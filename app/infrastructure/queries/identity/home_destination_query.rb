@@ -1,15 +1,18 @@
 # 🔌 INFRA · Queries::Identity::HomeDestinationQuery
-# Rôle : accueil d'un acteur connecté ; lit classe principale, école principale et onboarding, puis délègue à l'entité
-# ADR  : 0026, 0030, 0040
+# Rôle : accueil d'un acteur connecté (école principale et onboarding, puis l'entité) ; l'élève a-t-il une classe active
+# ADR  : 0026, 0030, 0040, 0085
 module Queries
   module Identity
     class HomeDestinationQuery
       # → Symbol ∈ Entities::Identity::HomeDestination::ALL
       def call(actor:)
         Entities::Identity::HomeDestination.for(
-          actor:, primary_membership: primary_membership(actor), primary_school_id: primary_school_id(actor), onboarded: onboarded?(actor)
+          actor:, primary_school_id: primary_school_id(actor), onboarded: onboarded?(actor)
         )
       end
+
+      # L'élève a une classe principale active (HomeDestination.enrolled?) ; false pour tout autre rôle.
+      def enrolled?(actor:) = Entities::Identity::HomeDestination.enrolled?(primary_membership(actor))
 
       private
 

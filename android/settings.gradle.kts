@@ -1,4 +1,5 @@
-// Coque Android de Lnclass (ADR-0070, ADR-0084 §4.8) : un module d'app par public, `student` aujourd'hui.
+// Coques Android de Lnclass (ADR-0070, ADR-0084 §4.8, ADR-0086 §4.8) : un module d'app par public, `student` et
+// `teacher`, sur le socle partagé `shell`.
 pluginManagement {
     repositories {
         google()
@@ -16,4 +17,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "lnclass-android"
-include(":student")
+include(":shell", ":student", ":teacher")

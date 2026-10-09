@@ -67,7 +67,7 @@ class FactoriesTest < ActiveSupport::TestCase
   end
 
   test "archived rows carry their archive date" do
-    assert create_classroom(status: "archived", join_code: nil).archived_at
+    assert create_classroom(status: "archived").archived_at
     assert create_assignment(status: "archived").archived_by
     assert_equal "Exercise", create_assignment.assignable_type # ADR-0072 §4.1 : seul un exercice s'assigne
     assert create_course(status: "archived").archived_at

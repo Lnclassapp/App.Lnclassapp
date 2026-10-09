@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::TeamDashboardQuery
 # Rôle : pilotage de l'équipe (TR-10, TR-12) : indicateurs, élèves par niveau, par DRENA ou par établissement, derniers inscrits
-# ADR  : 0040, 0041, 0049, 0062, 0082, 0084 · UDR : 0049, 0078 · un nombre fixe de requêtes groupées, quel que soit le volume
+# ADR  : 0040, 0041, 0049, 0062, 0082, 0084, 0086 · UDR : 0049, 0078 · un nombre fixe de requêtes groupées, quel que soit le volume
 module Queries
   module School
     class TeamDashboardQuery
@@ -13,8 +13,9 @@ module Queries
       # team : nil sous un filtre DRENA, l'équipe n'ayant pas de territoire.
       Accounts = Data.define(:students, :teachers, :team)
       # ADR-0082 §4.4 : comptes ouverts depuis l'icône de l'app installée (navigateur ou Android) pendant la période, par
-      # rôle ; android_students, ADR-0084 §4.6 : ceux de ces élèves qui l'ont ouverte depuis l'app Android.
-      AppOpeners = Data.define(:students, :teachers, :android_students)
+      # rôle ; android_students, ADR-0084 §4.6 : ceux de ces élèves qui l'ont ouverte depuis l'app Android ;
+      # android_teachers, ADR-0086 §4.6 : ceux de ces enseignants qui l'ont ouverte depuis « Lnclass Teacher ».
+      AppOpeners = Data.define(:students, :teachers, :android_students, :android_teachers)
       Coverage = Data.define(:active, :with_classroom, :with_teacher, :with_student)
       LevelShare = Data.define(:slug, :name, :students_count, :percent)
       DrenaRow = Data.define(:public_id, :name, :schools_count, :classrooms_count, :teachers_count, :students_count,
@@ -28,10 +29,10 @@ module Queries
       # ADR-0062, amendement du 2026-09-29 : les chiffres de l'année scolaire sont gardés 5 minutes ; 7 et 30 jours restent
       # lus en direct. Changer une définition ou la forme des chiffres, c'est changer CACHE_VERSION (2 : les lignes
       # d'établissements sous filtre, amendement du 2026-10-04 ; 3 : les ouvertures depuis l'app installée, ADR-0082 ;
-      # 4 : l'app Android, ADR-0084).
+      # 4 : l'app Android, ADR-0084 ; 5 : la part Android des enseignants, ADR-0086).
       CACHED_PERIODS = %w[year].freeze
       CACHE_TTL = 5.minutes
-      CACHE_VERSION = 4
+      CACHE_VERSION = 5
 
       # Une seule lecture : les établissements actifs, et combien ont une classe, un enseignant, un élève (élève placé :
       # ADR-0062). SQL constant : seule l'année scolaire est liée.
@@ -137,7 +138,7 @@ module Queries
           app_openers: }
       end
 
-      # ADR-0082 §4.4, ADR-0084 §4.6 : une seule lecture groupée par rôle, sur les comptes du territoire (non anonymisés),
+      # ADR-0082 §4.4, ADR-0084 §4.6, ADR-0086 §4.6 : une seule lecture groupée par rôle, sur les comptes du territoire (non anonymisés),
       # comme les inscrits. Un compte ouvert par les deux canaux compte une fois ; la part Android en est un sous-ensemble.
       def app_openers
         users = Orm::User.arel_table
@@ -146,7 +147,8 @@ module Queries
                                 .pluck(:role, Arel.star.count, Arel.star.count.filter(android))
         counts = Hash.new([ 0, 0 ]).merge(rows.to_h { |role, *values| [ role, values ] })
         students, android_students = counts["student"]
-        AppOpeners.new(students:, teachers: counts["teacher"].first, android_students:)
+        teachers, android_teachers = counts["teacher"]
+        AppOpeners.new(students:, teachers:, android_students:, android_teachers:)
       end
 
       def sessions

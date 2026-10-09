@@ -28,9 +28,11 @@ class ApplicationControllerTest < ActionDispatch::IntegrationTest
   APP = "Mozilla/5.0 (Linux; Android 13; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36 " \
         "Hotwire Native Android; LnclassStudentAndroid/1.0".freeze
 
-  test "the student shell is recognised by Hotwire Native and its own token, and nothing else is" do
+  test "each shell is recognised by Hotwire Native and its own token, and nothing else is" do
     {
       APP => :android_student,
+      APP.sub("LnclassStudentAndroid", "LnclassTeacherAndroid") => :android_teacher, # ADR-0086 §4.1
+      "#{FLOOR} LnclassTeacherAndroid/1.0" => nil,
       "#{FLOOR} Hotwire Native Android" => nil,
       "#{FLOOR} LnclassStudentAndroid/1.0" => nil,
       FLOOR => nil

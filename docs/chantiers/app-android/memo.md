@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | exécuté (2026-10-08, [#205](https://github.com/Lnclassapp/App.Lnclassapp/pull/205)) — app élèves ; test sur un vrai téléphone en attente (phase 5) |
+| **Statut** | app élèves exécutée (2026-10-08, [#205](https://github.com/Lnclassapp/App.Lnclassapp/pull/205), [#206](https://github.com/Lnclassapp/App.Lnclassapp/pull/206)), test sur un vrai téléphone en attente ; app enseignants exécutée (2026-10-08), test sur un vrai téléphone en attente |
 | **Ouvert le** | 2026-09-30 |
 | **Branche** | `ccr-e4a51f57-9ve9og` *(branche imposée par la session ; `feature/app-android` selon la convention)* |
 | **Programme** | — *(hors plan de `refonte-application` ; la PWA est livrée par `installation-pwa`, ADR-0082)* |
@@ -88,6 +88,24 @@ Pas d'urgence de livraison : le chantier est **cadré puis mis en attente** (dé
 | Mesure | **Oui** : l'équipe voit les élèves qui utilisent l'app, à côté du chiffre de la PWA | La tuile « Ouvert depuis l'app installée » (ADR-0082) gagne l'origine « app Android » |
 | Compte Play Store | **Compte personnel tout de suite**, test fermé de 14 jours avec 12 élèves au moins ; passage en compte d'organisation à l'arrivée du D-U-N-S | Remplace la réponse « compte d'organisation d'abord » (ligne précédente) : le test fermé de 14 jours devient la recette sur téléphones réels |
 | Où développer et tester ? | **APK compilé ici**, testé par le porteur ; guide pour Android Studio et le téléphone en USB | Les livrables de chaque lot incluent un APK et ses étapes d'installation |
+
+### Reprise du 2026-10-08 — « Lnclass Teacher »
+
+> Après l'app élèves, le porteur lance l'app enseignants le même jour. Ce qui était déjà tranché n'est pas reposé : deux apps, icône (baobab au bras levé sur orange, zip validé le 2026-10-08), inscription enseignant dans l'app, liens `/teacher-signup` et `/i/:token` ouverts dans l'app, refus après un PIN correct seulement, variantes develop, recette et production, pas d'iPhone.
+
+| Question posée | Réponse | Conséquence sur le chantier |
+|---|---|---|
+| Identifiant et nom | **`com.lnclass.teacher`**, « Lnclass Teacher » ; « Lnclass Teacher develop » et « Lnclass Teacher recette » pour les tests | Un second module Android ; trois apps de plus côte à côte sur un téléphone |
+| Clé des APK de test | **La même clé `lnclass-test`** que l'app élèves | Aucune empreinte de plus ; `assetlinks.json` déclare deux identifiants par environnement |
+| Qui entre dans l'app enseignants ? | **Les enseignants seuls**. Un élève lit « Cette app est réservée aux enseignants » avec un lien vers l'app « Lnclass » ; direction et équipe sont renvoyées vers le site | Le refus par rôle de l'ADR-0084 §4.5 vaut dans les deux sens |
+| Un enseignant dans l'app élèves ? | **« Utilisez Lnclass Teacher »**, lien vers le site tant que l'app n'est pas sur le Play Store, puis vers sa fiche | Le message de l'app élèves change pour l'enseignant ; direction et équipe gardent « continuez sur le site » |
+| En-tête de l'enseignant sur le site | **Même forme que l'élève** : avatar à gauche sans logo, « Besoin d'aide ? » et thème à droite ; l'avatar ouvre le panneau du compte, qui garde « Inviter un collègue » | UDR-0080 §3.1 s'étend à l'enseignant ; seuls direction et équipe gardent l'en-tête d'origine |
+| Barre basse du site | **Inchangée** : Accueil, Classes, Cours, Annonces | — |
+| Barres de l'app | **Barre du haut comme l'élève** (avatar, « Besoin d'aide ? ») ; **quatre onglets** : Accueil, Classes, Cours, Annonces | Le pont `account` sert aux deux apps |
+| Pages en modale plein écran | **« Assigner un exercice », « Jours de séance », le panneau du compte et l'aide** | Règles de plus dans la configuration des chemins |
+| Mesure | **« dont app Android : N enseignants »** dans la tuile du pilotage ; même colonne `android_opened_at`, le rôle dit l'app | Aucune migration |
+| La direction voit-elle l'usage des apps ? | **Reporté** à un petit chantier séparé | Seul le pilotage de l'équipe compte les apps |
+| Distribution | **Comme l'app élèves** : APK par WhatsApp à 5 à 10 enseignants, puis test fermé de 14 jours avec 12 testeurs, compte personnel | Un second test fermé sur le Play Store |
 
 ## Cas limites identifiés
 

@@ -12,7 +12,7 @@ module Teams
       result = build(UseCases::Classroom::AddLevelClassroom, taxonomy: Repositories::Catalog::TaxonomyRepository.new)
                .call(actor: current_actor, school_public_id: @block.school_public_id, level_slug: params[:level],
                      series_slug: params[:series])
-      respond(result) { |classroom| t(".done", name: classroom.name, code: Entities::Classroom::JoinCode.display(classroom.join_code)) }
+      respond(result) { |classroom| t(".done", name: classroom.name) }
     end
 
     def destroy

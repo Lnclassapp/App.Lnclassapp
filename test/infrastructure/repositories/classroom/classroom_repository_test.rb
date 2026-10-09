@@ -3,8 +3,6 @@ require "test_helper"
 module Repositories
   module Classroom
     class ClassroomRepositoryTest < ActiveSupport::TestCase
-      JoinCode = Entities::Classroom::JoinCode
-
       setup do
         @school = create_school
         @level = create_level
@@ -16,44 +14,21 @@ module Repositories
         Entities::Classroom::Classroom.new(school_id: @school.id, level_id: @level.id, school_year: @year, name:)
       end
 
-      # Les codes que tirerait un Random de graine 7, dans l'ordre.
-      def drawn_codes(count)
-        random = Random.new(7)
-        Array.new(count) { JoinCode.generate(random:) }
-      end
-
-      test "crée une classe avec un code d'adhésion valide et la relit avec ses enseignants et son effectif" do
+      test "crée une classe avec le jeton de son lien, sans code, et la relit avec ses enseignants et son effectif" do
         created = ClassroomRepository.new.create(classroom: classroom).value
         record = Orm::Classroom.find(created.id)
         teacher = create_teacher(classrooms: [ record ])
         create_student(classroom: record)
-        Orm::ClassroomStudent.create!(classroom: record, student: create_student, joined_at: @at, left_at: @at)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: record, student: create_student, joined_at: @at, left_at: @at)
 
         found = ClassroomRepository.new.find_by_public_id(public_id: created.public_id)
 
-        assert JoinCode.valid?(found.join_code)
+        assert_match(/\A[0-9a-f]{12}\z/, found.link_token)
+        assert_not_respond_to found, :join_code
         assert_equal [ "Tle D 1", @year, "active", 80 ], [ found.name, found.school_year, found.status, found.max_students ]
         assert_equal [ teacher.id ], found.teacher_ids
         assert_equal 1, found.active_students_count
         assert_nil ClassroomRepository.new.find_by_public_id(public_id: "inconnu")
-      end
-
-      test "un code d'adhésion déjà pris est retiré une fois" do
-        taken, fresh = drawn_codes(2)
-        create_classroom(school: @school, join_code: taken)
-
-        result = ClassroomRepository.new(random: Random.new(7)).create(classroom: classroom)
-
-        assert result.success?
-        assert_equal fresh, result.value.join_code
-      end
-
-      test "deux codes pris de suite donnent :conflict sur le code" do
-        drawn_codes(2).each { |code| create_classroom(school: @school, join_code: code) }
-
-        result = ClassroomRepository.new(random: Random.new(7)).create(classroom: classroom)
-
-        assert_equal({ join_code: [ :taken ] }, result.errors)
       end
 
       test "un nom déjà pris dans l'école et l'année donne :conflict sur le nom" do
@@ -65,21 +40,10 @@ module Repositories
         assert_equal({ name: [ :taken ] }, result.errors)
       end
 
-      test "verrouille une classe par son code, nil si le code est inconnu" do
-        record = create_classroom(school: @school)
+      test "liste les noms d'une école pour une année" do
+        create_classroom(school: @school, name: "6ème 1", school_year: @year)
+        create_classroom(school: @school, name: "6ème 2", school_year: "2020-2021")
 
-        locked = Orm::Classroom.transaction { ClassroomRepository.new.lock_by_join_code(join_code: record.join_code) }
-
-        assert_equal record.id, locked.id
-        assert_nil ClassroomRepository.new.lock_by_join_code(join_code: "zzz99")
-      end
-
-      test "liste les codes pris et les noms d'une école pour une année" do
-        record = create_classroom(school: @school, name: "6ème 1", school_year: @year)
-        create_classroom(school: @school, join_code: nil, name: "6ème 2", school_year: "2020-2021")
-
-        assert_includes ClassroomRepository.new.taken_join_codes, record.join_code
-        assert_not_includes ClassroomRepository.new.taken_join_codes, nil
         assert_equal Set["6ème 1"], ClassroomRepository.new.names_in(school_id: @school.id, school_year: @year)
       end
 
@@ -108,7 +72,7 @@ module Repositories
 
       test "refuse une classe qui a eu un élève, même parti, un enseignant ou une assignation, même archivée (CN-06)" do
         left = create_classroom(school: @school)
-        Orm::ClassroomStudent.create!(classroom: left, student: create_student, joined_at: @at, left_at: @at)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: left, student: create_student, joined_at: @at, left_at: @at)
         taught = create_classroom(school: @school)
         create_teacher(school: @school, classrooms: [ taught ])
         assigned = create_classroom(school: @school)
@@ -123,23 +87,50 @@ module Repositories
       end
 
       test "insère 1 000 classes générées d'un coup" do
-        codes = JoinCode.generate_unique(count: 1_000, taken: ClassroomRepository.new.taken_join_codes)
-        rows = codes.each_with_index.map do |join_code, index|
+        rows = Array.new(1_000) do |index|
           { public_id: SecureRandom.base58(14), school_id: @school.id, school_year: @year, name: "Classe #{index}",
-            level_id: @level.id, series_id: nil, join_code: }
+            level_id: @level.id, series_id: nil }
         end
 
         assert_equal 1_000, ClassroomRepository.new.insert_generated(rows:, at: @at)
-        assert_equal 1_000, Orm::Classroom.where(school: @school, created_at: @at).count
+        assert_equal 1_000, Orm::Classroom.where(school: @school, created_at: @at).distinct.count(:link_token)
         assert_equal 0, ClassroomRepository.new.insert_generated(rows: [], at: @at)
       end
 
-      test "un code pris lève RecordNotUnique : le rejeu est l'affaire du moteur" do
-        taken = create_classroom(school: @school).join_code
-        rows = [ { public_id: SecureRandom.base58(14), school_id: @school.id, school_year: @year, name: "Nouvelle",
-                   level_id: @level.id, series_id: nil, join_code: taken } ]
+      test "un nom pris lève RecordNotUnique : le rejeu est l'affaire du moteur" do
+        create_classroom(school: @school, name: "Prise", school_year: @year)
+        rows = [ { public_id: SecureRandom.base58(14), school_id: @school.id, school_year: @year, name: "Prise",
+                   level_id: @level.id, series_id: nil } ]
 
         assert_raises(ActiveRecord::RecordNotUnique) { ClassroomRepository.new.insert_generated(rows:, at: @at) }
+      end
+
+      test "IL-08: verrouille une classe par son identifiant public ou par le jeton de son lien, avec son effectif" do
+        record = create_classroom(school: @school)
+        create_student(classroom: record)
+        repository = ClassroomRepository.new
+
+        by_id = Orm::Classroom.transaction { repository.lock_by_public_id(public_id: record.public_id) }
+        by_token = Orm::Classroom.transaction { repository.lock_by_link_token(token: record.reload.link_token) }
+
+        assert_equal [ record.id, record.id ], [ by_id.id, by_token.id ]
+        assert_equal [ record.link_token, 1 ], [ by_token.link_token, by_token.active_students_count ]
+        assert_nil repository.lock_by_public_id(public_id: "inconnu")
+        assert_nil repository.lock_by_link_token(token: "0123456789ab")
+        assert_nil repository.lock_by_link_token(token: nil)
+      end
+
+      test "IL-11: changer le lien tire un nouveau jeton et invalide l'ancien" do
+        record = create_classroom(school: @school).reload
+        old = record.link_token
+        repository = ClassroomRepository.new
+
+        fresh = repository.rotate_link_token(id: record.id)
+
+        assert_match(/\A[0-9a-f]{12}\z/, fresh)
+        assert_not_equal old, fresh
+        assert_equal fresh, record.reload.link_token
+        assert_nil repository.lock_by_link_token(token: old)
       end
     end
   end

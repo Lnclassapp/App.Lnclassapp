@@ -21,7 +21,7 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
   TODO_BLOCKS = "#main h1, #student_home_exercises h2, #student_home_help, #student_home_exercises li".freeze
 
   setup do
-    @classroom = create_classroom(name: "Tle D 1", join_code: "kfm37", school: create_school(name: "Lycée Classique"))
+    @classroom = create_classroom(name: "Tle D 1", school: create_school(name: "Lycée Classique"))
     @student = create_student(classroom: @classroom, first_name: "Aya")
     # UDR-0013, amendement du 2026-10-01 : le cours assigné est du niveau de la classe de l'élève.
     @course = create_course(material: create_material(name: "SVT", category: "science"), level: @classroom.level)
@@ -53,7 +53,7 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
 
     assert_current_path student_home_path
     assert_selector "h1", text: tl("show.greeting", name: "Aya")
-    assert_selector "#student_home_classroom", text: "KFM37"
+    assert_selector "#student_home_classroom", text: "Tle D 1"
     within(row("La mitose")) { assert_text "SVT" }
     within("turbo-frame#student_home_recent_activity") { assert_link text: /La mitose/ }
 

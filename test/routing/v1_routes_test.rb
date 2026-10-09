@@ -71,6 +71,25 @@ class V1RoutesTest < ActionDispatch::IntegrationTest
     assert_equal({ controller: "teams/school_codes", action: "update" }, first_match("/teams/schools/abcdefghijkmno/code", method: "PATCH"))
   end
 
+  # ADR-0085 §4: the Lot 0 of inscription-eleve-sans-code draws the routes its vertical lots fill; /join and /c/<code>
+  # stay until the last lot.
+  test "IL-02: the student signs up by /student-signup, picks a classroom through the cascade, and a classroom has a link" do
+    id = "abcdefghijkmno"
+    assert_equal({ controller: "classroom/student_registrations", action: "new" }, first_match("/student-signup"))
+    assert_equal({ controller: "classroom/student_registrations", action: "create" }, first_match("/student-signup", method: "POST"))
+    assert_equal({ controller: "classroom/student_classroom_choices", action: "new" }, first_match("/students/classroom/new"))
+    assert_equal({ controller: "classroom/student_classroom_choices", action: "create" }, first_match("/students/classroom", method: "POST"))
+    assert_equal({ controller: "classroom/student_classrooms", action: "show" }, first_match("/students/classroom"))
+    assert_equal "/schools/#{id}/levels", helpers.school_picker_levels_path(id)
+    assert_equal({ controller: "school/school_levels", action: "index" }, first_match("/schools/#{id}/levels"))
+    assert_equal "/schools/#{id}/levels/3e/classrooms", helpers.school_picker_classrooms_path(id, "3e")
+    assert_equal({ controller: "school/level_classrooms", action: "index" }, first_match("/schools/#{id}/levels/3e/classrooms"))
+    assert_equal({ controller: "classroom/classroom_links", action: "update" }, first_match("/classrooms/#{id}/link", method: "PATCH"))
+    assert_equal "/classrooms/#{id}/students/pqrstuvwxyzabc", helpers.classroom_student_path(id, "pqrstuvwxyzabc")
+    assert_equal({ controller: "classroom/classroom_students", action: "destroy" },
+                 first_match("/classrooms/#{id}/students/pqrstuvwxyzabc", method: "DELETE"))
+  end
+
   # IE-02 (ADR-0083 §4.1, §4.3): a teacher signs up by /teacher-signup or by an invite link /i/<token>; the code link
   # /e/<code> and the sign-up without a code are gone.
   test "IE-02: /i/:token opens the sign-up; /e/:code and /teacher-signup/without-code are not routed" do

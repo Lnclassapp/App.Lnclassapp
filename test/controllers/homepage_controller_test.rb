@@ -11,6 +11,8 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
   # ADR-0084 §4.1 : le User-Agent de la coque Android élèves ; un navigateur ; une autre coque Hotwire Native, sans jeton.
   ANDROID_APP = "Mozilla/5.0 (Linux; Android 13; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36 " \
                 "Hotwire Native Android; LnclassStudentAndroid/1.0".freeze
+  # ADR-0086 §4.1 : la coque Android enseignants, « Lnclass Teacher ».
+  TEACHER_APP = ANDROID_APP.sub("LnclassStudentAndroid", "LnclassTeacherAndroid").freeze
   BROWSER = "Mozilla/5.0 (Linux; Android 13; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Mobile Safari/537.36".freeze
   OTHER_SHELL = "#{BROWSER} Hotwire Native Android".freeze
   SUBJECTS = [ "Mathématiques", "Physique-Chimie", "SVT", "Français", "Histoire-Géographie", "EDHC", "Philosophie" ].freeze
@@ -64,7 +66,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "dialog#role-modal-student-hero" do
       assert_select "a[href='#{new_session_path}']", text: "Se connecter"
-      assert_select "a[href='#{new_join_code_path}']", text: "Rejoindre ma classe"
+      assert_select "a[href='#{new_student_registration_path}']", text: "Rejoindre ma classe"
     end
   end
 
@@ -110,7 +112,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     get root_url
 
     assert_select "#comment ol > li", 3
-    assert_select "#comment ol > li:first-child h3", text: "Récupère le code de ta classe"
+    assert_select "#comment ol > li:first-child h3", text: "Trouve ta classe"
     assert_select "#comment ol > li:last-child h3", text: "Apprends et progresse"
   end
 
@@ -272,7 +274,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
 
     travel_to(opened_at) { get root_path(source: "app") }
 
-    assert_redirected_to pending_account_path
+    assert_redirected_to student_home_path
     assert_equal opened_at, student.reload.app_opened_at
   end
 
@@ -326,7 +328,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
 
     report = assert_error_reported(ActiveRecord::ConnectionTimeoutError) { get root_path(source: "app") }
 
-    assert_redirected_to pending_account_path
+    assert_redirected_to student_home_path
     assert report.handled
     assert_equal student.id, report.context[:user_id]
     assert_nil student.reload.app_opened_at
@@ -359,6 +361,29 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     end
     assert_nil student.reload.android_opened_at
     assert_nil student.app_opened_at
+  end
+
+  # CA-T5 (ADR-0086 §4.6) : l'onglet « Accueil » de « Lnclass Teacher » ouvre aussi « /?source=android ».
+  test "CA-T5: a teacher opening Lnclass Teacher has android_opened_at dated at the server's time and lands on their home" do
+    teacher = create_teacher
+    sign_in_as teacher
+    opened_at = Time.current.change(usec: 0)
+
+    travel_to(opened_at) { get root_path(source: "android"), headers: { "User-Agent" => TEACHER_APP } }
+
+    assert_redirected_to teacher_home_path
+    assert_equal opened_at, teacher.reload.android_opened_at
+    assert_nil teacher.app_opened_at
+  end
+
+  test "CA-T5: « /?source=android » typed by a teacher in a browser dates nothing" do
+    teacher = create_teacher
+    sign_in_as teacher
+
+    assert_no_queries_match(/\A\s*UPDATE\s+"users"/i) { get root_path(source: "android"), headers: { "User-Agent" => BROWSER } }
+
+    assert_redirected_to teacher_home_path
+    assert_nil teacher.reload.android_opened_at
   end
 
   test "CA-5: « /?source=app » keeps dating the installed web app, even inside the Android app" do

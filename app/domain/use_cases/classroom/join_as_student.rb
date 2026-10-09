@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::JoinAsStudent
-# Rôle : un élève connecté dont la classe principale est archivée rejoint une nouvelle classe par son code
-# ADR  : 0026, 0028, 0040, 0041 · UDR : 0009
+# Rôle : un élève connecté sans classe active (classe archivée, ou retiré) entre dans la classe choisie ou dans celle d'un lien
+# ADR  : 0026, 0028, 0040, 0041, 0085 · UDR : 0009, 0081
 module UseCases
   module Classroom
     class JoinAsStudent
@@ -16,47 +16,67 @@ module UseCases
         end
       end
 
-      def initialize(classrooms:, memberships:, policy:, transaction:, clock:)
-        @classrooms = classrooms
+      def initialize(classrooms:, schools:, taxonomy:, memberships:, policy:, transaction:, clock:)
+        @designation = ClassroomDesignation.new(classrooms:, schools:, taxonomy:, clock:)
         @memberships = memberships
         @policy = policy
         @transaction = transaction
         @clock = clock
       end
 
-      # → success(Entities::Classroom::Classroom) | :forbidden (visiteur, rôle, raison en errors[:base]) | :not_found
-      #   | :conflict (classe principale encore active, écriture refusée)
-      def call(actor:, code:)
-        # Un visiteur n'a pas de compte à inscrire : son chemin est JoinWithCode.
-        return Shared::Result.failure(:forbidden) if actor.nil?
+      # dto : Dtos::Classroom::StudentRegistrationInput, dont seuls les champs de la classe comptent : link_token (voie
+      # « link »), sinon school_public_id, level_slug et classroom_public_id (voie « standard »).
+      # → success(Entities::Classroom::Classroom) | :forbidden (visiteur, rôle, ou raison en errors[:base], déjà inscrit
+      #   compris) | :not_found (lien qui ne mène plus à une classe ouverte) | :invalid (classe hors de la cascade)
+      #   | :conflict (écriture refusée)
+      def call(actor:, dto:)
+        # Un visiteur s'inscrit par RegisterStudent ; les autres rôles n'ont pas de classe principale.
+        return Shared::Result.failure(:forbidden) unless actor&.student?
 
-        @transaction.call { join(actor, code) }
+        @transaction.call { join(actor, dto) }
       rescue Aborted => e
         e.result
       end
 
       private
 
-      def join(actor, code)
-        classroom = @classrooms.lock_by_join_code(join_code: Entities::Classroom::JoinCode.normalize(code))
-        return Shared::Result.failure(:not_found) if classroom.nil?
+      # ADR-0040 : une seule classe principale active. L'élève qui en a une le sait d'abord, quelle que soit la classe visée.
+      def join(actor, dto)
+        current = @memberships.primary_for(student_id: actor.user_id)
+        return Shared::Result.failure(:forbidden, errors: ALREADY_ENROLLED) if current&.classroom_active?
 
-        allowed = @policy.call(actor:, classroom:, code:)
+        destination = designated(dto)
+        return destination if destination.is_a?(Shared::Result)
+
+        allowed = allowed(actor, destination)
         return allowed if allowed.failure?
 
-        move(actor.user_id, classroom)
+        move(actor.user_id, current, destination)
       end
 
-      def move(student_id, classroom)
-        current = @memberships.primary_for(student_id:)
-        return Shared::Result.failure(:conflict, errors: ALREADY_ENROLLED) if current && current.classroom_active?
+      # ADR-0085 §4.3 : le retrait ne ferme que la voie standard ; le lien le lève.
+      def allowed(actor, destination)
+        classroom = destination.classroom
+        via_link = destination.via == ClassroomDesignation::LINK
+        removed = !via_link && @memberships.removed_from?(classroom_id: classroom.id, student_id: actor.user_id)
+        @policy.call(actor:, classroom:, via_link:, removed:)
+      end
 
+      # Avec un jeton, la classe du lien, qui ne retombe pas sur la cascade (ADR-0085 §4.1) ; sans, la classe choisie.
+      def designated(dto)
+        return @designation.chosen(dto) unless dto.link_token
+
+        @designation.linked(dto.link_token) || Shared::Result.failure(:not_found)
+      end
+
+      # IL-17 : l'adhésion à la classe archivée est close dans la même transaction que la nouvelle.
+      def move(student_id, current, destination)
         now = @clock.now
         @memberships.leave_primary(student_id:, at: now) if current
-        added = @memberships.add_primary(classroom_id: classroom.id, student_id:, at: now)
+        added = @memberships.add_primary(classroom_id: destination.classroom.id, student_id:, via: destination.via, at: now)
         raise Aborted, added if added.failure?
 
-        Shared::Result.success(classroom)
+        Shared::Result.success(destination.classroom)
       end
     end
   end
