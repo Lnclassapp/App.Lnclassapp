@@ -281,4 +281,39 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to exercise_path(exercise.public_id)
     assert_equal tl("transition.refusals.transition_not_allowed"), flash[:alert]
   end
+
+  # ADR-0089 §4.4, UDR-0084 §3.2 : la question 2 attend son image ; l'image envoyée se rattache à l'enregistrement.
+  test "ADR-0089: a question waiting for its image blocks the publication, and names the question" do
+    exercise = create_exercise(essential: @essential, status: "draft", questions: 2)
+    exercise.questions.second.update!(image_description: "Un circuit simple")
+    sign_in_as @member
+
+    patch publish_teams_exercise_path(exercise.public_id), as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_select "turbo-stream[action=append][target=toasts] [role=alert]", text: including(tl("transition.refusals.image_missing", number: 2))
+    assert_equal "draft", exercise.reload.status
+  end
+
+  test "ADR-0089: the edit form offers the expected image, and saving attaches the uploaded image with its text" do
+    exercise = create_exercise(essential: @essential, status: "draft", questions: 1)
+    exercise.questions.first.update!(image_description: "Un circuit simple")
+    image = create_question_image
+    sign_in_as @member
+
+    get edit_teams_exercise_path(exercise.public_id), headers: { "Turbo-Frame" => "modal" }
+    assert_select "form#exercise-form", text: including(tl("question_fields.image_expected", description: "Un circuit simple"))
+    assert_select "input[type=hidden][name='exercise[questions_attributes][0][image_description]'][value='Un circuit simple']"
+
+    questions = meiosis_questions
+    questions["0"] = questions["0"].merge(image_public_id: image.public_id, image_alt: "Une pile et une lampe",
+                                          image_description: "Un circuit simple")
+    patch teams_exercise_path(exercise.public_id), params: exercise_params(questions:), as: :turbo_stream
+
+    assert_response :success
+    question = exercise.reload.questions.order(:position).first
+    assert_equal [ question.id, "Une pile et une lampe" ], [ image.reload.question_id, image.alt ]
+    patch publish_teams_exercise_path(exercise.public_id), as: :turbo_stream
+    assert_equal "published", exercise.reload.status
+  end
 end

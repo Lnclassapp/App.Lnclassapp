@@ -37,18 +37,18 @@ module UseCases
         def record(**event) = (@events ||= []) << event
       end
 
-      def exercise(status:, parents_published:, questions:)
+      def exercise(status:, parents_published:, questions:, second: {})
         answers = [ Entities::Assessment::Answer.new(id: 1, position: 1, content: "A", correct: true),
                     Entities::Assessment::Answer.new(id: 2, position: 2, content: "B", correct: false) ]
         question = Entities::Assessment::Question.new(id: 3, position: 1, content: "Q", explanation: nil,
                                                       question_type: "single_choice", answers:)
         Entities::Assessment::Exercise.new(id: 40, public_id: "ExErCiCe000040", essential_id: 9, title: "Méiose",
                                            exercise_type: "fixation", status:, parents_published:,
-                                           questions: Array.new(questions, question))
+                                           questions: Array.new(questions, question).each_with_index.map { |item, index| index == 1 ? item.with(**second) : item })
       end
 
-      def publish(actor: TEAM, public_id: "ExErCiCe000040", status: "draft", parents_published: true, questions: 2)
-        @exercises = FakeExercises.new(exercise(status:, parents_published:, questions:))
+      def publish(actor: TEAM, public_id: "ExErCiCe000040", status: "draft", parents_published: true, questions: 2, second: {})
+        @exercises = FakeExercises.new(exercise(status:, parents_published:, questions:, second:))
         @audit = FakeAudit.new
         @transaction = FakeTransaction.new
         PublishExercise.new(exercises: @exercises, audit_log: @audit, transaction: @transaction,
@@ -77,6 +77,23 @@ module UseCases
         assert_equal [ :conflict, { base: [ :transition_not_allowed ] } ], publish(status: "published").then { [ it.code, it.errors ] }
         assert_empty @exercises.transitions
         assert_nil @audit.events
+      end
+
+      # ADR-0089 §4.4 : une image annoncée qui manque, ou une image sans texte de remplacement, bloque la publication.
+      test "la question 2 attend son image : conflit numéroté, rien n'est écrit" do
+        result = publish(second: { image_description: "Un circuit simple" })
+
+        assert_equal [ :conflict, { base: [ :image_missing ], number: [ 2 ] } ], [ result.code, result.errors ]
+        assert_empty @exercises.transitions
+        assert_nil @audit.events
+      end
+
+      test "une image sans texte de remplacement bloque ; avec son texte, l'exercice se publie" do
+        blank = Entities::Shared::ContentImage.new(public_id: "ImAgE000000001", alt: " ")
+        result = publish(second: { image_description: "Un circuit", image: blank })
+
+        assert_equal [ :conflict, { base: [ :image_alt_blank ], number: [ 2 ] } ], [ result.code, result.errors ]
+        assert publish(second: { image_description: "Un circuit", image: blank.with(alt: "Un circuit simple") }).success?
       end
 
       test "hors équipe, refus ; un exercice inconnu est introuvable" do
