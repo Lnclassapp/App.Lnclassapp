@@ -1,0 +1,878 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Masse et poids d'un corps",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "Physique-Chimie",
+      "essentials": [
+        {
+          "name": "La masse d'un corps",
+          "subtitle": "Mesurer la quantité de matière d'un objet en kilogrammes",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Dire ce que mesure la masse d'un corps, son unité et son instrument de mesure.</li><li>Convertir une masse entre tonnes, kilogrammes et grammes.</li><li>Calculer une masse totale ou lire une pesée à la balance à plateaux.</li></ul><h2>L'image pour comprendre</h2><p><strong>Les sacs de cacao du port d'Abidjan.</strong> Sur le quai, des dockers remplissent un cargo de sacs de cacao. Le chef de quai ne s'intéresse pas à la taille du sac, mais à la quantité de cacao qu'il contient. Pour la connaître, il pose le sac sur un plateau d'une balance. Sur l'autre plateau, il ajoute des masses marquées (des blocs de 20 kg, de 5 kg, de 1 kg…) jusqu'à ce que la balance soit à l'équilibre.</p><p><strong>Le pont.</strong> La quantité de cacao dans le sac, c'est la <strong>masse</strong>. La balance est l'<strong>instrument de mesure</strong>. Les blocs marqués sont la <strong>référence</strong> : on additionne leurs valeurs pour obtenir la masse du sac. Le kilogramme est l'<strong>unité</strong>, comme le mètre pour une longueur.</p><p><strong>La limite de l'image.</strong> La masse n'est pas la taille. Un gros sac rempli de copeaux de bois peut avoir une masse plus petite qu'un petit sac rempli de fèves.</p><h2>Ce qu'il faut retenir</h2><p>Une <em>grandeur</em> est une propriété qu'on peut mesurer (une longueur, une durée, une masse…).</p><blockquote><p><strong>Masse</strong> : grandeur qui mesure la quantité de matière contenue dans un corps. On la note $m$. Son unité légale est le <strong>kilogramme</strong> (kg). On la mesure avec une <strong>balance</strong>.</p><p><strong>Autres unités</strong> : $1\\ \\text{t} = 1000\\ \\text{kg}$ ; $1\\ \\text{kg} = 1000\\ \\text{g}$ ; $1\\ \\text{g} = 1000\\ \\text{mg}$.</p><p><strong>Masse totale</strong> : la masse d'un ensemble est la somme des masses de ses parties, exprimées dans la même unité. À l'équilibre d'une balance à plateaux, la masse du sac est égale à la somme des masses marquées.</p></blockquote><h2>Exemple résolu</h2><p>Un camion emporte 300 sacs de cacao de 60 kg chacun. Quelle est la masse totale, en kg puis en tonnes ?</p><ol><li><strong>Masse totale en kg.</strong> Les masses s'additionnent : $300 \\times 60 = 18000\\ \\text{kg}$.</li><li><strong>Conversion.</strong> Comme $1\\ \\text{t} = 1000\\ \\text{kg}$, on divise par 1000 : $18000 \\div 1000 = 18\\ \\text{t}$.</li><li><strong>Conclusion.</strong> Le camion emporte 18 t de cacao.</li></ol><h2>Le piège à éviter</h2><p>Additionner des masses exprimées dans des unités différentes. Par exemple, $2{,}5\\ \\text{kg} + 300\\ \\text{g}$ ne vaut pas $302{,}5$. Il faut d'abord tout convertir : $2500\\ \\text{g} + 300\\ \\text{g} = 2800\\ \\text{g}$, soit $2{,}8\\ \\text{kg}$.</p><p>Pour repérer l'erreur, regarde les unités avant de calculer : si elles sont différentes, convertis d'abord.</p><h2>En une phrase</h2><p>La masse dit combien de matière contient un corps ; elle se mesure à la balance, en kilogrammes, et on convertit toujours avant d'additionner.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Ce que mesure la masse",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Que mesure la masse d'un corps ?",
+                  "question_type": "single_choice",
+                  "explanation": "La masse mesure la quantité de matière contenue dans le corps, comme la quantité de cacao dans le sac. L'erreur tentante est de la confondre avec la taille : un grand sac peut contenir moins de matière qu'un petit sac bien rempli.",
+                  "answers": [
+                    { "content": "La quantité de matière qu'il contient", "correct": true },
+                    { "content": "La place qu'il occupe, c'est-à-dire sa taille", "correct": false },
+                    { "content": "La force avec laquelle la Terre l'attire", "correct": false },
+                    { "content": "La longueur de ses côtés", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un grand sac a toujours une masse plus grande qu'un petit sac.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. La masse dépend de la quantité de matière, pas de la taille. Un grand sac rempli de copeaux de bois peut avoir une masse plus petite qu'un petit sac rempli de fèves de cacao.",
+                  "answers": [
+                    { "content": "Vrai", "correct": false },
+                    { "content": "Faux", "correct": true }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'unité légale de la masse ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'unité légale de la masse est le kilogramme (kg). Le gramme et la tonne sont des unités de masse aussi, mais ce ne sont pas l'unité légale. Le newton, lui, n'est pas une unité de masse : c'est celle d'une force.",
+                  "answers": [
+                    { "content": "Le kilogramme (kg)", "correct": true },
+                    { "content": "Le gramme (g)", "correct": false },
+                    { "content": "La tonne (t)", "correct": false },
+                    { "content": "Le newton (N)", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Avec quel instrument mesure-t-on la masse d'un sac de cacao ?",
+                  "question_type": "single_choice",
+                  "explanation": "On mesure une masse avec une balance. La règle mesure une longueur, l'éprouvette graduée mesure un volume de liquide, et le dynamomètre mesure une force.",
+                  "answers": [
+                    { "content": "Une balance", "correct": true },
+                    { "content": "Un dynamomètre", "correct": false },
+                    { "content": "Une éprouvette graduée", "correct": false },
+                    { "content": "Une règle graduée", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Parmi ces unités, lesquelles sont des unités de masse ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Le gramme et la tonne sont des unités de masse. Le newton mesure une force, le litre un volume et le mètre une longueur. Attention : on pense souvent que le newton est une unité de masse parce qu'on parle de « poids » dans la vie courante.",
+                  "answers": [
+                    { "content": "Le gramme (g)", "correct": true },
+                    { "content": "La tonne (t)", "correct": true },
+                    { "content": "Le newton (N)", "correct": false },
+                    { "content": "Le litre (L)", "correct": false },
+                    { "content": "Le mètre (m)", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du port, le chef de quai pèse un sac de cacao. Que représente la quantité de cacao contenue dans le sac ?",
+                  "question_type": "single_choice",
+                  "explanation": "La quantité de cacao contenue dans le sac, c'est sa masse, que la balance permet de mesurer. Ce n'est ni le volume ni la taille : ce sont d'autres grandeurs, et un sac peu rempli peut être aussi grand qu'un sac plein.",
+                  "answers": [
+                    { "content": "La masse du sac", "correct": true },
+                    { "content": "La taille du sac", "correct": false },
+                    { "content": "Le nombre de plateaux de la balance", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Convertir et additionner des masses",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Convertis 3 kg en grammes.",
+                  "question_type": "single_choice",
+                  "explanation": "1 kg = 1000 g, donc 3 kg = 3 × 1000 = 3000 g. Une erreur fréquente est de multiplier par 100 au lieu de 1000, ce qui donne 300 g.",
+                  "answers": [
+                    { "content": "3000 g", "correct": true },
+                    { "content": "300 g", "correct": false },
+                    { "content": "30 g", "correct": false },
+                    { "content": "0,003 g", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Convertis 4500 kg en tonnes.",
+                  "question_type": "single_choice",
+                  "explanation": "1 t = 1000 kg, donc on divise par 1000 : 4500 ÷ 1000 = 4,5 t. Multiplier au lieu de diviser donne un résultat absurde : un camion ne porte pas 4 500 000 t.",
+                  "answers": [
+                    { "content": "4,5 t", "correct": true },
+                    { "content": "45 t", "correct": false },
+                    { "content": "0,45 t", "correct": false },
+                    { "content": "4 500 000 t", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Convertis 250 g en kilogrammes.",
+                  "question_type": "single_choice",
+                  "explanation": "1 kg = 1000 g, donc 250 g = 250 ÷ 1000 = 0,25 kg. L'erreur fréquente est de décaler la virgule d'un seul rang et d'obtenir 2,5 kg.",
+                  "answers": [
+                    { "content": "0,25 kg", "correct": true },
+                    { "content": "2,5 kg", "correct": false },
+                    { "content": "25 kg", "correct": false },
+                    { "content": "250 000 kg", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Calcule en grammes la masse totale de 1,2 kg de fèves et de 300 g de sucre.",
+                  "question_type": "single_choice",
+                  "explanation": "On convertit d'abord : 1,2 kg = 1200 g. Puis on additionne : 1200 + 300 = 1500 g. Écrire 301,2 revient à additionner 1,2 et 300 sans tenir compte des unités différentes.",
+                  "answers": [
+                    { "content": "1500 g", "correct": true },
+                    { "content": "301,2 g", "correct": false },
+                    { "content": "1230 g", "correct": false },
+                    { "content": "1,5 g", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un chariot porte 8 sacs de 60 kg chacun. Quelle est la masse totale des sacs ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les masses s'additionnent : 8 × 60 = 480 kg. Additionner 8 et 60 donne 68, ce qui oublie que chaque sac pèse 60 kg et qu'il y en a 8.",
+                  "answers": [
+                    { "content": "480 kg", "correct": true },
+                    { "content": "68 kg", "correct": false },
+                    { "content": "4800 kg", "correct": false },
+                    { "content": "48 kg", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Parmi ces égalités, lesquelles sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "1 t = 1000 kg et 1 kg = 1000 g sont exactes. Dans les unités de masse, chaque unité vaut 1000 fois la suivante. Les égalités avec 100 sont des confusions avec les unités de longueur comme le centimètre.",
+                  "answers": [
+                    { "content": "$1\\ \\text{t} = 1000\\ \\text{kg}$", "correct": true },
+                    { "content": "$1\\ \\text{kg} = 1000\\ \\text{g}$", "correct": true },
+                    { "content": "$1\\ \\text{g} = 1000\\ \\text{kg}$", "correct": false },
+                    { "content": "$1\\ \\text{t} = 100\\ \\text{kg}$", "correct": false },
+                    { "content": "$1\\ \\text{kg} = 100\\ \\text{g}$", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Pesées et masses totales au port",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Une grue charge 3 palettes de 1,2 t chacune et une caisse d'outils de 300 kg. Quelle est la masse totale chargée ?",
+                  "question_type": "single_choice",
+                  "explanation": "On convertit : 1,2 t = 1200 kg. Trois palettes : 3 × 1200 = 3600 kg. Avec la caisse : 3600 + 300 = 3900 kg. Écrire 303,6 revient à additionner 3,6 t et 300 kg sans convertir.",
+                  "answers": [
+                    { "content": "3900 kg", "correct": true },
+                    { "content": "3600 kg", "correct": false },
+                    { "content": "303,6 kg", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Sur un plateau d'une balance, on pose un sac de cacao. Pour l'équilibrer, on met sur l'autre plateau des masses marquées de 50 kg, 5 kg, 500 g et 200 g. Quelle est la masse du sac ?",
+                  "question_type": "single_choice",
+                  "explanation": "On convertit en kg : 500 g = 0,5 kg et 200 g = 0,2 kg. Puis 50 + 5 + 0,5 + 0,2 = 55,7 kg. Additionner les nombres bruts donne 755, ce qui ignore les unités différentes.",
+                  "answers": [
+                    { "content": "55,7 kg", "correct": true },
+                    { "content": "755 kg", "correct": false },
+                    { "content": "55700 kg", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un cargo embarque 240 sacs de cacao de 65 kg chacun. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "240 × 65 = 15600 kg, soit 15,6 t après division par 1000. Les valeurs 1560 kg et 156 t viennent d'un décalage de virgule : vérifie toujours si le résultat est plausible.",
+                  "answers": [
+                    { "content": "La masse totale est de 15600 kg", "correct": true },
+                    { "content": "La masse totale est de 15,6 t", "correct": true },
+                    { "content": "La masse totale est de 1560 kg", "correct": false },
+                    { "content": "La masse totale est de 156 t", "correct": false },
+                    { "content": "La masse totale est de 305 kg", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un sac de cacao a une masse de 60 kg. Sa masse est de 6000 g.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. 60 kg = 60 × 1000 = 60000 g. Dire 6000 g, c'est multiplier par 100 au lieu de 1000. Pour t'aider, souviens-toi que dans 1 kg il y a 1000 g.",
+                  "answers": [
+                    { "content": "Vrai", "correct": false },
+                    { "content": "Faux", "correct": true }
+                  ]
+                },
+                {
+                  "content": "Un camion peut transporter au maximum 8 t de cacao. On veut y charger 150 sacs de 60 kg chacun. Que peut-on dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "150 × 60 = 9000 kg, soit 9 t. Comme 9 t dépasse 8 t, le chargement est impossible. Dire 900 kg est une erreur de conversion : on ne peut pas comparer des kg et des t sans convertir.",
+                  "answers": [
+                    { "content": "Impossible : la masse des sacs est de 9 t, donc supérieure à 8 t", "correct": true },
+                    { "content": "Possible : la masse des sacs est de 900 kg, donc inférieure à 8 t", "correct": false },
+                    { "content": "Possible : la masse des sacs est de 6 t, donc inférieure à 8 t", "correct": false }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le poids d'un corps",
+          "subtitle": "Reconnaître le poids comme une force et le mesurer en newtons",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Dire ce qu'est le poids d'un corps et dans quelle unité on le mesure.</li><li>Lire l'intensité d'un poids sur un dynamomètre.</li><li>Donner les quatre caractéristiques du poids d'un corps.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le sac au crochet à ressort.</strong> Sur le quai, un docker accroche un sac de cacao au crochet d'une balance à ressort. Le ressort s'allonge, et l'aiguille s'arrête sur un chiffre. Avec un sac plus rempli, le ressort s'allonge davantage. Si le docker lâche le sac au-dessus de l'eau, le sac tombe tout droit vers le bas, jamais de côté. Un peu plus loin, le câble de la grue qui tient une charge immobile est bien droit, comme un fil à plomb.</p><p><strong>Le pont.</strong> L'allongement du ressort montre la force avec laquelle la Terre attire le sac : c'est le <strong>poids</strong>. Le crochet à ressort est un <strong>dynamomètre</strong>. La chute « tout droit vers le bas » donne la <strong>direction</strong> du poids (la verticale) et son <strong>sens</strong> (vers le bas). Le point où l'on peut imaginer que le poids agit est le milieu du sac, son <strong>centre de gravité</strong>, noté G.</p><p><strong>La limite de l'image.</strong> Ce n'est pas le sac qui tire de lui-même sur le ressort : c'est la Terre qui l'attire. Et le poids existe aussi quand le sac tombe ou quand il est posé sur le quai : le dynamomètre sert seulement à le lire.</p><h2>Ce qu'il faut retenir</h2><p>Une <em>force</em> est une action capable de déformer un corps ou de modifier son mouvement. Ici, on ne s'intéresse qu'à une seule force : le poids.</p><blockquote><p><strong>Poids</strong> : force d'attraction exercée par la Terre sur un corps. On le note $\\vec P$ et son intensité $P$. Son unité est le <strong>newton</strong> (N). On le mesure avec un <strong>dynamomètre</strong>, suspendu verticalement, quand le corps est immobile.</p><p><strong>Les quatre caractéristiques du poids</strong> :</p><ul><li>point d'application : le centre de gravité G du corps ;</li><li>direction : la verticale du lieu (celle du fil à plomb) ;</li><li>sens : vers le bas (vers le centre de la Terre) ;</li><li>intensité : la valeur $P$, en newtons, lue sur le dynamomètre.</li></ul></blockquote><h2>Exemple résolu</h2><p>On accroche un sac de cacao immobile au crochet d'un dynamomètre gradué en newtons. L'aiguille s'arrête sur 600 N. Donne les caractéristiques de son poids.</p><ol><li><strong>Point d'application.</strong> Le poids s'applique au centre de gravité G du sac, au milieu du sac.</li><li><strong>Direction.</strong> Le sac pend au bout du ressort tenu droit : la direction est la verticale.</li><li><strong>Sens.</strong> La Terre attire le sac : le sens est vers le bas.</li><li><strong>Intensité.</strong> On lit l'aiguille : $P = 600\\ \\text{N}$.</li></ol><h2>Le piège à éviter</h2><p>Exprimer un poids en kilogrammes, par exemple « le poids du sac est de 60 kg ». Le kilogramme est l'unité d'une masse. Le poids est une force : il se mesure en newtons.</p><p>Pour repérer l'erreur, regarde l'unité. Si c'est le kilogramme, on parle d'une masse. Si c'est le newton, on parle d'un poids.</p><h2>En une phrase</h2><p>Le poids est la force avec laquelle la Terre attire un corps : il se mesure au dynamomètre, en newtons, et il est vertical et dirigé vers le bas.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître le poids d'un corps",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Qu'est-ce que le poids d'un corps ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le poids est la force d'attraction exercée par la Terre sur le corps, comme celle qui tire le sac de cacao vers le bas. Il ne faut pas le confondre avec la quantité de matière, qui est la masse.",
+                  "answers": [
+                    { "content": "La force d'attraction exercée par la Terre sur ce corps", "correct": true },
+                    { "content": "La quantité de matière contenue dans ce corps", "correct": false },
+                    { "content": "La place occupée par ce corps", "correct": false },
+                    { "content": "La force exercée par la main qui porte le corps", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'unité du poids dans le Système international ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le poids est une force : son unité est le newton (N). Le kilogramme et le gramme sont des unités de masse. L'erreur fréquente vient du langage courant, où l'on dit « je pèse 50 kg ».",
+                  "answers": [
+                    { "content": "Le newton (N)", "correct": true },
+                    { "content": "Le kilogramme (kg)", "correct": false },
+                    { "content": "Le gramme (g)", "correct": false },
+                    { "content": "Le litre (L)", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quel appareil permet de mesurer directement le poids d'un corps ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le dynamomètre mesure une force : le ressort s'allonge d'autant plus que le poids est grand. La balance à plateaux, elle, compare des masses, et le thermomètre mesure une température.",
+                  "answers": [
+                    { "content": "Un dynamomètre", "correct": true },
+                    { "content": "Une balance à plateaux", "correct": false },
+                    { "content": "Un thermomètre", "correct": false },
+                    { "content": "Une éprouvette graduée", "correct": false }
+                  ]
+                },
+                {
+                  "content": "La direction du poids d'un sac de cacao est l'horizontale.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. La direction du poids est la verticale : un sac lâché tombe tout droit, comme le fil à plomb ou le câble de la grue. L'horizontale est perpendiculaire à la verticale.",
+                  "answers": [
+                    { "content": "Vrai", "correct": false },
+                    { "content": "Faux", "correct": true }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions décrivent correctement le poids d'un sac posé sur le quai ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Le poids a pour direction la verticale et pour sens vers le bas. Son point d'application est le centre de gravité G du sac, pas le sol. Le poids ne change pas de sens quand le sac est posé : la Terre l'attire toujours.",
+                  "answers": [
+                    { "content": "Sa direction est la verticale du lieu", "correct": true },
+                    { "content": "Son sens est vers le bas", "correct": true },
+                    { "content": "Son point d'application est le point du sol sous le sac", "correct": false },
+                    { "content": "Son sens est vers le haut, car le sol soutient le sac", "correct": false },
+                    { "content": "Sa direction est l'horizontale", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du port, le ressort s'allonge quand le docker accroche un sac. Que montre cet allongement ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'allongement du ressort montre l'intensité de la force d'attraction de la Terre sur le sac, donc son poids. Le dynamomètre est gradué en newtons : il ne donne pas directement la masse en kilogrammes.",
+                  "answers": [
+                    { "content": "L'intensité du poids du sac", "correct": true },
+                    { "content": "La masse du sac, directement en kilogrammes", "correct": false },
+                    { "content": "La taille du sac", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Lire un dynamomètre et donner les caractéristiques",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un sac de cacao immobile est accroché à un dynamomètre gradué en newtons. L'aiguille indique 250. Quel est le poids du sac ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le dynamomètre est gradué en newtons : le poids du sac est donc de 250 N. Écrire 250 kg serait une erreur d'unité, car le kilogramme est l'unité d'une masse et non d'un poids.",
+                  "answers": [
+                    { "content": "250 N", "correct": true },
+                    { "content": "250 kg", "correct": false },
+                    { "content": "25 N", "correct": false },
+                    { "content": "2500 N", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Pour mesurer le poids d'un objet, on le suspend au dynamomètre tenu verticalement et on lit l'indication quand l'objet est immobile.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Le dynamomètre doit être vertical, comme la direction du poids, et l'objet immobile pour que l'aiguille se stabilise. Un dynamomètre tenu penché ou un objet qui balance donne une lecture fausse.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Le poids d'une caisse vaut 800 N. Quelle est la direction et le sens de ce poids ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le poids est vertical et dirigé vers le bas. L'intensité (800 N) n'a aucun effet sur la direction et le sens. L'erreur tentante est de confondre la direction (verticale) et le sens (vers le bas).",
+                  "answers": [
+                    { "content": "Direction verticale, sens vers le bas", "correct": true },
+                    { "content": "Direction verticale, sens vers le haut", "correct": false },
+                    { "content": "Direction horizontale, sens vers le bas", "correct": false },
+                    { "content": "Direction horizontale, sens vers la droite", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quel est le point d'application du poids d'un sac de cacao ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le poids s'applique au centre de gravité G du sac, qui se trouve en gros au milieu. Le sol et le crochet de la grue sont des endroits où le sac est en contact avec autre chose : ce ne sont pas des points d'application du poids.",
+                  "answers": [
+                    { "content": "Son centre de gravité G", "correct": true },
+                    { "content": "Le sol sur lequel il repose", "correct": false },
+                    { "content": "Le crochet de la grue", "correct": false },
+                    { "content": "L'étiquette collée sur le sac", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelles écritures sont correctes pour l'intensité du poids d'une caisse ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Le poids est une force : on l'écrit en newtons, soit 300 N ou 300 newtons. Écrire 300 kg ou 300 g, c'est employer des unités de masse, ce qui est l'erreur la plus fréquente.",
+                  "answers": [
+                    { "content": "$P = 300\\ \\text{N}$", "correct": true },
+                    { "content": "$P = 300$ newtons", "correct": true },
+                    { "content": "$P = 300\\ \\text{kg}$", "correct": false },
+                    { "content": "$P = 300\\ \\text{g}$", "correct": false },
+                    { "content": "$P = 300\\ \\text{L}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un maçon utilise un fil à plomb pour construire un mur. Que matérialise le fil à plomb ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le fil à plomb pend librement : il prend la direction du poids du plomb, c'est-à-dire la verticale du lieu. L'horizontale lui est perpendiculaire, et il ne donne ni la masse ni la hauteur du mur.",
+                  "answers": [
+                    { "content": "La verticale du lieu, direction du poids", "correct": true },
+                    { "content": "L'horizontale du lieu", "correct": false },
+                    { "content": "La masse du plomb", "correct": false },
+                    { "content": "La hauteur du mur", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Interpréter des mesures de poids",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un docker accroche un sac de cacao à un dynamomètre : l'aiguille se stabilise à 650 N. Il le remplace ensuite par deux sacs, tous deux identiques au premier, accrochés ensemble. Quelle indication attend-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Chaque sac identique est attiré par la Terre avec la même force. Pour deux sacs, les poids s'ajoutent : 650 + 650 = 1300 N. L'aiguille ne reste pas à 650 N, et 325 N serait la moitié.",
+                  "answers": [
+                    { "content": "1300 N", "correct": true },
+                    { "content": "650 N", "correct": false },
+                    { "content": "325 N", "correct": false },
+                    { "content": "1950 N", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un sac de cacao est posé sur le quai. Quelles affirmations sur son poids sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Le poids est exercé par la Terre, se mesure au dynamomètre et s'exprime en newtons. Il existe encore quand le sac est posé : le sol ne le supprime pas. Les kilogrammes sont réservés à la masse.",
+                  "answers": [
+                    { "content": "Il est exercé par la Terre sur le sac", "correct": true },
+                    { "content": "Il se mesure avec un dynamomètre", "correct": true },
+                    { "content": "Il s'exprime en newtons", "correct": true },
+                    { "content": "Il s'exprime en kilogrammes", "correct": false },
+                    { "content": "Il est horizontal", "correct": false },
+                    { "content": "Il disparaît quand le sac est posé au sol", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un élève écrit : « Le poids du sac de cacao est de 60 kg. » Quelle est la correction juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le kilogramme est l'unité d'une masse : 60 kg est la masse du sac. Le poids se mesure en newtons. Changer seulement l'unité en écrivant 60 N serait faux, car la valeur du poids n'est pas égale à celle de la masse.",
+                  "answers": [
+                    { "content": "60 kg est la masse du sac ; son poids s'exprime en newtons", "correct": true },
+                    { "content": "Il n'y a rien à corriger", "correct": false },
+                    { "content": "Il faut seulement écrire 60 N à la place de 60 kg", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quand un sac de cacao tombe du quai en direction de l'eau, il n'a plus de poids.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Pendant sa chute, le sac est attiré par la Terre : c'est précisément ce qui le fait tomber. Le poids existe tout le temps, que le sac soit posé, accroché ou en chute.",
+                  "answers": [
+                    { "content": "Vrai", "correct": false },
+                    { "content": "Faux", "correct": true }
+                  ]
+                },
+                {
+                  "content": "Un objet est suspendu à un dynamomètre fixé au plafond. Quel est le point d'application du poids de l'objet ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le poids de l'objet s'applique au centre de gravité G de l'objet lui-même. Le ressort et le plafond ne font pas partie de l'objet : ils servent seulement à le retenir et à lire la mesure.",
+                  "answers": [
+                    { "content": "Le centre de gravité de l'objet", "correct": true },
+                    { "content": "Le ressort du dynamomètre", "correct": false },
+                    { "content": "Le point d'attache du dynamomètre au plafond", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un dynamomètre indique 400 N pour un colis immobile. Quelle proposition donne correctement les caractéristiques du poids du colis ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le poids a pour point d'application le centre de gravité G, pour direction la verticale, pour sens vers le bas et pour intensité 400 N. Les autres propositions changent le sens, la direction ou l'unité.",
+                  "answers": [
+                    { "content": "Point d'application G ; direction verticale ; sens vers le bas ; intensité 400 N", "correct": true },
+                    { "content": "Point d'application G ; direction verticale ; sens vers le haut ; intensité 400 N", "correct": false },
+                    { "content": "Point d'application G ; direction horizontale ; sens vers le bas ; intensité 400 N", "correct": false },
+                    { "content": "Point d'application G ; direction verticale ; sens vers le bas ; intensité 400 kg", "correct": false }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La relation entre le poids et la masse",
+          "subtitle": "Calculer un poids ou une masse avec P = m × g",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Utiliser la relation $P = m \\times g$ pour calculer un poids à partir d'une masse.</li><li>Calculer une masse à partir d'un poids.</li><li>Convertir la masse en kilogrammes avant de calculer.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le prix au kilo, au marché de Treichville.</strong> Un vendeur de riz affiche un prix fixe pour chaque kilo, disons 600 F le kilo. Pour 1 kg, tu paies 600 F. Pour 2 kg, tu paies deux fois plus. Pour 5 kg, cinq fois plus. Pour trouver la somme à payer, tu multiplies la masse achetée par le prix d'un kilo. Pour retrouver la masse achetée, tu divises la somme payée par le prix d'un kilo.</p><p><strong>Le pont.</strong> La masse achetée, c'est la masse $m$ du corps. La somme à payer, c'est son poids $P$. Le prix d'un kilo, c'est l'<strong>intensité de la pesanteur</strong> $g$ : le poids d'un corps de 1 kg. Doubler la masse double le poids, comme doubler les kilos double la somme à payer.</p><p><strong>La limite de l'image.</strong> Le prix au kilo peut changer d'un marché à l'autre. De même, $g$ n'a pas la même valeur partout, ce que tu verras dans la fiche essentielle suivante. Et le poids se mesure en newtons, pas en francs !</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Relation entre le poids et la masse</strong> : $$P = m \\times g$$ avec $P$ en newtons (N), $m$ en <strong>kilogrammes</strong> (kg) et $g$ en newtons par kilogramme (N/kg).</p><p><strong>Intensité de la pesanteur</strong> : $g$ est le poids d'un corps de masse 1 kg. Sur Terre, $g \\approx 9{,}8\\ \\text{N/kg}$. Dans les exercices, on l'arrondit à $g = 10\\ \\text{N/kg}$ quand l'énoncé le demande.</p><p><strong>Proportionnalité</strong> : le poids est proportionnel à la masse. Pour retrouver la masse : $m = \\dfrac{P}{g}$.</p></blockquote><h2>Exemple résolu</h2><p>On prend $g = 10\\ \\text{N/kg}$. Un sac de cacao a une masse de 60 kg. Calcule son poids. Puis calcule la masse d'un colis dont le poids est 450 N.</p><ol><li><strong>Poids du sac.</strong> La masse est déjà en kg : $P = m \\times g = 60 \\times 10 = 600\\ \\text{N}$.</li><li><strong>Masse du colis.</strong> On isole $m$ : $m = \\dfrac{P}{g} = \\dfrac{450}{10} = 45\\ \\text{kg}$.</li><li><strong>Avec des grammes.</strong> Pour une caisse de 250 g, on convertit d'abord : $250\\ \\text{g} = 0{,}25\\ \\text{kg}$. Alors $P = 0{,}25 \\times 10 = 2{,}5\\ \\text{N}$.</li></ol><h2>Le piège à éviter</h2><p>Oublier de convertir la masse en kilogrammes avant de calculer. Avec une caisse de 250 g, écrire $P = 250 \\times 10 = 2500\\ \\text{N}$ est faux : le résultat est 1000 fois trop grand.</p><p>Pour repérer l'erreur, regarde l'unité de la masse avant de multiplier. Si ce n'est pas le kilogramme, convertis d'abord.</p><h2>En une phrase</h2><p>Le poids se calcule en multipliant la masse (en kg) par $g$, et la masse se retrouve en divisant le poids par $g$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Lire la relation P = m × g",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle relation lie le poids $P$ d'un corps à sa masse $m$ et à l'intensité de la pesanteur $g$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le poids est égal au produit de la masse par g : P = m × g, comme la somme à payer est égale aux kilos achetés multipliés par le prix du kilo. Une addition ou une division ne convient pas.",
+                  "answers": [
+                    { "content": "$P = m \\times g$", "correct": true },
+                    { "content": "$P = m + g$", "correct": false },
+                    { "content": "$P = \\dfrac{m}{g}$", "correct": false },
+                    { "content": "$P = \\dfrac{g}{m}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'unité de l'intensité de la pesanteur $g$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le poids se mesure en newtons et la masse en kilogrammes : g = P ÷ m s'exprime donc en newtons par kilogramme (N/kg). Le kg/N serait l'inverse.",
+                  "answers": [
+                    { "content": "Le newton par kilogramme (N/kg)", "correct": true },
+                    { "content": "Le kilogramme par newton (kg/N)", "correct": false },
+                    { "content": "Le newton (N)", "correct": false },
+                    { "content": "Le kilogramme (kg)", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Le poids d'un corps est proportionnel à sa masse.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. P = m × g : si la masse double, le poids double, car g reste le même au même endroit. C'est comme le prix du riz, qui double quand tu achètes deux fois plus de kilos.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du marché, que représente l'intensité de la pesanteur $g$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le prix d'un kilo correspond à g : c'est le poids d'un corps de 1 kg. La somme à payer représente le poids P, et les kilos achetés représentent la masse m.",
+                  "answers": [
+                    { "content": "Le prix d'un kilo", "correct": true },
+                    { "content": "La somme totale à payer", "correct": false },
+                    { "content": "Le nombre de kilos achetés", "correct": false },
+                    { "content": "Le nom du vendeur", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans la relation $P = m \\times g$, quelles unités doit-on utiliser pour calculer ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Pour que P sorte en newtons, il faut la masse en kilogrammes et g en N/kg. Une masse en grammes est l'erreur la plus fréquente : elle donne un résultat 1000 fois trop grand.",
+                  "answers": [
+                    { "content": "Le poids $P$ en newtons", "correct": true },
+                    { "content": "La masse $m$ en kilogrammes", "correct": true },
+                    { "content": "La masse $m$ en grammes", "correct": false },
+                    { "content": "Le poids $P$ en kilogrammes", "correct": false },
+                    { "content": "L'intensité $g$ en kilogrammes par newton", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Que signifie $g = 10\\ \\text{N/kg}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "g = 10 N/kg signifie qu'un corps de 1 kg a un poids d'environ 10 N. Un corps de 10 kg a alors un poids d'environ 100 N. Écrire qu'un corps de 10 kg a un poids de 1 N inverse le rôle de la masse et de g.",
+                  "answers": [
+                    { "content": "Un corps de 1 kg a un poids de 10 N", "correct": true },
+                    { "content": "Un corps de 10 kg a un poids de 1 N", "correct": false },
+                    { "content": "Un corps dont le poids est de 1 N a une masse de 1 kg", "correct": false },
+                    { "content": "Tous les corps ont un poids de 10 N", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer un poids ou une masse",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On prend $g = 10\\ \\text{N/kg}$. Calcule le poids d'un corps de masse 5 kg.",
+                  "question_type": "single_choice",
+                  "explanation": "P = m × g = 5 × 10 = 50 N. Obtenir 0,5 vient d'une division par g au lieu d'une multiplication, et 15 d'une addition de m et g.",
+                  "answers": [
+                    { "content": "50 N", "correct": true },
+                    { "content": "0,5 N", "correct": false },
+                    { "content": "15 N", "correct": false },
+                    { "content": "5 N", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On prend $g = 10\\ \\text{N/kg}$. Un sac de cacao a une masse de 60 kg. Quel est son poids ?",
+                  "question_type": "single_choice",
+                  "explanation": "P = m × g = 60 × 10 = 600 N. Le résultat 6 N vient d'une division de 60 par 10, qui donne une masse et non un poids : on multiplie la masse par g.",
+                  "answers": [
+                    { "content": "600 N", "correct": true },
+                    { "content": "6 N", "correct": false },
+                    { "content": "70 N", "correct": false },
+                    { "content": "60 N", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On prend $g = 10\\ \\text{N/kg}$. Un colis a un poids de 450 N. Quelle est sa masse ?",
+                  "question_type": "single_choice",
+                  "explanation": "On isole la masse : m = P ÷ g = 450 ÷ 10 = 45 kg. Multiplier 450 par 10 donne 4500, ce qui est l'erreur courante quand on ne sait pas quelle opération utiliser.",
+                  "answers": [
+                    { "content": "45 kg", "correct": true },
+                    { "content": "4500 kg", "correct": false },
+                    { "content": "4,5 kg", "correct": false },
+                    { "content": "460 kg", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On prend $g = 10\\ \\text{N/kg}$. Une caisse a une masse de 250 g. Quel est son poids ?",
+                  "question_type": "single_choice",
+                  "explanation": "On convertit d'abord : 250 g = 0,25 kg. Puis P = 0,25 × 10 = 2,5 N. Écrire 2500 N vient d'un calcul avec 250 sans convertir : le résultat est 1000 fois trop grand.",
+                  "answers": [
+                    { "content": "2,5 N", "correct": true },
+                    { "content": "2500 N", "correct": false },
+                    { "content": "25 N", "correct": false },
+                    { "content": "0,25 N", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On prend $g = 10\\ \\text{N/kg}$. Un corps dont le poids est de 80 N a une masse de 800 kg.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. m = P ÷ g = 80 ÷ 10 = 8 kg. Trouver 800 kg vient d'une multiplication de 80 par 10 au lieu d'une division : on cherche une masse, donc on divise le poids par g.",
+                  "answers": [
+                    { "content": "Vrai", "correct": false },
+                    { "content": "Faux", "correct": true }
+                  ]
+                },
+                {
+                  "content": "On prend $g = 10\\ \\text{N/kg}$. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "3 kg ont un poids de 3 × 10 = 30 N, et 70 N correspond à 70 ÷ 10 = 7 kg. Les autres reviennent à diviser quand il faut multiplier, ou à multiplier quand il faut diviser.",
+                  "answers": [
+                    { "content": "Une masse de 3 kg a un poids de 30 N", "correct": true },
+                    { "content": "Un poids de 70 N correspond à une masse de 7 kg", "correct": true },
+                    { "content": "Une masse de 12 kg a un poids de 1,2 N", "correct": false },
+                    { "content": "Un poids de 5 N correspond à une masse de 50 kg", "correct": false },
+                    { "content": "Une masse de 0,5 kg a un poids de 15 N", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Poids et masses sur le quai",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "On prend $g = 10\\ \\text{N/kg}$. Une grue soulève 3 sacs de cacao de 60 kg chacun. Quel est le poids total de la charge ?",
+                  "question_type": "single_choice",
+                  "explanation": "La masse totale est 3 × 60 = 180 kg. Le poids est P = 180 × 10 = 1800 N. Le résultat 600 N est le poids d'un seul sac, et 180 N oublie de multiplier par g.",
+                  "answers": [
+                    { "content": "1800 N", "correct": true },
+                    { "content": "600 N", "correct": false },
+                    { "content": "180 N", "correct": false },
+                    { "content": "18000 N", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On prend $g = 10\\ \\text{N/kg}$. Une charge accrochée à une grue a un poids de 24000 N. Quelle est sa masse en tonnes ?",
+                  "question_type": "single_choice",
+                  "explanation": "m = P ÷ g = 24000 ÷ 10 = 2400 kg. Comme 1 t = 1000 kg, cela fait 2,4 t. Répondre 2400 t oublie la conversion de kg en t, et 24 t oublie de diviser par g.",
+                  "answers": [
+                    { "content": "2,4 t", "correct": true },
+                    { "content": "24 t", "correct": false },
+                    { "content": "2400 t", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On prend $g = 10\\ \\text{N/kg}$. Un câble de grue ne doit pas supporter une charge de poids supérieur à 50000 N. Peut-on soulever un conteneur de masse 6 t avec ce câble ?",
+                  "question_type": "single_choice",
+                  "explanation": "6 t = 6000 kg. Le poids est P = 6000 × 10 = 60000 N, supérieur à 50000 N : on ne peut pas. Répondre oui avec 60 N revient à oublier de convertir les tonnes en kilogrammes.",
+                  "answers": [
+                    { "content": "Non : le poids du conteneur est de 60000 N, supérieur à 50000 N", "correct": true },
+                    { "content": "Oui : le poids du conteneur est de 60 N, inférieur à 50000 N", "correct": false },
+                    { "content": "Oui : le poids du conteneur est de 6000 N, inférieur à 50000 N", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On prend $g = 10\\ \\text{N/kg}$. Un colis a une masse de 40 kg. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Le poids du colis est 40 × 10 = 400 N, donc deux colis identiques font 800 N. Un poids de 200 N correspond à 200 ÷ 10 = 20 kg. La masse de deux colis fait 80 kg, et non 40 kg.",
+                  "answers": [
+                    { "content": "Son poids est de 400 N", "correct": true },
+                    { "content": "Deux colis identiques ont un poids total de 800 N", "correct": true },
+                    { "content": "Un colis de poids 200 N a une masse de 20 kg", "correct": true },
+                    { "content": "Son poids est de 4000 N", "correct": false },
+                    { "content": "Deux colis identiques ont une masse totale de 40 kg", "correct": false },
+                    { "content": "Son poids est de 40 N", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On prend $g = 10\\ \\text{N/kg}$. Un dynamomètre indique 15 N pour un petit objet. Quelle est la masse de l'objet ?",
+                  "question_type": "single_choice",
+                  "explanation": "m = P ÷ g = 15 ÷ 10 = 1,5 kg. Répondre 15 kg revient à lire la valeur du dynamomètre comme une masse. Répondre 150 kg vient d'une multiplication par 10 au lieu d'une division.",
+                  "answers": [
+                    { "content": "1,5 kg", "correct": true },
+                    { "content": "15 kg", "correct": false },
+                    { "content": "150 kg", "correct": false },
+                    { "content": "0,15 kg", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On prend $g = 9{,}8\\ \\text{N/kg}$. Quel est le poids d'un corps de masse 10 kg ?",
+                  "question_type": "single_choice",
+                  "explanation": "P = m × g = 10 × 9,8 = 98 N. Répondre 100 N revient à arrondir g à 10 alors que l'énoncé donne 9,8. Répondre 9,8 N ne tient pas compte de la masse de 10 kg.",
+                  "answers": [
+                    { "content": "98 N", "correct": true },
+                    { "content": "100 N", "correct": false },
+                    { "content": "9,8 N", "correct": false },
+                    { "content": "980 N", "correct": false }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Masse et poids : ce qui change selon le lieu",
+          "subtitle": "Comparer la masse et le poids d'un même corps. À compléter : représentation du poids à l'échelle (voir Les forces)",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Distinguer la masse et le poids d'un corps.</li><li>Expliquer pourquoi le poids change d'un lieu à l'autre alors que la masse ne change pas.</li><li>Calculer le poids d'un même corps sur la Terre et sur la Lune.</li></ul><h2>L'image pour comprendre</h2><p><strong>Un sac de cacao, deux instruments.</strong> Le chef de quai pèse le même sac de 60 kg avec deux appareils. La balance à plateaux compare le sac à des masses marquées : elle donne 60 kg. Le dynamomètre indique 600 N. Imagine maintenant qu'on emporte le sac, la balance et le dynamomètre sur la Lune. La balance à plateaux donne encore 60 kg. Mais le dynamomètre n'indique plus que 96 N environ : la Lune attire moins fort que la Terre.</p><p><strong>Le pont.</strong> La quantité de cacao dans le sac, c'est la <strong>masse</strong> : elle voyage avec le sac et ne change pas. L'attraction exercée par la Terre ou par la Lune, c'est le <strong>poids</strong> : il dépend de l'astre où l'on se trouve, à cause de $g$.</p><p><strong>La limite de l'image.</strong> Le sac n'a pas « maigri » sur la Lune : il contient toujours la même quantité de cacao. Il est seulement moins attiré.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>La masse</strong> est invariable : c'est la même sur la Terre, sur la Lune et partout. Elle se mesure en kilogrammes avec une balance.</p><p><strong>Le poids</strong> dépend du lieu, car $g$ dépend du lieu : $P = m \\times g$. Il se mesure en newtons avec un dynamomètre.</p><ul><li>Sur la Terre : $g \\approx 9{,}8\\ \\text{N/kg}$, arrondi à $10\\ \\text{N/kg}$.</li><li>Sur la Lune : $g \\approx 1{,}6\\ \\text{N/kg}$.</li></ul><p>À la surface de la Terre, $g$ varie même un peu d'un endroit à l'autre (altitude, latitude).</p></blockquote><p>Dans la vie courante, quand on dit « je pèse 55 kg », on donne en réalité une <strong>masse</strong>.</p><h2>Exemple résolu</h2><p>Un conteneur a une masse de 2 t. Calcule son poids sur la Terre ($g = 10\\ \\text{N/kg}$) puis sur la Lune ($g = 1{,}6\\ \\text{N/kg}$). Quelle est sa masse sur la Lune ?</p><ol><li><strong>Conversion.</strong> $2\\ \\text{t} = 2000\\ \\text{kg}$.</li><li><strong>Poids sur la Terre.</strong> $P_T = 2000 \\times 10 = 20000\\ \\text{N}$.</li><li><strong>Poids sur la Lune.</strong> $P_L = 2000 \\times 1{,}6 = 3200\\ \\text{N}$.</li><li><strong>Masse sur la Lune.</strong> La masse ne change pas : elle vaut toujours 2000 kg.</li></ol><h2>Le piège à éviter</h2><p>Croire que la masse change quand le poids change. « Il pèse moins sur la Lune, donc il contient moins de matière » est faux : le poids diminue, la masse reste la même.</p><p>Pour repérer l'erreur, pose-toi la question : l'objet a-t-il perdu de la matière ? Non. Alors sa masse n'a pas changé.</p><h2>En une phrase</h2><p>La masse d'un corps reste la même partout, mais son poids change avec l'astre où il se trouve, car $g$ change.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Masse ou poids ?",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "La masse d'un sac de cacao est la même à Abidjan et sur la Lune.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. La masse mesure la quantité de matière, qui ne change pas quand le sac voyage. C'est le poids qui change, car la Lune attire moins fort que la Terre.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelle grandeur dépend du lieu où se trouve le corps ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le poids dépend du lieu, car l'intensité de la pesanteur g dépend du lieu. La masse, qui mesure la quantité de matière, ne change pas quand on déplace le corps.",
+                  "answers": [
+                    { "content": "Le poids", "correct": true },
+                    { "content": "La masse", "correct": false },
+                    { "content": "La quantité de matière", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Pourquoi le poids d'un même corps change-t-il d'un astre à l'autre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le poids vaut P = m × g. La masse m ne change pas, mais g change d'un astre à l'autre : c'est donc g qui fait varier le poids. L'objet ne perd pas de matière en voyageant.",
+                  "answers": [
+                    { "content": "Parce que l'intensité de la pesanteur g change", "correct": true },
+                    { "content": "Parce que la masse de l'objet change", "correct": false },
+                    { "content": "Parce que l'objet perd de la matière pendant le voyage", "correct": false },
+                    { "content": "Parce que le dynamomètre est abîmé par le voyage", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "La masse se mesure en kilogrammes et le poids en newtons. Le poids est une force et se lit au dynamomètre, la masse se mesure à la balance. Dire « poids en kilogrammes » est la confusion de la vie courante.",
+                  "answers": [
+                    { "content": "La masse se mesure en kilogrammes", "correct": true },
+                    { "content": "Le poids se mesure en newtons", "correct": true },
+                    { "content": "Le poids se mesure en kilogrammes", "correct": false },
+                    { "content": "La masse se mesure avec un dynamomètre", "correct": false },
+                    { "content": "La masse est une force", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « Je pèse 55 kg. » Quelle grandeur donne-t-il en réalité ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le kilogramme est l'unité de la masse : 55 kg est donc la masse de l'élève. Son poids, lui, s'exprimerait en newtons. Le verbe « peser » est employé dans la vie courante pour parler d'une masse.",
+                  "answers": [
+                    { "content": "Sa masse", "correct": true },
+                    { "content": "Son poids", "correct": false },
+                    { "content": "L'intensité de la pesanteur", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On emporte un sac de cacao sur la Lune avec une balance à plateaux et un dynamomètre. Que se passe-t-il pour ce sac ?",
+                  "question_type": "single_choice",
+                  "explanation": "La balance à plateaux compare des masses : elle donne la même valeur qu'à Abidjan. Le dynamomètre mesure le poids, qui est plus petit sur la Lune car g y est plus petit.",
+                  "answers": [
+                    { "content": "Le dynamomètre indique moins, la balance à plateaux donne la même masse", "correct": true },
+                    { "content": "Les deux appareils indiquent moins", "correct": false },
+                    { "content": "Les deux appareils indiquent la même valeur qu'à Abidjan", "correct": false },
+                    { "content": "Le dynamomètre indique plus, la balance à plateaux donne la même masse", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Comparer la Terre et la Lune",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Sur la Lune, $g = 1{,}6\\ \\text{N/kg}$. Quel est le poids d'un objet de masse 6 kg sur la Lune ?",
+                  "question_type": "single_choice",
+                  "explanation": "P = m × g = 6 × 1,6 = 9,6 N. Répondre 3,75 N vient d'une division de 6 par 1,6, alors que le poids se calcule par une multiplication. La masse reste 6 kg, mais ce n'est pas un poids.",
+                  "answers": [
+                    { "content": "9,6 N", "correct": true },
+                    { "content": "60 N", "correct": false },
+                    { "content": "6 N", "correct": false },
+                    { "content": "3,75 N", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Sur la Lune, $g = 1{,}6\\ \\text{N/kg}$. Un objet a un poids de 16 N sur la Lune. Quelle est sa masse ?",
+                  "question_type": "single_choice",
+                  "explanation": "m = P ÷ g = 16 ÷ 1,6 = 10 kg. Répondre 25,6 kg vient d'une multiplication au lieu d'une division, et 16 kg d'une lecture du poids comme si c'était la masse.",
+                  "answers": [
+                    { "content": "10 kg", "correct": true },
+                    { "content": "25,6 kg", "correct": false },
+                    { "content": "16 kg", "correct": false },
+                    { "content": "1 kg", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un objet a une masse de 4 kg sur la Terre. Sur la Lune, sa masse est inférieure à 4 kg.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. La masse est invariable : elle reste 4 kg sur la Lune. Seul le poids est plus petit. Le sac n'a pas perdu de cacao en voyageant : il est seulement moins attiré.",
+                  "answers": [
+                    { "content": "Vrai", "correct": false },
+                    { "content": "Faux", "correct": true }
+                  ]
+                },
+                {
+                  "content": "On prend $g = 10\\ \\text{N/kg}$ sur la Terre et $g = 1{,}6\\ \\text{N/kg}$ sur la Lune. Un objet a un poids de 300 N sur la Terre. Quelle est sa masse sur la Lune ?",
+                  "question_type": "single_choice",
+                  "explanation": "Sur la Terre, m = 300 ÷ 10 = 30 kg. La masse ne change pas : elle est de 30 kg sur la Lune. Répondre 48 kg prend le poids sur la Lune (48 N) pour une masse, et 5 kg divise la masse par 6 sans raison.",
+                  "answers": [
+                    { "content": "30 kg", "correct": true },
+                    { "content": "48 kg", "correct": false },
+                    { "content": "5 kg", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On prend $g = 10\\ \\text{N/kg}$ sur la Terre et $g = 1{,}6\\ \\text{N/kg}$ sur la Lune. Un sac a une masse de 20 kg. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Sur la Terre, P = 20 × 10 = 200 N. Sur la Lune, P = 20 × 1,6 = 32 N. Sa masse reste de 20 kg : écrire 32 kg ou 3,2 kg confond la masse avec le poids.",
+                  "answers": [
+                    { "content": "Son poids sur la Terre est de 200 N", "correct": true },
+                    { "content": "Son poids sur la Lune est de 32 N", "correct": true },
+                    { "content": "Sa masse sur la Lune est de 32 kg", "correct": false },
+                    { "content": "Son poids sur la Lune est de 200 N", "correct": false },
+                    { "content": "Sa masse sur la Lune est de 3,2 kg", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Sur la Lune, $g = 1{,}6\\ \\text{N/kg}$. Un astronaute a une masse de 80 kg. Quel est son poids sur la Lune ?",
+                  "question_type": "single_choice",
+                  "explanation": "P = m × g = 80 × 1,6 = 128 N. Répondre 800 N utilise g = 10, valeur de la Terre. Répondre 50 N vient d'une division de 80 par 1,6, alors que le poids se calcule par une multiplication.",
+                  "answers": [
+                    { "content": "128 N", "correct": true },
+                    { "content": "800 N", "correct": false },
+                    { "content": "50 N", "correct": false },
+                    { "content": "12,8 N", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Un conteneur entre la Terre et la Lune",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "On prend $g = 10\\ \\text{N/kg}$ sur la Terre. Un conteneur a une masse de 1,5 t. Quel est son poids sur la Terre ?",
+                  "question_type": "single_choice",
+                  "explanation": "On convertit : 1,5 t = 1500 kg. Puis P = 1500 × 10 = 15000 N. Répondre 15 N oublie la conversion des tonnes en kilogrammes, et 1500 N oublie de multiplier par g.",
+                  "answers": [
+                    { "content": "15000 N", "correct": true },
+                    { "content": "1500 N", "correct": false },
+                    { "content": "15 N", "correct": false },
+                    { "content": "150000 N", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Sur la Lune, $g = 1{,}6\\ \\text{N/kg}$. Le même conteneur a une masse de 1,5 t. Quel est son poids sur la Lune ?",
+                  "question_type": "single_choice",
+                  "explanation": "On convertit : 1,5 t = 1500 kg. Puis P = 1500 × 1,6 = 2400 N. Répondre 937,5 N vient d'une division par 1,6, et 2,4 N d'un oubli de convertir les tonnes en kilogrammes.",
+                  "answers": [
+                    { "content": "2400 N", "correct": true },
+                    { "content": "15000 N", "correct": false },
+                    { "content": "2,4 N", "correct": false },
+                    { "content": "937,5 N", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On compare un même objet sur la Terre et sur la Lune. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "La masse est inchangée, mais le poids est plus petit sur la Lune car g y est plus petit. Dire que la masse diminue, ou que le dynamomètre indique la même valeur, confond masse et poids.",
+                  "answers": [
+                    { "content": "La masse de l'objet est inchangée", "correct": true },
+                    { "content": "Le poids de l'objet est plus petit sur la Lune", "correct": true },
+                    { "content": "L'intensité de la pesanteur g est plus petite sur la Lune", "correct": true },
+                    { "content": "La masse de l'objet est plus petite sur la Lune", "correct": false },
+                    { "content": "Le poids de l'objet est le même sur les deux astres", "correct": false },
+                    { "content": "Le dynamomètre indique la même valeur sur les deux astres", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Sur la Lune ($g = 1{,}6\\ \\text{N/kg}$), un objet a un poids de 48 N. Quel est son poids sur la Terre ($g = 10\\ \\text{N/kg}$) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Sur la Lune, m = 48 ÷ 1,6 = 30 kg. La masse est la même sur la Terre : P = 30 × 10 = 300 N. Répondre 48 N revient à croire que le poids ne change pas, et 30 N à confondre masse et poids.",
+                  "answers": [
+                    { "content": "300 N", "correct": true },
+                    { "content": "48 N", "correct": false },
+                    { "content": "30 N", "correct": false },
+                    { "content": "480 N", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un astronaute dont le poids est plus petit sur la Lune que sur la Terre a perdu de la matière pendant le voyage.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Son poids est plus petit car g est plus petit sur la Lune, pas parce qu'il a perdu de la matière. Sa masse est la même : comme le sac de cacao, il est seulement moins attiré.",
+                  "answers": [
+                    { "content": "Vrai", "correct": false },
+                    { "content": "Faux", "correct": true }
+                  ]
+                },
+                {
+                  "content": "Un objet a un poids de 160 N sur la Terre ($g = 10\\ \\text{N/kg}$). Quel est son poids sur la Lune ($g = 1{,}6\\ \\text{N/kg}$) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Sur la Terre, m = 160 ÷ 10 = 16 kg. Sur la Lune, P = 16 × 1,6 = 25,6 N. Répondre 256 N vient d'une multiplication directe de 160 par 1,6, qui oublie de passer par la masse.",
+                  "answers": [
+                    { "content": "25,6 N", "correct": true },
+                    { "content": "160 N", "correct": false },
+                    { "content": "16 N", "correct": false },
+                    { "content": "256 N", "correct": false }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
