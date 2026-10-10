@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::ContentTreeWriter
 # Rôle : écrit en masse des arbres de contenu validés (cours → fiches → exercices → questions → propositions), tout en draft
-# ADR  : 0035, 0039, 0068
+# ADR  : 0035, 0039, 0068, 0089
 module Repositories
   module Catalog
     class ContentTreeWriter
@@ -8,7 +8,7 @@ module Repositories
 
       NATURAL_KEYS = { "Orm::Course" => %w[slug], "Orm::Essential" => %w[slug], "Orm::RichTextRow" => [] }.freeze
       EXERCISE_COLUMNS = %w[id public_id essential_id title description exercise_type position author_id status created_at updated_at].freeze
-      QUESTION_COLUMNS = %w[id exercise_id position content explanation question_type created_at updated_at].freeze
+      QUESTION_COLUMNS = %w[id exercise_id position content explanation question_type image_description created_at updated_at].freeze
       ANSWER_COLUMNS = %w[question_id position content correct created_at updated_at].freeze
       # Format texte de COPY : ces quatre caractères seraient lus comme séparateurs ou échappements.
       COPY_ESCAPES = { "\\" => "\\\\", "\t" => "\\t", "\n" => "\\n", "\r" => "\\r" }.freeze
@@ -109,7 +109,7 @@ module Repositories
 
       # Dans l'ordre de QUESTION_COLUMNS.
       def question_row(id, exercise_id, node)
-        [ id, exercise_id, node.position, node.content, node.explanation, node.question_type, @copy_at, @copy_at ]
+        [ id, exercise_id, node.position, node.content, node.explanation, node.question_type, node.image_description, @copy_at, @copy_at ]
       end
 
       # Dans l'ordre d'ANSWER_COLUMNS.

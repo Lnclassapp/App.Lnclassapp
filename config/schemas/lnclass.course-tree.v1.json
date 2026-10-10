@@ -74,7 +74,17 @@
         "answers": {
           "type": "array",
           "items": { "$ref": "#/$defs/answer" }
-        }
+        },
+        "image": { "$ref": "#/$defs/question_image" }
+      }
+    },
+    "question_image": {
+      "description": "ADR-0089 §4.6 : l'image annoncée d'une question, jamais l'image. Facultative ; un fichier sans elle reste valide.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description"],
+      "properties": {
+        "description": { "type": "string", "minLength": 1, "maxLength": 150 }
       }
     },
     "answer": {

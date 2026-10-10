@@ -56,8 +56,34 @@ Règles d'écriture :
 - Formules en KaTeX : `$…$` dans une ligne, `$$…$$` pour une formule seule sur sa ligne. Elles sont rendues dans le contenu de la fiche, l'énoncé des questions, les propositions et les explications. Elles ne sont **pas** rendues dans `name`, `subtitle` ni les titres d'exercices : pas de formule à ces endroits.
 - Chimie : l'extension `\ce{…}` n'est pas disponible. Écris les formules chimiques avec des indices Unicode (CH₃–CH₂–OH, H₂O, Cr₂O₇²⁻) ; réserve KaTeX aux calculs.
 - **Pas de tableau** : l'application supprime les balises `table`, `tr`, `td` et `th`. Présente les comparaisons en listes (`ul`/`li`).
-- Pas d'image ni de pièce jointe (l'éditeur n'en accepte pas). Un schéma se décrit en mots, ou se remplace par une liste.
+- **Images** : voir « Les images » ci-dessous. Le fichier ne contient jamais l'image, seulement l'endroit où elle va et ce qu'elle doit montrer.
 - `name` fait au plus 150 caractères, et `subtitle` au plus 150 caractères.
+
+## Les images
+
+Une image est produite **après** l'import, dans Claude Design, par l'équipe, à partir de la description que tu écris. Ta description est donc une **commande de dessin** : précise, concrète, complète (ADR-0089).
+
+### Dans une fiche : l'emplacement `[[image: …]]`
+
+- Place l'emplacement **seul dans son paragraphe**, exactement à l'endroit où l'élève doit voir l'image : `<p>[[image: description]]</p>`. Au milieu d'une phrase, ou sans les deux crochets de chaque côté, il n'est pas reconnu.
+- **Une image seulement si elle aide vraiment** : un schéma qu'on ne peut pas décrire en mots sans perdre l'élève (circuit, figure géométrique, cellule, carte, montage, courbe). Au plus une image par notion ; pas d'image décorative.
+- La description fait **150 caractères au plus** et dit ce que l'image montre, pas ce qu'elle doit faire comprendre : les objets, leur disposition, les étiquettes à écrire. Exemple : `[[image: circuit fermé : une pile, un interrupteur fermé et une lampe allumée reliés en boucle ; flèche du sens du courant]]`.
+- Le texte de la fiche reste compréhensible sans l'image : elle illustre, le texte explique. La description sert aussi de texte de remplacement si l'image ne charge pas.
+- Une fiche ne se publie pas tant qu'un emplacement n'a pas reçu son image : n'en mets pas « au cas où ».
+
+### Dans une question : `"image": { "description": "…" }`
+
+- Seulement si la question **a besoin** de l'image (« Observe ce circuit : la lampe brille-t-elle ? »). L'image s'affiche au-dessus de l'énoncé ; les propositions restent du texte.
+- Même règle de description : 150 caractères au plus, précise, dessinable.
+- L'énoncé doit rester compréhensible si l'élève ne voit que la description (réseau faible, élève malvoyant).
+- Une question sans image n'a pas de clé `image`.
+
+### Style des images
+
+- **Ludique et clair** : couleurs vives, traits nets, fond simple ; un personnage du quotidien ivoirien (un élève, une maman au marché, un chauffeur de gbaka…) quand il porte l'analogie de la fiche.
+- **Lisible sur un téléphone** : un seul sujet par image, de gros éléments, peu de détails ; l'image fait au plus 1200 pixels de côté et 300 Ko.
+- **Juste avant d'être joli** : quand la matière l'exige, les symboles normalisés (symboles électriques, notations de géométrie, légendes de SVT). Une image fausse est pire qu'une absence d'image.
+- **Pas de texte long dans l'image** : des étiquettes de quelques mots au plus ; les explications restent dans la fiche.
 
 ## Exercices de chaque fiche
 
@@ -85,7 +111,7 @@ Règles des questions :
 - Chaque proposition fait **au plus 500 caractères**.
 - Les propositions fausses sont **plausibles** : chacune correspond à une erreur réelle d'élève, pas à une réponse absurde.
 - Chaque question a une **`explanation`** de 400 caractères au plus : pourquoi la bonne réponse est bonne, et pourquoi l'erreur la plus tentante est fausse. Quand c'est utile, elle rappelle l'image de la fiche (« souviens-toi des deux policiers… »).
-- Aucune question ne dépend d'une figure ou d'un document absent.
+- Aucune question ne dépend d'une figure ou d'un document absent : si elle a besoin d'une figure, elle la décrit dans `"image": { "description": "…" }` (voir « Les images »).
 - Chaque question est **autonome** : elle répète les données dont elle a besoin, sans renvoyer à la question précédente.
 - Pas de HTML dans les questions, les propositions ni les explications : du texte et des formules `$…$` seulement.
 - L'ordre des propositions est libre : l'application les mélange à chaque session.
@@ -120,7 +146,7 @@ Un seul fichier contient **tout le cours** : le cours, ses fiches essentielles, 
         {
           "name": "Le théorème des gendarmes",
           "subtitle": "Encadrer une suite pour trouver sa limite",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>…</li></ul><h2>L'image pour comprendre</h2><p>…</p>…",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>…</li></ul><h2>L'image pour comprendre</h2><p>…</p><p>[[image: deux policiers tiennent un prisonnier par les bras sur la route du commissariat ; étiquettes u_n, v_n, w_n]]</p>…",
           "exercises": [
             {
               "title": "Comprendre — Reconnaître un encadrement",
@@ -130,6 +156,7 @@ Un seul fichier contient **tout le cours** : le cours, ses fiches essentielles, 
                   "content": "On sait que $u_n \\le v_n \\le w_n$ et que $\\lim u_n = \\lim w_n = 2$. Que vaut $\\lim v_n$ ?",
                   "question_type": "single_choice",
                   "explanation": "Les deux « policiers » $u_n$ et $w_n$ vont vers 2 : le « prisonnier » $v_n$ y va aussi. …",
+                  "image": { "description": "graphique : trois suites de points, celle du milieu toujours entre les deux autres, qui se rapprochent toutes de la droite y = 2" },
                   "answers": [
                     { "content": "$2$", "correct": true },
                     { "content": "On ne peut pas savoir", "correct": false },
@@ -147,6 +174,7 @@ Un seul fichier contient **tout le cours** : le cours, ses fiches essentielles, 
 ```
 
 - `content` d'une fiche est du **HTML simple**, limité à : `h2`, `h3`, `p`, `ul`/`ol`/`li`, `strong`, `em`, `blockquote`. Tout autre balise est supprimée à l'import.
+- Une image de fiche s'annonce par `<p>[[image: description]]</p>`, une image de question par `"image": { "description": "…" }` (150 caractères au plus). La clé `image` est facultative et n'accepte que `description`.
 - Dans le JSON, chaque `\` d'une formule s'écrit `\\`.
 - Le résultat est **uniquement** ce JSON, sans texte avant ni après (dans la réponse comme dans un fichier).
 
@@ -160,6 +188,7 @@ Un seul fichier contient **tout le cours** : le cours, ses fiches essentielles, 
 - [ ] Chaque question a son `explanation`.
 - [ ] Les longueurs sont respectées : `name` et `subtitle` ≤ 150, titre d'exercice ≤ 150, proposition ≤ 500.
 - [ ] Aucun tableau, aucune formule dans les noms et titres, aucune formule `\ce`.
+- [ ] Chaque image annoncée est utile ; sa description fait 150 caractères au plus et dit précisément ce qu'il faut dessiner ; chaque emplacement de fiche est seul dans son paragraphe ; une question avec image reste compréhensible avec sa seule description.
 - [ ] Chaque question est autonome.
 - [ ] Le vocabulaire imposé est respecté, et le JSON est valide.
 
