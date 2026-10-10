@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/essentials/new — création d'une fiche essentielle dans un cours, servie dans le frame « modal » %>
 <%# Rôle : nom, sous-titre et contenu riche (Trix, CSS posé ici) ; échec en 422 ici, succès en Turbo Stream %>
-<%# ADR  : 0035, 0047, 0051 · UDR : 0006, 0007, 0016, 0054 %>
+<%# ADR  : 0035, 0047, 0051, 0089 · UDR : 0006, 0007, 0016, 0054, 0084 %>
 <%= turbo_frame_tag "modal" do %>
   <%= stylesheet_link_tag "trix" %>
   <%= ui_modal title: t(".title"), id: "essential-modal", size: :lg, open: true, document_title: page_title(t(".title")) do |modal| %>
@@ -12,6 +12,7 @@
       <p id="essential-course" class="font-medium text-ink"><%= t(".course", name: @course.name) %></p>
       <p class="text-sm text-mute"><%= t(".draft_notice") %></p>
     </div>
-    <%= render "form", input: @form, url: teams_course_essentials_path(@course.slug), method: :post %>
+    <%= render "form", input: @form, url: teams_course_essentials_path(@course.slug), method: :post,
+               images: @images, upload_url: teams_essential_images_path %>
   <% end %>
 <% end %>

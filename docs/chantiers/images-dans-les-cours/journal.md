@@ -51,3 +51,12 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 - **Exercice verrouillé** (déjà tenté) : les questions ne sont pas réécrites, donc l'image ne change plus. Le formulaire verrouillé ne l'affiche pas encore (clé `image_locked` posée au Lot 0, non utilisée).
 - **Carte de question élève** : l'image est placée avant le `fieldset`, pas dedans, pour que la `legend` reste son premier enfant (UDR-0084 §3.4 dit « avant la legend »).
 - **Refus numéroté** : `PublishExercise` rend `errors: { base: [code], number: [N] }` pour la première question en cause ; `image_alt_blank` est refusé de la même façon.
+
+## 2026-10-10 — Lot A
+
+- **Un emplacement enregistré par Trix est un `<div>`** : Trix réécrit les `<p>` de l'import en `<div>` (son bloc par défaut). `ImageSlot::PATTERN` lit désormais `<p>` et `<div>` ; sans cela, le compteur disparaissait après le premier enregistrement et le Lot B aurait laissé publier une fiche à emplacement restant.
+- **Événement `rich-text-editor:inserting`** (détail `{ file }`), émis juste avant `insertFile` : c'est le seul instant où l'emplacement peut être sélectionné pour que l'image le remplace. `uploaded` porte aussi `file`, pour retrouver la description de l'emplacement réclamé. Le blog n'écoute pas cet événement : son comportement ne change pas.
+- **Valeurs `uploadField` et `squeeze`** ajoutées à `rich-text-editor` ; absentes, le blog garde `article_image[file]` et une seule qualité.
+- **Clés retirées** : `teams.essentials.form.content_hint` et l'erreur `content.attachment` (texte seul), remplacée par `content.invalid` (sgid illisible, refus du repository).
+- **Suite système** : `test/system/catalog/essential_images_test.rb` enregistré à 4,6 s (à chaud). Reste ~10,4 s de budget pour les lots C et D.
+- **Environnement local** : `test/system/teams/blog_management_test.rb` échoue aussi sur `HEAD` sans ce lot (ligne 71, ou délai de `drop_generated_image`) : pas causé par le lot, à revoir hors chantier.

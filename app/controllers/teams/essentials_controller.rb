@@ -10,21 +10,25 @@ module Teams
 
     def new
       @form = Dtos::Catalog::EssentialInput.new(course_slug: @course.slug)
+      @images = []
     end
 
     def create
       @form = form_input(course_slug: @course.slug)
+      @images = form_images.call(content: @form.content, image_alts: @form.image_alts)
       render_result create_essential.call(actor: current_actor, dto: @form), form: :new,
                     success: ->(essential) { respond_written(essential, :created, course_path(@course.slug)) }
     end
 
     def edit
       @form = Dtos::Catalog::EssentialInput.new(name: @essential.name, subtitle: @essential.subtitle, content: @essential.content)
+      @images = form_images.call(content: @essential.content, essential_slug: @essential.slug)
     end
 
     # Sans Turbo, retour au catalogue : la fiche ne connaît que l'identifiant de son cours, pas son slug.
     def update
       @form = form_input
+      @images = form_images.call(content: @form.content, image_alts: @form.image_alts, essential_slug: @essential.slug)
       render_result update_essential.call(actor: current_actor, slug: @essential.slug, dto: @form), form: :edit,
                     success: ->(essential) { respond_written(essential, :updated, courses_path) }
     end
@@ -47,7 +51,9 @@ module Teams
     end
 
     def form_input(**attributes)
-      Dtos::Catalog::EssentialInput.new(params.expect(essential: %i[name subtitle content]).merge(attributes))
+      # ADR-0089 : image_alts, { public_id => texte de remplacement } des images du texte (UDR-0084 §3.1).
+      Dtos::Catalog::EssentialInput.new(params.expect(essential: [ :name, :subtitle, :content, { image_alts: {} } ]).to_h
+                                              .symbolize_keys.merge(attributes))
     end
 
     # La page hôte (cours, fiche) appartient à d'autres lots : le stream la rafraîchit par morphing.
@@ -80,6 +86,7 @@ module Teams
       end
     end
 
+    def form_images = Queries::Catalog::EssentialFormImagesQuery.new
     def course_repository = Repositories::Catalog::CourseRepository.new
     def essential_repository = Repositories::Catalog::EssentialRepository.new
 

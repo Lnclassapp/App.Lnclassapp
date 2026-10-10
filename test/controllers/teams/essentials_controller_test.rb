@@ -42,7 +42,7 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::AuditEvent.where(action: %w[content.published content.archived]).count
   end
 
-  test "the creation form opens in the modal frame, with the course and the rich text editor, without attachment" do
+  test "the creation form opens in the modal frame, with the course and the rich text editor in image mode" do
     sign_in_as @member
 
     get new_teams_course_essential_path(@course.slug), headers: { "Turbo-Frame" => "modal" }
@@ -56,11 +56,18 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
         assert_select "input[name='essential[name]'][maxlength='150'][required]"
         assert_select "input[name='essential[subtitle]'][maxlength='150']"
         assert_select "label[for=essential_content]", text: I18n.t("activemodel.attributes.dtos/catalog/essential_input.content")
-        assert_select "[data-controller=rich-text-editor] trix-editor#essential_content[aria-describedby=essential_content_hint]"
+        assert_select "[data-controller~=rich-text-editor] trix-editor#essential_content[aria-describedby=essential_content_hint]"
         # ADR-0060: no direct upload address, the Active Storage routes are not drawn.
         assert_select "trix-editor#essential_content[data-direct-upload-url=''][data-blob-url-template='']"
         assert_select "input[type=hidden][name='essential[content]']", 1
-        assert_select "input[type=file]", 0
+        # ADR-0089: images go through the team endpoint, one at a time, a new sheet without its slug.
+        assert_select "#essential_editor[data-rich-text-editor-attachments-value=true]" \
+                      "[data-rich-text-editor-upload-url-value='#{teams_essential_images_path}']" \
+                      "[data-rich-text-editor-upload-field-value='essential_image[file]']" \
+                      "[data-rich-text-editor-max-count-value='#{Entities::Shared::ContentImage::MAX_PER_ESSENTIAL}']"
+        assert_select "input#essential_image_files[type=file]:not([multiple])", 1
+        assert_select "#essential_image_slots[hidden]"
+        assert_select "#essential_images[hidden] ul#essential_image_alts li", 0
       end
     end
     assert_select "button[type=submit][form=essential-form]", text: tl("new.submit")
@@ -124,16 +131,42 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 2, Orm::Essential.where(name: "Brassage génétique").count
   end
 
-  test "an attachment or an image sent past the editor is refused on the content field" do
+  # ADR-0089: only the sheet images sent through the team endpoint stay in the text; anything else is dropped.
+  test "an attachment that is not a sheet image, sent past the editor, leaves the text" do
     sign_in_as @member
 
-    post teams_course_essentials_path(@course.slug), params: essential_params(content: '<figure data-trix-attachment="{}"></figure>'),
-                                                     as: :turbo_stream
+    post teams_course_essentials_path(@course.slug),
+         params: essential_params(content: '<div>Texte</div><figure data-trix-attachment="{&quot;url&quot;:&quot;https://ailleurs.example/a.png&quot;}"></figure>'),
+         as: :turbo_stream
 
-    assert_response :unprocessable_entity
-    assert_select "trix-editor#essential_content[aria-invalid=true][aria-describedby='essential_content_hint essential_content_error']"
-    assert_select "#essential_content_error", text: including(error_message(:content, :attachment))
-    assert_equal 0, Orm::Essential.count
+    assert_response :success
+    body = Orm::Essential.sole.content.body.to_html
+    assert_includes body, "Texte"
+    assert_not_includes body, "ailleurs.example"
+  end
+
+  test "ADR-0089: the cited images are attached with their text alternative, and the edit form lists them in order" do
+    first = create_essential_image
+    second = create_essential_image(fixture: "photos/photo.png")
+    attachment = ->(image) { %(<action-text-attachment sgid="#{image.attachable_sgid}"></action-text-attachment>) }
+    sign_in_as @member
+
+    post teams_course_essentials_path(@course.slug), as: :turbo_stream, params: {
+      essential: { name: "Le circuit", content: "<div>[[image: une pile]]</div>#{attachment[second]}#{attachment[first]}",
+                   image_alts: { first.public_id => "Une lampe", second.public_id => "Une pile" } }
+    }
+
+    assert_response :success
+    essential = Orm::Essential.sole
+    assert_equal [ [ essential.id, "Une lampe" ], [ essential.id, "Une pile" ] ],
+                 [ first.reload, second.reload ].map { [ it.essential_id, it.alt ] }
+
+    get edit_teams_essential_path(essential.slug), headers: { "Turbo-Frame" => "modal" }
+
+    assert_select "#essential_image_slots:not([hidden]) li", text: including(tl("form.slot", description: "une pile"))
+    assert_select "ul#essential_image_alts li input[name^='essential[image_alts]']" do |inputs|
+      assert_equal [ "Une pile", "Une lampe" ], inputs.map { it["value"] }
+    end
   end
 
   test "without Turbo, a creation leads back to the course with a notice" do
@@ -160,7 +193,8 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
       assert_select "input[name='essential[name]'][value='La méiose']"
       assert_select "input[name='essential[subtitle]'][value='Deux divisions']"
       assert_select "input[type=hidden][name='essential[content]'][value*='<strong>Gras</strong><ul><li>Point</li></ul>']"
-      assert_select "[data-controller=rich-text-editor] trix-editor#essential_content"
+      assert_select "[data-controller~=rich-text-editor] trix-editor#essential_content"
+      assert_select "#essential_editor[data-rich-text-editor-upload-url-value='#{teams_essential_images_path(essential: essential.slug)}']"
     end
     assert_select "button[type=submit][form=essential-form]", text: tl("edit.submit")
   end

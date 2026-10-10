@@ -10,6 +10,10 @@ module Entities
         assert_equal [ "une pile et une lampe", "un interrupteur ouvert" ], ImageSlot.scan(html).map(&:description)
       end
 
+      test "un emplacement enregistré par Trix, dans un <div>, est lu aussi" do
+        assert_equal [ "une pile" ], ImageSlot.scan("<div>Texte</div><div>[[image: une pile]]</div>").map(&:description)
+      end
+
       test "un emplacement au milieu d'une phrase, vide ou trop long n'en est pas un" do
         html = "<p>Voir [[image: une pile]] ici.</p><p>[[image: ]]</p><p>[[image: #{'a' * 151}]]</p>"
 
