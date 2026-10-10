@@ -1,18 +1,38 @@
 <%# 🌐 UI · school_admin/levels/show — page d'un niveau pour la direction (AD-09 à AD-12, AD-22) %>
-<%# Rôle : une carte par classe active de l'année du niveau, triée par nom, avec sa pastille ; la légende si une pastille au moins %>
-<%# ADR  : 0065 · UDR : 0052, 0074 (§3.8, §3.12) · le taux et la moyenne sont ceux de la page d'une classe, inchangés %>
+<%# Rôle : une carte par classe de l'année du niveau, actives par nom puis archivées récentes, avec sa pastille ; menu ⋮ du niveau et des classes si l'établissement est actif ; la légende si une pastille au moins %>
+<%# ADR  : 0065, 0088 · UDR : 0052, 0074 (§3.8, §3.12), 0083 · le taux et la moyenne sont ceux de la page d'une classe, inchangés ; les totaux ne comptent pas les archivées %>
 <% page_title @level.level_name %>
 <% content_for :nav_key, "home" %>
 <% illustration = level_illustration(@level.level_slug) %>
+<% active = @level.active_classrooms %>
 <% signals = @level.classrooms.map { Entities::School::WorkSignal.for(it.submission_rate) } %>
 <%= ui_page_header title: @level.level_name,
-                   subtitle: t(".subtitle", classrooms: t(".classrooms", count: @level.classrooms.size),
+                   subtitle: t(".subtitle", classrooms: t(".classrooms", count: active.size),
                                             students: t(".students", count: @level.students_count)),
-                   back: { label: t(".back"), href: school_admin_classrooms_path } %>
-
-<ul id="level_classrooms" class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-  <% @level.classrooms.zip(signals) do |classroom, signal| %>
-    <%= render "classroom_card", classroom:, illustration:, signal: %>
+                   back: { label: t(".back"), href: school_admin_classrooms_path } do %>
+  <%# UDR-0083 : « Archiver le niveau » n'existe que s'il reste une classe active et que l'établissement l'est. %>
+  <% if @school.active? && active.any? %>
+    <%# ml-auto : à droite du titre aussi sous sm, où l'en-tête passe en colonne (UDR-0083). %>
+    <div class="ml-auto">
+    <%= render "shared/level_archive_menu", name: @level.level_name, slug: @level.level_slug, classrooms_count: active.size,
+                                            students_count: @level.students_count, teachers_count: @level.teachers_count,
+                                            archive_path: school_admin_level_archivals_path %>
+    </div>
   <% end %>
-</ul>
+<% end %>
+
+<% if @level.classrooms.any? %>
+  <ul id="level_classrooms" class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    <% @level.classrooms.zip(signals) do |classroom, signal| %>
+      <%= render "classroom_card", classroom:, illustration:, signal:, manageable: @school.active? %>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="rounded-ln border border-line bg-white p-4 text-mute"><%= t(".empty") %></p>
+<% end %>
+<div class="mt-4">
+  <%= render "shared/archives_toggle", hidden_count: @level.older_archives_count, shown: @archives && @level.older_archives_count.positive?,
+                                       show_path: school_admin_level_path(@level.level_slug, archives: 1),
+                                       hide_path: school_admin_level_path(@level.level_slug) %>
+</div>
 <%= render "school_admin/shared/signal_legend" if signals.any? %>

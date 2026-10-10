@@ -1,28 +1,54 @@
 <%# 🌐 UI · teams/schools/_classroom_group — les classes d'un niveau, sur la fiche d'un établissement %>
-<%# Rôle : une carte par classe : nom (lien vers sa page), effectif, enseignants, « Copier le lien » si la classe et l'établissement sont actifs %>
-<%# ADR  : 0030, 0041, 0085 · UDR : 0036, 0081 (§3.7 : le lien se copie ici, il se change sur la page de la classe) %>
-<%# locals: (level:, school_active:) -%>
-<% heading_id = "level_#{level.name.parameterize}" %>
-<section aria-labelledby="<%= heading_id %>">
+<%# Rôle : une carte par classe : nom (lien vers sa page), effectif, enseignants, menu ⋮ (archiver, restaurer), « Copier le lien » si la classe et l'établissement sont actifs ; archivées en fin de niveau %>
+<%# ADR  : 0030, 0041, 0085, 0088 · UDR : 0036, 0081 (§3.7 : le lien se copie ici, il se change sur la page de la classe), 0083 %>
+<%# locals: (level:, school_active:, school_public_id:, archives_shown:) -%>
+<% heading_id = "level_#{level.slug}_title" %>
+<%# scroll-mt : l'ancre #level_<slug> du bouton des archives ne passe pas sous la barre fixe. %>
+<section id="level_<%= level.slug %>" aria-labelledby="<%= heading_id %>" class="scroll-mt-24">
   <div class="mb-4 flex items-center justify-between gap-3 border-b border-line pb-3">
     <h3 id="<%= heading_id %>" class="font-display text-lg font-extrabold"><%= level.name %></h3>
-    <%= ui_badge t(".count", count: level.classrooms.size), size: :sm %>
+    <div class="flex items-center gap-2">
+      <%= ui_badge t(".count", count: level.classrooms.size), size: :sm %>
+      <% archived_count = level.archived.size + level.hidden_count %>
+      <%= ui_badge t(".archived_count", count: archived_count), size: :sm if archived_count.positive? %>
+      <%# Pas de menu sans classe active : il n'y a rien à archiver (UDR-0083 §3.1). %>
+      <% if level.classrooms.any? %>
+        <%= render "shared/level_archive_menu", name: level.name, slug: level.slug, classrooms_count: level.classrooms.size,
+                                                students_count: level.students_count, teachers_count: level.teachers_count,
+                                                archive_path: school_level_archivals_path(school_public_id) %>
+      <% end %>
+    </div>
   </div>
+  <% if level.classrooms.empty? && level.archived.empty? %>
+    <p class="text-sm text-mute"><%= t(".empty") %></p>
+  <% end %>
   <ul class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-    <% level.classrooms.each do |classroom| %>
+    <% (level.classrooms + level.archived).each do |classroom| %>
+      <% archived = classroom.status == "archived" %>
       <li id="classroom_<%= classroom.public_id %>"
           class="relative rounded-card border border-line bg-white p-4 shadow-card transition hover:border-brand/40 hover:shadow-lift">
         <div class="flex items-start justify-between gap-2">
-          <%= link_to classroom.name, classroom_path(classroom.public_id), data: { turbo_frame: "_top" },
-                      class: "font-display font-extrabold after:absolute after:inset-0 after:rounded-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
-          <% if classroom.status == "archived" %>
-            <%= ui_badge t(".archived"), size: :sm %>
-          <% end %>
+          <div class="min-w-0">
+            <%# ADR-0088 : une classe archivée n'a plus de page ; son nom n'est pas un lien, son badge passe dessous. %>
+            <% if archived %>
+              <p class="truncate font-display font-extrabold text-mute"><%= classroom.name %></p>
+              <%= ui_badge t(".archived"), size: :sm %>
+            <% else %>
+              <%= link_to classroom.name, classroom_path(classroom.public_id), data: { turbo_frame: "_top" },
+                          class: "font-display font-extrabold after:absolute after:inset-0 after:rounded-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
+            <% end %>
+          </div>
+          <div class="flex items-center gap-2">
+            <%= render "shared/classroom_archive_menu", name: classroom.name, public_id: classroom.public_id, archived:,
+                                                        students_count: classroom.students_count, teachers_count: classroom.teacher_names.size,
+                                                        archive_path: archive_school_classroom_archival_path(school_public_id, classroom.public_id),
+                                                        restore_path: restore_school_classroom_archival_path(school_public_id, classroom.public_id) %>
+          </div>
         </div>
         <dl class="mt-3 grid grid-cols-2 gap-2 text-sm">
           <div>
             <dt class="text-xs text-mute"><%= t(".students") %></dt>
-            <dd class="tabular-nums font-medium"><%= classroom.students_count %></dd>
+            <dd class="tabular-nums font-medium <%= "text-mute" if archived %>"><%= classroom.students_count %></dd>
           </div>
           <div class="col-span-2">
             <dt class="text-xs text-mute"><%= t(".teachers") %></dt>
@@ -31,7 +57,7 @@
         </dl>
         <%# Au-dessus du lien étiré de la carte ; le lien d'une classe archivée, ou d'un établissement qui n'est pas actif, n'ouvre
             rien (ADR-0085 §4.1) : il n'est pas proposé. Le nom de la classe est dans le libellé lu. %>
-        <% if classroom.status == "active" && school_active %>
+        <% if !archived && school_active %>
           <div class="relative z-10 mt-3">
             <%= ui_copy_button join_classroom_url(classroom.link_token), label: t("classroom.classrooms.link.copy"),
                                aria_label: t(".copy_link_label", name: classroom.name), icon: "link",
@@ -41,4 +67,12 @@
       </li>
     <% end %>
   </ul>
+  <%# UDR-0083 : le bouton des archives vit sous son niveau, état vide compris. %>
+  <% if level.hidden_count.positive? || (archives_shown && level.archived.any?) %>
+    <div class="mt-3">
+      <%= render "shared/archives_toggle", hidden_count: level.hidden_count, shown: archives_shown && level.hidden_count.zero?,
+                                           show_path: school_path(school_public_id, archives: 1, anchor: "level_#{level.slug}"),
+                                           hide_path: school_path(school_public_id, anchor: "level_#{level.slug}") %>
+    </div>
+  <% end %>
 </section>

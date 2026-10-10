@@ -175,7 +175,7 @@ module Repositories
 
       test "insère en masse et renvoie de quoi générer les classes" do
         rows = [ [ "Lycée A", "k7m4qz" ], [ "Collège B", "abc234" ] ].map do |name, school_code|
-          row(name, school_code:, school_type: "private", cycle: Entities::School::School.cycle_for(name:))
+          row(name, school_code:, school_type: "private", cycle: name.start_with?("Collège") ? "first" : "both")
         end
 
         inserted = @repository.insert_many(rows:, at: @at)

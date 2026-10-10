@@ -73,6 +73,12 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #without_classrooms"
       end
 
+      # Réparation du second cycle : établissements active ou draft au premier cycle seul, id > after_id, par id croissant,
+      # `limit` au plus. → [Entities::School::School]
+      def first_cycle_after(after_id:, limit:)
+        raise NotImplementedError, "#{self.class} doit implémenter #first_cycle_after"
+      end
+
       # Une seule école principale par enseignant (index partiel). → Result | failure(:conflict)
       def attach_teacher(teacher_id:, school_id:, primary:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #attach_teacher"
