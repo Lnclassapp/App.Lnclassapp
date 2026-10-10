@@ -60,7 +60,8 @@ module Contenus
       fail_at("#{path}.level_name", "niveau inconnu : #{level.inspect}") unless LEVELS.include?(level)
       fail_at("#{path}.material_name", "matière inconnue : #{material.inspect}") unless MATERIALS.include?(material)
       fail_at("#{path}.series_name", "série à omettre au 1er cycle") if FIRST_CYCLE.include?(level) && series
-      fail_at("#{path}.series_name", "série obligatoire à partir de la 2nde") if !FIRST_CYCLE.include?(level) && series.to_s.empty?
+      # Histoire-Géographie a une progression commune à toutes les séries (sans series_name, cf. prompt-redaction-lot.md)
+      fail_at("#{path}.series_name", "série obligatoire à partir de la 2nde") if !FIRST_CYCLE.include?(level) && series.to_s.empty? && material != "Histoire-Géographie"
       fail_at("#{path}.material_name", "EDHC : 1er cycle seulement") if material == "EDHC" && !FIRST_CYCLE.include?(level)
       fail_at("#{path}.material_name", "Philosophie : 1ère et Tle seulement") if material == "Philosophie" && !%w[1ère Tle].include?(level)
     end
