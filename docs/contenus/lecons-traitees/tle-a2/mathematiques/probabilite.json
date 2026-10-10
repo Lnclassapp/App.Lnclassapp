@@ -1,0 +1,1523 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Probabilité",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "A2",
+      "essentials": [
+        {
+          "name": "Expérience aléatoire, univers et événements",
+          "subtitle": "Issues, événements, contraire, « ou », « et »",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Décrire l'univers d'une expérience aléatoire et distinguer une issue d'un événement.</li>\n<li>Reconnaître l'événement certain, l'événement impossible et un événement élémentaire.</li>\n<li>Écrire le contraire, la réunion et l'intersection d'événements, et reconnaître deux événements incompatibles.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le bol de prénoms (l'univers).</strong> Après le repas du dimanche, maman a six cousins à table : Awa, Koffi, Yao, Mariam, Kouamé et Fatou. Elle écrit chaque prénom sur un papier et plie les six papiers dans un bol. La petite sœur en tire un, les yeux fermés : la personne tirée fera la vaisselle. Personne ne sait à l'avance qui sera tiré, mais tout le monde sait quels résultats sont possibles.</p>\n<p><em>Le pont.</em> Tirer un papier au hasard, c'est une <strong>expérience aléatoire</strong> : on connaît les résultats possibles, mais pas celui qui va sortir. Chaque prénom est une <strong>issue</strong> (un résultat possible). Le bol avec ses six prénoms, c'est l'<strong>univers</strong> $\\Omega$ (on lit « grand oméga ») : l'ensemble de toutes les issues, ici $\\Omega = \\{\\text{Awa}, \\text{Koffi}, \\text{Yao}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$. Il a 6 éléments.</p>\n<p><em>Où l'image s'arrête.</em> L'univers liste les résultats possibles, pas les résultats probables. Papa n'est pas dans le bol : « Papa » n'est pas une issue.</p>\n<p><strong>2. Le groupe des filles (l'événement).</strong> Maman dit : « Si c'est une fille qui est tirée, elle aide aussi à ranger les assiettes. » Elle pense à un groupe de prénoms : Awa, Mariam et Fatou. Ce groupe ne désigne personne en particulier. Il dit seulement : « le papier tiré est dans ce groupe ».</p>\n<p><em>Le pont.</em> Ce groupe d'issues est un <strong>événement</strong> : $A = \\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$, « la personne tirée est une fille ». Un événement est une partie de l'univers. Il se <strong>réalise</strong> si l'issue obtenue en fait partie. Un événement qui ne contient qu'une seule issue est <strong>élémentaire</strong>, par exemple $\\{\\text{Yao}\\}$. L'événement qui contient toutes les issues, $\\Omega$, est <strong>certain</strong> : il se réalise toujours. L'événement qui ne contient aucune issue, noté $\\varnothing$, est <strong>impossible</strong> : il ne se réalise jamais (« Papa est tiré »).</p>\n<p><em>Où l'image s'arrête.</em> Ne confonds pas une issue (un prénom, Yao) et un événement (un ensemble d'issues, $\\{\\text{Yao}\\}$ ou $A$).</p>\n<p><strong>3. Les listes collées sur le frigo (contraire, « ou », « et »).</strong> Sur le frigo, il y a deux listes. La liste $A$ : les filles, soit Awa, Mariam, Fatou. La liste $B$ : ceux qui ont fini de manger en premier, soit Koffi, Mariam, Kouamé. Maman demande trois choses. Qui n'est pas sur la liste $A$ ? Qui est sur la liste $A$ ou sur la liste $B$ ? Qui est sur les deux listes à la fois ?</p>\n<p><em>Le pont.</em> Ceux qui ne sont pas sur la liste $A$ forment le <strong>contraire</strong> de $A$, noté $\\overline{A}$ : $\\{\\text{Koffi}, \\text{Yao}, \\text{Kouamé}\\}$. Ceux qui sont sur l'une ou l'autre liste (ou sur les deux) forment la <strong>réunion</strong> $A \\cup B$ : $\\{\\text{Awa}, \\text{Koffi}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$. Ceux qui sont sur les deux listes forment l'<strong>intersection</strong> $A \\cap B$ : $\\{\\text{Mariam}\\}$. Si deux listes n'ont aucun prénom commun, leurs événements sont <strong>incompatibles</strong>.</p>\n<p><em>Où l'image s'arrête.</em> À la cuisine, « fromage ou dessert » veut dire l'un des deux, pas les deux. En mathématiques, « $A$ ou $B$ » accepte aussi le cas où les deux sont réalisés : Mariam est dans $A \\cup B$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Vocabulaire.</strong> Une <strong>expérience aléatoire</strong> a plusieurs résultats possibles, appelés <strong>issues</strong>, et on ne sait pas lequel va se produire. L'<strong>univers</strong> $\\Omega$ est l'ensemble de toutes les issues. Un <strong>événement</strong> est une partie de $\\Omega$.</p>\n<ul>\n<li>Événement <strong>élémentaire</strong> : une seule issue.</li>\n<li>Événement <strong>certain</strong> : $\\Omega$. Événement <strong>impossible</strong> : $\\varnothing$.</li>\n<li><strong>Contraire</strong> de $A$, noté $\\overline{A}$ : les issues de $\\Omega$ qui ne sont pas dans $A$ (« $A$ ne se réalise pas »).</li>\n<li><strong>Réunion</strong> $A \\cup B$ : les issues qui sont dans $A$, ou dans $B$, ou dans les deux (« $A$ ou $B$ »).</li>\n<li><strong>Intersection</strong> $A \\cap B$ : les issues qui sont à la fois dans $A$ et dans $B$ (« $A$ et $B$ »).</li>\n<li>$A$ et $B$ sont <strong>incompatibles</strong> si $A \\cap B = \\varnothing$ : ils n'ont aucune issue commune et ne peuvent pas se réaliser ensemble.</li>\n</ul>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>On reprend les six cousins avec $A = \\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$ et $B = \\{\\text{Koffi}, \\text{Mariam}, \\text{Kouamé}\\}$. Détermine $\\overline{A}$, $A \\cup B$, $A \\cap B$, puis dis si $A$ et $C = \\{\\text{Yao}, \\text{Koffi}\\}$ sont incompatibles.</strong></p>\n<ol>\n<li>$\\overline{A}$ : on garde les prénoms de $\\Omega$ qui ne sont pas dans $A$. Donc $\\overline{A} = \\{\\text{Koffi}, \\text{Yao}, \\text{Kouamé}\\}$. Contrôle : $A$ et $\\overline{A}$ ensemble font bien les 6 prénoms (3 + 3).</li>\n<li>$A \\cup B$ : on rassemble tous les prénoms des deux listes, sans écrire Mariam deux fois. Donc $A \\cup B = \\{\\text{Awa}, \\text{Koffi}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$ : 5 prénoms.</li>\n<li>$A \\cap B$ : seul Mariam est dans les deux listes. Donc $A \\cap B = \\{\\text{Mariam}\\}$.</li>\n<li>$A \\cap C$ : aucun prénom de $A$ (Awa, Mariam, Fatou) n'est dans $C$ (Yao, Koffi). Donc $A \\cap C = \\varnothing$ : $A$ et $C$ sont incompatibles.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Lire « $A$ ou $B$ » comme « l'un des deux seulement », comme dans « fromage ou dessert ». En mathématiques, $A \\cup B$ contient aussi les issues qui sont dans $A$ <strong>et</strong> dans $B$ : ici, Mariam.</p>\n<p>Autre erreur fréquente : prendre pour contraire de $A$ n'importe quel autre événement. Le contraire de « c'est une fille » est « ce n'est pas une fille », c'est-à-dire exactement les issues qui restent dans $\\Omega$, pas seulement quelques-unes.</p>\n<h2>En une phrase</h2>\n<p>L'univers $\\Omega$ est le bol de tous les résultats possibles, un événement est un groupe d'issues de ce bol, et on le combine avec le contraire $\\overline{A}$ (« pas $A$ »), la réunion $A \\cup B$ (« $A$ ou $B$ ») et l'intersection $A \\cap B$ (« $A$ et $B$ »).</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Univers, issues et événements",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Maman met dans un bol six papiers portant les prénoms de six cousins, et on tire un papier au hasard. Que représente l'univers $\\Omega$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'univers est le bol entier : tous les résultats possibles, avant le tirage. Le prénom qui sort est une issue, pas l'univers. Et le nombre 6 est le nombre d'éléments de $\\Omega$, pas $\\Omega$ lui-même.",
+                  "answers": [
+                    {
+                      "content": "Le nombre de papiers dans le bol, c'est-à-dire 6.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le prénom qui sort réellement du bol.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ensemble de tous les résultats possibles du tirage : les six prénoms.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ensemble des prénoms de filles seulement.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'expérience du bol de six prénoms, « la personne tirée est une fille » est un événement : c'est une partie de l'univers, un groupe d'issues.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Un événement est un groupe d'issues, donc une partie de $\\Omega$. « Une fille » regroupe Awa, Mariam et Fatou. Ne confonds pas avec une issue, qui est un seul prénom.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'expérience du bol de six prénoms, quelles sont les deux phrases exactes sur le vocabulaire ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Certain : $\\Omega$, toutes les issues. Impossible : $\\varnothing$, aucune issue. Un événement élémentaire ne contient qu'une seule issue, et c'est l'inverse pour la dernière erreur : un événement est un ensemble d'issues.",
+                  "answers": [
+                    {
+                      "content": "Une issue est un ensemble d'événements.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'événement impossible est $\\varnothing$ : il ne se réalise jamais.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'événement certain est $\\Omega$ : il se réalise toujours.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un événement élémentaire contient toujours deux issues.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le bol, il n'y a que les prénoms de six cousins : Awa, Koffi, Yao, Mariam, Kouamé, Fatou. On tire un papier. L'événement « le papier porte le prénom Papa » est :",
+                  "question_type": "single_choice",
+                  "explanation": "Papa n'est pas dans le bol : aucune issue ne réalise cet événement. C'est $\\varnothing$, l'événement impossible. Un événement élémentaire contient au moins une issue, ici il n'y en a aucune.",
+                  "answers": [
+                    {
+                      "content": "égal à l'univers $\\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "certain",
+                      "correct": false
+                    },
+                    {
+                      "content": "impossible",
+                      "correct": true
+                    },
+                    {
+                      "content": "élémentaire",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En probabilités, « $A$ ou $B$ » se réalise quand $A$ se réalise, ou quand $B$ se réalise, ou quand les deux se réalisent.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. À la cuisine, « fromage ou dessert » exclut souvent d'avoir les deux. En mathématiques, le « ou » est large : la réunion $A \\cup B$ contient aussi les issues qui sont à la fois dans $A$ et dans $B$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Contraire, réunion et intersection",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "L'univers est $\\Omega = \\{\\text{Awa}, \\text{Koffi}, \\text{Yao}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$. On note $A = \\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$ et $B = \\{\\text{Koffi}, \\text{Mariam}, \\text{Kouamé}\\}$. Quel est le contraire $\\overline{A}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\overline{A}$ regroupe les issues de $\\Omega$ qui ne sont pas dans $A$ : Koffi, Yao, Kouamé. Vérifie : $A$ et $\\overline{A}$ ont 3 + 3 = 6 éléments, tout l'univers. Les autres propositions sont $A$ lui-même, une seule issue, ou $B$.",
+                  "answers": [
+                    {
+                      "content": "$\\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{\\text{Koffi}, \\text{Yao}, \\text{Kouamé}\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{\\text{Koffi}, \\text{Mariam}, \\text{Kouamé}\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{\\text{Yao}\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'univers est $\\Omega = \\{\\text{Awa}, \\text{Koffi}, \\text{Yao}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$. On note $A = \\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$ et $B = \\{\\text{Koffi}, \\text{Mariam}, \\text{Kouamé}\\}$. Que vaut $A \\cup B$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$A \\cup B$ rassemble les prénoms de $A$ ou de $B$, et on écrit chaque prénom une seule fois : Mariam n'apparaît qu'une fois. Yao n'est dans aucune des deux listes, donc $A \\cup B \\neq \\Omega$. $\\{\\text{Mariam}\\}$ est l'intersection.",
+                  "answers": [
+                    {
+                      "content": "$\\{\\text{Mariam}\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{\\text{Awa}, \\text{Koffi}, \\text{Mariam}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{\\text{Awa}, \\text{Koffi}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On note $A = \\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$ et $B = \\{\\text{Koffi}, \\text{Mariam}, \\text{Kouamé}\\}$. Quelle est l'intersection $A \\cap B$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$A \\cap B$ contient les issues présentes dans les deux listes à la fois : seule Mariam est une fille qui a fini en premier. Ne confonds pas avec la réunion, qui prend les prénoms de l'une ou l'autre liste. L'intersection n'est pas vide.",
+                  "answers": [
+                    {
+                      "content": "$\\{\\text{Awa}, \\text{Koffi}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\varnothing$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{\\text{Yao}\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{\\text{Mariam}\\}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'univers est $\\Omega = \\{\\text{Awa}, \\text{Koffi}, \\text{Yao}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$ et on note $A = \\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$. Quels sont les deux événements incompatibles avec $A$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Incompatible avec $A$ veut dire : aucune issue commune avec $A$. Koffi, Yao et Kouamé ne sont pas dans $A$. Mais Fatou et Mariam sont dans $A$ : les deux autres événements ont une issue commune avec $A$.",
+                  "answers": [
+                    {
+                      "content": "$\\{\\text{Yao}, \\text{Kouamé}\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{\\text{Koffi}, \\text{Yao}\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{\\text{Yao}, \\text{Fatou}\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{\\text{Koffi}, \\text{Mariam}\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On tire un cube de bouillon au hasard parmi huit cubes numérotés de 1 à 8. Soit $A$ l'événement « le numéro est pair ». Quel est son contraire $\\overline{A}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le contraire de « pair » est « pas pair », donc impair : tous les numéros restants. Pair et impair font ensemble les 8 numéros. Pair, c'est $A$ lui-même. Le contraire n'est jamais un autre événement choisi au hasard.",
+                  "answers": [
+                    {
+                      "content": "« Le numéro est pair », c'est-à-dire $\\{2, 4, 6, 8\\}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "« Le numéro est supérieur à 4 », c'est-à-dire $\\{5, 6, 7, 8\\}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "« Le numéro est impair », c'est-à-dire $\\{1, 3, 5, 7\\}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "« Le numéro est 1 », c'est-à-dire $\\{1\\}$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Décrire des événements avec des ensembles",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "On tire au hasard un jeton dans une calebasse qui contient dix jetons numérotés de 1 à 10. Soit $A$ l'événement « le numéro est un multiple de 3 » et $B$ l'événement « le numéro est supérieur ou égal à 7 ». Quelle est l'intersection $A \\cap B$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$A = \\{3, 6, 9\\}$ et $B = \\{7, 8, 9, 10\\}$. Le seul numéro dans les deux est 9. Les jetons 3 et 6 sont dans $A$ mais pas dans $B$, car ils sont inférieurs à 7. L'intersection n'est donc pas vide.",
+                  "answers": [
+                    {
+                      "content": "$\\varnothing$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{9\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{3, 6, 7, 8, 9, 10\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{6, 9\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On tire au hasard un jeton dans une calebasse qui contient dix jetons numérotés de 1 à 10. Soit $A$ l'événement « le numéro est un multiple de 3 » et $B$ l'événement « le numéro est supérieur ou égal à 7 ». Combien d'issues contient $A \\cup B$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$A = \\{3, 6, 9\\}$ (3 issues) et $B = \\{7, 8, 9, 10\\}$ (4 issues). Additionner 3 + 4 = 7 compte le 9 deux fois. La réunion est $\\{3, 6, 7, 8, 9, 10\\}$ : 6 issues.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "7",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On tire au hasard un jeton dans une calebasse qui contient dix jetons numérotés de 1 à 10. Soit $A$ l'événement « le numéro est un multiple de 3 » et $B$ l'événement « le numéro est supérieur ou égal à 7 ». Quelles sont les trois affirmations exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$\\overline{B}$ regroupe les numéros inférieurs à 7 : de 1 à 6. $\\overline{A}$ a 10 − 3 = 7 issues. $A$ et $B$ ont le 9 en commun, donc ne sont pas incompatibles. Et $A \\cup B$ n'a que 6 issues : 3 + 4 compte le 9 deux fois.",
+                  "answers": [
+                    {
+                      "content": "$A \\cup B$ contient 7 issues.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le contraire $\\overline{A}$ contient 7 issues.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A \\cap B = \\{9\\}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le contraire $\\overline{B}$ est $\\{1, 2, 3, 4, 5, 6\\}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A$ et $B$ sont incompatibles.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux événements incompatibles $A$ et $B$ peuvent avoir une issue en commun.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Incompatibles veut dire $A \\cap B = \\varnothing$ : aucune issue commune, donc ils ne peuvent pas se réaliser en même temps. Si une issue appartient aux deux, ils se réalisent ensemble avec elle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'univers est $\\Omega = \\{\\text{Awa}, \\text{Koffi}, \\text{Yao}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$. On note $A = \\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$ (les filles) et $B = \\{\\text{Koffi}, \\text{Mariam}, \\text{Kouamé}\\}$ (ceux qui ont fini de manger en premier). Quel événement correspond à « une fille qui n'a pas fini de manger en premier » ?",
+                  "question_type": "single_choice",
+                  "explanation": "« Et » se traduit par une intersection. « Une fille » est $A$ et « pas parmi les premiers » est $\\overline{B} = \\{\\text{Awa}, \\text{Yao}, \\text{Fatou}\\}$. Les deux ensemble : Awa et Fatou. $A \\cap B$ désigne au contraire les filles qui ont fini en premier.",
+                  "answers": [
+                    {
+                      "content": "$\\overline{A} \\cap B$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A \\cap B$, soit $\\{\\text{Mariam}\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A \\cup \\overline{B}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A \\cap \\overline{B}$, soit $\\{\\text{Awa}, \\text{Fatou}\\}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'univers est $\\Omega = \\{\\text{Awa}, \\text{Koffi}, \\text{Yao}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$. On note $A = \\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$ et $B = \\{\\text{Koffi}, \\text{Mariam}, \\text{Kouamé}\\}$. Combien d'issues contient $\\overline{A \\cup B}$, c'est-à-dire « ni $A$ ni $B$ » ?",
+                  "question_type": "single_choice",
+                  "explanation": "$A \\cup B$ contient 5 prénoms : tous sauf Yao. Son contraire est donc $\\{\\text{Yao}\\}$, soit 1 issue. Yao n'est ni une fille, ni parmi ceux qui ont fini en premier.",
+                  "answers": [
+                    {
+                      "content": "0 issue",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 issues",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 issue : Yao",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 issues",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Probabilité d'un événement et équiprobabilité",
+          "subtitle": "Cas favorables sur cas possibles, ou somme des probabilités des issues",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer la probabilité d'un événement quand toutes les issues ont la même chance (équiprobabilité).</li>\n<li>Calculer la probabilité d'un événement quand les issues n'ont pas la même chance.</li>\n<li>Reconnaître une probabilité valable : un nombre entre 0 et 1, avec une somme égale à 1.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. L'assiette de beignets (l'équiprobabilité).</strong> Sur la table du repas de famille, il y a une assiette de 10 beignets de même taille, de même forme, bien mélangés. Trois contiennent du piment, sept sont nature. Papa en prend un, les yeux fermés. Chaque beignet a exactement la même chance d'être choisi. Il y a donc 3 chances sur 10 de tomber sur un beignet au piment.</p>\n<p><em>Le pont.</em> Chaque beignet est une issue, et les 10 issues ont la même chance : on dit qu'elles sont <strong>équiprobables</strong>. L'événement $A$ « le beignet contient du piment » a 3 issues : ce sont les <strong>cas favorables</strong>. Le nombre total de beignets, 10, est le nombre de <strong>cas possibles</strong>. La probabilité de $A$ est $P(A) = \\frac{3}{10}$.</p>\n<p><em>Où l'image s'arrête.</em> Si les beignets au piment sont posés sur le dessus et plus faciles à attraper, les issues n'ont plus la même chance : la formule « cas favorables sur cas possibles » ne marche plus. Et une probabilité de $\\frac{3}{10}$ ne promet pas que tu obtiendras « exactement 3 fois sur 10 » : elle mesure la chance, pas le résultat.</p>\n<p><strong>2. Le panier de fruits (issues qui n'ont pas la même chance).</strong> Dans un panier opaque, il y a 10 fruits : 5 mangues, 3 oranges et 2 ananas. Maman en prend un au hasard. Elle peut obtenir trois sortes de fruits, mais elle a bien plus de chances d'obtenir une mangue qu'un ananas : il y a 5 mangues contre 2 ananas.</p>\n<p><em>Le pont.</em> L'univers $\\Omega = \\{\\text{mangue}, \\text{orange}, \\text{ananas}\\}$ a 3 issues, mais elles ne sont pas équiprobables. On donne à chaque issue sa probabilité, qui est sa part du panier : $P(\\text{mangue}) = \\frac{5}{10} = \\frac{1}{2}$, $P(\\text{orange}) = \\frac{3}{10}$, $P(\\text{ananas}) = \\frac{2}{10} = \\frac{1}{5}$. Le panier entier est partagé entre les trois sortes de fruits : $\\frac{5}{10} + \\frac{3}{10} + \\frac{2}{10} = 1$. La probabilité d'un événement est la somme des probabilités de ses issues : $P(\\text{mangue ou ananas}) = \\frac{1}{2} + \\frac{1}{5} = \\frac{7}{10}$.</p>\n<p><em>Où l'image s'arrête.</em> Il y a 3 sortes de fruits, mais la probabilité d'un ananas n'est pas $\\frac{1}{3}$ : on ne divise par le nombre d'issues que si elles sont équiprobables.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Probabilité d'un événement.</strong> À chaque événement $A$ de l'univers, on associe un nombre $P(A)$ entre $0$ et $1$ qui mesure la chance que $A$ se réalise.</p>\n<ul>\n<li>$0 \\le P(A) \\le 1$, $P(\\varnothing) = 0$ et $P(\\Omega) = 1$.</li>\n<li>La somme des probabilités de toutes les issues vaut $1$.</li>\n<li>$P(A)$ est la somme des probabilités des issues de $A$.</li>\n</ul>\n<p><strong>Équiprobabilité.</strong> Si toutes les issues ont la même chance (on dit que le tirage se fait « au hasard » et que les objets sont indiscernables au toucher), alors $$P(A) = \\frac{\\text{nombre de cas favorables}}{\\text{nombre de cas possibles}} = \\frac{\\text{nombre d'issues de } A}{\\text{nombre d'issues de } \\Omega}.$$</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Un bocal contient 12 cubes de bouillon indiscernables au toucher : 5 de bœuf, 4 de poulet et 3 de poisson. On en tire un au hasard. Calcule la probabilité de tirer un cube de poulet, puis un cube de bœuf ou de poisson.</strong></p>\n<ol>\n<li>Le tirage est au hasard et les cubes sont indiscernables : les 12 cubes sont équiprobables. Cas possibles : 12.</li>\n<li>Poulet : 4 cas favorables. $P(\\text{poulet}) = \\frac{4}{12} = \\frac{1}{3}$ (on réduit la fraction).</li>\n<li>Bœuf ou poisson : $5 + 3 = 8$ cas favorables. $P = \\frac{8}{12} = \\frac{2}{3}$.</li>\n<li>Contrôle : $P(\\text{bœuf}) + P(\\text{poulet}) + P(\\text{poisson}) = \\frac{5}{12} + \\frac{4}{12} + \\frac{3}{12} = \\frac{12}{12} = 1$.</li>\n</ol>\n<p><strong>Dans le panier de fruits, on sait que $P(\\text{mangue}) = 0{,}5$ et $P(\\text{ananas}) = 0{,}2$. Quelle est $P(\\text{orange})$ ?</strong></p>\n<ol>\n<li>La somme des probabilités des trois issues vaut $1$ : $0{,}5 + P(\\text{orange}) + 0{,}2 = 1$.</li>\n<li>Donc $P(\\text{orange}) = 1 - 0{,}7 = 0{,}3$, ce qui correspond bien aux 3 oranges sur 10 fruits.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Diviser par le nombre d'issues sans vérifier qu'elles ont la même chance. Dans le panier de fruits, il y a 3 issues, mais $P(\\text{ananas})$ vaut $\\frac{2}{10} = \\frac{1}{5}$, pas $\\frac{1}{3}$.</p>\n<p>Comment le repérer : avant d'écrire « cas favorables sur cas possibles », demande-toi si chaque issue a bien la même chance. Si les objets sont en nombres différents, compte les objets, pas les sortes. Contrôle toujours ton résultat : une probabilité est entre $0$ et $1$, et la somme des probabilités des issues fait $1$.</p>\n<h2>En une phrase</h2>\n<p>Quand toutes les issues ont la même chance, la probabilité est « cas favorables sur cas possibles » ; sinon, on additionne les probabilités des issues, et le total de toutes les issues fait toujours $1$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Probabilité et équiprobabilité",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Pour calculer une probabilité avec la formule « nombre de cas favorables sur nombre de cas possibles », quelle condition faut-il vérifier ?",
+                  "question_type": "single_choice",
+                  "explanation": "La formule repose sur le fait que chaque issue a la même chance, comme les beignets mélangés dans l'assiette. Le nombre d'issues, la taille de l'événement ou la numérotation ne comptent pas.",
+                  "answers": [
+                    {
+                      "content": "L'événement contient au moins la moitié des issues.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les issues sont toutes numérotées.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Toutes les issues ont la même chance (équiprobabilité).",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'univers contient exactement deux issues.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une probabilité est toujours un nombre compris entre 0 et 1.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $0$ pour un événement impossible, $1$ pour un événement certain, et entre les deux pour tous les autres. Un résultat comme $\\frac{7}{5}$ ou $-0{,}2$ montre qu'il y a une erreur de calcul.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une assiette contient 10 beignets de même taille, bien mélangés : 3 au piment et 7 nature. Papa en prend un au hasard. Quelle est la probabilité qu'il contienne du piment ?",
+                  "question_type": "single_choice",
+                  "explanation": "Cas favorables : 3 beignets au piment. Cas possibles : 10 beignets en tout, pas 7. $\\frac{3}{7}$ compare les piments aux nature. $\\frac{7}{10}$ est la probabilité de tomber sur un beignet nature.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{7}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{7}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{10}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La somme des probabilités de toutes les issues d'un univers fini est égale à 1.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Les issues se partagent toute la chance : c'est le panier entier de fruits, divisé en parts de mangues, d'oranges et d'ananas. Si ta somme ne fait pas $1$, une probabilité est fausse ou une issue manque.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux valeurs qui peuvent être une probabilité ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Une probabilité est comprise entre $0$ et $1$. $0{,}35$ et $\\frac{3}{4}$ sont bien dans cet intervalle. $1{,}2$ dépasse $1$ et $-0{,}1$ est négatif : ces deux valeurs ne peuvent jamais mesurer une chance.",
+                  "answers": [
+                    {
+                      "content": "$-0{,}1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1{,}2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}35$",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer une probabilité",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un bocal contient 12 cubes de bouillon indiscernables au toucher : 5 de bœuf, 4 de poulet et 3 de poisson. On en tire un au hasard. Quelle est la probabilité de tirer un cube de poulet ?",
+                  "question_type": "single_choice",
+                  "explanation": "4 cubes de poulet sur 12 cubes : $\\frac{4}{12} = \\frac{1}{3}$ après simplification par 4. $\\frac{1}{4}$ vient d'une division par 4 du mauvais nombre, $\\frac{1}{12}$ serait la chance d'un cube précis.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{12}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un bocal contient 12 cubes de bouillon indiscernables au toucher : 5 de bœuf, 4 de poulet et 3 de poisson. On en tire un au hasard. Quelle est la probabilité de tirer un cube de bœuf ou de poisson ?",
+                  "question_type": "single_choice",
+                  "explanation": "Cas favorables : 5 + 3 = 8 cubes. $\\frac{8}{12} = \\frac{2}{3}$. $\\frac{5}{12}$ oublie le poisson. On peut contrôler : poulet ($\\frac{1}{3}$) et « bœuf ou poisson » ($\\frac{2}{3}$) font ensemble $1$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{3}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{5}{12}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{3}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un panier opaque contient 10 fruits : 5 mangues, 3 oranges et 2 ananas. Maman en prend un au hasard. Quelle est la probabilité de prendre un ananas ?",
+                  "question_type": "single_choice",
+                  "explanation": "2 ananas sur 10 fruits : $\\frac{2}{10} = \\frac{1}{5}$. L'erreur $\\frac{1}{3}$ vient du fait qu'il y a 3 sortes de fruits, mais les sortes n'ont pas la même chance : on compte les fruits, pas les sortes.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{2}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un panier contient des mangues, des oranges et des ananas. On prend un fruit au hasard, avec $P(\\text{mangue}) = 0{,}5$ et $P(\\text{ananas}) = 0{,}2$. Quelle est $P(\\text{orange})$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme des trois probabilités vaut $1$ : $P(\\text{orange}) = 1 - 0{,}5 - 0{,}2 = 0{,}3$. $0{,}7$ est la probabilité d'avoir « mangue ou ananas » (0,5 + 0,2), pas celle de l'orange.",
+                  "answers": [
+                    {
+                      "content": "$0{,}25$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un panier opaque contient 10 fruits : 5 mangues, 3 oranges et 2 ananas. On prend un fruit au hasard. Quelles sont les deux affirmations exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Mangue ou orange : $\\frac{5 + 3}{10} = \\frac{8}{10} = \\frac{4}{5}$. Ananas : $\\frac{2}{10} = \\frac{1}{5}$. L'orange vaut $\\frac{3}{10}$, pas $\\frac{1}{3}$. Et la somme des trois probabilités vaut $1$, pas $10$ : $10$ est le nombre de fruits.",
+                  "answers": [
+                    {
+                      "content": "La probabilité de prendre une orange est $\\frac{1}{3}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La somme $P(\\text{mangue}) + P(\\text{orange}) + P(\\text{ananas})$ vaut $10$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La probabilité de prendre un ananas est $\\frac{1}{5}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La probabilité de prendre une mangue ou une orange est $\\frac{4}{5}$.",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Probabilités avec ou sans équiprobabilité",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un tiroir contient 20 sachets d'épices indiscernables au toucher : 8 de gingembre, 7 de curcuma et le reste de poivre. On en prend un au hasard. Quelle est la probabilité de prendre un sachet de poivre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Poivre : $20 - 8 - 7 = 5$ sachets. $P = \\frac{5}{20} = \\frac{1}{4}$. Il faut d'abord calculer le nombre de sachets de poivre avant de diviser par le total.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{5}{8}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tiroir contient 20 sachets d'épices indiscernables au toucher : 8 de gingembre, 7 de curcuma et 5 de poivre. On en prend un au hasard. Quelle est la probabilité de prendre un sachet de gingembre ou de poivre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Gingembre ou poivre : $8 + 5 = 13$ sachets sur 20, soit $\\frac{13}{20}$ (fraction déjà réduite). $\\frac{13}{15}$ divise par un mauvais total. $\\frac{7}{20}$ est la probabilité du curcuma, l'événement contraire.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{13}{20}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{7}{20}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{13}{15}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{5}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une famille choisit une sauce parmi trois : tomate, arachide, graine. Les probabilités vérifient $P(\\text{arachide}) = 2 \\times P(\\text{tomate})$ et $P(\\text{graine}) = 3 \\times P(\\text{tomate})$. Que vaut $P(\\text{graine})$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $x = P(\\text{tomate})$ : $x + 2x + 3x = 6x = 1$, donc $x = \\frac{1}{6}$. Alors $P(\\text{graine}) = 3 \\times \\frac{1}{6} = \\frac{1}{2}$. $\\frac{1}{6}$ est la probabilité de la tomate.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{3}{5}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tiroir contient 20 sachets d'épices indiscernables au toucher : 8 de gingembre, 7 de curcuma et 5 de poivre. On en prend un au hasard. Quelles sont les trois affirmations exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Gingembre : $\\frac{8}{20} = \\frac{2}{5}$. Curcuma : $\\frac{7}{20}$. La somme est $\\frac{8 + 7 + 5}{20} = 1$. Le poivre vaut $\\frac{5}{20} = \\frac{1}{4}$, pas $\\frac{1}{5}$. Et $\\frac{1}{3}$ vient du nombre de sortes d'épices, pas des sachets.",
+                  "answers": [
+                    {
+                      "content": "$P(\\text{gingembre}) = \\frac{2}{5}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P(\\text{poivre}) = \\frac{1}{5}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P(\\text{gingembre}) + P(\\text{curcuma}) + P(\\text{poivre}) = 1$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P(\\text{curcuma}) = \\frac{1}{3}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P(\\text{curcuma}) = \\frac{7}{20}$.",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un panier contient 10 fruits : 5 mangues, 3 oranges et 2 ananas. Comme il y a 3 sortes de fruits, la probabilité de prendre un ananas au hasard est $\\frac{1}{3}$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Les trois sortes n'ont pas la même chance : il y a 2 ananas sur 10 fruits, donc $P(\\text{ananas}) = \\frac{2}{10} = \\frac{1}{5}$. On ne divise par le nombre de sortes que si toutes les issues sont équiprobables.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une calebasse contient 8 jetons indiscernables au toucher, numérotés de 1 à 8. On en tire un au hasard. Quelle est la probabilité que le numéro soit un multiple de 3 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les multiples de 3 entre 1 et 8 sont 3 et 6 : 2 cas favorables sur 8. $\\frac{2}{8} = \\frac{1}{4}$. $\\frac{3}{8}$ compterait un cas favorable de trop : le jeton 9 n'existe pas, la numérotation s'arrête à 8.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{8}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{8}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Événement contraire, réunion et intersection",
+          "subtitle": "Calculer P(contraire) et P(A ou B) sans compter deux fois",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer la probabilité de l'événement contraire.</li>\n<li>Calculer la probabilité d'une réunion, avec ou sans issues communes.</li>\n<li>Passer des effectifs d'un repas aux probabilités d'une réunion, d'une intersection ou de « ni l'un ni l'autre ».</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le gâteau entier (l'événement contraire).</strong> À la fin du repas de famille, maman apporte un gâteau entier. Elle en découpe une part, et il reste le reste du gâteau. La part et le reste, mis ensemble, redonnent exactement le gâteau entier. Si la part représente $\\frac{2}{5}$ du gâteau, le reste représente $1 - \\frac{2}{5} = \\frac{3}{5}$.</p>\n<p><em>Le pont.</em> Le gâteau entier, c'est la probabilité totale $1$. La part, c'est $P(A)$. Le reste, c'est $P(\\overline{A})$, la probabilité que $A$ ne se réalise pas. Donc $P(A) + P(\\overline{A}) = 1$, soit $P(\\overline{A}) = 1 - P(A)$.</p>\n<p><em>Où l'image s'arrête.</em> Une part de gâteau peut être de n'importe quelle taille, mais deux parts qui se recouvrent ne se partagent pas : $A$ et $\\overline{A}$ ne se recouvrent jamais.</p>\n<p><strong>2. Le comptage des invités (la réunion).</strong> Ce dimanche, 20 invités sont à table. Douze prennent du poulet, neuf prennent du poisson. Le secrétaire de la famille additionne : $12 + 9 = 21$. Mais il n'y a que 20 invités ! Quatre invités ont pris les deux plats : il les a comptés deux fois, une fois dans la liste du poulet et une fois dans celle du poisson. Pour savoir combien d'invités ont pris au moins un des deux plats, il enlève une fois ces 4 personnes : $12 + 9 - 4 = 17$.</p>\n<p><em>Le pont.</em> Les invités qui prennent du poulet forment l'événement $A$, ceux qui prennent du poisson l'événement $B$, ceux qui prennent les deux l'événement $A \\cap B$. Compter « poulet ou poisson », c'est $P(A \\cup B)$, et on a : $$P(A \\cup B) = P(A) + P(B) - P(A \\cap B).$$ Avec les nombres : $\\frac{12}{20} + \\frac{9}{20} - \\frac{4}{20} = \\frac{17}{20}$.</p>\n<p><em>Où l'image s'arrête.</em> Si personne ne prenait les deux plats, il n'y aurait rien à soustraire : $P(A \\cap B) = 0$ et on additionne simplement. C'est le cas de deux événements incompatibles.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Événement contraire.</strong> Pour tout événement $A$ : $$P(\\overline{A}) = 1 - P(A).$$</p>\n<p><strong>Réunion.</strong> Pour deux événements $A$ et $B$ : $$P(A \\cup B) = P(A) + P(B) - P(A \\cap B).$$</p>\n<p><strong>Événements incompatibles.</strong> Si $A \\cap B = \\varnothing$, alors $P(A \\cup B) = P(A) + P(B)$.</p>\n<ul>\n<li>« Ni $A$ ni $B$ » est le contraire de $A \\cup B$ : sa probabilité est $1 - P(A \\cup B)$.</li>\n<li>Comme $A$ est contenu dans $A \\cup B$, on a toujours $P(A \\cup B) \\ge P(A)$, et $P(A \\cup B) \\le 1$.</li>\n</ul>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>20 invités sont à table. 12 prennent du poulet ($A$), 9 prennent du poisson ($B$), 4 prennent les deux. On choisit un invité au hasard. Calcule $P(A)$, $P(\\overline{A})$, $P(A \\cup B)$ et la probabilité qu'il ne prenne ni poulet ni poisson.</strong></p>\n<ol>\n<li>Les 20 invités sont équiprobables. $P(A) = \\frac{12}{20} = \\frac{3}{5}$, $P(B) = \\frac{9}{20}$, $P(A \\cap B) = \\frac{4}{20} = \\frac{1}{5}$.</li>\n<li>Contraire : $P(\\overline{A}) = 1 - \\frac{3}{5} = \\frac{2}{5}$. Contrôle : $20 - 12 = 8$ invités, et $\\frac{8}{20} = \\frac{2}{5}$.</li>\n<li>Réunion : $P(A \\cup B) = \\frac{12}{20} + \\frac{9}{20} - \\frac{4}{20} = \\frac{17}{20}$.</li>\n<li>Ni poulet ni poisson : $1 - \\frac{17}{20} = \\frac{3}{20}$. Contrôle : $20 - 17 = 3$ invités.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Écrire $P(A \\cup B) = P(A) + P(B)$ pour tous les événements. Ici, cela donnerait $\\frac{12}{20} + \\frac{9}{20} = \\frac{21}{20}$, qui dépasse $1$ : c'est impossible pour une probabilité.</p>\n<p>Comment le repérer : si le résultat dépasse $1$, ou si tu additionnes deux événements qui ont des issues communes sans avoir soustrait leur intersection, tu comptes des issues deux fois. Autre erreur : écrire $P(\\overline{A}) = P(A) - 1$, qui est négatif.</p>\n<h2>En une phrase</h2>\n<p>Le contraire, c'est le reste du gâteau : $P(\\overline{A}) = 1 - P(A)$ ; et pour « $A$ ou $B$ », on additionne puis on enlève une fois ce qui a été compté deux fois : $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Contraire et réunion",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Pour un événement $A$, on sait que $P(A) = 0{,}3$. Que vaut la probabilité de l'événement contraire $\\overline{A}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Dans l'image du gâteau entier, la part $A$ fait $0{,}3$ et le reste fait $1 - 0{,}3 = 0{,}7$. $-0{,}7$ vient de $P(A) - 1$, et $1{,}3$ de $1 + P(A)$ : dans les deux cas, ce n'est pas une probabilité.",
+                  "answers": [
+                    {
+                      "content": "$0{,}7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1{,}3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-0{,}7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour deux événements $A$ et $B$ quelconques, on a toujours $P(A \\cup B) = P(A) + P(B)$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Cette égalité n'est vraie que si $A$ et $B$ sont incompatibles. Sinon, les issues communes sont comptées deux fois, comme les invités qui prennent poulet et poisson : il faut soustraire $P(A \\cap B)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "À quelle condition a-t-on $P(A \\cup B) = P(A) + P(B)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il n'y a rien à soustraire s'il n'y a aucune issue commune : $P(A \\cap B) = 0$. Deux événements de même probabilité peuvent très bien avoir des issues communes. Et $A \\cup B = \\Omega$ ne dit rien de leur intersection.",
+                  "answers": [
+                    {
+                      "content": "Quand $A$ et $B$ sont incompatibles ($A \\cap B = \\varnothing$).",
+                      "correct": true
+                    },
+                    {
+                      "content": "Toujours, quels que soient $A$ et $B$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quand $A \\cup B$ est l'univers $\\Omega$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quand $A$ et $B$ ont la même probabilité.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du gâteau entier, la part $A$ et le reste $\\overline{A}$ forment ensemble tout le gâteau. Que vaut $P(A) + P(\\overline{A})$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un événement et son contraire n'ont aucune issue commune et couvrent tout l'univers : leurs probabilités se complètent pour faire $1$, la probabilité de $\\Omega$. D'où $P(\\overline{A}) = 1 - P(A)$.",
+                  "answers": [
+                    {
+                      "content": "$1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P(A)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les invités qui prennent poulet et poisson figurent dans les deux listes : ils sont comptés deux fois. Par ailleurs $A \\subset A \\cup B$, donc $P(A \\cup B) \\ge P(A)$, pas l'inverse. Et $P(A) + P(B)$ calcule la réunion, pas l'intersection.",
+                  "answers": [
+                    {
+                      "content": "Pour tous événements $A$ et $B$, $P(A \\cup B) \\le P(A)$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "En calculant $P(A) + P(B)$, les issues de $A \\cap B$ sont comptées deux fois.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour tous événements $A$ et $B$, $P(A \\cap B) = P(A) + P(B)$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour tout événement $A$, $P(\\overline{A}) = 1 - P(A)$.",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer avec le contraire et la réunion",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Pour un événement $A$, $P(A) = \\frac{2}{5}$. Quelle est la probabilité de $\\overline{A}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P(\\overline{A}) = 1 - \\frac{2}{5} = \\frac{5}{5} - \\frac{2}{5} = \\frac{3}{5}$. $\\frac{5}{2}$ est supérieur à $1$ : ce ne peut pas être une probabilité. Le signe moins vient d'une soustraction faite dans le mauvais sens.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{3}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{5}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\frac{3}{5}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux événements incompatibles $A$ et $B$ vérifient $P(A) = 0{,}5$ et $P(B) = 0{,}3$. Que vaut $P(A \\cup B)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les événements sont incompatibles : on additionne, $0{,}5 + 0{,}3 = 0{,}8$, sans rien soustraire. $0{,}2$ est la différence, $0{,}15$ est le produit, et $1{,}3$ aurait ajouté $1$ par erreur.",
+                  "answers": [
+                    {
+                      "content": "$0{,}2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1{,}3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}15$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}8$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $P(A) = 0{,}6$, $P(B) = 0{,}5$ et $P(A \\cap B) = 0{,}2$. Que vaut $P(A \\cup B)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P(A \\cup B) = 0{,}6 + 0{,}5 - 0{,}2 = 0{,}9$. $1{,}1$ oublie de soustraire l'intersection et dépasse $1$. $1{,}3$ l'ajoute au lieu de la soustraire. Une probabilité ne dépasse jamais $1$.",
+                  "answers": [
+                    {
+                      "content": "$1{,}3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1{,}1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}9$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $P(A) = 0{,}4$, $P(B) = 0{,}5$ et $P(A \\cup B) = 0{,}7$. Que vaut $P(A \\cap B)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On part de $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$, donc $P(A \\cap B) = 0{,}4 + 0{,}5 - 0{,}7 = 0{,}2$. $0{,}9$ est la somme $P(A) + P(B)$, qui compte l'intersection deux fois.",
+                  "answers": [
+                    {
+                      "content": "$0{,}9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}2$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "20 invités sont à table et 12 prennent du poulet. On choisit un invité au hasard. Quelle est la probabilité qu'il ne prenne pas de poulet ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P(\\text{poulet}) = \\frac{12}{20} = \\frac{3}{5}$, donc la probabilité du contraire est $1 - \\frac{3}{5} = \\frac{2}{5}$, soit 8 invités sur 20. $\\frac{3}{5}$ est la probabilité de prendre du poulet. $\\frac{12}{8}$ dépasse $1$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{3}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{12}{8}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Le repas de famille en probabilités",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "20 invités sont à table. 12 prennent du poulet ($A$), 9 prennent du poisson ($B$), et 4 prennent les deux plats. On choisit un invité au hasard. Quelle est la probabilité qu'il prenne du poulet ou du poisson ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P(A \\cup B) = \\frac{12}{20} + \\frac{9}{20} - \\frac{4}{20} = \\frac{17}{20}$. $\\frac{21}{20}$ oublie de soustraire les 4 invités comptés deux fois et dépasse $1$. $\\frac{3}{20}$ est la probabilité de ne prendre aucun des deux plats.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{17}{20}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{21}{20}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{20}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "20 invités sont à table. 12 prennent du poulet ($A$), 9 prennent du poisson ($B$), et 4 prennent les deux plats. On choisit un invité au hasard. Quelle est la probabilité qu'il ne prenne ni poulet ni poisson ?",
+                  "question_type": "single_choice",
+                  "explanation": "« Ni poulet ni poisson » est le contraire de « poulet ou poisson ». Donc $1 - \\frac{17}{20} = \\frac{3}{20}$. $\\frac{8}{20}$ est la probabilité de ne pas prendre de poulet : cet événement est plus grand, car il contient ceux qui prennent du poisson.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{20}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{17}{20}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{8}{20}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "20 invités sont à table. 12 prennent du poulet ($A$), 9 prennent du poisson ($B$), et 4 prennent les deux plats. On choisit un invité au hasard. Quelle est la probabilité qu'il prenne du poulet mais pas de poisson ?",
+                  "question_type": "single_choice",
+                  "explanation": "Parmi les 12 invités qui prennent du poulet, 4 prennent aussi du poisson. Ceux qui prennent du poulet seulement : $12 - 4 = 8$, donc $\\frac{8}{20} = \\frac{2}{5}$. $\\frac{3}{5}$ est la probabilité de prendre du poulet, y compris avec du poisson.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{3}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{9}{20}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "20 invités sont à table. 12 prennent du poulet ($A$), 9 prennent du poisson ($B$), et 4 prennent les deux plats. On choisit un invité au hasard. Quelles sont les trois affirmations exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Les deux plats : $\\frac{4}{20} = \\frac{1}{5}$. Poisson : $\\frac{9}{20}$, donc pas de poisson : $1 - \\frac{9}{20} = \\frac{11}{20}$. En revanche $\\frac{21}{20}$ dépasse $1$, et ne pas prendre de poulet donne $\\frac{8}{20} = \\frac{2}{5}$, pas $\\frac{3}{5}$.",
+                  "answers": [
+                    {
+                      "content": "La probabilité de ne pas prendre de poisson est $\\frac{11}{20}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La probabilité de prendre les deux plats est $\\frac{1}{5}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La probabilité de prendre du poisson est $\\frac{9}{20}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La probabilité de prendre du poulet ou du poisson est $\\frac{21}{20}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La probabilité de ne pas prendre de poulet est $\\frac{3}{5}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une famille, on choisit une personne au hasard. L'événement $A$ « aime le piment » a pour probabilité $0{,}7$, l'événement $B$ « aime l'alloco » a pour probabilité $0{,}6$, et tout le monde aime au moins l'un des deux, donc $P(A \\cup B) = 1$. Quelle est $P(A \\cap B)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P(A \\cap B) = P(A) + P(B) - P(A \\cup B) = 0{,}7 + 0{,}6 - 1 = 0{,}3$. $1{,}3$ est la somme $P(A) + P(B)$, qui dépasse $1$ à cause des personnes comptées deux fois. $0{,}42$ est le produit $0{,}7 \\times 0{,}6$, qui ne donne pas l'intersection ici.",
+                  "answers": [
+                    {
+                      "content": "$0{,}3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1{,}3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}42$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux événements $A$ et $B$ ont pour probabilités $P(A) = 0{,}7$ et $P(B) = 0{,}6$. Alors $A$ et $B$ ne peuvent pas être incompatibles.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Si $A$ et $B$ étaient incompatibles, on aurait $P(A \\cup B) = 0{,}7 + 0{,}6 = 1{,}3$, ce qui dépasse $1$ : impossible. Ils ont donc des issues communes, comme les invités qui prennent deux plats.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Dénombrer pour calculer une probabilité",
+          "subtitle": "À compléter : probabilité conditionnelle, événements indépendants, combinaisons (programme A2 à confirmer)",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Compter le nombre de résultats possibles avec le principe multiplicatif et un arbre.</li>\n<li>Compter des tirages successifs avec remise et sans remise, l'ordre étant pris en compte.</li>\n<li>Calculer une probabilité en comptant les cas favorables et les cas possibles.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le menu du dimanche (le principe multiplicatif).</strong> Pour le repas de famille, maman compose un menu avec un plat et une boisson. Elle a 3 plats : attiéké-poisson, foutou-sauce, riz-sauce. Elle a 2 boissons : bissap et jus de gingembre. Elle dessine un arbre au dos d'un sachet : de chaque plat partent 2 branches, une par boisson. Elle compte les bouts de branches : $3 \\times 2 = 6$ menus. Si elle ajoute 2 desserts possibles, chacun des 6 menus se prolonge de 2 branches : $6 \\times 2 = 12$ menus.</p>\n<p><em>Le pont.</em> Un menu est une issue. Choisir le plat, c'est une étape avec 3 choix. Choisir la boisson, c'est une étape avec 2 choix, quel que soit le plat. Le nombre de résultats se calcule en <strong>multipliant</strong> le nombre de choix de chaque étape : c'est le <strong>principe multiplicatif</strong>.</p>\n<p><em>Où l'image s'arrête.</em> On multiplie seulement parce qu'il faut faire <strong>les deux</strong> choix (un plat <strong>et</strong> une boisson). Si l'on choisissait seulement soit un plat, soit une boisson, on additionnerait : $3 + 2 = 5$ possibilités.</p>\n<p><strong>2. Le tirage au sort des corvées (avec ou sans remise).</strong> Cinq cousins, Awa, Koffi, Yao, Mariam et Fatou, tirent au sort deux corvées : la sauce, puis la vaisselle. Maman tire un papier du bol pour la sauce, puis un second pour la vaisselle. Si elle <strong>remet</strong> le premier papier dans le bol, la même personne peut avoir les deux corvées : il y a $5 \\times 5 = 25$ résultats. Si elle <strong>ne le remet pas</strong>, le second tirage se fait parmi 4 papiers seulement : il y a $5 \\times 4 = 20$ résultats.</p>\n<p><em>Le pont.</em> Un résultat est un couple ordonné : (Awa, Koffi) signifie « Awa à la sauce, Koffi à la vaisselle ». Il est différent de (Koffi, Awa). Le bol, c'est l'ensemble des 5 prénoms. « Avec remise », il garde 5 papiers à chaque tirage. « Sans remise », il en perd un à chaque tirage.</p>\n<p><em>Où l'image s'arrête.</em> Ici, l'ordre compte : les deux tirages ont un rôle différent (sauce, vaisselle). Quand le tirage est au hasard, tous les résultats sont équiprobables et on calcule la probabilité par « cas favorables sur cas possibles ».</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Principe multiplicatif.</strong> Si un choix se fait en plusieurs étapes, avec $n_1$ possibilités à la première, puis $n_2$ à la deuxième, et ainsi de suite, le nombre total de résultats est $n_1 \\times n_2 \\times \\cdots$ Un arbre aide à ne rien oublier.</p>\n<ul>\n<li><strong>Avec remise</strong> : deux tirages successifs parmi $n$ objets donnent $n \\times n = n^2$ résultats (ordonnés).</li>\n<li><strong>Sans remise</strong> : deux tirages successifs parmi $n$ objets donnent $n \\times (n - 1)$ résultats (ordonnés).</li>\n</ul>\n<p><strong>Probabilité.</strong> Quand tous les résultats sont équiprobables, $P(A) = \\frac{\\text{nombre de résultats de } A}{\\text{nombre total de résultats}}$. On compte l'un et l'autre avec le principe multiplicatif.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Maman compose un menu au hasard : 1 plat parmi 3, 1 boisson parmi 2 (bissap, gingembre), 1 dessert parmi 2. Calcule le nombre de menus, puis la probabilité que le menu contienne du bissap.</strong></p>\n<ol>\n<li>Nombre de menus : $3 \\times 2 \\times 2 = 12$ (on multiplie car on choisit un plat, une boisson et un dessert).</li>\n<li>Menus avec du bissap : 3 plats, 1 boisson (le bissap), 2 desserts, donc $3 \\times 1 \\times 2 = 6$.</li>\n<li>Tous les menus sont équiprobables : $P = \\frac{6}{12} = \\frac{1}{2}$.</li>\n</ol>\n<p><strong>Cinq cousins tirent deux corvées sans remise : la sauce, puis la vaisselle. Quelle est la probabilité qu'Awa fasse la sauce ?</strong></p>\n<ol>\n<li>Nombre total de résultats : $5 \\times 4 = 20$.</li>\n<li>Awa à la sauce : 1 possibilité pour la sauce, puis 4 pour la vaisselle. Soit $1 \\times 4 = 4$ résultats.</li>\n<li>$P = \\frac{4}{20} = \\frac{1}{5}$. Contrôle : chacun des 5 cousins a la même chance d'avoir la sauce, donc $\\frac{1}{5}$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Additionner au lieu de multiplier : avec 3 plats et 2 boissons, il y a $3 \\times 2 = 6$ menus, pas $3 + 2 = 5$. Autre erreur : oublier d'enlever le papier déjà tiré quand le tirage se fait sans remise, et écrire $5 \\times 5$ au lieu de $5 \\times 4$.</p>\n<p>Comment le repérer : demande-toi s'il faut faire <strong>tous</strong> les choix (on multiplie) ou <strong>un seul</strong> d'entre eux (on additionne), et si l'objet tiré est remis ou non. Vérifie aussi que ta probabilité est comprise entre $0$ et $1$.</p>\n<h2>En une phrase</h2>\n<p>Pour compter les résultats d'un choix en plusieurs étapes, on multiplie les nombres de choix de chaque étape (en retirant l'objet déjà tiré si le tirage est sans remise), puis la probabilité est « cas favorables sur cas possibles ».</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Compter avec le principe multiplicatif",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Maman compose un menu avec un plat parmi 3 et une boisson parmi 2. Combien de menus différents peut-elle composer ?",
+                  "question_type": "single_choice",
+                  "explanation": "On choisit un plat et une boisson : on multiplie, $3 \\times 2 = 6$, comme les bouts de branches de l'arbre. $5$ vient de l'addition $3 + 2$, qui s'appliquerait pour choisir seulement un plat ou une boisson. $9$ est $3^2$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": true
+                    },
+                    {
+                      "content": "5",
+                      "correct": false
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour compter les menus composés d'un plat parmi 3 et d'une boisson parmi 2, on additionne le nombre de plats et le nombre de boissons.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Chaque plat peut être accompagné de chacune des deux boissons : de chaque plat partent 2 branches. On multiplie : $3 \\times 2 = 6$ menus. L'addition donnerait seulement 5.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On fait un premier choix parmi $n$ possibilités, puis, quel que soit ce choix, un second parmi $p$ possibilités. Combien y a-t-il de résultats ?",
+                  "question_type": "single_choice",
+                  "explanation": "À chacune des $n$ possibilités du premier choix correspondent $p$ possibilités du second : on obtient $n$ paquets de $p$ résultats, soit $n \\times p$. L'addition correspondrait à un choix de l'un ou de l'autre, pas des deux.",
+                  "answers": [
+                    {
+                      "content": "$n - p$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n \\times p$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$n + p$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n^p$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Maman tire deux papiers de suite dans un bol de 5 prénoms, en remettant le premier papier avant le second tirage. Combien de résultats ordonnés peut-elle obtenir ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec remise, le bol contient 5 papiers à chaque tirage : $5 \\times 5 = 25$ résultats. $20$ serait le résultat sans remise ($5 \\times 4$). $10$ est $5 + 5$ : on additionne alors qu'on fait deux tirages.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": false
+                    },
+                    {
+                      "content": "25",
+                      "correct": true
+                    },
+                    {
+                      "content": "20",
+                      "correct": false
+                    },
+                    {
+                      "content": "5",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cinq prénoms sont dans un bol. On tire deux papiers de suite, sans remise, en notant l'ordre. Quelles sont les deux affirmations exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Sans remise, le papier tiré ne revient pas : il en reste 4, et le même prénom ne peut pas sortir deux fois. L'ordre est noté, donc (Awa, Koffi) et (Koffi, Awa) diffèrent. Le total est $5 \\times 4 = 20$, pas $9$.",
+                  "answers": [
+                    {
+                      "content": "Le nombre de résultats est $5 + 4 = 9$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le même prénom peut sortir aux deux tirages.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le résultat (Awa, Koffi) est différent du résultat (Koffi, Awa).",
+                      "correct": true
+                    },
+                    {
+                      "content": "Au second tirage, il reste 4 papiers dans le bol.",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Dénombrer et calculer une probabilité",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un repas se compose d'une entrée parmi 2, d'un plat parmi 4 et d'un dessert parmi 3. Combien de repas différents peut-on composer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Trois choix à faire, tous nécessaires : $2 \\times 4 \\times 3 = 24$. $9$ vient de l'addition $2 + 4 + 3$. $12$ oublie un des trois choix : $4 \\times 3$ ou $2 \\times 6$.",
+                  "answers": [
+                    {
+                      "content": "14",
+                      "correct": false
+                    },
+                    {
+                      "content": "24",
+                      "correct": true
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Six prénoms sont dans un bol. On tire deux papiers de suite, sans remise, en notant l'ordre : le premier pour la sauce, le second pour la vaisselle. Combien de résultats y a-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec 6 prénoms : $6 \\times 5 = 30$ résultats, car au second tirage il reste 5 papiers. $36$ serait le cas avec remise ($6 \\times 6$). $12$ est $6 + 6$, et $15$ ne tient pas compte de l'ordre.",
+                  "answers": [
+                    {
+                      "content": "36",
+                      "correct": false
+                    },
+                    {
+                      "content": "15",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    },
+                    {
+                      "content": "30",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On lance trois fois de suite une pièce de monnaie (pile ou face). Combien y a-t-il de résultats ordonnés possibles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Chaque lancer a 2 possibilités, et on fait les trois lancers : $2 \\times 2 \\times 2 = 8$. $6$ vient de l'addition $2 + 2 + 2$ et $9$ de $3 \\times 3$.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "8",
+                      "correct": true
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Maman compose un menu au hasard : un plat parmi 3 et une boisson parmi 2 (bissap, jus de gingembre). Les 6 menus sont équiprobables. Quelle est la probabilité que le menu contienne du bissap ?",
+                  "question_type": "single_choice",
+                  "explanation": "Menus avec du bissap : 3 plats $\\times$ 1 boisson = 3, sur 6 menus. $P = \\frac{3}{6} = \\frac{1}{2}$. Cela se voit aussi par la boisson : une chance sur deux. $\\frac{1}{6}$ serait la chance d'un menu précis.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{2}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On tire deux fois de suite un jeton dans une calebasse de 5 jetons numérotés de 1 à 5, en remettant le jeton après le premier tirage. Quelle est la probabilité d'obtenir deux fois le même numéro ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il y a $5 \\times 5 = 25$ résultats. Deux fois le même numéro : (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), soit 5 résultats. $P = \\frac{5}{25} = \\frac{1}{5}$. $\\frac{1}{25}$ n'est que la chance de (1, 1) par exemple.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{25}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{5}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Tirages et menus au hasard",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Cinq cousins, Awa, Koffi, Yao, Mariam et Fatou, tirent au sort deux corvées : un papier du bol désigne la personne qui fait la sauce, puis un second papier désigne celle qui fait la vaisselle. Les tirages se font sans remise. Quelle est la probabilité qu'Awa fasse la sauce ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il y a $5 \\times 4 = 20$ résultats. Awa à la sauce : $1 \\times 4 = 4$ résultats. $P = \\frac{4}{20} = \\frac{1}{5}$. $\\frac{1}{20}$ est la chance d'un couple précis, par exemple (Awa, Koffi).",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{4}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{20}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cinq cousins, Awa, Koffi, Yao, Mariam et Fatou, tirent au sort deux corvées : un papier du bol désigne la personne qui fait la sauce, puis un second papier désigne celle qui fait la vaisselle. Les tirages se font sans remise. Quelle est la probabilité qu'Awa fasse la sauce et Koffi la vaisselle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il y a $5 \\times 4 = 20$ résultats ordonnés, et un seul est (Awa, Koffi). $P = \\frac{1}{20}$. $\\frac{1}{10}$ confond (Awa, Koffi) avec (Koffi, Awa), qui est un autre résultat puisque l'ordre compte.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{20}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{2}{25}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{10}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cinq cousins, Awa, Koffi, Yao, Mariam et Fatou, tirent au sort deux corvées : un papier du bol désigne la personne qui fait la sauce, puis un second papier désigne celle qui fait la vaisselle. Les tirages se font sans remise. Quelle est la probabilité qu'Awa ait au moins une des deux corvées ?",
+                  "question_type": "single_choice",
+                  "explanation": "Awa à la sauce : 4 résultats. Awa à la vaisselle : 4 résultats. Elle ne peut pas avoir les deux, donc $4 + 4 = 8$ résultats sur 20 : $\\frac{8}{20} = \\frac{2}{5}$. $\\frac{3}{5}$ est la chance qu'Awa n'ait aucune corvée.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{9}{20}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{5}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Maman compose un menu au hasard : un plat parmi 3, une boisson parmi 2 (bissap, jus de gingembre) et un dessert parmi 4 (dont la mangue). Tous les menus sont équiprobables. Quelle est la probabilité que le menu contienne du bissap et de la mangue ?",
+                  "question_type": "single_choice",
+                  "explanation": "Nombre de menus : $3 \\times 2 \\times 4 = 24$. Avec bissap et mangue : $3 \\times 1 \\times 1 = 3$. $P = \\frac{3}{24} = \\frac{1}{8}$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{24}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{8}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Cinq cousins, Awa, Koffi, Yao, Mariam et Fatou, tirent au sort deux corvées : un papier du bol désigne la personne qui fait la sauce, puis un second papier désigne celle qui fait la vaisselle. Cette fois, le premier papier est remis dans le bol avant le second tirage. Quelles sont les trois affirmations exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Avec remise : $5 \\times 5 = 25$ résultats. Même prénom : 5 résultats, soit $\\frac{1}{5}$. (Awa, Awa) : $\\frac{1}{25}$. Deux prénoms différents : $1 - \\frac{1}{5} = \\frac{4}{5}$. Et (Awa, Koffi) est un seul résultat sur 25.",
+                  "answers": [
+                    {
+                      "content": "Il y a 25 résultats ordonnés possibles.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La probabilité de tirer deux prénoms différents est $\\frac{1}{5}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La probabilité de tirer deux fois le même prénom est $\\frac{1}{5}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La probabilité qu'Awa fasse les deux corvées est $\\frac{1}{25}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La probabilité de (Awa, Koffi) est $\\frac{1}{10}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un menu se compose d'un plat parmi 3 et d'une boisson parmi 2, soit 6 menus. Si on ajoute un dessert au choix parmi 4, le nombre de menus devient $6 \\times 4 = 24$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Chaque menu plat-boisson peut être prolongé par chacun des 4 desserts : le nombre de menus est multiplié par 4, ce qui donne 24. Additionner $6 + 4 = 10$ oublierait que chaque dessert s'associe à chaque menu.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
