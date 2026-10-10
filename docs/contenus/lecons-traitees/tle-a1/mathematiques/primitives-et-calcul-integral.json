@@ -1,0 +1,1715 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Primitives et calcul intégral",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "A1",
+      "essentials": [
+        {
+          "name": "Primitives d'une fonction polynôme",
+          "subtitle": "Remonter de la dérivée à la fonction, avec la constante",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Reconnaître une primitive d'une fonction en la dérivant.</li>\n<li>Calculer les primitives d'une fonction polynôme, terme par terme.</li>\n<li>Trouver la primitive qui prend une valeur donnée en un point.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le gbaka et ses deux compteurs (la primitive).</strong> Un gbaka roule d'Adjamé vers Yopougon. Son compteur de vitesse affiche la vitesse à chaque instant. Son compteur kilométrique affiche la distance totale déjà parcourue par le véhicule. Si tu dérives la distance, tu retrouves la vitesse. Mais ici, on fait le chemin inverse : on connaît la vitesse et on cherche une fonction dont la dérivée est cette vitesse. C'est une <strong>primitive</strong>.</p>\n<p><em>Le pont.</em> La vitesse à l'instant $t$, c'est $f(t)$. Le compteur kilométrique, c'est une primitive $F(t)$ : sa dérivée est la vitesse, donc $F'(t) = f(t)$. Deux gbakas qui roulent exactement de la même façon n'affichent pas le même kilométrage si l'un est neuf et l'autre vieux : leurs compteurs diffèrent d'un nombre fixe. Ce nombre fixe, c'est la <strong>constante</strong> $c$ (un nombre qui ne change pas quand $t$ varie).</p>\n<p><em>Où l'image s'arrête.</em> La vitesse seule ne dit pas ce que le compteur affichait au départ. Il faut une information en plus, par exemple « le compteur marquait 12 au départ » : c'est la condition $F(0) = 12$ qui fixe la constante.</p>\n<p><strong>2. L'escalier de l'école (la règle pour $x^n$).</strong> Dériver $x^n$, c'est descendre d'une marche : l'exposant passe de $n$ à $n-1$, et le coefficient $n$ apparaît devant. Chercher une primitive, c'est remonter d'une marche : l'exposant passe de $n$ à $n+1$, et on divise par le nouvel exposant pour effacer le coefficient que la dérivation ferait apparaître.</p>\n<p><em>Le pont.</em> La marche, c'est l'exposant. Monter, c'est ajouter $1$ à l'exposant. Diviser par $n+1$ compense le facteur $n+1$ que la dérivation fait apparaître : $\\left(\\frac{x^{n+1}}{n+1}\\right)' = x^n$.</p>\n<p><em>Où l'image s'arrête.</em> En descendant l'escalier, une constante disparaît sans laisser de trace (la dérivée d'un nombre fixe est $0$). En remontant, il faut donc penser à ajouter $+ c$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Primitive.</strong> Soit $f$ une fonction définie sur un intervalle $I$ (un « morceau » de la droite des réels, sans trou). Une fonction $F$ est une <strong>primitive</strong> de $f$ sur $I$ si $F$ est dérivable sur $I$ et si $F'(x) = f(x)$ pour tout $x$ de $I$.</p>\n<p><strong>Toutes les primitives.</strong> Toute fonction polynôme admet des primitives sur $\\mathbb{R}$. Si $F$ en est une, les primitives de $f$ sont exactement les fonctions $F + c$, avec $c$ réel : deux primitives de $f$ diffèrent d'une constante.</p>\n<p><strong>Une condition fixe la constante.</strong> Pour $x_0$ et $y_0$ donnés, il existe une seule primitive $F$ de $f$ telle que $F(x_0) = y_0$.</p>\n<p><strong>Primitives usuelles</strong> (sur $\\mathbb{R}$, avec $n$ entier naturel) :</p>\n<ul>\n<li>$f(x) = k$ (constante) : $F(x) = kx + c$.</li>\n<li>$f(x) = x^n$ : $F(x) = \\frac{x^{n+1}}{n+1} + c$. Par exemple, $x$ a pour primitive $\\frac{x^2}{2}$ et $x^2$ a pour primitive $\\frac{x^3}{3}$.</li>\n</ul>\n<p><strong>Somme et multiple.</strong> Si $F$ et $G$ sont des primitives de $f$ et de $g$, alors $F + G$ est une primitive de $f + g$ et, pour $k$ réel, $kF$ est une primitive de $kf$. On cherche donc la primitive d'un polynôme terme par terme.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Déterminer les primitives de $f(x) = 6x^2 - 4x + 5$ sur $\\mathbb{R}$, puis la primitive $G$ telle que $G(1) = 4$.</strong></p>\n<ol>\n<li>Terme par terme : $6x^2$ a pour primitive $6 \\times \\frac{x^3}{3} = 2x^3$. Le terme $-4x$ a pour primitive $-4 \\times \\frac{x^2}{2} = -2x^2$. Le terme $5$ a pour primitive $5x$.</li>\n<li>Les primitives de $f$ sont donc $F(x) = 2x^3 - 2x^2 + 5x + c$, avec $c$ réel.</li>\n<li>Contrôle en dérivant : $F'(x) = 6x^2 - 4x + 5 = f(x)$. C'est bon.</li>\n<li>Condition $G(1) = 4$ : $2 - 2 + 5 + c = 4$, donc $5 + c = 4$ et $c = -1$.</li>\n<li>La primitive cherchée est $G(x) = 2x^3 - 2x^2 + 5x - 1$. Vérification : $G(1) = 2 - 2 + 5 - 1 = 4$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Oublier de diviser par le nouvel exposant : la primitive de $x^2$ est $\\frac{x^3}{3}$, pas $x^3$. Autre oubli fréquent : écrire une seule primitive sans la constante $c$ quand l'énoncé demande « les primitives ».</p>\n<p>Comment le repérer : dérive ton résultat. Si tu ne retrouves pas exactement $f$, ta primitive est fausse. Attention aussi : la primitive d'un produit n'est pas le produit des primitives. Pour $(x+1)(x-3)$, développe d'abord, puis cherche la primitive terme par terme.</p>\n<h2>En une phrase</h2>\n<p>Une primitive de $f$, c'est une fonction qu'on dérive pour retrouver $f$ (comme le compteur kilométrique dont la dérivée est la vitesse) ; on monte l'exposant de $1$, on divise par le nouvel exposant, et on garde $+ c$, la constante que seule une condition de départ peut fixer.</p>\n",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître une primitive",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $f$ une fonction définie sur un intervalle $I$. Que signifie « $F$ est une primitive de $f$ sur $I$ » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une primitive est une fonction qu'on dérive pour retrouver $f$ : $F$ dérivable et $F'(x) = f(x)$ sur $I$. Ne confonds pas les sens : dire $f' = F$, c'est dire que $F$ est la dérivée de $f$, pas sa primitive.",
+                  "answers": [
+                    {
+                      "content": "$F$ est dérivable sur $I$ et $F'(x) = f(x)$ pour tout $x$ de $I$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est dérivable sur $I$ et $f'(x) = F(x)$ pour tout $x$ de $I$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = f(x) + c$ pour un certain réel $c$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = x \\times f(x)$ pour tout $x$ de $I$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du gbaka, la vitesse joue le rôle de la fonction $f$ et le compteur kilométrique joue le rôle d'une primitive $F$ de $f$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. La dérivée de la distance affichée par le compteur kilométrique est la vitesse : $F' = f$. Le compteur kilométrique est donc une primitive de la vitesse. Attention : c'est une primitive parmi d'autres, car un autre gbaka peut afficher un kilométrage différent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $F$ une primitive de $f$ sur $\\mathbb{R}$. Laquelle de ces fonctions est aussi une primitive de $f$ sur $\\mathbb{R}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "En ajoutant un nombre fixe à $F$, on ne change pas la dérivée : $(F + 7)' = F' = f$. C'est le compteur du gbaka neuf ou vieux. Multiplier par 7 donne la dérivée $7f$, et $F'$ est la fonction $f$ elle-même, pas une primitive de $f$.",
+                  "answers": [
+                    {
+                      "content": "$F(x) + 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7F(x)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) \\times x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F'(x)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction polynôme n'a qu'une seule primitive.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Si $F$ est une primitive de $f$, alors $F + c$ en est une aussi pour tout réel $c$, car la dérivée d'une constante est $0$. Une fonction polynôme a donc une infinité de primitives : deux gbakas qui roulent pareil peuvent afficher des kilométrages différents.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces fonctions, lesquelles sont des primitives de $f(x) = 2x$ sur $\\mathbb{R}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "On dérive chaque proposition. $(x^2)' = 2x$ et $(x^2 + 5)' = 2x$ : les deux conviennent. Mais $(2x^2)' = 4x$ et $\\left(\\frac{x^2}{2}\\right)' = x$ ne donnent pas $2x$, et $(2)' = 0$. Piège : oublier que la constante ne change pas la dérivée.",
+                  "answers": [
+                    {
+                      "content": "$x^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{x^2}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi la vitesse d'un gbaka ne suffit-elle pas à retrouver son kilométrage ?",
+                  "question_type": "single_choice",
+                  "explanation": "Deux fonctions qui ne diffèrent que par une constante ont la même dérivée, car la dérivée d'une constante est nulle. La vitesse ne contient donc pas l'information sur le point de départ : il faut une condition, comme « le compteur marquait 12 au départ ».",
+                  "answers": [
+                    {
+                      "content": "Parce que la dérivée d'une constante est nulle : toutes les fonctions $F + c$ ont la même dérivée.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que la fonction vitesse n'a pas de primitive.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la constante $c$ vaut toujours $0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la vitesse est toujours mal mesurée.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer des primitives de polynômes",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle est une primitive de $f(x) = x^3$ sur $\\mathbb{R}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On monte l'exposant : $x^3$ devient $x^4$, puis on divise par le nouvel exposant $4$. Contrôle : $\\left(\\frac{x^4}{4}\\right)' = x^3$. Piège : $3x^2$ est la dérivée de $x^3$, pas une primitive ; et $\\frac{x^4}{3}$ divise par l'ancien exposant.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{x^4}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3x^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{x^4}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont toutes les primitives de la fonction constante $f(x) = 5$ sur $\\mathbb{R}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La dérivée de $5x$ est $5$, donc les primitives de $5$ sont les $5x + c$. Une fonction constante $5 + c$ a pour dérivée $0$, ce n'est pas une primitive de $5$. Quant à $\\frac{5x^2}{2}$, sa dérivée est $5x$.",
+                  "answers": [
+                    {
+                      "content": "$F(x) = 5x + c$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(x) = 5 + c$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = \\frac{5x^2}{2} + c$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = x + 5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est une primitive de $f(x) = 3x^2 - 4x + 1$ sur $\\mathbb{R}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Terme par terme : $3x^2 \\to x^3$, $-4x \\to -4 \\times \\frac{x^2}{2} = -2x^2$, $1 \\to x$. Contrôle : $(x^3 - 2x^2 + x)' = 3x^2 - 4x + 1$. Piège : oublier de diviser $-4x$ par $2$ donne $-4x^2$, et $6x - 4$ est la dérivée de $f$.",
+                  "answers": [
+                    {
+                      "content": "$x^3 - 2x^2 + x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6x - 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^3 - 4x^2 + x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^3 - 2x^2 + 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces fonctions, lesquelles sont des primitives de $f(x) = 4x^3 + 2x$ sur $\\mathbb{R}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$(x^4 + x^2)' = 4x^3 + 2x$ et ajouter $-3$ ne change pas la dérivée : ces deux fonctions conviennent. En revanche $(4x^4 + 2x^2)' = 16x^3 + 4x$, $\\left(\\frac{x^4}{4} + \\frac{x^2}{2}\\right)' = x^3 + x$, et $12x^2 + 2$ est la dérivée de $f$.",
+                  "answers": [
+                    {
+                      "content": "$x^4 + x^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^4 + x^2 - 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4x^4 + 2x^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{x^4}{4} + \\frac{x^2}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12x^2 + 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = 2x + 3$. Quelle est la primitive $F$ de $f$ sur $\\mathbb{R}$ telle que $F(0) = 5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les primitives sont $x^2 + 3x + c$. La condition $F(0) = 5$ donne $0 + 0 + c = 5$, donc $c = 5$. Piège : $x^2 + 3x$ vaut $0$ en $0$ (on a oublié la constante), et $x^2 + 3x - 5$ vaut $-5$ en $0$.",
+                  "answers": [
+                    {
+                      "content": "$F(x) = x^2 + 3x + 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(x) = x^2 + 3x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = x^2 + 3x - 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = 2x + 8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une primitive de $f(x) = x^2$ sur $\\mathbb{R}$ est la fonction $g(x) = x^3$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. La dérivée de $x^3$ est $3x^2$, pas $x^2$. Il faut diviser par le nouvel exposant : la primitive de $x^2$ est $\\frac{x^3}{3}$. Ce n'est pas monter l'exposant tout seul : sur l'escalier, on remonte d'une marche et on corrige le coefficient.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Primitives avec condition de départ",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = x^2 - 2x + 3$. Quelle est la primitive $F$ de $f$ sur $\\mathbb{R}$ qui s'annule en $x = 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les primitives sont $\\frac{x^3}{3} - x^2 + 3x + c$. En $3$ : $9 - 9 + 9 + c = 9 + c$. Pour que cela vaille $0$, il faut $c = -9$. Piège : prendre $c = +9$ donne $F(3) = 18$, et oublier $c$ donne $F(3) = 9$.",
+                  "answers": [
+                    {
+                      "content": "$F(x) = \\frac{x^3}{3} - x^2 + 3x - 9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(x) = \\frac{x^3}{3} - x^2 + 3x + 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = \\frac{x^3}{3} - x^2 + 3x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(x) = x^3 - x^2 + 3x - 9$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = 3x^2 + 2$ sur $\\mathbb{R}$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$(x^3 + 2x)' = 3x^2 + 2$ et $+10$ ne change pas la dérivée : les deux premières sont vraies, et deux primitives diffèrent toujours d'une constante. Faux : $6x$ est la dérivée de $f$, et $f$ a une infinité de primitives, pas une seule.",
+                  "answers": [
+                    {
+                      "content": "$x^3 + 2x$ est une primitive de $f$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^3 + 2x + 10$ est une primitive de $f$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux primitives de $f$ diffèrent toujours d'une constante.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6x$ est une primitive de $f$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ n'a qu'une seule primitive.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka roule sur une route droite. Sa vitesse, en km/h, est $v(t) = 6t + 30$ à l'instant $t$ (en heures). Son point kilométrique $D(t)$ vérifie $D' = v$. Au départ ($t = 0$) il est au point kilométrique $12$. Où est-il à $t = 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les primitives de $v$ sont $3t^2 + 30t + c$. La condition $D(0) = 12$ donne $c = 12$. Donc $D(2) = 12 + 60 + 12 = 84$. Piège : oublier la constante donne $72$, et $42$ est la vitesse $v(2)$, pas le point kilométrique.",
+                  "answers": [
+                    {
+                      "content": "Au point kilométrique $84$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Au point kilométrique $72$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au point kilométrique $42$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La primitive $F$ de $f(x) = 4x + 1$ sur $\\mathbb{R}$ telle que $F(1) = 3$ est $F(x) = 2x^2 + x + 1$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Les primitives sont $2x^2 + x + c$. La condition $F(1) = 3$ donne $2 + 1 + c = 3$, donc $c = 0$ : $F(x) = 2x^2 + x$. Avec $+1$, on trouve $F(1) = 4$. Piège : recopier le $+1$ de $f$ comme si c'était la constante.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est une primitive de $f(x) = (x + 1)(x - 3)$ sur $\\mathbb{R}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On développe : $f(x) = x^2 - 2x - 3$. Terme par terme, une primitive est $\\frac{x^3}{3} - x^2 - 3x$. Piège : la primitive d'un produit n'est pas le produit des primitives ; $2x - 2$ est la dérivée de $f$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{x^3}{3} - x^2 - 3x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\left(\\frac{x^2}{2} + x\\right)\\left(\\frac{x^2}{2} - 3x\\right)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x - 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{x^3}{3} - 2x^2 - 3x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^2 - 4x + 4$. Quelles fonctions sont des primitives de $f$ sur $\\mathbb{R}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\left(\\frac{x^3}{3} - 2x^2 + 4x\\right)' = x^2 - 4x + 4$, et ajouter $1$ ne change pas la dérivée. Les autres échouent : $-4x^2$ vient d'une division oubliée, $2x - 4$ est la dérivée de $f$, et $x^3$ au lieu de $\\frac{x^3}{3}$ oublie de diviser.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{x^3}{3} - 2x^2 + 4x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{x^3}{3} - 2x^2 + 4x + 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{x^3}{3} - 4x^2 + 4x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x - 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^3 - 2x^2 + 4x$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Calculer une intégrale à l'aide d'une primitive",
+          "subtitle": "Borne du haut moins borne du bas avec la notation crochet",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer une intégrale d'une fonction polynôme à l'aide d'une primitive.</li>\n<li>Utiliser la notation crochet $\\left[ F(x) \\right]_a^b$ et ses étapes.</li>\n<li>Expliquer pourquoi la constante $c$ disparaît dans le calcul.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>Le compteur kilométrique du gbaka.</strong> Un gbaka part de la gare d'Adjamé à 9 h. Tu lis son compteur kilométrique à 9 h : il affiche 120 km. Tu le relis à 11 h : il affiche 200 km. Pour savoir combien de kilomètres le gbaka a parcourus entre 9 h et 11 h, tu soustrais : $200 - 120 = 80$ km. Peu importe que le compteur affiche 120 ou 5 120 à 9 h : la différence reste la même, car les deux lectures contiennent le même kilométrage de départ.</p>\n<p><em>Le pont.</em> La vitesse du gbaka, c'est la fonction $f$. Le compteur kilométrique, c'est une primitive $F$ de $f$. La distance parcourue entre $a$ et $b$ (ici 9 h et 11 h), c'est le nombre $F(b) - F(a)$ : on l'appelle l'<strong>intégrale de $f$ de $a$ à $b$</strong>. Le kilométrage de départ, c'est la constante $c$ : elle apparaît dans $F(b)$ et dans $F(a)$, donc elle s'annule dans la soustraction.</p>\n<p><em>Où l'image s'arrête.</em> Le gbaka ne recule jamais, donc sa distance parcourue est un nombre positif. En mathématiques, le calcul $F(b) - F(a)$ fonctionne aussi quand la fonction prend des valeurs négatives, et le résultat peut alors être négatif : ce n'est plus une distance.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Intégrale.</strong> Soit $f$ une fonction continue sur un intervalle $I$ (c'est le cas d'une fonction polynôme sur $\\mathbb{R}$), soient $a$ et $b$ deux réels de $I$, et $F$ une primitive de $f$ sur $I$. L'<strong>intégrale de $a$ à $b$</strong> de $f$ est le nombre $$\\int_a^b f(x)\\,dx = \\left[ F(x) \\right]_a^b = F(b) - F(a).$$</p>\n<p>Les nombres $a$ et $b$ sont les <strong>bornes</strong> de l'intégrale. Le résultat ne dépend pas de la primitive choisie, car $(F(b) + c) - (F(a) + c) = F(b) - F(a)$.</p>\n<p>La lettre $x$ est « muette » : $\\int_a^b f(x)\\,dx = \\int_a^b f(t)\\,dt$.</p>\n<p><strong>Méthode en trois étapes.</strong></p>\n<ul>\n<li>Trouver une primitive $F$ de $f$ (inutile d'écrire $+ c$).</li>\n<li>Calculer $F(b)$ et $F(a)$, en mettant des parenthèses quand une valeur est négative.</li>\n<li>Soustraire : $F(b) - F(a)$.</li>\n</ul>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Calculer $\\displaystyle\\int_1^3 (2x + 1)\\,dx$.</strong></p>\n<ol>\n<li>Une primitive de $2x + 1$ est $F(x) = x^2 + x$.</li>\n<li>$F(3) = 9 + 3 = 12$ et $F(1) = 1 + 1 = 2$.</li>\n<li>$\\displaystyle\\int_1^3 (2x + 1)\\,dx = F(3) - F(1) = 12 - 2 = 10$.</li>\n</ol>\n<p><strong>Calculer $\\displaystyle\\int_{-1}^{2} x^2\\,dx$.</strong></p>\n<ol>\n<li>Une primitive de $x^2$ est $F(x) = \\frac{x^3}{3}$.</li>\n<li>$F(2) = \\frac{8}{3}$ et $F(-1) = \\frac{(-1)^3}{3} = -\\frac{1}{3}$.</li>\n<li>$\\displaystyle\\int_{-1}^{2} x^2\\,dx = \\frac{8}{3} - \\left(-\\frac{1}{3}\\right) = \\frac{8}{3} + \\frac{1}{3} = \\frac{9}{3} = 3$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Oublier de soustraire $F(a)$, ou soustraire dans le mauvais sens. Le calcul est toujours « valeur à la borne du haut moins valeur à la borne du bas » : $F(b) - F(a)$, jamais $F(a) - F(b)$.</p>\n<p>Autre piège : un signe perdu quand une borne est négative. Dans l'exemple précédent, $-\\left(-\\frac{1}{3}\\right)$ devient $+\\frac{1}{3}$. Pour le repérer, écris toujours $F(a)$ entre parenthèses avant de soustraire.</p>\n<p>Enfin, ne confonds pas l'intégrale avec la valeur de $f$ à la borne : $\\int_0^2 3x^2\\,dx$ vaut $8$, alors que $f(2) = 12$.</p>\n<h2>En une phrase</h2>\n<p>Calculer $\\int_a^b f(x)\\,dx$, c'est relever le compteur au départ et à l'arrivée : on cherche une primitive $F$ de $f$, puis on calcule $F(b) - F(a)$, et la constante s'annule.</p>\n",
+          "exercises": [
+            {
+              "title": "Comprendre — Le sens de l'intégrale et de la notation crochet",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $f$ une fonction continue, $F$ une primitive de $f$, et $a$, $b$ deux réels. Comment calcule-t-on $\\displaystyle\\int_a^b f(x)\\,dx$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'intégrale est la différence entre la lecture du compteur à l'arrivée et celle du départ : $F(b) - F(a)$, borne du haut moins borne du bas. Piège : $F(a) - F(b)$ change le signe, et $f(b) - f(a)$ utilise $f$ au lieu de sa primitive $F$.",
+                  "answers": [
+                    {
+                      "content": "$F(b) - F(a)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(a) - F(b)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(b) + F(a)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(b) - f(a)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du gbaka, la distance parcourue entre 9 h et 11 h ne dépend pas du kilométrage que le compteur affichait au départ.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Le kilométrage de départ est la constante $c$. Elle figure dans la lecture de 11 h et dans celle de 9 h, donc elle disparaît dans la soustraction $F(b) - F(a)$. Que le compteur marque 120 ou 5 120 à 9 h, la distance parcourue est la même.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi peut-on choisir n'importe quelle primitive de $f$ pour calculer $\\displaystyle\\int_a^b f(x)\\,dx$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Deux primitives de $f$ diffèrent d'une constante $c$. Dans $(F(b) + c) - (F(a) + c)$, cette constante s'annule : le résultat est le même. Piège : une fonction a une infinité de primitives, et personne n'impose $F(a) = 0$.",
+                  "answers": [
+                    {
+                      "content": "Parce que la constante $c$ s'annule dans la soustraction $F(b) - F(a)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce qu'une fonction n'a qu'une seule primitive.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce qu'on impose toujours $F(a) = 0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la valeur de $F(b)$ est toujours égale à $0$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les écritures $\\displaystyle\\int_1^3 x^2\\,dx$ et $\\displaystyle\\int_1^3 t^2\\,dt$ désignent le même nombre.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. La lettre sous l'intégrale est muette : $x$ ou $t$, c'est la même fonction « carré » intégrée entre $1$ et $3$. Les bornes $1$ et $3$ fixent la valeur, pas le nom de la variable.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f$ continue et $F$ une primitive de $f$. Quelles écritures désignent le même nombre que $\\displaystyle\\int_a^b f(x)\\,dx$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "L'intégrale s'écrit $\\left[F(x)\\right]_a^b$, ce qui se lit « $F(b)$ moins $F(a)$ ». En changeant l'ordre ($F(a) - F(b)$) on obtient l'opposé, et additionner ou soustraire les valeurs de $f$ ne tient pas compte de la primitive.",
+                  "answers": [
+                    {
+                      "content": "$\\left[F(x)\\right]_a^b$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(b) - F(a)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(a) - F(b)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(b) + F(a)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(b) - f(a)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le compteur kilométrique d'un gbaka affiche $120$ km à 9 h et $200$ km à 11 h. Quelle distance a-t-il parcourue entre 9 h et 11 h ?",
+                  "question_type": "single_choice",
+                  "explanation": "La distance parcourue est la différence des deux lectures : $200 - 120 = 80$ km. C'est le calcul $F(b) - F(a)$ de l'intégrale. Piège : $200$ est une lecture du compteur (valeur de $F$), pas la distance parcourue pendant ces deux heures.",
+                  "answers": [
+                    {
+                      "content": "$80$ km",
+                      "correct": true
+                    },
+                    {
+                      "content": "$320$ km",
+                      "correct": false
+                    },
+                    {
+                      "content": "$200$ km",
+                      "correct": false
+                    },
+                    {
+                      "content": "$120$ km",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer des intégrales de polynômes",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Calculer $\\displaystyle\\int_0^2 3x^2\\,dx$.",
+                  "question_type": "single_choice",
+                  "explanation": "Une primitive de $3x^2$ est $x^3$. Donc $[x^3]_0^2 = 2^3 - 0^3 = 8$. Piège : $12$ est la valeur de $3x^2$ en $x = 2$ ; ce n'est pas l'intégrale. Il faut passer par la primitive puis soustraire.",
+                  "answers": [
+                    {
+                      "content": "$8$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calculer $\\displaystyle\\int_1^4 2x\\,dx$.",
+                  "question_type": "single_choice",
+                  "explanation": "Une primitive de $2x$ est $x^2$. Donc $[x^2]_1^4 = 16 - 1 = 15$. Piège : $16$ oublie de soustraire $F(1) = 1$, et $17$ additionne au lieu de soustraire.",
+                  "answers": [
+                    {
+                      "content": "$15$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$16$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$17$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calculer $\\displaystyle\\int_0^3 (x + 2)\\,dx$.",
+                  "question_type": "single_choice",
+                  "explanation": "Une primitive de $x + 2$ est $\\frac{x^2}{2} + 2x$. En $3$ : $\\frac{9}{2} + 6 = \\frac{21}{2}$. En $0$ : $0$. Donc l'intégrale vaut $\\frac{21}{2}$. Piège : prendre $x^2 + 2x$ (sans diviser par $2$) donne $15$, et $5$ est la valeur de $f(3)$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{21}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$15$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{9}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calculer $\\displaystyle\\int_{-1}^{2} x^2\\,dx$.",
+                  "question_type": "single_choice",
+                  "explanation": "$\\left[\\frac{x^3}{3}\\right]_{-1}^{2} = \\frac{8}{3} - \\left(-\\frac{1}{3}\\right) = \\frac{9}{3} = 3$. Piège : écrire $\\frac{8}{3} - \\frac{1}{3} = \\frac{7}{3}$ oublie que $F(-1)$ est négatif ; et $\\frac{8}{3}$ oublie de soustraire $F(-1)$.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{7}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{8}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calculer $\\displaystyle\\int_2^5 7\\,dx$.",
+                  "question_type": "single_choice",
+                  "explanation": "Une primitive de la constante $7$ est $7x$. Donc $[7x]_2^5 = 35 - 14 = 21$. Piège : $35$ oublie de soustraire $F(2) = 14$, et $7$ est la valeur de la fonction constante.",
+                  "answers": [
+                    {
+                      "content": "$21$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$35$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$49$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquelles de ces intégrales valent $4$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\int_0^2 2x\\,dx = [x^2]_0^2 = 4$ et $\\int_0^1 4\\,dx = [4x]_0^1 = 4$. Les autres : $\\int_0^2 x^2\\,dx = \\frac{8}{3}$, $\\int_0^2 3x^2\\,dx = 8$ et $\\int_1^2 4x\\,dx = [2x^2]_1^2 = 6$. Piège : confondre la borne et le résultat.",
+                  "answers": [
+                    {
+                      "content": "$\\displaystyle\\int_0^2 2x\\,dx$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_0^1 4\\,dx$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_0^2 x^2\\,dx$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_0^2 3x^2\\,dx$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_1^2 4x\\,dx$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Intégrales à plusieurs étapes",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Calculer $\\displaystyle\\int_0^2 (3x^2 - 4x + 5)\\,dx$.",
+                  "question_type": "single_choice",
+                  "explanation": "Une primitive est $F(x) = x^3 - 2x^2 + 5x$. Alors $F(2) = 8 - 8 + 10 = 10$ et $F(0) = 0$. L'intégrale vaut $10$. Piège : $9$ est la valeur de $f(2)$ ; et $26$ vient d'une primitive fausse $3x^3 - 2x^2 + 5x$ (primitive de $3x^2$ non divisée).",
+                  "answers": [
+                    {
+                      "content": "$10$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$26$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calculer $\\displaystyle\\int_{-2}^{1} (x^2 + 1)\\,dx$.",
+                  "question_type": "single_choice",
+                  "explanation": "Une primitive est $\\frac{x^3}{3} + x$. En $1$ : $\\frac{4}{3}$. En $-2$ : $-\\frac{8}{3} - 2 = -\\frac{14}{3}$. Donc $\\frac{4}{3} + \\frac{14}{3} = \\frac{18}{3} = 6$. Piège : additionner $F(1)$ et $F(-2)$ donne $-\\frac{10}{3}$ ; oublier $F(-2)$ donne $\\frac{4}{3}$.",
+                  "answers": [
+                    {
+                      "content": "$6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\frac{10}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{4}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{14}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La vitesse d'un gbaka, en km/h, est $v(t) = 12t + 20$ à l'instant $t$ (en heures). Quelle distance parcourt-il entre $t = 1$ et $t = 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La distance est $\\int_1^2 (12t + 20)\\,dt = [6t^2 + 20t]_1^2 = (24 + 40) - (6 + 20) = 64 - 26 = 38$ km. Piège : $44$ est la vitesse $v(2)$, et $64$ est la distance parcourue depuis $t = 0$ (on a oublié de retrancher $F(1)$).",
+                  "answers": [
+                    {
+                      "content": "$38$ km",
+                      "correct": true
+                    },
+                    {
+                      "content": "$44$ km",
+                      "correct": false
+                    },
+                    {
+                      "content": "$64$ km",
+                      "correct": false
+                    },
+                    {
+                      "content": "$32$ km",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour calculer $\\displaystyle\\int_1^3 (4x - 1)\\,dx$, on prend la primitive $F(x) = 2x^2 - x$ et on obtient $F(3) = 15$, donc l'intégrale vaut $15$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. On a bien $F(3) = 18 - 3 = 15$, mais il faut soustraire $F(1) = 2 - 1 = 1$. L'intégrale vaut $15 - 1 = 14$. L'erreur classique est de s'arrêter à la borne du haut : le compteur du départ doit aussi être relevé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $a > 0$ tel que $\\displaystyle\\int_0^a 2x\\,dx = 9$. Que vaut $a$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une primitive de $2x$ est $x^2$, donc $\\int_0^a 2x\\,dx = a^2 - 0 = a^2$. L'équation $a^2 = 9$ avec $a > 0$ donne $a = 3$. Piège : $\\frac{9}{2}$ vient de $2a = 9$, qui revient à dériver au lieu de chercher une primitive.",
+                  "answers": [
+                    {
+                      "content": "$a = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a = \\frac{9}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 81$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = 3x^2 - 3$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$F(x) = x^3 - 3x$ est une primitive de $f$. Alors $F(2) - F(0) = 2 - 0 = 2$. Ajouter $4$ ne change pas la différence : $G(x) = x^3 - 3x + 4$ donne aussi $2$. Faux : $9$ est la valeur de $f(2)$, et $F(0) - F(2) = -2$ inverse les bornes.",
+                  "answers": [
+                    {
+                      "content": "$F(x) = x^3 - 3x$ est une primitive de $f$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_0^2 f(x)\\,dx = 2$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Avec $G(x) = x^3 - 3x + 4$, on obtient le même résultat pour $\\displaystyle\\int_0^2 f(x)\\,dx$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_0^2 f(x)\\,dx = 9$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_0^2 f(x)\\,dx = F(0) - F(2) = -2$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Intégrale et aire sous une courbe",
+          "subtitle": "Calculer une aire en unités d'aire, puis en cm² ou en m²",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Interpréter l'intégrale d'une fonction positive comme une aire en unités d'aire.</li>\n<li>Calculer l'aire sous une courbe avec une primitive.</li>\n<li>Convertir une aire de « unités d'aire » en cm² ou en m².</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le graphique du gbaka (l'aire sous la courbe).</strong> Un gbaka roule à 40 km/h, sans changer de vitesse, pendant 3 heures. Dessine sa vitesse en fonction du temps : tu obtiens une barre horizontale à la hauteur 40, de l'heure 0 à l'heure 3. Le rectangle entre cette barre et l'axe horizontal a pour largeur 3 et pour hauteur 40. Son aire est $3 \\times 40 = 120$, et c'est exactement la distance parcourue : 120 km. Si la vitesse varie, la courbe n'est plus plate, mais le dessin garde le même sens : la surface sous la courbe donne la distance.</p>\n<p><em>Le pont.</em> La vitesse, c'est la fonction $f$, qui reste positive (le gbaka avance). L'axe horizontal, c'est le temps $x$. Les heures 0 et 3, ce sont les bornes $a$ et $b$. La surface sous la courbe, de $a$ à $b$, c'est le domaine dont l'aire vaut $\\int_a^b f(x)\\,dx$.</p>\n<p><em>Où l'image s'arrête.</em> Ici, l'aire est une distance en kilomètres, parce que le graphique est vitesse contre temps. Pour un autre graphique, l'aire a une autre signification. Et cette image ne marche que si la courbe reste au-dessus de l'axe horizontal.</p>\n<p><strong>2. Le carrelage de la salle de classe (l'unité d'aire).</strong> Pour mesurer la surface d'un sol, on compte les carreaux : le sol fait 50 carreaux. Si chaque carreau fait 20 cm sur 20 cm, soit 400 cm², l'aire du sol est $50 \\times 400 = 20\\,000$ cm². Le nombre de carreaux ne dit pas encore une aire en cm² : il faut connaître la taille d'un carreau.</p>\n<p><em>Le pont.</em> Le carreau, c'est l'<strong>unité d'aire</strong> (notée u.a.), c'est-à-dire l'aire du rectangle construit sur $OI$ et $OJ$ dans le repère. Le nombre de carreaux, c'est l'intégrale. Pour obtenir des cm², on multiplie le nombre d'unités d'aire par l'aire d'un carreau.</p>\n<p><em>Où l'image s'arrête.</em> Sous une courbe, les carreaux ne tombent pas pile : on ne compte pas, on calcule l'intégrale, qui donne le nombre exact d'unités d'aire, fractions comprises.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Aire sous une courbe.</strong> Soit $f$ une fonction continue et <strong>positive</strong> sur un intervalle $[a ; b]$ (avec $a \\le b$), et $\\mathcal{C}$ sa courbe dans un repère orthogonal $(O ; I, J)$. L'aire du domaine délimité par $\\mathcal{C}$, l'axe des abscisses et les droites d'équations $x = a$ et $x = b$ est, en unités d'aire, $$\\int_a^b f(x)\\,dx.$$</p>\n<p><strong>Unité d'aire.</strong> Une unité d'aire (u.a.) est l'aire du rectangle de côtés $OI$ et $OJ$. Si $OI = 2$ cm et $OJ = 1$ cm, alors $1$ u.a. $= 2$ cm². Pour passer aux cm² : aire en cm² = (nombre d'u.a.) $\\times$ ($OI \\times OJ$).</p>\n<p><strong>Résultat positif.</strong> Si $f$ est positive sur $[a ; b]$, alors $\\int_a^b f(x)\\,dx \\ge 0$. Si ton calcul donne un nombre négatif pour une fonction positive, il contient une erreur.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Soit $f(x) = x^2 + 1$. Calculer l'aire du domaine sous la courbe entre $x = 0$ et $x = 3$, avec $OI = 2$ cm et $OJ = 1$ cm.</strong></p>\n<ol>\n<li>$f$ est positive sur $[0 ; 3]$, car $x^2 + 1 \\ge 1$. On peut donc utiliser l'intégrale.</li>\n<li>Une primitive de $f$ est $F(x) = \\frac{x^3}{3} + x$.</li>\n<li>$\\displaystyle\\int_0^3 (x^2 + 1)\\,dx = F(3) - F(0) = (9 + 3) - 0 = 12$. L'aire vaut $12$ u.a.</li>\n<li>Une unité d'aire vaut $2 \\times 1 = 2$ cm². L'aire vaut donc $12 \\times 2 = 24$ cm².</li>\n</ol>\n<p><strong>Contrôle par la géométrie.</strong> Soit $g(x) = x$ sur $[0 ; 4]$. Le domaine est un triangle rectangle de côtés $4$ et $4$ : son aire est $\\frac{4 \\times 4}{2} = 8$ u.a. Avec une primitive : $\\left[\\frac{x^2}{2}\\right]_0^4 = 8 - 0 = 8$. Les deux méthodes donnent le même nombre.</p>\n<h2>Le piège à éviter</h2>\n<p>Donner l'intégrale comme si c'était déjà des cm² : le résultat est en unités d'aire, et il faut encore multiplier par l'aire d'une unité ($OI \\times OJ$).</p>\n<p>Autre piège : appliquer la formule à une fonction qui n'est pas positive sur l'intervalle. Vérifie toujours le signe de $f$ sur $[a ; b]$ avant de parler d'aire. Enfin, ne confonds pas l'aire avec la valeur de $f$ à la borne : l'aire sous $2x$ entre $0$ et $3$ vaut $9$ u.a., alors que $f(3) = 6$.</p>\n<h2>En une phrase</h2>\n<p>Pour une fonction continue et positive, l'intégrale de $a$ à $b$ est l'aire du domaine sous la courbe, comptée en unités d'aire ; on la calcule avec une primitive, puis on multiplie par $OI \\times OJ$ pour avoir des cm² ou des m².</p>\n",
+          "exercises": [
+            {
+              "title": "Comprendre — Le lien entre intégrale et aire",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $f$ continue et positive sur $[a ; b]$ avec $a < b$. Que représente $\\displaystyle\\int_a^b f(x)\\,dx$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour une fonction positive, l'intégrale est l'aire du domaine sous la courbe, entre l'axe des abscisses et les droites $x = a$ et $x = b$, en unités d'aire. Piège : $f(b) - f(a)$ est la variation de $f$, et non l'aire du domaine.",
+                  "answers": [
+                    {
+                      "content": "L'aire, en unités d'aire, du domaine situé sous la courbe de $f$, entre $x = a$ et $x = b$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La longueur de la courbe de $f$ entre $x = a$ et $x = b$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La variation $f(b) - f(a)$ de la fonction.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La pente de la tangente à la courbe en $x = a$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka roule à 40 km/h pendant 3 heures. Sur le graphique de sa vitesse, l'aire du rectangle sous la courbe vaut $3 \\times 40 = 120$ et représente la distance parcourue en kilomètres.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Largeur 3 (heures) fois hauteur 40 (km/h) donne 120 : des kilomètres. C'est l'idée de l'intégrale : l'aire sous la courbe de la vitesse est la distance parcourue. Cela reste vrai si la vitesse varie, tant qu'elle est positive.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que désigne une unité d'aire dans un repère orthogonal $(O ; I, J)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "C'est l'aire du rectangle de côtés $OI$ et $OJ$, comme le carreau du carrelage. Elle dépend du repère : si $OI = 3$ cm et $OJ = 2$ cm, elle vaut $6$ cm². Piège : ce n'est pas toujours $1$ cm², et $OI$ seul est une longueur, pas une aire.",
+                  "answers": [
+                    {
+                      "content": "L'aire du rectangle de côtés $OI$ et $OJ$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La longueur du segment $OI$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'aire d'un carré de $1$ cm de côté, quel que soit le repère.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'aire sous la courbe de $f$ entre $x = 0$ et $x = 2$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une fonction $f$ positive sur $[a ; b]$, l'intégrale $\\displaystyle\\int_a^b f(x)\\,dx$ peut être un nombre négatif.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Une aire ne peut pas être négative : si $f$ est positive sur $[a ; b]$, l'intégrale est positive ou nulle. Un résultat négatif pour une fonction positive signale une erreur de calcul, comme un signe perdu ou une soustraction à l'envers.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour que $\\displaystyle\\int_a^b f(x)\\,dx$ soit l'aire du domaine sous la courbe de $f$ (avec $a < b$), quelles conditions faut-il ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Il faut que $f$ soit continue sur $[a ; b]$ et positive sur $[a ; b]$ : la courbe ne doit ni avoir de saut, ni passer sous l'axe des abscisses. Une fonction croissante, qui s'annule aux bornes, ou du second degré n'est pas une condition nécessaire.",
+                  "answers": [
+                    {
+                      "content": "$f$ est continue sur $[a ; b]$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est positive sur $[a ; b]$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est croissante sur $[a ; b]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ s'annule en $a$ et en $b$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est une fonction du second degré.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $OI = 3$ cm et $OJ = 2$ cm. Quelle est l'aire d'une unité d'aire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une unité d'aire est l'aire du rectangle de côtés $OI$ et $OJ$ : $3 \\times 2 = 6$ cm². Piège : $3 + 2 = 5$ additionne au lieu de multiplier, et $6$ cm (sans le carré) donne une longueur au lieu d'une aire.",
+                  "answers": [
+                    {
+                      "content": "$6$ cm²",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$ cm",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer des aires sous une courbe",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Calculer l'aire, en unités d'aire, du domaine sous la courbe de $f(x) = 2x$ entre $x = 0$ et $x = 3$.",
+                  "question_type": "single_choice",
+                  "explanation": "$f$ est positive sur $[0 ; 3]$ et une primitive est $x^2$. L'aire vaut $[x^2]_0^3 = 9 - 0 = 9$ u.a. Piège : $6$ est la valeur $f(3)$, c'est-à-dire la hauteur de la courbe au bord, et non l'aire.",
+                  "answers": [
+                    {
+                      "content": "$9$ u.a.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6$ u.a.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$ u.a.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$18$ u.a.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calculer l'aire, en unités d'aire, du domaine sous la courbe de $f(x) = x^2$ entre $x = 0$ et $x = 2$.",
+                  "question_type": "single_choice",
+                  "explanation": "Une primitive de $x^2$ est $\\frac{x^3}{3}$, donc l'aire vaut $\\left[\\frac{x^3}{3}\\right]_0^2 = \\frac{8}{3}$ u.a. Piège : $4$ est la valeur de $f(2)$ ; et $8$ vient de $x^3$ non divisé par $3$ (on a oublié de corriger l'exposant).",
+                  "answers": [
+                    {
+                      "content": "$\\frac{8}{3}$ u.a.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$ u.a.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8$ u.a.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{3}$ u.a.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calculer l'aire, en unités d'aire, du domaine sous la courbe de la fonction constante $f(x) = 4$ entre $x = 1$ et $x = 6$.",
+                  "question_type": "single_choice",
+                  "explanation": "Le domaine est un rectangle de largeur $6 - 1 = 5$ et de hauteur $4$ : aire $20$ u.a. Avec l'intégrale : $[4x]_1^6 = 24 - 4 = 20$. Piège : $24$ oublie de retrancher $F(1) = 4$, et $4$ est la hauteur du rectangle.",
+                  "answers": [
+                    {
+                      "content": "$20$ u.a.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$24$ u.a.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$ u.a.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10$ u.a.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calculer l'aire, en unités d'aire, du domaine sous la courbe de $f(x) = 3x^2 + 1$ entre $x = 0$ et $x = 2$.",
+                  "question_type": "single_choice",
+                  "explanation": "Une primitive de $3x^2 + 1$ est $x^3 + x$. L'aire vaut $F(2) - F(0) = (8 + 2) - 0 = 10$ u.a. Piège : $13$ est la valeur de $f(2)$, et $8$ oublie le terme $x$ de la primitive.",
+                  "answers": [
+                    {
+                      "content": "$10$ u.a.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$13$ u.a.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8$ u.a.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$ u.a.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^2 + 1$. Dans un repère où $OI = 2$ cm et $OJ = 1$ cm, quelle est l'aire en cm² du domaine sous la courbe de $f$ entre $x = 0$ et $x = 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'intégrale donne $\\left[\\frac{x^3}{3} + x\\right]_0^3 = 12$ u.a. Une unité d'aire vaut $2 \\times 1 = 2$ cm², donc l'aire est $12 \\times 2 = 24$ cm². Piège : $12$ cm² oublie de convertir les unités d'aire, et $36$ vient de $OI + OJ = 3$ au lieu de $OI \\times OJ$.",
+                  "answers": [
+                    {
+                      "content": "$24$ cm²",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$36$ cm²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$14$ cm²",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On cherche l'aire en unités d'aire du domaine sous la droite d'équation $y = x$ entre $x = 0$ et $x = 4$. Quelles méthodes donnent le bon résultat ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Le domaine est un triangle rectangle de côtés $4$ et $4$ : aire $\\frac{4 \\times 4}{2} = 8$. L'intégrale donne $\\left[\\frac{x^2}{2}\\right]_0^4 = 8$. Piège : $[x^2]_0^4 = 16$ oublie de diviser par $2$, et $16$ est l'aire du carré, pas du triangle.",
+                  "answers": [
+                    {
+                      "content": "Calculer $\\left[\\frac{x^2}{2}\\right]_0^4 = 8$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Calculer l'aire du triangle rectangle : $\\frac{4 \\times 4}{2} = 8$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Calculer l'aire du carré de côté $4$ : $4 \\times 4 = 16$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Calculer $[x^2]_0^4 = 16$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Prendre $f(4) = 4$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Aires en situation",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = -x^2 + 4$ sur $[0 ; 2]$. La fonction $f$ est positive sur cet intervalle. Quelle est l'aire, en unités d'aire, du domaine sous la courbe de $f$ entre $x = 0$ et $x = 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une primitive de $-x^2 + 4$ est $-\\frac{x^3}{3} + 4x$. L'aire vaut $-\\frac{8}{3} + 8 = \\frac{16}{3}$ u.a. Piège : $\\frac{32}{3}$ vient d'un signe oublié devant $\\frac{x^3}{3}$, et $8$ oublie le terme $-x^2$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{16}{3}$ u.a.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{32}{3}$ u.a.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8$ u.a.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{8}{3}$ u.a.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur le graphique de sa vitesse, un gbaka a, pour $t$ en heures compris entre $0$ et $3$, une vitesse $v(t) = 2t + 10$ km/h. Quelle distance parcourt-il entre $t = 0$ et $t = 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La distance est l'aire sous la courbe : $\\int_0^3 (2t + 10)\\,dt = [t^2 + 10t]_0^3 = 9 + 30 = 39$ km. Contrôle : vitesse moyenne $\\frac{10 + 16}{2} = 13$ km/h pendant $3$ h, soit $39$ km. Piège : $30$ et $48$ utilisent une vitesse constante.",
+                  "answers": [
+                    {
+                      "content": "$39$ km",
+                      "correct": true
+                    },
+                    {
+                      "content": "$30$ km",
+                      "correct": false
+                    },
+                    {
+                      "content": "$48$ km",
+                      "correct": false
+                    },
+                    {
+                      "content": "$16$ km",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x + 1$ sur $[0 ; 2]$, avec $OI = OJ = 1$ cm. On étudie l'aire du domaine sous la courbe de $f$ entre $x = 0$ et $x = 2$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$f$ est positive sur $[0 ; 2]$. L'aire vaut $\\left[\\frac{x^2}{2} + x\\right]_0^2 = 2 + 2 = 4$ u.a. ; c'est aussi le trapèze : $\\frac{(1 + 3)}{2} \\times 2 = 4$. Comme $1$ u.a. $= 1$ cm², l'aire est $4$ cm², pas $8$. Piège : $3$ est seulement $f(2)$.",
+                  "answers": [
+                    {
+                      "content": "$f$ est positive sur $[0 ; 2]$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'aire vaut $4$ unités d'aire.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'aire est celle du trapèze de bases $1$ et $3$ et de hauteur $2$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'aire vaut $3$ unités d'aire.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'aire vaut $8$ cm².",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^2 - 4$ sur $[0 ; 1]$. Le calcul donne $\\displaystyle\\int_0^1 (x^2 - 4)\\,dx = -\\frac{11}{3}$, donc l'aire du domaine sous la courbe est $-\\frac{11}{3}$ unité d'aire.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Le calcul de l'intégrale est juste, mais $f$ est négative sur $[0 ; 1]$ (par exemple $f(0) = -4$) : la courbe est sous l'axe des abscisses et la formule « aire = intégrale » ne s'applique pas. Une aire n'est jamais négative.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $k > 0$ tel que l'aire du domaine sous la courbe de $f(x) = 3x^2$ entre $x = 0$ et $x = k$ vaut $8$ u.a. Que vaut $k$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'aire vaut $[x^3]_0^k = k^3$. L'équation $k^3 = 8$ donne $k = 2$. Piège : $4$ vient de $\\frac{8}{2}$ et $\\frac{8}{3}$ de $3k^2 = 8$, qui revient à confondre $f$ et sa primitive.",
+                  "answers": [
+                    {
+                      "content": "$k = 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$k = 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$k = \\frac{8}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$k = 8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un champ est limité par l'axe des abscisses, les droites $x = 0$ et $x = 3$, et la courbe de $f(x) = x^2 + 2$. Sur chaque axe, une unité de longueur représente $10$ m. Quelle est l'aire du champ ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'intégrale donne $\\left[\\frac{x^3}{3} + 2x\\right]_0^3 = 9 + 6 = 15$ u.a. Une unité d'aire vaut $10 \\times 10 = 100$ m², donc $15 \\times 100 = 1\\,500$ m². Piège : $150$ m² multiplie par $10$ (une longueur) au lieu de $100$ (une aire).",
+                  "answers": [
+                    {
+                      "content": "$1\\,500$ m²",
+                      "correct": true
+                    },
+                    {
+                      "content": "$150$ m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15$ m²",
+                      "correct": false
+                    },
+                    {
+                      "content": "$300$ m²",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Propriétés de l'intégrale",
+          "subtitle": "Découper, additionner, multiplier. À compléter : aire entre deux courbes, valeur moyenne, fonctions rationnelles",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Découper une intégrale en deux avec la relation de Chasles.</li>\n<li>Utiliser la linéarité : intégrale d'une somme et d'un multiple.</li>\n<li>Échanger les bornes d'une intégrale en changeant le signe.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le voyage Abidjan–Bouaké avec un arrêt (la relation de Chasles).</strong> Un gbaka part d'Abidjan à 6 h. Il s'arrête à Yamoussoukro à 8 h, puis repart jusqu'à Bouaké où il arrive à 10 h. La distance parcourue entre 6 h et 10 h est la somme de deux étapes : la distance entre 6 h et 8 h, plus la distance entre 8 h et 10 h. L'arrêt à Yamoussoukro coupe le voyage en deux sans rien changer au total.</p>\n<p><em>Le pont.</em> Le voyage entier va de $a$ à $b$. L'arrêt, c'est le réel $c$ entre les deux. On a : $\\int_a^b f = \\int_a^c f + \\int_c^b f$. La fin de la première étape est le début de la seconde : le même $c$ revient.</p>\n<p><em>Où l'image s'arrête.</em> En mathématiques, on peut couper en n'importe quel $c$ pris dans l'intervalle où $f$ est continue. Ça marche même si $c$ n'est pas entre $a$ et $b$, mais pour l'image on le prend entre les deux.</p>\n<p><strong>2. Deux gbakas au dépôt de carburant (la linéarité).</strong> Le gbaka A consomme du carburant avec un débit $f(t)$ en litres par heure. Le gbaka B a un débit $g(t)$. Quand les deux roulent entre 8 h et 10 h, le carburant total consommé est la consommation de A plus celle de B. Et trois gbakas A identiques consomment trois fois plus qu'un seul.</p>\n<p><em>Le pont.</em> L'intégrale d'un débit sur une durée, c'est le carburant consommé. Le total des deux gbakas, c'est $\\int_a^b (f + g)$ : il vaut $\\int_a^b f + \\int_a^b g$. Les trois gbakas identiques, c'est $\\int_a^b 3f = 3\\int_a^b f$.</p>\n<p><em>Où l'image s'arrête.</em> On peut additionner et multiplier par un nombre fixe. Mais l'intégrale d'un produit $f \\times g$ n'est pas le produit des intégrales : le carburant total n'est pas « consommation de A fois consommation de B ».</p>\n<p><strong>3. L'aller et le retour (échanger les bornes).</strong> Mesure les kilomètres à partir d'Abidjan. Aller d'Abidjan à Bouaké, c'est gagner des kilomètres. Faire le trajet dans l'autre sens, de Bouaké vers Abidjan, c'est en perdre exactement autant. Quant à rester sur place, on ne gagne rien.</p>\n<p><em>Le pont.</em> Aller de $a$ à $b$ donne $\\int_a^b f$. Aller de $b$ à $a$ donne l'opposé : $\\int_b^a f = -\\int_a^b f$. Rester au même point donne $\\int_a^a f = 0$.</p>\n<p><em>Où l'image s'arrête.</em> Un compteur kilométrique ne recule jamais. Ici, c'est une convention de calcul : on retranche la distance quand on lit les bornes dans l'ordre inverse.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p>Soit $f$ et $g$ deux fonctions continues sur un intervalle $I$, $a$, $b$, $c$ trois réels de $I$ et $k$ un réel.</p>\n<ul>\n<li><strong>Somme :</strong> $\\displaystyle\\int_a^b \\big(f(x) + g(x)\\big)\\,dx = \\int_a^b f(x)\\,dx + \\int_a^b g(x)\\,dx$.</li>\n<li><strong>Multiple :</strong> $\\displaystyle\\int_a^b k\\,f(x)\\,dx = k\\int_a^b f(x)\\,dx$. (Ces deux propriétés s'appellent la <strong>linéarité</strong>.)</li>\n<li><strong>Relation de Chasles :</strong> $\\displaystyle\\int_a^b f(x)\\,dx = \\int_a^c f(x)\\,dx + \\int_c^b f(x)\\,dx$.</li>\n<li><strong>Bornes égales :</strong> $\\displaystyle\\int_a^a f(x)\\,dx = 0$.</li>\n<li><strong>Bornes échangées :</strong> $\\displaystyle\\int_b^a f(x)\\,dx = -\\int_a^b f(x)\\,dx$.</li>\n</ul>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>On sait que $\\displaystyle\\int_0^2 f(x)\\,dx = 5$, $\\displaystyle\\int_2^6 f(x)\\,dx = 3$ et $\\displaystyle\\int_0^2 g(x)\\,dx = 1$. Calculer $\\displaystyle\\int_0^6 f(x)\\,dx$, $\\displaystyle\\int_6^2 f(x)\\,dx$ et $\\displaystyle\\int_0^2 \\big(3f(x) - 2g(x)\\big)\\,dx$.</strong></p>\n<ol>\n<li>Chasles avec $c = 2$ : $\\int_0^6 f = \\int_0^2 f + \\int_2^6 f = 5 + 3 = 8$.</li>\n<li>Bornes échangées : $\\int_6^2 f = -\\int_2^6 f = -3$.</li>\n<li>Linéarité : $\\int_0^2 (3f - 2g) = 3\\int_0^2 f - 2\\int_0^2 g = 3 \\times 5 - 2 \\times 1 = 13$.</li>\n</ol>\n<p><strong>Calculer $\\displaystyle\\int_0^3 (x^2 - 2x)\\,dx$ par linéarité, puis contrôler avec une primitive.</strong></p>\n<ol>\n<li>$\\int_0^3 x^2\\,dx = \\left[\\frac{x^3}{3}\\right]_0^3 = 9$ et $\\int_0^3 2x\\,dx = \\left[x^2\\right]_0^3 = 9$.</li>\n<li>Donc $\\int_0^3 (x^2 - 2x)\\,dx = 9 - 9 = 0$.</li>\n<li>Contrôle : une primitive de $x^2 - 2x$ est $\\frac{x^3}{3} - x^2$ ; elle vaut $9 - 9 = 0$ en $3$ et $0$ en $0$. On retrouve $0$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Croire que l'intégrale d'un produit est le produit des intégrales : $\\int_a^b f(x)\\,g(x)\\,dx \\ne \\int_a^b f(x)\\,dx \\times \\int_a^b g(x)\\,dx$. Contre-exemple avec $f = g = 1$ sur $[0 ; 2]$ : le premier membre vaut $2$, le second vaut $2 \\times 2 = 4$.</p>\n<p>Autres pièges : mal enchaîner les bornes avec Chasles (le $c$ de fin de la première intégrale est le $c$ de début de la seconde) et oublier le signe moins quand on échange les bornes. Pour les repérer, relis les bornes de gauche à droite : on doit pouvoir « marcher » de $a$ à $b$ sans sauter.</p>\n<h2>En une phrase</h2>\n<p>L'intégrale se découpe en étapes (Chasles), s'additionne et se multiplie par un nombre fixe (linéarité), et change de signe quand on échange les bornes, mais l'intégrale d'un produit n'est pas le produit des intégrales.</p>\n",
+          "exercises": [
+            {
+              "title": "Comprendre — Les règles de l'intégrale",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $f$ continue sur un intervalle $I$ contenant $a$, $b$ et $c$. Quelle égalité exprime la relation de Chasles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Chasles coupe le voyage de $a$ à $b$ en deux étapes qui s'enchaînent : de $a$ à $c$, puis de $c$ à $b$. Il faut additionner, et la fin de la première étape est le début de la seconde. Piège : multiplier les deux étapes, ou écrire $\\int_b^c$ au lieu de $\\int_c^b$, brise l'enchaînement.",
+                  "answers": [
+                    {
+                      "content": "$\\displaystyle\\int_a^b f(x)\\,dx = \\int_a^c f(x)\\,dx + \\int_c^b f(x)\\,dx$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_a^b f(x)\\,dx = \\int_a^c f(x)\\,dx \\times \\int_c^b f(x)\\,dx$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_a^b f(x)\\,dx = \\int_a^c f(x)\\,dx + \\int_b^c f(x)\\,dx$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_a^b f(x)\\,dx = \\int_c^a f(x)\\,dx + \\int_c^b f(x)\\,dx$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du voyage Abidjan–Bouaké avec un arrêt à Yamoussoukro, la distance totale parcourue est la somme des distances des deux étapes.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. L'arrêt coupe le voyage en deux sans changer le total : c'est exactement la relation de Chasles, avec $c$ comme heure de l'arrêt. Souviens-toi : l'arrivée de la première étape est le départ de la seconde.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f$ et $g$ continues sur $[a ; b]$. Quelle égalité est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "La linéarité permet d'additionner : $\\int_a^b (f + g) = \\int_a^b f + \\int_a^b g$, comme la consommation totale de deux gbakas. Piège : le produit des intégrales, le produit $f \\times g$ à l'intérieur, ou la somme des seules bornes ne conviennent pas.",
+                  "answers": [
+                    {
+                      "content": "$\\displaystyle\\int_a^b \\big(f(x) + g(x)\\big)\\,dx = \\int_a^b f(x)\\,dx + \\int_a^b g(x)\\,dx$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_a^b \\big(f(x) + g(x)\\big)\\,dx = \\int_a^b f(x)\\,dx \\times \\int_a^b g(x)\\,dx$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_a^b \\big(f(x) + g(x)\\big)\\,dx = \\int_a^b f(x)\\,dx + g(b)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_a^b \\big(f(x) + g(x)\\big)\\,dx = \\int_a^b f(x)g(x)\\,dx$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour deux fonctions $f$ et $g$ continues sur $[a ; b]$, on a toujours $\\displaystyle\\int_a^b f(x)\\,g(x)\\,dx = \\int_a^b f(x)\\,dx \\times \\int_a^b g(x)\\,dx$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. La linéarité ne concerne que la somme et le multiple par un nombre fixe. Contre-exemple : $f = g = 1$ sur $[0 ; 2]$. Le premier membre vaut $\\int_0^2 1\\,dx = 2$, le second vaut $2 \\times 2 = 4$. Le carburant total n'est pas un produit de consommations.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f$ une fonction continue sur un intervalle $I$ et $a$, $b$ deux réels de $I$. Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Rester au même point ne fait rien gagner : $\\int_a^a f = 0$. Échanger les bornes change le signe : $\\int_b^a f = -\\int_a^b f$. Piège : sans le signe moins, aller et retour se cumuleraient. Quant à $f(a)$ ou à un $+ 3$, ils n'ont rien à voir avec une intégrale.",
+                  "answers": [
+                    {
+                      "content": "$\\displaystyle\\int_a^a f(x)\\,dx = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_b^a f(x)\\,dx = -\\int_a^b f(x)\\,dx$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_b^a f(x)\\,dx = \\int_a^b f(x)\\,dx$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_a^a f(x)\\,dx = f(a)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_a^b 3f(x)\\,dx = 3 + \\int_a^b f(x)\\,dx$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le gbaka A a un débit de carburant $f(t)$ et le gbaka B un débit $g(t)$, en litres par heure. Que représente $\\displaystyle\\int_a^b \\big(f(t) + g(t)\\big)\\,dt$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'intégrale d'un débit sur une durée est une quantité de carburant. La somme $f + g$ est le débit des deux gbakas ensemble : l'intégrale est donc le carburant total consommé entre $a$ et $b$, soit A plus B. Piège : une différence ou un produit n'a pas ce sens.",
+                  "answers": [
+                    {
+                      "content": "Le carburant total consommé par les deux gbakas entre $a$ et $b$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La différence de consommation entre A et B.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le carburant consommé par le seul gbaka A.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le produit des deux consommations.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Utiliser les règles sur des données",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Une fonction $f$ continue vérifie $\\displaystyle\\int_0^1 f(x)\\,dx = 2$ et $\\displaystyle\\int_1^4 f(x)\\,dx = 5$. Que vaut $\\displaystyle\\int_0^4 f(x)\\,dx$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Chasles avec $c = 1$ : $\\int_0^4 f = \\int_0^1 f + \\int_1^4 f = 2 + 5 = 7$. Piège : $10$ vient du produit $2 \\times 5$, et $3$ de la différence $5 - 2$ ; on additionne les deux étapes du voyage.",
+                  "answers": [
+                    {
+                      "content": "$7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux fonctions $f$ et $g$ continues vérifient $\\displaystyle\\int_0^3 f(x)\\,dx = 4$ et $\\displaystyle\\int_0^3 g(x)\\,dx = 6$. Que vaut $\\displaystyle\\int_0^3 \\big(f(x) - g(x)\\big)\\,dx$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par linéarité, $\\int_0^3 (f - g) = \\int_0^3 f - \\int_0^3 g = 4 - 6 = -2$. Piège : $2$ oublie le signe (on a soustrait dans le mauvais sens) ; $10$ additionne au lieu de soustraire.",
+                  "answers": [
+                    {
+                      "content": "$-2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-10$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ continue vérifie $\\displaystyle\\int_1^5 f(x)\\,dx = 3$. Que vaut $\\displaystyle\\int_1^5 4f(x)\\,dx$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le facteur $4$ sort de l'intégrale : $\\int_1^5 4f = 4\\int_1^5 f = 4 \\times 3 = 12$. Quatre gbakas identiques consomment quatre fois plus qu'un seul. Piège : $7$ ajoute $4$ au lieu de multiplier ; $\\frac{3}{4}$ divise.",
+                  "answers": [
+                    {
+                      "content": "$12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$81$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ continue vérifie $\\displaystyle\\int_2^6 f(x)\\,dx = 9$. Que vaut $\\displaystyle\\int_6^2 f(x)\\,dx$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Échanger les bornes change le signe : $\\int_6^2 f = -\\int_2^6 f = -9$. C'est le trajet retour, qui retranche ce que l'aller a gagné. Piège : garder $9$ oublie le signe, et $0$ est la valeur de $\\int_2^2 f$.",
+                  "answers": [
+                    {
+                      "content": "$-9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\frac{1}{9}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calculer $\\displaystyle\\int_0^2 (x^2 + 3x)\\,dx$ par linéarité.",
+                  "question_type": "single_choice",
+                  "explanation": "On sépare : $\\int_0^2 x^2\\,dx = \\frac{8}{3}$ et $\\int_0^2 3x\\,dx = 3 \\times 2 = 6$, car $\\int_0^2 x\\,dx = 2$. La somme vaut $\\frac{8}{3} + 6 = \\frac{26}{3}$. Piège : $16$ multiplie les deux morceaux, et $\\frac{17}{3}$ ajoute $3$ au lieu de $6$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{26}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{17}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$16$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{8}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ continue vérifie $\\displaystyle\\int_0^5 f(x)\\,dx = 10$ et $\\displaystyle\\int_0^2 f(x)\\,dx = 4$. Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Chasles avec $c = 2$ : $\\int_2^5 f = \\int_0^5 f - \\int_0^2 f = 10 - 4 = 6$. Les bornes échangées donnent $\\int_5^2 f = -6$. Piège : $14$ additionne au lieu de retrancher, et $\\int_5^2 f = 6$ oublie le signe.",
+                  "answers": [
+                    {
+                      "content": "$\\displaystyle\\int_2^5 f(x)\\,dx = 6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_5^2 f(x)\\,dx = -6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_2^5 f(x)\\,dx = 14$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_5^2 f(x)\\,dx = 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_2^5 f(x)\\,dx = 40$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Combiner Chasles, linéarité et bornes",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Une fonction $f$ continue vérifie $\\displaystyle\\int_0^2 f(x)\\,dx = 3$ et $\\displaystyle\\int_5^2 f(x)\\,dx = -4$. Que vaut $\\displaystyle\\int_0^5 f(x)\\,dx$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "D'abord, on échange les bornes : $\\int_2^5 f = -\\int_5^2 f = 4$. Ensuite, Chasles avec $c = 2$ : $\\int_0^5 f = 3 + 4 = 7$. Piège : $-1$ additionne directement $3$ et $-4$ sans échanger les bornes, et $12$ multiplie.",
+                  "answers": [
+                    {
+                      "content": "$7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $\\displaystyle\\int_0^2 x^2\\,dx = \\frac{8}{3}$, $\\displaystyle\\int_0^2 x\\,dx = 2$ et $\\displaystyle\\int_0^2 1\\,dx = 2$. Que vaut $\\displaystyle\\int_0^2 (6x^2 - 2x + 3)\\,dx$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par linéarité : $6 \\times \\frac{8}{3} - 2 \\times 2 + 3 \\times 2 = 16 - 4 + 6 = 18$. Piège : $15$ oublie de multiplier $\\int_0^2 1\\,dx$ par $3$ pour garder $3$ seul ; $26$ change le signe du terme en $x$.",
+                  "answers": [
+                    {
+                      "content": "$18$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$15$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$26$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre $t = 0$ et $t = 2$ (en heures), le débit de carburant du gbaka A est $f(t) = 4t$ et celui du gbaka B est $g(t) = 2t + 3$, en litres par heure. Quel est le carburant total consommé par les deux gbakas pendant ces deux heures ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour A : $\\int_0^2 4t\\,dt = 8$ L. Pour B : $\\int_0^2 (2t + 3)\\,dt = [t^2 + 3t]_0^2 = 10$ L. Le total est $8 + 10 = 18$ L. Piège : $8$ ou $10$ ne comptent qu'un seul gbaka, et $80$ multiplie les deux consommations.",
+                  "answers": [
+                    {
+                      "content": "$18$ litres",
+                      "correct": true
+                    },
+                    {
+                      "content": "$10$ litres",
+                      "correct": false
+                    },
+                    {
+                      "content": "$80$ litres",
+                      "correct": false
+                    },
+                    {
+                      "content": "$14$ litres",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $\\displaystyle\\int_0^4 x\\,dx = \\int_0^1 x\\,dx + \\int_4^1 x\\,dx$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Les bornes ne s'enchaînent pas : après $\\int_0^1$, il faut continuer par $\\int_1^4$. Ici $\\int_0^4 x\\,dx = 8$, alors que $\\frac{1}{2} + \\left(-\\frac{15}{2}\\right) = -7$. Le $c = 1$ doit être la fin d'une étape et le début de l'autre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = 2x$ et $g(x) = 3$. On a $\\displaystyle\\int_0^2 f(x)\\,dx = 4$ et $\\displaystyle\\int_0^2 g(x)\\,dx = 6$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Linéarité : $\\int_0^2 (f + g) = 4 + 6 = 10$ et $\\int_0^2 3f = 3 \\times 4 = 12$. Bornes échangées : $\\int_2^0 f = -4$. Faux : $\\int_0^2 f g = \\int_0^2 6x\\,dx = 12$, et pas $24$ ; et $\\int_2^0 g = -6$, et pas $6$.",
+                  "answers": [
+                    {
+                      "content": "$\\displaystyle\\int_0^2 \\big(f(x) + g(x)\\big)\\,dx = 10$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_0^2 3f(x)\\,dx = 12$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_2^0 f(x)\\,dx = -4$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_0^2 f(x)\\,g(x)\\,dx = 24$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\displaystyle\\int_2^0 g(x)\\,dx = 6$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction $f$ continue vérifie $\\displaystyle\\int_1^4 f(x)\\,dx = 8$ et $\\displaystyle\\int_1^3 f(x)\\,dx = 5$. Que vaut $\\displaystyle\\int_3^4 f(x)\\,dx + \\int_4^1 f(x)\\,dx$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Chasles : $\\int_3^4 f = 8 - 5 = 3$. Bornes échangées : $\\int_4^1 f = -8$. La somme vaut $3 - 8 = -5$ (c'est aussi $\\int_3^1 f = -\\int_1^3 f$). Piège : $11$ additionne $3$ et $8$ sans changer le signe de la seconde intégrale.",
+                  "answers": [
+                    {
+                      "content": "$-5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$11$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-11$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
