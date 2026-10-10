@@ -1,0 +1,1779 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Équations et inéquations dans ℝ",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Mathématiques",
+      "series_name": "C",
+      "essentials": [
+        {
+          "name": "Résoudre une équation du second degré",
+          "subtitle": "Discriminant, racines et factorisation d'un trinôme",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Calculer le discriminant d'un trinôme du second degré et en déduire le nombre de solutions réelles de l'équation.</li><li>Résoudre $ax^2+bx+c=0$ dans $\\mathbb{R}$ et factoriser le trinôme quand c'est possible.</li><li>Reconnaître les cas particuliers ($b=0$ ou $c=0$) où le discriminant n'est pas nécessaire.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le beignet d'Aya.</strong> Aya fait sauter un beignet dans la cuisine. Il part de sa main, à 1 m au-dessus du plan de travail. Sa hauteur, en mètres, au bout de $t$ secondes est $h(t) = -5t^2 + 4t + 1$. Aya se demande : « À quels instants le beignet est-il à 1 m ? à 1,8 m ? à 2 m ? » Il monte, atteint un sommet, puis redescend.</p><p><em>Le pont.</em> Chercher les instants où le beignet est à la hauteur $k$, c'est résoudre l'équation $-5t^2+4t+1-k=0$, dont le discriminant vaut $\\Delta = 36-20k$. À 1 m : $\\Delta=16>0$, il y a deux instants, à la montée ($t=0$) et à la descente ($t=0{,}8$). À 1,8 m : $\\Delta=0$, il y a un seul instant, au sommet ($t=0{,}4$). À 2 m : $\\Delta=-4<0$, le beignet n'y arrive jamais. Le discriminant est le juge qui annonce le nombre d'instants avant même de les chercher.</p><p><em>Où l'image s'arrête.</em> Dans la cuisine, seul $t \\ge 0$ a un sens et le beignet retombe dans la main. En mathématiques, l'équation est résolue dans $\\mathbb{R}$ sans tenir compte du contexte : c'est à toi d'écarter ensuite une solution qui n'a pas de sens, comme un temps négatif.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Trinôme.</strong> Un trinôme du second degré est une expression $ax^2+bx+c$ avec $a \\ne 0$. Une racine est un réel qui l'annule.</p><p><strong>Forme canonique.</strong> $ax^2+bx+c = a\\left[\\left(x+\\frac{b}{2a}\\right)^2 - \\frac{\\Delta}{4a^2}\\right]$, avec le discriminant $\\Delta = b^2-4ac$. (On développe : $a\\left(x+\\frac{b}{2a}\\right)^2 = ax^2+bx+\\frac{b^2}{4a}$, puis on retire $\\frac{\\Delta}{4a}=\\frac{b^2}{4a}-c$, et il reste $ax^2+bx+c$.)</p><p><strong>Si $\\Delta < 0$</strong> : le crochet est strictement positif, donc le trinôme ne s'annule jamais. L'équation n'a pas de solution dans $\\mathbb{R}$.</p><p><strong>Si $\\Delta = 0$</strong> : une seule solution, la racine double $x_0 = -\\frac{b}{2a}$, et $ax^2+bx+c = a(x-x_0)^2$.</p><p><strong>Si $\\Delta > 0$</strong> : deux solutions distinctes $x_1 = \\frac{-b-\\sqrt{\\Delta}}{2a}$ et $x_2 = \\frac{-b+\\sqrt{\\Delta}}{2a}$, et $ax^2+bx+c = a(x-x_1)(x-x_2)$.</p><p><strong>Cas particuliers.</strong> Si $c=0$ : $ax^2+bx = x(ax+b)$, donc $x=0$ ou $x=-\\frac{b}{a}$. Si $b=0$ : $ax^2+c=0$ équivaut à $x^2=-\\frac{c}{a}$, qui a deux solutions opposées si $-\\frac{c}{a}>0$, une seule ($0$) si $c=0$, aucune si $-\\frac{c}{a}<0$.</p></blockquote><h2>Exemple résolu</h2><p><strong>Résoudre $2x^2-5x-3=0$ et factoriser.</strong></p><ol><li>On lit $a=2$, $b=-5$, $c=-3$.</li><li>$\\Delta = (-5)^2 - 4 \\times 2 \\times (-3) = 25+24 = 49 = 7^2 > 0$ : deux solutions.</li><li>$x_1 = \\frac{5-7}{4} = -\\frac{1}{2}$ et $x_2 = \\frac{5+7}{4} = 3$.</li><li>Vérification : $2 \\times 9 - 15 - 3 = 0$ et $2 \\times \\frac14 + \\frac52 - 3 = 0$.</li><li>Factorisation : $2x^2-5x-3 = 2\\left(x+\\frac12\\right)(x-3) = (2x+1)(x-3)$.</li></ol><p><strong>Résoudre $4x^2-12x+9=0$.</strong> $\\Delta = 144-144 = 0$ : racine double $x_0 = \\frac{12}{8} = \\frac32$, et $4x^2-12x+9 = (2x-3)^2$.</p><h2>Le piège à éviter</h2><p>Faire une erreur de signe dans $\\Delta$ ou dans $-b$. Si $c<0$ et $a>0$, alors $-4ac$ est positif : pour $2x^2-5x-3$, on obtient $25+24$ et non $25-24$. Si $b$ est négatif, alors $-b$ est positif : ici $-b=5$. Autre oubli fréquent : diviser par $2a$ seulement $\\sqrt{\\Delta}$ au lieu de tout le numérateur $-b \\pm \\sqrt{\\Delta}$.</p><p>Comment le repérer : après la résolution, remplace une solution dans l'équation. Si le résultat n'est pas $0$, reprends le signe de $\\Delta$.</p><h2>En une phrase</h2><p>Le signe du discriminant $\\Delta=b^2-4ac$ annonce zéro, une ou deux solutions, comme le beignet qui n'atteint pas, touche ou traverse une hauteur donnée.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Discriminant et nombre de solutions",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Pour un trinôme $ax^2+bx+c$ avec $a \\ne 0$, quelle est l'expression du discriminant $\\Delta$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le discriminant est $\\Delta = b^2-4ac$. Retiens le signe moins devant $4ac$ : c'est lui qui crée presque toutes les erreurs. Il ne faut ni l'additionner à $b^2$, ni prendre sa racine carrée : $\\sqrt{\\Delta}$ n'apparaît que dans les formules des solutions.",
+                  "answers": [
+                    {
+                      "content": "$\\Delta = b^2-4ac$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\Delta = b^2+4ac$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\Delta = 4ac-b^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\Delta = \\sqrt{b^2-4ac}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si $\\Delta = 0$, l'équation $ax^2+bx+c=0$ n'a aucune solution dans $\\mathbb{R}$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Si $\\Delta = 0$, il y a une solution, la racine double $x_0=-\\frac{b}{2a}$. Pense au sommet du beignet : à cette hauteur précise, il n'y a qu'un seul instant. L'absence de solution correspond à $\\Delta<0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La hauteur (en m) d'un beignet lancé par Aya est $h(t)=-5t^2+4t+1$ au bout de $t$ secondes. Pour savoir quand il est à 2 m, on résout $-5t^2+4t-1=0$, dont le discriminant vaut $-4$. Que peut-on dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le discriminant est négatif : l'équation n'a aucune solution réelle. Le beignet n'atteint donc jamais 2 m, son sommet est plus bas. Deux instants correspondraient à $\\Delta>0$ (montée et descente), un seul à $\\Delta=0$ (le sommet).",
+                  "answers": [
+                    {
+                      "content": "Le beignet n'atteint jamais 2 m",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le beignet atteint 2 m deux fois, à la montée et à la descente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le beignet atteint 2 m une seule fois, à son sommet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le beignet atteint 2 m à l'instant $t=-4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de solutions réelles l'équation $x^2-6x+9=0$ possède-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\Delta = 36-36 = 0$ : une seule solution, $x_0=\\frac{6}{2}=3$, et $x^2-6x+9=(x-3)^2$. Ne confonds pas avec $x^2=9$, qui donne $3$ et $-3$.",
+                  "answers": [
+                    {
+                      "content": "Une seule, $x=3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux, $x=3$ et $x=-3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux, $x=0$ et $x=6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $\\Delta>0$ pour le trinôme $ax^2+bx+c$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Avec $\\Delta>0$, il y a deux racines distinctes $x_1$ et $x_2$ et le trinôme s'écrit $a(x-x_1)(x-x_2)$. La formule $-\\frac{b}{2a}$ donne la racine double, valable seulement quand $\\Delta=0$ : c'est l'erreur la plus tentante.",
+                  "answers": [
+                    {
+                      "content": "L'équation $ax^2+bx+c=0$ a deux solutions réelles distinctes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le trinôme se factorise en $a(x-x_1)(x-x_2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'équation n'a aucune solution réelle",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'unique solution est $x=-\\frac{b}{2a}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $\\Delta=0$ et si $x_0=-\\frac{b}{2a}$, comment se factorise $ax^2+bx+c$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec une racine double, on obtient $a(x-x_0)^2$. Le facteur $a$ reste obligatoire : $x^2$ devient $ax^2$. Il faut aussi $x-x_0$ et non $x+x_0$, puisque $x_0$ est la valeur qui annule le facteur.",
+                  "answers": [
+                    {
+                      "content": "$a(x-x_0)^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x-x_0)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a(x+x_0)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a(x-x_0)(x+x_0)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer et résoudre",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelles sont les solutions de $x^2-7x+10=0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\Delta=49-40=9$, donc $x=\\frac{7\\pm3}{2}$ : $x=5$ ou $x=2$. Les solutions $-2$ et $-5$ viennent d'un oubli du signe de $-b$. Le couple $1$ et $10$ a le bon produit, mais pas la bonne somme.",
+                  "answers": [
+                    {
+                      "content": "$2$ et $5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-2$ et $-5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$ et $10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$ et $4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le discriminant de $3x^2+2x-5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\Delta = 2^2 - 4 \\times 3 \\times (-5) = 4+60 = 64$. Comme $c$ est négatif, $-4ac$ est positif. Le résultat $-56$ vient de $4-60$, avec un signe oublié, et $8$ est la racine carrée de $64$, pas le discriminant.",
+                  "answers": [
+                    {
+                      "content": "$64$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-56$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$16$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de $3x^2+2x-5=0$, sachant que $\\Delta=64$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$x=\\frac{-2\\pm8}{6}$ : $x=1$ ou $x=-\\frac{5}{3}$. Vérification : $3+2-5=0$. Le couple $-1$ et $\\frac53$ oublie le signe de $-b$, et le couple $2$ et $-\\frac{10}{3}$ divise par $a$ au lieu de $2a$.",
+                  "answers": [
+                    {
+                      "content": "$1$ et $-\\frac{5}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-1$ et $\\frac{5}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$ et $-\\frac{10}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$ et $\\frac{5}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle factorisation est égale à $2x^2-5x-3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les racines sont $3$ et $-\\frac12$ : $2(x-3)\\left(x+\\frac12\\right)=(x-3)(2x+1)$. Développe : $2x^2+x-6x-3$. Le produit $(x-3)\\left(x+\\frac12\\right)$ oublie le facteur $2$, et $(x+3)(2x-1)$ change les signes des racines.",
+                  "answers": [
+                    {
+                      "content": "$(x-3)(2x+1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x-3)\\left(x+\\frac12\\right)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+3)(2x-1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2(x+3)\\left(x-\\frac12\\right)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de $2x^2-8x=0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "On factorise : $2x(x-4)=0$, donc $x=0$ ou $x=4$. Diviser par $x$ fait perdre la solution $0$ : l'erreur la plus fréquente. Ni $2$ ni $-4$ ne conviennent : $2\\times4-16=-8\\ne0$ et $2\\times16+32\\ne0$.",
+                  "answers": [
+                    {
+                      "content": "$0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de solutions réelles l'équation $x^2+9=0$ possède-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "On aurait $x^2=-9$, impossible puisqu'un carré est positif ou nul. Aussi $\\Delta=0-36=-36<0$. Les valeurs $3$ et $-3$ seraient solutions de $x^2-9=0$, pas de $x^2+9=0$.",
+                  "answers": [
+                    {
+                      "content": "Aucune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux, $3$ et $-3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une seule, $-3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une seule, $0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Paramètre, problème et choix de méthode",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Pour quelles valeurs de $m$ l'équation $x^2-4x+m=0$ admet-elle deux solutions réelles distinctes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut $\\Delta>0$ : $\\Delta = 16-4m>0$, donc $m<4$. L'inégalité est stricte : pour $m=4$, on a $\\Delta=0$ et une seule solution. Attention au sens : en divisant par $-4$, on change le sens de l'inégalité.",
+                  "answers": [
+                    {
+                      "content": "$m<4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$m>4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m\\le4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m<-4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un beignet est lancé de la main d'Aya à 1 m du plan de travail, sa hauteur en mètres étant $h(t)=-5t^2+4t+1$ au bout de $t$ secondes. À quels instants est-il à 1,6 m ?",
+                  "question_type": "single_choice",
+                  "explanation": "On résout $-5t^2+4t-0{,}6=0$, soit $25t^2-20t+3=0$ (en multipliant par $-5$), avec $\\Delta=100$ : $t=\\frac{20\\pm10}{50}$, donc $0{,}2$ s et $0{,}6$ s. À $0{,}4$ s, c'est le sommet à 1,8 m ; à $0{,}8$ s, le beignet est redescendu à 1 m.",
+                  "answers": [
+                    {
+                      "content": "À $0{,}2$ s et à $0{,}6$ s",
+                      "correct": true
+                    },
+                    {
+                      "content": "À $0{,}4$ s seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Jamais",
+                      "correct": false
+                    },
+                    {
+                      "content": "À $0{,}2$ s et à $0{,}8$ s",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles équations ont deux solutions réelles distinctes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Il faut $\\Delta>0$. Ici : $x^2-x-6=0$ donne $25$ ; $x^2-2x-1=0$ donne $8$ ; $-x^2+3x-2=0$ donne $1$. Les autres échouent : $x^2-6x+9=0$ et $4x^2+4x+1=0$ donnent $\\Delta=0$, et $2x^2+x+3=0$ donne $1-24<0$.",
+                  "answers": [
+                    {
+                      "content": "$x^2-x-6=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2-2x-1=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-x^2+3x-2=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2-6x+9=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x^2+x+3=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x^2+4x+1=0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de $x^2-3x-1=0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\Delta=9+4=13$, qui n'est pas un carré parfait, donc $x=\\frac{3\\pm\\sqrt{13}}{2}$. Garde la racine sous forme exacte. Dans $\\frac{-3\\pm\\sqrt{13}}{2}$, le signe de $-b$ est oublié ; avec $4$ au dénominateur, on a oublié que $2a=2$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{3\\pm\\sqrt{13}}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{-3\\pm\\sqrt{13}}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3\\pm\\sqrt{13}}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3\\pm13}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On cherche $m$ pour que $x^2-6x+m=0$ ait une racine double. Que vaut $m$, et quelle est alors la racine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une racine double exige $\\Delta=36-4m=0$, donc $m=9$. La racine est $x_0=-\\frac{b}{2a}=3$, et $x^2-6x+9=(x-3)^2$. Ne confonds pas $m$ et la racine : $9$ est une valeur du paramètre, $3$ est la solution.",
+                  "answers": [
+                    {
+                      "content": "$m=9$ et la racine vaut $3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$m=9$ et la racine vaut $9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m=3$ et la racine vaut $3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m=36$ et la racine vaut $3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La longueur d'une plaque à pâtisserie rectangulaire dépasse sa largeur de 7 dm, et son aire vaut 60 dm². Quelle est sa largeur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $x$ la largeur : $x(x+7)=60$, donc $x^2+7x-60=0$, $\\Delta=289=17^2$ et $x=\\frac{-7\\pm17}{2}$, soit $5$ ou $-12$. Une largeur est positive : $5$ dm. La longueur vaut $12$ dm. Vérifie : $5\\times12=60$.",
+                  "answers": [
+                    {
+                      "content": "$5$ dm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12$ dm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$ dm ou $-12$ dm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$ dm",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Somme et produit des racines",
+          "subtitle": "Relations entre coefficients et racines, racine évidente",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Calculer la somme et le produit des racines d'un trinôme sans les calculer une à une.</li><li>Retrouver deux nombres dont on connaît la somme et le produit.</li><li>Trouver une racine évidente et déduire la seconde, ou le signe des racines.</li></ul><h2>L'image pour comprendre</h2><p><strong>La plaque à pâtisserie de Maman.</strong> Maman prépare un gâteau pour le repas du dimanche. Elle dit : « Le tour de ma plaque rectangulaire mesure 14 dm et sa surface 12 dm². » Pour trouver ses deux dimensions sans tâtonner, on retient deux informations : la moitié du tour, c'est la somme des deux dimensions, soit $7$ ; la surface, c'est leur produit, soit $12$. Les deux nombres cherchés sont $3$ et $4$ : $3+4=7$ et $3 \\times 4=12$.</p><p><em>Le pont.</em> La somme $S=7$ est la somme des deux racines, le produit $P=12$ est leur produit. Les dimensions de la plaque sont les deux solutions de $X^2-SX+P=X^2-7X+12=0$.</p><p><em>Où l'image s'arrête.</em> Certaines plaques n'existent pas : un demi-tour de 4 dm et une surface de 5 dm² donnent $X^2-4X+5=0$, de discriminant $-4<0$. Il n'y a pas de rectangle. Et dans $\\mathbb{R}$, les racines peuvent être négatives ou irrationnelles, ce qu'une dimension de plaque n'est pas.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Somme et produit.</strong> Si $\\Delta \\ge 0$, les racines $x_1$ et $x_2$ de $ax^2+bx+c$ (confondues si $\\Delta=0$) vérifient $S=x_1+x_2=-\\frac{b}{a}$ et $P=x_1x_2=\\frac{c}{a}$.</p><p><em>Preuve.</em> $x_1+x_2=\\frac{-b-\\sqrt{\\Delta}-b+\\sqrt{\\Delta}}{2a}=-\\frac{b}{a}$ et $x_1x_2=\\frac{b^2-\\Delta}{4a^2}=\\frac{4ac}{4a^2}=\\frac{c}{a}$.</p><p><strong>Réciproque.</strong> Deux nombres de somme $S$ et de produit $P$ sont les solutions de $X^2-SX+P=0$. Ils existent dans $\\mathbb{R}$ si et seulement si $S^2-4P \\ge 0$.</p><p><strong>Racines évidentes.</strong> Si $a+b+c=0$, alors $1$ est racine et l'autre racine vaut $\\frac{c}{a}$. Si $a-b+c=0$, alors $-1$ est racine et l'autre racine vaut $-\\frac{c}{a}$.</p><p><strong>Signe des racines</strong> (quand elles existent). Si $P<0$ : racines de signes contraires, et $\\Delta>0$ automatiquement. Si $P>0$ et $S>0$ : deux racines strictement positives. Si $P>0$ et $S<0$ : deux racines strictement négatives.</p><p><strong>Un calcul utile.</strong> $x_1^2+x_2^2 = S^2-2P$.</p></blockquote><h2>Exemple résolu</h2><p><strong>Pour $2x^2-5x-3=0$ ($\\Delta=49>0$), sans résoudre.</strong> $S=-\\frac{-5}{2}=\\frac52$ et $P=\\frac{-3}{2}$. Comme $P<0$, les racines sont de signes contraires. Contrôle avec les racines $3$ et $-\\frac12$ : $3-\\frac12=\\frac52$ et $3 \\times \\left(-\\frac12\\right)=-\\frac32$.</p><p><strong>Deux nombres de somme 7 et de produit 12.</strong> On résout $X^2-7X+12=0$ : $\\Delta=49-48=1$ et $X=\\frac{7\\pm1}{2}$, soit $3$ et $4$.</p><p><strong>Racine évidente de $3x^2-7x+4=0$.</strong> $a+b+c=3-7+4=0$ : $1$ est racine. L'autre vaut $\\frac{c}{a}=\\frac43$. Contrôle : $1+\\frac43=\\frac73=-\\frac{b}{a}$.</p><h2>Le piège à éviter</h2><p>Écrire $S=\\frac{b}{a}$ en oubliant le signe moins. Pour $x^2-7x+12=0$, la somme des racines vaut $+7$ et non $-7$. Autre piège : utiliser $S$ et $P$ sans vérifier que les racines existent. Pour $x^2+x+1=0$, $S=-1$ et $P=1$, mais $\\Delta=-3<0$ : il n'y a pas de racine réelle.</p><p>Comment le repérer : calcule d'abord $\\Delta$, ou vérifie $S^2-4P \\ge 0$, avant d'utiliser $S$ et $P$.</p><h2>En une phrase</h2><p>La somme des racines vaut $-\\frac{b}{a}$ et leur produit $\\frac{c}{a}$ : deux nombres de somme $S$ et de produit $P$ sont les racines de $X^2-SX+P$, comme les dimensions d'une plaque dont on connaît le demi-tour et la surface.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Somme, produit et plaque à pâtisserie",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Vrai ou faux : pour l'équation $x^2-7x+12=0$, la somme des racines vaut $-7$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. La somme vaut $-\\frac{b}{a}=-\\frac{-7}{1}=7$ (les racines sont $3$ et $4$). Oublier le signe moins devant $\\frac{b}{a}$ est l'erreur classique. C'est aussi le demi-tour de la plaque de Maman : une somme de dimensions, donc positive.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $ax^2+bx+c=0$ avec $\\Delta \\ge 0$, quelles égalités sont correctes pour la somme $S$ et le produit $P$ des racines ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "On a $S=-\\frac{b}{a}$ et $P=\\frac{c}{a}$. Les formules $S=\\frac{b}{a}$ et $P=-\\frac{c}{a}$ inversent les signes. Pour t'en souvenir : dans $x^2-7x+12$, $S=7$ est l'opposé de $b=-7$, et $P=12$ vaut $c$.",
+                  "answers": [
+                    {
+                      "content": "$S=-\\frac{b}{a}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P=\\frac{c}{a}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$S=\\frac{b}{a}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P=-\\frac{c}{a}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Maman cherche les dimensions d'une plaque rectangulaire dont le demi-périmètre vaut 7 dm et l'aire 12 dm². Quelle équation donne ces dimensions ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les dimensions ont pour somme $7$ et pour produit $12$ : ce sont les racines de $X^2-SX+P=X^2-7X+12=0$. Permuter $S$ et $P$ ou prendre le périmètre entier $14$ à la place de $S$ donne d'autres équations.",
+                  "answers": [
+                    {
+                      "content": "$X^2-7X+12=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$X^2+7X+12=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$X^2-12X+7=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$X^2-14X+12=0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un rectangle a un demi-périmètre de 4 dm et une aire de 5 dm². Peut-il exister ?",
+                  "question_type": "single_choice",
+                  "explanation": "Ses dimensions seraient les racines de $X^2-4X+5=0$, dont le discriminant vaut $16-20=-4<0$ : aucune racine réelle, donc pas de rectangle. Un bon produit ne suffit pas : il faut aussi $S^2-4P \\ge 0$. Ici $16<20$.",
+                  "answers": [
+                    {
+                      "content": "Non, car $X^2-4X+5=0$ n'a pas de solution réelle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, de dimensions $1$ dm et $5$ dm",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, de dimensions $4$ dm et $5$ dm",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir sans mesurer la plaque",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si le produit $P$ des racines d'un trinôme est strictement négatif, alors ses deux racines sont de signes contraires.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Un produit négatif impose un facteur positif et un facteur négatif. Dans ce cas, $\\frac{c}{a}<0$ donc $ac<0$ et $\\Delta=b^2-4ac>0$ : les racines existent bien. Ce n'est pas vrai de la somme : le signe de $S$ ne dit rien sur les signes des deux racines.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour un trinôme $ax^2+bx+c$ tel que $a+b+c=0$, quelle est une racine évidente ?",
+                  "question_type": "single_choice",
+                  "explanation": "Si $a+b+c=0$, alors en remplaçant $x$ par $1$ on obtient $a\\times1^2+b\\times1+c=0$ : $1$ est racine. L'autre racine vaut $\\frac{c}{a}$. Le nombre $-1$ est racine évidente lorsque $a-b+c=0$.",
+                  "answers": [
+                    {
+                      "content": "$1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{c}{a}$ est racine, mais $1$ ne l'est pas",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Somme, produit et racines évidentes",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Sans résoudre $5x^2+10x-15=0$ (qui a deux racines réelles), quels sont la somme $S$ et le produit $P$ de ses racines ?",
+                  "question_type": "single_choice",
+                  "explanation": "$S=-\\frac{b}{a}=-\\frac{10}{5}=-2$ et $P=\\frac{c}{a}=\\frac{-15}{5}=-3$. Les racines sont $1$ et $-3$. Prendre $S=2$ oublie le signe moins ; $S=10$ et $P=-15$ oublient de diviser par $a=5$.",
+                  "answers": [
+                    {
+                      "content": "$S=-2$ et $P=-3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$S=2$ et $P=-3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$S=-2$ et $P=3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$S=10$ et $P=-15$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux nombres dont la somme vaut 5 et le produit vaut 6 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Ce sont les solutions de $X^2-5X+6=0$ : $\\Delta=1$ et $X=\\frac{5\\pm1}{2}$, soit $2$ et $3$. Les nombres $-2$ et $-3$ ont le bon produit, mais une somme de $-5$. Les nombres $1$ et $6$ ont le bon produit, mais pas la bonne somme.",
+                  "answers": [
+                    {
+                      "content": "$2$ et $3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-2$ et $-3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$ et $6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$ et $6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'équation $7x^2-4x-3=0$ a une racine évidente. Quelles sont ses deux solutions ?",
+                  "question_type": "single_choice",
+                  "explanation": "$a+b+c=7-4-3=0$ : $1$ est racine, et l'autre vaut $\\frac{c}{a}=-\\frac37$. Contrôle : $1-\\frac37=\\frac47=-\\frac{b}{a}$. La valeur $\\frac37$ oublie le signe de $c$.",
+                  "answers": [
+                    {
+                      "content": "$1$ et $-\\frac{3}{7}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$ et $\\frac{3}{7}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-1$ et $\\frac{3}{7}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$ et $-\\frac{7}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'équation $2x^2+5x+3=0$ a une racine évidente. Quelles sont ses deux solutions ?",
+                  "question_type": "single_choice",
+                  "explanation": "$a-b+c=2-5+3=0$ : $-1$ est racine, et l'autre vaut $-\\frac{c}{a}=-\\frac32$. Contrôle : $2\\times\\frac94-\\frac{15}{2}+3=0$. Ici $a+b+c=10\\ne0$, donc $1$ n'est pas racine.",
+                  "answers": [
+                    {
+                      "content": "$-1$ et $-\\frac{3}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$ et $\\frac{3}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-1$ et $\\frac{3}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$ et $-\\frac{3}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'équation $x^2+6x+5=0$ a deux racines réelles. Que peut-on dire de leurs signes sans les calculer ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P=5>0$ : les racines ont le même signe. $S=-6<0$ : elles sont donc toutes deux négatives. En effet, ce sont $-1$ et $-5$. Un produit positif seul ne suffit pas à conclure : il faut regarder aussi le signe de la somme.",
+                  "answers": [
+                    {
+                      "content": "Elles sont toutes deux strictement négatives",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elles sont toutes deux strictement positives",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont de signes contraires",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a aucune racine réelle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les racines $x_1$ et $x_2$ de $x^2-5x+3=0$ existent car $\\Delta=13>0$. Que vaut $x_1^2+x_2^2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$S=5$ et $P=3$. Comme $(x_1+x_2)^2=x_1^2+x_2^2+2x_1x_2$, on a $x_1^2+x_2^2=S^2-2P=25-6=19$. Le résultat $25$ oublie $-2P$, et $31$ se trompe de signe.",
+                  "answers": [
+                    {
+                      "content": "$19$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$25$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$31$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Paramètre, rectangle et factorisation",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Le nombre $4$ est solution de $x^2-9x+m=0$. Que vaut $m$, et quelle est l'autre solution ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme des racines vaut $9$, donc l'autre racine est $9-4=5$, et $m=P=4\\times5=20$. Contrôle : $16-36+20=0$. Si on permute les rôles, on obtient $m=5$ et $20$, ce qui ne vérifie pas $S=9$.",
+                  "answers": [
+                    {
+                      "content": "$m=20$ et l'autre solution vaut $5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$m=-20$ et l'autre solution vaut $5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m=20$ et l'autre solution vaut $13$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m=5$ et l'autre solution vaut $20$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une plaque à pâtisserie rectangulaire a un périmètre de 20 dm et une aire de 21 dm². Quelles sont ses dimensions ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le demi-périmètre vaut $10$, donc les dimensions sont les racines de $X^2-10X+21=0$ : $\\Delta=16$ et $X=\\frac{10\\pm4}{2}$, soit $3$ et $7$. Contrôle : $2(3+7)=20$ et $3\\times7=21$. Les couples $4$ et $6$, $2$ et $8$ donnent un bon périmètre, pas la bonne aire.",
+                  "answers": [
+                    {
+                      "content": "$3$ dm et $7$ dm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$ dm et $6$ dm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$ dm et $8$ dm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$ dm et $21$ dm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelles valeurs de $m$ l'équation $x^2-4x+m=0$ a-t-elle deux racines réelles strictement positives (éventuellement égales) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut $\\Delta=16-4m\\ge0$, donc $m\\le4$, et $P=m>0$ avec $S=4>0$. Donc $0< m\\le4$. Sans la condition $m>0$, une racine pourrait être négative ou nulle ; sans la condition sur $\\Delta$, les racines pourraient ne pas exister.",
+                  "answers": [
+                    {
+                      "content": "$0< m\\le4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$m\\le4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0< m<4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m>0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles écritures sont égales au trinôme $2x^2-3x+1$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Comme $2-3+1=0$, $1$ est racine, et l'autre racine vaut $\\frac{c}{a}=\\frac12$. Donc $2x^2-3x+1=2(x-1)\\left(x-\\frac12\\right)=(x-1)(2x-1)$. L'écriture sans le facteur $2$ est fausse, et $(x+1)(2x+1)$ change les signes des racines.",
+                  "answers": [
+                    {
+                      "content": "$(x-1)(2x-1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2(x-1)\\left(x-\\frac12\\right)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x-1)\\left(x-\\frac12\\right)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+1)(2x+1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les racines $x_1$ et $x_2$ de $x^2-6x+4=0$ existent car $\\Delta=20>0$. Que vaut $\\frac{1}{x_1}+\\frac{1}{x_2}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On réduit au même dénominateur : $\\frac{1}{x_1}+\\frac{1}{x_2}=\\frac{x_1+x_2}{x_1x_2}=\\frac{S}{P}=\\frac64=\\frac32$. Le résultat $\\frac23$ inverse $S$ et $P$, et $6$ ne garde que $S$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{3}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{2}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $2x^2-6x-5=0$, dont le discriminant $\\Delta=76$ est positif. On note $x_1$ et $x_2$ ses racines. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$S=-\\frac{-6}{2}=3$ et $P=\\frac{-5}{2}$. Comme $P<0$, les racines sont de signes contraires. Elles ne sont donc pas toutes deux positives, et $P=\\frac52$ oublie le signe de $c$. Enfin $S=-3$ oublie le signe moins.",
+                  "answers": [
+                    {
+                      "content": "$x_1+x_2=3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x_1x_2=-\\frac52$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les racines sont de signes contraires",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x_1x_2=\\frac52$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x_1+x_2=-3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux racines sont strictement positives",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Signe du trinôme et inéquations du second degré",
+          "subtitle": "Signe d'un trinôme et résolution d'inéquations",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Déterminer le signe d'un trinôme du second degré selon les valeurs de $x$.</li><li>Résoudre une inéquation du second degré et écrire l'ensemble solution avec des intervalles.</li><li>Utiliser le signe d'un trinôme dans un tableau de signes (produit ou quotient).</li></ul><h2>L'image pour comprendre</h2><p><strong>Le saladier et la table de la cuisine.</strong> Imagine la coupe d'un saladier : elle a la forme d'un U. Pose-la sur ta feuille et trace une droite horizontale, le niveau de la table, qui représente la valeur $0$. Un saladier peut traverser ce niveau en deux points : entre ces deux points, il est sous le niveau, et en dehors, au-dessus. Il peut aussi seulement toucher le niveau en un point, ou rester entièrement au-dessus. Retourne le saladier en forme de dôme (∩) : tout est inversé.</p><p><em>Le pont.</em> La coupe est la courbe de $x \\mapsto ax^2+bx+c$. Le U correspond à $a>0$, le dôme à $a<0$. Le niveau de la table est $0$. Les points où le bord croise le niveau sont les racines $x_1$ et $x_2$ ($\\Delta>0$). Le saladier qui touche le niveau en un point, c'est $\\Delta=0$. Celui qui reste d'un seul côté, c'est $\\Delta<0$. « Au-dessus » veut dire trinôme positif, « en dessous » veut dire trinôme négatif.</p><p><em>Où l'image s'arrête.</em> Un vrai saladier est fermé, alors que la courbe continue à l'infini. L'image donne l'allure du signe, pas les valeurs : pour trouver les points de croisement, il faut calculer $\\Delta$ et les racines.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Signe de $ax^2+bx+c$.</strong></p><ul><li>Si $\\Delta<0$ : il a le signe de $a$ pour tout réel $x$, et ne s'annule jamais.</li><li>Si $\\Delta=0$ : il a le signe de $a$ pour tout $x \\ne x_0$, et il est nul en $x_0=-\\frac{b}{2a}$.</li><li>Si $\\Delta>0$ et $x_1< x_2$ sont les racines : il a le signe de $a$ à l'extérieur des racines (pour $x< x_1$ ou $x>x_2$), le signe contraire de $a$ strictement entre les racines, et il est nul en $x_1$ et en $x_2$.</li></ul><p><em>Preuve.</em> Si $\\Delta<0$, la forme canonique $a\\left[\\left(x+\\frac{b}{2a}\\right)^2+\\frac{-\\Delta}{4a^2}\\right]$ a un crochet strictement positif. Si $\\Delta>0$, on écrit $a(x-x_1)(x-x_2)$ : le produit $(x-x_1)(x-x_2)$ est positif hors des racines et négatif entre elles.</p><p><strong>Méthode pour une inéquation.</strong> On calcule $\\Delta$ et les racines, on applique la règle du signe, puis on lit l'ensemble solution en intervalles. Les crochets sont fermés si l'inégalité est large ($\\le$ ou $\\ge$), ouverts si elle est stricte. Pour un produit ou un quotient, on dresse un tableau de signes avec les signes de chaque facteur ; pour un quotient, la valeur qui annule le dénominateur est toujours exclue.</p></blockquote><h2>Exemple résolu</h2><p><strong>Résoudre $2x^2-5x-3 \\le 0$.</strong> Ici $a=2>0$ et les racines sont $-\\frac12$ et $3$. Le trinôme est négatif entre les racines et nul en elles. Comme l'inégalité est large : $S=\\left[-\\frac12 \\, ; 3\\right]$. Contrôle avec $x=0$ : $-3 \\le 0$, vrai.</p><p><strong>Résoudre $x^2-2x+5>0$.</strong> $\\Delta=4-20=-16<0$ et $a=1>0$ : le trinôme est strictement positif pour tout $x$. Donc $S=\\mathbb{R}$.</p><p><strong>Résoudre $-x^2+4x-4>0$.</strong> $\\Delta=16-16=0$, $x_0=2$ et $a=-1<0$ : le trinôme est négatif ou nul pour tout $x$, et vaut $0$ en $2$. Il n'est jamais strictement positif : $S=\\emptyset$.</p><h2>Le piège à éviter</h2><p>Oublier le signe de $a$. Pour $-x^2+x+2 \\ge 0$, les racines sont $-1$ et $2$, mais comme $a=-1<0$, le trinôme est positif entre les racines : $S=[-1\\, ;2]$. Appliquer par réflexe « positif à l'extérieur » donne l'ensemble contraire.</p><p>Comment le repérer : teste une valeur facile comme $x=0$ dans l'inéquation de départ, et vérifie que ton ensemble la contient (ou l'exclut) comme il faut.</p><h2>En une phrase</h2><p>Un trinôme a le signe de $a$ partout sauf entre ses racines, où il prend le signe contraire : comme un saladier en U qui est sous le niveau de la table seulement entre ses deux points de croisement.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Lire le signe d'un trinôme",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un trinôme a pour coefficient $a>0$ et pour discriminant $\\Delta>0$, avec des racines $x_1< x_2$. Où est-il strictement négatif ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $a>0$, il a le signe de $a$ (positif) à l'extérieur des racines, et le signe contraire (négatif) strictement entre elles. C'est le saladier en U : il passe sous le niveau de la table entre ses deux points de croisement.",
+                  "answers": [
+                    {
+                      "content": "Strictement entre $x_1$ et $x_2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "À l'extérieur de l'intervalle $[x_1\\,;x_2]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour tout réel $x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour aucune valeur de $x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si $a<0$ et $\\Delta<0$, alors $ax^2+bx+c<0$ pour tout réel $x$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Quand $\\Delta<0$, le trinôme a le signe de $a$ pour tout $x$ et ne s'annule jamais. Avec $a<0$, c'est le saladier retourné, entièrement sous le niveau de la table. Le signe de $a$ suffit, aucune racine n'est à chercher.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un trinôme a $a>0$ et une racine double $x_0$ ($\\Delta=0$). Que peut-on dire de son signe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $\\Delta=0$, le trinôme est égal à $a(x-x_0)^2$ : il est positif pour tout $x \\ne x_0$ et vaut $0$ en $x_0$. Il ne change donc pas de signe en $x_0$ : il touche le niveau de la table sans le traverser.",
+                  "answers": [
+                    {
+                      "content": "Positif pour $x \\ne x_0$, nul en $x_0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Strictement positif pour tout réel $x$, y compris en $x_0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Négatif de part et d'autre de $x_0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il change de signe en $x_0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On considère $x^2-2x+5$, dont le discriminant vaut $-16$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Avec $\\Delta<0$ et $a=1>0$, le trinôme est strictement positif pour tout $x$ : sa courbe reste au-dessus du niveau de la table. Il ne s'annule pas en $x=1$ : c'est son minimum, qui vaut $1-2+5=4$, et non $0$.",
+                  "answers": [
+                    {
+                      "content": "Il est strictement positif pour tout réel $x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa courbe ne rencontre jamais l'axe des abscisses",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est négatif entre deux racines",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il s'annule en $x=1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le trinôme $-2x^2+x+6$ a pour racines $-\\frac32$ et $2$. Pour quelles valeurs de $x$ est-il strictement positif ?",
+                  "question_type": "single_choice",
+                  "explanation": "Ici $a=-2<0$ : le trinôme a le signe contraire de $a$, donc positif, strictement entre les racines. Le dôme est au-dessus du niveau de la table entre ses deux points de croisement. Vérification avec $x=0$ : $6>0$.",
+                  "answers": [
+                    {
+                      "content": "Pour $x$ strictement entre $-\\frac32$ et $2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour $x<-\\frac32$ ou $x>2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour tout réel $x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour aucune valeur de $x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du saladier et de la table, que représentent les deux points où le bord du saladier croise le niveau de la table ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le niveau de la table est la valeur $0$ : les points où la courbe le croise sont ceux où le trinôme s'annule, c'est-à-dire ses racines. Le discriminant, lui, est un nombre qui annonce combien il y a de points de croisement.",
+                  "answers": [
+                    {
+                      "content": "Les racines du trinôme",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le discriminant du trinôme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le coefficient $a$ du trinôme",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sommet de la courbe",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Résoudre des inéquations du second degré",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quel est l'ensemble solution de $x^2-3x-4<0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les racines sont $-1$ et $4$ ($\\Delta=25$), et $a=1>0$ : le trinôme est négatif strictement entre les racines. L'inégalité est stricte, donc les crochets sont ouverts : $]-1\\,;4[$. L'ensemble à l'extérieur correspond à $x^2-3x-4>0$.",
+                  "answers": [
+                    {
+                      "content": "$]-1\\,;4[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;-1[\\,\\cup\\,]4\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-1\\,;4]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-4\\,;1[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble solution de $2x^2-7x+3 \\ge 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\Delta=49-24=25$ et les racines sont $\\frac12$ et $3$. Avec $a=2>0$, le trinôme est positif à l'extérieur des racines, nul en elles, et l'inégalité est large : $\\left]-\\infty\\,;\\frac12\\right]\\cup[3\\,;+\\infty[$. Crochets ouverts seraient faux, car l'égalité est permise.",
+                  "answers": [
+                    {
+                      "content": "$\\left]-\\infty\\,;\\frac12\\right]\\cup[3\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\left[\\frac12\\,;3\\right]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left]-\\infty\\,;\\frac12\\right[\\cup]3\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble solution de $-x^2+6x-9 \\le 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $-x^2+6x-9=-(x-3)^2$, qui est négatif ou nul pour tout $x$ : l'ensemble solution est $\\mathbb{R}$. La valeur $3$ annule le trinôme mais n'est pas la seule solution. Avec $\\Delta=0$, le trinôme garde le signe de $a$ partout sauf en $x_0$.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{3\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\emptyset$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;3]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble solution de $x^2+x+1 \\le 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\Delta=1-4=-3<0$ et $a=1>0$ : le trinôme est strictement positif pour tout réel $x$. Il n'est donc jamais négatif ou nul : $S=\\emptyset$. Contrôle : en $x=-\\frac12$, qui est le minimum, il vaut $\\frac34>0$.",
+                  "answers": [
+                    {
+                      "content": "$\\emptyset$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left\\{-\\frac12\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-1\\,;0]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles valeurs de $x$ vérifient $x^2-5x+6 \\le 0$ ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Les racines sont $2$ et $3$, et $a=1>0$ : le trinôme est négatif ou nul sur $[2\\,;3]$. Donc $2$, $\\frac52$ et $3$ conviennent. Les valeurs $0$, $1$ et $4$ sont à l'extérieur : le trinôme y vaut $6$, $2$ et $2$, donc positif.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac52$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelles valeurs de $x$ l'expression $\\sqrt{x^2-4x+3}$ est-elle définie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une racine carrée exige un nombre positif ou nul : on résout $x^2-4x+3 \\ge 0$. Les racines sont $1$ et $3$, et $a>0$ : le trinôme est positif à l'extérieur des racines et nul en elles, soit $]-\\infty\\,;1]\\cup[3\\,;+\\infty[$. L'intervalle $[1\\,;3]$ est l'ensemble où le trinôme est négatif.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;1]\\cup[3\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[1\\,;3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;1[\\cup]3\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]1\\,;3[$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Produit, quotient, paramètre et problème",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Quel est l'ensemble solution de $(x-1)(x^2-5x+6) \\ge 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme $x^2-5x+6=(x-2)(x-3)$, on étudie $(x-1)(x-2)(x-3)$. Le produit est négatif pour $x<1$, positif sur $]1\\,;2[$, négatif sur $]2\\,;3[$, positif pour $x>3$. Avec l'égalité permise : $[1\\,;2]\\cup[3\\,;+\\infty[$.",
+                  "answers": [
+                    {
+                      "content": "$[1\\,;2]\\cup[3\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;1]\\cup[2\\,;3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[1\\,;3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[1\\,;+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelles valeurs de $m$ a-t-on $x^2+mx+9>0$ pour tout réel $x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le coefficient $a=1>0$, donc il faut $\\Delta<0$ : $m^2-36<0$, soit $-6< m<6$. Pour $m=6$ ou $m=-6$, on a $(x\\pm3)^2$, qui s'annule : l'inégalité stricte échoue en $x=\\mp3$. Les crochets doivent donc être ouverts.",
+                  "answers": [
+                    {
+                      "content": "$]-6\\,;6[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-6\\,;6]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;-6[\\cup]6\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-36\\,;36[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble solution de $\\dfrac{x^2-x-2}{x-1} \\ge 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le numérateur vaut $(x+1)(x-2)$ et le dénominateur s'annule en $1$. Le quotient est négatif pour $x<-1$, positif sur $]-1\\,;1[$, négatif sur $]1\\,;2[$, positif pour $x>2$. Il est nul en $-1$ et $2$. La valeur $1$ est exclue : $[-1\\,;1[\\,\\cup\\,[2\\,;+\\infty[$.",
+                  "answers": [
+                    {
+                      "content": "$[-1\\,;1[\\,\\cup\\,[2\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-1\\,;1]\\cup[2\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;-1]\\cup]1\\,;2]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-1\\,;2]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un traiteur prépare des plats pour des repas de famille. Son bénéfice, en milliers de francs, pour $x$ centaines de plats est $B(x)=-x^2+8x-12$. Pour quelles valeurs de $x$ le bénéfice est-il strictement positif ?",
+                  "question_type": "single_choice",
+                  "explanation": "$B(x)=0$ équivaut à $x^2-8x+12=0$, d'où $x=2$ ou $x=6$. Avec $a=-1<0$, $B$ est positif strictement entre les racines : $]2\\,;6[$. Contrôle : $B(4)=4>0$. Hors des racines, $B$ est négatif : c'est une perte.",
+                  "answers": [
+                    {
+                      "content": "$]2\\,;6[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[2\\,;6]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;2[\\cup]6\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]0\\,;2[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles inéquations ont pour ensemble solution $\\mathbb{R}$ ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Sont vraies pour tout $x$ : $x^2+2x+2>0$ ($\\Delta<0$, $a>0$), $-x^2+4x-5<0$ ($\\Delta<0$, $a<0$) et $x^2-4x+4\\ge0$ (car $(x-2)^2\\ge0$). Fausses : $x^2-4x+4>0$ échoue en $2$, $x^2-1\\ge0$ échoue sur $]-1\\,;1[$, et $-x^2-x-1\\ge0$ n'est jamais vraie.",
+                  "answers": [
+                    {
+                      "content": "$x^2+2x+2>0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-x^2+4x-5<0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2-4x+4 \\ge 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2-4x+4>0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2-1 \\ge 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-x^2-x-1 \\ge 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble solution du système formé de l'inéquation $x^2-3x-10<0$ et de la condition $x \\ge 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les racines de $x^2-3x-10$ sont $-2$ et $5$ : le trinôme est négatif sur $]-2\\,;5[$. On garde les $x$ tels que $x \\ge 0$ : $[0\\,;5[$. Le crochet en $0$ est fermé car $x \\ge 0$, celui en $5$ est ouvert car $5$ annule le trinôme.",
+                  "answers": [
+                    {
+                      "content": "$[0\\,;5[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-2\\,;5[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]0\\,;5[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[0\\,;5]$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Équations et inéquations avec valeur absolue",
+          "subtitle": "La distance en action — À compléter : équations bicarrées, équations et inéquations irrationnelles",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Interpréter $|x-a|$ comme une distance et traduire une équation ou une inéquation avec valeur absolue.</li><li>Résoudre $|u|=k$, $|u|=|v|$, $|u|\\le k$ et $|u|\\ge k$, puis écrire l'ensemble solution en intervalles.</li><li>Résoudre une équation ou une inéquation où $|x|$ apparaît avec $x^2$, en se ramenant au second degré.</li></ul><h2>L'image pour comprendre</h2><p><strong>La balance de cuisine.</strong> Pour son gâteau, Maman a besoin de 250 g de farine. Sur la balance, que la farine pèse un peu trop ou un peu moins n'a pas d'importance pour elle : ce qui compte, c'est l'écart avec 250 g, sans le sens. Elle accepte un écart d'au plus 10 g.</p><p><em>Le pont.</em> La masse de farine est $m$. L'écart est $|m-250|$, la distance entre $m$ et $250$ sur la droite graduée. « Écart exactement égal à 10 g » s'écrit $|m-250|=10$, soit $m=240$ ou $m=260$. « Écart d'au plus 10 g » s'écrit $|m-250| \\le 10$, soit $240 \\le m \\le 260$. « Écart d'au moins 10 g » s'écrit $|m-250| \\ge 10$ : $m \\le 240$ ou $m \\ge 260$.</p><p><em>Où l'image s'arrête.</em> Un écart ne peut jamais être négatif : une équation comme $|m-250|=-3$ n'a aucune solution. Dans l'image, la masse est aussi positive, alors que $x$ dans $|x-3|$ est un réel quelconque.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Définition.</strong> $|x|=x$ si $x \\ge 0$ et $|x|=-x$ si $x<0$. Pour tout réel $x$ : $|x| \\ge 0$ et $|x|^2=x^2$. Pour deux réels $x$ et $a$, $|x-a|$ est la distance entre $x$ et $a$.</p><p><strong>Équations.</strong> Pour $k>0$ : $|u|=k$ équivaut à $u=k$ ou $u=-k$. Pour $k<0$ : $|u|=k$ n'a aucune solution. Et $|u|=|v|$ équivaut à $u=v$ ou $u=-v$.</p><p><strong>Inéquations.</strong> Pour $k \\ge 0$ : $|u| \\le k$ équivaut à $-k \\le u \\le k$ (une seule condition « et »), et $|u| \\ge k$ équivaut à $u \\le -k$ ou $u \\ge k$ (deux morceaux séparés). Même chose avec des inégalités strictes. Pour $k<0$ : $|u| \\le k$ est impossible et $|u| \\ge k$ est toujours vraie.</p><p><strong>Plusieurs valeurs absolues.</strong> On découpe la droite aux valeurs qui annulent chaque expression, on enlève les barres sur chaque intervalle selon le signe, puis on garde seulement les solutions qui appartiennent à l'intervalle étudié.</p><p><strong>Avec le second degré.</strong> Comme $x^2=|x|^2$, une équation en $x^2$ et $|x|$ se résout en posant $T=|x|$, avec $T \\ge 0$ : on résout en $T$, puis on revient à $x$ par $x=T$ ou $x=-T$.</p></blockquote><h2>Exemple résolu</h2><p><strong>Résoudre $|2x-3|=|x+1|$.</strong> Cela équivaut à $2x-3=x+1$ ou $2x-3=-(x+1)$. Le premier cas donne $x=4$, le second $3x=2$, donc $x=\\frac23$. Contrôle : $|5|=|5|$ et $\\left|-\\frac53\\right|=\\left|\\frac53\\right|$. Les solutions sont $4$ et $\\frac23$.</p><p><strong>Résoudre $|x-3|<2$ puis $|x-3| \\ge 2$.</strong> La distance de $x$ à $3$ est inférieure à $2$ si et seulement si $-2< x-3<2$, soit $1< x<5$ : $]1\\,;5[$. Pour $|x-3| \\ge 2$, on prend le complémentaire : $x \\le 1$ ou $x \\ge 5$, soit $]-\\infty\\,;1]\\cup[5\\,;+\\infty[$.</p><p><strong>Résoudre $|x-1|+|x+2|=5$.</strong> Si $x<-2$ : $-(x-1)-(x+2)=-2x-1=5$, donc $x=-3$, qui est bien $<-2$. Si $-2 \\le x<1$ : $-(x-1)+(x+2)=3 \\ne 5$, aucune solution. Si $x \\ge 1$ : $2x+1=5$, donc $x=2$, qui est bien $\\ge1$. Les solutions sont $-3$ et $2$.</p><p><strong>Résoudre $x^2-3|x|+2=0$.</strong> On pose $T=|x| \\ge 0$ : $T^2-3T+2=0$, donc $T=1$ ou $T=2$. Ainsi $|x|=1$ ou $|x|=2$, et $x \\in \\{-2\\,;-1\\,;1\\,;2\\}$.</p><h2>Le piège à éviter</h2><p>Écrire $|x-3| \\ge 2$ comme un seul encadrement $-2 \\le x-3 \\le 2$, ou l'inverse. L'inégalité « plus petit que » donne un intervalle (un « et »). L'inégalité « plus grand que » donne deux morceaux (un « ou »). Autre piège : croire que $|x|=-2$ a pour solutions $2$ et $-2$ : une distance n'est jamais négative, il n'y a aucune solution.</p><p>Comment le repérer : pense à la distance. « À moins de 2 de 3 » est un seul morceau autour de $3$ ; « à plus de 2 de 3 » est de part et d'autre, loin de $3$.</p><h2>En une phrase</h2><p>La valeur absolue $|x-a|$ est la distance de $x$ à $a$ : « inférieure à $k$ » donne un seul intervalle centré en $a$, « supérieure à $k$ » donne deux morceaux de part et d'autre.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — La valeur absolue comme écart",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Maman pèse de la farine : $m$ est la masse en grammes. Elle veut un écart d'exactement 10 g avec 250 g, c'est-à-dire $|m-250|=10$. Quelles masses conviennent ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'écart vaut $10$ dans les deux sens : $m-250=10$ ou $m-250=-10$, donc $m=260$ ou $m=240$. Garder seulement $260$ oublie le cas où il manque de la farine. La valeur $10$ est l'écart, pas la masse.",
+                  "answers": [
+                    {
+                      "content": "$m=240$ ou $m=260$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$m=260$ seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m=10$ ou $m=-10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m=-240$ ou $m=260$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : l'équation $|x|=-3$ a pour solutions $3$ et $-3$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Une valeur absolue est une distance, donc elle est positive ou nulle : $|x|=-3$ n'a aucune solution. Les nombres $3$ et $-3$ sont les solutions de $|x|=3$. L'écart sur la balance ne peut pas être négatif.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que représente $|x-5|$ sur la droite graduée ?",
+                  "question_type": "single_choice",
+                  "explanation": "$|x-5|$ est la distance entre $x$ et $5$, comme l'écart entre la masse pesée et la masse demandée. Ce n'est pas $x-5$, qui peut être négatif, ni $5-x$, qui peut aussi l'être.",
+                  "answers": [
+                    {
+                      "content": "La distance entre $x$ et $5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nombre $x-5$, toujours positif",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre $5-x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La distance entre $x$ et $0$, diminuée de $5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À quelle condition sur $x$ l'inéquation $|x-3| \\le 2$ est-elle équivalente ?",
+                  "question_type": "single_choice",
+                  "explanation": "« La distance de $x$ à $3$ est au plus $2$ » signifie $-2 \\le x-3 \\le 2$, soit $1 \\le x \\le 5$. Les deux morceaux $x\\le1$ ou $x\\ge5$ correspondent à $|x-3|\\ge2$. L'encadrement $-2\\le x\\le2$ oublie de décaler de $3$.",
+                  "answers": [
+                    {
+                      "content": "$1 \\le x \\le 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x \\le 1$ ou $x \\ge 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-2 \\le x \\le 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x \\le 5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propriétés sont vraies pour tout réel $x$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Une valeur absolue est positive ou nulle, et $|x|^2=x^2$ pour tout $x$. En revanche $|x|=x$ n'est vraie que pour $x\\ge0$, et $|x|=-x$ que pour $x\\le0$ : le piège est de croire que « valeur absolue » signifie « on enlève le signe moins » sans condition.",
+                  "answers": [
+                    {
+                      "content": "$|x| \\ge 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$|x|^2=x^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$|x|=x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$|x|=-x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que signifie l'égalité $|u|=|v|$, où $u$ et $v$ sont deux expressions réelles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Deux nombres ont la même valeur absolue s'ils sont égaux ou opposés : $u=v$ ou $u=-v$. Ne garder que $u=v$ oublie la moitié des solutions, et « $u=v$ et $u=-v$ » ne marcherait que pour $u=v=0$.",
+                  "answers": [
+                    {
+                      "content": "$u=v$ ou $u=-v$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$u=v$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$u=v$ et $u=-v$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$u+v=0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Résoudre avec des valeurs absolues",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelles sont les solutions de $|3x-6|=9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$|3x-6|=9$ équivaut à $3x-6=9$ ou $3x-6=-9$. Donc $x=5$ ou $x=-1$. Contrôle : $|15-6|=9$ et $|-3-6|=9$. Garder seulement $5$ oublie le cas négatif ; les valeurs $\\pm5$ oublient de décaler de $6$.",
+                  "answers": [
+                    {
+                      "content": "$-1$ et $5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5$ seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-5$ et $5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-5$ et $1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble solution de $|2x-1|<5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$|2x-1|<5$ équivaut à $-5<2x-1<5$, soit $-4<2x<6$, donc $-2< x<3$ : $]-2\\,;3[$. Le complémentaire $]-\\infty\\,;-2[\\cup]3\\,;+\\infty[$ correspond à $|2x-1|>5$. L'intervalle $]-3\\,;2[$ a les signes inversés.",
+                  "answers": [
+                    {
+                      "content": "$]-2\\,;3[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-3\\,;2[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;-2[\\cup]3\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;3[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble solution de $|x+4| \\ge 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$|x+4|\\ge3$ équivaut à $x+4\\le-3$ ou $x+4\\ge3$, soit $x\\le-7$ ou $x\\ge-1$ : $]-\\infty\\,;-7]\\cup[-1\\,;+\\infty[$. L'intervalle $[-7\\,;-1]$ est celui de $|x+4|\\le3$. La réponse avec $7$ oublie que $x+4\\ge3$ donne $x\\ge-1$.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;-7]\\cup[-1\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-7\\,;-1]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;-1]\\cup[7\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-7\\,;-1[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de $|x-2|=|3x+4|$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Cela équivaut à $x-2=3x+4$ ou $x-2=-(3x+4)$. Le premier cas donne $x=-3$, le second $4x=-2$, donc $x=-\\frac12$. Contrôle : $|{-5}|=|{-5}|$ et $\\left|-\\frac52\\right|=\\left|\\frac52\\right|$. Les valeurs $3$ et $\\frac12$ viennent d'un signe oublié.",
+                  "answers": [
+                    {
+                      "content": "$x=-3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x=-\\frac12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x=3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=\\frac12$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de solutions réelles l'équation $x^2-3|x|+2=0$ possède-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "On pose $T=|x|\\ge0$ : $T^2-3T+2=0$ donne $T=1$ ou $T=2$. Chaque valeur de $T$ donne deux valeurs de $x$ : $\\pm1$ et $\\pm2$, donc $4$ solutions. Compter seulement $T$ donne $2$ solutions, ce qui oublie que $|x|=T$ a deux solutions.",
+                  "answers": [
+                    {
+                      "content": "Quatre : $-2$, $-1$, $1$ et $2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux : $1$ et $2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Trois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles valeurs de $x$ vérifient $|x-1| \\le 2$ ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "La distance de $x$ à $1$ est au plus $2$ si et seulement si $-1 \\le x \\le 3$. Donc $-1$, $0$ et $3$ conviennent. Les valeurs $-2$, $4$ et $5$ sont à une distance de $1$ égale à $3$, $3$ et $4$ : elles sont trop loin.",
+                  "answers": [
+                    {
+                      "content": "$-1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Plusieurs valeurs absolues et second degré",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Quelles sont les solutions de $|x-1|+|x+2|=5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On découpe en $x<-2$, $-2\\le x<1$ et $x\\ge1$. Sur le premier intervalle : $-2x-1=5$, donc $x=-3$ (valable). Sur le deuxième : la somme vaut toujours $3\\ne5$. Sur le troisième : $2x+1=5$, donc $x=2$ (valable). Les solutions sont $-3$ et $2$.",
+                  "answers": [
+                    {
+                      "content": "$-3$ et $2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$ seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-2$ et $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune solution",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble solution de $|x^2-4| \\le 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$|x^2-4|\\le3$ équivaut à $1\\le x^2\\le7$. Or $x^2\\ge1$ donne $x\\le-1$ ou $x\\ge1$, et $x^2\\le7$ donne $-\\sqrt7\\le x\\le\\sqrt7$. On garde les deux : $[-\\sqrt7\\,;-1]\\cup[1\\,;\\sqrt7]$. Contrôle : $x=0$ donne $|{-4}|=4>3$, donc $0$ est exclu.",
+                  "answers": [
+                    {
+                      "content": "$[-\\sqrt7\\,;-1]\\cup[1\\,;\\sqrt7]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-\\sqrt7\\,;\\sqrt7]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[1\\,;\\sqrt7]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-\\sqrt7\\,;-1[\\,\\cup\\,]1\\,;\\sqrt7]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble solution de $x^2-3|x|+2<0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $T=|x|$, on a $T^2-3T+2<0$ : le trinôme est négatif entre ses racines $1$ et $2$, donc $1<|x|<2$. Cela donne $1< x<2$ ou $-2< x<-1$ : $]-2\\,;-1[\\cup]1\\,;2[$. Contrôle : $x=1{,}5$ donne $-0{,}25<0$ et $x=0$ donne $2>0$.",
+                  "answers": [
+                    {
+                      "content": "$]-2\\,;-1[\\cup]1\\,;2[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]1\\,;2[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-2\\,;2[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;-2[\\cup]-1\\,;1[\\cup]2\\,;+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pâtissier doit faire des gâteaux de 24 cm de diamètre $d$, avec une tolérance de 0,5 cm : on veut $|d-24| \\le 0{,}5$. Quels diamètres sont acceptés ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "La condition équivaut à $-0{,}5\\le d-24\\le0{,}5$, soit $23{,}5\\le d\\le24{,}5$, bornes comprises car l'inégalité est large. Les diamètres $23{,}5$, $24$ et $24{,}5$ conviennent. Les valeurs $23{,}4$, $24{,}6$ et $25$ sont à plus de $0{,}5$ de $24$.",
+                  "answers": [
+                    {
+                      "content": "$23{,}5$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$24$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$24{,}5$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$23{,}4$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$24{,}6$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$25$ cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de l'équation $|x-2|=x+1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut $x+1\\ge0$. Le cas $x-2=x+1$ est impossible. Le cas $x-2=-(x+1)$ donne $2x=1$, donc $x=\\frac12$, qui vérifie $x+1\\ge0$. Contrôle : $\\left|\\frac12-2\\right|=\\frac32=\\frac12+1$. Écrire $-x+1$ au lieu de $-(x+1)$ donne à tort $\\frac32$.",
+                  "answers": [
+                    {
+                      "content": "Seulement $\\frac12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement $\\frac32$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune solution",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac12$ et $\\frac32$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des réels $x$ dont la distance à $2$ est inférieure ou égale à la distance à $-4$, c'est-à-dire $|x-2| \\le |x+4|$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les points à égale distance de $2$ et de $-4$ sont au milieu : $\\frac{2+(-4)}{2}=-1$. Les points plus proches de $2$ sont à droite du milieu : $[-1\\,;+\\infty[$. Contrôle : $x=0$ donne $2\\le4$. Le contraire, $]-\\infty\\,;-1]$, est l'ensemble des points plus proches de $-4$.",
+                  "answers": [
+                    {
+                      "content": "$[-1\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;-1]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-4\\,;2]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-1\\,;2]$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
