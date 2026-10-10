@@ -19,7 +19,7 @@
               "exercise_type": "fixation",
               "questions": [
                 {
-                  "content": "Dans l'image du car de ramassage, que représente une place libre ?",
+                  "content": "Si chaque siège d'un car représente une liaison et chaque élève assis une liaison prise, que représente une place libre ?",
                   "question_type": "single_choice",
                   "explanation": "Une place libre est une liaison encore disponible. Un car saturé n'a plus de place libre, comme une molécule saturée n'a plus de liaison disponible. L'erreur tentante est de voir un hydrogène : l'image parle des liaisons, pas des atomes.",
                   "answers": [
@@ -344,7 +344,7 @@
                   ]
                 },
                 {
-                  "content": "Une molécule est une chaîne ouverte de 5 carbones, liés uniquement par des liaisons simples. Quelles affirmations sont exactes ? (deux bonnes propositions)",
+                  "content": "Une molécule est une chaîne droite ouverte de 5 carbones, liés uniquement par des liaisons simples. Quelles affirmations sont exactes ? (deux bonnes propositions)",
                   "question_type": "multiple_correct_2",
                   "explanation": "5 carbones donnent 2 × 5 + 2 = 12 hydrogènes : C₅H₁₂, le pentane. Compter 10 hydrogènes est le piège du 2n ; le butane a 4 carbones, pas 5.",
                   "answers": [
@@ -369,10 +369,10 @@
                 {
                   "content": "A est une molécule de formule C₆H₁₄ et B une molécule de formule C₆H₁₂. Laquelle est un alcane ?",
                   "question_type": "single_choice",
-                  "explanation": "Pour 6 carbones, un alcane porte 2 × 6 + 2 = 14 hydrogènes : A en est un. B en a deux de moins, donc elle n'est pas saturée. Piège : croire que le nombre de carbones suffit à identifier la famille.",
+                  "explanation": "Pour 6 carbones, un alcane porte 2 × 6 + 2 = 14 hydrogènes : A en est un. B en a deux de moins : ce n'est pas une chaîne ouverte saturée (cycle ou double liaison), donc ce n'est pas un alcane. Piège : croire que le nombre de carbones suffit à identifier la famille.",
                   "answers": [
                     {
-                      "content": "A seulement : 14 hydrogènes, comme un alcane à 6 carbones. B en a deux de moins, elle n'est pas saturée.",
+                      "content": "A seulement : 14 hydrogènes, comme un alcane à 6 carbones. B en a deux de moins : ce n'est pas une chaîne ouverte saturée (cycle ou double liaison).",
                       "correct": true
                     },
                     {
@@ -640,7 +640,7 @@
                 {
                   "content": "Quelle est la formule semi-développée de l'octane, alcane à chaîne droite à 8 carbones ?",
                   "question_type": "single_choice",
-                  "explanation": "Octane : deux CH₃ aux bouts et six CH₂ au milieu, soit 8 carbones. Piège : compter 7 ou 9 carbones et prendre la formule voisine.",
+                  "explanation": "Octane : deux CH₃ aux bouts et six CH₂ au milieu, soit 8 carbones. Piège : compter 7 ou 9 carbones et prendre la formule voisine. Le bout de chaîne doit être un CH₃ ; un CH₂ en extrémité n'a qu'un voisin et il lui manque une liaison.",
                   "answers": [
                     {
                       "content": "CH₃–CH₂–CH₂–CH₂–CH₂–CH₂–CH₂–CH₃",
@@ -761,7 +761,7 @@
                 {
                   "content": "Une molécule a pour formule semi-développée CH₃–CH₂–CH₂–CH₂–CH₂–CH₂–CH₃. Quelles affirmations sont exactes ? (deux bonnes propositions)",
                   "question_type": "multiple_correct_2",
-                  "explanation": "Cette chaîne compte 7 carbones : c'est l'heptane, C₇H₁₆. Piège : compter 6 carbones, ce qui donnerait l'hexane et 12 hydrogènes ; le compte exact donne 2 × 3 + 5 × 2 = 16.",
+                  "explanation": "Cette chaîne compte 7 carbones : c'est l'heptane, C₇H₁₆. Piège : compter 6 carbones, ce qui donnerait l'hexane, à 14 hydrogènes ; le compte exact donne 2 × 3 + 5 × 2 = 16.",
                   "answers": [
                     {
                       "content": "Elle a 7 atomes de carbone.",
@@ -825,7 +825,7 @@
         },
         {
           "name": "Combustion complète des alcanes et calculs de masses",
-          "subtitle": "Équilibrer la combustion, puis calculer des masses de CO₂ et d'eau. À compléter : alcanes ramifiés, substitution (rattachement à valider)",
+          "subtitle": "Équilibrer la combustion, puis calculer des masses de CO₂ et d'eau.",
           "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul><li>Écrire et équilibrer l'équation de la combustion complète d'un alcane.</li><li>Reconnaître les produits d'une combustion complète.</li><li>Calculer une quantité de matière, puis une masse de produits, à partir d'une masse d'alcane.</li></ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>Image 1 — La bougie de la classe.</strong> Un jour de coupure d'électricité, la classe s'éclaire avec une bougie posée sur le bureau. La bougie est faite de paraffine, un mélange d'alcanes à longue chaîne. La flamme fait fondre la cire, qui monte dans la mèche et brûle. Si l'on pose au-dessus de la flamme un verre froid et sec, il se couvre de buée en quelques secondes.</p>\n<p><strong>Le pont.</strong> La paraffine, ce sont les alcanes. Le dioxygène de l'air est le partenaire de la combustion. La buée sur le verre, c'est de l'eau, un des deux produits. Le second produit, le dioxyde de carbone, se reconnaît avec de l'eau de chaux qui se trouble.</p>\n<p><strong>La limite de l'image.</strong> La bougie donne aussi de la suie quand l'air manque : c'est une combustion incomplète. Ici, on ne parle que de la combustion complète, où tout le carbone part en CO₂ et tout l'hydrogène en H₂O.</p>\n<p><strong>Image 2 — La douzaine d'œufs au marché.</strong> Au marché, on achète les œufs à la douzaine : une douzaine, c'est toujours 12 œufs. En chimie, la mole joue ce rôle : une mole est un paquet fixe de particules, et sa masse en grammes est sa masse molaire.</p>\n<p><strong>Le pont.</strong> La douzaine compte les œufs ; la mole compte les molécules. Les nombres devant les formules d'une équation, les coefficients, disent combien de paquets réagissent et combien en sortent.</p>\n<p><strong>La limite de l'image.</strong> Une douzaine vaut 12 ; une mole contient un nombre immense de particules, environ $6{,}02 \\times 10^{23}$. Le paquet sert aux calculs de quantités, pas à compter les molécules une à une.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote><p><strong>Combustion complète d'un alcane</strong> : l'alcane et le dioxygène donnent du dioxyde de carbone et de l'eau. Tout le carbone va dans CO₂, tout l'hydrogène va dans H₂O.</p><p>CₙH₂ₙ₊₂ + $\\frac{3n+1}{2}$ O₂ → n CO₂ + (n+1) H₂O</p><p><strong>Équilibrer</strong> : on équilibre d'abord les carbones, puis les hydrogènes, puis les oxygènes, qui se comptent dans O₂, CO₂ et H₂O. Ne change jamais les indices d'une formule, seulement les nombres devant elle.</p><p><strong>Masse et quantité de matière</strong> : $n = \\frac{m}{M}$, où m est la masse en grammes et M la masse molaire en g/mol. Les coefficients de l'équation donnent les quantités de matière, en moles.</p></blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Énoncé.</strong> On brûle complètement 16 g de méthane CH₄. Quelles sont les masses de CO₂ et d'eau formées ? Données : M(CH₄) = 16 g/mol, M(CO₂) = 44 g/mol, M(H₂O) = 18 g/mol, M(O₂) = 32 g/mol.</p>\n<ul><li>Étape 1 : équation équilibrée, CH₄ + 2 O₂ → CO₂ + 2 H₂O. Vérification : 1 C de chaque côté, 4 H de chaque côté, 4 O à gauche (2 × 2) et à droite (2 + 2).</li><li>Étape 2 : quantité de matière de méthane, n = m / M = 16 / 16 = 1 mol.</li><li>Étape 3 : d'après les coefficients, 1 mol de CH₄ donne 1 mol de CO₂ et 2 mol de H₂O.</li><li>Étape 4 : masses. CO₂ : 1 × 44 = 44 g. H₂O : 2 × 18 = 36 g.</li></ul>\n<p><strong>Vérification.</strong> La masse se conserve. Réactifs : 16 g de CH₄ et 2 × 32 = 64 g de O₂, soit 80 g. Produits : 44 g + 36 g = 80 g. Le total est le même.</p>\n<h2>Le piège à éviter</h2>\n<p>L'erreur la plus fréquente est d'équilibrer à moitié : on oublie que H₂O contient deux hydrogènes, ou l'on écrit 4 H₂O pour 4 H. Pour la repérer, compte à la fin les atomes de chaque sorte de part et d'autre de la flèche. Autre piège : croire que le CO₂ a la masse de l'alcane brûlé. Une partie de sa masse vient de l'oxygène de l'air.</p>\n<h2>En une phrase</h2>\n<p>Brûler un alcane donne du dioxyde de carbone et de l'eau : équilibre l'équation atome par atome, passe par les moles, puis calcule les masses.</p>\n",
           "exercises": [
             {
