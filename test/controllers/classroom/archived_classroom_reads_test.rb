@@ -89,8 +89,9 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#classroom-archived[role=alert]", text: /#{Regexp.escape(tl("joins.classroom_preview.archived"))}/
 
-    # ADR-0088 : l'envoi est refusé avec le motif d'archivage, et le formulaire n'est pas offert.
+    # ADR-0088 : l'envoi est refusé avec le motif d'archivage, et le formulaire n'est pas offert ; l'issue est le choix de classe.
     assert_select "form#join-form", count: 0
+    assert_select "a#choose-classroom[href='#{new_student_classroom_choice_path}']"
     post join_classroom_path(token)
     assert_response :forbidden
     assert_select "#classroom-archived[role=alert]", text: /#{Regexp.escape(tl("joins.classroom_preview.archived"))}/
@@ -104,12 +105,12 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
     assert_equal token, @classroom.reload.link_token
   end
 
-  test "the visitor opening the link of an archived classroom is told it is archived" do
+  test "the visitor opening the link of an archived classroom is sent to the standard sign-up, told it is archived" do
     archive!
 
     get join_classroom_path(@classroom.link_token)
 
-    assert_response :success
-    assert_select "#classroom-archived", text: /#{Regexp.escape(tl("joins.classroom_preview.archived"))}/
+    assert_redirected_to new_student_registration_path
+    assert_equal tl("joins.new.archived_alert"), flash[:alert]
   end
 end

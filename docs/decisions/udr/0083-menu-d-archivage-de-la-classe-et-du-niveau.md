@@ -46,8 +46,8 @@ Un établissement importé a toutes les classes de la 6ème à la Tle. Sa direct
 
 **Classe archivée dans la liste**
 - Badge « Archivée » (déjà présent), effectif grisé, hors des totaux ; la carte n'est plus un lien (la page d'une classe archivée n'existe pas : sa lecture renvoie 404), la restauration se fait depuis son menu ⋮.
-- Rangée en fin de son niveau.
-- Visible 7 jours après la date d'archivage ; au-delà, masquée. Un bouton « Afficher les archives (N) » sous la liste (lien `?archives=1`, Turbo, `aria-expanded`) les montre toutes ; « Masquer les archives » les remasque. N compte les archives masquées ; le bouton n'existe pas à 0.
+- Rangée en fin de son niveau ; son badge « Archivée » passe sous son nom (le titre ne se coupe pas) ; l'en-tête du niveau ajoute « N archivée(s) » au compteur des actives.
+- Visible 7 jours après la date d'archivage ; au-delà, masquée. Un bouton « Afficher les archives (N) » sous la liste de **chaque niveau** (état vide compris ; ancre `#level_<slug>`), taille `sm` dont la zone tactile est portée à 48 px (convention des boutons) (lien `?archives=1`, Turbo, `aria-expanded`) les montre toutes ; « Masquer les archives » les remasque. N compte les archives masquées ; le bouton n'existe pas à 0.
 
 **Comportement Turbo**
 - Archiver et restaurer répondent par un `turbo_stream` qui remplace la carte (`classroom_<public_id>`) ou le groupe du niveau (`level_<slug>`) et émet un toast de succès.
@@ -61,11 +61,14 @@ Un établissement importé a toutes les classes de la 6ème à la Tle. Sa direct
 
 **Accessibilité**
 - Cibles tactiles ≥ 48×48 px pour le ⋮ et les boutons de la confirmation ; 390 px : menu et dialog utilisables au pouce.
-- `<dialog>` avec `aria-labelledby` (titre) et `aria-describedby` (corps) ; focus piégé, Échap = Annuler.
-- Le toast de succès a `role="status"`.
+- `<dialog>` avec `aria-labelledby` (titre) et `aria-describedby` (corps, option `described_by:` de `ui_modal`) ; focus piégé, Échap = Annuler.
+- En-tête de la page d'un niveau (direction) : le ⋮ reste à droite du titre sous `sm` (`ml-auto`).
+- Le toast de succès est annoncé par la région `aria-live="polite"` des toasts (convention UDR-0006/0071 ; pas de `role="status"` en plus, qui doublerait l'annonce).
+- Le bouton ⋮ et son menu portent le même libellé (convention du composant `ui_dropdown`, UDR-0042).
 
 **Côté élève (UDR existantes)**
 - Un élève sans classe active voit l'écran « Choisis ta classe » existant ; son en-tête n'affiche plus le nom de la classe archivée.
+- Lien d'une classe archivée : bandeau « Cette classe est archivée », pas de « Rejoindre » ; l'élève connecté a le bouton « Choisir ma classe » (`#choose-classroom`) ; le visiteur est renvoyé vers l'inscription standard avec un toast d'alerte.
 
 ## 4. Conséquences
 

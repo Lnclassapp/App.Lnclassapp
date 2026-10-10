@@ -4,7 +4,7 @@
 <%= turbo_stream_toast @notice || @alert, type: (@notice ? :success : :info) %>
 <% if @level %>
   <%= turbo_stream.replace "level_#{@level.slug}", method: :morph do %>
-    <%= render "teams/schools/classroom_group", level: @level, school_active: @school.status == "active", school_public_id: @school.public_id %>
+    <%= render "teams/schools/classroom_group", level: @level, school_active: @school.status == "active", school_public_id: @school.public_id, archives_shown: false %>
   <% end %>
 <% end %>
 <% if @notice %>

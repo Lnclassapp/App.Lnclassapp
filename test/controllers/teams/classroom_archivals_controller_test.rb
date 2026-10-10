@@ -159,19 +159,33 @@ class Teams::ClassroomArchivalsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", school_path(@school.public_id, archives: 1), false
   end
 
-  test "la fiche : archivée de 8 jours masquée derrière « Afficher les archives (1) », visible avec ?archives=1" do
+  test "ADR-0088 : la carte d'une classe archivée n'est plus un lien, et son niveau dit combien d'archivées il montre" do
+    archive_at(@classroom, ago: 2.days)
+    sign_in_as @member
+
+    get school_path(@school.public_id)
+
+    assert_select "li#classroom_#{@classroom.public_id}", text: including("Archivée")
+    assert_select "li#classroom_#{@classroom.public_id} a[href=?]", classroom_path(@classroom.public_id), 0
+    assert_select "section#level_#{@classroom.level.slug}", text: including("1 archivée")
+  end
+
+  test "la fiche : archivée de 8 jours masquée derrière « Afficher les archives (1) » de son niveau, visible avec ?archives=1" do
     archive_at(@classroom, ago: 8.days)
     sign_in_as @member
 
     get school_path(@school.public_id)
 
     assert_select "li#classroom_#{@classroom.public_id}", false
-    assert_select "a[href=?][aria-expanded=false]", school_path(@school.public_id, archives: 1), text: including("Afficher les archives (1)")
+    level = "level_#{@classroom.level.slug}"
+    assert_select "section##{level} a[href=?][aria-expanded=false]", school_path(@school.public_id, archives: 1, anchor: level),
+                  text: including("Afficher les archives (1)")
 
     get school_path(@school.public_id, archives: 1)
 
     assert_select "li#classroom_#{@classroom.public_id}", text: including("Archivée")
-    assert_select "a[href=?][aria-expanded=true]", school_path(@school.public_id), text: including("Masquer les archives")
+    assert_select "section##{level} a[href=?][aria-expanded=true]", school_path(@school.public_id, anchor: level),
+                  text: including("Masquer les archives")
   end
 
   test "la fiche : un niveau sans classe active visible affiche « Aucune classe » et n'a pas de menu" do

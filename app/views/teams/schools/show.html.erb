@@ -22,12 +22,8 @@
       <% if @school.levels.empty? %>
         <%= ui_empty_state title: t(".no_classrooms"), description: t(".no_classrooms_description"), icon: "academic-cap" %>
       <% else %>
-        <%= render partial: "classroom_group", collection: @school.levels, as: :level, locals: { school_active: @school.status == "active", school_public_id: @school.public_id } %>
-      <% end %>
-      <% if @school.archived_total.positive? %>
-        <%# UDR-0083 §3.1 : les archivées de plus de 7 jours ne paraissent que sur demande (?archives=1). %>
-        <%= render "shared/archives_toggle", hidden_count: @school.hidden_archives_count, shown: @school.archives_shown,
-                                             show_path: school_path(@school.public_id, archives: 1), hide_path: school_path(@school.public_id) %>
+        <%= render partial: "classroom_group", collection: @school.levels, as: :level, locals: { school_active: @school.status == "active", school_public_id: @school.public_id,
+                                                                                                      archives_shown: @school.archives_shown } %>
       <% end %>
     </section>
 

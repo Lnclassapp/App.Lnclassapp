@@ -38,7 +38,9 @@ Règle d'autorisation : la politique « structure d'établissement » existante 
 | Direction d'un autre établissement ou établissement inactif | Refusé (403) |
 | Niveau sans classe active | L'action « Archiver le niveau » n'est pas proposée |
 | Élève sans autre classe active | À sa prochaine page, écran « Choisis ta classe » |
-| Élève dans plusieurs classes dont une archivée | Les autres classes restent intactes |
+| Élève dans plusieurs classes dont une archivée | Les autres classes restent intactes ; si c'est sa classe principale, il passe par « Choisis ta classe » |
+| Page d'une classe archivée | 404 pour tous ; carte non cliquable |
+| Visiteur sur le lien d'une classe archivée | Renvoyé vers l'inscription standard, averti ; l'élève connecté a « Choisir ma classe » |
 | Lien d'inscription d'une classe archivée | Refuse l'élève (déjà le cas), le message nomme l'archivage |
 | Restauration quand l'établissement est inactif (direction) | Refusée ; l'équipe peut |
 
@@ -90,9 +92,16 @@ Scénario : l'élève
   Alors il voit « Choisis ta classe » et aucun exercice
   Et son en-tête ne nomme plus la classe archivée
 
-Scénario : l'élève multi-classes
-  Étant donné un élève de deux classes dont l'une est archivée
-  Alors il voit l'autre classe normalement
+Scénario : l'élève multi-classes (décision du porteur après le challenger, 2026-10-10)
+  Étant donné un élève de deux classes dont la classe secondaire est archivée
+  Alors il voit sa classe principale normalement
+  Étant donné un élève dont la classe principale est archivée et qui a une autre classe active
+  Alors il voit « Choisis ta classe » et choisit lui-même sa nouvelle classe principale
+
+Scénario : la page d'une classe archivée (décision du porteur, 2026-10-10)
+  Étant donné une classe archivée
+  Quand l'enseignant ou l'équipe ouvre son adresse
+  Alors la page n'existe pas (404) ; la classe se restaure depuis le menu ⋮ de l'établissement
 
 Scénario : l'enseignant
   Étant donné un enseignant d'une classe archivée et d'une classe active

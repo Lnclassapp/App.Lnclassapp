@@ -12,9 +12,12 @@
                    back: { label: t(".back"), href: school_admin_classrooms_path } do %>
   <%# UDR-0083 : « Archiver le niveau » n'existe que s'il reste une classe active et que l'établissement l'est. %>
   <% if @school.active? && active.any? %>
+    <%# ml-auto : à droite du titre aussi sous sm, où l'en-tête passe en colonne (UDR-0083). %>
+    <div class="ml-auto">
     <%= render "shared/level_archive_menu", name: @level.level_name, slug: @level.level_slug, classrooms_count: active.size,
                                             students_count: @level.students_count, teachers_count: @level.teachers_count,
                                             archive_path: school_admin_level_archivals_path %>
+    </div>
   <% end %>
 <% end %>
 
