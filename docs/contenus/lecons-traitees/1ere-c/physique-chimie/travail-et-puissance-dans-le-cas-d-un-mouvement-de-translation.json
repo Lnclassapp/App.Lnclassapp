@@ -1,0 +1,1707 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Travail et puissance dans le cas d'un mouvement de translation",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Physique-Chimie",
+      "series_name": "C",
+      "essentials": [
+        {
+          "name": "Le travail d'une force constante",
+          "subtitle": "Force, déplacement et angle : un travail moteur, résistant ou nul",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Calculer le travail d'une force constante avec $W = F \\times d \\times \\cos\\alpha$.</li><li>Dire si un travail est moteur, résistant ou nul.</li><li>Convertir les données en unités SI (newtons, mètres) avant de calculer.</li></ul><h2>L'image pour comprendre</h2><p><strong>Image 1 : la charrette du marché.</strong> Awa tire sa charrette de légumes avec une corde, du portail du marché jusqu'à son étal, 40 m plus loin. Si elle tire la corde bien à l'horizontale, tout son effort fait avancer la charrette. Si elle tient la corde en l'air, inclinée vers le haut, une partie de son effort essaie de soulever la charrette au lieu de la faire avancer.</p><p><strong>Le pont.</strong> La force, c'est la traction d'Awa sur la corde. Le déplacement, c'est le trajet du portail à l'étal. L'angle $\\alpha$ entre la corde et le sol, c'est l'angle entre la force et le déplacement. Seule la part de la force qui va dans le sens du déplacement fait avancer la charrette : cette part vaut $F\\cos\\alpha$. Le travail, c'est cette part multipliée par la distance parcourue.</p><p><strong>La limite de l'image.</strong> La force ne disparaît pas quand la corde est inclinée : on mesure seulement la part qui sert à avancer. Et en physique, être fatigué n'est pas travailler : Awa qui porte un sac immobile se fatigue, mais le point d'application ne se déplace pas, donc le travail est nul.</p><p><strong>Image 2 : le gbaka qui freine.</strong> Le chauffeur freine : les freins ne font pas avancer le gbaka, ils s'y opposent. Leur force est de sens contraire au déplacement, donc l'angle vaut $180^\\circ$. Comme $\\cos 180^\\circ = -1$, le travail est négatif : on dit qu'il est <strong>résistant</strong>.</p><p><strong>La limite de l'image.</strong> Un travail négatif ne veut pas dire que la force n'existe pas, ni que le gbaka recule. Il dit seulement que la force s'oppose au déplacement.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Force constante.</strong> C'est une force dont la valeur, la direction et le sens ne changent pas pendant le déplacement.</p><p><strong>Travail.</strong> Quand le point d'application d'une force constante $\\vec F$ va d'un point A à un point B, le travail de la force est :</p><p>$$W_{AB}(\\vec F) = F \\times AB \\times \\cos\\alpha$$</p><p>$F$ est en newtons (N), $AB$ en mètres (m), et $\\alpha$ est l'angle entre $\\vec F$ et le déplacement $\\overrightarrow{AB}$. Le travail s'exprime en joules (J) : $1\\ \\text{J} = 1\\ \\text{N} \\times 1\\ \\text{m}$.</p><p><strong>Signe du travail.</strong> Si $0^\\circ \\le \\alpha < 90^\\circ$, $\\cos\\alpha > 0$ : le travail est <strong>moteur</strong> (positif). Si $\\alpha = 90^\\circ$, le travail est <strong>nul</strong>. Si $90^\\circ < \\alpha \\le 180^\\circ$, le travail est <strong>résistant</strong> (négatif).</p><p><strong>Chemin suivi.</strong> Pour une force constante, le travail ne dépend que du point de départ A et du point d'arrivée B, pas du chemin suivi entre les deux.</p></blockquote><h2>Exemple résolu</h2><p>Un ouvrier tire une caisse avec une corde. La tension est constante, $T = 200\\ \\text{N}$, et la corde fait $60^\\circ$ avec le sol horizontal. La caisse avance de 40 m en ligne droite sur le sol. Calcule le travail de la tension.</p><ol><li><strong>Données en SI.</strong> $T = 200\\ \\text{N}$, $AB = 40\\ \\text{m}$. Le déplacement est horizontal et la corde fait $60^\\circ$ avec l'horizontale : $\\alpha = 60^\\circ$.</li><li><strong>Formule.</strong> $W = T \\times AB \\times \\cos\\alpha$.</li><li><strong>Calcul.</strong> $W = 200 \\times 40 \\times \\cos 60^\\circ = 200 \\times 40 \\times 0{,}5 = 4000\\ \\text{J}$.</li><li><strong>Signe.</strong> $\\cos 60^\\circ > 0$ : le travail est moteur.</li></ol><p>Le travail de la tension vaut $4000\\ \\text{J}$, soit $4\\ \\text{kJ}$.</p><h2>Le piège à éviter</h2><p>Se tromper d'angle. $\\alpha$ est toujours l'angle entre la force et le déplacement. Si une corde fait $30^\\circ$ avec la verticale et que le déplacement est horizontal, l'angle avec le déplacement vaut $90^\\circ - 30^\\circ = 60^\\circ$, pas $30^\\circ$.</p><p>Autre erreur : oublier de convertir. Des kilomètres, des centimètres ou des kilonewtons donnent un résultat faux : il faut des mètres et des newtons pour obtenir des joules.</p><h2>En une phrase</h2><p>Le travail d'une force constante, c'est la part de la force qui va dans le sens du déplacement multipliée par la distance : $F \\times d \\times \\cos\\alpha$, en joules.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître le travail et son signe",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Awa marche d'un pas régulier sur un sol plat et horizontal en portant un seau d'eau sur la tête. La force que sa tête exerce sur le seau est verticale, dirigée vers le haut. Quel est son travail pendant la marche ?",
+                  "question_type": "single_choice",
+                  "explanation": "La force est verticale et le déplacement horizontal : $\\alpha = 90^\\circ$ et $\\cos 90^\\circ = 0$, donc $W = 0$. Soutenir ne fait pas avancer. La fatigue d'Awa n'est pas un travail au sens de la physique.",
+                  "answers": [
+                    {
+                      "content": "Nul, car la force est perpendiculaire au déplacement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Positif, car la force soutient le seau pendant tout le trajet",
+                      "correct": false
+                    },
+                    {
+                      "content": "Négatif, car la force est de sens contraire au poids du seau",
+                      "correct": false
+                    },
+                    {
+                      "content": "Positif, car Awa se fatigue en portant le seau",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le joule est l'unité du travail. Un joule est le travail d'une force de 1 N dont le point d'application se déplace de 1 m dans la direction et le sens de la force.",
+                  "question_type": "true_false",
+                  "explanation": "Avec $\\alpha = 0^\\circ$ : $W = 1 \\times 1 \\times \\cos 0^\\circ = 1\\ \\text{J}$, donc $1\\ \\text{J} = 1\\ \\text{N} \\times 1\\ \\text{m}$. Le newton, lui, mesure une force et non un travail.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force constante de valeur $F$ a son point d'application qui se déplace d'un point A à un point B. On note $\\alpha$ l'angle entre la force et le déplacement $\\overrightarrow{AB}$. Quelle est l'expression du travail de la force ?",
+                  "question_type": "single_choice",
+                  "explanation": "Seule la part de la force dans le sens du déplacement compte : $F\\cos\\alpha$, multipliée par la distance $AB$. Le sinus donnerait la part perpendiculaire au déplacement, qui ne fait pas avancer la charrette d'Awa.",
+                  "answers": [
+                    {
+                      "content": "$W = F \\times AB \\times \\cos\\alpha$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$W = F \\times AB \\times \\sin\\alpha$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$W = \\dfrac{F \\times \\cos\\alpha}{AB}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$W = F + AB \\times \\cos\\alpha$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Moteur : la force aide le déplacement ($\\alpha < 90^\\circ$, $\\cos\\alpha > 0$). Résistant : elle s'y oppose ($\\alpha > 90^\\circ$, $\\cos\\alpha < 0$). L'angle de $180^\\circ$ est celui du freinage : le travail est alors négatif, pas moteur.",
+                  "answers": [
+                    {
+                      "content": "Un travail moteur est positif.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un travail résistant est négatif.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un travail moteur correspond à un angle $\\alpha$ de $180^\\circ$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le travail d'une force est toujours positif.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka freine en ligne droite et avance encore de 30 m. La force de freinage est de sens contraire au déplacement. Quel est son travail ?",
+                  "question_type": "single_choice",
+                  "explanation": "Force opposée au déplacement : $\\alpha = 180^\\circ$, $\\cos 180^\\circ = -1$, donc $W = -F \\times d$. Le travail est négatif. Le fait que le gbaka finisse par s'arrêter ne rend pas ce travail nul.",
+                  "answers": [
+                    {
+                      "content": "Négatif (résistant), car $\\alpha = 180^\\circ$ et $\\cos 180^\\circ = -1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Positif, car la force s'exerce pendant le déplacement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nul, car le gbaka finit par s'arrêter",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nul, car la force de freinage est horizontale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un porteur tient un sac de riz immobile à bout de bras pendant une heure. Le travail de la force qu'il exerce sur le sac est nul, même s'il se fatigue.",
+                  "question_type": "true_false",
+                  "explanation": "Le point d'application de la force ne se déplace pas : $AB = 0$, donc $W = 0$. La fatigue vient des muscles, elle ne mesure pas le travail au sens de la physique.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer un travail en joules",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un ouvrier pousse un chariot avec une force constante de $50\\ \\text{N}$, dans le sens du déplacement, sur $12\\ \\text{m}$. Quel est le travail de cette force ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\alpha = 0^\\circ$ et $\\cos 0^\\circ = 1$ : $W = 50 \\times 12 \\times 1 = 600\\ \\text{J}$. Additionner 50 et 12 n'a pas de sens physique : la formule est un produit.",
+                  "answers": [
+                    {
+                      "content": "$600\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$62\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4{,}2\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force constante de $80\\ \\text{N}$ fait un angle de $60^\\circ$ avec le déplacement, qui mesure $10\\ \\text{m}$. Quel est son travail ?",
+                  "question_type": "single_choice",
+                  "explanation": "$W = 80 \\times 10 \\times \\cos 60^\\circ = 800 \\times 0{,}5 = 400\\ \\text{J}$. Le résultat $800\\ \\text{J}$ oublie le cosinus ; $693\\ \\text{J}$ vient de $\\cos 30^\\circ$, un angle confondu avec son complément.",
+                  "answers": [
+                    {
+                      "content": "$400\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$800\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$693\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force constante de $200\\ \\text{N}$, dans le sens du déplacement, s'exerce sur un chariot qui avance de $0{,}5\\ \\text{km}$. Quel est son travail ?",
+                  "question_type": "single_choice",
+                  "explanation": "$0{,}5\\ \\text{km} = 500\\ \\text{m}$ et $\\cos 0^\\circ = 1$ : $W = 200 \\times 500 = 100\\,000\\ \\text{J}$, soit $100\\ \\text{kJ}$. Garder $0{,}5$ sans convertir donne $100\\ \\text{J}$ : il faut des mètres.",
+                  "answers": [
+                    {
+                      "content": "$100\\,000\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$100\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1\\,000\\,000\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka avance de $25\\ \\text{m}$ en freinant. La force de freinage, constante, vaut $3000\\ \\text{N}$ et s'oppose au déplacement. Quel est son travail ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\alpha = 180^\\circ$ et $\\cos 180^\\circ = -1$ : $W = 3000 \\times 25 \\times (-1) = -75\\,000\\ \\text{J}$. Le travail est résistant. Le résultat positif oublie le signe ; $-120\\ \\text{J}$ vient d'une division au lieu d'un produit.",
+                  "answers": [
+                    {
+                      "content": "$-75\\,000\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+75\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-120\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force constante de $100\\ \\text{N}$ s'exerce sur un objet dont le point d'application se déplace de $20\\ \\text{m}$ en ligne droite. On note $\\alpha$ l'angle entre la force et le déplacement. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$100 \\times 20 = 2000$. Avec $\\cos 0^\\circ = 1$ on obtient $2000\\ \\text{J}$, avec $\\cos 180^\\circ = -1$ on obtient $-2000\\ \\text{J}$. À $90^\\circ$, $\\cos = 0$ donne un travail nul ; à $60^\\circ$, $\\cos = 0{,}5$ donne $1000\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "Pour $\\alpha = 0^\\circ$, le travail vaut $2000\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour $\\alpha = 180^\\circ$, le travail vaut $-2000\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour $\\alpha = 90^\\circ$, le travail vaut $2000\\ \\text{J}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour $\\alpha = 60^\\circ$, le travail vaut $2000\\ \\text{J}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force constante de $100\\ \\text{N}$ effectue un travail de $500\\ \\text{J}$ pendant un déplacement de $10\\ \\text{m}$. Quel est l'angle $\\alpha$ entre la force et le déplacement ?",
+                  "question_type": "single_choice",
+                  "explanation": "$500 = 100 \\times 10 \\times \\cos\\alpha$, donc $\\cos\\alpha = 0{,}5$ et $\\alpha = 60^\\circ$. À $0^\\circ$ on aurait $1000\\ \\text{J}$ ; à $30^\\circ$, environ $866\\ \\text{J}$ ; à $45^\\circ$, environ $707\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "$60^\\circ$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$30^\\circ$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0^\\circ$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$45^\\circ$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Plusieurs forces et unités à convertir",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un ouvrier tire une charrette sur 30 m en ligne droite, avec une corde inclinée de $60^\\circ$ par rapport au sol horizontal. La tension est constante et vaut $120\\ \\text{N}$. Le sol exerce un frottement constant de $40\\ \\text{N}$, de sens contraire au déplacement. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Tension : $120 \\times 30 \\times \\cos 60^\\circ = 1800\\ \\text{J}$. Frottement : $40 \\times 30 \\times \\cos 180^\\circ = -1200\\ \\text{J}$. Somme : $+600\\ \\text{J}$. Le résultat $3118\\ \\text{J}$ utilise $\\cos 30^\\circ$ ; $3600\\ \\text{J}$ oublie le cosinus.",
+                  "answers": [
+                    {
+                      "content": "Le travail de la tension vaut $1800\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail du frottement vaut $-1200\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La somme de ces deux travaux vaut $+600\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail de la tension vaut $3600\\ \\text{J}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le travail du frottement vaut $+1200\\ \\text{J}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le travail de la tension vaut environ $3118\\ \\text{J}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force constante de $2\\ \\text{kN}$ s'exerce dans le sens du déplacement d'un objet qui avance de $300\\ \\text{cm}$. Quel est son travail ?",
+                  "question_type": "single_choice",
+                  "explanation": "$2\\ \\text{kN} = 2000\\ \\text{N}$ et $300\\ \\text{cm} = 3\\ \\text{m}$ : $W = 2000 \\times 3 = 6000\\ \\text{J}$. Les autres résultats viennent d'unités non converties : $2 \\times 300$, $2000 \\times 300$ ou $2 \\times 3$.",
+                  "answers": [
+                    {
+                      "content": "$6000\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$600\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$600\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un objet est déplacé d'un point A à un point B, soit en ligne droite, soit par un détour. Pendant tout le déplacement, il est soumis à une même force constante $\\vec F$ (même valeur, même direction, même sens). Le travail de $\\vec F$ est le même par les deux trajets.",
+                  "question_type": "true_false",
+                  "explanation": "Pour une force constante, $W = F \\times AB \\times \\cos\\alpha$ ne dépend que de A et de B. Ce n'est plus vrai pour un frottement, dont le sens change avec la trajectoire : il n'est pas une force de direction fixe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux garçons poussent un gbaka en panne sur 20 m, en ligne droite sur un sol horizontal. L'un exerce $300\\ \\text{N}$ et l'autre $200\\ \\text{N}$, tous deux dans le sens du déplacement. Le sol et l'air exercent au total une résistance de $100\\ \\text{N}$, de sens contraire. Quelle est la somme des travaux de ces forces ?",
+                  "question_type": "single_choice",
+                  "explanation": "$300 \\times 20 = 6000\\ \\text{J}$ et $200 \\times 20 = 4000\\ \\text{J}$ ; la résistance donne $-100 \\times 20 = -2000\\ \\text{J}$. Total : $8000\\ \\text{J}$. Le poids et la réaction du sol sont perpendiculaires au déplacement : leur travail est nul.",
+                  "answers": [
+                    {
+                      "content": "$8000\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$10\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6000\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force constante fait un angle de $60^\\circ$ avec le déplacement de $18\\ \\text{m}$ de son point d'application. Son travail vaut $3600\\ \\text{J}$. Quelle est la valeur de la force ?",
+                  "question_type": "single_choice",
+                  "explanation": "$3600 = F \\times 18 \\times \\cos 60^\\circ = F \\times 9$, donc $F = 400\\ \\text{N}$. Le résultat $200\\ \\text{N}$ oublie le cosinus ; $231\\ \\text{N}$ utilise $\\cos 30^\\circ$ ; $7200\\ \\text{N}$ oublie la distance.",
+                  "answers": [
+                    {
+                      "content": "$400\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$200\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$231\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7200\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quelles situations le travail de la force indiquée est-il nul ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "La réaction est perpendiculaire à la route : $\\cos 90^\\circ = 0$. Un mur qui ne bouge pas donne un déplacement nul. La force motrice ($\\alpha = 0^\\circ$) a un travail positif, la résistance de l'air ($\\alpha = 180^\\circ$) un travail négatif.",
+                  "answers": [
+                    {
+                      "content": "La réaction de la route sur un gbaka qui roule sur une route horizontale (force perpendiculaire à la route)",
+                      "correct": true
+                    },
+                    {
+                      "content": "La force de $200\\ \\text{N}$ qu'une personne exerce sur un mur qui ne bouge pas",
+                      "correct": true
+                    },
+                    {
+                      "content": "La force motrice sur un gbaka qui avance",
+                      "correct": false
+                    },
+                    {
+                      "content": "La résistance de l'air sur un gbaka qui avance",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le travail du poids",
+          "subtitle": "Le poids travaille selon la hauteur gagnée ou perdue, jamais selon le chemin",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Calculer le travail du poids à la montée et à la descente.</li><li>Trouver le dénivelé d'un plan incliné avec $h = d \\sin\\theta$.</li><li>Expliquer pourquoi le travail du poids ne dépend pas du chemin suivi.</li></ul><h2>L'image pour comprendre</h2><p><strong>Image 1 : le sac de ciment.</strong> Sur un chantier à Abidjan, un maçon doit monter un sac de ciment de 50 kg du sol jusqu'au plancher du premier étage, 6 m plus haut. Il peut monter par l'escalier, long et plein de tournants, ou hisser le sac avec une corde, tout droit. Dans les deux cas, le sac gagne les mêmes 6 m de hauteur, et le poids s'y oppose de la même manière.</p><p><strong>Le pont.</strong> Le poids, c'est la force qui tire le sac vers le bas. La hauteur gagnée entre le sol et le plancher, c'est la seule chose qui compte pour son travail. Le chemin choisi, escalier ou corde, ne change rien.</p><p><strong>La limite de l'image.</strong> Ceci est vrai pour le poids, qui est une force constante. Le frottement du sac sur l'escalier, lui, dépend de la longueur du trajet. Et monter par l'escalier reste plus fatigant : la fatigue n'est pas le travail du poids.</p><p><strong>Image 2 : le gbaka dans la côte.</strong> Quand le gbaka monte une côte, son poids le tire vers l'arrière : il s'oppose à l'avancée. Quand il la descend, le poids le pousse vers l'avant : il aide. Sur une route plate, il ne fait ni l'un ni l'autre.</p><p><strong>Le pont.</strong> Montée : le travail du poids est résistant (négatif). Descente : il est moteur (positif). Route horizontale : il est nul.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Poids.</strong> Le poids d'un solide de masse $m$ est $P = m g$. Près de la Terre, il est constant. On prend $g \\approx 9{,}8\\ \\text{N/kg}$, arrondi à $10\\ \\text{N/kg}$ dans les exercices quand l'énoncé le dit.</p><p><strong>Travail du poids.</strong> Sur un axe vertical orienté vers le haut, le centre d'inertie G d'un solide passe d'une altitude $z_A$ à une altitude $z_B$. Le travail du poids est :</p><p>$$W_{AB}(\\vec P) = m g\\,(z_A - z_B)$$</p><p>Descente ($z_B < z_A$) : $W = +mgh$, moteur. Montée ($z_B > z_A$) : $W = -mgh$, résistant. Déplacement horizontal : $W = 0$. Ici $h$ désigne la hauteur perdue ou gagnée, c'est-à-dire la valeur absolue de $z_A - z_B$.</p><p><strong>Pourquoi.</strong> Le poids est vertical, dirigé vers le bas. Si $\\alpha$ est l'angle entre le poids et le déplacement $\\overrightarrow{AB}$, alors $AB\\cos\\alpha = z_A - z_B$ (c'est la descente verticale du point). Donc $W = P \\times AB \\times \\cos\\alpha = mg\\,(z_A - z_B)$.</p><p><strong>Indépendance du chemin.</strong> Le travail du poids ne dépend que de $z_A$ et $z_B$ : pas de la forme du chemin, ni de sa longueur. Sur un aller-retour, il est nul.</p><p><strong>Plan incliné.</strong> Si le solide parcourt une distance $d$ le long d'une pente faisant l'angle $\\theta$ avec l'horizontale, le dénivelé est $h = d \\sin\\theta$.</p></blockquote><h2>Exemple résolu</h2><p>Un fût de 80 kg est monté sur la plateforme d'un camion en glissant sur une planche de 4 m, inclinée de $30^\\circ$ sur l'horizontale. On prend $g = 10\\ \\text{N/kg}$. Calcule le travail du poids du fût.</p><ol><li><strong>Poids.</strong> $P = m g = 80 \\times 10 = 800\\ \\text{N}$.</li><li><strong>Dénivelé.</strong> $h = d \\sin\\theta = 4 \\times \\sin 30^\\circ = 4 \\times 0{,}5 = 2\\ \\text{m}$.</li><li><strong>Signe.</strong> Le fût monte : le travail du poids est résistant. $W = -mgh = -800 \\times 2 = -1600\\ \\text{J}$.</li><li><strong>Vérification.</strong> L'angle entre le poids et le déplacement est $90^\\circ + 30^\\circ = 120^\\circ$ et $\\cos 120^\\circ = -0{,}5$ : $W = 800 \\times 4 \\times (-0{,}5) = -1600\\ \\text{J}$. On retrouve le même résultat.</li></ol><p>Si on avait hissé le fût verticalement de 2 m, le travail du poids serait aussi $-1600\\ \\text{J}$.</p><h2>Le piège à éviter</h2><p>Prendre la longueur de la pente à la place du dénivelé. Dans l'exemple, $-800 \\times 4 = -3200\\ \\text{J}$ est faux : c'est la hauteur gagnée, $2\\ \\text{m}$, qui compte, pas la distance parcourue sur la planche.</p><p>Autre erreur : oublier le signe. À la montée le travail du poids est négatif, à la descente il est positif.</p><h2>En une phrase</h2><p>Le travail du poids vaut $mg(z_A - z_B)$ : positif à la descente, négatif à la montée, nul à l'horizontale, et jamais dépendant du chemin.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Signe et chemin du travail du poids",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quand un solide monte, le travail de son poids est négatif.",
+                  "question_type": "true_false",
+                  "explanation": "Le poids est dirigé vers le bas et le déplacement vers le haut : $\\alpha = 180^\\circ$ et $W = -mgh$. Comme pour le sac de ciment, le poids s'oppose à la montée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de masse $m$ descend d'une hauteur $h$ ; $g$ est l'intensité de la pesanteur. Quel est le travail de son poids ?",
+                  "question_type": "single_choice",
+                  "explanation": "À la descente, le poids aide le mouvement : son travail est positif et vaut $mgh$. Un poids vertical n'a un travail nul que si le déplacement est horizontal.",
+                  "answers": [
+                    {
+                      "content": "$+mgh$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-mgh$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{mg}{h}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$, car le poids est vertical",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de ciment est monté du sol au plancher d'un étage situé 6 m plus haut, soit par un escalier long de 15 m, soit hissé verticalement par une corde. Comment se comparent les travaux du poids sur les deux chemins ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le travail du poids ne dépend que de la différence d'altitude (ici 6 m), pas du chemin : $-mg \\times 6$ dans les deux cas. Le chemin compte pour le frottement, jamais pour le poids.",
+                  "answers": [
+                    {
+                      "content": "Ils sont identiques",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est plus grand en valeur absolue par l'escalier, car le chemin est plus long",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est plus petit en valeur absolue par l'escalier, car on monte plus lentement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est nul par l'escalier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour calculer le travail du poids d'un solide entre deux points A et B, quelles données faut-il connaître ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$W = mg(z_A - z_B)$ : la masse (avec $g$) et la différence d'altitude suffisent. Ni la longueur du chemin suivi ni la durée du trajet n'interviennent dans le travail du poids.",
+                  "answers": [
+                    {
+                      "content": "La masse du solide",
+                      "correct": true
+                    },
+                    {
+                      "content": "La différence d'altitude entre A et B",
+                      "correct": true
+                    },
+                    {
+                      "content": "La longueur du chemin suivi",
+                      "correct": false
+                    },
+                    {
+                      "content": "La durée du trajet",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka roule sur une route parfaitement horizontale. Quel est le travail de son poids pendant ce trajet ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'altitude ne change pas : $z_A - z_B = 0$, donc $W = 0$. Le poids est vertical et le déplacement horizontal ($\\alpha = 90^\\circ$). Un véhicule lourd a un grand poids, mais cela ne rend pas son travail non nul.",
+                  "answers": [
+                    {
+                      "content": "Nul, car le poids est perpendiculaire au déplacement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Négatif, car le gbaka est lourd",
+                      "correct": false
+                    },
+                    {
+                      "content": "Positif, car le poids est dirigé vers le bas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Égal à $mg$ multiplié par la distance parcourue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand un gbaka descend une côte, son poids est une force résistante.",
+                  "question_type": "true_false",
+                  "explanation": "En descente, le poids a une composante dans le sens du déplacement : son travail est moteur (positif). C'est à la montée que le poids est résistant.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer le travail du poids",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un maçon monte un sac de $20\\ \\text{kg}$ du sol à un plancher situé $3\\ \\text{m}$ plus haut. On prend $g = 10\\ \\text{N/kg}$. Quel est le travail du poids du sac ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P = 20 \\times 10 = 200\\ \\text{N}$. À la montée : $W = -200 \\times 3 = -600\\ \\text{J}$. Le résultat $-60\\ \\text{J}$ oublie $g$ ; le résultat $+600\\ \\text{J}$ oublie que la montée est résistante.",
+                  "answers": [
+                    {
+                      "content": "$-600\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+600\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-60\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un seau de $40\\ \\text{kg}$ descend de $5\\ \\text{m}$ au bout d'une corde. On prend $g = 10\\ \\text{N/kg}$. Quel est le travail de son poids ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P = 40 \\times 10 = 400\\ \\text{N}$. À la descente : $W = +400 \\times 5 = +2000\\ \\text{J}$. Le résultat $200\\ \\text{J}$ oublie $g$ ; le signe négatif oublierait que le poids aide à la descente.",
+                  "answers": [
+                    {
+                      "content": "$+2000\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-2000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+200\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une charrette de $150\\ \\text{kg}$ est montée de bas en haut d'une rampe de $10\\ \\text{m}$, inclinée de $30^\\circ$ sur l'horizontale. On prend $g = 10\\ \\text{N/kg}$. Quel est le travail de son poids ?",
+                  "question_type": "single_choice",
+                  "explanation": "$h = 10 \\times \\sin 30^\\circ = 5\\ \\text{m}$ et $P = 1500\\ \\text{N}$. Montée : $W = -1500 \\times 5 = -7500\\ \\text{J}$. Le résultat $-15\\,000\\ \\text{J}$ prend la longueur de la rampe ; $-13\\,000\\ \\text{J}$ environ vient de $\\cos 30^\\circ$ au lieu de $\\sin 30^\\circ$.",
+                  "answers": [
+                    {
+                      "content": "$-7500\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-15\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+7500\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-13\\,000\\ \\text{J}$ environ",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une grue soulève une masse de $2\\ \\text{t}$ de $5\\ \\text{m}$. On prend $g = 10\\ \\text{N/kg}$. Quel est le travail du poids ?",
+                  "question_type": "single_choice",
+                  "explanation": "$2\\ \\text{t} = 2000\\ \\text{kg}$ donc $P = 20\\,000\\ \\text{N}$. Montée : $W = -20\\,000 \\times 5 = -100\\,000\\ \\text{J}$. Le résultat $-100\\ \\text{J}$ oublie la conversion des tonnes ; $-10\\,000\\ \\text{J}$ oublie $g$.",
+                  "answers": [
+                    {
+                      "content": "$-100\\,000\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-100\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-10\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+100\\,000\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camion de $4000\\ \\text{kg}$ monte une route droite longue de $500\\ \\text{m}$. Le point d'arrivée est $20\\ \\text{m}$ plus haut que le point de départ. On prend $g = 10\\ \\text{N/kg}$. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Seul le dénivelé compte : $W = -4000 \\times 10 \\times 20 = -800\\,000\\ \\text{J}$, négatif à la montée. Utiliser les $500\\ \\text{m}$ de route, c'est confondre la longueur du chemin et la hauteur gagnée.",
+                  "answers": [
+                    {
+                      "content": "Le travail du poids vaut $-800\\,000\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail du poids est résistant.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail du poids vaut $-20\\,000\\,000\\ \\text{J}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le travail du poids vaut $+800\\,000\\ \\text{J}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maçon monte un sac de $30\\ \\text{kg}$. Le travail du poids du sac vaut $-1500\\ \\text{J}$. On prend $g = 10\\ \\text{N/kg}$. De quelle hauteur le sac est-il monté ?",
+                  "question_type": "single_choice",
+                  "explanation": "$|W| = mgh$, donc $h = \\dfrac{1500}{30 \\times 10} = 5\\ \\text{m}$. Le résultat $50\\ \\text{m}$ s'obtient en oubliant $g$ ; $0{,}2\\ \\text{m}$, en inversant la division.",
+                  "answers": [
+                    {
+                      "content": "$5\\ \\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$50\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}2\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15\\ \\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Dénivelé, chemins et aller-retour",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un ouvrier monte un seau d'enduit de $12\\ \\text{kg}$ du sol au sommet d'un échafaudage situé à $9\\ \\text{m}$ de hauteur, par un escalier dont le parcours mesure $15\\ \\text{m}$. On prend $g = 10\\ \\text{N/kg}$. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$P = 120\\ \\text{N}$ et $W = -120 \\times 9 = -1080\\ \\text{J}$, quel que soit le chemin. Le résultat $-1800\\ \\text{J}$ utilise la longueur du parcours au lieu de la hauteur. Le temps n'intervient jamais dans le travail du poids.",
+                  "answers": [
+                    {
+                      "content": "Le travail du poids vaut $-1080\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail du poids serait le même si le seau était hissé verticalement par une corde.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail du poids est résistant.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail du poids vaut $-1800\\ \\text{J}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le travail du poids vaut $+1080\\ \\text{J}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le travail du poids dépend de la durée de la montée.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une brouette de $100\\ \\text{kg}$ descend une piste de chantier longue de $40\\ \\text{m}$, inclinée de $30^\\circ$ sur l'horizontale. On prend $g = 10\\ \\text{N/kg}$. Quel est le travail de son poids ?",
+                  "question_type": "single_choice",
+                  "explanation": "$h = 40 \\times \\sin 30^\\circ = 20\\ \\text{m}$ et $P = 1000\\ \\text{N}$. À la descente : $W = +1000 \\times 20 = +20\\,000\\ \\text{J}$. Le résultat $+40\\,000\\ \\text{J}$ prend la longueur de la piste pour la hauteur ; $+34\\,600\\ \\text{J}$ utilise $\\cos 30^\\circ$.",
+                  "answers": [
+                    {
+                      "content": "$+20\\,000\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-20\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+40\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+34\\,600\\ \\text{J}$ environ",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide monte d'un point A à un point B, puis redescend en A par un autre chemin. Le travail total de son poids sur cet aller-retour est nul.",
+                  "question_type": "true_false",
+                  "explanation": "À l'aller, $-mgh$ ; au retour, $+mgh$ : la somme est nulle, quel que soit le chemin. Cela ne marche pas pour un frottement, qui s'oppose au mouvement à l'aller comme au retour.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de $50\\ \\text{kg}$ est monté du sol à un plancher situé $6\\ \\text{m}$ plus haut en glissant sur une rampe rugueuse de $12\\ \\text{m}$. Le frottement $f$ est constant et opposé au mouvement. On prend $g = 10\\ \\text{N/kg}$. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Poids : seule la hauteur (6 m) compte, donc $-500 \\times 6 = -3000\\ \\text{J}$ pour tout chemin. Frottement : il dépend du chemin parcouru, donc $-f \\times 12$. Confondre les deux est l'erreur classique.",
+                  "answers": [
+                    {
+                      "content": "Le travail du poids vaut $-3000\\ \\text{J}$, quel que soit le chemin entre le sol et le plancher.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail du frottement sur la rampe vaut $-12 f$, avec $f$ en newtons.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail du poids sur la rampe vaut $-6000\\ \\text{J}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le travail du frottement est nul, car la hauteur gagnée est la même par tous les chemins.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide de $20\\ \\text{kg}$ part d'un point A situé à $12\\ \\text{m}$ d'altitude, descend en B à $4\\ \\text{m}$, puis remonte en C à $9\\ \\text{m}$. On prend $g = 10\\ \\text{N/kg}$. Quel est le travail de son poids de A à C ?",
+                  "question_type": "single_choice",
+                  "explanation": "Seuls A et C comptent : $W = 200 \\times (12 - 9) = +600\\ \\text{J}$. Le résultat $+1600\\ \\text{J}$ ne regarde que la descente de A à B ; $+2600\\ \\text{J}$ additionne les valeurs absolues des deux dénivelés (8 m et 5 m).",
+                  "answers": [
+                    {
+                      "content": "$+600\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-600\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+2600\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+1600\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On tire un chariot de $60\\ \\text{kg}$ le long d'une rampe de $8\\ \\text{m}$ de long, qui fait l'angle $\\theta$ avec l'horizontale. Le travail du poids du chariot vaut $-1200\\ \\text{J}$. On prend $g = 10\\ \\text{N/kg}$. Quelle est la hauteur gagnée $h$, et que vaut $\\sin\\theta$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P = 600\\ \\text{N}$ et $|W| = P \\times h$, donc $h = 1200 / 600 = 2\\ \\text{m}$. Puis $\\sin\\theta = h/d = 2/8 = 0{,}25$. Un sinus ne dépasse jamais 1 : les valeurs $4$ et $2{,}5$ sont impossibles.",
+                  "answers": [
+                    {
+                      "content": "$h = 2\\ \\text{m}$ et $\\sin\\theta = 0{,}25$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$h = 2\\ \\text{m}$ et $\\sin\\theta = 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$h = 20\\ \\text{m}$ et $\\sin\\theta = 2{,}5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$h = 8\\ \\text{m}$ et $\\sin\\theta = 1$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le travail du frottement et des autres forces",
+          "subtitle": "Frottement, réaction du support, tension : et la somme des travaux",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Calculer le travail d'une force de frottement constante.</li><li>Dire pourquoi la réaction normale d'un support ne travaille pas.</li><li>Calculer la somme des travaux de plusieurs forces, et l'utiliser quand la vitesse est constante.</li></ul><h2>L'image pour comprendre</h2><p><strong>Image 1 : la caisse traînée dans la cour.</strong> Un élève traîne une caisse de livres sur le sol rugueux de la cour de l'école. Le sol retient la caisse tout le long du trajet : plus la distance est grande, plus il la retient longtemps. Si l'élève fait un détour, le sol retient la caisse sur un chemin plus long.</p><p><strong>Le pont.</strong> Le sol qui retient la caisse, c'est la force de frottement $f$. Elle est toujours de sens contraire au glissement : son travail est négatif, et il est d'autant plus grand en valeur absolue que le chemin parcouru est long.</p><p><strong>La limite de l'image.</strong> Ce n'est pas le cas du poids : lui ne se soucie pas de la longueur du chemin. Et le frottement n'est pas toujours de même valeur : on suppose ici qu'il est constant et que la trajectoire est une droite.</p><p><strong>Image 2 : les roues du gbaka sur la route.</strong> Une route plate porte le gbaka : elle le pousse vers le haut, perpendiculairement à la route. Cette poussée soutient le gbaka mais ne le fait ni avancer ni reculer. Son travail est nul.</p><p><strong>Le pont.</strong> La poussée de la route vers le haut, c'est la réaction normale $\\vec R_N$. Elle est perpendiculaire au déplacement : $\\alpha = 90^\\circ$, donc $W = 0$.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Frottement.</strong> Quand un solide glisse sur un support, le support exerce sur lui une force de frottement $\\vec f$ parallèle au support et de sens contraire au déplacement. Si $f$ est constante et si la trajectoire est une droite de longueur $d$ :</p><p>$$W(\\vec f) = -f \\times d$$</p><p>Ce travail est résistant. Il dépend de la longueur du chemin parcouru, pas seulement de A et de B.</p><p><strong>Réaction normale.</strong> La composante de la réaction du support perpendiculaire au support, $\\vec R_N$, a un travail nul quand le solide glisse sur le support (elle est perpendiculaire au déplacement).</p><p><strong>Tension d'un fil ou d'une corde.</strong> Pour une tension constante $T$, $W = T \\times d \\times \\cos\\alpha$, avec $\\alpha$ l'angle entre la corde et le déplacement.</p><p><strong>Plusieurs forces.</strong> Si un solide en translation est soumis à plusieurs forces constantes, la somme de leurs travaux est égale au travail de leur somme vectorielle : $\\sum W = W(\\sum \\vec F)$.</p><p><strong>Vitesse constante.</strong> Si le mouvement est rectiligne uniforme, le principe de l'inertie donne $\\sum \\vec F = \\vec 0$ : la somme des travaux est nulle, $\\sum W = 0$.</p></blockquote><h2>Exemple résolu</h2><p>Un ouvrier tire un fût de 100 kg sur une planche inclinée de $30^\\circ$ sur l'horizontale, longue de 5 m, à vitesse constante. La corde est parallèle à la planche. Le frottement vaut $f = 150\\ \\text{N}$. On prend $g = 10\\ \\text{N/kg}$. Calcule la tension de la corde.</p><ol><li><strong>Bilan des forces.</strong> Poids $\\vec P$, réaction normale $\\vec R_N$, frottement $\\vec f$, tension $\\vec T$.</li><li><strong>Travaux.</strong> $W(\\vec P) = -mg\\,d\\sin 30^\\circ = -1000 \\times 5 \\times 0{,}5 = -2500\\ \\text{J}$. $W(\\vec R_N) = 0$. $W(\\vec f) = -150 \\times 5 = -750\\ \\text{J}$. $W(\\vec T) = T \\times 5$.</li><li><strong>Vitesse constante.</strong> $\\sum W = 0$, donc $-2500 + 0 - 750 + 5T = 0$.</li><li><strong>Résolution.</strong> $5T = 3250$, donc $T = 650\\ \\text{N}$.</li><li><strong>Contrôle.</strong> Avec les forces : $T = mg\\sin 30^\\circ + f = 500 + 150 = 650\\ \\text{N}$. Même résultat.</li></ol><h2>Le piège à éviter</h2><p>Croire que le travail du frottement ne dépend que de A et de B, comme celui du poids. Faux : il dépend de la longueur du chemin. Sur un aller-retour de 10 m, il vaut $-20 f$, pas zéro.</p><p>Autre erreur : penser que « vitesse constante » veut dire « chaque travail est nul ». C'est la <strong>somme</strong> des travaux qui est nulle : un travail moteur compense un travail résistant.</p><h2>En une phrase</h2><p>Le frottement a un travail négatif $-f \\times d$ qui dépend du chemin, la réaction normale ne travaille pas, et à vitesse constante la somme des travaux est nulle.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Frottement, réaction et somme des travaux",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Le travail d'une force de frottement qui s'oppose au glissement d'un solide est négatif.",
+                  "question_type": "true_false",
+                  "explanation": "Le frottement est de sens contraire au déplacement : $\\alpha = 180^\\circ$ et $W = -f \\times d < 0$. C'est la caisse traînée dans la cour : le sol la retient.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une caisse glisse sur un sol horizontal. La réaction normale du sol, perpendiculaire au sol, a un travail :",
+                  "question_type": "single_choice",
+                  "explanation": "La réaction normale est verticale et le déplacement horizontal : $\\alpha = 90^\\circ$ et $W = 0$. Elle compense le poids mais n'a aucun travail.",
+                  "answers": [
+                    {
+                      "content": "Nul, car elle est perpendiculaire au déplacement",
+                      "correct": true
+                    },
+                    {
+                      "content": "Positif, car elle soutient la caisse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Négatif, car elle s'oppose au poids",
+                      "correct": false
+                    },
+                    {
+                      "content": "Égal à $R_N \\times d$, où $d$ est la distance parcourue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une caisse est déplacée d'un point A à un point B sur un sol rugueux, soit par le trajet direct de 10 m, soit par un détour de 30 m. Le frottement $f$ est constant et toujours de sens contraire au déplacement. Comment se comparent les travaux du frottement ?",
+                  "question_type": "single_choice",
+                  "explanation": "$W = -f \\times (\\text{longueur parcourue})$ : $-10 f$ contre $-30 f$. Contrairement au poids, le frottement dépend du chemin suivi.",
+                  "answers": [
+                    {
+                      "content": "Il est plus négatif sur le détour",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est le même sur les deux trajets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est nul sur les deux trajets",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est positif sur le détour",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Awa tire une caisse sur un sol horizontal rugueux, à vitesse constante et en ligne droite, avec une corde horizontale. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Vitesse constante en ligne droite : les forces se compensent, donc $T = f$ et $W(\\vec T) + W(\\vec f) = Td - fd = 0$. Le frottement a un travail négatif ; le poids, perpendiculaire au sol horizontal, un travail nul.",
+                  "answers": [
+                    {
+                      "content": "La somme vectorielle des forces appliquées à la caisse est nulle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La somme des travaux de la tension et du frottement est nulle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail du frottement est positif.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le travail du poids est négatif.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide glisse en ligne droite à vitesse constante. Cela signifie que le travail de chaque force qui s'exerce sur lui est nul.",
+                  "question_type": "true_false",
+                  "explanation": "C'est la somme des travaux qui est nulle. Chaque force peut avoir un travail non nul : la tension fournit un travail positif, le frottement un travail négatif, et ils se compensent.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force de frottement constante $f$ s'oppose à un déplacement rectiligne de longueur $d$. Quel est son travail ?",
+                  "question_type": "single_choice",
+                  "explanation": "La force est opposée au déplacement : $W = f \\times d \\times \\cos 180^\\circ = -f \\times d$. Il n'y a pas de division : un travail est un produit d'une force par une longueur.",
+                  "answers": [
+                    {
+                      "content": "$-f \\times d$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+f \\times d$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{f}{d}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer un travail de frottement et une somme de travaux",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un solide glisse sur $25\\ \\text{m}$ en ligne droite. Le frottement, constant, vaut $80\\ \\text{N}$ et s'oppose au déplacement. Quel est son travail ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\alpha = 180^\\circ$ : $W = -80 \\times 25 = -2000\\ \\text{J}$. Le résultat $+2000\\ \\text{J}$ oublie le signe ; $-3{,}2\\ \\text{J}$ vient d'une division ; $-105\\ \\text{J}$, d'une addition.",
+                  "answers": [
+                    {
+                      "content": "$-2000\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+2000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-3{,}2\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-105\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une charrette parcourt $0{,}3\\ \\text{km}$ en ligne droite. Le frottement, constant, vaut $400\\ \\text{N}$ et s'oppose au déplacement. Quel est son travail ?",
+                  "question_type": "single_choice",
+                  "explanation": "$0{,}3\\ \\text{km} = 300\\ \\text{m}$. $W = -400 \\times 300 = -120\\,000\\ \\text{J}$. Le résultat $-120\\ \\text{J}$ oublie la conversion en mètres ; le résultat positif oublie le signe.",
+                  "answers": [
+                    {
+                      "content": "$-120\\,000\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-120\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+120\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-1333\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une caisse est tirée sur $20\\ \\text{m}$ en ligne droite sur un sol horizontal, par une corde inclinée de $60^\\circ$ sur le sol. La tension vaut $100\\ \\text{N}$. Le frottement, constant, vaut $30\\ \\text{N}$ et s'oppose au déplacement. Quelle est la somme des travaux de toutes les forces appliquées à la caisse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Tension : $100 \\times 20 \\times \\cos 60^\\circ = 1000\\ \\text{J}$. Frottement : $-30 \\times 20 = -600\\ \\text{J}$. Poids et réaction normale : $0$. Total : $+400\\ \\text{J}$. Le résultat $1400\\ \\text{J}$ oublie le cosinus ; $1600\\ \\text{J}$ oublie que le frottement est négatif.",
+                  "answers": [
+                    {
+                      "content": "$+400\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+1400\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+1600\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+1000\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka roule à vitesse constante sur $500\\ \\text{m}$ d'une route horizontale et rectiligne. Les résistances totales (frottements et air) valent $900\\ \\text{N}$. Quel est le travail de la force motrice ?",
+                  "question_type": "single_choice",
+                  "explanation": "Vitesse constante : la force motrice compense les résistances, donc elle vaut $900\\ \\text{N}$ et agit dans le sens du déplacement : $W = 900 \\times 500 = +450\\,000\\ \\text{J}$. Il n'est pas nul : il annule le travail résistant de $-450\\,000\\ \\text{J}$.",
+                  "answers": [
+                    {
+                      "content": "$+450\\,000\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0\\ \\text{J}$, car la vitesse est constante",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-450\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$900\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une caisse glisse sur un sol horizontal, tirée par une corde horizontale. Quelles forces ont un travail nul ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Le poids et la réaction normale sont verticaux, le déplacement est horizontal : $\\cos 90^\\circ = 0$. La tension ($\\alpha = 0^\\circ$) et le frottement ($\\alpha = 180^\\circ$) ont des travaux non nuls.",
+                  "answers": [
+                    {
+                      "content": "Le poids de la caisse",
+                      "correct": true
+                    },
+                    {
+                      "content": "La réaction normale du sol",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension de la corde",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le frottement du sol",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le travail d'une force de frottement constante vaut $-1800\\ \\text{J}$ sur un trajet rectiligne de $60\\ \\text{m}$. Quelle est la valeur du frottement ?",
+                  "question_type": "single_choice",
+                  "explanation": "$|W| = f \\times d$, donc $f = 1800 / 60 = 30\\ \\text{N}$. Le résultat $108\\,000\\ \\text{N}$ vient d'une multiplication, $1860\\ \\text{N}$ d'une addition.",
+                  "answers": [
+                    {
+                      "content": "$30\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$108\\,000\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1860\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}033\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Bilan complet des travaux sur une rampe",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un docker tire une caisse de $50\\ \\text{kg}$ sur une rampe inclinée de $30^\\circ$ sur l'horizontale, longue de $6\\ \\text{m}$, à vitesse constante. La corde est parallèle à la rampe. Le frottement vaut $100\\ \\text{N}$. On prend $g = 10\\ \\text{N/kg}$. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$W(\\vec P) = -500 \\times 6 \\times 0{,}5 = -1500\\ \\text{J}$ ; $W(\\vec f) = -600\\ \\text{J}$ ; $W(\\vec R_N) = 0$. Somme nulle, donc $W(\\vec T) = +2100\\ \\text{J}$ et $T = 2100/6 = 350\\ \\text{N}$. Le résultat $250\\ \\text{N}$ oublie le frottement.",
+                  "answers": [
+                    {
+                      "content": "Le travail du poids vaut $-1500\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail de la tension vaut $+2100\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension vaut $350\\ \\text{N}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail de la réaction normale vaut $3000\\ \\text{J}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le travail du frottement vaut $+600\\ \\text{J}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tension vaut $250\\ \\text{N}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur un gbaka qui avance de $50\\ \\text{m}$ sur une route horizontale rectiligne s'exercent une force motrice de $3000\\ \\text{N}$ dans le sens du déplacement et une résistance totale de $1000\\ \\text{N}$ de sens contraire. Quelle est la somme des travaux de toutes les forces, poids et réaction de la route compris ?",
+                  "question_type": "single_choice",
+                  "explanation": "Force motrice : $+3000 \\times 50 = 150\\,000\\ \\text{J}$. Résistance : $-1000 \\times 50 = -50\\,000\\ \\text{J}$. Poids et réaction : $0$. Total : $100\\,000\\ \\text{J}$. Un total nul supposerait des forces qui se compensent, ce qui n'est pas le cas ici.",
+                  "answers": [
+                    {
+                      "content": "$100\\,000\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$200\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$150\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide fait un aller-retour de 10 m sur un sol rugueux. Le frottement $f$ est constant et s'oppose toujours au mouvement. Le travail total du frottement sur l'aller-retour est nul, comme celui du poids.",
+                  "question_type": "true_false",
+                  "explanation": "À l'aller : $-10 f$. Au retour, le déplacement change de sens et le frottement aussi : encore $-10 f$. Total : $-20 f$. Le poids est nul sur un aller-retour, jamais le frottement.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un colis de $10\\ \\text{kg}$ descend à vitesse constante en glissant sur une planche inclinée de $30^\\circ$ sur l'horizontale, longue de $4\\ \\text{m}$. On prend $g = 10\\ \\text{N/kg}$. Quelle est la valeur du frottement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Vitesse constante : $\\sum W = 0$. $W(\\vec P) = +100 \\times 4 \\times 0{,}5 = +200\\ \\text{J}$ et $W(\\vec R_N) = 0$, donc $W(\\vec f) = -200\\ \\text{J} = -f \\times 4$, soit $f = 50\\ \\text{N}$. Sans frottement, le colis accélérerait.",
+                  "answers": [
+                    {
+                      "content": "$50\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$100\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$200\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux garçons poussent un gbaka en panne à vitesse constante sur une route horizontale et rectiligne. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Vitesse constante : la somme des travaux est nulle, donc la poussée compense les résistances. Le poids est perpendiculaire à la route : son travail est nul. Une vitesse constante n'annule pas le travail de la poussée.",
+                  "answers": [
+                    {
+                      "content": "La somme des travaux de toutes les forces est nulle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail de la poussée est l'opposé du travail des résistances.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail du poids est négatif.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La poussée n'a pas de travail, puisque la vitesse est constante.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une grue hisse un conteneur de $500\\ \\text{kg}$ verticalement, à vitesse constante, sur $8\\ \\text{m}$. On prend $g = 10\\ \\text{N/kg}$. Quel est le travail de la tension du câble ?",
+                  "question_type": "single_choice",
+                  "explanation": "Vitesse constante : $T = P = 5000\\ \\text{N}$, vers le haut comme le déplacement : $W(\\vec T) = 5000 \\times 8 = +40\\,000\\ \\text{J}$. Il compense $W(\\vec P) = -40\\,000\\ \\text{J}$. Vitesse constante ne veut pas dire travail nul.",
+                  "answers": [
+                    {
+                      "content": "$+40\\,000\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-40\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{J}$, car la vitesse est constante",
+                      "correct": false
+                    },
+                    {
+                      "content": "$625\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La puissance",
+          "subtitle": "Puissance moyenne et puissance instantanée. À compléter : travail d'une force variable, rendement d'une machine",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Calculer une puissance moyenne avec $P_m = \\dfrac{W}{\\Delta t}$.</li><li>Calculer une puissance instantanée avec $P = F \\times v \\times \\cos\\alpha$.</li><li>Convertir minutes, heures, km/h et kW en unités SI.</li></ul><h2>L'image pour comprendre</h2><p><strong>Image 1 : deux maçons et vingt sacs.</strong> Séraphin et Moussa doivent monter 20 sacs de ciment au premier étage. Séraphin termine en 10 minutes, Moussa en 20 minutes. Ils ont fait exactement la même besogne, mais Séraphin l'a faite deux fois plus vite.</p><p><strong>Le pont.</strong> La besogne, c'est le travail $W$. Le temps, c'est la durée $\\Delta t$. La rapidité du travail, c'est la <strong>puissance moyenne</strong> $P_m = W / \\Delta t$. Ici Séraphin a deux fois plus de puissance que Moussa.</p><p><strong>La limite de l'image.</strong> Être plus puissant ne veut pas dire avoir fait plus de travail : ici, le travail est le même. Et une puissance moyenne ne dit rien de ce qui se passe à chaque instant du travail.</p><p><strong>Image 2 : le gbaka sur la route droite.</strong> Le chauffeur maintient 20 m/s. Chaque seconde, le gbaka avance de 20 m, et la force motrice travaille sur ces 20 m. À force égale, plus le gbaka va vite, plus la force travaille sur une longue distance chaque seconde : plus la puissance demandée au moteur est grande.</p><p><strong>Le pont.</strong> La distance parcourue en une seconde, c'est la vitesse $v$. Le travail par seconde est donc $F \\times v$ : c'est la <strong>puissance instantanée</strong>.</p><p><strong>La limite de l'image.</strong> Ce calcul suppose que la force est dans le sens du mouvement. Sinon, il faut ajouter le cosinus de l'angle entre la force et la vitesse.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Puissance moyenne.</strong> C'est le travail fourni par unité de temps :</p><p>$$P_m = \\frac{W}{\\Delta t}$$</p><p>$W$ est en joules (J), $\\Delta t$ en secondes (s), $P_m$ en watts (W). $1\\ \\text{W} = 1\\ \\text{J/s}$ et $1\\ \\text{kW} = 1000\\ \\text{W}$.</p><p><strong>Puissance instantanée.</strong> Une force constante $\\vec F$ s'applique à un point qui a, à un instant donné, la vitesse $\\vec v$. Sa puissance à cet instant est :</p><p>$$P = F \\times v \\times \\cos\\alpha$$</p><p>$v$ est en m/s et $\\alpha$ est l'angle entre $\\vec F$ et le vecteur vitesse $\\vec v$. D'où vient cette formule : sur un très court intervalle $\\Delta t$, le point parcourt $d = v\\,\\Delta t$, donc $W = F\\,v\\,\\Delta t \\cos\\alpha$ et $W/\\Delta t = F\\,v\\cos\\alpha$.</p><p><strong>Cas particulier.</strong> Si $\\vec F$ est constante et la vitesse constante, la puissance instantanée est égale à la puissance moyenne.</p><p><strong>Conversions.</strong> $1\\ \\text{min} = 60\\ \\text{s}$ ; $1\\ \\text{h} = 3600\\ \\text{s}$ ; $1\\ \\text{km/h} = \\dfrac{1}{3{,}6}\\ \\text{m/s}$.</p></blockquote><h2>Exemple résolu</h2><p>Une grue hisse un conteneur de 2 t, à vitesse constante, sur une hauteur de 12 m, en 40 s. On prend $g = 10\\ \\text{N/kg}$. Calcule la puissance moyenne de la tension du câble.</p><ol><li><strong>Tension.</strong> Vitesse constante, donc $T = P = m g = 2000 \\times 10 = 20\\,000\\ \\text{N}$ (2 t = 2000 kg).</li><li><strong>Travail.</strong> La tension est dans le sens du déplacement : $W = T \\times h = 20\\,000 \\times 12 = 240\\,000\\ \\text{J}$.</li><li><strong>Puissance moyenne.</strong> $P_m = \\dfrac{W}{\\Delta t} = \\dfrac{240\\,000}{40} = 6000\\ \\text{W} = 6\\ \\text{kW}$.</li><li><strong>Contrôle.</strong> La vitesse est $v = 12 / 40 = 0{,}3\\ \\text{m/s}$. Puis $P = T \\times v = 20\\,000 \\times 0{,}3 = 6000\\ \\text{W}$. Même résultat.</li></ol><h2>Le piège à éviter</h2><p>Confondre les deux « W » : le $W$ en italique est le travail (en joules), le « W » en lettre droite est le watt, l'unité de puissance. Ne lis pas « 6000 W » comme un travail.</p><p>Autre erreur : croire qu'une machine plus puissante a toujours fait plus de travail. Pour comparer des puissances, il faut diviser par la durée. Et n'oublie pas de convertir : les minutes en secondes, les km/h en m/s.</p><h2>En une phrase</h2><p>La puissance mesure la rapidité du travail : $P_m = W/\\Delta t$ en watts, et à un instant donné $P = F \\times v \\times \\cos\\alpha$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Puissance, watt et vitesse",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Deux maçons montent le même nombre de sacs de ciment à la même hauteur. Le plus rapide a fourni plus de travail que l'autre.",
+                  "question_type": "true_false",
+                  "explanation": "Le travail est le même : même poids, même hauteur. Séraphin n'a pas fait plus de travail, il l'a fait plus vite : sa puissance est plus grande.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'unité de puissance dans le système international ?",
+                  "question_type": "single_choice",
+                  "explanation": "La puissance est un travail par unité de temps : $1\\ \\text{W} = 1\\ \\text{J/s}$. Le joule mesure le travail, le newton une force, et le produit $\\text{J} \\cdot \\text{s}$ ne correspond à aucune puissance.",
+                  "answers": [
+                    {
+                      "content": "Le watt, avec $1\\ \\text{W} = 1\\ \\text{J/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le joule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le newton",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le joule-seconde",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un travail $W$ est fourni pendant une durée $\\Delta t$. Quelle est l'expression de la puissance moyenne ?",
+                  "question_type": "single_choice",
+                  "explanation": "La puissance moyenne est le travail fourni par unité de temps : $W / \\Delta t$. Le produit $W \\times \\Delta t$ augmenterait avec la durée, alors qu'une machine plus lente est moins puissante.",
+                  "answers": [
+                    {
+                      "content": "$P_m = \\dfrac{W}{\\Delta t}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P_m = W \\times \\Delta t$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P_m = \\dfrac{\\Delta t}{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P_m = W - \\Delta t$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$1\\ \\text{kW} = 1000\\ \\text{W}$ et $1\\ \\text{W} = 1\\ \\text{J/s}$. La puissance moyenne se calcule en divisant le travail par la durée, pas en les multipliant : plus la durée est longue, plus la puissance moyenne est petite.",
+                  "answers": [
+                    {
+                      "content": "$1\\ \\text{kW} = 1000\\ \\text{W}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1\\ \\text{W} = 1\\ \\text{J/s}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1\\ \\text{W} = 1\\ \\text{J} \\cdot \\text{s}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La puissance moyenne est le produit du travail par la durée.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force motrice de valeur $F$ s'exerce dans le sens du mouvement d'un gbaka, dont la vitesse est $v$. Si la force reste la même et que la vitesse double, que devient la puissance instantanée $P = F \\times v$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P = F \\times v$ est proportionnelle à $v$ : si $v$ double, $P$ double. Le gbaka rapide parcourt deux fois plus de distance par seconde, donc la force travaille sur deux fois plus de distance.",
+                  "answers": [
+                    {
+                      "content": "Elle double",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle reste la même",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est divisée par deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est multipliée par quatre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force est perpendiculaire au vecteur vitesse du point où elle s'applique. Sa puissance instantanée est nulle.",
+                  "question_type": "true_false",
+                  "explanation": "$\\alpha = 90^\\circ$ et $\\cos 90^\\circ = 0$, donc $P = F \\times v \\times \\cos\\alpha = 0$. Une force perpendiculaire au mouvement ne le fait ni avancer ni ralentir à cet instant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer une puissance en watts",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un moteur fournit un travail de $1200\\ \\text{J}$ en $30\\ \\text{s}$. Quelle est sa puissance moyenne ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P_m = 1200 / 30 = 40\\ \\text{W}$. Le résultat $36\\,000\\ \\text{W}$ vient d'une multiplication au lieu d'une division ; $0{,}025\\ \\text{W}$, d'une division à l'envers.",
+                  "answers": [
+                    {
+                      "content": "$40\\ \\text{W}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$36\\,000\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1170\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}025\\ \\text{W}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pompe fournit un travail de $90\\,000\\ \\text{J}$ en $5\\ \\text{min}$. Quelle est sa puissance moyenne ?",
+                  "question_type": "single_choice",
+                  "explanation": "$5\\ \\text{min} = 300\\ \\text{s}$, donc $P_m = 90\\,000 / 300 = 300\\ \\text{W}$. Le résultat $18\\,000\\ \\text{W}$ vient de la division par 5 : les minutes n'ont pas été converties en secondes.",
+                  "answers": [
+                    {
+                      "content": "$300\\ \\text{W}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$18\\,000\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$450\\,000\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5\\ \\text{W}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La force motrice d'un gbaka vaut $2000\\ \\text{N}$ et agit dans le sens du mouvement. Le gbaka roule à $18\\ \\text{km/h}$. Quelle est la puissance instantanée de cette force ?",
+                  "question_type": "single_choice",
+                  "explanation": "$18\\ \\text{km/h} = 18 / 3{,}6 = 5\\ \\text{m/s}$. Puis $P = 2000 \\times 5 \\times \\cos 0^\\circ = 10\\,000\\ \\text{W}$. Garder $18$ sans convertir donne $36\\,000\\ \\text{W}$, un résultat faux.",
+                  "answers": [
+                    {
+                      "content": "$10\\,000\\ \\text{W}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$36\\,000\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$111\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10\\ \\text{W}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un moteur de puissance moyenne $3\\ \\text{kW}$ fonctionne pendant $2\\ \\text{min}$. Quel travail fournit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "$3\\ \\text{kW} = 3000\\ \\text{W}$ et $2\\ \\text{min} = 120\\ \\text{s}$. $W = P_m \\times \\Delta t = 3000 \\times 120 = 360\\,000\\ \\text{J}$. Le résultat $180\\,000\\ \\text{J}$ prend 60 s pour 2 min ; $6000\\ \\text{J}$, des unités non converties.",
+                  "answers": [
+                    {
+                      "content": "$360\\,000\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$180\\,000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6000\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$360\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force constante de $500\\ \\text{N}$ s'applique à un point qui se déplace à la vitesse de $4\\ \\text{m/s}$, l'angle entre la force et la vitesse valant $60^\\circ$. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$P = 500 \\times 4 \\times \\cos 60^\\circ = 2000 \\times 0{,}5 = 1000\\ \\text{W}$. L'angle est inférieur à $90^\\circ$ : le cosinus est positif, la puissance est positive (force motrice). Le résultat $2000\\ \\text{W}$ oublie le cosinus.",
+                  "answers": [
+                    {
+                      "content": "La puissance instantanée vaut $1000\\ \\text{W}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La puissance instantanée est positive : la force est motrice.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La puissance instantanée vaut $2000\\ \\text{W}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La puissance instantanée est négative.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un moteur de puissance moyenne $500\\ \\text{W}$ fournit un travail de $36\\,000\\ \\text{J}$. Combien de temps a-t-il fonctionné ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\Delta t = W / P_m = 36\\,000 / 500 = 72\\ \\text{s}$. Le résultat $18\\,000\\,000\\ \\text{s}$ vient d'un produit ; $0{,}0139\\ \\text{s}$, d'une division à l'envers.",
+                  "answers": [
+                    {
+                      "content": "$72\\ \\text{s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$18\\,000\\,000\\ \\text{s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}0139\\ \\text{s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7{,}2\\ \\text{s}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Puissance d'une grue et d'un gbaka",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Une grue hisse un conteneur de $3\\ \\text{t}$ à vitesse constante, sur une hauteur de $10\\ \\text{m}$, en $50\\ \\text{s}$. On prend $g = 10\\ \\text{N/kg}$. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$T = P = 3000 \\times 10 = 30\\,000\\ \\text{N}$, donc $W = 30\\,000 \\times 10 = 300\\,000\\ \\text{J}$ et $P_m = 300\\,000 / 50 = 6000\\ \\text{W}$. Le résultat $300\\,000\\ \\text{W}$ oublie de diviser par la durée.",
+                  "answers": [
+                    {
+                      "content": "La tension du câble vaut $30\\,000\\ \\text{N}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail de la tension vaut $300\\,000\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La puissance moyenne de la tension vaut $6000\\ \\text{W}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La puissance moyenne de la tension vaut $300\\,000\\ \\text{W}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La vitesse de montée vaut $5\\ \\text{m/s}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La puissance moyenne de la tension est négative.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka roule à $72\\ \\text{km/h}$, à vitesse constante, sur une route horizontale et rectiligne. Les résistances totales valent $1500\\ \\text{N}$. Quelle est la puissance de la force motrice ?",
+                  "question_type": "single_choice",
+                  "explanation": "$72\\ \\text{km/h} = 20\\ \\text{m/s}$. Vitesse constante : la force motrice vaut $1500\\ \\text{N}$. $P = 1500 \\times 20 = 30\\,000\\ \\text{W} = 30\\ \\text{kW}$. Une puissance nulle supposerait une force nulle : ce n'est pas le cas.",
+                  "answers": [
+                    {
+                      "content": "$30\\,000\\ \\text{W}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$108\\,000\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$75\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{W}$, car la vitesse est constante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camion de $2000\\ \\text{kg}$ monte à vitesse constante de $10\\ \\text{m/s}$ une route droite. La route monte de $1\\ \\text{m}$ pour $10\\ \\text{m}$ parcourus ($\\sin\\theta = 0{,}1$). Les frottements sont négligés et $g = 10\\ \\text{N/kg}$. Quelle est la puissance de la force motrice, parallèle à la route ?",
+                  "question_type": "single_choice",
+                  "explanation": "Vitesse constante : la force motrice compense la composante du poids le long de la route : $F = mg\\sin\\theta = 20\\,000 \\times 0{,}1 = 2000\\ \\text{N}$. Puis $P = F \\times v = 2000 \\times 10 = 20\\,000\\ \\text{W} = 20\\ \\text{kW}$.",
+                  "answers": [
+                    {
+                      "content": "$20\\ \\text{kW}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$200\\ \\text{kW}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\ \\text{kW}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{kW}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka descend une pente à vitesse constante, en ligne droite. La puissance instantanée de son poids est positive.",
+                  "question_type": "true_false",
+                  "explanation": "À la descente, le poids est moteur : l'angle entre le poids et la vitesse est inférieur à $90^\\circ$, donc $\\cos\\alpha > 0$ et $P = mg\\,v\\cos\\alpha > 0$. Elle est compensée par la puissance négative des résistances.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un moteur A fournit $12\\,000\\ \\text{J}$ en $4\\ \\text{s}$. Un moteur B fournit $9000\\ \\text{J}$ en $2\\ \\text{s}$. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$P_A = 12\\,000 / 4 = 3000\\ \\text{W}$ et $P_B = 9000 / 2 = 4500\\ \\text{W}$. B est plus puissant, même s'il a fourni moins de travail : la puissance compare le travail par seconde, pas le travail total.",
+                  "answers": [
+                    {
+                      "content": "Le moteur B est plus puissant que le moteur A.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La puissance moyenne du moteur A vaut $3000\\ \\text{W}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le moteur A est plus puissant, car il a fourni plus de travail.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La puissance moyenne du moteur B vaut $18\\,000\\ \\text{W}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un monte-charge soulève, à vitesse constante, une charge de poids $3000\\ \\text{N}$ pendant $30\\ \\text{s}$. La force qu'il exerce sur la charge développe une puissance moyenne de $2\\ \\text{kW}$. Quelle hauteur la charge a-t-elle gagnée ?",
+                  "question_type": "single_choice",
+                  "explanation": "$W = P_m \\times \\Delta t = 2000 \\times 30 = 60\\,000\\ \\text{J}$. La force vaut $3000\\ \\text{N}$ (vitesse constante), donc $h = W / F = 60\\,000 / 3000 = 20\\ \\text{m}$. Le résultat $0{,}05\\ \\text{m}$ vient d'une division à l'envers.",
+                  "answers": [
+                    {
+                      "content": "$20\\ \\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$200\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2000\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}05\\ \\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
