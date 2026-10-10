@@ -16,7 +16,7 @@ module Classroom
     def new
       # ADR-0088 : le visiteur d'une classe archivée s'inscrit par la voie standard, averti.
       if current_actor.nil? && @preview.archived
-        return redirect_to(new_student_registration_path, alert: t(".archived_alert"), status: :see_other)
+        return redirect_to(new_student_registration_path, flash: { warning: t(".archived_alert") }, status: :see_other)
       end
 
       @form = Dtos::Classroom::StudentRegistrationInput.new(link_token:)

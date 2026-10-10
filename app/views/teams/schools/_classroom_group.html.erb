@@ -3,12 +3,14 @@
 <%# ADR  : 0030, 0041, 0085, 0088 · UDR : 0036, 0081 (§3.7 : le lien se copie ici, il se change sur la page de la classe), 0083 %>
 <%# locals: (level:, school_active:, school_public_id:, archives_shown:) -%>
 <% heading_id = "level_#{level.slug}_title" %>
-<section id="level_<%= level.slug %>" aria-labelledby="<%= heading_id %>">
+<%# scroll-mt : l'ancre #level_<slug> du bouton des archives ne passe pas sous la barre fixe. %>
+<section id="level_<%= level.slug %>" aria-labelledby="<%= heading_id %>" class="scroll-mt-24">
   <div class="mb-4 flex items-center justify-between gap-3 border-b border-line pb-3">
     <h3 id="<%= heading_id %>" class="font-display text-lg font-extrabold"><%= level.name %></h3>
     <div class="flex items-center gap-2">
       <%= ui_badge t(".count", count: level.classrooms.size), size: :sm %>
-      <%= ui_badge t(".archived_count", count: level.archived.size), size: :sm if level.archived.any? %>
+      <% archived_count = level.archived.size + level.hidden_count %>
+      <%= ui_badge t(".archived_count", count: archived_count), size: :sm if archived_count.positive? %>
       <%# Pas de menu sans classe active : il n'y a rien à archiver (UDR-0083 §3.1). %>
       <% if level.classrooms.any? %>
         <%= render "shared/level_archive_menu", name: level.name, slug: level.slug, classrooms_count: level.classrooms.size,

@@ -177,6 +177,7 @@ class Teams::ClassroomArchivalsControllerTest < ActionDispatch::IntegrationTest
     get school_path(@school.public_id)
 
     assert_select "li#classroom_#{@classroom.public_id}", false
+    assert_select "section#level_#{@classroom.level.slug}", text: including("1 archivée") # masquée, mais comptée
     level = "level_#{@classroom.level.slug}"
     assert_select "section##{level} a[href=?][aria-expanded=false]", school_path(@school.public_id, archives: 1, anchor: level),
                   text: including("Afficher les archives (1)")

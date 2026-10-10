@@ -39,11 +39,18 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 |---|---|---|
 | — | Les deux dettes de compteur sont soldées dans ce chantier : la colonne « Classes » de la liste de l'équipe et le « − » ne comptent plus les archivées | — |
 
+## Ce qui a dérapé
+
+- Le plan supposait qu'un élève « multi-classes » verrait son autre classe : l'application n'a qu'une classe principale par élève (ADR-0040). Trouvé par le challenger ; le porteur a choisi « Choisis ta classe » plutôt qu'une promotion automatique.
+- L'UDR disait la page d'une classe archivée en 404 alors qu'elle était lisible (tests existants l'exigeaient) : trois tests de lecture d'une classe archivée remplacés par le 404, sur décision du porteur.
+- Les tests des trois partiels du Lot 0 ont été écrits après les partiels (passés du premier coup) ; le challenger a couvert le rendu réel.
+- Les bases de test des worktrees chargeaient les seeds au `db:prepare` : `db:schema:load` à la place.
+
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-10 (sur `Develop`) |
+| **PR** | aucune : lots fusionnés directement dans `Develop`, branche de la session |
+| **ADR produits** | ADR-0088 |
+| **UDR produits** | UDR-0083 |

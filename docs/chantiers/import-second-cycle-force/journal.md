@@ -21,4 +21,13 @@
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | Cas d'usage d'archivage d'une classe | Spec manquante, pas un bug | `archivage-classes` |
-| Lancer `bin/rails schools:grant_second_cycle` en production après déploiement | Opération, pas du code | — |
+| Lancer `bin/rails schools:grant_second_cycle` sur Develop (aucun établissement en Staging ni en production, porteur 2026-10-10) | Aucun accès shell au conteneur depuis la session | — |
+
+## Clôture
+
+| | |
+|---|---|
+| **Livré le** | 2026-10-10 (sur `Develop`) |
+| **PR** | aucune : commit direct sur `Develop`, branche de la session |
+| **ADR produits** | ADR-0087 |
+| **UDR produits** | — |

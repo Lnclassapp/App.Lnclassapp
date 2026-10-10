@@ -111,6 +111,6 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
     get join_classroom_path(@classroom.link_token)
 
     assert_redirected_to new_student_registration_path
-    assert_equal tl("joins.new.archived_alert"), flash[:alert]
+    assert_equal tl("joins.new.archived_alert"), flash[:warning]
   end
 end
