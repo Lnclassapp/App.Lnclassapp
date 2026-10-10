@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage |
+| **Statut** | décision |
 | **Ouvert le** | 2026-10-09 |
 | **Branche** | `Develop` (branche désignée de la session ; pas de `feature/<slug>`) |
 | **Programme** | — *(ou `<programme>` si le chantier est une vague d'un programme — voir `docs/workflows/programme.md`)* |
@@ -42,6 +42,7 @@ Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du me
 | Restaurer une classe : les élèves et l'enseignant reviennent-ils ? | Oui, automatiquement (porteur) : l'archivage ne touche ni adhésions ni assignations ; pendant l'archivage, le lien d'inscription refuse les nouveaux élèves | La restauration ne ressaisit rien ; une classe archivée n'accepte aucune nouvelle adhésion |
 | Une classe à la fois, ou tout un niveau ? | Les deux (porteur), dans le menu ⋮ de la carte de la classe et dans celui du niveau | Deux actions : « Archiver la classe » et « Archiver le niveau » (confirmation avec le nombre de classes et d'élèves) ; l'archivage par niveau sort du hors périmètre |
 | Une classe archivée reste-t-elle dans la liste ? | Visible 7 jours après l'archivage (badge « Archivée », menu ⋮ « Restaurer »), puis masquée derrière un bouton « Afficher les archives » (porteur) | Le délai se compte depuis la date d'archivage ; passé 7 jours la classe n'apparaît que sur demande ; restaurable à tout moment |
+| Que voit un enseignant dont la classe est archivée ? | Recommandation acceptée (porteur) : la classe disparaît de sa liste, plus d'assignation possible ; assignations et résultats conservés, visibles à la restauration ; échéances de cette classe retirées du tableau de bord ; ses autres classes intactes | Pas de lecture seule pour l'enseignant ; toutes les lectures enseignant filtrent les classes actives |
 | Une classe avec des enseignants rattachés ou des exercices assignés ? | Oui aussi, même confirmation (porteur) | Plus aucun blocage : seule la confirmation protège ; l'historique (adhésions, assignations) est conservé |
 
 ## Cas limites identifiés
