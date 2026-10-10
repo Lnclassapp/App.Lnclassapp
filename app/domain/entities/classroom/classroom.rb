@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Classroom::Classroom
 # Rôle : une classe d'une école pour une année scolaire, avec ses enseignants et son effectif actif
-# ADR  : 0030, 0041, 0085
+# ADR  : 0030, 0041, 0085, 0088
 module Entities
   module Classroom
     class Classroom
@@ -11,7 +11,7 @@ module Entities
       MAX_STUDENTS = 80
       MAX_STUDENTS_LIMIT = 150
 
-      attr_accessor :id, :public_id, :school_id, :level_id, :series_id, :school_year, :link_token
+      attr_accessor :id, :public_id, :school_id, :level_id, :series_id, :school_year, :link_token, :archived_at
       attr_writer :status, :max_students, :teacher_ids, :active_students_count
       attr_reader :name
 
@@ -31,6 +31,7 @@ module Entities
       def active_students_count = @active_students_count || 0
 
       def active? = status == "active"
+      def archived? = status == "archived"
       def full? = active_students_count >= max_students
 
       private

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes de l'espace direction ; tout contrôleur hérite de SchoolAdmin::BaseController
 # Rôle : lectures de la direction sur son seul établissement, et ses gestes (classes d'un niveau, enseignants, directions)
-# ADR  : 0036, 0065, 0071, 0077, 0083 · UDR : 0052, 0056, 0070, 0074, 0079 · l'établissement vient toujours du compte, jamais d'un paramètre
+# ADR  : 0036, 0065, 0071, 0077, 0083, 0088 · UDR : 0052, 0056, 0070, 0074, 0079 · l'établissement vient toujours du compte, jamais d'un paramètre
 scope "school-admin", module: "school_admin", as: "school_admin" do
   resources :classrooms, only: %i[index show], param: :public_id
   # UDR-0074 §3.8, §3.11 : la page d'un niveau, par son slug figé ; l'activité récente, frame différé de l'accueil.
@@ -18,6 +18,14 @@ scope "school-admin", module: "school_admin", as: "school_admin" do
   # Sous /school-admin/school, sans le préfixe de nom « school_ » (UDR-0056 §3.0 : school_admin_level_classrooms_path).
   scope "school" do
     resources :level_classrooms, only: %i[create destroy], path: "level-classrooms", param: :public_id
+    # ADR-0088 : archiver et restaurer une classe de l'établissement, archiver un niveau (menus ⋮ de l'UDR-0083).
+    resources :classroom_archivals, only: [], path: "classroom-archivals", param: :public_id do
+      member do
+        patch :archive
+        patch :restore
+      end
+    end
+    resources :level_archivals, only: :create, path: "level-archivals"
     # ADR-0077 : retirer une autre direction de l'établissement (public_id du compte).
     resources :staff_members, only: :destroy, path: "staff", param: :public_id
   end

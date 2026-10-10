@@ -132,6 +132,58 @@ module Repositories
         assert_equal fresh, record.reload.link_token
         assert_nil repository.lock_by_link_token(token: old)
       end
+
+      test "archive une classe peuplée sans toucher adhésions ni assignations, la restaure à l'identique (ADR-0088)" do
+        record = Orm::Classroom.create!(school: @school, level: @level, school_year: @year, name: "6ème 1")
+        create_teacher(classrooms: [ record ])
+        create_student(classroom: record)
+        create_assignment(classroom: record)
+        counts = -> { [ Orm::ClassroomStudent.count, Orm::TeacherClassroom.count, Orm::ClassroomAssignment.count ] }
+        before = counts.call
+
+        archived = ClassroomRepository.new.archive(id: record.id, at: @at)
+
+        assert archived.success?
+        assert_equal [ "archived", @at ], [ record.reload.status, record.archived_at ]
+        assert_equal before, counts.call
+        assert_equal :conflict, ClassroomRepository.new.archive(id: record.id, at: @at).code
+        assert_equal({ base: [ :already_archived ] }, ClassroomRepository.new.archive(id: record.id, at: @at).errors)
+
+        restored = ClassroomRepository.new.restore(id: record.id, at: @at)
+
+        assert restored.success?
+        assert_equal [ "active", nil ], [ record.reload.status, record.archived_at ]
+        assert_equal before, counts.call
+        assert_equal({ base: [ :not_archived ] }, ClassroomRepository.new.restore(id: record.id, at: @at).errors)
+        assert_equal :not_found, ClassroomRepository.new.archive(id: 0, at: @at).code
+        assert_equal :not_found, ClassroomRepository.new.restore(id: 0, at: @at).code
+      end
+
+      test "archive les classes actives d'un niveau de l'année, d'un seul établissement, et les compte" do
+        other_level = create_level
+        mine = [ "6ème 1", "6ème 2" ].map { Orm::Classroom.create!(school: @school, level: @level, school_year: @year, name: it) }
+        already = Orm::Classroom.create!(school: @school, level: @level, school_year: @year, name: "6ème 3", status: "archived",
+                                         archived_at: @at - 1.day)
+        elsewhere = [ Orm::Classroom.create!(school: @school, level: other_level, school_year: @year, name: "5ème 1"),
+                      Orm::Classroom.create!(school: create_school, level: @level, school_year: @year, name: "6ème 1"),
+                      Orm::Classroom.create!(school: @school, level: @level, school_year: "2020-2021", name: "6ème 1") ]
+
+        count = ClassroomRepository.new.archive_level(school_id: @school.id, school_year: @year, level_id: @level.id, at: @at)
+
+        assert_equal 2, count
+        assert_equal %w[archived], mine.map { it.reload.status }.uniq
+        assert_equal @at - 1.day, already.reload.archived_at
+        assert_equal %w[active], elsewhere.map { it.reload.status }.uniq
+      end
+
+      test "relit la date d'archivage dans l'entité" do
+        record = Orm::Classroom.create!(school: @school, level: @level, school_year: @year, name: "6ème 1", status: "archived", archived_at: @at)
+
+        found = ClassroomRepository.new.find_by_public_id(public_id: record.public_id)
+
+        assert found.archived?
+        assert_equal @at, found.archived_at
+      end
     end
   end
 end
