@@ -177,18 +177,23 @@ module UseCases
       end
 
       test "a link that no longer leads to an open classroom: :not_found, nothing written" do
-        archived = classroom(status: "archived")
         closed_school = Entities::School::School.new(id: 3, public_id: "sch-3", name: "Lycée fermé", status: "inactive")
-        cases = { "unknown" => [ [ classroom ], [ @school ], "cccccccccccc" ], "archived" => [ [ archived ], [ @school ], TOKEN ],
-                  "inactive school" => [ [ classroom ], [ closed_school ], TOKEN ] }
+        cases = { "unknown" => [ [ classroom ], [ @school ], "cccccccccccc" ], "inactive school" => [ [ classroom ], [ closed_school ], TOKEN ] }
 
         cases.each do |label, (classrooms, schools, token)|
           @journal.clear
           result = join(dto: choice(link_token: token), classrooms:, schools:)
 
           assert_equal :not_found, result.code, label
-          assert_equal [ [ :primary_for, 41 ], [ :lock_link, token ] ], @journal, label
+          assert_equal [ [ :primary_for, 41 ], [ :lock_link, token ], [ :lock_link, token ] ], @journal, label
         end
+      end
+
+      test "ADR-0088: the link of an archived classroom is refused with the reason, nothing written" do
+        result = join(dto: choice(link_token: TOKEN), classrooms: [ classroom(status: "archived") ], schools: [ @school ])
+
+        assert_equal [ :forbidden, { base: [ :classroom_archived ] } ], [ result.code, result.errors ]
+        assert_nil added
       end
 
       test "a classroom outside the cascade is refused in :invalid under the classroom, nothing written" do

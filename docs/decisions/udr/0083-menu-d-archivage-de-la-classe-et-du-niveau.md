@@ -45,7 +45,7 @@ Un établissement importé a toutes les classes de la 6ème à la Tle. Sa direct
 - Focus d'ouverture sur [Annuler].
 
 **Classe archivée dans la liste**
-- Badge « Archivée » (déjà présent), effectif grisé, hors des totaux ; la carte reste cliquable.
+- Badge « Archivée » (déjà présent), effectif grisé, hors des totaux ; la carte n'est plus un lien (la page d'une classe archivée n'existe pas : sa lecture renvoie 404), la restauration se fait depuis son menu ⋮.
 - Rangée en fin de son niveau.
 - Visible 7 jours après la date d'archivage ; au-delà, masquée. Un bouton « Afficher les archives (N) » sous la liste (lien `?archives=1`, Turbo, `aria-expanded`) les montre toutes ; « Masquer les archives » les remasque. N compte les archives masquées ; le bouton n'existe pas à 0.
 

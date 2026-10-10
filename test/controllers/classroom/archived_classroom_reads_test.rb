@@ -89,10 +89,11 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#classroom-archived[role=alert]", text: /#{Regexp.escape(tl("joins.classroom_preview.archived"))}/
 
-    # TROU CONNU (hors Lot C) : JoinAsStudent traite le lien archivé comme inconnu (classroom_designation.rb:25), donc 404 sans
-    # message, et joins/new.html.erb offre encore le bouton. Ce test caractérise l'état actuel : aucune adhésion n'est créée.
+    # ADR-0088 : l'envoi est refusé avec le motif d'archivage, et le formulaire n'est pas offert.
+    assert_select "form#join-form", count: 0
     post join_classroom_path(token)
-    assert_response :not_found
+    assert_response :forbidden
+    assert_select "#classroom-archived[role=alert]", text: /#{Regexp.escape(tl("joins.classroom_preview.archived"))}/
     assert_equal 0, Orm::ClassroomStudent.where(student: free).count
 
     restore!
