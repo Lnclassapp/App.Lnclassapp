@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::EssentialsController
 # Rôle : fiches essentielles d'un cours : création et modification en modale, publication (seule ou avec ses exercices) et archivage
-# ADR  : 0026, 0028, 0035 · UDR : 0006, 0007, 0016
+# ADR  : 0026, 0028, 0035, 0089 · UDR : 0006, 0007, 0016, 0084
 module Teams
   class EssentialsController < BaseController
     include PublishCascade
@@ -59,12 +59,13 @@ module Teams
       end
     end
 
-    # Refus (cours non publié, transition interdite) : 422 et toast d'erreur, le panneau de statut reste tel quel.
-    # Sans Turbo, retour à la page d'où le bouton a été cliqué.
+    # Refus (cours non publié, transition interdite, image manquante) : 422 et toast d'erreur, le panneau de statut reste tel
+    # quel. Sans Turbo, retour à la page d'où le bouton a été cliqué. @reason_count : emplacements d'image restants (ADR-0089).
     def transition(use_case)
       result = use_case.call(actor: current_actor, slug: params[:slug])
       @reason = result.errors.fetch(:base).first if result.code == :conflict
-      return respond_transition(:unprocessable_entity, alert: t("teams.essentials.transition.#{@reason}")) if @reason
+      @reason_count = result.errors[:count]
+      return respond_transition(:unprocessable_entity, alert: t("teams.essentials.transition.#{@reason}", count: @reason_count)) if @reason
 
       render_result result, success: lambda { |essential|
         @essential = essential
