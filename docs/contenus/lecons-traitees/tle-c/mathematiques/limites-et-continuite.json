@@ -1,0 +1,1885 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Limites et continuité",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "C",
+      "essentials": [
+        {
+          "name": "Définition d'une limite et limites de référence",
+          "subtitle": "Limites finies et infinies, en un point et à l'infini",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Reconnaître qu'un entier relatif en divise un autre et utiliser les propriétés de la divisibilité.</li>\n<li>Effectuer la division euclidienne de deux entiers relatifs, avec un reste toujours positif.</li>\n<li>Déterminer les entiers $n$ pour lesquels une expression en $n$ en divise une autre.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Les piles de sacs (diviseur et multiple).</strong> Sur le quai du port d'Abidjan, un docker doit ranger 84 sacs de cacao en piles de même hauteur, sans qu'il lui reste un seul sac. Il peut faire 12 piles de 7 sacs : $84 = 7 \\times 12$. Avec des piles de 5 sacs, il lui resterait des sacs sur les bras.</p>\n<p><em>Le pont.</em> Les 84 sacs, c'est $b$. La hauteur d'une pile, c'est $a$. Le nombre de piles, c'est $k$. Ranger sans reste, c'est écrire $b = ka$ : on dit que $a$ <strong>divise</strong> $b$, ou que $b$ est un <strong>multiple</strong> de $a$.</p>\n<p><em>Où l'image s'arrête.</em> Des sacs, on n'en compte qu'un nombre positif. Dans ℤ, $a$ et $k$ peuvent être négatifs, et $0$ est un multiple de tout entier ($0 = a \\times 0$).</p>\n<p><strong>2. Les voyages du chariot élévateur (division euclidienne).</strong> Un chariot élévateur emporte 8 caisses par voyage. Il y a 100 caisses à évacuer du quai. Il fait 12 voyages pleins, soit 96 caisses. Il en reste 4 : pas assez pour un voyage plein.</p>\n<p><em>Le pont.</em> Les 100 caisses, c'est le <strong>dividende</strong> $a$. Les 8 caisses par voyage, c'est le <strong>diviseur</strong> $b$. Les 12 voyages pleins, c'est le <strong>quotient</strong> $q$. Les 4 caisses qui restent, c'est le <strong>reste</strong> $r$. On écrit $100 = 8 \\times 12 + 4$. Le reste est plus petit que 8 : sinon, le chariot referait un voyage plein.</p>\n<p><em>Où l'image s'arrête.</em> Avec des caisses, le dividende est positif. Dans ℤ, le dividende peut être négatif, et le reste reste pourtant toujours positif ou nul.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Divisibilité.</strong> Soient $a$ et $b$ deux entiers relatifs. On dit que $a$ divise $b$, et on note $a \\mid b$, s'il existe un entier relatif $k$ tel que $b = ka$. On dit aussi que $b$ est un multiple de $a$.</p>\n<p><strong>Propriétés.</strong> Pour $a$, $b$, $c$ entiers relatifs :</p>\n<ul>\n<li>si $a \\mid b$ et $b \\mid c$, alors $a \\mid c$ (transitivité) ;</li>\n<li>si $a \\mid b$ et $a \\mid c$, alors $a$ divise $ub + vc$ pour tous entiers relatifs $u$ et $v$ (combinaison linéaire) ;</li>\n<li>si $a \\mid b$ et $b \\mid a$, alors $a = b$ ou $a = -b$ ;</li>\n<li>si $a \\mid b$, alors $ac \\mid bc$.</li>\n</ul>\n<p><strong>Division euclidienne.</strong> Soient $a$ un entier relatif et $b$ un entier relatif non nul. Il existe un unique couple $(q ; r)$ d'entiers relatifs tel que $$a = bq + r \\quad \\text{avec} \\quad 0 \\le r < |b|.$$ Ici $b$ divise $a$ si et seulement si $r = 0$.</p>\n<p><strong>Pourquoi ce couple existe et est unique.</strong> <em>Existence</em> (avec $b > 0$) : les multiples $bk$ inférieurs ou égaux à $a$ forment un ensemble non vide (il contient $b \\times (-|a|)$) et majoré par $a$. Il a un plus grand élément $bq$. Alors $bq \\le a < b(q+1)$, donc $r = a - bq$ vérifie $0 \\le r < b$. Si $b < 0$, on divise par $-b$ puis on change le signe de $q$. <em>Unicité</em> : si $bq + r = bq' + r'$ avec les deux restes dans $[0 ; |b|[$, alors $b(q - q') = r' - r$. Ce multiple de $b$ a une valeur absolue inférieure à $|b|$ : il vaut $0$. Donc $r = r'$ et $q = q'$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Effectuer la division euclidienne de $2025$ par $12$, puis de $-47$ par $6$.</strong></p>\n<ol>\n<li>$12 \\times 168 = 2016$ et $2025 - 2016 = 9$, avec $0 \\le 9 < 12$. Donc $2025 = 12 \\times 168 + 9$ : $q = 168$ et $r = 9$.</li>\n<li>Pour $-47$ : on cherche le plus grand multiple de $6$ inférieur ou égal à $-47$. $6 \\times (-8) = -48 \\le -47$, et $6 \\times (-7) = -42 > -47$. Donc $q = -8$.</li>\n<li>Le reste est $r = -47 - (-48) = 1$, avec $0 \\le 1 < 6$. Donc $-47 = 6 \\times (-8) + 1$.</li>\n</ol>\n<p><strong>Déterminer les entiers relatifs $n$ tels que $n + 2$ divise $3n + 7$.</strong></p>\n<ol>\n<li>On écrit $3n + 7 = 3(n + 2) + 1$.</li>\n<li>Si $n + 2$ divise $3n + 7$, comme il divise aussi $3(n + 2)$, il divise la différence : $n + 2 \\mid 1$.</li>\n<li>Les seuls diviseurs de $1$ sont $1$ et $-1$. Donc $n + 2 = 1$ ou $n + 2 = -1$, soit $n = -1$ ou $n = -3$.</li>\n<li>Contrôle : pour $n = -1$, $n + 2 = 1$ divise $4$ ; pour $n = -3$, $n + 2 = -1$ divise $-2$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Donner un reste négatif ou trop grand. Pour $-47$ divisé par $6$, écrire $-47 = 6 \\times (-7) - 5$ est une égalité exacte, mais ce n'est pas la division euclidienne : le reste $-5$ est négatif. Le bon quotient est $-8$ et le bon reste est $1$.</p>\n<p>Comment le repérer : vérifie toujours que ton reste est dans l'intervalle $0 \\le r < |b|$. Une calculatrice qui donne $-7{,}83\\ldots$ ne te donne pas le bon quotient : le quotient est le plus grand entier $q$ tel que $bq \\le a$, donc ici $-8$ et non $-7$.</p>\n<p>Autre piège : dans la recherche des $n$ tels que $n + 2 \\mid 3n + 7$, oublier les diviseurs négatifs. Dans ℤ, $-1$ divise aussi $1$.</p>\n<h2>En une phrase</h2>\n<p>$a$ divise $b$ quand $b = ka$ avec $k$ entier ; et pour tout entier $a$ et tout $b \\ne 0$, il existe un seul couple $(q ; r)$ avec $a = bq + r$ et $0 \\le r < |b|$, comme les voyages pleins du chariot et les caisses qui restent.</p>\n",
+          "exercises": [
+            {
+              "title": "Comprendre — Diviseur, multiple, quotient et reste",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soient $a$ et $b$ deux entiers relatifs. Que signifie « $a$ divise $b$ » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Dans l'image des piles de sacs, $84 = 7 \\times 12$ : 7 divise 84. Le diviseur est celui qui « range » : $b = ka$. Attention au sens : si tu inverses, tu écris que $b$ divise $a$. Et le quotient $k$ peut être négatif dans ℤ.",
+                  "answers": [
+                    {
+                      "content": "Il existe un entier relatif $k$ tel que $b = ka$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il existe un entier relatif $k$ tel que $a = kb$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le reste de la division euclidienne de $a$ par $b$ est nul.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le quotient de $a$ par $b$ est un entier positif.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chariot élévateur emporte 8 caisses par voyage. Il y a 100 caisses à évacuer. Il fait 12 voyages pleins, puis il reste 4 caisses. On écrit $100 = 8 \\times 12 + 4$. Que représente le nombre $12$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "12 est le nombre de voyages pleins : c'est le quotient. Les 4 caisses restantes forment le reste, 8 est le diviseur (la taille d'un voyage) et 100 le dividende. Le reste est toujours inférieur au diviseur : $4 < 8$.",
+                  "answers": [
+                    {
+                      "content": "Le quotient $q$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le reste $r$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le diviseur $b$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dividende $a$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$-6 \\mid 18$ car $18 = (-6) \\times (-3)$ : le quotient peut être négatif. Et $0 = 7 \\times 0$ est un multiple de 7. Mais $0 \\nmid 7$ (0 fois $k$ donne toujours 0), $4 \\nmid 18$ (car $18 = 4 \\times 4 + 2$), et $18 \\nmid 6$ : attention au sens de « divise ».",
+                  "answers": [
+                    {
+                      "content": "$-6$ divise $18$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$ est un multiple de $7$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$ divise $7$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$ divise $18$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$18$ divise $6$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces écritures est la division euclidienne de $100$ par $8$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les trois autres égalités sont exactes, mais leur reste ne vérifie pas $0 \\le r < 8$ : $12$ et $20$ sont trop grands (le chariot pourrait faire d'autres voyages pleins) et $-4$ est négatif. Le reste est toujours positif ou nul, et plus petit que le diviseur.",
+                  "answers": [
+                    {
+                      "content": "$100 = 8 \\times 12 + 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$100 = 8 \\times 11 + 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100 = 8 \\times 13 - 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100 = 8 \\times 10 + 20$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $a$ un entier relatif et $b$ un entier relatif non nul. Il existe un unique couple $(q ; r)$ d'entiers relatifs tel que $a = bq + r$ et $0 \\le r < |b|$.",
+                  "question_type": "true_false",
+                  "explanation": "C'est le théorème de la division euclidienne : existence et unicité. L'unicité vient de $b(q - q') = r' - r$ : un multiple de $b$ de valeur absolue inférieure à $|b|$ ne peut être que $0$. Le reste est choisi positif, même quand $a$ est négatif.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Divisions euclidiennes et diviseurs",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle est la division euclidienne de $2025$ par $12$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$12 \\times 168 = 2016$ et $2025 - 2016 = 9$, avec $0 \\le 9 < 12$. Les deux autres égalités sont exactes, mais leur reste ne convient pas : $-3$ est négatif et $21$ dépasse le diviseur $12$.",
+                  "answers": [
+                    {
+                      "content": "$2025 = 12 \\times 168 + 9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2025 = 12 \\times 169 - 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2025 = 12 \\times 167 + 21$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la division euclidienne de $-47$ par $6$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$6 \\times (-8) = -48$ et $-47 - (-48) = 1$ : $q = -8$ et $r = 1$. L'égalité $-47 = 6 \\times (-7) - 5$ est exacte mais son reste est négatif. Et $6 \\times (-7) + 5 = -37$, pas $-47$.",
+                  "answers": [
+                    {
+                      "content": "$-47 = 6 \\times (-8) + 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-47 = 6 \\times (-7) - 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-47 = 6 \\times (-7) + 5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'entiers relatifs $n$ vérifient « $n - 1$ divise $6$ » ?",
+                  "question_type": "single_choice",
+                  "explanation": "$n - 1$ doit être un diviseur de 6 dans ℤ : $\\pm 1, \\pm 2, \\pm 3, \\pm 6$, soit 8 valeurs, donc $n \\in \\{2, 0, 3, -1, 4, -2, 7, -5\\}$. Si tu oublies les diviseurs négatifs, tu n'en trouves que 4.",
+                  "answers": [
+                    {
+                      "content": "$8$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $a$ et $b$ deux entiers relatifs, tous deux multiples de $7$. Lesquelles de ces affirmations sont toujours vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Une combinaison linéaire de multiples de 7 est un multiple de 7. Contre-exemples avec $a = 7$ et $b = 14$ : $a + b = 21$ n'est divisible ni par 49 ni par 14 ; et avec $a = 14$ et $b = 7$, $a$ ne divise pas $b$.",
+                  "answers": [
+                    {
+                      "content": "$7$ divise $a + b$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7$ divise $2a - 3b$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$49$ divise $a + b$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a$ divise $b$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$14$ divise $a + b$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la division euclidienne de l'entier $a$ par $9$, le reste est $4$. Quel est le reste de la division euclidienne de $a + 8$ par $9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On écrit $a = 9q + 4$. Alors $a + 8 = 9q + 12 = 9(q + 1) + 3$, avec $0 \\le 3 < 9$ : le reste est 3. Répondre 12 est l'erreur classique : 12 dépasse le diviseur, il reste encore un voyage plein à faire.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tous entiers relatifs $a$, $b$ et $c$, si $a$ divise $b + c$, alors $a$ divise $b$ et $a$ divise $c$.",
+                  "question_type": "true_false",
+                  "explanation": "Contre-exemple : $3 \\mid 1 + 2$, mais $3 \\nmid 1$ et $3 \\nmid 2$. La propriété vraie va dans l'autre sens : si $a$ divise $b$ et $c$, alors $a$ divise $b + c$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Divisibilité et division euclidienne",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Quels sont les entiers relatifs $n$ tels que $n + 1$ divise $2n + 9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$2n + 9 = 2(n + 1) + 7$, donc $n + 1$ divise $7$ : $n + 1 \\in \\{-7, -1, 1, 7\\}$, soit $n \\in \\{-8, -2, 0, 6\\}$. Oublier les diviseurs négatifs, ou confondre $n$ et $n + 1$, donne les autres réponses.",
+                  "answers": [
+                    {
+                      "content": "$n \\in \\{-8 ; -2 ; 0 ; 6\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$n \\in \\{0 ; 6\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n \\in \\{1 ; 7\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n \\in \\{-8 ; 6\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la division euclidienne de $a$ par $b$, le quotient est $7$ et le reste est $5$. On sait que $a + b = 117$. Que vaut $a$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$a = 7b + 5$, donc $a + b = 8b + 5 = 117$ et $b = 14$. Alors $a = 7 \\times 14 + 5 = 103$, et $5 < 14$ : le reste est valable. 98 oublie le reste ; 112 retire seulement 5 de 117.",
+                  "answers": [
+                    {
+                      "content": "$103$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$98$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$112$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On effectue la division euclidienne de $-100$ par $7$. Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$7 \\times (-15) = -105$ et $-100 - (-105) = 5$ : $-100 = 7 \\times (-15) + 5$. Avec le quotient $-14$, on trouverait le reste $-2$, négatif. Et $2$ est le reste de $100$, pas celui de $-100$.",
+                  "answers": [
+                    {
+                      "content": "Le quotient est $-15$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le reste est $5$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le quotient est $-14$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le reste est $2$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le reste est $-2$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On suppose $a = bq + r = bq' + r'$, avec $0 \\le r < |b|$ et $0 \\le r' < |b|$. On obtient $b(q - q') = r' - r$. Comment conclut-on que $r = r'$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les restes sont dans $[0 ; |b|[$, donc $|r' - r| < |b|$. Or $r' - r = b(q - q')$ est un multiple de $b$ : si $q \\ne q'$, sa valeur absolue serait au moins $|b|$. Donc $q = q'$, puis $r = r'$.",
+                  "answers": [
+                    {
+                      "content": "$r' - r$ est un multiple de $b$ et $|r' - r| < |b|$ : le seul multiple de $b$ de valeur absolue inférieure à $|b|$ est $0$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que $b$ divise tous les entiers.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $q = q'$ par hypothèse.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $r$ et $r'$ sont positifs, donc égaux.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces propriétés, lesquelles sont vraies pour tous entiers relatifs $a$, $b$, $c$ non nuls ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Les trois premières sont des propriétés du cours : transitivité, $a = \\pm b$ et multiplication par $c$. Contre-exemples : $6 \\mid 2 \\times 3$ sans diviser 2 ni 3 ; $4 \\mid 2^2$ mais $4 \\nmid 2$. Un produit peut être divisible par $a$ sans que ses facteurs le soient.",
+                  "answers": [
+                    {
+                      "content": "Si $a \\mid b$ et $b \\mid c$, alors $a \\mid c$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $a \\mid b$ et $b \\mid a$, alors $a = b$ ou $a = -b$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $a \\mid b$, alors $ac \\mid bc$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $a \\mid bc$, alors $a \\mid b$ ou $a \\mid c$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si $a \\mid b^2$, alors $a \\mid b$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si un entier $n$ est divisible par $6$ et par $4$, alors il est divisible par $24$.",
+                  "question_type": "true_false",
+                  "explanation": "Contre-exemple : $n = 12$ est divisible par 6 et par 4, mais pas par 24 ($12 = 24 \\times 0 + 12$). Il faudrait que 6 et 4 n'aient aucun facteur en commun ; or ils ont tous deux le facteur 2.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Opérations sur les limites et formes indéterminées",
+          "subtitle": "Calculer une limite, lever une indétermination, limite d'une composée",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Utiliser la congruence modulo $n$ et ses propriétés pour calculer un reste, y compris celui d'une puissance.</li>\n<li>Appliquer les critères de divisibilité par 2, 3, 4, 5, 9, 10 et 11.</li>\n<li>Raisonner sur les restes possibles d'un entier pour démontrer une propriété vraie pour tout $n$.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le cargo de la semaine (la congruence).</strong> Un cargo fait escale à Abidjan tous les 7 jours. Il est au port le jour n° 4, puis les jours 11, 18, 25… Aux jours 4 et 18, il arrive le même jour de la semaine : l'écart est $14 = 2 \\times 7$. Pour savoir quel jour de la semaine on tombe, on ne garde que le reste de la division du numéro du jour par 7.</p>\n<p><em>Le pont.</em> Les numéros de jours sont les entiers. La semaine de 7 jours, c'est le <strong>modulo</strong> $7$. Tomber le même jour de la semaine, c'est avoir le même reste dans la division par 7, ou encore un écart multiple de 7. On écrit $18 \\equiv 4 \\; [7]$ et on lit « 18 est congru à 4 modulo 7 ».</p>\n<p><em>Où l'image s'arrête.</em> Le calendrier n'a pas de jours négatifs. Dans ℤ, on peut écrire $-3 \\equiv 4 \\; [7]$ : le jour qui précède de 3 jours le jour 0 tombe le même jour que le jour 4.</p>\n<p><strong>2. Les paquets de 9 (les critères de divisibilité).</strong> Le pointeur du port note le numéro d'un lot : 4 275, c'est-à-dire 4 milliers, 2 centaines, 7 dizaines et 5 unités de caisses. Il regroupe les caisses par paquets de 9. Un millier de caisses fait $1000 = 111 \\times 9 + 1$ : il reste 1 caisse. Une centaine fait $100 = 11 \\times 9 + 1$ : il reste 1 caisse. Une dizaine fait $10 = 1 \\times 9 + 1$ : il reste 1 caisse. Chaque chiffre apporte donc autant de caisses restantes que sa valeur : $4 + 2 + 7 + 5 = 18$.</p>\n<p><em>Le pont.</em> Les paquets de 9 sont le modulo $9$. Chaque puissance de 10 laisse le reste 1 : $10 \\equiv 1 \\; [9]$, donc $10^k \\equiv 1 \\; [9]$. Un nombre est donc congru à la somme de ses chiffres modulo 9.</p>\n<p><em>Où l'image s'arrête.</em> Pour 11, ça ne marche plus avec des « 1 » : $10 \\equiv -1 \\; [11]$, les restes alternent $+1, -1, +1, \\ldots$ et les chiffres s'ajoutent avec des signes alternés. Pour 2, 5 et 10, seul le dernier chiffre compte, car $10$ est multiple de chacun d'eux. Pour 4, ce sont les deux derniers chiffres, car $100$ est multiple de $4$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Congruence.</strong> Soit $n$ un entier supérieur ou égal à $2$. Deux entiers relatifs $a$ et $b$ sont <strong>congrus modulo $n$</strong>, et on note $a \\equiv b \\; [n]$, lorsque $n$ divise $a - b$. Cela équivaut à dire que $a$ et $b$ ont le même reste dans la division euclidienne par $n$. En particulier, $a \\equiv 0 \\; [n]$ si et seulement si $n \\mid a$.</p>\n<p><strong>Propriétés.</strong> La congruence est réflexive, symétrique et transitive. Si $a \\equiv b \\; [n]$ et $c \\equiv d \\; [n]$, alors :</p>\n<ul>\n<li>$a + c \\equiv b + d \\; [n]$ et $a - c \\equiv b - d \\; [n]$ ;</li>\n<li>$ac \\equiv bd \\; [n]$ ;</li>\n<li>$a^p \\equiv b^p \\; [n]$ pour tout entier naturel $p$.</li>\n</ul>\n<p><strong>Critères de divisibilité.</strong> Un entier est divisible :</p>\n<ul>\n<li>par $2$ si son dernier chiffre est $0, 2, 4, 6$ ou $8$ ; par $5$ si son dernier chiffre est $0$ ou $5$ ; par $10$ si son dernier chiffre est $0$ ;</li>\n<li>par $4$ si le nombre formé par ses deux derniers chiffres est divisible par $4$ ;</li>\n<li>par $3$ (respectivement $9$) si la somme de ses chiffres est divisible par $3$ (respectivement $9$) ;</li>\n<li>par $11$ si sa somme alternée est divisible par $11$ : chiffre des unités, moins chiffre des dizaines, plus chiffre des centaines, moins… et ainsi de suite.</li>\n</ul>\n<p>Pour 3 et 9, on a mieux : un entier est congru à la somme de ses chiffres modulo 9 (et modulo 3). Pour 11, un entier est congru à sa somme alternée modulo 11.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Quel est le reste de la division de $3^{2025}$ par $7$ ?</strong></p>\n<ol>\n<li>On calcule les premières puissances de 3 modulo 7 : $3^1 \\equiv 3$, $3^2 = 9 \\equiv 2$, $3^3 \\equiv 6$, $3^4 \\equiv 18 \\equiv 4$, $3^5 \\equiv 12 \\equiv 5$, $3^6 \\equiv 15 \\equiv 1 \\; [7]$.</li>\n<li>On divise l'exposant par 6 : $2025 = 6 \\times 337 + 3$.</li>\n<li>$3^{2025} = (3^6)^{337} \\times 3^3 \\equiv 1^{337} \\times 27 \\; [7]$, et $27 = 3 \\times 7 + 6$.</li>\n<li>Donc $3^{2025} \\equiv 6 \\; [7]$ : le reste est $6$.</li>\n</ol>\n<p><strong>Le lot n° 4 275 est-il divisible par 9 ? par 11 ?</strong></p>\n<ol>\n<li>Somme des chiffres : $4 + 2 + 7 + 5 = 18$, qui est un multiple de 9. Donc $4275$ est divisible par $9$ (et par $3$). En effet, $4275 = 9 \\times 475$.</li>\n<li>Somme alternée en partant des unités : $5 - 7 + 2 - 4 = -4$. Ce n'est pas un multiple de 11 : $4275$ n'est pas divisible par $11$.</li>\n<li>Son reste modulo 11 est celui de $-4$, soit $-4 + 11 = 7$. Contrôle : $11 \\times 388 = 4268$ et $4275 - 4268 = 7$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Simplifier une congruence comme une égalité. On a $6 \\equiv 10 \\; [4]$, car $10 - 6 = 4$. Mais si tu « simplifies par 2 », tu obtiens $3 \\equiv 5 \\; [4]$, et c'est faux : $5 - 3 = 2$ n'est pas un multiple de 4. On peut additionner, soustraire, multiplier, élever à une puissance. Diviser est interdit sans précaution.</p>\n<p>Autre piège, très fréquent avec les puissances : réduire l'exposant modulo $n$. Pour $2^{100}$ modulo $7$, on réduit la <em>base</em> ou l'on cherche la période des puissances (ici $2^3 \\equiv 1$). Remplacer l'exposant 100 par son reste 2 dans la division par 7 est faux.</p>\n<p>Dernier piège : un reste n'est jamais négatif. Le reste de $-17$ par $5$ est $3$ (car $-17 = 5 \\times (-4) + 3$), pas $-2$.</p>\n<h2>En une phrase</h2>\n<p>$a \\equiv b \\; [n]$ veut dire que $a$ et $b$ ont le même reste par $n$, comme deux jours qui tombent le même jour de la semaine : on peut additionner et multiplier les congruences, mais pas les simplifier, et les critères de divisibilité viennent de $10 \\equiv 1 \\; [9]$ et de $10 \\equiv -1 \\; [11]$.</p>\n",
+          "exercises": [
+            {
+              "title": "Comprendre — Sens de la congruence et critères",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soient $a$ et $b$ deux entiers relatifs et $n$ un entier supérieur ou égal à $2$. Que signifie $a \\equiv b \\; [n]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Être congrus modulo $n$, c'est avoir le même reste dans la division par $n$, ce qui équivaut à $n \\mid a - b$. Dans l'image du cargo, deux jours tombent le même jour de la semaine si leur écart est un multiple de 7. Le quotient (le numéro de la semaine) n'a pas à être le même.",
+                  "answers": [
+                    {
+                      "content": "$n$ divise $a - b$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$n$ divise $a + b$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a - b = n$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a$ et $b$ ont le même quotient dans la division par $n$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cargo fait escale à Abidjan tous les 7 jours. Il est au port le jour n° 4 : il y est aussi le jour n° 18, car $18 \\equiv 4 \\; [7]$.",
+                  "question_type": "true_false",
+                  "explanation": "$18 - 4 = 14 = 7 \\times 2$ : l'écart est un multiple de 7, donc $18 \\equiv 4 \\; [7]$. Le cargo revient à intervalle de 7 jours : jours 4, 11, 18, 25…",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces congruences, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$23 - 2 = 21$ et $-3 - 4 = -7$ sont des multiples de 7. Mais $17 - 2 = 15$, $10 - 1 = 9$ et $25 - 3 = 22$ n'en sont pas. Un reste est positif : celui de $-3$ par 7 est $4$.",
+                  "answers": [
+                    {
+                      "content": "$23 \\equiv 2 \\; [7]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-3 \\equiv 4 \\; [7]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$17 \\equiv 2 \\; [7]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10 \\equiv 1 \\; [7]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$25 \\equiv 3 \\; [7]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi un entier est-il congru à la somme de ses chiffres modulo $9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme dans l'image des paquets de 9, $10 \\equiv 1 \\; [9]$, donc $100 \\equiv 1$, $1000 \\equiv 1$… Chaque chiffre pèse donc sa propre valeur. Ce n'est pas $10 \\equiv 0 \\; [9]$ : 10 n'est pas un multiple de 9, il vaut 9 plus 1.",
+                  "answers": [
+                    {
+                      "content": "Parce que $10 \\equiv 1 \\; [9]$, donc toutes les puissances de $10$ sont congrues à $1$ modulo $9$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que $10$ est un multiple de $9$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $10 \\equiv 0 \\; [9]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $9$ divise la somme de ses chiffres.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $a \\equiv b \\; [n]$ et $c \\equiv d \\; [n]$, alors $a \\times c \\equiv b \\times d \\; [n]$.",
+                  "question_type": "true_false",
+                  "explanation": "C'est une propriété du cours : la congruence est compatible avec la multiplication, comme avec l'addition. En effet, $ac - bd = a(c - d) + d(a - b)$ est un multiple de $n$. En revanche, elle n'est pas compatible avec la division.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer avec les congruences",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quel est le reste de la division euclidienne de $7349$ par $9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un entier est congru à la somme de ses chiffres modulo 9 : $7 + 3 + 4 + 9 = 23$. Mais 23 n'est pas un reste : $23 = 9 \\times 2 + 5$, donc le reste est 5. Contrôle : $9 \\times 816 = 7344$ et $7349 - 7344 = 5$.",
+                  "answers": [
+                    {
+                      "content": "$5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$23$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquels de ces nombres sont divisibles par $11$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Somme alternée en partant des unités : $7359 \\to 9 - 5 + 3 - 7 = 0$ et $2849 \\to 9 - 4 + 8 - 2 = 11$. Pour $1234$ et $4567$ on trouve $2$, pour $6500$ on trouve $-1$. La somme des chiffres de 6500 est 11, mais cela ne sert pas pour le critère de 11.",
+                  "answers": [
+                    {
+                      "content": "$7359$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2849$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1234$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4567$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6500$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lequel de ces nombres est divisible par $4$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Seuls les deux derniers chiffres comptent, car $100 \\equiv 0 \\; [4]$. On a $16 = 4 \\times 4$, mais $14$, $30$ et $2$ ne sont pas des multiples de 4. Finir par un chiffre pair ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "$3716$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2514$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6530$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4702$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le reste de la division euclidienne de $2^{100}$ par $7$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$2^3 = 8 \\equiv 1 \\; [7]$ et $100 = 3 \\times 33 + 1$, donc $2^{100} = (2^3)^{33} \\times 2 \\equiv 2 \\; [7]$. L'erreur classique est de réduire l'exposant modulo 7 : $100 \\equiv 2$ donnerait $2^2 = 4$, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $3x \\equiv 3y \\; [6]$, alors $x \\equiv y \\; [6]$.",
+                  "question_type": "true_false",
+                  "explanation": "Avec $x = 0$ et $y = 2$ : $3x = 0$ et $3y = 6$ sont congrus modulo 6, mais $0 \\not\\equiv 2 \\; [6]$. On ne simplifie pas une congruence comme une égalité : ici 3 et 6 ont un diviseur commun.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le reste de la division euclidienne de $-17$ par $5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$-17 = 5 \\times (-4) + 3$ avec $0 \\le 3 < 5$ : le reste est 3. On le retrouve par $-17 - 3 = -20$, multiple de 5. Le reste 2 est celui de $17$, et $-2$ est négatif : ce n'est pas un reste.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Restes, puissances et critères",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Quels restes peut-on obtenir dans la division euclidienne de $n^2$ par $4$, lorsque $n$ décrit les entiers naturels ?",
+                  "question_type": "single_choice",
+                  "explanation": "On étudie $n$ selon son reste modulo 4 : $0^2 = 0$, $1^2 = 1$, $2^2 = 4 \\equiv 0$, $3^2 = 9 \\equiv 1$. Un carré a donc pour reste 0 ou 1 dans la division par 4, jamais 2 ni 3.",
+                  "answers": [
+                    {
+                      "content": "Seulement $0$ ou $1$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$, $1$, $2$ ou $3$, tous sont possibles.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement $1$ ou $3$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement $0$ ou $2$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le reste de la division euclidienne de $7^{2024} + 3$ par $5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$7 \\equiv 2 \\; [5]$ et $2^4 = 16 \\equiv 1 \\; [5]$. Comme $2024 = 4 \\times 506$, $7^{2024} \\equiv 1 \\; [5]$, puis $7^{2024} + 3 \\equiv 4 \\; [5]$. La réponse 1 oublie d'ajouter 3.",
+                  "answers": [
+                    {
+                      "content": "$4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations, lesquelles sont vraies pour tout entier naturel $n$ ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$n(n+1)$ est un produit de deux entiers consécutifs : l'un est pair. $n^3 - n = (n-1)n(n+1)$ contient un multiple de 3. Modulo 3, $n^2 \\equiv 0$ ou $1$, donc $n^2 + 1 \\equiv 1$ ou $2$. Faux : $n = 3$ donne $n^2 \\equiv 0$ ; $n = 1$ donne $n(n+1)(n+2) = 6$ et $n^2 + n = 2$.",
+                  "answers": [
+                    {
+                      "content": "$n(n+1)$ est pair.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$n^3 - n$ est divisible par $3$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$n^2 + 1$ n'est jamais divisible par $3$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$n^2 \\equiv 1 \\; [3]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n(n+1)(n+2)$ est divisible par $4$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n^2 + n$ est divisible par $3$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quels entiers relatifs $n$ le nombre $3n + 1$ est-il divisible par $5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On étudie le reste de $n$ modulo 5. Pour $n \\equiv 0, 1, 2, 3, 4$, on trouve $3n + 1 \\equiv 1, 4, 2, 0, 3$. Seul $n \\equiv 3 \\; [5]$ donne $3n + 1 \\equiv 0 \\; [5]$. Contrôle : $n = 3$ donne $10$.",
+                  "answers": [
+                    {
+                      "content": "Ceux tels que $n \\equiv 3 \\; [5]$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ceux tels que $n \\equiv 2 \\; [5]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ceux tels que $n \\equiv 4 \\; [5]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ceux tels que $n \\equiv 1 \\; [5]$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre à quatre chiffres $4a72$ a pour chiffre des milliers $4$, pour chiffre des centaines $a$, pour chiffre des dizaines $7$ et pour chiffre des unités $2$. Pour quel chiffre $a$ est-il divisible par $9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme des chiffres $4 + a + 7 + 2 = 13 + a$ doit être un multiple de 9. Comme $0 \\le a \\le 9$, seule la valeur 18 convient : $a = 5$. Contrôle : $4572 = 9 \\times 508$.",
+                  "answers": [
+                    {
+                      "content": "$a = 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a = 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 9$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un entier dont la somme des chiffres est égale à $12$ est divisible par $3$ et par $9$.",
+                  "question_type": "true_false",
+                  "explanation": "La somme 12 est un multiple de 3 ($12 = 3 \\times 4$), donc l'entier est divisible par 3. Mais $12 = 9 + 3$ n'est pas un multiple de 9 : l'entier est congru à $12 \\equiv 3 \\; [9]$. Exemple : $39$ est divisible par 3, pas par 9.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Limites par comparaison et théorème des gendarmes",
+          "subtitle": "Encadrer une fonction pour trouver sa limite",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Utiliser un théorème de comparaison pour obtenir une limite infinie.</li><li>Appliquer le théorème des gendarmes pour obtenir une limite finie.</li><li>Encadrer une expression qui contient $\\sin x$ ou $\\cos x$.</li></ul><h2>L'image pour comprendre</h2><p><strong>1. La clameur plus forte que les ultras (comparaison, limite infinie).</strong> Dans une tribune, un groupe d'ultras chante de plus en plus fort pendant le match : son volume dépasse tout nombre. La clameur de la tribune entière est toujours plus forte que celle du groupe. La clameur de la tribune dépasse donc, elle aussi, tout nombre.</p><p><em>Le pont.</em> Le volume des ultras est $g(x)$, avec $\\lim g = +\\infty$. La clameur de la tribune est $f(x)$, avec $f(x) \\geq g(x)$. Donc $\\lim f = +\\infty$.</p><p><em>Où l'image s'arrête.</em> Il faut que la plus petite grandeur monte sans fin. Si la clameur était toujours plus faible que celle des ultras, on ne saurait rien : elle pourrait rester presque nulle.</p><p><strong>2. Le milieu coincé entre deux défenseurs (théorème des gendarmes).</strong> Deux défenseurs reculent chacun vers la même ligne, celle du point de penalty. Un milieu adverse est coincé entre eux : il est toujours devant l'un et derrière l'autre. Si les deux défenseurs finissent sur la ligne du point de penalty, le milieu y finit forcément aussi.</p><p><em>Le pont.</em> Les défenseurs sont les fonctions $g$ et $h$. Le milieu est $f$. La ligne du point de penalty est la limite $\\ell$. « Être coincé entre les deux » est l'encadrement $g(x) \\leq f(x) \\leq h(x)$.</p><p><em>Où l'image s'arrête.</em> Les deux défenseurs doivent aller <strong>au même endroit</strong>. S'ils reculent vers deux lignes différentes, le milieu peut aller n'importe où entre les deux, ou même ne pas s'arrêter.</p><p><strong>3. La marge d'erreur qui disparaît (variante avec une valeur absolue).</strong> Un tireur vise un poteau. L'écart entre le ballon et le poteau ne dépasse jamais une marge, et cette marge devient aussi petite qu'on veut au fil des essais. Le ballon finit donc au poteau.</p><p><em>Le pont.</em> Le poteau est $\\ell$, le ballon est $f(x)$ et la marge est $h(x)$ : si $|f(x) - \\ell| \\leq h(x)$ et $\\lim h = 0$, alors $\\lim f = \\ell$.</p><p><em>Où l'image s'arrête.</em> La marge doit tendre vers $0$ : une marge qui reste égale à 1 m ne permet pas de conclure.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Dans tout ce qui suit, $a$ désigne un réel, $+\\infty$ ou $-\\infty$, et les inégalités sont vraies au voisinage de $a$ (pour $x$ assez proche de $a$, ou assez grand).</p><p><strong>Théorèmes de comparaison.</strong> Si $f(x) \\geq g(x)$ et $\\lim_{x \\to a} g(x) = +\\infty$, alors $\\lim_{x \\to a} f(x) = +\\infty$. Si $f(x) \\leq g(x)$ et $\\lim_{x \\to a} g(x) = -\\infty$, alors $\\lim_{x \\to a} f(x) = -\\infty$.</p><p><strong>Théorème des gendarmes.</strong> Si $g(x) \\leq f(x) \\leq h(x)$ et $\\lim_{x \\to a} g(x) = \\lim_{x \\to a} h(x) = \\ell$ (réel), alors $\\lim_{x \\to a} f(x) = \\ell$.</p><p><strong>Variante.</strong> Si $|f(x) - \\ell| \\leq h(x)$ et $\\lim_{x \\to a} h(x) = 0$, alors $\\lim_{x \\to a} f(x) = \\ell$.</p><p><strong>Passage à la limite.</strong> Si $f(x) \\leq g(x)$ et si $f$ et $g$ ont une limite en $a$, alors $\\lim f \\leq \\lim g$. Les inégalités strictes deviennent larges à la limite.</p><p><strong>Rappel.</strong> Pour tout réel $x$ : $-1 \\leq \\sin x \\leq 1$ et $-1 \\leq \\cos x \\leq 1$.</p></blockquote><h2>Exemple résolu</h2><p><strong>Calculer $\\lim_{x \\to +\\infty} \\frac{\\sin x}{x}$.</strong></p><ol><li>On part de l'encadrement connu : $-1 \\leq \\sin x \\leq 1$.</li><li>On divise par $x$. Comme on cherche la limite en $+\\infty$, on peut supposer $x > 0$, donc l'ordre est conservé : $-\\frac{1}{x} \\leq \\frac{\\sin x}{x} \\leq \\frac{1}{x}$.</li><li>$\\lim_{x \\to +\\infty} \\left(-\\frac{1}{x}\\right) = 0$ et $\\lim_{x \\to +\\infty} \\frac{1}{x} = 0$ : les deux défenseurs vont au même endroit.</li><li>Par le théorème des gendarmes, $\\lim_{x \\to +\\infty} \\frac{\\sin x}{x} = 0$.</li></ol><p><strong>Calculer $\\lim_{x \\to +\\infty} (x + \\cos x)$.</strong></p><ol><li>Comme $\\cos x \\geq -1$, on a $x + \\cos x \\geq x - 1$.</li><li>$\\lim_{x \\to +\\infty} (x - 1) = +\\infty$.</li><li>Par comparaison, $\\lim_{x \\to +\\infty} (x + \\cos x) = +\\infty$. On ne dit pas que $\\cos x$ a une limite : on s'en passe.</li></ol><h2>Le piège à éviter</h2><p>Deux erreurs fréquentes. Première erreur : multiplier ou diviser un encadrement par un nombre négatif sans retourner les inégalités. Si $x < 0$, diviser $-1 \\leq \\sin x \\leq 1$ par $x$ donne $\\frac{1}{x} \\leq \\frac{\\sin x}{x} \\leq -\\frac{1}{x}$. Seconde erreur : croire qu'une inégalité stricte reste stricte à la limite. On a $\\frac{1}{x} > 0$ pour tout $x > 0$, mais sa limite en $+\\infty$ est $0$, et non un nombre strictement positif.</p><p>Comment le repérer : avant de diviser par $x$, regarde son signe ; avant de conclure, regarde si les deux fonctions qui encadrent ont <strong>la même</strong> limite.</p><h2>En une phrase</h2><p>Si une fonction est toujours au-dessus d'une autre qui tend vers $+\\infty$, elle y tend aussi ; si elle est coincée entre deux fonctions qui tendent vers le même réel, elle tend vers ce réel.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Comparaison et gendarmes",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On sait que $g(x) \\leq f(x) \\leq h(x)$ près de $+\\infty$. Quelle condition permet de conclure que $f$ a une limite finie en $+\\infty$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour que le milieu soit forcé d'arriver quelque part, les deux défenseurs doivent aller au même endroit : $g$ et $h$ ont la même limite réelle $\\ell$. Avoir chacune une limite ne suffit pas ; la monotonie de $f$ n'est pas une hypothèse du théorème.",
+                  "answers": [
+                    {
+                      "content": "$g$ et $h$ ont la même limite réelle $\\ell$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$g$ et $h$ ont chacune une limite",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est croissante",
+                      "correct": false
+                    },
+                    {
+                      "content": "$g(x) < h(x)$ pour tout $x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si $f(x) \\geq g(x)$ près de $+\\infty$ et si $\\lim_{x \\to +\\infty} g(x) = +\\infty$, alors $\\lim_{x \\to +\\infty} f(x) = +\\infty$.",
+                  "question_type": "true_false",
+                  "explanation": "Souviens-toi de la clameur de la tribune et du groupe d'ultras : si la clameur est toujours plus forte que celle du groupe, qui dépasse tout nombre, elle le dépasse aussi. C'est le théorème de comparaison par minoration.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si $f(x) \\leq g(x)$ près de $+\\infty$ et si $\\lim_{x \\to +\\infty} g(x) = +\\infty$, alors $\\lim_{x \\to +\\infty} f(x) = +\\infty$.",
+                  "question_type": "true_false",
+                  "explanation": "L'inégalité est dans le mauvais sens. Si la clameur est toujours plus faible que celle des ultras, elle peut rester presque nulle : par exemple $f(x) = 0$ et $g(x) = x$. Pour avoir $+\\infty$, il faut que la plus petite des deux fonctions tende vers $+\\infty$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $g(x) \\leq f(x) \\leq h(x)$, avec $\\lim_{x \\to +\\infty} g(x) = 0$ et $\\lim_{x \\to +\\infty} h(x) = 2$. Que peut-on dire de $\\lim_{x \\to +\\infty} f(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux défenseurs reculent vers deux lignes différentes : le milieu peut rester entre les deux, sans s'arrêter nulle part. Le théorème des gendarmes ne s'applique pas, et la valeur $1$ (la moyenne) n'a aucune raison d'être la limite.",
+                  "answers": [
+                    {
+                      "content": "On ne peut pas conclure avec le théorème des gendarmes",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim f = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim f = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim f = 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles implications sont correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les deux marges $\\frac{1}{x}$ (en $+\\infty$) et $|x|$ (en $0$) tendent vers $0$ : c'est la variante des gendarmes. Minorer par $-x^2$, qui tend vers $-\\infty$, ne dit rien. Et être borné par $5$ ne donne pas la limite $5$ : la marge ne tend pas vers $0$.",
+                  "answers": [
+                    {
+                      "content": "Si $|f(x) - 3| \\leq \\frac{1}{x}$ pour $x > 0$, alors $\\lim_{x \\to +\\infty} f(x) = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $|f(x) - 3| \\leq |x|$ près de $0$, alors $\\lim_{x \\to 0} f(x) = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $f(x) \\geq -x^2$, alors $\\lim_{x \\to +\\infty} f(x) = +\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si $|f(x)| \\leq 5$ pour tout $x$, alors $\\lim_{x \\to +\\infty} f(x) = 5$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Encadrer pour calculer",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Que vaut $\\lim_{x \\to +\\infty} \\frac{\\sin x}{x}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $x > 0$, $-\\frac{1}{x} \\leq \\frac{\\sin x}{x} \\leq \\frac{1}{x}$. Les deux bornes tendent vers $0$ : par les gendarmes, la limite est $0$. Ne confonds pas avec la valeur $1$, qui apparaît à propos de $\\frac{\\sin x}{x}$ quand $x$ tend vers $0$, et non vers $+\\infty$.",
+                  "answers": [
+                    {
+                      "content": "$0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite n'existe pas, car $\\sin x$ oscille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to +\\infty} (x + \\cos x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme $\\cos x \\geq -1$, on a $x + \\cos x \\geq x - 1$, et $x - 1 \\to +\\infty$. Par comparaison, la limite est $+\\infty$. Que $\\cos x$ oscille ne gêne pas : le terme $x$ domine et $\\cos x$ reste borné entre $-1$ et $1$.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La limite n'existe pas, car $\\cos x$ oscille",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to +\\infty} \\frac{2x + \\sin x}{x}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On écrit $\\frac{2x + \\sin x}{x} = 2 + \\frac{\\sin x}{x}$ pour $x > 0$. Comme $\\frac{\\sin x}{x} \\to 0$ par les gendarmes, la limite vaut $2$. Remplacer $\\sin x$ par $1$ pour obtenir $3$ est faux : $\\sin x$ prend toutes les valeurs entre $-1$ et $1$.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to -\\infty} (x - \\sin x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme $\\sin x \\geq -1$, on a $-\\sin x \\leq 1$, donc $x - \\sin x \\leq x + 1$. Or $x + 1 \\to -\\infty$. Par comparaison (majoration), la limite est $-\\infty$. Le terme $x$ domine, puisque $\\sin x$ reste entre $-1$ et $1$.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to 0} x \\cos\\left(\\frac{1}{x}\\right)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $x \\neq 0$, $\\left|x \\cos\\left(\\frac{1}{x}\\right)\\right| \\leq |x|$ car $|\\cos| \\leq 1$. Comme $|x| \\to 0$, la variante des gendarmes donne $0$. On ne peut pas dire « $\\cos\\left(\\frac{1}{x}\\right)$ oscille donc pas de limite » : il est multiplié par $x$, qui tend vers $0$.",
+                  "answers": [
+                    {
+                      "content": "$0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Encadrements à plusieurs étapes",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Pour tout $x > 0$, on sait que $\\frac{x - 1}{x} \\leq f(x) \\leq \\frac{x^2 + 1}{x^2 + x}$. Que vaut $\\lim_{x \\to +\\infty} f(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On calcule chaque borne en $+\\infty$. $\\frac{x - 1}{x} = 1 - \\frac{1}{x} \\to 1$. $\\frac{x^2 + 1}{x^2 + x}$ se comporte comme $\\frac{x^2}{x^2} = 1$, donc tend vers $1$. Les deux bornes ont la même limite $1$ : par les gendarmes, $\\lim f = 1$.",
+                  "answers": [
+                    {
+                      "content": "$1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas conclure",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to +\\infty} \\frac{x + \\sin x}{x - \\cos x}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $x > 1$, on divise par $x$ : $\\frac{1 + \\frac{\\sin x}{x}}{1 - \\frac{\\cos x}{x}}$. Par les gendarmes, $\\frac{\\sin x}{x} \\to 0$ et $\\frac{\\cos x}{x} \\to 0$. Le quotient tend donc vers $\\frac{1}{1} = 1$. Dire « pas de limite » parce que $\\sin x$ et $\\cos x$ oscillent est faux.",
+                  "answers": [
+                    {
+                      "content": "$1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces égalités, lesquelles sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$\\left|x^2 \\sin\\frac{1}{x}\\right| \\leq x^2 \\to 0$ ; $\\left|\\frac{\\cos x}{x^2}\\right| \\leq \\frac{1}{x^2} \\to 0$ ; $x - \\sin x \\geq x - 1 \\to +\\infty$. En revanche $\\cos x$ n'a pas de limite en $+\\infty$, $x \\sin x$ non plus, et $-x^2 + \\cos x \\leq -x^2 + 1 \\to -\\infty$.",
+                  "answers": [
+                    {
+                      "content": "$\\lim_{x \\to 0} x^2 \\sin\\frac{1}{x} = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} \\frac{\\cos x}{x^2} = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} (x - \\sin x) = +\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} \\cos x = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} x \\sin x = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} (-x^2 + \\cos x) = +\\infty$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si $f(x) > 0$ pour tout $x > 0$ et si $\\lim_{x \\to +\\infty} f(x) = \\ell$, alors $\\ell > 0$.",
+                  "question_type": "true_false",
+                  "explanation": "À la limite, les inégalités strictes deviennent larges : on peut seulement affirmer $\\ell \\geq 0$. Contre-exemple : $f(x) = \\frac{1}{x}$ est strictement positive pour tout $x > 0$, et sa limite en $+\\infty$ vaut $0$, qui n'est pas strictement positif.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x < 0$, on divise l'encadrement $-1 \\leq \\sin x \\leq 1$ par $x$. Quel encadrement de $\\frac{\\sin x}{x}$ obtient-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Diviser par un nombre négatif retourne les inégalités : $\\frac{-1}{x} \\geq \\frac{\\sin x}{x} \\geq \\frac{1}{x}$, soit $\\frac{1}{x} \\leq \\frac{\\sin x}{x} \\leq -\\frac{1}{x}$. Test : avec $x = -2$, on a $-0{,}5 \\leq \\frac{\\sin x}{x} \\leq 0{,}5$. Les deux bornes tendent vers $0$ en $-\\infty$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{x} \\leq \\frac{\\sin x}{x} \\leq -\\frac{1}{x}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\frac{1}{x} \\leq \\frac{\\sin x}{x} \\leq \\frac{1}{x}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-1 \\leq \\frac{\\sin x}{x} \\leq 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-x \\leq \\frac{\\sin x}{x} \\leq x$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Continuité en un point et sur un intervalle",
+          "subtitle": "Reconnaître une fonction continue, étudier un raccord, prolonger par continuité",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Dire si une fonction est continue en un point ou sur un intervalle, avec la définition par la limite.</li><li>Étudier le raccord d'une fonction définie par morceaux et déterminer un paramètre.</li><li>Prolonger une fonction par continuité en un point où elle n'est pas définie.</li></ul><h2>L'image pour comprendre</h2><p><strong>1. Le ballon et le tableau d'affichage (continuité en un point).</strong> Pendant un lob, la hauteur du ballon change sans jamais sauter : il ne disparaît pas d'un endroit pour réapparaître plus haut. Le score affiché, lui, saute de 0 à 1 à l'instant exact du but : juste avant, il affiche 0 ; juste après, il affiche 1.</p><p><em>Le pont.</em> Pour la hauteur $h(t)$ du ballon, quand $t$ s'approche de $t_0$, $h(t)$ s'approche de $h(t_0)$ : $\\lim_{t \\to t_0} h(t) = h(t_0)$. On dit que $h$ est <strong>continue</strong> en $t_0$. Pour le score $S(t)$, la limite à gauche vaut $0$, la limite à droite vaut $1$ : elles sont différentes, donc $S$ est <strong>discontinue</strong> à l'instant du but.</p><p><em>Où l'image s'arrête.</em> « Se tracer sans lever le crayon » ne marche que sur un intervalle. La fonction $x \\mapsto \\frac{1}{x}$ est continue en tout point de son ensemble de définition, mais sa courbe a deux morceaux séparés par $x = 0$, où elle n'est pas définie.</p><p><strong>2. Le raccord entre deux bandes de pelouse.</strong> On pose deux bandes de gazon côte à côte. Si leurs hauteurs se rejoignent exactement à la jonction, on marche d'une bande à l'autre sans marche. S'il y a une différence de hauteur, on trébuche.</p><p><em>Le pont.</em> La bande de gauche est la formule de $f$ pour $x < a$, la bande de droite la formule pour $x \\geq a$. Le raccord est sans marche quand la limite à gauche, la limite à droite et la valeur $f(a)$ sont égales.</p><p><em>Où l'image s'arrête.</em> Une pelouse sans marche peut quand même avoir un angle à la jonction. Continuité ne veut pas dire « courbe lisse ».</p><p><strong>3. Le trou à combler (prolongement par continuité).</strong> Un trou a été creusé en un seul point de la pelouse. La pelouse tout autour monte vers la hauteur 6 cm quand on s'approche du trou. On bouche le trou avec du gazon à 6 cm : la pelouse redevient continue.</p><p><em>Le pont.</em> La fonction $f$ n'est pas définie en $a$ mais $\\lim_{x \\to a} f(x) = \\ell$ (un réel). On pose $f(a) = \\ell$ : la nouvelle fonction est continue en $a$. C'est un <strong>prolongement par continuité</strong>.</p><p><em>Où l'image s'arrête.</em> On ne peut pas boucher le trou si les deux bords arrivent à des hauteurs différentes, ou s'ils partent à l'infini.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Continuité en un point.</strong> Une fonction $f$ est continue en $a$ si $f$ est définie en $a$ et si $\\lim_{x \\to a} f(x) = f(a)$. De façon équivalente : $\\lim_{x \\to a^-} f(x) = \\lim_{x \\to a^+} f(x) = f(a)$.</p><p><strong>Continuité sur un intervalle.</strong> $f$ est continue sur un intervalle $I$ si elle est continue en tout point de $I$.</p><p><strong>Fonctions usuelles.</strong> Les fonctions polynômes sont continues sur $\\mathbb{R}$. Les fonctions rationnelles sont continues sur leur ensemble de définition. La fonction racine carrée est continue sur $[0\\,;+\\infty[$, la valeur absolue sur $\\mathbb{R}$, et $\\sin$ et $\\cos$ sur $\\mathbb{R}$. Une somme, un produit, un quotient (dénominateur non nul) ou une composée de fonctions continues est continue.</p><p><strong>Raccord.</strong> Si $f$ est définie par une formule pour $x < a$ et par une autre pour $x \\geq a$, elle est continue en $a$ si et seulement si la limite à gauche (calculée avec la 1re formule) est égale à $f(a)$ (donnée par la 2e formule), qui est aussi la limite à droite.</p><p><strong>Prolongement par continuité.</strong> Si $f$ n'est pas définie en $a$ mais si $\\lim_{x \\to a} f(x) = \\ell$ avec $\\ell$ réel, la fonction égale à $f$ partout et à $\\ell$ en $a$ est continue en $a$ : c'est le prolongement par continuité de $f$ en $a$.</p></blockquote><h2>Exemple résolu</h2><p><strong>Déterminer $a$ pour que $f$ soit continue en $2$, avec $f(x) = ax + 1$ si $x < 2$ et $f(x) = x^2$ si $x \\geq 2$.</strong></p><ol><li>La valeur en $2$ est donnée par la 2e formule : $f(2) = 2^2 = 4$.</li><li>Limite à droite : $\\lim_{x \\to 2^+} x^2 = 4$. Elle est égale à $f(2)$.</li><li>Limite à gauche : $\\lim_{x \\to 2^-} (ax + 1) = 2a + 1$.</li><li>Pour la continuité en $2$, il faut $2a + 1 = 4$, donc $a = \\frac{3}{2}$.</li></ol><p><strong>Prolonger par continuité en $2$ la fonction $f(x) = \\frac{x^2 - 4}{x - 2}$ ($x \\neq 2$).</strong></p><ol><li>En $2$, on obtient « $\\frac{0}{0}$ ». On factorise : $x^2 - 4 = (x - 2)(x + 2)$.</li><li>Pour $x \\neq 2$, $f(x) = x + 2$, et $\\lim_{x \\to 2} f(x) = 4$. C'est un réel.</li><li>On pose $f(2) = 4$. La fonction prolongée est continue en $2$.</li></ol><h2>Le piège à éviter</h2><p>Croire que « la limite à gauche est égale à la limite à droite » suffit pour la continuité. Prenons $f(x) = x^2$ pour $x \\neq 1$ et $f(1) = 3$. Les limites à gauche et à droite en $1$ valent toutes les deux $1$, mais $f(1) = 3$ : la fonction n'est pas continue en $1$. Il faut aussi que $f(a)$ existe et soit égale à cette limite.</p><p>Comment le repérer : pour la continuité en $a$, vérifie toujours les <strong>trois</strong> nombres : limite à gauche, limite à droite et $f(a)$.</p><h2>En une phrase</h2><p>Une fonction est continue en $a$ quand elle est définie en $a$ et que sa limite en $a$ est exactement $f(a)$, sans saut ni trou.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Ce que veut dire « continue »",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Que signifie « $f$ est continue en $a$ » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme la hauteur du ballon, $f(x)$ s'approche de $f(a)$ quand $x$ s'approche de $a$. Il faut que $f(a)$ existe et que la limite soit exactement $f(a)$. Avoir une limite en $a$ ne suffit pas : on peut avoir un trou, ou une valeur $f(a)$ différente.",
+                  "answers": [
+                    {
+                      "content": "$f$ est définie en $a$ et $\\lim_{x \\to a} f(x) = f(a)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est définie en $a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ a une limite finie en $a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(a) = 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : le score d'un match en fonction du temps est une fonction continue.",
+                  "question_type": "true_false",
+                  "explanation": "À l'instant d'un but, le score passe de 0 à 1 sans valeur intermédiaire : la limite à gauche (0) et la limite à droite (1) sont différentes. C'est l'opposé de la hauteur du ballon, qui varie sans saut.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $f(x) = x^2$ pour $x \\neq 1$ et $f(1) = 3$. Pourquoi $f$ n'est-elle pas continue en $1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f(1) = 3$ est bien défini, et les limites à gauche et à droite en $1$ valent toutes les deux $1$. Mais $1 \\neq 3$ : la valeur en $1$ ne correspond pas à la limite. C'est une pelouse dont on a mal comblé le trou.",
+                  "answers": [
+                    {
+                      "content": "Parce que $\\lim_{x \\to 1} f(x) = 1 \\neq f(1) = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que $f$ n'est pas définie en $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que les limites à gauche et à droite en $1$ sont différentes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $x^2$ n'est pas une fonction continue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles fonctions sont continues sur $\\mathbb{R}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Un polynôme comme $x^3 - 2x + 1$ et la valeur absolue sont continus sur $\\mathbb{R}$. En revanche $\\frac{1}{x}$ n'est pas définie en $0$ et $\\sqrt{x}$ n'est définie que pour $x \\geq 0$ : elles ne sont pas des fonctions continues sur $\\mathbb{R}$ tout entier.",
+                  "answers": [
+                    {
+                      "content": "$x \\mapsto x^3 - 2x + 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x \\mapsto |x|$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x \\mapsto \\frac{1}{x}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x \\mapsto \\sqrt{x}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image des deux bandes de pelouse, que signifie « le raccord en $a$ est sans marche » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Sans marche signifie que les deux bandes arrivent à la même hauteur, qui est aussi la hauteur à la jonction : limite à gauche, limite à droite et $f(a)$ sont égales. Avoir seulement les deux limites égales laisse la possibilité d'une valeur $f(a)$ différente, comme un petit trou rempli trop haut.",
+                  "answers": [
+                    {
+                      "content": "La limite à gauche, la limite à droite et $f(a)$ sont égales",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seules la limite à gauche et la limite à droite sont égales",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(a) = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est croissante en $a$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Raccord et prolongement",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On pose $f(x) = ax + 1$ si $x < 2$ et $f(x) = x^2$ si $x \\geq 2$. Pour quelle valeur de $a$ la fonction $f$ est-elle continue en $2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $f(2) = 4$ et $\\lim_{x \\to 2^+} f(x) = 4$. À gauche, $\\lim_{x \\to 2^-} (ax + 1) = 2a + 1$. Il faut $2a + 1 = 4$, donc $a = \\frac{3}{2}$. Vérification : $\\frac{3}{2} \\times 2 + 1 = 4$. Prendre $a = 3$ oublie de diviser par $2$.",
+                  "answers": [
+                    {
+                      "content": "$a = \\frac{3}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : la fonction $f$ définie par $f(x) = 2x$ si $x < 1$ et $f(x) = x + 2$ si $x \\geq 1$ est continue en $1$.",
+                  "question_type": "true_false",
+                  "explanation": "À gauche, $\\lim_{x \\to 1^-} 2x = 2$. À droite et en $1$, $f(1) = 1 + 2 = 3$. Les limites sont différentes ($2$ et $3$) : il y a une marche de hauteur $1$ au raccord. La fonction n'est pas continue en $1$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{x^2 - 9}{x - 3}$ pour $x \\neq 3$. Quelle valeur donner à $f(3)$ pour la prolonger par continuité en $3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $x \\neq 3$, $x^2 - 9 = (x - 3)(x + 3)$, donc $f(x) = x + 3$, qui tend vers $6$ en $3$. On pose $f(3) = 6$. Donner $0$ (le numérateur en $3$) ou $9$ (le $9$ de $x^2 - 9$) est faux : on utilise la limite, pas des morceaux de la formule.",
+                  "answers": [
+                    {
+                      "content": "$6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{\\sqrt{x} - 2}{x - 4}$ pour $x \\geq 0$ et $x \\neq 4$. Quelle valeur donner à $f(4)$ pour la prolonger par continuité ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $x - 4 = (\\sqrt{x} - 2)(\\sqrt{x} + 2)$. Donc $f(x) = \\frac{1}{\\sqrt{x} + 2}$ pour $x \\neq 4$, qui tend vers $\\frac{1}{4}$ en $4$. On pose $f(4) = \\frac{1}{4}$. Test : $x = 4{,}01$ donne environ $0{,}2499$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{1}{x - 1}$. Sur quels intervalles $f$ est-elle continue ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "La fonction est rationnelle, donc continue sur son ensemble de définition $\\mathbb{R} \\setminus \\{1\\}$. Elle est donc continue sur tout intervalle qui ne contient pas $1$, comme $]-\\infty\\,;1[$, $]1\\,;+\\infty[$ ou $[2\\,;5]$. Elle ne l'est pas sur $[0\\,;2]$ ni sur $\\mathbb{R}$, car $1$ y est.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;1[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]1\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[2\\,;5]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[0\\,;2]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Continuité à étudier",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "On pose $f(x) = \\frac{x^2 + x - 2}{x - 1}$ pour $x \\neq 1$ et $f(1) = m$. Pour quelle valeur de $m$ la fonction $f$ est-elle continue en $1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On factorise : $x^2 + x - 2 = (x - 1)(x + 2)$. Pour $x \\neq 1$, $f(x) = x + 2$, qui tend vers $3$ en $1$. Il faut $f(1) = m = 3$. La valeur $0$ est le numérateur en $1$ ; $2$ est une erreur de substitution.",
+                  "answers": [
+                    {
+                      "content": "$m = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$m = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m = 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $f(x) = x^2 + b$ si $x < 0$ et $f(x) = \\sqrt{x + 1}$ si $x \\geq 0$. Pour quelle valeur de $b$ la fonction $f$ est-elle continue en $0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $f(0) = \\sqrt{1} = 1$ et la limite à droite vaut $1$. À gauche, $\\lim_{x \\to 0^-} (x^2 + b) = b$. La continuité demande $b = 1$. Choisir $b = 0$ revient à oublier que $f(0)$ vaut $1$.",
+                  "answers": [
+                    {
+                      "content": "$b = 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$b = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$b = -1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$b = 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $f(x) = \\frac{x^3 - 1}{x - 1}$ pour $x \\neq 1$ et $f(1) = 2$. La fonction $f$ est-elle continue en $1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $x \\neq 1$, $f(x) = x^2 + x + 1$, qui tend vers $3$ en $1$. Mais $f(1) = 2 \\neq 3$ : la fonction n'est pas continue en $1$. Être définie en $1$ ne suffit pas ; il faut que la valeur corresponde à la limite.",
+                  "answers": [
+                    {
+                      "content": "Non, car $\\lim_{x \\to 1} f(x) = 3 \\neq f(1) = 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car $f$ est définie en $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $f$ n'est pas définie en $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car les limites à gauche et à droite sont égales",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations, lesquelles sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Une composée, une somme et un quotient à dénominateur non nul de fonctions continues sont continus : $\\sqrt{x^2 + 1}$, $\\frac{1}{x^2 + 1}$ et $|x - 2| + 3x$ sont continues sur $\\mathbb{R}$. En revanche $\\frac{x^2 - 1}{x + 1}$ n'est pas définie en $-1$, la fonction « marche » est discontinue en $0$, et $\\frac{1}{x - 4}$ n'est pas définie en $4 \\in [0\\,;5]$.",
+                  "answers": [
+                    {
+                      "content": "$x \\mapsto \\sqrt{x^2 + 1}$ est continue sur $\\mathbb{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x \\mapsto \\frac{1}{x^2 + 1}$ est continue sur $\\mathbb{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x \\mapsto |x - 2| + 3x$ est continue sur $\\mathbb{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x \\mapsto \\frac{x^2 - 1}{x + 1}$ est continue sur $\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fonction qui vaut $1$ si $x \\geq 0$ et $0$ si $x < 0$ est continue sur $\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x \\mapsto \\frac{1}{x - 4}$ est continue sur $[0\\,;5]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $f(x) = x^2 - 2x + a$ si $x < 3$ et $f(x) = 2x + 1$ si $x \\geq 3$. Pour quelle valeur de $a$ la fonction $f$ est-elle continue en $3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $f(3) = 2 \\times 3 + 1 = 7$. À gauche, $\\lim_{x \\to 3^-} (x^2 - 2x + a) = 9 - 6 + a = 3 + a$. Il faut $3 + a = 7$, donc $a = 4$. Prendre $a = 7$ revient à oublier de retrancher les $3$ déjà obtenus par $9 - 6$.",
+                  "answers": [
+                    {
+                      "content": "$a = 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a = 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 10$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Valeurs intermédiaires et bijection",
+          "subtitle": "Prouver qu'une équation a une solution, une seule, et la localiser",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Énoncer et utiliser le théorème des valeurs intermédiaires pour prouver qu'une équation a une solution.</li><li>Utiliser le théorème de la bijection pour prouver qu'une solution est unique et déterminer l'image d'un intervalle.</li><li>Localiser une solution par encadrement et exprimer une bijection réciproque.</li></ul><h2>L'image pour comprendre</h2><p><strong>1. Le ballon qui monte (valeurs intermédiaires).</strong> À l'instant du coup de pied, le ballon est au sol : hauteur 0 m. Quelques secondes plus tard, il est à 6 m. Entre les deux, il ne disparaît pas et ne saute pas : il passe forcément, à un moment, par 3 m.</p><p><em>Le pont.</em> La hauteur est $f(x)$ au temps $x$ de l'intervalle $[a\\,;b]$. On a $f(a) = 0$ et $f(b) = 6$, et $3$ est entre les deux. Comme $f$ est continue, il existe un instant $c$ avec $f(c) = 3$.</p><p><em>Où l'image s'arrête.</em> Le ballon d'un lob monte puis redescend : il peut passer <strong>deux fois</strong> par 3 m. Le théorème garantit au moins un passage, pas un seul. Et si la hauteur pouvait sauter (comme un score), le théorème ne marcherait plus.</p><p><strong>2. Le joueur qui court sans jamais s'arrêter ni reculer (bijection).</strong> Un joueur fait un tour de terrain, sans jamais s'arrêter et sans jamais reculer. La distance parcourue $d(t)$ augmente sans arrêt. Chaque point du parcours est franchi une seule fois, à un seul instant. Et chaque point du parcours est franchi, sans en sauter aucun.</p><p><em>Le pont.</em> L'application $t \\mapsto d(t)$ est continue (pas de saut) et strictement croissante (jamais deux fois la même distance). À chaque distance correspond exactement un instant : c'est une <strong>bijection</strong> de la durée du tour sur la longueur du tour. L'application inverse répond à la question « à quel instant le joueur est-il à tel endroit ? » : c'est la <strong>bijection réciproque</strong>.</p><p><em>Où l'image s'arrête.</em> Si le joueur s'arrête ou recule, il peut franchir le même point plusieurs fois : on perd la bijection. La stricte monotonie est indispensable.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Théorème des valeurs intermédiaires.</strong> Si $f$ est continue sur $[a\\,;b]$, alors pour tout réel $k$ compris entre $f(a)$ et $f(b)$, l'équation $f(x) = k$ a au moins une solution dans $[a\\,;b]$.</p><p><strong>Cas particulier.</strong> Si $f$ est continue sur $[a\\,;b]$ et si $f(a) \\times f(b) < 0$, l'équation $f(x) = 0$ a au moins une solution dans $]a\\,;b[$.</p><p><strong>Image d'un intervalle.</strong> L'image d'un intervalle par une fonction continue est un intervalle. L'image d'un segment $[a\\,;b]$ par une fonction continue est un segment $[m\\,;M]$, où $m$ et $M$ sont le minimum et le maximum de $f$ sur $[a\\,;b]$.</p><p><strong>Théorème de la bijection.</strong> Si $f$ est continue et strictement monotone sur un intervalle $I$, alors $f$ réalise une bijection de $I$ sur l'intervalle $J = f(I)$. Pour tout $k$ de $J$, l'équation $f(x) = k$ a donc une solution unique dans $I$.</p><p><strong>Calcul de $J = f(I)$</strong> pour $f$ continue et strictement croissante. Pour $I = [a\\,;b]$ : $J = [f(a)\\,;f(b)]$. Pour $I = ]a\\,;b[$ : $J = ]\\lim_{x \\to a^+} f(x)\\,;\\lim_{x \\to b^-} f(x)[$. Pour $I = [a\\,;+\\infty[$ : $J = [f(a)\\,;\\lim_{x \\to +\\infty} f(x)[$. Si $f$ est strictement décroissante, les bornes sont échangées.</p><p><strong>Bijection réciproque.</strong> La bijection réciproque $f^{-1} : J \\to I$ est continue, a le même sens de variation que $f$, et sa courbe est symétrique de celle de $f$ par rapport à la droite $y = x$ (dans un repère orthonormé).</p></blockquote><h2>Exemple résolu</h2><p><strong>Montrer que l'équation $x^3 + x - 1 = 0$ a une solution unique $\\alpha$, et la localiser.</strong></p><ol><li>Soit $f(x) = x^3 + x - 1$. C'est un polynôme : $f$ est continue sur $\\mathbb{R}$.</li><li>$f$ est la somme des fonctions $x \\mapsto x^3$ et $x \\mapsto x$ (toutes deux strictement croissantes) et d'une constante : $f$ est strictement croissante sur $\\mathbb{R}$.</li><li>$f(0) = -1 < 0$ et $f(1) = 1 > 0$. Donc $0$ est entre $f(0)$ et $f(1)$ : par le théorème des valeurs intermédiaires, il existe au moins un $\\alpha \\in ]0\\,;1[$ tel que $f(\\alpha) = 0$.</li><li>$f$ est continue et strictement croissante : c'est une bijection, donc la solution est unique.</li><li>Encadrement : $f(0{,}68) = 0{,}314432 + 0{,}68 - 1 = -0{,}005568 < 0$ et $f(0{,}69) = 0{,}328509 + 0{,}69 - 1 = 0{,}018509 > 0$. Donc $0{,}68 < \\alpha < 0{,}69$.</li></ol><p><strong>Déterminer l'image et la réciproque de $f(x) = 2 - \\frac{1}{x + 1}$ sur $I = ]-1\\,;+\\infty[$.</strong></p><ol><li>$f$ est continue sur $I$ (fonction rationnelle). Sur $I$, $x + 1 > 0$ et $x \\mapsto \\frac{1}{x + 1}$ est strictement décroissante, donc $f$ est strictement croissante.</li><li>$\\lim_{x \\to -1^+} \\frac{1}{x + 1} = +\\infty$, donc $\\lim_{x \\to -1^+} f(x) = -\\infty$. En $+\\infty$, $\\frac{1}{x + 1} \\to 0$, donc $\\lim_{x \\to +\\infty} f(x) = 2$.</li><li>$f$ réalise une bijection de $]-1\\,;+\\infty[$ sur $J = ]-\\infty\\,;2[$.</li><li>Pour $y < 2$, $f(x) = y$ équivaut à $\\frac{1}{x + 1} = 2 - y$, soit $x + 1 = \\frac{1}{2 - y}$, soit $x = \\frac{y - 1}{2 - y}$. Donc $f^{-1}(y) = \\frac{y - 1}{2 - y}$. Vérification : $f(0) = 1$ et $f^{-1}(1) = 0$.</li></ol><h2>Le piège à éviter</h2><p>Appliquer le théorème des valeurs intermédiaires sans vérifier que $f$ est <strong>continue</strong> sur tout l'intervalle. Prenons $f(x) = \\frac{1}{x}$ sur $[-1\\,;1]$ : $f(-1) = -1 < 0 < 1 = f(1)$, pourtant $f$ ne s'annule jamais, car elle n'est pas définie en $0$. Autre erreur : conclure à l'unicité avec le seul théorème des valeurs intermédiaires. Il donne l'existence ; l'unicité vient de la stricte monotonie.</p><p>Comment le repérer : écris toujours les trois hypothèses (continue, strictement monotone, sur un intervalle) avant de conclure « une solution et une seule ».</p><h2>En une phrase</h2><p>Une fonction continue qui passe de $f(a)$ à $f(b)$ prend toutes les valeurs intermédiaires, et si elle est en plus strictement monotone, elle les prend chacune une seule fois.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Valeurs intermédiaires et bijection",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "La fonction $f$ est continue sur $[a\\,;b]$, avec $f(a) = -2$ et $f(b) = 5$. Que garantit le théorème des valeurs intermédiaires ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour tout $k$ entre $-2$ et $5$, le ballon passe au moins une fois par la hauteur $k$. Le théorème garantit l'existence, pas l'unicité. Il ne se limite pas à $k = 0$, et ne dit rien de la monotonie de $f$.",
+                  "answers": [
+                    {
+                      "content": "Pour tout $k$ de $[-2\\,;5]$, l'équation $f(x) = k$ a au moins une solution dans $[a\\,;b]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour tout $k$ de $[-2\\,;5]$, l'équation $f(x) = k$ a exactement une solution",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seule l'équation $f(x) = 0$ a une solution",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fonction $f$ est strictement croissante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : dans le lob du ballon, le théorème des valeurs intermédiaires garantit que le ballon passe une seule fois par 3 m.",
+                  "question_type": "true_false",
+                  "explanation": "Il garantit au moins un passage. Un lob monte puis redescend : le ballon peut passer par 3 m à la montée et à la descente. L'unicité demande une stricte monotonie, comme le joueur qui ne s'arrête ni ne recule.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles hypothèses le théorème de la bijection demande-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il demande une fonction continue (pas de saut, donc toutes les valeurs sont atteintes) et strictement monotone (jamais deux fois la même valeur), sur un intervalle. Sans la stricte monotonie, on a l'existence mais pas l'unicité ; sans la continuité, des valeurs peuvent être sautées.",
+                  "answers": [
+                    {
+                      "content": "Continue et strictement monotone sur un intervalle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Continue sur un intervalle seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Strictement monotone seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Continue et positive",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si $f$ est continue sur $[a\\,;b]$ et si $f(a) \\times f(b) < 0$, alors $f$ s'annule au moins une fois sur $]a\\,;b[$.",
+                  "question_type": "true_false",
+                  "explanation": "Le produit négatif signifie que $f(a)$ et $f(b)$ sont de signes contraires, donc $0$ est entre les deux. Comme $f$ est continue, le théorème des valeurs intermédiaires donne un $c$ avec $f(c) = 0$. Il n'est pas aux bornes puisque ni $f(a)$ ni $f(b)$ ne sont nuls.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f$ continue et strictement croissante sur $[a\\,;b]$. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "L'image de $[a\\,;b]$ est $[f(a)\\,;f(b)]$ et chaque $k$ de cet intervalle a un unique antécédent. Mais $f$ ne prend pas toutes les valeurs réelles, seulement celles de $[f(a)\\,;f(b)]$. Et la bijection réciproque garde le sens de variation de $f$ : elle est strictement croissante.",
+                  "answers": [
+                    {
+                      "content": "$f([a\\,;b]) = [f(a)\\,;f(b)]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour tout $k$ de $[f(a)\\,;f(b)]$, l'équation $f(x) = k$ a une unique solution dans $[a\\,;b]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour tout réel $k$, l'équation $f(x) = k$ a une solution dans $[a\\,;b]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La bijection réciproque $f^{-1}$ est strictement décroissante",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Existence, unicité, image",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = x^3 + x - 1$. On a $f(0) = -1$ et $f(1) = 1$. Combien de solutions l'équation $f(x) = 0$ a-t-elle dans $[0\\,;1]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f$ est continue (polynôme) et strictement croissante (somme de deux fonctions strictement croissantes), avec $f(0) < 0 < f(1)$. Donc il y a une solution (valeurs intermédiaires) et une seule (bijection). Le degré $3$ permet jusqu'à trois racines au total, mais ici la monotonie en impose une.",
+                  "answers": [
+                    {
+                      "content": "Exactement une",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au moins une, mais peut-être plusieurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Trois, car le degré est $3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^2 + 1$ sur $[0\\,;+\\infty[$. Quelle est l'image de cet intervalle par $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f$ est continue et strictement croissante sur $[0\\,;+\\infty[$. L'image est $[f(0)\\,;\\lim_{+\\infty} f[ = [1\\,;+\\infty[$. La borne $1$ est atteinte (en $x = 0$), donc elle est fermée. L'intervalle $[0\\,;+\\infty[$ est l'ensemble de départ, pas l'image.",
+                  "answers": [
+                    {
+                      "content": "$[1\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]1\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[0\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = 3 - x$ sur $]0\\,;4]$. Quelle est l'image de cet intervalle par $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f$ est continue et strictement décroissante. En $4$, $f(4) = -1$, atteint : borne fermée. Quand $x \\to 0^+$, $f(x) \\to 3$ sans l'atteindre : borne ouverte. L'image est $[-1\\,;3[$. Une fonction décroissante échange l'ordre des bornes.",
+                  "answers": [
+                    {
+                      "content": "$[-1\\,;3[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-1\\,;3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-1\\,;3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]0\\,;4]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = 2 - \\frac{1}{x + 1}$, continue et strictement croissante sur $]-1\\,;+\\infty[$. Quelle est l'image de cet intervalle ?",
+                  "question_type": "single_choice",
+                  "explanation": "En $-1^+$, $\\frac{1}{x + 1} \\to +\\infty$ donc $f(x) \\to -\\infty$. En $+\\infty$, $\\frac{1}{x + 1} \\to 0$ donc $f(x) \\to 2$. L'image est $]-\\infty\\,;2[$, avec $2$ non atteint. La valeur $f(0) = 1$ est un exemple de valeur prise, pas une borne.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;2[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;2]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]1\\,;2[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^3 + x - 1$, continue et strictement croissante, avec $f(0{,}6) = -0{,}184$ et $f(0{,}7) = 0{,}043$. Où se trouve la solution $\\alpha$ de $f(x) = 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme $f(0{,}6) < 0 < f(0{,}7)$ et que $f$ est continue et strictement croissante, la solution unique est dans $]0{,}6\\,;0{,}7[$. On vérifie : $0{,}6^3 + 0{,}6 - 1 = -0{,}184$. Les autres intervalles ne changent pas le signe de $f$ : on ne peut pas y avoir de solution.",
+                  "answers": [
+                    {
+                      "content": "$\\alpha \\in ]0{,}6\\,;0{,}7[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\alpha \\in ]0{,}7\\,;1[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\alpha \\in ]0\\,;0{,}6[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Justifier existence, unicité et réciproque",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = \\frac{1}{x}$ sur $[-1\\,;1]$. On a $f(-1) = -1$ et $f(1) = 1$. Peut-on utiliser le théorème des valeurs intermédiaires pour affirmer que $f$ s'annule dans $]-1\\,;1[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le théorème exige la continuité sur tout $[-1\\,;1]$. Or $f$ n'est pas définie en $0$, donc pas continue sur cet intervalle. Et en fait $\\frac{1}{x}$ ne s'annule jamais. Le produit $f(-1) \\times f(1) < 0$ ne suffit pas sans continuité.",
+                  "answers": [
+                    {
+                      "content": "Non, car $f$ n'est pas continue sur $[-1\\,;1]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car $f(-1) \\times f(1) < 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $f$ est impaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $f(-1) \\neq f(1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^2$ sur $[-1\\,;1]$, avec $f(-1) = f(1) = 1$. Quelle affirmation est vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f$ est continue sur $[-1\\,;1]$, donc l'image du segment est un segment $[m\\,;M]$ : ici $m = 0$ (atteint en $0$) et $M = 1$. Elle n'est pas $[f(-1)\\,;f(1)]$ car $f$ n'est pas monotone. Et ce n'est pas une bijection : $-\\frac{1}{2}$ et $\\frac{1}{2}$ ont la même image.",
+                  "answers": [
+                    {
+                      "content": "L'image de $[-1\\,;1]$ par $f$ est $[0\\,;1]$, et $f$ n'est pas une bijection de $[-1\\,;1]$ sur cet intervalle",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'image de $[-1\\,;1]$ par $f$ est $\\{1\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'image de $[-1\\,;1]$ par $f$ est $[1\\,;1]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ réalise une bijection de $[-1\\,;1]$ sur $[0\\,;1]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = 2 - \\frac{1}{x + 1}$ sur $]-1\\,;+\\infty[$, bijection de cet intervalle sur $]-\\infty\\,;2[$. Quelle est l'expression de $f^{-1}(y)$ pour $y < 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On résout $2 - \\frac{1}{x + 1} = y$ : $\\frac{1}{x + 1} = 2 - y$, donc $x + 1 = \\frac{1}{2 - y}$ et $x = \\frac{1}{2 - y} - 1 = \\frac{y - 1}{2 - y}$. Test : $y = 1$ donne $0$, car $f(0) = 1$. Oublier le $-1$ donne $\\frac{1}{2 - y}$, qui vaut $1$ en $y = 1$ et non $0$.",
+                  "answers": [
+                    {
+                      "content": "$f^{-1}(y) = \\frac{y - 1}{2 - y}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f^{-1}(y) = \\frac{1}{2 - y}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f^{-1}(y) = \\frac{y - 1}{y - 2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f^{-1}(y) = \\frac{1 - y}{2 - y}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^3 + x$, continue et strictement croissante sur $\\mathbb{R}$, avec $\\lim_{x \\to +\\infty} f(x) = +\\infty$ et $\\lim_{x \\to -\\infty} f(x) = -\\infty$. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$f$ est continue et strictement croissante sur $\\mathbb{R}$, avec des limites $\\pm\\infty$ aux bornes : l'image est $]-\\infty\\,;+\\infty[ = \\mathbb{R}$. Pour tout réel $k$, il y a donc une unique solution. Le degré $3$ ne donne pas trois solutions, et $f(\\mathbb{R}) \\neq [0\\,;+\\infty[$ car $f(-1) = -2$.",
+                  "answers": [
+                    {
+                      "content": "$f(\\mathbb{R}) = \\mathbb{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour tout réel $k$, l'équation $f(x) = k$ a exactement une solution",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est une bijection de $\\mathbb{R}$ sur $\\mathbb{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'équation $f(x) = k$ a $0$ ou $3$ solutions selon $k$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(\\mathbb{R}) = [0\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ n'est pas une bijection à cause de son degré $3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On étudie l'équation $\\sqrt{x} = 2 - x$ sur $[0\\,;2]$ avec $f(x) = \\sqrt{x} + x - 2$. On a $f(0) = -2$ et $f(2) = \\sqrt{2}$. Quel argument prouve qu'il y a une solution et une seule ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f$ est continue sur $[0\\,;2]$ et strictement croissante (somme de deux fonctions strictement croissantes), avec $f(0) < 0 < f(2)$. D'où l'existence et l'unicité. Les signes seuls ne suffisent pas, et la continuité seule ne donne pas l'unicité. On vérifie : $x = 1$ convient, car $\\sqrt{1} = 1 = 2 - 1$.",
+                  "answers": [
+                    {
+                      "content": "$f$ est continue et strictement croissante sur $[0\\,;2]$, avec $f(0) < 0 < f(2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(0) < 0 < f(2)$ suffit",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est continue sur $[0\\,;2]$ et $f(0) \\times f(2) < 0$, donc la solution est unique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les fonctions $\\sqrt{x}$ et $2 - x$ sont continues, donc la solution est unique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

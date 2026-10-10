@@ -1,0 +1,1608 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Divisibilité dans ℤ",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "C",
+      "essentials": [
+        {
+          "name": "Diviseurs, multiples et division euclidienne",
+          "subtitle": "Reconnaître un diviseur et poser une division euclidienne",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Reconnaître qu'un entier relatif en divise un autre et utiliser les propriétés de la divisibilité.</li>\n<li>Effectuer la division euclidienne de deux entiers relatifs, avec un reste toujours positif.</li>\n<li>Déterminer les entiers $n$ pour lesquels une expression en $n$ en divise une autre.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Les piles de sacs (diviseur et multiple).</strong> Sur le quai du port d'Abidjan, un docker doit ranger 84 sacs de cacao en piles de même hauteur, sans qu'il lui reste un seul sac. Il peut faire 12 piles de 7 sacs : $84 = 7 \\times 12$. Avec des piles de 5 sacs, il lui resterait des sacs sur les bras.</p>\n<p><em>Le pont.</em> Les 84 sacs, c'est $b$. La hauteur d'une pile, c'est $a$. Le nombre de piles, c'est $k$. Ranger sans reste, c'est écrire $b = ka$ : on dit que $a$ <strong>divise</strong> $b$, ou que $b$ est un <strong>multiple</strong> de $a$.</p>\n<p><em>Où l'image s'arrête.</em> Des sacs, on n'en compte qu'un nombre positif. Dans ℤ, $a$ et $k$ peuvent être négatifs, et $0$ est un multiple de tout entier ($0 = a \\times 0$).</p>\n<p><strong>2. Les voyages du chariot élévateur (division euclidienne).</strong> Un chariot élévateur emporte 8 caisses par voyage. Il y a 100 caisses à évacuer du quai. Il fait 12 voyages pleins, soit 96 caisses. Il en reste 4 : pas assez pour un voyage plein.</p>\n<p><em>Le pont.</em> Les 100 caisses, c'est le <strong>dividende</strong> $a$. Les 8 caisses par voyage, c'est le <strong>diviseur</strong> $b$. Les 12 voyages pleins, c'est le <strong>quotient</strong> $q$. Les 4 caisses qui restent, c'est le <strong>reste</strong> $r$. On écrit $100 = 8 \\times 12 + 4$. Le reste est plus petit que 8 : sinon, le chariot referait un voyage plein.</p>\n<p><em>Où l'image s'arrête.</em> Avec des caisses, le dividende est positif. Dans ℤ, le dividende peut être négatif, et le reste reste pourtant toujours positif ou nul.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Divisibilité.</strong> Soient $a$ et $b$ deux entiers relatifs. On dit que $a$ divise $b$, et on note $a \\mid b$, s'il existe un entier relatif $k$ tel que $b = ka$. On dit aussi que $b$ est un multiple de $a$.</p>\n<p><strong>Propriétés.</strong> Pour $a$, $b$, $c$ entiers relatifs :</p>\n<ul>\n<li>si $a \\mid b$ et $b \\mid c$, alors $a \\mid c$ (transitivité) ;</li>\n<li>si $a \\mid b$ et $a \\mid c$, alors $a$ divise $ub + vc$ pour tous entiers relatifs $u$ et $v$ (combinaison linéaire) ;</li>\n<li>si $a \\mid b$ et $b \\mid a$, alors $a = b$ ou $a = -b$ ;</li>\n<li>si $a \\mid b$, alors $ac \\mid bc$.</li>\n</ul>\n<p><strong>Division euclidienne.</strong> Soient $a$ un entier relatif et $b$ un entier relatif non nul. Il existe un unique couple $(q ; r)$ d'entiers relatifs tel que $$a = bq + r \\quad \\text{avec} \\quad 0 \\le r < |b|.$$ Ici $b$ divise $a$ si et seulement si $r = 0$.</p>\n<p><strong>Pourquoi ce couple existe et est unique.</strong> <em>Existence</em> (avec $b > 0$) : les multiples $bk$ inférieurs ou égaux à $a$ forment un ensemble non vide (il contient $b \\times (-|a|)$) et majoré par $a$. Il a un plus grand élément $bq$. Alors $bq \\le a < b(q+1)$, donc $r = a - bq$ vérifie $0 \\le r < b$. Si $b < 0$, on divise par $-b$ puis on change le signe de $q$. <em>Unicité</em> : si $bq + r = bq' + r'$ avec les deux restes dans $[0 ; |b|[$, alors $b(q - q') = r' - r$. Ce multiple de $b$ a une valeur absolue inférieure à $|b|$ : il vaut $0$. Donc $r = r'$ et $q = q'$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Effectuer la division euclidienne de $2025$ par $12$, puis de $-47$ par $6$.</strong></p>\n<ol>\n<li>$12 \\times 168 = 2016$ et $2025 - 2016 = 9$, avec $0 \\le 9 < 12$. Donc $2025 = 12 \\times 168 + 9$ : $q = 168$ et $r = 9$.</li>\n<li>Pour $-47$ : on cherche le plus grand multiple de $6$ inférieur ou égal à $-47$. $6 \\times (-8) = -48 \\le -47$, et $6 \\times (-7) = -42 > -47$. Donc $q = -8$.</li>\n<li>Le reste est $r = -47 - (-48) = 1$, avec $0 \\le 1 < 6$. Donc $-47 = 6 \\times (-8) + 1$.</li>\n</ol>\n<p><strong>Déterminer les entiers relatifs $n$ tels que $n + 2$ divise $3n + 7$.</strong></p>\n<ol>\n<li>On écrit $3n + 7 = 3(n + 2) + 1$.</li>\n<li>Si $n + 2$ divise $3n + 7$, comme il divise aussi $3(n + 2)$, il divise la différence : $n + 2 \\mid 1$.</li>\n<li>Les seuls diviseurs de $1$ sont $1$ et $-1$. Donc $n + 2 = 1$ ou $n + 2 = -1$, soit $n = -1$ ou $n = -3$.</li>\n<li>Contrôle : pour $n = -1$, $n + 2 = 1$ divise $4$ ; pour $n = -3$, $n + 2 = -1$ divise $-2$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Donner un reste négatif ou trop grand. Pour $-47$ divisé par $6$, écrire $-47 = 6 \\times (-7) - 5$ est une égalité exacte, mais ce n'est pas la division euclidienne : le reste $-5$ est négatif. Le bon quotient est $-8$ et le bon reste est $1$.</p>\n<p>Comment le repérer : vérifie toujours que ton reste est dans l'intervalle $0 \\le r < |b|$. Une calculatrice qui donne $-7{,}83\\ldots$ ne te donne pas le bon quotient : le quotient est le plus grand entier $q$ tel que $bq \\le a$, donc ici $-8$ et non $-7$.</p>\n<p>Autre piège : dans la recherche des $n$ tels que $n + 2 \\mid 3n + 7$, oublier les diviseurs négatifs. Dans ℤ, $-1$ divise aussi $1$.</p>\n<h2>En une phrase</h2>\n<p>$a$ divise $b$ quand $b = ka$ avec $k$ entier ; et pour tout entier $a$ et tout $b \\ne 0$, il existe un seul couple $(q ; r)$ avec $a = bq + r$ et $0 \\le r < |b|$, comme les voyages pleins du chariot et les caisses qui restent.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Diviseur, multiple, quotient et reste",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soient $a$ et $b$ deux entiers relatifs. Que signifie « $a$ divise $b$ » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Dans l'image des piles de sacs, $84 = 7 \\times 12$ : 7 divise 84. Le diviseur est celui qui « range » : $b = ka$. Attention au sens : si tu inverses, tu écris que $b$ divise $a$. Et le quotient $k$ peut être négatif dans ℤ.",
+                  "answers": [
+                    {
+                      "content": "Il existe un entier relatif $k$ tel que $b = ka$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il existe un entier relatif $k$ tel que $a = kb$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le reste de la division euclidienne de $a$ par $b$ est nul.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le quotient de $a$ par $b$ est un entier positif.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chariot élévateur emporte 8 caisses par voyage. Il y a 100 caisses à évacuer. Il fait 12 voyages pleins, puis il reste 4 caisses. On écrit $100 = 8 \\times 12 + 4$. Que représente le nombre $12$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "12 est le nombre de voyages pleins : c'est le quotient. Les 4 caisses restantes forment le reste, 8 est le diviseur (la taille d'un voyage) et 100 le dividende. Le reste est toujours inférieur au diviseur : $4 < 8$.",
+                  "answers": [
+                    {
+                      "content": "Le quotient $q$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le reste $r$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le diviseur $b$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le dividende $a$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$-6 \\mid 18$ car $18 = (-6) \\times (-3)$ : le quotient peut être négatif. Et $0 = 7 \\times 0$ est un multiple de 7. Mais $0 \\nmid 7$ (0 fois $k$ donne toujours 0), $4 \\nmid 18$ (car $18 = 4 \\times 4 + 2$), et $18 \\nmid 6$ : attention au sens de « divise ».",
+                  "answers": [
+                    {
+                      "content": "$-6$ divise $18$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$ est un multiple de $7$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$ divise $7$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$ divise $18$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$18$ divise $6$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces écritures est la division euclidienne de $100$ par $8$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les trois autres égalités sont exactes, mais leur reste ne vérifie pas $0 \\le r < 8$ : $12$ et $20$ sont trop grands (le chariot pourrait faire d'autres voyages pleins) et $-4$ est négatif. Le reste est toujours positif ou nul, et plus petit que le diviseur.",
+                  "answers": [
+                    {
+                      "content": "$100 = 8 \\times 12 + 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$100 = 8 \\times 11 + 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100 = 8 \\times 13 - 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100 = 8 \\times 10 + 20$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $a$ un entier relatif et $b$ un entier relatif non nul. Il existe un unique couple $(q ; r)$ d'entiers relatifs tel que $a = bq + r$ et $0 \\le r < |b|$.",
+                  "question_type": "true_false",
+                  "explanation": "C'est le théorème de la division euclidienne : existence et unicité. L'unicité vient de $b(q - q') = r' - r$ : un multiple de $b$ de valeur absolue inférieure à $|b|$ ne peut être que $0$. Le reste est choisi positif, même quand $a$ est négatif.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Divisions euclidiennes et diviseurs",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle est la division euclidienne de $2025$ par $12$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$12 \\times 168 = 2016$ et $2025 - 2016 = 9$, avec $0 \\le 9 < 12$. Les deux autres égalités sont exactes, mais leur reste ne convient pas : $-3$ est négatif et $21$ dépasse le diviseur $12$.",
+                  "answers": [
+                    {
+                      "content": "$2025 = 12 \\times 168 + 9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2025 = 12 \\times 169 - 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2025 = 12 \\times 167 + 21$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la division euclidienne de $-47$ par $6$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$6 \\times (-8) = -48$ et $-47 - (-48) = 1$ : $q = -8$ et $r = 1$. L'égalité $-47 = 6 \\times (-7) - 5$ est exacte mais son reste est négatif. Et $6 \\times (-7) + 5 = -37$, pas $-47$.",
+                  "answers": [
+                    {
+                      "content": "$-47 = 6 \\times (-8) + 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-47 = 6 \\times (-7) - 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-47 = 6 \\times (-7) + 5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'entiers relatifs $n$ vérifient « $n - 1$ divise $6$ » ?",
+                  "question_type": "single_choice",
+                  "explanation": "$n - 1$ doit être un diviseur de 6 dans ℤ : $\\pm 1, \\pm 2, \\pm 3, \\pm 6$, soit 8 valeurs, donc $n \\in \\{2, 0, 3, -1, 4, -2, 7, -5\\}$. Si tu oublies les diviseurs négatifs, tu n'en trouves que 4.",
+                  "answers": [
+                    {
+                      "content": "$8$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $a$ et $b$ deux entiers relatifs, tous deux multiples de $7$. Lesquelles de ces affirmations sont toujours vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Une combinaison linéaire de multiples de 7 est un multiple de 7. Contre-exemples avec $a = 7$ et $b = 14$ : $a + b = 21$ n'est divisible ni par 49 ni par 14 ; et avec $a = 14$ et $b = 7$, $a$ ne divise pas $b$.",
+                  "answers": [
+                    {
+                      "content": "$7$ divise $a + b$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7$ divise $2a - 3b$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$49$ divise $a + b$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a$ divise $b$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$14$ divise $a + b$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la division euclidienne de l'entier $a$ par $9$, le reste est $4$. Quel est le reste de la division euclidienne de $a + 8$ par $9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On écrit $a = 9q + 4$. Alors $a + 8 = 9q + 12 = 9(q + 1) + 3$, avec $0 \\le 3 < 9$ : le reste est 3. Répondre 12 est l'erreur classique : 12 dépasse le diviseur, il reste encore un voyage plein à faire.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tous entiers relatifs $a$, $b$ et $c$, si $a$ divise $b + c$, alors $a$ divise $b$ et $a$ divise $c$.",
+                  "question_type": "true_false",
+                  "explanation": "Contre-exemple : $3 \\mid 1 + 2$, mais $3 \\nmid 1$ et $3 \\nmid 2$. La propriété vraie va dans l'autre sens : si $a$ divise $b$ et $c$, alors $a$ divise $b + c$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Divisibilité et division euclidienne",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Quels sont les entiers relatifs $n$ tels que $n + 1$ divise $2n + 9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$2n + 9 = 2(n + 1) + 7$, donc $n + 1$ divise $7$ : $n + 1 \\in \\{-7, -1, 1, 7\\}$, soit $n \\in \\{-8, -2, 0, 6\\}$. Oublier les diviseurs négatifs, ou confondre $n$ et $n + 1$, donne les autres réponses.",
+                  "answers": [
+                    {
+                      "content": "$n \\in \\{-8 ; -2 ; 0 ; 6\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$n \\in \\{0 ; 6\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n \\in \\{1 ; 7\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n \\in \\{-8 ; 6\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la division euclidienne de $a$ par $b$, le quotient est $7$ et le reste est $5$. On sait que $a + b = 117$. Que vaut $a$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$a = 7b + 5$, donc $a + b = 8b + 5 = 117$ et $b = 14$. Alors $a = 7 \\times 14 + 5 = 103$, et $5 < 14$ : le reste est valable. 98 oublie le reste ; 112 retire seulement 5 de 117.",
+                  "answers": [
+                    {
+                      "content": "$103$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$98$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$112$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On effectue la division euclidienne de $-100$ par $7$. Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$7 \\times (-15) = -105$ et $-100 - (-105) = 5$ : $-100 = 7 \\times (-15) + 5$. Avec le quotient $-14$, on trouverait le reste $-2$, négatif. Et $2$ est le reste de $100$, pas celui de $-100$.",
+                  "answers": [
+                    {
+                      "content": "Le quotient est $-15$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le reste est $5$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le quotient est $-14$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le reste est $2$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le reste est $-2$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On suppose $a = bq + r = bq' + r'$, avec $0 \\le r < |b|$ et $0 \\le r' < |b|$. On obtient $b(q - q') = r' - r$. Comment conclut-on que $r = r'$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les restes sont dans $[0 ; |b|[$, donc $|r' - r| < |b|$. Or $r' - r = b(q - q')$ est un multiple de $b$ : si $q \\ne q'$, sa valeur absolue serait au moins $|b|$. Donc $q = q'$, puis $r = r'$.",
+                  "answers": [
+                    {
+                      "content": "$r' - r$ est un multiple de $b$ et $|r' - r| < |b|$ : le seul multiple de $b$ de valeur absolue inférieure à $|b|$ est $0$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que $b$ divise tous les entiers.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $q = q'$ par hypothèse.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $r$ et $r'$ sont positifs, donc égaux.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces propriétés, lesquelles sont vraies pour tous entiers relatifs $a$, $b$, $c$ non nuls ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Les trois premières sont des propriétés du cours : transitivité, $a = \\pm b$ et multiplication par $c$. Contre-exemples : $6 \\mid 2 \\times 3$ sans diviser 2 ni 3 ; $4 \\mid 2^2$ mais $4 \\nmid 2$. Un produit peut être divisible par $a$ sans que ses facteurs le soient.",
+                  "answers": [
+                    {
+                      "content": "Si $a \\mid b$ et $b \\mid c$, alors $a \\mid c$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $a \\mid b$ et $b \\mid a$, alors $a = b$ ou $a = -b$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $a \\mid b$, alors $ac \\mid bc$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $a \\mid bc$, alors $a \\mid b$ ou $a \\mid c$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si $a \\mid b^2$, alors $a \\mid b$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si un entier $n$ est divisible par $6$ et par $4$, alors il est divisible par $24$.",
+                  "question_type": "true_false",
+                  "explanation": "Contre-exemple : $n = 12$ est divisible par 6 et par 4, mais pas par 24 ($12 = 24 \\times 0 + 12$). Il faudrait que 6 et 4 n'aient aucun facteur en commun ; or ils ont tous deux le facteur 2.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Congruences et critères de divisibilité",
+          "subtitle": "Calculer avec les restes et reconnaître les multiples de 2 à 11",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Utiliser la congruence modulo $n$ et ses propriétés pour calculer un reste, y compris celui d'une puissance.</li>\n<li>Appliquer les critères de divisibilité par 2, 3, 4, 5, 9, 10 et 11.</li>\n<li>Raisonner sur les restes possibles d'un entier pour démontrer une propriété vraie pour tout $n$.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le cargo de la semaine (la congruence).</strong> Un cargo fait escale à Abidjan tous les 7 jours. Il est au port le jour n° 4, puis les jours 11, 18, 25… Aux jours 4 et 18, il arrive le même jour de la semaine : l'écart est $14 = 2 \\times 7$. Pour savoir quel jour de la semaine on tombe, on ne garde que le reste de la division du numéro du jour par 7.</p>\n<p><em>Le pont.</em> Les numéros de jours sont les entiers. La semaine de 7 jours, c'est le <strong>modulo</strong> $7$. Tomber le même jour de la semaine, c'est avoir le même reste dans la division par 7, ou encore un écart multiple de 7. On écrit $18 \\equiv 4 \\; [7]$ et on lit « 18 est congru à 4 modulo 7 ».</p>\n<p><em>Où l'image s'arrête.</em> Le calendrier n'a pas de jours négatifs. Dans ℤ, on peut écrire $-3 \\equiv 4 \\; [7]$ : le jour qui précède de 3 jours le jour 0 tombe le même jour que le jour 4.</p>\n<p><strong>2. Les paquets de 9 (les critères de divisibilité).</strong> Le pointeur du port note le numéro d'un lot : 4 275, c'est-à-dire 4 milliers, 2 centaines, 7 dizaines et 5 unités de caisses. Il regroupe les caisses par paquets de 9. Un millier de caisses fait $1000 = 111 \\times 9 + 1$ : il reste 1 caisse. Une centaine fait $100 = 11 \\times 9 + 1$ : il reste 1 caisse. Une dizaine fait $10 = 1 \\times 9 + 1$ : il reste 1 caisse. Chaque chiffre apporte donc autant de caisses restantes que sa valeur : $4 + 2 + 7 + 5 = 18$.</p>\n<p><em>Le pont.</em> Les paquets de 9 sont le modulo $9$. Chaque puissance de 10 laisse le reste 1 : $10 \\equiv 1 \\; [9]$, donc $10^k \\equiv 1 \\; [9]$. Un nombre est donc congru à la somme de ses chiffres modulo 9.</p>\n<p><em>Où l'image s'arrête.</em> Pour 11, ça ne marche plus avec des « 1 » : $10 \\equiv -1 \\; [11]$, les restes alternent $+1, -1, +1, \\ldots$ et les chiffres s'ajoutent avec des signes alternés. Pour 2, 5 et 10, seul le dernier chiffre compte, car $10$ est multiple de chacun d'eux. Pour 4, ce sont les deux derniers chiffres, car $100$ est multiple de $4$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Congruence.</strong> Soit $n$ un entier supérieur ou égal à $2$. Deux entiers relatifs $a$ et $b$ sont <strong>congrus modulo $n$</strong>, et on note $a \\equiv b \\; [n]$, lorsque $n$ divise $a - b$. Cela équivaut à dire que $a$ et $b$ ont le même reste dans la division euclidienne par $n$. En particulier, $a \\equiv 0 \\; [n]$ si et seulement si $n \\mid a$.</p>\n<p><strong>Propriétés.</strong> La congruence est réflexive, symétrique et transitive. Si $a \\equiv b \\; [n]$ et $c \\equiv d \\; [n]$, alors :</p>\n<ul>\n<li>$a + c \\equiv b + d \\; [n]$ et $a - c \\equiv b - d \\; [n]$ ;</li>\n<li>$ac \\equiv bd \\; [n]$ ;</li>\n<li>$a^p \\equiv b^p \\; [n]$ pour tout entier naturel $p$.</li>\n</ul>\n<p><strong>Critères de divisibilité.</strong> Un entier est divisible :</p>\n<ul>\n<li>par $2$ si son dernier chiffre est $0, 2, 4, 6$ ou $8$ ; par $5$ si son dernier chiffre est $0$ ou $5$ ; par $10$ si son dernier chiffre est $0$ ;</li>\n<li>par $4$ si le nombre formé par ses deux derniers chiffres est divisible par $4$ ;</li>\n<li>par $3$ (respectivement $9$) si la somme de ses chiffres est divisible par $3$ (respectivement $9$) ;</li>\n<li>par $11$ si sa somme alternée est divisible par $11$ : chiffre des unités, moins chiffre des dizaines, plus chiffre des centaines, moins… et ainsi de suite.</li>\n</ul>\n<p>Pour 3 et 9, on a mieux : un entier est congru à la somme de ses chiffres modulo 9 (et modulo 3). Pour 11, un entier est congru à sa somme alternée modulo 11.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Quel est le reste de la division de $3^{2025}$ par $7$ ?</strong></p>\n<ol>\n<li>On calcule les premières puissances de 3 modulo 7 : $3^1 \\equiv 3$, $3^2 = 9 \\equiv 2$, $3^3 \\equiv 6$, $3^4 \\equiv 18 \\equiv 4$, $3^5 \\equiv 12 \\equiv 5$, $3^6 \\equiv 15 \\equiv 1 \\; [7]$.</li>\n<li>On divise l'exposant par 6 : $2025 = 6 \\times 337 + 3$.</li>\n<li>$3^{2025} = (3^6)^{337} \\times 3^3 \\equiv 1^{337} \\times 27 \\; [7]$, et $27 = 3 \\times 7 + 6$.</li>\n<li>Donc $3^{2025} \\equiv 6 \\; [7]$ : le reste est $6$.</li>\n</ol>\n<p><strong>Le lot n° 4 275 est-il divisible par 9 ? par 11 ?</strong></p>\n<ol>\n<li>Somme des chiffres : $4 + 2 + 7 + 5 = 18$, qui est un multiple de 9. Donc $4275$ est divisible par $9$ (et par $3$). En effet, $4275 = 9 \\times 475$.</li>\n<li>Somme alternée en partant des unités : $5 - 7 + 2 - 4 = -4$. Ce n'est pas un multiple de 11 : $4275$ n'est pas divisible par $11$.</li>\n<li>Son reste modulo 11 est celui de $-4$, soit $-4 + 11 = 7$. Contrôle : $11 \\times 388 = 4268$ et $4275 - 4268 = 7$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Simplifier une congruence comme une égalité. On a $6 \\equiv 10 \\; [4]$, car $10 - 6 = 4$. Mais si tu « simplifies par 2 », tu obtiens $3 \\equiv 5 \\; [4]$, et c'est faux : $5 - 3 = 2$ n'est pas un multiple de 4. On peut additionner, soustraire, multiplier, élever à une puissance. Diviser est interdit sans précaution.</p>\n<p>Autre piège, très fréquent avec les puissances : réduire l'exposant modulo $n$. Pour $2^{100}$ modulo $7$, on réduit la <em>base</em> ou l'on cherche la période des puissances (ici $2^3 \\equiv 1$). Remplacer l'exposant 100 par son reste 2 dans la division par 7 est faux.</p>\n<p>Dernier piège : un reste n'est jamais négatif. Le reste de $-17$ par $5$ est $3$ (car $-17 = 5 \\times (-4) + 3$), pas $-2$.</p>\n<h2>En une phrase</h2>\n<p>$a \\equiv b \\; [n]$ veut dire que $a$ et $b$ ont le même reste par $n$, comme deux jours qui tombent le même jour de la semaine : on peut additionner et multiplier les congruences, mais pas les simplifier, et les critères de divisibilité viennent de $10 \\equiv 1 \\; [9]$ et de $10 \\equiv -1 \\; [11]$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Sens de la congruence et critères",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soient $a$ et $b$ deux entiers relatifs et $n$ un entier supérieur ou égal à $2$. Que signifie $a \\equiv b \\; [n]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Être congrus modulo $n$, c'est avoir le même reste dans la division par $n$, ce qui équivaut à $n \\mid a - b$. Dans l'image du cargo, deux jours tombent le même jour de la semaine si leur écart est un multiple de 7. Le quotient (le numéro de la semaine) n'a pas à être le même.",
+                  "answers": [
+                    {
+                      "content": "$n$ divise $a - b$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$n$ divise $a + b$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a - b = n$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a$ et $b$ ont le même quotient dans la division par $n$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cargo fait escale à Abidjan tous les 7 jours. Il est au port le jour n° 4 : il y est aussi le jour n° 18, car $18 \\equiv 4 \\; [7]$.",
+                  "question_type": "true_false",
+                  "explanation": "$18 - 4 = 14 = 7 \\times 2$ : l'écart est un multiple de 7, donc $18 \\equiv 4 \\; [7]$. Le cargo revient à intervalle de 7 jours : jours 4, 11, 18, 25…",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces congruences, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$23 - 2 = 21$ et $-3 - 4 = -7$ sont des multiples de 7. Mais $17 - 2 = 15$, $10 - 1 = 9$ et $25 - 3 = 22$ n'en sont pas. Un reste est positif : celui de $-3$ par 7 est $4$.",
+                  "answers": [
+                    {
+                      "content": "$23 \\equiv 2 \\; [7]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-3 \\equiv 4 \\; [7]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$17 \\equiv 2 \\; [7]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10 \\equiv 1 \\; [7]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$25 \\equiv 3 \\; [7]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi un entier est-il congru à la somme de ses chiffres modulo $9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme dans l'image des paquets de 9, $10 \\equiv 1 \\; [9]$, donc $100 \\equiv 1$, $1000 \\equiv 1$… Chaque chiffre pèse donc sa propre valeur. Ce n'est pas $10 \\equiv 0 \\; [9]$ : 10 n'est pas un multiple de 9, il vaut 9 plus 1.",
+                  "answers": [
+                    {
+                      "content": "Parce que $10 \\equiv 1 \\; [9]$, donc toutes les puissances de $10$ sont congrues à $1$ modulo $9$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que $10$ est un multiple de $9$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $10 \\equiv 0 \\; [9]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $9$ divise la somme de ses chiffres.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $a \\equiv b \\; [n]$ et $c \\equiv d \\; [n]$, alors $a \\times c \\equiv b \\times d \\; [n]$.",
+                  "question_type": "true_false",
+                  "explanation": "C'est une propriété du cours : la congruence est compatible avec la multiplication, comme avec l'addition. En effet, $ac - bd = a(c - d) + d(a - b)$ est un multiple de $n$. En revanche, elle n'est pas compatible avec la division.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer avec les congruences",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quel est le reste de la division euclidienne de $7349$ par $9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un entier est congru à la somme de ses chiffres modulo 9 : $7 + 3 + 4 + 9 = 23$. Mais 23 n'est pas un reste : $23 = 9 \\times 2 + 5$, donc le reste est 5. Contrôle : $9 \\times 816 = 7344$ et $7349 - 7344 = 5$.",
+                  "answers": [
+                    {
+                      "content": "$5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$23$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquels de ces nombres sont divisibles par $11$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Somme alternée en partant des unités : $7359 \\to 9 - 5 + 3 - 7 = 0$ et $2849 \\to 9 - 4 + 8 - 2 = 11$. Pour $1234$ et $4567$ on trouve $2$, pour $6500$ on trouve $-1$. La somme des chiffres de 6500 est 11, mais cela ne sert pas pour le critère de 11.",
+                  "answers": [
+                    {
+                      "content": "$7359$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2849$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1234$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4567$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6500$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lequel de ces nombres est divisible par $4$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Seuls les deux derniers chiffres comptent, car $100 \\equiv 0 \\; [4]$. On a $16 = 4 \\times 4$, mais $14$, $30$ et $2$ ne sont pas des multiples de 4. Finir par un chiffre pair ne suffit pas.",
+                  "answers": [
+                    {
+                      "content": "$3716$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2514$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6530$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4702$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le reste de la division euclidienne de $2^{100}$ par $7$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$2^3 = 8 \\equiv 1 \\; [7]$ et $100 = 3 \\times 33 + 1$, donc $2^{100} = (2^3)^{33} \\times 2 \\equiv 2 \\; [7]$. L'erreur classique est de réduire l'exposant modulo 7 : $100 \\equiv 2$ donnerait $2^2 = 4$, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $3x \\equiv 3y \\; [6]$, alors $x \\equiv y \\; [6]$.",
+                  "question_type": "true_false",
+                  "explanation": "Avec $x = 0$ et $y = 2$ : $3x = 0$ et $3y = 6$ sont congrus modulo 6, mais $0 \\not\\equiv 2 \\; [6]$. On ne simplifie pas une congruence comme une égalité : ici 3 et 6 ont un diviseur commun.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le reste de la division euclidienne de $-17$ par $5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$-17 = 5 \\times (-4) + 3$ avec $0 \\le 3 < 5$ : le reste est 3. On le retrouve par $-17 - 3 = -20$, multiple de 5. Le reste 2 est celui de $17$, et $-2$ est négatif : ce n'est pas un reste.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Restes, puissances et critères",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Quels restes peut-on obtenir dans la division euclidienne de $n^2$ par $4$, lorsque $n$ décrit les entiers naturels ?",
+                  "question_type": "single_choice",
+                  "explanation": "On étudie $n$ selon son reste modulo 4 : $0^2 = 0$, $1^2 = 1$, $2^2 = 4 \\equiv 0$, $3^2 = 9 \\equiv 1$. Un carré a donc pour reste 0 ou 1 dans la division par 4, jamais 2 ni 3.",
+                  "answers": [
+                    {
+                      "content": "Seulement $0$ ou $1$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$, $1$, $2$ ou $3$, tous sont possibles.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement $1$ ou $3$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement $0$ ou $2$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le reste de la division euclidienne de $7^{2024} + 3$ par $5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$7 \\equiv 2 \\; [5]$ et $2^4 = 16 \\equiv 1 \\; [5]$. Comme $2024 = 4 \\times 506$, $7^{2024} \\equiv 1 \\; [5]$, puis $7^{2024} + 3 \\equiv 4 \\; [5]$. La réponse 1 oublie d'ajouter 3.",
+                  "answers": [
+                    {
+                      "content": "$4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations, lesquelles sont vraies pour tout entier naturel $n$ ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$n(n+1)$ est un produit de deux entiers consécutifs : l'un est pair. $n^3 - n = (n-1)n(n+1)$ contient un multiple de 3. Modulo 3, $n^2 \\equiv 0$ ou $1$, donc $n^2 + 1 \\equiv 1$ ou $2$. Faux : $n = 3$ donne $n^2 \\equiv 0$ ; $n = 1$ donne $n(n+1)(n+2) = 6$ et $n^2 + n = 2$.",
+                  "answers": [
+                    {
+                      "content": "$n(n+1)$ est pair.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$n^3 - n$ est divisible par $3$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$n^2 + 1$ n'est jamais divisible par $3$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$n^2 \\equiv 1 \\; [3]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n(n+1)(n+2)$ est divisible par $4$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n^2 + n$ est divisible par $3$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quels entiers relatifs $n$ le nombre $3n + 1$ est-il divisible par $5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On étudie le reste de $n$ modulo 5. Pour $n \\equiv 0, 1, 2, 3, 4$, on trouve $3n + 1 \\equiv 1, 4, 2, 0, 3$. Seul $n \\equiv 3 \\; [5]$ donne $3n + 1 \\equiv 0 \\; [5]$. Contrôle : $n = 3$ donne $10$.",
+                  "answers": [
+                    {
+                      "content": "Ceux tels que $n \\equiv 3 \\; [5]$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ceux tels que $n \\equiv 2 \\; [5]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ceux tels que $n \\equiv 4 \\; [5]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ceux tels que $n \\equiv 1 \\; [5]$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre à quatre chiffres $4a72$ a pour chiffre des milliers $4$, pour chiffre des centaines $a$, pour chiffre des dizaines $7$ et pour chiffre des unités $2$. Pour quel chiffre $a$ est-il divisible par $9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme des chiffres $4 + a + 7 + 2 = 13 + a$ doit être un multiple de 9. Comme $0 \\le a \\le 9$, seule la valeur 18 convient : $a = 5$. Contrôle : $4572 = 9 \\times 508$.",
+                  "answers": [
+                    {
+                      "content": "$a = 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a = 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 9$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un entier dont la somme des chiffres est égale à $12$ est divisible par $3$ et par $9$.",
+                  "question_type": "true_false",
+                  "explanation": "La somme 12 est un multiple de 3 ($12 = 3 \\times 4$), donc l'entier est divisible par 3. Mais $12 = 9 + 3$ n'est pas un multiple de 9 : l'entier est congru à $12 \\equiv 3 \\; [9]$. Exemple : $39$ est divisible par 3, pas par 9.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PGCD, PPCM et algorithme d'Euclide",
+          "subtitle": "Calculer un PGCD et un PPCM par divisions successives",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer le PGCD de deux entiers avec l'algorithme d'Euclide.</li>\n<li>Calculer le PPCM de deux entiers et utiliser la relation entre PGCD et PPCM.</li>\n<li>Résoudre un problème de partage ou de rencontre avec un PGCD ou un PPCM.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Les dalles de l'entrepôt (le PGCD).</strong> Un entrepôt du port d'Abidjan est un rectangle de 84 m de long sur 60 m de large. On veut le recouvrir de dalles carrées toutes identiques, sans en couper aucune. Un côté de 12 m convient : 7 dalles dans la longueur ($7 \\times 12 = 84$), 5 dans la largeur ($5 \\times 12 = 60$). Un côté de 6 m convient aussi, mais les dalles sont plus petites. Un côté de 24 m ne convient pas : 60 n'est pas un multiple de 24.</p>\n<p><em>Le pont.</em> Le côté d'une dalle qui convient, c'est un <strong>diviseur commun</strong> de 84 et de 60. Le plus grand côté possible, c'est le <strong>PGCD</strong> (plus grand commun diviseur) : $\\text{pgcd}(84 ; 60) = 12$.</p>\n<p><em>Où l'image s'arrête.</em> Les longueurs d'un entrepôt sont positives et non nulles. Le PGCD, lui, est défini pour des entiers relatifs : $\\text{pgcd}(-84 ; 60) = 12$ et $\\text{pgcd}(a ; 0) = |a|$ si $a \\ne 0$.</p>\n<p><strong>2. Les carrés qu'on découpe (l'algorithme d'Euclide).</strong> Pour trouver ce côté sans lister tous les diviseurs, on découpe dans le rectangle 84 sur 60 le plus de carrés possible de côté 60 : il y en a 1, et il reste un rectangle de 24 m sur 60 m. Dans ce rectangle, on découpe des carrés de côté 24 : il y en a 2, et il reste un rectangle de 12 m sur 24 m. Dans ce dernier, on découpe des carrés de côté 12 : il y en a 2 et il ne reste rien. Le dernier côté utilisé, 12, est le côté cherché.</p>\n<p><em>Le pont.</em> Chaque découpage est une division euclidienne : $84 = 60 \\times 1 + 24$, puis $60 = 24 \\times 2 + 12$, puis $24 = 12 \\times 2 + 0$. Le morceau qui reste, c'est le reste. Le PGCD est le <strong>dernier reste non nul</strong>.</p>\n<p><em>Où l'image s'arrête.</em> Le découpage s'arrête toujours : les restes diminuent à chaque étape et sont des entiers naturels. Avec deux entiers qui n'ont aucun facteur commun, le dernier reste non nul vaut 1.</p>\n<p><strong>3. Les deux navires (le PPCM).</strong> Deux navires quittent Abidjan le même jour. L'un revient tous les 12 jours, l'autre tous les 18 jours. Ils se retrouveront au port le jour 36 : c'est le premier jour qui est à la fois un multiple de 12 ($36 = 12 \\times 3$) et un multiple de 18 ($36 = 18 \\times 2$).</p>\n<p><em>Le pont.</em> Les jours où le premier navire est au port sont les multiples de 12, ceux du second sont les multiples de 18. Le premier jour commun après le départ, c'est le <strong>PPCM</strong> (plus petit commun multiple) : $\\text{ppcm}(12 ; 18) = 36$.</p>\n<p><em>Où l'image s'arrête.</em> Les navires se retrouveront ensuite les jours 72, 108, … : tous les multiples communs sont les multiples du PPCM.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>PGCD.</strong> Soient $a$ et $b$ deux entiers relatifs non tous deux nuls. Le plus grand entier naturel qui divise à la fois $a$ et $b$ est leur PGCD, noté $\\text{pgcd}(a ; b)$. On a $\\text{pgcd}(a ; b) = \\text{pgcd}(|a| ; |b|)$. Les diviseurs communs de $a$ et $b$ sont exactement les diviseurs de $\\text{pgcd}(a ; b)$. Pour tout entier naturel $k$ non nul, $\\text{pgcd}(ka ; kb) = k \\times \\text{pgcd}(a ; b)$.</p>\n<p><strong>Lemme d'Euclide.</strong> Si $a = bq + r$, alors $\\text{pgcd}(a ; b) = \\text{pgcd}(b ; r)$. En effet, un diviseur commun de $a$ et $b$ divise $r = a - bq$, et un diviseur commun de $b$ et $r$ divise $a = bq + r$ : les deux couples ont les mêmes diviseurs communs.</p>\n<p><strong>Algorithme d'Euclide.</strong> Pour $a \\ge b > 0$, on effectue les divisions successives $a = bq_0 + r_0$, puis $b = r_0 q_1 + r_1$, puis $r_0 = r_1 q_2 + r_2$, et ainsi de suite jusqu'à obtenir un reste nul. Le PGCD de $a$ et $b$ est le <strong>dernier reste non nul</strong>. L'algorithme s'arrête, car les restes forment une suite strictement décroissante d'entiers naturels.</p>\n<p><strong>PPCM.</strong> Soient $a$ et $b$ deux entiers relatifs non nuls. Le plus petit entier naturel non nul multiple de $a$ et de $b$ est leur PPCM, noté $\\text{ppcm}(a ; b)$. Les multiples communs de $a$ et $b$ sont exactement les multiples de $\\text{ppcm}(a ; b)$. On a $$\\text{pgcd}(a ; b) \\times \\text{ppcm}(a ; b) = |ab|,$$ et $\\text{ppcm}(ka ; kb) = k \\times \\text{ppcm}(a ; b)$ pour tout entier naturel $k$ non nul.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Calculer $\\text{pgcd}(1071 ; 462)$ et $\\text{ppcm}(1071 ; 462)$.</strong></p>\n<ol>\n<li>Première division : $1071 = 462 \\times 2 + 147$, car $462 \\times 2 = 924$ et $1071 - 924 = 147$.</li>\n<li>Deuxième division : $462 = 147 \\times 3 + 21$, car $147 \\times 3 = 441$ et $462 - 441 = 21$.</li>\n<li>Troisième division : $147 = 21 \\times 7 + 0$. Le reste est nul : l'algorithme s'arrête.</li>\n<li>Le dernier reste non nul est $21$, donc $\\text{pgcd}(1071 ; 462) = 21$.</li>\n<li>On en déduit le PPCM : $\\text{ppcm}(1071 ; 462) = \\dfrac{1071 \\times 462}{21} = 1071 \\times 22 = 23562$. Contrôle : $23562 = 1071 \\times 22 = 462 \\times 51$.</li>\n</ol>\n<p><strong>Deux navires reviennent au port tous les 12 jours et tous les 18 jours. Quand se retrouvent-ils ?</strong></p>\n<ol>\n<li>$\\text{pgcd}(12 ; 18)$ : $18 = 12 \\times 1 + 6$, puis $12 = 6 \\times 2 + 0$. Donc $\\text{pgcd}(12 ; 18) = 6$.</li>\n<li>$\\text{ppcm}(12 ; 18) = \\dfrac{12 \\times 18}{6} = 36$. Ils se retrouvent tous les 36 jours.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Prendre le mauvais reste. Le PGCD est le dernier reste <strong>non nul</strong>, pas le dernier reste (qui vaut $0$), ni le premier reste, ni le dernier quotient. Dans l'exemple du rectangle 84 sur 60, le premier reste est 24, le dernier reste non nul est 12, et le PGCD est 12.</p>\n<p>Autre piège : confondre PGCD et PPCM. Le PGCD est un <em>diviseur</em> des deux nombres, donc plus petit qu'eux. Le PPCM est un <em>multiple</em> des deux nombres, donc plus grand qu'eux. La relation $\\text{pgcd} \\times \\text{ppcm} = |ab|$ ne marche que pour <strong>deux</strong> nombres.</p>\n<h2>En une phrase</h2>\n<p>Le PGCD est le côté de la plus grande dalle qui pave l'entrepôt sans coupe, trouvé par divisions successives jusqu'au dernier reste non nul, et le PPCM est le premier jour où les deux navires se retrouvent, avec $\\text{pgcd} \\times \\text{ppcm} = |ab|$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — PGCD, PPCM et divisions successives",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Que représente $\\text{pgcd}(a ; b)$ pour deux entiers $a$ et $b$ non tous deux nuls ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le PGCD est le plus grand diviseur commun, comme le côté de la plus grande dalle qui pave l'entrepôt sans coupe. Le plus petit multiple commun est le PPCM. Un diviseur commun quelconque (comme une dalle plus petite) ne suffit pas : c'est le plus grand qu'on cherche.",
+                  "answers": [
+                    {
+                      "content": "Le plus grand entier naturel qui divise à la fois $a$ et $b$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le plus petit entier naturel non nul multiple de $a$ et de $b$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le plus grand multiple commun de $a$ et $b$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un diviseur quelconque commun à $a$ et $b$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un entrepôt rectangulaire mesure 84 m sur 60 m. On le recouvre de dalles carrées identiques, sans en couper. Quel est le plus grand côté possible d'une dalle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le côté doit diviser 84 et 60 : c'est un diviseur commun, et on veut le plus grand. $\\text{pgcd}(84 ; 60) = 12$ (7 dalles sur 84 m, 5 sur 60 m). 6 convient mais n'est pas le plus grand ; 420 est le PPCM, et 24 est le premier reste de l'algorithme.",
+                  "answers": [
+                    {
+                      "content": "$12$ m",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$24$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$420$ m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux navires quittent Abidjan le même jour. L'un revient tous les 12 jours, l'autre tous les 18 jours. Au bout de combien de jours se retrouvent-ils pour la première fois ?",
+                  "question_type": "single_choice",
+                  "explanation": "On cherche le premier jour qui est un multiple de 12 et de 18 : c'est le PPCM, $\\text{ppcm}(12 ; 18) = 36$. Le PGCD, 6, est le plus grand diviseur commun et ne répond pas à la question. Le produit $216$ est un multiple commun, mais pas le plus petit.",
+                  "answers": [
+                    {
+                      "content": "$36$ jours",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6$ jours",
+                      "correct": false
+                    },
+                    {
+                      "content": "$216$ jours",
+                      "correct": false
+                    },
+                    {
+                      "content": "$30$ jours",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $a = bq + r$ avec $0 \\le r < b$, alors $\\text{pgcd}(a ; b) = \\text{pgcd}(b ; r)$.",
+                  "question_type": "true_false",
+                  "explanation": "C'est le lemme d'Euclide, à la base de l'algorithme. Un diviseur commun de $a$ et $b$ divise $r = a - bq$, et un diviseur commun de $b$ et $r$ divise $a = bq + r$. Les deux couples ont donc les mêmes diviseurs communs, et le même plus grand.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $\\text{pgcd}(84 ; 60) = 12$. Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Le PGCD de 84 et 60 vaut 12 et leur PPCM vaut $\\dfrac{84 \\times 60}{12} = 420$. Ne confonds pas les deux : le PGCD est un diviseur (petit), le PPCM est un multiple (grand). Le PPCM n'est jamais plus petit que le PGCD, et 24 n'est pas le PGCD.",
+                  "answers": [
+                    {
+                      "content": "$\\text{pgcd}(84 ; 60) = 12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\text{ppcm}(84 ; 60) = 420$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\text{ppcm}(84 ; 60) = 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\text{pgcd}(84 ; 60) = 420$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\text{pgcd}(84 ; 60) = 24$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Algorithme d'Euclide et propriétés",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quel est le PGCD de $252$ et $198$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$252 = 198 \\times 1 + 54$, puis $198 = 54 \\times 3 + 36$, puis $54 = 36 \\times 1 + 18$, puis $36 = 18 \\times 2 + 0$. Le dernier reste non nul est 18. Le piège est de s'arrêter trop tôt, au reste 36, ou de prendre le premier reste 54.",
+                  "answers": [
+                    {
+                      "content": "$18$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$36$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$54$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le PGCD de $-48$ et $36$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\text{pgcd}(-48 ; 36) = \\text{pgcd}(48 ; 36)$. On a $48 = 36 \\times 1 + 12$, puis $36 = 12 \\times 3 + 0$ : le PGCD est 12. Un PGCD est un entier naturel, jamais négatif ; et $144$ est le PPCM de 48 et 36.",
+                  "answers": [
+                    {
+                      "content": "$12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$144$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le PPCM de $15$ et $20$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\text{pgcd}(15 ; 20) = 5$ (car $20 = 15 + 5$ et $15 = 5 \\times 3$). Alors $\\text{ppcm}(15 ; 20) = \\dfrac{15 \\times 20}{5} = 60$. Le produit 300 est un multiple commun mais pas le plus petit ; 120 aussi.",
+                  "answers": [
+                    {
+                      "content": "$60$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$300$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$120$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux entiers naturels non nuls $a$ et $b$ ont pour PGCD $7$ et pour PPCM $84$. Que vaut le produit $a \\times b$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On utilise $\\text{pgcd}(a ; b) \\times \\text{ppcm}(a ; b) = ab$. Donc $ab = 7 \\times 84 = 588$. Additionner (91) ou diviser (12) ne correspond à aucune relation du cours.",
+                  "answers": [
+                    {
+                      "content": "$588$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$91$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On applique l'algorithme d'Euclide à $360$ et $150$ : $360 = 150 \\times 2 + 60$, puis $150 = 60 \\times 2 + 30$, puis $60 = 30 \\times 2 + 0$. Le PGCD est le premier reste, $60$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Le PGCD est le dernier reste non nul, ici 30, pas le premier reste. Contrôle : 30 divise 360 ($30 \\times 12$) et 150 ($30 \\times 5$), alors que 60 ne divise pas 150.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $a$ et $b$ deux entiers naturels non nuls. Lesquelles de ces égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "En multipliant $a$ et $b$ par 3, PGCD et PPCM sont multipliés par 3. Les autres sont fausses : le PGCD ne peut pas rester le même, le produit $\\text{pgcd} \\times \\text{ppcm}$ vaut $ab$ et non $a + b$, et le PPCM est un multiple du PGCD, pas l'inverse.",
+                  "answers": [
+                    {
+                      "content": "$\\text{pgcd}(3a ; 3b) = 3 \\times \\text{pgcd}(a ; b)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\text{ppcm}(3a ; 3b) = 3 \\times \\text{ppcm}(a ; b)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\text{pgcd}(3a ; 3b) = \\text{pgcd}(a ; b)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\text{pgcd}(a ; b) \\times \\text{ppcm}(a ; b) = a + b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\text{ppcm}(a ; b)$ divise $\\text{pgcd}(a ; b)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Problèmes de PGCD et de PPCM",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Deux entiers naturels $a$ et $b$ ont pour PGCD $12$ et pour PPCM $360$. On sait que $a = 72$. Que vaut $b$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$ab = \\text{pgcd} \\times \\text{ppcm} = 12 \\times 360 = 4320$, donc $b = 4320 \\div 72 = 60$. Contrôle : $\\text{pgcd}(72 ; 60) = 12$ et $\\text{ppcm}(72 ; 60) = \\dfrac{72 \\times 60}{12} = 360$. La réponse 30 vient de $360 \\div 12$, sans lien avec $a$.",
+                  "answers": [
+                    {
+                      "content": "$b = 60$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$b = 30$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$b = 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$b = 120$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un entrepôt rectangulaire mesure 1071 m sur 462 m. On le recouvre de dalles carrées identiques, sans en couper, avec le plus grand côté possible. Combien faut-il de dalles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le côté est $\\text{pgcd}(1071 ; 462) = 21$ m. Il y a $1071 \\div 21 = 51$ dalles dans la longueur et $462 \\div 21 = 22$ dans la largeur, soit $51 \\times 22 = 1122$ dalles. 21 est le côté, 23562 le PPCM.",
+                  "answers": [
+                    {
+                      "content": "$1122$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$21$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$23562$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$51$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces entiers, lesquels divisent à la fois $84$ et $60$ ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Les diviseurs communs de 84 et 60 sont les diviseurs de leur PGCD, 12 : donc 1, 2, 3, 4, 6, 12. Ici 4, 6 et 12 conviennent. 8 divise 60 mais pas 84 ; 24 ne divise ni l'un ni l'autre ; 5 divise 60 mais pas 84.",
+                  "answers": [
+                    {
+                      "content": "$4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$24$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le PGCD de $1140$ et $1365$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$1365 = 1140 \\times 1 + 225$, puis $1140 = 225 \\times 5 + 15$, puis $225 = 15 \\times 15 + 0$. Le dernier reste non nul est 15. La réponse 225 est l'avant-dernier reste ; 5 est un diviseur commun, mais pas le plus grand.",
+                  "answers": [
+                    {
+                      "content": "$15$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$225$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$45$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux bouées lumineuses du chenal d'accès clignotent, l'une toutes les 18 secondes, l'autre toutes les 30 secondes. Elles viennent de clignoter ensemble. Elles clignoteront de nouveau ensemble dans 90 secondes.",
+                  "question_type": "true_false",
+                  "explanation": "On cherche le plus petit multiple commun non nul de 18 et 30. $\\text{pgcd}(18 ; 30) = 6$, donc $\\text{ppcm} = \\dfrac{18 \\times 30}{6} = 90$. Contrôle : $90 = 18 \\times 5 = 30 \\times 3$, et aucun multiple commun plus petit n'existe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'algorithme d'Euclide, pourquoi $\\text{pgcd}(a ; b) = \\text{pgcd}(b ; r)$ quand $a = bq + r$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Si $d$ divise $a$ et $b$, alors il divise $r = a - bq$. Si $d$ divise $b$ et $r$, alors il divise $a = bq + r$. Les couples $(a ; b)$ et $(b ; r)$ ont donc les mêmes diviseurs communs, donc le même plus grand. Ce n'est pas $q$ qui est le PGCD.",
+                  "answers": [
+                    {
+                      "content": "Les diviseurs communs de $a$ et $b$ sont exactement ceux de $b$ et $r$, car $r = a - bq$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que $r$ est plus petit que $b$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $q$ est égal au PGCD.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $a$ et $r$ ont les mêmes diviseurs.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Nombres premiers entre eux, Bézout et Gauss",
+          "subtitle": "Équations ax + by = c dans les entiers. À compléter : nombres premiers, décomposition en facteurs premiers",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Reconnaître deux entiers premiers entre eux et utiliser le théorème de Bézout.</li>\n<li>Appliquer le théorème de Gauss pour conclure qu'un entier en divise un autre.</li>\n<li>Résoudre dans ℤ × ℤ une équation $ax + by = c$.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. La balance du marché (premiers entre eux et Bézout).</strong> Près du port, un commerçant n'a que deux poids : un de 5 kg et un de 7 kg, qu'il possède en grand nombre. Sa balance a deux plateaux, et il peut mettre des poids des deux côtés. Il pose 3 poids de 5 kg à gauche, soit 15 kg, et 2 poids de 7 kg à droite, soit 14 kg. Il ajoute de la marchandise à droite jusqu'à l'équilibre : elle pèse exactement 1 kg. Avec ses deux poids, il sait donc peser 1 kg, et donc n'importe quel nombre entier de kilogrammes.</p>\n<p><em>Le pont.</em> Les poids de 5 kg et de 7 kg, ce sont $a = 5$ et $b = 7$. Poser 3 poids à gauche et 2 à droite, c'est écrire $5 \\times 3 + 7 \\times (-2) = 1$ : un poids posé du côté de la marchandise compte négativement. Que le 1 soit atteignable vient de ce que 5 et 7 n'ont aucun diviseur commun autre que 1 : ils sont <strong>premiers entre eux</strong>.</p>\n<p><em>Où l'image s'arrête.</em> Avec des poids de 6 kg et de 9 kg, il ne pèserait jamais 1 kg : tout ce qu'il pèse est un multiple de 3, car 3 est un diviseur commun de 6 et de 9.</p>\n<p><strong>2. Les palettes de 9 caisses (Gauss).</strong> Au port, on charge $4c$ caisses, où $c$ est un nombre entier, et on sait que ce chargement se range exactement en palettes de 9 caisses. Le nombre 4 n'a aucun diviseur en commun avec 9. Le facteur 9 ne peut donc pas venir du 4 : il vient de $c$. Le nombre $c$ est lui-même un multiple de 9.</p>\n<p><em>Le pont.</em> « 9 divise $4c$ », c'est $a \\mid bc$ avec $a = 9$, $b = 4$. « 4 n'a rien en commun avec 9 », c'est $\\text{pgcd}(9 ; 4) = 1$. La conclusion « 9 divise $c$ » est le <strong>théorème de Gauss</strong>.</p>\n<p><em>Où l'image s'arrête.</em> Si on remplace 4 par 6, le raisonnement tombe : 9 divise $6 \\times 3 = 18$, mais 9 ne divise pas 3. C'est que 6 et 9 ont le diviseur commun 3.</p>\n<p><strong>3. Toutes les pesées possibles (l'équation).</strong> Le commerçant veut une masse de 3 kg. Il refait trois fois la pesée de 1 kg : il pose $3 \\times 3 = 9$ poids de 5 kg à gauche, et $3 \\times 2 = 6$ poids de 7 kg à droite. Il peut aussi ajouter, des deux côtés, 7 poids de 5 kg à gauche et 5 poids de 7 kg à droite : c'est $35$ kg de chaque côté, l'équilibre ne change pas.</p>\n<p><em>Le pont.</em> Les nombres $x$ et $y$ de poids sont les inconnues de l'équation $5x + 7y = 3$. La pesée de départ est une solution particulière. Ajouter 7 poids de 5 kg et en retirer 5 de 7 kg donne toutes les autres solutions : $x \\to x + 7$ et $y \\to y - 5$.</p>\n<p><em>Où l'image s'arrête.</em> Un nombre de poids ne peut pas être négatif dans la vie. Mathématiquement, $x$ et $y$ sont des entiers relatifs, et il faut parfois chercher des solutions positives à part.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Premiers entre eux.</strong> Deux entiers relatifs $a$ et $b$ non tous deux nuls sont premiers entre eux si $\\text{pgcd}(a ; b) = 1$. Deux entiers peuvent être premiers entre eux sans être premiers : 8 et 15 le sont.</p>\n<p><strong>Théorème de Bézout.</strong> Deux entiers relatifs $a$ et $b$ sont premiers entre eux si et seulement s'il existe deux entiers relatifs $u$ et $v$ tels que $au + bv = 1$. Plus généralement, si $d = \\text{pgcd}(a ; b)$, il existe $u$ et $v$ tels que $au + bv = d$. On trouve $u$ et $v$ en remontant l'algorithme d'Euclide. Ces entiers ne sont pas uniques.</p>\n<p><strong>Théorème de Gauss.</strong> Si $a$ divise $bc$ et si $a$ et $b$ sont premiers entre eux, alors $a$ divise $c$. <em>Preuve</em> : $au + bv = 1$ donne $acu + bcv = c$. Or $a$ divise $acu$ et $a$ divise $bc$, donc $a$ divise $c$. <em>Corollaire</em> : si $a$ et $b$ sont premiers entre eux et divisent tous deux $c$, alors $ab$ divise $c$.</p>\n<p><strong>Équation $ax + by = c$</strong> ($a$ et $b$ non nuls, $c$ entier relatif, $d = \\text{pgcd}(a ; b)$).</p>\n<ul>\n<li>Elle a des solutions dans ℤ × ℤ si et seulement si $d$ divise $c$.</li>\n<li>Dans ce cas, on divise par $d$ pour se ramener à $a'x + b'y = c'$ avec $a'$ et $b'$ premiers entre eux. Si $(x_0 ; y_0)$ est une solution particulière, les solutions sont les couples $(x_0 + b'k ; y_0 - a'k)$, avec $k$ dans ℤ.</li>\n</ul>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Résoudre dans ℤ × ℤ l'équation $5x + 7y = 3$.</strong></p>\n<ol>\n<li>$\\text{pgcd}(5 ; 7) = 1$ divise $3$ : l'équation a des solutions.</li>\n<li>On remonte l'algorithme d'Euclide : $7 = 5 \\times 1 + 2$ et $5 = 2 \\times 2 + 1$. Donc $1 = 5 - 2 \\times 2 = 5 - 2 \\times (7 - 5) = 5 \\times 3 + 7 \\times (-2)$. Contrôle : $15 - 14 = 1$.</li>\n<li>On multiplie par $3$ : $5 \\times 9 + 7 \\times (-6) = 3$. Une solution particulière est $(9 ; -6)$.</li>\n<li>Soit $(x ; y)$ une solution. Par différence avec $(9 ; -6)$ : $5(x - 9) + 7(y + 6) = 0$, soit $5(x - 9) = -7(y + 6)$.</li>\n<li>Donc $7$ divise $5(x - 9)$. Comme $7$ et $5$ sont premiers entre eux, Gauss donne que $7$ divise $x - 9$ : $x = 9 + 7k$ avec $k$ dans ℤ.</li>\n<li>On remplace : $5 \\times 7k = -7(y + 6)$, donc $y + 6 = -5k$ et $y = -6 - 5k$.</li>\n<li>Les solutions sont les couples $(9 + 7k ; -6 - 5k)$, où $k$ est un entier relatif. Contrôle : $5(9 + 7k) + 7(-6 - 5k) = 45 + 35k - 42 - 35k = 3$.</li>\n</ol>\n<p><strong>L'équation $6x + 9y = 10$ a-t-elle des solutions dans ℤ × ℤ ?</strong> Non : $\\text{pgcd}(6 ; 9) = 3$ et $3$ ne divise pas $10$. Le premier membre est toujours un multiple de 3.</p>\n<h2>Le piège à éviter</h2>\n<p>Croire que si $au + bv = 2$, alors $\\text{pgcd}(a ; b) = 2$. C'est faux : $5 \\times 1 + 3 \\times (-1) = 2$, et pourtant $\\text{pgcd}(5 ; 3) = 1$. Seule l'égalité $au + bv = 1$ prouve que $a$ et $b$ sont premiers entre eux. Si $au + bv = c$, on sait seulement que le PGCD divise $c$.</p>\n<p>Autre piège : appliquer Gauss sans vérifier que $a$ et $b$ sont premiers entre eux. $6$ divise $4 \\times 3 = 12$, mais $6$ ne divise ni $4$ ni $3$, car $\\text{pgcd}(6 ; 4) = 2$.</p>\n<p>Dernier piège : donner une seule solution de $ax + by = c$ en pensant avoir tout trouvé. Il y a une infinité de couples, d'où le paramètre $k$.</p>\n<h2>En une phrase</h2>\n<p>Deux entiers premiers entre eux, comme les poids de 5 kg et 7 kg, permettent d'obtenir 1 par $au + bv = 1$ (Bézout), ce qui donne Gauss : si $a$ divise $bc$ avec $a$ premier avec $b$, alors $a$ divise $c$ ; et $ax + by = c$ a des solutions si et seulement si $\\text{pgcd}(a ; b)$ divise $c$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Premiers entre eux, Bézout et Gauss",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Que signifie « les entiers $a$ et $b$ sont premiers entre eux » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Premiers entre eux veut dire que leur seul diviseur commun positif est 1, c'est-à-dire $\\text{pgcd}(a ; b) = 1$, comme les poids de 5 kg et 7 kg. Cela ne demande pas que chacun soit premier : 8 et 15 ne le sont pas. Et 4 et 6 ne se divisent pas mutuellement, mais ont le diviseur 2.",
+                  "answers": [
+                    {
+                      "content": "Leur PGCD vaut $1$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chacun des deux est un nombre premier.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun des deux ne divise l'autre.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux sont des nombres impairs.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les entiers $8$ et $15$ sont premiers entre eux, bien qu'aucun des deux ne soit un nombre premier.",
+                  "question_type": "true_false",
+                  "explanation": "$8 = 2^3$ et $15 = 3 \\times 5$ n'ont aucun diviseur commun autre que 1, donc $\\text{pgcd}(8 ; 15) = 1$. Être premiers entre eux est une propriété du couple. Être premier est une propriété d'un seul nombre : 8 et 15 ne sont pas premiers.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $a$ et $b$ deux entiers relatifs non nuls. Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Bézout : $\\text{pgcd}(a ; b) = 1$ équivaut à l'existence de $u$ et $v$ avec $au + bv = 1$. Mais $au + bv = 2$ ne donne pas $\\text{pgcd} = 2$ ($5 \\times 1 + 3 \\times (-1) = 2$). Et $u$, $v$ ne sont pas uniques, ni forcément positifs : $5 \\times 3 + 7 \\times (-2) = 1$.",
+                  "answers": [
+                    {
+                      "content": "Si $\\text{pgcd}(a ; b) = 1$, il existe deux entiers relatifs $u$ et $v$ tels que $au + bv = 1$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "S'il existe deux entiers relatifs $u$ et $v$ tels que $au + bv = 1$, alors $a$ et $b$ sont premiers entre eux.",
+                      "correct": true
+                    },
+                    {
+                      "content": "S'il existe $u$ et $v$ tels que $au + bv = 2$, alors $\\text{pgcd}(a ; b) = 2$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les entiers $u$ et $v$ de la relation de Bézout sont uniques.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les entiers $u$ et $v$ de la relation de Bézout sont toujours positifs.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel énoncé est le théorème de Gauss ?",
+                  "question_type": "single_choice",
+                  "explanation": "Gauss demande deux conditions : $a$ divise $bc$ et $a$ est premier avec $b$. Alors $a$ divise $c$. Sans la condition « premiers entre eux », c'est faux : $6 \\mid 4 \\times 3$ sans que 6 divise 4 ou 3.",
+                  "answers": [
+                    {
+                      "content": "Si $a$ divise $bc$ et si $a$ et $b$ sont premiers entre eux, alors $a$ divise $c$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $a$ divise $bc$, alors $a$ divise $b$ ou $a$ divise $c$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si $a$ divise $bc$ et si $a$ et $b$ sont premiers entre eux, alors $a$ divise $b$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si $a$ divise $b$ et $c$, alors $a$ et $b$ sont premiers entre eux.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $6 \\mid 4 \\times 3$ et pourtant $6$ ne divise ni $4$ ni $3$. Cela contredit le théorème de Gauss.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Gauss s'applique seulement si $a$ et $b$ sont premiers entre eux. Ici $\\text{pgcd}(6 ; 4) = 2$ : l'hypothèse n'est pas vérifiée, il n'y a aucune contradiction. C'est la limite de l'image des palettes : 4 doit n'avoir rien de commun avec 6.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Bézout, Gauss et équations",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quel couple $(u ; v)$ vérifie $5u + 7v = 1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$5 \\times 3 + 7 \\times (-2) = 15 - 14 = 1$ : c'est la pesée de 1 kg du marchand. Le couple $(-3 ; 2)$ donne $-15 + 14 = -1$, et $(2 ; -1)$ donne $10 - 7 = 3$. Ne te contente pas de signes qui « ont l'air bons » : calcule.",
+                  "answers": [
+                    {
+                      "content": "$(3 ; -2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-3 ; 2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2 ; -1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3 ; -1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquels de ces couples d'entiers sont formés de deux entiers premiers entre eux ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$14 = 2 \\times 7$ et $25 = 5^2$ n'ont aucun diviseur commun ; de même $15 = 3 \\times 5$ et $28 = 2^2 \\times 7$. Mais $\\text{pgcd}(21 ; 35) = 7$, $\\text{pgcd}(18 ; 27) = 9$ et $\\text{pgcd}(9 ; 12) = 3$.",
+                  "answers": [
+                    {
+                      "content": "$14$ et $25$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$15$ et $28$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$21$ et $35$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$18$ et $27$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9$ et $12$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $n$ un entier relatif tel que $15$ divise $4n$. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "$15$ divise $4 \\times n$ et $\\text{pgcd}(15 ; 4) = 1$ : par Gauss, 15 divise $n$. On ne peut pas conclure que 60 divise $n$ : $n = 15$ convient, et 60 ne divise pas 15. Et 4 ne divise pas forcément $n$ non plus.",
+                  "answers": [
+                    {
+                      "content": "$15$ divise $n$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$15$ divise $4$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$60$ divise $n$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$ divise $n$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquelles de ces équations ont au moins une solution dans ℤ × ℤ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Il faut que le PGCD des coefficients divise le second membre. $\\text{pgcd}(6 ; 9) = 3$ divise 12 : oui, mais ne divise pas 10. $\\text{pgcd}(5 ; 7) = 1$ divise tout. $\\text{pgcd}(4 ; 6) = 2$ ne divise pas 7 et $\\text{pgcd}(10 ; 15) = 5$ ne divise pas 12.",
+                  "answers": [
+                    {
+                      "content": "$6x + 9y = 12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5x + 7y = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6x + 9y = 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x + 6y = 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10x + 15y = 12$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel couple est solution de l'équation $5x + 7y = 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$5 \\times 2 + 7 \\times (-1) = 10 - 7 = 3$ : le couple $(2 ; -1)$ convient. Les autres donnent $-3$, $-2$ et $1$ : par exemple $5 \\times 3 + 7 \\times (-2) = 1$ est la relation de Bézout pour 1, pas pour 3.",
+                  "answers": [
+                    {
+                      "content": "$(2 ; -1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-2 ; 1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1 ; -1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3 ; -2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $(2 ; -1)$ est une solution de $5x + 7y = 3$. Quelles sont toutes les solutions dans ℤ × ℤ, avec $k$ entier relatif ?",
+                  "question_type": "single_choice",
+                  "explanation": "Si $(x ; y)$ est solution, $5(x - 2) = -7(y + 1)$. Comme 5 et 7 sont premiers entre eux, 7 divise $x - 2$ (Gauss) : $x = 2 + 7k$, puis $y = -1 - 5k$. Les coefficients de $k$ sont échangés : $b'$ pour $x$, $a'$ pour $y$.",
+                  "answers": [
+                    {
+                      "content": "$x = 2 + 7k$ et $y = -1 - 5k$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 2 + 5k$ et $y = -1 - 7k$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 2 + 7k$ et $y = -1 + 5k$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 2 + 7k$ et $y = -1 - 7k$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Équations et raisonnements avec Gauss",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Parmi ces affirmations sur un entier $n$, lesquelles sont toujours vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Si $a$ et $b$ sont premiers entre eux et divisent $n$, alors $ab$ divise $n$ : 4 et 9, puis 5 et 7, le sont. Mais 6 et 10 (PGCD 2) donnent 30, pas 60 ; 4 et 6 (PGCD 2) donnent 12, pas 24 ; 12 et 18 (PGCD 6) donnent 36, pas 216.",
+                  "answers": [
+                    {
+                      "content": "Si $4$ et $9$ divisent $n$, alors $36$ divise $n$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $5$ et $7$ divisent $n$, alors $35$ divise $n$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $6$ et $10$ divisent $n$, alors $60$ divise $n$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si $4$ et $6$ divisent $n$, alors $24$ divise $n$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si $12$ et $18$ divisent $n$, alors $216$ divise $n$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien y a-t-il de couples $(x ; y)$ d'entiers naturels qui vérifient $5x + 3y = 29$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une solution est $(1 ; 8)$ car $5 + 24 = 29$. Les solutions dans ℤ × ℤ sont $(1 + 3k ; 8 - 5k)$. Pour $x \\ge 0$ et $y \\ge 0$, il faut $k \\ge 0$ et $k \\le 1$ : $k = 0$ donne $(1 ; 8)$ et $k = 1$ donne $(4 ; 3)$. Il y en a donc 2.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions dans ℤ × ℤ de l'équation $15x + 21y = 9$, avec $k$ entier relatif ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\text{pgcd}(15 ; 21) = 3$ divise 9. On simplifie : $5x + 7y = 3$, de solutions $(9 + 7k ; -6 - 5k)$. Le couple $(9 + 21k ; -6 - 15k)$ est bien solution, mais incomplet : $(16 ; -11)$ est solution et n'y figure pas, car il faut diviser par le PGCD.",
+                  "answers": [
+                    {
+                      "content": "$(9 + 7k ; -6 - 5k)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(9 + 21k ; -6 - 15k)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(9 + 5k ; -6 - 7k)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a aucune solution, car $15$ et $21$ ne sont pas premiers entre eux.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $n$ un entier relatif. Pour montrer que $n$ et $2n + 1$ sont premiers entre eux, quel argument est correct ?",
+                  "question_type": "single_choice",
+                  "explanation": "On écrit $(2n + 1) \\times 1 + n \\times (-2) = 1$ : c'est une relation de Bézout, donc $\\text{pgcd}(n ; 2n + 1) = 1$. Dire que $2n + 1$ est impair ne suffit pas : 3 et 9 sont impairs sans être premiers entre eux. Et être plus grand n'a aucun rapport.",
+                  "answers": [
+                    {
+                      "content": "$(2n + 1) \\times 1 + n \\times (-2) = 1$, donc d'après Bézout ils sont premiers entre eux.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2n + 1$ est impair, donc il est premier avec $n$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2n + 1$ est plus grand que $n$, donc ils sont premiers entre eux.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $a$ et $b$ deux entiers naturels non nuls premiers entre eux. Lesquelles de ces affirmations sont toujours vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Pour $a$ et $b$ premiers entre eux : $\\text{ppcm} = ab$ (car $\\text{pgcd} = 1$), Bézout donne $au + bv = 1$, et Gauss s'applique. Faux : 8 et 15 ne sont pas des nombres premiers ; 2 et 3 sont premiers entre eux sans que l'un divise l'autre ; avec $a = 2$ et $b = 3$, $\\text{pgcd}(2 ; 5) = 1$ et non 2.",
+                  "answers": [
+                    {
+                      "content": "$\\text{ppcm}(a ; b) = ab$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il existe $u$ et $v$ entiers relatifs tels que $au + bv = 1$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $a$ divise $bc$, alors $a$ divise $c$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a$ et $b$ sont des nombres premiers.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a$ divise $b$ ou $b$ divise $a$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\text{pgcd}(a ; a + b) = a$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
