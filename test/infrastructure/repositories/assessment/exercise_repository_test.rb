@@ -127,6 +127,54 @@ module Repositories
         assert_equal [ a, b ].map(&:public_id), repository.draft_public_ids(essential_id: first.id)
         assert_empty repository.draft_public_ids(essential_id: drafted.id)
       end
+
+      # ADR-0089 : une question cite son image par public_id ; l'enregistrement la rattache (si elle n'est à personne), écrit
+      # son texte de remplacement, et supprime l'image remplacée ou retirée. FK RESTRICT : une question remplacée perd son
+      # image avant de partir.
+      def illustrated(content, image: nil, alt: nil, description: nil)
+        question(content).with(image_description: description,
+                               image: image && Entities::Shared::ContentImage.new(public_id: image.public_id, alt:))
+      end
+
+      test "ADR-0089 : crée un exercice dont une question porte son image et sa description, relues" do
+        image = create_question_image(fixture: "photos/photo.png")
+
+        created = @repository.create(exercise: exercise(questions: [ illustrated("Q1", image:, alt: "Une pile", description: "Un circuit"),
+                                                                     illustrated("Q2", description: "Une lampe") ]))
+
+        first, second = created.questions
+        assert_equal [ image.public_id, "Une pile", "image/png", "Un circuit" ],
+                     [ first.image.public_id, first.image.alt, first.image.content_type, first.image_description ]
+        assert_equal [ nil, "Une lampe" ], [ second.image, second.image_description ]
+        assert_equal Orm::Question.find_by!(exercise_id: created.id, position: 1).id, image.reload.question_id
+      end
+
+      test "ADR-0089 : remplacer les questions garde l'image citée, supprime la remplacée, ignore celle d'un autre exercice" do
+        kept = create_question_image
+        replaced = create_question_image
+        foreign = create_question_image(question: create_exercise.questions.first)
+        fresh = create_question_image
+        created = @repository.create(exercise: exercise(questions: [ illustrated("Q1", image: kept, alt: "a"),
+                                                                     illustrated("Q2", image: replaced, alt: "b") ]))
+
+        updated = @repository.update(exercise: exercise(id: created.id, questions: [ illustrated("Q1", image: kept, alt: "a2"),
+                                                                                     illustrated("Q2", image: fresh, alt: "c"),
+                                                                                     illustrated("Q3", image: foreign, alt: "d") ]),
+                                     replace_questions: true)
+
+        assert_equal [ [ kept.public_id, "a2" ], [ fresh.public_id, "c" ], nil ], updated.questions.map { it.image && [ it.image.public_id, it.image.alt ] }
+        assert_not Orm::QuestionImage.exists?(replaced.id)
+        assert_not_equal updated.questions.last.id, foreign.reload.question_id
+      end
+
+      test "ADR-0089 : retirer toutes les questions supprime leurs images sans heurter la clé étrangère" do
+        image = create_question_image
+        created = @repository.create(exercise: exercise(questions: [ illustrated("Q1", image:, alt: "a") ]))
+
+        @repository.update(exercise: exercise(id: created.id, questions: [ question("Q") ]), replace_questions: true)
+
+        assert_not Orm::QuestionImage.exists?(image.id)
+      end
     end
   end
 end
