@@ -1,0 +1,5 @@
+<%# 🌐 UI · school_admin/level_archivals/create — réponse de « Archiver le niveau » %>
+<%# Rôle : toast (nombre de classes archivées, ou motif neutre du conflit), puis la page du niveau se rafraîchit %>
+<%# ADR  : 0088 · UDR : 0083 %>
+<%= turbo_stream_toast @notice || @alert, type: @notice ? :success : :info %>
+<%= turbo_stream.refresh(request_id: nil) %>

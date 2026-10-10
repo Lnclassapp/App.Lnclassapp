@@ -48,9 +48,8 @@ class SchoolAdmin::LevelsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_session_path
   end
 
-  test "AD-11: an unknown level, or a level without an active classroom of the school this year, gives 404" do
+  test "AD-11: an unknown level, or a level without any classroom of the school this year, gives 404" do
     terminale = create_level(name: "Tle", position: 7)
-    classroom("Tle D 1", level: terminale, status: "archived")
     classroom("Tle D 2", level: terminale, school_year: "2020-2021")
     classroom("Tle D 3", level: terminale, school: create_school(name: "Lycée Classique d'Abidjan"))
     sign_in_as @admin
@@ -132,9 +131,9 @@ class SchoolAdmin::LevelsControllerTest < ActionDispatch::IntegrationTest
     assert_select "p", text: "1 classe · 1 élève"
   end
 
-  test "AD-10: another school's, archived or past classrooms of the level never show, nor count" do
+  test "AD-10: another school's, past or long archived classrooms of the level never show, nor count" do
     kept = classroom_with("3ème 1", students: 2)
-    classroom_with("3ème 8", students: 4, status: "archived")
+    classroom_with("3ème 8", students: 4, status: "archived", archived_at: 8.days.ago)
     classroom_with("3ème 9", students: 4, school_year: "2020-2021")
     classroom_with("3ème 7", students: 4, school: create_school(name: "Lycée Classique d'Abidjan"))
     sign_in_as @admin
