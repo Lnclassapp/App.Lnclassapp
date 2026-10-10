@@ -1,14 +1,17 @@
 # 🔌 INFRA · Queries::School::StudentWorkQuery
 # Rôle : travail des élèves de la direction (DS-07 à DS-10) : chiffres de chaque classe de l'année, d'un niveau, puis des élèves (lien, nouveaux, retrait)
-# ADR  : 0006, 0043, 0062, 0065, 0067, 0072, 0085 · UDR : 0052, 0074, 0081 (§3.6, §3.7) · rendu : standard ou remédiation ; requêtes en nombre fixe
+# ADR  : 0006, 0043, 0062, 0065, 0067, 0072, 0085, 0088 · UDR : 0052, 0074, 0081 (§3.6, §3.7), 0083 · rendu : standard ou remédiation ; requêtes en nombre fixe
 module Queries
   module School
     class StudentWorkQuery
       MIN_STUDENTS_FOR_AVERAGE = 5
       # submission_rate, average_percent : nil → « — » ; submitted_count : devoirs rendus (élève, devoir) distincts, la
-      # somme qui fait le taux d'un niveau (UDR-0074 §3.2).
+      # somme qui fait le taux d'un niveau (UDR-0074 §3.2). teachers_count : enseignants rattachés à la classe (la confirmation
+      # d'archivage, UDR-0083) ; archived_at : nil pour une classe active, la date pour une archivée de la page d'un niveau.
       ClassroomRow = Data.define(:public_id, :name, :level_name, :level_slug, :students_count, :assignments_count,
-                                 :submitted_count, :submission_rate, :average_percent)
+                                 :submitted_count, :submission_rate, :average_percent, :teachers_count, :archived_at) do
+        def archived? = !archived_at.nil?
+      end
       StudentRow = Data.define(:display_name, :submitted_count, :average_percent)
       # students_count : élèves présents distincts de l'établissement ; un élève de deux classes compte une fois (UDR-0074).
       Overview = Data.define(:school_name, :school_year, :students_count, :classrooms)
@@ -24,8 +27,14 @@ module Queries
         def students = members.map(&:work)
         def new_students_count = members.count(&:newcomer)
       end
-      # students_count : élèves présents distincts du niveau, même règle (phase 5, O1).
-      LevelOverview = Data.define(:level_name, :level_slug, :students_count, :classrooms)
+      # students_count, teachers_count : élèves présents et enseignants distincts des seules classes actives du niveau (même règle,
+      # phase 5, O1). classrooms : les actives, puis les archivées visibles ; older_archives_count : les archivées depuis plus
+      # de ARCHIVE_VISIBLE_FOR, que le bouton « Afficher les archives » montre (ADR-0088, UDR-0083).
+      LevelOverview = Data.define(:level_name, :level_slug, :students_count, :teachers_count, :older_archives_count, :classrooms) do
+        def active_classrooms = classrooms.reject(&:archived?)
+      end
+      # ADR-0088 : une classe archivée reste sur la page de son niveau 7 jours après archived_at.
+      ARCHIVE_VISIBLE_FOR = 7.days
 
       CLASSROOM_COLUMNS = %w[classrooms.id classrooms.public_id classrooms.name levels.name levels.slug].freeze
       MEMBER_COLUMNS = %w[users.id users.public_id users.first_name users.last_name classroom_students.joined_via
@@ -56,20 +65,27 @@ module Queries
       # → Overview
       def classrooms(school_id:, school_year: Entities::Classroom::SchoolYear.current(Date.current))
         rows = active_classrooms(school_id, school_year).order("levels.position", "classrooms.name").pluck(*CLASSROOM_COLUMNS)
-        students_count, classrooms = classroom_rows(rows)
+        students_count, _, classrooms = classroom_rows(rows)
 
         Overview.new(school_name: Orm::School.where(id: school_id).pick(:name), school_year:, students_count:, classrooms:)
       end
 
-      # La page d'un niveau (UDR-0074 §3.8) : ses classes actives de l'année dans cet établissement, par nom. → LevelOverview
-      # | nil : nil pour un slug inconnu ou un niveau sans classe active de l'établissement cette année (404).
-      def level(school_id:, slug:, school_year: Entities::Classroom::SchoolYear.current(Date.current))
-        rows = active_classrooms(school_id, school_year).where(levels: { slug: slug.to_s }).order("classrooms.name")
-                                                        .pluck(*CLASSROOM_COLUMNS)
+      # La page d'un niveau (UDR-0074 §3.8) : ses classes actives de l'année dans cet établissement, par nom, puis ses archivées
+      # visibles (récentes, ou toutes avec archives: true), sans jamais les compter dans les totaux. → LevelOverview | nil :
+      # nil pour un slug inconnu ou un niveau sans aucune classe de l'établissement cette année (404).
+      def level(school_id:, slug:, archives: false, now: Time.current, school_year: Entities::Classroom::SchoolYear.current(Date.current))
+        rows = Orm::Classroom.joins(:level).where(school_id:, school_year:, levels: { slug: slug.to_s })
+                             .order(Arel.sql("classrooms.status = 'archived'"), "classrooms.name")
+                             .pluck(*CLASSROOM_COLUMNS, "classrooms.archived_at")
         return if rows.empty?
 
-        students_count, classrooms = classroom_rows(rows)
-        LevelOverview.new(level_name: rows.first[3], level_slug: rows.first[4], students_count:, classrooms:)
+        active, archived = rows.partition { it.last.nil? }
+        recent, older = archived.partition { it.last > now - ARCHIVE_VISIBLE_FOR }
+        shown = archives ? archived : recent
+        students_count, teachers_count, classrooms = classroom_rows(active)
+
+        LevelOverview.new(level_name: rows.first[3], level_slug: rows.first[4], students_count:, teachers_count:,
+                          older_archives_count: older.size, classrooms: classrooms + archived_rows(shown))
       end
 
       # → Detail | nil : nil pour une classe inconnue, archivée, d'une autre année ou d'un autre établissement.
@@ -86,20 +102,40 @@ module Queries
         assignments_count = Orm::ClassroomAssignment.where(classroom_id: row.first).count
         totals = totals_by("classroom_students.student_id", row.first)
 
-        Detail.new(classroom: classroom_row(row, students.size, assignments_count, { row.first => sum(totals.values) }),
+        teachers = teacher_counts([ row.first ])
+        Detail.new(classroom: classroom_row(row, students.size, assignments_count, { row.first => sum(totals.values) }, teachers),
                    link: Link.new(public_id: row[1], name: row[2], link_token: row.last), members: members(students, totals))
       end
 
       private
 
       # Les lignes de classes lues, avec leurs effectifs, devoirs et totaux, et le nombre d'élèves distincts de ces classes :
-      # trois requêtes, quel que soit le nombre. → [élèves distincts, [ClassroomRow]]
+      # quatre requêtes, quel que soit le nombre. → [élèves distincts, enseignants distincts, [ClassroomRow]]
       def classroom_rows(rows)
         ids = rows.map(&:first)
         students = present_counts(ids)
         assignments = Orm::ClassroomAssignment.where(classroom_id: ids).group(:classroom_id).count
         totals = totals_by("classroom_students.classroom_id", ids)
-        [ students.fetch(nil, 0), rows.map { |row| classroom_row(row, students.fetch(row.first, 0), assignments.fetch(row.first, 0), totals) } ]
+        teachers = teacher_counts(ids)
+        [ students.fetch(nil, 0), teachers.fetch(nil, 0),
+          rows.map { |row| classroom_row(row, students.fetch(row.first, 0), assignments.fetch(row.first, 0), totals, teachers) } ]
+      end
+
+      # Les classes archivées affichées : leur seul effectif et leurs enseignants, pour la confirmation de restauration et la carte
+      # grisée ; ni devoirs ni taux (la classe archivée n'a pas de page, UDR-0083). Deux requêtes, quel que soit leur nombre.
+      def archived_rows(rows)
+        return [] if rows.empty?
+
+        ids = rows.map(&:first)
+        students = present_counts(ids)
+        teachers = teacher_counts(ids)
+        rows.map { |row| classroom_row(row, students.fetch(row.first, 0), 0, {}, teachers, archived_at: row.last) }
+      end
+
+      # { classroom_id => enseignants, nil => enseignants distincts de toutes ces classes } : même lecture que present_counts.
+      def teacher_counts(ids)
+        Orm::TeacherClassroom.where(classroom_id: ids).group(Arel.sql("GROUPING SETS ((classroom_id), ())"))
+                             .pluck(Arel.sql("classroom_id"), Arel.sql("COUNT(DISTINCT teacher_id)")).to_h
       end
 
       # { classroom_id => élèves présents, nil => élèves présents distincts de toutes ces classes } en une lecture : la ligne
@@ -132,13 +168,14 @@ module Queries
 
       def sum(totals) = Totals.new(**Totals.members.to_h { |member| [ member, totals.sum(&member) ] })
 
-      def classroom_row(row, students_count, assignments_count, totals)
+      def classroom_row(row, students_count, assignments_count, totals, teachers, archived_at: nil)
         id, public_id, name, level_name, level_slug = row
         total = totals.fetch(id, Totals.none)
         given = students_count * assignments_count
         ClassroomRow.new(public_id:, name:, level_name:, level_slug:, students_count:, assignments_count:, submitted_count: total.submitted,
                          submission_rate: ((total.submitted * 100.0 / given).round unless given.zero?),
-                         average_percent: (total.average if total.students >= MIN_STUDENTS_FOR_AVERAGE))
+                         average_percent: (total.average if total.students >= MIN_STUDENTS_FOR_AVERAGE),
+                         teachers_count: teachers.fetch(id, 0), archived_at:)
       end
 
       # ADR-0085 §4.4 : « nouveau » pendant ClassroomOverviewQuery::NEW_FOR, la règle de la page de l'enseignant.

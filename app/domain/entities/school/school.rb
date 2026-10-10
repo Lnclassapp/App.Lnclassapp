@@ -11,7 +11,6 @@ module Entities
       STATUSES = %w[draft active inactive].freeze
       NAME_MAX = 150
       SIGLE_MAX = 20 # plan.md et db/schema.rb : string(20)
-      COLLEGE_WORD = "college".freeze
 
       attr_accessor :id, :public_id, :drena_id, :school_type, :cycle, :school_code, :national_code
       attr_writer :status
@@ -23,11 +22,6 @@ module Entities
       validates :school_type, inclusion: { in: SCHOOL_TYPES }
       validates :cycle, inclusion: { in: CYCLES }
       validates :status, inclusion: { in: STATUSES }
-
-      # « first » si le nom contient le mot collège, accents et casse ignorés (« Collége », « COLLEGE »).
-      def self.cycle_for(name:)
-        name.to_s.parameterize.split("-").include?(COLLEGE_WORD) ? "first" : "both"
-      end
 
       def status = @status || "active"
 

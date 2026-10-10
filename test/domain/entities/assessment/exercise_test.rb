@@ -44,6 +44,13 @@ module Entities
         assert build.questions_locked?(has_attempts: true)
         assert_not build.questions_locked?(has_attempts: false)
       end
+
+      test "ADR-0089 : image_errors numérote les questions dont l'image manque" do
+        missing = question(true, false).with(image_description: "Une pile")
+
+        assert_equal({ 2 => [ :image_missing ] }, build(questions: [ question(true, false), missing ]).image_errors)
+        assert_empty build.image_errors
+      end
     end
   end
 end

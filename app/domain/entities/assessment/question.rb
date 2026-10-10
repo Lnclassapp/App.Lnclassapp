@@ -1,10 +1,14 @@
 # 🧠 DOMAINE · Entities::Assessment::Question
 # Rôle : vérifie la forme d'une réponse, la corrige par identifiants et contrôle la structure d'une question
-# ADR  : 0039, 0054
+# ADR  : 0039, 0054, 0089
 module Entities
   module Assessment
-    # answers : [Answer]
-    Question = Data.define(:id, :position, :content, :explanation, :question_type, :answers) do
+    # answers : [Answer] ; image_description : l'image annoncée par l'import (ADR-0089 §4.6) ; image : Shared::ContentImage | nil.
+    Question = Data.define(:id, :position, :content, :explanation, :question_type, :answers, :image_description, :image) do
+      def initialize(id:, position:, content:, explanation:, question_type:, answers:, image_description: nil, image: nil)
+        super
+      end
+
       # Règles de l'ADR-0039 et du PRD (AS-03) → [Symbol], vide si la question est bien construite.
       # Hors Vrai/Faux, au moins une proposition incorrecte s'ajoute aux correctes : N correctes → N + 1 propositions.
       # answers : objets qui répondent à correct (Answer, ou proposition importée).
@@ -33,6 +37,14 @@ module Entities
       def correct?(selected_ids) = selected_ids.sort == correct_answer_ids.sort
 
       def structure_errors = Question.structure_errors_for(question_type:, answers:)
+
+      # Ce qui manque pour publier, sans gêner l'enregistrement d'un brouillon (ADR-0089 §4.4) → [Symbol].
+      def image_errors
+        return [ :image_alt_blank ] if image && !image.alt?
+        return [ :image_missing ] if image.nil? && !image_description.to_s.strip.empty?
+
+        []
+      end
 
       # Copie montrable avant une tentative : aucune proposition ne dit si elle est correcte.
       def without_correction = with(answers: answers.map { |answer| answer.with(correct: nil) })

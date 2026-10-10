@@ -42,6 +42,10 @@ class SchoolAdminRoutesTest < ActionDispatch::IntegrationTest
              [ "POST", "/school-admin/teachers/:public_id/reinstatement(.:format)" ],
              [ "POST", "/school-admin/school/level-classrooms(.:format)" ],
              [ "DELETE", "/school-admin/school/level-classrooms/:public_id(.:format)" ],
+             # ADR-0088 : archiver et restaurer une classe, archiver un niveau.
+             [ "PATCH", "/school-admin/school/classroom-archivals/:public_id/archive(.:format)" ],
+             [ "PATCH", "/school-admin/school/classroom-archivals/:public_id/restore(.:format)" ],
+             [ "POST", "/school-admin/school/level-archivals(.:format)" ],
              # ADR-0077 : retirer une autre direction.
              [ "DELETE", "/school-admin/school/staff/:public_id(.:format)" ] ].freeze
 

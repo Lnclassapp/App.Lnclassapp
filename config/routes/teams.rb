@@ -31,6 +31,14 @@ scope "teams", module: "teams" do
     resources :join_requests, only: :update, path: "join-requests", param: :public_id
     # ADR-0059 : « + » et « − » du bloc « Classes par niveau » de la fiche.
     resources :level_classrooms, only: %i[create destroy], path: "level-classrooms", param: :public_id
+    # ADR-0088 : archiver et restaurer une classe, archiver un niveau (menus ⋮ de l'UDR-0083).
+    resources :classroom_archivals, only: [], path: "classroom-archivals", param: :public_id do
+      member do
+        patch :archive
+        patch :restore
+      end
+    end
+    resources :level_archivals, only: :create, path: "level-archivals"
     # ADR-0065 : inviter la direction depuis la fiche (modale de l'UDR-0052).
     resources :staff_invitations, only: %i[new create], path: "staff-invitations"
     # ADR-0077 : retirer une direction, la restaurer avant sa suppression (public_id du compte).
@@ -54,6 +62,12 @@ scope "teams/blog", as: :teams do
   resources :articles, path: "", controller: "teams/articles", param: :public_id, only: %i[index new create edit update] do
     member { patch :publish; patch :archive }
   end
+end
+
+# ADR-0089 §4.7, UDR-0084 §3.0 : envoi d'une image de fiche (paramètre essential : slug, absent à la création) ou de question.
+scope "teams", as: :teams do
+  post "essential-images", to: "teams/essential_images#create", as: :essential_images
+  post "question-images", to: "teams/question_images#create", as: :question_images
 end
 
 namespace :teams do

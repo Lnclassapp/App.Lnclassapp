@@ -50,7 +50,7 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
 
     assert_equal Query::ClassroomRow.new(public_id: klass.public_id, name: "2nde C 1", level_name: "2nde", level_slug: "2nde",
                                          students_count: 4, assignments_count: 2, submitted_count: 3, submission_rate: 38,
-                                         average_percent: nil), row
+                                         average_percent: nil, teachers_count: 0, archived_at: nil), row
   end
 
   test "the overview names the school and the school year, and keeps only the active classrooms of the year" do
@@ -288,8 +288,8 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
 
     level = Query.new.level(school_id: @school.id, slug: "2nde")
 
-    assert_equal Query::LevelOverview.new(level_name: "2nde", level_slug: "2nde", students_count: 4,
-                                          classrooms: [ row_of(second), row_of(klass) ]), level
+    assert_equal Query::LevelOverview.new(level_name: "2nde", level_slug: "2nde", students_count: 4, teachers_count: 0,
+                                          older_archives_count: 0, classrooms: [ row_of(second), row_of(klass) ]), level
   end
 
   # Constat du challenger (phase 5, O1) : la page d'un niveau annonçait 23 élèves quand l'accueil en comptait 22. Un élève
@@ -309,27 +309,108 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     assert_equal 2, level.students_count
   end
 
-  test "AD-10: another school's, archived or past classrooms of the level never show" do
+  test "AD-10: another school's or past classrooms of the level never show" do
     kept = classroom
-    classroom(name: "2nde C 2", status: "archived")
     classroom(name: "2nde C 3", school_year: "2020-2021")
     classroom(name: "2nde C 4", school: create_school(name: "Lycée Classique d'Abidjan"))
 
     assert_equal [ kept.public_id ], Query.new.level(school_id: @school.id, slug: "2nde").classrooms.map(&:public_id)
   end
 
-  test "AD-11: an unknown level, or a level without an active classroom of the school this year, has no page" do
+  test "AD-11: an unknown level, or a level without any classroom of the school this year, has no page" do
     classroom(name: "Tle D 1", level: @terminale, school: create_school(name: "Lycée Classique d'Abidjan"))
-    classroom(name: "Tle D 2", level: @terminale, status: "archived")
+    classroom(name: "Tle D 2", level: @terminale, school_year: "2020-2021")
 
     assert_nil Query.new.level(school_id: @school.id, slug: "7eme")
     assert_nil Query.new.level(school_id: @school.id, slug: "tle")
     assert_nil Query.new.level(school_id: @school.id, slug: nil)
   end
 
+  # ADR-0088, UDR-0083: an archived classroom stays on the page of its level for 7 days after archived_at, at the end,
+  # and never counts in the figures of the level; beyond 7 days it only shows with `archives: true`.
+  def archived_level
+    @active = classroom(name: "2nde C 1")
+    create_student(classroom: @active)
+    @recent = classroom(name: "2nde A 9", status: "archived", archived_at: 3.days.ago)
+    @old = classroom(name: "2nde A 8", status: "archived", archived_at: 8.days.ago)
+    [ @recent, @old ].each { create_student(classroom: it) }
+  end
+
+  test "ADR-0088: a recently archived classroom shows after the active ones, flagged, with its own headcount" do
+    archived_level
+
+    level = Query.new.level(school_id: @school.id, slug: "2nde")
+
+    assert_equal [ @active.public_id, @recent.public_id ], level.classrooms.map(&:public_id)
+    assert_equal [ false, true ], level.classrooms.map { it.archived_at.present? }
+    assert_equal [ 1, 1 ], level.classrooms.map(&:students_count)
+    assert_equal 1, level.older_archives_count
+  end
+
+  test "ADR-0088: the figures of the level and the home page do not count the archived classrooms" do
+    archived_level
+
+    level = Query.new.level(school_id: @school.id, slug: "2nde", archives: true)
+
+    assert_equal 1, level.students_count
+    assert_equal 0, level.teachers_count
+    assert_equal [ @active.public_id ], overview.classrooms.map(&:public_id)
+    assert_equal 1, overview.students_count
+  end
+
+  test "ADR-0088: the archives older than 7 days only show on request" do
+    archived_level
+
+    level = Query.new.level(school_id: @school.id, slug: "2nde", archives: true)
+
+    assert_equal [ @active.public_id, @old.public_id, @recent.public_id ], level.classrooms.map(&:public_id)
+    assert_equal 1, level.older_archives_count
+  end
+
+  test "ADR-0088: the window is 7 days after archived_at, counted from now" do
+    archived_level
+
+    level = Query.new.level(school_id: @school.id, slug: "2nde", now: 5.days.from_now)
+
+    assert_equal [ @active.public_id ], level.classrooms.map(&:public_id)
+    assert_equal 2, level.older_archives_count
+  end
+
+  test "ADR-0088: a level whose classrooms are all archived still has its page" do
+    old = classroom(status: "archived", archived_at: 9.days.ago)
+
+    level = Query.new.level(school_id: @school.id, slug: "2nde")
+
+    assert_empty level.classrooms
+    assert_equal [ 0, 0, 1 ], [ level.students_count, level.teachers_count, level.older_archives_count ]
+    assert_equal [ old.public_id ], Query.new.level(school_id: @school.id, slug: "2nde", archives: true).classrooms.map(&:public_id)
+  end
+
+  test "ADR-0088: teachers are counted per classroom and once in the level, archived classrooms apart" do
+    first, second = classroom, classroom(name: "2nde C 2")
+    gone = classroom(name: "2nde C 3", status: "archived", archived_at: 1.day.ago)
+    create_teacher(school: @school, classrooms: [ first, second, gone ])
+    create_teacher(school: @school, classrooms: [ second ])
+
+    level = Query.new.level(school_id: @school.id, slug: "2nde")
+
+    assert_equal [ 1, 2, 1 ], level.classrooms.map(&:teachers_count)
+    assert_equal 2, level.teachers_count
+  end
+
+  test "ADR-0088: reading a level writes nothing" do
+    archived_level
+    before = Orm::Classroom.order(:id).pluck(:id, :status, :archived_at, :updated_at)
+
+    Query.new.level(school_id: @school.id, slug: "2nde", archives: true)
+
+    assert_equal before, Orm::Classroom.order(:id).pluck(:id, :status, :archived_at, :updated_at)
+  end
+
   test "the number of queries does not follow the volume" do
     build = lambda do |count|
       count.times do |index|
+        create_student(classroom: classroom(name: "A#{factory_sequence}", status: "archived", archived_at: 1.day.ago))
         klass = classroom(name: "C#{factory_sequence}", level: index.even? ? @seconde : @terminale)
         given = assignment(klass)
         2.times { submit(create_student(classroom: klass), given, 50) }
@@ -337,12 +418,12 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
     end
     build.call(1)
     small = count_queries { overview }
-    small_detail = count_queries { detail(Orm::Classroom.first) }
+    small_detail = count_queries { detail(Orm::Classroom.where(status: "active").first) }
     small_level = count_queries { Query.new.level(school_id: @school.id, slug: "2nde") }
     build.call(3)
 
     assert_equal small, count_queries { overview }
-    assert_equal small_detail, count_queries { detail(Orm::Classroom.last) }
+    assert_equal small_detail, count_queries { detail(Orm::Classroom.where(status: "active").last) }
     assert_equal small_level, count_queries { Query.new.level(school_id: @school.id, slug: "2nde") }
   end
 
