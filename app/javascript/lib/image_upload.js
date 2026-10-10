@@ -1,8 +1,10 @@
-// ⚡ FRONT · lib/image_upload — prépare une image d'article dans le navigateur, puis l'envoie à l'endpoint de l'équipe
-// Rôle : chargé par import() seulement (éditeur du blog, couverture) : plus grand côté borné, WebP 0,82 (JPEG à défaut), sans métadonnées
-// ADR  : 0051, 0060, 0074 · UDR : 0067 (§3.4.3) · mêmes règles de réduction que identity/photo_picker_controller.js
+// ⚡ FRONT · lib/image_upload — prépare une image (article, fiche, question) dans le navigateur, puis l'envoie à l'endpoint de l'équipe
+// Rôle : chargé par import() seulement : plus grand côté borné, WebP 0,82 (JPEG à défaut), sans métadonnées ; fiche et question : qualité abaissée jusqu'au plafond
+// ADR  : 0051, 0060, 0074, 0089 · UDR : 0067 (§3.4.3), 0084 · mêmes règles de réduction que identity/photo_picker_controller.js
 
 const QUALITY = 0.82
+// squeeze (sheets and questions, 300 KB, ADR-0089 §4.1): the qualities tried in turn until the image fits.
+const SQUEEZED_QUALITIES = [QUALITY, 0.7, 0.55]
 // An upload that never answers (a stalled connection) is given up: the editor and « Enregistrer » are free again.
 export const UPLOAD_TIMEOUT = 60_000
 
@@ -24,11 +26,12 @@ export class Refusal extends Error {
 
 // Type announced by the browser, then the article's image count (the editor only), shrink, then weight (UDR-0067 §3.4.3).
 // An image the browser cannot decode, or that decodes into nothing, leaves as it is: the server decides (BL-12).
-export async function prepareImage(file, { accept, maxSide, maxBytes, full = false }) {
+export async function prepareImage(file, { accept, maxSide, maxBytes, full = false, squeeze = false }) {
   if (!accept.includes(file.type)) throw new Refusal("format")
   if (full) throw new Refusal("too_many")
 
-  const ready = await shrinkImage(file, { maxSide }).catch((error) => {
+  const qualities = squeeze ? SQUEEZED_QUALITIES : [QUALITY]
+  const ready = await shrinkImage(file, { maxSide, maxBytes, qualities }).catch((error) => {
     if (error instanceof EmptyImage) return file
     throw error
   })
@@ -36,7 +39,7 @@ export async function prepareImage(file, { accept, maxSide, maxBytes, full = fal
   return ready
 }
 
-export async function shrinkImage(file, { maxSide }) {
+export async function shrinkImage(file, { maxSide, maxBytes = Infinity, qualities = [QUALITY] }) {
   const url = URL.createObjectURL(file)
   try {
     const image = new Image()
@@ -44,7 +47,13 @@ export async function shrinkImage(file, { maxSide }) {
     const decoded = await image.decode().then(() => true, () => false)
     if (!decoded) return file
     if (!image.naturalWidth || !image.naturalHeight) throw new EmptyImage()
-    return await encode(draw(image, maxSide), file.name)
+    const canvas = draw(image, maxSide)
+    let encoded
+    for (const quality of qualities) {
+      encoded = await encode(canvas, file.name, quality)
+      if (encoded.size <= maxBytes) break
+    }
+    return encoded
   } finally {
     URL.revokeObjectURL(url)
   }
@@ -52,7 +61,8 @@ export async function shrinkImage(file, { maxSide }) {
 
 // XMLHttpRequest: the only way to follow the progress of an upload. 201 { public_id, sgid, url, width, height }.
 // A network error, no answer within timeout (ms) or an aborted request is a failure.
-export function uploadImage(file, { url, onProgress = () => {}, timeout = UPLOAD_TIMEOUT }) {
+// field: the form name of the file, « article_image[file] » for the blog, « essential_image[file] » or « question_image[file] ».
+export function uploadImage(file, { url, field = "article_image[file]", onProgress = () => {}, timeout = UPLOAD_TIMEOUT }) {
   return new Promise((resolve, reject) => {
     const request = new XMLHttpRequest()
     request.open("POST", url)
@@ -71,7 +81,7 @@ export function uploadImage(file, { url, onProgress = () => {}, timeout = UPLOAD
     })
     for (const type of ["error", "timeout", "abort"]) request.addEventListener(type, () => reject(new Refusal("failed")))
     const data = new FormData()
-    data.append("article_image[file]", file)
+    data.append(field, file)
     request.send(data)
   })
 }
@@ -102,17 +112,17 @@ function visible(context, width, height) {
 }
 
 // WebP first; a browser that cannot write it returns a PNG: JPEG then.
-async function encode(canvas, name) {
+async function encode(canvas, name, quality = QUALITY) {
   const base = name.replace(/\.[^.]*$/, "") || "image"
-  const webp = await toBlob(canvas, "image/webp")
+  const webp = await toBlob(canvas, "image/webp", quality)
   if (webp.type === "image/webp") return new File([webp], `${base}.webp`, { type: webp.type })
 
-  const jpeg = await toBlob(canvas, "image/jpeg")
+  const jpeg = await toBlob(canvas, "image/jpeg", quality)
   return new File([jpeg], `${base}.jpg`, { type: "image/jpeg" })
 }
 
-function toBlob(canvas, type) {
+function toBlob(canvas, type, quality) {
   return new Promise((resolve, reject) => {
-    canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Refusal("failed"))), type, QUALITY)
+    canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Refusal("failed"))), type, quality)
   })
 }

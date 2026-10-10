@@ -36,3 +36,10 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | **PR** | |
 | **ADR produits** | |
 | **UDR produits** | |
+
+## 2026-10-10 — Lot 0
+
+- **Clés étrangères en RESTRICT, pas CASCADE** : l'ADR proposait `on_delete: :cascade` ; `SchemaConstraintsTest` impose RESTRICT hors d'une liste fermée (ADR-0036). Corrigé dans la migration et l'ADR. Conséquence pour le Lot C : une question qui part doit d'abord perdre son image.
+- **Adaptateurs et tâches de purge remontés au Lot 0** : `PortContractsTest` refuse un port sans adaptateur et `RecurringTasksTest` une tâche sans classe.
+- **Une seule migration** au lieu de trois.
+- **Environnement local** : 5 erreurs préexistantes, sans rapport avec le chantier (PostgreSQL 18 lève `RestrictViolation`, que Rails ne range pas en `InvalidForeignKey`). `npx` absent : `bin/rails test` sans chemin échoue au `css:build` ; les tests passent dossier par dossier.

@@ -22,9 +22,7 @@ Dispatch proposé : Lot 0 seul, puis A, B, C, D ensemble (4 worktrees).
 ## Lot 0 — Socle
 
 - **Couche**       : infrastructure + domaine (contrats) + fichiers partagés
-- **Fichiers**     : `db/migrate/<ts>_create_essential_images.rb`
-                     `db/migrate/<ts>_create_question_images.rb`
-                     `db/migrate/<ts>_add_image_description_to_questions.rb`
+- **Fichiers**     : `db/migrate/20261010090000_create_essential_and_question_images.rb` *(une migration : deux tables, une colonne)*
                      `db/schema.rb`
                      `app/domain/entities/shared/content_image.rb`
                      `app/domain/entities/catalog/image_slot.rb`
@@ -37,6 +35,12 @@ Dispatch proposé : Lot 0 seul, puis A, B, C, D ensemble (4 worktrees).
                      `app/domain/ports/catalog/content_tree_writer_port.rb` *(`QuestionNode` gagne `image_description`)*
                      `app/infrastructure/orm/essential_image.rb` · `app/infrastructure/orm/question_image.rb`
                      `app/infrastructure/orm/essential.rb` · `app/infrastructure/orm/question.rb` *(associations)*
+                     `app/infrastructure/repositories/catalog/essential_image_store.rb` *(remonté du Lot A : un port sans adaptateur casse `port_contracts_test`)*
+                     `app/infrastructure/repositories/assessment/question_image_store.rb` *(remonté du Lot C, même raison)*
+                     `app/jobs/catalog/purge_orphan_essential_images_job.rb` · `app/jobs/assessment/purge_orphan_question_images_job.rb` *(remontés : `recurring_tasks_test` exige leur classe)*
+                     `app/domain/entities/assessment/exercise.rb` *(`image_errors` par numéro de question)*
+                     `app/domain/dtos/communication/article_image_input.rb` *(plafonds lus sur la classe, comportement du blog inchangé)*
+                     `test/support/factories/catalog.rb` · `test/support/factories/assessment.rb` *(`create_essential_image`, `create_question_image`)*
                      `app/infrastructure/repositories/shared/rich_text_sanitizer.rb` *(`image_model:`)*
                      `app/javascript/lib/image_upload.js` *(`field:`, réencodage WebP)*
                      `config/routes/teams.rb` · `config/routes/catalog.rb` · `config/routes/assessment.rb`
@@ -45,6 +49,10 @@ Dispatch proposé : Lot 0 seul, puis A, B, C, D ensemble (4 worktrees).
                      `test/fixtures/essential_images.yml` · `test/fixtures/question_images.yml`
 - **Dépend de**    : —
 - **Test associé** : `test/domain/entities/catalog/image_slot_test.rb`
+                     `test/infrastructure/repositories/catalog/essential_image_store_test.rb` · `test/infrastructure/repositories/assessment/question_image_store_test.rb`
+                     `test/jobs/catalog/purge_orphan_essential_images_job_test.rb` · `test/jobs/assessment/purge_orphan_question_images_job_test.rb`
+                     `test/infrastructure/orm/essential_image_test.rb` · `test/infrastructure/orm/models_test.rb` (47 modèles)
+                     `test/infrastructure/repositories/catalog/content_tree_writer_characterization_test.rb` *(colonne vide ignorée)*
                      `test/domain/entities/shared/content_image_test.rb`
                      `test/domain/dtos/shared/content_image_input_test.rb`
                      `test/domain/entities/assessment/question_test.rb`
@@ -60,9 +68,7 @@ Dispatch proposé : Lot 0 seul, puis A, B, C, D ensemble (4 worktrees).
                      `app/domain/use_cases/catalog/read_essential_image.rb`
                      `app/domain/dtos/catalog/essential_input.rb` *(gagne `image_alts`)*
                      `app/domain/use_cases/catalog/update_essential.rb` · `app/domain/use_cases/catalog/create_essential.rb`
-                     `app/infrastructure/repositories/catalog/essential_image_store.rb`
                      `app/infrastructure/repositories/catalog/essential_repository.rb` *(rattache les images citées, alts, supprime les retirées)*
-                     `app/jobs/catalog/purge_orphan_essential_images_job.rb`
                      `app/controllers/teams/essential_images_controller.rb`
                      `app/controllers/catalog/essential_images_controller.rb`
                      `app/controllers/teams/essentials_controller.rb` *(paramètre `image_alts`)*
@@ -76,7 +82,6 @@ Dispatch proposé : Lot 0 seul, puis A, B, C, D ensemble (4 worktrees).
                      `test/domain/use_cases/catalog/read_essential_image_test.rb`
                      `test/controllers/catalog/essential_images_controller_test.rb` *(404 brouillon, 404 hors niveau, 401 sans connexion, `Cache-Control`, 404 après remplacement)*
                      `test/controllers/teams/essential_images_controller_test.rb` *(403 terrain, 422 400 Ko, 31ᵉ image)*
-                     `test/jobs/catalog/purge_orphan_essential_images_job_test.rb`
                      `test/system/catalog/essential_images_test.rb` *(insérer dans un emplacement, alt pré-rempli, élève voit l'image `loading=lazy`)*
 - **Done quand**   : dans l'application, l'équipe insère une image à la place d'un emplacement, le texte de remplacement est pré-rempli, et un élève du niveau voit l'image dans la fiche publiée ; un élève d'un autre niveau reçoit 404 sur son adresse
 
@@ -104,9 +109,7 @@ Dispatch proposé : Lot 0 seul, puis A, B, C, D ensemble (4 worktrees).
                      `app/domain/use_cases/assessment/read_question_image.rb`
                      `app/domain/use_cases/assessment/publish_exercise.rb` *(message `image_missing` numéroté)*
                      `app/domain/dtos/assessment/exercise_input.rb` *(question : `image_public_id`, `image_alt`, `image_description`)*
-                     `app/infrastructure/repositories/assessment/question_image_store.rb`
-                     `app/infrastructure/repositories/assessment/exercise_repository.rb`
-                     `app/jobs/assessment/purge_orphan_question_images_job.rb`
+                     `app/infrastructure/repositories/assessment/exercise_repository.rb` *(rattache l'image ; la détache et la supprime avant toute suppression de sa question : FK RESTRICT)*
                      `app/controllers/teams/question_images_controller.rb`
                      `app/controllers/assessment/question_images_controller.rb`
                      `app/controllers/teams/exercises_controller.rb`
@@ -118,7 +121,6 @@ Dispatch proposé : Lot 0 seul, puis A, B, C, D ensemble (4 worktrees).
 - **Test associé** : `test/domain/use_cases/assessment/upload_question_image_test.rb`
                      `test/domain/use_cases/assessment/publish_exercise_test.rb`
                      `test/controllers/assessment/question_images_controller_test.rb`
-                     `test/jobs/assessment/purge_orphan_question_images_job_test.rb`
                      `test/system/assessment/question_image_test.rb`
 - **Done quand**   : l'équipe ajoute une image à une question, publie l'exercice, et l'élève la voit au-dessus de l'énoncé en session ; un exercice dont une question attend son image refuse de se publier avec « La question N attend son image. »
 
@@ -173,7 +175,7 @@ Aucun fichier n'est listé par deux lots parallèles.
 - [x] ADR écrit si un port / une table / un contrat apparaît, (index généré par `script/docs/build_index` à la clôture)
 - [x] UDR écrite pour **chaque** vue créée ou modifiée, (index généré à la clôture)
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
-- [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
+- [x] Lot 0 mergé et ports gelés avant tout lot parallèle
 - [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
 - [ ] En-tête HITL sur chaque fichier créé dans `app/`
 - [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur

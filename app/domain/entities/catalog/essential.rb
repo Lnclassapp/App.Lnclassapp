@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::Essential
 # Rôle : une fiche essentielle d'un cours ; lisible si elle et son cours sont publiés
-# ADR  : 0035, 0037
+# ADR  : 0035, 0037, 0089
 module Entities
   module Catalog
     class Essential
@@ -12,6 +12,8 @@ module Entities
       attr_accessor :id, :slug, :course_id, :position, :author_id, :status, :published_at, :archived_at,
                     :content, :course_status
       attr_reader :name, :subtitle
+      # images : [Shared::ContentImage], celles que cite le texte, dans son ordre, chacune avec son alt (ADR-0089).
+      attr_writer :images
 
       validates :name, presence: true, length: { maximum: NAME_MAX }
       validates :subtitle, length: { maximum: SUBTITLE_MAX }
@@ -24,6 +26,19 @@ module Entities
 
       def subtitle=(value)
         @subtitle = value&.squish.presence
+      end
+
+      def images = @images || []
+      # Les emplacements annoncés par l'import et pas encore remplacés par une image (ADR-0089 §4.3).
+      def image_slots = ImageSlot.scan(content)
+
+      # Ce qui empêche de publier : emplacements restants et images sans texte de remplacement → { Symbol => valeur }.
+      def image_publish_errors
+        errors = {}
+        errors[:image_slots_left] = image_slots.size if image_slots.any?
+        missing = images.reject(&:alt?).map(&:public_id)
+        errors[:image_alts_blank] = missing if missing.any?
+        errors
       end
 
       def published? = status == "published"

@@ -60,14 +60,14 @@ Contraintes de départ, tirées du grill (memo) :
 | `essential_images` | Contrainte |
 |---|---|
 | `public_id` | `string(14) NOT NULL`, unique ; une ligne ne change jamais de fichier |
-| `essential_id` | `bigint NULL`, FK `essentials` `on_delete: :cascade` ; `NULL` tant que la fiche n'est pas enregistrée |
+| `essential_id` | `bigint NULL`, FK `essentials` `on_delete: :restrict` (ADR-0036 : rien ne part par une clé étrangère) ; `NULL` tant que la fiche n'est pas enregistrée |
 | `alt` | `string(150) NULL` ; exigé à la publication |
 | `content_type`, `byte_size`, `width`, `height` | `CHECK IN ('image/jpeg','image/png','image/webp')`, `byte_size BETWEEN 1 AND 307200`, côtés `BETWEEN 1 AND 1200` |
 
 | `question_images` | Contrainte |
 |---|---|
 | `public_id` | `string(14) NOT NULL`, unique |
-| `question_id` | `bigint NULL`, FK `questions` `on_delete: :cascade`, **index unique partiel** `WHERE question_id IS NOT NULL` : une image par question |
+| `question_id` | `bigint NULL`, FK `questions` `on_delete: :restrict`, **index unique partiel** `WHERE question_id IS NOT NULL` : une image par question |
 | `alt`, `content_type`, `byte_size`, `width`, `height` | comme `essential_images` |
 
 `questions.image_description` : `string(150) NULL`. Le fichier est `has_one_attached :file`, créé `analyzed: true` (pas de libvips, ADR-0060).
