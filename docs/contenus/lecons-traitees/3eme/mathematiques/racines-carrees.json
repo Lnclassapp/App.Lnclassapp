@@ -1,0 +1,880 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Racines carrées",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "Mathématiques",
+      "essentials": [
+        {
+          "name": "La racine carrée d'un nombre positif",
+          "subtitle": "Retrouver le côté d'un carré à partir de son aire",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Calculer la racine carrée d'un carré parfait.</li><li>Dire si $\\sqrt{a}$ existe ou non.</li><li>Utiliser $(\\sqrt{a})^2 = a$ et $\\sqrt{a^2} = a$ pour $a \\ge 0$.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le terrain carré.</strong> Sur un chantier, le maçon doit tracer un terrain carré de $49$ m² pour une petite maison. Il connaît l'aire, mais pas la longueur du côté. Il cherche donc le nombre qui, multiplié par lui-même, donne $49$. C'est $7$, car $7 \\times 7 = 49$. Dans l'autre sens, un côté de $7$ m donne une aire de $49$ m² : on a mis $7$ au carré.</p><p><em>Le pont.</em> L'aire du terrain, c'est le nombre $a$. La longueur du côté, c'est la <strong>racine carrée</strong> de $a$, notée $\\sqrt{a}$ (on lit « racine carrée de $a$ »). Mettre au carré et prendre la racine carrée sont deux chemins inverses : $\\sqrt{49} = 7$.</p><p><em>Où l'image s'arrête.</em> Une longueur n'est jamais négative, et une aire non plus. C'est pourquoi $\\sqrt{a}$ n'existe que pour $a \\ge 0$ et n'est jamais négative. De plus, un terrain de $50$ m² a bien un côté, mais ce n'est pas un nombre « rond ».</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Carré.</strong> Le carré d'un nombre $a$ est $a^2 = a \\times a$. Un <strong>carré parfait</strong> est le carré d'un nombre entier. À connaître : $0, 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225$.</p><p><strong>Définition.</strong> Pour $a \\ge 0$, la racine carrée de $a$ est le seul nombre positif ou nul dont le carré est $a$. On la note $\\sqrt{a}$.</p><p><strong>Propriétés.</strong> Pour $a \\ge 0$ : $\\sqrt{a} \\ge 0$ ; $(\\sqrt{a})^2 = a$ ; $\\sqrt{a^2} = a$. En particulier $\\sqrt{0} = 0$ et $\\sqrt{1} = 1$.</p><p><strong>Nombre négatif.</strong> Si $a < 0$, $\\sqrt{a}$ n'existe pas, car aucun carré n'est négatif.</p></blockquote><h2>Exemple résolu</h2><p><strong>Calculer $\\sqrt{81}$, $(\\sqrt{7})^2$ et $\\sqrt{(-4)^2}$.</strong></p><ol><li>$\\sqrt{81}$ : on cherche le nombre positif dont le carré est $81$. Comme $9^2 = 81$, $\\sqrt{81} = 9$.</li><li>$(\\sqrt{7})^2$ : le carré d'une racine carrée redonne le nombre. Donc $(\\sqrt{7})^2 = 7$.</li><li>$\\sqrt{(-4)^2}$ : on calcule d'abord $(-4)^2 = 16$. Puis $\\sqrt{16} = 4$. Le résultat n'est pas $-4$, car une racine carrée n'est jamais négative.</li></ol><p><strong>Le nombre $\\sqrt{-16}$ existe-t-il ?</strong> Non, car un carré n'est jamais négatif.</p><h2>Le piège à éviter</h2><p>Écrire $\\sqrt{16} = 8$ (on prend la moitié au lieu de chercher le nombre qui, multiplié par lui-même, donne $16$). Ou écrire $\\sqrt{(-4)^2} = -4$. Ou dire que $\\sqrt{25}$ vaut « $5$ ou $-5$ » : la racine carrée est un seul nombre, et il est positif.</p><p>Comment le repérer : pose-toi la question « quel nombre positif, multiplié par lui-même, donne ce nombre ? », puis vérifie en refaisant la multiplication.</p><h2>En une phrase</h2><p>La racine carrée de $a$ est le côté positif du carré d'aire $a$ ; elle n'existe que si $a \\ge 0$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître une racine carrée",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Que représente $\\sqrt{36}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sqrt{36}$ est le nombre positif dont le carré est $36$ : c'est $6$, car $6 \\times 6 = 36$. L'erreur tentante est de prendre la moitié de $36$, ce qui donne $18$ : la racine carrée n'a rien à voir avec la moitié.",
+                  "answers": [
+                    { "content": "Le nombre positif dont le carré est $36$", "correct": true },
+                    { "content": "La moitié de $36$", "correct": false },
+                    { "content": "Le nombre qui, multiplié par $2$, donne $36$", "correct": false },
+                    { "content": "Le carré de $36$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du terrain carré, l'aire du terrain joue le rôle du nombre $a$ et la longueur de son côté joue le rôle de $\\sqrt{a}$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Un terrain de $49$ m² a un côté de $\\sqrt{49} = 7$ m. Retiens : l'aire, c'est $a$ ; le côté, c'est $\\sqrt{a}$. L'erreur serait d'inverser les deux rôles.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Parmi ces écritures, laquelle n'existe pas ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un terrain ne peut pas avoir une aire négative : $\\sqrt{-9}$ n'existe pas, car aucun nombre multiplié par lui-même ne donne $-9$. À l'inverse, $\\sqrt{0} = 0$ existe bien, tout comme $\\sqrt{9} = 3$.",
+                  "answers": [
+                    { "content": "$\\sqrt{-9}$", "correct": true },
+                    { "content": "$\\sqrt{0}$", "correct": false },
+                    { "content": "$\\sqrt{9}$", "correct": false },
+                    { "content": "$\\sqrt{\\dfrac{9}{4}}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\sqrt{25} = 5$ et $\\sqrt{64} = 8$ sont vraies. Mais $\\sqrt{16} = 4$, pas $8$ : $8$ est la moitié de $16$. Et $\\sqrt{49} = 7$, jamais $-7$ : une racine carrée n'est pas négative.",
+                  "answers": [
+                    { "content": "$\\sqrt{25} = 5$", "correct": true },
+                    { "content": "$\\sqrt{64} = 8$", "correct": true },
+                    { "content": "$\\sqrt{16} = 8$", "correct": false },
+                    { "content": "$\\sqrt{49} = -7$", "correct": false },
+                    { "content": "$\\sqrt{100} = 50$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On a $7^2 = 49$ et $(-7)^2 = 49$. Donc $\\sqrt{49}$ peut être égal à $-7$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Deux nombres ont pour carré $49$, mais la racine carrée est par définition le nombre positif : $\\sqrt{49} = 7$. Dans l'image, un côté de terrain est une longueur, donc il n'est jamais négatif.",
+                  "answers": [
+                    { "content": "Vrai", "correct": false },
+                    { "content": "Faux", "correct": true }
+                  ]
+                },
+                {
+                  "content": "Un terrain carré a une aire de $144$ m². Quelle est la longueur de son côté ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le côté est la racine carrée de l'aire : $\\sqrt{144} = 12$, car $12 \\times 12 = 144$. Diviser $144$ par $2$ donne $72$ et par $4$ donne $36$ : ce sont des erreurs classiques, qui ne multiplient rien par lui-même.",
+                  "answers": [
+                    { "content": "$12$ m", "correct": true },
+                    { "content": "$72$ m", "correct": false },
+                    { "content": "$36$ m", "correct": false },
+                    { "content": "$14$ m", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer avec des carrés parfaits",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Que vaut $\\sqrt{121}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$11 \\times 11 = 121$, donc $\\sqrt{121} = 11$. On ne divise pas $121$ par $2$ : cela donne $60{,}5$, qui n'a pas pour carré $121$.",
+                  "answers": [
+                    { "content": "$11$", "correct": true },
+                    { "content": "$12$", "correct": false },
+                    { "content": "$60{,}5$", "correct": false },
+                    { "content": "$21$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Que vaut $(\\sqrt{13})^2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Mettre au carré une racine carrée redonne le nombre : $(\\sqrt{13})^2 = 13$. Ne confonds pas avec $13^2 = 169$ : ici, c'est $\\sqrt{13}$ qui est élevé au carré, pas $13$.",
+                  "answers": [
+                    { "content": "$13$", "correct": true },
+                    { "content": "$\\sqrt{13}$", "correct": false },
+                    { "content": "$26$", "correct": false },
+                    { "content": "$169$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\sqrt{(-6)^2}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On calcule d'abord $(-6)^2 = 36$, puis $\\sqrt{36} = 6$. Le résultat est positif. Écrire $-6$ est tentant car on voit un $-6$, mais une racine carrée n'est jamais négative.",
+                  "answers": [
+                    { "content": "$6$", "correct": true },
+                    { "content": "$-6$", "correct": false },
+                    { "content": "$36$", "correct": false },
+                    { "content": "Cette écriture n'existe pas", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelles écritures ont un sens (existent) ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\sqrt{0}$ existe et vaut $0$. $\\sqrt{8 - 3} = \\sqrt{5}$ existe. En revanche $\\sqrt{3 - 8} = \\sqrt{-5}$, $\\sqrt{-0{,}5}$ et $\\sqrt{-25}$ sont des racines de nombres négatifs : elles n'existent pas.",
+                  "answers": [
+                    { "content": "$\\sqrt{0}$", "correct": true },
+                    { "content": "$\\sqrt{8 - 3}$", "correct": true },
+                    { "content": "$\\sqrt{3 - 8}$", "correct": false },
+                    { "content": "$\\sqrt{-0{,}5}$", "correct": false },
+                    { "content": "$\\sqrt{-25}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\sqrt{16} + \\sqrt{9}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On calcule chaque racine : $\\sqrt{16} = 4$ et $\\sqrt{9} = 3$, donc la somme vaut $7$. L'erreur tentante est d'additionner d'abord sous la racine : $\\sqrt{25} = 5$. Une racine ne se coupe pas sur une addition.",
+                  "answers": [
+                    { "content": "$7$", "correct": true },
+                    { "content": "$5$", "correct": false },
+                    { "content": "$25$", "correct": false },
+                    { "content": "$17$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Calculer $3 \\times \\sqrt{25} - \\sqrt{4}$.",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sqrt{25} = 5$ et $\\sqrt{4} = 2$, donc $3 \\times 5 - 2 = 13$. On trouve $11$ si on oublie la racine de $4$ ($15 - 4$), et $71$ si on oublie celle de $25$ ($75 - 4$).",
+                  "answers": [
+                    { "content": "$13$", "correct": true },
+                    { "content": "$11$", "correct": false },
+                    { "content": "$71$", "correct": false },
+                    { "content": "$3$", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Racines carrées et situations de chantier",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un terrain carré a une aire de $225$ m². On veut poser une clôture tout autour. Quelle longueur de clôture faut-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le côté mesure $\\sqrt{225} = 15$ m. La clôture fait le tour des quatre côtés : $4 \\times 15 = 60$ m. Donner $15$ m, c'est s'arrêter au côté ; $30$ m, c'est ne compter que deux côtés.",
+                  "answers": [
+                    { "content": "$60$ m", "correct": true },
+                    { "content": "$15$ m", "correct": false },
+                    { "content": "$30$ m", "correct": false },
+                    { "content": "$900$ m", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Calculer $\\sqrt{(-9)^2} + (\\sqrt{5})^2$.",
+                  "question_type": "single_choice",
+                  "explanation": "$(-9)^2 = 81$ et $\\sqrt{81} = 9$ ; $(\\sqrt{5})^2 = 5$. La somme vaut $9 + 5 = 14$. On trouve $-4$ si on écrit $\\sqrt{(-9)^2} = -9$, ce qui est faux : une racine carrée est positive.",
+                  "answers": [
+                    { "content": "$14$", "correct": true },
+                    { "content": "$-4$", "correct": false },
+                    { "content": "$86$", "correct": false },
+                    { "content": "Cette écriture n'existe pas", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$\\sqrt{49} + \\sqrt{36} = 7 + 6 = 13$ ; $(\\sqrt{11})^2 = 11$ ; $\\sqrt{(-8)^2} = \\sqrt{64} = 8$. Les autres sont fausses : $\\sqrt{100} = 10$, $\\sqrt{4} \\times \\sqrt{9} = 2 \\times 3 = 6$, et $\\sqrt{-16}$ n'existe pas.",
+                  "answers": [
+                    { "content": "$\\sqrt{49} + \\sqrt{36} = 13$", "correct": true },
+                    { "content": "$(\\sqrt{11})^2 = 11$", "correct": true },
+                    { "content": "$\\sqrt{(-8)^2} = 8$", "correct": true },
+                    { "content": "$\\sqrt{100} = 50$", "correct": false },
+                    { "content": "$\\sqrt{4} \\times \\sqrt{9} = 36$", "correct": false },
+                    { "content": "$\\sqrt{-16} = -4$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Pour tout nombre $a$, on a $\\sqrt{a^2} = a$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Cette égalité est vraie seulement si $a \\ge 0$. Avec $a = -3$ : $\\sqrt{(-3)^2} = \\sqrt{9} = 3$, et non $-3$. Un seul contre-exemple suffit à montrer qu'une règle est fausse.",
+                  "answers": [
+                    { "content": "Vrai", "correct": false },
+                    { "content": "Faux", "correct": true }
+                  ]
+                },
+                {
+                  "content": "Un nombre $x$ vérifie $\\sqrt{x} = 7$. Que vaut $x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sqrt{x} = 7$ veut dire que $7$ est le nombre positif dont le carré est $x$. Donc $x = 7^2 = 49$. Doubler $7$ pour obtenir $14$ est l'erreur classique : on confond racine carrée et moitié.",
+                  "answers": [
+                    { "content": "$49$", "correct": true },
+                    { "content": "$14$", "correct": false },
+                    { "content": "$3{,}5$", "correct": false },
+                    { "content": "$\\sqrt{7}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un terrain carré a un côté de $\\sqrt{64}$ m. Quelle est son aire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le côté vaut $\\sqrt{64} = 8$ m. L'aire est donc $8^2 = 64$ m². C'est aussi $(\\sqrt{64})^2 = 64$. On trouve $8$ en oubliant de mettre au carré, et $32$ en multipliant par $4$ comme pour un périmètre.",
+                  "answers": [
+                    { "content": "$64$ m²", "correct": true },
+                    { "content": "$8$ m²", "correct": false },
+                    { "content": "$32$ m²", "correct": false },
+                    { "content": "$4\\,096$ m²", "correct": false }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Racine carrée d'un produit et d'un quotient",
+          "subtitle": "Deux règles qui marchent, une erreur à éviter sur la somme",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Appliquer $\\sqrt{a \\times b} = \\sqrt{a} \\times \\sqrt{b}$ et $\\sqrt{\\dfrac{a}{b}} = \\dfrac{\\sqrt{a}}{\\sqrt{b}}$.</li><li>Calculer des racines de produits et de quotients de carrés parfaits.</li><li>Reconnaître que $\\sqrt{a + b}$ n'est pas égal à $\\sqrt{a} + \\sqrt{b}$.</li></ul><h2>L'image pour comprendre</h2><p><strong>1. L'agrandissement du plan (le produit).</strong> Sur le plan du chantier, une dalle carrée a une aire de $4$ m², donc un côté de $2$ m. Le client veut une dalle carrée dont l'aire est $9$ fois plus grande : $4 \\times 9 = 36$ m². Son côté mesure $6$ m, c'est-à-dire $2 \\times 3$. Le côté a été multiplié par $3$, qui est la racine carrée de $9$.</p><p><em>Le pont.</em> Les aires $4$ et $9$ sont $a$ et $b$. L'aire finale est $a \\times b = 36$. Son côté est $\\sqrt{a \\times b} = 6$, et c'est aussi $\\sqrt{a} \\times \\sqrt{b} = 2 \\times 3$.</p><p><em>Où l'image s'arrête.</em> Les aires sont positives. La règle n'a de sens que pour des nombres positifs ou nuls.</p><p><strong>2. Le terrain réduit (le quotient).</strong> Un terrain carré de $100$ m² a un côté de $10$ m. On le remplace par un terrain carré dont l'aire est $4$ fois plus petite : $100 \\div 4 = 25$ m². Son côté mesure $5$ m, soit $10 \\div 2$.</p><p><em>Le pont.</em> $\\sqrt{\\dfrac{100}{4}} = \\sqrt{25} = 5$ et $\\dfrac{\\sqrt{100}}{\\sqrt{4}} = \\dfrac{10}{2} = 5$. Diviser l'aire par $b$ revient à diviser le côté par $\\sqrt{b}$.</p><p><em>Où l'image s'arrête.</em> On ne peut pas diviser par $0$ : il faut $b > 0$.</p><p><strong>3. Les deux dalles réunies (la somme).</strong> Tu as une dalle carrée de $9$ m² (côté $3$ m) et une dalle carrée de $16$ m² (côté $4$ m). Tu veux les remplacer par une seule dalle carrée de même aire totale : $9 + 16 = 25$ m². Son côté mesure $5$ m, et non $3 + 4 = 7$ m (une dalle de $7$ m de côté ferait $49$ m², beaucoup trop).</p><p><em>Le pont.</em> $\\sqrt{9 + 16} = 5$, alors que $\\sqrt{9} + \\sqrt{16} = 7$. Les deux résultats sont différents.</p><p><em>Où l'image s'arrête.</em> L'image montre un exemple où cela ne marche pas. Pour une somme ou une différence, il n'existe aucune règle qui coupe la racine.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Produit.</strong> Pour $a \\ge 0$ et $b \\ge 0$ : $\\sqrt{a \\times b} = \\sqrt{a} \\times \\sqrt{b}$.</p><p><strong>Quotient.</strong> Pour $a \\ge 0$ et $b > 0$ : $\\sqrt{\\dfrac{a}{b}} = \\dfrac{\\sqrt{a}}{\\sqrt{b}}$.</p><p><strong>Somme et différence.</strong> En général, $\\sqrt{a + b} \\neq \\sqrt{a} + \\sqrt{b}$ et $\\sqrt{a - b} \\neq \\sqrt{a} - \\sqrt{b}$. Contre-exemples : $\\sqrt{9 + 16} = 5$ mais $\\sqrt{9} + \\sqrt{16} = 7$ ; $\\sqrt{25 - 16} = 3$ mais $\\sqrt{25} - \\sqrt{16} = 1$.</p><p><strong>À quoi ça sert.</strong> Pour calculer la racine d'un grand nombre, on le décompose en un produit de carrés parfaits.</p></blockquote><h2>Exemple résolu</h2><p><strong>Calculer $\\sqrt{36 \\times 49}$, $\\sqrt{\\dfrac{81}{25}}$ et $\\sqrt{5} \\times \\sqrt{20}$.</strong></p><ol><li>$\\sqrt{36 \\times 49} = \\sqrt{36} \\times \\sqrt{49} = 6 \\times 7 = 42$. On a séparé le produit, puis calculé chaque racine.</li><li>$\\sqrt{\\dfrac{81}{25}} = \\dfrac{\\sqrt{81}}{\\sqrt{25}} = \\dfrac{9}{5}$. Ici le dénominateur $25$ est strictement positif.</li><li>$\\sqrt{5} \\times \\sqrt{20} = \\sqrt{5 \\times 20}$. On rassemble le produit sous une seule racine : $\\sqrt{100} = 10$.</li></ol><h2>Le piège à éviter</h2><p>Écrire $\\sqrt{a + b} = \\sqrt{a} + \\sqrt{b}$ (ou la même chose avec une différence). C'est faux : la règle de séparation ne marche que pour une multiplication et une division.</p><p>Comment le repérer : si tu as un doute, essaie avec $9$ et $16$. Tu trouveras $5$ d'un côté et $7$ de l'autre.</p><h2>En une phrase</h2><p>On peut séparer une racine carrée sur un produit ou un quotient, jamais sur une somme ni sur une différence.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Les règles du produit et du quotient",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Pour $a \\ge 0$ et $b \\ge 0$, laquelle de ces égalités est toujours vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "La racine d'un produit est le produit des racines : $\\sqrt{a \\times b} = \\sqrt{a} \\times \\sqrt{b}$. Les autres écritures mélangent produit et somme : avec $a = 4$ et $b = 9$, $\\sqrt{36} = 6$ alors que $\\sqrt{4} + \\sqrt{9} = 5$.",
+                  "answers": [
+                    { "content": "$\\sqrt{a \\times b} = \\sqrt{a} \\times \\sqrt{b}$", "correct": true },
+                    { "content": "$\\sqrt{a + b} = \\sqrt{a} + \\sqrt{b}$", "correct": false },
+                    { "content": "$\\sqrt{a \\times b} = \\sqrt{a} + \\sqrt{b}$", "correct": false },
+                    { "content": "$\\sqrt{a \\times b} = a \\times \\sqrt{b}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans l'image de l'agrandissement du plan, multiplier l'aire d'une dalle carrée par $9$ multiplie la longueur de son côté par $3$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Le côté est la racine carrée de l'aire, et $\\sqrt{9} = 3$. Une dalle de $4$ m² (côté $2$ m) devient une dalle de $36$ m² (côté $6$ m) : $6 = 2 \\times 3$. On ne multiplie pas le côté par $9$.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\sqrt{9 + 16}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On additionne d'abord sous la racine : $9 + 16 = 25$, puis $\\sqrt{25} = 5$. Le résultat $7$ vient de l'erreur $\\sqrt{9} + \\sqrt{16}$. Souviens-toi des deux dalles réunies : la dalle de $25$ m² a un côté de $5$ m, pas de $7$ m.",
+                  "answers": [
+                    { "content": "$5$", "correct": true },
+                    { "content": "$7$", "correct": false },
+                    { "content": "$25$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Pour $a \\ge 0$ et $b > 0$, on a $\\sqrt{\\dfrac{a}{b}} = \\dfrac{\\sqrt{a}}{\\sqrt{b}}$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. La racine d'un quotient est le quotient des racines. On exige $b > 0$ car on ne divise pas par $0$. Par exemple $\\sqrt{\\dfrac{100}{4}} = \\sqrt{25} = 5$ et $\\dfrac{\\sqrt{100}}{\\sqrt{4}} = \\dfrac{10}{2} = 5$.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Le produit et le quotient se séparent : $\\sqrt{36} = 6 = 2 \\times 3$ et $\\sqrt{9} = 3 = \\dfrac{6}{2}$. Mais $\\sqrt{13} \\neq 5$, $\\sqrt{16} = 4 \\neq 2$, et $\\sqrt{36} = 6 \\neq 5$ : une somme ou une différence ne se sépare pas.",
+                  "answers": [
+                    { "content": "$\\sqrt{4 \\times 9} = \\sqrt{4} \\times \\sqrt{9}$", "correct": true },
+                    { "content": "$\\sqrt{\\dfrac{36}{4}} = \\dfrac{\\sqrt{36}}{\\sqrt{4}}$", "correct": true },
+                    { "content": "$\\sqrt{4 + 9} = \\sqrt{4} + \\sqrt{9}$", "correct": false },
+                    { "content": "$\\sqrt{25 - 9} = \\sqrt{25} - \\sqrt{9}$", "correct": false },
+                    { "content": "$\\sqrt{4 \\times 9} = \\sqrt{4} + \\sqrt{9}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces comparaisons montre que l'égalité $\\sqrt{a + b} = \\sqrt{a} + \\sqrt{b}$ est fausse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un contre-exemple est un cas où l'égalité ne marche pas : avec $9$ et $16$, on a $5$ d'un côté et $7$ de l'autre. Le cas $0 + 0$ ne prouve rien (il marche), et le cas du produit confirme une règle vraie, pas une règle fausse.",
+                  "answers": [
+                    { "content": "$\\sqrt{9 + 16} = 5$ alors que $\\sqrt{9} + \\sqrt{16} = 7$", "correct": true },
+                    { "content": "$\\sqrt{9 \\times 16} = 12$ et $\\sqrt{9} \\times \\sqrt{16} = 12$", "correct": false },
+                    { "content": "$\\sqrt{0 + 0} = 0$ et $\\sqrt{0} + \\sqrt{0} = 0$", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer des racines de produits et de quotients",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Calculer $\\sqrt{4 \\times 25}$.",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sqrt{4 \\times 25} = \\sqrt{4} \\times \\sqrt{25} = 2 \\times 5 = 10$. Vérification : $4 \\times 25 = 100$ et $\\sqrt{100} = 10$. Le résultat $7$ vient de l'erreur qui additionne les racines.",
+                  "answers": [
+                    { "content": "$10$", "correct": true },
+                    { "content": "$7$", "correct": false },
+                    { "content": "$100$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Calculer $\\sqrt{\\dfrac{49}{16}}$.",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sqrt{\\dfrac{49}{16}} = \\dfrac{\\sqrt{49}}{\\sqrt{16}} = \\dfrac{7}{4}$. Il faut prendre la racine du numérateur et celle du dénominateur. Oublier une des deux racines donne $\\dfrac{49}{4}$ ou $\\dfrac{7}{16}$.",
+                  "answers": [
+                    { "content": "$\\dfrac{7}{4}$", "correct": true },
+                    { "content": "$\\dfrac{49}{4}$", "correct": false },
+                    { "content": "$\\dfrac{7}{16}$", "correct": false },
+                    { "content": "$\\dfrac{49}{16}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Calculer $\\sqrt{2} \\times \\sqrt{18}$.",
+                  "question_type": "single_choice",
+                  "explanation": "On regroupe sous une seule racine : $\\sqrt{2} \\times \\sqrt{18} = \\sqrt{36} = 6$. Le résultat $20$ vient de $2 + 18$ : on additionne alors que le signe est une multiplication.",
+                  "answers": [
+                    { "content": "$6$", "correct": true },
+                    { "content": "$20$", "correct": false },
+                    { "content": "$36$", "correct": false },
+                    { "content": "$\\sqrt{20}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Calculer $\\sqrt{36 \\times 49}$.",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sqrt{36 \\times 49} = \\sqrt{36} \\times \\sqrt{49} = 6 \\times 7 = 42$. On trouve $13$ en additionnant les racines, $85$ en additionnant sous la racine, et $1\\,764$ en oubliant de prendre la racine.",
+                  "answers": [
+                    { "content": "$42$", "correct": true },
+                    { "content": "$13$", "correct": false },
+                    { "content": "$85$", "correct": false },
+                    { "content": "$1\\,764$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Calculer $\\sqrt{\\dfrac{50}{2}}$.",
+                  "question_type": "single_choice",
+                  "explanation": "On simplifie d'abord : $\\dfrac{50}{2} = 25$, puis $\\sqrt{25} = 5$. Répondre $25$ revient à oublier la racine. Répondre $\\sqrt{48}$ revient à soustraire au lieu de diviser.",
+                  "answers": [
+                    { "content": "$5$", "correct": true },
+                    { "content": "$25$", "correct": false },
+                    { "content": "$\\sqrt{48}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Lesquels de ces calculs sont corrects ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\sqrt{16 \\times 9} = 4 \\times 3 = 12$ et $\\sqrt{\\dfrac{81}{9}} = \\sqrt{9} = 3$ sont corrects. Faux : $\\sqrt{16 + 9} = \\sqrt{25} = 5$, $\\sqrt{100 - 36} = \\sqrt{64} = 8$ et $\\sqrt{25 \\times 4} = \\sqrt{100} = 10$.",
+                  "answers": [
+                    { "content": "$\\sqrt{16 \\times 9} = 12$", "correct": true },
+                    { "content": "$\\sqrt{\\dfrac{81}{9}} = 3$", "correct": true },
+                    { "content": "$\\sqrt{16 + 9} = 7$", "correct": false },
+                    { "content": "$\\sqrt{100 - 36} = 4$", "correct": false },
+                    { "content": "$\\sqrt{25 \\times 4} = 7$", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Produits, quotients et sommes de racines",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un sol carré a pour aire $4 \\times 81$ m². Quelle est la longueur de son côté ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le côté est $\\sqrt{4 \\times 81} = \\sqrt{4} \\times \\sqrt{81} = 2 \\times 9 = 18$ m. Vérification : $18^2 = 324 = 4 \\times 81$. Répondre $36$ revient à oublier la racine de $81$ ; $11$, à additionner $2 + 9$.",
+                  "answers": [
+                    { "content": "$18$ m", "correct": true },
+                    { "content": "$36$ m", "correct": false },
+                    { "content": "$11$ m", "correct": false },
+                    { "content": "$162$ m", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces expressions est égale à $\\sqrt{9} \\times \\sqrt{16}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sqrt{9} \\times \\sqrt{16} = 3 \\times 4 = 12$ et $\\sqrt{144} = 12$ : c'est la règle du produit. Les autres valent $5$ ($\\sqrt{25} = \\sqrt{9 + 16}$), $\\sqrt{7}$ ($16 - 9$) et $7$ ($\\sqrt{49} = 3 + 4$) : ce sont des erreurs de somme.",
+                  "answers": [
+                    { "content": "$\\sqrt{144}$", "correct": true },
+                    { "content": "$\\sqrt{25}$", "correct": false },
+                    { "content": "$\\sqrt{7}$", "correct": false },
+                    { "content": "$\\sqrt{49}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Vraies : $\\sqrt{8} \\times \\sqrt{2} = \\sqrt{16} = 4$ ; $\\sqrt{\\dfrac{121}{9}} = \\dfrac{11}{3}$ ; $\\sqrt{5} \\times \\sqrt{5} = \\sqrt{25} = 5$. Fausses : $\\sqrt{100} = 10 \\neq 14$ ; $\\sqrt{3} \\times \\sqrt{12} = \\sqrt{36} = 6$ ; $\\sqrt{\\dfrac{100}{25}} = 2 \\neq 20$.",
+                  "answers": [
+                    { "content": "$\\sqrt{8} \\times \\sqrt{2} = 4$", "correct": true },
+                    { "content": "$\\sqrt{\\dfrac{121}{9}} = \\dfrac{11}{3}$", "correct": true },
+                    { "content": "$\\sqrt{5} \\times \\sqrt{5} = 5$", "correct": true },
+                    { "content": "$\\sqrt{64 + 36} = 8 + 6$", "correct": false },
+                    { "content": "$\\sqrt{3} \\times \\sqrt{12} = \\sqrt{15}$", "correct": false },
+                    { "content": "$\\sqrt{\\dfrac{100}{25}} = \\dfrac{100}{5}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Karim calcule $\\sqrt{100 - 36}$. Il écrit $\\sqrt{100} - \\sqrt{36} = 10 - 6 = 4$. Quel est le bon résultat ?",
+                  "question_type": "single_choice",
+                  "explanation": "Karim a séparé la racine sur une soustraction, ce qui est interdit. Il faut calculer d'abord sous la racine : $100 - 36 = 64$, puis $\\sqrt{64} = 8$. Le bon résultat est $8$, et non $4$.",
+                  "answers": [
+                    { "content": "$8$", "correct": true },
+                    { "content": "$4$", "correct": false },
+                    { "content": "$64$", "correct": false },
+                    { "content": "$10$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "L'expression $\\sqrt{25 \\times 36} - \\sqrt{25} \\times \\sqrt{4}$ est égale à $20$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $\\sqrt{25 \\times 36} = \\sqrt{900} = 30$, et $\\sqrt{25} \\times \\sqrt{4} = 5 \\times 2 = 10$. Donc $30 - 10 = 20$. Les deux racines de produits se calculent séparément, puis on soustrait les résultats.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un terrain carré a une aire de 1 600 m². Un autre terrain carré a une aire $4$ fois plus petite. Combien de fois le côté du grand terrain est-il plus long que celui du petit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le petit terrain a pour aire $\\dfrac{1\\,600}{4} = 400$ m². Les côtés sont $\\sqrt{1\\,600} = 40$ m et $\\sqrt{400} = 20$ m : le grand côté est $2$ fois plus long. C'est $\\sqrt{4} = 2$, et non $4$.",
+                  "answers": [
+                    { "content": "$2$ fois", "correct": true },
+                    { "content": "$4$ fois", "correct": false },
+                    { "content": "$16$ fois", "correct": false }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Simplifier et calculer avec des radicaux",
+          "subtitle": "Écrire sous la forme a√b, additionner, multiplier",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Écrire $\\sqrt{n}$ sous la forme $a\\sqrt{b}$ en sortant un carré parfait.</li><li>Additionner et soustraire des radicaux.</li><li>Multiplier des radicaux et utiliser les identités remarquables avec des racines.</li></ul><h2>L'image pour comprendre</h2><p><strong>Les sacs du chantier.</strong> Sur le chantier, il y a des sacs de ciment et des sacs de sable. $2$ sacs de ciment et $3$ sacs de ciment font $5$ sacs de ciment. Mais $2$ sacs de ciment et $3$ sacs de sable ne font pas $5$ sacs de « quelque chose » : ce sont deux produits différents.</p><p>Un jour, le camion livre un gros sac marqué « $\\sqrt{12}$ » et un autre marqué « $\\sqrt{27}$ ». Tu les ouvres : le premier contient $2$ sacs de ciment, le second en contient $3$. C'étaient les mêmes produits, sous un autre emballage.</p><p><em>Le pont.</em> Le « ciment », c'est $\\sqrt{3}$. Ouvrir l'emballage, c'est simplifier : $\\sqrt{12} = 2\\sqrt{3}$ et $\\sqrt{27} = 3\\sqrt{3}$. Alors $\\sqrt{12} + \\sqrt{27} = 2\\sqrt{3} + 3\\sqrt{3} = 5\\sqrt{3}$. En revanche $2\\sqrt{3} + 3\\sqrt{5}$ mélange du « ciment » et du « sable » : on ne peut pas réduire.</p><p><em>Où l'image s'arrête.</em> Des sacs ne se multiplient pas entre eux, mais des radicaux, si : $\\sqrt{3} \\times \\sqrt{3} = 3$, car c'est le carré d'une racine carrée. Et on ne peut pas dire que $\\sqrt{3} + \\sqrt{5}$ vaut « $8$ sacs » : il reste simplement $\\sqrt{3} + \\sqrt{5}$.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Simplifier.</strong> On cherche le plus grand carré parfait qui divise le nombre sous la racine. Pour $a \\ge 0$ et $b \\ge 0$ : $\\sqrt{a^2 \\times b} = a\\sqrt{b}$. Exemple : $\\sqrt{50} = \\sqrt{25 \\times 2} = 5\\sqrt{2}$.</p><p><strong>Somme et différence.</strong> $m\\sqrt{a} + n\\sqrt{a} = (m + n)\\sqrt{a}$. On ne réduit que des radicaux qui ont le même nombre sous la racine, après simplification.</p><p><strong>Produit.</strong> $m\\sqrt{a} \\times n\\sqrt{b} = mn\\sqrt{ab}$. En particulier $\\sqrt{a} \\times \\sqrt{a} = a$.</p><p><strong>Identités remarquables.</strong> Celles du calcul littéral marchent aussi avec des racines : $(x + y)^2 = x^2 + 2xy + y^2$ et $(x + y)(x - y) = x^2 - y^2$.</p></blockquote><h2>Exemple résolu</h2><p><strong>1. Écrire $\\sqrt{72}$ sous la forme $a\\sqrt{b}$.</strong> On cherche le plus grand carré parfait qui divise $72$ : c'est $36$, car $72 = 36 \\times 2$. Donc $\\sqrt{72} = \\sqrt{36} \\times \\sqrt{2} = 6\\sqrt{2}$.</p><p><strong>2. Calculer $A = \\sqrt{12} + \\sqrt{27} - \\sqrt{3}$.</strong></p><ol><li>$\\sqrt{12} = \\sqrt{4 \\times 3} = 2\\sqrt{3}$ et $\\sqrt{27} = \\sqrt{9 \\times 3} = 3\\sqrt{3}$.</li><li>$A = 2\\sqrt{3} + 3\\sqrt{3} - \\sqrt{3}$. Les trois termes ont le même radical $\\sqrt{3}$.</li><li>On additionne les coefficients : $2 + 3 - 1 = 4$. Donc $A = 4\\sqrt{3}$.</li></ol><p><strong>3. Calculer $B = (3\\sqrt{2}) \\times (4\\sqrt{2})$ et $C = (1 + \\sqrt{2})^2$.</strong></p><ol><li>$B = 3 \\times 4 \\times \\sqrt{2} \\times \\sqrt{2} = 12 \\times 2 = 24$.</li><li>$C = 1^2 + 2 \\times 1 \\times \\sqrt{2} + (\\sqrt{2})^2 = 1 + 2\\sqrt{2} + 2 = 3 + 2\\sqrt{2}$.</li></ol><h2>Le piège à éviter</h2><p>Additionner les nombres sous les racines : écrire $\\sqrt{2} + \\sqrt{3} = \\sqrt{5}$. C'est faux : $\\sqrt{2} + \\sqrt{3}$ vaut environ $3{,}15$, et $\\sqrt{5}$ environ $2{,}24$. Autre erreur : écrire $2\\sqrt{3} \\times 3\\sqrt{3} = 6\\sqrt{3}$, alors que $\\sqrt{3} \\times \\sqrt{3} = 3$ donne $6 \\times 3 = 18$.</p><p>Comment le repérer : avant d'additionner, simplifie chaque radical, puis regarde si le nombre sous la racine est le même partout. Si oui, additionne seulement les nombres devant les racines.</p><h2>En une phrase</h2><p>On simplifie d'abord en sortant les carrés parfaits, puis on additionne les radicaux qui sont de même type, et on se souvient que $\\sqrt{a} \\times \\sqrt{a} = a$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Radicaux semblables et simplification",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle égalité est vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sqrt{12} = \\sqrt{4 \\times 3} = 2\\sqrt{3}$. Les autres sont fausses : $3\\sqrt{2} = \\sqrt{18}$, $4\\sqrt{3} = \\sqrt{48}$, et $\\sqrt{12}$ n'est pas égal à $6$, qui est la moitié de $12$. Pour vérifier, on remet le coefficient au carré : $2^2 \\times 3 = 12$.",
+                  "answers": [
+                    { "content": "$\\sqrt{12} = 2\\sqrt{3}$", "correct": true },
+                    { "content": "$\\sqrt{12} = 3\\sqrt{2}$", "correct": false },
+                    { "content": "$\\sqrt{12} = 4\\sqrt{3}$", "correct": false },
+                    { "content": "$\\sqrt{12} = 6$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans l'image des sacs, $2\\sqrt{3} + 3\\sqrt{3} = 5\\sqrt{3}$ se comprend comme $2$ sacs de ciment plus $3$ sacs de ciment qui font $5$ sacs de ciment.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Le « ciment », c'est $\\sqrt{3}$ : on additionne les nombres devant le même radical. Le radical $\\sqrt{3}$ reste inchangé, comme le mot « ciment » reste inchangé quand on compte des sacs.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'écriture simplifiée de $\\sqrt{45}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$45 = 9 \\times 5$ et $9$ est un carré parfait, donc $\\sqrt{45} = 3\\sqrt{5}$. Attention : $5\\sqrt{3} = \\sqrt{75}$ et $9\\sqrt{5} = \\sqrt{405}$. Vérifie en remettant au carré le nombre devant la racine.",
+                  "answers": [
+                    { "content": "$3\\sqrt{5}$", "correct": true },
+                    { "content": "$5\\sqrt{3}$", "correct": false },
+                    { "content": "$9\\sqrt{5}$", "correct": false },
+                    { "content": "$15$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On a $\\sqrt{2} + \\sqrt{3} = \\sqrt{5}$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Les radicaux $\\sqrt{2}$ et $\\sqrt{3}$ ne sont pas semblables : c'est du « ciment » et du « sable ». On n'additionne pas les nombres sous les racines. Environ $1{,}41 + 1{,}73 = 3{,}15$, alors que $\\sqrt{5}$ vaut environ $2{,}24$.",
+                  "answers": [
+                    { "content": "Vrai", "correct": false },
+                    { "content": "Faux", "correct": true }
+                  ]
+                },
+                {
+                  "content": "Lesquelles de ces sommes se réduisent directement en un seul terme ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Il faut le même radical : $4\\sqrt{5} + 2\\sqrt{5} = 6\\sqrt{5}$ et $\\sqrt{7} - 3\\sqrt{7} = -2\\sqrt{7}$. Les autres mélangent des radicaux différents ($\\sqrt{2}$ et $\\sqrt{3}$, $\\sqrt{5}$ et $\\sqrt{7}$) ou un radical et un nombre entier ($\\sqrt{6}$ et $6$).",
+                  "answers": [
+                    { "content": "$4\\sqrt{5} + 2\\sqrt{5}$", "correct": true },
+                    { "content": "$\\sqrt{7} - 3\\sqrt{7}$", "correct": true },
+                    { "content": "$\\sqrt{2} + \\sqrt{3}$", "correct": false },
+                    { "content": "$3\\sqrt{5} + 2\\sqrt{7}$", "correct": false },
+                    { "content": "$\\sqrt{6} + 6$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Que vaut $2\\sqrt{3} \\times \\sqrt{3}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sqrt{3} \\times \\sqrt{3} = 3$, donc $2\\sqrt{3} \\times \\sqrt{3} = 2 \\times 3 = 6$. L'erreur tentante est de garder un radical, comme $6\\sqrt{3}$ : mais le produit d'une racine par elle-même fait disparaître la racine.",
+                  "answers": [
+                    { "content": "$6$", "correct": true },
+                    { "content": "$6\\sqrt{3}$", "correct": false },
+                    { "content": "$2\\sqrt{6}$", "correct": false },
+                    { "content": "$12$", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Simplifier, additionner, multiplier",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Écrire $\\sqrt{75}$ sous la forme $a\\sqrt{b}$ avec $b$ le plus petit possible.",
+                  "question_type": "single_choice",
+                  "explanation": "$75 = 25 \\times 3$, donc $\\sqrt{75} = 5\\sqrt{3}$. L'écriture $3\\sqrt{5}$ vaut $\\sqrt{45}$, et $25\\sqrt{3}$ vaut $\\sqrt{1\\,875}$. On remet toujours le coefficient au carré pour vérifier : $5^2 \\times 3 = 75$.",
+                  "answers": [
+                    { "content": "$5\\sqrt{3}$", "correct": true },
+                    { "content": "$3\\sqrt{5}$", "correct": false },
+                    { "content": "$25\\sqrt{3}$", "correct": false },
+                    { "content": "$15$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Écrire $\\sqrt{98}$ sous la forme $a\\sqrt{b}$ avec $b$ le plus petit possible.",
+                  "question_type": "single_choice",
+                  "explanation": "$98 = 49 \\times 2$, donc $\\sqrt{98} = 7\\sqrt{2}$. L'écriture $2\\sqrt{7}$ vaut $\\sqrt{28}$ : on a inversé les deux nombres. Le carré parfait, $49$, devient $7$ devant la racine.",
+                  "answers": [
+                    { "content": "$7\\sqrt{2}$", "correct": true },
+                    { "content": "$2\\sqrt{7}$", "correct": false },
+                    { "content": "$49\\sqrt{2}$", "correct": false },
+                    { "content": "$14$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Calculer $5\\sqrt{3} - 2\\sqrt{3}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux termes ont le même radical : $5\\sqrt{3} - 2\\sqrt{3} = (5 - 2)\\sqrt{3} = 3\\sqrt{3}$. Écrire $3$ revient à faire disparaître le radical, et $7\\sqrt{3}$ à additionner au lieu de soustraire.",
+                  "answers": [
+                    { "content": "$3\\sqrt{3}$", "correct": true },
+                    { "content": "$3$", "correct": false },
+                    { "content": "$7\\sqrt{3}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Calculer $\\sqrt{18} + \\sqrt{50}$ et donner le résultat sous la forme $k\\sqrt{2}$.",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sqrt{18} = \\sqrt{9 \\times 2} = 3\\sqrt{2}$ et $\\sqrt{50} = \\sqrt{25 \\times 2} = 5\\sqrt{2}$. Donc la somme vaut $8\\sqrt{2}$. Écrire $\\sqrt{68}$, c'est additionner sous la racine ($18 + 50$) : c'est faux.",
+                  "answers": [
+                    { "content": "$8\\sqrt{2}$", "correct": true },
+                    { "content": "$\\sqrt{68}$", "correct": false },
+                    { "content": "$8$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Calculer $(3\\sqrt{2}) \\times (4\\sqrt{2})$.",
+                  "question_type": "single_choice",
+                  "explanation": "On multiplie les coefficients, $3 \\times 4 = 12$, et les radicaux, $\\sqrt{2} \\times \\sqrt{2} = 2$. Le résultat est $12 \\times 2 = 24$. Garder $12\\sqrt{2}$ oublie que $\\sqrt{2} \\times \\sqrt{2} = 2$ ; répondre $12$ oublie le facteur $2$.",
+                  "answers": [
+                    { "content": "$24$", "correct": true },
+                    { "content": "$12\\sqrt{2}$", "correct": false },
+                    { "content": "$12$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Calculer $(\\sqrt{5} + 2)(\\sqrt{5} - 2)$.",
+                  "question_type": "single_choice",
+                  "explanation": "C'est $(x + y)(x - y) = x^2 - y^2$ avec $x = \\sqrt{5}$ et $y = 2$ : $5 - 4 = 1$. Répondre $9$ revient à écrire $5 + 4$ ; répondre $3$, à calculer $5 - 2$ sans mettre le $2$ au carré.",
+                  "answers": [
+                    { "content": "$1$", "correct": true },
+                    { "content": "$3$", "correct": false },
+                    { "content": "$9$", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Calculs avec des radicaux",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "On pose $A = \\sqrt{50} - \\sqrt{8} + \\sqrt{18}$. Écrire $A$ sous la forme $k\\sqrt{2}$.",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sqrt{50} = 5\\sqrt{2}$, $\\sqrt{8} = 2\\sqrt{2}$, $\\sqrt{18} = 3\\sqrt{2}$. Donc $A = (5 - 2 + 3)\\sqrt{2} = 6\\sqrt{2}$. Écrire $\\sqrt{60}$ revient à calculer $50 - 8 + 18$ sous la racine : c'est interdit.",
+                  "answers": [
+                    { "content": "$6\\sqrt{2}$", "correct": true },
+                    { "content": "$\\sqrt{60}$", "correct": false },
+                    { "content": "$10\\sqrt{2}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Développer et réduire $(1 + \\sqrt{2})^2$.",
+                  "question_type": "single_choice",
+                  "explanation": "$(x + y)^2 = x^2 + 2xy + y^2$ avec $x = 1$ et $y = \\sqrt{2}$ : $1 + 2\\sqrt{2} + 2 = 3 + 2\\sqrt{2}$. Répondre $3$ oublie le double produit $2\\sqrt{2}$. Répondre $3 + \\sqrt{2}$ oublie le facteur $2$ du double produit.",
+                  "answers": [
+                    { "content": "$3 + 2\\sqrt{2}$", "correct": true },
+                    { "content": "$3$", "correct": false },
+                    { "content": "$3 + \\sqrt{2}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Vraies : $\\sqrt{20} = \\sqrt{4 \\times 5} = 2\\sqrt{5}$ ; $\\sqrt{27} \\times \\sqrt{3} = \\sqrt{81} = 9$ ; $(\\sqrt{7} - 1)(\\sqrt{7} + 1) = 7 - 1 = 6$. Fausses : $\\sqrt{8} + \\sqrt{2} = 3\\sqrt{2}$ ; $2\\sqrt{3} \\times 3\\sqrt{3} = 18$ ; $\\sqrt{45} = 3\\sqrt{5}$.",
+                  "answers": [
+                    { "content": "$\\sqrt{20} = 2\\sqrt{5}$", "correct": true },
+                    { "content": "$\\sqrt{27} \\times \\sqrt{3} = 9$", "correct": true },
+                    { "content": "$(\\sqrt{7} - 1)(\\sqrt{7} + 1) = 6$", "correct": true },
+                    { "content": "$\\sqrt{8} + \\sqrt{2} = \\sqrt{10}$", "correct": false },
+                    { "content": "$2\\sqrt{3} \\times 3\\sqrt{3} = 6\\sqrt{3}$", "correct": false },
+                    { "content": "$\\sqrt{45} = 5\\sqrt{3}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un carré a un côté de $3\\sqrt{2}$ m. Quelle est son aire ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'aire est $(3\\sqrt{2})^2 = 3\\sqrt{2} \\times 3\\sqrt{2} = 9 \\times 2 = 18$ m². Répondre $9\\sqrt{2}$ oublie de mettre $\\sqrt{2}$ au carré ; répondre $6\\sqrt{2}$ double le côté au lieu de le multiplier par lui-même.",
+                  "answers": [
+                    { "content": "$18$ m²", "correct": true },
+                    { "content": "$9\\sqrt{2}$ m²", "correct": false },
+                    { "content": "$6\\sqrt{2}$ m²", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On a $\\sqrt{12} + \\sqrt{27} = \\sqrt{39}$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. On simplifie d'abord : $\\sqrt{12} + \\sqrt{27} = 2\\sqrt{3} + 3\\sqrt{3} = 5\\sqrt{3}$, qui vaut environ $8{,}66$. Or $\\sqrt{39}$ vaut environ $6{,}24$. On n'additionne jamais les nombres sous les racines.",
+                  "answers": [
+                    { "content": "Vrai", "correct": false },
+                    { "content": "Faux", "correct": true }
+                  ]
+                },
+                {
+                  "content": "Un sol carré a une aire de $200$ m². Quelle est la longueur de son côté, écrite sous la forme $a\\sqrt{b}$ avec $b$ le plus petit possible ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le côté vaut $\\sqrt{200}$. Comme $200 = 100 \\times 2$, on a $\\sqrt{200} = 10\\sqrt{2}$ m. L'écriture $2\\sqrt{10}$ vaut $\\sqrt{40}$, et $100\\sqrt{2}$ vaut $\\sqrt{20\\,000}$ : on remet toujours le coefficient au carré pour vérifier.",
+                  "answers": [
+                    { "content": "$10\\sqrt{2}$ m", "correct": true },
+                    { "content": "$2\\sqrt{10}$ m", "correct": false },
+                    { "content": "$100\\sqrt{2}$ m", "correct": false },
+                    { "content": "$20$ m", "correct": false }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Comparer et encadrer des racines carrées",
+          "subtitle": "Ranger et encadrer des racines. À compléter : écriture sans radical au dénominateur",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Comparer deux racines carrées, ou une racine et un nombre.</li><li>Encadrer $\\sqrt{n}$ entre deux entiers consécutifs, puis au dixième.</li><li>Comparer deux nombres positifs en comparant leurs carrés.</li></ul><h2>L'image pour comprendre</h2><p><strong>Les terrains carrés.</strong> Sur un chantier, deux terrains sont carrés. Le terrain A a une aire de $16$ m², le terrain B une aire de $25$ m². Le plus grand terrain est celui dont le côté est le plus long : le côté de A mesure $4$ m, celui de B mesure $5$ m. Maintenant, un terrain C a une aire de $20$ m². Elle est entre $16$ et $25$, donc son côté est entre $4$ m et $5$ m.</p><p><em>Le pont.</em> Les aires sont les nombres sous la racine, et les côtés sont les racines carrées. Si l'aire est plus grande, le côté est plus grand : si $a < b$, alors $\\sqrt{a} < \\sqrt{b}$. Et comme $16 < 20 < 25$, on obtient $4 < \\sqrt{20} < 5$.</p><p><em>Où l'image s'arrête.</em> Des aires sont toujours positives, donc la règle ne vaut que pour des nombres positifs ou nuls. Avec des nombres négatifs, mettre au carré inverse l'ordre : $-5 < 2$ mais $(-5)^2 = 25 > 4 = 2^2$. De plus, l'encadrement ne donne pas la valeur exacte du côté, seulement un intervalle où il se trouve.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>La racine carrée conserve l'ordre.</strong> Pour $a \\ge 0$ et $b \\ge 0$ : $a < b$ équivaut à $\\sqrt{a} < \\sqrt{b}$. Même chose avec $\\le$.</p><p><strong>Comparer deux nombres positifs.</strong> Si $x \\ge 0$ et $y \\ge 0$, alors $x < y$ équivaut à $x^2 < y^2$. Pour comparer deux nombres positifs écrits avec des radicaux, on compare leurs carrés. Pour comparer une racine à un entier, on écrit l'entier comme une racine : $4 = \\sqrt{16}$.</p><p><strong>Encadrer entre deux entiers.</strong> Si $k^2 < n < (k + 1)^2$ avec $k$ entier positif, alors $k < \\sqrt{n} < k + 1$.</p><p><strong>Encadrer au dixième.</strong> On élève au carré des nombres décimaux à un chiffre après la virgule, jusqu'à entourer $n$. Exemple : $2{,}6^2 = 6{,}76$ et $2{,}7^2 = 7{,}29$, donc $2{,}6 < \\sqrt{7} < 2{,}7$.</p></blockquote><h2>Exemple résolu</h2><p><strong>1. Comparer $\\sqrt{17}$ et $4$.</strong> On écrit $4 = \\sqrt{16}$. Comme $17 > 16$, on a $\\sqrt{17} > \\sqrt{16}$. Donc $\\sqrt{17} > 4$.</p><p><strong>2. Encadrer $\\sqrt{45}$ entre deux entiers consécutifs.</strong> $6^2 = 36$ et $7^2 = 49$. Comme $36 < 45 < 49$, on a $6 < \\sqrt{45} < 7$.</p><p><strong>3. Comparer $3\\sqrt{2}$ et $2\\sqrt{3}$.</strong></p><ol><li>Les deux nombres sont positifs : on peut comparer leurs carrés.</li><li>$(3\\sqrt{2})^2 = 9 \\times 2 = 18$ et $(2\\sqrt{3})^2 = 4 \\times 3 = 12$.</li><li>Comme $18 > 12$, on a $3\\sqrt{2} > 2\\sqrt{3}$.</li></ol><p><strong>4. Encadrer $\\sqrt{7}$ au dixième.</strong> $2{,}6^2 = 6{,}76 < 7$ et $2{,}7^2 = 7{,}29 > 7$. Donc $2{,}6 < \\sqrt{7} < 2{,}7$.</p><h2>Le piège à éviter</h2><p>Comparer $3\\sqrt{2}$ et $2\\sqrt{3}$ en regardant un seul des deux nombres de chaque écriture. Le nombre devant la racine dit « $3 > 2$ », donc le premier serait plus grand ; le nombre sous la racine dit « $2 < 3$ », donc le second serait plus grand. Les indices se contredisent, on ne peut pas conclure ainsi. Autre erreur : croire que $\\sqrt{45}$ est proche de $22$ (la moitié de $45$) alors qu'il est entre $6$ et $7$.</p><p>Comment le repérer : dès que tu hésites, mets les deux nombres positifs au carré et compare les résultats.</p><h2>En une phrase</h2><p>Pour des nombres positifs, plus le nombre sous la racine est grand, plus la racine est grande ; pour encadrer $\\sqrt{n}$, on l'entoure entre deux carrés parfaits.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Ordre des racines et encadrement",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Si $a$ et $b$ sont deux nombres positifs avec $a < b$, alors $\\sqrt{a} < \\sqrt{b}$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Dans l'image des terrains carrés, le terrain qui a la plus grande aire a aussi le plus long côté. La racine carrée conserve l'ordre pour les nombres positifs ou nuls.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelle comparaison est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme $10 > 7$, on a $\\sqrt{10} > \\sqrt{7}$. L'égalité $\\sqrt{10} = 5$ est fausse, car $5^2 = 25$. Et $\\sqrt{10}$ n'est pas supérieur à $5$ : il vaut environ $3{,}16$. La moitié de $10$ n'est pas sa racine.",
+                  "answers": [
+                    { "content": "$\\sqrt{10} > \\sqrt{7}$", "correct": true },
+                    { "content": "$\\sqrt{10} < \\sqrt{7}$", "correct": false },
+                    { "content": "$\\sqrt{10} > 5$", "correct": false },
+                    { "content": "$\\sqrt{10} = 5$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Entre quels entiers consécutifs se trouve $\\sqrt{20}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$4^2 = 16$ et $5^2 = 25$. Comme $16 < 20 < 25$, on a $4 < \\sqrt{20} < 5$. Choisir $9$ et $10$ revient à prendre la moitié de $20$ : mais $9^2 = 81$ est bien trop grand.",
+                  "answers": [
+                    { "content": "$4$ et $5$", "correct": true },
+                    { "content": "$5$ et $6$", "correct": false },
+                    { "content": "$9$ et $10$", "correct": false },
+                    { "content": "$19$ et $21$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un terrain carré d'aire $30$ m² a un côté compris entre $5$ m et $6$ m.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Un terrain de $25$ m² a un côté de $5$ m, un terrain de $36$ m² a un côté de $6$ m. Comme $25 < 30 < 36$, le côté du terrain de $30$ m² est entre $5$ m et $6$ m.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Pourquoi peut-on affirmer que $5 < \\sqrt{30} < 6$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On entoure $30$ entre deux carrés parfaits : $25 = 5^2$ et $36 = 6^2$. Dire que $30$ est entre $5$ et $6$ est faux, et ne prouve rien. De même, $30 \\div 5 = 6$ n'a aucun lien avec la racine carrée de $30$.",
+                  "answers": [
+                    { "content": "Parce que $5^2 = 25$, $6^2 = 36$ et $25 < 30 < 36$", "correct": true },
+                    { "content": "Parce que $30$ est compris entre $5$ et $6$", "correct": false },
+                    { "content": "Parce que $30 \\div 5 = 6$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "La règle « si $a < b$ alors $a^2 < b^2$ » est vraie pour tous les nombres, même négatifs.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Avec $a = -5$ et $b = 2$, on a $-5 < 2$ mais $(-5)^2 = 25 > 4 = 2^2$. La règle est vraie seulement pour des nombres positifs ou nuls, comme les aires ou les longueurs de l'image.",
+                  "answers": [
+                    { "content": "Vrai", "correct": false },
+                    { "content": "Faux", "correct": true }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Comparer et encadrer",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Comparer $\\sqrt{17}$ et $4$.",
+                  "question_type": "single_choice",
+                  "explanation": "On écrit $4 = \\sqrt{16}$. Comme $17 > 16$, on a $\\sqrt{17} > \\sqrt{16}$, donc $\\sqrt{17} > 4$. On peut toujours comparer : un entier positif est la racine de son carré.",
+                  "answers": [
+                    { "content": "$\\sqrt{17} > 4$", "correct": true },
+                    { "content": "$\\sqrt{17} < 4$", "correct": false },
+                    { "content": "$\\sqrt{17} = 4$", "correct": false },
+                    { "content": "On ne peut pas les comparer", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Entre quels entiers consécutifs se trouve $\\sqrt{50}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$7^2 = 49$ et $8^2 = 64$. Comme $49 < 50 < 64$, on a $7 < \\sqrt{50} < 8$. Répondre $24$ et $25$ revient à prendre la moitié de $50$ : mais $\\sqrt{50}$ est proche de $7$.",
+                  "answers": [
+                    { "content": "$7$ et $8$", "correct": true },
+                    { "content": "$6$ et $7$", "correct": false },
+                    { "content": "$24$ et $25$", "correct": false },
+                    { "content": "$25$ et $26$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ordre croissant de $\\sqrt{15}$, $4$ et $\\sqrt{10}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On écrit $4 = \\sqrt{16}$. Comme $10 < 15 < 16$, on a $\\sqrt{10} < \\sqrt{15} < \\sqrt{16}$, soit $\\sqrt{10} < \\sqrt{15} < 4$. Ranger $4$ avant les racines est tentant, car $4$ est « petit » : mais $15$ et $10$ sont plus petits que $16$.",
+                  "answers": [
+                    { "content": "$\\sqrt{10} < \\sqrt{15} < 4$", "correct": true },
+                    { "content": "$4 < \\sqrt{10} < \\sqrt{15}$", "correct": false },
+                    { "content": "$\\sqrt{15} < \\sqrt{10} < 4$", "correct": false },
+                    { "content": "$\\sqrt{10} < 4 < \\sqrt{15}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quel est le bon encadrement de $\\sqrt{7}$ au dixième près ?",
+                  "question_type": "single_choice",
+                  "explanation": "$2{,}6^2 = 6{,}76 < 7$ et $2{,}7^2 = 7{,}29 > 7$. L'encadrement $2{,}7 < \\sqrt{7} < 2{,}8$ est faux, car $2{,}7^2 = 7{,}29$ dépasse déjà $7$. Et $3{,}5$ est la moitié de $7$, pas sa racine.",
+                  "answers": [
+                    { "content": "$2{,}6 < \\sqrt{7} < 2{,}7$", "correct": true },
+                    { "content": "$2{,}7 < \\sqrt{7} < 2{,}8$", "correct": false },
+                    { "content": "$2{,}5 < \\sqrt{7} < 2{,}6$", "correct": false },
+                    { "content": "$3{,}5 < \\sqrt{7} < 3{,}6$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Comparer $3\\sqrt{2}$ et $2\\sqrt{3}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux nombres sont positifs : on compare leurs carrés. $(3\\sqrt{2})^2 = 9 \\times 2 = 18$ et $(2\\sqrt{3})^2 = 4 \\times 3 = 12$. Comme $18 > 12$, on a $3\\sqrt{2} > 2\\sqrt{3}$.",
+                  "answers": [
+                    { "content": "$3\\sqrt{2} > 2\\sqrt{3}$", "correct": true },
+                    { "content": "$3\\sqrt{2} < 2\\sqrt{3}$", "correct": false },
+                    { "content": "$3\\sqrt{2} = 2\\sqrt{3}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelles comparaisons sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Vraies : $\\sqrt{26} > \\sqrt{25} = 5$ et $\\sqrt{8} < \\sqrt{9} = 3$. Fausses : $\\sqrt{40} > \\sqrt{36} = 6$ ; $\\sqrt{2} < \\sqrt{4} = 2$ ; $\\sqrt{50} > \\sqrt{49} = 7$. On compare toujours avec le carré parfait voisin.",
+                  "answers": [
+                    { "content": "$\\sqrt{26} > 5$", "correct": true },
+                    { "content": "$\\sqrt{8} < 3$", "correct": true },
+                    { "content": "$\\sqrt{40} < 6$", "correct": false },
+                    { "content": "$\\sqrt{2} > 2$", "correct": false },
+                    { "content": "$\\sqrt{50} < 7$", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Comparer, ranger et encadrer",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Parmi ces quatre nombres, lequel est le plus grand : $2\\sqrt{5}$, $3\\sqrt{2}$, $\\sqrt{19}$ ou $4$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Ils sont tous positifs : on compare leurs carrés. $(2\\sqrt{5})^2 = 20$, $(3\\sqrt{2})^2 = 18$, $(\\sqrt{19})^2 = 19$ et $4^2 = 16$. Le plus grand carré est $20$, donc le plus grand nombre est $2\\sqrt{5}$.",
+                  "answers": [
+                    { "content": "$2\\sqrt{5}$", "correct": true },
+                    { "content": "$3\\sqrt{2}$", "correct": false },
+                    { "content": "$\\sqrt{19}$", "correct": false },
+                    { "content": "$4$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un terrain carré a une aire de $150$ m². Entre quelles longueurs entières (en m) se trouve son côté ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le côté vaut $\\sqrt{150}$. Comme $12^2 = 144$ et $13^2 = 169$, on a $144 < 150 < 169$, donc $12 < \\sqrt{150} < 13$. Répondre $75$ et $76$ revient à prendre la moitié de l'aire.",
+                  "answers": [
+                    { "content": "Entre $12$ m et $13$ m", "correct": true },
+                    { "content": "Entre $11$ m et $12$ m", "correct": false },
+                    { "content": "Entre $14$ m et $15$ m", "correct": false },
+                    { "content": "Entre $75$ m et $76$ m", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Vraies : $16 < 17 < 25$ donc $4 < \\sqrt{17} < 5$ ; $(3\\sqrt{3})^2 = 27 > 25$ ; $12 < 13$ donc $\\sqrt{12} < \\sqrt{13}$. Fausses : $\\sqrt{24} < \\sqrt{25} = 5$ ; $(2\\sqrt{7})^2 = 28 > 25$ ; $\\sqrt{10} > \\sqrt{9} = 3$.",
+                  "answers": [
+                    { "content": "$4 < \\sqrt{17} < 5$", "correct": true },
+                    { "content": "$3\\sqrt{3} > 5$", "correct": true },
+                    { "content": "$\\sqrt{12} < \\sqrt{13}$", "correct": true },
+                    { "content": "$\\sqrt{24} > 5$", "correct": false },
+                    { "content": "$2\\sqrt{7} < 5$", "correct": false },
+                    { "content": "$\\sqrt{10} < 3$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un carreleur dispose de $70$ m² de carrelage. Il veut couvrir un sol carré dont le côté est un nombre entier de mètres. Quel est le plus grand côté possible ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'aire d'un sol de côté $c$ est $c^2$, et elle doit être au plus $70$. Comme $8^2 = 64 \\le 70$ et $9^2 = 81 > 70$, le côté maximal est $8$ m. On a aussi $8 < \\sqrt{70} < 9$. Répondre $9$ dépasserait le carrelage disponible.",
+                  "answers": [
+                    { "content": "$8$ m", "correct": true },
+                    { "content": "$9$ m", "correct": false },
+                    { "content": "$7$ m", "correct": false },
+                    { "content": "$35$ m", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Pour comparer $2\\sqrt{6}$ et $5$, on compare leurs carrés $24$ et $25$. Comme $24 < 25$, on a $2\\sqrt{6} < 5$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Les deux nombres sont positifs, donc comparer leurs carrés donne le même ordre. $(2\\sqrt{6})^2 = 4 \\times 6 = 24$ et $5^2 = 25$. Donc $2\\sqrt{6}$ est un peu plus petit que $5$ (environ $4{,}9$).",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Combien d'entiers $n$ vérifient $3 < \\sqrt{n} < 4$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$3 < \\sqrt{n} < 4$ équivaut à $9 < n < 16$, avec des inégalités strictes. Les entiers sont $10, 11, 12, 13, 14, 15$ : il y en a $6$. On trouve $7$ ou $8$ en comptant à tort $9$ et $16$, qui donnent exactement $3$ et $4$.",
+                  "answers": [
+                    { "content": "$6$", "correct": true },
+                    { "content": "$5$", "correct": false },
+                    { "content": "$7$", "correct": false },
+                    { "content": "$8$", "correct": false }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
