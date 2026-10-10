@@ -109,6 +109,7 @@ module Queries
       test "find : la ligne d'un établissement par son public_id, ou nil ; l'année par défaut est l'année en cours" do
         school = create_school(name: "Lycée Moderne")
         create_classroom(school:)
+        create_classroom(school:, status: "archived")
 
         row = SchoolsQuery.new.find(public_id: school.public_id)
         assert_equal [ "Lycée Moderne", 1 ], [ row.name, row.classrooms_count ]

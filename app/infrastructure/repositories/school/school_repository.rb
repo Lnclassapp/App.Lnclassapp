@@ -82,6 +82,11 @@ module Repositories
                    .map { |values| Inserted.new(**INSERTED_COLUMNS.map(&:to_sym).zip(values).to_h) }
       end
 
+      def first_cycle_after(after_id:, limit:)
+        Orm::School.where(cycle: "first", status: GENERATION_STATUSES).where(id: (after_id + 1)..).order(:id).limit(limit)
+                   .map { map_to_entity(it) }
+      end
+
       def attach_teacher(teacher_id:, school_id:, primary:, at:)
         # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::TeacherSchool.transaction(requires_new: true) do

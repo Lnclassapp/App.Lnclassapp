@@ -1,26 +1,31 @@
 <%# 🌐 UI · school_admin/levels/_classroom_card — une classe sur la page de son niveau (AD-09, AD-22) %>
-<%# Rôle : illustration du niveau et pastille du taux de rendu, effectif, devoirs, taux et moyenne ; toute la carte mène à la classe %>
-<%# ADR  : 0065 · UDR : 0074 (§3.5, §3.8) · pastille décorative, toujours doublée de son texte sr-only ; sans signal, ni l'une ni l'autre %>
-<%# locals: (classroom:, illustration:, signal:) -%>
+<%# Rôle : illustration du niveau et pastille du taux de rendu, effectif, devoirs, taux et moyenne ; toute la carte mène à la classe, sauf l'archivée (badge, effectif grisé, sans page) ; menu ⋮ au-dessus du lien %>
+<%# ADR  : 0065, 0088 · UDR : 0074 (§3.5, §3.8), 0083 · pastille décorative, toujours doublée de son texte sr-only ; sans signal, ni l'une ni l'autre %>
+<%# locals: (classroom:, illustration:, signal:, manageable:) -%>
 <% figure = lambda do |value|
      next tag.span(t("school_admin.classrooms.percent", value:), class: "font-medium text-ink") unless value.nil?
 
      safe_join([ tag.span("—", aria: { hidden: true }), tag.span(t("school_admin.classrooms.not_computed"), class: "sr-only") ])
    end %>
-<li id="classroom_<%= classroom.public_id %>">
-  <%= link_to school_admin_classroom_path(classroom.public_id),
-              class: "group flex h-full flex-col gap-4 rounded-ln border border-line bg-white p-4 transition hover:border-brand focus-visible:outline-2 focus-visible:outline-brand" do %>
-    <div class="flex items-center gap-3">
-      <span class="<%= class_names("relative grid size-15 shrink-0 place-items-center rounded-full", illustration.tint) %>">
-        <%= image_tag illustration.path, alt: "", class: "size-10", "aria-hidden": true, loading: "lazy" %>
-        <%= tag.span(class: [ "absolute -top-0.5 -right-0.5 size-3.5 rounded-full ring-2 ring-white", ComponentsHelper::SIGNAL_DOTS.fetch(signal) ],
-                     "aria-hidden": true) if signal %>
-      </span>
-      <div class="min-w-0">
-        <p class="truncate font-display text-lg font-extrabold text-ink"><%= classroom.name %></p>
-        <%= tag.span(t("school_admin.signals.#{signal}.label"), class: "sr-only") if signal %>
-      </div>
+<% card_class = "group flex h-full flex-col gap-4 rounded-ln border border-line bg-white p-4 transition focus-visible:outline-2 focus-visible:outline-brand" %>
+<% content = capture do %>
+  <div class="flex items-center gap-3 pr-12">
+    <span class="<%= class_names("relative grid size-15 shrink-0 place-items-center rounded-full", illustration.tint, "opacity-60 grayscale" => classroom.archived?) %>">
+      <%= image_tag illustration.path, alt: "", class: "size-10", "aria-hidden": true, loading: "lazy" %>
+      <%= tag.span(class: [ "absolute -top-0.5 -right-0.5 size-3.5 rounded-full ring-2 ring-white", ComponentsHelper::SIGNAL_DOTS.fetch(signal) ],
+                   "aria-hidden": true) if signal %>
+    </span>
+    <div class="min-w-0">
+      <p class="truncate font-display text-lg font-extrabold text-ink"><%= classroom.name %></p>
+      <%= tag.span(t("school_admin.signals.#{signal}.label"), class: "sr-only") if signal %>
+      <%= ui_badge t(".archived"), size: :sm if classroom.archived? %>
     </div>
+  </div>
+  <% if classroom.archived? %>
+    <p class="inline-flex items-center gap-1.5 text-sm text-mute opacity-70">
+      <%= ui_icon "users", variant: :mini, size: :sm %><%= t(".students", count: classroom.students_count) %>
+    </p>
+  <% else %>
     <ul class="space-y-1.5 text-sm text-mute">
       <li class="inline-flex w-full items-center gap-1.5">
         <%= ui_icon "users", variant: :mini, size: :sm %><%= t(".students", count: classroom.students_count) %>
@@ -38,5 +43,21 @@
     <span class="mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-brand-strong">
       <%= t(".open") %><%= ui_icon "arrow-right", variant: :mini, size: :sm, class: "transition group-hover:translate-x-0.5" %>
     </span>
+  <% end %>
+<% end %>
+<%# Carte + lien étiré (comme teams/schools/_classroom_group) : le ⋮ est frère du lien, jamais dedans, et passe au-dessus (z-10). %>
+<li id="classroom_<%= classroom.public_id %>" class="relative">
+  <% if classroom.archived? %>
+    <%= tag.div content, class: card_class %>
+  <% else %>
+    <%= link_to content, school_admin_classroom_path(classroom.public_id), class: "#{card_class} hover:border-brand" %>
+  <% end %>
+  <% if manageable %>
+    <div class="absolute top-2 right-2 z-10">
+      <%= render "shared/classroom_archive_menu", name: classroom.name, public_id: classroom.public_id, archived: classroom.archived?,
+                                                  students_count: classroom.students_count, teachers_count: classroom.teachers_count,
+                                                  archive_path: archive_school_admin_classroom_archival_path(classroom.public_id),
+                                                  restore_path: restore_school_admin_classroom_archival_path(classroom.public_id) %>
+    </div>
   <% end %>
 </li>

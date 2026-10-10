@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Classroom::ClassroomRepositoryPort
 # Rôle : contrat de persistance des classes, du jeton de leur lien et de la génération par défaut
-# ADR  : 0030, 0039, 0041, 0059, 0085
+# ADR  : 0030, 0039, 0041, 0059, 0085, 0088
 module Ports
   module Classroom
     module ClassroomRepositoryPort
@@ -43,7 +43,8 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #names_in"
       end
 
-      # Noms des classes d'un couple niveau/série (series_id nil : sans série) dans l'école pour l'année. → [String]
+      # Noms des classes ACTIVES d'un couple niveau/série (series_id nil : sans série) dans l'école pour l'année : l'archivée n'est
+      # jamais la « dernière » que retire « − » (ADR-0088). Pour numéroter une classe nouvelle, names_in prend toutes les classes. → [String]
       def names_in_level(school_id:, school_year:, level_id:, series_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #names_in_level"
       end
@@ -53,6 +54,24 @@ module Ports
       # → Result | failure(:not_found) | failure(:conflict, errors: { base: [:has_students | :has_teachers | :has_assignments] })
       def delete_if_unused(id:)
         raise NotImplementedError, "#{self.class} doit implémenter #delete_if_unused"
+      end
+
+      # ADR-0088 : dans la transaction de l'appelant, passe la classe en « archived » avec sa date ; adhésions, enseignants et
+      # assignations ne sont pas touchés. → Result(Classroom) | failure(:not_found)
+      #   | failure(:conflict, errors: { base: [:already_archived] })
+      def archive(id:, at:)
+        raise NotImplementedError, "#{self.class} doit implémenter #archive"
+      end
+
+      # ADR-0088 : l'inverse, la date d'archivage est effacée. → Result(Classroom) | failure(:not_found)
+      #   | failure(:conflict, errors: { base: [:not_archived] })
+      def restore(id:, at:)
+        raise NotImplementedError, "#{self.class} doit implémenter #restore"
+      end
+
+      # ADR-0088 : archive les classes ACTIVES d'un niveau (toutes séries) d'un établissement pour l'année. → Integer (classes archivées)
+      def archive_level(school_id:, school_year:, level_id:, at:)
+        raise NotImplementedError, "#{self.class} doit implémenter #archive_level"
       end
     end
   end

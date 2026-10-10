@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::SchoolsQuery
 # Rôle : liste nationale des établissements (SC-04) : filtres DRENA, type, cycle, statut, nom ou sigle (IE-21), 50 par page
-# ADR  : 0026, 0030, 0057, 0063, 0083 · UDR : 0036, 0044, 0050, 0079 · codes et team_invite_token : en-tête re-rendu par les streams
+# ADR  : 0026, 0030, 0057, 0063, 0083, 0088 · UDR : 0036, 0044, 0050, 0079 · codes et team_invite_token : en-tête re-rendu par les streams
 module Queries
   module School
     class SchoolsQuery
@@ -47,7 +47,7 @@ module Queries
         [ "schools.public_id", "schools.name", "schools.sigle", "drenas.public_id", "drenas.name", "schools.school_type",
           "schools.cycle", "schools.status",
           Arel.sql(Orm::School.sanitize_sql_array([ "(SELECT COUNT(*) FROM classrooms WHERE classrooms.school_id = schools.id " \
-                                                    "AND classrooms.school_year = ?)", school_year ])),
+                                                    "AND classrooms.school_year = ? AND classrooms.status = 'active')", school_year ])),
           Arel.sql("(SELECT COUNT(*) FROM teacher_schools WHERE teacher_schools.school_id = schools.id)"), "schools.school_code",
           "schools.national_code", "schools.team_invite_token" ]
       end

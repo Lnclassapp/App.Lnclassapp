@@ -72,6 +72,14 @@ module UseCases
         assert_nil designation(school: School.new(id: 3, public_id: "sch-3", status: "inactive")).linked(TOKEN)
       end
 
+      test "ADR-0088: only the token of an archived classroom of an active school is an archived link" do
+        assert designation(classrooms: [ classroom(status: "archived") ]).archived_link?(TOKEN)
+        assert_not designation.archived_link?(TOKEN)
+        assert_not designation.archived_link?(nil)
+        assert_not designation.archived_link?("ffffffffffff")
+        assert_not designation(classrooms: [ classroom(status: "archived") ], school: School.new(id: 3, public_id: "sch-3", status: "inactive")).archived_link?(TOKEN)
+      end
+
       test "IL-01: the classroom chosen in the cascade, way « standard », under the lock" do
         destination = designation.chosen(choice)
 

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::ClassroomDesignation
 # Rôle : la classe que désigne un élève, celle d'un lien valide ou celle choisie dans la cascade, et sa voie ; règle commune à RegisterStudent et JoinAsStudent
-# ADR  : 0040, 0041, 0085 · UDR : 0081
+# ADR  : 0040, 0041, 0085, 0088 · UDR : 0081
 module UseCases
   module Classroom
     class ClassroomDesignation
@@ -23,6 +23,12 @@ module UseCases
       def linked(token)
         classroom = token && @classrooms.lock_by_link_token(token:)
         Destination.new(classroom:, via: LINK) if classroom&.active? && school_of(classroom).active?
+      end
+
+      # ADR-0088 : le jeton d'une classe archivée d'un établissement actif, pour refuser avec le motif plutôt qu'avec un lien inconnu.
+      def archived_link?(token)
+        classroom = token && @classrooms.lock_by_link_token(token:)
+        classroom.present? && classroom.archived? && school_of(classroom).active?
       end
 
       # ADR-0085 §4.2 : la classe choisie doit être de celles que la cascade propose, sinon la même erreur sous le champ.

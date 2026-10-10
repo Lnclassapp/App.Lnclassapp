@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Communication::ArticleImageInput
 # Rôle : l'image d'article envoyée : format lu dans les octets (JPEG, PNG, WebP fixe), 1 Mo et 1600 px au plus ; octets gardés sans métadonnées
-# ADR  : 0060, 0074 · UDR : 0067
+# ADR  : 0060, 0074, 0089 · UDR : 0067
 module Dtos
   module Communication
     # Calqué sur Dtos::Identity::ProfilePhotoInput, avec les plafonds de Entities::Communication::ArticleImage.
@@ -31,12 +31,16 @@ module Dtos
       # Le poids est vérifié avant toute lecture : un fichier de plusieurs Mo n'est jamais chargé en mémoire.
       def file_is_an_article_image
         return errors.add(:file, :blank) if file.nil?
-        return errors.add(:file, :too_heavy, count: IMAGE::MAX_MEGABYTES) if file.size > IMAGE::MAX_BYTES
+        return errors.add(:file, :too_heavy, count: heavy_limit) if file.size > caps::MAX_BYTES
         # Fail closed : un flux incomplet ou mal formé n'est pas une image, et les octets gardés sont relus sans métadonnées.
         return errors.add(:file, other_format? ? :content_type : :unreadable) if facts.nil? || HEADER.read(data)&.metadata != false
 
-        errors.add(:file, :too_large, count: IMAGE::MAX_SIDE) if [ width, height ].max > IMAGE::MAX_SIDE
+        errors.add(:file, :too_large, count: caps::MAX_SIDE) if [ width, height ].max > caps::MAX_SIDE
       end
+
+      # Les plafonds de la classe qui reçoit l'image : un article ici, une fiche ou une question dans Dtos::Shared::ContentImageInput.
+      def caps = self.class::IMAGE
+      def heavy_limit = caps::MAX_MEGABYTES
 
       def other_format? = OTHER_FORMATS.any? { bytes.match?(it) }
 

@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · UseCases::School::ImportSchools
-# Rôle : adaptateur d'import des établissements (clés de l'ancien acceptées), chacun écrit avec son code et ses classes générées
+# Rôle : adaptateur d'import des établissements (clés de l'ancien acceptées), chacun écrit avec son code et ses classes générées, 6ème à Tle
 # ADR  : 0028, 0030, 0039, 0041, 0057, 0058, 0063 · UDR : 0037, 0050
 module UseCases
   module School
@@ -10,14 +10,17 @@ module UseCases
       # Le moteur autorise l'auteur par le registre des types (ImportKind) ; c'est la même policy.
       POLICY = Policies::School::ManageSchoolPolicy
       PUBLIC_ID_LENGTH = 14
+      # Tout établissement importé reçoit le second cycle, quel que soit son nom ou la colonne « cycle » du fichier (ignorée) :
+      # la direction ou l'équipe archive les classes en trop après coup.
+      CYCLE = "both".freeze
       # Clé canonique de l'élément → clés acceptées, la première présente l'emporte (ADR-0039).
       ALIASES = { "name" => %w[name nom], "sigle" => %w[sigle schoolsigle], "status" => %w[status schoolstatus statut],
-                  "type" => %w[type schooltype], "cycle" => %w[cycle], "national_code" => %w[national_code] }.freeze
+                  "type" => %w[type schooltype], "national_code" => %w[national_code] }.freeze
       # Valeur normalisée (NaturalKey) → type stocké.
       SCHOOL_TYPES = { "public" => "public", "privee" => "private", "prive" => "private", "private" => "private",
                        "mixte" => "mixed", "mixed" => "mixed" }.freeze
       # Attribut de l'entité → clé canonique où l'erreur est notée.
-      ERROR_KEYS = { name: "name", sigle: "sigle", status: "status", school_type: "type", cycle: "cycle" }.freeze
+      ERROR_KEYS = { name: "name", sigle: "sigle", status: "status", school_type: "type" }.freeze
       ERROR_CODES = { blank: "blank", too_long: "too_long", inclusion: "invalid_value" }.freeze
 
       # classroom_plan : le barème, lu une fois à la préparation (ADR-0058).
@@ -93,15 +96,9 @@ module UseCases
         Entities::School::School.new(
           public_id: SecureRandom.base58(PUBLIC_ID_LENGTH), drena_id:, name:, sigle: values["sigle"],
           school_type: SCHOOL_TYPES[Entities::Shared::NaturalKey.normalize(values["type"])],
-          cycle: cycle_of(values["cycle"], name), status: normalized(values["status"]) || "active",
+          cycle: CYCLE, status: normalized(values["status"]) || "active",
           national_code: Entities::School::NationalCode.normalize(values["national_code"])
         )
-      end
-
-      def cycle_of(given, name)
-        return Entities::School::School.cycle_for(name:) if given.nil?
-
-        normalized(given)
       end
 
       def normalized(value)
