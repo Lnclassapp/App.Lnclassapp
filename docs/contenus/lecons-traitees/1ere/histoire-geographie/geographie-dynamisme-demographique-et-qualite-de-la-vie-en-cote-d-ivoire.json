@@ -18,7 +18,7 @@
               "exercise_type": "fixation",
               "questions": [
                 {
-                  "content": "Un pays a un taux de natalité de 32 pour 1 000 habitants et un taux de mortalité de 9 pour 1 000. Quelle est sa croissance naturelle ?",
+                  "content": "Un pays fictif (chiffres fictifs) a un taux de natalité de 32 pour 1 000 habitants et un taux de mortalité de 9 pour 1 000. Quelle est sa croissance naturelle ?",
                   "question_type": "single_choice",
                   "explanation": "La croissance naturelle est la natalité moins la mortalité : $32 - 9 = 23$. Ne fais pas la somme $32 + 9 = 41$ : les décès font baisser la population. Souviens-toi du bac à eau, dont le trou fait baisser le niveau.",
                   "answers": [
@@ -146,7 +146,7 @@
                   ]
                 },
                 {
-                  "content": "Dans la même ville de 50 000 habitants, 400 personnes décèdent en une année. Quel est le taux de mortalité, pour 1 000 habitants ?",
+                  "content": "Dans une ville fictive de 50 000 habitants, 400 personnes décèdent en une année. Quel est le taux de mortalité, pour 1 000 habitants ?",
                   "question_type": "single_choice",
                   "explanation": "$\\frac{400}{50\\,000} \\times 1\\,000 = 8$ pour 1 000. Le résultat 0,8 correspond à 0,8 % : ce n'est pas un taux pour 1 000. Le résultat 125 correspond à $50\\,000 \\div 400$, c'est-à-dire la division à l'envers.",
                   "answers": [
@@ -192,22 +192,22 @@
                   ]
                 },
                 {
-                  "content": "Vrai ou faux : si la croissance naturelle est de 2 % par an et que le solde migratoire est nul, alors la croissance totale est aussi de 2 % par an.",
+                  "content": "Vrai ou faux : si la croissance naturelle est de 2 % par an et que le solde migratoire est nul, alors la croissance totale est de 4 % par an.",
                   "question_type": "true_false",
-                  "explanation": "Vrai. La croissance totale est la croissance naturelle plus le solde migratoire. Si le solde est nul, il n'ajoute ni ne retire rien. L'erreur tentante est de multiplier les deux taux : on les additionne.",
+                  "explanation": "Faux. Avec un solde migratoire nul, la croissance totale reste égale à la croissance naturelle, soit 2 % par an. L'erreur tentante est de doubler le taux : rien ne s'ajoute quand le solde est nul.",
                   "answers": [
                     {
                       "content": "Vrai",
-                      "correct": true
+                      "correct": false
                     },
                     {
                       "content": "Faux",
-                      "correct": false
+                      "correct": true
                     }
                   ]
                 },
                 {
-                  "content": "Une région de 20 000 habitants a une croissance naturelle de 500 personnes et un solde migratoire de −100 personnes en une année. Quelles affirmations sont exactes ? Deux réponses sont exactes.",
+                  "content": "Une région fictive de 20 000 habitants (chiffres fictifs) a une croissance naturelle de 500 personnes et un solde migratoire de −100 personnes en une année. Quelles affirmations sont exactes ? Deux réponses sont exactes.",
                   "question_type": "multiple_correct_2",
                   "explanation": "La croissance totale vaut $500 + (-100) = 400$ personnes : un solde négatif retranche des personnes. L'erreur fréquente est d'oublier le signe moins et de trouver 600 personnes.",
                   "answers": [
@@ -282,7 +282,7 @@
                   ]
                 },
                 {
-                  "content": "Dans cette région fictive de 80 000 habitants, 2 800 enfants naissent et 960 personnes décèdent en une année. Quel est le taux de natalité, pour 1 000 habitants ?",
+                  "content": "Dans une région fictive de 80 000 habitants, 2 800 enfants naissent et 960 personnes décèdent en une année. Quel est le taux de natalité, pour 1 000 habitants ?",
                   "question_type": "single_choice",
                   "explanation": "$\\frac{2\\,800}{80\\,000} \\times 1\\,000 = 35$ pour 1 000. Le taux de mortalité vaut $\\frac{960}{80\\,000} \\times 1\\,000 = 12$ pour 1 000. Ne confonds pas ces deux taux.",
                   "answers": [
@@ -305,7 +305,7 @@
                   ]
                 },
                 {
-                  "content": "Vrai ou faux : dans cette région, la croissance naturelle dépasse 2 % par an.",
+                  "content": "Vrai ou faux : dans une région fictive de 80 000 habitants, où naissent 2 800 enfants et décèdent 960 personnes en une année, la croissance naturelle dépasse 2 % par an.",
                   "question_type": "true_false",
                   "explanation": "Vrai. La croissance naturelle vaut $35 - 12 = 23$ pour 1 000, soit $2{,}3$ %. Le solde migratoire n'entre pas dans ce calcul, puisqu'il ne fait pas partie de la croissance naturelle.",
                   "answers": [
@@ -320,7 +320,7 @@
                   ]
                 },
                 {
-                  "content": "Parmi ces affirmations sur la croissance totale de cette région (1 540 personnes), lesquelles sont exactes ? Deux réponses sont exactes.",
+                  "content": "Une région fictive de 80 000 habitants a une croissance naturelle de 1 840 personnes et un solde migratoire de −300 personnes. Lesquelles de ces affirmations sur sa croissance totale sont exactes ? Deux réponses sont exactes.",
                   "question_type": "multiple_correct_2",
                   "explanation": "La croissance totale est plus faible que la croissance naturelle (1 840 personnes), à cause du solde migratoire négatif. Elle représente environ 1,9 % de la population de départ : $\\frac{1\\,540}{80\\,000} \\approx 0{,}019$. Elle n'est pas négative, car les naissances dépassent largement les décès.",
                   "answers": [
@@ -347,7 +347,7 @@
                   ]
                 },
                 {
-                  "content": "Dans une autre région fictive, le solde migratoire est nul. Le taux de natalité est de 35 pour 1 000 et le taux de mortalité de 12 pour 1 000. Quelle est la croissance totale, en pour 1 000 habitants ?",
+                  "content": "Dans une région fictive, le solde migratoire est nul. Le taux de natalité est de 35 pour 1 000 et le taux de mortalité de 12 pour 1 000. Quelle est la croissance totale, en pour 1 000 habitants ?",
                   "question_type": "single_choice",
                   "explanation": "Avec un solde migratoire nul, la croissance totale est égale à la croissance naturelle : $35 - 12 = 23$ pour 1 000. Le piège est d'additionner les deux taux, ce qui donne 47 pour 1 000.",
                   "answers": [
@@ -391,7 +391,7 @@
         {
           "name": "La qualité de la vie : ce qu'elle recouvre et comment on la mesure",
           "subtitle": "Reconnaître les composantes de la qualité de la vie et lire un indice de développement humain",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Citer les grandes composantes de la qualité de la vie.</li><li>Lire un indicateur simple, comme un taux de scolarisation.</li><li>Expliquer ce que mesure l'indice de développement humain (IDH) et ce qu'il ne dit pas.</li></ul>\n<h2>L'image pour comprendre</h2>\n<h3>Image : deux maisons construites par Koffi</h3>\n<p>Koffi, le maçon, a construit deux maisons du même prix, dans deux quartiers différents. Dans la première, l'eau coule au robinet de la cour, la lumière est installée, chaque enfant a sa place pour dormir, et le centre de santé est à dix minutes à pied. Dans la seconde, il faut porter l'eau d'un puits situé à plus d'un kilomètre, il n'y a pas d'électricité, et il faut plus de deux heures pour atteindre le dispensaire.</p>\n<p><strong>Le pont.</strong> Le logement, l'eau, l'électricité, la santé et l'école sont les composantes de la <strong>qualité de la vie</strong>. Le prix de la construction, c'est le revenu : il dit combien a coûté la maison, mais pas ce que la famille vit au quotidien.</p>\n<p><strong>La limite de l'image.</strong> Les deux maisons ne disent rien de la sécurité du quartier, de la pollution ou de la liberté de chacun. La qualité de la vie a plusieurs dimensions, et certaines sont plus difficiles à mesurer.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote><p>La <strong>qualité de la vie</strong> est l'ensemble des conditions qui permettent à une personne de vivre bien : la santé, l'éducation, le revenu, le logement, l'accès à l'eau potable et à l'électricité, la sécurité et l'environnement.</p><p>L'<strong>indice de développement humain</strong> (IDH) est un indicateur calculé par le PNUD, dont la valeur se situe entre 0 et 1. Il combine trois dimensions : la santé (espérance de vie à la naissance), l'éducation (durée de scolarisation) et le niveau de vie (revenu par habitant). Plus il est proche de 1, plus le niveau est élevé.</p><p>Le <strong>taux de scolarisation</strong> est la part des enfants d'un âge donné qui sont scolarisés : taux de scolarisation = (enfants scolarisés ÷ enfants d'âge scolaire) × 100.</p></blockquote>\n<p><strong>Repère ivoirien.</strong> En 2023, l'IDH de la Côte d'Ivoire est d'environ 0,58. Il se situe dans la catégorie du développement humain moyen, et il progresse depuis les années 2010. Le pays a donc progressé, mais il n'a pas encore atteint la catégorie élevée.</p>\n<h2>Exemple résolu</h2>\n<p>Dans un village fictif (chiffres imaginés pour l'exemple), 300 enfants ont l'âge d'aller à l'école primaire, et 240 y sont scolarisés. Quel est le taux de scolarisation ?</p>\n<ol><li>On divise le nombre d'enfants scolarisés par le nombre d'enfants d'âge scolaire : $\\frac{240}{300} = 0{,}8$.</li><li>On multiplie par 100 pour obtenir un pourcentage : $0{,}8 \\times 100 = 80$.</li><li>Vérification : 80 % de 300 fait bien $0{,}8 \\times 300 = 240$ enfants.</li></ol>\n<p>Le taux de scolarisation est donc de 80 %.</p>\n<h2>Le piège à éviter</h2>\n<p>L'erreur la plus fréquente est de croire que la qualité de la vie se résume au revenu. Un pays peut avoir un revenu moyen correct et pourtant des villages sans centre de santé. Une moyenne cache aussi les écarts entre les habitants. Quand un énoncé ne parle que d'argent, demande-toi ce qui manque à la vie quotidienne des gens.</p>\n<h2>En une phrase</h2>\n<blockquote><p>La qualité de la vie, ce n'est pas seulement gagner de l'argent : c'est pouvoir se soigner, aller à l'école, avoir de l'eau et de l'électricité.</p></blockquote>",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Citer les grandes composantes de la qualité de la vie.</li><li>Lire un indicateur simple, comme un taux de scolarisation.</li><li>Expliquer ce que mesure l'indice de développement humain (IDH) et ce qu'il ne dit pas.</li></ul>\n<h2>L'image pour comprendre</h2>\n<h3>Image : deux maisons construites par Koffi</h3>\n<p>Koffi, le maçon, a construit deux maisons du même prix, dans deux quartiers différents. Dans la première, l'eau coule au robinet de la cour, la lumière est installée, chaque enfant a sa place pour dormir, et le centre de santé est à dix minutes à pied. Dans la seconde, il faut porter l'eau d'un puits situé à plus d'un kilomètre, il n'y a pas d'électricité, et il faut plus de deux heures pour atteindre le dispensaire.</p>\n<p><strong>Le pont.</strong> Le logement, l'eau, l'électricité, la santé et l'école sont les composantes de la <strong>qualité de la vie</strong>. Le revenu, c'est le budget de la famille : il a payé les deux maisons au même prix, mais ne dit pas ce que la famille vit au quotidien.</p>\n<p><strong>La limite de l'image.</strong> Les deux maisons ne disent rien de la sécurité du quartier, de la pollution ou de la liberté de chacun. La qualité de la vie a plusieurs dimensions, et certaines sont plus difficiles à mesurer.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote><p>La <strong>qualité de la vie</strong> est l'ensemble des conditions qui permettent à une personne de vivre bien : la santé, l'éducation, le revenu, le logement, l'accès à l'eau potable et à l'électricité, la sécurité et l'environnement.</p><p>L'<strong>indice de développement humain</strong> (IDH) est un indicateur calculé par le PNUD, dont la valeur se situe entre 0 et 1. Il combine trois dimensions : la santé (espérance de vie à la naissance), l'éducation (durée de scolarisation) et le niveau de vie (revenu par habitant). Plus il est proche de 1, plus le niveau est élevé.</p><p>Le <strong>taux de scolarisation</strong> est la part des enfants d'un âge donné qui sont scolarisés : taux de scolarisation = (enfants scolarisés ÷ enfants d'âge scolaire) × 100.</p></blockquote>\n<p><strong>Repère ivoirien.</strong> L'IDH de la Côte d'Ivoire progresse, mais il reste encore faible au regard des pays les plus avancés.</p>\n<h2>Exemple résolu</h2>\n<p>Dans un village fictif (chiffres imaginés pour l'exemple), 300 enfants ont l'âge d'aller à l'école primaire, et 240 y sont scolarisés. Quel est le taux de scolarisation ?</p>\n<ol><li>On divise le nombre d'enfants scolarisés par le nombre d'enfants d'âge scolaire : $\\frac{240}{300} = 0{,}8$.</li><li>On multiplie par 100 pour obtenir un pourcentage : $0{,}8 \\times 100 = 80$.</li><li>Vérification : 80 % de 300 fait bien $0{,}8 \\times 300 = 240$ enfants.</li></ol>\n<p>Le taux de scolarisation est donc de 80 %.</p>\n<h2>Le piège à éviter</h2>\n<p>L'erreur la plus fréquente est de croire que la qualité de la vie se résume au revenu. Un pays peut avoir un revenu moyen correct et pourtant des villages sans centre de santé. Une moyenne cache aussi les écarts entre les habitants. Quand un énoncé ne parle que d'argent, demande-toi ce qui manque à la vie quotidienne des gens.</p>\n<h2>En une phrase</h2>\n<blockquote><p>La qualité de la vie, ce n'est pas seulement gagner de l'argent : c'est pouvoir se soigner, aller à l'école, avoir de l'eau et de l'électricité.</p></blockquote>",
           "exercises": [
             {
               "title": "Comprendre — Reconnaître les composantes de la qualité de la vie",
@@ -423,7 +423,7 @@
                 {
                   "content": "Vrai ou faux : l'IDH est un indicateur dont la valeur se situe entre 0 et 1.",
                   "question_type": "true_false",
-                  "explanation": "Vrai. Plus la valeur est proche de 1, plus le niveau de développement humain est élevé. Un IDH de 0,58 n'est donc pas un pourcentage : c'est une valeur sur une échelle de 0 à 1.",
+                  "explanation": "Vrai. Plus la valeur est proche de 1, plus le niveau de développement humain est élevé. Une valeur comme 0,6 n'est donc pas un pourcentage : c'est une valeur sur une échelle de 0 à 1.",
                   "answers": [
                     {
                       "content": "Vrai",
@@ -505,17 +505,17 @@
                   ]
                 },
                 {
-                  "content": "Vrai ou faux : un IDH de 0,6 correspond à une valeur située dans la zone du développement humain moyen.",
+                  "content": "Vrai ou faux : l'IDH se mesure en pourcentage de la population.",
                   "question_type": "true_false",
-                  "explanation": "Vrai. Une valeur de 0,6 se situe entre les niveaux faible et élevé, dans la zone moyenne. Ne confonds pas la catégorie d'un pays et son classement : le classement compare des pays, la catégorie décrit le niveau.",
+                  "explanation": "Faux. L'IDH est une valeur comprise entre 0 et 1, qui combine la santé, l'éducation et le niveau de vie. Ce n'est pas un pourcentage de la population : il ne compte pas les habitants.",
                   "answers": [
                     {
                       "content": "Vrai",
-                      "correct": true
+                      "correct": false
                     },
                     {
                       "content": "Faux",
-                      "correct": false
+                      "correct": true
                     }
                   ]
                 }
@@ -587,7 +587,7 @@
                   ]
                 },
                 {
-                  "content": "Le pays A a un IDH de 0,82 et le pays B un IDH de 0,55. Lequel a le niveau de développement humain le plus élevé ?",
+                  "content": "Deux pays fictifs (chiffres fictifs) : le pays A a un IDH de 0,82 et le pays B un IDH de 0,55. Lequel a le niveau de développement humain le plus élevé ?",
                   "question_type": "single_choice",
                   "explanation": "Le pays A : plus l'IDH est proche de 1, plus le niveau est élevé. Ne compare pas 0,82 et 0,55 comme deux nombres quelconques : 0,82 est nettement plus haut sur l'échelle de 0 à 1.",
                   "answers": [
@@ -668,7 +668,7 @@
                 {
                   "content": "Une commune fictive compte 60 000 habitants et 20 centres de santé de même taille. Un programme prévoit d'atteindre 66 000 habitants, avec toujours 3 000 habitants par centre. Combien de centres faut-il au total ?",
                   "question_type": "single_choice",
-                  "explanation": "$66\\,000 \\div 3\\,000 = 22$ centres. Aujourd'hui, $60\\,000 \\div 3\\,000 = 20$ : il faut donc deux centres de plus. Le piège est de garder 20 centres, ou de diviser 66 000 par 20 pour retrouver 3 000 habitants.",
+                  "explanation": "$66\\,000 \\div 3\\,000 = 22$ centres. Aujourd'hui, $60\\,000 \\div 3\\,000 = 20$ : il faut donc deux centres de plus. Le piège est de garder 20 centres : diviser 66 000 par 20 donne 3 300 habitants par centre, ce qui est faux.",
                   "answers": [
                     {
                       "content": "22 centres",
@@ -689,9 +689,9 @@
                   ]
                 },
                 {
-                  "content": "Vrai ou faux : un IDH de 0,58 indique que le pays a atteint le niveau maximal de développement humain.",
+                  "content": "Vrai ou faux : un IDH de 0,6 indique que le pays a atteint le niveau maximal de développement humain.",
                   "question_type": "true_false",
-                  "explanation": "Faux. Le maximum de l'échelle est 1, et 0,58 se situe dans la catégorie moyenne. Une valeur proche de 1 indique un niveau élevé ; 0,58 signifie qu'il reste une marge de progrès.",
+                  "explanation": "Faux. Le maximum de l'échelle est 1 : un IDH de 0,6 signifie qu'il reste une marge de progrès.",
                   "answers": [
                     {
                       "content": "Vrai",
@@ -774,20 +774,20 @@
         },
         {
           "name": "Dynamisme démographique et qualité de la vie : un lien à double sens",
-          "subtitle": "À compléter : les politiques publiques de santé et d'éducation",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Expliquer comment une croissance rapide de la population met à l'épreuve les services publics.</li><li>Montrer que la santé et l'éducation agissent à leur tour sur la croissance de la population.</li><li>Repérer les inégalités de services entre les villes et les campagnes en Côte d'Ivoire.</li></ul>\n<h2>L'image pour comprendre</h2>\n<h3>Image : la cantine de l'école du quartier</h3>\n<p>L'an dernier, la cantine de l'école du quartier servait 120 élèves. Cette année, 180 élèves arrivent, et la cantine n'a pas changé : mêmes marmites, mêmes deux cuisinières, même point d'eau. Koffi, le maçon, promet d'ajouter une salle, mais il faut du temps et de l'argent. En attendant, les élèves mangent par tours, et les classes sont pleines.</p>\n<p><strong>Le pont.</strong> Les enfants qui arrivent, ce sont la <strong>croissance de la population</strong>. La cantine, la salle de classe et le point d'eau, ce sont les <strong>services publics</strong> : écoles, santé, eau. Le temps de construire, c'est le temps qu'il faut pour que les services suivent.</p>\n<p><strong>La limite de l'image.</strong> Une population nombreuse est aussi une force de travail. Et la cantine ne peut agir ni sur les naissances ni sur les décès, alors que la santé et l'éducation le peuvent.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote><p>Une population jeune et nombreuse crée des besoins : <strong>écoles, centres de santé, eau, logements et emplois</strong>.</p><p>Si les services et les revenus augmentent moins vite que la population, la <strong>qualité de la vie par habitant</strong> peut baisser.</p><p>À l'inverse, une meilleure santé fait baisser la mortalité. Une meilleure éducation est souvent associée à une baisse de la natalité : les familles ont alors en moyenne moins d'enfants.</p></blockquote>\n<p><strong>Repère ivoirien.</strong> Les services ne sont pas répartis de la même façon. Abidjan regroupe à elle seule environ 36 % de la population urbaine du pays (recensement de 2021). Les grandes villes concentrent souvent les écoles, les hôpitaux et l'eau courante, alors que de nombreux villages, notamment dans le nord et l'ouest, sont moins bien équipés.</p>\n<h2>Exemple résolu</h2>\n<p>Une école fictive (chiffres imaginés pour l'exemple) a 6 salles et 240 élèves, soit 40 élèves par salle. La population scolaire passe à 300 élèves, sans nouvelle salle. Combien d'élèves par salle ?</p>\n<ol><li>Nombre d'élèves par salle : $\\frac{300}{6} = 50$.</li><li>Pour revenir à 40 élèves par salle, il faut $\\frac{300}{40} = 7{,}5$ salles. Comme on ne construit pas une demi-salle, il en faut 8.</li></ol>\n<p>Sans nouvelle salle, chaque salle accueille 50 élèves au lieu de 40 : la vie scolaire devient plus difficile.</p>\n<h2>Le piège à éviter</h2>\n<p>L'erreur la plus fréquente est de croire que le lien va dans un seul sens. Une population nombreuse ne mène pas automatiquement à une mauvaise qualité de vie : tout dépend de la croissance des services et des revenus. Pour répondre, compare toujours les besoins et les moyens, par habitant.</p>\n<h2>En une phrase</h2>\n<blockquote><p>Une population qui grandit vite met les écoles, les soins et l'eau à l'épreuve, mais de bons services aident aussi à maîtriser cette croissance.</p></blockquote>",
+          "subtitle": "Comment la population et les services publics s'influencent",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Expliquer comment une croissance rapide de la population met à l'épreuve les services publics.</li><li>Montrer que la santé et l'éducation agissent à leur tour sur la croissance de la population.</li><li>Repérer les inégalités de services entre les villes et les campagnes en Côte d'Ivoire.</li></ul>\n<h2>L'image pour comprendre</h2>\n<h3>Image : la cantine de l'école du quartier</h3>\n<p>L'an dernier, la cantine de l'école du quartier servait 120 élèves. Cette année, 180 élèves arrivent, et la cantine n'a pas changé : mêmes marmites, mêmes deux cuisinières, même point d'eau. Koffi, le maçon, promet d'ajouter une salle, mais il faut du temps et de l'argent. En attendant, les élèves mangent par tours, et les classes sont pleines.</p>\n<p><strong>Le pont.</strong> Les enfants qui arrivent, ce sont la <strong>croissance de la population</strong>. La cantine, la salle de classe et le point d'eau, ce sont les <strong>services publics</strong> : écoles, santé, eau. Le temps de construire, c'est le temps qu'il faut pour que les services suivent.</p>\n<p><strong>La limite de l'image.</strong> Une population nombreuse est aussi une force de travail. Et la cantine ne peut agir ni sur les naissances ni sur les décès, alors que la santé et l'éducation le peuvent.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote><p>Une population jeune et nombreuse crée des besoins : <strong>écoles, centres de santé, eau, logements et emplois</strong>.</p><p>Si les services et les revenus augmentent moins vite que la population, la <strong>qualité de la vie par habitant</strong> peut baisser.</p><p>À l'inverse, une meilleure santé fait baisser la mortalité. Une meilleure éducation est souvent associée à une baisse de la natalité : les familles ont alors en moyenne moins d'enfants.</p></blockquote>\n<p><strong>Repère ivoirien.</strong> Les services ne sont pas répartis de la même façon. Les grandes villes concentrent souvent les écoles, les hôpitaux et l'eau courante, alors que de nombreux villages, notamment dans le nord et l'ouest, sont moins bien équipés.</p>\n<h2>Exemple résolu</h2>\n<p>Une école fictive (chiffres imaginés pour l'exemple) a 6 salles et 240 élèves, soit 40 élèves par salle. La population scolaire passe à 300 élèves, sans nouvelle salle. Combien d'élèves par salle ?</p>\n<ol><li>Nombre d'élèves par salle : $\\frac{300}{6} = 50$.</li><li>Pour revenir à 40 élèves par salle, il faut $\\frac{300}{40} = 7{,}5$ salles. Comme on ne construit pas une demi-salle, il en faut 8.</li></ol>\n<p>Sans nouvelle salle, chaque salle accueille 50 élèves au lieu de 40 : la vie scolaire devient plus difficile.</p>\n<h2>Le piège à éviter</h2>\n<p>L'erreur la plus fréquente est de croire que le lien va dans un seul sens. Une population nombreuse ne mène pas automatiquement à une mauvaise qualité de vie : tout dépend de la croissance des services et des revenus. Pour répondre, compare toujours les besoins et les moyens, par habitant.</p>\n<h2>En une phrase</h2>\n<blockquote><p>Une population qui grandit vite met les écoles, les soins et l'eau à l'épreuve, mais de bons services aident aussi à maîtriser cette croissance.</p></blockquote>",
           "exercises": [
             {
               "title": "Comprendre — Relier population et services",
               "exercise_type": "fixation",
               "questions": [
                 {
-                  "content": "Une population jeune et nombreuse augmente. Quel besoin apparaît en premier ?",
+                  "content": "Quels besoins une population jeune et nombreuse crée-t-elle ?",
                   "question_type": "single_choice",
                   "explanation": "Une population qui grandit a besoin d'écoles, de centres de santé, d'eau et de logements. Souviens-toi de la cantine : plus d'élèves, mêmes marmites. L'erreur tentante est de croire qu'une population jeune ne coûte rien.",
                   "answers": [
                     {
-                      "content": "des écoles, des centres de santé, de l'eau et des logements",
+                      "content": "tous ces besoins à la fois : des écoles, des centres de santé, de l'eau et des logements",
                       "correct": true
                     },
                     {
@@ -866,7 +866,7 @@
                   ]
                 },
                 {
-                  "content": "Une école voit ses élèves passer de 200 à 260 sans nouvelle salle. Quelle est la conséquence la plus probable ?",
+                  "content": "Une école fictive (chiffres fictifs) voit ses élèves passer de 200 à 260 sans nouvelle salle. Quelle est la conséquence la plus probable ?",
                   "question_type": "single_choice",
                   "explanation": "Avec le même nombre de salles, il y a plus d'élèves par salle : les classes deviennent plus chargées. L'erreur tentante est de croire que l'école accueille mieux les élèves sans rien changer.",
                   "answers": [
@@ -895,7 +895,7 @@
               "exercise_type": "fixation",
               "questions": [
                 {
-                  "content": "Une école a 8 salles et 320 élèves. Combien d'élèves par salle en moyenne ?",
+                  "content": "Une école fictive (chiffres fictifs) a 8 salles et 320 élèves. Combien d'élèves par salle en moyenne ?",
                   "question_type": "single_choice",
                   "explanation": "$320 \\div 8 = 40$ élèves par salle. Vérifie : $40 \\times 8 = 320$.",
                   "answers": [
@@ -918,9 +918,9 @@
                   ]
                 },
                 {
-                  "content": "Dans cette même école, 400 élèves doivent être accueillis au même rythme de 40 élèves par salle. Combien de salles faut-il ?",
+                  "content": "Une école doit accueillir 400 élèves au même rythme de 40 élèves par salle. Combien de salles faut-il ?",
                   "question_type": "single_choice",
-                  "explanation": "$400 \\div 40 = 10$ salles. La réponse 8 correspond au nombre de salles actuel, qui ne suffit plus.",
+                  "explanation": "$400 \\div 40 = 10$ salles. La réponse 8 correspond à 320 élèves, et non à 400.",
                   "answers": [
                     {
                       "content": "10 salles",
@@ -941,7 +941,7 @@
                   ]
                 },
                 {
-                  "content": "Vrai ou faux : une école de 6 salles accueillant 270 élèves a en moyenne 40 élèves par salle.",
+                  "content": "Vrai ou faux : une école fictive de 6 salles accueillant 270 élèves a en moyenne 40 élèves par salle.",
                   "question_type": "true_false",
                   "explanation": "Faux : $270 \\div 6 = 45$ élèves par salle, pas 40. Refais toujours la division au lieu de répondre de tête.",
                   "answers": [
@@ -979,7 +979,7 @@
                   ]
                 },
                 {
-                  "content": "Une région compte 50 000 habitants et sa croissance totale est de 2 % en un an. Quelles affirmations sont exactes ? Deux réponses sont exactes.",
+                  "content": "Une région fictive (chiffres fictifs) compte 50 000 habitants et sa croissance totale est de 2 % en un an. Quelles affirmations sont exactes ? Deux réponses sont exactes.",
                   "question_type": "multiple_correct_2",
                   "explanation": "$2\\,\\%$ de 50 000 vaut 1 000 : la population gagne 1 000 habitants et atteint 51 000. L'erreur tentante est de prendre 2 000 habitants, ce qui correspondrait en fait à 4 %.",
                   "answers": [
@@ -1006,7 +1006,7 @@
                   ]
                 },
                 {
-                  "content": "Un pays compte 10 000 enfants d'âge scolaire, et 8 500 sont scolarisés. Quel est le pourcentage d'enfants non scolarisés ?",
+                  "content": "Un pays fictif (chiffres fictifs) compte 10 000 enfants d'âge scolaire, et 8 500 sont scolarisés. Quel est le pourcentage d'enfants non scolarisés ?",
                   "question_type": "single_choice",
                   "explanation": "Il y a $10\\,000 - 8\\,500 = 1\\,500$ enfants non scolarisés, soit $\\frac{1\\,500}{10\\,000} = 0{,}15$, donc 15 %. Le piège est de répondre 85 %, qui est le taux de scolarisation.",
                   "answers": [
@@ -1035,7 +1035,7 @@
               "exercise_type": "evaluation",
               "questions": [
                 {
-                  "content": "Une école a 12 salles et 480 élèves, soit 40 élèves par salle. La population scolaire augmente de 25 %, et aucune salle n'est ajoutée. Combien d'élèves par salle ?",
+                  "content": "Une école fictive (chiffres fictifs) a 12 salles et 480 élèves, soit 40 élèves par salle. La population scolaire augmente de 25 %, et aucune salle n'est ajoutée. Combien d'élèves par salle ?",
                   "question_type": "single_choice",
                   "explanation": "Nouvel effectif : $480 \\times 1{,}25 = 600$ élèves. Par salle : $600 \\div 12 = 50$. La réponse 40 correspond à la situation de départ, qui ne tient pas compte de la hausse.",
                   "answers": [
@@ -1058,9 +1058,9 @@
                   ]
                 },
                 {
-                  "content": "Dans cette école, 600 élèves sont accueillis. Pour garder 40 élèves par salle, combien de salles faut-il au minimum ?",
+                  "content": "Une école fictive accueille 600 élèves (chiffres fictifs). Pour garder 40 élèves par salle, combien de salles faut-il au minimum ?",
                   "question_type": "single_choice",
-                  "explanation": "$600 \\div 40 = 15$ salles. Il en faut 3 de plus que les 12 actuelles : répondre 12 revient à garder la situation actuelle, qui ne suffit plus.",
+                  "explanation": "$600 \\div 40 = 15$ salles. Répondre 12 reviendrait à garder un nombre de salles qui ne suffit pas pour 600 élèves.",
                   "answers": [
                     {
                       "content": "15 salles",
@@ -1108,7 +1108,7 @@
                   ]
                 },
                 {
-                  "content": "Vrai ou faux : si la mortalité passe de 8 à 16 pour 1 000 et que la natalité reste à 38 pour 1 000, la croissance naturelle passe de 30 à 22 pour 1 000.",
+                  "content": "Vrai ou faux : si, dans une région fictive (chiffres fictifs), la mortalité passe de 8 à 16 pour 1 000 et que la natalité reste à 38 pour 1 000, la croissance naturelle passe de 30 à 22 pour 1 000.",
                   "question_type": "true_false",
                   "explanation": "Vrai : $38 - 8 = 30$, puis $38 - 16 = 22$. Une hausse de la mortalité réduit la croissance naturelle, même si la natalité ne bouge pas.",
                   "answers": [
@@ -1123,9 +1123,9 @@
                   ]
                 },
                 {
-                  "content": "Un district de 50 000 habitants a une croissance totale de 1 200 personnes en un an, dont un solde migratoire de −300 personnes. Quelle est sa croissance naturelle, en personnes ?",
+                  "content": "Un district fictif (chiffres fictifs) de 50 000 habitants a une croissance totale de 1 200 personnes en un an, dont un solde migratoire de −300 personnes. Quelle est sa croissance naturelle, en personnes ?",
                   "question_type": "single_choice",
-                  "explanation": "Croissance totale = croissance naturelle + solde migratoire, donc $N = 1\\,200 - (-300) = 1\\,500$. L'erreur tentante est de répondre 900, soit $1\\,200 - 300$ : le solde négatif doit être ajouté au calcul avec son signe.",
+                  "explanation": "Croissance totale = croissance naturelle + solde migratoire, donc $N = 1\\,200 - (-300) = 1\\,500$. L'erreur tentante est de répondre 900, soit $1\\,200 - 300$ : il faut soustraire le solde négatif : 1 200 − (−300) = 1 500.",
                   "answers": [
                     {
                       "content": "1 500 personnes",
