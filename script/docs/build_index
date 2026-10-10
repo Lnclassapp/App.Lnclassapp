@@ -9,8 +9,8 @@
 # Block, one `key: value` per line: titre, statut, date (only when it differs from the **Date** row of the header),
 # adr-lie (UDR only), problematique. The number and the link come from the file name.
 KINDS = {
-  "adr" => { columns: ["N°", "Titre", "Statut", "Date", "Problématique"], keys: %w[titre statut date problematique] },
-  "udr" => { columns: ["N°", "Titre", "Statut", "Date", "ADR lié", "Problématique"], keys: %w[titre statut date adr-lie problematique] }
+  "adr" => { columns: [ "N°", "Titre", "Statut", "Date", "Problématique" ], keys: %w[titre statut date problematique] },
+  "udr" => { columns: [ "N°", "Titre", "Statut", "Date", "ADR lié", "Problématique" ], keys: %w[titre statut date adr-lie problematique] }
 }.freeze
 START = "<!-- index:start -->".freeze
 FINISH = "<!-- index:end -->".freeze
@@ -32,10 +32,10 @@ def table(kind)
     fields = metadata(path)
     missing = spec[:keys] - fields.keys
     abort "#{path}: missing #{missing.join(', ')}" unless missing.empty?
-    cells = ["[#{file[0, 4]}](./#{file})"] + spec[:keys].map { |key| fields.fetch(key) }
+    cells = [ "[#{file[0, 4]}](./#{file})" ] + spec[:keys].map { |key| fields.fetch(key) }
     "| #{cells.join(' | ')} |"
   end
-  ["| #{spec[:columns].join(' | ')} |", "| #{(['---'] * spec[:columns].size).map { |s| ":#{s}" }.join(' | ')} |", *rows].join("\n")
+  [ "| #{spec[:columns].join(' | ')} |", "| #{([ '---' ] * spec[:columns].size).map { |s| ":#{s}" }.join(' | ')} |", *rows ].join("\n")
 end
 
 stale = KINDS.keys.reject do |kind|
