@@ -12,119 +12,115 @@
         {
           "name": "Définition d'une limite et limites de référence",
           "subtitle": "Limites finies et infinies, en un point et à l'infini",
-          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Reconnaître qu'un entier relatif en divise un autre et utiliser les propriétés de la divisibilité.</li>\n<li>Effectuer la division euclidienne de deux entiers relatifs, avec un reste toujours positif.</li>\n<li>Déterminer les entiers $n$ pour lesquels une expression en $n$ en divise une autre.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Les piles de sacs (diviseur et multiple).</strong> Sur le quai du port d'Abidjan, un docker doit ranger 84 sacs de cacao en piles de même hauteur, sans qu'il lui reste un seul sac. Il peut faire 12 piles de 7 sacs : $84 = 7 \\times 12$. Avec des piles de 5 sacs, il lui resterait des sacs sur les bras.</p>\n<p><em>Le pont.</em> Les 84 sacs, c'est $b$. La hauteur d'une pile, c'est $a$. Le nombre de piles, c'est $k$. Ranger sans reste, c'est écrire $b = ka$ : on dit que $a$ <strong>divise</strong> $b$, ou que $b$ est un <strong>multiple</strong> de $a$.</p>\n<p><em>Où l'image s'arrête.</em> Des sacs, on n'en compte qu'un nombre positif. Dans ℤ, $a$ et $k$ peuvent être négatifs, et $0$ est un multiple de tout entier ($0 = a \\times 0$).</p>\n<p><strong>2. Les voyages du chariot élévateur (division euclidienne).</strong> Un chariot élévateur emporte 8 caisses par voyage. Il y a 100 caisses à évacuer du quai. Il fait 12 voyages pleins, soit 96 caisses. Il en reste 4 : pas assez pour un voyage plein.</p>\n<p><em>Le pont.</em> Les 100 caisses, c'est le <strong>dividende</strong> $a$. Les 8 caisses par voyage, c'est le <strong>diviseur</strong> $b$. Les 12 voyages pleins, c'est le <strong>quotient</strong> $q$. Les 4 caisses qui restent, c'est le <strong>reste</strong> $r$. On écrit $100 = 8 \\times 12 + 4$. Le reste est plus petit que 8 : sinon, le chariot referait un voyage plein.</p>\n<p><em>Où l'image s'arrête.</em> Avec des caisses, le dividende est positif. Dans ℤ, le dividende peut être négatif, et le reste reste pourtant toujours positif ou nul.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Divisibilité.</strong> Soient $a$ et $b$ deux entiers relatifs. On dit que $a$ divise $b$, et on note $a \\mid b$, s'il existe un entier relatif $k$ tel que $b = ka$. On dit aussi que $b$ est un multiple de $a$.</p>\n<p><strong>Propriétés.</strong> Pour $a$, $b$, $c$ entiers relatifs :</p>\n<ul>\n<li>si $a \\mid b$ et $b \\mid c$, alors $a \\mid c$ (transitivité) ;</li>\n<li>si $a \\mid b$ et $a \\mid c$, alors $a$ divise $ub + vc$ pour tous entiers relatifs $u$ et $v$ (combinaison linéaire) ;</li>\n<li>si $a \\mid b$ et $b \\mid a$, alors $a = b$ ou $a = -b$ ;</li>\n<li>si $a \\mid b$, alors $ac \\mid bc$.</li>\n</ul>\n<p><strong>Division euclidienne.</strong> Soient $a$ un entier relatif et $b$ un entier relatif non nul. Il existe un unique couple $(q ; r)$ d'entiers relatifs tel que $$a = bq + r \\quad \\text{avec} \\quad 0 \\le r < |b|.$$ Ici $b$ divise $a$ si et seulement si $r = 0$.</p>\n<p><strong>Pourquoi ce couple existe et est unique.</strong> <em>Existence</em> (avec $b > 0$) : les multiples $bk$ inférieurs ou égaux à $a$ forment un ensemble non vide (il contient $b \\times (-|a|)$) et majoré par $a$. Il a un plus grand élément $bq$. Alors $bq \\le a < b(q+1)$, donc $r = a - bq$ vérifie $0 \\le r < b$. Si $b < 0$, on divise par $-b$ puis on change le signe de $q$. <em>Unicité</em> : si $bq + r = bq' + r'$ avec les deux restes dans $[0 ; |b|[$, alors $b(q - q') = r' - r$. Ce multiple de $b$ a une valeur absolue inférieure à $|b|$ : il vaut $0$. Donc $r = r'$ et $q = q'$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Effectuer la division euclidienne de $2025$ par $12$, puis de $-47$ par $6$.</strong></p>\n<ol>\n<li>$12 \\times 168 = 2016$ et $2025 - 2016 = 9$, avec $0 \\le 9 < 12$. Donc $2025 = 12 \\times 168 + 9$ : $q = 168$ et $r = 9$.</li>\n<li>Pour $-47$ : on cherche le plus grand multiple de $6$ inférieur ou égal à $-47$. $6 \\times (-8) = -48 \\le -47$, et $6 \\times (-7) = -42 > -47$. Donc $q = -8$.</li>\n<li>Le reste est $r = -47 - (-48) = 1$, avec $0 \\le 1 < 6$. Donc $-47 = 6 \\times (-8) + 1$.</li>\n</ol>\n<p><strong>Déterminer les entiers relatifs $n$ tels que $n + 2$ divise $3n + 7$.</strong></p>\n<ol>\n<li>On écrit $3n + 7 = 3(n + 2) + 1$.</li>\n<li>Si $n + 2$ divise $3n + 7$, comme il divise aussi $3(n + 2)$, il divise la différence : $n + 2 \\mid 1$.</li>\n<li>Les seuls diviseurs de $1$ sont $1$ et $-1$. Donc $n + 2 = 1$ ou $n + 2 = -1$, soit $n = -1$ ou $n = -3$.</li>\n<li>Contrôle : pour $n = -1$, $n + 2 = 1$ divise $4$ ; pour $n = -3$, $n + 2 = -1$ divise $-2$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Donner un reste négatif ou trop grand. Pour $-47$ divisé par $6$, écrire $-47 = 6 \\times (-7) - 5$ est une égalité exacte, mais ce n'est pas la division euclidienne : le reste $-5$ est négatif. Le bon quotient est $-8$ et le bon reste est $1$.</p>\n<p>Comment le repérer : vérifie toujours que ton reste est dans l'intervalle $0 \\le r < |b|$. Une calculatrice qui donne $-7{,}83\\ldots$ ne te donne pas le bon quotient : le quotient est le plus grand entier $q$ tel que $bq \\le a$, donc ici $-8$ et non $-7$.</p>\n<p>Autre piège : dans la recherche des $n$ tels que $n + 2 \\mid 3n + 7$, oublier les diviseurs négatifs. Dans ℤ, $-1$ divise aussi $1$.</p>\n<h2>En une phrase</h2>\n<p>$a$ divise $b$ quand $b = ka$ avec $k$ entier ; et pour tout entier $a$ et tout $b \\ne 0$, il existe un seul couple $(q ; r)$ avec $a = bq + r$ et $0 \\le r < |b|$, comme les voyages pleins du chariot et les caisses qui restent.</p>\n",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Lire et traduire une limite finie ou infinie, en un point (à gauche, à droite) et à l'infini.</li><li>Utiliser la définition d'une limite avec des intervalles ouverts, puis avec $\\varepsilon$ et $\\alpha$.</li><li>Appliquer les limites de référence et en déduire les asymptotes d'une courbe.</li></ul><h2>L'image pour comprendre</h2><p><strong>1. Le stade qui se remplit (limite finie à l'infini).</strong> Un stade a 20 000 places. Une heure avant le coup d'envoi, les supporters entrent. Demande : « À partir de quand y a-t-il toujours entre 19 990 et 20 010 personnes ? » Il existe un moment. Demande plus précis : « entre 19 999 et 20 001 » : il existe encore un moment, plus tardif. Quelle que soit la marge demandée, le nombre de présents finit par rester dans cette marge.</p><p><em>Le pont.</em> Le temps qui passe, c'est $x$ qui tend vers $+\\infty$. Le nombre de présents, c'est $f(x)$. Les 20 000 places, c'est la limite $\\ell$. « Une marge aussi petite qu'on veut autour de 20 000 » est un intervalle ouvert centré en $\\ell$. « À partir d'un moment » veut dire « pour $x$ assez grand ». On écrit $\\lim_{x \\to +\\infty} f(x) = 20\\,000$.</p><p><em>Où l'image s'arrête.</em> Dans un vrai stade, on ne dépasse pas la capacité. Une fonction peut, elle, passer au-dessus et au-dessous de sa limite, ou l'atteindre. Ce qui compte : rester dans toute marge choisie.</p><p><strong>2. La file à l'entrée (limite infinie en un point).</strong> Il faut faire entrer 1 000 supporters. Le portillon laisse passer $x$ supporters par seconde. La durée de l'opération est $\\frac{1000}{x}$ secondes. Plus le débit $x$ est petit (en restant positif), plus l'attente est longue, et elle finit par dépasser n'importe quel nombre, même un million de secondes.</p><p><em>Le pont.</em> Le débit $x$ s'approche de $0$ par valeurs positives : on note $x \\to 0^+$. L'attente $f(x) = \\frac{1000}{x}$ dépasse tout réel $A$ choisi à l'avance : c'est la définition de $\\lim_{x \\to 0^+} f(x) = +\\infty$.</p><p><em>Où l'image s'arrête.</em> Un débit négatif n'a pas de sens pour le portillon. En mathématiques, $x$ peut s'approcher de $0$ aussi par la gauche, et $\\frac{1}{x}$ y prend alors de grandes valeurs négatives. Il faut donc toujours dire « à droite » ou « à gauche ».</p><p><strong>3. Le tireur de penalty (la définition avec $\\varepsilon$ et $\\alpha$).</strong> Le sélectionneur exige : « Ton ballon doit finir à moins de $\\varepsilon$ du point visé. » Le tireur répond : « D'accord. Je règle la précision de mon geste à $\\alpha$ près, et tant que mon geste reste dans cette précision, le ballon finit à moins de $\\varepsilon$. » Si le sélectionneur devient plus exigeant (un $\\varepsilon$ plus petit), le tireur doit devenir plus précis (un $\\alpha$ plus petit).</p><p><em>Le pont.</em> Le point visé, c'est $\\ell$. Le geste, c'est $x$ près de $a$, à moins de $\\alpha$ de $a$. L'arrivée du ballon, c'est $f(x)$, à moins de $\\varepsilon$ de $\\ell$. Le défi est lancé en premier ($\\varepsilon$), la réponse vient après ($\\alpha$) : $\\alpha$ dépend de $\\varepsilon$.</p><p><em>Où l'image s'arrête.</em> Un tireur n'a le droit qu'à un nombre limité de précisions. En mathématiques, la réponse $\\alpha$ doit exister pour tous les $\\varepsilon>0$, aussi petits soient-ils.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Limite finie en un réel $a$.</strong> $\\lim_{x \\to a} f(x) = \\ell$ signifie : pour tout intervalle ouvert $J$ contenant $\\ell$, il existe un intervalle ouvert $I$ contenant $a$ tel que, pour tout $x$ de $I$ différent de $a$ (et dans l'ensemble de définition), $f(x)$ appartient à $J$. Avec $\\varepsilon$ : pour tout $\\varepsilon > 0$, il existe $\\alpha > 0$ tel que $0 < |x - a| < \\alpha$ entraîne $|f(x) - \\ell| < \\varepsilon$.</p><p><strong>Limite finie à l'infini.</strong> $\\lim_{x \\to +\\infty} f(x) = \\ell$ signifie : pour tout $\\varepsilon > 0$, il existe un réel $B$ tel que $x > B$ entraîne $|f(x) - \\ell| < \\varepsilon$. Pour $-\\infty$, on écrit $x < B$.</p><p><strong>Limite infinie.</strong> $\\lim_{x \\to +\\infty} f(x) = +\\infty$ signifie : pour tout réel $A$, il existe $B$ tel que $x > B$ entraîne $f(x) > A$. De même, $\\lim_{x \\to a} f(x) = +\\infty$ signifie : pour tout réel $A$, il existe $\\alpha > 0$ tel que $0 < |x - a| < \\alpha$ entraîne $f(x) > A$. Pour $-\\infty$, on remplace $f(x) > A$ par $f(x) < A$.</p><p><strong>À gauche, à droite.</strong> $\\lim_{x \\to a^+} f(x)$ est la limite quand $x > a$, et $\\lim_{x \\to a^-} f(x)$ la limite quand $x < a$. On a $\\lim_{x \\to a} f(x) = \\ell$ si et seulement si ces deux limites existent et valent $\\ell$. Une limite, si elle existe, est unique.</p><p><strong>Asymptotes.</strong> Si $\\lim_{x \\to \\pm\\infty} f(x) = \\ell$, la droite d'équation $y = \\ell$ est asymptote horizontale à la courbe. Si $\\lim_{x \\to a} f(x) = \\pm\\infty$ (ou seulement à gauche, ou à droite), la droite d'équation $x = a$ est asymptote verticale.</p><p><strong>Limites de référence.</strong> Pour tout entier $n \\geq 1$ : $\\lim_{x \\to \\pm\\infty} \\frac{1}{x^n} = 0$ ; $\\lim_{x \\to 0^+} \\frac{1}{x^n} = +\\infty$ ; $\\lim_{x \\to 0^-} \\frac{1}{x^n} = -\\infty$ si $n$ est impair, $+\\infty$ si $n$ est pair. Aussi : $\\lim_{x \\to +\\infty} x^n = +\\infty$ ; $\\lim_{x \\to -\\infty} x^n = +\\infty$ si $n$ est pair, $-\\infty$ si $n$ est impair ; $\\lim_{x \\to +\\infty} \\sqrt{x} = +\\infty$ ; $\\lim_{x \\to +\\infty} \\frac{1}{\\sqrt{x}} = 0$ ; $\\lim_{x \\to 0^+} \\frac{1}{\\sqrt{x}} = +\\infty$.</p></blockquote><h2>Exemple résolu</h2><p><strong>Étudier $f(x) = 2 + \\frac{1}{x - 3}$ aux bornes de son ensemble de définition.</strong></p><ol><li>En $+\\infty$ : $x - 3 \\to +\\infty$, donc $\\frac{1}{x - 3} \\to 0$ et $f(x) \\to 2$. La droite $y = 2$ est asymptote horizontale (de même en $-\\infty$).</li><li>En $3^+$ : $x - 3 \\to 0$ par valeurs positives, donc $\\frac{1}{x - 3} \\to +\\infty$ et $\\lim_{x \\to 3^+} f(x) = +\\infty$.</li><li>En $3^-$ : $x - 3 \\to 0$ par valeurs négatives, donc $\\lim_{x \\to 3^-} f(x) = -\\infty$.</li><li>Les limites à gauche et à droite sont différentes : $f$ n'a pas de limite en $3$, mais la droite $x = 3$ est asymptote verticale.</li></ol><p><strong>Prouver avec $\\varepsilon$ que $\\lim_{x \\to 1} (3x - 2) = 1$.</strong></p><ol><li>On cherche à rendre $|f(x) - 1|$ petit, avec $f(x) = 3x - 2$ : $|f(x) - 1| = |3x - 3| = 3|x - 1|$.</li><li>Soit $\\varepsilon > 0$. On veut $3|x - 1| < \\varepsilon$, c'est-à-dire $|x - 1| < \\frac{\\varepsilon}{3}$.</li><li>On choisit $\\alpha = \\frac{\\varepsilon}{3}$ : si $0 < |x - 1| < \\alpha$, alors $|f(x) - 1| < 3\\alpha = \\varepsilon$. La limite vaut bien $1$.</li></ol><h2>Le piège à éviter</h2><p>Écrire « $\\lim_{x \\to 0} \\frac{1}{x} = +\\infty$ ». C'est faux : à droite de $0$, $\\frac{1}{x}$ tend vers $+\\infty$, à gauche vers $-\\infty$. Comme les deux limites sont différentes, il n'y a pas de limite en $0$. Seule $\\frac{1}{x^2}$, toujours positive, tend vers $+\\infty$ des deux côtés.</p><p>Comment le repérer : avant de conclure sur un dénominateur qui tend vers $0$, étudie son signe de chaque côté.</p><h2>En une phrase</h2><p>Une limite dit où va $f(x)$ quand $x$ s'approche de $a$ ou part à l'infini, et pour une limite en un point, elle n'existe que si la limite à gauche et la limite à droite sont égales.</p>",
           "exercises": [
             {
-              "title": "Comprendre — Diviseur, multiple, quotient et reste",
+              "title": "Comprendre — Lire une limite et sa définition",
               "exercise_type": "fixation",
               "questions": [
                 {
-                  "content": "Soient $a$ et $b$ deux entiers relatifs. Que signifie « $a$ divise $b$ » ?",
+                  "content": "On écrit $\\lim_{x \\to +\\infty} f(x) = 20\\,000$, où $f(x)$ est le nombre de supporters présents dans un stade de 20 000 places au temps $x$. Que signifie cette égalité ?",
                   "question_type": "single_choice",
-                  "explanation": "Dans l'image des piles de sacs, $84 = 7 \\times 12$ : 7 divise 84. Le diviseur est celui qui « range » : $b = ka$. Attention au sens : si tu inverses, tu écris que $b$ divise $a$. Et le quotient $k$ peut être négatif dans ℤ.",
+                  "explanation": "Souviens-toi du stade : le nombre de présents finit par rester dans toute marge choisie autour de 20 000. Il n'a pas besoin de valoir exactement 20 000, ni de rester en dessous : une limite n'est ni une valeur atteinte ni un plafond.",
                   "answers": [
                     {
-                      "content": "Il existe un entier relatif $k$ tel que $b = ka$.",
+                      "content": "Pour tout intervalle ouvert centré en $20\\,000$, $f(x)$ y reste dès que $x$ est assez grand",
                       "correct": true
                     },
                     {
-                      "content": "Il existe un entier relatif $k$ tel que $a = kb$.",
+                      "content": "$f(x)$ vaut exactement $20\\,000$ dès que $x$ est assez grand",
                       "correct": false
                     },
                     {
-                      "content": "Le reste de la division euclidienne de $a$ par $b$ est nul.",
+                      "content": "$f(x)$ ne dépasse jamais $20\\,000$",
                       "correct": false
                     },
                     {
-                      "content": "Le quotient de $a$ par $b$ est un entier positif.",
+                      "content": "$x$ se rapproche de $20\\,000$ quand $f(x)$ devient très grand",
                       "correct": false
                     }
                   ]
                 },
                 {
-                  "content": "Un chariot élévateur emporte 8 caisses par voyage. Il y a 100 caisses à évacuer. Il fait 12 voyages pleins, puis il reste 4 caisses. On écrit $100 = 8 \\times 12 + 4$. Que représente le nombre $12$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "12 est le nombre de voyages pleins : c'est le quotient. Les 4 caisses restantes forment le reste, 8 est le diviseur (la taille d'un voyage) et 100 le dividende. Le reste est toujours inférieur au diviseur : $4 < 8$.",
-                  "answers": [
-                    {
-                      "content": "Le quotient $q$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le reste $r$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le diviseur $b$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le dividende $a$.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Parmi ces affirmations, lesquelles sont vraies ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "$-6 \\mid 18$ car $18 = (-6) \\times (-3)$ : le quotient peut être négatif. Et $0 = 7 \\times 0$ est un multiple de 7. Mais $0 \\nmid 7$ (0 fois $k$ donne toujours 0), $4 \\nmid 18$ (car $18 = 4 \\times 4 + 2$), et $18 \\nmid 6$ : attention au sens de « divise ».",
-                  "answers": [
-                    {
-                      "content": "$-6$ divise $18$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0$ est un multiple de $7$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0$ divise $7$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "$4$ divise $18$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "$18$ divise $6$.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Laquelle de ces écritures est la division euclidienne de $100$ par $8$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les trois autres égalités sont exactes, mais leur reste ne vérifie pas $0 \\le r < 8$ : $12$ et $20$ sont trop grands (le chariot pourrait faire d'autres voyages pleins) et $-4$ est négatif. Le reste est toujours positif ou nul, et plus petit que le diviseur.",
-                  "answers": [
-                    {
-                      "content": "$100 = 8 \\times 12 + 4$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$100 = 8 \\times 11 + 12$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$100 = 8 \\times 13 - 4$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$100 = 8 \\times 10 + 20$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Soient $a$ un entier relatif et $b$ un entier relatif non nul. Il existe un unique couple $(q ; r)$ d'entiers relatifs tel que $a = bq + r$ et $0 \\le r < |b|$.",
+                  "content": "Vrai ou faux : $\\lim_{x \\to 0} \\frac{1}{x} = +\\infty$.",
                   "question_type": "true_false",
-                  "explanation": "C'est le théorème de la division euclidienne : existence et unicité. L'unicité vient de $b(q - q') = r' - r$ : un multiple de $b$ de valeur absolue inférieure à $|b|$ ne peut être que $0$. Le reste est choisi positif, même quand $a$ est négatif.",
+                  "explanation": "À droite de $0$, $\\frac{1}{x}$ tend vers $+\\infty$ ; à gauche, vers $-\\infty$. Les deux limites sont différentes : il n'y a pas de limite en $0$. La file d'attente à l'entrée du stade n'a de sens que pour un débit positif : ce n'est que la limite à droite.",
                   "answers": [
                     {
                       "content": "Vrai",
-                      "correct": true
+                      "correct": false
                     },
                     {
                       "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase traduit $\\lim_{x \\to a} f(x) = \\ell$ avec $\\varepsilon$ et $\\alpha$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le défi $\\varepsilon$ est lancé en premier, comme le sélectionneur au tireur de penalty : pour chaque $\\varepsilon > 0$ on trouve ensuite un $\\alpha > 0$ qui dépend de lui. Inverser l'ordre, ou mesurer $x$ contre $\\ell$, change complètement le sens.",
+                  "answers": [
+                    {
+                      "content": "Pour tout $\\varepsilon > 0$, il existe $\\alpha > 0$ tel que $0 < |x - a| < \\alpha$ entraîne $|f(x) - \\ell| < \\varepsilon$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il existe $\\alpha > 0$ tel que, pour tout $\\varepsilon > 0$, $0 < |x - a| < \\alpha$ entraîne $|f(x) - \\ell| < \\varepsilon$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour tout $\\varepsilon > 0$, il existe $\\alpha > 0$ tel que $|f(x) - \\ell| < \\alpha$ entraîne $|x - a| < \\varepsilon$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour tout $\\varepsilon > 0$, il existe $\\alpha > 0$ tel que $0 < |x - \\ell| < \\alpha$ entraîne $|f(x) - a| < \\varepsilon$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $\\lim_{x \\to +\\infty} f(x) = 3$. Quelles affirmations sont correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "La limite finie en $+\\infty$ donne une asymptote horizontale $y = 3$, et $f(x)$ s'approche de $3$ autant qu'on veut. Mais la courbe peut couper cette asymptote, même plusieurs fois. Et $x = 3$ serait une asymptote verticale, liée à une limite infinie en $3$ : autre situation.",
+                  "answers": [
+                    {
+                      "content": "La droite d'équation $y = 3$ est asymptote horizontale à la courbe en $+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(x)$ s'approche de $3$ aussi près qu'on veut dès que $x$ est assez grand",
+                      "correct": true
+                    },
+                    {
+                      "content": "La courbe de $f$ ne peut jamais couper la droite d'équation $y = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $x = 3$ est asymptote verticale à la courbe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que signifie $\\lim_{x \\to a} f(x) = +\\infty$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La définition fixe un réel $A$ quelconque, aussi grand qu'on veut, comme l'attente à l'entrée du stade qui dépasse tout nombre. C'est la valeur de $f(x)$ qui devient grande quand $x$ est proche de $a$, pas $x$. Et $+\\infty$ n'est pas un nombre : $f(a)$ ne peut pas valoir $+\\infty$.",
+                  "answers": [
+                    {
+                      "content": "Pour tout réel $A$, on a $f(x) > A$ dès que $x \\ne a$ est assez proche de $a$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(a) = +\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(x)$ est grand quand $x$ est grand",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il existe un réel $A$ tel que $f(x) > A$ pour tout $x$",
                       "correct": false
                     }
                   ]
@@ -132,268 +128,254 @@
               ]
             },
             {
-              "title": "Appliquer — Divisions euclidiennes et diviseurs",
+              "title": "Appliquer — Utiliser les limites de référence",
               "exercise_type": "fixation",
               "questions": [
                 {
-                  "content": "Quelle est la division euclidienne de $2025$ par $12$ ?",
+                  "content": "Que vaut $\\lim_{x \\to -\\infty} x^3$ ?",
                   "question_type": "single_choice",
-                  "explanation": "$12 \\times 168 = 2016$ et $2025 - 2016 = 9$, avec $0 \\le 9 < 12$. Les deux autres égalités sont exactes, mais leur reste ne convient pas : $-3$ est négatif et $21$ dépasse le diviseur $12$.",
+                  "explanation": "Un nombre négatif très grand en valeur absolue, élevé au cube (exposant impair), reste négatif et devient encore plus grand en valeur absolue. Par exemple $(-100)^3 = -1\\,000\\,000$. Pour un exposant pair, le résultat serait positif.",
                   "answers": [
                     {
-                      "content": "$2025 = 12 \\times 168 + 9$",
+                      "content": "$-\\infty$",
                       "correct": true
                     },
                     {
-                      "content": "$2025 = 12 \\times 169 - 3$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$2025 = 12 \\times 167 + 21$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelle est la division euclidienne de $-47$ par $6$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$6 \\times (-8) = -48$ et $-47 - (-48) = 1$ : $q = -8$ et $r = 1$. L'égalité $-47 = 6 \\times (-7) - 5$ est exacte mais son reste est négatif. Et $6 \\times (-7) + 5 = -37$, pas $-47$.",
-                  "answers": [
-                    {
-                      "content": "$-47 = 6 \\times (-8) + 1$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$-47 = 6 \\times (-7) - 5$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$-47 = 6 \\times (-7) + 5$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Combien d'entiers relatifs $n$ vérifient « $n - 1$ divise $6$ » ?",
-                  "question_type": "single_choice",
-                  "explanation": "$n - 1$ doit être un diviseur de 6 dans ℤ : $\\pm 1, \\pm 2, \\pm 3, \\pm 6$, soit 8 valeurs, donc $n \\in \\{2, 0, 3, -1, 4, -2, 7, -5\\}$. Si tu oublies les diviseurs négatifs, tu n'en trouves que 4.",
-                  "answers": [
-                    {
-                      "content": "$8$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$4$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$6$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Soient $a$ et $b$ deux entiers relatifs, tous deux multiples de $7$. Lesquelles de ces affirmations sont toujours vraies ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Une combinaison linéaire de multiples de 7 est un multiple de 7. Contre-exemples avec $a = 7$ et $b = 14$ : $a + b = 21$ n'est divisible ni par 49 ni par 14 ; et avec $a = 14$ et $b = 7$, $a$ ne divise pas $b$.",
-                  "answers": [
-                    {
-                      "content": "$7$ divise $a + b$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "$7$ divise $2a - 3b$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "$49$ divise $a + b$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "$a$ divise $b$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "$14$ divise $a + b$.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans la division euclidienne de l'entier $a$ par $9$, le reste est $4$. Quel est le reste de la division euclidienne de $a + 8$ par $9$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "On écrit $a = 9q + 4$. Alors $a + 8 = 9q + 12 = 9(q + 1) + 3$, avec $0 \\le 3 < 9$ : le reste est 3. Répondre 12 est l'erreur classique : 12 dépasse le diviseur, il reste encore un voyage plein à faire.",
-                  "answers": [
-                    {
-                      "content": "$3$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$12$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$4$",
+                      "content": "$+\\infty$",
                       "correct": false
                     },
                     {
                       "content": "$0$",
                       "correct": false
+                    },
+                    {
+                      "content": "$-1$",
+                      "correct": false
                     }
                   ]
                 },
                 {
-                  "content": "Pour tous entiers relatifs $a$, $b$ et $c$, si $a$ divise $b + c$, alors $a$ divise $b$ et $a$ divise $c$.",
-                  "question_type": "true_false",
-                  "explanation": "Contre-exemple : $3 \\mid 1 + 2$, mais $3 \\nmid 1$ et $3 \\nmid 2$. La propriété vraie va dans l'autre sens : si $a$ divise $b$ et $c$, alors $a$ divise $b + c$.",
+                  "content": "Que vaut $\\lim_{x \\to 0^-} \\frac{1}{x^2}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le carré $x^2$ est toujours positif et tend vers $0$ : donc $x^2 \\to 0^+$ et $\\frac{1}{x^2} \\to +\\infty$. Par exemple $x = -0{,}01$ donne $\\frac{1}{x^2} = 10\\,000$. Le signe négatif de $x$ ne compte pas, puisque l'exposant est pair.",
                   "answers": [
                     {
-                      "content": "Vrai",
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
                       "correct": false
                     },
                     {
-                      "content": "Faux",
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to -1^-} \\frac{3}{x + 1}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Quand $x < -1$ et $x \\to -1$, le dénominateur $x + 1$ est négatif et tend vers $0$ : c'est $0^-$. Un numérateur $3$ positif divisé par un nombre négatif très petit donne un nombre négatif très grand : $-\\infty$. Exemple : $x = -1{,}01$ donne $\\frac{3}{-0{,}01} = -300$.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
                       "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = 2x + 1$, avec $\\lim_{x \\to 3} f(x) = 7$. Quelles valeurs de $\\alpha$ garantissent que $0 < |x - 3| < \\alpha$ entraîne $|f(x) - 7| < 0{,}1$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "On a $|f(x) - 7| = |2x - 6| = 2|x - 3|$. Il faut $2|x - 3| < 0{,}1$, soit $|x - 3| < 0{,}05$. Donc $\\alpha = 0{,}05$ et tout $\\alpha$ plus petit conviennent, comme $0{,}01$. Avec $\\alpha = 0{,}1$ ou $0{,}5$, on obtient $|f(x) - 7|$ jusqu'à $0{,}2$ ou $1$.",
+                  "answers": [
+                    {
+                      "content": "$\\alpha = 0{,}01$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\alpha = 0{,}05$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\alpha = 0{,}1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\alpha = 0{,}5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces égalités sur $\\frac{1}{\\sqrt{x}}$ et $\\sqrt{x}$, lesquelles sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$\\sqrt{x}$ tend vers $+\\infty$ en $+\\infty$ et vers $0$ en $0^+$. Donc $\\frac{1}{\\sqrt{x}}$ tend vers $0$ en $+\\infty$, et vers $+\\infty$ en $0^+$ (dénominateur positif qui tend vers $0$). Écrire $\\lim_{x \\to 0^+} \\frac{1}{\\sqrt{x}} = 0$ ou $\\lim_{x \\to +\\infty} \\sqrt{x} = 0$ est faux.",
+                  "answers": [
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} \\frac{1}{\\sqrt{x}} = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to 0^+} \\frac{1}{\\sqrt{x}} = +\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to 0^+} \\sqrt{x} = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to 0^+} \\frac{1}{\\sqrt{x}} = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} \\sqrt{x} = 0$",
+                      "correct": false
                     }
                   ]
                 }
               ]
             },
             {
-              "title": "S'évaluer — Divisibilité et division euclidienne",
+              "title": "S'évaluer — Limites, asymptotes et définition",
               "exercise_type": "evaluation",
               "questions": [
                 {
-                  "content": "Quels sont les entiers relatifs $n$ tels que $n + 1$ divise $2n + 9$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$2n + 9 = 2(n + 1) + 7$, donc $n + 1$ divise $7$ : $n + 1 \\in \\{-7, -1, 1, 7\\}$, soit $n \\in \\{-8, -2, 0, 6\\}$. Oublier les diviseurs négatifs, ou confondre $n$ et $n + 1$, donne les autres réponses.",
-                  "answers": [
-                    {
-                      "content": "$n \\in \\{-8 ; -2 ; 0 ; 6\\}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$n \\in \\{0 ; 6\\}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$n \\in \\{1 ; 7\\}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$n \\in \\{-8 ; 6\\}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans la division euclidienne de $a$ par $b$, le quotient est $7$ et le reste est $5$. On sait que $a + b = 117$. Que vaut $a$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$a = 7b + 5$, donc $a + b = 8b + 5 = 117$ et $b = 14$. Alors $a = 7 \\times 14 + 5 = 103$, et $5 < 14$ : le reste est valable. 98 oublie le reste ; 112 retire seulement 5 de 117.",
-                  "answers": [
-                    {
-                      "content": "$103$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$98$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$112$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On effectue la division euclidienne de $-100$ par $7$. Lesquelles de ces affirmations sont vraies ?",
+                  "content": "Soit $f(x) = 4 + \\frac{5}{x + 1}$ pour $x \\ne -1$. Quelles droites sont asymptotes à la courbe de $f$ ?",
                   "question_type": "multiple_correct_2",
-                  "explanation": "$7 \\times (-15) = -105$ et $-100 - (-105) = 5$ : $-100 = 7 \\times (-15) + 5$. Avec le quotient $-14$, on trouverait le reste $-2$, négatif. Et $2$ est le reste de $100$, pas celui de $-100$.",
+                  "explanation": "En $\\pm\\infty$, $\\frac{5}{x + 1} \\to 0$, donc $f(x) \\to 4$ : asymptote horizontale $y = 4$. En $-1$, le dénominateur tend vers $0$, donc $f(x) \\to \\pm\\infty$ : asymptote verticale $x = -1$. Inverser les rôles ($y = -1$, $x = 4$) est l'erreur classique.",
                   "answers": [
                     {
-                      "content": "Le quotient est $-15$.",
+                      "content": "La droite d'équation $y = 4$",
                       "correct": true
                     },
                     {
-                      "content": "Le reste est $5$.",
+                      "content": "La droite d'équation $x = -1$",
                       "correct": true
                     },
                     {
-                      "content": "Le quotient est $-14$.",
+                      "content": "La droite d'équation $y = -1$",
                       "correct": false
                     },
                     {
-                      "content": "Le reste est $2$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le reste est $-2$.",
+                      "content": "La droite d'équation $x = 4$",
                       "correct": false
                     }
                   ]
                 },
                 {
-                  "content": "On suppose $a = bq + r = bq' + r'$, avec $0 \\le r < |b|$ et $0 \\le r' < |b|$. On obtient $b(q - q') = r' - r$. Comment conclut-on que $r = r'$ ?",
+                  "content": "Que vaut $\\lim_{x \\to 1} \\frac{1}{(x - 1)^2}$ ?",
                   "question_type": "single_choice",
-                  "explanation": "Les restes sont dans $[0 ; |b|[$, donc $|r' - r| < |b|$. Or $r' - r = b(q - q')$ est un multiple de $b$ : si $q \\ne q'$, sa valeur absolue serait au moins $|b|$. Donc $q = q'$, puis $r = r'$.",
+                  "explanation": "Le carré $(x - 1)^2$ est positif des deux côtés de $1$ et tend vers $0^+$. Donc $\\frac{1}{(x - 1)^2} \\to +\\infty$ à gauche comme à droite, et la limite en $1$ existe. Ne confonds pas avec $\\frac{1}{x - 1}$, dont les limites à gauche et à droite diffèrent.",
                   "answers": [
                     {
-                      "content": "$r' - r$ est un multiple de $b$ et $|r' - r| < |b|$ : le seul multiple de $b$ de valeur absolue inférieure à $|b|$ est $0$.",
+                      "content": "$+\\infty$",
                       "correct": true
                     },
                     {
-                      "content": "Parce que $b$ divise tous les entiers.",
+                      "content": "$-\\infty$",
                       "correct": false
                     },
                     {
-                      "content": "Parce que $q = q'$ par hypothèse.",
+                      "content": "$0$",
                       "correct": false
                     },
                     {
-                      "content": "Parce que $r$ et $r'$ sont positifs, donc égaux.",
+                      "content": "La limite n'existe pas, car les limites à gauche et à droite diffèrent",
                       "correct": false
                     }
                   ]
                 },
                 {
-                  "content": "Parmi ces propriétés, lesquelles sont vraies pour tous entiers relatifs $a$, $b$, $c$ non nuls ?",
+                  "content": "Soit $f(x) = \\frac{1}{x - 2}$. Quelles affirmations sont exactes ?",
                   "question_type": "multiple_correct_3",
-                  "explanation": "Les trois premières sont des propriétés du cours : transitivité, $a = \\pm b$ et multiplication par $c$. Contre-exemples : $6 \\mid 2 \\times 3$ sans diviser 2 ni 3 ; $4 \\mid 2^2$ mais $4 \\nmid 2$. Un produit peut être divisible par $a$ sans que ses facteurs le soient.",
+                  "explanation": "Pour $x > 2$ proche de $2$, $x - 2 \\to 0^+$ : on a $+\\infty$. Pour $x < 2$, $x - 2 \\to 0^-$ : on a $-\\infty$. Les deux limites diffèrent, donc pas de limite en $2$. En $\\pm\\infty$, le dénominateur devient grand, donc $f(x) \\to 0$ et non $\\pm\\infty$.",
                   "answers": [
                     {
-                      "content": "Si $a \\mid b$ et $b \\mid c$, alors $a \\mid c$.",
+                      "content": "$\\lim_{x \\to 2^+} f(x) = +\\infty$",
                       "correct": true
                     },
                     {
-                      "content": "Si $a \\mid b$ et $b \\mid a$, alors $a = b$ ou $a = -b$.",
+                      "content": "$\\lim_{x \\to 2^-} f(x) = -\\infty$",
                       "correct": true
                     },
                     {
-                      "content": "Si $a \\mid b$, alors $ac \\mid bc$.",
+                      "content": "La fonction $f$ n'a pas de limite en $2$",
                       "correct": true
                     },
                     {
-                      "content": "Si $a \\mid bc$, alors $a \\mid b$ ou $a \\mid c$.",
+                      "content": "$\\lim_{x \\to +\\infty} f(x) = +\\infty$",
                       "correct": false
                     },
                     {
-                      "content": "Si $a \\mid b^2$, alors $a \\mid b$.",
+                      "content": "$\\lim_{x \\to -\\infty} f(x) = -\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim_{x \\to 2} f(x) = 0$",
                       "correct": false
                     }
                   ]
                 },
                 {
-                  "content": "Si un entier $n$ est divisible par $6$ et par $4$, alors il est divisible par $24$.",
-                  "question_type": "true_false",
-                  "explanation": "Contre-exemple : $n = 12$ est divisible par 6 et par 4, mais pas par 24 ($12 = 24 \\times 0 + 12$). Il faudrait que 6 et 4 n'aient aucun facteur en commun ; or ils ont tous deux le facteur 2.",
+                  "content": "Soit $f(x) = 3x - 2$, avec $\\lim_{x \\to 1} f(x) = 1$. Quelle est la plus grande valeur de $\\alpha$ telle que $0 < |x - 1| < \\alpha$ entraîne $|f(x) - 1| < 0{,}3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $|f(x) - 1| = |3x - 3| = 3|x - 1|$. La condition $3|x - 1| < 0{,}3$ équivaut à $|x - 1| < 0{,}1$, donc $\\alpha = 0{,}1$. La valeur $0{,}3$ est l'erreur qui oublie le facteur $3$ ; $0{,}01$ convient aussi mais n'est pas la plus grande.",
                   "answers": [
                     {
-                      "content": "Vrai",
+                      "content": "$0{,}1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}3$",
                       "correct": false
                     },
                     {
-                      "content": "Faux",
+                      "content": "$0{,}9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}01$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^2$ et $\\lim_{x \\to +\\infty} f(x) = +\\infty$. Pour $A = 400$, quelle est la plus petite valeur de $B$ telle que $x > B$ entraîne $f(x) > 400$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $x > 0$, $x^2 > 400$ équivaut à $x > 20$ : donc $B = 20$. Pour $x = 20$ on obtient exactement $400$, qui n'est pas strictement supérieur à $400$, d'où la condition $x > B$. Prendre $B = 200$ est trop grand ; $B = 400$ est l'erreur « $B = A$ ».",
+                  "answers": [
+                    {
+                      "content": "$20$",
                       "correct": true
+                    },
+                    {
+                      "content": "$200$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$400$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$40$",
+                      "correct": false
                     }
                   ]
                 }
@@ -404,111 +386,119 @@
         {
           "name": "Opérations sur les limites et formes indéterminées",
           "subtitle": "Calculer une limite, lever une indétermination, limite d'une composée",
-          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Utiliser la congruence modulo $n$ et ses propriétés pour calculer un reste, y compris celui d'une puissance.</li>\n<li>Appliquer les critères de divisibilité par 2, 3, 4, 5, 9, 10 et 11.</li>\n<li>Raisonner sur les restes possibles d'un entier pour démontrer une propriété vraie pour tout $n$.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le cargo de la semaine (la congruence).</strong> Un cargo fait escale à Abidjan tous les 7 jours. Il est au port le jour n° 4, puis les jours 11, 18, 25… Aux jours 4 et 18, il arrive le même jour de la semaine : l'écart est $14 = 2 \\times 7$. Pour savoir quel jour de la semaine on tombe, on ne garde que le reste de la division du numéro du jour par 7.</p>\n<p><em>Le pont.</em> Les numéros de jours sont les entiers. La semaine de 7 jours, c'est le <strong>modulo</strong> $7$. Tomber le même jour de la semaine, c'est avoir le même reste dans la division par 7, ou encore un écart multiple de 7. On écrit $18 \\equiv 4 \\; [7]$ et on lit « 18 est congru à 4 modulo 7 ».</p>\n<p><em>Où l'image s'arrête.</em> Le calendrier n'a pas de jours négatifs. Dans ℤ, on peut écrire $-3 \\equiv 4 \\; [7]$ : le jour qui précède de 3 jours le jour 0 tombe le même jour que le jour 4.</p>\n<p><strong>2. Les paquets de 9 (les critères de divisibilité).</strong> Le pointeur du port note le numéro d'un lot : 4 275, c'est-à-dire 4 milliers, 2 centaines, 7 dizaines et 5 unités de caisses. Il regroupe les caisses par paquets de 9. Un millier de caisses fait $1000 = 111 \\times 9 + 1$ : il reste 1 caisse. Une centaine fait $100 = 11 \\times 9 + 1$ : il reste 1 caisse. Une dizaine fait $10 = 1 \\times 9 + 1$ : il reste 1 caisse. Chaque chiffre apporte donc autant de caisses restantes que sa valeur : $4 + 2 + 7 + 5 = 18$.</p>\n<p><em>Le pont.</em> Les paquets de 9 sont le modulo $9$. Chaque puissance de 10 laisse le reste 1 : $10 \\equiv 1 \\; [9]$, donc $10^k \\equiv 1 \\; [9]$. Un nombre est donc congru à la somme de ses chiffres modulo 9.</p>\n<p><em>Où l'image s'arrête.</em> Pour 11, ça ne marche plus avec des « 1 » : $10 \\equiv -1 \\; [11]$, les restes alternent $+1, -1, +1, \\ldots$ et les chiffres s'ajoutent avec des signes alternés. Pour 2, 5 et 10, seul le dernier chiffre compte, car $10$ est multiple de chacun d'eux. Pour 4, ce sont les deux derniers chiffres, car $100$ est multiple de $4$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Congruence.</strong> Soit $n$ un entier supérieur ou égal à $2$. Deux entiers relatifs $a$ et $b$ sont <strong>congrus modulo $n$</strong>, et on note $a \\equiv b \\; [n]$, lorsque $n$ divise $a - b$. Cela équivaut à dire que $a$ et $b$ ont le même reste dans la division euclidienne par $n$. En particulier, $a \\equiv 0 \\; [n]$ si et seulement si $n \\mid a$.</p>\n<p><strong>Propriétés.</strong> La congruence est réflexive, symétrique et transitive. Si $a \\equiv b \\; [n]$ et $c \\equiv d \\; [n]$, alors :</p>\n<ul>\n<li>$a + c \\equiv b + d \\; [n]$ et $a - c \\equiv b - d \\; [n]$ ;</li>\n<li>$ac \\equiv bd \\; [n]$ ;</li>\n<li>$a^p \\equiv b^p \\; [n]$ pour tout entier naturel $p$.</li>\n</ul>\n<p><strong>Critères de divisibilité.</strong> Un entier est divisible :</p>\n<ul>\n<li>par $2$ si son dernier chiffre est $0, 2, 4, 6$ ou $8$ ; par $5$ si son dernier chiffre est $0$ ou $5$ ; par $10$ si son dernier chiffre est $0$ ;</li>\n<li>par $4$ si le nombre formé par ses deux derniers chiffres est divisible par $4$ ;</li>\n<li>par $3$ (respectivement $9$) si la somme de ses chiffres est divisible par $3$ (respectivement $9$) ;</li>\n<li>par $11$ si sa somme alternée est divisible par $11$ : chiffre des unités, moins chiffre des dizaines, plus chiffre des centaines, moins… et ainsi de suite.</li>\n</ul>\n<p>Pour 3 et 9, on a mieux : un entier est congru à la somme de ses chiffres modulo 9 (et modulo 3). Pour 11, un entier est congru à sa somme alternée modulo 11.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Quel est le reste de la division de $3^{2025}$ par $7$ ?</strong></p>\n<ol>\n<li>On calcule les premières puissances de 3 modulo 7 : $3^1 \\equiv 3$, $3^2 = 9 \\equiv 2$, $3^3 \\equiv 6$, $3^4 \\equiv 18 \\equiv 4$, $3^5 \\equiv 12 \\equiv 5$, $3^6 \\equiv 15 \\equiv 1 \\; [7]$.</li>\n<li>On divise l'exposant par 6 : $2025 = 6 \\times 337 + 3$.</li>\n<li>$3^{2025} = (3^6)^{337} \\times 3^3 \\equiv 1^{337} \\times 27 \\; [7]$, et $27 = 3 \\times 7 + 6$.</li>\n<li>Donc $3^{2025} \\equiv 6 \\; [7]$ : le reste est $6$.</li>\n</ol>\n<p><strong>Le lot n° 4 275 est-il divisible par 9 ? par 11 ?</strong></p>\n<ol>\n<li>Somme des chiffres : $4 + 2 + 7 + 5 = 18$, qui est un multiple de 9. Donc $4275$ est divisible par $9$ (et par $3$). En effet, $4275 = 9 \\times 475$.</li>\n<li>Somme alternée en partant des unités : $5 - 7 + 2 - 4 = -4$. Ce n'est pas un multiple de 11 : $4275$ n'est pas divisible par $11$.</li>\n<li>Son reste modulo 11 est celui de $-4$, soit $-4 + 11 = 7$. Contrôle : $11 \\times 388 = 4268$ et $4275 - 4268 = 7$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Simplifier une congruence comme une égalité. On a $6 \\equiv 10 \\; [4]$, car $10 - 6 = 4$. Mais si tu « simplifies par 2 », tu obtiens $3 \\equiv 5 \\; [4]$, et c'est faux : $5 - 3 = 2$ n'est pas un multiple de 4. On peut additionner, soustraire, multiplier, élever à une puissance. Diviser est interdit sans précaution.</p>\n<p>Autre piège, très fréquent avec les puissances : réduire l'exposant modulo $n$. Pour $2^{100}$ modulo $7$, on réduit la <em>base</em> ou l'on cherche la période des puissances (ici $2^3 \\equiv 1$). Remplacer l'exposant 100 par son reste 2 dans la division par 7 est faux.</p>\n<p>Dernier piège : un reste n'est jamais négatif. Le reste de $-17$ par $5$ est $3$ (car $-17 = 5 \\times (-4) + 3$), pas $-2$.</p>\n<h2>En une phrase</h2>\n<p>$a \\equiv b \\; [n]$ veut dire que $a$ et $b$ ont le même reste par $n$, comme deux jours qui tombent le même jour de la semaine : on peut additionner et multiplier les congruences, mais pas les simplifier, et les critères de divisibilité viennent de $10 \\equiv 1 \\; [9]$ et de $10 \\equiv -1 \\; [11]$.</p>\n",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Calculer une limite avec les règles d'opérations (somme, produit, quotient).</li><li>Reconnaître une forme indéterminée et la lever (factorisation, terme de plus haut degré, expression conjuguée).</li><li>Calculer la limite d'une fonction composée.</li></ul><h2>L'image pour comprendre</h2><p><strong>1. La recette de la buvette (les règles qui marchent).</strong> Dans un stade imaginaire, l'affluence grandit sans cesse : elle dépasse tout nombre. La dépense moyenne par supporter se stabilise à 500 F. La recette est « affluence $\\times$ dépense moyenne ». Elle grandit sans cesse, elle aussi.</p><p><em>Le pont.</em> L'affluence est $f(x)$, avec $\\lim f = +\\infty$. La dépense moyenne est $g(x)$, avec $\\lim g = 500$. La recette est $f(x) \\times g(x)$, et $\\lim f g = +\\infty$, puisque $500 > 0$. C'est la règle « $+\\infty \\times \\ell = +\\infty$ si $\\ell > 0$ ».</p><p><em>Où l'image s'arrête.</em> Si la dépense moyenne tendait vers $0$ (les supporters ne dépensent presque plus), on ne pourrait plus conclure sans calcul : c'est la forme « $\\infty \\times 0$ ».</p><p><strong>2. Deux équipes qui marquent sans fin (les formes indéterminées).</strong> Dans un championnat imaginaire sans fin, l'équipe A a marqué $a(t)$ buts et l'équipe B $b(t)$ buts après $t$ matchs. Les deux totaux grandissent sans limite. Si A marque 3 buts par match et B 1 but par match, l'écart $a - b$ grandit sans limite et le rapport $\\frac{a}{b}$ vaut 3. Si les deux marquent 2 buts par match, l'écart est nul et le rapport vaut 1.</p><p><em>Le pont.</em> Les deux totaux tendent vers $+\\infty$. L'écart est de la forme « $+\\infty - \\infty$ » et le rapport de la forme « $\\frac{\\infty}{\\infty}$ ». On voit que le résultat change selon le rythme de chaque équipe : on dit que ces formes sont <strong>indéterminées</strong>. Même idée pour « $0 \\times \\infty$ » (un joueur dont la vitesse tend vers $0$ pendant un temps qui tend vers $+\\infty$) et « $\\frac{0}{0}$ ».</p><p><em>Où l'image s'arrête.</em> « Indéterminée » ne veut pas dire « sans limite ». La limite existe souvent. Il faut la trouver en transformant l'écriture.</p><p><strong>3. La passe en deux temps (la limite d'une composée).</strong> Un défenseur passe le ballon à un milieu, qui le passe à l'attaquant. Si la première passe amène le ballon aussi près qu'on veut du milieu, et si le milieu, de là, envoie le ballon aussi près qu'on veut de l'attaquant, le ballon arrive près de l'attaquant.</p><p><em>Le pont.</em> $x$ tend vers $a$ et la première passe donne $g(x)$, qui tend vers $b$ (le milieu). La deuxième passe donne $f(g(x))$, et comme $f(y)$ tend vers $c$ quand $y$ tend vers $b$ (l'attaquant), on obtient $\\lim_{x \\to a} f(g(x)) = c$.</p><p><em>Où l'image s'arrête.</em> Les valeurs $a$, $b$ et $c$ peuvent être des réels ou $\\pm\\infty$. L'image oublie ce cas, qui est pourtant fréquent.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Somme.</strong> $\\ell + \\ell'$ ; $\\ell + (\\pm\\infty) = \\pm\\infty$ ; $(+\\infty) + (+\\infty) = +\\infty$ ; $(-\\infty) + (-\\infty) = -\\infty$. La forme « $+\\infty - \\infty$ » est indéterminée.</p><p><strong>Produit.</strong> $\\ell \\times \\ell'$ ; si $\\ell \\neq 0$, $\\ell \\times (\\pm\\infty) = \\pm\\infty$ avec la règle des signes ; $(\\pm\\infty) \\times (\\pm\\infty) = \\pm\\infty$ avec la règle des signes. La forme « $0 \\times \\infty$ » est indéterminée.</p><p><strong>Quotient.</strong> $\\frac{\\ell}{\\ell'}$ si $\\ell' \\neq 0$ ; $\\frac{\\ell}{\\pm\\infty} = 0$ ; $\\frac{\\pm\\infty}{\\ell'} = \\pm\\infty$ avec la règle des signes, si $\\ell' \\neq 0$ ; $\\frac{\\ell}{0}$ avec $\\ell \\neq 0$ donne $\\pm\\infty$ : on étudie le signe du dénominateur ($0^+$ ou $0^-$). Les formes « $\\frac{\\infty}{\\infty}$ » et « $\\frac{0}{0}$ » sont indéterminées.</p><p><strong>Les 4 formes indéterminées.</strong> $+\\infty - \\infty$ ; $0 \\times \\infty$ ; $\\frac{\\infty}{\\infty}$ ; $\\frac{0}{0}$.</p><p><strong>Pour les lever.</strong></p><ul><li>En $\\pm\\infty$, un polynôme a la même limite que son terme de plus haut degré.</li><li>En $\\pm\\infty$, une fraction rationnelle a la même limite que le quotient de ses termes de plus haut degré.</li><li>Pour « $\\frac{0}{0}$ » en $a$ avec un polynôme, on factorise par $(x - a)$, puis on simplifie.</li><li>Avec une racine carrée, on multiplie par l'expression conjuguée : celle de $\\sqrt{A} - \\sqrt{B}$ est $\\sqrt{A} + \\sqrt{B}$.</li></ul><p><strong>Limite d'une composée.</strong> Si $\\lim_{x \\to a} g(x) = b$ et $\\lim_{y \\to b} f(y) = c$, alors $\\lim_{x \\to a} f(g(x)) = c$ ($a$, $b$, $c$ réels, $+\\infty$ ou $-\\infty$).</p></blockquote><h2>Exemple résolu</h2><p><strong>Calculer $\\lim_{x \\to +\\infty} \\left(\\sqrt{x^2 + x} - x\\right)$.</strong></p><ol><li>$\\sqrt{x^2 + x} \\to +\\infty$ et $x \\to +\\infty$ : c'est la forme « $+\\infty - \\infty$ », indéterminée.</li><li>On multiplie et on divise par l'expression conjuguée $\\sqrt{x^2 + x} + x$ : $\\sqrt{x^2 + x} - x = \\frac{(x^2 + x) - x^2}{\\sqrt{x^2 + x} + x} = \\frac{x}{\\sqrt{x^2 + x} + x}$.</li><li>Pour $x > 0$, on divise le numérateur et le dénominateur par $x$ : $\\frac{x}{\\sqrt{x^2 + x} + x} = \\frac{1}{\\sqrt{1 + \\frac{1}{x}} + 1}$.</li><li>Quand $x \\to +\\infty$, $\\frac{1}{x} \\to 0$, donc $\\sqrt{1 + \\frac{1}{x}} \\to 1$ (limite d'une composée). Le quotient tend vers $\\frac{1}{1 + 1} = \\frac{1}{2}$.</li></ol><p><strong>Calculer $\\lim_{x \\to 1} \\frac{x^3 - 1}{x^2 - 1}$.</strong></p><ol><li>En remplaçant $x$ par $1$, on obtient « $\\frac{0}{0}$ » : forme indéterminée.</li><li>On factorise : $x^3 - 1 = (x - 1)(x^2 + x + 1)$ et $x^2 - 1 = (x - 1)(x + 1)$.</li><li>Pour $x \\neq 1$, on simplifie : $\\frac{x^3 - 1}{x^2 - 1} = \\frac{x^2 + x + 1}{x + 1}$.</li><li>En $x = 1$ : $\\frac{1 + 1 + 1}{1 + 1} = \\frac{3}{2}$. La limite vaut $\\frac{3}{2}$.</li></ol><h2>Le piège à éviter</h2><p>Traiter $\\infty$ comme un nombre ordinaire : écrire « $\\infty - \\infty = 0$ » ou « $\\frac{\\infty}{\\infty} = 1$ ». C'est faux. Par exemple, $\\lim_{x \\to +\\infty} \\frac{3x}{x} = 3$ et $\\lim_{x \\to +\\infty} \\frac{x^2}{x} = +\\infty$ : les deux sont de la forme « $\\frac{\\infty}{\\infty}$ », avec des résultats différents.</p><p>Comment le repérer : si ton calcul direct donne l'une des 4 formes indéterminées, arrête-toi, transforme l'écriture, puis recalcule.</p><h2>En une phrase</h2><p>On calcule une limite avec les règles de somme, de produit et de quotient ; quand elles donnent une des 4 formes indéterminées, on transforme l'écriture (terme de plus haut degré, factorisation, conjugué) avant de conclure.</p>",
           "exercises": [
             {
-              "title": "Comprendre — Sens de la congruence et critères",
+              "title": "Comprendre — Règles et formes indéterminées",
               "exercise_type": "fixation",
               "questions": [
                 {
-                  "content": "Soient $a$ et $b$ deux entiers relatifs et $n$ un entier supérieur ou égal à $2$. Que signifie $a \\equiv b \\; [n]$ ?",
+                  "content": "Laquelle de ces formes n'est PAS une forme indéterminée ?",
                   "question_type": "single_choice",
-                  "explanation": "Être congrus modulo $n$, c'est avoir le même reste dans la division par $n$, ce qui équivaut à $n \\mid a - b$. Dans l'image du cargo, deux jours tombent le même jour de la semaine si leur écart est un multiple de 7. Le quotient (le numéro de la semaine) n'a pas à être le même.",
+                  "explanation": "Dans la recette de la buvette ou dans la somme de deux totaux qui grandissent, les deux termes vont dans le même sens : $(+\\infty) + (+\\infty) = +\\infty$. Les formes « $+\\infty - \\infty$ », « $0 \\times \\infty$ » et « $\\frac{\\infty}{\\infty}$ » opposent deux tendances et restent indéterminées.",
                   "answers": [
                     {
-                      "content": "$n$ divise $a - b$.",
+                      "content": "$(+\\infty) + (+\\infty)$",
                       "correct": true
                     },
                     {
-                      "content": "$n$ divise $a + b$.",
+                      "content": "$(+\\infty) - (+\\infty)$",
                       "correct": false
                     },
                     {
-                      "content": "$a - b = n$.",
+                      "content": "$0 \\times (+\\infty)$",
                       "correct": false
                     },
                     {
-                      "content": "$a$ et $b$ ont le même quotient dans la division par $n$.",
+                      "content": "$\\frac{+\\infty}{+\\infty}$",
                       "correct": false
                     }
                   ]
                 },
                 {
-                  "content": "Un cargo fait escale à Abidjan tous les 7 jours. Il est au port le jour n° 4 : il y est aussi le jour n° 18, car $18 \\equiv 4 \\; [7]$.",
+                  "content": "Vrai ou faux : si $\\lim_{x \\to +\\infty} f(x) = +\\infty$ et $\\lim_{x \\to +\\infty} g(x) = +\\infty$, alors $\\lim_{x \\to +\\infty} (f(x) - g(x)) = 0$.",
                   "question_type": "true_false",
-                  "explanation": "$18 - 4 = 14 = 7 \\times 2$ : l'écart est un multiple de 7, donc $18 \\equiv 4 \\; [7]$. Le cargo revient à intervalle de 7 jours : jours 4, 11, 18, 25…",
+                  "explanation": "La forme « $+\\infty - \\infty$ » est indéterminée. Avec $f(x) = g(x) = x$, la différence vaut $0$. Mais avec $f(x) = x^2$ et $g(x) = x$, elle tend vers $+\\infty$. C'est l'écart de buts de nos deux équipes : tout dépend du rythme de chacune.",
                   "answers": [
                     {
                       "content": "Vrai",
-                      "correct": true
+                      "correct": false
                     },
                     {
                       "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une équipe marque $a(t) = 3t$ buts et une autre $b(t) = t$ buts après $t$ matchs. Que vaut $\\lim_{t \\to +\\infty} \\frac{a(t)}{b(t)}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Ici le rapport vaut $\\frac{3t}{t} = 3$ pour tout $t > 0$, donc la limite est $3$. La forme « $\\frac{\\infty}{\\infty}$ » ne vaut pas toujours $1$ : le résultat dépend des rythmes. L'erreur tentante est de simplifier $\\frac{\\infty}{\\infty}$ en $1$.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
                       "correct": false
                     }
                   ]
                 },
                 {
-                  "content": "Parmi ces congruences, lesquelles sont vraies ?",
+                  "content": "Parmi ces formes, lesquelles sont indéterminées ?",
                   "question_type": "multiple_correct_2",
-                  "explanation": "$23 - 2 = 21$ et $-3 - 4 = -7$ sont des multiples de 7. Mais $17 - 2 = 15$, $10 - 1 = 9$ et $25 - 3 = 22$ n'en sont pas. Un reste est positif : celui de $-3$ par 7 est $4$.",
+                  "explanation": "Les formes « $0 \\times \\infty$ » et « $\\frac{\\infty}{\\infty}$ » sont indéterminées. Les autres se calculent : $3 \\times (+\\infty) = +\\infty$ car $3 > 0$ ; $\\frac{5}{+\\infty} = 0$ ; $(-\\infty) + (-\\infty) = -\\infty$. Un réel fixé ne donne pas d'indétermination avec $\\infty$ dans ces trois cas.",
                   "answers": [
                     {
-                      "content": "$23 \\equiv 2 \\; [7]$",
+                      "content": "$0 \\times \\infty$",
                       "correct": true
                     },
                     {
-                      "content": "$-3 \\equiv 4 \\; [7]$",
+                      "content": "$\\frac{\\infty}{\\infty}$",
                       "correct": true
                     },
                     {
-                      "content": "$17 \\equiv 2 \\; [7]$",
+                      "content": "$3 \\times (+\\infty)$",
                       "correct": false
                     },
                     {
-                      "content": "$10 \\equiv 1 \\; [7]$",
+                      "content": "$\\frac{5}{+\\infty}$",
                       "correct": false
                     },
                     {
-                      "content": "$25 \\equiv 3 \\; [7]$",
+                      "content": "$(-\\infty) + (-\\infty)$",
                       "correct": false
                     }
                   ]
                 },
                 {
-                  "content": "Pourquoi un entier est-il congru à la somme de ses chiffres modulo $9$ ?",
+                  "content": "Si $\\lim_{x \\to a} g(x) = b$ et $\\lim_{y \\to b} f(y) = c$, que vaut $\\lim_{x \\to a} f(g(x))$ ?",
                   "question_type": "single_choice",
-                  "explanation": "Comme dans l'image des paquets de 9, $10 \\equiv 1 \\; [9]$, donc $100 \\equiv 1$, $1000 \\equiv 1$… Chaque chiffre pèse donc sa propre valeur. Ce n'est pas $10 \\equiv 0 \\; [9]$ : 10 n'est pas un multiple de 9, il vaut 9 plus 1.",
+                  "explanation": "C'est la passe en deux temps : la première passe amène le ballon près de $b$ (le milieu), la seconde près de $c$ (l'attaquant). On lit le résultat final : $c$, et non $b$, qui n'est que l'étape intermédiaire. Le produit $b \\times c$ n'a pas de sens ici.",
                   "answers": [
                     {
-                      "content": "Parce que $10 \\equiv 1 \\; [9]$, donc toutes les puissances de $10$ sont congrues à $1$ modulo $9$.",
+                      "content": "$c$",
                       "correct": true
                     },
                     {
-                      "content": "Parce que $10$ est un multiple de $9$.",
+                      "content": "$b$",
                       "correct": false
                     },
                     {
-                      "content": "Parce que $10 \\equiv 0 \\; [9]$.",
+                      "content": "$a$",
                       "correct": false
                     },
                     {
-                      "content": "Parce que $9$ divise la somme de ses chiffres.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Si $a \\equiv b \\; [n]$ et $c \\equiv d \\; [n]$, alors $a \\times c \\equiv b \\times d \\; [n]$.",
-                  "question_type": "true_false",
-                  "explanation": "C'est une propriété du cours : la congruence est compatible avec la multiplication, comme avec l'addition. En effet, $ac - bd = a(c - d) + d(a - b)$ est un multiple de $n$. En revanche, elle n'est pas compatible avec la division.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
+                      "content": "$b \\times c$",
                       "correct": false
                     }
                   ]
@@ -516,20 +506,20 @@
               ]
             },
             {
-              "title": "Appliquer — Calculer avec les congruences",
+              "title": "Appliquer — Calculer des limites",
               "exercise_type": "fixation",
               "questions": [
                 {
-                  "content": "Quel est le reste de la division euclidienne de $7349$ par $9$ ?",
+                  "content": "Que vaut $\\lim_{x \\to -\\infty} (-x^3 + 4x)$ ?",
                   "question_type": "single_choice",
-                  "explanation": "Un entier est congru à la somme de ses chiffres modulo 9 : $7 + 3 + 4 + 9 = 23$. Mais 23 n'est pas un reste : $23 = 9 \\times 2 + 5$, donc le reste est 5. Contrôle : $9 \\times 816 = 7344$ et $7349 - 7344 = 5$.",
+                  "explanation": "En $-\\infty$, un polynôme a la même limite que son terme de plus haut degré : $-x^3$. Comme $x^3 \\to -\\infty$, on obtient $-x^3 \\to +\\infty$. Par exemple, $x = -10$ donne $1000 - 40 = 960$. L'erreur est d'oublier le signe moins devant $x^3$.",
                   "answers": [
                     {
-                      "content": "$5$",
+                      "content": "$+\\infty$",
                       "correct": true
                     },
                     {
-                      "content": "$23$",
+                      "content": "$-\\infty$",
                       "correct": false
                     },
                     {
@@ -537,65 +527,15 @@
                       "correct": false
                     },
                     {
-                      "content": "$7$",
+                      "content": "$4$",
                       "correct": false
                     }
                   ]
                 },
                 {
-                  "content": "Lesquels de ces nombres sont divisibles par $11$ ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Somme alternée en partant des unités : $7359 \\to 9 - 5 + 3 - 7 = 0$ et $2849 \\to 9 - 4 + 8 - 2 = 11$. Pour $1234$ et $4567$ on trouve $2$, pour $6500$ on trouve $-1$. La somme des chiffres de 6500 est 11, mais cela ne sert pas pour le critère de 11.",
-                  "answers": [
-                    {
-                      "content": "$7359$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$2849$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$1234$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$4567$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$6500$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Lequel de ces nombres est divisible par $4$ ?",
+                  "content": "Que vaut $\\lim_{x \\to +\\infty} \\frac{4x^2 - 3x + 1}{2x^2 + 5}$ ?",
                   "question_type": "single_choice",
-                  "explanation": "Seuls les deux derniers chiffres comptent, car $100 \\equiv 0 \\; [4]$. On a $16 = 4 \\times 4$, mais $14$, $30$ et $2$ ne sont pas des multiples de 4. Finir par un chiffre pair ne suffit pas.",
-                  "answers": [
-                    {
-                      "content": "$3716$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$2514$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$6530$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$4702$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quel est le reste de la division euclidienne de $2^{100}$ par $7$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$2^3 = 8 \\equiv 1 \\; [7]$ et $100 = 3 \\times 33 + 1$, donc $2^{100} = (2^3)^{33} \\times 2 \\equiv 2 \\; [7]$. L'erreur classique est de réduire l'exposant modulo 7 : $100 \\equiv 2$ donnerait $2^2 = 4$, ce qui est faux.",
+                  "explanation": "La fraction rationnelle a la même limite que le quotient de ses termes de plus haut degré : $\\frac{4x^2}{2x^2} = 2$. Variante de calcul : en divisant par $x^2$, on obtient $\\frac{4 - \\frac{3}{x} + \\frac{1}{x^2}}{2 + \\frac{5}{x^2}} \\to \\frac{4}{2}$.",
                   "answers": [
                     {
                       "content": "$2$",
@@ -606,45 +546,80 @@
                       "correct": false
                     },
                     {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to 2} \\frac{x^2 - 5x + 6}{x - 2}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "En $x = 2$ on obtient « $\\frac{0}{0}$ ». On factorise : $x^2 - 5x + 6 = (x - 2)(x - 3)$. Pour $x \\neq 2$, la fraction vaut $x - 3$, qui tend vers $2 - 3 = -1$. Conclure $0$ ou $+\\infty$ directement est l'erreur classique.",
+                  "answers": [
+                    {
+                      "content": "$-1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
                       "content": "$1$",
                       "correct": false
                     },
                     {
-                      "content": "$6$",
+                      "content": "$+\\infty$",
                       "correct": false
                     }
                   ]
                 },
                 {
-                  "content": "Si $3x \\equiv 3y \\; [6]$, alors $x \\equiv y \\; [6]$.",
-                  "question_type": "true_false",
-                  "explanation": "Avec $x = 0$ et $y = 2$ : $3x = 0$ et $3y = 6$ sont congrus modulo 6, mais $0 \\not\\equiv 2 \\; [6]$. On ne simplifie pas une congruence comme une égalité : ici 3 et 6 ont un diviseur commun.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Quel est le reste de la division euclidienne de $-17$ par $5$ ?",
+                  "content": "Que vaut $\\lim_{x \\to +\\infty} \\left(\\sqrt{x + 3} - \\sqrt{x}\\right)$ ?",
                   "question_type": "single_choice",
-                  "explanation": "$-17 = 5 \\times (-4) + 3$ avec $0 \\le 3 < 5$ : le reste est 3. On le retrouve par $-17 - 3 = -20$, multiple de 5. Le reste 2 est celui de $17$, et $-2$ est négatif : ce n'est pas un reste.",
+                  "explanation": "Forme « $+\\infty - \\infty$ ». Avec le conjugué : $\\sqrt{x + 3} - \\sqrt{x} = \\frac{3}{\\sqrt{x + 3} + \\sqrt{x}}$. Le dénominateur tend vers $+\\infty$, donc le quotient tend vers $0$. Test : $x = 10\\,000$ donne environ $0{,}015$. Ce n'est pas $3$.",
                   "answers": [
+                    {
+                      "content": "$0$",
+                      "correct": true
+                    },
                     {
                       "content": "$3$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$2$",
                       "correct": false
                     },
                     {
-                      "content": "$-2$",
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to 1^+} \\frac{2x + 1}{x - 1}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le numérateur tend vers $3$ et le dénominateur vers $0$ par valeurs positives (car $x > 1$). Le quotient « $\\frac{3}{0^+}$ » tend vers $+\\infty$. Pour $x = 1{,}001$, on trouve environ $3\\,002$. À gauche de $1$, on aurait $-\\infty$.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
                       "correct": false
                     }
                   ]
@@ -652,43 +627,20 @@
               ]
             },
             {
-              "title": "S'évaluer — Restes, puissances et critères",
+              "title": "S'évaluer — Formes indéterminées et composées",
               "exercise_type": "evaluation",
               "questions": [
                 {
-                  "content": "Quels restes peut-on obtenir dans la division euclidienne de $n^2$ par $4$, lorsque $n$ décrit les entiers naturels ?",
+                  "content": "Que vaut $\\lim_{x \\to -\\infty} \\frac{3x^3 - x}{x^2 + 1}$ ?",
                   "question_type": "single_choice",
-                  "explanation": "On étudie $n$ selon son reste modulo 4 : $0^2 = 0$, $1^2 = 1$, $2^2 = 4 \\equiv 0$, $3^2 = 9 \\equiv 1$. Un carré a donc pour reste 0 ou 1 dans la division par 4, jamais 2 ni 3.",
+                  "explanation": "La fraction rationnelle se comporte comme le quotient des termes de plus haut degré : $\\frac{3x^3}{x^2} = 3x$. Quand $x \\to -\\infty$, $3x \\to -\\infty$. Le degré du numérateur est supérieur à celui du dénominateur : il n'y a pas de limite finie. Le signe de $x$ donne $-\\infty$.",
                   "answers": [
                     {
-                      "content": "Seulement $0$ ou $1$.",
+                      "content": "$-\\infty$",
                       "correct": true
                     },
                     {
-                      "content": "$0$, $1$, $2$ ou $3$, tous sont possibles.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Seulement $1$ ou $3$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Seulement $0$ ou $2$.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quel est le reste de la division euclidienne de $7^{2024} + 3$ par $5$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$7 \\equiv 2 \\; [5]$ et $2^4 = 16 \\equiv 1 \\; [5]$. Comme $2024 = 4 \\times 506$, $7^{2024} \\equiv 1 \\; [5]$, puis $7^{2024} + 3 \\equiv 4 \\; [5]$. La réponse 1 oublie d'ajouter 3.",
-                  "answers": [
-                    {
-                      "content": "$4$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$1$",
+                      "content": "$+\\infty$",
                       "correct": false
                     },
                     {
@@ -696,100 +648,108 @@
                       "correct": false
                     },
                     {
-                      "content": "$2$",
+                      "content": "$0$",
                       "correct": false
                     }
                   ]
                 },
                 {
-                  "content": "Parmi ces affirmations, lesquelles sont vraies pour tout entier naturel $n$ ?",
+                  "content": "Que vaut $\\lim_{x \\to 0^+} \\left(\\frac{1}{x} - \\frac{1}{x^2}\\right)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Forme « $+\\infty - \\infty$ ». On réduit au même dénominateur : $\\frac{1}{x} - \\frac{1}{x^2} = \\frac{x - 1}{x^2}$. Le numérateur tend vers $-1$ et $x^2 \\to 0^+$, donc la limite est $-\\infty$. Test : $x = 0{,}1$ donne $10 - 100 = -90$. C'est $\\frac{1}{x^2}$ qui tire le plus fort.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces égalités, lesquelles sont exactes ?",
                   "question_type": "multiple_correct_3",
-                  "explanation": "$n(n+1)$ est un produit de deux entiers consécutifs : l'un est pair. $n^3 - n = (n-1)n(n+1)$ contient un multiple de 3. Modulo 3, $n^2 \\equiv 0$ ou $1$, donc $n^2 + 1 \\equiv 1$ ou $2$. Faux : $n = 3$ donne $n^2 \\equiv 0$ ; $n = 1$ donne $n(n+1)(n+2) = 6$ et $n^2 + n = 2$.",
+                  "explanation": "$x - \\sqrt{x} = x\\left(1 - \\frac{1}{\\sqrt{x}}\\right) \\to +\\infty$. Avec le conjugué, $\\sqrt{x^2 + 1} + x = \\frac{1}{\\sqrt{x^2 + 1} - x} \\to 0$ en $-\\infty$. Et $\\frac{x^3 - 1}{x^2 - 1} = \\frac{x^2 + x + 1}{x + 1} \\to \\frac{3}{2}$. Mais $\\sqrt{x^2 + x} - x \\to \\frac{1}{2}$, pas $1$ ; $\\frac{x - 1}{x + 1} \\to 1$.",
                   "answers": [
                     {
-                      "content": "$n(n+1)$ est pair.",
+                      "content": "$\\lim_{x \\to +\\infty} (x - \\sqrt{x}) = +\\infty$",
                       "correct": true
                     },
                     {
-                      "content": "$n^3 - n$ est divisible par $3$.",
+                      "content": "$\\lim_{x \\to -\\infty} \\left(\\sqrt{x^2 + 1} + x\\right) = 0$",
                       "correct": true
                     },
                     {
-                      "content": "$n^2 + 1$ n'est jamais divisible par $3$.",
+                      "content": "$\\lim_{x \\to 1} \\frac{x^3 - 1}{x^2 - 1} = \\frac{3}{2}$",
                       "correct": true
                     },
                     {
-                      "content": "$n^2 \\equiv 1 \\; [3]$.",
+                      "content": "$\\lim_{x \\to +\\infty} \\left(\\sqrt{x^2 + x} - x\\right) = 1$",
                       "correct": false
                     },
                     {
-                      "content": "$n(n+1)(n+2)$ est divisible par $4$.",
+                      "content": "$\\lim_{x \\to +\\infty} \\frac{x - 1}{x + 1} = +\\infty$",
                       "correct": false
                     },
                     {
-                      "content": "$n^2 + n$ est divisible par $3$.",
+                      "content": "$\\lim_{x \\to +\\infty} (x^2 - x) = 0$",
                       "correct": false
                     }
                   ]
                 },
                 {
-                  "content": "Pour quels entiers relatifs $n$ le nombre $3n + 1$ est-il divisible par $5$ ?",
+                  "content": "Que vaut $\\lim_{x \\to +\\infty} \\sqrt{\\frac{4x + 1}{x + 2}}$ ?",
                   "question_type": "single_choice",
-                  "explanation": "On étudie le reste de $n$ modulo 5. Pour $n \\equiv 0, 1, 2, 3, 4$, on trouve $3n + 1 \\equiv 1, 4, 2, 0, 3$. Seul $n \\equiv 3 \\; [5]$ donne $3n + 1 \\equiv 0 \\; [5]$. Contrôle : $n = 3$ donne $10$.",
+                  "explanation": "On calcule d'abord l'intérieur : $\\frac{4x + 1}{x + 2}$ se comporte comme $\\frac{4x}{x} = 4$. Puis on applique la racine carrée : par composée, la limite est $\\sqrt{4} = 2$. Répondre $4$ oublie de composer avec la racine ; $+\\infty$ confond avec $\\sqrt{x}$.",
                   "answers": [
                     {
-                      "content": "Ceux tels que $n \\equiv 3 \\; [5]$.",
+                      "content": "$2$",
                       "correct": true
                     },
                     {
-                      "content": "Ceux tels que $n \\equiv 2 \\; [5]$.",
+                      "content": "$4$",
                       "correct": false
                     },
                     {
-                      "content": "Ceux tels que $n \\equiv 4 \\; [5]$.",
+                      "content": "$+\\infty$",
                       "correct": false
                     },
                     {
-                      "content": "Ceux tels que $n \\equiv 1 \\; [5]$.",
+                      "content": "$\\frac{1}{2}$",
                       "correct": false
                     }
                   ]
                 },
                 {
-                  "content": "Le nombre à quatre chiffres $4a72$ a pour chiffre des milliers $4$, pour chiffre des centaines $a$, pour chiffre des dizaines $7$ et pour chiffre des unités $2$. Pour quel chiffre $a$ est-il divisible par $9$ ?",
+                  "content": "Que vaut $\\lim_{x \\to 2} \\frac{\\sqrt{x + 2} - 2}{x - 2}$ ?",
                   "question_type": "single_choice",
-                  "explanation": "La somme des chiffres $4 + a + 7 + 2 = 13 + a$ doit être un multiple de 9. Comme $0 \\le a \\le 9$, seule la valeur 18 convient : $a = 5$. Contrôle : $4572 = 9 \\times 508$.",
+                  "explanation": "En $x = 2$ on obtient « $\\frac{0}{0}$ ». Avec le conjugué : $\\frac{(x + 2) - 4}{(x - 2)(\\sqrt{x + 2} + 2)} = \\frac{1}{\\sqrt{x + 2} + 2}$ pour $x \\neq 2$. Cette expression tend vers $\\frac{1}{2 + 2} = \\frac{1}{4}$. Le résultat n'est ni $0$ ni $+\\infty$.",
                   "answers": [
                     {
-                      "content": "$a = 5$",
+                      "content": "$\\frac{1}{4}$",
                       "correct": true
                     },
                     {
-                      "content": "$a = 4$",
+                      "content": "$0$",
                       "correct": false
                     },
                     {
-                      "content": "$a = 8$",
+                      "content": "$\\frac{1}{2}$",
                       "correct": false
                     },
                     {
-                      "content": "$a = 9$",
+                      "content": "$+\\infty$",
                       "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un entier dont la somme des chiffres est égale à $12$ est divisible par $3$ et par $9$.",
-                  "question_type": "true_false",
-                  "explanation": "La somme 12 est un multiple de 3 ($12 = 3 \\times 4$), donc l'entier est divisible par 3. Mais $12 = 9 + 3$ n'est pas un multiple de 9 : l'entier est congru à $12 \\equiv 3 \\; [9]$. Exemple : $39$ est divisible par 3, pas par 9.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
                     }
                   ]
                 }
