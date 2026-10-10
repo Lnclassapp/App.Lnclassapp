@@ -101,6 +101,45 @@ module UseCases
       test "une fiche inconnue est introuvable" do
         assert_equal :not_found, publish("inconnue").code
       end
+
+      # ADR-0089 §4.4 : une fiche ne se publie pas tant qu'un emplacement d'image reste ou qu'une image n'a pas de texte de
+      # remplacement ; rien n'est écrit. Une fiche sans emplacement ni image se publie comme avant.
+      test "ADR-0089 : des emplacements restants refusent la publication, avec leur nombre, sans rien écrire" do
+        @essentials = FakeEssentials.new(Essential.new(id: 20, slug: "slots", course_id: 1, name: "Slots", status: "draft",
+                                                       course_status: "published",
+                                                       content: "<p>[[image: une pile]]</p><p>Texte</p><p>[[image: une lampe]]</p>"))
+
+        result = publish("slots")
+
+        assert_equal :conflict, result.code
+        assert_equal({ base: [ :image_slots_left ], count: 2 }, result.errors)
+        assert_empty @essentials.transitions
+        assert_empty @audit_log.records
+      end
+
+      test "ADR-0089 : une image sans texte de remplacement refuse la publication, sans rien écrire" do
+        essential = Essential.new(id: 21, slug: "alts", course_id: 1, name: "Alts", status: "draft", course_status: "published",
+                                  content: "<p>Texte</p>")
+        essential.images = [ Entities::Shared::ContentImage.new(public_id: "ok", alt: "Une pile"),
+                             Entities::Shared::ContentImage.new(public_id: "ko", alt: " ") ]
+        @essentials = FakeEssentials.new(essential)
+
+        result = publish("alts")
+
+        assert_equal :conflict, result.code
+        assert_equal({ base: [ :image_alts_blank ], image_alts: [ "ko" ] }, result.errors)
+        assert_empty @essentials.transitions
+      end
+
+      test "ADR-0089 : une fiche dont chaque image a son texte de remplacement, sans emplacement, se publie" do
+        essential = Essential.new(id: 22, slug: "illustree", course_id: 1, name: "Illustrée", status: "draft",
+                                  course_status: "published", content: "<p>Voir [[image: ceci]] dans la phrase.</p>")
+        essential.images = [ Entities::Shared::ContentImage.new(public_id: "ok", alt: "Une pile") ]
+        @essentials = FakeEssentials.new(essential)
+
+        assert publish("illustree").success?
+        assert_equal [ [ 22, "published", NOW ] ], @essentials.transitions
+      end
     end
   end
 end
