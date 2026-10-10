@@ -38,6 +38,8 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | — | Les deux dettes de compteur sont soldées dans ce chantier : la colonne « Classes » de la liste de l'équipe et le « − » ne comptent plus les archivées | — |
+| Sous-pages d'une classe archivée (cours, essentiels, élèves, suivi) encore lisibles par ses membres ; seule la page principale renvoie 404 | Constat bas de la revue de sécurité (2026-10-10) : policy appliquée, aucune fuite entre rôles ni établissements | à ouvrir |
+| `schools:grant_second_cycle` ne laisse aucune trace d'audit | Constat bas de la revue de sécurité ; tâche unique, lancée sur Develop | à ouvrir si la tâche resert |
 
 ## Ce qui a dérapé
 
@@ -51,6 +53,6 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | | |
 |---|---|
 | **Livré le** | 2026-10-10 (sur `Develop`) |
-| **PR** | aucune : lots fusionnés directement dans `Develop`, branche de la session |
+| **PR** | lots fusionnés dans `Develop` ; promotion #224 (Staging), #225 (main, 2026-10-10) |
 | **ADR produits** | ADR-0088 |
 | **UDR produits** | UDR-0083 |
