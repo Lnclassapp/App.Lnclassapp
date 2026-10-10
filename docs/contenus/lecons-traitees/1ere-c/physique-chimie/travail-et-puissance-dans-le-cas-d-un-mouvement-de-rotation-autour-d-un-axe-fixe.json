@@ -1,0 +1,1715 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Travail et puissance dans le cas d'un mouvement de rotation autour d'un axe fixe",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Physique-Chimie",
+      "series_name": "C",
+      "essentials": [
+        {
+          "name": "Le moment d'une force par rapport à un axe",
+          "subtitle": "Mesurer l'effet de rotation d'une force avec son bras de levier",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Reconnaître un mouvement de rotation autour d'un axe fixe.</li><li>Calculer le moment d'une force par rapport à un axe, en newton-mètre.</li><li>Dire quand ce moment est nul, positif ou négatif.</li></ul><h2>L'image pour comprendre</h2><p><strong>Image 1 : la porte du magasin.</strong> Au marché, un commerçant ferme la lourde porte de sa boutique. Il la pousse d'abord tout près des charnières : la porte résiste et bouge à peine. Puis il pousse à l'autre bout, près de la poignée, avec la même force : la porte se ferme sans effort.</p><p><strong>Le pont.</strong> Les charnières forment l'<strong>axe de rotation</strong> $\\Delta$ : une droite qui reste immobile pendant que la porte tourne. La distance entre cet axe et l'endroit où il pousse est le <strong>bras de levier</strong>. L'effet de rotation de la force s'appelle son <strong>moment</strong> : plus le bras de levier est long, plus le moment est grand.</p><p><strong>La limite de l'image.</strong> Si le commerçant pousse la porte en direction des charnières, elle ne tourne pas, même s'il pousse très fort. Ce qui compte, c'est la distance entre l'axe et la <strong>droite d'action</strong> de la force (la droite qui porte la force), pas la distance jusqu'au point où la main touche la porte.</p><p><strong>Image 2 : la clé en croix.</strong> Un mécanicien de Yopougon doit desserrer l'écrou d'une roue de gbaka. Avec la clé seule, rien à faire. Il enfile un long tube sur la clé : l'écrou cède. Il n'a pas poussé plus fort, il a seulement allongé le bras de levier.</p><p><strong>Le pont.</strong> L'axe de rotation est l'axe de l'écrou. Chaque point de la clé décrit un cercle centré sur cet axe. Le tube allonge le bras de levier : il augmente le moment de la même force.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Rotation autour d'un axe fixe.</strong> Un solide tourne autour d'un axe fixe $\\Delta$ quand chacun de ses points décrit un cercle centré sur l'axe, dans un plan perpendiculaire à l'axe. Les points de l'axe restent immobiles.</p><p><strong>Moment d'une force.</strong> Pour une force $\\vec F$ située dans un plan perpendiculaire à l'axe $\\Delta$, le moment de $\\vec F$ par rapport à $\\Delta$ vaut :</p><p>$$M = \\pm\\, F \\times d$$</p><p>$F$ est l'intensité de la force (en newtons) et $d$ la distance de l'axe à la droite d'action de la force, le <strong>bras de levier</strong> (en mètres). Le moment s'exprime en <strong>newton-mètre</strong> ($\\text{N}\\cdot\\text{m}$).</p><p><strong>Signe.</strong> On choisit un sens de rotation positif. Le moment est positif si la force tend à faire tourner le solide dans ce sens, négatif sinon.</p><p><strong>Cas usuels.</strong> Soit A le point d'application de la force et O le point de l'axe le plus proche de A, avec $OA = r$. Si la force est perpendiculaire à $OA$, alors $d = r$ et $M = F\\,r$. Si elle fait l'angle $\\alpha$ avec $OA$, alors $d = r\\sin\\alpha$ et $M = F\\,r\\sin\\alpha$.</p><p><strong>Moment nul.</strong> Le moment est nul si la droite d'action de la force coupe l'axe ($d = 0$), ou si la force est parallèle à l'axe.</p></blockquote><h2>Exemple résolu</h2><p>Le mécanicien serre un écrou avec une clé de $0{,}40\\ \\text{m}$. Il pousse à l'extrémité avec une force de $150\\ \\text{N}$, perpendiculaire à la clé. Calcule le moment, puis compare avec un tube qui porte le bras à $0{,}80\\ \\text{m}$, et avec une poussée inclinée.</p><ol><li><strong>Axe et bras de levier.</strong> L'axe est celui de l'écrou. La force est perpendiculaire à la clé : $d = r = 0{,}40\\ \\text{m}$.</li><li><strong>Clé seule.</strong> $M = F \\times d = 150 \\times 0{,}40 = 60\\ \\text{N}\\cdot\\text{m}$.</li><li><strong>Avec le tube.</strong> Le bras de levier vaut $0{,}80\\ \\text{m}$ : $M = 150 \\times 0{,}80 = 120\\ \\text{N}\\cdot\\text{m}$. Le moment est doublé, parce que le bras de levier est doublé.</li><li><strong>Poussée inclinée.</strong> Avec la clé seule, si la même force de $150\\ \\text{N}$ fait un angle de $30^\\circ$ avec la clé : $M = F\\,r\\sin\\alpha = 150 \\times 0{,}40 \\times 0{,}5 = 30\\ \\text{N}\\cdot\\text{m}$. Pousser de biais fait perdre de l'effet.</li></ol><h2>Le piège à éviter</h2><p>Prendre pour bras de levier la distance de l'axe au point d'application quand la force est inclinée. Cette distance est $r$, mais le bras de levier est $d = r\\sin\\alpha$, plus petit.</p><p>Autre erreur : ne regarder que la force. Une force de $100\\ \\text{N}$ à $0{,}20\\ \\text{m}$ de l'axe donne $20\\ \\text{N}\\cdot\\text{m}$ ; une force de $40\\ \\text{N}$ à $0{,}80\\ \\text{m}$ donne $32\\ \\text{N}\\cdot\\text{m}$. La plus petite force a le plus grand moment. Enfin, le moment s'écrit en newton-mètre : le joule est réservé au travail.</p><h2>En une phrase</h2><p>Le moment d'une force par rapport à un axe est le produit de la force par son bras de levier, $M = F \\times d$, en newton-mètre.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Axe, bras de levier et moment",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Une porte de magasin tourne autour de ses charnières. Quelle est la trajectoire d'un point de la porte situé à $0{,}80\\ \\text{m}$ des charnières ?",
+                  "question_type": "single_choice",
+                  "explanation": "Dans une rotation autour d'un axe fixe, chaque point décrit un cercle centré sur l'axe, dans un plan perpendiculaire à l'axe. Ici le cercle a pour rayon la distance du point à l'axe, soit 0,80 m. Seuls les points de l'axe restent immobiles.",
+                  "answers": [
+                    {
+                      "content": "Un cercle de rayon $0{,}80\\ \\text{m}$ centré sur l'axe des charnières",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un segment de droite de longueur $0{,}80\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un cercle centré sur la poignée de la porte",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une parabole dont le sommet est sur l'axe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le moment d'une force par rapport à un axe est le produit de l'intensité de la force par son bras de levier.",
+                  "question_type": "true_false",
+                  "explanation": "C'est la définition : $M = F \\times d$ en valeur absolue. Dans l'image de la porte du magasin, pousser plus loin des charnières allonge le bras de levier et augmente le moment, même si la force reste la même.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qu'appelle-t-on bras de levier d'une force par rapport à un axe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le bras de levier est la distance de l'axe à la droite d'action de la force. Ce n'est ni la longueur de la force, ni la taille de l'objet : une force dirigée vers l'axe a un bras de levier nul, comme le commerçant qui pousse vers les charnières.",
+                  "answers": [
+                    {
+                      "content": "La distance entre l'axe et la droite d'action de la force",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'intensité de la force, mesurée en newtons",
+                      "correct": false
+                    },
+                    {
+                      "content": "La longueur totale de l'objet qui tourne",
+                      "correct": false
+                    },
+                    {
+                      "content": "La distance entre le point d'application et le centre de la Terre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quels cas le moment d'une force par rapport à un axe est-il nul ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Le moment est nul si $d = 0$, donc si la droite d'action coupe l'axe, ou si la force est parallèle à l'axe. Une force très grande ou appliquée loin de l'axe n'annule pas le moment : tout dépend de la direction de la force.",
+                  "answers": [
+                    {
+                      "content": "La droite d'action de la force coupe l'axe de rotation.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La force est parallèle à l'axe de rotation.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La force est très grande.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La force est appliquée très loin de l'axe.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image de la porte du magasin, que représentent les charnières ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les charnières forment la droite immobile autour de laquelle la porte tourne : c'est l'axe de rotation $\\Delta$. Le bras de levier est la distance entre cet axe et la droite d'action de la poussée, et le moment est l'effet de rotation obtenu.",
+                  "answers": [
+                    {
+                      "content": "L'axe de rotation $\\Delta$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le bras de levier",
+                      "correct": false
+                    },
+                    {
+                      "content": "La force exercée par le commerçant",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le moment de la force",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une même force, perpendiculaire à une porte, est appliquée successivement à différentes distances des charnières. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Pour une force perpendiculaire, $M = F\\,r$ : le moment augmente avec la distance à l'axe. Le signe du moment indique seulement le sens de rotation que la force tend à produire ; il ne dit rien sur la valeur de la force.",
+                  "answers": [
+                    {
+                      "content": "Plus on s'éloigne des charnières, plus le moment est grand.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le moment peut être positif ou négatif selon le sens de rotation que la force tend à produire.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le moment ne dépend que de l'intensité de la force.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un moment négatif signifie que la force est faible.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer un moment",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Une force de $50\\ \\text{N}$, perpendiculaire à la porte, est appliquée à $0{,}60\\ \\text{m}$ des charnières. Quel est son moment par rapport à l'axe des charnières ?",
+                  "question_type": "single_choice",
+                  "explanation": "La force est perpendiculaire au rayon, donc $d = r = 0{,}60\\ \\text{m}$ et $M = 50 \\times 0{,}60 = 30\\ \\text{N}\\cdot\\text{m}$. Additionner donne 50,6 ; diviser donne 83 : ni l'un ni l'autre n'est un moment.",
+                  "answers": [
+                    {
+                      "content": "$30\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$50{,}6\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$83\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}012\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une clé de $25\\ \\text{cm}$ de long est poussée à son extrémité par une force de $80\\ \\text{N}$, perpendiculaire à la clé. Quel est le moment par rapport à l'axe de l'écrou ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut convertir : $25\\ \\text{cm} = 0{,}25\\ \\text{m}$. Alors $M = 80 \\times 0{,}25 = 20\\ \\text{N}\\cdot\\text{m}$. Le résultat $2\\,000$ vient de $80 \\times 25$ avec des centimètres, qui ne donnent pas des newton-mètres. Le quotient 320 n'a pas de sens physique ici.",
+                  "answers": [
+                    {
+                      "content": "$20\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2\\,000\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$320\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$105\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force de $200\\ \\text{N}$ est appliquée en un point situé à $0{,}50\\ \\text{m}$ de l'axe. Elle fait un angle de $30^\\circ$ avec la droite qui joint ce point à l'axe (perpendiculaire à l'axe). Quel est son moment ?",
+                  "question_type": "single_choice",
+                  "explanation": "$M = F\\,r\\sin\\alpha = 200 \\times 0{,}50 \\times \\sin 30^\\circ = 100 \\times 0{,}5 = 50\\ \\text{N}\\cdot\\text{m}$. Oublier le sinus donne 100. Prendre le cosinus ($0{,}866$) donne 86,6 : ce serait le cas pour un angle de $60^\\circ$.",
+                  "answers": [
+                    {
+                      "content": "$50\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$100\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$86{,}6\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$25\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On veut un moment de $45\\ \\text{N}\\cdot\\text{m}$ avec une force perpendiculaire à une manivelle de $0{,}15\\ \\text{m}$. Quelle intensité de force faut-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "De $M = F \\times d$ on tire $F = M / d = 45 / 0{,}15 = 300\\ \\text{N}$. Multiplier $45 \\times 0{,}15$ donne 6,75 : on retrouverait une force bien trop faible. Inverser le quotient donne 0,0033, absurde.",
+                  "answers": [
+                    {
+                      "content": "$300\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6{,}75\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$30\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}0033\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mécanicien enfile un tube sur sa clé et double ainsi le bras de levier (de $0{,}30\\ \\text{m}$ à $0{,}60\\ \\text{m}$). Il pousse avec la même force, perpendiculairement à la clé. Que devient le moment ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le moment $M = F \\times d$ est proportionnel au bras de levier. Si $d$ double et $F$ ne change pas, $M$ double. On multiplie les distances, on ne les ajoute pas : l'écart de $0{,}30\\ \\text{m}$ n'est pas ajouté au moment.",
+                  "answers": [
+                    {
+                      "content": "Il est multiplié par 2.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il ne change pas.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est divisé par 2.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il augmente de $0{,}30\\ \\text{N}\\cdot\\text{m}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force de $120\\ \\text{N}$ est appliquée à $0{,}50\\ \\text{m}$ de l'axe, avec un angle $\\alpha$ entre la force et la droite qui joint son point d'application à l'axe. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$M = 120 \\times 0{,}50 \\times \\sin\\alpha = 60\\sin\\alpha$. Pour $90^\\circ$ : 60. Pour $30^\\circ$ : 30. Pour $0^\\circ$ la force est dirigée vers l'axe : 0. Pour $60^\\circ$ : $60 \\times 0{,}866 \\approx 52$, pas 30. Pour $90^\\circ$, le moment n'est pas nul.",
+                  "answers": [
+                    {
+                      "content": "Pour $\\alpha = 90^\\circ$, $M = 60\\ \\text{N}\\cdot\\text{m}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour $\\alpha = 30^\\circ$, $M = 30\\ \\text{N}\\cdot\\text{m}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour $\\alpha = 0^\\circ$, $M = 0$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour $\\alpha = 60^\\circ$, $M = 30\\ \\text{N}\\cdot\\text{m}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour $\\alpha = 90^\\circ$, $M = 0$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Moments dans l'atelier et au marché",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "L'écrou d'une roue de gbaka ne se desserre que si le moment atteint $120\\ \\text{N}\\cdot\\text{m}$. Le mécanicien pousse perpendiculairement à une clé de $0{,}40\\ \\text{m}$. Quelle force minimale doit-il exercer ?",
+                  "question_type": "single_choice",
+                  "explanation": "$F = M / d = 120 / 0{,}40 = 300\\ \\text{N}$. Le produit $120 \\times 0{,}40 = 48$ ne donne pas une force. Retenir 120 revient à confondre le moment demandé avec la force.",
+                  "answers": [
+                    {
+                      "content": "$300\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$48\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$120\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}0033\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Même écrou, même moment nécessaire de $120\\ \\text{N}\\cdot\\text{m}$. Le mécanicien prolonge sa clé de $0{,}40\\ \\text{m}$ par un tube de $0{,}40\\ \\text{m}$ et pousse toujours perpendiculairement, à l'extrémité du tube. Quelle force minimale suffit maintenant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le bras de levier vaut $0{,}40 + 0{,}40 = 0{,}80\\ \\text{m}$. Donc $F = 120 / 0{,}80 = 150\\ \\text{N}$, deux fois moins qu'avec la clé seule (300 N). Garder 300 N oublie le tube ; 75 N le compte deux fois.",
+                  "answers": [
+                    {
+                      "content": "$150\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$300\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$75\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$96\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une porte tourne autour de ses charnières. Pour la fermer, un commerçant exerce une force de $30\\ \\text{N}$, perpendiculaire à la porte, à $0{,}90\\ \\text{m}$ des charnières. Un enfant la pousse en sens inverse avec $50\\ \\text{N}$, perpendiculairement, à $0{,}30\\ \\text{m}$ des charnières. On compte positivement le sens de fermeture. Quelle est la somme algébrique des deux moments ?",
+                  "question_type": "single_choice",
+                  "explanation": "Moment du commerçant : $+30 \\times 0{,}90 = +27\\ \\text{N}\\cdot\\text{m}$. Moment de l'enfant : $-50 \\times 0{,}30 = -15\\ \\text{N}\\cdot\\text{m}$. Somme : $+12\\ \\text{N}\\cdot\\text{m}$, la porte tend à se fermer. Le piège est d'oublier que les sens opposés donnent des signes opposés (42 serait faux).",
+                  "answers": [
+                    {
+                      "content": "$+12\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-12\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+42\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+27\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un commerçant tire une grille avec une corde accrochée à $1{,}2\\ \\text{m}$ de l'axe de rotation. La corde, tendue avec $80\\ \\text{N}$, fait un angle de $30^\\circ$ avec la droite qui joint son point d'accrochage à l'axe (perpendiculaire à l'axe). Quel est le moment de la tension de la corde ?",
+                  "question_type": "single_choice",
+                  "explanation": "$M = F\\,r\\sin\\alpha = 80 \\times 1{,}2 \\times 0{,}5 = 48\\ \\text{N}\\cdot\\text{m}$. Sans le sinus, on trouve 96 : c'est le moment d'une corde perpendiculaire. Avec le cosinus, on trouve $83{,}1$ : ce serait le moment pour $60^\\circ$.",
+                  "answers": [
+                    {
+                      "content": "$48\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$96\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$83{,}1\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$24\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Fatou pousse une porte lourde avec $40\\ \\text{N}$ à $0{,}80\\ \\text{m}$ de l'axe, et Moussa avec $60\\ \\text{N}$ à $0{,}50\\ \\text{m}$ de l'axe, les deux perpendiculairement à la porte et dans le même sens. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Fatou : $40 \\times 0{,}80 = 32\\ \\text{N}\\cdot\\text{m}$. Moussa : $60 \\times 0{,}50 = 30\\ \\text{N}\\cdot\\text{m}$. Moussa a la plus grande force mais le plus petit moment : c'est le bras de levier qui fait la différence. Les moments ne sont pas égaux.",
+                  "answers": [
+                    {
+                      "content": "Le moment de Fatou vaut $32\\ \\text{N}\\cdot\\text{m}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le moment de Moussa vaut $30\\ \\text{N}\\cdot\\text{m}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Moussa a le plus grand moment, car sa force est la plus grande.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux moments sont égaux.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une corde est enroulée sur une poulie de rayon $0{,}20\\ \\text{m}$ et tirée avec une force de $150\\ \\text{N}$. La corde reste tendue, tangente à la poulie, dans un plan perpendiculaire à l'axe. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "La corde tangente est perpendiculaire au rayon : $d = 0{,}20\\ \\text{m}$, donc $M = 150 \\times 0{,}20 = 30\\ \\text{N}\\cdot\\text{m}$. Déplacer le point d'application le long de la corde ne change pas la droite d'action, donc pas le moment. $M = 150$ oublie le bras de levier.",
+                  "answers": [
+                    {
+                      "content": "Le bras de levier est le rayon de la poulie, soit $0{,}20\\ \\text{m}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le moment vaut $30\\ \\text{N}\\cdot\\text{m}$ en valeur absolue.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le moment ne change pas si on déplace le point d'application le long de la corde.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le moment vaut $150\\ \\text{N}\\cdot\\text{m}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le moment est nul, car la corde est dans le plan de la poulie.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le travail d'une force en rotation",
+          "subtitle": "Calculer W = M·θ avec l'angle en radians",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Convertir un nombre de tours ou un angle en degrés en radians.</li><li>Calculer le travail d'une force de moment constant avec $W = M\\,\\theta$.</li><li>Dire si ce travail est moteur, résistant ou nul.</li></ul><h2>L'image pour comprendre</h2><p><strong>Image 1 : la roue du livreur.</strong> Au marché de Treichville, un livreur fait rouler son vélo. Il repère la valve de sa roue : quand elle revient exactement au même endroit, la roue a fait un tour. Que la roue soit petite ou grande, un tour ramène la valve au point de départ.</p><p><strong>Le pont.</strong> Un tour complet est un angle de $2\\pi$ radians, soit environ $6{,}28\\ \\text{rad}$. Le radian mesure un angle par le rapport $\\dfrac{\\text{arc}}{\\text{rayon}}$ : un tour, c'est un arc égal à la circonférence $2\\pi r$, divisé par le rayon $r$.</p><p><strong>La limite de l'image.</strong> Le radian ne dépend pas de la taille de la roue : un tour fait $2\\pi$ radians pour toutes les roues. Il ne mesure donc pas une distance.</p><p><strong>Image 2 : le treuil du puits.</strong> Au village, une femme remonte le seau avec la manivelle du treuil. Elle pousse toujours la poignée dans le sens du mouvement, avec la même force. Plus elle fait de tours, plus elle fournit de travail : sa main parcourt un cercle de plus en plus long.</p><p><strong>Le pont.</strong> Sa main décrit un arc de cercle. Le travail d'une force est « force fois distance parcourue » : la distance est l'arc, qui vaut le rayon fois l'angle. La force fois le rayon donne le moment : le travail est donc le moment fois l'angle.</p><p><strong>La limite de l'image.</strong> Cela marche tant que le moment reste constant. Si la force change de direction à chaque instant, le moment varie et le calcul est plus délicat.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Angle en radians.</strong> L'angle dont un solide a tourné se mesure en radians : $\\theta = \\dfrac{s}{r}$, où $s$ est la longueur de l'arc décrit par un point situé à la distance $r$ de l'axe. Pour $n$ tours : $\\theta = 2\\pi n$. Conversions : $1\\ \\text{tour} = 2\\pi\\ \\text{rad}$ et $180^\\circ = \\pi\\ \\text{rad}$.</p><p><strong>Travail d'une force de moment constant.</strong> Quand un solide tourne d'un angle $\\theta$ autour d'un axe fixe, le travail d'une force dont le moment $M$ par rapport à l'axe est constant vaut :</p><p>$$W = M\\,\\theta$$</p><p>$W$ en joules, $M$ en $\\text{N}\\cdot\\text{m}$, $\\theta$ en radians.</p><p><strong>Signe.</strong> On prend pour sens positif le sens de rotation du solide. Si $M > 0$, le travail est moteur ($W > 0$). Si $M < 0$, la force freine la rotation : le travail est résistant ($W < 0$). Si $M = 0$, le travail est nul.</p></blockquote><p><strong>Démonstration</strong> pour une force d'intensité $F$ toujours tangente au cercle décrit par son point d'application, à la distance $r$ de l'axe. Ce point décrit un arc de longueur $s = r\\theta$. Le travail est la force fois la distance parcourue : $W = F \\times s = F \\times r\\theta = (F\\,r)\\,\\theta = M\\,\\theta$.</p><h2>Exemple résolu</h2><p>La poignée d'un treuil de puits est à $0{,}30\\ \\text{m}$ de l'axe. La femme pousse avec une force constante de $40\\ \\text{N}$, perpendiculaire à la manivelle et dans le sens du mouvement. Elle fait 5 tours. Les frottements de l'axe ont un moment résistant constant de $2\\ \\text{N}\\cdot\\text{m}$. Calcule le travail de chaque force.</p><ol><li><strong>Moment moteur.</strong> La force est perpendiculaire à la manivelle : $M = F\\,r = 40 \\times 0{,}30 = 12\\ \\text{N}\\cdot\\text{m}$.</li><li><strong>Angle en radians.</strong> $\\theta = 2\\pi \\times 5 = 10\\pi \\approx 31{,}4\\ \\text{rad}$.</li><li><strong>Travail moteur.</strong> $W = M\\,\\theta = 12 \\times 10\\pi = 120\\pi \\approx 377\\ \\text{J}$.</li><li><strong>Travail des frottements.</strong> Le moment est résistant : $W = -2 \\times 10\\pi = -20\\pi \\approx -62{,}8\\ \\text{J}$.</li><li><strong>Vérification.</strong> En 5 tours, la poignée parcourt $5 \\times 2\\pi \\times 0{,}30 = 3\\pi \\approx 9{,}42\\ \\text{m}$. Alors $F \\times s = 40 \\times 9{,}42 \\approx 377\\ \\text{J}$ : on retrouve le même résultat.</li></ol><h2>Le piège à éviter</h2><p>Laisser l'angle en tours ou en degrés. Avec 5 tours, on écrirait $12 \\times 5 = 60\\ \\text{J}$, soit $2\\pi \\approx 6{,}28$ fois trop peu. Avec des degrés ($5 \\times 360 = 1\\,800$), on serait trop grand. Dans $W = M\\theta$, l'angle est toujours en radians.</p><p>Autre erreur : oublier le signe. Un moment qui freine la rotation donne un travail négatif, jamais positif.</p><h2>En une phrase</h2><p>Le travail d'une force de moment constant est le moment fois l'angle parcouru en radians, $W = M\\,\\theta$, positif s'il fait tourner, négatif s'il freine.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Radians, signe du travail et formule W = Mθ",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un solide fait un tour complet autour de son axe. Quel angle, en radians, a-t-il décrit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un tour complet vaut $2\\pi\\ \\text{rad} \\approx 6{,}28\\ \\text{rad}$, comme la valve qui revient au même endroit sur la roue du livreur. Le nombre 360 est un nombre de degrés, pas de radians.",
+                  "answers": [
+                    {
+                      "content": "$2\\pi\\ \\text{rad}$, soit environ $6{,}28\\ \\text{rad}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\pi\\ \\text{rad}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$360\\ \\text{rad}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1\\ \\text{rad}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans $W = M\\,\\theta$, on peut exprimer l'angle $\\theta$ en tours : le résultat reste en joules.",
+                  "question_type": "true_false",
+                  "explanation": "L'angle doit être en radians. Cinq tours valent $10\\pi \\approx 31{,}4\\ \\text{rad}$, pas $5\\ \\text{rad}$. Avec des tours, on perd un facteur $2\\pi \\approx 6{,}28$ et le résultat n'est pas en joules.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une roue de vélo continue de tourner dans le même sens. Quelle force fournit un travail résistant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le frein s'oppose à la rotation : son moment est de signe contraire au sens du mouvement, donc $W < 0$. Le pied qui pousse dans le sens du mouvement fournit un travail moteur. Le poids d'une roue équilibrée a un moment nul, donc un travail nul.",
+                  "answers": [
+                    {
+                      "content": "Les patins du frein qui frottent sur la jante",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le pied du cycliste qui pousse la pédale dans le sens du mouvement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le poids de la roue, dont la droite d'action coupe l'axe",
+                      "correct": false
+                    },
+                    {
+                      "content": "Toutes les forces fournissent un travail résistant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions sont justes à propos de $W = M\\,\\theta$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Avec $M$ en $\\text{N}\\cdot\\text{m}$ et $\\theta$ en radians, $W$ est en joules. Un moment de même sens que la rotation donne un travail moteur positif. Le travail n'est pas toujours positif, et des degrés ne se multiplient pas directement par $M$.",
+                  "answers": [
+                    {
+                      "content": "Avec $M$ en $\\text{N}\\cdot\\text{m}$ et $\\theta$ en radians, $W$ est en joules.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si le moment a le même sens que la rotation, le travail est positif (moteur).",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail est toujours positif.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si l'angle est donné en degrés, on peut le multiplier directement par $M$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force d'intensité $F$, tangente au cercle décrit par son point d'application à la distance $r$ de l'axe, agit pendant que le solide tourne de l'angle $\\theta$. Quelle écriture retrouve $W = M\\,\\theta$ à partir de « force fois distance parcourue » ?",
+                  "question_type": "single_choice",
+                  "explanation": "La distance parcourue est l'arc $s = r\\theta$. Donc $W = F \\times r\\theta = (F\\,r)\\,\\theta = M\\,\\theta$, puisque $F\\,r$ est le moment. Les autres écritures divisent ou additionnent des grandeurs qui doivent se multiplier.",
+                  "answers": [
+                    {
+                      "content": "$W = F \\times r\\theta = (F\\,r)\\,\\theta = M\\,\\theta$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$W = F \\times \\theta / r$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$W = F + r\\theta$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$W = F\\,r / \\theta$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force dont la droite d'action passe par l'axe de rotation ne fournit aucun travail quand le solide tourne.",
+                  "question_type": "true_false",
+                  "explanation": "Si la droite d'action coupe l'axe, le bras de levier est nul, donc $M = 0$ et $W = M\\,\\theta = 0$. C'est comme pousser la porte vers les charnières : elle ne tourne pas, et la force ne travaille pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Convertir et calculer un travail",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Une roue fait 3 tours. Quel est l'angle décrit, en radians ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\theta = 2\\pi \\times 3 = 6\\pi \\approx 18{,}8\\ \\text{rad}$. Écrire $3\\pi \\approx 9{,}42$ oublie que chaque tour vaut $2\\pi$. Le nombre $1\\,080$ est un nombre de degrés ($3 \\times 360$).",
+                  "answers": [
+                    {
+                      "content": "$6\\pi \\approx 18{,}8\\ \\text{rad}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3\\pi \\approx 9{,}42\\ \\text{rad}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3\\ \\text{rad}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1\\,080\\ \\text{rad}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un volet tourne d'un angle de $90^\\circ$. Quelle est cette valeur en radians ?",
+                  "question_type": "single_choice",
+                  "explanation": "$180^\\circ$ valent $\\pi\\ \\text{rad}$, donc $90^\\circ$ valent $\\pi/2 \\approx 1{,}57\\ \\text{rad}$. Le quart de tour est la moitié du demi-tour. Garder 90 mélange degrés et radians ; $\\pi/4$ correspond à $45^\\circ$.",
+                  "answers": [
+                    {
+                      "content": "$\\pi/2 \\approx 1{,}57\\ \\text{rad}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$90\\ \\text{rad}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\pi/4 \\approx 0{,}79\\ \\text{rad}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\pi \\approx 6{,}28\\ \\text{rad}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force de moment constant $M = 15\\ \\text{N}\\cdot\\text{m}$ agit pendant que le solide tourne de $\\theta = 4\\ \\text{rad}$. Quel est son travail ?",
+                  "question_type": "single_choice",
+                  "explanation": "$W = M\\,\\theta = 15 \\times 4 = 60\\ \\text{J}$. Le résultat $3{,}75$ vient d'une division de $15$ par $4$, qui ne correspond à aucune formule. Multiplier encore par $\\pi$ n'a pas lieu d'être : l'angle est déjà en radians.",
+                  "answers": [
+                    {
+                      "content": "$60\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3{,}75\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$60\\pi \\approx 188\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$19\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un moment moteur constant de $12\\ \\text{N}\\cdot\\text{m}$ fait tourner un arbre de 2 tours. Quel est le travail fourni ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\theta = 2 \\times 2\\pi = 4\\pi\\ \\text{rad}$, donc $W = 12 \\times 4\\pi \\approx 151\\ \\text{J}$. Garder 2 donne 24 J. Oublier le 2 de $2\\pi$ donne $24\\pi \\approx 75{,}4\\ \\text{J}$. Convertir en degrés donne $12 \\times 720 = 8\\,640$, faux.",
+                  "answers": [
+                    {
+                      "content": "$\\approx 151\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$24\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 75{,}4\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8\\,640\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les patins d'un frein exercent sur une roue un moment résistant constant de $5\\ \\text{N}\\cdot\\text{m}$. La roue tourne de $10\\ \\text{rad}$ pendant le freinage. Quel est le travail du frein ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le moment résistant est de signe contraire au sens de rotation : $M = -5\\ \\text{N}\\cdot\\text{m}$. Donc $W = -5 \\times 10 = -50\\ \\text{J}$. Le travail est négatif parce que le frein s'oppose au mouvement. Le signe plus oublie cette opposition.",
+                  "answers": [
+                    {
+                      "content": "$-50\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+50\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-2\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-0{,}5\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une femme pousse la manivelle d'un moulin avec une force de $60\\ \\text{N}$, perpendiculaire à la manivelle, à $0{,}25\\ \\text{m}$ de l'axe, dans le sens du mouvement. Elle fait un demi-tour. Quel est le travail de sa force ?",
+                  "question_type": "single_choice",
+                  "explanation": "$M = 60 \\times 0{,}25 = 15\\ \\text{N}\\cdot\\text{m}$ et un demi-tour vaut $\\pi\\ \\text{rad}$. Donc $W = 15\\pi \\approx 47{,}1\\ \\text{J}$. Le résultat $7{,}5$ prend $\\theta = 0{,}5$ ; $94{,}2$ prend un tour entier ; $15$ oublie l'angle.",
+                  "answers": [
+                    {
+                      "content": "$\\approx 47{,}1\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7{,}5\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 94{,}2\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Treuil, frein et moulin",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Au puits du village, la manivelle d'un treuil a une poignée à $0{,}25\\ \\text{m}$ de l'axe. La porteuse d'eau pousse avec une force constante de $60\\ \\text{N}$, perpendiculaire à la manivelle et dans le sens du mouvement, pendant 8 tours. Quel est le travail de sa force ?",
+                  "question_type": "single_choice",
+                  "explanation": "$M = 60 \\times 0{,}25 = 15\\ \\text{N}\\cdot\\text{m}$ et $\\theta = 8 \\times 2\\pi = 16\\pi\\ \\text{rad}$. Donc $W = 15 \\times 16\\pi = 240\\pi \\approx 754\\ \\text{J}$. Le résultat $377$ oublie le facteur 2 des tours ; 120 garde 8 au lieu de $16\\pi$.",
+                  "answers": [
+                    {
+                      "content": "$\\approx 754\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\approx 377\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$120\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$240\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur le même treuil, la corde est enroulée sur un tambour de rayon $0{,}10\\ \\text{m}$. Elle exerce sur le tambour une force tangente de $150\\ \\text{N}$, qui s'oppose à la rotation. Quel est le travail de cette force pendant 8 tours ?",
+                  "question_type": "single_choice",
+                  "explanation": "$M = -150 \\times 0{,}10 = -15\\ \\text{N}\\cdot\\text{m}$ (résistant) et $\\theta = 16\\pi\\ \\text{rad}$. Donc $W = -15 \\times 16\\pi = -240\\pi \\approx -754\\ \\text{J}$. Le signe plus oublie que la corde freine. Garder 8 donne $-120$.",
+                  "answers": [
+                    {
+                      "content": "$\\approx -754\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\approx +754\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-120\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx -1\\,508\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un frein à patins exerce sur la jante d'une roue (rayon $0{,}35\\ \\text{m}$) une force de frottement tangente de $20\\ \\text{N}$, qui s'oppose à la rotation. La roue fait 30 tours avant de s'arrêter. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Valeur du moment : $20 \\times 0{,}35 = 7\\ \\text{N}\\cdot\\text{m}$. Angle : $30 \\times 2\\pi = 60\\pi \\approx 188\\ \\text{rad}$. Travail : $-7 \\times 60\\pi \\approx -1{,}32\\ \\text{kJ}$, négatif car le frein freine. Prendre $\\theta = 30\\ \\text{rad}$ oublie la conversion des tours.",
+                  "answers": [
+                    {
+                      "content": "La valeur du moment du frottement est $7\\ \\text{N}\\cdot\\text{m}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'angle décrit est $60\\pi \\approx 188\\ \\text{rad}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail vaut environ $-1{,}32\\ \\text{kJ}$ : il est négatif, car le frottement est résistant.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail vaut environ $+1{,}32\\ \\text{kJ}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'angle décrit est $30\\ \\text{rad}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La manivelle d'un moulin à main est à $0{,}20\\ \\text{m}$ de l'axe. Une femme pousse avec $35\\ \\text{N}$ perpendiculairement, dans le sens du mouvement, pendant 10 tours. La meule oppose un moment résistant constant de $5\\ \\text{N}\\cdot\\text{m}$. Quelle est la somme algébrique des deux travaux ?",
+                  "question_type": "single_choice",
+                  "explanation": "$W_{moteur} = 35 \\times 0{,}20 \\times 20\\pi = 140\\pi \\approx 440\\ \\text{J}$. $W_{résistant} = -5 \\times 20\\pi = -100\\pi \\approx -314\\ \\text{J}$. Somme : $40\\pi \\approx 126\\ \\text{J}$. Additionner les valeurs absolues donne 754 : les signes ne se perdent pas.",
+                  "answers": [
+                    {
+                      "content": "$\\approx 126\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\approx 754\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 440\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx -314\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide tourne d'un tour complet sous l'action d'une force de moment $10\\ \\text{N}\\cdot\\text{m}$ dans le sens du mouvement. Son travail est de $10\\ \\text{J}$.",
+                  "question_type": "true_false",
+                  "explanation": "Un tour vaut $2\\pi \\approx 6{,}28\\ \\text{rad}$, donc $W = 10 \\times 2\\pi \\approx 62{,}8\\ \\text{J}$. Le résultat $10\\ \\text{J}$ confond un tour avec un radian. Le travail est positif, mais six fois plus grand.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force de moment constant $12\\ \\text{N}\\cdot\\text{m}$ fournit un travail de $300\\ \\text{J}$ dans le sens du mouvement. Combien de tours le solide a-t-il fait ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\theta = W / M = 300 / 12 = 25\\ \\text{rad}$. Un tour valant $2\\pi \\approx 6{,}28\\ \\text{rad}$, cela fait $25 / 6{,}28 \\approx 4$ tours. Répondre 25 tours confond radians et tours ; 157 multiplie au lieu de diviser par $2\\pi$.",
+                  "answers": [
+                    {
+                      "content": "Environ 4 tours",
+                      "correct": true
+                    },
+                    {
+                      "content": "25 tours",
+                      "correct": false
+                    },
+                    {
+                      "content": "Environ 157 tours",
+                      "correct": false
+                    },
+                    {
+                      "content": "Environ 0,04 tour",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La puissance en rotation",
+          "subtitle": "Calculer la puissance moyenne et la puissance P = M·ω",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Convertir une vitesse de rotation de tours par minute en radians par seconde.</li><li>Calculer une puissance moyenne avec $P_m = \\dfrac{W}{\\Delta t}$.</li><li>Calculer la puissance d'une force de moment constant avec $P = M\\,\\omega$.</li></ul><h2>L'image pour comprendre</h2><p><strong>Image 1 : les deux moulins.</strong> Au marché, deux clientes font broyer du maïs. L'une tourne la manivelle du moulin à main et y passe une heure. L'autre dépose son sac au moulin à moteur du quartier : c'est fini en cinq minutes. Le travail à fournir pour broyer un sac est le même. Le moteur le fournit simplement plus vite.</p><p><strong>Le pont.</strong> La <strong>puissance</strong> mesure la rapidité avec laquelle le travail est fourni : $P_m = \\dfrac{W}{\\Delta t}$. Le moulin à moteur a une puissance beaucoup plus grande que la manivelle.</p><p><strong>La limite de l'image.</strong> Une grande puissance ne fournit du travail que pendant qu'elle agit. Un moteur de 3 kilowatts éteint ne fournit rien.</p><p><strong>Image 2 : le compte-tours.</strong> Sur la moto d'un conducteur de moto-taxi, le compte-tours indique 3 000 tours par minute. Cela fait 50 tours par seconde, et chaque tour est un angle de $2\\pi$ radians : l'arbre du moteur tourne de $100\\pi \\approx 314$ radians chaque seconde.</p><p><strong>Le pont.</strong> Le nombre de radians parcourus par seconde est la <strong>vitesse angulaire</strong> $\\omega$. Le compte-tours donne la même information, mais en tours par minute.</p><p><strong>La limite de l'image.</strong> Le tour par minute est pratique à lire, mais ce n'est pas l'unité à employer dans les formules. Pour calculer une puissance, on convertit toujours en radians par seconde.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Vitesse angulaire.</strong> Si un solide tourne d'un angle $\\theta$ pendant la durée $\\Delta t$ à vitesse angulaire constante, $\\omega = \\dfrac{\\theta}{\\Delta t}$, en radians par seconde ($\\text{rad/s}$). Si le solide tourne à $N$ tours par minute :</p><p>$$\\omega = \\frac{2\\pi N}{60}$$</p><p>Un point situé à la distance $r$ de l'axe se déplace à la vitesse $v = \\omega\\,r$ (arc $s = r\\theta$ divisé par $\\Delta t$).</p><p><strong>Puissance moyenne.</strong> $P_m = \\dfrac{W}{\\Delta t}$, avec $W$ en joules et $\\Delta t$ en secondes. La puissance s'exprime en <strong>watts</strong> : $1\\ \\text{W} = 1\\ \\text{J}/\\text{s}$.</p><p><strong>Puissance d'une force de moment constant.</strong> Pour un solide qui tourne autour d'un axe fixe :</p><p>$$P = M\\,\\omega$$</p><p>$M$ en $\\text{N}\\cdot\\text{m}$, $\\omega$ en $\\text{rad/s}$, $P$ en watts. La puissance a le signe du travail : positive si la force fait tourner, négative si elle freine. Si $\\omega$ varie, la formule donne la puissance à chaque instant.</p></blockquote><p><strong>Démonstration</strong> avec $\\omega$ constante. Pendant $\\Delta t$, le solide tourne de $\\theta = \\omega\\,\\Delta t$. Le travail est $W = M\\,\\theta = M\\,\\omega\\,\\Delta t$. Donc $P = \\dfrac{W}{\\Delta t} = M\\,\\omega$. Pour une force tangente, on retrouve la puissance d'une translation : $P = F\\,v = F\\,\\omega\\,r = M\\,\\omega$.</p><h2>Exemple résolu</h2><p>Le moteur du moulin à maïs du quartier exerce un moment moteur constant de $20\\ \\text{N}\\cdot\\text{m}$ et tourne à $1\\,500\\ \\text{tr/min}$. Calcule sa puissance, puis le travail fourni en 10 minutes.</p><ol><li><strong>Vitesse angulaire.</strong> $\\omega = \\dfrac{2\\pi \\times 1\\,500}{60} = 50\\pi \\approx 157\\ \\text{rad/s}$.</li><li><strong>Puissance.</strong> $P = M\\,\\omega = 20 \\times 50\\pi = 1\\,000\\pi \\approx 3\\,142\\ \\text{W}$, soit environ $3{,}14\\ \\text{kW}$.</li><li><strong>Durée en secondes.</strong> $\\Delta t = 10 \\times 60 = 600\\ \\text{s}$.</li><li><strong>Travail.</strong> $W = P\\,\\Delta t = 1\\,000\\pi \\times 600 \\approx 1{,}885 \\times 10^{6}\\ \\text{J}$, soit environ $1{,}89\\ \\text{MJ}$.</li></ol><h2>Le piège à éviter</h2><p>Oublier de convertir les tours par minute en radians par seconde. Ici, $20 \\times 1\\,500 = 30\\,000\\ \\text{W}$ serait presque dix fois trop grand : l'unité n'est plus le watt.</p><p>Autre erreur : confondre le travail $W$ (en italique, en joules) avec le watt $\\text{W}$ (en romain), ou oublier de passer des kilowatts aux watts : $3{,}14\\ \\text{kW} = 3\\,140\\ \\text{W}$.</p><h2>En une phrase</h2><p>La puissance, c'est le travail fourni par seconde : $P_m = W/\\Delta t$, et pour un moment constant en rotation $P = M\\,\\omega$, avec $\\omega$ en radians par seconde.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Vitesse angulaire et puissance",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle est l'unité de la puissance dans le Système international ?",
+                  "question_type": "single_choice",
+                  "explanation": "La puissance est le travail fourni par seconde : $1\\ \\text{W} = 1\\ \\text{J}/\\text{s}$. Le joule mesure le travail, pas la puissance. Le newton-mètre est l'unité du moment. Le tour par minute mesure une vitesse de rotation.",
+                  "answers": [
+                    {
+                      "content": "Le watt, noté $\\text{W}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le joule, noté $\\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le newton-mètre, noté $\\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le tour par minute",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux moulins fournissent le même travail pour broyer un sac de maïs. Celui qui le fait en moins de temps a la plus grande puissance.",
+                  "question_type": "true_false",
+                  "explanation": "$P_m = W/\\Delta t$ : à travail égal, une durée plus courte donne une puissance plus grande. C'est l'image des deux moulins : le moteur ne fait pas plus de travail que la manivelle, il le fait plus vite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la formule $P = M\\,\\omega$, dans quelle unité doit-on exprimer la vitesse angulaire $\\omega$ pour obtenir $P$ en watts ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $M$ en $\\text{N}\\cdot\\text{m}$ et $\\omega$ en $\\text{rad/s}$, $P$ est en watts. Les tours par minute et les degrés par seconde ne sont pas des unités SI de vitesse angulaire. Le mètre par seconde mesure une vitesse linéaire.",
+                  "answers": [
+                    {
+                      "content": "En radians par seconde ($\\text{rad/s}$)",
+                      "correct": true
+                    },
+                    {
+                      "content": "En tours par minute ($\\text{tr/min}$)",
+                      "correct": false
+                    },
+                    {
+                      "content": "En degrés par seconde",
+                      "correct": false
+                    },
+                    {
+                      "content": "En mètres par seconde ($\\text{m}/\\text{s}$)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions sont justes à propos de la puissance ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "La puissance moyenne est $P_m = W/\\Delta t$, et pour un moment constant $P = M\\,\\omega$. En revanche, $M\\,\\theta$ est un travail, pas une puissance, et la puissance se mesure en watts, pas en joules.",
+                  "answers": [
+                    {
+                      "content": "$P_m = \\dfrac{W}{\\Delta t}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour un moment constant, $P = M\\,\\omega$ avec $\\omega$ en $\\text{rad/s}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P = M\\,\\theta$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La puissance s'exprime en joules.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un moteur tourne à 1 tour par seconde, soit $60\\ \\text{tr/min}$. Quelle est sa vitesse angulaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un tour par seconde vaut $2\\pi\\ \\text{rad}$ par seconde : $\\omega = 2\\pi \\approx 6{,}28\\ \\text{rad/s}$. Répondre 60 recopie le nombre de tours par minute. Répondre 1 ignore que chaque tour vaut $2\\pi$ radians. Répondre $\\pi$ ne compte qu'un demi-tour.",
+                  "answers": [
+                    {
+                      "content": "$2\\pi \\approx 6{,}28\\ \\text{rad/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$60\\ \\text{rad/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1\\ \\text{rad/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\pi \\approx 3{,}14\\ \\text{rad/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À moment constant, si la vitesse angulaire double, la puissance double.",
+                  "question_type": "true_false",
+                  "explanation": "$P = M\\,\\omega$ : la puissance est proportionnelle à $\\omega$ quand $M$ est constant. Un moteur qui tourne deux fois plus vite fournit, avec le même moment, deux fois plus de travail par seconde.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Convertir une vitesse et calculer une puissance",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Une meule tourne à $300\\ \\text{tr/min}$. Quelle est sa vitesse angulaire en radians par seconde ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\omega = \\dfrac{2\\pi \\times 300}{60} = 10\\pi \\approx 31{,}4\\ \\text{rad/s}$. Le résultat $1\\,885$ oublie de diviser par 60. Garder 300 ne convertit rien. Le résultat 5 est le nombre de tours par seconde, pas de radians.",
+                  "answers": [
+                    {
+                      "content": "$10\\pi \\approx 31{,}4\\ \\text{rad/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1\\,885\\ \\text{rad/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$300\\ \\text{rad/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5\\ \\text{rad/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un arbre tourne à la vitesse angulaire de $20\\ \\text{rad/s}$. Quelle est sa vitesse de rotation en tours par minute ?",
+                  "question_type": "single_choice",
+                  "explanation": "$N = \\dfrac{60\\,\\omega}{2\\pi} = \\dfrac{60 \\times 20}{2\\pi} \\approx 191\\ \\text{tr/min}$. Le résultat $3{,}2$ est le nombre de tours par seconde. Le résultat $1\\,200$ oublie la division par $2\\pi$. Garder 20 ne convertit rien.",
+                  "answers": [
+                    {
+                      "content": "Environ $191\\ \\text{tr/min}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Environ $3{,}2\\ \\text{tr/min}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1\\,200\\ \\text{tr/min}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$20\\ \\text{tr/min}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un moteur exerce un moment constant de $8\\ \\text{N}\\cdot\\text{m}$ et tourne à $25\\ \\text{rad/s}$. Quelle est sa puissance ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P = M\\,\\omega = 8 \\times 25 = 200\\ \\text{W}$. Diviser donne $0{,}32$ ; multiplier encore par $2\\pi$ donne $1\\,257$ : ce serait convertir deux fois, alors que $\\omega$ est déjà en radians par seconde.",
+                  "answers": [
+                    {
+                      "content": "$200\\ \\text{W}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\approx 1\\,257\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 33\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}32\\ \\text{W}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une force fournit un travail de $1\\,800\\ \\text{J}$ en $30\\ \\text{s}$. Quelle est sa puissance moyenne ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P_m = W / \\Delta t = 1\\,800 / 30 = 60\\ \\text{W}$. Multiplier donne $54\\,000$, qui n'est pas une puissance mais un produit sans signification. L'inverse du quotient, $0{,}0167$, n'a pas non plus de sens.",
+                  "answers": [
+                    {
+                      "content": "$60\\ \\text{W}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$54\\,000\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}0167\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1\\,830\\ \\text{W}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un moteur de puissance $4\\ \\text{kW}$ tourne à la vitesse angulaire de $200\\ \\text{rad/s}$. Quel est son moment moteur, supposé constant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut d'abord convertir : $4\\ \\text{kW} = 4\\,000\\ \\text{W}$. Alors $M = P / \\omega = 4\\,000 / 200 = 20\\ \\text{N}\\cdot\\text{m}$. Prendre $4$ au lieu de $4\\,000$ oublie le kilo. Multiplier donne $800\\,000$, sans signification.",
+                  "answers": [
+                    {
+                      "content": "$20\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}02\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$800\\,000\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4\\,200\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cycliste appuie sur les pédales avec un moment moyen, supposé constant, de $25\\ \\text{N}\\cdot\\text{m}$ sur l'axe du pédalier, qui tourne à $60\\ \\text{tr/min}$. Quelle puissance fournit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\omega = 2\\pi \\times 60 / 60 = 2\\pi \\approx 6{,}28\\ \\text{rad/s}$, donc $P = 25 \\times 2\\pi \\approx 157\\ \\text{W}$. Le résultat $1\\,500$ multiplie $25$ par $60$ sans conversion. Le résultat 25 oublie l'angle. Diviser par 2 oublie le facteur $2\\pi$.",
+                  "answers": [
+                    {
+                      "content": "$\\approx 157\\ \\text{W}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1\\,500\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$25\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 79\\ \\text{W}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Moteur de moulin, treuil et comparaison de moteurs",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Le moteur d'un moulin exerce un moment constant de $12\\ \\text{N}\\cdot\\text{m}$ et tourne à $900\\ \\text{tr/min}$. Quelle est sa puissance ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\omega = 2\\pi \\times 900 / 60 = 30\\pi \\approx 94{,}2\\ \\text{rad/s}$, donc $P = 12 \\times 94{,}2 \\approx 1\\,131\\ \\text{W}$, soit $1{,}13\\ \\text{kW}$. Sans conversion, on trouve $10{,}8\\ \\text{kW}$. En oubliant $2\\pi$, 180 W. En oubliant la division par 60, 67,9 kW.",
+                  "answers": [
+                    {
+                      "content": "$\\approx 1{,}13\\ \\text{kW}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$10{,}8\\ \\text{kW}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$180\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 67{,}9\\ \\text{kW}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le même moteur de moulin a une puissance d'environ $1\\,131\\ \\text{W}$. Quel travail fournit-il en 5 minutes de fonctionnement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut convertir la durée : $5\\ \\text{min} = 300\\ \\text{s}$. Alors $W = P\\,\\Delta t \\approx 1\\,131 \\times 300 \\approx 339\\,000\\ \\text{J}$, soit $339\\ \\text{kJ}$. Garder 5 donne $5\\,655\\ \\text{J}$ : la durée doit être en secondes.",
+                  "answers": [
+                    {
+                      "content": "$\\approx 339\\ \\text{kJ}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\approx 5{,}66\\ \\text{kJ}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 3{,}8\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 1{,}13\\ \\text{kJ}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le moteur d'un treuil de chantier fournit une puissance de $2{,}4\\ \\text{kW}$ à la vitesse angulaire de $40\\ \\text{rad/s}$. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$P = 2\\,400\\ \\text{W}$. Le moment vaut $M = P/\\omega = 2\\,400/40 = 60\\ \\text{N}\\cdot\\text{m}$. En $25\\ \\text{s}$, $W = 2\\,400 \\times 25 = 60\\,000\\ \\text{J}$. Enfin $40\\ \\text{rad/s}$ valent $40 \\times 60 / 2\\pi \\approx 382\\ \\text{tr/min}$. Les valeurs $0{,}0167$ et $96\\ \\text{kJ}$ viennent d'une division inversée ou d'un produit mal choisi.",
+                  "answers": [
+                    {
+                      "content": "Son moment vaut $60\\ \\text{N}\\cdot\\text{m}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "En $25\\ \\text{s}$, il fournit $60\\,000\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa vitesse de rotation est d'environ $382\\ \\text{tr/min}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son moment vaut $0{,}0167\\ \\text{N}\\cdot\\text{m}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "En $25\\ \\text{s}$, il fournit $96\\ \\text{kJ}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Moteur A : moment $30\\ \\text{N}\\cdot\\text{m}$ à $2\\,000\\ \\text{tr/min}$. Moteur B : moment $50\\ \\text{N}\\cdot\\text{m}$ à $1\\,000\\ \\text{tr/min}$. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "A : $\\omega = 209{,}4\\ \\text{rad/s}$ et $P = 30 \\times 209{,}4 \\approx 6{,}28\\ \\text{kW}$. B : $\\omega = 104{,}7\\ \\text{rad/s}$ et $P \\approx 5{,}24\\ \\text{kW}$. A est plus puissant malgré un moment plus faible : la vitesse compte autant que le moment.",
+                  "answers": [
+                    {
+                      "content": "La puissance de A est d'environ $6{,}28\\ \\text{kW}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La puissance de B est d'environ $5{,}24\\ \\text{kW}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "B est plus puissant, car son moment est plus grand.",
+                      "correct": false
+                    },
+                    {
+                      "content": "A et B ont la même puissance.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un treuil de chantier remonte une charge. La corde tire la charge avec une force de $500\\ \\text{N}$, à la vitesse de $0{,}6\\ \\text{m}/\\text{s}$, et s'enroule sur un tambour de rayon $0{,}15\\ \\text{m}$. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\omega = v / r = 0{,}6 / 0{,}15 = 4\\ \\text{rad/s}$. Le moment de la corde sur le tambour est $500 \\times 0{,}15 = 75\\ \\text{N}\\cdot\\text{m}$, donc $P = 75 \\times 4 = 300\\ \\text{W}$, comme $F \\times v = 500 \\times 0{,}6$. Le résultat $2\\,000$ multiplie la force par $\\omega$.",
+                  "answers": [
+                    {
+                      "content": "La vitesse angulaire du tambour est $4\\ \\text{rad/s}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La puissance de la corde est $300\\ \\text{W}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La vitesse angulaire du tambour est $0{,}25\\ \\text{rad/s}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La puissance de la corde est $2\\,000\\ \\text{W}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un moteur de puissance $3\\ \\text{kW}$ fournit toujours un travail de $3\\,000\\ \\text{J}$.",
+                  "question_type": "true_false",
+                  "explanation": "$3\\ \\text{kW} = 3\\,000\\ \\text{W} = 3\\,000\\ \\text{J}$ par seconde. Le travail dépend de la durée : $W = P\\,\\Delta t$. En 10 s, il fournit $30\\,000\\ \\text{J}$. Confondre puissance et travail est l'erreur la plus fréquente.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le couple de forces et le couple moteur",
+          "subtitle": "Faire tourner un solide avec deux forces égales et opposées. À compléter : rendement d'un moteur",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Reconnaître un couple de forces et calculer son moment avec $M = F \\times d$.</li><li>Calculer le travail et la puissance d'un couple qui fait tourner un solide.</li><li>Résoudre un problème qui combine moment, angle, durée et puissance.</li></ul><h2>L'image pour comprendre</h2><p><strong>Image : le volant du gbaka.</strong> Le chauffeur prend un virage. Sa main gauche tire vers le bas sur un côté du volant, sa main droite pousse vers le haut de l'autre côté, avec la même force. Le volant tourne, mais il n'est ni tiré ni poussé d'un côté : les deux mains agissent en sens contraires.</p><p><strong>Le pont.</strong> Les deux mains exercent un <strong>couple de forces</strong> : deux forces égales, de sens contraires, qui ne sont pas sur la même droite. La distance entre les deux droites d'action (ici, le diamètre du volant) joue le rôle de bras de levier pour l'ensemble.</p><p><strong>La limite de l'image.</strong> Si le chauffeur pousse avec les deux mains du même côté, ce n'est plus un couple : les forces s'ajoutent et tirent le volant vers un côté. Pour un vrai couple, la somme des forces est nulle.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Couple de forces.</strong> Deux forces $\\vec F_1$ et $\\vec F_2$ forment un couple si elles ont la même intensité $F$, des sens opposés et des droites d'action parallèles et distinctes. Leur somme vectorielle est nulle. On note $d$ la distance entre leurs droites d'action.</p><p><strong>Moment du couple.</strong></p><p>$$M = \\pm\\, F \\times d$$</p><p>Il a la même valeur par rapport à tout axe perpendiculaire au plan du couple. Il s'exprime en $\\text{N}\\cdot\\text{m}$.</p><p><strong>Travail et puissance.</strong> Quand le couple fait tourner un solide autour d'un axe fixe d'un angle $\\theta$ (en radians) à la vitesse angulaire $\\omega$ (en $\\text{rad/s}$) :</p><p>$$W = M\\,\\theta \\qquad P = M\\,\\omega$$</p><p>Si le couple agit dans le sens de la rotation, on l'appelle <strong>couple moteur</strong> ; s'il s'y oppose, c'est un <strong>couple résistant</strong>.</p></blockquote><p><strong>Pourquoi $M = F \\times d$.</strong> Place l'axe entre les deux droites d'action, à la distance $r_1$ de l'une et $r_2$ de l'autre, avec $r_1 + r_2 = d$. Les deux forces tendent à faire tourner dans le même sens. Les moments s'ajoutent : $F\\,r_1 + F\\,r_2 = F\\,(r_1 + r_2) = F\\,d$.</p><h2>Exemple résolu</h2><p>Un chauffeur de gbaka tourne son volant de $0{,}40\\ \\text{m}$ de diamètre. Chaque main exerce une force de $15\\ \\text{N}$, perpendiculaire au rayon, aux extrémités d'un diamètre, en sens contraires. Il tourne le volant d'un tour et demi en $3\\ \\text{s}$. Calcule le moment du couple, son travail et sa puissance moyenne.</p><ol><li><strong>Moment du couple.</strong> La distance entre les droites d'action est le diamètre : $d = 0{,}40\\ \\text{m}$. Donc $M = F\\,d = 15 \\times 0{,}40 = 6\\ \\text{N}\\cdot\\text{m}$. Chaque main seule donne $15 \\times 0{,}20 = 3\\ \\text{N}\\cdot\\text{m}$, et $3 + 3 = 6$.</li><li><strong>Angle.</strong> $\\theta = 1{,}5 \\times 2\\pi = 3\\pi \\approx 9{,}42\\ \\text{rad}$.</li><li><strong>Travail.</strong> $W = M\\,\\theta = 6 \\times 3\\pi = 18\\pi \\approx 56{,}5\\ \\text{J}$.</li><li><strong>Puissance moyenne.</strong> $P_m = \\dfrac{W}{\\Delta t} = \\dfrac{18\\pi}{3} = 6\\pi \\approx 18{,}8\\ \\text{W}$.</li><li><strong>Vérification.</strong> $\\omega = \\dfrac{3\\pi}{3} = \\pi\\ \\text{rad/s}$ et $P = M\\,\\omega = 6\\pi$ : on retrouve le même résultat.</li></ol><h2>Le piège à éviter</h2><p>Prendre pour $d$ le rayon au lieu de la distance entre les deux droites d'action. On trouverait $15 \\times 0{,}20 = 3\\ \\text{N}\\cdot\\text{m}$, soit la moitié du moment réel : on ne compte qu'une des deux mains.</p><p>Autre erreur : écrire que les forces du couple « s'ajoutent » pour donner $2F$. Leur somme vectorielle est nulle. Seuls leurs moments s'ajoutent.</p><h2>En une phrase</h2><p>Un couple de deux forces égales et opposées a pour moment $F \\times d$, où $d$ est la distance entre leurs droites d'action, et son travail et sa puissance sont $W = M\\,\\theta$ et $P = M\\,\\omega$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître un couple de forces",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Qu'est-ce qu'un couple de forces ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un couple est formé de deux forces de même intensité, de sens opposés, sur des droites parallèles mais distinctes, comme les deux mains sur le volant. Deux forces sur la même droite se compensent sans faire tourner : leur distance est nulle.",
+                  "answers": [
+                    {
+                      "content": "Deux forces de même intensité, de sens opposés, sur des droites d'action parallèles et distinctes",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux forces de même sens, appliquées en deux points du solide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux forces égales et opposées portées par la même droite d'action",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une force et le poids du solide",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La somme vectorielle des deux forces d'un couple est nulle.",
+                  "question_type": "true_false",
+                  "explanation": "Les deux forces ont la même intensité et des sens opposés : leur somme est $\\vec 0$. Comme pour les deux mains sur le volant, elles ne cherchent pas à déplacer le solide d'un côté, seulement à le faire tourner.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux forces d'un couple, d'intensité $F$ chacune, ont des droites d'action parallèles distantes de $d$. Que vaut le moment du couple ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le moment du couple est $M = F \\times d$, avec $d$ la distance entre les deux droites d'action. L'écriture $2F$ oublie le bras de levier et traite le couple comme une somme de forces, qui est nulle.",
+                  "answers": [
+                    {
+                      "content": "$M = F \\times d$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$M = 2F$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M = F / d$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M = 2F + d$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles propositions sont justes à propos du moment d'un couple de forces ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Le moment d'un couple ne dépend pas de la position de l'axe (perpendiculaire au plan du couple) et le travail se calcule par $W = M\\,\\theta$. Le moment ne vaut pas $2F$, et comme la somme des forces est nulle, le couple n'entraîne pas l'axe sur le côté.",
+                  "answers": [
+                    {
+                      "content": "Il a la même valeur par rapport à tout axe perpendiculaire au plan du couple.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail du couple se calcule avec $W = M\\,\\theta$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il vaut toujours $2F$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il tire l'axe de rotation vers le côté.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du volant du gbaka, que représentent les deux mains du chauffeur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux mains exercent des forces égales et opposées sur des droites distinctes : c'est le couple de forces. La distance entre leurs droites d'action est le diamètre du volant, et le moment est l'effet de rotation obtenu.",
+                  "answers": [
+                    {
+                      "content": "Les deux forces du couple",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'axe de rotation",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le bras de levier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le moment du couple",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si les deux forces d'un couple ont la même droite d'action, le moment du couple est nul.",
+                  "question_type": "true_false",
+                  "explanation": "Si les deux droites d'action sont confondues, leur distance est $d = 0$ et $M = F \\times d = 0$. Les deux forces se compensent sans faire tourner le solide, comme deux mains qui poussent le volant l'une contre l'autre sur une même droite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Moment, travail et puissance d'un couple",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un couple est formé de deux forces de $20\\ \\text{N}$ dont les droites d'action sont distantes de $0{,}30\\ \\text{m}$. Quel est son moment ?",
+                  "question_type": "single_choice",
+                  "explanation": "$M = F \\times d = 20 \\times 0{,}30 = 6\\ \\text{N}\\cdot\\text{m}$. Le résultat $12$ compte deux fois la force ($2F \\times d$). Le quotient $66{,}7$ divise au lieu de multiplier. Le résultat $0{,}015$ inverse le quotient.",
+                  "answers": [
+                    {
+                      "content": "$6\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 66{,}7\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}015\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chauffeur de gbaka tient un volant de $0{,}45\\ \\text{m}$ de diamètre et exerce sur lui un couple de forces de $12\\ \\text{N}$ chacune, aux extrémités d'un diamètre. Quel est le moment du couple ?",
+                  "question_type": "single_choice",
+                  "explanation": "La distance entre les droites d'action est le diamètre : $d = 0{,}45\\ \\text{m}$. Donc $M = 12 \\times 0{,}45 = 5{,}4\\ \\text{N}\\cdot\\text{m}$. Le résultat $2{,}7$ prend le rayon et ne compte qu'une main. Le résultat $10{,}8$ compte $2F$. Le résultat $26{,}7$ est un quotient.",
+                  "answers": [
+                    {
+                      "content": "$5{,}4\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2{,}7\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10{,}8\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 26{,}7\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un couple de moment $5{,}4\\ \\text{N}\\cdot\\text{m}$ fait tourner un volant de 2 tours dans le sens du couple. Quel est le travail du couple ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\theta = 2 \\times 2\\pi = 4\\pi\\ \\text{rad}$, donc $W = 5{,}4 \\times 4\\pi \\approx 67{,}9\\ \\text{J}$. Garder 2 donne $10{,}8$. Compter un seul tour donne $33{,}9$. Convertir en degrés ($720$) donne $3\\,888$, faux.",
+                  "answers": [
+                    {
+                      "content": "$\\approx 67{,}9\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$10{,}8\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 33{,}9\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3\\,888\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un couple moteur de moment $6\\ \\text{N}\\cdot\\text{m}$ fait tourner un arbre à $30\\ \\text{tr/min}$. Quelle est sa puissance ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\omega = 2\\pi \\times 30 / 60 = \\pi \\approx 3{,}14\\ \\text{rad/s}$, donc $P = 6\\pi \\approx 18{,}8\\ \\text{W}$. Le résultat $180$ multiplie par $30$ sans conversion, puis divise par $60$ sans $2\\pi$. Le résultat $1\\,131$ ne divise pas par 60. Le résultat 6 recopie le moment sans $\\omega$.",
+                  "answers": [
+                    {
+                      "content": "$\\approx 18{,}8\\ \\text{W}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$180\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 1\\,131\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6\\ \\text{W}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour desserrer l'écrou d'une roue, un mécanicien utilise une clé en croix et appuie avec ses deux mains, en sens contraires, avec $90\\ \\text{N}$ chacune. Les deux droites d'action sont distantes de $0{,}50\\ \\text{m}$. Quel est le moment du couple ?",
+                  "question_type": "single_choice",
+                  "explanation": "$M = F \\times d = 90 \\times 0{,}50 = 45\\ \\text{N}\\cdot\\text{m}$. Le résultat $22{,}5$ prend la moitié de la distance, donc une seule main. Le résultat $90$ recopie la force. Le résultat $180$ compte $2F$, qui n'est pas le moment du couple.",
+                  "answers": [
+                    {
+                      "content": "$45\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$22{,}5\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$90\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$180\\ \\text{N}\\cdot\\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un couple de deux forces de $50\\ \\text{N}$, dont les droites d'action sont distantes de $0{,}40\\ \\text{m}$, fait tourner un solide d'un demi-tour en $2\\ \\text{s}$. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$M = 50 \\times 0{,}40 = 20\\ \\text{N}\\cdot\\text{m}$. Un demi-tour vaut $\\pi\\ \\text{rad}$ : $W = 20\\pi \\approx 62{,}8\\ \\text{J}$. Puissance moyenne : $62{,}8 / 2 \\approx 31{,}4\\ \\text{W}$. Le résultat $126\\ \\text{W}$ multiplie par $2\\ \\text{s}$ au lieu de diviser.",
+                  "answers": [
+                    {
+                      "content": "Le moment du couple est $20\\ \\text{N}\\cdot\\text{m}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail est environ $62{,}8\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La puissance moyenne est environ $31{,}4\\ \\text{W}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail est $10\\ \\text{J}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La puissance moyenne est environ $126\\ \\text{W}$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Volant, moteur de moulin et meule à manioc",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un chauffeur de gbaka tient son volant de $0{,}44\\ \\text{m}$ de diamètre et exerce un couple de deux forces de $10\\ \\text{N}$, aux extrémités d'un diamètre. Il tourne le volant de trois quarts de tour dans le sens du couple. Quel est le travail du couple ?",
+                  "question_type": "single_choice",
+                  "explanation": "$M = 10 \\times 0{,}44 = 4{,}4\\ \\text{N}\\cdot\\text{m}$. Trois quarts de tour : $\\theta = 0{,}75 \\times 2\\pi = 1{,}5\\pi \\approx 4{,}71\\ \\text{rad}$. Donc $W = 4{,}4 \\times 4{,}71 \\approx 20{,}7\\ \\text{J}$. Le résultat $27{,}6$ compte un tour entier ; $13{,}8$ un demi-tour ; $3{,}3$ prend $0{,}75\\ \\text{rad}$.",
+                  "answers": [
+                    {
+                      "content": "$\\approx 20{,}7\\ \\text{J}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\approx 27{,}6\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 13{,}8\\ \\text{J}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3{,}3\\ \\text{J}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un moteur de moulin exerce sur son arbre un couple de deux forces de $80\\ \\text{N}$ chacune, dont les droites d'action sont distantes de $0{,}25\\ \\text{m}$. Il tourne à $600\\ \\text{tr/min}$. Quelle est sa puissance ?",
+                  "question_type": "single_choice",
+                  "explanation": "$M = 80 \\times 0{,}25 = 20\\ \\text{N}\\cdot\\text{m}$ et $\\omega = 2\\pi \\times 600 / 60 = 20\\pi \\approx 62{,}8\\ \\text{rad/s}$. Donc $P = 20 \\times 62{,}8 \\approx 1\\,257\\ \\text{W}$. Sans conversion, on obtient $12\\ \\text{kW}$ ; sans $2\\pi$, 200 W ; sans la division par 60, $75{,}4\\ \\text{kW}$.",
+                  "answers": [
+                    {
+                      "content": "$\\approx 1{,}26\\ \\text{kW}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12\\ \\text{kW}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$200\\ \\text{W}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 75{,}4\\ \\text{kW}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un couple de deux forces de $30\\ \\text{N}$ a ses droites d'action distantes de $0{,}20\\ \\text{m}$. Un axe perpendiculaire au plan du couple passe entre les deux droites. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Le moment du couple est $30 \\times 0{,}20 = 6\\ \\text{N}\\cdot\\text{m}$. Si l'axe est au milieu, chaque force a pour moment $30 \\times 0{,}10 = 3\\ \\text{N}\\cdot\\text{m}$ et les deux s'ajoutent. Déplacer l'axe entre les droites ne change pas le total. Une force seule ne donne que $3\\ \\text{N}\\cdot\\text{m}$.",
+                  "answers": [
+                    {
+                      "content": "Si l'axe est au milieu, chaque force a un moment de $3\\ \\text{N}\\cdot\\text{m}$ et le couple vaut $6\\ \\text{N}\\cdot\\text{m}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si on déplace l'axe entre les deux droites, le moment du couple reste $6\\ \\text{N}\\cdot\\text{m}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le moment du couple vaut $3\\ \\text{N}\\cdot\\text{m}$, celui d'une seule force.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le moment du couple est maximal quand l'axe est au milieu.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour hisser un sac de maïs, une manivelle est tournée de 6 tours en $12\\ \\text{s}$. Le couple moteur a un moment de $8\\ \\text{N}\\cdot\\text{m}$ et le couple résistant (frottements et charge) un moment de $3\\ \\text{N}\\cdot\\text{m}$. Quelles propositions sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$\\theta = 6 \\times 2\\pi = 12\\pi\\ \\text{rad}$ et $\\omega = \\pi\\ \\text{rad/s}$. Travail moteur : $8 \\times 12\\pi \\approx 302\\ \\text{J}$. Travail résistant : $-3 \\times 12\\pi \\approx -113\\ \\text{J}$. Puissance du couple moteur : $8\\pi \\approx 25{,}1\\ \\text{W}$. Additionner les valeurs absolues (415 J) fait perdre les signes.",
+                  "answers": [
+                    {
+                      "content": "Le travail du couple moteur est environ $302\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le travail du couple résistant est environ $-113\\ \\text{J}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La puissance du couple moteur est environ $25{,}1\\ \\text{W}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La somme algébrique des deux travaux est environ $415\\ \\text{J}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La puissance du couple moteur est $4\\ \\text{W}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide tourne à vitesse angulaire constante, dans le sens positif. Un couple résistant de moment constant agit sur lui. La puissance de ce couple est positive.",
+                  "question_type": "true_false",
+                  "explanation": "Le couple résistant a un moment de signe contraire à la rotation : $M < 0$ et $\\omega > 0$, donc $P = M\\,\\omega < 0$. Comme son travail, sa puissance est négative : le couple freine le solide au lieu de le faire tourner.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une meule à manioc du marché est entraînée par un moteur de puissance $1{,}5\\ \\text{kW}$ qui tourne à $300\\ \\text{tr/min}$. Le moment du couple moteur est réalisé par deux forces égales dont les droites d'action sont distantes de $0{,}40\\ \\text{m}$. Quelle est l'intensité de chaque force ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\omega = 2\\pi \\times 300 / 60 = 10\\pi \\approx 31{,}4\\ \\text{rad/s}$. Alors $M = P / \\omega = 1\\,500 / 31{,}4 \\approx 47{,}7\\ \\text{N}\\cdot\\text{m}$ et $F = M / d = 47{,}7 / 0{,}40 \\approx 119\\ \\text{N}$. Le résultat $19{,}1$ multiplie au lieu de diviser ; $239$ divise par le rayon $0{,}20\\ \\text{m}$ au lieu de $d$.",
+                  "answers": [
+                    {
+                      "content": "$\\approx 119\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\approx 19{,}1\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 239\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 12{,}5\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
