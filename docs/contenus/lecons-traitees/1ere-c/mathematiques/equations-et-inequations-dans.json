@@ -224,24 +224,24 @@
                   ]
                 },
                 {
-                  "content": "Quelle factorisation est égale à $2x^2-5x-3$ ?",
+                  "content": "Quelle factorisation est égale à $3x^2-4x-4$ ?",
                   "question_type": "single_choice",
-                  "explanation": "Les racines sont $3$ et $-\\frac12$ : $2(x-3)\\left(x+\\frac12\\right)=(x-3)(2x+1)$. Développe : $2x^2+x-6x-3$. Le produit $(x-3)\\left(x+\\frac12\\right)$ oublie le facteur $2$, et $(x+3)(2x-1)$ change les signes des racines.",
+                  "explanation": "$\\Delta=64$ et les racines sont $2$ et $-\\frac23$ : $3(x-2)\\left(x+\\frac23\\right)=(x-2)(3x+2)$. Développe : $3x^2+2x-6x-4$. Le produit $(x-2)\\left(x+\\frac23\\right)$ oublie le facteur $3$, et $(x+2)(3x-2)$ change les signes des racines.",
                   "answers": [
                     {
-                      "content": "$(x-3)(2x+1)$",
+                      "content": "$(x-2)(3x+2)$",
                       "correct": true
                     },
                     {
-                      "content": "$(x-3)\\left(x+\\frac12\\right)$",
+                      "content": "$(x-2)\\left(x+\\frac23\\right)$",
                       "correct": false
                     },
                     {
-                      "content": "$(x+3)(2x-1)$",
+                      "content": "$(x+2)(3x-2)$",
                       "correct": false
                     },
                     {
-                      "content": "$2(x+3)\\left(x-\\frac12\\right)$",
+                      "content": "$3(x+2)\\left(x-\\frac23\\right)$",
                       "correct": false
                     }
                   ]
@@ -451,7 +451,7 @@
         {
           "name": "Somme et produit des racines",
           "subtitle": "Relations entre coefficients et racines, racine évidente",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Calculer la somme et le produit des racines d'un trinôme sans les calculer une à une.</li><li>Retrouver deux nombres dont on connaît la somme et le produit.</li><li>Trouver une racine évidente et déduire la seconde, ou le signe des racines.</li></ul><h2>L'image pour comprendre</h2><p><strong>La plaque à pâtisserie de Maman.</strong> Maman prépare un gâteau pour le repas du dimanche. Elle dit : « Le tour de ma plaque rectangulaire mesure 14 dm et sa surface 12 dm². » Pour trouver ses deux dimensions sans tâtonner, on retient deux informations : la moitié du tour, c'est la somme des deux dimensions, soit $7$ ; la surface, c'est leur produit, soit $12$. Les deux nombres cherchés sont $3$ et $4$ : $3+4=7$ et $3 \\times 4=12$.</p><p><em>Le pont.</em> La somme $S=7$ est la somme des deux racines, le produit $P=12$ est leur produit. Les dimensions de la plaque sont les deux solutions de $X^2-SX+P=X^2-7X+12=0$.</p><p><em>Où l'image s'arrête.</em> Certaines plaques n'existent pas : un demi-tour de 4 dm et une surface de 5 dm² donnent $X^2-4X+5=0$, de discriminant $-4<0$. Il n'y a pas de rectangle. Et dans $\\mathbb{R}$, les racines peuvent être négatives ou irrationnelles, ce qu'une dimension de plaque n'est pas.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Somme et produit.</strong> Si $\\Delta \\ge 0$, les racines $x_1$ et $x_2$ de $ax^2+bx+c$ (confondues si $\\Delta=0$) vérifient $S=x_1+x_2=-\\frac{b}{a}$ et $P=x_1x_2=\\frac{c}{a}$.</p><p><em>Preuve.</em> $x_1+x_2=\\frac{-b-\\sqrt{\\Delta}-b+\\sqrt{\\Delta}}{2a}=-\\frac{b}{a}$ et $x_1x_2=\\frac{b^2-\\Delta}{4a^2}=\\frac{4ac}{4a^2}=\\frac{c}{a}$.</p><p><strong>Réciproque.</strong> Deux nombres de somme $S$ et de produit $P$ sont les solutions de $X^2-SX+P=0$. Ils existent dans $\\mathbb{R}$ si et seulement si $S^2-4P \\ge 0$.</p><p><strong>Racines évidentes.</strong> Si $a+b+c=0$, alors $1$ est racine et l'autre racine vaut $\\frac{c}{a}$. Si $a-b+c=0$, alors $-1$ est racine et l'autre racine vaut $-\\frac{c}{a}$.</p><p><strong>Signe des racines</strong> (quand elles existent). Si $P<0$ : racines de signes contraires, et $\\Delta>0$ automatiquement. Si $P>0$ et $S>0$ : deux racines strictement positives. Si $P>0$ et $S<0$ : deux racines strictement négatives.</p><p><strong>Un calcul utile.</strong> $x_1^2+x_2^2 = S^2-2P$.</p></blockquote><h2>Exemple résolu</h2><p><strong>Pour $2x^2-5x-3=0$ ($\\Delta=49>0$), sans résoudre.</strong> $S=-\\frac{-5}{2}=\\frac52$ et $P=\\frac{-3}{2}$. Comme $P<0$, les racines sont de signes contraires. Contrôle avec les racines $3$ et $-\\frac12$ : $3-\\frac12=\\frac52$ et $3 \\times \\left(-\\frac12\\right)=-\\frac32$.</p><p><strong>Deux nombres de somme 7 et de produit 12.</strong> On résout $X^2-7X+12=0$ : $\\Delta=49-48=1$ et $X=\\frac{7\\pm1}{2}$, soit $3$ et $4$.</p><p><strong>Racine évidente de $3x^2-7x+4=0$.</strong> $a+b+c=3-7+4=0$ : $1$ est racine. L'autre vaut $\\frac{c}{a}=\\frac43$. Contrôle : $1+\\frac43=\\frac73=-\\frac{b}{a}$.</p><h2>Le piège à éviter</h2><p>Écrire $S=\\frac{b}{a}$ en oubliant le signe moins. Pour $x^2-7x+12=0$, la somme des racines vaut $+7$ et non $-7$. Autre piège : utiliser $S$ et $P$ sans vérifier que les racines existent. Pour $x^2+x+1=0$, $S=-1$ et $P=1$, mais $\\Delta=-3<0$ : il n'y a pas de racine réelle.</p><p>Comment le repérer : calcule d'abord $\\Delta$, ou vérifie $S^2-4P \\ge 0$, avant d'utiliser $S$ et $P$.</p><h2>En une phrase</h2><p>La somme des racines vaut $-\\frac{b}{a}$ et leur produit $\\frac{c}{a}$ : deux nombres de somme $S$ et de produit $P$ sont les racines de $X^2-SX+P$, comme les dimensions d'une plaque dont on connaît le demi-tour et la surface.</p>",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Calculer la somme et le produit des racines d'un trinôme sans les calculer une à une.</li><li>Retrouver deux nombres dont on connaît la somme et le produit.</li><li>Trouver une racine évidente et déduire la seconde, ou le signe des racines.</li></ul><h2>L'image pour comprendre</h2><p><strong>La plaque à pâtisserie de Maman.</strong> Maman prépare un gâteau pour le repas du dimanche. Elle dit : « Le tour de ma plaque rectangulaire mesure 14 dm et sa surface 12 dm². » Pour trouver ses deux dimensions sans tâtonner, on retient deux informations : la moitié du tour, c'est la somme des deux dimensions, soit $7$ ; la surface, c'est leur produit, soit $12$. Les deux nombres cherchés sont $3$ et $4$ : $3+4=7$ et $3 \\times 4=12$.</p><p><em>Le pont.</em> La somme $S=7$ est la somme des deux racines, le produit $P=12$ est leur produit. Les dimensions de la plaque sont les deux solutions de $X^2-SX+P=X^2-7X+12=0$.</p><p><em>Où l'image s'arrête.</em> Certaines plaques n'existent pas : un demi-tour de 4 dm et une surface de 5 dm² donnent $X^2-4X+5=0$, de discriminant $-4<0$. Il n'y a pas de rectangle. Et dans $\\mathbb{R}$, les racines peuvent être négatives, ce qu'une dimension de plaque ne peut pas être.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Somme et produit.</strong> Si $\\Delta \\ge 0$, les racines $x_1$ et $x_2$ de $ax^2+bx+c$ (confondues si $\\Delta=0$) vérifient $S=x_1+x_2=-\\frac{b}{a}$ et $P=x_1x_2=\\frac{c}{a}$.</p><p><em>Preuve.</em> $x_1+x_2=\\frac{-b-\\sqrt{\\Delta}-b+\\sqrt{\\Delta}}{2a}=-\\frac{b}{a}$ et $x_1x_2=\\frac{b^2-\\Delta}{4a^2}=\\frac{4ac}{4a^2}=\\frac{c}{a}$.</p><p><strong>Réciproque.</strong> Deux nombres de somme $S$ et de produit $P$ sont les solutions de $X^2-SX+P=0$. Ils existent dans $\\mathbb{R}$ si et seulement si $S^2-4P \\ge 0$.</p><p><strong>Racines évidentes.</strong> Si $a+b+c=0$, alors $1$ est racine et l'autre racine vaut $\\frac{c}{a}$. Si $a-b+c=0$, alors $-1$ est racine et l'autre racine vaut $-\\frac{c}{a}$.</p><p><strong>Signe des racines</strong> (quand elles existent). Si $P<0$ : racines de signes contraires, et $\\Delta>0$ automatiquement. Si $P>0$ et $S>0$ : deux racines strictement positives. Si $P>0$ et $S<0$ : deux racines strictement négatives.</p><p><strong>Un calcul utile.</strong> $x_1^2+x_2^2 = S^2-2P$.</p></blockquote><h2>Exemple résolu</h2><p><strong>Pour $2x^2-5x-3=0$ ($\\Delta=49>0$), sans résoudre.</strong> $S=-\\frac{-5}{2}=\\frac52$ et $P=\\frac{-3}{2}$. Comme $P<0$, les racines sont de signes contraires. Contrôle avec les racines $3$ et $-\\frac12$ : $3-\\frac12=\\frac52$ et $3 \\times \\left(-\\frac12\\right)=-\\frac32$.</p><p><strong>Deux nombres de somme 7 et de produit 12.</strong> On résout $X^2-7X+12=0$ : $\\Delta=49-48=1$ et $X=\\frac{7\\pm1}{2}$, soit $3$ et $4$.</p><p><strong>Racine évidente de $3x^2-7x+4=0$.</strong> $a+b+c=3-7+4=0$ : $1$ est racine. L'autre vaut $\\frac{c}{a}=\\frac43$. Contrôle : $1+\\frac43=\\frac73=-\\frac{b}{a}$.</p><h2>Le piège à éviter</h2><p>Écrire $S=\\frac{b}{a}$ en oubliant le signe moins. Pour $x^2-7x+12=0$, la somme des racines vaut $+7$ et non $-7$. Autre piège : utiliser $S$ et $P$ sans vérifier que les racines existent. Pour $x^2+x+1=0$, $S=-1$ et $P=1$, mais $\\Delta=-3<0$ : il n'y a pas de racine réelle.</p><p>Comment le repérer : calcule d'abord $\\Delta$, ou vérifie $S^2-4P \\ge 0$, avant d'utiliser $S$ et $P$.</p><h2>En une phrase</h2><p>La somme des racines vaut $-\\frac{b}{a}$ et leur produit $\\frac{c}{a}$ : deux nombres de somme $S$ et de produit $P$ sont les racines de $X^2-SX+P$, comme les dimensions d'une plaque dont on connaît le demi-tour et la surface.</p>",
           "exercises": [
             {
               "title": "Comprendre — Somme, produit et plaque à pâtisserie",
@@ -996,9 +996,9 @@
                   ]
                 },
                 {
-                  "content": "Dans l'image du saladier et de la table, que représentent les deux points où le bord du saladier croise le niveau de la table ?",
+                  "content": "Pour la courbe d'un trinôme du second degré, que représentent les points où elle coupe l'axe des abscisses ?",
                   "question_type": "single_choice",
-                  "explanation": "Le niveau de la table est la valeur $0$ : les points où la courbe le croise sont ceux où le trinôme s'annule, c'est-à-dire ses racines. Le discriminant, lui, est un nombre qui annonce combien il y a de points de croisement.",
+                  "explanation": "L'axe des abscisses correspond à la valeur $0$ : les points où la courbe le coupe sont ceux où le trinôme s'annule, c'est-à-dire ses racines. Le discriminant, lui, est un nombre qui annonce combien il y a de tels points.",
                   "answers": [
                     {
                       "content": "Les racines du trinôme",
@@ -1050,7 +1050,7 @@
                 {
                   "content": "Quel est l'ensemble solution de $2x^2-7x+3 \\ge 0$ ?",
                   "question_type": "single_choice",
-                  "explanation": "$\\Delta=49-24=25$ et les racines sont $\\frac12$ et $3$. Avec $a=2>0$, le trinôme est positif à l'extérieur des racines, nul en elles, et l'inégalité est large : $\\left]-\\infty\\,;\\frac12\\right]\\cup[3\\,;+\\infty[$. Crochets ouverts seraient faux, car l'égalité est permise.",
+                  "explanation": "$\\Delta=49-24=25$ et les racines sont $\\frac12$ et $3$. Avec $a=2>0$, le trinôme est positif à l'extérieur des racines, nul en elles, et l'inégalité est large : $\\left]-\\infty\\,;\\frac12\\right]\\cup[3\\,;+\\infty[$. Des crochets ouverts seraient faux, car l'égalité est permise.",
                   "answers": [
                     {
                       "content": "$\\left]-\\infty\\,;\\frac12\\right]\\cup[3\\,;+\\infty[$",
@@ -1329,7 +1329,7 @@
         {
           "name": "Équations et inéquations avec valeur absolue",
           "subtitle": "La distance en action — À compléter : équations bicarrées, équations et inéquations irrationnelles",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Interpréter $|x-a|$ comme une distance et traduire une équation ou une inéquation avec valeur absolue.</li><li>Résoudre $|u|=k$, $|u|=|v|$, $|u|\\le k$ et $|u|\\ge k$, puis écrire l'ensemble solution en intervalles.</li><li>Résoudre une équation ou une inéquation où $|x|$ apparaît avec $x^2$, en se ramenant au second degré.</li></ul><h2>L'image pour comprendre</h2><p><strong>La balance de cuisine.</strong> Pour son gâteau, Maman a besoin de 250 g de farine. Sur la balance, que la farine pèse un peu trop ou un peu moins n'a pas d'importance pour elle : ce qui compte, c'est l'écart avec 250 g, sans le sens. Elle accepte un écart d'au plus 10 g.</p><p><em>Le pont.</em> La masse de farine est $m$. L'écart est $|m-250|$, la distance entre $m$ et $250$ sur la droite graduée. « Écart exactement égal à 10 g » s'écrit $|m-250|=10$, soit $m=240$ ou $m=260$. « Écart d'au plus 10 g » s'écrit $|m-250| \\le 10$, soit $240 \\le m \\le 260$. « Écart d'au moins 10 g » s'écrit $|m-250| \\ge 10$ : $m \\le 240$ ou $m \\ge 260$.</p><p><em>Où l'image s'arrête.</em> Un écart ne peut jamais être négatif : une équation comme $|m-250|=-3$ n'a aucune solution. Dans l'image, la masse est aussi positive, alors que $x$ dans $|x-3|$ est un réel quelconque.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Définition.</strong> $|x|=x$ si $x \\ge 0$ et $|x|=-x$ si $x<0$. Pour tout réel $x$ : $|x| \\ge 0$ et $|x|^2=x^2$. Pour deux réels $x$ et $a$, $|x-a|$ est la distance entre $x$ et $a$.</p><p><strong>Équations.</strong> Pour $k>0$ : $|u|=k$ équivaut à $u=k$ ou $u=-k$. Pour $k<0$ : $|u|=k$ n'a aucune solution. Et $|u|=|v|$ équivaut à $u=v$ ou $u=-v$.</p><p><strong>Inéquations.</strong> Pour $k \\ge 0$ : $|u| \\le k$ équivaut à $-k \\le u \\le k$ (une seule condition « et »), et $|u| \\ge k$ équivaut à $u \\le -k$ ou $u \\ge k$ (deux morceaux séparés). Même chose avec des inégalités strictes. Pour $k<0$ : $|u| \\le k$ est impossible et $|u| \\ge k$ est toujours vraie.</p><p><strong>Plusieurs valeurs absolues.</strong> On découpe la droite aux valeurs qui annulent chaque expression, on enlève les barres sur chaque intervalle selon le signe, puis on garde seulement les solutions qui appartiennent à l'intervalle étudié.</p><p><strong>Avec le second degré.</strong> Comme $x^2=|x|^2$, une équation en $x^2$ et $|x|$ se résout en posant $T=|x|$, avec $T \\ge 0$ : on résout en $T$, puis on revient à $x$ par $x=T$ ou $x=-T$.</p></blockquote><h2>Exemple résolu</h2><p><strong>Résoudre $|2x-3|=|x+1|$.</strong> Cela équivaut à $2x-3=x+1$ ou $2x-3=-(x+1)$. Le premier cas donne $x=4$, le second $3x=2$, donc $x=\\frac23$. Contrôle : $|5|=|5|$ et $\\left|-\\frac53\\right|=\\left|\\frac53\\right|$. Les solutions sont $4$ et $\\frac23$.</p><p><strong>Résoudre $|x-3|<2$ puis $|x-3| \\ge 2$.</strong> La distance de $x$ à $3$ est inférieure à $2$ si et seulement si $-2< x-3<2$, soit $1< x<5$ : $]1\\,;5[$. Pour $|x-3| \\ge 2$, on prend le complémentaire : $x \\le 1$ ou $x \\ge 5$, soit $]-\\infty\\,;1]\\cup[5\\,;+\\infty[$.</p><p><strong>Résoudre $|x-1|+|x+2|=5$.</strong> Si $x<-2$ : $-(x-1)-(x+2)=-2x-1=5$, donc $x=-3$, qui est bien $<-2$. Si $-2 \\le x<1$ : $-(x-1)+(x+2)=3 \\ne 5$, aucune solution. Si $x \\ge 1$ : $2x+1=5$, donc $x=2$, qui est bien $\\ge1$. Les solutions sont $-3$ et $2$.</p><p><strong>Résoudre $x^2-3|x|+2=0$.</strong> On pose $T=|x| \\ge 0$ : $T^2-3T+2=0$, donc $T=1$ ou $T=2$. Ainsi $|x|=1$ ou $|x|=2$, et $x \\in \\{-2\\,;-1\\,;1\\,;2\\}$.</p><h2>Le piège à éviter</h2><p>Écrire $|x-3| \\ge 2$ comme un seul encadrement $-2 \\le x-3 \\le 2$, ou l'inverse. L'inégalité « plus petit que » donne un intervalle (un « et »). L'inégalité « plus grand que » donne deux morceaux (un « ou »). Autre piège : croire que $|x|=-2$ a pour solutions $2$ et $-2$ : une distance n'est jamais négative, il n'y a aucune solution.</p><p>Comment le repérer : pense à la distance. « À moins de 2 de 3 » est un seul morceau autour de $3$ ; « à plus de 2 de 3 » est de part et d'autre, loin de $3$.</p><h2>En une phrase</h2><p>La valeur absolue $|x-a|$ est la distance de $x$ à $a$ : « inférieure à $k$ » donne un seul intervalle centré en $a$, « supérieure à $k$ » donne deux morceaux de part et d'autre.</p>",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Interpréter $|x-a|$ comme une distance et traduire une équation ou une inéquation avec valeur absolue.</li><li>Résoudre $|u|=k$, $|u|=|v|$, $|u|\\le k$ et $|u|\\ge k$, puis écrire l'ensemble solution en intervalles.</li><li>Résoudre une équation ou une inéquation où $|x|$ apparaît avec $x^2$, en se ramenant au second degré.</li></ul><h2>L'image pour comprendre</h2><p><strong>La balance de cuisine.</strong> Pour son gâteau, Maman a besoin de 250 g de farine. Sur la balance, que la farine pèse un peu trop ou un peu moins n'a pas d'importance pour elle : ce qui compte, c'est l'écart avec 250 g, sans le sens. Elle accepte un écart d'au plus 10 g.</p><p><em>Le pont.</em> La masse de farine est $m$. L'écart est $|m-250|$, la distance entre $m$ et $250$ sur la droite graduée. « Écart exactement égal à 10 g » s'écrit $|m-250|=10$, soit $m=240$ ou $m=260$. « Écart d'au plus 10 g » s'écrit $|m-250| \\le 10$, soit $240 \\le m \\le 260$. « Écart d'au moins 10 g » s'écrit $|m-250| \\ge 10$ : $m \\le 240$ ou $m \\ge 260$.</p><p><em>Où l'image s'arrête.</em> Un écart ne peut jamais être négatif : une équation comme $|m-250|=-3$ n'a aucune solution. Dans l'image, la masse est aussi positive, alors que $x$ dans $|x-3|$ est un réel quelconque.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Définition.</strong> $|x|=x$ si $x \\ge 0$ et $|x|=-x$ si $x<0$. Pour tout réel $x$ : $|x| \\ge 0$ et $|x|^2=x^2$. Pour deux réels $x$ et $a$, $|x-a|$ est la distance entre $x$ et $a$.</p><p><strong>Équations.</strong> Pour $k \\ge 0$ : $|u|=k$ équivaut à $u=k$ ou $u=-k$ (si $k=0$, cela se réduit à $u=0$). Pour $k<0$ : $|u|=k$ n'a aucune solution. Et $|u|=|v|$ équivaut à $u=v$ ou $u=-v$.</p><p><strong>Inéquations.</strong> Pour $k \\ge 0$ : $|u| \\le k$ équivaut à $-k \\le u \\le k$ (une seule condition « et »), et $|u| \\ge k$ équivaut à $u \\le -k$ ou $u \\ge k$ (deux morceaux séparés). Même chose avec des inégalités strictes. Pour $k<0$ : $|u| \\le k$ est impossible et $|u| \\ge k$ est toujours vraie. Pour comparer deux distances, $|u| \\le |v|$ équivaut à $u^2 \\le v^2$ (les deux membres sont positifs et $|u|^2=u^2$) ; on peut aussi le lire sur la droite graduée.</p><p><strong>Plusieurs valeurs absolues.</strong> On découpe la droite aux valeurs qui annulent chaque expression, on enlève les barres sur chaque intervalle selon le signe, puis on garde seulement les solutions qui appartiennent à l'intervalle étudié.</p><p><strong>Avec le second degré.</strong> Comme $x^2=|x|^2$, une équation en $x^2$ et $|x|$ se résout en posant $T=|x|$, avec $T \\ge 0$ : on résout en $T$, puis on revient à $x$ par $x=T$ ou $x=-T$.</p></blockquote><h2>Exemple résolu</h2><p><strong>Résoudre $|2x-3|=|x+1|$.</strong> Cela équivaut à $2x-3=x+1$ ou $2x-3=-(x+1)$. Le premier cas donne $x=4$, le second $3x=2$, donc $x=\\frac23$. Contrôle : $|5|=|5|$ et $\\left|-\\frac53\\right|=\\left|\\frac53\\right|$. Les solutions sont $4$ et $\\frac23$.</p><p><strong>Résoudre $|x-3|<2$ puis $|x-3| \\ge 2$.</strong> La distance de $x$ à $3$ est inférieure à $2$ si et seulement si $-2< x-3<2$, soit $1< x<5$ : $]1\\,;5[$. Pour $|x-3| \\ge 2$, on prend le complémentaire : $x \\le 1$ ou $x \\ge 5$, soit $]-\\infty\\,;1]\\cup[5\\,;+\\infty[$.</p><p><strong>Résoudre $|x-1|+|x+2|=5$.</strong> Si $x<-2$ : $-(x-1)-(x+2)=-2x-1=5$, donc $x=-3$, qui est bien $<-2$. Si $-2 \\le x<1$ : $-(x-1)+(x+2)=3 \\ne 5$, aucune solution. Si $x \\ge 1$ : $2x+1=5$, donc $x=2$, qui est bien $\\ge1$. Les solutions sont $-3$ et $2$.</p><p><strong>Résoudre $x^2-3|x|+2=0$.</strong> On pose $T=|x| \\ge 0$ : $T^2-3T+2=0$, donc $T=1$ ou $T=2$. Ainsi $|x|=1$ ou $|x|=2$, et $x \\in \\{-2\\,;-1\\,;1\\,;2\\}$.</p><h2>Le piège à éviter</h2><p>Écrire $|x-3| \\ge 2$ comme un seul encadrement $-2 \\le x-3 \\le 2$, ou l'inverse. L'inégalité « plus petit que » donne un intervalle (un « et »). L'inégalité « plus grand que » donne deux morceaux (un « ou »). Autre piège : croire que $|x|=-2$ a pour solutions $2$ et $-2$ : une distance n'est jamais négative, il n'y a aucune solution.</p><p>Comment le repérer : pense à la distance. « À moins de 2 de 3 » est un seul morceau autour de $3$ ; « à plus de 2 de 3 » est de part et d'autre, loin de $3$.</p><h2>En une phrase</h2><p>La valeur absolue $|x-a|$ est la distance de $x$ à $a$ : « inférieure à $k$ » donne un seul intervalle centré en $a$, « supérieure à $k$ » donne deux morceaux de part et d'autre.</p>",
           "exercises": [
             {
               "title": "Comprendre — La valeur absolue comme écart",
@@ -1564,20 +1564,20 @@
                   ]
                 },
                 {
-                  "content": "Combien de solutions réelles l'équation $x^2-3|x|+2=0$ possède-t-elle ?",
+                  "content": "Combien de solutions réelles l'équation $x^2-|x|-6=0$ possède-t-elle ?",
                   "question_type": "single_choice",
-                  "explanation": "On pose $T=|x|\\ge0$ : $T^2-3T+2=0$ donne $T=1$ ou $T=2$. Chaque valeur de $T$ donne deux valeurs de $x$ : $\\pm1$ et $\\pm2$, donc $4$ solutions. Compter seulement $T$ donne $2$ solutions, ce qui oublie que $|x|=T$ a deux solutions.",
+                  "explanation": "On pose $T=|x|\\ge0$ : $T^2-T-6=0$ donne $T=3$ ou $T=-2$. Or $T=-2$ est impossible, car une valeur absolue est positive ou nulle. Il reste $|x|=3$, donc $x=3$ ou $x=-3$ : $2$ solutions. Compter aussi $\\pm2$ oublie la condition $T\\ge0$.",
                   "answers": [
                     {
-                      "content": "Quatre : $-2$, $-1$, $1$ et $2$",
+                      "content": "Deux : $-3$ et $3$",
                       "correct": true
                     },
                     {
-                      "content": "Deux : $1$ et $2$",
+                      "content": "Quatre : $-3$, $-2$, $2$ et $3$",
                       "correct": false
                     },
                     {
-                      "content": "Trois",
+                      "content": "Une seule : $3$",
                       "correct": false
                     },
                     {
@@ -1624,20 +1624,20 @@
               "exercise_type": "evaluation",
               "questions": [
                 {
-                  "content": "Quelles sont les solutions de $|x-1|+|x+2|=5$ ?",
+                  "content": "Quelles sont les solutions de $|x-3|+|x+1|=6$ ?",
                   "question_type": "single_choice",
-                  "explanation": "On découpe en $x<-2$, $-2\\le x<1$ et $x\\ge1$. Sur le premier intervalle : $-2x-1=5$, donc $x=-3$ (valable). Sur le deuxième : la somme vaut toujours $3\\ne5$. Sur le troisième : $2x+1=5$, donc $x=2$ (valable). Les solutions sont $-3$ et $2$.",
+                  "explanation": "On découpe en $x<-1$, $-1\\le x<3$ et $x\\ge3$. Sur le premier intervalle : $-2x+2=6$, donc $x=-2$ (valable). Sur le deuxième : la somme vaut toujours $4\\ne6$. Sur le troisième : $2x-2=6$, donc $x=4$ (valable). Les solutions sont $-2$ et $4$.",
                   "answers": [
                     {
-                      "content": "$-3$ et $2$",
+                      "content": "$-2$ et $4$",
                       "correct": true
                     },
                     {
-                      "content": "$2$ seulement",
+                      "content": "$4$ seulement",
                       "correct": false
                     },
                     {
-                      "content": "$-2$ et $1$",
+                      "content": "$-1$ et $3$",
                       "correct": false
                     },
                     {
@@ -1670,24 +1670,24 @@
                   ]
                 },
                 {
-                  "content": "Quel est l'ensemble solution de $x^2-3|x|+2<0$ ?",
+                  "content": "Quel est l'ensemble solution de $x^2-4|x|+3<0$ ?",
                   "question_type": "single_choice",
-                  "explanation": "Avec $T=|x|$, on a $T^2-3T+2<0$ : le trinôme est négatif entre ses racines $1$ et $2$, donc $1<|x|<2$. Cela donne $1< x<2$ ou $-2< x<-1$ : $]-2\\,;-1[\\cup]1\\,;2[$. Contrôle : $x=1{,}5$ donne $-0{,}25<0$ et $x=0$ donne $2>0$.",
+                  "explanation": "Avec $T=|x|$, on a $T^2-4T+3<0$ : le trinôme est négatif entre ses racines $1$ et $3$, donc $1<|x|<3$. Cela donne $1 < x < 3$ ou $-3 < x < -1$ : $]-3\\,;-1[\\cup]1\\,;3[$. Contrôle : $x=2$ donne $-1<0$ et $x=0$ donne $3>0$.",
                   "answers": [
                     {
-                      "content": "$]-2\\,;-1[\\cup]1\\,;2[$",
+                      "content": "$]-3\\,;-1[\\cup]1\\,;3[$",
                       "correct": true
                     },
                     {
-                      "content": "$]1\\,;2[$",
+                      "content": "$]1\\,;3[$",
                       "correct": false
                     },
                     {
-                      "content": "$]-2\\,;2[$",
+                      "content": "$]-3\\,;3[$",
                       "correct": false
                     },
                     {
-                      "content": "$]-\\infty\\,;-2[\\cup]-1\\,;1[\\cup]2\\,;+\\infty[$",
+                      "content": "$]-\\infty\\,;-3[\\cup]-1\\,;1[\\cup]3\\,;+\\infty[$",
                       "correct": false
                     }
                   ]
@@ -1749,7 +1749,7 @@
                 {
                   "content": "Quel est l'ensemble des réels $x$ dont la distance à $2$ est inférieure ou égale à la distance à $-4$, c'est-à-dire $|x-2| \\le |x+4|$ ?",
                   "question_type": "single_choice",
-                  "explanation": "Les points à égale distance de $2$ et de $-4$ sont au milieu : $\\frac{2+(-4)}{2}=-1$. Les points plus proches de $2$ sont à droite du milieu : $[-1\\,;+\\infty[$. Contrôle : $x=0$ donne $2\\le4$. Le contraire, $]-\\infty\\,;-1]$, est l'ensemble des points plus proches de $-4$.",
+                  "explanation": "Comme $|u|\\le|v|$ équivaut à $u^2\\le v^2$, on développe $(x-2)^2\\le(x+4)^2$ : $-4x+4\\le8x+16$, donc $x\\ge-1$. Sur la droite, le milieu de $2$ et $-4$ est $-1$ et les points plus proches de $2$ sont à sa droite. Contrôle : $x=0$ donne $2\\le4$.",
                   "answers": [
                     {
                       "content": "$[-1\\,;+\\infty[$",
