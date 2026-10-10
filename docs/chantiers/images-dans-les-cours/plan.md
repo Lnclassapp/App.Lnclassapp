@@ -132,6 +132,7 @@ Dispatch proposé : Lot 0 seul, puis A, B, C, D ensemble (4 worktrees).
 - **Fichiers**     : `config/schemas/lnclass.course-tree.v1.json` *(propriété facultative `image.description`)*
                      `app/domain/use_cases/catalog/import_course_tree.rb` *(`question_node` lit `image.description`)*
                      `app/infrastructure/repositories/catalog/content_tree_writer.rb` *(écrit `image_description`)*
+                     `app/domain/entities/catalog/content_node.rb` *(ajouté au lot : une description faite d'espaces est « blank », le schéma ne le voit pas)*
                      `docs/contenus/prompt-redaction.md` *(règle des images : emplacements, descriptions, style ludique Claude Design)*
                      `docs/contenus/README.md` *(procédure : importer, produire dans Claude Design, insérer, publier)*
 - **Dépend de**    : Lot 0

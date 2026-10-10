@@ -239,6 +239,43 @@ module UseCases
                      report.import_errors.map { it.values_at("path", "code") }
       end
 
+      # ADR-0089 §4.3, §4.6 : l'import annonce les images, il n'en crée aucune.
+      test "an image slot in a sheet and an image description on a question are written as they are" do
+        illustrated = course("Le circuit électrique")
+        essential = illustrated["essentials"][0]
+        essential["content"] = "<h2>Le circuit</h2><p>[[image: une pile reliée à une lampe]]</p><p>Texte.</p>"
+        essential["exercises"][0]["questions"][1]["image"] = { "description" => "  un interrupteur ouvert  " }
+
+        report = run_import(document(illustrated))
+
+        assert_equal [ "completed", 1, 0 ], report.values_at(:status, :imported_count, :error_count)
+        written = Orm::Essential.joins(:course).find_by!(courses: { name: "Le circuit électrique" })
+        assert_includes written.content.body.to_html, "<p>[[image: une pile reliée à une lampe]]</p>"
+        assert_equal [ "une pile reliée à une lampe" ], Entities::Catalog::ImageSlot.scan(written.content.body.to_html).map(&:description)
+        assert_equal [ nil, "un interrupteur ouvert" ], written.exercises.first.questions.order(:position).pluck(:image_description)
+        assert_equal 0, Orm::QuestionImage.count
+      end
+
+      test "an image description empty, blank, too long, missing, with an unknown key, or an image not an object is refused at its path" do
+        cases = { "" => "schema", "   " => "blank", "a" * 151 => "schema" }.map do |description, code|
+          [ { "description" => description }, code, "courses[0].essentials[0].exercises[0].questions[0].image.description" ]
+        end
+        cases << [ { "description" => "une pile", "url" => "https://x" }, "schema", "courses[0].essentials[0].exercises[0].questions[0].image.url" ]
+        cases << [ "une pile", "schema", "courses[0].essentials[0].exercises[0].questions[0].image" ]
+        cases << [ {}, "schema", "courses[0].essentials[0].exercises[0].questions[0].image.description" ]
+
+        cases.each do |image, code, path|
+          broken = course("Cassé")
+          broken["essentials"][0]["exercises"][0]["questions"][0]["image"] = image
+
+          report = run_import(document(broken))
+
+          assert_equal [ 0, 1 ], report.values_at(:imported_count, :error_count), image.inspect
+          assert_equal [ [ path, code ] ], report.import_errors.map { it.values_at("path", "code") }, image.inspect
+        end
+        assert_equal 0, Orm::Course.count
+      end
+
       test "a version 2 envelope is rejected in bloc, with zero writes" do
         report = run_import(course_tree_document(courses: 3).merge("version" => 2))
 

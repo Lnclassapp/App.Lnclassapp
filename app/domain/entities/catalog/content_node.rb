@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::ContentNode
 # Rôle : validateurs des cours, fiches et exercices importés, partagés par les trois imports de contenu
-# ADR  : 0035, 0039
+# ADR  : 0035, 0039, 0089
 module Entities
   module Catalog
     module ContentNode
@@ -48,7 +48,14 @@ module Entities
         end
         errors = text(hash, "content", nil, path)
         errors += raw_answers.each_with_index.flat_map { |answer, index| text(answer, "content", nil, "#{path}.answers[#{index}]") }
-        errors + structure_errors(hash["question_type"], answers, path)
+        errors + structure_errors(hash["question_type"], answers, path) + image_errors(hash["image"], path)
+      end
+
+      # ADR-0089 §4.6 : le schéma a vérifié la forme et la longueur ; une description faite d'espaces n'en est pas une.
+      def self.image_errors(image, path)
+        return [] unless image.is_a?(Hash) && image["description"].is_a?(String)
+
+        text(image, "description", nil, "#{path}.image")
       end
 
       def self.structure_errors(question_type, answers, path)
@@ -94,7 +101,7 @@ module Entities
 
       def self.error(path, code, **params) = ImportError.new(path:, code:, params:)
 
-      private_class_method :question_errors, :structure_errors, :taxonomy, :series_errors, :text, :children, :error
+      private_class_method :question_errors, :structure_errors, :image_errors, :taxonomy, :series_errors, :text, :children, :error
     end
   end
 end
