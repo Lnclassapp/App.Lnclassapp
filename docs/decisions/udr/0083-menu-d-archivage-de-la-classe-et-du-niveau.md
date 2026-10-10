@@ -68,7 +68,7 @@ Un établissement importé a toutes les classes de la 6ème à la Tle. Sa direct
 
 **Côté élève (UDR existantes)**
 - Un élève sans classe active voit l'écran « Choisis ta classe » existant ; son en-tête n'affiche plus le nom de la classe archivée.
-- Lien d'une classe archivée : bandeau « Cette classe est archivée », pas de « Rejoindre » ; l'élève connecté a le bouton « Choisir ma classe » (`#choose-classroom`) ; le visiteur est renvoyé vers l'inscription standard avec un toast d'alerte.
+- Lien d'une classe archivée : bandeau « Cette classe est archivée », pas de « Rejoindre » ; l'élève connecté a le bouton « Choisir ma classe » (`#choose-classroom`) ; le visiteur est renvoyé vers l'inscription standard avec l'alerte « Ce lien n'est plus valable » (IL-09 : rien de la classe ne lui est révélé).
 
 ## 4. Conséquences
 

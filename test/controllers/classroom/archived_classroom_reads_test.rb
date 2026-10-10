@@ -105,12 +105,12 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
     assert_equal token, @classroom.reload.link_token
   end
 
-  test "the visitor opening the link of an archived classroom is sent to the standard sign-up, told it is archived" do
+  test "IL-09: the visitor opening the link of an archived classroom is sent to the standard sign-up, told the link is no longer valid" do
     archive!
 
     get join_classroom_path(@classroom.link_token)
 
     assert_redirected_to new_student_registration_path
-    assert_equal tl("joins.new.archived_alert"), flash[:warning]
+    assert flash[:link_invalid]
   end
 end

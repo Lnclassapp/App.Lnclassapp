@@ -14,9 +14,10 @@ module Classroom
     # Le visiteur reçoit la page d'inscription, la classe dans son bandeau ; l'élève sans classe, la carte et son bouton ;
     # une classe complète se dit, sans formulaire.
     def new
-      # ADR-0088 : le visiteur d'une classe archivée s'inscrit par la voie standard, averti.
+      # IL-09 : le visiteur du lien d'une classe archivée retombe sur la voie standard, comme pour un lien changé ; rien
+      # de la classe ne lui est révélé (l'élève connecté, lui, lit le bandeau « archivée », ADR-0088).
       if current_actor.nil? && @preview.archived
-        return redirect_to(new_student_registration_path, flash: { warning: t(".archived_alert") }, status: :see_other)
+        return redirect_to(new_student_registration_path, flash: { link_invalid: true }, status: :see_other)
       end
 
       @form = Dtos::Classroom::StudentRegistrationInput.new(link_token:)
