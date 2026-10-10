@@ -1,0 +1,1751 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Barycentre et lignes de niveaux",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "C",
+      "essentials": [
+        {
+          "name": "Barycentre de deux points pondérés",
+          "subtitle": "Définition, position sur la droite (AB), coordonnées et homogénéité",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Reconnaître quand deux points pondérés ont un barycentre, et le construire sur la droite $(AB)$.</li>\n<li>Calculer les coordonnées du barycentre de deux points pondérés.</li>\n<li>Utiliser la relation $\\alpha\\overrightarrow{MA}+\\beta\\overrightarrow{MB}=(\\alpha+\\beta)\\overrightarrow{MG}$ et l'homogénéité.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>Le tréteau sous la planche.</strong> Sur un chantier, le maçon pose une longue planche sur un tréteau. À une extrémité $A$, il dépose un sac de ciment de 40 kg. À l'autre extrémité $B$, un sac de 20 kg. Il fait glisser le tréteau jusqu'à ce que la planche reste bien horizontale. Le tréteau se retrouve plus près du sac le plus lourd.</p>\n<p><em>Le pont.</em> Les extrémités de la planche sont les points $A$ et $B$. Les poids 40 et 20 sont les coefficients $\\alpha$ et $\\beta$. Le tréteau, à l'équilibre, est le <strong>barycentre</strong> $G$. Le sac lourd « tire » plus fort, donc $G$ est plus près de $A$ : c'est la relation $\\alpha\\overrightarrow{GA}+\\beta\\overrightarrow{GB}=\\overrightarrow{0}$.</p>\n<p><em>Où l'image s'arrête.</em> Un poids réel est positif, alors qu'un coefficient peut être négatif : c'est comme une corde qui tire la planche vers le haut en $B$. Dans ce cas, $G$ sort du segment $[AB]$, du côté du coefficient le plus grand en valeur absolue. Et si $\\alpha+\\beta=0$ (autant de poids posé que de traction), il n'y a plus de point d'équilibre unique : le barycentre n'existe pas.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Définition.</strong> Soient $A$ et $B$ deux points et $\\alpha$, $\\beta$ deux réels tels que $\\alpha+\\beta\\neq 0$. Le <strong>barycentre</strong> de $\\{(A,\\alpha),(B,\\beta)\\}$ est l'unique point $G$ tel que $\\alpha\\overrightarrow{GA}+\\beta\\overrightarrow{GB}=\\overrightarrow{0}$. On dit que $\\alpha$ et $\\beta$ sont les <strong>coefficients</strong> (ou poids).</p>\n<p><strong>Existence et position.</strong> Comme $\\overrightarrow{GB}=\\overrightarrow{GA}+\\overrightarrow{AB}$, la relation donne $(\\alpha+\\beta)\\overrightarrow{GA}=-\\beta\\overrightarrow{AB}$, donc $\\overrightarrow{AG}=\\dfrac{\\beta}{\\alpha+\\beta}\\overrightarrow{AB}$. Le point $G$ existe, il est unique, et il est sur la droite $(AB)$. Si $\\alpha$ et $\\beta$ ont le même signe, $G\\in[AB]$. S'ils ont des signes contraires, $G$ est hors de $[AB]$.</p>\n<p><strong>Réduction.</strong> Pour tout point $M$ : $\\alpha\\overrightarrow{MA}+\\beta\\overrightarrow{MB}=(\\alpha+\\beta)\\overrightarrow{MG}$. En effet, avec Chasles, $\\overrightarrow{MA}=\\overrightarrow{MG}+\\overrightarrow{GA}$ et $\\overrightarrow{MB}=\\overrightarrow{MG}+\\overrightarrow{GB}$, donc la somme vaut $(\\alpha+\\beta)\\overrightarrow{MG}+\\big(\\alpha\\overrightarrow{GA}+\\beta\\overrightarrow{GB}\\big)=(\\alpha+\\beta)\\overrightarrow{MG}$.</p>\n<p><strong>Coordonnées.</strong> Dans un repère, $x_G=\\dfrac{\\alpha x_A+\\beta x_B}{\\alpha+\\beta}$ et $y_G=\\dfrac{\\alpha y_A+\\beta y_B}{\\alpha+\\beta}$.</p>\n<p><strong>Homogénéité.</strong> Pour tout réel $k\\neq 0$, les systèmes $\\{(A,\\alpha),(B,\\beta)\\}$ et $\\{(A,k\\alpha),(B,k\\beta)\\}$ ont le même barycentre. Si $\\alpha=\\beta\\neq 0$, $G$ est le milieu de $[AB]$ (l'isobarycentre).</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Dans un repère, $A(1\\,;\\,2)$ et $B(7\\,;\\,-1)$. Calculer les coordonnées de $G_1$, barycentre de $\\{(A,2),(B,1)\\}$, puis de $G_2$, barycentre de $\\{(A,3),(B,-1)\\}$.</strong></p>\n<ol>\n<li>Pour $G_1$ : $\\alpha+\\beta=3\\neq 0$, le barycentre existe.</li>\n<li>$x_{G_1}=\\dfrac{2\\times 1+1\\times 7}{3}=3$ et $y_{G_1}=\\dfrac{2\\times 2+1\\times(-1)}{3}=1$. Donc $G_1(3\\,;\\,1)$.</li>\n<li>Vérification : $\\overrightarrow{G_1A}=(-2\\,;\\,1)$ et $\\overrightarrow{G_1B}=(4\\,;\\,-2)$, donc $2\\overrightarrow{G_1A}+\\overrightarrow{G_1B}=(0\\,;\\,0)$.</li>\n<li>Pour $G_2$ : $\\alpha+\\beta=2\\neq 0$. $x_{G_2}=\\dfrac{3\\times 1-7}{2}=-2$ et $y_{G_2}=\\dfrac{3\\times 2+1}{2}=\\dfrac{7}{2}$. Donc $G_2\\left(-2\\,;\\,\\dfrac{7}{2}\\right)$.</li>\n<li>Les coefficients ont des signes contraires : $G_2$ est bien hors du segment $[AB]$, du côté de $A$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Inverser les coefficients. Pour $\\{(A,2),(B,1)\\}$, le barycentre est plus près de $A$ (coefficient le plus grand), et non de $B$. On a $\\overrightarrow{AG}=\\dfrac{1}{3}\\overrightarrow{AB}$ : c'est le coefficient de $B$ qui est au numérateur. Autre oubli fréquent : ne pas diviser par $\\alpha+\\beta$ dans les coordonnées.</p>\n<p>Comment le repérer : place ton résultat sur un croquis. Le tréteau doit être du côté du sac le plus lourd. Et avant tout calcul, vérifie que $\\alpha+\\beta\\neq 0$.</p>\n<h2>En une phrase</h2>\n<p>Le barycentre de $(A,\\alpha)$ et $(B,\\beta)$ est le point d'équilibre de la planche $[AB]$ chargée de poids $\\alpha$ et $\\beta$ : il est sur $(AB)$, plus proche du plus fort coefficient, et il n'existe que si $\\alpha+\\beta\\neq 0$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître un barycentre de deux points",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soient $A$ et $B$ deux points, $\\alpha$ et $\\beta$ deux réels. À quelle condition le système $\\{(A,\\alpha),(B,\\beta)\\}$ admet-il un barycentre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le barycentre vérifie $(\\alpha+\\beta)\\overrightarrow{GA}=-\\beta\\overrightarrow{AB}$ : on divise par $\\alpha+\\beta$, qui doit donc être non nul. Les coefficients peuvent être négatifs, ou l'un d'eux nul (alors $G$ est l'autre point).",
+                  "answers": [
+                    {
+                      "content": "$\\alpha+\\beta\\neq 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\alpha\\neq 0$ et $\\beta\\neq 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\alpha>0$ et $\\beta>0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A\\neq B$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $G$ le barycentre de $(A,2)$ et $(B,3)$. Le point $G$ est plus proche de $B$ que de $A$.",
+                  "question_type": "true_false",
+                  "explanation": "On a $\\overrightarrow{AG}=\\dfrac{3}{5}\\overrightarrow{AB}$ : $G$ est aux trois cinquièmes du chemin de $A$ vers $B$, donc plus près de $B$. Comme le tréteau de la planche, il se rapproche du sac le plus lourd (le coefficient 3 est en $B$).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le barycentre de $(A,1)$ et $(B,1)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $\\alpha=\\beta=1$, $\\overrightarrow{AG}=\\dfrac{1}{2}\\overrightarrow{AB}$ : $G$ est le milieu de $[AB]$. Deux sacs de même poids aux deux bouts de la planche : le tréteau se place au milieu.",
+                  "answers": [
+                    {
+                      "content": "Le milieu de $[AB]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le point $A$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le point $B$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'existe pas, car les coefficients sont égaux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces systèmes de deux points pondérés, lesquels admettent un barycentre ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Un barycentre existe si la somme des coefficients est non nulle : $3+(-1)=2$ et $-1+(-5)=-6$. Les sommes $2+(-2)$, $-4+4$ et $0+0$ valent $0$ : pas de barycentre. Un coefficient négatif n'empêche rien.",
+                  "answers": [
+                    {
+                      "content": "$\\{(A,3),(B,-1)\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{(A,-1),(B,-5)\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{(A,2),(B,-2)\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{(A,-4),(B,4)\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{(A,0),(B,0)\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $G$ le barycentre de $(A,\\alpha)$ et $(B,\\beta)$ avec $\\alpha+\\beta\\neq 0$. Pour tout point $M$, le vecteur $\\alpha\\overrightarrow{MA}+\\beta\\overrightarrow{MB}$ est égal à :",
+                  "question_type": "single_choice",
+                  "explanation": "Avec Chasles, $\\overrightarrow{MA}=\\overrightarrow{MG}+\\overrightarrow{GA}$ et $\\overrightarrow{MB}=\\overrightarrow{MG}+\\overrightarrow{GB}$. La somme vaut $(\\alpha+\\beta)\\overrightarrow{MG}+\\big(\\alpha\\overrightarrow{GA}+\\beta\\overrightarrow{GB}\\big)$, et la parenthèse est nulle. Le vecteur nul n'est obtenu que pour $M=G$.",
+                  "answers": [
+                    {
+                      "content": "$(\\alpha+\\beta)\\overrightarrow{MG}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{0}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{MG}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\alpha-\\beta)\\overrightarrow{MG}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $G$ le barycentre de $(A,3)$ et $(B,-1)$. Le point $G$ appartient au segment $[AB]$.",
+                  "question_type": "true_false",
+                  "explanation": "On a $\\overrightarrow{AG}=\\dfrac{-1}{2}\\overrightarrow{AB}$ : $G$ est de l'autre côté de $A$ par rapport à $B$, donc hors du segment. Un coefficient négatif est comme une corde qui tire la planche vers le haut : le point d'équilibre sort de la planche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer et placer le barycentre",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans un repère, $A(1\\,;\\,2)$ et $B(7\\,;\\,-1)$. Quelles sont les coordonnées du barycentre $G$ de $\\{(A,2),(B,1)\\}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$x_G=\\dfrac{2\\times 1+7}{3}=3$ et $y_G=\\dfrac{2\\times 2-1}{3}=1$. Les erreurs classiques : prendre le milieu $(4\\,;\\,\\tfrac12)$, inverser les coefficients $(5\\,;\\,0)$, ou oublier de diviser par $3$ : $(9\\,;\\,3)$.",
+                  "answers": [
+                    {
+                      "content": "$(3\\,;\\,1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\left(4\\,;\\,\\dfrac{1}{2}\\right)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(5\\,;\\,0)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(9\\,;\\,3)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(1\\,;\\,2)$ et $B(7\\,;\\,-1)$. Quelles sont les coordonnées du barycentre $G$ de $\\{(A,3),(B,-1)\\}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme des coefficients vaut $2$. $x_G=\\dfrac{3\\times 1-7}{2}=-2$ et $y_G=\\dfrac{3\\times 2+1}{2}=\\dfrac{7}{2}$. Attention au signe : $-1\\times(-1)=+1$ dans le calcul de $y_G$.",
+                  "answers": [
+                    {
+                      "content": "$\\left(-2\\,;\\,\\dfrac{7}{2}\\right)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-4\\,;\\,7)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left(-1\\,;\\,\\dfrac{7}{4}\\right)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left(10\\,;\\,-\\dfrac{5}{2}\\right)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $G$ le barycentre de $(A,2)$ et $(B,3)$. Quelle relation est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $\\overrightarrow{AG}=\\dfrac{\\beta}{\\alpha+\\beta}\\overrightarrow{AB}=\\dfrac{3}{5}\\overrightarrow{AB}$ : le coefficient de $B$ est au numérateur. Écrire $\\dfrac{2}{5}$ revient à inverser les rôles de $A$ et $B$.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{AG}=\\dfrac{3}{5}\\overrightarrow{AB}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AG}=\\dfrac{2}{5}\\overrightarrow{AB}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AG}=\\dfrac{2}{3}\\overrightarrow{AB}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AG}=\\dfrac{3}{2}\\overrightarrow{AB}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels systèmes ont le même barycentre que $\\{(A,4),(B,6)\\}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "L'homogénéité permet de multiplier tous les coefficients par un même réel non nul : par $\\tfrac12$ on obtient $(2,3)$, par $-\\tfrac12$ on obtient $(-2,-3)$. Les systèmes $(3,2)$ et $(6,4)$ inversent le rapport, donc le barycentre change.",
+                  "answers": [
+                    {
+                      "content": "$\\{(A,2),(B,3)\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{(A,-2),(B,-3)\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{(A,3),(B,2)\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{(A,6),(B,4)\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{(A,4),(B,-6)\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On veut un point $G$ tel que $\\overrightarrow{AG}=\\dfrac{1}{4}\\overrightarrow{AB}$. De quel système $G$ est-il le barycentre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut $\\dfrac{\\beta}{\\alpha+\\beta}=\\dfrac{1}{4}$, soit $\\alpha=3\\beta$ : le système $\\{(A,3),(B,1)\\}$ convient. Vérification : $\\dfrac{1}{3+1}=\\dfrac14$. Le système $\\{(A,1),(B,3)\\}$ donnerait $\\dfrac34$.",
+                  "answers": [
+                    {
+                      "content": "$\\{(A,3),(B,1)\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{(A,1),(B,3)\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{(A,1),(B,4)\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{(A,4),(B,1)\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une droite graduée, $A$ a pour abscisse $1$ et $B$ a pour abscisse $5$. Quelle est l'abscisse du barycentre de $\\{(A,3),(B,-1)\\}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$x_G=\\dfrac{3\\times 1+(-1)\\times 5}{3+(-1)}=\\dfrac{-2}{2}=-1$. Le point est hors de $[AB]$, du côté de $A$. Traiter $-1$ comme $+1$ donne $\\dfrac{3+5}{4}=2$ ; diviser $3+5$ par $2$ donne $4$ ; le milieu donne $3$.",
+                  "answers": [
+                    {
+                      "content": "$-1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Problèmes sur le barycentre de deux points",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Dans un repère, $A(-2\\,;\\,1)$ et $B(4\\,;\\,-3)$. Quelles sont les coordonnées du barycentre $G$ de $\\{(A,1),(B,2)\\}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$x_G=\\dfrac{-2+2\\times 4}{3}=2$ et $y_G=\\dfrac{1+2\\times(-3)}{3}=-\\dfrac{5}{3}$. Vérification : $\\overrightarrow{GA}=\\left(-4\\,;\\,\\tfrac83\\right)$, $\\overrightarrow{GB}=\\left(2\\,;\\,-\\tfrac43\\right)$ et $\\overrightarrow{GA}+2\\overrightarrow{GB}=\\overrightarrow{0}$. Inverser les coefficients donnerait $\\left(0\\,;\\,-\\tfrac13\\right)$.",
+                  "answers": [
+                    {
+                      "content": "$\\left(2\\,;\\,-\\dfrac{5}{3}\\right)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\left(0\\,;\\,-\\dfrac{1}{3}\\right)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(6\\,;\\,-5)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;\\,-1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $m$ un réel. Pour quelle valeur de $m$ le barycentre de $\\{(A,m+1),(B,2m)\\}$ est-il le milieu de $[AB]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le milieu correspond à deux coefficients égaux : $m+1=2m$, donc $m=1$ (somme $4\\neq 0$). Pour $m=0$, les coefficients sont $(1,0)$ et $G=A$ ; pour $m=-1$, ils sont $(0,-2)$ et $G=B$ ; pour $m=-\\tfrac13$, la somme est nulle : pas de barycentre.",
+                  "answers": [
+                    {
+                      "content": "$m=1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$m=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m=-1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m=-\\dfrac{1}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(1\\,;\\,1)$ et $B(3\\,;\\,2)$. Soit $G$ le barycentre de $\\{(A,2),(B,-1)\\}$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "La somme vaut $1$, donc $G=2A-B=(-1\\,;\\,0)$. Alors $A=\\dfrac{G+B}{2}$ : $A$ est le milieu de $[GB]$, et $G$ est hors de $[AB]$ (signes contraires). Le point $\\left(\\tfrac53\\,;\\,\\tfrac43\\right)$ est le barycentre de $(A,2),(B,+1)$.",
+                  "answers": [
+                    {
+                      "content": "$G$ a pour coordonnées $(-1\\,;\\,0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A$ est le milieu de $[GB]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$G$ appartient au segment $[AB]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$G$ a pour coordonnées $\\left(\\dfrac{5}{3}\\,;\\,\\dfrac{4}{3}\\right)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$G$ est le milieu de $[AB]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une planche $[AB]$ de 3 m est posée sur un tréteau. Un sac de 40 kg est en $A$ et un sac de 20 kg est en $B$. Le tréteau est au point d'équilibre $G$, barycentre de $(A,40)$ et $(B,20)$. Quelle est la distance $AG$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par homogénéité, $G$ est le barycentre de $(A,2)$ et $(B,1)$ : $\\overrightarrow{AG}=\\dfrac{1}{3}\\overrightarrow{AB}$, donc $AG=1$ m. Le tréteau est près du sac lourd. La valeur $2$ m est la distance $BG$, pas $AG$.",
+                  "answers": [
+                    {
+                      "content": "$1$ m",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1{,}5$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}5$ m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $AB=10$ cm. Soit $G$ le barycentre de $(A,2)$ et $(B,3)$, et $K$ le barycentre de $(A,3)$ et $(B,2)$. Quelle est la distance $GK$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$AG=\\dfrac{3}{5}\\times 10=6$ cm et $AK=\\dfrac{2}{5}\\times 10=4$ cm, avec $G$ et $K$ sur $[AB]$ dans le même sens. Donc $GK=6-4=2$ cm. Ne pas confondre avec la distance entre $G$ et le milieu.",
+                  "answers": [
+                    {
+                      "content": "$2$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$ cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $G$ le barycentre de $(A,\\alpha)$ et $(B,\\beta)$, avec $\\alpha+\\beta\\neq 0$. On démontre que $\\alpha\\overrightarrow{MA}+\\beta\\overrightarrow{MB}=(\\alpha+\\beta)\\overrightarrow{MG}$. Quelles étapes sont correctes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "On écrit $\\overrightarrow{MA}=\\overrightarrow{MG}+\\overrightarrow{GA}$ et $\\overrightarrow{MB}=\\overrightarrow{MG}+\\overrightarrow{GB}$ (Chasles). La somme devient $(\\alpha+\\beta)\\overrightarrow{MG}+\\alpha\\overrightarrow{GA}+\\beta\\overrightarrow{GB}$, et $\\alpha\\overrightarrow{GA}+\\beta\\overrightarrow{GB}=\\overrightarrow{0}$ par définition de $G$. Ce n'est pas le réel $\\alpha+\\beta$.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{MA}=\\overrightarrow{MG}+\\overrightarrow{GA}$ et $\\overrightarrow{MB}=\\overrightarrow{MG}+\\overrightarrow{GB}$ (relation de Chasles)",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\alpha\\overrightarrow{MA}+\\beta\\overrightarrow{MB}=(\\alpha+\\beta)\\overrightarrow{MG}+\\alpha\\overrightarrow{GA}+\\beta\\overrightarrow{GB}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\alpha\\overrightarrow{GA}+\\beta\\overrightarrow{GB}=\\overrightarrow{0}$, par définition de $G$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\alpha\\overrightarrow{GA}+\\beta\\overrightarrow{GB}=\\alpha+\\beta$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{MA}=\\overrightarrow{GA}-\\overrightarrow{MG}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Barycentre de trois points ou plus, associativité",
+          "subtitle": "Coordonnées, barycentre partiel, isobarycentre et centre de gravité",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Définir et calculer le barycentre de trois points ou plus, et reconnaître un isobarycentre.</li>\n<li>Utiliser l'associativité (barycentre partiel) pour construire ou calculer un barycentre.</li>\n<li>Calculer les coordonnées d'un barycentre de $n$ points pondérés.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. La plaque de tôle et ses trois sacs (barycentre de plusieurs points).</strong> Un maçon veut soulever une plaque de tôle triangulaire avec une seule corde. Il a posé un sac de sable à chaque coin $A$, $B$, $C$. Pour trouver où accrocher la corde, il remplace d'abord les sacs de $A$ et de $B$ par un seul sac équivalent, placé à leur point d'équilibre $H$ et pesant la somme de leurs deux poids. Puis il cherche l'équilibre entre ce sac équivalent en $H$ et le sac en $C$.</p>\n<p><em>Le pont.</em> Les poids des sacs sont les coefficients $\\alpha$, $\\beta$, $\\gamma$. Le point d'accroche est le barycentre $G$ des trois points. Le sac équivalent est le point $H$, barycentre de $(A,\\alpha)$ et $(B,\\beta)$, affecté du coefficient $\\alpha+\\beta$ : c'est le <strong>barycentre partiel</strong>. L'<strong>associativité</strong> dit que cette méthode en deux temps donne le même point $G$.</p>\n<p><em>Où l'image s'arrête.</em> Les coefficients peuvent être négatifs. Surtout, le sac équivalent n'existe que si la somme des deux poids regroupés n'est pas nulle : on ne peut pas regrouper deux points dont les coefficients s'annulent.</p>\n<p><strong>2. Trois sacs identiques (isobarycentre).</strong> Si les trois sacs pèsent exactement pareil, le point d'accroche est le « centre » de la plaque : on l'appelle le centre de gravité du triangle. Pont : coefficients tous égaux, c'est l'<strong>isobarycentre</strong>. Limite : il n'est pas toujours « au milieu » d'un côté ; pour un triangle, il est aux deux tiers de chaque médiane.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Définition.</strong> Soient $A_1,\\dots,A_n$ des points et $\\alpha_1,\\dots,\\alpha_n$ des réels de somme $\\alpha_1+\\dots+\\alpha_n\\neq 0$. Le <strong>barycentre</strong> de $\\{(A_i,\\alpha_i)\\}$ est l'unique point $G$ tel que $\\alpha_1\\overrightarrow{GA_1}+\\dots+\\alpha_n\\overrightarrow{GA_n}=\\overrightarrow{0}$.</p>\n<p><strong>Réduction.</strong> Pour tout point $M$ : $\\sum\\alpha_i\\overrightarrow{MA_i}=\\Big(\\sum\\alpha_i\\Big)\\overrightarrow{MG}$. En prenant $M=O$ (une origine), on obtient $\\overrightarrow{OG}=\\dfrac{\\sum\\alpha_i\\overrightarrow{OA_i}}{\\sum\\alpha_i}$, d'où, dans un repère, $x_G=\\dfrac{\\sum\\alpha_i x_i}{\\sum\\alpha_i}$ et $y_G=\\dfrac{\\sum\\alpha_i y_i}{\\sum\\alpha_i}$.</p>\n<p><strong>Homogénéité.</strong> Multiplier tous les coefficients par un même réel $k\\neq 0$ ne change pas le barycentre.</p>\n<p><strong>Associativité (barycentre partiel).</strong> Si $\\alpha+\\beta\\neq 0$ et si $H$ est le barycentre de $\\{(A,\\alpha),(B,\\beta)\\}$, alors le barycentre de $\\{(A,\\alpha),(B,\\beta),(C,\\gamma)\\}$ (si $\\alpha+\\beta+\\gamma\\neq 0$) est le barycentre de $\\{(H,\\alpha+\\beta),(C,\\gamma)\\}$. On peut regrouper n'importe quels points dont la somme des coefficients est non nulle.</p>\n<p><strong>Isobarycentre.</strong> C'est le barycentre quand tous les coefficients sont égaux (par exemple tous égaux à $1$). Pour un triangle $ABC$, c'est le centre de gravité $G$ : $G$ est sur chaque médiane, et si $I$ est le milieu de $[BC]$, alors $\\overrightarrow{AG}=\\dfrac{2}{3}\\overrightarrow{AI}$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Dans un repère, $A(-1\\,;\\,2)$, $B(3\\,;\\,-2)$ et $C(5\\,;\\,4)$. Calculer les coordonnées du barycentre $G$ de $\\{(A,1),(B,2),(C,3)\\}$, puis le retrouver par associativité.</strong></p>\n<ol>\n<li>La somme des coefficients vaut $1+2+3=6\\neq 0$ : le barycentre existe.</li>\n<li>$x_G=\\dfrac{1\\times(-1)+2\\times 3+3\\times 5}{6}=\\dfrac{20}{6}=\\dfrac{10}{3}$.</li>\n<li>$y_G=\\dfrac{1\\times 2+2\\times(-2)+3\\times 4}{6}=\\dfrac{10}{6}=\\dfrac{5}{3}$. Donc $G\\left(\\dfrac{10}{3}\\,;\\,\\dfrac{5}{3}\\right)$.</li>\n<li>Par associativité : $H$, barycentre de $\\{(A,1),(B,2)\\}$, a pour coordonnées $\\left(\\dfrac{-1+6}{3}\\,;\\,\\dfrac{2-4}{3}\\right)=\\left(\\dfrac{5}{3}\\,;\\,-\\dfrac{2}{3}\\right)$.</li>\n<li>$G$ est le barycentre de $\\{(H,3),(C,3)\\}$ : c'est le milieu de $[HC]$, de coordonnées $\\left(\\dfrac{\\frac53+5}{2}\\,;\\,\\dfrac{-\\frac23+4}{2}\\right)=\\left(\\dfrac{10}{3}\\,;\\,\\dfrac{5}{3}\\right)$. Les deux méthodes concordent.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Regrouper deux points dont la somme des coefficients est nulle. Par exemple, pour $\\{(A,1),(B,-1),(C,2)\\}$, le barycentre de $\\{(A,1),(B,-1)\\}$ n'existe pas : tu ne peux pas commencer par $A$ et $B$. Il faut regrouper $B$ et $C$ (somme $1$) ou $A$ et $C$ (somme $3$).</p>\n<p>Comment le repérer : avant chaque regroupement, calcule la somme des coefficients regroupés. Elle doit être non nulle. Et dans les coordonnées, divise toujours par la somme <em>totale</em> des coefficients.</p>\n<h2>En une phrase</h2>\n<p>Le barycentre de $n$ points pondérés (de somme non nulle) est leur point d'équilibre ; on peut le calculer avec les coordonnées ou le construire par étapes en regroupant des points dont les coefficients ne s'annulent pas.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Barycentre de plusieurs points pondérés",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "À quelle condition un système de $n$ points pondérés $\\{(A_i,\\alpha_i)\\}$ admet-il un barycentre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le point $G$ est défini par $\\sum\\alpha_i\\overrightarrow{GA_i}=\\overrightarrow{0}$ ; on le calcule en divisant par $\\sum\\alpha_i$, qui doit donc être non nul. Les coefficients peuvent être négatifs ou nuls pris séparément.",
+                  "answers": [
+                    {
+                      "content": "La somme des coefficients est non nulle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tous les coefficients sont non nuls",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tous les coefficients sont positifs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les points sont alignés",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le barycentre de $(A,1)$, $(B,1)$ et $(C,1)$ est le centre de gravité du triangle $ABC$.",
+                  "question_type": "true_false",
+                  "explanation": "C'est l'isobarycentre : les trois coins portent le même poids, comme trois sacs identiques sur la plaque triangulaire. Le point d'accroche est alors le centre de gravité, à l'intersection des médianes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $H$ le barycentre de $(A,2)$ et $(B,3)$. Le barycentre de $\\{(A,2),(B,3),(C,5)\\}$ est aussi le barycentre de $(H,k)$ et $(C,5)$. Que vaut $k$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le sac équivalent en $H$ pèse la somme des deux poids regroupés : $k=2+3=5$. Ce n'est ni $2$ ni $3$ seuls ; et $10$ est la somme totale, qui compterait $C$ deux fois.",
+                  "answers": [
+                    {
+                      "content": "$5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $G$ le barycentre de $\\{(A,1),(B,2),(C,3)\\}$. Quelles égalités sont vraies pour tout point $M$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "La réduction donne $\\sum\\alpha_i\\overrightarrow{MA_i}=\\left(\\sum\\alpha_i\\right)\\overrightarrow{MG}$, donc $\\overrightarrow{MA}+2\\overrightarrow{MB}+3\\overrightarrow{MC}=6\\overrightarrow{MG}$. Pour $M=G$, on obtient bien $\\overrightarrow{GA}+2\\overrightarrow{GB}+3\\overrightarrow{GC}=\\overrightarrow{0}$. Le facteur est la somme $6$, pas $3$.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{MA}+2\\overrightarrow{MB}+3\\overrightarrow{MC}=6\\overrightarrow{MG}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{GA}+2\\overrightarrow{GB}+3\\overrightarrow{GC}=\\overrightarrow{0}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{MA}+2\\overrightarrow{MB}+3\\overrightarrow{MC}=3\\overrightarrow{MG}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{MA}+2\\overrightarrow{MB}+3\\overrightarrow{MC}=\\overrightarrow{MG}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{MA}+\\overrightarrow{MB}+\\overrightarrow{MC}=6\\overrightarrow{MG}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le système $\\{(A,2),(B,-3),(C,1)\\}$ admet un barycentre.",
+                  "question_type": "true_false",
+                  "explanation": "La somme des coefficients vaut $2-3+1=0$ : le barycentre n'existe pas. Piège : avoir des coefficients non nuls ne suffit pas, c'est leur somme qui doit être non nulle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est un triangle, $G$ son centre de gravité et $I$ le milieu de $[BC]$. Quelle égalité est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "$G$ est le barycentre de $(A,1),(B,1),(C,1)$, donc de $(A,1)$ et $(I,2)$ par associativité ($I$ est le barycentre de $(B,1),(C,1)$). Ainsi $\\overrightarrow{AG}=\\dfrac{2}{3}\\overrightarrow{AI}$. Le centre de gravité est aux deux tiers de la médiane en partant du sommet.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{AG}=\\dfrac{2}{3}\\overrightarrow{AI}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AG}=\\dfrac{1}{2}\\overrightarrow{AI}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AG}=\\dfrac{1}{3}\\overrightarrow{AI}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AG}=\\dfrac{3}{2}\\overrightarrow{AI}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Coordonnées et barycentre partiel",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans un repère, $A(-1\\,;\\,2)$, $B(3\\,;\\,-2)$ et $C(5\\,;\\,4)$. Quelles sont les coordonnées du barycentre $G$ de $\\{(A,1),(B,2),(C,3)\\}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme vaut $6$. $x_G=\\dfrac{-1+6+15}{6}=\\dfrac{10}{3}$ et $y_G=\\dfrac{2-4+12}{6}=\\dfrac{5}{3}$. Les erreurs courantes : ne pas diviser $(20\\,;\\,10)$, diviser par $3$ $\\left(\\tfrac{20}{3}\\,;\\,\\tfrac{10}{3}\\right)$, ou prendre l'isobarycentre.",
+                  "answers": [
+                    {
+                      "content": "$\\left(\\dfrac{10}{3}\\,;\\,\\dfrac{5}{3}\\right)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(20\\,;\\,10)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left(\\dfrac{7}{3}\\,;\\,\\dfrac{4}{3}\\right)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left(\\dfrac{20}{3}\\,;\\,\\dfrac{10}{3}\\right)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(2\\,;\\,1)$, $B(-4\\,;\\,5)$ et $C(5\\,;\\,3)$. Quelles sont les coordonnées de l'isobarycentre $G$ du triangle $ABC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$x_G=\\dfrac{2-4+5}{3}=1$ et $y_G=\\dfrac{1+5+3}{3}=3$. On additionne les coordonnées et on divise par $3$. Le point $(3\\,;\\,9)$ oublie la division ; $(-1\\,;\\,3)$ est le milieu de $[AB]$.",
+                  "answers": [
+                    {
+                      "content": "$(1\\,;\\,3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(3\\,;\\,9)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-1\\,;\\,3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left(\\dfrac{7}{2}\\,;\\,2\\right)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelles valeurs du réel $m$ le système $\\{(A,2),(B,1),(C,m)\\}$ admet-il un barycentre ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme des coefficients est $2+1+m=3+m$ ; elle est non nulle si et seulement si $m\\neq -3$. La valeur $m=0$ est permise : le barycentre est alors celui de $(A,2)$ et $(B,1)$.",
+                  "answers": [
+                    {
+                      "content": "Pour tout réel $m\\neq -3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour tout réel $m\\neq 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour tout réel $m\\neq 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour tout réel $m$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(0\\,;\\,0)$, $B(6\\,;\\,0)$ et $C(0\\,;\\,6)$. Quelles sont les coordonnées du barycentre $G$ de $\\{(A,1),(B,2),(C,3)\\}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme vaut $6$. $x_G=\\dfrac{0+12+0}{6}=2$ et $y_G=\\dfrac{0+0+18}{6}=3$. Par associativité : $H(4\\,;\\,0)$ est le barycentre de $(A,1),(B,2)$, et $G$ est le milieu de $[HC]$, soit $(2\\,;\\,3)$.",
+                  "answers": [
+                    {
+                      "content": "$(2\\,;\\,3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2\\,;\\,2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(12\\,;\\,18)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(4\\,;\\,6)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $ABC$ un triangle, $G$ le barycentre de $\\{(A,1),(B,1),(C,2)\\}$ et $K$ le milieu de $[AB]$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$K$ est le barycentre de $(A,1),(B,1)$ ; par associativité $G$ est le barycentre de $(K,2),(C,2)$, donc le milieu de $[KC]$. La somme totale est $4$, d'où $\\overrightarrow{MA}+\\overrightarrow{MB}+2\\overrightarrow{MC}=4\\overrightarrow{MG}$. Ce n'est pas l'isobarycentre, car les coefficients diffèrent.",
+                  "answers": [
+                    {
+                      "content": "$G$ est le milieu de $[KC]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour tout $M$, $\\overrightarrow{MA}+\\overrightarrow{MB}+2\\overrightarrow{MC}=4\\overrightarrow{MG}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$G$ est l'isobarycentre de $A$, $B$, $C$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour tout $M$, $\\overrightarrow{MA}+\\overrightarrow{MB}+2\\overrightarrow{MC}=3\\overrightarrow{MG}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$G$ appartient à la droite $(AB)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABCD$ est un parallélogramme. Le sommet $D$ est le barycentre de quel système ?",
+                  "question_type": "single_choice",
+                  "explanation": "Dans un parallélogramme, $\\overrightarrow{AD}=\\overrightarrow{BC}$, soit $D=A-B+C$ en vecteurs. La somme des coefficients vaut $1-1+1=1\\neq 0$ : $D$ est le barycentre de $(A,1),(B,-1),(C,1)$. Les autres systèmes donnent d'autres points.",
+                  "answers": [
+                    {
+                      "content": "$\\{(A,1),(B,-1),(C,1)\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{(A,1),(B,1),(C,1)\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{(A,1),(B,1),(C,-1)\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{(A,-1),(B,1),(C,1)\\}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Problèmes sur le barycentre de plusieurs points",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Dans un repère, $A(0\\,;\\,0)$, $B(4\\,;\\,0)$ et $C(0\\,;\\,6)$. Quelles sont les coordonnées du barycentre $G$ de $\\{(A,2),(B,1),(C,-1)\\}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme vaut $2$. $x_G=\\dfrac{0+4+0}{2}=2$ et $y_G=\\dfrac{0+0-6}{2}=-3$. Vérification : $2\\overrightarrow{GA}+\\overrightarrow{GB}-\\overrightarrow{GC}=2(-2\\,;\\,3)+(2\\,;\\,3)-(-2\\,;\\,9)=(0\\,;\\,0)$. Oublier le signe du coefficient $-1$ donne $(2\\,;\\,3)$.",
+                  "answers": [
+                    {
+                      "content": "$(2\\,;\\,-3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(4\\,;\\,-6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left(\\dfrac{4}{3}\\,;\\,2\\right)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2\\,;\\,3)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une plaque, trois sacs de ciment sont posés en $A(1\\,;\\,1)$ (20 kg), en $B(7\\,;\\,1)$ (30 kg) et en $C(1\\,;\\,7)$ (10 kg). Où est le point d'équilibre $G$, barycentre de $(A,20)$, $(B,30)$, $(C,10)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme vaut $60$. $x_G=\\dfrac{20+210+10}{60}=4$ et $y_G=\\dfrac{20+30+70}{60}=2$. L'isobarycentre $(3\\,;\\,3)$ ignorerait les poids ; $(240\\,;\\,120)$ oublie de diviser par $60$.",
+                  "answers": [
+                    {
+                      "content": "$(4\\,;\\,2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(3\\,;\\,3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(240\\,;\\,120)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(4\\,;\\,3)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $G$ le barycentre de $\\{(A,2),(B,-1),(C,3)\\}$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Les coefficients de $A$ et $B$ ont pour somme $1\\neq 0$ : $H$ existe, et $G$ est le barycentre de $(H,1),(C,3)$ (somme totale $4$). Donc $G\\in(HC)$. Le milieu de $[HC]$ demanderait des coefficients égaux ; mettre $(H,2)$ oublie que $2+(-1)=1$.",
+                  "answers": [
+                    {
+                      "content": "Le barycentre $H$ de $(A,2)$ et $(B,-1)$ existe",
+                      "correct": true
+                    },
+                    {
+                      "content": "$G$ est le barycentre de $(H,1)$ et $(C,3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$G$ appartient à la droite $(HC)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le barycentre de $(A,2)$ et $(B,-1)$ n'existe pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "$G$ est le barycentre de $(H,2)$ et $(C,3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$G$ est le milieu de $[HC]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour construire le barycentre $G$ de $\\{(A,1),(B,-1),(C,2)\\}$, on peut commencer par regrouper $A$ et $B$ en leur barycentre partiel.",
+                  "question_type": "true_false",
+                  "explanation": "Faux : $1+(-1)=0$, donc $A$ et $B$ n'ont pas de barycentre partiel. Le système total, lui, existe (somme $2$). On regroupe plutôt $B$ et $C$ (somme $1$) ou $A$ et $C$ (somme $3$).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABC$ est un triangle, $G$ son centre de gravité et $I$ le milieu de $[BC]$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$I$ est le barycentre de $(B,1),(C,1)$ ; par associativité, $G$ est le barycentre de $(A,1)$ et $(I,2)$, d'où $\\overrightarrow{AG}=\\dfrac{2}{3}\\overrightarrow{AI}$. $G$ n'est ni au milieu de $[AI]$ (ce serait $\\tfrac12$), ni sur $(BC)$.",
+                  "answers": [
+                    {
+                      "content": "$G$ est le barycentre de $(A,1)$ et $(I,2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AG}=\\dfrac{2}{3}\\overrightarrow{AI}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$G$ est le milieu de $[AI]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AG}=\\dfrac{1}{3}\\overrightarrow{AI}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$G$ appartient à la droite $(BC)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(0\\,;\\,0)$, $B(4\\,;\\,0)$ et $C(0\\,;\\,4)$. Pour quelle valeur de $m$ le barycentre de $\\{(A,1),(B,1),(C,m)\\}$ a-t-il pour coordonnées $(1\\,;\\,2)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme vaut $2+m$. $x_G=\\dfrac{4}{2+m}=1$ donne $m=2$. Vérification avec l'ordonnée : $y_G=\\dfrac{4m}{2+m}=\\dfrac{8}{4}=2$. Pour $m=1$, on trouve $\\left(\\tfrac43\\,;\\,\\tfrac43\\right)$ ; pour $m=4$, $\\left(\\tfrac23\\,;\\,\\tfrac83\\right)$.",
+                  "answers": [
+                    {
+                      "content": "$m=2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$m=1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m=4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m=\\dfrac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Réduire une somme vectorielle pondérée",
+          "subtitle": "Réduction, cercles et médiatrices définis par des normes de vecteurs",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Réduire une somme $\\sum\\alpha_i\\overrightarrow{MA_i}$ en un seul vecteur, selon que la somme des coefficients est nulle ou non.</li>\n<li>Déterminer l'ensemble des points $M$ tels que $\\Big\\|\\sum\\alpha_i\\overrightarrow{MA_i}\\Big\\|=k$ (un cercle).</li>\n<li>Reconnaître une médiatrice ou un cercle de diamètre donné dans une égalité de normes.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Les élastiques du chantier (la réduction).</strong> Le maçon accroche un anneau en un point $M$. Il y attache trois élastiques tendus vers trois piquets $A$, $B$, $C$. Chaque élastique tire l'anneau vers son piquet, d'autant plus fort qu'il est étiré, et avec sa propre raideur $\\alpha$, $\\beta$, $\\gamma$. Au lieu de suivre trois élastiques, le maçon peut les remplacer par un seul, tendu vers le point d'équilibre $G$, avec la raideur totale $\\alpha+\\beta+\\gamma$.</p>\n<p><em>Le pont.</em> La force de chaque élastique est $\\alpha\\overrightarrow{MA}$, $\\beta\\overrightarrow{MB}$, $\\gamma\\overrightarrow{MC}$. La force totale est $\\alpha\\overrightarrow{MA}+\\beta\\overrightarrow{MB}+\\gamma\\overrightarrow{MC}=(\\alpha+\\beta+\\gamma)\\overrightarrow{MG}$, où $G$ est le barycentre.</p>\n<p><em>Où l'image s'arrête.</em> Si les raideurs s'annulent (somme nulle), il n'y a plus de point $G$. La force totale ne dépend plus de la position de l'anneau : c'est un <strong>vecteur constant</strong>.</p>\n<p><strong>2. Le cercle au cordeau (ensemble de points).</strong> Pour tracer un bassin rond, le maçon plante un piquet en $G$ et tend un cordeau de longueur $r$. Il marche en gardant le cordeau tendu : tous les points du cercle sont à la même distance $r$ de $G$. Pont : la condition $\\Big\\|\\sum\\alpha_i\\overrightarrow{MA_i}\\Big\\|=k$ devient $|\\sum\\alpha_i|\\times MG=k$, donc $MG$ est une longueur fixe. Limite : si $k=0$, le cordeau a une longueur nulle, et le « cercle » se réduit au seul piquet $G$.</p>\n<p><strong>3. Le mur au milieu (médiatrice).</strong> Deux piquets $G_1$ et $G_2$ sont plantés. Un ouvrier marche en restant toujours à la même distance de $G_1$ et de $G_2$ : il trace une droite qui coupe le segment $[G_1G_2]$ en son milieu et lui est perpendiculaire. Pont : c'est la <strong>médiatrice</strong> de $[G_1G_2]$. Limite : cela exige $G_1\\neq G_2$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Somme de coefficients non nulle.</strong> Si $\\sum\\alpha_i\\neq 0$ et si $G$ est le barycentre de $\\{(A_i,\\alpha_i)\\}$, alors pour tout $M$ : $\\sum\\alpha_i\\overrightarrow{MA_i}=\\Big(\\sum\\alpha_i\\Big)\\overrightarrow{MG}$.</p>\n<p><strong>Somme de coefficients nulle.</strong> Si $\\sum\\alpha_i=0$, le vecteur $\\sum\\alpha_i\\overrightarrow{MA_i}$ est le même pour tout point $M$. Exemple : $\\alpha\\overrightarrow{MA}-\\alpha\\overrightarrow{MB}=\\alpha\\overrightarrow{BA}$. En effet, avec un point fixe $O$ : $\\sum\\alpha_i\\overrightarrow{MA_i}=\\sum\\alpha_i\\overrightarrow{MO}+\\sum\\alpha_i\\overrightarrow{OA_i}=\\sum\\alpha_i\\overrightarrow{OA_i}$.</p>\n<p><strong>Ensemble $\\Big\\|\\sum\\alpha_i\\overrightarrow{MA_i}\\Big\\|=k$ avec $k>0$.</strong> Si $\\sum\\alpha_i\\neq 0$, c'est le cercle de centre $G$ et de rayon $\\dfrac{k}{\\left|\\sum\\alpha_i\\right|}$ (réduit à $\\{G\\}$ si $k=0$). Si $\\sum\\alpha_i=0$, c'est tout le plan lorsque la norme du vecteur constant vaut $k$, et l'ensemble vide sinon.</p>\n<p><strong>Égalité de deux normes.</strong> Si $G_1$ et $G_2$ sont les barycentres de deux systèmes dont les sommes de coefficients sont non nulles et de même valeur absolue, alors $\\Big\\|\\sum\\alpha_i\\overrightarrow{MA_i}\\Big\\|=\\Big\\|\\sum\\beta_j\\overrightarrow{MB_j}\\Big\\|$ équivaut à $MG_1=MG_2$ : l'ensemble est la médiatrice de $[G_1G_2]$ si $G_1\\neq G_2$.</p>\n<p><strong>Cas particulier.</strong> $\\|\\overrightarrow{MA}+\\overrightarrow{MB}\\|=\\|\\overrightarrow{MA}-\\overrightarrow{MB}\\|$ : avec $I$ milieu de $[AB]$, cela donne $2MI=AB$, donc l'ensemble est le cercle de diamètre $[AB]$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Le plan est muni d'un repère, $A(-2\\,;\\,0)$ et $B(4\\,;\\,0)$. Déterminer l'ensemble $(E_1)$ des points $M$ tels que $\\|2\\overrightarrow{MA}+\\overrightarrow{MB}\\|=6$, puis l'ensemble $(E_2)$ des points $M$ tels que $\\|2\\overrightarrow{MA}+\\overrightarrow{MB}\\|=\\|\\overrightarrow{MA}+2\\overrightarrow{MB}\\|$.</strong></p>\n<ol>\n<li>Pour $(E_1)$ : $2+1=3\\neq 0$. Soit $G_1$ le barycentre de $\\{(A,2),(B,1)\\}$ : $x_{G_1}=\\dfrac{-4+4}{3}=0$ et $y_{G_1}=0$, donc $G_1(0\\,;\\,0)$.</li>\n<li>Alors $2\\overrightarrow{MA}+\\overrightarrow{MB}=3\\overrightarrow{MG_1}$ et la condition devient $3\\,MG_1=6$, soit $MG_1=2$.</li>\n<li>$(E_1)$ est le cercle de centre $G_1(0\\,;\\,0)$ et de rayon $2$. Vérification avec $M(0\\,;\\,2)$ : $\\overrightarrow{MA}=(-2\\,;\\,-2)$, $\\overrightarrow{MB}=(4\\,;\\,-2)$, donc $2\\overrightarrow{MA}+\\overrightarrow{MB}=(0\\,;\\,-6)$, de norme $6$.</li>\n<li>Pour $(E_2)$ : soit $G_2$ le barycentre de $\\{(A,1),(B,2)\\}$, de coordonnées $\\left(\\dfrac{-2+8}{3}\\,;\\,0\\right)=(2\\,;\\,0)$. Les deux sommes de coefficients valent $3$.</li>\n<li>La condition devient $3\\,MG_1=3\\,MG_2$, soit $MG_1=MG_2$. Donc $(E_2)$ est la médiatrice de $[G_1G_2]$, c'est-à-dire la droite d'équation $x=1$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Écrire que le rayon vaut $k$ au lieu de $\\dfrac{k}{|\\alpha+\\beta|}$. Dans $\\|2\\overrightarrow{MA}+\\overrightarrow{MB}\\|=6$, on a $3\\,MG=6$, donc le rayon est $2$ et non $6$. Autre piège : appliquer ce résultat quand la somme des coefficients est nulle. Par exemple, $\\|\\overrightarrow{MA}-\\overrightarrow{MB}\\|=k$ n'est jamais un cercle : le vecteur $\\overrightarrow{BA}$ ne dépend pas de $M$.</p>\n<p>Comment le repérer : avant de chercher $G$, calcule la somme des coefficients. Si elle est nulle, réduis en un vecteur constant ; sinon, divise $k$ par sa valeur absolue.</p>\n<h2>En une phrase</h2>\n<p>Quand la somme des coefficients n'est pas nulle, $\\sum\\alpha_i\\overrightarrow{MA_i}$ se réduit à $(\\sum\\alpha_i)\\overrightarrow{MG}$, ce qui transforme $\\|\\dots\\|=k$ en un cercle de centre $G$ et de rayon $k/|\\sum\\alpha_i|$ ; quand elle est nulle, la somme est un vecteur constant.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Réduire une somme et reconnaître l'ensemble associé",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $G$ le barycentre de $(A,\\alpha)$ et $(B,\\beta)$ avec $\\alpha+\\beta\\neq 0$. Pour tout point $M$, par quoi peut-on remplacer $\\alpha\\overrightarrow{MA}+\\beta\\overrightarrow{MB}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "C'est la réduction du barycentre : $(\\alpha+\\beta)\\overrightarrow{MG}$. Les deux élastiques de raideurs $\\alpha$ et $\\beta$ sont remplacés par un seul, vers $G$, de raideur $\\alpha+\\beta$. Le vecteur nul n'est obtenu que si $M=G$.",
+                  "answers": [
+                    {
+                      "content": "$(\\alpha+\\beta)\\overrightarrow{MG}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{MG}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{0}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\alpha\\beta\\overrightarrow{MG}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On suppose $\\alpha+\\beta=0$ et $A\\neq B$. Que peut-on dire du vecteur $\\alpha\\overrightarrow{MA}+\\beta\\overrightarrow{MB}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $\\beta=-\\alpha$ : $\\alpha\\overrightarrow{MA}-\\alpha\\overrightarrow{MB}=\\alpha(\\overrightarrow{MA}-\\overrightarrow{MB})=\\alpha\\overrightarrow{BA}$. Ce vecteur ne dépend pas de $M$ : il est constant. Il n'est pas nul, car $\\alpha\\neq 0$ et $A\\neq B$.",
+                  "answers": [
+                    {
+                      "content": "C'est un vecteur constant, le même pour tout point $M$",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est toujours le vecteur nul",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il dépend de la position de $M$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il vaut $(\\alpha+\\beta)\\overrightarrow{MG}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $I$ le milieu de $[AB]$. L'ensemble des points $M$ tels que $\\|\\overrightarrow{MA}+\\overrightarrow{MB}\\|=4$ est le cercle de centre $I$ et de rayon $2$.",
+                  "question_type": "true_false",
+                  "explanation": "Avec $I$ milieu, $\\overrightarrow{MA}+\\overrightarrow{MB}=2\\overrightarrow{MI}$. La condition devient $2\\,MI=4$, soit $MI=2$. Le rayon est $k$ divisé par la valeur absolue de la somme des coefficients, ici $2$, et non $4$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $G$ le barycentre de $(A,3)$ et $(B,1)$. L'ensemble des points $M$ tels que $\\|3\\overrightarrow{MA}+\\overrightarrow{MB}\\|=8$ est :",
+                  "question_type": "single_choice",
+                  "explanation": "On a $3\\overrightarrow{MA}+\\overrightarrow{MB}=4\\overrightarrow{MG}$, donc $4\\,MG=8$ et $MG=2$ : cercle de centre $G$ et de rayon $2$. Le rayon n'est ni $8$ (valeur de $k$), ni $\\tfrac83$ (division par le seul coefficient $3$).",
+                  "answers": [
+                    {
+                      "content": "Le cercle de centre $G$ et de rayon $2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cercle de centre $G$ et de rayon $8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cercle de centre $G$ et de rayon $\\dfrac{8}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cercle de centre $A$ et de rayon $2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces égalités, lesquelles définissent un cercle (non réduit à un point, non vide) ? On suppose $A$, $B$, $C$ trois points distincts.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Un cercle apparaît si la somme des coefficients est non nulle : $2+1=3$ et $1+1+1=3$. Pour $1-1$, $1-2+1$ et $3-3$, les sommes valent $0$ : le vecteur est constant, donc l'ensemble est tout le plan ou vide.",
+                  "answers": [
+                    {
+                      "content": "$\\|2\\overrightarrow{MA}+\\overrightarrow{MB}\\|=3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\|\\overrightarrow{MA}+\\overrightarrow{MB}+\\overrightarrow{MC}\\|=6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\|\\overrightarrow{MA}-\\overrightarrow{MB}\\|=3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\|\\overrightarrow{MA}-2\\overrightarrow{MB}+\\overrightarrow{MC}\\|=5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\|3\\overrightarrow{MA}-3\\overrightarrow{MB}\\|=3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tous points $A$, $B$, $M$, on a $\\|\\overrightarrow{MA}-\\overrightarrow{MB}\\|=AB$.",
+                  "question_type": "true_false",
+                  "explanation": "On a $\\overrightarrow{MA}-\\overrightarrow{MB}=\\overrightarrow{MA}+\\overrightarrow{BM}=\\overrightarrow{BA}$ par Chasles. Ce vecteur ne dépend pas de $M$ et sa norme est $AB$. C'est le cas de somme de coefficients nulle ($1-1=0$) : le résultat est constant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Cercles, médiatrices et vecteurs constants",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans un repère, $A(0\\,;\\,1)$, $B(1\\,;\\,0)$ et $C(2\\,;\\,3)$. Pour tout point $M$, on a $2\\overrightarrow{MA}-3\\overrightarrow{MB}+2\\overrightarrow{MC}=\\overrightarrow{MG}$. Quelles sont les coordonnées de $G$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme des coefficients vaut $2-3+2=1$ : $G$ est le barycentre de $(A,2),(B,-3),(C,2)$. $x_G=0-3+4=1$ et $y_G=2-0+6=8$ (division par $1$). Le point $(7\\,;\\,8)$ oublie le signe de $-3$ ; l'isobarycentre est $\\left(1\\,;\\,\\tfrac43\\right)$.",
+                  "answers": [
+                    {
+                      "content": "$(1\\,;\\,8)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(7\\,;\\,8)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left(1\\,;\\,\\dfrac{8}{7}\\right)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left(1\\,;\\,\\dfrac{4}{3}\\right)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tout point $M$, le vecteur $\\overrightarrow{MA}-2\\overrightarrow{MB}+\\overrightarrow{MC}$ est égal à :",
+                  "question_type": "single_choice",
+                  "explanation": "La somme des coefficients est nulle. On regroupe : $(\\overrightarrow{MA}-\\overrightarrow{MB})+(\\overrightarrow{MC}-\\overrightarrow{MB})=\\overrightarrow{BA}+\\overrightarrow{BC}$. C'est un vecteur constant. Attention au sens : $\\overrightarrow{BA}$ est $A$ moins $B$, pas l'inverse.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{BA}+\\overrightarrow{BC}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}+\\overrightarrow{CB}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{0}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{MB}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(0\\,;\\,0)$ et $B(6\\,;\\,0)$. Quel est l'ensemble des points $M$ tels que $\\|\\overrightarrow{MA}+2\\overrightarrow{MB}\\|=9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Soit $G$ le barycentre de $(A,1),(B,2)$ : $G(4\\,;\\,0)$. Alors $\\overrightarrow{MA}+2\\overrightarrow{MB}=3\\overrightarrow{MG}$ et $3\\,MG=9$, soit $MG=3$. Le centre $(2\\,;\\,0)$ viendrait de coefficients inversés ; $\\left(3\\,;\\,0\\right)$ de coefficients égaux.",
+                  "answers": [
+                    {
+                      "content": "Le cercle de centre $(4\\,;\\,0)$ et de rayon $3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cercle de centre $(2\\,;\\,0)$ et de rayon $3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cercle de centre $(4\\,;\\,0)$ et de rayon $9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cercle de centre $(3\\,;\\,0)$ et de rayon $\\dfrac{9}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(0\\,;\\,0)$ et $B(0\\,;\\,6)$. Quel est l'ensemble des points $M$ tels que $\\|\\overrightarrow{MA}+3\\overrightarrow{MB}\\|=\\|3\\overrightarrow{MA}+\\overrightarrow{MB}\\|$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Soient $G_1(0\\,;\\,\\tfrac92)$ barycentre de $(A,1),(B,3)$ et $G_2(0\\,;\\,\\tfrac32)$ barycentre de $(A,3),(B,1)$. Les deux sommes valent $4$, donc $MG_1=MG_2$ : médiatrice de $[G_1G_2]$, soit la droite $y=3$, qui est aussi la médiatrice de $[AB]$.",
+                  "answers": [
+                    {
+                      "content": "La droite d'équation $y=3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cercle de centre $(0\\,;\\,3)$ et de rayon $3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $x=3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $y=\\dfrac{9}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(-1\\,;\\,2)$ et $B(5\\,;\\,2)$. Quel est l'ensemble des points $M$ tels que $\\|\\overrightarrow{MA}+\\overrightarrow{MB}\\|=\\|\\overrightarrow{MA}-\\overrightarrow{MB}\\|$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $I(2\\,;\\,2)$ milieu de $[AB]$ : $\\overrightarrow{MA}+\\overrightarrow{MB}=2\\overrightarrow{MI}$ et $\\overrightarrow{MA}-\\overrightarrow{MB}=\\overrightarrow{BA}$ de norme $6$. Donc $2\\,MI=6$, soit $MI=3$ : cercle de diamètre $[AB]$. Ce n'est pas la médiatrice : celle-ci correspond à $MA=MB$.",
+                  "answers": [
+                    {
+                      "content": "Le cercle de centre $(2\\,;\\,2)$ et de rayon $3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cercle de centre $(2\\,;\\,2)$ et de rayon $6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La médiatrice de $[AB]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $(AB)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces sommes, lesquelles se réduisent à un vecteur constant (indépendant de $M$) ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Un vecteur constant correspond à une somme de coefficients nulle : $3-2-1=0$ et $2-2=0$. Les autres sommes valent $1+1-1=1$, $2-1-2=-1$ et $1+2=3$ : elles dépendent de $M$ par $(\\sum\\alpha_i)\\overrightarrow{MG}$.",
+                  "answers": [
+                    {
+                      "content": "$3\\overrightarrow{MA}-2\\overrightarrow{MB}-\\overrightarrow{MC}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2\\overrightarrow{MA}-2\\overrightarrow{MB}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{MA}+\\overrightarrow{MB}-\\overrightarrow{MC}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\overrightarrow{MA}-\\overrightarrow{MB}-2\\overrightarrow{MC}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{MA}+2\\overrightarrow{MB}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Déterminer des ensembles de points",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Dans un repère, $A(1\\,;\\,2)$ et $B(4\\,;\\,-1)$. Quel est l'ensemble des points $M$ tels que $\\|\\overrightarrow{MA}+2\\overrightarrow{MB}\\|=6$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Soit $G$ le barycentre de $(A,1),(B,2)$ : $G\\left(\\tfrac{1+8}{3}\\,;\\,\\tfrac{2-2}{3}\\right)=(3\\,;\\,0)$. Alors $3\\,MG=6$, soit $MG=2$. Le centre $(2\\,;\\,1)$ viendrait de coefficients inversés ; le milieu $\\left(\\tfrac52\\,;\\,\\tfrac12\\right)$ ignore les coefficients.",
+                  "answers": [
+                    {
+                      "content": "Le cercle de centre $(3\\,;\\,0)$ et de rayon $2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cercle de centre $(3\\,;\\,0)$ et de rayon $6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cercle de centre $(2\\,;\\,1)$ et de rayon $2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cercle de centre $\\left(\\dfrac{5}{2}\\,;\\,\\dfrac{1}{2}\\right)$ et de rayon $3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(0\\,;\\,0)$, $B(4\\,;\\,0)$ et $C(2\\,;\\,3)$. Quel est l'ensemble des points $M$ tels que $\\|\\overrightarrow{MA}+\\overrightarrow{MB}-2\\overrightarrow{MC}\\|=5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme des coefficients est nulle : $\\overrightarrow{MA}+\\overrightarrow{MB}-2\\overrightarrow{MC}=\\overrightarrow{CA}+\\overrightarrow{CB}=(-2\\,;\\,-3)+(2\\,;\\,-3)=(0\\,;\\,-6)$, de norme $6$. Cette norme vaut $6$ pour tout $M$, jamais $5$ : l'ensemble est vide. Ce n'est pas un cercle.",
+                  "answers": [
+                    {
+                      "content": "L'ensemble vide",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le plan entier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un cercle de rayon $5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un cercle de rayon $\\dfrac{5}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(0\\,;\\,0)$, $B(6\\,;\\,0)$ et $C(0\\,;\\,6)$. Quel est l'ensemble des points $M$ tels que $\\|\\overrightarrow{MA}+\\overrightarrow{MB}+\\overrightarrow{MC}\\|=9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'isobarycentre est $G(2\\,;\\,2)$ et $\\overrightarrow{MA}+\\overrightarrow{MB}+\\overrightarrow{MC}=3\\overrightarrow{MG}$. La condition devient $3\\,MG=9$, soit $MG=3$. Le point $(3\\,;\\,3)$ est le milieu de $[BC]$, pas l'isobarycentre.",
+                  "answers": [
+                    {
+                      "content": "Le cercle de centre $(2\\,;\\,2)$ et de rayon $3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cercle de centre $(2\\,;\\,2)$ et de rayon $9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cercle de centre $(3\\,;\\,3)$ et de rayon $3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cercle de centre $(2\\,;\\,2)$ et de rayon $27$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $A\\neq B$. Soit $G_1$ le barycentre de $(A,2),(B,1)$ et $G_2$ celui de $(A,1),(B,2)$. À propos de l'ensemble $(E)$ des points $M$ tels que $\\|2\\overrightarrow{MA}+\\overrightarrow{MB}\\|=\\|\\overrightarrow{MA}+2\\overrightarrow{MB}\\|$, quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Les deux sommes de coefficients valent $3$ : la condition s'écrit $3\\,MG_1=3\\,MG_2$, soit $MG_1=MG_2$. $(E)$ est la médiatrice de $[G_1G_2]$ ; comme $G_1$ et $G_2$ sont symétriques par rapport au milieu de $[AB]$, c'est aussi la médiatrice de $[AB]$. Ce n'est pas un cercle.",
+                  "answers": [
+                    {
+                      "content": "$2\\overrightarrow{MA}+\\overrightarrow{MB}=3\\overrightarrow{MG_1}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La condition équivaut à $MG_1=MG_2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(E)$ est la médiatrice de $[AB]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(E)$ est le cercle de centre le milieu de $[AB]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(E)$ est la droite $(AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(E)$ est vide dès que $A\\neq B$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maçon plante deux piquets $A$ et $B$ distants de 8 m. Il veut tracer le contour d'un bassin circulaire dont le centre est le milieu de $[AB]$ et dont le rayon est 5 m. Quelle égalité décrit les points $M$ de ce contour ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $I$ milieu, $\\overrightarrow{MA}+\\overrightarrow{MB}=2\\overrightarrow{MI}$. On veut $MI=5$, donc $\\|\\overrightarrow{MA}+\\overrightarrow{MB}\\|=2\\times 5=10$. L'égalité avec $5$ donnerait un rayon de $2{,}5$ m ; et $\\|\\overrightarrow{MA}-\\overrightarrow{MB}\\|$ vaut toujours $AB=8$, constante.",
+                  "answers": [
+                    {
+                      "content": "$\\|\\overrightarrow{MA}+\\overrightarrow{MB}\\|=10$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\|\\overrightarrow{MA}+\\overrightarrow{MB}\\|=5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\|\\overrightarrow{MA}-\\overrightarrow{MB}\\|=10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\|\\overrightarrow{MA}+\\overrightarrow{MB}\\|=2{,}5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(0\\,;\\,0)$ et $B(6\\,;\\,0)$. Le point $C(3\\,;\\,0)$ appartient à l'ensemble des points $M$ tels que $\\|2\\overrightarrow{MA}+\\overrightarrow{MB}\\|=3$.",
+                  "question_type": "true_false",
+                  "explanation": "Soit $G$ le barycentre de $(A,2),(B,1)$ : $G(2\\,;\\,0)$. La condition donne $3\\,MG=3$, soit $MG=1$. Or $CG=1$ : le point $C$ est bien sur ce cercle. Vérification directe : $2\\overrightarrow{CA}+\\overrightarrow{CB}=(-6\\,;\\,0)+(3\\,;\\,0)=(-3\\,;\\,0)$, de norme $3$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Lignes de niveau : droites, cercles et médiatrices",
+          "subtitle": "À compléter : fonction de Leibniz (somme pondérée des carrés des distances) et ses lignes de niveau",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Déterminer la ligne de niveau $k$ de $M\\mapsto MA^2-MB^2$ (une droite perpendiculaire à $(AB)$).</li>\n<li>Déterminer la ligne de niveau $k$ de $M\\mapsto \\overrightarrow{MA}\\cdot\\overrightarrow{MB}$ (un cercle, un point ou rien).</li>\n<li>Déterminer l'ensemble des points $M$ tels que $MA=k\\,MB$ (une médiatrice ou un cercle).</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le niveau du maçon (ligne de niveau).</strong> Sur un terrain, le maçon pose son niveau à bulle et marque tous les points qui ont la même hauteur. Le résultat est une ligne : à chaque point $M$, on associe une hauteur $f(M)$, et la <strong>ligne de niveau $k$</strong> est l'ensemble des points $M$ tels que $f(M)=k$.</p>\n<p><em>Le pont.</em> La hauteur du terrain est la valeur $f(M)$. Une ligne de niveau est un ensemble de points qui ont la même valeur $k$ : ici, ce seront des droites ou des cercles.</p>\n<p><strong>2. La rampe (cas de $MA^2-MB^2$).</strong> Imagine une rampe d'accès qui monte régulièrement dans la direction de la ligne qui joint deux piquets $A$ et $B$, et qui est plate dans la direction perpendiculaire. À une hauteur donnée, les points sont alignés sur une droite perpendiculaire à $(AB)$. Pont : $MA^2-MB^2$ est « la hauteur de la rampe ». Limite : à toute hauteur $k$ correspond une droite, la rampe n'a ni haut ni bas.</p>\n<p><strong>3. La fosse ronde (cas de $\\overrightarrow{MA}\\cdot\\overrightarrow{MB}$).</strong> Un maçon creuse une fosse ronde autour du milieu $I$ des piquets $A$ et $B$. La profondeur ne dépend que de la distance au centre : à profondeur donnée, les points forment un cercle autour de $I$. Pont : $\\overrightarrow{MA}\\cdot\\overrightarrow{MB}=MI^2-\\dfrac{AB^2}{4}$. Limite : la fosse a un fond. Au fond, il n'y a que le point $I$ ; en dessous du fond, il n'y a aucun point.</p>\n<p><strong>4. Le coureur du chantier (cas de $MA=k\\,MB$).</strong> Un ouvrier $M$ court en restant toujours deux fois plus loin du poste $A$ que du poste $B$. Il ne peut pas aller n'importe où : il tourne autour du poste le plus proche, $B$. Pont : l'ensemble de ses positions est un cercle. Limite : s'il reste à égale distance des deux postes ($k=1$), il longe une droite, la médiatrice de $[AB]$, et non un cercle.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Ligne de niveau.</strong> Pour une fonction $f$ qui à tout point $M$ associe un réel, la ligne de niveau $k$ est l'ensemble des points $M$ tels que $f(M)=k$.</p>\n<p><strong>Cas $MA^2-MB^2=k$ ($A\\neq B$).</strong> Avec $I$ milieu de $[AB]$ : $MA^2-MB^2=(\\overrightarrow{MA}-\\overrightarrow{MB})\\cdot(\\overrightarrow{MA}+\\overrightarrow{MB})=\\overrightarrow{BA}\\cdot 2\\overrightarrow{MI}=2\\overrightarrow{AB}\\cdot\\overrightarrow{IM}$. La ligne de niveau $k$ est donc une droite perpendiculaire à $(AB)$, qui coupe $(AB)$ au point $H$ tel que $\\overrightarrow{IH}=\\dfrac{k}{2AB^2}\\overrightarrow{AB}$. Pour $k=0$, c'est la médiatrice de $[AB]$. Il y a une droite pour toute valeur de $k$.</p>\n<p><strong>Cas $\\overrightarrow{MA}\\cdot\\overrightarrow{MB}=k$.</strong> Avec $I$ milieu de $[AB]$, on a $\\overrightarrow{MA}=\\overrightarrow{MI}+\\overrightarrow{IA}$ et $\\overrightarrow{MB}=\\overrightarrow{MI}-\\overrightarrow{IA}$, donc $\\overrightarrow{MA}\\cdot\\overrightarrow{MB}=MI^2-IA^2=MI^2-\\dfrac{AB^2}{4}$. L'égalité s'écrit $MI^2=k+\\dfrac{AB^2}{4}$ :</p>\n<ul>\n<li>si $k+\\dfrac{AB^2}{4}>0$ : cercle de centre $I$ et de rayon $\\sqrt{k+\\dfrac{AB^2}{4}}$ ;</li>\n<li>si $k+\\dfrac{AB^2}{4}=0$ : l'ensemble réduit au point $I$ ;</li>\n<li>si $k+\\dfrac{AB^2}{4}<0$ : l'ensemble vide.</li>\n</ul>\n<p>Pour $k=0$, c'est le cercle de diamètre $[AB]$ : $\\overrightarrow{MA}\\cdot\\overrightarrow{MB}=0$ signifie que $M=A$, ou $M=B$, ou que $(MA)$ et $(MB)$ sont perpendiculaires.</p>\n<p><strong>Cas $MA=k\\,MB$ ($k>0$, soit $\\dfrac{MA}{MB}=k$ pour $M\\neq B$).</strong> Si $k=1$, c'est la médiatrice de $[AB]$. Si $k\\neq 1$, soient $G_1$ le barycentre de $\\{(A,1),(B,-k)\\}$ et $G_2$ celui de $\\{(A,1),(B,k)\\}$ (sommes $1-k$ et $1+k$, non nulles). Alors $MA=k\\,MB\\iff MA^2-k^2MB^2=0\\iff(\\overrightarrow{MA}-k\\overrightarrow{MB})\\cdot(\\overrightarrow{MA}+k\\overrightarrow{MB})=0\\iff(1-k)(1+k)\\,\\overrightarrow{MG_1}\\cdot\\overrightarrow{MG_2}=0\\iff \\overrightarrow{MG_1}\\cdot\\overrightarrow{MG_2}=0$. L'ensemble est le cercle de diamètre $[G_1G_2]$. Remarque : $\\dfrac{MA^2}{MB^2}=k'$ (avec $k'>0$) revient à $\\dfrac{MA}{MB}=\\sqrt{k'}$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Dans un repère, $A(0\\,;\\,0)$ et $B(4\\,;\\,0)$. Déterminer l'ensemble des points $M$ tels que $MA^2-MB^2=8$. Puis, avec $A'(-3\\,;\\,0)$ et $B'(3\\,;\\,0)$, l'ensemble des points $M$ tels que $\\overrightarrow{MA'}\\cdot\\overrightarrow{MB'}=7$.</strong></p>\n<ol>\n<li>Soit $M(x\\,;\\,y)$. $MA^2=x^2+y^2$ et $MB^2=(x-4)^2+y^2$, donc $MA^2-MB^2=8x-16$.</li>\n<li>$8x-16=8$ équivaut à $x=3$. L'ensemble est la droite d'équation $x=3$, perpendiculaire à $(AB)$. Vérification avec $M(3\\,;\\,5)$ : $MA^2=34$, $MB^2=26$, et $34-26=8$.</li>\n<li>Pour la seconde question, $I$ est l'origine $O(0\\,;\\,0)$ et $A'B'=6$, donc $\\dfrac{A'B'^2}{4}=9$.</li>\n<li>$\\overrightarrow{MA'}\\cdot\\overrightarrow{MB'}=MO^2-9$. L'égalité $MO^2-9=7$ donne $MO^2=16$, soit $MO=4$.</li>\n<li>L'ensemble est le cercle de centre $O$ et de rayon $4$. Vérification avec $M(0\\,;\\,4)$ : $\\overrightarrow{MA'}=(-3\\,;\\,-4)$, $\\overrightarrow{MB'}=(3\\,;\\,-4)$, et $-9+16=7$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Pour $\\overrightarrow{MA}\\cdot\\overrightarrow{MB}=k$, prendre $k$ directement comme carré du rayon. Le carré du rayon est $k+\\dfrac{AB^2}{4}$. Avec $AB=6$ et $k=7$, le rayon est $\\sqrt{16}=4$, et non $\\sqrt{7}$. Autre piège : croire que $MA=k\\,MB$ donne toujours une droite. C'est un cercle sauf si $k=1$.</p>\n<p>Comment le repérer : pour un produit scalaire, écris toujours $MI^2=k+\\dfrac{AB^2}{4}$ et regarde le signe du second membre avant de conclure (cercle, point ou ensemble vide).</p>\n<h2>En une phrase</h2>\n<p>La ligne de niveau de $MA^2-MB^2$ est une droite perpendiculaire à $(AB)$, celle de $\\overrightarrow{MA}\\cdot\\overrightarrow{MB}$ est un cercle centré au milieu de $[AB]$ (ou un point, ou rien), et celle de $MA/MB$ est une médiatrice ou un cercle.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître une ligne de niveau",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $f$ une fonction qui à tout point $M$ du plan associe un réel. Que désigne la ligne de niveau $k$ de $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "C'est l'ensemble des points qui ont la même « hauteur » $k$ : ceux pour lesquels $f(M)=k$. Comme la ligne tracée avec le niveau du maçon. Une ligne de niveau n'est pas forcément une droite : ça dépend de $f$.",
+                  "answers": [
+                    {
+                      "content": "L'ensemble des points $M$ tels que $f(M)=k$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le point $M$ où $f$ est la plus grande",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite qui passe par les points où $f$ s'annule",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ensemble des points $M$ tels que $f(M)\\geq k$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $A\\neq B$ et $k$ un réel. L'ensemble des points $M$ tels que $MA^2-MB^2=k$ est :",
+                  "question_type": "single_choice",
+                  "explanation": "On a $MA^2-MB^2=2\\overrightarrow{AB}\\cdot\\overrightarrow{IM}$ avec $I$ milieu de $[AB]$ : c'est une droite perpendiculaire à $(AB)$, pour toute valeur de $k$. La médiatrice correspond au seul cas $k=0$. Comme sur la rampe, chaque hauteur donne une droite.",
+                  "answers": [
+                    {
+                      "content": "Une droite perpendiculaire à $(AB)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un cercle de centre le milieu de $[AB]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une droite parallèle à $(AB)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La médiatrice de $[AB]$, quel que soit $k$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ensemble des points $M$ tels que $MA^2-MB^2=0$ est la médiatrice de $[AB]$.",
+                  "question_type": "true_false",
+                  "explanation": "$MA^2-MB^2=0$ équivaut à $MA^2=MB^2$, soit $MA=MB$ car les distances sont positives. Les points équidistants de $A$ et $B$ forment la médiatrice de $[AB]$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $I$ le milieu de $[AB]$. Pour tout point $M$, le produit scalaire $\\overrightarrow{MA}\\cdot\\overrightarrow{MB}$ est égal à :",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $\\overrightarrow{MA}=\\overrightarrow{MI}+\\overrightarrow{IA}$ et $\\overrightarrow{MB}=\\overrightarrow{MI}-\\overrightarrow{IA}$, le produit vaut $MI^2-IA^2=MI^2-\\dfrac{AB^2}{4}$. Le signe est « moins », et on divise $AB^2$ par $4$ car $IA=\\dfrac{AB}{2}$. Comme la fosse : la profondeur dépend de $MI$.",
+                  "answers": [
+                    {
+                      "content": "$MI^2-\\dfrac{AB^2}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$MI^2+\\dfrac{AB^2}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$MI^2-AB^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2MI^2-\\dfrac{AB^2}{4}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $A\\neq B$. À propos de l'ensemble des points $M$ tels que $\\overrightarrow{MA}\\cdot\\overrightarrow{MB}=0$, quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Pour $k=0$ : $MI^2=\\dfrac{AB^2}{4}$, soit $MI=\\dfrac{AB}{2}$, le cercle de diamètre $[AB]$. Les points $A$ et $B$ en font partie, car un vecteur nul a un produit scalaire nul. Ce n'est pas la médiatrice (c'est $MA=MB$).",
+                  "answers": [
+                    {
+                      "content": "C'est le cercle de diamètre $[AB]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les points $A$ et $B$ lui appartiennent",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est la médiatrice de $[AB]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est l'ensemble vide",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est le cercle de centre $A$ passant par $B$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $A\\neq B$ et $k>0$ avec $k\\neq 1$. L'ensemble des points $M$ tels que $MA=k\\,MB$ est une droite.",
+                  "question_type": "true_false",
+                  "explanation": "Faux : pour $k\\neq 1$, c'est un cercle (le coureur tourne autour du poste le plus proche). Seul $k=1$ donne une droite, la médiatrice de $[AB]$. Ne pas généraliser le cas $MA=MB$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Droites, cercles et lignes de niveau",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans un repère, $A(0\\,;\\,0)$ et $B(4\\,;\\,0)$. Quel est l'ensemble des points $M$ tels que $MA^2-MB^2=8$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $M(x\\,;\\,y)$ : $MA^2-MB^2=x^2+y^2-(x-4)^2-y^2=8x-16$. L'égalité $8x-16=8$ donne $x=3$. L'erreur $x=1$ vient de $\\tfrac{k}{8}$ ; $x=2$ est la médiatrice ($k=0$).",
+                  "answers": [
+                    {
+                      "content": "La droite d'équation $x=3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite d'équation $x=2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $x=1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $y=3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(-2\\,;\\,0)$ et $B(2\\,;\\,0)$. Quel est l'ensemble des points $M$ tels que $\\overrightarrow{MA}\\cdot\\overrightarrow{MB}=5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le milieu est $O$ et $\\dfrac{AB^2}{4}=4$. Donc $MO^2=5+4=9$ et $MO=3$ : cercle de centre $O$ et de rayon $3$. Les erreurs : rayon $\\sqrt5$ (on oublie $\\tfrac{AB^2}{4}$), rayon $9$ (on oublie la racine), rayon $1$ (mauvais signe).",
+                  "answers": [
+                    {
+                      "content": "Le cercle de centre $O$ et de rayon $3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cercle de centre $O$ et de rayon $\\sqrt{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cercle de centre $O$ et de rayon $9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cercle de centre $O$ et de rayon $1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(-3\\,;\\,0)$ et $B(3\\,;\\,0)$. Pour la fonction $f:M\\mapsto \\overrightarrow{MA}\\cdot\\overrightarrow{MB}$, quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "On a $f(M)=MO^2-9$. Pour $k=-9$, $MO^2=0$ : seulement le point $O$. Pour $k=-10$, $MO^2=-1$ est impossible : ensemble vide. Ce n'est donc ni un cercle de rayon $1$, ni vide pour $k=-9$. Pour $k=0$, c'est un cercle.",
+                  "answers": [
+                    {
+                      "content": "La ligne de niveau $-9$ est réduite au point $O$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La ligne de niveau $-10$ est vide",
+                      "correct": true
+                    },
+                    {
+                      "content": "La ligne de niveau $-9$ est vide",
+                      "correct": false
+                    },
+                    {
+                      "content": "La ligne de niveau $-10$ est un cercle de rayon $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La ligne de niveau $0$ est réduite à un point",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(0\\,;\\,0)$ et $B(3\\,;\\,0)$. Quel est l'ensemble des points $M$ tels que $MA=2\\,MB$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$G_1$, barycentre de $(A,1),(B,-2)$, est $(6\\,;\\,0)$ ; $G_2$, barycentre de $(A,1),(B,2)$, est $(2\\,;\\,0)$. L'ensemble est le cercle de diamètre $[G_1G_2]$ : centre $(4\\,;\\,0)$, rayon $2$. Vérification : $(6\\,;\\,0)$ donne $MA=6$ et $MB=3$.",
+                  "answers": [
+                    {
+                      "content": "Le cercle de centre $(4\\,;\\,0)$ et de rayon $2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cercle de centre $\\left(\\dfrac{3}{2}\\,;\\,0\\right)$ et de rayon $\\dfrac{3}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $x=\\dfrac{3}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cercle de centre $B$ et de rayon $2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $A\\neq B$ et $k>0$. Pour quelle valeur de $k$ l'ensemble des points $M$ tels que $MA=k\\,MB$ est-il une droite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $k=1$, $MA=MB$ : la médiatrice de $[AB]$. Pour tout autre $k>0$ (comme $2$ ou $\\tfrac12$), l'ensemble est un cercle. Un $k$ négatif est impossible, car $MA$ et $MB$ sont des distances positives.",
+                  "answers": [
+                    {
+                      "content": "$k=1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$k=2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$k=\\dfrac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$k=-1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(2\\,;\\,1)$ et $B(4\\,;\\,5)$. Soit $f:M\\mapsto MA^2-MB^2$. Quelle est la ligne de niveau de $f$ qui passe par l'origine $O$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f(O)=5-41=-36$. Avec $M(x\\,;\\,y)$, $f(M)=4x+8y-36$ ; $f(M)=-36$ donne $x+2y=0$, droite perpendiculaire à $(AB)$ (de direction $(2\\,;\\,4)$). La droite $2x-y=0$ est parallèle à $(AB)$ ; $x+2y=9$ est la médiatrice.",
+                  "answers": [
+                    {
+                      "content": "La droite d'équation $x+2y=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite d'équation $2x-y=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $x+2y=9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cercle de centre $O$ passant par $A$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Déterminer des lignes de niveau",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Dans un repère, $A(1\\,;\\,2)$ et $B(5\\,;\\,2)$. Quel est l'ensemble des points $M$ tels que $MA^2-MB^2=16$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$MA^2-MB^2=(x-1)^2-(x-5)^2=8x-24$. L'égalité $8x-24=16$ donne $x=5$ : droite perpendiculaire à $(AB)$ passant par $B$. Vérification : pour $M=B$, $MA^2-MB^2=16-0=16$. La droite $x=3$ est la médiatrice ($k=0$).",
+                  "answers": [
+                    {
+                      "content": "La droite d'équation $x=5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite d'équation $x=3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $x=2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $y=2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(-1\\,;\\,2)$ et $B(5\\,;\\,2)$. Quel est l'ensemble des points $M$ tels que $\\overrightarrow{MA}\\cdot\\overrightarrow{MB}=16$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le milieu est $I(2\\,;\\,2)$, $AB=6$ et $\\dfrac{AB^2}{4}=9$. Donc $MI^2=16+9=25$ et $MI=5$. Vérification avec $M(7\\,;\\,2)$ : $\\overrightarrow{MA}\\cdot\\overrightarrow{MB}=(-8)(-2)=16$. Rayon $\\sqrt7$ : mauvais signe ; rayon $4$ : $\\tfrac{AB^2}{4}$ oublié.",
+                  "answers": [
+                    {
+                      "content": "Le cercle de centre $(2\\,;\\,2)$ et de rayon $5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le cercle de centre $(2\\,;\\,2)$ et de rayon $4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cercle de centre $(2\\,;\\,2)$ et de rayon $\\sqrt{7}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le cercle de centre $(2\\,;\\,2)$ et de rayon $25$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(0\\,;\\,0)$ et $B(4\\,;\\,0)$. Soit $(E)$ l'ensemble des points $M$ tels que $MA=3\\,MB$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$G_1$, barycentre de $(A,1),(B,-3)$, est $(6\\,;\\,0)$ ; $G_2$, barycentre de $(A,1),(B,3)$, est $(3\\,;\\,0)$. $(E)$ est le cercle de diamètre $[G_1G_2]$ : centre $\\left(\\tfrac92\\,;\\,0\\right)$. Le point $B$ n'y est pas : $MB=0$ donnerait $MA=0$.",
+                  "answers": [
+                    {
+                      "content": "$(E)$ est un cercle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les points $(3\\,;\\,0)$ et $(6\\,;\\,0)$ appartiennent à $(E)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le centre de $(E)$ est $\\left(\\dfrac{9}{2}\\,;\\,0\\right)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(E)$ est la droite d'équation $x=2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(E)$ est le cercle de centre $B$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le point $B$ appartient à $(E)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(-2\\,;\\,0)$ et $B(2\\,;\\,0)$. Quels sont les points $M$ qui vérifient à la fois $\\overrightarrow{MA}\\cdot\\overrightarrow{MB}=0$ et $MA=MB$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$MA=MB$ donne la médiatrice $x=0$. $\\overrightarrow{MA}\\cdot\\overrightarrow{MB}=0$ donne le cercle de centre $O$ et de rayon $2$ (diamètre $[AB]$). Les deux se coupent en $(0\\,;\\,2)$ et $(0\\,;\\,-2)$. Le point $O$ est sur la médiatrice mais $\\overrightarrow{OA}\\cdot\\overrightarrow{OB}=-4\\neq 0$.",
+                  "answers": [
+                    {
+                      "content": "Les points $(0\\,;\\,2)$ et $(0\\,;\\,-2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le seul point $O$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les points $(2\\,;\\,0)$ et $(-2\\,;\\,0)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun point",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $A\\neq B$. Pour tout réel $k$, la ligne de niveau $k$ de $M\\mapsto MA^2-MB^2$ n'est jamais vide.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : $MA^2-MB^2=2\\overrightarrow{AB}\\cdot\\overrightarrow{IM}$ prend toutes les valeurs réelles quand $M$ se déplace le long de $(AB)$. À chaque $k$ correspond une droite perpendiculaire à $(AB)$. Contraste avec $\\overrightarrow{MA}\\cdot\\overrightarrow{MB}$, dont les lignes de niveau sont vides sous le « fond » de la fosse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $AB=8$ cm. Pour quelles valeurs de $k$ la ligne de niveau $k$ de $M\\mapsto \\overrightarrow{MA}\\cdot\\overrightarrow{MB}$ est-elle un vrai cercle (de rayon strictement positif) ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $MI^2=k+\\dfrac{AB^2}{4}=k+16$. Un cercle de rayon strictement positif demande $k+16>0$, soit $k>-16$. Pour $k=-16$, l'ensemble se réduit à $I$ ; pour $k<-16$, il est vide. Le signe de $k$ n'est pas en cause.",
+                  "answers": [
+                    {
+                      "content": "$k>-16$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$k\\geq -16$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$k>16$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$k>0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
