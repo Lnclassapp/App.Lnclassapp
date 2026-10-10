@@ -1,0 +1,12 @@
+<%# 🌐 UI · teams/level_archivals/create — réponse de « Archiver le niveau » de la fiche %>
+<%# Rôle : toast (nombre de classes archivées, ou motif du refus), niveau remplacé par morphing, fiche re-demandée après un succès %>
+<%# ADR  : 0088 · UDR : 0083, 0056 %>
+<%= turbo_stream_toast @notice || @alert, type: (@notice ? :success : :info) %>
+<% if @level %>
+  <%= turbo_stream.replace "level_#{@level.slug}", method: :morph do %>
+    <%= render "teams/schools/classroom_group", level: @level, school_active: @school.status == "active", school_public_id: @school.public_id %>
+  <% end %>
+<% end %>
+<% if @notice %>
+  <%= turbo_stream.refresh(request_id: nil) %>
+<% end %>

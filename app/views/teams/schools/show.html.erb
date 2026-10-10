@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/show — fiche d'un établissement (SC-05) %>
 <%# Rôle : en-tête, classes par niveau (« − n + »), classes de l'année, « Direction » et « Directions retirées », enseignants et leur voie %>
-<%# ADR  : 0030, 0041, 0059, 0063, 0077, 0083 · UDR : 0006, 0036, 0046, 0050, 0054, 0056, 0070, 0079 (§3.8) · retour vers la liste filtrée %>
+<%# ADR  : 0030, 0041, 0059, 0063, 0077, 0083, 0088 · UDR : 0006, 0036, 0046, 0050, 0054, 0056, 0070, 0079 (§3.8), 0083 · retour vers la liste filtrée %>
 <% page_title @school.name %>
 <% content_for :nav_key, "schools" %>
 <%# Hors de #school_header : les streams qui remplacent l'en-tête (modification, désactivation, code) gardent ce retour. %>
@@ -22,7 +22,12 @@
       <% if @school.levels.empty? %>
         <%= ui_empty_state title: t(".no_classrooms"), description: t(".no_classrooms_description"), icon: "academic-cap" %>
       <% else %>
-        <%= render partial: "classroom_group", collection: @school.levels, as: :level, locals: { school_active: @school.status == "active" } %>
+        <%= render partial: "classroom_group", collection: @school.levels, as: :level, locals: { school_active: @school.status == "active", school_public_id: @school.public_id } %>
+      <% end %>
+      <% if @school.archived_total.positive? %>
+        <%# UDR-0083 §3.1 : les archivées de plus de 7 jours ne paraissent que sur demande (?archives=1). %>
+        <%= render "shared/archives_toggle", hidden_count: @school.hidden_archives_count, shown: @school.archives_shown,
+                                             show_path: school_path(@school.public_id, archives: 1), hide_path: school_path(@school.public_id) %>
       <% end %>
     </section>
 

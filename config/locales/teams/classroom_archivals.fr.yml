@@ -1,0 +1,26 @@
+# ADR-0088, UDR-0083 : archivage d'une classe et d'un niveau depuis la fiche d'un établissement (équipe).
+fr:
+  teams:
+    classroom_archivals:
+      archive:
+        done: "Classe « %{name} » archivée."
+      restore:
+        done: "Classe « %{name} » restaurée."
+      undo: "Annuler"
+      errors:
+        forbidden: "Vous n'avez pas le droit d'archiver cette classe."
+        not_found: "Cette classe est introuvable."
+        already_archived: "Cette classe est déjà archivée."
+        not_archived: "Cette classe n'est pas archivée."
+    level_archivals:
+      create:
+        done:
+          one: "%{count} classe archivée."
+          other: "%{count} classes archivées."
+      errors:
+        forbidden: "Vous n'avez pas le droit d'archiver ce niveau."
+        not_found: "Ce niveau est introuvable."
+        nothing_to_archive: "Ce niveau n'a aucune classe active à archiver."
+    schools:
+      classroom_group:
+        empty: "Aucune classe"

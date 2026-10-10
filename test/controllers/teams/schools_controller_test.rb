@@ -277,7 +277,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#{within_block} #level_classrooms_tle-a1 button[disabled]", text: I18n.t("teams.level_classrooms.block.remove", level: "Tle A1")
     assert_select "#{within_block} #level_classrooms_tle-a1 form[action='#{school_level_classrooms_path(school.public_id)}'] input[name=series][value=a1]"
     assert_select "#{within_block} form[action='#{school_level_classrooms_path(school.public_id)}'] button[type=submit]", 14
-    assert_select "#school_classrooms_title", text: I18n.t("teams.schools.show.classrooms", count: 5)
+    assert_select "#school_classrooms_title", text: I18n.t("teams.schools.show.classrooms", count: 4) # ADR-0088 : la classe archivée ne compte plus dans le titre de la fiche
 
     get schools_path
     assert_select "#school_#{school.public_id} td:nth-child(6)", text: "5" # « Classes » : plus de code d'établissement (IE-21)
