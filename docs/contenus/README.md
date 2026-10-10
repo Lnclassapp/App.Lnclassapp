@@ -6,7 +6,7 @@ Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **pr
 |---|---|
 | [`progressions-2026-2027/`](progressions-2026-2027/) | Les 10 premières leçons de la progression DPFC 2026-2027, par matière, niveau et série : 13 fichiers `lnclass.course-tree` (1 056 cours sans fiche), à importer depuis **Imports → Cours complets**, **après** les leçons traitées. Détail et couverture : [`progressions-2026-2027/README.md`](progressions-2026-2027/README.md) |
 | [`prompt-redaction.md`](prompt-redaction.md) | Le prompt à donner à un modèle pour rédiger une leçon : règle de l'analogie, structure d'une fiche, 3 exercices par fiche, contraintes de l'application. Il produit **un seul fichier** `lnclass.course-tree` : le cours, ses fiches et leurs exercices |
-| [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot » : il tire d’une matière, d’un niveau et d’une série les leçons de la progression qui restent à rédiger (jusqu’à 10), les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture indépendante) et les range dans `lecons-traitees/`. Un appel = un lot = jusqu’à 10 fichiers |
+| [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour un niveau et une série (Tle D, 1ère D, 3ème…), il prend les 3 premières leçons de chaque matière du niveau (jusqu’à 18), les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture indépendante) et les range dans `lecons-traitees/`. Un appel = un niveau |
 | [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle mécanique d’un fichier de leçon contre les règles du prompt : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s’il y a une erreur |
 | [`lecons-traitees/`](lecons-traitees/) | Les leçons déjà rédigées avec ce prompt, un fichier `lnclass.course-tree` par cours complet, rangées par niveau et série, puis par matière. Pour l'instant `tle-d/` : 18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Histoire-Géographie, Philosophie et Français |
 
@@ -28,7 +28,7 @@ Exemple de référence, le théorème des gendarmes : deux policiers tiennent un
 3. Faire relire le contenu par un enseignant de la discipline, puis publier.
 4. Ranger le fichier dans `lecons-traitees/<niveau>-<série>/<matière>/` (le slug de la matière : `mathematiques`, `physique-chimie`, `svt`, `histoire-geographie`, `philosophie`, `francais`…) et ajouter une ligne au tableau ci-dessous.
 
-Pour plusieurs leçons d’un coup, utiliser plutôt [`prompt-redaction-lot.md`](prompt-redaction-lot.md).
+Pour toutes les matières d’un niveau d’un coup, utiliser plutôt [`prompt-redaction-lot.md`](prompt-redaction-lot.md).
 
 ## Ordre des imports
 
