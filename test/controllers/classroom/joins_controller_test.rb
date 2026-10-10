@@ -87,19 +87,17 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom-link-invalid, #classroom-preview", 0
   end
 
-  test "IL-09: an unknown or changed token, an archived classroom or a closed school opens the standard page with the alert" do
+  test "IL-09: an unknown or changed token or a closed school opens the standard page with the alert" do
     token = link_token
-    archived = create_classroom(school: @school, name: "6ème 2", status: "archived")
     closed = create_classroom(school: create_school(status: "inactive"), name: "6ème 1")
 
-    [ "cccccccccccc", archived.reload.link_token, closed.reload.link_token ].each do |invalid|
+    [ "cccccccccccc", closed.reload.link_token ].each do |invalid|
       get join_classroom_path(invalid)
 
       assert_redirected_to new_student_registration_path
       follow_redirect!
       assert_select "#classroom-link-invalid[role=alert]", text: I18n.t("classroom.student_registrations.form.link_invalid")
       assert_select "#classroom-preview", 0
-      assert_no_match(/6ème 2/, response.body)
     end
 
     @classroom.update!(link_token: "ffffffffffff")

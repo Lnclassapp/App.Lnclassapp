@@ -1,0 +1,9 @@
+<%# 🌐 UI · shared/_archives_toggle — « Afficher les archives (N) » / « Masquer les archives » sous une liste de classes %>
+<%# Rôle : les classes archivées depuis plus de 7 jours sont masquées ; ce lien les montre toutes (?archives=1) ou les remasque %>
+<%# ADR  : 0088 · UDR : 0083 %>
+<%# locals: (hidden_count:, shown:, show_path:, hide_path:) -%>
+<% if shown %>
+  <%= ui_button t(".hide"), href: hide_path, variant: :ghost, size: :sm, icon: "eye-slash", "aria-expanded": "true" %>
+<% elsif hidden_count.positive? %>
+  <%= ui_button t(".show", count: hidden_count), href: show_path, variant: :ghost, size: :sm, icon: "eye", "aria-expanded": "false" %>
+<% end %>

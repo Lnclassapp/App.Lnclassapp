@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::ClassroomRepository
 # Rôle : traduit Orm::Classroom ↔ Entities::Classroom::Classroom  ; jeton du lien, verrou, génération en masse, retrait d'une classe vide
-# ADR  : 0030, 0039, 0041, 0059, 0085
+# ADR  : 0030, 0039, 0041, 0059, 0085, 0088
 module Repositories
   module Classroom
     class ClassroomRepository
@@ -54,7 +54,7 @@ module Repositories
       end
 
       def names_in_level(school_id:, school_year:, level_id:, series_id:)
-        Orm::Classroom.where(school_id:, school_year:, level_id:, series_id:).pluck(:name)
+        Orm::Classroom.where(school_id:, school_year:, level_id:, series_id:, status: "active").pluck(:name)
       end
 
       # Le verrou est celui que prend l'adhésion d'un élève (lock_by_public_id, lock_by_link_token) : un élève ne rejoint pas
@@ -67,6 +67,30 @@ module Repositories
 
         Orm::Classroom.where(id:).delete_all
         ::Shared::Result.success
+      end
+
+      # ADR-0088 : une seule écriture pose le statut et la date, comme l'exige la contrainte « archived_at ⇔ archived ».
+      def archive(id:, at:)
+        record = Orm::Classroom.lock.find_by(id:)
+        return ::Shared::Result.failure(:not_found) if record.nil?
+        return ::Shared::Result.failure(:conflict, errors: { base: [ :already_archived ] }) if record.status == "archived"
+
+        record.update_columns(status: "archived", archived_at: at, updated_at: at)
+        ::Shared::Result.success(map_to_entity(record))
+      end
+
+      def restore(id:, at:)
+        record = Orm::Classroom.lock.find_by(id:)
+        return ::Shared::Result.failure(:not_found) if record.nil?
+        return ::Shared::Result.failure(:conflict, errors: { base: [ :not_archived ] }) if record.status == "active"
+
+        record.update_columns(status: "active", archived_at: nil, updated_at: at)
+        ::Shared::Result.success(map_to_entity(record))
+      end
+
+      def archive_level(school_id:, school_year:, level_id:, at:)
+        Orm::Classroom.where(school_id:, school_year:, level_id:, status: "active")
+                      .update_all(status: "archived", archived_at: at, updated_at: at)
       end
 
       private
@@ -83,7 +107,7 @@ module Repositories
         Entities::Classroom::Classroom.new(
           id: record.id, public_id: record.public_id, school_id: record.school_id, level_id: record.level_id,
           series_id: record.series_id, school_year: record.school_year, link_token: record.link_token, name: record.name,
-          status: record.status, max_students: record.max_students,
+          status: record.status, archived_at: record.archived_at, max_students: record.max_students,
           teacher_ids: Orm::TeacherClassroom.where(classroom_id: record.id).pluck(:teacher_id),
           active_students_count: Orm::ClassroomStudent.where(classroom_id: record.id, left_at: nil).count
         )

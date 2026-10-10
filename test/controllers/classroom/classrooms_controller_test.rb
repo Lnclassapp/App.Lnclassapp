@@ -134,16 +134,21 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "une classe archivée montre ses jours de séance sans bouton" do
+  test "ADR-0088 : la page d'une classe archivée n'existe plus, pour l'enseignant comme pour l'équipe : 404" do
     classroom = create_classroom(school: @school, status: "archived")
     Orm::TeacherClassroom.create!(teacher: @teacher, classroom:)
-    Orm::ClassroomSessionDay.create!(teacher: @teacher, classroom:, weekday: 3)
+    student = create_student(classroom:)
     sign_in_as @teacher
 
     get classroom_path(classroom.public_id)
 
-    assert_select "section#classroom_session_days", text: /mercredi/
-    assert_select "section#classroom_session_days a", 0
+    assert_response :not_found
+    assert_no_match(/#{student.last_name}/, response.body)
+
+    sign_in_as create_team_member
+    get classroom_path(classroom.public_id)
+
+    assert_response :not_found
   end
 
   test "PRD : la ligne de l'exercice dit « 18 faits, dont 3 en retard · 7 pas encore faits » et mène à son suivi" do
@@ -291,24 +296,6 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
       assert_select "span.text-ink", text: "Pas encore lisible · 0/0"
     end
     assert_select "#assignment_#{assignment.public_id} p", text: "0 fait · 0 pas encore fait"
-  end
-
-  test "une classe archivée reste lisible : badges et cercle au bord bas de ses exercices assignés" do
-    classroom = create_classroom(school: @school, status: "archived")
-    Orm::TeacherClassroom.create!(teacher: @teacher, classroom:)
-    assignment = create_assignment(classroom:, assignable: create_exercise, by: @teacher)
-    [ 100, 90, 80, 60, 40 ].each { hand_in(assignment, it, student: create_student(classroom:)) }
-    sign_in_as @teacher
-
-    get classroom_path(classroom.public_id)
-
-    assert_response :success
-    assert_select "#classroom_header", text: /#{I18n.t("#{scope}.header.archived")}/
-    assert_badges assignment, [ "1 Bronze", "0 Argent", "2 Or", "1 Diamant" ]
-    assert_select "#assignment_#{assignment.public_id} #{FOOTER} > :last-child" do
-      assert_select "span.bg-success.rounded-full[aria-hidden='true']", 1
-      assert_select "span.text-ink", text: "Acquis · 5/5"
-    end
   end
 
   test "sans les comptes (hors FollowAssignmentPolicy), la ligne n'a ni pied, ni badges, ni cercle" do
@@ -515,22 +502,6 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_roster_empty", text: /#{I18n.t("#{scope}.roster.empty_title")}/
     assert_select "#classroom-roster-search", 0
     assert_select "#classroom_roster_list", 0
-  end
-
-  test "une classe archivée est signalée, et n'offre plus de code de récupération" do
-    classroom = create_classroom(school: @school, status: "archived")
-    Orm::TeacherClassroom.create!(teacher: @teacher, classroom:)
-    student = create_student(classroom:)
-    sign_in_as @teacher
-
-    get classroom_path(classroom.public_id)
-
-    assert_response :success
-    assert_select "#classroom_header", text: /#{I18n.t("#{scope}.header.archived")}/
-    assert_select "#student_#{student.public_id}", 1
-    assert_select "#classroom_roster_list form", 0
-    assert_select "#classroom_roster_list [role=menu]", 0
-    assert_select "#classroom_roster_list dialog", 0
   end
 
   # IL-13 (ADR-0085 §4.4, UDR-0081 §3.7) : « Nouveau » pendant 7 jours, la voie sous chaque nom, les nouveaux en tête,

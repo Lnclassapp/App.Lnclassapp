@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::JoinAsStudent
 # Rôle : un élève connecté sans classe active (classe archivée, ou retiré) entre dans la classe choisie ou dans celle d'un lien
-# ADR  : 0026, 0028, 0040, 0041, 0085 · UDR : 0009, 0081
+# ADR  : 0026, 0028, 0040, 0041, 0085, 0088 · UDR : 0009, 0081
 module UseCases
   module Classroom
     class JoinAsStudent
@@ -66,7 +66,14 @@ module UseCases
       def designated(dto)
         return @designation.chosen(dto) unless dto.link_token
 
-        @designation.linked(dto.link_token) || Shared::Result.failure(:not_found)
+        @designation.linked(dto.link_token) || unavailable_link(dto.link_token)
+      end
+
+      # ADR-0088 : le lien d'une classe archivée dit pourquoi il refuse ; tout autre lien mort reste inconnu.
+      def unavailable_link(token)
+        return Shared::Result.failure(:not_found) unless @designation.archived_link?(token)
+
+        Shared::Result.failure(:forbidden, errors: { base: [ :classroom_archived ] })
       end
 
       # IL-17 : l'adhésion à la classe archivée est close dans la même transaction que la nouvelle.

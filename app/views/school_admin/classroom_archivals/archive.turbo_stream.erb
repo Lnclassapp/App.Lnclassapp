@@ -1,0 +1,5 @@
+<%# 🌐 UI · school_admin/classroom_archivals/archive — réponse de « Archiver la classe » %>
+<%# Rôle : toast (succès avec « Annuler », ou motif neutre du conflit), puis la page se rafraîchit : la carte passe en fin de niveau %>
+<%# ADR  : 0088 · UDR : 0083, 0071 (§3.6) %>
+<%= turbo_stream_toast @notice || @alert, type: @notice ? :success : :info, action: @undo %>
+<%= turbo_stream.refresh(request_id: nil) %>

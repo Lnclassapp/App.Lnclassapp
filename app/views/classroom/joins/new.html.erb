@@ -40,6 +40,12 @@
               <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
               <p><%= t(".classroom_full") %></p>
             </div>
+          <% elsif @preview&.archived %>
+            <%# ADR-0088 : une classe archivée ne se rejoint pas ; l'issue est le choix de sa classe. %>
+            <div class="mt-6">
+              <%= ui_button t(".choose_classroom"), href: new_student_classroom_choice_path, variant: :brand, size: :lg, full: true,
+                            icon: "academic-cap", id: "choose-classroom" %>
+            </div>
           <% elsif current_actor %>
             <%= form_with url: join_classroom_path(@form.link_token), method: :post, id: "join-form", class: "mt-6 space-y-5" do %>
               <%# Challenger phase 5 (E1) : après un refus (403), le focus et le défilement vont à l'alerte, sous l'en-tête fixe. %>

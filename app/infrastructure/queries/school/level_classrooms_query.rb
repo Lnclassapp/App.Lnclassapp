@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::LevelClassroomsQuery
-# Rôle : lignes du bloc « Classes par niveau » de la fiche : nombre de classes de l'année par niveau/série, et la dernière
-# ADR  : 0030, 0041, 0059 · UDR : 0046
+# Rôle : lignes du bloc « Classes par niveau » de la fiche : nombre de classes actives de l'année par niveau/série, et la dernière
+# ADR  : 0030, 0041, 0059, 0088 · UDR : 0046
 module Queries
   module School
     class LevelClassroomsQuery
@@ -12,14 +12,14 @@ module Queries
       Series = Data.define(:id, :slug, :name)
 
       # Lignes : couples ouverts au référentiel pour le cycle de l'établissement (un niveau sans série liée en est un), plus
-      # ceux qui ont des classes de l'année sans être ouverts : la somme des lignes est le total de la fiche. → Block | nil
+      # ceux qui ont des classes actives de l'année sans être ouverts : la somme des lignes est le total de la fiche. → Block | nil
       def call(public_id:, school_year: Entities::Classroom::SchoolYear.current(Date.current))
         school_id, status, cycle = Orm::School.where(public_id:).pick(:id, :status, :cycle)
         return if school_id.nil?
 
         levels = Orm::Level.order(:position).pluck(:id, :slug, :name, :position, :cycle).map { Level.new(*it) }.index_by(&:id)
         series = Orm::Series.pluck(:id, :slug, :name).map { Series.new(*it) }.index_by(&:id)
-        classrooms = Orm::Classroom.where(school_id:, school_year:).pluck(:level_id, :series_id, :public_id, :name)
+        classrooms = Orm::Classroom.where(school_id:, school_year:, status: "active").pluck(:level_id, :series_id, :public_id, :name)
                                    .group_by { it.first(2) }
         open = open_pairs(levels.values, series, cycle)
 

@@ -1,6 +1,6 @@
 <%# 🌐 UI · components/_modal — <dialog> native, déclencheur facultatif, appelée par ui_modal %>
 <%# Rôle : piège du focus, Échap et fond cliquable fournis par le navigateur ; feuille basse sur mobile %>
-<%# UDR  : 0005, 0006, 0054, 0061 (placement: :sheet, déclencheur-lien), 0064 (déclencheur pleine largeur) · Stimulus : modal, autofocus %>
+<%# UDR  : 0005, 0006, 0054, 0061 (placement: :sheet, déclencheur-lien), 0064 (déclencheur pleine largeur), 0083 (described_by) · Stimulus : modal, autofocus %>
 <%# Servie ouverte (open: true), la <dialog> porte `open` dès le HTML : lisible sans JavaScript, que le contrôleur
     rouvre en vraie modale. UDR-0054 : `document_title` nomme l'onglet tant qu'elle est ouverte ; à l'ouverture, le
     contrôleur autofocus vise le premier champ, sinon le bouton de fermeture du pied (jamais la croix). UDR-0061 : la
@@ -11,7 +11,7 @@
     <%= ui_button trigger, variant: trigger_variant, icon: trigger_icon, href: trigger_href, size: trigger_size, full: trigger_full,
           class: trigger_class, data: { action: "modal#open" }, "aria-haspopup": "dialog", "aria-controls": id %>
   <% end %>
-  <dialog id="<%= id %>" <%= "open" if open %> aria-labelledby="<%= id %>-title" data-modal-target="dialog" data-action="click->modal#backdrop close->modal#closed turbo:submit-end->modal#submitEnd modal:opened->autofocus#focus"
+  <dialog id="<%= id %>" <%= "open" if open %> aria-labelledby="<%= id %>-title" <%= tag.attributes("aria-describedby": described_by) %> data-modal-target="dialog" data-action="click->modal#backdrop close->modal#closed turbo:submit-end->modal#submitEnd modal:opened->autofocus#focus"
           data-controller="autofocus" data-autofocus-mode-value="dialog"
           class="ui-dialog <%= [ size_class, placement_class ].compact.join(" ") %>"><% if sheet %>
     <span class="sheet-handle mt-3 lg:hidden" aria-hidden="true"></span><% end %>

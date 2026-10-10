@@ -55,17 +55,89 @@ module Queries
         levels = detail.levels
         assert_equal %w[6ème Tle], levels.map(&:name)
         assert_equal [ "6ème 1" ], levels.first.classrooms.map(&:name)
-        assert_equal [ "Tle A1 1", "Tle D 2", "Tle D 10" ], levels.last.classrooms.map(&:name)
 
         row = levels.last.classrooms.last
         assert_equal SchoolDetailQuery::ClassroomRow.new(public_id: tle_d10.public_id, name: "Tle D 10", link_token: tle_d10.reload.link_token,
                                                          students_count: 2, teacher_names: [ "Yao Brou", "Awa Koné" ],
                                                          status: "active"),
                      row
-        assert_equal [ 0, [], "active" ], levels.last.classrooms.second.to_h.values_at(:students_count, :teacher_names, :status)
+        assert_equal [ 0, [], "active" ], levels.last.classrooms.first.to_h.values_at(:students_count, :teacher_names, :status)
         assert_not_includes SchoolDetailQuery::ClassroomRow.members, :join_code_display
-        assert_equal "archived", levels.last.classrooms.first.status
-        assert_equal 4, detail.classrooms_count
+        assert_equal [ "Tle D 2", "Tle D 10" ], levels.last.classrooms.map(&:name)
+        assert_equal [ "Tle A1 1" ], levels.last.archived.map(&:name)
+        assert_equal 3, detail.classrooms_count
+      end
+
+      # ADR-0088, UDR-0083 : une classe archivée reste visible 7 jours, rangée après les actives ; ensuite, seulement sur demande.
+      def archive_classroom(classroom, ago:)
+        classroom.update_columns(status: "archived", archived_at: NOW - ago)
+      end
+
+      NOW = Time.zone.local(2026, 10, 10, 12)
+
+      def archival_detail(archives: false) = SchoolDetailQuery.new.call(public_id: @school.public_id, school_year: YEAR, archives:, now: NOW)
+
+      test "ADR-0088 : archivée il y a 3 jours, visible en fin de niveau ; archivée il y a 8 jours, masquée et comptée à part" do
+        active = create_classroom(school: @school, level: @sixth, name: "6ème 2", school_year: YEAR)
+        recent = create_classroom(school: @school, level: @sixth, name: "6ème 1", school_year: YEAR)
+        old = create_classroom(school: @school, level: @sixth, name: "6ème 3", school_year: YEAR)
+        archive_classroom(recent, ago: 3.days)
+        archive_classroom(old, ago: 8.days)
+
+        level = archival_detail.levels.sole
+
+        assert_equal [ active.public_id ], level.classrooms.map(&:public_id)
+        assert_equal [ recent.public_id ], level.archived.map(&:public_id)
+        assert_equal [ "archived" ], level.archived.map(&:status)
+        assert_equal [ 1, false ], [ level.hidden_count, archival_detail.archives_shown ]
+      end
+
+      test "ADR-0088 : avec les archives demandées, toutes les archivées sont rangées en fin de niveau, aucune masquée" do
+        create_classroom(school: @school, level: @sixth, name: "6ème 2", school_year: YEAR)
+        archive_classroom(create_classroom(school: @school, level: @sixth, name: "6ème 1", school_year: YEAR), ago: 3.days)
+        archive_classroom(create_classroom(school: @school, level: @sixth, name: "6ème 3", school_year: YEAR), ago: 30.days)
+
+        detail = archival_detail(archives: true)
+
+        assert_equal [ "6ème 1", "6ème 3" ], detail.levels.sole.archived.map(&:name)
+        assert_equal [ true, [ 0 ] ], [ detail.archives_shown, detail.levels.map(&:hidden_count).uniq ]
+      end
+
+      test "ADR-0088 : les compteurs du niveau et de l'établissement ne comptent que les classes actives" do
+        first = create_classroom(school: @school, level: @sixth, name: "6ème 1", school_year: YEAR)
+        second = create_classroom(school: @school, level: @sixth, name: "6ème 2", school_year: YEAR)
+        create_student(classroom: first)
+        create_student(classroom: first)
+        create_student(classroom: second)
+        create_teacher(school: @school, classrooms: [ first, second ])
+        create_teacher(school: @school, classrooms: [ second ])
+        archive_classroom(second, ago: 1.day)
+
+        detail = archival_detail
+        level = detail.levels.sole
+
+        assert_equal [ 1, 1, 2, 1 ], [ detail.classrooms_count, level.classrooms.size, level.students_count, level.teachers_count ]
+        assert_equal [ "6ème 2" ], level.archived.map(&:name)
+        assert_equal 1, level.archived.sole.students_count
+        assert_equal @sixth.slug, level.slug
+      end
+
+      test "ADR-0088 : un niveau n'ayant que des archivées masquées reste listé, sans classe active" do
+        archive_classroom(create_classroom(school: @school, level: @sixth, name: "6ème 1", school_year: YEAR), ago: 9.days)
+
+        level = archival_detail.levels.sole
+
+        assert_equal [ [], [], 1, 0 ], [ level.classrooms, level.archived, level.hidden_count, level.students_count ]
+      end
+
+      test "ADR-0088 : lire la fiche n'écrit rien" do
+        archive_classroom(create_classroom(school: @school, level: @sixth, name: "6ème 1", school_year: YEAR), ago: 9.days)
+        writes = 0
+        counter = ->(*, payload) { writes += 1 if payload[:sql].match?(/\A\s*(INSERT|UPDATE|DELETE)/i) }
+
+        ActiveSupport::Notifications.subscribed(counter, "sql.active_record") { archival_detail }
+
+        assert_equal 0, writes
       end
 
       test "SC-05 : les enseignants de l'établissement, l'école principale d'abord, avec leur matière" do
@@ -140,6 +212,19 @@ module Queries
         create_classroom(school: @school, level: @sixth, name: "6ème 3")
 
         assert_equal [ "6ème 3" ], SchoolDetailQuery.new.call(public_id: @school.public_id).levels.sole.classrooms.map(&:name)
+      end
+
+      test "ADR-0088 : un élève de deux classes du niveau compte une fois dans l'effectif du niveau (confirmation)" do
+        first = create_classroom(school: @school, level: @sixth, name: "6ème 1", school_year: YEAR)
+        second = create_classroom(school: @school, level: @sixth, name: "6ème 2", school_year: YEAR)
+        both = create_student(classroom: first)
+        Orm::ClassroomStudent.create!(classroom: second, student: both, joined_via: "standard", joined_at: Time.current)
+        create_student(classroom: second)
+
+        level = detail.levels.sole
+
+        assert_equal [ 1, 2 ], level.classrooms.map(&:students_count)
+        assert_equal 2, level.students_count
       end
     end
   end
