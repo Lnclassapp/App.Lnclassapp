@@ -18,6 +18,29 @@ module Queries
         assert_nil @query.call(user_id: create_student.id).detail
       end
 
+      test "a student whose only classroom is archived has no detail, and gets it back once the classroom is restored (ADR-0088)" do
+        classroom = create_classroom(name: "Tle D 1")
+        student = create_student(classroom:)
+        repository = Repositories::Classroom::ClassroomRepository.new
+
+        repository.archive(id: classroom.id, at: Time.current)
+        assert_nil @query.call(user_id: student.id).detail
+
+        repository.restore(id: classroom.id, at: Time.current)
+        assert_match(/\ATle D 1 · /, @query.call(user_id: student.id).detail)
+      end
+
+      test "a student with a left archived classroom and an active primary one shows the active one" do
+        archived = create_classroom(name: "Tle D 1")
+        student = create_student(classroom: archived)
+        Orm::ClassroomStudent.where(student:).update_all(primary: false)
+        Orm::ClassroomStudent.create!(classroom: create_classroom(name: "Tle D 2"), student:, primary: true, joined_at: Time.current,
+                                      joined_via: "standard")
+        Repositories::Classroom::ClassroomRepository.new.archive(id: archived.id, at: Time.current)
+
+        assert_match(/\ATle D 2 · /, @query.call(user_id: student.id).detail)
+      end
+
       test "a teacher shows their subject and primary school" do
         teacher = create_teacher(school: create_school(name: "Lycée moderne de Cocody"), material: create_material(name: "Mathématiques"))
 

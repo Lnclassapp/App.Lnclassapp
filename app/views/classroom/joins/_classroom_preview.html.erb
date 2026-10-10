@@ -1,11 +1,14 @@
 <%# 🌐 UI · classroom/joins/_classroom_preview — bandeau « Classe — Établissement » et niveau de la classe rejointe %>
 <%# Rôle : ne montre que ces trois noms : ni effectif, ni enseignant, ni élève, ni identifiant (CL-08) %>
-<%# ADR  : 0041 · UDR : 0009 %>
+<%# ADR  : 0041, 0088 · UDR : 0009 %>
 <div id="classroom-preview" class="flex items-center gap-3 rounded-ln border border-brand/30 bg-brand-soft px-4 py-3">
   <span class="grid size-10 shrink-0 place-items-center rounded-full bg-white text-brand-strong"><%= ui_icon "academic-cap" %></span>
   <div class="min-w-0">
     <p class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".label") %></p>
     <p class="font-display font-extrabold text-ink"><%= preview.classroom_name %> — <%= preview.school_name %></p>
     <p class="text-sm text-mute"><%= t(".level", level: preview.level_name) %></p>
+    <% if preview.archived %>
+      <p id="classroom-archived" role="alert" class="mt-2 text-sm font-medium text-error"><%= t(".archived") %></p>
+    <% end %>
   </div>
 </div>
