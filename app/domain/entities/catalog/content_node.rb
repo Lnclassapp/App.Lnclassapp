@@ -19,6 +19,7 @@ module Entities
 
         text(hash, "name", Essential::NAME_MAX, path) +
           text(hash, "subtitle", Essential::SUBTITLE_MAX, path, required: false) +
+          image_slot_errors(hash["content"], path) +
           children(hash, "exercises", path) { |exercise, child_path| validate_exercise(exercise, path: child_path) }
       end
 
@@ -56,6 +57,12 @@ module Entities
         return [] unless image.is_a?(Hash) && image["description"].is_a?(String)
 
         text(image, "description", nil, "#{path}.image")
+      end
+
+      # ADR-0089 §4.3 : un « [[image: » que le motif ne reconnaît pas ne serait jamais compté ; l'élève le lirait tel quel.
+      def self.image_slot_errors(content, path)
+        malformed = ImageSlot.malformed_count(content)
+        malformed.positive? ? [ error("#{path}.content", "image_slot_malformed", count: malformed) ] : []
       end
 
       def self.structure_errors(question_type, answers, path)
@@ -101,7 +108,7 @@ module Entities
 
       def self.error(path, code, **params) = ImportError.new(path:, code:, params:)
 
-      private_class_method :question_errors, :structure_errors, :image_errors, :taxonomy, :series_errors, :text, :children, :error
+      private_class_method :question_errors, :structure_errors, :image_errors, :image_slot_errors, :taxonomy, :series_errors, :text, :children, :error
     end
   end
 end

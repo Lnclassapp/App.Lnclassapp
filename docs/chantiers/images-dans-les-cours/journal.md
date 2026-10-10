@@ -60,3 +60,17 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 - **Clés retirées** : `teams.essentials.form.content_hint` et l'erreur `content.attachment` (texte seul), remplacée par `content.invalid` (sgid illisible, refus du repository).
 - **Suite système** : `test/system/catalog/essential_images_test.rb` enregistré à 4,6 s (à chaud). Reste ~10,4 s de budget pour les lots C et D.
 - **Environnement local** : `test/system/teams/blog_management_test.rb` échoue aussi sur `HEAD` sans ce lot (ligne 71, ou délai de `drop_generated_image`) : pas causé par le lot, à revoir hors chantier.
+
+## 2026-10-10 — Corrections de revue
+
+Revue du diff réuni (security-reviewer, silent-failure-hunter, pr-test-analyzer).
+
+- **Plus de perte d'image sans message.** Question : une image citée qu'elle ne peut pas prendre (autre exercice, citée deux fois, inconnue, purgée) lève `ExerciseRepositoryPort::ImageUnavailable`. La transaction s'annule et le use case rend `:invalid`, `questions: [:image_unavailable]`. Fiche : un sgid valide hors des images admises rend `content: [:image_unavailable]` au lieu d'être retiré par l'assainisseur.
+- **Suppressions journalisées** : `[EssentialRepository]` et `[ExerciseRepository] images supprimées ids=… public_ids=…`.
+- **Emplacement mal écrit** : un bloc entier `[[image: …]]` que le motif ne lit pas (liste, titre, gras, vide, plus de 150 caractères) est refusé. À l'import, c'est `image_slot_malformed` sur `….content` ; à la publication, `image_slots_malformed` passe avant `image_slots_left`. Au milieu d'une phrase, l'emplacement reste du texte (ADR-0089 §4.3 inchangé).
+- **Cache** : `max-age=3600, private` au lieu de `max-age=31536000, private, immutable`. Après une heure, la revalidation par ETag rejoue la règle de lecture. Une ligne sans son fichier répond 404 et le journal le dit. ADR-0089 §4.5 révisé.
+- **Envois** : `rate_limit` de 60 par minute et par compte sur les deux `create`. Le 429 porte son texte, que `image_upload.js` affiche comme un 422.
+- **Formulaire verrouillé** : l'image d'une question déjà tentée s'affiche en lecture seule avec `image_locked` (UDR-0084 §3.2). La dette du Lot C est soldée.
+- **Clés retirées** : `teams.essentials.form.image_alt_label`, `image_alt_hint` et `image_alt_missing`, que rien ne lisait. La ligne de texte de remplacement de la fiche reprend celle de l'article.
+- **Enseignant** : `ReadsOwnLevel` ne borne que l'élève. Un enseignant reçoit donc pour l'image la même réponse que pour la fiche ou l'exercice qui la porte. Les tests le figent : 200 publié, 404 archivé.
+- **Durées système** : `question_image_test` 5,2 s et `publish_essential_with_images_test` 2,3 s. Le chantier en est à 12,1 s sur 15.

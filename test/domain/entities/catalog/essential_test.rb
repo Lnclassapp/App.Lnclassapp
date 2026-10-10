@@ -36,6 +36,8 @@ module Entities
 
         assert_empty build(content: "<p>Texte</p>").image_publish_errors
         assert_equal({ image_slots_left: 2 }, build(content: "<p>[[image: a]]</p><p>[[image: b]]</p>").image_publish_errors)
+        assert_equal({ image_slots_malformed: 1, image_slots_left: 1 },
+                     build(content: "<p>[[image: a]]</p><ul><li>[[image: b]]</li></ul>").image_publish_errors)
         with_images = build(content: "<p>x</p>")
         with_images.images = [ image.("ok", "Une pile"), image.("ko", "") ]
         assert_equal({ image_alts_blank: [ "ko" ] }, with_images.image_publish_errors)

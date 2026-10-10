@@ -15,7 +15,7 @@ export class EmptyImage extends Error {}
 const STATUS_REASONS = { 401: "expired", 403: "forbidden" }
 
 // A named refusal: reason is a key of the form's image_messages (format, too_many, too_heavy, forbidden, expired, failed), or
-// "server", whose French text, written by the server (422 { error }), is in detail.
+// "server", whose French text, written by the server (422 or 429 { error }), is in detail.
 export class Refusal extends Error {
   constructor(reason, detail = "") {
     super(reason)
@@ -76,7 +76,7 @@ export function uploadImage(file, { url, field = "article_image[file]", onProgre
     request.addEventListener("load", () => {
       const body = request.response || {}
       if (request.status === 201) resolve(body)
-      else if (request.status === 422 && body.error) reject(new Refusal("server", body.error))
+      else if ((request.status === 422 || request.status === 429) && body.error) reject(new Refusal("server", body.error))
       else reject(new Refusal(STATUS_REASONS[request.status] || "failed"))
     })
     for (const type of ["error", "timeout", "abort"]) request.addEventListener(type, () => reject(new Refusal("failed")))

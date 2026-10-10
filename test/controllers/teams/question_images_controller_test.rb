@@ -45,6 +45,16 @@ class Teams::QuestionImagesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "ADR-0049 : au-delà de 60 envois en une minute, 429 en JSON" do
+    sign_in_as @member
+
+    60.times { post teams_question_images_path, params: { question_image: { file: "" } }, headers: JSON_ACCEPT }
+    post teams_question_images_path, params: { question_image: { file: "" } }, headers: JSON_ACCEPT
+
+    assert_response :too_many_requests
+    assert_equal({ "error" => I18n.t("errors.codes.rate_limited") }, json)
+  end
+
   test "le Terrain, l'enseignant et l'élève reçoivent 403, rien n'est stocké" do
     [ create_team_member(team_role: "field"), create_teacher, create_student ].each do |someone|
       sign_in_as someone

@@ -1,7 +1,7 @@
 require "test_helper"
 
 # ADR-0089 §4.5 : une image de fiche se sert sous la règle de lecture de sa fiche : un élève du niveau la lit si la fiche
-# et son cours sont publiés, gardée par son seul navigateur (privé, immuable) ; brouillon, hors niveau ou remplacée : 404 ;
+# et son cours sont publiés, gardée une heure par son seul navigateur puis revalidée ; brouillon, hors niveau ou remplacée : 404 ;
 # sans connexion : jamais.
 class Catalog::EssentialImagesControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -11,7 +11,7 @@ class Catalog::EssentialImagesControllerTest < ActionDispatch::IntegrationTest
     @student = create_student_for(@course)
   end
 
-  test "l'élève du niveau lit l'image d'une fiche publiée, en cache privé immuable, et 304 ensuite sans relire le fichier" do
+  test "l'élève du niveau lit l'image d'une fiche publiée, en cache privé d'une heure, et 304 ensuite sans relire le fichier" do
     sign_in_as @student
     get essential_image_path(@image.public_id) # consomme l'avis de connexion, qui entre dans l'ETag (EtagWithFlash)
 
@@ -20,7 +20,7 @@ class Catalog::EssentialImagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal "image/png", response.media_type
     assert response.body.b == file_fixture("photos/photo.png").binread, "octets servis : #{response.body.bytesize}"
-    assert_equal "max-age=31536000, private, immutable", response.headers["Cache-Control"]
+    assert_equal "max-age=3600, private", response.headers["Cache-Control"]
     etag = response.headers["ETag"]
 
     get essential_image_path(@image.public_id), headers: { "If-None-Match" => etag }
@@ -64,6 +64,31 @@ class Catalog::EssentialImagesControllerTest < ActionDispatch::IntegrationTest
     get essential_image_path(@image.public_id)
 
     assert_redirected_to new_session_path
-    assert_not_equal "image/png", response.media_type
+  end
+
+  # PRD §2 : un enseignant lit l'image d'une fiche comme la fiche elle-même (ReadsOwnLevel ne borne que l'élève).
+  test "un enseignant reçoit pour l'image la même réponse que pour sa fiche ; archivée, 404 comme elle" do
+    sign_in_as create_teacher(material: @course.material)
+
+    get course_essential_path(@course.slug, @essential.slug)
+    page_status = response.status
+    get essential_image_path(@image.public_id)
+    assert_equal [ 200, 200 ], [ page_status, response.status ]
+
+    @essential.update!(status: "archived", archived_at: Time.current)
+    get course_essential_path(@course.slug, @essential.slug)
+    page_status = response.status
+    get essential_image_path(@image.public_id)
+    assert_equal [ 404, 404 ], [ page_status, response.status ]
+  end
+
+  test "une ligne sans son fichier répond 404 et le journal le dit, au lieu d'une image vide" do
+    @image.file.purge
+    sign_in_as @student
+
+    logs = capture_log { get essential_image_path(@image.public_id) }
+
+    assert_response :not_found
+    assert_includes logs, "[Catalog::EssentialImagesController] fichier absent public_id=#{@image.public_id}"
   end
 end

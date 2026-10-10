@@ -1,8 +1,12 @@
 # 🌐 DELIVERY · Teams::QuestionImagesController
 # Rôle : le formulaire d'exercice envoie l'image d'une question ; 201 { public_id, url, width, height }, 422 { error }, 403 et 401 en JSON
-# ADR  : 0026, 0028, 0060, 0089 · UDR : 0084
+# ADR  : 0026, 0028, 0049, 0060, 0089 · UDR : 0084
 module Teams
   class QuestionImagesController < BaseController
+    # ADR-0049 : un compte de l'équipe n'envoie pas plus de 60 images par minute ; les non rattachées attendent la purge.
+    rate_limit to: 60, within: 1.minute, only: :create, by: -> { current_actor.user_id },
+               with: -> { render json: { error: t("errors.codes.rate_limited") }, status: :too_many_requests }
+
     def create
       result = upload.call(actor: current_actor, dto: Dtos::Shared::ContentImageInput.new(file: uploaded_file))
       # La raison est déjà rédigée en français par le serveur : le formulaire l'affiche telle quelle (UDR-0084 §3.2).

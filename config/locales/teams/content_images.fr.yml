@@ -29,9 +29,7 @@ fr:
           one: "1 image à insérer"
           other: "%{count} images à insérer"
         slot: "Image à insérer : %{description}"
-        image_alt_label: "Texte de remplacement de l'image"
-        image_alt_hint: "Ce que montre l'image, en une phrase : il s'affiche si l'image ne charge pas et il est lu aux élèves malvoyants."
-        image_alt_missing: "À compléter"
+        # Les lignes de textes de remplacement reprennent celles de l'article (teams/articles/_image_alt_row, UDR-0067 §3.4.2).
         image_messages:
           refused: "« %{name} » n'a pas été ajoutée. %{reason}"
           format: "Ce format n'est pas accepté : JPEG, PNG ou WebP fixe seulement."
@@ -46,6 +44,9 @@ fr:
           waiting: "Envoi de l'image en cours : la fiche s'enregistrera ensuite."
           not_saved: "La fiche n'est pas enregistrée : une image n'a pas pu être ajoutée. Retirez-la ou renvoyez-la, puis enregistrez de nouveau."
       transition:
+        image_slots_malformed:
+          one: "Un emplacement d'image de cette fiche est mal écrit : « [[image: description]] » doit être seul dans son paragraphe, avec une description de 150 caractères au plus. Corrigez-le ou retirez-le avant de publier."
+          other: "%{count} emplacements d'image de cette fiche sont mal écrits : « [[image: description]] » doit être seul dans son paragraphe, avec une description de 150 caractères au plus. Corrigez-les ou retirez-les avant de publier."
         image_slots_left:
           one: "Il reste 1 image à insérer dans cette fiche."
           other: "Il reste %{count} images à insérer dans cette fiche."

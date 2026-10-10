@@ -20,6 +20,15 @@ module Entities
         assert_empty ImageSlot.scan(html)
       end
 
+      test "malformed_count compte les blocs « [[image: …]] » que le motif ne lit pas : trop long, dans une liste, vide, en gras" do
+        html = "<p>[[image: une pile]]</p><p>[[image: #{'a' * 151}]]</p><ul><li>[[image: une lampe]]</li></ul><p>[[image: ]]</p>" \
+               "<h3><strong>[[image: un titre]]</strong></h3><p>Voir [[image: ceci]] dans la phrase.</p>"
+
+        assert_equal 4, ImageSlot.malformed_count(html)
+        assert_equal 0, ImageSlot.malformed_count("<p>[[image: une pile]]</p>")
+        assert_equal 0, ImageSlot.malformed_count(nil)
+      end
+
       test "un texte nul ou sans emplacement n'en a aucun" do
         assert_empty ImageSlot.scan(nil)
         assert_empty ImageSlot.scan("<p>Rien à insérer.</p>")

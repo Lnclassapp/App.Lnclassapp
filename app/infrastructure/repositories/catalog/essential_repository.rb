@@ -11,6 +11,9 @@ module Repositories
       # Une pièce jointe dont le sgid ne se vérifie pas : l'assainir la retirerait, et l'image qu'elle désignait serait
       # détruite comme n'étant plus citée. Le texte est refusé, rien n'est écrit (comme un article, ADR-0074).
       UNREADABLE = ::Shared::Result.failure(:invalid, errors: { content: [ :invalid ] })
+      # Un sgid valide dont l'image n'est plus admise (celle d'une autre fiche, ou purgée) : l'assainir la retirerait sans
+      # rien dire. Le texte est refusé, rien n'est écrit.
+      IMAGE_UNAVAILABLE = ::Shared::Result.failure(:invalid, errors: { content: [ :image_unavailable ] })
       # Une image citée, prise entre-temps par une autre fiche : le geste se refait (elle ne sera plus admise).
       WRITE_FAILED = ::Shared::Result.failure(:conflict, errors: { base: [ :write_failed ] })
 
@@ -70,6 +73,7 @@ module Repositories
       def save(record, essential)
         canonical = essential.content.nil? ? nil : ActionText::Content.new(essential.content).to_html
         return UNREADABLE if unreadable?(canonical)
+        return IMAGE_UNAVAILABLE unless all_admissible?(canonical, record)
 
         Orm::Essential.transaction(requires_new: true) do
           previous = record.new_record? ? [] : record.images.ids
@@ -78,7 +82,7 @@ module Repositories
           record.save!
           cited = cited_ids(content)
           attach(record, cited, essential.images)
-          Orm::EssentialImage.where(id: previous - cited).each(&:destroy!)
+          destroy_uncited(previous - cited)
         end
         ::Shared::Result.success(map_to_entity(record))
       rescue ActiveRecord::RecordNotUnique
@@ -88,6 +92,20 @@ module Repositories
       end
 
       def admissible(record) = Orm::EssentialImage.where(essential_id: [ nil, record.id ].uniq)
+
+      def all_admissible?(canonical, record)
+        cited = cited_ids(canonical)
+        cited.empty? || admissible(record).where(id: cited).count == cited.size
+      end
+
+      # Les images que le texte ne cite plus partent avec leur fichier ; le journal garde lesquelles.
+      def destroy_uncited(ids)
+        uncited = Orm::EssentialImage.where(id: ids).to_a
+        return if uncited.empty?
+
+        uncited.each(&:destroy!)
+        Rails.logger.info("[EssentialRepository] images supprimées ids=#{uncited.map(&:id)} public_ids=#{uncited.map(&:public_id)}")
+      end
 
       def sanitized_content(canonical, record)
         cited = cited_ids(canonical)

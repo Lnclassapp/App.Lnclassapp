@@ -49,7 +49,7 @@ Contraintes de départ, tirées du grill (memo) :
 
 ## 4. Décision
 
-> **Nous ouvrons les fiches essentielles et les questions aux images JPEG, PNG et WebP fixes, de 300 Ko et 1200 px au plus, envoyées une à une par l'équipe `admin` ou `content` après réduction par le navigateur, vérifiées par `ImageHeader` et privées de leurs métadonnées ; nous les rangeons dans `essential_images` (catalogue) et `question_images` (évaluation) ; l'import annonce une image de fiche par un emplacement `[[image: description]]` dans le texte et une image de question par `image.description` ; une fiche ou un exercice ne se publie pas tant qu'un emplacement reste ou qu'une image n'a pas de texte de remplacement ; une image se sert par un contrôleur Lnclass sous la règle de lecture du contenu qui la porte, en cache navigateur privé et immuable.**
+> **Nous ouvrons les fiches essentielles et les questions aux images JPEG, PNG et WebP fixes, de 300 Ko et 1200 px au plus, envoyées une à une par l'équipe `admin` ou `content` après réduction par le navigateur, vérifiées par `ImageHeader` et privées de leurs métadonnées ; nous les rangeons dans `essential_images` (catalogue) et `question_images` (évaluation) ; l'import annonce une image de fiche par un emplacement `[[image: description]]` dans le texte et une image de question par `image.description` ; une fiche ou un exercice ne se publie pas tant qu'un emplacement reste ou qu'une image n'a pas de texte de remplacement ; une image se sert par un contrôleur Lnclass sous la règle de lecture du contenu qui la porte, en cache navigateur privé d'une heure, revalidé ensuite.**
 
 ### 4.1 Plafonds partagés
 
@@ -87,7 +87,9 @@ Un emplacement est un paragraphe dont tout le texte est `[[image: <description>]
 
 `GET /images/fiches/:public_id` (`Catalog::EssentialImagesController#show`) et `GET /images/questions/:public_id` (`Assessment::QuestionImagesController#show`), sous `AuthenticatedController` :
 - lecture refusée (`404`) si le contenu porteur n'est pas lisible par l'acteur selon la règle du texte (fiche et cours publiés, niveau de l'élève, matière de l'enseignant) ; l'équipe `admin`/`content` lit aussi les brouillons ;
-- publié : `Cache-Control: max-age=31536000, private, immutable`, `ETag` = `public_id` (304 sans lire le bucket) ; brouillon : `private, no-store` ;
+- publié : `Cache-Control: max-age=3600, private`, `ETag` = `public_id` (304 sans lire le bucket, après la règle de lecture) ; brouillon : `private, no-store` ;
+- *Révision du 2026-10-10 (revue de sécurité)* : le `max-age=31536000, immutable` d'abord retenu laissait un élève revoir pendant un an, sans interroger le serveur, l'image d'une fiche archivée ou d'un niveau quitté. Une heure, puis la revalidation rejoue la règle de lecture ;
+- une ligne dont le fichier manque répond `404` et le journalise, jamais une image vide ;
 - jamais de cache **public** : le catalogue est sous connexion (différence avec le blog).
 
 Remplacer une image crée une nouvelle ligne ; l'ancienne, plus citée, est supprimée à l'enregistrement : son adresse répond 404.
@@ -114,8 +116,8 @@ Remplacer une image crée une nouvelle ligne ; l'ancienne, plus citée, est supp
 ### 🔴 Coûts consentis
 
 - **Deux tables, deux stores, deux contrôleurs de service** quasi jumeaux : le prix de l'étanchéité catalogue / évaluation.
-- **Un emplacement est du texte** : une faute de frappe (`[image: …]`) n'est pas reconnue et passe la publication. Le prompt et le validateur de la méthode de rédaction en portent la forme exacte.
-- **Cache privé seulement** : chaque élève télécharge chaque image une fois (pas de relais partagé).
+- **Un emplacement est du texte** : une faute de frappe (`[image: …]`) n'est pas reconnue et passe la publication. Un bloc entier de forme `[[image: …]]` que le motif ne lit pas (liste, titre, gras, vide, trop long) est en revanche refusé à l'import (`image_slot_malformed`) et à la publication (`image_slots_malformed`). Le prompt et le validateur de la méthode de rédaction en portent la forme exacte.
+- **Cache privé d'une heure** : chaque élève revalide chaque image au plus une fois par heure (pas de relais partagé).
 - **300 Ko / 1200 px** : une image très détaillée (carte) peut perdre en lisibilité ; l'équipe la recadre.
 - **Travail manuel** : chaque image est produite dans Claude Design puis envoyée à la main, fiche par fiche.
 - **« Tout publier » peut désormais refuser** un cours entier pour une seule image manquante.
@@ -147,6 +149,6 @@ def self.call(html, image_ids: nil, image_model: "Orm::ArticleImage")
 - `test/domain/use_cases/catalog/publish_essential_test.rb` et `publish_cascade_test.rb` : refus avec emplacement restant ou alt vide.
 - `test/domain/use_cases/assessment/publish_exercise_test.rb` : refus `image_missing`.
 - `test/domain/dtos/shared/content_image_input_test.rb` : 300 Ko, 1200 px, SVG déguisé, EXIF retiré.
-- `test/controllers/catalog/essential_images_controller_test.rb` : 404 brouillon, 404 hors niveau, `Cache-Control` privé immuable.
+- `test/controllers/catalog/essential_images_controller_test.rb` : 404 brouillon, 404 hors niveau, `Cache-Control` privé d'une heure, 404 journalisé sans fichier.
 - `test/infrastructure/repositories/catalog/import_schema_validator_test.rb` : ancien fichier valide, description vide refusée.
 - Contraintes `CHECK` en base : un octet de trop échoue même hors du domaine.

@@ -6,8 +6,8 @@ module Catalog
     include ReadsOwnLevel
 
     # Le catalogue est sous connexion : jamais de cache public ni de relais partagé, seulement le navigateur du lecteur.
-    # Une ligne ne change jamais de fichier : l'adresse est versionnée par construction (ADR-0089 §4.5).
-    PUBLISHED_CACHE = "max-age=31536000, private, immutable"
+    # Une heure, puis revalidation par ETag : la règle de lecture est rejouée, une fiche retirée ne reste pas lisible (ADR-0089 §4.5).
+    PUBLISHED_CACHE = "max-age=3600, private"
     UNPUBLISHED_CACHE = "private, no-store"
 
     def show
@@ -20,12 +20,21 @@ module Catalog
 
     private
 
-    # Image lisible de tous : ETag = public_id ; un navigateur qui l'a déjà reçoit 304 sans que le bucket soit lu.
+    # Image lisible de tous : ETag = public_id ; un navigateur qui l'a déjà reçoit 304, après la règle de lecture, sans que le bucket soit lu.
     def serve(image)
       response.headers["Cache-Control"] = image.public ? PUBLISHED_CACHE : UNPUBLISHED_CACHE
       return if image.public && !stale?(etag: params[:public_id])
 
-      send_data image.data.call, type: image.content_type, disposition: :inline, filename: "image"
+      data = image.data.call
+      return missing_file if data.nil?
+
+      send_data data, type: image.content_type, disposition: :inline, filename: "image"
+    end
+
+    # La ligne existe mais pas son fichier (donnée incohérente) : 404 plutôt qu'une image vide, et une trace pour l'exploitant.
+    def missing_file
+      Rails.logger.error("[Catalog::EssentialImagesController] fichier absent public_id=#{params[:public_id]}")
+      head :not_found
     end
 
     def read

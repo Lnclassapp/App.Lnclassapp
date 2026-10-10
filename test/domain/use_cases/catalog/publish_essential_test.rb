@@ -117,6 +117,17 @@ module UseCases
         assert_empty @audit_log.records
       end
 
+      test "ADR-0089 : un emplacement mal écrit refuse la publication avant les emplacements restants, sans rien écrire" do
+        @essentials = FakeEssentials.new(Essential.new(id: 23, slug: "mal-ecrit", course_id: 1, name: "Mal écrit", status: "draft",
+                                                       course_status: "published",
+                                                       content: "<p>[[image: une pile]]</p><ul><li>[[image: une lampe]]</li></ul>"))
+
+        result = publish("mal-ecrit")
+
+        assert_equal [ :conflict, { base: [ :image_slots_malformed ], count: 1 } ], [ result.code, result.errors ]
+        assert_empty @essentials.transitions
+      end
+
       test "ADR-0089 : une image sans texte de remplacement refuse la publication, sans rien écrire" do
         essential = Essential.new(id: 21, slug: "alts", course_id: 1, name: "Alts", status: "draft", course_status: "published",
                                   content: "<p>Texte</p>")

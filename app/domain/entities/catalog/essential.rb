@@ -32,9 +32,12 @@ module Entities
       # Les emplacements annoncés par l'import et pas encore remplacés par une image (ADR-0089 §4.3).
       def image_slots = ImageSlot.scan(content)
 
-      # Ce qui empêche de publier : emplacements restants et images sans texte de remplacement → { Symbol => valeur }.
+      # Ce qui empêche de publier : emplacements mal écrits, emplacements restants et images sans texte de remplacement
+      # → { Symbol => valeur }.
       def image_publish_errors
         errors = {}
+        malformed = ImageSlot.malformed_count(content)
+        errors[:image_slots_malformed] = malformed if malformed.positive?
         errors[:image_slots_left] = image_slots.size if image_slots.any?
         missing = images.reject(&:alt?).map(&:public_id)
         errors[:image_alts_blank] = missing if missing.any?

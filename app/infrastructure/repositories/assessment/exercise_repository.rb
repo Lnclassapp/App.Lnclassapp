@@ -40,7 +40,7 @@ module Repositories
           Orm::Answer.where(question_id: question_ids).delete_all
           Orm::Question.where(exercise_id: record.id).delete_all
           write_questions(record.id, exercise.questions)
-          Orm::QuestionImage.where(id: previous, question_id: nil).find_each(&:destroy!)
+          destroy_uncited(previous)
         end
         find_by_public_id(public_id: record.public_id)
       end
@@ -98,11 +98,22 @@ module Repositories
         end
       end
 
-      # Seule une image qui n'est à aucune question se rattache : une image d'une autre question reste où elle est.
+      # Seule une image qui n'est à aucune question se rattache : une image d'une autre question reste où elle est, et
+      # l'enregistrement est refusé plutôt que d'écrire la question sans son image.
       def attach_image(question_id, image)
         return if image.nil?
 
-        Orm::QuestionImage.where(public_id: image.public_id, question_id: nil).update_all(question_id:, alt: image.alt.presence)
+        attached = Orm::QuestionImage.where(public_id: image.public_id, question_id: nil).update_all(question_id:, alt: image.alt.presence)
+        raise Ports::Assessment::ExerciseRepositoryPort::ImageUnavailable if attached != 1
+      end
+
+      # Les images que les nouvelles questions ne citent plus partent avec leur fichier ; le journal garde lesquelles.
+      def destroy_uncited(previous)
+        uncited = Orm::QuestionImage.where(id: previous, question_id: nil).to_a
+        return if uncited.empty?
+
+        uncited.each(&:destroy!)
+        Rails.logger.info("[ExerciseRepository] images supprimées ids=#{uncited.map(&:id)} public_ids=#{uncited.map(&:public_id)}")
       end
 
       def map_to_entity(record)

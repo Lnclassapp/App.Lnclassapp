@@ -122,22 +122,37 @@ module Repositories
         assert_equal created.images.map(&:public_id), @repository.find_by_slug(slug: created.slug).images.map(&:public_id)
       end
 
-      test "ADR-0089 : une image d'une autre fiche ou d'un article n'est pas admise ; une image retirée du texte est supprimée" do
-        other = create_essential_image(essential: create_essential)
+      test "ADR-0089 : une image d'article n'est pas admise ; une image retirée du texte est supprimée, et le journal le dit" do
         article = create_article_image
         kept = create_essential_image
         dropped = create_essential_image
         created = @repository.create(essential: essential(content: attachment(kept) + attachment(dropped))).value
 
-        created.content = attachment(kept) + attachment(other) + attachment(article)
-        updated = @repository.update(essential: with_alts(created, kept.public_id => "Gardée")).value
+        created.content = attachment(kept) + attachment(article)
+        logs = capture_log { @updated = @repository.update(essential: with_alts(created, kept.public_id => "Gardée")).value }
 
-        assert_equal [ kept.public_id ], updated.images.map(&:public_id)
+        assert_equal [ kept.public_id ], @updated.images.map(&:public_id)
         assert_equal "Gardée", kept.reload.alt
-        assert_not_includes updated.content, other.attachable_sgid
-        assert_not_includes updated.content, article.attachable_sgid
+        assert_not_includes @updated.content, article.attachable_sgid
         assert_not Orm::EssentialImage.exists?(dropped.id)
+        assert_includes logs, "[EssentialRepository] images supprimées ids=[#{dropped.id}] public_ids=[\"#{dropped.public_id}\"]"
+      end
+
+      test "ADR-0089 : une image d'une autre fiche ou purgée refuse le texte au lieu d'être retirée sans rien dire" do
+        image = create_essential_image
+        created = @repository.create(essential: essential(content: attachment(image))).value
+        other = create_essential_image(essential: create_essential)
+        purged = create_essential_image.tap(&:destroy!)
+
+        [ other, purged ].each do |unavailable|
+          created.content = attachment(image) + attachment(unavailable)
+          result = @repository.update(essential: created)
+
+          assert_equal [ :invalid, { content: [ :image_unavailable ] } ], [ result.code, result.errors ]
+        end
+        assert_equal created.id, image.reload.essential_id
         assert_not_equal created.id, other.reload.essential_id
+        assert_equal [ image.public_id ], @repository.find_by_slug(slug: created.slug).images.map(&:public_id)
       end
 
       test "ADR-0089 : un texte de remplacement absent de la saisie est gardé ; vidé, il s'efface" do
