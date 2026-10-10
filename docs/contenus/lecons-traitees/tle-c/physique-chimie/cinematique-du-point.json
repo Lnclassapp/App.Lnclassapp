@@ -1,0 +1,1837 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Cinématique du point",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Physique-Chimie",
+      "series_name": "C",
+      "essentials": [
+        {
+          "name": "Position, vitesse et accélération d'un mobile",
+          "subtitle": "Décrire un mouvement avec les vecteurs position, vitesse et accélération",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Choisir un référentiel et un repère pour situer un mobile.</li><li>Écrire le vecteur position, puis en déduire les équations horaires et la trajectoire.</li><li>Calculer, par dérivation, les coordonnées et la valeur des vecteurs vitesse et accélération.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le ballon du coup franc.</strong> Un soir de match au stade, une caméra fixée dans les gradins filme le terrain. Le poteau de corner sert de point de départ à toutes les mesures : la ligne de touche part de là dans une direction, la ligne de but dans une autre. À chaque seconde, on note où se trouve le ballon et on trace une flèche qui part du poteau de corner et pointe vers lui. Quand le ballon roule, cette flèche change. Quand le joueur frappe, le ballon part plus vite et dans une autre direction.</p><p><strong>Le pont.</strong> La caméra immobile dans les gradins, c'est le <strong>référentiel</strong> : l'objet par rapport auquel on regarde le mouvement. Le poteau de corner est l'<strong>origine O</strong>, la ligne de touche et la ligne de but sont les axes $(Ox)$ et $(Oy)$, et le chronomètre est le <strong>repère de temps</strong>. La flèche qui va du poteau au ballon, c'est le <strong>vecteur position</strong> $\\overrightarrow{OM}$. La vitesse à laquelle cette flèche change, c'est le <strong>vecteur vitesse</strong> : il indique où file le ballon à cet instant. La frappe fait varier la vitesse : il y a donc une <strong>accélération</strong>.</p><p><strong>La limite de l'image.</strong> Le vecteur vitesse n'est pas la seule « rapidité » : il a aussi une direction et un sens. Et l'accélération ne veut pas dire « aller plus vite » : un ballon qui ralentit, ou qui est dévié par un poteau, a lui aussi une accélération.</p><h2>Ce qu'il faut retenir</h2><p>Le <em>mobile</em> est le point M dont on étudie le mouvement. Dériver une grandeur par rapport au temps, c'est calculer à quel rythme elle change.</p><blockquote><p><strong>Référentiel</strong> : objet de référence par rapport auquel on étudie le mouvement ; on lui associe un repère d'espace $(O ; \\vec i, \\vec j, \\vec k)$ et un repère de temps (origine des dates, unité : la seconde). Le mouvement, et donc la trajectoire, dépend du référentiel.</p><p><strong>Vecteur position</strong> : $\\overrightarrow{OM} = x\\,\\vec i + y\\,\\vec j + z\\,\\vec k$. Les fonctions $x(t)$, $y(t)$, $z(t)$ sont les <strong>équations horaires</strong>. La <strong>trajectoire</strong> est l'ensemble des positions successives du mobile ; on obtient son équation en éliminant $t$ entre les équations horaires.</p><p><strong>Vecteur vitesse</strong> : entre deux dates $t_1$ et $t_2$, le vecteur vitesse moyenne est $\\vec v_m = \\dfrac{\\overrightarrow{M_1M_2}}{t_2 - t_1}$. Le vecteur vitesse (instantanée) est sa limite quand $t_2 - t_1$ tend vers $0$ : $$\\vec v = \\dfrac{d\\overrightarrow{OM}}{dt}, \\quad v_x = \\dfrac{dx}{dt},\\ v_y = \\dfrac{dy}{dt},\\ v_z = \\dfrac{dz}{dt}.$$ Il est tangent à la trajectoire et orienté dans le sens du mouvement. Sa valeur est $v = \\sqrt{v_x^2 + v_y^2 + v_z^2}$, en $\\text{m/s}$.</p><p><strong>Vecteur accélération</strong> : $$\\vec a = \\dfrac{d\\vec v}{dt} = \\dfrac{d^2\\overrightarrow{OM}}{dt^2}, \\quad a_x = \\dfrac{dv_x}{dt},\\ a_y = \\dfrac{dv_y}{dt},\\ a_z = \\dfrac{dv_z}{dt}.$$ Sa valeur est $a = \\sqrt{a_x^2 + a_y^2 + a_z^2}$, en $\\text{m/s}^2$.</p><p><strong>Rappel</strong> : $(t^n)' = n\\,t^{n-1}$ ; la dérivée d'une constante est nulle.</p></blockquote><h2>Exemple résolu</h2><p>Un mobile M se déplace dans un plan. Ses équations horaires sont $x(t) = 4t$ et $y(t) = 2t^2 - 4t$ (unités SI). Étudie-le à la date $t = 2\\ \\text{s}$.</p><ol><li><strong>Position.</strong> On remplace $t$ par $2$ : $x = 8\\ \\text{m}$ et $y = 2 \\times 4 - 8 = 0\\ \\text{m}$. Donc $\\overrightarrow{OM} = 8\\,\\vec i$.</li><li><strong>Vitesse.</strong> On dérive chaque coordonnée : $v_x = 4$ et $v_y = 4t - 4$. À $t = 2\\ \\text{s}$ : $v_x = 4\\ \\text{m/s}$ et $v_y = 4\\ \\text{m/s}$. Sa valeur est $v = \\sqrt{16 + 16} = \\sqrt{32} \\approx 5{,}7\\ \\text{m/s}$. Comme $v_x = v_y$, le vecteur vitesse fait un angle de $45^\\circ$ avec l'axe $(Ox)$.</li><li><strong>Accélération.</strong> On dérive encore : $a_x = 0$ et $a_y = 4\\ \\text{m/s}^2$. Donc $\\vec a = 4\\,\\vec j$, constant.</li><li><strong>Trajectoire.</strong> De $x = 4t$, on tire $t = \\dfrac{x}{4}$. On remplace : $y = 2\\left(\\dfrac{x}{4}\\right)^2 - x = \\dfrac{x^2}{8} - x$. C'est une parabole.</li><li><strong>Vérification.</strong> À $t = 2\\ \\text{s}$, $x = 8$ donne $y = \\dfrac{64}{8} - 8 = 0$ : c'est bien la position trouvée à l'étape 1.</li></ol><h2>Le piège à éviter</h2><p>Croire que « vitesse nulle » veut dire « accélération nulle ». Dans l'exemple, la coordonnée $v_y = 4t - 4$ s'annule à $t = 1\\ \\text{s}$ (le vecteur vitesse est alors horizontal), et $a_y = 4\\ \\text{m/s}^2$ ne s'annule jamais. De même, un ballon lancé vers le haut s'arrête un instant au sommet, mais sa vitesse continue de changer : il est toujours accéléré.</p><p>Pour t'en protéger, rappelle-toi que la vitesse est la dérivée de la position, et l'accélération la dérivée de la vitesse : ce sont deux fonctions différentes, qui peuvent s'annuler à des dates différentes.</p><h2>En une phrase</h2><p>Je choisis un référentiel, j'écris $\\overrightarrow{OM}$, je dérive une fois pour la vitesse et deux fois pour l'accélération.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Le vocabulaire du mouvement",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans le référentiel terrestre, le vecteur vitesse d'un ballon qui roule sur la pelouse est tangent à sa trajectoire et orienté dans le sens du mouvement.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Le vecteur vitesse est la dérivée du vecteur position : il est tangent à la trajectoire, dans le sens du mouvement. Souviens-toi de la caméra : cette flèche montre où le ballon file à cet instant, pas où il se trouve.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle expression définit le vecteur accélération $\\vec a$ d'un mobile M, de vecteur position $\\overrightarrow{OM}$ et de vecteur vitesse $\\vec v$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'accélération est la dérivée de la vitesse : $\\vec a = \\dfrac{d\\vec v}{dt}$, soit la dérivée seconde de $\\overrightarrow{OM}$. Dériver une seule fois $\\overrightarrow{OM}$ donne la vitesse, pas l'accélération.",
+                  "answers": [
+                    {
+                      "content": "$\\vec a = \\dfrac{d\\vec v}{dt} = \\dfrac{d^2\\overrightarrow{OM}}{dt^2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\vec a = \\dfrac{d\\overrightarrow{OM}}{dt}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\vec a = \\dfrac{\\vec v}{t}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\vec a = \\displaystyle\\int \\vec v\\,dt$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À propos du mouvement d'un ballon filmé pendant un match, quelles sont les deux affirmations correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les équations horaires donnent la position à chaque date ; la trajectoire est le chemin, qui change avec le référentiel. L'accélération n'est pas toujours dans le sens du mouvement : un ballon qui ralentit a une accélération de sens opposé à sa vitesse.",
+                  "answers": [
+                    {
+                      "content": "Les équations horaires $x(t)$ et $y(t)$ donnent les coordonnées du ballon à chaque date.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La trajectoire d'un même ballon peut être différente selon le référentiel choisi.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La trajectoire est la courbe qui donne $x$ en fonction du temps.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le vecteur accélération est toujours orienté dans le sens du mouvement.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il existe un référentiel unique dans lequel tout mouvement doit être décrit.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quelle unité du système international s'exprime la valeur de l'accélération ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'accélération mesure une variation de vitesse (en m/s) par seconde : $\\text{m/s}$ divisé par $\\text{s}$ donne $\\text{m/s}^2$. Le m/s est l'unité de la vitesse, pas de l'accélération.",
+                  "answers": [
+                    {
+                      "content": "$\\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\text{m}\\cdot\\text{s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\text{s/m}^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon M est repéré depuis le poteau de corner O (l'origine) : la flèche qui part de O et pointe vers M représente :",
+                  "question_type": "single_choice",
+                  "explanation": "La flèche qui relie l'origine au mobile est le vecteur position. La vitesse est la rapidité avec laquelle cette flèche change ; la trajectoire est l'ensemble des positions successives du ballon, pas une flèche.",
+                  "answers": [
+                    {
+                      "content": "le vecteur position $\\overrightarrow{OM}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "le vecteur vitesse $\\vec v$",
+                      "correct": false
+                    },
+                    {
+                      "content": "la trajectoire du ballon",
+                      "correct": false
+                    },
+                    {
+                      "content": "le vecteur accélération $\\vec a$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Dériver pour trouver vitesse et accélération",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un joueur court le long de la ligne de touche. Son abscisse est $x(t) = 3t + 2$ (unités SI). Quelle est sa coordonnée de vitesse $v_x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On dérive : $v_x = \\dfrac{dx}{dt} = 3\\ \\text{m/s}$, constante. Le terme $+2$ est la position de départ (en mètre) : il disparaît en dérivant. Calculer $x(1) = 5\\ \\text{m}$ donne une position, pas une vitesse.",
+                  "answers": [
+                    {
+                      "content": "$3\\ \\text{m/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3t\\ \\text{m/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un joueur a pour abscisse $x(t) = 2t^2 - 3t$ (unités SI). Quelle est sa coordonnée d'accélération $a_x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$v_x = 4t - 3$ puis $a_x = \\dfrac{dv_x}{dt} = 4\\ \\text{m/s}^2$, constante. L'expression $4t - 3$ est la vitesse (une seule dérivée). La valeur $2$ oublie le facteur 2 de la dérivée de $t^2$.",
+                  "answers": [
+                    {
+                      "content": "$4\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4t - 3$ (en $\\text{m/s}^2$)",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-3\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile a pour coordonnées de vitesse $v_x = 3\\ \\text{m/s}$ et $v_y = 4\\ \\text{m/s}$. Quelle est la valeur de sa vitesse ?",
+                  "question_type": "single_choice",
+                  "explanation": "$v = \\sqrt{v_x^2 + v_y^2} = \\sqrt{9 + 16} = 5\\ \\text{m/s}$. Additionner les coordonnées (7) est faux : la valeur d'un vecteur s'obtient par Pythagore. Le nombre 25 est $v^2$ : il manque la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "$5\\ \\text{m/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$25\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12\\ \\text{m/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile a pour équations horaires $x(t) = 2t$ et $y(t) = 4t^2$ (unités SI). Quelle est l'équation de sa trajectoire ?",
+                  "question_type": "single_choice",
+                  "explanation": "De $x = 2t$ on tire $t = \\dfrac{x}{2}$, donc $y = 4\\left(\\dfrac{x}{2}\\right)^2 = x^2$ : une parabole. Remplacer $t$ par $x$ donnerait $4x^2$ ; poser $t = 2x$ donnerait $16x^2$.",
+                  "answers": [
+                    {
+                      "content": "$y = x^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 4x^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 16x^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 2x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile a pour abscisse $x(t) = t^3 - 3t$ (unités SI). Quelles sont les deux affirmations correctes à la date $t = 2\\ \\text{s}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$v_x = 3t^2 - 3 = 9\\ \\text{m/s}$ et $a_x = 6t = 12\\ \\text{m/s}^2$. Oublier le $-3$ donnerait $v_x = 12$. La valeur $6\\ \\text{m/s}^2$ est le coefficient de $a_x = 6t$ sans le facteur $t$.",
+                  "answers": [
+                    {
+                      "content": "$v_x = 9\\ \\text{m/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a_x = 12\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$v_x = 12\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a_x = 6\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Étudier le mouvement d'un ballon",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un ballon est filmé dans un plan. Ses équations horaires sont $x(t) = 6t$ et $y(t) = -5t^2 + 10t$ (unités SI). Quelle est la valeur de sa vitesse à la date $t = 2\\ \\text{s}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$v_x = 6$ et $v_y = -10t + 10 = -10\\ \\text{m/s}$ à $t = 2\\ \\text{s}$. Donc $v = \\sqrt{36 + 100} = \\sqrt{136} \\approx 11{,}7\\ \\text{m/s}$. Ici $y(2) = 0$ : le ballon est au sol, mais sa vitesse n'est pas nulle.",
+                  "answers": [
+                    {
+                      "content": "$\\sqrt{136} \\approx 11{,}7\\ \\text{m/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$16\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{m/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon a pour équations horaires $x(t) = 6t$ et $y(t) = -5t^2 + 10t$ (unités SI). Quelles sont les deux affirmations correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$v_y = -10t + 10$ s'annule à $t = 1\\ \\text{s}$ : $\\vec v = 6\\,\\vec i$ est horizontal, de valeur $6\\ \\text{m/s}$ (non nulle). Alors $y(1) = -5 + 10 = 5\\ \\text{m}$. Le nombre 10 est le coefficient de $t$, pas l'ordonnée maximale.",
+                  "answers": [
+                    {
+                      "content": "Le vecteur vitesse est horizontal à la date $t = 1\\ \\text{s}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ordonnée maximale atteinte est $5\\ \\text{m}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La vitesse est nulle à la date $t = 1\\ \\text{s}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ordonnée maximale atteinte est $10\\ \\text{m}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon a pour équations horaires $x(t) = 6t$ et $y(t) = -5t^2 + 10t$ (unités SI). Quel est son vecteur accélération ?",
+                  "question_type": "single_choice",
+                  "explanation": "$a_x = 0$ car $v_x = 6$ est constante, et $a_y = \\dfrac{dv_y}{dt} = -10\\ \\text{m/s}^2$. Une coordonnée nulle ne rend pas le vecteur nul. L'expression $-10t + 10$ est $v_y$, avant la seconde dérivation.",
+                  "answers": [
+                    {
+                      "content": "$\\vec a = -10\\,\\vec j$, de valeur $10\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\vec a = 6\\,\\vec i - 10\\,\\vec j$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\vec a = \\vec 0$, car $v_x$ est constante",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\vec a = (-10t + 10)\\,\\vec j$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon a pour équations horaires $x(t) = 6t$ et $y(t) = -5t^2 + 10t$ (unités SI). Quelle est l'équation de sa trajectoire ?",
+                  "question_type": "single_choice",
+                  "explanation": "$t = \\dfrac{x}{6}$, donc $y = -5\\dfrac{x^2}{36} + 10\\dfrac{x}{6} = -\\dfrac{5}{36}x^2 + \\dfrac{5}{3}x$. Attention : $\\left(\\dfrac{x}{6}\\right)^2 = \\dfrac{x^2}{36}$ et non $\\dfrac{x^2}{6}$ ; le terme en $t$ devient $\\dfrac{10x}{6}$.",
+                  "answers": [
+                    {
+                      "content": "$y = -\\dfrac{5}{36}x^2 + \\dfrac{5}{3}x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = -5x^2 + 10x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = -\\dfrac{5}{6}x^2 + \\dfrac{5}{3}x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = -\\dfrac{5}{36}x^2 + 10x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon a pour équations horaires $x(t) = 6t$ et $y(t) = -5t^2 + 10t$ (unités SI). À la date $t = 2\\ \\text{s}$, le ballon revient à l'ordonnée $y = 0$ en se déplaçant vers le bas.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $y(2) = -20 + 20 = 0$ et $v_y(2) = -10\\ \\text{m/s}$ : négative, donc dirigée vers le bas. L'erreur tentante est de croire que $y = 0$ entraîne une vitesse nulle : la position et la vitesse sont deux grandeurs distinctes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Les mouvements rectilignes uniforme et uniformément varié",
+          "subtitle": "Utiliser les équations horaires du MRU et du MRUV",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Reconnaître un mouvement rectiligne uniforme (MRU) et un mouvement rectiligne uniformément varié (MRUV).</li><li>Écrire et utiliser les équations horaires $x(t)$ et $v(t)$ de chacun, en déterminant les constantes à partir des conditions initiales.</li><li>Utiliser la relation entre vitesse et distance, sans le temps, et dire si le mouvement est accéléré ou retardé.</li></ul><h2>L'image pour comprendre</h2><p><strong>Deux courses sur la ligne de touche.</strong> Un ailier trottine le long de la ligne de touche, et des plots sont posés tous les 10 mètres. Il passe devant chaque plot après le même temps : il avance toujours du même nombre de mètres à chaque seconde. Un peu plus loin, un attaquant démarre depuis l'arrêt : après 1 seconde il court à 2 m/s, après 2 secondes à 4 m/s, après 3 secondes à 6 m/s. À chaque seconde, il gagne la même vitesse.</p><p><strong>Le pont.</strong> La ligne de touche est la trajectoire <strong>rectiligne</strong>, dirigée par l'axe $(Ox)$. L'ailier qui franchit les plots à un rythme régulier a une <strong>vitesse constante</strong> : c'est le MRU. L'attaquant qui gagne chaque seconde la même vitesse a une <strong>accélération constante</strong> : c'est le MRUV, dont l'accélération est ici $2\\ \\text{m/s}^2$.</p><p><strong>La limite de l'image.</strong> Un vrai joueur ne peut pas gagner de la vitesse indéfiniment : le MRUV est un modèle valable sur une durée limitée. Et une accélération négative ne veut pas dire que le mobile « recule » : elle veut dire que sa vitesse diminue, tant qu'il avance.</p><h2>Ce qu'il faut retenir</h2><p>Dans un mouvement rectiligne, on dirige l'axe $(Ox)$ suivant la trajectoire. Seules comptent alors $x$, $v_x$ et $a_x$, des valeurs <em>algébriques</em> : le signe donne le sens (positif dans le sens de l'axe). On note $x_0$ et $v_0$ la position et la vitesse à $t = 0$.</p><blockquote><p><strong>MRU</strong> : la vitesse est constante, $v_x = v$, et $a_x = 0$. L'équation horaire est $$x(t) = v\\,t + x_0.$$</p><p><strong>MRUV</strong> : l'accélération $a_x = a$ est constante et non nulle. On prend les primitives, en fixant les constantes par les conditions initiales ($v(0) = v_0$ et $x(0) = x_0$) : $$v(t) = a\\,t + v_0, \\qquad x(t) = \\dfrac{1}{2}a\\,t^2 + v_0\\,t + x_0.$$</p><p><strong>Relation sans le temps</strong> : en éliminant $t = \\dfrac{v - v_0}{a}$, on trouve $$v^2 - v_0^2 = 2a\\,(x - x_0).$$</p><p><strong>Accéléré ou retardé</strong> : le mouvement est accéléré si $v_x$ et $a_x$ ont le même signe (la valeur de la vitesse augmente) et retardé si leurs signes sont contraires (elle diminue).</p></blockquote><h2>Exemple résolu</h2><p>Un joueur frappe un ballon qui roule ensuite sur la pelouse en ligne droite. On prend l'origine O au pied du joueur et l'axe $(Ox)$ dans le sens du tir. À $t = 0$, le ballon part de $x_0 = 0$ avec $v_0 = 10\\ \\text{m/s}$ et son accélération constante est $a = -2\\ \\text{m/s}^2$.</p><ol><li><strong>Équations.</strong> $v(t) = -2t + 10$ et $x(t) = \\dfrac{1}{2}(-2)t^2 + 10t = -t^2 + 10t$.</li><li><strong>Type de mouvement.</strong> $v_x \\gt 0$ et $a_x \\lt 0$ : signes contraires, le mouvement est retardé.</li><li><strong>Arrêt.</strong> $v = 0$ donne $-2t + 10 = 0$, soit $t = 5\\ \\text{s}$.</li><li><strong>Distance d'arrêt.</strong> $x(5) = -25 + 50 = 25\\ \\text{m}$.</li><li><strong>Vérification sans le temps.</strong> $0 - 10^2 = 2 \\times (-2) \\times (x - 0)$, donc $x = 25\\ \\text{m}$ : le résultat est confirmé.</li><li><strong>À $t = 3\\ \\text{s}$.</strong> $v = -6 + 10 = 4\\ \\text{m/s}$ et $x = -9 + 30 = 21\\ \\text{m}$.</li></ol><h2>Le piège à éviter</h2><p>Croire qu'une accélération négative fait reculer le mobile, et appliquer les équations après l'arrêt. Dans l'exemple, la formule donnerait $v \\lt 0$ pour $t \\gt 5\\ \\text{s}$, comme si le ballon revenait vers le joueur. Il n'en est rien : pour un ballon qui roule sur l'herbe, le modèle (accélération constante) cesse d'être valable quand il s'arrête.</p><p>Pour repérer l'erreur, cherche toujours la date où $v = 0$ et arrête l'étude de la phase de freinage à cette date.</p><h2>En une phrase</h2><p>En MRU, la vitesse est constante et $x = vt + x_0$ ; en MRUV, l'accélération est constante, $v = at + v_0$ et $x = \\tfrac{1}{2}at^2 + v_0t + x_0$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Distinguer MRU et MRUV",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans un mouvement rectiligne uniforme, l'accélération est nulle.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. La vitesse est constante, donc sa dérivée est nulle : $a_x = 0$. Pense à l'ailier qui passe devant chaque plot au même rythme : sa vitesse ne change pas, il n'accélère pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle propriété caractérise un mouvement rectiligne uniformément varié (MRUV) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Dans un MRUV, $a_x$ est constante et non nulle : la vitesse varie de la même valeur à chaque seconde, comme l'attaquant qui démarre. Une position qui avance de la même distance à chaque seconde décrit un MRU.",
+                  "answers": [
+                    {
+                      "content": "L'accélération est constante et non nulle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La vitesse est constante.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La position augmente de la même valeur à chaque seconde.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'accélération augmente régulièrement avec le temps.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'équation horaire d'un mouvement rectiligne uniforme de vitesse $v$ et d'abscisse initiale $x_0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "En MRU, la position augmente de $v\\,t$ à partir de $x_0$ : $x(t) = vt + x_0$, fonction affine de $t$. Un terme en $t^2$ n'apparaît qu'avec une accélération non nulle.",
+                  "answers": [
+                    {
+                      "content": "$x(t) = v\\,t + x_0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x(t) = \\dfrac{1}{2}v\\,t^2 + x_0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x(t) = v + x_0\\,t$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x(t) = v\\,x_0\\,t$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À un instant donné, un mobile a la coordonnée de vitesse $v_x = 3\\ \\text{m/s}$ et la coordonnée d'accélération $a_x = -2\\ \\text{m/s}^2$. Quelles sont les deux affirmations correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$v_x \\gt 0$ : le mobile avance dans le sens positif. $v_x$ et $a_x$ de signes contraires : la valeur de la vitesse diminue (mouvement retardé). Un $a_x$ négatif ne veut pas dire reculer : c'est le signe de $v_x$ qui donne le sens.",
+                  "answers": [
+                    {
+                      "content": "Le mobile avance dans le sens positif de l'axe $(Ox)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le mouvement est retardé : la valeur de la vitesse diminue.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le mouvement est accéléré, car $a_x$ est non nulle.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mobile recule, car $a_x$ est négative.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile a une accélération constante $a$ et une vitesse initiale $v_0$. Que vaut sa coordonnée de vitesse $v(t)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Si $\\dfrac{dv}{dt} = a$, une primitive est $at$ ; la constante est fixée par $v(0) = v_0$ : $v(t) = at + v_0$. Le terme $\\tfrac{1}{2}at^2$ appartient à la position $x(t)$, obtenue par une seconde primitive.",
+                  "answers": [
+                    {
+                      "content": "$v(t) = a\\,t + v_0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$v(t) = \\dfrac{1}{2}a\\,t^2 + v_0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$v(t) = a + v_0\\,t$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$v(t) = \\dfrac{v_0}{a\\,t}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Utiliser les équations horaires",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un joueur court en mouvement rectiligne uniforme sur la ligne de touche. À $t = 0$, il est à $x_0 = 5\\ \\text{m}$ et sa vitesse est $v = 4\\ \\text{m/s}$. Où se trouve-t-il à $t = 6\\ \\text{s}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$x(6) = 4 \\times 6 + 5 = 29\\ \\text{m}$. La valeur $24\\ \\text{m}$ est la distance parcourue : elle oublie la position de départ $x_0$. Additionner ($4 + 5$) ou tout multiplier ($4 \\times 6 \\times 5$) n'a pas de sens.",
+                  "answers": [
+                    {
+                      "content": "$29\\ \\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$24\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$120\\ \\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un attaquant démarre sans vitesse initiale avec une accélération constante de $2{,}5\\ \\text{m/s}^2$. Quelle est sa vitesse après $4\\ \\text{s}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$v = at + v_0 = 2{,}5 \\times 4 + 0 = 10\\ \\text{m/s}$. La valeur $40$ vient de $at^2$ ; la valeur $1{,}6$ de $t/a$ : une accélération se multiplie par la durée, elle ne la divise pas.",
+                  "answers": [
+                    {
+                      "content": "$10\\ \\text{m/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$40\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1{,}6\\ \\text{m/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un coureur part du repos avec une accélération constante de $2\\ \\text{m/s}^2$. Quelle distance parcourt-il pendant les $5$ premières secondes ?",
+                  "question_type": "single_choice",
+                  "explanation": "$x = \\dfrac{1}{2}at^2 = \\dfrac{1}{2} \\times 2 \\times 25 = 25\\ \\text{m}$. Le nombre 50 oublie le facteur $\\tfrac{1}{2}$ ; 10 est la vitesse atteinte ($at$), pas une distance ; $12{,}5$ oublie l'accélération.",
+                  "answers": [
+                    {
+                      "content": "$25\\ \\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$50\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12{,}5\\ \\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bus de l'équipe roule à $20\\ \\text{m/s}$ et freine avec une accélération constante de $-2{,}5\\ \\text{m/s}^2$ jusqu'à l'arrêt. Quelle distance parcourt-il pendant le freinage ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $v^2 - v_0^2 = 2a\\,d$ : $0 - 400 = 2 \\times (-2{,}5)\\,d$, donc $d = 80\\ \\text{m}$. Le nombre 160 oublie le facteur 2 ; $8$ est la durée du freinage en secondes ($20/2{,}5$), pas une distance.",
+                  "answers": [
+                    {
+                      "content": "$80\\ \\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$160\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$50\\ \\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile a pour équation horaire $x(t) = 2t^2 - 8t + 3$ (unités SI). Quelles sont les trois affirmations correctes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "On identifie $x = \\tfrac{1}{2}at^2 + v_0t + x_0$ : $\\tfrac{1}{2}a = 2$ donc $a = 4$ ; $v_0 = -8$ ; $x_0 = 3$. Le coefficient de $t^2$ vaut $\\tfrac{1}{2}a$ et non $a$ ; le terme constant est la position initiale, pas la vitesse.",
+                  "answers": [
+                    {
+                      "content": "Son abscisse à $t = 0$ est $x_0 = 3\\ \\text{m}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa vitesse initiale est $v_0 = -8\\ \\text{m/s}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son accélération est $a = 4\\ \\text{m/s}^2$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Son accélération est $a = 2\\ \\text{m/s}^2$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa vitesse initiale est $v_0 = 3\\ \\text{m/s}$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Dates, rencontres et freinage",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un attaquant a pour équation horaire $x(t) = 2t^2 - 8t + 3$ (unités SI), pour $t \\ge 0$. À quelle date s'arrête-t-il un instant pour changer de sens, et où se trouve-t-il alors ?",
+                  "question_type": "single_choice",
+                  "explanation": "$v = 4t - 8$ s'annule à $t = 2\\ \\text{s}$. Alors $x(2) = 8 - 16 + 3 = -5\\ \\text{m}$. À $t = 4\\ \\text{s}$ il repasse en $x = 3\\ \\text{m}$ ; $-9$ vient d'un oubli du carré de $t$ ; $3$ est la position à $t = 0$.",
+                  "answers": [
+                    {
+                      "content": "$t = 2\\ \\text{s}$ et $x = -5\\ \\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$t = 4\\ \\text{s}$ et $x = 3\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$t = 2\\ \\text{s}$ et $x = 3\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$t = 2\\ \\text{s}$ et $x = -9\\ \\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un défenseur A court à vitesse constante : $x_A(t) = 8t$. Un attaquant B part de la position $15\\ \\text{m}$ sans vitesse initiale : $x_B(t) = 15 + t^2$ (unités SI). À quelles dates sont-ils au même endroit ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "On résout $8t = 15 + t^2$, soit $t^2 - 8t + 15 = 0$, c'est-à-dire $(t - 3)(t - 5) = 0$ : $t = 3\\ \\text{s}$ ou $t = 5\\ \\text{s}$. À 3 s ils sont tous deux en $24\\ \\text{m}$ ; à 5 s en $40\\ \\text{m}$. Il y a donc deux rencontres.",
+                  "answers": [
+                    {
+                      "content": "$t = 3\\ \\text{s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$t = 5\\ \\text{s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$t = 15\\ \\text{s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$t = 8\\ \\text{s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$t = 0\\ \\text{s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile a pour équation horaire $x(t) = 2t^2 - 8t + 3$ (unités SI). Que peut-on dire de son mouvement à la date $t = 1\\ \\text{s}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$v_x = 4t - 8 = -4\\ \\text{m/s}$ et $a_x = +4\\ \\text{m/s}^2$ : signes contraires, donc la valeur de la vitesse diminue (retardé). Ce n'est ni le signe de $a_x$ seul, ni celui de $v_x$ seul qui décide, mais leur comparaison.",
+                  "answers": [
+                    {
+                      "content": "Retardé : $v_x = -4\\ \\text{m/s}$ et $a_x = 4\\ \\text{m/s}^2$ sont de signes contraires.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Accéléré : l'accélération $a_x = 4\\ \\text{m/s}^2$ est positive.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Uniforme : l'accélération est constante.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Accéléré : $v_x$ est négative.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sprinter part du repos et garde une accélération constante. Il parcourt $36\\ \\text{m}$ en $6\\ \\text{s}$. Quelle est sa vitesse à l'arrivée ?",
+                  "question_type": "single_choice",
+                  "explanation": "$x = \\tfrac{1}{2}at^2$ donne $36 = 18\\,a$, donc $a = 2\\ \\text{m/s}^2$ et $v = at = 12\\ \\text{m/s}$. La valeur $6$ est la vitesse moyenne $36/6$, moitié de la vitesse finale d'un départ arrêté ; $2$ est l'accélération.",
+                  "answers": [
+                    {
+                      "content": "$12\\ \\text{m/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$72\\ \\text{m/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon roule en ligne droite avec la vitesse initiale $v_0 = 12\\ \\text{m/s}$ et une accélération constante de $-3\\ \\text{m/s}^2$, jusqu'à l'arrêt. Quelles sont les deux affirmations correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$v = -3t + 12 = 0$ donne $t = 4\\ \\text{s}$. Distance : $v^2 - v_0^2 = 2ad$ donne $-144 = -6d$, donc $d = 24\\ \\text{m}$. Le nombre 48 serait $v_0 t$, valable sans freinage ; 36 vient d'un produit au lieu d'un quotient.",
+                  "answers": [
+                    {
+                      "content": "Il s'arrête au bout de $4\\ \\text{s}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il parcourt $24\\ \\text{m}$ avant de s'arrêter.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il parcourt $48\\ \\text{m}$ avant de s'arrêter.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il s'arrête au bout de $36\\ \\text{s}$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le mouvement circulaire uniforme",
+          "subtitle": "Vitesse angulaire, période et accélération centripète",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Repérer un mobile sur un cercle par son abscisse angulaire et calculer sa vitesse angulaire, sa période et sa fréquence.</li><li>Relier la vitesse linéaire $v$ et la vitesse angulaire $\\omega$ par $v = R\\omega$.</li><li>Établir et utiliser l'accélération centripète $a = R\\omega^2 = \\dfrac{v^2}{R}$.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le tour de piste.</strong> À l'entraînement, un coureur tourne sur une piste circulaire, toujours à la même allure. L'entraîneur est debout au centre avec son chronomètre. Il suit le coureur du regard : l'angle de son regard, mesuré depuis une direction fixe, augmente régulièrement. Le temps d'un tour est toujours le même. Si le coureur quittait la piste d'un coup, il filerait tout droit, dans la direction où il courait à cet instant. Mais comme il reste sur le cercle, il tourne à chaque instant vers l'intérieur de la piste.</p><p><strong>Le pont.</strong> L'entraîneur au centre est le point O ; la piste est un cercle de <strong>rayon R</strong>. L'angle de son regard est l'<strong>abscisse angulaire</strong> $\\theta$ ; la rapidité avec laquelle cet angle grandit est la <strong>vitesse angulaire</strong> $\\omega$. Le temps d'un tour est la <strong>période</strong> $T$. La direction « tout droit » est celle du vecteur vitesse : il est <strong>tangent</strong> au cercle. Et le fait de tourner à chaque instant vers l'intérieur est l'<strong>accélération centripète</strong>, dirigée vers O.</p><p><strong>La limite de l'image.</strong> « Toujours à la même allure » veut dire que la <em>valeur</em> de la vitesse est constante, pas que l'accélération est nulle : la direction du vecteur vitesse change, donc il y a une accélération.</p><h2>Ce qu'il faut retenir</h2><p>Un mouvement est <em>circulaire</em> si la trajectoire est un cercle de centre O et de rayon $R$. Il est <em>uniforme</em> si la valeur de la vitesse est constante.</p><blockquote><p><strong>Repérage.</strong> L'abscisse angulaire $\\theta(t)$ est l'angle (en radian) entre une direction de référence et $\\overrightarrow{OM}$. L'abscisse curviligne est $s = R\\theta$ (en mètre).</p><p><strong>Vitesse angulaire</strong> : $\\omega = \\dfrac{d\\theta}{dt}$, en $\\text{rad/s}$. Dans un mouvement circulaire uniforme, $\\omega$ est constante et $\\theta(t) = \\omega t + \\theta_0$.</p><p><strong>Vitesse linéaire</strong> : $v = R\\omega$, en $\\text{m/s}$. Le vecteur vitesse est tangent au cercle, donc perpendiculaire à $\\overrightarrow{OM}$.</p><p><strong>Période et fréquence</strong> : $T = \\dfrac{2\\pi}{\\omega}$ (durée d'un tour, en s) et $f = \\dfrac{1}{T}$ (nombre de tours par seconde, en hertz), donc $\\omega = 2\\pi f$. Pour une fréquence de rotation de $n$ tours par minute : $\\omega = \\dfrac{2\\pi n}{60}$.</p><p><strong>Accélération centripète</strong> : $\\vec a = -\\omega^2\\,\\overrightarrow{OM}$. Elle est dirigée vers le centre O et sa valeur est $$a = R\\omega^2 = \\dfrac{v^2}{R}.$$</p><p><strong>Démonstration.</strong> Avec O pour origine et $\\theta_0 = 0$ : $x = R\\cos\\omega t$ et $y = R\\sin\\omega t$. On dérive : $v_x = -R\\omega\\sin\\omega t$ et $v_y = R\\omega\\cos\\omega t$, donc $v = R\\omega\\sqrt{\\sin^2\\omega t + \\cos^2\\omega t} = R\\omega$. On dérive encore : $a_x = -R\\omega^2\\cos\\omega t = -\\omega^2 x$ et $a_y = -\\omega^2 y$, donc $\\vec a = -\\omega^2\\,\\overrightarrow{OM}$ et $a = R\\omega^2$.</p></blockquote><h2>Exemple résolu</h2><p>Un coureur parcourt une piste circulaire de rayon $R = 25\\ \\text{m}$ en un tour toutes les $T = 20\\ \\text{s}$, à allure constante.</p><ol><li><strong>Vitesse angulaire.</strong> $\\omega = \\dfrac{2\\pi}{T} = \\dfrac{2\\pi}{20} = \\dfrac{\\pi}{10} \\approx 0{,}31\\ \\text{rad/s}$.</li><li><strong>Fréquence.</strong> $f = \\dfrac{1}{T} = 0{,}05\\ \\text{Hz}$, soit un tour toutes les 20 secondes.</li><li><strong>Vitesse.</strong> $v = R\\omega = 25 \\times \\dfrac{\\pi}{10} = 2{,}5\\pi \\approx 7{,}9\\ \\text{m/s}$.</li><li><strong>Accélération.</strong> $a = R\\omega^2 = 25 \\times \\dfrac{\\pi^2}{100} = \\dfrac{\\pi^2}{4} \\approx 2{,}5\\ \\text{m/s}^2$, dirigée vers le centre de la piste. Contrôle : $\\dfrac{v^2}{R} = \\dfrac{(2{,}5\\pi)^2}{25} = \\dfrac{\\pi^2}{4}$.</li><li><strong>Après 5 s.</strong> L'angle balayé est $\\theta = \\omega t = \\dfrac{\\pi}{10} \\times 5 = \\dfrac{\\pi}{2}$ : un quart de tour. L'arc parcouru est $s = R\\theta = 25 \\times \\dfrac{\\pi}{2} \\approx 39\\ \\text{m}$.</li></ol><h2>Le piège à éviter</h2><p>Penser que « la valeur de la vitesse est constante, donc l'accélération est nulle ». Dans l'exemple, la valeur de $\\vec v$ reste $7{,}9\\ \\text{m/s}$, mais $a \\approx 2{,}5\\ \\text{m/s}^2$. Une accélération existe dès que le vecteur vitesse change, que ce soit sa valeur, sa direction, ou les deux.</p><p>Autre erreur fréquente : oublier de convertir. Des tours par minute ne sont pas des radians par seconde : $\\omega = \\dfrac{2\\pi n}{60}$.</p><h2>En une phrase</h2><p>En mouvement circulaire uniforme, $v = R\\omega$, $T = \\dfrac{2\\pi}{\\omega}$, et l'accélération est dirigée vers le centre avec $a = R\\omega^2 = \\dfrac{v^2}{R}$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Vitesse angulaire et accélération centripète",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans un mouvement circulaire uniforme, la valeur de la vitesse est constante, mais le vecteur vitesse change à chaque instant.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. La valeur reste $v = R\\omega$, mais la direction du vecteur, tangent au cercle, tourne avec le mobile. C'est pourquoi un coureur à allure constante dans un virage a quand même une accélération.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un mouvement circulaire uniforme, le vecteur accélération est :",
+                  "question_type": "single_choice",
+                  "explanation": "Le vecteur vitesse tourne vers l'intérieur de la courbe : $\\vec a = -\\omega^2\\,\\overrightarrow{OM}$ est dirigé vers le centre. Elle n'est pas nulle : une vitesse de valeur constante n'impose pas $\\vec a = \\vec 0$ si la direction change.",
+                  "answers": [
+                    {
+                      "content": "dirigé vers le centre du cercle (accélération centripète)",
+                      "correct": true
+                    },
+                    {
+                      "content": "tangent au cercle, dans le sens du mouvement",
+                      "correct": false
+                    },
+                    {
+                      "content": "dirigé vers l'extérieur du cercle",
+                      "correct": false
+                    },
+                    {
+                      "content": "nul, car la valeur de la vitesse est constante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que représente la vitesse angulaire $\\omega$ d'un mobile en mouvement circulaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\omega = \\dfrac{d\\theta}{dt}$ mesure l'angle balayé par seconde, en rad/s. La distance parcourue par seconde est la vitesse linéaire $v = R\\omega$ ; le nombre de tours par seconde est la fréquence $f$ ; l'angle total, c'est $\\theta$ lui-même.",
+                  "answers": [
+                    {
+                      "content": "L'angle balayé par seconde, $\\omega = \\dfrac{d\\theta}{dt}$, en $\\text{rad/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La distance parcourue par seconde, en $\\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre de tours effectués par seconde, en hertz",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'angle total parcouru depuis le départ, en radian",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux relations correctes pour un mouvement circulaire uniforme de rayon $R$, de vitesse angulaire $\\omega$ et de période $T$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Un tour fait $2\\pi$ rad en une période : $T = \\dfrac{2\\pi}{\\omega}$. L'arc d'un tour est $2\\pi R$, donc $v = \\dfrac{2\\pi R}{T} = R\\omega$. L'accélération vaut $R\\omega^2$ ou $\\dfrac{v^2}{R}$, et non $R\\omega$.",
+                  "answers": [
+                    {
+                      "content": "$v = R\\omega$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$T = \\dfrac{2\\pi}{\\omega}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$v = \\dfrac{\\omega}{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$T = 2\\pi\\omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = R\\omega$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au point M d'un mouvement circulaire uniforme de centre O, le vecteur vitesse est :",
+                  "question_type": "single_choice",
+                  "explanation": "Si le coureur quittait la piste, il filerait tout droit selon la tangente : le vecteur vitesse est tangent au cercle, donc perpendiculaire au rayon $OM$. Il est aussi perpendiculaire à $\\vec a$, qui est centripète.",
+                  "answers": [
+                    {
+                      "content": "tangent au cercle, donc perpendiculaire à $\\overrightarrow{OM}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "dirigé suivant $\\overrightarrow{OM}$, vers l'extérieur",
+                      "correct": false
+                    },
+                    {
+                      "content": "dirigé vers le centre O",
+                      "correct": false
+                    },
+                    {
+                      "content": "parallèle au vecteur accélération",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer vitesse angulaire, vitesse et accélération",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un coureur fait un tour de piste circulaire en $T = 20\\ \\text{s}$ à allure constante. Quelle est sa vitesse angulaire ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\omega = \\dfrac{2\\pi}{T} = \\dfrac{2\\pi}{20} = \\dfrac{\\pi}{10} \\approx 0{,}31\\ \\text{rad/s}$. La valeur $0{,}05$ est la fréquence en Hz (tours par seconde) : il manque le facteur $2\\pi$ pour avoir des radians. $2\\pi T$ inverse le rapport.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{\\pi}{10} \\approx 0{,}31\\ \\text{rad/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{1}{20} = 0{,}05\\ \\text{rad/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$40\\pi \\approx 126\\ \\text{rad/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$20\\ \\text{rad/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une roue tourne uniformément à $300\\ \\text{tr/min}$ (tours par minute). Quelle est sa vitesse angulaire en $\\text{rad/s}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\omega = \\dfrac{2\\pi n}{60} = \\dfrac{2\\pi \\times 300}{60} = 10\\pi \\approx 31{,}4\\ \\text{rad/s}$. La valeur $5$ est $300/60$ : des tours par seconde, sans le facteur $2\\pi$. $300$ confond tr/min et rad/s ; $600\\pi$ oublie de diviser par 60.",
+                  "answers": [
+                    {
+                      "content": "$10\\pi \\approx 31{,}4\\ \\text{rad/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$300\\ \\text{rad/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5\\ \\text{rad/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$600\\pi \\approx 1885\\ \\text{rad/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point tourne sur un cercle de rayon $R = 40\\ \\text{m}$ avec la vitesse angulaire $\\omega = 0{,}2\\ \\text{rad/s}$. Quelle est la valeur de sa vitesse ?",
+                  "question_type": "single_choice",
+                  "explanation": "$v = R\\omega = 40 \\times 0{,}2 = 8\\ \\text{m/s}$. Les valeurs $200$ ($R/\\omega$) et $0{,}005$ ($\\omega/R$) sont des rapports inversés ; additionner $R$ et $\\omega$ n'a pas de sens, car leurs unités sont différentes.",
+                  "answers": [
+                    {
+                      "content": "$8\\ \\text{m/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$200\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}005\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$40{,}2\\ \\text{m/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point est animé d'un mouvement circulaire uniforme avec $v = 6\\ \\text{m/s}$ sur un cercle de rayon $R = 12\\ \\text{m}$. Quelle est la valeur de son accélération ?",
+                  "question_type": "single_choice",
+                  "explanation": "$a = \\dfrac{v^2}{R} = \\dfrac{36}{12} = 3\\ \\text{m/s}^2$. La valeur $0{,}5$ est $v/R$ : une vitesse angulaire (en rad/s), pas une accélération. Le nombre 72 ($vR$) n'a pas la bonne unité, et 36 oublie de diviser par $R$.",
+                  "answers": [
+                    {
+                      "content": "$3\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}5\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$72\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$36\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point tourne sur un cercle de rayon $R = 2\\ \\text{m}$ avec une période $T = 4\\ \\text{s}$ (mouvement circulaire uniforme). Quelles sont les trois affirmations correctes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$\\omega = \\dfrac{2\\pi}{4} = \\dfrac{\\pi}{2}$ ; $v = R\\omega = \\pi\\ \\text{m/s}$ ; $a = R\\omega^2 = \\dfrac{\\pi^2}{2} \\approx 4{,}9\\ \\text{m/s}^2$. Le nombre $4\\pi$ est le périmètre $2\\pi R$ en mètres : il faut le diviser par $T$. L'accélération n'est pas nulle.",
+                  "answers": [
+                    {
+                      "content": "$\\omega = \\dfrac{\\pi}{2}\\ \\text{rad/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$v = \\pi\\ \\text{m/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a = \\dfrac{\\pi^2}{2} \\approx 4{,}9\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$v = 4\\pi\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 0$, car la valeur de la vitesse est constante",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Un joueur sur une piste circulaire",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un joueur s'entraîne sur une piste circulaire de rayon $R = 50\\ \\text{m}$ avec la vitesse angulaire constante $\\omega = 0{,}1\\ \\text{rad/s}$. Quelles sont les valeurs de sa vitesse $v$ et de son accélération $a$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$v = R\\omega = 50 \\times 0{,}1 = 5\\ \\text{m/s}$ et $a = R\\omega^2 = 50 \\times 0{,}01 = 0{,}5\\ \\text{m/s}^2$ (ou $\\dfrac{v^2}{R} = \\dfrac{25}{50}$). Une vitesse de valeur constante n'implique pas $a = 0$ ; $0{,}1$ est la valeur de $\\omega$, pas de $a$.",
+                  "answers": [
+                    {
+                      "content": "$v = 5\\ \\text{m/s}$ et $a = 0{,}5\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$v = 5\\ \\text{m/s}$ et $a = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$v = 0{,}5\\ \\text{m/s}$ et $a = 5\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$v = 5\\ \\text{m/s}$ et $a = 0{,}1\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un joueur s'entraîne sur une piste circulaire de rayon $R = 50\\ \\text{m}$ avec la vitesse angulaire constante $\\omega = 0{,}1\\ \\text{rad/s}$. Quelle est la période de son mouvement ?",
+                  "question_type": "single_choice",
+                  "explanation": "$T = \\dfrac{2\\pi}{\\omega} = \\dfrac{2\\pi}{0{,}1} = 20\\pi \\approx 63\\ \\text{s}$. La valeur $10$ est $1/\\omega$ : il manque $2\\pi$. Le nombre 314 est le périmètre $2\\pi R$ en mètres, pas une durée ; $20$ ignore le facteur $\\pi$.",
+                  "answers": [
+                    {
+                      "content": "$20\\pi \\approx 63\\ \\text{s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$10\\ \\text{s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100\\pi \\approx 314\\ \\text{s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$20\\ \\text{s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un joueur s'entraîne sur une piste circulaire de rayon $R = 50\\ \\text{m}$ avec la vitesse angulaire constante $\\omega = 0{,}1\\ \\text{rad/s}$. Il part de l'angle $\\theta_0 = 0$. À la date $t = 5\\pi\\ \\text{s} \\approx 15{,}7\\ \\text{s}$, quelles sont les deux affirmations correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\theta = \\omega t = 0{,}1 \\times 5\\pi = \\dfrac{\\pi}{2}$ : un quart de tour (la période est $20\\pi$ s). Arc : $s = R\\theta = 50 \\times \\dfrac{\\pi}{2} = 25\\pi \\approx 78{,}5\\ \\text{m}$. Le nombre $15{,}7$ est la date, pas une distance.",
+                  "answers": [
+                    {
+                      "content": "Il a tourné d'un quart de tour, soit $\\dfrac{\\pi}{2}\\ \\text{rad}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a parcouru un arc d'environ $78{,}5\\ \\text{m}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a tourné d'un demi-tour.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a parcouru un arc d'environ $15{,}7\\ \\text{m}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un joueur court en mouvement circulaire uniforme sur une piste de rayon $R = 50\\ \\text{m}$ avec $v = 5\\ \\text{m/s}$. S'il double sa vitesse sur la même piste, son accélération double aussi.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. $a = \\dfrac{v^2}{R}$ : si $v$ double, $a$ est multipliée par $2^2 = 4$. Elle passe de $0{,}5$ à $2\\ \\text{m/s}^2$ quand $v$ passe de $5$ à $10\\ \\text{m/s}$. L'erreur est de croire $a$ proportionnelle à $v$ : elle l'est à $v^2$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une roue de rayon $R = 0{,}25\\ \\text{m}$ tourne uniformément à $120\\ \\text{tr/min}$. Quelles sont les trois affirmations correctes pour un point de sa jante ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$120$ tr/min $= 2$ tr/s, donc $\\omega = 4\\pi$ rad/s. Puis $v = R\\omega = 0{,}25 \\times 4\\pi = \\pi\\ \\text{m/s}$ et $a = R\\omega^2 = 0{,}25 \\times 16\\pi^2 = 4\\pi^2$. La valeur $4\\pi$ pour $v$ oublie le rayon ; $\\pi^2$ vient de $v^2$ sans division par $R$.",
+                  "answers": [
+                    {
+                      "content": "$\\omega = 4\\pi \\approx 12{,}6\\ \\text{rad/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$v = \\pi \\approx 3{,}14\\ \\text{m/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a = 4\\pi^2 \\approx 39{,}5\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$v = 4\\pi \\approx 12{,}6\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = \\pi^2 \\approx 9{,}9\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le repère de Frenet",
+          "subtitle": "Accélérations tangentielle et normale d'un mobile sur une trajectoire courbe",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Construire le repère de Frenet en un point d'une trajectoire courbe.</li><li>Décomposer l'accélération en accélération tangentielle $a_t$ et accélération normale $a_n$.</li><li>Calculer $a_t$, $a_n$ et la valeur de $\\vec a$, puis dire si le mouvement est accéléré ou retardé.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le dribbleur.</strong> Un milieu de terrain reçoit le ballon et file en courbe pour contourner un défenseur. À chaque instant, il court dans une direction précise : celle de son buste. Il peut faire deux choses indépendantes. Il peut appuyer sur les jambes pour courir plus vite, ou lever le pied pour ralentir : sa rapidité change, pas sa direction. Et il peut tourner vers l'intérieur de la courbe : sa direction change, pas forcément sa rapidité.</p><p><strong>Le pont.</strong> La direction du buste, c'est le vecteur unitaire $\\vec\\tau$ <strong>tangent</strong> à la trajectoire, orienté dans le sens du mouvement. Le côté vers lequel il tourne, c'est le vecteur unitaire $\\vec n$ <strong>normal</strong> (perpendiculaire à $\\vec\\tau$), orienté vers l'intérieur de la courbe. Appuyer ou lever le pied, c'est l'<strong>accélération tangentielle</strong> $a_t$ ; tourner, c'est l'<strong>accélération normale</strong> $a_n$. Le rayon de la courbe qu'il dessine est le <strong>rayon de courbure</strong> $\\rho$.</p><p><strong>La limite de l'image.</strong> Un joueur n'a pas besoin de « tourner exprès » pour qu'il y ait une accélération normale : dès que la trajectoire est courbe, elle existe, même à allure constante. Et le virage serré (petit $\\rho$) donne une grande accélération normale.</p><h2>Ce qu'il faut retenir</h2><p>Le <strong>repère de Frenet</strong> $(M ; \\vec\\tau, \\vec n)$ est un repère qui se déplace avec le mobile M. $\\vec\\tau$ est unitaire, tangent à la trajectoire, dans le sens du mouvement. $\\vec n$ est unitaire, perpendiculaire à $\\vec\\tau$, dirigé vers l'intérieur de la courbe (vers le centre de courbure). Le <strong>rayon de courbure</strong> $\\rho$ est le rayon du cercle qui épouse la trajectoire au point M (pour un cercle, $\\rho = R$).</p><blockquote><p><strong>Vitesse</strong> : $\\vec v = v\\,\\vec\\tau$, où $v$ est la valeur de la vitesse.</p><p><strong>Accélération</strong> : $\\vec a = a_t\\,\\vec\\tau + a_n\\,\\vec n$ avec $$a_t = \\dfrac{dv}{dt}, \\qquad a_n = \\dfrac{v^2}{\\rho}.$$ Sa valeur est $a = \\sqrt{a_t^2 + a_n^2}$.</p><p><strong>Lecture</strong> : $a_t$ traduit la variation de la <em>valeur</em> de la vitesse ; $a_n$ traduit la variation de sa <em>direction</em>. Le mouvement est accéléré si $a_t \\gt 0$ et retardé si $a_t \\lt 0$.</p><p><strong>Cas connus</strong> : mouvement rectiligne, $\\rho$ infini donc $a_n = 0$ ; MRU : $a_t = 0$ et $a_n = 0$ ; MRUV : $a_n = 0$ et $a_t = a$ constante ; mouvement circulaire uniforme : $a_t = 0$ et $a_n = \\dfrac{v^2}{R} = R\\omega^2$.</p></blockquote><h2>Exemple résolu</h2><p>Un coureur aborde un virage de rayon de courbure $\\rho = 18\\ \\text{m}$. À un instant donné, la valeur de sa vitesse est $v = 6\\ \\text{m/s}$ et elle augmente de $1{,}5\\ \\text{m/s}$ chaque seconde.</p><ol><li><strong>Accélération tangentielle.</strong> $a_t = \\dfrac{dv}{dt} = 1{,}5\\ \\text{m/s}^2$.</li><li><strong>Accélération normale.</strong> $a_n = \\dfrac{v^2}{\\rho} = \\dfrac{36}{18} = 2\\ \\text{m/s}^2$.</li><li><strong>Valeur de l'accélération.</strong> $a = \\sqrt{1{,}5^2 + 2^2} = \\sqrt{2{,}25 + 4} = \\sqrt{6{,}25} = 2{,}5\\ \\text{m/s}^2$.</li><li><strong>Nature du mouvement.</strong> $a_t \\gt 0$ : le mouvement est accéléré.</li><li><strong>Direction de $\\vec a$.</strong> Elle n'est ni tangente ni normale : l'angle $\\alpha$ avec $\\vec\\tau$ vérifie $\\tan\\alpha = \\dfrac{a_n}{a_t} = \\dfrac{2}{1{,}5}$, soit $\\alpha \\approx 53^\\circ$.</li></ol><h2>Le piège à éviter</h2><p>Confondre l'accélération tangentielle $a_t = \\dfrac{dv}{dt}$ (dérivée de la <em>valeur</em> de la vitesse) avec la valeur $a$ du vecteur accélération. En mouvement circulaire uniforme, $v$ est constante donc $a_t = 0$, mais $a = a_n = \\dfrac{v^2}{R}$ n'est pas nulle.</p><p>Pour t'en protéger, demande-toi : « est-ce que je calcule le changement de la rapidité (tangentiel) ou le changement de direction (normal) ? »</p><h2>En une phrase</h2><p>Dans le repère de Frenet, $\\vec a = \\dfrac{dv}{dt}\\,\\vec\\tau + \\dfrac{v^2}{\\rho}\\,\\vec n$ : la première composante change l'allure, la seconde fait tourner.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Les deux composantes de l'accélération",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans le repère de Frenet, le vecteur vitesse d'un mobile est toujours porté par le vecteur unitaire tangent $\\vec\\tau$ : il n'a pas de composante suivant $\\vec n$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Le vecteur vitesse est tangent à la trajectoire : $\\vec v = v\\,\\vec\\tau$, où $v$ est la valeur de la vitesse. C'est l'accélération qui a, en général, deux composantes : l'une suivant $\\vec\\tau$, l'autre suivant $\\vec n$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le repère de Frenet, quelle est l'expression de la composante normale $a_n$ de l'accélération, pour une vitesse de valeur $v$ et un rayon de courbure $\\rho$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'accélération n'est pas nulle : sa composante normale vaut $\\dfrac{v^2}{\\rho}$ : elle mesure le changement de direction de $\\vec v$ et grandit avec le carré de la vitesse et quand le virage est serré. L'expression $\\dfrac{dv}{dt}$ est la composante tangentielle $a_t$.",
+                  "answers": [
+                    {
+                      "content": "$a_n = \\dfrac{v^2}{\\rho}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a_n = \\dfrac{dv}{dt}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a_n = \\dfrac{v}{\\rho}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a_n = v\\,\\rho$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile est animé d'un mouvement circulaire uniforme de rayon $R$ et de vitesse de valeur $v$. Quelles sont les composantes de son accélération dans le repère de Frenet ?",
+                  "question_type": "single_choice",
+                  "explanation": "La valeur $v$ est constante, donc $a_t = \\dfrac{dv}{dt} = 0$. Le cercle a pour rayon de courbure $\\rho = R$, donc $a_n = \\dfrac{v^2}{R}$, non nul. Souviens-toi du dribbleur : il tourne sans changer d'allure.",
+                  "answers": [
+                    {
+                      "content": "$a_t = 0$ et $a_n = \\dfrac{v^2}{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a_t = \\dfrac{v^2}{R}$ et $a_n = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a_t = 0$ et $a_n = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a_t = \\dfrac{dv}{dt} \\neq 0$ et $a_n = \\dfrac{v^2}{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations correctes sur les composantes de l'accélération dans le repère de Frenet ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$a_t = \\dfrac{dv}{dt}$ : le joueur accélère ou freine (la valeur de la vitesse). $a_n = \\dfrac{v^2}{\\rho}$ : il tourne (la direction). Dans un virage, $\\rho$ est fini et $v \\neq 0$, donc $a_n \\neq 0$. Inverser les rôles est l'erreur classique.",
+                  "answers": [
+                    {
+                      "content": "$a_t$ traduit la variation de la valeur de la vitesse.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a_n$ traduit la variation de la direction du vecteur vitesse.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a_t$ traduit la variation de la direction du vecteur vitesse.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a_n$ est nulle dans tout virage.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile suit une trajectoire rectiligne (rayon de courbure infini) avec une vitesse de valeur $v$ non nulle. Que vaut la composante normale $a_n$ de son accélération ?",
+                  "question_type": "single_choice",
+                  "explanation": "$a_n = \\dfrac{v^2}{\\rho}$ avec $\\rho$ infini donne $a_n = 0$. Sur une droite, la direction du vecteur vitesse ne change pas : il n'y a pas de composante normale, et seule $a_t = \\dfrac{dv}{dt}$ peut exister.",
+                  "answers": [
+                    {
+                      "content": "$a_n = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a_n = v^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a_n = \\dfrac{dv}{dt}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "une valeur constante non nulle",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer les accélérations tangentielle et normale",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un joueur court dans un virage de rayon de courbure $\\rho = 25\\ \\text{m}$ avec une vitesse de valeur $v = 10\\ \\text{m/s}$. Quelle est la composante normale $a_n$ de son accélération ?",
+                  "question_type": "single_choice",
+                  "explanation": "$a_n = \\dfrac{v^2}{\\rho} = \\dfrac{100}{25} = 4\\ \\text{m/s}^2$. La valeur $0{,}4$ vient de $\\dfrac{v}{\\rho}$ (vitesse sans carré) ; 100 oublie la division par $\\rho$ ; 250 multiplie $v$ par $\\rho$ au lieu de diviser $v^2$ par $\\rho$.",
+                  "answers": [
+                    {
+                      "content": "$4\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}4\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$250\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile a pour composantes d'accélération $a_t = 3\\ \\text{m/s}^2$ et $a_n = 4\\ \\text{m/s}^2$. Quelle est la valeur de son accélération ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux composantes sont perpendiculaires : $a = \\sqrt{a_t^2 + a_n^2} = \\sqrt{9 + 16} = 5\\ \\text{m/s}^2$. Additionner (7) ignore que $\\vec\\tau$ et $\\vec n$ sont perpendiculaires ; 12 est un simple produit.",
+                  "answers": [
+                    {
+                      "content": "$5\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$25\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile a une vitesse de valeur $v = 8\\ \\text{m/s}$ et une composante normale $a_n = 2\\ \\text{m/s}^2$. Quel est le rayon de courbure de sa trajectoire à cet instant ?",
+                  "question_type": "single_choice",
+                  "explanation": "$a_n = \\dfrac{v^2}{\\rho}$ donne $\\rho = \\dfrac{v^2}{a_n} = \\dfrac{64}{2} = 32\\ \\text{m}$. La valeur $4$ est $\\dfrac{v}{a_n}$ ; $16$ est le produit $v \\times a_n$ ; $0{,}03$ inverse le rapport.",
+                  "answers": [
+                    {
+                      "content": "$32\\ \\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$16\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}03\\ \\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point parcourt un cercle de rayon $R = 10\\ \\text{m}$ avec la vitesse de valeur $v(t) = 2t$ (unités SI). À la date $t = 5\\ \\text{s}$, quelles sont les deux affirmations correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$a_t = \\dfrac{dv}{dt} = 2\\ \\text{m/s}^2$. À $t = 5\\ \\text{s}$, $v = 10\\ \\text{m/s}$ et $a_n = \\dfrac{v^2}{R} = \\dfrac{100}{10} = 10\\ \\text{m/s}^2$. La valeur $a_n = 1$ vient de $\\dfrac{v}{R}$ ; $a_t = 10$ confond la vitesse et sa dérivée.",
+                  "answers": [
+                    {
+                      "content": "$a_t = 2\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a_n = 10\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a_t = 10\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a_n = 1\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un coureur a une vitesse de valeur $v = 4\\ \\text{m/s}$ et une composante tangentielle d'accélération $a_t = -1{,}5\\ \\text{m/s}^2$. Son mouvement est retardé : la valeur de sa vitesse diminue.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $a_t = \\dfrac{dv}{dt} \\lt 0$ : la valeur de la vitesse diminue, donc le mouvement est retardé. Le signe de $a_t$ se lit directement, car $v$ est positive. Il ne dit rien du virage, qui concerne $a_n$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Un cycliste dans un virage",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un cycliste aborde un virage de rayon de courbure $\\rho = 40\\ \\text{m}$. À un instant donné, la valeur de sa vitesse est $v = 12\\ \\text{m/s}$ et elle augmente de $2{,}7\\ \\text{m/s}$ chaque seconde. Quelle est sa composante normale $a_n$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$a_n = \\dfrac{v^2}{\\rho} = \\dfrac{144}{40} = 3{,}6\\ \\text{m/s}^2$. La valeur $0{,}3$ est $\\dfrac{v}{\\rho}$ (carré oublié) ; 144 oublie la division par $\\rho$ ; $4{,}5$ est la valeur totale de $\\vec a$, pas sa composante normale.",
+                  "answers": [
+                    {
+                      "content": "$3{,}6\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}3\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$144\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4{,}5\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cycliste aborde un virage de rayon de courbure $\\rho = 40\\ \\text{m}$. À un instant donné, la valeur de sa vitesse est $v = 12\\ \\text{m/s}$ et elle augmente de $2{,}7\\ \\text{m/s}$ chaque seconde. Quelle est la valeur de son accélération ?",
+                  "question_type": "single_choice",
+                  "explanation": "$a_t = 2{,}7$ et $a_n = 3{,}6\\ \\text{m/s}^2$, donc $a = \\sqrt{7{,}29 + 12{,}96} = \\sqrt{20{,}25} = 4{,}5\\ \\text{m/s}^2$. La somme $2{,}7 + 3{,}6 = 6{,}3$ est fausse : les composantes sont perpendiculaires, on applique Pythagore.",
+                  "answers": [
+                    {
+                      "content": "$4{,}5\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6{,}3\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2{,}7\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3{,}6\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cycliste aborde un virage de rayon de courbure $\\rho = 40\\ \\text{m}$. À un instant donné, la valeur de sa vitesse est $v = 12\\ \\text{m/s}$ et elle augmente de $2{,}7\\ \\text{m/s}$ chaque seconde. Quelles sont les deux affirmations correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$a_t = 2{,}7 \\gt 0$ : la valeur de la vitesse augmente (mouvement accéléré). Comme $a_n = 3{,}6 \\neq 0$ aussi, $\\vec a$ a deux composantes et n'est ni tangent ni normal. Seul le signe de $a_t$ décide « accéléré » ou « retardé ».",
+                  "answers": [
+                    {
+                      "content": "Le mouvement est accéléré, car $a_t \\gt 0$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vecteur accélération n'est ni tangent ni normal à la trajectoire : ses deux composantes sont non nulles.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le vecteur accélération est tangent à la trajectoire, comme le vecteur vitesse.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mouvement est retardé, car $a_n \\gt 0$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point parcourt un cercle de rayon $R = 16\\ \\text{m}$ avec la vitesse de valeur $v(t) = 2t^2$ (unités SI). Quelle est la valeur de son accélération à la date $t = 2\\ \\text{s}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$a_t = \\dfrac{dv}{dt} = 4t = 8\\ \\text{m/s}^2$ ; $v(2) = 8\\ \\text{m/s}$ donc $a_n = \\dfrac{64}{16} = 4\\ \\text{m/s}^2$. Alors $a = \\sqrt{64 + 16} = \\sqrt{80} \\approx 8{,}9\\ \\text{m/s}^2$. Prendre $a_t$ seule (8) oublie le virage ; additionner (12) oublie Pythagore.",
+                  "answers": [
+                    {
+                      "content": "$\\sqrt{80} \\approx 8{,}9\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois affirmations correctes sur l'accélération dans le repère de Frenet ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Rectiligne : $\\rho$ infini donc $a_n = 0$ ; uniforme : $a_t = 0$ ; uniformément varié : $a_t$ constante. Circulaire uniforme : $a_t = 0$ mais $a_n = \\dfrac{v^2}{R} \\neq 0$. Un mouvement courbe a toujours $a_n \\neq 0$ tant que $v \\neq 0$.",
+                  "answers": [
+                    {
+                      "content": "Dans un mouvement rectiligne uniforme, $a_t = 0$ et $a_n = 0$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans un mouvement rectiligne uniformément varié, $a_n = 0$ et $a_t$ est constante.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans un mouvement circulaire uniforme, $a_t = 0$ et $a_n = \\dfrac{v^2}{R}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans un mouvement circulaire uniforme, l'accélération est nulle car $v$ est constante.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans tout mouvement à trajectoire courbe, $a_n = 0$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le mouvement rectiligne sinusoïdal",
+          "subtitle": "Amplitude, pulsation, phase, vitesse et accélération. À compléter : mouvement circulaire non uniforme",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Reconnaître l'équation horaire d'un mouvement rectiligne sinusoïdal et en lire l'amplitude, la pulsation et la phase.</li><li>Calculer la période, la fréquence, la vitesse et l'accélération, et retrouver $a_x = -\\omega^2 x$.</li><li>Déterminer l'amplitude et la phase à l'origine à partir des conditions initiales.</li></ul><h2>L'image pour comprendre</h2><p><strong>L'ombre du ballon.</strong> Pendant l'entraînement de nuit, un ballon est fixé sur la jante d'une roue de vélo qui tourne régulièrement. Un projecteur du stade éclaire la roue de côté, et l'ombre du ballon se dessine sur une ligne droite tracée au sol. L'ombre va et vient le long de cette ligne : elle s'arrête au bout, repart, file au milieu, ralentit de l'autre côté, s'arrête, repart.</p><p><strong>Le pont.</strong> Le rayon de la roue est l'<strong>amplitude</strong> $X_m$ : l'ombre ne s'écarte jamais du milieu de plus de $X_m$. Le temps d'un tour de roue est la <strong>période</strong> $T$ de l'ombre. La vitesse angulaire de la roue est la <strong>pulsation</strong> $\\omega$. L'angle de départ du ballon est la <strong>phase à l'origine</strong> $\\varphi$. Le mouvement de l'ombre est un mouvement <strong>rectiligne sinusoïdal</strong>, car son abscisse est un cosinus.</p><p><strong>La limite de l'image.</strong> Le ballon sur la roue court toujours à la même allure, alors que l'ombre, elle, ralentit vers les bouts et accélère vers le milieu : sa vitesse n'est pas constante. Et pour étudier un mouvement sinusoïdal, on n'a pas besoin d'une roue : c'est l'équation $x(t)$ qui le définit.</p><h2>Ce qu'il faut retenir</h2><p>Un mouvement est <em>rectiligne</em> si la trajectoire est une droite, et <em>sinusoïdal</em> si l'abscisse est une fonction sinusoïdale du temps. L'<em>élongation</em> est l'abscisse $x$ du mobile mesurée à partir du milieu O du mouvement.</p><blockquote><p><strong>Équation horaire</strong> : $x(t) = X_m\\cos(\\omega t + \\varphi)$. $X_m \\gt 0$ est l'<strong>amplitude</strong> (en m), $\\omega$ la <strong>pulsation</strong> (en rad/s), $\\omega t + \\varphi$ la <strong>phase</strong> (en rad) et $\\varphi$ la phase à l'origine des dates. Toujours $-X_m \\le x \\le X_m$.</p><p><strong>Période et fréquence</strong> : $T = \\dfrac{2\\pi}{\\omega}$ (durée d'une oscillation complète, en s) et $f = \\dfrac{1}{T}$ (nombre d'oscillations par seconde, en Hz), donc $\\omega = 2\\pi f$.</p><p><strong>Vitesse</strong> : $v_x = \\dfrac{dx}{dt} = -X_m\\omega\\sin(\\omega t + \\varphi)$. Sa valeur est au plus $X_m\\omega$ : maximale en $x = 0$, nulle en $x = \\pm X_m$.</p><p><strong>Accélération</strong> : $a_x = \\dfrac{dv_x}{dt} = -X_m\\omega^2\\cos(\\omega t + \\varphi)$, soit $$a_x = -\\omega^2 x.$$ Sa valeur est au plus $X_m\\omega^2$ : maximale en $x = \\pm X_m$, nulle en $x = 0$.</p><p><strong>Relation sans le temps</strong> : comme $\\sin^2 + \\cos^2 = 1$, on obtient $v_x^2 = \\omega^2\\left(X_m^2 - x^2\\right)$.</p><p><strong>Conditions initiales</strong> : $x(0) = X_m\\cos\\varphi$ et $v_x(0) = -X_m\\omega\\sin\\varphi$ permettent de trouver $X_m$ et $\\varphi$. La calculatrice doit être en radians.</p></blockquote><h2>Exemple résolu</h2><p>Un point M se déplace sur l'axe $(Ox)$ avec $x(t) = 0{,}05\\cos\\left(4\\pi t + \\dfrac{\\pi}{3}\\right)$ (unités SI).</p><ol><li><strong>Lecture.</strong> Par comparaison avec $X_m\\cos(\\omega t + \\varphi)$ : $X_m = 0{,}05\\ \\text{m}$, $\\omega = 4\\pi \\approx 12{,}6\\ \\text{rad/s}$ et $\\varphi = \\dfrac{\\pi}{3}\\ \\text{rad}$.</li><li><strong>Période et fréquence.</strong> $T = \\dfrac{2\\pi}{4\\pi} = 0{,}5\\ \\text{s}$ et $f = \\dfrac{1}{0{,}5} = 2\\ \\text{Hz}$.</li><li><strong>Position initiale.</strong> $x(0) = 0{,}05\\cos\\dfrac{\\pi}{3} = 0{,}05 \\times 0{,}5 = 0{,}025\\ \\text{m}$.</li><li><strong>Vitesse.</strong> $v_x(t) = -0{,}05 \\times 4\\pi\\sin\\left(4\\pi t + \\dfrac{\\pi}{3}\\right) = -0{,}2\\pi\\sin\\left(4\\pi t + \\dfrac{\\pi}{3}\\right)$. À $t = 0$ : $v_x(0) = -0{,}2\\pi \\times \\dfrac{\\sqrt{3}}{2} \\approx -0{,}54\\ \\text{m/s}$ : le point va vers les $x$ négatifs. La valeur maximale est $X_m\\omega = 0{,}2\\pi \\approx 0{,}63\\ \\text{m/s}$.</li><li><strong>Accélération.</strong> $a_x(t) = -0{,}05 \\times 16\\pi^2\\cos\\left(4\\pi t + \\dfrac{\\pi}{3}\\right)$. La valeur maximale est $X_m\\omega^2 = 0{,}8\\pi^2 \\approx 7{,}9\\ \\text{m/s}^2$. À $t = 0$ : $a_x(0) = -\\omega^2 x(0) = -16\\pi^2 \\times 0{,}025 = -0{,}4\\pi^2 \\approx -3{,}9\\ \\text{m/s}^2$.</li></ol><h2>Le piège à éviter</h2><p>Croire que la vitesse est maximale quand l'élongation est maximale. C'est l'inverse : en $x = \\pm X_m$, le mobile s'arrête pour faire demi-tour ($v_x = 0$), mais son accélération est alors maximale en valeur. La vitesse est maximale quand le mobile passe par le milieu $x = 0$.</p><p>Pour t'en protéger, reviens à l'ombre du ballon : elle s'arrête au bout de la ligne et file au milieu.</p><h2>En une phrase</h2><p>Un mouvement rectiligne sinusoïdal est décrit par $x = X_m\\cos(\\omega t + \\varphi)$ ; sa période est $\\dfrac{2\\pi}{\\omega}$, sa vitesse maximale $X_m\\omega$, et son accélération vérifie $a_x = -\\omega^2 x$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Amplitude, pulsation et phase",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un mobile en mouvement rectiligne sinusoïdal d'équation $x(t) = X_m\\cos(\\omega t + \\varphi)$ reste toujours entre les abscisses $-X_m$ et $+X_m$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Le cosinus est compris entre $-1$ et $1$, donc $-X_m \\le x \\le X_m$. $X_m$ est l'amplitude. Sur le sol, l'ombre du ballon ne sort jamais d'un segment dont la longueur est le diamètre de la roue.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle relation lie la pulsation $\\omega$ et la période $T$ d'un mouvement rectiligne sinusoïdal ?",
+                  "question_type": "single_choice",
+                  "explanation": "Après une période, la phase $\\omega t$ a augmenté de $2\\pi$ : $\\omega T = 2\\pi$, soit $\\omega = \\dfrac{2\\pi}{T}$. La quantité $\\dfrac{1}{T}$ est la fréquence $f$ en hertz ; il faut multiplier par $2\\pi$ pour obtenir la pulsation en rad/s.",
+                  "answers": [
+                    {
+                      "content": "$\\omega = \\dfrac{2\\pi}{T}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\omega = \\dfrac{T}{2\\pi}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\omega = 2\\pi\\,T$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\omega = \\dfrac{1}{T}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour un mouvement d'équation horaire $x(t) = X_m\\cos(\\omega t + \\varphi)$, quelle est la coordonnée d'accélération $a_x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$v_x = -X_m\\omega\\sin(\\omega t + \\varphi)$, puis $a_x = -X_m\\omega^2\\cos(\\omega t + \\varphi) = -\\omega^2 x$. Le signe moins montre que l'accélération est de sens contraire à l'élongation. Deux dérivations donnent deux fois le facteur $\\omega$.",
+                  "answers": [
+                    {
+                      "content": "$a_x = -\\omega^2 x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a_x = \\omega^2 x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a_x = -\\omega\\,x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a_x = -\\dfrac{x}{\\omega^2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile est animé d'un mouvement rectiligne sinusoïdal de centre O. Quand il passe par l'origine $x = 0$, quelles sont les deux affirmations correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "En $x = 0$, $\\cos(\\omega t + \\varphi) = 0$, donc $|\\sin| = 1$ : $|v_x| = X_m\\omega$ est maximale, et $a_x = -\\omega^2 x = 0$. C'est l'inverse aux extrémités $x = \\pm X_m$ : vitesse nulle et accélération maximale en valeur.",
+                  "answers": [
+                    {
+                      "content": "La valeur de la vitesse est maximale.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'accélération est nulle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La vitesse est nulle.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La valeur de l'accélération est maximale.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ballon est fixé à la jante d'une roue qui tourne régulièrement avec une période de $0{,}5\\ \\text{s}$. Un projecteur projette son ombre sur une ligne droite du sol. Quelle est la période du mouvement de l'ombre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Quand la roue a fait un tour, l'ombre est revenue à la même position avec la même vitesse. La période de l'ombre est donc celle de la roue. Le rayon de la roue devient l'amplitude, et sa vitesse angulaire devient la pulsation.",
+                  "answers": [
+                    {
+                      "content": "$0{,}5\\ \\text{s}$, la même que celle de la roue",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}25\\ \\text{s}$, la moitié de celle de la roue",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1\\ \\text{s}$, le double de celle de la roue",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ombre ne se répète pas : elle n'a pas de période.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Lire et utiliser une équation horaire",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un mobile a pour équation horaire $x(t) = 0{,}12\\cos(5\\pi t)$ (unités SI). Quelles sont son amplitude et sa période ?",
+                  "question_type": "single_choice",
+                  "explanation": "$X_m = 0{,}12\\ \\text{m}$ (coefficient du cosinus) et $T = \\dfrac{2\\pi}{\\omega} = \\dfrac{2\\pi}{5\\pi} = 0{,}4\\ \\text{s}$. La valeur $2{,}5$ est la fréquence en Hz ($\\dfrac{1}{T}$), pas la période. La valeur $0{,}24\\ \\text{m}$ est le débattement total, de $-X_m$ à $+X_m$.",
+                  "answers": [
+                    {
+                      "content": "$0{,}12\\ \\text{m}$ et $0{,}4\\ \\text{s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}12\\ \\text{m}$ et $2{,}5\\ \\text{s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5\\pi\\ \\text{m}$ et $0{,}4\\ \\text{s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}24\\ \\text{m}$ et $0{,}4\\ \\text{s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile a pour équation horaire $x(t) = 0{,}12\\cos(5\\pi t)$ (unités SI). Quelle est la valeur maximale de sa vitesse ?",
+                  "question_type": "single_choice",
+                  "explanation": "$v_x = -X_m\\omega\\sin(5\\pi t)$, donc $v_{\\max} = X_m\\omega = 0{,}12 \\times 5\\pi = 0{,}6\\pi \\approx 1{,}9\\ \\text{m/s}$. La valeur $3\\pi^2$ est $X_m\\omega^2$, l'accélération maximale (en $\\text{m/s}^2$). Diviser par $\\omega$ est faux : dériver multiplie par $\\omega$.",
+                  "answers": [
+                    {
+                      "content": "$0{,}6\\pi \\approx 1{,}9\\ \\text{m/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3\\pi^2 \\approx 29{,}6\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}12\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{0{,}12}{5\\pi} \\approx 7{,}6 \\times 10^{-3}\\ \\text{m/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile en mouvement rectiligne sinusoïdal a une pulsation $\\omega = 10\\ \\text{rad/s}$. Quand son abscisse est $x = 0{,}03\\ \\text{m}$, quelle est sa coordonnée d'accélération ?",
+                  "question_type": "single_choice",
+                  "explanation": "$a_x = -\\omega^2 x = -100 \\times 0{,}03 = -3\\ \\text{m/s}^2$. Le signe est négatif : l'accélération est de sens contraire à l'élongation. La valeur $-0{,}3$ oublie le carré de $\\omega$ ; $-3 \\times 10^{-4}$ divise par $\\omega^2$ au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "$-3\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+3\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-0{,}3\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-3 \\times 10^{-4}\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile a pour équation horaire $x(t) = X_m\\cos(\\omega t + \\varphi)$ avec $\\varphi$ dans l'intervalle $]-\\pi\\,;\\pi]$. À $t = 0$, il est en $x = 0$ et se déplace dans le sens positif de l'axe. Que vaut $\\varphi$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$x(0) = X_m\\cos\\varphi = 0$ donne $\\varphi = \\pm\\dfrac{\\pi}{2}$. Et $v_x(0) = -X_m\\omega\\sin\\varphi \\gt 0$ impose $\\sin\\varphi \\lt 0$, donc $\\varphi = -\\dfrac{\\pi}{2}$. Avec $+\\dfrac{\\pi}{2}$ la vitesse serait négative ; $0$ et $\\pi$ donnent $x(0) = \\pm X_m \\neq 0$.",
+                  "answers": [
+                    {
+                      "content": "$-\\dfrac{\\pi}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\dfrac{\\pi}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\pi$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile a pour équation horaire $x(t) = 0{,}08\\cos(20\\pi t)$ (unités SI). Quelles sont les trois affirmations correctes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$T = \\dfrac{2\\pi}{20\\pi} = 0{,}1\\ \\text{s}$, donc $f = \\dfrac{1}{T} = 10\\ \\text{Hz}$. Le nombre $20\\pi$ est la pulsation en rad/s : ce n'est ni une fréquence ni une période. La fréquence est le nombre d'oscillations par seconde.",
+                  "answers": [
+                    {
+                      "content": "Son amplitude est $0{,}08\\ \\text{m}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa période est $0{,}1\\ \\text{s}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa fréquence est $10\\ \\text{Hz}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa fréquence est $20\\pi\\ \\text{Hz}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa période est $20\\pi\\ \\text{s}$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Étudier un mouvement sinusoïdal complet",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un mobile a pour équation horaire $x(t) = 0{,}06\\cos\\left(5\\pi t - \\dfrac{\\pi}{2}\\right)$ (unités SI). Quelle est sa coordonnée de vitesse à la date $t = 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$v_x = -0{,}06 \\times 5\\pi\\sin\\left(5\\pi t - \\dfrac{\\pi}{2}\\right)$. À $t = 0$ : $\\sin\\left(-\\dfrac{\\pi}{2}\\right) = -1$, donc $v_x(0) = +0{,}3\\pi \\approx 0{,}94\\ \\text{m/s}$. Le mobile passe par l'origine, où sa vitesse est maximale : $x = 0$ ne veut pas dire $v = 0$.",
+                  "answers": [
+                    {
+                      "content": "$+0{,}3\\pi \\approx +0{,}94\\ \\text{m/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0\\ \\text{m/s}$, car $x(0) = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-0{,}3\\pi \\approx -0{,}94\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}06\\ \\text{m/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile a pour équation horaire $x(t) = 0{,}06\\cos\\left(5\\pi t - \\dfrac{\\pi}{2}\\right)$ (unités SI). À quelle date atteint-il pour la première fois, après $t = 0$, l'abscisse $x = +0{,}06\\ \\text{m}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut $\\cos\\left(5\\pi t - \\dfrac{\\pi}{2}\\right) = 1$, soit $5\\pi t - \\dfrac{\\pi}{2} = 0$ et $t = 0{,}1\\ \\text{s}$, quart de la période $0{,}4\\ \\text{s}$. À $0{,}2\\ \\text{s}$ il repasse par l'origine ; à $0{,}4\\ \\text{s}$ il est revenu à son point de départ.",
+                  "answers": [
+                    {
+                      "content": "$0{,}1\\ \\text{s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}2\\ \\text{s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}4\\ \\text{s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}05\\ \\text{s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile a pour équation horaire $x(t) = 0{,}06\\cos\\left(5\\pi t - \\dfrac{\\pi}{2}\\right)$ (unités SI). Quelle est sa coordonnée d'accélération à la date $t = 0{,}1\\ \\text{s}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "À $t = 0{,}1\\ \\text{s}$, $x = +0{,}06\\ \\text{m}$ (extrémité). $a_x = -\\omega^2 x = -25\\pi^2 \\times 0{,}06 = -1{,}5\\pi^2 \\approx -14{,}8\\ \\text{m/s}^2$. À l'extrémité, la vitesse est nulle mais la valeur de l'accélération est maximale : ne pas confondre avec l'origine.",
+                  "answers": [
+                    {
+                      "content": "$-1{,}5\\pi^2 \\approx -14{,}8\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+14{,}8\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-0{,}3\\pi \\approx -0{,}94\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile a pour équation horaire $x(t) = 0{,}06\\cos\\left(5\\pi t - \\dfrac{\\pi}{2}\\right)$ (unités SI). Quelle est la valeur de sa vitesse quand son abscisse est $x = 0{,}03\\ \\text{m}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$v^2 = \\omega^2\\left(X_m^2 - x^2\\right) = 25\\pi^2 \\times (0{,}0036 - 0{,}0009) = 0{,}0675\\,\\pi^2$, donc $v \\approx 0{,}82\\ \\text{m/s}$. À mi-amplitude, la vitesse n'est pas la moitié de $v_{\\max}$ ($0{,}47$) : la relation n'est pas linéaire.",
+                  "answers": [
+                    {
+                      "content": "$\\approx 0{,}82\\ \\text{m/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}3\\pi \\approx 0{,}94\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}15\\pi \\approx 0{,}47\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{m/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile a pour équation horaire $x(t) = 0{,}06\\cos\\left(5\\pi t - \\dfrac{\\pi}{2}\\right)$ (unités SI). Quelles sont les trois affirmations correctes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$T = \\dfrac{2\\pi}{5\\pi} = 0{,}4\\ \\text{s}$ et $f = 2{,}5\\ \\text{Hz}$. $a_{\\max} = X_m\\omega^2 = 0{,}06 \\times 25\\pi^2 = 1{,}5\\pi^2$. La vitesse est maximale en $x = 0$ (valeur $X_m\\omega = 0{,}3\\pi\\ \\text{m/s}$) et nulle en $x = \\pm X_m$.",
+                  "answers": [
+                    {
+                      "content": "Sa période est $0{,}4\\ \\text{s}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa fréquence est $2{,}5\\ \\text{Hz}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La valeur maximale de son accélération est $1{,}5\\pi^2 \\approx 14{,}8\\ \\text{m/s}^2$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La valeur de sa vitesse est maximale quand $x = \\pm 0{,}06\\ \\text{m}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La valeur maximale de sa vitesse est $0{,}06\\ \\text{m/s}$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

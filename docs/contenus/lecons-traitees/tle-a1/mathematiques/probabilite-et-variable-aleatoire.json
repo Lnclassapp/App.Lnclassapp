@@ -1,0 +1,1731 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Probabilité et variable aléatoire",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "A1",
+      "essentials": [
+        {
+          "name": "Expérience aléatoire, univers et événements",
+          "subtitle": "Décrire les issues et construire des événements : contraire, « et », « ou »",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Décrire l'univers d'une expérience aléatoire en listant toutes ses issues.</li>\n<li>Écrire un événement comme un ensemble d'issues.</li>\n<li>Construire l'événement contraire, l'intersection et la réunion de deux événements.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le tirage au sort de l'arbitre (l'expérience, les issues, l'univers).</strong> Avant le coup d'envoi, l'arbitre lance une pièce pour savoir quelle équipe choisit son côté. Personne ne sait d'avance si la pièce va tomber sur pile ou sur face. Mais tout le monde connaît la liste de ce qui peut arriver : pile ou face, rien d'autre.</p>\n<p><em>Le pont.</em> Le lancer de la pièce, c'est une <strong>expérience aléatoire</strong> : on connaît tous les résultats possibles, mais pas celui qu'on va obtenir. Chaque résultat possible est une <strong>issue</strong>. La liste de toutes les issues est l'<strong>univers</strong>, noté $\\Omega$ (la lettre grecque « oméga »). Ici, $\\Omega = \\{\\text{pile} ; \\text{face}\\}$.</p>\n<p><em>Où l'image s'arrête.</em> L'univers doit contenir toutes les issues possibles, sans en oublier et sans les compter deux fois. Il ne dépend pas de ce que tu souhaites : il décrit seulement ce qui peut se passer.</p>\n<p><strong>2. La tombola du stade (les événements).</strong> À l'entrée du stade, un supporter tire un ticket numéroté de 1 à 20 dans une urne. Il gagne un maillot si son numéro est un multiple de 5. « Gagner un maillot », ce n'est pas un seul ticket : ce sont les tickets 5, 10, 15 et 20. Un autre supporter gagne une écharpe si son numéro est un multiple de 3 : ce sont les tickets 3, 6, 9, 12, 15 et 18.</p>\n<p><em>Le pont.</em> Un <strong>événement</strong> est un groupe d'issues : une partie de l'univers. Ici, $A = \\{5 ; 10 ; 15 ; 20\\}$ et $B = \\{3 ; 6 ; 9 ; 12 ; 15 ; 18\\}$. L'événement est <strong>réalisé</strong> quand l'issue obtenue fait partie du groupe. « Ne pas gagner de maillot », c'est l'<strong>événement contraire</strong> de $A$, noté $\\overline{A}$ : tous les autres tickets. « Gagner le maillot <em>et</em> l'écharpe », c'est l'<strong>intersection</strong> $A \\cap B$ : les tickets qui sont dans les deux groupes, ici seulement le 15. « Gagner le maillot <em>ou</em> l'écharpe », c'est la <strong>réunion</strong> $A \\cup B$ : les tickets qui sont dans au moins un des deux groupes.</p>\n<p><em>Où l'image s'arrête.</em> Un événement n'est pas une issue : « multiple de 5 » regroupe quatre issues. Et en mathématiques, « ou » est large : le ticket 15 fait partie de $A \\cup B$, même s'il gagne les deux lots.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Expérience aléatoire.</strong> Une expérience dont on connaît les résultats possibles, les <strong>issues</strong>, sans pouvoir prévoir celui qui sera obtenu. L'ensemble des issues est l'<strong>univers</strong> $\\Omega$. Dans ce cours, $\\Omega$ est toujours fini.</p>\n<p><strong>Événement.</strong> Un événement est une partie de $\\Omega$. Un événement qui ne contient qu'une issue est dit <strong>élémentaire</strong>. L'événement <strong>certain</strong> est $\\Omega$ (toujours réalisé). L'événement <strong>impossible</strong> est l'ensemble vide $\\emptyset$ (jamais réalisé).</p>\n<ul>\n<li><strong>Contraire.</strong> $\\overline{A}$ est formé des issues de $\\Omega$ qui ne sont pas dans $A$.</li>\n<li><strong>Intersection.</strong> $A \\cap B$ (« $A$ et $B$ ») est formé des issues qui sont dans $A$ et dans $B$.</li>\n<li><strong>Réunion.</strong> $A \\cup B$ (« $A$ ou $B$ ») est formé des issues qui sont dans $A$, ou dans $B$, ou dans les deux.</li>\n<li><strong>Incompatibles.</strong> $A$ et $B$ sont incompatibles quand ils n'ont aucune issue en commun : $A \\cap B = \\emptyset$.</li>\n</ul>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>On lance un dé à six faces. $A$ : « le nombre est pair ». $B$ : « le nombre est supérieur ou égal à 4 ». Décrire $\\Omega$, $A$, $B$, $\\overline{A}$, $A \\cap B$ et $A \\cup B$.</strong></p>\n<ol>\n<li>Les faces portent les numéros de 1 à 6 : $\\Omega = \\{1 ; 2 ; 3 ; 4 ; 5 ; 6\\}$.</li>\n<li>Les nombres pairs sont 2, 4 et 6 : $A = \\{2 ; 4 ; 6\\}$. Les nombres au moins égaux à 4 sont 4, 5 et 6 : $B = \\{4 ; 5 ; 6\\}$.</li>\n<li>Le contraire de $A$ regroupe les issues de $\\Omega$ qui ne sont pas dans $A$ : $\\overline{A} = \\{1 ; 3 ; 5\\}$.</li>\n<li>Les issues communes à $A$ et $B$ sont 4 et 6 : $A \\cap B = \\{4 ; 6\\}$.</li>\n<li>On regroupe les issues de $A$ et de $B$, sans répéter 4 et 6 : $A \\cup B = \\{2 ; 4 ; 5 ; 6\\}$.</li>\n</ol>\n<p><strong>Dans la tombola (tickets de 1 à 20), $A$ et $B$ sont-ils incompatibles ?</strong> Non : le ticket 15 est un multiple de 5 et de 3, donc $A \\cap B = \\{15\\}$ n'est pas vide.</p>\n<h2>Le piège à éviter</h2>\n<p>Confondre l'<strong>issue</strong> et l'<strong>événement</strong>. Le numéro 10 est une issue. « Le numéro est un multiple de 5 » est un événement, qui contient plusieurs issues. On écrit $10 \\in A$ (l'issue 10 appartient à l'événement $A$), pas $10 = A$.</p>\n<p>Autre piège : croire que « incompatibles » veut dire « contraires ». Deux événements contraires sont toujours incompatibles, mais la réciproque est fausse. Dans un dé, « obtenir 1 » et « obtenir 2 » sont incompatibles, sans être contraires : il reste les issues 3, 4, 5 et 6.</p>\n<p>Comment le repérer : liste toujours les issues de chaque événement entre accolades avant de calculer. Tu vois alors directement ce qui est commun et ce qui manque.</p>\n<h2>En une phrase</h2>\n<p>Une expérience aléatoire a un univers $\\Omega$ d'issues, un événement est un groupe d'issues, et on le combine avec le contraire $\\overline{A}$, le « et » $A \\cap B$ et le « ou » $A \\cup B$ en travaillant sur les listes d'issues.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Vocabulaire des expériences aléatoires",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On lance un dé à six faces et on lit le numéro de la face du dessus. Quel est l'univers $\\Omega$ de cette expérience ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'univers regroupe toutes les issues possibles : les numéros de 1 à 6. Il n'y a pas de face 0. Et « pair » ou « impair » décrit des événements, pas les issues elles-mêmes : avec $\\{\\text{pair} ; \\text{impair}\\}$ tu perdrais le numéro exact.",
+                  "answers": [
+                    {
+                      "content": "$\\{1 ; 2 ; 3 ; 4 ; 5 ; 6\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{0 ; 1 ; 2 ; 3 ; 4 ; 5 ; 6\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{\\text{pair} ; \\text{impair}\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{2 ; 4 ; 6\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À la tombola du stade, on tire un ticket numéroté de 1 à 20. « Le numéro est un multiple de 5 » est une issue de cette expérience.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Une issue est un résultat précis, comme le ticket 10. « Multiple de 5 » regroupe quatre issues : 5, 10, 15 et 20. C'est donc un événement, pas une issue.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une urne contient les tickets numérotés de 1 à 20. On en tire un. Combien l'univers compte-t-il d'issues ?",
+                  "question_type": "single_choice",
+                  "explanation": "Chaque ticket est une issue et il y en a 20 : de 1 à 20 inclus. Attention à ne pas oublier une extrémité (19 ou 21 sont des erreurs classiques) ni à confondre avec les 4 multiples de 5.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    },
+                    {
+                      "content": "19",
+                      "correct": false
+                    },
+                    {
+                      "content": "21",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la tombola (tickets de 1 à 20), l'événement $B$ est : « le numéro est inférieur ou égal à 3 ». Quel ensemble décrit $B$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "« Inférieur ou égal à 3 » inclut le 3 lui-même : $B = \\{1 ; 2 ; 3\\}$. Il n'y a pas de ticket 0. Et $\\{3\\}$ est un événement élémentaire, bien plus petit que $B$.",
+                  "answers": [
+                    {
+                      "content": "$\\{1 ; 2 ; 3\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{1 ; 2\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{0 ; 1 ; 2 ; 3\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{3\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On lance un dé à six faces. $A$ est l'événement « obtenir un nombre pair ». Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$A$ regroupe les issues 2, 4 et 6 : c'est une partie de $\\Omega$, donc un événement. Ce n'est pas une issue : une issue est un seul résultat. Et $\\{1 ; 3 ; 5\\}$ décrit le contraire de $A$, pas $A$.",
+                  "answers": [
+                    {
+                      "content": "$A = \\{2 ; 4 ; 6\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A$ est une partie de l'univers $\\Omega$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A$ est une issue de l'expérience.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A = \\{1 ; 3 ; 5\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une expérience aléatoire, on connaît à l'avance la liste de toutes les issues possibles, mais on ne peut pas prévoir laquelle sera obtenue.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. C'est la définition : comme l'arbitre qui lance la pièce, on sait que ce sera pile ou face, sans savoir lequel. Si on pouvait prévoir l'issue avec certitude, l'expérience ne serait pas aléatoire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Contraire, intersection et réunion",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On lance un dé à six faces. $A$ est l'événement « le nombre est pair », soit $A = \\{2 ; 4 ; 6\\}$. Quel est l'événement contraire $\\overline{A}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le contraire de $A$ regroupe toutes les issues de $\\Omega = \\{1 ; 2 ; 3 ; 4 ; 5 ; 6\\}$ qui ne sont pas dans $A$ : 1, 3 et 5. Ce ne sont pas les nombres 1, 2, 3, ni les nombres différents de 6.",
+                  "answers": [
+                    {
+                      "content": "$\\{1 ; 3 ; 5\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{1 ; 2 ; 3\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{1 ; 2 ; 3 ; 4 ; 5\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{2 ; 4\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On lance un dé à six faces. $A = \\{2 ; 4 ; 6\\}$ (« pair ») et $B = \\{4 ; 5 ; 6\\}$ (« au moins 4 »). Que vaut $A \\cap B$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'intersection contient les issues qui sont dans $A$ et dans $B$ : 4 et 6. Le 2 n'est que dans $A$, le 5 n'est que dans $B$. Ne confonds pas avec la réunion, qui regrouperait aussi le 2 et le 5.",
+                  "answers": [
+                    {
+                      "content": "$\\{4 ; 6\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{2 ; 4 ; 5 ; 6\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{4\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{2 ; 5\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On lance un dé à six faces. $A = \\{2 ; 4 ; 6\\}$ (« pair ») et $B = \\{4 ; 5 ; 6\\}$ (« au moins 4 »). Que vaut $A \\cup B$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La réunion regroupe les issues de $A$ ou de $B$ : 2, 4, 5 et 6. On ne répète pas 4 et 6, qui sont dans les deux. Écrire $\\{2 ; 4 ; 6 ; 4 ; 5 ; 6\\}$ compterait deux fois des issues communes.",
+                  "answers": [
+                    {
+                      "content": "$\\{2 ; 4 ; 5 ; 6\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{4 ; 6\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{2 ; 4 ; 6 ; 4 ; 5 ; 6\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{1 ; 3\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Tombola avec les tickets de 1 à 20. $C$ : « multiple de 5 » ; $D$ : « multiple de 3 ». Quels tickets réalisent à la fois $C$ et $D$, c'est-à-dire que vaut $C \\cap D$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les multiples de 5 sont 5, 10, 15, 20 ; les multiples de 3 sont 3, 6, 9, 12, 15, 18. Le seul numéro commun est 15. Il est donc faux de dire que $C \\cap D$ est vide : les deux événements ne sont pas incompatibles.",
+                  "answers": [
+                    {
+                      "content": "$\\{15\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{3 ; 5 ; 6 ; 9 ; 10 ; 12 ; 15 ; 18 ; 20\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{5 ; 10 ; 15 ; 20\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\emptyset$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On lance un dé à six faces. Quels couples d'événements sont incompatibles ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Deux événements sont incompatibles s'ils n'ont aucune issue commune. « Pair » et « impair » ne partagent rien. « Obtenir 1 » et « au moins 5 » non plus. Mais « pair » et « au moins 4 » partagent 4 et 6, « multiple de 3 » et « pair » partagent 6, « au plus 3 » et « au moins 3 » partagent 3.",
+                  "answers": [
+                    {
+                      "content": "« le nombre est pair » et « le nombre est impair »",
+                      "correct": true
+                    },
+                    {
+                      "content": "« on obtient 1 » et « le nombre est supérieur ou égal à 5 »",
+                      "correct": true
+                    },
+                    {
+                      "content": "« le nombre est pair » et « le nombre est supérieur ou égal à 4 »",
+                      "correct": false
+                    },
+                    {
+                      "content": "« le nombre est un multiple de 3 » et « le nombre est pair »",
+                      "correct": false
+                    },
+                    {
+                      "content": "« le nombre est inférieur ou égal à 3 » et « le nombre est supérieur ou égal à 3 »",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avant un match, l'arbitre lance deux fois la pièce de monnaie. On note les issues PP, PF, FP, FF (par exemple PF : pile au premier lancer, face au second). Quel ensemble décrit l'événement « obtenir exactement une fois face » ?",
+                  "question_type": "single_choice",
+                  "explanation": "On cherche les issues avec une seule face : PF et FP. FF contient deux faces, PP aucune. Et « au moins une face » serait un autre événement : $\\{PF ; FP ; FF\\}$.",
+                  "answers": [
+                    {
+                      "content": "$\\{PF ; FP\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{PF\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{PF ; FP ; FF\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{FF\\}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Les places numérotées du stade",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Au stade, un supporter tire au hasard un numéro de 1 à 12. $A$ : « le numéro est pair » ; $B$ : « le numéro est un multiple de 3 ». Que vaut $A \\cap B$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$A = \\{2 ; 4 ; 6 ; 8 ; 10 ; 12\\}$ et $B = \\{3 ; 6 ; 9 ; 12\\}$. Les issues communes sont 6 et 12. Les numéros 3 et 9 sont des multiples de 3 mais ils sont impairs, donc ils ne sont pas dans $A$.",
+                  "answers": [
+                    {
+                      "content": "$\\{6 ; 12\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{3 ; 6 ; 9 ; 12\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{6\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{2 ; 3 ; 4 ; 6 ; 8 ; 9 ; 10 ; 12\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au stade, un supporter tire au hasard un numéro de 1 à 12. $A$ : « le numéro est pair » ; $B$ : « le numéro est un multiple de 3 ». Combien d'issues compte $A \\cup B$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$A$ a 6 issues, $B$ en a 4, et 2 issues (6 et 12) sont dans les deux. Si tu fais $6 + 4 = 10$, tu comptes 6 et 12 deux fois. Il faut retirer les doublons : $6 + 4 - 2 = 8$ issues.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    },
+                    {
+                      "content": "10",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au stade, un supporter tire au hasard un numéro de 1 à 12. $A$ : « le numéro est pair » ; $B$ : « le numéro est un multiple de 3 ». Que vaut $\\overline{A} \\cap B$ (impair et multiple de 3) ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\overline{A}$ est l'ensemble des numéros impairs : $\\{1 ; 3 ; 5 ; 7 ; 9 ; 11\\}$. Parmi eux, les multiples de 3 sont 3 et 9. Les numéros 6 et 12 sont multiples de 3 mais pairs, donc ils ne sont pas dans $\\overline{A}$.",
+                  "answers": [
+                    {
+                      "content": "$\\{3 ; 9\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{6 ; 12\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{3 ; 6 ; 9 ; 12\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{1 ; 5 ; 7 ; 11\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au stade, un supporter tire au hasard un numéro de 1 à 12. $A$ : « pair » ; $B$ : « multiple de 3 » ; $C$ : « numéro supérieur ou égal à 10 », soit $C = \\{10 ; 11 ; 12\\}$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$A \\cap C = \\{10 ; 12\\}$ n'est pas vide, donc $A$ et $C$ ne sont pas incompatibles. « Au plus 9 » est exactement le contraire de $C$ : aucune issue commune. Mais $B \\cap C = \\{12\\}$, et $A$ et $\\overline{A}$ n'ont rien en commun.",
+                  "answers": [
+                    {
+                      "content": "$A$ et $C$ ont des issues communes (10 et 12), donc ils ne sont pas incompatibles.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$C$ et « le numéro est inférieur ou égal à 9 » sont incompatibles.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$B$ et $C$ sont incompatibles.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A$ et $\\overline{A}$ ne sont pas incompatibles.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au stade, un supporter tire au hasard un numéro de 1 à 12. $A$ : « pair » ; $B$ : « multiple de 3 ». Quels numéros réalisent l'un des deux événements $A$ ou $B$, mais pas les deux à la fois ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$A \\cup B = \\{2 ; 3 ; 4 ; 6 ; 8 ; 9 ; 10 ; 12\\}$ et $A \\cap B = \\{6 ; 12\\}$. Il faut garder la réunion en retirant l'intersection : 2, 3, 4, 8, 9, 10. Parmi les propositions : 3, 9 et 4. Les numéros 6 et 12 sont dans les deux ; 7 n'est dans aucun.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    },
+                    {
+                      "content": "9",
+                      "correct": true
+                    },
+                    {
+                      "content": "4",
+                      "correct": true
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    },
+                    {
+                      "content": "7",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un supporter tire au hasard un numéro de 1 à 12. $C$ est l'événement « le numéro est supérieur ou égal à 10 ». Son événement contraire est « le numéro est inférieur ou égal à 10 ».",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Le contraire de $C = \\{10 ; 11 ; 12\\}$ est $\\{1 ; \\dots ; 9\\}$ : « inférieur ou égal à 9 » (ou « strictement inférieur à 10 »). Le numéro 10 est dans $C$, donc il ne peut pas être dans son contraire.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Probabilité d'un événement",
+          "subtitle": "Cas favorables sur cas possibles, événement contraire et réunion",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer la probabilité d'un événement quand toutes les issues ont la même chance.</li>\n<li>Utiliser l'événement contraire : $P(\\overline{A}) = 1 - P(A)$.</li>\n<li>Calculer la probabilité d'une réunion, avec ou sans issues communes.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. L'urne de la tombola (cas favorables sur cas possibles).</strong> À l'entrée du stade, 20 tickets identiques, bien mélangés, sont dans l'urne. Aucun ticket n'a plus de chances que les autres. Le supporter gagne un maillot avec les tickets 5, 10, 15 et 20. Sa chance de gagner, c'est « 4 tickets gagnants sur 20 tickets possibles », soit $\\frac{4}{20} = \\frac{1}{5}$.</p>\n<p><em>Le pont.</em> Les 4 tickets gagnants sont les <strong>cas favorables</strong> (les issues de l'événement $A$). Les 20 tickets sont les <strong>cas possibles</strong> (les issues de $\\Omega$). La probabilité de $A$ est le rapport des deux : $P(A) = \\frac{4}{20} = \\frac{1}{5}$. Tu peux aussi le dire ainsi : sur 5 supporters, il y en a environ un qui gagne.</p>\n<p><em>Où l'image s'arrête.</em> Ce calcul ne marche que si les tickets sont <strong>équiprobables</strong>, c'est-à-dire si chaque issue a la même chance. Un attaquant qui tire un penalty a deux issues possibles, « but » ou « raté ». Cela ne veut pas dire qu'il a une chance sur deux de marquer : les deux issues n'ont pas la même chance.</p>\n<p><strong>2. Gagner ou perdre (l'événement contraire).</strong> Dans la même tombola, ne pas gagner de maillot, c'est tirer l'un des 16 autres tickets : $\\frac{16}{20} = \\frac{4}{5}$. Et on voit que $\\frac{1}{5} + \\frac{4}{5} = 1$ : on gagne, ou bien on ne gagne pas, et un seul des deux arrive.</p>\n<p><em>Le pont.</em> « Gagner » est l'événement $A$, « ne pas gagner » est son contraire $\\overline{A}$. À eux deux, ils couvrent tout l'univers, donc leurs probabilités s'additionnent pour faire 1 : $P(\\overline{A}) = 1 - P(A)$.</p>\n<p><strong>3. La tribune (la réunion).</strong> Dans une tribune de 200 supporters, 120 portent un maillot orange, 80 portent une écharpe, et 50 portent les deux. On interroge un supporter au hasard. Combien portent un maillot ou une écharpe ? Si tu fais $120 + 80 = 200$, tu comptes deux fois les 50 qui portent les deux. Il faut les retirer une fois : $120 + 80 - 50 = 150$ supporters.</p>\n<p><em>Le pont.</em> Le maillot est l'événement $M$, l'écharpe est l'événement $E$, « les deux » est $M \\cap E$. La formule du comptage se transforme en formule de probabilité : $P(M \\cup E) = P(M) + P(E) - P(M \\cap E)$. Si personne ne porte les deux (événements incompatibles), il n'y a rien à retirer.</p>\n<p><em>Où l'image s'arrête.</em> La tribune sert à comprendre le doublon. La formule vaut pour tous les événements d'une expérience aléatoire, pas seulement pour des supporters.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Équiprobabilité.</strong> Quand toutes les issues de $\\Omega$ ont la même probabilité, la probabilité d'un événement $A$ est $$P(A) = \\frac{\\text{nombre d'issues de } A}{\\text{nombre d'issues de } \\Omega} = \\frac{\\text{cas favorables}}{\\text{cas possibles}}.$$</p>\n<p><strong>Propriétés.</strong> Pour tous événements $A$ et $B$ :</p>\n<ul>\n<li>$0 \\le P(A) \\le 1$, $P(\\Omega) = 1$ et $P(\\emptyset) = 0$.</li>\n<li>$P(\\overline{A}) = 1 - P(A)$.</li>\n<li>$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$.</li>\n<li>Si $A$ et $B$ sont incompatibles : $P(A \\cup B) = P(A) + P(B)$.</li>\n</ul>\n<p><strong>Cas général.</strong> Quand les issues n'ont pas la même chance, on donne à chaque issue une probabilité positive ou nulle, et la somme de toutes ces probabilités vaut 1. La probabilité d'un événement est alors la somme des probabilités de ses issues.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Dans la tribune de 200 supporters (120 maillots orange, 80 écharpes, 50 qui portent les deux), on choisit un supporter au hasard. Calculer $P(M)$, $P(E)$, $P(M \\cap E)$, $P(M \\cup E)$ et la probabilité de ne porter ni l'un ni l'autre.</strong></p>\n<ol>\n<li>Chaque supporter a la même chance d'être choisi : on est en équiprobabilité, avec 200 cas possibles.</li>\n<li>$P(M) = \\frac{120}{200} = \\frac{3}{5}$ et $P(E) = \\frac{80}{200} = \\frac{2}{5}$. Pour « les deux » : $P(M \\cap E) = \\frac{50}{200} = \\frac{1}{4}$.</li>\n<li>Réunion : $P(M \\cup E) = \\frac{3}{5} + \\frac{2}{5} - \\frac{1}{4} = 1 - \\frac{1}{4} = \\frac{3}{4}$. Contrôle : $\\frac{150}{200} = \\frac{3}{4}$.</li>\n<li>« Ni l'un ni l'autre » est le contraire de $M \\cup E$ : $1 - \\frac{3}{4} = \\frac{1}{4}$. Contrôle : $200 - 150 = 50$ supporters, et $\\frac{50}{200} = \\frac{1}{4}$.</li>\n</ol>\n<p><strong>Tombola (tickets de 1 à 20) : probabilité de tirer un multiple de 5 ou un multiple de 3 ?</strong> Multiples de 5 : $\\frac{4}{20} = \\frac{1}{5}$. Multiples de 3 : $\\frac{6}{20} = \\frac{3}{10}$. Les deux à la fois : seulement le 15, soit $\\frac{1}{20}$. Donc $P = \\frac{4}{20} + \\frac{6}{20} - \\frac{1}{20} = \\frac{9}{20}$.</p>\n<h2>Le piège à éviter</h2>\n<p>Additionner $P(A) + P(B)$ pour une réunion sans retirer $P(A \\cap B)$. Tu obtiens parfois un résultat plus grand que 1, ce qui est le signal d'alarme : une probabilité n'est jamais supérieure à 1.</p>\n<p>Autre piège : écrire « deux issues, donc une chance sur deux ». Le calcul cas favorables sur cas possibles n'a de sens que si les issues sont équiprobables. Avant de diviser, demande-toi : tous les cas ont-ils la même chance ?</p>\n<p>Enfin, simplifie toujours la fraction : $\\frac{4}{20}$ se range en $\\frac{1}{5}$.</p>\n<h2>En une phrase</h2>\n<p>Quand toutes les issues ont la même chance, $P(A)$ vaut cas favorables sur cas possibles, le contraire se calcule par $1 - P(A)$, et pour « $A$ ou $B$ » on retire les issues comptées deux fois : $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Les règles des probabilités",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Pour calculer la probabilité d'un événement par la formule « nombre de cas favorables sur nombre de cas possibles », quelle condition doit être vérifiée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Cette formule suppose l'équiprobabilité : toutes les issues ont la même chance, comme les tickets identiques de l'urne. Le nombre d'issues, la taille de l'événement ou le type d'expérience ne changent rien à cette condition.",
+                  "answers": [
+                    {
+                      "content": "Toutes les issues de l'univers ont la même probabilité.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'univers contient au plus six issues.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'événement contient au moins deux issues.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'expérience n'a que deux issues.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un attaquant tire un penalty. Il y a deux issues possibles, « but » et « raté ». On peut donc affirmer que la probabilité qu'il marque est $\\frac{1}{2}$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Avoir deux issues ne rend pas les issues équiprobables. Un bon tireur marque bien plus souvent qu'une fois sur deux. La formule cas favorables sur cas possibles n'est valable que si chaque issue a la même chance.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, lequel ne peut pas être la probabilité d'un événement ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une probabilité est toujours comprise entre 0 et 1. Le nombre $\\frac{3}{2}$ vaut 1,5 : il est supérieur à 1. Les valeurs 0 (événement impossible) et 1 (événement certain) sont possibles, comme $\\frac{2}{5}$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{3}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{5}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La probabilité de l'événement certain $\\Omega$ vaut 1 et la probabilité de l'événement impossible $\\emptyset$ vaut 0.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. L'événement certain est toujours réalisé, sa probabilité est 1. L'événement impossible n'est jamais réalisé, sa probabilité est 0. Toutes les autres probabilités sont comprises entre ces deux valeurs.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles égalités ou inégalités sont vraies pour tous événements $A$ et $B$ d'un même univers ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Une probabilité est entre 0 et 1, et le contraire se calcule par $1 - P(A)$. En revanche $P(\\overline{A}) = P(A)$ est faux sauf cas très particulier, et $P(A \\cup B) = P(A) + P(B)$ n'est vrai que pour des événements incompatibles.",
+                  "answers": [
+                    {
+                      "content": "$P(\\overline{A}) = 1 - P(A)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0 \\le P(A) \\le 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P(\\overline{A}) = P(A)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P(A \\cup B) = P(A) + P(B)$, dans tous les cas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une urne contient 20 tickets identiques numérotés de 1 à 20. On en tire un au hasard. Quelle est la probabilité que le numéro soit inférieur ou égal à 5 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il y a 5 cas favorables (1, 2, 3, 4, 5) sur 20 cas possibles : $\\frac{5}{20} = \\frac{1}{4}$. La valeur $\\frac{1}{20}$ serait la probabilité d'un ticket précis, et $\\frac{1}{5}$ celle d'un multiple de 5.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{20}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer des probabilités",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On lance un dé équilibré à six faces. Quelle est la probabilité d'obtenir un multiple de 3 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les multiples de 3 sont 3 et 6 : 2 cas favorables sur 6 cas possibles. $\\frac{2}{6} = \\frac{1}{3}$. Écrire $\\frac{1}{6}$ serait oublier une des deux faces ; $\\frac{1}{2}$ correspond aux nombres pairs.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un événement $A$ a pour probabilité $\\frac{3}{10}$. Que vaut la probabilité de l'événement contraire $\\overline{A}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On utilise $P(\\overline{A}) = 1 - P(A) = 1 - \\frac{3}{10} = \\frac{7}{10}$. Reprendre $\\frac{3}{10}$ confond $A$ et son contraire. Une probabilité n'est jamais négative, donc $-\\frac{3}{10}$ est impossible.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{7}{10}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{3}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\frac{3}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{7}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux événements $A$ et $B$ sont incompatibles, avec $P(A) = \\frac{1}{5}$ et $P(B) = \\frac{3}{10}$. Que vaut $P(A \\cup B)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les événements sont incompatibles : $P(A \\cup B) = P(A) + P(B) = \\frac{2}{10} + \\frac{3}{10} = \\frac{5}{10} = \\frac{1}{2}$. Multiplier ($\\frac{3}{50}$) est une erreur classique : on additionne pour un « ou », on ne multiplie pas.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{3}{50}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{7}{10}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $P(A) = \\frac{1}{2}$, $P(B) = \\frac{1}{3}$ et $P(A \\cap B) = \\frac{1}{6}$. Que vaut $P(A \\cup B)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P(A \\cup B) = \\frac{1}{2} + \\frac{1}{3} - \\frac{1}{6} = \\frac{3}{6} + \\frac{2}{6} - \\frac{1}{6} = \\frac{4}{6} = \\frac{2}{3}$. Oublier de retirer $P(A \\cap B)$ donnerait $\\frac{5}{6}$, qui compte deux fois les issues communes.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{2}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{5}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une tribune de 200 supporters, 120 portent un maillot orange ($M$), 80 portent une écharpe ($E$) et 50 portent les deux. On choisit un supporter au hasard. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$P(M \\cap E) = \\frac{50}{200} = \\frac{1}{4}$ et $P(M \\cup E) = \\frac{120 + 80 - 50}{200} = \\frac{3}{4}$. Écrire $P(M \\cup E) = 1$ revient à additionner 120 et 80 sans retirer les 50 comptés deux fois. Et $P(M) = \\frac{120}{200} = \\frac{3}{5}$, pas $\\frac{1}{2}$.",
+                  "answers": [
+                    {
+                      "content": "$P(M \\cap E) = \\frac{1}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P(M \\cup E) = \\frac{3}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P(M \\cup E) = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P(M) = \\frac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une tribune de 200 supporters, 120 portent un maillot orange, 80 portent une écharpe et 50 portent les deux. On choisit un supporter au hasard. Quelle est la probabilité qu'il ne porte ni maillot ni écharpe ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il y a $120 + 80 - 50 = 150$ supporters qui portent au moins un des deux. Donc $200 - 150 = 50$ n'en portent aucun : $\\frac{50}{200} = \\frac{1}{4}$. C'est $1 - \\frac{3}{4}$. La valeur $\\frac{3}{4}$ est la probabilité de porter au moins un des deux.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{3}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{5}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Probabilités dans le stade et aux dés",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un stade accueille 5 000 spectateurs : 3 000 supporters de l'équipe locale, 1 500 supporters de l'équipe visiteuse et 500 spectateurs neutres. On en interroge un au hasard. Quelle est la probabilité qu'il ne soit pas supporter de l'équipe locale ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P(\\text{local}) = \\frac{3000}{5000} = \\frac{3}{5}$. Le contraire : $1 - \\frac{3}{5} = \\frac{2}{5}$. Contrôle : $1500 + 500 = 2000$ spectateurs, et $\\frac{2000}{5000} = \\frac{2}{5}$. La valeur $\\frac{3}{5}$ est la probabilité d'être supporter local.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{2}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{3}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{10}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On lance deux fois de suite un dé équilibré à six faces et on note le couple de résultats, par exemple $(2 ; 5)$. Il y a 36 couples équiprobables. Quelle est la probabilité d'obtenir deux fois le 6 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un seul couple convient : $(6 ; 6)$. La probabilité est donc $\\frac{1}{36}$. La valeur $\\frac{1}{6}$ est la probabilité d'obtenir 6 au premier lancer seulement ; $\\frac{1}{12}$ ne correspond à aucun comptage.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{36}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{12}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{6}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On lance deux fois de suite un dé équilibré à six faces. Il y a 36 couples de résultats équiprobables. Quelle est la probabilité que la somme des deux résultats soit égale à 7 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les couples de somme 7 sont $(1 ; 6)$, $(2 ; 5)$, $(3 ; 4)$, $(4 ; 3)$, $(5 ; 2)$, $(6 ; 1)$ : 6 couples sur 36, soit $\\frac{1}{6}$. Les 11 sommes possibles (de 2 à 12) ne sont pas équiprobables : $\\frac{1}{11}$ est une erreur.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{6}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{11}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{12}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{7}{36}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On lance deux fois de suite un dé équilibré à six faces. Il y a 36 couples de résultats équiprobables. Quelle est la probabilité que la somme des deux résultats soit égale à 2 ou égale à 12 ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme 2 n'arrive que pour $(1 ; 1)$ et la somme 12 que pour $(6 ; 6)$. Ces deux événements sont incompatibles : $\\frac{1}{36} + \\frac{1}{36} = \\frac{2}{36} = \\frac{1}{18}$. La valeur $\\frac{1}{36}$ ne compte qu'un des deux couples.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{18}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{36}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{9}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{6}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour deux événements $A$ et $B$, on sait que $P(A) = \\frac{2}{5}$, $P(B) = \\frac{1}{2}$ et $P(A \\cup B) = \\frac{7}{10}$. Que vaut $P(A \\cap B)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "De $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$, on tire $P(A \\cap B) = \\frac{4}{10} + \\frac{5}{10} - \\frac{7}{10} = \\frac{2}{10} = \\frac{1}{5}$. La valeur $\\frac{9}{10}$ est la somme $P(A) + P(B)$, sans retirer la réunion.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{9}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{7}{20}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un stade, un spectateur interrogé au hasard est supporter local ($L$) avec la probabilité $\\frac{3}{5}$, supporter visiteur ($V$) avec la probabilité $\\frac{3}{10}$, ou neutre ($N$) avec la probabilité $\\frac{1}{10}$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Un spectateur ne peut pas être à la fois local et visiteur : incompatibles. Donc $P(L \\cup V) = \\frac{3}{5} + \\frac{3}{10} = \\frac{9}{10}$. Et $P(\\overline{V}) = 1 - \\frac{3}{10} = \\frac{7}{10}$. En revanche $P(L \\cup V)$ n'est pas 1, puisqu'il reste les neutres.",
+                  "answers": [
+                    {
+                      "content": "$L$ et $V$ sont incompatibles.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P(L \\cup V) = \\frac{9}{10}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La probabilité de ne pas être supporter visiteur est $\\frac{7}{10}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P(L \\cup V) = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P(V) + P(N) = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$L$ et $\\overline{N}$ sont incompatibles.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Variable aléatoire et loi de probabilité",
+          "subtitle": "Associer un nombre à chaque issue et donner la loi",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Reconnaître une variable aléatoire et lister les valeurs qu'elle prend.</li>\n<li>Déterminer la loi de probabilité d'une variable aléatoire dans un cas simple.</li>\n<li>Vérifier qu'une loi est correcte et calculer la probabilité d'un événement comme $X \\ge 1$.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le classement du championnat (la variable aléatoire).</strong> À la fin d'un match, l'équipe n'enregistre pas « victoire », « nul » ou « défaite » dans son classement. Elle enregistre des points : 3 pour une victoire, 1 pour un match nul, 0 pour une défaite. Avant le match, on ne sait pas quel résultat aura lieu. Mais pour chaque résultat possible, le nombre de points est déjà fixé.</p>\n<p><em>Le pont.</em> Les résultats possibles (victoire, nul, défaite) sont les issues de $\\Omega$. La règle « victoire donne 3, nul donne 1, défaite donne 0 » est la <strong>variable aléatoire</strong> $X$ : elle associe un nombre à chaque issue. Les valeurs prises par $X$ sont 3, 1 et 0.</p>\n<p><em>Où l'image s'arrête.</em> La variable aléatoire n'est ni un événement ni une probabilité : c'est une règle qui donne un nombre. L'issue « victoire » est un résultat, le nombre 3 est la valeur de $X$.</p>\n<p><strong>2. La fiche de pronostic (la loi de probabilité).</strong> Imagine que, d'après les statistiques de la saison, ton équipe a une chance sur deux de gagner, trois chances sur dix de faire match nul et une chance sur cinq de perdre. On range alors les informations : 3 points avec la probabilité $\\frac{1}{2}$, 1 point avec $\\frac{3}{10}$, 0 point avec $\\frac{1}{5}$. Les trois probabilités s'additionnent pour faire 1 : $\\frac{5}{10} + \\frac{3}{10} + \\frac{2}{10} = 1$.</p>\n<p><em>Le pont.</em> Cette liste « valeur, probabilité » est la <strong>loi de probabilité</strong> de $X$. Pour chaque valeur $x_i$, on note $P(X = x_i)$ la probabilité de l'événement « $X$ prend la valeur $x_i$ ». Ici : $P(X = 3) = \\frac{1}{2}$, $P(X = 1) = \\frac{3}{10}$, $P(X = 0) = \\frac{1}{5}$.</p>\n<p><em>Où l'image s'arrête.</em> Les probabilités données ici sont un exemple choisi pour calculer. Dans un exercice, c'est toujours l'énoncé qui donne la loi, ou qui permet de la calculer.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Variable aléatoire.</strong> Soit $\\Omega$ un univers fini. Une <strong>variable aléatoire</strong> $X$ est une règle qui associe un nombre réel à chaque issue de $\\Omega$. Si $X$ prend les valeurs $x_1, x_2, \\dots, x_n$, on dit qu'elle est <strong>discrète</strong>. L'événement « $X$ prend la valeur $x_i$ » se note $(X = x_i)$ : ce sont toutes les issues auxquelles $X$ associe $x_i$.</p>\n<p><strong>Loi de probabilité.</strong> La loi de $X$ est la liste des valeurs $x_i$ avec leurs probabilités $p_i = P(X = x_i)$. Elle vérifie :</p>\n<ul>\n<li>chaque $p_i$ est compris entre 0 et 1 ;</li>\n<li>$p_1 + p_2 + \\dots + p_n = 1$.</li>\n</ul>\n<p>Pour un événement comme $(X \\ge 1)$, on additionne les probabilités des valeurs concernées. Par exemple, si $X$ prend les valeurs 0, 1 et 3, $P(X \\ge 1) = P(X = 1) + P(X = 3)$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>L'arbitre lance deux fois une pièce équilibrée. $X$ est le nombre de fois où l'on obtient face. Donner la loi de $X$.</strong></p>\n<ol>\n<li>Les issues sont PP, PF, FP, FF. Elles sont équiprobables : chacune a pour probabilité $\\frac{1}{4}$.</li>\n<li>Le nombre de faces vaut 0 pour PP, 1 pour PF et FP, 2 pour FF. Donc $X$ prend les valeurs 0, 1 et 2.</li>\n<li>$P(X = 0) = \\frac{1}{4}$ (une issue : PP). $P(X = 1) = \\frac{2}{4} = \\frac{1}{2}$ (deux issues : PF et FP). $P(X = 2) = \\frac{1}{4}$ (une issue : FF).</li>\n<li>Contrôle : $\\frac{1}{4} + \\frac{1}{2} + \\frac{1}{4} = 1$. La loi est correcte.</li>\n</ol>\n<p><strong>Avec la loi des points du championnat, calculer $P(X \\ge 1)$.</strong> $X \\ge 1$ regroupe les valeurs 1 et 3 : $P(X \\ge 1) = \\frac{3}{10} + \\frac{1}{2} = \\frac{8}{10} = \\frac{4}{5}$. Contrôle : c'est aussi $1 - P(X = 0) = 1 - \\frac{1}{5} = \\frac{4}{5}$.</p>\n<h2>Le piège à éviter</h2>\n<p>Croire que toutes les valeurs de $X$ ont la même probabilité. Dans l'exemple des deux pièces, $X$ prend trois valeurs, mais $P(X = 1) = \\frac{1}{2}$ et non $\\frac{1}{3}$ : la valeur 1 regroupe deux issues. C'est toujours à partir des issues équiprobables de $\\Omega$ qu'on calcule.</p>\n<p>Autre piège : confondre la valeur $x_i$ et sa probabilité $p_i$. La valeur 3 est un nombre de points, la probabilité $\\frac{1}{2}$ est une chance, toujours entre 0 et 1.</p>\n<p>Comment le repérer : après avoir écrit la loi, additionne les probabilités. Si le total n'est pas 1, une issue a été oubliée ou mal comptée.</p>\n<h2>En une phrase</h2>\n<p>Une variable aléatoire $X$ donne un nombre à chaque issue ; sa loi de probabilité liste chaque valeur $x_i$ avec $P(X = x_i)$, et la somme de ces probabilités vaut toujours 1.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Variable aléatoire et loi",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Qu'est-ce qu'une variable aléatoire $X$ définie sur un univers fini $\\Omega$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une variable aléatoire est une règle qui associe un nombre réel à chaque issue, comme la règle « victoire : 3 points, nul : 1 point, défaite : 0 point ». Ce n'est ni une issue, ni une probabilité, ni un événement.",
+                  "answers": [
+                    {
+                      "content": "Une règle qui associe un nombre réel à chaque issue de $\\Omega$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une issue de l'expérience.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La probabilité d'un événement.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un événement, c'est-à-dire une partie de $\\Omega$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du championnat (victoire : 3 points, nul : 1 point, défaite : 0 point), l'issue « victoire » est le nombre 3.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. L'issue est le résultat du match : « victoire ». Le nombre 3 est la valeur que prend la variable aléatoire $X$ pour cette issue. Il ne faut pas mélanger les résultats de l'expérience et les nombres qu'on leur associe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "L'arbitre lance deux fois une pièce. $X$ est le nombre de fois où l'on obtient face. Quelles valeurs $X$ peut-il prendre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Sur deux lancers, on peut obtenir aucune face, une face ou deux faces : $X \\in \\{0 ; 1 ; 2\\}$. La valeur 3 est impossible avec seulement deux lancers, et la valeur 1 est possible (PF ou FP).",
+                  "answers": [
+                    {
+                      "content": "$0$, $1$ ou $2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$ ou $2$ seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$ ou $2$ seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$, $1$, $2$ ou $3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que désigne la notation $(X = 3)$ pour une variable aléatoire $X$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$(X = 3)$ est un événement : l'ensemble des issues pour lesquelles $X$ vaut 3. On note $P(X = 3)$ sa probabilité. Ce n'est donc ni cette probabilité, ni un nombre d'issues, ni une moyenne.",
+                  "answers": [
+                    {
+                      "content": "L'événement formé des issues pour lesquelles $X$ vaut 3.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La probabilité que $X$ vaille 3.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre d'issues de l'univers.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La valeur moyenne de $X$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une variable aléatoire $X$ prend les valeurs $x_1, \\dots, x_n$ avec les probabilités $p_i = P(X = x_i)$. Quelles conditions la loi de $X$ doit-elle vérifier ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Une loi de probabilité vérifie deux choses : chaque $p_i$ est entre 0 et 1, et la somme des $p_i$ vaut 1. La somme des valeurs $x_i$ n'a pas à valoir 1 (les points peuvent être 3, 1, 0), et les $p_i$ ne sont pas forcément égaux.",
+                  "answers": [
+                    {
+                      "content": "Chaque $p_i$ est compris entre 0 et 1.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La somme $p_1 + p_2 + \\dots + p_n$ vaut 1.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La somme des valeurs $x_1 + \\dots + x_n$ vaut 1.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Toutes les probabilités $p_i$ sont égales.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une équipe, $X$ est le nombre de points d'un match (victoire : 3, nul : 1, défaite : 0). Le nombre $P(X = 3)$ représente les 3 points marqués en cas de victoire.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. $P(X = 3)$ est une probabilité : la chance que $X$ vaille 3, c'est-à-dire la chance de gagner. Elle est comprise entre 0 et 1. Le nombre 3 est la valeur de $X$, pas sa probabilité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Établir et utiliser une loi de probabilité",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "L'arbitre lance deux fois une pièce équilibrée. Les quatre issues PP, PF, FP, FF sont équiprobables. $X$ est le nombre de faces obtenues. Que vaut $P(X = 1)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les issues PF et FP donnent $X = 1$ : 2 issues sur 4, donc $\\frac{2}{4} = \\frac{1}{2}$. Dire $\\frac{1}{3}$ (trois valeurs, donc trois chances égales) est faux, car les valeurs 0, 1, 2 ne regroupent pas le même nombre d'issues.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{4}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une variable aléatoire $X$ prend les valeurs 0, 1 et 3 avec $P(X = 0) = \\frac{1}{5}$ et $P(X = 1) = \\frac{3}{10}$. Que vaut $P(X = 3)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme des probabilités vaut 1 : $P(X = 3) = 1 - \\frac{2}{10} - \\frac{3}{10} = \\frac{5}{10} = \\frac{1}{2}$. La valeur $\\frac{7}{10}$ vient de $1 - \\frac{3}{10}$, qui oublie de retirer $P(X = 0)$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{7}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une variable aléatoire $X$ prend les valeurs 0, 1 et 3 avec $P(X = 0) = \\frac{1}{5}$, $P(X = 1) = \\frac{3}{10}$ et $P(X = 3) = \\frac{1}{2}$. Que vaut $P(X \\ge 1)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$X \\ge 1$ regroupe les valeurs 1 et 3 : $\\frac{3}{10} + \\frac{1}{2} = \\frac{8}{10} = \\frac{4}{5}$. Même résultat avec le contraire : $1 - P(X = 0) = \\frac{4}{5}$. La valeur 1 serait la somme de toutes les probabilités, 0 comprise.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{4}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{10}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On lance un dé équilibré. Le gain $X$ en francs est 1 000 si le résultat est 6, 200 s'il est 4 ou 5, et 0 sinon. Que vaut $P(X = 200)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le gain 200 correspond aux deux faces 4 et 5 : 2 issues sur 6, soit $\\frac{2}{6} = \\frac{1}{3}$. La valeur $\\frac{1}{6}$ ne compte qu'une face, et $\\frac{1}{2}$ est la probabilité d'un gain nul (faces 1, 2, 3).",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une variable aléatoire $X$ prend les valeurs 0, 1 et 2. Quelles listes de probabilités $\\big(P(X = 0) ; P(X = 1) ; P(X = 2)\\big)$ définissent une loi de probabilité ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Il faut des nombres entre 0 et 1 dont la somme vaut 1. $\\big(\\frac{1}{4} ; \\frac{1}{2} ; \\frac{1}{4}\\big)$ et $\\big(\\frac{1}{5} ; \\frac{2}{5} ; \\frac{2}{5}\\big)$ conviennent. $\\frac{1}{2} + \\frac{1}{3} + \\frac{1}{4} = \\frac{13}{12}$ dépasse 1 ; $-\\frac{1}{4}$ est négatif ; $\\frac{1}{3} + \\frac{1}{3} + \\frac{1}{6} = \\frac{5}{6}$ n'atteint pas 1.",
+                  "answers": [
+                    {
+                      "content": "$\\big(\\frac{1}{4} ; \\frac{1}{2} ; \\frac{1}{4}\\big)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\big(\\frac{1}{5} ; \\frac{2}{5} ; \\frac{2}{5}\\big)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\big(\\frac{1}{2} ; \\frac{1}{3} ; \\frac{1}{4}\\big)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\big(\\frac{1}{2} ; \\frac{3}{4} ; -\\frac{1}{4}\\big)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\big(\\frac{1}{3} ; \\frac{1}{3} ; \\frac{1}{6}\\big)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une tombola vend 10 tickets équiprobables. Le ticket 1 gagne 5 000 F, les tickets 2 et 3 gagnent 1 000 F chacun, les autres ne gagnent rien. $X$ est le gain. Que vaut $P(X \\ge 1000)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$X \\ge 1000$ regroupe le gain 5 000 F (1 ticket) et le gain 1 000 F (2 tickets) : 3 tickets sur 10, donc $\\frac{3}{10}$. La valeur $\\frac{7}{10}$ est la probabilité de ne rien gagner.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{3}{10}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{7}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{5}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Lois de probabilité dans le sport et les jeux",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "On lance deux dés équilibrés. Il y a 36 couples équiprobables. $X$ est la somme des deux résultats. Que vaut $P(X = 4)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les couples de somme 4 sont $(1 ; 3)$, $(2 ; 2)$ et $(3 ; 1)$ : 3 couples sur 36, soit $\\frac{1}{12}$. Dire $\\frac{1}{11}$ suppose que les 11 sommes possibles sont équiprobables, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{12}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{36}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{11}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{9}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac contient 10 jetons : 4 rouges, 3 verts et 3 blancs. On en tire un au hasard. Le jeton rouge rapporte 0 point, le vert 2 points et le blanc 5 points. $X$ est le nombre de points. Que vaut $P(X > 0)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$X > 0$ correspond aux jetons verts et blancs : $3 + 3 = 6$ jetons sur 10, soit $\\frac{3}{5}$. La valeur $\\frac{3}{10}$ ne compte qu'une couleur, et $\\frac{2}{5}$ est la probabilité de tirer un jeton rouge.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{3}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{3}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{7}{10}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une équipe, la probabilité de perdre un match est $\\frac{1}{5}$ et la probabilité de gagner est le double de celle de faire match nul. Un match rapporte 3 points pour une victoire, 1 pour un nul, 0 pour une défaite. Quelle est $P(X = 3)$, où $X$ est le nombre de points ?",
+                  "question_type": "single_choice",
+                  "explanation": "Soit $n$ la probabilité du nul : celle de la victoire est $2n$. Alors $2n + n + \\frac{1}{5} = 1$, donc $3n = \\frac{4}{5}$, $n = \\frac{4}{15}$ et $P(X = 3) = 2n = \\frac{8}{15}$. Contrôle : $\\frac{8}{15} + \\frac{4}{15} + \\frac{3}{15} = 1$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{8}{15}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{4}{15}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{5}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maquis propose un jeu où la variable aléatoire $X$ prend les valeurs 1, 2 et 3 avec $P(X = 1) = \\frac{1}{2}$, $P(X = 2) = \\frac{1}{3}$ et $P(X = 3) = \\frac{1}{4}$. Ces nombres définissent bien une loi de probabilité.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Chaque nombre est entre 0 et 1, mais leur somme vaut $\\frac{6}{12} + \\frac{4}{12} + \\frac{3}{12} = \\frac{13}{12}$, qui dépasse 1. Une loi de probabilité exige une somme égale à 1 : le total des probabilités d'une expérience ne peut dépasser 1.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On lance deux dés équilibrés (36 couples équiprobables). $X$ est la somme des deux résultats. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "La somme va de 2 à 12 : 11 valeurs. La somme 2 vient du seul couple $(1 ; 1)$ : $\\frac{1}{36}$. La somme 7 vient de 6 couples : $\\frac{6}{36} = \\frac{1}{6}$. Mais la somme 12 vaut $\\frac{1}{36}$, pas $\\frac{1}{12}$, et les 11 valeurs ne sont pas équiprobables.",
+                  "answers": [
+                    {
+                      "content": "$X$ prend 11 valeurs différentes, de 2 à 12.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P(X = 2) = \\frac{1}{36}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P(X = 7) = \\frac{1}{6}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P(X = 12) = \\frac{1}{12}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les 11 valeurs de $X$ ont la même probabilité.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P(X = 7) = \\frac{7}{36}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un supporter parie 1 000 F sur la victoire de son équipe, dont la probabilité est $\\frac{2}{5}$. S'il a raison, il gagne 1 000 F (gain net +1 000) ; sinon il perd sa mise (gain net −1 000). $X$ est son gain net. Que vaut $P(X > 0)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$X > 0$ signifie que $X = 1000$, donc que l'équipe gagne : $P(X > 0) = \\frac{2}{5}$. La valeur $\\frac{3}{5}$ est la probabilité de perdre, soit $P(X = -1000)$. La somme des deux vaut bien 1.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{2}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{3}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Espérance d'une variable aléatoire",
+          "subtitle": "À compléter : variance, écart-type, probabilité conditionnelle, indépendance, dénombrement",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer l'espérance d'une variable aléatoire à partir de sa loi de probabilité.</li>\n<li>Interpréter l'espérance comme une moyenne sur un très grand nombre de répétitions.</li>\n<li>Décider si un jeu est équitable, favorable ou défavorable.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Les points sur dix matchs (la moyenne qui se stabilise).</strong> Une équipe joue dix matchs. Elle en gagne 5, fait 3 matchs nuls et en perd 2. Ses points : $5 \\times 3 + 3 \\times 1 + 2 \\times 0 = 18$ points. Par match, cela fait en moyenne $\\frac{18}{10} = 1{,}8$ point. Regarde le calcul autrement : $\\frac{5}{10} \\times 3 + \\frac{3}{10} \\times 1 + \\frac{2}{10} \\times 0 = 1{,}8$. On a multiplié chaque nombre de points par la <em>fréquence</em> de ce résultat.</p>\n<p><em>Le pont.</em> Quand on répète l'expérience très souvent, les fréquences se rapprochent des probabilités. La moyenne de points par match se rapproche alors du nombre obtenu en multipliant chaque valeur par sa <strong>probabilité</strong>, puis en additionnant : c'est l'<strong>espérance</strong> $E(X)$. Avec $P(X = 3) = \\frac{1}{2}$, $P(X = 1) = \\frac{3}{10}$, $P(X = 0) = \\frac{1}{5}$ : $E(X) = 3 \\times \\frac{1}{2} + 1 \\times \\frac{3}{10} + 0 \\times \\frac{1}{5} = \\frac{9}{5} = 1{,}8$.</p>\n<p><em>Où l'image s'arrête.</em> Aucun match ne rapporte 1,8 point : l'espérance n'est pas une valeur que $X$ prend, et elle ne prédit pas le prochain match. C'est la moyenne qu'on obtient à la longue, sur beaucoup de matchs.</p>\n<p><strong>2. Le ticket de tombola (le jeu équitable).</strong> Un ticket coûte 500 F. Sur 20 tickets, un seul gagne 6 000 F, trois gagnent 1 000 F chacun, et les autres ne gagnent rien. Si tu comptes ce que tu gagnes <em>en tenant compte de ta mise</em>, le gain net est : 6 000 − 500 = 5 500 F (1 ticket sur 20), 1 000 − 500 = 500 F (3 tickets), et −500 F (16 tickets). En moyenne, chaque ticket rapporte $\\frac{5500 \\times 1 + 500 \\times 3 - 500 \\times 16}{20} = \\frac{-1000}{20} = -50$ F : le joueur perd en moyenne 50 F par ticket.</p>\n<p><em>Le pont.</em> Le gain net est la variable aléatoire $X$, et ce calcul est $E(X) = -50$. Quand $E(X) < 0$, le jeu est <strong>défavorable</strong> au joueur ; quand $E(X) > 0$, il est <strong>favorable</strong> ; quand $E(X) = 0$, il est <strong>équitable</strong>.</p>\n<p><em>Où l'image s'arrête.</em> Une espérance négative n'empêche pas de gagner un jour : un ticket peut rapporter 5 500 F. Elle dit seulement ce qui se passe en moyenne sur un très grand nombre de parties.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Espérance.</strong> Soit $X$ une variable aléatoire qui prend les valeurs $x_1, x_2, \\dots, x_n$ avec les probabilités $p_1, p_2, \\dots, p_n$. L'<strong>espérance</strong> de $X$ est le nombre $$E(X) = x_1 p_1 + x_2 p_2 + \\dots + x_n p_n.$$</p>\n<ul>\n<li>C'est une <strong>moyenne pondérée</strong> : chaque valeur est multipliée par sa probabilité.</li>\n<li>Elle se situe entre la plus petite et la plus grande valeur de $X$, sans être forcément l'une d'elles.</li>\n<li>Pour un jeu, $X$ est le gain algébrique (gain moins mise, donc négatif en cas de perte). Le jeu est <strong>équitable</strong> si $E(X) = 0$, favorable si $E(X) > 0$, défavorable si $E(X) < 0$.</li>\n</ul>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>On lance un dé équilibré. $X$ est le nombre obtenu. Calculer $E(X)$.</strong></p>\n<ol>\n<li>$X$ prend les valeurs 1, 2, 3, 4, 5, 6, chacune avec la probabilité $\\frac{1}{6}$.</li>\n<li>$E(X) = 1 \\times \\frac{1}{6} + 2 \\times \\frac{1}{6} + \\dots + 6 \\times \\frac{1}{6} = \\frac{1 + 2 + 3 + 4 + 5 + 6}{6} = \\frac{21}{6}$.</li>\n<li>On simplifie : $E(X) = \\frac{7}{2} = 3{,}5$. Contrôle : 3,5 est entre 1 et 6, mais le dé ne donne jamais 3,5.</li>\n</ol>\n<p><strong>Un jeu : mise de 1 000 F, on lance un dé. Le gain net est +3 000 F pour un 6, +600 F pour un 4 ou un 5, et −1 000 F pour un 1, un 2 ou un 3. Ce jeu est-il équitable ?</strong></p>\n<ol>\n<li>Loi du gain net $X$ : $P(X = 3000) = \\frac{1}{6}$, $P(X = 600) = \\frac{2}{6}$, $P(X = -1000) = \\frac{3}{6}$. Somme : $\\frac{1 + 2 + 3}{6} = 1$.</li>\n<li>$E(X) = 3000 \\times \\frac{1}{6} + 600 \\times \\frac{2}{6} - 1000 \\times \\frac{3}{6} = 500 + 200 - 500 = 200$.</li>\n<li>$E(X) = 200 > 0$ : le jeu n'est pas équitable, il est favorable au joueur (200 F de gain moyen par partie).</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Faire la moyenne simple des valeurs, sans tenir compte des probabilités. Pour les points d'un match (3, 1 et 0), $\\frac{3 + 1 + 0}{3} = \\frac{4}{3}$ est faux : la victoire n'a pas la même probabilité que les deux autres résultats. Il faut multiplier chaque valeur par sa probabilité.</p>\n<p>Autre piège : oublier la mise dans un jeu. Si tu calcules le gain moyen sans retirer ce que tu paies, tu conclus à tort qu'un jeu défavorable est avantageux. Pense aussi aux signes : une perte est un nombre négatif.</p>\n<p>Comment le repérer : avant de conclure, compare ton $E(X)$ à la plus petite et à la plus grande valeur de $X$. Il doit être entre les deux.</p>\n<h2>En une phrase</h2>\n<p>L'espérance $E(X) = x_1 p_1 + \\dots + x_n p_n$ est la moyenne pondérée des valeurs de $X$, celle qu'on obtient à la longue ; pour un jeu, elle est nulle si le jeu est équitable.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Sens de l'espérance",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $X$ une variable aléatoire qui prend les valeurs $x_1, \\dots, x_n$ avec les probabilités $p_1, \\dots, p_n$. Quelle est la formule de l'espérance $E(X)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'espérance est la moyenne pondérée : $x_1 p_1 + \\dots + x_n p_n$. La moyenne simple $\\frac{x_1 + \\dots + x_n}{n}$ oublie les probabilités. Et $p_1 + \\dots + p_n$ vaut toujours 1 : cela ne dit rien sur les valeurs de $X$.",
+                  "answers": [
+                    {
+                      "content": "$E(X) = x_1 p_1 + x_2 p_2 + \\dots + x_n p_n$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$E(X) = \\dfrac{x_1 + x_2 + \\dots + x_n}{n}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$E(X) = p_1 + p_2 + \\dots + p_n$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$E(X) = x_1 + x_2 + \\dots + x_n$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'espérance $E(X)$ d'une variable aléatoire est toujours une des valeurs que $X$ peut prendre.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Avec les points d'un match (3, 1 ou 0), l'espérance peut valoir 1,8 : aucun match ne rapporte 1,8 point. L'espérance est une moyenne à long terme, elle se situe entre la plus petite et la plus grande valeur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une équipe joue un très grand nombre de matchs. Que représente l'espérance $E(X)$ du nombre de points $X$ par match ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'espérance est la moyenne des points par match qu'on obtient à la longue, quand on répète l'expérience très souvent. Elle ne prédit pas le prochain match et n'est pas la valeur la plus fréquente.",
+                  "answers": [
+                    {
+                      "content": "La moyenne de points par match, sur un très grand nombre de matchs.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nombre de points exact du prochain match.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre de points le plus probable à chaque match.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La probabilité de gagner un match.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies à propos de l'espérance $E(X)$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "L'espérance est la somme des $x_i p_i$ et elle peut être négative, par exemple pour un gain algébrique. Ce n'est pas une probabilité (elle peut dépasser 1), et elle n'est pas toujours entière : 1,8 ou $\\frac{7}{2}$ sont possibles.",
+                  "answers": [
+                    {
+                      "content": "$E(X) = \\sum x_i p_i$ : chaque valeur est multipliée par sa probabilité.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$E(X)$ peut être négative quand $X$ représente un gain avec des pertes.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$E(X)$ est une probabilité, donc comprise entre 0 et 1.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$E(X)$ est toujours un nombre entier.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un jeu est équitable lorsque l'espérance du gain algébrique (gain moins mise) est égale à 0.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Une espérance nulle signifie qu'en moyenne, le joueur ne gagne ni ne perd. Si elle est positive, le jeu est favorable ; si elle est négative, il est défavorable. Attention : il faut bien compter la mise dans le gain.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur dix matchs, une équipe en gagne 5 (3 points chacun), fait 3 nuls (1 point chacun) et en perd 2 (0 point). Quelle est la moyenne de points par match ?",
+                  "question_type": "single_choice",
+                  "explanation": "Total : $5 \\times 3 + 3 \\times 1 + 0 = 18$ points sur 10 matchs, soit 1,8 point par match. Faire $\\frac{3 + 1 + 0}{3} = \\frac{4}{3}$ ignore que les résultats n'arrivent pas aussi souvent l'un que l'autre.",
+                  "answers": [
+                    {
+                      "content": "1,8 point par match",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{4}{3}$ point par match",
+                      "correct": false
+                    },
+                    {
+                      "content": "18 points par match",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 points par match",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer une espérance",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Une variable aléatoire $X$ prend les valeurs 0, 1 et 3 avec $P(X = 0) = \\frac{1}{5}$, $P(X = 1) = \\frac{3}{10}$ et $P(X = 3) = \\frac{1}{2}$. Que vaut $E(X)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$E(X) = 0 \\times \\frac{1}{5} + 1 \\times \\frac{3}{10} + 3 \\times \\frac{1}{2} = \\frac{3}{10} + \\frac{15}{10} = \\frac{18}{10} = \\frac{9}{5}$. La valeur $\\frac{4}{3}$ vient de la moyenne simple de 0, 1 et 3, qui oublie les probabilités.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{9}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{4}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On lance un dé équilibré. $X$ est le nombre obtenu, chaque face ayant la probabilité $\\frac{1}{6}$. Que vaut $E(X)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$E(X) = \\frac{1 + 2 + 3 + 4 + 5 + 6}{6} = \\frac{21}{6} = \\frac{7}{2}$. La valeur 21 est la somme des valeurs sans la probabilité $\\frac{1}{6}$. Et 3,5 n'est pas une face du dé, mais c'est bien l'espérance.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{7}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$21$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une variable aléatoire $X$ prend les valeurs −2, 0 et 4 avec $P(X = -2) = \\frac{1}{4}$, $P(X = 0) = \\frac{1}{4}$ et $P(X = 4) = \\frac{1}{2}$. Que vaut $E(X)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$E(X) = -2 \\times \\frac{1}{4} + 0 \\times \\frac{1}{4} + 4 \\times \\frac{1}{2} = -\\frac{1}{2} + 0 + 2 = \\frac{3}{2}$. La valeur $\\frac{2}{3}$ est la moyenne simple $\\frac{-2 + 0 + 4}{3}$, qui oublie les probabilités.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{3}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{2}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une tombola vend 10 tickets équiprobables. Un ticket gagne 5 000 F, deux tickets gagnent 1 000 F chacun, les autres ne gagnent rien. $X$ est le gain d'un ticket. Que vaut $E(X)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$E(X) = 5000 \\times \\frac{1}{10} + 1000 \\times \\frac{2}{10} + 0 \\times \\frac{7}{10} = 500 + 200 = 700$ F. Le nombre 6 000 additionne les gains sans les pondérer, et 2 000 est la moyenne simple de 5 000, 1 000 et 0.",
+                  "answers": [
+                    {
+                      "content": "700 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "6 000 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 000 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "70 F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'arbitre lance deux fois une pièce équilibrée. $X$ est le nombre de faces. La loi est $P(X = 0) = \\frac{1}{4}$, $P(X = 1) = \\frac{1}{2}$, $P(X = 2) = \\frac{1}{4}$. Que vaut $E(X)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$E(X) = 0 \\times \\frac{1}{4} + 1 \\times \\frac{1}{2} + 2 \\times \\frac{1}{4} = \\frac{1}{2} + \\frac{1}{2} = 1$. En moyenne, on obtient une face sur deux lancers, ce qui est cohérent avec une pièce équilibrée.",
+                  "answers": [
+                    {
+                      "content": "$1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{4}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une variable aléatoire $X$ prend les valeurs 1, 2 et 3. Quelles lois $\\big(P(X = 1) ; P(X = 2) ; P(X = 3)\\big)$ donnent une espérance égale à 2 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Pour $\\big(\\frac{1}{4} ; \\frac{1}{2} ; \\frac{1}{4}\\big)$ : $\\frac{1}{4} + 1 + \\frac{3}{4} = 2$. Pour $\\big(\\frac{1}{3} ; \\frac{1}{3} ; \\frac{1}{3}\\big)$ : $\\frac{1 + 2 + 3}{3} = 2$. Les deux autres lois penchent d'un côté : $\\frac{7}{4}$ et $\\frac{9}{4}$.",
+                  "answers": [
+                    {
+                      "content": "$\\big(\\frac{1}{4} ; \\frac{1}{2} ; \\frac{1}{4}\\big)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\big(\\frac{1}{3} ; \\frac{1}{3} ; \\frac{1}{3}\\big)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\big(\\frac{1}{2} ; \\frac{1}{4} ; \\frac{1}{4}\\big)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\big(\\frac{1}{4} ; \\frac{1}{4} ; \\frac{1}{2}\\big)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Jeux équitables et gains moyens",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un ticket de tombola coûte 500 F. Sur 20 tickets, un gagne 6 000 F, trois gagnent 1 000 F chacun, seize ne gagnent rien. $X$ est le gain net d'un ticket (gain moins mise de 500 F). Que vaut $E(X)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Gains nets : 5 500 (1 ticket), 500 (3 tickets), −500 (16 tickets). $E(X) = \\frac{5500 + 1500 - 8000}{20} = \\frac{-1000}{20} = -50$ F. La valeur 450 F est le gain moyen avant de retirer la mise de 500 F.",
+                  "answers": [
+                    {
+                      "content": "−50 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "450 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "50 F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un organisateur vend les 20 tickets d'une tombola à 500 F chacun. Un ticket gagne 6 000 F, trois tickets gagnent 1 000 F chacun, seize ne gagnent rien. Quel bénéfice total réalise l'organisateur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il encaisse $20 \\times 500 = 10\\,000$ F et distribue $6000 + 3 \\times 1000 = 9000$ F. Il garde 1 000 F. C'est cohérent avec l'espérance : −50 F par joueur, donc $20 \\times 50 = 1000$ F pour l'organisateur.",
+                  "answers": [
+                    {
+                      "content": "1 000 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "9 000 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "10 000 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "50 F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un supporter mise 1 000 F sur la victoire de son équipe, dont la probabilité est $\\frac{2}{5}$. S'il a raison, son gain net est +1 500 F ; sinon, il perd sa mise (−1 000 F). Que peut-on dire de ce pari ?",
+                  "question_type": "single_choice",
+                  "explanation": "$E(X) = 1500 \\times \\frac{2}{5} - 1000 \\times \\frac{3}{5} = 600 - 600 = 0$. Le pari est équitable. Les valeurs 500 ou 250 viennent d'additionner ou de moyenner +1 500 et −1 000 sans les probabilités.",
+                  "answers": [
+                    {
+                      "content": "Il est équitable, car l'espérance du gain net vaut 0 F.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est favorable, car l'espérance du gain net vaut 500 F.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est favorable, car l'espérance du gain net vaut 250 F.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est défavorable, car l'espérance du gain net vaut −600 F.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une équipe gagne un match avec la probabilité $\\frac{1}{2}$ (3 points), fait match nul avec la probabilité $\\frac{3}{10}$ (1 point) et perd avec la probabilité $\\frac{1}{5}$ (0 point). Sur 30 matchs, combien de points peut-elle espérer en moyenne ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'espérance par match est $3 \\times \\frac{1}{2} + 1 \\times \\frac{3}{10} = \\frac{9}{5}$. Sur 30 matchs, on attend $30 \\times \\frac{9}{5} = 54$ points. Le nombre 90 supposerait 3 points à chaque match, c'est-à-dire 30 victoires.",
+                  "answers": [
+                    {
+                      "content": "54 points",
+                      "correct": true
+                    },
+                    {
+                      "content": "90 points",
+                      "correct": false
+                    },
+                    {
+                      "content": "30 points",
+                      "correct": false
+                    },
+                    {
+                      "content": "18 points",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une variable aléatoire $X$ prend les valeurs 0, 1 et 3 avec $P(X = 0) = \\frac{1}{5}$, $P(X = 1) = \\frac{3}{10}$ et $P(X = 3) = \\frac{1}{2}$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$E(X) = \\frac{3}{10} + \\frac{3}{2} = \\frac{9}{5}$ et $P(X \\ge 1) = \\frac{3}{10} + \\frac{1}{2} = \\frac{4}{5}$. La somme des probabilités vaut 1. Mais $\\frac{4}{3}$ est la moyenne simple des valeurs ; $\\frac{9}{5}$ n'est pas une valeur de $X$ ; et $P(X \\ge 1)$ ne vaut pas $\\frac{1}{2}$.",
+                  "answers": [
+                    {
+                      "content": "$E(X) = \\frac{9}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P(X \\ge 1) = \\frac{4}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La somme des trois probabilités vaut 1.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$E(X) = \\frac{4}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$X$ prend la valeur $\\frac{9}{5}$ à chaque match.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P(X \\ge 1) = \\frac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un jeu coûte 1 000 F. On lance un dé équilibré. Le gain net est +3 000 F pour un 6, +600 F pour un 4 ou un 5, et −1 000 F pour un 1, un 2 ou un 3. Que vaut l'espérance $E(X)$ du gain net ?",
+                  "question_type": "single_choice",
+                  "explanation": "Loi : $\\frac{1}{6}$, $\\frac{2}{6}$, $\\frac{3}{6}$. $E(X) = 3000 \\times \\frac{1}{6} + 600 \\times \\frac{2}{6} - 1000 \\times \\frac{3}{6} = 500 + 200 - 500 = 200$ F. Le jeu est favorable. Le nombre 2 600 est la somme des valeurs, sans probabilités.",
+                  "answers": [
+                    {
+                      "content": "200 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "−200 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 600 F",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

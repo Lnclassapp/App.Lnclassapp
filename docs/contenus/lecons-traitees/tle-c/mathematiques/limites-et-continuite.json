@@ -1,0 +1,1845 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Limites et continuité",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "C",
+      "essentials": [
+        {
+          "name": "Définition d'une limite et limites de référence",
+          "subtitle": "Limites finies et infinies, en un point et à l'infini",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Lire et traduire une limite finie ou infinie, en un point (à gauche, à droite) et à l'infini.</li><li>Utiliser la définition d'une limite avec des intervalles ouverts, puis avec $\\varepsilon$ et $\\alpha$.</li><li>Appliquer les limites de référence et en déduire les asymptotes d'une courbe.</li></ul><h2>L'image pour comprendre</h2><p><strong>1. Le stade qui se remplit (limite finie à l'infini).</strong> Un stade a 20 000 places. Une heure avant le coup d'envoi, les supporters entrent. Demande : « À partir de quand y a-t-il toujours entre 19 990 et 20 010 personnes ? » Il existe un moment. Demande plus précis : « entre 19 999 et 20 001 » : il existe encore un moment, plus tardif. Quelle que soit la marge demandée, le nombre de présents finit par rester dans cette marge.</p><p><em>Le pont.</em> Le temps qui passe, c'est $x$ qui tend vers $+\\infty$. Le nombre de présents, c'est $f(x)$. Les 20 000 places, c'est la limite $\\ell$. « Une marge aussi petite qu'on veut autour de 20 000 » est un intervalle ouvert centré en $\\ell$. « À partir d'un moment » veut dire « pour $x$ assez grand ». On écrit $\\lim_{x \\to +\\infty} f(x) = 20\\,000$.</p><p><em>Où l'image s'arrête.</em> Dans un vrai stade, on ne dépasse pas la capacité. Une fonction peut, elle, passer au-dessus et au-dessous de sa limite, ou l'atteindre. Ce qui compte : rester dans toute marge choisie.</p><p><strong>2. La file à l'entrée (limite infinie en un point).</strong> Il faut faire entrer 1 000 supporters. Le portillon laisse passer $x$ supporters par seconde. La durée de l'opération est $\\frac{1000}{x}$ secondes. Plus le débit $x$ est petit (en restant positif), plus l'attente est longue, et elle finit par dépasser n'importe quel nombre, même un million de secondes.</p><p><em>Le pont.</em> Le débit $x$ s'approche de $0$ par valeurs positives : on note $x \\to 0^+$. L'attente $f(x) = \\frac{1000}{x}$ dépasse tout réel $A$ choisi à l'avance : c'est la définition de $\\lim_{x \\to 0^+} f(x) = +\\infty$.</p><p><em>Où l'image s'arrête.</em> Un débit négatif n'a pas de sens pour le portillon. En mathématiques, $x$ peut s'approcher de $0$ aussi par la gauche, et $\\frac{1}{x}$ y prend alors de grandes valeurs négatives. Il faut donc toujours dire « à droite » ou « à gauche ».</p><p><strong>3. Le tireur de penalty (la définition avec $\\varepsilon$ et $\\alpha$).</strong> Le sélectionneur exige : « Ton ballon doit finir à moins de $\\varepsilon$ du point visé. » Le tireur répond : « D'accord. Je règle la précision de mon geste à $\\alpha$ près, et tant que mon geste reste dans cette précision, le ballon finit à moins de $\\varepsilon$. » Si le sélectionneur devient plus exigeant (un $\\varepsilon$ plus petit), le tireur doit devenir plus précis (un $\\alpha$ plus petit).</p><p><em>Le pont.</em> Le point visé, c'est $\\ell$. Le geste, c'est $x$ près de $a$, à moins de $\\alpha$ de $a$. L'arrivée du ballon, c'est $f(x)$, à moins de $\\varepsilon$ de $\\ell$. Le défi est lancé en premier ($\\varepsilon$), la réponse vient après ($\\alpha$) : $\\alpha$ dépend de $\\varepsilon$.</p><p><em>Où l'image s'arrête.</em> Un tireur n'a le droit qu'à un nombre limité de précisions. En mathématiques, la réponse $\\alpha$ doit exister pour tous les $\\varepsilon>0$, aussi petits soient-ils.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Limite finie en un réel $a$.</strong> $\\lim_{x \\to a} f(x) = \\ell$ signifie : pour tout intervalle ouvert $J$ contenant $\\ell$, il existe un intervalle ouvert $I$ contenant $a$ tel que, pour tout $x$ de $I$ différent de $a$ (et dans l'ensemble de définition), $f(x)$ appartient à $J$. Avec $\\varepsilon$ : pour tout $\\varepsilon > 0$, il existe $\\alpha > 0$ tel que $0 < |x - a| < \\alpha$ entraîne $|f(x) - \\ell| < \\varepsilon$.</p><p><strong>Limite finie à l'infini.</strong> $\\lim_{x \\to +\\infty} f(x) = \\ell$ signifie : pour tout $\\varepsilon > 0$, il existe un réel $B$ tel que $x > B$ entraîne $|f(x) - \\ell| < \\varepsilon$. Pour $-\\infty$, on écrit $x < B$.</p><p><strong>Limite infinie.</strong> $\\lim_{x \\to +\\infty} f(x) = +\\infty$ signifie : pour tout réel $A$, il existe $B$ tel que $x > B$ entraîne $f(x) > A$. De même, $\\lim_{x \\to a} f(x) = +\\infty$ signifie : pour tout réel $A$, il existe $\\alpha > 0$ tel que $0 < |x - a| < \\alpha$ entraîne $f(x) > A$. Pour $-\\infty$, on remplace $f(x) > A$ par $f(x) < A$.</p><p><strong>À gauche, à droite.</strong> $\\lim_{x \\to a^+} f(x)$ est la limite quand $x > a$, et $\\lim_{x \\to a^-} f(x)$ la limite quand $x < a$. On a $\\lim_{x \\to a} f(x) = \\ell$ si et seulement si ces deux limites existent et valent $\\ell$. Une limite, si elle existe, est unique.</p><p><strong>Asymptotes.</strong> Si $\\lim_{x \\to \\pm\\infty} f(x) = \\ell$, la droite d'équation $y = \\ell$ est asymptote horizontale à la courbe. Si $\\lim_{x \\to a} f(x) = \\pm\\infty$ (ou seulement à gauche, ou à droite), la droite d'équation $x = a$ est asymptote verticale.</p><p><strong>Limites de référence.</strong> Pour tout entier $n \\geq 1$ : $\\lim_{x \\to \\pm\\infty} \\frac{1}{x^n} = 0$ ; $\\lim_{x \\to 0^+} \\frac{1}{x^n} = +\\infty$ ; $\\lim_{x \\to 0^-} \\frac{1}{x^n} = -\\infty$ si $n$ est impair, $+\\infty$ si $n$ est pair. Aussi : $\\lim_{x \\to +\\infty} x^n = +\\infty$ ; $\\lim_{x \\to -\\infty} x^n = +\\infty$ si $n$ est pair, $-\\infty$ si $n$ est impair ; $\\lim_{x \\to +\\infty} \\sqrt{x} = +\\infty$ ; $\\lim_{x \\to +\\infty} \\frac{1}{\\sqrt{x}} = 0$ ; $\\lim_{x \\to 0^+} \\frac{1}{\\sqrt{x}} = +\\infty$.</p></blockquote><h2>Exemple résolu</h2><p><strong>Étudier $f(x) = 2 + \\frac{1}{x - 3}$ aux bornes de son ensemble de définition.</strong></p><ol><li>En $+\\infty$ : $x - 3 \\to +\\infty$, donc $\\frac{1}{x - 3} \\to 0$ et $f(x) \\to 2$. La droite $y = 2$ est asymptote horizontale (de même en $-\\infty$).</li><li>En $3^+$ : $x - 3 \\to 0$ par valeurs positives, donc $\\frac{1}{x - 3} \\to +\\infty$ et $\\lim_{x \\to 3^+} f(x) = +\\infty$.</li><li>En $3^-$ : $x - 3 \\to 0$ par valeurs négatives, donc $\\lim_{x \\to 3^-} f(x) = -\\infty$.</li><li>Les limites à gauche et à droite sont différentes : $f$ n'a pas de limite en $3$, mais la droite $x = 3$ est asymptote verticale.</li></ol><p><strong>Prouver avec $\\varepsilon$ que $\\lim_{x \\to 1} (3x - 2) = 1$.</strong></p><ol><li>On cherche à rendre $|f(x) - 1|$ petit, avec $f(x) = 3x - 2$ : $|f(x) - 1| = |3x - 3| = 3|x - 1|$.</li><li>Soit $\\varepsilon > 0$. On veut $3|x - 1| < \\varepsilon$, c'est-à-dire $|x - 1| < \\frac{\\varepsilon}{3}$.</li><li>On choisit $\\alpha = \\frac{\\varepsilon}{3}$ : si $0 < |x - 1| < \\alpha$, alors $|f(x) - 1| < 3\\alpha = \\varepsilon$. La limite vaut bien $1$.</li></ol><h2>Le piège à éviter</h2><p>Écrire « $\\lim_{x \\to 0} \\frac{1}{x} = +\\infty$ ». C'est faux : à droite de $0$, $\\frac{1}{x}$ tend vers $+\\infty$, à gauche vers $-\\infty$. Comme les deux limites sont différentes, il n'y a pas de limite en $0$. Seule $\\frac{1}{x^2}$, toujours positive, tend vers $+\\infty$ des deux côtés.</p><p>Comment le repérer : avant de conclure sur un dénominateur qui tend vers $0$, étudie son signe de chaque côté.</p><h2>En une phrase</h2><p>Une limite dit où va $f(x)$ quand $x$ s'approche de $a$ ou part à l'infini, et pour une limite en un point, elle n'existe que si la limite à gauche et la limite à droite sont égales.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Lire une limite et sa définition",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On écrit $\\lim_{x \\to +\\infty} f(x) = 20\\,000$, où $f(x)$ est le nombre de supporters présents dans un stade de 20 000 places au temps $x$. Que signifie cette égalité ?",
+                  "question_type": "single_choice",
+                  "explanation": "Souviens-toi du stade : le nombre de présents finit par rester dans toute marge choisie autour de 20 000. Il n'a pas besoin de valoir exactement 20 000, ni de rester en dessous : une limite n'est ni une valeur atteinte ni un plafond.",
+                  "answers": [
+                    {
+                      "content": "Pour tout intervalle ouvert centré en $20\\,000$, $f(x)$ y reste dès que $x$ est assez grand",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(x)$ vaut exactement $20\\,000$ dès que $x$ est assez grand",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(x)$ ne dépasse jamais $20\\,000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x$ se rapproche de $20\\,000$ quand $f(x)$ devient très grand",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : $\\lim_{x \\to 0} \\frac{1}{x} = +\\infty$.",
+                  "question_type": "true_false",
+                  "explanation": "À droite de $0$, $\\frac{1}{x}$ tend vers $+\\infty$ ; à gauche, vers $-\\infty$. Les deux limites sont différentes : il n'y a pas de limite en $0$. La file d'attente à l'entrée du stade n'a de sens que pour un débit positif : ce n'est que la limite à droite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle phrase traduit $\\lim_{x \\to a} f(x) = \\ell$ avec $\\varepsilon$ et $\\alpha$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le défi $\\varepsilon$ est lancé en premier, comme le sélectionneur au tireur de penalty : pour chaque $\\varepsilon > 0$ on trouve ensuite un $\\alpha > 0$ qui dépend de lui. Inverser l'ordre, ou mesurer $x$ contre $\\ell$, change complètement le sens.",
+                  "answers": [
+                    {
+                      "content": "Pour tout $\\varepsilon > 0$, il existe $\\alpha > 0$ tel que $0 < |x - a| < \\alpha$ entraîne $|f(x) - \\ell| < \\varepsilon$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il existe $\\alpha > 0$ tel que, pour tout $\\varepsilon > 0$, $0 < |x - a| < \\alpha$ entraîne $|f(x) - \\ell| < \\varepsilon$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour tout $\\varepsilon > 0$, il existe $\\alpha > 0$ tel que $|f(x) - \\ell| < \\alpha$ entraîne $|x - a| < \\varepsilon$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour tout $\\varepsilon > 0$, il existe $\\alpha > 0$ tel que $0 < |x - \\ell| < \\alpha$ entraîne $|f(x) - a| < \\varepsilon$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $\\lim_{x \\to +\\infty} f(x) = 3$. Quelles affirmations sont correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "La limite finie en $+\\infty$ donne une asymptote horizontale $y = 3$, et $f(x)$ s'approche de $3$ autant qu'on veut. Mais la courbe peut couper cette asymptote, même plusieurs fois. Et $x = 3$ serait une asymptote verticale, liée à une limite infinie en $3$ : autre situation.",
+                  "answers": [
+                    {
+                      "content": "La droite d'équation $y = 3$ est asymptote horizontale à la courbe en $+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(x)$ s'approche de $3$ aussi près qu'on veut dès que $x$ est assez grand",
+                      "correct": true
+                    },
+                    {
+                      "content": "La courbe de $f$ ne peut jamais couper la droite d'équation $y = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $x = 3$ est asymptote verticale à la courbe",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que signifie $\\lim_{x \\to a} f(x) = +\\infty$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La définition fixe un réel $A$ quelconque, aussi grand qu'on veut, comme l'attente à l'entrée du stade qui dépasse tout nombre. C'est la valeur de $f(x)$ qui devient grande quand $x$ est proche de $a$, pas $x$. Et $+\\infty$ n'est pas un nombre : $f(a)$ ne peut pas valoir $+\\infty$.",
+                  "answers": [
+                    {
+                      "content": "Pour tout réel $A$, on a $f(x) > A$ dès que $x \\ne a$ est assez proche de $a$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(a) = +\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(x)$ est grand quand $x$ est grand",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il existe un réel $A$ tel que $f(x) > A$ pour tout $x$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Utiliser les limites de référence",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Que vaut $\\lim_{x \\to -\\infty} x^3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un nombre négatif très grand en valeur absolue, élevé au cube (exposant impair), reste négatif et devient encore plus grand en valeur absolue. Par exemple $(-100)^3 = -1\\,000\\,000$. Pour un exposant pair, le résultat serait positif.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to 0^-} \\frac{1}{x^2}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le carré $x^2$ est toujours positif et tend vers $0$ : donc $x^2 \\to 0^+$ et $\\frac{1}{x^2} \\to +\\infty$. Par exemple $x = -0{,}01$ donne $\\frac{1}{x^2} = 10\\,000$. Le signe négatif de $x$ ne compte pas, puisque l'exposant est pair.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to -1^-} \\frac{3}{x + 1}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Quand $x < -1$ et $x \\to -1$, le dénominateur $x + 1$ est négatif et tend vers $0$ : c'est $0^-$. Un numérateur $3$ positif divisé par un nombre négatif très petit donne un nombre négatif très grand : $-\\infty$. Exemple : $x = -1{,}01$ donne $\\frac{3}{-0{,}01} = -300$.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = 2x + 1$, avec $\\lim_{x \\to 3} f(x) = 7$. Quelles valeurs de $\\alpha$ garantissent que $0 < |x - 3| < \\alpha$ entraîne $|f(x) - 7| < 0{,}1$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "On a $|f(x) - 7| = |2x - 6| = 2|x - 3|$. Il faut $2|x - 3| < 0{,}1$, soit $|x - 3| < 0{,}05$. Donc $\\alpha = 0{,}05$ et tout $\\alpha$ plus petit conviennent, comme $0{,}01$. Avec $\\alpha = 0{,}1$ ou $0{,}5$, on obtient $|f(x) - 7|$ jusqu'à $0{,}2$ ou $1$.",
+                  "answers": [
+                    {
+                      "content": "$\\alpha = 0{,}01$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\alpha = 0{,}05$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\alpha = 0{,}1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\alpha = 0{,}5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces égalités sur $\\frac{1}{\\sqrt{x}}$ et $\\sqrt{x}$, lesquelles sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$\\sqrt{x}$ tend vers $+\\infty$ en $+\\infty$ et vers $0$ en $0^+$. Donc $\\frac{1}{\\sqrt{x}}$ tend vers $0$ en $+\\infty$, et vers $+\\infty$ en $0^+$ (dénominateur positif qui tend vers $0$). Écrire $\\lim_{x \\to 0^+} \\frac{1}{\\sqrt{x}} = 0$ ou $\\lim_{x \\to +\\infty} \\sqrt{x} = 0$ est faux.",
+                  "answers": [
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} \\frac{1}{\\sqrt{x}} = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to 0^+} \\frac{1}{\\sqrt{x}} = +\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to 0^+} \\sqrt{x} = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to 0^+} \\frac{1}{\\sqrt{x}} = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} \\sqrt{x} = 0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Limites, asymptotes et définition",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = 4 + \\frac{5}{x + 1}$ pour $x \\ne -1$. Quelles droites sont asymptotes à la courbe de $f$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "En $\\pm\\infty$, $\\frac{5}{x + 1} \\to 0$, donc $f(x) \\to 4$ : asymptote horizontale $y = 4$. En $-1$, le dénominateur tend vers $0$, donc $f(x) \\to \\pm\\infty$ : asymptote verticale $x = -1$. Inverser les rôles ($y = -1$, $x = 4$) est l'erreur classique.",
+                  "answers": [
+                    {
+                      "content": "La droite d'équation $y = 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite d'équation $x = -1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite d'équation $y = -1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $x = 4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to 1} \\frac{1}{(x - 1)^2}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le carré $(x - 1)^2$ est positif des deux côtés de $1$ et tend vers $0^+$. Donc $\\frac{1}{(x - 1)^2} \\to +\\infty$ à gauche comme à droite, et la limite en $1$ existe. Ne confonds pas avec $\\frac{1}{x - 1}$, dont les limites à gauche et à droite diffèrent.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite n'existe pas, car les limites à gauche et à droite diffèrent",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{1}{x - 2}$. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Pour $x > 2$ proche de $2$, $x - 2 \\to 0^+$ : on a $+\\infty$. Pour $x < 2$, $x - 2 \\to 0^-$ : on a $-\\infty$. Les deux limites diffèrent, donc pas de limite en $2$. En $\\pm\\infty$, le dénominateur devient grand, donc $f(x) \\to 0$ et non $\\pm\\infty$.",
+                  "answers": [
+                    {
+                      "content": "$\\lim_{x \\to 2^+} f(x) = +\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to 2^-} f(x) = -\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La fonction $f$ n'a pas de limite en $2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} f(x) = +\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim_{x \\to -\\infty} f(x) = -\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim_{x \\to 2} f(x) = 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = 3x - 2$, avec $\\lim_{x \\to 1} f(x) = 1$. Quelle est la plus grande valeur de $\\alpha$ telle que $0 < |x - 1| < \\alpha$ entraîne $|f(x) - 1| < 0{,}3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $|f(x) - 1| = |3x - 3| = 3|x - 1|$. La condition $3|x - 1| < 0{,}3$ équivaut à $|x - 1| < 0{,}1$, donc $\\alpha = 0{,}1$. La valeur $0{,}3$ est l'erreur qui oublie le facteur $3$ ; $0{,}01$ convient aussi mais n'est pas la plus grande.",
+                  "answers": [
+                    {
+                      "content": "$0{,}1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}01$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^2$ et $\\lim_{x \\to +\\infty} f(x) = +\\infty$. Pour $A = 400$, quelle est la plus petite valeur de $B$ telle que $x > B$ entraîne $f(x) > 400$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $x > 0$, $x^2 > 400$ équivaut à $x > 20$ : donc $B = 20$. Pour $x = 20$ on obtient exactement $400$, qui n'est pas strictement supérieur à $400$, d'où la condition $x > B$. Prendre $B = 200$ est trop grand ; $B = 400$ est l'erreur « $B = A$ ».",
+                  "answers": [
+                    {
+                      "content": "$20$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$200$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$400$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$40$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Opérations sur les limites et formes indéterminées",
+          "subtitle": "Calculer une limite, lever une indétermination, limite d'une composée",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Calculer une limite avec les règles d'opérations (somme, produit, quotient).</li><li>Reconnaître une forme indéterminée et la lever (factorisation, terme de plus haut degré, expression conjuguée).</li><li>Calculer la limite d'une fonction composée.</li></ul><h2>L'image pour comprendre</h2><p><strong>1. La recette de la buvette (les règles qui marchent).</strong> Dans un stade imaginaire, l'affluence grandit sans cesse : elle dépasse tout nombre. La dépense moyenne par supporter se stabilise à 500 F. La recette est « affluence $\\times$ dépense moyenne ». Elle grandit sans cesse, elle aussi.</p><p><em>Le pont.</em> L'affluence est $f(x)$, avec $\\lim f = +\\infty$. La dépense moyenne est $g(x)$, avec $\\lim g = 500$. La recette est $f(x) \\times g(x)$, et $\\lim f g = +\\infty$, puisque $500 > 0$. C'est la règle « $+\\infty \\times \\ell = +\\infty$ si $\\ell > 0$ ».</p><p><em>Où l'image s'arrête.</em> Si la dépense moyenne tendait vers $0$ (les supporters ne dépensent presque plus), on ne pourrait plus conclure sans calcul : c'est la forme « $\\infty \\times 0$ ».</p><p><strong>2. Deux équipes qui marquent sans fin (les formes indéterminées).</strong> Dans un championnat imaginaire sans fin, l'équipe A a marqué $a(t)$ buts et l'équipe B $b(t)$ buts après $t$ matchs. Les deux totaux grandissent sans limite. Si A marque 3 buts par match et B 1 but par match, l'écart $a - b$ grandit sans limite et le rapport $\\frac{a}{b}$ vaut 3. Si les deux marquent 2 buts par match, l'écart est nul et le rapport vaut 1.</p><p><em>Le pont.</em> Les deux totaux tendent vers $+\\infty$. L'écart est de la forme « $+\\infty - \\infty$ » et le rapport de la forme « $\\frac{\\infty}{\\infty}$ ». On voit que le résultat change selon le rythme de chaque équipe : on dit que ces formes sont <strong>indéterminées</strong>. Même idée pour « $0 \\times \\infty$ » (un joueur dont la vitesse tend vers $0$ pendant un temps qui tend vers $+\\infty$) et « $\\frac{0}{0}$ ».</p><p><em>Où l'image s'arrête.</em> « Indéterminée » ne veut pas dire « sans limite ». La limite existe souvent. Il faut la trouver en transformant l'écriture.</p><p><strong>3. La passe en deux temps (la limite d'une composée).</strong> Un défenseur passe le ballon à un milieu, qui le passe à l'attaquant. Si la première passe amène le ballon aussi près qu'on veut du milieu, et si le milieu, de là, envoie le ballon aussi près qu'on veut de l'attaquant, le ballon arrive près de l'attaquant.</p><p><em>Le pont.</em> $x$ tend vers $a$ et la première passe donne $g(x)$, qui tend vers $b$ (le milieu). La deuxième passe donne $f(g(x))$, et comme $f(y)$ tend vers $c$ quand $y$ tend vers $b$ (l'attaquant), on obtient $\\lim_{x \\to a} f(g(x)) = c$.</p><p><em>Où l'image s'arrête.</em> Les valeurs $a$, $b$ et $c$ peuvent être des réels ou $\\pm\\infty$. L'image oublie ce cas, qui est pourtant fréquent.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Somme.</strong> $\\ell + \\ell'$ ; $\\ell + (\\pm\\infty) = \\pm\\infty$ ; $(+\\infty) + (+\\infty) = +\\infty$ ; $(-\\infty) + (-\\infty) = -\\infty$. La forme « $+\\infty - \\infty$ » est indéterminée.</p><p><strong>Produit.</strong> $\\ell \\times \\ell'$ ; si $\\ell \\neq 0$, $\\ell \\times (\\pm\\infty) = \\pm\\infty$ avec la règle des signes ; $(\\pm\\infty) \\times (\\pm\\infty) = \\pm\\infty$ avec la règle des signes. La forme « $0 \\times \\infty$ » est indéterminée.</p><p><strong>Quotient.</strong> $\\frac{\\ell}{\\ell'}$ si $\\ell' \\neq 0$ ; $\\frac{\\ell}{\\pm\\infty} = 0$ ; $\\frac{\\pm\\infty}{\\ell'} = \\pm\\infty$ avec la règle des signes, si $\\ell' \\neq 0$ ; $\\frac{\\ell}{0}$ avec $\\ell \\neq 0$ donne $\\pm\\infty$ : on étudie le signe du dénominateur ($0^+$ ou $0^-$). Les formes « $\\frac{\\infty}{\\infty}$ » et « $\\frac{0}{0}$ » sont indéterminées.</p><p><strong>Les 4 formes indéterminées.</strong> $+\\infty - \\infty$ ; $0 \\times \\infty$ ; $\\frac{\\infty}{\\infty}$ ; $\\frac{0}{0}$.</p><p><strong>Pour les lever.</strong></p><ul><li>En $\\pm\\infty$, un polynôme a la même limite que son terme de plus haut degré.</li><li>En $\\pm\\infty$, une fraction rationnelle a la même limite que le quotient de ses termes de plus haut degré.</li><li>Pour « $\\frac{0}{0}$ » en $a$ avec un polynôme, on factorise par $(x - a)$, puis on simplifie.</li><li>Avec une racine carrée, on multiplie par l'expression conjuguée : celle de $\\sqrt{A} - \\sqrt{B}$ est $\\sqrt{A} + \\sqrt{B}$.</li></ul><p><strong>Limite d'une composée.</strong> Si $\\lim_{x \\to a} g(x) = b$ et $\\lim_{y \\to b} f(y) = c$, alors $\\lim_{x \\to a} f(g(x)) = c$ ($a$, $b$, $c$ réels, $+\\infty$ ou $-\\infty$).</p></blockquote><h2>Exemple résolu</h2><p><strong>Calculer $\\lim_{x \\to +\\infty} \\left(\\sqrt{x^2 + x} - x\\right)$.</strong></p><ol><li>$\\sqrt{x^2 + x} \\to +\\infty$ et $x \\to +\\infty$ : c'est la forme « $+\\infty - \\infty$ », indéterminée.</li><li>On multiplie et on divise par l'expression conjuguée $\\sqrt{x^2 + x} + x$ : $\\sqrt{x^2 + x} - x = \\frac{(x^2 + x) - x^2}{\\sqrt{x^2 + x} + x} = \\frac{x}{\\sqrt{x^2 + x} + x}$.</li><li>Pour $x > 0$, on divise le numérateur et le dénominateur par $x$ : $\\frac{x}{\\sqrt{x^2 + x} + x} = \\frac{1}{\\sqrt{1 + \\frac{1}{x}} + 1}$.</li><li>Quand $x \\to +\\infty$, $\\frac{1}{x} \\to 0$, donc $\\sqrt{1 + \\frac{1}{x}} \\to 1$ (limite d'une composée). Le quotient tend vers $\\frac{1}{1 + 1} = \\frac{1}{2}$.</li></ol><p><strong>Calculer $\\lim_{x \\to 1} \\frac{x^3 - 1}{x^2 - 1}$.</strong></p><ol><li>En remplaçant $x$ par $1$, on obtient « $\\frac{0}{0}$ » : forme indéterminée.</li><li>On factorise : $x^3 - 1 = (x - 1)(x^2 + x + 1)$ et $x^2 - 1 = (x - 1)(x + 1)$.</li><li>Pour $x \\neq 1$, on simplifie : $\\frac{x^3 - 1}{x^2 - 1} = \\frac{x^2 + x + 1}{x + 1}$.</li><li>En $x = 1$ : $\\frac{1 + 1 + 1}{1 + 1} = \\frac{3}{2}$. La limite vaut $\\frac{3}{2}$.</li></ol><h2>Le piège à éviter</h2><p>Traiter $\\infty$ comme un nombre ordinaire : écrire « $\\infty - \\infty = 0$ » ou « $\\frac{\\infty}{\\infty} = 1$ ». C'est faux. Par exemple, $\\lim_{x \\to +\\infty} \\frac{3x}{x} = 3$ et $\\lim_{x \\to +\\infty} \\frac{x^2}{x} = +\\infty$ : les deux sont de la forme « $\\frac{\\infty}{\\infty}$ », avec des résultats différents.</p><p>Comment le repérer : si ton calcul direct donne l'une des 4 formes indéterminées, arrête-toi, transforme l'écriture, puis recalcule.</p><h2>En une phrase</h2><p>On calcule une limite avec les règles de somme, de produit et de quotient ; quand elles donnent une des 4 formes indéterminées, on transforme l'écriture (terme de plus haut degré, factorisation, conjugué) avant de conclure.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Règles et formes indéterminées",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Laquelle de ces formes n'est PAS une forme indéterminée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Seule la somme de deux $+\\infty$ va dans le même sens : $(+\\infty) + (+\\infty) = +\\infty$. Les trois autres formes, « $+\\infty - \\infty$ », « $0 \\times \\infty$ » et « $\\frac{\\infty}{\\infty}$ », se disputent et sont indéterminées : le résultat dépend de la fonction.",
+                  "answers": [
+                    {
+                      "content": "$(+\\infty) + (+\\infty)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(+\\infty) - (+\\infty)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0 \\times (+\\infty)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{+\\infty}{+\\infty}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si $\\lim_{x \\to +\\infty} f(x) = +\\infty$ et $\\lim_{x \\to +\\infty} g(x) = +\\infty$, alors $\\lim_{x \\to +\\infty} (f(x) - g(x)) = 0$.",
+                  "question_type": "true_false",
+                  "explanation": "La forme « $+\\infty - \\infty$ » est indéterminée. Avec $f(x) = g(x) = x$, la différence vaut $0$. Mais avec $f(x) = x^2$ et $g(x) = x$, elle tend vers $+\\infty$. C'est l'écart de buts de nos deux équipes : tout dépend du rythme de chacune.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une équipe marque $a(t) = 3t$ buts et une autre $b(t) = t$ buts après $t$ matchs. Que vaut $\\lim_{t \\to +\\infty} \\frac{a(t)}{b(t)}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Ici le rapport vaut $\\frac{3t}{t} = 3$ pour tout $t > 0$, donc la limite est $3$. La forme « $\\frac{\\infty}{\\infty}$ » ne vaut pas toujours $1$ : le résultat dépend des rythmes. L'erreur tentante est de simplifier $\\frac{\\infty}{\\infty}$ en $1$.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces formes, lesquelles sont indéterminées ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les formes « $0 \\times \\infty$ » et « $\\frac{\\infty}{\\infty}$ » sont indéterminées. Les autres se calculent : $3 \\times (+\\infty) = +\\infty$ car $3 > 0$ ; $\\frac{5}{+\\infty} = 0$ ; $(-\\infty) + (-\\infty) = -\\infty$. Un réel fixé ne donne pas d'indétermination avec $\\infty$ dans ces trois cas.",
+                  "answers": [
+                    {
+                      "content": "$0 \\times \\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{\\infty}{\\infty}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3 \\times (+\\infty)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{5}{+\\infty}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-\\infty) + (-\\infty)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $\\lim_{x \\to a} g(x) = b$ et $\\lim_{y \\to b} f(y) = c$, que vaut $\\lim_{x \\to a} f(g(x))$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "C'est la passe en deux temps : le défenseur amène le ballon près de $b$ (le milieu), puis le milieu l'amène près de $c$ (l'attaquant). On lit le résultat final : $c$, et non $b$, qui n'est que l'étape intermédiaire. Le produit $b \\times c$ n'a pas de sens ici.",
+                  "answers": [
+                    {
+                      "content": "$c$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$b \\times c$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer des limites",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Que vaut $\\lim_{x \\to -\\infty} (-x^3 + 4x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "En $-\\infty$, un polynôme a la même limite que son terme de plus haut degré : $-x^3$. Comme $x^3 \\to -\\infty$, on obtient $-x^3 \\to +\\infty$. Par exemple, $x = -10$ donne $1000 - 40 = 960$. L'erreur est d'oublier le signe moins devant $x^3$.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to +\\infty} \\frac{4x^2 - 3x + 1}{2x^2 + 5}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La fraction rationnelle a la même limite que le quotient de ses termes de plus haut degré : $\\frac{4x^2}{2x^2} = 2$. Variante de calcul : en divisant par $x^2$, on obtient $\\frac{4 - \\frac{3}{x} + \\frac{1}{x^2}}{2 + \\frac{5}{x^2}} \\to \\frac{4}{2}$.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to 2} \\frac{x^2 - 5x + 6}{x - 2}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "En $x = 2$ on obtient « $\\frac{0}{0}$ ». On factorise : $x^2 - 5x + 6 = (x - 2)(x - 3)$. Pour $x \\neq 2$, la fraction vaut $x - 3$, qui tend vers $2 - 3 = -1$. Conclure $0$ ou $+\\infty$ directement est l'erreur classique.",
+                  "answers": [
+                    {
+                      "content": "$-1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to +\\infty} \\left(\\sqrt{x + 3} - \\sqrt{x}\\right)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Forme « $+\\infty - \\infty$ ». Avec le conjugué : $\\sqrt{x + 3} - \\sqrt{x} = \\frac{3}{\\sqrt{x + 3} + \\sqrt{x}}$. Le dénominateur tend vers $+\\infty$, donc le quotient tend vers $0$. Test : $x = 10\\,000$ donne environ $0{,}015$. Ce n'est pas $3$.",
+                  "answers": [
+                    {
+                      "content": "$0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to 1^+} \\frac{2x + 1}{x - 1}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le numérateur tend vers $3$ et le dénominateur vers $0$ par valeurs positives (car $x > 1$). Le quotient « $\\frac{3}{0^+}$ » tend vers $+\\infty$. Pour $x = 1{,}001$, on trouve environ $3\\,002$. À gauche de $1$, on aurait $-\\infty$.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Formes indéterminées et composées",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Que vaut $\\lim_{x \\to -\\infty} \\frac{3x^3 - x}{x^2 + 1}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La fraction rationnelle se comporte comme le quotient des termes de plus haut degré : $\\frac{3x^3}{x^2} = 3x$. Quand $x \\to -\\infty$, $3x \\to -\\infty$. Le degré du numérateur est supérieur à celui du dénominateur : il n'y a pas de limite finie. Le signe de $x$ donne $-\\infty$.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to 0^+} \\left(\\frac{1}{x} - \\frac{1}{x^2}\\right)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Forme « $+\\infty - \\infty$ ». On réduit au même dénominateur : $\\frac{1}{x} - \\frac{1}{x^2} = \\frac{x - 1}{x^2}$. Le numérateur tend vers $-1$ et $x^2 \\to 0^+$, donc la limite est $-\\infty$. Test : $x = 0{,}1$ donne $10 - 100 = -90$. C'est $\\frac{1}{x^2}$ qui tire le plus fort.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces égalités, lesquelles sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$x - \\sqrt{x} = x\\left(1 - \\frac{1}{\\sqrt{x}}\\right) \\to +\\infty$. Avec le conjugué, $\\sqrt{x^2 + 1} + x = \\frac{1}{\\sqrt{x^2 + 1} - x} \\to 0$ en $-\\infty$. Et $\\frac{x^3 - 1}{x^2 - 1} = \\frac{x^2 + x + 1}{x + 1} \\to \\frac{3}{2}$. Mais $\\sqrt{x^2 + x} - x \\to \\frac{1}{2}$, pas $1$ ; $\\frac{x - 1}{x + 1} \\to 1$.",
+                  "answers": [
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} (x - \\sqrt{x}) = +\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to -\\infty} \\left(\\sqrt{x^2 + 1} + x\\right) = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to 1} \\frac{x^3 - 1}{x^2 - 1} = \\frac{3}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} \\left(\\sqrt{x^2 + x} - x\\right) = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} \\frac{x - 1}{x + 1} = +\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} (x^2 - x) = 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to +\\infty} \\sqrt{\\frac{4x + 1}{x + 2}}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On calcule d'abord l'intérieur : $\\frac{4x + 1}{x + 2}$ se comporte comme $\\frac{4x}{x} = 4$. Puis on applique la racine carrée : par composée, la limite est $\\sqrt{4} = 2$. Répondre $4$ oublie de composer avec la racine ; $+\\infty$ confond avec $\\sqrt{x}$.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to 2} \\frac{\\sqrt{x + 2} - 2}{x - 2}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "En $x = 2$ on obtient « $\\frac{0}{0}$ ». Avec le conjugué : $\\frac{(x + 2) - 4}{(x - 2)(\\sqrt{x + 2} + 2)} = \\frac{1}{\\sqrt{x + 2} + 2}$ pour $x \\neq 2$. Cette expression tend vers $\\frac{1}{2 + 2} = \\frac{1}{4}$. Le résultat n'est ni $0$ ni $+\\infty$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Limites par comparaison et théorème des gendarmes",
+          "subtitle": "Encadrer une fonction pour trouver sa limite",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Utiliser un théorème de comparaison pour obtenir une limite infinie.</li><li>Appliquer le théorème des gendarmes pour obtenir une limite finie.</li><li>Encadrer une expression qui contient $\\sin x$ ou $\\cos x$.</li></ul><h2>L'image pour comprendre</h2><p><strong>1. La clameur plus forte que les ultras (comparaison, limite infinie).</strong> Dans une tribune, un groupe d'ultras chante de plus en plus fort pendant le match : son volume dépasse tout nombre. La clameur de la tribune entière est toujours plus forte que celle du groupe. La clameur de la tribune dépasse donc, elle aussi, tout nombre.</p><p><em>Le pont.</em> Le volume des ultras est $g(x)$, avec $\\lim g = +\\infty$. La clameur de la tribune est $f(x)$, avec $f(x) \\geq g(x)$. Donc $\\lim f = +\\infty$.</p><p><em>Où l'image s'arrête.</em> Il faut que la plus petite grandeur monte sans fin. Si la clameur était toujours plus faible que celle des ultras, on ne saurait rien : elle pourrait rester presque nulle.</p><p><strong>2. Le milieu coincé entre deux défenseurs (théorème des gendarmes).</strong> Deux défenseurs reculent chacun vers la même ligne, celle du point de penalty. Un milieu adverse est coincé entre eux : il est toujours devant l'un et derrière l'autre. Si les deux défenseurs finissent sur la ligne du point de penalty, le milieu y finit forcément aussi.</p><p><em>Le pont.</em> Les défenseurs sont les fonctions $g$ et $h$. Le milieu est $f$. La ligne du point de penalty est la limite $\\ell$. « Être coincé entre les deux » est l'encadrement $g(x) \\leq f(x) \\leq h(x)$.</p><p><em>Où l'image s'arrête.</em> Les deux défenseurs doivent aller <strong>au même endroit</strong>. S'ils reculent vers deux lignes différentes, le milieu peut aller n'importe où entre les deux, ou même ne pas s'arrêter.</p><p><strong>3. La marge d'erreur qui disparaît (variante avec une valeur absolue).</strong> Un tireur vise un poteau. L'écart entre le ballon et le poteau ne dépasse jamais une marge, et cette marge devient aussi petite qu'on veut au fil des essais. Le ballon finit donc au poteau.</p><p><em>Le pont.</em> Le poteau est $\\ell$, le ballon est $f(x)$ et la marge est $h(x)$ : si $|f(x) - \\ell| \\leq h(x)$ et $\\lim h = 0$, alors $\\lim f = \\ell$.</p><p><em>Où l'image s'arrête.</em> La marge doit tendre vers $0$ : une marge qui reste égale à 1 m ne permet pas de conclure.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Dans tout ce qui suit, $a$ désigne un réel, $+\\infty$ ou $-\\infty$, et les inégalités sont vraies au voisinage de $a$ (pour $x$ assez proche de $a$, ou assez grand).</p><p><strong>Théorèmes de comparaison.</strong> Si $f(x) \\geq g(x)$ et $\\lim_{x \\to a} g(x) = +\\infty$, alors $\\lim_{x \\to a} f(x) = +\\infty$. Si $f(x) \\leq g(x)$ et $\\lim_{x \\to a} g(x) = -\\infty$, alors $\\lim_{x \\to a} f(x) = -\\infty$.</p><p><strong>Théorème des gendarmes.</strong> Si $g(x) \\leq f(x) \\leq h(x)$ et $\\lim_{x \\to a} g(x) = \\lim_{x \\to a} h(x) = \\ell$ (réel), alors $\\lim_{x \\to a} f(x) = \\ell$.</p><p><strong>Variante.</strong> Si $|f(x) - \\ell| \\leq h(x)$ et $\\lim_{x \\to a} h(x) = 0$, alors $\\lim_{x \\to a} f(x) = \\ell$.</p><p><strong>Passage à la limite.</strong> Si $f(x) \\leq g(x)$ et si $f$ et $g$ ont une limite en $a$, alors $\\lim f \\leq \\lim g$. Les inégalités strictes deviennent larges à la limite.</p><p><strong>Rappel.</strong> Pour tout réel $x$ : $-1 \\leq \\sin x \\leq 1$ et $-1 \\leq \\cos x \\leq 1$.</p></blockquote><h2>Exemple résolu</h2><p><strong>Calculer $\\lim_{x \\to +\\infty} \\frac{\\sin x}{x}$.</strong></p><ol><li>On part de l'encadrement connu : $-1 \\leq \\sin x \\leq 1$.</li><li>On divise par $x$. Comme on cherche la limite en $+\\infty$, on peut supposer $x > 0$, donc l'ordre est conservé : $-\\frac{1}{x} \\leq \\frac{\\sin x}{x} \\leq \\frac{1}{x}$.</li><li>$\\lim_{x \\to +\\infty} \\left(-\\frac{1}{x}\\right) = 0$ et $\\lim_{x \\to +\\infty} \\frac{1}{x} = 0$ : les deux défenseurs vont au même endroit.</li><li>Par le théorème des gendarmes, $\\lim_{x \\to +\\infty} \\frac{\\sin x}{x} = 0$.</li></ol><p><strong>Calculer $\\lim_{x \\to +\\infty} (x + \\cos x)$.</strong></p><ol><li>Comme $\\cos x \\geq -1$, on a $x + \\cos x \\geq x - 1$.</li><li>$\\lim_{x \\to +\\infty} (x - 1) = +\\infty$.</li><li>Par comparaison, $\\lim_{x \\to +\\infty} (x + \\cos x) = +\\infty$. On ne dit pas que $\\cos x$ a une limite : on s'en passe.</li></ol><h2>Le piège à éviter</h2><p>Deux erreurs fréquentes. Première erreur : multiplier ou diviser un encadrement par un nombre négatif sans retourner les inégalités. Si $x < 0$, diviser $-1 \\leq \\sin x \\leq 1$ par $x$ donne $\\frac{1}{x} \\leq \\frac{\\sin x}{x} \\leq -\\frac{1}{x}$. Seconde erreur : croire qu'une inégalité stricte reste stricte à la limite. On a $\\frac{1}{x} > 0$ pour tout $x > 0$, mais sa limite en $+\\infty$ est $0$, et non un nombre strictement positif.</p><p>Comment le repérer : avant de diviser par $x$, regarde son signe ; avant de conclure, regarde si les deux fonctions qui encadrent ont <strong>la même</strong> limite.</p><h2>En une phrase</h2><p>Si une fonction est toujours au-dessus d'une autre qui tend vers $+\\infty$, elle y tend aussi ; si elle est coincée entre deux fonctions qui tendent vers le même réel, elle tend vers ce réel.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Comparaison et gendarmes",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On sait que $g(x) \\leq f(x) \\leq h(x)$ près de $+\\infty$. Quelle condition permet de conclure que $f$ a une limite finie en $+\\infty$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour que le milieu soit forcé d'arriver quelque part, les deux défenseurs doivent aller au même endroit : $g$ et $h$ ont la même limite réelle $\\ell$. Avoir chacune une limite ne suffit pas ; la monotonie de $f$ n'est pas une hypothèse du théorème.",
+                  "answers": [
+                    {
+                      "content": "$g$ et $h$ ont la même limite réelle $\\ell$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$g$ et $h$ ont chacune une limite",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est croissante",
+                      "correct": false
+                    },
+                    {
+                      "content": "$g(x) < h(x)$ pour tout $x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si $f(x) \\geq g(x)$ près de $+\\infty$ et si $\\lim_{x \\to +\\infty} g(x) = +\\infty$, alors $\\lim_{x \\to +\\infty} f(x) = +\\infty$.",
+                  "question_type": "true_false",
+                  "explanation": "Souviens-toi de la clameur de la tribune et du groupe d'ultras : si la clameur est toujours plus forte que celle du groupe, qui dépasse tout nombre, elle le dépasse aussi. C'est le théorème de comparaison par minoration.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si $f(x) \\leq g(x)$ près de $+\\infty$ et si $\\lim_{x \\to +\\infty} g(x) = +\\infty$, alors $\\lim_{x \\to +\\infty} f(x) = +\\infty$.",
+                  "question_type": "true_false",
+                  "explanation": "L'inégalité est dans le mauvais sens. Si la clameur est toujours plus faible que celle des ultras, elle peut rester presque nulle : par exemple $f(x) = 0$ et $g(x) = x$. Pour avoir $+\\infty$, il faut que la plus petite des deux fonctions tende vers $+\\infty$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $g(x) \\leq f(x) \\leq h(x)$, avec $\\lim_{x \\to +\\infty} g(x) = 0$ et $\\lim_{x \\to +\\infty} h(x) = 2$. Que peut-on dire de $\\lim_{x \\to +\\infty} f(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux défenseurs reculent vers deux lignes différentes : le milieu peut rester entre les deux, sans s'arrêter nulle part. Le théorème des gendarmes ne s'applique pas, et la valeur $1$ (la moyenne) n'a aucune raison d'être la limite.",
+                  "answers": [
+                    {
+                      "content": "On ne peut pas conclure avec le théorème des gendarmes",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim f = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim f = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim f = 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles implications sont correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les deux marges $\\frac{1}{x}$ (en $+\\infty$) et $|x|$ (en $0$) tendent vers $0$ : c'est la variante des gendarmes. Minorer par $-x^2$, qui tend vers $-\\infty$, ne dit rien. Et être borné par $5$ ne donne pas la limite $5$ : la marge ne tend pas vers $0$.",
+                  "answers": [
+                    {
+                      "content": "Si $|f(x) - 3| \\leq \\frac{1}{x}$ pour $x > 0$, alors $\\lim_{x \\to +\\infty} f(x) = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $|f(x) - 3| \\leq |x|$ près de $0$, alors $\\lim_{x \\to 0} f(x) = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $f(x) \\geq -x^2$, alors $\\lim_{x \\to +\\infty} f(x) = +\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si $|f(x)| \\leq 5$ pour tout $x$, alors $\\lim_{x \\to +\\infty} f(x) = 5$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Encadrer pour calculer",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Que vaut $\\lim_{x \\to +\\infty} \\frac{\\sin x}{x}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $x > 0$, $-\\frac{1}{x} \\leq \\frac{\\sin x}{x} \\leq \\frac{1}{x}$. Les deux bornes tendent vers $0$ : par les gendarmes, la limite est $0$. Ne confonds pas avec la valeur $1$, qui apparaît à propos de $\\frac{\\sin x}{x}$ quand $x$ tend vers $0$ (résultat vu plus tard), et non vers $+\\infty$.",
+                  "answers": [
+                    {
+                      "content": "$0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite n'existe pas, car $\\sin x$ oscille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to +\\infty} (x + \\cos x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme $\\cos x \\geq -1$, on a $x + \\cos x \\geq x - 1$, et $x - 1 \\to +\\infty$. Par comparaison, la limite est $+\\infty$. Que $\\cos x$ oscille ne gêne pas : le terme $x$ domine et $\\cos x$ reste borné entre $-1$ et $1$.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La limite n'existe pas, car $\\cos x$ oscille",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to +\\infty} \\frac{2x + \\sin x}{x}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On écrit $\\frac{2x + \\sin x}{x} = 2 + \\frac{\\sin x}{x}$ pour $x > 0$. Comme $\\frac{\\sin x}{x} \\to 0$ par les gendarmes, la limite vaut $2$. Remplacer $\\sin x$ par $1$ pour obtenir $3$ est faux : $\\sin x$ prend toutes les valeurs entre $-1$ et $1$.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to -\\infty} (x - \\sin x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme $\\sin x \\geq -1$, on a $-\\sin x \\leq 1$, donc $x - \\sin x \\leq x + 1$. Or $x + 1 \\to -\\infty$. Par comparaison (majoration), la limite est $-\\infty$. Le terme $x$ domine, puisque $\\sin x$ reste entre $-1$ et $1$.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to 0} x \\cos\\left(\\frac{1}{x}\\right)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $x \\neq 0$, $\\left|x \\cos\\left(\\frac{1}{x}\\right)\\right| \\leq |x|$ car $|\\cos| \\leq 1$. Comme $|x| \\to 0$, la variante des gendarmes donne $0$. On ne peut pas dire « $\\cos\\left(\\frac{1}{x}\\right)$ oscille donc pas de limite » : il est multiplié par $x$, qui tend vers $0$.",
+                  "answers": [
+                    {
+                      "content": "$0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Encadrements à plusieurs étapes",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Pour tout $x > 0$, on sait que $\\frac{x - 1}{x} \\leq f(x) \\leq \\frac{x^2 + 1}{x^2 + x}$. Que vaut $\\lim_{x \\to +\\infty} f(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On calcule chaque borne en $+\\infty$. $\\frac{x - 1}{x} = 1 - \\frac{1}{x} \\to 1$. $\\frac{x^2 + 1}{x^2 + x}$ se comporte comme $\\frac{x^2}{x^2} = 1$, donc tend vers $1$. Les deux bornes ont la même limite $1$ : par les gendarmes, $\\lim f = 1$.",
+                  "answers": [
+                    {
+                      "content": "$1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas conclure",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to +\\infty} \\frac{x + \\sin x}{x - \\cos x}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $x > 1$, on divise par $x$ : $\\frac{1 + \\frac{\\sin x}{x}}{1 - \\frac{\\cos x}{x}}$. Par les gendarmes, $\\frac{\\sin x}{x} \\to 0$ et $\\frac{\\cos x}{x} \\to 0$. Le quotient tend donc vers $\\frac{1}{1} = 1$. Dire « pas de limite » parce que $\\sin x$ et $\\cos x$ oscillent est faux.",
+                  "answers": [
+                    {
+                      "content": "$1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La limite n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces égalités, lesquelles sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$\\left|x^2 \\sin\\frac{1}{x}\\right| \\leq x^2 \\to 0$ ; $\\left|\\frac{\\cos x}{x^2}\\right| \\leq \\frac{1}{x^2} \\to 0$ ; $x - \\sin x \\geq x - 1 \\to +\\infty$. En revanche $\\cos x$ n'a pas de limite en $+\\infty$, $x \\sin x$ non plus, et $-x^2 + \\cos x \\leq -x^2 + 1 \\to -\\infty$.",
+                  "answers": [
+                    {
+                      "content": "$\\lim_{x \\to 0} x^2 \\sin\\frac{1}{x} = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} \\frac{\\cos x}{x^2} = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} (x - \\sin x) = +\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} \\cos x = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} x \\sin x = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} (-x^2 + \\cos x) = +\\infty$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si $f(x) > 0$ pour tout $x > 0$ et si $\\lim_{x \\to +\\infty} f(x) = \\ell$, alors $\\ell > 0$.",
+                  "question_type": "true_false",
+                  "explanation": "À la limite, les inégalités strictes deviennent larges : on peut seulement affirmer $\\ell \\geq 0$. Contre-exemple : $f(x) = \\frac{1}{x}$ est strictement positive pour tout $x > 0$, et sa limite en $+\\infty$ vaut $0$, qui n'est pas strictement positif.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x < 0$, on divise l'encadrement $-1 \\leq \\sin x \\leq 1$ par $x$. Quel encadrement de $\\frac{\\sin x}{x}$ obtient-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "Diviser par un nombre négatif retourne les inégalités : $\\frac{-1}{x} \\geq \\frac{\\sin x}{x} \\geq \\frac{1}{x}$, soit $\\frac{1}{x} \\leq \\frac{\\sin x}{x} \\leq -\\frac{1}{x}$. Test : avec $x = -2$, on a $-0{,}5 \\leq \\frac{\\sin x}{x} \\leq 0{,}5$. Les deux bornes tendent vers $0$ en $-\\infty$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{x} \\leq \\frac{\\sin x}{x} \\leq -\\frac{1}{x}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\frac{1}{x} \\leq \\frac{\\sin x}{x} \\leq \\frac{1}{x}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-1 \\leq \\frac{\\sin x}{x} \\leq 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-x \\leq \\frac{\\sin x}{x} \\leq x$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Continuité en un point et sur un intervalle",
+          "subtitle": "Reconnaître une fonction continue, étudier un raccord, prolonger par continuité",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Dire si une fonction est continue en un point ou sur un intervalle, avec la définition par la limite.</li><li>Étudier le raccord d'une fonction définie par morceaux et déterminer un paramètre.</li><li>Prolonger une fonction par continuité en un point où elle n'est pas définie.</li></ul><h2>L'image pour comprendre</h2><p><strong>1. Le ballon et le tableau d'affichage (continuité en un point).</strong> Pendant un lob, la hauteur du ballon change sans jamais sauter : il ne disparaît pas d'un endroit pour réapparaître plus haut. Le score affiché, lui, saute de 0 à 1 à l'instant exact du but : juste avant, il affiche 0 ; juste après, il affiche 1.</p><p><em>Le pont.</em> Pour la hauteur $h(t)$ du ballon, quand $t$ s'approche de $t_0$, $h(t)$ s'approche de $h(t_0)$ : $\\lim_{t \\to t_0} h(t) = h(t_0)$. On dit que $h$ est <strong>continue</strong> en $t_0$. Pour le score $S(t)$, la limite à gauche vaut $0$, la limite à droite vaut $1$ : elles sont différentes, donc $S$ est <strong>discontinue</strong> à l'instant du but.</p><p><em>Où l'image s'arrête.</em> « Se tracer sans lever le crayon » ne marche que sur un intervalle. La fonction $x \\mapsto \\frac{1}{x}$ est continue en tout point de son ensemble de définition, mais sa courbe a deux morceaux séparés par $x = 0$, où elle n'est pas définie.</p><p><strong>2. Le raccord entre deux bandes de pelouse.</strong> On pose deux bandes de gazon côte à côte. Si leurs hauteurs se rejoignent exactement à la jonction, on marche d'une bande à l'autre sans marche. S'il y a une différence de hauteur, on trébuche.</p><p><em>Le pont.</em> La bande de gauche est la formule de $f$ pour $x < a$, la bande de droite la formule pour $x \\geq a$. Le raccord est sans marche quand la limite à gauche, la limite à droite et la valeur $f(a)$ sont égales.</p><p><em>Où l'image s'arrête.</em> Une pelouse sans marche peut quand même avoir un angle à la jonction. Continuité ne veut pas dire « courbe lisse ».</p><p><strong>3. Le trou à combler (prolongement par continuité).</strong> Un trou a été creusé en un seul point de la pelouse. La pelouse tout autour monte vers la hauteur 6 cm quand on s'approche du trou. On bouche le trou avec du gazon à 6 cm : la pelouse redevient continue.</p><p><em>Le pont.</em> La fonction $f$ n'est pas définie en $a$ mais $\\lim_{x \\to a} f(x) = \\ell$ (un réel). On pose $f(a) = \\ell$ : la nouvelle fonction est continue en $a$. C'est un <strong>prolongement par continuité</strong>.</p><p><em>Où l'image s'arrête.</em> On ne peut pas boucher le trou si les deux bords arrivent à des hauteurs différentes, ou s'ils partent à l'infini.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Continuité en un point.</strong> Une fonction $f$ est continue en $a$ si $f$ est définie en $a$ et si $\\lim_{x \\to a} f(x) = f(a)$. De façon équivalente : $\\lim_{x \\to a^-} f(x) = \\lim_{x \\to a^+} f(x) = f(a)$.</p><p><strong>Continuité sur un intervalle.</strong> $f$ est continue sur un intervalle $I$ si elle est continue en tout point de $I$.</p><p><strong>Fonctions usuelles.</strong> Les fonctions polynômes sont continues sur $\\mathbb{R}$. Les fonctions rationnelles sont continues sur leur ensemble de définition. La fonction racine carrée est continue sur $[0\\,;+\\infty[$, la valeur absolue sur $\\mathbb{R}$, et $\\sin$ et $\\cos$ sur $\\mathbb{R}$. Une somme, un produit, un quotient (dénominateur non nul) ou une composée de fonctions continues est continue.</p><p><strong>Raccord.</strong> Si $f$ est définie par une formule pour $x < a$ et par une autre pour $x \\geq a$, elle est continue en $a$ si et seulement si la limite à gauche (calculée avec la 1re formule) est égale à $f(a)$ (donnée par la 2e formule), qui est aussi la limite à droite (la 2e formule étant continue en $a$).</p><p><strong>Prolongement par continuité.</strong> Si $f$ n'est pas définie en $a$ mais si $\\lim_{x \\to a} f(x) = \\ell$ avec $\\ell$ réel, la fonction égale à $f$ partout et à $\\ell$ en $a$ est continue en $a$ : c'est le prolongement par continuité de $f$ en $a$.</p></blockquote><h2>Exemple résolu</h2><p><strong>Déterminer $a$ pour que $f$ soit continue en $2$, avec $f(x) = ax + 1$ si $x < 2$ et $f(x) = x^2$ si $x \\geq 2$.</strong></p><ol><li>La valeur en $2$ est donnée par la 2e formule : $f(2) = 2^2 = 4$.</li><li>Limite à droite : $\\lim_{x \\to 2^+} x^2 = 4$. Elle est égale à $f(2)$.</li><li>Limite à gauche : $\\lim_{x \\to 2^-} (ax + 1) = 2a + 1$.</li><li>Pour la continuité en $2$, il faut $2a + 1 = 4$, donc $a = \\frac{3}{2}$.</li></ol><p><strong>Prolonger par continuité en $2$ la fonction $f(x) = \\frac{x^2 - 4}{x - 2}$ ($x \\neq 2$).</strong></p><ol><li>En $2$, on obtient « $\\frac{0}{0}$ ». On factorise : $x^2 - 4 = (x - 2)(x + 2)$.</li><li>Pour $x \\neq 2$, $f(x) = x + 2$, et $\\lim_{x \\to 2} f(x) = 4$. C'est un réel.</li><li>On pose $f(2) = 4$. La fonction prolongée est continue en $2$.</li></ol><h2>Le piège à éviter</h2><p>Croire que « la limite à gauche est égale à la limite à droite » suffit pour la continuité. Prenons $f(x) = x^2$ pour $x \\neq 1$ et $f(1) = 3$. Les limites à gauche et à droite en $1$ valent toutes les deux $1$, mais $f(1) = 3$ : la fonction n'est pas continue en $1$. Il faut aussi que $f(a)$ existe et soit égale à cette limite.</p><p>Comment le repérer : pour la continuité en $a$, vérifie toujours les <strong>trois</strong> nombres : limite à gauche, limite à droite et $f(a)$.</p><h2>En une phrase</h2><p>Une fonction est continue en $a$ quand elle est définie en $a$ et que sa limite en $a$ est exactement $f(a)$, sans saut ni trou.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Ce que veut dire « continue »",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Que signifie « $f$ est continue en $a$ » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme la hauteur du ballon, $f(x)$ s'approche de $f(a)$ quand $x$ s'approche de $a$. Il faut que $f(a)$ existe et que la limite soit exactement $f(a)$. Avoir une limite en $a$ ne suffit pas : on peut avoir un trou, ou une valeur $f(a)$ différente.",
+                  "answers": [
+                    {
+                      "content": "$f$ est définie en $a$ et $\\lim_{x \\to a} f(x) = f(a)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est définie en $a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ a une limite finie en $a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(a) = 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : le score d'un match en fonction du temps est une fonction continue.",
+                  "question_type": "true_false",
+                  "explanation": "À l'instant d'un but, le score passe de 0 à 1 sans valeur intermédiaire : la limite à gauche (0) et la limite à droite (1) sont différentes. C'est l'opposé de la hauteur du ballon, qui varie sans saut.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $f(x) = x^2$ pour $x \\neq 1$ et $f(1) = 3$. Pourquoi $f$ n'est-elle pas continue en $1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f(1) = 3$ est bien défini, et les limites à gauche et à droite en $1$ valent toutes les deux $1$. Mais $1 \\neq 3$ : la valeur en $1$ ne correspond pas à la limite. C'est une pelouse dont on a mal comblé le trou.",
+                  "answers": [
+                    {
+                      "content": "Parce que $\\lim_{x \\to 1} f(x) = 1 \\neq f(1) = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que $f$ n'est pas définie en $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que les limites à gauche et à droite en $1$ sont différentes",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $x^2$ n'est pas une fonction continue",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles fonctions sont continues sur $\\mathbb{R}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Un polynôme comme $x^3 - 2x + 1$ et la valeur absolue sont continus sur $\\mathbb{R}$. En revanche $\\frac{1}{x}$ n'est pas définie en $0$ et $\\sqrt{x}$ n'est définie que pour $x \\geq 0$ : elles ne sont pas des fonctions continues sur $\\mathbb{R}$ tout entier.",
+                  "answers": [
+                    {
+                      "content": "$x \\mapsto x^3 - 2x + 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x \\mapsto |x|$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x \\mapsto \\frac{1}{x}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x \\mapsto \\sqrt{x}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une fonction définie par deux formules, de part et d'autre de $a$, que signifie « le raccord en $a$ est sans marche » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Sans marche signifie que les deux bandes arrivent à la même hauteur, qui est aussi la hauteur à la jonction : limite à gauche, limite à droite et $f(a)$ sont égales. Avoir seulement les deux limites égales laisse la possibilité d'une valeur $f(a)$ différente, comme un petit trou rempli trop haut.",
+                  "answers": [
+                    {
+                      "content": "La limite à gauche, la limite à droite et $f(a)$ sont égales",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seules la limite à gauche et la limite à droite sont égales",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(a) = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est croissante en $a$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Raccord et prolongement",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On pose $f(x) = ax + 1$ si $x < 2$ et $f(x) = x^2$ si $x \\geq 2$. Pour quelle valeur de $a$ la fonction $f$ est-elle continue en $2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $f(2) = 4$ et $\\lim_{x \\to 2^+} f(x) = 4$. À gauche, $\\lim_{x \\to 2^-} (ax + 1) = 2a + 1$. Il faut $2a + 1 = 4$, donc $a = \\frac{3}{2}$. Vérification : $\\frac{3}{2} \\times 2 + 1 = 4$. Prendre $a = 3$ oublie de diviser par $2$.",
+                  "answers": [
+                    {
+                      "content": "$a = \\frac{3}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : la fonction $f$ définie par $f(x) = 2x$ si $x < 1$ et $f(x) = x + 2$ si $x \\geq 1$ est continue en $1$.",
+                  "question_type": "true_false",
+                  "explanation": "À gauche, $\\lim_{x \\to 1^-} 2x = 2$. À droite et en $1$, $f(1) = 1 + 2 = 3$. Les limites sont différentes ($2$ et $3$) : il y a une marche de hauteur $1$ au raccord. La fonction n'est pas continue en $1$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{x^2 - 9}{x - 3}$ pour $x \\neq 3$. Quelle valeur donner à $f(3)$ pour la prolonger par continuité en $3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $x \\neq 3$, $x^2 - 9 = (x - 3)(x + 3)$, donc $f(x) = x + 3$, qui tend vers $6$ en $3$. On pose $f(3) = 6$. Donner $0$ (le numérateur en $3$) ou $9$ (le $9$ de $x^2 - 9$) est faux : on utilise la limite, pas des morceaux de la formule.",
+                  "answers": [
+                    {
+                      "content": "$6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{\\sqrt{x} - 2}{x - 4}$ pour $x \\geq 0$ et $x \\neq 4$. Quelle valeur donner à $f(4)$ pour la prolonger par continuité ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $x - 4 = (\\sqrt{x} - 2)(\\sqrt{x} + 2)$. Donc $f(x) = \\frac{1}{\\sqrt{x} + 2}$ pour $x \\neq 4$, qui tend vers $\\frac{1}{4}$ en $4$. On pose $f(4) = \\frac{1}{4}$. Test : $x = 4{,}01$ donne environ $0{,}2498$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{1}{x - 1}$. Sur quels intervalles $f$ est-elle continue ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "La fonction est rationnelle, donc continue sur son ensemble de définition $\\mathbb{R} \\setminus \\{1\\}$. Elle est donc continue sur tout intervalle qui ne contient pas $1$, comme $]-\\infty\\,;1[$, $]1\\,;+\\infty[$ ou $[2\\,;5]$. Elle ne l'est pas sur $[0\\,;2]$ ni sur $\\mathbb{R}$, car $1$ y est.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;1[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]1\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[2\\,;5]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[0\\,;2]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Continuité à étudier",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "On pose $f(x) = \\frac{x^2 + x - 2}{x - 1}$ pour $x \\neq 1$ et $f(1) = m$. Pour quelle valeur de $m$ la fonction $f$ est-elle continue en $1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On factorise : $x^2 + x - 2 = (x - 1)(x + 2)$. Pour $x \\neq 1$, $f(x) = x + 2$, qui tend vers $3$ en $1$. Il faut $f(1) = m = 3$. La valeur $0$ est le numérateur en $1$ ; $2$ est une erreur de substitution.",
+                  "answers": [
+                    {
+                      "content": "$m = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$m = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m = 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $f(x) = x^2 + b$ si $x < 0$ et $f(x) = \\sqrt{x + 1}$ si $x \\geq 0$. Pour quelle valeur de $b$ la fonction $f$ est-elle continue en $0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $f(0) = \\sqrt{1} = 1$ et la limite à droite vaut $1$. À gauche, $\\lim_{x \\to 0^-} (x^2 + b) = b$. La continuité demande $b = 1$. Choisir $b = 0$ revient à oublier que $f(0)$ vaut $1$.",
+                  "answers": [
+                    {
+                      "content": "$b = 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$b = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$b = -1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$b = 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $f(x) = \\frac{x^3 - 1}{x - 1}$ pour $x \\neq 1$ et $f(1) = 2$. La fonction $f$ est-elle continue en $1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $x \\neq 1$, $f(x) = x^2 + x + 1$, qui tend vers $3$ en $1$. Mais $f(1) = 2 \\neq 3$ : la fonction n'est pas continue en $1$. Être définie en $1$ ne suffit pas ; il faut que la valeur corresponde à la limite.",
+                  "answers": [
+                    {
+                      "content": "Non, car $\\lim_{x \\to 1} f(x) = 3 \\neq f(1) = 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car $f$ est définie en $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $f$ n'est pas définie en $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car les limites à gauche et à droite sont égales",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations, lesquelles sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Une composée, une somme et un quotient à dénominateur non nul de fonctions continues sont continus : $\\sqrt{x^2 + 1}$, $\\frac{1}{x^2 + 1}$ et $|x - 2| + 3x$ sont continues sur $\\mathbb{R}$. En revanche $\\frac{x^2 - 1}{x + 1}$ n'est pas définie en $-1$, la fonction « marche » est discontinue en $0$, et $\\frac{1}{x - 4}$ n'est pas définie en $4 \\in [0\\,;5]$.",
+                  "answers": [
+                    {
+                      "content": "$x \\mapsto \\sqrt{x^2 + 1}$ est continue sur $\\mathbb{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x \\mapsto \\frac{1}{x^2 + 1}$ est continue sur $\\mathbb{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x \\mapsto |x - 2| + 3x$ est continue sur $\\mathbb{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x \\mapsto \\frac{x^2 - 1}{x + 1}$ est continue sur $\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fonction qui vaut $1$ si $x \\geq 0$ et $0$ si $x < 0$ est continue sur $\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x \\mapsto \\frac{1}{x - 4}$ est continue sur $[0\\,;5]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $f(x) = x^2 - 2x + a$ si $x < 3$ et $f(x) = 2x + 1$ si $x \\geq 3$. Pour quelle valeur de $a$ la fonction $f$ est-elle continue en $3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $f(3) = 2 \\times 3 + 1 = 7$. À gauche, $\\lim_{x \\to 3^-} (x^2 - 2x + a) = 9 - 6 + a = 3 + a$. Il faut $3 + a = 7$, donc $a = 4$. Prendre $a = 7$ revient à oublier de retrancher les $3$ déjà obtenus par $9 - 6$.",
+                  "answers": [
+                    {
+                      "content": "$a = 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a = 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 10$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Valeurs intermédiaires et bijection",
+          "subtitle": "Prouver qu'une équation a une solution, une seule, et la localiser",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Énoncer et utiliser le théorème des valeurs intermédiaires pour prouver qu'une équation a une solution.</li><li>Utiliser le théorème de la bijection pour prouver qu'une solution est unique et déterminer l'image d'un intervalle.</li><li>Localiser une solution par encadrement et exprimer une bijection réciproque.</li></ul><h2>L'image pour comprendre</h2><p><strong>1. Le ballon qui monte (valeurs intermédiaires).</strong> À l'instant du coup de pied, le ballon est au sol : hauteur 0 m. Quelques secondes plus tard, il est à 6 m. Entre les deux, il ne disparaît pas et ne saute pas : il passe forcément, à un moment, par 3 m.</p><p><em>Le pont.</em> La hauteur est $f(x)$ au temps $x$ de l'intervalle $[a\\,;b]$. On a $f(a) = 0$ et $f(b) = 6$, et $3$ est entre les deux. Comme $f$ est continue, il existe un instant $c$ avec $f(c) = 3$.</p><p><em>Où l'image s'arrête.</em> Le ballon d'un lob monte puis redescend : il peut passer <strong>deux fois</strong> par 3 m. Le théorème garantit au moins un passage, pas un seul. Et si la hauteur pouvait sauter (comme un score), le théorème ne marcherait plus.</p><p><strong>2. Le joueur qui court sans jamais s'arrêter ni reculer (bijection).</strong> Un joueur fait un tour de terrain, sans jamais s'arrêter et sans jamais reculer. La distance parcourue $d(t)$ augmente sans arrêt. Chaque point du parcours est franchi une seule fois, à un seul instant. Et chaque point du parcours est franchi, sans en sauter aucun.</p><p><em>Le pont.</em> L'application $t \\mapsto d(t)$ est continue (pas de saut) et strictement croissante (jamais deux fois la même distance). À chaque distance correspond exactement un instant : c'est une <strong>bijection</strong> de la durée du tour sur la longueur du tour. L'application inverse répond à la question « à quel instant le joueur est-il à tel endroit ? » : c'est la <strong>bijection réciproque</strong>.</p><p><em>Où l'image s'arrête.</em> Si le joueur s'arrête ou recule, il peut franchir le même point plusieurs fois : on perd la bijection. La stricte monotonie est indispensable.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Théorème des valeurs intermédiaires.</strong> Si $f$ est continue sur $[a\\,;b]$, alors pour tout réel $k$ compris entre $f(a)$ et $f(b)$, l'équation $f(x) = k$ a au moins une solution dans $[a\\,;b]$.</p><p><strong>Cas particulier.</strong> Si $f$ est continue sur $[a\\,;b]$ et si $f(a) \\times f(b) < 0$, l'équation $f(x) = 0$ a au moins une solution dans $]a\\,;b[$.</p><p><strong>Image d'un intervalle.</strong> L'image d'un intervalle par une fonction continue est un intervalle. L'image d'un segment $[a\\,;b]$ par une fonction continue est un segment $[m\\,;M]$, où $m$ et $M$ sont le minimum et le maximum de $f$ sur $[a\\,;b]$.</p><p><strong>Théorème de la bijection.</strong> Si $f$ est continue et strictement monotone sur un intervalle $I$, alors $f$ réalise une bijection de $I$ sur l'intervalle $J = f(I)$. Pour tout $k$ de $J$, l'équation $f(x) = k$ a donc une solution unique dans $I$.</p><p><strong>Calcul de $J = f(I)$</strong> pour $f$ continue et strictement croissante. Pour $I = [a\\,;b]$ : $J = [f(a)\\,;f(b)]$. Pour $I = ]a\\,;b[$ : $J = ]\\lim_{x \\to a^+} f(x)\\,;\\lim_{x \\to b^-} f(x)[$. Pour $I = [a\\,;+\\infty[$ : $J = [f(a)\\,;\\lim_{x \\to +\\infty} f(x)[$. Si $f$ est strictement décroissante, les bornes sont échangées.</p><p><strong>Bijection réciproque.</strong> La bijection réciproque $f^{-1} : J \\to I$ est continue, a le même sens de variation que $f$, et sa courbe est symétrique de celle de $f$ par rapport à la droite $y = x$ (dans un repère orthonormé).</p></blockquote><h2>Exemple résolu</h2><p><strong>Montrer que l'équation $x^3 + x - 1 = 0$ a une solution unique $\\alpha$, et la localiser.</strong></p><ol><li>Soit $f(x) = x^3 + x - 1$. C'est un polynôme : $f$ est continue sur $\\mathbb{R}$.</li><li>$f$ est la somme des fonctions $x \\mapsto x^3$ et $x \\mapsto x$ (toutes deux strictement croissantes) et d'une constante : $f$ est strictement croissante sur $\\mathbb{R}$.</li><li>$f(0) = -1 < 0$ et $f(1) = 1 > 0$. Donc $0$ est entre $f(0)$ et $f(1)$ : par le théorème des valeurs intermédiaires, il existe au moins un $\\alpha \\in ]0\\,;1[$ tel que $f(\\alpha) = 0$.</li><li>$f$ est continue et strictement croissante : c'est une bijection, donc la solution est unique.</li><li>Encadrement : $f(0{,}68) = 0{,}314432 + 0{,}68 - 1 = -0{,}005568 < 0$ et $f(0{,}69) = 0{,}328509 + 0{,}69 - 1 = 0{,}018509 > 0$. Donc $0{,}68 < \\alpha < 0{,}69$.</li></ol><p><strong>Déterminer l'image et la réciproque de $f(x) = 2 - \\frac{1}{x + 1}$ sur $I = ]-1\\,;+\\infty[$.</strong></p><ol><li>$f$ est continue sur $I$ (fonction rationnelle). Sur $I$, $x + 1 > 0$ et $x \\mapsto \\frac{1}{x + 1}$ est strictement décroissante, donc $f$ est strictement croissante.</li><li>$\\lim_{x \\to -1^+} \\frac{1}{x + 1} = +\\infty$, donc $\\lim_{x \\to -1^+} f(x) = -\\infty$. En $+\\infty$, $\\frac{1}{x + 1} \\to 0$, donc $\\lim_{x \\to +\\infty} f(x) = 2$.</li><li>$f$ réalise une bijection de $]-1\\,;+\\infty[$ sur $J = ]-\\infty\\,;2[$.</li><li>Pour $y < 2$, $f(x) = y$ équivaut à $\\frac{1}{x + 1} = 2 - y$, soit $x + 1 = \\frac{1}{2 - y}$, soit $x = \\frac{y - 1}{2 - y}$. Donc $f^{-1}(y) = \\frac{y - 1}{2 - y}$. Vérification : $f(0) = 1$ et $f^{-1}(1) = 0$.</li></ol><h2>Le piège à éviter</h2><p>Appliquer le théorème des valeurs intermédiaires sans vérifier que $f$ est <strong>continue</strong> sur tout l'intervalle. Prenons $f(x) = \\frac{1}{x}$ sur $[-1\\,;1]$ : $f(-1) = -1 < 0 < 1 = f(1)$, pourtant $f$ ne s'annule jamais, car elle n'est pas définie en $0$. Autre erreur : conclure à l'unicité avec le seul théorème des valeurs intermédiaires. Il donne l'existence ; l'unicité vient de la stricte monotonie.</p><p>Comment le repérer : écris toujours les trois hypothèses (continue, strictement monotone, sur un intervalle) avant de conclure « une solution et une seule ».</p><h2>En une phrase</h2><p>Une fonction continue qui passe de $f(a)$ à $f(b)$ prend toutes les valeurs intermédiaires, et si elle est en plus strictement monotone, elle les prend chacune une seule fois.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Valeurs intermédiaires et bijection",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "La fonction $f$ est continue sur $[a\\,;b]$, avec $f(a) = -2$ et $f(b) = 5$. Que garantit le théorème des valeurs intermédiaires ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour tout $k$ entre $-2$ et $5$, le ballon passe au moins une fois par la hauteur $k$. Le théorème garantit l'existence, pas l'unicité. Il ne se limite pas à $k = 0$, et ne dit rien de la monotonie de $f$.",
+                  "answers": [
+                    {
+                      "content": "Pour tout $k$ de $[-2\\,;5]$, l'équation $f(x) = k$ a au moins une solution dans $[a\\,;b]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour tout $k$ de $[-2\\,;5]$, l'équation $f(x) = k$ a exactement une solution",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seule l'équation $f(x) = 0$ a une solution",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fonction $f$ est strictement croissante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si $f$ est continue sur $[a\\,;b]$ avec $f(a) = 0$ et $f(b) = 6$, le théorème des valeurs intermédiaires garantit que l'équation $f(x) = 3$ a une seule solution dans $[a\\,;b]$.",
+                  "question_type": "true_false",
+                  "explanation": "Il garantit au moins un passage. Un lob monte puis redescend : le ballon peut passer par 3 m à la montée et à la descente. L'unicité demande une stricte monotonie, comme le joueur qui ne s'arrête ni ne recule.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles hypothèses le théorème de la bijection demande-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il demande une fonction continue (pas de saut, donc toutes les valeurs sont atteintes) et strictement monotone (jamais deux fois la même valeur), sur un intervalle. Sans la stricte monotonie, on a l'existence mais pas l'unicité ; sans la continuité, des valeurs peuvent être sautées.",
+                  "answers": [
+                    {
+                      "content": "Continue et strictement monotone sur un intervalle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Continue sur un intervalle seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Strictement monotone seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Continue et positive",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Vrai ou faux : si $f$ est continue sur $[a\\,;b]$ et si $f(a) \\times f(b) < 0$, alors $f$ s'annule au moins une fois sur $]a\\,;b[$.",
+                  "question_type": "true_false",
+                  "explanation": "Le produit négatif signifie que $f(a)$ et $f(b)$ sont de signes contraires, donc $0$ est entre les deux. Comme $f$ est continue, le théorème des valeurs intermédiaires donne un $c$ avec $f(c) = 0$. Il n'est pas aux bornes puisque ni $f(a)$ ni $f(b)$ ne sont nuls.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f$ continue et strictement croissante sur $[a\\,;b]$. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "L'image de $[a\\,;b]$ est $[f(a)\\,;f(b)]$ et chaque $k$ de cet intervalle a un unique antécédent. Mais $f$ ne prend pas toutes les valeurs réelles, seulement celles de $[f(a)\\,;f(b)]$. Et la bijection réciproque garde le sens de variation de $f$ : elle est strictement croissante.",
+                  "answers": [
+                    {
+                      "content": "$f([a\\,;b]) = [f(a)\\,;f(b)]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour tout $k$ de $[f(a)\\,;f(b)]$, l'équation $f(x) = k$ a une unique solution dans $[a\\,;b]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour tout réel $k$, l'équation $f(x) = k$ a une solution dans $[a\\,;b]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La bijection réciproque $f^{-1}$ est strictement décroissante",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Existence, unicité, image",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = x^3 + x - 1$. On a $f(0) = -1$ et $f(1) = 1$. Combien de solutions l'équation $f(x) = 0$ a-t-elle dans $[0\\,;1]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f$ est continue (polynôme) et strictement croissante (somme de deux fonctions strictement croissantes), avec $f(0) < 0 < f(1)$. Donc il y a une solution (valeurs intermédiaires) et une seule (bijection). Le degré $3$ permet jusqu'à trois racines au total, mais ici la monotonie en impose une.",
+                  "answers": [
+                    {
+                      "content": "Exactement une",
+                      "correct": true
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au moins une, mais peut-être plusieurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Trois, car le degré est $3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^2 + 1$ sur $[0\\,;+\\infty[$. Quelle est l'image de cet intervalle par $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f$ est continue et strictement croissante sur $[0\\,;+\\infty[$. L'image est $[f(0)\\,;\\lim_{+\\infty} f[ = [1\\,;+\\infty[$. La borne $1$ est atteinte (en $x = 0$), donc elle est fermée. L'intervalle $[0\\,;+\\infty[$ est l'ensemble de départ, pas l'image.",
+                  "answers": [
+                    {
+                      "content": "$[1\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]1\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[0\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = 3 - x$ sur $]0\\,;4]$. Quelle est l'image de cet intervalle par $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f$ est continue et strictement décroissante. En $4$, $f(4) = -1$, atteint : borne fermée. Quand $x \\to 0^+$, $f(x) \\to 3$ sans l'atteindre : borne ouverte. L'image est $[-1\\,;3[$. Une fonction décroissante échange l'ordre des bornes.",
+                  "answers": [
+                    {
+                      "content": "$[-1\\,;3[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-1\\,;3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-1\\,;3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]0\\,;4]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = 2 - \\frac{1}{x + 1}$, continue et strictement croissante sur $]-1\\,;+\\infty[$. Quelle est l'image de cet intervalle ?",
+                  "question_type": "single_choice",
+                  "explanation": "En $-1^+$, $\\frac{1}{x + 1} \\to +\\infty$ donc $f(x) \\to -\\infty$. En $+\\infty$, $\\frac{1}{x + 1} \\to 0$ donc $f(x) \\to 2$. L'image est $]-\\infty\\,;2[$, avec $2$ non atteint. La valeur $f(0) = 1$ est un exemple de valeur prise, pas une borne.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;2[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;2]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]1\\,;2[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^3 + x - 1$, continue et strictement croissante, avec $f(0{,}6) = -0{,}184$ et $f(0{,}7) = 0{,}043$. Où se trouve la solution $\\alpha$ de $f(x) = 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme $f(0{,}6) < 0 < f(0{,}7)$ et que $f$ est continue et strictement croissante, la solution unique est dans $]0{,}6\\,;0{,}7[$. On vérifie : $0{,}6^3 + 0{,}6 - 1 = -0{,}184$. Les autres intervalles ne changent pas le signe de $f$ : on ne peut pas y avoir de solution.",
+                  "answers": [
+                    {
+                      "content": "$\\alpha \\in ]0{,}6\\,;0{,}7[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\alpha \\in ]0{,}7\\,;1[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\alpha \\in ]0\\,;0{,}6[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Justifier existence, unicité et réciproque",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = \\frac{1}{x}$ sur $[-1\\,;1]$. On a $f(-1) = -1$ et $f(1) = 1$. Peut-on utiliser le théorème des valeurs intermédiaires pour affirmer que $f$ s'annule dans $]-1\\,;1[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le théorème exige la continuité sur tout $[-1\\,;1]$. Or $f$ n'est pas définie en $0$, donc pas continue sur cet intervalle. Et en fait $\\frac{1}{x}$ ne s'annule jamais. Le produit $f(-1) \\times f(1) < 0$ ne suffit pas sans continuité.",
+                  "answers": [
+                    {
+                      "content": "Non, car $f$ n'est pas continue sur $[-1\\,;1]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car $f(-1) \\times f(1) < 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $f$ est impaire",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $f(-1) \\neq f(1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^2$ sur $[-1\\,;1]$, avec $f(-1) = f(1) = 1$. Quelle affirmation est vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f$ est continue sur $[-1\\,;1]$, donc l'image du segment est un segment $[m\\,;M]$ : ici $m = 0$ (atteint en $0$) et $M = 1$. Elle n'est pas $[f(-1)\\,;f(1)]$ car $f$ n'est pas monotone. Et ce n'est pas une bijection : $-\\frac{1}{2}$ et $\\frac{1}{2}$ ont la même image.",
+                  "answers": [
+                    {
+                      "content": "L'image de $[-1\\,;1]$ par $f$ est $[0\\,;1]$, et $f$ n'est pas une bijection de $[-1\\,;1]$ sur cet intervalle",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'image de $[-1\\,;1]$ par $f$ est $\\{1\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'image de $[-1\\,;1]$ par $f$ est $[1\\,;1]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ réalise une bijection de $[-1\\,;1]$ sur $[0\\,;1]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = 2 - \\frac{1}{x + 1}$ sur $]-1\\,;+\\infty[$, bijection de cet intervalle sur $]-\\infty\\,;2[$. Quelle est l'expression de $f^{-1}(y)$ pour $y < 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On résout $2 - \\frac{1}{x + 1} = y$ : $\\frac{1}{x + 1} = 2 - y$, donc $x + 1 = \\frac{1}{2 - y}$ et $x = \\frac{1}{2 - y} - 1 = \\frac{y - 1}{2 - y}$. Test : $y = 1$ donne $0$, car $f(0) = 1$. Oublier le $-1$ donne $\\frac{1}{2 - y}$, qui vaut $1$ en $y = 1$ et non $0$.",
+                  "answers": [
+                    {
+                      "content": "$f^{-1}(y) = \\frac{y - 1}{2 - y}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f^{-1}(y) = \\frac{1}{2 - y}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f^{-1}(y) = \\frac{y - 1}{y - 2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f^{-1}(y) = \\frac{1 - y}{2 - y}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^3 + x$, continue et strictement croissante sur $\\mathbb{R}$, avec $\\lim_{x \\to +\\infty} f(x) = +\\infty$ et $\\lim_{x \\to -\\infty} f(x) = -\\infty$. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$f$ est continue et strictement croissante sur $\\mathbb{R}$, avec des limites $\\pm\\infty$ aux bornes : l'image est $]-\\infty\\,;+\\infty[ = \\mathbb{R}$. Pour tout réel $k$, il y a donc une unique solution. Le degré $3$ ne donne pas trois solutions, et $f(\\mathbb{R}) \\neq [0\\,;+\\infty[$ car $f(-1) = -2$.",
+                  "answers": [
+                    {
+                      "content": "$f(\\mathbb{R}) = \\mathbb{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour tout réel $k$, l'équation $f(x) = k$ a exactement une solution",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est une bijection de $\\mathbb{R}$ sur $\\mathbb{R}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'équation $f(x) = k$ a $0$ ou $3$ solutions selon $k$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(\\mathbb{R}) = [0\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ n'est pas une bijection à cause de son degré $3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On étudie l'équation $\\sqrt{x} = 2 - x$ sur $[0\\,;2]$ avec $f(x) = \\sqrt{x} + x - 2$. On a $f(0) = -2$ et $f(2) = \\sqrt{2}$. Quel argument prouve qu'il y a une solution et une seule ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f$ est continue sur $[0\\,;2]$ et strictement croissante (somme de deux fonctions strictement croissantes), avec $f(0) < 0 < f(2)$. D'où l'existence et l'unicité. Les signes seuls ne suffisent pas, et la continuité seule ne donne pas l'unicité. On vérifie : $x = 1$ convient, car $\\sqrt{1} = 1 = 2 - 1$.",
+                  "answers": [
+                    {
+                      "content": "$f$ est continue et strictement croissante sur $[0\\,;2]$, avec $f(0) < 0 < f(2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(0) < 0 < f(2)$ suffit",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est continue sur $[0\\,;2]$ et $f(0) \\times f(2) < 0$, donc la solution est unique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les fonctions $\\sqrt{x}$ et $2 - x$ sont continues, donc la solution est unique",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
