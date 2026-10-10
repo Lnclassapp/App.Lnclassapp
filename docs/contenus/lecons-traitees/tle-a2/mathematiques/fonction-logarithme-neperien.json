@@ -865,24 +865,24 @@
                   ]
                 },
                 {
-                  "content": "La récolte d'un planteur est doublée chaque année. Au bout de $n$ années, elle est multipliée par $2^n$. À partir de combien d'années est-elle multipliée par au moins $100$ ? On donne $\\ln 2 \\approx 0{,}69$ et $\\ln 10 \\approx 2{,}30$.",
+                  "content": "On pose $a = \\ln 2$ et $b = \\ln 3$. Laquelle de ces écritures est égale à $\\ln 12$ ?",
                   "question_type": "single_choice",
-                  "explanation": "$2^n \\ge 100$ équivaut à $n\\ln 2 \\ge \\ln 100 = 2\\ln 10$, soit $n \\ge \\frac{4{,}6}{0{,}69} \\approx 6{,}7$. Il faut donc $n = 7$. Contrôle : $2^6 = 64 < 100$ et $2^7 = 128 \\ge 100$. Piège : utiliser $\\ln 10$ au lieu de $\\ln 100$ donne $4$.",
+                  "explanation": "$12 = 2^2 \\times 3$, donc $\\ln 12 = 2\\ln 2 + \\ln 3 = 2a + b$. L'écriture $a + 2b$ serait $\\ln 18$ ; $a \\times b$ confond somme et produit ; $12(a + b)$ n'a aucun lien. Le produit à l'intérieur devient une somme à l'extérieur.",
                   "answers": [
                     {
-                      "content": "7 ans",
+                      "content": "$2a + b$",
                       "correct": true
                     },
                     {
-                      "content": "6 ans",
+                      "content": "$a + 2b$",
                       "correct": false
                     },
                     {
-                      "content": "4 ans",
+                      "content": "$a \\times b$",
                       "correct": false
                     },
                     {
-                      "content": "50 ans",
+                      "content": "$12(a + b)$",
                       "correct": false
                     }
                   ]
@@ -1274,7 +1274,7 @@
                       "correct": true
                     },
                     {
-                      "content": "$x < 1$",
+                      "content": "$1 < x < 3$",
                       "correct": false
                     },
                     {
@@ -1325,7 +1325,7 @@
         {
           "name": "Dérivée de ln u et étude de fonctions",
           "subtitle": "À compléter : le nombre e, limites de ln x sur x, logarithme décimal",
-          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer la dérivée de $\\ln u$ avec la formule $\\frac{u'}{u}$.</li>\n<li>Étudier le signe de la dérivée d'une fonction qui contient $\\ln$.</li>\n<li>Dresser le tableau de variations et trouver un minimum ou un maximum.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>La récolte qui grandit.</strong> Un planteur note sa récolte $u$ (en tonnes) au fil des années. Un voisin a $10$ tonnes et en gagne $1$ : il a augmenté de $10\\ \\%$ environ. Un autre a $100$ tonnes et en gagne $1$ aussi : il n'a augmenté que de $1\\ \\%$. Le même gain d'une tonne ne pèse pas pareil : ce qui compte pour dire « ça va vite », c'est le gain <strong>rapporté à la récolte déjà là</strong>.</p>\n<p><em>Le pont.</em> La récolte, c'est $u$. Le gain, c'est la variation $u'$. Le gain rapporté à la récolte, c'est le quotient $\\frac{u'}{u}$ : c'est exactement la dérivée de $\\ln u$. Une récolte qui reste strictement positive, c'est la condition $u > 0$.</p>\n<p><em>Où l'image s'arrête.</em> Les pourcentages de l'image sont des valeurs approchées pour un gain d'une tonne. La formule $\\frac{u'}{u}$ décrit la variation pour un gain très petit. Et si $u$ s'annule ou devient négative, $\\ln u$ n'existe plus.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Dérivée de $\\ln u$.</strong> Si $u$ est dérivable et strictement positive sur un intervalle $I$, alors la fonction $x \\mapsto \\ln(u(x))$ est dérivable sur $I$ et $$(\\ln u)' = \\frac{u'}{u}.$$ En particulier, $\\big(\\ln(ax + b)\\big)' = \\frac{a}{ax + b}$ là où $ax + b > 0$.</p>\n<p><strong>Méthode d'étude d'une fonction $f$ avec $\\ln$.</strong></p>\n<ol>\n<li>Ensemble de définition : tout ce qui est dans un $\\ln$ doit être strictement positif.</li>\n<li>Dérivée $f'$, mise sur un même dénominateur.</li>\n<li>Signe de $f'$ : le dénominateur est souvent positif, donc on étudie le signe du numérateur.</li>\n<li>Variations : $f' > 0$ donne $f$ croissante, $f' < 0$ donne $f$ décroissante. Si $f'$ s'annule en changeant de signe, $f$ a un maximum ou un minimum.</li>\n</ol>\n<p><strong>Tangente.</strong> La tangente en $x = a$ a pour équation $y = f'(a)(x - a) + f(a)$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>1. Dériver $f(x) = \\ln(3x - 6)$.</strong></p>\n<ol>\n<li>Définition : $3x - 6 > 0$ donne $x > 2$. Donc $f$ est définie sur $]2 ; +\\infty[$.</li>\n<li>Avec $u(x) = 3x - 6$ et $u'(x) = 3$ : $f'(x) = \\frac{3}{3x - 6} = \\frac{1}{x - 2}$.</li>\n<li>Pour $x > 2$, $f'(x) > 0$ : $f$ est strictement croissante. Contrôle en $x = 3$ : $\\frac{3}{3 \\times 3 - 6} = 1$ et $\\frac{1}{3 - 2} = 1$.</li>\n</ol>\n<p><strong>2. Étudier $g(x) = \\ln(x^2 + 1)$.</strong></p>\n<ol>\n<li>Définition : $x^2 + 1 > 0$ pour tout réel $x$. Donc $g$ est définie sur $\\mathbb{R}$.</li>\n<li>Avec $u(x) = x^2 + 1$ et $u'(x) = 2x$ : $g'(x) = \\frac{2x}{x^2 + 1}$.</li>\n<li>Le dénominateur est positif : $g'(x)$ a le signe de $2x$. Donc $g$ est décroissante sur $]-\\infty ; 0]$ et croissante sur $[0 ; +\\infty[$.</li>\n<li>Minimum : $g(0) = \\ln 1 = 0$. Contrôle : $g(1) = g(-1) = \\ln 2 > 0$.</li>\n</ol>\n<p><strong>3. Étudier $h(x) = x - 1 - \\ln x$ sur $]0 ; +\\infty[$.</strong></p>\n<ol>\n<li>$h'(x) = 1 - \\frac{1}{x} = \\frac{x - 1}{x}$. Pour $x > 0$, le signe est celui de $x - 1$.</li>\n<li>$h$ est décroissante sur $]0 ; 1]$ et croissante sur $[1 ; +\\infty[$. Son minimum est $h(1) = 1 - 1 - \\ln 1 = 0$.</li>\n<li>Donc $h(x) \\ge 0$ pour tout $x > 0$, c'est-à-dire $\\ln x \\le x - 1$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Oublier le $u'$ : écrire $\\big(\\ln(x^2 + 1)\\big)' = \\frac{1}{x^2 + 1}$. C'est faux : la dérivée de ce qui est dans le $\\ln$ doit apparaître au numérateur. Ici c'est $\\frac{2x}{x^2 + 1}$.</p>\n<p>Autre piège : étudier le signe de $u$ au lieu de celui de $u'$. Comme $u > 0$, le signe de $\\frac{u'}{u}$ est celui de $u'$ seulement.</p>\n<h2>En une phrase</h2>\n<p>La dérivée de $\\ln u$ est $\\frac{u'}{u}$ (le gain rapporté à la récolte), et comme $u > 0$, son signe est celui de $u'$.</p>",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer la dérivée de $\\ln u$ avec la formule $\\frac{u'}{u}$.</li>\n<li>Étudier le signe de la dérivée d'une fonction qui contient $\\ln$.</li>\n<li>Dresser le tableau de variations et trouver un minimum ou un maximum.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>La récolte qui grandit.</strong> Un planteur note sa récolte $u$ (en tonnes) au fil des années. Un voisin a $10$ tonnes et en gagne $1$ : il a augmenté de $10\\ \\%$. Un autre a $100$ tonnes et en gagne $1$ aussi : il n'a augmenté que de $1\\ \\%$. Le même gain d'une tonne ne pèse pas pareil : ce qui compte pour dire « ça va vite », c'est le gain <strong>rapporté à la récolte déjà là</strong>.</p>\n<p><em>Le pont.</em> La récolte, c'est $u$. Le gain, c'est la variation $u'$. Le gain rapporté à la récolte, c'est le quotient $\\frac{u'}{u}$ : c'est exactement la dérivée de $\\ln u$. Une récolte qui reste strictement positive, c'est la condition $u > 0$.</p>\n<p><em>Où l'image s'arrête.</em> Les pourcentages de l'image sont exacts : $\\frac{1}{10} = 10\\ \\%$ et $\\frac{1}{100} = 1\\ \\%$. Mais le lien avec $\\frac{u'}{u}$ n'est valable que pour un gain très petit : la formule décrit la variation sur un tout petit instant. Et si $u$ s'annule ou devient négative, $\\ln u$ n'existe plus.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Dérivée de $\\ln u$.</strong> Si $u$ est dérivable et strictement positive sur un intervalle $I$, alors la fonction $x \\mapsto \\ln(u(x))$ est dérivable sur $I$ et $$(\\ln u)' = \\frac{u'}{u}.$$ En particulier, $\\big(\\ln(ax + b)\\big)' = \\frac{a}{ax + b}$ là où $ax + b > 0$.</p>\n<p><strong>Méthode d'étude d'une fonction $f$ avec $\\ln$.</strong></p>\n<ol>\n<li>Ensemble de définition : tout ce qui est dans un $\\ln$ doit être strictement positif.</li>\n<li>Dérivée $f'$, mise sur un même dénominateur.</li>\n<li>Signe de $f'$ : le dénominateur est souvent positif, donc on étudie le signe du numérateur.</li>\n<li>Variations : $f' > 0$ donne $f$ croissante, $f' < 0$ donne $f$ décroissante. Si $f'$ s'annule en changeant de signe, $f$ a un maximum ou un minimum.</li>\n</ol>\n<p><strong>Tangente.</strong> La tangente en $x = a$ a pour équation $y = f'(a)(x - a) + f(a)$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>1. Dériver $f(x) = \\ln(3x - 6)$.</strong></p>\n<ol>\n<li>Définition : $3x - 6 > 0$ donne $x > 2$. Donc $f$ est définie sur $]2 ; +\\infty[$.</li>\n<li>Avec $u(x) = 3x - 6$ et $u'(x) = 3$ : $f'(x) = \\frac{3}{3x - 6} = \\frac{1}{x - 2}$.</li>\n<li>Pour $x > 2$, $f'(x) > 0$ : $f$ est strictement croissante. Contrôle en $x = 3$ : $\\frac{3}{3 \\times 3 - 6} = 1$ et $\\frac{1}{3 - 2} = 1$.</li>\n</ol>\n<p><strong>2. Étudier $g(x) = \\ln(x^2 + 1)$.</strong></p>\n<ol>\n<li>Définition : $x^2 + 1 > 0$ pour tout réel $x$. Donc $g$ est définie sur $\\mathbb{R}$.</li>\n<li>Avec $u(x) = x^2 + 1$ et $u'(x) = 2x$ : $g'(x) = \\frac{2x}{x^2 + 1}$.</li>\n<li>Le dénominateur est positif : $g'(x)$ a le signe de $2x$. Donc $g$ est décroissante sur $]-\\infty ; 0]$ et croissante sur $[0 ; +\\infty[$.</li>\n<li>Minimum : $g(0) = \\ln 1 = 0$. Contrôle : $g(1) = g(-1) = \\ln 2 > 0$.</li>\n</ol>\n<p><strong>3. Étudier $h(x) = x - 1 - \\ln x$ sur $]0 ; +\\infty[$.</strong></p>\n<ol>\n<li>$h'(x) = 1 - \\frac{1}{x} = \\frac{x - 1}{x}$. Pour $x > 0$, le signe est celui de $x - 1$.</li>\n<li>$h$ est décroissante sur $]0 ; 1]$ et croissante sur $[1 ; +\\infty[$. Son minimum est $h(1) = 1 - 1 - \\ln 1 = 0$.</li>\n<li>Donc $h(x) \\ge 0$ pour tout $x > 0$, c'est-à-dire $\\ln x \\le x - 1$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Oublier le $u'$ : écrire $\\big(\\ln(x^2 + 1)\\big)' = \\frac{1}{x^2 + 1}$. C'est faux : la dérivée de ce qui est dans le $\\ln$ doit apparaître au numérateur. Ici c'est $\\frac{2x}{x^2 + 1}$.</p>\n<p>Autre piège : étudier le signe de $u$ au lieu de celui de $u'$. Comme $u > 0$, le signe de $\\frac{u'}{u}$ est celui de $u'$ seulement.</p>\n<h2>En une phrase</h2>\n<p>La dérivée de $\\ln u$ est $\\frac{u'}{u}$ (le gain rapporté à la récolte), et comme $u > 0$, son signe est celui de $u'$.</p>",
           "exercises": [
             {
               "title": "Comprendre — La dérivée de ln u",
@@ -1357,7 +1357,7 @@
                 {
                   "content": "Dans l'image de la récolte, passer de $100$ à $101$ tonnes est une augmentation relative plus grande que passer de $10$ à $11$ tonnes.",
                   "question_type": "true_false",
-                  "explanation": "Faux. Le gain est le même ($1$ tonne), mais rapporté à la récolte déjà là, il vaut environ $1\\ \\%$ de $100$ contre $10\\ \\%$ de $10$. C'est le rôle du quotient $\\frac{u'}{u}$ : plus $u$ est grand, plus le même gain compte peu.",
+                  "explanation": "Faux. Le gain est le même ($1$ tonne), mais rapporté à la récolte déjà là, il vaut $1\\ \\%$ de $100$ contre $10\\ \\%$ de $10$. C'est le rôle du quotient $\\frac{u'}{u}$ : plus $u$ est grand, plus le même gain compte peu.",
                   "answers": [
                     {
                       "content": "Vrai",
@@ -1422,7 +1422,7 @@
                 {
                   "content": "Soit $f(x) = \\ln(u(x))$ avec $u$ strictement positive. Le signe de $f'(x)$ est le même que celui de :",
                   "question_type": "single_choice",
-                  "explanation": "$f'(x) = \\frac{u'(x)}{u(x)}$ et $u(x) > 0$ : le quotient a donc le signe de son numérateur $u'(x)$. C'est le signe de la dérivée de ce qui est dans le $\\ln$ qui décide du sens de variation.",
+                  "explanation": "$f'(x) = \\frac{u'(x)}{u(x)}$ et $u(x) > 0$ : le quotient a le signe de son numérateur $u'(x)$. Ni $u(x)$, ni $\\ln(u(x))$, ni $u(x) - u'(x)$ ne donnent ce signe. C'est la dérivée de ce qui est dans le $\\ln$ qui décide du sens de variation.",
                   "answers": [
                     {
                       "content": "$u'(x)$",
@@ -1437,7 +1437,7 @@
                       "correct": false
                     },
                     {
-                      "content": "$u(x) \\times u'(x)$",
+                      "content": "$u(x) - u'(x)$",
                       "correct": false
                     }
                   ]
