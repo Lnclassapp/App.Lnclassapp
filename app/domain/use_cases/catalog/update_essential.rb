@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::UpdateEssential
 # Rôle : l'équipe modifie le nom, le sous-titre ou le contenu d'une fiche ; son cours, son slug et son statut restent
-# ADR  : 0026, 0028, 0029, 0035
+# ADR  : 0026, 0028, 0029, 0035, 0089
 module UseCases
   module Catalog
     class UpdateEssential
@@ -24,6 +24,8 @@ module UseCases
           id: current.id, slug: current.slug, course_id: current.course_id, position: current.position,
           author_id: current.author_id, status: current.status, course_status: current.course_status, **dto.essential_attributes
         )
+        # Les textes de remplacement saisis ; le repository les écrit sur les images que cite le contenu (ADR-0089).
+        essential.images = dto.images
         @transaction.call { @essentials.update(essential:) }
       end
     end

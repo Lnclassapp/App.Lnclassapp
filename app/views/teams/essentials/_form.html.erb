@@ -1,6 +1,9 @@
-<%# 🌐 UI · teams/essentials/_form — nom, sous-titre et contenu d'une fiche essentielle, dans la modale %>
-<%# Rôle : éditeur riche Trix chargé à la demande, sans pièce jointe ; erreurs sous leur champ, valeurs saisies conservées %>
-<%# ADR  : 0035, 0047, 0051 · UDR : 0005, 0016 · Stimulus : rich-text-editor %>
+<%# 🌐 UI · teams/essentials/_form — nom, sous-titre, contenu et images d'une fiche essentielle, dans la modale %>
+<%# Rôle : éditeur Trix en mode images (UDR-0084 §3.1) : emplacements à remplir, insertion, textes de remplacement ; valeurs saisies conservées %>
+<%# ADR  : 0035, 0047, 0051, 0089 · UDR : 0005, 0016, 0067, 0084 · Stimulus : rich-text-editor, communication--image-alts, catalog--essential-image-slots %>
+<%# locals: (input:, url:, method:, images:, upload_url:) -%>
+<% caps = Entities::Shared::ContentImage %>
+<% slots = essential_image_slots(input.content) %>
 <%= form_with model: input, scope: :essential, url:, method:, id: "essential-form", class: "space-y-5" do |form| %>
   <% if input.errors[:base].any? %>
     <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
@@ -13,20 +16,72 @@
   <%= ui_field form, :subtitle, maxlength: Entities::Catalog::Essential::SUBTITLE_MAX, autocomplete: "off",
                                 placeholder: t(".subtitle_placeholder") %>
   <% content_error = input.errors[:content].first %>
-  <div class="space-y-1.5">
-    <%= form.label :content, class: "block text-sm font-medium text-ink" %>
-    <div data-controller="rich-text-editor" data-rich-text-editor-lang-value="<%= t("components.rich_text_editor.lang").to_json %>">
-      <%= form.rich_textarea :content,
-            "aria-describedby": [ "essential_content_hint", ("essential_content_error" if content_error) ].compact.join(" "),
-            "aria-invalid": ("true" if content_error), data: rich_text_without_uploads,
-            class: class_names("trix-content block min-h-48 w-full rounded-ln border bg-white px-4 py-3 text-base text-ink",
-                               content_error ? "border-error" : "border-line") %>
+  <%= tag.div id: "essential_editor", class: "space-y-2",
+              data: { controller: "rich-text-editor communication--image-alts catalog--essential-image-slots",
+                      **essential_editor_data(upload_url:),
+                      "catalog--essential-image-slots-slots-left-value": t(".slots_left").to_json,
+                      "catalog--essential-image-slots-slot-value": t(".slot"),
+                      action: "rich-text-editor:uploaded->communication--image-alts#add rich-text-editor:attached->communication--image-alts#restore " \
+                              "rich-text-editor:removed->communication--image-alts#remove trix-change->communication--image-alts#renumber " \
+                              "rich-text-editor:inserting->catalog--essential-image-slots#claim " \
+                              "rich-text-editor:uploaded->catalog--essential-image-slots#describe " \
+                              "trix-change->catalog--essential-image-slots#refresh" } do %>
+    <%# Emplacements annoncés par l'import et pas encore remplis (§3.1.1), tenus à jour à chaque frappe. %>
+    <div id="essential_image_slots" aria-live="polite" <%= "hidden" if slots.empty? %> data-catalog--essential-image-slots-target="panel">
+      <span data-catalog--essential-image-slots-target="badge"><%= ui_badge t(".slots_left", count: slots.size), tone: :warning, size: :sm %></span>
+      <ul class="mt-2 space-y-1 text-sm text-mute" data-catalog--essential-image-slots-target="list">
+        <% slots.each do |slot| %>
+          <li class="flex items-center gap-1.5"><%= ui_icon "photo", variant: :mini, size: :sm %><span><%= t(".slot", description: slot.description) %></span></li>
+        <% end %>
+      </ul>
+      <template data-catalog--essential-image-slots-target="itemTemplate">
+        <li class="flex items-center gap-1.5"><%= ui_icon "photo", variant: :mini, size: :sm %><span></span></li>
+      </template>
     </div>
-    <p id="essential_content_hint" class="text-sm text-mute"><%= t(".content_hint") %></p>
+
+    <div class="flex flex-wrap items-end justify-between gap-3">
+      <%= form.label :content, class: "block text-sm font-medium text-ink" %>
+      <%= ui_button t(".insert_image"), variant: :secondary, size: :sm, icon: "photo", id: "essential_insert_image", hidden: true,
+                                        data: { "rich-text-editor-target": "pickButton", action: "rich-text-editor#pickImages" } %>
+    </div>
+    <input id="essential_image_files" type="file" hidden accept="<%= caps::CONTENT_TYPES.join(",") %>"
+           data-rich-text-editor-target="fileInput" data-action="change->rich-text-editor#insertPicked">
+    <%# Aucun envoi par Active Storage : les images passent par l'endpoint de l'équipe (ADR-0089 §4.7). %>
+    <%= form.rich_textarea :content, value: essential_editor_content(input.content),
+          "aria-describedby": [ "essential_content_hint", ("essential_content_error" if content_error) ].compact.join(" "),
+          "aria-invalid": ("true" if content_error), data: rich_text_without_uploads,
+          class: class_names("trix-content block min-h-48 w-full rounded-ln border bg-white px-4 py-3 text-base text-ink",
+                             content_error ? "border-error" : "border-line") %>
+    <div id="essential_content_upload_errors" class="space-y-1" role="alert" tabindex="-1" hidden data-rich-text-editor-target="errors"></div>
+    <template data-rich-text-editor-target="errorTemplate">
+      <p class="flex items-center gap-1.5 text-sm font-medium text-error"><%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><span></span></p>
+    </template>
+    <p id="essential_content_upload_status" class="sr-only" aria-live="polite" data-rich-text-editor-target="status"></p>
+    <p id="essential_content_hint" class="text-sm text-mute">
+      <%= t(".content_hint_images", max_bytes: number_to_human_size(caps::MAX_BYTES), max_side: caps::MAX_SIDE) %>
+    </p>
     <% if content_error %>
       <p id="essential_content_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
         <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= content_error %>
       </p>
     <% end %>
-  </div>
+
+    <%# Textes de remplacement : une ligne par image, dans l'ordre du texte ; le gabarit sert aux images ajoutées (UDR-0067 §3.4.2). %>
+    <%= tag.section id: "essential_images", class: "space-y-3 rounded-ln border border-line bg-paper p-4", hidden: images.empty?,
+                    "aria-labelledby": "essential_images_title", data: { "communication--image-alts-target": "panel" } do %>
+      <h3 id="essential_images_title" class="text-sm font-semibold text-ink">
+        <%= t("teams.articles.form.images_title") %> <span data-communication--image-alts-target="total">(<%= images.size %>)</span>
+      </h3>
+      <p class="text-sm text-mute"><%= t("teams.articles.form.images_intro") %></p>
+      <ul id="essential_image_alts" class="space-y-4" data-communication--image-alts-target="list">
+        <% images.each.with_index(1) do |image, number| %>
+          <%= render "teams/articles/image_alt_row", form:, image:, number:, error: input.errors[:"image_alts.#{image.public_id}"].first %>
+        <% end %>
+      </ul>
+      <template data-communication--image-alts-target="rowTemplate">
+        <%= render "teams/articles/image_alt_row", form:, number: "__NUMBER__", error: nil,
+                   image: Queries::Catalog::EssentialFormImagesQuery::Row.new(public_id: "__PUBLIC_ID__", sgid: "__SGID__", url: "__URL__", alt: nil) %>
+      </template>
+    <% end %>
+  <% end %>
 <% end %>

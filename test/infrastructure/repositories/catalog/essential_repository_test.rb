@@ -97,6 +97,90 @@ module Repositories
 
         assert_equal [ first.slug, second.slug ], @repository.draft_slugs(course_id: @course.id)
       end
+
+      # ADR-0089 : une image de fiche est une pièce jointe Action Text de son contenu, par sgid.
+      def attachment(image)
+        %(<action-text-attachment sgid="#{image.attachable_sgid}" content-type="#{image.content_type}" ) +
+          %(width="#{image.width}" height="#{image.height}"></action-text-attachment>)
+      end
+
+      def with_alts(entity, alts)
+        entity.images = alts.map { |public_id, alt| Entities::Shared::ContentImage.new(public_id:, alt:) }
+        entity
+      end
+
+      test "ADR-0089 : les images citées sont rattachées avec leur texte de remplacement, dans l'ordre du texte" do
+        first = create_essential_image
+        second = create_essential_image(fixture: "photos/photo.png")
+        content = "<p>Avant</p>#{attachment(second)}<p>Entre</p>#{attachment(first)}"
+
+        created = @repository.create(essential: with_alts(essential(content:), first.public_id => "Une pile")).value
+
+        assert_equal [ created.id ] * 2, [ first.reload.essential_id, second.reload.essential_id ]
+        assert_equal [ [ second.public_id, nil ], [ first.public_id, "Une pile" ] ], created.images.map { [ it.public_id, it.alt ] }
+        assert_includes created.content, second.attachable_sgid
+        assert_equal created.images.map(&:public_id), @repository.find_by_slug(slug: created.slug).images.map(&:public_id)
+      end
+
+      test "ADR-0089 : une image d'une autre fiche ou d'un article n'est pas admise ; une image retirée du texte est supprimée" do
+        other = create_essential_image(essential: create_essential)
+        article = create_article_image
+        kept = create_essential_image
+        dropped = create_essential_image
+        created = @repository.create(essential: essential(content: attachment(kept) + attachment(dropped))).value
+
+        created.content = attachment(kept) + attachment(other) + attachment(article)
+        updated = @repository.update(essential: with_alts(created, kept.public_id => "Gardée")).value
+
+        assert_equal [ kept.public_id ], updated.images.map(&:public_id)
+        assert_equal "Gardée", kept.reload.alt
+        assert_not_includes updated.content, other.attachable_sgid
+        assert_not_includes updated.content, article.attachable_sgid
+        assert_not Orm::EssentialImage.exists?(dropped.id)
+        assert_not_equal created.id, other.reload.essential_id
+      end
+
+      test "ADR-0089 : un texte de remplacement absent de la saisie est gardé ; vidé, il s'efface" do
+        image = create_essential_image
+        created = @repository.create(essential: with_alts(essential(content: attachment(image)), image.public_id => "Une pile")).value
+
+        @repository.update(essential: with_alts(created, {}))
+        assert_equal "Une pile", image.reload.alt
+        @repository.update(essential: with_alts(created, image.public_id => nil))
+        assert_nil image.reload.alt
+      end
+
+      test "ADR-0089 : un sgid illisible refuse le texte, rien n'est écrit, aucune image n'est détruite" do
+        image = create_essential_image
+        created = @repository.create(essential: essential(content: attachment(image))).value
+        created.content = %(<action-text-attachment sgid="altere"></action-text-attachment>)
+
+        assert_equal({ content: [ :invalid ] }, @repository.update(essential: created).errors)
+        assert_equal created.id, image.reload.essential_id
+        assert_includes @repository.find_by_slug(slug: created.slug).content, image.attachable_sgid
+      end
+
+      test "ADR-0089 : une image citée prise entre-temps par une autre fiche fait échouer l'écriture, rien n'est écrit" do
+        image = create_essential_image
+        other = create_essential
+        @repository.define_singleton_method(:sanitized_content) do |canonical, record|
+          super(canonical, record).tap { image.update_columns(essential_id: other.id) }
+        end
+
+        result = @repository.create(essential: essential(content: attachment(image)))
+
+        assert_equal [ :conflict, { base: [ :write_failed ] } ], [ result.code, result.errors ]
+        assert_equal [ other.id ], Orm::Essential.ids
+      end
+
+      test "ADR-0089 : les figures de Trix envoyées par l'éditeur deviennent des pièces jointes" do
+        image = create_essential_image
+        figure = %(<figure data-trix-attachment="#{ERB::Util.html_escape({ sgid: image.attachable_sgid, contentType: image.content_type }.to_json)}"></figure>)
+
+        created = @repository.create(essential: essential(content: "<div>Texte#{figure}</div>")).value
+
+        assert_equal [ image.public_id ], created.images.map(&:public_id)
+      end
     end
   end
 end

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::CreateEssential
 # Rôle : l'équipe crée une fiche essentielle en brouillon, à la suite des fiches de son cours ; nom unique dans le cours
-# ADR  : 0026, 0028, 0035
+# ADR  : 0026, 0028, 0035, 0089
 module UseCases
   module Catalog
     class CreateEssential
@@ -22,6 +22,7 @@ module UseCases
 
         essential = Entities::Catalog::Essential.new(course_id: course.id, course_status: course.status, status: "draft",
                                                      author_id: actor.user_id, **dto.essential_attributes)
+        essential.images = dto.images
         @transaction.call do
           essential.position = @essentials.next_position(course_id: course.id)
           @essentials.create(essential:)

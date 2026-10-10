@@ -35,18 +35,22 @@ module Dtos
         assert_equal({ name: "Brassage génétique", subtitle: "", content: "" }, essential.essential_attributes)
       end
 
-      test "une pièce jointe ou une image, même envoyée hors de l'éditeur, est refusée : texte seul en V1" do
-        [ '<action-text-attachment sgid="x"></action-text-attachment>',
-          '<figure data-trix-attachment="{&quot;url&quot;:&quot;/a.png&quot;}"></figure>',
-          '<p>Voir <IMG src="/rails/active_storage/blobs/a.png"></p>' ].each do |content|
-          assert errors_of(content:).of_kind?(:content, :attachment), content
-        end
-        assert input(content: "<p>Une figure de style, une image mentale.</p>").valid?
+      # ADR-0089 : une fiche accepte des images, pièces jointes de son contenu ; c'est le repository qui n'en garde que les
+      # images de fiche admises (RichTextSanitizer), la saisie ne les filtre plus.
+      test "une pièce jointe d'image passe la saisie ; les textes de remplacement sont resserrés et bornés à 150 caractères" do
+        essential = input(content: '<action-text-attachment sgid="x"></action-text-attachment>',
+                          image_alts: { "img1" => "  Une   pile ", img2: "", "img3" => "a" * 150 })
+
+        assert essential.valid?
+        assert_equal({ "img1" => "Une pile", "img2" => nil, "img3" => "a" * 150 }, essential.image_alts)
+        assert_equal [ [ "img1", "Une pile" ], [ "img2", nil ] ], essential.images.first(2).map { [ it.public_id, it.alt ] }
+        assert errors_of(image_alts: { "img4" => "a" * 151 }).of_kind?(:"image_alts.img4", :too_long)
+        assert_empty input.images
       end
 
       test "les messages d'erreur viennent de la locale de l'écran" do
-        assert_equal [ I18n.t("activemodel.errors.models.dtos/catalog/essential_input.attributes.content.attachment") ],
-                     errors_of(content: "<img src='/a.png'>")[:content]
+        assert_equal [ I18n.t("activemodel.errors.models.dtos/catalog/essential_input.attributes.name.taken") ],
+                     input.tap { it.errors.add(:name, :taken) }.errors[:name]
         assert_equal I18n.t("activemodel.attributes.dtos/catalog/essential_input.name"), EssentialInput.human_attribute_name(:name)
       end
     end
