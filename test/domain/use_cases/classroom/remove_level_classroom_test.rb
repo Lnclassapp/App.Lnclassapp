@@ -26,7 +26,7 @@ module UseCases
         def find_by_public_id(public_id:) = @classrooms.find { it.public_id == public_id }
 
         def names_in_level(school_id:, school_year:, level_id:, series_id:)
-          @classrooms.select { [ it.school_id, it.school_year, it.level_id, it.series_id ] == [ school_id, school_year, level_id, series_id ] }
+          @classrooms.select { [ it.school_id, it.school_year, it.level_id, it.series_id ] == [ school_id, school_year, level_id, series_id ] && it.active? }
                      .map(&:name)
         end
 
@@ -93,6 +93,15 @@ module UseCases
         assert_equal [ { action: "school.changed", actor_id: 7, at: NOW, subject_type: "School", subject_id: 5,
                          metadata: { change: "classroom_removed", classroom_public_id: "cls-3", name: "6ème 10" } } ], @audit.events
         assert_equal 1, @transaction.calls
+      end
+
+      test "ADR-0088 : une classe archivée n'est jamais la dernière, « − » retire la dernière classe active" do
+        archived = classroom(8, "6ème 11")
+        archived.status = "archived"
+        @classrooms.classrooms << archived
+
+        assert_equal :not_last, remove("cls-8").errors[:base].first
+        assert remove("cls-3").success?
       end
 
       test "une classe qui a servi est refusée avec sa raison : rien n'est supprimé ni tracé" do

@@ -43,7 +43,8 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #names_in"
       end
 
-      # Noms des classes d'un couple niveau/série (series_id nil : sans série) dans l'école pour l'année. → [String]
+      # Noms des classes ACTIVES d'un couple niveau/série (series_id nil : sans série) dans l'école pour l'année : l'archivée n'est
+      # jamais la « dernière » que retire « − » (ADR-0088). Pour numéroter une classe nouvelle, names_in prend toutes les classes. → [String]
       def names_in_level(school_id:, school_year:, level_id:, series_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #names_in_level"
       end

@@ -54,7 +54,7 @@ module Repositories
       end
 
       def names_in_level(school_id:, school_year:, level_id:, series_id:)
-        Orm::Classroom.where(school_id:, school_year:, level_id:, series_id:).pluck(:name)
+        Orm::Classroom.where(school_id:, school_year:, level_id:, series_id:, status: "active").pluck(:name)
       end
 
       # Le verrou est celui que prend l'adhésion d'un élève (lock_by_public_id, lock_by_link_token) : un élève ne rejoint pas

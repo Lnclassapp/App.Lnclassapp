@@ -47,11 +47,12 @@ module Repositories
         assert_equal Set["6ème 1"], ClassroomRepository.new.names_in(school_id: @school.id, school_year: @year)
       end
 
-      test "liste les noms d'un couple niveau/série d'une école pour une année (CN-07)" do
+      test "liste les noms des classes actives d'un couple niveau/série d'une école pour une année (CN-07, ADR-0088)" do
         series = create_series(name: "D")
         create_classroom(school: @school, level: @level, series:, name: "Tle D 1")
         create_classroom(school: @school, level: @level, series:, name: "Tle D 2")
         create_classroom(school: @school, level: @level, name: "Tle 1")
+        create_classroom(school: @school, level: @level, series:, name: "Tle D 3", status: "archived")
         create_classroom(school: @school, level: @level, series:, name: "Tle D 9", school_year: "2020-2021")
         create_classroom(level: @level, series:, name: "Tle D 3")
 

@@ -26,14 +26,18 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - Le lien d'inscription d'une classe archivée donnait un 404 sans message : `JoinAsStudent` refuse maintenant avec le motif d'archivage et le formulaire n'est plus offert.
 - Un nouveau test système exige une durée enregistrée dans `script/ci/test_timings.yml` (`script/ci/record_timings`).
 
+## Ce qui a été corrigé en fin de chantier
+
+- Colonne « Classes » de la liste des établissements de l'équipe : actives seulement.
+- « − » : la dernière classe d'un niveau est la dernière classe **active** ; `names_in_level` ne renvoie plus que les actives (la numérotation d'une classe nouvelle, elle, regarde toutes les classes via `names_in`).
+
 ## Dette laissée derrière
 
 Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Colonne « Classes » de la liste des établissements de l'équipe : compte encore les archivées | Hors des fichiers des lots | à ouvrir |
-| Le « − » du bloc « Classes par niveau » compte aussi les archivées pour trouver la dernière classe | Hors périmètre (PRD §5) | à ouvrir |
+| — | Les deux dettes de compteur sont soldées dans ce chantier : la colonne « Classes » de la liste de l'équipe et le « − » ne comptent plus les archivées | — |
 
 ## Clôture
 

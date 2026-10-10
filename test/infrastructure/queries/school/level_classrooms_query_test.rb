@@ -3,7 +3,7 @@ require "test_helper"
 module Queries
   module School
     # CN-01, UDR-0046 : une ligne par niveau (par couple niveau/série au second cycle) avec le nombre de classes de
-    # l'année, archivées comprises, et la dernière classe, celle que « − » retire.
+    # l'année (les archivées ne comptent pas, ADR-0088), et la dernière classe active, celle que « − » retire.
     class LevelClassroomsQueryTest < ActiveSupport::TestCase
       YEAR = "2026-2027".freeze
 
@@ -32,10 +32,20 @@ module Queries
         result = rows
 
         assert_equal [ [ "6eme", "6ème", 2, "6ème 10", true ], [ "2nde", "2nde", 0, nil, true ],
-                       [ "tle-a1", "Tle A1", 0, nil, true ], [ "tle-d", "Tle D", 1, "Tle D 1", true ] ], summary(result)
+                       [ "tle-a1", "Tle A1", 0, nil, true ], [ "tle-d", "Tle D", 0, nil, true ] ], summary(result)
         assert_equal last.public_id, result.first.last_classroom.public_id
         assert_equal [ "6eme", nil ], [ result.first.level_slug, result.first.series_slug ]
         assert_equal [ "tle", "d" ], [ result.last.level_slug, result.last.series_slug ]
+      end
+
+      test "une classe archivée ne compte pas et n'est jamais la dernière : « − » vise la dernière classe active" do
+        create_classroom(school: @school, level: @sixth, name: "6ème 1", school_year: YEAR)
+        active = create_classroom(school: @school, level: @sixth, name: "6ème 2", school_year: YEAR)
+        create_classroom(school: @school, level: @sixth, name: "6ème 3", school_year: YEAR, status: "archived")
+
+        row = rows.first
+
+        assert_equal [ 2, "6ème 2", active.public_id ], [ row.count, row.last_classroom.name, row.last_classroom.public_id ]
       end
 
       test "un collège ne voit que le premier cycle" do

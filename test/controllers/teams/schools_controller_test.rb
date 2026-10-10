@@ -254,7 +254,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "CN-01, UDR-0046: the « Classes par niveau » block counts each level and series; its sum is the page's and the list's" do
+  test "CN-01, UDR-0046: the « Classes par niveau » block counts the active classes of each level and series; its sum is the page's and the list's" do
     referential = seed_referential
     school = create_school(drena: @drena, name: "Lycée Moderne de Cocody", cycle: "both")
     sixths = (1..4).map { create_classroom(school:, level: referential[:levels]["6eme"], name: "6ème #{it}") }
@@ -270,7 +270,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#{within_block} h3#school_level_classrooms_title", text: I18n.t("teams.level_classrooms.block.title")
     assert_select "#{within_block} li", 14
     assert_select "#{within_block} #level_classrooms_6eme [role=group][aria-label=?]", I18n.t("teams.level_classrooms.block.count", level: "6ème", count: 4)
-    assert_select "#{within_block} #level_classrooms_tle-d [role=group][aria-label=?]", I18n.t("teams.level_classrooms.block.count", level: "Tle D", count: 1)
+    assert_select "#{within_block} #level_classrooms_tle-d [role=group][aria-label=?]", I18n.t("teams.level_classrooms.block.count", level: "Tle D", count: 0)
     assert_select "#{within_block} #level_classrooms_tle-a1 [role=group][aria-label=?]", I18n.t("teams.level_classrooms.block.count", level: "Tle A1", count: 0)
     assert_select "#{within_block} #level_classrooms_6eme dialog form[action='#{school_level_classroom_path(school.public_id, sixths.last.public_id)}'] input[name=_method][value=delete]", 1
     assert_select "#{within_block} #level_classrooms_6eme dialog h2", text: I18n.t("teams.level_classrooms.block.remove_title", name: "6ème 4")
@@ -280,7 +280,7 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#school_classrooms_title", text: I18n.t("teams.schools.show.classrooms", count: 4) # ADR-0088 : la classe archivée ne compte plus dans le titre de la fiche
 
     get schools_path
-    assert_select "#school_#{school.public_id} td:nth-child(6)", text: "5" # « Classes » : plus de code d'établissement (IE-21)
+    assert_select "#school_#{school.public_id} td:nth-child(6)", text: "4" # « Classes » : les actives seules (ADR-0088) ; plus de code d'établissement (IE-21)
   end
 
   # UDR-0056 §3.2: the block moved to shared/_level_classrooms, shared with the direction; the team's page is unchanged.
