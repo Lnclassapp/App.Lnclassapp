@@ -328,6 +328,75 @@ Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-
 - **Français et Philosophie** : la règle du e muet, les formes fixes (sonnet, ballade), le nombre de parties d'une dissertation, les connecteurs et la réfutation.
 - **Histoire-Géographie** : l'IDH et le taux de scolarisation (à citer avec une source), la date de la seconde révolution industrielle (« vers 1850 », « vers 1870 »), les lois sur le travail des enfants.
 
+### 2nde — `lecons-traitees/2nde-a/`, `2nde-c/`, `2nde/`
+
+Les 3 premières leçons de chaque matière de Seconde (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-11 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A et C ont des progressions différentes en Mathématiques, SVT et Français ; Physique-Chimie et Histoire-Géographie ont des premières leçons communes.
+
+#### 2nde A (12)
+
+| Fichier | Cours | Rang | Fiches | Exercices | Questions |
+|---|---|---:|---:|---:|---:|
+| `mathematiques/calcul-numerique.json` | Calcul numérique | 1 | 3 | 9 | 45 |
+| `mathematiques/denombrement.json` | Dénombrement | 2 | 3 | 9 | 45 |
+| `mathematiques/calcul-litteral.json` | Calcul littéral | 3 | 3 | 9 | 45 |
+| `physique-chimie/le-mouvement.json` | Le mouvement | 1 | 3 | 9 | 45 |
+| `physique-chimie/l-element-chimique.json` | L'élément chimique | 2 | 3 | 9 | 45 |
+| `physique-chimie/structure-de-l-atome.json` | Structure de l'atome | 3 | 3 | 9 | 45 |
+| `svt/la-transmission-d-un-message-nerveux.json` | La transmission d'un message nerveux | 1 | 3 | 9 | 49 |
+| `svt/la-transmission-d-un-message-hormonal.json` | La transmission d'un message hormonal | 2 | 3 | 9 | 48 |
+| `svt/les-grands-ensembles-environnementaux.json` | Les grands ensembles environnementaux | 3 | 3 | 9 | 48 |
+| `francais/oeuvre-narrative.json` | Œuvre narrative | 1 | 3 | 9 | 48 |
+| `francais/les-techniques-de-communication.json` | Les techniques de communication | 2 | 3 | 9 | 48 |
+| `francais/resume-du-texte-argumentatif.json` | Résumé du texte argumentatif | 3 | 3 | 9 | 48 |
+
+#### 2nde C (12)
+
+| Fichier | Cours | Rang | Fiches | Exercices | Questions |
+|---|---|---:|---:|---:|---:|
+| `mathematiques/vecteurs-et-points-du-plan.json` | Vecteurs et points du plan | 1 | 4 | 12 | 67 |
+| `mathematiques/ensemble-des-nombres-reels.json` | Ensemble des nombres réels | 2 | 3 | 9 | 48 |
+| `mathematiques/utilisation-des-symetries-et-translations.json` | Utilisation des symétries et translations | 3 | 3 | 9 | 48 |
+| `physique-chimie/le-mouvement.json` | Le mouvement | 1 | 3 | 9 | 45 |
+| `physique-chimie/l-element-chimique.json` | L'élément chimique | 2 | 3 | 9 | 45 |
+| `physique-chimie/structure-de-l-atome.json` | Structure de l'atome | 3 | 3 | 9 | 45 |
+| `svt/l-absorption-de-l-eau-par-la-plante-verte.json` | L'absorption de l'eau par la plante verte | 1 | 3 | 9 | 45 |
+| `svt/l-influence-des-sels-mineraux-sur-la-croissance-de-la-plante-verte.json` | L'influence des sels minéraux sur la croissance de la plante verte | 2 | 3 | 9 | 45 |
+| `svt/l-absorption-des-sels-mineraux-par-la-plante-verte.json` | L'absorption des sels minéraux par la plante verte | 3 | 3 | 9 | 45 |
+| `francais/oeuvre-narrative.json` | Œuvre narrative | 1 | 3 | 9 | 48 |
+| `francais/les-techniques-de-communication.json` | Les techniques de communication | 2 | 3 | 9 | 48 |
+| `francais/resume-du-texte-argumentatif.json` | Résumé du texte argumentatif | 3 | 3 | 9 | 48 |
+
+#### 2nde (commune à toutes les séries) (3)
+
+| Fichier | Cours | Rang | Fiches | Exercices | Questions |
+|---|---|---:|---:|---:|---:|
+| `histoire-geographie/histoire-l-histoire-et-la-formation-du-citoyen.json` | Histoire — L'Histoire et la formation du citoyen | 1 | 3 | 9 | 46 |
+| `histoire-geographie/geographie-la-geographie-objet-interet-et-demarche.json` | Géographie — La géographie : objet, intérêt et démarche | 2 | 3 | 9 | 45 |
+| `histoire-geographie/histoire-les-methodes-d-etude-de-l-histoire.json` | Histoire — Les méthodes d'étude de l'histoire | 3 | 3 | 9 | 45 |
+
+**27 cours, 82 fiches, 246 exercices, 1272 questions, 4458 propositions.** Tous passent `script/contenus/valider.rb`, et `ctrlchars.rb` ne signale aucun caractère de contrôle. Importés en un seul envoi sur une base jetable : **27 cours créés, aucun ignoré, aucun refusé**.
+
+**Ce qui a été repris, ce qui a été rédigé.**
+
+- **Rédigées pour leur série** (21) : Maths A et C ; SVT A et C ; Français A ; Physique-Chimie A ; Histoire-Géographie (commune, sans `series_name`).
+- **Copiées vers la série C** (6) : Physique-Chimie et Français ont les mêmes trois premières leçons en A et en C. La copie reprend la leçon de la série A, avec la série C et le nom et le sous-titre de la progression C.
+
+**Attention à l'import.**
+
+- La série fait partie de la clé de doublon (nom, niveau, matière, série). Un cours sans série n'est donc pas un doublon d'un cours de série.
+- Un cours déjà présent est ignoré, jamais mis à jour. Si une progression de 2nde a déjà été importée, les cours de ces leçons existent vides : le **renommer, l'archiver**, puis importer le cours complet.
+- Histoire-Géographie : les cours rédigés n'ont pas de série, comme la progression. Un cours vide de la progression, créé avec une série, ne sera pas reconnu comme doublon.
+
+À faire valider par un enseignant (le programme détaillé n'était pas disponible) :
+
+- **Toutes les leçons** : le champ `subtitle` de la dernière fiche porte parfois un « À compléter : … » qui liste ce que le rédacteur a laissé de côté. L'élève le voit. À compléter ou à effacer après validation.
+- **Mathématiques** : les pourcentages et les identités remarquables (A), le critère de colinéarité et la valeur absolue (C), la démonstration de l'irrationalité de √2 (C).
+- **Physique-Chimie** : la notion d'accélération (leçon 1), les formules des molécules et des ions (leçon 2), le nombre de masse (leçon 3).
+- **SVT** : le potentiel d'action et les hormones précises (A), le déboisement et les pluies (A), le transport actif et la respiration comme source d'énergie (C), la liste des symptômes de carence (C).
+- **Français** : la focalisation et les rôles adjuvant et opposant (A), le discours direct et indirect et la lettre (A), les fonctions du langage (A).
+- **Histoire-Géographie** : la « mémoire collective » et le « patrimoine », la convention « l'histoire commence avec les premiers textes », le contexte de la décolonisation dans l'exemple de la leçon 1.
+
+
 ## Contraintes de l'application, vérifiées pendant le test
 
 - **Pas de tableau dans une fiche.** L'application supprime `table`, `tr`, `td` et `th`, et ne garde que le texte des cellules. Les balises conservées sont `h2`, `h3`, `p`, `ul`, `ol`, `li`, `strong`, `em` et `blockquote`.
