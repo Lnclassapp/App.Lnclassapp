@@ -1,0 +1,1755 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Fonction logarithme népérien",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "A2",
+      "essentials": [
+        {
+          "name": "Définition et variations de la fonction ln",
+          "subtitle": "Domaine, valeur en 1, dérivée, signe et sens de variation",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Dire sur quel ensemble la fonction $\\ln$ est définie et donner la valeur de $\\ln 1$.</li>\n<li>Utiliser la dérivée $\\frac{1}{x}$ de $\\ln$ pour justifier qu'elle est strictement croissante.</li>\n<li>Déterminer le signe de $\\ln x$ et comparer deux logarithmes.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>Le jeune plant de cacaoyer.</strong> Un planteur suit un jeune plant. Il note son âge $x$ en mois, avec $x > 0$. Quand le plant est très jeune, il pousse vite. Plus il vieillit, plus il pousse lentement : à l'âge $x$, sa pousse est de $\\frac{1}{x}$ centimètre par mois. Le planteur compte la hauteur gagnée depuis l'âge d'un mois. À un mois, le gain est nul. Ensuite, le gain cumulé grandit toujours, mais de plus en plus lentement.</p>\n<p><em>Le pont.</em> L'âge, c'est $x$. La vitesse de pousse $\\frac{1}{x}$, c'est la <strong>dérivée</strong> de $\\ln$ : la vitesse à laquelle la fonction change. Le gain cumulé depuis un mois, c'est $\\ln x$. Le gain nul à un mois, c'est $\\ln 1 = 0$. Une pousse toujours positive, c'est une fonction <strong>strictement croissante</strong>. Avant un mois (on « remonte » dans le temps), le gain est négatif : $\\ln x < 0$ si $0 < x < 1$. Un âge nul ou négatif n'existe pas : c'est pourquoi $\\ln$ n'est définie que pour $x > 0$.</p>\n<p><em>Où l'image s'arrête.</em> Un vrai plant finit par s'arrêter de grandir. La fonction $\\ln$, elle, n'a pas de plafond : elle dépasse n'importe quel nombre, mais très lentement.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Définition.</strong> La fonction <strong>logarithme népérien</strong>, notée $\\ln$, est définie sur $]0 ; +\\infty[$. C'est la primitive de la fonction $x \\mapsto \\frac{1}{x}$ qui s'annule en $1$ (une primitive d'une fonction $f$ est une fonction dont la dérivée est $f$). Donc :</p>\n<ul>\n<li>$\\ln 1 = 0$ ;</li>\n<li>pour tout $x > 0$, $(\\ln x)' = \\frac{1}{x}$.</li>\n</ul>\n<p><strong>Sens de variation.</strong> Pour $x > 0$, $\\frac{1}{x} > 0$ : la fonction $\\ln$ est strictement croissante sur $]0 ; +\\infty[$.</p>\n<p><strong>Conséquences.</strong> Pour tous réels $a > 0$ et $b > 0$ :</p>\n<ul>\n<li>$\\ln a = \\ln b \\iff a = b$ ;</li>\n<li>$\\ln a < \\ln b \\iff a < b$ ;</li>\n<li>$\\ln x > 0 \\iff x > 1$ ; $\\ln x < 0 \\iff 0 < x < 1$ ; $\\ln x = 0 \\iff x = 1$.</li>\n</ul>\n<p><strong>Limites (admises).</strong> $\\lim_{x \\to +\\infty} \\ln x = +\\infty$ et $\\lim_{x \\to 0,\\, x > 0} \\ln x = -\\infty$.</p>\n<p><strong>Valeurs utiles.</strong> $\\ln 2 \\approx 0{,}69$ et $\\ln 10 \\approx 2{,}30$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>1. Comparer $\\ln 5$ et $\\ln 3$, puis donner le signe de $\\ln 0{,}4$.</strong></p>\n<ol>\n<li>On a $5 > 3$ et $\\ln$ est strictement croissante : donc $\\ln 5 > \\ln 3$.</li>\n<li>On a $0 < 0{,}4 < 1$ : donc $\\ln 0{,}4 < 0$.</li>\n</ol>\n<p><strong>2. Soit $f(x) = x + 3\\ln x$ sur $]0 ; +\\infty[$. Étudier le sens de variation de $f$.</strong></p>\n<ol>\n<li>Pour $x > 0$ : $f'(x) = 1 + 3 \\times \\frac{1}{x} = \\frac{x + 3}{x}$.</li>\n<li>Pour $x > 0$, $x + 3 > 0$ et $x > 0$, donc $f'(x) > 0$.</li>\n<li>Donc $f$ est strictement croissante sur $]0 ; +\\infty[$. Contrôle : $f(1) = 1 + 3 \\times 0 = 1$ et $f(2) = 2 + 3\\ln 2$, qui est supérieur à $2$ puisque $\\ln 2 > 0$ : on a bien $f(2) > f(1)$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Croire que $\\ln x$ est toujours positif parce que $\\ln$ est croissante. Croissante ne veut pas dire positive : $\\ln x$ est négatif tant que $0 < x < 1$, nul en $1$, positif ensuite.</p>\n<p>Autre piège : écrire $\\ln 0$ ou $\\ln(-3)$. Ces nombres n'existent pas, car $\\ln$ n'est définie que sur $]0 ; +\\infty[$. Avant d'écrire un logarithme, vérifie que ce qui est dedans est strictement positif.</p>\n<h2>En une phrase</h2>\n<p>$\\ln$ est définie pour $x > 0$, vaut $0$ en $1$, a pour dérivée $\\frac{1}{x}$, donc elle est strictement croissante : négative avant $1$, positive après.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Définition, domaine et variations de ln",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Sur quel ensemble la fonction $\\ln$ est-elle définie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Dans l'image du plant, l'âge $x$ doit être strictement positif : $\\ln x$ n'existe que pour $x > 0$. Le nombre $0$ est exclu, car $\\ln 0$ n'existe pas. Et $\\ln$ n'est pas définie sur $\\mathbb{R}$ : les nombres négatifs n'ont pas de logarithme.",
+                  "answers": [
+                    {
+                      "content": "$]0 ; +\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[0 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]1 ; +\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du jeune plant de cacaoyer, la vitesse de pousse $\\frac{1}{x}$ à l'âge $x$ représente :",
+                  "question_type": "single_choice",
+                  "explanation": "La vitesse de pousse est la dérivée : $(\\ln x)' = \\frac{1}{x}$. Le gain cumulé de hauteur, lui, est $\\ln x$. Ne confonds pas la vitesse (la dérivée) avec la hauteur gagnée (la fonction elle-même).",
+                  "answers": [
+                    {
+                      "content": "la dérivée de $\\ln$ en $x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "la valeur de $\\ln x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "la valeur de $\\ln 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "l'âge du plant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La valeur de $\\ln 1$ est $1$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. À l'âge d'un mois, le gain cumulé du plant est nul : $\\ln 1 = 0$. La fonction $\\ln$ est la primitive de $\\frac{1}{x}$ qui s'annule en $1$. Ne confonds pas $\\ln 1 = 0$ avec la valeur de la dérivée en $1$, qui vaut $\\frac{1}{1} = 1$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour lesquels de ces réels $x$ le nombre $\\ln x$ existe-t-il ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\ln x$ existe seulement si $x > 0$. Les nombres $0{,}5$ et $12$ sont strictement positifs. Le nombre $0$ n'est pas accepté : un plant d'âge nul n'a pas de gain cumulé. Les nombres négatifs non plus.",
+                  "answers": [
+                    {
+                      "content": "$x = 0{,}5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -\\frac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la dérivée de la fonction $\\ln$ sur $]0 ; +\\infty[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par définition, $\\ln$ est la primitive de $x \\mapsto \\frac{1}{x}$ qui s'annule en $1$ : sa dérivée est donc $\\frac{1}{x}$. C'est la vitesse de pousse du plant, qui ralentit quand l'âge augmente.",
+                  "answers": [
+                    {
+                      "content": "$x \\mapsto \\frac{1}{x}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x \\mapsto x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x \\mapsto \\frac{\\ln x}{x}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x \\mapsto \\frac{1}{\\ln x}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sur la fonction $\\ln$ sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "La dérivée $\\frac{1}{x}$ est positive pour tout $x > 0$ : $\\ln$ est strictement croissante partout, y compris sur $]0 ; 1[$ (où elle est négative, mais elle monte). Elle vaut $0$ en $1$ et n'existe pas en $0$.",
+                  "answers": [
+                    {
+                      "content": "Elle est définie sur $]0 ; +\\infty[$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle s'annule en $x = 1$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est strictement croissante sur son ensemble de définition.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est définie en $0$ et $\\ln 0 = 0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est décroissante sur $]0 ; 1[$ puis croissante.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est définie sur $\\mathbb{R}$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Signe, comparaison et dérivée avec ln",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quel est le signe de $\\ln 0{,}8$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\ln x < 0$ quand $0 < x < 1$. Comme $0{,}8$ est entre $0$ et $1$, $\\ln 0{,}8$ est négatif. Il existe bien, puisque $0{,}8 > 0$. Le simple fait que $0{,}8$ soit positif ne rend pas son logarithme positif.",
+                  "answers": [
+                    {
+                      "content": "Négatif, car $0 < 0{,}8 < 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Positif, car $0{,}8 > 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nul, car $0{,}8$ est proche de $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre $\\ln 0{,}8$ n'existe pas",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces comparaisons est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\ln$ est strictement croissante : $0{,}3 < 0{,}5$ donne $\\ln 0{,}3 < \\ln 0{,}5$. Les autres sont fausses : $2 > 1$ donc $\\ln 2 > \\ln 1 = 0$ ; $5 > 0{,}2$ donc $\\ln 5 > \\ln 0{,}2$ ; $3 \\neq 4$ donc $\\ln 3 \\neq \\ln 4$.",
+                  "answers": [
+                    {
+                      "content": "$\\ln 0{,}3 < \\ln 0{,}5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 2 < \\ln 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 5 < \\ln 0{,}2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 3 = \\ln 4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la dérivée de $f(x) = 4\\ln x$ sur $]0 ; +\\infty[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le facteur $4$ reste devant : $(4\\ln x)' = 4 \\times \\frac{1}{x} = \\frac{4}{x}$. Erreur fréquente : diviser par $4$ ou « remonter » le $4$ au dénominateur.",
+                  "answers": [
+                    {
+                      "content": "$f'(x) = \\frac{4}{x}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'(x) = \\frac{1}{4x}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(x) = 4\\ln x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(x) = 4x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x + 2\\ln x$ sur $]0 ; +\\infty[$. Son sens de variation est :",
+                  "question_type": "single_choice",
+                  "explanation": "$f'(x) = 1 + \\frac{2}{x} = \\frac{x + 2}{x}$. Pour $x > 0$, le numérateur et le dénominateur sont positifs : $f'(x) > 0$. Donc $f$ est strictement croissante. Un facteur $\\ln$ ne rend pas une fonction décroissante : $\\ln$ elle-même est croissante.",
+                  "answers": [
+                    {
+                      "content": "strictement croissante sur $]0 ; +\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "strictement décroissante sur $]0 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "décroissante sur $]0 ; 1]$ puis croissante",
+                      "correct": false
+                    },
+                    {
+                      "content": "constante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$3 > 1$ donc $\\ln 3 > 0$ ; $0 < 0{,}5 < 1$ donc $\\ln 0{,}5 < 0$. Fausses : $\\ln 1 = 0$ ; $0{,}5 < 2$ donc $\\ln 0{,}5 < \\ln 2$ ; et $\\ln(-1)$ n'existe pas.",
+                  "answers": [
+                    {
+                      "content": "$\\ln 3 > 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 0{,}5 < 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 1 > 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 0{,}5 > \\ln 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln(-1) < 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de l'inéquation $\\ln x > 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\ln 1 = 0$ et $\\ln$ est strictement croissante : $\\ln x > 0$ équivaut à $x > 1$. L'ensemble $x > 0$ est seulement l'ensemble de définition de $\\ln$, pas celui des solutions.",
+                  "answers": [
+                    {
+                      "content": "$x > 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x > 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0 < x < 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x > 10$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Variations, signe et limites de ln",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = x + 3\\ln x$ sur $]0 ; +\\infty[$. Que valent $f(1)$ et le sens de variation de $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f(1) = 1 + 3\\ln 1 = 1 + 0 = 1$. Puis $f'(x) = 1 + \\frac{3}{x} > 0$ pour $x > 0$ : $f$ est strictement croissante. Erreur fréquente : prendre $\\ln 1 = 1$ et trouver $f(1) = 4$.",
+                  "answers": [
+                    {
+                      "content": "$f(1) = 1$ et $f$ est strictement croissante",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(1) = 0$ et $f$ est strictement croissante",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(1) = 1$ et $f$ est strictement décroissante",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(1) = 4$ et $f$ est strictement croissante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelles valeurs de $x$ a-t-on $\\ln x \\le 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\ln x \\le 0 \\iff x \\le 1$, mais il faut aussi $x > 0$ pour que $\\ln x$ existe. Donc $0 < x \\le 1$. Écrire seulement $x \\le 1$ inclut des nombres négatifs ou nuls qui n'ont pas de logarithme.",
+                  "answers": [
+                    {
+                      "content": "$0 < x \\le 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x \\le 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x \\ge 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x \\le 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles inégalités sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$\\ln$ est strictement croissante : elle conserve l'ordre. Vraies : $4 > 2$, $0{,}1 < 0{,}2$, $3 > 1$. Fausses : $\\ln 0{,}5 < 0$ car $0{,}5 < 1$ ; $2 > 0{,}9$ donc $\\ln 2 > \\ln 0{,}9$ ; $\\ln 10 > 0$ car $10 > 1$.",
+                  "answers": [
+                    {
+                      "content": "$\\ln 4 > \\ln 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 0{,}1 < \\ln 0{,}2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 3 > \\ln 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 0{,}5 > 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 2 < \\ln 0{,}9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 10 < 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $\\ln$ est positive sur tout son ensemble de définition.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. $\\ln x$ est négatif pour $0 < x < 1$ (le plant « avant un mois ») et ne devient positif qu'après $x = 1$. Par exemple $\\ln 0{,}5 < 0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un planteur note $G(x) = \\ln x$ le gain cumulé de hauteur d'un plant d'âge $x \\ge 1$ mois. Que peut-on dire de $\\ln 6 - \\ln 2$, le gain entre 2 et 6 mois ?",
+                  "question_type": "single_choice",
+                  "explanation": "$6 > 2$ et $\\ln$ est strictement croissante : $\\ln 6 > \\ln 2$, donc $\\ln 6 - \\ln 2 > 0$. Le plant a bien gagné de la hauteur. On le sait sans calculer les deux logarithmes.",
+                  "answers": [
+                    {
+                      "content": "C'est un nombre strictement positif",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est un nombre strictement négatif",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est le nombre $0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas le savoir",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que valent les limites de $\\ln x$ quand $x$ tend vers $+\\infty$, puis quand $x$ tend vers $0$ par valeurs positives ?",
+                  "question_type": "single_choice",
+                  "explanation": "Admises : $\\ln x \\to +\\infty$ quand $x \\to +\\infty$ (sans plafond, mais très lentement), et $\\ln x \\to -\\infty$ quand $x \\to 0^+$. Piège : croire que $\\ln 0 = 0$ ; $\\ln 0$ n'existe pas.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$ puis $-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$ puis $0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$ puis $-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$ puis $+\\infty$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Propriétés algébriques de la fonction ln",
+          "subtitle": "Transformer un produit, un quotient et une puissance",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Transformer $\\ln(ab)$, $\\ln\\frac{a}{b}$ et $\\ln(a^n)$ avec les propriétés algébriques de $\\ln$.</li>\n<li>Exprimer un logarithme à partir de $\\ln 2$ et $\\ln 3$.</li>\n<li>Regrouper une somme de logarithmes en un seul logarithme.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>Le carnet du planteur.</strong> Kouassi veut savoir de combien sa récolte de cacao a grandi. Grâce aux engrais, elle est multipliée par $2$. Grâce aux nouveaux plants, elle est encore multipliée par $3$. Au lieu de multiplier, il tient un carnet où chaque coefficient reçoit une « note », et il <strong>additionne</strong> les notes. Si le coefficient $6$ est le résultat des deux étapes, sa note est la somme des notes de $2$ et de $3$. S'il applique trois fois le coefficient $2$ (donc $2 \\times 2 \\times 2$), la note est trois fois celle de $2$.</p>\n<p><em>Le pont.</em> La note d'un coefficient $a$, c'est $\\ln a$. Multiplier les coefficients, c'est additionner les notes : $\\ln(ab) = \\ln a + \\ln b$. Retirer un coefficient (diviser), c'est soustraire sa note : $\\ln\\frac{a}{b} = \\ln a - \\ln b$. Répéter $n$ fois le même coefficient, c'est compter $n$ fois la note : $\\ln(a^n) = n\\ln a$. Ne rien changer (coefficient $1$) a pour note $0$ : c'est $\\ln 1 = 0$.</p>\n<p><em>Où l'image s'arrête.</em> Le carnet ne sait additionner les notes que pour des <strong>produits</strong>. Si on ajoute deux quantités ($a + b$), la note de la somme n'est pas la somme des notes. De plus, un coefficient doit être strictement positif pour avoir une note.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Propriétés algébriques (admises).</strong> Pour tous réels $a > 0$ et $b > 0$, et tout entier $n$ :</p>\n<ul>\n<li>$\\ln(ab) = \\ln a + \\ln b$ ;</li>\n<li>$\\ln\\frac{1}{b} = -\\ln b$ ;</li>\n<li>$\\ln\\frac{a}{b} = \\ln a - \\ln b$ ;</li>\n<li>$\\ln(a^n) = n\\ln a$ ;</li>\n<li>$\\ln\\sqrt{a} = \\frac{1}{2}\\ln a$.</li>\n</ul>\n<p><strong>Attention.</strong> Il n'existe pas de formule simple pour $\\ln(a + b)$ ni pour $\\ln(a - b)$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>On pose $a = \\ln 2$ et $b = \\ln 3$. Exprimer $\\ln 12$, $\\ln\\frac{8}{3}$ et $\\ln\\frac{1}{9}$ en fonction de $a$ et $b$.</strong></p>\n<ol>\n<li>$12 = 4 \\times 3 = 2^2 \\times 3$, donc $\\ln 12 = \\ln(2^2) + \\ln 3 = 2\\ln 2 + \\ln 3 = 2a + b$.</li>\n<li>$8 = 2^3$, donc $\\ln\\frac{8}{3} = \\ln 8 - \\ln 3 = 3\\ln 2 - \\ln 3 = 3a - b$.</li>\n<li>$9 = 3^2$, donc $\\ln\\frac{1}{9} = -\\ln 9 = -2\\ln 3 = -2b$.</li>\n</ol>\n<p><strong>Écrire $A = \\ln 5 + \\ln 4 - \\ln 2$ avec un seul logarithme.</strong></p>\n<ol>\n<li>Une somme de logarithmes devient un produit : $\\ln 5 + \\ln 4 = \\ln 20$.</li>\n<li>Une différence devient un quotient : $\\ln 20 - \\ln 2 = \\ln\\frac{20}{2} = \\ln 10$.</li>\n<li>Contrôle : $\\ln 10 \\approx 2{,}30$, et $\\ln 5 + \\ln 4 - \\ln 2$ donne bien le même nombre.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Le piège le plus fréquent est d'écrire $\\ln(a + b) = \\ln a + \\ln b$. C'est faux. Prends $a = b = 1$ : $\\ln 2 \\approx 0{,}69$, alors que $\\ln 1 + \\ln 1 = 0$. La somme de logarithmes correspond à un <strong>produit</strong>, pas à une somme.</p>\n<p>Autres confusions : $\\ln(ab) = \\ln a \\times \\ln b$ (faux, c'est une somme) ; $\\ln(a^n) = (\\ln a)^n$ (faux, c'est $n\\ln a$) ; $\\ln(a - b) = \\ln a - \\ln b$ (faux : la différence correspond à un quotient).</p>\n<h2>En une phrase</h2>\n<p>$\\ln$ transforme un produit en somme, un quotient en différence et une puissance en multiplication : $\\ln(ab) = \\ln a + \\ln b$, $\\ln\\frac{a}{b} = \\ln a - \\ln b$, $\\ln(a^n) = n\\ln a$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Les propriétés algébriques de ln",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Pour tous réels $a > 0$ et $b > 0$, $\\ln(ab)$ est égal à :",
+                  "question_type": "single_choice",
+                  "explanation": "Dans l'image du carnet, multiplier deux coefficients revient à additionner leurs notes : $\\ln(ab) = \\ln a + \\ln b$. Le produit de logarithmes $\\ln a \\times \\ln b$ est l'erreur classique.",
+                  "answers": [
+                    {
+                      "content": "$\\ln a + \\ln b$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln a \\times \\ln b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln a - \\ln b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln(a + b)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du carnet, appliquer le coefficient $2$ puis le coefficient $3$ donne la note $\\ln 2 + \\ln 3$, qui est la note du coefficient $6$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Les deux étapes multiplient la récolte par $2 \\times 3 = 6$, et $\\ln 6 = \\ln 2 + \\ln 3$. Les notes s'additionnent quand les coefficients se multiplient. Ne confonds pas avec $2 + 3 = 5$ : la note de $5$ n'est pas $\\ln 2 + \\ln 3$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $a > 0$, $\\ln(a^3)$ est égal à :",
+                  "question_type": "single_choice",
+                  "explanation": "$a^3 = a \\times a \\times a$, donc $\\ln(a^3) = \\ln a + \\ln a + \\ln a = 3\\ln a$. L'exposant passe devant le logarithme, il ne le met pas à la puissance.",
+                  "answers": [
+                    {
+                      "content": "$3\\ln a$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\ln a)^3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3 + \\ln a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a\\ln 3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles égalités sont vraies pour tous réels $a > 0$ et $b > 0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Un quotient devient une différence de logarithmes, et l'inverse change le signe : $\\ln\\frac{1}{b} = \\ln 1 - \\ln b = -\\ln b$. Les trois autres égalités sont fausses : il n'y a pas de formule pour $\\ln(a \\pm b)$, et $\\ln\\frac{a}{b}$ n'est pas un quotient de logarithmes.",
+                  "answers": [
+                    {
+                      "content": "$\\ln\\frac{a}{b} = \\ln a - \\ln b$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln\\frac{1}{b} = -\\ln b$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln(a + b) = \\ln a + \\ln b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln\\frac{a}{b} = \\frac{\\ln a}{\\ln b}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln(a - b) = \\ln a - \\ln b$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tous réels $a > 0$ et $b > 0$, on a $\\ln(a + b) = \\ln a + \\ln b$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Avec $a = b = 1$ : $\\ln 2 \\neq \\ln 1 + \\ln 1 = 0$ puisque $\\ln 2 > 0$. C'est la limite de l'image : le carnet additionne les notes pour des produits, pas pour des sommes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi faut-il $a > 0$ et $b > 0$ pour écrire $\\ln(ab) = \\ln a + \\ln b$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les nombres $\\ln a$ et $\\ln b$ n'existent que si $a > 0$ et $b > 0$. Un coefficient nul ou négatif n'a pas de note dans le carnet. La croissance de $\\ln$ et la valeur $\\ln 1 = 0$ n'interviennent pas ici.",
+                  "answers": [
+                    {
+                      "content": "Parce que $\\ln$ n'est définie que sur $]0 ; +\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que $\\ln$ est croissante",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $\\ln 1 = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le produit $ab$ doit être entier",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer avec ln en fonction de ln 2 et ln 3",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On pose $a = \\ln 2$ et $b = \\ln 3$. Que vaut $\\ln 6$ en fonction de $a$ et $b$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$6 = 2 \\times 3$, donc $\\ln 6 = \\ln 2 + \\ln 3 = a + b$. Un produit à l'intérieur devient une somme à l'extérieur. Le produit $a \\times b$ est l'erreur classique.",
+                  "answers": [
+                    {
+                      "content": "$a + b$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a \\times b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$b - a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6ab$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $a = \\ln 2$. Que vaut $\\ln 8$ en fonction de $a$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$8 = 2^3$, donc $\\ln 8 = 3\\ln 2 = 3a$. L'exposant $3$ devient un facteur. On ne met pas $a$ au cube, et on ne multiplie pas par $8$.",
+                  "answers": [
+                    {
+                      "content": "$3a$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a^3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a + 8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $a = \\ln 2$ et $b = \\ln 3$. Que vaut $\\ln\\frac{3}{2}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un quotient devient une différence, dans l'ordre : $\\ln\\frac{3}{2} = \\ln 3 - \\ln 2 = b - a$. Contrôle : $\\frac{3}{2} > 1$, donc $\\ln\\frac{3}{2} > 0$, ce qui est bien le cas de $b - a$ car $\\ln 3 > \\ln 2$.",
+                  "answers": [
+                    {
+                      "content": "$b - a$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a - b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{b}{a}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a + b$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $a = \\ln 2$. Que vaut $\\ln\\frac{1}{4}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\ln\\frac{1}{4} = -\\ln 4 = -\\ln(2^2) = -2\\ln 2 = -2a$. Contrôle : $\\frac{1}{4}$ est entre $0$ et $1$, donc son logarithme est négatif, ce qui exclut $2a$.",
+                  "answers": [
+                    {
+                      "content": "$-2a$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-4a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2a}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $A = \\ln 3 + \\ln 5 - \\ln 15$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\ln 3 + \\ln 5 = \\ln 15$ car $3 \\times 5 = 15$. Donc $A = \\ln 15 - \\ln 15 = 0$. Les sommes $3 + 5 = 8$ ou $3 + 5 + 15 = 23$ ne jouent aucun rôle ici.",
+                  "answers": [
+                    {
+                      "content": "$0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 23$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquelles de ces écritures sont égales à $2\\ln 5$ ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$2\\ln 5 = \\ln(5^2) = \\ln 25$. Aussi $\\ln 5 + \\ln 5 = 2\\ln 5$, et $\\ln 100 - \\ln 4 = \\ln\\frac{100}{4} = \\ln 25$. Fausses : $\\ln 10 = \\ln 5 + \\ln 2$ ; $(\\ln 5)^2$ est un carré de logarithme ; $\\ln 5 + 2$ n'a aucun lien.",
+                  "answers": [
+                    {
+                      "content": "$\\ln 25$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 5 + \\ln 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 100 - \\ln 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\ln 5)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 5 + 2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Simplifier et utiliser les propriétés de ln",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "On pose $a = \\ln 2$ et $c = \\ln 5$. Que vaut $\\ln 20$ en fonction de $a$ et $c$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$20 = 4 \\times 5 = 2^2 \\times 5$, donc $\\ln 20 = 2\\ln 2 + \\ln 5 = 2a + c$. Le nombre $a + 2c$ serait $\\ln 50$. Et un produit à l'intérieur ne devient jamais un produit à l'extérieur.",
+                  "answers": [
+                    {
+                      "content": "$2a + c$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a + 2c$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2ac$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$20(a + c)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $A = \\ln 9 - 2\\ln 3 + \\ln\\frac{1}{2}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\ln 9 = \\ln(3^2) = 2\\ln 3$, donc $\\ln 9 - 2\\ln 3 = 0$. Reste $\\ln\\frac{1}{2} = -\\ln 2$. Donc $A = -\\ln 2$. Piège : oublier que l'inverse change le signe et répondre $\\ln 2$.",
+                  "answers": [
+                    {
+                      "content": "$-\\ln 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-2\\ln 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $\\ln 2 \\approx 0{,}69$ et $\\ln 10 \\approx 2{,}30$. Alors $\\ln 5 \\approx 1{,}61$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $10 = 2 \\times 5$, donc $\\ln 10 = \\ln 2 + \\ln 5$ et $\\ln 5 = \\ln 10 - \\ln 2 \\approx 2{,}30 - 0{,}69 = 1{,}61$. Ne divise pas les logarithmes : $\\ln 5$ n'est pas $\\frac{\\ln 10}{\\ln 2}$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles égalités sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Vraies : $\\sqrt{7} = 7^{1/2}$ donne la moitié de $\\ln 7$ ; l'inverse change le signe ; un produit $3 \\times 4 = 12$ devient une somme. Fausses : $\\ln 6 - \\ln 2 = \\ln 3$ ; $\\ln 9 = 2\\ln 3$ ; $\\ln 5 \\neq \\ln 2 + \\ln 3 = \\ln 6$.",
+                  "answers": [
+                    {
+                      "content": "$\\ln\\sqrt{7} = \\frac{1}{2}\\ln 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln\\frac{1}{5} = -\\ln 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 3 + \\ln 4 = \\ln 12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 6 - \\ln 2 = \\ln 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 9 = (\\ln 3)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln(2 + 3) = \\ln 2 + \\ln 3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\ln 18 - \\ln 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une différence devient un quotient : $\\ln 18 - \\ln 2 = \\ln 9 = \\ln(3^2) = 2\\ln 3$. Ce n'est pas $\\ln 16$ (qui serait $\\ln(18 - 2)$) ni $\\ln 36$ (le produit).",
+                  "answers": [
+                    {
+                      "content": "$2\\ln 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 16$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 36$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{\\ln 18}{\\ln 2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On pose $a = \\ln 2$ et $b = \\ln 3$. Laquelle de ces écritures est égale à $\\ln 12$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$12 = 2^2 \\times 3$, donc $\\ln 12 = 2\\ln 2 + \\ln 3 = 2a + b$. L'écriture $a + 2b$ serait $\\ln 18$ ; $a \\times b$ confond somme et produit ; $12(a + b)$ n'a aucun lien. Le produit à l'intérieur devient une somme à l'extérieur.",
+                  "answers": [
+                    {
+                      "content": "$2a + b$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a + 2b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a \\times b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12(a + b)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Équations et inéquations avec la fonction ln",
+          "subtitle": "Condition d'existence, puis ramener à A = B ou A < B",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Trouver la condition d'existence d'une équation ou d'une inéquation qui contient $\\ln$.</li>\n<li>Résoudre une équation de la forme $\\ln A = \\ln B$ et une inéquation de la forme $\\ln A < \\ln B$.</li>\n<li>Vérifier que les solutions trouvées respectent la condition d'existence.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>Le registre de la coopérative.</strong> À la coopérative de cacao, le registre n'accepte que des récoltes <strong>strictement positives</strong> : on ne peut pas enregistrer un sac de $0$ kg ni un « sac négatif ». Chaque récolte reçoit une note, et la note monte quand la récolte grandit. Deux planteurs ont la même note si et seulement s'ils ont la même récolte. L'un a une meilleure note que l'autre si et seulement si sa récolte est plus grande.</p>\n<p><em>Le pont.</em> Le registre, c'est la fonction $\\ln$, et la note d'une récolte $A$ est $\\ln A$. La règle « strictement positive », c'est la <strong>condition d'existence</strong> : pour écrire $\\ln A$, il faut $A > 0$. « Même note, même récolte », c'est $\\ln A = \\ln B \\iff A = B$. « Meilleure note, plus grande récolte », c'est $\\ln A < \\ln B \\iff A < B$, car $\\ln$ est strictement croissante.</p>\n<p><em>Où l'image s'arrête.</em> En résolvant, on peut trouver une valeur de $x$ qui rendrait une récolte nulle ou négative : le registre la refuserait. Cette valeur n'est pas une solution, même si le calcul l'a produite.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Condition d'existence.</strong> L'expression $\\ln(u(x))$ existe pour les réels $x$ tels que $u(x) > 0$.</p>\n<p><strong>Équivalences.</strong> Pour $A > 0$ et $B > 0$ :</p>\n<ul>\n<li>$\\ln A = \\ln B \\iff A = B$ ;</li>\n<li>$\\ln A < \\ln B \\iff A < B$ (de même avec $\\le$) ;</li>\n<li>$\\ln A > 0 \\iff A > 1$ et $\\ln A < 0 \\iff 0 < A < 1$.</li>\n</ul>\n<p><strong>Méthode.</strong></p>\n<ol>\n<li>Écrire la condition d'existence : tout ce qui est dans un $\\ln$ doit être strictement positif.</li>\n<li>Regrouper pour obtenir un seul $\\ln$ de chaque côté (propriétés de la fiche précédente). Un nombre comme $2\\ln 3$ s'écrit $\\ln 9$.</li>\n<li>Passer à $A = B$ (ou $A < B$) et résoudre.</li>\n<li>Ne garder que les solutions qui vérifient la condition d'existence.</li>\n</ol>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Résoudre $\\ln x + \\ln(x - 1) = \\ln 6$.</strong></p>\n<ol>\n<li>Condition d'existence : $x > 0$ et $x - 1 > 0$, donc $x > 1$.</li>\n<li>On regroupe : $\\ln\\big(x(x - 1)\\big) = \\ln 6$, donc $x(x - 1) = 6$.</li>\n<li>On résout : $x^2 - x - 6 = 0$. Le discriminant est $1 + 24 = 25$, donc $x = \\frac{1 - 5}{2} = -2$ ou $x = \\frac{1 + 5}{2} = 3$.</li>\n<li>On garde ce qui vérifie $x > 1$ : $-2$ est rejeté. La solution est $x = 3$.</li>\n<li>Contrôle : $\\ln 3 + \\ln 2 = \\ln 6$. C'est exact.</li>\n</ol>\n<p><strong>Résoudre $\\ln(2x - 4) < \\ln(x + 1)$.</strong></p>\n<ol>\n<li>Condition d'existence : $2x - 4 > 0$ donne $x > 2$, et $x + 1 > 0$ donne $x > -1$. Il faut donc $x > 2$.</li>\n<li>Comme $\\ln$ est strictement croissante : $2x - 4 < x + 1$, donc $x < 5$.</li>\n<li>On garde ce qui vérifie $x > 2$ : l'ensemble des solutions est $]2 ; 5[$.</li>\n<li>Contrôle : pour $x = 3$, $\\ln 2 < \\ln 4$ est vrai. Pour $x = 6$, $\\ln 8 < \\ln 7$ est faux.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Oublier la condition d'existence, donc garder une « solution » qui rend un logarithme impossible. Dans le premier exemple, $x = -2$ vérifie l'équation $x^2 - x - 6 = 0$, mais $\\ln(-2)$ n'existe pas : il faut le rejeter.</p>\n<p>Autre piège : résoudre l'inéquation sans tenir compte de la condition d'existence, et donner $]-\\infty ; 5[$ au lieu de $]2 ; 5[$. Écris toujours la condition en premier et fais l'intersection à la fin.</p>\n<h2>En une phrase</h2>\n<p>Pour résoudre avec $\\ln$, je commence par la condition d'existence (tout ce qui est dans un $\\ln$ est strictement positif), je passe de $\\ln A$ et $\\ln B$ à $A$ et $B$, je résous, puis je rejette les valeurs qui ne respectent pas la condition.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Condition d'existence et équivalences avec ln",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Pour quelles valeurs de $x$ l'expression $\\ln(x - 5)$ existe-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\ln(x - 5)$ existe si $x - 5 > 0$, donc $x > 5$. Pour $x = 5$ on obtient $\\ln 0$, qui n'existe pas : l'inégalité est stricte. Dans l'image du registre, la récolte $x - 5$ doit être strictement positive.",
+                  "answers": [
+                    {
+                      "content": "$x > 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x \\ge 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x > 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x < 5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $A > 0$ et $B > 0$, l'égalité $\\ln A = \\ln B$ équivaut à $A = B$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Deux récoltes ont la même note si et seulement si elles sont égales : c'est le sens du registre. La fonction $\\ln$ est strictement croissante, donc elle ne prend jamais deux fois la même valeur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle propriété de $\\ln$ permet de passer de $\\ln A < \\ln B$ à $A < B$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "C'est la croissance : si la note de $A$ est plus petite que celle de $B$, alors $A$ est plus petit que $B$. Les autres propriétés servent à regrouper les logarithmes ou à donner le domaine, pas à comparer.",
+                  "answers": [
+                    {
+                      "content": "$\\ln$ est strictement croissante",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln(ab) = \\ln a + \\ln b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln 1 = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln$ est définie sur $]0 ; +\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x = -1$, lesquelles de ces expressions existent ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Pour $x = -1$ : $x + 3 = 2$ et $x^2 + 1 = 2$, deux nombres strictement positifs. En revanche $\\ln(-1)$, $\\ln 0$ et $\\ln(-3)$ n'existent pas. Attention à $\\ln(x + 1)$ : on obtient $\\ln 0$, qui est refusé.",
+                  "answers": [
+                    {
+                      "content": "$\\ln(x + 3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln(x^2 + 1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln(x + 1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln(2x - 1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du registre, que représente la condition $u(x) > 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La condition d'existence porte sur ce qui est dans le $\\ln$ (la récolte), pas sur la note $\\ln u(x)$. La note peut être négative : $\\ln 0{,}5 < 0$ existe très bien.",
+                  "answers": [
+                    {
+                      "content": "La récolte enregistrée doit être strictement positive",
+                      "correct": true
+                    },
+                    {
+                      "content": "La note de la récolte doit être positive",
+                      "correct": false
+                    },
+                    {
+                      "content": "La récolte doit être égale à $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La récolte doit être un nombre entier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'équation $\\ln(x - 2) = \\ln 3$ a pour solution $x = 5$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Condition : $x > 2$. Puis $\\ln(x - 2) = \\ln 3 \\iff x - 2 = 3$, donc $x = 5$. Et $5 > 2$ : la solution convient. Contrôle : $\\ln(5 - 2) = \\ln 3$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Résoudre équations et inéquations avec ln",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle est la solution de l'équation $\\ln(x + 1) = \\ln 4$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Condition : $x > -1$. Puis $x + 1 = 4$, donc $x = 3$, et $3 > -1$ convient. Piège : oublier le $+1$ et répondre $4$.",
+                  "answers": [
+                    {
+                      "content": "$x = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = \\ln 3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la solution de l'équation $\\ln(2x) = \\ln(x + 3)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Condition : $2x > 0$ et $x + 3 > 0$, donc $x > 0$. Puis $2x = x + 3$ donne $x = 3$, qui vérifie $x > 0$. Contrôle : $\\ln 6 = \\ln 6$.",
+                  "answers": [
+                    {
+                      "content": "$x = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = -3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a aucune solution",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de l'inéquation $\\ln(x - 3) < 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Condition : $x > 3$. Puis $\\ln(x - 3) < 0 \\iff 0 < x - 3 < 1$, donc $3 < x < 4$. Répondre $]-\\infty ; 4[$ oublie la condition d'existence.",
+                  "answers": [
+                    {
+                      "content": "$]3 ; 4[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty ; 4[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty ; 3[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]4 ; +\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de l'inéquation $\\ln(3x - 6) \\ge \\ln 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Condition : $3x - 6 > 0$, donc $x > 2$. Puis $3x - 6 \\ge 3$, donc $x \\ge 3$. En croisant avec $x > 2$, on garde $[3 ; +\\infty[$. Le sens de l'inégalité reste le même car $\\ln$ est croissante.",
+                  "answers": [
+                    {
+                      "content": "$[3 ; +\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]2 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[1 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]2 ; 3]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour l'expression $\\ln(x - 1) + \\ln(5 - x)$, lesquelles de ces valeurs de $x$ vérifient la condition d'existence ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Il faut $x - 1 > 0$ et $5 - x > 0$, donc $1 < x < 5$. Les valeurs $2$ et $4$ conviennent. Pour $x = 5$ on obtient $\\ln 0$ ; pour $x = 0$ ou $x = 6$, un des deux logarithmes porte sur un nombre négatif.",
+                  "answers": [
+                    {
+                      "content": "$x = 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de l'équation $\\ln x + \\ln(x - 2) = \\ln 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Condition : $x > 2$. Puis $x(x - 2) = 3$, soit $x^2 - 2x - 3 = 0$, de solutions $-1$ et $3$. Seule $3$ vérifie $x > 2$ : $-1$ est rejetée. Contrôle : $\\ln 3 + \\ln 1 = \\ln 3$.",
+                  "answers": [
+                    {
+                      "content": "$x = 3$ uniquement",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = -1$ uniquement",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 3$ et $x = -1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune solution",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Équations et inéquations avec ln",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Quelle est la solution de l'équation $\\ln x + \\ln(x + 1) = \\ln 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Condition : $x > 0$. Puis $x(x + 1) = 2$, soit $x^2 + x - 2 = 0$, de solutions $1$ et $-2$. Seule $1$ vérifie $x > 0$. Contrôle : $\\ln 1 + \\ln 2 = \\ln 2$.",
+                  "answers": [
+                    {
+                      "content": "$x = 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = -2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 1$ et $x = -2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'équation $2\\ln x = \\ln(x + 6)$ a deux solutions : $x = 3$ et $x = -2$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Condition : $x > 0$. Puis $\\ln(x^2) = \\ln(x + 6)$ donne $x^2 = x + 6$, de solutions $3$ et $-2$. Seule $3$ vérifie $x > 0$. Contrôle : $2\\ln 3 = \\ln 9 = \\ln(3 + 6)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de l'inéquation $\\ln(2x + 1) \\le \\ln(x + 4)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Condition : $2x + 1 > 0$ donne $x > -\\frac{1}{2}$, et $x + 4 > 0$ donne $x > -4$. Il faut les deux, donc $x > -\\frac{1}{2}$. Puis $2x + 1 \\le x + 4$ donne $x \\le 3$. Solution : $]-\\frac{1}{2} ; 3]$.",
+                  "answers": [
+                    {
+                      "content": "$\\left]-\\frac{1}{2} ; 3\\right]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty ; 3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-4 ; 3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[3 ; +\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de l'inéquation $\\ln x > 2\\ln 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$2\\ln 3 = \\ln(3^2) = \\ln 9$, donc l'inéquation devient $\\ln x > \\ln 9$, soit $x > 9$. Piège : écrire $2\\ln 3 = \\ln 6$ en multipliant le $3$ par $2$ au lieu de l'élever au carré.",
+                  "answers": [
+                    {
+                      "content": "$]9 ; +\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]6 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]3 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]0 ; 9[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une coopérative note ses récoltes avec $\\ln$. La récolte d'un planteur est de $x$ tonnes ($x > 0$) et celle de son voisin de $(x + 2)$ tonnes. Pour quelles valeurs de $x$ la note du voisin dépasse-t-elle celle du planteur de plus de $\\ln 3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On veut $\\ln(x + 2) - \\ln x > \\ln 3$, soit $\\ln\\frac{x + 2}{x} > \\ln 3$, donc $\\frac{x + 2}{x} > 3$. Comme $x > 0$ : $x + 2 > 3x$, donc $x < 1$. Avec $x > 0$ : $0 < x < 1$. Contrôle : $x = 0{,}5$ donne $\\frac{2{,}5}{0{,}5} = 5 > 3$.",
+                  "answers": [
+                    {
+                      "content": "$0 < x < 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1 < x < 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x > 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0 < x < 3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour l'équation $\\ln(x - 1) = \\ln(3 - x)$, quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Il faut $x - 1 > 0$ et $3 - x > 0$, donc $1 < x < 3$. Puis $x - 1 = 3 - x$ donne $2x = 4$, soit $x = 2$, qui est bien dans $]1 ; 3[$. Il y a une seule solution, et elle est acceptée : $\\ln 1 = \\ln 1$.",
+                  "answers": [
+                    {
+                      "content": "La condition d'existence est $1 < x < 3$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'équation se ramène à $x - 1 = 3 - x$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La solution est $x = 2$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La condition d'existence est $x > 3$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'équation a deux solutions.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La valeur $x = 2$ est rejetée car elle ne vérifie pas la condition.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Dérivée de ln u et étude de fonctions",
+          "subtitle": "À compléter : le nombre e, limites de ln x sur x, logarithme décimal",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer la dérivée de $\\ln u$ avec la formule $\\frac{u'}{u}$.</li>\n<li>Étudier le signe de la dérivée d'une fonction qui contient $\\ln$.</li>\n<li>Dresser le tableau de variations et trouver un minimum ou un maximum.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>La récolte qui grandit.</strong> Un planteur note sa récolte $u$ (en tonnes) au fil des années. Un voisin a $10$ tonnes et en gagne $1$ : il a augmenté de $10\\ \\%$. Un autre a $100$ tonnes et en gagne $1$ aussi : il n'a augmenté que de $1\\ \\%$. Le même gain d'une tonne ne pèse pas pareil : ce qui compte pour dire « ça va vite », c'est le gain <strong>rapporté à la récolte déjà là</strong>.</p>\n<p><em>Le pont.</em> La récolte, c'est $u$. Le gain, c'est la variation $u'$. Le gain rapporté à la récolte, c'est le quotient $\\frac{u'}{u}$ : c'est exactement la dérivée de $\\ln u$. Une récolte qui reste strictement positive, c'est la condition $u > 0$.</p>\n<p><em>Où l'image s'arrête.</em> Les pourcentages de l'image sont exacts : $\\frac{1}{10} = 10\\ \\%$ et $\\frac{1}{100} = 1\\ \\%$. Mais le lien avec $\\frac{u'}{u}$ n'est valable que pour un gain très petit : la formule décrit la variation sur un tout petit instant. Et si $u$ s'annule ou devient négative, $\\ln u$ n'existe plus.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Dérivée de $\\ln u$.</strong> Si $u$ est dérivable et strictement positive sur un intervalle $I$, alors la fonction $x \\mapsto \\ln(u(x))$ est dérivable sur $I$ et $$(\\ln u)' = \\frac{u'}{u}.$$ En particulier, $\\big(\\ln(ax + b)\\big)' = \\frac{a}{ax + b}$ là où $ax + b > 0$.</p>\n<p><strong>Méthode d'étude d'une fonction $f$ avec $\\ln$.</strong></p>\n<ol>\n<li>Ensemble de définition : tout ce qui est dans un $\\ln$ doit être strictement positif.</li>\n<li>Dérivée $f'$, mise sur un même dénominateur.</li>\n<li>Signe de $f'$ : le dénominateur est souvent positif, donc on étudie le signe du numérateur.</li>\n<li>Variations : $f' > 0$ donne $f$ croissante, $f' < 0$ donne $f$ décroissante. Si $f'$ s'annule en changeant de signe, $f$ a un maximum ou un minimum.</li>\n</ol>\n<p><strong>Tangente.</strong> La tangente en $x = a$ a pour équation $y = f'(a)(x - a) + f(a)$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>1. Dériver $f(x) = \\ln(3x - 6)$.</strong></p>\n<ol>\n<li>Définition : $3x - 6 > 0$ donne $x > 2$. Donc $f$ est définie sur $]2 ; +\\infty[$.</li>\n<li>Avec $u(x) = 3x - 6$ et $u'(x) = 3$ : $f'(x) = \\frac{3}{3x - 6} = \\frac{1}{x - 2}$.</li>\n<li>Pour $x > 2$, $f'(x) > 0$ : $f$ est strictement croissante. Contrôle en $x = 3$ : $\\frac{3}{3 \\times 3 - 6} = 1$ et $\\frac{1}{3 - 2} = 1$.</li>\n</ol>\n<p><strong>2. Étudier $g(x) = \\ln(x^2 + 1)$.</strong></p>\n<ol>\n<li>Définition : $x^2 + 1 > 0$ pour tout réel $x$. Donc $g$ est définie sur $\\mathbb{R}$.</li>\n<li>Avec $u(x) = x^2 + 1$ et $u'(x) = 2x$ : $g'(x) = \\frac{2x}{x^2 + 1}$.</li>\n<li>Le dénominateur est positif : $g'(x)$ a le signe de $2x$. Donc $g$ est décroissante sur $]-\\infty ; 0]$ et croissante sur $[0 ; +\\infty[$.</li>\n<li>Minimum : $g(0) = \\ln 1 = 0$. Contrôle : $g(1) = g(-1) = \\ln 2 > 0$.</li>\n</ol>\n<p><strong>3. Étudier $h(x) = x - 1 - \\ln x$ sur $]0 ; +\\infty[$.</strong></p>\n<ol>\n<li>$h'(x) = 1 - \\frac{1}{x} = \\frac{x - 1}{x}$. Pour $x > 0$, le signe est celui de $x - 1$.</li>\n<li>$h$ est décroissante sur $]0 ; 1]$ et croissante sur $[1 ; +\\infty[$. Son minimum est $h(1) = 1 - 1 - \\ln 1 = 0$.</li>\n<li>Donc $h(x) \\ge 0$ pour tout $x > 0$, c'est-à-dire $\\ln x \\le x - 1$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Oublier le $u'$ : écrire $\\big(\\ln(x^2 + 1)\\big)' = \\frac{1}{x^2 + 1}$. C'est faux : la dérivée de ce qui est dans le $\\ln$ doit apparaître au numérateur. Ici c'est $\\frac{2x}{x^2 + 1}$.</p>\n<p>Autre piège : étudier le signe de $u$ au lieu de celui de $u'$. Comme $u > 0$, le signe de $\\frac{u'}{u}$ est celui de $u'$ seulement.</p>\n<h2>En une phrase</h2>\n<p>La dérivée de $\\ln u$ est $\\frac{u'}{u}$ (le gain rapporté à la récolte), et comme $u > 0$, son signe est celui de $u'$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — La dérivée de ln u",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Si $u$ est dérivable et strictement positive, quelle est la dérivée de $\\ln u$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On dérive ce qui est dans le $\\ln$, et on divise par ce qui est dans le $\\ln$ : $(\\ln u)' = \\frac{u'}{u}$. Dans l'image, c'est le gain rapporté à la récolte déjà là. L'erreur classique est d'écrire $\\frac{1}{u}$ et d'oublier $u'$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{u'}{u}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{u}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$u' \\ln u$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{u}{u'}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image de la récolte, passer de $100$ à $101$ tonnes est une augmentation relative plus grande que passer de $10$ à $11$ tonnes.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Le gain est le même ($1$ tonne), mais rapporté à la récolte déjà là, il vaut $1\\ \\%$ de $100$ contre $10\\ \\%$ de $10$. C'est le rôle du quotient $\\frac{u'}{u}$ : plus $u$ est grand, plus le même gain compte peu.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour que $x \\mapsto \\ln(u(x))$ existe et soit dérivable sur un intervalle, que faut-il pour $u$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut que $\\ln$ existe, donc $u(x) > 0$ strictement, et que $u$ soit dérivable pour appliquer la formule. Une valeur $u(x) = 0$ est interdite. La croissance de $u$ n'est pas nécessaire.",
+                  "answers": [
+                    {
+                      "content": "$u$ est dérivable et strictement positive",
+                      "correct": true
+                    },
+                    {
+                      "content": "$u$ est positive ou nulle",
+                      "correct": false
+                    },
+                    {
+                      "content": "$u$ est croissante",
+                      "correct": false
+                    },
+                    {
+                      "content": "$u(x) = 1$ pour tout $x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\ln(2x + 1)$ sur $\\left]-\\frac{1}{2} ; +\\infty\\right[$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "La dérivée de $2x + 1$ est $2$, donc $f'(x) = \\frac{u'}{u} = \\frac{2}{2x + 1}$. Fausses : $\\frac{1}{2x + 1}$ oublie $u'$ ; $2\\ln(2x + 1)$ n'a pas la forme d'une dérivée de $\\ln$ ; et $2x + 1 > 0$ impose $x > -\\frac{1}{2}$.",
+                  "answers": [
+                    {
+                      "content": "Avec $u(x) = 2x + 1$, on a $u'(x) = 2$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'(x) = \\frac{2}{2x + 1}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'(x) = \\frac{1}{2x + 1}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(x) = 2\\ln(2x + 1)$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est définie sur $\\mathbb{R}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\ln(u(x))$ avec $u$ strictement positive. Le signe de $f'(x)$ est le même que celui de :",
+                  "question_type": "single_choice",
+                  "explanation": "$f'(x) = \\frac{u'(x)}{u(x)}$ et $u(x) > 0$ : le quotient a le signe de son numérateur $u'(x)$. Ni $u(x)$, ni $\\ln(u(x))$, ni $u(x) - u'(x)$ ne donnent ce signe. C'est la dérivée de ce qui est dans le $\\ln$ qui décide du sens de variation.",
+                  "answers": [
+                    {
+                      "content": "$u'(x)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$u(x)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\ln(u(x))$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$u(x) - u'(x)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x > 0$, la dérivée de $x \\mapsto \\ln(x^2)$ est $\\frac{1}{x^2}$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Avec $u(x) = x^2$ et $u'(x) = 2x$, la dérivée est $\\frac{2x}{x^2} = \\frac{2}{x}$. On le retrouve avec $\\ln(x^2) = 2\\ln x$, dont la dérivée est $2 \\times \\frac{1}{x}$. Écrire $\\frac{1}{x^2}$ oublie $u'$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Dériver et étudier des fonctions avec ln",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle est la dérivée de $f(x) = \\ln(x + 3)$ sur $]-3 ; +\\infty[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$u(x) = x + 3$ et $u'(x) = 1$, donc $f'(x) = \\frac{1}{x + 3}$. Garde l'expression complète $x + 3$ au dénominateur, sans la changer.",
+                  "answers": [
+                    {
+                      "content": "$f'(x) = \\frac{1}{x + 3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'(x) = \\frac{1}{x}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(x) = x + 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(x) = \\frac{1}{x - 3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la dérivée de $f(x) = \\ln(4x - 1)$ sur $\\left]\\frac{1}{4} ; +\\infty\\right[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$u(x) = 4x - 1$ et $u'(x) = 4$, donc $f'(x) = \\frac{u'(x)}{u(x)} = \\frac{4}{4x - 1}$. Le $4$ doit apparaître au numérateur : c'est la dérivée de $4x - 1$.",
+                  "answers": [
+                    {
+                      "content": "$f'(x) = \\frac{4}{4x - 1}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'(x) = \\frac{1}{4x - 1}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(x) = 4x - 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(x) = \\frac{4}{x}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la dérivée de $f(x) = \\ln(x^2 + 4)$ sur $\\mathbb{R}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$u(x) = x^2 + 4$ et $u'(x) = 2x$, donc $f'(x) = \\frac{2x}{x^2 + 4}$. L'ensemble de définition est bien $\\mathbb{R}$ car $x^2 + 4 > 0$ pour tout réel $x$.",
+                  "answers": [
+                    {
+                      "content": "$f'(x) = \\frac{2x}{x^2 + 4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'(x) = \\frac{1}{x^2 + 4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(x) = 2x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(x) = \\ln(2x)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble de définition de $f(x) = \\ln(5 - x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\ln(5 - x)$ existe si $5 - x > 0$, donc $x < 5$. Attention au sens : $5 - x > 0$ s'écrit $5 > x$, soit $x < 5$, et non $x > 5$.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty ; 5[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]5 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]0 ; 5[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\ln(x^2 + 1)$ sur $\\mathbb{R}$. Quel est son sens de variation ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f'(x) = \\frac{2x}{x^2 + 1}$ a le signe de $x$ (le dénominateur est positif). Donc $f' < 0$ pour $x < 0$ et $f' > 0$ pour $x > 0$. Minimum en $0$ : $f(0) = \\ln 1 = 0$. Même si $\\ln$ est croissante, $x^2 + 1$ ne l'est pas.",
+                  "answers": [
+                    {
+                      "content": "Décroissante sur $]-\\infty ; 0]$ puis croissante sur $[0 ; +\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Croissante sur $\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Décroissante sur $\\mathbb{R}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Croissante sur $]-\\infty ; 0]$ puis décroissante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\ln x - 2x$ sur $]0 ; +\\infty[$. Sa dérivée est $f'(x) = \\frac{1}{x} - 2$. En quelle valeur de $x$ s'annule-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\frac{1}{x} - 2 = 0$ donne $\\frac{1}{x} = 2$, donc $x = \\frac{1}{2}$. Contrôle : $\\frac{1}{1/2} - 2 = 2 - 2 = 0$. Piège : répondre $x = 2$ en oubliant que $x$ est au dénominateur.",
+                  "answers": [
+                    {
+                      "content": "$x = \\frac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Étudier une fonction avec ln",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Soit $h(x) = x - 1 - \\ln x$ sur $]0 ; +\\infty[$. Quel est son minimum, et en quelle valeur est-il atteint ?",
+                  "question_type": "single_choice",
+                  "explanation": "$h'(x) = 1 - \\frac{1}{x} = \\frac{x - 1}{x}$ : négative avant $1$, positive après. Le minimum est en $x = 1$ et vaut $h(1) = 1 - 1 - \\ln 1 = 0$. La valeur $x = 0$ n'est pas dans l'ensemble de définition.",
+                  "answers": [
+                    {
+                      "content": "$0$, atteint en $x = 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$, atteint en $x = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$, atteint en $x = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-1$, atteint en $x = 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Comme $x - 1 - \\ln x \\ge 0$ pour tout $x > 0$, on a $\\ln x \\le x - 1$ pour tout $x > 0$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. L'inégalité $x - 1 - \\ln x \\ge 0$ se réécrit $\\ln x \\le x - 1$. Elle découle de l'étude de $h(x) = x - 1 - \\ln x$, qui a pour minimum $0$ en $x = 1$. Contrôle : $\\ln 1 = 0 = 1 - 1$ (égalité), et $\\ln 2 < 1$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\ln(x^2 - 4x + 5)$, définie sur $\\mathbb{R}$ car $x^2 - 4x + 5 = (x - 2)^2 + 1 > 0$. Quel est le minimum de $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f'(x) = \\frac{2x - 4}{x^2 - 4x + 5}$ a le signe de $2x - 4$ : négative avant $2$, positive après. Minimum en $2$ : $f(2) = \\ln(4 - 8 + 5) = \\ln 1 = 0$. Piège : donner $1$ (la valeur de $u$) au lieu de $\\ln 1 = 0$.",
+                  "answers": [
+                    {
+                      "content": "$0$, atteint en $x = 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\ln 5$, atteint en $x = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$, atteint en $x = 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$, atteint en $x = 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'équation de la tangente à la courbe de $\\ln$ au point d'abscisse $1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f(x) = \\ln x$ donne $f(1) = 0$ et $f'(1) = \\frac{1}{1} = 1$. Donc $y = 1 \\times (x - 1) + 0 = x - 1$. Piège : oublier le $f(a)$ ou confondre $f'(1) = 1$ avec $f(1) = 1$.",
+                  "answers": [
+                    {
+                      "content": "$y = x - 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = x + 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\ln(2x - 6)$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$2x - 6 > 0$ donne $x > 3$. Avec $u' = 2$ : $f'(x) = \\frac{2}{2x - 6} = \\frac{1}{x - 3}$, positif pour $x > 3$. Donc $f$ est strictement croissante. Fausses : $\\mathbb{R}$ (oublie la condition), $\\frac{1}{2x - 6}$ (oublie $u'$), décroissante.",
+                  "answers": [
+                    {
+                      "content": "$f$ est définie sur $]3 ; +\\infty[$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'(x) = \\frac{1}{x - 3}$ pour $x > 3$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est strictement croissante sur son ensemble de définition.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est définie sur $\\mathbb{R}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(x) = \\frac{1}{2x - 6}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est strictement décroissante sur son ensemble de définition.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un modèle donne le bénéfice d'un planteur par $B(x) = 3\\ln x - x$, où $x > 0$ est la surface cultivée en hectares. Pour quelle surface le bénéfice est-il maximal ?",
+                  "question_type": "single_choice",
+                  "explanation": "$B'(x) = \\frac{3}{x} - 1 = \\frac{3 - x}{x}$. Pour $x < 3$, $B' > 0$ ; pour $x > 3$, $B' < 0$. Donc $B$ croît puis décroît : maximum en $x = 3$. Piège : croire que $B$ croît toujours parce que $\\ln$ croît ; ici le terme $-x$ finit par l'emporter.",
+                  "answers": [
+                    {
+                      "content": "$x = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = \\frac{1}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a pas de maximum",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

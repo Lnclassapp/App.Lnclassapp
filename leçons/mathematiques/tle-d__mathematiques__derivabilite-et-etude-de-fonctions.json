@@ -1,0 +1,1263 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Dérivabilité et étude de fonctions",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "D",
+      "essentials": [
+        {
+          "name": "Nombre dérivé, tangente et dérivabilité en un point",
+          "subtitle": "Du taux d'accroissement à la tangente, et les points où la courbe fait un angle",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer le nombre dérivé $f'(a)$ comme limite du taux d'accroissement.</li>\n<li>Écrire une équation de la tangente à la courbe d'une fonction en un point.</li>\n<li>Étudier la dérivabilité à gauche et à droite, et interpréter un point anguleux ou une demi-tangente verticale.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le compteur du gbaka (le nombre dérivé).</strong> Un gbaka part d'Adjamé. Il a parcouru 12 km en 20 minutes : sa vitesse moyenne est de 36 km/h. Mais à un instant précis, son compteur affiche peut-être 50 km/h. Pour trouver cette vitesse à l'instant précis, on calcule la vitesse moyenne sur une durée de plus en plus courte : une minute, puis une seconde, puis encore moins. Ces vitesses moyennes se rapprochent du nombre affiché au compteur.</p>\n<p><em>Le pont.</em> L'instant précis, c'est $a$. La distance parcourue à l'instant $x$, c'est $f(x)$. La vitesse moyenne entre les instants $a$ et $a + h$, c'est le <strong>taux d'accroissement</strong> $\\frac{f(a+h) - f(a)}{h}$ : la variation de $f$ divisée par la variation de $x$. La durée qui rétrécit, c'est $h$ qui tend vers $0$. Le nombre affiché au compteur, c'est le <strong>nombre dérivé</strong> $f'(a)$.</p>\n<p><em>Où l'image s'arrête.</em> Un compteur affiche toujours un nombre. En mathématiques, le taux d'accroissement peut n'avoir aucune limite, ou avoir une limite infinie : la fonction n'est alors pas dérivable en $a$.</p>\n<p><strong>2. Le toit de la case (le point anguleux).</strong> Regarde le toit d'une case à deux pans. Une fourmi monte le long du pan gauche en suivant une pente. Arrivée au sommet, elle redescend par le pan droit, avec une autre pente. Au sommet, il n'y a pas une seule pente : il y en a deux, une de chaque côté.</p>\n<p><em>Le pont.</em> La pente vue de la gauche, c'est le <strong>nombre dérivé à gauche</strong> $f'_g(a)$ : la limite du taux quand $h$ tend vers $0$ en restant négatif. La pente vue de la droite, c'est le <strong>nombre dérivé à droite</strong> $f'_d(a)$ ($h$ positif). Le sommet du toit, c'est un <strong>point anguleux</strong> : $f'_g(a) \\neq f'_d(a)$, donc $f$ n'est pas dérivable en $a$. Chaque pan porte une <strong>demi-tangente</strong>, une demi-droite qui prolonge la courbe d'un seul côté.</p>\n<p><em>Où l'image s'arrête.</em> Le toit monte puis descend. Mais un point anguleux n'est pas forcément un sommet : il suffit que les deux pentes soient différentes, même si elles ont le même signe.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Nombre dérivé.</strong> Soit $f$ une fonction définie sur un intervalle ouvert contenant $a$. On dit que $f$ est <strong>dérivable en $a$</strong> si le taux $\\frac{f(a+h) - f(a)}{h}$ admet une limite <strong>finie</strong> quand $h$ tend vers $0$. Cette limite est le nombre dérivé de $f$ en $a$ : $$f'(a) = \\lim_{h \\to 0} \\frac{f(a+h) - f(a)}{h} = \\lim_{x \\to a} \\frac{f(x) - f(a)}{x - a}.$$</p>\n<p><strong>Tangente.</strong> Si $f$ est dérivable en $a$, la courbe $(\\mathcal{C})$ de $f$ admet au point $A(a ; f(a))$ une tangente de coefficient directeur $f'(a)$, d'équation $$y = f'(a)(x - a) + f(a).$$</p>\n<p><strong>À gauche et à droite.</strong> $f$ est dérivable en $a$ si et seulement si elle est dérivable à gauche et à droite en $a$, avec $f'_g(a) = f'_d(a)$.</p>\n<ul>\n<li>Si $f'_g(a)$ et $f'_d(a)$ existent mais sont différents : le point $A$ est un point anguleux, avec deux demi-tangentes de pentes différentes.</li>\n<li>Si le taux tend vers $+\\infty$ ou $-\\infty$ quand $x$ tend vers $a$ (à gauche ou à droite) : $f$ n'est pas dérivable de ce côté, et la courbe admet au point $A$ une demi-tangente <strong>verticale</strong>.</li>\n</ul>\n<p><strong>Dérivable entraîne continue.</strong> Si $f$ est dérivable en $a$, alors $f$ est continue en $a$. La réciproque est fausse : $x \\mapsto |x|$ est continue en $0$, mais pas dérivable en $0$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Soit $f(x) = x^2 - 3x$. Calculer $f'(1)$ avec le taux d'accroissement, puis écrire la tangente au point d'abscisse $1$.</strong></p>\n<ol>\n<li>$f(1) = 1 - 3 = -2$. Pour $h \\neq 0$ : $f(1+h) = (1+h)^2 - 3(1+h) = 1 + 2h + h^2 - 3 - 3h = h^2 - h - 2$.</li>\n<li>Le taux vaut $\\frac{f(1+h) - f(1)}{h} = \\frac{h^2 - h}{h} = h - 1$.</li>\n<li>$\\lim_{h \\to 0} (h - 1) = -1$. La limite est finie : $f$ est dérivable en $1$ et $f'(1) = -1$.</li>\n<li>Tangente : $y = -1 \\times (x - 1) + (-2)$, soit $y = -x - 1$. Contrôle : en $x = 1$, on retrouve $y = -2 = f(1)$.</li>\n</ol>\n<p><strong>Soit $g(x) = \\sqrt{x}$ sur $[0 ; +\\infty[$. Étudier la dérivabilité de $g$ en $0$.</strong></p>\n<ol>\n<li>Pour $x > 0$ : $\\frac{g(x) - g(0)}{x - 0} = \\frac{\\sqrt{x}}{x} = \\frac{1}{\\sqrt{x}}$.</li>\n<li>Quand $x$ tend vers $0$ par la droite, $\\sqrt{x}$ tend vers $0$ en restant positif, donc $\\frac{1}{\\sqrt{x}}$ tend vers $+\\infty$.</li>\n<li>La limite n'est pas finie : $g$ n'est pas dérivable en $0$. Sa courbe admet à l'origine $O$ une demi-tangente verticale.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Croire qu'une fonction continue en $a$ est forcément dérivable en $a$. C'est faux : $x \\mapsto |x|$ et $x \\mapsto \\sqrt{x}$ sont continues en $0$, mais aucune des deux n'est dérivable en $0$.</p>\n<p>Comment le repérer : quand la formule change en $a$ (valeur absolue, fonction définie par morceaux) ou quand une racine carrée s'annule en $a$, ne dérive pas la formule directement. Reviens au taux d'accroissement, calcule sa limite à gauche puis à droite, et compare.</p>\n<p>Autre piège : dans l'équation de la tangente, oublier le terme $+ f(a)$, ou écrire $f'(x)$ au lieu du nombre $f'(a)$.</p>\n<h2>En une phrase</h2>\n<p>Le nombre dérivé $f'(a)$, c'est la vitesse au compteur : la limite finie du taux d'accroissement ; il donne la pente de la tangente $y = f'(a)(x - a) + f(a)$, et si les pentes à gauche et à droite sont différentes, la courbe fait un angle et $f$ n'est pas dérivable.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Taux d'accroissement, nombre dérivé et tangente",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $f$ une fonction définie sur un intervalle ouvert contenant $a$. Que signifie « $f$ est dérivable en $a$ » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Dérivable en $a$ veut dire : le taux d'accroissement, la vitesse moyenne du gbaka, a une limite finie quand $h \\to 0$. La continuité ne suffit pas : $|x|$ est continue en $0$ sans y être dérivable. Et si le taux tend vers l'infini, $f$ n'est pas dérivable : la courbe a une demi-tangente verticale.",
+                  "answers": [
+                    {
+                      "content": "Le taux $\\frac{f(a+h) - f(a)}{h}$ admet une limite finie quand $h$ tend vers $0$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est continue en $a$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(a)$ existe.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le taux $\\frac{f(a+h) - f(a)}{h}$ tend vers $+\\infty$ quand $h$ tend vers $0$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du gbaka, la vitesse moyenne sur une durée de plus en plus courte correspond au taux d'accroissement, et la vitesse affichée au compteur correspond au nombre dérivé $f'(a)$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. La vitesse moyenne entre $a$ et $a + h$, c'est $\\frac{f(a+h) - f(a)}{h}$. Quand la durée $h$ rétrécit vers $0$, ces vitesses moyennes se rapprochent de la vitesse à l'instant $a$ : c'est $f'(a)$. Ne confonds pas : la distance parcourue, c'est $f(x)$, pas $f'(a)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f$ est dérivable en $2$, avec $f(2) = 5$ et $f'(2) = 3$. Quelle est une équation de la tangente à sa courbe au point d'abscisse $2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On applique $y = f'(2)(x - 2) + f(2) = 3(x - 2) + 5 = 3x - 1$. L'erreur tentante est $y = 3x + 5$ : $5$ est l'ordonnée du point d'abscisse $2$, pas celle du point d'abscisse $0$. Contrôle : en $x = 2$, $3 \\times 2 - 1 = 5$.",
+                  "answers": [
+                    {
+                      "content": "$y = 3x - 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 3x + 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 3x - 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 5x - 7$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f$ une fonction définie sur un intervalle ouvert contenant $a$. Parmi ces affirmations, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Dérivable entraîne continue, mais pas l'inverse : $|x|$ est continue en $0$ sans y être dérivable. Si les nombres dérivés à gauche et à droite existent et sont égaux, $f$ est dérivable. S'ils sont différents, c'est le toit de la case : un point anguleux avec deux demi-tangentes, pas une tangente verticale.",
+                  "answers": [
+                    {
+                      "content": "Si $f$ est dérivable en $a$, alors $f$ est continue en $a$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $f'_g(a)$ et $f'_d(a)$ existent et sont égaux, alors $f$ est dérivable en $a$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $f$ est continue en $a$, alors $f$ est dérivable en $a$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si $f'_g(a) \\neq f'_d(a)$, la courbe admet une tangente verticale au point d'abscisse $a$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si $f$ est dérivable en $a$, alors $f'(a) \\neq 0$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du toit de la case, que représente le sommet du toit pour la courbe d'une fonction $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Au sommet, la fourmi passe d'une pente à une autre : $f'_g(a) \\neq f'_d(a)$. C'est un point anguleux, avec deux demi-tangentes. L'erreur tentante est « tangente horizontale » : c'est le cas d'un sommet arrondi, où $f'(a) = 0$. Et le toit ne se casse pas : $f$ reste continue au sommet.",
+                  "answers": [
+                    {
+                      "content": "Un point anguleux : les pentes à gauche et à droite sont différentes, donc $f$ n'est pas dérivable en ce point.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un point où la tangente est horizontale, donc $f'(a) = 0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un point où $f$ n'est pas continue.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un point où la courbe admet une tangente verticale.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $x \\mapsto |x|$ est continue en $0$, donc elle est dérivable en $0$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Pour $h > 0$, le taux $\\frac{|h| - 0}{h}$ vaut $1$ ; pour $h < 0$, il vaut $-1$. Les nombres dérivés à droite ($1$) et à gauche ($-1$) sont différents : l'origine est un point anguleux. La continuité ne suffit jamais à garantir la dérivabilité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer un nombre dérivé et écrire une tangente",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = x^2 + x$. Pour $h \\neq 0$, que vaut le taux d'accroissement $\\frac{f(1+h) - f(1)}{h}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f(1) = 2$ et $f(1+h) = (1+h)^2 + (1+h) = h^2 + 3h + 2$. Donc $f(1+h) - f(1) = h^2 + 3h$, et en divisant par $h$ on obtient $h + 3$. L'erreur tentante est $3$ : c'est la limite du taux quand $h \\to 0$, c'est-à-dire $f'(1)$, pas le taux lui-même.",
+                  "answers": [
+                    {
+                      "content": "$h + 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$h^2 + 3h$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2h + 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{1}{x}$ sur $]0 ; +\\infty[$. En calculant $\\lim_{x \\to 2} \\frac{f(x) - f(2)}{x - 2}$, que vaut $f'(2)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\frac{1}{x} - \\frac{1}{2} = \\frac{2 - x}{2x}$. Donc, pour $x \\neq 2$, $\\frac{f(x) - f(2)}{x - 2} = \\frac{2 - x}{2x(x - 2)} = -\\frac{1}{2x}$. Quand $x \\to 2$, on obtient $-\\frac{1}{4}$. L'erreur tentante est $\\frac{1}{4}$ : on oublie que $2 - x = -(x - 2)$.",
+                  "answers": [
+                    {
+                      "content": "$-\\frac{1}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^3 - 2x$. Quelle est une équation de la tangente à sa courbe au point d'abscisse $1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f(1) = 1 - 2 = -1$ et $f'(x) = 3x^2 - 2$, donc $f'(1) = 1$. Tangente : $y = 1 \\times (x - 1) + (-1) = x - 2$. L'erreur tentante est $y = x - 1$ : on a oublié d'ajouter $f(1) = -1$. Vérifie toujours que le point $(1 ; f(1))$ est sur ta droite.",
+                  "answers": [
+                    {
+                      "content": "$y = x - 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = x - 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 3x - 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = -x + 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\sqrt{x}$ sur $[0 ; +\\infty[$. Pour $x > 0$, on a $\\frac{f(x) - f(0)}{x - 0} = \\frac{1}{\\sqrt{x}}$. Que peut-on conclure en $0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Quand $x \\to 0^+$, $\\frac{1}{\\sqrt{x}} \\to +\\infty$. La limite n'est pas finie : $f$ n'est pas dérivable en $0$, et sa courbe arrive en $O$ avec une demi-tangente verticale. L'erreur tentante est « $f'(0) = +\\infty$ » : un nombre dérivé est toujours un nombre réel, jamais l'infini.",
+                  "answers": [
+                    {
+                      "content": "$f$ n'est pas dérivable en $0$, et sa courbe admet à l'origine $O$ une demi-tangente verticale.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est dérivable en $0$ et $f'(0) = +\\infty$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est dérivable en $0$ et $f'(0) = 0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ n'est pas continue en $0$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f$ définie sur $\\mathbb{R}$ par $f(x) = x^2$ si $x \\le 1$, et $f(x) = 2x - 1$ si $x > 1$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "À gauche, $\\frac{x^2 - 1}{x - 1} = x + 1 \\to 2$. À droite, $\\frac{(2x - 1) - 1}{x - 1} = 2$. Les deux nombres dérivés valent $2$ : $f$ est dérivable en $1$, et la tangente est $y = 2(x - 1) + 1 = 2x - 1$. Un changement de formule n'empêche pas la dérivabilité : il oblige à calculer des deux côtés.",
+                  "answers": [
+                    {
+                      "content": "$f$ est dérivable en $1$ et $f'(1) = 2$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tangente à la courbe au point d'abscisse $1$ a pour équation $y = 2x - 1$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ n'est pas dérivable en $1$, car la formule change en $1$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'_g(1) = 1$ et $f'_d(1) = 2$, donc le point d'abscisse $1$ est un point anguleux.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ n'est pas continue en $1$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = |x - 3|$. Que valent les nombres dérivés à gauche et à droite de $f$ en $3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $x > 3$, $|x - 3| = x - 3$ et le taux vaut $1$. Pour $x < 3$, $|x - 3| = 3 - x$ et le taux $\\frac{3 - x}{x - 3}$ vaut $-1$. Les pentes sont différentes : c'est le toit de la case, ici renversé en V. L'erreur tentante est d'inverser : à gauche de $3$, la courbe descend, donc la pente est négative.",
+                  "answers": [
+                    {
+                      "content": "$f'_g(3) = -1$ et $f'_d(3) = 1$ : $f$ n'est pas dérivable en $3$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'_g(3) = 1$ et $f'_d(3) = -1$ : $f$ n'est pas dérivable en $3$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'_g(3) = f'_d(3) = 0$ : $f$ est dérivable en $3$ et $f'(3) = 0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'_g(3) = f'_d(3) = 1$ : $f$ est dérivable en $3$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Étudier la dérivabilité et interpréter graphiquement",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = x\\sqrt{x}$ sur $[0 ; +\\infty[$. On étudie la dérivabilité de $f$ en $0$. Quelle conclusion est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $x > 0$, $\\frac{x\\sqrt{x} - 0}{x - 0} = \\sqrt{x}$, qui tend vers $0$ quand $x \\to 0^+$. La limite est finie : $f$ est dérivable à droite en $0$, avec $f'_d(0) = 0$, d'où une demi-tangente horizontale. Le piège : conclure que $f$ n'est pas dérivable parce que $\\sqrt{x}$ ne l'est pas en $0$. Il faut calculer le taux.",
+                  "answers": [
+                    {
+                      "content": "$f$ est dérivable à droite en $0$, avec $f'_d(0) = 0$ : sa courbe admet en $O$ une demi-tangente horizontale.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ n'est pas dérivable en $0$, car $x \\mapsto \\sqrt{x}$ n'est pas dérivable en $0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa courbe admet en $O$ une demi-tangente verticale.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est dérivable à droite en $0$, avec $f'_d(0) = 1$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\sqrt{x^2 + 5}$, dérivable sur $\\mathbb{R}$, avec $f'(x) = \\frac{x}{\\sqrt{x^2 + 5}}$. Quelle est une équation de la tangente à sa courbe au point d'abscisse $2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f(2) = \\sqrt{9} = 3$ et $f'(2) = \\frac{2}{3}$. Tangente : $y = \\frac{2}{3}(x - 2) + 3 = \\frac{2}{3}x + \\frac{5}{3}$. L'erreur tentante est $y = \\frac{2}{3}x + 3$ : $3$ est l'ordonnée du point d'abscisse $2$, pas de l'abscisse $0$. Contrôle : en $x = 2$, $\\frac{4}{3} + \\frac{5}{3} = 3$.",
+                  "answers": [
+                    {
+                      "content": "$y = \\frac{2}{3}x + \\frac{5}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = \\frac{2}{3}x + 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = \\frac{2}{3}x - \\frac{4}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 3x - \\frac{16}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f$ définie sur $\\mathbb{R}$ par $f(x) = x^2 + 1$ si $x \\le 0$, et $f(x) = x + 1$ si $x > 0$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les deux formules donnent $1$ en $0$ : $f$ est continue en $0$. À gauche, le taux $\\frac{x^2}{x} = x$ tend vers $0$ ; à droite, $\\frac{x}{x} = 1$. Pentes différentes : point anguleux, comme le sommet du toit, avec une demi-tangente horizontale à gauche et une de pente $1$ à droite. Continue ne veut pas dire dérivable.",
+                  "answers": [
+                    {
+                      "content": "$f$ est continue en $0$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'_g(0) = 0$ et $f'_d(0) = 1$ : la courbe a un point anguleux au point $(0 ; 1)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est dérivable en $0$ et $f'(0) = 1$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ n'est pas continue en $0$, donc elle n'est pas dérivable en $0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La courbe admet une tangente verticale au point $(0 ; 1)$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^2 - 4x + 1$. En quel point de sa courbe la tangente est-elle parallèle à la droite d'équation $y = 2x + 7$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Deux droites sont parallèles si elles ont le même coefficient directeur. On résout $f'(x) = 2$ : $2x - 4 = 2$, donc $x = 3$, et $f(3) = 9 - 12 + 1 = -2$. L'erreur tentante est $(2 ; -3)$ : c'est le point où $f'(x) = 0$, où la tangente est horizontale, pas parallèle à la droite donnée.",
+                  "answers": [
+                    {
+                      "content": "Au point $(3 ; -2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Au point $(2 ; -3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au point $(3 ; 2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au point $(0 ; 1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\sqrt{4 - x}$ sur $]-\\infty ; 4]$. On étudie $f$ au point d'abscisse $4$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$f(4) = 0$. Pour $x < 4$, $x - 4 = -(4 - x)$, donc le taux vaut $\\frac{\\sqrt{4 - x}}{-(4 - x)} = -\\frac{1}{\\sqrt{4 - x}}$, qui tend vers $-\\infty$ et non vers $+\\infty$. Limite infinie : $f$ n'est pas dérivable en $4$, et la courbe a une demi-tangente verticale. Mais $f$ reste continue en $4$.",
+                  "answers": [
+                    {
+                      "content": "$f$ est continue en $4$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour $x < 4$, $\\frac{f(x) - f(4)}{x - 4} = -\\frac{1}{\\sqrt{4 - x}}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La courbe de $f$ admet au point $(4 ; 0)$ une demi-tangente verticale.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est dérivable à gauche en $4$, avec $f'_g(4) = 0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le taux $\\frac{f(x) - f(4)}{x - 4}$ tend vers $+\\infty$ quand $x$ tend vers $4$ par la gauche.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ n'est pas continue en $4$, puisqu'elle n'y est pas dérivable.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Dériver une fonction composée et une bijection réciproque",
+          "subtitle": "Les taux qui se multiplient en chaîne, et le taux du retour",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer la dérivée d'une fonction composée $g \\circ u$, en particulier de $u^n$, $\\frac{1}{u}$ et $\\sqrt{u}$.</li>\n<li>Justifier qu'une fonction composée est dérivable sur un intervalle.</li>\n<li>Calculer le nombre dérivé d'une bijection réciproque en un point.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. La moto de livraison (la dérivée d'une composée).</strong> Ton grand frère fait des livraisons à moto. Sa moto consomme 0,05 litre d'essence par kilomètre. Il roule à 40 km par heure. Combien d'essence brûle-t-il par heure ? Tu multiplies les deux taux : $0{,}05 \\times 40 = 2$ litres par heure. Les taux se multiplient en chaîne.</p>\n<p><em>Le pont.</em> Le temps, c'est $x$. La distance parcourue au temps $x$, c'est $u(x)$ : son taux de variation, c'est $u'(x)$ (les 40 km/h). L'essence consommée pour une distance $d$, c'est $g(d)$ : son taux de variation, c'est $g'$ (les 0,05 L/km). L'essence consommée au temps $x$, c'est $g\\big(u(x)\\big)$ : la <strong>composée</strong> $g \\circ u$, où l'on applique d'abord $u$, puis $g$. Son taux est le produit des deux taux : $(g \\circ u)'(x) = g'\\big(u(x)\\big) \\times u'(x)$.</p>\n<p><em>Où l'image s'arrête.</em> Dans l'image, les taux sont constants. En général, ils changent d'un point à l'autre : $g'$ se calcule <strong>au point $u(x)$</strong>, là où se trouve la moto, et non au point $x$.</p>\n<p><strong>2. Le change au marché de Noé (la dérivée d'une réciproque).</strong> Au marché de Noé, près de la frontière du Ghana, une commerçante change des cedis en francs CFA. Supposons qu'un cedi lui donne 40 F. Au retour, pour changer des francs en cedis, un franc vaut $\\frac{1}{40}$ de cedi. Le taux du retour est l'inverse du taux de l'aller.</p>\n<p><em>Le pont.</em> L'aller, c'est une bijection $f$ : elle envoie $x$ sur $y = f(x)$. Le retour, c'est sa <strong>bijection réciproque</strong> $f^{-1}$ : elle ramène $y$ sur $x$. Le taux de l'aller en $x_0$, c'est $f'(x_0)$. Le taux du retour en $y_0 = f(x_0)$, c'est son inverse : $(f^{-1})'(y_0) = \\frac{1}{f'(x_0)}$.</p>\n<p><em>Où l'image s'arrête.</em> Si le taux de l'aller est nul ($f'(x_0) = 0$), le retour n'a plus de taux, car on ne divise pas par $0$. $f^{-1}$ n'est alors pas dérivable en $y_0$ : sa courbe y admet une tangente verticale.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Dérivée d'une composée.</strong> Soit $u$ une fonction dérivable sur un intervalle $I$, et $g$ une fonction dérivable sur un intervalle $J$ qui contient $u(x)$ pour tout $x$ de $I$. Alors $g \\circ u$ est dérivable sur $I$ et $$(g \\circ u)'(x) = g'\\big(u(x)\\big) \\times u'(x).$$</p>\n<p><strong>Cas à connaître</strong> ($u$ dérivable sur $I$) :</p>\n<ul>\n<li>$(u^n)' = n\\,u^{n-1}\\,u'$, pour $n$ entier naturel non nul ;</li>\n<li>$\\left(\\frac{1}{u}\\right)' = -\\frac{u'}{u^2}$, si $u$ ne s'annule pas sur $I$ ;</li>\n<li>$(\\sqrt{u})' = \\frac{u'}{2\\sqrt{u}}$, si $u(x) > 0$ pour tout $x$ de $I$ ;</li>\n<li>la fonction $x \\mapsto f(ax + b)$ a pour dérivée $x \\mapsto a\\,f'(ax + b)$.</li>\n</ul>\n<p><strong>Dérivée d'une bijection réciproque.</strong> Soit $f$ une fonction continue et strictement monotone sur un intervalle $I$ : elle réalise une bijection de $I$ sur $J = f(I)$. Si $f$ est dérivable en $x_0$ de $I$ et si $f'(x_0) \\neq 0$, alors $f^{-1}$ est dérivable en $y_0 = f(x_0)$ et $$(f^{-1})'(y_0) = \\frac{1}{f'(x_0)} = \\frac{1}{f'\\big(f^{-1}(y_0)\\big)}.$$</p>\n<p>Si $f'(x_0) = 0$, $f^{-1}$ n'est pas dérivable en $y_0$, et sa courbe admet au point d'abscisse $y_0$ une tangente verticale. La courbe de $f^{-1}$ est la symétrique de celle de $f$ par rapport à la droite d'équation $y = x$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Dériver $f(x) = (2x^2 - 1)^3$ sur $\\mathbb{R}$.</strong></p>\n<ol>\n<li>On repère la fonction intérieure : $u(x) = 2x^2 - 1$, avec $u'(x) = 4x$. On a $f = u^3$.</li>\n<li>$(u^3)' = 3u^2\\,u'$, donc $f'(x) = 3(2x^2 - 1)^2 \\times 4x = 12x(2x^2 - 1)^2$.</li>\n</ol>\n<p><strong>Dériver $h(x) = \\sqrt{x^2 + 3}$ sur $\\mathbb{R}$.</strong></p>\n<ol>\n<li>$u(x) = x^2 + 3$ est strictement positif sur $\\mathbb{R}$, et $u'(x) = 2x$ : $h$ est dérivable sur $\\mathbb{R}$.</li>\n<li>$h'(x) = \\frac{u'(x)}{2\\sqrt{u(x)}} = \\frac{2x}{2\\sqrt{x^2 + 3}} = \\frac{x}{\\sqrt{x^2 + 3}}$.</li>\n</ol>\n<p><strong>Soit $f(x) = x^3 + x$. Calculer $(f^{-1})'(2)$.</strong></p>\n<ol>\n<li>$f'(x) = 3x^2 + 1 > 0$ : $f$ est continue et strictement croissante sur $\\mathbb{R}$. Ses limites en $-\\infty$ et $+\\infty$ sont $-\\infty$ et $+\\infty$ : c'est une bijection de $\\mathbb{R}$ sur $\\mathbb{R}$.</li>\n<li>On cherche l'antécédent de $2$ : $f(1) = 1 + 1 = 2$, donc $f^{-1}(2) = 1$.</li>\n<li>$f'(1) = 4 \\neq 0$, donc $(f^{-1})'(2) = \\frac{1}{f'(1)} = \\frac{1}{4}$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Oublier de multiplier par $u'(x)$. Par exemple, écrire que la dérivée de $(3x + 1)^4$ est $4(3x + 1)^3$. C'est faux : la bonne réponse est $4(3x + 1)^3 \\times 3 = 12(3x + 1)^3$.</p>\n<p>Comment le repérer : avant de dériver, repère la fonction intérieure $u$ et écris sa dérivée à côté. Si $u'$ n'est pas égale à $1$, elle doit apparaître en facteur dans ton résultat.</p>\n<p>Autre piège, pour la réciproque : calculer $\\frac{1}{f'(y_0)}$ au lieu de $\\frac{1}{f'(x_0)}$. Cherche d'abord l'antécédent $x_0$ tel que $f(x_0) = y_0$, puis calcule $f'$ en $x_0$.</p>\n<h2>En une phrase</h2>\n<p>Pour dériver une composée, on dérive l'extérieur au point $u(x)$ et on multiplie par la dérivée de l'intérieur, comme des taux en chaîne ; pour la réciproque, on prend l'inverse du taux de l'aller, calculé à l'antécédent : $(f^{-1})'(y_0) = \\frac{1}{f'(x_0)}$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître une composée et sa formule de dérivation",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $u(x) = x^2 + 1$ et $g(x) = \\sqrt{x}$. Quelle est l'expression de $(g \\circ u)(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$(g \\circ u)(x) = g\\big(u(x)\\big)$ : on applique d'abord $u$, puis $g$. Donc $g(x^2 + 1) = \\sqrt{x^2 + 1}$. L'erreur tentante est $(\\sqrt{x})^2 + 1$ : c'est $u \\circ g$, où l'on applique $g$ en premier. L'ordre compte, et une composée n'est ni un produit ni une somme.",
+                  "answers": [
+                    {
+                      "content": "$\\sqrt{x^2 + 1}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\sqrt{x})^2 + 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{x} \\times (x^2 + 1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{x} + x^2 + 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image de la moto de livraison, l'essence consommée par heure s'obtient en multipliant l'essence consommée par kilomètre par le nombre de kilomètres parcourus par heure. C'est l'idée de la formule $(g \\circ u)' = (g' \\circ u) \\times u'$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $0{,}05$ L/km $\\times$ $40$ km/h $= 2$ L/h : les taux se multiplient. $u'$ est la vitesse (km/h), $g'$ est la consommation (L/km), et leur produit est le taux de la composée. Attention : dans le cas général, $g'$ se calcule en $u(x)$, pas en $x$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $u$ dérivable sur un intervalle $I$, et $g$ dérivable sur un intervalle qui contient $u(x)$ pour tout $x$ de $I$. Quelle est la dérivée de $g \\circ u$ sur $I$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On dérive la fonction extérieure $g$, calculée au point $u(x)$, puis on multiplie par $u'(x)$. L'erreur tentante est $g'(x) \\times u'(x)$ : la moto n'est pas au point $x$ mais au point $u(x)$, et c'est là qu'il faut lire la consommation $g'$.",
+                  "answers": [
+                    {
+                      "content": "$(g \\circ u)'(x) = g'\\big(u(x)\\big) \\times u'(x)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(g \\circ u)'(x) = g'(x) \\times u'(x)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(g \\circ u)'(x) = g'\\big(u(x)\\big)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(g \\circ u)'(x) = g'\\big(u'(x)\\big)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $u$ une fonction dérivable et strictement positive sur un intervalle $I$. Quelles formules sont justes sur $I$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Ce sont deux cas de $(g \\circ u)' = g'(u) \\times u'$, avec $g(t) = \\sqrt{t}$ puis $g(t) = \\frac{1}{t}$. Les propositions fausses oublient le facteur $u'$ (en effet $(u^3)' = 3u^2\\,u'$), ou inventent une règle : la dérivée de $\\frac{1}{u}$ n'est pas $\\frac{1}{u'}$.",
+                  "answers": [
+                    {
+                      "content": "$(\\sqrt{u})' = \\frac{u'}{2\\sqrt{u}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\left(\\frac{1}{u}\\right)' = -\\frac{u'}{u^2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\sqrt{u})' = \\frac{1}{2\\sqrt{u}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(u^3)' = 3u^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left(\\frac{1}{u}\\right)' = \\frac{1}{u'}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du change au marché de Noé, un cedi donne 40 F. L'aller est la bijection $f$, de taux $f'(x_0) = 40$. Quel nombre joue le rôle de $(f^{-1})'(y_0)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'aller transforme un cedi en 40 F : son taux est $40$. Le retour ramène 40 F à un cedi : un franc vaut $\\frac{1}{40}$ de cedi. C'est $(f^{-1})'(y_0) = \\frac{1}{f'(x_0)}$. L'erreur tentante est $-40$ : revenir en arrière ne change pas le signe du taux, cela remplace le taux par son inverse.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{40}$ : le taux du retour est l'inverse du taux de l'aller.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$40$ : le retour a le même taux que l'aller.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-40$ : le retour se fait dans l'autre sens.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\frac{1}{40}$ : on prend l'inverse et on change le signe.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f$ une bijection dérivable sur un intervalle $I$, et $x_0$ un point de $I$ tel que $f'(x_0) = 0$. Alors $f^{-1}$ est dérivable en $f(x_0)$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. La formule $(f^{-1})'(y_0) = \\frac{1}{f'(x_0)}$ exige $f'(x_0) \\neq 0$. Si $f'(x_0) = 0$, le taux de $f^{-1}$ tend vers l'infini : $f^{-1}$ n'est pas dérivable en $y_0 = f(x_0)$, et sa courbe y a une tangente verticale. Exemple : $x \\mapsto x^3$ en $0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer des dérivées de fonctions composées",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = (3x - 2)^5$ sur $\\mathbb{R}$. Que vaut $f'(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f = u^5$ avec $u(x) = 3x - 2$ et $u'(x) = 3$. Donc $f'(x) = 5(3x - 2)^4 \\times 3 = 15(3x - 2)^4$. L'erreur tentante est $5(3x - 2)^4$ : on a oublié de multiplier par $u' = 3$, le deuxième taux de la chaîne.",
+                  "answers": [
+                    {
+                      "content": "$15(3x - 2)^4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5(3x - 2)^4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15(3x - 2)^5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5(3x - 2)^4 \\times 3x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\sqrt{2x + 6}$ sur $]-3 ; +\\infty[$. Que vaut $f'(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$(\\sqrt{u})' = \\frac{u'}{2\\sqrt{u}}$ avec $u(x) = 2x + 6$ et $u'(x) = 2$. Donc $f'(x) = \\frac{2}{2\\sqrt{2x + 6}} = \\frac{1}{\\sqrt{2x + 6}}$. L'erreur tentante est $\\frac{1}{2\\sqrt{2x + 6}}$ : on a oublié $u' = 2$. L'intervalle est ouvert en $-3$, car la formule exige $u(x) > 0$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{\\sqrt{2x + 6}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{2\\sqrt{2x + 6}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{\\sqrt{2x + 6}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\sqrt{2x + 6}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{1}{x^2 + 4}$ sur $\\mathbb{R}$. Que vaut $f'(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\left(\\frac{1}{u}\\right)' = -\\frac{u'}{u^2}$ avec $u(x) = x^2 + 4$, qui ne s'annule jamais, et $u'(x) = 2x$. Donc $f'(x) = -\\frac{2x}{(x^2 + 4)^2}$. L'erreur tentante est $-\\frac{1}{(x^2 + 4)^2}$ : le facteur $u'(x) = 2x$ a disparu. Et la dérivée d'un inverse n'est pas l'inverse de la dérivée.",
+                  "answers": [
+                    {
+                      "content": "$-\\frac{2x}{(x^2 + 4)^2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\frac{1}{(x^2 + 4)^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2x}{(x^2 + 4)^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2x}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\sqrt{x^2 - 2x + 5}$ sur $\\mathbb{R}$. Que vaut $f'(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$u(x) = x^2 - 2x + 5 = (x - 1)^2 + 4 > 0$, donc $f$ est dérivable sur $\\mathbb{R}$. $u'(x) = 2x - 2$, d'où $f'(x) = \\frac{2x - 2}{2\\sqrt{u(x)}} = \\frac{x - 1}{\\sqrt{x^2 - 2x + 5}}$. L'erreur tentante est $\\frac{2x - 2}{\\sqrt{u(x)}}$ : on a oublié le $2$ du dénominateur dans $\\frac{u'}{2\\sqrt{u}}$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{x - 1}{\\sqrt{x^2 - 2x + 5}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{2x - 2}{\\sqrt{x^2 - 2x + 5}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2\\sqrt{x^2 - 2x + 5}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{x - 1}{2\\sqrt{x^2 - 2x + 5}}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f(x) = x^3 + 2x - 1$ est une bijection de $\\mathbb{R}$ sur $\\mathbb{R}$, avec $f'(x) = 3x^2 + 2$. Sachant que $f(1) = 2$, que vaut $(f^{-1})'(2)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f(1) = 2$, donc l'antécédent de $2$ est $x_0 = 1$. $f'(1) = 3 + 2 = 5 \\neq 0$, donc $(f^{-1})'(2) = \\frac{1}{f'(1)} = \\frac{1}{5}$. L'erreur tentante est $\\frac{1}{14}$ : on a calculé $\\frac{1}{f'(2)}$, au point d'arrivée, au lieu de prendre l'antécédent.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{14}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = (x^2 + 1)^3$ sur $\\mathbb{R}$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$f = u^3$ avec $u(x) = x^2 + 1$ et $u'(x) = 2x$. Donc $f'(x) = 3(x^2 + 1)^2 \\times 2x = 6x(x^2 + 1)^2$, et $f'(1) = 6 \\times 4 = 24$. Les valeurs $12$ et $3$ viennent de la même erreur : oublier le facteur $u'(x) = 2x$.",
+                  "answers": [
+                    {
+                      "content": "$f'(x) = 6x(x^2 + 1)^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'(1) = 24$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'(x) = 3(x^2 + 1)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(1) = 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(0) = 3$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Dériver, justifier la dérivabilité et utiliser la réciproque",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = \\sqrt{4 - x^2}$, définie sur $[-2 ; 2]$. Sur quel intervalle la formule de dérivation de $\\sqrt{u}$ s'applique-t-elle, et que vaut alors $f'(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La formule $(\\sqrt{u})' = \\frac{u'}{2\\sqrt{u}}$ exige $u(x) > 0$ : ici $4 - x^2 > 0$ sur $]-2 ; 2[$. Avec $u'(x) = -2x$, on obtient $f'(x) = \\frac{-x}{\\sqrt{4 - x^2}}$. L'erreur tentante est d'inclure $-2$ et $2$ : $u$ s'y annule. En ces points, le taux tend vers l'infini : demi-tangentes verticales.",
+                  "answers": [
+                    {
+                      "content": "Sur $]-2 ; 2[$, avec $f'(x) = \\frac{-x}{\\sqrt{4 - x^2}}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur $[-2 ; 2]$, avec $f'(x) = \\frac{-x}{\\sqrt{4 - x^2}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur $]-2 ; 2[$, avec $f'(x) = \\frac{1}{2\\sqrt{4 - x^2}}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur $]-2 ; 2[$, avec $f'(x) = \\frac{-2x}{\\sqrt{4 - x^2}}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{1}{(2x - 1)^2}$ sur $\\left]\\frac{1}{2} ; +\\infty\\right[$. Que vaut $f'(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $u(x) = (2x - 1)^2$, on a $u'(x) = 2(2x - 1) \\times 2 = 4(2x - 1)$. Alors $f'(x) = -\\frac{u'(x)}{u(x)^2} = -\\frac{4(2x - 1)}{(2x - 1)^4} = -\\frac{4}{(2x - 1)^3}$. L'erreur tentante est $-\\frac{2}{(2x - 1)^3}$ : on a oublié le facteur $2$, dérivée de $2x - 1$, au fond de la chaîne.",
+                  "answers": [
+                    {
+                      "content": "$-\\frac{4}{(2x - 1)^3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\frac{2}{(2x - 1)^3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{4}{(2x - 1)^3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\frac{4}{(2x - 1)^4}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f(x) = x + \\sqrt{x}$ est continue et strictement croissante sur $[0 ; +\\infty[$ : c'est une bijection de $[0 ; +\\infty[$ sur $[0 ; +\\infty[$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$f(4) = 4 + 2 = 6$, donc $f^{-1}(6) = 4$. Pour $x > 0$, $f'(x) = 1 + \\frac{1}{2\\sqrt{x}}$, donc $f'(4) = \\frac{5}{4} \\neq 0$ et $(f^{-1})'(6) = \\frac{1}{f'(4)} = \\frac{4}{5}$. Pièges : $f^{-1}(6)$ n'est pas $\\frac{1}{6}$, et on calcule $f'$ à l'antécédent $4$, pas en $6$.",
+                  "answers": [
+                    {
+                      "content": "$f^{-1}(6) = 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(f^{-1})'(6) = \\frac{4}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(f^{-1})'(6) = \\frac{5}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(f^{-1})'(6) = \\frac{1}{f'(6)}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f^{-1}(6) = \\frac{1}{6}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = (x^2 - 3)^2$ sur $\\mathbb{R}$. Quelle est une équation de la tangente à sa courbe au point d'abscisse $2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f(2) = (4 - 3)^2 = 1$. $f'(x) = 2(x^2 - 3) \\times 2x = 4x(x^2 - 3)$, donc $f'(2) = 8$. Tangente : $y = 8(x - 2) + 1 = 8x - 15$. L'erreur tentante est $y = 2x - 3$ : elle vient de $f'(x) = 2(x^2 - 3)$, où le facteur $u'(x) = 2x$ manque.",
+                  "answers": [
+                    {
+                      "content": "$y = 8x - 15$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$y = 2x - 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 8x - 16$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$y = 8x + 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^2 + 1$ sur $[0 ; +\\infty[$. Elle réalise une bijection de $[0 ; +\\infty[$ sur $[1 ; +\\infty[$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$f(2) = 5$, donc $f^{-1}(5) = 2$, et $(f^{-1})'(5) = \\frac{1}{f'(2)} = \\frac{1}{4}$, pas $\\frac{1}{f'(5)} = \\frac{1}{10}$. En $1 = f(0)$, on a $f'(0) = 0$ : le taux du retour devient infini, donc $f^{-1}$ n'est pas dérivable en $1$, et sa courbe y a une demi-tangente verticale.",
+                  "answers": [
+                    {
+                      "content": "$f^{-1}(5) = 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(f^{-1})'(5) = \\frac{1}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f^{-1}$ n'est pas dérivable en $1$, car $f'(0) = 0$ ; sa courbe y admet une demi-tangente verticale.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(f^{-1})'(5) = \\frac{1}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(f^{-1})'(5) = 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f^{-1}$ est dérivable en $1$, avec $(f^{-1})'(1) = 0$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Étudier une fonction : variations, extremums et branches infinies",
+          "subtitle": "Variations, extremums, asymptotes et symétries. À compléter : inégalité des accroissements finis, dérivées successives",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Déterminer le sens de variation d'une fonction à partir du signe de sa dérivée, et repérer ses extremums.</li>\n<li>Reconnaître une asymptote (verticale, horizontale ou oblique) et étudier la position de la courbe par rapport à elle.</li>\n<li>Démontrer qu'une droite est axe de symétrie, ou qu'un point est centre de symétrie, de la courbe.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. La route de Man (variations et extremums).</strong> Un car roule vers Man, sur une route de montagne. Tant que la route monte, sa pente est positive. Quand elle redescend, sa pente est négative. Au sommet d'un col, la route ne monte plus et ne descend pas encore : la pente est nulle, et le car est au point le plus haut des environs.</p>\n<p><em>Le pont.</em> La route, c'est la courbe de $f$. La pente en chaque point, c'est $f'(x)$. Pente positive : $f$ est croissante. Pente négative : $f$ est décroissante. Le sommet du col, c'est un <strong>maximum local</strong> : $f'$ s'annule en passant du signe $+$ au signe $-$. Le fond d'une vallée, c'est un <strong>minimum local</strong> : $f'$ passe de $-$ à $+$. « Local » veut dire « le plus haut ou le plus bas des environs », pas forcément de toute la route.</p>\n<p><em>Où l'image s'arrête.</em> Une route peut être plate un instant sans être un sommet : un replat au milieu d'une montée. De même, $f'(a) = 0$ ne suffit pas : $x \\mapsto x^3$ a une dérivée nulle en $0$, mais aucun extremum, car sa dérivée ne change pas de signe.</p>\n<p><strong>2. La pirogue et la berge (l'asymptote).</strong> Sur la lagune, un piroguier longe la berge. Au fil du trajet, il s'en approche de plus en plus : au bout d'un long moment, l'écart entre la pirogue et la berge devient aussi petit qu'on veut.</p>\n<p><em>Le pont.</em> Le trajet de la pirogue, c'est la courbe de $f$ quand $x$ tend vers $+\\infty$ ou vers $-\\infty$. La berge, c'est une droite, l'<strong>asymptote</strong>. L'écart vertical entre les deux, c'est $f(x) - (ax + b)$, qui tend vers $0$. Une berge penchée, c'est une asymptote <strong>oblique</strong> $y = ax + b$ avec $a \\neq 0$ ; une berge horizontale, c'est une asymptote $y = b$. Le signe de l'écart dit de quel côté de la berge se trouve la pirogue : c'est la <strong>position relative</strong>.</p>\n<p><em>Où l'image s'arrête.</em> Une pirogue ne traverse pas la berge. Une courbe, elle, peut couper son asymptote, même plusieurs fois. Ce qui compte, c'est que l'écart tende vers $0$.</p>\n<p><strong>3. Le pagne plié (la symétrie).</strong> Plie un pagne en deux le long d'un pli vertical : le motif de gauche tombe exactement sur le motif de droite. Le pli est un axe de symétrie. Plante maintenant une épingle au milieu du pagne et fais-le tourner d'un demi-tour : si le motif retombe sur lui-même, l'épingle est un centre de symétrie.</p>\n<p><em>Le pont.</em> Le pli, c'est la droite d'équation $x = a$. Deux points du motif qui se superposent, ce sont les points d'abscisses $x$ et $2a - x$, situés à la même distance du pli : ils ont la même hauteur, $f(2a - x) = f(x)$. L'épingle, c'est le point $\\Omega(a ; b)$ : il est le milieu des points de la courbe d'abscisses $x$ et $2a - x$, donc $f(2a - x) + f(x) = 2b$.</p>\n<p><em>Où l'image s'arrête.</em> Un pagne a des bords ; une courbe peut s'étendre à l'infini. Il faut donc aussi vérifier que l'ensemble de définition est symétrique par rapport à $a$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Sens de variation.</strong> Soit $f$ une fonction dérivable sur un intervalle $I$.</p>\n<ul>\n<li>Si $f'(x) > 0$ pour tout $x$ de $I$, sauf peut-être en des points isolés où $f'$ s'annule, alors $f$ est strictement croissante sur $I$.</li>\n<li>Si $f'(x) < 0$ pour tout $x$ de $I$, avec la même remarque, alors $f$ est strictement décroissante sur $I$.</li>\n<li>Si $f'(x) = 0$ pour tout $x$ de $I$, alors $f$ est constante sur $I$.</li>\n</ul>\n<p><strong>Extremum local.</strong> Si $f'$ s'annule en un point $a$ intérieur à $I$ <strong>en changeant de signe</strong>, alors $f(a)$ est un extremum local : un maximum si $f'$ passe de $+$ à $-$, un minimum si $f'$ passe de $-$ à $+$. La tangente y est horizontale.</p>\n<p><strong>Asymptotes.</strong></p>\n<ul>\n<li>Si $f(x)$ tend vers $+\\infty$ ou $-\\infty$ quand $x$ tend vers $a$ (à gauche ou à droite), la droite d'équation $x = a$ est asymptote verticale.</li>\n<li>Si $\\lim_{x \\to +\\infty} f(x) = b$, avec $b$ réel, la droite d'équation $y = b$ est asymptote horizontale en $+\\infty$ (même chose en $-\\infty$).</li>\n<li>Si $\\lim_{x \\to +\\infty} \\big[f(x) - (ax + b)\\big] = 0$, la droite d'équation $y = ax + b$ est asymptote oblique en $+\\infty$ (même chose en $-\\infty$).</li>\n</ul>\n<p><strong>Position relative.</strong> On étudie le signe de $d(x) = f(x) - (ax + b)$ : si $d(x) > 0$, la courbe est au-dessus de la droite ; si $d(x) < 0$, elle est au-dessous ; si $d(x) = 0$, elle la coupe.</p>\n<p><strong>Symétries.</strong> Soit $D_f$ l'ensemble de définition de $f$.</p>\n<ul>\n<li>La droite d'équation $x = a$ est axe de symétrie de la courbe si, pour tout $x$ de $D_f$, $2a - x$ appartient à $D_f$ et $f(2a - x) = f(x)$.</li>\n<li>Le point $\\Omega(a ; b)$ est centre de symétrie de la courbe si, pour tout $x$ de $D_f$, $2a - x$ appartient à $D_f$ et $f(2a - x) + f(x) = 2b$.</li>\n</ul>\n<p><strong>Plan d'étude.</strong> Ensemble de définition ; limites aux bornes et asymptotes ; dérivée et son signe ; tableau de variation ; symétries et positions relatives ; tracé de la courbe.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Étudier la fonction $f(x) = x + 1 + \\frac{4}{x - 1}$ sur $D_f = \\mathbb{R} \\setminus \\{1\\}$.</strong></p>\n<ol>\n<li><strong>Dérivée.</strong> $f'(x) = 1 - \\frac{4}{(x - 1)^2} = \\frac{(x - 1)^2 - 4}{(x - 1)^2} = \\frac{(x - 3)(x + 1)}{(x - 1)^2}$. Le dénominateur est positif : $f'(x)$ a le signe de $(x - 3)(x + 1)$.</li>\n<li><strong>Variations.</strong> $f'(x) > 0$ sur $]-\\infty ; -1[$ et sur $]3 ; +\\infty[$ : $f$ y est strictement croissante. $f'(x) < 0$ sur $]-1 ; 1[$ et sur $]1 ; 3[$ : $f$ y est strictement décroissante.</li>\n<li><strong>Extremums.</strong> En $-1$, $f'$ s'annule en passant de $+$ à $-$ : maximum local $f(-1) = 0 + \\frac{4}{-2} = -2$. En $3$, $f'$ passe de $-$ à $+$ : minimum local $f(3) = 4 + 2 = 6$. Le maximum local est plus petit que le minimum local : ils sont « locaux », pas valables sur tout $D_f$.</li>\n<li><strong>Asymptote verticale.</strong> $\\lim_{x \\to 1^+} \\frac{4}{x - 1} = +\\infty$ et $\\lim_{x \\to 1^-} \\frac{4}{x - 1} = -\\infty$. Donc $f$ tend vers $+\\infty$ à droite de $1$ et vers $-\\infty$ à gauche : la droite d'équation $x = 1$ est asymptote verticale.</li>\n<li><strong>Asymptote oblique.</strong> $f(x) - (x + 1) = \\frac{4}{x - 1}$, qui tend vers $0$ en $+\\infty$ et en $-\\infty$ : la droite $(\\Delta) : y = x + 1$ est asymptote oblique. Si $x > 1$, $\\frac{4}{x - 1} > 0$ : la courbe est au-dessus de $(\\Delta)$. Si $x < 1$, elle est au-dessous.</li>\n<li><strong>Centre de symétrie.</strong> Si $x \\neq 1$, alors $2 - x \\neq 1$, et $f(2 - x) = 3 - x + \\frac{4}{1 - x} = 3 - x - \\frac{4}{x - 1}$. Donc $f(2 - x) + f(x) = 4 = 2 \\times 2$ : le point $\\Omega(1 ; 2)$ est centre de symétrie de la courbe. C'est le point où se coupent les deux asymptotes.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Conclure à un extremum dès que $f'(a) = 0$. C'est faux : pour $f(x) = x^3$, $f'(0) = 0$, mais $f'(x) = 3x^2 \\ge 0$ des deux côtés de $0$. La fonction est croissante sur $\\mathbb{R}$, sans extremum en $0$.</p>\n<p>Comment le repérer : un extremum se lit sur le <strong>changement de signe</strong> de $f'$, jamais sur sa seule annulation.</p>\n<p>Autre piège : écrire « $f$ est décroissante sur $]-1 ; 1[ \\cup ]1 ; 3[$ ». Dans l'exemple, $f(0) = -3$ et $f(2) = 7$ : la fonction ne décroît pas sur cette réunion. Un sens de variation se donne sur chaque intervalle séparément, car la valeur interdite $1$ coupe le domaine.</p>\n<h2>En une phrase</h2>\n<p>Étudier une fonction, c'est lire sa route : le signe de $f'$ dit où elle monte et où elle descend, un changement de signe de $f'$ marque un sommet ou un creux, et les asymptotes sont les berges dont la courbe s'approche à l'infini.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Lire les variations, les extremums et les asymptotes",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $f$ une fonction dérivable sur un intervalle $I$, avec $f'(x) < 0$ pour tout $x$ de $I$. Que peut-on dire de $f$ sur $I$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le signe de $f'$ donne le sens de variation, pas le signe de $f$. Dérivée négative : la route descend, $f$ est strictement décroissante. L'erreur tentante est « $f$ est négative » : une fonction peut descendre en restant positive, comme $x \\mapsto \\frac{1}{x}$ sur $]0 ; +\\infty[$.",
+                  "answers": [
+                    {
+                      "content": "$f$ est strictement décroissante sur $I$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est négative sur $I$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est strictement croissante sur $I$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ admet un minimum local à l'intérieur de $I$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f$ une fonction dérivable sur $\\mathbb{R}$, et $a$ un réel. Si $f'(a) = 0$, alors $f$ admet un extremum local en $a$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Il faut que $f'$ s'annule en changeant de signe. Pour $f(x) = x^3$, $f'(0) = 0$, mais $f'(x) = 3x^2 \\ge 0$ des deux côtés de $0$ : $f$ est croissante, sans extremum en $0$. C'est le replat dans la montée vers Man : plat un instant, mais pas un sommet.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image de la route de Man, à quoi correspond le sommet d'un col pour la fonction $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avant le col, la route monte ($f' > 0$) ; après, elle descend ($f' < 0$) ; au sommet, la pente est nulle. C'est un maximum local. L'erreur tentante est « minimum local » : c'est le fond d'une vallée, où l'on passe de la descente ($-$) à la montée ($+$).",
+                  "answers": [
+                    {
+                      "content": "À un maximum local : $f'$ s'annule en passant du signe $+$ au signe $-$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "À un minimum local : $f'$ s'annule en passant du signe $-$ au signe $+$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "À une asymptote horizontale de la courbe.",
+                      "correct": false
+                    },
+                    {
+                      "content": "À un point où $f$ n'est pas dérivable.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f$ définie sur $\\mathbb{R} \\setminus \\{2\\}$, avec $\\lim_{x \\to 2^+} f(x) = +\\infty$, $\\lim_{x \\to +\\infty} f(x) = 3$ et $\\lim_{x \\to -\\infty} \\big[f(x) - (2x - 1)\\big] = 0$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Limite infinie en $2$ : asymptote verticale $x = 2$. Limite finie $3$ en $+\\infty$ : asymptote horizontale $y = 3$, une droite « $y = \\dots$ », pas « $x = \\dots$ ». Écart qui tend vers $0$ en $-\\infty$ : asymptote oblique $y = 2x - 1$, mais seulement en $-\\infty$, là où la limite est donnée.",
+                  "answers": [
+                    {
+                      "content": "La droite d'équation $x = 2$ est asymptote verticale à la courbe de $f$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite d'équation $y = 3$ est asymptote horizontale à la courbe de $f$ en $+\\infty$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite d'équation $y = 2x - 1$ est asymptote oblique à la courbe de $f$ en $-\\infty$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite d'équation $x = 3$ est asymptote verticale à la courbe de $f$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $y = 2x - 1$ est asymptote oblique à la courbe de $f$ en $+\\infty$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $y = 2$ est asymptote horizontale à la courbe de $f$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image de la pirogue qui longe la berge, la berge est la droite d'équation $y = ax + b$. Que représente l'écart entre la pirogue et la berge ?",
+                  "question_type": "single_choice",
+                  "explanation": "La berge, c'est la droite $y = ax + b$ ; la pirogue, c'est la courbe. L'écart vertical entre les deux, c'est $f(x) - (ax + b)$, et il tend vers $0$. L'erreur tentante est « $f(x)$ tend vers $0$ » : cela voudrait dire que la courbe s'approche de l'axe des abscisses, ce qui n'est que le cas particulier $y = 0$.",
+                  "answers": [
+                    {
+                      "content": "La différence $f(x) - (ax + b)$, qui tend vers $0$ quand $x$ tend vers l'infini.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La valeur $f(x)$, qui tend vers $0$ quand $x$ tend vers l'infini.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La dérivée $f'(x)$, qui tend vers $0$ quand $x$ tend vers l'infini.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le coefficient directeur $a$ de l'asymptote.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une courbe ne peut jamais couper son asymptote oblique.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Contrairement à la pirogue, qui ne traverse pas la berge, une courbe peut couper son asymptote, même plusieurs fois. Ce qui compte, c'est que l'écart tende vers $0$ à l'infini. Exemple : $f(x) = x + \\frac{x - 1}{x^2 + 1}$ coupe son asymptote $y = x$ au point d'abscisse $1$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Étudier les variations, les asymptotes et les symétries",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = x^3 - 3x + 1$ sur $\\mathbb{R}$. Sur quel intervalle $f$ est-elle strictement décroissante ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f'(x) = 3x^2 - 3 = 3(x - 1)(x + 1)$. Ce trinôme est négatif entre ses racines $-1$ et $1$ : $f$ est strictement décroissante sur $[-1 ; 1]$. L'erreur tentante est $]-\\infty ; -1]$ : c'est là que $f' > 0$ et que $f$ monte. Un trinôme $ax^2 + bx + c$ avec $a > 0$ est négatif entre ses racines.",
+                  "answers": [
+                    {
+                      "content": "$[-1 ; 1]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty ; -1]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[1 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty ; 1]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^3 - 3x + 1$ sur $\\mathbb{R}$, avec $f'(x) = 3(x - 1)(x + 1)$. Quel est le maximum local de $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f'$ passe de $+$ à $-$ en $-1$ : la route monte puis descend, c'est un maximum local, $f(-1) = -1 + 3 + 1 = 3$. En $1$, $f'$ passe de $-$ à $+$ : c'est un minimum local, $f(1) = -1$. L'erreur tentante est de confondre l'abscisse où l'extremum est atteint avec sa valeur.",
+                  "answers": [
+                    {
+                      "content": "$3$, atteint en $x = -1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-1$, atteint en $x = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$, atteint en $x = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$, atteint en $x = 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{2x + 1}{x - 3}$ sur $\\mathbb{R} \\setminus \\{3\\}$. Quelles sont les asymptotes de sa courbe ?",
+                  "question_type": "single_choice",
+                  "explanation": "En $3$, le dénominateur s'annule et le numérateur vaut $7 \\neq 0$ : $f$ tend vers l'infini, d'où l'asymptote $x = 3$. En $\\pm\\infty$, $f(x)$ a la limite de $\\frac{2x}{x} = 2$, d'où $y = 2$. L'erreur tentante est d'échanger les deux : la valeur interdite donne l'asymptote verticale, la limite à l'infini l'horizontale.",
+                  "answers": [
+                    {
+                      "content": "$x = 3$ (verticale) et $y = 2$ (horizontale)",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 2$ (verticale) et $y = 3$ (horizontale)",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 3$ (verticale) et $y = 2x + 1$ (oblique)",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -\\frac{1}{2}$ (verticale) et $y = 2$ (horizontale)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = 2x - 1 + \\frac{3}{x + 2}$ sur $\\mathbb{R} \\setminus \\{-2\\}$. La droite $(\\Delta) : y = 2x - 1$ est asymptote oblique à sa courbe. Où est la courbe par rapport à $(\\Delta)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On étudie le signe de $f(x) - (2x - 1) = \\frac{3}{x + 2}$. Il a le signe de $x + 2$ : positif si $x > -2$ (courbe au-dessus), négatif si $x < -2$ (courbe au-dessous). L'erreur tentante est « toujours au-dessus, car $3 > 0$ » : le signe d'un quotient dépend aussi de son dénominateur.",
+                  "answers": [
+                    {
+                      "content": "Au-dessus de $(\\Delta)$ sur $]-2 ; +\\infty[$ et au-dessous sur $]-\\infty ; -2[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Au-dessus de $(\\Delta)$ sur tout $\\mathbb{R} \\setminus \\{-2\\}$, car $3 > 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au-dessous de $(\\Delta)$ sur $]-2 ; +\\infty[$ et au-dessus sur $]-\\infty ; -2[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au-dessus de $(\\Delta)$ sur $]-\\infty ; 2[$ et au-dessous sur $]2 ; +\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x - 1 + \\frac{1}{x - 1}$ sur $\\mathbb{R} \\setminus \\{1\\}$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$f(x) - (x - 1) = \\frac{1}{x - 1}$ tend vers $0$ en $\\pm\\infty$ : $y = x - 1$ est asymptote oblique. Pour $x \\neq 1$, $f(2 - x) = 1 - x + \\frac{1}{1 - x} = -f(x)$, donc $f(2 - x) + f(x) = 0 = 2 \\times 0$ : $\\Omega(1 ; 0)$ est centre de symétrie. Attention à l'ordre : $\\Omega(a ; b)$, abscisse d'abord.",
+                  "answers": [
+                    {
+                      "content": "La droite d'équation $y = x - 1$ est asymptote oblique à la courbe en $+\\infty$ et en $-\\infty$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le point $\\Omega(1 ; 0)$ est centre de symétrie de la courbe.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le point $\\Omega(0 ; 1)$ est centre de symétrie de la courbe.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $x = 1$ est axe de symétrie de la courbe.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $y = x$ est asymptote oblique à la courbe.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^2 - 4x + 7$ sur $\\mathbb{R}$. Quelle droite est axe de symétrie de sa courbe ?",
+                  "question_type": "single_choice",
+                  "explanation": "On vérifie $f(4 - x) = f(x)$, c'est-à-dire $f(2a - x) = f(x)$ avec $a = 2$ : $(4 - x)^2 - 4(4 - x) + 7 = x^2 - 4x + 7$. Comme le pli du pagne, la droite $x = 2$ est verticale et passe par le sommet, où $f'(2) = 0$. L'erreur tentante est $y = 3$ : c'est la valeur du minimum, pas l'axe.",
+                  "answers": [
+                    {
+                      "content": "La droite d'équation $x = 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite d'équation $y = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $x = -2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite d'équation $x = 4$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Étude complète d'une fonction rationnelle",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = \\frac{x^2 + 2x + 5}{x + 1}$ sur $\\mathbb{R} \\setminus \\{-1\\}$. Quels réels $a$, $b$ et $c$ vérifient $f(x) = ax + b + \\frac{c}{x + 1}$ pour tout $x \\neq -1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On réduit au même dénominateur : $ax + b + \\frac{c}{x + 1} = \\frac{ax^2 + (a + b)x + b + c}{x + 1}$. On identifie : $a = 1$ ; $a + b = 2$, donc $b = 1$ ; $b + c = 5$, donc $c = 4$. L'erreur tentante est de recopier les coefficients du numérateur ($b = 2$, $c = 5$) sans identifier.",
+                  "answers": [
+                    {
+                      "content": "$a = 1$, $b = 1$, $c = 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a = 1$, $b = 2$, $c = 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 1$, $b = 1$, $c = 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 1$, $b = 0$, $c = 4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x + 1 + \\frac{4}{x + 1}$ sur $\\mathbb{R} \\setminus \\{-1\\}$. Que vaut $f'(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La dérivée de $\\frac{4}{x + 1}$ est $-\\frac{4}{(x + 1)^2}$, par la formule $\\left(\\frac{1}{u}\\right)' = -\\frac{u'}{u^2}$. Donc $f'(x) = 1 - \\frac{4}{(x + 1)^2} = \\frac{(x + 1)^2 - 4}{(x + 1)^2} = \\frac{(x + 3)(x - 1)}{(x + 1)^2}$, avec $A^2 - B^2 = (A - B)(A + B)$. L'erreur tentante est d'oublier le signe moins.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{(x + 3)(x - 1)}{(x + 1)^2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1 + \\frac{4}{(x + 1)^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{(x - 3)(x + 1)}{(x + 1)^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1 - \\frac{4}{x + 1}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x + 1 + \\frac{4}{x + 1}$ sur $\\mathbb{R} \\setminus \\{-1\\}$, avec $f'(x) = \\frac{(x + 3)(x - 1)}{(x + 1)^2}$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$f'$ a le signe de $(x + 3)(x - 1)$ : $+$ avant $-3$, $-$ entre $-3$ et $1$ (sauf en $-1$, valeur interdite), $+$ après $1$. Donc maximum local $f(-3) = -4$ et minimum local $f(1) = 4$. Piège : « décroissante sur $]-3 ; 1[$ » est faux, car $-1$ coupe cet ensemble en deux intervalles.",
+                  "answers": [
+                    {
+                      "content": "$f$ admet en $-3$ un maximum local égal à $-4$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ admet en $1$ un minimum local égal à $4$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est strictement décroissante sur $]-3 ; 1[$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ admet en $1$ un maximum local égal à $4$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ admet un extremum en $-1$, car $f'$ change de signe en $-1$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x + 1 + \\frac{4}{x + 1}$ sur $\\mathbb{R} \\setminus \\{-1\\}$, et $(\\Delta)$ la droite d'équation $y = x + 1$. Quelle affirmation est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f(x) - (x + 1) = \\frac{4}{x + 1}$ tend vers $0$ en $\\pm\\infty$ : $(\\Delta)$ est asymptote oblique. Ce quotient a le signe de $x + 1$ : courbe au-dessus pour $x > -1$, au-dessous pour $x < -1$. L'erreur « pas asymptote, car l'écart ne s'annule jamais » confond : il suffit que l'écart tende vers $0$, comme la pirogue près de la berge.",
+                  "answers": [
+                    {
+                      "content": "$(\\Delta)$ est asymptote oblique ; la courbe est au-dessus de $(\\Delta)$ sur $]-1 ; +\\infty[$ et au-dessous sur $]-\\infty ; -1[$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\Delta)$ est asymptote oblique ; la courbe est au-dessus de $(\\Delta)$ sur tout $\\mathbb{R} \\setminus \\{-1\\}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\Delta)$ est asymptote oblique ; la courbe est au-dessous de $(\\Delta)$ sur $]-1 ; +\\infty[$ et au-dessus sur $]-\\infty ; -1[$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\Delta)$ n'est pas asymptote, car $f(x) - (x + 1)$ ne s'annule jamais.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x + 1 + \\frac{4}{x + 1}$ sur $\\mathbb{R} \\setminus \\{-1\\}$. Le point $\\Omega(-1 ; 0)$ est centre de symétrie de sa courbe.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Si $x \\neq -1$, alors $-2 - x \\neq -1$, et $f(-2 - x) = -1 - x + \\frac{4}{-1 - x} = -f(x)$. Donc $f(2a - x) + f(x) = 0 = 2b$, avec $a = -1$ et $b = 0$. On pouvait le deviner : $\\Omega$ est le point où l'asymptote verticale $x = -1$ coupe l'asymptote oblique $y = x + 1$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

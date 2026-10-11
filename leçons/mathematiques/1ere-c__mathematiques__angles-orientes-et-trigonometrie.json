@@ -1,0 +1,1720 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Angles orientés et trigonométrie",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Mathématiques",
+      "series_name": "C",
+      "essentials": [
+        {
+          "name": "Radian, cercle trigonométrique et mesure principale",
+          "subtitle": "Mesurer un angle orienté en radians et trouver sa mesure principale",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Passer des degrés aux radians, et inversement.</li>\n<li>Reconnaître toutes les mesures d'un même angle orienté.</li>\n<li>Trouver la mesure principale d'un angle orienté, dans $]-\\pi\\,;\\,\\pi]$.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>L'horloge de la salle d'attente.</strong> Au centre de santé, la grande aiguille de l'horloge murale tourne toujours dans le même sens, celui des aiguilles d'une montre. À 5 h 10 et à 6 h 10, elle est exactement au même endroit : elle a fait un tour complet de plus, et c'est tout. L'infirmière qui lit l'heure ne regarde que la position de l'aiguille.</p>\n<p><em>Le pont.</em> La position de l'aiguille, c'est l'angle orienté. Un tour complet vaut $2\\pi$ radians. Ajouter ou retirer des tours complets ne change pas la position : un même angle orienté a donc une infinité de mesures, qui diffèrent d'un multiple de $2\\pi$. Le sens des aiguilles d'une montre est le sens négatif ; le sens inverse est le sens direct (positif).</p>\n<p><em>Où l'image s'arrête.</em> L'horloge ne sait tourner que dans un sens et elle compte le temps cumulé. Un angle orienté peut être positif ou négatif, et il ne garde aucune trace du nombre de tours.</p>\n<p><strong>La ficelle sur la roue.</strong> Prends une roue de rayon 1 m et une ficelle de 1 m. Pose la ficelle le long du bord : l'angle au centre qu'elle intercepte est l'angle d'un radian. Pour le tour complet, il faut une ficelle de $2\\pi\\times 1$ m, soit environ 6,28 m.</p>\n<p><em>Le pont.</em> La longueur de l'arc est la mesure de l'angle en radians, tant que le rayon vaut 1. Le tour complet fait $2\\pi$ radians, le demi-tour $\\pi$ radians, le quart de tour $\\dfrac{\\pi}{2}$ radians.</p>\n<p><em>Où l'image s'arrête.</em> Le radian est un nombre sans unité. Pour un rayon $R$ quelconque, la longueur de l'arc vaut $R$ fois l'angle en radians.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Plan orienté.</strong> Le plan est orienté quand on a choisi un sens positif de rotation, appelé sens direct : le sens inverse des aiguilles d'une montre. Le <strong>cercle trigonométrique</strong> est le cercle de centre $O$ et de rayon 1, parcouru dans le sens direct.</p>\n<p><strong>Radian.</strong> Un radian est la mesure de l'angle au centre qui intercepte un arc de longueur 1 sur le cercle trigonométrique. On a $\\pi$ rad $=180^\\circ$. Pour passer des degrés aux radians, on multiplie par $\\dfrac{\\pi}{180}$ ; pour l'inverse, on multiplie par $\\dfrac{180}{\\pi}$.</p>\n<p><strong>Angle orienté.</strong> Soient $\\vec u$ et $\\vec v$ deux vecteurs non nuls. L'angle orienté $(\\vec u\\,;\\,\\vec v)$ est la rotation qui amène le vecteur unitaire de même sens que $\\vec u$ (la demi-droite portée par $\\vec u$) sur le vecteur unitaire de même sens que $\\vec v$. Si $\\alpha$ est l'une de ses mesures, toutes les autres sont $\\alpha+2k\\pi$ avec $k\\in\\mathbb{Z}$. On écrit $(\\vec u\\,;\\,\\vec v)=\\alpha\\ [2\\pi]$ : cela se lit « $\\alpha$ modulo $2\\pi$ ».</p>\n<p><strong>Mesure principale.</strong> Parmi toutes les mesures d'un angle orienté, une seule appartient à l'intervalle $]-\\pi\\,;\\,\\pi]$ : c'est la <strong>mesure principale</strong>. Pour la trouver, on ajoute ou on retire des multiples de $2\\pi$ jusqu'à tomber dans cet intervalle. Le sens direct donne un angle positif, le sens des aiguilles d'une montre un angle négatif.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Donner la mesure principale de $\\dfrac{25\\pi}{4}$, puis de $-\\dfrac{17\\pi}{3}$. Convertir $135^\\circ$ en radians.</strong></p>\n<ol>\n<li>On cherche un entier $k$ tel que $\\dfrac{25\\pi}{4}-2k\\pi\\in\\,]-\\pi\\,;\\,\\pi]$. On remarque que $\\dfrac{25\\pi}{4}=\\dfrac{\\pi}{4}+6\\pi=\\dfrac{\\pi}{4}+3\\times 2\\pi$.</li>\n<li>Donc $\\dfrac{25\\pi}{4}=\\dfrac{\\pi}{4}\\ [2\\pi]$. Comme $\\dfrac{\\pi}{4}\\in\\,]-\\pi\\,;\\,\\pi]$, la mesure principale est $\\dfrac{\\pi}{4}$.</li>\n<li>Pour $-\\dfrac{17\\pi}{3}$ : on ajoute $6\\pi=3\\times 2\\pi$, ce qui donne $-\\dfrac{17\\pi}{3}+\\dfrac{18\\pi}{3}=\\dfrac{\\pi}{3}$. La mesure principale est $\\dfrac{\\pi}{3}$.</li>\n<li>Pour la conversion : $135^\\circ=135\\times\\dfrac{\\pi}{180}=\\dfrac{3\\pi}{4}$ rad.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Se tromper d'intervalle. La mesure principale est dans $]-\\pi\\,;\\,\\pi]$, pas dans $[0\\,;\\,2\\pi[$. Ainsi $\\dfrac{3\\pi}{2}$ n'est pas la mesure principale d'un quart de tour dans le sens des aiguilles d'une montre : c'est $-\\dfrac{\\pi}{2}$. Autre erreur fréquente : $-\\pi$ n'est pas une mesure principale, car l'intervalle est ouvert en $-\\pi$ ; on prend $\\pi$.</p>\n<p>Comment le repérer : après ton calcul, vérifie que ton résultat est strictement plus grand que $-\\pi$ et au plus égal à $\\pi$.</p>\n<h2>En une phrase</h2>\n<p>Un angle orienté se mesure en radians à $2\\pi$ près, comme la position de l'aiguille d'une horloge qui ne dépend pas du nombre de tours, et sa mesure principale est celle qui tombe dans $]-\\pi\\,;\\,\\pi]$.</p>\n",
+          "exercises": [
+            {
+              "title": "Comprendre — Sens direct, radian et mesures d'un angle",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans le plan orienté, quel est le sens direct (sens positif) de rotation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par convention, le sens direct est le sens inverse des aiguilles d'une montre. L'aiguille de l'horloge du centre de santé tourne donc dans le sens négatif : ses angles se comptent négativement.",
+                  "answers": [
+                    {
+                      "content": "Le sens inverse des aiguilles d'une montre",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le sens des aiguilles d'une montre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sens qu'on choisit à chaque exercice, sans règle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sens de gauche à droite sur la feuille",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un angle de $\\pi$ radians correspond à un tour complet.",
+                  "question_type": "true_false",
+                  "explanation": "Un tour complet vaut $2\\pi$ radians. L'angle $\\pi$ radians vaut $180^\\circ$ : c'est un demi-tour. Pense à la ficelle de $2\\pi$ mètres qui fait le tour de la roue de rayon 1 m.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un angle orienté de vecteurs a pour mesure $\\alpha$. Quelles sont toutes ses mesures ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un tour complet ne change pas la position : on ajoute des multiples de $2\\pi$. Ajouter $\\pi$ (un demi-tour) retourne le vecteur et change l'angle. Comme pour l'horloge, on compte les tours à part.",
+                  "answers": [
+                    {
+                      "content": "Les réels $\\alpha+2k\\pi$, avec $k$ entier relatif",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les réels $\\alpha+k\\pi$, avec $k$ entier relatif",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le seul réel $\\alpha$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les réels $k\\alpha$, avec $k$ entier relatif",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un angle orienté a pour mesure $\\dfrac{\\pi}{3}$. Lesquels de ces réels sont aussi des mesures de cet angle ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\dfrac{7\\pi}{3}=\\dfrac{\\pi}{3}+2\\pi$ et $-\\dfrac{5\\pi}{3}=\\dfrac{\\pi}{3}-2\\pi$ : on a ajouté ou retiré un tour. Les autres réels s'écartent de $\\dfrac{\\pi}{3}$ d'un demi-tour ou d'un autre angle, pas d'un multiple de $2\\pi$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{7\\pi}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\dfrac{5\\pi}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{4\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{2\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{\\pi}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qu'appelle-t-on mesure principale d'un angle orienté ?",
+                  "question_type": "single_choice",
+                  "explanation": "La mesure principale est l'unique mesure dans $]-\\pi\\,;\\,\\pi]$. Elle peut donc être négative, par exemple pour un angle dans le sens des aiguilles d'une montre. Elle n'est pas toujours positive.",
+                  "answers": [
+                    {
+                      "content": "L'unique mesure qui appartient à l'intervalle $]-\\pi\\,;\\,\\pi]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'unique mesure qui appartient à l'intervalle $[0\\,;\\,2\\pi[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La plus petite mesure positive",
+                      "correct": false
+                    },
+                    {
+                      "content": "La mesure qui est un multiple de $\\pi$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Convertir et trouver une mesure principale",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Convertis $135^\\circ$ en radians.",
+                  "question_type": "single_choice",
+                  "explanation": "$135\\times\\dfrac{\\pi}{180}=\\dfrac{3\\pi}{4}$, car $135=3\\times 45$ et $45^\\circ=\\dfrac{\\pi}{4}$. La réponse $\\dfrac{4\\pi}{3}$ vient d'avoir renversé la fraction $\\dfrac{3\\pi}{4}$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{3\\pi}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{3\\pi}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{4\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\pi}{135}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Convertis $\\dfrac{5\\pi}{6}$ radians en degrés.",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{5\\pi}{6}\\times\\dfrac{180}{\\pi}=5\\times 30=150^\\circ$. On sait que $\\dfrac{\\pi}{6}$ vaut $30^\\circ$, donc il suffit de multiplier par 5.",
+                  "answers": [
+                    {
+                      "content": "$150^\\circ$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$120^\\circ$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$30^\\circ$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$300^\\circ$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la mesure principale de $\\dfrac{25\\pi}{4}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{25\\pi}{4}-6\\pi=\\dfrac{25\\pi-24\\pi}{4}=\\dfrac{\\pi}{4}$ : on retire trois tours complets. Le résultat est bien dans $]-\\pi\\,;\\,\\pi]$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{\\pi}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{25\\pi}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{3\\pi}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{\\pi}{4}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la mesure principale de $-\\dfrac{17\\pi}{3}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$-\\dfrac{17\\pi}{3}+6\\pi=-\\dfrac{17\\pi}{3}+\\dfrac{18\\pi}{3}=\\dfrac{\\pi}{3}$ : on ajoute trois tours. Garder le signe moins (réponse $-\\dfrac{\\pi}{3}$) est une erreur de calcul fréquente.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{\\pi}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\dfrac{2\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{2\\pi}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces réels, lesquels sont des mesures principales, c'est-à-dire des éléments de $]-\\pi\\,;\\,\\pi]$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\pi$ est dans l'intervalle (fermé en $\\pi$) et $-\\dfrac{2\\pi}{3}$ aussi. $-\\pi$ est exclu (ouvert en $-\\pi$), et $\\dfrac{3\\pi}{2}$ et $\\dfrac{5\\pi}{4}$ dépassent $\\pi$.",
+                  "answers": [
+                    {
+                      "content": "$\\pi$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\dfrac{2\\pi}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\pi$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{3\\pi}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{5\\pi}{4}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La grande aiguille d'une horloge passe de la position « 12 » à la position « 4 » en tournant dans le sens des aiguilles d'une montre, soit 20 minutes sur 60. Quelle est la mesure principale de l'angle orienté qu'elle décrit ?",
+                  "question_type": "single_choice",
+                  "explanation": "20 minutes sur 60 font un tiers de tour, soit $\\dfrac{2\\pi}{3}$ en valeur absolue. Le sens des aiguilles d'une montre est négatif : on obtient $-\\dfrac{2\\pi}{3}$. Le réel $\\dfrac{4\\pi}{3}$ est hors de $]-\\pi\\,;\\,\\pi]$.",
+                  "answers": [
+                    {
+                      "content": "$-\\dfrac{2\\pi}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{2\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{4\\pi}{3}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Mesures principales et conversions",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Une aiguille tourne de 3 tours et demi dans le sens des aiguilles d'une montre. Quelle est la mesure principale de l'angle orienté correspondant ?",
+                  "question_type": "single_choice",
+                  "explanation": "Trois tours et demi valent $-7\\pi$. On ajoute $8\\pi$ (quatre tours) : $-7\\pi+8\\pi=\\pi$. La valeur $-\\pi$ est une mesure de l'angle, mais elle n'est pas dans $]-\\pi\\,;\\,\\pi]$.",
+                  "answers": [
+                    {
+                      "content": "$\\pi$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\pi$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-7\\pi$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\pi}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la mesure principale de $\\dfrac{2026\\pi}{3}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{2026\\pi}{3}=\\dfrac{4\\pi}{3}+\\dfrac{2022\\pi}{3}=\\dfrac{4\\pi}{3}+674\\pi$, et $674\\pi=337\\times 2\\pi$. Donc $\\dfrac{4\\pi}{3}$ convient, mais il dépasse $\\pi$ : on retire un tour, et on obtient $-\\dfrac{2\\pi}{3}$.",
+                  "answers": [
+                    {
+                      "content": "$-\\dfrac{2\\pi}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{4\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{2\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\pi}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquels de ces réels sont des mesures du même angle orienté que $\\dfrac{5\\pi}{6}$ ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$\\dfrac{17\\pi}{6}=\\dfrac{5\\pi}{6}+2\\pi$, $-\\dfrac{7\\pi}{6}=\\dfrac{5\\pi}{6}-2\\pi$ et $-\\dfrac{19\\pi}{6}=\\dfrac{5\\pi}{6}-4\\pi$. Les trois autres réels ne diffèrent pas de $\\dfrac{5\\pi}{6}$ d'un multiple de $2\\pi$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{17\\pi}{6}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\dfrac{7\\pi}{6}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\dfrac{19\\pi}{6}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{7\\pi}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{5\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{11\\pi}{6}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une roue de gbaka a un rayon de 40 cm. Une valve posée sur le bord décrit un arc correspondant à un angle de $\\dfrac{5\\pi}{4}$ radians au centre. Quelle est la longueur de cet arc ?",
+                  "question_type": "single_choice",
+                  "explanation": "La longueur d'un arc vaut le rayon fois l'angle en radians : $40\\times\\dfrac{5\\pi}{4}=50\\pi$ cm. Sans multiplier par le rayon, on retrouve la valeur pour un rayon égal à 1, ce qui est ici faux.",
+                  "answers": [
+                    {
+                      "content": "$50\\pi$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{5\\pi}{4}$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$32\\pi$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$200\\pi$ cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un angle orienté mesure $1\\,140^\\circ$ dans le sens direct. Quelle est sa mesure principale en radians ?",
+                  "question_type": "single_choice",
+                  "explanation": "$1\\,140=3\\times 360+60$ : on enlève 3 tours, il reste $60^\\circ$, soit $\\dfrac{\\pi}{3}$ rad. Le réel $\\dfrac{19\\pi}{3}$ est bien une mesure, mais pas la mesure principale.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{\\pi}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{\\pi}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{2\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{19\\pi}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les réels $\\dfrac{3\\pi}{2}$ et $-\\dfrac{\\pi}{2}$ sont deux mesures du même angle orienté.",
+                  "question_type": "true_false",
+                  "explanation": "Leur différence vaut $\\dfrac{3\\pi}{2}+\\dfrac{\\pi}{2}=2\\pi$ : ils diffèrent d'un tour complet. La mesure principale commune est $-\\dfrac{\\pi}{2}$, car $\\dfrac{3\\pi}{2}$ dépasse $\\pi$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Angles orientés de deux vecteurs et relation de Chasles",
+          "subtitle": "Additionner des angles, retourner un vecteur, reconnaître colinéarité et orthogonalité",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Utiliser la relation de Chasles pour les angles orientés de vecteurs.</li>\n<li>Calculer $(\\vec v\\,;\\,\\vec u)$, $(-\\vec u\\,;\\,\\vec v)$ et $(-\\vec u\\,;\\,-\\vec v)$ à partir de $(\\vec u\\,;\\,\\vec v)$.</li>\n<li>Reconnaître des vecteurs colinéaires ou orthogonaux avec un angle orienté.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>Le carrefour du centre de santé.</strong> Trois routes partent du même carrefour : la route de l'hôpital $\\vec u$, la route du marché $\\vec v$ et la route de l'école $\\vec w$. Pour aller de la direction de l'hôpital à celle du marché, tu tournes d'un certain angle. Pour aller ensuite de la direction du marché à celle de l'école, tu tournes d'un autre angle. Le virage total, de l'hôpital à l'école, est la somme des deux virages. Si tu fais demi-tour, tu ajoutes un demi-tour.</p>\n<p><em>Le pont.</em> Les routes sont des vecteurs non nuls. Un virage est un angle orienté. Enchaîner deux virages, c'est la relation de Chasles : $(\\vec u\\,;\\,\\vec v)+(\\vec v\\,;\\,\\vec w)=(\\vec u\\,;\\,\\vec w)$. Le demi-tour transforme $\\vec u$ en $-\\vec u$ et ajoute $\\pi$. Revenir en arrière sur un virage change son signe.</p>\n<p><em>Où l'image s'arrête.</em> Les virages ne se comptent qu'à un tour complet près, donc toutes les égalités se lisent modulo $2\\pi$. Et seule la direction et le sens comptent, pas la longueur de la route : on peut remplacer $\\vec u$ par $3\\vec u$ sans rien changer.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Repère orthonormé direct.</strong> Le repère $(O\\,;\\,\\vec\\imath,\\vec\\jmath)$ est orthonormé direct si $(\\vec\\imath\\,;\\,\\vec\\jmath)=\\dfrac{\\pi}{2}\\ [2\\pi]$.</p>\n<p><strong>Relation de Chasles.</strong> Pour trois vecteurs non nuls : $(\\vec u\\,;\\,\\vec v)+(\\vec v\\,;\\,\\vec w)=(\\vec u\\,;\\,\\vec w)\\ [2\\pi]$. Idée de la preuve : tourner de $\\vec u$ à $\\vec v$, puis de $\\vec v$ à $\\vec w$, revient à tourner de $\\vec u$ à $\\vec w$.</p>\n<p><strong>Conséquences.</strong> $(\\vec u\\,;\\,\\vec u)=0$ et $(\\vec v\\,;\\,\\vec u)=-(\\vec u\\,;\\,\\vec v)\\ [2\\pi]$. De plus :</p>\n<ul>\n<li>$(-\\vec u\\,;\\,\\vec v)=(\\vec u\\,;\\,-\\vec v)=(\\vec u\\,;\\,\\vec v)+\\pi\\ [2\\pi]$ ;</li>\n<li>$(-\\vec u\\,;\\,-\\vec v)=(\\vec u\\,;\\,\\vec v)\\ [2\\pi]$ ;</li>\n<li>$(a\\vec u\\,;\\,b\\vec v)=(\\vec u\\,;\\,\\vec v)\\ [2\\pi]$ si $a>0$ et $b>0$ ; on ajoute $\\pi$ si un seul des deux réels $a$ et $b$ est négatif.</li>\n</ul>\n<p><strong>Colinéarité et orthogonalité.</strong> Pour $\\vec u$ et $\\vec v$ non nuls :</p>\n<ul>\n<li>$\\vec u$ et $\\vec v$ sont colinéaires $\\iff(\\vec u\\,;\\,\\vec v)=0\\ [\\pi]$ ;</li>\n<li>ils ont le même sens $\\iff(\\vec u\\,;\\,\\vec v)=0\\ [2\\pi]$, et des sens contraires $\\iff(\\vec u\\,;\\,\\vec v)=\\pi\\ [2\\pi]$ ;</li>\n<li>ils sont orthogonaux $\\iff(\\vec u\\,;\\,\\vec v)=\\dfrac{\\pi}{2}\\ [\\pi]$.</li>\n</ul>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>On donne $(\\vec u\\,;\\,\\vec v)=\\dfrac{\\pi}{3}\\ [2\\pi]$ et $(\\vec v\\,;\\,\\vec w)=-\\dfrac{5\\pi}{6}\\ [2\\pi]$. Calculer la mesure principale de $(\\vec u\\,;\\,\\vec w)$, de $(\\vec w\\,;\\,\\vec u)$ et de $(-\\vec u\\,;\\,\\vec v)$.</strong></p>\n<ol>\n<li>Par Chasles : $(\\vec u\\,;\\,\\vec w)=\\dfrac{\\pi}{3}-\\dfrac{5\\pi}{6}=\\dfrac{2\\pi-5\\pi}{6}=-\\dfrac{\\pi}{2}\\ [2\\pi]$. Cette valeur est dans $]-\\pi\\,;\\,\\pi]$ : c'est la mesure principale.</li>\n<li>L'angle de sens contraire donne $(\\vec w\\,;\\,\\vec u)=-(\\vec u\\,;\\,\\vec w)=\\dfrac{\\pi}{2}\\ [2\\pi]$.</li>\n<li>Le demi-tour sur $\\vec u$ donne $(-\\vec u\\,;\\,\\vec v)=\\dfrac{\\pi}{3}+\\pi=\\dfrac{4\\pi}{3}\\ [2\\pi]$.</li>\n<li>Comme $\\dfrac{4\\pi}{3}>\\pi$, on retire un tour : $\\dfrac{4\\pi}{3}-2\\pi=-\\dfrac{2\\pi}{3}$. La mesure principale est $-\\dfrac{2\\pi}{3}$.</li>\n<li>Comme $(\\vec u\\,;\\,\\vec w)=-\\dfrac{\\pi}{2}\\ [2\\pi]$, les vecteurs $\\vec u$ et $\\vec w$ sont orthogonaux.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Mal appliquer Chasles : on ne peut additionner que deux angles dont le <strong>vecteur du milieu est le même</strong>. Écrire $(\\vec u\\,;\\,\\vec v)+(\\vec w\\,;\\,\\vec v)=(\\vec u\\,;\\,\\vec w)$ est faux ; il faut d'abord retourner le second angle : $(\\vec w\\,;\\,\\vec v)=-(\\vec v\\,;\\,\\vec w)$. Autre confusion : le lien entre colinéarité et $0\\ [2\\pi]$. Deux vecteurs colinéaires de sens contraires ont pour angle $\\pi$, pas $0$.</p>\n<p>Comment le repérer : écris les angles comme une chaîne $\\vec u\\to\\vec v\\to\\vec w$. Chaque vecteur du milieu doit apparaître deux fois.</p>\n<h2>En une phrase</h2>\n<p>Les angles orientés s'ajoutent comme des virages à partir du même carrefour (Chasles), un demi-tour ajoute $\\pi$, et un angle de $0$ ou $\\pi$ signale des vecteurs colinéaires.</p>\n",
+          "exercises": [
+            {
+              "title": "Comprendre — Relation de Chasles et angles particuliers",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soient $\\vec u$, $\\vec v$ et $\\vec w$ trois vecteurs non nuls. Que vaut $(\\vec u\\,;\\,\\vec v)+(\\vec v\\,;\\,\\vec w)$, modulo $2\\pi$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "C'est la relation de Chasles : on tourne de $\\vec u$ à $\\vec v$ puis de $\\vec v$ à $\\vec w$, donc de $\\vec u$ à $\\vec w$. Les deux virages se suivent au carrefour, comme sur les routes de l'hôpital, du marché et de l'école.",
+                  "answers": [
+                    {
+                      "content": "$(\\vec u\\,;\\,\\vec w)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\vec w\\,;\\,\\vec u)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\vec u\\,;\\,\\vec v)-(\\vec v\\,;\\,\\vec w)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\vec v\\,;\\,\\vec v)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour deux vecteurs non nuls, $(\\vec v\\,;\\,\\vec u)=(\\vec u\\,;\\,\\vec v)\\ [2\\pi]$.",
+                  "question_type": "true_false",
+                  "explanation": "Inverser l'ordre change le sens du virage : $(\\vec v\\,;\\,\\vec u)=-(\\vec u\\,;\\,\\vec v)\\ [2\\pi]$. L'égalité n'est vraie que si $(\\vec u\\,;\\,\\vec v)$ vaut $0$ ou $\\pi$ modulo $2\\pi$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $\\vec u$ et $\\vec v$ deux vecteurs non nuls de même sens. Que vaut $(\\vec u\\,;\\,\\vec v)$, modulo $2\\pi$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Deux vecteurs de même sens pointent dans la même direction : il n'y a aucun virage à faire, l'angle est nul. L'angle $\\pi$ correspond à des vecteurs de sens contraires, c'est-à-dire à un demi-tour.",
+                  "answers": [
+                    {
+                      "content": "$0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\pi$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\pi}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{\\pi}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $\\vec u$ un vecteur non nul. Lesquelles de ces égalités sont vraies, modulo $2\\pi$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Un vecteur et lui-même font un angle nul. Un vecteur et son opposé sont de sens contraires : il faut un demi-tour, soit $\\pi$. Dans les mauvaises propositions, on oublie ce demi-tour ou on le remplace par un quart de tour.",
+                  "answers": [
+                    {
+                      "content": "$(\\vec u\\,;\\,\\vec u)=0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\vec u\\,;\\,-\\vec u)=\\pi$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\vec u\\,;\\,-\\vec u)=0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\vec u\\,;\\,-\\vec u)=\\dfrac{\\pi}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-\\vec u\\,;\\,\\vec u)=0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $\\vec u$ et $\\vec v$ deux vecteurs non nuls orthogonaux. Que peut-on affirmer pour $(\\vec u\\,;\\,\\vec v)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Orthogonaux signifie un quart de tour, dans un sens ou dans l'autre : $\\dfrac{\\pi}{2}$ ou $-\\dfrac{\\pi}{2}$, qui diffèrent de $\\pi$. Le cas $0\\ [\\pi]$ est celui des vecteurs colinéaires.",
+                  "answers": [
+                    {
+                      "content": "$(\\vec u\\,;\\,\\vec v)=\\dfrac{\\pi}{2}\\ [\\pi]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\vec u\\,;\\,\\vec v)=0\\ [\\pi]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\vec u\\,;\\,\\vec v)=\\pi\\ [2\\pi]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\vec u\\,;\\,\\vec v)=\\dfrac{\\pi}{4}\\ [\\pi]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Faire demi-tour au carrefour, c'est remplacer $\\vec u$ par $-\\vec u$, ce qui ajoute $\\pi$ à l'angle : $(-\\vec u\\,;\\,\\vec v)=(\\vec u\\,;\\,\\vec v)+\\pi\\ [2\\pi]$.",
+                  "question_type": "true_false",
+                  "explanation": "Le vecteur $-\\vec u$ pointe à l'opposé de $\\vec u$ : il y a un demi-tour de plus, donc $\\pi$ de plus. Même résultat si on retourne $\\vec v$ au lieu de $\\vec u$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer avec Chasles et reconnaître des cas particuliers",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On donne $(\\vec u\\,;\\,\\vec v)=\\dfrac{\\pi}{3}\\ [2\\pi]$ et $(\\vec v\\,;\\,\\vec w)=\\dfrac{\\pi}{4}\\ [2\\pi]$. Que vaut $(\\vec u\\,;\\,\\vec w)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par Chasles : $\\dfrac{\\pi}{3}+\\dfrac{\\pi}{4}=\\dfrac{4\\pi+3\\pi}{12}=\\dfrac{7\\pi}{12}$. La différence $\\dfrac{\\pi}{12}$ viendrait d'une soustraction à tort, et les fractions ne s'additionnent pas terme à terme.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{7\\pi}{12}\\ [2\\pi]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{\\pi}{12}\\ [2\\pi]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{2\\pi}{7}\\ [2\\pi]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\pi}{7}\\ [2\\pi]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $(\\vec u\\,;\\,\\vec v)=\\dfrac{2\\pi}{3}\\ [2\\pi]$ et $(\\vec w\\,;\\,\\vec v)=\\dfrac{\\pi}{6}\\ [2\\pi]$. Que vaut $(\\vec u\\,;\\,\\vec w)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le vecteur du milieu doit être le même : $(\\vec u\\,;\\,\\vec w)=(\\vec u\\,;\\,\\vec v)+(\\vec v\\,;\\,\\vec w)$ avec $(\\vec v\\,;\\,\\vec w)=-(\\vec w\\,;\\,\\vec v)=-\\dfrac{\\pi}{6}$. On obtient $\\dfrac{2\\pi}{3}-\\dfrac{\\pi}{6}=\\dfrac{\\pi}{2}$. Ajouter $\\dfrac{\\pi}{6}$ donne $\\dfrac{5\\pi}{6}$, erreur classique.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{\\pi}{2}\\ [2\\pi]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{5\\pi}{6}\\ [2\\pi]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{\\pi}{2}\\ [2\\pi]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\pi}{6}\\ [2\\pi]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $(\\vec u\\,;\\,\\vec v)=\\dfrac{\\pi}{3}\\ [2\\pi]$. Quelle est la mesure principale de $(-\\vec u\\,;\\,\\vec v)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le demi-tour ajoute $\\pi$ : $\\dfrac{\\pi}{3}+\\pi=\\dfrac{4\\pi}{3}$. Cette valeur dépasse $\\pi$ : on retire $2\\pi$ et on obtient $-\\dfrac{2\\pi}{3}$. Le réel $\\dfrac{4\\pi}{3}$ est une mesure, mais pas la mesure principale.",
+                  "answers": [
+                    {
+                      "content": "$-\\dfrac{2\\pi}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{4\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{2\\pi}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère orthonormé direct, on donne $\\vec u(1\\,;\\,0)$ et $\\vec v(-1\\,;\\,1)$. Quelle est la mesure principale de $(\\vec u\\,;\\,\\vec v)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\vec u$ pointe vers la droite. $\\vec v(-1\\,;\\,1)$ pointe vers le haut et vers la gauche, à $135^\\circ$ dans le sens direct : $135^\\circ=\\dfrac{3\\pi}{4}$. Le signe est positif car on tourne dans le sens direct.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{3\\pi}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{\\pi}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{3\\pi}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\pi}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquels de ces couples de vecteurs vérifient $(\\vec u\\,;\\,\\vec v)=\\pi\\ [2\\pi]$ ? Les coordonnées sont données dans un repère orthonormé direct.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "L'angle $\\pi$ correspond à des vecteurs colinéaires de sens contraires : $(2\\,;\\,0)$ et $(-3\\,;\\,0)$, ou $(0\\,;\\,1)$ et $(0\\,;\\,-4)$. Les vecteurs $(1\\,;\\,1)$ et $(2\\,;\\,2)$, ou $(1\\,;\\,0)$ et $(3\\,;\\,0)$, ont le même sens et donnent $0$ ; les vecteurs $(1\\,;\\,0)$ et $(0\\,;\\,1)$ sont orthogonaux et donnent $\\dfrac{\\pi}{2}$.",
+                  "answers": [
+                    {
+                      "content": "$\\vec u(2\\,;\\,0)$ et $\\vec v(-3\\,;\\,0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\vec u(0\\,;\\,1)$ et $\\vec v(0\\,;\\,-4)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\vec u(1\\,;\\,0)$ et $\\vec v(0\\,;\\,1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\vec u(1\\,;\\,1)$ et $\\vec v(2\\,;\\,2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\vec u(1\\,;\\,0)$ et $\\vec v(3\\,;\\,0)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $(\\vec u\\,;\\,\\vec v)=-\\dfrac{\\pi}{2}\\ [2\\pi]$. Que vaut $(\\vec v\\,;\\,\\vec u)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Inverser l'ordre des vecteurs change le signe de l'angle : $(\\vec v\\,;\\,\\vec u)=-(\\vec u\\,;\\,\\vec v)=\\dfrac{\\pi}{2}$. Dans les deux cas les vecteurs restent orthogonaux, mais le sens du quart de tour change.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{\\pi}{2}\\ [2\\pi]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\dfrac{\\pi}{2}\\ [2\\pi]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\pi\\ [2\\pi]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ [2\\pi]$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Enchaîner les angles et justifier",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "On donne $(\\vec u\\,;\\,\\vec v)=\\dfrac{5\\pi}{6}\\ [2\\pi]$ et $(\\vec v\\,;\\,\\vec w)=\\dfrac{3\\pi}{4}\\ [2\\pi]$. Quelle est la mesure principale de $(\\vec u\\,;\\,\\vec w)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par Chasles : $\\dfrac{5\\pi}{6}+\\dfrac{3\\pi}{4}=\\dfrac{10\\pi+9\\pi}{12}=\\dfrac{19\\pi}{12}$. Cette valeur dépasse $\\pi$ : on retire $2\\pi=\\dfrac{24\\pi}{12}$, ce qui donne $-\\dfrac{5\\pi}{12}$. La valeur $\\dfrac{19\\pi}{12}$ n'est pas la mesure principale.",
+                  "answers": [
+                    {
+                      "content": "$-\\dfrac{5\\pi}{12}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{19\\pi}{12}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{5\\pi}{12}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\pi}{12}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $(\\vec u\\,;\\,\\vec v)=\\dfrac{\\pi}{6}\\ [2\\pi]$. Quelle est la mesure principale de $(-2\\vec u\\,;\\,3\\vec v)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Multiplier par $3$ ne change rien. Multiplier $\\vec u$ par $-2$ retourne le vecteur, ce qui ajoute $\\pi$ : $\\dfrac{\\pi}{6}+\\pi=\\dfrac{7\\pi}{6}$. Cette mesure dépasse $\\pi$ : on retire $2\\pi$ et on trouve $-\\dfrac{5\\pi}{6}$.",
+                  "answers": [
+                    {
+                      "content": "$-\\dfrac{5\\pi}{6}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{\\pi}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{7\\pi}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{5\\pi}{6}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On note $\\alpha$ une mesure de $(\\vec u\\,;\\,\\vec v)$. Lesquelles de ces égalités sont vraies pour tout angle orienté $(\\vec u\\,;\\,\\vec v)$, modulo $2\\pi$ ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Inverser l'ordre change le signe ; retourner les deux vecteurs ne change rien ; retourner un seul vecteur ajoute $\\pi$. Multiplier $\\vec u$ par $2$ ne change pas l'angle. Enfin $(\\vec v\\,;\\,-\\vec u)=-\\alpha+\\pi$, qui diffère de $\\alpha$ en général.",
+                  "answers": [
+                    {
+                      "content": "$(\\vec v\\,;\\,\\vec u)=-\\alpha$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-\\vec u\\,;\\,-\\vec v)=\\alpha$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(\\vec u\\,;\\,-\\vec v)=\\alpha+\\pi$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2\\vec u\\,;\\,\\vec v)=2\\alpha$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-\\vec u\\,;\\,\\vec v)=\\alpha$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(\\vec v\\,;\\,-\\vec u)=\\alpha$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le triangle $ABC$ est équilatéral et direct, c'est-à-dire que $(\\overrightarrow{AB}\\,;\\,\\overrightarrow{AC})=\\dfrac{\\pi}{3}\\ [2\\pi]$ et que $(\\overrightarrow{BC}\\,;\\,\\overrightarrow{BA})=\\dfrac{\\pi}{3}\\ [2\\pi]$. Quelle est la mesure principale de $(\\overrightarrow{AB}\\,;\\,\\overrightarrow{BC})$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par Chasles : $(\\overrightarrow{AB}\\,;\\,\\overrightarrow{BC})=(\\overrightarrow{AB}\\,;\\,\\overrightarrow{BA})+(\\overrightarrow{BA}\\,;\\,\\overrightarrow{BC})=\\pi-\\dfrac{\\pi}{3}=\\dfrac{2\\pi}{3}$, car $(\\overrightarrow{BA}\\,;\\,\\overrightarrow{BC})=-(\\overrightarrow{BC}\\,;\\,\\overrightarrow{BA})$. Oublier ce changement de signe mène à $\\pi+\\dfrac{\\pi}{3}$, soit $-\\dfrac{2\\pi}{3}$ après réduction.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{2\\pi}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{2\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{5\\pi}{6}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les vecteurs $\\vec u$ et $\\vec v$ sont colinéaires et de sens contraires, et $(\\vec v\\,;\\,\\vec w)=\\dfrac{\\pi}{3}\\ [2\\pi]$. Quelle est la mesure principale de $(\\vec u\\,;\\,\\vec w)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Des vecteurs colinéaires de sens contraires donnent $(\\vec u\\,;\\,\\vec v)=\\pi$. Par Chasles : $(\\vec u\\,;\\,\\vec w)=\\pi+\\dfrac{\\pi}{3}=\\dfrac{4\\pi}{3}$. On retire $2\\pi$ pour revenir dans $]-\\pi\\,;\\,\\pi]$ : $-\\dfrac{2\\pi}{3}$.",
+                  "answers": [
+                    {
+                      "content": "$-\\dfrac{2\\pi}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{2\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{\\pi}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $(\\vec u\\,;\\,\\vec v)=\\dfrac{\\pi}{2}\\ [2\\pi]$ et $(\\vec v\\,;\\,\\vec w)=\\dfrac{\\pi}{2}\\ [2\\pi]$. Alors $\\vec u$ et $\\vec w$ sont colinéaires.",
+                  "question_type": "true_false",
+                  "explanation": "Par Chasles, $(\\vec u\\,;\\,\\vec w)=\\dfrac{\\pi}{2}+\\dfrac{\\pi}{2}=\\pi\\ [2\\pi]$ : deux quarts de tour font un demi-tour. Les vecteurs $\\vec u$ et $\\vec w$ sont donc colinéaires, de sens contraires. Les croire orthogonaux est une erreur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Cosinus, sinus et tangente d'un réel",
+          "subtitle": "Valeurs remarquables, relation fondamentale et angles associés",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Lire le cosinus et le sinus d'un angle sur le cercle trigonométrique.</li>\n<li>Utiliser $\\cos^2x+\\sin^2x=1$ et les valeurs remarquables.</li>\n<li>Ramener un cosinus, un sinus ou une tangente à un angle connu grâce aux angles associés.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>La valve de la roue de gbaka.</strong> Une roue tourne dans le sens direct. Son centre est le moyeu, et on prend le rayon de la roue comme unité de longueur. Au départ, la valve est à droite du moyeu, à « trois heures ». Quand la roue tourne d'un angle $x$, tu regardes la valve de côté. Sa position horizontale par rapport au moyeu te donne un nombre, et sa hauteur par rapport au moyeu en donne un autre. À « douze heures », la valve est tout en haut : sa position horizontale est nulle et sa hauteur vaut 1.</p>\n<p><em>Le pont.</em> Le moyeu est l'origine $O$, la valve est le point $M$ du cercle trigonométrique, et l'angle parcouru est $x$. La position horizontale de la valve est $\\cos x$ et sa hauteur est $\\sin x$. Comme le rayon vaut 1, la valve ne sort jamais de l'intervalle de $-1$ à $1$ : on a $-1\\le\\cos x\\le 1$ et $-1\\le\\sin x\\le 1$.</p>\n<p><em>Où l'image s'arrête.</em> Une position à gauche du moyeu ou une hauteur sous le moyeu se compte négativement : un cosinus ou un sinus peut être négatif. Et la hauteur se mesure par rapport au moyeu, pas par rapport au sol.</p>\n<p><strong>Le reflet de la valve.</strong> Imagine un miroir d'eau au niveau du moyeu : le reflet de la valve est à la même position horizontale, mais sa hauteur est opposée. Avec un mur vertical qui passe par le moyeu, le reflet a la même hauteur et une position horizontale opposée.</p>\n<p><em>Le pont.</em> Le reflet dans l'eau est le point associé à $-x$ : $\\cos(-x)=\\cos x$ et $\\sin(-x)=-\\sin x$. Le reflet dans le mur est le point associé à $\\pi-x$ : il a le même sinus et un cosinus opposé.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Définition.</strong> Soit $M$ le point du cercle trigonométrique tel que $(\\overrightarrow{OI}\\,;\\,\\overrightarrow{OM})=x\\ [2\\pi]$. Alors $M(\\cos x\\,;\\,\\sin x)$ : le cosinus de $x$ est l'abscisse de $M$, et le sinus de $x$ est son ordonnée.</p>\n<p><strong>Propriétés.</strong> Pour tout réel $x$ et tout entier $k$ : $-1\\le\\cos x\\le 1$, $-1\\le\\sin x\\le 1$, $\\cos(x+2k\\pi)=\\cos x$ et $\\sin(x+2k\\pi)=\\sin x$. De plus $\\cos^2x+\\sin^2x=1$ : c'est le théorème de Pythagore dans le triangle formé par $O$, $M$ et le pied de la hauteur de $M$, dont l'hypoténuse vaut 1.</p>\n<p><strong>Tangente.</strong> Si $\\cos x\\neq 0$, c'est-à-dire si $x\\neq\\dfrac{\\pi}{2}+k\\pi$, on pose $\\tan x=\\dfrac{\\sin x}{\\cos x}$.</p>\n<p><strong>Valeurs remarquables.</strong></p>\n<ul>\n<li>$x=0$ : $\\cos x=1$, $\\sin x=0$, $\\tan x=0$.</li>\n<li>$x=\\dfrac{\\pi}{6}$ : $\\cos x=\\dfrac{\\sqrt3}{2}$, $\\sin x=\\dfrac12$, $\\tan x=\\dfrac{\\sqrt3}{3}$.</li>\n<li>$x=\\dfrac{\\pi}{4}$ : $\\cos x=\\dfrac{\\sqrt2}{2}$, $\\sin x=\\dfrac{\\sqrt2}{2}$, $\\tan x=1$.</li>\n<li>$x=\\dfrac{\\pi}{3}$ : $\\cos x=\\dfrac12$, $\\sin x=\\dfrac{\\sqrt3}{2}$, $\\tan x=\\sqrt3$.</li>\n<li>$x=\\dfrac{\\pi}{2}$ : $\\cos x=0$, $\\sin x=1$, la tangente n'existe pas.</li>\n<li>$x=\\pi$ : $\\cos x=-1$, $\\sin x=0$, $\\tan x=0$.</li>\n</ul>\n<p><strong>Angles associés.</strong> Pour tout réel $x$ :</p>\n<ul>\n<li>$\\cos(-x)=\\cos x$ et $\\sin(-x)=-\\sin x$ ;</li>\n<li>$\\cos(\\pi-x)=-\\cos x$ et $\\sin(\\pi-x)=\\sin x$ ;</li>\n<li>$\\cos(\\pi+x)=-\\cos x$ et $\\sin(\\pi+x)=-\\sin x$ ;</li>\n<li>$\\cos\\left(\\dfrac{\\pi}{2}-x\\right)=\\sin x$ et $\\sin\\left(\\dfrac{\\pi}{2}-x\\right)=\\cos x$ ;</li>\n<li>$\\cos\\left(\\dfrac{\\pi}{2}+x\\right)=-\\sin x$ et $\\sin\\left(\\dfrac{\\pi}{2}+x\\right)=\\cos x$.</li>\n</ul>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Calculer $\\cos\\dfrac{2\\pi}{3}$, $\\sin\\left(-\\dfrac{5\\pi}{6}\\right)$ et $\\tan\\dfrac{3\\pi}{4}$. Puis : sachant que $\\cos x=\\dfrac35$ et que $x\\in\\,]-\\pi\\,;\\,0[$, calculer $\\sin x$.</strong></p>\n<ol>\n<li>$\\dfrac{2\\pi}{3}=\\pi-\\dfrac{\\pi}{3}$, donc $\\cos\\dfrac{2\\pi}{3}=-\\cos\\dfrac{\\pi}{3}=-\\dfrac12$.</li>\n<li>$\\sin\\left(-\\dfrac{5\\pi}{6}\\right)=-\\sin\\dfrac{5\\pi}{6}$, et $\\dfrac{5\\pi}{6}=\\pi-\\dfrac{\\pi}{6}$, donc $\\sin\\dfrac{5\\pi}{6}=\\sin\\dfrac{\\pi}{6}=\\dfrac12$. Ainsi $\\sin\\left(-\\dfrac{5\\pi}{6}\\right)=-\\dfrac12$.</li>\n<li>$\\dfrac{3\\pi}{4}=\\pi-\\dfrac{\\pi}{4}$ : $\\sin\\dfrac{3\\pi}{4}=\\dfrac{\\sqrt2}{2}$ et $\\cos\\dfrac{3\\pi}{4}=-\\dfrac{\\sqrt2}{2}$. Donc $\\tan\\dfrac{3\\pi}{4}=\\dfrac{\\sqrt2/2}{-\\sqrt2/2}=-1$.</li>\n<li>Pour la dernière question : $\\sin^2x=1-\\cos^2x=1-\\dfrac{9}{25}=\\dfrac{16}{25}$, donc $\\sin x=\\dfrac45$ ou $\\sin x=-\\dfrac45$.</li>\n<li>Comme $x\\in\\,]-\\pi\\,;\\,0[$, le point $M$ est sous l'axe horizontal : son ordonnée est négative. Donc $\\sin x=-\\dfrac45$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Oublier de choisir le signe. La relation $\\cos^2x+\\sin^2x=1$ donne deux valeurs possibles pour $\\sin x$, une positive et une négative : c'est la position de l'angle sur le cercle qui permet de trancher. Autre confusion : mélanger les formules des angles associés. Retiens que $\\cos(\\pi-x)=-\\cos x$ mais $\\sin(\\pi-x)=+\\sin x$.</p>\n<p>Comment le repérer : place l'angle sur le cercle. Si $M$ est à gauche, le cosinus est négatif ; s'il est en bas, le sinus est négatif.</p>\n<h2>En une phrase</h2>\n<p>Le cosinus est la position horizontale et le sinus la hauteur de la valve de la roue de rayon 1 après un angle $x$, et les angles associés se lisent comme des reflets de cette valve.</p>\n",
+          "exercises": [
+            {
+              "title": "Comprendre — Cosinus, sinus et tangente sur le cercle",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Sur le cercle trigonométrique, $M$ est le point associé au réel $x$. Que représente $\\cos x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le cosinus est l'abscisse de $M$ et le sinus son ordonnée. Pour la valve de la roue : le cosinus est la position horizontale, le sinus la hauteur. Ne les inverse pas.",
+                  "answers": [
+                    {
+                      "content": "L'abscisse de $M$",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ordonnée de $M$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La longueur de l'arc $IM$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le coefficient directeur de la droite $(OM)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Il existe un réel $x$ tel que $\\sin x=1{,}5$.",
+                  "question_type": "true_false",
+                  "explanation": "Le point $M$ est sur un cercle de rayon 1 : sa hauteur est comprise entre $-1$ et $1$. On a donc toujours $-1\\le\\sin x\\le 1$. La valve ne peut pas monter plus haut que le rayon de la roue.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle égalité est vraie pour tout réel $x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "C'est le théorème de Pythagore dans le triangle de côtés $\\cos x$ et $\\sin x$ et d'hypoténuse 1. La relation $\\cos x+\\sin x=1$ est fausse : par exemple, pour $x=\\dfrac{\\pi}{4}$, la somme vaut $\\sqrt2$.",
+                  "answers": [
+                    {
+                      "content": "$\\cos^2x+\\sin^2x=1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\cos x+\\sin x=1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\cos^2x-\\sin^2x=1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\cos x\\times\\sin x=1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelles valeurs de $x$ la tangente $\\tan x=\\dfrac{\\sin x}{\\cos x}$ est-elle définie ?",
+                  "question_type": "single_choice",
+                  "explanation": "On divise par $\\cos x$, qui doit être non nul. Le cosinus s'annule quand la valve est tout en haut ou tout en bas, c'est-à-dire pour $x=\\dfrac{\\pi}{2}+k\\pi$. Les multiples de $\\pi$ annulent le sinus, pas le cosinus.",
+                  "answers": [
+                    {
+                      "content": "Pour $x\\neq\\dfrac{\\pi}{2}+k\\pi$, avec $k$ entier relatif",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour $x\\neq k\\pi$, avec $k$ entier relatif",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour tout réel $x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour $x\\neq 2k\\pi$, avec $k$ entier relatif",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquelles de ces égalités sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Pour $\\dfrac{\\pi}{3}$ le cosinus vaut $\\dfrac12$ et le sinus $\\dfrac{\\sqrt3}{2}$ ; pour $\\dfrac{\\pi}{6}$ c'est l'inverse. Et $\\tan\\dfrac{\\pi}{4}=\\dfrac{\\sqrt2/2}{\\sqrt2/2}=1$. Les valeurs $\\dfrac12$ et $\\dfrac{\\sqrt3}{2}$ s'échangent quand on passe de $\\dfrac{\\pi}{6}$ à $\\dfrac{\\pi}{3}$.",
+                  "answers": [
+                    {
+                      "content": "$\\cos\\dfrac{\\pi}{3}=\\dfrac12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sin\\dfrac{\\pi}{6}=\\dfrac12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\cos\\dfrac{\\pi}{6}=\\dfrac12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sin\\dfrac{\\pi}{3}=\\dfrac12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\tan\\dfrac{\\pi}{4}=\\dfrac12$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tout réel $x$, $\\sin(-x)=-\\sin x$.",
+                  "question_type": "true_false",
+                  "explanation": "Le point associé à $-x$ est le reflet du point associé à $x$ dans l'eau, de l'autre côté de l'axe horizontal : même abscisse, ordonnée opposée. Donc $\\cos(-x)=\\cos x$ et $\\sin(-x)=-\\sin x$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Valeurs remarquables et angles associés",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Que vaut $\\cos\\dfrac{2\\pi}{3}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{2\\pi}{3}=\\pi-\\dfrac{\\pi}{3}$, donc $\\cos\\dfrac{2\\pi}{3}=-\\cos\\dfrac{\\pi}{3}=-\\dfrac12$. Le point est à gauche du moyeu : son abscisse est négative.",
+                  "answers": [
+                    {
+                      "content": "$-\\dfrac12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{\\sqrt3}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\sqrt3}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\sin\\left(-\\dfrac{5\\pi}{6}\\right)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sin\\left(-\\dfrac{5\\pi}{6}\\right)=-\\sin\\dfrac{5\\pi}{6}$ et $\\sin\\dfrac{5\\pi}{6}=\\sin\\left(\\pi-\\dfrac{\\pi}{6}\\right)=\\sin\\dfrac{\\pi}{6}=\\dfrac12$. On obtient $-\\dfrac12$ : le point est sous l'axe horizontal.",
+                  "answers": [
+                    {
+                      "content": "$-\\dfrac12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{\\sqrt3}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\sqrt3}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\tan\\dfrac{3\\pi}{4}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $\\sin\\dfrac{3\\pi}{4}=\\dfrac{\\sqrt2}{2}$ et $\\cos\\dfrac{3\\pi}{4}=-\\dfrac{\\sqrt2}{2}$. Le quotient vaut $-1$. Oublier le signe moins du cosinus donnerait $1$.",
+                  "answers": [
+                    {
+                      "content": "$-1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{\\sqrt3}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\sqrt3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $\\cos x=\\dfrac35$ et que $x\\in\\,]-\\pi\\,;\\,0[$. Que vaut $\\sin x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sin^2x=1-\\dfrac{9}{25}=\\dfrac{16}{25}$, donc $\\sin x=\\pm\\dfrac45$. Pour $x\\in\\,]-\\pi\\,;\\,0[$, le point est sous l'axe horizontal : le sinus est négatif, donc $-\\dfrac45$.",
+                  "answers": [
+                    {
+                      "content": "$-\\dfrac45$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac45$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac25$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac35$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquels de ces nombres sont égaux à $\\sin\\dfrac{\\pi}{6}=\\dfrac12$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\cos\\dfrac{\\pi}{3}=\\sin\\left(\\dfrac{\\pi}{2}-\\dfrac{\\pi}{3}\\right)=\\sin\\dfrac{\\pi}{6}$ et $\\sin\\dfrac{5\\pi}{6}=\\sin\\left(\\pi-\\dfrac{\\pi}{6}\\right)=\\dfrac12$. Les autres valent $-\\dfrac12$ : $\\cos\\dfrac{2\\pi}{3}$, $\\sin\\left(-\\dfrac{\\pi}{6}\\right)$ et $\\sin\\dfrac{7\\pi}{6}$.",
+                  "answers": [
+                    {
+                      "content": "$\\cos\\dfrac{\\pi}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sin\\dfrac{5\\pi}{6}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\cos\\dfrac{2\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sin\\left(-\\dfrac{\\pi}{6}\\right)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sin\\dfrac{7\\pi}{6}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tout réel $x$, que vaut $\\cos\\left(\\dfrac{\\pi}{2}-x\\right)+\\sin(\\pi-x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $\\cos\\left(\\dfrac{\\pi}{2}-x\\right)=\\sin x$ et $\\sin(\\pi-x)=\\sin x$. La somme vaut donc $2\\sin x$. Se tromper de signe sur $\\sin(\\pi-x)$ conduirait à $0$.",
+                  "answers": [
+                    {
+                      "content": "$2\\sin x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\cos x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sin x+\\cos x$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Calculs trigonométriques à plusieurs étapes",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "On sait que $\\sin x=\\dfrac13$ et que $x\\in\\left[\\dfrac{\\pi}{2}\\,;\\,\\pi\\right]$. Que vaut $\\cos x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\cos^2x=1-\\dfrac19=\\dfrac89$, donc $\\cos x=\\pm\\dfrac{2\\sqrt2}{3}$. Sur $\\left[\\dfrac{\\pi}{2}\\,;\\,\\pi\\right]$, le point est à gauche de l'axe vertical : le cosinus est négatif. D'où $-\\dfrac{2\\sqrt2}{3}$.",
+                  "answers": [
+                    {
+                      "content": "$-\\dfrac{2\\sqrt2}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{2\\sqrt2}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac23$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{\\sqrt2}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tout réel $x$, que vaut $\\cos(\\pi-x)+\\sin\\left(\\dfrac{\\pi}{2}+x\\right)+\\cos(-x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\cos(\\pi-x)=-\\cos x$, $\\sin\\left(\\dfrac{\\pi}{2}+x\\right)=\\cos x$ et $\\cos(-x)=\\cos x$. La somme vaut $-\\cos x+\\cos x+\\cos x=\\cos x$. Les trois termes ne sont pas égaux : celui en $\\pi-x$ est opposé aux deux autres.",
+                  "answers": [
+                    {
+                      "content": "$\\cos x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3\\cos x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\cos x+\\sin x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\cos\\dfrac{11\\pi}{6}+\\sin\\dfrac{2\\pi}{3}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{11\\pi}{6}=-\\dfrac{\\pi}{6}\\ [2\\pi]$, donc $\\cos\\dfrac{11\\pi}{6}=\\cos\\dfrac{\\pi}{6}=\\dfrac{\\sqrt3}{2}$. Et $\\sin\\dfrac{2\\pi}{3}=\\sin\\dfrac{\\pi}{3}=\\dfrac{\\sqrt3}{2}$. La somme vaut $\\sqrt3$.",
+                  "answers": [
+                    {
+                      "content": "$\\sqrt3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\sqrt3}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquels de ces nombres sont égaux à $-\\dfrac{\\sqrt2}{2}$ ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$\\cos\\dfrac{3\\pi}{4}=-\\cos\\dfrac{\\pi}{4}$, $\\sin\\left(-\\dfrac{\\pi}{4}\\right)=-\\sin\\dfrac{\\pi}{4}$ et $\\cos\\dfrac{5\\pi}{4}=-\\cos\\dfrac{\\pi}{4}$. En revanche $\\sin\\dfrac{3\\pi}{4}$ et $\\cos\\left(-\\dfrac{\\pi}{4}\\right)$ valent $\\dfrac{\\sqrt2}{2}$, et $\\tan\\dfrac{\\pi}{4}=1$.",
+                  "answers": [
+                    {
+                      "content": "$\\cos\\dfrac{3\\pi}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sin\\left(-\\dfrac{\\pi}{4}\\right)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\cos\\dfrac{5\\pi}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sin\\dfrac{3\\pi}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\cos\\left(-\\dfrac{\\pi}{4}\\right)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\tan\\dfrac{\\pi}{4}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tout réel $x$ tel que $\\tan x$ existe, $\\tan(\\pi-x)=-\\tan x$.",
+                  "question_type": "true_false",
+                  "explanation": "On a $\\sin(\\pi-x)=\\sin x$ et $\\cos(\\pi-x)=-\\cos x$. Le quotient est donc $\\dfrac{\\sin x}{-\\cos x}=-\\tan x$. Le reflet dans le mur conserve la hauteur et inverse la position horizontale.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $\\cos x=-\\dfrac12$ et que $\\sin x=\\dfrac{\\sqrt3}{2}$. Quelle est la mesure principale de $x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La valve est à gauche (cosinus négatif) et en haut (sinus positif). L'angle associé est $\\dfrac{\\pi}{3}$, d'où $x=\\pi-\\dfrac{\\pi}{3}=\\dfrac{2\\pi}{3}$. Le réel $\\dfrac{\\pi}{3}$ aurait un cosinus positif.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{2\\pi}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\dfrac{2\\pi}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{5\\pi}{6}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Formules d'addition, duplication et équations trigonométriques",
+          "subtitle": "À compléter : tangente de a+b, linéarisation de puissances, produits en sommes, inéquations avec sinus",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Utiliser les formules d'addition et de duplication pour calculer des cosinus et des sinus.</li>\n<li>Résoudre dans $\\mathbb{R}$ les équations $\\cos x=\\cos a$ et $\\sin x=\\sin a$.</li>\n<li>Donner les solutions d'une équation trigonométrique dans un intervalle donné.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>Le rond-point du centre de santé.</strong> Un gbaka entre sur un rond-point circulaire et prend une première sortie en tournant d'un angle $a$. Un peu plus loin, il tourne encore d'un angle $b$. En tout, il a tourné de $a+b$. Pour savoir où il se trouve à la fin, tu pars de sa position après le premier virage, puis tu corriges avec le second virage.</p>\n<p><em>Le pont.</em> La position du gbaka sur le cercle de rayon 1 est $(\\cos x\\,;\\,\\sin x)$. Les angles $a$ et $b$ s'additionnent, mais la nouvelle abscisse et la nouvelle hauteur se calculent en mélangeant les anciennes : c'est ce que disent les formules d'addition. Quand $b=a$, le gbaka a tourné deux fois du même angle : c'est la duplication.</p>\n<p><em>Où l'image s'arrête.</em> Ce sont les angles qui s'additionnent, pas leurs cosinus. Par exemple, $\\cos\\left(\\dfrac{\\pi}{3}+\\dfrac{\\pi}{3}\\right)=-\\dfrac12$, alors que $\\cos\\dfrac{\\pi}{3}+\\cos\\dfrac{\\pi}{3}=1$.</p>\n<p><strong>Les deux nacelles de la grande roue.</strong> Sur une grande roue de foire, deux nacelles sont à la même hauteur au même moment : l'une est en train de monter, l'autre de descendre. Elles sont symétriques par rapport à l'axe vertical qui passe par le centre. Et deux nacelles qui sont à la même position horizontale, l'une dans la partie haute et l'autre dans la partie basse, sont symétriques par rapport à l'axe horizontal.</p>\n<p><em>Le pont.</em> Chercher les $x$ tels que $\\sin x=\\sin a$, c'est chercher toutes les nacelles à la hauteur de la nacelle $a$ : il y en a deux, d'angles $a$ et $\\pi-a$, et on ajoute des tours complets. Chercher les $x$ tels que $\\cos x=\\cos a$, c'est chercher les nacelles à la même position horizontale : ce sont celles d'angles $a$ et $-a$.</p>\n<p><em>Où l'image s'arrête.</em> Quand la nacelle est tout en haut ou tout en bas, les deux positions se confondent : il n'y a qu'une seule famille de solutions. C'est le cas de $\\sin x=1$, qui donne $x=\\dfrac{\\pi}{2}+2k\\pi$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Formules d'addition.</strong> Pour tous réels $a$ et $b$ :</p>\n<ul>\n<li>$\\cos(a-b)=\\cos a\\cos b+\\sin a\\sin b$ et $\\cos(a+b)=\\cos a\\cos b-\\sin a\\sin b$ ;</li>\n<li>$\\sin(a+b)=\\sin a\\cos b+\\cos a\\sin b$ et $\\sin(a-b)=\\sin a\\cos b-\\cos a\\sin b$.</li>\n</ul>\n<p>On admet la première formule. Les autres s'en déduisent : en remplaçant $b$ par $-b$, on obtient $\\cos(a+b)$ car $\\cos(-b)=\\cos b$ et $\\sin(-b)=-\\sin b$ ; puis $\\sin(a+b)=\\cos\\left(\\dfrac{\\pi}{2}-a-b\\right)=\\cos\\left(\\left(\\dfrac{\\pi}{2}-a\\right)-b\\right)$ que l'on développe avec la première formule.</p>\n<p><strong>Formules de duplication.</strong> En prenant $b=a$ :</p>\n<ul>\n<li>$\\sin 2a=2\\sin a\\cos a$ ;</li>\n<li>$\\cos 2a=\\cos^2a-\\sin^2a=2\\cos^2a-1=1-2\\sin^2a$.</li>\n</ul>\n<p>On en déduit $\\cos^2a=\\dfrac{1+\\cos 2a}{2}$ et $\\sin^2a=\\dfrac{1-\\cos 2a}{2}$.</p>\n<p><strong>Équations.</strong> Pour tous réels $x$ et $a$, avec $k\\in\\mathbb{Z}$ :</p>\n<ul>\n<li>$\\cos x=\\cos a\\iff x=a+2k\\pi$ ou $x=-a+2k\\pi$ ;</li>\n<li>$\\sin x=\\sin a\\iff x=a+2k\\pi$ ou $x=\\pi-a+2k\\pi$.</li>\n</ul>\n<p>Pour avoir les solutions dans un intervalle donné, on donne à $k$ les valeurs entières qui placent $x$ dans cet intervalle.</p>\n<p><strong>Pour aller plus loin (plus difficile).</strong> Pour $(a\\,;\\,b)\\neq(0\\,;\\,0)$, on pose $r=\\sqrt{a^2+b^2}$ et on cherche un réel $\\varphi$ tel que $\\cos\\varphi=\\dfrac{a}{r}$ et $\\sin\\varphi=\\dfrac{b}{r}$. Alors $a\\cos x+b\\sin x=r\\cos(x-\\varphi)$, d'après la formule d'addition. L'équation $a\\cos x+b\\sin x=c$ se ramène donc à $\\cos(x-\\varphi)=\\dfrac{c}{r}$. Une inéquation comme $\\cos x\\ge\\cos a$ se lit sur le cercle : on garde les points dont l'abscisse est au moins égale à $\\cos a$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>1) Calculer $\\cos\\dfrac{5\\pi}{12}$. 2) Résoudre $2\\sin x+\\sqrt2=0$ dans $\\mathbb{R}$, puis dans $]-\\pi\\,;\\,\\pi]$. 3) Sachant que $\\cos a=\\dfrac45$ et que $a\\in\\left]0\\,;\\,\\dfrac{\\pi}{2}\\right[$, calculer $\\sin 2a$.</strong></p>\n<ol>\n<li>On écrit $\\dfrac{5\\pi}{12}=\\dfrac{\\pi}{4}+\\dfrac{\\pi}{6}$. Alors $\\cos\\dfrac{5\\pi}{12}=\\cos\\dfrac{\\pi}{4}\\cos\\dfrac{\\pi}{6}-\\sin\\dfrac{\\pi}{4}\\sin\\dfrac{\\pi}{6}=\\dfrac{\\sqrt2}{2}\\times\\dfrac{\\sqrt3}{2}-\\dfrac{\\sqrt2}{2}\\times\\dfrac12=\\dfrac{\\sqrt6-\\sqrt2}{4}$.</li>\n<li>L'équation s'écrit $\\sin x=-\\dfrac{\\sqrt2}{2}=\\sin\\left(-\\dfrac{\\pi}{4}\\right)$.</li>\n<li>Donc $x=-\\dfrac{\\pi}{4}+2k\\pi$ ou $x=\\pi-\\left(-\\dfrac{\\pi}{4}\\right)+2k\\pi=\\dfrac{5\\pi}{4}+2k\\pi$, avec $k\\in\\mathbb{Z}$.</li>\n<li>Dans $]-\\pi\\,;\\,\\pi]$ : la première famille donne $-\\dfrac{\\pi}{4}$ pour $k=0$. La seconde donne $\\dfrac{5\\pi}{4}-2\\pi=-\\dfrac{3\\pi}{4}$ pour $k=-1$. L'ensemble des solutions est $\\left\\{-\\dfrac{3\\pi}{4}\\,;\\,-\\dfrac{\\pi}{4}\\right\\}$.</li>\n<li>Pour $\\sin 2a$ : $\\sin^2a=1-\\dfrac{16}{25}=\\dfrac{9}{25}$, et $\\sin a>0$ car $a\\in\\left]0\\,;\\,\\dfrac{\\pi}{2}\\right[$, donc $\\sin a=\\dfrac35$. Alors $\\sin 2a=2\\times\\dfrac35\\times\\dfrac45=\\dfrac{24}{25}$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Écrire $\\cos(a+b)=\\cos a+\\cos b$ (ou $\\sin 2a=2\\sin a$). Les formules d'addition mélangent cosinus et sinus ; il n'existe aucune formule « simple » qui additionne les cosinus. Autre oubli fréquent : ne donner qu'une famille de solutions. Pour $\\sin x=\\sin a$, la seconde famille est $\\pi-a$ (et non $-a$, qui sert pour le cosinus), et il faut toujours écrire $+2k\\pi$.</p>\n<p>Comment le repérer : teste avec des valeurs connues. Pour $a=b=\\dfrac{\\pi}{3}$, la formule fausse donne $1$ alors que $\\cos\\dfrac{2\\pi}{3}=-\\dfrac12$. Pour les équations, vérifie tes solutions en remplaçant dans l'équation de départ.</p>\n<h2>En une phrase</h2>\n<p>Quand deux virages s'ajoutent, les angles s'additionnent mais les cosinus et sinus se mélangent selon les formules d'addition, et une équation $\\cos x=\\cos a$ ou $\\sin x=\\sin a$ a deux familles de solutions, celles des deux positions symétriques de la roue.</p>\n",
+          "exercises": [
+            {
+              "title": "Comprendre — Formules d'addition, duplication et équations",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Pour tous réels $a$ et $b$, quelle égalité est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "La formule d'addition pour le cosinus a un signe moins entre les deux produits. Le signe plus est celui de $\\cos(a-b)$, et l'expression $\\sin a\\cos b+\\cos a\\sin b$ est $\\sin(a+b)$. Les cosinus ne s'additionnent jamais simplement.",
+                  "answers": [
+                    {
+                      "content": "$\\cos(a+b)=\\cos a\\cos b-\\sin a\\sin b$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\cos(a+b)=\\cos a+\\cos b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\cos(a+b)=\\cos a\\cos b+\\sin a\\sin b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\cos(a+b)=\\sin a\\cos b+\\cos a\\sin b$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tous réels $a$ et $b$, on a $\\cos(a+b)=\\cos a+\\cos b$.",
+                  "question_type": "true_false",
+                  "explanation": "Avec $a=b=\\dfrac{\\pi}{3}$ : $\\cos\\dfrac{2\\pi}{3}=-\\dfrac12$ alors que $\\cos\\dfrac{\\pi}{3}+\\cos\\dfrac{\\pi}{3}=1$. Les angles s'additionnent, pas leurs cosinus : il faut la formule d'addition.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\sin 2a$ pour tout réel $a$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La formule d'addition avec $b=a$ donne $\\sin 2a=\\sin a\\cos a+\\cos a\\sin a=2\\sin a\\cos a$. Écrire $2\\sin a$ revient à oublier le cosinus.",
+                  "answers": [
+                    {
+                      "content": "$2\\sin a\\cos a$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2\\sin a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sin^2a-\\cos^2a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sin a+\\cos a$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les expressions égales à $\\cos 2a$ pour tout réel $a$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Avec $b=a$, on a $\\cos 2a=\\cos^2a-\\sin^2a$, et avec $\\sin^2a=1-\\cos^2a$ on trouve $2\\cos^2a-1$. La forme correcte avec le sinus est $1-2\\sin^2a$. L'expression $2\\sin a\\cos a$ est $\\sin 2a$.",
+                  "answers": [
+                    {
+                      "content": "$\\cos^2a-\\sin^2a$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2\\cos^2a-1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2\\sin a\\cos a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1+2\\sin^2a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\cos^2a+\\sin^2a$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $a$ un réel. Quelles sont les solutions de l'équation $\\cos x=\\cos a$ dans $\\mathbb{R}$ ? ($k$ désigne un entier relatif.)",
+                  "question_type": "single_choice",
+                  "explanation": "Deux points du cercle ont le même cosinus quand ils sont symétriques par rapport à l'axe horizontal : leurs angles sont $a$ et $-a$. La famille $\\pi-a$ est celle du sinus. Oublier $-a$ fait perdre la moitié des solutions.",
+                  "answers": [
+                    {
+                      "content": "$x=a+2k\\pi$ ou $x=-a+2k\\pi$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x=a+2k\\pi$ ou $x=\\pi-a+2k\\pi$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=a+2k\\pi$ uniquement",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=a+k\\pi$ uniquement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi l'équation $\\sin x=\\dfrac12$ a-t-elle deux familles de solutions, $\\dfrac{\\pi}{6}+2k\\pi$ et $\\dfrac{5\\pi}{6}+2k\\pi$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Deux points ont le même sinus quand ils sont symétriques par rapport à l'axe vertical : leurs angles sont $a$ et $\\pi-a$. Ici $\\pi-\\dfrac{\\pi}{6}=\\dfrac{5\\pi}{6}$. Le sinus de $\\dfrac{5\\pi}{6}$ est positif, et on a $\\sin(-x)=-\\sin x$.",
+                  "answers": [
+                    {
+                      "content": "Deux points du cercle trigonométrique ont le même sinus quand ils sont symétriques par rapport à l'axe vertical : leurs angles sont $a$ et $\\pi-a$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que le sinus est négatif pour la seconde famille",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que le sinus vaut aussi $-\\dfrac12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $\\sin x$ est toujours égal à $\\sin(-x)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer avec les formules et résoudre",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "En écrivant $\\dfrac{\\pi}{12}=\\dfrac{\\pi}{3}-\\dfrac{\\pi}{4}$, calcule $\\cos\\dfrac{\\pi}{12}$.",
+                  "question_type": "single_choice",
+                  "explanation": "$\\cos\\left(\\dfrac{\\pi}{3}-\\dfrac{\\pi}{4}\\right)=\\cos\\dfrac{\\pi}{3}\\cos\\dfrac{\\pi}{4}+\\sin\\dfrac{\\pi}{3}\\sin\\dfrac{\\pi}{4}=\\dfrac{\\sqrt2}{4}+\\dfrac{\\sqrt6}{4}$. Le signe est $+$ pour $\\cos(a-b)$ ; avec $-$ on trouverait un nombre négatif, qui n'est pas $\\cos\\dfrac{\\pi}{12}$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{\\sqrt6+\\sqrt2}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{\\sqrt6-\\sqrt2}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\sqrt3+\\sqrt2}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\sqrt6+\\sqrt2}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En écrivant $\\dfrac{\\pi}{12}=\\dfrac{\\pi}{3}-\\dfrac{\\pi}{4}$, calcule $\\sin\\dfrac{\\pi}{12}$.",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sin\\left(\\dfrac{\\pi}{3}-\\dfrac{\\pi}{4}\\right)=\\sin\\dfrac{\\pi}{3}\\cos\\dfrac{\\pi}{4}-\\cos\\dfrac{\\pi}{3}\\sin\\dfrac{\\pi}{4}=\\dfrac{\\sqrt6}{4}-\\dfrac{\\sqrt2}{4}$. Ce nombre est positif, car $\\dfrac{\\pi}{12}$ correspond à un point en haut à droite du cercle.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{\\sqrt6-\\sqrt2}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{\\sqrt6+\\sqrt2}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\sqrt2-\\sqrt6}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{\\sqrt3-\\sqrt2}{4}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $\\cos a=\\dfrac45$ et que $a\\in\\left]0\\,;\\,\\dfrac{\\pi}{2}\\right[$. Que vaut $\\sin 2a$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme $a\\in\\left]0\\,;\\,\\dfrac{\\pi}{2}\\right[$, $\\sin a=\\dfrac35$. Alors $\\sin 2a=2\\times\\dfrac35\\times\\dfrac45=\\dfrac{24}{25}$. La valeur $\\dfrac{12}{25}$ oublie le facteur 2, et $\\dfrac{7}{25}$ est $\\cos 2a$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{24}{25}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{8}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{12}{25}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{7}{25}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On sait que $\\cos a=\\dfrac14$. Que vaut $\\cos 2a$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\cos 2a=2\\cos^2a-1=2\\times\\dfrac{1}{16}-1=\\dfrac18-1=-\\dfrac78$. La valeur $\\dfrac18$ oublie le « $-1$ », et $\\dfrac12$ vient de $2\\cos a$.",
+                  "answers": [
+                    {
+                      "content": "$-\\dfrac78$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac18$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac78$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de $\\cos x=\\dfrac12$ dans $]-\\pi\\,;\\,\\pi]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\cos x=\\cos\\dfrac{\\pi}{3}$ donne $x=\\pm\\dfrac{\\pi}{3}+2k\\pi$. Dans $]-\\pi\\,;\\,\\pi]$ seul $k=0$ convient : $\\dfrac{\\pi}{3}$ et $-\\dfrac{\\pi}{3}$. Le réel $\\dfrac{2\\pi}{3}$ vient de la famille $\\pi-a$ du sinus, pas du cosinus : $\\cos\\dfrac{2\\pi}{3}=-\\dfrac12$.",
+                  "answers": [
+                    {
+                      "content": "$\\left\\{-\\dfrac{\\pi}{3}\\,;\\,\\dfrac{\\pi}{3}\\right\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\left\\{\\dfrac{\\pi}{3}\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left\\{\\dfrac{\\pi}{3}\\,;\\,\\dfrac{2\\pi}{3}\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left\\{-\\dfrac{\\pi}{6}\\,;\\,\\dfrac{\\pi}{6}\\right\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de $\\sin x=\\dfrac{\\sqrt3}{2}$ dans $[0\\,;\\,2\\pi[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sin x=\\sin\\dfrac{\\pi}{3}$ donne $x=\\dfrac{\\pi}{3}+2k\\pi$ ou $x=\\pi-\\dfrac{\\pi}{3}+2k\\pi=\\dfrac{2\\pi}{3}+2k\\pi$. Dans $[0\\,;\\,2\\pi[$ : $\\dfrac{\\pi}{3}$ et $\\dfrac{2\\pi}{3}$. L'autre famille $-\\dfrac{\\pi}{3}$ est celle du cosinus.",
+                  "answers": [
+                    {
+                      "content": "$\\left\\{\\dfrac{\\pi}{3}\\,;\\,\\dfrac{2\\pi}{3}\\right\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\left\\{\\dfrac{\\pi}{3}\\,;\\,\\dfrac{5\\pi}{3}\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left\\{\\dfrac{\\pi}{6}\\,;\\,\\dfrac{5\\pi}{6}\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left\\{\\dfrac{\\pi}{3}\\,;\\,\\dfrac{4\\pi}{3}\\right\\}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Équations, duplication et approfondissements",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Quel est l'ensemble des solutions de $2\\sin x+\\sqrt2=0$ dans $]-\\pi\\,;\\,\\pi]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sin x=-\\dfrac{\\sqrt2}{2}=\\sin\\left(-\\dfrac{\\pi}{4}\\right)$, donc $x=-\\dfrac{\\pi}{4}+2k\\pi$ ou $x=\\dfrac{5\\pi}{4}+2k\\pi$. Dans $]-\\pi\\,;\\,\\pi]$ : $-\\dfrac{\\pi}{4}$ et $\\dfrac{5\\pi}{4}-2\\pi=-\\dfrac{3\\pi}{4}$. Le réel $\\dfrac{5\\pi}{4}$ est hors de l'intervalle.",
+                  "answers": [
+                    {
+                      "content": "$\\left\\{-\\dfrac{3\\pi}{4}\\,;\\,-\\dfrac{\\pi}{4}\\right\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\left\\{-\\dfrac{\\pi}{4}\\,;\\,\\dfrac{5\\pi}{4}\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left\\{\\dfrac{\\pi}{4}\\,;\\,\\dfrac{3\\pi}{4}\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left\\{-\\dfrac{\\pi}{4}\\,;\\,\\dfrac{3\\pi}{4}\\right\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de $\\cos 2x=\\dfrac12$ dans $[0\\,;\\,\\pi]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\cos 2x=\\cos\\dfrac{\\pi}{3}$ donne $2x=\\pm\\dfrac{\\pi}{3}+2k\\pi$, donc $x=\\pm\\dfrac{\\pi}{6}+k\\pi$. Dans $[0\\,;\\,\\pi]$ : $\\dfrac{\\pi}{6}$ (avec $k=0$) et $-\\dfrac{\\pi}{6}+\\pi=\\dfrac{5\\pi}{6}$. Oublier de diviser le $2k\\pi$ par 2 est l'erreur classique.",
+                  "answers": [
+                    {
+                      "content": "$\\left\\{\\dfrac{\\pi}{6}\\,;\\,\\dfrac{5\\pi}{6}\\right\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\left\\{\\dfrac{\\pi}{3}\\,;\\,\\dfrac{2\\pi}{3}\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left\\{\\dfrac{\\pi}{6}\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left\\{\\dfrac{\\pi}{6}\\,;\\,\\dfrac{7\\pi}{6}\\right\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de $\\sin 2x=\\sin x$ dans $]-\\pi\\,;\\,\\pi]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sin 2x=\\sin x$ équivaut à $\\sin x\\,(2\\cos x-1)=0$. Soit $\\sin x=0$ : $x=0$ ou $x=\\pi$. Soit $\\cos x=\\dfrac12$ : $x=\\pm\\dfrac{\\pi}{3}$. Simplifier par $\\sin x$ ferait perdre $0$ et $\\pi$.",
+                  "answers": [
+                    {
+                      "content": "$\\left\\{-\\dfrac{\\pi}{3}\\,;\\,0\\,;\\,\\dfrac{\\pi}{3}\\,;\\,\\pi\\right\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\left\\{0\\,;\\,\\pi\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left\\{0\\,;\\,\\dfrac{\\pi}{3}\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left\\{-\\dfrac{\\pi}{3}\\,;\\,\\dfrac{\\pi}{3}\\right\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On a $\\cos^2\\dfrac{\\pi}{8}=\\dfrac{2+\\sqrt2}{4}$.",
+                  "question_type": "true_false",
+                  "explanation": "On utilise $\\cos^2a=\\dfrac{1+\\cos 2a}{2}$ avec $a=\\dfrac{\\pi}{8}$ : $\\cos^2\\dfrac{\\pi}{8}=\\dfrac{1+\\frac{\\sqrt2}{2}}{2}=\\dfrac{2+\\sqrt2}{4}$. On retrouve le résultat sans connaître $\\cos\\dfrac{\\pi}{8}$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Plus difficile : Quel est l'ensemble des solutions de $\\cos x+\\sqrt3\\sin x=1$ dans $[0\\,;\\,2\\pi[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Ici $r=\\sqrt{1+3}=2$ et $\\varphi=\\dfrac{\\pi}{3}$ : $\\cos x+\\sqrt3\\sin x=2\\cos\\left(x-\\dfrac{\\pi}{3}\\right)$. On résout $\\cos\\left(x-\\dfrac{\\pi}{3}\\right)=\\dfrac12$, d'où $x-\\dfrac{\\pi}{3}=\\pm\\dfrac{\\pi}{3}+2k\\pi$, soit $x=0$ ou $x=\\dfrac{2\\pi}{3}$.",
+                  "answers": [
+                    {
+                      "content": "$\\left\\{0\\,;\\,\\dfrac{2\\pi}{3}\\right\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\left\\{\\dfrac{\\pi}{3}\\,;\\,\\dfrac{5\\pi}{3}\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left\\{\\dfrac{2\\pi}{3}\\,;\\,\\dfrac{4\\pi}{3}\\right\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left\\{\\dfrac{\\pi}{3}\\right\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Plus difficile : Quel est l'ensemble des solutions de l'inéquation $\\cos x\\ge\\dfrac12$ dans $]-\\pi\\,;\\,\\pi]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On garde les points du cercle dont l'abscisse est au moins égale à $\\dfrac12$ : ceux de l'arc qui entoure le point $I$, de $-\\dfrac{\\pi}{3}$ à $\\dfrac{\\pi}{3}$. L'ensemble qui contient $\\pi$ correspond à $\\cos x\\le\\dfrac12$, c'est-à-dire à l'inégalité contraire.",
+                  "answers": [
+                    {
+                      "content": "$\\left[-\\dfrac{\\pi}{3}\\,;\\,\\dfrac{\\pi}{3}\\right]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\left[0\\,;\\,\\dfrac{\\pi}{3}\\right]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left[\\dfrac{\\pi}{3}\\,;\\,\\pi\\right]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left]-\\pi\\,;\\,-\\dfrac{\\pi}{3}\\right]\\cup\\left[\\dfrac{\\pi}{3}\\,;\\,\\pi\\right]$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

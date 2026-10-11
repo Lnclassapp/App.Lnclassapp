@@ -1,0 +1,1632 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Étude d'un dipôle passif : cas d'un résistor",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Physique-Chimie",
+      "series_name": "A1",
+      "essentials": [
+        {
+          "name": "Le dipôle passif et sa caractéristique",
+          "subtitle": "Reconnaître un résistor sur une courbe intensité-tension",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Expliquer ce qu'est un dipôle passif.</li><li>Lire une caractéristique intensité-tension.</li><li>Reconnaître un résistor à sa caractéristique.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le tuyau derrière le maquis.</strong> Un tuyau relie le château d'eau du quartier au robinet de la cour. Pour savoir comment il se comporte, le gérant ouvre la vanne un peu, puis un peu plus, puis encore plus. À chaque fois, il note la poussée de l'eau et la quantité d'eau qui sort chaque seconde. Sans poussée, rien ne coule. Le tuyau ne fabrique pas de poussée lui-même : elle vient de la hauteur du château d'eau ou d'une pompe.</p><p><strong>Le pont.</strong> La poussée de l'eau, c'est la <strong>tension</strong> $U$. La quantité d'eau par seconde, c'est l'<strong>intensité</strong> $I$ du courant. Le tuyau seul est un <strong>dipôle passif</strong> ; la pompe, qui fournit elle-même la poussée, n'est pas un dipôle passif. La liste des notes du gérant (poussée, débit), c'est la <strong>caractéristique</strong>.</p><p><strong>La limite de l'image.</strong> Dans un tuyau, l'eau peut s'écouler dehors. Dans un circuit électrique, le courant ne se perd pas : c'est le même à l'entrée et à la sortie du dipôle.</p><h2>Ce qu'il faut retenir</h2><p>Un <em>dipôle</em> est un composant électrique qui possède deux bornes. L'<em>intensité</em> $I$ se mesure en ampères (A) avec un ampèremètre monté en série. La <em>tension</em> $U$ entre les deux bornes se mesure en volts (V) avec un voltmètre monté en dérivation, c'est-à-dire branché directement sur les deux bornes.</p><blockquote><p><strong>Caractéristique</strong> d'un dipôle : courbe qui représente la tension $U$ en fonction de l'intensité $I$. On la trace à partir de plusieurs mesures du couple $(I\\ ;\\ U)$.</p><p><strong>Dipôle passif</strong> : dipôle qui ne produit pas d'énergie électrique. Quand $I = 0$, on a $U = 0$ : sa caractéristique passe par l'origine du repère.</p><p><strong>Dipôle non passif</strong> : dipôle qui garde une tension non nulle même quand $I = 0$. Sa caractéristique ne passe pas par l'origine.</p><p><strong>Résistor</strong> : dipôle passif dont la caractéristique est une <strong>droite passant par l'origine</strong>.</p></blockquote><p>Une lampe à filament est aussi un dipôle passif, mais sa caractéristique est une courbe : ce n'est pas un résistor.</p><h2>Exemple résolu</h2><p>Un élève mesure les couples $(I\\ ;\\ U)$ d'un dipôle : $(0\\ ;\\ 0)$, $(0{,}05\\ \\text{A}\\ ;\\ 1{,}0\\ \\text{V})$, $(0{,}10\\ \\text{A}\\ ;\\ 2{,}0\\ \\text{V})$, $(0{,}15\\ \\text{A}\\ ;\\ 3{,}0\\ \\text{V})$ et $(0{,}20\\ \\text{A}\\ ;\\ 4{,}0\\ \\text{V})$. Est-ce un résistor ?</p><ol><li><strong>Passage par l'origine.</strong> Quand $I = 0$, on a $U = 0$ : le dipôle est passif.</li><li><strong>Alignement.</strong> On calcule $U / I$ pour chaque point : $\\dfrac{1{,}0}{0{,}05} = 20$, $\\dfrac{2{,}0}{0{,}10} = 20$, $\\dfrac{3{,}0}{0{,}15} = 20$ et $\\dfrac{4{,}0}{0{,}20} = 20$. Le rapport est le même : les points sont sur une droite passant par l'origine.</li><li><strong>Conclusion.</strong> C'est un résistor.</li></ol><h2>Le piège à éviter</h2><p>Croire qu'une droite suffit pour dire « résistor ». Il faut aussi que la droite passe par l'origine. Si la tension n'est pas nulle quand $I = 0$, le dipôle n'est pas passif, même si les points sont alignés.</p><p>Pour repérer l'erreur, regarde toujours d'abord le point $I = 0$.</p><h2>En une phrase</h2><p>Un résistor est un dipôle passif dont la caractéristique est une droite qui passe par l'origine.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Dipôle, caractéristique et résistor",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un dipôle est un composant électrique qui possède deux bornes.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. « Di » veut dire deux : un dipôle a deux bornes, comme le tuyau de l'image a une entrée et une sortie. Un résistor ou une lampe sont des dipôles.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour mesurer l'intensité du courant qui traverse un dipôle, comment branche-t-on l'ampèremètre ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'ampèremètre se monte en série : le courant doit le traverser, comme l'eau doit passer par le compteur placé sur le tuyau. Le voltmètre, lui, se branche en dérivation sur les bornes. Brancher l'ampèremètre aux bornes du dipôle est une erreur fréquente.",
+                  "answers": [
+                    {
+                      "content": "En série avec le dipôle, dans la même branche",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il suffit de le poser à côté du dipôle, sans le brancher",
+                      "correct": false
+                    },
+                    {
+                      "content": "En dérivation, directement sur les deux bornes du dipôle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tuyau relie un château d'eau à un robinet. Dans cette image, la quantité d'eau qui sort du robinet chaque seconde représente quelle grandeur électrique ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le débit d'eau correspond à l'intensité du courant. La poussée de l'eau correspond à la tension. Il ne faut pas les échanger : on peut avoir une grande poussée avec un petit débit si le tuyau est très étroit.",
+                  "answers": [
+                    {
+                      "content": "L'intensité $I$ du courant",
+                      "correct": true
+                    },
+                    {
+                      "content": "La caractéristique du dipôle",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tension $U$ aux bornes du dipôle",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre de bornes du dipôle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces propositions, lesquelles décrivent un dipôle passif ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Un dipôle passif ne produit pas d'énergie électrique et sa caractéristique passe par l'origine : sans courant, pas de tension. Il n'est pas obligé d'avoir une caractéristique en droite : une lampe à filament est passive avec une courbe.",
+                  "answers": [
+                    {
+                      "content": "Sa caractéristique est toujours une droite",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sa caractéristique passe par l'origine du repère",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il ne produit pas d'énergie électrique par lui-même",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il garde une tension non nulle même quand $I = 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qu'appelle-t-on la caractéristique d'un dipôle ?",
+                  "question_type": "single_choice",
+                  "explanation": "La caractéristique est la courbe construite avec les mesures de tension et d'intensité, comme les notes du gérant qui relève poussée et débit. Ce n'est ni un schéma de circuit ni une unité.",
+                  "answers": [
+                    {
+                      "content": "Le schéma du circuit dans lequel il est branché",
+                      "correct": false
+                    },
+                    {
+                      "content": "La liste des appareils de mesure utilisés",
+                      "correct": false
+                    },
+                    {
+                      "content": "La courbe qui représente la tension à ses bornes en fonction de l'intensité du courant",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'unité dans laquelle on mesure son intensité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand l'intensité du courant dans un résistor est nulle, la tension à ses bornes est nulle.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Un résistor est un dipôle passif : sans courant, il n'y a pas de tension. La droite passe par l'origine. Comme un tuyau sans pompe : pas de poussée, pas de débit.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Reconnaître un résistor sur un relevé",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On mesure pour un dipôle : $(0\\ ;\\ 0)$, $(0{,}10\\ \\text{A}\\ ;\\ 3{,}0\\ \\text{V})$, $(0{,}20\\ \\text{A}\\ ;\\ 6{,}0\\ \\text{V})$ et $(0{,}30\\ \\text{A}\\ ;\\ 9{,}0\\ \\text{V})$. De quel dipôle s'agit-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le rapport $U / I$ vaut $30$ pour les trois mesures, et le point $(0\\ ;\\ 0)$ est sur la droite : c'est un résistor.",
+                  "answers": [
+                    {
+                      "content": "Un résistor, car les points sont alignés avec l'origine",
+                      "correct": true
+                    },
+                    {
+                      "content": "On ne peut rien dire avec seulement quatre points",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un dipôle qui n'est pas passif, car la tension augmente",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On mesure pour un dipôle : $I = 0$ pour $U = 4{,}5\\ \\text{V}$, puis $I = 0{,}10\\ \\text{A}$ pour $U = 5{,}5\\ \\text{V}$. Peut-on dire que c'est un dipôle passif ?",
+                  "question_type": "single_choice",
+                  "explanation": "À $I = 0$, la tension est $4{,}5\\ \\text{V}$ et non $0$ : la caractéristique ne passe pas par l'origine, donc le dipôle n'est pas passif. Que les points soient alignés ou non ne change rien à ce constat.",
+                  "answers": [
+                    {
+                      "content": "Non : la tension n'est pas nulle quand $I = 0$, la caractéristique ne passe pas par l'origine",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : la tension augmente avec l'intensité, c'est un résistor",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : tout dipôle dont les points sont alignés est passif",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La caractéristique d'un résistor est une droite passant par l'origine et par le point $(0{,}20\\ \\text{A}\\ ;\\ 5{,}0\\ \\text{V})$. Quelle est la tension pour $I = 0{,}10\\ \\text{A}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La droite passe par l'origine : si l'intensité est divisée par 2, la tension l'est aussi. On obtient $5{,}0 / 2 = 2{,}5\\ \\text{V}$. Garder $5{,}0\\ \\text{V}$ serait oublier que la tension suit l'intensité.",
+                  "answers": [
+                    {
+                      "content": "$10\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}10\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2{,}5\\ \\text{V}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5{,}0\\ \\text{V}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor a pour point de sa caractéristique $(0{,}10\\ \\text{A}\\ ;\\ 4{,}0\\ \\text{V})$. Quels autres points $(I\\ ;\\ U)$ appartiennent aussi à sa caractéristique ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "La droite passe par l'origine : $U / I = 40$ pour tous les points. $(0{,}05\\ ;\\ 2{,}0)$ et $(0{,}20\\ ;\\ 8{,}0)$ vérifient $U / I = 40$. $(0{,}20\\ ;\\ 4{,}0)$ donnerait $20$ et $(0\\ ;\\ 4{,}0)$ n'est pas sur la droite.",
+                  "answers": [
+                    {
+                      "content": "$(0{,}05\\ \\text{A}\\ ;\\ 4{,}0\\ \\text{V})$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(0{,}20\\ \\text{A}\\ ;\\ 4{,}0\\ \\text{V})$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(0\\ ;\\ 4{,}0\\ \\text{V})$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(0{,}05\\ \\text{A}\\ ;\\ 2{,}0\\ \\text{V})$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(0{,}20\\ \\text{A}\\ ;\\ 8{,}0\\ \\text{V})$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un dipôle passif dont la caractéristique est une courbe (qui n'est pas une droite) et qui passe par l'origine n'est pas un résistor.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Un résistor exige une droite passant par l'origine. Une lampe à filament est passive mais sa caractéristique est une courbe : ce n'est pas un résistor.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Analyser des mesures",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un élève mesure un résistor : $(0{,}05\\ \\text{A}\\ ;\\ 1{,}0\\ \\text{V})$, $(0{,}10\\ \\text{A}\\ ;\\ 2{,}0\\ \\text{V})$, $(0{,}15\\ \\text{A}\\ ;\\ 3{,}5\\ \\text{V})$ et $(0{,}20\\ \\text{A}\\ ;\\ 4{,}0\\ \\text{V})$. Une seule mesure est fausse. Laquelle ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour un résistor, $U / I$ est constant. Les autres points donnent $20$. Pour $0{,}15\\ \\text{A}$, on attend $3{,}0\\ \\text{V}$ et non $3{,}5\\ \\text{V}$ ($3{,}5 / 0{,}15 \\approx 23{,}3$). Ce point sort de la droite.",
+                  "answers": [
+                    {
+                      "content": "$(0{,}10\\ \\text{A}\\ ;\\ 2{,}0\\ \\text{V})$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(0{,}05\\ \\text{A}\\ ;\\ 1{,}0\\ \\text{V})$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(0{,}20\\ \\text{A}\\ ;\\ 4{,}0\\ \\text{V})$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(0{,}15\\ \\text{A}\\ ;\\ 3{,}5\\ \\text{V})$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un dipôle donne les mesures $(0\\ ;\\ 0)$, $(0{,}1\\ \\text{A}\\ ;\\ 5\\ \\text{V})$, $(0{,}2\\ \\text{A}\\ ;\\ 10\\ \\text{V})$ et $(0{,}4\\ \\text{A}\\ ;\\ 20\\ \\text{V})$. Quelles propositions sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Les points sont sur une droite passant par l'origine : c'est un résistor. $U / I = 50$ pour chaque point, et doubler $I$ double $U$. Il est bien passif : à $I = 0$, la tension est nulle. La tension varie bien avec l'intensité.",
+                  "answers": [
+                    {
+                      "content": "La tension est la même pour toutes les intensités",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quand l'intensité double, la tension double",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ce n'est pas un dipôle passif",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un résistor",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa caractéristique ne passe pas par l'origine",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le rapport $U / I$ vaut $50$ pour chaque mesure",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Au maquis, un électricien mesure un composant inconnu. À $I = 0$, $U = 0$. Puis $I = 0{,}10\\ \\text{A}$ pour $U = 2{,}0\\ \\text{V}$, $I = 0{,}20\\ \\text{A}$ pour $U = 3{,}0\\ \\text{V}$ et $I = 0{,}30\\ \\text{A}$ pour $U = 3{,}5\\ \\text{V}$. Que conclut-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "La caractéristique passe par l'origine : le dipôle est passif. Mais $U / I$ vaut $20$, puis $15$, puis environ $11{,}7$ : il n'est pas constant, les points ne sont pas alignés. Ce n'est donc pas un résistor.",
+                  "answers": [
+                    {
+                      "content": "C'est un résistor, car la tension augmente avec l'intensité",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ce n'est pas un dipôle passif, car la tension n'est pas proportionnelle à l'intensité",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est un dipôle passif, mais pas un résistor",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les mesures sont forcément fausses",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On veut tracer la caractéristique d'un résistor. Quels branchements faut-il réaliser ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "L'ampèremètre mesure le courant qui traverse le résistor : il se monte en série. Le voltmètre mesure la tension entre les bornes : il se monte en dérivation. Les inverser fausse les mesures et peut perturber le circuit.",
+                  "answers": [
+                    {
+                      "content": "Un ampèremètre en série avec le résistor",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un voltmètre en série avec le résistor",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un voltmètre en dérivation aux bornes du résistor",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un ampèremètre en dérivation aux bornes du résistor",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les mesures $(0\\ ;\\ 1{,}5\\ \\text{V})$, $(0{,}1\\ \\text{A}\\ ;\\ 2{,}5\\ \\text{V})$ et $(0{,}2\\ \\text{A}\\ ;\\ 3{,}5\\ \\text{V})$ sont alignées : c'est donc la caractéristique d'un résistor.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Les points sont alignés, mais la droite ne passe pas par l'origine : à $I = 0$, la tension vaut $1{,}5\\ \\text{V}$. Le dipôle n'est pas passif, donc ce n'est pas un résistor. Il faut toujours vérifier le point $I = 0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor a pour point de sa caractéristique $(0{,}25\\ \\text{A}\\ ;\\ 5{,}0\\ \\text{V})$. Quelle intensité le traverse quand la tension à ses bornes vaut $2{,}0\\ \\text{V}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La tension est multipliée par $2 / 5$, donc l'intensité aussi : $0{,}25 \\times 2 / 5 = 0{,}10\\ \\text{A}$. Inverser le rapport ($5 / 2$) donnerait $0{,}625\\ \\text{A}$ : l'intensité diminue quand la tension diminue.",
+                  "answers": [
+                    {
+                      "content": "$0{,}625\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}10\\ \\text{A}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}05\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2{,}0\\ \\text{A}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La loi d'Ohm",
+          "subtitle": "Relier la tension, l'intensité et la résistance d'un résistor",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Écrire et utiliser la loi d'Ohm $U = R \\times I$.</li><li>Calculer une tension, une intensité ou une résistance.</li><li>Convertir les kilo-ohms et les milliampères avant de calculer.</li></ul><h2>L'image pour comprendre</h2><p><strong>Deux tuyaux, une même poussée.</strong> Le soir, derrière le maquis, deux tuyaux sont branchés sur le même château d'eau. L'un est large, l'autre est étroit. La poussée de l'eau est la même, mais le tuyau étroit laisse passer beaucoup moins d'eau par seconde. Si le gérant double la poussée, l'eau coule deux fois plus vite dans chaque tuyau.</p><p><strong>Le pont.</strong> La poussée, c'est la tension $U$. L'eau qui passe chaque seconde, c'est l'intensité $I$. L'étroitesse du tuyau, c'est la <strong>résistance</strong> $R$ : plus elle est grande, moins le courant passe pour une même tension.</p><p><strong>La limite de l'image.</strong> Dans un vrai tuyau, le débit n'est pas toujours proportionnel à la poussée. Pour un résistor, la proportionnalité est exacte dans les conditions habituelles d'usage.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Loi d'Ohm</strong> : aux bornes d'un résistor de résistance $R$ traversé par un courant d'intensité $I$, la tension est $U = R \\times I$.</p><p>On en tire $I = \\dfrac{U}{R}$ et $R = \\dfrac{U}{I}$.</p><p>$U$ s'exprime en volts (V), $I$ en ampères (A) et $R$ en <strong>ohms</strong> ($\\Omega$).</p></blockquote><p>La résistance $R$ est le <em>coefficient directeur</em> (la pente) de la droite $U = f(I)$. Elle ne dépend ni de $U$ ni de $I$ : c'est une propriété du résistor. Pour les unités : $1\\ \\text{k}\\Omega = 1000\\ \\Omega$ et $1\\ \\text{mA} = 0{,}001\\ \\text{A}$.</p><h2>Exemple résolu</h2><p>Un résistor a pour résistance $R = 150\\ \\Omega$.</p><ol><li><strong>Intensité sous $6{,}0\\ \\text{V}$.</strong> On cherche $I$ : $I = \\dfrac{U}{R} = \\dfrac{6{,}0}{150} = 0{,}040\\ \\text{A}$, soit $40\\ \\text{mA}$.</li><li><strong>Tension pour $I = 0{,}10\\ \\text{A}$.</strong> On cherche $U$ : $U = R \\times I = 150 \\times 0{,}10 = 15\\ \\text{V}$.</li><li><strong>Résistance d'un autre résistor</strong> qui reçoit $9{,}0\\ \\text{V}$ et laisse passer $0{,}030\\ \\text{A}$. On cherche $R$ : $R = \\dfrac{U}{I} = \\dfrac{9{,}0}{0{,}030} = 300\\ \\Omega$.</li></ol><h2>Le piège à éviter</h2><p>Oublier de convertir. Avec $R = 2\\ \\text{k}\\Omega$ et $U = 10\\ \\text{V}$, il faut écrire $R = 2000\\ \\Omega$ : on trouve $I = \\dfrac{10}{2000} = 0{,}0050\\ \\text{A} = 5{,}0\\ \\text{mA}$. Écrire $10 / 2 = 5\\ \\text{A}$ donne une intensité 1000 fois trop grande.</p><p>Pour repérer l'erreur, convertis tout en V, A et $\\Omega$ avant de calculer.</p><h2>En une phrase</h2><p>Pour un résistor, $U = R \\times I$ : à tension fixée, plus la résistance est grande, plus l'intensité est petite.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Sens de la loi d'Ohm",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle est la loi d'Ohm pour un résistor ?",
+                  "question_type": "single_choice",
+                  "explanation": "La loi d'Ohm s'écrit $U = R \\times I$ : la tension est proportionnelle à l'intensité, avec la résistance comme coefficient. Les autres écritures inversent des grandeurs : par exemple $U = R / I$ ferait diminuer la tension quand l'intensité augmente.",
+                  "answers": [
+                    {
+                      "content": "$I = R \\times U$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$U = R \\times I$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$U = \\dfrac{R}{I}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$R = I \\times U$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans quelle unité mesure-t-on la résistance d'un résistor ?",
+                  "question_type": "single_choice",
+                  "explanation": "La résistance se mesure en ohms, notés $\\Omega$. Le volt est l'unité de la tension et l'ampère celle de l'intensité : ce sont les deux autres grandeurs de la loi d'Ohm.",
+                  "answers": [
+                    {
+                      "content": "L'ohm ($\\Omega$)",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ampère (A)",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le volt (V)",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si on double la tension aux bornes d'un résistor, l'intensité qui le traverse double aussi.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $I = U / R$ avec $R$ constante : $I$ est proportionnelle à $U$. C'est comme le tuyau de l'image : deux fois plus de poussée, deux fois plus d'eau par seconde.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux tuyaux sont branchés sur le même château d'eau : l'un est large, l'autre est étroit. Dans l'image, que représente l'étroitesse du tuyau ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'étroitesse du tuyau s'oppose au passage de l'eau, comme la résistance s'oppose au passage du courant. La poussée de l'eau, elle, représente la tension. Le débit représente l'intensité.",
+                  "answers": [
+                    {
+                      "content": "La caractéristique du résistor",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tension aux bornes du résistor",
+                      "correct": false
+                    },
+                    {
+                      "content": "La résistance du résistor",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'intensité du courant",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors sont soumis à la même tension. L'un a une résistance plus grande que l'autre. Quelles propositions sont vraies pour celui qui a la plus grande résistance ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Avec $I = U / R$, pour $U$ fixée, $R$ plus grande donne $I$ plus petite : le résistor s'oppose davantage au passage du courant. C'est le tuyau étroit. La tension, elle, est la même pour les deux résistors.",
+                  "answers": [
+                    {
+                      "content": "Il s'oppose davantage au passage du courant",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est traversé par une intensité plus petite",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est traversé par une intensité plus grande",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tension à ses bornes est forcément nulle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La résistance d'un résistor change chaque fois qu'on augmente la tension à ses bornes, car on a $U = R \\times I$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. La résistance est une propriété du résistor : elle reste constante. Quand on augmente $U$, c'est l'intensité $I$ qui augmente. Sur la caractéristique, $R$ est la pente de la droite, qui ne change pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer une tension, une intensité ou une résistance",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un résistor de $100\\ \\Omega$ est soumis à une tension de $12\\ \\text{V}$. Quelle est l'intensité du courant qui le traverse ?",
+                  "question_type": "single_choice",
+                  "explanation": "$I = U / R = 12 / 100 = 0{,}12\\ \\text{A}$. Calculer $R / U$ donnerait environ $8{,}3\\ \\text{A}$ : on a inversé la division. L'intensité est petite, car la résistance est grande par rapport à la tension.",
+                  "answers": [
+                    {
+                      "content": "$8{,}3\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1200\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}12\\ \\text{A}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}012\\ \\text{A}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $47\\ \\Omega$ est traversé par un courant de $0{,}20\\ \\text{A}$. Quelle est la tension à ses bornes ?",
+                  "question_type": "single_choice",
+                  "explanation": "$U = R \\times I = 47 \\times 0{,}20 = 9{,}4\\ \\text{V}$. Diviser $R$ par $I$ donnerait $235\\ \\text{V}$ : cette division sert à trouver une résistance, pas une tension.",
+                  "answers": [
+                    {
+                      "content": "$0{,}004\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9{,}4\\ \\text{V}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$235\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$47{,}2\\ \\text{V}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aux bornes d'un résistor, on mesure $6{,}0\\ \\text{V}$ et un courant de $0{,}030\\ \\text{A}$. Quelle est sa résistance ?",
+                  "question_type": "single_choice",
+                  "explanation": "$R = U / I = 6{,}0 / 0{,}030 = 200\\ \\Omega$. Multiplier $U$ par $I$ donnerait $0{,}18$, ce qui n'est pas une résistance. Il faut diviser la tension par l'intensité.",
+                  "answers": [
+                    {
+                      "content": "$200\\ \\Omega$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$20\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}18\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}005\\ \\Omega$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $4{,}7\\ \\text{k}\\Omega$ est soumis à $9{,}4\\ \\text{V}$. Quelle est l'intensité du courant ?",
+                  "question_type": "single_choice",
+                  "explanation": "On convertit : $4{,}7\\ \\text{k}\\Omega = 4700\\ \\Omega$. Alors $I = 9{,}4 / 4700 = 0{,}0020\\ \\text{A} = 2{,}0\\ \\text{mA}$. Écrire $9{,}4 / 4{,}7 = 2{,}0\\ \\text{A}$ oublie la conversion : le résultat serait 1000 fois trop grand.",
+                  "answers": [
+                    {
+                      "content": "$20\\ \\text{mA}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2{,}0\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}50\\ \\text{mA}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2{,}0\\ \\text{mA}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $50\\ \\Omega$ est traversé par un courant de $0{,}30\\ \\text{A}$. Quelles propositions sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$U = 50 \\times 0{,}30 = 15\\ \\text{V}$. Si $I$ passe à $0{,}60\\ \\text{A}$, $U$ double : $30\\ \\text{V}$. $50 / 0{,}30 \\approx 167$ est une division qui ne donne pas une tension, et $R$ ne change pas quand $I$ double.",
+                  "answers": [
+                    {
+                      "content": "Si l'intensité double, la résistance devient $100\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si l'intensité passe à $0{,}60\\ \\text{A}$, la tension passe à $30\\ \\text{V}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension à ses bornes vaut environ $167\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tension à ses bornes vaut $15\\ \\text{V}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La caractéristique d'un résistor est une droite qui passe par l'origine et par le point $(0{,}20\\ \\text{A}\\ ;\\ 8{,}0\\ \\text{V})$. La résistance de ce résistor est $40\\ \\Omega$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $R$ est le rapport $U / I$ de n'importe quel point de la droite : $8{,}0 / 0{,}20 = 40\\ \\Omega$. C'est aussi la pente de la droite $U = f(I)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Problèmes avec la loi d'Ohm",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un résistor est traversé par $0{,}015\\ \\text{A}$ quand la tension à ses bornes vaut $3{,}0\\ \\text{V}$. Quelle intensité le traverse sous $9{,}0\\ \\text{V}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On trouve $R = 3{,}0 / 0{,}015 = 200\\ \\Omega$, puis $I = 9{,}0 / 200 = 0{,}045\\ \\text{A}$. On peut aussi dire que la tension est multipliée par 3, donc l'intensité aussi. Multiplier par 9 ($0{,}135\\ \\text{A}$) est une erreur de proportion.",
+                  "answers": [
+                    {
+                      "content": "$0{,}005\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}135\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}015\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}045\\ \\text{A}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $2{,}2\\ \\text{k}\\Omega$ est traversé par un courant de $5{,}0\\ \\text{mA}$. Quelle est la tension à ses bornes ?",
+                  "question_type": "single_choice",
+                  "explanation": "On convertit : $2200\\ \\Omega$ et $0{,}0050\\ \\text{A}$. Alors $U = 2200 \\times 0{,}0050 = 11\\ \\text{V}$. Oublier de convertir les milliampères donne $2200 \\times 5 = 11\\,000\\ \\text{V}$, valeur absurde. Diviser $2200$ par $5$ donne $440\\ \\text{V}$.",
+                  "answers": [
+                    {
+                      "content": "$0{,}11\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$440\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$11\\ \\text{V}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$11\\,000\\ \\text{V}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On mesure un résistor : $(0{,}10\\ \\text{A}\\ ;\\ 5{,}0\\ \\text{V})$, $(0{,}20\\ \\text{A}\\ ;\\ 10\\ \\text{V})$ et $(0{,}30\\ \\text{A}\\ ;\\ 15\\ \\text{V})$. Quelles propositions sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$R = 5{,}0 / 0{,}10 = 50\\ \\Omega$, et $U / I$ est le même pour les trois mesures. Sous $20\\ \\text{V}$, $I = 20 / 50 = 0{,}40\\ \\text{A}$. Le rapport $0{,}02$ vient de $I / U$ ; et $R$ ne change pas avec $I$.",
+                  "answers": [
+                    {
+                      "content": "Sous $20\\ \\text{V}$, l'intensité vaut $0{,}40\\ \\text{A}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le rapport $U / I$ est le même pour les trois mesures",
+                      "correct": true
+                    },
+                    {
+                      "content": "La résistance vaut $50\\ \\Omega$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sous $20\\ \\text{V}$, l'intensité vaut $2{,}5\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La résistance vaut $0{,}02\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La résistance augmente quand l'intensité augmente",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fiche d'un résistor de $100\\ \\Omega$ indique qu'on ne doit pas le traverser par plus de $0{,}15\\ \\text{A}$. Quelle tension maximale peut-on appliquer à ses bornes ?",
+                  "question_type": "single_choice",
+                  "explanation": "$U = R \\times I = 100 \\times 0{,}15 = 15\\ \\text{V}$. Diviser $R$ par $I$ donnerait environ $667\\ \\text{V}$ : on aurait utilisé une formule qui sert à autre chose. Une erreur de virgule donne $1{,}5\\ \\text{V}$.",
+                  "answers": [
+                    {
+                      "content": "$1{,}5\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}0015\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\approx 667\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15\\ \\text{V}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors, A de $100\\ \\Omega$ et B de $400\\ \\Omega$, sont soumis à la même tension de $20\\ \\text{V}$. Que peut-on dire des intensités ?",
+                  "question_type": "single_choice",
+                  "explanation": "$I_A = 20 / 100 = 0{,}20\\ \\text{A}$ et $I_B = 20 / 400 = 0{,}050\\ \\text{A}$. $I_A$ est donc 4 fois plus grande : le résistor de plus petite résistance laisse passer le plus de courant, comme le tuyau large.",
+                  "answers": [
+                    {
+                      "content": "$I_A$ est 100 fois plus grande que $I_B$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$I_A$ est 4 fois plus grande que $I_B$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$I_A$ est 4 fois plus petite que $I_B$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$I_A$ et $I_B$ sont égales, car la tension est la même",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La caractéristique d'un résistor est la droite passant par l'origine et par le point $(0{,}50\\ \\text{A}\\ ;\\ 20\\ \\text{V})$. On le branche ensuite sous $6{,}0\\ \\text{V}$. Quelle est l'intensité ?",
+                  "question_type": "single_choice",
+                  "explanation": "$R = 20 / 0{,}50 = 40\\ \\Omega$, donc $I = 6{,}0 / 40 = 0{,}15\\ \\text{A}$. Calculer $R / U = 40 / 6 \\approx 6{,}7\\ \\text{A}$ inverserait la division, et $40 \\times 6 = 240$ multiplierait au lieu de diviser.",
+                  "answers": [
+                    {
+                      "content": "$6{,}7\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}50\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$240\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}15\\ \\text{A}$",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Les résistors en série",
+          "subtitle": "Additionner les résistances et partager la tension",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Reconnaître des résistors montés en série.</li><li>Calculer la résistance équivalente d'une association en série.</li><li>Calculer l'intensité et les tensions dans un montage en série.</li></ul><h2>L'image pour comprendre</h2><p><strong>Les contrôles du stade.</strong> Un jour de match, pour entrer dans le stade, un supporter passe trois contrôles l'un derrière l'autre : la fouille, le billet, le portique. Il n'y a qu'un seul chemin. Chaque contrôle lui fait perdre du temps, et ces pertes de temps s'ajoutent : son temps total d'entrée est plus long qu'avec un seul contrôle. Personne ne disparaît en route : un supporter qui franchit un contrôle franchit aussi les suivants.</p><p><strong>Le pont.</strong> Le chemin unique, c'est le montage <strong>en série</strong>. Le fait que personne ne disparaît en route, c'est l'intensité $I$, la même partout. Le temps que fait perdre chaque contrôle, c'est la résistance $R_1$, $R_2$, $R_3$. Le temps total perdu, c'est la <strong>résistance équivalente</strong> $R_{\\text{éq}}$. La poussée totale de la foule se partage entre les contrôles : c'est la tension totale, qui est la somme des tensions de chaque résistor.</p><p><strong>La limite de l'image.</strong> Au stade, le nombre de supporters qui entrent par minute dépend surtout du contrôle le plus lent, et des supporters peuvent s'entasser devant lui : l'image sert à comprendre l'addition des résistances, pas à prévoir l'intensité. Dans un circuit, l'intensité est exactement la même dans tous les dipôles en série : rien ne s'accumule et rien n'est consommé.</p><h2>Ce qu'il faut retenir</h2><p>Des dipôles sont <em>en série</em> quand ils sont montés les uns à la suite des autres, sur un seul chemin, sans point où le fil se sépare. La <em>résistance équivalente</em> est la résistance du résistor unique qui, sous la même tension, laisserait passer la même intensité.</p><blockquote><p><strong>Intensité</strong> : elle est la même dans tous les résistors en série.</p><p><strong>Tensions</strong> : la tension aux bornes de l'ensemble est la somme des tensions aux bornes de chaque résistor : $U = U_1 + U_2 + \\dots$ (loi d'additivité des tensions).</p><p><strong>Résistance équivalente</strong> : $R_{\\text{éq}} = R_1 + R_2 + \\dots + R_n$. Elle est plus grande que chacune des résistances.</p></blockquote><h2>Exemple résolu</h2><p>Deux résistors $R_1 = 100\\ \\Omega$ et $R_2 = 200\\ \\Omega$ sont en série, sous une tension totale de $12\\ \\text{V}$.</p><ol><li><strong>Résistance équivalente.</strong> $R_{\\text{éq}} = 100 + 200 = 300\\ \\Omega$.</li><li><strong>Intensité.</strong> $I = \\dfrac{U}{R_{\\text{éq}}} = \\dfrac{12}{300} = 0{,}040\\ \\text{A}$. Elle est la même dans $R_1$ et dans $R_2$.</li><li><strong>Tensions.</strong> $U_1 = R_1 \\times I = 100 \\times 0{,}040 = 4{,}0\\ \\text{V}$ et $U_2 = R_2 \\times I = 200 \\times 0{,}040 = 8{,}0\\ \\text{V}$.</li><li><strong>Vérification.</strong> $U_1 + U_2 = 4{,}0 + 8{,}0 = 12\\ \\text{V}$, c'est bien la tension totale.</li></ol><h2>Le piège à éviter</h2><p>Croire que la tension de $12\\ \\text{V}$ se retrouve aux bornes de chaque résistor. En série, c'est l'<strong>intensité</strong> qui est la même, pas la tension : la tension se partage.</p><p>Pour repérer l'erreur, vérifie que la somme des tensions de chaque résistor redonne la tension totale.</p><h2>En une phrase</h2><p>En série, l'intensité est la même partout, les tensions s'additionnent et les résistances s'additionnent.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Ce qui se conserve en série",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Deux résistors sont montés en série. Quelle grandeur est la même dans les deux ?",
+                  "question_type": "single_choice",
+                  "explanation": "En série, il n'y a qu'un chemin : le même courant traverse les deux résistors, comme les supporters qui passent devant chaque contrôle. La tension, elle, se partage, et les résistances sont différentes.",
+                  "answers": [
+                    {
+                      "content": "La résistance",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'intensité du courant",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension à leurs bornes",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La résistance équivalente de deux résistors en série est plus grande que chacune des deux résistances.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $R_{\\text{éq}} = R_1 + R_2$ est plus grande que $R_1$ et que $R_2$. Comme au stade : deux contrôles successifs font perdre plus de temps qu'un seul.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle formule donne la résistance équivalente de deux résistors $R_1$ et $R_2$ en série ?",
+                  "question_type": "single_choice",
+                  "explanation": "En série, les résistances s'additionnent : $R_{\\text{éq}} = R_1 + R_2$. La formule avec les inverses est celle de la dérivation. Multiplier les résistances ne correspond à aucun montage.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{1}{R_{\\text{éq}}} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$R_{\\text{éq}} = R_1 \\times R_2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$R_{\\text{éq}} = R_1 + R_2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$R_{\\text{éq}} = \\dfrac{R_1}{R_2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors sont montés en série. Quelles propositions sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "En série, l'intensité est la même et les tensions s'additionnent : la poussée totale se partage entre les contrôles. Les tensions ne sont égales que si les résistances le sont, et les intensités ne s'additionnent pas : elles sont égales.",
+                  "answers": [
+                    {
+                      "content": "Les deux résistors ont toujours la même tension à leurs bornes",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tension aux bornes de l'ensemble est la somme des deux tensions",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'intensité est la même dans les deux résistors",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'intensité totale est la somme des intensités des deux résistors",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour entrer dans un stade, un supporter passe plusieurs contrôles l'un derrière l'autre, sur un chemin unique. On ajoute un contrôle de plus sur ce chemin. À quoi cela correspond-il en électricité ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un contrôle de plus sur le même chemin, c'est un résistor de plus en série. Les lenteurs s'additionnent : la résistance équivalente augmente. Un résistor en dérivation serait un second chemin, et il ferait diminuer la résistance équivalente, jamais augmenter.",
+                  "answers": [
+                    {
+                      "content": "Ajouter un résistor en série, ce qui diminue la résistance équivalente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ajouter un résistor en dérivation, ce qui augmente la résistance équivalente",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ajouter un résistor en série, ce qui augmente la résistance équivalente",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un circuit en série, l'intensité diminue après chaque résistor, car chaque résistor « consomme » une partie du courant.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. L'intensité est la même avant et après chaque résistor : le courant n'est pas consommé. Ce qui se partage en série, c'est la tension. Au stade, personne ne disparaît entre deux contrôles.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Résistance équivalente et tensions en série",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Deux résistors de $30\\ \\Omega$ et $70\\ \\Omega$ sont montés en série. Quelle est la résistance équivalente ?",
+                  "question_type": "single_choice",
+                  "explanation": "En série, on additionne : $30 + 70 = 100\\ \\Omega$. Le résultat $21\\ \\Omega$ vient de la formule de la dérivation $(30 \\times 70) / (30 + 70)$ : ce n'est pas le bon montage.",
+                  "answers": [
+                    {
+                      "content": "$2100\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$21\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$40\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100\\ \\Omega$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois résistors de $10\\ \\Omega$, $20\\ \\Omega$ et $50\\ \\Omega$ sont montés en série. Quelle est la résistance équivalente ?",
+                  "question_type": "single_choice",
+                  "explanation": "On additionne : $10 + 20 + 50 = 80\\ \\Omega$. Calculer avec les inverses donnerait environ $5{,}9\\ \\Omega$ : c'est la formule de la dérivation. Le produit $10\\,000$ n'a pas de sens pour une association.",
+                  "answers": [
+                    {
+                      "content": "$\\approx 5{,}9\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$70\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10\\,000\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$80\\ \\Omega$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $220\\ \\Omega$ et $280\\ \\Omega$ sont montés en série sous une tension totale de $10\\ \\text{V}$. Quelle est l'intensité du courant ?",
+                  "question_type": "single_choice",
+                  "explanation": "$R_{\\text{éq}} = 220 + 280 = 500\\ \\Omega$, puis $I = 10 / 500 = 0{,}020\\ \\text{A}$. Diviser $10$ par $220$ seulement ($0{,}045\\ \\text{A}$) oublie le second résistor, qui est traversé par le même courant.",
+                  "answers": [
+                    {
+                      "content": "$0{,}045\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}020\\ \\text{A}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}040\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$50\\ \\text{A}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor $R_1 = 100\\ \\Omega$ et un résistor $R_2 = 300\\ \\Omega$ sont en série. Le courant vaut $0{,}020\\ \\text{A}$. Quelles propositions sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$U_1 = 100 \\times 0{,}020 = 2{,}0\\ \\text{V}$ et $U_2 = 300 \\times 0{,}020 = 6{,}0\\ \\text{V}$. La tension totale vaut $8{,}0\\ \\text{V}$. Les tensions ne sont pas égales : $R_2$ est trois fois plus grande que $R_1$, donc $U_2$ aussi.",
+                  "answers": [
+                    {
+                      "content": "La tension aux bornes de $R_1$ vaut $2{,}0\\ \\text{V}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux résistors ont $4{,}0\\ \\text{V}$ à leurs bornes",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tension aux bornes de $R_2$ vaut $6{,}0\\ \\text{V}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension aux bornes de l'ensemble vaut $2{,}0\\ \\text{V}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors sont en série sous $9{,}0\\ \\text{V}$. La tension aux bornes du premier vaut $3{,}5\\ \\text{V}$. La tension aux bornes du second vaut donc $5{,}5\\ \\text{V}$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Les tensions s'additionnent : $U_2 = 9{,}0 - 3{,}5 = 5{,}5\\ \\text{V}$. La tension totale se partage entre les deux résistors.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $50\\ \\Omega$ est monté en série avec un résistor $R_2$ inconnu. On mesure une résistance équivalente de $120\\ \\Omega$. Que vaut $R_2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "En série, $R_{\\text{éq}} = R_1 + R_2$, donc $R_2 = 120 - 50 = 70\\ \\Omega$. Additionner $120 + 50$ donne $170\\ \\Omega$, ce qui est plus grand que la résistance équivalente : impossible en série.",
+                  "answers": [
+                    {
+                      "content": "$6000\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$70\\ \\Omega$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2{,}4\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$170\\ \\Omega$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Problèmes sur les montages en série",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Deux résistors de $60\\ \\Omega$ et $140\\ \\Omega$ sont en série sous $12\\ \\text{V}$. Quelle est la tension aux bornes du résistor de $140\\ \\Omega$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$R_{\\text{éq}} = 200\\ \\Omega$, $I = 12 / 200 = 0{,}060\\ \\text{A}$, puis $U = 140 \\times 0{,}060 = 8{,}4\\ \\text{V}$. L'autre résistor a $3{,}6\\ \\text{V}$ ; la somme fait $12\\ \\text{V}$. Prendre $12\\ \\text{V}$ ou $6\\ \\text{V}$ ignore que la tension se partage selon les résistances.",
+                  "answers": [
+                    {
+                      "content": "$12\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3{,}6\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6{,}0\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8{,}4\\ \\text{V}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors $R_1 = 150\\ \\Omega$ et $R_2 = 250\\ \\Omega$ sont en série sous $20\\ \\text{V}$. Quelles propositions sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$R_{\\text{éq}} = 400\\ \\Omega$ et $I = 20 / 400 = 0{,}050\\ \\text{A}$. Alors $U_2 = 250 \\times 0{,}050 = 12{,}5\\ \\text{V}$ et $U_1 = 7{,}5\\ \\text{V}$. $0{,}13\\ \\text{A}$ vient de $20 / 150$ et oublie $R_2$ ; $10\\ \\text{V}$ serait un partage à parts égales, faux ici.",
+                  "answers": [
+                    {
+                      "content": "La tension aux bornes de $R_1$ vaut $10\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'intensité vaut $0{,}050\\ \\text{A}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La résistance équivalente vaut $400\\ \\Omega$",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'intensité vaut environ $0{,}13\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tension aux bornes de $R_2$ vaut $12{,}5\\ \\text{V}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sous $9{,}0\\ \\text{V}$, on veut un courant de $0{,}020\\ \\text{A}$ avec des résistors identiques de $150\\ \\Omega$ montés en série. Combien en faut-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "La résistance totale doit valoir $R_{\\text{éq}} = 9{,}0 / 0{,}020 = 450\\ \\Omega$. En série, $n \\times 150 = 450$ donne $n = 3$. Avec 2 résistors, on aurait $300\\ \\Omega$ et un courant de $0{,}030\\ \\text{A}$.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": true
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor $R_1 = 100\\ \\Omega$ est en série avec un résistor $R_2$. Sous une tension totale de $15\\ \\text{V}$, l'intensité vaut $0{,}050\\ \\text{A}$. Que vaut $R_2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$R_{\\text{éq}} = 15 / 0{,}050 = 300\\ \\Omega$. Donc $R_2 = 300 - 100 = 200\\ \\Omega$. Répondre $300\\ \\Omega$ prend la résistance équivalente pour $R_2$ : elle comprend aussi $R_1$.",
+                  "answers": [
+                    {
+                      "content": "$100\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$400\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$300\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$200\\ \\Omega$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un circuit contient un seul résistor, alimenté par une tension fixe. On ajoute un deuxième résistor en série. L'intensité du courant diminue.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. La résistance équivalente augmente, donc $I = U / R_{\\text{éq}}$ diminue. Un contrôle de plus au stade : chaque supporter met plus de temps à entrer.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $100\\ \\Omega$ et $300\\ \\Omega$ sont en série sous $24\\ \\text{V}$. Quelle est la tension aux bornes du résistor de $300\\ \\Omega$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$R_{\\text{éq}} = 400\\ \\Omega$, $I = 24 / 400 = 0{,}060\\ \\text{A}$, $U = 300 \\times 0{,}060 = 18\\ \\text{V}$. Le résistor de $100\\ \\Omega$ a $6{,}0\\ \\text{V}$ ; $12\\ \\text{V}$ serait un partage à parts égales, faux ici.",
+                  "answers": [
+                    {
+                      "content": "$6{,}0\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$24\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$18\\ \\text{V}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12\\ \\text{V}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Les résistors en dérivation",
+          "subtitle": "Associer des résistors en dérivation. À compléter : code des couleurs, résistivité, diviseurs de tension et de courant",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Reconnaître des résistors montés en dérivation.</li><li>Calculer la résistance équivalente d'une association en dérivation.</li><li>Calculer les intensités dans les branches et dans la branche principale.</li></ul><h2>L'image pour comprendre</h2><p><strong>Les guichets de la gare routière.</strong> À la gare routière d'Adjamé, plusieurs guichets vendent des tickets côte à côte. Les voyageurs arrivent tous du même parking et repartent tous vers le même quai. La foule se répartit entre les guichets : chacun voit passer une partie des voyageurs. Le nombre total de voyageurs servis chaque minute est la somme de ceux de chaque guichet. Ouvrir un guichet de plus facilite le passage : l'ensemble est moins lent que le meilleur guichet seul.</p><p><strong>Le pont.</strong> Les guichets côte à côte, ce sont les résistors <strong>en dérivation</strong>. Le parking et le quai, ce sont les deux points communs : ils imposent la même tension à chaque guichet. Les voyageurs servis par un guichet, c'est l'intensité $I_1$, $I_2$, … dans chaque branche. Le total par minute, c'est l'intensité $I$ dans la branche principale. Ouvrir un guichet de plus, c'est ajouter un résistor en dérivation : la <strong>résistance équivalente</strong> diminue.</p><p><strong>La limite de l'image.</strong> À la gare, les voyageurs choisissent leur guichet. Dans un circuit, la répartition est imposée par les résistances : la branche de plus petite résistance reçoit la plus grande intensité.</p><h2>Ce qu'il faut retenir</h2><p>Des résistors sont <em>en dérivation</em> quand leurs bornes sont reliées aux deux mêmes points. Un <em>nœud</em> est un point où au moins trois fils se rejoignent.</p><blockquote><p><strong>Tension</strong> : elle est la même aux bornes de chaque résistor en dérivation.</p><p><strong>Intensités</strong> : l'intensité dans la branche principale est la somme des intensités dans les branches : $I = I_1 + I_2 + \\dots$ (loi des nœuds : ce qui arrive à un nœud en ressort).</p><p><strong>Résistance équivalente</strong> : $\\dfrac{1}{R_{\\text{éq}}} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2} + \\dots$. Pour deux résistors : $R_{\\text{éq}} = \\dfrac{R_1 \\times R_2}{R_1 + R_2}$. Pour $n$ résistors identiques de résistance $R$ : $R_{\\text{éq}} = \\dfrac{R}{n}$. Elle est plus petite que la plus petite des résistances.</p></blockquote><h2>Exemple résolu</h2><p>Deux résistors $R_1 = 30\\ \\Omega$ et $R_2 = 60\\ \\Omega$ sont en dérivation, sous une tension de $12\\ \\text{V}$.</p><ol><li><strong>Intensités dans les branches.</strong> La tension est $12\\ \\text{V}$ pour chacun : $I_1 = \\dfrac{12}{30} = 0{,}40\\ \\text{A}$ et $I_2 = \\dfrac{12}{60} = 0{,}20\\ \\text{A}$.</li><li><strong>Branche principale.</strong> $I = I_1 + I_2 = 0{,}40 + 0{,}20 = 0{,}60\\ \\text{A}$.</li><li><strong>Résistance équivalente.</strong> $R_{\\text{éq}} = \\dfrac{30 \\times 60}{30 + 60} = \\dfrac{1800}{90} = 20\\ \\Omega$.</li><li><strong>Vérification.</strong> $\\dfrac{U}{R_{\\text{éq}}} = \\dfrac{12}{20} = 0{,}60\\ \\text{A}$, c'est bien $I$.</li></ol><p><strong>Association mixte.</strong> Quand un montage mélange série et dérivation, on remplace d'abord chaque groupe en dérivation par son résistor équivalent, puis on additionne les résistances en série.</p><p>Exemple : un résistor de $10\\ \\Omega$ est en série avec deux résistors de $20\\ \\Omega$ montés en dérivation entre eux, sous $24\\ \\text{V}$. Les deux résistors de $20\\ \\Omega$ valent $\\dfrac{20}{2} = 10\\ \\Omega$. Donc $R_{\\text{éq}} = 10 + 10 = 20\\ \\Omega$ et $I = \\dfrac{24}{20} = 1{,}2\\ \\text{A}$. Cette intensité traverse le résistor de $10\\ \\Omega$ ; elle se partage ensuite à parts égales dans les deux résistors de $20\\ \\Omega$ : $0{,}6\\ \\text{A}$ dans chacun.</p><h2>Le piège à éviter</h2><p>Additionner les résistances comme en série ($30 + 60 = 90\\ \\Omega$). En dérivation, la résistance équivalente est plus petite que la plus petite des résistances. Autre erreur : trouver $\\dfrac{1}{30} + \\dfrac{1}{60} = 0{,}05$ et s'arrêter là, car c'est $\\dfrac{1}{R_{\\text{éq}}}$ : il faut encore inverser pour obtenir $20\\ \\Omega$.</p><p>Pour repérer l'erreur, compare ton résultat à la plus petite résistance : il doit être plus petit.</p><h2>En une phrase</h2><p>En dérivation, la tension est la même, les intensités s'additionnent et la résistance équivalente est plus petite que chaque résistance.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Ce qui se conserve en dérivation",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Deux résistors sont montés en dérivation. Quelle grandeur est la même aux bornes des deux ?",
+                  "question_type": "single_choice",
+                  "explanation": "En dérivation, les deux résistors sont reliés aux mêmes points, comme les guichets qui partagent le même parking et le même quai : ils ont la même tension. L'intensité se partage et les résistances peuvent être différentes.",
+                  "answers": [
+                    {
+                      "content": "La tension",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'intensité du courant",
+                      "correct": false
+                    },
+                    {
+                      "content": "La résistance",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un montage en dérivation, l'intensité dans la branche principale est la somme des intensités dans les branches.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. C'est la loi des nœuds : ce qui arrive au nœud ressort. Le total des voyageurs servis chaque minute est la somme de ceux de chaque guichet.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "À la gare routière, on ouvre un guichet de plus à côté des autres. En électricité, que se passe-t-il quand on ajoute un résistor en dérivation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un guichet de plus facilite le passage de l'ensemble : la résistance équivalente diminue. Elle devient plus petite que la plus petite des résistances. L'augmentation est le propre du montage en série.",
+                  "answers": [
+                    {
+                      "content": "La résistance équivalente augmente",
+                      "correct": false
+                    },
+                    {
+                      "content": "La résistance équivalente ne change pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "La résistance équivalente diminue",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors $R_1$ et $R_2$ avec $R_1 < R_2$ sont en dérivation. Quelles propositions sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "La tension est la même aux bornes des deux. $I = U / R$ : pour la même tension, la plus petite résistance reçoit la plus grande intensité, comme le guichet le plus rapide. La résistance équivalente est plus petite que $R_1$, donc que $R_2$.",
+                  "answers": [
+                    {
+                      "content": "$R_1$ est traversé par une intensité plus grande que $R_2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension est la même aux bornes de $R_1$ et de $R_2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$R_2$ est traversé par une intensité plus grande que $R_1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La résistance équivalente est plus grande que $R_2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle formule donne la résistance équivalente de deux résistors $R_1$ et $R_2$ en dérivation ?",
+                  "question_type": "single_choice",
+                  "explanation": "$R_{\\text{éq}} = \\dfrac{R_1 R_2}{R_1 + R_2}$, qui vient de $\\dfrac{1}{R_{\\text{éq}}} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2}$. Écrire $R_1 + R_2$ est la formule de la série ; $\\dfrac{1}{R_1} + \\dfrac{1}{R_2}$ donne l'inverse de $R_{\\text{éq}}$, pas $R_{\\text{éq}}$.",
+                  "answers": [
+                    {
+                      "content": "$R_{\\text{éq}} = \\dfrac{R_1 \\times R_2}{R_1 + R_2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$R_{\\text{éq}} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$R_{\\text{éq}} = R_1 + R_2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$R_{\\text{éq}} = \\dfrac{R_1 + R_2}{R_1 \\times R_2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qu'appelle-t-on un nœud dans un circuit ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un nœud est un point de jonction où au moins trois fils se rejoignent : le courant s'y répartit entre plusieurs branches. Un point où seulement deux fils se rejoignent est une simple connexion entre deux dipôles en série.",
+                  "answers": [
+                    {
+                      "content": "Un point où seulement deux dipôles se suivent sur le même fil",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un fil dont l'extrémité est coupée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un point où au moins trois fils se rejoignent",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Résistance équivalente et intensités en dérivation",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Deux résistors de $100\\ \\Omega$ chacun sont montés en dérivation. Quelle est la résistance équivalente ?",
+                  "question_type": "single_choice",
+                  "explanation": "$R_{\\text{éq}} = \\dfrac{100 \\times 100}{100 + 100} = 50\\ \\Omega$. Pour deux résistors identiques, on divise par 2. Répondre $200\\ \\Omega$ est la formule de la série ; en dérivation, on doit trouver moins que $100\\ \\Omega$.",
+                  "answers": [
+                    {
+                      "content": "$200\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$50\\ \\Omega$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$10\\,000\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100\\ \\Omega$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $20\\ \\Omega$ et $30\\ \\Omega$ sont montés en dérivation. Quelle est la résistance équivalente ?",
+                  "question_type": "single_choice",
+                  "explanation": "$R_{\\text{éq}} = \\dfrac{20 \\times 30}{20 + 30} = \\dfrac{600}{50} = 12\\ \\Omega$, plus petite que $20\\ \\Omega$. $50\\ \\Omega$ est la somme (série) ; $25\\ \\Omega$ est la moyenne, qui ne correspond à aucune loi.",
+                  "answers": [
+                    {
+                      "content": "$25\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$600\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$50\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12\\ \\Omega$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $40\\ \\Omega$ et $60\\ \\Omega$ sont montés en dérivation sous $12\\ \\text{V}$. Quelle est l'intensité dans la branche principale ?",
+                  "question_type": "single_choice",
+                  "explanation": "$I_1 = 12 / 40 = 0{,}30\\ \\text{A}$ et $I_2 = 12 / 60 = 0{,}20\\ \\text{A}$. En dérivation, les intensités s'additionnent : $I = 0{,}50\\ \\text{A}$. Soustraire ($0{,}10\\ \\text{A}$) ou faire la moyenne ($0{,}25\\ \\text{A}$) sont des erreurs.",
+                  "answers": [
+                    {
+                      "content": "$0{,}50\\ \\text{A}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5{,}0\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}25\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}10\\ \\text{A}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un montage en dérivation à deux branches, la branche principale est traversée par $0{,}90\\ \\text{A}$ et la première branche par $0{,}60\\ \\text{A}$. Quelles propositions sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Loi des nœuds : $0{,}90 = 0{,}60 + I_2$, donc $I_2 = 0{,}30\\ \\text{A}$. La tension est la même pour les deux branches. L'intensité n'est pas la même dans les deux branches ici, puisque $0{,}60 \\neq 0{,}30$.",
+                  "answers": [
+                    {
+                      "content": "L'intensité dans l'autre branche vaut $1{,}50\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Chaque branche est traversée par $0{,}45\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tension aux bornes des deux branches est la même",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'intensité dans l'autre branche vaut $0{,}30\\ \\text{A}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois résistors identiques de $90\\ \\Omega$ montés en dérivation ont pour résistance équivalente $30\\ \\Omega$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Pour $n$ résistors identiques en dérivation, $R_{\\text{éq}} = R / n = 90 / 3 = 30\\ \\Omega$. Avec $\\dfrac{1}{90} + \\dfrac{1}{90} + \\dfrac{1}{90} = \\dfrac{3}{90} = \\dfrac{1}{30}$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $60\\ \\Omega$ est monté en dérivation avec un résistor $R_2$ inconnu. La résistance équivalente vaut $20\\ \\Omega$. Que vaut $R_2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{1}{R_2} = \\dfrac{1}{20} - \\dfrac{1}{60} = \\dfrac{3 - 1}{60} = \\dfrac{1}{30}$, donc $R_2 = 30\\ \\Omega$. Vérification : $\\dfrac{60 \\times 30}{90} = 20\\ \\Omega$. Soustraire directement $60 - 20 = 40$ ne tient pas compte de la formule des inverses.",
+                  "answers": [
+                    {
+                      "content": "$20\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$40\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$30\\ \\Omega$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$80\\ \\Omega$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Problèmes sur les montages en dérivation",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Deux résistors de $12\\ \\Omega$ et $4\\ \\Omega$ sont montés en dérivation sous $6{,}0\\ \\text{V}$. Quelle est l'intensité dans la branche principale ?",
+                  "question_type": "single_choice",
+                  "explanation": "$I_1 = 6{,}0 / 12 = 0{,}50\\ \\text{A}$ et $I_2 = 6{,}0 / 4 = 1{,}5\\ \\text{A}$, donc $I = 2{,}0\\ \\text{A}$. Vérification : $R_{\\text{éq}} = 48 / 16 = 3{,}0\\ \\Omega$ et $6{,}0 / 3{,}0 = 2{,}0\\ \\text{A}$. $0{,}38\\ \\text{A}$ vient de $6 / (12 + 4)$ : la résistance de la série.",
+                  "answers": [
+                    {
+                      "content": "$0{,}38\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1{,}5\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2{,}0\\ \\text{A}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}50\\ \\text{A}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux résistors de $15\\ \\Omega$ et $10\\ \\Omega$ sont en dérivation sous $30\\ \\text{V}$. Quelles propositions sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$I_1 = 30 / 15 = 2{,}0\\ \\text{A}$, $I_2 = 30 / 10 = 3{,}0\\ \\text{A}$, $I = 5{,}0\\ \\text{A}$ et $R_{\\text{éq}} = 150 / 25 = 6{,}0\\ \\Omega$. Les intensités ne sont pas égales, et la tension est de $30\\ \\text{V}$ aux bornes de chaque résistor, pas $20\\ \\text{V}$.",
+                  "answers": [
+                    {
+                      "content": "La tension aux bornes du résistor de $10\\ \\Omega$ vaut $20\\ \\text{V}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'intensité dans le résistor de $15\\ \\Omega$ vaut $2{,}0\\ \\text{A}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La résistance équivalente vaut $6{,}0\\ \\Omega$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux résistors sont traversés par la même intensité",
+                      "correct": false
+                    },
+                    {
+                      "content": "La résistance équivalente vaut $25\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'intensité totale vaut $5{,}0\\ \\text{A}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $100\\ \\Omega$ est monté en dérivation avec un résistor $R_2$ sous $30\\ \\text{V}$. L'intensité dans la branche principale vaut $0{,}80\\ \\text{A}$. Que vaut $R_2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$I_1 = 30 / 100 = 0{,}30\\ \\text{A}$, donc $I_2 = 0{,}80 - 0{,}30 = 0{,}50\\ \\text{A}$ et $R_2 = 30 / 0{,}50 = 60\\ \\Omega$. Le résultat $37{,}5\\ \\Omega$ est la résistance équivalente $30 / 0{,}80$, pas $R_2$.",
+                  "answers": [
+                    {
+                      "content": "$37{,}5\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$60\\ \\Omega$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$50\\ \\Omega$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100\\ \\Omega$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un circuit est alimenté par une tension fixe avec deux résistors en dérivation. On retire l'un des deux résistors. L'intensité dans la branche principale diminue.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. La résistance équivalente augmente (on enlève un guichet), donc $I = U / R_{\\text{éq}}$ diminue. Il reste une seule branche, avec moins de courant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un résistor de $10\\ \\Omega$ est monté en série avec deux résistors de $20\\ \\Omega$ montés en dérivation entre eux. Le tout est sous $24\\ \\text{V}$. Quelle est l'intensité dans le résistor de $10\\ \\Omega$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux résistors de $20\\ \\Omega$ en dérivation valent $10\\ \\Omega$. Avec le résistor de $10\\ \\Omega$ en série, $R_{\\text{éq}} = 20\\ \\Omega$ et $I = 24 / 20 = 1{,}2\\ \\text{A}$. Prendre $24 / 10 = 2{,}4\\ \\text{A}$ oublie les deux autres résistors.",
+                  "answers": [
+                    {
+                      "content": "$0{,}60\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}48\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2{,}4\\ \\text{A}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1{,}2\\ \\text{A}$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On relie deux résistors de $40\\ \\Omega$ à une même source de $20\\ \\text{V}$, d'abord en série, puis en dérivation. Comment se comparent les intensités dans la branche principale ?",
+                  "question_type": "single_choice",
+                  "explanation": "En série, $R_{\\text{éq}} = 80\\ \\Omega$ et $I = 0{,}25\\ \\text{A}$. En dérivation, $R_{\\text{éq}} = 20\\ \\Omega$ et $I = 1{,}0\\ \\text{A}$. L'intensité est 4 fois plus grande en dérivation, car la résistance équivalente est 4 fois plus petite.",
+                  "answers": [
+                    {
+                      "content": "Elle est la même dans les deux montages",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est 4 fois plus grande en dérivation qu'en série",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est 4 fois plus petite en dérivation qu'en série",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est 2 fois plus grande en dérivation qu'en série",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
