@@ -590,13 +590,17 @@
               "exercise_type": "evaluation",
               "questions": [
                 {
-                  "content": "Une nouvelle Lune a lieu le 1er du mois. Environ quel jour voit-on le premier quartier ?",
+                  "content": "Une pleine Lune a lieu le 15 du mois. Environ quel jour voit-on le dernier quartier ?",
                   "question_type": "single_choice",
-                  "explanation": "Le premier quartier arrive environ 7 jours après la nouvelle Lune. Le 1er plus 7 jours donne environ le 8 du mois. Le 16 correspondrait plutôt à la pleine Lune, environ 15 jours après.",
+                  "explanation": "Le dernier quartier arrive environ une semaine après la pleine Lune : le 15 plus 7 jours donne environ le 22 du mois. Le 8 correspond au premier quartier, qui précède cette pleine Lune.",
                   "answers": [
                     {
-                      "content": "Environ le 8 du mois",
+                      "content": "Environ le 22 du mois",
                       "correct": true
+                    },
+                    {
+                      "content": "Environ le 8 du mois",
+                      "correct": false
                     },
                     {
                       "content": "Environ le 16 du mois",
@@ -604,10 +608,6 @@
                     },
                     {
                       "content": "Environ le 30 du mois",
-                      "correct": false
-                    },
-                    {
-                      "content": "Environ le 4 du mois",
                       "correct": false
                     }
                   ]
@@ -712,7 +712,7 @@
                 {
                   "content": "Lors d'une éclipse de Soleil, que se passe-t-il ?",
                   "question_type": "single_choice",
-                  "explanation": "La Lune passe entre le Soleil et la Terre, et son ombre tombe sur une partie de la Terre. Le Soleil ne s'éteint pas : il est caché pour une petite zone de la Terre.",
+                  "explanation": "La Lune passe entre le Soleil et la Terre, et son ombre tombe sur une partie de la Terre. Le Soleil ne s'éteint pas : il n'est totalement caché que pour une petite zone de la Terre.",
                   "answers": [
                     {
                       "content": "La Lune se place entre le Soleil et la Terre, et son ombre tombe sur une partie de la Terre",
@@ -788,10 +788,10 @@
                 {
                   "content": "Lesquelles de ces affirmations sur les éclipses sont justes ?",
                   "question_type": "multiple_correct_2",
-                  "explanation": "L'ombre de la Lune ne couvre qu'une petite zone de la Terre : seules quelques régions voient le Soleil caché. L'éclipse de Soleil a lieu à la nouvelle Lune, et non à chaque pleine Lune. Dans une éclipse de Lune, c'est la Terre qui fait de l'ombre sur la Lune.",
+                  "explanation": "L'ombre complète de la Lune ne couvre qu'une petite zone de la Terre, où le Soleil est totalement caché. Près des bords de l'ombre, seule une éclipse partielle est visible. L'éclipse de Soleil a lieu à la nouvelle Lune, et non à chaque pleine Lune. Dans une éclipse de Lune, c'est la Terre qui fait de l'ombre sur la Lune.",
                   "answers": [
                     {
-                      "content": "Pendant une éclipse de Soleil, seule une petite partie de la Terre voit le Soleil caché",
+                      "content": "Pendant une éclipse de Soleil, l'ombre complète ne couvre qu'une petite zone de la Terre",
                       "correct": true
                     },
                     {
@@ -899,12 +899,12 @@
                   ]
                 },
                 {
-                  "content": "Une éclipse de Soleil se voit dans une petite zone de la Terre. Une personne située loin de cette zone voit-elle l'éclipse ?",
+                  "content": "L'ombre complète de la Lune couvre une petite zone de la Terre. Une personne située loin de cette zone voit-elle l'éclipse de Soleil ?",
                   "question_type": "single_choice",
-                  "explanation": "L'ombre de la Lune ne couvre qu'une petite partie de la Terre. Les personnes en dehors de cette zone voient le Soleil comme d'habitude, au mieux avec une éclipse partielle.",
+                  "explanation": "L'ombre complète ne couvre qu'une petite zone de la Terre. Hors de cette zone, l'éclipse n'est pas visible ; près de ses bords, on ne voit qu'une éclipse partielle.",
                   "answers": [
                     {
-                      "content": "Non : en dehors de la zone de l'ombre, le Soleil se voit normalement, ou au mieux partiellement caché",
+                      "content": "Non : hors de la zone d'ombre, l'éclipse n'est pas visible ; près de ses bords, seulement une éclipse partielle",
                       "correct": true
                     },
                     {
@@ -1003,7 +1003,7 @@
                 {
                   "content": "Une éclipse de Lune peut être vue depuis toutes les régions de la Terre où il fait nuit à ce moment-là.",
                   "question_type": "true_false",
-                  "explanation": "Vrai. Les personnes qui sont de nuit à ce moment-là peuvent voir l'éclipse, si la Lune est au-dessus de leur horizon. Elle se voit donc sur une grande partie de la Terre, contrairement à l'éclipse de Soleil.",
+                  "explanation": "Vrai. À la pleine Lune, la Lune est au-dessus de l'horizon dès qu'il fait nuit. Toutes les personnes qui sont de nuit à ce moment-là peuvent donc voir l'éclipse : elle se voit sur une grande partie de la Terre, contrairement à l'éclipse de Soleil.",
                   "answers": [
                     {
                       "content": "Vrai",
