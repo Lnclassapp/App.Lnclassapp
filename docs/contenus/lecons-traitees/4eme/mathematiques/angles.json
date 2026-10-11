@@ -73,7 +73,7 @@
                 {
                   "content": "Deux angles qui se suivent sur une même droite forment toujours un angle droit.",
                   "question_type": "true_false",
-                  "explanation": "Faux : ils forment un demi-tour, donc leur somme vaut $180^\\circ$. Ils ne font un angle droit ($90^\\circ$) que si chacun mesure $90^\\circ$. L'erreur tentante est de confondre la droite et l'angle droit.",
+                  "explanation": "Faux : ils forment un demi-tour, donc leur somme vaut $180^\\circ$. Chacun est un angle droit seulement si chacun mesure $90^\\circ$, et alors leur somme vaut $180^\\circ$. L'erreur tentante est de confondre la droite et l'angle droit.",
                   "answers": [
                     {
                       "content": "Faux",
@@ -88,7 +88,7 @@
                 {
                   "content": "Parmi ces affirmations, lesquelles sont vraies ?",
                   "question_type": "multiple_correct_2",
-                  "explanation": "Deux angles supplémentaires ont une somme de $180^\\circ$, et deux angles opposés par le sommet sont égaux. Les deux fausses affirmations sont l'erreur la plus fréquente : un angle n'est pas égal à son supplémentaire, et la somme de deux angles opposés n'est pas $180^\\circ$ en général.",
+                  "explanation": "Deux angles supplémentaires ont une somme de $180^\\circ$, et deux angles opposés par le sommet sont égaux. Les deux fausses affirmations sont l'erreur la plus fréquente : un angle n'est égal à son supplémentaire que s'il mesure $90^\\circ$, et la somme de deux angles opposés n'est pas $180^\\circ$ en général.",
                   "answers": [
                     {
                       "content": "Deux angles supplémentaires ont une somme égale à $180^\\circ$",
@@ -99,7 +99,7 @@
                       "correct": true
                     },
                     {
-                      "content": "Un angle et son supplémentaire ont la même mesure",
+                      "content": "Un angle et son supplémentaire ont toujours la même mesure",
                       "correct": false
                     },
                     {
@@ -109,20 +109,20 @@
                   ]
                 },
                 {
-                  "content": "Un angle mesure $x$ et son supplémentaire mesure $2x$. Quelle est la valeur de $x$ en degrés ?",
+                  "content": "Deux angles sont supplémentaires. Le plus grand mesure $120^\\circ$. Quelle est la mesure du plus petit ?",
                   "question_type": "single_choice",
-                  "explanation": "$x + 2x = 180$, donc $3x = 180$ et $x = 60$. Vérification : $60 + 120 = 180$. L'erreur tentante est de répondre $120$, qui est la mesure de l'angle $2x$ et non de $x$.",
+                  "explanation": "$180^\\circ - 120^\\circ = 60^\\circ$. Vérification : $60 + 120 = 180$. L'erreur tentante est de répondre $120^\\circ$, qui est la mesure du grand angle, ou $240^\\circ$, en additionnant $120^\\circ$ et $120^\\circ$ au lieu de retrancher de $180^\\circ$.",
                   "answers": [
                     {
-                      "content": "$60$",
+                      "content": "$60^\\circ$",
                       "correct": true
                     },
                     {
-                      "content": "$120$",
+                      "content": "$120^\\circ$",
                       "correct": false
                     },
                     {
-                      "content": "$90$",
+                      "content": "$240^\\circ$",
                       "correct": false
                     }
                   ]
@@ -172,20 +172,20 @@
                   ]
                 },
                 {
-                  "content": "Deux angles supplémentaires mesurent $2x$ et $x + 30^\\circ$. Quelle est la valeur de $x$ en degrés ?",
+                  "content": "Deux angles sont supplémentaires. Le plus grand mesure $30^\\circ$ de plus que le plus petit. Quelle est la mesure du plus petit ?",
                   "question_type": "single_choice",
-                  "explanation": "La somme vaut $180^\\circ$ : $2x + x + 30 = 180$, donc $3x = 150$ et $x = 50$. Vérification : $100^\\circ$ et $80^\\circ$ font bien $180^\\circ$. L'erreur tentante est de répondre $150$, en oubliant de retirer $30^\\circ$ avant de diviser.",
+                  "explanation": "Retire d'abord les $30^\\circ$ de $180^\\circ$ : il reste $150^\\circ$, soit deux fois le plus petit. Donc le plus petit mesure $150 : 2 = 75^\\circ$, et le plus grand $105^\\circ$. Vérification : $75 + 105 = 180$. L'erreur tentante est de répondre $90^\\circ$, en partageant $180^\\circ$ en deux parts égales sans tenir compte des $30^\\circ$.",
                   "answers": [
                     {
-                      "content": "$50$",
+                      "content": "$75^\\circ$",
                       "correct": true
                     },
                     {
-                      "content": "$150$",
+                      "content": "$90^\\circ$",
                       "correct": false
                     },
                     {
-                      "content": "$30$",
+                      "content": "$150^\\circ$",
                       "correct": false
                     }
                   ]
@@ -229,20 +229,20 @@
                   ]
                 },
                 {
-                  "content": "Un angle mesure le double de son supplémentaire. Combien mesure cet angle ?",
+                  "content": "Deux droites se coupent. L'un des angles formés mesure $62^\\circ$. Quelle est la somme des quatre angles formés ?",
                   "question_type": "single_choice",
-                  "explanation": "Si l'angle mesure $a$ et son supplémentaire $\\dfrac{a}{2}$ : $a + \\dfrac{a}{2} = 180$, donc $a = 120^\\circ$ et son supplémentaire vaut $60^\\circ$. Vérification : $120 + 60 = 180$. L'erreur tentante est de répondre $60^\\circ$, qui est la mesure du plus petit angle.",
+                  "explanation": "Les quatre angles valent $62^\\circ$, $118^\\circ$, $62^\\circ$ et $118^\\circ$. Deux angles qui se suivent font $180^\\circ$, et il y a deux paires : le total vaut $360^\\circ$. L'erreur tentante est de répondre $248^\\circ$, en multipliant $62^\\circ$ par $4$.",
                   "answers": [
                     {
-                      "content": "$120^\\circ$",
+                      "content": "$360^\\circ$",
                       "correct": true
                     },
                     {
-                      "content": "$60^\\circ$",
+                      "content": "$180^\\circ$",
                       "correct": false
                     },
                     {
-                      "content": "$90^\\circ$",
+                      "content": "$248^\\circ$",
                       "correct": false
                     }
                   ]
@@ -254,20 +254,20 @@
               "exercise_type": "evaluation",
               "questions": [
                 {
-                  "content": "Deux droites se coupent en $O$. L'angle $AOB$ mesure $3x$ et son opposé par le sommet mesure $x + 40^\\circ$. Quelle est la valeur de $x$ ?",
+                  "content": "Deux droites se coupent. Un des angles formés mesure $130^\\circ$. Quelle est la somme de l'angle opposé par le sommet à cet angle et de son supplémentaire ?",
                   "question_type": "single_choice",
-                  "explanation": "Les angles opposés par le sommet sont égaux : $3x = x + 40$, donc $2x = 40$ et $x = 20$. Vérification : l'angle mesure $60^\\circ$, et son opposé aussi. L'erreur tentante est de répondre $40$ en oubliant de diviser par $2$.",
+                  "explanation": "L'opposé par le sommet mesure $130^\\circ$, et le supplémentaire mesure $180^\\circ - 130^\\circ = 50^\\circ$. Somme : $130 + 50 = 180^\\circ$. L'erreur tentante est de répondre $260^\\circ$, en additionnant deux fois $130^\\circ$.",
                   "answers": [
                     {
-                      "content": "$20$",
+                      "content": "$180^\\circ$",
                       "correct": true
                     },
                     {
-                      "content": "$10$",
+                      "content": "$100^\\circ$",
                       "correct": false
                     },
                     {
-                      "content": "$40$",
+                      "content": "$260^\\circ$",
                       "correct": false
                     }
                   ]
@@ -311,39 +311,39 @@
                   ]
                 },
                 {
-                  "content": "Deux angles $\\alpha$ et $\\beta$ sont supplémentaires, et $\\alpha = 3\\beta$. Quelle est la mesure de $\\alpha$ ?",
+                  "content": "Deux angles sont supplémentaires. L'un est le triple de l'autre. Quelle est la mesure du plus petit ?",
                   "question_type": "single_choice",
-                  "explanation": "$\\alpha + \\beta = 180^\\circ$ et $\\alpha = 3\\beta$, donc $4\\beta = 180^\\circ$ et $\\beta = 45^\\circ$. Ainsi $\\alpha = 135^\\circ$. Vérification : $135 + 45 = 180$. L'erreur tentante est de répondre $60^\\circ$ en divisant $180$ par $3$.",
+                  "explanation": "Le petit angle compte pour une part, le grand pour trois : quatre parts font $180^\\circ$, donc une part vaut $180^\\circ : 4 = 45^\\circ$. Vérification : $45 + 135 = 180$. L'erreur tentante est de répondre $60^\\circ$, en partageant $180^\\circ$ en trois.",
                   "answers": [
                     {
-                      "content": "$135^\\circ$",
+                      "content": "$45^\\circ$",
                       "correct": true
                     },
                     {
-                      "content": "$45^\\circ$",
+                      "content": "$60^\\circ$",
                       "correct": false
                     },
                     {
-                      "content": "$60^\\circ$",
+                      "content": "$135^\\circ$",
                       "correct": false
                     }
                   ]
                 },
                 {
-                  "content": "Deux angles opposés par le sommet mesurent $5x$ et $3x + 24^\\circ$. Quelle est la valeur de $x$ ?",
+                  "content": "Deux droites se coupent. Un angle mesure $108^\\circ$. Quelle est la mesure de l'angle opposé par le sommet à cet angle ?",
                   "question_type": "single_choice",
-                  "explanation": "Des angles opposés par le sommet sont égaux : $5x = 3x + 24$, donc $2x = 24$ et $x = 12$. Vérification : les deux angles mesurent $60^\\circ$. L'erreur tentante est d'écrire $6$ en divisant $12$ par $2$ une seconde fois.",
+                  "explanation": "Les angles opposés par le sommet sont égaux : l'opposé mesure aussi $108^\\circ$. L'erreur tentante est de répondre $72^\\circ$, qui est le supplémentaire de $108^\\circ$, et non son opposé par le sommet.",
                   "answers": [
                     {
-                      "content": "$12$",
+                      "content": "$108^\\circ$",
                       "correct": true
                     },
                     {
-                      "content": "$6$",
+                      "content": "$72^\\circ$",
                       "correct": false
                     },
                     {
-                      "content": "$24$",
+                      "content": "$180^\\circ$",
                       "correct": false
                     }
                   ]
@@ -512,20 +512,20 @@
                   ]
                 },
                 {
-                  "content": "Les trois angles d'un triangle mesurent $2x$, $3x$ et $4x$. Quelle est la valeur de $x$ ?",
+                  "content": "Dans un triangle, un angle mesure $40^\\circ$ et un autre mesure $80^\\circ$, le double du premier. Quelle est la mesure du troisième angle ?",
                   "question_type": "single_choice",
-                  "explanation": "$2x + 3x + 4x = 9x = 180$, donc $x = 20$. Vérification : les angles mesurent $40^\\circ$, $60^\\circ$ et $80^\\circ$, soit $180^\\circ$. L'erreur tentante est de répondre $180$ en oubliant de diviser par $9$.",
+                  "explanation": "$40 + 80 = 120$, puis $180 - 120 = 60$. Vérification : $40 + 80 + 60 = 180$. L'erreur tentante est de répondre $120^\\circ$, qui est la somme des deux angles connus et non l'angle cherché.",
                   "answers": [
                     {
-                      "content": "$20$",
+                      "content": "$60^\\circ$",
                       "correct": true
                     },
                     {
-                      "content": "$9$",
+                      "content": "$120^\\circ$",
                       "correct": false
                     },
                     {
-                      "content": "$180$",
+                      "content": "$140^\\circ$",
                       "correct": false
                     }
                   ]
@@ -613,20 +613,20 @@
               "exercise_type": "evaluation",
               "questions": [
                 {
-                  "content": "Dans le triangle $ABC$, $\\widehat{A} = 2x$, $\\widehat{B} = x + 10^\\circ$ et $\\widehat{C} = 3x - 10^\\circ$. Quelle est la valeur de $x$ ?",
+                  "content": "Dans un triangle, le premier angle est le double du deuxième, et le troisième est le triple du deuxième. Le deuxième angle mesure $30^\\circ$. Combien mesure le troisième angle ?",
                   "question_type": "single_choice",
-                  "explanation": "La somme vaut $2x + x + 10 + 3x - 10 = 6x = 180$, donc $x = 30$. Vérification : $\\widehat{A} = 60^\\circ$, $\\widehat{B} = 40^\\circ$ et $\\widehat{C} = 80^\\circ$, soit $180^\\circ$. L'erreur tentante est de répondre $36$ en oubliant les termes $+10$ et $-10$.",
+                  "explanation": "Le premier mesure $60^\\circ$ et le troisième $3 \\times 30 = 90^\\circ$ : $60 + 30 + 90 = 180$. L'erreur tentante est de répondre $60^\\circ$, qui est la mesure du premier angle, ou de compter 5 parts au lieu de 6 (2 + 1 + 3).",
                   "answers": [
                     {
-                      "content": "$30$",
+                      "content": "$90^\\circ$",
                       "correct": true
                     },
                     {
-                      "content": "$36$",
+                      "content": "$60^\\circ$",
                       "correct": false
                     },
                     {
-                      "content": "$60$",
+                      "content": "$150^\\circ$",
                       "correct": false
                     }
                   ]
@@ -670,39 +670,39 @@
                   ]
                 },
                 {
-                  "content": "Un triangle a un angle de $x$, un angle de $x + 20^\\circ$ et un angle droit. Quelle est la valeur de $x$ ?",
+                  "content": "Un triangle a un angle de $25^\\circ$ et un angle de $65^\\circ$. Quel est son troisième angle, et de quel type est le triangle ?",
                   "question_type": "single_choice",
-                  "explanation": "$x + (x + 20) + 90 = 180$, donc $2x = 70$ et $x = 35$. Vérification : $35^\\circ$, $55^\\circ$ et $90^\\circ$ font $180^\\circ$. L'erreur tentante est de répondre $45$ en oubliant de retrancher $90^\\circ$ avant de diviser.",
+                  "explanation": "$25 + 65 = 90$, donc le troisième angle vaut $180 - 90 = 90^\\circ$ : le triangle a un angle droit, c'est un triangle rectangle. L'erreur tentante est de dire que le triangle est obtus : un angle de $90^\\circ$ n'est pas obtus.",
                   "answers": [
                     {
-                      "content": "$35$",
+                      "content": "Troisième angle $90^\\circ$ : le triangle est rectangle",
                       "correct": true
                     },
                     {
-                      "content": "$45$",
+                      "content": "Troisième angle $90^\\circ$ : le triangle est obtus",
                       "correct": false
                     },
                     {
-                      "content": "$70$",
+                      "content": "Troisième angle $115^\\circ$ : le triangle est obtus",
                       "correct": false
                     }
                   ]
                 },
                 {
-                  "content": "Dans un triangle rectangle, un angle aigu est le double de l'autre. Quelle est la mesure du plus petit angle aigu ?",
+                  "content": "Dans un triangle rectangle, un angle aigu mesure $30^\\circ$. Quelle est la mesure de l'autre angle aigu ?",
                   "question_type": "single_choice",
-                  "explanation": "Les deux angles aigus font $90^\\circ$. Si le petit mesure $x$, le grand mesure $2x$ : $3x = 90$, donc $x = 30^\\circ$. Vérification : $30 + 60 = 90$. L'erreur tentante est de répondre $60^\\circ$, qui est le plus grand des deux.",
+                  "explanation": "Les deux angles aigus font ensemble $90^\\circ$ : $90^\\circ - 30^\\circ = 60^\\circ$. Vérification : $30 + 60 = 90$. L'erreur tentante est de répondre $150^\\circ$, en retranchant $30^\\circ$ de $180^\\circ$ sans tenir compte de l'angle droit.",
                   "answers": [
                     {
-                      "content": "$30^\\circ$",
+                      "content": "$60^\\circ$",
                       "correct": true
                     },
                     {
-                      "content": "$60^\\circ$",
+                      "content": "$150^\\circ$",
                       "correct": false
                     },
                     {
-                      "content": "$45^\\circ$",
+                      "content": "$30^\\circ$",
                       "correct": false
                     }
                   ]
@@ -728,7 +728,7 @@
         },
         {
           "name": "Angles alternes-internes et angles correspondants",
-          "subtitle": "Parallèles coupées par une sécante : alternes-internes et correspondants sont égaux. À compléter : alternes-externes",
+          "subtitle": "Parallèles coupées par une sécante : alternes-internes et correspondants sont égaux",
           "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul><li>Reconnaître une sécante et des angles alternes-internes ou correspondants.</li><li>Calculer un angle inconnu quand deux droites parallèles sont coupées par une sécante.</li></ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>Les deux rangées de bancs de la fête.</strong> Pour le bal du village, on a aligné deux rangées de bancs parallèles. Une corde tendue les traverse en diagonale, de l'un à l'autre. La corde est une sécante : elle coupe les deux rangées.</p>\n<p><em>Le pont.</em> Les bancs sont les deux droites parallèles. La corde est la sécante. Les angles qui sont placés dans la bande entre les deux rangées, de part et d'autre de la corde, sont les angles alternes-internes : ils sont égaux. Les angles qui sont à la même place sur chaque rangée, du même côté de la corde, sont les angles correspondants : eux aussi sont égaux.</p>\n<p><em>Où l'image s'arrête.</em> Les bancs réels ne sont jamais parfaitement parallèles. L'égalité des angles ne vaut que pour des droites parallèles : si les rangées penchent, il faut le vérifier autrement.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote><p><strong>Vocabulaire.</strong> Une sécante est une droite qui coupe deux autres droites. Deux angles sont alternes-internes s'ils sont dans la bande entre les deux droites, de part et d'autre de la sécante. Deux angles sont correspondants s'ils occupent la même place sur chacune des deux droites, du même côté de la sécante.</p><p><strong>Propriété.</strong> Si deux droites sont parallèles, alors les angles alternes-internes ont la même mesure, et les angles correspondants ont la même mesure.</p><p><strong>Angles qui se suivent.</strong> Deux angles qui se suivent sur une même parallèle, de part et d'autre de la sécante, sont supplémentaires : leur somme vaut $180^\\circ$.</p></blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Deux droites parallèles sont coupées par une sécante. Un angle correspondant mesure $65^\\circ$. Quelle est la mesure de l'angle qui se suit avec lui sur la même parallèle ?</strong></p>\n<ol><li>L'angle correspondant de l'autre parallèle mesure aussi $65^\\circ$, puisque les angles correspondants sont égaux.</li><li>L'angle qui se suit avec lui sur la même parallèle est supplémentaire de $65^\\circ$ : $180^\\circ - 65^\\circ = 115^\\circ$.</li><li>Vérification : $65 + 115 = 180$. Le calcul est juste.</li></ol>\n<h2>Le piège à éviter</h2>\n<p>Dire que deux angles alternes-internes sont supplémentaires. Par exemple, écrire $40^\\circ + 40^\\circ = 180^\\circ$. C'est faux : des angles alternes-internes sont égaux, leur somme n'a pas de raison de valoir $180^\\circ$.</p>\n<p>Comment le repérer : demande-toi si les deux angles sont égaux (alternes-internes ou correspondants) ou se suivent sur la même parallèle (supplémentaires). Ne mélange jamais les deux relations.</p>\n<h2>En une phrase</h2>\n<p>Quand deux droites parallèles sont coupées par une sécante, les angles alternes-internes et les angles correspondants sont égaux, et les angles qui se suivent sur une même parallèle font $180^\\circ$.</p>",
           "exercises": [
             {
@@ -871,20 +871,20 @@
                   ]
                 },
                 {
-                  "content": "Deux droites parallèles sont coupées par une sécante. Un angle mesure $3x$ et son angle alterne-interne mesure $x + 50^\\circ$. Quelle est la valeur de $x$ ?",
+                  "content": "Deux droites parallèles sont coupées par une sécante. Un angle mesure $75^\\circ$. Quelle est la mesure de son angle alterne-interne ?",
                   "question_type": "single_choice",
-                  "explanation": "Les angles alternes-internes sont égaux : $3x = x + 50$, donc $2x = 50$ et $x = 25$. Vérification : les deux angles mesurent $75^\\circ$. L'erreur tentante est de répondre $50$, en oubliant de retrancher $x$ des deux côtés.",
+                  "explanation": "Les angles alternes-internes sont égaux : l'angle alterne-interne mesure aussi $75^\\circ$. L'erreur tentante est de répondre $105^\\circ$, qui est la mesure de l'angle qui se suit avec lui sur la même parallèle.",
                   "answers": [
                     {
-                      "content": "$25$",
+                      "content": "$75^\\circ$",
                       "correct": true
                     },
                     {
-                      "content": "$50$",
+                      "content": "$105^\\circ$",
                       "correct": false
                     },
                     {
-                      "content": "$12{,}5$",
+                      "content": "$15^\\circ$",
                       "correct": false
                     }
                   ]
@@ -905,20 +905,20 @@
                   ]
                 },
                 {
-                  "content": "Deux droites parallèles sont coupées par une sécante. Un angle mesure $x$, et l'angle qui se suit avec lui sur la même parallèle mesure $2x$. Quelle est la valeur de $x$ ?",
+                  "content": "Deux droites parallèles sont coupées par une sécante. Un angle mesure $60^\\circ$. Quelle est la mesure de l'angle qui se suit avec lui sur la même parallèle ?",
                   "question_type": "single_choice",
-                  "explanation": "Les deux angles se suivent, donc sont supplémentaires : $x + 2x = 180$, soit $3x = 180$ et $x = 60$. Vérification : $60 + 120 = 180$. L'erreur tentante est de répondre $120$, qui est la mesure de l'angle $2x$.",
+                  "explanation": "Ces deux angles sont supplémentaires : $180^\\circ - 60^\\circ = 120^\\circ$. Vérification : $60 + 120 = 180$. L'erreur tentante est de répondre $60^\\circ$, en pensant que les angles qui se suivent sont égaux.",
                   "answers": [
                     {
-                      "content": "$60$",
+                      "content": "$120^\\circ$",
                       "correct": true
                     },
                     {
-                      "content": "$120$",
+                      "content": "$60^\\circ$",
                       "correct": false
                     },
                     {
-                      "content": "$90$",
+                      "content": "$30^\\circ$",
                       "correct": false
                     }
                   ]
@@ -947,20 +947,20 @@
                   ]
                 },
                 {
-                  "content": "Deux droites parallèles sont coupées par une sécante. Deux angles alternes-internes ont pour mesures $2x + 10^\\circ$ et $4x - 30^\\circ$. Quelle est la valeur de $x$ ?",
+                  "content": "Deux droites parallèles sont coupées par une sécante. Un angle mesure $50^\\circ$. Quelle est la somme de son angle alterne-interne et de l'angle qui se suit avec lui sur la même parallèle ?",
                   "question_type": "single_choice",
-                  "explanation": "Les angles alternes-internes sont égaux : $2x + 10 = 4x - 30$, donc $40 = 2x$ et $x = 20$. Vérification : les deux angles mesurent $50^\\circ$. L'erreur tentante est de répondre $10$ en oubliant de diviser $40$ par $2$ après avoir déplacé les termes.",
+                  "explanation": "L'angle alterne-interne mesure aussi $50^\\circ$, et l'angle qui se suit avec le premier mesure $180^\\circ - 50^\\circ = 130^\\circ$. Somme : $50 + 130 = 180^\\circ$. L'erreur tentante est de répondre $100^\\circ$, en additionnant deux fois $50^\\circ$.",
                   "answers": [
                     {
-                      "content": "$20$",
+                      "content": "$180^\\circ$",
                       "correct": true
                     },
                     {
-                      "content": "$10$",
+                      "content": "$100^\\circ$",
                       "correct": false
                     },
                     {
-                      "content": "$40$",
+                      "content": "$130^\\circ$",
                       "correct": false
                     }
                   ]
@@ -972,20 +972,20 @@
               "exercise_type": "evaluation",
               "questions": [
                 {
-                  "content": "Deux droites parallèles sont coupées par une sécante. Un angle mesure $(2x + 15)^\\circ$ et son angle alterne-interne mesure $(4x - 5)^\\circ$. Quelle est la valeur de $x$ ?",
+                  "content": "Deux droites parallèles sont coupées par une sécante. L'angle $A$ et l'angle $B$ sont alternes-internes, et $A$ mesure $35^\\circ$. L'angle $C$ se suit avec $B$ sur la même parallèle. Quelle est la mesure de $C$ ?",
                   "question_type": "single_choice",
-                  "explanation": "Les angles alternes-internes sont égaux : $2x + 15 = 4x - 5$, donc $20 = 2x$ et $x = 10$. Vérification : les deux angles mesurent $35^\\circ$. L'erreur tentante est de répondre $20$, en oubliant de diviser par $2$.",
+                  "explanation": "$A$ et $B$ sont alternes-internes, donc égaux : $B$ mesure $35^\\circ$. $C$ se suit avec $B$ : $180^\\circ - 35^\\circ = 145^\\circ$. L'erreur tentante est de répondre $35^\\circ$, en croyant que $C$ est égal à $B$.",
                   "answers": [
                     {
-                      "content": "$10$",
+                      "content": "$145^\\circ$",
                       "correct": true
                     },
                     {
-                      "content": "$20$",
+                      "content": "$35^\\circ$",
                       "correct": false
                     },
                     {
-                      "content": "$5$",
+                      "content": "$215^\\circ$",
                       "correct": false
                     }
                   ]
@@ -1029,20 +1029,20 @@
                   ]
                 },
                 {
-                  "content": "Deux droites parallèles sont coupées par une sécante. Un angle alterne-interne mesure $x$, et l'angle qui se suit avec lui sur la même parallèle mesure $4x$. Quelle est la valeur de $x$ ?",
+                  "content": "Deux droites parallèles sont coupées par une sécante. Un angle alterne-interne mesure $36^\\circ$. Quelle est la mesure de l'angle qui se suit avec lui sur la même parallèle ?",
                   "question_type": "single_choice",
-                  "explanation": "Les deux angles se suivent sur une parallèle : $x + 4x = 180$, donc $5x = 180$ et $x = 36$. Vérification : $36^\\circ$ et $144^\\circ$ font $180^\\circ$. L'erreur tentante est de répondre $45$ en divisant $180$ par $4$.",
+                  "explanation": "Les deux angles se suivent sur une parallèle, donc sont supplémentaires : $180^\\circ - 36^\\circ = 144^\\circ$. Vérification : $36 + 144 = 180$. L'erreur tentante est de répondre $54^\\circ$, en retranchant $36^\\circ$ de $90^\\circ$.",
                   "answers": [
                     {
-                      "content": "$36$",
+                      "content": "$144^\\circ$",
                       "correct": true
                     },
                     {
-                      "content": "$45$",
+                      "content": "$54^\\circ$",
                       "correct": false
                     },
                     {
-                      "content": "$144$",
+                      "content": "$36^\\circ$",
                       "correct": false
                     }
                   ]
