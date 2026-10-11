@@ -7,7 +7,7 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "h1", text: "Connexion"
-    assert_select "input[type=tel][name='session[contact]'][maxlength='15'][placeholder='07 00 00 00 00']"
+    assert_select "input[type=tel][name='session[contact]'][maxlength='10'][placeholder='07 00 00 00 00']"
     assert_select "input[type=password][name='session[pin]'][inputmode=numeric]"
     assert_select "a[href='#{new_identity_pin_reset_path}']", text: "Code secret oublié ?"
   end
@@ -33,9 +33,9 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "p", text: "Heureux de vous revoir"
     assert_no_match "Élève · Enseignant · Équipe", response.body
     assert_no_match "Connectez-vous avec votre numéro", response.body
-    assert_select "#session_pin_hint", 0
+    assert_select "#session_pin_hint", text: "code secret à 4 chiffres"
     assert_select "details div", text: "Code secret de 4 chiffres, choisi à l'inscription."
-    assert_equal 1, response.body.scan("4 chiffres").size
+    assert_equal 2, response.body.scan("4 chiffres").size
     assert_select "a[href=?].min-h-tap", new_identity_pin_reset_path, text: "Code secret oublié ?"
   end
 

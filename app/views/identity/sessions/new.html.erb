@@ -23,7 +23,8 @@
 
     <div class="w-full max-w-sm">
       <%= ui_card title: t(".title"), heading: :h1, padding: :lg do %>
-        <%= form_with model: @form, scope: :session, url: session_path, id: "session-form", class: "space-y-5" do |form| %>
+        <%= form_with model: @form, scope: :session, url: session_path, id: "session-form", class: "space-y-5",
+                      data: { controller: "identity--phone-digits" } do |form| %>
           <% if @wrong_app %>
             <%# Le message selon la coque et l'app proposée ; la coque ouvre dans le navigateur un lien en target="_blank". %>
             <% refusal = ".wrong_app_for.#{@wrong_app[:shell]}.#{@wrong_app[:app]}" %>
@@ -43,11 +44,14 @@
               <p><%= @form.errors[:base].to_sentence %></p>
             </div>
           <% end %>
-          <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 15,
-                       placeholder: t(".contact_placeholder"), inputmode: "tel", autocomplete: "username", autofocus: !@prefilled %>
+          <%# Chiffres seuls, indicatif retiré, 10 chiffres au plus : même règle que les inscriptions (contrôleur identity--phone-digits). %>
+          <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 10,
+                       placeholder: t(".contact_placeholder"), inputmode: "numeric", autocomplete: "username", autofocus: !@prefilled,
+                       data: { identity__phone_digits_target: "input", action: "input->identity--phone-digits#clean" } %>
           <div>
             <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",
-                         autocomplete: "current-password", autofocus: @prefilled %>
+                         autocomplete: "current-password", autofocus: @prefilled, placeholder:"****",
+                         hint: t(".pin_info_message") %>
             <%= ui_info_tip t(".pin_info_tip"), label: Dtos::Identity::CredentialsInput.human_attribute_name(:pin) %>
           </div>
           <%= ui_button t(".submit"), type: :submit, variant: :brand, full: true %>
