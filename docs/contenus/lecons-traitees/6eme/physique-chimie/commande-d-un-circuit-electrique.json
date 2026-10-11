@@ -117,7 +117,7 @@
                   ]
                 },
                 {
-                  "content": "Un interrupteur ouvert et une lampe allumée peuvent coexister dans le même circuit.",
+                  "content": "Un interrupteur ouvert et une lampe allumée peuvent coexister dans une boucle simple.",
                   "question_type": "true_false",
                   "explanation": "Faux. Une lampe allumée demande un courant qui circule, donc une boucle fermée. Si l'interrupteur est ouvert, la boucle est coupée et la lampe ne peut pas briller.",
                   "answers": [
@@ -138,7 +138,7 @@
               "exercise_type": "fixation",
               "questions": [
                 {
-                  "content": "Un circuit a une pile, une lampe, un interrupteur et des fils. L'interrupteur est fermé. La lampe est-elle allumée ?",
+                  "content": "Un circuit a une pile, une lampe, un interrupteur et des fils, et la boucle est complète. L'interrupteur est fermé. La lampe est-elle allumée ?",
                   "question_type": "single_choice",
                   "explanation": "Interrupteur fermé : la boucle est complète, le courant circule et la lampe brille. L'erreur tentante est de croire qu'un interrupteur fermé coupe le courant. C'est l'inverse : fermé, il laisse passer le courant.",
                   "answers": [
@@ -189,7 +189,7 @@
                       "correct": true
                     },
                     {
-                      "content": "L'interrupteur est fermé et la boucle est complète",
+                      "content": "La lampe est neuve",
                       "correct": false
                     },
                     {
@@ -557,7 +557,7 @@
               "exercise_type": "fixation",
               "questions": [
                 {
-                  "content": "Un circuit a une pile, un interrupteur, une lampe et un ventilateur sur la même boucle. L'interrupteur est fermé. Le ventilateur tourne-t-il ?",
+                  "content": "Un circuit a une pile, un interrupteur, une lampe et un ventilateur sur la même boucle, qui est complète. L'interrupteur est fermé. Le ventilateur tourne-t-il ?",
                   "question_type": "single_choice",
                   "explanation": "Interrupteur fermé : la boucle est complète, le courant circule et le ventilateur reçoit l'énergie : il tourne. La lampe ne bloque pas le ventilateur, et l'interrupteur fermé ne coupe pas le courant.",
                   "answers": [
@@ -656,7 +656,7 @@
                   ]
                 },
                 {
-                  "content": "Un circuit est composé d'une pile, d'une lampe et d'un interrupteur ouvert. Pour que la lampe brille, quelle action suffit ?",
+                  "content": "Un circuit est composé d'une pile, d'une lampe, d'un interrupteur ouvert et de deux fils qui relient ces éléments en boucle. Pour que la lampe brille, quelle action suffit ?",
                   "question_type": "single_choice",
                   "explanation": "Fermer l'interrupteur complète la boucle : le courant circule et la lampe brille. Les autres actions ouvrent la boucle ou retirent un élément, ce qui éteint la lampe.",
                   "answers": [
@@ -828,7 +828,7 @@
         },
         {
           "name": "Prévoir si une lampe s'allume",
-          "subtitle": "Lire un circuit pour dire si le récepteur fonctionne. À compléter : montages à plusieurs branches (vus en 5ème)",
+          "subtitle": "Lire un circuit pour dire si le récepteur fonctionne",
           "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Citer les trois conditions qui permettent à un récepteur de fonctionner.</li><li>Lire un circuit décrit en mots pour prévoir si la lampe brille.</li><li>Trouver la cause d'une lampe éteinte dans un circuit.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le tableau de commande du stade.</strong> Avant le match, l'électricien du stade vérifie le panneau de commande. Un voyant indique la position de l'interrupteur des projecteurs. Il regarde aussi si la boucle est complète et si la pile, ou le générateur, fonctionne. Ainsi, il sait si les projecteurs vont s'allumer avant même de les essayer.</p><p><strong>Le pont.</strong> Lire le panneau, c'est lire le circuit. Interrupteur fermé, boucle complète et générateur en bon état : le récepteur fonctionne. Interrupteur ouvert, fil débranché ou générateur hors service : le récepteur reste éteint.</p><p><strong>La limite de l'image.</strong> Le voyant ne dit rien de la pile. Une pile vide ou usée empêche la lampe de briller, même si l'interrupteur est fermé.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Pour qu'un récepteur fonctionne</strong>, il faut trois conditions : un générateur qui fournit l'énergie, une boucle complète, et un interrupteur fermé sur cette boucle.</p><p><strong>Méthode</strong> : repère le générateur, suis la boucle, regarde l'interrupteur, puis conclus.</p></blockquote><h2>Exemple résolu</h2><p>Un circuit comprend une pile, une lampe, un interrupteur ouvert et des fils. Les fils relient bien la pile, l'interrupteur et la lampe. La lampe brille-t-elle ?</p><ol><li><strong>Le générateur.</strong> La pile est présente et fournit l'énergie.</li><li><strong>La boucle.</strong> Les fils relient la pile, l'interrupteur et la lampe : la boucle existe, mais elle n'est pas fermée pour autant.</li><li><strong>L'interrupteur.</strong> Il est ouvert : la boucle est coupée à cet endroit.</li><li><strong>Conclusion.</strong> Le courant ne circule pas : la lampe ne brille pas.</li></ol><h2>Le piège à éviter</h2><p>Dire qu'un circuit « fonctionne » parce que tous les éléments sont branchés. Un interrupteur ouvert suffit à tout bloquer.</p><p>Vérifie toujours l'interrupteur et la boucle, pas seulement la présence des éléments.</p><h2>En une phrase</h2><p>Une lampe brille quand la boucle est complète, l'interrupteur fermé et la pile en bon état ; si une condition manque, elle reste éteinte.</p>",
           "exercises": [
             {
@@ -912,12 +912,12 @@
                   ]
                 },
                 {
-                  "content": "Dans le panneau du stade, un voyant indique que l'interrupteur des projecteurs est fermé. Les projecteurs s'allument-ils ?",
+                  "content": "Dans le panneau du stade, un voyant indique que l'interrupteur des projecteurs est fermé. On sait aussi que la boucle est complète et que la pile est en bon état. Les projecteurs s'allument-ils ?",
                   "question_type": "single_choice",
-                  "explanation": "Un interrupteur fermé est nécessaire, mais il ne suffit pas : il faut aussi une boucle complète et un générateur en bon état. Le voyant ne dit rien de la pile ni des fils.",
+                  "explanation": "Les trois conditions sont réunies : interrupteur fermé, boucle complète et pile en bon état, donc les projecteurs s'allument. Le voyant seul ne suffit pas, car il ne dit rien de la pile ni des fils.",
                   "answers": [
                     {
-                      "content": "Oui, si la boucle est complète et la pile en bon état",
+                      "content": "Oui, car les trois conditions sont réunies",
                       "correct": true
                     },
                     {
