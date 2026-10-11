@@ -1,0 +1,1255 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Nombres entiers naturels",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "Mathématiques",
+      "essentials": [
+        {
+          "name": "La numération décimale",
+          "subtitle": "Lire un nombre et connaître la valeur de chaque chiffre selon sa position",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Lire un nombre entier et dire combien il contient d'unités, de dizaines et de centaines.</li><li>Donner la valeur d'un chiffre selon sa position.</li><li>Décomposer un nombre en milliers, centaines, dizaines et unités.</li></ul><h2>L'image pour comprendre</h2><p><strong>Les cahiers de la cour.</strong> Le surveillant reçoit des cahiers pour l'école. Il les range par paquets : dix cahiers font un paquet, et dix paquets font un carton. Un carton vaut donc $10 \\times 10 = 100$ cahiers. S'il a 2 cartons, 3 paquets et 5 cahiers isolés, il compte $2 \\times 100 + 3 \\times 10 + 5 = 235$ cahiers.</p><p><em>Le pont.</em> Le cahier isolé correspond au rang des unités, le paquet au rang des dizaines, le carton au rang des centaines. Dans 235, le 2 désigne les cartons, le 3 les paquets et le 5 les cahiers isolés.</p><p><em>Où l'image s'arrête.</em> Le surveillant n'écrit pas de zéro : il dit « deux cartons, cinq cahiers ». En numération, le zéro est indispensable pour marquer un rang vide. Dans 205, il n'y a aucune dizaine.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Numération décimale.</strong> Un nombre entier s'écrit avec les dix chiffres 0, 1, 2, 3, 4, 5, 6, 7, 8 et 9. Chaque rang vaut dix fois le rang situé à sa droite.</p><p><strong>Rangs.</strong> De droite à gauche : unités, dizaines, centaines, milliers, dizaines de milliers, centaines de milliers, millions.</p><p><strong>Valeur d'un chiffre.</strong> Elle se calcule ainsi : chiffre $\\times$ valeur du rang. Dans 235, le 3 vaut $3 \\times 10 = 30$.</p></blockquote><h2>Exemple résolu</h2><p>Décomposons 4 052, qui se lit « quatre mille cinquante-deux ».</p><ol><li>On place chaque chiffre à son rang : 4 aux milliers, 0 aux centaines, 5 aux dizaines, 2 aux unités.</li><li>On calcule la valeur de chacun : $4 \\times 1000 = 4000$ ; $0 \\times 100 = 0$ ; $5 \\times 10 = 50$ ; $2 \\times 1 = 2$.</li><li>On additionne : $4000 + 0 + 50 + 2 = 4052$. On retrouve le nombre de départ, la décomposition est donc juste.</li></ol><h2>Le piège à éviter</h2><p>Dire que le 5 de 4 052 « vaut 5 ». C'est faux : il est au rang des dizaines, donc il vaut $50$. Autre erreur très fréquente : oublier le zéro et écrire 452 au lieu de 4 052.</p><p>Comment le repérer : compte les rangs depuis la droite, donne à chaque chiffre sa valeur de rang, puis refais l'addition pour vérifier.</p><h2>En une phrase</h2><p>Un chiffre vaut selon sa place : dans 4 052, le 5 est au rang des dizaines, donc il vaut 50.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître la valeur d'un chiffre",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans le nombre 235, combien vaut le chiffre 3 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le 3 est au rang des dizaines : il vaut $3 \\times 10 = 30$. L'erreur tentante est de répondre 3, qui est le chiffre seul, sans tenir compte de sa place.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "30",
+                      "correct": true
+                    },
+                    {
+                      "content": "300",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 000",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le nombre 4 052, le chiffre 5 vaut 5.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Le 5 est au rang des dizaines : il vaut $50$. Retiens qu'un chiffre vaut selon sa place, pas seulement selon son nom.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le nombre 1 207, quel chiffre est au rang des centaines ?",
+                  "question_type": "single_choice",
+                  "explanation": "On compte depuis la droite : 7 unités, 0 dizaine, 2 centaines, 1 millier. Le chiffre des centaines est donc 2. L'erreur tentante est de prendre le 0, qui est au rang des dizaines.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    },
+                    {
+                      "content": "7",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations sur le nombre 3 064, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Dans 3 064, le 3 est au rang des milliers (3 000), le 0 à celui des centaines, le 6 à celui des dizaines et le 4 à celui des unités. L'erreur tentante est de dire « 6 centaines » : le 6 n'est pas au rang des centaines.",
+                  "answers": [
+                    {
+                      "content": "Le nombre contient 3 milliers.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le nombre contient 6 centaines.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le chiffre des dizaines est 6.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le chiffre des unités est 6.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un carton contient dix paquets, et un paquet contient dix cahiers : un carton contient donc cent cahiers.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Dix paquets de dix cahiers font $10 \\times 10 = 100$ cahiers. Souviens-toi du surveillant de la cour : chaque rang vaut dix fois celui situé à sa droite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le surveillant a 2 cartons, 3 paquets et 5 cahiers isolés. Combien de cahiers a-t-il en tout ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un carton vaut 100 cahiers et un paquet 10 : $2 \\times 100 + 3 \\times 10 + 5 = 235$. L'erreur la plus fréquente est d'additionner 2 + 3 + 5 = 10, en oubliant que chaque chiffre a sa valeur de rang.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": false
+                    },
+                    {
+                      "content": "235",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 350",
+                      "correct": false
+                    },
+                    {
+                      "content": "325",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Décomposer et écrire un nombre",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle est la décomposition de 3 508 ?",
+                  "question_type": "single_choice",
+                  "explanation": "3 508 = 3 000 + 500 + 0 + 8. Le zéro est au rang des dizaines : il garde la place vide. L'erreur tentante est $3 \\times 1000 + 5 \\times 10 + 8$, qui donne 3 058 : le 5 n'est pas au rang des dizaines.",
+                  "answers": [
+                    {
+                      "content": "$3 \\times 1000 + 5 \\times 100 + 0 \\times 10 + 8$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3 \\times 100 + 5 \\times 10 + 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3 + 5 + 0 + 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3 \\times 1000 + 5 \\times 10 + 8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel nombre s'écrit $6000 + 300 + 20 + 1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On lit chaque terme : 6 000 correspond à 6 milliers, 300 à 3 centaines, 20 à 2 dizaines et 1 à 1 unité. Le nombre est 6 321. L'erreur la plus fréquente est d'inverser les centaines et les dizaines, ce qui donne 6 231.",
+                  "answers": [
+                    {
+                      "content": "6 302",
+                      "correct": false
+                    },
+                    {
+                      "content": "6 231",
+                      "correct": false
+                    },
+                    {
+                      "content": "6 321",
+                      "correct": true
+                    },
+                    {
+                      "content": "6 031",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre 4 070 se décompose en $4 \\times 1000 + 7 \\times 10$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $4 \\times 1000 = 4000$ et $7 \\times 10 = 70$, donc $4000 + 70 = 4070$. Ne laisse pas tomber le zéro des centaines : il indique qu'il n'y a aucune centaine.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles écritures représentent le nombre 2 409 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$2 \\times 1000 + 4 \\times 100 + 9 = 2409$ et $2000 + 400 + 9 = 2409$. L'erreur tentante est $2 \\times 1000 + 4 \\times 10 + 9$, qui donne 2 049 : le 4 est au rang des centaines, pas des dizaines.",
+                  "answers": [
+                    {
+                      "content": "$2 \\times 1000 + 4 \\times 100 + 9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2 \\times 1000 + 4 \\times 10 + 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2000 + 400 + 9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2 \\times 1000 + 40 + 9 \\times 10$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus grand nombre de quatre chiffres différents formé avec 9, 0, 2 et 7, chaque chiffre étant utilisé une seule fois ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour être le plus grand, on met les grands chiffres à gauche : 9, puis 7, puis 2, puis 0, soit 9 720. L'erreur tentante est 9 702 : le 0 placé avant le 2 fait baisser le nombre.",
+                  "answers": [
+                    {
+                      "content": "9 720",
+                      "correct": true
+                    },
+                    {
+                      "content": "9 702",
+                      "correct": false
+                    },
+                    {
+                      "content": "9 270",
+                      "correct": false
+                    },
+                    {
+                      "content": "9 027",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, lesquels ont un 5 au rang des centaines ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Il faut regarder le troisième chiffre en partant de la droite. 1 503, 2 512 et 7 590 ont bien un 5 à ce rang. Dans 5 300, le 5 est au rang des milliers ; dans 1 050, il est au rang des dizaines.",
+                  "answers": [
+                    {
+                      "content": "1 503",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 512",
+                      "correct": true
+                    },
+                    {
+                      "content": "5 300",
+                      "correct": false
+                    },
+                    {
+                      "content": "7 590",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 050",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Lire, écrire et décomposer un nombre",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Une école reçoit 3 cartons, 4 paquets et 7 cahiers isolés. Combien de cahiers reçoit-elle en tout ?",
+                  "question_type": "single_choice",
+                  "explanation": "$3 \\times 100 + 4 \\times 10 + 7 = 347$. L'erreur la plus fréquente est d'additionner 3 + 4 + 7 = 14, sans tenir compte des rangs.",
+                  "answers": [
+                    {
+                      "content": "347",
+                      "correct": true
+                    },
+                    {
+                      "content": "14",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 407",
+                      "correct": false
+                    },
+                    {
+                      "content": "437",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel nombre s'écrit « huit mille six cents deux » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Huit mille vaut 8 000, six cents vaut 600 et deux vaut 2. Le total est 8 602. Le zéro des dizaines est indispensable : il n'y a aucune dizaine.",
+                  "answers": [
+                    {
+                      "content": "8 602",
+                      "correct": true
+                    },
+                    {
+                      "content": "8 620",
+                      "correct": false
+                    },
+                    {
+                      "content": "8 062",
+                      "correct": false
+                    },
+                    {
+                      "content": "86 002",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, lesquels ont un 7 au rang des centaines ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Le rang des centaines est le troisième chiffre en partant de la droite. 1 789 et 3 741 ont un 7 à ce rang. Dans 7 120, le 7 est au rang des milliers ; dans 2 071, il est au rang des dizaines.",
+                  "answers": [
+                    {
+                      "content": "1 789",
+                      "correct": true
+                    },
+                    {
+                      "content": "7 120",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 071",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 741",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre dix mille s'écrit 10 000.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Dix mille vaut $10 \\times 1000$ : il y a un 1 au rang des dizaines de milliers, puis quatre zéros. Le nombre 9 999, lui, n'a que quatre chiffres.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit nombre de quatre chiffres différents formé avec 4, 1, 0 et 7, chaque chiffre étant utilisé une seule fois ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour le plus petit, on met les petits chiffres à gauche, sans 0 en tête : 1, puis 0, puis 4, puis 7, soit 1 047. L'erreur tentante est 0 147 : un nombre ne commence pas par 0, et 0 147 n'est que 147.",
+                  "answers": [
+                    {
+                      "content": "1 047",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 074",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 470",
+                      "correct": false
+                    },
+                    {
+                      "content": "0 147",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un nombre a 5 au rang des milliers, 0 au rang des centaines, 9 au rang des dizaines et 4 au rang des unités. Quel est ce nombre ?",
+                  "question_type": "single_choice",
+                  "explanation": "On écrit les chiffres dans l'ordre des rangs : 5 (milliers), 0 (centaines), 9 (dizaines), 4 (unités), soit 5 094. L'erreur tentante est 5 904 : on a inversé les centaines et les dizaines.",
+                  "answers": [
+                    {
+                      "content": "5 094",
+                      "correct": true
+                    },
+                    {
+                      "content": "5 904",
+                      "correct": false
+                    },
+                    {
+                      "content": "5 940",
+                      "correct": false
+                    },
+                    {
+                      "content": "594",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Comparer et ranger des nombres entiers",
+          "subtitle": "Dire quel nombre est le plus grand et ranger une liste de nombres",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Comparer deux nombres entiers avec les signes $\\lt$, $\\gt$, $\\le$ et $\\ge$.</li><li>Ranger une liste de nombres du plus petit au plus grand, ou l'inverse.</li></ul><h2>L'image pour comprendre</h2><p><strong>Les billes de la récréation.</strong> Koffi a 58 billes et Awa en a 62. Ils ne recomptent pas tout : ils regardent d'abord les paquets de dix billes. Koffi a 5 paquets, Awa en a 6. Awa a donc plus de billes.</p><p><em>Le pont.</em> Les paquets de dix sont les dizaines : le chiffre de gauche dit combien il y en a. Le plus grand nombre de paquets l'emporte. Les unités ne servent qu'à départager deux collections qui ont le même nombre de paquets.</p><p><em>Où l'image s'arrête.</em> La règle « le nombre qui a le plus de chiffres est le plus grand » ne vaut que pour des nombres sans zéro inutile devant : 052 et 52 désignent le même nombre.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Symboles.</strong> $a \\lt b$ se lit « a est plus petit que b ». $a \\gt b$ se lit « a est plus grand que b ». La pointe du signe est toujours tournée vers le plus petit nombre.</p><p><strong>Règle.</strong> Entre deux entiers, celui qui a le plus de chiffres est le plus grand. À nombre de chiffres égal, on compare le chiffre de gauche ; s'il est le même, on passe au suivant.</p><p><strong>Ranger.</strong> Du plus petit au plus grand, c'est l'ordre croissant ; du plus grand au plus petit, c'est l'ordre décroissant.</p></blockquote><h2>Exemple résolu</h2><p>Ranger du plus petit au plus grand : 4 205 ; 398 ; 4 052 ; 405.</p><ol><li>On compte les chiffres : 398 et 405 en ont 3 ; 4 052 et 4 205 en ont 4. Donc 398 et 405 sont plus petits que 4 052 et 4 205.</li><li>398 et 405 ont le même nombre de chiffres. Premier chiffre : 3 contre 4, donc $398 \\lt 405$.</li><li>4 052 et 4 205 ont aussi le même nombre de chiffres. Premier chiffre : 4 contre 4, égal. Deuxième chiffre : 0 contre 2, donc $4052 \\lt 4205$.</li><li>On obtient : $398 \\lt 405 \\lt 4052 \\lt 4205$.</li></ol><h2>Le piège à éviter</h2><p>Comparer les chiffres sans tenir compte de leur place. Par exemple dire que 398 est plus grand que 405, parce que 9 est plus grand que 5. Pour comparer, on regarde les chiffres au même rang, en commençant par la gauche.</p><p>Comment le repérer : si tu compares deux chiffres qui ne sont pas au même rang, arrête-toi et recommence.</p><h2>En une phrase</h2><p>Le nombre qui a le plus de chiffres est le plus grand ; à égalité, le premier chiffre différent en partant de la gauche décide.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Lire un signe de comparaison",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle affirmation est vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "58 est plus petit que 62, car il a 5 dizaines contre 6. La pointe du signe $\\lt$ est tournée vers le plus petit nombre : on écrit $58 \\lt 62$. L'erreur tentante est d'écrire $58 \\gt 62$.",
+                  "answers": [
+                    {
+                      "content": "$58 \\lt 62$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$58 \\gt 62$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$58 = 62$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$62 \\lt 58$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre 999 est plus grand que 1 000.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. 1 000 a quatre chiffres, 999 n'en a que trois : 1 000 est donc le plus grand. Un nombre qui a plus de chiffres est plus grand, à condition de ne pas écrire de zéro inutile devant.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la liste 45, 54, 4 et 504, quel est le plus grand nombre ?",
+                  "question_type": "single_choice",
+                  "explanation": "504 a trois chiffres, il vaut donc plus de cent. L'erreur tentante est 54 : son premier chiffre est aussi 5, mais 504 a un rang de plus, donc il est plus grand.",
+                  "answers": [
+                    {
+                      "content": "54",
+                      "correct": false
+                    },
+                    {
+                      "content": "504",
+                      "correct": true
+                    },
+                    {
+                      "content": "45",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "2 450 et 2 405 ont 2 milliers et 4 centaines ; aux dizaines, 5 l'emporte sur 0 : 2 450 est plus grand. Et 7 n'a qu'un chiffre, 12 en a deux : $7 \\lt 12$. Erreurs tentantes : $1999 \\gt 2000$ et $3000 \\lt 2999$, qui sont fausses.",
+                  "answers": [
+                    {
+                      "content": "2 450 est plus grand que 2 405.",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 999 est plus grand que 2 000.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7 \\lt 12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 000 est plus petit que 2 999.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit nombre parmi 1 000, 999, 1 009 et 1 100 ?",
+                  "question_type": "single_choice",
+                  "explanation": "999 n'a que trois chiffres, les trois autres en ont quatre : c'est le plus petit. L'erreur tentante est 1 000, qui paraît petit parce qu'il commence par 1 : pour comparer, on compte d'abord les chiffres.",
+                  "answers": [
+                    {
+                      "content": "999",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 009",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 100",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour comparer 3 084 et 3 048, c'est le chiffre des dizaines qui décide : 8 est plus grand que 4, donc 3 084 est plus grand.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Les deux nombres ont les mêmes milliers (3) et les mêmes centaines (0). Aux dizaines, 8 l'emporte sur 4. Piège : les unités (4 et 8) ne décident pas, puisque la comparaison se fait de gauche à droite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Ranger et comparer des entiers",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Range du plus petit au plus grand les nombres 312, 98, 1 004 et 1 040. Quelle suite est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "98 n'a que deux chiffres, 312 en a trois, et 1 004 et 1 040 en ont quatre. Entre ces deux derniers, milliers et centaines sont égaux ; aux dizaines, 0 est plus petit que 4 : 1 004 est le plus petit des deux.",
+                  "answers": [
+                    {
+                      "content": "$98 \\lt 312 \\lt 1004 \\lt 1040$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$312 \\lt 98 \\lt 1004 \\lt 1040$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$98 \\lt 312 \\lt 1040 \\lt 1004$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1040 \\lt 1004 \\lt 312 \\lt 98$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre 2 500 est plus petit que 2 050.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Les deux ont 2 milliers ; 2 500 a 5 centaines, 2 050 n'en a aucune. Donc 2 500 est le plus grand. Erreur tentante : voir le 5 de 2 050 à la fin et croire qu'il est plus grand.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel nombre est compris strictement entre 1 299 et 1 301 ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $1299 \\lt 1300 \\lt 1301$ : 1 300 vient juste après 1 299. L'erreur tentante est 1 399, qui a le bon nombre de chiffres mais dépasse 1 301, car aux dizaines 9 est plus grand que 0.",
+                  "answers": [
+                    {
+                      "content": "1 029",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 300",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 399",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 030",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, lesquels sont plus grands que 4 000 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "4 001 est plus grand que 4 000 (même nombre de chiffres, unités plus grandes), et 10 000 a plus de chiffres. 4 000 est égal à 4 000, il n'est pas plus grand ; 3 999 est plus petit.",
+                  "answers": [
+                    {
+                      "content": "4 001",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 999",
+                      "correct": false
+                    },
+                    {
+                      "content": "4 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "10 000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, lesquels sont plus petits que 100 ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Un nombre plus petit que 100 a au plus deux chiffres : 19, 91 et 99 conviennent. 109 et 190 ont trois chiffres, ils dépassent 100. L'erreur tentante est de ne regarder que le premier chiffre : 109 commence par 1 et paraît petit.",
+                  "answers": [
+                    {
+                      "content": "19",
+                      "correct": true
+                    },
+                    {
+                      "content": "91",
+                      "correct": true
+                    },
+                    {
+                      "content": "99",
+                      "correct": true
+                    },
+                    {
+                      "content": "109",
+                      "correct": false
+                    },
+                    {
+                      "content": "190",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus grand nombre de quatre chiffres différents qu'on peut écrire avec 8, 5, 2 et 1 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le plus grand met les grands chiffres à gauche : 8, 5, 2, 1, soit 8 521. L'erreur tentante est 8 512 : le 2 et le 1 sont inversés aux dizaines et aux unités.",
+                  "answers": [
+                    {
+                      "content": "8 521",
+                      "correct": true
+                    },
+                    {
+                      "content": "8 512",
+                      "correct": false
+                    },
+                    {
+                      "content": "8 251",
+                      "correct": false
+                    },
+                    {
+                      "content": "8 125",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Comparer et ranger dans un contexte",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Une école compte 1 248 élèves cette année. L'an dernier, elle en comptait 1 284. Quelle affirmation est vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "$1284 \\gt 1248$ : aux dizaines, 8 l'emporte sur 4. L'école était donc plus nombreuse l'an dernier, de $1284 - 1248 = 36$ élèves. Erreur tentante : regarder les unités, où 8 l'emporte sur 4, et conclure que 1 248 est le plus grand.",
+                  "answers": [
+                    {
+                      "content": "L'école avait plus d'élèves l'an dernier.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'école a plus d'élèves cette année.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux années, l'école comptait autant d'élèves.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'école compte 36 élèves de plus cette année.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le plus petit nombre de cinq chiffres est 10 000.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Un nombre de cinq chiffres commence au moins par 1, suivi de quatre zéros. Ni 9 999 ni 1 000 ne sont des nombres de cinq chiffres.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'entiers sont strictement compris entre 25 et 30 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les entiers concernés sont 26, 27, 28 et 29 : il y en a quatre. Les bornes 25 et 30 sont exclues, à cause du mot « strictement ». L'erreur tentante est 5, qui compte 25 et oublie que cette borne est exclue.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": true
+                    },
+                    {
+                      "content": "5",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre vendeurs comptent leurs cartons de tomates. Kouadio en a 1 040, Awa 1 004, Yao 980 et Fatou 1 400. Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Fatou a le plus grand nombre de cartons (1 400). Kouadio dépasse Awa : aux dizaines, 4 l'emporte sur 0. Yao a le plus petit nombre : 980 n'a que trois chiffres, les autres en ont quatre.",
+                  "answers": [
+                    {
+                      "content": "Fatou a le plus grand nombre de cartons.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Yao a plus de cartons qu'Awa.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Kouadio a plus de cartons qu'Awa.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le plus petit nombre de cartons est celui de Fatou.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, lesquels sont compris strictement entre 4 500 et 4 600 ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Un nombre compris entre 4 500 et 4 600 est plus grand que 4 500 et plus petit que 4 600. 4 520, 4 550 et 4 580 conviennent. 4 499 est juste sous 4 500, et 4 605 dépasse 4 600.",
+                  "answers": [
+                    {
+                      "content": "4 520",
+                      "correct": true
+                    },
+                    {
+                      "content": "4 550",
+                      "correct": true
+                    },
+                    {
+                      "content": "4 499",
+                      "correct": false
+                    },
+                    {
+                      "content": "4 580",
+                      "correct": true
+                    },
+                    {
+                      "content": "4 605",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On range par ordre décroissant les nombres 4 052, 4 205, 398 et 405. Quel nombre vient en premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un rangement décroissant commence par le plus grand : 4 205. Il a quatre chiffres, et à la place des centaines il a 2, contre 0 pour 4 052. L'erreur tentante est 4 052, qui a le même début mais un chiffre plus petit aux centaines.",
+                  "answers": [
+                    {
+                      "content": "4 205",
+                      "correct": true
+                    },
+                    {
+                      "content": "4 052",
+                      "correct": false
+                    },
+                    {
+                      "content": "405",
+                      "correct": false
+                    },
+                    {
+                      "content": "398",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Additionner, soustraire et multiplier",
+          "subtitle": "À compléter : division euclidienne, multiples et diviseurs (à vérifier au programme)",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Calculer une somme, une différence ou un produit de nombres entiers.</li><li>Vérifier une soustraction à l'aide d'une addition.</li><li>Choisir la bonne opération pour un problème de la vie courante.</li></ul><h2>L'image pour comprendre</h2><p><strong>La buvette de l'école.</strong> À la récréation, Aïcha tient la buvette. Chaque beignet coûte 25 F. Le matin, sa caisse contient déjà 1 250 F ; à midi, elle reçoit 3 400 F de plus.</p><p><em>Le pont.</em> Recevoir de l'argent en plus, c'est une addition : $1250 + 3400$. Vendre 35 beignets à 25 F chacun, c'est une multiplication répétée : $35 \\times 25$. Dépenser une somme, c'est une soustraction.</p><p><em>Où l'image s'arrête.</em> On ne peut pas retirer plus d'argent qu'il n'y en a dans la caisse. De même, chez les entiers naturels, $3 - 5$ n'a pas de résultat.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Somme.</strong> Le résultat d'une addition s'appelle une somme : $a + b$. On peut changer l'ordre des termes : $a + b = b + a$.</p><p><strong>Différence.</strong> Le résultat d'une soustraction s'appelle une différence. Pour la vérifier, on ajoute : si $a - b = c$, alors $b + c = a$.</p><p><strong>Produit.</strong> Le résultat d'une multiplication s'appelle un produit : $a \\times b$. On peut changer l'ordre des facteurs : $a \\times b = b \\times a$. Multiplier par 10 ajoute un zéro à droite.</p></blockquote><h2>Exemple résolu</h2><p>Aïcha vend 35 beignets à 25 F. Quelle somme encaisse-t-elle ?</p><ol><li>C'est une multiplication : $35 \\times 25$.</li><li>On découpe 35 en $30 + 5$ : $30 \\times 25 = 750$ et $5 \\times 25 = 125$.</li><li>On additionne : $750 + 125 = 875$. Elle encaisse 875 F.</li><li>Vérification : en calculant $25 \\times 35$, on retrouve aussi 875, car on peut échanger les facteurs.</li></ol><h2>Le piège à éviter</h2><p>Poser une addition sans aligner les chiffres de même rang. Par exemple, pour $1250 + 3400$, certains écrivent 4 550 : ils additionnent 2 centaines et 4 centaines en en comptant 5, au lieu de 6. Le résultat juste est 4 650.</p><p>Comment le repérer : refais l'opération inverse. Si $4650 - 3400$ ne donne pas 1 250, l'addition est fausse.</p><h2>En une phrase</h2><p>On ajoute pour une somme, on retire pour une différence, on multiplie pour un lot identique, et l'on vérifie toujours avec l'opération inverse.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Nommer et vérifier les opérations",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans $1250 + 3400 = 4650$, comment s'appelle le nombre 4 650 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le résultat d'une addition est une somme. Le produit est le résultat d'une multiplication, et la différence celui d'une soustraction. Ne confonds pas les trois mots.",
+                  "answers": [
+                    {
+                      "content": "La somme",
+                      "correct": true
+                    },
+                    {
+                      "content": "La différence",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le produit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le facteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans $4650 - 875 = 3775$, comment s'appelle le nombre 3 775 ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le résultat d'une soustraction est une différence : c'est ce qui reste après avoir retiré 875 à 4 650. L'erreur tentante est « la somme » : une somme vient d'une addition, pas d'une soustraction.",
+                  "answers": [
+                    {
+                      "content": "La somme",
+                      "correct": false
+                    },
+                    {
+                      "content": "La différence",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le produit",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le facteur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour vérifier $4650 - 875 = 3775$, on calcule $3775 + 875$ : on doit retrouver 4 650.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Une soustraction se vérifie par l'addition inverse : $3775 + 875 = 4650$. Si ce n'est pas le cas, le calcul de soustraction est faux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans les entiers naturels, on peut calculer $875 - 4650$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Le résultat serait négatif, et les entiers naturels ne sont jamais négatifs. On ne peut retirer un nombre que s'il est plus petit ou égal à celui dont on part.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces égalités, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$35 \\times 25$ et $25 \\times 35$ donnent tous deux 875 : on peut échanger les facteurs. $35 + 25$ vaut 60, et $35 \\times 25$ vaut 875, pas 825.",
+                  "answers": [
+                    {
+                      "content": "$35 \\times 25 = 875$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$25 \\times 35 = 875$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$35 \\times 25 = 825$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$35 + 25 = 875$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Aïcha avait 1 250 F et reçoit 3 400 F. Quelle opération donne ce qu'elle a en tout ?",
+                  "question_type": "single_choice",
+                  "explanation": "Recevoir une somme en plus s'ajoute à ce qu'on a : c'est une addition, $1250 + 3400 = 4650$. Une multiplication de ces deux montants n'a aucun sens ici, et $3400 - 1250$ ne donne que l'écart entre les deux montants.",
+                  "answers": [
+                    {
+                      "content": "Une addition : $1250 + 3400$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une soustraction : $3400 - 1250$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une multiplication : $1250 \\times 3400$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une soustraction : $1250 - 3400$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer une somme, une différence ou un produit",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Calcule $2347 + 1568$.",
+                  "question_type": "single_choice",
+                  "explanation": "On ajoute rang par rang. Unités : 7 + 8 = 15, on écrit 5 et on retient 1. Dizaines : 4 + 6 + 1 = 11, on écrit 1 et on retient 1. Centaines : 3 + 5 + 1 = 9. Milliers : 2 + 1 = 3. Total : 3 915.",
+                  "answers": [
+                    {
+                      "content": "3 915",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 815",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 925",
+                      "correct": false
+                    },
+                    {
+                      "content": "4 915",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $1000 - 368$.",
+                  "question_type": "single_choice",
+                  "explanation": "Vérifie par l'addition : $632 + 368 = 1000$. L'erreur tentante est 642 : la vérification $642 + 368 = 1010$ montre qu'il est faux.",
+                  "answers": [
+                    {
+                      "content": "632",
+                      "correct": true
+                    },
+                    {
+                      "content": "642",
+                      "correct": false
+                    },
+                    {
+                      "content": "668",
+                      "correct": false
+                    },
+                    {
+                      "content": "732",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$6 \\times 40 = 240$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $6 \\times 4 = 24$, puis on ajoute un zéro : $6 \\times 40 = 240$. Multiplier par 10 ajoute un zéro à droite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquels de ces calculs sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$12 \\times 15 = 12 \\times 10 + 12 \\times 5 = 120 + 60 = 180$. Et $15 \\times 100 = 1500$, car multiplier par 100 ajoute deux zéros. Erreurs tentantes : $25 \\times 4 = 90$ (c'est 100) et $7 \\times 9 = 56$ (c'est 63).",
+                  "answers": [
+                    {
+                      "content": "$12 \\times 15 = 180$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12 \\times 15 = 170$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15 \\times 100 = 1500$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$25 \\times 4 = 90$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7 \\times 9 = 56$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un cahier coûte 350 F. Combien coûtent 4 cahiers ?",
+                  "question_type": "single_choice",
+                  "explanation": "$350 \\times 4 = 1400$ : $300 \\times 4 = 1200$ et $50 \\times 4 = 200$, donc $1200 + 200 = 1400$. L'erreur tentante est 1 040 F, où le 4 est mal placé.",
+                  "answers": [
+                    {
+                      "content": "1 400 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 040 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 300 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 450 F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève affirme : $0 \\times 258 = 258$. Que faut-il en penser ?",
+                  "question_type": "single_choice",
+                  "explanation": "Multiplier par 0 donne toujours 0 : $0 \\times 258 = 0$. Retiens aussi que multiplier par 1 laisse le nombre inchangé.",
+                  "answers": [
+                    {
+                      "content": "C'est vrai : multiplier par 0 ne change pas le nombre.",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux : tout nombre multiplié par 0 donne 0.",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est vrai pour 258 seulement.",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir sans calculer.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Résoudre un problème en plusieurs étapes",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "La caisse de la buvette contient 1 250 F. Aïcha vend 35 beignets à 25 F. Combien y a-t-il dans la caisse ensuite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les 35 beignets rapportent $35 \\times 25 = 875$ F. On ajoute cette somme : $1250 + 875 = 2125$. L'erreur tentante est 875 F : on oublie ce qu'il y avait déjà dans la caisse.",
+                  "answers": [
+                    {
+                      "content": "2 125 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 125 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 025 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "875 F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une école achète 12 paquets de 25 feuilles. Elle en utilise 180. Combien de feuilles reste-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "$12 \\times 25 = 300$ feuilles au total, puis $300 - 180 = 120$. Vérifie : $120 + 180 = 300$. L'erreur tentante est 480, obtenu en additionnant au lieu de soustraire.",
+                  "answers": [
+                    {
+                      "content": "120",
+                      "correct": true
+                    },
+                    {
+                      "content": "112",
+                      "correct": false
+                    },
+                    {
+                      "content": "180",
+                      "correct": false
+                    },
+                    {
+                      "content": "480",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un commerçant a 7 sacs contenant chacun 15 oranges. Il a donc 105 oranges.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $7 \\times 15 = 7 \\times 10 + 7 \\times 5 = 70 + 35 = 105$. L'erreur tentante est de faire 7 + 15 = 22 : on additionne au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces calculs, lesquels donnent 100 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$4 \\times 25 = 100$ et $50 + 50 = 100$. Erreurs tentantes : $10 \\times 9 = 90$ et $1000 - 800 = 200$. Ni l'un ni l'autre ne donne 100.",
+                  "answers": [
+                    {
+                      "content": "$4 \\times 25$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$50 + 50$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$10 \\times 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1000 - 800$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations sur les opérations, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Si $a + b = c$, alors $c - b = a$ : une somme se vérifie par une soustraction, et réciproquement. Faux : $3 - 5$ n'a pas de résultat dans les entiers naturels, et l'ordre compte : $12 - 7$ vaut 5, alors que $7 - 12$ n'a pas de résultat.",
+                  "answers": [
+                    {
+                      "content": "Une addition peut se vérifier par une soustraction.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une soustraction peut se vérifier par une addition.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans les entiers naturels, $3 - 5 = 2$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12 - 7 = 7 - 12$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une multiplication peut se vérifier par des additions répétées : $3 \\times 4 = 4 + 4 + 4$.",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le résultat de $2375 + 1625 - 1000$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On fait les calculs dans l'ordre, de gauche à droite : $2375 + 1625 = 4000$, puis $4000 - 1000 = 3000$. L'erreur tentante est 4 000 : on oublie la soustraction finale.",
+                  "answers": [
+                    {
+                      "content": "3 000",
+                      "correct": true
+                    },
+                    {
+                      "content": "4 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 600",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
