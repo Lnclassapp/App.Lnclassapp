@@ -1,0 +1,945 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Calcul numérique",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "Mathématiques",
+      "series_name": "A",
+      "essentials": [
+        {
+          "name": "Fractions : additionner, multiplier, diviser",
+          "subtitle": "Calculer avec des parts de mangue ou de sucre",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Additionner deux fractions en les ramenant au même dénominateur.</li>\n<li>Multiplier deux fractions, puis diviser une fraction par une autre.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Les parts de mangue (l'addition).</strong> Tantie Adjoua coupe une mangue en 4 parts égales. Ton petit frère prend une part, ta sœur en prend une autre. Ensemble, ils ont mangé deux parts sur quatre, c'est-à-dire la moitié de la mangue.</p>\n<p><em>Le pont.</em> Une part sur quatre s'écrit $\\dfrac{1}{4}$. Le dénominateur 4 dit en combien de parts égales la mangue a été coupée, et le numérateur 1 dit combien de parts on prend. Additionner, c'est compter ensemble des parts de même taille : $\\dfrac{1}{4} + \\dfrac{1}{4} = \\dfrac{2}{4}$.</p>\n<p><em>Où l'image s'arrête.</em> Ici, les parts ont la même taille. Si une mangue est coupée en 3 et une autre en 4, les parts n'ont pas la même taille : il faut d'abord ramener les deux fractions au même dénominateur (12), puis compter.</p>\n<p><strong>2. Le sac de sucre (la multiplication).</strong> Un commerçant a $\\dfrac{3}{4}$ d'un sac de sucre. Une cliente en achète la moitié de ce qu'il a : elle repart avec la moitié de $\\dfrac{3}{4}$ du sac.</p>\n<p><em>Le pont.</em> « La moitié de » se traduit par « multiplié par $\\dfrac{1}{2}$ ». La moitié de $\\dfrac{3}{4}$ est donc $\\dfrac{1}{2} \\times \\dfrac{3}{4} = \\dfrac{3}{8}$.</p>\n<p><em>Où l'image s'arrête.</em> Le sac de sucre ne montre pas la division par une fraction. Diviser, c'est chercher combien de fois une part tient dans le tout.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Fraction.</strong> Pour $b \\neq 0$, $\\dfrac{a}{b}$ est le quotient de $a$ par $b$ : $a$ est le <strong>numérateur</strong>, $b$ le <strong>dénominateur</strong>.</p>\n<p><strong>Addition.</strong> Avec le même dénominateur : $\\dfrac{a}{c} + \\dfrac{b}{c} = \\dfrac{a + b}{c}$. Sinon, on ramène d'abord les deux fractions au même dénominateur.</p>\n<p><strong>Multiplication.</strong> $\\dfrac{a}{b} \\times \\dfrac{c}{d} = \\dfrac{a \\times c}{b \\times d}$, avec $b$ et $d$ non nuls.</p>\n<p><strong>Division.</strong> Diviser par une fraction non nulle revient à multiplier par son inverse : $\\dfrac{a}{b} \\div \\dfrac{c}{d} = \\dfrac{a}{b} \\times \\dfrac{d}{c}$, avec $b$, $c$ et $d$ non nuls.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p>Calculons $\\dfrac{2}{3} + \\dfrac{5}{6}$, puis $\\dfrac{3}{4} \\div \\dfrac{3}{8}$.</p>\n<ul>\n<li><strong>Étape 1 :</strong> 6 est un multiple de 3 ($6 = 2 \\times 3$). On écrit $\\dfrac{2}{3} = \\dfrac{2 \\times 2}{3 \\times 2} = \\dfrac{4}{6}$. On multiplie le haut et le bas par le même nombre : la valeur ne change pas.</li>\n<li><strong>Étape 2 :</strong> Les dénominateurs sont égaux : $\\dfrac{4}{6} + \\dfrac{5}{6} = \\dfrac{9}{6}$.</li>\n<li><strong>Étape 3 :</strong> On simplifie par 3 : $\\dfrac{9}{6} = \\dfrac{3}{2}$.</li>\n<li><strong>Étape 4 :</strong> Diviser par $\\dfrac{3}{8}$, c'est multiplier par son inverse $\\dfrac{8}{3}$ : $\\dfrac{3}{4} \\times \\dfrac{8}{3} = \\dfrac{24}{12} = 2$.</li>\n</ul>\n<h2>Le piège à éviter</h2>\n<p>L'erreur la plus fréquente : additionner les numérateurs <strong>et</strong> les dénominateurs. Pour $\\dfrac{1}{2} + \\dfrac{1}{3}$, un élève écrit $\\dfrac{2}{5}$. C'est faux : $\\dfrac{1}{2} = \\dfrac{3}{6}$ et $\\dfrac{1}{3} = \\dfrac{2}{6}$, donc la somme vaut $\\dfrac{5}{6}$. Le bon réflexe : quand deux fractions ont déjà le même dénominateur, celui-ci reste le même après l'addition.</p>\n<h2>En une phrase</h2>\n<p>Pour additionner des fractions, mets-les au même dénominateur. Pour les multiplier, multiplie les hauts entre eux et les bas entre eux. Pour les diviser, multiplie par l'inverse de la deuxième.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître une fraction et son vocabulaire",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans la fraction $\\dfrac{3}{7}$, quel nombre est le dénominateur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le dénominateur est le nombre du bas : 7. Il dit en combien de parts égales le tout a été coupé. Le 3 du haut est le numérateur. Ne fais pas la somme 3 + 7 = 10.",
+                  "answers": [
+                    {
+                      "content": "$7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fraction $\\dfrac{5}{5}$ vaut 1.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Cinq cinquièmes font le tout entier : on a pris toutes les parts. Une fraction dont le numérateur et le dénominateur sont égaux vaut 1, et non 5.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une mangue est coupée en 4 parts égales. Ton frère en prend 3 parts. Quelle fraction de la mangue a-t-il prise ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le dénominateur 4 compte les parts égales, le numérateur 3 compte les parts prises : $\\dfrac{3}{4}$. L'erreur $\\dfrac{4}{3}$ inverse la fraction : elle vaut plus que 1, ce qui est impossible pour une seule mangue.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{3}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{4}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{1}{4}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces fractions, lesquelles sont égales à $\\dfrac{1}{2}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\dfrac{2}{4}$ et $\\dfrac{3}{6}$ sont égales à $\\dfrac{1}{2}$ : on a multiplié le haut et le bas par le même nombre. L'erreur la plus tentante, $\\dfrac{1}{4}$, ne prend que le quart du tout, pas la moitié.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{2}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{3}{6}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{1}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{2}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Simplifie la fraction $\\dfrac{12}{18}$ : quelle est son écriture la plus simple ?",
+                  "question_type": "single_choice",
+                  "explanation": "Divise le haut et le bas par le même nombre, 6 : $\\dfrac{12}{18} = \\dfrac{2}{3}$. Si tu ne divises que le haut, tu obtiens $\\dfrac{6}{18}$, qui vaut $\\dfrac{1}{3}$ : la valeur a changé.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{2}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{3}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{6}{18}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Additionner et multiplier des fractions",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Calcule $\\dfrac{1}{3} + \\dfrac{1}{3}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Les dénominateurs sont déjà égaux : on additionne seulement les numérateurs, $\\dfrac{1 + 1}{3} = \\dfrac{2}{3}$. Ne touche pas au dénominateur : $\\dfrac{2}{6}$ ne vaut que $\\dfrac{1}{3}$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{2}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{2}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{1}{6}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\dfrac{1}{2} + \\dfrac{1}{3}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Mets les deux fractions au dénominateur 6 : $\\dfrac{1}{2} = \\dfrac{3}{6}$ et $\\dfrac{1}{3} = \\dfrac{2}{6}$. La somme vaut donc $\\dfrac{5}{6}$. L'erreur la plus fréquente additionne les numérateurs et les dénominateurs : $\\dfrac{2}{5}$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{5}{6}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{2}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{1}{6}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\dfrac{2}{5} \\times \\dfrac{3}{4}$.",
+                  "question_type": "single_choice",
+                  "explanation": "On multiplie les numérateurs ($2 \\times 3 = 6$) et les dénominateurs ($5 \\times 4 = 20$) : $\\dfrac{6}{20}$, puis on simplifie par 2 : $\\dfrac{3}{10}$. Pour multiplier, on n'additionne jamais les dénominateurs. $\\dfrac{6}{9}$ et $\\dfrac{5}{9}$ viennent de ce calcul interdit.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{3}{10}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{6}{9}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{5}{9}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\dfrac{5}{6} \\div \\dfrac{5}{3}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Diviser par $\\dfrac{5}{3}$, c'est multiplier par son inverse $\\dfrac{3}{5}$ : $\\dfrac{5}{6} \\times \\dfrac{3}{5} = \\dfrac{15}{30} = \\dfrac{1}{2}$. Multiplier directement par $\\dfrac{5}{3}$ donne $\\dfrac{25}{18}$ : c'est l'erreur de ne pas retourner la deuxième fraction. Retourner la première donne $2$.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{25}{18}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un quart de 8 fait 2 : $\\dfrac{1}{4} \\times 8 = 2$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $\\dfrac{1}{4} \\times 8 = \\dfrac{8}{4} = 2$. Multiplier par une fraction plus petite que 1 donne un résultat plus petit que le nombre de départ.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Calculer une expression fractionnaire",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Calcule $\\dfrac{2}{3} + \\dfrac{5}{6}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Mets $\\dfrac{2}{3}$ au dénominateur 6 : $\\dfrac{4}{6}$. Puis $\\dfrac{4}{6} + \\dfrac{5}{6} = \\dfrac{9}{6} = \\dfrac{3}{2}$. La réponse $\\dfrac{7}{6}$ oublie de convertir $\\dfrac{2}{3}$ ; $\\dfrac{7}{9}$ additionne les dénominateurs.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{3}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{7}{9}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{7}{6}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\dfrac{3}{4} \\div \\dfrac{3}{8}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Multiplie par l'inverse : $\\dfrac{3}{4} \\times \\dfrac{8}{3} = \\dfrac{24}{12} = 2$. Multiplier sans retourner donne $\\dfrac{9}{32}$. Retourner la première fraction donne $\\dfrac{1}{2}$.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{9}{32}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une recette demande $\\dfrac{3}{4}$ de litre d'huile. Tu veux préparer la moitié de la recette. Quelles quantités d'huile conviennent ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Prendre la moitié, c'est multiplier par $\\dfrac{1}{2}$ : $\\dfrac{3}{4} \\times \\dfrac{1}{2} = \\dfrac{3}{8}$ de litre. Les deux écritures correctes donnent la même quantité. Confondre « moitié » et « double » donne $\\dfrac{3}{2}$ de litre ; $\\dfrac{1}{4}$ de litre vient d'une soustraction erronée.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{3}{8}$ de litre",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{3}{4} \\times \\dfrac{1}{2}$ de litre",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{3}{2}$ de litre",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{1}{4}$ de litre",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\dfrac{4}{5} - \\dfrac{1}{10}$.",
+                  "question_type": "single_choice",
+                  "explanation": "Mets $\\dfrac{4}{5}$ au dénominateur 10 : $\\dfrac{8}{10}$. Puis $\\dfrac{8}{10} - \\dfrac{1}{10} = \\dfrac{7}{10}$. La réponse $\\dfrac{3}{10}$ oublie de convertir $\\dfrac{4}{5}$ avant de soustraire.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{7}{10}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{3}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{3}{5}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de riz coûte 1 200 F. Tu n'achètes que les $\\dfrac{3}{4}$ de ce sac. Combien paies-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le prix de $\\dfrac{3}{4}$ du sac est $1\\,200 \\times \\dfrac{3}{4} = \\dfrac{3\\,600}{4} = 900$ F. L'erreur 300 F ne prend que le quart du sac. L'erreur 1 600 F inverse la fraction : elle calcule $1\\,200 \\times \\dfrac{4}{3}$.",
+                  "answers": [
+                    {
+                      "content": "900 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 600 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "300 F",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Puissances d'un nombre",
+          "subtitle": "Compter des produits de facteurs égaux, comme des caisses empilées",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Écrire un produit de facteurs égaux sous la forme d'une puissance, et lire l'exposant.</li>\n<li>Calculer une puissance, puis simplifier le produit de deux puissances de même base.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Les caisses empilées (la puissance).</strong> Au marché, un vendeur de tomates pose 2 caisses au premier étage de son étal. Chaque étage du dessus a deux fois plus de caisses que l'étage du dessous : 2 au premier, 2 × 2 = 4 au deuxième, 2 × 2 × 2 = 8 au troisième.</p>\n<p><em>Le pont.</em> Le nombre 2, qui est multiplié, c'est la <strong>base</strong>. Le nombre de fois où on l'écrit en produit, c'est l'<strong>exposant</strong>. Au troisième étage, on a $2 \\times 2 \\times 2 = 2^3 = 8$ caisses : la base 2 apparaît trois fois, donc l'exposant est 3.</p>\n<p><em>Où l'image s'arrête.</em> L'image ne porte que sur des exposants entiers positifs. Un exposant 1 ne change rien : $2^1 = 2$.</p>\n<p><strong>2. Les étages qui se rejoignent (le produit de puissances).</strong> Un premier vendeur empile $2^3$ caisses, un second empile $2^4$ caisses sur le même plan. Au total, on compte 3 facteurs égaux à 2, puis 4 autres facteurs égaux à 2 : cela fait 7 facteurs égaux à 2.</p>\n<p><em>Le pont.</em> Quand les bases sont égales, on additionne les exposants : $2^3 \\times 2^4 = 2^{3+4} = 2^7$.</p>\n<p><em>Où l'image s'arrête.</em> Cette règle ne marche que si la base est la même. $2^3 \\times 3^4$ ne se simplifie pas ainsi.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Puissance.</strong> Pour $a$ réel et $n$ entier naturel non nul, $a^n = a \\times a \\times \\dots \\times a$, avec $n$ facteurs égaux à $a$.</p>\n<p><strong>Produit de puissances de même base.</strong> $a^m \\times a^n = a^{m+n}$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p>Calculons $2^5$, puis simplifions $2^3 \\times 2^4$.</p>\n<ul>\n<li><strong>Étape 1 :</strong> $2^5$ veut dire cinq facteurs égaux à 2 : $2 \\times 2 \\times 2 \\times 2 \\times 2$.</li>\n<li><strong>Étape 2 :</strong> On multiplie de proche en proche : $2 \\times 2 = 4$, $4 \\times 2 = 8$, $8 \\times 2 = 16$, $16 \\times 2 = 32$. Donc $2^5 = 32$.</li>\n<li><strong>Étape 3 :</strong> Les deux puissances ont la même base 2 : $2^3 \\times 2^4 = 2^{3+4} = 2^7$.</li>\n<li><strong>Étape 4 (vérification) :</strong> $2^3 = 8$ et $2^4 = 16$, donc $8 \\times 16 = 128$, et $2^7 = 128$. C'est bien le même nombre.</li>\n</ul>\n<h2>Le piège à éviter</h2>\n<p>L'erreur la plus fréquente : multiplier la base par l'exposant. $2^3$ devient alors $2 \\times 3 = 6$. C'est faux : $2^3 = 2 \\times 2 \\times 2 = 8$. Repère-le : l'exposant compte les facteurs ; il ne se multiplie pas avec la base.</p>\n<h2>En une phrase</h2>\n<p>Une puissance compte combien de fois on multiplie la même base : $2^3$ veut dire $2 \\times 2 \\times 2$. Quand on multiplie deux puissances de même base, on additionne les exposants.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître une puissance et son exposant",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans $5^3$, quel est l'exposant ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'exposant est le petit nombre en haut à droite : 3. La base est 5, et on la multiplie 3 fois : $5 \\times 5 \\times 5 = 125$. Ne fais pas la somme 5 + 3 = 8.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'écriture $2^4$ signifie $2 \\times 4$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. $2^4 = 2 \\times 2 \\times 2 \\times 2 = 16$, alors que $2 \\times 4 = 8$. L'exposant compte combien de facteurs égaux à 2 on écrit : il n'est pas un facteur du produit.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur de $10^3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$10^3 = 10 \\times 10 \\times 10 = 1\\,000$ : trois zéros après le 1. L'erreur $30$ multiplie la base par l'exposant, $10 \\times 3$. L'erreur $100$ ne compte que deux facteurs.",
+                  "answers": [
+                    {
+                      "content": "$1\\,000$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$30$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces écritures, lesquelles valent $32$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$2^5 = 2 \\times 2 \\times 2 \\times 2 \\times 2 = 32$, et $4^2 \\times 2 = 16 \\times 2 = 32$. Les erreurs $5^2$ (25) et $2 \\times 5$ (10) traitent l'exposant comme un facteur ordinaire.",
+                  "answers": [
+                    {
+                      "content": "$2^5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4^2 \\times 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2 \\times 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Simplifie $2^3 \\times 2^4$ sous la forme d'une seule puissance.",
+                  "question_type": "single_choice",
+                  "explanation": "Même base 2 : on additionne les exposants, $3 + 4 = 7$, donc $2^7$ (soit 128). L'erreur $4^7$ multiplie les bases. L'erreur $2^{12}$ multiplie les exposants, ce qui n'est pas la règle du produit.",
+                  "answers": [
+                    {
+                      "content": "$2^7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4^7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2^{12}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer des puissances",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Calcule $3^4$.",
+                  "question_type": "single_choice",
+                  "explanation": "$3^4 = 3 \\times 3 \\times 3 \\times 3 = 81$. L'erreur $12$ multiplie 3 par 4. L'erreur $64$ inverse base et exposant : elle calcule $4^3$.",
+                  "answers": [
+                    {
+                      "content": "$81$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$64$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $5^2 \\times 2$.",
+                  "question_type": "single_choice",
+                  "explanation": "D'abord $5^2 = 25$, puis $25 \\times 2 = 50$. L'erreur $100$ calcule $(5 \\times 2)^2$ : la puissance ne s'applique qu'au 5, pas au produit par 2.",
+                  "answers": [
+                    {
+                      "content": "$50$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$100$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$20$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de zéros écrit-on derrière le 1 dans $10^6$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Chaque facteur 10 ajoute un zéro : $10^6 = 1\\,000\\,000$, soit six zéros. La réponse 5 oublie un zéro.",
+                  "answers": [
+                    {
+                      "content": "$6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'égalité $2^3 \\times 2^2 = 2^5$ est vraie.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Même base 2, donc on additionne les exposants : $3 + 2 = 5$. Vérification : $8 \\times 4 = 32 = 2^5$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $2^{10}$.",
+                  "question_type": "single_choice",
+                  "explanation": "$2^{10} = 1\\,024$ : on double dix fois de suite, de 2 à 1 024. L'erreur $1\\,000$ confond $2^{10}$ avec $10^3$. L'erreur $20$ multiplie 2 par 10.",
+                  "answers": [
+                    {
+                      "content": "$1\\,024$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1\\,000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$20$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Puissances et calculs enchaînés",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un vendeur empile des caisses. Au premier étage, il y a 2 caisses. Chaque étage au-dessus a deux fois plus de caisses que l'étage précédent. Combien de caisses y a-t-il au 5e étage ?",
+                  "question_type": "single_choice",
+                  "explanation": "Au 1er étage : $2 = 2^1$. Au 5e étage : $2^5 = 32$ caisses. L'erreur $16 = 2^4$ compte un étage de moins.",
+                  "answers": [
+                    {
+                      "content": "$32$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$16$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\dfrac{2^4 \\times 3}{8}$.",
+                  "question_type": "single_choice",
+                  "explanation": "$2^4 = 16$, puis $16 \\times 3 = 48$, et $48 \\div 8 = 6$. L'erreur $48$ oublie la division par 8.",
+                  "answers": [
+                    {
+                      "content": "$6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$48$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces égalités, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$10^2 = 100$ et $2^3 \\times 5^3 = 8 \\times 125 = 1\\,000$. L'erreur $2^2 + 2^2 = 2^4$ confond somme et produit : $4 + 4 = 8$, et non 16. L'erreur $3 \\times 3^2 = 9$ oublie que $3 \\times 3^2 = 3^3 = 27$.",
+                  "answers": [
+                    {
+                      "content": "$10^2 = 100$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2^3 \\times 5^3 = 1\\,000$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2^2 + 2^2 = 2^4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3 \\times 3^2 = 9$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On prend la moitié, puis la moitié de cette moitié, puis encore la moitié de ce quart : quelle fraction d'une mangue a-t-on prise au total ?",
+                  "question_type": "single_choice",
+                  "explanation": "La moitié de la moitié de la moitié : $\\dfrac{1}{2} \\times \\dfrac{1}{2} \\times \\dfrac{1}{2} = \\dfrac{1}{2^3} = \\dfrac{1}{8}$. L'erreur $\\dfrac{1}{6}$ multiplie 2 par 3 au lieu de répéter le facteur 2 trois fois.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{1}{8}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{1}{6}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{1}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $\\dfrac{2^5 \\times 3}{2^3}$.",
+                  "question_type": "single_choice",
+                  "explanation": "$2^5 = 32$ et $2^3 = 8$ : $\\dfrac{32 \\times 3}{8} = \\dfrac{96}{8} = 12$. L'erreur $96$ oublie de diviser par 8.",
+                  "answers": [
+                    {
+                      "content": "$12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$96$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Pourcentages",
+          "subtitle": "Prendre une part sur 100 : remise et hausse au marché. À compléter : racines carrées, notation scientifique.",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Lire un pourcentage comme une fraction de 100, et le convertir en nombre décimal.</li>\n<li>Calculer une part, une remise ou une hausse d'une quantité.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. La remise du vendeur de pagnes (le pourcentage).</strong> Au marché, un vendeur de pagnes affiche « 10 % de remise ». Il t'explique : pour chaque 100 F de ton achat, il te rend 10 F. Sur un achat de 100 F, tu paies donc 90 F.</p>\n<p><em>Le pont.</em> Le signe % veut dire « pour 100 ». Donc 10 % s'écrit $\\dfrac{10}{100}$, soit $0{,}1$. Prendre 10 % d'une somme, c'est la multiplier par $0{,}1$, c'est-à-dire prendre un dixième.</p>\n<p><em>Où l'image s'arrête.</em> La remise s'applique toujours au prix de départ. Deux remises successives ne s'ajoutent pas : la seconde porte sur le prix déjà réduit.</p>\n<p><strong>2. Le prix qui monte (la hausse).</strong> Si le vendeur augmente le prix d'un pagne de 10 %, un pagne de 100 F coûte désormais 110 F : on ajoute 10 F sur chaque 100 F.</p>\n<p><em>Le pont.</em> Une hausse de $p$ % se calcule en multipliant par $1 + \\dfrac{p}{100}$. Une remise de $p$ % se calcule en multipliant par $1 - \\dfrac{p}{100}$.</p>\n<p><em>Où l'image s'arrête.</em> Hausse et remise ne se compensent pas : 100 F augmentés de 10 % puis réduits de 10 % donnent 99 F, et non 100 F.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Pourcentage.</strong> $p$ % signifie $\\dfrac{p}{100}$. Par exemple, $25$ % $= \\dfrac{25}{100} = 0{,}25$.</p>\n<p><strong>Part.</strong> Prendre $p$ % d'une quantité $Q$ revient à calculer $\\dfrac{p}{100} \\times Q$.</p>\n<p><strong>Hausse et remise.</strong> Après une hausse de $p$ %, le nouveau prix vaut $Q \\times \\left(1 + \\dfrac{p}{100}\\right)$. Après une remise de $p$ %, il vaut $Q \\times \\left(1 - \\dfrac{p}{100}\\right)$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p>Un pagne coûte 5 000 F. Il est soldé avec une remise de 20 %. Quel est le nouveau prix ?</p>\n<ul>\n<li><strong>Étape 1 :</strong> 20 % s'écrit $\\dfrac{20}{100} = 0{,}2$.</li>\n<li><strong>Étape 2 :</strong> La remise vaut $0{,}2 \\times 5\\,000 = 1\\,000$ F.</li>\n<li><strong>Étape 3 :</strong> Le nouveau prix vaut $5\\,000 - 1\\,000 = 4\\,000$ F.</li>\n<li><strong>Vérification :</strong> $5\\,000 \\times (1 - 0{,}2) = 5\\,000 \\times 0{,}8 = 4\\,000$ F. Même résultat.</li>\n</ul>\n<h2>Le piège à éviter</h2>\n<p>L'erreur la plus fréquente : confondre la remise et le prix à payer. Dans l'exemple, 1 000 F est la remise, pas le nouveau prix. Repère-le : relis la question et demande-toi si elle demande « combien on enlève » ou « combien on paie ».</p>\n<h2>En une phrase</h2>\n<p>Un pourcentage est une fraction de 100. Pour prendre 20 % d'une somme, tu la multiplies par 0,2 ; pour une remise, tu soustrais ce montant, et pour une hausse tu l'ajoutes.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Lire un pourcentage",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Que signifie « 25 % » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le signe % veut dire « pour 100 » : 25 % = $\\dfrac{25}{100}$, soit 0,25. L'erreur $\\dfrac{1}{25}$ inverse le rapport : elle vaut 4 %.",
+                  "answers": [
+                    {
+                      "content": "25 parts sur 100, soit $\\dfrac{25}{100}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "25 unités entières",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\dfrac{1}{25}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "10 % de 500 F font 50 F.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : $\\dfrac{10}{100} \\times 500 = 50$ F. Un dixième de 500 est 50. Prendre 10 %, c'est diviser par 10.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour prendre 20 % d'une somme, on la multiplie par :",
+                  "question_type": "single_choice",
+                  "explanation": "20 % = $\\dfrac{20}{100} = 0{,}2$. Multiplier par $1{,}2$ ajoute 20 % au lieu d'en prendre 20 %. Multiplier par $20$ donne une somme 100 fois trop grande.",
+                  "answers": [
+                    {
+                      "content": "$0{,}2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$20$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1{,}2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces écritures, lesquelles sont égales à 0,3 ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\dfrac{3}{10} = 0{,}3$ et 30 % = $\\dfrac{30}{100} = 0{,}3$. Les erreurs $\\dfrac{3}{100}$ et 3 % valent 0,03 : elles oublient le zéro de 30.",
+                  "answers": [
+                    {
+                      "content": "$\\dfrac{3}{10}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "30 %",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\dfrac{3}{100}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 %",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève a réussi 15 exercices sur 20. Quel est son pourcentage de réussite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pourcentage = $\\dfrac{15}{20} \\times 100 = 75$ %. Il faut ramener la fraction « sur 100 ». L'erreur 15 % garde le nombre de réussites tel quel. L'erreur 133 % inverse le rapport, $\\dfrac{20}{15} \\approx 1{,}33$.",
+                  "answers": [
+                    {
+                      "content": "75 %",
+                      "correct": true
+                    },
+                    {
+                      "content": "15 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "133 %",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer une part, une remise, une hausse",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Calcule 15 % de 400.",
+                  "question_type": "single_choice",
+                  "explanation": "$0{,}15 \\times 400 = 60$. L'erreur 600 multiplie par 1,5 au lieu de 0,15. L'erreur 26,7 divise 400 par 15.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    },
+                    {
+                      "content": "600",
+                      "correct": false
+                    },
+                    {
+                      "content": "26,7",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un vendeur fait une remise de 10 % sur un prix de 3 000 F. Quel est le prix à payer ?",
+                  "question_type": "single_choice",
+                  "explanation": "La remise vaut $0{,}1 \\times 3\\,000 = 300$ F : c'est ce qu'on enlève, pas ce qu'on paie. Le prix à payer est $3\\,000 \\times 0{,}9 = 2\\,700$ F. L'erreur 2 970 F ne retire que 1 % (30 F).",
+                  "answers": [
+                    {
+                      "content": "2 700 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "300 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 970 F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une hausse de 5 % fait passer un prix de 2 000 F à :",
+                  "question_type": "single_choice",
+                  "explanation": "$2\\,000 \\times 1{,}05 = 2\\,100$ F : 5 % de 2 000 font 100 F, qu'on ajoute. L'erreur 2 005 F ajoute 5 F au lieu de 5 %. L'erreur 1 900 F retire 5 % au lieu de l'ajouter.",
+                  "answers": [
+                    {
+                      "content": "2 100 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 005 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 900 F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une remise de 50 %, puis une hausse de 50 %, sur un même prix, redonnent le prix de départ.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Un prix de 100 F devient 50 F après la remise, puis 75 F après la hausse de 50 % (50 + 25). Les deux pourcentages ne se compensent pas : le second porte sur le prix déjà changé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pagne coûte 5 000 F. Le commerçant fait une remise de 30 %. Quel est le nouveau prix ?",
+                  "question_type": "single_choice",
+                  "explanation": "La remise vaut $0{,}3 \\times 5\\,000 = 1\\,500$ F. Le prix final est $5\\,000 - 1\\,500 = 3\\,500$ F. Vérification : $5\\,000 \\times 0{,}7 = 3\\,500$ F. Le montant 1 500 F est la remise, pas le prix à payer.",
+                  "answers": [
+                    {
+                      "content": "3 500 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 500 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "4 700 F",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Pourcentages dans une situation complète",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un commerçant achète un sac de riz 12 000 F et le revend 15 000 F. De combien de pourcentage son prix a-t-il augmenté, par rapport au prix d'achat ?",
+                  "question_type": "single_choice",
+                  "explanation": "La hausse vaut $\\dfrac{15\\,000 - 12\\,000}{12\\,000} = \\dfrac{3\\,000}{12\\,000} = 0{,}25$, soit 25 %. Le pourcentage se calcule par rapport au prix de départ. Diviser par 15 000 donne 20 %, et 125 % est le rapport des deux prix.",
+                  "answers": [
+                    {
+                      "content": "25 %",
+                      "correct": true
+                    },
+                    {
+                      "content": "20 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "125 %",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Après une remise de 25 %, un article coûte 4 500 F. Quel était son prix avant la remise ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le prix après remise vaut $0{,}75 \\times x = 4\\,500$, donc $x = 4\\,500 \\div 0{,}75 = 6\\,000$ F. Vérification : 25 % de 6 000 font 1 500 F, et $6\\,000 - 1\\,500 = 4\\,500$ F. L'erreur 5 625 F ajoute 25 % à 4 500 F.",
+                  "answers": [
+                    {
+                      "content": "6 000 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "5 625 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 375 F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une classe de 40 élèves, 60 % sont des filles. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "60 % de 40 font 24 filles, donc $40 - 24 = 16$ garçons. L'erreur « 16 filles » échange les deux effectifs. L'erreur « 4 garçons » vient d'un calcul de 10 % de 40 au lieu de 40 %.",
+                  "answers": [
+                    {
+                      "content": "Il y a 24 filles.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il y a 16 garçons.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il y a 16 filles.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a 4 garçons.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un vendeur augmente ses prix de 10 %, puis fait une remise de 10 % sur le nouveau prix. Un article coûtait 1 000 F. Quel est le prix final ?",
+                  "question_type": "single_choice",
+                  "explanation": "Hausse : $1\\,000 \\times 1{,}1 = 1\\,100$ F. Remise : $1\\,100 \\times 0{,}9 = 990$ F. L'erreur 1 000 F croit que la hausse et la remise de 10 % s'annulent : la remise porte sur le prix déjà augmenté.",
+                  "answers": [
+                    {
+                      "content": "990 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 000 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 100 F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une classe de 30 élèves, 12 ont réussi un contrôle. Quel pourcentage d'élèves a échoué ?",
+                  "question_type": "single_choice",
+                  "explanation": "18 élèves ont échoué : $\\dfrac{18}{30} = 0{,}6$, soit 60 %. Les 40 % correspondent aux élèves reçus, pas à ceux qui ont échoué. Ne confonds pas réussite et échec.",
+                  "answers": [
+                    {
+                      "content": "60 %",
+                      "correct": true
+                    },
+                    {
+                      "content": "40 %",
+                      "correct": false
+                    },
+                    {
+                      "content": "18 %",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
