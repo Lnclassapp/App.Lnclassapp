@@ -1,0 +1,1666 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Étude de fonctions polynômes et de fonctions rationnelles",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "A2",
+      "essentials": [
+        {
+          "name": "Limites et dérivée d'une fonction polynôme",
+          "subtitle": "Terme dominant, limites aux infinis, dérivée",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer la limite d'une fonction polynôme en $+\\infty$ et en $-\\infty$.</li>\n<li>Dériver une fonction polynôme.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Les frais de Maman Affoué (la limite d'un polynôme).</strong> Maman Affoué vend des mangues au marché du quartier. Elle paie 500 F de place par jour. Un jour ordinaire, avec 50 clients, ces 500 F pèsent dans ses comptes. Le jour de la grande fête, 10 000 clients défilent devant son étal : à côté de tout l'argent qui circule, les 500 F de place ne se voient plus. Ce qui décide du total, c'est le poste qui grossit le plus vite avec le nombre de clients.</p>\n<p><em>Le pont.</em> Le nombre de clients, c'est $x$, qui devient très grand ($x \\to +\\infty$). Les différents postes de ses comptes, ce sont les termes de la fonction polynôme. Le poste qui grossit le plus vite, c'est le <strong>terme de plus haut degré</strong> (le terme avec la plus grande puissance de $x$). Les autres termes deviennent négligeables devant lui.</p>\n<p><em>Où l'image s'arrête.</em> L'image ne parle que de $x$ très grand et positif. Pour $x \\to -\\infty$, il faut regarder si la puissance de $x$ est paire ou impaire. Et si le poste dominant est une dépense (coefficient négatif), le total part vers $-\\infty$.</p>\n<p><strong>2. Le prix du kilo de riz (la dérivée).</strong> Un grossiste vend du riz. Il demande 2 000 F de transport, plus 600 F par kilo : le coût est $C(x) = 600x + 2000$. Un kilo de plus coûte toujours 600 F, que tu achètes 10 kg ou 100 kg. Les 2 000 F de transport ne bougent pas : ils ne changent rien à ce que coûte un kilo de plus.</p>\n<p><em>Le pont.</em> La <strong>dérivée</strong> mesure de combien le total varie quand $x$ augmente un peu. Ici $C'(x) = 600$. La constante $2000$ ne varie pas : sa dérivée est $0$.</p>\n<p><em>Où l'image s'arrête.</em> Ici le prix du kilo est constant. Pour un coût comme $x^2$, le coût d'un kilo de plus dépend de la quantité déjà achetée : la dérivée $2x$ change avec $x$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Fonction polynôme.</strong> C'est une fonction de la forme $f(x) = a_n x^n + \\dots + a_1 x + a_0$, avec $a_n \\neq 0$. Elle est définie sur $\\mathbb{R}$. L'entier $n$ est son <strong>degré</strong>, et $a_n x^n$ est son <strong>terme de plus haut degré</strong>.</p>\n<p><strong>Limites de référence.</strong> $\\lim_{x \\to +\\infty} x^n = +\\infty$. En $-\\infty$ : $\\lim x^n = +\\infty$ si $n$ est pair, et $\\lim x^n = -\\infty$ si $n$ est impair.</p>\n<p><strong>Limite d'une fonction polynôme en $+\\infty$ ou en $-\\infty$.</strong> Elle est égale à la limite de son terme de plus haut degré : $$\\lim_{x \\to \\pm\\infty} f(x) = \\lim_{x \\to \\pm\\infty} a_n x^n.$$</p>\n<p><strong>Dérivée.</strong> Une fonction polynôme est dérivable sur $\\mathbb{R}$. Pour $n$ entier non nul : $(x^n)' = n\\,x^{n-1}$. Pour une constante $k$ : $(k)' = 0$. On dérive terme à terme : $(a x^n)' = a\\,n\\,x^{n-1}$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Étudier $f(x) = -2x^3 + 5x^2 - 4x + 7$ : limites aux infinis et dérivée.</strong></p>\n<ol>\n<li>Le terme de plus haut degré est $-2x^3$.</li>\n<li>En $+\\infty$ : $x^3 \\to +\\infty$, donc $-2x^3 \\to -\\infty$. Ainsi $\\lim_{x \\to +\\infty} f(x) = -\\infty$.</li>\n<li>En $-\\infty$ : $x^3 \\to -\\infty$ (puissance impaire), donc $-2x^3 \\to +\\infty$. Ainsi $\\lim_{x \\to -\\infty} f(x) = +\\infty$.</li>\n<li>Dérivée, terme à terme : $(-2x^3)' = -6x^2$, $(5x^2)' = 10x$, $(-4x)' = -4$, $(7)' = 0$. Donc $f'(x) = -6x^2 + 10x - 4$.</li>\n</ol>\n<p><strong>Autre exemple : $g(x) = x^4 - 3x^2 + 1$.</strong> Le terme de plus haut degré est $x^4$ (puissance paire) : $\\lim_{x \\to +\\infty} g(x) = \\lim_{x \\to -\\infty} g(x) = +\\infty$. Et $g'(x) = 4x^3 - 6x$.</p>\n<h2>Le piège à éviter</h2>\n<p>Calculer la limite terme par terme et additionner. Pour $x^2 - 100x$ en $+\\infty$, tu obtiens « $+\\infty - \\infty$ », et tu es tenté de conclure $0$. C'est faux : on ne peut rien conclure ainsi. Garde seulement le terme de plus haut degré : $x^2 \\to +\\infty$, donc la limite est $+\\infty$.</p>\n<p>Autre piège : en $-\\infty$, oublier la parité. $\\lim_{x \\to -\\infty} x^3 = -\\infty$, mais $\\lim_{x \\to -\\infty} x^2 = +\\infty$.</p>\n<h2>En une phrase</h2>\n<p>Aux infinis, seul le terme de plus haut degré compte, comme les gros postes d'une foule de clients ; la dérivée se calcule terme à terme, et une constante disparaît.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Terme dominant, limites de référence et dérivée d'une constante",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quel est le terme de plus haut degré de $f(x) = -4x^3 + 2x^5 - x + 9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le terme de plus haut degré est celui qui porte la plus grande puissance de $x$ : ici $x^5$, donc $2x^5$. L'erreur tentante est de prendre le terme écrit en tête, $-4x^3$. L'ordre d'écriture ne compte pas : regarde les exposants.",
+                  "answers": [
+                    {
+                      "content": "$2x^5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-4x^3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Maman Affoué paie 500 F de place par jour. Quand le nombre de clients devient immense, ces 500 F deviennent négligeables devant le gros poste de ses comptes. Cela illustre le fait que, aux infinis, seul le terme de plus haut degré compte.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Les 500 F sont le terme constant : ils ne grossissent pas. Le poste qui grossit le plus vite, le terme de plus haut degré, décide de la limite. C'est ce que dit la règle sur les limites des fonctions polynômes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que vaut $\\lim_{x \\to -\\infty} x^3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Quand $x$ est un très grand nombre négatif, $x^3$ est un très grand nombre négatif (puissance impaire : le signe reste). La limite est $-\\infty$. L'erreur tentante est $+\\infty$, qui est la bonne réponse pour une puissance paire comme $x^2$.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces fonctions, lesquelles ont pour limite $+\\infty$ en $-\\infty$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "En $-\\infty$, une puissance paire donne $+\\infty$ : $x^2$ et $x^4$. Les puissances impaires $x^3$ et $x^5$ donnent $-\\infty$. Et $-x^2$ tend vers $-\\infty$ : le signe moins change le résultat.",
+                  "answers": [
+                    {
+                      "content": "$x^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-x^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la dérivée de la fonction constante $f(x) = 500$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une constante ne varie pas : sa dérivée est $0$. Souviens-toi des 2 000 F de transport du grossiste de riz : ils ne changent pas le prix d'un kilo de plus. L'erreur tentante est de garder $500$ : on confond la valeur de la fonction et sa variation.",
+                  "answers": [
+                    {
+                      "content": "$0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$500$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$500x$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer des limites et dériver des polynômes",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle est la limite en $+\\infty$ de $f(x) = 3x^2 - 50x + 100$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le terme de plus haut degré est $3x^2$, qui tend vers $+\\infty$. Donc $\\lim_{x \\to +\\infty} f(x) = +\\infty$. L'erreur tentante est de dire que $3x^2 - 50x$ donne « $+\\infty - \\infty$ », donc $0$ : on ne peut pas conclure terme par terme.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite en $-\\infty$ de $f(x) = -x^3 + 4x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le terme de plus haut degré est $-x^3$. En $-\\infty$, $x^3 \\to -\\infty$, donc $-x^3 \\to +\\infty$. L'erreur tentante est $-\\infty$ : on oublie que le signe moins devant $x^3$ renverse le résultat.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite en $-\\infty$ de $g(x) = 2x^4 - x^3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le terme de plus haut degré est $2x^4$. La puissance 4 est paire : en $-\\infty$, $x^4 \\to +\\infty$, donc $2x^4 \\to +\\infty$. L'erreur tentante est de suivre le terme $-x^3$ : il grossit moins vite, il ne décide pas.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la dérivée de $f(x) = 4x^3 - 5x^2 + x - 8$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On dérive terme à terme : $(4x^3)' = 12x^2$, $(-5x^2)' = -10x$, $(x)' = 1$, $(-8)' = 0$. Les erreurs tentantes : garder $-8$ (la constante disparaît), ne pas baisser l'exposant, ou oublier de multiplier par l'exposant.",
+                  "answers": [
+                    {
+                      "content": "$12x^2 - 10x + 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12x^2 - 10x - 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12x^3 - 10x^2 + x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4x^2 - 5x + 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquelles de ces égalités sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "On a $(x^5)' = 5x^4$ et $(7x)' = 7$. Les autres sont fausses : $(x^2)' = 2x$, $(3x^4)' = 12x^3$ (l'exposant baisse de 1) et $(-x^3)' = -3x^2$ (le signe moins reste).",
+                  "answers": [
+                    {
+                      "content": "$(x^5)' = 5x^4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(7x)' = 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x^2)' = x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3x^4)' = 12x^4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-x^3)' = 3x^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^2 - 6x$. Que vaut $f'(4)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $f'(x) = 2x - 6$, donc $f'(4) = 8 - 6 = 2$. L'erreur $-8$ est la valeur de $f(4) = 16 - 24$ : on a calculé la fonction au lieu de sa dérivée. L'erreur $14$ vient d'un signe : $8 + 6$.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$14$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Limites et dérivées de polynômes",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = -5x^3 + x^2 + 100x$. Quelles sont ses limites en $+\\infty$ et en $-\\infty$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le terme de plus haut degré est $-5x^3$. En $+\\infty$ : $x^3 \\to +\\infty$, donc $-5x^3 \\to -\\infty$. En $-\\infty$ : $x^3 \\to -\\infty$, donc $-5x^3 \\to +\\infty$. Le coefficient négatif et la puissance impaire inversent le comportement des deux côtés.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$ en $+\\infty$ et $+\\infty$ en $-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$ en $+\\infty$ et $-\\infty$ en $-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\infty$ en $+\\infty$ et $-\\infty$ en $-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$ en $+\\infty$ et $+\\infty$ en $-\\infty$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = (x + 1)(x^2 - 3)$. Quelle est sa dérivée ?",
+                  "question_type": "single_choice",
+                  "explanation": "On développe : $f(x) = x^3 + x^2 - 3x - 3$. Puis $f'(x) = 3x^2 + 2x - 3$. Les erreurs tentantes : multiplier les dérivées ($1 \\times 2x = 2x$), oublier la dérivée de $-3x$, ou s'arrêter au développement.",
+                  "answers": [
+                    {
+                      "content": "$3x^2 + 2x - 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3x^2 + 2x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^3 + x^2 - 3x - 3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = -3x^4 + 2x^3 - x$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Le terme de plus haut degré est $-3x^4$ (puissance paire) : $f$ tend vers $-\\infty$ des deux côtés. Le degré est 4, pas 3. On a $f'(x) = -12x^3 + 6x^2 - 1$, donc $f'(0) = -1$ et non $0$.",
+                  "answers": [
+                    {
+                      "content": "$\\lim_{x \\to +\\infty} f(x) = -\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to -\\infty} f(x) = -\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'(x) = -12x^3 + 6x^2 - 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est une fonction polynôme de degré 3",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim_{x \\to -\\infty} f(x) = +\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(0) = 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La limite de $x^2 - 1000x$ en $+\\infty$ est $-\\infty$, parce que $-1000x$ est un très grand nombre négatif.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. On a $x^2 - 1000x = x(x - 1000)$. Quand $x$ devient très grand, $x$ et $x - 1000$ sont tous deux très grands et positifs : la limite est $+\\infty$. Le terme $x^2$ finit toujours par écraser $1000x$, comme la foule écrase les 500 F de place.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le coût de fabrication de $x$ articles est $C(x) = 0{,}5x^2 + 200x + 3000$ (en francs). On calcule $C'(100)$. Quelle est sa valeur ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $C'(x) = x + 200$ : $(0{,}5x^2)' = x$, $(200x)' = 200$, $(3000)' = 0$. Donc $C'(100) = 300$. L'erreur $28\\,000$ est la valeur de $C(100)$. L'erreur $250$ oublie le facteur 2 de la dérivée de $x^2$.",
+                  "answers": [
+                    {
+                      "content": "$300$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$28\\,000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$200$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$250$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = ax^2 + 3x$, où $a$ est un réel. On sait que $f'(2) = 11$. Que vaut $a$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $f'(x) = 2ax + 3$, donc $f'(2) = 4a + 3$. L'égalité $4a + 3 = 11$ donne $a = 2$. L'erreur $a = 4$ oublie de remplacer $x$ par 2 ; l'erreur $\\frac{11}{4}$ oublie le terme $+3$ ; l'erreur $8$ oublie de diviser par 4.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{11}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Étudier une fonction polynôme de degré 2 ou 3",
+          "subtitle": "Signe de la dérivée, variations, extremums et courbe",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Étudier le signe de la dérivée d'une fonction polynôme et en déduire ses variations.</li>\n<li>Décrire un tableau de variation en phrases et repérer les extremums.</li>\n<li>Placer quelques points pour représenter la courbe.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. La route du marché (le signe de la dérivée).</strong> Pour aller au marché, tu suis une route de colline. Au départ elle monte, puis elle atteint un sommet, puis elle descend vers la place du marché. À chaque endroit, la <strong>pente</strong> te dit si tu montes (pente positive), si tu descends (pente négative), ou si la route est plate un instant (pente nulle).</p>\n<p><em>Le pont.</em> La distance parcourue, c'est $x$. L'altitude, c'est $f(x)$. La pente de la route à cet endroit, c'est $f'(x)$. Si $f'(x) > 0$ sur un intervalle, $f$ monte : elle est <strong>croissante</strong>. Si $f'(x) < 0$, $f$ descend : elle est <strong>décroissante</strong>. Au sommet ou au creux, la pente est nulle : la tangente à la courbe est horizontale.</p>\n<p><em>Où l'image s'arrête.</em> Une pente nulle ne signifie pas toujours un sommet. Une route peut être plate un instant, puis continuer à monter. C'est ce qui se passe pour $x^3$ en $x = 0$ : $f'(0) = 0$, mais $f$ continue de monter. Il faut que la pente <strong>change de signe</strong>.</p>\n<p><strong>2. Le meilleur prix du vendeur de jus (le maximum).</strong> Un vendeur de jus de bissap fixe son prix. Trop bas, il gagne peu par verre. Trop cher, personne n'achète. Entre les deux, il existe un prix qui lui donne le gain le plus grand. Ce prix est une chose, le gain obtenu en est une autre.</p>\n<p><em>Le pont.</em> Le prix, c'est la valeur $a$ de $x$ où la pente s'annule en passant du positif au négatif. Le gain maximal, c'est la valeur $f(a)$. Le <strong>maximum</strong> est $f(a)$ ; il est <strong>atteint en</strong> $x = a$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Sens de variation.</strong> Soit $f$ dérivable sur un intervalle $I$. Si $f'(x) > 0$ sur $I$, alors $f$ est strictement croissante sur $I$. Si $f'(x) < 0$ sur $I$, alors $f$ est strictement décroissante sur $I$. Si $f'(x) = 0$ sur $I$, alors $f$ est constante.</p>\n<p><strong>Extremum local.</strong> Si $f'$ s'annule en $a$ en <strong>changeant de signe</strong>, alors $f(a)$ est un extremum local. C'est un maximum si $f'$ passe de $+$ à $-$, et un minimum si $f'$ passe de $-$ à $+$. La courbe a alors une tangente horizontale au point d'abscisse $a$.</p>\n<p><strong>Signe d'un trinôme $ax^2 + bx + c$ ayant deux racines $x_1 < x_2$.</strong> Il est du signe de $a$ à l'extérieur des racines, et du signe contraire de $a$ entre les racines.</p>\n<p><strong>Méthode d'étude d'une fonction polynôme.</strong></p>\n<ol>\n<li>Domaine : $\\mathbb{R}$.</li>\n<li>Limites en $+\\infty$ et en $-\\infty$ (terme de plus haut degré).</li>\n<li>Calcul de $f'(x)$, puis factorisation de $f'(x)$.</li>\n<li>Signe de $f'(x)$ et tableau de variation, décrit en phrases.</li>\n<li>Calcul des extremums et de quelques points, puis tracé de la courbe.</li>\n</ol>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Étudier $f(x) = x^3 - 6x^2 + 9x$ sur $\\mathbb{R}$.</strong></p>\n<ol>\n<li>Limites. Le terme de plus haut degré est $x^3$ : $\\lim_{x \\to +\\infty} f(x) = +\\infty$ et $\\lim_{x \\to -\\infty} f(x) = -\\infty$.</li>\n<li>Dérivée. $f'(x) = 3x^2 - 12x + 9 = 3(x^2 - 4x + 3) = 3(x - 1)(x - 3)$. Les racines sont $1$ et $3$.</li>\n<li>Signe. Le coefficient de $x^2$ est $3 > 0$ : $f'(x) > 0$ à l'extérieur des racines (pour $x < 1$ et pour $x > 3$), et $f'(x) < 0$ entre les racines (pour $1 < x < 3$).</li>\n<li>Valeurs. $f(1) = 1 - 6 + 9 = 4$ et $f(3) = 27 - 54 + 27 = 0$.</li>\n<li>Tableau décrit en phrases. Sur $]-\\infty ; 1]$, $f$ est croissante : elle monte de $-\\infty$ jusqu'à $4$. Sur $[1 ; 3]$, elle est décroissante : elle descend de $4$ à $0$. Sur $[3 ; +\\infty[$, elle est croissante : elle monte de $0$ jusqu'à $+\\infty$.</li>\n<li>Extremums. $f(1) = 4$ est un maximum local, atteint en $x = 1$. $f(3) = 0$ est un minimum local, atteint en $x = 3$.</li>\n<li>Courbe. Elle passe par $(0 ; 0)$, $(1 ; 4)$, $(3 ; 0)$ et $(4 ; 4)$, avec une tangente horizontale en $x = 1$ et en $x = 3$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Confondre le signe de $f'$ et le signe de $f$. Si $f'(x) < 0$, cela veut dire que $f$ <strong>descend</strong>, pas que ses valeurs sont négatives. Dans l'exemple, $f$ descend entre $1$ et $3$ en restant positive ou nulle.</p>\n<p>Autre piège : donner $a$ au lieu de $f(a)$. L'extremum est la valeur $f(a)$. Dans l'exemple, le maximum est $4$, atteint en $x = 1$ : ce n'est pas « le maximum est $1$ ».</p>\n<h2>En une phrase</h2>\n<p>Le signe de $f'$ dit si la route monte ou descend ; là où $f'$ s'annule en changeant de signe, il y a un sommet ou un creux, dont la hauteur est $f(a)$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Pente, variations et extremums",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans l'image de la route qui mène au marché, la distance parcourue est $x$ et l'altitude est $f(x)$. Que représente $f'(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$f'(x)$ mesure la façon dont $f$ monte ou descend : c'est la pente. L'altitude est $f(x)$ elle-même. L'erreur tentante est de confondre $f$ et $f'$ : la fonction donne la hauteur, sa dérivée donne la pente.",
+                  "answers": [
+                    {
+                      "content": "La pente de la route à l'endroit $x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'altitude à l'endroit $x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La distance totale parcourue",
+                      "correct": false
+                    },
+                    {
+                      "content": "La longueur de la route entre deux points",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $f'(x) < 0$ sur un intervalle, alors $f$ est strictement décroissante sur cet intervalle : la route descend.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Une pente négative signifie que l'altitude diminue quand on avance. Attention : cela ne veut pas dire que les valeurs de $f$ sont négatives. La route peut descendre tout en restant très haut.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $f'(a) = 0$, alors $f(a)$ est forcément un maximum ou un minimum.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Pour $f(x) = x^3$, on a $f'(0) = 0$, mais $f$ continue de monter avant et après $0$ : il n'y a pas d'extremum. Il faut que $f'$ change de signe en $a$. Une route plate un instant n'a pas toujours de sommet.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "À quelle condition $f(a)$ est-il un extremum local d'une fonction polynôme $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une pente nulle ne suffit pas : il faut qu'elle change de signe, de $+$ à $-$ pour un maximum ou de $-$ à $+$ pour un minimum. L'erreur tentante est de s'arrêter à $f'(a) = 0$. Le contre-exemple est $x^3$ en $0$.",
+                  "answers": [
+                    {
+                      "content": "$f'$ s'annule en $a$ et change de signe autour de $a$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'$ s'annule en $a$, sans autre condition",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'$ est positive en $a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'(a)$ est égale à $f(a)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction polynôme $f$ a une dérivée positive pour $x < 2$, nulle en $x = 2$ et négative pour $x > 2$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Avant 2, la pente est positive : la route monte. Après 2, elle est négative : la route descend. En 2, elle passe de $+$ à $-$ : c'est un sommet, donc un maximum local. L'erreur tentante est de confondre sommet (maximum) et creux (minimum).",
+                  "answers": [
+                    {
+                      "content": "$f$ est croissante sur $]-\\infty ; 2]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(2)$ est un maximum local",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(2)$ est un minimum local",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est décroissante pour $x < 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est constante",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Signe de la dérivée et extremums",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Sur quel ensemble la dérivée $f'(x) = 3x^2 - 12 = 3(x - 2)(x + 2)$ est-elle strictement négative ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les racines sont $-2$ et $2$. Le coefficient de $x^2$ est $3 > 0$ : le trinôme est positif à l'extérieur des racines et négatif entre elles. L'erreur $]-4 ; 4[$ vient de $3x^2 = 12$ résolu en $x = \\pm 4$, alors que $x^2 = 4$ donne $x = \\pm 2$.",
+                  "answers": [
+                    {
+                      "content": "$]-2 ; 2[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty ; -2[ \\cup ]2 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty ; 2[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-4 ; 4[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^2 - 4x + 1$. Quel est l'extremum de $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $f'(x) = 2x - 4$, nulle en $x = 2$, négative avant et positive après : c'est un minimum. Sa valeur est $f(2) = 4 - 8 + 1 = -3$. L'erreur est d'inverser $a$ et $f(a)$, ou de prendre $f(0) = 1$, qui n'est pas un extremum.",
+                  "answers": [
+                    {
+                      "content": "Un minimum égal à $-3$, atteint en $x = 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un maximum égal à $-3$, atteint en $x = 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un minimum égal à $2$, atteint en $x = -3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un minimum égal à $1$, atteint en $x = 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = -x^2 + 6x$. Sur quel intervalle $f$ est-elle croissante ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $f'(x) = -2x + 6$. Elle est positive quand $-2x + 6 \\geq 0$, soit $x \\leq 3$. Donc $f$ monte jusqu'à $3$, puis descend. L'erreur $[3 ; +\\infty[$ oublie que la division par $-2$ renverse le sens de l'inégalité.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty ; 3]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[3 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty ; -3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[6 ; +\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^3 - 3x$. On a $f'(x) = 3(x - 1)(x + 1)$. Quels sont les extremums locaux de $f$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Le coefficient de $x^2$ dans $f'$ est $3 > 0$ : $f'$ est positive avant $-1$, négative entre $-1$ et $1$, positive après. Donc maximum en $-1$ de valeur $f(-1) = 2$, minimum en $1$ de valeur $f(1) = -2$. En $0$, $f'(0) = -3 \\neq 0$ : pas d'extremum.",
+                  "answers": [
+                    {
+                      "content": "Un maximum local égal à $2$, atteint en $x = -1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un minimum local égal à $-2$, atteint en $x = 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un maximum local égal à $-2$, atteint en $x = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un minimum local égal à $2$, atteint en $x = -1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un minimum local égal à $0$, atteint en $x = 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien d'extremums locaux la fonction $f(x) = x^3 + x$ possède-t-elle ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $f'(x) = 3x^2 + 1$. Cette dérivée est toujours strictement positive, car $3x^2 \\geq 0$. Elle ne s'annule jamais : $f$ est strictement croissante sur $\\mathbb{R}$, sans sommet ni creux.",
+                  "answers": [
+                    {
+                      "content": "Aucun",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une infinité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^3 - 3x$. La tangente à la courbe de $f$ au point d'abscisse $1$ est horizontale.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. On a $f'(x) = 3x^2 - 3$, donc $f'(1) = 3 - 3 = 0$. Une pente nulle signifie une tangente horizontale. Le point de la courbe est $(1 ; -2)$, un creux de la route.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Étudier une fonction polynôme",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un vendeur de jus fixe le prix du verre à $x$ centaines de francs. Son bénéfice du jour, en milliers de francs, est $B(x) = -x^2 + 8x - 7$ pour $x$ entre $1$ et $7$. Quel prix donne le bénéfice maximal, et quel est ce bénéfice ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $B'(x) = -2x + 8$, qui s'annule en $x = 4$ en passant de $+$ à $-$ : maximum. Le bénéfice est $B(4) = -16 + 32 - 7 = 9$. Le prix et le bénéfice sont deux nombres différents : ne confonds pas $a$ et $f(a)$.",
+                  "answers": [
+                    {
+                      "content": "Prix de $4$ centaines de francs, bénéfice de $9$ milliers de francs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Prix de $9$ centaines de francs, bénéfice de $4$ milliers de francs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Prix de $4$ centaines de francs, bénéfice de $4$ milliers de francs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Prix de $8$ centaines de francs, bénéfice de $-7$ milliers de francs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = 2x^3 - 3x^2 - 12x + 1$. On a $f'(x) = 6(x - 2)(x + 1)$, $f(-1) = 8$ et $f(2) = -19$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$f'$ est positive à l'extérieur de $-1$ et $2$, négative entre eux. Donc $f$ monte jusqu'à $-1$ (maximum local $8$), descend jusqu'à $2$ (minimum local $-19$), puis remonte. Les racines de $f'$ sont $-1$ et $2$, pas $1$ et $-2$.",
+                  "answers": [
+                    {
+                      "content": "$f'(x) = 6x^2 - 6x - 12$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est décroissante sur $[-1 ; 2]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(-1) = 8$ est un maximum local",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(2) = -19$ est un maximum local",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ est croissante sur $[-1 ; 2]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f'$ s'annule en $x = 1$ et en $x = -2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $g(x) = -x^3 + 3x^2$, avec $g'(x) = -3x(x - 2)$, $g(0) = 0$ et $g(2) = 4$. Quelle description de ses variations est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le coefficient de $x^2$ dans $g'$ est $-3 < 0$ : $g'$ est négative à l'extérieur de $0$ et $2$, positive entre eux. Le terme dominant $-x^3$ donne $+\\infty$ en $-\\infty$ et $-\\infty$ en $+\\infty$. Le minimum local est $g(0) = 0$ et le maximum local $g(2) = 4$.",
+                  "answers": [
+                    {
+                      "content": "Décroissante de $+\\infty$ à $0$ sur $]-\\infty ; 0]$, croissante de $0$ à $4$ sur $[0 ; 2]$, décroissante de $4$ à $-\\infty$ sur $[2 ; +\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Croissante de $-\\infty$ à $0$ sur $]-\\infty ; 0]$, décroissante de $0$ à $4$ sur $[0 ; 2]$, croissante de $4$ à $+\\infty$ sur $[2 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Décroissante de $+\\infty$ à $4$ sur $]-\\infty ; 0]$, croissante de $4$ à $0$ sur $[0 ; 2]$, décroissante de $0$ à $-\\infty$ sur $[2 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Croissante sur $\\mathbb{R}$ tout entier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f(x) = x^3 + 3x + 1$ admet un maximum local.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. On a $f'(x) = 3x^2 + 3$, toujours strictement positive. La pente ne s'annule jamais et ne change donc jamais de signe : $f$ est croissante sur $\\mathbb{R}$ et n'a ni sommet ni creux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^2 + bx + c$. Elle admet un minimum égal à $-1$, atteint en $x = 2$. Quelles sont les valeurs de $b$ et $c$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $f'(x) = 2x + b$. Le minimum en $x = 2$ donne $f'(2) = 4 + b = 0$, donc $b = -4$. Puis $f(2) = 4 - 8 + c = -1$ donne $c = 3$. L'erreur $b = -2$ oublie le facteur $2$ dans $2x$ ; l'erreur $c = -1$ confond $c$ et la valeur du minimum.",
+                  "answers": [
+                    {
+                      "content": "$b = -4$ et $c = 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$b = 4$ et $c = -13$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$b = -4$ et $c = -1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$b = -2$ et $c = -1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = x^3 - 6x^2 + 9x$. En quels points sa courbe a-t-elle une tangente horizontale ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $f'(x) = 3(x - 1)(x - 3)$, nulle en $x = 1$ et $x = 3$. Les points sont $(1 ; f(1)) = (1 ; 4)$ et $(3 ; f(3)) = (3 ; 0)$. Les points $(0 ; 0)$ et $(3 ; 0)$ sont ceux où la courbe coupe l'axe des abscisses, ce qui est autre chose.",
+                  "answers": [
+                    {
+                      "content": "$(1 ; 4)$ et $(3 ; 0)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(0 ; 0)$ et $(3 ; 0)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1 ; 0)$ et $(3 ; 4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement $(1 ; 4)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Fonctions rationnelles : domaine, limites et asymptotes",
+          "subtitle": "Valeurs interdites, limites aux bornes, asymptotes verticale et horizontale",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Déterminer le domaine de définition d'une fonction rationnelle.</li>\n<li>Calculer ses limites en $+\\infty$, en $-\\infty$ et en une valeur interdite.</li>\n<li>En déduire les asymptotes verticale et horizontale de sa courbe.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le partage de la recette de la tontine (valeur interdite et asymptote verticale).</strong> Des commerçantes du marché se partagent une recette de 12 000 F à parts égales. Avec $x$ commerçantes, chacune reçoit $\\frac{12000}{x}$ francs. Avec 2 commerçantes, la part est de 6 000 F. Avec 100, elle n'est plus que de 120 F. Quand le nombre de commerçantes devient immense, la part devient minuscule : elle se rapproche de $0$ F sans jamais l'atteindre. À l'inverse, si le nombre de commerçantes devient minuscule (presque aucune), la part devient énorme. Et avec $x = 0$ commerçante, le partage n'a aucun sens : on ne divise pas par $0$.</p>\n<p><em>Le pont.</em> La fonction $f(x) = \\frac{12000}{x}$ n'est pas définie pour $x = 0$ : c'est une <strong>valeur interdite</strong>. Quand $x \\to +\\infty$, $f(x) \\to 0$ : la droite $y = 0$ est une <strong>asymptote horizontale</strong>. Quand $x$ se rapproche de $0$ par valeurs positives, $f(x) \\to +\\infty$ : la droite $x = 0$ est une <strong>asymptote verticale</strong>. Une asymptote est une droite dont la courbe se rapproche de plus en plus.</p>\n<p><em>Où l'image s'arrête.</em> Dans l'image, $x$ est un nombre positif de personnes. La fonction $\\frac{12000}{x}$ existe aussi pour $x < 0$ : alors ses valeurs sont négatives, et près de $0$ par la gauche elle tend vers $-\\infty$.</p>\n<p><strong>2. Le coût moyen par article (la limite d'un quotient).</strong> Un commerçant paie 500 F pour la place du jour et 200 F par article acheté. Pour $x$ articles, son coût moyen par article est $\\frac{200x + 500}{x} = 200 + \\frac{500}{x}$. Avec très peu d'articles, les 500 F de place pèsent lourd sur chaque article. Avec des milliers d'articles, la place est diluée : le coût moyen se rapproche de 200 F, sans jamais descendre jusqu'à ce prix.</p>\n<p><em>Le pont.</em> Quand $x \\to +\\infty$, le quotient $\\frac{200x + 500}{x}$ a pour limite $\\frac{200x}{x} = 200$ : c'est le quotient des termes de plus haut degré. La droite $y = 200$ est une asymptote horizontale.</p>\n<p><em>Où l'image s'arrête.</em> Ici la courbe reste au-dessus de la droite $y = 200$. Pour d'autres fonctions, elle peut s'en approcher par en dessous.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Fonction rationnelle.</strong> C'est un quotient de deux polynômes : $f(x) = \\frac{P(x)}{Q(x)}$, avec $Q$ non nul. Son domaine est l'ensemble des réels qui n'annulent pas le dénominateur : $D_f = \\{x \\in \\mathbb{R} \\;;\\; Q(x) \\neq 0\\}$.</p>\n<p><strong>Limites de référence.</strong> $\\lim_{x \\to +\\infty} \\frac{1}{x} = 0$ et $\\lim_{x \\to -\\infty} \\frac{1}{x} = 0$. De plus $\\lim_{x \\to 0^+} \\frac{1}{x} = +\\infty$ et $\\lim_{x \\to 0^-} \\frac{1}{x} = -\\infty$. Ici $x \\to 0^+$ veut dire « $x$ se rapproche de $0$ en restant supérieur à $0$ ».</p>\n<p><strong>Limite en $+\\infty$ ou en $-\\infty$.</strong> La limite d'une fonction rationnelle est celle du quotient de ses termes de plus haut degré. Si le degré du numérateur est inférieur à celui du dénominateur, la limite est $0$.</p>\n<p><strong>Limite en une valeur interdite $a$.</strong> Si le dénominateur s'annule en $a$ et si le numérateur ne s'annule pas en $a$, la limite est infinie. Son signe ($+\\infty$ ou $-\\infty$) se détermine avec le signe du numérateur et celui du dénominateur, à droite et à gauche de $a$.</p>\n<p><strong>Asymptotes.</strong> Si $\\lim_{x \\to +\\infty} f(x) = \\ell$ ou $\\lim_{x \\to -\\infty} f(x) = \\ell$, la droite d'équation $y = \\ell$ est une <strong>asymptote horizontale</strong>. Si $\\lim_{x \\to a} f(x) = +\\infty$ ou $-\\infty$ (à droite ou à gauche de $a$), la droite d'équation $x = a$ est une <strong>asymptote verticale</strong>.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Étudier les limites de $f(x) = \\frac{2x + 1}{x - 3}$.</strong></p>\n<ol>\n<li>Domaine. $x - 3 = 0$ pour $x = 3$ : valeur interdite. $D_f = ]-\\infty ; 3[ \\cup ]3 ; +\\infty[$.</li>\n<li>Aux infinis. Le quotient des termes de plus haut degré est $\\frac{2x}{x} = 2$. Donc $\\lim_{x \\to +\\infty} f(x) = \\lim_{x \\to -\\infty} f(x) = 2$ : la droite $y = 2$ est asymptote horizontale.</li>\n<li>En $3$. Le numérateur vaut $2 \\times 3 + 1 = 7 > 0$ et le dénominateur s'annule. Pour $x > 3$ (un peu), $x - 3$ est petit et positif : $f(x)$ est positif et grand, donc $\\lim_{x \\to 3^+} f(x) = +\\infty$. Pour $x < 3$ (un peu), $x - 3$ est petit et négatif : $\\lim_{x \\to 3^-} f(x) = -\\infty$.</li>\n<li>Conclusion. La droite $x = 3$ est asymptote verticale.</li>\n</ol>\n<p><strong>Autre exemple : $g(x) = \\frac{3x - 2}{x^2 + 1}$.</strong> Le dénominateur vaut au moins $1$ : il ne s'annule jamais, donc $D_g = \\mathbb{R}$ et il n'y a pas d'asymptote verticale. Le degré du numérateur (1) est inférieur à celui du dénominateur (2) : $\\lim_{x \\to \\pm\\infty} g(x) = 0$, et la droite $y = 0$ est asymptote horizontale.</p>\n<h2>Le piège à éviter</h2>\n<p>Oublier le signe quand le dénominateur tend vers $0$. Écrire « $\\frac{7}{0} = 0$ » est faux : il faut étudier les limites à droite et à gauche, ici $+\\infty$ d'un côté et $-\\infty$ de l'autre. Regarde le signe du numérateur, puis celui du dénominateur près de la valeur interdite.</p>\n<p>Autre piège : confondre les deux asymptotes. L'asymptote <strong>verticale</strong> se trouve en une valeur interdite $x = a$. L'asymptote <strong>horizontale</strong> vient de la limite en $\\pm\\infty$ : c'est une droite $y = \\ell$.</p>\n<h2>En une phrase</h2>\n<p>On exclut les valeurs qui annulent le dénominateur ; aux infinis on compare les termes de plus haut degré (asymptote horizontale), et près d'une valeur interdite la fonction part vers $+\\infty$ ou $-\\infty$ (asymptote verticale), selon les signes.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Valeurs interdites, limites de référence et asymptotes",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Pour quelle valeur de $x$ la part $\\frac{12000}{x}$ de chaque commerçante n'a-t-elle pas de sens ?",
+                  "question_type": "single_choice",
+                  "explanation": "On ne divise jamais par $0$ : la part n'a aucun sens avec 0 commerçante. C'est la valeur interdite. L'erreur tentante est de croire que le nombre $12000$ du numérateur pose problème : seul le dénominateur compte.",
+                  "answers": [
+                    {
+                      "content": "$x = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x = 12000$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x = -12000$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'image du partage de 12 000 F, quand le nombre $x$ de commerçantes devient très grand, la part de chacune se rapproche de $0$ sans jamais valoir exactement $0$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Pour tout $x > 0$, $\\frac{12000}{x} > 0$, mais cette part devient aussi petite qu'on veut. C'est la limite $\\lim_{x \\to +\\infty} \\frac{12000}{x} = 0$, d'où l'asymptote horizontale $y = 0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que devient $\\frac{12000}{x}$ quand $x$ se rapproche de $0$ en restant positif ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec très peu de commerçantes, la part de chacune est énorme. Par exemple $\\frac{12000}{0{,}001} = 12\\,000\\,000$. L'erreur tentante est de dire que la limite est $0$ : cela se produit quand $x$ devient grand, pas quand $x$ se rapproche de $0$.",
+                  "answers": [
+                    {
+                      "content": "Il devient très grand : il tend vers $+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il se rapproche de $0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il tend vers $-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il reste égal à $12000$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que signifie $\\lim_{x \\to +\\infty} f(x) = \\ell$ pour la courbe de $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Quand $x$ devient très grand, les valeurs $f(x)$ se rapprochent de $\\ell$ : la courbe colle à la droite horizontale $y = \\ell$. L'erreur tentante est d'inverser les rôles de $x$ et de $y$ et de parler d'asymptote verticale.",
+                  "answers": [
+                    {
+                      "content": "La droite d'équation $y = \\ell$ est une asymptote horizontale",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite d'équation $x = \\ell$ est une asymptote verticale",
+                      "correct": false
+                    },
+                    {
+                      "content": "La courbe coupe l'axe des abscisses au point d'abscisse $\\ell$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La fonction $f$ n'est pas définie en $\\ell$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour lesquelles de ces fonctions le domaine de définition est-il $\\mathbb{R} \\setminus \\{2\\}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Le dénominateur doit s'annuler exactement en $2$ : $x - 2$ convient pour $\\frac{1}{x - 2}$ et pour $\\frac{x}{x - 2}$. La fonction $\\frac{x-2}{x}$ exclut $0$ ; $\\frac{1}{x+2}$ exclut $-2$ ; et $x^2 + 2$ ne s'annule jamais. Ne regarde pas le numérateur.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{x - 2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{x}{x - 2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{x - 2}{x}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{x + 2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{x^2 + 2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un commerçant paie 500 F de place et 200 F par article. Pour $x$ articles, son coût moyen par article est $\\frac{200x + 500}{x}$. Vers quelle valeur ce coût moyen se rapproche-t-il quand $x$ devient très grand ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $\\frac{200x + 500}{x} = 200 + \\frac{500}{x}$, et $\\frac{500}{x} \\to 0$. Le coût moyen se rapproche de 200 F : la place est diluée dans la masse des articles. L'erreur $700$ additionne les deux nombres de l'énoncé, sans réfléchir au sens du quotient.",
+                  "answers": [
+                    {
+                      "content": "$200$ francs",
+                      "correct": true
+                    },
+                    {
+                      "content": "$500$ francs",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$ franc",
+                      "correct": false
+                    },
+                    {
+                      "content": "$700$ francs",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Domaine, limites et asymptotes",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quel est le domaine de définition de $f(x) = \\frac{3x + 1}{x^2 - 9}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut $x^2 - 9 \\neq 0$, soit $(x - 3)(x + 3) \\neq 0$ : on exclut $3$ et $-3$. L'erreur $\\mathbb{R} \\setminus \\{3\\}$ oublie la seconde racine ; l'erreur $\\mathbb{R} \\setminus \\{-\\frac{1}{3}\\}$ regarde le numérateur au lieu du dénominateur.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{R} \\setminus \\{-3 ; 3\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{R} \\setminus \\{3\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R} \\setminus \\{9\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{R} \\setminus \\left\\{-\\frac{1}{3}\\right\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite en $+\\infty$ de $f(x) = \\frac{4x + 3}{2x - 5}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le quotient des termes de plus haut degré est $\\frac{4x}{2x} = 2$. L'erreur $-\\frac{3}{5}$ divise les constantes : elles deviennent négligeables quand $x$ est très grand. L'erreur $4$ oublie de diviser par le coefficient du dénominateur.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\frac{3}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite en $+\\infty$ de $f(x) = \\frac{5x + 1}{x^2 + 3}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le numérateur est de degré 1 et le dénominateur de degré 2 : le dénominateur grossit plus vite. Le quotient des termes de plus haut degré est $\\frac{5x}{x^2} = \\frac{5}{x} \\to 0$. L'erreur $\\frac{1}{3}$ divise les constantes ; l'erreur $+\\infty$ ne regarde que le numérateur.",
+                  "answers": [
+                    {
+                      "content": "$0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la limite de $f(x) = \\frac{3}{x - 2}$ quand $x$ se rapproche de $2$ en restant supérieur à $2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $x > 2$ (un peu), $x - 2$ est petit et positif, et le numérateur $3$ est positif : le quotient est positif et très grand. Par exemple $f(2{,}001) = 3000$. L'erreur $-\\infty$ se produirait pour $x < 2$.",
+                  "answers": [
+                    {
+                      "content": "$+\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{x + 4}{x - 1}$. Quelle est la limite de $f$ quand $x$ se rapproche de $1$ en restant inférieur à $1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "En $x = 1$, le numérateur vaut $5 > 0$. Pour $x < 1$ (un peu), $x - 1$ est petit et négatif : le quotient est négatif et très grand en valeur absolue. Par exemple $f(0{,}999) = \\frac{4{,}999}{-0{,}001} = -4999$. La limite est $-\\infty$.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{6x - 1}{2x + 4}$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Aux infinis, $\\frac{6x}{2x} = 3$ : asymptote $y = 3$. Le dénominateur s'annule en $-2$, où le numérateur vaut $-13 \\neq 0$ : asymptote $x = -2$. L'erreur $x = \\frac{1}{6}$ prend la racine du numérateur, qui est un zéro de la fonction et non une valeur interdite.",
+                  "answers": [
+                    {
+                      "content": "La droite $y = 3$ est asymptote horizontale",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite $x = -2$ est asymptote verticale",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite $x = 3$ est asymptote verticale",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $y = -2$ est asymptote horizontale",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $x = \\frac{1}{6}$ est asymptote verticale",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Étudier les limites d'une fonction rationnelle",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = \\frac{2x + 6}{x - 4}$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Le dénominateur s'annule en $4$, où le numérateur vaut $14 > 0$. Pour $x > 4$, $x - 4$ est positif : la limite est $+\\infty$. Aux infinis, $\\frac{2x}{x} = 2$. L'erreur $x = -3$ prend le zéro du numérateur ; l'erreur $y = -\\frac{3}{2}$ divise les constantes.",
+                  "answers": [
+                    {
+                      "content": "La droite $x = 4$ est asymptote verticale",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite $y = 2$ est asymptote horizontale",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\lim_{x \\to 4^+} f(x) = +\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite $x = -3$ est asymptote verticale",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $y = -\\frac{3}{2}$ est asymptote horizontale",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\lim_{x \\to 4^+} f(x) = -\\infty$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un tailleur a un coût total de $C(x) = 300x + 6000$ francs pour $x$ habits. Son coût moyen par habit est $M(x) = \\frac{C(x)}{x} = 300 + \\frac{6000}{x}$. À partir de combien d'habits ce coût moyen est-il inférieur ou égal à $310$ francs ?",
+                  "question_type": "single_choice",
+                  "explanation": "On résout $300 + \\frac{6000}{x} \\leq 310$, soit $\\frac{6000}{x} \\leq 10$. Comme $x > 0$, cela donne $x \\geq \\frac{6000}{10} = 600$. L'erreur $20$ vient de $\\frac{6000}{310}$ : on a oublié de retirer les $300$ francs du prix de base.",
+                  "answers": [
+                    {
+                      "content": "À partir de $600$ habits",
+                      "correct": true
+                    },
+                    {
+                      "content": "À partir de $60$ habits",
+                      "correct": false
+                    },
+                    {
+                      "content": "À partir de $6000$ habits",
+                      "correct": false
+                    },
+                    {
+                      "content": "À partir de $20$ habits",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La fonction $f(x) = \\frac{5x + 2}{x^2 + 1}$ admet une asymptote verticale.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Une asymptote verticale se trouve en une valeur interdite. Or $x^2 + 1 \\geq 1$ : le dénominateur ne s'annule jamais, donc $f$ est définie sur $\\mathbb{R}$. En revanche, $\\lim_{x \\to \\pm\\infty} f(x) = 0$ donne une asymptote horizontale, $y = 0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $h(x) = \\frac{-x + 3}{x + 2}$. Quelle est la limite de $h$ quand $x$ se rapproche de $-2$ en restant inférieur à $-2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "En $x = -2$, le numérateur vaut $2 + 3 = 5 > 0$. Pour $x < -2$, $x + 2$ est petit et négatif : le quotient est négatif et grand en valeur absolue. Par exemple $h(-2{,}01) = \\frac{5{,}01}{-0{,}01} = -501$. L'erreur $-1$ est la limite en $\\pm\\infty$.",
+                  "answers": [
+                    {
+                      "content": "$-\\infty$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$+\\infty$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{ax + 1}{x - 2}$, où $a$ est un réel. La courbe de $f$ admet la droite $y = 3$ pour asymptote horizontale. Que vaut $a$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Aux infinis, $f(x)$ se rapproche de $\\frac{ax}{x} = a$. L'asymptote horizontale est donc $y = a$, et $a = 3$. L'erreur $6$ multiplie par la valeur interdite $2$ : elle n'intervient pas dans la limite en $\\pm\\infty$.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "En quel point la courbe de $f(x) = \\frac{2x - 1}{x + 3}$ coupe-t-elle l'axe des abscisses ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un point de l'axe des abscisses a pour ordonnée $0$ : on résout $\\frac{2x - 1}{x + 3} = 0$, donc $2x - 1 = 0$ et $x = \\frac{1}{2}$. Le point $\\left(0 ; -\\frac{1}{3}\\right)$ est sur l'axe des ordonnées ; $x = -3$ est la valeur interdite.",
+                  "answers": [
+                    {
+                      "content": "$\\left(\\frac{1}{2} ; 0\\right)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\left(0 ; -\\frac{1}{3}\\right)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-3 ; 0)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2 ; 0)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Étudier une fonction rationnelle et tracer sa courbe",
+          "subtitle": "À compléter : asymptote oblique, forme 0/0 (factorisation), position de la courbe par rapport à ses asymptotes",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Dériver une fonction rationnelle avec la formule du quotient.</li>\n<li>Étudier le signe de la dérivée et décrire le tableau de variation sur chaque intervalle du domaine.</li>\n<li>Rassembler limites, asymptotes et variations pour tracer la courbe.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le pont coupé (étudier sur chaque intervalle).</strong> Sur la route du marché, un pont est coupé en un point précis. Tu ne peux pas le traverser : tu étudies la route avant le pont, puis la route après le pont, comme deux routes séparées. Avant le pont, la route peut monter. Après le pont, elle peut aussi monter, mais à une tout autre altitude.</p>\n<p><em>Le pont.</em> Le pont coupé, c'est la valeur interdite de la fonction rationnelle. Le domaine est alors formé de plusieurs intervalles, et on étudie les variations sur <strong>chacun</strong>. On ne peut pas comparer une valeur d'avant le pont avec une valeur d'après le pont à l'aide de la dérivée.</p>\n<p><em>Où l'image s'arrête.</em> Près du « pont coupé », la route ne s'arrête pas net : elle part vers le ciel ou vers l'abîme. C'est l'asymptote verticale.</p>\n<p><strong>2. Le bénéfice moyen par verre (le sens de variation).</strong> Une vendeuse de jus gagne 200 F net par verre vendu, mais elle paie 1 000 F de frais fixes pour la journée. Si elle vend $x$ verres, son bénéfice moyen par verre est $b(x) = \\frac{200x - 1000}{x} = 200 - \\frac{1000}{x}$. Avec 2 verres, le bénéfice moyen est $-300$ F (une perte). Avec 10 verres, il est de 100 F. Avec 1 000 verres, il est de 199 F. Plus elle vend, plus son bénéfice moyen augmente, mais il ne dépasse jamais 200 F.</p>\n<p><em>Le pont.</em> La fonction $b$ est croissante : $b'(x) = \\frac{1000}{x^2} > 0$. Elle tend vers 200 quand $x$ devient grand : asymptote horizontale $y = 200$. Le dénominateur $x^2$ est toujours positif : le signe de la dérivée est celui du numérateur $1000$.</p>\n<p><em>Où l'image s'arrête.</em> Ici $x$ est un nombre de verres, donc positif. La fonction $200 - \\frac{1000}{x}$ existe aussi pour $x < 0$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Dérivée d'un quotient.</strong> Si $u$ et $v$ sont dérivables sur un intervalle où $v$ ne s'annule pas, alors $\\frac{u}{v}$ est dérivable sur cet intervalle et $$\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}.$$</p>\n<p><strong>Cas à connaître.</strong> Pour $f(x) = \\frac{ax + b}{cx + d}$ : $$f'(x) = \\frac{ad - bc}{(cx + d)^2}.$$ Pour $f(x) = \\frac{1}{x}$ : $f'(x) = -\\frac{1}{x^2}$.</p>\n<p><strong>Signe de la dérivée.</strong> Le dénominateur $v^2$ est strictement positif : le signe de $f'(x)$ est celui du numérateur $u'v - uv'$.</p>\n<p><strong>Plan d'étude d'une fonction rationnelle.</strong></p>\n<ol>\n<li>Domaine : on exclut les valeurs qui annulent le dénominateur.</li>\n<li>Limites en $+\\infty$, en $-\\infty$ et aux valeurs interdites ; asymptotes.</li>\n<li>Dérivée, puis signe de la dérivée sur <strong>chaque intervalle</strong> du domaine.</li>\n<li>Tableau de variation décrit en phrases, intervalle par intervalle.</li>\n<li>Points particuliers (intersections avec les axes), puis courbe avec ses asymptotes.</li>\n</ol>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Étudier $f(x) = \\frac{4x - 2}{x + 1}$.</strong></p>\n<ol>\n<li>Domaine. $x + 1 = 0$ pour $x = -1$ : $D_f = ]-\\infty ; -1[ \\cup ]-1 ; +\\infty[$.</li>\n<li>Limites. Aux infinis, $\\frac{4x}{x} = 4$ : asymptote horizontale $y = 4$. En $-1$, le numérateur vaut $-4 - 2 = -6 < 0$. Si $x > -1$ (un peu), $x + 1$ est petit et positif : $\\lim_{x \\to -1^+} f(x) = -\\infty$. Si $x < -1$ (un peu), $\\lim_{x \\to -1^-} f(x) = +\\infty$. Asymptote verticale : $x = -1$.</li>\n<li>Dérivée. Avec $a = 4$, $b = -2$, $c = 1$, $d = 1$ : $ad - bc = 4 \\times 1 - (-2) \\times 1 = 6$. Donc $f'(x) = \\frac{6}{(x + 1)^2}$.</li>\n<li>Signe. $f'(x) > 0$ pour tout $x$ du domaine.</li>\n<li>Tableau décrit en phrases. Sur $]-\\infty ; -1[$, $f$ est croissante : elle monte de $4$ (limite en $-\\infty$) jusqu'à $+\\infty$. Sur $]-1 ; +\\infty[$, elle est croissante : elle monte de $-\\infty$ jusqu'à $4$ (limite en $+\\infty$).</li>\n<li>Points. $f(0) = -2$ : la courbe coupe l'axe des ordonnées en $(0 ; -2)$. $f(x) = 0$ pour $4x - 2 = 0$, soit $x = \\frac{1}{2}$ : elle coupe l'axe des abscisses en $\\left(\\frac{1}{2} ; 0\\right)$. On a aussi $f(1) = 1$ et $f(-2) = 10$.</li>\n<li>Courbe. Elle a deux branches : l'une à droite de $x = -1$, qui monte de $-\\infty$ vers $y = 4$ ; l'autre à gauche de $x = -1$, qui part de la hauteur $y = 4$ loin sur la gauche et monte vers $+\\infty$ en approchant de $x = -1$.</li>\n</ol>\n<p><strong>Autre exemple : $h(x) = \\frac{-2x + 5}{x + 3}$.</strong> La valeur interdite est $-3$. Aux infinis, $\\frac{-2x}{x} = -2$ : asymptote horizontale $y = -2$. Avec $a = -2$, $b = 5$, $c = 1$, $d = 3$ : $ad - bc = -6 - 5 = -11$, donc $h'(x) = \\frac{-11}{(x + 3)^2}$, qui est strictement négative. En $-3$, le numérateur vaut $11 > 0$ : $h$ tend vers $+\\infty$ à droite de $-3$ et vers $-\\infty$ à gauche. Donc $h$ est décroissante sur chaque intervalle : de $-2$ à $-\\infty$ sur $]-\\infty ; -3[$, et de $+\\infty$ à $-2$ sur $]-3 ; +\\infty[$.</p>\n<h2>Le piège à éviter</h2>\n<p>Dire que $f$ est croissante sur tout son domaine. Dans l'exemple, $f'(x) > 0$, mais $f(-2) = 10$ et $f(0) = -2$ : on a $-2 < 0$ et pourtant $f(-2) > f(0)$. La fonction est croissante sur chaque intervalle séparément, pas sur $\\mathbb{R} \\setminus \\{-1\\}$ tout entier. C'est le pont coupé.</p>\n<p>Autre piège : se tromper d'ordre dans le numérateur de la formule. C'est $u'v - uv'$, et non $uv' - u'v$ : le signe de la dérivée serait inversé.</p>\n<h2>En une phrase</h2>\n<p>Pour une fonction rationnelle, on dérive avec $\\frac{u'v - uv'}{v^2}$, on lit le signe sur le numérateur, et on décrit les variations intervalle par intervalle, comme les deux côtés d'un pont coupé.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Formule du quotient, signe et intervalles",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle est la formule de la dérivée de $\\frac{u}{v}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La dérivée d'un quotient est $\\frac{u'v - uv'}{v^2}$. L'erreur $\\frac{u'}{v'}$ est la plus répandue : on dérive le haut et le bas séparément, ce qui est faux. L'erreur du signe $+$ est celle de la dérivée d'un produit. L'ordre $uv' - u'v$ inverse le signe.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{u'v - uv'}{v^2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{u'}{v'}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{u'v + uv'}{v^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{uv' - u'v}{v^2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la dérivée d'un quotient, le dénominateur $v(x)^2$ est strictement positif sur le domaine. Le signe de $f'(x)$ est donc celui du numérateur $u'v - uv'$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Un carré est positif ou nul, et il n'est pas nul sur le domaine, car $v$ ne s'annule pas. Il ne change donc pas le signe du quotient. C'est comme pour $b'(x) = \\frac{1000}{x^2}$ : le signe vient de $1000$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f$ une fonction rationnelle dont la valeur interdite est $3$. Si $f'(x) > 0$ sur $]-\\infty ; 3[$ et sur $]3 ; +\\infty[$, alors $f$ est croissante sur $\\mathbb{R} \\setminus \\{3\\}$ tout entier : pour tous $x < y$ de ce domaine, on a $f(x) < f(y)$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. La croissance vaut sur chaque intervalle séparément. Exemple : $f(x) = \\frac{1}{3 - x}$ a pour dérivée $\\frac{1}{(3 - x)^2} > 0$, mais $f(2) = 1$ et $f(4) = -1$ : on a $2 < 4$ et pourtant $f(2) > f(4)$. La route ne reprend pas à la même altitude après le pont.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction rationnelle a pour seule valeur interdite $2$. Sur quels intervalles étudie-t-on ses variations ?",
+                  "question_type": "single_choice",
+                  "explanation": "La valeur $2$ est exclue du domaine : le domaine est $]-\\infty ; 2[ \\cup ]2 ; +\\infty[$. On étudie les deux intervalles séparément, comme les deux côtés du pont coupé. Les crochets fermés en $2$ sont faux : $f(2)$ n'existe pas.",
+                  "answers": [
+                    {
+                      "content": "Sur $]-\\infty ; 2[$ et sur $]2 ; +\\infty[$, séparément",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur $\\mathbb{R}$ tout entier",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur $[2 ; +\\infty[$ seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur $]-\\infty ; 2]$ et sur $[2 ; +\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bénéfice moyen par verre est $b(x) = 200 - \\frac{1000}{x}$ pour $x > 0$. Que se passe-t-il quand le nombre de verres $x$ devient très grand ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $b(x) = 200 - \\frac{1000}{x}$, avec $\\frac{1000}{x} > 0$ et qui tend vers $0$. Donc $b(x) < 200$ pour tout $x > 0$, et $b(x)$ s'approche de $200$. La droite $y = 200$ est une asymptote que la courbe ne touche pas ici.",
+                  "answers": [
+                    {
+                      "content": "$b(x)$ se rapproche de $200$ par valeurs inférieures, sans l'atteindre",
+                      "correct": true
+                    },
+                    {
+                      "content": "$b(x)$ dépasse $200$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$b(x)$ devient négatif",
+                      "correct": false
+                    },
+                    {
+                      "content": "$b(x)$ vaut exactement $200$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Dériver, étudier le signe et décrire les variations",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle est la dérivée de $f(x) = \\frac{3x + 2}{x - 1}$ sur son domaine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $u = 3x + 2$ et $v = x - 1$ : $u'v - uv' = 3(x - 1) - (3x + 2) = -5$. Donc $f'(x) = \\frac{-5}{(x - 1)^2}$. L'erreur $\\frac{6x - 1}{(x - 1)^2}$ utilise un $+$ au lieu du $-$ ; l'erreur $\\frac{5}{(x-1)^2}$ inverse l'ordre des termes.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{-5}{(x - 1)^2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{5}{(x - 1)^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{(x - 1)^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{6x - 1}{(x - 1)^2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{3x + 2}{x - 1}$, avec $f'(x) = \\frac{-5}{(x - 1)^2}$. Quelles sont les variations de $f$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le carré est positif, le numérateur $-5$ est négatif : $f'(x) < 0$ partout sur le domaine. Donc $f$ est décroissante sur chacun des deux intervalles. Dire « décroissante sur le domaine entier » est faux : on ne compare pas des valeurs de part et d'autre de la valeur interdite.",
+                  "answers": [
+                    {
+                      "content": "Strictement décroissante sur $]-\\infty ; 1[$ et sur $]1 ; +\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Strictement croissante sur $]-\\infty ; 1[$ et sur $]1 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Strictement décroissante sur $\\mathbb{R} \\setminus \\{1\\}$ tout entier, sans distinction",
+                      "correct": false
+                    },
+                    {
+                      "content": "Croissante sur $]-\\infty ; 1[$ et décroissante sur $]1 ; +\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la dérivée de $g(x) = \\frac{5x - 3}{2x + 1}$ sur son domaine ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $u = 5x - 3$ et $v = 2x + 1$ : $u'v - uv' = 5(2x + 1) - (5x - 3) \\times 2 = 10x + 5 - 10x + 6 = 11$. Donc $g'(x) = \\frac{11}{(2x + 1)^2}$. Les erreurs : inverser l'ordre (signe opposé), utiliser un $+$ (on obtient $20x - 1$), ou calculer $\\frac{u'}{v'}$.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{11}{(2x + 1)^2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{-11}{(2x + 1)^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{20x - 1}{(2x + 1)^2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{5}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $g(x) = \\frac{5x - 3}{2x + 1}$, définie pour $x \\neq -\\frac{1}{2}$, avec $g'(x) = \\frac{11}{(2x + 1)^2}$. Pour quelles valeurs de $x$ du domaine $g'(x)$ est-elle strictement positive ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le numérateur $11$ est positif et le carré $(2x + 1)^2$ est strictement positif sur le domaine : $g'(x) > 0$ des deux côtés de la valeur interdite. En $x = -\\frac{1}{2}$, $g'$ n'est pas définie : elle ne s'annule pas. Donc $g$ est croissante sur chaque intervalle.",
+                  "answers": [
+                    {
+                      "content": "Pour toutes : sur $]-\\infty ; -\\frac{1}{2}[$ comme sur $]-\\frac{1}{2} ; +\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seulement pour $x > -\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seulement pour $x < -\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour aucune : $g'$ s'annule en $x = -\\frac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $g(x) = \\frac{5x - 3}{2x + 1}$, avec $g'(x) = \\frac{11}{(2x + 1)^2}$. La fonction $g$ admet-elle un extremum local ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un extremum demande que $g'$ s'annule en changeant de signe. Ici $g'(x) = \\frac{11}{(2x + 1)^2}$ est toujours strictement positive : pas d'extremum. La valeur $-\\frac{1}{2}$ est interdite (asymptote verticale) et $\\frac{5}{2}$ est une limite en $\\pm\\infty$ (asymptote horizontale) : ce ne sont pas des extremums.",
+                  "answers": [
+                    {
+                      "content": "Non : $g'$ ne s'annule jamais",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, un minimum en $x = -\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, un maximum égal à $\\frac{5}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, un minimum égal à $11$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{2x + 3}{x + 1}$, avec $f'(x) = \\frac{-1}{(x + 1)^2}$. Quelle description de ses variations est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "La dérivée est négative : $f$ décroît sur chaque intervalle. Le numérateur $2x + 3$ vaut $1 > 0$ en $-1$. À gauche de $-1$, le dénominateur est négatif : la limite est $-\\infty$, et en $-\\infty$ elle vaut $2$. À droite, la limite est $+\\infty$, et en $+\\infty$ elle vaut $2$.",
+                  "answers": [
+                    {
+                      "content": "Décroissante de $2$ à $-\\infty$ sur $]-\\infty ; -1[$, et décroissante de $+\\infty$ à $2$ sur $]-1 ; +\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Croissante de $2$ à $+\\infty$ sur $]-\\infty ; -1[$, et croissante de $-\\infty$ à $2$ sur $]-1 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Décroissante de $+\\infty$ à $2$ sur $]-\\infty ; -1[$, et décroissante de $-\\infty$ à $2$ sur $]-1 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Décroissante de $2$ à $-\\infty$ sur $\\mathbb{R} \\setminus \\{-1\\}$ tout entier",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Étude complète d'une fonction rationnelle",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Soit $f(x) = \\frac{4x - 2}{x + 1}$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Le dénominateur s'annule en $-1$. On a $ad - bc = 4 + 2 = 6$, donc $f' > 0$ : $f$ est croissante sur chaque intervalle. La droite $y = 4$ est l'asymptote horizontale ($-2$ est $f(0)$). Et $f(-2) = 10 > f(0) = -2$.",
+                  "answers": [
+                    {
+                      "content": "Le domaine de $f$ est $\\mathbb{R} \\setminus \\{-1\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f'(x) = \\frac{6}{(x + 1)^2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La courbe de $f$ coupe l'axe des abscisses au point $\\left(\\frac{1}{2} ; 0\\right)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f$ est décroissante sur $]-1 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $y = -2$ est asymptote horizontale",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(-2) < f(0)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bénéfice moyen par verre d'une vendeuse de jus est $b(x) = \\frac{200x - 1000}{x}$ francs pour $x > 0$ verres vendus. Pour quels nombres de verres vendus le bénéfice moyen est-il strictement positif ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme $x > 0$, $b(x) > 0$ équivaut à $200x - 1000 > 0$, donc $x > \\frac{1000}{200} = 5$. Vérification : $b(5) = 0$, $b(10) = 100$. L'erreur $0{,}2$ calcule $\\frac{200}{1000}$ au lieu de $\\frac{1000}{200}$.",
+                  "answers": [
+                    {
+                      "content": "Pour plus de $5$ verres",
+                      "correct": true
+                    },
+                    {
+                      "content": "Pour plus de $0{,}2$ verre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour plus de $200$ verres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Pour plus de $1000$ verres",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une fonction rationnelle dont le dénominateur ne s'annule jamais n'a pas d'asymptote verticale.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Une asymptote verticale apparaît près d'une valeur interdite. Si le dénominateur ne s'annule jamais, il n'y a pas de valeur interdite, donc pas d'asymptote verticale. C'est le cas de $\\frac{x^2 - 4}{x^2 + 1}$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{x - 1}{x + 2}$, avec $f'(x) = \\frac{3}{(x + 2)^2}$. Quel tableau de variation, décrit en phrases, est exact ?",
+                  "question_type": "single_choice",
+                  "explanation": "On a $f' > 0$ : $f$ croît sur chaque intervalle. Le numérateur vaut $-3$ en $-2$. À gauche de $-2$ le dénominateur est négatif, donc $f \\to +\\infty$ ; à droite, $f \\to -\\infty$. En $\\pm\\infty$, la limite vaut $1$. Test : $f(-3) = 4$ et $f(-10) = 1{,}375$, donc $f$ croît vers $+\\infty$.",
+                  "answers": [
+                    {
+                      "content": "Croissante de $1$ à $+\\infty$ sur $]-\\infty ; -2[$, et croissante de $-\\infty$ à $1$ sur $]-2 ; +\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Croissante de $-\\infty$ à $1$ sur $]-\\infty ; -2[$, et croissante de $+\\infty$ à $1$ sur $]-2 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Décroissante de $1$ à $+\\infty$ sur $]-\\infty ; -2[$, et décroissante de $-\\infty$ à $1$ sur $]-2 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Croissante de $-\\infty$ à $+\\infty$ sur $\\mathbb{R} \\setminus \\{-2\\}$ tout entier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $k(x) = \\frac{3x + 1}{x - 2}$, avec $k'(x) = \\frac{-7}{(x - 2)^2}$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "La dérivée $\\frac{-7}{(x - 2)^2}$ est strictement négative sur le domaine et ne s'annule jamais : $k$ décroît sur chaque intervalle, sans extremum. Mais $k(0) = -\\frac{1}{2}$ et $k(3) = 10$ : on ne compare pas de part et d'autre de la valeur interdite $2$.",
+                  "answers": [
+                    {
+                      "content": "$k$ est strictement décroissante sur $]-\\infty ; 2[$ et sur $]2 ; +\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$k$ n'admet aucun extremum local",
+                      "correct": true
+                    },
+                    {
+                      "content": "$k$ admet un minimum local en $x = 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$k(0) > k(3)$, car $k$ est décroissante",
+                      "correct": false
+                    },
+                    {
+                      "content": "$k$ est croissante sur $]2 ; +\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = \\frac{ax + 1}{x + b}$. Sa courbe admet la droite $x = 2$ comme asymptote verticale et la droite $y = 3$ comme asymptote horizontale. Quelles sont les valeurs de $a$ et $b$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'asymptote horizontale vaut $\\frac{ax}{x} = a$, donc $a = 3$. Le dénominateur $x + b$ s'annule en $2$ : $2 + b = 0$, donc $b = -2$. Le numérateur vaut alors $3 \\times 2 + 1 = 7 \\neq 0$ : la limite en $2$ est bien infinie. L'erreur $b = 2$ annule le dénominateur en $-2$.",
+                  "answers": [
+                    {
+                      "content": "$a = 3$ et $b = -2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a = 3$ et $b = 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = 2$ et $b = -3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a = -2$ et $b = 3$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -274,15 +274,17 @@ module ComponentsHelper
   # `placement: :sheet` : feuille ancrée en bas sous lg, avec sa poignée ; `:drawer` : panneau ancré à gauche, sans poignée
   # (UDR-0080 §3.2) ; `:center` (défaut) ne change rien.
   # `trigger_full:` étire le déclencheur sur toute la largeur de sa cellule : une entrée de rôle de la page d'accueil (UDR-0064).
+  # `described_by:` l'id du texte qui explique une confirmation, lu à l'ouverture (aria-describedby, UDR-0083).
   def ui_modal(title:, id: nil, size: :md, trigger: nil, trigger_variant: :secondary, trigger_icon: nil, open: false,
                document_title: nil, trigger_href: nil, trigger_size: :md, trigger_full: false, trigger_class: nil,
-               placement: :center, &block)
+               placement: :center, described_by: nil, &block)
     slots = Slots.new(self)
     body = block ? capture(slots, &block) : nil
     render "components/modal", id: id || "modal-#{title.parameterize}", title:, trigger:, trigger_variant:,
            trigger_icon:, trigger_href:, trigger_size:, trigger_full:, trigger_class:, open:, body:, slots:, document_title:,
            size_class: option!(MODAL_SIZES, size, "ui_modal size"),
-           placement_class: option!(MODAL_PLACEMENTS, placement, "ui_modal placement"), sheet: placement.to_sym == :sheet
+           placement_class: option!(MODAL_PLACEMENTS, placement, "ui_modal placement"), sheet: placement.to_sym == :sheet,
+           described_by:
   end
 
   # Menu déroulant. `trigger:` remplace le bouton icône par un contenu libre (avatar + nom, par exemple).

@@ -89,8 +89,7 @@ module Queries
         assert_equal [ active.public_id ], level.classrooms.map(&:public_id)
         assert_equal [ recent.public_id ], level.archived.map(&:public_id)
         assert_equal [ "archived" ], level.archived.map(&:status)
-        assert_equal [ 1, false, 1 ], [ level.hidden_count, archival_detail.archives_shown, archival_detail.hidden_archives_count ]
-        assert_equal 2, archival_detail.archived_total
+        assert_equal [ 1, false ], [ level.hidden_count, archival_detail.archives_shown ]
       end
 
       test "ADR-0088 : avec les archives demandées, toutes les archivées sont rangées en fin de niveau, aucune masquée" do
@@ -101,7 +100,7 @@ module Queries
         detail = archival_detail(archives: true)
 
         assert_equal [ "6ème 1", "6ème 3" ], detail.levels.sole.archived.map(&:name)
-        assert_equal [ true, 0 ], [ detail.archives_shown, detail.hidden_archives_count ]
+        assert_equal [ true, [ 0 ] ], [ detail.archives_shown, detail.levels.map(&:hidden_count).uniq ]
       end
 
       test "ADR-0088 : les compteurs du niveau et de l'établissement ne comptent que les classes actives" do
@@ -213,6 +212,19 @@ module Queries
         create_classroom(school: @school, level: @sixth, name: "6ème 3")
 
         assert_equal [ "6ème 3" ], SchoolDetailQuery.new.call(public_id: @school.public_id).levels.sole.classrooms.map(&:name)
+      end
+
+      test "ADR-0088 : un élève de deux classes du niveau compte une fois dans l'effectif du niveau (confirmation)" do
+        first = create_classroom(school: @school, level: @sixth, name: "6ème 1", school_year: YEAR)
+        second = create_classroom(school: @school, level: @sixth, name: "6ème 2", school_year: YEAR)
+        both = create_student(classroom: first)
+        Orm::ClassroomStudent.create!(classroom: second, student: both, joined_via: "standard", joined_at: Time.current)
+        create_student(classroom: second)
+
+        level = detail.levels.sole
+
+        assert_equal [ 1, 2 ], level.classrooms.map(&:students_count)
+        assert_equal 2, level.students_count
       end
     end
   end

@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | livré (en attente de PR) |
+| **Statut** | livré |
 | **Ouvert le** | 2026-10-09 |
 | **Branche** | `Develop` (branche désignée de la session ; pas de `fix/<slug>`) |
 | **Programme** | — |

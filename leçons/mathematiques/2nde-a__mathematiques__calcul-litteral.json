@@ -1,0 +1,933 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Calcul littéral",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "Mathématiques",
+      "series_name": "A",
+      "essentials": [
+        {
+          "name": "Expressions littérales et valeur numérique",
+          "subtitle": "Remplacer une lettre par un montant pour calculer ce qu'on paie au mobile money",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Écrire une expression littérale qui traduit une situation où une quantité est inconnue, notée $x$.</li>\n<li>Calculer la valeur numérique d'une expression pour une valeur donnée de $x$.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le transfert mobile money (l'expression).</strong> Tu envoies une somme à ton petit frère par mobile money. Quelle que soit la somme, l'opérateur ajoute 25 F de frais. Si tu envoies 1 000 F, tu paies 1 025 F. Si tu envoies 500 F, tu paies 525 F.</p>\n<p><em>Le pont.</em> Le montant envoyé varie : on le note $x$, une lettre qui attend un nombre. Le total payé s'écrit $x + 25$ : c'est une <strong>expression littérale</strong>. Remplacer $x$ par 1 000 donne sa <strong>valeur numérique</strong> : $1\\,000 + 25 = 1\\,025$.</p>\n<p><em>Où l'image s'arrête.</em> La lettre $x$ représente ici un montant positif. Une expression littérale n'a pas de valeur tant qu'on ne sait pas quel nombre mettre à la place de la lettre.</p>\n<p><strong>2. Le crédit du téléphone (l'ordre des opérations).</strong> Ton téléphone a 500 F de crédit. Chaque appel coûte 25 F. Après 4 appels, il reste $500 - 25 \\times 4 = 400$ F : on retire 25 F quatre fois.</p>\n<p><em>Le pont.</em> Si l'on fait $n$ appels, le crédit restant est $500 - 25n$. La multiplication $25n$ se fait avant la soustraction : c'est la règle des priorités.</p>\n<p><em>Où l'image s'arrête.</em> Le nombre d'appels $n$ est un entier positif : l'expression ne dit rien d'un nombre d'appels qui ne serait pas entier.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Expression littérale.</strong> Écriture qui contient une ou plusieurs lettres, appelées <strong>variables</strong>. Par exemple $x + 25$ ou $500 - 25n$.</p>\n<p><strong>Valeur numérique.</strong> Pour une valeur donnée de la lettre, on remplace la lettre par ce nombre, puis on calcule en respectant les priorités : les parenthèses d'abord, puis les puissances, puis les multiplications, enfin les additions et soustractions.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p>Calculons la valeur de $2x^2 - x + 1$ pour $x = 3$.</p>\n<ul>\n<li><strong>Étape 1 :</strong> On remplace chaque $x$ par 3 : $2 \\times 3^2 - 3 + 1$.</li>\n<li><strong>Étape 2 :</strong> La puissance d'abord : $3^2 = 9$, donc on a $2 \\times 9 - 3 + 1$.</li>\n<li><strong>Étape 3 :</strong> La multiplication ensuite : $2 \\times 9 = 18$, donc $18 - 3 + 1$.</li>\n<li><strong>Étape 4 :</strong> On calcule de gauche à droite : $18 - 3 = 15$, puis $15 + 1 = 16$.</li>\n</ul>\n<h2>Le piège à éviter</h2>\n<p>L'erreur la plus fréquente : écrire $2x^2$ comme $(2x)^2$. Avec $x = 3$, $(2 \\times 3)^2 = 36$, alors que $2 \\times 3^2 = 18$. Repère-le : la puissance ne porte que sur la lettre, pas sur le coefficient qui la précède.</p>\n<h2>En une phrase</h2>\n<p>Une expression littérale est une recette avec une lettre : pour obtenir un résultat, remplace la lettre par le nombre demandé et respecte l'ordre des calculs.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître une expression littérale",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans l'expression $x + 25$, où $x$ est le montant envoyé par mobile money, quel nombre représente les frais ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les frais sont fixes : 25 F, quel que soit le montant envoyé. La lettre $x$ représente le montant, qui varie d'un transfert à l'autre.",
+                  "answers": [
+                    {
+                      "content": "$25$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x + 25$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'expression $x + 25$ a une valeur numérique, même si l'on ne connaît pas $x$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Sa valeur dépend de $x$ : pour $x = 1\\,000$, elle vaut 1 025 ; pour $x = 500$, elle vaut 525. Sans valeur donnée pour $x$, on ne peut pas calculer de nombre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x = 1\\,000$, quelle est la valeur numérique de $x + 25$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Remplace $x$ par 1 000 : $1\\,000 + 25 = 1\\,025$. L'erreur 1 250 multiplie les frais par 10 ; l'erreur 250 oublie le montant envoyé.",
+                  "answers": [
+                    {
+                      "content": "1 025",
+                      "correct": true
+                    },
+                    {
+                      "content": "1 250",
+                      "correct": false
+                    },
+                    {
+                      "content": "250",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle expression traduit « le double de $x$, moins 10 » ?",
+                  "question_type": "single_choice",
+                  "explanation": "« Le double de $x$ » donne $2x$, puis « moins 10 » donne $2x - 10$. L'erreur $2(x - 10)$ prend le double de $x - 10$ ; l'erreur $x - 20$ soustrait 10 deux fois au lieu de doubler $x$.",
+                  "answers": [
+                    {
+                      "content": "$2x - 10$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2(x - 10)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x - 20$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un téléphone a 500 F de crédit. Chaque appel coûte 25 F. Quelle expression donne le crédit restant après $n$ appels ?",
+                  "question_type": "single_choice",
+                  "explanation": "Chaque appel retire 25 F : il faut soustraire 25 fois $n$, soit $500 - 25n$. L'erreur $(500 - 25)n$ retire 25 F une seule fois puis multiplie le reste par $n$ ; $500 + 25n$ ajoute le coût au lieu de le retirer.",
+                  "answers": [
+                    {
+                      "content": "$500 - 25n$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(500 - 25)n$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$500 + 25n$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer une valeur numérique",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Calcule $3x + 4$ pour $x = 5$.",
+                  "question_type": "single_choice",
+                  "explanation": "$3 \\times 5 + 4 = 15 + 4 = 19$. L'erreur 27 calcule $3 \\times (5 + 4)$, alors qu'il n'y a pas de parenthèses ; l'erreur 12 additionne les trois nombres 3, 5 et 4.",
+                  "answers": [
+                    {
+                      "content": "19",
+                      "correct": true
+                    },
+                    {
+                      "content": "27",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $x^2 - 3$ pour $x = 4$.",
+                  "question_type": "single_choice",
+                  "explanation": "$4^2 = 16$, puis $16 - 3 = 13$. L'erreur 1 calcule $(4 - 3)^2$ : le carré ne porte que sur le 4. L'erreur 49 calcule $(4 + 3)^2$.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "49",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $a = 2$ et $b = 3$, calcule $a^2 + 2b$.",
+                  "question_type": "single_choice",
+                  "explanation": "$2^2 + 2 \\times 3 = 4 + 6 = 10$. L'erreur 25 calcule $(a + b)^2$ ; l'erreur 12 calcule $2ab$, qui n'est pas l'expression demandée.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    },
+                    {
+                      "content": "25",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x = 2$, les expressions $3x + 1$ et $x^2 + 5$ ont la même valeur.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. $3 \\times 2 + 1 = 7$ et $2^2 + 5 = 9$. Les valeurs sont différentes : une valeur numérique ne suffit pas à dire que deux expressions sont égales.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Ton compte mobile money affiche un solde de 3 500 F. Tu envoies $x = 1\\,000$ F, avec 25 F de frais. Quel est ton solde après le transfert ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le transfert coûte $1\\,000 + 25 = 1\\,025$ F ; le solde devient $3\\,500 - 1\\,025 = 2\\,475$ F. L'erreur 2 500 F oublie les frais ; l'erreur 4 525 F ajoute le transfert au lieu de le retirer.",
+                  "answers": [
+                    {
+                      "content": "2 475 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 500 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "4 525 F",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Expressions littérales en situation",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un forfait coûte 500 F, plus 20 F par Go utilisé. Si tu utilises $x$ Go, quelle expression donne le coût total ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le forfait de 500 F est fixe ; chaque Go ajoute 20 F, soit $20x$ au total. L'erreur $520x$ compte le forfait à chaque Go ; $20 + 500x$ inverse les rôles de 20 et de 500.",
+                  "answers": [
+                    {
+                      "content": "$500 + 20x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$520x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$20 + 500x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $x^2 - 2x + 5$ pour $x = 4$.",
+                  "question_type": "single_choice",
+                  "explanation": "$4^2 - 2 \\times 4 + 5 = 16 - 8 + 5 = 13$. L'erreur 29 change le signe de $-2x$ ; l'erreur 21 oublie le terme $-2x$.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    },
+                    {
+                      "content": "29",
+                      "correct": false
+                    },
+                    {
+                      "content": "21",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x = 0$, l'expression $x^2 + 5$ vaut 5.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : $0^2 + 5 = 5$. Le carré de 0 vaut 0.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces écritures, lesquelles traduisent « un nombre $x$ augmenté de 7, puis multiplié par 3 » ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "« Augmenté de 7, puis multiplié par 3 » donne $3(x + 7)$, qu'on peut aussi écrire $3x + 21$. L'erreur $3x + 7$ ne multiplie que $x$ par 3 ; l'erreur $x + 21$ ne multiplie que le 7.",
+                  "answers": [
+                    {
+                      "content": "$3(x + 7)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3x + 21$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3x + 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x + 21$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un transfert coûte $x$ F, plus 25 F de frais. Tu fais 3 transferts de 1 000 F chacun. Quel est le coût total ?",
+                  "question_type": "single_choice",
+                  "explanation": "Chaque transfert coûte $1\\,000 + 25 = 1\\,025$ F. Pour 3 transferts : $3 \\times 1\\,025 = 3\\,075$ F. L'erreur 3 025 F ne compte les frais qu'une fois ; l'erreur 1 025 F oublie deux transferts.",
+                  "answers": [
+                    {
+                      "content": "3 075 F",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 025 F",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 025 F",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Développer et réduire",
+          "subtitle": "Distribuer un nombre sur une parenthèse, puis regrouper les termes semblables",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Développer une expression où un nombre est multiplié par une parenthèse, ou un produit de deux parenthèses.</li>\n<li>Réduire une expression en regroupant les termes semblables.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Trois transferts identiques (la distributivité).</strong> Tu fais 3 transferts de la même somme $x$. Chaque transfert coûte $x$ F plus 25 F de frais. Le total payé s'écrit $3(x + 25)$ : trois fois « la somme et les frais ».</p>\n<p><em>Le pont.</em> Les 3 transferts correspondent au nombre 3 placé devant la parenthèse. Chaque transfert contient une somme $x$ et des frais de 25 F : le 3 se multiplie donc à la fois par $x$ et par 25. On obtient $3x + 75$.</p>\n<p><em>Où l'image s'arrête.</em> Les trois transferts sont identiques : la distributivité consiste à multiplier chaque terme de la parenthèse, sans en oublier un.</p>\n<p><strong>2. Le relevé du compte (la réduction).</strong> Sur le relevé de ton compte mobile money, deux dépôts de la somme $x$ apparaissent, puis trois autres dépôts de la même somme $x$ : au total, cinq fois $x$.</p>\n<p><em>Le pont.</em> Les termes en $x$ sont « semblables » : on additionne leurs nombres de devant, $2x + 3x = 5x$. Les nombres sans $x$ se regroupent entre eux.</p>\n<p><em>Où l'image s'arrête.</em> On ne peut pas additionner $2x$ et 3 : une somme inconnue $x$ et un nombre fixe ne se regroupent pas.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Distributivité.</strong> Pour tous nombres $k$, $a$ et $b$ : $k(a + b) = ka + kb$. Chaque terme de la parenthèse est multiplié par $k$.</p>\n<p><strong>Double distributivité.</strong> $(a + b)(c + d) = ac + ad + bc + bd$.</p>\n<p><strong>Réduction.</strong> Les termes semblables s'additionnent : $ax + bx = (a + b)x$. Les nombres se regroupent entre eux.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p>Développons et réduisons $3(x + 25) + 2x - 10$.</p>\n<ul>\n<li><strong>Étape 1 :</strong> On distribue le 3 : $3(x + 25) = 3x + 75$.</li>\n<li><strong>Étape 2 :</strong> On remplace dans l'expression : $3x + 75 + 2x - 10$.</li>\n<li><strong>Étape 3 :</strong> On regroupe les termes en $x$ : $3x + 2x = 5x$. On regroupe les nombres : $75 - 10 = 65$.</li>\n<li><strong>Vérification :</strong> Pour $x = 1\\,000$, l'expression de départ donne $3 \\times 1\\,025 + 2\\,000 - 10 = 5\\,065$, et $5x + 65 = 5\\,065$. Même résultat.</li>\n</ul>\n<h2>Le piège à éviter</h2>\n<p>L'erreur la plus fréquente : ne multiplier que le premier terme de la parenthèse. $3(x + 25)$ devient alors $3x + 25$, alors que la bonne réponse est $3x + 75$. Repère-le : compte les termes de la parenthèse, chacun doit être multiplié. Autre piège : écrire $2x + 3x = 5x^2$, ou additionner $x$ et une constante.</p>\n<h2>En une phrase</h2>\n<p>Pour développer, le nombre placé devant la parenthèse multiplie chaque terme à l'intérieur ; pour réduire, on regroupe les $x$ entre eux et les nombres entre eux.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître une distribution",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Que vaut $2(x + 5)$ une fois développé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le 2 multiplie chaque terme de la parenthèse : $2 \\times x + 2 \\times 5 = 2x + 10$. L'erreur $2x + 5$ oublie de multiplier le 5 ; l'erreur $x + 10$ oublie de multiplier le $x$.",
+                  "answers": [
+                    {
+                      "content": "$2x + 10$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x + 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x + 10$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$3(x - 4) = 3x - 4$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Le 3 se multiplie par chaque terme : $3(x - 4) = 3x - 12$. Oublier le 3 devant le 4 est l'erreur la plus fréquente.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Réduis $5x + 3x$.",
+                  "question_type": "single_choice",
+                  "explanation": "Ce sont des termes semblables, en $x$ : on additionne leurs nombres de devant, $5 + 3 = 8$, donc $8x$. L'erreur $8x^2$ additionne les exposants ; l'erreur $15x$ multiplie les nombres de devant.",
+                  "answers": [
+                    {
+                      "content": "$8x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$8x^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Réduis $4x + 7 - 2x + 1$.",
+                  "question_type": "single_choice",
+                  "explanation": "Les $x$ se regroupent : $4x - 2x = 2x$ ; les nombres : $7 + 1 = 8$. Donc $2x + 8$. L'erreur $6x + 8$ additionne $4x$ et $2x$ ; l'erreur $2x + 6$ soustrait 1 au lieu d'additionner.",
+                  "answers": [
+                    {
+                      "content": "$2x + 8$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x + 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x + 8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développe et réduis $2(x + 1) + 3x$.",
+                  "question_type": "single_choice",
+                  "explanation": "Distribue : $2(x + 1) = 2x + 2$, puis $2x + 2 + 3x = 5x + 2$. L'erreur $5x + 1$ oublie de multiplier le 1 par 2 ; l'erreur $5x + 4$ double le 2 au lieu de le garder.",
+                  "answers": [
+                    {
+                      "content": "$5x + 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5x + 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5x + 4$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Développer et réduire",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Développe $4(2x - 1)$.",
+                  "question_type": "single_choice",
+                  "explanation": "$4 \\times 2x = 8x$ et $4 \\times (-1) = -4$, donc $8x - 4$. L'erreur $8x - 1$ oublie de multiplier le $-1$ par 4 ; l'erreur $8x + 4$ change le signe.",
+                  "answers": [
+                    {
+                      "content": "$8x - 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$8x - 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8x + 4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développe $(x + 3)(x + 2)$.",
+                  "question_type": "single_choice",
+                  "explanation": "Chaque terme de la première parenthèse multiplie chaque terme de la seconde : $x^2 + 2x + 3x + 6$, soit $x^2 + 5x + 6$. L'erreur $x^2 + 6$ oublie les produits en $x$ ; l'erreur $x^2 + 5x + 5$ additionne 3 et 2 au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 5x + 6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 5x + 5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x = 1\\,000$, calcule la valeur de $3(x + 25) + 2x - 10$.",
+                  "question_type": "single_choice",
+                  "explanation": "L'expression développée est $5x + 65$ ; pour $x = 1\\,000$, cela fait $5\\,000 + 65 = 5\\,065$. L'erreur 3 075 s'arrête après $3(x + 25)$ ; l'erreur 5 000 oublie les 65.",
+                  "answers": [
+                    {
+                      "content": "5 065",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 075",
+                      "correct": false
+                    },
+                    {
+                      "content": "5 000",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$(x + 1)^2 = x^2 + 1$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. $(x + 1)^2 = (x + 1)(x + 1) = x^2 + 2x + 1$ : le double produit $2x$ est oublié.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Réduis $7a - 3b + 2a + 5b$.",
+                  "question_type": "single_choice",
+                  "explanation": "Les termes en $a$ : $7a + 2a = 9a$. Les termes en $b$ : $-3b + 5b = 2b$. Donc $9a + 2b$. L'erreur $9a + 8b$ additionne 3 et 5 sans tenir compte du signe ; l'erreur $5a + 2b$ soustrait $2a$ au lieu de l'ajouter.",
+                  "answers": [
+                    {
+                      "content": "$9a + 2b$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$9a + 8b$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5a + 2b$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Développer et réduire en situation",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Ton frère et toi achetez chacun un forfait de $x$ F, plus une recharge de 500 F. Le total est $2(x + 500)$. Quelle est la forme développée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Distribue le 2 : $2x + 2 \\times 500 = 2x + 1\\,000$. L'erreur $2x + 500$ oublie de multiplier 500 par 2 ; l'erreur $x + 1\\,000$ oublie de multiplier le $x$.",
+                  "answers": [
+                    {
+                      "content": "$2x + 1\\,000$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x + 500$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x + 1\\,000$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développe et réduis $(x - 2)(x + 5)$.",
+                  "question_type": "single_choice",
+                  "explanation": "$x \\times x + 5x - 2x - 10 = x^2 + 3x - 10$. L'erreur $x^2 + 3x + 10$ change le signe de $-2 \\times 5$ ; l'erreur $x^2 - 10$ oublie les termes en $x$.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 3x - 10$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 3x + 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 - 10$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquelles de ces expressions sont égales à $2x + 6$ pour tout nombre $x$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$2(x + 3) = 2x + 6$ : le 2 multiplie $x$ et 3. $2x + 3 + 3$ regroupe les nombres : $2x + 6$. Les erreurs $2(x + 6) = 2x + 12$ et $2x + 6x = 8x$ ne sont pas égales à $2x + 6$.",
+                  "answers": [
+                    {
+                      "content": "$2(x + 3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x + 3 + 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2(x + 6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2x + 6x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Réduis $5(x + 2) - 3(x - 1)$.",
+                  "question_type": "single_choice",
+                  "explanation": "$5x + 10 - 3x + 3 = 2x + 13$, car $-3 \\times (-1) = +3$. L'erreur $2x + 7$ écrit $-3(x - 1) = -3x - 3$, en oubliant que $-3 \\times (-1)$ donne $+3$.",
+                  "answers": [
+                    {
+                      "content": "$2x + 13$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x + 7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8x + 7$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x = 4$, quelle est la valeur de $(x - 2)(x + 5)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$(4 - 2)(4 + 5) = 2 \\times 9 = 18$. Vérification avec la forme réduite : $4^2 + 3 \\times 4 - 10 = 16 + 12 - 10 = 18$. L'erreur 16 oublie les termes en $x$ et le nombre $-10$.",
+                  "answers": [
+                    {
+                      "content": "18",
+                      "correct": true
+                    },
+                    {
+                      "content": "16",
+                      "correct": false
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Factoriser et identités remarquables",
+          "subtitle": "Facteur commun, puis identités (a+b)², (a-b)² et a²-b². À compléter : fractions à dénominateur littéral (à valider).",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Factoriser une expression en mettant un facteur commun en évidence.</li>\n<li>Utiliser les identités remarquables pour développer ou factoriser, et pour calculer de tête.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Les frais par transfert (le facteur commun).</strong> Tu fais 4 transferts de $x$ F, et chacun coûte 25 F de frais : le total payé est $4x + 100$. Les 4 transferts apparaissent dans chaque morceau : on peut les mettre en facteur.</p>\n<p><em>Le pont.</em> Le 4 est le facteur commun de $4x$ et de $100$. En le sortant, on écrit $4x + 100 = 4(x + 25)$ : 4 paquets de « somme plus frais ». C'est l'inverse de la distributivité.</p>\n<p><em>Où l'image s'arrête.</em> Le facteur commun doit diviser tous les termes. Ici, 4 divise bien 4x et 100 : c'est pour cela qu'on peut le sortir.</p>\n<p><strong>2. Le carré de cartes (l'identité $a^2 - b^2$).</strong> Un vendeur dispose des cartes de recharge en carré de 10 cartes de côté, soit 100 cartes. Il retire un petit carré de 3 cartes de côté dans un coin. Il reste $10^2 - 3^2 = 91$ cartes.</p>\n<p><em>Le pont.</em> En recollant les morceaux restants, on obtient un seul rectangle de côtés $10 - 3 = 7$ et $10 + 3 = 13$. D'où $a^2 - b^2 = (a - b)(a + b)$, avec $a = 10$ et $b = 3$ : $7 \\times 13 = 91$.</p>\n<p><em>Où l'image s'arrête.</em> L'image suppose $a > b > 0$, c'est-à-dire un petit carré retiré dans un grand. Pour des valeurs négatives, elle n'a plus de sens.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Facteur commun.</strong> $ka + kb = k(a + b)$ : on factorise en sortant le facteur commun $k$.</p>\n<p><strong>Identités remarquables.</strong> Pour tous nombres $a$ et $b$ :</p>\n<p>$(a + b)^2 = a^2 + 2ab + b^2$ ; $(a - b)^2 = a^2 - 2ab + b^2$ ; $a^2 - b^2 = (a - b)(a + b)$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p>Factorisons $5x - 15$, puis calculons $99 \\times 101$ de tête.</p>\n<ul>\n<li><strong>Étape 1 :</strong> 5 divise $5x$ et $15$ : $5x = 5 \\times x$ et $15 = 5 \\times 3$.</li>\n<li><strong>Étape 2 :</strong> On sort le 5 : $5x - 15 = 5(x - 3)$.</li>\n<li><strong>Étape 3 :</strong> Pour $99 \\times 101$, on écrit $(100 - 1)(100 + 1)$, de la forme $(a - b)(a + b)$ avec $a = 100$ et $b = 1$.</li>\n<li><strong>Étape 4 :</strong> On applique $a^2 - b^2$ : $100^2 - 1 = 10\\,000 - 1 = 9\\,999$.</li>\n</ul>\n<h2>Le piège à éviter</h2>\n<p>L'erreur la plus fréquente : croire que $(a + b)^2 = a^2 + b^2$. Avec $a = 2$ et $b = 3$, $(2 + 3)^2 = 25$, alors que $2^2 + 3^2 = 13$. Il manque le double produit $2ab = 12$. Repère-le : si tu as développé un carré, il doit y avoir trois termes, dont le terme du milieu $2ab$.</p>\n<h2>En une phrase</h2>\n<p>Factoriser, c'est sortir un facteur commun ; les identités remarquables permettent de passer d'une forme à l'autre, par exemple $(a - b)(a + b) = a^2 - b^2$, et de calculer de tête.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître un facteur commun",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quel est le facteur commun de $6x + 9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "3 divise 6 et 9 : $6x + 9 = 3(2x + 3)$. L'erreur $x$ n'est pas un facteur commun, car le 9 n'a pas de $x$.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$4x + 12 = 4(x + 3)$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : en développant, $4(x + 3) = 4x + 12$. Factoriser est l'inverse de développer.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Factorise $7x + 21$.",
+                  "question_type": "single_choice",
+                  "explanation": "7 divise $7x$ et $21$ : $21 = 7 \\times 3$, donc $7x + 21 = 7(x + 3)$. L'erreur $7(x + 21)$ ne sort le 7 que du premier terme ; $x(7 + 21)$ sort le $x$, qui n'est pas commun aux deux termes.",
+                  "answers": [
+                    {
+                      "content": "$7(x + 3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7(x + 21)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x(7 + 21)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces factorisations, lesquelles sont correctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$2(x + 2) = 2x + 4$ et $7(x - 2) = 7x - 14$ : le facteur commun divise tous les termes. $3(x + 3) = 3x + 9$ et $x(x + 2) = x^2 + 2x$ ne redonnent pas l'expression de départ.",
+                  "answers": [
+                    {
+                      "content": "$2x + 4 = 2(x + 2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7x - 14 = 7(x - 2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3x + 6 = 3(x + 3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + x = x(x + 2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est un facteur commun à $x^2 + x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$x^2 + x = x \\times x + x \\times 1 = x(x + 1)$ : $x$ est en facteur. L'erreur $x^2$ ne divise pas le second terme $x$ ; l'erreur 2 n'est pas un facteur de $x^2 + x$.",
+                  "answers": [
+                    {
+                      "content": "$x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Factoriser et utiliser une identité",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Développe $(x + 4)^2$.",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $(a + b)^2 = a^2 + 2ab + b^2$, $a = x$ et $b = 4$ : $x^2 + 8x + 16$. L'erreur $x^2 + 16$ oublie le double produit $2ab$ ; l'erreur $x^2 + 4x + 16$ calcule mal le double produit.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 8x + 16$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 16$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 4x + 16$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Développe $(x - 3)^2$.",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $(a - b)^2 = a^2 - 2ab + b^2$ : $x^2 - 6x + 9$. L'erreur $x^2 - 9$ oublie le double produit ; l'erreur $x^2 + 6x + 9$ change le signe du double produit.",
+                  "answers": [
+                    {
+                      "content": "$x^2 - 6x + 9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 - 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + 6x + 9$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Factorise $x^2 - 16$.",
+                  "question_type": "single_choice",
+                  "explanation": "$x^2 - 16 = x^2 - 4^2$ est de la forme $a^2 - b^2 = (a - b)(a + b)$, avec $a = x$ et $b = 4$. L'erreur $(x - 4)^2$ donne $x^2 - 8x + 16$, qui n'est pas $x^2 - 16$.",
+                  "answers": [
+                    {
+                      "content": "$(x - 4)(x + 4)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x - 16)(x + 1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x - 4)^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$(x + 5)(x - 5) = x^2 - 25$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : identité $a^2 - b^2$ avec $a = x$ et $b = 5$. Vérification pour $x = 6$ : $11 \\times 1 = 11$, et $36 - 25 = 11$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $x = 10$, calcule $x^2 - 4$ en factorisant.",
+                  "question_type": "single_choice",
+                  "explanation": "$x^2 - 4 = (x - 2)(x + 2) = 8 \\times 12 = 96$. L'erreur 104 ajoute 4 au lieu de le retirer ; l'erreur 36 calcule $(10 - 4)^2$.",
+                  "answers": [
+                    {
+                      "content": "96",
+                      "correct": true
+                    },
+                    {
+                      "content": "104",
+                      "correct": false
+                    },
+                    {
+                      "content": "36",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Calcul mental et factorisation",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Calcule $102 \\times 98$ de tête, en utilisant une identité remarquable.",
+                  "question_type": "single_choice",
+                  "explanation": "$102 \\times 98 = (100 + 2)(100 - 2) = 100^2 - 2^2 = 10\\,000 - 4 = 9\\,996$. L'erreur 10 004 ajoute 4 au lieu de le retirer ; l'erreur 9 800 calcule $100 \\times 98$ en oubliant le 2 ajouté.",
+                  "answers": [
+                    {
+                      "content": "9 996",
+                      "correct": true
+                    },
+                    {
+                      "content": "10 004",
+                      "correct": false
+                    },
+                    {
+                      "content": "9 800",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces égalités, lesquelles sont vraies pour tout nombre $x$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$(x + 2)^2 = x^2 + 4x + 4$ car $2ab = 2 \\times x \\times 2 = 4x$. $(x - 3)(x + 3) = x^2 - 9$ est l'identité $a^2 - b^2$. Les erreurs oublient le double produit, ou donnent $+9$ au lieu de $-9$.",
+                  "answers": [
+                    {
+                      "content": "$(x + 2)^2 = x^2 + 4x + 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 - 9 = (x - 3)(x + 3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x + 2)^2 = x^2 + 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x - 3)(x + 3) = x^2 + 9$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Factorise $3x^2 + 6x$.",
+                  "question_type": "single_choice",
+                  "explanation": "$3x$ est le facteur commun : $3x^2 = 3x \\times x$ et $6x = 3x \\times 2$, donc $3x(x + 2)$. L'erreur $3x(x + 6)$ divise mal le $6x$ ; l'erreur $6x(x + 1)$ ne redonne pas $3x^2 + 6x$.",
+                  "answers": [
+                    {
+                      "content": "$3x(x + 2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3x(x + 6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6x(x + 1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $(a + b)^2$ pour $a = 2$ et $b = 3$.",
+                  "question_type": "single_choice",
+                  "explanation": "$(2 + 3)^2 = 5^2 = 25$. Avec la formule : $4 + 2 \\times 2 \\times 3 + 9 = 25$. L'erreur 13 oublie le double produit $2ab$ ; l'erreur 12 ne garde que $2ab$.",
+                  "answers": [
+                    {
+                      "content": "25",
+                      "correct": true
+                    },
+                    {
+                      "content": "13",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule $48 \\times 52$ de tête, en utilisant une identité remarquable.",
+                  "question_type": "single_choice",
+                  "explanation": "$48 \\times 52 = (50 - 2)(50 + 2) = 50^2 - 2^2 = 2\\,500 - 4 = 2\\,496$. L'erreur 2 500 oublie le $-4$ ; l'erreur 2 504 ajoute 4 au lieu de le retirer.",
+                  "answers": [
+                    {
+                      "content": "2 496",
+                      "correct": true
+                    },
+                    {
+                      "content": "2 500",
+                      "correct": false
+                    },
+                    {
+                      "content": "2 504",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

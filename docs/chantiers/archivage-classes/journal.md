@@ -38,12 +38,21 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | — | Les deux dettes de compteur sont soldées dans ce chantier : la colonne « Classes » de la liste de l'équipe et le « − » ne comptent plus les archivées | — |
+| Sous-pages d'une classe archivée (cours, essentiels, élèves, suivi) encore lisibles par ses membres ; seule la page principale renvoie 404 | Constat bas de la revue de sécurité (2026-10-10) : policy appliquée, aucune fuite entre rôles ni établissements | à ouvrir |
+| `schools:grant_second_cycle` ne laisse aucune trace d'audit | Constat bas de la revue de sécurité ; tâche unique, lancée sur Develop | à ouvrir si la tâche resert |
+
+## Ce qui a dérapé
+
+- Le plan supposait qu'un élève « multi-classes » verrait son autre classe : l'application n'a qu'une classe principale par élève (ADR-0040). Trouvé par le challenger ; le porteur a choisi « Choisis ta classe » plutôt qu'une promotion automatique.
+- L'UDR disait la page d'une classe archivée en 404 alors qu'elle était lisible (tests existants l'exigeaient) : trois tests de lecture d'une classe archivée remplacés par le 404, sur décision du porteur.
+- Les tests des trois partiels du Lot 0 ont été écrits après les partiels (passés du premier coup) ; le challenger a couvert le rendu réel.
+- Les bases de test des worktrees chargeaient les seeds au `db:prepare` : `db:schema:load` à la place.
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-10 (sur `Develop`) |
+| **PR** | lots fusionnés dans `Develop` ; promotion #224 (Staging), #225 (main, 2026-10-10) |
+| **ADR produits** | ADR-0088 |
+| **UDR produits** | UDR-0083 |

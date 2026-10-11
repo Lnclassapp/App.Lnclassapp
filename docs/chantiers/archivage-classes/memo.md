@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré |
 | **Ouvert le** | 2026-10-09 |
 | **Branche** | `Develop` (branche désignée de la session ; pas de `feature/<slug>`) |
 | **Programme** | — *(ou `<programme>` si le chantier est une vague d'un programme — voir `docs/workflows/programme.md`)* |

@@ -61,13 +61,13 @@ class Classroom::ClassroomLinksControllerTest < ActionDispatch::IntegrationTest
     assert_link_block link_url, scope: "#classroom_header"
   end
 
-  test "UDR-0081 §3.6 : une classe archivée n'a pas de bloc du lien" do
+  test "UDR-0081 §3.6, ADR-0088 : une classe archivée n'a plus de page, donc plus de bloc du lien" do
     @classroom.update!(status: "archived", archived_at: Time.current)
     sign_in_as @teacher
 
     get classroom_path(@classroom.public_id)
 
-    assert_response :success
+    assert_response :not_found
     assert_select "#classroom_link", 0
   end
 

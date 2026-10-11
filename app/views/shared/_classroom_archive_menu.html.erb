@@ -13,12 +13,12 @@
     <% end %>
   <% end %>
   <% unless archived %>
-    <%= ui_modal title: t(".title", name:), id: dialog_id, size: :sm do |modal| %>
+    <%= ui_modal title: t(".title", name:), id: dialog_id, size: :sm, described_by: "#{dialog_id}-description" do |modal| %>
       <% modal.footer do %>
         <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
         <%= ui_button t(".confirm"), type: :submit, form: "#{dialog_id}-form", variant: :danger, icon: "archive-box" %>
       <% end %>
-      <p class="text-sm text-mute">
+      <p id="<%= dialog_id %>-description" class="text-sm text-mute">
         <%= t(".warning", people: t(".people", students: t(".students", count: students_count), teachers: t(".teachers", count: teachers_count))) %>
       </p>
       <%= form_with url: archive_path, method: :patch, id: "#{dialog_id}-form" do %><% end %>

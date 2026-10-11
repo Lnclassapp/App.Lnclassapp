@@ -8,8 +8,6 @@ module Queries
                            :teachers, :national_code, :team_invite_token, :archives_shown) do
         # Les classes archivées ne comptent dans aucun total (ADR-0088).
         def classrooms_count = levels.sum { it.classrooms.size }
-        def hidden_archives_count = levels.sum(&:hidden_count)
-        def archived_total = levels.sum { it.archived.size + it.hidden_count }
       end
       # classrooms : les actives ; archived : les archivées visibles (7 jours, ou toutes avec ?archives=1), en fin de niveau ;
       # hidden_count : celles qui restent masquées. students_count et teachers_count : les actives seules, pour la confirmation.
@@ -46,7 +44,9 @@ module Queries
       def levels(school_id, school_year, archives, now)
         classrooms = Orm::Classroom.joins(:level).left_joins(:series).where(school_id:, school_year:).pluck(*CLASSROOM_COLUMNS)
         ids = classrooms.map(&:first)
-        students = Orm::ClassroomStudent.where(classroom_id: ids, left_at: nil).group(:classroom_id).count
+        # Les élèves de chaque classe (et non leur seul nombre) : un élève de deux classes du niveau compte une fois.
+        students = Orm::ClassroomStudent.where(classroom_id: ids, left_at: nil).pluck(:classroom_id, :student_id)
+                                        .group_by(&:first).transform_values { it.map(&:last) }
         teachers = Orm::TeacherClassroom.joins(:teacher).where(classroom_id: ids).order("users.last_name", "users.first_name")
                                         .pluck(:classroom_id, FULL_NAME, :teacher_id).group_by(&:first)
 
@@ -60,14 +60,14 @@ module Queries
         shown = archives ? archived : archived.select { it[9] > now - ARCHIVE_WINDOW }
         rows = ->(list) { list.map { classroom_row(it, students, teachers) } }
         Level.new(name: group.first[5], slug: group.first[8], classrooms: rows.(active), archived: rows.(shown),
-                  hidden_count: archived.size - shown.size, students_count: active.sum { students.fetch(it.first, 0) },
+                  hidden_count: archived.size - shown.size, students_count: active.flat_map { students.fetch(it.first, []) }.uniq.size,
                   teachers_count: active.flat_map { teachers.fetch(it.first, []).map(&:last) }.uniq.size)
       end
 
       def classroom_row(values, students, teachers)
         id, public_id, name, link_token, status = values
         ClassroomRow.new(public_id:, name:, link_token:,
-                         students_count: students.fetch(id, 0), teacher_names: teachers.fetch(id, []).map { it[1] }, status:)
+                         students_count: students.fetch(id, []).size, teacher_names: teachers.fetch(id, []).map { it[1] }, status:)
       end
 
       def teachers(school_id)

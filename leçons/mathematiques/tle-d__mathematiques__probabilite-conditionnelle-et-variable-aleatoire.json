@@ -1,0 +1,1328 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Probabilité conditionnelle et variable aléatoire",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "D",
+      "essentials": [
+        {
+          "name": "Calculer une probabilité conditionnelle",
+          "subtitle": "Probabilité sachant un événement, arbre pondéré et formule des probabilités totales",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer la probabilité d'un événement $A$ sachant qu'un événement $B$ est réalisé.</li>\n<li>Construire et lire un arbre pondéré.</li>\n<li>Calculer une probabilité avec la formule des probabilités totales.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. La classe qui rétrécit (probabilité conditionnelle).</strong> Dans ta classe de Tle D, il y a 40 élèves : 16 filles et 24 garçons. Parmi les 16 filles, 4 portent des lunettes. Le professeur tire un nom au hasard et annonce seulement : « C'est une fille. » Pour deviner si l'élève porte des lunettes, tu ne regardes plus toute la classe, mais seulement le groupe des 16 filles. Ta chance est alors de 4 sur 16.</p>\n<p><em>Le pont.</em> La classe entière, c'est l'<strong>univers</strong> $\\Omega$, l'ensemble de tous les résultats possibles. « C'est une fille », c'est l'événement $B$, que l'on sait réalisé. « Porter des lunettes », c'est l'événement $A$. Les filles à lunettes, c'est l'événement $A \\cap B$ (lu « $A$ et $B$ »). Savoir que $B$ est réalisé fait rétrécir l'univers à $B$ : $P_B(A) = \\frac{4}{16} = \\frac{4/40}{16/40} = \\frac{P(A \\cap B)}{P(B)}$.</p>\n<p><em>Où l'image s'arrête.</em> L'information ne change pas l'élève tiré ; elle change seulement ce que tu sais. Et l'ordre compte : si 10 élèves de la classe portent des lunettes, la part des filles parmi les porteurs de lunettes est $\\frac{4}{10}$, pas $\\frac{4}{16}$. Donc $P_A(B)$ et $P_B(A)$ sont deux nombres différents.</p>\n<p><strong>2. Les routes du gbaka (arbre pondéré et probabilités totales).</strong> Un gbaka part de la gare d'Adjamé. Au premier carrefour, il prend la voie express 7 fois sur 10, sinon il passe par les petites rues. Par la voie express, il arrive en retard 2 fois sur 10 ; par les petites rues, 5 fois sur 10. Pour savoir à quelle fréquence il arrive en retard, tu suis chaque route jusqu'au retard, puis tu additionnes les routes.</p>\n<p><em>Le pont.</em> Chaque carrefour est un <strong>nœud</strong> de l'arbre, chaque route une <strong>branche</strong> qui porte sa probabilité. Au premier niveau : $E$ (voie express) avec $0{,}7$ et $\\overline{E}$ (l'événement contraire) avec $0{,}3$. Au second niveau, les branches portent des probabilités conditionnelles : $P_E(R) = 0{,}2$ et $P_{\\overline{E}}(R) = 0{,}5$. Suivre une route, c'est <strong>multiplier</strong> : $P(E \\cap R) = 0{,}7 \\times 0{,}2 = 0{,}14$. Additionner les routes, c'est la formule des probabilités totales : $P(R) = 0{,}14 + 0{,}3 \\times 0{,}5 = 0{,}29$.</p>\n<p><em>Où l'image s'arrête.</em> Les routes du départ doivent couvrir tous les cas et ne jamais se chevaucher. Si tu oublies une route, ou si deux routes se recouvrent, le total est faux.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Probabilité conditionnelle.</strong> Soit $B$ un événement tel que $P(B) \\neq 0$. La probabilité de $A$ sachant $B$ est $P_B(A) = \\frac{P(A \\cap B)}{P(B)}$. On la note aussi $P(A/B)$. On a $P_B(\\overline{A}) = 1 - P_B(A)$.</p>\n<p><strong>Probabilités composées.</strong> $P(A \\cap B) = P(B) \\times P_B(A)$ et, si $P(A) \\neq 0$, $P(A \\cap B) = P(A) \\times P_A(B)$.</p>\n<p><strong>Règles de l'arbre pondéré.</strong></p>\n<ul>\n<li>La somme des probabilités des branches issues d'un même nœud vaut $1$.</li>\n<li>Les branches du second niveau portent des probabilités conditionnelles.</li>\n<li>La probabilité d'un chemin est le produit des probabilités de ses branches.</li>\n<li>La probabilité d'un événement est la somme des probabilités des chemins qui y mènent.</li>\n</ul>\n<p><strong>Formule des probabilités totales.</strong> Si $B_1, B_2, \\ldots, B_n$ forment une <strong>partition</strong> de $\\Omega$ (ils sont deux à deux incompatibles, c'est-à-dire qu'ils ne peuvent pas se produire ensemble, leur réunion est $\\Omega$ et leurs probabilités sont non nulles), alors $P(A) = P(B_1) \\times P_{B_1}(A) + \\ldots + P(B_n) \\times P_{B_n}(A)$. Cas le plus fréquent : $P(A) = P(B) \\times P_B(A) + P(\\overline{B}) \\times P_{\\overline{B}}(A)$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Dans un lycée, 60 % des élèves sont en série D (événement $D$), les autres en série A. 30 % des élèves de D ont plus de 12 de moyenne (événement $M$), contre 20 % des élèves de A. On choisit un élève au hasard.</strong></p>\n<ol>\n<li>On traduit l'énoncé : $P(D) = 0{,}6$, donc $P(\\overline{D}) = 0{,}4$. « 30 % des élèves de D » se lit « parmi les élèves de D » : $P_D(M) = 0{,}3$. De même, $P_{\\overline{D}}(M) = 0{,}2$.</li>\n<li>On construit l'arbre : premier niveau $D$ ($0{,}6$) et $\\overline{D}$ ($0{,}4$) ; second niveau $M$ et $\\overline{M}$ après chaque nœud, avec $0{,}3$ et $0{,}7$ après $D$, $0{,}2$ et $0{,}8$ après $\\overline{D}$.</li>\n<li>Probabilité d'un chemin : $P(D \\cap M) = 0{,}6 \\times 0{,}3 = 0{,}18$.</li>\n<li>Probabilités totales, car $D$ et $\\overline{D}$ forment une partition : $P(M) = 0{,}18 + 0{,}4 \\times 0{,}2 = 0{,}18 + 0{,}08 = 0{,}26$.</li>\n<li>On « remonte » l'arbre : l'élève a plus de 12 ; quelle est la probabilité qu'il soit en D ? $P_M(D) = \\frac{P(D \\cap M)}{P(M)} = \\frac{0{,}18}{0{,}26} = \\frac{9}{13} \\approx 0{,}69$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Confondre trois nombres différents. Dans l'exemple : $P_D(M) = 0{,}3$ se lit sur une branche ; $P(D \\cap M) = 0{,}18$ est le produit le long d'un chemin ; $P_M(D) \\approx 0{,}69$ se calcule avec la formule.</p>\n<p>Comment le repérer : lis la phrase. « Parmi les… », « sachant que… », « si l'élève est… » annoncent une probabilité conditionnelle, et le groupe qui suit est la condition. « …et… », « à la fois » annoncent une intersection.</p>\n<h2>En une phrase</h2>\n<p>Savoir que $B$ est réalisé fait rétrécir l'univers à $B$, donc $P_B(A) = \\frac{P(A \\cap B)}{P(B)}$ ; dans un arbre, on multiplie le long d'un chemin et on additionne les chemins.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Lire une probabilité conditionnelle et un arbre pondéré",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans une classe de 40 élèves, il y a 16 filles, et 4 de ces filles portent des lunettes. On tire un élève au hasard. On note $F$ « l'élève est une fille » et $L$ « l'élève porte des lunettes ». Que vaut $P_F(L)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Sachant que c'est une fille, l'univers se réduit aux 16 filles : $P_F(L) = \\frac{4}{16} = \\frac{1}{4}$. Répondre $\\frac{1}{10}$, c'est calculer $P(F \\cap L) = \\frac{4}{40}$ : tu as gardé toute la classe au lieu de la faire rétrécir.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{5}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour deux événements $A$ et $B$ de probabilités non nulles, on a toujours $P_B(A) = P_A(B)$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Dans une classe de 40 élèves avec 16 filles et 10 porteurs de lunettes, dont 4 filles : la part des porteurs de lunettes parmi les filles vaut $\\frac{4}{16}$, mais la part des filles parmi les porteurs de lunettes vaut $\\frac{4}{10}$. Le groupe de référence a changé.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $A$ et $B$ deux événements, avec $P(B) \\neq 0$. Quelle égalité définit $P_B(A)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On divise par la probabilité de la condition $B$, car l'univers rétrécit à $B$ : $P_B(A) = \\frac{P(A \\cap B)}{P(B)}$. Diviser par $P(A)$ donne $P_A(B)$, la probabilité de $B$ sachant $A$ : c'est la confusion la plus fréquente.",
+                  "answers": [
+                    {
+                      "content": "$P_B(A) = \\frac{P(A \\cap B)}{P(B)}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P_B(A) = \\frac{P(A \\cap B)}{P(A)}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P_B(A) = P(A) \\times P(B)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P_B(A) = \\frac{P(A)}{P(B)}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un arbre pondéré, quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les branches issues d'un même nœud couvrent tous les cas, donc leur somme vaut $1$, et on multiplie le long d'un chemin. Les branches du second niveau portent des probabilités conditionnelles, pas des intersections. La somme de tous les nombres de l'arbre dépasse $1$ dès qu'il a deux niveaux.",
+                  "answers": [
+                    {
+                      "content": "La somme des probabilités des branches issues d'un même nœud vaut $1$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La probabilité d'un chemin est le produit des probabilités de ses branches.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La probabilité d'un chemin est la somme des probabilités de ses branches.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les branches du second niveau portent des probabilités du type $P(A \\cap B)$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La somme de toutes les probabilités écrites sur l'arbre vaut $1$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un gbaka prend la voie express (événement $E$) avec la probabilité $0{,}7$. Quand il prend la voie express, il arrive en retard (événement $R$) avec la probabilité $0{,}2$. Que représente le nombre $0{,}2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "« Quand il prend la voie express » est la condition : $0{,}2$ est la probabilité du retard sachant $E$, donc $P_E(R)$. Ce n'est pas $P(E \\cap R)$, qui vaut $0{,}7 \\times 0{,}2 = 0{,}14$ : souviens-toi, on multiplie en suivant la route.",
+                  "answers": [
+                    {
+                      "content": "$P_E(R)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P(E \\cap R)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P(R)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P_R(E)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $P(B) = 0{,}5$ et $P_B(A) = 0{,}4$. Alors $P_B(\\overline{A}) = 0{,}6$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Dans l'univers rétréci à $B$, $A$ et $\\overline{A}$ restent contraires : $P_B(\\overline{A}) = 1 - P_B(A) = 1 - 0{,}4 = 0{,}6$. L'erreur tentante est de calculer $1 - P(B) = 0{,}5$ : cela donne $P(\\overline{B})$, une tout autre probabilité.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer avec la formule et l'arbre pondéré",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On donne $P(A \\cap B) = 0{,}12$ et $P(B) = 0{,}4$. Que vaut $P_B(A)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P_B(A) = \\frac{P(A \\cap B)}{P(B)} = \\frac{0{,}12}{0{,}4} = 0{,}3$. Le résultat $0{,}048$ vient d'une multiplication au lieu d'une division : la formule demande de diviser par la probabilité de la condition.",
+                  "answers": [
+                    {
+                      "content": "$0{,}3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}048$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}52$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}28$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $P(A) = 0{,}6$ et $P_A(B) = 0{,}5$. Que vaut $P(A \\cap B)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Formule des probabilités composées : $P(A \\cap B) = P(A) \\times P_A(B) = 0{,}6 \\times 0{,}5 = 0{,}3$. Répondre $0{,}5$, c'est confondre la probabilité de la branche avec celle du chemin entier.",
+                  "answers": [
+                    {
+                      "content": "$0{,}3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}83$ environ",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $P(B) = 0{,}3$, $P_B(A) = 0{,}6$ et $P_{\\overline{B}}(A) = 0{,}2$. Que vaut $P(A)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P(\\overline{B}) = 1 - 0{,}3 = 0{,}7$. Probabilités totales : $P(A) = 0{,}3 \\times 0{,}6 + 0{,}7 \\times 0{,}2 = 0{,}18 + 0{,}14 = 0{,}32$. Additionner $0{,}6 + 0{,}2 = 0{,}8$, c'est oublier de multiplier par la probabilité de chaque route.",
+                  "answers": [
+                    {
+                      "content": "$0{,}32$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}24$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $P(B) = 0{,}3$, $P_B(A) = 0{,}6$ et $P_{\\overline{B}}(A) = 0{,}2$. Que vaut $P_A(B)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P(A \\cap B) = 0{,}3 \\times 0{,}6 = 0{,}18$ et $P(A) = 0{,}18 + 0{,}7 \\times 0{,}2 = 0{,}32$. Donc $P_A(B) = \\frac{0{,}18}{0{,}32} = \\frac{9}{16}$. Répondre $0{,}6$, c'est lire $P_B(A)$ : on a inversé la condition.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{9}{16}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}18$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}32$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une urne contient 3 boules rouges et 2 boules vertes. On tire successivement deux boules, sans remise. Quelle est la probabilité que les deux boules soient rouges ?",
+                  "question_type": "single_choice",
+                  "explanation": "Premier tirage : $\\frac{3}{5}$. Sachant que la première est rouge, il reste 2 rouges sur 4 boules : $\\frac{2}{4}$. Donc $\\frac{3}{5} \\times \\frac{2}{4} = \\frac{3}{10}$. Le résultat $\\frac{9}{25}$ correspond à un tirage avec remise : ici l'urne a changé après le premier tirage.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{3}{10}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{9}{25}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{6}{25}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un lycée, 60 % des élèves sont internes (événement $I$), les autres sont externes. Ce lundi, 10 % des internes et 25 % des externes sont arrivés en retard (événement $R$). On choisit un élève au hasard. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$P(I \\cap R) = 0{,}6 \\times 0{,}1 = 0{,}06$ et $P(R) = 0{,}06 + 0{,}4 \\times 0{,}25 = 0{,}16$. Le total $0{,}35 = 0{,}1 + 0{,}25$ oublie de multiplier par $P(I)$ et $P(\\overline{I})$. Et $P_I(R) = 0{,}1$, lu sur la branche, n'est pas $0{,}06$.",
+                  "answers": [
+                    {
+                      "content": "$P(I \\cap R) = 0{,}06$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P(R) = 0{,}16$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P(R) = 0{,}35$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P_I(R) = 0{,}06$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P_R(I) = 0{,}6$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Dépistage du paludisme et probabilités totales",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Dans une région, 10 % des habitants ont le paludisme (événement $M$). Un test rapide est positif (événement $T$) chez 95 % des malades et chez 2 % des personnes non malades. On choisit un habitant au hasard. Que vaut $P(M \\cap T)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On suit le chemin « malade puis positif » : $P(M \\cap T) = P(M) \\times P_M(T) = 0{,}1 \\times 0{,}95 = 0{,}095$. Le nombre $0{,}95$ est seulement la probabilité de la branche, $P_M(T)$.",
+                  "answers": [
+                    {
+                      "content": "$0{,}095$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}95$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}113$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une région, 10 % des habitants ont le paludisme (événement $M$). Un test rapide est positif (événement $T$) chez 95 % des malades et chez 2 % des personnes non malades. On choisit un habitant au hasard. Que vaut $P(T)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$M$ et $\\overline{M}$ forment une partition : $P(T) = 0{,}1 \\times 0{,}95 + 0{,}9 \\times 0{,}02 = 0{,}095 + 0{,}018 = 0{,}113$. Le résultat $0{,}097$ vient de l'erreur $0{,}1 \\times 0{,}02$ : la seconde route part de $\\overline{M}$, de probabilité $0{,}9$.",
+                  "answers": [
+                    {
+                      "content": "$0{,}113$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}097$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}97$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}095$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une région, 10 % des habitants ont le paludisme (événement $M$). Un test rapide est positif (événement $T$) chez 95 % des malades et chez 2 % des personnes non malades. On choisit un habitant au hasard. Le test d'un habitant est positif. Quelle est la probabilité qu'il soit malade, arrondie au centième ?",
+                  "question_type": "single_choice",
+                  "explanation": "On cherche $P_T(M) = \\frac{P(M \\cap T)}{P(T)} = \\frac{0{,}095}{0{,}113} \\approx 0{,}84$, avec $P(T) = 0{,}095 + 0{,}9 \\times 0{,}02 = 0{,}113$. Répondre $0{,}95$, c'est confondre $P_T(M)$ et $P_M(T)$ : la condition n'est pas la même.",
+                  "answers": [
+                    {
+                      "content": "$0{,}84$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}95$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}11$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une région, 10 % des habitants ont le paludisme (événement $M$). Un test rapide est positif (événement $T$) chez 95 % des malades et chez 2 % des personnes non malades. On choisit un habitant au hasard. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$P(T) = 0{,}113$, donc $P(\\overline{T}) = 0{,}887$. Le test se trompe sur deux chemins : $0{,}1 \\times 0{,}05 + 0{,}9 \\times 0{,}02 = 0{,}005 + 0{,}018 = 0{,}023$. Le total $0{,}07 = 0{,}05 + 0{,}02$ oublie le premier niveau de l'arbre.",
+                  "answers": [
+                    {
+                      "content": "$P(\\overline{T}) = 0{,}887$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La probabilité que le test se trompe (malade et négatif, ou non malade et positif) est $0{,}023$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P_M(\\overline{T}) = 0{,}95$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P(M \\cap \\overline{T}) = 0{,}05$",
+                      "correct": false
+                    },
+                    {
+                      "content": "La probabilité que le test se trompe est $0{,}07$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une région, 10 % des habitants ont le paludisme (événement $M$). Un test rapide est positif (événement $T$) chez 95 % des malades et chez 2 % des personnes non malades. On choisit un habitant au hasard. Affirmation : une personne dont le test est positif a 95 chances sur 100 d'être malade.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. 95 % est $P_M(T)$, la part des positifs parmi les malades. Parmi les positifs, la part des malades est $P_T(M) = \\frac{0{,}095}{0{,}113} \\approx 0{,}84$, soit environ 84 %. Les non malades sont nombreux, et leurs 2 % de faux positifs pèsent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $P(A) = 0{,}4$, $P_A(B) = 0{,}5$ et $P(B) = 0{,}38$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$P(A \\cap B) = 0{,}4 \\times 0{,}5 = 0{,}2$. Probabilités totales : $P(\\overline{A} \\cap B) = 0{,}38 - 0{,}2 = 0{,}18$. Puis $P_{\\overline{A}}(B) = \\frac{0{,}18}{0{,}6} = 0{,}3$. Répondre $0{,}18$ pour $P_{\\overline{A}}(B)$, c'est oublier de diviser par $P(\\overline{A})$.",
+                  "answers": [
+                    {
+                      "content": "$P(A \\cap B) = 0{,}2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P(\\overline{A} \\cap B) = 0{,}18$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P_{\\overline{A}}(B) = 0{,}3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P_{\\overline{A}}(B) = 0{,}18$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P_B(A) = 0{,}5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P(\\overline{A} \\cap B) = 0{,}62$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Variable aléatoire, loi de probabilité et espérance",
+          "subtitle": "Donner la loi d'une variable aléatoire, calculer espérance, variance, écart-type et fonction de répartition",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Reconnaître une variable aléatoire et donner sa loi de probabilité.</li>\n<li>Calculer l'espérance, la variance et l'écart-type d'une variable aléatoire.</li>\n<li>Déterminer la fonction de répartition d'une variable aléatoire.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. La tombola de la kermesse (variable aléatoire et loi).</strong> À la kermesse du lycée, tu tires un ticket dans une boîte de 10 tickets : 1 ticket gagne 1 000 F, 3 tickets gagnent 200 F et 6 tickets ne gagnent rien. Avant le tirage, tu ne sais pas combien tu vas gagner. Mais tu connais toutes les sommes possibles, et la chance de chacune.</p>\n<p><em>Le pont.</em> Chaque ticket est une <strong>issue</strong>, un résultat possible de l'expérience. La somme gagnée, c'est la <strong>variable aléatoire</strong> $X$ : elle associe un nombre à chaque issue. Les sommes $0$, $200$ et $1\\,000$ sont les <strong>valeurs prises</strong> par $X$. La liste « valeur, probabilité » est la <strong>loi de probabilité</strong> de $X$ : $P(X = 0) = 0{,}6$, $P(X = 200) = 0{,}3$ et $P(X = 1\\,000) = 0{,}1$.</p>\n<p><em>Où l'image s'arrête.</em> Malgré son nom, $X$ n'est pas une inconnue comme le $x$ d'une équation : c'est une fonction, qui va de l'univers vers $\\mathbb{R}$. Le hasard est dans le tirage du ticket, pas dans la règle qui donne le gain.</p>\n<p><strong>2. La caisse de l'organisateur (espérance).</strong> Si 100 élèves jouent, environ 10 gagnent 1 000 F, 30 gagnent 200 F et 60 ne gagnent rien. L'organisateur distribue environ $10 \\times 1\\,000 + 30 \\times 200 = 16\\,000$ F, soit 160 F par joueur en moyenne. S'il vend le ticket 200 F, il garde environ 40 F par joueur.</p>\n<p><em>Le pont.</em> Ces 160 F sont l'<strong>espérance</strong> $E(X)$ : la moyenne des valeurs de $X$, chacune pondérée par sa probabilité. $E(X) = 0 \\times 0{,}6 + 200 \\times 0{,}3 + 1\\,000 \\times 0{,}1 = 160$.</p>\n<p><em>Où l'image s'arrête.</em> Aucun joueur ne gagne exactement 160 F. L'espérance n'est pas forcément une valeur prise par $X$ : c'est une moyenne sur un très grand nombre de parties.</p>\n<p><strong>3. Les deux attaquants (variance et écart-type).</strong> Deux attaquants marquent en moyenne 1 but par match. Le premier marque 1 but à chaque match. Le second ne marque rien deux matchs sur trois, puis 3 buts le troisième. Même moyenne, mais le second est bien plus irrégulier.</p>\n<p><em>Le pont.</em> La <strong>variance</strong> $V(X)$ mesure cette irrégularité : c'est la moyenne des carrés des écarts entre les valeurs et l'espérance. Pour le premier attaquant, $V = 0$. Pour le second, $V = \\frac{2}{3} \\times (0 - 1)^2 + \\frac{1}{3} \\times (3 - 1)^2 = 2$. L'<strong>écart-type</strong> $\\sigma(X) = \\sqrt{V(X)}$ donne l'écart typique à la moyenne : ici $\\sqrt{2} \\approx 1{,}4$ but.</p>\n<p><em>Où l'image s'arrête.</em> La variance s'exprime en « buts au carré », ce qui n'a pas de sens concret. C'est pour cela qu'on prend sa racine carrée, l'écart-type, qui a la même unité que $X$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Variable aléatoire.</strong> Sur un univers fini $\\Omega$, une variable aléatoire $X$ est une application de $\\Omega$ dans $\\mathbb{R}$. On note $(X = x_i)$ l'événement « $X$ prend la valeur $x_i$ ».</p>\n<p><strong>Loi de probabilité.</strong> Donner la loi de $X$, c'est donner ses valeurs $x_1, x_2, \\ldots, x_n$ et les probabilités $p_i = P(X = x_i)$, avec $p_1 + p_2 + \\ldots + p_n = 1$. Sur ta copie, on la présente souvent dans un tableau à deux lignes.</p>\n<p><strong>Espérance.</strong> $E(X) = p_1 x_1 + p_2 x_2 + \\ldots + p_n x_n$. Pour un jeu où $X$ est le gain du joueur, le jeu est équitable si $E(X) = 0$, favorable au joueur si $E(X) > 0$, défavorable si $E(X) < 0$.</p>\n<p><strong>Variance et écart-type.</strong> $V(X) = p_1 \\big(x_1 - E(X)\\big)^2 + \\ldots + p_n \\big(x_n - E(X)\\big)^2$. En pratique, on utilise $V(X) = E(X^2) - \\big(E(X)\\big)^2$, avec $E(X^2) = p_1 x_1^2 + \\ldots + p_n x_n^2$. On a toujours $V(X) \\geq 0$, et $\\sigma(X) = \\sqrt{V(X)}$.</p>\n<p><strong>Fonction de répartition.</strong> C'est la fonction $F$ définie sur $\\mathbb{R}$ par $F(x) = P(X \\leq x)$. Elle est en escalier et croissante ; elle vaut $0$ avant la plus petite valeur de $X$ et $1$ à partir de la plus grande. Certains manuels utilisent $F(x) = P(X < x)$ : les deux définitions ne diffèrent qu'aux valeurs prises par $X$. Suis celle de ton professeur.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>On lance un dé équilibré. Avec 1, 2 ou 3, tu perds 100 F ; avec 4 ou 5, tu ne gagnes rien ; avec 6, tu gagnes 300 F. On note $X$ ton gain algébrique (positif si tu gagnes, négatif si tu perds).</strong></p>\n<ol>\n<li>Valeurs de $X$ : $-100$, $0$ et $300$.</li>\n<li>Loi : $P(X = -100) = \\frac{3}{6} = \\frac{1}{2}$ ; $P(X = 0) = \\frac{2}{6} = \\frac{1}{3}$ ; $P(X = 300) = \\frac{1}{6}$. Vérification : $\\frac{1}{2} + \\frac{1}{3} + \\frac{1}{6} = 1$.</li>\n<li>Espérance : $E(X) = \\frac{1}{2} \\times (-100) + \\frac{1}{3} \\times 0 + \\frac{1}{6} \\times 300 = -50 + 0 + 50 = 0$. Le jeu est équitable.</li>\n<li>Variance : $E(X^2) = \\frac{1}{2} \\times 10\\,000 + \\frac{1}{3} \\times 0 + \\frac{1}{6} \\times 90\\,000 = 5\\,000 + 15\\,000 = 20\\,000$. Donc $V(X) = 20\\,000 - 0^2 = 20\\,000$.</li>\n<li>Écart-type : $\\sigma(X) = \\sqrt{20\\,000} = 100\\sqrt{2} \\approx 141$ F.</li>\n<li>Fonction de répartition : $F(x) = 0$ si $x < -100$ ; $F(x) = \\frac{1}{2}$ si $-100 \\leq x < 0$ ; $F(x) = \\frac{1}{2} + \\frac{1}{3} = \\frac{5}{6}$ si $0 \\leq x < 300$ ; $F(x) = 1$ si $x \\geq 300$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Prendre $E(X^2)$ pour la variance, en oubliant de retrancher $\\big(E(X)\\big)^2$, ou écrire $\\sigma(X) = V(X)^2$ au lieu de $\\sqrt{V(X)}$.</p>\n<p>Comment le repérer : vérifie d'abord que la somme des probabilités vaut $1$. Ensuite, une variance n'est jamais négative, et l'écart-type a la même unité que $X$ (des francs, des buts…) : s'il est bien plus grand que les écarts entre les valeurs et l'espérance, ton calcul est faux.</p>\n<h2>En une phrase</h2>\n<p>Une variable aléatoire donne un nombre à chaque résultat du hasard ; sa loi dit avec quelle probabilité elle prend chaque valeur, son espérance est sa moyenne sur un grand nombre de parties, et son écart-type mesure à quel point elle s'en éloigne.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître une variable aléatoire et sa loi",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On lance deux pièces de monnaie et on note $X$ le nombre de « pile » obtenus. Quelles sont les valeurs prises par $X$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On peut obtenir aucun, un ou deux « pile » : $X$ prend les valeurs $0$, $1$ et $2$. Les issues PP, PF, FP, FF sont les résultats de l'expérience, pas les valeurs de $X$ : la variable aléatoire transforme chaque issue en nombre.",
+                  "answers": [
+                    {
+                      "content": "$0$, $1$ et $2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$ et $2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$ et $1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "PP, PF, FP et FF",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On lance deux pièces de monnaie équilibrées et on note $X$ le nombre de « pile » obtenus. Que vaut $P(X = 1)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les 4 issues PP, PF, FP, FF sont équiprobables, et deux d'entre elles donnent un seul « pile » : $P(X = 1) = \\frac{2}{4} = \\frac{1}{2}$. Répondre $\\frac{1}{3}$, c'est croire que les trois valeurs $0$, $1$, $2$ ont la même probabilité.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{2}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une variable aléatoire $X$ prend les valeurs $1$, $2$ et $3$ avec $P(X = 1) = 0{,}2$, $P(X = 2) = 0{,}5$ et $P(X = 3) = 0{,}4$. Ces données définissent une loi de probabilité.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. La somme des probabilités vaut $0{,}2 + 0{,}5 + 0{,}4 = 1{,}1$, et non $1$. Chaque probabilité est bien entre $0$ et $1$, mais cela ne suffit pas : la somme doit valoir exactement $1$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une tombola de 10 tickets, 1 ticket gagne 1 000 F, 3 tickets gagnent 200 F et 6 ne gagnent rien. On note $X$ le gain d'un joueur qui tire un ticket. On trouve $E(X) = 160$. Que représente ce nombre ?",
+                  "question_type": "single_choice",
+                  "explanation": "$E(X) = 0 \\times 0{,}6 + 200 \\times 0{,}3 + 1\\,000 \\times 0{,}1 = 160$ : c'est le gain moyen par ticket sur un très grand nombre de tirages. Ce n'est pas la moyenne simple $\\frac{0 + 200 + 1\\,000}{3} = 400$, qui oublie que les gains n'ont pas la même probabilité.",
+                  "answers": [
+                    {
+                      "content": "Le gain moyen par ticket sur un très grand nombre de tirages",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le gain le plus probable",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le gain que chaque joueur reçoit à coup sûr",
+                      "correct": false
+                    },
+                    {
+                      "content": "La moyenne des trois gains possibles $0$, $200$ et $1\\,000$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $X$ une variable aléatoire définie sur un univers fini. Quelles affirmations sont toujours vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "La variance est une moyenne de carrés, donc $V(X) \\geq 0$, et $\\sigma(X) = \\sqrt{V(X)}$. En revanche, $E(X)$ peut être négative (un jeu perdant) et n'est pas forcément une valeur de $X$. Et $V(X) = E(X^2) - \\big(E(X)\\big)^2$, pas $E(X^2)$.",
+                  "answers": [
+                    {
+                      "content": "$V(X) \\geq 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sigma(X) = \\sqrt{V(X)}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$E(X)$ est l'une des valeurs prises par $X$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$V(X) = E(X^2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$E(X) \\geq 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une variable aléatoire $X$ prend les valeurs $0$, $1$ et $2$ avec les probabilités respectives $0{,}3$ ; $0{,}5$ et $0{,}2$. Sa fonction de répartition est définie par $F(x) = P(X \\leq x)$. Que vaut $F(1{,}5)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$F(1{,}5) = P(X \\leq 1{,}5)$ : on additionne les probabilités des valeurs inférieures ou égales à $1{,}5$, donc $0$ et $1$. $F(1{,}5) = 0{,}3 + 0{,}5 = 0{,}8$. Répondre $0{,}5$, c'est ne prendre que $P(X = 1)$ : la fonction de répartition cumule.",
+                  "answers": [
+                    {
+                      "content": "$0{,}8$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer espérance, variance et écart-type",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Une variable aléatoire $X$ prend les valeurs $-1$, $2$ et $5$ avec les probabilités respectives $0{,}5$ ; $0{,}3$ et $0{,}2$. Que vaut $E(X)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$E(X) = 0{,}5 \\times (-1) + 0{,}3 \\times 2 + 0{,}2 \\times 5 = -0{,}5 + 0{,}6 + 1 = 1{,}1$. Le résultat $2$ est la moyenne simple des valeurs, sans les probabilités ; $2{,}1$ vient d'un signe moins oublié devant $0{,}5$.",
+                  "answers": [
+                    {
+                      "content": "$1{,}1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2{,}1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1{,}21$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une variable aléatoire $X$ prend les valeurs $-1$, $2$ et $5$ avec les probabilités respectives $0{,}5$ ; $0{,}3$ et $0{,}2$. Que vaut $V(X)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$E(X) = 1{,}1$ et $E(X^2) = 0{,}5 \\times 1 + 0{,}3 \\times 4 + 0{,}2 \\times 25 = 6{,}7$. Donc $V(X) = 6{,}7 - 1{,}1^2 = 6{,}7 - 1{,}21 = 5{,}49$. Le résultat $5{,}6$ vient d'un oubli du carré : on retranche $\\big(E(X)\\big)^2$, pas $E(X)$.",
+                  "answers": [
+                    {
+                      "content": "$5{,}49$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6{,}7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5{,}6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1{,}21$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une variable aléatoire $X$ prend la valeur $0$ avec la probabilité $0{,}75$ et la valeur $4$ avec la probabilité $0{,}25$. Que vaut l'écart-type $\\sigma(X)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$E(X) = 0{,}25 \\times 4 = 1$ et $E(X^2) = 0{,}25 \\times 16 = 4$, donc $V(X) = 4 - 1^2 = 3$ et $\\sigma(X) = \\sqrt{3}$. Répondre $3$, c'est s'arrêter à la variance ; l'écart-type est sa racine carrée.",
+                  "answers": [
+                    {
+                      "content": "$\\sqrt{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une variable aléatoire $X$ prend les valeurs $1$, $2$, $3$ et $4$ avec $P(X = 1) = 0{,}1$, $P(X = 2) = 0{,}3$, $P(X = 3) = a$ et $P(X = 4) = 0{,}2$. Que vaut $a$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme des probabilités vaut $1$ : $0{,}1 + 0{,}3 + a + 0{,}2 = 1$, donc $a = 1 - 0{,}6 = 0{,}4$. Répondre $0{,}6$, c'est s'arrêter à la somme des probabilités connues, sans la retrancher de $1$.",
+                  "answers": [
+                    {
+                      "content": "$0{,}4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}25$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On lance un dé équilibré. Si tu obtiens 6, tu gagnes 300 F ; sinon, tu perds 60 F. On note $X$ ton gain algébrique, négatif quand tu perds. Que vaut $E(X)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P(X = 300) = \\frac{1}{6}$ et $P(X = -60) = \\frac{5}{6}$. $E(X) = \\frac{300}{6} - \\frac{5 \\times 60}{6} = 50 - 50 = 0$ : le jeu est équitable. Répondre $50$ F, c'est oublier les pertes, qui comptent avec un signe moins.",
+                  "answers": [
+                    {
+                      "content": "$0$ F",
+                      "correct": true
+                    },
+                    {
+                      "content": "$50$ F",
+                      "correct": false
+                    },
+                    {
+                      "content": "$240$ F",
+                      "correct": false
+                    },
+                    {
+                      "content": "$40$ F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une variable aléatoire $X$ prend les valeurs $1$, $3$ et $6$ avec les probabilités respectives $0{,}2$ ; $0{,}5$ et $0{,}3$. Sa fonction de répartition est définie par $F(x) = P(X \\leq x)$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Aucune valeur de $X$ n'est inférieure ou égale à $0$, donc $F(0) = 0$. $F(4) = P(X = 1) + P(X = 3) = 0{,}7$. L'erreur tentante est de prendre seulement la probabilité de la valeur la plus proche, comme $F(4) = 0{,}5$ : $F$ cumule toutes les valeurs jusqu'à $x$.",
+                  "answers": [
+                    {
+                      "content": "$F(0) = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(4) = 0{,}7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(4) = 0{,}5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(7) = 0{,}3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(2) = 0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Étudier un jeu de hasard",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Une urne contient 2 jetons rouges et 3 jetons verts. Un joueur paie 300 F, puis tire simultanément 2 jetons au hasard. Il reçoit 500 F par jeton rouge tiré. On note $X$ son gain algébrique (somme reçue moins la mise). Que vaut $P(X = 200)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$X = 200$ quand le joueur tire exactement 1 rouge. Il y a $C_5^2 = 10$ tirages possibles, dont $2 \\times 3 = 6$ avec 1 rouge et 1 vert : $P(X = 200) = \\frac{6}{10} = \\frac{3}{5}$. Répondre $\\frac{3}{10}$, c'est compter $C_3^2$, les tirages sans rouge.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{3}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{2}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{10}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{10}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une urne contient 2 jetons rouges et 3 jetons verts. Un joueur paie 300 F, puis tire simultanément 2 jetons au hasard. Il reçoit 500 F par jeton rouge tiré. On note $X$ son gain algébrique (somme reçue moins la mise). Que vaut $P(X = -300)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$X = -300$ quand aucun jeton rouge n'est tiré : 2 verts parmi 3, soit $C_3^2 = 3$ tirages sur $C_5^2 = 10$. Donc $P(X = -300) = \\frac{3}{10}$. Le résultat $\\frac{9}{25} = \\left(\\frac{3}{5}\\right)^2$ correspond à des tirages avec remise : ici, le tirage est simultané.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{3}{10}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{9}{25}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{10}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une urne contient 2 jetons rouges et 3 jetons verts. Un joueur paie 300 F, puis tire simultanément 2 jetons au hasard. Il reçoit 500 F par jeton rouge tiré. On note $X$ son gain algébrique (somme reçue moins la mise). Que vaut $E(X)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Loi : $P(X = -300) = 0{,}3$ ; $P(X = 200) = 0{,}6$ ; $P(X = 700) = 0{,}1$. $E(X) = -90 + 120 + 70 = 100$. Le résultat $200$ est la moyenne simple des trois valeurs ; $400$ oublie de retirer la mise de 300 F.",
+                  "answers": [
+                    {
+                      "content": "$100$ F",
+                      "correct": true
+                    },
+                    {
+                      "content": "$200$ F",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$ F",
+                      "correct": false
+                    },
+                    {
+                      "content": "$400$ F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une urne contient 2 jetons rouges et 3 jetons verts. Un joueur paie 300 F, puis tire simultanément 2 jetons au hasard. Il reçoit 500 F par jeton rouge tiré. On note $X$ son gain algébrique (somme reçue moins la mise). Que vaut l'écart-type $\\sigma(X)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $P(X = -300) = 0{,}3$, $P(X = 200) = 0{,}6$, $P(X = 700) = 0{,}1$ : $E(X^2) = 27\\,000 + 24\\,000 + 49\\,000 = 100\\,000$ et $E(X) = 100$. $V(X) = 100\\,000 - 100^2 = 90\\,000$, donc $\\sigma(X) = 300$ F. Répondre $316$ F, c'est oublier de retrancher $\\big(E(X)\\big)^2$.",
+                  "answers": [
+                    {
+                      "content": "$300$ F",
+                      "correct": true
+                    },
+                    {
+                      "content": "$90\\,000$ F",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100\\,000$ F",
+                      "correct": false
+                    },
+                    {
+                      "content": "Environ $316$ F",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une urne contient 2 jetons rouges et 3 jetons verts. Un joueur paie 300 F, puis tire simultanément 2 jetons au hasard. Il reçoit 500 F par jeton rouge tiré. On note $X$ son gain algébrique (somme reçue moins la mise). Affirmation : ce jeu est favorable au joueur.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. La loi est $P(X = -300) = 0{,}3$, $P(X = 200) = 0{,}6$, $P(X = 700) = 0{,}1$, donc $E(X) = -90 + 120 + 70 = 100 > 0$. En moyenne, le joueur gagne 100 F par partie. Perdre 3 fois sur 10 ne rend pas le jeu défavorable : c'est le signe de l'espérance qui décide.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une urne contient 2 jetons rouges et 3 jetons verts. Un joueur paie 300 F, puis tire simultanément 2 jetons au hasard. Il reçoit 500 F par jeton rouge tiré. On note $X$ son gain algébrique (somme reçue moins la mise). Sa fonction de répartition est définie par $F(x) = P(X \\leq x)$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Les valeurs de $X$ sont $-300$ ($0{,}3$), $200$ ($0{,}6$) et $700$ ($0{,}1$). $F(-400) = 0$ ; $F(0) = 0{,}3$ ; $F(500) = 0{,}3 + 0{,}6 = 0{,}9$ ; $F(1\\,000) = 1$. Écrire $F(1\\,000) = 0{,}1$, c'est oublier que $F$ cumule toutes les valeurs.",
+                  "answers": [
+                    {
+                      "content": "$F(-400) = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(0) = 0{,}3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(500) = 0{,}9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F(500) = 0{,}6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(1\\,000) = 0{,}1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F(0) = 0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Événements indépendants et loi binomiale",
+          "subtitle": "Reconnaître l'indépendance et un schéma de Bernoulli, puis calculer avec la loi binomiale",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Reconnaître deux événements indépendants.</li>\n<li>Reconnaître une épreuve de Bernoulli et un schéma de Bernoulli.</li>\n<li>Calculer avec la loi binomiale : $P(X = k)$, l'espérance et la variance.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Ton dé et la pluie à Korhogo (indépendance).</strong> Tu lances un dé à Abidjan. Au même moment, il pleut ou non à Korhogo. Savoir qu'il pleut à Korhogo ne change rien à ta chance d'obtenir 6 : elle reste $\\frac{1}{6}$.</p>\n<p><em>Le pont.</em> $A$ est « obtenir 6 », $B$ est « il pleut à Korhogo ». « Savoir $B$ ne change pas la chance de $A$ » s'écrit $P_B(A) = P(A)$. Comme $P_B(A) = \\frac{P(A \\cap B)}{P(B)}$, cela revient à $P(A \\cap B) = P(A) \\times P(B)$ : c'est la définition de deux événements <strong>indépendants</strong>.</p>\n<p><em>Où l'image s'arrête.</em> Indépendants ne veut pas dire <strong>incompatibles</strong>. Deux événements incompatibles ne peuvent pas se produire ensemble, comme « obtenir 6 » et « obtenir 1 » au même lancer. Ils sont très dépendants : si tu sais que tu as obtenu 1, ta chance d'avoir 6 tombe à $0$.</p>\n<p><strong>2. La séance de tirs au but (schéma de Bernoulli et loi binomiale).</strong> L'attaquant de l'équipe du lycée tire 5 penalties. À chaque tir, il marque avec la même chance, $0{,}8$, et un tir n'influence pas les autres. Tu veux la chance qu'il marque exactement 3 fois. Une séance possible est « but, but, but, raté, raté » : sa probabilité est $0{,}8^3 \\times 0{,}2^2$. Mais les 3 buts peuvent tomber à d'autres places parmi les 5 tirs.</p>\n<p><em>Le pont.</em> Chaque tir est une <strong>épreuve de Bernoulli</strong> : deux issues seulement, le succès (but) de probabilité $p = 0{,}8$ et l'échec (raté) de probabilité $1 - p = 0{,}2$. Les 5 tirs, identiques et indépendants, forment un <strong>schéma de Bernoulli</strong> avec $n = 5$. Le nombre de façons de placer les 3 buts parmi les 5 tirs est $C_5^3 = 10$. Le nombre de buts $X$ suit la <strong>loi binomiale</strong> de paramètres $5$ et $0{,}8$, et $P(X = 3) = 10 \\times 0{,}8^3 \\times 0{,}2^2 = 0{,}2048$.</p>\n<p><em>Où l'image s'arrête.</em> Un vrai joueur se fatigue ou stresse : sa chance change d'un tir à l'autre. La loi binomiale ne s'applique que si les épreuves sont identiques (même $p$ à chaque fois) et indépendantes. Un tirage sans remise dans une urne, par exemple, n'est pas un schéma de Bernoulli.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Événements indépendants.</strong> $A$ et $B$ sont indépendants si $P(A \\cap B) = P(A) \\times P(B)$. Si $P(B) \\neq 0$, cela équivaut à $P_B(A) = P(A)$. Si $A$ et $B$ sont indépendants, alors $\\overline{A}$ et $B$, $A$ et $\\overline{B}$, $\\overline{A}$ et $\\overline{B}$ le sont aussi.</p>\n<p><strong>Épreuve de Bernoulli.</strong> Expérience aléatoire à deux issues : le succès, de probabilité $p$, et l'échec, de probabilité $1 - p$.</p>\n<p><strong>Schéma de Bernoulli.</strong> Répétition de $n$ épreuves de Bernoulli identiques et indépendantes.</p>\n<p><strong>Loi binomiale.</strong> Dans un schéma de Bernoulli de paramètres $n$ et $p$, le nombre $X$ de succès suit la loi binomiale $\\mathcal{B}(n \\,;\\, p)$ : pour tout entier $k$ de $0$ à $n$, $P(X = k) = C_n^k \\, p^k \\, (1 - p)^{n - k}$. Le nombre $C_n^k$, noté aussi $\\binom{n}{k}$, compte les façons de placer les $k$ succès parmi les $n$ épreuves.</p>\n<p><strong>Espérance et variance.</strong> $E(X) = np$ et $V(X) = np(1 - p)$.</p>\n<p><strong>Au moins un succès.</strong> $P(X \\geq 1) = 1 - P(X = 0) = 1 - (1 - p)^n$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Un paysan sème 4 graines de maïs. Chaque graine germe avec la probabilité $0{,}9$, indépendamment des autres. On note $X$ le nombre de graines qui germent.</strong></p>\n<ol>\n<li>Loi de $X$ : chaque graine est une épreuve de Bernoulli (succès : elle germe, $p = 0{,}9$). Les 4 épreuves sont identiques et indépendantes, et $X$ compte les succès. Donc $X$ suit la loi $\\mathcal{B}(4 \\,;\\, 0{,}9)$.</li>\n<li>Les 4 graines germent : $P(X = 4) = C_4^4 \\times 0{,}9^4 \\times 0{,}1^0 = 0{,}6561$.</li>\n<li>Exactement 3 graines germent : $P(X = 3) = C_4^3 \\times 0{,}9^3 \\times 0{,}1 = 4 \\times 0{,}729 \\times 0{,}1 = 0{,}2916$.</li>\n<li>Au moins une graine germe : $P(X \\geq 1) = 1 - P(X = 0) = 1 - 0{,}1^4 = 0{,}9999$.</li>\n<li>$E(X) = 4 \\times 0{,}9 = 3{,}6$ graines en moyenne ; $V(X) = 4 \\times 0{,}9 \\times 0{,}1 = 0{,}36$, donc $\\sigma(X) = 0{,}6$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Oublier le coefficient $C_n^k$. Écrire $P(X = 3) = 0{,}9^3 \\times 0{,}1 = 0{,}0729$ donne la probabilité d'un seul ordre (les trois premières germent, la dernière non). Or les 3 graines qui germent peuvent être n'importe lesquelles parmi les 4.</p>\n<p>Comment le repérer : demande-toi « l'énoncé impose-t-il un ordre ? ». S'il dit seulement « exactement $k$ succès », multiplie par $C_n^k$. Autre contrôle : la somme des $P(X = k)$ pour $k$ de $0$ à $n$ doit valoir $1$.</p>\n<h2>En une phrase</h2>\n<p>Deux événements sont indépendants quand l'un ne change pas la chance de l'autre, soit $P(A \\cap B) = P(A) \\times P(B)$ ; et si on répète $n$ fois, de façon identique et indépendante, une épreuve à deux issues, le nombre de succès suit la loi binomiale $P(X = k) = C_n^k \\, p^k (1 - p)^{n - k}$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Indépendance et schéma de Bernoulli",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On donne $P(A) = 0{,}5$, $P(B) = 0{,}4$ et $P(A \\cap B) = 0{,}2$. Les événements $A$ et $B$ sont-ils indépendants ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P(A) \\times P(B) = 0{,}5 \\times 0{,}4 = 0{,}2 = P(A \\cap B)$ : ils sont indépendants. Répondre « non, car $P(A \\cap B) \\neq 0$ », c'est confondre indépendants et incompatibles. Souviens-toi du dé et de la pluie : ils peuvent arriver ensemble.",
+                  "answers": [
+                    {
+                      "content": "Oui, car $P(A \\cap B) = P(A) \\times P(B)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, car $P(A \\cap B) \\neq 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $P(A) + P(B) \\neq 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir sans construire un arbre.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux événements incompatibles, de probabilités non nulles, sont indépendants.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Incompatibles signifie $P(A \\cap B) = 0$, alors que $P(A) \\times P(B) > 0$ : l'égalité de l'indépendance est fausse. Savoir que $A$ est réalisé rend $B$ impossible, donc $A$ change la chance de $B$ : ils sont dépendants.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Laquelle de ces expériences est une épreuve de Bernoulli ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une épreuve de Bernoulli a exactement deux issues. « Obtenir 6 ou non » en a deux : succès et échec. Noter le numéro du dé donne six issues. Tirer 3 boules et les compter, c'est une répétition d'épreuves, pas une seule épreuve.",
+                  "answers": [
+                    {
+                      "content": "Lancer un dé et noter si l'on obtient 6 ou non",
+                      "correct": true
+                    },
+                    {
+                      "content": "Lancer un dé et noter le numéro obtenu",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lancer deux pièces et noter le nombre de « pile »",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tirer 3 boules d'une urne et compter les boules rouges",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans lesquelles de ces situations la variable aléatoire $X$ suit-elle une loi binomiale ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Il faut un nombre fixé d'épreuves identiques et indépendantes, et $X$ doit compter les succès. Avec remise, la composition de l'urne ne change pas : c'est bon. Sans remise, la probabilité change à chaque tirage. « Lancer jusqu'à obtenir 6 » n'a pas de nombre d'épreuves fixé.",
+                  "answers": [
+                    {
+                      "content": "On lance 10 fois une pièce équilibrée ; $X$ est le nombre de « face ».",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une urne contient 3 boules rouges et 7 blanches ; on tire 4 boules une à une avec remise ; $X$ est le nombre de boules rouges.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une urne contient 3 boules rouges et 7 blanches ; on tire 4 boules une à une sans remise ; $X$ est le nombre de boules rouges.",
+                      "correct": false
+                    },
+                    {
+                      "content": "On lance un dé jusqu'à obtenir 6 ; $X$ est le nombre de lancers.",
+                      "correct": false
+                    },
+                    {
+                      "content": "On lance un dé 5 fois ; $X$ est la somme des numéros obtenus.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un joueur tire 5 penalties. À chaque tir, il marque avec la probabilité $0{,}8$, indépendamment des autres tirs. On note $X$ le nombre de buts marqués. Quels sont les paramètres de la loi binomiale suivie par $X$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il y a $n = 5$ épreuves, et le succès compté par $X$ est « marquer », de probabilité $p = 0{,}8$. Prendre $p = 0{,}2$, c'est prendre la probabilité de l'échec : elle servirait si $X$ comptait les tirs ratés.",
+                  "answers": [
+                    {
+                      "content": "$n = 5$ et $p = 0{,}8$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$n = 5$ et $p = 0{,}2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n = 0{,}8$ et $p = 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$n = 4$ et $p = 0{,}8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la formule de la loi binomiale $P(X = k) = C_n^k \\, p^k \\, (1 - p)^{n - k}$, que compte le nombre $C_n^k$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$p^k (1 - p)^{n - k}$ est la probabilité d'un seul ordre de succès et d'échecs. $C_n^k$ compte les façons de placer les $k$ succès parmi les $n$ épreuves : pour 3 buts en 5 tirs, $C_5^3 = 10$ séances possibles. Ce n'est pas une probabilité : il peut dépasser $1$.",
+                  "answers": [
+                    {
+                      "content": "Le nombre de façons de placer les $k$ succès parmi les $n$ épreuves",
+                      "correct": true
+                    },
+                    {
+                      "content": "La probabilité d'obtenir $k$ succès",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre d'échecs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre total d'issues de l'expérience",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer avec l'indépendance et la loi binomiale",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Les événements $A$ et $B$ sont indépendants, avec $P(A) = 0{,}3$ et $P(B) = 0{,}6$. Que vaut $P(A \\cap B)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Indépendants : $P(A \\cap B) = P(A) \\times P(B) = 0{,}3 \\times 0{,}6 = 0{,}18$. Répondre $0$, c'est confondre indépendants et incompatibles ; répondre $0{,}9$, c'est additionner au lieu de multiplier.",
+                  "answers": [
+                    {
+                      "content": "$0{,}18$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les événements $A$ et $B$ sont indépendants, avec $P(A) = 0{,}3$ et $P(B) = 0{,}6$. Que vaut $P(A \\cup B)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P(A \\cap B) = 0{,}3 \\times 0{,}6 = 0{,}18$, puis $P(A \\cup B) = P(A) + P(B) - P(A \\cap B) = 0{,}9 - 0{,}18 = 0{,}72$. Répondre $0{,}9$, c'est oublier de retirer la partie commune, comptée deux fois.",
+                  "answers": [
+                    {
+                      "content": "$0{,}72$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}18$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}82$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La variable aléatoire $X$ suit la loi binomiale $\\mathcal{B}(4 \\,;\\, 0{,}5)$. Que vaut $P(X = 2)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P(X = 2) = C_4^2 \\times 0{,}5^2 \\times 0{,}5^2 = 6 \\times \\frac{1}{16} = \\frac{3}{8}$. Répondre $\\frac{1}{16}$, c'est oublier $C_4^2 = 6$ : il y a 6 façons de placer les 2 succès parmi les 4 épreuves.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{3}{8}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{16}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La variable aléatoire $X$ suit la loi binomiale $\\mathcal{B}(3 \\,;\\, 0{,}2)$. Que vaut $P(X = 0)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Aucun succès : les 3 épreuves sont des échecs, de probabilité $0{,}8$ chacune. $P(X = 0) = 0{,}8^3 = 0{,}512$. Le résultat $0{,}008 = 0{,}2^3$ est la probabilité de 3 succès, $P(X = 3)$.",
+                  "answers": [
+                    {
+                      "content": "$0{,}512$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}008$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On lance 3 fois une pièce équilibrée. Quelle est la probabilité d'obtenir au moins une fois « pile » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le contraire de « au moins un pile » est « aucun pile », de probabilité $\\left(\\frac{1}{2}\\right)^3 = \\frac{1}{8}$. Donc $P = 1 - \\frac{1}{8} = \\frac{7}{8}$. Le résultat $\\frac{3}{8}$ est la probabilité d'exactement un « pile » : « au moins un » compte aussi deux et trois.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{7}{8}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{8}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{8}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La variable aléatoire $X$ suit la loi binomiale $\\mathcal{B}(20 \\,;\\, 0{,}3)$. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$E(X) = np = 20 \\times 0{,}3 = 6$ et $V(X) = np(1 - p) = 20 \\times 0{,}3 \\times 0{,}7 = 4{,}2$. L'écart-type est $\\sqrt{4{,}2} \\approx 2{,}05$, pas $4{,}2$. Écrire $V(X) = 6$, c'est oublier le facteur $1 - p$.",
+                  "answers": [
+                    {
+                      "content": "$E(X) = 6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$V(X) = 4{,}2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$V(X) = 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$E(X) = 0{,}3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sigma(X) = 4{,}2$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Les mangues abîmées, problème de loi binomiale",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Au marché, chaque mangue d'un grand tas est abîmée avec la probabilité $0{,}1$, indépendamment des autres. Un client choisit 5 mangues au hasard. On note $X$ le nombre de mangues abîmées. Pourquoi $X$ suit-elle une loi binomiale ?",
+                  "question_type": "single_choice",
+                  "explanation": "On répète 5 fois la même épreuve à deux issues (abîmée ou non, avec $p = 0{,}1$), de façon indépendante, et $X$ compte les succès : c'est un schéma de Bernoulli. Avoir un nombre fini de valeurs ne suffit pas : toutes les variables de ce cours en ont un.",
+                  "answers": [
+                    {
+                      "content": "On répète 5 fois, de façon identique et indépendante, une épreuve à deux issues, et $X$ compte les mangues abîmées.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que $X$ prend un nombre fini de valeurs.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que la probabilité qu'une mangue soit abîmée est faible.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $X$ peut prendre la valeur $0$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au marché, chaque mangue d'un grand tas est abîmée avec la probabilité $0{,}1$, indépendamment des autres. Un client choisit 5 mangues au hasard. On note $X$ le nombre de mangues abîmées. Que vaut $P(X = 0)$, arrondie au millième ?",
+                  "question_type": "single_choice",
+                  "explanation": "$X$ suit $\\mathcal{B}(5 \\,;\\, 0{,}1)$. Aucune mangue abîmée : les 5 sont bonnes, chacune avec la probabilité $0{,}9$. $P(X = 0) = 0{,}9^5 \\approx 0{,}590$. Le nombre $0{,}1^5 = 0{,}00001$ est la probabilité que les 5 soient abîmées.",
+                  "answers": [
+                    {
+                      "content": "$0{,}590$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}900$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}410$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}00001$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au marché, chaque mangue d'un grand tas est abîmée avec la probabilité $0{,}1$, indépendamment des autres. Un client choisit 5 mangues au hasard. On note $X$ le nombre de mangues abîmées. Que vaut $P(X = 1)$, arrondie au millième ?",
+                  "question_type": "single_choice",
+                  "explanation": "$P(X = 1) = C_5^1 \\times 0{,}1 \\times 0{,}9^4 = 5 \\times 0{,}1 \\times 0{,}6561 \\approx 0{,}328$. Le résultat $0{,}066$ oublie $C_5^1 = 5$ : la mangue abîmée peut être n'importe laquelle des 5.",
+                  "answers": [
+                    {
+                      "content": "$0{,}328$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}066$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au marché, chaque mangue d'un grand tas est abîmée avec la probabilité $0{,}1$, indépendamment des autres. Un client choisit 5 mangues au hasard. On note $X$ le nombre de mangues abîmées. Quelle est la probabilité, arrondie au millième, que le client ait au moins une mangue abîmée ?",
+                  "question_type": "single_choice",
+                  "explanation": "« Au moins une » est le contraire de « aucune » : $P(X \\geq 1) = 1 - P(X = 0) = 1 - 0{,}9^5 \\approx 1 - 0{,}590 = 0{,}410$. Répondre $0{,}328$, c'est calculer « exactement une », $P(X = 1)$.",
+                  "answers": [
+                    {
+                      "content": "$0{,}410$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}328$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}590$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au marché, chaque mangue d'un grand tas est abîmée avec la probabilité $0{,}1$, indépendamment des autres. Un client choisit 5 mangues au hasard. On note $X$ le nombre de mangues abîmées. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$X$ suit $\\mathcal{B}(5 \\,;\\, 0{,}1)$ : $E(X) = 5 \\times 0{,}1 = 0{,}5$ et $V(X) = 5 \\times 0{,}1 \\times 0{,}9 = 0{,}45$. $P(X \\leq 1) = 0{,}9^5 + 5 \\times 0{,}1 \\times 0{,}9^4 \\approx 0{,}590 + 0{,}328 = 0{,}919$. $E(X) = 4{,}5$ compte les bonnes mangues, pas les abîmées.",
+                  "answers": [
+                    {
+                      "content": "$E(X) = 0{,}5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$V(X) = 0{,}45$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P(X \\leq 1) \\approx 0{,}919$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$E(X) = 4{,}5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$V(X) = 0{,}5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$P(X \\leq 1) \\approx 0{,}328$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Au marché, chaque mangue d'un grand tas est abîmée avec la probabilité $0{,}1$, indépendamment des autres. Un client choisit $n$ mangues au hasard. Quel est le plus petit entier $n$ pour lequel la probabilité d'avoir au moins une mangue abîmée dépasse $0{,}5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On veut $1 - 0{,}9^n > 0{,}5$, soit $0{,}9^n < 0{,}5$. À la calculatrice : $0{,}9^6 \\approx 0{,}531$, encore trop grand, et $0{,}9^7 \\approx 0{,}478 < 0{,}5$. Donc $n = 7$. Répondre $5$, c'est croire que les probabilités s'additionnent : $5 \\times 0{,}1 = 0{,}5$.",
+                  "answers": [
+                    {
+                      "content": "$7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
