@@ -85,6 +85,90 @@ Les 4 premiers fichiers ont été importés le 2026-09-29 sur une base neuve, pa
 - **Chimie** : il faut vérifier que la règle de Markovnikov est au programme. DNPH, Fehling et Schiff chevauchent peut-être la leçon suivante sur les aldéhydes et cétones.
 - **SVT** : l'hCG, le corps jaune et la progestérone sont traités au minimum, parce qu'ils relèvent aussi de la leçon suivante.
 
+### 6ème, 5ème et 4ème — `lecons-traitees/6eme/`, `5eme/`, `4eme/`
+
+Les 3 premières leçons de chaque matière du 1er cycle (progression DPFC 2026-2027, rangs 1 à 3, sans série), rédigées le 2026-10-11 avec [`prompt-redaction.md`](prompt-redaction.md). Chaque fichier contient un cours : 3 fiches (2 ou 4 pour quelques leçons), 3 exercices par fiche, 5 à 6 questions par exercice. Chaque fichier passe `script/contenus/valider.rb`. Chaque leçon a été relue par un second rédacteur, qui a refait les calculs et vérifié les faits : les défauts trouvés ont été corrigés.
+
+Au total : **54 cours, 160 fiches, 480 exercices, 2 612 questions**, réparties comme suit.
+
+#### 6ème
+| Fichier | Cours | Fiches | Exercices | Questions |
+|---|---|---:|---:|---:|
+| `6eme/mathematiques/nombres-entiers-naturels.json` | Nombres entiers naturels | 3 | 9 | 54 |
+| `6eme/mathematiques/droites-et-points.json` | Droites et points | 3 | 9 | 54 |
+| `6eme/mathematiques/nombres-decimaux-relatifs.json` | Nombres décimaux relatifs | 3 | 9 | 54 |
+| `6eme/physique-chimie/le-circuit-electrique.json` | Le circuit électrique | 3 | 9 | 54 |
+| `6eme/physique-chimie/commande-d-un-circuit-electrique.json` | Commande d'un circuit électrique | 3 | 9 | 54 |
+| `6eme/physique-chimie/court-circuit-et-protection-des-installations-electriques.json` | Court - circuit et protection des installations électriques | 3 | 9 | 54 |
+| `6eme/svt/les-actions-nefastes-de-l-homme-et-leurs-consequences-sur-l-environnement.json` | Les actions néfastes de l'Homme et leurs conséquences sur l'environnement | 3 | 9 | 50 |
+| `6eme/svt/la-lutte-contre-la-degradation-de-l-environnement.json` | La lutte contre la dégradation de l'environnement | 3 | 9 | 48 |
+| `6eme/svt/les-facteurs-de-croissance-chez-les-plantes-a-fleurs.json` | Les facteurs de croissance chez les plantes à fleurs | 3 | 9 | 46 |
+| `6eme/francais/la-phrase.json` | La phrase | 3 | 9 | 45 |
+| `6eme/francais/le-dialogue-oral.json` | Le dialogue oral | 3 | 9 | 45 |
+| `6eme/francais/la-lettre-personnelle.json` | La lettre personnelle | 3 | 9 | 45 |
+| `6eme/histoire-geographie/histoire-l-histoire-et-son-objet.json` | Histoire — L'histoire et son objet | 3 | 9 | 52 |
+| `6eme/histoire-geographie/geographie-la-geographie-et-son-objet.json` | Géographie — La géographie et son objet | 3 | 9 | 54 |
+| `6eme/histoire-geographie/histoire-les-sources-de-l-histoire.json` | Histoire — Les sources de l'histoire | 4 | 12 | 70 |
+| `6eme/edhc/les-droits-a-la-survie-et-les-droits-a-la-protection-de-l-enfant.json` | Les droits à la survie et les droits à la protection de l'enfant | 2 | 6 | 30 |
+| `6eme/edhc/les-droits-humains.json` | Les droits humains | 2 | 6 | 30 |
+| `6eme/edhc/le-droit-international-humanitaire-dih.json` | Le droit international humanitaire (DIH) | 3 | 9 | 45 |
+
+#### 5ème
+| Fichier | Cours | Fiches | Exercices | Questions |
+|---|---|---:|---:|---:|
+| `5eme/mathematiques/nombres-premiers.json` | Nombres premiers | 3 | 9 | 48 |
+| `5eme/mathematiques/segments.json` | Segments | 3 | 9 | 48 |
+| `5eme/mathematiques/angles.json` | Angles | 3 | 9 | 47 |
+| `5eme/physique-chimie/adaptation-d-un-generateur-a-un-recepteur.json` | Adaptation d'un générateur à un récepteur | 3 | 9 | 45 |
+| `5eme/physique-chimie/association-de-lampes-electriques.json` | Association de lampes électriques | 3 | 9 | 45 |
+| `5eme/physique-chimie/association-de-piles-en-serie.json` | Association de piles en série | 3 | 9 | 46 |
+| `5eme/svt/les-consequences-de-la-proliferation-du-criquet.json` | Les conséquences de la prolifération du criquet | 3 | 9 | 54 |
+| `5eme/svt/les-consequences-de-la-proliferation-du-moustique.json` | Les conséquences de la prolifération du moustique | 3 | 9 | 54 |
+| `5eme/svt/la-lutte-contre-le-criquet-et-le-moustique.json` | La lutte contre le criquet et le moustique | 3 | 9 | 54 |
+| `5eme/francais/le-groupe-nominal.json` | Le groupe nominal | 3 | 9 | 54 |
+| `5eme/francais/l-expose-oral.json` | L'exposé oral | 3 | 9 | 54 |
+| `5eme/francais/le-portrait.json` | Le portrait | 3 | 9 | 54 |
+| `5eme/histoire-geographie/histoire-les-premiers-habitants-de-la-cote-d-ivoire.json` | Histoire — Les premiers habitants de la Côte d'Ivoire | 3 | 9 | 45 |
+| `5eme/histoire-geographie/geographie-le-milieu-physique-en-cote-d-ivoire-et-l-installation-des-populations.json` | Géographie — Le milieu physique en Côte d'Ivoire et l'installation des populations | 3 | 9 | 45 |
+| `5eme/histoire-geographie/histoire-les-premiers-mouvements-migratoires-en-cote-d-ivoire.json` | Histoire — Les premiers mouvements migratoires en Côte d'Ivoire | 3 | 9 | 45 |
+| `5eme/edhc/les-droits-au-developpement-et-les-droits-a-la-participation-de-l-enfant.json` | Les droits au développement et les droits à la participation de l'enfant | 3 | 9 | 45 |
+| `5eme/edhc/les-principes-des-droits-humains.json` | Les principes des droits humains | 3 | 9 | 45 |
+| `5eme/edhc/les-regles-de-protection-des-victimes-des-conflits-armes.json` | Les règles de protection des victimes des conflits armés | 2 | 6 | 30 |
+
+#### 4ème
+| Fichier | Cours | Fiches | Exercices | Questions |
+|---|---|---:|---:|---:|
+| `4eme/mathematiques/nombres-decimaux-relatifs.json` | Nombres décimaux relatifs | 3 | 9 | 53 |
+| `4eme/mathematiques/angles.json` | Angles | 3 | 9 | 54 |
+| `4eme/mathematiques/nombres-rationnels.json` | Nombres rationnels | 3 | 9 | 52 |
+| `4eme/physique-chimie/sources-et-recepteurs-de-lumiere.json` | Sources et récepteurs de lumière | 3 | 9 | 45 |
+| `4eme/physique-chimie/propagation-de-la-lumiere.json` | Propagation de la lumière | 3 | 9 | 45 |
+| `4eme/physique-chimie/les-phases-de-la-lune-et-les-eclipses.json` | Les phases de la Lune et les éclipses | 3 | 9 | 45 |
+| `4eme/svt/les-differentes-transformations-du-corps-humain-de-l-enfance-a-l-adolescence.json` | Les différentes transformations du corps humain de l'enfance à l'adolescence | 3 | 9 | 45 |
+| `4eme/svt/le-devenir-des-cellules-sexuelles-chez-l-homme.json` | Le devenir des cellules sexuelles chez l'Homme | 3 | 9 | 45 |
+| `4eme/svt/la-formation-des-roches-endogenes.json` | La formation des roches endogènes | 3 | 9 | 45 |
+| `4eme/francais/le-groupe-nominal.json` | Le groupe nominal | 3 | 9 | 45 |
+| `4eme/francais/le-debat-i.json` | Le débat I | 3 | 9 | 45 |
+| `4eme/francais/le-texte-explicatif.json` | Le texte explicatif | 3 | 9 | 45 |
+| `4eme/histoire-geographie/histoire-la-mise-en-place-des-peuples-de-cote-d-ivoire-du-xvie-au-xviiie-siecle.json` | Histoire — La mise en place des peuples de Côte d'Ivoire du XVIe au XVIIIe siècle | 3 | 9 | 48 |
+| `4eme/histoire-geographie/geographie-la-deconcentration-administrative-en-cote-d-ivoire.json` | Géographie — La déconcentration administrative en Côte d'Ivoire | 3 | 9 | 48 |
+| `4eme/histoire-geographie/histoire-l-organisation-sociopolitique-des-peuples-de-cote-d-ivoire.json` | Histoire — L'organisation sociopolitique des peuples de Côte d'Ivoire | 3 | 9 | 48 |
+| `4eme/edhc/la-promotion-des-droits-de-l-enfant.json` | La promotion des droits de l'enfant | 3 | 9 | 54 |
+| `4eme/edhc/la-lutte-contre-le-recrutement-des-enfants-soldats.json` | La lutte contre le recrutement des enfants soldats | 3 | 9 | 54 |
+| `4eme/edhc/les-instruments-et-les-mecanismes-de-protection-contre-les-discriminations.json` | Les instruments et les mécanismes de protection contre les discriminations | 3 | 9 | 54 |
+
+**Attention à l'import.** Les 54 fichiers dépassent la limite de 50 par import : envoyer en deux fois. La matière **EDHC** n'existe pas encore dans le référentiel Lnclass : les 9 cours d'EDHC (3 par niveau) seront rejetés (`unknown_material`) tant qu'elle n'est pas créée. Si la progression a déjà été importée, renommer puis archiver les cours vides avant d'importer (voir « Ordre des imports »).
+
+Aucun enseignant ne les a encore relues. À faire valider par un enseignant :
+
+- **Toutes les leçons** : le sous-titre de la dernière fiche peut porter un « À compléter : … » qui liste les notions laissées de côté. L'élève le voit : à compléter ou à effacer après validation.
+- **Mathématiques** : « Nombres décimaux relatifs » apparaît en 6ème et en 4ème dans la progression du dépôt : les deux leçons se recouvrent peut-être. Le rattachement à la 4ème des « angles alternes-internes et correspondants » et de l'inverse et du quotient de nombres rationnels est incertain.
+- **Physique-Chimie** : la « pénombre » et la classification « transparent, translucide, opaque » sont peut-être acquises avant la 4ème.
+- **SVT** : la fécondation et la cellule-œuf (leçon 2 de 4ème) ne sont pas nommées dans la progression : à confirmer.
+- **Histoire-Géographie** : le rôle du gouverneur de district et des préfets de région et de département, le Poro chez les Sénoufo, la reine Pokou et le passage du Comoé (présentés sans date).
+- **Français** : le périmètre du Débat I et le plan du texte explicatif, à confirmer au programme. La proposition relative est laissée de côté.
+- **EDHC** : la Constitution ivoirienne est citée sans numéro d'article ni date, et les textes de loi ivoiriens (numéros, dates) ne sont pas cités. Les dates des textes internationaux, et le seuil de 15 ans de l'article 38 de la Convention relative aux droits de l'enfant, sont cités de mémoire. Le mot « interdépendance » (5ème), et la règle des 18 ans pour la participation aux combats (5ème), sont à confirmer.
+
 ### 3ème — `lecons-traitees/3eme/`
 
 Les 3 premières leçons de chaque matière de la 3ème (progression DPFC 2026-2027), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md).

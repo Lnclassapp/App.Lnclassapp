@@ -1,0 +1,1271 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Droites et points",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "6ème",
+      "material_name": "Mathématiques",
+      "essentials": [
+        {
+          "name": "Le point et la droite",
+          "subtitle": "Nommer des points et des droites, et dire si un point appartient à une droite",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Nommer un point et une droite avec les notations habituelles.</li><li>Dire si un point appartient ou n'appartient pas à une droite.</li><li>Savoir qu'une seule droite passe par deux points distincts.</li></ul><h2>L'image pour comprendre</h2><p><strong>Les étals de l'allée.</strong> Au marché, les étals de tomates et d'oignons sont installés le long d'une allée. Si tu te places au début de l'allée et que tu regardes droit devant toi, tu vois les étals les uns derrière les autres : ils sont sur une même ligne.</p><p><em>Le pont.</em> Chaque étal est un point, noté par une lettre majuscule (A, B, C). L'allée qui passe par les étals est une droite, notée par une lettre minuscule entre parenthèses, $(d)$, ou par deux de ses points, $(AB)$.</p><p><em>Où l'image s'arrête.</em> Une allée a un début et une fin, alors qu'une droite n'en a pas : elle se prolonge sans fin dans les deux sens.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Point.</strong> Un point se note avec une lettre majuscule : A, B, C. On le marque avec une petite croix.</p><p><strong>Droite.</strong> Une droite est illimitée dans les deux sens. Elle se trace à la règle et se note $(d)$, ou $(AB)$ si elle passe par les points A et B.</p><p><strong>Appartenance.</strong> Le point A appartient à la droite $(d)$ si la droite passe par A : on écrit $A \\in (d)$. Sinon, on écrit $A \\notin (d)$.</p><p><strong>Deux points.</strong> Par deux points distincts A et B, il ne passe qu'une seule droite, notée $(AB)$.</p></blockquote><h2>Exemple résolu</h2><p>On place deux points A et B, puis on trace la droite $(AB)$ à la règle. On place ensuite C sur le tracé et D en dehors. Dire si C et D appartiennent à $(AB)$.</p><ol><li>La droite $(AB)$ passe par A et par B : A et B lui appartiennent.</li><li>C est placé sur le tracé : la droite passe par C, donc $C \\in (AB)$.</li><li>D est en dehors du tracé : la droite ne passe pas par D, donc $D \\notin (AB)$.</li><li>La droite ne s'arrête ni en A ni en B : on peut la prolonger au-delà de ces points.</li></ol><h2>Le piège à éviter</h2><p>Croire qu'une droite a un début et une fin, comme un trait tracé entre deux points. Ou croire qu'un seul point suffit à définir une droite : par un point passent une infinité de droites, alors que par deux points distincts il n'en passe qu'une.</p><p>Comment le repérer : demande-toi si le tracé s'arrête quelque part. Si c'est le cas, ce n'est pas une droite.</p><h2>En une phrase</h2><p>Une droite est une ligne sans bout qui passe par des points ; un point lui appartient s'il est situé exactement sur ce tracé.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Nommer les points et les droites",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Comment se note un point ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un point se note par une lettre majuscule : A, B, C. Les droites se notent avec une minuscule entre parenthèses, comme $(d)$, ou avec deux de leurs points, comme $(AB)$. L'erreur tentante est la lettre minuscule, qui sert aux droites.",
+                  "answers": [
+                    {
+                      "content": "Avec une lettre majuscule, comme A",
+                      "correct": true
+                    },
+                    {
+                      "content": "Avec une lettre minuscule, comme a",
+                      "correct": false
+                    },
+                    {
+                      "content": "Avec deux lettres, comme AB",
+                      "correct": false
+                    },
+                    {
+                      "content": "Avec un nombre, comme 1",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une droite a un point de départ et un point d'arrivée.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Une droite est illimitée : elle se prolonge sans fin dans les deux sens, comme une allée qui ne s'arrêterait jamais. Un trait qui a deux bouts n'est pas une droite.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de droites différentes peut-on tracer qui passent par un seul point A ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par un seul point, on peut tracer une infinité de droites, dans toutes les directions. Par deux points distincts, en revanche, il n'en passe qu'une seule : c'est pour cela qu'on la note $(AB)$.",
+                  "answers": [
+                    {
+                      "content": "Une infinité",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $(d)$ passe par les points A et B. Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "A et B sont sur $(d)$ : la droite passe par eux. Un point placé tout près du tracé reste en dehors, il n'appartient pas à la droite. Une droite ne s'arrête jamais : elle continue au-delà de B.",
+                  "answers": [
+                    {
+                      "content": "$A \\in (d)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$B \\in (d)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "C appartient à $(d)$, car C est placé tout près du tracé.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $(d)$ s'arrête au point B.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point C est placé sur le tracé de la droite $(d)$. Quelle écriture est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "On écrit $C \\in (d)$ : le point est à gauche du symbole $\\in$, et la droite à droite. Écrire $(d) \\in C$ inverse les rôles. Le signe $=$ relie deux objets de même nature, ce qui n'est pas le cas ici.",
+                  "answers": [
+                    {
+                      "content": "$C \\in (d)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d) \\in C$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$C = (d)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$C \\subset (d)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par deux points distincts A et B, on peut tracer une seule droite.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Deux points distincts déterminent une droite unique, notée $(AB)$. Il n'existe qu'un seul tracé droit qui passe par ces deux points.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Placer des points sur une droite",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "La droite $(MN)$ passe par les points M et N. Le point P est placé à quelques centimètres du tracé, en dehors de la droite. Quelle affirmation est vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "M et N sont sur $(MN)$, donc $M \\in (MN)$. P est en dehors du tracé : $P \\notin (MN)$. L'erreur tentante est de croire qu'un point proche de la droite lui appartient.",
+                  "answers": [
+                    {
+                      "content": "$P \\notin (MN)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$P \\in (MN)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M \\notin (MN)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(MN) \\in P$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $(AB)$ et la droite $(BA)$ sont la même droite.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. La droite qui passe par A et par B se note $(AB)$ ou $(BA)$ : c'est la même ligne. L'ordre des lettres ne change pas la droite.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien faut-il au minimum de points distincts pour définir une seule droite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Deux points distincts suffisent : ils déterminent une unique droite. Un seul point n'en détermine pas : une infinité de droites passent par lui.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $(d)$ passe par les points A et C. Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "A et C sont sur $(d)$, puisque la droite passe par eux. Un point situé à 1 cm du tracé est en dehors : il n'appartient pas à $(d)$. Une droite ne se termine jamais, même au point C.",
+                  "answers": [
+                    {
+                      "content": "$A \\in (d)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$C \\in (d)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$D \\in (d)$, car D est à 1 cm de la droite.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $(d)$ se termine au point C.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la différence entre le point A et la droite $(AB)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le point A est une position marquée par une lettre majuscule. La droite $(AB)$ est un tracé illimité qui passe par A et par B. L'erreur tentante est de croire qu'un point et une droite désignent le même objet.",
+                  "answers": [
+                    {
+                      "content": "A est un point, et $(AB)$ est une droite qui passe par A.",
+                      "correct": true
+                    },
+                    {
+                      "content": "A est une droite, et $(AB)$ est un point.",
+                      "correct": false
+                    },
+                    {
+                      "content": "A est une lettre minuscule, et $(AB)$ un nombre.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ce sont deux notations pour le même objet.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Un point se note avec une lettre majuscule, et la droite qui passe par A et B se note $(AB)$. Par deux points distincts, il ne passe qu'une seule droite. Faux : une droite passe par une infinité de points et n'a pas d'extrémité.",
+                  "answers": [
+                    {
+                      "content": "Un point se note avec une lettre majuscule.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite passant par A et B se note $(AB)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une droite ne passe que par un seul point.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Par deux points distincts passe une seule droite.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une droite a deux extrémités.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Points, droites et appartenance",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "La droite $(EF)$ passe par les points E et F. On place G sur la droite et H en dehors. Lequel de ces énoncés est exact ?",
+                  "question_type": "single_choice",
+                  "explanation": "G est posé sur la droite, donc il lui appartient. H est en dehors : il n'appartient pas à $(EF)$. L'erreur tentante est de dire que H appartient à la droite parce qu'il est proche du tracé.",
+                  "answers": [
+                    {
+                      "content": "$G \\in (EF)$ et $H \\notin (EF)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$G \\notin (EF)$ et $H \\in (EF)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$G \\in (EF)$ et $H \\in (EF)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(EF) \\in G$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par le point A passent une infinité de droites ; une seule passe par A et par B.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Par un seul point, on peut tracer une infinité de droites. Dès qu'on impose un second point distinct, il n'en reste qu'une : $(AB)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève écrit : $(AB) \\in C$. Quelle correction faut-il faire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le point se place à gauche du symbole $\\in$ et la droite à droite : on écrit $C \\in (AB)$, après avoir vérifié que C est bien sur le tracé. L'erreur tentante est d'écrire $(AB) = C$, qui relie deux objets de nature différente.",
+                  "answers": [
+                    {
+                      "content": "Écrire $C \\in (AB)$ si C est bien sur la droite.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Écrire $(AB) = C$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Écrire $(AB) \\subset C$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y a rien à corriger.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par le point M, on trace deux droites différentes, $(d_1)$ et $(d_2)$. Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les deux droites passent par M, donc M leur appartient. Elles sont pourtant différentes : par un point passent une infinité de droites. Une droite ne passe pas par tous les points de la feuille.",
+                  "answers": [
+                    {
+                      "content": "M appartient à $(d_1)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "M appartient à $(d_2)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d_1)$ et $(d_2)$ sont la même droite.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(d_1)$ passe par tous les points de la feuille.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations sur la droite $(EF)$ qui passe par E et F, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "E et F sont sur $(EF)$, et $(FE)$ désigne la même droite. Une droite n'a pas de début : elle est illimitée. Un point placé en dehors du tracé n'appartient pas à la droite.",
+                  "answers": [
+                    {
+                      "content": "$E \\in (EF)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$F \\in (FE)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La droite $(EF)$ a un début au point E.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $(EF)$ et la droite $(FE)$ sont la même droite.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un point G placé en dehors de $(EF)$ appartient à $(EF)$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève trace une droite et la nomme $(d)$. Il place ensuite trois points M, N et P sur cette droite. Combien de points appartiennent à $(d)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les trois points M, N et P sont placés sur le tracé de $(d)$ : ils lui appartiennent tous. Le nom de la droite, $(d)$, n'est pas un point et ne compte pas parmi eux.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Points alignés",
+          "subtitle": "Reconnaître des points qui se trouvent sur une même droite",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Dire si trois points sont alignés.</li><li>Vérifier un alignement avec une règle.</li><li>Utiliser le symbole $\\in$ pour un point situé sur une droite.</li></ul><h2>L'image pour comprendre</h2><p><strong>Les bassines du marché.</strong> À l'entrée du marché, une marchande a posé ses bassines de tomates en ligne droite. Un client qui se place au bout de la rangée et regarde le long de la ligne voit toutes les bassines de la rangée : elles sont alignées.</p><p><em>Le pont.</em> Chaque bassine est un point. La ligne le long de laquelle elles sont posées est une droite. Des points alignés sont des points qui se trouvent sur une même droite.</p><p><em>Où l'image s'arrête.</em> L'œil peut se tromper : une rangée paraît droite alors qu'elle ne l'est pas exactement. En géométrie, on vérifie l'alignement avec une règle.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Points alignés.</strong> Des points sont alignés s'ils appartiennent à une même droite.</p><p><strong>Trois points.</strong> Les points A, B et C sont alignés si la droite passant par deux d'entre eux, par exemple $(AB)$, passe aussi par le troisième : $C \\in (AB)$.</p><p><strong>Deux points.</strong> Deux points distincts sont toujours alignés, car une droite passe par eux.</p></blockquote><h2>Exemple résolu</h2><p>On trace la droite $(AB)$. On place C sur ce tracé, puis D en dehors. Les points A, B et C sont-ils alignés ? Et A, B et D ?</p><ol><li>La droite $(AB)$ passe par A et par B.</li><li>C est sur le tracé : $C \\in (AB)$. Donc A, B et C appartiennent à la même droite : ils sont alignés.</li><li>D est en dehors du tracé : $D \\notin (AB)$. Donc A, B et D ne sont pas alignés.</li></ol><h2>Le piège à éviter</h2><p>Croire que trois points sont alignés parce qu'ils semblent l'être à l'œil. Un écart de quelques millimètres suffit à les rendre non alignés. Vérifie avec une règle posée sur deux des points : si elle touche aussi le troisième, les trois sont alignés.</p><p>Comment le repérer : place la règle sur deux points, puis regarde si le troisième est exactement sur le bord de la règle.</p><h2>En une phrase</h2><p>Des points sont alignés quand une règle posée sur deux d'entre eux passe aussi par le troisième.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître des points alignés",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Que signifie « les points A, B et C sont alignés » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Des points alignés se trouvent sur une même droite. L'erreur tentante est de penser à une forme géométrique : l'alignement ne parle que de la position sur une même ligne droite.",
+                  "answers": [
+                    {
+                      "content": "Ils appartiennent tous à une même droite.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ils sont placés en cercle.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils sont tous identiques.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ils forment une figure fermée.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux points distincts sont toujours alignés.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Par deux points distincts passe toujours une droite : ils sont donc sur une même droite. La question de l'alignement se pose vraiment à partir de trois points.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la droite $(AB)$, on place le point C. Lequel de ces énoncés est vrai ?",
+                  "question_type": "single_choice",
+                  "explanation": "C est sur la droite $(AB)$, qui passe par A et par B : les trois points appartiennent à la même droite, donc ils sont alignés. L'erreur tentante est de penser que trois points ne peuvent jamais être alignés.",
+                  "answers": [
+                    {
+                      "content": "A, B et C sont alignés.",
+                      "correct": true
+                    },
+                    {
+                      "content": "A, B et C ne sont pas alignés.",
+                      "correct": false
+                    },
+                    {
+                      "content": "C n'appartient pas à $(AB)$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il faut au moins quatre points pour être alignés.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une droite $(d)$, on place les points P, Q et R. Quelles affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les trois points sont placés sur $(d)$ : ils sont alignés, et R lui appartient. Q appartient aussi à $(d)$, donc l'affirmation sur Q est fausse. Trois points placés sur une même droite ne peuvent pas être non alignés.",
+                  "answers": [
+                    {
+                      "content": "P, Q et R sont alignés.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le point Q n'appartient pas à $(d)$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$R \\in (d)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "P, Q et R ne sont pas alignés.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel symbole signifie « appartient à » ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le symbole $\\in$ se lit « appartient à », et $\\notin$ se lit « n'appartient pas à ». On écrit $A \\in (d)$ pour dire que A est sur la droite. Le symbole $\\subset$ relie deux ensembles, pas un point à une droite.",
+                  "answers": [
+                    {
+                      "content": "$\\in$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\notin$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\subset$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$=$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si les points A, B et C sont alignés, alors C appartient à la droite $(AB)$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Alignés signifie que les trois points sont sur une même droite. Cette droite passe par A et par B : c'est donc $(AB)$, et elle contient C.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Vérifier l'alignement de points",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Les points A, B et C sont sur une même droite $(d)$, qui passe par A et B. Le point D n'est pas sur $(d)$. Lequel de ces énoncés est vrai ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme $(d)$ passe par A et B, les points situés sur $(d)$ sont alignés avec eux. D n'est pas sur $(d)$, donc A, B et D ne sont pas alignés. L'erreur tentante est de croire que D est aligné parce qu'il est proche de la droite.",
+                  "answers": [
+                    {
+                      "content": "A, B et D ne sont pas alignés.",
+                      "correct": true
+                    },
+                    {
+                      "content": "A, B et D sont alignés.",
+                      "correct": false
+                    },
+                    {
+                      "content": "D appartient à $(d)$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "A, B et C ne sont pas alignés.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois points placés sur une même droite restent alignés, même si l'un d'eux est très loin des deux autres.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. La distance ne change rien : l'alignement dépend seulement du fait que les trois points soient sur une même droite, qui se prolonge sans fin.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On trace la droite $(XY)$. Le point Z est placé en dehors de cette droite. Combien de points parmi X, Y et Z appartiennent à $(XY)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "X et Y sont sur la droite qui les relie, $(XY)$. Z est en dehors : il n'appartient pas à $(XY)$. L'erreur tentante est de répondre 3, en oubliant que Z est placé hors du tracé.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La droite $(d)$ passe par A et par C. Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les points de $(d)$ sont alignés avec A et C, puisque $(d)$ passe par A et par C. Un point placé en dehors de $(d)$ n'est pas aligné avec eux. A appartient à $(d)$ car la droite passe par lui.",
+                  "answers": [
+                    {
+                      "content": "A, C et un point P de $(d)$ sont alignés.",
+                      "correct": true
+                    },
+                    {
+                      "content": "A, C et un point Q placé en dehors de $(d)$ sont alignés.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A \\in (d)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le point Q appartient à $(d)$ s'il est placé en dehors.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle affirmation est fausse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Faux : trois points peuvent ne pas être sur une même droite, par exemple si l'un est en dehors de la droite qui passe par les deux autres. Les trois autres affirmations sont vraies.",
+                  "answers": [
+                    {
+                      "content": "Trois points alignés appartiennent à une même droite.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux points distincts sont toujours alignés.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Trois points sont toujours alignés.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si $C \\in (AB)$, alors A, B et C sont alignés.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une feuille, on trace la droite $(d)$ et on place A et B dessus. On place aussi C, E sur $(d)$, puis D en dehors. Parmi ces trios de points, lesquels sont alignés ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "A, B, C et E sont tous sur $(d)$ : tout trio formé avec ces quatre points est aligné. Le point D n'est pas sur $(d)$ : tout trio qui le contient n'est pas aligné. C'est le piège de l'alignement avec un point hors de la droite.",
+                  "answers": [
+                    {
+                      "content": "A, B et C",
+                      "correct": true
+                    },
+                    {
+                      "content": "A, C et E",
+                      "correct": true
+                    },
+                    {
+                      "content": "A, B et D",
+                      "correct": false
+                    },
+                    {
+                      "content": "C, D et E",
+                      "correct": false
+                    },
+                    {
+                      "content": "B, C et E",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Alignement et droites",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Sur une feuille, on trace une droite $(d)$. On place les points A, B et C sur $(d)$, et D en dehors. Combien de trios distincts de points parmi A, B, C et D sont alignés ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il y a quatre trios possibles : ABC, ABD, ACD et BCD. Seul ABC est tout entier sur $(d)$. Chaque trio qui contient D n'est pas aligné, car D est en dehors de $(d)$.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si A et B sont deux points distincts, que A, B et C sont alignés et que A, B et D sont alignés aussi, alors A, B, C et D sont tous alignés.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. A et B définissent une seule droite, $(AB)$. C est sur cette droite, et D aussi, puisque A, B et D sont alignés. Les quatre points sont donc sur $(AB)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève affirme : « Si je place 5 points sur une droite, aucun trio de ces points n'est aligné, car ils sont trop éloignés les uns des autres. » Que faut-il en penser ?",
+                  "question_type": "single_choice",
+                  "explanation": "Si les cinq points sont sur la même droite, n'importe quel trio parmi eux est aligné : l'affirmation est fausse. L'élève confond « aligné » et « serré » : la distance entre les points ne compte pas.",
+                  "answers": [
+                    {
+                      "content": "C'est vrai : il faut être proche pour être aligné.",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux : tous les points étant sur la droite, tous les trios sont alignés.",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est vrai : les points alignés ne peuvent pas former de trios.",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux seulement si les points sont proches.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une feuille, on trace la droite $(XY)$ et on place un point Z en dehors. Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Z n'est pas sur $(XY)$ : X, Y et Z ne sont pas alignés. En revanche, X, Y et T sont sur la même droite. La proximité ne compte pas : même à 1 mm de $(XY)$, Z reste hors de la droite.",
+                  "answers": [
+                    {
+                      "content": "X, Y et Z ne sont pas alignés.",
+                      "correct": true
+                    },
+                    {
+                      "content": "X, Y et un point T placé sur $(XY)$ sont alignés.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Z est aligné avec X et Y.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Z est aligné avec X et Y s'il est à moins de 1 mm de $(XY)$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations sur l'alignement, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Trois points alignés sont tous sur une même droite, et si C est aligné avec A et B, il appartient à $(AB)$. Deux points distincts sont toujours alignés, car une droite passe par eux. Faux : la proximité ne compte pas, et un point hors d'une droite n'est pas aligné avec deux de ses points.",
+                  "answers": [
+                    {
+                      "content": "Trois points alignés sont sur une même droite.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Trois points sont alignés s'ils sont très proches.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si A, B et C sont alignés, C appartient à la droite $(AB)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux points distincts ne sont jamais alignés.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un point placé hors d'une droite est aligné avec deux points de cette droite.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux points distincts sont toujours alignés.",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un marchand range 3 bassines sur une même ligne droite, et une quatrième à côté, hors de la ligne. Combien de bassines se trouvent sur cette ligne droite ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les trois bassines rangées sont sur la même ligne : elles sont alignées. La quatrième, posée à côté, n'est pas sur cette ligne : elle ne compte donc pas.",
+                  "answers": [
+                    {
+                      "content": "3",
+                      "correct": true
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Droites sécantes",
+          "subtitle": "Repérer le point commun de deux droites. À compléter : droites parallèles",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Reconnaître deux droites sécantes.</li><li>Nommer leur point d'intersection.</li><li>Expliquer pourquoi deux droites distinctes ont un seul point commun au plus.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le carrefour du marché.</strong> Au centre du marché, deux allées se croisent. Une vendeuse de bananes est installée exactement à l'endroit où les deux allées se coupent. Chaque allée est une droite ; la vendeuse est au point où elles se croisent.</p><p><em>Le pont.</em> Les deux allées sont les droites $(d_1)$ et $(d_2)$. Le point où elles se coupent est leur point d'intersection : c'est le seul endroit commun aux deux allées.</p><p><em>Où l'image s'arrête.</em> Une allée a une largeur, alors qu'une droite est un trait fin sans épaisseur. Et deux droites distinctes ne se coupent jamais en deux points, sinon elles seraient la même droite.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Droites sécantes.</strong> Deux droites distinctes sont sécantes si elles ont un point commun. Ce point s'appelle le point d'intersection.</p><p><strong>Un seul point commun.</strong> Deux droites distinctes ont au plus un point commun : si elles en avaient deux, elles passeraient par deux points distincts, donc elles seraient la même droite.</p><p><strong>Repérer le point d'intersection.</strong> C'est le point où les deux tracés se croisent. Il appartient aux deux droites.</p></blockquote><h2>Exemple résolu</h2><p>On trace $(d_1)$ qui passe par A et B, et $(d_2)$ qui passe par C et D. Les deux tracés se croisent en un point O. Trouver le point commun, puis vérifier qu'il est unique.</p><ol><li>O est sur le tracé de $(d_1)$ et sur celui de $(d_2)$ : $O \\in (d_1)$ et $O \\in (d_2)$. C'est donc le point d'intersection.</li><li>Peut-il y avoir un second point commun P ? Non : si P était commun, $(d_1)$ et $(d_2)$ passeraient toutes deux par O et par P.</li><li>Or deux points distincts ne déterminent qu'une seule droite : les deux droites seraient donc la même. Elles étant distinctes, O est l'unique point commun.</li></ol><h2>Le piège à éviter</h2><p>Dire que deux droites distinctes peuvent se couper en deux points. C'est faux : deux points distincts déterminent une seule droite, donc les deux droites seraient confondues. Autre erreur : croire qu'un point situé juste à côté d'un tracé appartient à l'autre droite.</p><p>Comment le repérer : pour chaque point commun trouvé, demande-toi s'il est bien sur les deux tracés. Si tu trouves un second point commun, les droites ne sont pas distinctes.</p><h2>En une phrase</h2><p>Deux droites distinctes qui se croisent ont un seul point commun, leur point d'intersection.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître deux droites sécantes",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Comment s'appelle le point commun à deux droites sécantes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le point commun à deux droites sécantes est leur point d'intersection. Les mots de départ, d'arrivée ou d'origine ne désignent rien ici : une droite n'a ni début ni fin.",
+                  "answers": [
+                    {
+                      "content": "Le point d'intersection",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le point d'arrivée",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le point de départ",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le point d'origine",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites distinctes peuvent avoir deux points communs.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Si deux droites avaient deux points communs, elles passeraient par ces deux points distincts. Or il n'existe qu'une seule droite passant par deux points distincts : elles seraient donc confondues.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites $(d_1)$ et $(d_2)$ se croisent au point O. Lequel de ces énoncés est vrai ?",
+                  "question_type": "single_choice",
+                  "explanation": "O est le point d'intersection : il appartient aux deux droites. L'erreur tentante est de croire qu'il n'appartient qu'à l'une des deux, en oubliant que le point est commun.",
+                  "answers": [
+                    {
+                      "content": "$O \\in (d_1)$ et $O \\in (d_2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$O \\in (d_1)$ seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "$O \\notin (d_1)$ et $O \\in (d_2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(d_1) \\in O$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites distinctes $(d)$ et $(e)$ ont un point commun A. Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "A appartient aux deux droites : elles sont sécantes en A. Erreurs tentantes : dire qu'elles ont deux points communs, ce qui est impossible pour des droites distinctes, ou dire qu'elles sont confondues, alors qu'elles sont distinctes.",
+                  "answers": [
+                    {
+                      "content": "A appartient à $(d)$ et à $(e)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d)$ et $(e)$ sont sécantes en A.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d)$ et $(e)$ ont deux points communs.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(d)$ et $(e)$ sont confondues.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle situation décrit deux droites sécantes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Deux allées qui se croisent à un carrefour sont sécantes : elles ont exactement un point commun. Une même allée tracée deux fois ne fait pas deux droites distinctes, et une allée qui s'arrête n'est pas une droite.",
+                  "answers": [
+                    {
+                      "content": "Deux allées du marché qui se croisent à un carrefour",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une même allée tracée deux fois",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux allées qui se confondent sur toute leur longueur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une allée qui s'arrête à un mur",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point d'intersection de deux droites sécantes appartient aux deux droites.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. C'est la définition même : le point d'intersection est le point commun, donc il est sur chacune des deux droites.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Trouver le point d'intersection",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Les droites $(d_1)$ et $(d_2)$ sont sécantes en O. Le point P est sur $(d_1)$, mais pas sur $(d_2)$. Quel est le point commun aux deux droites ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le point commun doit appartenir aux deux droites. P n'est que sur $(d_1)$ : ce n'est pas un point commun. Seul O est sur les deux tracés.",
+                  "answers": [
+                    {
+                      "content": "O",
+                      "correct": true
+                    },
+                    {
+                      "content": "P",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'y en a pas.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y en a deux : O et P.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites sécantes ont exactement un point commun.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Deux droites sécantes se coupent en un point, et un seul : deux points communs les rendraient confondues.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux droites distinctes ont un point commun A. Combien de points communs ont-elles en tout ?",
+                  "question_type": "single_choice",
+                  "explanation": "Elles n'en ont qu'un : A. S'il y en avait un second, les deux droites passeraient par deux points distincts, donc elles seraient la même droite, ce qui contredit l'hypothèse.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une infinité",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les droites $(d_1)$ et $(d_2)$ se coupent en O. Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "O est le point d'intersection : il appartient aux deux droites. Deux droites qui se coupent ont un seul point commun : elles ne sont ni confondues, ni sans point commun.",
+                  "answers": [
+                    {
+                      "content": "$O \\in (d_1)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$O \\in (d_2)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d_1)$ et $(d_2)$ ont deux points communs.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(d_1)$ et $(d_2)$ sont confondues.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(d_1)$ et $(d_2)$ n'ont aucun point commun.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle affirmation est fausse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Faux : un point d'intersection est unique. Les trois autres affirmations sont vraies : elles découlent de la définition des droites sécantes et de l'unicité du point commun.",
+                  "answers": [
+                    {
+                      "content": "Deux droites sécantes ont un point d'intersection.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux droites distinctes ont au plus un point commun.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le point d'intersection appartient aux deux droites.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux droites sécantes ont deux points d'intersection.",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur une feuille, on trace les droites $(d_1)$, $(d_2)$ et $(d_3)$. $(d_1)$ et $(d_2)$ se coupent en O. $(d_3)$ est distincte de $(d_1)$ et de $(d_2)$, et elle passe aussi par O. Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "O est sur $(d_1)$ et sur $(d_2)$, et $(d_3)$ passe aussi par O : O est commun aux trois droites. Faux : deux droites distinctes ne partagent jamais deux points, et les trois droites n'ont en commun que O.",
+                  "answers": [
+                    {
+                      "content": "O est un point commun aux trois droites.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(d_1)$ et $(d_3)$ ont pour point commun O.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les trois droites ont deux points communs.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(d_2)$ et $(d_3)$ ont toujours deux points communs.",
+                      "correct": false
+                    },
+                    {
+                      "content": "O appartient à $(d_2)$.",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Droites sécantes et point d'intersection",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Deux droites distinctes ont un point commun O. Un élève affirme qu'un autre point P est aussi commun. Que faut-il en penser ?",
+                  "question_type": "single_choice",
+                  "explanation": "O et P sont deux points distincts : ils déterminent une seule droite. Si P était commun, $(d_1)$ et $(d_2)$ seraient toutes deux la droite $(OP)$, donc confondues, ce qui contredit l'hypothèse.",
+                  "answers": [
+                    {
+                      "content": "C'est impossible : deux points distincts déterminent une seule droite, donc les droites seraient confondues.",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est possible : deux droites peuvent se rencontrer en plusieurs points.",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est vrai seulement si P est très proche de O.",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est vrai si les droites sont très longues.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois droites distinctes peuvent passer toutes par un même point O.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Par un même point passent une infinité de droites : on peut en tracer trois, toutes distinctes, qui se croisent en O. Deux à deux, elles n'ont que ce point commun.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre droites distinctes passent toutes par un même point O. Pour deux de ces droites choisies au hasard, combien de points communs ont-elles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Deux droites distinctes ont au plus un point commun. Ici, ce point est O, commun à toutes les droites. Aucun autre point n'est commun à deux d'entre elles.",
+                  "answers": [
+                    {
+                      "content": "1",
+                      "correct": true
+                    },
+                    {
+                      "content": "0",
+                      "correct": false
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Sur la feuille, les droites $(AB)$ et $(CD)$ se coupent en E. Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "E est sur les deux droites : c'est leur point d'intersection, et c'est le seul point commun. Erreurs tentantes : parler d'un point de départ, alors qu'une droite n'a ni début ni fin, ou affirmer qu'il existe un autre point commun, ce qui est impossible.",
+                  "answers": [
+                    {
+                      "content": "E appartient à $(AB)$ et à $(CD)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les droites $(AB)$ et $(CD)$ ont exactement un point commun.",
+                      "correct": true
+                    },
+                    {
+                      "content": "E est le point de départ de $(AB)$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il existe un point commun distinct de E.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Deux droites sécantes se coupent en un seul point. Deux droites distinctes ont au plus un point commun, et le point d'intersection appartient aux deux droites. Faux : deux droites confondues partagent tous leurs points, et un point d'intersection est unique.",
+                  "answers": [
+                    {
+                      "content": "Deux droites sécantes ont exactement un point commun.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux droites distinctes ont au plus un point commun.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux droites distinctes ont toujours deux points communs.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le point d'intersection appartient aux deux droites.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux droites confondues ont un seul point commun.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux droites sécantes ont deux points d'intersection.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève trace $(d_1)$ et $(d_2)$ qui se croisent en O, puis une troisième droite $(d_3)$, distincte des deux premières, qui passe aussi par O. Il dit : « Les trois droites ont trois points communs. » Quelle est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les trois droites passent par O, et c'est leur seul point commun. L'élève a sans doute compté les croisements deux à deux comme des points distincts : chaque paire se coupe pourtant au même point O.",
+                  "answers": [
+                    {
+                      "content": "Les trois droites n'ont en commun que le point O.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il n'y a aucune erreur.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les trois droites sont confondues.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles n'ont aucun point commun.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
