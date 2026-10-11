@@ -9,7 +9,7 @@ module Contenus
   class Valider
     LEVELS = %w[6ème 5ème 4ème 3ème 2nde 1ère Tle].freeze
     FIRST_CYCLE = %w[6ème 5ème 4ème 3ème].freeze
-    MATERIALS = [ "Mathématiques", "Mathématique", "Physique-Chimie", "SVT", "Français", "Histoire-Géographie", "Philosophie", "EDHC" ].freeze
+    MATERIALS = [ "Mathématiques", "Physique-Chimie", "SVT", "Français", "Histoire-Géographie", "Philosophie", "EDHC" ].freeze
     SECTIONS = [ "Ce que tu vas savoir faire", "L'image pour comprendre", "Ce qu'il faut retenir", "Exemple résolu",
                  "Le piège à éviter", "En une phrase" ].freeze
     TAGS = %w[h2 h3 p ul ol li strong em blockquote].freeze
