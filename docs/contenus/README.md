@@ -296,35 +296,15 @@ Les 3 premières leçons de chaque matière des séries A1, A2 et C de Terminale
 - **SVT C** : la contraception hormonale (4e fiche de « Les cycles sexuels chez la femme ») et la méiose, le rendement chiffré de la respiration (36 à 38 ATP par glucose, 30,5 kJ par mole d'ATP et 2 870 kJ par mole de glucose : valeurs écrites par le rédacteur) sont à confirmer.
 - **Physique-Chimie C** : le repère de Frenet et le mouvement rectiligne sinusoïdal (« Cinématique du point »), la fermentation alcoolique, la liaison hydrogène et la distillation (« Les alcools ») ; les noms des produits d'oxydation (aldéhydes, cétones, acides) y sont cités sans nomenclature systématique, réservée à la leçon suivante ; le frottement par une relation `f = k·R_N` donnée dans l'énoncé, sans coefficient de frottement (« Mouvement du centre d'inertie d'un solide »).
 
-### 1ère — `lecons-traitees/1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, `1ere/`
+### 1ère — `lecons-traitees/1ere-a/`, `1ere-c/`, `1ere-d/`, `1ere/`
 
-Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A1, A2, C et D ont des progressions différentes, et Histoire-Géographie est commune à toutes les séries.
+Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A, C et D ont des progressions différentes, et Histoire-Géographie est commune à toutes les séries. Dans le référentiel de Develop, la 1ère n'a que les séries A, C et D : les anciens jeux « 1ère A1 » et « 1ère A2 », au contenu identique, sont fusionnés en « 1ère A ».
 
-#### 1ère A1 (15)
+#### 1ère A (15)
 
 | Fichier | Cours | Rang | Fiches | Exercices | Questions |
 |---|---|---:|---:|---:|---:|
 | `mathematiques/equations-et-inequations.json` | Équations et inéquations | 1 | 4 | 12 | 72 |
-| `mathematiques/denombrement.json` | Dénombrement | 2 | 4 | 12 | 72 |
-| `mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 3 | 4 | 12 | 72 |
-| `physique-chimie/etude-d-un-dipole-passif-cas-d-un-resistor.json` | Étude d'un dipôle passif : cas d'un résistor | 1 | 4 | 12 | 71 |
-| `physique-chimie/les-alcanes.json` | Les alcanes | 2 | 4 | 12 | 72 |
-| `physique-chimie/les-alcenes-cas-de-l-ethylene.json` | Les alcènes : cas de l'éthylène | 3 | 4 | 12 | 72 |
-| `svt/le-reflexe-conditionnel.json` | Le réflexe conditionnel | 1 | 4 | 12 | 64 |
-| `svt/les-effets-des-drogues-sur-le-comportement.json` | Les effets des drogues sur le comportement | 2 | 4 | 12 | 65 |
-| `svt/les-anomalies-chromosomiques.json` | Les anomalies chromosomiques | 3 | 3 | 9 | 54 |
-| `francais/oeuvre-poetique.json` | Œuvre poétique | 1 | 4 | 12 | 64 |
-| `francais/lecture-des-consignes-et-elaboration-de-plan.json` | Lecture des consignes et élaboration de plan | 2 | 3 | 9 | 45 |
-| `francais/le-commentaire-compose.json` | Le commentaire composé | 3 | 4 | 12 | 64 |
-| `philosophie/la-methode-de-lecture-de-texte.json` | La méthode de lecture de texte | 1 | 3 | 9 | 48 |
-| `philosophie/la-redaction-de-l-introduction.json` | La rédaction de l'introduction | 2 | 4 | 12 | 60 |
-| `philosophie/la-redaction-de-la-conclusion.json` | La rédaction de la conclusion | 3 | 3 | 9 | 53 |
-
-#### 1ère A2 (15)
-
-| Fichier | Cours | Rang | Fiches | Exercices | Questions |
-|---|---|---:|---:|---:|---:|
-| `mathematiques/equations-et-inequations-dans.json` | Équations et inéquations dans ℝ | 1 | 4 | 12 | 72 |
 | `mathematiques/denombrement.json` | Dénombrement | 2 | 4 | 12 | 72 |
 | `mathematiques/generalites-sur-les-fonctions.json` | Généralités sur les fonctions | 3 | 4 | 12 | 72 |
 | `physique-chimie/etude-d-un-dipole-passif-cas-d-un-resistor.json` | Étude d'un dipôle passif : cas d'un résistor | 1 | 4 | 12 | 71 |
@@ -388,27 +368,27 @@ Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-
 | `histoire-geographie/geographie-dynamisme-demographique-et-qualite-de-la-vie-en-cote-d-ivoire.json` | Géographie — Dynamisme démographique et qualité de la vie en Côte d'Ivoire | 2 | 3 | 9 | 51 |
 | `histoire-geographie/histoire-les-revolutions-industrielles.json` | Histoire — Les révolutions industrielles | 3 | 3 | 9 | 54 |
 
-**63 cours, 233 fiches, 699 exercices, 3946 questions, 14863 propositions.** Tous passent `script/contenus/valider.rb`, et `ctrlchars.rb` ne signale aucun caractère de contrôle. Importés en deux envois sur une base jetable par la vraie chaîne d'import : **63 cours créés, aucun ignoré, aucun refusé**.
+**48 cours, 177 fiches, 531 exercices, 2998 questions, 11289 propositions.** Tous passent `script/contenus/valider.rb`, et `ctrlchars.rb` ne signale aucun caractère de contrôle. Les 63 cours de la version précédente (1ère A1 et A2 séparées) avaient été importés en deux envois sur une base jetable, sans refus ; **le lot actuel de 48 cours n'a pas été réimporté**.
 
 **Ce qui a été repris, ce qui a été rédigé.**
 
-- **Rédigées pour leur série** (32) : Maths A1, C et D ; Physique-Chimie A1, C et D ; SVT A1, C et D ; Français A1 ; Philosophie A1 ; Histoire-Géographie. Les niveaux suivent la série : A (littéraire) = compréhension, calculs concrets ; C et D = rigueur, avec les approfondissements marqués « Plus difficile ».
-- **Copiées vers une autre série** (31) : quand la progression d'une autre série porte le même intitulé, la leçon est copiée avec la série et le rang de cette progression. Le nom et le sous-titre sont ceux de la progression d'arrivée : par exemple « Équations et inéquations » (A1) devient « Équations et inéquations dans ℝ » en A2.
-- **Français et Philosophie** : la même leçon sert aux séries A1, A2, C et D. Les rangs peuvent différer d'une série à l'autre, et le sous-titre suit la progression.
+- **Rédigées pour leur série** (32) : Maths A, C et D ; Physique-Chimie A, C et D ; SVT A, C et D ; Français A ; Philosophie A ; Histoire-Géographie. Les niveaux suivent la série : A (littéraire) = compréhension, calculs concrets ; C et D = rigueur, avec les approfondissements marqués « Plus difficile ».
+- **Copiées vers une autre série** (16) : quand la progression d'une autre série porte le même intitulé, la leçon est copiée avec la série et le rang de cette progression. Le nom et le sous-titre sont ceux de la progression d'arrivée. Les 15 copies vers « 1ère A2 » ont été supprimées avec la fusion en A : elles étaient identiques à celles de A1.
+- **Français et Philosophie** : la même leçon sert aux séries A, C et D. Les rangs peuvent différer d'une série à l'autre, et le sous-titre suit la progression.
 - **Histoire-Géographie** : sans `series_name`, comme la progression commune. Le validateur accepte cette absence pour cette seule matière à partir de la 2nde.
 
 **Attention à l'import.**
 
 - La série fait partie de la clé de doublon (nom, niveau, matière, série). Un cours sans série n'est donc pas un doublon d'un cours de série.
 - Un cours déjà présent est ignoré, jamais mis à jour. Si une progression de 1ère a déjà été importée, le cours de la leçon existe vide : le **renommer, l'archiver**, puis importer le cours complet.
-- Un import accepte jusqu'à 50 fichiers : ce lot en compte 63, à importer en deux envois.
+- Un import accepte jusqu'à 50 fichiers : ce lot en compte 48, à importer en un seul envoi.
 
 À faire valider par un enseignant (le programme détaillé n'était pas disponible) :
 
 - **Toutes les leçons** : le champ `subtitle` de la dernière fiche porte parfois un « À compléter : … » qui liste ce que le rédacteur a laissé de côté. L'élève le voit. À compléter ou à effacer après validation.
 - **Maths** : le rattachement de la valeur absolue, des équations avec |x| et des équations bicarrées au programme de chaque série.
 - **Physique-Chimie** : le repère de Frenet, le mouvement rectiligne sinusoïdal (C), le code des couleurs et la résistivité (A1), la formule générale de combustion avec coefficients fractionnaires (D).
-- **SVT** : la régulation hormonale et le cycle sexuel (gonades, C et D), la méiose et la gamétogenèse (C et D), les effets des drogues et les anomalies chromosomiques (A1 et A2).
+- **SVT** : la régulation hormonale et le cycle sexuel (gonades, C et D), la méiose et la gamétogenèse (C et D), les effets des drogues et les anomalies chromosomiques (A).
 - **Français et Philosophie** : la règle du e muet, les formes fixes (sonnet, ballade), le nombre de parties d'une dissertation, les connecteurs et la réfutation.
 - **Histoire-Géographie** : l'IDH et le taux de scolarisation (à citer avec une source), la date de la seconde révolution industrielle (« vers 1850 », « vers 1870 »), les lois sur le travail des enfants.
 

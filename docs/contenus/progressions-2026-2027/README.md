@@ -10,7 +10,7 @@ Chaque fichier est un import **`lnclass.course-tree` v1** (écran Imports → «
 - Exclus : régulations, évaluations, remédiations, révisions, mises à niveau, devoirs de niveau, prises de contact, congés.
 - Intitulé fidèle au document, sans « Leçon n : » ni volume horaire ; une leçon répétée n'est gardée qu'une fois.
 - `subtitle` : « Leçon N — progression DPFC 2026-2027 », N étant le rang dans l'année.
-- Série : celle du document. Un « A » en 1ère ou Tle devient deux cours, en **A1** et en **A2** (le référentiel découpe la série A). Progression commune à toutes les séries : pas de `series_name`.
+- Série : celle du document. Un « A » en Tle devient deux cours, en **A1** et en **A2** (le référentiel découpe la série A en Terminale) ; en 1ère, la série reste **A**. Progression commune à toutes les séries : pas de `series_name`.
 - Apostrophes uniformisées en `'`.
 
 ## Fichiers
@@ -18,18 +18,18 @@ Chaque fichier est un import **`lnclass.course-tree` v1** (écran Imports → «
 | Fichier | Cours | Matière reconnue par le référentiel de développement |
 |---|---:|---|
 | `progressions-2026-2027-allemand.json` | 30 | **non** : créer la matière avant l'import |
-| `progressions-2026-2027-anglais.json` | 126 | oui |
+| `progressions-2026-2027-anglais.json` | 116 | oui |
 | `progressions-2026-2027-arts-plastiques.json` | 63 | **non** : créer la matière avant l'import |
 | `progressions-2026-2027-edhc.json` | 40 | **non** : créer la matière avant l'import |
 | `progressions-2026-2027-education-musicale.json` | 70 | **non** : créer la matière avant l'import |
 | `progressions-2026-2027-eps.json` | 39 | **non** : créer la matière avant l'import |
 | `progressions-2026-2027-espagnol.json` | 32 | **non** : créer la matière avant l'import |
-| `progressions-2026-2027-francais.json` | 126 | oui |
+| `progressions-2026-2027-francais.json` | 116 | oui |
 | `progressions-2026-2027-histoire-geographie.json` | 70 | oui |
-| `progressions-2026-2027-mathematiques.json` | 127 | oui |
-| `progressions-2026-2027-philosophie.json` | 87 | oui ; la série **E** (17 cours) n'existe pas dans le référentiel |
-| `progressions-2026-2027-physique-chimie.json` | 120 | oui |
-| `progressions-2026-2027-svt.json` | 126 | oui |
+| `progressions-2026-2027-mathematiques.json` | 120 | oui |
+| `progressions-2026-2027-philosophie.json` | 79 | oui ; la série **E** (17 cours) n'existe pas dans le référentiel |
+| `progressions-2026-2027-physique-chimie.json` | 110 | oui |
+| `progressions-2026-2027-svt.json` | 117 | oui |
 
 ## Couverture (série : nombre de leçons ; « toutes » = progression commune ; — = niveau absent du document)
 
@@ -44,8 +44,8 @@ Chaque fichier est un import **`lnclass.course-tree` v1** (écran Imports → «
 | Espagnol | — | — | toutes : 7 | toutes : 7 | toutes : 6 | toutes : 6 | toutes : 6 |
 | Français | toutes : 10 | toutes : 10 | toutes : 10 | toutes : 10 | A : 10<br>C : 10 | A : 10<br>C : 10<br>D : 10 | A : 7<br>C : 6<br>D : 6 |
 | Histoire-Géographie | toutes : 10 | toutes : 10 | toutes : 10 | toutes : 10 | toutes : 10 | toutes : 10 | toutes : 10 |
-| Mathématiques | toutes : 10 | toutes : 10 | toutes : 10 | toutes : 10 | A : 8<br>C : 10 | A1 : 7<br>A2 : 7<br>C : 10<br>D : 10 | A1 : 8<br>A2 : 7<br>C : 10<br>D : 10 |
-| Philosophie | — | — | — | — | — | A1 : 8<br>A2 : 8<br>C : 8<br>D : 8<br>E : 8 | A1 : 10<br>A2 : 10<br>C : 9<br>D : 9<br>E : 9 |
+| Mathématiques | toutes : 10 | toutes : 10 | toutes : 10 | toutes : 10 | A : 8<br>C : 10 | A : 7<br>C : 10<br>D : 10 | A1 : 8<br>A2 : 7<br>C : 10<br>D : 10 |
+| Philosophie | — | — | — | — | — | A : 8<br>C : 8<br>D : 8<br>E : 8 | A1 : 10<br>A2 : 10<br>C : 9<br>D : 9<br>E : 9 |
 | Physique-Chimie | toutes : 10 | toutes : 10 | toutes : 10 | toutes : 10 | A : 10<br>C : 10 | A : 10<br>C : 10<br>D : 10 | C : 10<br>D : 10 |
 | SVT | toutes : 8 | toutes : 8 | toutes : 9 | toutes : 10 | A : 9<br>C : 10 | A : 9<br>C : 10<br>D : 10 | A : 7<br>C : 10<br>D : 10 |
 

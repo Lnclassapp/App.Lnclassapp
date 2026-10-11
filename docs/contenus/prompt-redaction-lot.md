@@ -90,7 +90,7 @@ Selon le champ **Livraison** de l'ENTRÉE :
 ## ENTRÉE (à remplir à chaque appel)
 
 - **Niveau** : <`6ème`, `5ème`, `4ème`, `3ème`, `2nde`, `1ère` ou `Tle`>
-- **Série** : <`A`, `C` en 2nde ; `A1`, `A2`, `C`, `D` en 1ère et Tle ; vide au 1er cycle>
+- **Série** : <`A`, `C` en 2nde ; `A`, `C`, `D` en 1ère ; `A1`, `A2`, `C`, `D` en Tle ; vide au 1er cycle>
 - **Leçons par matière** (facultatif) : <3 par défaut : les rangs 1 à 3 de la progression>
 - **Matières** (facultatif) : <vide = toutes celles du niveau ; sinon une liste, ex. « Mathématiques, SVT »>
 - **Relecture** (facultatif) : <`oui` par défaut, `non` pour s'en passer>
