@@ -1,0 +1,991 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Association de piles en série",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "5ème",
+      "material_name": "Physique-Chimie",
+      "essentials": [
+        {
+          "name": "Des piles bout à bout : les tensions s'ajoutent",
+          "subtitle": "Savoir monter des piles en série et calculer la tension totale de piles identiques",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Monter des piles en série : la borne + de l'une est reliée à la borne − de la suivante.</li><li>Calculer la tension totale de piles identiques montées en série.</li></ul><h2>L'image pour comprendre</h2><p><strong>Les caisses de la fête.</strong> À la fête du village, l'animateur veut voir la scène par-dessus la foule. Il pose une caisse de bois sur le sol, puis une deuxième dessus, puis une troisième. Chaque caisse ajoute sa hauteur : trois caisses de 50 cm font 1,5 m.</p><p><strong>Le pont.</strong> Les caisses sont les piles, et leur hauteur est la tension de chaque pile. Les mettre les unes sur les autres, c'est les mettre bout à bout : leurs tensions s'ajoutent.</p><p><strong>La limite de l'image.</strong> La hauteur d'une caisse ne dit rien de la durée d'une pile. Retiens seulement l'addition : des piles bout à bout, dans le même sens, ajoutent leurs tensions.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Montage en série de piles</strong> : les piles sont bout à bout, la borne + de l'une étant reliée à la borne − de la suivante.</p><p><strong>Règle</strong> : pour $n$ piles identiques, de tension $U_{\\text{pile}}$ chacune, la tension totale vaut $U_{\\text{total}} = n \\times U_{\\text{pile}}$.</p></blockquote><h2>Exemple résolu</h2><p>Deux piles de 1,5 V sont montées en série dans le même sens. Quelle est la tension totale ?</p><ol><li>Les piles sont bout à bout et dans le même sens : leurs tensions s'ajoutent, on additionne donc.</li><li>$U_{\\text{total}} = 1{,}5 + 1{,}5 = 3$ V, soit $2 \\times 1{,}5 = 3$ V.</li><li>Conclusion : la tension totale est de 3 V.</li></ol><h2>Le piège à éviter</h2><p>Croire que trois piles en série donnent 1,5 V, parce que « c'est toujours la même pile ». Chaque pile apporte sa tension : 3 × 1,5 = 4,5 V. Ne confonds pas non plus avec les lampes en série, où la tension se partage.</p><h2>En une phrase</h2><p>Des piles identiques, bout à bout dans le même sens, ajoutent leurs tensions.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître un montage en série de piles",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Comment monter deux piles en série ?",
+                  "question_type": "single_choice",
+                  "explanation": "Monter en série, c'est mettre les piles bout à bout : la borne + de l'une touche la borne − de l'autre. Relier deux bornes + entre elles ne donne pas une série, et les tensions ne s'ajoutent pas.",
+                  "answers": [
+                    {
+                      "content": "La borne + de l'une est reliée à la borne − de l'autre.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux bornes + sont reliées entre elles.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux piles sont posées côte à côte, sans fil.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux piles de 1,5 V montées en série donnent une tension totale de 1,5 V.",
+                  "question_type": "true_false",
+                  "explanation": "Faux : les tensions s'ajoutent. Deux piles de 1,5 V en série donnent 1,5 + 1,5 = 3 V.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois piles identiques de 1,5 V sont montées en série dans le même sens. Quelle est la tension totale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Trois piles de 1,5 V : 3 × 1,5 = 4,5 V. Le 3 V correspond à deux piles seulement, et 1,5 V à une seule pile.",
+                  "answers": [
+                    {
+                      "content": "4,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "1,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sur des piles montées en série sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "En série, les piles sont bout à bout et leurs tensions s'ajoutent. Dire que la tension ne change pas, ou que côte à côte c'est une série, sont les deux erreurs les plus fréquentes.",
+                  "answers": [
+                    {
+                      "content": "Les tensions des piles s'ajoutent.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les piles sont placées bout à bout.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension totale reste celle d'une seule pile.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il suffit de poser les piles côte à côte pour les mettre en série.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre piles identiques de 1,5 V sont montées en série dans le même sens. Quelle est la tension totale ?",
+                  "question_type": "single_choice",
+                  "explanation": "4 × 1,5 = 6 V. Le nombre 4 vient du nombre de piles, le 1,5 de la tension d'une pile : il faut multiplier les deux, sans en garder un seul.",
+                  "answers": [
+                    {
+                      "content": "6 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "4 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "1,5 V",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer une tension totale",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Deux piles de 4,5 V sont montées en série dans le même sens. Quelle est la tension totale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les tensions s'ajoutent : 4,5 + 4,5 = 9 V. Diviser 4,5 par 2 (2,25 V) confond la série avec un partage de tension, qui concerne les récepteurs et non les piles.",
+                  "answers": [
+                    {
+                      "content": "9 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "4,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "2,25 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe est notée 3 V. Deux piles de 1,5 V montées en série dans le même sens peuvent l'alimenter avec sa tension nominale.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : 1,5 + 1,5 = 3 V, soit exactement la tension nominale de la lampe. Les piles fournissent la tension, la lampe la reçoit.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois piles de 1,5 V sont montées en série dans le même sens. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Trois piles de 1,5 V donnent 4,5 V : un récepteur noté 4,5 V est alors bien alimenté. Une lampe notée 1,5 V recevrait trois fois sa tension nominale et risquerait de griller. Des piles identiques ne réduisent pas la tension totale.",
+                  "answers": [
+                    {
+                      "content": "La tension totale est de 4,5 V.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Ce montage peut alimenter un récepteur noté 4,5 V.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension totale est de 3 V.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ce montage peut alimenter sans problème une lampe notée 1,5 V.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La tension totale est de 1,5 V, car les piles sont identiques.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe est notée 6 V. On dispose de piles de 1,5 V. Combien de piles faut-il monter en série, dans le même sens, pour obtenir 6 V ?",
+                  "question_type": "single_choice",
+                  "explanation": "4 × 1,5 = 6 V. Trois piles donneraient 4,5 V, six piles 9 V : ni l'une ni l'autre ne correspond à la tension nominale. Il faut calculer le nombre de piles, sans le deviner.",
+                  "answers": [
+                    {
+                      "content": "4 piles",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 piles",
+                      "correct": false
+                    },
+                    {
+                      "content": "6 piles",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans une série de piles identiques dans le même sens, la tension totale augmente à chaque pile ajoutée.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : chaque pile ajoute sa tension. La tension totale est donc égale au nombre de piles multiplié par la tension d'une pile.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Calculer et vérifier",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Cinq piles de 1,5 V sont montées en série dans le même sens. Quelle est leur tension totale ?",
+                  "question_type": "single_choice",
+                  "explanation": "5 × 1,5 = 7,5 V. Une erreur fréquente consiste à compter les piles sans multiplier par leur tension : 5 V serait le résultat de cette erreur.",
+                  "answers": [
+                    {
+                      "content": "7,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "1,5 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquelles de ces associations donnent une tension totale de 6 V ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "4 × 1,5 = 6 ; 2 × 3 = 6 ; 3 × 2 = 6. Trois piles de 1,5 V donnent 4,5 V, deux piles de 4,5 V donnent 9 V, six piles de 1,5 V donnent 9 V : ce sont des erreurs de calcul fréquentes. Vérifie toujours le produit.",
+                  "answers": [
+                    {
+                      "content": "Quatre piles de 1,5 V montées en série dans le même sens.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux piles de 3 V montées en série dans le même sens.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Trois piles de 2 V montées en série dans le même sens.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Trois piles de 1,5 V montées en série dans le même sens.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux piles de 4,5 V montées en série dans le même sens.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Six piles de 1,5 V montées en série dans le même sens.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Six piles de 1,5 V montées en série dans le même sens fournissent une tension totale de 9 V.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : 6 × 1,5 = 9 V. Les six piles sont dans le même sens, bout à bout : leurs tensions s'ajoutent.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève dit : « J'ai trois piles de 1,5 V, donc je peux les mettre en série pour obtenir 4,5 V. » Que faut-il lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Trois piles de 1,5 V montées bout à bout dans le même sens donnent 4,5 V. Dire qu'il faut cinq piles confond le nombre de piles avec la tension. Les tensions des trois piles s'ajoutent bien.",
+                  "answers": [
+                    {
+                      "content": "Il a raison : 3 × 1,5 = 4,5 V, si les piles sont dans le même sens.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a tort : trois piles font toujours 1,5 V.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a tort : il faudrait cinq piles pour obtenir 4,5 V.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux piles de 1,5 V sont montées en série dans le même sens et donnent 3 V. On ajoute une troisième pile identique, dans le même sens. Quelle est la tension totale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Chaque pile ajoute sa tension : 3 V + 1,5 V = 4,5 V. Obtenir 6 V reviendrait à compter 3 V pour la troisième pile, alors qu'elle vaut 1,5 V.",
+                  "answers": [
+                    {
+                      "content": "4,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "6 V",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le sens des piles compte",
+          "subtitle": "Calculer la tension totale quand une pile est montée à l'envers",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Reconnaître des piles montées dans le même sens et des piles montées en sens contraire.</li><li>Calculer la tension totale quand une pile est retournée.</li></ul><h2>L'image pour comprendre</h2><p><strong>La file de danse.</strong> À la fête du village, les danseurs se tiennent par la main en une longue file. Quand tous avancent dans le même sens, chacun ajoute son pas : la file avance vite. Si l'un fait demi-tour et tire en arrière, il retient la file et la fait reculer d'autant.</p><p><strong>Le pont.</strong> Chaque pile est un danseur. Montées dans le même sens, les piles ajoutent leurs tensions. Une pile retournée est un danseur qui tire en arrière : sa tension se <strong>retranche</strong> de celle des autres.</p><p><strong>La limite de l'image.</strong> Les pas ne sont pas des volts : la file montre le sens de l'addition, pas la valeur des tensions. Pour les valeurs, fais toujours le calcul.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Piles dans le même sens</strong> (bout à bout) : les tensions s'ajoutent.</p><p><strong>Pile retournée</strong> : sa tension se retranche de la somme des autres.</p><p><strong>Deux piles identiques opposées</strong> : leurs tensions s'annulent, la tension totale est nulle.</p></blockquote><h2>Exemple résolu</h2><p>Trois piles de 1,5 V sont montées en série. Deux sont dans le même sens, la troisième est retournée. Quelle est la tension totale ?</p><ol><li>Les deux piles dans le même sens donnent $1{,}5 + 1{,}5 = 3$ V : leurs tensions s'ajoutent.</li><li>La pile retournée retranche sa tension : $3 - 1{,}5 = 1{,}5$ V.</li><li>Conclusion : la tension totale est de 1,5 V.</li></ol><h2>Le piège à éviter</h2><p>Oublier de regarder le sens des piles. Trois piles identiques donnent 4,5 V seulement si toutes sont dans le même sens : une seule pile retournée change tout. Demande-toi toujours : <em>chaque pile est-elle dans le même sens que les autres ?</em></p><h2>En une phrase</h2><p>Pour additionner des piles en série, elles doivent toutes être dans le même sens : une pile retournée retranche sa tension.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Repérer le sens des piles",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Deux piles identiques sont en série. Pour que leurs tensions s'ajoutent, comment doivent-elles être placées ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour que les tensions s'ajoutent, les piles doivent être dans le même sens, bout à bout. Une pile à l'envers change le résultat : le sens compte autant que le nombre de piles.",
+                  "answers": [
+                    {
+                      "content": "Dans le même sens, bout à bout.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans le sens contraire, l'une à l'envers de l'autre.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Peu importe le sens, la tension totale est toujours la même.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pile montée à l'envers dans une série ajoute sa tension aux autres.",
+                  "question_type": "true_false",
+                  "explanation": "Faux : une pile retournée retranche sa tension de celle des autres. Elle fait baisser la tension totale au lieu de l'augmenter.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux piles de 1,5 V sont montées en série, mais l'une est retournée. Quelle est la tension totale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux piles identiques, montées en sens contraires, se retranchent : 1,5 − 1,5 = 0 V. La pile retournée ne disparaît pas : elle retranche sa tension.",
+                  "answers": [
+                    {
+                      "content": "0 V : les deux tensions s'annulent.",
+                      "correct": true
+                    },
+                    {
+                      "content": "3 V : les tensions s'ajoutent toujours.",
+                      "correct": false
+                    },
+                    {
+                      "content": "1,5 V : la pile retournée ne compte pas.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois piles de 1,5 V sont montées en série. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Trois piles dans le même sens : 4,5 V. Une pile retournée retranche 1,5 V : 1,5 + 1,5 − 1,5 = 1,5 V. Les tensions s'ajoutent ou se retranchent, elles ne se multiplient pas.",
+                  "answers": [
+                    {
+                      "content": "Si les trois sont dans le même sens, la tension totale est de 4,5 V.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si l'une est retournée, la tension totale est de 1,5 V.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si l'une est retournée, la tension totale est de 4,5 V.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les tensions se multiplient quand les piles sont en série.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre piles de 1,5 V sont en série. Trois sont dans le même sens et une est retournée. Quelle est la tension totale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Trois piles dans le même sens donnent 4,5 V ; la pile retournée retranche 1,5 V : 4,5 − 1,5 = 3 V. Compter 6 V revient à ignorer le sens de la quatrième pile.",
+                  "answers": [
+                    {
+                      "content": "3 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "6 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "4,5 V",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer avec un sens inversé",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Deux piles de 3 V, montées dans le même sens, donnent 6 V.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : les deux tensions s'ajoutent, 3 + 3 = 6 V. Les piles sont bout à bout, dans le même sens.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux piles de 4,5 V sont en série et l'une est retournée. Quelle est la tension totale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux piles identiques et opposées se retranchent : 4,5 − 4,5 = 0 V. Compter 9 V revient à oublier le sens de la pile retournée.",
+                  "answers": [
+                    {
+                      "content": "0 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "9 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "4,5 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre piles identiques de 1,5 V sont en série. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Quatre piles dans le même sens : 4 × 1,5 = 6 V. Une seule retournée : trois piles ajoutent 4,5 V, la quatrième retranche 1,5 V, soit 3 V. Le sens change donc la tension totale.",
+                  "answers": [
+                    {
+                      "content": "Dans le même sens, la tension totale est de 6 V.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si une seule est retournée, la tension totale est de 3 V.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si une seule est retournée, la tension totale est de 4,5 V.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Si deux sont retournées, la tension totale est de 6 V.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quel que soit le sens, la tension totale reste de 6 V.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un récepteur est noté 4,5 V. On dispose de trois piles de 1,5 V : deux dans le même sens et une retournée. Le récepteur reçoit-il 4,5 V ?",
+                  "question_type": "single_choice",
+                  "explanation": "Deux piles dans le même sens donnent 3 V, puis la pile retournée retranche 1,5 V : il reste 1,5 V. Le récepteur est alors sous-alimenté et ne fonctionne pas normalement.",
+                  "answers": [
+                    {
+                      "content": "Non : la tension totale est de 1,5 V, soit trop peu.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : les trois piles donnent 4,5 V.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : la pile retournée ne change rien.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe notée 1,5 V est alimentée par une série de trois piles de 1,5 V, dont une est retournée. Elle reçoit donc sa tension nominale.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : 1,5 + 1,5 − 1,5 = 1,5 V, soit la tension nominale de la lampe. Pour calculer une tension totale, il faut tenir compte du sens de chaque pile.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Piles en sens mixtes",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Cinq piles de 1,5 V sont montées en série : deux à l'envers, trois dans le même sens. Quelle est la tension totale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les trois piles dans le même sens donnent 4,5 V. Les deux piles retournées retranchent 3 V : 4,5 − 3 = 1,5 V. Ignorer le sens donnerait 7,5 V, erreur à éviter.",
+                  "answers": [
+                    {
+                      "content": "1,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "7,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "4,5 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un récepteur est noté 3 V. Avec des piles de 1,5 V, lesquelles de ces propositions donnent exactement 3 V ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Deux piles dans le même sens : 3 V. Trois piles dans le même sens moins une retournée : 4,5 − 1,5 = 3 V. Quatre dans le même sens moins deux retournées : 6 − 3 = 3 V. Trois piles dans le même sens donnent 4,5 V, et cinq piles dont une retournée donnent aussi 4,5 V : deux erreurs fréquentes.",
+                  "answers": [
+                    {
+                      "content": "Deux piles dans le même sens.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Quatre piles : trois dans le même sens et une retournée.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Six piles : quatre dans le même sens et deux retournées.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Trois piles dans le même sens.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux piles : une dans le même sens et une retournée.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cinq piles : quatre dans le même sens et une retournée.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux piles de 1,5 V sont montées en série dans le même sens, puis une troisième pile identique est ajoutée à l'envers. Quelle est la tension totale ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux piles dans le même sens donnent 3 V ; la troisième, retournée, retranche 1,5 V : 3 − 1,5 = 1,5 V. L'ajouter sans regarder son sens donnerait 4,5 V.",
+                  "answers": [
+                    {
+                      "content": "1,5 V",
+                      "correct": true
+                    },
+                    {
+                      "content": "4,5 V",
+                      "correct": false
+                    },
+                    {
+                      "content": "3 V",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux piles identiques de 1,5 V doivent donner une tension totale nulle. Quelle solution convient ?",
+                  "question_type": "single_choice",
+                  "explanation": "Deux piles identiques placées à l'envers l'une de l'autre se retranchent : 1,5 − 1,5 = 0 V. Dans le même sens, elles donneraient 3 V, et une seule pile donne 1,5 V.",
+                  "answers": [
+                    {
+                      "content": "Les deux piles montées en série, l'une à l'envers de l'autre.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux piles montées en série dans le même sens.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une seule pile de 1,5 V.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève met deux piles de 1,5 V dans le même sens et une troisième dans le sens contraire : la tension totale est de 3 V.",
+                  "question_type": "true_false",
+                  "explanation": "Faux : la pile retournée retranche 1,5 V. Le total est 3 − 1,5 = 1,5 V, pas 3 V.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre piles de 1,5 V sont en série. Quelle tension totale obtient-on si les quatre sont dans le même sens, puis si l'une d'elles est retournée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Quatre piles dans le même sens : 6 V. Une pile retournée retranche 1,5 V : 6 − 3 = 3 V. Le sens de chaque pile doit être pris en compte, sinon le total est faux.",
+                  "answers": [
+                    {
+                      "content": "6 V, puis 3 V.",
+                      "correct": true
+                    },
+                    {
+                      "content": "6 V, puis 6 V.",
+                      "correct": false
+                    },
+                    {
+                      "content": "4,5 V, puis 1,5 V.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Adapter le nombre de piles au récepteur",
+          "subtitle": "Calculer le nombre de piles en série qui donne la tension nominale du récepteur. À compléter : piles de tensions différentes en série",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Calculer le nombre de piles en série qui donne la tension nominale d'un récepteur.</li><li>Vérifier qu'un nombre de piles convient, en multipliant.</li></ul><h2>L'image pour comprendre</h2><p><strong>Les caisses pour atteindre le manguier.</strong> Kouadio veut cueillir une mangue haut dans le manguier. Il empile des caisses de bois de 50 cm chacune. Il lui faut une hauteur de 1,5 m : il compte combien de caisses il faut, en divisant la hauteur voulue par la hauteur d'une caisse.</p><p><strong>Le pont.</strong> La hauteur voulue est la <strong>tension nominale</strong> du récepteur, la hauteur d'une caisse est la <strong>tension d'une pile</strong>, et le nombre de caisses est le <strong>nombre de piles</strong> en série : $n = U_{\\text{nom}} \\div U_{\\text{pile}}$.</p><p><strong>La limite de l'image.</strong> Kouadio peut se contenter d'une hauteur un peu différente. Un récepteur, lui, a besoin de la tension exacte : une tension qui ne correspond pas peut l'abîmer.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Tension totale</strong> de $n$ piles identiques dans le même sens : $U_{\\text{total}} = n \\times U_{\\text{pile}}$.</p><p><strong>Nombre de piles</strong> : $n = U_{\\text{nom}} \\div U_{\\text{pile}}$. Ce nombre doit être entier ; sinon, aucune série de piles identiques ne donne exactement la tension nominale.</p></blockquote><h2>Exemple résolu</h2><p>Un moteur est noté 4,5 V. On dispose de piles de 1,5 V. Combien de piles faut-il monter en série ?</p><ol><li>Tension nominale du moteur : $U_{\\text{nom}} = 4{,}5$ V.</li><li>Tension d'une pile : $U_{\\text{pile}} = 1{,}5$ V.</li><li>Nombre de piles : $n = 4{,}5 \\div 1{,}5 = 3$.</li><li>Vérification : $3 \\times 1{,}5 = 4{,}5$ V, la tension nominale est bien atteinte.</li><li>Conclusion : on monte trois piles en série, dans le même sens.</li></ol><h2>Le piège à éviter</h2><p>Multiplier au lieu de diviser : 4,5 × 1,5 = 6,75 ne donne pas un nombre de piles. Divise la tension voulue par la tension d'une pile, puis vérifie en multipliant.</p><h2>En une phrase</h2><p>Pour trouver le nombre de piles en série, divise la tension nominale par la tension d'une pile, puis vérifie en multipliant.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Relier nombre de piles et tension",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un récepteur est noté 6 V. On utilise des piles de 1,5 V. Quelle est la règle pour trouver le nombre de piles en série ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour savoir combien de piles il faut, on divise la tension voulue par la tension d'une pile : 6 ÷ 1,5 = 4. La multiplication donne une tension, pas un nombre de piles, et la soustraction ne correspond à aucune règle ici.",
+                  "answers": [
+                    {
+                      "content": "Diviser la tension nominale par la tension d'une pile : 6 ÷ 1,5 = 4.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Multiplier la tension nominale par la tension d'une pile : 6 × 1,5 = 9.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Soustraire la tension d'une pile à la tension nominale : 6 − 1,5 = 4,5.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour obtenir 10,5 V avec des piles de 1,5 V montées en série dans le même sens, il faut 7 piles.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : 10,5 ÷ 1,5 = 7, et 7 × 1,5 = 10,5 V. Multiplier pour vérifier confirme le calcul.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un récepteur est noté 3 V. On dispose de piles de 1,5 V. Combien de piles faut-il en série dans le même sens ?",
+                  "question_type": "single_choice",
+                  "explanation": "3 ÷ 1,5 = 2 : deux piles dans le même sens donnent 2 × 1,5 = 3 V. Une seule pile donnerait 1,5 V, et trois piles 4,5 V.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un récepteur est noté 4,5 V. Quelles affirmations sont exactes avec des piles de 1,5 V montées en série dans le même sens ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "4,5 ÷ 1,5 = 3 : trois piles, et 3 × 1,5 = 4,5 V. Deux piles donnent 3 V seulement, et quatre piles donneraient 6 V : l'arrondi ne donne jamais la bonne tension.",
+                  "answers": [
+                    {
+                      "content": "Il faut trois piles.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Trois piles donnent exactement la tension nominale.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il faut quatre piles, car 4,5 est proche de 4.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux piles suffisent, car 2 × 1,5 = 4,5.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si la division de la tension nominale par la tension d'une pile ne tombe pas sur un nombre entier, on peut quand même obtenir exactement la tension avec ces piles.",
+                  "question_type": "true_false",
+                  "explanation": "Faux : un nombre de piles doit être entier. Si le résultat n'est pas entier, aucune série de piles identiques ne donne exactement la tension nominale ; il faut alors chercher un autre générateur.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer le nombre de piles",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un moteur est noté 9 V. On dispose de piles de 4,5 V. Combien de piles en série faut-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "9 ÷ 4,5 = 2 : deux piles dans le même sens donnent 2 × 4,5 = 9 V. Le nombre de piles n'est pas la tension nominale : 9 ne sert pas à compter les piles.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un ventilateur noté 12 V peut être alimenté par huit piles de 1,5 V montées en série dans le même sens.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : 12 ÷ 1,5 = 8, et 8 × 1,5 = 12 V. La multiplication de vérification confirme le calcul.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On dispose de piles identiques de 2 V. Un récepteur est noté 6 V. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "6 ÷ 2 = 3 : trois piles donnent 3 × 2 = 6 V. Deux piles donnent 4 V, six piles donneraient 12 V, et une pile seule donne 2 V, même si 6 est un multiple de 2.",
+                  "answers": [
+                    {
+                      "content": "Il faut trois piles de 2 V montées en série dans le même sens.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Trois piles de 2 V en série donnent la tension nominale du récepteur.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux piles de 2 V en série donnent la tension nominale.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il faut six piles de 2 V en série.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une seule pile de 2 V suffit, car 6 est un multiple de 2.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe est notée 4,5 V. On dispose de piles de 1,5 V et d'une pile plate de 4,5 V. Quelle solution a le moins de piles ?",
+                  "question_type": "single_choice",
+                  "explanation": "La pile plate de 4,5 V fournit directement la tension nominale, avec une seule pile. Trois piles de 1,5 V donnent aussi 4,5 V, mais il en faut trois. Deux piles de 1,5 V donnent 3 V seulement.",
+                  "answers": [
+                    {
+                      "content": "Une pile plate de 4,5 V seule.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Trois piles de 1,5 V montées en série dans le même sens.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux piles de 1,5 V montées en série dans le même sens.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour alimenter une lampe notée 1,5 V avec des piles de 1,5 V, il faut mettre deux piles en série.",
+                  "question_type": "true_false",
+                  "explanation": "Faux : une seule pile de 1,5 V fournit déjà la tension nominale. Deux piles en série donneraient 3 V, le double : la lampe risquerait d'être abîmée.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Choisir et vérifier",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un récepteur est noté 7,5 V. On dispose de piles de 1,5 V. Quel est le nombre de piles en série, et comment le vérifier ?",
+                  "question_type": "single_choice",
+                  "explanation": "7,5 ÷ 1,5 = 5, et 5 × 1,5 = 7,5 V : la vérification confirme le calcul. Arrondir à 6 ou 7 piles ne donne jamais la tension nominale exacte.",
+                  "answers": [
+                    {
+                      "content": "5 piles, car 5 × 1,5 = 7,5 V.",
+                      "correct": true
+                    },
+                    {
+                      "content": "7 piles, car 7,5 est proche de 7.",
+                      "correct": false
+                    },
+                    {
+                      "content": "6 piles, car 6 × 1,5 = 9 V, donc 7,5 est proche.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un récepteur est noté 12 V. Lesquelles de ces propositions donnent exactement 12 V avec des piles identiques dans le même sens ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Quatre piles de 3 V, huit piles de 1,5 V et six piles de 2 V donnent chacune 12 V. Trois piles de 3 V donnent 9 V, quatre piles de 1,5 V donnent 6 V, cinq piles de 1,5 V donnent 7,5 V : vérifie toujours en multipliant le nombre de piles par la tension d'une pile.",
+                  "answers": [
+                    {
+                      "content": "Quatre piles de 3 V.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Huit piles de 1,5 V.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Six piles de 2 V.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Trois piles de 3 V.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quatre piles de 1,5 V.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cinq piles de 1,5 V.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un récepteur noté 9 V peut être alimenté par sept piles de 1,5 V montées en série dans le même sens.",
+                  "question_type": "true_false",
+                  "explanation": "Faux : 7 × 1,5 = 10,5 V, pas 9 V. Le bon nombre est 6 piles, car 9 ÷ 1,5 = 6.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe est notée 2 V. On dispose de piles de 1,5 V. Un élève dit : « Deux piles font 3 V, c'est plus que 2 V, donc je prends deux piles pour avoir plus de lumière. » Que faut-il répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec des piles de 1,5 V, on obtient 1,5 V, puis 3 V, jamais exactement 2 V : aucun nombre entier de piles ne convient. Une tension plus forte ne rend pas la lampe plus lumineuse : elle risque de la griller.",
+                  "answers": [
+                    {
+                      "content": "Non : aucun nombre de piles de 1,5 V ne donne exactement 2 V, et une tension plus forte risque de griller la lampe.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : une tension plus forte donne toujours plus de lumière, sans risque.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : 3 V est assez proche de 2 V.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un moteur est noté 4,5 V. On dispose de piles de 1,5 V et d'une pile plate de 4,5 V. Quelles affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Trois piles dans le même sens donnent 4,5 V, et une pile plate de 4,5 V donne directement cette tension. Deux piles donnent 3 V, trois piles dont une retournée donnent 1,5 V, et quatre piles donnent 6 V : aucune de ces solutions ne convient.",
+                  "answers": [
+                    {
+                      "content": "Trois piles de 1,5 V montées en série dans le même sens conviennent.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une pile plate de 4,5 V seule conviendrait aussi.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux piles de 1,5 V montées en série conviennent.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Trois piles de 1,5 V montées en série, dont une retournée, conviennent.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Quatre piles de 1,5 V montées en série dans le même sens conviennent.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
