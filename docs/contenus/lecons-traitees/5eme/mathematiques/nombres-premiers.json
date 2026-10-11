@@ -1,0 +1,1165 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Nombres premiers",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "5ème",
+      "material_name": "Mathématiques",
+      "essentials": [
+        {
+          "name": "Diviseurs et nombres premiers",
+          "subtitle": "Trouver les diviseurs d'un nombre et reconnaître un nombre premier",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Trouver tous les diviseurs d'un nombre entier.</li><li>Reconnaître un nombre premier.</li><li>Dire pourquoi $1$ n'est pas un nombre premier.</li></ul><h2>L'image pour comprendre</h2><p><strong>Les équipes du terrain.</strong> Sur le terrain de football du quartier, 12 jeunes veulent jouer. Le coach veut former des équipes de même taille, sans personne en trop. Il peut faire des équipes de 2, de 3, de 4 ou de 6 joueurs, mais aussi de 1 joueur ou une seule grande équipe de 12. Ces tailles possibles sont les diviseurs de $12$.</p><p><em>Le pont.</em> Le nombre de joueurs, c'est $12$. Chaque taille d'équipe qui tombe juste, sans joueur en trop, est un <strong>diviseur</strong> de $12$. Maintenant, avec 7 joueurs : les seules possibilités sont des équipes de 1 ou une équipe de 7. Le nombre $7$ n'a donc que deux diviseurs : c'est un nombre premier.</p><p><em>Où l'image s'arrête.</em> Une équipe de 1 joueur n'est pas vraiment une « équipe » de jeu. En mathématiques, $1$ est un diviseur de tout nombre, mais il n'est pas premier, car il n'en a qu'un seul : lui-même.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Diviseur.</strong> Un nombre $d$ est un diviseur de $n$ si $n$ est égal à $d$ multiplié par un nombre entier. On dit aussi que $d$ divise $n$. Par exemple $3$ divise $12$, car $12 = 3 \\times 4$.</p><p><strong>Nombre premier.</strong> Un entier $n \\ge 2$ est premier si ses seuls diviseurs positifs sont $1$ et $n$. Les premiers nombres premiers sont $2$, $3$, $5$, $7$, $11$, $13$, $17$, $19$ et $23$.</p><p><strong>À retenir.</strong> Le nombre $1$ n'est pas premier. Le nombre $2$ est le seul nombre premier pair.</p></blockquote><h2>Exemple résolu</h2><p><strong>Le nombre $21$ est-il premier ?</strong></p><ol><li>On cherche un diviseur de $21$ autre que $1$ et $21$.</li><li>$2$ ne divise pas $21$, car $21$ est impair.</li><li>$3$ divise $21$, car $21 = 3 \\times 7$.</li><li>Conclusion : $21$ a quatre diviseurs, $1$, $3$, $7$ et $21$. Il n'est donc pas premier.</li></ol><h2>Le piège à éviter</h2><p>Croire que les nombres impairs sont premiers. $9 = 3 \\times 3$ et $15 = 3 \\times 5$ sont impairs, mais ils ne sont pas premiers. Croire aussi que $1$ est premier.</p><p>Comment le repérer : compte les diviseurs. Un nombre premier doit en avoir exactement deux.</p><h2>En une phrase</h2><p>Un nombre premier ne se range en équipes égales que de deux façons : en équipes de un joueur, ou en une seule équipe.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Diviseurs et nombres premiers",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Parmi les nombres suivants, lequel est un diviseur de $12$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$3$ est un diviseur de $12$, car $12 = 3 \\times 4$. Les autres ne conviennent pas : $12$ n'est pas un multiple de $5$ ni de $7$, et $8$ ne divise pas $12$, car $12 \\div 8$ n'est pas un nombre entier. Pour vérifier, regarde si la division tombe juste.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $1$ est un nombre premier.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Un nombre premier a exactement deux diviseurs : $1$ et lui-même. Le nombre $1$ n'a qu'un seul diviseur, lui-même : il n'est donc pas premier.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les diviseurs positifs de $10$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$10 = 1 \\times 10 = 2 \\times 5$. Les diviseurs de $10$ sont donc $1$, $2$, $5$ et $10$. L'erreur tentante est d'oublier $1$ et $10$ : ce sont des diviseurs, même s'ils semblent évidents.",
+                  "answers": [
+                    {
+                      "content": "$1$, $2$, $5$ et $10$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$ et $5$ seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$ et $10$ seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$, $2$, $3$, $5$ et $10$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, lesquels sont premiers ? Deux propositions sont bonnes.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$7$ et $2$ n'ont que deux diviseurs chacun. $9 = 3 \\times 3$ en a trois ($1$, $3$, $9$). $15 = 3 \\times 5$ en a quatre, et $1$ n'est pas premier. L'erreur la plus fréquente est de prendre les nombres impairs pour des nombres premiers : $9$ et $15$ le prouvent.",
+                  "answers": [
+                    {
+                      "content": "$7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de diviseurs positifs a le nombre $21$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les diviseurs de $21$ sont $1$, $3$, $7$ et $21$, car $21 = 3 \\times 7$. Il y en a $4$. Comme $21$ a plus de deux diviseurs, il n'est pas premier.",
+                  "answers": [
+                    {
+                      "content": "$2$, car il est premier",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Trouver tous les diviseurs",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quels sont tous les diviseurs positifs de $18$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$18 = 1 \\times 18 = 2 \\times 9 = 3 \\times 6$. Les diviseurs sont donc $1$, $2$, $3$, $6$, $9$ et $18$. L'erreur tentante est de mettre $4$ : $18 \\div 4 = 4{,}5$ n'est pas un nombre entier.",
+                  "answers": [
+                    {
+                      "content": "$1$, $2$, $3$, $6$, $9$ et $18$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$, $3$, $6$ et $9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$, $2$, $9$ et $18$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$, $2$, $3$, $4$, $6$, $9$ et $18$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $13$ est premier.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Les seuls diviseurs de $13$ sont $1$ et $13$. Il n'est divisible ni par $2$, ni par $3$ (la somme de ses chiffres vaut $4$), ni par $5$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $27$ est-il premier ?",
+                  "question_type": "single_choice",
+                  "explanation": "Non, car $27 = 3 \\times 9$. Le nombre $3$ est un diviseur de $27$, différent de $1$ et de $27$. L'erreur tentante est de dire « oui, car $27$ n'est divisible ni par $2$ ni par $5$ » : il faut tester tous les diviseurs possibles, pas seulement les plus petits.",
+                  "answers": [
+                    {
+                      "content": "Non, car $27 = 3 \\times 9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui, car $27$ est impair",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $27$ n'est divisible ni par $2$ ni par $5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $27$ est plus grand que $20$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le nombre de diviseurs positifs de $16$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les diviseurs de $16$ sont $1$, $2$, $4$, $8$ et $16$, car $16 = 2 \\times 8 = 4 \\times 4$. Il y en a $5$. L'erreur tentante est de compter $1$, $2$, $4$ et $16$ : il faut aussi $8$, car $16 = 2 \\times 8$.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, lesquels sont des diviseurs de $30$ ? Deux propositions sont bonnes.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$30 = 6 \\times 5$ et $30 = 15 \\times 2$ : $6$ et $15$ divisent $30$. Ni $4$ (car $30 \\div 4 = 7{,}5$), ni $7$, ni $12$ (car $30 \\div 12 = 2{,}5$) ne conviennent.",
+                  "answers": [
+                    {
+                      "content": "$6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$15$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Nombres premiers et équipes",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Au tournoi du quartier, 11 joueurs doivent être répartis en équipes de même taille, sans personne en trop. Quelles tailles d'équipes sont possibles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les tailles possibles sont les diviseurs de $11$. Le nombre $11$ est premier : seuls $1$ et $11$ le divisent. Avec des équipes de $2$, il reste un joueur en trop, car $11 = 2 \\times 5 + 1$.",
+                  "answers": [
+                    {
+                      "content": "Des équipes de $1$ joueur, ou une seule équipe de $11$ joueurs",
+                      "correct": true
+                    },
+                    {
+                      "content": "Des équipes de $1$ ou $2$ joueurs, ou une équipe de $11$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des équipes de $2$ ou $5$ joueurs",
+                      "correct": false
+                    },
+                    {
+                      "content": "Des équipes de $1$, $2$, $5$ ou $11$ joueurs",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi les nombres suivants, lesquels sont premiers ? Trois propositions sont bonnes.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$2$, $11$ et $19$ n'ont que deux diviseurs chacun. $25 = 5 \\times 5$ et $51 = 3 \\times 17$ ont plus de deux diviseurs. $1$ n'est pas premier.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$11$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$19$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$25$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$51$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $51$ est premier.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. $51 = 3 \\times 17$, donc $51$ a quatre diviseurs : $1$, $3$, $17$ et $51$. C'est un piège : être impair ne suffit pas pour être premier.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève affirme : « Tous les nombres impairs sont premiers. » Que faut-il lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "La phrase est fausse, et un contre-exemple suffit : $9 = 3 \\times 3$ a trois diviseurs ($1$, $3$ et $9$). Être impair ne suffit pas pour être premier. L'erreur la plus fréquente est de confondre « pas divisible par $2$ » et « premier ».",
+                  "answers": [
+                    {
+                      "content": "Faux : $9 = 3 \\times 3$ et $15 = 3 \\times 5$ ne sont pas premiers",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai, car $3$, $5$ et $7$ sont premiers",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vrai, car un nombre impair ne peut pas être divisé par $2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vrai, car $2$ est le seul nombre premier pair",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit nombre premier supérieur à $10$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$11$ est premier, et il n'y a aucun nombre premier entre $10$ et $11$. $13$ est aussi premier, mais il est plus grand. $12$ est pair et $15$ est divisible par $3$ et par $5$.",
+                  "answers": [
+                    {
+                      "content": "$11$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$13$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de diviseurs positifs a le nombre $36$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$36 = 2 \\times 18 = 3 \\times 12 = 4 \\times 9 = 6 \\times 6$. Les diviseurs sont $1$, $2$, $3$, $4$, $6$, $9$, $12$, $18$ et $36$ : il y en a $9$. L'erreur la plus fréquente est d'oublier les diviseurs situés au milieu de la liste.",
+                  "answers": [
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Critères de divisibilité",
+          "subtitle": "Savoir si un nombre est divisible par 2, 3, 5, 9 ou 10 sans poser la division",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Dire si un nombre est divisible par $2$, $5$ ou $10$ en regardant son dernier chiffre.</li><li>Dire si un nombre est divisible par $3$ ou par $9$ en additionnant ses chiffres.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le rang par deux.</strong> Avant un exercice, le coach demande aux joueurs de se ranger par deux. Si le nombre de joueurs est pair, personne ne reste seul. Il n'a pas besoin de compter un par un : il regarde le nombre de joueurs et sait tout de suite.</p><p><em>Le pont.</em> Le nombre de joueurs est le nombre $n$. « Ranger par deux sans personne seul » veut dire que $n$ est divisible par $2$. Pour savoir si c'est le cas, on ne regarde que le <strong>chiffre des unités</strong>, c'est-à-dire le dernier chiffre.</p><p><em>Où l'image s'arrête.</em> Le rang par deux ne marche que pour $2$, $5$ et $10$. Pour $3$ et $9$, il faut regarder la somme des chiffres, pas le dernier chiffre.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Divisibilité par $2$.</strong> Un nombre est divisible par $2$ si son chiffre des unités est $0$, $2$, $4$, $6$ ou $8$.</p><p><strong>Divisibilité par $5$.</strong> Un nombre est divisible par $5$ si son chiffre des unités est $0$ ou $5$.</p><p><strong>Divisibilité par $10$.</strong> Un nombre est divisible par $10$ si son chiffre des unités est $0$.</p><p><strong>Divisibilité par $3$.</strong> Un nombre est divisible par $3$ si la somme de ses chiffres est divisible par $3$.</p><p><strong>Divisibilité par $9$.</strong> Un nombre est divisible par $9$ si la somme de ses chiffres est divisible par $9$.</p></blockquote><h2>Exemple résolu</h2><p><strong>Le nombre $4716$ est-il divisible par $3$, par $9$ et par $5$ ?</strong></p><ol><li>Somme des chiffres : $4 + 7 + 1 + 6 = 18$.</li><li>$18 = 3 \\times 6$, donc $4716$ est divisible par $3$.</li><li>$18 = 9 \\times 2$, donc $4716$ est divisible par $9$. Vérification : $9 \\times 524 = 4716$.</li><li>Chiffre des unités : $6$. Ce n'est ni $0$ ni $5$, donc $4716$ n'est pas divisible par $5$.</li></ol><h2>Le piège à éviter</h2><p>Regarder le dernier chiffre pour le $3$ ou le $9$. Le nombre $12$ se termine par $2$, mais $1 + 2 = 3$ : il est divisible par $3$. Un nombre peut être divisible par $3$ sans que son dernier chiffre le montre.</p><p>Comment le repérer : demande-toi quel critère il faut utiliser. Pour $2$, $5$ ou $10$, c'est le chiffre des unités ; pour $3$ ou $9$, c'est la somme des chiffres.</p><h2>En une phrase</h2><p>Pour $2$, $5$ ou $10$, on regarde le dernier chiffre ; pour $3$ ou $9$, on additionne les chiffres.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Les critères de divisibilité",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quel critère permet de savoir si un nombre est divisible par $5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un nombre est divisible par $5$ si son chiffre des unités est $0$ ou $5$, car $10$, $15$, $20$ et $25$ sont des multiples de $5$. La somme des chiffres ne sert que pour $3$ et $9$. Une équipe de $5$ joueurs se forme en comptant par $5$.",
+                  "answers": [
+                    {
+                      "content": "Son chiffre des unités est $0$ ou $5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sa somme des chiffres est divisible par $5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son chiffre des unités est $5$ seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il se termine par $2$, $4$, $6$ ou $8$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $1234$ est divisible par $2$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Le chiffre des unités de $1234$ est $4$, qui est pair : le nombre est divisible par $2$. En effet, $1234 = 2 \\times 617$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, lequel est divisible par $10$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un nombre est divisible par $10$ s'il se termine par $0$ : $1250 = 10 \\times 125$. $1255$ est divisible par $5$, mais pas par $10$, car il se termine par $5$. $1252$ est pair, mais pas divisible par $10$.",
+                  "answers": [
+                    {
+                      "content": "$1255$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1252$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1250$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1253$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, lesquels sont divisibles par $3$ ? Deux propositions sont bonnes.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$21$ et $42$ sont divisibles par $3$ : les sommes de leurs chiffres valent $3$ et $6$. Pour $34$, la somme vaut $7$, qui n'est pas divisible par $3$. Le piège est de regarder seulement le dernier chiffre : $50$ et $55$ ne sont pas divisibles par $3$ non plus.",
+                  "answers": [
+                    {
+                      "content": "$21$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$42$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$34$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$50$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$55$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $378$ est-il divisible par $9$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour $9$, on additionne les chiffres : $3 + 7 + 8 = 18$. Comme $18 = 9 \\times 2$, le nombre $378$ est divisible par $9$ : $378 = 9 \\times 42$. Le dernier chiffre ne sert pas pour $9$ : l'erreur tentante est de regarder seulement le $8$.",
+                  "answers": [
+                    {
+                      "content": "Oui, car $3 + 7 + 8 = 18$ est divisible par $9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, car $378$ ne se termine pas par $9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car $378$ est pair",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, car $378$ se termine par $8$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Appliquer les critères",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quel est le plus petit nombre à trois chiffres divisible par $10$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un multiple de $10$ se termine par $0$. Le plus petit nombre à trois chiffres est $100$, qui se termine par $0$ : $100 = 10 \\times 10$. $101$ et $105$ ne sont pas divisibles par $10$, car ils ne se terminent pas par $0$.",
+                  "answers": [
+                    {
+                      "content": "$100$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$101$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$105$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$990$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $2025$ est divisible par $5$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Le nombre $2025$ se termine par $5$, donc il est divisible par $5$ : $2025 = 5 \\times 405$. Le critère du $5$ ne regarde que le chiffre des unités.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi les nombres $52$, $64$, $75$ et $83$, lequel est divisible par $3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les sommes des chiffres sont : $5 + 2 = 7$ ; $6 + 4 = 10$ ; $7 + 5 = 12$ ; $8 + 3 = 11$. Seule $12$ est divisible par $3$. Donc $75 = 3 \\times 25$ est le seul nombre de la liste divisible par $3$.",
+                  "answers": [
+                    {
+                      "content": "$52$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$64$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$75$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$83$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, lesquels sont divisibles par $9$ ? Trois propositions sont bonnes.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$81$, $99$ et $108$ sont divisibles par $9$ : les sommes de leurs chiffres valent $9$, $18$ et $9$. Pour $120$, la somme vaut $3$ : il est divisible par $3$, mais pas par $9$. Pour $123$ et $125$, les sommes valent $6$ et $8$, qui ne sont pas divisibles par $9$.",
+                  "answers": [
+                    {
+                      "content": "$81$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$99$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$108$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$120$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$123$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$125$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si un nombre est divisible par $10$, est-il forcément divisible par $5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Oui. Un multiple de $10$ s'écrit $10 \\times k$, donc $5 \\times 2k$ : il est divisible par $5$. Par exemple, $120 = 5 \\times 24$. Les multiples de $10$ se terminent par $0$, et $0$ fait partie des chiffres qui donnent un multiple de $5$.",
+                  "answers": [
+                    {
+                      "content": "Oui, car $10 = 2 \\times 5$ : tout multiple de $10$ est un multiple de $5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, car $10$ et $5$ n'ont aucun lien",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, car un multiple de $10$ se termine par $0$ et jamais par $5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, mais seulement si le nombre est impair",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Divisibilité et diviseurs",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Parmi les affirmations suivantes sur le nombre $2835$, laquelle est vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme des chiffres vaut $2 + 8 + 3 + 5 = 18$, divisible par $9$ : donc $2835 = 9 \\times 315$. Le chiffre des unités est $5$, donc $2835 = 5 \\times 567$. Il est impair, donc pas divisible par $2$, et il ne se termine pas par $0$, donc pas divisible par $10$.",
+                  "answers": [
+                    {
+                      "content": "Il est divisible par $9$ et par $5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est divisible par $2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est divisible par $10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'est divisible ni par $3$ ni par $9$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, lesquels sont divisibles par $6$ ? Trois propositions sont bonnes.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Un nombre est divisible par $6$ s'il est divisible par $2$ et par $3$. $36$, $42$ et $48$ sont pairs, et leurs sommes de chiffres valent $9$, $6$ et $12$, toutes divisibles par $3$. $50$ est pair, mais sa somme vaut $5$. $63$ est impair.",
+                  "answers": [
+                    {
+                      "content": "$36$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$42$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$48$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$50$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$63$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $1001$ est divisible par $9$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. La somme des chiffres de $1001$ vaut $1 + 0 + 0 + 1 = 2$, qui n'est pas divisible par $3$. Donc $1001$ n'est divisible ni par $3$, ni par $9$.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit nombre divisible à la fois par $2$, $3$ et $5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour être divisible par $2$ et par $5$, le nombre doit se terminer par $0$ : on teste $10$, $20$ et $30$. $10$ et $20$ ont une somme de chiffres ($1$ et $2$) non divisible par $3$. $30$ a une somme de $3$, donc il convient. $15$ est impair.",
+                  "answers": [
+                    {
+                      "content": "$10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$30$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$60$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève écrit : « $1458$ est divisible par $3$ car il se termine par $8$. » Que faut-il lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le nombre $1458$ est bien divisible par $3$, car $1 + 4 + 5 + 8 = 18$ (en fait $1458 = 9 \\times 162$). Mais le chiffre des unités ne sert pas pour le $3$. L'élève a eu de la chance avec sa conclusion : il faut toujours justifier avec le bon critère.",
+                  "answers": [
+                    {
+                      "content": "La conclusion est juste, mais le raisonnement est faux : il faut additionner les chiffres, $18$",
+                      "correct": true
+                    },
+                    {
+                      "content": "La conclusion et le raisonnement sont justes",
+                      "correct": false
+                    },
+                    {
+                      "content": "La conclusion est fausse : $1458$ n'est pas divisible par $3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le raisonnement est juste, car $8$ est pair",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien y a-t-il de nombres premiers entre $20$ et $30$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les nombres entre $20$ et $30$ sont de $21$ à $29$. $21 = 3 \\times 7$, $22$, $24$, $26$, $27$ et $28$ ont des diviseurs autres que $1$ et eux-mêmes. $23$ et $29$ sont premiers. Il y en a donc deux.",
+                  "answers": [
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Décomposer un nombre en produit de facteurs premiers",
+          "subtitle": "Écrire un nombre comme produit de nombres premiers. À compléter : PGCD et PPCM, non traités ici",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Écrire un nombre comme produit de nombres premiers.</li><li>Choisir le premier nombre premier à utiliser pour découper un nombre.</li><li>Vérifier qu'une décomposition est juste.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le tournoi par étapes.</strong> Un tournoi de quartier réunit 36 joueurs. Pour former des groupes, on commence par les répartir par 2 : on obtient 18 groupes. Puis on regroupe ces 18 groupes par 2 : on obtient 9 groupes. Ensuite, les 9 groupes se répartissent par 3 : on obtient 3 groupes, puis un seul groupe par 3. Les nombres utilisés, $2$, $2$, $3$ et $3$, sont les facteurs premiers de $36$.</p><p><em>Le pont.</em> Chaque étape découpe le nombre restant par un nombre premier. Les nombres premiers utilisés, et seulement eux, forment la décomposition : $36 = 2 \\times 2 \\times 3 \\times 3$.</p><p><em>Où l'image s'arrête.</em> Le tournoi ne demande pas de commencer par le plus petit nombre. En mathématiques, on commence toujours par le plus petit nombre premier qui divise le nombre restant : on va plus vite, et le résultat ne change pas.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Facteurs premiers.</strong> Décomposer un nombre en produit de facteurs premiers, c'est l'écrire comme un produit de nombres premiers. Par exemple $12 = 2 \\times 2 \\times 3$.</p><p><strong>Méthode.</strong> On divise le nombre par le plus petit nombre premier qui le divise. On recommence avec le quotient, jusqu'à obtenir $1$.</p><p><strong>Unicité.</strong> La décomposition est unique, à l'ordre près des facteurs.</p></blockquote><h2>Exemple résolu</h2><p><strong>Décomposer $84$ en produit de facteurs premiers.</strong></p><ol><li>$84$ est pair : on divise par $2$, $84 = 2 \\times 42$.</li><li>$42$ est pair : $42 = 2 \\times 21$.</li><li>$21$ n'est pas pair, mais $21 = 3 \\times 7$. Les nombres $3$ et $7$ sont premiers.</li><li>Résultat : $84 = 2 \\times 2 \\times 3 \\times 7$. Vérification : $2 \\times 2 \\times 3 \\times 7 = 84$.</li></ol><h2>Le piège à éviter</h2><p>Garder un facteur qui n'est pas premier, comme $84 = 2 \\times 42$ ou $84 = 2 \\times 2 \\times 21$. Ces écritures sont justes, mais $42$ et $21$ ne sont pas premiers : il faut continuer à les découper.</p><p>Comment le repérer : regarde chaque facteur de ta liste et demande-toi s'il a exactement deux diviseurs. Si ce n'est pas le cas, découpe-le encore.</p><h2>En une phrase</h2><p>Décomposer un nombre, c'est le découper en étapes jusqu'à ce que tous les morceaux soient des nombres premiers.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître une décomposition",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle écriture est une décomposition de $12$ en produit de facteurs premiers ?",
+                  "question_type": "single_choice",
+                  "explanation": "$2 \\times 2 \\times 3 = 12$, et $2$ et $3$ sont premiers. Les écritures $2 \\times 6$ et $3 \\times 4$ donnent bien $12$, mais $6$ et $4$ ne sont pas premiers : il faut encore les découper. $1$ n'est pas premier.",
+                  "answers": [
+                    {
+                      "content": "$2 \\times 2 \\times 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2 \\times 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3 \\times 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1 \\times 12$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans la décomposition de $30$ en produit de facteurs premiers, on trouve le facteur $6$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. $30 = 2 \\times 3 \\times 5$. Le facteur $6$ n'est pas premier : il se découpe en $2 \\times 3$. Dans une décomposition, on ne garde que des nombres premiers.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par quel nombre faut-il commencer pour décomposer $45$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$45$ est impair : il n'est pas divisible par $2$. Le plus petit nombre premier qui le divise est $3$, car $45 = 3 \\times 15$. L'erreur tentante est de prendre $9$ : il divise $45$, mais il n'est pas premier.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la décomposition de $60$ en produit de facteurs premiers ?",
+                  "question_type": "single_choice",
+                  "explanation": "$60 = 2 \\times 30 = 2 \\times 2 \\times 15 = 2 \\times 2 \\times 3 \\times 5$. Les quatre facteurs sont premiers. Les trois autres écritures donnent bien $60$, mais elles contiennent $10$, $15$ ou $4$, qui ne sont pas premiers.",
+                  "answers": [
+                    {
+                      "content": "$2 \\times 3 \\times 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 \\times 2 \\times 15$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3 \\times 4 \\times 5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 \\times 2 \\times 3 \\times 5$",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces écritures, lesquelles sont des décompositions de $18$ en produit de facteurs premiers ? Deux propositions sont bonnes.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$2 \\times 3 \\times 3 = 18$ : ce sont trois facteurs premiers. Changer l'ordre ne change rien, donc $3 \\times 3 \\times 2$ convient aussi. $2 \\times 9$ et $3 \\times 6$ ne sont pas des décompositions complètes, car $9$ et $6$ ne sont pas premiers. $2 \\times 3 \\times 3 \\times 3$ vaut $54$.",
+                  "answers": [
+                    {
+                      "content": "$2 \\times 3 \\times 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3 \\times 3 \\times 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2 \\times 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3 \\times 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 \\times 3 \\times 3 \\times 3$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Décomposer un nombre",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Décompose $36$ en produit de facteurs premiers.",
+                  "question_type": "single_choice",
+                  "explanation": "$36 = 2 \\times 18 = 2 \\times 2 \\times 9 = 2 \\times 2 \\times 3 \\times 3$. Les écritures $2 \\times 18$, $4 \\times 9$ et $2 \\times 3 \\times 6$ donnent bien $36$, mais elles contiennent un nombre qui n'est pas premier ($18$, $4$, $9$ ou $6$).",
+                  "answers": [
+                    {
+                      "content": "$2 \\times 2 \\times 3 \\times 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2 \\times 18$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4 \\times 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 \\times 3 \\times 6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $50$ se décompose en $2 \\times 5 \\times 5$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $2 \\times 5 \\times 5 = 50$, et les trois facteurs sont premiers. On peut aussi écrire $50 = 2 \\times 25$, mais $25$ n'est pas premier : il faut le découper en $5 \\times 5$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel nombre a pour décomposition $2 \\times 2 \\times 2 \\times 5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$2 \\times 2 \\times 2 = 8$, puis $8 \\times 5 = 40$. Le piège est de s'arrêter à $2 \\times 2 \\times 5 = 20$ en oubliant un facteur $2$.",
+                  "answers": [
+                    {
+                      "content": "$20$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$40$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$25$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$32$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève écrit $48 = 2 \\times 2 \\times 2 \\times 2 \\times 3$. A-t-il raison ?",
+                  "question_type": "single_choice",
+                  "explanation": "Oui. $2 \\times 2 \\times 2 \\times 2 = 16$ et $16 \\times 3 = 48$. Tous les facteurs sont premiers, et un même facteur peut apparaître plusieurs fois. L'erreur tentante est de croire qu'un facteur ne peut être utilisé qu'une seule fois.",
+                  "answers": [
+                    {
+                      "content": "Oui : ses facteurs sont premiers, et le produit vaut $48$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non : il faut écrire $48 = 6 \\times 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : un facteur ne peut pas être répété",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non : $3$ n'est pas premier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces écritures, lesquelles décomposent $30$ en produit de facteurs premiers ? Deux propositions sont bonnes.",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les deux écritures justes ont les mêmes facteurs premiers $2$, $3$ et $5$, dans un ordre différent. $2 \\times 15$ et $3 \\times 10$ ne sont pas des décompositions complètes, car $15$ et $10$ ne sont pas premiers. $2 \\times 3 \\times 3 \\times 5$ vaut $90$, pas $30$.",
+                  "answers": [
+                    {
+                      "content": "$2 \\times 3 \\times 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5 \\times 3 \\times 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2 \\times 15$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3 \\times 10$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 \\times 3 \\times 3 \\times 5$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Décomposer et vérifier",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Décompose $84$ en produit de facteurs premiers.",
+                  "question_type": "single_choice",
+                  "explanation": "On divise par $2$ : $84 = 2 \\times 42$, puis $42 = 2 \\times 21$, puis $21 = 3 \\times 7$. Donc $84 = 2 \\times 2 \\times 3 \\times 7$. Les écritures $2 \\times 42$ et $3 \\times 28$ sont vraies, mais $42$ et $28$ ne sont pas premiers.",
+                  "answers": [
+                    {
+                      "content": "$2 \\times 2 \\times 3 \\times 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2 \\times 42$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3 \\times 28$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2 \\times 3 \\times 14$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquelles de ces écritures sont des décompositions en produit de facteurs premiers ? Trois propositions sont bonnes.",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$20 = 2 \\times 2 \\times 5$, $28 = 2 \\times 2 \\times 7$ et $30 = 2 \\times 3 \\times 5$ sont justes. $12 = 2 \\times 6$ et $24 = 2 \\times 2 \\times 6$ donnent bien le bon nombre, mais $6$ n'est pas premier. L'erreur la plus fréquente est de croire qu'une égalité suffit : il faut aussi que tous les facteurs soient premiers.",
+                  "answers": [
+                    {
+                      "content": "$20 = 2 \\times 2 \\times 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$28 = 2 \\times 2 \\times 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$30 = 2 \\times 3 \\times 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$12 = 2 \\times 6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$24 = 2 \\times 2 \\times 6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La décomposition de $100$ en produit de facteurs premiers est $2 \\times 5 \\times 10$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. $10$ n'est pas premier. On a $100 = 2 \\times 50 = 2 \\times 2 \\times 25 = 2 \\times 2 \\times 5 \\times 5$. La bonne décomposition est $2 \\times 2 \\times 5 \\times 5$.",
+                  "answers": [
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit nombre premier qui divise $91$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$91$ est impair, donc il n'est pas divisible par $2$. Sa somme de chiffres vaut $10$, donc il n'est pas divisible par $3$. Il ne se termine ni par $0$ ni par $5$. Le premier nombre premier qui le divise est $7$ : $91 = 7 \\times 13$. Le nombre $13$ divise aussi $91$, mais il est plus grand.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$13$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève écrit : « $84 = 2 \\times 42$, donc la décomposition de $84$ en facteurs premiers est $2 \\times 42$. » Que faut-il lui répondre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Dans une décomposition en facteurs premiers, tous les facteurs doivent être premiers. L'égalité $84 = 2 \\times 42$ est juste, mais elle n'est pas finie : $42$ n'est pas premier. Il faut le découper en $2 \\times 3 \\times 7$, et la décomposition complète de $84$ est $2 \\times 2 \\times 3 \\times 7$.",
+                  "answers": [
+                    {
+                      "content": "C'est incomplet : il faut écrire $84 = 2 \\times 2 \\times 3 \\times 7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "C'est juste, car $2$ est premier",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est faux, car $2 \\times 42$ ne vaut pas $84$",
+                      "correct": false
+                    },
+                    {
+                      "content": "C'est juste, car $42$ est un nombre entier",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux élèves trouvent $84 = 2 \\times 2 \\times 3 \\times 7$ et $84 = 7 \\times 3 \\times 2 \\times 2$. Qui a raison ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux ont raison : ils ont les mêmes facteurs premiers, $2$, $2$, $3$ et $7$, dans un ordre différent. Le produit reste le même. Pour comparer deux décompositions, vérifie que les facteurs sont identiques, ou range-les du plus petit au plus grand.",
+                  "answers": [
+                    {
+                      "content": "Les deux, car l'ordre des facteurs ne change pas le produit",
+                      "correct": true
+                    },
+                    {
+                      "content": "Seul le premier, car il commence par le plus petit facteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Seul le second, car il commence par le plus grand facteur",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucun des deux, car $84$ a deux décompositions différentes",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
