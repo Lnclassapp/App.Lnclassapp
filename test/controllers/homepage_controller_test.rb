@@ -245,6 +245,15 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     Communication::PagesController.define_singleton_method(:online?, online)
   end
 
+  # UDR-0084 §2 : les objets publiés sont des fiches de cours et des fiches de révision ; « cours » au sens courant reste.
+  test "the visitor reads « fiches de cours, fiches de révision et exercices », never « essentielle »" do
+    get root_url
+
+    assert_select "#fonctionnalites p", text: /Des fiches de cours, fiches de révision et exercices de la 6e à la Terminale/
+    assert_select "#hero img[alt=?]", "Deux élèves révisent leurs cours avec Lnclass sur leur téléphone"
+    assert_no_match(/essentielle/i, response.body)
+  end
+
   # UDR-0062 §4 : l'enseignant n'assigne plus que des exercices ; la landing ne promet plus de cours assignés.
   test "the teacher is promised to assign exercises, not courses" do
     get root_url
