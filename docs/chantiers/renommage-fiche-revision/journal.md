@@ -8,6 +8,7 @@
 |---|---|---|---|
 | 2026-10-12 | Le chantier, ouvert pour « Fiche de révision », renomme aussi « Cours » en « Fiche de cours » | Décision du porteur au grill (question 6) | Non : UDR-0084 |
 | 2026-10-12 | UDR numérotée 0084 | 0078 à 0083 déjà pris sur d'autres branches | — |
+| 2026-10-12 | Correctif du menu ⋮ qui sort de l'écran à 390 px, ajouté au chantier | Vu par le challenger sur les captures, défaut antérieur au chantier ; le porteur demande de le corriger ici | Non : amendement de l'UDR-0042 |
 
 ## Ce qui a dérapé
 
@@ -19,7 +20,9 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
-- …
+- Les fichiers de traduction ne déclenchent aucun test au pre-commit. Seuls les tests stagés et les miroirs de `app/*.rb` sont lancés.
+- `db/seeds/demo/saint_michel.rb` s'arrête sur `CreateMessage` (mot-clé `illustrations` manquant) après l'import des leçons, donc avant les élèves joués, les lacunes et les annonces. C'est un défaut antérieur au chantier ; les captures ont été faites avec une lacune créée à la main.
+- Un menu ⋮ absolu, aligné à droite de son bouton, sortait de l'écran dès que le bouton passait à gauche (390 px). Il est corrigé dans le contrôleur (UDR-0042, amendement du 2026-10-12).
 
 ## Dette laissée derrière
 
@@ -27,7 +30,9 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| | | |
+| Seed de démonstration cassé (`CreateMessage` sans `illustrations`) | Hors périmètre, défaut des annonces | à ouvrir (`/bugfix`) |
+| « fiches de cours de Anglais » (lecteur d'écran de l'accueil enseignant) sans élision | Défaut antérieur (« cours de Anglais »), demande une règle d'élision | à ouvrir |
+| « fiche essentielle » dans le contenu des leçons JSON de `docs/contenus/lecons-traitees/` | Données de contenu, hors périmètre (memo) | à reprendre avec `contenu-en-blocs` |
 
 ## Clôture
 

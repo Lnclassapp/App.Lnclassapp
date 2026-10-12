@@ -126,4 +126,20 @@ class Teams::RowActionsMenuTest < ApplicationSystemTestCase
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
     end
   end
+
+  # UDR-0042, amendement du 2026-10-12 : sur téléphone, le ⋮ d'un en-tête passe sous le titre, à gauche ; son menu,
+  # aligné à droite du bouton, sortait de l'écran par la gauche. Il est décalé pour tenir dans l'écran.
+  test "on a phone, the menu of a course header opens whole inside the screen" do
+    course = create_course(name: "La cellule")
+
+    with_mobile_viewport do
+      visit course_path(course.slug)
+      find("button[aria-controls='course-actions-menu']").click
+      menu = "#course-actions-menu"
+
+      assert_selector menu, visible: true
+      assert reachable?("#{menu} [role=menuitem]:first-child"), "le menu sort de l'écran par la gauche"
+      assert reachable?("#{menu} [role=menuitem]:last-child"), "le menu sort de l'écran"
+    end
+  end
 end
