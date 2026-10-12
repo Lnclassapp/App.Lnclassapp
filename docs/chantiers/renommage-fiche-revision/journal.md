@@ -15,6 +15,7 @@
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
 - **Lot 0 rouge refusé par le pre-commit** (2026-10-12) : le hook lance tout test stagé et refuse un rouge. Le plan voulait committer la garde rouge au Lot 0. Elle a été écrite et vue rouge (2 échecs, 62 clés listées), puis mise de côté et committée à l'intégration, une fois A, B et C mergés. Leçon : sur ce dépôt, un « test rouge du chantier » se prouve dans le journal, pas dans un commit. Les fichiers de traduction ne déclenchent aucun test au pre-commit.
+- **Tests système rouges hérités de `Develop`** (2026-10-12) : `94fc2d0d` (connexion : numéro en chiffres, aide « code secret à 4 chiffres ») n'a pas aligné ses tests système, que le pre-commit ne joue pas. 6 assertions sur 4 fichiers attendaient encore `01 00 00 00 09` ou l'absence de « 4 chiffres » ; alignées dans ce chantier à la demande du porteur.
 
 ## Ce qu'on a appris sur la codebase
 

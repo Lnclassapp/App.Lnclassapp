@@ -111,7 +111,9 @@ class Identity::SignInTest < ApplicationSystemTestCase
       assert_no_text "Heureux de vous revoir"
       assert_single_primary_action scope: "main"
       assert_blocks_above_fold "main > *", max: 1
-      assert_no_text "4 chiffres"
+      # UDR-0060 §3.4 : l'aide courte se lit sous le champ, l'infobulle reste fermée.
+      assert_text "code secret à 4 chiffres"
+      assert_no_text "choisi à l'inscription"
       find("details summary", text: "Aide : Code secret").click
       assert_text "Code secret de 4 chiffres, choisi à l'inscription."
       assert_operator tap_height(find_link(I18n.t("identity.sessions.new.forgot_pin"))), :>=, 48
