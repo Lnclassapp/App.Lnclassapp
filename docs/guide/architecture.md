@@ -299,7 +299,7 @@ Chaque couche est namespacée par contexte. Les six, et rien d'autre. Le découp
 | Contexte | Ce qu'il possède | Points d'entrée dans l'ancien dépôt |
 |---|---|---|
 | **assessment** | Exercices, questions, propositions, sessions, tentatives, badges, lacunes | `app/controllers/assessment/`, `app/domain/use_cases/assessment/` (14 use cases) |
-| **catalog** | Niveaux, séries, `level_series`, matières, cours, fiches essentielles, rapports d'import | `app/controllers/catalog/`, `app/domain/use_cases/catalog/` |
+| **catalog** | Niveaux, séries, `level_series`, matières, fiches de cours, fiches de révision, rapports d'import | `app/controllers/catalog/`, `app/domain/use_cases/catalog/` |
 | **classroom** | Classes, adhésions, enseignement (`teacher_classrooms`), assignations polymorphes | `app/controllers/classroom/`, `app/domain/use_cases/classroom/` |
 | **communication** | Annonces diffusées par audience, rejets | `app/controllers/messages_controller.rb`, `app/domain/use_cases/communication/` |
 | **identity** | Comptes, profils, authentification, sessions, invitations, journal d'audit | `app/controllers/identity/`, `app/domain/use_cases/identity/` |
