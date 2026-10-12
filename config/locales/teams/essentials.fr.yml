@@ -11,36 +11,36 @@ fr:
         dtos/catalog/essential_input:
           attributes:
             name:
-              taken: "est déjà pris par une autre fiche essentielle de ce cours"
+              taken: "est déjà pris par une autre fiche de révision de cette fiche de cours"
             content:
               attachment: "n'accepte que du texte : les pièces jointes et les images ne sont pas acceptées"
   teams:
     essentials:
       form:
         name_placeholder: "Ex. : Brassage génétique par la méiose"
-        name_hint: "150 caractères au plus, unique dans le cours. La casse saisie est gardée."
+        name_hint: "150 caractères au plus, unique dans la fiche de cours. La casse saisie est gardée."
         subtitle_placeholder: "Ex. : Les deux divisions et leurs conséquences"
         content_hint: "Titres, gras, italique, listes, citations et formules entre $…$. Pas de pièce jointe ni d'image."
       new:
-        title: "Nouvelle fiche essentielle"
-        course: "Cours : %{name}"
-        draft_notice: "La fiche essentielle naît en brouillon, visible uniquement par l'équipe, jusqu'à sa publication."
-        submit: "Créer la fiche essentielle"
+        title: "Nouvelle fiche de révision"
+        course: "Fiche de cours : %{name}"
+        draft_notice: "La fiche de révision naît en brouillon, visible uniquement par l'équipe, jusqu'à sa publication."
+        submit: "Créer la fiche de révision"
         cancel: "Annuler"
       edit:
-        title: "Modifier la fiche essentielle"
+        title: "Modifier la fiche de révision"
         status: "Statut :"
         submit: "Enregistrer"
         cancel: "Annuler"
       create:
-        created: "Fiche essentielle « %{name} » créée (brouillon)."
+        created: "Fiche de révision « %{name} » créée (brouillon)."
       update:
-        updated: "Fiche essentielle « %{name} » modifiée."
+        updated: "Fiche de révision « %{name} » modifiée."
       transition:
-        published: "Fiche essentielle « %{name} » publiée."
-        archived: "Fiche essentielle « %{name} » archivée."
+        published: "Fiche de révision « %{name} » publiée."
+        archived: "Fiche de révision « %{name} » archivée."
         refused_title:
           publish: "Publication impossible"
           archive: "Archivage impossible"
-        parent_not_published: "Le cours de cette fiche essentielle n'est pas publié : publiez d'abord le cours."
-        transition_not_allowed: "Cette fiche essentielle est déjà dans cet état, ou ne peut pas prendre ce statut."
+        parent_not_published: "La fiche de cours de cette fiche de révision n'est pas publiée : publiez d'abord la fiche de cours."
+        transition_not_allowed: "Cette fiche de révision est déjà dans cet état, ou ne peut pas prendre ce statut."
