@@ -9,12 +9,12 @@ module Queries
         d = create_series(name: "D")
         student = create_student(classroom: create_classroom(level: tle, series: d))
         seconde = create_level(name: "2nde")
-        Orm::ClassroomStudent.create!(classroom: create_classroom(level: seconde), student:, joined_at: Time.current)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: create_classroom(level: seconde), student:, joined_at: Time.current)
         [ create_classroom(level: create_level, status: "archived"),
           create_classroom(level: create_level, school_year: current_school_year(on: 1.year.ago.to_date)) ].each do |classroom|
-          Orm::ClassroomStudent.create!(classroom:, student:, joined_at: Time.current)
+          Orm::ClassroomStudent.create!(joined_via: "standard", classroom:, student:, joined_at: Time.current)
         end
-        Orm::ClassroomStudent.create!(classroom: create_classroom(level: create_level), student:, joined_at: 2.days.ago,
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: create_classroom(level: create_level), student:, joined_at: 2.days.ago,
                                       left_at: 1.day.ago)
 
         audience = StudentAudienceQuery.new.call(student_id: student.id)

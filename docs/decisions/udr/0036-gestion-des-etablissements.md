@@ -1,4 +1,10 @@
 # UDR-0036 : Gestion des établissements — liste nationale filtrée dans un frame, fiche par niveau, modification en modale, aucune création à l'écran
+<!-- index
+titre: Gestion des établissements
+statut: Accepté
+adr-lie: [0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md), [0036](../adr/0036-suppression-archivage-et-anonymisation.md)
+problematique: Liste nationale filtrée dans un frame, fiche par niveau, modification en modale, aucune création à l'écran
+-->
 
 | | |
 |---|---|

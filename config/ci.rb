@@ -23,6 +23,7 @@ CI_PLAN = CiPlan.define do
     step "Guard: HITL headers, no :nocov:, worker in Puma", "ruby -Itest test/guards/repository_rules_test.rb"
     step "Guard: CI groups add up to bin/ci", "ruby -Itest test/guards/ci_plan_test.rb"
     step "Guard: System suite budget (15 s per chantier)", "ruby -Itest test/guards/system_budget_test.rb"
+    step "Guard: Android shell (minSdk 28, variants, no signing key)", "ruby -Itest test/guards/android_project_test.rb"
 
     step "Style: Ruby", "bin/rubocop"
   end

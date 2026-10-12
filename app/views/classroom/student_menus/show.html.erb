@@ -1,0 +1,9 @@
+<%# 🌐 UI · classroom/student_menus/show — panneau du compte de l'élève, en page (/students/menu) %>
+<%# Rôle : même contenu que la <dialog> de l'en-tête ; l'app l'ouvre en modale, le site sans JavaScript y mène par l'avatar %>
+<%# UDR  : 0080 §3.2, §3.5 · titre « Mon compte · Lnclass » %>
+<% page_title t("shared.navigation.account_panel.title") %>
+<%= ui_page_header title: t("shared.navigation.account_panel.title") %>
+
+<%= ui_card id: "student_menu", class: "max-w-md" do %>
+  <%= render "shared/navigation/account_panel", user: shell_user, page: true %>
+<% end %>

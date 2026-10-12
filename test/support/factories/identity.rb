@@ -13,9 +13,10 @@ module Factories
       Orm::User.create!(role:, contact:, pin:, last_name:, first_name:, gender:, team_role:, **attributes)
     end
 
-    def create_student(classroom: nil, **attributes)
+    # ADR-0085 §4.4: joined_via, the arrival channel, has no default in the database.
+    def create_student(classroom: nil, joined_via: "standard", joined_at: Time.current, **attributes)
       create_user(role: "student", **attributes).tap do |student|
-        Orm::ClassroomStudent.create!(classroom:, student:, primary: true, joined_at: Time.current) if classroom
+        Orm::ClassroomStudent.create!(classroom:, student:, primary: true, joined_at:, joined_via:) if classroom
       end
     end
 
@@ -25,9 +26,11 @@ module Factories
       create_student(classroom: create_classroom(level: course.level, series: course.series), **attributes)
     end
 
-    def create_teacher(school: create_school, material: create_material, onboarded: true, classrooms: [], **attributes)
+    # ADR-0083 §4.2: joined_via, the arrival channel, has no default in the database.
+    def create_teacher(school: create_school, material: create_material, onboarded: true, classrooms: [], joined_via: "standard",
+                       **attributes)
       create_user(role: "teacher", **attributes).tap do |teacher|
-        Orm::TeacherProfile.create!(user: teacher, material:, onboarding_completed_at: (Time.current if onboarded))
+        Orm::TeacherProfile.create!(user: teacher, material:, joined_via:, onboarding_completed_at: (Time.current if onboarded))
         # school: nil — a teacher without a primary school: a pending account (ADR-0030, ADR-0063).
         Orm::TeacherSchool.create!(teacher:, school:, primary: true) if school
         classrooms.each { |classroom| Orm::TeacherClassroom.create!(teacher:, classroom:) }

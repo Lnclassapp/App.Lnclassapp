@@ -7,9 +7,10 @@
 
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version.
+# The base image comes from the AWS mirror of the official images: Docker Hub answers the builder of Railway with 429.
 ARG RUBY_VERSION=3.4.9
-FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
+FROM public.ecr.aws/docker/library/ruby:$RUBY_VERSION-slim AS base
 
 # Rails app lives here
 WORKDIR /rails

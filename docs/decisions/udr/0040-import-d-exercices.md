@@ -1,4 +1,10 @@
 # UDR-0040 : Import d'exercices — fiche essentielle cible rappelée dans la modale d'import, aide de l'exercice à la proposition, rapport qui compte questions et propositions
+<!-- index
+titre: Import d'exercices
+statut: Accepté
+adr-lie: [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md), [0039](../adr/0039-format-d-import-du-contenu.md)
+problematique: Fiche essentielle cible rappelée dans la modale d'import, aide de l'exercice à la proposition, rapport qui compte questions et propositions
+-->
 
 | | |
 |---|---|

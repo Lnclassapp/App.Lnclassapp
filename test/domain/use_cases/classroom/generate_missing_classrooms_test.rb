@@ -55,21 +55,16 @@ module UseCases
 
         attr_reader :rows, :inserts
 
-        def initialize(taken: Set[], refuse: [], broken: false)
-          @taken = taken
+        def initialize(refuse: [], broken: false)
           @refuse = refuse
           @broken = broken
           @rows = []
           @inserts = 0
         end
 
-        def taken_join_codes
+        def insert_generated(rows:, at:)
           raise "base indisponible" if @broken
 
-          @taken.dup
-        end
-
-        def insert_generated(rows:, at:)
           @inserts += 1
           raise FakeTransaction::Refused if rows.any? { @refuse.include?(it[:school_id]) }
 
@@ -149,7 +144,7 @@ module UseCases
           reports:, schools: @schools, classrooms: @classrooms, taxonomy: FakeTaxonomy.new(lookup), classroom_plan: @plan,
           users: FakeUsers.new(actor), audit_log: @audit, transaction: @transaction,
           policy: Policies::School::ManageSchoolPolicy.new, clock: Clock.new(NOW),
-          random: Random.new(42), batch_size:
+          batch_size:
         ).call(report_id: 1)
       end
 
@@ -174,16 +169,12 @@ module UseCases
                                      skipped_count: 0, error_count: 0 } } ], @audit.entries
       end
 
-      test "join codes are valid, all distinct, and never one already taken" do
-        taken = Set.new(Array.new(50) { Entities::Classroom::JoinCode.generate(random: Random.new(it)) })
-        @classrooms = FakeClassrooms.new(taken: taken.dup)
-
+      # ADR-0085 §4.1 : le jeton du lien est tiré par la base ; aucune ligne ne porte de code de classe.
+      test "IL-22: the rows carry a public id and no classroom code" do
         generate
 
-        codes = @classrooms.rows.map { it[:join_code] }
-        assert_equal codes.size, codes.uniq.size
-        assert(codes.all? { Entities::Classroom::JoinCode.valid?(it) })
-        assert_empty codes.to_set & taken
+        assert(@classrooms.rows.none? { it.key?(:join_code) })
+        assert_equal @classrooms.rows.size, @classrooms.rows.map { it[:public_id] }.uniq.size
       end
 
       test "candidates are read and written by batch, one transaction each, after the last id seen" do

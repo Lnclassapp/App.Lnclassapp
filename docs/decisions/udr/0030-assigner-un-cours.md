@@ -1,4 +1,10 @@
 # UDR-0030 : Assigner un cours — « Assigner à mes classes », une ligne par classe avec la bascule de la classe
+<!-- index
+titre: Assigner un cours
+statut: **Déprécié** *(2026-10-02, UDR-0062, ADR-0072 : un cours ne s'assigne plus)*
+adr-lie: [0048](../adr/0048-statuts-d-assignation-active-et-archived.md), [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md)
+problematique: « Assigner à mes classes », une ligne par classe avec la bascule de la classe
+-->
 
 | | |
 |---|---|

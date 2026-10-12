@@ -38,7 +38,7 @@ module Queries
         left = create_student(classroom: @troisieme_b)
         Orm::ClassroomStudent.where(student: left).update_all(left_at: Time.current)
         secondary = create_student
-        Orm::ClassroomStudent.create!(classroom: @troisieme_b, student: secondary, primary: false, joined_at: Time.current)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: @troisieme_b, student: secondary, primary: false, joined_at: Time.current)
         archived = create_student(classroom: create_classroom(school: @lauriers, status: "archived"))
 
         [ create_student, left, secondary, archived ].each do |student|
@@ -150,7 +150,7 @@ module Queries
       test "classrooms: a secondary membership of a targeted classroom does not count" do
         message = create_message(author: create_teacher(school: @lauriers), audience: "classrooms", classrooms: [ @troisieme_b ])
         student = create_student(classroom: @troisieme_a)
-        Orm::ClassroomStudent.create!(classroom: @troisieme_b, student:, primary: false, joined_at: Time.current)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: @troisieme_b, student:, primary: false, joined_at: Time.current)
 
         assert_not reads?(student, message)
       end
@@ -172,7 +172,7 @@ module Queries
         create_message(author: teacher, title: "Nouvelles fiches", audience: "classrooms", classrooms: [ @troisieme_b ])
         create_message(author: teacher, title: "Sortie", audience: "classrooms", classrooms: [ quatrieme_a ])
         Orm::ClassroomStudent.where(student: @awa).update_all(left_at: Time.current)
-        Orm::ClassroomStudent.create!(classroom: quatrieme_a, student: @awa, primary: true, joined_at: Time.current)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: quatrieme_a, student: @awa, primary: true, joined_at: Time.current)
 
         assert_equal [ "Sortie" ], titles(@awa)
       end

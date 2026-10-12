@@ -1,4 +1,9 @@
 # ADR-0033 : Quatre badges de Bronze à Diamant, des seuils pédagogiques nommés, l'avancement et le score dans deux champs
+<!-- index
+titre: Quatre badges de Bronze à Diamant, des seuils pédagogiques nommés, l'avancement et le score dans deux champs
+statut: Accepté — *remplace 0008 §3 (badges) et §4*
+problematique: Bronze 50, Argent 70, Or 80, Diamant 100 (sans faute) ; un badge par élève et exercice, montée stricte ; `PASS_THRESHOLD`, `MASTERY_THRESHOLD`, `GOLD_THRESHOLD`, `PERFECT_THRESHOLD` ; `progress_percent` et `score_percent`. F-10 + F-11.
+-->
 
 | | |
 |---|---|

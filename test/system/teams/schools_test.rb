@@ -37,11 +37,14 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
   end
 
   test "SC-04, FU-45: filter the list by DRENA, type and name as they change; the URL keeps the filters, no page reload" do
-    create_school(drena: @abidjan, name: "Lycée Classique", school_type: "public")
+    create_school(drena: @abidjan, name: "Lycée Classique", sigle: "LCA", school_type: "public", national_code: "012345")
     create_school(drena: @abidjan, name: "Collège Moderne de Cocody", school_type: "private", cycle: "first")
     create_school(drena: @bouake, name: "Lycée Municipal", school_type: "private")
     visit schools_path
     assert_selector "#schools_list tr", count: 3
+    # IE-21 (UDR-0079 §3.8 bis) : plus de colonne « Code d'établissement » ; la recherche porte sur le nom ou le sigle.
+    assert_no_selector "thead th", text: "Code d'établissement"
+    assert_selector "label[for=filter_search]", text: "Nom ou sigle"
     # UDR-0054 §3.9 : avec JavaScript, « Filtrer » s'efface ; chaque liste part au changement, la frappe après une pause.
     assert_no_button I18n.t("teams.schools.filters.submit")
 
@@ -69,15 +72,23 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
       fill_in "filter_search", with: "introuvable"
 
       assert_selector "#schools_empty", text: I18n.t("teams.schools.index.no_match_title")
+
+      fill_in "filter_search", with: "LCA"
+      assert_selector "#schools_list tr", count: 1
+      assert_selector "#schools_list tr", text: "Lycée Classique"
+
+      # IE-21 : le code national ne trouve plus l'établissement.
+      fill_in "filter_search", with: "012345"
+      assert_selector "#schools_empty", text: I18n.t("teams.schools.index.no_match_title")
     end
   end
 
   test "SC-05, SC-06, SC-09: edit a school from its page — the header changes, the classrooms stay — then deactivate it" do
     school = create_school(drena: @abidjan, name: "Lycée Classique", school_type: "public", cycle: "both")
     create_school(drena: @abidjan, name: "Lycée Moderne")
-    classroom = create_classroom(school:, level: create_level(name: "Tle"), name: "Tle D 1", join_code: "kfm37")
+    classroom = create_classroom(school:, level: create_level(name: "Tle"), name: "Tle D 1")
     visit school_path(school.public_id)
-    assert_selector "#classroom_#{classroom.public_id}", text: "KFM37"
+    assert_selector "#classroom_#{classroom.public_id}", text: "Tle D 1"
 
     assert_no_page_reload do
       click_menu_action("#school_header", I18n.t("#{header_scope}.edit"))
@@ -102,7 +113,7 @@ class Teams::SchoolsTest < ApplicationSystemTestCase
         assert_text "Bouaké"
         assert_text I18n.t("teams.schools.cycles.first")
       end
-      assert_selector "#classroom_#{classroom.public_id}", text: "KFM37"
+      assert_selector "#classroom_#{classroom.public_id}", text: "Tle D 1"
 
       click_menu_action("#school_header", I18n.t("#{header_scope}.deactivate"))
       within("#school_header dialog[open]") { click_on I18n.t("#{header_scope}.confirm_deactivate") }

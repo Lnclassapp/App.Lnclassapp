@@ -9,12 +9,12 @@ class Identity::ProfilePhotoDisplayTest < ActionDispatch::IntegrationTest
     @src = account_photo_path(@student.public_id, v: Queries::Identity::PhotoVersions.for(user_ids: [ @student.id ])[@student.id])
   end
 
-  test "the account menu, the sidebar and the profile card show the photo; « Changer ma photo » opens the modal" do
+  test "the avatar of the header (UDR-0080), the sidebar and the profile card show the photo; « Changer ma photo » opens the modal" do
     sign_in_as @student
 
     get profile_path
 
-    assert_select "header button[aria-controls=account-menu] img.ui-avatar[alt='Aya Koné'][src='#{@src}']"
+    assert_select "header a[aria-controls=account_panel] img.ui-avatar[alt='Aya Koné'][src='#{@src}']"
     assert_select "aside img[alt='Aya Koné'][src='#{@src}']"
     assert_select "#profile_information" do
       # UDR-0041, amendment of 2026-10-02: for the student, the avatar is the value of the « Photo » row, the
@@ -32,7 +32,7 @@ class Identity::ProfilePhotoDisplayTest < ActionDispatch::IntegrationTest
 
     get profile_path
 
-    assert_select "header button[aria-controls=account-menu] [role=img][aria-label='Awa Traoré']", text: "AT"
+    assert_select "header a[aria-controls=account_panel] [role=img][aria-label='Awa Traoré']", text: "AT"
     assert_select "header img[src*='/photo']", 0
     assert_select "#profile_information dd span[aria-hidden=true] [role=img][aria-label='Awa Traoré']", text: "AT"
     assert_select "#profile_information dd span.sr-only", "Aucune photo : tes initiales s'affichent."

@@ -1,4 +1,9 @@
 # ADR-0060 : La photo de profil est recadrée par le navigateur, vérifiée sans bibliothèque par le serveur, et servie seulement après la règle de lecture d'un compte
+<!-- index
+titre: La photo de profil est recadrée par le navigateur, vérifiée sans bibliothèque par le serveur, et servie seulement après la règle de lecture d'un compte
+statut: Accepté
+problematique: Pas de libvips : canvas 512 px WebP/JPEG côté navigateur ; en-têtes JPEG/PNG/WebP lus en Ruby pur (≤ 1 Mo, ≤ 1024 px, Exif retiré) ; port `ProfilePhotoStorePort` ; lecture par `GET /accounts/:id/photo` sous `ReadUserPolicy`, cache privé. Numéro = plus haut (0056) + 4.
+-->
 
 | | |
 |---|---|

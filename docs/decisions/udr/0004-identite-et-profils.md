@@ -1,4 +1,10 @@
 # UDR-0004 : Identité et Profils (Identity UI)
+<!-- index
+titre: Identité et profils (Identity UI)
+statut: Accepté · non applicable (0005)
+adr-lie: [0021](../adr/0021-gestion-de-l-identite.md)
+problematique: Garantir zéro régression d'interface pour les 5 rôles pendant le refactoring du module Identity côté backend.
+-->
 
 > ⚠️ **Non applicable au projet cible** ([UDR-0005](./0005-design-system-fondateur.md), 2026-09-25). Cette UDR décrit une migration à iso-interface de l'ancienne application (5 rôles dont `parent`, tiroir et barre latérale « non altérés »). Le projet cible a 4 rôles et un shell unique : voir [UDR-0006](./0006-shell-applicatif-par-role.md).
 

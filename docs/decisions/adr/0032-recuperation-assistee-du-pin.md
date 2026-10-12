@@ -1,4 +1,9 @@
 # ADR-0032 : Récupération assistée du PIN par un code à usage unique de 15 minutes
+<!-- index
+titre: Récupération assistée du PIN par un code à usage unique de 15 minutes
+statut: Accepté — *complète 0025 comp. 6, amende 0002 §4*
+problematique: Code de 8 chiffres émis par l'enseignant de la classe ou l'équipe, 15 min, 5 essais, sessions coupées, journalisé ; SMS reporté. F-08.
+-->
 
 | | |
 |---|---|

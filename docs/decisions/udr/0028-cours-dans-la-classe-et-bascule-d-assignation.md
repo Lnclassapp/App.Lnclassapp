@@ -1,4 +1,10 @@
 # UDR-0028 : Cours dans la classe et bascule d'assignation — « Assigner », ou « Assigné » avec « Retirer », remplacée en place
+<!-- index
+titre: Cours dans la classe et bascule d'assignation
+statut: Accepté — *amendé le 2026-10-02 : plus de bascule de cours ni de fiche (UDR-0062)*
+adr-lie: [0048](../adr/0048-statuts-d-assignation-active-et-archived.md), [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md)
+problematique: « Assigner », ou « Assigné » avec « Retirer », remplacée en place
+-->
 
 | | |
 |---|---|

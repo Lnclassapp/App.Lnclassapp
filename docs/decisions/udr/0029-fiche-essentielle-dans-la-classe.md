@@ -1,4 +1,10 @@
 # UDR-0029 : Fiche essentielle dans la classe — ses exercices publiés, leur bascule d'assignation et la réussite de la classe
+<!-- index
+titre: Fiche essentielle dans la classe
+statut: Accepté — *amendé le 2026-10-02 : plus de bascule de fiche ; date limite de l'exercice (UDR-0062)*
+adr-lie: [0048](../adr/0048-statuts-d-assignation-active-et-archived.md), [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md)
+problematique: Ses exercices publiés, leur bascule d'assignation et la réussite de la classe
+-->
 
 | | |
 |---|---|

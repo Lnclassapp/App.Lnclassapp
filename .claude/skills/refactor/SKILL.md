@@ -5,7 +5,7 @@ description: Ouvre et cadre un chantier de refactoring Lnclass, à comportement 
 
 # Cycle Refactoring
 
-Tu exécutes le cycle décrit dans `docs/workflows/refactoring.md`. **Lis-le maintenant**, ainsi que `docs/workflows/README.md` et `docs/guide/conventions.md`.
+Tu exécutes le cycle décrit dans `docs/workflows/refactoring.md`. **Lis-le maintenant**, ainsi que `docs/workflows/README.md` (la **Table de routage** et **Les interdits** seulement) et `docs/guide/conventions.md` §2, §4 et §5 (le reste à la demande).
 
 Argument : un `<slug>` kebab-case (`namespaces-dupliques`). S'il manque, demande-le.
 

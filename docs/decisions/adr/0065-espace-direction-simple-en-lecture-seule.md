@@ -1,4 +1,9 @@
 # ADR-0065 : La direction, invitée par l'équipe et connectée par PIN, lit son seul établissement
+<!-- index
+titre: La direction, invitée par l'équipe et connectée par PIN, lit son seul établissement
+statut: Accepté *(2026-09-29)* — *amendé par [0078](./0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md) (§2, §4), puis le 2026-10-04 (accueil de la direction gardé 5 minutes)*
+problematique: `school_staffs` sans fonction ; invitation `school_staff` sans fonction ; acceptation qui rattache ; PIN seul ; `SchoolTeachersQuery` et `StudentWorkQuery` en lecture seule, définitions du rendu et de la moyenne (« — » sous 5 élèves). Amende ADR-0044 et ADR-0025 (compensation 5).
+-->
 
 | | |
 |---|---|

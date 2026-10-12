@@ -11,9 +11,9 @@ class ParameterFilteringTest < ActiveSupport::TestCase
     assert_equal({ "contact" => "[FILTERED]", "pin" => "[FILTERED]", "pin_confirmation" => "[FILTERED]", "classroom" => "6e A" }, filtered["session"])
   end
 
-  test "second factor, recovery, invitation and join secrets are filtered" do
+  test "second factor, recovery and invitation secrets are filtered" do
     filter = ActiveSupport::ParameterFilter.new(Rails.application.config.filter_parameters)
-    secrets = %w[new_pin code otp backup_code token join_code].index_with("secret")
+    secrets = %w[new_pin code otp backup_code token].index_with("secret")
 
     assert_equal secrets.transform_values { "[FILTERED]" }, filter.filter(secrets)
   end

@@ -181,7 +181,7 @@ class Teams::StaffInvitationsControllerTest < ActionDispatch::IntegrationTest
                                                                            pin: "4821", pin_confirmation: "4821" } }
 
     assert_redirected_to new_session_path
-    assert_equal "Votre compte est créé. Connectez-vous avec votre numéro et votre PIN.", flash[:notice]
+    assert_equal "Votre compte est créé. Connectez-vous avec votre numéro et votre code secret.", flash[:notice]
     user = Orm::User.find_by!(contact: "0799000009")
     assert_equal [ "school_admin", nil ], [ user.role, user.team_role ]
     assert_equal [ [ @school.id, @member.id ] ], Orm::SchoolStaff.where(user_id: user.id).pluck(:school_id, :invited_by_id)

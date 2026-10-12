@@ -1,4 +1,10 @@
 # UDR-0050 : Inviter un collègue, partager sa classe, s'inscrire sans code, valider les comptes en attente, page Croissance
+<!-- index
+titre: Inviter un collègue, partager sa classe, s'inscrire sans code, valider les comptes en attente, page Croissance
+statut: Accepté *(2026-09-28)* — *amendé le 2026-10-02 : validation en pause, arrivée sur la sélection des classes (ADR-0073)* — *amendée par 0069 (carte « Parrainage »), 2026-10-03*
+adr-lie: [0063](../adr/0063-parrainage-demarrage-a-froid-et-mesure-du-k-factor.md), [0057](../adr/0057-code-d-etablissement.md), [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md)
+problematique: WhatsApp, SMS, copier, partage natif, compté côté serveur ; collègues en attente et « Je confirme » ; inscription par code national ; Valider / Refuser sur la fiche ; `/teams/growth` sans entrée de navigation. Amende UDR-0006, 0018, 0025, 0026, 0027, 0036, 0041, 0044
+-->
 
 | | |
 |---|---|

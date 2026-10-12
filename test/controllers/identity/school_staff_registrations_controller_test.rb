@@ -110,8 +110,8 @@ class Identity::SchoolStaffRegistrationsControllerTest < ActionDispatch::Integra
     end
   end
 
-  test "a blank code, a malformed one and a classroom code each have their message, in 422" do
-    { "" => :blank, "k7m4q" => :invalid, "KFM 37" => :classroom_code }.each do |school_code, kind|
+  test "a blank code and a malformed one (an old classroom code included) each have their message, in 422" do
+    { "" => :blank, "k7m4q" => :invalid, "KFM 37" => :invalid }.each do |school_code, kind|
       post school_staff_registrations_path, params: { school_staff_registration: registration_params(school_code:) }
 
       assert_refused :school_code, I18n.t("#{ERRORS}.school_code.#{kind}")

@@ -1,4 +1,9 @@
 # ADR-0051 : Navigateurs supportés sans blocage, et budget de poids vérifié en CI
+<!-- index
+titre: Navigateurs supportés sans blocage, et budget de poids vérifié en CI
+statut: Accepté — *complète [0009](./0009-stack-frontend-vanilla-css-tailwind-hotwire.md)* ; *amendé par [0074](./0074-blog-public-articles-images-et-referencement.md) (images de l'éditeur pour le blog seul)*
+problematique: Plus aucun 406 : plancher testé Chrome 111 / Safari 16.4 / Firefox 128 (celui de Tailwind v4), bandeau non bloquant en dessous ; budget gzip bloquant en CI (JS commun ≤ 60 Ko, CSS ≤ 30 Ko) ; Trix, KaTeX et confetti chargés à la demande. Tranche F-29 du programme de refonte.
+-->
 
 | | |
 |---|---|

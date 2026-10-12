@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::SchoolsController
 # Rôle : liste nationale filtrée, fiche (enseignants en attente, « Direction », « Directions retirées »), modale, confirmations lues à la demande, désactivation
-# ADR  : 0026, 0030, 0036, 0059, 0063, 0076, 0077 · UDR : 0006, 0036, 0046, 0050, 0070 · aucune création : un établissement n'entre que par l'import
+# ADR  : 0026, 0030, 0036, 0059, 0063, 0076, 0077, 0088 · UDR : 0006, 0036, 0046, 0050, 0070, 0083 · aucune création : un établissement n'entre que par l'import
 module Teams
   class SchoolsController < BaseController
     include SchoolStaffBlock
@@ -18,7 +18,7 @@ module Teams
 
     # « /teams/schools/new » n'a pas de route : il arrive ici comme un public_id inconnu, donc 404.
     def show
-      @school = Queries::School::SchoolDetailQuery.new.call(public_id: params[:public_id])
+      @school = Queries::School::SchoolDetailQuery.new.call(public_id: params[:public_id], archives: params[:archives] == "1")
       return render_not_found if @school.nil?
 
       @level_classrooms = Queries::School::LevelClassroomsQuery.new.call(public_id: params[:public_id])

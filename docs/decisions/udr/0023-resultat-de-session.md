@@ -1,4 +1,10 @@
 # UDR-0023 : Résultat de session — note, badge et correction, sans jamais montrer les bonnes réponses à l'élève
+<!-- index
+titre: Résultat de session
+statut: Accepté — *amendé le 2026-10-02 : épuration élève (UDR-0057)*
+adr-lie: [0028](../adr/0028-policies-de-domaine-par-use-case.md), [0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md), [0054](../adr/0054-moteur-d-evaluation-soumission-et-cloture.md)
+problematique: Note, badge et correction, sans jamais montrer les bonnes réponses à l'élève
+-->
 
 | | |
 |---|---|

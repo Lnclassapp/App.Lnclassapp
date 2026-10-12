@@ -1,4 +1,10 @@
 # UDR-0045 : Barème des classes — un tableau par ligne du référentiel, public et privé côte à côte, totaux par établissement, modification en modale
+<!-- index
+titre: Barème des classes
+statut: Accepté
+adr-lie: [0058](../adr/0058-bareme-des-classes-en-base.md), [0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md)
+problematique: Tableau public/privé par ligne du référentiel, totaux par établissement, « Non défini » signalé, modification en modale au menu ⋮ ; accès depuis l'accueil, Niveaux et le menu « Classes » des établissements. UDR-0044 laissée libre (chantiers parallèles).
+-->
 
 | | |
 |---|---|

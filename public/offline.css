@@ -1,0 +1,78 @@
+/* Page « Pas de connexion » (UDR-0078 §3.2, ADR-0082 §4.2) : gardée par le programme d'arrière-plan, sans script ni
+   police web. Recopie à la main des tokens du design system ; toute modification augmente le numéro de cache du programme. */
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --ink: #1f2128;
+  --mute: #5f6470;
+  --accent: #00a0ff;
+  --accent-strong: #0070b3;
+  --on-accent: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1218;
+    --ink: #eef1f5;
+    --mute: #9aa3b0;
+    --accent-strong: #7fd0ff;
+    --on-accent: #0f1218;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+.offline {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 16px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-width: 22rem;
+  margin: 0 auto;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.offline img { border-radius: 18px; }
+
+.offline h1 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.offline p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--mute);
+}
+
+.offline-retry {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 9999px;
+  background: var(--accent-strong);
+  color: var(--on-accent);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.offline-retry:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}

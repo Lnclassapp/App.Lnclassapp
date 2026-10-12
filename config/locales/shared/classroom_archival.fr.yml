@@ -1,0 +1,39 @@
+# ADR-0088, UDR-0083 : menus d'archivage d'une classe et d'un niveau, bouton des archives.
+fr:
+  shared:
+    classroom_archive_menu:
+      actions: "Actions de la classe %{name}"
+      archive: "Archiver la classe"
+      restore: "Restaurer la classe"
+      title: "Archiver la classe %{name} ?"
+      people: "%{students} et %{teachers}"
+      students:
+        one: "%{count} élève"
+        other: "%{count} élèves"
+      teachers:
+        one: "%{count} enseignant"
+        other: "%{count} enseignants"
+      warning: "%{people} ne la verront plus. Rien n'est supprimé : vous pouvez la restaurer à tout moment."
+      cancel: "Annuler"
+      confirm: "Archiver la classe"
+    level_archive_menu:
+      actions: "Actions du niveau %{name}"
+      archive: "Archiver le niveau"
+      title:
+        one: "Archiver la classe de %{name} ?"
+        other: "Archiver les %{count} classes de %{name} ?"
+      people: "%{students} et %{teachers}"
+      students:
+        one: "%{count} élève"
+        other: "%{count} élèves"
+      teachers:
+        one: "%{count} enseignant"
+        other: "%{count} enseignants"
+      warning: "%{people} ne les verront plus. Rien n'est supprimé : vous pouvez restaurer chaque classe à tout moment."
+      cancel: "Annuler"
+      confirm: "Archiver le niveau"
+    archives_toggle:
+      show:
+        one: "Afficher les archives (%{count})"
+        other: "Afficher les archives (%{count})"
+      hide: "Masquer les archives"

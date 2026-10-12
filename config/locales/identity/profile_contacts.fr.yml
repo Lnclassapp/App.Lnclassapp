@@ -5,7 +5,7 @@ fr:
   activemodel:
     attributes:
       dtos/identity/contact_change_input:
-        current_pin: "PIN actuel"
+        current_pin: "Code secret actuel"
         contact: "Nouveau numéro"
         contact_confirmation: "Confirmation du nouveau numéro"
     errors:
@@ -13,9 +13,9 @@ fr:
         dtos/identity/contact_change_input:
           attributes:
             current_pin:
-              blank: "Le PIN actuel est obligatoire."
-              invalid: "Le PIN compte 4 chiffres."
-              incorrect: "PIN incorrect."
+              blank: "Le code secret actuel est obligatoire."
+              invalid: "Le code secret compte 4 chiffres."
+              incorrect: "Code secret incorrect."
             contact:
               blank: "Le nouveau numéro est obligatoire."
               invalid: "Un numéro ivoirien compte 10 chiffres, par exemple 05 01 02 03 04."
@@ -29,8 +29,8 @@ fr:
         title: "Changer mon numéro"
         intro: "Vous vous connecterez ensuite avec le nouveau numéro. Vos autres appareils seront déconnectés."
         intro_student: "Tu te connecteras ensuite avec le nouveau numéro. Tes autres appareils seront déconnectés."
-        current_pin_hint: "Le PIN à 4 chiffres que vous utilisez pour vous connecter."
-        current_pin_hint_student: "Le PIN à 4 chiffres que tu utilises pour te connecter."
+        current_pin_hint: "Le code secret à 4 chiffres que vous utilisez pour vous connecter."
+        current_pin_hint_student: "Le code secret à 4 chiffres que tu utilises pour te connecter."
         contact_placeholder: "07 00 00 00 00"
         cancel: "Annuler"
         submit: "Changer mon numéro"

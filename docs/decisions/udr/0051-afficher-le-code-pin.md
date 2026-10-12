@@ -1,4 +1,10 @@
 # UDR-0051 : Afficher le code PIN — bouton œil dans chaque champ de PIN
+<!-- index
+titre: Afficher le code PIN
+statut: Accepté
+adr-lie: [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md), [0050](../adr/0050-authentification-et-session.md)
+problematique: Un bouton œil dans chaque champ de PIN (`ui_field … reveal: true`, contrôleur `password-reveal`), masqué au chargement et avant l'envoi, absent sans JavaScript. Amende UDR-0005
+-->
 
 | | |
 |---|---|

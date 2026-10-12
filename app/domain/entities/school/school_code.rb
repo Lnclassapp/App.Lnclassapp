@@ -28,9 +28,6 @@ module Entities
       def self.normalize(raw) = raw.to_s.gsub(/[\s-]+/, "").downcase
       def self.valid?(code) = FORMAT.match?(code.to_s)
 
-      # Un code de classe saisi par erreur : reconnu à sa forme, sans aucune recherche.
-      def self.classroom_code?(code) = Entities::Classroom::JoinCode.valid?(code)
-
       def self.display(code)
         code && "#{code[0, GROUP]}-#{code[GROUP..]}".upcase
       end

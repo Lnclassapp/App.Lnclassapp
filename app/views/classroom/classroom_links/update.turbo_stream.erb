@@ -1,0 +1,5 @@
+<%# 🌐 UI · classroom/classroom_links/update — succès de « Changer le lien » %>
+<%# Rôle : toast, bloc #classroom_link remplacé par le nouveau lien (ce qui referme la confirmation) %>
+<%# ADR  : 0085 (§4.1) · UDR : 0081 (§3.6) %>
+<%= turbo_stream_toast t("classroom.classrooms.link.changed"), type: :success %>
+<%= turbo_stream.replace "classroom_link", partial: "classroom/classrooms/link", locals: { classroom: @classroom } %>

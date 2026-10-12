@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · ApplicationController
-# Rôle : contrôleur parent ; authentifie par défaut, traduit les résultats, signale un navigateur ancien, ferme aux moteurs tout hôte hors production
-# ADR  : 0026, 0031, 0050, 0051, 0074 (amendement du 2026-10-07)
+# Rôle : contrôleur parent ; authentifie par défaut, traduit les résultats, signale un navigateur ancien, ferme aux moteurs tout hôte hors production, reconnaît l'app Android
+# ADR  : 0026, 0031, 0050, 0051, 0074 (amendement du 2026-10-07), 0084, 0086
 class ApplicationController < ActionController::Base
   include Authentication
   include RendersResult
@@ -15,4 +15,20 @@ class ApplicationController < ActionController::Base
   prepend_before_action do
     response.set_header("X-Robots-Tag", "noindex, nofollow") unless Rails.configuration.x.indexed_hosts.include?(request.host)
   end
+
+  # ADR-0084 §4.1 : une coque Lnclass se reconnaît au marqueur de Hotwire Native suivi de son jeton « <Jeton>/<version> ».
+  # Le jeton seul, sans Hotwire Native, ne compte pas. → :android_student, :android_teacher (ADR-0086 §4.1) ou nil
+  LNCLASS_APPS = { "LnclassStudentAndroid" => :android_student, "LnclassTeacherAndroid" => :android_teacher }.freeze
+
+  private
+
+  def lnclass_app
+    return unless hotwire_native_app?
+
+    LNCLASS_APPS.find { |token, _| request.user_agent.to_s.include?("#{token}/") }&.last
+  end
+  helper_method :lnclass_app
+
+  def lnclass_app? = lnclass_app.present?
+  helper_method :lnclass_app?
 end

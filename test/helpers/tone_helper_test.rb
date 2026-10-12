@@ -10,20 +10,20 @@ class ToneHelperTest < ActionView::TestCase
   test "a student reads the « _student » variant of a key" do
     self.current_actor = actor(:student)
 
-    assert_equal "Ton PIN est changé.", tone_t("identity.profile_pins.update.changed")
+    assert_equal "Ton code secret est changé.", tone_t("identity.profile_pins.update.changed")
   end
 
   test "a teacher, a team member and a visitor read the key itself" do
     [ actor(:teacher), actor(:team), nil ].each do |someone|
       self.current_actor = someone
 
-      assert_equal "Votre PIN est changé.", tone_t("identity.profile_pins.update.changed")
+      assert_equal "Votre code secret est changé.", tone_t("identity.profile_pins.update.changed")
     end
   end
 
   test "a key without a variant is the same for the student" do
     self.current_actor = actor(:student)
 
-    assert_equal "Changer mon PIN", tone_t("identity.profiles.show.change_pin")
+    assert_equal "Changer mon code secret", tone_t("identity.profiles.show.change_pin")
   end
 end

@@ -31,7 +31,7 @@ class Teams::AccountDeletionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "turbo-frame#modal dialog#account-deletion-modal[open]" do
       assert_select "h2", "Supprimer le compte de Awa Koné ?"
-      assert_select "p", text: /Le nom, le numéro, le PIN et la photo sont effacés/
+      assert_select "p", text: /Le nom, le numéro, le code secret et la photo sont effacés/
       assert_select "p", text: /notes, badges et lacunes sont effacés aussi : l'élève sort des chiffres de ses classes/
       assert_select "form#account-deletion-form[action='#{teams_account_deletion_path(@student.public_id)}'][method=post]" do
         assert_select "input[type=date][name='account_deletion[requested_on]'][required][max='#{Date.current.iso8601}']"

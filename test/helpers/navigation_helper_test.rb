@@ -188,6 +188,18 @@ class NavigationHelperTest < ActionView::TestCase
     assert_nil account_links.first[:href]
   end
 
+  # CA-8, CA-T6 (UDR-0080 §3.2, UDR-0082 §3.2): the student and the teacher have the account panel, each with its page
+  # and its links in order; the direction and the team keep the account menu.
+  test "the account panel of the student and of the teacher: its page, then its links in order" do
+    assert_equal [ true, true, false, false ], %w[student teacher school_admin team].map { account_panel?(it) }
+    assert_equal [ "/students/menu", "/teachers/menu" ], %i[student teacher].map { account_panel_page_path(it) }
+    assert_equal [ [ "/profile", "user-circle" ], [ "/courses", "book-open" ] ],
+                 account_panel_links(:student).map { it.values_at(:href, :icon) }
+    assert_equal [ { label: I18n.t("shared.navigation.profile"), href: "/profile", icon: "user-circle" },
+                   { label: I18n.t("shared.navigation.account_panel.invite"), href: "/teachers/invite", icon: "user-plus" } ],
+                 account_panel_links(:teacher)
+  end
+
   # RE-05, RE-11 (UDR-0068 §3.4, UDR-0069 §3.1).
   test "the teacher's home reads classrooms, courses, announcements then activities; the team's has no referential" do
     assert_equal %i[classrooms courses announcements activity], home_sections_for(:teacher).map(&:first)

@@ -1,4 +1,9 @@
 # ADR-0006 : Séparation Stricte Écriture/Lecture (CQRS Léger) et Élimination des `group_by` Ruby
+<!-- index
+titre: Séparation écriture/lecture (CQRS léger) et anti-`group_by` en RAM
+statut: ⚠️ **Remplacé** par [0026](./0026-contrat-result-entites-et-dto.md)
+problematique: Réserver les Use Cases aux modifications et confier les lectures lourdes (dashboards) à des objets Query (`app/infrastructure/queries/`) exploitant l'agrégation SQL native.
+-->
 
 | | |
 |---|---|

@@ -25,10 +25,10 @@ module Entities
         assert SchoolCode.valid?("234567")
       end
 
-      test "ne se confond jamais avec un code de classe" do
-        assert_not SchoolCode.valid?(Entities::Classroom::JoinCode.generate)
-        assert SchoolCode.classroom_code?("kfm37")
-        assert_not SchoolCode.classroom_code?("k7m4qz")
+      # IL-02 (ADR-0085, Lot F) : il n'y a plus de code de classe à reconnaître ; un ancien code est un code mal formé.
+      test "un ancien code de classe n'est pas un code d'établissement" do
+        assert_not SchoolCode.valid?("kfm37")
+        assert_not SchoolCode.respond_to?(:classroom_code?)
       end
 
       test "tire des codes distincts hors des codes pris, et complète l'ensemble" do

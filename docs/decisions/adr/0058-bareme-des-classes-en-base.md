@@ -1,4 +1,9 @@
 # ADR-0058 : Le barème des classes générées est en base, modifiable par l'équipe, repris à l'identique au déploiement
+<!-- index
+titre: Le barème des classes générées est en base, modifiable par l'équipe, repris à l'identique au déploiement
+statut: Accepté
+problematique: Table `classroom_plan_entries` (type, niveau, série, 0–30) ; reprise par slug ; ligne absente = 0, « Non défini », comptée sautée ; `DefaultClassroomPlan` reçoit le barème. Amende ADR-0030 et ADR-0056. ADR-0057 laissé libre (chantiers parallèles).
+-->
 
 | | |
 |---|---|

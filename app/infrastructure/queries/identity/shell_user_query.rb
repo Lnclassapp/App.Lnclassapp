@@ -4,7 +4,7 @@
 module Queries
   module Identity
     class ShellUserQuery
-      # detail : classe de l'élève, matière de l'enseignant, et son école ; établissement de la direction (UDR-0052) ;
+      # detail : classe active de l'élève (ADR-0088 : une classe archivée n'est plus nommée), matière de l'enseignant, et son école ; établissement de la direction (UDR-0052) ;
       # photo_version : nil sans photo (ADR-0060).
       Row = Data.define(:name, :role, :detail, :public_id, :photo_version)
 
@@ -31,7 +31,7 @@ module Queries
       end
 
       def student_detail(user_id)
-        Orm::ClassroomStudent.joins(classroom: :school).where(student_id: user_id, primary: true, left_at: nil)
+        Orm::ClassroomStudent.joins(classroom: :school).where(student_id: user_id, primary: true, left_at: nil, classrooms: { status: "active" })
                              .pick("classrooms.name", "schools.name")
       end
 

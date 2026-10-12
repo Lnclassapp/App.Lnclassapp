@@ -1,4 +1,9 @@
 # ADR-0081 : Une annonce dure 30 jours et un auteur en a 3 en ligne au plus ; thème de couleur, illustrations SVG de l'équipe reconstruites, enregistrements de téléphone acceptés
+<!-- index
+titre: Une annonce dure 30 jours et un auteur en a 3 en ligne au plus ; thème de couleur, illustrations SVG de l'équipe reconstruites, enregistrements de téléphone acceptés
+statut: Accepté *(porteur, 2026-10-05)* — *amende 0078 (§4.1, §4.4)*
+problematique: Plus de date de fin choisie (parution + 30 j) ; plafond de 3 en ligne par compte, sous verrou de l'auteur à chaque parution ; `messages.theme` (10 clés) par tokens de carte ; `message_illustrations` (formes reconstruites en `jsonb`, jamais insérées), `messages.illustration_id` ; `AudioHeader` sur 4096 octets (MP3 avec remplissage, MP4/3GP de toute marque audio). Chantier `annonces-v2`.
+-->
 
 | | |
 |---|---|

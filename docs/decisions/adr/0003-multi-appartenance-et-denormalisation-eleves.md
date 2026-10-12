@@ -1,4 +1,9 @@
 # ADR-0003 : Multi-Appartenance et Dénormalisation des Élèves (`Student` & `ClassroomStudent`)
+<!-- index
+titre: Multi-appartenance et dénormalisation des élèves (`ClassroomStudent`)
+statut: Accepté — *amendé par [0040](./0040-classe-principale-unique-de-l-eleve.md) (§2, §4)*
+problematique: Supprimer les clés étrangères directes sur `Student` (`level_id`, `school_id`) au profit d'une table de jointure avec attribut `primary: true` (classe officielle).
+-->
 
 | | |
 |---|---|

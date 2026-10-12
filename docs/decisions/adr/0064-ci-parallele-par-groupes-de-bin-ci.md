@@ -1,4 +1,9 @@
 # ADR-0064 : La CI GitHub joue les groupes de `bin/ci` en parallèle, une seule liste d'étapes
+<!-- index
+titre: La CI GitHub joue les groupes de `bin/ci` en parallèle, une seule liste d'étapes
+statut: Accepté *(2026-09-28)*
+problematique: `config/ci.rb` range ses étapes en groupes ; chaque job lance `CI_GROUP=<groupe>` ou une part (`system:k/n`) ; job final `ci` ; tests unitaires jamais découpés (ADR-0024).
+-->
 
 | | |
 |---|---|

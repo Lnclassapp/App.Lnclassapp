@@ -103,7 +103,7 @@ Règles des questions :
 Un seul fichier contient **toute la fiche de cours** : la fiche de cours, ses fiches de révision, les exercices de chaque fiche de révision, leurs questions et leurs propositions. Il s'importe **en une fois** depuis l'écran **Imports → Fiches de cours complètes**. Tout le contenu naît en brouillon.
 
 - `name` : l'intitulé exact de la leçon dans la progression. `subtitle` : « Leçon N — progression DPFC 2026-2027 ».
-- `level_name` : `6ème`, `5ème`, `4ème`, `3ème`, `2nde`, `1ère` ou `Tle`. `material_name` : le nom de la matière dans Lnclass (ex. « Physique-Chimie » pour la physique comme pour la chimie). `series_name` : la série (A1, A2, C, D…), à omettre au 1er cycle.
+- `level_name` : `6ème`, `5ème`, `4ème`, `3ème`, `2nde`, `1ère` ou `Tle`. `material_name` : le nom de la matière dans Lnclass (ex. « Physique-Chimie » pour la physique comme pour la chimie). `series_name` : la série (A, C, D…; A1 et A2 en Tle seulement), à omettre au 1er cycle.
 
 ```json
 {

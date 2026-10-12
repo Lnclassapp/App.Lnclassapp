@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::School::SchoolRepositoryPort
 # Rôle : contrat des établissements, de leur code d'établissement et du rattachement des enseignants
-# ADR  : 0030, 0036, 0039, 0056, 0057, 0063, 0071
+# ADR  : 0030, 0036, 0039, 0056, 0057, 0063, 0071, 0083 · UDR : 0079 · aucune recherche par code national (IE-21)
 module Ports
   module School
     module SchoolRepositoryPort
@@ -20,11 +20,6 @@ module Ports
       # Quel que soit son statut : l'appelant décide (ADR-0057). → Entities::School::School | nil
       def find_by_school_code(school_code:)
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_school_code"
-      end
-
-      # Code national (ADR-0063), quel que soit le statut. → Entities::School::School | nil
-      def find_by_national_code(national_code:)
-        raise NotImplementedError, "#{self.class} doit implémenter #find_by_national_code"
       end
 
       # Codes nationaux déjà pris, pour l'import. → Set[String]
@@ -76,6 +71,12 @@ module Ports
       # archivée) de school_year, id > after_id, par id croissant, `limit` au plus. → [Inserted]
       def without_classrooms(school_year:, after_id:, limit:)
         raise NotImplementedError, "#{self.class} doit implémenter #without_classrooms"
+      end
+
+      # Réparation du second cycle : établissements active ou draft au premier cycle seul, id > after_id, par id croissant,
+      # `limit` au plus. → [Entities::School::School]
+      def first_cycle_after(after_id:, limit:)
+        raise NotImplementedError, "#{self.class} doit implémenter #first_cycle_after"
       end
 
       # Une seule école principale par enseignant (index partiel). → Result | failure(:conflict)

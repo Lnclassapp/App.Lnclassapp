@@ -9,7 +9,7 @@ class FinitionsNarrowTitlesTest < ApplicationSystemTestCase
 
     with_mobile_viewport do
       [ new_school_staff_registration_path, new_teacher_registration_path, invitation_path(invitation.token),
-        join_classroom_path(classroom.join_code) ].each do |path|
+        join_classroom_path(classroom.reload.link_token) ].each do |path|
         visit path
 
         assert_selector "h1", visible: true, count: 1

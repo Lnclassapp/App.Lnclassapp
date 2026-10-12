@@ -38,12 +38,12 @@ module Dtos
         errors.add(:contact, raw_contact.blank? ? :blank : :invalid)
       end
 
-      # La forme seule, sans recherche : un code de classe saisi par erreur a son message (ADR-0057).
+      # La forme seule, sans recherche (ADR-0057).
       def school_code_well_formed
         return errors.add(:school_code, :blank) if school_code.blank?
         return if Entities::School::SchoolCode.valid?(school_code)
 
-        errors.add(:school_code, Entities::School::SchoolCode.classroom_code?(school_code) ? :classroom_code : :invalid)
+        errors.add(:school_code, :invalid)
       end
     end
   end

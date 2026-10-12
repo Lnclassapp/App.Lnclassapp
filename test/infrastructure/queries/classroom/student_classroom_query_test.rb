@@ -51,7 +51,7 @@ module Queries
         assert_nil classroom(left)
 
         secondary = create_user(role: "student")
-        Orm::ClassroomStudent.create!(classroom: @classroom, student: secondary, primary: false, joined_at: Time.current)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: @classroom, student: secondary, primary: false, joined_at: Time.current)
         assert_nil classroom(secondary)
       end
 
@@ -142,7 +142,7 @@ module Queries
 
       test "the primary classroom only" do
         other = create_classroom
-        Orm::ClassroomStudent.create!(classroom: other, student: @student, primary: false, joined_at: Time.current)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: other, student: @student, primary: false, joined_at: Time.current)
         create_assignment(classroom: other)
 
         assert_equal @classroom.public_id, classroom.public_id

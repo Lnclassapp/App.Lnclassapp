@@ -1,5 +1,10 @@
 # UDR-NNNN : [Titre — quelle surface d'interface]
-
+<!-- index
+titre: [titre court de l'index]
+statut: Accepté
+adr-lie: [NNNN](../adr/NNNN-slug.md)
+problematique: [une phrase : le problème d'interface que la décision tranche]
+-->
 <!--
   Nom du fichier : NNNN-titre-en-kebab-case.md
   Une UDR n'est pas un compte-rendu de design : c'est une CONSIGNE EXÉCUTABLE.

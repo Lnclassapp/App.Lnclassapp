@@ -1,4 +1,10 @@
 # UDR-0075 : Annonces — thème de couleur, illustrations de l'équipe, décompte des caractères, trois annonces en ligne
+<!-- index
+titre: Annonces : thème de couleur, illustrations de l'équipe, décompte des caractères, trois annonces en ligne
+statut: Accepté *(porteur, 2026-10-05)*
+adr-lie: [0081](../adr/0081-annonces-trois-en-ligne-themes-et-illustrations-de-l-equipe.md), [0078](../adr/0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md)
+problematique: 10 thèmes par tokens de carte (contrastes mesurés en clair et en sombre) ; décompte du titre et du texte (contrôleur de l'UDR-0067) ; pastilles de thème ; illustrations de l'équipe dans le choix ; plus de « Visible jusqu'au » ; encadré du plafond ; page « Illustrations d'annonce » et tuile du Référentiel. Amende 0071 (§3.2, §3.3, §3.8) et 0068 (§3.4).
+-->
 
 | | |
 |---|---|

@@ -1,4 +1,10 @@
 # UDR-0026 : Accueil enseignant — mes classes et leurs chiffres, activité « Bientôt », cours ; aucun montant
+<!-- index
+titre: Accueil enseignant
+statut: Accepté — *amendée par 0069 (accueil réordonné, cours par niveau), 2026-10-03*
+adr-lie: [0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md), [0041](../adr/0041-vie-d-une-classe-annee-scolaire-et-code.md), [0048](../adr/0048-statuts-d-assignation-active-et-archived.md)
+problematique: Mes classes et leurs chiffres, activité « Bientôt », cours ; aucun montant
+-->
 
 | | |
 |---|---|

@@ -5,7 +5,7 @@ require "test_helper"
 class Classroom::ForeignTeacherAccessTest < ActionDispatch::IntegrationTest
   setup do
     @school = create_school
-    @classroom = create_classroom(school: @school, name: "3ème B", join_code: "kfm37")
+    @classroom = create_classroom(school: @school, name: "3ème B")
     create_teacher(school: @school, classrooms: [ @classroom ])
     create_student(classroom: @classroom, first_name: "Mariam", last_name: "Traoré")
   end

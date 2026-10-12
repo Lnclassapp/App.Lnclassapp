@@ -1,4 +1,10 @@
 # UDR-0063 : Pages publiques — Notre mission, Protection des données, Conditions d'utilisation, Conditions de vente
+<!-- index
+titre: Pages publiques : Notre mission, Protection des données, CGU, CGV
+statut: Accepté *(porteur, 2026-10-02 : « lance les lots »)* — *amendé le 2026-10-02 : les quatre pages en ligne avant la relecture des juristes, mentions visibles* ; *amendée par [0066](./0066-blog-public-liste-article-et-partage.md) (`blog_link`, pied de la homepage)*
+adr-lie: [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md)
+problematique: `/mission`, `/confidentialite`, `/conditions-utilisation`, `/conditions-vente` (`Communication::PagesController`) sur le motif de `/aide` ; textes en locales, aucun fait inventé, une page en ligne seulement complète ; liens au pied de la homepage, sur `/aide` et dans la carte d'aide ; CGV dépendantes d'`abonnement-mobile-money`. Amende UDR-0061 §3.1, 0012
+-->
 
 | | |
 |---|---|

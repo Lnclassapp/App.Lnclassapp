@@ -1,4 +1,9 @@
 # ADR-0009 : Stack Frontend Moderne — Vanilla CSS, Tailwind CSS v4, Hotwire (Turbo/Stimulus) & KaTeX
+<!-- index
+titre: Stack frontend — Tailwind v4, Hotwire (Turbo/Stimulus), Redux & KaTeX
+statut: ⚠️ **Remplacé partiellement** par [0013](./0013-suppression-redux-et-introduction-dto.md) *(partie Redux)*
+problematique: Éviter une SPA lourde en optant pour le rendu serveur (Turbo Stream) et KaTeX pour les formules. **Redux n'est plus en vigueur** ; Tailwind v4, Hotwire et KaTeX le restent. Depuis le 2026-09-25, tous les CRUD passent par Turbo Frames et Streams (§3, point 6).
+-->
 
 | | |
 |---|---|

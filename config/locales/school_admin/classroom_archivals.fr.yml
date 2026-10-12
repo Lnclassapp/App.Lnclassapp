@@ -1,0 +1,26 @@
+# Archivage d'une classe et d'un niveau par la direction (ADR-0088, UDR-0083) : toasts des deux contrôleurs, puis les textes que la
+# page d'un niveau ajoute à school_admin.levels (carte et page), fusionnés ici pour tenir dans le périmètre du lot.
+# Les menus ⋮, la confirmation et le bouton des archives sont ceux de shared.classroom_archive_menu / level_archive_menu / archives_toggle.
+fr:
+  school_admin:
+    classroom_archivals:
+      archive:
+        done: "Classe « %{name} » archivée."
+        undo: "Annuler"
+      restore:
+        done: "Classe « %{name} » restaurée."
+      errors:
+        already_archived: "Cette classe est déjà archivée."
+        not_archived: "Cette classe n'est pas archivée."
+    level_archivals:
+      create:
+        done:
+          one: "%{count} classe de %{name} archivée."
+          other: "%{count} classes de %{name} archivées."
+      errors:
+        nothing_to_archive: "Ce niveau n'a aucune classe active à archiver."
+    levels:
+      show:
+        empty: "Aucune classe à afficher pour ce niveau."
+      classroom_card:
+        archived: "Archivée"

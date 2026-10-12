@@ -86,7 +86,7 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     second = create_classroom(school: @school, level: @level, name: "2nde C 2")
     create_classroom(school: @school, level: @level, name: "2nde C 9", status: "archived")
     both = create_student(classroom: @classroom)
-    Orm::ClassroomStudent.create!(classroom: second, student: both, primary: false, joined_at: Time.current)
+    Orm::ClassroomStudent.create!(joined_via: "standard", classroom: second, student: both, primary: false, joined_at: Time.current)
     create_student(classroom: second)
     create_teacher(school: @school, classrooms: [ @classroom, second ])
     sign_in_as @admin
@@ -286,7 +286,7 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     given = create_assignment(classroom: @classroom, by: teacher)
     create_assignment(classroom: @classroom, by: teacher)
     aya = create_student(classroom: @classroom, first_name: "Aya", last_name: "Bamba")
-    create_student(classroom: @classroom, first_name: "Koffi", last_name: "Diallo")
+    koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Diallo")
     handed_in(aya, given, 72)
     sign_in_as @admin
 
@@ -302,20 +302,21 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "ul#classroom_figures li", text: /2\s+#{tc('show.figures.assignments')}/
     assert_select "ul#classroom_figures li", text: /25 %\s+#{tc('show.figures.submission_rate')}/
     assert_select "#classroom_students caption.sr-only", text: tc("show.caption", classroom: "2nde C 1")
-    assert_select "#classroom_students th[scope=col]", count: 3
-    assert_select "tr#student_0" do
-      assert_select "th[scope=row]", text: "Aya Bamba"
+    assert_select "#classroom_students th[scope=col]", count: 4
+    assert_select "#classroom_students tbody tr", count: 2
+    assert_select "tr#student_#{aya.public_id}" do
+      assert_select "th[scope=row] p", text: "Aya Bamba"
       assert_select "td", text: "1 / 2"
       assert_select "td", text: "72 %"
     end
-    assert_select "tr#student_1" do
-      assert_select "th[scope=row]", text: "Koffi Diallo"
+    assert_select "tr#student_#{koffi.public_id}" do
+      assert_select "th[scope=row] p", text: "Koffi Diallo"
       assert_select "td", text: "0 / 2"
       assert_select "td span[aria-hidden=true]", text: "—"
     end
-    assert_no_match(/#{aya.public_id}|#{aya.contact}/, response.body)
-    assert_select "main form", count: 1
+    assert_no_match(/#{aya.contact}/, response.body)
     assert_select "main form#student-work-search input[name=q]", count: 1
+    assert_select "form#student-work-search button#student-work-search-submit-#{@classroom.public_id}[data-turbo-permanent]"
   end
 
   # Memo of remediation-comptee-faite: Aya fails X at 25 %, a gap opens on the fiche (ADR-0043), she then does Y in
@@ -339,8 +340,8 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     get school_admin_classroom_path(@classroom.public_id)
 
     assert_select "ul#classroom_figures li", text: /100 %\s+#{tc('show.figures.submission_rate')}/
-    assert_select "tr#student_0" do
-      assert_select "th[scope=row]", text: "Aya Bamba"
+    assert_select "tr#student_#{aya.public_id}" do
+      assert_select "th[scope=row] p", text: "Aya Bamba"
       assert_select "td", text: "2 / 2"
       assert_select "td", text: "53 %"
     end
@@ -417,7 +418,7 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#student_work_students" do
       assert_select "[aria-live=polite]", text: tc("show.search.count", count: 1)
       assert_select "tbody tr", count: 1
-      assert_select "tbody th[scope=row]", text: "Fanta Diabaté"
+      assert_select "tbody th[scope=row] p", text: "Fanta Diabaté"
     end
     assert_select "p", text: tc("show.subtitle", level: "2nde", count: 3)
     assert_select "ul#classroom_figures li", text: /33 %\s+#{tc('show.figures.submission_rate')}/
@@ -443,7 +444,7 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     get school_admin_classroom_path(@classroom.public_id, q: "aya")
 
     assert_select "#student_work_students tbody tr", count: 1
-    assert_select "#student_work_students tbody th[scope=row]", text: "Aya Bamba"
+    assert_select "#student_work_students tbody th[scope=row] p", text: "Aya Bamba"
   end
 
   test "FU-49: a classroom without student offers no search" do
@@ -453,6 +454,147 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "form#student-work-search", count: 0
     assert_select "#classroom_students", text: /#{tc('show.empty')}/
+  end
+
+  # IL-12, IL-13, IL-14 from the direction's page (ADR-0085 §4.5, UDR-0081 §3.6, §3.7): the link block above the three tiles,
+  # then on the numbered lines the new arrivals, their arrival channel and « Retirer de la classe » in the line's ⋮ menu. The
+  # gestures are those of the teacher's page (Lots C and D), under ManageClassroomMembersPolicy: its own school only.
+  def tl(key, **) = I18n.t("classroom.classrooms.link.#{key}", **)
+  def tr(key, **) = I18n.t("classroom.classrooms.roster.#{key}", **)
+  def membership(student, classroom: @classroom) = Orm::ClassroomStudent.find_by!(classroom:, student:)
+
+  test "IL-12: the link block sits above the three tiles, without its address in clear, even in an empty classroom" do
+    sign_in_as @admin
+
+    get school_admin_classroom_path(@classroom.public_id)
+
+    url = join_classroom_url(@classroom.reload.link_token)
+    assert_response :success
+    assert_operator response.body.index('id="classroom_link"'), :<, response.body.index('id="classroom_figures"')
+    # The page fetched again after a removal is morphed: the block keeps « Copier le lien », shown by its controller.
+    assert_select "#classroom_link_block_#{@classroom.public_id}[data-turbo-permanent] > #classroom_link"
+    assert_select "#classroom_link" do
+      assert_select "p#classroom_link_label", text: tl("label")
+      assert_select "[data-clipboard-text-value=?] button[aria-label=?]", url, tl("copy_label"), text: tl("copy")
+      message = tl("whatsapp_message", classroom: "2nde C 1", url:)
+      assert_select "a[href=?][target=_blank][rel=noopener]", "https://wa.me/?text=#{ERB::Util.url_encode(message)}",
+                    text: tl("whatsapp")
+      assert_select "p", text: tl("hint")
+      assert_select "button[aria-label=?]", tl("more_label")
+      assert_select "[role=menuitem][aria-controls=change-classroom-link]", text: tl("change")
+      assert_select "dialog#change-classroom-link form#change-classroom-link-form[action=?] input[name=_method][value=patch]",
+                    classroom_link_path(@classroom.public_id)
+    end
+    assert_no_match url, css_select("#classroom_link").map(&:text).join
+    assert_select "#classroom_students h2#classroom_roster_title", text: tr("title", count: 0)
+    assert_select "#classroom_students", text: /#{tc('show.empty')}/
+  end
+
+  test "IL-12: the direction changes the link of its school's classroom; without JavaScript, it comes back to its page" do
+    old = @classroom.reload.link_token
+    sign_in_as @admin
+
+    patch classroom_link_path(@classroom.public_id), as: :turbo_stream
+
+    assert_response :success
+    assert_not_equal old, @classroom.reload.link_token
+    assert_select "turbo-stream[action=replace][target=classroom_link] template #classroom_link [data-clipboard-text-value=?]",
+                  join_classroom_url(@classroom.link_token)
+
+    page = school_admin_classroom_url(@classroom.public_id)
+    patch classroom_link_path(@classroom.public_id), headers: { "HTTP_REFERER" => page }
+
+    assert_redirected_to page
+    follow_redirect!
+    assert_select "#classroom_link [data-clipboard-text-value=?]", join_classroom_url(@classroom.reload.link_token)
+  end
+
+  test "IL-12: another school's classroom is a 404 for its page, its link and its students; nothing changes" do
+    intruder = Orm::ClassroomStudent.find_by!(classroom: @other).student
+    token = @other.reload.link_token
+    sign_in_as @admin
+
+    get school_admin_classroom_path(@other.public_id)
+    assert_response :not_found
+    patch classroom_link_path(@other.public_id), as: :turbo_stream
+    assert_response :not_found
+    delete classroom_student_path(@other.public_id, intruder.public_id), as: :turbo_stream
+    assert_response :not_found
+
+    assert_equal token, @other.reload.link_token
+    assert_nil membership(intruder, classroom: @other).removed_at
+    assert_no_match(/Intrus/, response.body)
+  end
+
+  test "IL-13: « Nouveau » and the arrival channel under each name, « 1 nouveau » in the list title, newcomers first" do
+    koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao", joined_at: 2.days.ago)
+    awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba", joined_via: "link", joined_at: 10.days.ago)
+    ali = create_student(classroom: @classroom, first_name: "Ali", last_name: "Cissé", joined_via: "code", joined_at: 1.year.ago)
+    sign_in_as @admin
+
+    get school_admin_classroom_path(@classroom.public_id)
+
+    assert_select "#classroom_students h2#classroom_roster_title[tabindex='-1']", text: /#{tr('title', count: 3)}/ do
+      assert_select "span", text: tr("new_count", count: 1)
+    end
+    assert_select "tr#student_#{koffi.public_id} th[scope=row]" do
+      assert_select "p", text: "Koffi Yao"
+      assert_select "span", text: tr("new")
+      assert_select "p.text-xs.text-mute", text: tr("via.standard")
+    end
+    assert_select "tr#student_#{awa.public_id} th[scope=row]" do
+      assert_select "span", text: tr("new"), count: 0
+      assert_select "p.text-xs.text-mute", text: tr("via.link")
+    end
+    assert_select "tr#student_#{ali.public_id} th[scope=row]" do
+      assert_select "span", text: tr("new"), count: 0
+      assert_select "p", count: 1, text: "Ali Cissé"
+    end
+    # UDR-0081 §3.7 (challenger de la phase 5, E3) : le nouveau d'abord, puis les autres par nom, comme chez l'enseignant.
+    assert_equal [ koffi, awa, ali ].map { "student_#{it.public_id}" }, css_select("#classroom_students tbody tr").map { it["id"] }
+  end
+
+  test "IL-14: each line's ⋮ menu removes its student after a confirmation naming them; the page then counts one less" do
+    koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
+    awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
+    sign_in_as @admin
+
+    get school_admin_classroom_path(@classroom.public_id)
+
+    dialog = "remove-student-#{koffi.public_id}"
+    assert_select "#classroom_students th[scope=col] .sr-only", text: tc("show.columns.actions")
+    assert_select "tr#student_#{koffi.public_id}" do
+      assert_select "button[aria-haspopup=menu][aria-label=?]", tr("actions_label", name: "Koffi Yao")
+      assert_select "[role=menuitem]", count: 1
+      assert_select "[role=menuitem][aria-controls=?]", dialog, text: tr("remove")
+      assert_select "dialog##{dialog}" do
+        assert_select "h2", text: tr("remove_title", name: "Koffi Yao")
+        assert_select "p", text: tr("remove_warning", name: "Koffi Yao")
+        assert_select "form##{dialog}-form[action=?][data-turbo-frame=_top] input[name=_method][value=delete]",
+                      classroom_student_path(@classroom.public_id, koffi.public_id)
+        assert_select "button[type=submit][form=?]", "#{dialog}-form", text: tr("remove_confirm")
+        assert_select "button", text: tr("cancel")
+      end
+    end
+    # ADR-0085 §4.5: a student's public_id is on the line of the gesture, nowhere else.
+    [ koffi, awa ].each do |student|
+      assert_operator response.body.scan(student.public_id).size, :>, 0
+      assert_equal response.body.scan(student.public_id).size, css_select("tr#student_#{student.public_id}").to_s.scan(student.public_id).size
+    end
+
+    delete classroom_student_path(@classroom.public_id, koffi.public_id), as: :turbo_stream
+
+    assert_response :success
+    assert_select "turbo-stream[action=remove][target=student_#{koffi.public_id}]"
+    assert_select "turbo-stream[action=refresh]"
+    assert_equal @admin.id, membership(koffi).removed_by_id
+
+    get school_admin_classroom_path(@classroom.public_id)
+
+    assert_select "p", text: tc("show.subtitle", level: "2nde", count: 1)
+    assert_select "#classroom_students h2#classroom_roster_title", text: /\A\s*#{tr('title', count: 1)}\s+#{tr('new_count', count: 1)}\s*\z/
+    assert_select "#classroom_students tbody tr", count: 1
+    assert_no_match(/Koffi/, response.body)
   end
 
   # ID-10 (ADR-0077 §4.4, UDR-0070 §3.3, UDR-0074 §3.2): the arrival banner, between the greeting and the home's sections.

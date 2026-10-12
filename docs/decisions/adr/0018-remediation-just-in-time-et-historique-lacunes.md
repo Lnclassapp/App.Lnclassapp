@@ -1,4 +1,9 @@
 # ADR-0018 : Feature Remédiation, Génération Just-In-Time et Historique des Lacunes
+<!-- index
+titre: Remédiation, génération just-in-time et historique des lacunes
+statut: ⚠️ **Remplacé partiellement** par [0043](./0043-remediation-declenchee-par-la-cloture.md) *(§3)*, [0027](./0027-contextes-bornes-et-arborescence.md) *(noms)*, [0029](./0029-identifiants-exposes-public-id-et-slugs.md) *(clé)*
+problematique: Tracer les lacunes (`KnowledgeGap`) d'un élève et générer la session de rattrapage au moment exact du clic, sans polluer la base de sessions orphelines.
+-->
 
 | | |
 |---|---|

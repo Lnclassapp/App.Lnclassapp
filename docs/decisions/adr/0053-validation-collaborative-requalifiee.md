@@ -1,4 +1,9 @@
 # ADR-0053 : La validation collaborative n'entre pas dans le projet cible avant une décision produit, et aucun label de conformité n'est affiché
+<!-- index
+titre: La validation collaborative n'entre pas dans le projet cible avant une décision produit, et aucun label de conformité n'est affiché
+statut: Accepté — *remplace 0011*
+problematique: Bandeau « Conforme au programme » retiré ; aucune table ni route avant la V8 ; trois questions produit préalables. F-33.
+-->
 
 | | |
 |---|---|

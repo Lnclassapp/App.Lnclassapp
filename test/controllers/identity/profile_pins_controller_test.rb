@@ -46,7 +46,7 @@ class Identity::ProfilePinsControllerTest < ActionDispatch::IntegrationTest
         assert_select "input[type=password][name='pin_change[#{field}]'][autocomplete=new-password][inputmode=numeric][maxlength='4'][required]"
       end
     end
-    assert_select "button[type=submit][form=profile-pin-form]", "Changer mon PIN"
+    assert_select "button[type=submit][form=profile-pin-form]", "Changer mon code secret"
   end
 
   test "without a frame, the same modal opens on the shell" do
@@ -67,7 +67,7 @@ class Identity::ProfilePinsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to profile_path
     assert_response :see_other
-    assert_equal "Votre PIN est changé.", flash[:notice]
+    assert_equal "Votre code secret est changé.", flash[:notice]
     assert flash[Authentication::RELOAD_FLASH], "la session renouvelée recharge la page d'arrivée (ADR-0049)"
     assert_no_pin_in_response
     assert Orm::User.authenticate_by(contact: @teacher.contact, pin: "1357")
@@ -101,7 +101,7 @@ class Identity::ProfilePinsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :unprocessable_entity
     assert_select "turbo-frame#modal dialog#profile-pin-modal"
-    assert_select "[role=alert]", text: "PIN incorrect."
+    assert_select "[role=alert]", text: "Code secret incorrect."
     assert_select "#pin_change_current_pin_error", 0
     assert_no_pin_in_response
     assert_pin_kept
@@ -111,11 +111,11 @@ class Identity::ProfilePinsControllerTest < ActionDispatch::IntegrationTest
   test "a confirmation that differs, a PIN out of format and the current PIN are refused in 422, fields emptied" do
     sign_in_as @teacher
     {
-      { pin_confirmation: "1358" } => [ "pin_confirmation", "Les deux PIN ne sont pas identiques." ],
-      { pin: "13579", pin_confirmation: "13579" } => [ "pin", "Le PIN compte 4 chiffres." ],
-      { pin: "", pin_confirmation: "" } => [ "pin", "Le nouveau PIN, à 4 chiffres, est obligatoire." ],
-      { current_pin: "" } => [ "current_pin", "Le PIN actuel est obligatoire." ],
-      { pin: "2468" } => [ "pin", "C'est déjà le PIN de ce compte." ]
+      { pin_confirmation: "1358" } => [ "pin_confirmation", "Les deux codes secrets ne sont pas identiques." ],
+      { pin: "13579", pin_confirmation: "13579" } => [ "pin", "Le code secret compte 4 chiffres." ],
+      { pin: "", pin_confirmation: "" } => [ "pin", "Le nouveau code secret, à 4 chiffres, est obligatoire." ],
+      { current_pin: "" } => [ "current_pin", "Le code secret actuel est obligatoire." ],
+      { pin: "2468" } => [ "pin", "C'est déjà le code secret de ce compte." ]
     }.each do |entry, (field, message)|
       change_pin(**entry)
 

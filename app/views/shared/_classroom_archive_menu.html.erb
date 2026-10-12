@@ -1,0 +1,27 @@
+<%# 🌐 UI · shared/_classroom_archive_menu — menu ⋮ d'une carte de classe : archiver (confirmé) ou restaurer %>
+<%# Rôle : « Archiver la classe » ouvre une confirmation qui chiffre l'impact ; « Restaurer la classe » agit tout de suite %>
+<%# ADR  : 0088 · UDR : 0083, 0042, 0056 · Stimulus : dropdown, modal %>
+<%# locals: (name:, public_id:, archived:, students_count:, teachers_count:, archive_path:, restore_path:) -%>
+<% dialog_id = "archive-classroom-#{public_id}" %>
+<%# Au-dessus du lien étiré de la carte (z-10), comme « Copier le lien ». %>
+<div class="relative z-10">
+  <%= ui_dropdown label: t(".actions", name:), id: "classroom-menu-#{public_id}", fixed: true do %>
+    <% if archived %>
+      <%= ui_dropdown_item t(".restore"), href: restore_path, method: :patch, icon: "arrow-uturn-left" %>
+    <% else %>
+      <%= ui_dropdown_item t(".archive"), dialog: dialog_id, icon: "archive-box", tone: :danger %>
+    <% end %>
+  <% end %>
+  <% unless archived %>
+    <%= ui_modal title: t(".title", name:), id: dialog_id, size: :sm, described_by: "#{dialog_id}-description" do |modal| %>
+      <% modal.footer do %>
+        <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+        <%= ui_button t(".confirm"), type: :submit, form: "#{dialog_id}-form", variant: :danger, icon: "archive-box" %>
+      <% end %>
+      <p id="<%= dialog_id %>-description" class="text-sm text-mute">
+        <%= t(".warning", people: t(".people", students: t(".students", count: students_count), teachers: t(".teachers", count: teachers_count))) %>
+      </p>
+      <%= form_with url: archive_path, method: :patch, id: "#{dialog_id}-form" do %><% end %>
+    <% end %>
+  <% end %>
+</div>

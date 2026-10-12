@@ -1,4 +1,9 @@
 # ADR-0036 : Aucune cascade vers la production des élèves — archiver le contenu et les classes, refuser la suppression de la taxonomie référencée, anonymiser les comptes
+<!-- index
+titre: Aucune cascade vers la production des élèves — archiver, refuser, anonymiser
+statut: Accepté — *complète et amende 0005, complète 0016 ; amendé le 2026-10-02 : suppression sur demande, demandes rappelées avant 30 jours, résultats effacés (l'amendement « anonymisation automatique » est retiré)*
+problematique: FK `restrict` par défaut, `cascade` en liste fermée ; contenu publié archivé ; taxonomie référencée non supprimable ; comptes anonymisés. F-14.
+-->
 
 | | |
 |---|---|

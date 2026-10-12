@@ -1,4 +1,9 @@
 # ADR-0022 : Modélisation Hexagonale du Catalogue Pédagogique
+<!-- index
+titre: Modélisation hexagonale du catalogue pédagogique
+statut: ⚠️ **Remplacé partiellement** par [0026](./0026-contrat-result-entites-et-dto.md) *(§2.A à §2.C)* ; complété par [0035](./0035-cycle-de-vie-et-propriete-du-contenu.md)
+problematique: Extraire le catalogue (Niveaux, Séries, Matières, Cours, Essentiels) des modèles ActiveRecord vers des entités, ports et use cases purs. *(Renuméroté depuis ADR-0014.)*
+-->
 
 | | |
 |---|---|

@@ -9,7 +9,7 @@ class Classroom::TeacherHomeTest < ApplicationSystemTestCase
     @school = create_school(name: "Lycée Classique d'Abidjan")
     svt = create_material(name: "SVT", category: "science")
     level = create_level(name: "Tle")
-    @classroom = create_classroom(school: @school, level:, name: "Tle D 1", join_code: "kfm37")
+    @classroom = create_classroom(school: @school, level:, name: "Tle D 1")
     other = create_classroom(school: @school, level:, name: "Tle D 2")
     @teacher = create_teacher(school: @school, material: svt, classrooms: [ @classroom, other ], first_name: "Yao")
     exercise = create_exercise(essential: create_essential(course: create_course(material: svt)))
@@ -58,7 +58,7 @@ class Classroom::TeacherHomeTest < ApplicationSystemTestCase
       card(@classroom).click_link
       assert_current_path classroom_path(@classroom.public_id)
     end
-    assert_text "KFM37"
+    assert_selector "#classroom_link"
   end
 
   test "a teacher whose setup is not finished lands on the classroom declaration" do

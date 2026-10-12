@@ -1,4 +1,10 @@
 # UDR-0043 : Générer les classes manquantes — bouton secondaire de l'écran Établissements, confirmation qui dit qui est concerné, suivi dans le rapport des imports
+<!-- index
+titre: Générer les classes manquantes
+statut: Accepté
+adr-lie: [0056](../adr/0056-generation-des-classes-manquantes.md), [0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md), [0039](../adr/0039-format-d-import-du-contenu.md)
+problematique: Bouton secondaire de l'écran Établissements, confirmation qui dit le périmètre, suivi dans le rapport des imports
+-->
 
 | | |
 |---|---|

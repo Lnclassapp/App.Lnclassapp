@@ -1,4 +1,9 @@
 # ADR-0007 : Gestion Modulaire du Contenu Pédagogique et Traçabilité Polymorphe
+<!-- index
+titre: Hiérarchie pédagogique et assignations polymorphes (`ClassroomAssignment`)
+statut: ⚠️ **Remplacé partiellement** par [0048](./0048-statuts-d-assignation-active-et-archived.md) *(§5)*
+problematique: Hiérarchiser le contenu en Matière ➔ Cours ➔ Fiche ➔ Exercice et utiliser une table d'assignation polymorphe traçant l'auteur (`assigned_by_id`).
+-->
 
 | | |
 |---|---|

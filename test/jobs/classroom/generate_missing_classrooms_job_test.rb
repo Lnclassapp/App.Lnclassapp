@@ -38,7 +38,7 @@ class Classroom::GenerateMissingClassroomsJobTest < ActiveJob::TestCase
     assert_equal kept.map(&:id).sort, classrooms_of(equipped).ids.sort
     assert_equal 1, classrooms_of(archived).count
     assert_equal [ current_school_year ], classrooms_of(lycee).distinct.pluck(:school_year)
-    assert_equal Orm::Classroom.count, Orm::Classroom.distinct.count(:join_code)
+    assert_equal Orm::Classroom.count, Orm::Classroom.distinct.count(:link_token)
     assert Orm::AuditEvent.exists?(action: "import.run", actor_id: @author.id, subject_id: report.id)
   end
 

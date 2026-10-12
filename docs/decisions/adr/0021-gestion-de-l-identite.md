@@ -1,4 +1,9 @@
 # ADR-0021 : Migration de la Gestion de l'Identité vers le Domaine Pur
+<!-- index
+titre: Migration de la gestion de l'identité vers le domaine pur
+statut: ⚠️ **Remplacé** par [0026](./0026-contrat-result-entites-et-dto.md)
+problematique: Extraire la logique métier des modèles `Orm::User`, `Orm::Student`, `Orm::Teacher` vers `Entities::Identity::*`, via une délégation au vol qui ne casse pas les vues.
+-->
 
 | | |
 |---|---|

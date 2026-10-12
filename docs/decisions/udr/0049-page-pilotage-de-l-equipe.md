@@ -1,4 +1,10 @@
 # UDR-0049 : Page « Pilotage » de l'équipe — chiffres clés, filtres, répartition, couverture, inscrits, recherche
+<!-- index
+titre: Page « Pilotage » de l'équipe
+statut: Accepté (décidé par le porteur le 2026-09-28) — *amendée par 0068 (recherche de DRENA, « Par établissement »), 2026-10-03*
+adr-lie: [0062](../adr/0062-indicateurs-de-pilotage-lus-en-direct.md), [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md), [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md), [0038](../adr/0038-comptes-de-l-equipe-et-sous-roles.md)
+problematique: Chiffres clés sur la période et en ce moment, filtres GET (période, DRENA), barres en CSS pur, couverture par DRENA, inscrits à numéro masqué, recherche dans un frame
+-->
 
 | | |
 |---|---|

@@ -1,4 +1,12 @@
 # UDR-0044 : Inscription enseignant par code d'établissement, et code sur la fiche de l'établissement
+<!-- index
+titre: Inscription enseignant par code d'établissement, et code sur la fiche
+statut: Accepté *(2026-09-28)* — *remplacée côté enseignant par 0079 (2026-10-07)*
+adr-lie: [0057](../adr/0057-code-d-etablissement.md), [0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md), [0050](../adr/0050-authentification-et-session.md)
+problematique: Un champ « Code d'établissement » remplace DRENA → établissement ; `/e/<code>` montre l'établissement ; la fiche affiche, copie et régénère le code (menu ⋮). Amende UDR-0024 et UDR-0036
+-->
+
+> ⚠️ **Remplacée côté enseignant par [UDR-0079](0079-inscription-enseignant-en-deux-voies.md)** (2026-10-07, chantier `inscription-enseignant`) : plus de champ ni de lien `/e/<code>` pour l'enseignant. Le bloc du code sur la fiche de l'équipe reste, pour l'inscription de la direction, amendé par l'UDR-0079 §3.7.
 
 | | |
 |---|---|
@@ -6,7 +14,7 @@
 | **Date** | 2026-09-28 |
 | **Chantier** | [`docs/chantiers/code-etablissement`](../../chantiers/code-etablissement/prd.md) — critères CE-01 à CE-08 |
 | **ADR lié** | [ADR-0057](../adr/0057-code-d-etablissement.md) · [ADR-0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md) · [ADR-0050](../adr/0050-authentification-et-session.md) · amende [UDR-0024](0024-inscription-enseignant.md) et [UDR-0036](0036-gestion-des-etablissements.md) · [UDR-0009](0009-rejoindre-une-classe.md) (patron du code) · [UDR-0042](0042-actions-de-ligne-dans-un-menu.md) (menu ⋮) · [UDR-0005](0005-design-system-fondateur.md) |
-| **Remplacé par** | — |
+| **Remplacé par** | [UDR-0079](0079-inscription-enseignant-en-deux-voies.md) *(côté enseignant)* |
 
 ---
 

@@ -1,4 +1,9 @@
 # ADR-0074 : Le blog public vit dans `communication` ; ses articles ont une adresse lisible figée, des images vérifiées et servies par Lnclass, un compteur de lectures tenu par le serveur et un plan du site
+<!-- index
+titre: Le blog public vit dans `communication` : articles à adresse lisible figée, images vérifiées et servies par Lnclass, compteur de lectures tenu par le serveur, plan du site
+statut: Accepté *(porteur, 2026-10-02 : délégation, « crée un système de blog et puis c'est tout »)* — *amende 0027, 0029, 0038, 0047, 0051 ; complète 0026, 0028, 0035, 0049, 0060, 0067, 0068*
+problematique: Tables `articles` et `article_images` ; slug figé ; cycle `ContentStatus` partagé ; `ManageArticlesPolicy` (équipe admin ou contenu) ; images JPEG/PNG/WebP ≤ 1 Mo, ≤ 1600 px, 10 par article, servies à `/blog/images/:public_id` en cache public immuable ; `/sitemap.xml` et `/robots.txt` par des routes ; hôte canonique `config.x.canonical_host`. Chantier `blog`. Amendé le 2026-10-07 : Staging et Develop sur leur propre domaine ; seuls les hôtes de la production s'indexent (`robots.txt`, `X-Robots-Tag`).
+-->
 
 | | |
 |---|---|

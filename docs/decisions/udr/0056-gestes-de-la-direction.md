@@ -1,4 +1,10 @@
 # UDR-0056 : Les gestes de la direction — une page « Établissement » (lien et classes), un retrait confirmé en modale, une liste des enseignants retirés, un code saisi depuis l'écran d'attente
+<!-- index
+titre: Les gestes de la direction
+statut: Accepté *(2026-10-01)*
+adr-lie: [0071](../adr/0071-gestes-de-la-direction-sur-son-etablissement.md), [0065](../adr/0065-espace-direction-simple-en-lecture-seule.md)
+problematique: Destination « Établissement » (lien d'inscription : copier, WhatsApp, changer en modale ; « Classes par niveau » partagé avec l'équipe) ; « Retirer de l'établissement » au menu ⋮, confirmé ; page « Enseignants retirés » et « Réintégrer » ; code saisi depuis l'écran d'attente. Amende UDR-0052, 0046, 0050
+-->
 
 | | |
 |---|---|

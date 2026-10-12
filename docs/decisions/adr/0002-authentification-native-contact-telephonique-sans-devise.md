@@ -1,4 +1,9 @@
 # ADR-0002 : Authentification Native par Contact Téléphonique (`has_secure_password`) et Abandon de Devise
+<!-- index
+titre: Authentification native par contact téléphonique (`has_secure_password`)
+statut: ⚠️ **Remplacé partiellement** par [0050](./0050-authentification-et-session.md) *(§3.2, §3.3, §5)* ; amendé par [0032](./0032-recuperation-assistee-du-pin.md) *(§4)*
+problematique: Abandonner Devise et la dépendance à l'email au profit d'une connexion par numéro de téléphone à 10 chiffres, adaptée au contexte ivoirien.
+-->
 
 | | |
 |---|---|

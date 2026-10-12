@@ -36,13 +36,16 @@ class SchoolAdminRoutesTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # ADR-0071, UDR-0056 §3.0 (gestion-etablissement-direction, Lot 0) amends DS-11: the direction's three gestures are
-  # its only writes, a closed list; its reading pages still accept GET alone.
+  # ADR-0071, UDR-0056 §3.0 (gestion-etablissement-direction, Lot 0) amends DS-11: the direction's gestures are its only
+  # writes, a closed list; its reading pages still accept GET alone. ADR-0083 §4.5: « Changer le lien » is gone.
   WRITES = [ [ "DELETE", "/school-admin/teachers/:public_id(.:format)" ],
              [ "POST", "/school-admin/teachers/:public_id/reinstatement(.:format)" ],
-             [ "PATCH", "/school-admin/school/link(.:format)" ],
              [ "POST", "/school-admin/school/level-classrooms(.:format)" ],
              [ "DELETE", "/school-admin/school/level-classrooms/:public_id(.:format)" ],
+             # ADR-0088 : archiver et restaurer une classe, archiver un niveau.
+             [ "PATCH", "/school-admin/school/classroom-archivals/:public_id/archive(.:format)" ],
+             [ "PATCH", "/school-admin/school/classroom-archivals/:public_id/restore(.:format)" ],
+             [ "POST", "/school-admin/school/level-archivals(.:format)" ],
              # ADR-0077 : retirer une autre direction.
              [ "DELETE", "/school-admin/school/staff/:public_id(.:format)" ] ].freeze
 

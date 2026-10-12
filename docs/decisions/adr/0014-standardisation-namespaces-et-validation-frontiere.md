@@ -1,4 +1,9 @@
 # ADR-0014 : Standardisation des Namespaces et Validation aux Frontières (DTOs)
+<!-- index
+titre: Standardisation des namespaces et validation aux frontières (DTOs)
+statut: ⚠️ **Remplacé partiellement** par [0027](./0027-contextes-bornes-et-arborescence.md) *(§2.2)* ; amendé par [0026](./0026-contrat-result-entites-et-dto.md) *(§2.1)*
+problematique: Valider les inputs HTTP via des objets dédiés avant le passage au Domaine, et clarifier les espaces `presentation/`, `adapters/`, `ports/`.
+-->
 
 | | |
 |---|---|

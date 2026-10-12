@@ -1,4 +1,9 @@
 # ADR-0063 : Parrainage par lien personnel, démarrage à froid par le code national et k-factor mesuré côté serveur
+<!-- index
+titre: Parrainage par lien personnel, démarrage à froid par le code national et k-factor mesuré côté serveur
+statut: Accepté *(2026-09-28)*
+problematique: `referrals` (filleul unique, source lien ou garant), `referral_shares` au clic, jeton `teacher_profiles.referral_token` tiré par la base ; `schools.national_code` facultatif et unique ; `school_join_requests` validées par l'équipe ou un garant ; `GrowthMetricsQuery` sur `/teams/growth`. Amende ADR-0057 et ADR-0030.
+-->
 
 | | |
 |---|---|

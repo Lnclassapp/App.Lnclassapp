@@ -84,7 +84,7 @@ class Identity::InvitationsControllerTest < ActionDispatch::IntegrationTest
     post accept_invitation_path(invitation.token), params: acceptance_params
 
     assert_redirected_to new_session_path
-    assert_equal "Votre compte est créé. Connectez-vous avec votre numéro et votre PIN.", flash[:notice]
+    assert_equal "Votre compte est créé. Connectez-vous avec votre numéro et votre code secret.", flash[:notice]
     # ID-08 (ADR-0077) : une direction entrée par invitation est marquée comme telle.
     assert_equal "invitation", Orm::SchoolStaff.joins(:user).find_by!(users: { contact: "0500000007" }).joined_via
     follow_redirect!
@@ -152,7 +152,7 @@ class Identity::InvitationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "#invitation_first_name_error", "Saisissez votre ou vos prénoms."
     assert_select "#invitation_gender_error", /Choisissez votre genre./
-    assert_select "#invitation_pin_confirmation_error", "Les deux PIN ne sont pas identiques."
+    assert_select "#invitation_pin_confirmation_error", "Les deux codes secrets ne sont pas identiques."
     assert_select "input[name='invitation[last_name]'][value=Kouassi]"
     assert_select "input[name='invitation[pin]']:not([value])"
     assert_nil @invitation.reload.accepted_at

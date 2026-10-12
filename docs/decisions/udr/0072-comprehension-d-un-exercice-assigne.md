@@ -1,4 +1,10 @@
 # UDR-0072 : Compréhension d'un exercice assigné — badges et cercle au bord bas de l'exercice, section « Compréhension » du suivi
+<!-- index
+titre: Compréhension d'un exercice assigné
+statut: Accepté
+adr-lie: [0079](../adr/0079-lecture-de-la-comprehension-d-un-exercice-assigne.md), [0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md)
+problematique: Au bord bas de chaque exercice assigné de la page classe : les quatre badges à gauche, le cercle de la catégorie dominante à droite (gris sous 5 faits) ; section « Compréhension » de la page de suivi : synthèse des signes, trois catégories en liens d'un Turbo Frame (`?category=`), taux par question et élèves de la catégorie. Tokens `struggling` et `fragile` réservés aux écrans enseignant. Numéro 0071 pris par `feature/annonces`. Amende UDR-0062 §3.4, §3.5
+-->
 
 | | |
 |---|---|

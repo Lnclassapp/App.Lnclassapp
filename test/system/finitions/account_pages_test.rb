@@ -9,7 +9,7 @@ class Finitions::AccountPagesTest < ApplicationSystemTestCase
   PROFILE_MODALS = {
     "profile_name_last_name" => [ :edit_profile_name_path, "Modifier mon nom" ],
     "contact_change_current_pin" => [ :edit_profile_contact_path, "Changer mon numéro" ],
-    "pin_change_current_pin" => [ :edit_profile_pin_path, "Changer mon PIN" ],
+    "pin_change_current_pin" => [ :edit_profile_pin_path, "Changer mon code secret" ],
     "profile_photo_photo" => [ :edit_profile_photo_path, "Ma photo" ]
   }.freeze
 
@@ -70,11 +70,12 @@ class Finitions::AccountPagesTest < ApplicationSystemTestCase
     end
   end
 
+  # ADR-0085 §4.3 : l'écran d'attente n'est plus la destination d'un élève ; il reste celle d'un enseignant sans établissement.
   test "the pending account page has a composed title" do
-    sign_in_as create_student(first_name: "Awa", last_name: "Traoré")
+    sign_in_as create_user(role: "teacher", first_name: "Awa", last_name: "Traoré")
 
     assert_selector "#pending_account"
-    assert_equal "Compte en attente · Élève · Lnclass", page.title
+    assert_equal "Compte en attente · Enseignant · Lnclass", page.title
   end
 
   # FU-27

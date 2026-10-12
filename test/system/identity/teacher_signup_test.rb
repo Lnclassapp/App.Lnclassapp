@@ -1,125 +1,212 @@
 require "application_system_test_case"
 
-# ID-03, CE-01 to CE-03 (ADR-0057, UDR-0024, UDR-0044): a visitor signs up as a teacher with the code of their school —
-# typed on /teacher-signup, or carried by the link /e/<code>, which shows the school instead of the field. A refused code
-# reads the same whatever the reason; errors come back without reloading the page until the account exists.
+# IE-01, IE-03, IE-05, IE-06, IE-09, IE-17, IE-19 (ADR-0083, UDR-0079): one sign-up page in three sections. The standard
+# way chooses the DRENA, then the school, then the subject; the name and the first names are two fields (ADR-0037); the
+# number is cleaned while typed; the secret code says live whether the confirmation matches. An invite link arrives with
+# the school already chosen. Errors come back without reloading the page until the account exists.
 class Identity::TeacherSignupTest < ApplicationSystemTestCase
   FORM = "identity.teacher_registrations.form".freeze
   ERRORS = "activemodel.errors.models.dtos/identity/teacher_registration_input.attributes".freeze
 
   setup do
-    abidjan = create_drena(name: "Abidjan 1")
-    @school = create_school(drena: abidjan, name: "Lycée Classique d'Abidjan", school_code: "k7m4qz")
-    create_school(drena: abidjan, name: "Lycée fermé", status: "inactive", school_code: "abc234")
+    @drena = create_drena(name: "Abidjan 1")
+    @school = create_school(drena: @drena, name: "Lycée Moderne de Cocody")
+    create_school(drena: @drena, name: "Lycée fermé", status: "inactive")
     create_material(name: "SVT", shortname: "SVT")
   end
 
-  test "CE-01, CE-03: a refused code, then an unconfirmed PIN, without reloading; the right sign-up lands on the class selection" do
-    visit new_teacher_registration_path
+  def t(key, **) = I18n.t(key, **)
 
-    assert_no_selector "select[name='teacher_registration[drena_public_id]']"
-    assert_no_page_reload do
-      fill_registration(school_code: "abc 234")
-      click_on I18n.t("#{FORM}.submit")
+  # A paste: the whole value at once, then one input event, as the browser does.
+  def paste(field, text)
+    execute_script("arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('input', { bubbles: true }))",
+                   find_field(field), text)
+  end
 
-      assert_selector "#teacher_registration_school_code_error", text: I18n.t("#{ERRORS}.school_code.inclusion")
-      assert_no_text "Lycée fermé"
-      # FU-17 (UDR-0054 §3.3): after a 422, the focus is on the field in error.
-      assert_selector "#teacher_registration_school_code[aria-invalid=true]:focus"
+  def choose_school
+    select "Abidjan 1", from: "teacher_registration[drena_public_id]"
+    select "Lycée Moderne de Cocody", from: "teacher_registration[school_public_id]"
+    select "SVT", from: "teacher_registration[material_slug]"
+  end
 
-      fill_in "teacher_registration[school_code]", with: "k7m 4qz"
-      fill_in "teacher_registration[pin]", with: "4821"
-      fill_in "teacher_registration[pin_confirmation]", with: "1357"
-      click_on I18n.t("#{FORM}.submit")
+  def fill_person(last_name: "KOUASSI", first_name: "Aya Marie", contact: "0501020304")
+    fill_in "teacher_registration[last_name]", with: last_name
+    fill_in "teacher_registration[first_name]", with: first_name
+    choose t("genders.female")
+    fill_in "teacher_registration[contact]", with: contact
+  end
 
-      assert_selector "#teacher_registration_pin_confirmation_error",
-                      text: I18n.t("#{ERRORS}.pin_confirmation.confirmation")
-      assert_selector "#school-preview", text: "Lycée Classique d'Abidjan"
-      assert_selector "#teacher_registration_pin_confirmation:focus"
-    end
-    assert_field "teacher_registration[last_name]", with: "Kouassi"
-    assert_equal 0, Orm::User.count
+  def fill_codes(pin: "4821", confirmation: "4821")
+    fill_in "teacher_registration[pin]", with: pin
+    fill_in "teacher_registration[pin_confirmation]", with: confirmation
+  end
 
-    fill_in "teacher_registration[pin]", with: "4821"
-    fill_in "teacher_registration[pin_confirmation]", with: "4821"
-    click_on I18n.t("#{FORM}.submit")
-
-    assert_toast I18n.t("identity.teacher_registrations.create.welcome")
+  def assert_signed_up(channel)
+    assert_toast t("identity.teacher_registrations.create.welcome")
     assert_current_path teacher_classrooms_path
-    teacher = Orm::User.find_by!(contact: "0501020304", role: "teacher")
-    assert_equal [ @school.id ], Orm::TeacherSchool.where(teacher:).pluck(:school_id)
+    teacher = Orm::User.find_by!(contact: "0701020304", role: "teacher")
+    assert_equal [ "KOUASSI", "Aya Marie" ], [ teacher.last_name, teacher.first_name ]
+    assert_equal [ [ @school.id, true ] ], Orm::TeacherSchool.where(teacher:).pluck(:school_id, :primary)
+    assert_equal channel, Orm::TeacherProfile.find_by!(user: teacher).joined_via
   end
 
-  test "FU-19: no field takes the focus on arrival; the school code has its help, read with a touch" do
+  # The standard journey, the same on a phone and on a computer (IE-01, IE-17, IE-19).
+  def standard_journey
     visit new_teacher_registration_path
 
-    assert_title "Inscription enseignant · Lnclass"
-    assert_equal "BODY", page.evaluate_script("document.activeElement.tagName")
-    find("#teacher-registration-form details summary").click
-    assert_text I18n.t("#{FORM}.school_code_info_tip")
-  end
-
-  test "CE-02: the link shows the school and its DRENA, and the sign-up attaches the teacher to it" do
-    visit school_code_signup_path("k7m4qz")
-
-    within "#school-preview" do
-      assert_text "Lycée Classique d'Abidjan"
-      assert_text "Abidjan 1"
-    end
+    assert_equal [ "ÉTABLISSEMENT", "VOUS", "CODE SECRET" ], all("fieldset > legend.uppercase").map { it.text.upcase }
     assert_no_field "teacher_registration[school_code]"
-    fill_registration
-    click_on I18n.t("#{FORM}.submit")
+    assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
+           "la page déborde en largeur"
+    assert_no_page_reload do
+      choose_school
+      fill_in "teacher_registration[last_name]", with: "KOUASSI"
+      fill_in "teacher_registration[first_name]", with: "Aya  Marie"
+      choose t("genders.female")
+      paste "teacher_registration[contact]", "+225 07 01 02 03 04"
 
-    assert_toast I18n.t("identity.teacher_registrations.create.welcome")
-    assert_current_path teacher_classrooms_path
-    assert_equal [ @school.id ], Orm::TeacherSchool.where(teacher: Orm::User.find_by!(contact: "0501020304")).pluck(:school_id)
-  end
+      assert_field "teacher_registration[contact]", with: "0701020304"
+      fill_codes(confirmation: "4822")
 
-  test "CE-03: a wrong link says the code is invalid and leads to the field" do
-    visit school_code_signup_path("abc234")
-
-    assert_selector "#invalid-school-code", text: I18n.t("identity.teacher_registrations.new.invalid_code.title")
-    assert_no_text "Lycée fermé"
-    click_on I18n.t("identity.teacher_registrations.new.invalid_code.other_code")
-
-    assert_current_path new_teacher_registration_path
-    assert_field "teacher_registration[school_code]"
-  end
-
-  test "the same sign-up by the link on a 390 px screen" do
-    with_mobile_viewport do
-      visit school_code_signup_path("k7m4qz")
-
-      assert_selector "#school-preview", text: "Lycée Classique d'Abidjan"
-      assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
-             "la page déborde en largeur"
-      assert_no_page_reload do
-        fill_registration(pin_confirmation: "1357")
-        click_on I18n.t("#{FORM}.submit")
-
-        assert_selector "#teacher_registration_pin_confirmation_error"
-        assert_selector "#school-preview", text: "Lycée Classique d'Abidjan"
-      end
-      fill_in "teacher_registration[pin]", with: "4821"
+      assert_selector "#pin_match_status.text-error", text: t("#{FORM}.pin_match.ko")
+      assert_selector "#teacher_registration_pin_confirmation[aria-invalid=true]"
       fill_in "teacher_registration[pin_confirmation]", with: "4821"
-      click_on I18n.t("#{FORM}.submit")
 
-      assert_toast I18n.t("identity.teacher_registrations.create.welcome")
-      assert_current_path teacher_classrooms_path
+      assert_selector "#pin_match_status.text-success", text: t("#{FORM}.pin_match.ok")
+      assert_no_selector "#teacher_registration_pin_confirmation[aria-invalid]"
+    end
+    click_on t("#{FORM}.submit")
+
+    assert_signed_up "standard"
+  end
+
+  test "IE-01, IE-17, IE-19: the standard sign-up on a computer" do
+    standard_journey
+  end
+
+  test "IE-01: the standard sign-up on a 390 px screen" do
+    with_mobile_viewport { standard_journey }
+  end
+
+  test "IE-19, IE-17: the number keeps only ten digits; the status waits for four digits" do
+    visit new_teacher_registration_path
+
+    paste "teacher_registration[contact]", "(+225) 0701020304"
+    assert_field "teacher_registration[contact]", with: "0701020304"
+    paste "teacher_registration[contact]", "002250701020304"
+    assert_field "teacher_registration[contact]", with: "0701020304"
+    find_field("teacher_registration[contact]").send_keys("5", "a")
+    assert_field "teacher_registration[contact]", with: "0701020304"
+
+    assert_no_selector "#pin_match_status svg", visible: :all
+    fill_codes(pin: "1234", confirmation: "123")
+    assert_no_selector "#pin_match_status svg", visible: :all
+    find_field("teacher_registration[pin_confirmation]").send_keys("5")
+    assert_selector "#pin_match_status.text-error svg", count: 1
+    assert_text t("#{FORM}.pin_match.ko")
+    find_field("teacher_registration[pin_confirmation]").send_keys(:backspace, "4")
+    assert_selector "#pin_match_status.text-success svg", count: 1
+    find_field("teacher_registration[pin_confirmation]").send_keys(:backspace)
+    assert_no_selector "#pin_match_status", visible: true
+    assert_no_selector "#pin_match_status svg"
+    assert_no_selector "#teacher_registration_pin_confirmation[aria-invalid]"
+    assert_includes find("#teacher_registration_pin_confirmation")["aria-describedby"], "pin_match_status"
+  end
+
+  test "IE-03, IE-05: Nom, Prénom(s), Genre, Numéro, never a full name; first names left blank are refused" do
+    visit new_teacher_registration_path
+
+    within all("form#teacher-registration-form > fieldset")[1] do
+      assert_equal [ "Nom", "Prénom(s)", "Genre", "Numéro de téléphone" ],
+                   all("label[for], legend:not(.uppercase)").map { it.text.delete("*").strip }
+      assert_equal [ "last_name", "first_name", "gender", "contact" ],
+                   all("input").map { it[:name][/\[(\w+)\]/, 1] }.uniq
+    end
+    assert_no_field "teacher_registration[full_name]"
+    assert_no_text "Nom complet"
+    assert_no_text "Corriger"
+    assert_no_page_reload do
+      choose_school
+      fill_person(last_name: "N'GUESSAN", first_name: "  ", contact: "0701020304")
+      fill_codes
+      click_on t("#{FORM}.submit")
+
+      assert_selector "#teacher_registration_first_name_error", text: t("#{ERRORS}.first_name.blank")
+    end
+    assert_not Orm::User.exists?(contact: "0701020304")
+    fill_in "teacher_registration[first_name]", with: "Konan  Jean-Baptiste"
+    fill_codes
+    click_on t("#{FORM}.submit")
+
+    assert_current_path teacher_classrooms_path
+    assert_equal [ "N'GUESSAN", "Konan Jean-Baptiste" ], Orm::User.where(contact: "0701020304").pick(:last_name, :first_name)
+  end
+
+  test "IE-06, IE-09: a colleague's link shows the school and counts the referral; an unknown link warns" do
+    referrer = create_teacher(school: @school)
+    token = Orm::TeacherProfile.find_by!(user: referrer).referral_token
+
+    visit teacher_invite_link_path("cccccccccccc")
+    assert_selector "#invite-link-invalid", text: t("identity.teacher_registrations.new.invite_invalid")
+    assert_field "teacher_registration[drena_public_id]"
+
+    with_mobile_viewport do
+      visit teacher_invite_link_path(token)
+
+      within "#school-preview" do
+        assert_text "Lycée Moderne de Cocody"
+        assert_text "Abidjan 1"
+      end
+      assert_no_field "teacher_registration[drena_public_id]"
+      select "SVT", from: "teacher_registration[material_slug]"
+      fill_person(contact: "+225 07 01 02 03 04")
+      fill_codes
+      click_on t("#{FORM}.submit")
+
+      assert_signed_up "colleague"
+    end
+    assert_equal [ referrer.id ], Orm::Referral.pluck(:referrer_id)
+  end
+end
+
+# IE-17, IE-19 and UDR-0079 §2.4: without JavaScript, the DRENA is sent by its own GET form, the server cleans the number
+# and refuses different codes. Chrome runs with scripts disabled.
+class Identity::TeacherSignupWithoutJavascriptTest < ApplicationSystemTestCase
+  driven_by :selenium, using: :chrome, screen_size: [ 1400, 1400 ], options: { name: :chrome_without_javascript } do |options|
+    options.binary = ENV["CHROME_BIN"] if ENV["CHROME_BIN"].present?
+    %w[--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --blink-settings=scriptEnabled=false].each do
+      options.add_argument(it)
     end
   end
 
-  private
+  setup do
+    @school = create_school(drena: create_drena(name: "Abidjan 1"), name: "Lycée Moderne de Cocody")
+    create_material(name: "SVT", shortname: "SVT")
+  end
 
-  # school_code: nil when the page came from a link (the code travels hidden).
-  def fill_registration(school_code: nil, pin_confirmation: "4821")
-    fill_in "teacher_registration[last_name]", with: "Kouassi"
+  test "the whole sign-up without JavaScript" do
+    visit new_teacher_registration_path
+
+    select "Abidjan 1", from: "teacher_registration[drena_public_id]"
+    click_on I18n.t("identity.teacher_registrations.school_fields.show_schools")
+    select "Lycée Moderne de Cocody", from: "teacher_registration[school_public_id]"
+    select "SVT", from: "teacher_registration[material_slug]"
+    fill_in "teacher_registration[last_name]", with: "KOUASSI"
     fill_in "teacher_registration[first_name]", with: "Aya Marie"
     choose I18n.t("genders.female")
-    fill_in "teacher_registration[contact]", with: "05 01 02 03 04"
-    fill_in "teacher_registration[school_code]", with: school_code if school_code
-    select "SVT", from: "teacher_registration[material_slug]"
+    fill_in "teacher_registration[contact]", with: "+225 07 01 02 03 04"
     fill_in "teacher_registration[pin]", with: "4821"
-    fill_in "teacher_registration[pin_confirmation]", with: pin_confirmation
+    fill_in "teacher_registration[pin_confirmation]", with: "1357"
+    click_on I18n.t("identity.teacher_registrations.form.submit")
+
+    assert_selector "#teacher_registration_pin_confirmation_error"
+    fill_in "teacher_registration[pin]", with: "4821"
+    fill_in "teacher_registration[pin_confirmation]", with: "4821"
+    click_on I18n.t("identity.teacher_registrations.form.submit")
+
+    assert_current_path teacher_classrooms_path
+    teacher = Orm::User.find_by!(contact: "0701020304")
+    assert_equal [ "KOUASSI", "Aya Marie" ], [ teacher.last_name, teacher.first_name ]
+    assert_equal [ @school.id ], Orm::TeacherSchool.where(teacher:).pluck(:school_id)
   end
 end

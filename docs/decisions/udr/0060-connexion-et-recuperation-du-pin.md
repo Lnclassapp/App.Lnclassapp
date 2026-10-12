@@ -1,4 +1,10 @@
 # UDR-0060 : Connexion et récupération du PIN — un titre, un formulaire, une action, pour tous les rôles
+<!-- index
+titre: Connexion et récupération du PIN
+statut: Accepté *(2026-10-02)*
+adr-lie: [0050](../adr/0050-authentification-et-session.md), [0032](../adr/0032-recuperation-assistee-du-pin.md), [0031](../adr/0031-second-facteur-totp-pour-l-equipe.md)
+problematique: Un titre, un formulaire, une action, pour tous les rôles : plus de phrase d'aide permanente, l'aide du PIN en infobulle, « Connexion » en h1
+-->
 
 | | |
 |---|---|
@@ -130,10 +136,10 @@ Hiérarchie, du conteneur à l'élément :
    - `div.w-full.max-w-sm`, puis `ui_card title: t(".title"), heading: :h1, padding: :lg`.
 4. **Formulaire** : `form_with model: @form, scope: :session, url: session_path, id: "session-form", class: "space-y-5"`. Dans l'ordre :
    1. l'alerte d'erreur (§3.1) ;
-   2. `ui_field form, :contact`, inchangé : `as: :tel`, `required: true`, `value: @form.raw_contact`, `maxlength: 15`, `placeholder: t(".contact_placeholder")`, `inputmode: "tel"`, `autocomplete: "username"`, `autofocus: !@prefilled` ;
+   2. `ui_field form, :contact` : `as: :tel`, `required: true`, `value: @form.raw_contact`, `maxlength: 10`, `placeholder: t(".contact_placeholder")`, `inputmode: "numeric"`, `autocomplete: "username"`, `autofocus: !@prefilled`, et `data: { identity__phone_digits_target: "input", action: "input->identity--phone-digits#clean" }` (chiffres seuls, indicatif retiré, 10 chiffres au plus, comme les inscriptions) ;
    3. un `div` qui contient :
-      - `ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "current-password", autofocus: @prefilled`, **sans `hint:`** ;
-      - `ui_info_tip t(".pin_info_tip"), label: Dtos::Identity::CredentialsInput.human_attribute_name(:pin)` ;
+      - `ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "current-password", autofocus: @prefilled, hint: t(".pin_info_message")`. Le message d'aide vient en premier, sous le champ ;
+      - `ui_info_tip t(".pin_info_tip"), label: Dtos::Identity::CredentialsInput.human_attribute_name(:pin)`, après le message ;
    4. `ui_button t(".submit"), type: :submit, variant: :brand, full: true` ;
    5. `p.text-center.text-sm`, puis le lien `t(".forgot_pin")` vers `new_identity_pin_reset_path`, classes `inline-flex min-h-tap items-center font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand`.
 
@@ -167,6 +173,7 @@ Hiérarchie, du conteneur à l'élément :
 | `welcome_hint` | supprimée |
 | `audience` | supprimée |
 | `pin_hint` | supprimée |
+| `pin_info_message` | nouvelle : « code secret à 4 chiffres », message d'aide sous le champ PIN |
 | `pin_info_tip` | « Code secret de 4 chiffres, choisi à l'inscription. » (le commentaire « À valider par le porteur » part avec l'ancien texte) |
 | `page_title`, `logo_home`, `welcome`, `title`, `contact_placeholder`, `submit`, `forgot_pin` | inchangées |
 | `create.signed_in`, `destroy.signed_out` | inchangées |

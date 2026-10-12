@@ -1,0 +1,21 @@
+# « Choisis ta classe » : l'élève sans classe active (classe archivée, ou retiré) choisit la sienne par la cascade de l'inscription — ADR-0040, ADR-0085, UDR-0081 (§3.4, §3.5)
+fr:
+  activemodel:
+    errors:
+      models:
+        dtos/classroom/student_registration_input:
+          attributes:
+            base:
+              # ADR-0085 §4.3 : l'élève retiré ne revient pas par la voie standard, seulement par le lien. Jamais dit à
+              # l'inscription, où un compte qui naît n'a été retiré de rien.
+              removed_from_classroom: "Tu ne peux pas rejoindre cette classe. Demande son lien à ton enseignant."
+  classroom:
+    student_classroom_choices:
+      new:
+        page_title: "Choisis ta classe"
+        title: "Choisis ta classe"
+        back: "Accueil"
+        link_invalid: "Ce lien n'est plus valable. Choisis ta classe."
+        submit: "Rejoindre cette classe"
+      create:
+        welcome: "Bienvenue dans ta classe !"

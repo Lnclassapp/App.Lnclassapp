@@ -1,4 +1,10 @@
 # UDR-0046 : Classes par niveau — sur la fiche d'un établissement, compter les classes de chaque niveau, ajouter la suivante, retirer la dernière
+<!-- index
+titre: Classes par niveau
+statut: Accepté *(2026-09-28)*
+adr-lie: [0059](../adr/0059-ajuster-les-classes-d-un-niveau.md), [0036](../adr/0036-suppression-archivage-et-anonymisation.md), [0041](../adr/0041-vie-d-une-classe-annee-scolaire-et-code.md)
+problematique: Bloc de la fiche d'un établissement : une ligne par niveau et série, « − n + », retrait confirmé, mise à jour en Turbo Stream ; numéro = plus haut + 3
+-->
 
 | | |
 |---|---|

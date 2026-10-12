@@ -1,4 +1,10 @@
 # UDR-0035 : Gestion des DRENA — tableau par nom, slug affiché pour les imports, création et renommage en modale, suppression confirmée dans la ligne
+<!-- index
+titre: Gestion des DRENA
+statut: Accepté
+adr-lie: [0029](../adr/0029-identifiants-exposes-public-id-et-slugs.md), [0034](../adr/0034-reprise-des-donnees-et-referentiel-seede.md), [0036](../adr/0036-suppression-archivage-et-anonymisation.md)
+problematique: Tableau par nom, slug affiché pour les imports, création et renommage en modale, suppression confirmée dans la ligne
+-->
 
 | | |
 |---|---|

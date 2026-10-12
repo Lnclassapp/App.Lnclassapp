@@ -5,33 +5,33 @@ fr:
   activemodel:
     attributes:
       dtos/identity/pin_change_input:
-        current_pin: "PIN actuel"
-        pin: "Nouveau PIN"
-        pin_confirmation: "Confirmation du nouveau PIN"
+        current_pin: "Code secret actuel"
+        pin: "Nouveau code secret"
+        pin_confirmation: "Confirmation du nouveau code secret"
     errors:
       models:
         dtos/identity/pin_change_input:
           attributes:
             current_pin:
-              blank: "Le PIN actuel est obligatoire."
-              invalid: "Le PIN compte 4 chiffres."
-              incorrect: "PIN incorrect."
+              blank: "Le code secret actuel est obligatoire."
+              invalid: "Le code secret compte 4 chiffres."
+              incorrect: "Code secret incorrect."
             pin:
-              blank: "Le nouveau PIN, à 4 chiffres, est obligatoire."
-              invalid: "Le PIN compte 4 chiffres."
-              unchanged: "C'est déjà le PIN de ce compte."
+              blank: "Le nouveau code secret, à 4 chiffres, est obligatoire."
+              invalid: "Le code secret compte 4 chiffres."
+              unchanged: "C'est déjà le code secret de ce compte."
             pin_confirmation:
-              confirmation: "Les deux PIN ne sont pas identiques."
+              confirmation: "Les deux codes secrets ne sont pas identiques."
   identity:
     profile_pins:
       edit:
-        title: "Changer mon PIN"
-        intro: "Saisissez votre PIN actuel, puis deux fois le nouveau. Vos autres appareils seront déconnectés."
-        intro_student: "Saisis ton PIN actuel, puis deux fois le nouveau. Tes autres appareils seront déconnectés."
+        title: "Changer mon code secret"
+        intro: "Saisissez votre code secret actuel, puis deux fois le nouveau. Vos autres appareils seront déconnectés."
+        intro_student: "Saisis ton code secret actuel, puis deux fois le nouveau. Tes autres appareils seront déconnectés."
         pin_hint: "4 chiffres, que vous seul connaissez."
         pin_hint_student: "4 chiffres, que toi seul connais."
         cancel: "Annuler"
-        submit: "Changer mon PIN"
+        submit: "Changer mon code secret"
       update:
-        changed: "Votre PIN est changé."
-        changed_student: "Ton PIN est changé."
+        changed: "Votre code secret est changé."
+        changed_student: "Ton code secret est changé."

@@ -1,4 +1,10 @@
 # UDR-0061 : Carte d'aide et FAQ — « Besoin d'aide ? » ouvre une carte à trois options : questions fréquentes, WhatsApp, appel
+<!-- index
+titre: Carte d'aide et FAQ
+statut: FAQ : Accepté *(porteur, 2026-10-02, construction directe)* · carte d'aide : Accepté *(porteur, 2026-10-02 : « lance les lots »)* — *amendée le 2026-10-06 : FAQ dans le shell une fois connecté, liens de 48 px* — *amendée par [0066](./0066-blog-public-liste-article-et-partage.md) (pied de la carte d'aide)*
+adr-lie: [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md)
+problematique: `/aide` publique (`Communication::HelpController`), une question par `<details>`, textes dans `communication/help.fr.yml`, seuils lus dans `Grading` ; « Besoin d'aide ? » sur l'accueil élève ; carte `ui_modal placement: :sheet` (feuille basse sous `lg`, au moins 25 %, hauteur du contenu ; modale au-dessus) : FAQ, WhatsApp (`wa.me`), appel (`tel:`), numéros et horaires dans `config/support.yml`
+-->
 
 | | |
 |---|---|

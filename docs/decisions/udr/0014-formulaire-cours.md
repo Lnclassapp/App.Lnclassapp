@@ -1,4 +1,10 @@
 # UDR-0014 : Formulaire cours — créer et modifier un cours dans une modale large, contenu dans l'éditeur riche, statut changé hors du formulaire
+<!-- index
+titre: Formulaire cours
+statut: Accepté — *amendée par [0067](./0067-gestion-du-blog-par-l-equipe.md) (images pour le blog seul)* — *amendée par 0069 (niveau d'un cours assigné), 2026-10-03*
+adr-lie: [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md), [0029](../adr/0029-identifiants-exposes-public-id-et-slugs.md), [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md), [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md)
+problematique: Créer et modifier un cours dans une modale large, contenu dans l'éditeur riche, statut changé hors du formulaire
+-->
 
 | | |
 |---|---|

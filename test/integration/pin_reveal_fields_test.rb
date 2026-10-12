@@ -42,12 +42,12 @@ class PinRevealFieldsTest < ActionDispatch::IntegrationTest
     assert_revealable "teacher_registration[pin_confirmation]", autocomplete: "new-password"
   end
 
-  test "student sign-up by classroom code: the PIN and its confirmation" do
-    create_classroom(join_code: "kfm37")
-    get join_classroom_path("kfm37")
+  # IL-02 (ADR-0085): the student signs up at /student-signup, or by a classroom link that renders the same form.
+  test "student sign-up: the PIN and its confirmation" do
+    get new_student_registration_path
 
-    assert_revealable "join[pin]", autocomplete: "new-password"
-    assert_revealable "join[pin_confirmation]", autocomplete: "new-password"
+    assert_revealable "student_registration[pin]", autocomplete: "new-password"
+    assert_revealable "student_registration[pin_confirmation]", autocomplete: "new-password"
   end
 
   test "forgotten PIN: the new PIN and its confirmation" do

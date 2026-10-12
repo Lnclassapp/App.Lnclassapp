@@ -1,4 +1,10 @@
 # UDR-0070 : Inscription de la direction, bloc « Direction », retrait et restauration d'un compte direction
+<!-- index
+titre: Inscription de la direction, bloc « Direction », retrait et restauration
+statut: Proposé
+adr-lie: [0077](../adr/0077-inscription-de-la-direction-par-le-code-et-retrait.md)
+problematique: Page `/school-staff-signup` (sans matière, avec le code) ; lien discret, section « Établissements » et pied de page sur l'accueil ; bandeau d'arrivée de 7 jours ; bloc « Direction » partagé (places « 2 / 3 », ⋮ « Retirer de la direction ») ; « Directions retirées » et « Restaurer » pour l'équipe. Amende UDR-0064, 0059, 0052, 0056, 0018
+-->
 
 | | |
 |---|---|

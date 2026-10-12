@@ -1,0 +1,5 @@
+<%# 🌐 UI · school_admin/classroom_archivals/restore — réponse de « Restaurer la classe » %>
+<%# Rôle : toast (succès, ou motif neutre du conflit), puis la page se rafraîchit : la carte redevient active %>
+<%# ADR  : 0088 · UDR : 0083 %>
+<%= turbo_stream_toast @notice || @alert, type: @notice ? :success : :info %>
+<%= turbo_stream.refresh(request_id: nil) %>

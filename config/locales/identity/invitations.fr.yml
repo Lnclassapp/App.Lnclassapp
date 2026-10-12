@@ -7,8 +7,8 @@ fr:
         last_name: "Nom"
         first_name: "Prénom(s)"
         gender: "Genre"
-        pin: "PIN"
-        pin_confirmation: "Confirmation du PIN"
+        pin: "Code secret"
+        pin_confirmation: "Confirmation du code secret"
     errors:
       models:
         dtos/identity/invitation_acceptance_input:
@@ -26,10 +26,10 @@ fr:
             gender:
               inclusion: "Choisissez votre genre."
             pin:
-              blank: "Choisissez un PIN à 4 chiffres."
-              invalid: "Le PIN compte 4 chiffres."
+              blank: "Choisissez un code secret à 4 chiffres."
+              invalid: "Le code secret compte 4 chiffres."
             pin_confirmation:
-              confirmation: "Les deux PIN ne sont pas identiques."
+              confirmation: "Les deux codes secrets ne sont pas identiques."
   identity:
     invitations:
       show:
@@ -57,4 +57,4 @@ fr:
         sign_in: "Se connecter"
       accept:
         accepted: "Votre compte est créé. Connectez-vous : la vérification en deux étapes vous sera demandée."
-        accepted_school_admin: "Votre compte est créé. Connectez-vous avec votre numéro et votre PIN."
+        accepted_school_admin: "Votre compte est créé. Connectez-vous avec votre numéro et votre code secret."

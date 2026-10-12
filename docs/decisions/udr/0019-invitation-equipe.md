@@ -1,4 +1,10 @@
 # UDR-0019 : Invitation équipe — le lien s'affiche une fois dans la modale, la personne invitée crée son compte sur une page publique puis active son second facteur
+<!-- index
+titre: Invitation équipe
+statut: Accepté
+adr-lie: [0028](../adr/0028-policies-de-domaine-par-use-case.md), [0031](../adr/0031-second-facteur-totp-pour-l-equipe.md), [0037](../adr/0037-nom-et-prenoms-en-deux-champs.md), [0038](../adr/0038-comptes-de-l-equipe-et-sous-roles.md), [0050](../adr/0050-authentification-et-session.md)
+problematique: Le lien s'affiche une fois dans la modale, la personne invitée crée son compte sur une page publique puis active son second facteur
+-->
 
 | | |
 |---|---|

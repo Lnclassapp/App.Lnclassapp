@@ -1,0 +1,31 @@
+<%# 🌐 UI · classroom/classrooms/_link — bloc « Lien de la classe » : copier, partager sur WhatsApp, changer (menu ⋮, confirmation) %>
+<%# Rôle : l'adresse absolue /c/<jeton> n'est portée que par les boutons, jamais affichée ; vu par l'enseignant, la direction et l'équipe %>
+<%# ADR  : 0063, 0085 (§4.1) · UDR : 0054 (§3.5), 0081 (§3.6) · classroom : public_id, name, link_token · rendu par qui l'accorde %>
+<%# locals: (classroom:) -%>
+<% url = join_classroom_url(classroom.link_token) %>
+<div id="classroom_link" class="rounded-card bg-brand-soft p-4">
+  <div class="flex items-center justify-between gap-2">
+    <p id="classroom_link_label" class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".label") %></p>
+    <div class="-my-2 -mr-2">
+      <%= ui_dropdown label: t(".more_label"), id: "classroom-link-menu" do %>
+        <%= ui_dropdown_item t(".change"), dialog: "change-classroom-link", icon: "arrow-path" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="mt-2 flex flex-wrap gap-2" role="group" aria-labelledby="classroom_link_label">
+    <%= ui_copy_button url, label: t(".copy"), aria_label: t(".copy_label"), icon: "link", copied: t(".copied") %>
+    <%= ui_button t(".whatsapp"), href: whatsapp_share_url(t(".whatsapp_message", classroom: classroom.name, url:)),
+                                  variant: :secondary, size: :sm, icon: "chat-bubble-left-right", target: "_blank", rel: "noopener",
+                                  id: "classroom_whatsapp_share" %>
+  </div>
+  <p class="mt-2 max-w-xs text-xs text-mute"><%= t(".hint") %></p>
+  <%= ui_modal title: t(".change_title"), id: "change-classroom-link", size: :sm do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".change"), type: :submit, form: "change-classroom-link-form" %>
+    <% end %>
+    <%= form_with url: classroom_link_path(classroom.public_id), method: :patch, id: "change-classroom-link-form" do %>
+      <p class="text-sm text-mute"><%= t(".change_warning") %></p>
+    <% end %>
+  <% end %>
+</div>

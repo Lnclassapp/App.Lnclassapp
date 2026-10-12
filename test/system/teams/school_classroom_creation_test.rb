@@ -46,9 +46,8 @@ class Teams::SchoolClassroomCreationTest < ApplicationSystemTestCase
       assert_no_selector "turbo-frame#modal dialog[open]"
       assert_title "Lycée Classique d'Abidjan · Équipe · Lnclass"
       classroom = Orm::Classroom.find_by!(name: "Tle D 7")
-      code = classroom.join_code.upcase
-      assert_toast tc("create.created", code:)
-      assert_selector "[id='classroom_#{classroom.public_id}']", text: code
+      assert_toast tc("create.created", name: "Tle D 7")
+      assert_selector "[id='classroom_#{classroom.public_id}']", text: "Tle D 7"
     end
   end
 end

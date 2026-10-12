@@ -1,4 +1,10 @@
 # UDR-0068 : Espace équipe — carte « Configuration » et menu « Plus », page Référentiel, recherche de DRENA et pilotage par établissement
+<!-- index
+titre: Configuration et pilotage par établissement
+statut: Proposé — *amendée le 2026-10-04 : établissements et chiffres en une lecture (ADR-0062)*
+adr-lie: [0062](../adr/0062-indicateurs-de-pilotage-lus-en-direct.md), [0067](../adr/0067-budgets-de-temps-serveur-des-ecrans.md)
+problematique: Imports et Référentiel mêlés au quotidien de l'équipe, DRENA du pilotage sans suite : 2e carte « Configuration » et menu « Plus », page `/teams/referential`, recherche de DRENA dans le navigateur, DRENA cliquable vers « Par établissement » paginé
+-->
 
 | | |
 |---|---|

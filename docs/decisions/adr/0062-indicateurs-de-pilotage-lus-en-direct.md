@@ -1,4 +1,9 @@
 # ADR-0062 : Les indicateurs de pilotage se lisent en direct, par deux queries bornées, sur des définitions métier fixées
+<!-- index
+titre: Les indicateurs de pilotage se lisent en direct, par deux queries bornées, sur des définitions métier fixées
+statut: Accepté (décidé par le porteur le 2026-09-28) — *amendé deux fois le 2026-09-29 (index de période, placements lus une fois, `pg_trgm` ; vue « année » gardée 5 minutes), voir [0067](./0067-budgets-de-temps-serveur-des-ecrans.md)* — *amendé le 2026-10-03 : lecture « Par établissement » ([UDR-0068](../udr/0068-configuration-et-pilotage-par-etablissement.md))* — *amendé le 2026-10-04 : sous filtre DRENA, établissements et chiffres en une lecture, même entrée de cache (`CACHE_VERSION` 2)*
+problematique: Page « Pilotage » de l'équipe (V4, TR-10/11/12) : définitions d'une phrase (compte actif, élève placé, élève actif, DRENA d'un compte…), période 7 j / 30 j / année, filtre DRENA, numéro masqué, recherche bornée ; ni table, ni index, ni cache ; nombre de requêtes fixe. Complète ADR-0049 et ADR-0038.
+-->
 
 | | |
 |---|---|

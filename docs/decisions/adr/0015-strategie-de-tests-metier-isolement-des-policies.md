@@ -1,4 +1,9 @@
 # ADR-0015 : Stratégie de tests métier et isolation des Policies
+<!-- index
+titre: Stratégie de tests métier et isolation des Policies
+statut: Accepté — *complété par [0028](./0028-policies-de-domaine-par-use-case.md)*
+problematique: Tester les règles d'autorisation unitairement sur les objets Policy avec des Fakes en mémoire, au lieu de surcharger les tests de Use Cases.
+-->
 
 | | |
 |---|---|

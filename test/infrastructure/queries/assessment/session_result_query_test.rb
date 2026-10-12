@@ -106,7 +106,7 @@ module Queries
 
       test "enseignant : seulement celui d'une classe active où l'élève est encore inscrit" do
         classroom = create_classroom
-        Orm::ClassroomStudent.create!(classroom:, student: @student, primary: true, joined_at: Time.current)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom:, student: @student, primary: true, joined_at: Time.current)
         teacher = create_teacher(classrooms: [ classroom ])
         query = SessionResultQuery.new
 

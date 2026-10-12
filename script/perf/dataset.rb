@@ -114,13 +114,10 @@ module PerfDataset
     classrooms = Repositories::Classroom::ClassroomRepository.new
     lookup = Repositories::Catalog::TaxonomyRepository.new.lookup
     plan = Repositories::Classroom::ClassroomPlanRepository.new.plan
-    taken = classrooms.taken_join_codes
     school_year = Entities::Classroom::SchoolYear.current(now.to_date)
     schools.each do |school|
       generated = Entities::Classroom::DefaultClassroomPlan.rows_for(school:, lookup:, plan:).rows
-      codes = Entities::Classroom::JoinCode.generate_unique(count: generated.size, taken:)
-      taken.merge(codes)
-      rows = generated.zip(codes).map { |row, join_code| row.merge(public_id:, school_id: school.id, school_year:, join_code:) }
+      rows = generated.map { |row| row.merge(public_id:, school_id: school.id, school_year:) }
       classrooms.insert_generated(rows:, at: now)
     end
   end

@@ -1,4 +1,9 @@
 # ADR-0001 : Adoption de l'Architecture Hexagonale (DDD) dans un Monolithe Rails 8
+<!-- index
+titre: Adoption de l'architecture hexagonale (DDD) dans un monolithe Rails 8
+statut: Accepté
+problematique: Isoler les règles métier (`app/domain/`) d'ActiveRecord et des contrôleurs pour obtenir des tests unitaires en quelques millisecondes et éliminer les « Fat Models ».
+-->
 
 | | |
 |---|---|

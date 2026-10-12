@@ -1,4 +1,9 @@
 # ADR-0020 : Optimisation des Imports Massifs via Bulk Insert (`insert_all`)
+<!-- index
+titre: Optimisation des imports massifs via bulk insert (`insert_all`)
+statut: ⚠️ **Remplacé partiellement** par [0039](./0039-format-d-import-du-contenu.md) *(sauf §2.1, §2.2)*
+problematique: Éliminer les timeouts et le N+1 des imports (cours, classes, élèves démos) en déléguant l'insertion aux Repositories via `insert_all!` / `upsert_all`.
+-->
 
 | | |
 |---|---|

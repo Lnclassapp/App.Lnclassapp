@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Identity::UserRepositoryPort
 # Rôle : contrat de lecture des comptes et de leur PIN (bcrypt côté repository) ; anonymisation d'un compte
-# ADR  : 0026, 0028, 0036, 0050, 0055
+# ADR  : 0026, 0028, 0036, 0050, 0055, 0082, 0084
 module Ports
   module Identity
     module UserRepositoryPort
@@ -43,6 +43,12 @@ module Ports
       # posé. → true
       def anonymize(user_id:, first_name:, last_name:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #anonymize"
+      end
+
+      # ADR-0082 §4.3, ADR-0084 §4.6 : heure de la dernière ouverture de Lnclass par canal, :pwa (l'app installée depuis
+      # le navigateur) ou :android (l'app « Lnclass » du Play Store). Un autre canal lève KeyError. → true
+      def mark_app_opened(user_id:, at:, channel: :pwa)
+        raise NotImplementedError, "#{self.class} doit implémenter #mark_app_opened"
       end
 
       # → Entities::Identity::Actor ; school_id = école principale de l'enseignant, sinon nil

@@ -1,6 +1,6 @@
 <%# 🌐 UI · layouts/application — document HTML commun (pages publiques et shell) %>
 <%# Rôle : en-tête HTML, feuille et script uniques, région des toasts ; le shell y injecte :body %>
-<%# UDR  : 0005, 0006, 0054, 0065 · ADR : 0031, 0049, 0051 %>
+<%# UDR  : 0005, 0006, 0054, 0065 · ADR : 0031, 0049, 0051, 0082 %>
 <!DOCTYPE html>
 <%# UDR-0065, amendement du 2026-10-03 : le choix de l'interrupteur (cookie) est rendu par le serveur, sans éclair %>
 <html lang="<%= I18n.locale %>"<%= tag.attributes(data: { theme: theme_preference }) %>>
@@ -23,8 +23,10 @@
     <% turbo_refreshes_with method: :morph, scroll: :preserve %>
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+    <%# ADR-0082 §4.1 : fiche d'application (installation) ; barre d'état au bleu de marque, pour tous les rôles %>
+    <%# Chemin littéral, gelé par le Lot 0 : une page d'erreur rendue sous un jeu de routes réduit le déclare aussi %>
+    <%= tag.link rel: "manifest", href: "/manifest.json" %>
+    <%= tag.meta name: "theme-color", content: Rails.configuration.x.pwa[:theme_color] %>
 
     <%# Icônes générées depuis app/assets/images/logo/lnclass.jpeg %>
     <link rel="icon" href="/favicon.ico" sizes="48x48">

@@ -8,7 +8,7 @@ class Identity::PinRevealTest < ApplicationSystemTestCase
   HIDE = "Masquer le code".freeze
 
   setup do
-    create_classroom(name: "6ème 1", join_code: "kfm37")
+    @classroom = create_classroom(name: "6ème 1")
     browser_errors # the browser log is shared by the tests of the process: start from an empty one
   end
 
@@ -28,24 +28,25 @@ class Identity::PinRevealTest < ApplicationSystemTestCase
     assert_no_js_errors
   end
 
-  test "sign-up by classroom code: the PIN is masked again before a failed submit and comes back masked in 422" do
-    visit join_classroom_path("kfm37")
+  # IL-08 (ADR-0085): the student sign-up, opened by a classroom link, the classroom already chosen.
+  test "student sign-up by link: the PIN is masked again before a failed submit and comes back masked in 422" do
+    visit join_classroom_path(@classroom.reload.link_token)
     failed_sign_up_masks_again
     assert_no_js_errors
   end
 
-  test "sign-up by classroom code at 390 px" do
+  test "student sign-up by link at 390 px" do
     with_mobile_viewport do
-      visit join_classroom_path("kfm37")
-      assert_button_inside_field "join[pin_confirmation]"
-      show_then_hide "join[pin]"
+      visit join_classroom_path(@classroom.reload.link_token)
+      assert_button_inside_field "student_registration[pin_confirmation]"
+      show_then_hide "student_registration[pin]"
       failed_sign_up_masks_again
       assert_no_horizontal_scroll
     end
     assert_no_js_errors
   end
 
-  test "profile: the three PIN fields of « Changer mon PIN » show and hide one by one" do
+  test "profile: the three PIN fields of « Changer mon code secret » show and hide one by one" do
     sign_in_as create_teacher
     profile_pin_fields_one_by_one
     assert_no_js_errors
@@ -122,15 +123,15 @@ class Identity::PinRevealTest < ApplicationSystemTestCase
   end
 
   def failed_sign_up_masks_again
-    fill_in "join[last_name]", with: "Kouassi"
-    fill_in "join[first_name]", with: "Aya"
+    fill_in "student_registration[last_name]", with: "KOUASSI"
+    fill_in "student_registration[first_name]", with: "Aya"
     choose I18n.t("genders.female")
-    fill_in "join[contact]", with: "07 01 02 03 04"
-    fill_in "join[pin]", with: "4821"
-    fill_in "join[pin_confirmation]", with: "1357"
-    toggle_for("join[pin]").click
-    toggle_for("join[pin_confirmation]").click
-    assert_revealed "join[pin]"
+    fill_in "student_registration[contact]", with: "07 01 02 03 04"
+    fill_in "student_registration[pin]", with: "4821"
+    fill_in "student_registration[pin_confirmation]", with: "1357"
+    toggle_for("student_registration[pin]").click
+    toggle_for("student_registration[pin_confirmation]").click
+    assert_revealed "student_registration[pin]"
     # Turbo stops the submit event at the document; turbo:submit-start follows it, before the request leaves.
     page.execute_script(<<~JS)
       document.addEventListener("turbo:submit-start", () => {
@@ -139,12 +140,12 @@ class Identity::PinRevealTest < ApplicationSystemTestCase
     JS
 
     assert_no_page_reload do
-      click_on I18n.t("classroom.joins.signup_form.submit")
-      assert_selector "#join_pin_confirmation_error"
+      click_on I18n.t("classroom.student_registrations.form.submit")
+      assert_selector "#student_registration_pin_confirmation_error"
     end
 
     assert_equal %w[password password], page.evaluate_script("window.pinTypesAtSubmit")
-    %w[join[pin] join[pin_confirmation]].each do |name|
+    %w[student_registration[pin] student_registration[pin_confirmation]].each do |name|
       assert_masked name
       assert_field name, with: ""
     end

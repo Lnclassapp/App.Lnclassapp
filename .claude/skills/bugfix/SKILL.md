@@ -5,7 +5,7 @@ description: Ouvre et cadre un chantier de correction Lnclass (un comportement d
 
 # Cycle Bugfix
 
-Tu exécutes le cycle décrit dans `docs/workflows/bugfix.md`. **Lis-le maintenant**, ainsi que `docs/workflows/README.md` et `docs/guide/conventions.md`. Cette skill joue ces documents, elle ne les remplace pas.
+Tu exécutes le cycle décrit dans `docs/workflows/bugfix.md`. **Lis-le maintenant**, ainsi que `docs/workflows/README.md` (la **Table de routage** et **Les interdits** seulement) et `docs/guide/conventions.md` §3, §4 et §7 (le reste à la demande). Cette skill joue ces documents, elle ne les remplace pas.
 
 Argument : un `<slug>` kebab-case (`login-contact-vide`). S'il manque, demande-le.
 

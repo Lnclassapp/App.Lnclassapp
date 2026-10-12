@@ -1,4 +1,10 @@
 # UDR-0033 : Gestion des séries — un tableau des séries et une matrice niveaux × séries sur le même écran
+<!-- index
+titre: Gestion des séries
+statut: Accepté
+adr-lie: [0029](../adr/0029-identifiants-exposes-public-id-et-slugs.md), [0034](../adr/0034-reprise-des-donnees-et-referentiel-seede.md), [0036](../adr/0036-suppression-archivage-et-anonymisation.md)
+problematique: Un tableau des séries et une matrice niveaux × séries sur le même écran
+-->
 
 | | |
 |---|---|

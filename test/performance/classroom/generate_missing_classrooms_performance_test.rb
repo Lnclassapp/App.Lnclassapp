@@ -48,7 +48,7 @@ class Classroom::GenerateMissingClassroomsPerformanceTest < ActiveSupport::TestC
                 SCHOOLS, classrooms, elapsed, peak_memory_mb)
     assert_equal [ "completed", SCHOOLS, 0 ], report.values_at(:status, :imported_count, :error_count)
     assert_equal classrooms, report.details["classrooms_created"]
-    assert_equal classrooms, Orm::Classroom.distinct.count(:join_code)
+    assert_equal classrooms, Orm::Classroom.distinct.count(:link_token)
     assert_operator elapsed, :<, BUDGET_SECONDS * SCHOOLS / 500.0
     classrooms
   end

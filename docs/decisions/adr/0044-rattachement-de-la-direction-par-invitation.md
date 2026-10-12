@@ -1,4 +1,9 @@
 # ADR-0044 : Rattachement de la direction par invitation, une école par membre, quatre fonctions de référence, second facteur exigé
+<!-- index
+titre: Rattachement de la direction par invitation, une école par membre, quatre fonctions de référence, second facteur exigé
+statut: Accepté ; amendé par [0065](./0065-espace-direction-simple-en-lecture-seule.md) *(proposé)*
+problematique: Invitation par l'équipe ou un membre de l'école ; Proviseur, Censeur, Éducateur, Secrétaire ; un proviseur actif par école ; TOTP pour `school_admin`. F-22.
+-->
 
 | | |
 |---|---|

@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 # Finitions UX, Lot E (UDR-0054, amendements d'UDR-0027 et d'UDR-0050) : la classe vue par l'enseignant et par l'équipe,
 # « Inviter un collègue ». FU-02 (enseignant), FU-07, FU-08, FU-10 (Inviter un collègue), FU-26 (classe), FU-28, FU-48,
-# FU-53 (classe).
+# FU-53 (classe). IE-20 (UDR-0079 §3.7) : la bulle « Inviter » de l'accueil ouvre WhatsApp, partage compté.
 module Finitions; end
 
 class Finitions::ClassroomTest < ApplicationSystemTestCase
@@ -10,7 +10,7 @@ class Finitions::ClassroomTest < ApplicationSystemTestCase
 
   setup do
     @school = create_school(name: "Lycée moderne de Cocody", school_code: "k7m4qz")
-    @classroom = create_classroom(school: @school, level: create_level(name: "3e"), name: "3e A", join_code: "kfm37",
+    @classroom = create_classroom(school: @school, level: create_level(name: "3e"), name: "3e A",
                                   max_students: 40)
     @teacher = create_teacher(school: @school, classrooms: [ @classroom ])
     @awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
@@ -53,22 +53,18 @@ class Finitions::ClassroomTest < ApplicationSystemTestCase
     assert_current_path school_path(@school.public_id)
   end
 
-  test "FU-26 : l'enseignant copie le code en majuscules et le lien /c/<code> de sa classe" do
+  # FU-26, UDR-0081 §3.6 : le code de classe a laissé la place au lien (Lot F) ; seul le lien se copie.
+  test "FU-26 : l'enseignant copie le lien de sa classe, sans aucun code" do
     sign_in_as @teacher
     visit classroom_path(@classroom.public_id)
 
-    assert_no_page_reload do
-      click_on t("#{SCOPE}.header.copy")
-      assert_toast t("shared.clipboard.copied_code")
-    end
-    assert_equal "KFM37", clipboard
-
     # Le bloc « Parrainage » de la barre latérale (UDR-0069 §3.6) a aussi « Copier le lien » : celui de la classe est dans son en-tête.
-    within("#classroom_header") { click_on t("#{SCOPE}.header.copy_link") }
-
-    assert_toast t("shared.clipboard.copied_link")
-    assert_equal URI.join(page.current_url, join_classroom_path("KFM37")).to_s, clipboard
-    assert_selector "[data-controller~='classroom--join-code-copy']", count: 0
+    assert_no_page_reload do
+      within("#classroom_link") { click_on t("#{SCOPE}.link.copy") }
+      assert_toast t("#{SCOPE}.link.copied")
+    end
+    assert_equal URI.join(page.current_url, join_classroom_path(@classroom.reload.link_token)).to_s, clipboard
+    assert_no_selector "[id*=join_code], [data-controller~='classroom--join-code-copy']"
   end
 
   test "FU-48, FU-51 : « Chercher un élève » filtre la liste pendant la frappe, sans recharger la page" do
@@ -155,6 +151,7 @@ class Finitions::ClassroomTest < ApplicationSystemTestCase
     sign_in_as @teacher
     visit teacher_invite_path
     link = find("a#referral_link")[:href]
+    assert_match %r{/i/\h{12}\z}, link
 
     click_on t("identity.referrals.invite.copy")
 
@@ -168,5 +165,20 @@ class Finitions::ClassroomTest < ApplicationSystemTestCase
     assert_toast t("shared.clipboard.failed")
     sleep 0.5
     assert_equal %w[copy], shares
+  end
+
+  test "IE-20 : la bulle « Inviter » de l'accueil ouvre WhatsApp avec le lien /i/<jeton>, et le partage est compté" do
+    sign_in_as @teacher
+    visit teacher_home_path
+    token = Orm::TeacherProfile.find_by!(user: @teacher).referral_token
+
+    whatsapp = window_opened_by { find("a#course_level_invite").click }
+    whatsapp.close
+
+    Timeout.timeout(10) { sleep 0.1 until shares == %w[whatsapp] }
+    href = find("a#course_level_invite")[:href]
+    assert_match %r{\Ahttps://wa\.me/\?text=}, href
+    assert_match %r{/i/#{token}\z}, CGI.unescape(href)
+    assert_current_path teacher_home_path
   end
 end

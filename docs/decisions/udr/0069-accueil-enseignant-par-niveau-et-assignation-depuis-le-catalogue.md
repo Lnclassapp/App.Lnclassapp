@@ -1,4 +1,10 @@
 # UDR-0069 : Espace enseignant — accueil réordonné, cours par niveau enseigné, carte Parrainage, assignation depuis le catalogue ; niveau d'un cours assigné
+<!-- index
+titre: Accueil enseignant par niveau et assignation depuis le catalogue
+statut: Proposé
+adr-lie: [0075](../adr/0075-niveau-d-un-cours-assigne-fige.md), [0063](../adr/0063-parrainage-demarrage-a-froid-et-mesure-du-k-factor.md), [0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md)
+problematique: « Mes classes », « Cours », « Activités » ; bulles par niveau-série à l'illustration de la matière, « Inviter » ; carte « Parrainage » latérale en frame différé ; bascules d'assignation au catalogue limitées au niveau du cours ; le formulaire d'un cours refuse un niveau qui sortirait une classe assignée (ADR-0075)
+-->
 
 | | |
 |---|---|

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · SchoolAdmin::ClassroomsController
-# Rôle : accueil de la direction (établissement, niveaux, bandeau d'arrivée) et page d'une classe, en lecture ; 404 hors établissement
-# ADR  : 0006, 0065, 0077, 0078 · UDR : 0052, 0054, 0070, 0071, 0074 · `q` ne filtre que les élèves déjà lus de cette classe (FU-49)
+# Rôle : accueil de la direction (établissement, niveaux, bandeau d'arrivée) et page d'une classe : lien, nouveaux, retrait ; 404 hors établissement
+# ADR  : 0006, 0065, 0077, 0078, 0085 · UDR : 0052, 0054, 0070, 0071, 0074, 0081 · `q` ne filtre que les élèves déjà lus de cette classe (FU-49)
 module SchoolAdmin
   class ClassroomsController < BaseController
     def index
@@ -12,12 +12,14 @@ module SchoolAdmin
       @announcements = announcements
     end
 
+    # La classe n'est lue que dans l'établissement de la direction et active : là où ManageClassroomMembersPolicy lui
+    # accorde le lien et le retrait (UDR-0081 §3.6, §3.7), que leurs contrôleurs vérifient de nouveau à chaque geste.
     def show
       @detail = query.classroom(school_id: current_actor.school_id, public_id: params[:public_id])
       return render_not_found if @detail.nil?
 
       @search = params[:q].to_s.squish
-      @students = matching_students(@detail.students, @search)
+      @students = matching_students(@detail.members, @search)
     end
 
     private

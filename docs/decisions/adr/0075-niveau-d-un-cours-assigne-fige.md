@@ -1,4 +1,9 @@
 # ADR-0075 : Le niveau et la série d'un cours ne changent pas s'ils sortiraient une assignation active de son niveau
+<!-- index
+titre: Le niveau et la série d'un cours ne changent pas s'ils sortiraient une assignation active de son niveau
+statut: Proposé
+problematique: `UpdateCourse` refuse (`:conflict`, `assigned_elsewhere`) un couple niveau-série qui ne couvre pas toutes les classes assignées (`LevelAudience`) ; port `CourseRepositoryPort#assigned_classroom_levels` ; aucune migration (aucune assignation en base).
+-->
 
 | | |
 |---|---|

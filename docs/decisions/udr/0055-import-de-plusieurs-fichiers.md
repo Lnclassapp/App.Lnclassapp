@@ -1,4 +1,10 @@
 # UDR-0055 : Import de plusieurs fichiers — résumé de la sélection dans la modale, bilan par fichier dans le suivi, nom de l'import dans l'historique, suivi rafraîchi chaque seconde
+<!-- index
+titre: Import de plusieurs fichiers
+statut: Proposé
+adr-lie: [0068](../adr/0068-import-de-plusieurs-fichiers-de-cours-et-ecriture-acceleree.md), [0039](../adr/0039-format-d-import-du-contenu.md)
+problematique: Champ multiple pour les cours complets et résumé de la sélection (nombre, taille, noms, dépassements) par le contrôleur `teams--import-files` ; section « Fichiers » du bilan ; erreur qui nomme son fichier ; « … et N autres fichiers » dans l'historique ; suivi rechargé toutes les 1 s. Complète UDR-0038, 0006 §7
+-->
 
 | | |
 |---|---|

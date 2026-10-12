@@ -1,0 +1,949 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Dénombrement",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "Mathématiques",
+      "series_name": "A",
+      "essentials": [
+        {
+          "name": "Compter les choix : principes additif et multiplicatif",
+          "subtitle": "Combiner des choix au maquis : on multiplie les choix successifs, on additionne les cas qui s'excluent",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Compter le nombre d'issues d'une situation faite de plusieurs choix successifs.</li>\n<li>Reconnaître si l'on doit additionner ou multiplier les nombres de choix.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le menu du maquis (le principe multiplicatif).</strong> Au maquis de Tantie Yao, tu choisis un plat, puis une boisson. Il y a deux plats : poulet braisé ou poisson braisé. Il y a trois boissons : bissap, gingembre ou eau. Tu prends un plat et une boisson.</p>\n<p><em>Le pont.</em> Le choix du plat est la première étape, celui de la boisson la deuxième. Pour chacun des 2 plats, tu peux prendre chacune des 3 boissons. Le nombre de menus possibles est donc $2 \\times 3 = 6$.</p>\n<p><em>Où l'image s'arrête.</em> Le calcul ne marche que si le choix de la boisson ne dépend pas du plat. Si le poulet n'était servi qu'avec l'eau, il n'y aurait plus 6 menus mais 4.</p>\n<p><strong>2. Viande ou poisson (le principe additif).</strong> Le maquis propose 2 plats de viande et 3 plats de poisson. Tu choisis <em>un seul</em> plat, de viande ou de poisson.</p>\n<p><em>Le pont.</em> Les deux cas s'excluent : si tu prends de la viande, tu ne prends pas de poisson. On additionne donc : $2 + 3 = 5$ plats possibles.</p>\n<p><em>Où l'image s'arrête.</em> Si tu pouvais prendre à la fois un plat de viande et un plat de poisson, ce ne serait plus une addition mais deux choix successifs, donc une multiplication.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Principe multiplicatif.</strong> Si une situation se décompose en deux choix successifs, avec $p$ possibilités pour le premier et $q$ pour le second, quel que soit le premier, le nombre total d'issues est $p \\times q$.</p>\n<p><strong>Principe additif.</strong> Si deux cas s'excluent, avec $p$ issues pour le premier et $q$ pour le second, le nombre total d'issues est $p + q$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p>Un maquis propose 3 plats (riz, attiéké, foutou) et 2 sauces (arachide, gombo). Un menu se compose d'un plat, d'une sauce et d'une boisson, et on suppose que chaque plat se mange avec chaque sauce. Le maquis propose aussi 2 boissons (bissap, eau). Combien de menus différents peut-on composer ?</p>\n<ul>\n<li><strong>Étape 1 :</strong> Le choix du plat a 3 possibilités.</li>\n<li><strong>Étape 2 :</strong> Quel que soit le plat, il reste 2 sauces : $3 \\times 2 = 6$ couples (plat, sauce).</li>\n<li><strong>Étape 3 :</strong> Quel que soit le couple, il y a 2 boissons : $6 \\times 2 = 12$ menus.</li>\n<li><strong>Vérification :</strong> $3 \\times 2 \\times 2 = 12$, en suivant un autre ordre de choix.</li>\n</ul>\n<h2>Le piège à éviter</h2>\n<p>L'erreur la plus fréquente : additionner alors qu'il faut multiplier. Pour deux choix successifs (un plat, puis une boisson), 2 plats et 3 boissons donnent 6 menus, et non 5. Repère-le : si tu fais un choix <em>puis</em> un autre, tu multiplies ; si tu retiens un seul cas parmi des groupes qui s'excluent, tu additionnes.</p>\n<h2>En une phrase</h2>\n<p>Pour compter des choix faits l'un après l'autre, on multiplie ; pour compter des cas qui s'excluent, on additionne.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître un choix multiple ou exclusif",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Au maquis, tu choisis un plat (2 possibilités), puis une boisson (3 possibilités), et les deux choix sont indépendants. Combien de menus différents peux-tu composer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Deux choix successifs et indépendants : on multiplie, $2 \\times 3 = 6$ menus. L'erreur 5 additionne 2 et 3, comme si tu ne faisais qu'un seul choix.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    },
+                    {
+                      "content": "5",
+                      "correct": false
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour choisir un seul plat parmi 2 plats de viande et 3 plats de poisson, il y a 5 possibilités.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Les deux groupes s'excluent : tu prends un plat de viande ou un plat de poisson, jamais les deux. On additionne donc $2 + 3 = 5$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un jus est servi en 3 tailles (petite, moyenne, grande) et avec 4 parfums. Combien de jus différents peut-on commander ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un jus est une taille et un parfum, deux choix faits ensemble : $3 \\times 4 = 12$. L'erreur 7 additionne 3 et 4, comme si l'on choisissait soit la taille, soit le parfum.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    },
+                    {
+                      "content": "7",
+                      "correct": false
+                    },
+                    {
+                      "content": "34",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces situations, lesquelles se comptent par une addition ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Dans les situations où l'on prend un seul élément parmi des groupes qui s'excluent, on additionne : $4 + 2 = 6$ et $3 + 2 = 5$. Les situations où l'on enchaîne deux choix se multiplient, et non l'inverse.",
+                  "answers": [
+                    {
+                      "content": "Choisir un seul dessert parmi 4 desserts sucrés et 2 desserts salés.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Choisir un seul jus parmi 3 jus de fruits et 2 jus de légumes.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Choisir un plat, puis un dessert, parmi 3 plats et 2 desserts.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Choisir un plat, puis une boisson, parmi 4 plats et 3 boissons.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un menu complet est composé d'un plat (3 choix), d'une boisson (2 choix) et d'un dessert (4 choix). Combien de menus complets différents ?",
+                  "question_type": "single_choice",
+                  "explanation": "Trois choix successifs et indépendants : on multiplie, $3 \\times 2 \\times 4 = 24$. L'erreur 9 additionne les trois nombres de choix. L'erreur 12 oublie la boisson.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Compter avec un ou deux principes",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un maquis propose 4 sauces et 2 accompagnements. Chaque sauce peut être servie avec chaque accompagnement. Combien de combinaisons sauce et accompagnement peut-on former ?",
+                  "question_type": "single_choice",
+                  "explanation": "Deux choix faits ensemble : une sauce et un accompagnement, soit $4 \\times 2 = 8$ combinaisons. L'erreur 6 additionne 4 et 2.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un serveur propose 5 jus et 4 sodas. Tu ne choisis qu'une seule boisson. Combien de choix as-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Tu ne prends qu'une boisson, soit dans le groupe des jus, soit dans celui des sodas : ces cas s'excluent, donc $5 + 4 = 9$. L'erreur 20 multiplie les deux groupes, comme si tu prenais un jus et un soda.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    },
+                    {
+                      "content": "20",
+                      "correct": false
+                    },
+                    {
+                      "content": "5",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maquis propose 3 entrées, 4 plats et 2 desserts. Un repas complet comprend une entrée, un plat et un dessert. Combien de repas complets peut-on composer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Trois choix successifs : $3 \\times 4 \\times 2 = 24$. L'erreur 9 additionne les choix. L'erreur 12 oublie le dessert.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec 3 plats et 3 boissons, on peut composer 9 menus, chacun étant un plat suivi d'une boisson.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : $3 \\times 3 = 9$. Chaque plat peut être accompagné de chaque boisson, et les deux choix se font l'un après l'autre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un code est formé d'une lettre (A, B ou C) suivie d'un chiffre (1 ou 2). Combien de codes différents existe-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une lettre puis un chiffre : deux choix successifs, $3 \\times 2 = 6$ codes (A1, A2, B1, B2, C1, C2). L'erreur 5 additionne 3 et 2.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    },
+                    {
+                      "content": "5",
+                      "correct": false
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Dénombrer une situation complète",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un client choisit un plat (4 possibilités), puis une boisson (3 possibilités). Il choisit ensuite un dessert : 2 desserts sucrés ou 1 dessert salé, soit 3 possibilités au total. Combien de menus différents peut-il composer ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le plat et la boisson se multiplient : $4 \\times 3 = 12$. Pour le dessert, les cas s'excluent : $2 + 1 = 3$. Au total, $12 \\times 3 = 36$ menus. L'erreur 12 oublie le dessert ; l'erreur 10 additionne tous les choix.",
+                  "answers": [
+                    {
+                      "content": "36",
+                      "correct": true
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    },
+                    {
+                      "content": "10",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec les chiffres 1, 2 et 3, combien de nombres de 2 chiffres peut-on former, en autorisant les répétitions (par exemple 11 ou 33) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Deux places, et 3 chiffres possibles à chaque place : $3 \\times 3 = 9$ nombres, de 11 à 33. Si les répétitions étaient interdites, il resterait $3 \\times 2 = 6$ nombres. L'erreur 5 additionne 3 et 2.",
+                  "answers": [
+                    {
+                      "content": "9",
+                      "correct": true
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "5",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sur les principes de dénombrement sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Deux choix successifs indépendants se multiplient ; deux cas qui s'excluent s'additionnent. L'erreur la plus fréquente additionne deux choix successifs. L'erreur « deux cas qui s'excluent se multiplient toujours » inverse cette règle.",
+                  "answers": [
+                    {
+                      "content": "Pour deux choix successifs indépendants, on multiplie les nombres de possibilités.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux cas qui s'excluent se comptent par une addition.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Deux choix successifs indépendants se comptent toujours par une addition.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux cas qui s'excluent se multiplient toujours.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maquis propose un plat au choix : poulet avec riz ou attiéké, ou poisson avec riz seulement. Chaque plat se commande avec une boisson, bissap ou eau. Combien de menus différents ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un seul plat est choisi : poulet avec 2 accompagnements, ou poisson avec 1 seul, soit $2 + 1 = 3$ plats avec accompagnement. Chacun se commande avec 2 boissons : $3 \\times 2 = 6$ menus. L'erreur 8 donne 2 accompagnements au poisson ; l'erreur 4 oublie le poisson.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    },
+                    {
+                      "content": "8",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève s'habille : il choisit une chemise (3 choix) ou un polo (2 choix), puis un pantalon (2 choix). Combien de tenues différentes peut-il former ?",
+                  "question_type": "single_choice",
+                  "explanation": "Chemise ou polo : les cas s'excluent, donc $3 + 2 = 5$ hauts. Le pantalon se choisit ensuite pour chacun : $5 \\times 2 = 10$ tenues. L'erreur 12 multiplie les trois choix, comme si la chemise et le polo se portaient ensemble ; l'erreur 7 additionne le pantalon.",
+                  "answers": [
+                    {
+                      "content": "10",
+                      "correct": true
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    },
+                    {
+                      "content": "7",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Arbre de dénombrement",
+          "subtitle": "Dessiner tous les choix étape par étape, puis compter les chemins complets sans en oublier",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Construire un arbre de dénombrement pour représenter des choix successifs.</li>\n<li>Lire un arbre pour compter ses issues, c'est-à-dire ses chemins complets, sans en oublier.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>Le carnet du serveur.</strong> Au maquis, le serveur note les commandes sur un carnet. Il trace d'abord un trait pour chaque plat possible : poulet, poisson. Depuis chaque plat, il trace un trait pour chaque boisson : bissap, eau. Chaque chemin, du plat jusqu'à la boisson, forme une commande complète.</p>\n<p><em>Le pont.</em> Chaque trait est un <strong>choix</strong>. Chaque chemin complet, du point de départ jusqu'au bout de l'arbre, est une <strong>issue</strong> : une commande possible. Compter les issues revient à compter les chemins complets, c'est-à-dire les extrémités de l'arbre.</p>\n<p><em>Où l'image s'arrête.</em> L'arbre ne sert que si le nombre d'étapes reste petit. Pour dix étapes de deux choix, on ne le dessine plus : on multiplie.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Arbre de dénombrement.</strong> On place un point de départ, puis on trace une branche pour chaque choix possible à chaque étape. Une <strong>issue</strong> est un chemin complet, du départ jusqu'à une extrémité.</p>\n<p><strong>Nombre d'issues.</strong> Le nombre d'issues est le nombre de chemins complets. Quand le nombre de branches ne change pas d'une branche à l'autre, il est égal au produit des nombres de branches de chaque étape.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p>Un client commande un plat (riz ou attiéké) et une boisson (bissap ou eau). Combien de commandes possibles, et lesquelles ?</p>\n<ul>\n<li><strong>Étape 1 :</strong> Du point de départ partent 2 branches : « riz » et « attiéké ».</li>\n<li><strong>Étape 2 :</strong> De « riz » partent 2 branches, « bissap » et « eau ». De « attiéké » partent aussi 2 branches, « bissap » et « eau ».</li>\n<li><strong>Étape 3 :</strong> On lit les chemins complets : riz-bissap, riz-eau, attiéké-bissap, attiéké-eau. Il y en a 4.</li>\n<li><strong>Vérification :</strong> $2 \\times 2 = 4$, comme avec le principe multiplicatif.</li>\n</ul>\n<h2>Le piège à éviter</h2>\n<p>L'erreur la plus fréquente est de compter les branches au lieu des chemins complets, ou de ne lire que quelques chemins. Pour ne rien oublier, écris chaque chemin complet en partant du départ, dans l'ordre : riz-bissap, riz-eau, attiéké-bissap, attiéké-eau.</p>\n<h2>En une phrase</h2>\n<p>Un arbre dessine tous les choix possibles, étape par étape ; chaque chemin complet est une issue, et on les compte pour savoir combien de possibilités existent.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Lire un arbre de dénombrement",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans un arbre de dénombrement, que représente une branche ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une branche représente un choix possible à une étape, par exemple « poulet » ou « poisson ». Une issue, elle, va du départ jusqu'au bout de l'arbre : ne confonds pas la branche avec la commande complète.",
+                  "answers": [
+                    {
+                      "content": "Un choix possible à une étape",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une issue complète, du départ jusqu'à la fin",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le nombre total d'issues",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un arbre a deux étapes : 3 branches à la première, puis 2 branches depuis chacune d'elles. Combien de chemins complets y a-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Chacune des 3 branches de la première étape se prolonge par 2 branches : $3 \\times 2 = 6$ chemins complets. L'erreur 5 additionne 3 et 2, comme si les étapes ne se suivaient pas.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    },
+                    {
+                      "content": "5",
+                      "correct": false
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un arbre, compter les extrémités revient à compter les issues.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Chaque extrémité se trouve au bout d'un chemin complet, donc correspond à une issue. Les branches intermédiaires ne sont pas des commandes complètes : ne les compte pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un arbre commence par deux branches, « viande » et « poisson ». De la branche « viande » partent 2 branches, et de la branche « poisson » partent 3 branches. Combien d'issues compte cet arbre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Chaque branche de la première étape a son propre nombre de branches : viande donne 2 issues, poisson donne 3 issues. Total : $2 + 3 = 5$. L'erreur 6 calcule $2 \\times 3$, comme si chaque branche avait le même nombre de suites.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "10",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un arbre à 3 étapes, avec 2 branches à chaque étape. Combien de chemins complets ?",
+                  "question_type": "single_choice",
+                  "explanation": "$2 \\times 2 \\times 2 = 8$ chemins complets. L'erreur 6 additionne les étapes : $2 + 2 + 2$.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Construire et compter un arbre",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un client choisit un jus (orange ou ananas), puis une taille (petite ou grande). Combien de commandes possibles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Deux étapes à 2 choix chacune : $2 \\times 2 = 4$ commandes : orange-petite, orange-grande, ananas-petite, ananas-grande. L'erreur 2 ne compte que les jus et oublie la taille.",
+                  "answers": [
+                    {
+                      "content": "4",
+                      "correct": true
+                    },
+                    {
+                      "content": "2",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un arbre a une première étape à 3 branches (A, B, C), puis une seconde étape à 2 branches (1, 2) depuis chacune. Lequel est un chemin complet ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un chemin complet va jusqu'à la dernière étape : « A puis 1 » en est un. Un chemin qui s'arrête à A n'est pas complet : il manque le second choix.",
+                  "answers": [
+                    {
+                      "content": "A puis 1",
+                      "correct": true
+                    },
+                    {
+                      "content": "A seul",
+                      "correct": false
+                    },
+                    {
+                      "content": "1 seul",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une commande comprend une entrée (2 choix), puis un plat (3 choix), puis une boisson (2 choix). Combien de commandes différentes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Trois étapes successives : $2 \\times 3 \\times 2 = 12$. L'erreur 7 additionne les choix. L'erreur 6 oublie la boisson.",
+                  "answers": [
+                    {
+                      "content": "12",
+                      "correct": true
+                    },
+                    {
+                      "content": "7",
+                      "correct": false
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un arbre a deux étapes : 2 branches à la première, puis 3 branches depuis chacune. Lesquelles des affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Chacune des 2 branches de la première étape se prolonge par 3 branches : $2 \\times 3 = 6$ issues, et chaque branche de la première étape mène à 3 issues. L'erreur 5 additionne 2 et 3 ; l'erreur 9 calcule $3 \\times 3$.",
+                  "answers": [
+                    {
+                      "content": "Il y a 6 issues.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Chaque branche de la première étape mène à 3 issues.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il y a 5 issues.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a 9 issues.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un arbre a 4 branches à la première étape, puis 2 branches depuis chacune. Combien d'issues ?",
+                  "question_type": "single_choice",
+                  "explanation": "Chacune des 4 branches se prolonge par 2 branches : $4 \\times 2 = 8$ issues. L'erreur 6 additionne 4 et 2 ; l'erreur 16 calcule $4 \\times 4$.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "16",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Dénombrer avec un arbre en situation",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un maquis propose deux plats : le riz, avec 3 sauces au choix, et l'attiéké, avec 2 sauces au choix. Tu choisis un plat, puis une sauce. Combien de commandes différentes peux-tu faire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Depuis le riz, 3 sauces ; depuis l'attiéké, 2 sauces. Les cas s'excluent d'un plat à l'autre : $3 + 2 = 5$ commandes. L'erreur 6 calcule $2 \\times 3$, comme si chaque plat avait le même nombre de sauces ; l'erreur 4 oublie une sauce du riz.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un code de 2 caractères : la première lettre est A ou B, le second caractère est un chiffre parmi 1, 2 ou 3. Après B, le chiffre 1 est interdit. Combien de codes peut-on former ?",
+                  "question_type": "single_choice",
+                  "explanation": "Après A : 3 codes (A1, A2, A3). Après B : seulement 2 codes (B2, B3), car B1 est interdit. Total : $3 + 2 = 5$. L'erreur 6 oublie l'interdiction ; l'erreur 4 oublie un code après A.",
+                  "answers": [
+                    {
+                      "content": "5",
+                      "correct": true
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "4",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maquis propose 5 plats, dont le poisson braisé, et 3 boissons. Un seul menu est interdit : poisson braisé avec bissap. Lesquelles des affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Sans restriction, $5 \\times 3 = 15$ menus. Une seule combinaison est interdite : $15 - 1 = 14$ menus. L'erreur 8 additionne 5 et 3 ; l'erreur 15 oublie l'interdiction.",
+                  "answers": [
+                    {
+                      "content": "Il y a 14 menus possibles.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sans l'interdiction, il y aurait 15 menus.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il y a 8 menus possibles.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il y a 15 menus possibles, l'interdiction ne change rien.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un arbre à 3 étapes, avec 3 branches à chaque étape. Combien de chemins complets ?",
+                  "question_type": "single_choice",
+                  "explanation": "$3 \\times 3 \\times 3 = 27$ chemins complets. L'erreur 9 oublie la troisième étape ; l'erreur 12 additionne les branches au lieu de les multiplier.",
+                  "answers": [
+                    {
+                      "content": "27",
+                      "correct": true
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maquis propose 2 sortes de jus d'orange, qui existent chacune en 2 tailles, et 3 sortes de jus d'ananas, qui existent chacune en 3 tailles. Tu choisis une sorte et une taille. Combien de commandes différentes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les jus d'orange et d'ananas s'excluent : $2 \\times 2 = 4$ commandes d'orange, $3 \\times 3 = 9$ d'ananas, donc $4 + 9 = 13$. L'erreur 6 additionne directement 2 et 3 et oublie les tailles.",
+                  "answers": [
+                    {
+                      "content": "13",
+                      "correct": true
+                    },
+                    {
+                      "content": "6",
+                      "correct": false
+                    },
+                    {
+                      "content": "25",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Listes et codes : compter les rangements",
+          "subtitle": "Ranger des amis sur des places, ou former un code, avec ou sans répétition. À compléter : factorielle, combinaisons, probabilités.",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Compter de combien de façons on peut ranger des personnes ou des objets sur des places.</li>\n<li>Compter les codes formés de plusieurs symboles, avec ou sans répétition.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. La banquette du maquis (les rangements).</strong> Trois amis, Kouassi, Awa et Ibrahim, s'assoient sur une banquette de 3 places. Pour la première place, ils ont 3 choix : qui s'assoit là ? Une fois la première place prise, il reste 2 personnes pour la deuxième place, puis une seule pour la dernière.</p>\n<p><em>Le pont.</em> Chaque place est une étape successive. Le nombre de choix <strong>diminue</strong> à chaque étape, car une personne déjà assise ne peut plus se placer ailleurs. Le compte est donc $3 \\times 2 \\times 1 = 6$ façons de s'asseoir.</p>\n<p><em>Où l'image s'arrête.</em> Ici, une personne ne s'assoit qu'une seule fois. Dans un code où un même chiffre peut revenir, le nombre de choix ne diminue pas : c'est la deuxième image.</p>\n<p><strong>2. Le code du patron (les codes).</strong> Le patron du maquis compose un code de 2 chiffres, chacun pris parmi les dix chiffres de 0 à 9. Un chiffre peut revenir : 33 est un code possible.</p>\n<p><em>Le pont.</em> À chaque place, les 10 chiffres restent disponibles. Le nombre de codes est donc $10 \\times 10 = 100$, de 00 à 99.</p>\n<p><em>Où l'image s'arrête.</em> Si les chiffres ne pouvaient pas se répéter, la seconde place n'aurait plus que 9 choix, comme les amis sur la banquette.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Liste sans répétition.</strong> Pour remplir $k$ places avec des éléments distincts pris parmi $n$, on a $n \\times (n - 1) \\times \\dots \\times (n - k + 1)$ listes possibles : les choix diminuent à chaque place.</p>\n<p><strong>Liste avec répétition.</strong> Pour remplir $k$ places avec des éléments pris parmi $n$, un même élément pouvant revenir, on a $n \\times n \\times \\dots \\times n$ ($k$ facteurs), soit $n^k$ listes possibles.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p>Combien de codes de 3 chiffres peut-on former avec les chiffres 1, 2, 3 et 4 ? On compte d'abord avec répétitions autorisées, puis sans répétition.</p>\n<ul>\n<li><strong>Étape 1 (avec répétitions) :</strong> 4 choix pour le premier chiffre, 4 pour le deuxième, 4 pour le troisième : $4 \\times 4 \\times 4 = 64$ codes.</li>\n<li><strong>Étape 2 (sans répétition) :</strong> 4 choix pour le premier chiffre, puis 3 pour le deuxième (un chiffre est déjà pris), puis 2 pour le troisième : $4 \\times 3 \\times 2 = 24$ codes.</li>\n<li><strong>Vérification :</strong> $4^3 = 64$, et le nombre sans répétition est plus petit, car on interdit des codes.</li>\n</ul>\n<h2>Le piège à éviter</h2>\n<p>L'erreur la plus fréquente : garder 4 choix à chaque place alors que les répétitions sont interdites. Un élève écrit $4 \\times 4 \\times 4 = 64$ pour le cas sans répétition : il compte aussi des codes comme 112, qui répètent le 1. Repère-le : relis l'énoncé. « Chiffres différents » signifie que le choix diminue à chaque place.</p>\n<h2>En une phrase</h2>\n<p>Sur des places qui se suivent, on multiplie les choix de chaque place. Si un élément ne peut servir qu'une fois, le nombre de choix baisse à chaque place.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître une liste avec ou sans répétition",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans un code de 2 chiffres où chaque chiffre peut revenir, le second chiffre a toujours 10 choix possibles.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : les répétitions sont permises, donc les 10 chiffres restent disponibles pour la seconde place. Sans répétition, il n'en resterait que 9.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Trois amis s'assoient sur 3 places, chacun sur une seule place. Une fois la première place occupée, combien de choix reste-t-il pour la deuxième place ?",
+                  "question_type": "single_choice",
+                  "explanation": "La première place est prise par une personne : il reste 2 amis pour la deuxième place. L'erreur 3 oublie que la personne installée ne peut plus se placer ailleurs.",
+                  "answers": [
+                    {
+                      "content": "2",
+                      "correct": true
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    },
+                    {
+                      "content": "1",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un code de 3 chiffres où chaque chiffre n'apparaît qu'une fois, les deux premiers chiffres sont 4 et 7 (parmi les dix chiffres de 0 à 9). Combien de choix reste-t-il pour le troisième chiffre ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les chiffres 4 et 7 sont déjà utilisés : il reste $10 - 2 = 8$ chiffres. L'erreur 9 n'enlève qu'un seul chiffre ; l'erreur 10 oublie la règle sans répétition.",
+                  "answers": [
+                    {
+                      "content": "8",
+                      "correct": true
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    },
+                    {
+                      "content": "10",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces situations, lesquelles sont des listes sans répétition ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Une liste sans répétition utilise chaque élément une seule fois : les livres et les coureurs. Un code dont les chiffres peuvent revenir, ou un tirage avec remise, sont des listes avec répétition, qui se comptent autrement.",
+                  "answers": [
+                    {
+                      "content": "Ranger 4 livres différents sur 4 places.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Choisir 3 coureurs différents pour les 3 premières places d'une course.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Composer un code de 4 chiffres où chaque chiffre peut revenir.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tirer 2 fois une lettre, en la remettant après chaque tirage.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de rangements différents pour 3 amis sur 3 places, sachant qu'une personne occupe une seule place ?",
+                  "question_type": "single_choice",
+                  "explanation": "$3 \\times 2 \\times 1 = 6$ : 3 choix pour la première place, 2 pour la deuxième, 1 pour la dernière. L'erreur 9 calcule $3 \\times 3$, comme si une même personne pouvait occuper plusieurs places.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Compter des codes et des rangements",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Combien de codes de 2 chiffres peut-on former, les répétitions étant permises ?",
+                  "question_type": "single_choice",
+                  "explanation": "$10 \\times 10 = 100$ codes, de 00 à 99. Sans répétition, on aurait $10 \\times 9 = 90$ codes. L'erreur 20 additionne les deux choix.",
+                  "answers": [
+                    {
+                      "content": "100",
+                      "correct": true
+                    },
+                    {
+                      "content": "90",
+                      "correct": false
+                    },
+                    {
+                      "content": "20",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de codes de 2 lettres différentes peut-on former avec les lettres A, B et C ?",
+                  "question_type": "single_choice",
+                  "explanation": "Première lettre : 3 choix. Deuxième lettre : 2 choix, car elle doit être différente de la première. $3 \\times 2 = 6$ codes : AB, BA, AC, CA, BC, CB. L'erreur 9 autorise les répétitions.",
+                  "answers": [
+                    {
+                      "content": "6",
+                      "correct": true
+                    },
+                    {
+                      "content": "9",
+                      "correct": false
+                    },
+                    {
+                      "content": "3",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de façons y a-t-il de mettre 4 personnes en file sur 4 places, sachant que chacune occupe une seule place ?",
+                  "question_type": "single_choice",
+                  "explanation": "$4 \\times 3 \\times 2 \\times 1 = 24$ : 4 choix pour la première place, 3 pour la deuxième, 2 pour la troisième, 1 pour la dernière. L'erreur 256 garde 4 choix à chaque place, comme si une même personne pouvait occuper plusieurs places.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    },
+                    {
+                      "content": "256",
+                      "correct": false
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Avec les chiffres 1, 2 et 3, on peut former 27 codes de 3 chiffres si les répétitions sont permises.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : $3 \\times 3 \\times 3 = 27$. Chaque place a 3 choix, et les répétitions sont permises.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de codes de 3 chiffres sans répétition peut-on former avec les chiffres de 0 à 4 ?",
+                  "question_type": "single_choice",
+                  "explanation": "5 choix pour la première place, puis 4 pour la deuxième (un chiffre est pris), puis 3 : $5 \\times 4 \\times 3 = 60$. L'erreur 125 compte les répétitions ($5^3$) ; l'erreur 30 = $5 \\times 3 \\times 2$ oublie le choix de 4 à la deuxième place.",
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    },
+                    {
+                      "content": "125",
+                      "correct": false
+                    },
+                    {
+                      "content": "30",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Listes et codes en situation",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un code de 4 chiffres : chaque chiffre est pris parmi 0 à 9, les répétitions sont permises, mais le premier chiffre ne peut pas être 0. Combien de codes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Premier chiffre : 9 choix (de 1 à 9). Les trois autres : 10 choix chacun. Au total $9 \\times 10 \\times 10 \\times 10 = 9\\,000$. L'erreur 10 000 oublie l'interdiction du 0 en premier ; l'erreur 5 040 suppose des chiffres tous différents.",
+                  "answers": [
+                    {
+                      "content": "9 000",
+                      "correct": true
+                    },
+                    {
+                      "content": "10 000",
+                      "correct": false
+                    },
+                    {
+                      "content": "5 040",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Cinq élèves (Ama, Bono, Cécile, Didier et Émile) doivent former un duo : un capitaine, puis un adjoint différent du capitaine. Combien de duos différents ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le capitaine : 5 choix. L'adjoint : 4 choix, puisque ce ne peut pas être la même personne. $5 \\times 4 = 20$ duos. L'erreur 10 oublie que les rôles comptent : (Ama, Bono) et (Bono, Ama) sont deux duos différents.",
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    },
+                    {
+                      "content": "10",
+                      "correct": false
+                    },
+                    {
+                      "content": "25",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un menu se compose d'une entrée (3 choix), d'un plat (2 choix) et d'une boisson (4 choix). Lesquelles des affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les choix d'un menu se multiplient : $3 \\times 2 \\times 4 = 24$. Sans entrée, il reste $2 \\times 4 = 8$ menus. Avec l'entrée et le plat seuls, on a $3 \\times 2 = 6$ choix, et non 12. L'addition $3 + 2 + 4 = 9$ est fausse.",
+                  "answers": [
+                    {
+                      "content": "Il y a 24 menus possibles.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sans entrée, il reste 8 menus possibles.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il y a 9 menus possibles.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Avec l'entrée et le plat seuls, il y a 12 possibilités.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Combien de codes de 3 lettres distinctes peut-on former avec les 26 lettres de l'alphabet ?",
+                  "question_type": "single_choice",
+                  "explanation": "26 choix, puis 25, puis 24 : $26 \\times 25 \\times 24 = 15\\,600$. L'erreur 17 576 ($26^3$) autorise les répétitions ; l'erreur 15 625 ($25^3$) compte 25 choix à chaque place.",
+                  "answers": [
+                    {
+                      "content": "15 600",
+                      "correct": true
+                    },
+                    {
+                      "content": "17 576",
+                      "correct": false
+                    },
+                    {
+                      "content": "15 625",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quatre coureurs disputent une course. On compte les podiums possibles : une personne différente pour la 1re place, la 2e place et la 3e place. Combien de podiums différents ?",
+                  "question_type": "single_choice",
+                  "explanation": "Première place : 4 choix ; deuxième : 3 ; troisième : 2. $4 \\times 3 \\times 2 = 24$ podiums. L'erreur 64 garde 4 choix à chaque place, comme si un même coureur pouvait monter plusieurs fois ; l'erreur 12 oublie une place.",
+                  "answers": [
+                    {
+                      "content": "24",
+                      "correct": true
+                    },
+                    {
+                      "content": "12",
+                      "correct": false
+                    },
+                    {
+                      "content": "64",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

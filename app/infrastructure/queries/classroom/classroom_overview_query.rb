@@ -1,16 +1,22 @@
 # 🔌 INFRA · Queries::Classroom::ClassroomOverviewQuery
-# Rôle : corps de la page d'une classe (CL-10) : jours de séance de l'enseignant, exercices assignés et leurs comptes, cours, élèves
-# ADR  : 0026, 0028, 0048, 0060, 0072, 0079 · UDR : 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4)
+# Rôle : corps de la page d'une classe (CL-10) : jours de séance de l'enseignant, exercices assignés et leurs comptes, cours, élèves au numéro masqué (nouveaux, voie)
+# ADR  : 0026, 0028, 0048, 0060, 0062, 0072, 0079, 0083 (§4.4 bis), 0085 · UDR : 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0079 (§3.8 ter), 0081 (§3.7)
 module Queries
   module Classroom
     class ClassroomOverviewQuery
       # students : nil sans show_roster (ReadClassroomPolicy) — la liste nominative n'est alors même pas lue.
+      # new_students_count : les nouveaux de toute la classe, quelle que soit la recherche ; nil sans show_roster.
       # session_days : jours (1 = lundi … 6 = samedi) de l'enseignant pour la classe, [] s'il ne les a pas renseignés ;
       # nil sans teacher_id (l'équipe n'a pas de jours, ADR-0072 §4.2).
-      Overview = Data.define(:students, :session_days, :assignments, :courses)
+      Overview = Data.define(:students, :new_students_count, :session_days, :assignments, :courses)
       # last_session_public_id : la dernière session terminée, dont l'enseignant ouvre le résultat ; nil sans session.
       # photo_version : nil sans photo (ADR-0060).
-      StudentRow = Data.define(:public_id, :display_name, :contact, :last_score_percent, :last_session_public_id, :photo_version)
+      # contact : toujours masqué (« 07 •• •• •• 04 »), pour tout lecteur ; le numéro complet ne quitte pas cette requête
+      # (ADR-0083 §4.4 bis : protéger les élèves).
+      # joined_via : Entities::Classroom::StudentArrivalChannel.
+      # newcomer : arrivé depuis moins de NEW_FOR (ADR-0085 §4.4).
+      StudentRow = Data.define(:public_id, :display_name, :contact, :last_score_percent, :last_session_public_id, :photo_version,
+                               :joined_via, :newcomer)
       # counts : AssignmentFollowUpQuery::Counts, nil sans show_follow_up (FollowAssignmentPolicy, ADR-0072 §4.5).
       # comprehension : Assessment::ComprehensionSummaryQuery::Summary (ADR-0079), nil sans show_follow_up, comme counts.
       AssignmentRow = Data.define(:public_id, :exercise_title, :material_name, :material_category, :due_on, :counts,
@@ -18,7 +24,12 @@ module Queries
       CourseRow = Data.define(:slug, :name, :subtitle, :level_name, :series_name, :material_name, :material_category,
                               :essentials_count)
 
-      STUDENT_COLUMNS = %w[users.id users.public_id users.first_name users.last_name users.contact].freeze
+      STUDENT_COLUMNS = %w[users.id users.public_id users.first_name users.last_name users.contact classroom_students.joined_via
+                           classroom_students.joined_at].freeze
+      # ADR-0085 §4.4 : un élève est « nouveau » pendant 7 jours après son arrivée ; calcul de lecture, sans colonne.
+      NEW_FOR = 7.days
+      # UDR-0081 §3.7 : les nouveaux d'abord, du plus récent au plus ancien ; les autres (NULL) gardent l'ordre par nom.
+      NEWCOMERS_FIRST = "CASE WHEN classroom_students.joined_at > ? THEN classroom_students.joined_at END DESC NULLS LAST".freeze
       # « Awa Bamba » se trouve par « awa », « bamba » ou « awa bamba » (UDR-0054 §3.9).
       STUDENT_NAME = "concat_ws(' ', users.first_name, users.last_name)".freeze
       ASSIGNMENT_COLUMNS = %w[classroom_assignments.id classroom_assignments.public_id exercises.title materials.name
@@ -33,24 +44,34 @@ module Queries
         id, level_id, series_id = Orm::Classroom.where(public_id:).pick(:id, :level_id, :series_id)
         return if id.nil?
 
-        Overview.new(students: (students(id, search) if show_roster), session_days: (session_days(teacher_id, id) if teacher_id),
+        since = Time.current - NEW_FOR
+        Overview.new(students: (students(id, search, since) if show_roster),
+                     new_students_count: (new_students_count(id, since) if show_roster),
+                     session_days: (session_days(teacher_id, id) if teacher_id),
                      assignments: assignments(id, show_follow_up), courses: courses(level_id, series_id, teacher_id))
       end
 
       private
 
-      def students(classroom_id, search)
+      def students(classroom_id, search, since)
         scope = Orm::ClassroomStudent.joins(:student).where(classroom_id:, left_at: nil)
         rows = Queries::Shared::TextSearch.apply(scope, search, columns: [ STUDENT_NAME ])
-                                          .order("users.last_name", "users.first_name").pluck(*STUDENT_COLUMNS)
+                                          .order(Arel.sql(Orm::ClassroomStudent.sanitize_sql_array([ NEWCOMERS_FIRST, since ])),
+                                                 "users.last_name", "users.first_name")
+                                          .pluck(*STUDENT_COLUMNS)
         sessions = last_sessions(rows.map(&:first))
         photos = Queries::Identity::PhotoVersions.for(user_ids: rows.map(&:first))
 
-        rows.map do |id, public_id, first_name, last_name, contact|
+        rows.map do |id, public_id, first_name, last_name, contact, joined_via, joined_at|
           score, session_public_id = sessions[id]
-          StudentRow.new(public_id:, display_name: "#{first_name} #{last_name}", contact:, last_score_percent: score,
-                         last_session_public_id: session_public_id, photo_version: photos[id])
+          StudentRow.new(public_id:, display_name: "#{first_name} #{last_name}", contact: Entities::Identity::Contact.mask(contact),
+                         last_score_percent: score, last_session_public_id: session_public_id, photo_version: photos[id],
+                         joined_via:, newcomer: joined_at > since)
         end
+      end
+
+      def new_students_count(classroom_id, since)
+        Orm::ClassroomStudent.where(classroom_id:, left_at: nil).where("classroom_students.joined_at > ?", since).count
       end
 
       # { student_id => [score, public_id] } de la dernière session terminée de chaque élève, en une requête.

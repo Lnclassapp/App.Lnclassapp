@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069, 0071, 0076 · ADR : 0009, 0049, 0067
+# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069, 0071, 0076, 0079, 0080 · ADR : 0009, 0049, 0067, 0083
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -90,7 +90,7 @@ module ComponentsHelper
   # UDR-0061 §3.3 : `:sheet` est une feuille basse sous lg (`.dialog-sheet`, application.tailwind.css), centrée au-dessus.
   # Mouvement réduit : ui-dialog ne glisse qu'en motion-safe (motion-reduce:animate-none, moins spécifique que open:, ne
   # l'arrêtait pas).
-  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet" }.freeze
+  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet", drawer: "dialog-drawer" }.freeze
   DROPDOWN_ALIGNS = { start: "left-0", end: "right-0" }.freeze
   DROPDOWN_TONES = { default: "ui-menu-item-default", danger: "ui-menu-item-danger" }.freeze
 
@@ -271,17 +271,20 @@ module ComponentsHelper
   # `document_title:` (le résultat de `page_title`) nomme l'onglet tant que la modale est ouverte (UDR-0054 §3.1) ;
   # une confirmation n'en a pas. Le focus d'ouverture est l'affaire du contrôleur `autofocus` de la <dialog>.
   # `trigger_href:` fait du déclencheur un lien, suivi sans JavaScript, que le contrôleur `modal` intercepte (UDR-0061).
-  # `placement: :sheet` : feuille ancrée en bas sous lg, avec sa poignée ; `:center` (défaut) ne change rien.
+  # `placement: :sheet` : feuille ancrée en bas sous lg, avec sa poignée ; `:drawer` : panneau ancré à gauche, sans poignée
+  # (UDR-0080 §3.2) ; `:center` (défaut) ne change rien.
   # `trigger_full:` étire le déclencheur sur toute la largeur de sa cellule : une entrée de rôle de la page d'accueil (UDR-0064).
+  # `described_by:` l'id du texte qui explique une confirmation, lu à l'ouverture (aria-describedby, UDR-0083).
   def ui_modal(title:, id: nil, size: :md, trigger: nil, trigger_variant: :secondary, trigger_icon: nil, open: false,
                document_title: nil, trigger_href: nil, trigger_size: :md, trigger_full: false, trigger_class: nil,
-               placement: :center, &block)
+               placement: :center, described_by: nil, &block)
     slots = Slots.new(self)
     body = block ? capture(slots, &block) : nil
     render "components/modal", id: id || "modal-#{title.parameterize}", title:, trigger:, trigger_variant:,
            trigger_icon:, trigger_href:, trigger_size:, trigger_full:, trigger_class:, open:, body:, slots:, document_title:,
            size_class: option!(MODAL_SIZES, size, "ui_modal size"),
-           placement_class: option!(MODAL_PLACEMENTS, placement, "ui_modal placement"), sheet: placement.to_sym == :sheet
+           placement_class: option!(MODAL_PLACEMENTS, placement, "ui_modal placement"), sheet: placement.to_sym == :sheet,
+           described_by:
   end
 
   # Menu déroulant. `trigger:` remplace le bouton icône par un contenu libre (avatar + nom, par exemple).
@@ -332,9 +335,10 @@ module ComponentsHelper
   # Bulle ronde teintée, illustration 40 px, libellé dessous (UDR-0069 §3.3, charte §9) ; sr_suffix complète le nom accessible.
   # signal (UDR-0074 §3.5) : nil, :green, :yellow ou :red — pastille décorative, que sr_suffix doit dire.
   # short_label : libellé affiché sous 640 px (« PC ») ; le nom entier reste le nom accessible.
-  def ui_subject_bubble(label:, href:, illustration:, short_label: nil, sr_suffix: nil, id: nil, signal: nil)
+  # link_html (UDR-0079 §3.7) : attributs ajoutés au lien (target, rel, data), vide par défaut : rendu inchangé sans lui.
+  def ui_subject_bubble(label:, href:, illustration:, short_label: nil, sr_suffix: nil, id: nil, signal: nil, link_html: {})
     dot = (option!(SIGNAL_DOTS, signal, "ui_subject_bubble signal") if signal)
-    render "components/subject_bubble", label:, short_label:, href:, illustration:, sr_suffix:, id:, dot:
+    render "components/subject_bubble", label:, short_label:, href:, illustration:, sr_suffix:, id:, dot:, link_html:
   end
 
   def ui_subject_badge(label, category:, size: :md)

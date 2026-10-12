@@ -62,7 +62,7 @@ class Teams::SchoolClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "select[name='classroom[series_slug]'] optgroup", 3
     assert_select "input[name='classroom[name]'][maxlength='15'][required]"
     assert_select "input[type=number][name='classroom[max_students]'][value='80'][min='1'][max='150']"
-    assert_select "input[name='classroom[join_code]']", 0
+    assert_select "input[name*=code]", 0
     assert_select "button[type=submit][form=classroom-form]", text: tc("new.submit")
   end
 
@@ -78,7 +78,7 @@ class Teams::SchoolClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "select[name='classroom[series_slug]'] optgroup", 0
   end
 
-  test "CL-01, CL-04: a created classroom belongs to the current school year, its code drawn in lower case and toasted in capitals" do
+  test "CL-01, CL-04: a created classroom belongs to the current school year, draws its link token and is toasted by its name" do
     sign_in_as @member
 
     post create_path, params: classroom_params, as: :turbo_stream
@@ -89,14 +89,11 @@ class Teams::SchoolClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ @school.id, @levels["tle"].id, @series["d"].id, "Tle D 7", 60, "active", current_school_year ],
                  [ classroom.school_id, classroom.level_id, classroom.series_id, classroom.name, classroom.max_students,
                    classroom.status, classroom.school_year ]
-    assert_match Entities::Classroom::JoinCode::FORMAT, classroom.join_code
-    assert_select "turbo-stream[action=append][target=toasts]", text: including(tc("create.created", code: classroom.join_code.upcase))
+    assert_match(/\A[0-9a-f]{12}\z/, classroom.link_token)
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(tc("create.created", name: "Tle D 7"))
+    assert_equal "La classe Tle D 7 est créée.", tc("create.created", name: "Tle D 7")
     assert_select "turbo-stream[action=update][target=modal]"
     assert_select "turbo-stream[action=refresh]:not([request-id])"
-  end
-
-  test "CL-01: the join code column is exactly as long as a generated code" do
-    assert_equal Entities::Classroom::JoinCode::LENGTH, Orm::Classroom.columns_hash.fetch("join_code").limit
   end
 
   test "a name taken in the school and year reopens the modal in 422 with the error and the typed values" do
@@ -173,7 +170,7 @@ class Teams::SchoolClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     classroom = Orm::Classroom.sole
     assert_redirected_to classroom_path(classroom.public_id)
-    assert_equal tc("create.created", code: classroom.join_code.upcase), flash[:notice]
+    assert_equal tc("create.created", name: "6ème 5"), flash[:notice]
     assert_nil classroom.series_id
   end
 end

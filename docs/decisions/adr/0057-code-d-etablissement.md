@@ -1,4 +1,9 @@
 # ADR-0057 : Un code d'établissement unique, obligatoire à l'inscription enseignant, régénérable par l'équipe
+<!-- index
+titre: Un code d'établissement unique, obligatoire à l'inscription enseignant, régénérable par l'équipe
+statut: Accepté *(2026-09-28)*
+problematique: `schools.school_code` `string(6) NOT NULL`, unique, `CHECK` de format ; 32 symboles, affiché `K7M-4QZ`, lien `/e/<code>` limité à 10 par minute ; tiré à l'import, rempli par lots pour l'existant ; régénération par l'équipe, auditée. Amende ADR-0030.
+-->
 
 | | |
 |---|---|

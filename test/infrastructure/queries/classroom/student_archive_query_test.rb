@@ -20,7 +20,7 @@ module Queries
       end
 
       def joined(classroom, joined_at:, left_at: nil)
-        Orm::ClassroomStudent.create!(classroom:, student: @student, primary: true, joined_at:, left_at:)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom:, student: @student, primary: true, joined_at:, left_at:)
       end
 
       test "the classrooms he left or that were archived, most recent first, with their school and school year" do

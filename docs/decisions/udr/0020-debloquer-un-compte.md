@@ -1,4 +1,10 @@
 # UDR-0020 : Débloquer un compte — recherche par numéro exact, code de récupération dans une modale, second facteur réinitialisé en place
+<!-- index
+titre: Débloquer un compte
+statut: Accepté
+adr-lie: [0028](../adr/0028-policies-de-domaine-par-use-case.md), [0031](../adr/0031-second-facteur-totp-pour-l-equipe.md), [0032](../adr/0032-recuperation-assistee-du-pin.md), [0050](../adr/0050-authentification-et-session.md)
+problematique: Recherche par numéro exact, code de récupération dans une modale, second facteur réinitialisé en place
+-->
 
 | | |
 |---|---|

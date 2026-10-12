@@ -3,14 +3,10 @@ module Factories
   module Classroom
     ActiveSupport::TestCase.include(self)
 
-    JOIN_CODE_LETTERS = [ *"a".."h", *"j".."n", *"p".."z" ].freeze
-    JOIN_CODE_DIGITS = [ *"2".."9" ].freeze
-
-    # join_code: :auto draws a valid code, nil leaves the classroom without one.
+    # The link token is drawn by the database (ADR-0085 §4.1); there is no classroom code any more.
     def create_classroom(school: create_school, level: create_level, series: nil, name: "Classe #{factory_sequence}",
-                         join_code: :auto, status: "active", max_students: 80, school_year: current_school_year, **attributes)
-      join_code = Array.new(3) { JOIN_CODE_LETTERS.sample }.join + Array.new(2) { JOIN_CODE_DIGITS.sample }.join if join_code == :auto
-      Orm::Classroom.create!(school:, level:, series:, name:, join_code:, status:, max_students:, school_year:,
+                         status: "active", max_students: 80, school_year: current_school_year, **attributes)
+      Orm::Classroom.create!(school:, level:, series:, name:, status:, max_students:, school_year:,
                              archived_at: (Time.current if status == "archived"), **attributes)
     end
 

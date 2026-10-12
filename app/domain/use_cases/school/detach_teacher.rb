@@ -7,7 +7,7 @@ module UseCases
       Detached = Data.define(:teacher, :classrooms_count, :assignments_archived)
       TEACHER = "teacher".freeze
 
-      # Un refus dans la transaction la traverse pour l'annuler, puis ressort en Result (comme Classroom::JoinWithCode).
+      # Un refus dans la transaction la traverse pour l'annuler, puis ressort en Result (comme Classroom::RegisterStudent).
       class Aborted < StandardError
         attr_reader :result
 

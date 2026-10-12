@@ -82,6 +82,19 @@ fi
 } > "$HOME/.lnclass-ci-env"
 cat "$HOME/.lnclass-ci-env" >> "$ENV_FILE"
 
+# --- graphify: the code graph the PreToolUse hooks of .claude/settings.json and CLAUDE.md rely on ----------
+# AST only (tree-sitter): no model call, no token cost. Never blocks the session: a failure is logged and skipped.
+export PATH="$HOME/.local/bin:$PATH"
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$ENV_FILE"
+if ! command -v graphify >/dev/null 2>&1 && command -v uv >/dev/null 2>&1; then
+  log "installing graphify"
+  uv tool install --quiet graphifyy >&2 || log "graphify install failed: skipped"
+fi
+if command -v graphify >/dev/null 2>&1; then
+  log "graphify update ."
+  graphify update . >&2 || log "graphify update failed: skipped"
+fi
+
 # db:prepare dumps db/schema.rb again, and PostgreSQL 16 writes some constraints differently from the 17 of the
 # developers: an untouched schema is put back, so the session starts on a clean worktree (script/ci/cloud-check).
 schema_clean=false

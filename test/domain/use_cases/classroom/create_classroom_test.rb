@@ -23,7 +23,6 @@ module UseCases
 
           classroom.id = 31
           classroom.public_id = "abcdefghijkmno"
-          classroom.join_code = "kfm37"
           @created << classroom
           Shared::Result.success(classroom)
         end
@@ -66,9 +65,9 @@ module UseCases
         assert result.success?
         classroom = @classrooms.created.sole
         assert_same classroom, result.value
-        assert_equal [ 5, 7, 105, "2026-2027", "Tle D 7", 60, "active", "kfm37" ],
+        assert_equal [ 5, 7, 105, "2026-2027", "Tle D 7", 60, "active" ],
                      [ classroom.school_id, classroom.level_id, classroom.series_id, classroom.school_year, classroom.name,
-                       classroom.max_students, classroom.status, classroom.join_code ]
+                       classroom.max_students, classroom.status ]
       end
 
       test "l'année scolaire suit la date : le 15 août 2027 est encore en 2026-2027" do

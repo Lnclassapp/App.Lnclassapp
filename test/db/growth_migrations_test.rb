@@ -4,6 +4,7 @@ require Rails.root.join("db/migrate/20260928150100_add_national_code_to_schools"
 require Rails.root.join("db/migrate/20260928150200_create_school_join_requests").to_s
 require Rails.root.join("db/migrate/20260929200200_add_trigram_search_indexes").to_s
 require Rails.root.join("db/migrate/20261003120000_pause_teacher_join_request_review").to_s
+require Rails.root.join("db/migrate/20261007100000_add_teacher_arrival_and_school_invite_tokens").to_s
 
 # ADR-0063 (CP-01, CP-09): the growth tables arrive on a live database. Existing teachers each receive their own referral
 # token; existing schools keep every column they had and receive no national code. Down then up, twice, outside any
@@ -14,8 +15,10 @@ class GrowthMigrationsTest < ActiveSupport::TestCase
   MIGRATIONS = [ CreateReferrals, AddNationalCodeToSchools, CreateSchoolJoinRequests ].freeze
   # Later migrations whose indexes or constraints fall with a column or table dropped above: replayed after « up »
   # (idempotent), so that the test database ends exactly as the schema describes it (the trigram index of
-  # schools.national_code, ADR-0067; the "auto" way of school_join_requests, ADR-0073).
-  LATER = [ AddTrigramSearchIndexes, PauseTeacherJoinRequestReview ].freeze
+  # schools.national_code, ADR-0067; the "auto" way of school_join_requests, ADR-0073; the invite tokens and the arrival
+  # channel, ADR-0083, which deduce nothing again once the column exists). Outside any transaction, this test drops
+  # columns of the worker's database: two test runs sharing those databases at once break each other.
+  LATER = [ AddTrigramSearchIndexes, PauseTeacherJoinRequestReview, AddTeacherArrivalAndSchoolInviteTokens ].freeze
 
   def migrate(direction)
     order = direction == :down ? MIGRATIONS.reverse : MIGRATIONS + LATER
@@ -56,6 +59,7 @@ class GrowthMigrationsTest < ActiveSupport::TestCase
     assert_equal 3, tokens.uniq.size
     assert(tokens.all? { it.match?(/\A[0-9a-f]{12}\z/) }, tokens.inspect)
     assert_equal before, school_rows
+    assert_equal [ "standard" ], Orm::TeacherProfile.where(user_id: @teacher_ids).distinct.pluck(:joined_via)
     assert_equal [ nil ], Orm::School.where(id: @school_ids).distinct.pluck(:national_code)
     %i[referrals referral_shares school_join_requests].each { assert ActiveRecord::Base.connection.table_exists?(it), it }
     assert_includes ActiveRecord::Base.connection.indexes(:schools).map(&:name), "index_schools_on_national_code_trigram"

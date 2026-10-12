@@ -82,7 +82,7 @@ class Queries::School::DrenaSchoolsQueryTest < ActiveSupport::TestCase
     placed_student(classroom).tap { create_exercise_session(student: it, started_at: 20.days.ago) }
     placed_student(classroom, anonymized_at: Time.current)
     placed_student(classroom).tap { Orm::ClassroomStudent.where(student: it).update_all(left_at: Time.current) }
-    create_student.tap { Orm::ClassroomStudent.create!(classroom:, student: it, primary: false, joined_at: Time.current) }
+    create_student.tap { Orm::ClassroomStudent.create!(joined_via: "standard", classroom:, student: it, primary: false, joined_at: Time.current) }
     placed_student(create_classroom(school:, level: @level, status: "archived"))
 
     assert_equal [ 1, 1, 1, 0 ], figures(schools.rows.sole)

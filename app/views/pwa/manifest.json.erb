@@ -1,22 +1,20 @@
+<%# 🌐 UI · pwa/manifest — fiche d'application : installe le site sous le nom « Lnclass », en plein écran %>
+<%# Rôle : servie par Rails::PwaController (GET /manifest.json) ; couleurs de config.x.pwa, icônes de public/ %>
+<%# ADR  : 0082 (§4.1) %>
 {
-  "name": "AppLnclassapp",
-  "icons": [
-    {
-      "src": "/icon.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    },
-    {
-      "src": "/icon.png",
-      "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "maskable"
-    }
-  ],
-  "start_url": "/",
-  "display": "standalone",
+  "id": "/",
+  "name": "Lnclass",
+  "short_name": "Lnclass",
+  "description": "Cours, exercices et suivi des classes.",
+  "lang": "fr",
+  "start_url": "/?source=app",
   "scope": "/",
-  "description": "AppLnclassapp.",
-  "theme_color": "red",
-  "background_color": "red"
+  "display": "standalone",
+  "theme_color": <%= raw Rails.configuration.x.pwa[:theme_color].to_json %>,
+  "background_color": <%= raw Rails.configuration.x.pwa[:background_color].to_json %>,
+  "icons": [
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon.png", "type": "image/png", "sizes": "512x512" },
+    { "src": "/icon-maskable.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
+  ]
 }

@@ -1,4 +1,10 @@
 # UDR-0059 : Homepage — maquette du porteur sur téléphone et tablette, landing actuelle épurée sur ordinateur
+<!-- index
+titre: Homepage sur téléphone et tablette
+statut: Accepté *(2026-10-02)*
+adr-lie: [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md), [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md)
+problematique: Sous 1 024 px : photo, badge, slogan « Forcément, tu comprends chap chap », deux entrées (modales de l'UDR-0012) et « Espace établissement » ; le badge « même sans internet » gardé (PWA en cours), pas d'invitation aux applications tant qu'elles ne sont pas publiées ; au-dessus, la landing sans la section « Rejoindre ». Amende UDR-0012
+-->
 
 | | |
 |---|---|

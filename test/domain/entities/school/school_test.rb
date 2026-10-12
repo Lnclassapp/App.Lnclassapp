@@ -47,12 +47,9 @@ module Entities
         assert_equal "private", build(school_type: "mixed").plan_type
       end
 
-      test "déduit le premier cycle du mot collège, accents et casse ignorés" do
-        [ "Collège Moderne de Cocody", "COLLEGE Saint-Jean", "Collége Notre Dame", "Le collège du Plateau" ].each do |name|
-          assert_equal "first", School.cycle_for(name:), name
-        end
-        [ "Lycée Classique", "Collegeville Academy", nil ].each { |name| assert_equal "both", School.cycle_for(name:) }
+      test "un établissement du premier cycle seul le sait" do
         assert build(cycle: "first").first_cycle_only?
+        assert_not build(cycle: "both").first_cycle_only?
       end
     end
   end

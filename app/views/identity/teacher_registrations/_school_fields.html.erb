@@ -1,0 +1,14 @@
+<%# 🌐 UI · identity/teacher_registrations/_school_fields — l'établissement de la voie standard : DRENA, puis la liste %>
+<%# Rôle : DRENA (envoyée seule en GET sans JavaScript), puis établissement dans le frame « schools » (UDR-0024) ; Stimulus school--drena-schools %>
+<%# ADR  : 0030, 0083 · UDR : 0024, 0079 %>
+<%# locals: (form:) -%>
+<div class="space-y-2">
+  <%= ui_field form, :drena_public_id, as: :select, choices: drena_options, prompt: t(".drena_prompt"),
+               form: "teacher-signup-drena", data: { action: "change->school--drena-schools#load" } %>
+  <%# Repli sans JavaScript : noscript plutôt qu'un attribut posé par Stimulus, que le morphing du 422 effacerait. %>
+  <noscript>
+    <%= ui_button t(".show_schools"), type: :submit, variant: :secondary, size: :sm, icon: "magnifying-glass", form: "teacher-signup-drena" %>
+  </noscript>
+</div>
+<%= render template: "school/drena_schools/index",
+           locals: { schools: school_options, drena_public_id: @form.drena_public_id, registration: @form, scope: :teacher_registration } %>

@@ -1,4 +1,10 @@
 # UDR-0002 : UI/UX de l'Organisation Scolaire
+<!-- index
+titre: UI/UX de l'organisation scolaire
+statut: Accepté · Tokens remplacés par 0005
+adr-lie: [0023](../adr/0023-modelisation-de-l-organisation-scolaire.md)
+problematique: Rendre l'espace écoles / DRENA / classes clair et hiérarchique plutôt qu'administratif : cartes d'école, badges de statut, édition en page dédiée ou slide-over.
+-->
 
 > ⚠️ **Remplacée partiellement par [UDR-0005](./0005-design-system-fondateur.md)** (2026-09-25) : la section « Tokens » ne s'applique plus. Utilisez les tokens `@theme` et la table de correspondance de l'UDR-0005 §3. Les autres sections restent valables.
 

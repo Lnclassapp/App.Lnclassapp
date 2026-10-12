@@ -1,4 +1,9 @@
 # ADR-0045 : Annonces de la V6a — publication programmée par job, audience filtrée à la lecture, rejets en base, pièces jointes validées
+<!-- index
+titre: Annonces de la V6a — publication programmée par job, audience filtrée à la lecture, rejets en base, pièces jointes validées
+statut: Accepté — *amendé par [0078](./0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md) (§4, §7)*
+problematique: Job toutes les 5 min ; audience `school_admins` ; `show` filtré ; `message_dismissals` ; image ≤ 2 Mo, audio ≤ 10 Mo. F-23.
+-->
 
 | | |
 |---|---|

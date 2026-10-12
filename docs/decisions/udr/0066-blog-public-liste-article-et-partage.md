@@ -1,4 +1,10 @@
 # UDR-0066 : Blog public — liste `/blog`, page d'un article, article retiré, aperçu partagé et liens « Blog »
+<!-- index
+titre: Blog public : liste `/blog`, page d'un article, article retiré, aperçu partagé, liens « Blog »
+statut: Accepté *(porteur, 2026-10-02 : délégation, « crée un système de blog et puis c'est tout »)*
+adr-lie: [0074](../adr/0074-blog-public-articles-images-et-referencement.md)
+problematique: Gabarit des pages publiques (UDR-0063), liste paginée par 10, page 410 « n'est plus disponible », balises de partage et de référencement, lien « Blog » au pied de la homepage et de la carte d'aide dès le premier article publié. Amende UDR-0061 §3.3, §3.5 ; 0063 §3.1, §3.4
+-->
 
 | | |
 |---|---|

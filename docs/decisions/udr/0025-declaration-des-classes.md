@@ -1,4 +1,10 @@
 # UDR-0025 : Déclaration des classes — une bascule par classe, enregistrée à chaque clic, compteur par Turbo Stream, onboarding terminé par un bouton
+<!-- index
+titre: Déclaration des classes
+statut: Accepté
+adr-lie: [0030](../adr/0030-une-ecole-par-enseignant-et-creation-des-classes.md), [0041](../adr/0041-vie-d-une-classe-annee-scolaire-et-code.md)
+problematique: Une bascule par classe, enregistrée à chaque clic, compteur par Turbo Stream, onboarding terminé par un bouton
+-->
 
 | | |
 |---|---|

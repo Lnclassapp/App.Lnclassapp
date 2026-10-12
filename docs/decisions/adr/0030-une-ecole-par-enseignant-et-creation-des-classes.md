@@ -1,4 +1,9 @@
 # ADR-0030 : Une école visible par enseignant en V1, `teacher_schools` avec drapeau « principale », classes générées à la création de l'établissement puis gérées par l'équipe et la direction
+<!-- index
+titre: Une école visible par enseignant en V1, `teacher_schools` avec drapeau « principale », classes générées à la création de l'établissement puis gérées par l'équipe et la direction
+statut: Accepté — *remplace 0004 §2 et §3.1*
+problematique: Index partiel « une principale » ; l'enseignant déclare ses classes dans son école ; onboarding persisté ; `schools.cycle` explicite ; classes par défaut générées par slug de niveau et de série dans la transaction de l'école ; gestion par `team` (V1) puis `school_admin` (V2). F-06.
+-->
 
 | | |
 |---|---|

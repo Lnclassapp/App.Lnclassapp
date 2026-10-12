@@ -1,4 +1,9 @@
 # ADR-0073 : La validation des enseignants inscrits sans code est en pause : leur demande est validée à l'inscription
+<!-- index
+titre: La validation des enseignants inscrits sans code est en pause : leur demande est validée à l'inscription
+statut: Accepté *(porteur, 2026-10-02)* — *amende 0063*
+problematique: `RegisterPendingTeacher` crée puis valide la demande (`approve`, `via: "auto"`, sans décideur) : rattachement immédiat, arrivée sur la sélection des classes ; migration qui valide les demandes encore en attente ; la future certification par DRENA réutilisera la trace. Chantier `validation-enseignants-en-pause`.
+-->
 
 | | |
 |---|---|

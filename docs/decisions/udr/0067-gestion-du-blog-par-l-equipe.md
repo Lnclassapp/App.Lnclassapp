@@ -1,4 +1,10 @@
 # UDR-0067 : Gestion du blog par l'équipe — raccourci de l'accueil, liste de gestion, modale d'édition avec images, publication refusée, aperçu
+<!-- index
+titre: Gestion du blog par l'équipe : raccourci, liste de gestion, modale d'édition avec images, publication refusée, aperçu
+statut: Accepté *(porteur, 2026-10-02 : délégation, « crée un système de blog et puis c'est tout »)*
+adr-lie: [0074](../adr/0074-blog-public-articles-images-et-referencement.md)
+problematique: Raccourci « Blog » (admin et contenu), `/teams/blog`, modale Trix avec images pour le blog seul, textes de remplacement, menu ⋮ Publier / Archiver / Remettre en ligne. Amende UDR-0014, 0016, 0018
+-->
 
 | | |
 |---|---|

@@ -1,4 +1,9 @@
 # ADR-0078 : Annonces — l'enseignant publie pour ses classes, toute annonce a une date de fin, la direction signe officiellement, l'équipe et la direction peuvent retirer
+<!-- index
+titre: Annonces — l'enseignant publie pour ses classes, toute annonce a une date de fin, la direction signe officiellement, l'équipe et la direction peuvent retirer
+statut: Accepté *(2026-10-03)* — *amende 0045 (§4, §7), 0065 (§2, §4)*
+problematique: Audience `classrooms` et `message_classrooms` ; `ends_at` obligatoire (30 j par défaut, 90 j au plus) filtrée à la lecture ; titre 60, texte 140, pas de page de détail ; illustration obligatoire ; statut `withdrawn` ; fichiers servis après la règle de lecture ; rejets effacés à la modification. V6a.
+-->
 
 | | |
 |---|---|

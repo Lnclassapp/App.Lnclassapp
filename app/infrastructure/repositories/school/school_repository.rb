@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::School::SchoolRepository
 # Rôle : traduit Orm::School ↔ Entities::School::School ; codes d'établissement, insertion en masse, génération, enseignants
-# ADR  : 0030, 0036, 0039, 0056, 0057, 0063, 0071
+# ADR  : 0030, 0036, 0039, 0056, 0057, 0063, 0071, 0083 · UDR : 0079 · aucune recherche par code national (IE-21)
 module Repositories
   module School
     class SchoolRepository
@@ -23,11 +23,6 @@ module Repositories
 
       def find_by_school_code(school_code:)
         record = Orm::School.find_by(school_code:)
-        record && map_to_entity(record)
-      end
-
-      def find_by_national_code(national_code:)
-        record = Orm::School.find_by(national_code:)
         record && map_to_entity(record)
       end
 
@@ -85,6 +80,11 @@ module Repositories
         Orm::School.where(status: GENERATION_STATUSES).where(id: (after_id + 1)..).where.not(classrooms.arel.exists)
                    .order(:id).limit(limit).pluck(*INSERTED_COLUMNS)
                    .map { |values| Inserted.new(**INSERTED_COLUMNS.map(&:to_sym).zip(values).to_h) }
+      end
+
+      def first_cycle_after(after_id:, limit:)
+        Orm::School.where(cycle: "first", status: GENERATION_STATUSES).where(id: (after_id + 1)..).order(:id).limit(limit)
+                   .map { map_to_entity(it) }
       end
 
       def attach_teacher(teacher_id:, school_id:, primary:, at:)

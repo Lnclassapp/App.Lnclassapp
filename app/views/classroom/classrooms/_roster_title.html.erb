@@ -1,0 +1,10 @@
+<%# 🌐 UI · classroom/classrooms/_roster_title — titre de la liste des élèves d'une classe, avec le compte des nouveaux %>
+<%# Rôle : une seule balise pour la page de l'enseignant, celle de la direction et le stream du retrait, qui la remplace et y met le focus %>
+<%# ADR  : 0085 (§4.4, §4.5) · UDR : 0081 (§3.7) · tabindex -1 : le focus y revient après un retrait %>
+<%# locals: (count:, new_count:, focus: false) -%>
+<%= tag.h2 id: "classroom_roster_title", tabindex: -1,
+           class: "mb-4 flex flex-wrap items-center gap-2 font-display text-xl font-extrabold focus:outline-none",
+           data: ({ controller: "autofocus", autofocus_target: "field" } if focus) do %>
+  <%= t("classroom.classrooms.roster.title", count:) %>
+  <% if new_count.positive? %><%= ui_badge t("classroom.classrooms.roster.new_count", count: new_count), tone: :brand %><% end %>
+<% end %>

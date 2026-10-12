@@ -35,7 +35,6 @@ module UseCases
           @names << classroom.name
           classroom.id = 40 + @created.size
           classroom.public_id = "cls#{@created.size}"
-          classroom.join_code = "kfm37"
           @created << classroom
           Shared::Result.success(classroom)
         end
@@ -91,9 +90,9 @@ module UseCases
         assert result.success?
         classroom = @classrooms.created.sole
         assert_same classroom, result.value
-        assert_equal [ 5, 1, nil, YEAR, "6ème 5", 80, "active", "kfm37" ],
+        assert_equal [ 5, 1, nil, YEAR, "6ème 5", 80, "active" ],
                      [ classroom.school_id, classroom.level_id, classroom.series_id, classroom.school_year, classroom.name,
-                       classroom.max_students, classroom.status, classroom.join_code ]
+                       classroom.max_students, classroom.status ]
         assert_equal [ { action: "school.changed", actor_id: 7, at: NOW, subject_type: "School", subject_id: 5,
                          metadata: { change: "classroom_added", classroom_public_id: "cls0", name: "6ème 5" } } ], @audit.events
         assert_equal 1, @transaction.calls

@@ -1,4 +1,9 @@
 # ADR-0037 : Nom et Prénom(s) en deux champs, sans changement de casse
+<!-- index
+titre: Nom et Prénom(s) en deux champs, sans changement de casse
+statut: Accepté
+problematique: `last_name` et `first_name`, `squish` seul, aucun `titleize` ; tri par nom ; aucun slug de compte. F-15.
+-->
 
 | | |
 |---|---|

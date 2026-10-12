@@ -1,4 +1,10 @@
 # UDR-0006 : Shell applicatif par rôle (en-tête, navigation, accueil, toasts, états)
+<!-- index
+titre: Shell applicatif par rôle
+statut: Accepté — *amendée par 0068, 0069 (2e carte équipe, menu « Plus », sections d'accueil), 2026-10-03*
+adr-lie: [0051](../adr/0051-navigateurs-supportes-et-budget-de-poids.md)
+problematique: 4 × 4 partials de navigation divergents et des destinations cachées sur mobile : un shell unique paramétré par le rôle, la même liste en bureau et en mobile, un accueil par rôle, des toasts dont le message survit au Turbo Stream, et des CRUD entièrement Hotwire (modale dans un frame, 422, Turbo Stream).
+-->
 
 | | |
 |---|---|

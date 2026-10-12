@@ -114,7 +114,7 @@ class Identity::ProfileContactsControllerTest < ActionDispatch::IntegrationTest
     change(current_pin: "1357")
 
     assert_response :unprocessable_entity
-    assert_select "[role=alert]", text: "PIN incorrect."
+    assert_select "[role=alert]", text: "Code secret incorrect."
     assert_select "input[name='contact_change[current_pin]']:not([value])"
     assert_select "input[name='contact_change[contact]'][value='07 11 22 33 44']"
     assert_equal 1, Orm::LoginAttempt.where(contact: "0101020304", succeeded: false).count

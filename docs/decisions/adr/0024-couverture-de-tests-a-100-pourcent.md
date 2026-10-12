@@ -1,4 +1,9 @@
 # ADR-0024 : Couverture de tests à 100 %, bloquante sur le projet cible
+<!-- index
+titre: Couverture de tests à 100 %, bloquante sur le projet cible
+statut: Accepté
+problematique: Exiger 100 % de couverture lignes **et** branches sur `app/` et `lib/`, avec `# :nocov:` interdit et test de mutation obligatoire. Bloquant dès le premier commit du projet Rails cible ; sur ce dépôt, cliquet non régressif à 45 %/29 % jusqu'à la migration.
+-->
 
 | | |
 |---|---|

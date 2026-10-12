@@ -180,11 +180,11 @@ module UseCases
         assert_equal 0, @transaction.calls
       end
 
-      test "un code de classe a son propre message" do
+      test "un ancien code de classe est un code d'établissement mal formé" do
         result = register(school_code: "KFM 37")
 
         assert_equal :invalid, result.code
-        assert_equal [ I18n.t("#{ERRORS}.school_code.classroom_code") ], result.errors[:school_code]
+        assert_equal [ I18n.t("#{ERRORS}.school_code.invalid") ], result.errors[:school_code]
       end
 
       test "ID-06: numéro déjà lié à un compte : contact taken, rien n'est écrit" do

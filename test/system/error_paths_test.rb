@@ -7,66 +7,42 @@ class ErrorPathsTest < ApplicationSystemTestCase
   setup { @import_dir = Dir.mktmpdir("error_paths") }
   teardown { FileUtils.remove_entry(@import_dir) }
 
-  # --- Code de classe invalide (ID-02, CL-07) ---------------------------------------------------------------
+  # --- Lien de classe qui n'est plus valable (IL-09, ADR-0085 §4.1) -------------------------------------------------
 
-  test "a visitor with a wrong class code is told so, then finds the class with a code typed anyhow" do
-    classroom = create_classroom(name: "Tle D 1", join_code: "kfm37")
+  test "a visitor with an old classroom code, a changed link or the link of an archived class lands on the standard page, told so" do
+    classroom = create_classroom(name: "Tle D 1")
+    archived = create_classroom(name: "Tle D 3", status: "archived")
+    old_token = classroom.reload.link_token
+    classroom.update!(link_token: "ffffffffffff")
     users = Orm::User.count
 
-    visit new_join_code_path
-    # A well-formed code leaves by itself at its fifth character (UDR-0054 §3.6): no click on « Continuer ».
-    fill_in "join[code]", with: "ZZZ99"
+    [ "kfm37", old_token, archived.reload.link_token ].each do |invalid|
+      visit join_classroom_path(invalid)
 
-    # recette-v1-defauts, D1 : le code inconnu est refusé dans son champ, sur /join même.
-    assert_selector "#join_code_error", text: t("classroom.joins.new.invalid_code.title")
-    assert_current_path new_join_code_path
-    assert_no_selector "#join-form"
-
-    fill_in "join[code]", with: "k1"
-    click_on t("classroom.join_codes.new.submit")
-    assert_text t("classroom.join_codes.create.invalid")
-
-    fill_in "join[code]", with: " Kfm 37 "
-    assert_current_path join_classroom_path("kfm37")
-    assert_selector "#classroom-preview", text: "Tle D 1"
-
-    # Un ancien code, remplacé depuis, ne mène plus nulle part.
-    classroom.update!(join_code: "pqr45")
-    visit join_classroom_path("KFM37")
-    assert_selector "h1", text: t("classroom.joins.new.invalid_code.title")
-    assert_no_text "Tle D 1"
+      assert_current_path new_student_registration_path
+      assert_selector "#classroom-link-invalid[role=alert]", text: t("classroom.student_registrations.form.link_invalid")
+      assert_no_text "Tle D 1"
+      assert_no_text "Tle D 3"
+    end
     assert_equal users, Orm::User.count
   end
 
-  # --- Classe pleine, classe archivée (CL-06) -----------------------------------------------------------------
+  # --- Classe pleine (IL-05) ------------------------------------------------------------------------------------------
 
-  test "a visitor who fills the whole form for a full class is refused with the reason and gets no account" do
-    classroom = create_classroom(name: "Tle D 2", join_code: "bcd23", max_students: 1)
-    create_student(classroom:)
+  test "a visitor who fills the whole form while the class fills up is refused with the reason and gets no account" do
+    classroom = create_classroom(name: "Tle D 2", max_students: 1)
     users = Orm::User.count
 
-    visit new_join_code_path
-    fill_in "join[code]", with: "BCD23"
+    visit join_classroom_path(classroom.reload.link_token)
     fill_in_student_signup(contact: "07 11 22 33 44")
-    click_on t("classroom.joins.signup_form.submit")
+    create_student(classroom:)
+    click_on t("classroom.student_registrations.form.submit")
 
-    assert_selector "#join-form [role=alert]", text: join_refusal(:classroom_full)
-    assert_equal users, Orm::User.count
+    assert_selector "#student-registration-form [role=alert]", text: join_refusal(:classroom_full)
+    assert_equal users + 1, Orm::User.count
     assert_equal 1, Orm::ClassroomStudent.where(classroom:).count
     visit student_home_path
     assert_current_path new_session_path
-  end
-
-  test "a visitor with the code of an archived class is refused with the reason and gets no account" do
-    create_classroom(name: "Tle D 3", join_code: "cde34", status: "archived")
-    users = Orm::User.count
-
-    visit join_classroom_path("cde34")
-    fill_in_student_signup(contact: "07 11 22 33 45")
-    click_on t("classroom.joins.signup_form.submit")
-
-    assert_selector "#join-form [role=alert]", text: join_refusal(:classroom_archived)
-    assert_equal users, Orm::User.count
   end
 
   # --- Réponse vide (AS-09) -----------------------------------------------------------------------------------
@@ -102,7 +78,7 @@ class ErrorPathsTest < ApplicationSystemTestCase
   test "a teacher who opens another class, its course or one of its results sees nothing of it" do
     school = create_school
     own = create_classroom(school:, name: "Tle D 1")
-    other = create_classroom(school:, name: "Tle D 2", join_code: "xyz89")
+    other = create_classroom(school:, name: "Tle D 2")
     teacher = create_teacher(school:, classrooms: [ own ])
     create_teacher(school:, classrooms: [ other ])
     stranger = create_student(classroom: other, last_name: "Yao", first_name: "Clarisse")
@@ -259,7 +235,7 @@ class ErrorPathsTest < ApplicationSystemTestCase
   def t(key, **options) = I18n.t(key, **options)
 
   def join_refusal(reason)
-    t("activemodel.errors.models.dtos/classroom/join_with_code_input.attributes.base.#{reason}")
+    t("activemodel.errors.models.dtos/classroom/student_registration_input.attributes.base.#{reason}")
   end
 
   def attempt_error(attribute, reason)
@@ -271,12 +247,12 @@ class ErrorPathsTest < ApplicationSystemTestCase
   end
 
   def fill_in_student_signup(contact:)
-    fill_in "join[last_name]", with: "Kouassi"
-    fill_in "join[first_name]", with: "Aya Marie"
+    fill_in "student_registration[last_name]", with: "KOUASSI"
+    fill_in "student_registration[first_name]", with: "Aya Marie"
     choose t("genders.female")
-    fill_in "join[contact]", with: contact
-    fill_in "join[pin]", with: "4821"
-    fill_in "join[pin_confirmation]", with: "4821"
+    fill_in "student_registration[contact]", with: contact
+    fill_in "student_registration[pin]", with: "4821"
+    fill_in "student_registration[pin_confirmation]", with: "4821"
   end
 
   def sign_in_with(contact, pin)

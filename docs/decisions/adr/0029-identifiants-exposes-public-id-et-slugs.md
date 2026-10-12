@@ -1,4 +1,9 @@
 # ADR-0029 : `public_id` opaque sans préfixe dans les URL, slugs réservés au catalogue, clés `bigint` partout
+<!-- index
+titre: `public_id` opaque sans préfixe dans les URL, slugs réservés au catalogue, clés `bigint` partout
+statut: Accepté — *complète 0017* ; *amendé par [0074](./0074-blog-public-articles-images-et-referencement.md) (slug des articles)*
+problematique: `SecureRandom.base58(14)` sans préfixe de rôle, index unique et un nouvel essai ; slugs figés pour niveaux, séries, matières, cours, fiches ; aucune route `:id`. F-05.
+-->
 
 | | |
 |---|---|

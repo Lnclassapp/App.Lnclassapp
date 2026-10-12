@@ -137,7 +137,7 @@ module UseCases
       test "a confirmation that differs is refused under its field, and costs no PIN attempt" do
         result = change(input(pin_confirmation: "1358"))
 
-        assert_equal [ :invalid, { pin_confirmation: [ "Les deux PIN ne sont pas identiques." ] } ], [ result.code, result.errors ]
+        assert_equal [ :invalid, { pin_confirmation: [ "Les deux codes secrets ne sont pas identiques." ] } ], [ result.code, result.errors ]
         assert_equal 0, @users.checked
         assert_empty @attempts.records
         assert_nothing_written

@@ -1,4 +1,9 @@
 # ADR-0013 : Suppression de Redux, Maintien de Yarn et Introduction des DTO
+<!-- index
+titre: Suppression de Redux, maintien de Yarn et introduction des DTO
+statut: Accepté — *remplace [0009](./0009-stack-frontend-vanilla-css-tailwind-hotwire.md) (partie Redux)*
+problematique: Abandonner Redux Toolkit au profit de Turbo/Hotwire et Stimulus, et découpler la couche Web du Domaine par des DTO.
+-->
 
 | | |
 |---|---|

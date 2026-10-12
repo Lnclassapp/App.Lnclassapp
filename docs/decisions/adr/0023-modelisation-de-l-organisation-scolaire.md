@@ -1,4 +1,9 @@
 # ADR-0023 : Modélisation de l'Organisation Scolaire (Hexagonale)
+<!-- index
+titre: Modélisation de l'organisation scolaire (hexagonale)
+statut: ⚠️ **Remplacé** par [0027](./0027-contextes-bornes-et-arborescence.md)
+problematique: Isoler la hiérarchie DRENA ➔ École ➔ Classe dans un bounded context `Identity` avec entités, ports et repositories dédiés. *(Renuméroté depuis ADR-0015.)*
+-->
 
 | | |
 |---|---|
