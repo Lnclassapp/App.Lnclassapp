@@ -87,7 +87,7 @@ class Teams::LevelsTest < ApplicationSystemTestCase
       click_menu_action("#level_tle", tl("level_row.delete"))
       within("dialog#delete-level-tle[open]") { click_on tl("level_row.delete_confirm") }
 
-      assert_toast tl("destroy.referenced", name: "Tle", usage: "1 cours")
+      assert_toast tl("destroy.referenced", name: "Tle", usage: "1 fiche de cours")
       assert_no_selector "dialog[open]"
       assert_selector "#level_tle", text: "Tle"
     end

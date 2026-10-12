@@ -31,7 +31,7 @@ fr:
         write_failed: "L'enregistrement de cet élément n'a pas abouti."
         taken: "Ce nom est déjà pris par une autre DRENA."
         no_latin_character: "Le nom doit contenir au moins une lettre ou un chiffre latin."
-        duplicate_in_files: "Ce cours est aussi dans %{other} : aucun des deux n'est importé."
+        duplicate_in_files: "Cette fiche de cours est aussi dans %{other} : aucune des deux n'est importée."
       # Erreurs de schéma, par mot-clé json_schemer (Teams::ImportsHelper) ; les autres prennent error_codes.schema.
       schema_keywords:
         schema: "Clé inconnue : ce format ne la prévoit pas."
@@ -51,7 +51,7 @@ fr:
       index:
         page_title: "Imports"
         title: "Imports"
-        subtitle: "DRENA, établissements, cours, fiches essentielles et exercices importés depuis un fichier JSON."
+        subtitle: "DRENA, établissements, fiches de cours, fiches de révision et exercices importés depuis un fichier JSON."
         new: "Nouvel import"
         all: "Tous"
         filter_label: "Filtrer par type d'import"
@@ -71,14 +71,14 @@ fr:
         # Titre de l'onglet (UDR-0054 §3.1) : un seul segment, sans deux-points.
         page_titles:
           schools: "Importer des établissements"
-          course_tree: "Importer des cours complets"
-          essentials: "Importer des fiches essentielles"
+          course_tree: "Importer des fiches de cours complètes"
+          essentials: "Importer des fiches de révision"
           exercises: "Importer des exercices"
           drenas: "Importer des DRENA"
         file: "Fichier JSON"
         limits: "Un fichier .json de %{megabytes} Mo au plus, avec %{roots} éléments au plus."
         files: "Fichiers JSON"
-        limits_multiple: "Jusqu'à %{files} fichiers .json, %{total} Mo au total, %{megabytes} Mo au plus par fichier, %{roots} cours au plus en tout."
+        limits_multiple: "Jusqu'à %{files} fichiers .json, %{total} Mo au total, %{megabytes} Mo au plus par fichier, %{roots} fiches de cours au plus en tout."
         # Résumé de la sélection, écrit par le contrôleur teams--import-files (UDR-0055 §3.1).
         files_summary:
           one: "1 fichier · %{size}"
@@ -99,8 +99,8 @@ fr:
         # Titre de l'onglet (UDR-0054 §3.1) : un seul segment, sans deux-points.
         page_titles:
           schools: "Import d'établissements"
-          course_tree: "Import de cours complets"
-          essentials: "Import de fiches essentielles"
+          course_tree: "Import de fiches de cours complètes"
+          essentials: "Import de fiches de révision"
           exercises: "Import d'exercices"
           drenas: "Import de DRENA"
         title: "Import : %{kind}"

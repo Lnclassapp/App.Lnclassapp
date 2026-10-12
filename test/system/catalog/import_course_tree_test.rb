@@ -64,7 +64,7 @@ class Catalog::ImportCourseTreeTest < ApplicationSystemTestCase
         assert_selector "#import_errors li", count: 2
         assert_selector "#import_errors li", text: /\Acourses\[3\]\.name\s+Valeur obligatoire manquante\.\z/
         assert_selector "#import_errors li", text: /\Acourses\[4\]\.material_name\s+Matière inconnue\.\z/
-        assert_text "Fiches essentielles créées : 4"
+        assert_text "Fiches de révision créées : 4"
         assert_text "Exercices créés : 4"
         assert_text "Questions créées : 8"
         assert_text "Propositions créées : 24"

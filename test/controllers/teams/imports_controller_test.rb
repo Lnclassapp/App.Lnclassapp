@@ -49,6 +49,16 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav a[aria-current=page]", text: "Exercices"
   end
 
+  # UDR-0084 §3: the import kinds of the course sheets and revision sheets are named by the decision.
+  test "the course sheets and revision sheets imports are named after the sheets" do
+    sign_in_as @member
+
+    get teams_imports_path
+
+    assert_select "#new-import-menu a[role=menuitem][href='#{new_teams_import_path(kind: 'course_tree')}']", text: "Fiches de cours complètes"
+    assert_select "#new-import-menu a[role=menuitem][href='#{new_teams_import_path(kind: 'essentials')}']", text: "Fiches de révision"
+  end
+
   test "an empty list says so" do
     sign_in_as @member
 
@@ -180,7 +190,7 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_select "form#import-upload-form[data-controller='teams--import-files'][data-teams--import-files-max-files-value='50']"
     assert_select "form[data-teams--import-files-max-total-bytes-value='#{50 * 1024 * 1024}'][data-teams--import-files-one-text-value='1 fichier · %{size}']"
     assert_select "input[type=file][multiple][name='import[files][]'][aria-describedby='import_io_hint import_files_summary']"
-    assert_select "#import_io_hint", text: "Jusqu'à 50 fichiers .json, 50 Mo au total, 20 Mo au plus par fichier, 500 cours au plus en tout."
+    assert_select "#import_io_hint", text: "Jusqu'à 50 fichiers .json, 50 Mo au total, 20 Mo au plus par fichier, 500 fiches de cours au plus en tout."
     assert_select "#import_files_summary[aria-live=polite] #import_files_error[role=alert][hidden]"
     assert_select "#import-help-multiple", text: /jusqu'à 50 fichiers/
   end

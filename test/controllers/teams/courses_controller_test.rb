@@ -91,6 +91,16 @@ class Teams::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=refresh]:not([request-id])"
   end
 
+  # UDR-0084 §3: the toast's exact value is set by the decision, so it is written out here.
+  test "l'équipe crée une fiche de cours" do
+    sign_in_as @member
+
+    post teams_courses_path, params: course_params(name: "Thalès"), as: :turbo_stream
+
+    assert_response :success
+    assert_select "turbo-stream[action=append][target=toasts]", text: including("Fiche de cours « Thalès » créée (brouillon).")
+  end
+
   test "an invalid entry reopens the modal in 422 with its errors and the typed values" do
     sign_in_as @member
 
