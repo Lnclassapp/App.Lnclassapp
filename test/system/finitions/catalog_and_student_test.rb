@@ -94,10 +94,13 @@ module Finitions
         assert_selector "nav[aria-label='#{t('components.back_link.label')}'] a[href='#{courses_path}']",
                         text: t("catalog.courses.show.back")
         assert_no_link "SVT"
+        # UDR-0084 : la liste des fiches de révision d'une fiche de cours.
+        assert_selector "#course_essentials_title", text: "Révisions de la leçon"
       end
       within("main nav") { click_on t("catalog.courses.show.back") }
       assert_current_path courses_path
       assert_title "Cours · Élève · Lnclass"
+      assert_selector "#courses_total", text: /\A\d+ fiches? de cours\z/
     end
 
     # UDR-0058 §3.3 (R4) : l'aide « Badges » / « Maîtrise » quitte l'accueil ; la page de l'exercice les explique.
@@ -127,6 +130,7 @@ module Finitions
 
       visit course_essential_path(@course.slug, @essential.slug)
       assert_title "La méiose · Élève · Lnclass"
+      assert_selector "#essential_header p", exact_text: "Fiche de révision"
       click_on "Génétique et évolution"
       assert_current_path course_path(@course.slug)
 

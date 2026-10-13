@@ -32,7 +32,9 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_select "#classroom_course_essentials li", text: /Brouillon/, count: 0
     assert_select "a[href='#{classroom_essential_path(@classroom.public_id, @course.slug, @meiose.slug)}']", text: "La méiose"
     assert_select "a[href='#{classroom_essential_path(@classroom.public_id, @course.slug, @mitose.slug)}']", text: "La mitose"
-    assert_select "#classroom_course_essentials_title", text: "Essentielles de la leçon"
+    # UDR-0084 : la même valeur exacte que la page de la fiche de cours dans le catalogue.
+    assert_select "#classroom_course_essentials_title", text: "Révisions de la leçon"
+    assert_equal I18n.t("catalog.courses.show.essentials_title"), I18n.t("classroom.classroom_courses.show.essentials_title")
     assert_select "#classroom_course_essentials", text: /exercice/, count: 0
     no_toggle
   end
@@ -45,7 +47,7 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
 
     assert_response :success
     assert_no_match including(toggle(:assign)), response.body
-    assert_no_match(/Assignez une fiche essentielle/, response.body)
+    assert_no_match(/Assignez une fiche/, response.body)
     no_toggle
   end
 
@@ -57,6 +59,7 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
 
     assert_response :success
     assert_select "#classroom_course_essentials", text: including(tl("empty"))
+    assert_select "#classroom_course_essentials", text: including("Aucune fiche de révision pour cette fiche de cours.")
   end
 
   test "an archived classroom shows its notice, without any toggle nor « Assigné » badge" do

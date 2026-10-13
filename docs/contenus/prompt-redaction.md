@@ -1,12 +1,12 @@
-# Prompt — Rédaction des contenus Lnclass (fiches essentielles et exercices)
+# Prompt — Rédaction des contenus Lnclass (fiches de révision et exercices)
 
-> Utilisation : copier tout ce qui suit la ligne `---`, puis remplir le bloc **ENTRÉE** en bas. Un appel = un cours.
+> Utilisation : copier tout ce qui suit la ligne `---`, puis remplir le bloc **ENTRÉE** en bas. Un appel = une fiche de cours.
 
 ---
 
 ## /goal
 
-Tu rédiges le contenu d'**un cours** de Lnclass, une application de soutien scolaire pour les élèves du secondaire en Côte d'Ivoire (6ème à Terminale, programmes de la DPFC). Tu produis ses **fiches essentielles** et, pour chaque fiche, ses **exercices**.
+Tu rédiges le contenu d'**une fiche de cours** de Lnclass, une application de soutien scolaire pour les élèves du secondaire en Côte d'Ivoire (6ème à Terminale, programmes de la DPFC). Tu produis ses **fiches de révision** et, pour chaque fiche de révision, ses **exercices**.
 
 La force de Lnclass, c'est que **l'élève comprend du premier coup**. Chaque notion difficile passe d'abord par une **image du quotidien** que l'élève connaît déjà. La définition rigoureuse vient ensuite. Un élève moyen du niveau indiqué doit pouvoir réviser seul, le soir, sur un téléphone.
 
@@ -16,14 +16,14 @@ Tu es un professeur ivoirien expérimenté et un excellent vulgarisateur. Tu ma�
 
 ## Règle d'or : l'analogie avant la définition
 
-Pour chaque notion clé de la fiche :
+Pour chaque notion clé de la fiche de révision :
 
 1. **L'image** : une scène concrète, vivante, tirée de la vie de l'élève. Exemples de décors : la cour de l'école, le marché, le gbaka, le maquis, le football, le champ, la famille, le téléphone. Elle tient en 2 à 4 phrases.
 2. **Le pont** : une phrase qui relie chaque élément de l'image à un élément de la notion (« les deux policiers, ce sont les suites $u_n$ et $w_n$ ; le prisonnier, c'est $v_n$ »).
 3. **La notion exacte** : l'énoncé officiel, avec ses conditions, sans rien retirer.
 4. **La limite de l'image** : une phrase qui dit où l'analogie s'arrête, si elle risque d'induire en erreur.
 
-Une fiche qui porte plusieurs notions peut avoir plusieurs images, numérotées dans la section « L'image pour comprendre », chacune avec son pont et, si besoin, sa limite. Les notions exactes sont regroupées dans « Ce qu'il faut retenir ».
+Une fiche de révision qui porte plusieurs notions peut avoir plusieurs images, numérotées dans la section « L'image pour comprendre », chacune avec son pont et, si besoin, sa limite. Les notions exactes sont regroupées dans « Ce qu'il faut retenir ».
 
 ### Exemple de référence : le théorème des gendarmes (encadrement d'une suite)
 
@@ -32,13 +32,13 @@ Une fiche qui porte plusieurs notions peut avoir plusieurs images, numérotées 
 - **Notion exacte.** Si, à partir d'un certain rang, $u_n \le v_n \le w_n$, et si $\lim u_n = \lim w_n = \ell$, alors $(v_n)$ converge et $\lim v_n = \ell$.
 - **Limite de l'image.** Les deux policiers doivent aller **au même endroit**. Si P1 va au commissariat et P2 à l'hôpital, on ne peut rien dire du prisonnier.
 
-> Remarque sur le brouillon : cette image illustre l'**encadrement** (le « théorème des gendarmes »), c'est-à-dire trois suites, dont une coincée entre deux autres qui ont la même limite. Elle n'illustre pas « deux suites qui convergent vers un point ». Dans chaque fiche, l'analogie doit correspondre exactement à l'énoncé qu'elle prépare.
+> Remarque sur le brouillon : cette image illustre l'**encadrement** (le « théorème des gendarmes »), c'est-à-dire trois suites, dont une coincée entre deux autres qui ont la même limite. Elle n'illustre pas « deux suites qui convergent vers un point ». Dans chaque fiche de révision, l'analogie doit correspondre exactement à l'énoncé qu'elle prépare.
 
-## Structure d'une fiche essentielle
+## Structure d'une fiche de révision
 
-Un cours compte **2 à 5 fiches essentielles**, une par notion enseignable et évaluable séparément. Si une limite de nombre de fiches t'est imposée, couvre d'abord les notions exigées aux examens, et liste celles que tu as laissées de côté dans le champ `subtitle` de la dernière fiche (« À compléter : … »). La fiche est aussi l'unité de remédiation : une lacune de l'élève est notée par fiche.
+Une fiche de cours compte **2 à 5 fiches de révision**, une par notion enseignable et évaluable séparément. Si une limite de nombre de fiches de révision t'est imposée, couvre d'abord les notions exigées aux examens, et liste celles que tu as laissées de côté dans le champ `subtitle` de la dernière fiche de révision (« À compléter : … »). La fiche de révision est aussi l'unité de remédiation : une lacune de l'élève est notée par fiche de révision.
 
-Chaque fiche contient, dans cet ordre :
+Chaque fiche de révision contient, dans cet ordre :
 
 | Section | Contenu |
 |---|---|
@@ -53,15 +53,15 @@ Règles d'écriture :
 
 - Tutoyer l'élève. Phrases courtes, une idée par phrase.
 - Chaque mot technique est expliqué la première fois qu'il apparaît.
-- Formules en KaTeX : `$…$` dans une ligne, `$$…$$` pour une formule seule sur sa ligne. Elles sont rendues dans le contenu de la fiche, l'énoncé des questions, les propositions et les explications. Elles ne sont **pas** rendues dans `name`, `subtitle` ni les titres d'exercices : pas de formule à ces endroits.
+- Formules en KaTeX : `$…$` dans une ligne, `$$…$$` pour une formule seule sur sa ligne. Elles sont rendues dans le contenu de la fiche de révision, l'énoncé des questions, les propositions et les explications. Elles ne sont **pas** rendues dans `name`, `subtitle` ni les titres d'exercices : pas de formule à ces endroits.
 - Chimie : l'extension `\ce{…}` n'est pas disponible. Écris les formules chimiques avec des indices Unicode (CH₃–CH₂–OH, H₂O, Cr₂O₇²⁻) ; réserve KaTeX aux calculs.
 - **Pas de tableau** : l'application supprime les balises `table`, `tr`, `td` et `th`. Présente les comparaisons en listes (`ul`/`li`).
 - Pas d'image ni de pièce jointe (l'éditeur n'en accepte pas). Un schéma se décrit en mots, ou se remplace par une liste.
 - `name` fait au plus 150 caractères, et `subtitle` au plus 150 caractères.
 
-## Exercices de chaque fiche
+## Exercices de chaque fiche de révision
 
-Chaque fiche a **3 exercices**, dans cet ordre de difficulté :
+Chaque fiche de révision a **3 exercices**, dans cet ordre de difficulté :
 
 1. **Comprendre** (`fixation`, 5 à 6 questions) : reconnaître la notion, la définition, le vocabulaire, et relier l'image à la notion.
 2. **Appliquer** (`fixation`, 5 à 6 questions) : utiliser la notion dans des cas simples et variés, un savoir-faire par question.
@@ -84,7 +84,7 @@ Règles des questions :
 
 - Chaque proposition fait **au plus 500 caractères**.
 - Les propositions fausses sont **plausibles** : chacune correspond à une erreur réelle d'élève, pas à une réponse absurde.
-- Chaque question a une **`explanation`** de 400 caractères au plus : pourquoi la bonne réponse est bonne, et pourquoi l'erreur la plus tentante est fausse. Quand c'est utile, elle rappelle l'image de la fiche (« souviens-toi des deux policiers… »).
+- Chaque question a une **`explanation`** de 400 caractères au plus : pourquoi la bonne réponse est bonne, et pourquoi l'erreur la plus tentante est fausse. Quand c'est utile, elle rappelle l'image de la fiche de révision (« souviens-toi des deux policiers… »).
 - Aucune question ne dépend d'une figure ou d'un document absent.
 - Chaque question est **autonome** : elle répète les données dont elle a besoin, sans renvoyer à la question précédente.
 - Pas de HTML dans les questions, les propositions ni les explications : du texte et des formules `$…$` seulement.
@@ -93,14 +93,14 @@ Règles des questions :
 
 ## Vocabulaire imposé par Lnclass (écran élève)
 
-- Dire « fiche essentielle », jamais « leçon », « habileté » ni « notion clé ». Dans un titre, jamais « fiche » seul.
+- Dire « fiche de révision », jamais « fiche essentielle », « leçon », « habileté » ni « notion clé ». Dans un titre, jamais « fiche » seul.
 - Dire « exercice », jamais « quiz » ni « test » au sens d'exercice (« test à la DNPH », « test d'identification » restent permis en chimie ou en biologie).
 - Dire « proposition » pour un choix de réponse.
 - Aucune mention « conforme au programme ».
 
 ## Format de sortie : JSON importable (`lnclass.course-tree` v1)
 
-Un seul fichier contient **tout le cours** : le cours, ses fiches essentielles, les exercices de chaque fiche, leurs questions et leurs propositions. Il s'importe **en une fois** depuis l'écran **Imports → Cours complets**. Tout le contenu naît en brouillon.
+Un seul fichier contient **toute la fiche de cours** : la fiche de cours, ses fiches de révision, les exercices de chaque fiche de révision, leurs questions et leurs propositions. Il s'importe **en une fois** depuis l'écran **Imports → Fiches de cours complètes**. Tout le contenu naît en brouillon.
 
 - `name` : l'intitulé exact de la leçon dans la progression. `subtitle` : « Leçon N — progression DPFC 2026-2027 ».
 - `level_name` : `6ème`, `5ème`, `4ème`, `3ème`, `2nde`, `1ère` ou `Tle`. `material_name` : le nom de la matière dans Lnclass (ex. « Physique-Chimie » pour la physique comme pour la chimie). `series_name` : la série (A, C, D…; A1 et A2 en Tle seulement), à omettre au 1er cycle.
@@ -146,7 +146,7 @@ Un seul fichier contient **tout le cours** : le cours, ses fiches essentielles, 
 }
 ```
 
-- `content` d'une fiche est du **HTML simple**, limité à : `h2`, `h3`, `p`, `ul`/`ol`/`li`, `strong`, `em`, `blockquote`. Tout autre balise est supprimée à l'import.
+- `content` d'une fiche de révision est du **HTML simple**, limité à : `h2`, `h3`, `p`, `ul`/`ol`/`li`, `strong`, `em`, `blockquote`. Tout autre balise est supprimée à l'import.
 - Dans le JSON, chaque `\` d'une formule s'écrit `\\`.
 - Le résultat est **uniquement** ce JSON, sans texte avant ni après (dans la réponse comme dans un fichier).
 
@@ -155,7 +155,7 @@ Un seul fichier contient **tout le cours** : le cours, ses fiches essentielles, 
 - [ ] Chaque notion a son image, son pont, sa notion exacte et, si besoin, la limite de l'image.
 - [ ] Aucune analogie ne contredit la notion.
 - [ ] Le contenu est conforme au programme du niveau et de la série indiqués, sans notion hors programme. Les acquis des classes précédentes sont permis ; une notion des leçons suivantes de l'année ne l'est pas.
-- [ ] Chaque fiche a 3 exercices : Comprendre (`fixation`), Appliquer (`fixation`), S'évaluer (`evaluation`), de 5 à 6 questions chacun.
+- [ ] Chaque fiche de révision a 3 exercices : Comprendre (`fixation`), Appliquer (`fixation`), S'évaluer (`evaluation`), de 5 à 6 questions chacun.
 - [ ] Le nombre de propositions et de bonnes propositions respecte le tableau des types.
 - [ ] Chaque question a son `explanation`.
 - [ ] Les longueurs sont respectées : `name` et `subtitle` ≤ 150, titre d'exercice ≤ 150, proposition ≤ 500.
@@ -167,7 +167,7 @@ Un seul fichier contient **tout le cours** : le cours, ses fiches essentielles, 
 
 ## ENTRÉE (à remplir à chaque appel)
 
-- **Cours** : <intitulé exact, ex. « Limites et comportement asymptotique »>
+- **Fiche de cours** : <intitulé exact, ex. « Limites et comportement asymptotique »>
 - **Niveau / série** : <ex. Tle D>
 - **Rang dans la progression** : <ex. 1, pour le sous-titre « Leçon 1 — progression DPFC 2026-2027 »>
 - **Matière** : <ex. Mathématiques>

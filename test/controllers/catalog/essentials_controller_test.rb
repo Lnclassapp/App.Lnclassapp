@@ -47,6 +47,9 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
 
     # UDR-0015, amendement du 2026-10-02 (UDR-0057) : surtitre sans le cours, que le retour nomme déjà ; plus d'aide « Badges ».
     assert_select "#essential_header p", text: I18n.t("#{scope}.show.student_eyebrow")
+    # UDR-0084 : le surtitre nomme la fiche de révision, jamais la « fiche essentielle ».
+    assert_select "#essential_header p", text: "Fiche de révision"
+    assert_select "#essential_header", text: /essentielle/i, count: 0
     assert_select "#essential_badges_help", 0
     # Une ligne = un lien étiré, le titre, « Type · Assigné par ton enseignant », une seule action à droite.
     assert_select row_of(@exercise) do
@@ -89,6 +92,8 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     get page_path
 
     assert_select "#essential_gap", text: /#{I18n.t("#{scope}.show.gap_title")}/
+    # UDR-0084 §2 : « Fiche à revoir », sans « de révision » redondant.
+    assert_select "#essential_gap_title", text: "Fiche à revoir"
     assert_select "#essential_gap", text: /12 septembre 2026/
     # UDR-0015, amendement du 2026-10-02 : la règle pour lever la lacune passe dans l'infobulle du titre.
     assert_select "#essential_gap details", text: /#{Entities::Assessment::Grading::REMEDIATION_THRESHOLD} %/
@@ -122,6 +127,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     # Décision du porteur du 2026-10-02 : la ligne de l'enseignant et le surtitre restent inchangés.
     assert_select "#essential_header p", text: I18n.t("#{scope}.show.eyebrow", course: "Génétique et évolution")
+    assert_select "#essential_header p", text: "Fiche de révision · Génétique et évolution"
     assert_select row_of(@exercise) do
       assert_select "a[href='#{exercise_path(@exercise.public_id)}']", text: "Méiose et ADN"
       assert_select "a.ui-button-secondary[href='#{exercise_path(@exercise.public_id)}']", text: I18n.t("#{scope}.exercise_progress.open")
@@ -280,6 +286,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     get page_path(create_essential(course: @course, name: "Nue", status: "draft"))
 
     assert_select "#essential_exercises", text: /#{I18n.t("#{scope}.show.team_empty_title")}/
+    assert_select "#essential_exercises", text: /Aucun exercice pour cette fiche de révision\./
   end
 
   test "outside the team, a draft or archived sheet, or a sheet of a draft course, answers 404 without its content" do
@@ -307,6 +314,16 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
 
     get course_essential_path(create_course.slug, @essential.slug)
     assert_response :not_found
+  end
+
+  # UDR-0084 §3 : le renommage ne touche aucune adresse ; un lien partagé avant lui s'ouvre sans redirection.
+  test "a link shared before the renaming, /courses/<course>/essentials/<sheet>, still opens without redirect" do
+    sign_in_as @student
+
+    get "/courses/#{@course.slug}/essentials/#{@essential.slug}"
+
+    assert_response 200
+    assert_select "#essential_header h1", text: "La méiose"
   end
 
   test "without a session, the page sends to the sign-in" do

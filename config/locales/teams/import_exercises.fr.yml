@@ -6,10 +6,10 @@ fr:
       kinds:
         exercises:
           title: "Format du fichier"
-          intro_html: "Un fichier JSON au format <code class=\"font-mono text-xs text-ink\">lnclass.exercises</code>, version 1. L'enveloppe désigne la fiche essentielle cible par son slug, dans <code class=\"font-mono text-xs text-ink\">essential</code>. Chaque élément de <code class=\"font-mono text-xs text-ink\">exercises</code> est un exercice avec ses questions et leurs propositions. Un exercice entre entier, ou pas du tout."
-          essential: "Fiche essentielle cible :"
+          intro_html: "Un fichier JSON au format <code class=\"font-mono text-xs text-ink\">lnclass.exercises</code>, version 1. L'enveloppe désigne la fiche de révision cible par son slug, dans <code class=\"font-mono text-xs text-ink\">essential</code>. Chaque élément de <code class=\"font-mono text-xs text-ink\">exercises</code> est un exercice avec ses questions et leurs propositions. Un exercice entre entier, ou pas du tout."
+          essential: "Fiche de révision cible :"
           essential_hint: "placez ce slug dans la clé essential de l'enveloppe."
-          no_essential_html: "Ouvrez l'import depuis la fiche essentielle cible, ou citez son slug dans la clé <code class=\"font-mono text-xs text-ink\">essential</code> de l'enveloppe. Un slug inconnu fait rejeter tout le fichier."
+          no_essential_html: "Ouvrez l'import depuis la fiche de révision cible, ou citez son slug dans la clé <code class=\"font-mono text-xs text-ink\">essential</code> de l'enveloppe. Un slug inconnu fait rejeter tout le fichier."
           nodes:
             exercise: "Exercice"
             question: "Question"
@@ -33,5 +33,5 @@ fr:
               content: "Texte de la proposition. Obligatoire, 500 caractères au plus."
               correct: "true si la proposition est correcte ; false par défaut."
           example: "Exemple minimal"
-          drafts: "Tout arrive en brouillon, à la suite des exercices de la fiche essentielle, quelle que soit la clé status du fichier : relisez, puis publiez. Un exercice déjà présent dans cette fiche essentielle (même titre, sans tenir compte des accents ni de la casse) est ignoré et compté ; il n'est jamais modifié."
+          drafts: "Tout arrive en brouillon, à la suite des exercices de la fiche de révision, quelle que soit la clé status du fichier : relisez, puis publiez. Un exercice déjà présent dans cette fiche de révision (même titre, sans tenir compte des accents ni de la casse) est ignoré et compté ; il n'est jamais modifié."
           errors: "Un exercice dont une question est mal formée est listé en erreur, avec le chemin de la question, et n'entre pas en base ; les autres exercices du fichier sont importés."

@@ -360,10 +360,13 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     get classroom_path(classroom.public_id)
 
     assert_select "section#classroom_courses h2", text: I18n.t("#{scope}.courses.title")
+    # UDR-0084 : une section de la page nomme l'objet, « Fiches de cours », et compte ses fiches de révision.
+    assert_select "section#classroom_courses h2", text: "Fiches de cours"
     assert_select "section#classroom_courses li", 1
     assert_select "#classroom_course_#{genetics.slug}" do
       assert_select "a[href='#{classroom_course_path(classroom.public_id, genetics.slug)}']", text: "Génétique et évolution"
       assert_select "p", text: /#{I18n.t("#{scope}.courses.essentials", count: 1)}/
+      assert_select "p", text: /1 fiche de révision/
     end
     assert_no_match(/Fonctions|Autre niveau/, response.body)
   end

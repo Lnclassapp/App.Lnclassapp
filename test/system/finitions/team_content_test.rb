@@ -21,7 +21,7 @@ class Finitions::TeamContentTest < ApplicationSystemTestCase
     visit new_teams_course_path
 
     assert_selector "dialog#course-modal[open]"
-    assert_equal team_title("Nouveau cours"), page.title
+    assert_equal team_title("Nouvelle fiche de cours"), page.title
     assert_equal "course_name", focused_id
   end
 
@@ -30,14 +30,14 @@ class Finitions::TeamContentTest < ApplicationSystemTestCase
     assert_equal team_title("Imports"), page.title
 
     {
-      new_teams_course_path => [ "course-modal", "Nouveau cours", "course_name" ],
-      edit_teams_course_path(@essential.course.slug) => [ "course-modal", "Modifier le cours", "course_name" ],
-      new_teams_course_essential_path(@essential.course.slug) => [ "essential-modal", "Nouvelle fiche essentielle", "essential_name" ],
-      edit_teams_essential_path(@essential.slug) => [ "essential-modal", "Modifier la fiche essentielle", "essential_name" ],
+      new_teams_course_path => [ "course-modal", "Nouvelle fiche de cours", "course_name" ],
+      edit_teams_course_path(@essential.course.slug) => [ "course-modal", "Modifier la fiche de cours", "course_name" ],
+      new_teams_course_essential_path(@essential.course.slug) => [ "essential-modal", "Nouvelle fiche de révision", "essential_name" ],
+      edit_teams_essential_path(@essential.slug) => [ "essential-modal", "Modifier la fiche de révision", "essential_name" ],
       new_teams_essential_exercise_path(@essential.slug) => [ "exercise-modal", "Nouvel exercice", "exercise_title" ],
       edit_teams_exercise_path(@exercise.public_id) => [ "exercise-modal", "Modifier l'exercice", "exercise_title" ],
       new_teams_import_path(kind: "drenas") => [ "import-upload-modal", "Importer des DRENA", "import_files" ],
-      new_teams_import_path(kind: "course_tree") => [ "import-upload-modal", "Importer des cours complets", "import_files" ]
+      new_teams_import_path(kind: "course_tree") => [ "import-upload-modal", "Importer des fiches de cours complètes", "import_files" ]
     }.each do |path, (id, title, field)|
       open_in_modal(path)
 
@@ -63,7 +63,7 @@ class Finitions::TeamContentTest < ApplicationSystemTestCase
       assert_selector "#course_name[aria-invalid=true]"
     end
     assert_equal "course_name", focused_id
-    assert_equal team_title("Nouveau cours"), page.title
+    assert_equal team_title("Nouvelle fiche de cours"), page.title
   end
 
   test "FU-10, FU-11: the import report goes back to « Imports » by the common link, its tab title without a colon" do

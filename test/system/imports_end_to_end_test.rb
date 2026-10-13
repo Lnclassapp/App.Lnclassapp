@@ -109,13 +109,13 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
     assert_selector "#courses_empty"
 
     assert_no_page_reload do
-      click_on "Importer des cours"
+      click_on I18n.t("catalog.courses.index.import")
       upload json_file(legacy_course_tree, name: "cours").path
 
       within "turbo-frame#modal dialog[open] turbo-frame#import_status" do
         assert_text "Terminé"
         assert_counters(imported: 1, skipped: 0, errors: 0, total: 1)
-        assert_text "Fiches essentielles créées : 1"
+        assert_text "Fiches de révision créées : 1"
         assert_text "Exercices créés : 1"
         assert_text "Questions créées : 2"
         assert_text "Propositions créées : 4"
@@ -181,7 +181,7 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
         assert_text "Rejeté"
         assert_selector "[role=alert]", text: "rejeté en bloc : rien n'a été écrit"
         assert_selector "#import_errors li",
-                        text: /\Aformat\s+Ce fichier est un import « Cours complets » \(format lnclass\.course-tree\), pas un import « Établissements »/
+                        text: /\Aformat\s+Ce fichier est un import « Fiches de cours complètes » \(format lnclass\.course-tree\), pas un import « Établissements »/
         assert_no_selector "#import_counter_imported"
       end
       assert_selector "#imports tr", text: /Établissements.*mauvaise-enveloppe.*\.json.*Rejeté/m

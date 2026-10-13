@@ -1,14 +1,14 @@
 require "test_helper"
 
-# Every French locale file lives under `fr:`, defines each key once, and speaks the UDR-0007 vocabulary.
+# Every French locale file lives under `fr:`, defines each key once, and speaks the UDR-0007 and UDR-0084 vocabulary.
 class LocaleFilesTest < ActiveSupport::TestCase
   FILES = Rails.root.glob("config/locales/**/*.fr.yml").freeze
-  FORBIDDEN = /(?<![[:alpha:]])(habilet|notions? clés?|leçon|quiz|essai|platine|médaille|trophée)/i
-  # UDR-0007, amendement du 2026-09-30 : le titre de la liste des fiches d'un cours, décidé par le porteur. « leçon » y
-  # désigne le cours parent, pas la fiche ; seule cette valeur exacte, sous ces clés, est admise.
+  FORBIDDEN = /(?<![[:alpha:]])(habilet|notions? clés?|leçon|quiz|essai|platine|médaille|trophée|essentielle)/i
+  # UDR-0084 : le titre de la liste des fiches de révision d'une fiche de cours, décidé par le porteur. « leçon » y
+  # désigne la fiche de cours parente ; seule cette valeur exacte, sous ces clés, est admise.
   ALLOWED = {
-    "fr.catalog.courses.show.essentials_title" => "Essentielles de la leçon",
-    "fr.classroom.classroom_courses.show.essentials_title" => "Essentielles de la leçon"
+    "fr.catalog.courses.show.essentials_title" => "Révisions de la leçon",
+    "fr.classroom.classroom_courses.show.essentials_title" => "Révisions de la leçon"
   }.freeze
 
   test "the French locale files exist" do
@@ -42,7 +42,7 @@ class LocaleFilesTest < ActiveSupport::TestCase
     assert_empty missing
   end
 
-  test "no term forbidden by UDR-0007" do
+  test "no term forbidden by UDR-0007 or UDR-0084" do
     offences = FILES.flat_map do |path|
       leaves(YAML.load_file(path), values: true).filter_map do |key, value|
         "#{relative(path)} #{key}" if value.to_s.match?(FORBIDDEN) && ALLOWED[key] != value
@@ -53,15 +53,18 @@ class LocaleFilesTest < ActiveSupport::TestCase
   end
 
   test "the vocabulary pattern catches what it must" do
-    [ "Habileté", "Notion clé", "notions clés", "Leçon", "Quiz", "Essai", "Platine", "Médaille", "Trophée" ].each do |term|
+    [ "Habileté", "Notion clé", "notions clés", "Leçon", "Quiz", "Essai", "Platine", "Médaille", "Trophée",
+      "Fiche essentielle", "fiches essentielles" ].each do |term|
       assert_match FORBIDDEN, term
     end
-    assert_no_match FORBIDDEN, "Fiche essentielle"
+    [ "Fiche de révision", "Fiche de cours", "Révise l'essentiel du cours" ].each do |term|
+      assert_no_match FORBIDDEN, term
+    end
   end
 
-  test "the UDR-0007 exception is the list title alone, with its exact wording" do
+  test "the UDR-0084 exception is the list title alone, with its exact wording" do
     assert(ALLOWED.values.all? { it.match?(FORBIDDEN) })
-    assert_equal [ "Essentielles de la leçon" ], ALLOWED.values.uniq
+    assert_equal [ "Révisions de la leçon" ], ALLOWED.values.uniq
     ALLOWED.each { |key, value| assert_equal value, I18n.t(key.delete_prefix("fr."), locale: :fr) }
   end
 

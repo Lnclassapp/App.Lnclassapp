@@ -38,7 +38,7 @@ module Queries
         assert_nil SessionResultQuery.new.call(public_id: "inconnue", reveal: true)
       end
 
-      test "en-tête : exercice, fiche essentielle, élève, score, note, maîtrise et palier tirés de Grading" do
+      test "en-tête : exercice, fiche de révision, élève, score, note, maîtrise et palier tirés de Grading" do
         row = result
 
         assert_equal [ @exercise.public_id, "Méiose" ], [ row.exercise.public_id, row.exercise.title ]

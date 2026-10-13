@@ -52,6 +52,7 @@ class Teams::MaterialsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#materials tr", 2
+    assert_select "th[scope=col]", text: "Fiches de cours" # UDR-0084 §3
     assert_select "#materials tr:first-child", text: /Anglais/
     assert_select "#material_physique #{tone_selector('literature')}", text: "Physique"
     assert_select "#material_physique #{tone_selector('science')}", 0

@@ -150,6 +150,20 @@ class Communication::PagesControllerTest < ActionDispatch::IntegrationTest
     (1..6).each { assert_select "h2#section-#{it}", "Section #{it}" }
   end
 
+  # UDR-0084 §3 : le 1er paragraphe de « 4. Le contenu » nomme les nouveaux objets ; pas de nouvelle version des CGU.
+  test "les CGU nomment les nouveaux objets sans nouvelle version" do
+    CONTROLLER.view_paths = @view_paths
+
+    get "/conditions-utilisation"
+
+    assert_response :success
+    assert_select "section[aria-labelledby='contenu'] p",
+                  text: /\ALes fiches de cours, fiches de révision et exercices sont publiés par Lnclass et lui appartiennent\./
+    assert_no_match(/essentielle/i, response.body)
+    assert_equal "2 octobre 2026", I18n.t("communication.pages.terms.updated_on", locale: :fr)
+    assert_select "p", text: "Mis à jour le 2 octobre 2026"
+  end
+
   test "/aide carries « Vos données » only when one of its pages is online" do
     simulate_online
     get help_path
