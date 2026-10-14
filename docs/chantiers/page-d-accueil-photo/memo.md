@@ -51,15 +51,14 @@ La page d'accueil est la première pièce de la refonte visuelle que le porteur 
 | La pastille promet « même sans internet », alors que l'UDR-0064 §2.6 interdit de promettre ce que l'application ne livre pas encore. | On garde la promesse ; la lecture hors ligne sera ajoutée après les maquettes des écrans (porteur, 2026-10-14). | Cette règle de l'UDR-0064 est levée pour la pastille, et l'écart doit être écrit dans la nouvelle UDR. Un chantier « lecture hors ligne » est à ouvrir. |
 | D'où vient la photo ? | Elle a été générée, il n'y a donc pas de droit à l'image à obtenir (porteur, 2026-10-14). | Elle doit tenir dans le budget de poids (WebP ≤ 100 Ko, UDR-0064 §3) avec un cadrage portrait pour le téléphone et un cadrage paysage pour l'ordinateur. |
 | Où se connecte un élève ou un enseignant qui revient ? La maquette n'a ni en-tête ni « Se connecter ». | Dans la modale de rôle, comme aujourd'hui : « Tu es élève ? » propose « Se connecter » puis un second bouton, renommé de « Rejoindre ma classe » en **« Créer mon compte »** (porteur, 2026-10-14). | La page n'a plus d'en-tête ni de bouton « Se connecter » propre : la connexion passe uniquement par les deux modales. Le libellé du bouton d'inscription de la modale élève change, et son indice (« Choisis ta classe, ou ouvre le lien… ») est à relire. Les tests qui cherchent « Se connecter » dans l'en-tête de `/` changent. |
-| Quelle mise en page sur ordinateur ? | Texte à gauche, photo à droite (porteur, 2026-10-14). | Il y a deux familles de mise en page : feuille sur la photo au téléphone, deux colonnes à partir de 1 024 px. |
+| Quelle mise en page sur ordinateur ? La maquette multi-écrans met la photo à gauche. | Texte à gauche, photo à droite, confirmé contre la maquette ; toutes les maquettes seront reprises (porteur, 2026-10-14). | Il y a deux familles de mise en page : feuille sur la photo au téléphone, deux colonnes à partir de 1 024 px avec la feuille à gauche dont le bord arrondi mord sur la photo. La maquette de référence de l'UDR sera la version reprise, pas l'artefact actuel. |
 
 ## Cas limites identifiés
 
-- …
+- La photo générée porte le filigrane de l'outil (une étoile en bas à droite), visible sur tablette et ordinateur : le recadrage de production doit l'exclure.
 
 ## Questions encore ouvertes
 
-- **Ordinateur : de quel côté est la photo ?** Le porteur a répondu « texte à gauche, photo à droite » (2026-10-14), mais sa maquette multi-écrans met la photo à gauche et la feuille à droite à partir de 1 024 px.
 - **Couleur des boutons.** La maquette multi-écrans garde le bleu `#00a0ff` avec un texte blanc (contraste 2,8:1), alors que le porteur a choisi le bleu foncé `brand-strong`. On retient sa réponse écrite tant qu'il ne dit pas le contraire.
 - **Photo.** La maquette la décrit comme « à remplacer en production par une vraie photo », alors que le porteur garde l'image générée. On retient l'image générée.
 - **Où mène « Espace établissement » ?** Troisième modale (« Se connecter » et « Créer l'espace de mon établissement »), lien direct vers l'inscription de la direction, ou retrait du lien.
