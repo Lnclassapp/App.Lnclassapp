@@ -39,6 +39,7 @@ La page d'accueil est la première pièce de la refonte visuelle que le porteur 
 - **La lecture hors ligne des fiches.** La pastille la promet, mais elle sera livrée par un chantier à part, après les maquettes des écrans (porteur, 2026-10-14).
 - **L'accueil élève**, qui fera l'objet du chantier suivant.
 - **Les modales de rôle** : elles gardent leurs identifiants et leur mécanique (UDR-0012 §2). Seul le libellé du second bouton de la modale élève change (voir le grill).
+- **Tarifs, abonnement, annales BEPC/BAC, défi du jour, témoignages, chiffres d'audience** : retirés de la maquette tant que la fonctionnalité n'existe pas (porteur, 2026-10-14).
 - **Une nouvelle charte** : couleurs et polices restent celles du design system. Seul l'usage de `brand-strong` pour les boutons pleins est nouveau.
 
 ## Ce que le grill a révélé
@@ -52,6 +53,7 @@ La page d'accueil est la première pièce de la refonte visuelle que le porteur 
 | D'où vient la photo ? | Elle a été générée, il n'y a donc pas de droit à l'image à obtenir (porteur, 2026-10-14). | Elle doit tenir dans le budget de poids (WebP ≤ 100 Ko, UDR-0064 §3) avec un cadrage portrait pour le téléphone et un cadrage paysage pour l'ordinateur. |
 | Où se connecte un élève ou un enseignant qui revient ? La maquette n'a ni en-tête ni « Se connecter ». | Dans la modale de rôle, comme aujourd'hui : « Tu es élève ? » propose « Se connecter » puis un second bouton, renommé de « Rejoindre ma classe » en **« Créer mon compte »** (porteur, 2026-10-14). | La page n'a plus d'en-tête ni de bouton « Se connecter » propre : la connexion passe uniquement par les deux modales. Le libellé du bouton d'inscription de la modale élève change, et son indice (« Choisis ta classe, ou ouvre le lien… ») est à relire. Les tests qui cherchent « Se connecter » dans l'en-tête de `/` changent. |
 | Quelle mise en page sur ordinateur ? La maquette multi-écrans met la photo à gauche. | Texte à gauche, photo à droite, confirmé contre la maquette ; toutes les maquettes seront reprises (porteur, 2026-10-14). | Il y a deux familles de mise en page : feuille sur la photo au téléphone, deux colonnes à partir de 1 024 px avec la feuille à gauche dont le bord arrondi mord sur la photo. La maquette de référence de l'UDR sera la version reprise, pas l'artefact actuel. |
+| Sur tablette et ordinateur, la page reprend-elle la maquette longue du porteur (en-tête, haut de page, matières, défi du jour, 3 étapes, annales, témoignages, appel à s'abonner, pied), qui promet des tarifs, des annales, un défi et des chiffres inventés, dans d'autres couleurs et polices ? | On adapte sa mise en page et son ordre ; les tarifs et les promesses sans fonctionnalité derrière sont retirés. La maquette était trop enthousiaste (porteur, 2026-10-14). | Deux familles : au téléphone, la feuille sur la photo ; à partir de la tablette, la page longue. On ne garde que les sections vraies aujourd'hui, en tokens du design system (couleurs, DM Sans, Bricolage Grotesque). La règle de l'UDR-0064 « ne promettre que ce qui est livré » reste, sauf pour la pastille « même sans internet ». |
 
 ## Cas limites identifiés
 
@@ -63,4 +65,4 @@ La page d'accueil est la première pièce de la refonte visuelle que le porteur 
 - **Photo.** La maquette la décrit comme « à remplacer en production par une vraie photo », alors que le porteur garde l'image générée. On retient l'image générée.
 - **Où mène « Espace établissement » ?** Troisième modale (« Se connecter » et « Créer l'espace de mon établissement »), lien direct vers l'inscription de la direction, ou retrait du lien.
 - **Liens des applications** « Lnclass Élève » et « Lnclass Enseignant » : leurs adresses de téléchargement, et que faire sur iPhone.
-- **Tablette (768 à 1 023 px)** : la maquette garde l'empilement du téléphone, avec le contenu centré sur 520 px et une photo plus haute. À confirmer.
+- **En-tête sur tablette et ordinateur** : la maquette longue a une navigation (Matières, Tarifs, À propos, Connexion, S'abonner) ; que garde-t-on, sachant qu'au téléphone la connexion passe par les modales ?
