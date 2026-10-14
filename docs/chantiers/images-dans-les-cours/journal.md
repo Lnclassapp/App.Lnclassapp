@@ -32,10 +32,10 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
+| **Livré le** | 2026-10-14 |
 | **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **ADR produits** | ADR-0089 |
+| **UDR produits** | UDR-0084 |
 
 ## 2026-10-10 — Lot 0
 
@@ -74,3 +74,11 @@ Revue du diff réuni (security-reviewer, silent-failure-hunter, pr-test-analyzer
 - **Clés retirées** : `teams.essentials.form.image_alt_label`, `image_alt_hint` et `image_alt_missing`, que rien ne lisait. La ligne de texte de remplacement de la fiche reprend celle de l'article.
 - **Enseignant** : `ReadsOwnLevel` ne borne que l'élève. Un enseignant reçoit donc pour l'image la même réponse que pour la fiche ou l'exercice qui la porte. Les tests le figent : 200 publié, 404 archivé.
 - **Durées système** : `question_image_test` 5,2 s et `publish_essential_with_images_test` 2,3 s. Le chantier en est à 12,1 s sur 15.
+
+## 2026-10-14 — Clôture (session fiches-interactives)
+
+- **Pourquoi maintenant** : le chantier `fiches-interactives` réutilise ces images ; le porteur décide de fusionner celui-ci d'abord et de garder 300 Ko et 1200 px.
+- **`Develop` fusionné** (un commit de documentation) avant la preuve.
+- **Couverture** : une branche manquait (`ReadQuestionImage`, image non rattachée lue sans compte) ; test ajouté.
+- **`bin/ci` local** : vert hors échecs connus de la machine (5 erreurs PostgreSQL 18 `RestrictViolation`, inscription sans JavaScript, blog `drop_generated_image`). Quatre tests système (archivage ×2, AN-22, IL-08) ont dépassé leur délai sous la charge de la suite et passent seuls ; aucun ne touche aux images.
+- **Machine** : `npx` absent, contourné pour la session par un `npx` local qui lance `node_modules/.bin`.

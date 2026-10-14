@@ -65,6 +65,7 @@ module UseCases
           assert_equal :not_found, read(public_id, actor: actor(:student)).code, public_id
           assert_equal :not_found, read(public_id, actor: actor(:teacher)).code, public_id
         end
+        assert_equal :not_found, read("orphan", actor: nil).code, "visiteur non connecté"
         assert_empty @store.downloads
       end
 
