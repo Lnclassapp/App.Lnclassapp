@@ -59,4 +59,9 @@ La page d'accueil est la première pièce de la refonte visuelle que le porteur 
 
 ## Questions encore ouvertes
 
-- …
+- **Ordinateur : de quel côté est la photo ?** Le porteur a répondu « texte à gauche, photo à droite » (2026-10-14), mais sa maquette multi-écrans met la photo à gauche et la feuille à droite à partir de 1 024 px.
+- **Couleur des boutons.** La maquette multi-écrans garde le bleu `#00a0ff` avec un texte blanc (contraste 2,8:1), alors que le porteur a choisi le bleu foncé `brand-strong`. On retient sa réponse écrite tant qu'il ne dit pas le contraire.
+- **Photo.** La maquette la décrit comme « à remplacer en production par une vraie photo », alors que le porteur garde l'image générée. On retient l'image générée.
+- **Où mène « Espace établissement » ?** Troisième modale (« Se connecter » et « Créer l'espace de mon établissement »), lien direct vers l'inscription de la direction, ou retrait du lien.
+- **Liens des applications** « Lnclass Élève » et « Lnclass Enseignant » : leurs adresses de téléchargement, et que faire sur iPhone.
+- **Tablette (768 à 1 023 px)** : la maquette garde l'empilement du téléphone, avec le contenu centré sur 520 px et une photo plus haute. À confirmer.
