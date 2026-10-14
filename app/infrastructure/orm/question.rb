@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Question
 # Rôle : table questions, questions d'un exercice et leurs propositions ordonnées
-# ADR  : 0054
+# ADR  : 0054, 0089
 module Orm
   class Question < ApplicationRecord
     self.table_name = "questions"
@@ -9,6 +9,7 @@ module Orm
 
     has_many :answers, -> { order(:position) }, class_name: "Orm::Answer", inverse_of: :question,
                                                 dependent: :restrict_with_error
+    has_one :image, class_name: "Orm::QuestionImage", inverse_of: :question, dependent: nil
     has_many :question_attempts, class_name: "Orm::QuestionAttempt", inverse_of: :question, dependent: :restrict_with_error
   end
 end

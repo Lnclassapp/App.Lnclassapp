@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · PublishCascade — action « Tout publier » d'un cours ou d'une fiche (menu ⋮ de l'équipe)
 # Rôle : appelle UseCases::Catalog::PublishCascade ; toast du bilan puis page rafraîchie par morphing (tous les statuts changent)
-# ADR  : 0026, 0035 (amendement du 2026-10-01) · UDR : 0042 (amendement du 2026-10-01)
+# ADR  : 0026, 0035 (amendement du 2026-10-01), 0089 · UDR : 0042 (amendement du 2026-10-01), 0084
 module PublishCascade
   extend ActiveSupport::Concern
 
@@ -13,9 +13,12 @@ module PublishCascade
 
   private
 
-  # Seul refus métier : une fiche dont le cours n'est pas publié. Rien n'a été écrit.
+  # Refus métier, rien n'a été écrit : une fiche dont le cours n'est pas publié, une fiche racine sans ses images (count),
+  # ou une fiche du cours qui n'est pas prête (essential_not_ready, nommée, ADR-0089 §4.4).
   def cascade_refused(result)
-    message = t("teams.essentials.transition.#{result.errors.fetch(:base).first}")
+    reason = result.errors.fetch(:base).first
+    scope = reason == :essential_not_ready ? "teams.courses.transition" : "teams.essentials.transition"
+    message = t("#{scope}.#{reason}", **result.errors.slice(:count, :name))
     respond_to do |format|
       format.turbo_stream { render turbo_stream: helpers.turbo_stream_toast(message, type: :error), status: :unprocessable_entity }
       format.html { redirect_back_or_to courses_path, alert: message, status: :see_other }

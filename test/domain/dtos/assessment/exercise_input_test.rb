@@ -99,6 +99,32 @@ module Dtos
                      input.errors[:"questions[1]"]
         assert_equal "Méiose", input.read_attribute_for_validation(:title)
       end
+
+      # ADR-0089 : l'image d'une question (son adresse, son texte de remplacement) et l'image annoncée par l'import.
+      test "une question porte son image et sa description, jusqu'à l'entité et retour" do
+        questions = params[:questions_attributes].dup
+        questions["0"] = questions["0"].merge(image_public_id: " ImAgE000000001 ", image_alt: "  Une pile  ", image_description: " Un circuit ")
+        input = ExerciseInput.from_params(params(questions:))
+
+        assert input.valid?
+        question = input.question_entities.first
+        assert_equal Entities::Shared::ContentImage.new(public_id: "ImAgE000000001", alt: "Une pile"), question.image
+        assert_equal "Un circuit", question.image_description
+        assert_nil input.question_entities.last.image
+        assert_nil input.question_entities.last.image_description
+
+        back = ExerciseInput.from_exercise(Entities::Assessment::Exercise.new(title: "E", exercise_type: "fixation", questions: [ question ]))
+        assert_equal [ "ImAgE000000001", "Une pile", "Un circuit" ], back.questions.first.then { [ it.image_public_id, it.image_alt, it.image_description ] }
+      end
+
+      test "texte de remplacement et description de 150 caractères au plus" do
+        questions = params[:questions_attributes].dup
+        questions["0"] = questions["0"].merge(image_public_id: "ImAgE000000001", image_alt: "a" * 151, image_description: "b" * 151)
+        input = ExerciseInput.from_params(params(questions:))
+
+        assert_not input.valid?
+        assert_equal %i[image_alt image_description], input.questions.first.errors.attribute_names.sort
+      end
     end
   end
 end

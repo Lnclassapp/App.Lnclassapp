@@ -69,6 +69,12 @@ module UseCases
         assert_equal 1, @transaction.calls
       end
 
+      test "ADR-0089 : les textes de remplacement saisis vont au repository avec la fiche" do
+        essential = create(image_alts: { "img1" => "Une pile" }).value
+
+        assert_equal [ [ "img1", "Une pile" ] ], essential.images.map { [ it.public_id, it.alt ] }
+      end
+
       test "dans un cours encore vide, la fiche prend la première position ; un cours brouillon en reçoit aussi" do
         empty = FakeCourses.new(Course.new(id: 3, slug: "vide", name: "Vide", status: "draft"))
         result = CreateEssential.new(courses: empty, essentials: @essentials, transaction: @transaction,

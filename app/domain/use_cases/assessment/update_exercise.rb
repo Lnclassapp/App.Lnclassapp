@@ -1,9 +1,12 @@
 # 🧠 DOMAINE · UseCases::Assessment::UpdateExercise
 # Rôle : l'équipe modifie un exercice ; après une première session, seuls son titre et sa description changent
-# ADR  : 0026, 0028, 0035, 0036, 0054 · UDR : 0017
+# ADR  : 0026, 0028, 0035, 0036, 0054, 0089 · UDR : 0017
 module UseCases
   module Assessment
     class UpdateExercise
+      # Une question cite une image qu'elle ne peut plus prendre (ADR-0089) : rien n'est écrit, le formulaire le dit.
+      IMAGE_UNAVAILABLE = Shared::Result.failure(:invalid, errors: { questions: [ :image_unavailable ] })
+
       def initialize(exercises:, transaction:, policy:)
         @exercises = exercises
         @transaction = transaction
@@ -11,7 +14,7 @@ module UseCases
       end
 
       # dto : Dtos::Assessment::ExerciseInput. Sans session, ses questions remplacent toutes les questions enregistrées.
-      # → Result(Exercise) | :forbidden | :not_found | :invalid (dont base: [:questions_locked]) | :conflict
+      # → Result(Exercise) | :forbidden | :not_found | :invalid (dont base: [:questions_locked], questions: [:image_unavailable]) | :conflict
       def call(actor:, public_id:, dto:)
         allowed = @policy.call(actor:)
         return allowed if allowed.failure?
@@ -28,6 +31,8 @@ module UseCases
         return Shared::Result.failure(:invalid, errors:) if errors.any?
 
         @transaction.attempt { @exercises.update(exercise:, replace_questions: !locked) }
+      rescue Ports::Assessment::ExerciseRepositoryPort::ImageUnavailable
+        IMAGE_UNAVAILABLE
       end
 
       private

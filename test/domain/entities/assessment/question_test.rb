@@ -48,6 +48,19 @@ module Entities
         assert_equal [ 1, 2 ], copy.answer_ids
         assert_equal %w[true_false single_choice multiple_correct_2 multiple_correct_3], Question::TYPES
       end
+
+      # ADR-0089 §4.4 : ce qui manque pour publier, sans gêner l'enregistrement d'un brouillon.
+      test "image_errors : description sans image, image sans texte de remplacement, ou rien" do
+        base = question("true_false", true, false)
+        image = ->(alt) { Entities::Shared::ContentImage.new(public_id: "p", alt:) }
+
+        assert_empty base.image_errors
+        assert_equal [ :image_missing ], base.with(image_description: "Une pile").image_errors
+        assert_empty base.with(image_description: "  ").image_errors
+        assert_equal [ :image_alt_blank ], base.with(image: image.(" ")).image_errors
+        assert_empty base.with(image_description: "Une pile", image: image.("Une pile")).image_errors
+        assert_empty base.with(image_description: "Une pile").structure_errors
+      end
     end
   end
 end

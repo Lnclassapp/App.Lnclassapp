@@ -69,6 +69,15 @@ module UseCases
                      [ sent.id, sent.slug, sent.course_id, sent.position, sent.author_id, sent.status, sent.course_status ]
       end
 
+      test "ADR-0089 : les textes de remplacement saisis vont au repository avec la fiche" do
+        sent = nil
+        @essentials.define_singleton_method(:update) { |essential:| (sent = essential) && Shared::Result.success(essential) }
+
+        update(image_alts: { "img1" => " Une pile " })
+
+        assert_equal [ [ "img1", "Une pile" ] ], sent.images.map { [ it.public_id, it.alt ] }
+      end
+
       test "hors équipe, rien ne change, même pour une fiche inconnue" do
         teacher = Entities::Identity::Actor.new(user_id: 8, role: :teacher, school_id: 3)
 

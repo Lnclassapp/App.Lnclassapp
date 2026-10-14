@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Assessment::ExerciseInput
 # Rôle : l'exercice saisi en modale, avec l'arbre de ses questions et propositions tiré de questions_attributes
-# ADR  : 0026, 0054 · UDR : 0007, 0017
+# ADR  : 0026, 0054, 0089 · UDR : 0007, 0017, 0084
 module Dtos
   module Assessment
     class ExerciseInput

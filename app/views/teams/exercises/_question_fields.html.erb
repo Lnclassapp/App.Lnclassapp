@@ -1,6 +1,6 @@
-<%# 🌐 UI · teams/exercises/_question_fields — une question du formulaire : énoncé, type, explication, propositions %>
-<%# Rôle : rendue par fields_for, ou clonée depuis <template> ; ses propositions ont leur propre contrôleur nested-form %>
-<%# ADR  : 0054 · UDR : 0007, 0017 · Stimulus : teams--nested-form (errors : structure de la question, « questions[i] ») %>
+<%# 🌐 UI · teams/exercises/_question_fields — une question du formulaire : image, énoncé, type, explication, propositions %>
+<%# Rôle : rendue par fields_for, ou clonée depuis <template> ; ses propositions ont leur propre contrôleur nested-form ; son image, assessment--question-image %>
+<%# ADR  : 0054, 0089 · UDR : 0007, 0017, 0084 · Stimulus : teams--nested-form, assessment--question-image (errors : « questions[i] ») %>
 <fieldset data-nested-question class="relative rounded-card border border-line bg-white p-4 counter-question">
   <legend class="float-left w-full pr-14 font-medium text-ink">
     <%= t(".legend") %> <span class="question-number"></span>
@@ -14,6 +14,7 @@
         <p><%= errors.to_sentence %></p>
       </div>
     <% end %>
+    <%= render "question_image_fields", form: %>
     <%= ui_field form, :content, as: :textarea, rows: 2, required: true, placeholder: t(".content_placeholder") %>
     <div class="grid gap-4 sm:grid-cols-2">
       <%= ui_field form, :question_type, as: :select, required: true,

@@ -5,7 +5,7 @@ Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **pr
 | Fichier | Rôle |
 |---|---|
 | [`progressions-2026-2027/`](progressions-2026-2027/) | Les 10 premières leçons de la progression DPFC 2026-2027, par matière, niveau et série : 13 fichiers `lnclass.course-tree` (1 056 cours sans fiche), à importer depuis **Imports → Cours complets**, **après** les leçons traitées. Détail et couverture : [`progressions-2026-2027/README.md`](progressions-2026-2027/README.md) |
-| [`prompt-redaction.md`](prompt-redaction.md) | Le prompt à donner à un modèle pour rédiger une leçon : règle de l'analogie, structure d'une fiche, 3 exercices par fiche, contraintes de l'application. Il produit **un seul fichier** `lnclass.course-tree` : le cours, ses fiches et leurs exercices |
+| [`prompt-redaction.md`](prompt-redaction.md) | Le prompt à donner à un modèle pour rédiger une leçon : règle de l'analogie, structure d'une fiche, 3 exercices par fiche, images annoncées et leur style, contraintes de l'application. Il produit **un seul fichier** `lnclass.course-tree` : le cours, ses fiches et leurs exercices |
 | [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour un niveau et une série (Tle D, 1ère D, 3ème…), il prend les 3 premières leçons de chaque matière du niveau (jusqu’à 18), les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture indépendante) et les range dans `lecons-traitees/`. Un appel = un niveau |
 | [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle mécanique d’un fichier de leçon contre les règles du prompt : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s’il y a une erreur |
 | [`lecons-traitees/`](lecons-traitees/) | Les leçons déjà rédigées avec ce prompt, un fichier `lnclass.course-tree` par cours complet, rangées par niveau et série, puis par matière. Pour l’instant `tle-d/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Histoire-Géographie, Philosophie et Français) et `3eme/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Français, Histoire-Géographie et EDHC) |
@@ -23,10 +23,15 @@ Exemple de référence, le théorème des gendarmes : deux policiers tiennent un
 
 ## Utiliser le prompt
 
-1. Copier le prompt, puis remplir son bloc **ENTRÉE** : intitulé exact de la leçon (celui de la progression), niveau, série, matière, rang dans la progression.
-2. Importer le JSON obtenu depuis **Imports → Cours complets**. **Un seul import** crée le cours, ses fiches essentielles et les exercices de chaque fiche, en brouillon. On peut choisir **jusqu'à 50 fichiers d'un coup** (50 Mo au total, 500 cours au plus) : ils forment un seul import, avec une ligne de bilan par fichier. Un même cours présent dans deux fichiers de l'envoi n'est importé dans aucun des deux.
-3. Faire relire le contenu par un enseignant de la discipline, puis publier.
-4. Ranger le fichier dans `lecons-traitees/<niveau>-<série>/<matière>/` (le slug de la matière : `mathematiques`, `physique-chimie`, `svt`, `histoire-geographie`, `philosophie`, `francais`…) et ajouter une ligne au tableau ci-dessous.
+1. **Rédiger.** Copier le prompt, puis remplir son bloc **ENTRÉE** : intitulé exact de la leçon (celui de la progression), niveau, série, matière, rang dans la progression. Le JSON obtenu annonce ses images : `<p>[[image: description]]</p>` dans le texte d'une fiche, `"image": { "description": "…" }` sur une question (voir « Les images » dans le prompt).
+2. **Importer** le JSON depuis **Imports → Cours complets**. **Un seul import** crée le cours, ses fiches essentielles et les exercices de chaque fiche, en brouillon. On peut choisir **jusqu'à 50 fichiers d'un coup** (50 Mo au total, 500 cours au plus) : ils forment un seul import, avec une ligne de bilan par fichier. Un même cours présent dans deux fichiers de l'envoi n'est importé dans aucun des deux. L'import ne crée aucune image : il garde les emplacements et les descriptions.
+3. **Produire chaque image dans Claude Design**, à partir de sa description et du style du prompt (ludique, lisible sur téléphone, symboles justes), puis l'exporter en **PNG ou WebP**. L'image est allégée par le navigateur à l'envoi (300 Ko et 1200 pixels de côté au plus).
+4. **Insérer chaque image.** Dans une fiche : ouvrir la fiche en modification, placer le curseur dans l'emplacement « Image à insérer : … » et cliquer **Insérer une image** ; l'image remplace l'emplacement et son texte de remplacement est pré-rempli avec la description. Dans une question : modifier l'exercice et cliquer **Ajouter l'image** sur la question. On peut aussi ajouter une image non annoncée, ou retirer un emplacement inutile.
+5. **Faire relire, puis publier.** Un enseignant de la discipline relit le texte **et les images**. Une fiche ou un exercice ne se publie pas tant qu'il reste un emplacement vide, une question qui attend son image, ou une image sans texte de remplacement.
+
+Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/<matière>/` (le slug de la matière : `mathematiques`, `physique-chimie`, `svt`, `histoire-geographie`, `philosophie`, `francais`…) et ajouter une ligne au tableau ci-dessous.
+
+**Leçons rédigées avant les images** (ADR-0089) : elles restent en texte seul, sans reprise en masse, puisqu'un import ne met jamais à jour un cours existant. C'est le cas de toutes les leçons de `lecons-traitees/` à ce jour et de toute leçon importée avant le 2026-10-10. Une image peut toujours s'y ajouter à la main, dans l'éditeur de la fiche.
 
 Pour toutes les matières d’un niveau d’un coup, utiliser plutôt [`prompt-redaction-lot.md`](prompt-redaction-lot.md).
 

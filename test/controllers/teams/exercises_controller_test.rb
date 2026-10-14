@@ -281,4 +281,92 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to exercise_path(exercise.public_id)
     assert_equal tl("transition.refusals.transition_not_allowed"), flash[:alert]
   end
+
+  # ADR-0089 §4.4, UDR-0084 §3.2 : la question 2 attend son image ; l'image envoyée se rattache à l'enregistrement.
+  test "ADR-0089: a question waiting for its image blocks the publication, and names the question" do
+    exercise = create_exercise(essential: @essential, status: "draft", questions: 2)
+    exercise.questions.second.update!(image_description: "Un circuit simple")
+    sign_in_as @member
+
+    patch publish_teams_exercise_path(exercise.public_id), as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_select "turbo-stream[action=append][target=toasts] [role=alert]", text: including(tl("transition.refusals.image_missing", number: 2))
+    assert_equal "draft", exercise.reload.status
+  end
+
+  test "ADR-0089: the edit form offers the expected image, and saving attaches the uploaded image with its text" do
+    exercise = create_exercise(essential: @essential, status: "draft", questions: 1)
+    exercise.questions.first.update!(image_description: "Un circuit simple")
+    image = create_question_image
+    sign_in_as @member
+
+    get edit_teams_exercise_path(exercise.public_id), headers: { "Turbo-Frame" => "modal" }
+    assert_select "form#exercise-form", text: including(tl("question_fields.image_expected", description: "Un circuit simple"))
+    assert_select "input[type=hidden][name='exercise[questions_attributes][0][image_description]'][value='Un circuit simple']"
+
+    questions = meiosis_questions
+    questions["0"] = questions["0"].merge(image_public_id: image.public_id, image_alt: "Une pile et une lampe",
+                                          image_description: "Un circuit simple")
+    patch teams_exercise_path(exercise.public_id), params: exercise_params(questions:), as: :turbo_stream
+
+    assert_response :success
+    question = exercise.reload.questions.order(:position).first
+    assert_equal [ question.id, "Une pile et une lampe" ], [ image.reload.question_id, image.alt ]
+    patch publish_teams_exercise_path(exercise.public_id), as: :turbo_stream
+    assert_equal "published", exercise.reload.status
+  end
+
+  test "ADR-0089: an image without its alternative text shows « À compléter » in the form" do
+    exercise = create_exercise(essential: @essential, status: "draft", questions: 1)
+    image = create_question_image(question: exercise.questions.first)
+    sign_in_as @member
+
+    get edit_teams_exercise_path(exercise.public_id), headers: { "Turbo-Frame" => "modal" }
+
+    assert_select "img[src='#{question_image_path(image.public_id)}']"
+    assert_select "[data-assessment--question-image-target=missing]:not([hidden])", text: tl("question_fields.image_alt_missing")
+  end
+
+  # PRD : « Cette question n'a pas besoin d'image » efface la description ; la question ne bloque plus la publication.
+  test "ADR-0089: dropping the image description makes the exercise publishable" do
+    exercise = create_exercise(essential: @essential, status: "draft", questions: 1)
+    exercise.questions.first.update!(image_description: "Un circuit simple")
+    sign_in_as @member
+
+    questions = { "0" => meiosis_questions["0"].merge(image_description: "") }
+    patch teams_exercise_path(exercise.public_id), params: exercise_params(questions:), as: :turbo_stream
+
+    assert_response :success
+    assert_nil exercise.reload.questions.first.image_description
+    patch publish_teams_exercise_path(exercise.public_id), as: :turbo_stream
+    assert_equal "published", exercise.reload.status
+  end
+
+  test "ADR-0089: citing the image of another exercise is refused with its reason, and nothing is written" do
+    exercise = create_exercise(essential: @essential, status: "draft", questions: 1)
+    foreign = create_question_image(question: create_exercise(essential: @essential).questions.first)
+    sign_in_as @member
+
+    questions = { "0" => meiosis_questions["0"].merge(image_public_id: foreign.public_id, image_alt: "Une pile") }
+    patch teams_exercise_path(exercise.public_id), params: exercise_params(title: "Autre titre", questions:), as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_select "form#exercise-form", text: including(error_of(:exercise_input, :questions, :image_unavailable))
+    assert_not_equal "Autre titre", exercise.reload.title
+    assert_not_equal exercise.questions.first.id, foreign.reload.question_id
+  end
+
+  test "ADR-0089, UDR-0084 §3.2: once tried, a question shows its image read only, without any button" do
+    exercise = create_exercise(essential: @essential, questions: 1)
+    image = create_question_image(question: exercise.questions.first, alt: "Une pile")
+    create_exercise_session(exercise:)
+    sign_in_as @member
+
+    get edit_teams_exercise_path(exercise.public_id), headers: { "Turbo-Frame" => "modal" }
+
+    assert_select "#exercise-questions figure img[src='#{question_image_path(image.public_id)}'][alt='Une pile']"
+    assert_select "#exercise-questions figcaption", text: tl("question_fields.image_locked")
+    assert_select "#exercise-questions [data-action*='assessment--question-image']", 0
+  end
 end

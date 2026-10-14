@@ -27,6 +27,7 @@ module UseCases
         def has_sessions?(exercise_id:) = @sessions && exercise_id == @exercise.id
 
         def update(exercise:, replace_questions:)
+          raise ImageUnavailable if @refuse == :image
           raise FakeTransaction::Refused if @refuse
 
           @updates << [ exercise, replace_questions ]
@@ -122,6 +123,10 @@ module UseCases
 
       test "une écriture refusée par la base est un conflit" do
         assert_equal [ :conflict, { base: [ :write_failed ] } ], update(refuse: true).then { [ it.code, it.errors ] }
+      end
+
+      test "ADR-0089 : une image citée qu'une question ne peut plus prendre refuse l'écriture" do
+        assert_equal [ :invalid, { questions: [ :image_unavailable ] } ], update(refuse: :image).then { [ it.code, it.errors ] }
       end
     end
   end

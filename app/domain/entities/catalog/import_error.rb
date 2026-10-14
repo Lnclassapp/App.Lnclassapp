@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::ImportError
 # Rôle : une erreur d'import localisée par son chemin JSON, avec un motif d'une liste fermée
-# ADR  : 0039, 0063, 0066, 0068
+# ADR  : 0039, 0063, 0066, 0068, 0089
 module Entities
   module Catalog
     # path : notation JSON (« schools[412].type », « $ » pour le fichier) ; params : valeurs pour le message ;
@@ -22,7 +22,7 @@ module Entities
                                too_large].freeze
     ImportError::ELEMENT = %w[schema blank too_long unknown_level unknown_series unknown_material unknown_drena
                               series_not_allowed invalid_value question_structure write_failed national_code_taken taken no_latin_character
-                              duplicate_in_files].freeze
+                              duplicate_in_files image_slot_malformed].freeze
     ImportError::CODES = (ImportError::BLOCKING + ImportError::ELEMENT).freeze
   end
 end

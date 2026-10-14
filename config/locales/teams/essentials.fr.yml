@@ -13,14 +13,16 @@ fr:
             name:
               taken: "est déjà pris par une autre fiche essentielle de ce cours"
             content:
-              attachment: "n'accepte que du texte : les pièces jointes et les images ne sont pas acceptées"
+              # ADR-0089 : une pièce jointe dont la signature ne se vérifie plus ; rien n'est écrit.
+              invalid: "contient une image qui n'a pas pu être relue : rechargez la fiche, puis réessayez"
+              # ADR-0089 : une image citée appartient à une autre fiche ou a été effacée ; rien n'est écrit.
+              image_unavailable: "contient une image qui n'est plus disponible (copiée d'une autre fiche, ou effacée) : retirez-la ou renvoyez-la, puis enregistrez de nouveau"
   teams:
     essentials:
       form:
         name_placeholder: "Ex. : Brassage génétique par la méiose"
         name_hint: "150 caractères au plus, unique dans le cours. La casse saisie est gardée."
         subtitle_placeholder: "Ex. : Les deux divisions et leurs conséquences"
-        content_hint: "Titres, gras, italique, listes, citations et formules entre $…$. Pas de pièce jointe ni d'image."
       new:
         title: "Nouvelle fiche essentielle"
         course: "Cours : %{name}"
