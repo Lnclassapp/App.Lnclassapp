@@ -34,6 +34,16 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_raises(ArgumentError) { ui_icon("home", variant: :duotone) }
   end
 
+  # UDR-0084 §3.1 : le casque et la porte ouverte n'existent pas dans Heroicons ; ui_icon les prend dans vendor/lnclass-icons.
+  test "ui_icon falls back on the Lnclass icons when Heroicons has none" do
+    show ui_icon("headset") + ui_icon("door-open", size: :sm, label: "Entrer")
+
+    assert_select "svg.shrink-0.size-5[aria-hidden=true][focusable=false][viewBox='0 0 24 24'][stroke=currentColor] path", minimum: 1
+    assert_select "svg.size-4[role=img][aria-label=Entrer]"
+    assert_select "svg[data-slot]", 2
+    assert_raises(ArgumentError) { ui_icon("headset", variant: :mini) }
+  end
+
   test "ui_icon_sprite draws each icon of its block once, in a <symbol> after the block, taken back by <use>" do
     show(ui_icon_sprite { safe_join([ ui_icon("home"), ui_icon("home", size: :lg), ui_icon("home", variant: :mini, label: "Accueil") ]) })
 
@@ -657,6 +667,26 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "img[alt=Awa][src='/a.png'].size-8"
   end
 
+  # UDR-0084 §3.4 : la couleur suit le compte (public_id), pas le nom ; seuls les tons lisibles (AA) sont tirés.
+  test "ui_avatar takes its tone from a seed: same seed, same tone, whatever the name" do
+    tones = %w[01HZX4 01HZX5 01HZX6 01HZX7 01HZX8 01HZX9 01HZXA 01HZXB].map { avatar_tone(ui_avatar("Awa Koné", tone_seed: it)) }
+
+    assert_equal avatar_tone(ui_avatar("Awa Koné", tone_seed: "01HZX4")), avatar_tone(ui_avatar("Kouassi Yao", tone_seed: "01HZX4"))
+    assert_operator tones.uniq.size, :>, 1
+    assert_not_includes tones, nil
+    assert_equal ComponentsHelper::AVATAR_TONES[:school], avatar_tone(ui_avatar("Awa", tone: :school, tone_seed: "01HZX4"))
+  end
+
+  # UDR-0084 §3.4 : la pastille « + » invite à ajouter sa photo ; décorative, seulement sans photo.
+  test "ui_avatar adds the « + » badge without a photo only" do
+    show ui_avatar("Awa Koné", size: :sm, add_photo: true)
+
+    assert_select "span.relative.inline-flex > span.ui-avatar[role=img][aria-label='Awa Koné']", text: "AK"
+    assert_select "span.relative > span[aria-hidden=true].rounded-full.bg-brand-strong.text-white.size-4", text: "+"
+    assert_not_includes ui_avatar("Awa Koné", src: "/a.png", add_photo: true), "+"
+    assert_not_includes ui_avatar("Awa Koné"), "+"
+  end
+
   # ADR-0060, UDR-0047: a photo is round, cropped to fill, loaded lazily; the xl size serves the photo modal.
   test "ui_avatar shows a photo round and cropped, lazily, in every size up to xl" do
     show ui_avatar("Awa Koné", src: "/accounts/abc/photo?v=1", size: :xl)
@@ -942,6 +972,9 @@ class ComponentsHelperTest < ActionView::TestCase
     node = Nokogiri::HTML5.fragment(node.to_s) unless node.respond_to?(:css)
     node.css("svg path").map { it["d"] }
   end
+
+  # Classes de couleur d'un avatar d'initiales : le ton tiré dans AVATAR_TONES.
+  def avatar_tone(html) = ComponentsHelper::AVATAR_TONES.values.find { html.include?(it) }
 
   def show(html)
     self.rendered = self.class.content_class.new(html.to_s)

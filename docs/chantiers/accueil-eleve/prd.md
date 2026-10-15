@@ -190,5 +190,5 @@ Alors le bloc #student_home_announcements est remplacé sans recharger la page
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Requêtes SQL de `GET /students` (élève avec classe) | à mesurer au Lot 0 | ≤ avant (le retrait de `recent_sessions` compense la query du jour) | |
+| Requêtes SQL de `GET /students` (élève avec classe) | 20 avec un exercice donné · 16 sans travail donné *(Lot 0 : 2e requête, cache de requêtes vidé, `sql.active_record` hors SCHEMA)* | ≤ avant (le retrait de `recent_sessions` compense la query du jour) | |
 | Élèves actifs sans enseignant qui font ≥ 1 exercice par semaine | 0 (rien à faire) | à suivre 4 semaines après la sortie | |
