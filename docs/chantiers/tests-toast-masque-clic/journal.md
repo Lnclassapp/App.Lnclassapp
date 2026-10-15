@@ -21,6 +21,6 @@
 | | |
 |---|---|
 | **Livré le** | 2026-10-15 |
-| **PR** | |
+| **PR** | [#249](https://github.com/Lnclassapp/App.Lnclassapp/pull/249) |
 | **ADR produits** | — |
 | **UDR produits** | — |
