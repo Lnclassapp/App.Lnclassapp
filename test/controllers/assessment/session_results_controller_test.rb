@@ -48,15 +48,17 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
   def progress(key, **) = I18n.t("#{scope}.progress.#{key}", **)
 
-  test "l'élève voit sa note sur 20, sa maîtrise, son badge, « Félicitations ! » et les confettis, sans score redit" do
+  # UDR-0087 §3.6 : « Félicitations ! », la note verte et les confettis à partir de 14/20 ; 10/20 lit « Courage ! ».
+  test "l'élève voit sa note sur 20, sa maîtrise, son badge, « Courage ! » sous 14/20, sans score redit" do
     sign_in_as @student
 
     show
 
     assert_response :success
     assert_select "title", text: /Méiose/
-    assert_select "h1", text: I18n.t("#{scope}.show.headline.success")
-    assert_select "[data-controller='assessment--confetti']", 1
+    assert_select "h1", text: I18n.t("#{scope}.show.headline.error")
+    assert_select "[data-controller='assessment--confetti']", 0
+    assert_select "#session_grade.text-success", 0
     assert_select "#session_result", text: /10\/20/
     # UDR-0023, amendement du 2026-10-02 : la note sur 20 seule dit le résultat de l'élève — ni score, ni questions justes (R6).
     assert_select "#session_result dl dt", 2
@@ -73,6 +75,18 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # CA-11 : 16/20, « Félicitations ! », la note verte et les confettis.
+  test "à 16/20, « Félicitations ! », la note verte et les confettis" do
+    @session.update!(score_percent: 80)
+    sign_in_as @student
+
+    show
+
+    assert_select "h1", text: I18n.t("#{scope}.show.headline.success")
+    assert_select "#session_grade.text-success", text: "16/20"
+    assert_select "[data-controller='assessment--confetti']", 1
+  end
+
   test "la revue de l'élève : ses choix, le verdict et l'explication, jamais une proposition juste qu'il n'a pas choisie" do
     sign_in_as @student
 
@@ -82,14 +96,14 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
       assert_select "*", text: /#{I18n.t("#{scope}.question_review.verdict.error")}/
       assert_select "*", text: /Combien de cellules donne la méiose \?/
       assert_select "*", text: /Quatre cellules filles\./
-      assert_select "li", text: wrong(@first).content, count: 1
-      # Le choix dans un span : un `li.flex` ferait du texte et de chaque formule KaTeX autant de colonnes (2026-10-06).
-      assert_select "li.flex > span.min-w-0", text: wrong(@first).content, count: 1
+      # UDR-0087 §3.6 : « Ton choix : … », ses seules propositions cochées.
+      assert_select "p", text: /#{I18n.t("#{scope}.question_review.selected")} :/
+      assert_select "strong > span", text: wrong(@first).content, count: 1
     end
     assert_select "#question_review_#{@second.id}", text: /#{I18n.t("#{scope}.question_review.verdict.success")}/
     assert_no_match right(@first).content, response.body
     assert_no_match(/#{I18n.t("#{scope}.question_review.correct")}|data-correct/, response.body)
-    assert_select "#question_review_#{@first.id} li", 1
+    assert_select "#question_review_#{@first.id} strong", 1
     # La correction se lit sans phrase d'aide (R4), 3 cartes puis « Voir plus » (R3) : 2 cartes ici, aucun bouton.
     assert_select "#session_review p", text: I18n.t("#{scope}.show.review_hint_student"), count: 0
     assert_select "#session_review[data-controller=reveal][data-reveal-step-value='3']"
@@ -199,7 +213,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     expected = "Tu progresses : 6/20 à ta première session, 18/20 aujourd'hui."
     assert_equal expected, progress(:progress, first: 6, current: 18)
-    assert_select "#session_result dl + p#session_progress + div form#restart-exercise-form"
+    assert_select "#session_result + p#session_progress + div form#restart-exercise-form"
     assert_select "p#session_progress.text-sm.text-ink", text: expected
     assert_select "#session_progress svg.text-success[aria-hidden=true]", 1
   end
