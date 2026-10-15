@@ -54,6 +54,7 @@ La page d'accueil publique est dessinée et ses décisions sont prises : l'accue
 | Où se trouve « Besoin d'aide ? » ? | Sur ordinateur et tablette, dans l'en-tête, en gras bleu foncé avec une icône de tête à casque de support ; sur téléphone, dans le menu de l'avatar, entre « Mon profil » et « Se déconnecter » (porteur, 2026-10-15). | L'en-tête du téléphone ne garde que le logo, le thème et l'avatar. L'icône du casque n'existe pas dans Heroicons : elle est à dessiner pour le code. |
 | Comment s'affiche « Mes matières » ? | Quatre matières par ligne au téléphone, six sur tablette et ordinateur ; Physique-Chimie s'écrit « PC » et Histoire-Géo « HG » sous l'icône (porteur, 2026-10-15). | Avec six matières, le téléphone montre une ligne de quatre puis une de deux. Les abréviations ne valent que pour la grille : le nom complet reste dans les listes (À faire, activités récentes) et pour les lecteurs d'écran. |
 | Que dit le bouton de « Ma classe » ? | « Entrer en classe », avec l'icône d'une porte ouverte devant et la flèche après (porteur, 2026-10-15). | Demandé pour le téléphone ; le même libellé est repris sur tablette et ordinateur pour garder une seule clé de traduction. |
+| Garde-t-on la barre d'onglets en bas du téléphone (Accueil, Cours, Ma classe) ? | Non, on la retire (porteur, 2026-10-15). | Au téléphone et sur tablette, ces trois liens passent en tête du menu de l'avatar, la page en cours en surbrillance ; sur ordinateur, le menu de gauche reste. À reporter dans l'UDR (amende UDR-0080). |
 
 ## Cas limites identifiés
 
@@ -66,7 +67,6 @@ La page d'accueil publique est dessinée et ses décisions sont prises : l'accue
 
 ## Questions encore ouvertes
 
-- **Barre d'onglets en bas au téléphone** : l'application en a une (Accueil, Cours, Ma classe) ; le grill du 14 oct. l'a refusée. On la garde ou on la retire ?
 - **Rentrée, élève sans classe de la nouvelle année** : laissé de côté par le porteur (2026-10-15). On garde le comportement actuel (catalogue vide, invitation à rejoindre sa classe) tant qu'il n'est pas tranché.
 - **Où apparaît le travail « fait seul »** dans les vues de l'enseignant et de la direction : page de la classe, fiche de l'élève, chiffres de l'établissement ? À dessiner.
 - **Texte du message d'invitation de l'enseignant** (WhatsApp) et page d'arrivée de l'enseignant invité.
