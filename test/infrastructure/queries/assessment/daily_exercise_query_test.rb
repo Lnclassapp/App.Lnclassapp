@@ -54,6 +54,39 @@ module Queries
                      row.to_h.values_at(:exercise_public_id, :exercise_title, :material_name, :tomorrow_material_name)
       end
 
+      test "a remediation finished today on the exercise of the day is not « done today »" do
+        complete(@fractions, started_at: at(TUESDAY, 9), gap: create_gap(student: @student, essential: @maths_essential))
+
+        row = travel_to(at(TUESDAY, 18)) { daily }
+
+        assert_equal :proposed, row.state
+      end
+
+      # Revue sécurité de la PR : la portée n'est garantie que par la query, chaque refus a son test.
+      test "never proposes an exercise of another level or series, nor after leaving or archiving the classroom" do
+        Orm::Exercise.update_all(status: "draft")
+        level = create_level(name: "2nde")
+        series = create_series(name: "C")
+        link_level_series(level:, series:)
+        classroom = create_classroom(level:, series:)
+        student = create_student(classroom:)
+        other_level = create_course(material: @maths, level: create_level)
+        other_series = create_course(material: @maths, level:, series: create_series(name: "A"))
+        [ other_level, other_series ].each { create_exercise(essential: create_essential(course: it)) }
+
+        assert_equal :none, travel_to(at(TUESDAY, 8)) { daily(student:) }.state
+
+        own = create_exercise(essential: create_essential(course: create_course(material: @maths, level:, series:)))
+        assert_equal own.public_id, travel_to(at(TUESDAY, 8)) { daily(student:) }.exercise_public_id
+
+        Orm::ClassroomStudent.where(student:).update_all(left_at: Time.current)
+        assert_equal :none, travel_to(at(TUESDAY, 8)) { daily(student:) }.state
+
+        Orm::ClassroomStudent.where(student:).update_all(left_at: nil)
+        Orm::Classroom.where(id: classroom.id).update_all(status: "archived", archived_at: Time.current)
+        assert_equal :none, travel_to(at(TUESDAY, 8)) { daily(student:) }.state
+      end
+
       test "the subject of tomorrow skips a subject left without candidates once today's exercise is done" do
         complete(@cell, started_at: at(TUESDAY - 3, 9))
         complete(@decimals, started_at: at(TUESDAY - 2, 9))
