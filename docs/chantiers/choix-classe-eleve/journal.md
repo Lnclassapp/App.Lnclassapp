@@ -35,6 +35,7 @@
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | Index UDR (`script/docs/build_index`) et index des chantiers non régénérés | Faits à la clôture de la PR, avec ceux des chantiers voisins de la même session | Clôture de la PR |
+| « Changer » sans JavaScript dans l'inscription : le lien ne renvoie que la DRENA, nom, prénoms et contact déjà saisis sont perdus (seulement après un 422/403 re-rendu, où l'établissement est replié) | Comportement gardé ; l'href est testé | `connexion-inscription-eleve` |
 | Revue par un rôle distinct (parcours nominal + erreur) et sous-agent `pr-test-analyzer` | Pas d'outil de sous-agent dans la session d'exécution | Avant la fusion de la PR |
 
 ## Clôture

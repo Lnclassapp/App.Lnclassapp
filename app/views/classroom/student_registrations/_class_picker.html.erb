@@ -6,9 +6,10 @@
     leur parent n'est pas choisi. Le formulaire hôte porte le contrôleur, ses trois adresses et la cible submit. framed : chaque étape
     dans sa carte (« Choisis ta classe ») ; sans, les étapes se suivent dans la carte de l'inscription. %>
 <% registration = form.object %>
-<%# Des niveaux listés : l'établissement envoyé appartient à sa DRENA, la ligne repliée peut le nommer. %>
-<% school = levels && schools.find { it.public_id == registration.school_public_id } %>
-<% drena = school && drenas.find { it.public_id == registration.drena_public_id } %>
+<%# Des niveaux listés : l'établissement envoyé appartient à sa DRENA (ClassPicker), la ligne repliée peut les nommer. Sans
+    l'un des deux (DRENA absente ou discordante), pas de ligne repliée : les deux listes restent ouvertes. %>
+<% drena = drenas.find { it.public_id == registration.drena_public_id } %>
+<% school = (schools&.find { it.public_id == registration.school_public_id } if drena && levels) %>
 <%# La carte entoure le fieldset : une légende posée sur une bordure de fieldset chevaucherait le haut de la carte. %>
 <% card_class = class_names(ComponentsHelper::CARD_BASE, ComponentsHelper::CARD_PADDINGS[:md]) if framed %>
 <% step_class = "flex min-w-0 flex-col" %>
