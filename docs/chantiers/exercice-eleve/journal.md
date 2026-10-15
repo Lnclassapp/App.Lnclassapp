@@ -10,6 +10,8 @@
 | 2026-10-15 | Nombre : marge facultative par question, virgule ou point | Choix du porteur | ADR-0091 §4.3 |
 | 2026-10-15 | Ordre et relier : tout juste ou faux, pas de points partiels | Choix du porteur ; la note, les badges et les lacunes ne changent pas | ADR-0091 §4.3 |
 | 2026-10-15 | La page poste des indices d'affichage, jamais des ids, pour l'ordre et relier | Les ids sont créés dans l'ordre des positions : ils révéleraient la solution | ADR-0091 §4.4 |
+| 2026-10-15 | Ordre ou relier faux : « Ton choix » ne dit pas quelle étape ou paire est fausse | Sinon l'élève retrouve la solution en recommençant ; confirmé par le porteur | UDR-0087 §3.5 |
+| 2026-10-15 | Nombre illisible : erreur de saisie, la question n'est pas comptée | Confirmé par le porteur | ADR-0091 §4.3 |
 
 ## Ce qui a dérapé
 
