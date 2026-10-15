@@ -123,8 +123,31 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
     get edit_profile_pin_path
 
     assert_select "dialog", text: /Saisissez votre code secret actuel/
-    assert_select "dialog#profile-pin-modal.sm\\:max-w-sm:not(.dialog-phone-sheet)", 1
-    assert_select "dialog#profile-pin-modal .sheet-handle", 0
+    sign_out
+
+    windows = { edit_profile_pin_path => "profile-pin-modal", edit_profile_contact_path => "contact-change-modal",
+                edit_profile_photo_path => "profile-photo-modal", edit_profile_name_path => "profile-name-modal" }
+    [ create_teacher, create_school_admin, create_team_member ].each do |user|
+      sign_in_as user
+      windows.each do |path, id|
+        get path
+
+        assert_select "dialog##{id}.sm\\:max-w-sm:not(.dialog-phone-sheet)", 1, "#{user.role} #{path}"
+        assert_select "dialog##{id} .sheet-handle", 0
+      end
+      sign_out
+    end
+  end
+
+  # UDR-0089 §3.4: a wrong PIN answers 422 in the same phone sheet.
+  test "UDR-0089: a wrong current PIN keeps the student's window a phone sheet" do
+    sign_in_as create_student(classroom: create_classroom)
+
+    patch profile_pin_path, params: { pin_change: { current_pin: "1357", pin: "1111", pin_confirmation: "1111" } }
+
+    assert_response :unprocessable_entity
+    assert_select "dialog#profile-pin-modal.dialog-phone-sheet.sm\\:max-w-120 > span.sheet-handle", 1
+    assert_select "dialog#profile-pin-modal [role=alert]", text: /Code secret incorrect/
   end
 
   # UDR-0041, amendment of 2026-10-02: the other roles keep the current profile until their own clean-up.
@@ -149,6 +172,12 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
       assert_select "#profile_security > h2#profile_security_title", "Mon code secret"
       assert_select "#profile_security p", text: /Votre code secret protège votre compte/
       assert_select "#profile_security details", 0
+      # UDR-0089 §4: their buttons keep the UDR-0041 styles, and nothing of the student's page appears.
+      [ edit_profile_photo_path, edit_profile_name_path, edit_profile_contact_path ].each do |path|
+        assert_select "#profile_information a.ui-button-secondary.ui-button-sm[href='#{path}'][data-turbo-frame=modal]", 1
+      end
+      assert_select "#profile_security a.ui-button-primary[href='#{edit_profile_pin_path}'][data-turbo-frame=modal]", 1
+      assert_select "#profile_identity, #main li, form#profile_sign_out", 0
       sign_out
     end
   end

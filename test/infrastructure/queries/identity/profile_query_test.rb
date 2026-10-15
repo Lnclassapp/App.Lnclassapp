@@ -41,6 +41,24 @@ module Queries
         assert_nil @query.call(user_id: create_student.id).classroom_name
       end
 
+      test "a student who left their primary classroom has neither classroom nor school, even with an active secondary one" do
+        student = create_student(classroom: create_classroom(school: create_school(name: "École A"), name: "3e A"))
+        Orm::ClassroomStudent.where(student_id: student.id).update_all(left_at: Time.current)
+        Orm::ClassroomStudent.create!(classroom: create_classroom(school: create_school(name: "École B"), name: "3e B"),
+                                      student:, primary: false, joined_at: Time.current, joined_via: "standard")
+
+        assert_equal [ nil, nil ], @query.call(user_id: student.id).then { [ it.classroom_name, it.school_name ] }
+      end
+
+      test "a student who changed school shows the school of their new primary classroom" do
+        student = create_student(classroom: create_classroom(school: create_school(name: "École A"), name: "3e A"))
+        Orm::ClassroomStudent.where(student_id: student.id).update_all(left_at: 1.day.ago)
+        Orm::ClassroomStudent.create!(classroom: create_classroom(school: create_school(name: "École B"), name: "3e B"),
+                                      student:, primary: true, joined_at: Time.current, joined_via: "standard")
+
+        assert_equal [ "3e B", "École B" ], @query.call(user_id: student.id).then { [ it.classroom_name, it.school_name ] }
+      end
+
       test "a teacher shows their primary school and subject" do
         teacher = create_teacher(school: create_school(name: "Lycée moderne de Cocody"), material: create_material(name: "SVT"))
 

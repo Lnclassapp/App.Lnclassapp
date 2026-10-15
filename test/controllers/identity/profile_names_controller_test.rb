@@ -54,6 +54,18 @@ class Identity::ProfileNamesControllerTest < ActionDispatch::IntegrationTest
                    "current" => { "first_name" => "Aya Marie", "last_name" => "Koné" } }, event.metadata)
   end
 
+  # UDR-0089 §3.1, §3.2: the student's card sent back still says « Élève en … » and shows the school row.
+  test "a student with a classroom gets back the blue card with their classroom and the rows with their school" do
+    student = create_student(first_name: "Aya", last_name: "Koné",
+                             classroom: create_classroom(school: create_school(name: "Lycée Classique d'Abidjan"), name: "3e B"))
+    sign_in_as student
+
+    rename(as: :turbo_stream)
+
+    assert_select "turbo-stream[target=profile_identity] template", text: /Élève en 3e B/
+    assert_select "turbo-stream[target=profile_information] template li", text: /Établissement\s+Lycée Classique d'Abidjan/
+  end
+
   # UDR-0089 §4: the other roles keep their card (UDR-0041), and have no blue card to replace.
   test "a teacher's valid name replaces their own card only" do
     sign_in_as create_teacher(first_name: "Yao", last_name: "Kouassi")

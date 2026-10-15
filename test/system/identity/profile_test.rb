@@ -127,7 +127,7 @@ end
       within("#profile_information") { assert_selector "li", text: "Lycée Classique d'Abidjan" }
       heights = all("#main a[data-turbo-frame=modal]").map { page.evaluate_script("arguments[0].getBoundingClientRect().height", it) }
       assert_equal 4, heights.size
-      assert heights.all? { it >= 44 }, "hauteurs : #{heights.inspect}"
+      assert heights.all? { it >= 48 }, "hauteurs : #{heights.inspect}"
 
       # CA-3: the label of the row, not its « Changer », opens the window.
       within("#profile_information") { find("a[href='#{edit_profile_contact_path}'] span", text: "Numéro", exact_text: true).click }
