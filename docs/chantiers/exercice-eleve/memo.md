@@ -43,7 +43,8 @@ Toile : https://claude.ai/artifact/NTPyZWmFK4oK9z9jMgvWL5 (téléphone d'abord).
 | En séance, retire-t-on l'en-tête de l'application (mode concentré) ? | Oui (porteur, 2026-10-15). | Pendant les questions et les retours : ni en-tête, ni menu de gauche, ni menu de l'avatar ; une croix « Quitter la session », la barre de progression et « 3/5 » en haut ; le bouton d'action reste collé en bas. |
 | Quitter la séance demande-t-il confirmation ? | Oui (porteur, 2026-10-15). | Une feuille en bas de l'écran : « Quitter la séance ? », « Ta progression est gardée. Tu pourras reprendre à la question N. », « Continuer l'exercice » (principal) et « Quitter ». La session reste ouverte, comme aujourd'hui. |
 | À 20/20, « Recommencer » disparaît-il du résultat ? | Oui, comme aujourd'hui (porteur, 2026-10-15). | Seul « Revoir l'exercice » reste. |
+| Que change la tablette ? | Passons à la tablette (porteur, 2026-10-15). | Page de l'exercice et résultat centrés (720 px au plus), « Ta progression » sur une ligne de quatre cases ; en séance, la question et les réponses sur 640 px au centre, la barre de progression sur toute la largeur ; la confirmation pour quitter devient une fenêtre au centre. |
 
 ## Questions ouvertes
 
-Aucune pour le téléphone. Suite : tablette et ordinateur.
+Aucune. Suite : l'ordinateur.
