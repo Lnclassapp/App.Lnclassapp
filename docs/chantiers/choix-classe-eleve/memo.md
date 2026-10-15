@@ -44,3 +44,8 @@ Toile : https://claude.ai/artifact/QhGVuZiGSxEdCBqa4CKwaM (téléphone d'abord).
 
 - Les classes passent sur une seule ligne (4 cases) dès 700 px ; le formulaire garde 640 px de large au plus.
 - Horizontale (1180 px) : le menu de gauche revient.
+
+## Ordinateur
+
+- Même mise en page que la tablette horizontale (1280 px) : menu de gauche, formulaire de 640 px de large au plus, classes sur une ligne de 4 cases.
+- « Mon historique » dans le menu du compte.
