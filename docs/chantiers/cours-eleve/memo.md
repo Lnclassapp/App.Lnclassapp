@@ -40,7 +40,8 @@ Toile : https://claude.ai/artifact/78wguP9ZtQc1g5LrtcxTy4 (téléphone d'abord).
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
-| On repart de la page actuelle ou d'une page nouvelle ? | On commence par le téléphone (porteur, 2026-10-15), en repartant du cadre et des blocs actuels, comme pour l'accueil élève. | Même en-tête que l'accueil élève ; la liste « Matière » devient une rangée de pastilles qui défile, avec l'icône de chaque matière ; la carte garde « Ouvrir le cours → ». |
+| On repart de la page actuelle ou d'une page nouvelle ? | On commence par le téléphone (porteur, 2026-10-15), en repartant du cadre et des blocs actuels, comme pour l'accueil élève. | Même en-tête que l'accueil élève ; la carte garde « Ouvrir le cours → ». |
+| Garde-t-on un filtre « Matière » (liste ou pastilles) ? | Non : on le supprime, la recherche suffit (porteur, 2026-10-15). | La page n'a plus que la recherche ; « Tout voir » n'apparaît que pendant une recherche ; le message sans résultat devient « Essaye un autre mot. ». Le filtre reste pour l'enseignant, la direction et l'équipe. |
 
 ## Questions ouvertes
 
