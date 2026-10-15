@@ -68,16 +68,41 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
                             completed_at: Time.zone.local(2026, 3, 14, 9))
     create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 60,
                             completed_at: Time.zone.local(2026, 3, 13, 9))
+    # 68 % shows « 14/20 » (rounded): the colour follows the grade read, not the raw percentage; 67 % shows 13/20.
+    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 68,
+                            completed_at: Time.zone.local(2026, 3, 11, 9))
+    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 67,
+                            completed_at: Time.zone.local(2026, 3, 10, 9))
     sign_in_as @student
 
     get student_archive_path
 
-    assert_select "#student_archive_results [data-grade].bg-success-soft", text: /14\/20/
+    assert_select "#student_archive_results [data-grade].bg-success-soft", 3
+    assert_select "#student_archive_results [data-grade].bg-success-soft", text: /14\/20/, count: 2
     assert_select "#student_archive_results [data-grade].bg-success-soft", text: /15\/20/
     assert_select "#student_archive_results [data-grade].bg-mist", text: /12\/20/
+    assert_select "#student_archive_results [data-grade].bg-mist", text: /13\/20/
     assert_select "#student_archive_results [data-grade] .sr-only", text: "12 sur 20"
     assert_select "#student_archive_results [class*=error], #student_archive_results [class*=danger]", 0
     assert_select "#student_archive_results a", 0
+  end
+
+  # CA-2: the blue card counts every finished exercise, not only the rows the list keeps.
+  test "the blue card shows the real total even when the list is capped" do
+    2.times { create_exercise_session(student: @student, exercise: @exercise, status: "completed") }
+    sign_in_as @student
+
+    query = Queries::Classroom::StudentArchiveQuery
+    capped = query.new(results_limit: 2)
+    query.define_singleton_method(:new) { |*, **| capped }
+    begin
+      get student_archive_path
+    ensure
+      query.singleton_class.remove_method(:new)
+    end
+
+    assert_select "#student_archive_summary", text: /3\s+exercices terminés/
+    assert_select "#student_archive_results li", 2
   end
 
   test "a student who never joined a classroom keeps the first exit screen, and an empty archive says what to expect" do

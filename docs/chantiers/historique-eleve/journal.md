@@ -11,6 +11,7 @@
 | 2026-10-15 | Titre de mois masqué en CSS (utilitaire `ui-reveal-group`, `:has` ; les variantes arbitraires sont refusées par `design_tokens_test`) tant qu'aucune de ses lignes n'est révélée (Lot A) | « Voir plus » reste le contrôleur `reveal` partagé, inchangé ; aucun JavaScript propre à la page | Non |
 | 2026-10-15 | Pastille de la matière rendue en `span` (Lot A), pas par `ui_subject_bubble` | `ui_subject_bubble` est un lien, et aucune ligne de l'historique n'en est un (UDR-0013) ; UDR-0090 §3.2 corrigée | Non |
 | 2026-10-15 | `ResultRow` gagne `material_slug` (Lot 0) | Les illustrations des matières sont choisies par slug (`subject_illustration`, UDR-0069 §3.3), pas par catégorie : la catégorie ne donnerait que trois icônes | Non |
+| 2026-10-15 | La couleur de la note suit la note lue (`grade_on_20 >= 14`), pas le pourcentage brut | 68 et 69 % s'affichent « 14/20 » par arrondi et restaient à l'encre, contre CA-4 (revue `pr-test-analyzer`). L'accueil (`_recent_activity`) garde la règle sur 70 % : à aligner | Non |
 
 ## Ce qui a dérapé
 
