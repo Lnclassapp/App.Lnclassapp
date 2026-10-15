@@ -13,6 +13,9 @@
 | 2026-10-15 | Lot 0 : texte en `text-white` sur le dégradé `from-brand-strong from-60% to-brand`, logo sur une tuile `bg-white` | Même recette que la carte « Ma classe » (UDR-0084 §3.5) : AA dans les deux thèmes, car `white` et `brand-strong` s'inversent en sombre | Non |
 | 2026-10-15 | Lot 0 : « Besoin d'aide ? » toujours rendu, y compris dans l'app Android | La barre native ne porte l'aide qu'après la connexion (pont `bridge--account`, rendu par le shell seulement) ; la règle de l'UDR-0080 ne s'applique donc pas à ces deux pages | Non |
 | 2026-10-15 | Lot 0 : les clés `logo_home` des deux pages restent jusqu'aux lots A et B | Les vues actuelles les lisent encore ; chaque commit garde l'app debout | Non |
+| 2026-10-15 | Lot A : le logo est dans la carte bleue (PRD CA-1, UDR §3.1), pas dans une barre « logo + Lnclass » comme sur la maquette ; la barre du haut ne porte que « Besoin d'aide ? » | Le PRD et l'UDR font autorité sur la maquette | Non |
+| 2026-10-15 | Lot A : `sign_in_test` attendait « pas de 4 chiffres » à 390 px ; la page garde « code secret à 4 chiffres » sous le code (maquette, UDR §3.3 « inchangés ») : l'assertion devient `assert_text` | Échec déjà présent sur la base, fixé par le texte de cette page | Non |
+| 2026-10-15 | Lot A : la page n'a pas de `main#main` | `sign_in_test` repère l'arrivée dans le shell par `main#main` ; l'avoir sur la connexion ferait passer ce repère trop tôt | Non |
 
 ## Ce qui a dérapé
 

@@ -39,13 +39,41 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?].min-h-tap", new_identity_pin_reset_path, text: "Code secret oublié ?"
   end
 
-  test "UDR-0060 §3.2: the two columns start at lg; below, the welcome column is hidden" do
+  # UDR-0088 §3.1 to §3.3 (CA-1, CA-2, CA-8): the blue card above the form under lg, the blue panel on the left from lg,
+  # « Besoin d'aide ? » at the top right, and the link to the student sign-up under « Code secret oublié ? ».
+  test "CA-1, CA-2: the blue card under lg, the blue panel from lg, the card « Connexion » centred, help at the top right" do
     get new_session_path
 
-    assert_select "main.grid[class~='lg:grid-cols-2']"
-    assert_select "main > section.hidden.bg-brand-soft[class~='lg:flex']"
-    assert_select "main > section > div.text-center[class~='lg:hidden']"
+    assert_select "body > div.grid[class~='lg:grid-cols-2']" do
+      assert_select "> aside#auth-welcome-panel.hidden[class~='lg:flex'][class~='from-brand-strong']", text: "Heureux de vous revoir"
+      assert_select "> div > #auth-help.justify-end [aria-controls=help-sheet]", text: "Besoin d'aide ?"
+      assert_select "> div > main[class~='lg:justify-center']" do
+        assert_select "> div.max-w-110 > section#auth-welcome-card[class~='lg:hidden']", text: "Heureux de vous revoir"
+        assert_select "> div.max-w-110 > section#auth-welcome-card + .rounded-card h1", text: "Connexion"
+      end
+    end
+    assert_select "dialog#help-sheet", 1
     assert_select "main [class*='md:']", 0
+  end
+
+  test "CA-1: under « Code secret oublié ? », a rule, then « Pas encore de compte ? » and the link to the student sign-up" do
+    get new_session_path
+
+    assert_select "#session-form + #session-sign-up.border-t", text: /Pas encore de compte \?/ do
+      assert_select "a[href=?].min-h-tap", new_student_registration_path, text: "Créer mon compte élève"
+    end
+    assert_operator response.body.index(new_identity_pin_reset_path), :<, response.body.index(new_student_registration_path)
+  end
+
+  # CA-3: the sign-in serves every role, so its own words say « vous », never « tu ».
+  test "CA-3: the words of the sign-in address the reader as « vous »" do
+    get new_session_path
+
+    words = css_select("#auth-welcome-panel, main").map(&:text).join(" ") +
+            css_select("main [placeholder], main [aria-label]").map { "#{it['placeholder']} #{it['aria-label']}" }.join(" ")
+
+    assert_match(/Heureux de vous revoir/, words)
+    assert_no_match(/\b(tu|te|toi|ton|ta|tes)\b|\bt'|-toi\b/i, words.squish)
   end
 
   test "a signed-in person who opens the sign-in page is sent home, the kept number dropped" do
