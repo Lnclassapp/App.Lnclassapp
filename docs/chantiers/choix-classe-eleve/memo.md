@@ -37,7 +37,10 @@ Toile : https://claude.ai/artifact/QhGVuZiGSxEdCBqa4CKwaM (téléphone d'abord).
 |---|---|---|
 | Quelle page après l'historique ? | Le choix de classe (porteur, 2026-10-15). | Trois étapes numérotées ; l'établissement en une ligne avec « Changer » ; niveaux en pastilles, classes en grandes cases ; même en-tête et même menu (avec « Mon historique »). |
 
-## Questions ouvertes
+| Les niveaux en pastilles et les classes en cases conviennent-ils ? | Oui (porteur, 2026-10-15). | Les listes déroulantes « Niveau » et la liste radio des classes deviennent des pastilles et des cases ; DRENA et établissement restent des listes, derrière « Changer ». |
+| La cascade de l'inscription reste-t-elle identique ? | Oui (porteur, 2026-10-15). | Le `_class_picker` reste partagé : le chantier de l'inscription reprend ces maquettes. |
 
-1. Les niveaux en pastilles et les classes en cases conviennent-ils ?
-2. La même cascade sert à l'inscription (`_class_picker` partagé) : la garde-t-on identique ?
+## Tablette
+
+- Les classes passent sur une seule ligne (4 cases) dès 700 px ; le formulaire garde 640 px de large au plus.
+- Horizontale (1180 px) : le menu de gauche revient.
