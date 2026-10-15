@@ -29,6 +29,7 @@ La page d'accueil publique est dessinée et ses décisions sont prises : l'accue
 - Le paiement lui-même : la tuile ouvre le parcours existant.
 - La lecture hors ligne (chantier à part, promis par la pastille de la page d'accueil).
 - Une barre d'onglets en bas de l'écran (refusée le 2026-10-14).
+- Le parent : il ne voit rien de l'accueil de son enfant ; pas de changement de compte sur un téléphone partagé (2026-10-15).
 
 ## Ce que le grill a révélé
 
@@ -37,6 +38,7 @@ La page d'accueil publique est dessinée et ses décisions sont prises : l'accue
 | La grille mélange matières et actions (« Paiement », « Inviter »). On garde ce mélange ? | Oui : on garde « Paiement » et « Inviter » ; Lnclass se limite à 6 matières (porteur, 2026-10-14). | Grille de 8 tuiles : 6 matières + « Paiement » + « Inviter ». La 7e matière (EDHC ou Philosophie selon le cycle) doit trouver sa place ou disparaître de la grille. |
 | Faut-il une barre d'onglets en bas, comme Wave et Djamo ? | Non, pas de barre native en bas (porteur, 2026-10-14). | La navigation reste celle du shell actuel (UDR-0006) ; l'accueil doit se suffire sans onglets. |
 | Les maquettes ne montrent que le téléphone. Et la tablette, l'ordinateur ? | On adapte le design aux grands écrans (porteur, 2026-10-14). | Il faut dessiner tablette et ordinateur, pas seulement étirer le téléphone. |
+| Le téléphone passe d'un enfant à l'autre, ou au parent : qui voit l'accueil ? | Un seul compte par téléphone : l'autre enfant se déconnecte puis se reconnecte (porteur, 2026-10-15). | Pas de sélecteur de comptes ni de vue parent. L'accueil doit dire clairement à qui il appartient (prénom, classe) pour qu'un frère ou une sœur s'en aperçoive, et la déconnexion doit rester trouvable depuis l'accueil. |
 
 ## Cas limites identifiés
 
