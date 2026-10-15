@@ -45,13 +45,13 @@ L'historique a été redessiné sur la toile https://claude.ai/artifact/V8DwH6oM
 
 - **Mois** : un titre par mois (`h3`, « Octobre 2026 »), du plus récent au plus ancien.
 - **Ligne** :
-  - l'icône de la matière (`ui_subject_bubble` taille `sm`, par `material_category`) ;
+  - l'illustration de la matière dans sa pastille teintée (`subject_illustration`, par le slug de la matière, comme les bulles de l'accueil, UDR-0069 §3.3) ; une pastille et non `ui_subject_bubble`, qui est un lien ;
   - le titre de l'exercice ;
   - la matière et la date ;
   - la note /20 à droite, dans une pastille : `bg-success-soft text-success` si `score_percent ≥ 70`, sinon `bg-mist text-ink`. Jamais de rouge.
 - **Ancien seuil** : `PASS_THRESHOLD` (50 %) ne sert plus à la couleur de cette page.
 - **Pas de lien** : aucune ligne n'en est un (UDR-0013).
-- **« Voir plus »** : par pas de 10, comme aujourd'hui. Les titres de mois suivent les lignes révélées.
+- **« Voir plus »** : par pas de 10, comme aujourd'hui. Les titres de mois suivent les lignes révélées : une section de mois sans ligne visible est masquée en CSS (utilitaire `ui-reveal-group`, `:has`), sans changer le contrôleur `reveal`.
 
 ### 3.3 « Mes classes »
 
