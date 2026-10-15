@@ -168,6 +168,7 @@ Travail mis de côté par le porteur. Les vagues V2 à V6 y sont placées le 202
 | [`historique-eleve`](historique-eleve/memo.md) | **Livré** le 2026-10-15, fusionné dans `Develop` ([#240](https://github.com/Lnclassapp/App.Lnclassapp/pull/240)) : carte bleue avec le total réel des exercices, exercices groupés par mois, note verte dès 14/20 et jamais rouge, deux colonnes dès 1 024 px (UDR-0090) |
 | [`accueil-eleve`](accueil-eleve/memo.md) | **Livré** le 2026-10-15, fusionné dans `Develop` ([#241](https://github.com/Lnclassapp/App.Lnclassapp/pull/241)) : en-tête au logo et menu de l'avatar (plus de barre du bas élève sur le web), accueil en une colonne, exercice du jour et « Inviter mon enseignant », « Fait seul (7 j) » chez l'enseignant et la direction (ADR-0089, UDR-0084) |
 | [`tests-numero-connexion`](tests-numero-connexion/memo.md) | **Livré** le 2026-10-15, fusionné dans `Develop` ([#248](https://github.com/Lnclassapp/App.Lnclassapp/pull/248)) : cinq tests système alignés sur la connexion au numéro en chiffres seuls (UDR-0060 §3.2), rouges sur `Develop` depuis le 2026-10-11 |
+| [`tests-toast-masque-clic`](tests-toast-masque-clic/memo.md) | **Livré** le 2026-10-15 : un toast ne masque plus le clic suivant dans les tests système (`dismiss_toasts` partagé), deux tests instables stabilisés |
 
 ## Cycle de vie
 
