@@ -37,8 +37,8 @@
 
 | | |
 |---|---|
-| **Livré le** | 2026-10-15 (branche `feature/profil-eleve`, PR à ouvrir après `accueil-eleve`) |
-| **PR** | |
+| **Livré le** | 2026-10-15, fusionné dans `Develop` |
+| **PR** | [#243](https://github.com/Lnclassapp/App.Lnclassapp/pull/243) |
 | **ADR produits** | — |
 | **UDR produits** | UDR-0089 |
 | **CI locale** (`bin/ci-quiet`, 2026-10-15, sur `e5019bdc` + docs) | Rouge, sans échec dans le périmètre du chantier. Couverture 13 604 / 13 605 lignes : la ligne manquante est dans `daily_exercise_query.rb` (lot 0 d'`accueil-eleve`). Un test de durée (`image_header_test.rb:516`, 0,75 s pour 0,5 s) a échoué sous charge, vert relancé seul. Système : échecs connus de `Develop` (`sign_in_test.rb:114`, `team_invitation_test.rb:62`, `public_pages_test.rb:89/:100`, même famille : `staff_invitation_test.rb:50`, numéro non mis en forme à la connexion) ; six autres fichiers rouges sous charge, tous verts relancés seuls. Tous les tests du profil, des fenêtres et du menu du compte sont verts. |

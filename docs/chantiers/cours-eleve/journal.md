@@ -54,7 +54,7 @@
 
 | | |
 |---|---|
-| **Livré le** | 2026-10-15 (branche `feature/cours-eleve`, sans PR à la demande du coordinateur) |
-| **PR** | — |
+| **Livré le** | 2026-10-15, fusionné dans `Develop` |
+| **PR** | [#246](https://github.com/Lnclassapp/App.Lnclassapp/pull/246) |
 | **ADR produits** | ADR-0090 |
 | **UDR produits** | UDR-0085 |

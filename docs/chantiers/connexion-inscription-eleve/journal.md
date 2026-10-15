@@ -56,8 +56,8 @@
 
 | | |
 |---|---|
-| **Livré le** | 2026-10-15 |
-| **PR** | |
+| **Livré le** | 2026-10-15, fusionné dans `Develop` |
+| **PR** | [#245](https://github.com/Lnclassapp/App.Lnclassapp/pull/245) |
 | **ADR produits** | — |
 | **UDR produits** | UDR-0088 (acceptée, §3.4 amendée) |
 | **bin/ci** | Lancé par groupes le 2026-10-15 (`CI_GROUP`, la suite entière dépasse 10 min d'un seul tenant). Vert : unit (couverture 100 %), sécurité, seeds, perf, assets, système 1/4 et 2/4. Rouge, déjà rouge sur la base : garde du budget système (+23,8 s, dont +2,0 s de ce chantier, le reste d'`accueil-eleve` et `choix-classe-eleve` non fusionnés) ; format du numéro « 01 00 00 00 09 » dans `public_pages_test` (FU-30, FU-32), `staff_invitation_test`, `team_invitation_test` |

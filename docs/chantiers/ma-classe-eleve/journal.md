@@ -45,7 +45,7 @@
 
 | | |
 |---|---|
-| **Livré le** | 2026-10-15 (branche `feature/ma-classe-eleve`) |
-| **PR** | à ouvrir vers `Develop` après la fusion d’`accueil-eleve` |
+| **Livré le** | 2026-10-15, fusionné dans `Develop` |
+| **PR** | [#244](https://github.com/Lnclassapp/App.Lnclassapp/pull/244) |
 | **ADR produits** | — |
 | **UDR produits** | UDR-0086 |

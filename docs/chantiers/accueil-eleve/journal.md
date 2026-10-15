@@ -60,7 +60,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | | |
 |---|---|
-| **Livré le** | 2026-10-15 |
-| **PR** | *(ouverte à la clôture)* |
+| **Livré le** | 2026-10-15, fusionné dans `Develop` |
+| **PR** | [#241](https://github.com/Lnclassapp/App.Lnclassapp/pull/241) |
 | **ADR produits** | [ADR-0089](../../decisions/adr/0089-exercice-du-jour-calcule-a-la-lecture-et-fait-seul-deduit.md) |
 | **UDR produits** | [UDR-0084](../../decisions/udr/0084-accueil-eleve-en-tete-au-logo-menu-de-l-avatar-et-exercice-du-jour.md) |

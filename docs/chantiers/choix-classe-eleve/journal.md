@@ -42,8 +42,8 @@
 
 | | |
 |---|---|
-| **Livré le** | 2026-10-15 (branche, sans PR) |
-| **PR** | — (branche `feature/choix-classe-eleve`, après la PR `accueil-eleve`) |
+| **Livré le** | 2026-10-15, fusionné dans `Develop` |
+| **PR** | [#242](https://github.com/Lnclassapp/App.Lnclassapp/pull/242) |
 | **`bin/ci-quiet`** (2026-10-15, après le lot A) | ROUGE, rien de ce chantier : garde budget système (`accueil-eleve` comptée avec ce chantier) ; couverture 99,99 % (`DailyExerciseQuery`, bouchon du lot 0 d'`accueil-eleve`) ; `image_header_test.rb:500` (chrono sous charge) ; système : `sign_in_test.rb:106`, `public_pages_test.rb:79/:97`, `team_invitation_test.rb:13`, `staff_invitation_test.rb:7` (numéro mis en forme, déjà rouges), `boucle_pedagogique_test.rb:37` (voie du lien, cascade non rendue : page blanche après l'inscription, à vérifier sur `accueil-eleve`). Pureté, HITL, rubocop, brakeman, audits, graines, perf, budget des assets : verts |
 | **ADR produits** | — |
 | **UDR produits** | UDR-0091 |

@@ -62,8 +62,8 @@
 
 | | |
 |---|---|
-| **Livré le** | 2026-10-15 (branche `feature/exercice-eleve`, PR à ouvrir par l'orchestrateur) |
-| **PR** | |
+| **Livré le** | 2026-10-15, fusionné dans `Develop` |
+| **PR** | [#247](https://github.com/Lnclassapp/App.Lnclassapp/pull/247) |
 | **`bin/ci-quiet`** | Rouge (2026-10-15) : budget système dépassé (25,3 s dont 9,9 s d'`accueil-eleve`, à trancher) ; couverture 100 % manquée par `daily_exercise_query.rb:14` (stub d'`accueil-eleve`) et trois branches de ce chantier, couvertes depuis ; tests système déjà rouges hors du chantier (connexion, invitations : `sign_in_test`, `team_invitation_test`, `public_pages_test`, `staff_invitation_test` sur le format du numéro) et `classroom_archival_test` instable sous charge (vert seul) |
 | **ADR produits** | ADR-0091 |
 | **UDR produits** | UDR-0087 |

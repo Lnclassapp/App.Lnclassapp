@@ -39,7 +39,7 @@
 
 | | |
 |---|---|
-| **Livré le** | 2026-10-15 (branche `feature/historique-eleve`) |
-| **PR** | à ouvrir après la PR `accueil-eleve` |
+| **Livré le** | 2026-10-15, fusionné dans `Develop` |
+| **PR** | [#240](https://github.com/Lnclassapp/App.Lnclassapp/pull/240) |
 | **ADR produits** | — |
 | **UDR produits** | UDR-0090 |
