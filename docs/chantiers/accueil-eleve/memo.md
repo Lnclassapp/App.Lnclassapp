@@ -42,11 +42,13 @@ La page d'accueil publique est dessinée et ses décisions sont prises : l'accue
 | Beaucoup de classes n'auront aucun enseignant sur Lnclass au lancement : la carte « Prochain exercice » reste vide. Que trouve l'élève ? | Les deux : un exercice proposé par Lnclass dans le programme de sa classe, qu'il fait seul, et en dessous un encouragement avec un bouton pour inviter son enseignant (porteur, 2026-10-15). | La carte du haut n'est jamais vide pour un élève qui a une classe : s'il n'a rien à rendre, Lnclass lui propose un exercice de son niveau (le catalogue de l'élève et la session en autonomie existent déjà). Il faut une règle qui choisit cet exercice. L'invitation de l'enseignant est un nouveau message à partager (WhatsApp), distinct de « Inviter » (les camarades). |
 | Quel exercice Lnclass propose-t-il ? | Une matière différente chaque jour, à tour de rôle, pour couvrir tout le programme (porteur, 2026-10-15). | Règle : chaque jour, la matière suivante dans le tour des matières du niveau de l'élève, et dans cette matière le premier exercice publié qu'il n'a pas encore fait. La proposition reste la même toute la journée (heure d'Abidjan), elle ne change pas à chaque ouverture. Une matière sans exercice publié pour son niveau est sautée. |
 | L'élève a fini l'exercice proposé du jour : que montre la carte ? | « Bravo, à demain ! » avec la matière de demain : un seul exercice proposé par jour (porteur, 2026-10-15). | Un nouvel état de la carte : « fait aujourd'hui », qui annonce la matière du lendemain. La limite ne touche que la proposition : l'élève peut toujours ouvrir d'autres exercices depuis la grille des matières. |
+| L'enseignant donne un exercice à rendre : que devient l'exercice proposé par Lnclass ? | Il ne revient que lorsque tout le travail de l'enseignant est fait (porteur, 2026-10-15). | La carte du haut a une priorité stricte : d'abord le travail de l'enseignant (en retard, puis par date limite), ensuite seulement l'exercice proposé. Un travail en retard bloque la proposition tant qu'il n'est pas fait. Le tour des matières avance avec le calendrier, qu'une proposition ait été affichée ou non. |
 
 ## Cas limites identifiés
 
 - Aucune matière de son niveau n'a d'exercice publié : rien à proposer, la carte ne garde que l'encouragement et l'invitation de l'enseignant.
 - L'élève a fait tous les exercices publiés d'une matière : la matière est sautée dans le tour.
+- Un travail de l'enseignant reste en retard des semaines : l'exercice proposé ne revient jamais tant qu'il n'est pas fait.
 
 ## Questions encore ouvertes
 
