@@ -39,13 +39,10 @@ Toile : https://claude.ai/artifact/Mk5fa5Wvh9jBgG9LDBH1eV (téléphone, tablette
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
 | Quelle page après le choix de classe ? | La connexion et l'inscription, toutes les étapes d'un coup (porteur, 2026-10-15). | Carte bleue d'accueil au téléphone et panneau bleu à gauche dès 1024 px ; rubriques numérotées en cartes ; la cascade de « Choisis ta classe » (pastilles, cases) reprise telle quelle, comme décidé dans `choix-classe-eleve` ; genre en deux grandes pastilles ; « Besoin d'aide ? » en haut. |
+| Ajoute-t-on « Pas encore de compte ? Créer mon compte élève » sur la connexion ? | Oui (porteur, 2026-10-15). | Un lien vers l'inscription élève en bas de la carte « Connexion », sous « Code secret oublié ? ». |
+| Garde-t-on « Besoin d'aide ? » en haut de ces deux pages ? | Oui (porteur, 2026-10-15). | « Besoin d'aide ? » en haut à droite, comme sur les autres pages élève. |
 
 ## Tablette et ordinateur
 
 - Tablette verticale (820 px) : une colonne ; la carte bleue prend la largeur du formulaire (440 px pour la connexion, 560 px pour l'inscription) ; classes sur une ligne de 4 cases.
 - Dès 1024 px : panneau bleu à gauche (logo, accueil), formulaire à droite ; la connexion est centrée en hauteur.
-
-## Questions ouvertes
-
-1. Ajoute-t-on « Pas encore de compte ? Créer mon compte élève » sur la connexion ?
-2. Garde-t-on « Besoin d'aide ? » en haut de ces deux pages ?
