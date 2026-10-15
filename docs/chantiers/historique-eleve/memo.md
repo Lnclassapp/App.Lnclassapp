@@ -45,3 +45,8 @@ Toile : https://claude.ai/artifact/V8DwH6oMQcHoxxtHji44B6 (téléphone d'abord).
 
 - Verticale (820 px) : une seule colonne centrée.
 - Horizontale (1180 px) : le menu de gauche revient ; « Mes exercices terminés » à gauche, « Mes classes » à droite.
+
+## Ordinateur
+
+- Même mise en page que la tablette horizontale (1280 px) : menu de gauche, « Mes exercices terminés » à gauche en grand, « Mes classes » à droite.
+- « Mon historique » dans le menu du compte, sous « Mon profil ».
