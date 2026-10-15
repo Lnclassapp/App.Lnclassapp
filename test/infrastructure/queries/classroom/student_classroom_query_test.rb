@@ -40,14 +40,39 @@ module Queries
 
       # UDR-0086 §3.3 (ma-classe-eleve): « Aucun enseignant sur Lnclass » reads teacher_classrooms, in the same query
       # as the header; a teacher of another classroom of the same school does not count.
+      # ADR-0067: the count is pinned, with or without a teacher (relevé le 2026-10-15).
+      QUERIES = 6
+
       test "has_teacher: false without a teacher in the classroom, true with one, in the same number of queries" do
         create_teacher(school: @classroom.school, classrooms: [ create_classroom(school: @classroom.school) ])
-        without = count_queries { assert_equal false, classroom.has_teacher }
+        assert_equal false, classroom.has_teacher
+        assert_equal QUERIES, count_queries { classroom }
 
         create_teacher(school: @classroom.school, classrooms: [ @classroom ])
 
         assert_equal true, classroom.has_teacher
-        assert_equal without, count_queries { classroom }
+        assert_equal QUERIES, count_queries { classroom }
+      end
+
+      # An anonymized teacher (users.anonymized_at) is no longer on Lnclass: the invitation must show.
+      test "has_teacher: false when the only teacher of the classroom is anonymized" do
+        teacher = create_teacher(school: @classroom.school, classrooms: [ @classroom ])
+        Orm::User.where(id: teacher.id).update_all(anonymized_at: Time.current)
+
+        assert_equal false, classroom.has_teacher
+
+        create_teacher(school: @classroom.school, classrooms: [ @classroom ])
+        assert_equal true, classroom.has_teacher
+      end
+
+      # Only the primary classroom counts: a teacher in a secondary classroom of the student does not hide the invitation.
+      test "has_teacher: false when only a secondary classroom of the student has a teacher" do
+        secondary = create_classroom(school: @classroom.school)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: secondary, student: @student, primary: false,
+                                      joined_at: Time.current)
+        create_teacher(school: @classroom.school, classrooms: [ secondary ])
+
+        assert_equal false, classroom.has_teacher
       end
 
       test "a classroom without series" do

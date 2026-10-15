@@ -40,6 +40,8 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     end
     assert_no_match(/Code de la classe/, response.body)
     assert_select "#student_classroom_header", text: /élève/, count: 0
+    # Ni effectif nu : deux élèves dans la classe, aucun « 2 » isolé (l'année « 2026-2027 » n'en est pas un).
+    assert_no_match(/(?<![\d-])2(?![\d-])/, css_select("#student_classroom_header").text)
     assert_no_match "Yapo", response.body
     assert_no_match "Koffi", response.body
     assert_select "a[href='#{student_classroom_path}'][aria-current=page]"
@@ -111,6 +113,8 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_select "#student_classroom_no_teacher", 0
     assert_no_match I18n.t("classroom.student_homes.invite_teacher.action"), response.body
     assert_no_match "Diabaté", response.body
+    # Le lien WhatsApp du support (« Besoin d'aide ? », support_helper) reste dans la coque ; la page n'en a aucun.
+    assert_select "#student_classroom a[href*='wa.me']", 0
     assert_select PRIMARY_ACTION, 0
   end
 
@@ -192,6 +196,8 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     complete(create_exercise(essential: create_essential(course: genetics), title: "À revoir"), 45, at: 1.hour.ago)
     # UDR-0090 §4 : la règle de l'historique, sur la note affichée (grade_on_20 >= 14) : 68 % s'affiche 14/20, en vert.
     complete(create_exercise(essential: create_essential(course: genetics), title: "Juste"), 68, at: 3.hours.ago)
+    # Le seuil bas : 66 % s'affiche 13/20, à l'encre.
+    complete(create_exercise(essential: create_essential(course: genetics), title: "Presque"), 66, at: 4.hours.ago)
     { "En retard" => -1, "Pour aujourd'hui" => 0, "Pour demain" => 1, "Plus tard" => 5 }.each do |title, days|
       # Une échéance tombe de 1 à 7 jours après l'assignation (contrainte classroom_assignments_due_on_within_a_week).
       exercise = assign(title, course: genetics, at: days > 1 ? 1.day.ago : 3.days.ago)
@@ -206,8 +212,10 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
       assert_select "li .text-success", text: "14/20"
       assert_select "li .text-ink", text: "9/20"
       assert_select "li .text-success", text: "9/20", count: 0
-      assert_select "[class*=error], [class*=danger]", 0
+      assert_select "li .text-ink", text: "13/20"
+      assert_select "li .text-success", text: "13/20", count: 0
     end
+    assert_select "#student_classroom [class*=red], #student_classroom [class*=error], #student_classroom [class*=danger]", 0
     orange = ->(title) { css_select("#student_classroom_assigned li").find { it.text.include?(title) }.css(".text-warning").size }
     assert_equal [ 1, 1, 1, 0 ], [ "En retard", "Pour aujourd'hui", "Pour demain", "Plus tard" ].map(&orange)
   end
@@ -232,6 +240,27 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_match(/private|no-store/, response.headers["Cache-Control"])
     assert_no_match(/public/, response.headers["Cache-Control"])
     assert_select "turbo-frame[src]", 0
+  end
+
+  def count_queries(&)
+    count = 0
+    counter = ->(*args) { count += 1 unless args.last[:name] == "SCHEMA" }
+    ActiveSupport::Notifications.subscribed(counter, "sql.active_record", &)
+    count
+  end
+
+  # PRD §7 : has_teacher se lit dans la requête de l'en-tête ; avec ou sans enseignant, le même nombre de requêtes.
+  test "ADR-0067 — the same number of queries with and without a teacher" do
+    assign("Méiose", course: course_named("Génétique"))
+    sign_in_as @student
+    without = count_queries { get student_classroom_path }
+    assert_select "#student_classroom_no_teacher"
+
+    create_teacher(school: @classroom.school, classrooms: [ @classroom ])
+    with = count_queries { get student_classroom_path }
+
+    assert_select "#student_classroom_no_teacher", 0
+    assert_equal without, with
   end
 
   test "a classroom without series: the level alone" do

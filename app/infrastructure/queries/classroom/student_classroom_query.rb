@@ -16,10 +16,13 @@ module Queries
       TreatedRow = Data.define(:exercise_public_id, :title, :material_name, :material_slug, :material_category, :best_score_percent,
                                :last_session_public_id, :last_completed_at)
 
-      # has_teacher se lit dans la même requête que l'en-tête : pas de requête de plus (ADR-0067).
+      # has_teacher se lit dans la même requête que l'en-tête : pas de requête de plus (ADR-0067). Un enseignant anonymisé
+      # n'est plus sur Lnclass : il ne masque pas « Inviter mon enseignant ».
+      HAS_TEACHER = "EXISTS (SELECT 1 FROM teacher_classrooms " \
+                    "INNER JOIN users ON users.id = teacher_classrooms.teacher_id AND users.anonymized_at IS NULL " \
+                    "WHERE teacher_classrooms.classroom_id = classrooms.id)"
       COLUMNS = [ "classrooms.id", "classrooms.public_id", "classrooms.name", "levels.name", "series.name", "schools.name",
-                  "classrooms.school_year",
-                  Arel.sql("EXISTS (SELECT 1 FROM teacher_classrooms WHERE teacher_classrooms.classroom_id = classrooms.id)") ].freeze
+                  "classrooms.school_year", Arel.sql(HAS_TEACHER) ].freeze
       COURSE_COLUMNS = [ "courses.slug", "courses.name", "materials.name", "materials.slug", "materials.category",
                          Arel.sql("COUNT(DISTINCT exercises.id)") ].freeze
       # DISTINCT ON garde, par exercice, la dernière session terminée ; la fenêtre lit le meilleur score avant ce tri.
