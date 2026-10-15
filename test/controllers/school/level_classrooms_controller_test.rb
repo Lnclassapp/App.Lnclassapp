@@ -62,6 +62,15 @@ class School::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "UDR-0091 §3.6: a single classroom is announced in the singular" do
+    single = create_school
+    create_classroom(school: single, level: @level)
+
+    classrooms(single.public_id)
+
+    assert_select "turbo-frame#picker_classrooms .sr-only", text: "1 classe trouvée."
+  end
+
   test "the fields follow the scope of the page" do
     classrooms(scope: "student_classroom_choice")
 

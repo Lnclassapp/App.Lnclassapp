@@ -98,6 +98,9 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
 
     assert_select "turbo-frame#picker_schools option[selected][value='#{@school.public_id}']"
     assert_select "#class-picker-school-summary", text: /Lycée Moderne de Cocody/
+    # « Changer » sans JavaScript : la DRENA seule revient ; nom, prénoms et contact sont perdus (dette, journal).
+    assert_select "#class-picker-school-summary a[href='#{new_student_registration_path(student_registration: { drena_public_id: @drena.public_id })}']",
+                  text: I18n.t("#{PICKER}.change")
     assert_select "turbo-frame#picker_levels input[type=radio][name='student_registration[level_slug]']" \
                   "[data-action='change->classroom--class-picker#loadClassrooms'][value='#{@level.slug}']"
     assert_select "turbo-frame#picker_levels label", text: "3ème"
@@ -108,6 +111,9 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
 
     assert_select "turbo-frame#picker_levels input[type=radio][checked][value='#{@level.slug}']"
     assert_select "fieldset > legend", text: "3 #{I18n.t("#{PICKER}.step_classroom")}"
+    # UDR-0091 §3.6 : les radios vivent dans le fieldset de leur étape, qui les nomme.
+    assert_select "fieldset#class-picker-step-level turbo-frame#picker_levels input[type=radio]", 1
+    assert_select "fieldset#class-picker-step-classroom turbo-frame#picker_classrooms input[type=radio]", 1
     assert_select "turbo-frame#picker_classrooms input[type=radio][name='student_registration[classroom_public_id]']" \
                   "[value='#{@classroom.public_id}']:not([checked])"
     assert_select "input[name='student_registration[last_name]'][value='KOUASSI']"

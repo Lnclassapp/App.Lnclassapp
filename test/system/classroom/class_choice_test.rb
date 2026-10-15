@@ -53,7 +53,7 @@ class Classroom::ClassChoiceTest < ApplicationSystemTestCase
     assert_equal [ @b.id ], Orm::ClassroomStudent.where(student: @student, left_at: nil).pluck(:classroom_id)
   end
 
-  test "CA-2, CA-7 at 820 px: four boxes on one row, the pills by the arrow keys; « Changer » opens the lists and empties the steps" do
+  test "CA-2, CA-7 at 820 px: four boxes in a row, pills by arrow keys; another pill or « Changer » drops the checked classroom" do
     with_mobile_viewport([ 820, 1180 ]) do
       visit new_student_classroom_choice_path
 
@@ -64,6 +64,17 @@ class Classroom::ClassChoiceTest < ApplicationSystemTestCase
       assert_checked_field "3ème"
       within("turbo-frame#picker_classrooms") { assert_selector "label", count: 4 }
       assert_equal 1, page.evaluate_script(BOX_TOPS).uniq.size, "quatre cases sur une ligne dès 700 px"
+
+      # Une classe cochée, puis une autre pastille : la classe disparaît, le bouton se désactive.
+      within("turbo-frame#picker_classrooms") { choose "3e B" }
+      assert_button I18n.t("#{PAGE}.submit"), disabled: false
+      within("turbo-frame#picker_levels") { choose "6ème" }
+      within("turbo-frame#picker_classrooms") { assert_selector "label", text: "6e 1", count: 1 }
+      assert_button I18n.t("#{PAGE}.submit"), disabled: true
+
+      within("turbo-frame#picker_levels") { choose "3ème" }
+      within("turbo-frame#picker_classrooms") { choose "3e B" }
+      assert_button I18n.t("#{PAGE}.submit"), disabled: false
 
       assert_no_page_reload do
         find("a[aria-label=\"#{I18n.t("#{PICKER}.change_label")}\"]").click

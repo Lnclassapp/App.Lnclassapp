@@ -85,6 +85,11 @@ class Classroom::StudentClassroomChoicesControllerTest < ActionDispatch::Integra
 
     assert_select "turbo-frame#picker_levels input[type=radio][checked][value='#{@level.slug}']"
     assert_select "turbo-frame#picker_classrooms input[type=radio][name='student_classroom_choice[classroom_public_id]']", 2
+    # UDR-0091 §3.6 : les radios vivent dans le fieldset de leur étape, qui les nomme.
+    assert_select "fieldset#class-picker-step-level turbo-frame#picker_levels input[type=radio]", 1
+    assert_select "fieldset#class-picker-step-classroom turbo-frame#picker_classrooms input[type=radio]", 2
+    # Sans JavaScript, le bouton n'est jamais désactivé.
+    assert_select "button#student-classroom-choice-submit:not([disabled])"
 
     # « Changer » sans JavaScript : la DRENA seule revient en GET, et les deux listes s'ouvrent, l'établissement à choisir.
     get new_student_classroom_choice_path, params: { student_classroom_choice: { drena_public_id: @drena.public_id } }
@@ -103,6 +108,21 @@ class Classroom::StudentClassroomChoicesControllerTest < ActionDispatch::Integra
 
     assert_response :success
     assert_select "turbo-frame#picker_levels input[type=radio][value='#{@level.slug}']"
+  end
+
+  test "a school sent with a DRENA it does not belong to, or without a DRENA, opens the lists: 200, no folded line" do
+    sign_in_as @student
+    other = create_drena(name: "Bouaké")
+
+    [ { drena_public_id: other.public_id, school_public_id: @school.public_id },
+      { school_public_id: @school.public_id, level_slug: @level.slug } ].each do |choices|
+      get new_student_classroom_choice_path, params: { student_classroom_choice: choices }
+
+      assert_response :success
+      assert_select "#class-picker-school-summary", 0
+      assert_select "#class-picker-school-fields:not([hidden])"
+      assert_select "turbo-frame#picker_levels *", 0
+    end
   end
 
   test "a student who never had a classroom starts from the DRENA" do
