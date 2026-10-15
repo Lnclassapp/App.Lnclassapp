@@ -47,7 +47,7 @@ module Finitions
     test "FU-47 : le catalogue se cherche pendant la frappe, sans accents, et l'état vide propose d'effacer la recherche" do
       sign_in_as @student
       visit courses_path
-      assert_selector "#courses_list > li", count: 3
+      assert_selector "#courses_groups li", count: 3
       assert_no_button tc("filters.submit")
       before = history_length
 
@@ -55,11 +55,11 @@ module Finitions
         # Un seul caractère ne part pas : « m » ne garderait que « Mathématiques 3e ».
         search_field.fill_in with: "m"
         sleep 0.6
-        assert_selector "#courses_list > li", count: 3
+        assert_selector "#courses_groups li", count: 3
 
         search_field.fill_in with: "mathematiques"
-        assert_selector "#courses_list > li", count: 1
-        assert_selector "#courses_list", text: "Mathématiques 3e"
+        assert_selector "#courses_groups li", count: 1
+        assert_selector "#courses_groups", text: "Mathématiques 3e"
         assert_selector "#courses_total", text: tc("total", count: 1)
         assert_current_path(/q=mathematiques/)
         assert_equal before, history_length, "la frappe empile l'historique"
@@ -72,15 +72,16 @@ module Finitions
         end
 
         search_field.fill_in with: ""
-        assert_selector "#courses_list > li", count: 3
+        assert_selector "#courses_groups li", count: 3
 
-        select "Maths", from: tc("filters.material")
-        assert_selector "#courses_list > li", count: 1
-        assert_current_path(/material=#{@maths.slug}/)
+        # UDR-0085 §3.1 (CA-2) : plus de liste « Matière » chez l'élève ; « Tout voir » efface la recherche.
+        assert_no_select tc("filters.material")
+        search_field.fill_in with: "mathematiques"
+        assert_selector "#courses_groups li", count: 1
       end
 
       click_on tc("reset")
-      assert_selector "#courses_list > li", count: 3
+      assert_selector "#courses_groups li", count: 3
       assert_equal "", search_field.value
     end
 
@@ -163,7 +164,7 @@ module Finitions
       with_mobile_viewport do
         visit courses_path(q: "genetique")
         assert_selector "#courses-filters"
-        assert_selector "#courses_list > li", count: 1
+        assert_selector "#courses_groups li", count: 1
         assert_link tc("reset"), href: courses_path
         assert_no_horizontal_scroll "le catalogue filtré"
 

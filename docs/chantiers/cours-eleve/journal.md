@@ -24,7 +24,11 @@
 
 ## Ce qui a dérapé
 
-- …
+- **Budget de la suite système** : `test/guards/system_budget_test.rb` compare à `origin/Develop`. La branche porte aussi `accueil-eleve` (non fusionné), d'où 17,4 s contre 15 s ; `cours-eleve` seul ajoute 3,1 s (`student_courses_test.rb`). Le garde redevient vert quand `accueil-eleve` est fusionné, ou si le porteur relève le budget.
+- **Cartes bord à bord sous 640 px** : la règle d'UDR-0005 (amendement du 2026-10-06) collait les cartes des groupes aux bords, loin des maquettes ; vu sur les captures, corrigé au Lot D par `data-bleed-keep`.
+- **Préchargement Turbo** : découvert au Lot A ; sans la parade, un survol comptait comme une lecture.
+- **Machine chargée** (charge 30 à 40) : la suite complète prend ~30 min ; un test de durée (`image_header_test.rb:500`) échoue sous charge et passe seul.
+- **Sous-agents de revue** (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) : non disponibles dans cette session ; revue faite à la main sur les trois axes (paramètres `material` et `after_material`, `sanitize_sql_array`, `rescue` limité à `ActiveRecord::ActiveRecordError` et signalé, branches couvertes).
 
 ## Ce qu'on a appris sur la codebase
 
@@ -32,6 +36,9 @@
 - `materials` n'a pas de rang ; l'ordre du programme ne vivait que dans `StudentHomeQuery::SUBJECT_ORDER`, le catalogue triait par nom.
 - Les bulles « Mes matières » de l'accueil ouvrent déjà `/courses?material=<slug>` : la vue de la matière est la liste filtrée, il n'y a pas de page dédiée.
 - `courses#index` est partagé par tous les rôles ; la branche élève se reconnaît à `student_audience` (`ReadsOwnLevel`).
+- `test/architecture/use_case_policies_test.rb` exige un `policy:` injecté dans tout use case ; `schema_constraints_test` tient la liste fermée des cascades.
+- Turbo 8 précharge les liens au survol et sert ensuite la page depuis son cache : une écriture sur GET doit s'en garder (`data-turbo-prefetch="false"`, en-tête `X-Sec-Purpose`).
+- Le tri par `courses.name` suit la collation de la base : « Équations » vient après « Théorème » (comportement antérieur, inchangé).
 
 ## Dette laissée derrière
 
@@ -39,12 +46,14 @@
 |---|---|---|
 | Suivi de lecture des fiches côté enseignant | Non demandé ; la donnée existe désormais | — |
 | Ordre des matières pour l'enseignant, la direction et l'équipe | Hors périmètre (memo) | — |
+| Rang d'une matière créée par l'équipe ou l'import | Elle reste sans rang (`NULL`, après les autres) jusqu'à une saisie en base ; aucun écran ne le règle | — |
+| Tri des cours sans tenir compte des accents | Collation de la base ; comportement antérieur | — |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
+| **Livré le** | 2026-10-15 (branche `feature/cours-eleve`, sans PR à la demande du coordinateur) |
+| **PR** | — |
 | **ADR produits** | ADR-0090 |
 | **UDR produits** | UDR-0085 |

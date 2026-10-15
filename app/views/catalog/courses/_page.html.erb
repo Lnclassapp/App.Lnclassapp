@@ -13,7 +13,8 @@
         répéter son titre. La vue d'une matière n'a pas de titre de groupe : le titre de la page le porte. %>
     <% previous = (after_material if nested) %>
     <% groups = page.rows.chunk_while { |one, other| one.material_slug == other.material_slug }.to_a %>
-    <div id="<%= nested ? "courses_groups_page_#{page.page}" : "courses_groups" %>" class="space-y-6">
+    <%# data-bleed-keep : sous 640 px, les cartes restent dans la marge, arrondies (UDR-0085 §3.4, maquettes). %>
+    <div id="<%= nested ? "courses_groups_page_#{page.page}" : "courses_groups" %>" class="space-y-6" data-bleed-keep>
       <% groups.each_with_index do |rows, index| %>
         <% first = rows.first %>
         <% grid = capture do %>

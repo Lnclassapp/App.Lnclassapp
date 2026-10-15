@@ -47,6 +47,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#courses[data-turbo-action=advance][target=_top] #courses_groups li", 2
     # CA-1 (UDR-0085 §3.2, ADR-0090 §4.2) : un groupe par matière, dans l'ordre du programme, SVT (3) avant Philosophie (7).
     assert_equal %w[courses_group_svt courses_group_philosophie], css_select("#courses_groups > section").map { it["id"] }
+    # UDR-0085 §3.4 : sous 640 px, ses cartes restent dans la marge, arrondies (exception à UDR-0005).
+    assert_select "#courses_groups[data-bleed-keep]"
     assert_select "section#courses_group_svt[aria-labelledby=courses_group_svt_title] h2#courses_group_svt_title" do
       assert_select "a[href='#{courses_path(material: @svt.slug)}'][aria-label='#{tl("course_group_title.label", material: "SVT", count: 1)}']" do
         assert_select "img[src*='subjects/svt']"
@@ -277,6 +279,17 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     get courses_path(material: @philo.slug, q: "zzz"), headers: { "Turbo-Frame" => "courses" }
     assert_select "#courses_empty", text: including(tl("index.student_no_match_description"))
     assert_select "#courses_empty a[href='#{courses_path(material: @philo.slug)}']", text: tl("index.clear_search")
+  end
+
+  test "an unknown subject in the student's address gives the « Cours » title and no course, never an error" do
+    sign_in_as create_student_for(@course)
+
+    get courses_path(material: "inconnue", page: 2, after_material: [ "x" ])
+
+    assert_response :success
+    assert_select "h1", text: tl("index.title")
+    assert_select "#courses_material_title", 0
+    assert_select "#courses_empty", text: including(tl("index.empty_title"))
   end
 
   # UDR-0085 §3.1 : l'élève revient par le menu (avatar, menu de gauche), plus par un lien « Accueil » ; l'équipe n'en a pas.

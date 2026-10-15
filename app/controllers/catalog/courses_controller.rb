@@ -63,7 +63,8 @@ module Catalog
     end
 
     # UDR-0085 §3.2 : la matière de la dernière carte de la page précédente, dont le titre de groupe est déjà rendu.
-    def after_material = (params[:after_material] if params[:after_material].is_a?(String))
+    # Toujours une chaîne : une valeur forgée (tableau, vide) ne vaut aucun slug, et le titre reste rendu.
+    def after_material = params[:after_material].to_s
 
     def list_frame_request? = turbo_frame_request_id == LIST_FRAME
     def page_frame_request? = PAGE_FRAME.match?(turbo_frame_request_id.to_s)
