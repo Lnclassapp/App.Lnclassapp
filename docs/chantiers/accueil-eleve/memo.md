@@ -40,10 +40,12 @@ La page d'accueil publique est dessinée et ses décisions sont prises : l'accue
 | Les maquettes ne montrent que le téléphone. Et la tablette, l'ordinateur ? | On adapte le design aux grands écrans (porteur, 2026-10-14). | Il faut dessiner tablette et ordinateur, pas seulement étirer le téléphone. |
 | Le téléphone passe d'un enfant à l'autre, ou au parent : qui voit l'accueil ? | Un seul compte par téléphone : l'autre enfant se déconnecte puis se reconnecte (porteur, 2026-10-15). | Pas de sélecteur de comptes ni de vue parent. L'accueil doit dire clairement à qui il appartient (prénom, classe) pour qu'un frère ou une sœur s'en aperçoive, et la déconnexion doit rester trouvable depuis l'accueil. |
 | Beaucoup de classes n'auront aucun enseignant sur Lnclass au lancement : la carte « Prochain exercice » reste vide. Que trouve l'élève ? | Les deux : un exercice proposé par Lnclass dans le programme de sa classe, qu'il fait seul, et en dessous un encouragement avec un bouton pour inviter son enseignant (porteur, 2026-10-15). | La carte du haut n'est jamais vide pour un élève qui a une classe : s'il n'a rien à rendre, Lnclass lui propose un exercice de son niveau (le catalogue de l'élève et la session en autonomie existent déjà). Il faut une règle qui choisit cet exercice. L'invitation de l'enseignant est un nouveau message à partager (WhatsApp), distinct de « Inviter » (les camarades). |
+| Quel exercice Lnclass propose-t-il ? | Une matière différente chaque jour, à tour de rôle, pour couvrir tout le programme (porteur, 2026-10-15). | Règle : chaque jour, la matière suivante dans le tour des matières du niveau de l'élève, et dans cette matière le premier exercice publié qu'il n'a pas encore fait. La proposition reste la même toute la journée (heure d'Abidjan), elle ne change pas à chaque ouverture. Une matière sans exercice publié pour son niveau est sautée. |
 
 ## Cas limites identifiés
 
-- …
+- Aucune matière de son niveau n'a d'exercice publié : rien à proposer, la carte ne garde que l'encouragement et l'invitation de l'enseignant.
+- L'élève a fait tous les exercices publiés d'une matière : la matière est sautée dans le tour.
 
 ## Questions encore ouvertes
 
