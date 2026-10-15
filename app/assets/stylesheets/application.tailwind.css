@@ -351,6 +351,14 @@
   @apply transition duration-300 ease-out hover:-translate-y-1 hover:border-brand/40 hover:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
 }
 
+/* UDR-0090 §3.2 : un groupe de lignes d'une liste à « Voir plus » (le mois de l'historique) reste masqué tant qu'aucune
+   de ses lignes n'est révélée ; son titre apparaît avec la première, sans JavaScript à lui. */
+@utility ui-reveal-group {
+  &:not(:has(li:not([hidden]))) {
+    display: none;
+  }
+}
+
 /* Lot E6 (politique-cache) : boutons, bouton icône, menu ⋮, boîte de dialogue et avatar, sur le même principe ; une
    ligne de tableau en porte plusieurs, une confirmation trois. */
 @utility ui-button {
@@ -454,6 +462,23 @@
    plage de media query, et `vh` avant `dvh` : lisible par les navigateurs de l'ADR-0051. */
 @media (max-width: 63.99rem) {
   dialog.dialog-sheet {
+    margin: auto 0 0;
+    width: 100%;
+    max-width: none;
+    min-height: 25vh;
+    min-height: 25dvh;
+    max-height: 90vh;
+    max-height: 90dvh;
+    overflow-y: auto;
+    border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* UDR-0089 §3.4 — `ui_modal placement: :phone_sheet` : la même feuille, sous 700 px seulement (palier du téléphone,
+   UDR-0086 §3.5) ; dès 700 px, la modale centrée de ses utilitaires. */
+@media (max-width: 43.74rem) {
+  dialog.dialog-phone-sheet {
     margin: auto 0 0;
     width: 100%;
     max-width: none;
