@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage |
+| **Statut** | planification |
 | **Ouvert le** | 2026-10-15 |
 | **Branche** | `Develop` (cadrage, docs seules) ; le code passera par une PR |
 | **Programme** | — |
@@ -46,3 +46,7 @@ Toile : https://claude.ai/artifact/Mk5fa5Wvh9jBgG9LDBH1eV (téléphone, tablette
 
 - Tablette verticale (820 px) : une colonne ; la carte bleue prend la largeur du formulaire (440 px pour la connexion, 560 px pour l'inscription) ; classes sur une ligne de 4 cases.
 - Dès 1024 px : panneau bleu à gauche (logo, accueil), formulaire à droite ; la connexion est centrée en hauteur.
+
+## Suite
+
+PRD, UDR-0088 et plan de lots écrits le 2026-10-15 (pas d’ADR). Le code se fait dans une PR, après celle d’`accueil-eleve` ; la cascade de classe vient de `choix-classe-eleve`.
