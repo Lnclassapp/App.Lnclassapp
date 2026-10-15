@@ -50,7 +50,8 @@ Toile : https://claude.ai/artifact/78wguP9ZtQc1g5LrtcxTy4 (téléphone d'abord).
 | Garde-t-on la barre d'onglets en bas du téléphone ? | Non, on la retire (porteur, 2026-10-15). | Au téléphone et sur tablette, Accueil, Cours et Ma classe passent dans le menu de l'avatar, la page en cours en surbrillance ; sur ordinateur, le menu de gauche reste. Décision commune avec `accueil-eleve` (UDR-0080 à amender). |
 | Que se passe-t-il au clic sur une matière ? | L'élève ne voit que les cours de son niveau et de cette matière (porteur, 2026-10-15) ; sans lien « Tous les cours » (porteur, 2026-10-15). | Le titre de chaque groupe ouvre la vue de la matière (comme les bulles de « Mes matières » sur l'accueil) : icône et nom de la matière à la place de « Cours », recherche limitée à la matière. On revient à la liste par « Cours » dans le menu (avatar au téléphone, menu de gauche sur ordinateur). |
 | « Reprendre » rouvre-t-il le cours là où l'élève s'est arrêté ? | Oui (porteur, 2026-10-15). | Il faut garder, par élève et par cours, la dernière fiche ouverte. |
+| Dans quel ordre viennent les matières ? | Celui du programme (porteur, 2026-10-15). | Mathématiques, Physique-Chimie, SVT, Français, Histoire-Géographie, EDHC, comme « Mes matières » sur l'accueil. Aujourd'hui le catalogue trie par nom de matière (`CourseCatalogQuery#ordered`) et la table `materials` n'a pas de rang : il faudra lui en donner un (migration) pour que les deux écrans suivent le même ordre. |
 
 ## Questions ouvertes
 
-1. Ordre des matières : celui du programme (Mathématiques d'abord) ou l'ordre alphabétique ?
+Aucune pour les maquettes. Suite : PRD, UDR et plan de lots, puis le code dans une PR.
