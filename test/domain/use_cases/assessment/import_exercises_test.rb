@@ -233,6 +233,18 @@ module UseCases
         assert_equal [ [ false, true ], nil ], [ choice.answers.map(&:correct), choice.numeric_tolerance ]
       end
 
+      # CA-14: a numeric question with « tolerance »: 0.1 is created with its margin.
+      test "a numeric question is imported with its tolerance" do
+        numeric = exercise("Nombre", "questions" => [ { "content" => "Calcule 7 ÷ 2.", "question_type" => "numeric", "tolerance" => 0.1,
+                                                         "answers" => [ { "content" => "3,5" } ] } ])
+
+        report = run_import(document(numeric))
+
+        assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count)
+        question = Orm::Question.find_by!(question_type: "numeric")
+        assert_equal [ BigDecimal("0.1"), [ [ "3,5", true ] ] ], [ question.numeric_tolerance, question.answers.pluck(:content, :correct) ]
+      end
+
       test "a negative tolerance or a too long match is refused by the schema, at its path" do
         bad = exercise("Marge")
         bad["questions"][0]["tolerance"] = -1

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Numeric
-# Rôle : réponse en nombre (ADR-0091 §4.3), notée au Lot E ; la lecture d'un nombre saisi sert déjà à la marge de l'équipe
-# ADR  : 0091
+# Rôle : réponse en nombre : juste si l'écart à la valeur attendue ne dépasse pas la marge (0 sans marge) ; illisible, mal formée
+# ADR  : 0091 (§4.2 : une seule valeur attendue, numeric_tolerance ; §4.3)
 require "bigdecimal"
 
 module Entities
@@ -19,9 +19,20 @@ module Entities
           BigDecimal(normalized) if normalized.match?(NUMBER)
         end
 
-        def self.structure_errors(**) = [ :not_available ]
-        def self.well_formed?(_question, _response) = false
-        def self.correct?(_question, _response) = false
+        def self.structure_errors(answers:, numeric_tolerance:, **)
+          errors = []
+          errors << :numeric_needs_one_value unless answers.size == 1
+          errors << :numeric_value_unreadable if answers.size == 1 && parse(answers.first.content).nil?
+          errors << :negative_tolerance if numeric_tolerance&.negative?
+          errors
+        end
+
+        # Une saisie illisible n'est pas une mauvaise réponse : l'élève voit une erreur de saisie (422).
+        def self.well_formed?(_question, text) = !parse(text).nil?
+
+        def self.correct?(question, text)
+          (parse(text) - parse(question.answers.first.content)).abs <= (question.numeric_tolerance || 0)
+        end
       end
     end
   end
