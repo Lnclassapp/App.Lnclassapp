@@ -33,6 +33,9 @@ class Identity::SignInTest < ApplicationSystemTestCase
     end
     assert_field "session[contact]", with: student.contact
     assert_field "session[pin]", with: ""
+    # Comportement actuel verrouillé : après l'échec, le focus va sur le numéro. Le PRD (§3) parle du code secret :
+    # écart noté au journal, à trancher par le porteur.
+    assert_selector "#session_contact:focus"
   end
 
   test "a student with a classroom lands on the student home" do
@@ -103,16 +106,26 @@ class Identity::SignInTest < ApplicationSystemTestCase
   end
 
   # UDR-0060 §3.10, UDR-0057: the two entry screens pass the rule at 390 px, for every role.
+  # UDR-0088 §3.1 to §3.3 (CA-1, CA-8): the blue card, then the card « Connexion » with the link to the student sign-up;
+  # « Besoin d'aide ? » at the top right opens the help sheet.
   test "at 390 px, the sign-in and the forgotten PIN show one column, one title and one action" do
     with_mobile_viewport do
       visit new_session_path
 
       assert_selector "h1", text: "Connexion", count: 1
-      assert_no_text "Heureux de vous revoir"
+      assert_selector "#auth-welcome-card", text: "Heureux de vous revoir"
+      assert_no_selector "#auth-welcome-panel"
       assert_single_primary_action scope: "main"
-      assert_blocks_above_fold "main > *", max: 1
-      # UDR-0060 §3.2 (2026-10-11) : l'aide « code secret à 4 chiffres » s'affiche sous le champ, une fois.
-      assert_text I18n.t("identity.sessions.new.pin_info_message"), count: 1
+      assert_blocks_above_fold "main > div > *", max: 2
+      assert_operator rect("#auth-welcome-card")["bottom"], :<=, rect("#session-form")["top"]
+      assert_text "code secret à 4 chiffres"
+      assert_link I18n.t("identity.sessions.new.sign_up"), href: new_student_registration_path
+      help = find("#auth-help [aria-controls=help-sheet]", text: "Besoin d'aide ?")
+      assert_operator rect("#auth-help [aria-controls=help-sheet]")["right"], :>, 390 - 40
+      help.click
+      assert_selector "dialog#help-sheet[open]"
+      find("dialog#help-sheet button[data-action='modal#close']").click
+      assert_no_selector "dialog#help-sheet[open]"
       find("details summary", text: "Aide : Code secret").click
       assert_text "Code secret de 4 chiffres, choisi à l'inscription."
       assert_operator tap_height(find_link(I18n.t("identity.sessions.new.forgot_pin"))), :>=, 48
@@ -130,15 +143,30 @@ class Identity::SignInTest < ApplicationSystemTestCase
     end
   end
 
-  test "from 1 024 px, the sign-in keeps its welcome column beside the form" do
-    visit new_session_path
+  # UDR-0088 §3.1, §3.3 (CA-2): at 1 280 px, the blue panel on the left half, the card « Connexion » on the right, centred
+  # in height.
+  test "CA-2: at 1 280 px, the blue panel on the left and the card « Connexion » on the right, centred in height" do
+    with_mobile_viewport([ 1280, 800 ]) do
+      visit new_session_path
 
-    assert_selector "main > section.bg-brand-soft", text: "Heureux de vous revoir"
-    assert_selector "h1", text: "Connexion", count: 1
-    assert_single_primary_action scope: "main"
+      assert_selector "#auth-welcome-panel", text: "Heureux de vous revoir"
+      assert_no_selector "#auth-welcome-card"
+      assert_selector "h1", text: "Connexion", count: 1
+      assert_single_primary_action scope: "main"
+      panel = rect("#auth-welcome-panel")
+      card = rect("main .rounded-card:has(h1)")
+      assert_in_delta evaluate_script("document.documentElement.clientWidth") / 2.0, panel["right"], 1
+      assert_operator card["left"], :>=, panel["right"]
+      # Centred in the column under the help bar: the card's middle sits within 48 px of the screen's middle.
+      assert_in_delta evaluate_script("window.innerHeight") / 2.0, (card["top"] + card["bottom"]) / 2, 48
+    end
   end
 
   private
+
+  def rect(selector)
+    page.evaluate_script("document.querySelector(arguments[0]).getBoundingClientRect().toJSON()", selector)
+  end
 
   def tap_height(element)
     page.evaluate_script("arguments[0].getBoundingClientRect().height", element)

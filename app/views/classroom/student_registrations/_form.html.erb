@@ -1,8 +1,8 @@
-<%# 🌐 UI · classroom/student_registrations/_form — formulaire d'inscription élève, en trois rubriques %>
-<%# Rôle : Ta classe (cascade, ou bandeau d'un lien), Toi (nom, prénoms, genre, numéro), Code secret ; 422/403 re-rendus %>
-<%# ADR  : 0037, 0050, 0083, 0085 · UDR : 0009, 0054, 0079, 0081 (§3.2) %>
+<%# 🌐 UI · classroom/student_registrations/_form — formulaire d'inscription élève, en trois rubriques numérotées, chacune dans sa carte %>
+<%# Rôle : 1 Ta classe (cascade, ou bandeau d'un lien), 2 Toi (nom, prénoms, genre en pastilles, numéro), 3 Code secret ; 422/403 re-rendus %>
+<%# ADR  : 0037, 0050, 0083, 0085 · UDR : 0009, 0054, 0079, 0081 (§3.2), 0088 (§3.4, §3.7) %>
 <%= form_with model: @form, scope: :student_registration, url: student_registrations_path, id: "student-registration-form",
-              class: "space-y-6",
+              class: "space-y-4",
               data: { controller: "classroom--class-picker identity--phone-digits identity--pin-match",
                       "classroom--class-picker-schools-url-value": drena_schools_path("__drena__", scope: :student_registration),
                       "classroom--class-picker-levels-url-value": school_picker_levels_path("__school__", scope: :student_registration),
@@ -26,9 +26,22 @@
   <% if @preview %>
     <%= form.hidden_field :link_token %>
   <% end %>
+  <%# UDR-0088 §3.7 : la carte entoure le fieldset (une légende posée sur une bordure chevaucherait le haut de la carte) ;
+      le numéro est décoratif, la légende se lit « Ta classe ». %>
+  <% section = lambda do |number, key, &content|
+       tag.div(id: "student-registration-section-#{key}", class: class_names(ComponentsHelper::CARD_BASE, "p-4 sm:p-6")) do
+         tag.fieldset(class: "min-w-0 space-y-4") do
+           legend = tag.legend(class: "mb-4 flex items-center gap-2.5 font-display text-lg font-extrabold text-ink") do
+             safe_join([ tag.span(number, "aria-hidden": true,
+                                  class: "grid size-7 shrink-0 place-items-center rounded-full bg-brand-soft text-sm font-extrabold text-brand-strong"),
+                         t(".#{key}") ], " ")
+           end
+           legend + capture(&content)
+         end
+       end
+     end %>
 
-  <fieldset class="space-y-4">
-    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".classroom") %></legend>
+  <%= section.call(1, :classroom) do %>
     <% if @preview %>
       <div class="space-y-2">
         <%= render "classroom/joins/classroom_preview", preview: @preview %>
@@ -38,23 +51,24 @@
     <% else %>
       <%= render "classroom/student_registrations/class_picker", form:, scope: :student_registration, **class_picker_lists %>
     <% end %>
-  </fieldset>
+  <% end %>
 
-  <fieldset class="space-y-4">
-    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".you") %></legend>
+  <%= section.call(2, :you) do %>
     <%= ui_field form, :last_name, required: true, maxlength: 50, autocomplete: "family-name", placeholder: t(".last_name_placeholder") %>
     <%= ui_field form, :first_name, required: true, maxlength: 80, autocomplete: "given-name", placeholder: t(".first_name_placeholder") %>
     <% gender_error = @form.errors[:gender].first %>
-    <fieldset class="space-y-1.5" <%= tag.attributes("aria-describedby": ("student_registration_gender_error" if gender_error)) %>>
+    <%# UDR-0088 §3.4 : deux grandes pastilles de 44 px ; le radio, sans apparence, couvre toute la pastille (doigt, souris, flèches). %>
+    <fieldset id="student-registration-gender" class="space-y-1.5" <%= tag.attributes("aria-describedby": ("student_registration_gender_error" if gender_error)) %>>
       <legend class="mb-1.5 block text-sm font-medium text-ink">
         <%= Dtos::Classroom::StudentRegistrationInput.human_attribute_name(:gender) %><span class="text-error" aria-hidden="true"> *</span>
       </legend>
       <div class="grid grid-cols-2 gap-3">
         <% Entities::Identity::User::GENDERS.each do |gender| %>
-          <label class="flex min-h-tap cursor-pointer items-center gap-3 rounded-ln border border-line bg-white px-4 transition has-checked:border-brand has-checked:bg-brand-soft">
-            <%= form.radio_button :gender, gender, required: true, class: "size-5 shrink-0 accent-brand",
+          <label class="relative flex h-11 items-center justify-center rounded-full border border-line bg-white px-4 font-display font-bold text-ink transition has-checked:border-brand-strong has-checked:bg-brand-strong has-checked:text-white">
+            <%= form.radio_button :gender, gender, required: true,
+                                  class: "absolute inset-0 cursor-pointer appearance-none rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
                                   "aria-invalid": ("true" if gender_error) %>
-            <span class="text-sm font-medium text-ink"><%= t("genders.#{gender}") %></span>
+            <%= t("genders.#{gender}") %>
           </label>
         <% end %>
       </div>
@@ -68,10 +82,9 @@
     <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 20, inputmode: "numeric",
                  autocomplete: "tel-national", placeholder: t(".contact_placeholder"), hint: t(".contact_hint"),
                  data: { identity__phone_digits_target: "input", action: "input->identity--phone-digits#clean" } %>
-  </fieldset>
+  <% end %>
 
-  <fieldset class="space-y-4">
-    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".security") %></legend>
+  <%= section.call(3, :security) do %>
     <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
                  hint: t(".pin_hint"), data: { identity__pin_match_target: "pin", action: "input->identity--pin-match#check" } %>
     <div class="space-y-1.5">
@@ -83,7 +96,7 @@
       <template data-identity--pin-match-target="okIcon"><%= ui_icon "check-circle", variant: :mini, size: :sm %></template>
       <template data-identity--pin-match-target="koIcon"><%= ui_icon "x-circle", variant: :mini, size: :sm %></template>
     </div>
-  </fieldset>
+  <% end %>
 
   <%# Sans JavaScript, jamais désactivé ; le contrôleur classroom--class-picker le désactive tant qu'aucune classe n'est cochée. %>
   <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, full: true, id: "student-registration-submit",

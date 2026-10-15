@@ -37,7 +37,7 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     get new_student_registration_path
 
     assert_response :success
-    assert_select "h2", text: I18n.t("#{PAGE}.title")
+    assert_select "h1", text: I18n.t("#{PAGE}.title"), count: 1
     assert_select "p", text: I18n.t("#{PAGE}.subtitle")
     assert_select "form#student-registration-form[action='#{student_registrations_path}'][method=post]" \
                   "[data-controller='classroom--class-picker identity--phone-digits identity--pin-match']" \
@@ -45,7 +45,8 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
                   "[data-classroom--class-picker-levels-url-value='#{school_picker_levels_path('__school__', scope: :student_registration)}']" \
                   "[data-classroom--class-picker-classrooms-url-value='" \
                   "#{school_picker_classrooms_path('__school__', '__level__', scope: :student_registration)}']" do
-      assert_equal [ "Ta classe", "Toi", "Code secret" ], css_select("fieldset > legend.uppercase").map { it.text.strip }
+      assert_equal [ "1 Ta classe", "2 Toi", "3 Code secret" ],
+                   css_select("[id^=student-registration-section] > fieldset > legend").map { it.text.squish }
       # UDR-0091 §3.4 : la rubrique 1 montre les trois étapes, les listes ouvertes tant que l'établissement est inconnu.
       assert_equal [ "1 #{I18n.t("#{PICKER}.step_school")}", "2 #{I18n.t("#{PICKER}.step_level")}",
                      "3 #{I18n.t("#{PICKER}.step_classroom")}" ], css_select("fieldset[id^=class-picker-step] > legend").map { it.text.squish }
@@ -78,6 +79,57 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_select "#classroom-preview, #classroom-link-invalid, #other-classroom", 0
     assert_no_match(/Code de classe/, response.body)
     assert_select "a[href='#{new_session_path}']", text: I18n.t("#{PAGE}.sign_in")
+  end
+
+  # UDR-0088 §3.1, §3.2, §3.4, §3.7 (CA-4): the blue welcome, help at the top right, three numbered sections each in a white
+  # card (a fieldset and its legend, the number decorative), the gender in two big pills that are real radios.
+  test "CA-4: three numbered sections in white cards, the gender in two big pills, the blue welcome and the help" do
+    get new_student_registration_path
+
+    assert_select "body > div.grid[class~='lg:grid-cols-2']" do
+      assert_select "> aside#auth-welcome-panel", text: /Bienvenue sur Lnclass.*Ton espace d'apprentissage/m
+      assert_select "> div > #auth-help [aria-controls=help-sheet]", text: "Besoin d'aide ?"
+      assert_select "> div > main > div.max-w-140 > section#auth-welcome-card", text: /Bienvenue sur Lnclass/
+    end
+    %w[classroom you security].each_with_index do |section, index|
+      assert_select "#student-registration-section-#{section}.rounded-card.bg-white > fieldset > legend" do
+        assert_select "span[aria-hidden=true].bg-brand-soft.text-brand-strong", text: (index + 1).to_s
+      end
+    end
+    assert_select "#student-registration-section-you fieldset#student-registration-gender > legend", text: /Genre/
+    assert_select "#student-registration-gender label.h-11[class~='has-checked:bg-brand-strong']", count: 2 do |pills|
+      assert_equal [ I18n.t("genders.male"), I18n.t("genders.female") ].sort, pills.map { it.text.squish }.sort
+    end
+    assert_select "#student-registration-gender label > input[type=radio][name='student_registration[gender]'][required]", count: 2
+    assert_select "#student-registration-form + p a[href=?]", new_session_path, text: I18n.t("#{PAGE}.sign_in")
+    assert_select "dialog#help-sheet", 1
+  end
+
+  # UDR-0088 §3.1: at 1 024 px (lg) the panel shows and the blue card hides; below, the reverse.
+  test "the blue panel is hidden under lg and the blue card from lg" do
+    get new_student_registration_path
+
+    assert_select "aside#auth-welcome-panel.hidden[class~='lg:flex']", 1
+    assert_select "section#auth-welcome-card[class~='lg:hidden']", 1
+    assert_select "aside#auth-welcome-panel[class~='lg:hidden'], section#auth-welcome-card.hidden", 0
+  end
+
+  test "a missing gender is refused under the gender, the fieldset described by it and both radios invalid" do
+    register(gender: "")
+
+    assert_refused :gender, I18n.t("#{ERRORS}.gender.inclusion")
+    assert_select "fieldset#student-registration-gender[aria-describedby=student_registration_gender_error]"
+    assert_select "#student-registration-gender input[type=radio][aria-invalid=true]", count: 2
+  end
+
+  # CA-6: a number of 9 digits comes back in 422, its message under the field, the field marked for the focus.
+  test "CA-6: a 9-digit number is refused under the number, the field invalid and first in error" do
+    register(contact: "070102030")
+
+    assert_refused :contact, I18n.t("#{ERRORS}.contact.invalid")
+    assert_select "#student-registration-section-you input#student_registration_contact[aria-invalid=true]" \
+                  "[aria-describedby~=student_registration_contact_error]"
+    assert_select "[aria-invalid=true]", 1
   end
 
   test "IL-04 without JavaScript: each choice sent in GET lists the next step in the page" do
@@ -310,7 +362,9 @@ end
     register(link_token: token, pin_confirmation: "1357", drena_public_id: nil)
 
     assert_refused :pin_confirmation, I18n.t("#{ERRORS}.pin_confirmation.confirmation")
-    assert_select "#classroom-preview", text: /3e 2 — Lycée Moderne de Cocody/
+    # CA-7 : le bandeau de la classe et « Ce n'est pas ta classe ? » dans la rubrique 1.
+    assert_select "#student-registration-section-classroom #classroom-preview", text: /3e 2 — Lycée Moderne de Cocody/
+    assert_select "#student-registration-section-classroom a#other-classroom", text: I18n.t("#{FORM}.other_classroom")
     assert_select "input[type=hidden][name='student_registration[link_token]'][value='#{token}']"
     assert_select "a#other-classroom[href='#{new_student_registration_path}']"
     assert_select "select[name='student_registration[drena_public_id]'], turbo-frame#picker_schools", 0
@@ -391,6 +445,8 @@ end
 
     assert_response :too_many_requests
     assert_select "form#student-registration-form [role=alert]", text: I18n.t("errors.codes.rate_limited")
+    # UDR-0088 §3.1 : en 429 aussi, la carte du formulaire suit l'accueil bleu.
+    assert_select "main section#auth-welcome-card ~ form#student-registration-form", 1
     assert_select "turbo-frame#picker_classrooms input[checked][value='#{@classroom.public_id}']"
     assert_not Orm::User.exists?(contact: "0701020304")
 
