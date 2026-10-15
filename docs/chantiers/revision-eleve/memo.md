@@ -1,4 +1,4 @@
-# Memo — Révision de l'élève (cours et fiches essentielles) aux couleurs Wave et Djamo
+# Memo — Révision de l'élève (fiche de révision) aux couleurs Wave et Djamo
 
 | | |
 |---|---|
@@ -39,9 +39,10 @@ Toile : https://claude.ai/artifact/2GWogAXzCziL8dR3FqcdGt (téléphone d'abord).
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
 | Quelle page après le parcours d'exercice ? | La page de révision (porteur, 2026-10-15). | Le chantier couvre la page du cours et la page de la fiche essentielle. |
+| Les fiches essentielles restent-elles telles quelles ? | Non : elles deviennent les « fiches de révision », et leur contenu est découpé en rubriques (porteur, 2026-10-15). | On applique les décisions du chantier `contenu-en-blocs` : une fiche de révision par leçon avec un sommaire, les fiches essentielles en deviennent les parties ; rubriques Tu dois savoir, À retenir, En clair (à masquer), Méthode, Exemple rédigé, Attention, Tableau, Document, Figure ; lexique en bulle et en bas de fiche, sources ; fond Seyès, écriture manuscrite, une couleur par rubrique ; exercices par partie (Comprendre, Appliquer, S'évaluer). La page du cours devient la fiche de révision. Accueil : « Fiches de révision à revoir » ; résultat d'exercice : « Relis ta fiche de révision ». |
 
 ## Questions ouvertes
 
-1. Sur la page du cours, met-on les fiches avant la leçon (plus court au téléphone) ?
-2. Ajoute-t-on « Fiche suivante » en bas d'une fiche ?
-3. Marque-t-on les fiches déjà lues ?
+1. Le contenu libre actuel de la leçon disparaît-il au profit des parties ?
+2. Le sommaire reste-t-il visible en défilant (en haut au téléphone, à droite sur ordinateur) ?
+3. Conflit avec `contenu-en-blocs` : il excluait « remettre dans l'ordre » et faisait trous et relier avec des choix uniques ; `exercice-eleve` vient d'ajouter les quatre types (porteur, 2026-10-15). À aligner dans `contenu-en-blocs`.
