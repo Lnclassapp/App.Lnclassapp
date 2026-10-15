@@ -201,7 +201,7 @@ module UseCases
       end
 
       test "indices d'affichage : relus par le mélange de la session, enregistrés dans l'ordre de l'élève" do
-        shuffled = Entities::Assessment::AnswerShuffle.for(session_id: 5, question_id: 2, ids: [ 21, 22, 23 ])
+        shuffled = Entities::Assessment::AnswerShuffle.for(session_id: 5, question_id: 2, ids: [ 21, 22, 23 ], avoid: [ 21, 22, 23 ])
         right = [ 21, 22, 23 ].map { shuffled.index(it) }
 
         assert submit_with(ByIndices, display_order: right.map(&:to_s)).value.correct

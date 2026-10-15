@@ -13,6 +13,9 @@ module Entities
           assert_equal BigDecimal("-2"), Numeric.parse("-2")
           assert_equal BigDecimal("1000.25"), Numeric.parse("1 000,25")
           assert_equal BigDecimal("12000"), Numeric.parse("12 000")
+          assert_equal BigDecimal("3.5"), Numeric.parse("\u00A03,5\u202F\n")
+          # ADR-0091 §4.3 : le point est toujours décimal, jamais le séparateur des milliers.
+          assert_equal 1, Numeric.parse("1.000")
         end
 
         test "une saisie illisible rend nil" do
@@ -30,6 +33,8 @@ module Entities
           assert question("3,5", tolerance: BigDecimal("0.1")).correct?("3.45")
           assert question("3,5", tolerance: BigDecimal("0.1")).correct?("3,6")
           assert_not question("3,5", tolerance: BigDecimal("0.1")).correct?("3.61")
+          assert question("3,5", tolerance: BigDecimal("0.1")).correct?("3.4")
+          assert_not question("3,5", tolerance: BigDecimal("0.1")).correct?("3.39")
           assert question("-2").correct?("−2")
           assert question("3.5").correct?("3,50")
           assert_not question("3.5").correct?("3.51")
@@ -47,6 +52,10 @@ module Entities
           assert_equal [ :numeric_needs_one_value ], question(nil, values: []).structure_errors
           assert_equal [ :numeric_value_unreadable ], question("trois").structure_errors
           assert_equal [ :negative_tolerance ], question("3", tolerance: BigDecimal("-0.1")).structure_errors
+          assert_empty question("3", tolerance: BigDecimal("99999999.9999")).structure_errors
+          [ BigDecimal("1e30"), BigDecimal("100000000"), BigDecimal("0.00001"), BigDecimal("Infinity") ].each do |tolerance|
+            assert_equal [ :tolerance_out_of_range ], question("3", tolerance:).structure_errors, tolerance.to_s
+          end
         end
       end
     end

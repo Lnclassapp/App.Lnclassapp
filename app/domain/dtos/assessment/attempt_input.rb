@@ -18,6 +18,8 @@ module Dtos
       # Une question à cocher n'envoie que answer_ids ; les trous et le nombre, response_text ; l'ordre et relier, display_order.
       validates :answer_ids, presence: true, if: -> { response_text.nil? && display_order.empty? }
       validates :response_text, presence: true, length: { maximum: RESPONSE_TEXT_MAX }, unless: -> { response_text.nil? }
+      # PostgreSQL refuse l'octet nul dans un texte : refusé ici, en 422, plutôt qu'en erreur de la base.
+      validates :response_text, format: { without: /\0/ }, unless: -> { response_text.nil? }
 
       # Cases à cocher et boutons radio envoient attempt[answer_ids][] ; une valeur seule se lit comme une liste.
       def answer_ids=(value)

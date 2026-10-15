@@ -12,17 +12,29 @@ module Entities
         # Apostrophes typographiques du clavier d'un téléphone (’ ‘ ʼ) : la même apostrophe que celle de l'enseignant.
         APOSTROPHES = /[’‘ʼ]/
 
-        # Minuscules, accents décomposés puis retirés, apostrophes unifiées, espaces réduits à un seul et retirés aux bords.
-        # Aucune distance d'édition : « Abidjn » n'est pas « Abidjan ».
+        # Tirets Unicode (‐ ‑ ‒ – — ― et le moins −) : le trait d'union du clavier.
+        DASHES = /[\u2010-\u2015\u2212]/
+        LIGATURES = { "œ" => "oe", "æ" => "ae" }.freeze
+
+        # Minuscules, accents décomposés puis retirés, ligatures œ et æ dépliées, apostrophes et tirets unifiés, espaces réduits
+        # à un seul et retirés aux bords. Aucune distance d'édition : « Abidjn » n'est pas « Abidjan ».
         def self.normalize(text)
-          text.to_s.unicode_normalize(:nfd).gsub(/\p{Mn}/, "").downcase.gsub(APOSTROPHES, "'").gsub(/[[:space:]]+/, " ").strip
+          text.to_s.unicode_normalize(:nfd).gsub(/\p{Mn}/, "").downcase.gsub(/[œæ]/, LIGATURES).gsub(APOSTROPHES, "'")
+              .gsub(DASHES, "-").gsub(/[[:space:]]+/, " ").strip
         end
 
         def self.structure_errors(content:, answers:, **)
           errors = []
           errors << :blank_marker unless content.scan(MARKER).size == 1
           errors << :accepted_answers_count unless ACCEPTED.cover?(answers.size)
+          errors << :duplicate_accepted if duplicates?(answers.map(&:content))
           errors
+        end
+
+        # Deux textes égaux une fois normalisés : la même réponse acceptée, saisie deux fois.
+        def self.duplicates?(texts)
+          normalized = texts.map { normalize(it) }.reject(&:empty?)
+          normalized.uniq.size != normalized.size
         end
 
         def self.well_formed?(_question, text) = !normalize(text).empty?

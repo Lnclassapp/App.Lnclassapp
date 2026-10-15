@@ -2,8 +2,10 @@
 <%# Rôle : badge, « Félicitations ! » (dès 14/20) ou « Courage ! », note (verte dès 14/20) et maîtrise, progrès, « Recommencer » (caché à 20/20), correction %>
 <%# ADR  : 0033, 0054, 0079, 0091 · UDR : 0007, 0023, 0054, 0057, 0073, 0087 §3.6 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
 <% result = @result %>
-<%# UDR-0087 §3.6 : le titre et la couleur de la note suivent la maîtrise (14/20), comme les confettis. %>
-<% tone = result.score_percent >= Entities::Assessment::Grading::MASTERY_THRESHOLD ? :success : :error %>
+<%# UDR-0087 §3.6 : le titre, la couleur de la note et les confettis dès « 14/20 » affiché, la règle de l'historique, de
+    « Ma classe » et de l'accueil (68 % s'affiche 14/20). %>
+<% grading = Entities::Assessment::Grading %>
+<% tone = grading.grade_on_20(result.score_percent) >= grading.grade_on_20(grading::MASTERY_THRESHOLD) ? :success : :error %>
 <% tile = "rounded-ln bg-mist px-3 py-3 text-center" %>
 <% label = "text-2xs font-bold tracking-wide text-mute uppercase" %>
 <% page_title t(".page_title", title: result.exercise.title) %>

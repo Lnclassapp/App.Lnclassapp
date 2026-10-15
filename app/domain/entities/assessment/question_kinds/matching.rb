@@ -14,7 +14,8 @@ module Entities
           errors = []
           errors << :pairs_count unless PAIRS.cover?(answers.size)
           errors << :missing_match if rights.any?(&:empty?)
-          errors << :duplicate_match if rights.reject(&:empty?).map { FillBlank.normalize(it) }.then { it.uniq.size != it.size }
+          errors << :duplicate_match if FillBlank.duplicates?(rights)
+          errors << :duplicate_left if FillBlank.duplicates?(answers.map(&:content))
           errors
         end
 

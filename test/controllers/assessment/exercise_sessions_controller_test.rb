@@ -31,6 +31,7 @@ class Assessment::ExerciseSessionsControllerTest < ActionDispatch::IntegrationTe
     assert_select "h1", text: "Méiose"
     # UDR-0087 §3.2 : mode concentré ; en haut la croix (lien vers l'exercice sans JavaScript), la barre et « 1/2 ».
     assert_select "header.z-40", 0
+    assert_select "aside, nav[aria-label], a[href='#main']", 0
     assert_select "a[href=?][aria-label=?][aria-controls='quit-dialog']", exercise_path(@exercise.public_id),
                   I18n.t("#{scope}.quit_dialog.trigger")
     assert_select "#progress_counter", text: /1\/2/

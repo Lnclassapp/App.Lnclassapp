@@ -25,6 +25,9 @@ class Assessment::QuestionFillBlankTest < ActionDispatch::IntegrationTest
     assert_select "input[type=text][name='attempt[response_text]'][required][autocapitalize=off][spellcheck=false]" \
                   "[aria-label=?]", "La capitale économique de la Côte d'Ivoire est blanc ."
     assert_no_match(/Abidjan|Babi|Yamoussoukro/, response.body)
+    # « Valider » attend le texte : le formulaire écoute la saisie (assessment--answer), sans test système.
+    assert_select "form#attempt-form[data-controller~='assessment--answer'][data-action~='input->assessment--answer#check']"
+    assert_select "form#attempt-form button[type=submit][data-assessment--answer-target=submit]"
   end
 
   test "CA-4 : « ABIDJAN  » est juste, enregistré tel quel ; le verdict le redit sans rien d'autre" do
@@ -45,6 +48,7 @@ class Assessment::QuestionFillBlankTest < ActionDispatch::IntegrationTest
 
     answer "Abidjn"
     assert_equal [ false, "Abidjn" ], Orm::QuestionAttempt.sole.values_at(:correct, :response_text)
+    assert_no_match(/Abidjan|Babi|Yamoussoukro/, response.body)
   end
 
   test "la correction de l'élève redit son texte ; celle de l'enseignant ajoute les réponses acceptées" do

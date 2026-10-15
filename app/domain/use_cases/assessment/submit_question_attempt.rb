@@ -62,7 +62,8 @@ module UseCases
         case question.kind::INPUT
         when :response_text then dto.response_text.to_s
         when :display_order
-          shuffled = Entities::Assessment::AnswerShuffle.for(session_id: session.id, question_id: question.id, ids: question.answer_ids)
+          shuffled = Entities::Assessment::AnswerShuffle.for(session_id: session.id, question_id: question.id, ids: question.answer_ids,
+                                                             avoid: question.ids_by_position)
           Entities::Assessment::AnswerShuffle.pick(shuffled, dto.display_order)
         else dto.answer_ids
         end

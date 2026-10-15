@@ -19,7 +19,7 @@ class Assessment::QuestionMatchingTest < ActionDispatch::IntegrationTest
   # Pour chaque gauche, dans l'ordre, l'indice d'affichage de la droite voulue.
   def indices(rights)
     ids = @question.answers.order(:position).map(&:id)
-    shuffled = Entities::Assessment::AnswerShuffle.for(session_id: @session.id, question_id: @question.id, ids:)
+    shuffled = Entities::Assessment::AnswerShuffle.for(session_id: @session.id, question_id: @question.id, ids:, avoid: ids)
     rights.map { |right| shuffled.index(ids[PAIRS.index { it.last == right }]) }
   end
 
@@ -87,5 +87,26 @@ class Assessment::QuestionMatchingTest < ActionDispatch::IntegrationTest
       assert_select "#import-help-question-kinds", text: /"tolerance": 0.1/
       assert_select "#import-help-question-kinds", text: /"match": "3x \+ 3"/
     end
+  end
+
+
+  test "aucun id de cette question n'apparaît dans la page, où que ce soit" do
+    get exercise_session_path(@session.public_id)
+
+    Orm::Answer.where(question_id: @question.id).pluck(:id).each { assert_no_match(/\b#{it}\b/, response.body) }
+  end
+
+  test "la correction de l'élève ne marque aucune solution" do
+    answer [ "2x-8", "3x+3", "10+5x" ]
+    student_result_body
+    assert_select "[data-correct]", 0
+  end
+
+  # La correction de l'élève redit sa réponse, sans aucune solution marquée.
+  def student_result_body
+    @session.update!(status: "completed", score_percent: 0, completed_at: Time.current)
+    sign_in_as @student
+    get exercise_session_result_path(@session.public_id)
+    response.body
   end
 end

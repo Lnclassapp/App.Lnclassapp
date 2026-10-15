@@ -1,7 +1,8 @@
 # ADR-0091 §4.1, Lot 0 of exercice-eleve: four new question types (fill_blank, numeric, ordering, matching) live on the
 # existing tables. questions gains its numeric tolerance, answers the right-hand side of a matching pair, and an attempt
-# may hold typed text instead of chosen answers. Rerunnable both ways; down refuses while a row of a new type exists,
-# since the narrower CHECKs would no longer hold.
+# may hold typed text instead of chosen answers. Rerunnable both ways. Down drops the three columns and puts the narrower
+# CHECKs back: PostgreSQL validates them on existing rows, so down fails (and rolls back) while a question of a new type
+# or an attempt without chosen answers remains; such rows must be deleted first.
 class AddQuestionKinds < ActiveRecord::Migration[8.1]
   TYPES = "questions_question_type_values".freeze
   OLD_TYPES = "question_type IN ('true_false','single_choice','multiple_correct_2','multiple_correct_3')".freeze

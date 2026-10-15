@@ -261,6 +261,40 @@ module UseCases
         assert_equal [ BigDecimal("0.1"), [ [ "3,5", true ] ] ], [ question.numeric_tolerance, question.answers.pluck(:content, :correct) ]
       end
 
+      def kind_question(question_type, answers, content: "Énoncé ___ .", **extra)
+        { "content" => content, "question_type" => question_type, "answers" => answers, **extra.transform_keys(&:to_s) }
+      end
+
+      test "a tolerance too large or too precise is refused at .tolerance, and the other exercises are imported" do
+        numeric = ->(title, tolerance) { exercise(title, "questions" => [ kind_question("numeric", [ { "content" => "3,5" } ], tolerance:) ]) }
+
+        report = run_import(document(numeric.("Énorme", 1e30), numeric.("Précise", 0.00001), exercise("Bon")))
+
+        assert_equal [ 3, 1, 2 ], report.values_at(:total_count, :imported_count, :error_count)
+        assert_equal [ "exercises[0].questions[0].tolerance", "exercises[1].questions[0].tolerance" ],
+                     report.import_errors.map { it["path"] }.sort
+        assert_equal [ "Bon" ], Orm::Exercise.pluck(:title)
+      end
+
+      test "malformed new questions are reported at their path, with their rule" do
+        questions = [
+          kind_question("fill_blank", [ { "content" => "Abidjan" } ], content: "Sans blanc."),
+          kind_question("ordering", [ { "content" => "A" }, { "content" => "B" } ]),
+          kind_question("numeric", [ { "content" => "trois" } ]),
+          kind_question("matching", [ { "content" => "a", "match" => "1" }, { "content" => "b", "match" => "1" }, { "content" => "c", "match" => "3" } ]),
+          kind_question("single_choice", [ { "content" => "A", "correct" => true, "match" => "x" }, { "content" => "B" } ], tolerance: 0.5)
+        ]
+
+        report = run_import(document(exercise("Mal formé", "questions" => questions)))
+
+        path = "exercises[0].questions"
+        assert_equal [ [ "#{path}[0].content", "blank_marker" ], [ "#{path}[1].answers", "steps_count" ],
+                       [ "#{path}[2].answers", "numeric_value_unreadable" ], [ "#{path}[3].answers", "duplicate_match" ],
+                       [ "#{path}[4].answers[0].match", "match_not_allowed" ], [ "#{path}[4].tolerance", "tolerance_not_allowed" ] ],
+                     report.import_errors.map { [ it["path"], it.dig("params", "rule") ] }.sort
+        assert_equal 0, Orm::Exercise.count
+      end
+
       test "a negative tolerance or a too long match is refused by the schema, at its path" do
         bad = exercise("Marge")
         bad["questions"][0]["tolerance"] = -1

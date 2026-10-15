@@ -42,6 +42,7 @@ module Dtos
         assert input(response_text: "x" * 201).tap(&:validate).errors.added?(:response_text, :too_long, count: 200)
         assert_nil input.response_text
         assert_nil input(response_text: nil).response_text
+        assert input(response_text: "Abi\0djan").tap(&:validate).errors.added?(:response_text, :invalid, value: "Abi\0djan")
       end
 
       test "les indices d'affichage gardent leur ordre et leurs doublons ; un indice illisible reste, en -1" do

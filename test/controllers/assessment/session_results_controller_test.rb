@@ -87,6 +87,19 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-controller='assessment--confetti']", 1
   end
 
+  # UDR-0087 §3.6 : dès « 14/20 » affiché, la règle de l'historique, de « Ma classe » et de l'accueil.
+  test "70 % et 68 % s'affichent 14/20, « Félicitations ! » en vert ; 67 % s'affiche 13/20, « Courage ! »" do
+    sign_in_as @student
+
+    { 70 => [ "14/20", :success ], 68 => [ "14/20", :success ], 67 => [ "13/20", :error ] }.each do |score, (grade, tone)|
+      @session.update!(score_percent: score)
+      show
+      assert_select "h1", text: I18n.t("#{scope}.show.headline.#{tone}")
+      assert_select "#session_grade#{".text-success" if tone == :success}", text: grade
+      assert_select "#session_grade.text-success", 0 if tone == :error
+    end
+  end
+
   test "la revue de l'élève : ses choix, le verdict et l'explication, jamais une proposition juste qu'il n'a pas choisie" do
     sign_in_as @student
 

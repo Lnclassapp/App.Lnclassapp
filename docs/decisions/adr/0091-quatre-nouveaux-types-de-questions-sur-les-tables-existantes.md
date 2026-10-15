@@ -92,6 +92,8 @@ Aujourd'hui, tout le moteur suppose « cocher parmi des propositions » :
   - Formes acceptées : la virgule ou le point comme séparateur, le signe moins ASCII ou Unicode (`−`), les espaces des milliers.
   - Juste si `|saisie − attendue| ≤ marge` (marge 0 si `NULL`).
   - Une saisie illisible n'est pas `well_formed?` : l'élève voit une erreur de saisie, pas « Mauvaise réponse ».
+  - Le point et la virgule sont toujours le séparateur décimal, jamais celui des milliers : « 1.000 » vaut 1, et « 1 000 » vaut mille.
+  - La marge tient dans `decimal(12,4)` : finie, au plus 99 999 999,9999, quatre décimales au plus ; sinon `:tolerance_out_of_range`.
 - **`Ordering#correct?(ids)`** : les ids reconstitués (§4.4) sont égaux aux ids triés par `position`.
 - **`Matching#correct?(ids)`** : pour chaque élément de gauche pris dans l'ordre des positions, l'id de l'élément de droite choisi est le sien.
 - **`Grading`** ne change pas : une question compte 1 ou 0.
@@ -103,6 +105,8 @@ Aujourd'hui, tout le moteur suppose « cocher parmi des propositions » :
   - **Affichage** : les éléments mélangés (les étapes, ou la colonne de droite) sont montrés dans l'ordre d'un mélange déterministe, propre à la session. Ce mélange est déjà utilisé pour les choix, et il passe dans le domaine : `Entities::Assessment::AnswerShuffle.for(session_public_id:, question_id:, ids:)`.
   - **Envoi** : le formulaire poste des **indices d'affichage** (`attempt[display_order][]`), jamais des ids.
   - **Lecture** : `SubmitQuestionAttempt` reconstitue les ids avec le même mélange, puis enregistre ces ids dans `selected_answer_ids`, dans l'ordre choisi par l'élève.
+  - **Graine** : le mélange est tiré de `session_id ^ question_id`, l'id entier de la session (pas son `public_id`), pour que les sessions ouvertes avant ce chantier se reprennent à l'identique. Aucune surface élève (page, lien, donnée, message) ne doit donc exposer `exercise_sessions.id` : avec lui et l'id de la question, l'ordre d'affichage se recalculerait.
+  - **Mélange identité** : pour l'ordre et relier seulement, si le mélange donne la solution telle quelle, il tourne d'un cran. Les choix ne changent pas.
   - **Colonne de gauche de « relier »** : elle est montrée dans l'ordre des positions, sans id.
 - **« Ton choix »** (retour et correction) :
   - pour les trous et le nombre, le texte saisi (`response_text`) ;

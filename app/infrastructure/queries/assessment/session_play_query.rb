@@ -71,7 +71,8 @@ module Queries
         when "choice"
           rows = Orm::Answer.where(question_id:).pluck(:id, :content).to_h
           { answers: shuffled(session_id, question_id, rows.keys).each_with_index.map { |id, index| Answer.new(id:, content: rows[id], index:) } }
-        when "ordering" then { items: items(session_id, question_id, Orm::Answer.where(question_id:).pluck(:id, :content).to_h) }
+        when "ordering"
+          { items: items(session_id, question_id, Orm::Answer.where(question_id:).order(:position, :id).pluck(:id, :content).to_h) }
         when "matching"
           rows = Orm::Answer.where(question_id:).order(:position, :id).pluck(:id, :content, :match_content)
           { prompts: rows.map { it[1] }, items: items(session_id, question_id, rows.to_h { |id, _, right| [ id, right ] }) }
@@ -79,8 +80,10 @@ module Queries
         end
       end
 
+      # contents : { id => texte }, dans l'ordre des positions, qui est la solution que le mélange évite (ADR-0091 §4.4).
       def items(session_id, question_id, contents)
-        shuffled(session_id, question_id, contents.keys).each_with_index.map { |id, index| Item.new(index:, content: contents[id]) }
+        Entities::Assessment::AnswerShuffle.for(session_id:, question_id:, ids: contents.keys, avoid: contents.keys)
+                                           .each_with_index.map { |id, index| Item.new(index:, content: contents[id]) }
       end
 
       # Mélangées, mais dans le même ordre à chaque affichage de la même session (AS-09, ADR-0091 §4.4).

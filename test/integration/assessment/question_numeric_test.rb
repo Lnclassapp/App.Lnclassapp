@@ -39,6 +39,26 @@ class Assessment::QuestionNumericTest < ActionDispatch::IntegrationTest
     assert_select "#feedback-card p[aria-labelledby=feedback-selected]", text: "42.6"
   end
 
+  test "une mauvaise réponse ne révèle ni la valeur ni la marge, au verdict comme au résultat" do
+    answer @question, "40"
+    assert_equal false, Orm::QuestionAttempt.sole.correct
+    assert_no_match(/42[,.]75|0[,.]25/, response.body)
+
+    student_result_body
+    # Le texte de la page, pas ses icônes : les tracés SVG contiennent des nombres comme 0.25.
+    assert_no_match(/42[,.]75|0[,.]25/, css_select("main").text)
+    assert_select "[data-correct]", 0
+  end
+
+  # La correction de l'élève redit sa réponse, sans aucune solution marquée.
+  def student_result_body
+    @session.update!(status: "completed", score_percent: 0, completed_at: Time.current)
+    sign_in_as @student
+    get exercise_session_result_path(@session.public_id)
+    response.body
+  end
+
+
   test "CA-6 : « −2 » (moins Unicode) est juste" do
     answer @question, "42,75"
     answer @negative, "−2"
@@ -58,6 +78,11 @@ class Assessment::QuestionNumericTest < ActionDispatch::IntegrationTest
 
     post teams_essential_exercises_path(essential.slug), params: params.("beaucoup"), as: :turbo_stream
     assert_response :unprocessable_entity
+    # Trop grande pour decimal(12,4) : refusée comme règle de structure, sans erreur de la base.
+    post teams_essential_exercises_path(essential.slug), params: params.("1000000000"), as: :turbo_stream
+    assert_response :unprocessable_entity
+    assert_select "[role=alert]", text: I18n.t("activemodel.errors.models.dtos/assessment/exercise_input.attributes.questions.tolerance_out_of_range")
+    assert_equal 0, Orm::Exercise.where(title: "Nombre").count
 
     post teams_essential_exercises_path(essential.slug), params: params.("0,25"), as: :turbo_stream
     question = Orm::Exercise.find_by!(title: "Nombre").questions.sole

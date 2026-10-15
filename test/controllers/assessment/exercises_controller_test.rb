@@ -112,6 +112,17 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{edit_teams_exercise_path(@exercise.public_id)}']", 0
   end
 
+  test "la meilleure note est verte dès « 14/20 » affiché : 68 % oui, 67 % non" do
+    sign_in_as @student
+    session = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 67)
+    get exercise_path(@exercise.public_id)
+    assert_select "#student_progress dd span.text-success", 0
+
+    session.update!(score_percent: 68)
+    get exercise_path(@exercise.public_id)
+    assert_select "#student_progress dd span.text-success", text: "14/20"
+  end
+
   # CA-16, ADR-0091 §4.4 : l'enseignant voit la solution des nouveaux types ; l'élève ni valeur, ni réponse, ni ordre.
   test "nouveaux types : la solution pour l'enseignant, l'énoncé et le type seuls pour l'élève" do
     create_kind_question(exercise: @exercise, question_type: "fill_blank", content: "La capitale est ___ .", answers: %w[Yamoussoukro])

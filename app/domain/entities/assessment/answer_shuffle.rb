@@ -6,7 +6,12 @@ module Entities
     module AnswerShuffle
       # Gelé : les identifiants triés, mélangés par la graine session_id ^ question_id, exactement comme le faisait
       # SessionPlayQuery avant l'ADR-0091. Le changer fausserait la correction des sessions déjà ouvertes.
-      def self.for(session_id:, question_id:, ids:) = ids.sort.shuffle(random: Random.new(session_id ^ question_id))
+      # avoid : la solution d'un ordre ou d'un relier (ids dans l'ordre des positions) ; si le mélange la donne telle quelle,
+      # il tourne d'un cran. Les choix ne passent jamais avoid : leur mélange, et les sessions d'avant, ne changent pas.
+      def self.for(session_id:, question_id:, ids:, avoid: nil)
+        shuffled = ids.sort.shuffle(random: Random.new(session_id ^ question_id))
+        avoid && shuffled.size > 1 && shuffled == avoid ? shuffled.rotate : shuffled
+      end
 
       # indices : indices d'affichage postés (attempt[display_order][]). Une permutation de 0...n rend les identifiants
       # dans l'ordre de l'élève ; toute autre liste (manquant, doublon, hors bornes) rend [], une réponse mal formée.

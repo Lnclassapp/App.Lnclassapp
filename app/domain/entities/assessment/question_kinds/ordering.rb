@@ -9,7 +9,13 @@ module Entities
         INPUT = :display_order
         INVALID = { display_order: [ :wrong_order ] }.freeze
 
-        def self.structure_errors(answers:, **) = STEPS.cover?(answers.size) ? [] : [ :steps_count ]
+        # Deux étapes de même texte rendraient l'ordre ambigu : l'élève ne saurait laquelle est laquelle.
+        def self.structure_errors(answers:, **)
+          errors = []
+          errors << :steps_count unless STEPS.cover?(answers.size)
+          errors << :duplicate_steps if FillBlank.duplicates?(answers.map(&:content))
+          errors
+        end
 
         # ids : reconstitués par AnswerShuffle, dans l'ordre de l'élève ; chaque étape une fois.
         def self.well_formed?(question, ids) = ids.sort == question.answer_ids.sort

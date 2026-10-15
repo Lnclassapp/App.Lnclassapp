@@ -123,7 +123,7 @@ module Queries
         steps = question.answers.order(:position).to_a
 
         items = play(session).next_question.items
-        expected = Entities::Assessment::AnswerShuffle.for(session_id: session.id, question_id: question.id, ids: steps.map(&:id))
+        expected = Entities::Assessment::AnswerShuffle.for(session_id: session.id, question_id: question.id, ids: steps.map(&:id), avoid: steps.map(&:id))
         assert_equal expected.map { |id| steps.find { it.id == id }.content }, items.map(&:content)
         assert_equal [ 0, 1, 2, 3 ], items.map(&:index)
         assert items.none? { it.respond_to?(:id) }
@@ -137,7 +137,7 @@ module Queries
         next_question = play(session).next_question
         assert_equal %w[3(x+1) 2(x-4) 5(2+x)], next_question.prompts
         ids = question.answers.order(:position).map(&:id)
-        shuffled = Entities::Assessment::AnswerShuffle.for(session_id: session.id, question_id: question.id, ids:)
+        shuffled = Entities::Assessment::AnswerShuffle.for(session_id: session.id, question_id: question.id, ids:, avoid: ids)
         assert_equal shuffled.map { pairs[ids.index(it)].last }, next_question.items.map(&:content)
         assert next_question.items.none? { it.respond_to?(:id) }
       end

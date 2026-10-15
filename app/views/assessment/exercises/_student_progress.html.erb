@@ -12,7 +12,8 @@
       <dt class="flex items-center gap-1"><span class="<%= label %>"><%= t(".best_score") %></span></dt>
       <dd class="mt-1 font-display text-xl font-extrabold tabular-nums">
         <% if progress.best_score_percent %>
-          <span class="<%= "text-success" if progress.best_score_percent >= Entities::Assessment::Grading::MASTERY_THRESHOLD %>"><%= grade_label(progress.best_score_percent) %></span>
+          <% grading = Entities::Assessment::Grading %>
+          <span class="<%= "text-success" if grading.grade_on_20(progress.best_score_percent) >= grading.grade_on_20(grading::MASTERY_THRESHOLD) %>"><%= grade_label(progress.best_score_percent) %></span>
         <% else %>
           <span class="text-mute"><%= t(".no_score") %></span>
         <% end %>

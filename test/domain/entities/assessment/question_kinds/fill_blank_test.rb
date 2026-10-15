@@ -15,6 +15,10 @@ module Entities
           assert question("Abidjan").correct?("ABIDJAN  ")
           assert question("Côte d'Ivoire").correct?("  cote   d’ivoire")
           assert question("Yamoussoukro", "Abidjan").correct?("abidjan")
+          assert question("Cœur").correct?("coeur")
+          assert question("Ex æquo").correct?("ex aequo")
+          assert question("Saint\u2011Louis").correct?("saint-louis")
+          assert question("x \u2212 1").correct?("x - 1")
         end
 
         test "une faute de frappe est fausse" do
@@ -36,6 +40,7 @@ module Entities
           assert_equal [ :blank_marker ], question("Abidjan", content: "___ et ___").structure_errors
           assert_equal [ :accepted_answers_count ], question.structure_errors
           assert_equal [ :accepted_answers_count ], question(*%w[a b c d e f]).structure_errors
+          assert_equal [ :duplicate_accepted ], question("Abidjan", " ABIDJAN ").structure_errors
         end
       end
     end

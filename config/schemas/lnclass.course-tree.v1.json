@@ -71,7 +71,7 @@
         "content": { "$ref": "#/$defs/text" },
         "question_type": { "$ref": "#/$defs/text" },
         "explanation": { "$ref": "#/$defs/text" },
-        "tolerance": { "type": ["number", "null"], "minimum": 0 },
+        "tolerance": { "type": ["number", "null"], "minimum": 0, "maximum": 99999999.9999 },
         "answers": {
           "type": "array",
           "items": { "$ref": "#/$defs/answer" }

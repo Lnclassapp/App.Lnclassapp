@@ -181,6 +181,21 @@ module UseCases
         assert_equal [ @course.id ], Orm::Essential.where(author_id: @author.id).distinct.pluck(:course_id)
       end
 
+      # CA-14, ADR-0091 §4.5 : tolerance et match s'importent aussi par les fiches.
+      test "tolerance and match are imported with the essentials" do
+        node = essential("Nouveaux types")
+        node["exercises"][0]["questions"] = [
+          { "content" => "Combien ?", "question_type" => "numeric", "tolerance" => 0.5, "answers" => [ { "content" => "3" } ] },
+          { "content" => "Relie.", "question_type" => "matching", "answers" => %w[a b c].map { { "content" => it, "match" => it.upcase } } }
+        ]
+
+        report = run_import(document(node))
+
+        assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count)
+        assert_equal BigDecimal("0.5"), Orm::Question.find_by!(question_type: "numeric").numeric_tolerance
+        assert_equal %w[A B C], Orm::Question.find_by!(question_type: "matching").answers.order(:position).pluck(:match_content)
+      end
+
       test "an unknown course slug is rejected in bloc, with zero writes; a missing one is refused by the schema" do
         report = run_import(essentials_document(course: "cours-inconnu", essentials: 3))
 

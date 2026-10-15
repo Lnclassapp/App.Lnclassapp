@@ -30,6 +30,8 @@ module Entities
           assert_empty question(6).structure_errors
           assert_equal [ :steps_count ], question(2).structure_errors
           assert_equal [ :steps_count ], question(7).structure_errors
+          same = question(3).with(answers: question(3).answers.map { it.with(content: "Étape") })
+          assert_equal [ :duplicate_steps ], same.structure_errors
         end
       end
     end

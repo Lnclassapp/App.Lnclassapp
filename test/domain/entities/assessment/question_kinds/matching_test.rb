@@ -32,6 +32,7 @@ module Entities
           assert_equal [ :pairs_count ], question(*(1..6).map { [ "g#{it}", "d#{it}" ] }).structure_errors
           assert_equal [ :missing_match ], question(%w[a 1], [ "b", " " ], %w[c 3]).structure_errors
           assert_equal [ :duplicate_match ], question(%w[a Été], %w[b ete], %w[c 3]).structure_errors
+          assert_equal [ :duplicate_left ], question(%w[a 1], %w[A 2], %w[c 3]).structure_errors
         end
       end
     end

@@ -33,6 +33,8 @@
 - Lots B à G : sur une machine chargée, la suite complète hors système dépasse 20 minutes ; les lots d'interface ont été vérifiés par les répertoires touchés (domaine, intégration, contrôleurs, design), la suite complète par `bin/ci-quiet` au Lot H.
 - Budget des tests système (ADR-0069 §9) : le chantier ajoute quatre fichiers (15,4 s enregistrées) à une branche `accueil-eleve` qui en avait déjà ajouté 9,9 s ; la somme dépasse 15 s, à trancher par le porteur (dérogation ou fusion séparée).
 
+- Relectures (après le Lot H) : marge bornée à decimal(12,4) (schéma, règle `tolerance_out_of_range`, `ActiveRecord::RangeError` dans les échecs d'écriture), octet nul refusé en 422, œ, æ et tirets Unicode unifiés au texte à trous, « 1.000 » vaut 1, une phrase et un chemin par règle d'import, `tolerance` et `match` refusés hors de leur type, doublons refusés (étapes, gauches, réponses acceptées), mélange jamais résolu d'avance pour l'ordre et relier, « Félicitations » dès « 14/20 » affiché ; le test système du texte à trous redescend en intégration.
+
 ## Ce qu'on a appris sur la codebase
 
 - Tout le moteur supposait « cocher parmi des propositions » : CHECK sur `question_type`, `selected_answer_ids` non vide, `correct?` par égalité d'ensembles d'ids.
@@ -52,6 +54,7 @@
 | Points partiels (ordre, relier) | Refusés par le porteur pour garder la note intacte | — |
 | Tolérance aux fautes de frappe (texte à trous) | Refusée par le porteur | — |
 | La saisie d'un nombre ou d'un texte refusée (422) est vidée au re-rendu | Le formulaire de la séance n'a pas d'objet ; l'erreur s'affiche, l'élève retape | — |
+| Pas de limite de débit sur l'ouverture de sessions ni sur les réponses (relecture de sécurité, point 4) | Décision du porteur : pas de limite pour ce chantier | — |
 | Revue par sous-agents (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) | Outil d'agents absent de la session d'exécution ; revue faite à la main sur la fuite de la solution | À lancer sur la PR |
 
 ## Clôture

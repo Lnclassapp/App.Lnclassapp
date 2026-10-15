@@ -18,16 +18,14 @@ class Assessment::QuestionOrderingTest < ApplicationSystemTestCase
       assert_no_selector "select[name='attempt[display_order][]']"
       assert_selector "[data-assessment--ordering-target=item]:first-child button[data-direction=up][disabled]"
 
-      moved = false
       STEPS.each_with_index do |step, rank|
         while (current = shown.index(step)) > rank
           find("[data-assessment--ordering-target=item]", text: step).find("button[data-direction=up]").click
           assert_equal current - 1, shown.index(step)
-          moved = true
         end
       end
-      # Le mélange de la session peut déjà donner le bon ordre : l'annonce n'est attendue qu'après un déplacement.
-      assert_selector "[role=status]", text: /position/, visible: :all if moved
+      # ADR-0091 §4.4 : le mélange ne donne jamais le bon ordre ; au moins un déplacement, donc une annonce.
+      assert_selector "[role=status]", text: /position/, visible: :all
       click_on I18n.t("#{SCOPE}.question_card.submit")
 
       assert_selector "#feedback-card", text: I18n.t("#{SCOPE}.feedback_card.verdict.success")

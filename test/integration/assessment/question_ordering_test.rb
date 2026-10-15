@@ -19,7 +19,7 @@ class Assessment::QuestionOrderingTest < ActionDispatch::IntegrationTest
   # Indices d'affichage de chaque étape, dans l'ordre demandé (des contenus).
   def indices(contents)
     ids = @question.answers.order(:position).map(&:id)
-    shuffled = Entities::Assessment::AnswerShuffle.for(session_id: @session.id, question_id: @question.id, ids:)
+    shuffled = Entities::Assessment::AnswerShuffle.for(session_id: @session.id, question_id: @question.id, ids:, avoid: ids)
     contents.map { |content| shuffled.index(ids[STEPS.index(content)]) }
   end
 
@@ -80,5 +80,26 @@ class Assessment::QuestionOrderingTest < ActionDispatch::IntegrationTest
 
     post teams_essential_exercises_path(essential.slug), params: params.(%w[A B C]), as: :turbo_stream
     assert_equal %w[A B C], Orm::Exercise.find_by!(title: "Ordre").questions.sole.answers.order(:position).pluck(:content)
+  end
+
+
+  test "aucun id de cette question n'apparaît dans la page, où que ce soit" do
+    get exercise_session_path(@session.public_id)
+
+    Orm::Answer.where(question_id: @question.id).pluck(:id).each { assert_no_match(/\b#{it}\b/, response.body) }
+  end
+
+  test "la correction de l'élève ne marque aucune solution" do
+    answer %w[Métaphase Prophase Anaphase Télophase]
+    student_result_body
+    assert_select "[data-correct]", 0
+  end
+
+  # La correction de l'élève redit sa réponse, sans aucune solution marquée.
+  def student_result_body
+    @session.update!(status: "completed", score_percent: 0, completed_at: Time.current)
+    sign_in_as @student
+    get exercise_session_result_path(@session.public_id)
+    response.body
   end
 end

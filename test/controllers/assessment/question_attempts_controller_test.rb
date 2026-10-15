@@ -238,4 +238,31 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
     assert_select "h1", text: "Méiose"
     assert_select "#attempt-errors", text: I18n.t("#{ERRORS}.answer_ids.blank")
   end
+
+  # PRD §7 : 22 requêtes avant le chantier, 23 après (la lettre affichée de « Ton choix ») ; la cible était « avant + 1 ».
+  test "envoyer une réponse coûte 23 requêtes SQL" do
+    sign_in_as @student
+    get exercise_session_path(@session.public_id)
+    count = 0
+    counter = lambda do |*, payload|
+      count += 1 unless payload[:name] == "SCHEMA" || payload[:sql] =~ /\A\s*(BEGIN|COMMIT|SAVEPOINT|RELEASE|ROLLBACK)/
+    end
+
+    ActiveSupport::Notifications.subscribed(counter, "sql.active_record") { answer @first, right(@first) }
+
+    assert_response :success
+    assert_equal 23, count
+  end
+
+  # PostgreSQL refuse l'octet nul : la saisie est refusée en 422, jamais en erreur 500.
+  test "un texte saisi avec un octet nul est refusé (422), rien n'est écrit" do
+    question = create_kind_question(exercise: @exercise, question_type: "fill_blank", answers: %w[Abidjan], content: "Capitale : ___ .")
+    sign_in_as @student
+
+    post exercise_session_attempts_path(@session.public_id), headers: TURBO,
+                                                             params: { attempt: { question_id: question.id, response_text: "Abi\0djan" } }
+
+    assert_response :unprocessable_entity
+    assert_equal 0, Orm::QuestionAttempt.count
+  end
 end
