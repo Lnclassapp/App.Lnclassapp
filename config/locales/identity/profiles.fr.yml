@@ -1,6 +1,7 @@
 # Page « Mon profil » et modale du nom (plan profil-utilisateur, Lot A) — PR-01 à PR-03, ADR-0055, UDR-0041 ; direction : UDR-0052
 # UDR-0041, amendement du 2026-10-06 : l'élève est tutoyé (charte §1) ; clés « _student », lues par tone_t. Les erreurs,
-# communes à tous les rôles, se disent sans pronom.
+# communes à tous les rôles, se disent sans pronom. UDR-0089 (profil-eleve) : carte bleue, lignes à toucher, « Se déconnecter » ;
+# ces clés ne servent qu'à l'élève, d'où le tutoiement sans suffixe.
 fr:
   activemodel:
     errors:
@@ -24,8 +25,34 @@ fr:
         subtitle: "Ce que Lnclass sait de vous, et ce que vous pouvez changer."
         security_title: "Mon code secret"
         security_body: "Votre code secret protège votre compte. Changez-le si vous pensez qu'une autre personne le connaît."
-        security_body_student: "Ton code secret protège ton compte. Change-le si tu penses qu'une autre personne le connaît."
         change_pin: "Changer mon code secret"
+      student:
+        title: "Mon profil"
+        back: "Accueil"
+        security_title: "Mon code secret"
+        security_reminder: "Ton code secret protège ton compte. Ne le donne à personne, même à un ami."
+        pin_label: "Code à 4 chiffres"
+        pin_value: "••••"
+        change: "Changer"
+        change_pin: "Changer mon code secret"
+        sign_out: "Se déconnecter"
+      student_identity:
+        student_of: "Élève en %{classroom}"
+      student_information:
+        title: "Mes informations"
+        photo: "Photo"
+        name: "Nom"
+        contact: "Numéro"
+        classroom: "Classe"
+        school: "Établissement"
+        registered_on: "Inscrit le"
+        photo_value:
+          present: "Ta photo"
+          absent: "Aucune photo"
+        add: "Ajouter"
+        edit: "Modifier"
+        change: "Changer"
+        row_label: "%{action} %{label}, %{value}"
       information:
         title: "Mes informations"
         name: "Nom"
@@ -33,8 +60,6 @@ fr:
         edit_name_label: "Modifier mon nom"
         contact: "Numéro"
         change_contact: "Changer mon numéro"
-        classroom: "Classe"
-        no_classroom: "Aucune classe"
         school: "Établissement"
         material: "Matière"
         team_role: "Rôle"

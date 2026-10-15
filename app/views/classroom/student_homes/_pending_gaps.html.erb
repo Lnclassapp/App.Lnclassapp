@@ -1,10 +1,11 @@
 <%# 🌐 UI · classroom/student_homes/_pending_gaps — « Fiches essentielles à revoir » (lacunes en attente), sous « À faire » %>
 <%# Rôle : une ligne par lacune pending, vers sa fiche essentielle publiée ; 3 lignes, puis « Voir plus » %>
-<%# ADR  : 0043 · UDR : 0007, 0057, 0058 §3.3, 0084 §3.5, §3.8 (carte blanche, tokens seuls) %>
+<%# ADR  : 0043, 0090 (§4.1 : pas de préchargement) · UDR : 0007, 0057, 0058 §3.3, 0084 §3.5, §3.8 (carte blanche, tokens seuls) %>
 <%# locals: (gaps:) -%>
 <%= ui_card title: t(".title"), subtitle: t(".subtitle"), id: "student_home_gaps" do %>
   <%= tag.div data: ui_reveal_data do %>
-    <ul class="space-y-2">
+    <%# Ouvrir la fiche la retient (ADR-0090 §4.1) : pas de préchargement au survol, qui servirait la page sans l'ouvrir. %>
+    <ul class="space-y-2" data-turbo-prefetch="false">
       <% gaps.each_with_index do |gap, index| %>
         <%= tag.li(**ui_reveal_item(index)) do %>
           <%= link_to course_essential_path(gap.course_slug, gap.essential_slug),

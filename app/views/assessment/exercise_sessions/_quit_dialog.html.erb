@@ -1,0 +1,15 @@
+<%# 🌐 UI · assessment/exercise_sessions/_quit_dialog — la croix « Quitter la session » et sa confirmation %>
+<%# Rôle : feuille sous 700 px, fenêtre au centre au-dessus ; « Continuer l'exercice » ferme, « Quitter » mène à la page de l'exercice %>
+<%# ADR  : 0054 · UDR : 0087 §3.3 · la session reste ouverte, aucune route ; sans JavaScript, la croix est le lien · Stimulus : modal %>
+<%# locals: (play:) -%>
+<%= ui_modal id: "quit-dialog", title: t(".title"), size: :sm, placement: :phone_sheet, described_by: "quit_resume",
+             trigger_label: t(".trigger"), trigger_icon: "x-mark", trigger_variant: :secondary,
+             trigger_href: exercise_path(play.exercise_public_id),
+             trigger_class: "size-11! shrink-0 rounded-full! px-0! shadow-card" do |modal| %>
+  <%= render "assessment/exercise_sessions/quit_resume", play: %>
+  <% modal.footer do %>
+    <%= ui_button t(".quit"), href: exercise_path(play.exercise_public_id), variant: :secondary, class: "w-full sm:w-auto",
+                              data: { turbo_frame: "_top" } %>
+    <%= ui_button t(".continue"), variant: :brand, class: "w-full sm:w-auto", data: { action: "modal#close" } %>
+  <% end %>
+<% end %>

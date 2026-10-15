@@ -1,14 +1,14 @@
 # UDR-0085 : Page Cours de l'élève — groupes par matière, recherche seule, bouton d'avancement, vue de la matière
 <!-- index
 titre: Page Cours de l'élève groupée par matière, bouton d'avancement
-statut: Proposé
+statut: Accepté
 adr-lie: [0090](../adr/0090-lecture-des-fiches-par-l-eleve-et-rang-des-matieres.md)
 problematique: Élève : plus de filtre Matière, cours groupés par matière dans l'ordre du programme (titre cliquable vers la vue de la matière), carte sans badge de matière dont le bouton dit Commencer / Reprendre / Revoir, 1 / 2 / 3 colonnes. Amende UDR-0013, 0057, 0076
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-10-15 |
 | **Chantier** | [`docs/chantiers/cours-eleve`](../../chantiers/cours-eleve/memo.md) |
 | **ADR lié** | [ADR-0090](../adr/0090-lecture-des-fiches-par-l-eleve-et-rang-des-matieres.md) (lectures, rang des matières) |
@@ -109,3 +109,12 @@ Aucun nouveau token.
   - `:175` : la règle de sobriété s'applique à la vue de la matière ;
   - `test/controllers/catalog/courses_controller_test.rb:235`, `:259`, `:362` : badge de matière, lien « Accueil », filtres au téléphone.
 - **UDR-0013** : elle ne vaut plus pour la branche élève de `/courses`. Elle reste valable pour les autres rôles et pour la page d'un cours.
+
+## 5. Mise en œuvre (2026-10-15)
+
+Livrée par le chantier `cours-eleve` (lots 0 à D). Écarts tranchés sur les maquettes, à confirmer par le porteur sur les captures ([journal](../../chantiers/cours-eleve/journal.md)) :
+
+- **§3.3** : la carte de l'élève ne porte pas l'icône de la matière (les maquettes n'en ont pas ; le groupe la porte).
+- **§3.5** : la vue d'une matière n'a pas de titre de groupe ; le titre de la page porte l'icône et le nom.
+- **§3.4** : sous 640 px, les cartes des groupes restent dans la marge, arrondies (`data-bleed-keep`), exception à [UDR-0005](0005-design-system-fondateur.md) (amendement du 2026-10-06, cartes bord à bord).
+- **Préchargement** : les liens de l'élève vers une fiche (« Reprendre », liste des fiches d'un cours, lacunes de l'accueil) ne préchargent pas au survol, sinon la fiche serait servie sans être ouverte (ADR-0090 §4.1).

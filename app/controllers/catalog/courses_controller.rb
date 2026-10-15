@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Catalog::CoursesController
-# Rôle : catalogue filtré, cherché par nom (frame « courses »), par pages chargées au défilement, et page d'un cours ; élève : son niveau ; enseignant : sa matière à ses niveaux
-# ADR  : 0026, 0028, 0035, 0076 · UDR : 0006, 0013 (amendement du 2026-10-05), 0054, 0069, 0077
+# Rôle : catalogue filtré, cherché par nom (frame « courses »), par pages chargées au défilement, et page d'un cours ; élève : son niveau, groupé par matière, vue d'une matière ; enseignant : sa matière à ses niveaux
+# ADR  : 0026, 0028, 0035, 0076, 0090 · UDR : 0006, 0013 (amendement du 2026-10-05), 0054, 0069, 0077, 0085
 module Catalog
   class CoursesController < AuthenticatedController
     include ReadsOwnLevel
@@ -11,7 +11,7 @@ module Catalog
     PAGE_FRAME = /\Acourses_page_\d+\z/
     FILTERS = %i[level series material q].freeze
 
-    helper_method :list_frame_request?, :filter_options, :student_audience, :teacher_scope
+    helper_method :list_frame_request?, :filter_options, :student_audience, :teacher_scope, :student_material, :after_material
 
     def index
       @filters = params.permit(*FILTERS).to_h.symbolize_keys
@@ -53,6 +53,18 @@ module Catalog
 
       @teacher_scope ||= Queries::Catalog::TeacherAudienceQuery.new.call(teacher_id: current_actor.user_id)
     end
+
+    # UDR-0085 §3.1 : la vue d'une matière de l'élève (?material=<slug>, l'adresse des bulles « Mes matières ») ; nil sur
+    # la liste complète, pour un autre rôle ou pour un slug inconnu.
+    def student_material
+      return unless current_actor.student? && @filters[:material].present?
+
+      @student_material ||= filter_options.materials.find { it.slug == @filters[:material] }
+    end
+
+    # UDR-0085 §3.2 : la matière de la dernière carte de la page précédente, dont le titre de groupe est déjà rendu.
+    # Toujours une chaîne : une valeur forgée (tableau, vide) ne vaut aucun slug, et le titre reste rendu.
+    def after_material = params[:after_material].to_s
 
     def list_frame_request? = turbo_frame_request_id == LIST_FRAME
     def page_frame_request? = PAGE_FRAME.match?(turbo_frame_request_id.to_s)

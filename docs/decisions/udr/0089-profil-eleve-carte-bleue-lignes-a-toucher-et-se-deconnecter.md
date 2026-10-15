@@ -1,14 +1,14 @@
 # UDR-0089 : Profil de l'élève — carte bleue, lignes entières à toucher, fenêtres par le bas, établissement, « Se déconnecter » en bas
 <!-- index
 titre: Profil de l'élève : carte bleue, lignes à toucher, Se déconnecter
-statut: Proposé
+statut: Accepté
 adr-lie: —
 problematique: Élève : profil dans le cadre de l'accueil, carte bleue (photo, nom, « Élève en 3e B »), lignes entières à toucher, ligne Établissement en lecture seule, fenêtres en feuille sous 700 px et au centre au-delà, « Se déconnecter » en bas, deux colonnes dès 1 024 px. Amende UDR-0041, 0047, 0051
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-10-15 |
 | **Chantier** | [`docs/chantiers/profil-eleve`](../../chantiers/profil-eleve/memo.md) |
 | **ADR lié** | — |
@@ -61,9 +61,10 @@ Le profil a été redessiné sur la toile https://claude.ai/artifact/BCpNowiWxjr
 
 ### 3.4 Fenêtres (nom, photo, code secret, numéro)
 
-- **Rendu** : `ui_modal`, dans le cadre `modal` existant.
+- **Rendu** : `ui_modal`, dans le cadre `modal` existant, avec `placement: :phone_sheet` et `size: :form` (élève seulement).
   - Sous 700 px, en feuille depuis le bas (`rounded-sheet` en haut, poignée).
   - Dès 700 px, au centre, 480 px au plus.
+  - `:sheet` (UDR-0061) bascule à 1 024 px : `:phone_sheet` est la même feuille au palier de 700 px.
 - **Contenu, validations et erreurs** : inchangés. L'aperçu recadré de la photo, l'œil du code secret et « Code secret incorrect. » restent comme aujourd'hui.
 - **Bouton principal** : pleine largeur dans la feuille.
 
@@ -85,7 +86,7 @@ La carte bleue est au-dessus, sur toute la largeur.
 
 ### 3.7 Accessibilité
 
-- **Lignes modifiables** : leur nom accessible est « Modifier %{libellé}, %{valeur} ».
+- **Lignes modifiables** : leur nom accessible est « %{action} %{libellé}, %{valeur} », où l'action est le mot affiché (« Ajouter », « Modifier », « Changer ») : le nom contient le texte visible. La ligne du code secret s'appelle « Changer mon code secret ».
 - **Feuille** : `role="dialog"` et `aria-modal`. Le focus y est piégé et revient à la ligne d'origine.
 - **« Se déconnecter »** : un vrai bouton de formulaire.
 

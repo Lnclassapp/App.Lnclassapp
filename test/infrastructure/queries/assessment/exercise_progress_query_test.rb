@@ -13,7 +13,8 @@ module Queries
       def progress = ExerciseProgressQuery.new.call(student_id: @student.id, exercise_id: @exercise.id)
 
       test "un élève qui n'a jamais ouvert l'exercice" do
-        assert_equal({ badge_level: nil, best_score_percent: nil, mastery: nil, completed_count: 0, started_session_public_id: nil },
+        assert_equal({ badge_level: nil, best_score_percent: nil, mastery: nil, completed_count: 0, started_session_public_id: nil,
+                       resume_number: nil },
                      progress.to_h)
       end
 
@@ -21,7 +22,7 @@ module Queries
         create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 40)
         best = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 85)
         create_exercise_session(student: @student, exercise: @exercise, status: "abandoned")
-        started = create_exercise_session(student: @student, exercise: @exercise, status: "started")
+        started = create_exercise_session(student: @student, exercise: @exercise, status: "started", answered_count: 1)
         create_badge(student: @student, exercise: @exercise, level: "gold", session: best)
         other = create_student
         create_exercise_session(student: other, exercise: @exercise, status: "completed", score_percent: 100)
@@ -30,7 +31,7 @@ module Queries
         create_badge(student: @student, level: "diamond")
 
         assert_equal({ badge_level: :gold, best_score_percent: 85, mastery: :acquired, completed_count: 2,
-                       started_session_public_id: started.public_id }, progress.to_h)
+                       started_session_public_id: started.public_id, resume_number: 2 }, progress.to_h)
       end
 
       test "la maîtrise suit les seuils de l'ADR-0033" do

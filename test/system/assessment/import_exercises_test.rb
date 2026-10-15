@@ -60,7 +60,7 @@ class Assessment::ImportExercisesTest < ApplicationSystemTestCase
         assert_selector "#import_counter_total", text: "8"
         assert_selector "#import_errors li", count: 2
         assert_selector "#import_errors li", text: /\Aexercises\[3\]\.title\s+Valeur obligatoire manquante\.\z/
-        assert_selector "#import_errors li", text: /\Aexercises\[4\]\.questions\[1\]\.answers\s+Question incomplète/
+        assert_selector "#import_errors li", text: /\Aexercises\[4\]\.questions\[1\]\.answers\s+#{I18n.t("teams.imports.question_rules.true_false_needs_two_answers")}/
         assert_text "Questions créées : 8"
         assert_text "Propositions créées : 24"
       end

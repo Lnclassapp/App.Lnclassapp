@@ -140,10 +140,10 @@ Chaque lot a la même forme ; `<type>` vaut `fill_blank` (D), `numeric` (E), `or
 - [ ] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md` *(ADR-0091 écrit ; index à la clôture)*
 - [ ] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md` *(UDR-0087 écrite ; index à la clôture)*
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
-- [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
-- [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
-- [ ] En-tête HITL sur chaque fichier créé dans `app/`
+- [x] Lot 0 mergé et ports gelés avant tout lot parallèle
+- [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord *(chaque CA a son test ; rouge d'abord pour le domaine des quatre types, pas pour les vues)*
+- [x] En-tête HITL sur chaque fichier créé dans `app/`
 - [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
-- [ ] Pureté domaine · rubocop · tests · brakeman : au vert
+- [x] Pureté domaine · rubocop · tests · brakeman : au vert
 - [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)

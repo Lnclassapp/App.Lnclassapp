@@ -14,6 +14,22 @@ module Repositories
         Entities::Catalog::Material.new(name:, shortname:, category:)
       end
 
+      # ADR-0090 §4.2 : une matière du programme créée par l'équipe prend son rang ; une autre n'en a pas (NULLS LAST).
+      test "créer « Mathématiques » par CreateMaterial lui donne le rang 1 ; une matière hors programme reste sans rang" do
+        create_material_use_case = UseCases::Catalog::CreateMaterial.new(
+          taxonomy: @repository, audit_log: Repositories::Identity::AuditLogRepository.new,
+          policy: Policies::Catalog::ManageTaxonomyPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
+        )
+        admin = create_team_member(team_role: "admin", second_factor: false)
+        actor = Entities::Identity::Actor.new(user_id: admin.id, role: :team, team_role: "admin")
+        create = ->(name, shortname) { create_material_use_case.call(actor:, dto: Dtos::Catalog::MaterialInput.new(name:, shortname:, category: "science")) }
+
+        assert create.call("Mathématiques", "Maths").success?
+        assert create.call("Anglais", "Ang").success?
+
+        assert_equal [ [ "mathematiques", 1 ], [ "anglais", nil ] ], Orm::Material.order(:id).pluck(:slug, :position)
+      end
+
       test "liste niveaux par position, séries et matières par nom, en entités" do
         seed_referential
 
