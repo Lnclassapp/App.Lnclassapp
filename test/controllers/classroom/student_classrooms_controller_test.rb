@@ -190,6 +190,8 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     genetics = course_named("Génétique")
     complete(create_exercise(essential: create_essential(course: genetics), title: "Réussi"), 75, at: 2.hours.ago)
     complete(create_exercise(essential: create_essential(course: genetics), title: "À revoir"), 45, at: 1.hour.ago)
+    # UDR-0090 §4 : la règle de l'historique, sur la note affichée (grade_on_20 >= 14) : 68 % s'affiche 14/20, en vert.
+    complete(create_exercise(essential: create_essential(course: genetics), title: "Juste"), 68, at: 3.hours.ago)
     { "En retard" => -1, "Pour aujourd'hui" => 0, "Pour demain" => 1, "Plus tard" => 5 }.each do |title, days|
       # Une échéance tombe de 1 à 7 jours après l'assignation (contrainte classroom_assignments_due_on_within_a_week).
       exercise = assign(title, course: genetics, at: days > 1 ? 1.day.ago : 3.days.ago)
@@ -201,6 +203,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     assert_select "#student_classroom_treated" do
       assert_select "li .text-success", text: "15/20"
+      assert_select "li .text-success", text: "14/20"
       assert_select "li .text-ink", text: "9/20"
       assert_select "li .text-success", text: "9/20", count: 0
       assert_select "[class*=error], [class*=danger]", 0

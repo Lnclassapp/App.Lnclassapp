@@ -1,9 +1,11 @@
 <%# 🌐 UI · classroom/student_classrooms/_treated_exercise — un exercice terminé par l'élève, à son meilleur score %>
 <%# Rôle : toute la ligne mène au résultat de sa dernière session : pastille de la matière, titre, maîtrise, meilleure note sur 20 %>
-<%# ADR  : 0033 · UDR : 0057 (R3), 0076 §3.2, 0086 §3.4 · vert à partir de 14/20 (MASTERY_THRESHOLD), neutre en dessous, jamais rouge %>
+<%# ADR  : 0033 · UDR : 0057 (R3), 0076 §3.2, 0086 §3.4, 0090 §4 · vert quand la note affichée vaut 14/20 ou plus, encre en dessous, jamais rouge %>
 <%# locals: (exercise:, index:) -%>
 <% illustration = subject_illustration(exercise.material_slug) %>
-<% acquired = exercise.best_score_percent >= Entities::Assessment::Grading::MASTERY_THRESHOLD %>
+<%# UDR-0090 §4 : la règle de l'historique, sur la note affichée : 68 % s'affiche 14/20, donc en vert. %>
+<% grade = Entities::Assessment::Grading.grade_on_20(exercise.best_score_percent) %>
+<% acquired = grade >= 14 %>
 <%= tag.li(**ui_reveal_item(index)) do %>
   <%= link_to exercise_session_result_path(exercise.last_session_public_id),
               class: "group -mx-2 flex min-h-tap items-center gap-3 rounded-ln px-2 py-3 transition hover:bg-mist active:bg-mist focus-visible:outline-2 focus-visible:outline-brand" do %>

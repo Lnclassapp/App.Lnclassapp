@@ -19,24 +19,32 @@
 
 ## Ce qui a dérapé
 
-- …
+- Une mesure de requêtes à zéro : un abonné `->(*, payload)` reçoit l'événement entier ; on compte avec `->(*args)` et `args.last`, sur une seule requête (le cache de requêtes du test marque `cached` celles d'une requête précédente).
+- Le test système cherchait « Exercice 4 » et trouvait « Exercice 40 » d'une fabrique : titres renommés « Devoir N ».
+- Une échéance de test hors contrainte `classroom_assignments_due_on_within_a_week` (1 à 7 jours après l'assignation) : `assigned_at` reculé.
+- Budget de la suite système (ADR-0069 §9) : la branche part d'`accueil-eleve`, pas encore sur `Develop` ; leurs croissances s'additionnent (14,3 s + 0,7 s = 15,0 s pour 15 s). La durée de `student_classroom_test.rb` (4,4 s) est l'ancienne (3,7 s) mise à l'échelle par le rapport nouveau / ancien mesuré sur la même machine (28,6 s / 23,9 s).
+- `bin/ci-quiet` (2026-10-15, avant l'alignement sur UDR-0090 §4) : rouge par les seuls tests système ; tout le reste vert (pureté, HITL, budget système, style, audits, Brakeman, Rails à 100 %, seeds, performance, assets). Cinq échecs, tous sur le numéro reformaté de `session[contact]` ou le texte « 4 chiffres », hors du périmètre : `sign_in_test.rb:114`, `team_invitation_test.rb:62`, `public_pages_test.rb:89` et `:100` (les :79 et :97 de Develop), et `teams/staff_invitation_test.rb:50`, de la même cause.
+- `image_header_test.rb:500` (moins de 0,5 s) échoue sous la charge de la suite complète (0,54 s, 0,66 s), vert seul : sans lien avec le chantier.
 
 ## Ce qu'on a appris sur la codebase
 
 - « Classe sans enseignant » se lit dans `teacher_classrooms` (unique `teacher_id, classroom_id`, index sur `classroom_id`).
 - `StudentClassroomQuery` lit les exercices assignés depuis les `ExerciseRow` de `StudentHomeQuery` : l'ordre reste celui de « À faire ».
+- Sous 640 px, une `rounded-card shadow-card` sous `[data-bleed]` va bord à bord, sauf dans une bande `snap-x`, une carte ou une grille à plusieurs colonnes.
+- La note verte suit la règle de l'historique (UDR-0090 §4) : `Grading.grade_on_20(score) >= 14`, sur la note affichée (68 % s'affiche 14/20, en vert) ; `PASS_THRESHOLD` (50 %) colorait jusque-là 10/20 en vert.
 
 ## Dette laissée derrière
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| | | |
+| `_invite_teacher` rendu sur deux pages, dans `classroom/student_homes/` | UDR-0086 §4 : il passe dans `shared/` au troisième usage | — |
+| Contraste AA du dégradé en sombre (texte sur `brand-strong` clair) | Même carte que l'accueil, jugée par `accueil-eleve` ; pas de test de contraste propre au dégradé | — |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
+| **Livré le** | 2026-10-15 (branche `feature/ma-classe-eleve`) |
+| **PR** | à ouvrir vers `Develop` après la fusion d’`accueil-eleve` |
 | **ADR produits** | — |
 | **UDR produits** | UDR-0086 |
