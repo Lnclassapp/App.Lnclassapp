@@ -37,10 +37,12 @@ Toile : https://claude.ai/artifact/5YCL2xGDiioqcrvEBr6W1B (téléphone d'abord).
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
 | Par quel écran commence-t-on ? | Le téléphone (porteur, 2026-10-15). | Même en-tête et même menu de l'avatar que l'accueil et Cours (« Ma classe » en surbrillance) ; carte de la classe en dégradé bleu comme sur l'accueil ; listes dans des cartes blanches ; échéances en orange (retard, aujourd'hui, demain), notes en vert à partir de 14/20. |
-| Montre-t-on les enseignants de la classe ? | Oui (porteur, 2026-10-15). | Nouveau bloc « Mes enseignants » sous la carte de la classe : initiales, nom, matière, sans lien. Sans enseignant sur Lnclass : « Aucun enseignant sur Lnclass pour l'instant » et « Inviter mon enseignant », le même parcours que sur l'accueil. C'est la seule action de la page ; UDR-0057 R1 (pas d'action) est à amender. Il faut une lecture des enseignants rattachés à la classe (nom, matière). |
+| Montre-t-on les enseignants de la classe ? | Oui, puis sur relecture : non, on retire la liste (porteur, 2026-10-15). | Pas de bloc enseignants. Seule une classe sans enseignant sur Lnclass montre une carte « Aucun enseignant sur Lnclass pour l'instant » avec « Inviter mon enseignant », le même parcours que sur l'accueil. |
 | Montre-t-on le nombre d'élèves ? | Non (porteur, 2026-10-15). | Ni nombre ni liste des élèves sur Ma classe. |
 | « Exercices assignés » répète « À faire » de l'accueil : on garde les deux ? | Oui (porteur, 2026-10-15). | Les deux listes restent, avec les mêmes échéances et le même ordre. |
+| « Inviter mon enseignant » ajoute une action à une page qui n'en a pas (UDR-0057 R1) : on modifie la règle ? | Oui (porteur, 2026-10-15). | L'UDR du chantier amende UDR-0057 R1 : Ma classe a une seule action, « Inviter mon enseignant », et seulement quand la classe n'a aucun enseignant sur Lnclass. |
+| Que change la tablette ? | Passons à la tablette (porteur, 2026-10-15). | À partir de 700 px, la page se centre (720 px au plus) ; le bandeau des cours montre deux cartes et demie ; les listes restent sur une colonne ; « Besoin d'aide ? » en entier dans l'en-tête. |
 
 ## Questions ouvertes
 
-Aucune pour le téléphone. Suite : tablette et ordinateur.
+Aucune. Suite : l'ordinateur.
