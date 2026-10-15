@@ -11,8 +11,9 @@ module Queries
                         :courses, :assigned_exercises, :treated_exercises)
       # assigned_count : les exercices du cours assignés à la classe (ADR-0072 : un cours ne s'assigne plus).
       CourseRow = Data.define(:slug, :name, :material_name, :material_slug, :material_category, :assigned_count)
-      # best_score_percent : le meilleur score de l'élève ; last_session_public_id : sa dernière session terminée.
-      TreatedRow = Data.define(:exercise_public_id, :title, :material_name, :material_category, :best_score_percent,
+      # best_score_percent : le meilleur score de l'élève ; last_session_public_id : sa dernière session terminée ;
+      # material_slug : la pastille de la matière (UDR-0086 §3.4).
+      TreatedRow = Data.define(:exercise_public_id, :title, :material_name, :material_slug, :material_category, :best_score_percent,
                                :last_session_public_id, :last_completed_at)
 
       # has_teacher se lit dans la même requête que l'en-tête : pas de requête de plus (ADR-0067).
@@ -23,7 +24,7 @@ module Queries
                          Arel.sql("COUNT(DISTINCT exercises.id)") ].freeze
       # DISTINCT ON garde, par exercice, la dernière session terminée ; la fenêtre lit le meilleur score avant ce tri.
       TREATED_COLUMNS = [ Arel.sql("DISTINCT ON (exercise_sessions.exercise_id) exercises.public_id"), "exercises.title",
-                          "materials.name", "materials.category",
+                          "materials.name", "materials.slug", "materials.category",
                           Arel.sql("MAX(exercise_sessions.score_percent) OVER (PARTITION BY exercise_sessions.exercise_id)"),
                           "exercise_sessions.public_id", "exercise_sessions.completed_at" ].freeze
 

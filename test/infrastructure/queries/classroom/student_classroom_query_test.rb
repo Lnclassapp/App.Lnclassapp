@@ -118,8 +118,9 @@ module Queries
         rows = classroom.treated_exercises
 
         assert_equal [ [ "Refait", 80 ], [ "Une fois", 65 ] ], rows.map { [ it.title, it.best_score_percent ] }
-        assert_equal [ last.public_id, twice.public_id, "SVT", "science" ],
-                     rows.first.to_h.values_at(:last_session_public_id, :exercise_public_id, :material_name, :material_category)
+        assert_equal [ last.public_id, twice.public_id, "SVT", "svt", "science" ],
+                     rows.first.to_h.values_at(:last_session_public_id, :exercise_public_id, :material_name, :material_slug,
+                                               :material_category)
       end
 
       # UDR-0076 §3.2 : le travail terminé reste à l'élève quand l'exercice est dépublié ensuite, comme « Mes activités

@@ -27,9 +27,10 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_select "title", text: including(tl("show.page_title"))
     assert_select "h1", text: tl("show.title")
     assert_select "h1 + p", 0
-    # UDR-0054, amendment of 2026-10-06: every student page but the home brings back to « Accueil ».
-    assert_select "nav[aria-label=?] a[href=?]", I18n.t("components.back_link.label"), student_home_path, text: tl("show.back")
-    assert_select "#student_classroom_header" do
+    # CA-1 (UDR-0086 §3.1): no « Accueil » back link above the title any more; the header and the menus lead home.
+    assert_select "#main nav[aria-label=?]", I18n.t("components.back_link.label"), 0
+    # CA-2 (UDR-0086 §3.2): the classroom card on the blue gradient, without the count or the list of its students.
+    assert_select "section#student_classroom_header.bg-linear-to-br.from-brand-strong.to-brand.text-white" do
       assert_select "h2", text: "Tle D 1"
       assert_select "*", text: "Tle · D"
       assert_select "*", text: "Lycée Classique"
@@ -38,6 +39,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
       assert_select "[id*=join_code]", 0
     end
     assert_no_match(/Code de la classe/, response.body)
+    assert_select "#student_classroom_header", text: /élève/, count: 0
     assert_no_match "Yapo", response.body
     assert_no_match "Koffi", response.body
     assert_select "a[href='#{student_classroom_path}'][aria-current=page]"
@@ -59,14 +61,57 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     create_exercise_session(student: @student, exercise:, status: "completed", score_percent: score).tap { it.update!(completed_at: at) }
   end
 
-  # UDR-0076 §3.2 : la classe, puis « Cours assignés », « Exercices assignés », « Exercices traités ».
+  def sections = css_select("#student_classroom [id^=student_classroom_]:not([id$=_title])").map { it["id"] }
+
+  # UDR-0076 §3.2, UDR-0086 §3.4 : la classe, puis « Cours assignés », « Exercices assignés », « Exercices traités », les
+  # deux listes dans une grille qui les met côte à côte dès 1 024 px.
   test "below the classroom: the assigned courses, the assigned exercises, then the treated exercises" do
+    create_teacher(school: @classroom.school, classrooms: [ @classroom ])
     sign_in_as @student
 
     get student_classroom_path
 
     assert_equal %w[student_classroom_header student_classroom_courses student_classroom_assigned student_classroom_treated],
-                 css_select("#main .grid > [id]").map { it["id"] }
+                 sections
+    assert_select "#student_classroom .lg\\:grid-cols-2 > #student_classroom_assigned + #student_classroom_treated"
+  end
+
+  # CA-3 (UDR-0086 §3.3) : sans enseignant sur Lnclass, la carte titrée sous celle de la classe, et le partage WhatsApp de
+  # l'accueil (ADR-0089 §4.3) : la classe, l'établissement, le lien d'inscription enseignant, dans un nouvel onglet.
+  test "a classroom without a teacher on Lnclass: the « Aucun enseignant » card and « Inviter mon enseignant », its only action" do
+    create_teacher(school: @classroom.school, classrooms: [ create_classroom(school: @classroom.school) ])
+    sign_in_as @student
+
+    get student_classroom_path
+
+    assert_equal %w[student_classroom_header student_classroom_no_teacher student_classroom_courses student_classroom_assigned
+                    student_classroom_treated], sections
+    message = I18n.t("classroom.student_homes.invite_teacher.message", classroom: "Tle D 1", school: "Lycée Classique",
+                                                                      link: new_teacher_registration_url)
+    assert_select "section#student_classroom_no_teacher[aria-labelledby=student_classroom_no_teacher_title]" do
+      assert_select "h2#student_classroom_no_teacher_title", text: tl("no_teacher.title")
+      assert_select "p", text: tl("no_teacher.description")
+      assert_select "a.ui-button-brand[href=?][target=_blank][rel=noopener][aria-label=?]",
+                    "https://wa.me/?text=#{ERB::Util.url_encode(message)}",
+                    I18n.t("classroom.student_homes.invite_teacher.action_label"),
+                    text: I18n.t("classroom.student_homes.invite_teacher.action")
+    end
+    assert_select PRIMARY_ACTION, 1
+  end
+
+  # CA-4 (UDR-0086 §3.3, UDR-0057 R1) : avec un enseignant, ni carte ni action, même avec des exercices à faire, et jamais
+  # la liste des enseignants.
+  test "a classroom with a teacher: neither the card nor any action, and no list of the teachers" do
+    create_teacher(school: @classroom.school, classrooms: [ @classroom ], first_name: "Moussa", last_name: "Diabaté")
+    assign("Méiose", course: course_named("Génétique"))
+    sign_in_as @student
+
+    get student_classroom_path
+
+    assert_select "#student_classroom_no_teacher", 0
+    assert_no_match I18n.t("classroom.student_homes.invite_teacher.action"), response.body
+    assert_no_match "Diabaté", response.body
+    assert_select PRIMARY_ACTION, 0
   end
 
   # CA-4 : les cours des exercices assignés, en bande défilante, chacun vers sa page ; un cours sans exercice assigné n'y est pas.
@@ -139,6 +184,31 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_no_match "Autre élève", response.body
   end
 
+  # CA-6 (UDR-0086 §3.4) : la note en vert à partir de 14/20, en encre en dessous, jamais en rouge ; l'échéance en retard,
+  # d'aujourd'hui ou de demain en orange (warning, UDR-0062), une échéance plus lointaine sans orange.
+  test "the grades green from 14/20, never red; the due dates late, today or tomorrow in orange" do
+    genetics = course_named("Génétique")
+    complete(create_exercise(essential: create_essential(course: genetics), title: "Réussi"), 75, at: 2.hours.ago)
+    complete(create_exercise(essential: create_essential(course: genetics), title: "À revoir"), 45, at: 1.hour.ago)
+    { "En retard" => -1, "Pour aujourd'hui" => 0, "Pour demain" => 1, "Plus tard" => 5 }.each do |title, days|
+      # Une échéance tombe de 1 à 7 jours après l'assignation (contrainte classroom_assignments_due_on_within_a_week).
+      exercise = assign(title, course: genetics, at: days > 1 ? 1.day.ago : 3.days.ago)
+      Orm::ClassroomAssignment.find_by!(assignable_id: exercise.id).update!(due_on: Date.current + days)
+    end
+    sign_in_as @student
+
+    get student_classroom_path
+
+    assert_select "#student_classroom_treated" do
+      assert_select "li .text-success", text: "15/20"
+      assert_select "li .text-ink", text: "9/20"
+      assert_select "li .text-success", text: "9/20", count: 0
+      assert_select "[class*=error], [class*=danger]", 0
+    end
+    orange = ->(title) { css_select("#student_classroom_assigned li").find { it.text.include?(title) }.css(".text-warning").size }
+    assert_equal [ 1, 1, 1, 0 ], [ "En retard", "Pour aujourd'hui", "Pour demain", "Plus tard" ].map(&orange)
+  end
+
   test "nothing assigned, nothing treated: the empty state of each section" do
     sign_in_as @student
 
@@ -148,16 +218,6 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_select "#student_classroom_assigned", text: including(tl("show.assigned_empty"))
     assert_select "#student_classroom_treated", text: including(tl("show.treated_empty"))
     assert_select "#main [data-controller=reveal]", 0
-  end
-
-  # UDR-0057 R1 : « Ma classe » se lit, elle n'a pas d'action principale, même avec des exercices à faire.
-  test "UDR-0057: no primary action, even with exercises to do" do
-    assign("Méiose", course: course_named("Génétique"))
-    sign_in_as @student
-
-    get student_classroom_path
-
-    assert_select PRIMARY_ACTION, 0
   end
 
   # ADR-0076 §4.1 (CA-8) : la page est personnelle, jamais dans un cache partagé ; ADR-0067 : un nombre fixe de requêtes.
