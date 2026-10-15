@@ -312,6 +312,11 @@
   padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
 }
 
+/* UDR-0087 §3.2 — bouton d'action collé au bas de la séance : 16 px au moins, la zone sûre si elle est plus haute */
+@utility pb-safe-action {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
 /* Élément collant posé juste au-dessus de la barre basse (« Question suivante », chantier ux-pages-eleve) */
 @utility bottom-above-bar {
   bottom: calc(var(--spacing-bar) + env(safe-area-inset-bottom));

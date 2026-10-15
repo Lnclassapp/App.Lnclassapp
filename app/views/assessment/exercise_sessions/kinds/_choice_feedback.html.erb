@@ -1,0 +1,14 @@
+<%# 🌐 UI · assessment/exercise_sessions/kinds/_choice_feedback — « Ton choix » d'une question à cocher %>
+<%# Rôle : les seules propositions cochées, avec la lettre qu'elles avaient à l'écran ; jamais la bonne réponse %>
+<%# ADR  : 0054, 0091 · UDR : 0022, 0087 §3.5 · bordure verte pour une bonne réponse, neutre sinon %>
+<%# locals: (feedback:) -%>
+<ul class="space-y-2" aria-labelledby="feedback-selected">
+  <% feedback.selected_answers.each do |answer| %>
+    <%# Le contenu dans un span : un `li.flex` ferait du texte et de chaque formule KaTeX autant de colonnes. %>
+    <li class="flex min-h-tap items-center gap-3 rounded-ln border-2 bg-white px-4 py-3 font-medium <%= feedback.correct ? "border-success bg-success-soft" : "border-line" %>">
+      <span class="grid size-8 shrink-0 place-items-center rounded-full text-sm font-bold <%= feedback.correct ? "bg-success text-white" : "bg-mist text-ink" %>"
+            aria-hidden="true"><%= ("A".ord + answer.index).chr %></span>
+      <span class="min-w-0 flex-1"><%= answer.content %></span>
+    </li>
+  <% end %>
+</ul>

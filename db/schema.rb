@@ -79,6 +79,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_15_100100) do
     t.integer "position", null: false
     t.bigint "question_id", null: false
     t.datetime "updated_at", null: false
+    t.string "match_content", limit: 500
     t.index ["question_id", "position"], name: "index_answers_on_question_id_and_position", unique: true
   end
 
@@ -585,9 +586,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_15_100100) do
     t.bigint "exercise_session_id", null: false
     t.bigint "question_id", null: false
     t.bigint "selected_answer_ids", null: false, array: true
+    t.string "response_text", limit: 200
     t.index ["exercise_session_id", "question_id"], name: "index_question_attempts_on_exercise_session_id_and_question_id", unique: true
     t.index ["question_id"], name: "index_question_attempts_on_question_id"
-    t.check_constraint "cardinality(selected_answer_ids) > 0", name: "question_attempts_selected_answer_ids_present"
+    t.check_constraint "cardinality(selected_answer_ids) > 0 OR response_text IS NOT NULL", name: "question_attempts_selected_answer_ids_present"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -598,8 +600,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_15_100100) do
     t.integer "position", null: false
     t.string "question_type", null: false
     t.datetime "updated_at", null: false
+    t.decimal "numeric_tolerance", precision: 12, scale: 4
     t.index ["exercise_id", "position"], name: "index_questions_on_exercise_id_and_position", unique: true
-    t.check_constraint "question_type::text = ANY (ARRAY['true_false'::character varying::text, 'single_choice'::character varying::text, 'multiple_correct_2'::character varying::text, 'multiple_correct_3'::character varying::text])", name: "questions_question_type_values"
+    t.check_constraint "numeric_tolerance >= 0::numeric", name: "questions_numeric_tolerance_positive"
+    t.check_constraint "question_type::text = ANY (ARRAY['true_false'::character varying, 'single_choice'::character varying, 'multiple_correct_2'::character varying, 'multiple_correct_3'::character varying, 'fill_blank'::character varying, 'numeric'::character varying, 'ordering'::character varying, 'matching'::character varying]::text[])", name: "questions_question_type_values"
   end
 
   create_table "referral_shares", force: :cascade do |t|

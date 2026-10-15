@@ -58,7 +58,7 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
     click_on I18n.t("#{scope}.student_progress.redo")
 
     assert_current_path %r{\A/sessions/[^/]+\z}
-    assert_text "Question 1"
+    assert_text(/question 1/i)
   end
 
   test "sur un téléphone, la page de l'élève tient dans la largeur" do
@@ -89,18 +89,19 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
 
       assert_selector "#exercise_context", exact_text: "Génétique et évolution"
       within "#student_progress" do
-        assert_text I18n.t("#{scope}.student_progress.best_score")
+        # UDR-0087 §3.1 : les libellés des cases s'affichent en capitales.
+        assert_text(/#{I18n.t("#{scope}.student_progress.best_score")}/i)
         assert_text "17/20"
         assert_text "Acquis"
         assert_text I18n.t("#{scope}.student_progress.badge_level", level: "Or")
         assert_text I18n.t("#{scope}.student_progress.completed", count: 1)
-        assert_link I18n.t("#{scope}.student_progress.resume")
+        assert_link I18n.t("#{scope}.student_progress.resume_at", number: 1)
         assert_button I18n.t("#{scope}.student_progress.restart")
-        assert_no_text I18n.t("#{scope}.student_progress.restart_hint")
+        assert_text I18n.t("#{scope}.student_progress.restart_note")
       end
       assert_no_text I18n.t("#{scope}.questions_preview.student_hint")
       assert_single_primary_action
-      assert_blocks_above_fold "#exercise_header > *, #main > div > div.space-y-10 > *"
+      assert_blocks_above_fold "#exercise_layout > div > *, #exercise_layout > section"
       assert_list_capped "#exercise_questions ol", items: "li.question"
 
       within "#exercise_questions" do
@@ -113,6 +114,21 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
       assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
              "la page déborde en largeur"
     end
+  end
+
+  # CA-15, UDR-0087 §3.1 : dès 1 024 px, la présentation et « Ta progression » à gauche, l'aperçu des questions à droite.
+  test "sur un ordinateur, la présentation et la progression à gauche, l'aperçu à droite" do
+    sign_in_as create_student_for(@course)
+    page.current_window.resize_to(1280, 900)
+
+    visit exercise_path(@exercise.public_id)
+
+    left = page.evaluate_script("document.querySelector('#student_progress').getBoundingClientRect().right")
+    right = page.evaluate_script("document.querySelector('#exercise_questions').getBoundingClientRect().left")
+    top = page.evaluate_script("[document.querySelector('#exercise_header'), document.querySelector('#exercise_questions')]" \
+                               ".map((block) => Math.round(block.getBoundingClientRect().top))")
+    assert_operator left, :<, right
+    assert_equal 1, top.uniq.size
   end
 
   test "l'enseignant voit les propositions correctes marquées" do

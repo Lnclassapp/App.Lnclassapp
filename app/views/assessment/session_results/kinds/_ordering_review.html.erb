@@ -1,0 +1,18 @@
+<%# 🌐 UI · assessment/session_results/kinds/_ordering_review — « Ton choix » d'un ordre, dans la correction %>
+<%# Rôle : les étapes dans l'ordre de l'élève, numérotées ; avec reveal seulement, le bon ordre %>
+<%# ADR  : 0091 §4.4 · UDR : 0023, 0087 §3.6 · sans reveal, rien n'est marqué juste ou faux %>
+<%# locals: (question:, reveal:) -%>
+<% if question.answers.any? %>
+  <p class="text-sm text-mute"><%= t("assessment.session_results.question_review.selected") %> :</p>
+  <ol class="mt-1 space-y-0.5 text-sm font-bold text-ink">
+    <% question.answers.each_with_index do |step, rank| %><li><%= rank + 1 %>. <span><%= step.content %></span></li><% end %>
+  </ol>
+<% end %>
+<% if reveal && question.solution.any? %>
+  <div class="mt-2 text-sm text-success" data-correct>
+    <p><%= t("assessment.session_results.question_review.right_order") %> :</p>
+    <ol class="mt-1 space-y-0.5 font-bold">
+      <% question.solution.each_with_index do |step, rank| %><li><%= rank + 1 %>. <span><%= step %></span></li><% end %>
+    </ol>
+  </div>
+<% end %>

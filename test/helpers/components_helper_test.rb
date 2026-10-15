@@ -373,6 +373,15 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "dialog#account_panel .sheet-handle", 0
   end
 
+  # UDR-0087 §3.3 : quitter la séance, une feuille sous 700 px, ouverte par une croix seule, lien sans JavaScript.
+  test "ui_modal as a compact sheet, opened by an icon-only trigger named by its label" do
+    show ui_modal(title: "Quitter ?", id: "quit", placement: :phone_sheet, trigger_label: "Quitter la session",
+                  trigger_icon: "x-mark", trigger_href: "/exercises/1")
+
+    assert_select "dialog#quit.dialog-phone-sheet .sheet-handle.min-\\[700px\\]\\:hidden"
+    assert_select "a[href='/exercises/1'][aria-label='Quitter la session'][aria-controls=quit][data-action='modal#open']", text: ""
+  end
+
   test "ui_modal without trigger nor block keeps an explicit id" do
     show ui_modal(title: "Info", id: "info")
 

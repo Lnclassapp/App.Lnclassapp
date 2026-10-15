@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::ContentNode
 # Rôle : validateurs des cours, fiches et exercices importés, partagés par les trois imports de contenu
-# ADR  : 0035, 0039
+# ADR  : 0035, 0039, 0091 (§4.5 : tolerance et match)
 module Entities
   module Catalog
     module ContentNode
@@ -35,7 +35,7 @@ module Entities
         errors + questions.each_with_index.flat_map { |question, index| question_errors(question, "#{path}.questions[#{index}]") }
       end
 
-      # L'ancienne application nomme is_correct ce que le schéma nomme correct.
+      # L'ancienne application nomme is_correct ce que le schéma nomme correct ; match est le côté droit d'une paire.
       def self.question_errors(hash, path)
         return [ error(path, "schema") ] unless hash.is_a?(Hash)
 
@@ -44,18 +44,41 @@ module Entities
 
         answers = raw_answers.each_with_index.map do |answer, index|
           Assessment::Answer.new(id: index, position: index, content: answer["content"],
-                                 correct: answer.fetch("correct") { answer["is_correct"] } == true)
+                                 correct: answer.fetch("correct") { answer["is_correct"] } == true,
+                                 match_content: answer["match"].to_s.strip.presence)
         end
         errors = text(hash, "content", nil, path)
         errors += raw_answers.each_with_index.flat_map { |answer, index| text(answer, "content", nil, "#{path}.answers[#{index}]") }
-        errors + structure_errors(hash["question_type"], answers, path)
+        errors + misplaced_keys(hash, raw_answers, path) + structure_errors(hash, answers, path)
       end
 
-      def self.structure_errors(question_type, answers, path)
-        rules = Assessment::Question.structure_errors_for(question_type:, answers:)
+      # ADR-0091 §4.5 : tolerance n'a de sens que pour un nombre, match que pour relier ; ailleurs, une clé ignorée
+      # tromperait l'équipe : elle est refusée à sa place.
+      def self.misplaced_keys(hash, raw_answers, path)
+        errors = []
+        if hash.key?("tolerance") && !hash["tolerance"].nil? && hash["question_type"] != "numeric"
+          errors << error("#{path}.tolerance", "question_structure", rule: :tolerance_not_allowed)
+        end
+        return errors if hash["question_type"] == "matching"
+
+        errors + raw_answers.each_with_index.filter_map do |answer, index|
+          next if answer["match"].nil?
+
+          error("#{path}.answers[#{index}].match", "question_structure", rule: :match_not_allowed)
+        end
+      end
+
+      # Une règle se rapporte à l'énoncé, à la marge, ou aux éléments de la question.
+      RULE_KEYS = { blank_marker: "content", negative_tolerance: "tolerance", tolerance_out_of_range: "tolerance" }.freeze
+
+      def self.structure_errors(hash, answers, path)
+        question_type = hash["question_type"]
+        tolerance = hash["tolerance"]
+        rules = Assessment::Question.structure_errors_for(question_type:, answers:, content: hash["content"],
+                                                          numeric_tolerance: tolerance.is_a?(::Numeric) ? BigDecimal(tolerance.to_s) : nil)
         return [ error("#{path}.question_type", "invalid_value", value: question_type) ] if rules == [ :unknown_question_type ]
 
-        rules.map { |rule| error("#{path}.answers", "question_structure", rule:) }
+        rules.map { |rule| error("#{path}.#{RULE_KEYS.fetch(rule, 'answers')}", "question_structure", rule:) }
       end
 
       def self.taxonomy(hash, path, lookup)
@@ -94,7 +117,7 @@ module Entities
 
       def self.error(path, code, **params) = ImportError.new(path:, code:, params:)
 
-      private_class_method :question_errors, :structure_errors, :taxonomy, :series_errors, :text, :children, :error
+      private_class_method :question_errors, :misplaced_keys, :structure_errors, :taxonomy, :series_errors, :text, :children, :error
     end
   end
 end

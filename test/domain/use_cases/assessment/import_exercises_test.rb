@@ -219,6 +219,93 @@ module UseCases
         assert_equal [ [ "exercises[0].questions[1].answers[2].content", "schema" ] ], report.import_errors.map { it.values_at("path", "code") }
       end
 
+      # CA-14, ADR-0091 §4.5: tolerance and match are two optional keys of the v1 format; a negative margin or a long
+      # right-hand side is refused by the schema, at its path.
+      test "tolerance and match are read into the nodes; outside the choices every element is correct" do
+        node = Ports::Catalog::ContentTreeWriterPort::QuestionNode.from_import(
+          { "content" => " Relie. ", "question_type" => "matching", "tolerance" => 0.1,
+            "answers" => [ { "content" => " a ", "match" => " A " }, { "content" => "b", "correct" => false } ] }, position: 3
+        )
+
+        assert_equal [ 3, "Relie.", BigDecimal("0.1") ], [ node.position, node.content, node.numeric_tolerance ]
+        assert_equal [ [ "a", true, "A" ], [ "b", true, nil ] ], node.answers.map { [ it.content, it.correct, it.match_content ] }
+        choice = Ports::Catalog::ContentTreeWriterPort::QuestionNode.from_import(question("single_choice", false, true), position: 1)
+        assert_equal [ [ false, true ], nil ], [ choice.answers.map(&:correct), choice.numeric_tolerance ]
+      end
+
+      test "the four new question types are imported when well formed" do
+        questions = [
+          { "content" => "La capitale est ___ .", "question_type" => "fill_blank", "answers" => [ { "content" => "Abidjan" } ] },
+          { "content" => "Combien ?", "question_type" => "numeric", "answers" => [ { "content" => "-2" } ] },
+          { "content" => "Range.", "question_type" => "ordering", "answers" => %w[A B C].map { { "content" => it } } },
+          { "content" => "Relie.", "question_type" => "matching",
+            "answers" => %w[a b c].map { { "content" => it, "match" => it.upcase } } }
+        ]
+
+        report = run_import(document(exercise("Nouveaux", "questions" => questions)))
+
+        assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count)
+        assert_equal %w[fill_blank numeric ordering matching], Orm::Question.order(:position).pluck(:question_type)
+        assert_equal %w[A B C], Orm::Question.find_by!(question_type: "matching").answers.order(:position).pluck(:match_content)
+      end
+
+      # CA-14: a numeric question with « tolerance »: 0.1 is created with its margin.
+      test "a numeric question is imported with its tolerance" do
+        numeric = exercise("Nombre", "questions" => [ { "content" => "Calcule 7 ÷ 2.", "question_type" => "numeric", "tolerance" => 0.1,
+                                                         "answers" => [ { "content" => "3,5" } ] } ])
+
+        report = run_import(document(numeric))
+
+        assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count)
+        question = Orm::Question.find_by!(question_type: "numeric")
+        assert_equal [ BigDecimal("0.1"), [ [ "3,5", true ] ] ], [ question.numeric_tolerance, question.answers.pluck(:content, :correct) ]
+      end
+
+      def kind_question(question_type, answers, content: "Énoncé ___ .", **extra)
+        { "content" => content, "question_type" => question_type, "answers" => answers, **extra.transform_keys(&:to_s) }
+      end
+
+      test "a tolerance too large or too precise is refused at .tolerance, and the other exercises are imported" do
+        numeric = ->(title, tolerance) { exercise(title, "questions" => [ kind_question("numeric", [ { "content" => "3,5" } ], tolerance:) ]) }
+
+        report = run_import(document(numeric.("Énorme", 1e30), numeric.("Précise", 0.00001), exercise("Bon")))
+
+        assert_equal [ 3, 1, 2 ], report.values_at(:total_count, :imported_count, :error_count)
+        assert_equal [ "exercises[0].questions[0].tolerance", "exercises[1].questions[0].tolerance" ],
+                     report.import_errors.map { it["path"] }.sort
+        assert_equal [ "Bon" ], Orm::Exercise.pluck(:title)
+      end
+
+      test "malformed new questions are reported at their path, with their rule" do
+        questions = [
+          kind_question("fill_blank", [ { "content" => "Abidjan" } ], content: "Sans blanc."),
+          kind_question("ordering", [ { "content" => "A" }, { "content" => "B" } ]),
+          kind_question("numeric", [ { "content" => "trois" } ]),
+          kind_question("matching", [ { "content" => "a", "match" => "1" }, { "content" => "b", "match" => "1" }, { "content" => "c", "match" => "3" } ]),
+          kind_question("single_choice", [ { "content" => "A", "correct" => true, "match" => "x" }, { "content" => "B" } ], tolerance: 0.5)
+        ]
+
+        report = run_import(document(exercise("Mal formé", "questions" => questions)))
+
+        path = "exercises[0].questions"
+        assert_equal [ [ "#{path}[0].content", "blank_marker" ], [ "#{path}[1].answers", "steps_count" ],
+                       [ "#{path}[2].answers", "numeric_value_unreadable" ], [ "#{path}[3].answers", "duplicate_match" ],
+                       [ "#{path}[4].answers[0].match", "match_not_allowed" ], [ "#{path}[4].tolerance", "tolerance_not_allowed" ] ],
+                     report.import_errors.map { [ it["path"], it.dig("params", "rule") ] }.sort
+        assert_equal 0, Orm::Exercise.count
+      end
+
+      test "a negative tolerance or a too long match is refused by the schema, at its path" do
+        bad = exercise("Marge")
+        bad["questions"][0]["tolerance"] = -1
+        bad["questions"][1]["answers"][0]["match"] = "a" * 501
+
+        report = run_import(document(bad))
+
+        assert_equal [ [ "exercises[0].questions[0].tolerance", "schema" ], [ "exercises[0].questions[1].answers[0].match", "schema" ] ],
+                     report.import_errors.map { it.values_at("path", "code") }.sort
+      end
+
       test "a batch refused by the base is replayed exercise by exercise, and only the refused one is in error" do
         transaction = CountingTransaction.new
 
