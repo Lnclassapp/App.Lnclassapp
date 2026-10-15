@@ -412,6 +412,28 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "dialog#help-sheet > span.sheet-handle.lg\\:hidden[aria-hidden=true]", 1
   end
 
+  # UDR-0089 §3.4 : `placement: :phone_sheet` est une feuille sous 700 px seulement, sa poignée cachée dès 700 px ;
+  # `size: :form` la borne à 480 px une fois centrée.
+  test "ui_modal placed as a phone sheet hides its handle from 700 px and can be 480 px wide" do
+    show ui_modal(title: "Changer mon code secret", id: "pin", size: :form, placement: :phone_sheet) { "Corps" }
+
+    assert_select "dialog#pin.ui-dialog.dialog-phone-sheet.sm\\:max-w-120:not(.dialog-sheet)"
+    assert_select "dialog#pin > span.sheet-handle.min-\\[700px\\]\\:hidden[aria-hidden=true]:not(.lg\\:hidden)", 1
+  end
+
+  # UDR-0089 §3.4, palier 700-1 023 px : la feuille de :phone_sheet cesse sous 700 px (43,75 rem), et non à lg comme :sheet ;
+  # au-delà, la <dialog> garde ses utilitaires de modale centrée (m-auto, sm:max-w-120).
+  test "the phone sheet stops at 700 px in the stylesheet, where the dialog is centred again" do
+    css = Rails.root.join("app/assets/stylesheets/application.tailwind.css").read
+    rule = css[/@media \(max-width: ([\d.]+)rem\) \{\s*dialog\.dialog-phone-sheet \{[^}]*\}/]
+
+    assert rule, "règle de .dialog-phone-sheet introuvable"
+    assert_in_delta 43.75, rule[/max-width: ([\d.]+)rem/, 1].to_f, 0.02, "la feuille doit s'arrêter à 700 px"
+    assert_no_match(/dialog\.dialog-phone-sheet/, css.sub(rule, ""), "aucune autre règle ne la place")
+    show ui_modal(title: "Changer mon code secret", id: "pin", size: :form, placement: :phone_sheet) { "Corps" }
+    assert_select "dialog#pin.ui-dialog.sm\\:max-w-120"
+  end
+
   test "ui_modal keeps its centred rendering by default, and refuses an unknown placement" do
     default = ui_modal(title: "Supprimer ?", id: "confirm", size: :sm, trigger: "Ouvrir") { "Corps" }
 

@@ -1,0 +1,29 @@
+<%# 🌐 UI · identity/profiles/_student_row — une ligne du profil de l'élève : pastille d'icône, libellé, valeur, action et chevron %>
+<%# Rôle : avec href, la ligne entière est un lien vers sa fenêtre (frame « modal »), 48 px au moins ; sans href, lecture seule %>
+<%# UDR  : 0089 §3.2, §3.7 (nom accessible « action libellé, valeur ») · locals : icon, label, value, action, href, aria_label, wrapper %>
+<%# locals: (icon:, label:, value:, action: nil, href: nil, aria_label: nil, wrapper: :li) -%>
+<% body = capture do %>
+  <span class="grid size-10 shrink-0 place-items-center rounded-ln bg-brand-soft text-brand-strong" aria-hidden="true">
+    <%= ui_icon icon %>
+  </span>
+  <span class="min-w-0 flex-1">
+    <span class="block text-sm text-mute"><%= label %></span>
+    <span class="block font-bold break-words text-ink tabular-nums"><%= value %></span>
+  </span>
+  <% if href %>
+    <span class="shrink-0 text-sm font-bold text-brand-strong"><%= action %></span>
+    <%= ui_icon "chevron-right", variant: :mini, class: "text-mute transition group-hover:translate-x-0.5" %>
+  <% end %>
+<% end %>
+<%= content_tag wrapper do %>
+  <% if href %>
+    <%= link_to href, data: { turbo_frame: "modal" },
+                "aria-label": aria_label || t("identity.profiles.student_information.row_label", action:, label: label.downcase, value:),
+                class: "group -mx-2 flex min-h-tap items-center gap-3 rounded-ln px-2 py-3 transition hover:bg-mist " \
+                       "focus-visible:outline-2 focus-visible:outline-brand" do %>
+      <%= body %>
+    <% end %>
+  <% else %>
+    <div class="flex min-h-tap items-center gap-3 py-3"><%= body %></div>
+  <% end %>
+<% end %>

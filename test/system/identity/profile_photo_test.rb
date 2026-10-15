@@ -14,7 +14,8 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
 
   def open_photo_modal
     visit profile_path
-    within("#profile_information") { click_on(stored.attached? ? "Changer ma photo" : "Ajouter une photo") }
+    # UDR-0089 §3.2 : la ligne « Photo » entière ouvre la fenêtre.
+    within("#profile_information") { find("a[href='#{edit_profile_photo_path}']", text: stored.attached? ? "Ta photo" : "Aucune photo").click }
     assert_selector "turbo-frame#modal dialog[open]", text: "Ma photo"
   end
 
@@ -57,7 +58,7 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
 
       assert_toast "Ta photo est enregistrée."
       assert_no_selector "turbo-frame#modal dialog[open]"
-      assert_photo_loaded "#profile_information img[alt='Aya Koné']"
+      assert_photo_loaded "#profile_identity img[alt='Aya Koné']"
       assert_photo_loaded "header button#avatar-menu-button img[alt='Aya Koné']"
     end
     assert_equal Entities::Shared::ImageHeader::Facts.new(format: :webp, width: 480, height: 480, metadata: false), stored_facts
@@ -76,7 +77,7 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
       within("turbo-frame#modal dialog[open]") { click_on "Retirer ma photo" }
 
       assert_toast "Ta photo est retirée."
-      within("#profile_information") { assert_selector "[role=img][aria-label='Aya Koné']", text: "AK" }
+      within("#profile_identity") { assert_selector "[role=img][aria-label='Aya Koné']", text: "AK" }
       assert_selector "header button#avatar-menu-button [role=img]", text: "AK"
     end
     assert_not stored.attached?
@@ -150,7 +151,7 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
       within("turbo-frame#modal dialog[open]") { click_on "Enregistrer" }
 
       assert_toast "Ta photo est enregistrée."
-      assert_photo_loaded "#profile_information img[alt='Aya Koné']"
+      assert_photo_loaded "#profile_identity img[alt='Aya Koné']"
       assert_photo_loaded "header button#avatar-menu-button img[alt='Aya Koné']"
       assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
       find("#toasts button[data-action='toast#dismiss']").click

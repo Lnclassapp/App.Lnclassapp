@@ -58,9 +58,9 @@ Lot 0 — SOCLE ──► Lot A — PAGE ──► Lot B — PREUVE ET CLÔTURE
 - [x] ADR écrit si un port / une table / un contrat apparaît *(aucun)*
 - [ ] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md` *(UDR-0090 écrite ; index à la clôture)*
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
-- [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
-- [ ] En-tête HITL sur chaque fichier créé dans `app/`
+- [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
+- [x] En-tête HITL sur chaque fichier créé dans `app/`
 - [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
-- [ ] Pureté domaine · rubocop · tests · brakeman : au vert
+- [ ] Pureté domaine · rubocop · tests · brakeman : au vert *(pureté, rubocop, brakeman verts ; tests rouges hors chantier, voir journal)*
 - [ ] PR unique vers `Develop`, référençant chantier + UDR
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)

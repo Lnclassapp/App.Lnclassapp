@@ -413,13 +413,15 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 70, completed_at: 1.hour.ago)
     create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 65, completed_at: 2.hours.ago)
     create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 20, completed_at: 3.hours.ago)
+    # 68 % se lit « 14/20 » (arrondi) : la couleur suit la note lue, comme l'historique et « Ma classe » (UDR-0090 §4).
+    create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 68, completed_at: 4.hours.ago)
     sign_in_as @student
 
     get student_home_path, headers: { "Turbo-Frame" => "student_home_recent_activity" }
 
     grades = css_select("turbo-frame#student_home_recent_activity li [data-grade]")
-    assert_equal [ "14/20", "13/20", "4/20" ], grades.map { it.text.squish }
-    assert_equal [ true, false, false ], grades.map { it["class"].split.include?("text-success") }
+    assert_equal [ "14/20", "13/20", "4/20", "14/20" ], grades.map { it.text.squish }
+    assert_equal [ true, false, false, true ], grades.map { it["class"].split.include?("text-success") }
     assert_select "turbo-frame#student_home_recent_activity [class*=error], turbo-frame#student_home_recent_activity [class*=warning]", 0
   end
 

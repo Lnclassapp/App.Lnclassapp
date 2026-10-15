@@ -97,4 +97,4 @@ Et le menu de gauche montre « Ma classe » actif
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Requêtes SQL de `GET /students/classroom` | à mesurer au Lot 0 | ≤ avant + 1 | |
+| Requêtes SQL de `GET /students/classroom` | 19 (Lot 0, hors SCHEMA ; 5 assignés, 4 traités) | ≤ avant + 1 | 19, avec ou sans enseignant (`has_teacher` dans la requête de l’en-tête) |

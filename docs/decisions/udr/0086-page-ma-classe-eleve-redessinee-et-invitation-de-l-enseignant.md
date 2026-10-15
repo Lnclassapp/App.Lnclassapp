@@ -1,14 +1,14 @@
 # UDR-0086 : Page Ma classe de l'élève — carte de la classe en dégradé, listes en cartes blanches, « Inviter mon enseignant » sans enseignant
 <!-- index
 titre: Ma classe de l'élève redessinée, invitation de l'enseignant
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-15)*
 adr-lie: [0089](../adr/0089-exercice-du-jour-calcule-a-la-lecture-et-fait-seul-deduit.md)
 problematique: Élève : Ma classe sans lien « Accueil », carte de la classe en dégradé bleu, ni enseignants ni nombre d'élèves, carte « Aucun enseignant » avec « Inviter mon enseignant » comme seule action possible, bande de 1 / 2,5 / 4 cartes, listes côte à côte dès 1 024 px. Amende UDR-0011, 0057, 0076 §3.2
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-15 ; livré par le chantier ma-classe-eleve)* |
 | **Date** | 2026-10-15 |
 | **Chantier** | [`docs/chantiers/ma-classe-eleve`](../../chantiers/ma-classe-eleve/memo.md) |
 | **ADR lié** | [ADR-0089](../adr/0089-exercice-du-jour-calcule-a-la-lecture-et-fait-seul-deduit.md) §4.3 (message d'invitation de l'enseignant) |
