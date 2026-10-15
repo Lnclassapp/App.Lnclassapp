@@ -69,17 +69,6 @@ class School::ClassroomsByLevelTest < ApplicationSystemTestCase
     assert_not_reloaded
   end
 
-  # Un toast d'erreur reste jusqu'à sa fermeture et peut couvrir l'en-tête (au téléphone surtout) : on le ferme par son
-  # vrai bouton, comme le ferait l'équipe, et on attend qu'il ait quitté la page.
-  def dismiss_toasts
-    all("#toasts button[data-action='toast#dismiss']").each do |button|
-      button.click
-    rescue Selenium::WebDriver::Error::StaleElementReferenceError
-      nil # un toast de succès s'est fermé seul entre la recherche et le clic : il a déjà quitté la page
-    end
-    assert_no_selector "#toasts [data-controller=toast]"
-  end
-
   # Après un refus, la confirmation est vraiment refermée : la page reste utilisable sans rechargement.
   def assert_page_usable
     assert_no_selector "dialog[open]"
