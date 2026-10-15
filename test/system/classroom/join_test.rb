@@ -116,11 +116,12 @@ class Classroom::JoinTest < ApplicationSystemTestCase
 
   private
 
-  # Each list of the cascade arrives in its frame once its parent is chosen (UDR-0081 §3.3).
+  # Each step of the cascade arrives in its frame once its parent is chosen (UDR-0081 §3.3); the level is a pill, the
+  # classroom a box, both real radios (UDR-0091 §3.1).
   def choose_classroom(name)
     select "Abidjan 1", from: "student_registration[drena_public_id]"
     select "Lycée Classique d'Abidjan", from: "student_registration[school_public_id]"
-    select "6ème", from: "student_registration[level_slug]"
+    within("turbo-frame#picker_levels") { choose "6ème" }
     within("turbo-frame#picker_classrooms") { choose name }
   end
 

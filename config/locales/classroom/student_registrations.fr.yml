@@ -72,14 +72,26 @@ fr:
           ko: "Les codes ne concordent pas."
         submit: "Créer mon compte"
       # UDR-0081 §3.3 : la cascade, partagée par l'inscription et par « Choisis ta classe » ; ses trois listes y puisent leurs textes.
+      # UDR-0091 : trois étapes numérotées, l'établissement replié avec « Changer », les niveaux en pastilles, les classes en cases.
       class_picker:
+        step_school: "Ton établissement"
+        step_level: "Ton niveau"
+        step_classroom: "Ta classe"
+        change: "Changer"
+        change_label: "Changer d'établissement"
+        drena_name: "DRENA %{name}"
+        school_first: "Choisis d'abord ton établissement."
+        level_first: "Choisis d'abord ton niveau."
+        levels_found:
+          one: "1 niveau trouvé."
+          other: "%{count} niveaux trouvés."
+        classrooms_found:
+          one: "1 classe trouvée."
+          other: "%{count} classes trouvées."
         drena: "DRENA"
         drena_prompt: "Choisis ta DRENA"
         continue: "Continuer"
         school_prompt: "Choisis ton établissement"
-        level: "Niveau"
-        level_prompt: "Choisis ton niveau"
-        classroom: "Classe"
         full: "Complète"
         not_found_title: "Ta classe n'est pas encore sur Lnclass."
         not_found_description: "Préviens ton enseignant ou la direction de ton établissement."

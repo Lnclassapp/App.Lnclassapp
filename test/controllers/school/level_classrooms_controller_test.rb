@@ -2,7 +2,7 @@ require "test_helper"
 
 # IL-04, IL-05, IL-06 (ADR-0085 §4.2, UDR-0081 §3.3): the classrooms of a level, public and limited to 30 requests a
 # minute — the « picker_classrooms » frame of the student cascade. One radio per active classroom; a full one disabled,
-# with « Complète » in its label; never a headcount, a ceiling, a teacher, a student nor a link token.
+# with « Complète » in its label; never a headcount, a ceiling, a teacher, a student nor a link token. UDR-0091: as boxes.
 class School::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
   PICKER = "classroom.student_registrations.class_picker".freeze
 
@@ -18,16 +18,22 @@ class School::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
     get school_picker_classrooms_path(school_public_id, level_slug, **params), headers: { "Turbo-Frame" => "picker_classrooms" }
   end
 
-  test "IL-04: the frame lists the active classrooms of the level as radios, each line a whole tap target" do
+  # UDR-0091 §3.1 : de grandes cases de 64 px, 2 par ligne puis 4 dès 700 px ; la case choisie en brand, avec sa coche.
+  test "IL-04: the frame lists the active classrooms of the level as big radio boxes, each a whole tap target" do
     classrooms(scope: "student_registration")
 
     assert_response :success
-    assert_select "turbo-frame#picker_classrooms.block.transition-opacity[aria-live=polite] fieldset" do
-      assert_select "legend", text: /\A\s*#{I18n.t("#{PICKER}.classroom")}/
-      assert_equal [ "3e 1", "3e 2" ], css_select("label").map { it.text.strip }
-      assert_select "label.flex.min-h-tap.items-center.gap-3.rounded-ln.border.border-line.px-4", 2
-      assert_select "input[type=radio][name='student_registration[classroom_public_id]'][value='#{@deux.public_id}']" \
+    assert_select "turbo-frame#picker_classrooms.block.transition-opacity[aria-live=polite]" do
+      assert_select ".sr-only", text: I18n.t("#{PICKER}.classrooms_found", count: 2)
+      assert_select "div.grid.grid-cols-2[class~='min-[700px]:grid-cols-4']" do
+        assert_equal [ "3e 1", "3e 2" ], css_select("label").map { it.text.strip }
+        assert_select "label.group.relative.min-h-16.rounded-ln.border.border-line.has-checked\\:border-brand.has-checked\\:bg-brand-soft", 2
+        assert_select "label span.font-display", text: "3e 2"
+        assert_select "label svg.hidden.group-has-checked\\:block[aria-hidden=true]", 2
+      end
+      assert_select "input[type=radio][name='student_registration[classroom_public_id]'][value='#{@deux.public_id}'][required]" \
                     "[data-action='change->classroom--class-picker#sync']:not([disabled])"
+      assert_select "fieldset, legend, select", 0
     end
     assert_no_match(/3e 3/, response.body)
   end

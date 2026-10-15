@@ -3,7 +3,7 @@ require "test_helper"
 # IL-01, IL-02 (the page), IL-05, IL-06, IL-07, IL-08, IL-09, IL-10, IL-19, IL-20, IL-23 server side (ADR-0085,
 # UDR-0081 §3.1 to §3.3): one public sign-up page in three sections (your classroom, you, secret code), no classroom
 # code. The classroom is chosen in four chained lists (DRENA, school, level, classroom), or given by a classroom link;
-# the student enters it at once, signed in.
+# the student enters it at once, signed in. UDR-0091 (CA-6): the same cascade as « Choisis ta classe », in three steps.
 class Classroom::StudentRegistrationsControllerTest < ActionDispatch::IntegrationTest
   ERRORS = "activemodel.errors.models.dtos/classroom/student_registration_input.attributes".freeze
   PAGE = "classroom.student_registrations.new".freeze
@@ -46,6 +46,11 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
                   "[data-classroom--class-picker-classrooms-url-value='" \
                   "#{school_picker_classrooms_path('__school__', '__level__', scope: :student_registration)}']" do
       assert_equal [ "Ta classe", "Toi", "Code secret" ], css_select("fieldset > legend.uppercase").map { it.text.strip }
+      # UDR-0091 §3.4 : la rubrique 1 montre les trois étapes, les listes ouvertes tant que l'établissement est inconnu.
+      assert_equal [ "1 #{I18n.t("#{PICKER}.step_school")}", "2 #{I18n.t("#{PICKER}.step_level")}",
+                     "3 #{I18n.t("#{PICKER}.step_classroom")}" ], css_select("fieldset[id^=class-picker-step] > legend").map { it.text.squish }
+      assert_select "#class-picker-school-summary", 0
+      assert_select "#class-picker-school-fields:not([hidden])"
       assert_select "select[name='student_registration[drena_public_id]'][data-action='change->classroom--class-picker#loadSchools'] " \
                     "option[value='#{@drena.public_id}']", text: "Abidjan 1"
       %w[picker_schools picker_levels picker_classrooms].each do |frame|
@@ -92,15 +97,17 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
         params: { student_registration: { drena_public_id: @drena.public_id, school_public_id: @school.public_id } }
 
     assert_select "turbo-frame#picker_schools option[selected][value='#{@school.public_id}']"
-    assert_select "turbo-frame#picker_levels select[name='student_registration[level_slug]']" \
-                  "[data-action='change->classroom--class-picker#loadClassrooms'] option[value='#{@level.slug}']", text: "3ème"
+    assert_select "#class-picker-school-summary", text: /Lycée Moderne de Cocody/
+    assert_select "turbo-frame#picker_levels input[type=radio][name='student_registration[level_slug]']" \
+                  "[data-action='change->classroom--class-picker#loadClassrooms'][value='#{@level.slug}']"
+    assert_select "turbo-frame#picker_levels label", text: "3ème"
     assert_select "turbo-frame#picker_classrooms *", 0
 
     get new_student_registration_path,
         params: { student_registration: registration_params(classroom_public_id: nil, pin: "4821") }
 
-    assert_select "turbo-frame#picker_levels option[selected][value='#{@level.slug}']"
-    assert_select "turbo-frame#picker_classrooms fieldset legend", text: /\A\s*#{I18n.t("#{PICKER}.classroom")}/
+    assert_select "turbo-frame#picker_levels input[type=radio][checked][value='#{@level.slug}']"
+    assert_select "fieldset > legend", text: "3 #{I18n.t("#{PICKER}.step_classroom")}"
     assert_select "turbo-frame#picker_classrooms input[type=radio][name='student_registration[classroom_public_id]']" \
                   "[value='#{@classroom.public_id}']:not([checked])"
     assert_select "input[name='student_registration[last_name]'][value='KOUASSI']"
@@ -152,7 +159,7 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
 
     assert_select "turbo-frame#picker_levels", text: /#{Regexp.escape(I18n.t("#{PICKER}.not_found_title"))}/
     assert_select "turbo-frame#picker_levels", text: /#{Regexp.escape(I18n.t("#{PICKER}.not_found_description"))}/
-    assert_select "turbo-frame#picker_levels select", 0
+    assert_select "turbo-frame#picker_levels input", 0
 
     get new_student_registration_path, params: { student_registration: { drena_public_id: create_drena.public_id } }
 
@@ -224,7 +231,7 @@ end
     assert_select "input[name='student_registration[pin]'][value]", count: 0
     assert_select "select[name='student_registration[drena_public_id]'] option[selected][value='#{@drena.public_id}']"
     assert_select "turbo-frame#picker_schools option[selected][value='#{@school.public_id}']"
-    assert_select "turbo-frame#picker_levels option[selected][value='#{@level.slug}']"
+    assert_select "turbo-frame#picker_levels input[type=radio][checked][value='#{@level.slug}']"
     assert_select "turbo-frame#picker_classrooms input[type=radio][checked][value='#{@classroom.public_id}']"
 
     register(contact: "+225 07 01 02 03 04")
