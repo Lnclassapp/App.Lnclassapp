@@ -1,4 +1,4 @@
-# Ma classe, élève (plan boucle-pedagogique, Lot A3, CL-22, CL-10 volet élève) — UDR-0007, UDR-0011 (amendée le 2026-10-02, interface-epuree Lot E, puis fonctions-espace-eleve), UDR-0076 §3.2
+# Ma classe, élève (plan boucle-pedagogique, Lot A3, CL-22, CL-10 volet élève) — UDR-0007, UDR-0011 (amendée le 2026-10-02, interface-epuree Lot E, puis fonctions-espace-eleve), UDR-0076 §3.2, UDR-0086
 fr:
   classroom:
     student_classrooms:
@@ -22,6 +22,11 @@ fr:
         treated_title: "Exercices traités"
         treated_empty: "Aucun exercice traité pour l'instant"
         treated_empty_description: "Termine un exercice pour retrouver ici ton meilleur score."
+      # UDR-0086 §3.3 : seulement quand la classe n'a aucun enseignant sur Lnclass ; le message vient de l'accueil
+      # (classroom.student_homes.invite_teacher, ADR-0089 §4.3).
+      no_teacher:
+        title: "Aucun enseignant sur Lnclass pour l'instant"
+        description: "Invite ton enseignant : il pourra te donner des exercices."
       course_card:
         assigned:
           one: "1 exercice assigné"

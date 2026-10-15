@@ -33,9 +33,21 @@ module Queries
 
         assert_equal [ @classroom.public_id, "Tle D 1", "Tle", "D", "Lycée Classique", "2026-2027" ],
                      row.to_h.values_at(:public_id, :classroom_name, :level_name, :series_name, :school_name, :school_year)
-        assert_equal %i[public_id classroom_name level_name series_name school_name school_year courses assigned_exercises
-                        treated_exercises], row.to_h.keys
+        assert_equal %i[public_id classroom_name level_name series_name school_name school_year has_teacher courses
+                        assigned_exercises treated_exercises], row.to_h.keys
         assert_no_match "Yapo", row.inspect
+      end
+
+      # UDR-0086 §3.3 (ma-classe-eleve): « Aucun enseignant sur Lnclass » reads teacher_classrooms, in the same query
+      # as the header; a teacher of another classroom of the same school does not count.
+      test "has_teacher: false without a teacher in the classroom, true with one, in the same number of queries" do
+        create_teacher(school: @classroom.school, classrooms: [ create_classroom(school: @classroom.school) ])
+        without = count_queries { assert_equal false, classroom.has_teacher }
+
+        create_teacher(school: @classroom.school, classrooms: [ @classroom ])
+
+        assert_equal true, classroom.has_teacher
+        assert_equal without, count_queries { classroom }
       end
 
       test "a classroom without series" do
