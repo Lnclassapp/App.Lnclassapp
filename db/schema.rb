@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_15_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_15_100100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -274,6 +274,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_15_090000) do
     t.index ["slug"], name: "index_drenas_on_slug", unique: true
   end
 
+  create_table "essential_reads", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "essential_id", null: false
+    t.datetime "first_read_at", null: false
+    t.datetime "last_read_at", null: false
+    t.bigint "student_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["essential_id"], name: "index_essential_reads_on_essential_id"
+    t.index ["student_id", "essential_id"], name: "index_essential_reads_on_student_id_and_essential_id", unique: true
+    t.index ["student_id", "last_read_at"], name: "index_essential_reads_on_student_id_and_last_read_at"
+  end
+
   create_table "essentials", force: :cascade do |t|
     t.datetime "archived_at"
     t.bigint "author_id", null: false
@@ -477,6 +489,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_15_090000) do
     t.string "category", null: false
     t.datetime "created_at", null: false
     t.string "name", limit: 40, null: false
+    t.integer "position"
     t.string "shortname", limit: 10, null: false
     t.string "slug", null: false
     t.datetime "updated_at", null: false
@@ -991,6 +1004,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_15_090000) do
   add_foreign_key "courses", "materials", on_delete: :restrict
   add_foreign_key "courses", "series", on_delete: :restrict
   add_foreign_key "courses", "users", column: "author_id", on_delete: :restrict
+  add_foreign_key "essential_reads", "essentials", on_delete: :cascade
+  add_foreign_key "essential_reads", "users", column: "student_id", on_delete: :restrict
   add_foreign_key "essentials", "courses", on_delete: :restrict
   add_foreign_key "essentials", "users", column: "author_id", on_delete: :restrict
   add_foreign_key "exercise_badges", "exercise_sessions", on_delete: :restrict

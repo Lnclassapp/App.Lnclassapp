@@ -86,7 +86,7 @@ class Finitions::PublicPagesTest < ApplicationSystemTestCase
 
     assert_selector "#session-form", wait: SIGN_IN_WAIT
     assert_toast "Votre compte est créé."
-    assert_field "session[contact]", with: "01 00 00 00 09"
+    assert_field "session[contact]", with: "0100000009"
     assert_field "session[pin]", with: ""
     assert_selector "#session_pin:focus"
     assert_no_match(/0100000009|01%2000/, page.current_url)
@@ -97,7 +97,7 @@ class Finitions::PublicPagesTest < ApplicationSystemTestCase
   test "FU-32: a reload forgets the number; a school admin invitation also ends on the filled-in sign-in, then its home" do
     visit invitation_path(@invitation.token)
     accept_invitation
-    assert_field "session[contact]", with: "01 00 00 00 09", wait: SIGN_IN_WAIT
+    assert_field "session[contact]", with: "0100000009", wait: SIGN_IN_WAIT
 
     visit new_session_path
     assert_field "session[contact]", with: ""
@@ -106,7 +106,7 @@ class Finitions::PublicPagesTest < ApplicationSystemTestCase
     school_invitation = create_invitation(kind: "school_staff", contact: "0500000007")
     visit invitation_path(school_invitation.token)
     accept_invitation
-    assert_field "session[contact]", with: "05 00 00 00 07", wait: SIGN_IN_WAIT
+    assert_field "session[contact]", with: "0500000007", wait: SIGN_IN_WAIT
     fill_in "session[pin]", with: "4821"
     click_on I18n.t("identity.sessions.new.submit")
 

@@ -1,0 +1,31 @@
+<%# 🌐 UI · classroom/student_classrooms/_classroom_card — la carte de la classe de « Ma classe », en dégradé bleu %>
+<%# Rôle : nom, niveau et série, établissement, année scolaire ; ni effectif, ni élèves, ni enseignants (UDR-0011, UDR-0086 §3.2) %>
+<%# ADR  : 0028 · UDR : 0011, 0081 §3.8 (plus de code de classe), 0084 §3.8, 0086 §3.2 (dégradé de l'accueil, tokens seuls) %>
+<%# locals: (classroom:) -%>
+<%# Comme sur l'accueil : le texte reste sur brand-strong (AA avec text-white, dans les deux thèmes), le dégradé ne
+    s'éclaircit vers brand qu'au-delà de 60 %. %>
+<section id="student_classroom_header" aria-labelledby="student_classroom_header_title"
+         class="rounded-card bg-linear-to-br from-brand-strong from-60% to-brand p-5 text-white shadow-pop sm:p-6">
+  <div class="flex min-w-0 items-center gap-4">
+    <span class="grid size-14 shrink-0 place-items-center rounded-card bg-white text-brand-strong" aria-hidden="true">
+      <%= ui_icon "academic-cap", size: :xl %>
+    </span>
+    <div class="min-w-0">
+      <h2 id="student_classroom_header_title" class="font-display text-2xl leading-tight font-extrabold text-balance break-words"><%= classroom.classroom_name %></h2>
+      <dl class="mt-1 space-y-0.5 text-sm">
+        <div>
+          <dt class="sr-only"><%= t(".level") %></dt>
+          <dd><%= [ classroom.level_name, classroom.series_name ].compact.join(" · ") %></dd>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <dt><%= ui_icon "building-library", variant: :mini, size: :sm, label: t(".school") %></dt>
+          <dd class="min-w-0 break-words"><%= classroom.school_name %></dd>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <dt><%= ui_icon "calendar", variant: :mini, size: :sm, label: t(".school_year") %></dt>
+          <dd><%= classroom.school_year %></dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
