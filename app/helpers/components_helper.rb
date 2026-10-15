@@ -341,7 +341,7 @@ module ComponentsHelper
 
   # Bulle ronde teintée, illustration 40 px, libellé dessous (UDR-0069 §3.3, charte §9) ; sr_suffix complète le nom accessible.
   # signal (UDR-0074 §3.5) : nil, :green, :yellow ou :red — pastille décorative, que sr_suffix doit dire.
-  # short_label : libellé affiché sous 640 px (« PC ») ; le nom entier reste le nom accessible.
+  # short_label : libellé seul visible (« PC »), à toutes les tailles (UDR-0084 §3.5) ; le nom entier reste lu et en title.
   # link_html (UDR-0079 §3.7) : attributs ajoutés au lien (target, rel, data), vide par défaut : rendu inchangé sans lui.
   def ui_subject_bubble(label:, href:, illustration:, short_label: nil, sr_suffix: nil, id: nil, signal: nil, link_html: {})
     dot = (option!(SIGNAL_DOTS, signal, "ui_subject_bubble signal") if signal)
