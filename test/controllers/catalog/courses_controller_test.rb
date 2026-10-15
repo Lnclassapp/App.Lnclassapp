@@ -45,7 +45,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", text: "#{tl("index.page_title")} · Élève · Lnclass"
     assert_select "h1", text: tl("index.title")
     assert_select "turbo-frame#courses[data-turbo-action=advance][target=_top] #courses_list > li", 2
-    assert_select "#courses_list li:first-child", text: /Philosophie.*La conscience/m
+    # ADR-0090 §4.2 : l'ordre du programme, SVT (3) avant Philosophie (7).
+    assert_select "#courses_list li:first-child", text: /SVT.*Génétique et évolution/m
     assert_select "#course_#{@course.slug} a[href='#{course_path(@course.slug)}']" do
       assert_select "*", text: including("SVT")
       # UDR-0013, amendement du 2026-10-02 : l'élève ne voit que son niveau ; le badge de niveau quitte ses cartes.

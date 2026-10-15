@@ -1,5 +1,5 @@
 # 🔌 INFRA · Queries::Catalog::CourseCatalogQuery
-# Rôle : cartes du catalogue (CA-01), filtrées par niveau, série, matière et nom (FU-47), par page ; publiés hors équipe ; élève : son niveau ; enseignant : sa matière à ses niveaux
+# Rôle : cartes du catalogue (CA-01), filtrées par niveau, série, matière et nom (FU-47), par page ; publiés hors équipe ; élève : son niveau, groupé par matière dans l'ordre du programme, avec son avancement ; enseignant : sa matière à ses niveaux
 # ADR  : 0026, 0028, 0035, 0076, 0090 · UDR : 0013 (amendement du 2026-10-05), 0054, 0069, 0077 §3.2, 0085
 module Queries
   module Catalog
@@ -15,24 +15,34 @@ module Queries
       # material_counts : { slug de matière => nombre de cours } sur toute la recherche, pas seulement la page (titres des
       # groupes de l'élève, UDR-0085 §3.2) ; {} hors élève.
       Page = Data.define(:rows, :total_count, :page, :pages, :material_counts)
+      NEUTRAL = [ :new, nil ].freeze
 
       COLUMNS = %w[courses.slug courses.name courses.subtitle levels.name series.name materials.name materials.category
                    courses.status materials.slug materials.position].freeze
+      # ADR-0090 §4.2 : l'élève lit les matières dans l'ordre du programme ; une matière sans rang vient après, par nom.
+      PROGRAM_ORDER = [ Arel.sql("materials.position ASC NULLS LAST"), "materials.name", "courses.name", "courses.id" ].freeze
+      CATALOG_ORDER = [ "materials.name", "levels.position", "courses.name", "courses.id" ].freeze
 
       # level, material : slugs. Un filtre vide est ignoré, un slug inconnu ne donne aucun cours.
       # series : slug, appliqué seulement avec un niveau (UDR-0069 §3.4) : cours sans série et cours de cette série.
       # search : fragment du nom du cours, sans casse ni accents (UDR-0054 §3.9) ; vide, il est ignoré.
       # audience : Entities::Catalog::LevelAudience d'un élève (la règle de ReadOwnLevelPolicy) ou d'un enseignant (ses
       # classes, UDR-0077 §3.2) ; nil pour les autres rôles. material_id : la matière de l'enseignant ; nil, aucune restriction.
-      # page : entier, hors bornes ramené à la plus proche (une adresse forgée « page[]=2 » vaut 1). Deux requêtes : le
-      # compte, puis les cartes de la page. → Page
+      # page : entier, hors bornes ramené à la plus proche (une adresse forgée « page[]=2 » vaut 1).
+      # Deux requêtes : le compte, puis les cartes de la page. L'élève : les comptes par matière (qui donnent le total), les
+      # cartes, puis l'avancement des cours de la page (une requête, sans requête par carte). → Page
       def call(actor:, page: 1, **filters)
         scope = filtered(actor:, **filters)
-        total_count = scope.count
+        student_id = actor.user_id if actor.student?
+        material_counts = student_id ? scope.group("materials.slug").count : {}
+        total_count = student_id ? material_counts.values.sum : scope.count
         pages = [ total_count.fdiv(PER_PAGE).ceil, 1 ].max
         page = page.to_s.to_i.clamp(1, pages)
-        rows = ordered(scope).offset((page - 1) * PER_PAGE).limit(PER_PAGE).pluck(*COLUMNS).map { Row.new(*it, :new, nil) }
-        Page.new(rows:, total_count:, page:, pages:, material_counts: {})
+        rows = scope.order(*(student_id ? PROGRAM_ORDER : CATALOG_ORDER)).offset((page - 1) * PER_PAGE).limit(PER_PAGE)
+                    .pluck("courses.id", *COLUMNS)
+        progress = student_id ? progress_by_course(student_id, rows.map(&:first)) : {}
+        rows = rows.map { |id, *values| Row.new(*values, *progress.fetch(id, NEUTRAL)) }
+        Page.new(rows:, total_count:, page:, pages:, material_counts:)
       end
 
       private
@@ -51,13 +61,38 @@ module Queries
         Queries::Shared::TextSearch.apply(scope, search, columns: [ "courses.name" ])
       end
 
-      def ordered(scope) = scope.order("materials.name", "levels.position", "courses.name", "courses.id")
-
       # La règle d'AudienceFilter, par slug : série vide ou cette série. Le cours sans série n'est gardé que si la série
       # existe, pour qu'une série inconnue ne donne aucun cours (dans la même requête).
       def of_series(scope, series)
         known = Orm::Series.where(slug: series).arel.exists
         scope.where(series: { slug: series }).or(scope.where(series_id: nil).where(known))
+      end
+
+      # ADR-0090 §4.1 : une requête pour les cours de la page — leurs fiches publiées, lues ou non, et les fiches lues qui
+      # ne le sont plus (pour savoir si la dernière ouverte a été dépubliée). → { course_id => [progress, resume_slug] }
+      def progress_by_course(student_id, course_ids)
+        return {} if course_ids.empty?
+
+        reads = Orm::Essential.sanitize_sql_array(
+          [ "LEFT JOIN essential_reads ON essential_reads.essential_id = essentials.id AND essential_reads.student_id = ?", student_id ]
+        )
+        Orm::Essential.joins(reads).where(course_id: course_ids)
+                      .where("essentials.status = 'published' OR essential_reads.id IS NOT NULL")
+                      .order(:position, :id).pluck(:course_id, :slug, :status, "essential_reads.last_read_at")
+                      .group_by(&:first).transform_values { progress_of(it) }
+      end
+
+      # essentials : [course_id, slug, status, last_read_at], par position. :new sans fiche publiée lue ; :done quand toutes
+      # les fiches publiées sont lues ; sinon :started, avec la dernière fiche ouverte si elle est encore publiée, à défaut
+      # la première fiche publiée non lue (CA-10).
+      def progress_of(essentials)
+        published = essentials.select { |_, _, status| status == "published" }
+        unread = published.reject(&:last)
+        return NEUTRAL if unread.size == published.size
+        return [ :done, nil ] if unread.empty?
+
+        _, slug, status, = essentials.select(&:last).max_by(&:last)
+        [ :started, status == "published" ? slug : unread.first[1] ]
       end
     end
   end
