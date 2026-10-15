@@ -70,7 +70,8 @@ La page d'accueil publique est dessinée et ses décisions sont prises : l'accue
 
 - **Rentrée, élève sans classe de la nouvelle année** : laissé de côté par le porteur (2026-10-15). On garde le comportement actuel (catalogue vide, invitation à rejoindre sa classe) tant qu'il n'est pas tranché.
 
-## Questions fermées par défaut (à confirmer par le porteur)
+## Questions fermées (confirmées par le porteur le 2026-10-15)
 
 - **Où apparaît le travail « fait seul »** : pour l'enseignant, une colonne « Fait seul (7 j) » dans la liste des élèves de la page de la classe ; pour la direction, un chiffre « Faits seul (7 j) » par niveau sur son accueil, à côté du taux de rendu. Rien dans les comptes d'un exercice donné. Voir UDR-0084 §3.7.
 - **Message d'invitation de l'enseignant** : « Bonjour ! Je suis en %{classroom} à %{school}. Sur Lnclass, vous pouvez nous donner des exercices et suivre nos résultats. Inscrivez-vous ici : %{link} ». Le lien ouvre l'inscription enseignant existante (`/teacher-signup`) ; l'élève n'a pas de jeton de parrainage, l'établissement n'est donc pas prérempli. Voir ADR-0089 §4.3.
+- **Icônes** : le casque d'aide et la porte ouverte n'existent pas dans Heroicons ; ils sont dessinés au Lot 0 (UDR-0084 §3.1).

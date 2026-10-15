@@ -8,7 +8,7 @@
 |---|---|---|---|
 | 2026-10-15 | Un seul chantier pour le dessin, l'exercice du jour, « fait seul » et l'invitation de l'enseignant | Choix du porteur, après avoir d'abord séparé | Non |
 | 2026-10-15 | Exercice du jour calculé à la lecture, « fait seul » = session terminée sans assignation | Aucune migration, aucune écriture sur une page de lecture | ADR-0089 |
-| 2026-10-15 | Placement de « fait seul » et texte de l'invitation fermés par défaut | Questions ouvertes du memo, à confirmer par le porteur | UDR-0084 §3.7, ADR-0089 §4.3 |
+| 2026-10-15 | Placement de « fait seul », texte de l'invitation et icônes maison | Proposés par défaut, confirmés par le porteur | UDR-0084 §3.7, ADR-0089 §4.3 |
 
 ## Ce qui a dérapé
 
