@@ -37,8 +37,11 @@ Toile : https://claude.ai/artifact/V8DwH6oMQcHoxxtHji44B6 (téléphone d'abord).
 |---|---|---|
 | Quelle page après le profil ? | L'historique (porteur, 2026-10-15). | Même en-tête et même menu de l'avatar ; carte bleue avec le nombre d'exercices terminés ; exercices rangés par mois, avec l'icône de leur matière. |
 
-## Questions ouvertes
+| Ajoute-t-on « Mon historique » au menu de l'avatar ? | Oui (porteur, 2026-10-15). | Un lien « Mon historique » sous « Mon profil » dans le menu de l'avatar, sur toutes les pages élève : le menu est un fichier partagé. |
+| La note devient-elle verte dès 14/20 ou dès 10/20 (`PASS_THRESHOLD`) ? | Dès 14/20 (porteur, 2026-10-15), comme Ma classe. | Le seuil de couleur de la page ne suit plus `PASS_THRESHOLD` (50 %) : 70 %, soit 14/20. |
+| Ajoute-t-on un filtre par matière ? | Non (porteur, 2026-10-15). | Aucun filtre. |
 
-1. Ajoute-t-on « Mon historique » au menu de l'avatar ?
-2. La note devient-elle verte dès 14/20 (comme Ma classe) ou dès 10/20 (comme aujourd'hui, `PASS_THRESHOLD`) ?
-3. Ajoute-t-on un filtre par matière ?
+## Tablette
+
+- Verticale (820 px) : une seule colonne centrée.
+- Horizontale (1180 px) : le menu de gauche revient ; « Mes exercices terminés » à gauche, « Mes classes » à droite.
