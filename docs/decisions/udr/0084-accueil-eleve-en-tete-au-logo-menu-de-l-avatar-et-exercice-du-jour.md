@@ -1,14 +1,14 @@
 # UDR-0084 : Accueil élève — en-tête au logo, menu de l'avatar sans barre du bas, blocs redessinés, exercice du jour et « fait seul »
 <!-- index
 titre: Accueil élève : en-tête au logo, menu de l'avatar, exercice du jour
-statut: Proposé
+statut: Accepté
 adr-lie: [0089](../adr/0089-exercice-du-jour-calcule-a-la-lecture-et-fait-seul-deduit.md)
 problematique: Élève sur le web : logo à gauche, aide/thème/avatar à droite, menu déroulant de l'avatar (Accueil, Cours, Ma classe sous 1 024 px), plus de barre du bas ; accueil en une colonne (Ma classe, Mes matières, Annonces, À faire, activités) ; carte de l'exercice du jour en trois états ; « Fait seul (7 j) » chez l'enseignant et la direction. Amende UDR-0080, 0058, 0006, 0061, 0076
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-10-15 |
 | **Chantier** | [`docs/chantiers/accueil-eleve`](../../chantiers/accueil-eleve/memo.md) |
 | **ADR lié** | [ADR-0089](../adr/0089-exercice-du-jour-calcule-a-la-lecture-et-fait-seul-deduit.md) (exercice du jour, « fait seul », invitation) · [ADR-0084](../adr/0084-coque-android-eleves-hotwire-native.md) (coque Android, inchangée) |

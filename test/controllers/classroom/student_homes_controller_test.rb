@@ -319,6 +319,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_home_exercises li", text: including("En retard")
     assert_select "#student_home_daily", 0
     assert_select "#student_home_invite_teacher", 0
+    assert_select "#student_home_exercises p", text: tl("show.todo_subtitle")
   end
 
   test "CA-8 — without work from a teacher, the exercise of the day starts like any exercise" do
@@ -333,6 +334,9 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
                     text: including(tl("daily_exercise.start"))
     end
     assert_select "#student_home_invite_teacher", text: including(tl("invite_teacher.prompt"))
+    # Lot E: the card of the day comes from Lnclass, not from the classroom: a neutral subtitle.
+    assert_select "#student_home_exercises p", text: tl("show.todo_subtitle_daily")
+    assert_select "#student_home_exercises p", text: tl("show.todo_subtitle"), count: 0
   end
 
   test "the sheets to review link to their sheet" do
