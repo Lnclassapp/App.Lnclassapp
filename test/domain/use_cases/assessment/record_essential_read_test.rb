@@ -76,6 +76,24 @@ module UseCases
         assert_empty @reads.records
       end
 
+      test "a teacher or a direction on an unpublished sheet: :not_found; no actor: :forbidden; nothing is recorded" do
+        draft = Essential.new(id: 42, published: false)
+
+        [ Actor.new(user_id: 2, role: :teacher), Actor.new(user_id: 3, role: :school_admin, school_id: 9) ].each do |actor|
+          assert_equal :not_found, record(actor:, essential: draft).code, actor.role
+        end
+        assert_equal :forbidden, record(actor: nil).code
+        assert_empty @reads.records
+      end
+
+      test "the team reads an unpublished sheet, but leaves no read" do
+        result = record(actor: Actor.new(user_id: 4, role: :team, team_role: "content"), essential: Essential.new(id: 42, published: false))
+
+        assert result.success?
+        assert_not result.value
+        assert_empty @reads.records
+      end
+
       test "a storage failure is reported with the essential and the student, and the read is not recorded" do
         failure = Unavailable.new("base indisponible")
         result = record(actor: Actor.new(user_id: 7, role: :student), reads: FakeReads.new(failure:))

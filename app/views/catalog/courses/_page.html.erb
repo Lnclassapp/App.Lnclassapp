@@ -28,7 +28,7 @@
           <%# Une nouvelle matière en tête d'une page suivante : l'écart d'un groupe, le frame n'en laissant qu'un de cartes. %>
           <section id="courses_group_<%= first.material_slug %>" aria-labelledby="courses_group_<%= first.material_slug %>_title"
                    class="<%= class_names("pt-3" => nested && index.zero?) %>">
-            <%= render "catalog/courses/course_group_title", course: first, count: page.material_counts.fetch(first.material_slug, rows.size) %>
+            <%= render "catalog/courses/course_group_title", course: first, count: page.material_counts.fetch(first.material_slug) %>
             <%= grid %>
           </section>
         <% end %>

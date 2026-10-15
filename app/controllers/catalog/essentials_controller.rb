@@ -38,10 +38,12 @@ module Catalog
 
     # ADR-0090 §4.1 : la fiche ouverte par l'élève fait « Reprendre » sur la page Cours. Une panne de la base ne bloque
     # jamais la fiche : elle est journalisée (config/initializers/error_reporting.rb). Toute autre erreur est un bogue.
+    # Le Result est ignoré exprès : la page ne dépend pas de la lecture, le refus de la policy a déjà répondu 404 plus
+    # haut (même policy), et la panne est déjà signalée par le use case.
     def record_read(essential)
       UseCases::Assessment::RecordEssentialRead.new(
         reads: Repositories::Assessment::EssentialReadRepository.new, policy: Policies::Catalog::ReadPublishedPolicy.new,
-        reporter: Rails.error, recoverable: ActiveRecord::ActiveRecordError, clock: Time.zone
+        reporter: Rails.error, recoverable: Repositories::Assessment::EssentialReadRepository::OUTAGES, clock: Time.zone
       ).call(actor: current_actor, essential:)
     end
 

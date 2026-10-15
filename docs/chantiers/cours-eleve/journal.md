@@ -20,6 +20,7 @@
 | 2026-10-15 | Lot C : la vue d'une matière n'a pas de titre de groupe | Les maquettes n'en montrent pas ; le titre de la page porte déjà l'icône et le nom (UDR-0085 §3.5 disait « un groupe ») | Non |
 | 2026-10-15 | Lot C : le nom accessible de la carte est son texte (nom, description, bouton), sans `aria-label` | Il contient le nom du cours (UDR-0085 §3.7) sans masquer la description aux lecteurs d'écran | Non |
 | 2026-10-15 | Lot C : la vue sans liste de l'élève n'appelle plus `ReferentialOptionsQuery` | Plus de liste « Matière » ; seule la vue d'une matière lit le référentiel, pour son titre | Non |
+| 2026-10-15 | Relectures : une matière créée prend son rang (`ProgramOrder`, table partagée avec la migration) ; le `rescue` de la lecture se limite aux pannes (`EssentialReadRepository::OUTAGES`) ; `last_read_at` ne recule jamais (`GREATEST`) | Constats des trois relectures | ADR-0090 §4.2 corrigé |
 | 2026-10-15 | Lot 0 : la fabrique de test `create_material` pose le rang du programme par slug | Les tests existants de l'accueil et de l'exercice du jour gardent leur ordre sans réécriture | Non |
 
 ## Ce qui a dérapé
@@ -46,7 +47,7 @@
 |---|---|---|
 | Suivi de lecture des fiches côté enseignant | Non demandé ; la donnée existe désormais | — |
 | Ordre des matières pour l'enseignant, la direction et l'équipe | Hors périmètre (memo) | — |
-| Rang d'une matière créée par l'équipe ou l'import | Elle reste sans rang (`NULL`, après les autres) jusqu'à une saisie en base ; aucun écran ne le règle | — |
+| Écran du rang des matières | Une matière créée par l'équipe prend son rang si son slug est du programme (`ProgramOrder`) ; une autre reste à `NULL`, et aucun écran ne règle le rang (ADR-0090 §4.2) | à ouvrir |
 | Tri des cours sans tenir compte des accents | Collation de la base ; comportement antérieur | — |
 
 ## Clôture

@@ -277,6 +277,15 @@ module Queries
         assert_equal %w[zoologie svt mathematiques allemand anglais], home.subjects.map(&:slug)
       end
 
+      test "CA-17: two subjects of equal rank are ordered by name" do
+        level = @classroom.level
+        @svt.update!(position: 4)
+        create_course(material: @svt, level:)
+        create_course(material: create_material(name: "Botanique", position: 4), level:)
+
+        assert_equal %w[botanique svt], home.subjects.map(&:slug)
+      end
+
       test "a student of another series sees no subject of a course reserved to a series" do
         series = create_series(name: "D")
         create_course(material: create_material(name: "Mathématiques"), level: @classroom.level, series:)

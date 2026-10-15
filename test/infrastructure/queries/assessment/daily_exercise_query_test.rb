@@ -168,6 +168,14 @@ module Queries
         assert_equal @cell.public_id, travel_to(at(TUESDAY, 8)) { daily }.exercise_public_id
       end
 
+      # Rang égal : le nom départage (Mathématiques avant SVT), pas l'ordre des cours (« Cours … » avant « Nombres »).
+      test "CA-17: two subjects of equal rank are ordered by name" do
+        @svt.update!(position: 1)
+        @maths.update!(position: 1)
+
+        assert_equal @fractions.public_id, travel_to(at(TUESDAY, 8)) { daily }.exercise_public_id
+      end
+
       test "the candidates follow the catalog: level, course name, sheet position, exercise position; published only" do
         algebra = create_course(material: @maths, level: @classroom.level, name: "Algèbre")
         create_exercise(essential: create_essential(course: algebra, status: "draft"), title: "Fiche brouillon")

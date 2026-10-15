@@ -24,6 +24,15 @@ module Repositories
         assert_equal [ first, last ], [ reads.first.first_read_at, reads.first.last_read_at ]
       end
 
+      test "a late request never moves last_read_at back, and first_read_at stays" do
+        recent = Time.zone.parse("2026-10-15 17:45")
+        @repository.record(student_id: @student.id, essential_id: @essential.id, at: recent)
+        @repository.record(student_id: @student.id, essential_id: @essential.id, at: recent - 1.hour)
+
+        read = Orm::EssentialRead.find_by!(student_id: @student.id)
+        assert_equal [ recent, recent ], [ read.first_read_at, read.last_read_at ]
+      end
+
       test "the reads of two students or of two essentials are separate rows" do
         other = create_student
         second = create_essential(course: @essential.course)

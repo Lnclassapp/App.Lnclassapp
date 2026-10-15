@@ -281,6 +281,48 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#courses_empty a[href='#{courses_path(material: @philo.slug)}']", text: tl("index.clear_search")
   end
 
+  # CA-3 (UDR-0085 §2) : une lecture d'élève en base ne change rien pour l'enseignant ni pour l'équipe.
+  test "CA-3: with a student's read in base, the teacher and the team keep « Ouvrir le cours », without any progress" do
+    create_essential_read(student: create_student_for(@course), essential: create_essential(course: @course))
+    teacher = create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle, series: @course.series) ])
+
+    [ teacher, create_team_member ].each do |user|
+      sign_in_as user
+      get courses_path
+
+      assert_select "#course_#{@course.slug}", text: including(tl("course_card.open"))
+      %w[new started done].each { assert_no_match(including(tl("course_card.progress.#{it}")), response.body) }
+      assert_select "#courses_groups", 0
+      assert_select "#courses_list svg.text-success", 0
+      sign_out
+    end
+  end
+
+  def queries_of(path)
+    get path
+    count = 0
+    counter = ->(*, payload) { count += 1 unless payload[:name] == "SCHEMA" }
+    ActiveSupport::Notifications.subscribed(counter, "sql.active_record") { get path }
+    count
+  end
+
+  # PRD §7 : le nombre de requêtes de la page ne dépend ni du nombre de cours ni des lectures (au plus 14).
+  test "GET /courses as a student: the same number of queries for 2 courses and for 25 courses with reads, at most 14" do
+    student = create_student_for(@course)
+    sign_in_as student
+    paths = [ courses_path, courses_path(q: "e"), courses_path(material: @svt.slug) ]
+    few = paths.map { queries_of(it) }
+
+    23.times do |index|
+      course = create_course(name: "Cours #{index}", level: @tle, material: @svt)
+      create_essential_read(student:, essential: create_essential(course:))
+    end
+    many = paths.map { queries_of(it) }
+
+    assert_equal few, many
+    assert(many.all? { it <= 14 }, many.inspect)
+  end
+
   test "an unknown subject in the student's address gives the « Cours » title and no course, never an error" do
     sign_in_as create_student_for(@course)
 
