@@ -20,12 +20,14 @@
       </div>
     </div>
     <%# Au-delà de lg, le menu de gauche montre déjà ces destinations : le menu ne les répète pas. %>
+    <%# Page en cours : le fond bg-brand-soft reste au focus (pas le gris de ui-menu-item-default) ; un anneau inset marque le focus clavier. %>
     <div class="border-b border-line py-1.5 lg:hidden">
       <% navigation_for(user.role).each do |destination| %>
         <% path = nav_path(destination) %>
         <% active = nav_active?(destination, path) %>
         <%= link_to path, role: "menuitem", tabindex: -1, "aria-current": ("page" if active),
-                    class: class_names("ui-menu-item ui-menu-item-default", "bg-brand-soft" => active) do %>
+                    class: class_names("ui-menu-item",
+                                       active ? "bg-brand-soft text-ink focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand" : "ui-menu-item-default") do %>
           <%= ui_icon destination.icon, class: active ? "text-brand-strong" : "opacity-70" %>
           <span><%= t("shared.navigation.#{destination.key}") %></span>
         <% end %>
