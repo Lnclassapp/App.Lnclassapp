@@ -33,7 +33,8 @@ class AppAndroidShellTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "CA-1 — the same page in a browser keeps header, sidebar, bottom bar and install pop-up, without bridge element" do
+  # UDR-0084 §3.3 (accueil-eleve): in a browser, the student has no bottom bar any more; the margin it needed goes.
+  test "CA-1 — the same page in a browser keeps header, sidebar and install pop-up, without bridge element" do
     sign_in_as create_student(classroom: create_classroom)
 
     get student_home_path
@@ -41,10 +42,28 @@ class AppAndroidShellTest < ActionDispatch::IntegrationTest
     assert_response :ok
     assert_select "header"
     assert_select "aside"
-    assert_select "nav[aria-label='#{I18n.t('shared.navigation.bottom_bar.label')}']"
+    assert_select "nav.fixed.bottom-0", 0
     assert_select "#install_banner"
-    assert_select "main#main.pb-28.lg\\:pl-rail"
+    assert_select "main#main.pb-12.lg\\:pl-rail:not(.pb-28)"
     assert_select BRIDGE, 0
+  end
+
+  # CA-19 (accueil-eleve) — UDR-0084 §3.2: the app is unchanged. The account panel the native top bar opens is still
+  # /students/menu, the panel as a page, without the site's navigation.
+  test "CA-19 — in the shell, /students/menu still serves the account panel, without header nor bottom bar" do
+    sign_in_as create_student(classroom: create_classroom, first_name: "Awa", last_name: "Koné")
+
+    get student_menu_path, headers: in_app
+
+    assert_response :ok
+    assert_select "header", 0
+    assert_select "nav[aria-label='#{I18n.t('shared.navigation.bottom_bar.label')}']", 0
+    assert_select "main #student_menu" do
+      assert_select "p", "Awa Koné"
+      assert_select "nav a[href='#{profile_path}']", I18n.t("shared.navigation.profile")
+      assert_select "form[action='#{session_path}'] button", I18n.t("shared.navigation.sign_out")
+    end
+    assert_select "#avatar-menu", 0
   end
 
   test "CA-1 — « Hotwire Native » without the Lnclass token is a browser" do

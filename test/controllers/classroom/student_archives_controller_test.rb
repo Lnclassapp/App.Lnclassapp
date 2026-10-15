@@ -47,7 +47,8 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
 
     get pending_account_path
     assert_select "h1", text: "Tu n'as pas encore de classe"
-    assert_select "a[href='#{student_archive_path}']", 0
+    # The page itself; the avatar menu of the header always offers « Mon historique » (UDR-0084 §3.2).
+    assert_select "main a[href='#{student_archive_path}']", 0
 
     get student_archive_path
     assert_response :success
