@@ -127,6 +127,14 @@ module Queries
         assert_equal [ current.public_id, @cell.public_id, @fractions.public_id ], rows.map(&:exercise_public_id)
       end
 
+      # CA-17, ADR-0090 §4.2 : le tour suit materials.position ; le même jour, SVT passe avant les Mathématiques.
+      test "CA-17: the rotation reads materials.position" do
+        @svt.update!(position: 1)
+        @maths.update!(position: 2)
+
+        assert_equal @cell.public_id, travel_to(at(TUESDAY, 8)) { daily }.exercise_public_id
+      end
+
       test "the candidates follow the catalog: level, course name, sheet position, exercise position; published only" do
         algebra = create_course(material: @maths, level: @classroom.level, name: "Algèbre")
         create_exercise(essential: create_essential(course: algebra, status: "draft"), title: "Fiche brouillon")

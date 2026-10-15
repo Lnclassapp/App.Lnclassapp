@@ -6,7 +6,7 @@ module Entities
     class DailyRotation
       EPOCH = Date.new(2026, 1, 1)
 
-      # day : date d'Abidjan ; subjects : slugs ordonnés (SUBJECT_ORDER) ; with_candidates : slugs qui ont au moins un
+      # day : date d'Abidjan ; subjects : slugs ordonnés (materials.position, ADR-0090) ; with_candidates : slugs qui ont au moins un
       # candidat ce jour-là (Array ou Set). → le slug du jour, ou nil quand aucune matière n'a de candidat.
       def self.subject_for(day:, subjects:, with_candidates:)
         return nil if subjects.empty?

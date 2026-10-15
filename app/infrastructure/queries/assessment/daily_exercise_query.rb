@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Assessment::DailyExerciseQuery
 # Rôle : exercice du jour d'un élève sans travail donné, calculé à la lecture (état, exercice, matière, matière de demain), en une requête
-# ADR  : 0035, 0089 (§4.1) · contrat gelé au Lot 0 du chantier accueil-eleve, implémenté au Lot C
+# ADR  : 0035, 0089 (§4.1), 0090 (§4.2 : rang des matières) · contrat gelé au Lot 0 du chantier accueil-eleve, implémenté au Lot C
 module Queries
   module Assessment
     class DailyExerciseQuery
@@ -12,7 +12,7 @@ module Queries
                      tomorrow_material_name: nil)
 
       # first_done_at : le début de sa première session terminée, ou nil ; assigned : donné dans une de ses classes.
-      Candidate = Data.define(:public_id, :title, :slug, :name, :category, :first_done_at, :assigned, :done_today) do
+      Candidate = Data.define(:public_id, :title, :slug, :name, :category, :position, :first_done_at, :assigned, :done_today) do
         # ADR-0089 §4.1 étape 2 : candidat du jour qui commence à `day_start`.
         def open_on?(day_start) = !assigned && (first_done_at.nil? || first_done_at >= day_start)
       end
@@ -24,7 +24,7 @@ module Queries
       def call(student_id:, today: Time.zone.today)
         day_start = today.in_time_zone
         by_subject = candidates(student_id, today, day_start).group_by(&:slug)
-        subjects = by_subject.keys.sort_by { |slug| [ subject_rank(slug), by_subject[slug].first.name ] }
+        subjects = by_subject.keys.sort_by { |slug| subject_rank(by_subject[slug].first) }
 
         exercise = first_open(by_subject, subjects, today, day_start)
         return NONE if exercise.nil?
@@ -49,11 +49,8 @@ module Queries
                 material_category: exercise.category, tomorrow_material_name:)
       end
 
-      # Une matière hors de l'ordre de la charte suit, par nom (comme « Mes matières »).
-      def subject_rank(slug)
-        order = Queries::Classroom::StudentHomeQuery::SUBJECT_ORDER
-        order.index(slug) || order.size
-      end
+      # L'ordre de « Mes matières » (ADR-0090 §4.2) : materials.position, une matière sans rang après, puis le nom.
+      def subject_rank(candidate) = [ candidate.position ? 0 : 1, candidate.position.to_i, candidate.name ]
 
       # Tous les exercices publiés (ADR-0035) du niveau de ses classes, avec ce qu'il faut pour aujourd'hui et demain : une
       # seule requête, quel que soit le nombre de matières. Les matières se lisent ici, même toutes faites : le tour n'en
@@ -66,7 +63,7 @@ module Queries
                      .where(status: "published", essentials: { status: "published" }, courses: { status: "published" })
                      .where(exists(audience(student_id, today))).order(*CATALOG_ORDER)
                      .pluck("exercises.public_id", "exercises.title", "materials.slug", "materials.name", "materials.category",
-                            Arel.sql("(#{first_done.to_sql})"), exists(assigned(student_id)), exists(done_today))
+                            "materials.position", Arel.sql("(#{first_done.to_sql})"), exists(assigned(student_id)), exists(done_today))
                      .map { Candidate.new(*it) }
       end
 

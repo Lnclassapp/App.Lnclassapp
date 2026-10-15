@@ -42,6 +42,11 @@ module Factories
       Orm::ExerciseBadge.create!(student:, exercise:, exercise_session: session, level:, awarded_at: Time.current)
     end
 
+    # ADR-0090 §4.1 : a student opened an essential.
+    def create_essential_read(student: create_student, essential: create_essential, at: Time.current, first_read_at: at)
+      Orm::EssentialRead.create!(student:, essential:, first_read_at:, last_read_at: at)
+    end
+
     def create_gap(student: create_student, essential: create_essential, status: "pending",
                    source_session: create_exercise_session(student:, exercise: create_exercise(essential:), status: "completed",
                                                   score_percent: 40), **attributes)

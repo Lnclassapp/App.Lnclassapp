@@ -70,6 +70,16 @@ module Repositories
         assert_not_nil others_gap.resolved_at
       end
 
+      # ADR-0090 §4.1, CA-16 : les fiches ouvertes sont des données d'apprentissage, effacées avec les autres.
+      test "CA-16: the essential reads of the student are erased; those of another student stay" do
+        [ @student, @other ].each { create_essential_read(student: it, essential: @essential) }
+
+        LearningDataEraser.new.erase_for(student_id: @student.id)
+
+        assert_not Orm::EssentialRead.exists?(student_id: @student.id)
+        assert Orm::EssentialRead.exists?(student_id: @other.id)
+      end
+
       test "a student without results is a no-op" do
         learning_path(@other)
 

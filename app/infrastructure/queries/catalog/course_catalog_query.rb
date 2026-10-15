@@ -1,17 +1,23 @@
 # 🔌 INFRA · Queries::Catalog::CourseCatalogQuery
 # Rôle : cartes du catalogue (CA-01), filtrées par niveau, série, matière et nom (FU-47), par page ; publiés hors équipe ; élève : son niveau ; enseignant : sa matière à ses niveaux
-# ADR  : 0026, 0028, 0035, 0076 · UDR : 0013 (amendement du 2026-10-05), 0054, 0069, 0077 §3.2
+# ADR  : 0026, 0028, 0035, 0076, 0090 · UDR : 0013 (amendement du 2026-10-05), 0054, 0069, 0077 §3.2, 0085
 module Queries
   module Catalog
     class CourseCatalogQuery
-      Row = Data.define(:slug, :name, :subtitle, :level_name, :series_name, :material_name, :material_category, :status)
+      # Chantier cours-eleve (ADR-0090, UDR-0085) : material_slug et material_position groupent les cartes de l'élève ;
+      # progress (:new, :started, :done) et resume_essential_slug (la fiche de « Reprendre », nil sinon) disent où il en est.
+      # Hors élève : :new et nil.
+      Row = Data.define(:slug, :name, :subtitle, :level_name, :series_name, :material_name, :material_category, :status,
+                        :material_slug, :material_position, :progress, :resume_essential_slug)
       # Chantier politique-cache, lot E4 (UDR-0013, amendement du 2026-10-05) : le catalogue se lit par pages de PER_PAGE
       # cartes, les suivantes chargées au défilement. 24 tient en lignes pleines sur 1, 2 ou 3 colonnes.
       PER_PAGE = 24
-      Page = Data.define(:rows, :total_count, :page, :pages)
+      # material_counts : { slug de matière => nombre de cours } sur toute la recherche, pas seulement la page (titres des
+      # groupes de l'élève, UDR-0085 §3.2) ; {} hors élève.
+      Page = Data.define(:rows, :total_count, :page, :pages, :material_counts)
 
       COLUMNS = %w[courses.slug courses.name courses.subtitle levels.name series.name materials.name materials.category
-                   courses.status].freeze
+                   courses.status materials.slug materials.position].freeze
 
       # level, material : slugs. Un filtre vide est ignoré, un slug inconnu ne donne aucun cours.
       # series : slug, appliqué seulement avec un niveau (UDR-0069 §3.4) : cours sans série et cours de cette série.
@@ -25,8 +31,8 @@ module Queries
         total_count = scope.count
         pages = [ total_count.fdiv(PER_PAGE).ceil, 1 ].max
         page = page.to_s.to_i.clamp(1, pages)
-        rows = ordered(scope).offset((page - 1) * PER_PAGE).limit(PER_PAGE).pluck(*COLUMNS).map { Row.new(*it) }
-        Page.new(rows:, total_count:, page:, pages:)
+        rows = ordered(scope).offset((page - 1) * PER_PAGE).limit(PER_PAGE).pluck(*COLUMNS).map { Row.new(*it, :new, nil) }
+        Page.new(rows:, total_count:, page:, pages:, material_counts: {})
       end
 
       private

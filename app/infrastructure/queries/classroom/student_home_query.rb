@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::StudentHomeQuery
 # Rôle : accueil élève (CL-23, TR-04, AS-36) : classe, matières, exercices assignés triés par échéance, lacunes ; l'activité, à part (cadre différé) ; sans classe, la dernière et un retrait récent
-# ADR  : 0026, 0033, 0035, 0043, 0048, 0072, 0085, 0089 · UDR : 0010, 0062 (§3.2 ordre, §3.3 `late_material_slugs`), 0076 (§3.1, §3.2), 0081 (§3.5), 0084 (§3.8)
+# ADR  : 0026, 0033, 0035, 0043, 0048, 0072, 0085, 0089, 0090 · UDR : 0010, 0062 (§3.2 ordre, §3.3 `late_material_slugs`), 0076 (§3.1, §3.2), 0081 (§3.5), 0084 (§3.8)
 module Queries
   module Classroom
     class StudentHomeQuery
@@ -26,9 +26,8 @@ module Queries
       RECENT_REMOVAL = 7.days
       # La dernière adhésion principale : celle encore ouverte (classe archivée) d'abord, puis la plus récemment quittée.
       LAST_FIRST = Arel.sql("classroom_students.left_at DESC NULLS FIRST, classroom_students.joined_at DESC, classroom_students.id DESC")
-      # L'ordre de la grille de la charte (§9) ; une matière hors de cette liste suit, par nom.
-      SUBJECT_ORDER = %w[mathematiques maths physique-chimie pc svt francais histoire-geographie histoire-geo hg edhc
-                         philosophie philo].freeze
+      # L'ordre du programme (ADR-0090 §4.2) : le rang de la matière, puis son nom ; une matière sans rang suit, par nom.
+      PROGRAM_ORDER = [ Arel.sql("materials.position ASC NULLS LAST"), "materials.name" ].freeze
       HEADER_COLUMNS = [ "classrooms.id", "schools.name", "levels.name", "classrooms.name" ].freeze
       EXERCISE_COLUMNS = [ "exercises.id", "exercises.public_id", "exercises.title", "materials.name", "materials.category",
                            "materials.slug", "courses.id", "essentials.position", "exercises.position" ].freeze
@@ -121,11 +120,12 @@ module Queries
         end
       end
 
-      # UDR-0076 §3.1 : une matière par cours publié du niveau de l'élève, une seule fois, dans l'ordre de la charte.
+      # UDR-0076 §3.1 : une matière par cours publié du niveau de l'élève, une seule fois, dans l'ordre du programme
+      # (materials.position, ADR-0090 §4.2). DISTINCT impose de lire les colonnes du tri.
       def subjects(student_id)
         Orm::Material.joins(:courses).merge(own_level(student_id)).where(courses: { status: "published" }).distinct
-                     .pluck(:slug, :name).map { |slug, name| SubjectRow.new(slug:, name:) }
-                     .sort_by { [ SUBJECT_ORDER.index(it.slug) || SUBJECT_ORDER.size, it.name ] }
+                     .order(*PROGRAM_ORDER).pluck(:slug, :name, :position)
+                     .map { |slug, name, _position| SubjectRow.new(slug:, name:) }
       end
 
       # Une lacune dont la fiche n'est plus publiée n'a plus de page à ouvrir : elle n'est pas proposée.

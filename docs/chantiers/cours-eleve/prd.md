@@ -152,5 +152,5 @@ Alors « Mes matières » sur l'accueil et les groupes de « Cours » suivent le
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Requêtes SQL de `GET /courses` (élève, 24 cours) | à mesurer au Lot 0 | ≤ avant + 2 (comptes par matière, avancement) | |
+| Requêtes SQL de `GET /courses` (élève, 24 cours) | 12 (mesuré au Lot 0 : 30 cours publiés de son niveau sur 6 matières, page 1 ; idem avec `q`) | ≤ avant + 2 (comptes par matière, avancement) | |
 | Part des élèves qui rouvrent un cours par « Reprendre » | inconnue (pas de suivi) | à suivre 4 semaines après la sortie | |

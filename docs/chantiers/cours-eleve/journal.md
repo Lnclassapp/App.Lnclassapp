@@ -11,6 +11,9 @@
 | 2026-10-15 | « Commencer » et « Revoir » ouvrent la page du cours, « Reprendre » la dernière fiche ouverte | Confirmé par le porteur le 2026-10-15 | UDR-0085 §3.3 |
 | 2026-10-15 | Le code attend la fusion de la PR `accueil-eleve` | En-tête, menu de l'avatar et fin de la barre du bas y sont livrés ; confirmé par le porteur | Non |
 | 2026-10-15 | Ouvrir une fiche suffit à la compter comme lue | Confirmé par le porteur ; pas de mesure de lecture réelle | ADR-0090 §5 |
+| 2026-10-15 | Lot 0 : `RecordEssentialRead` reçoit `ReadPublishedPolicy` et la rejoue | `test/architecture/use_case_policies_test.rb` (ADR-0028) refuse un use case sans `policy:` ; le contrôleur la passe déjà, le second appel ne lit pas la base | Non |
+| 2026-10-15 | Lot 0 : `essential_reads` rejoint la liste fermée des cascades de `schema_constraints_test` | ADR-0090 §4.1 décide `on_delete: cascade` vers `essentials` ; une fiche n'est jamais supprimée par l'application | ADR-0090 |
+| 2026-10-15 | Lot 0 : la fabrique de test `create_material` pose le rang du programme par slug | Les tests existants de l'accueil et de l'exercice du jour gardent leur ordre sans réécriture | Non |
 
 ## Ce qui a dérapé
 

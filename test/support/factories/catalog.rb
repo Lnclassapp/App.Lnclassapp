@@ -26,9 +26,14 @@ module Factories
       Orm::LevelSeries.create!(level:, series:)
     end
 
-    def create_material(name: nil, category: "science", shortname: nil)
+    # The program rank of ADR-0090 §4.2, as the migration fills it in; any other material has none (NULLS LAST).
+    PROGRAM_ORDER = %w[mathematiques physique-chimie svt francais histoire-geographie edhc philosophie].freeze
+
+    def create_material(name: nil, category: "science", shortname: nil, position: :program)
       sequence = factory_sequence
-      Orm::Material.create!(name: name || "Matière #{sequence}", shortname: shortname || "M#{sequence}", category:)
+      name ||= "Matière #{sequence}"
+      position = PROGRAM_ORDER.index(name.parameterize)&.succ if position == :program
+      Orm::Material.create!(name:, shortname: shortname || "M#{sequence}", category:, position:)
     end
 
     def create_course(level: create_level, material: create_material, series: nil, name: "Cours #{factory_sequence}",
