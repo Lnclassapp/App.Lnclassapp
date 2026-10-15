@@ -40,9 +40,10 @@ Toile : https://claude.ai/artifact/NTPyZWmFK4oK9z9jMgvWL5 (téléphone d'abord).
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
 | Quelle page élève après Ma classe ? | Le parcours d'un exercice ; restent la révision, le profil, l'historique, le choix de classe, la connexion et l'inscription (porteur, 2026-10-15). | Un chantier par parcours ; celui-ci couvre les trois écrans de l'exercice. |
+| En séance, retire-t-on l'en-tête de l'application (mode concentré) ? | Oui (porteur, 2026-10-15). | Pendant les questions et les retours : ni en-tête, ni menu de gauche, ni menu de l'avatar ; une croix « Quitter la session », la barre de progression et « 3/5 » en haut ; le bouton d'action reste collé en bas. |
+| Quitter la séance demande-t-il confirmation ? | Oui (porteur, 2026-10-15). | Une feuille en bas de l'écran : « Quitter la séance ? », « Ta progression est gardée. Tu pourras reprendre à la question N. », « Continuer l'exercice » (principal) et « Quitter ». La session reste ouverte, comme aujourd'hui. |
+| À 20/20, « Recommencer » disparaît-il du résultat ? | Oui, comme aujourd'hui (porteur, 2026-10-15). | Seul « Revoir l'exercice » reste. |
 
 ## Questions ouvertes
 
-1. En séance, retire-t-on l'en-tête de l'application (mode concentré : une croix pour quitter, la barre de progression en haut) ?
-2. Quitter la séance : demande-t-on confirmation (« Ta progression est gardée ») ?
-3. Sur le résultat, quand toutes les réponses sont justes : « Recommencer » disparaît, comme aujourd'hui ?
+Aucune pour le téléphone. Suite : tablette et ordinateur.
