@@ -43,6 +43,7 @@ Toile : https://claude.ai/artifact/78wguP9ZtQc1g5LrtcxTy4 (téléphone d'abord).
 | On repart de la page actuelle ou d'une page nouvelle ? | On commence par le téléphone (porteur, 2026-10-15), en repartant du cadre et des blocs actuels, comme pour l'accueil élève. | Même en-tête que l'accueil élève ; la carte garde « Ouvrir le cours → ». |
 | Garde-t-on un filtre « Matière » (liste ou pastilles) ? | Non : on le supprime, la recherche suffit (porteur, 2026-10-15). | La page n'a plus que la recherche ; « Tout voir » n'apparaît que pendant une recherche ; le message sans résultat devient « Essaye un autre mot. ». Le filtre reste pour l'enseignant, la direction et l'équipe. |
 | Que change la tablette ? | Passons à la tablette (porteur, 2026-10-15). | À partir de 700 px, la page se centre (720 px au plus) et les cartes passent sur deux colonnes, de même hauteur, « Ouvrir le cours » aligné en bas ; l'en-tête montre « Besoin d'aide ? » en entier. |
+| Que change l'ordinateur ? | Passons à l'ordinateur (porteur, 2026-10-15). | À partir de 1024 px (ordinateur et tablette à l'horizontale), menu à gauche avec « Cours » actif, cartes sur trois colonnes ; l'icône de la matière passe au-dessus du texte pour laisser la place au titre et à la description. |
 
 ## Questions ouvertes
 
