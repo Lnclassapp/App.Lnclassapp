@@ -2,7 +2,7 @@
 <%# Rôle : carte bleue au-dessus sous lg, panneau bleu à gauche dès lg (carte centrée en hauteur) ; « Besoin d'aide ? » en haut ; 422 re-rendu par Turbo %>
 <%# ADR  : 0050, 0084, 0086 · UDR : 0005, 0019, 0054 (§3.3 focus, §3.4 infobulle, §3.8 numéro pré-rempli), 0057, 0060, 0080, 0082 (§3.4), 0088 (§3.1 à §3.3) %>
 <% page_title t(".page_title") %>
-<div class="grid min-h-dvh bg-paper lg:grid-cols-2">
+<div class="grid min-h-dvh grid-cols-1 bg-paper lg:grid-cols-2">
   <%= render "shared/auth_welcome", variant: :panel, title: t(".welcome") %>
 
   <div class="flex min-w-0 flex-col">

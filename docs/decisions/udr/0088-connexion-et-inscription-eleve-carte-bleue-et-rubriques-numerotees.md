@@ -1,14 +1,14 @@
 # UDR-0088 : Connexion et inscription élève — carte bleue d'accueil, panneau bleu dès 1 024 px, rubriques numérotées, « Besoin d'aide ? » en haut
 <!-- index
 titre: Connexion et inscription élève : carte bleue, rubriques numérotées
-statut: Proposé
+statut: Accepté
 adr-lie: —
 problematique: Connexion (tous rôles, au « vous ») et inscription élève : carte bleue au téléphone, panneau bleu à gauche dès 1 024 px, « Besoin d'aide ? » en haut à droite, lien « Créer mon compte élève » sur la connexion, inscription en trois rubriques numérotées en cartes, genre en pastilles. Amende UDR-0054, 0060, 0081
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-10-15 |
 | **Chantier** | [`docs/chantiers/connexion-inscription-eleve`](../../chantiers/connexion-inscription-eleve/memo.md) |
 | **ADR lié** | — (règles d'identité inchangées : ADR-0050, ADR-0084 à ADR-0086) |
@@ -66,7 +66,7 @@ La connexion sert à tous les rôles : son texte reste au « vous ».
 - **Formulaire** : 560 px au plus. Le titre est « Créer ton compte élève », avec « Trois rubriques, une minute. » en dessous.
 - **Rubriques** : chacune est une carte blanche avec un numéro dans une pastille `bg-brand-soft text-brand-strong`.
   1. **Ta classe** : la cascade `_class_picker`. Par le lien d'une classe, c'est le bandeau de la classe avec « Ce n'est pas ta classe ? ».
-  2. **Toi** : nom, prénoms, genre et numéro. Le genre se choisit par deux grandes pastilles radio de 44 px de haut, avec les libellés actuels ; la pastille choisie est en `bg-brand text-white`.
+  2. **Toi** : nom, prénoms, genre et numéro. Le genre se choisit par deux grandes pastilles radio de 44 px de haut, avec les libellés actuels ; la pastille choisie est en `bg-brand-strong text-white` (amendé à la livraison : `bg-brand` sous du blanc ne passe pas AA, §3.7).
   3. **Code secret** : le code, la confirmation et « Les codes concordent. ».
 - **Bas du formulaire** : « Créer mon compte » (`brand`, pleine largeur au téléphone), puis « Déjà un compte ? Se connecter ».
 
