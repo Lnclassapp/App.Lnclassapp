@@ -4,8 +4,9 @@
 module NavigationHelper
   Destination = Data.define(:key, :route, :icon)
   # Ce que le shell affiche de la personne connectée. Le contrôleur qui rend `layout "shell"` l'expose par `helper_method :shell_user`.
-  ShellUser = Data.define(:name, :role, :detail, :avatar_url) do
-    def initialize(name:, role:, detail: nil, avatar_url: nil) = super
+  # public_id : graine de la couleur stable de l'avatar sans photo (UDR-0084 §3.4).
+  ShellUser = Data.define(:name, :role, :detail, :avatar_url, :public_id) do
+    def initialize(name:, role:, detail: nil, avatar_url: nil, public_id: nil) = super
 
     # L'accueil salue par le prénom, comme l'ancienne application.
     def first_name = name.split.first

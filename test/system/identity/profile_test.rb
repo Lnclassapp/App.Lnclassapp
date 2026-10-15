@@ -35,9 +35,13 @@ test "the switch next to the avatar turns the page dark at once, and the choice 
   assert_equal "rgb(250, 248, 244)", background.call
 end
 
-  # The student opens « Mon profil » from the account panel of the avatar (UDR-0080 §3.2), the others from the account menu.
+  # The student opens « Mon profil » from the avatar menu (UDR-0084 §3.2), the teacher from the account panel of the
+  # avatar (UDR-0082 §3.2), the others from the account menu.
   def open_profile
-    if page.has_selector?("header a[aria-controls=account_panel]", wait: 0)
+    if page.has_selector?("header button#avatar-menu-button", wait: 0)
+      find("header button#avatar-menu-button").click
+      within("#avatar-menu") { click_link I18n.t("shared.navigation.profile") }
+    elsif page.has_selector?("header a[aria-controls=account_panel]", wait: 0)
       find("header a[aria-controls=account_panel]").click
       within("dialog#account_panel[open]") { click_link I18n.t("shared.navigation.profile") }
     else
