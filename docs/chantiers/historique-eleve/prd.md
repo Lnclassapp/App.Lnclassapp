@@ -82,4 +82,4 @@ Alors « Mes exercices terminés » est à gauche et « Mes classes » à droite
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Requêtes SQL de `GET /students/archive` | 8 (mesuré au Lot 0, 2026-10-15) | ≤ 9 | |
+| Requêtes SQL de `GET /students/archive` | 8 (mesuré au Lot 0, 2026-10-15) | ≤ 9 | 9 (2026-10-15 : + le `COUNT` de `completed_count`) |

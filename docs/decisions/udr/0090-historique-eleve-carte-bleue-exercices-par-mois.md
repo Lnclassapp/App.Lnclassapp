@@ -1,14 +1,14 @@
 # UDR-0090 : Historique de l'élève — carte bleue du total, exercices rangés par mois avec l'icône de la matière, note verte dès 14/20
 <!-- index
 titre: Historique de l'élève : total, exercices par mois, vert dès 14/20
-statut: Proposé
+statut: Accepté
 adr-lie: —
 problematique: Élève : « Mon historique » dans le cadre de l'accueil, ouvert depuis le menu de l'avatar ; carte bleue du nombre total d'exercices terminés ; exercices par mois avec l'icône de la matière ; note verte dès 14/20 (et non plus dès 10/20) ; deux colonnes dès 1 024 px ; aucun filtre, aucune ligne cliquable. Amende UDR-0057
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-10-15 |
 | **Chantier** | [`docs/chantiers/historique-eleve`](../../chantiers/historique-eleve/memo.md) |
 | **ADR lié** | — (contenu inchangé : ADR-0036, ADR-0040) |
