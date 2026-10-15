@@ -89,10 +89,10 @@ class Classroom::StudentRemovalTest < ApplicationSystemTestCase
     assert_selector "#classroom_roster_count", text: "1"
   end
 
+  # UDR-0091 §3.1 : l'établissement de la dernière classe, replié ; le niveau en pastille, la classe en case.
   def choose_classroom(name)
-    select "Abidjan 1", from: "student_classroom_choice[drena_public_id]"
-    select "Lycée Classique d'Abidjan", from: "student_classroom_choice[school_public_id]"
-    select "3ème", from: "student_classroom_choice[level_slug]"
+    assert_selector "#class-picker-school-summary", text: "Lycée Classique d'Abidjan"
+    within("turbo-frame#picker_levels") { choose "3ème" }
     within("turbo-frame#picker_classrooms") { choose name }
   end
 end

@@ -1,14 +1,14 @@
 # UDR-0091 : « Choisis ta classe » — trois étapes numérotées, établissement replié avec « Changer », niveaux en pastilles, classes en cases
 <!-- index
 titre: Choix de classe : trois étapes, pastilles des niveaux, cases des classes
-statut: Proposé
+statut: Accepté
 adr-lie: —
 problematique: Élève sans classe et inscription : la cascade partagée `_class_picker` devient trois étapes numérotées ; établissement en une ligne avec « Changer » (DRENA et établissement en listes derrière) ; niveaux en pastilles ; classes en grandes cases, 4 par ligne dès 700 px, « Complète » désactivée ; repli sans JS conservé. Amende UDR-0081 §3.3–3.5
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-10-15 |
 | **Chantier** | [`docs/chantiers/choix-classe-eleve`](../../chantiers/choix-classe-eleve/memo.md) |
 | **ADR lié** | — (règles d'adhésion inchangées : ADR-0040, ADR-0085) |

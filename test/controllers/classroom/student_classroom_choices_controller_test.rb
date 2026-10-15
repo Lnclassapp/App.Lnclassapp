@@ -4,6 +4,8 @@ require "test_helper"
 # (archived, or removed) chooses one through the same cascade, the DRENA and the school of their last classroom already
 # chosen and the levels already listed; the classroom they were removed from is refused by this way, only its link brings
 # them back. A student in an active classroom is sent home, and refused in 403 on the form.
+# UDR-0091 (CA-1, CA-2, CA-5): three numbered steps; the known school folded in one line with « Changer », the DRENA and
+# school lists behind it; the levels as pills, the classrooms as boxes, all real radios; « Continuer » without JavaScript.
 class Classroom::StudentClassroomChoicesControllerTest < ActionDispatch::IntegrationTest
   ERRORS = "activemodel.errors.models.dtos/classroom/student_registration_input.attributes".freeze
   PAGE = "classroom.student_classroom_choices.new".freeze
@@ -39,20 +41,36 @@ class Classroom::StudentClassroomChoicesControllerTest < ActionDispatch::Integra
     assert_response :success
     assert_select "h1", text: I18n.t("#{PAGE}.title")
     assert_equal "Choisis ta classe", I18n.t("#{PAGE}.title")
+    # UDR-0091 §3.3 : plus de lien « Accueil » au-dessus du titre.
+    assert_select "nav[aria-label='#{I18n.t('components.back_link.label')}']", 0
     assert_select "form#student-classroom-choice-form[action='#{student_classroom_choices_path}'][method=post]" \
                   "[data-controller='classroom--class-picker']" \
                   "[data-classroom--class-picker-schools-url-value='#{drena_schools_path('__drena__', scope: :student_classroom_choice)}']" \
                   "[data-classroom--class-picker-levels-url-value='#{school_picker_levels_path('__school__', scope: :student_classroom_choice)}']" \
                   "[data-classroom--class-picker-classrooms-url-value='" \
                   "#{school_picker_classrooms_path('__school__', '__level__', scope: :student_classroom_choice)}']" do
-      assert_select "select[name='student_classroom_choice[drena_public_id]'] option[selected][value='#{@drena.public_id}']"
-      assert_select "turbo-frame#picker_schools select[name='student_classroom_choice[school_public_id]'] " \
-                    "option[selected][value='#{@school.public_id}']", text: "Lycée Moderne de Cocody"
-      assert_select "turbo-frame#picker_levels select[name='student_classroom_choice[level_slug]'] option[value='#{@level.slug}']",
-                    text: "3ème"
-      assert_select "turbo-frame#picker_levels option[selected][value]", 0
+      assert_equal [ "1 #{I18n.t("#{PICKER}.step_school")}", "2 #{I18n.t("#{PICKER}.step_level")}",
+                     "3 #{I18n.t("#{PICKER}.step_classroom")}" ], css_select("fieldset > legend").map { it.text.squish }
+      # UDR-0091 §3.1 : l'établissement connu, replié en une ligne ; les deux listes derrière « Changer », toujours envoyées.
+      assert_select "#class-picker-school-summary[data-classroom--class-picker-target=schoolSummary]", text: /Lycée Moderne de Cocody/ do
+        assert_select "*", text: /Abidjan 1/
+        assert_select "a[aria-label=?][data-action='classroom--class-picker#change']" \
+                      "[href='#{new_student_classroom_choice_path(student_classroom_choice: { drena_public_id: @drena.public_id })}']",
+                      I18n.t("#{PICKER}.change_label"), text: I18n.t("#{PICKER}.change")
+      end
+      assert_select "#class-picker-school-fields[hidden][data-classroom--class-picker-target=schoolFields]" do
+        assert_select "select[name='student_classroom_choice[drena_public_id]'] option[selected][value='#{@drena.public_id}']"
+        assert_select "turbo-frame#picker_schools select[name='student_classroom_choice[school_public_id]'] " \
+                      "option[selected][value='#{@school.public_id}']", text: "Lycée Moderne de Cocody"
+      end
+      assert_select "turbo-frame#picker_levels input[type=radio][name='student_classroom_choice[level_slug]'][value='#{@level.slug}']"
+      assert_select "turbo-frame#picker_levels label", text: "3ème"
+      assert_select "turbo-frame#picker_levels input[checked]", 0
       assert_select "turbo-frame#picker_classrooms *", 0
-      assert_select "noscript button[formmethod=get][formaction='#{new_student_classroom_choice_path}']", text: I18n.t("#{PICKER}.continue")
+      assert_select "turbo-frame#picker_classrooms + p", text: I18n.t("#{PICKER}.level_first")
+      # Sans JavaScript, « Continuer » à chaque étape : la ligne repliée cache celui de l'établissement, pas celui du niveau.
+      assert_select "noscript button[formmethod=get][formaction='#{new_student_classroom_choice_path}']", 2
+      assert_select "#class-picker-step-level noscript button", text: I18n.t("#{PICKER}.continue")
       assert_select "button#student-classroom-choice-submit[type=submit][data-classroom--class-picker-target=submit]",
                     text: I18n.t("#{PAGE}.submit")
     end
@@ -65,8 +83,22 @@ class Classroom::StudentClassroomChoicesControllerTest < ActionDispatch::Integra
 
     get new_student_classroom_choice_path, params: { student_classroom_choice: choice_params(classroom_public_id: nil) }
 
-    assert_select "turbo-frame#picker_levels option[selected][value='#{@level.slug}']"
+    assert_select "turbo-frame#picker_levels input[type=radio][checked][value='#{@level.slug}']"
     assert_select "turbo-frame#picker_classrooms input[type=radio][name='student_classroom_choice[classroom_public_id]']", 2
+    # UDR-0091 §3.6 : les radios vivent dans le fieldset de leur étape, qui les nomme.
+    assert_select "fieldset#class-picker-step-level turbo-frame#picker_levels input[type=radio]", 1
+    assert_select "fieldset#class-picker-step-classroom turbo-frame#picker_classrooms input[type=radio]", 2
+    # Sans JavaScript, le bouton n'est jamais désactivé.
+    assert_select "button#student-classroom-choice-submit:not([disabled])"
+
+    # « Changer » sans JavaScript : la DRENA seule revient en GET, et les deux listes s'ouvrent, l'établissement à choisir.
+    get new_student_classroom_choice_path, params: { student_classroom_choice: { drena_public_id: @drena.public_id } }
+
+    assert_select "#class-picker-school-summary", 0
+    assert_select "#class-picker-school-fields:not([hidden]) turbo-frame#picker_schools select"
+    assert_select "turbo-frame#picker_schools option[selected]:not([value=''])", 0
+    assert_select "turbo-frame#picker_levels *", 0
+    assert_select "turbo-frame#picker_levels + p", text: I18n.t("#{PICKER}.school_first")
   end
 
   test "choices sent as a string instead of a hash are ignored: the last classroom's school stays chosen" do
@@ -75,7 +107,22 @@ class Classroom::StudentClassroomChoicesControllerTest < ActionDispatch::Integra
     get new_student_classroom_choice_path, params: { student_classroom_choice: "x" }
 
     assert_response :success
-    assert_select "turbo-frame#picker_levels option[value='#{@level.slug}']"
+    assert_select "turbo-frame#picker_levels input[type=radio][value='#{@level.slug}']"
+  end
+
+  test "a school sent with a DRENA it does not belong to, or without a DRENA, opens the lists: 200, no folded line" do
+    sign_in_as @student
+    other = create_drena(name: "Bouaké")
+
+    [ { drena_public_id: other.public_id, school_public_id: @school.public_id },
+      { school_public_id: @school.public_id, level_slug: @level.slug } ].each do |choices|
+      get new_student_classroom_choice_path, params: { student_classroom_choice: choices }
+
+      assert_response :success
+      assert_select "#class-picker-school-summary", 0
+      assert_select "#class-picker-school-fields:not([hidden])"
+      assert_select "turbo-frame#picker_levels *", 0
+    end
   end
 
   test "a student who never had a classroom starts from the DRENA" do
@@ -86,6 +133,8 @@ class Classroom::StudentClassroomChoicesControllerTest < ActionDispatch::Integra
     assert_response :success
     assert_select "select[name='student_classroom_choice[drena_public_id]'] option[selected]", 0
     %w[picker_schools picker_levels picker_classrooms].each { assert_select "turbo-frame##{it} *", 0 }
+    assert_select "#class-picker-school-summary", 0
+    assert_select "#class-picker-school-fields:not([hidden])"
   end
 
   test "UDR-0081 §3.4: arriving from an invalid link, the alert once, in the student's words" do
@@ -163,7 +212,7 @@ class Classroom::StudentClassroomChoicesControllerTest < ActionDispatch::Integra
 
     assert_response :unprocessable_entity
     assert_select "#student_classroom_choice_classroom_public_id_error", text: I18n.t("#{ERRORS}.classroom_public_id.unavailable")
-    assert_select "turbo-frame#picker_levels option[selected][value='#{@level.slug}']"
+    assert_select "turbo-frame#picker_levels input[type=radio][checked][value='#{@level.slug}']"
 
     choose(classroom_public_id: nil)
 

@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planification |
+| **Statut** | lots A et B livrés sur `feature/choix-classe-eleve` (sans PR, empilée sur `feature/accueil-eleve`) |
 | **Ouvert le** | 2026-10-15 |
 | **Branche** | `Develop` (cadrage, docs seules) ; le code passera par une PR |
 | **Programme** | — |
