@@ -14,7 +14,7 @@
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| `boucle_pedagogique_test.rb:37` rouge sur `Develop` | Cause différente (fenêtre modale introuvable) | à ouvrir |
+| `boucle_pedagogique_test.rb:37` sensible à la charge (délai `MODAL_WAIT` dépassé quand la machine est saturée) | Passe trois fois de suite hors charge ; pas de défaut de code | — |
 
 ## Clôture
 

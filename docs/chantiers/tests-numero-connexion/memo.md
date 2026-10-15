@@ -30,4 +30,4 @@ Huit PR des pages élève attendent une preuve `bin/ci` ; ces échecs hérités 
 ## Hors périmètre
 
 - Aucun changement de l'application : le comportement d'UDR-0060 §3.2 est le bon, seuls les tests suivent.
-- `test/system/boucle_pedagogique_test.rb:37` (fenêtre `turbo-frame#modal` introuvable à la ligne 192), aussi rouge sur `Develop` : cause différente, chantier à part.
+- `test/system/boucle_pedagogique_test.rb:37` : vu rouge sur `Develop` quand la machine était très chargée (fenêtre `turbo-frame#modal` pas ouverte dans le délai `MODAL_WAIT`, ligne 192), il passe trois fois de suite machine moins chargée. Pas de défaut de code ; pas de changement ici.
