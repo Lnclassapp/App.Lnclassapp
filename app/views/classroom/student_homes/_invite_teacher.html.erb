@@ -1,0 +1,11 @@
+<%# 🌐 UI · classroom/student_homes/_invite_teacher — « Inviter mon enseignant », sous la carte du jour, dans ses trois états %>
+<%# Rôle : un partage WhatsApp qui nomme la classe et l'établissement, avec le lien d'inscription enseignant, dans un nouvel onglet %>
+<%# ADR  : 0049, 0089 §4.3 (sans jeton de parrainage) · UDR : 0050, 0084 §3.6 %>
+<%# locals: (classroom:, school:) -%>
+<% scope = "classroom.student_homes.invite_teacher" %>
+<% message = t("#{scope}.message", classroom:, school:, link: new_teacher_registration_url) %>
+<div id="student_home_invite_teacher" class="mt-4 flex flex-col gap-3 border-t border-line pt-4 sm:flex-row sm:items-center sm:justify-between">
+  <p class="text-sm text-mute"><%= t("#{scope}.prompt") %></p>
+  <%= ui_button t("#{scope}.action"), href: whatsapp_share_url(message), variant: :secondary, size: :sm,
+                icon: "chat-bubble-left-right", target: "_blank", rel: "noopener", class: "shrink-0 self-start sm:self-auto" %>
+</div>

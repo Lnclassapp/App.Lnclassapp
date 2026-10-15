@@ -63,6 +63,13 @@ class Identity::StudentAvatarMenuTest < ApplicationSystemTestCase
 
       # UDR-0084 §3.10: the keyboard — arrows move and loop, Escape closes and gives the focus back to the avatar.
       assert focused?("#avatar-menu a[href='#{student_home_path}']"), "le focus n'est pas sur la première entrée"
+      # Focused, the current page keeps its bg-brand-soft highlight, not the grey focus background of the other entries.
+      brand_soft, focused_bg = page.evaluate_script(<<~JS)
+        (() => { const probe = document.createElement("span"); probe.className = "bg-brand-soft"; document.body.append(probe);
+                 const want = getComputedStyle(probe).backgroundColor; probe.remove();
+                 return [want, getComputedStyle(document.activeElement).backgroundColor] })()
+      JS
+      assert_equal brand_soft, focused_bg, "la page en cours perd sa surbrillance au focus"
       page.send_keys(:down)
       assert focused?("#avatar-menu a[href='#{courses_path}']"), "la flèche bas ne passe pas à « Cours »"
       page.send_keys(:up, :up)
