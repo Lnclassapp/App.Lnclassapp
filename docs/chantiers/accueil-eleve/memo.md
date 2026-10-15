@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage |
+| **Statut** | décision |
 | **Ouvert le** | 2026-10-15 |
 | **Branche** | `Develop` (cadrage, docs seules) ; le code passera par une PR |
 | **Programme** | — |
@@ -54,7 +54,13 @@ La page d'accueil publique est dessinée et ses décisions sont prises : l'accue
 - Aucune matière de son niveau n'a d'exercice publié : rien à proposer, la carte ne garde que l'encouragement et l'invitation de l'enseignant.
 - L'élève a fait tous les exercices publiés d'une matière : la matière est sautée dans le tour.
 - Un travail de l'enseignant reste en retard des semaines : l'exercice proposé ne revient jamais tant qu'il n'est pas fait.
+- L'élève est dans plusieurs classes de niveaux différents : le tour des matières porte sur l'union de leurs matières, comme son catalogue.
+- Deux enfants partagent un téléphone : seule la photo (ou les initiales) les distingue sur l'accueil ; risque accepté.
+- L'élève fait l'exercice proposé à 23 h 50 et le termine après minuit : il compte pour le jour où il a été commencé.
 
 ## Questions encore ouvertes
 
-- …
+- **Rentrée, élève sans classe de la nouvelle année** : laissé de côté par le porteur (2026-10-15). On garde le comportement actuel (catalogue vide, invitation à rejoindre sa classe) tant qu'il n'est pas tranché.
+- **Où apparaît le travail « fait seul »** dans les vues de l'enseignant et de la direction : page de la classe, fiche de l'élève, chiffres de l'établissement ? À dessiner.
+- **Texte du message d'invitation de l'enseignant** (WhatsApp) et page d'arrivée de l'enseignant invité.
+- **Tablette et ordinateur** : disposition de l'accueil sur grand écran, à dessiner.
