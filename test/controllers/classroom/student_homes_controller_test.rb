@@ -283,13 +283,56 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_home_exercises button", text: including(I18n.t("components.reveal.more")), count: 0
   end
 
-  test "no exercise assigned, no sheet to review: the empty state, without the review section" do
+  # CA-13 (ADR-0089 §4.1, UDR-0084 §3.6): without work from a teacher, the card of the day takes the place of the empty
+  # state; with nothing to propose, it says so, and still offers to invite the teacher.
+  test "CA-13 — no exercise assigned nor to propose, no sheet to review: « Rien à te proposer », the invitation, no review" do
     sign_in_as @student
 
     get student_home_path
 
-    assert_select "#student_home_exercises", text: including(tl("show.todo_empty"))
+    assert_select "#student_home_exercises section#student_home_daily[aria-labelledby=student_home_daily_title]" do
+      assert_select "h3#student_home_daily_title", text: tl("daily_exercise.badge")
+      assert_select "#student_home_daily_state[aria-live=polite]", text: including(tl("daily_exercise.none"))
+      assert_select "button", 0
+    end
+    assert_select "#student_home_invite_teacher a[href^='https://wa.me/?text='][target=_blank][rel=noopener]",
+                  text: including(tl("invite_teacher.action"))
+    assert_select "#student_home_exercises", text: including(tl("show.todo_empty")), count: 0
     assert_select "#student_home_gaps", 0
+  end
+
+  # CA-11 (ADR-0089 §4.1, priorité stricte): a late exercise from the teacher comes first, and the exercise of the day is
+  # neither proposed nor even computed.
+  test "CA-11 — a late exercise from the teacher: no exercise of the day, no invitation, and its query is skipped" do
+    create_exercise(essential: @essential, title: "Libre")
+    late = create_exercise(essential: @essential, title: "En retard")
+    create_assignment(classroom: @classroom, assignable: late, assigned_at: 5.days.ago, due_on: Time.zone.today - 2)
+    sign_in_as @student
+
+    statements = []
+    collect = ->(*, payload) { statements << payload[:sql] }
+    ActiveSupport::Notifications.subscribed(collect, "sql.active_record") { get student_home_path }
+
+    # The signature of DailyExerciseQuery: the start of the first completed session of each exercise.
+    assert_empty statements.grep(/MIN\(exercise_sessions\.started_at\)/)
+
+    assert_select "#student_home_exercises li", text: including("En retard")
+    assert_select "#student_home_daily", 0
+    assert_select "#student_home_invite_teacher", 0
+  end
+
+  test "CA-8 — without work from a teacher, the exercise of the day starts like any exercise" do
+    exercise = create_exercise(essential: @essential, title: "La méiose en 4 étapes")
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "#student_home_daily" do
+      assert_select "a[href='#{exercise_path(exercise.public_id)}']", text: "La méiose en 4 étapes"
+      assert_select "form[action='#{exercise_sessions_path(exercise.public_id)}'][method=post] button.#{PRIMARY}",
+                    text: including(tl("daily_exercise.start"))
+    end
+    assert_select "#student_home_invite_teacher", text: including(tl("invite_teacher.prompt"))
   end
 
   test "the sheets to review link to their sheet" do
