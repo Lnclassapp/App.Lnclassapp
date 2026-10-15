@@ -87,11 +87,15 @@ module ComponentsHelper
   # Au téléphone, les options s'empilent toujours ; les colonnes ne s'ouvrent qu'à partir de `sm`.
   RADIO_COLUMNS = { 1 => nil, 2 => "sm:grid-cols-2", 3 => "sm:grid-cols-3" }.freeze
 
-  MODAL_SIZES = { sm: "sm:max-w-sm", md: "sm:max-w-lg", lg: "sm:max-w-2xl" }.freeze
+  # UDR-0089 §3.4 : `:form` (480 px) pour les fenêtres de formulaire de l'élève.
+  MODAL_SIZES = { sm: "sm:max-w-sm", form: "sm:max-w-120", md: "sm:max-w-lg", lg: "sm:max-w-2xl" }.freeze
   # UDR-0061 §3.3 : `:sheet` est une feuille basse sous lg (`.dialog-sheet`, application.tailwind.css), centrée au-dessus.
+  # UDR-0089 §3.4 : `:phone_sheet`, la même feuille sous 700 px seulement (palier du téléphone, UDR-0086 §3.5).
   # Mouvement réduit : ui-dialog ne glisse qu'en motion-safe (motion-reduce:animate-none, moins spécifique que open:, ne
   # l'arrêtait pas).
-  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet", drawer: "dialog-drawer" }.freeze
+  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet", phone_sheet: "dialog-phone-sheet", drawer: "dialog-drawer" }.freeze
+  # Poignée d'une feuille, cachée dès que la feuille redevient une modale centrée.
+  SHEET_HANDLES = { sheet: "lg:hidden", phone_sheet: "min-[700px]:hidden" }.freeze
   DROPDOWN_ALIGNS = { start: "left-0", end: "right-0" }.freeze
   DROPDOWN_TONES = { default: "ui-menu-item-default", danger: "ui-menu-item-danger" }.freeze
 
@@ -290,7 +294,7 @@ module ComponentsHelper
     render "components/modal", id: id || "modal-#{title.parameterize}", title:, trigger:, trigger_variant:,
            trigger_icon:, trigger_href:, trigger_size:, trigger_full:, trigger_class:, open:, body:, slots:, document_title:,
            size_class: option!(MODAL_SIZES, size, "ui_modal size"),
-           placement_class: option!(MODAL_PLACEMENTS, placement, "ui_modal placement"), sheet: placement.to_sym == :sheet,
+           placement_class: option!(MODAL_PLACEMENTS, placement, "ui_modal placement"), handle_class: SHEET_HANDLES[placement.to_sym],
            described_by:
   end
 

@@ -475,6 +475,23 @@
   }
 }
 
+/* UDR-0089 §3.4 — `ui_modal placement: :phone_sheet` : la même feuille, sous 700 px seulement (palier du téléphone,
+   UDR-0086 §3.5) ; dès 700 px, la modale centrée de ses utilitaires. */
+@media (max-width: 43.74rem) {
+  dialog.dialog-phone-sheet {
+    margin: auto 0 0;
+    width: 100%;
+    max-width: none;
+    min-height: 25vh;
+    min-height: 25dvh;
+    max-height: 90vh;
+    max-height: 90dvh;
+    overflow-y: auto;
+    border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
 /* UDR-0080 §3.2 — `ui_modal placement: :drawer` : un panneau ancré à gauche, sur toute la hauteur, à toutes les
    largeurs ; il glisse depuis la gauche, en mouvement autorisé seulement. Hors couche, comme la feuille ci-dessus. */
 dialog.dialog-drawer {

@@ -57,11 +57,11 @@ Lot 0 — SOCLE ──► Lot A — PAGE ET FENÊTRES ──► Lot B — PREUVE
 - [x] Grill fait : ≥ 1 ligne dans `Ce que le grill a révélé`
 - [x] `prd.md` : critères d'acceptation en Gherkin, tous testables
 - [x] ADR écrit si un port / une table / un contrat apparaît *(aucun)*
-- [ ] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md` *(UDR-0089 écrite ; index à la clôture)*
+- [ ] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md` *(UDR-0089 acceptée ; index par `script/docs/build_index` à la fusion)*
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
-- [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
-- [ ] En-tête HITL sur chaque fichier créé dans `app/`
+- [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
+- [x] En-tête HITL sur chaque fichier créé dans `app/`
 - [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
 - [ ] Pureté domaine · rubocop · tests · brakeman : au vert
 - [ ] PR unique vers `Develop`, référençant chantier + UDR
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)
