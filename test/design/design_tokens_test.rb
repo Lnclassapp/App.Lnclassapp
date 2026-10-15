@@ -33,6 +33,10 @@ class DesignTokensTest < ActiveSupport::TestCase
 
   SPACING = /(?<![\w-])-?(?:#{SPACING_UTILITIES.join('|')})-(\d+(?:\.\d+)?)(?![\w.\/-])/
 
+  # UDR-0086 §3.5 : le palier de 700 px des pages élève redessinées (UDR-0084, 0085, 0086) s'écrit `min-[700px]:`, sans
+  # token de point de rupture. Seule cette variante est admise ; toute autre valeur entre crochets reste refusée.
+  SANCTIONED_VARIANT = /(?<![\w-])min-\[700px\]:/
+
   test "the sources exist" do
     assert_operator SOURCES.size, :>, 20
   end
@@ -65,6 +69,8 @@ class DesignTokensTest < ActiveSupport::TestCase
     %w[rounded-card shadow-pop bg-brand-soft role[:accent] href="#pour-qui" text-ink/60 teams--nested-form#add].each do |sample|
       RULES.each_value { |pattern| assert_no_match pattern, sample }
     end
+    assert_no_match RULES.fetch("valeur arbitraire `-[…]`"), "min-[700px]:grid-cols-6".gsub(SANCTIONED_VARIANT, "")
+    assert_match RULES.fetch("valeur arbitraire `-[…]`"), "min-[701px]:grid-cols-6".gsub(SANCTIONED_VARIANT, "")
     assert_equal "7", SPACING.match("p-7")[1]
     assert_nil SPACING.match("size-7")
   end
@@ -74,7 +80,7 @@ class DesignTokensTest < ActiveSupport::TestCase
   def scan(pattern)
     SOURCES.flat_map do |path|
       path.each_line.with_index(1).flat_map do |line, number|
-        line.to_enum(:scan, pattern).map { Regexp.last_match }
+        line.gsub(SANCTIONED_VARIANT, "").to_enum(:scan, pattern).map { Regexp.last_match }
             .select { |match| !block_given? || yield(match) }
             .map { |match| "#{path.relative_path_from(Rails.root)}:#{number} #{match[0]}" }
       end

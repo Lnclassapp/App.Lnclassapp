@@ -40,10 +40,11 @@
           <p class="mt-1 text-sm whitespace-pre-line text-ink"><%= feedback.explanation %></p>
         </div>
       <% end %>
-      <%# Sous lg, la barre du bas reste visible (décision du porteur, 2026-10-06) : l'action colle juste au-dessus d'elle, même
-          quand une longue explication la pousserait sous le pli. Pleine largeur sous 640 px. %>
+      <%# Sous lg, l'action reste à l'écran (décision du porteur, 2026-10-06), même quand une longue explication la pousserait
+          sous le pli. Pleine largeur sous 640 px. UDR-0084 §3.3 : l'élève n'a plus de barre du bas sur le web, l'action colle
+          au bord ; l'app Android garde la place réservée d'avant. %>
       <div id="feedback-actions"
-           class="sticky bottom-above-bar z-10 -mx-4 -mb-4 border-t border-line bg-white px-4 py-4 sm:-mx-6 sm:-mb-6 sm:flex sm:justify-end sm:px-6 lg:static lg:mx-0 lg:mb-0 lg:px-0 lg:pt-4 lg:pb-0">
+           class="sticky <%= lnclass_app? ? "bottom-above-bar" : "bottom-0" %> z-10 -mx-4 -mb-4 border-t border-line bg-white px-4 py-4 sm:-mx-6 sm:-mb-6 sm:flex sm:justify-end sm:px-6 lg:static lg:mx-0 lg:mb-0 lg:px-0 lg:pt-4 lg:pb-0">
         <% if play.completed? %>
           <%= ui_button t(".result"), href: exercise_session_result_path(play.session_public_id), variant: :brand, icon_end: "trophy",
                                       class: "w-full sm:w-auto", data: { turbo_frame: "_top" } %>
