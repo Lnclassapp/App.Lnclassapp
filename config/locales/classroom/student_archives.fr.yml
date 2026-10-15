@@ -1,4 +1,5 @@
 # « Mon historique » de l'élève, même sans classe active (fonctions-espace-eleve, lot R) — ADR-0036, memo Q19
+# Redessiné (historique-eleve) : carte bleue du total, exercices par mois — UDR-0090
 fr:
   classroom:
     student_archives:
@@ -6,6 +7,12 @@ fr:
         page_title: "Mon historique"
         title: "Mon historique"
         back: "Accueil"
+        summary:
+          count:
+            one: "exercice terminé"
+            other: "exercices terminés"
+          none: "Aucun exercice terminé pour l'instant"
+          note: "Ils restent ici, même si tu changes de classe."
         classrooms:
           title: "Mes classes"
           detail: "%{level} · %{school}"
@@ -15,3 +22,11 @@ fr:
           title: "Mes exercices terminés"
           empty: "Aucun exercice terminé"
           empty_description: "Chaque exercice terminé reste ici avec sa note, même après avoir quitté ta classe."
+      month:
+        # « Octobre 2026 » : strftime traduit par rails-i18n, majuscule posée par la vue.
+        format: "%B %Y"
+      result_row:
+        # « 14 oct. »
+        date_format: "%-d %b"
+        detail: "%{material} · %{date}"
+        grade_spoken: "%{grade} sur 20"

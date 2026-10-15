@@ -8,6 +8,7 @@
 |---|---|---|---|
 | 2026-10-15 | Pas d'ADR | Un compte ajouté à `StudentArchiveQuery` | Non |
 | 2026-10-15 | La carte bleue donne le vrai total, la liste reste limitée à 200 | La liste est bornée (`RESULTS_LIMIT`), le total ne doit pas mentir | Non |
+| 2026-10-15 | `ResultRow` gagne `material_slug` (Lot 0) | Les illustrations des matières sont choisies par slug (`subject_illustration`, UDR-0069 §3.3), pas par catégorie : la catégorie ne donnerait que trois icônes | Non |
 
 ## Ce qui a dérapé
 

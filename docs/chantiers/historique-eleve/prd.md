@@ -68,7 +68,7 @@ Alors « Mes exercices terminés » est à gauche et « Mes classes » à droite
 | Couche | Éléments prévus |
 |---|---|
 | Domaine | — |
-| Infrastructure | `StudentArchiveQuery::Archive` gagne `completed_count` (un `COUNT` sur les sessions terminées, sans limite). |
+| Infrastructure | `StudentArchiveQuery::Archive` gagne `completed_count` (un `COUNT` sur les sessions terminées, sans limite) ; `ResultRow` gagne `material_slug` (l'illustration de la matière). |
 | Delivery | — |
 | UI | `classroom/student_archives/show` redessiné ; partials `_month` et `_result_row` ; seuil de couleur à 70 % (14/20), comme Ma classe et le résultat. |
 
@@ -82,4 +82,4 @@ Alors « Mes exercices terminés » est à gauche et « Mes classes » à droite
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Requêtes SQL de `GET /students/archive` | à mesurer au Lot 0 | ≤ avant + 1 | |
+| Requêtes SQL de `GET /students/archive` | 8 (mesuré au Lot 0, 2026-10-15) | ≤ 9 | |
