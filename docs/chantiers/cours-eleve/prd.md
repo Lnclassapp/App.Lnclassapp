@@ -139,7 +139,7 @@ Alors « Mes matières » sur l'accueil et les groupes de « Cours » suivent le
 |---|---|
 | Domaine | `Ports::Assessment::EssentialReadRepositoryPort` (`record(student_id:, essential_id:, at:)`) ; `UseCases::Assessment::RecordEssentialRead` (élève seulement, idempotent) ; `LearningDataEraserPort` : les lectures sont effacées. |
 | Infrastructure | Migration `essential_reads` (unique `student_id, essential_id`) ; migration `materials.position` avec remplissage dans l'ordre du programme ; `Orm::EssentialRead` ; `Repositories::Assessment::EssentialReadRepository` (upsert) ; `CourseCatalogQuery` : `Row` gagne `material_slug`, `material_position`, `progress` (`:new`/`:started`/`:done`), `resume_essential_slug`, et `Page` gagne `material_counts`, ordre par `materials.position` pour l'élève ; `StudentHomeQuery` et `DailyExerciseQuery` lisent `materials.position` au lieu de `SUBJECT_ORDER`. |
-| Delivery | `Catalog::EssentialsController#show` et `Classroom::ClassroomEssentialsController#show` appellent `RecordEssentialRead` après la policy, pour un élève ; `Catalog::CoursesController#index` : param `after_material` pour la page suivante. Pas de nouvelle route. |
+| Delivery | `Catalog::EssentialsController#show` appelle `RecordEssentialRead` après la policy, pour un élève (`Classroom::ClassroomEssentialsController` n'admet que l'enseignant et l'équipe : rien à y enregistrer, journal du 2026-10-15) ; `Catalog::CoursesController#index` : param `after_material` pour la page suivante. Pas de nouvelle route. |
 | UI | `catalog/courses/index` (branche élève) : titre ou en-tête de matière, recherche seule, groupes ; `_course_group_title` ; `_course_card` (variante élève : bouton d'avancement, icône au-dessus sur ordinateur) ; grilles 1 / 2 / 3 colonnes. |
 
 ## 6. Décisions rattachées
@@ -152,5 +152,5 @@ Alors « Mes matières » sur l'accueil et les groupes de « Cours » suivent le
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Requêtes SQL de `GET /courses` (élève, 24 cours) | à mesurer au Lot 0 | ≤ avant + 2 (comptes par matière, avancement) | |
+| Requêtes SQL de `GET /courses` (élève, 24 cours) | 12 (mesuré au Lot 0 : 30 cours publiés de son niveau sur 6 matières, page 1 ; idem avec `q`) | ≤ avant + 2 (comptes par matière, avancement) | 10 au Lot D, mêmes données, avec ou sans `q` (−2 : plus de référentiel pour la liste « Matière », plus de `COUNT` séparé ; +2 : comptes par matière, avancement). Vue d'une matière : 13 (le référentiel, pour son titre) |
 | Part des élèves qui rouvrent un cours par « Reprendre » | inconnue (pas de suivi) | à suivre 4 semaines après la sortie | |

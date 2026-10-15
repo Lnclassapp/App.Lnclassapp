@@ -264,6 +264,28 @@ module Queries
                      home.subjects.map { [ it.slug, it.name ] }
       end
 
+      # CA-17, ADR-0090 §4.2 : le rang vient de materials.position, plus d'une liste de slugs ; sans rang, après, par nom.
+      test "CA-17: the subjects follow materials.position, then the materials without a rank by name" do
+        level = @classroom.level
+        @svt.update!(position: 2)
+        create_course(material: @svt, level:)
+        create_course(material: create_material(name: "Zoologie", position: 1), level:)
+        create_course(material: create_material(name: "Mathématiques", position: 3), level:)
+        create_course(material: create_material(name: "Anglais", position: nil), level:)
+        create_course(material: create_material(name: "Allemand", position: nil), level:)
+
+        assert_equal %w[zoologie svt mathematiques allemand anglais], home.subjects.map(&:slug)
+      end
+
+      test "CA-17: two subjects of equal rank are ordered by name" do
+        level = @classroom.level
+        @svt.update!(position: 4)
+        create_course(material: @svt, level:)
+        create_course(material: create_material(name: "Botanique", position: 4), level:)
+
+        assert_equal %w[botanique svt], home.subjects.map(&:slug)
+      end
+
       test "a student of another series sees no subject of a course reserved to a series" do
         series = create_series(name: "D")
         create_course(material: create_material(name: "Mathématiques"), level: @classroom.level, series:)

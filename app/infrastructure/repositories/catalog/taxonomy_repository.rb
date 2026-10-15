@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::TaxonomyRepository
 # Rôle : référentiel géré par l'équipe (niveaux, séries, liaisons, matières) et son index en mémoire pour les imports
-# ADR  : 0029, 0034, 0036, 0058
+# ADR  : 0029, 0034, 0036, 0058, 0090 (§4.2 : rang d'une matière créée)
 module Repositories
   module Catalog
     class TaxonomyRepository
@@ -59,8 +59,10 @@ module Repositories
                                 Orm::LevelSeries.exists?(series_id: id), plan_entries: { series_id: id })
       end
 
+      # ADR-0090 §4.2 : une matière du programme reçoit son rang à la création (le slug suit le nom) ; une autre n'en a pas.
       def create_material(material:)
-        persist(Orm::Material.new, material_attributes(material), :map_material)
+        position = ProgramOrder.rank(material.name.to_s.parameterize)
+        persist(Orm::Material.new(position:), material_attributes(material), :map_material)
       end
 
       def update_material(material:)
