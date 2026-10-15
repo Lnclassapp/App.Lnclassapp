@@ -25,7 +25,8 @@
           <%= render "communication/messages/carousel", carousel: @announcements, link: false %>
         <% end %>
       <% elsif key == :todo %>
-        <%= render "todo", exercises: @home.assigned_exercises, gaps: @home.pending_gaps, icon: %>
+        <%= render "todo", exercises: @home.assigned_exercises, gaps: @home.pending_gaps, icon:, daily: @daily,
+                           classroom: @home.classroom_name, school: @home.school_name %>
       <% end %>
     <% end %>
 

@@ -1,7 +1,7 @@
 <%# 🌐 UI · classroom/student_homes/_todo — « À faire » de l'accueil élève, puis les fiches à revoir %>
-<%# Rôle : le travail de l'enseignant (en retard, puis par date limite) ; sans lui, la carte du jour si `daily:` est passé (lot C), sinon l'état vide %>
+<%# Rôle : le travail de l'enseignant (en retard, puis par date limite) ; sans lui, la carte du jour et « Inviter mon enseignant » ; sinon l'état vide %>
 <%# ADR  : 0043, 0072, 0089 · UDR : 0057 R1/R3, 0058 §3.3, 0062 §3.2, 0084 §3.5 (priorité stricte), §3.6 %>
-<%# locals: (exercises:, gaps:, icon:, daily: nil) -%>
+<%# locals: (exercises:, gaps:, icon:, daily: nil, classroom: nil, school: nil) -%>
 <%= ui_card title: t("classroom.student_homes.show.todo_title"), subtitle: t("classroom.student_homes.show.todo_subtitle"),
             id: "student_home_exercises", data: (ui_reveal_data if exercises.any?) do |card| %>
   <% if exercises.any? %>
@@ -18,8 +18,9 @@
     </ul>
     <%= ui_reveal_more exercises.size %>
   <% elsif daily %>
-    <%# ADR-0089 §4.1 : seulement sans travail de l'enseignant ; le partial et `daily:` arrivent avec le lot C, rien avant. %>
+    <%# ADR-0089 §4.1 : seulement sans travail de l'enseignant (le contrôleur ne lit `daily` que dans ce cas). %>
     <%= render "classroom/student_homes/daily_exercise", daily: %>
+    <%= render "classroom/student_homes/invite_teacher", classroom:, school: %>
   <% else %>
     <%= ui_empty_state title: t("classroom.student_homes.show.todo_empty"),
                        description: t("classroom.student_homes.show.todo_empty_description"), icon: %>
