@@ -58,7 +58,7 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
     click_on I18n.t("#{scope}.student_progress.redo")
 
     assert_current_path %r{\A/sessions/[^/]+\z}
-    assert_text "Question 1"
+    assert_text(/question 1/i)
   end
 
   test "sur un téléphone, la page de l'élève tient dans la largeur" do

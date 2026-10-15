@@ -70,7 +70,7 @@ class Catalog::EssentialPageTest < ApplicationSystemTestCase
     within("#essential_exercise_#{@exercise.public_id}") { click_on I18n.t("#{scope}.exercise_progress.redo") }
 
     assert_current_path %r{\A/sessions/[^/]+\z}
-    assert_text "Question 1"
+    assert_text(/question 1/i)
   end
 
   # UDR-0015, amendement du 2026-10-02 (UDR-0057) : à 390 × 844, une action principale, 5 blocs au plus avant le pli,

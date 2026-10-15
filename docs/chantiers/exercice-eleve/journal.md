@@ -14,12 +14,17 @@
 | 2026-10-15 | Nombre illisible : erreur de saisie, la question n'est pas comptée | Confirmé par le porteur | ADR-0091 §4.3 |
 | 2026-10-15 | Lot 0 : `AnswerShuffle.for(session_id:, …)` et non `session_public_id:` | L'ancien mélange tirait sa graine de l'id entier de la session (`session_id ^ question_id`) ; garder cette graine est la seule façon qu'une session ouverte se reprenne à l'identique | ADR-0091 §4.4 (écart de signature) |
 | 2026-10-15 | Lot 0 : chaque type de question est une classe à méthodes de classe (`structure_errors`, `well_formed?`, `correct?`, `INPUT`, `INVALID`) | `Question` délègue sans instancier ; `INPUT` dit au use case quoi lire (ids, texte, indices) et `INVALID` l'erreur à rendre | ADR-0091 §4.3 |
+| 2026-10-15 | Lot A : `ui_modal` gagne `placement: :sheet_compact` (feuille sous 700 px, fenêtre au-dessus) et `trigger_label:` (déclencheur icône seule) | La feuille existante s'arrêtait à 1 024 px ; la croix n'a pas de texte | UDR-0087 §3.3 |
+| 2026-10-15 | Lot A : le bouton radio ou la case est la pastille de la lettre (A, B, C), la lettre passe dessus sans intercepter le clic | Le champ reste visible et cliquable pour tous les outils (lecteur d'écran, tests), sans champ caché | UDR-0087 §3.4 |
 | 2026-10-15 | Lot 0 : un type n'est proposé au formulaire de l'équipe que si son partial `kinds/_<type>_fields` existe | Les quatre lots livrent chacun leur type sans toucher au formulaire commun | ADR-0091 §4.5 |
 
 ## Ce qui a dérapé
 
 - Lot 0 : la construction d'une question importée était copiée dans les trois imports ; elle passe dans `ContentTreeWriterPort::QuestionNode.from_import` pour n'ajouter `tolerance` et `match` qu'une fois.
 - Lot 0 : le test de caractérisation de `ContentTreeWriter` compare des lignes entières ; les deux colonnes nouvelles en sont retirées et vérifiées vides à part, plutôt que de réécrire l'instantané de 380 Ko.
+
+- Lot A : « Valider » désactivé tant que rien n'est choisi rend le chemin « valider à vide » injouable dans un navigateur ; `test/system/error_paths_test.rb` vérifie désormais le bouton désactivé, le refus 422 reste couvert par le test du contrôleur.
+- Lot A : « n/T » est dans l'en-tête, hors du frame ; « Question suivante » sans requête le recopie depuis `data-counter` de la carte (`assessment--next-question`), et le stream remplace « reprendre à la question N » de la confirmation.
 
 ## Ce qu'on a appris sur la codebase
 

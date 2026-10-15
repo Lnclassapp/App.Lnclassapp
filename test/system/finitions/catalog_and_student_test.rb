@@ -152,7 +152,8 @@ module Finitions
       started = create_exercise_session(student: @student, exercise: @exercise)
       visit exercise_session_path(started.public_id)
       assert_title "Méiose et ADN · Élève · Lnclass"
-      assert_link t("assessment.exercise_sessions.show.quit"), href: exercise_path(@exercise.public_id)
+      # UDR-0087 §3.2 : en mode concentré, la croix « Quitter la session » mène à la page de l'exercice.
+      assert_selector "a[href='#{exercise_path(@exercise.public_id)}'][aria-label='#{t("assessment.exercise_sessions.quit_dialog.trigger")}']"
     end
 
     # UDR-0077, amendement du 2026-10-06 : à 390 px, la recherche et les filtres restent ; un catalogue filtré offre « Tout voir ».

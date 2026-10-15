@@ -91,7 +91,8 @@ module ComponentsHelper
   # UDR-0061 §3.3 : `:sheet` est une feuille basse sous lg (`.dialog-sheet`, application.tailwind.css), centrée au-dessus.
   # Mouvement réduit : ui-dialog ne glisse qu'en motion-safe (motion-reduce:animate-none, moins spécifique que open:, ne
   # l'arrêtait pas).
-  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet", drawer: "dialog-drawer" }.freeze
+  # UDR-0087 §3.3 : `:sheet_compact` est une feuille basse sous 700 px seulement, une fenêtre centrée au-dessus.
+  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet", sheet_compact: "dialog-sheet-compact", drawer: "dialog-drawer" }.freeze
   DROPDOWN_ALIGNS = { start: "left-0", end: "right-0" }.freeze
   DROPDOWN_TONES = { default: "ui-menu-item-default", danger: "ui-menu-item-danger" }.freeze
 
@@ -282,16 +283,17 @@ module ComponentsHelper
   # (UDR-0080 §3.2) ; `:center` (défaut) ne change rien.
   # `trigger_full:` étire le déclencheur sur toute la largeur de sa cellule : une entrée de rôle de la page d'accueil (UDR-0064).
   # `described_by:` l'id du texte qui explique une confirmation, lu à l'ouverture (aria-describedby, UDR-0083).
+  # `trigger_label:` fait du déclencheur un bouton icône (`trigger_icon:`), sans texte, nommé par ce libellé (UDR-0087 §3.2).
   def ui_modal(title:, id: nil, size: :md, trigger: nil, trigger_variant: :secondary, trigger_icon: nil, open: false,
                document_title: nil, trigger_href: nil, trigger_size: :md, trigger_full: false, trigger_class: nil,
-               placement: :center, described_by: nil, &block)
+               placement: :center, described_by: nil, trigger_label: nil, &block)
     slots = Slots.new(self)
     body = block ? capture(slots, &block) : nil
     render "components/modal", id: id || "modal-#{title.parameterize}", title:, trigger:, trigger_variant:,
            trigger_icon:, trigger_href:, trigger_size:, trigger_full:, trigger_class:, open:, body:, slots:, document_title:,
            size_class: option!(MODAL_SIZES, size, "ui_modal size"),
-           placement_class: option!(MODAL_PLACEMENTS, placement, "ui_modal placement"), sheet: placement.to_sym == :sheet,
-           described_by:
+           placement_class: option!(MODAL_PLACEMENTS, placement, "ui_modal placement"),
+           sheet: { sheet: "lg:hidden", sheet_compact: "min-[700px]:hidden" }[placement.to_sym], described_by:, trigger_label:
   end
 
   # Menu déroulant. `trigger:` remplace le bouton icône par un contenu libre (avatar + nom, par exemple).

@@ -1,6 +1,6 @@
 <%# 🌐 UI · components/_modal — <dialog> native, déclencheur facultatif, appelée par ui_modal %>
 <%# Rôle : piège du focus, Échap et fond cliquable fournis par le navigateur ; feuille basse sur mobile %>
-<%# UDR  : 0005, 0006, 0054, 0061 (placement: :sheet, déclencheur-lien), 0064 (déclencheur pleine largeur), 0083 (described_by) · Stimulus : modal, autofocus %>
+<%# UDR  : 0005, 0006, 0054, 0061 (placement: :sheet, déclencheur-lien), 0064, 0083 (described_by), 0087 (sheet_compact, trigger_label) · Stimulus : modal, autofocus %>
 <%# Servie ouverte (open: true), la <dialog> porte `open` dès le HTML : lisible sans JavaScript, que le contrôleur
     rouvre en vraie modale. UDR-0054 : `document_title` nomme l'onglet tant qu'elle est ouverte ; à l'ouverture, le
     contrôleur autofocus vise le premier champ, sinon le bouton de fermeture du pied (jamais la croix). UDR-0061 : la
@@ -10,11 +10,14 @@
   <% if trigger %>
     <%= ui_button trigger, variant: trigger_variant, icon: trigger_icon, href: trigger_href, size: trigger_size, full: trigger_full,
           class: trigger_class, data: { action: "modal#open" }, "aria-haspopup": "dialog", "aria-controls": id %>
+  <% elsif trigger_label %>
+    <%= ui_button nil, variant: trigger_variant, icon: trigger_icon, href: trigger_href, size: trigger_size, class: trigger_class,
+          data: { action: "modal#open" }, "aria-haspopup": "dialog", "aria-controls": id, "aria-label": trigger_label %>
   <% end %>
   <dialog id="<%= id %>" <%= "open" if open %> aria-labelledby="<%= id %>-title" <%= tag.attributes("aria-describedby": described_by) %> data-modal-target="dialog" data-action="click->modal#backdrop close->modal#closed turbo:submit-end->modal#submitEnd modal:opened->autofocus#focus"
           data-controller="autofocus" data-autofocus-mode-value="dialog"
           class="ui-dialog <%= [ size_class, placement_class ].compact.join(" ") %>"><% if sheet %>
-    <span class="sheet-handle mt-3 lg:hidden" aria-hidden="true"></span><% end %>
+    <span class="sheet-handle mt-3 <%= sheet %>" aria-hidden="true"></span><% end %>
     <div class="flex items-start justify-between gap-4 px-6 pt-6">
       <h2 id="<%= id %>-title" class="font-display text-xl font-extrabold"><%= title %></h2>
       <button type="button" data-action="modal#close" aria-label="<%= t(".close") %>"

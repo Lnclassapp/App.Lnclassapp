@@ -29,8 +29,11 @@ class Assessment::ExerciseSessionsControllerTest < ActionDispatch::IntegrationTe
     follow_redirect!
     assert_response :success
     assert_select "h1", text: "Méiose"
-    # UDR-0022, amendement du 2026-10-02 : l'avancement n'est dit qu'une fois, par « Question n sur T » ; la barre est seule (R6).
-    assert_select "#progress_bar > *", 1
+    # UDR-0087 §3.2 : mode concentré ; en haut la croix (lien vers l'exercice sans JavaScript), la barre et « 1/2 ».
+    assert_select "header.z-40", 0
+    assert_select "a[href=?][aria-label=?][aria-controls='quit-dialog']", exercise_path(@exercise.public_id),
+                  I18n.t("#{scope}.quit_dialog.trigger")
+    assert_select "#progress_counter", text: /1\/2/
     assert_select "#progress_bar > progress[value='0'][max='100'][aria-label=?]", I18n.t("#{scope}.progress_bar.label"),
                   text: I18n.t("#{scope}.progress_bar.percent", percent: 0)
     assert_select "turbo-frame#question #question-card", text: /#{I18n.t("#{scope}.question_card.number", number: 1, total: 2)}/
@@ -38,7 +41,7 @@ class Assessment::ExerciseSessionsControllerTest < ActionDispatch::IntegrationTe
     assert_select "#attempt-form fieldset > p", 0
     assert_select "#attempt-form[action='#{exercise_session_attempts_path(session.public_id)}'] input[type=radio]", 4
     assert_select "#attempt-form input[type=hidden][name='attempt[question_id]'][value='#{@exercise.questions.order(:position).first.id}']"
-    assert_select "a[href='#{exercise_path(@exercise.public_id)}']", text: /#{I18n.t("#{scope}.show.quit")}/
+    assert_select "dialog#quit-dialog a[href='#{exercise_path(@exercise.public_id)}']", text: I18n.t("#{scope}.quit_dialog.quit")
   end
 
   test "une question à plusieurs réponses : « Coche N propositions. », sans badge qui le redit" do

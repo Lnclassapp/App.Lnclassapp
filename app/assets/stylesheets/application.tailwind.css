@@ -312,6 +312,11 @@
   padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
 }
 
+/* UDR-0087 §3.2 — bouton d'action collé au bas de la séance : 16 px au moins, la zone sûre si elle est plus haute */
+@utility pb-safe-action {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
 /* Élément collant posé juste au-dessus de la barre basse (« Question suivante », chantier ux-pages-eleve) */
 @utility bottom-above-bar {
   bottom: calc(var(--spacing-bar) + env(safe-area-inset-bottom));
@@ -459,6 +464,21 @@
     max-width: none;
     min-height: 25vh;
     min-height: 25dvh;
+    max-height: 90vh;
+    max-height: 90dvh;
+    overflow-y: auto;
+    border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* UDR-0087 §3.3 — `ui_modal placement: :sheet_compact` : la même feuille basse, mais sous 700 px seulement (le palier
+   de l'UDR-0086 §3.5) ; au-dessus, la modale centrée de ses utilitaires. Hors couche, pour la même raison. */
+@media (max-width: 43.74rem) {
+  dialog.dialog-sheet-compact {
+    margin: auto 0 0;
+    width: 100%;
+    max-width: none;
     max-height: 90vh;
     max-height: 90dvh;
     overflow-y: auto;
