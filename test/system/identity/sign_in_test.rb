@@ -33,6 +33,9 @@ class Identity::SignInTest < ApplicationSystemTestCase
     end
     assert_field "session[contact]", with: student.contact
     assert_field "session[pin]", with: ""
+    # Comportement actuel verrouillé : après l'échec, le focus va sur le numéro. Le PRD (§3) parle du code secret :
+    # écart noté au journal, à trancher par le porteur.
+    assert_selector "#session_contact:focus"
   end
 
   test "a student with a classroom lands on the student home" do

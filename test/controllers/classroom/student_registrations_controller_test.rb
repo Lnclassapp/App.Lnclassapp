@@ -102,6 +102,24 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     end
     assert_select "#student-registration-gender label > input[type=radio][name='student_registration[gender]'][required]", count: 2
     assert_select "#student-registration-form + p a[href=?]", new_session_path, text: I18n.t("#{PAGE}.sign_in")
+    assert_select "dialog#help-sheet", 1
+  end
+
+  # UDR-0088 §3.1: at 1 024 px (lg) the panel shows and the blue card hides; below, the reverse.
+  test "the blue panel is hidden under lg and the blue card from lg" do
+    get new_student_registration_path
+
+    assert_select "aside#auth-welcome-panel.hidden[class~='lg:flex']", 1
+    assert_select "section#auth-welcome-card[class~='lg:hidden']", 1
+    assert_select "aside#auth-welcome-panel[class~='lg:hidden'], section#auth-welcome-card.hidden", 0
+  end
+
+  test "a missing gender is refused under the gender, the fieldset described by it and both radios invalid" do
+    register(gender: "")
+
+    assert_refused :gender, I18n.t("#{ERRORS}.gender.inclusion")
+    assert_select "fieldset#student-registration-gender[aria-describedby=student_registration_gender_error]"
+    assert_select "#student-registration-gender input[type=radio][aria-invalid=true]", count: 2
   end
 
   # CA-6: a number of 9 digits comes back in 422, its message under the field, the field marked for the focus.
@@ -427,6 +445,8 @@ end
 
     assert_response :too_many_requests
     assert_select "form#student-registration-form [role=alert]", text: I18n.t("errors.codes.rate_limited")
+    # UDR-0088 §3.1 : en 429 aussi, la carte du formulaire suit l'accueil bleu.
+    assert_select "main section#auth-welcome-card ~ form#student-registration-form", 1
     assert_select "turbo-frame#picker_classrooms input[checked][value='#{@classroom.public_id}']"
     assert_not Orm::User.exists?(contact: "0701020304")
 

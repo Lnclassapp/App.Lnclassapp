@@ -66,14 +66,48 @@ class Identity::SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   # CA-3: the sign-in serves every role, so its own words say « vous », never « tu ».
-  test "CA-3: the words of the sign-in address the reader as « vous »" do
+  # Neither « tu » nor its imperatives.
+  TUTOIEMENT = /\b(tu|te|toi|ton|ta|tes|saisis|entre|choisis|clique|appuie)\b|\bt'|-toi\b/i
+
+  def words_of_the_sign_in
+    (css_select("#auth-welcome-panel, main").map(&:text).join(" ") +
+      css_select("main [placeholder], main [aria-label]").map { "#{it['placeholder']} #{it['aria-label']}" }.join(" ")).squish
+  end
+
+  test "CA-3: the words of the sign-in address the reader as « vous », on arrival and after a refusal in 422" do
     get new_session_path
 
-    words = css_select("#auth-welcome-panel, main").map(&:text).join(" ") +
-            css_select("main [placeholder], main [aria-label]").map { "#{it['placeholder']} #{it['aria-label']}" }.join(" ")
+    assert_match(/Heureux de vous revoir/, words_of_the_sign_in)
+    assert_no_match TUTOIEMENT, words_of_the_sign_in
 
-    assert_match(/Heureux de vous revoir/, words)
-    assert_no_match(/\b(tu|te|toi|ton|ta|tes)\b|\bt'|-toi\b/i, words.squish)
+    post session_path, params: { session: { contact: "0701020304", pin: "12" } }
+
+    assert_response :unprocessable_entity
+    assert_select "#session_pin_error"
+    assert_no_match TUTOIEMENT, words_of_the_sign_in
+  end
+
+  test "CA-3: the refusal in the wrong app addresses the reader as « vous » too, in both shells" do
+    sign_in_from APP_USER_AGENT, create_teacher
+    assert_select "#wrong-app"
+    assert_no_match TUTOIEMENT, words_of_the_sign_in
+
+    sign_in_from TEACHER_APP_USER_AGENT, create_student(classroom: create_classroom)
+    assert_select "#wrong-app"
+    assert_no_match TUTOIEMENT, words_of_the_sign_in
+  end
+
+  # UDR-0088 §3.2, UDR-0080 §3.3: the native bar carries the help only once signed in, so both shells keep « Besoin
+  # d'aide ? » on the sign-in, and the link to the student sign-up (to be confirmed by the owner for Lnclass Teacher).
+  test "in both Android shells, the sign-in keeps « Besoin d'aide ? » and the link to the student sign-up" do
+    [ APP_USER_AGENT, TEACHER_APP_USER_AGENT ].each do |agent|
+      get new_session_path, headers: { "User-Agent" => agent }
+
+      assert_response :success
+      assert_select "#auth-help [aria-controls=help-sheet]", text: "Besoin d'aide ?"
+      assert_select "dialog#help-sheet", 1
+      assert_select "#session-sign-up a[href=?]", new_student_registration_path, text: "Créer mon compte élève"
+    end
   end
 
   test "a signed-in person who opens the sign-in page is sent home, the kept number dropped" do

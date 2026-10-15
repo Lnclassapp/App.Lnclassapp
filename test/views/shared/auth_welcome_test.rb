@@ -46,14 +46,17 @@ class AuthWelcomeTest < ActionView::TestCase
     bar = html.at_css("#auth-help")
 
     assert_includes bar[:class].split, "justify-end"
-    trigger = bar.at_css("[aria-controls='help-sheet'], a[href='/aide']")
+    trigger = bar.at_css("[aria-controls='help-sheet']")
     assert_includes trigger.text, "Besoin d'aide ?"
+    # Sans JavaScript, le déclencheur est un lien vers la page d'aide.
+    assert_equal "/aide", trigger[:href]
     assert_includes trigger[:class], "text-brand-strong!"
     assert bar.at_css("dialog#help-sheet")
   end
 
-  test "both partials use tokens only, no colour written by hand, so the dark theme follows" do
-    [ "shared/_auth_welcome", "shared/_auth_help" ].each do |partial|
+  test "the partials and the two pages use tokens only, no colour written by hand, so the dark theme follows" do
+    [ "shared/_auth_welcome", "shared/_auth_help", "identity/sessions/new", "classroom/student_registrations/new",
+      "classroom/student_registrations/_form" ].each do |partial|
       source = Rails.root.join("app/views/#{partial}.html.erb").read
 
       assert_no_match(/#\h{3,8}\b|rgb\(|\[(#|rgb)|-(blue|sky|gray|slate|neutral)-\d|\bdark:/, source, partial)

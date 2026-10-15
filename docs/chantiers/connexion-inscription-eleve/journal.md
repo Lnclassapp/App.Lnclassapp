@@ -49,7 +49,8 @@
 | « Code secret oublié ? » et inscriptions enseignant et direction au même style | Hors périmètre | — |
 | Titre de la feuille d'aide au « vous » sur la connexion (« Contactez-nous ») | `shared/_help_sheet` partagé avec les écrans élève | À décider par le porteur |
 | Double numérotation (rubrique 1, étapes 1-2-3 de la cascade) et cases de classe trop étroites à 560 px | `_class_picker` du chantier `choix-classe-eleve` | À décider par le porteur |
-| Après un échec, le focus va sur le numéro (comportement actuel), le PRD parle du code | Comportement inchangé exprès (CA-9) | À décider par le porteur |
+| Après un échec, le focus va sur le numéro (comportement actuel), le PRD §3 parle du code ; verrouillé par `sign_in_test` (« a wrong PIN… ») jusqu'à la décision | Comportement inchangé exprès (CA-9) | À décider par le porteur |
+| Dans Lnclass Teacher, la connexion montre aussi « Créer mon compte élève » (verrouillé en contrôleur, avec « Besoin d'aide ? », dans les deux coques) | L'élève qui s'inscrit là serait ensuite refusé par `:wrong_app` | Le porteur doit confirmer ce lien dans Lnclass Teacher |
 
 ## Clôture
 

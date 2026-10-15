@@ -82,6 +82,10 @@ class Classroom::JoinTest < ApplicationSystemTestCase
       end
       fill_in_the_student
       assert_selector "#student-registration-gender label:has(input:checked)", text: I18n.t("genders.female")
+      # UDR-0088 §3.4, §3.7 : de vraies radios, 44 px de haut ; la flèche du clavier passe à l'autre pastille.
+      assert_equal [ 44 ], all("#student-registration-gender label").map { evaluate_script("arguments[0].getBoundingClientRect().height", it).round }.uniq
+      find_field(I18n.t("genders.female")).send_keys(:right)
+      assert_checked_field I18n.t("genders.male")
       fill_in "student_registration[contact]", with: "070102030"
       click_on I18n.t("#{FORM}.submit")
 
