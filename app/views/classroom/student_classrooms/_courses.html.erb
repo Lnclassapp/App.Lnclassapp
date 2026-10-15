@@ -1,0 +1,30 @@
+<%# 🌐 UI · classroom/student_classrooms/_courses — « Cours assignés » de « Ma classe » : titre, compteur, bande qui défile %>
+<%# Rôle : les cours des exercices assignés à la classe, 1 carte et le début de la suivante, 2 et demie dès 700 px, 4 dès 1 024 px %>
+<%# ADR  : 0072 · UDR : 0071 §3.5 (bande et points du carrousel d'annonces), 0076 §3.2, 0086 §3.4, §3.5 %>
+<%# locals: (courses:) -%>
+<section id="student_classroom_courses" aria-labelledby="student_classroom_courses_title" class="space-y-4">
+  <div class="flex items-center justify-between gap-3">
+    <h2 id="student_classroom_courses_title" class="font-display text-lg leading-tight font-extrabold"><%= t("classroom.student_classrooms.show.courses_title") %></h2>
+    <% if courses.any? %>
+      <%= ui_badge t("classroom.student_classrooms.show.courses_count", count: courses.size), tone: :brand, size: :sm %>
+    <% end %>
+  </div>
+  <% if courses.empty? %>
+    <%= ui_empty_state title: t("classroom.student_classrooms.show.courses_empty"),
+                       description: t("classroom.student_classrooms.show.courses_empty_description"), icon: "book-open" %>
+  <% else %>
+    <%# Sans JavaScript, la bande défile, sans points. %>
+    <div data-controller="communication--carousel">
+      <ul class="scrollbar-none flex snap-x snap-mandatory gap-3 overflow-x-auto motion-safe:scroll-smooth lg:-mx-1.5 lg:gap-0"
+          aria-label="<%= t("classroom.student_classrooms.show.courses_title") %>" data-communication--carousel-target="track">
+        <%= render partial: "classroom/student_classrooms/course_card", collection: courses, as: :course %>
+      </ul>
+      <div class="hidden justify-center gap-1.5 pt-3" aria-hidden="true" data-communication--carousel-target="pager">
+        <% courses.each_index do |index| %>
+          <span class="<%= index.zero? ? "h-1.5 w-4 rounded-full bg-brand-strong" : "h-1.5 w-1.5 rounded-full bg-line" %>"
+                data-communication--carousel-target="dot"></span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</section>
