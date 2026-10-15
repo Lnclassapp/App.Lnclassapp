@@ -4,7 +4,7 @@
 
 ## 1. Contexte
 
-La connexion (`/session/new`, tous les rôles) et l'inscription élève prennent la langue visuelle des écrans élève redessinés : carte bleue d'accueil au téléphone, panneau bleu à gauche dès 1 024 px, « Besoin d'aide ? » en haut, rubriques numérotées en cartes. Les règles d'identité ne changent pas ; la connexion gagne un lien vers l'inscription élève.
+La connexion (`/login`, tous les rôles) et l'inscription élève prennent la langue visuelle des écrans élève redessinés : carte bleue d'accueil au téléphone, panneau bleu à gauche dès 1 024 px, « Besoin d'aide ? » en haut, rubriques numérotées en cartes. Les règles d'identité ne changent pas ; la connexion gagne un lien vers l'inscription élève.
 
 ## 2. Acteurs et permissions
 

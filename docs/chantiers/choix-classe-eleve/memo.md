@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage |
+| **Statut** | planification |
 | **Ouvert le** | 2026-10-15 |
 | **Branche** | `Develop` (cadrage, docs seules) ; le code passera par une PR |
 | **Programme** | — |
@@ -49,3 +49,7 @@ Toile : https://claude.ai/artifact/QhGVuZiGSxEdCBqa4CKwaM (téléphone d'abord).
 
 - Même mise en page que la tablette horizontale (1280 px) : menu de gauche, formulaire de 640 px de large au plus, classes sur une ligne de 4 cases.
 - « Mon historique » dans le menu du compte.
+
+## Suite
+
+PRD, UDR-0091 et plan de lots écrits le 2026-10-15 (pas d’ADR). Le code se fait dans une PR, après celle d’`accueil-eleve`.

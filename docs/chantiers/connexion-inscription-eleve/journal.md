@@ -7,7 +7,7 @@
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
 | 2026-10-15 | Pas d'ADR | Interface seule : ni route, ni paramètre, ni règle d'identité nouvelle | Non |
-| 2026-10-15 | `_class_picker` n'appartient pas à ce chantier | Partagé avec « Choisis ta classe », redessiné par `choix-classe-eleve` | Non |
+| 2026-10-15 | `_class_picker` n'appartient pas à ce chantier ; codée avant, l'inscription garde l'ancienne cascade dans la nouvelle carte | Partagé avec « Choisis ta classe », redessiné par `choix-classe-eleve` ; confirmé par le porteur | Non |
 | 2026-10-15 | Les deux pages basculent en deux colonnes à 1 024 px | La connexion basculait à `lg`, l'inscription à `md` | UDR-0088 §3.1 |
 
 ## Ce qui a dérapé

@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage |
+| **Statut** | planification |
 | **Ouvert le** | 2026-10-15 |
 | **Branche** | `Develop` (cadrage, docs seules) ; le code passera par une PR |
 | **Programme** | — |
@@ -49,3 +49,7 @@ Toile : https://claude.ai/artifact/BCpNowiWxjrCx53kCTTr9g (téléphone d'abord).
 
 - Même mise en page que la tablette horizontale (1280 px) : menu de gauche, « Mes informations » à gauche, code secret et « Se déconnecter » à droite.
 - Les fenêtres s'ouvrent au milieu de l'écran, 480 px de large au plus.
+
+## Suite
+
+PRD, UDR-0089 et plan de lots écrits le 2026-10-15 (pas d’ADR). Le code se fait dans une PR, après celle d’`accueil-eleve`.
