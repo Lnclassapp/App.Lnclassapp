@@ -412,6 +412,15 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "dialog#help-sheet > span.sheet-handle.lg\\:hidden[aria-hidden=true]", 1
   end
 
+  # UDR-0089 §3.4 : `placement: :phone_sheet` est une feuille sous 700 px seulement, sa poignée cachée dès 700 px ;
+  # `size: :form` la borne à 480 px une fois centrée.
+  test "ui_modal placed as a phone sheet hides its handle from 700 px and can be 480 px wide" do
+    show ui_modal(title: "Changer mon code secret", id: "pin", size: :form, placement: :phone_sheet) { "Corps" }
+
+    assert_select "dialog#pin.ui-dialog.dialog-phone-sheet.sm\\:max-w-120:not(.dialog-sheet)"
+    assert_select "dialog#pin > span.sheet-handle.min-\\[700px\\]\\:hidden[aria-hidden=true]:not(.lg\\:hidden)", 1
+  end
+
   test "ui_modal keeps its centred rendering by default, and refuses an unknown placement" do
     default = ui_modal(title: "Supprimer ?", id: "confirm", size: :sm, trigger: "Ouvrir") { "Corps" }
 

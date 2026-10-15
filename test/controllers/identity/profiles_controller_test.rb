@@ -1,6 +1,6 @@
 require "test_helper"
 
-# PR-01, PR-02, ADR-0055, UDR-0041: « Mon profil » shows the account of the session, and only it, in the shell of its role.
+# PR-01, PR-02, ADR-0055, UDR-0041, UDR-0089: « Mon profil » shows the account of the session, and only it, in the shell of its role.
 class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
   def assert_modal_link(path, text)
     assert_select "a[href='#{path}'][data-turbo-frame=modal]", text:
@@ -12,56 +12,75 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_session_path
   end
 
-  test "a student reads their name, grouped number, classroom and registration date, with the three actions" do
+  # UDR-0089 §3.1, §3.2 (CA-1, CA-2, CA-3): the blue card, then « Mes informations » as whole rows to touch.
+  test "a student reads the blue card, then their information as rows, the editable ones whole links to their window" do
     student = create_student(first_name: "Aya", last_name: "Koné", contact: "0701020304",
-                             classroom: create_classroom(name: "Tle D 1"), created_at: Time.zone.local(2026, 9, 1, 10))
+                             classroom: create_classroom(school: create_school(name: "Lycée Classique d'Abidjan"), name: "3e B"),
+                             created_at: Time.zone.local(2026, 9, 1, 10))
     sign_in_as student
 
     get profile_path
 
     assert_response :success
     assert_select "aside nav"
-    assert_select "h1", "Mon profil"
+    assert_select "#main h1", "Mon profil"
+    assert_select "#main p", text: "Ce que Lnclass sait de vous, et ce que vous pouvez changer.", count: 0
+    assert_select "#profile_identity.rounded-card.bg-linear-to-br.from-brand-strong.to-brand.text-white" do
+      assert_select "span[aria-hidden=true] [role=img][aria-label='Aya Koné']", text: "AK"
+      assert_select "span[aria-hidden=true]", text: "+"
+      assert_select "h2#profile_identity_name", "Aya Koné"
+      assert_select "p", "Élève en 3e B"
+      assert_select "a, button", 0
+    end
     assert_select "#profile_information[aria-labelledby=profile_information_title]" do
       assert_select "#profile_information_title", "Mes informations"
-      assert_select "[role=img][aria-label='Aya Koné']"
-      assert_select "dd", text: /Aya Koné/
-      assert_select "dd", text: /07 01 02 03 04/
-      assert_select "dd", text: "Tle D 1"
-      assert_select "dd", text: "1 septembre 2026"
-      assert_modal_link edit_profile_name_path, /Modifier/
-      assert_modal_link edit_profile_contact_path, /Changer mon numéro/
+      rows = css_select("#profile_information li").map { it.text.squish }
+      assert_equal [ "Photo Aucune photo Ajouter", "Nom Aya Koné Modifier", "Numéro 07 01 02 03 04 Changer", "Classe 3e B",
+                     "Établissement Lycée Classique d'Abidjan", "Inscrit le 1 septembre 2026" ], rows
+      { edit_profile_photo_path => "Ajouter photo, Aucune photo", edit_profile_name_path => "Modifier nom, Aya Koné",
+        edit_profile_contact_path => "Changer numéro, 07 01 02 03 04" }.each do |path, label|
+        assert_select "li > a.min-h-tap[href='#{path}'][data-turbo-frame=modal][aria-label='#{label}']" do
+          assert_select "svg", 2
+        end
+      end
+      assert_select "a", 3
     end
-    assert_select "#profile_security" do
-      assert_select "details", text: /Ton code secret protège ton compte/
-      assert_modal_link edit_profile_pin_path, /Changer mon code secret/
-    end
-    assert_select "dt", text: "Établissement", count: 0
   end
 
-  # UDR-0041, amendment of 2026-10-02: the student's profile says each thing once, with no permanent help text.
-  test "UDR-0041: the student's profile has no subtitle, no identity block, its photo row shows the avatar" do
-    sign_in_as create_student(first_name: "Aya", last_name: "Koné", classroom: create_classroom)
+  # UDR-0089 §3.3 (CA-5): the PIN row opens its window, « Se déconnecter » is a real form button at the bottom.
+  test "a student changes their PIN from its row, and signs out from the button at the bottom of the page" do
+    sign_in_as create_student(classroom: create_classroom)
 
     get profile_path
 
-    assert_select "#main h1", count: 1
-    assert_select "#main h1", "Mon profil"
-    assert_select "#main p", text: "Ce que Lnclass sait de vous, et ce que vous pouvez changer.", count: 0
-    assert_select "#profile_information" do |card|
-      assert_equal 1, card.text.scan("Aya Koné").size
-      assert_select "p.truncate", 0
-      assert_select "*", text: "Élève", count: 0
-      assert_select "dl.mt-5.divide-y.divide-line.border-t.border-line.text-sm"
-      assert_select "dd span[aria-hidden=true] [role=img][aria-label='Aya Koné']", text: "AK"
-      assert_select "dd span.sr-only", "Aucune photo : tes initiales s'affichent."
-      assert_select "a[href='#{edit_profile_photo_path}'][data-turbo-frame=modal]", text: /Ajouter une photo/
-    end
     assert_select "#profile_security" do
-      assert_select "div.flex.flex-wrap.items-center > h2#profile_security_title", "Mon code secret"
-      assert_select "details summary .sr-only", "Aide : Mon code secret"
-      assert_select "details div", "Ton code secret protège ton compte. Change-le si tu penses qu'une autre personne le connaît."
-      assert_select "p", text: /Ton code secret protège ton compte/, count: 0
+      assert_select "h2#profile_security_title", "Mon code secret"
+      assert_select "p", "Ton code secret protège ton compte. Ne le donne à personne, même à un ami."
+      assert_select "a.min-h-tap[href='#{edit_profile_pin_path}'][data-turbo-frame=modal][aria-label='Changer mon code secret']",
+                    text: /Code à 4 chiffres\s+••••\s+Changer/
+      assert_select "details", 0
+    end
+    assert_select "form#profile_sign_out[action='#{session_path}'][method=post]" do
+      assert_select "input[name=_method][value=delete]", 1
+      assert_select "button[type=submit].ui-button-secondary.w-full", text: "Se déconnecter" do
+        assert_select "svg", 1
+      end
+    end
+    assert_equal "profile_sign_out", css_select("#main [id^=profile_]").last["id"], "« Se déconnecter » ferme la page"
+    assert_select "#profile_theme", 1
+  end
+
+  # UDR-0089 §3.5 (CA-6): one column of 720 px, then two in 960 px from 1 024 px, the blue card across both.
+  test "a student's profile is one centred column, two from lg: information on the left, PIN and sign-out on the right" do
+    sign_in_as create_student(classroom: create_classroom)
+
+    get profile_path
+
+    assert_select "#student_profile.mx-auto.grid.w-full.max-w-180.grid-cols-1.lg\\:max-w-240.lg\\:grid-cols-2" do
+      assert_select "> #profile_identity.lg\\:col-span-2"
+      assert_select "> #profile_information"
+      assert_select "> div > #profile_security + div > #profile_theme"
+      assert_select "> div > #profile_sign_out"
     end
   end
 
@@ -72,30 +91,30 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
     get profile_path
 
     assert_no_match(/\b(vous|votre|vos)\b/i, css_select("#main").text)
-    assert_select "#profile_security details div", "Ton code secret protège ton compte. Change-le si tu penses qu'une autre personne le connaît."
-    assert_select "#profile_information dd span.sr-only", "Aucune photo : tes initiales s'affichent."
   end
 
-  # UDR-0041, amendment of 2026-10-06: the student saw three styles (outline 40 px, dark filled, switch).
-  test "UDR-0041: the four actions of the student's profile share one button style, 48 px high" do
-    sign_in_as create_student(classroom: create_classroom)
+  test "a student with a photo reads « Ta photo » and sees it in the blue card, without the « + »" do
+    student = create_student(first_name: "Aya", last_name: "Koné", classroom: create_classroom)
+    attach_photo(student)
+    sign_in_as student
 
     get profile_path
 
-    classes = css_select("#main a[data-turbo-frame=modal]").map { it["class"] }
-    assert_equal 4, classes.size
-    assert_equal 1, classes.uniq.size, "styles : #{classes.uniq.inspect}"
-    # Lot E6 (politique-cache): « md » is the shared class ui-button-md, whose min-h-tap (48 px) shared_classes_test freezes.
-    assert_includes classes.first.split, "ui-button-md"
+    assert_select "#profile_identity img[alt='Aya Koné']", 1
+    assert_select "#profile_identity", text: /\+/, count: 0
+    assert_select "#profile_information a[href='#{edit_profile_photo_path}'][aria-label='Changer photo, Ta photo']",
+                  text: /Photo\s+Ta photo\s+Changer/
   end
 
-  test "UDR-0041: the student's profile modals say « tu », a teacher's keep « vous »" do
+  # UDR-0089 §3.4 (CA-4): the student's four windows are phone sheets, 480 px once centred; a teacher's are unchanged.
+  test "UDR-0041, UDR-0089: the student's profile windows say « tu » and are phone sheets; a teacher's keep « vous » and the centre" do
     sign_in_as create_student(classroom: create_classroom)
     { edit_profile_pin_path => "Saisis ton code secret actuel", edit_profile_contact_path => "Tu te connecteras",
       edit_profile_photo_path => "sur ton téléphone", edit_profile_name_path => "Modifier mon nom" }.each do |path, text|
       get path
 
       assert_select "dialog", text: /#{text}/
+      assert_select "dialog.dialog-phone-sheet.sm\\:max-w-120[aria-labelledby] > span.sheet-handle", 1
       assert_no_match(/\b(vous|votre|vos)\b/i, css_select("dialog").text, path)
     end
     sign_out
@@ -104,6 +123,8 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
     get edit_profile_pin_path
 
     assert_select "dialog", text: /Saisissez votre code secret actuel/
+    assert_select "dialog#profile-pin-modal.sm\\:max-w-sm:not(.dialog-phone-sheet)", 1
+    assert_select "dialog#profile-pin-modal .sheet-handle", 0
   end
 
   # UDR-0041, amendment of 2026-10-02: the other roles keep the current profile until their own clean-up.
@@ -138,16 +159,19 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
 
     get profile_path(user_id: other.id, id: other.public_id)
 
-    assert_select "dd", text: /Aya Koné/
-    assert_select "dd", text: /Awa Traoré/, count: 0
+    assert_select "#profile_identity h2", "Aya Koné"
+    assert_select "#main", text: /Awa Traoré/, count: 0
   end
 
-  test "a student without a classroom reads « Aucune classe »" do
-    sign_in_as create_student
+  # UDR-0089 §3.6: without a classroom, no « Classe » nor « Établissement » row, and no « Élève en … » in the blue card.
+  test "a student without a classroom has no classroom nor school row, and no « Élève en » line" do
+    sign_in_as create_student(first_name: "Aya", last_name: "Koné")
 
     get profile_path
 
-    assert_select "dd", text: "Aucune classe"
+    assert_select "#profile_identity p", 0
+    assert_select "#profile_information li", 4
+    assert_select "#profile_information", text: /Classe|Établissement/, count: 0
   end
 
   test "a teacher reads their school and subject, and no classroom" do

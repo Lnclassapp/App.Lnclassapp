@@ -44,12 +44,24 @@ class Identity::ProfileNamesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "turbo-stream[action=append][target=toasts]", text: /Ton nom est enregistré\./
     assert_select "turbo-stream[action=update][target=modal]"
-    assert_select "turbo-stream[action=replace][target=profile_information] template #profile_information dd", text: /Aya Marie Koné/
+    # UDR-0089 §3.1: the student's blue card carries the name too, so it is replaced with the rows.
+    assert_select "turbo-stream[action=replace][target=profile_identity] template #profile_identity h2", "Aya Marie Koné"
+    assert_select "turbo-stream[action=replace][target=profile_information] template #profile_information li", text: /Aya Marie Koné/
     assert_equal [ "Aya Marie", "Koné" ], [ @student.reload.first_name, @student.last_name ]
     event = Orm::AuditEvent.find_by!(action: "profile.name_changed")
     assert_equal [ @student.id, "User", @student.id ], [ event.actor_id, event.subject_type, event.subject_id ]
     assert_equal({ "previous" => { "first_name" => "Aya", "last_name" => "Koné" },
                    "current" => { "first_name" => "Aya Marie", "last_name" => "Koné" } }, event.metadata)
+  end
+
+  # UDR-0089 §4: the other roles keep their card (UDR-0041), and have no blue card to replace.
+  test "a teacher's valid name replaces their own card only" do
+    sign_in_as create_teacher(first_name: "Yao", last_name: "Kouassi")
+
+    rename(first_name: "Yao Paul", last_name: "Kouassi", as: :turbo_stream)
+
+    assert_select "turbo-stream[action=replace][target=profile_information] template #profile_information p.truncate", "Yao Paul Kouassi"
+    assert_select "turbo-stream[target=profile_identity]", 0
   end
 
   test "without Turbo, a valid name redirects to the profile with the toast" do
@@ -61,7 +73,7 @@ class Identity::ProfileNamesControllerTest < ActionDispatch::IntegrationTest
     assert_response :see_other
     follow_redirect!
     assert_select "#toasts", text: /Ton nom est enregistré\./
-    assert_select "#profile_information dd", text: /Aya Marie Koné/
+    assert_select "#profile_information li", text: /Aya Marie Koné/
   end
 
   test "an empty, blank or too long name is refused in 422 in the modal, and nothing is written" do
