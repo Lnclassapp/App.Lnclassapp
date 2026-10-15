@@ -34,6 +34,29 @@ fr:
         label: "Progression de la session"
         counter_label: "Question "
         counter: "%{number}/%{total}"
+      kinds:
+        fill_blank:
+          legend: "Complète la phrase."
+          blank: "blanc"
+        numeric:
+          label: "Ta réponse"
+          sign: "Changer le signe"
+          hint: "± pour un nombre négatif ; virgule pour les décimales."
+          invalid: "Écris un nombre, par exemple -3,5."
+        ordering:
+          hint: "Utilise les flèches pour ranger les étapes, de la première à la dernière."
+          steps: "Étapes"
+          up: "Monter l'étape %{n}"
+          down: "Descendre l'étape %{n}"
+          moved: "Étape déplacée en position %{n}."
+          rank: "Étape %{n}"
+        matching:
+          hint: "Touche un élément à gauche, puis celui qui va avec à droite."
+          left: "À relier"
+          right: "Réponses"
+          linked: ", relié à %{x}"
+          choose: "Choisis…"
+          with: "relié à"
       quit_dialog:
         trigger: "Quitter la session"
         title: "Quitter la séance ?"

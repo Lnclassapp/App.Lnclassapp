@@ -1,16 +1,36 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::FillBlank
-# Rôle : texte à trous (ADR-0091 §4.3), livré au Lot D ; d'ici là, aucune question de ce type ne se crée
-# ADR  : 0091
+# Rôle : texte à trous : juste sans tenir compte des majuscules, des accents ni des espaces en trop ; une faute de frappe est fausse
+# ADR  : 0091 (§4.2 : une à cinq réponses acceptées, `___` une fois dans l'énoncé ; §4.3 : la normalisation)
 module Entities
   module Assessment
     module QuestionKinds
       class FillBlank
+        MARKER = "___"
+        ACCEPTED = (1..5)
         INPUT = :response_text
         INVALID = { response_text: [ :blank_text ] }.freeze
+        # Apostrophes typographiques du clavier d'un téléphone (’ ‘ ʼ) : la même apostrophe que celle de l'enseignant.
+        APOSTROPHES = /[’‘ʼ]/
 
-        def self.structure_errors(**) = [ :not_available ]
-        def self.well_formed?(_question, _response) = false
-        def self.correct?(_question, _response) = false
+        # Minuscules, accents décomposés puis retirés, apostrophes unifiées, espaces réduits à un seul et retirés aux bords.
+        # Aucune distance d'édition : « Abidjn » n'est pas « Abidjan ».
+        def self.normalize(text)
+          text.to_s.unicode_normalize(:nfd).gsub(/\p{Mn}/, "").downcase.gsub(APOSTROPHES, "'").gsub(/[[:space:]]+/, " ").strip
+        end
+
+        def self.structure_errors(content:, answers:, **)
+          errors = []
+          errors << :blank_marker unless content.scan(MARKER).size == 1
+          errors << :accepted_answers_count unless ACCEPTED.cover?(answers.size)
+          errors
+        end
+
+        def self.well_formed?(_question, text) = !normalize(text).empty?
+
+        def self.correct?(question, text)
+          given = normalize(text)
+          question.answers.any? { normalize(it.content) == given }
+        end
       end
     end
   end
