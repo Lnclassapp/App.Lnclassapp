@@ -44,3 +44,8 @@ Toile : https://claude.ai/artifact/BCpNowiWxjrCx53kCTTr9g (téléphone d'abord).
 
 - Verticale (820 px) : une seule colonne centrée ; les fenêtres s'ouvrent au milieu de l'écran.
 - Horizontale (1180 px) : le menu de gauche revient ; « Mes informations » à gauche, le code secret et « Se déconnecter » à droite ; le mode sombre passe par la lune de l'en-tête.
+
+## Ordinateur
+
+- Même mise en page que la tablette horizontale (1280 px) : menu de gauche, « Mes informations » à gauche, code secret et « Se déconnecter » à droite.
+- Les fenêtres s'ouvrent au milieu de l'écran, 480 px de large au plus.
