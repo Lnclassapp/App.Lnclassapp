@@ -33,6 +33,24 @@ module Dtos
         assert_equal [ 5 ], input(answer_ids: [ "abc", "5", "0x3" ]).answer_ids
       end
 
+      # ADR-0091 §4.4 : les trous et le nombre envoient du texte ; l'ordre et relier, des indices d'affichage.
+      test "un texte saisi suffit, sans proposition ; vide ou trop long, il est refusé" do
+        assert input(response_text: "  Abidjan ").valid?
+        assert_equal "Abidjan", input(response_text: "  Abidjan ").response_text
+        assert input(response_text: " ").invalid?
+        assert input(response_text: " ").tap(&:validate).errors.added?(:response_text, :blank)
+        assert input(response_text: "x" * 201).tap(&:validate).errors.added?(:response_text, :too_long, count: 200)
+        assert_nil input.response_text
+      end
+
+      test "les indices d'affichage gardent leur ordre et leurs doublons ; un indice illisible reste, en -1" do
+        form = input(display_order: [ "2", "0", "1", "0", "x", "" ])
+
+        assert form.valid?
+        assert_equal [ 2, 0, 1, 0, -1, -1 ], form.display_order
+        assert_equal [], input.display_order
+      end
+
       test "la question est exigée" do
         form = AttemptInput.new(session_public_id: "SeSsIoN0000001", answer_ids: [ "1" ])
 

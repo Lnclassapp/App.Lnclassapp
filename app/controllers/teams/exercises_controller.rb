@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::ExercisesController
 # Rôle : l'équipe crée et modifie en modale un exercice, ses questions et propositions ; le publie ou l'archive
-# ADR  : 0026, 0028, 0035, 0036, 0054 · UDR : 0006, 0017
+# ADR  : 0026, 0028, 0035, 0036, 0054, 0091 · UDR : 0006, 0017, 0087
 module Teams
   class ExercisesController < BaseController
     before_action :load_essential, only: %i[new create]
@@ -50,7 +50,8 @@ module Teams
     def form_input
       Dtos::Assessment::ExerciseInput.from_params(params.expect(exercise: [
         :title, :description, :exercise_type,
-        { questions_attributes: [ [ :content, :explanation, :question_type, { answers_attributes: [ [ :content, :correct ] ] } ] ] }
+        { questions_attributes: [ [ :content, :explanation, :question_type, :numeric_tolerance,
+                                    { answers_attributes: [ [ :content, :correct, :match_content ] ] } ] ] }
       ]).to_h)
     end
 

@@ -29,10 +29,10 @@ module UseCases
           @session if @session.public_id == public_id
         end
 
-        def record_attempt(session_id:, question_id:, selected_answer_ids:, correct:, at:)
+        def record_attempt(session_id:, question_id:, selected_answer_ids:, correct:, at:, response_text: nil)
           return :duplicate if @recorded.any? { it[:question_id] == question_id }
 
-          @recorded << { session_id:, question_id:, selected_answer_ids:, correct:, at: }
+          @recorded << { session_id:, question_id:, selected_answer_ids:, correct:, at:, response_text: }
           :recorded
         end
       end
@@ -102,7 +102,8 @@ module UseCases
         assert result.success?
         assert_equal [ "SeSsIoN0000005", 1, true, nil ],
                      [ result.value.session_public_id, result.value.question_id, result.value.correct, result.value.closed ]
-        assert_equal [ { session_id: 5, question_id: 1, selected_answer_ids: [ 11 ], correct: true, at: NOW } ], @sessions.recorded
+        assert_equal [ { session_id: 5, question_id: 1, selected_answer_ids: [ 11 ], correct: true, at: NOW,
+                         response_text: nil } ], @sessions.recorded
         assert_equal [ true ], @sessions.locks
         assert_equal 1, @transaction.calls
         assert_empty @close.calls
@@ -170,6 +171,57 @@ module UseCases
         assert_equal :forbidden, submit(question_id: 1, answer_ids: [ 11 ], stored: session(student_id: 8)).code
         assert_equal :forbidden, submit(question_id: 1, answer_ids: [ 11 ], actor: Entities::Identity::Actor.new(user_id: 7, role: :teacher)).code
         assert_empty @sessions.recorded
+      end
+
+      # ADR-0091 §4.4 : l'ordre et relier postent des indices d'affichage ; le use case les relit avec le mélange de la
+      # session et enregistre les identifiants dans l'ordre de l'élève. Le type est doublé : ses règles arrivent aux lots F et G.
+      module ByIndices
+        INPUT = :display_order
+        INVALID = { display_order: [ :wrong_order ] }.freeze
+
+        def self.well_formed?(question, ids) = ids.sort == question.answer_ids.sort
+        def self.correct?(question, ids) = ids == question.ids_by_position
+      end
+
+      module ByText
+        INPUT = :response_text
+        INVALID = { response_text: [ :not_a_number ] }.freeze
+
+        def self.well_formed?(_question, text) = text.match?(/\A\d+\z/)
+        def self.correct?(_question, text) = text == "42"
+      end
+
+      def submit_with(kind, **attributes)
+        dto = Dtos::Assessment::AttemptInput.new(session_public_id: "SeSsIoN0000005", question_id: 2, **attributes)
+        original = Question.method(:kind_for)
+        Question.define_singleton_method(:kind_for) { |_question_type| kind }
+        use_case.call(actor: STUDENT, dto:)
+      ensure
+        Question.define_singleton_method(:kind_for, original)
+      end
+
+      test "indices d'affichage : relus par le mélange de la session, enregistrés dans l'ordre de l'élève" do
+        shuffled = Entities::Assessment::AnswerShuffle.for(session_id: 5, question_id: 2, ids: [ 21, 22, 23 ])
+        right = [ 21, 22, 23 ].map { shuffled.index(it) }
+
+        assert submit_with(ByIndices, display_order: right.map(&:to_s)).value.correct
+        assert_equal [ [ 21, 22, 23 ], nil ], @sessions.recorded.sole.values_at(:selected_answer_ids, :response_text)
+        assert_not submit_with(ByIndices, display_order: right.reverse).value.correct
+        assert_equal [ 23, 22, 21 ], @sessions.recorded.sole[:selected_answer_ids]
+      end
+
+      test "indices d'affichage incomplets : :invalid avec l'erreur du type, rien n'est écrit" do
+        result = submit_with(ByIndices, display_order: [ 0, 1 ])
+
+        assert_equal [ :invalid, { display_order: [ :wrong_order ] } ], [ result.code, result.errors ]
+        assert_empty @sessions.recorded
+      end
+
+      test "texte saisi : enregistré tel quel, sans proposition ; illisible pour le type, :invalid" do
+        assert submit_with(ByText, response_text: " 42 ").value.correct
+        assert_equal [ [], "42" ], @sessions.recorded.sole.values_at(:selected_answer_ids, :response_text)
+        result = submit_with(ByText, response_text: "4,,2")
+        assert_equal [ :invalid, { response_text: [ :not_a_number ] } ], [ result.code, result.errors ]
       end
 
       test "session inconnue : :not_found" do

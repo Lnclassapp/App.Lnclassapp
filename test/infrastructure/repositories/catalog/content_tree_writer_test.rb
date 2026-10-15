@@ -139,6 +139,20 @@ module Repositories
         assert_equal Time.zone.parse("2026-09-25 10:00:00.123456"), exercise.created_at
       end
 
+      test "la marge d'un nombre et le côté droit d'une paire s'écrivent par COPY (ADR-0091)" do
+        fiche = create_essential
+        number = Port::QuestionNode.new(position: 1, content: "Combien ?", explanation: nil, question_type: "numeric",
+                                        numeric_tolerance: BigDecimal("0.1"), answers: [ Port::AnswerNode.new(position: 1, content: "3,5", correct: true) ])
+        pairs = question("Relie.", position: 2, question_type: "matching",
+                         answers: [ Port::AnswerNode.new(position: 1, content: "a", correct: true, match_content: "tab\tA") ])
+
+        @writer.write(author_id: @author.id, at: Time.current, exercises: [ exercise_with([ number, pairs ], essential_id: fiche.id) ])
+
+        written = fiche.exercises.sole.questions.order(:position)
+        assert_equal [ BigDecimal("0.1"), nil ], written.map(&:numeric_tolerance)
+        assert_equal [ [ nil ], [ "tab\tA" ] ], written.map { it.answers.map(&:match_content) }
+      end
+
       # Un refus de la base pendant un COPY lève l'erreur qu'ActiveRecord aurait levée : le moteur rejoue alors le lot
       # élément par élément, et le cours refusé n'est jamais écrit à moitié.
       test "une contrainte refusée par COPY lève l'erreur d'ActiveRecord et n'écrit rien du cours" do

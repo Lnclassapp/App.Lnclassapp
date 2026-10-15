@@ -153,5 +153,5 @@ Alors il voit toujours les bonnes réponses, y compris pour les nouveaux types
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Requêtes SQL de `POST /sessions/:id/attempts` | à mesurer au Lot 0 | ≤ avant + 1 | |
+| Requêtes SQL de `POST /sessions/:id/attempts` | 22 (choix unique, mesuré au Lot 0) | ≤ avant + 1 | |
 | Poids JS ajouté (4 contrôleurs) | 0 | ≤ 8 Ko minifiés (budget ADR-0051) | |

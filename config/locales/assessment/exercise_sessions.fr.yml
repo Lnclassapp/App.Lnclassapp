@@ -1,9 +1,11 @@
-# Session d'exercice (AS-07 à AS-11) — Lot C2, UDR-0022 (épurée, UDR-0057) ; vocabulaire de l'UDR-0007
+# Session d'exercice (AS-07 à AS-11) — Lot C2, UDR-0022 (épurée, UDR-0057), UDR-0087 (mode concentré, nouveaux types) ; vocabulaire de l'UDR-0007
 fr:
   activemodel:
     attributes:
       dtos/assessment/attempt_input:
         answer_ids: "Propositions"
+        response_text: "Ta réponse"
+        display_order: "Ta réponse"
     errors:
       models:
         dtos/assessment/attempt_input:
@@ -11,6 +13,14 @@ fr:
             answer_ids:
               blank: "Sélectionne au moins une proposition."
               wrong_selection: "Coche le nombre de propositions demandé, parmi celles de la question."
+            response_text:
+              blank: "Écris ta réponse."
+              too_long: "Ta réponse est trop longue : %{count} caractères au plus."
+              blank_text: "Écris ta réponse dans le blanc."
+              not_a_number: "Écris un nombre, par exemple -3,5."
+            display_order:
+              wrong_order: "Range toutes les étapes, chacune une seule fois."
+              incomplete_pairs: "Relie chaque élément de gauche à un seul élément de droite."
             base:
               already_answered: "Tu as déjà répondu à cette question."
               session_closed: "Cette session est terminée."
@@ -23,6 +33,15 @@ fr:
       progress_bar:
         percent: "%{percent} %"
         label: "Progression de la session"
+        counter_label: "Question "
+        counter: "%{number}/%{total}"
+      quit_dialog:
+        trigger: "Quitter la session"
+        title: "Quitter la séance ?"
+        resume: "Ta progression est gardée. Tu pourras reprendre à la question %{number}."
+        done: "Ta séance est terminée : ton résultat t'attend."
+        continue: "Continuer l'exercice"
+        quit: "Quitter"
       question_card:
         number: "Question %{number} sur %{total}"
         # Plusieurs réponses seulement : les boutons radio portent déjà la consigne d'une réponse unique (UDR-0022, 2026-10-02).

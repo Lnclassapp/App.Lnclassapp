@@ -16,6 +16,17 @@ module Factories
       end
     end
 
+    # ADR-0091: a question of one of the four new types. answers: texts, or [left, right] for matching; all correct.
+    def create_kind_question(exercise:, question_type:, answers:, content: "Question #{factory_sequence}", numeric_tolerance: nil,
+                             explanation: nil, position: exercise.questions.maximum(:position).to_i + 1)
+      exercise.questions.create!(position:, content:, question_type:, numeric_tolerance:, explanation:).tap do |question|
+        answers.each_with_index do |answer, rank|
+          text, match_content = Array(answer)
+          question.answers.create!(position: rank + 1, content: text, match_content:, correct: true)
+        end
+      end
+    end
+
     # A completed session carries its score; a gap makes it a remediation session (ADR-0043).
     # Not create_session: ActionDispatch::Integration::Runner#create_session would hide it in controller and system tests.
     def create_exercise_session(student: create_student, exercise: create_exercise, status: "started", score_percent: nil, gap: nil,

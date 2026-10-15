@@ -219,6 +219,31 @@ module UseCases
         assert_equal [ [ "exercises[0].questions[1].answers[2].content", "schema" ] ], report.import_errors.map { it.values_at("path", "code") }
       end
 
+      # CA-14, ADR-0091 §4.5: tolerance and match are two optional keys of the v1 format; a negative margin or a long
+      # right-hand side is refused by the schema, at its path.
+      test "tolerance and match are read into the nodes; outside the choices every element is correct" do
+        node = Ports::Catalog::ContentTreeWriterPort::QuestionNode.from_import(
+          { "content" => " Relie. ", "question_type" => "matching", "tolerance" => 0.1,
+            "answers" => [ { "content" => " a ", "match" => " A " }, { "content" => "b", "correct" => false } ] }, position: 3
+        )
+
+        assert_equal [ 3, "Relie.", BigDecimal("0.1") ], [ node.position, node.content, node.numeric_tolerance ]
+        assert_equal [ [ "a", true, "A" ], [ "b", true, nil ] ], node.answers.map { [ it.content, it.correct, it.match_content ] }
+        choice = Ports::Catalog::ContentTreeWriterPort::QuestionNode.from_import(question("single_choice", false, true), position: 1)
+        assert_equal [ [ false, true ], nil ], [ choice.answers.map(&:correct), choice.numeric_tolerance ]
+      end
+
+      test "a negative tolerance or a too long match is refused by the schema, at its path" do
+        bad = exercise("Marge")
+        bad["questions"][0]["tolerance"] = -1
+        bad["questions"][1]["answers"][0]["match"] = "a" * 501
+
+        report = run_import(document(bad))
+
+        assert_equal [ [ "exercises[0].questions[0].tolerance", "schema" ], [ "exercises[0].questions[1].answers[0].match", "schema" ] ],
+                     report.import_errors.map { it.values_at("path", "code") }.sort
+      end
+
       test "a batch refused by the base is replayed exercise by exercise, and only the refused one is in error" do
         transaction = CountingTransaction.new
 

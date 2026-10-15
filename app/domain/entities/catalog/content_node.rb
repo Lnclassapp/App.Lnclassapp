@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::ContentNode
 # Rôle : validateurs des cours, fiches et exercices importés, partagés par les trois imports de contenu
-# ADR  : 0035, 0039
+# ADR  : 0035, 0039, 0091 (§4.5 : tolerance et match)
 module Entities
   module Catalog
     module ContentNode
@@ -35,7 +35,7 @@ module Entities
         errors + questions.each_with_index.flat_map { |question, index| question_errors(question, "#{path}.questions[#{index}]") }
       end
 
-      # L'ancienne application nomme is_correct ce que le schéma nomme correct.
+      # L'ancienne application nomme is_correct ce que le schéma nomme correct ; match est le côté droit d'une paire.
       def self.question_errors(hash, path)
         return [ error(path, "schema") ] unless hash.is_a?(Hash)
 
@@ -44,15 +44,19 @@ module Entities
 
         answers = raw_answers.each_with_index.map do |answer, index|
           Assessment::Answer.new(id: index, position: index, content: answer["content"],
-                                 correct: answer.fetch("correct") { answer["is_correct"] } == true)
+                                 correct: answer.fetch("correct") { answer["is_correct"] } == true,
+                                 match_content: answer["match"].to_s.strip.presence)
         end
         errors = text(hash, "content", nil, path)
         errors += raw_answers.each_with_index.flat_map { |answer, index| text(answer, "content", nil, "#{path}.answers[#{index}]") }
-        errors + structure_errors(hash["question_type"], answers, path)
+        errors + structure_errors(hash, answers, path)
       end
 
-      def self.structure_errors(question_type, answers, path)
-        rules = Assessment::Question.structure_errors_for(question_type:, answers:)
+      def self.structure_errors(hash, answers, path)
+        question_type = hash["question_type"]
+        tolerance = hash["tolerance"]
+        rules = Assessment::Question.structure_errors_for(question_type:, answers:, content: hash["content"],
+                                                          numeric_tolerance: tolerance.is_a?(::Numeric) ? BigDecimal(tolerance.to_s) : nil)
         return [ error("#{path}.question_type", "invalid_value", value: question_type) ] if rules == [ :unknown_question_type ]
 
         rules.map { |rule| error("#{path}.answers", "question_structure", rule:) }

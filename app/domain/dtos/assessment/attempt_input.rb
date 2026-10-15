@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Assessment::AttemptInput
-# Rôle : réponse d'un élève à une question : la session, la question et les propositions cochées (identifiants)
-# ADR  : 0026, 0054 · UDR : 0007, 0022
+# Rôle : réponse d'un élève à une question : propositions cochées, texte saisi, ou indices d'affichage (ordre, relier)
+# ADR  : 0026, 0054, 0091 (§4.4 : jamais d'identifiant pour l'ordre et relier) · UDR : 0007, 0022, 0087
 module Dtos
   module Assessment
     class AttemptInput
@@ -8,12 +8,16 @@ module Dtos
       include ActiveModel::Attributes
 
       INTEGER = /\A\d+\z/
+      # Borne de la colonne question_attempts.response_text.
+      RESPONSE_TEXT_MAX = 200
 
       attribute :session_public_id, :string
       attribute :question_id, :integer
 
       validates :session_public_id, :question_id, presence: true
-      validates :answer_ids, presence: true
+      # Une question à cocher n'envoie que answer_ids ; les trous et le nombre, response_text ; l'ordre et relier, display_order.
+      validates :answer_ids, presence: true, if: -> { response_text.nil? && display_order.empty? }
+      validates :response_text, presence: true, length: { maximum: RESPONSE_TEXT_MAX }, unless: -> { response_text.nil? }
 
       # Cases à cocher et boutons radio envoient attempt[answer_ids][] ; une valeur seule se lit comme une liste.
       def answer_ids=(value)
@@ -21,6 +25,20 @@ module Dtos
       end
 
       def answer_ids = @answer_ids || []
+
+      # nil quand le champ n'est pas posté : seule une question à texte l'envoie, même vide.
+      def response_text=(value)
+        @response_text = value&.to_s&.strip
+      end
+
+      attr_reader :response_text
+
+      # attempt[display_order][] : l'ordre compte, et une valeur illisible reste, pour que la liste soit refusée entière.
+      def display_order=(value)
+        @display_order = Array(value).map { it.to_s.match?(INTEGER) ? it.to_i : -1 }
+      end
+
+      def display_order = @display_order || []
     end
   end
 end

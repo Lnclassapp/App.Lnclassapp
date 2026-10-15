@@ -12,10 +12,14 @@
 | 2026-10-15 | La page poste des indices d'affichage, jamais des ids, pour l'ordre et relier | Les ids sont créés dans l'ordre des positions : ils révéleraient la solution | ADR-0091 §4.4 |
 | 2026-10-15 | Ordre ou relier faux : « Ton choix » ne dit pas quelle étape ou paire est fausse | Sinon l'élève retrouve la solution en recommençant ; confirmé par le porteur | UDR-0087 §3.5 |
 | 2026-10-15 | Nombre illisible : erreur de saisie, la question n'est pas comptée | Confirmé par le porteur | ADR-0091 §4.3 |
+| 2026-10-15 | Lot 0 : `AnswerShuffle.for(session_id:, …)` et non `session_public_id:` | L'ancien mélange tirait sa graine de l'id entier de la session (`session_id ^ question_id`) ; garder cette graine est la seule façon qu'une session ouverte se reprenne à l'identique | ADR-0091 §4.4 (écart de signature) |
+| 2026-10-15 | Lot 0 : chaque type de question est une classe à méthodes de classe (`structure_errors`, `well_formed?`, `correct?`, `INPUT`, `INVALID`) | `Question` délègue sans instancier ; `INPUT` dit au use case quoi lire (ids, texte, indices) et `INVALID` l'erreur à rendre | ADR-0091 §4.3 |
+| 2026-10-15 | Lot 0 : un type n'est proposé au formulaire de l'équipe que si son partial `kinds/_<type>_fields` existe | Les quatre lots livrent chacun leur type sans toucher au formulaire commun | ADR-0091 §4.5 |
 
 ## Ce qui a dérapé
 
-- …
+- Lot 0 : la construction d'une question importée était copiée dans les trois imports ; elle passe dans `ContentTreeWriterPort::QuestionNode.from_import` pour n'ajouter `tolerance` et `match` qu'une fois.
+- Lot 0 : le test de caractérisation de `ContentTreeWriter` compare des lignes entières ; les deux colonnes nouvelles en sont retirées et vérifiées vides à part, plutôt que de réécrire l'instantané de 380 Ko.
 
 ## Ce qu'on a appris sur la codebase
 
