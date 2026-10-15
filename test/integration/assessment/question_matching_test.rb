@@ -1,0 +1,91 @@
+require "test_helper"
+
+# Lot G (ADR-0091 §4.4, UDR-0087) : relier de bout en bout, sans navigateur. La gauche dans l'ordre des positions, la droite
+# mélangée ; la page poste, pour chaque élément de gauche, l'indice d'affichage choisi, jamais un id (CA-9). Trois paires
+# justes : juste (CA-8). « Ton choix » rend les paires de l'élève. L'équipe saisit trois paires (CA-13).
+class Assessment::QuestionMatchingTest < ActionDispatch::IntegrationTest
+  TURBO = { "Accept" => "text/vnd.turbo-stream.html, text/html, application/xhtml+xml" }.freeze
+  PAIRS = [ %w[3(x+1) 3x+3], %w[2(x-4) 2x-8], %w[5(2+x) 10+5x] ].freeze
+
+  setup do
+    @exercise = create_exercise(title: "Développer", questions: 0)
+    @question = create_kind_question(exercise: @exercise, question_type: "matching", answers: PAIRS, content: "Relie.")
+    create_kind_question(exercise: @exercise, question_type: "matching", answers: [ %w[a 1], %w[b 2], %w[c 3] ], content: "Encore.")
+    @student = create_student_for(@exercise.essential.course)
+    @session = create_exercise_session(student: @student, exercise: @exercise)
+    sign_in_as @student
+  end
+
+  # Pour chaque gauche, dans l'ordre, l'indice d'affichage de la droite voulue.
+  def indices(rights)
+    ids = @question.answers.order(:position).map(&:id)
+    shuffled = Entities::Assessment::AnswerShuffle.for(session_id: @session.id, question_id: @question.id, ids:)
+    rights.map { |right| shuffled.index(ids[PAIRS.index { it.last == right }]) }
+  end
+
+  def answer(rights) = post(exercise_session_attempts_path(@session.public_id), headers: TURBO,
+                                                                                 params: { attempt: { question_id: @question.id, display_order: indices(rights) } })
+
+  test "CA-9 : la gauche dans l'ordre, la droite mélangée, une liste par élément de gauche ; aucun id ni ordre révélateur" do
+    get exercise_session_path(@session.public_id)
+
+    assert_equal PAIRS.map(&:first), css_select("[data-assessment--matching-target=left] span.flex-1").map { it.text.strip }
+    assert_equal PAIRS.map(&:last).sort, css_select("[data-assessment--matching-target=right] span.flex-1").map { it.text.strip }.sort
+    assert_select "select[name='attempt[display_order][]'][required]", 3
+    answer_ids = Orm::Answer.where(question_id: @question.id).pluck(:id).map(&:to_s)
+    values = css_select("#attempt-form [value]").map { it["value"] } - [ @question.id.to_s ]
+    assert_empty answer_ids & values
+    assert_equal [ "", "0", "1", "2" ], css_select("select#attempt_display_order_0 option").map { it["value"].to_s }
+  end
+
+  test "CA-8 : trois paires justes, juste ; « Ton choix » rend les paires" do
+    answer PAIRS.map(&:last)
+
+    assert_equal [ true, @question.answers.order(:position).map(&:id) ], Orm::QuestionAttempt.sole.values_at(:correct, :selected_answer_ids)
+    assert_select "#feedback-card ul[aria-labelledby=feedback-selected] li", 3
+    assert_select "#feedback-card li", text: /3\(x\+1\)\s*→.*3x\+3/
+  end
+
+  test "une paire fausse : faux, sans rien marquer ; un élément de gauche non relié : 422, rien n'est écrit" do
+    post exercise_session_attempts_path(@session.public_id), headers: TURBO,
+                                                             params: { attempt: { question_id: @question.id, display_order: [ "", "0", "1" ] } }
+    assert_response :unprocessable_entity
+    assert_equal 0, Orm::QuestionAttempt.count
+
+    answer [ "2x-8", "3x+3", "10+5x" ]
+    assert_equal false, Orm::QuestionAttempt.sole.correct
+    assert_select "#feedback-card li", text: /3\(x\+1\)\s*→.*2x-8/
+    assert_select "#feedback-card [data-correct]", 0
+  end
+
+  test "CA-13 : l'équipe crée un relier de trois paires, enregistré et jouable ; deux côtés droits égaux sont refusés" do
+    essential = create_essential
+    sign_in_as create_team_member
+    params = ->(pairs) do
+      { exercise: { title: "Relier", exercise_type: "fixation", questions_attributes: {
+        "0" => { content: "Relie.", question_type: "matching",
+                 answers_attributes: pairs.each_with_index.to_h { |(left, right), index| [ index.to_s, { content: left, match_content: right, correct: "1" } ] } }
+      } } }
+    end
+
+    post teams_essential_exercises_path(essential.slug), params: params.([ %w[a 1], %w[b 1], %w[c 3] ]), as: :turbo_stream
+    assert_response :unprocessable_entity
+
+    post teams_essential_exercises_path(essential.slug), params: params.([ %w[a 1], %w[b 2], %w[c 3] ]), as: :turbo_stream
+    question = Orm::Exercise.find_by!(title: "Relier").questions.sole
+    assert_equal [ %w[a 1], %w[b 2], %w[c 3] ], question.answers.order(:position).pluck(:content, :match_content)
+    assert_empty Repositories::Assessment::ExerciseRepository.new.find(id: question.exercise_id).questions.sole.structure_errors
+  end
+
+  # UDR-0087 §3.7 : l'aide des trois imports montre un exemple de chaque nouveau type, avec tolerance et match.
+  test "l'aide de l'import montre les quatre nouveaux types" do
+    sign_in_as create_team_member
+
+    %w[exercises essentials course_tree].each do |kind|
+      get new_teams_import_path(kind:)
+      assert_select "#import-help-question-kinds pre", 4
+      assert_select "#import-help-question-kinds", text: /"tolerance": 0.1/
+      assert_select "#import-help-question-kinds", text: /"match": "3x \+ 3"/
+    end
+  end
+end

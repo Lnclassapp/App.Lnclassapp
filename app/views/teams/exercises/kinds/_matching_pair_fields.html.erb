@@ -1,0 +1,18 @@
+<%# 🌐 UI · teams/exercises/kinds/_matching_pair_fields — une paire d'un relier : gauche, droite, « Retirer » %>
+<%# Rôle : content à gauche, match_content à droite, « correcte » posé à 1 ; ids suffixés par le type %>
+<%# ADR  : 0091 §4.2 · UDR : 0017, 0087 §3.7 · Stimulus : teams--nested-form %>
+<%# locals: (form:) -%>
+<% scope = "teams.exercises.kinds.matching" %>
+<% classes = class_names(ComponentsHelper::FIELD_INPUT, "min-h-tap min-w-0 flex-1 basis-40", ComponentsHelper::FIELD_STATES[:valid]) %>
+<div data-nested-answer class="flex flex-wrap items-center gap-2">
+  <%= form.hidden_field :correct, value: "1", id: nil %>
+  <%= form.label :content, t("#{scope}.left"), for: "#{form.field_id(:content)}_matching", class: "sr-only" %>
+  <%= form.text_field :content, id: "#{form.field_id(:content)}_matching", required: true, autocomplete: "off",
+                                maxlength: Dtos::Assessment::AnswerInput::CONTENT_MAX, placeholder: t("#{scope}.left"), class: classes %>
+  <span aria-hidden="true" class="text-mute">→</span>
+  <%= form.label :match_content, t("#{scope}.right"), for: "#{form.field_id(:match_content)}_matching", class: "sr-only" %>
+  <%= form.text_field :match_content, id: "#{form.field_id(:match_content)}_matching", required: true, autocomplete: "off",
+                                      maxlength: Dtos::Assessment::AnswerInput::CONTENT_MAX, placeholder: t("#{scope}.right"), class: classes %>
+  <%= ui_button variant: :ghost, size: :sm, icon: "x-mark", "aria-label": t("teams.exercises.answer_fields.remove"),
+                data: { action: "teams--nested-form#remove" } %>
+</div>

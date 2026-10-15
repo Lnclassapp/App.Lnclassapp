@@ -233,6 +233,22 @@ module UseCases
         assert_equal [ [ false, true ], nil ], [ choice.answers.map(&:correct), choice.numeric_tolerance ]
       end
 
+      test "the four new question types are imported when well formed" do
+        questions = [
+          { "content" => "La capitale est ___ .", "question_type" => "fill_blank", "answers" => [ { "content" => "Abidjan" } ] },
+          { "content" => "Combien ?", "question_type" => "numeric", "answers" => [ { "content" => "-2" } ] },
+          { "content" => "Range.", "question_type" => "ordering", "answers" => %w[A B C].map { { "content" => it } } },
+          { "content" => "Relie.", "question_type" => "matching",
+            "answers" => %w[a b c].map { { "content" => it, "match" => it.upcase } } }
+        ]
+
+        report = run_import(document(exercise("Nouveaux", "questions" => questions)))
+
+        assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count)
+        assert_equal %w[fill_blank numeric ordering matching], Orm::Question.order(:position).pluck(:question_type)
+        assert_equal %w[A B C], Orm::Question.find_by!(question_type: "matching").answers.order(:position).pluck(:match_content)
+      end
+
       # CA-14: a numeric question with « tolerance »: 0.1 is created with its margin.
       test "a numeric question is imported with its tolerance" do
         numeric = exercise("Nombre", "questions" => [ { "content" => "Calcule 7 ÷ 2.", "question_type" => "numeric", "tolerance" => 0.1,
