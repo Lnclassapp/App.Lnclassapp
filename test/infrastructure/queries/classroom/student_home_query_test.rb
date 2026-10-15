@@ -56,11 +56,12 @@ module Queries
         create_gap(student: @student, essential: @essential)
 
         row = home
+        recent = StudentHomeQuery.new.recent_sessions(student_id: @student.id)
 
         assert_equal [ "Mon niveau" ], titles(row)
         # create_gap ouvre aussi une session terminée, sur un exercice de sa fiche : seule celle d'un autre niveau disparaît.
-        assert_includes row.recent_sessions.map(&:exercise_title), "Mon niveau"
-        assert_not_includes row.recent_sessions.map(&:exercise_title), "Autre niveau"
+        assert_includes recent.map(&:exercise_title), "Mon niveau"
+        assert_not_includes recent.map(&:exercise_title), "Autre niveau"
         assert_equal [ @essential.slug ], row.pending_gaps.map(&:essential_slug)
       end
 
@@ -206,7 +207,8 @@ module Queries
                      fresh.to_h.values_at(:best_score_percent, :completed_count, :badge_level, :started_session_public_id)
       end
 
-      test "the 10 last completed sessions, newest first, with their score" do
+      # Lues seules par le cadre différé de l'activité, avec leur matière (pastille illustrée, UDR-0084 §3.8).
+      test "the 10 last completed sessions, newest first, with their score and their subject" do
         exercise = create_exercise(essential: @essential, title: "Méiose")
         11.times do |index|
           create_exercise_session(student: @student, exercise:, status: "completed", score_percent: index * 5,
@@ -215,14 +217,27 @@ module Queries
         create_exercise_session(student: @student, exercise:)
         create_exercise_session(exercise:, status: "completed")
 
-        sessions = home.recent_sessions
+        sessions = StudentHomeQuery.new.recent_sessions(student_id: @student.id)
 
         assert_equal 10, sessions.size
         assert_equal (1..10).map { it * 5 }.reverse, sessions.map(&:score_percent)
-        assert_equal [ "Méiose" ], sessions.map(&:exercise_title).uniq
+        assert_equal [ [ "Méiose", "SVT", "svt" ] ],
+                     sessions.map { it.to_h.values_at(:exercise_title, :material_name, :material_slug) }.uniq
         assert_equal Orm::ExerciseSession.find_by(score_percent: 50, student: @student).public_id, sessions.first.public_id
-        assert_equal sessions, StudentHomeQuery.new.recent_sessions(student_id: @student.id)
         assert_empty StudentHomeQuery.new.recent_sessions(student_id: create_student.id)
+      end
+
+      # Chantier accueil-eleve, PRD §7 : la page ne lit plus l'activité, que le cadre différé demande à part.
+      test "the home no longer reads the recent sessions" do
+        create_exercise_session(student: @student, exercise: create_exercise(essential: @essential), status: "completed",
+                                score_percent: 80)
+        queries = []
+        counter = ->(*, payload) { queries << payload[:sql] unless payload[:name] == "SCHEMA" }
+
+        ActiveSupport::Notifications.subscribed(counter, "sql.active_record") { home }
+
+        assert_not_includes StudentHomeQuery::Row.members, :recent_sessions
+        assert_empty queries.grep(/completed_at/)
       end
 
       test "the pending gaps of the student, with their published sheet" do
@@ -259,7 +274,7 @@ module Queries
       test "an empty home" do
         row = home
 
-        assert_equal [ [], [], [], [] ], row.to_h.values_at(:assigned_exercises, :recent_sessions, :pending_gaps, :late_material_slugs)
+        assert_equal [ [], [], [] ], row.to_h.values_at(:assigned_exercises, :pending_gaps, :late_material_slugs)
         assert_equal %w[svt], row.subjects.map(&:slug)
       end
 

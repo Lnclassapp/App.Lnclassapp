@@ -1,0 +1,30 @@
+<%# 🌐 UI · classroom/student_homes/_todo — « À faire » de l'accueil élève, puis les fiches à revoir %>
+<%# Rôle : le travail de l'enseignant (en retard, puis par date limite) ; sans lui, la carte du jour si `daily:` est passé (lot C), sinon l'état vide %>
+<%# ADR  : 0043, 0072, 0089 · UDR : 0057 R1/R3, 0058 §3.3, 0062 §3.2, 0084 §3.5 (priorité stricte), §3.6 %>
+<%# locals: (exercises:, gaps:, icon:, daily: nil) -%>
+<%= ui_card title: t("classroom.student_homes.show.todo_title"), subtitle: t("classroom.student_homes.show.todo_subtitle"),
+            id: "student_home_exercises", data: (ui_reveal_data if exercises.any?) do |card| %>
+  <% if exercises.any? %>
+    <% card.actions do %>
+      <%= ui_badge t("classroom.student_homes.show.todo_progress", done: exercises.count { it.completed_count.positive? },
+                                                                   total: exercises.size),
+                   tone: :brand, size: :sm %>
+    <% end %>
+    <%# L'ordre de StudentHomeQuery (UDR-0062 §3.2) : en retard et dus d'abord, par date limite ; les terminés à la fin. %>
+    <ul class="divide-y divide-line">
+      <% exercises.each_with_index do |exercise, index| %>
+        <%= render "classroom/student_homes/assigned_exercise", exercise:, index: %>
+      <% end %>
+    </ul>
+    <%= ui_reveal_more exercises.size %>
+  <% elsif daily %>
+    <%# ADR-0089 §4.1 : seulement sans travail de l'enseignant ; le partial et `daily:` arrivent avec le lot C, rien avant. %>
+    <%= render "classroom/student_homes/daily_exercise", daily: %>
+  <% else %>
+    <%= ui_empty_state title: t("classroom.student_homes.show.todo_empty"),
+                       description: t("classroom.student_homes.show.todo_empty_description"), icon: %>
+  <% end %>
+<% end %>
+<% if gaps.any? %>
+  <%= render "classroom/student_homes/pending_gaps", gaps: %>
+<% end %>
