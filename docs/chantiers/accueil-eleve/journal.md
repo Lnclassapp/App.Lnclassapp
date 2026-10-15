@@ -17,6 +17,7 @@
 | 2026-10-15 | Lot E : le sous-titre de « À faire » devient « Ce qui t'attend aujourd'hui » quand la carte du jour s'affiche | « Les exercices assignés à ta classe » est faux pour un exercice proposé par Lnclass | Non |
 | 2026-10-15 | Lot E : la page en cours garde `bg-brand-soft` au focus dans le menu de l'avatar, avec un anneau inset au focus clavier | Le gris de focus de `ui-menu-item-default` effaçait la surbrillance à l'ouverture | Non |
 | 2026-10-15 | Lot E : l'avatar de l'élève dans le menu de gauche (≥ 1 024 px) prend la couleur de l'en-tête (graine `public_id`) | Le passage en navigateur a montré deux couleurs pour le même élève (violet à gauche, orange en haut) | Non (UDR-0084 §3.4) |
+| 2026-10-15 | Une remédiation terminée aujourd'hui ne met pas la carte en « Bravo, à demain ! » (`kind: "standard"`, comme « fait seul ») ; tests de portée de `DailyExerciseQuery` (autre niveau, autre série, classe quittée, archivée) | Revues `silent-failure-hunter` et `security-reviewer` de la PR | Non |
 
 ## Ce qui a dérapé
 

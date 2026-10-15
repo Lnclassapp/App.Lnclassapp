@@ -61,7 +61,8 @@ module Queries
       def candidates(student_id, today, day_start)
         sessions = Orm::ExerciseSession.where(student_id:, status: "completed").where("exercise_sessions.exercise_id = exercises.id")
         first_done = sessions.select("MIN(exercise_sessions.started_at)")
-        done_today = sessions.where(classroom_assignment_id: nil, started_at: day_start...(day_start + 1.day))
+        # Une remédiation (ADR-0043) n'est pas l'exercice du jour fait seul : elle ne déclenche pas « Bravo, à demain ! ».
+        done_today = sessions.where(kind: "standard", classroom_assignment_id: nil, started_at: day_start...(day_start + 1.day))
         Orm::Exercise.joins(essential: { course: %i[material level] })
                      .where(status: "published", essentials: { status: "published" }, courses: { status: "published" })
                      .where(exists(audience(student_id, today))).order(*CATALOG_ORDER)
