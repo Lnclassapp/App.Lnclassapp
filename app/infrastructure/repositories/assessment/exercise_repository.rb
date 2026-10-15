@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::ExerciseRepository
 # Rôle : traduit Orm::Exercise, ses questions et propositions ↔ Entities::Assessment::Exercise, avec la publication des parents
-# ADR  : 0035, 0036, 0039, 0054
+# ADR  : 0035, 0036, 0039, 0054, 0091
 module Repositories
   module Assessment
     class ExerciseRepository
@@ -83,10 +83,11 @@ module Repositories
       def write_questions(exercise_id, questions)
         questions.each_with_index do |question, index|
           record = Orm::Question.create!(exercise_id:, position: question.position || index + 1, content: question.content,
-                                         explanation: question.explanation, question_type: question.question_type)
+                                         explanation: question.explanation, question_type: question.question_type,
+                                         numeric_tolerance: question.numeric_tolerance)
           question.answers.each_with_index do |answer, rank|
             Orm::Answer.create!(question_id: record.id, position: answer.position || rank + 1, content: answer.content,
-                                correct: answer.correct)
+                                correct: answer.correct, match_content: answer.match_content)
           end
         end
       end
@@ -104,9 +105,10 @@ module Repositories
       def map_question(record)
         Entities::Assessment::Question.new(
           id: record.id, position: record.position, content: record.content, explanation: record.explanation,
-          question_type: record.question_type,
+          question_type: record.question_type, numeric_tolerance: record.numeric_tolerance,
           answers: record.answers.map do |answer|
-            Entities::Assessment::Answer.new(id: answer.id, position: answer.position, content: answer.content, correct: answer.correct)
+            Entities::Assessment::Answer.new(id: answer.id, position: answer.position, content: answer.content, correct: answer.correct,
+                                             match_content: answer.match_content)
           end
         )
       end

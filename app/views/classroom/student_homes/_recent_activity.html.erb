@@ -21,9 +21,10 @@
                 <span class="mt-0.5 block text-xs text-mute"><%= session.material_name %></span>
               </span>
               <span class="shrink-0 text-right">
-                <%# Grading::MASTERY_THRESHOLD (70 %) = 14/20 : en vert au-dessus, à l'encre dessous ; jamais en rouge ni en ambre. %>
+                <%# Vert dès « 14/20 » affiché (MASTERY_THRESHOLD sur 20, 68 % compris, UDR-0090 §4), à l'encre dessous ; jamais en rouge ni en ambre. %>
+                <% grading = Entities::Assessment::Grading %>
                 <span data-grade class="<%= class_names("block font-display text-base font-extrabold",
-                                                        session.score_percent >= Entities::Assessment::Grading::MASTERY_THRESHOLD ? "text-success" : "text-ink") %>"><%= grade_label(session.score_percent) %></span>
+                                                        grading.grade_on_20(session.score_percent) >= grading.grade_on_20(grading::MASTERY_THRESHOLD) ? "text-success" : "text-ink") %>"><%= grade_label(session.score_percent) %></span>
                 <span class="block text-xs text-mute"><%= t(".completed", time: time_ago_in_words(session.completed_at)) %></span>
               </span>
             <% end %>

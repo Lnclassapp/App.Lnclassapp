@@ -1,0 +1,28 @@
+<%# 🌐 UI · assessment/exercise_sessions/kinds/_choice — Vrai / Faux, choix unique, 2 ou 3 propositions correctes %>
+<%# Rôle : l'énoncé en légende, puis une grande carte par proposition, lettre A, B, C… dans l'ordre mélangé de la session %>
+<%# ADR  : 0054, 0091 · UDR : 0022, 0087 §3.4 · le bouton radio ou la case est la pastille de la lettre ; « Coche N propositions. » si plusieurs %>
+<%# locals: (f:, question:) -%>
+<legend class="font-display text-xl font-extrabold text-balance whitespace-pre-line text-ink"><%= question.content %></legend>
+<% if question.multiple? %>
+  <p class="text-sm text-mute" data-hint><%= t("assessment.exercise_sessions.question_card.hint", count: question.expected_count) %></p>
+<% end %>
+<div class="space-y-3" <%= tag.attributes(data: { expected_count: (question.expected_count if question.multiple?) }) %>>
+  <% question.answers.each do |answer| %>
+    <% letter = ("A".ord + answer.index).chr %>
+    <label class="flex min-h-tap cursor-pointer items-center gap-3 rounded-ln border-2 border-line bg-white px-4 py-3 transition hover:bg-mist has-checked:border-brand-strong has-checked:bg-brand-soft">
+      <%# La pastille est le champ lui-même : cliquable et visible pour tous les outils ; sa lettre passe dessus sans intercepter le clic. %>
+      <span class="relative grid shrink-0 place-items-center">
+        <% if question.multiple? %>
+          <%= check_box_tag "attempt[answer_ids][]", answer.id, false, id: "attempt_answer_#{answer.id}",
+                            data: { assessment__answer_target: "choice" },
+                            class: "peer size-8 cursor-pointer appearance-none rounded-sm border border-line bg-paper checked:border-brand-strong checked:bg-brand-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
+        <% else %>
+          <%= radio_button_tag "attempt[answer_ids][]", answer.id, false, id: "attempt_answer_#{answer.id}", required: true,
+                               class: "peer size-8 cursor-pointer appearance-none rounded-full border border-line bg-paper checked:border-brand-strong checked:bg-brand-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
+        <% end %>
+        <span class="pointer-events-none absolute text-sm font-bold text-ink peer-checked:text-white" aria-hidden="true"><%= letter %></span>
+      </span>
+      <span class="min-w-0 flex-1 font-medium text-ink"><%= answer.content %></span>
+    </label>
+  <% end %>
+</div>

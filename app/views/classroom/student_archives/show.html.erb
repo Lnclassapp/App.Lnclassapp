@@ -1,54 +1,75 @@
-<%# 🌐 UI · classroom/student_archives/show — « Mon historique » de l'élève, même sans classe active (lot R) %>
-<%# Rôle : ses classes (établissement, année), puis ses exercices terminés et leur note ; 3 lignes puis « Voir plus », aucun bouton %>
-<%# ADR  : 0036, 0040 · UDR : 0006, 0057, 0058 §3.3 (une seule forme de la note), charte §5 (note jamais en ambre) · pas de lien vers un résultat hors niveau (UDR-0013) %>
+<%# 🌐 UI · classroom/student_archives/show — « Mon historique » de l'élève, même sans classe active, redessiné (historique-eleve) %>
+<%# Rôle : carte bleue du total, exercices terminés par mois (3 lignes puis « Voir plus » par 10), puis ses classes ; deux colonnes dès 1 024 px %>
+<%# ADR  : 0036, 0040 · UDR : 0006, 0057, 0084, 0090 · aucune ligne n'est un lien (UDR-0013), aucun filtre %>
 <% page_title t(".page_title") %>
-<%= ui_page_header title: t(".title"), back: { label: t(".back"), href: student_home_path } %>
+<% count = @archive.completed_count %>
 
-<%# grid-cols-1 = minmax(0, 1fr) : une ligne longue (titre, bande de cartes) ne peut plus élargir la colonne, ni la page. %>
-<div class="grid grid-cols-1 gap-5">
-  <%= ui_card title: t(".classrooms.title"), icon: "academic-cap", id: "student_archive_classrooms" do %>
-    <% if @archive.classrooms.empty? %>
-      <%= ui_empty_state title: t(".classrooms.empty"), description: t(".classrooms.empty_description"), icon: "academic-cap" %>
-    <% else %>
-      <%= tag.div(class: "space-y-3", data: ui_reveal_data) do %>
-        <ul class="-mx-4 divide-y divide-line border-t border-line sm:-mx-6">
-          <% @archive.classrooms.each_with_index do |classroom, index| %>
-            <%= tag.li class: "flex items-center gap-3 px-4 py-3 sm:px-6", **ui_reveal_item(index) do %>
-              <div class="min-w-0 flex-1">
-                <p class="truncate font-medium text-ink"><%= classroom.name %></p>
-                <p class="line-clamp-2 text-sm text-mute"><%= t(".classrooms.detail", level: classroom.level_name, school: classroom.school_name) %></p>
-              </div>
-              <span class="shrink-0 text-sm text-mute tabular-nums"><%= classroom.school_year %></span>
+<%# UDR-0090 §3.4 : une colonne pleine, puis 720 px centrés dès 700 px ; dès 1 024 px, toute la largeur, sur trois tiers. %>
+<div id="student_archive" class="mx-auto w-full max-w-180 lg:max-w-none">
+  <%= ui_page_header title: t(".title"), back: { label: t(".back"), href: student_home_path } %>
+
+  <%# grid-cols-1 = minmax(0, 1fr) : une ligne longue ne peut plus élargir la colonne, ni la page. %>
+  <div class="grid grid-cols-1 gap-5 lg:grid-cols-3 lg:items-start">
+    <%# Le texte reste sur brand-strong (AA avec text-white, dans les deux thèmes), comme la carte « Ma classe » de l'accueil. %>
+    <div id="student_archive_summary"
+         class="flex items-center gap-4 rounded-card bg-linear-to-br from-brand-strong from-60% to-brand p-5 text-white shadow-pop sm:p-6 lg:col-span-3">
+      <span class="grid size-14 shrink-0 place-items-center rounded-card bg-white text-brand-strong" aria-hidden="true">
+        <%= ui_icon "check-circle", size: :xl %>
+      </span>
+      <div class="min-w-0">
+        <% if count.zero? %>
+          <p class="font-display text-xl leading-tight font-extrabold"><%= t(".summary.none") %></p>
+        <% else %>
+          <p class="flex flex-wrap items-baseline gap-x-2">
+            <span class="font-display text-4xl leading-none font-extrabold tabular-nums"><%= number_with_delimiter(count) %></span>
+            <span class="font-display text-lg font-bold"><%= t(".summary.count", count:) %></span>
+          </p>
+        <% end %>
+        <p class="mt-1 text-sm"><%= t(".summary.note") %></p>
+      </div>
+    </div>
+
+    <%= ui_card title: t(".results.title"), id: "student_archive_results", class: "lg:col-span-2" do %>
+      <% if @archive.results.empty? %>
+        <%= ui_empty_state title: t(".results.empty"), description: t(".results.empty_description"), icon: "clipboard-document-check" %>
+      <% else %>
+        <%= tag.div(class: "space-y-3", data: ui_reveal_data(step: 10)) do %>
+          <%# Du plus récent au plus ancien : une section par mois, l'index de chaque ligne compté sur toute la liste. %>
+          <% months = @archive.results.each_with_index.slice_when { |(a, _), (b, _)| a.completed_at.beginning_of_month != b.completed_at.beginning_of_month } %>
+          <div class="space-y-2">
+            <% months.each do |rows| %>
+              <%= render "month", month: rows.first.first.completed_at.to_date, rows: %>
             <% end %>
-          <% end %>
-        </ul>
-        <%= ui_reveal_more @archive.classrooms.size %>
+          </div>
+          <%= ui_reveal_more @archive.results.size %>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
 
-  <%= ui_card title: t(".results.title"), icon: "clipboard-document-check", id: "student_archive_results" do %>
-    <% if @archive.results.empty? %>
-      <%= ui_empty_state title: t(".results.empty"), description: t(".results.empty_description"), icon: "clipboard-document-check" %>
-    <% else %>
-      <%= tag.div(class: "space-y-3", data: ui_reveal_data(step: 10)) do %>
-        <ul class="-mx-4 divide-y divide-line border-t border-line sm:-mx-6">
-          <% @archive.results.each_with_index do |result, index| %>
-            <%= tag.li class: "flex items-center gap-3 px-4 py-3 sm:px-6", **ui_reveal_item(index) do %>
-              <div class="min-w-0 flex-1 space-y-1">
-                <p class="line-clamp-2 font-medium break-words text-ink"><%= result.exercise_title %></p>
-                <p class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-mute">
-                  <%= ui_subject_badge result.material_name, category: result.material_category, size: :sm %>
-                  <span><%= l(result.completed_at.to_date, format: :long) %></span>
-                </p>
-              </div>
-              <span class="<%= class_names("grid size-12 shrink-0 place-items-center rounded-ln text-xs font-bold",
-                                           result.score_percent >= Entities::Assessment::Grading::PASS_THRESHOLD ? "bg-success-soft text-success" : "bg-mist text-ink") %>"><%= grade_label(result.score_percent) %></span>
+    <%= ui_card title: t(".classrooms.title"), id: "student_archive_classrooms" do %>
+      <% if @archive.classrooms.empty? %>
+        <%= ui_empty_state title: t(".classrooms.empty"), description: t(".classrooms.empty_description"), icon: "academic-cap" %>
+      <% else %>
+        <%= tag.div(class: "space-y-3", data: ui_reveal_data) do %>
+          <ul class="divide-y divide-line">
+            <% @archive.classrooms.each_with_index do |classroom, index| %>
+              <%= tag.li class: "flex items-center gap-3 py-3", **ui_reveal_item(index) do %>
+                <span class="grid size-11 shrink-0 place-items-center rounded-ln bg-brand-soft text-brand-strong" aria-hidden="true">
+                  <%= ui_icon "academic-cap", size: :md %>
+                </span>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-baseline justify-between gap-3">
+                    <p class="truncate font-display font-bold text-ink"><%= classroom.name %></p>
+                    <span class="shrink-0 text-sm text-mute tabular-nums"><%= classroom.school_year %></span>
+                  </div>
+                  <p class="line-clamp-2 text-sm text-mute"><%= t(".classrooms.detail", level: classroom.level_name, school: classroom.school_name) %></p>
+                </div>
+              <% end %>
             <% end %>
-          <% end %>
-        </ul>
-        <%= ui_reveal_more @archive.results.size %>
+          </ul>
+          <%= ui_reveal_more @archive.classrooms.size %>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>

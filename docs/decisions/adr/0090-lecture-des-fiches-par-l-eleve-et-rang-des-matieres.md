@@ -45,7 +45,7 @@ La page « Cours » de l'élève est redessinée (memo `cours-eleve`, 2026-10-15
 | B — Table `essential_reads` (élève, fiche, première et dernière ouverture) | « Commencé », « tout lu » et « dernière fiche » se déduisent à la lecture et restent justes quand le cours change | Retenue |
 | C — Déduire la lecture des sessions d'exercice de la fiche | Aucune table | Un élève peut lire une fiche sans faire d'exercice ; « Reprendre » mentirait |
 | D — Garder `SUBJECT_ORDER` et l'appliquer au catalogue par un `CASE` SQL | Pas de migration | Deux copies de l'ordre à tenir à jour ; une matière ajoutée par l'import ne peut pas être rangée sans déploiement |
-| E — Colonne `materials.position` | Une source, triable, modifiable sans déploiement | Retenue |
+| E — Colonne `materials.position` | Une source, triable, en base (un écran pourra la régler sans déploiement) | Retenue |
 
 ## 4. Décision
 
@@ -78,7 +78,7 @@ La page « Cours » de l'élève est redessinée (memo `cours-eleve`, 2026-10-15
 ### 4.2 `materials.position`
 
 - **Colonne** : `position` integer, nullable, sans unicité. Les matières à égalité, ou sans rang, se départagent par `name`.
-- **Remplissage** dans la migration, par slug :
+- **Remplissage** par slug, d'après la table partagée `Repositories::Catalog::ProgramOrder` (lue par la migration et par la création d'une matière) :
   1. `mathematiques`, `maths` ;
   2. `physique-chimie`, `pc` ;
   3. `svt` ;
@@ -87,6 +87,8 @@ La page « Cours » de l'élève est redessinée (memo `cours-eleve`, 2026-10-15
   6. `edhc` ;
   7. `philosophie`, `philo`.
 - **Les autres matières** restent à `NULL` et viennent après (`NULLS LAST`).
+- **Matière créée plus tard** : `TaxonomyRepository#create_material` pose le rang d'après la même table (slug tiré du nom) ; une matière inconnue reste à `NULL`.
+- **Pas d'écran aujourd'hui** : le rang ne se modifie pas à l'écran ; un écran de l'équipe viendra plus tard (dette notée dans le journal du chantier `cours-eleve`).
 - **Lecteurs** :
   - `StudentHomeQuery#subjects` ;
   - `DailyExerciseQuery` (ADR-0089) ;

@@ -1,0 +1,20 @@
+<%# 🌐 UI · teams/exercises/kinds/_matching_fields — relier : trois à cinq paires gauche–droite %>
+<%# Rôle : rendu par _question_fields dans le panneau du type ; chaque paire est un élément (content à gauche, match_content à droite) %>
+<%# ADR  : 0091 §4.2, §4.5 · UDR : 0017, 0087 §3.7 · Stimulus : teams--nested-form %>
+<%# locals: (form:) -%>
+<% scope = "teams.exercises.kinds.matching" %>
+<div class="space-y-2" data-controller="teams--nested-form" data-teams--nested-form-placeholder-value="NEW_ANSWER"
+     data-teams--nested-form-item-value="[data-nested-answer]">
+  <p class="text-sm font-medium text-ink"><%= t("#{scope}.pairs") %></p>
+  <div data-teams--nested-form-target="list" class="space-y-2">
+    <%= form.fields_for :answers do |answer_form| %>
+      <%= render "teams/exercises/kinds/matching_pair_fields", form: answer_form %>
+    <% end %>
+  </div>
+  <template data-teams--nested-form-target="template">
+    <%= form.fields_for :answers, Dtos::Assessment::AnswerInput.new, child_index: "NEW_ANSWER" do |answer_form| %>
+      <%= render "teams/exercises/kinds/matching_pair_fields", form: answer_form %>
+    <% end %>
+  </template>
+  <%= ui_button t("#{scope}.add"), variant: :ghost, size: :sm, icon: "plus", data: { action: "teams--nested-form#add" } %>
+</div>

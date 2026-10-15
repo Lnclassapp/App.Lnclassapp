@@ -58,6 +58,7 @@ Ce qui existe déjà :
 Pour un élève et un jour `D` (date d'Abidjan) :
 
 1. **Matières** : l'union des matières de ses classes actives de l'année, ordonnée par `SUBJECT_ORDER` (puis par nom).
+   *Note du 2026-10-15 : l'ordre se lit désormais dans `materials.position` (`NULLS LAST`, puis le nom), qui remplace `SUBJECT_ORDER` ([ADR-0090](0090-lecture-des-fiches-par-l-eleve-et-rang-des-matieres.md) §4.2) ; l'ordre est le même.*
 2. **Candidats d'une matière** : ses exercices publiés (exercice, fiche et cours publiés, ADR-0035) pour les niveaux et séries de l'élève (`StudentAudienceQuery`), dans l'ordre du catalogue (niveau, puis nom du cours, comme `CourseCatalogQuery`), puis `essentials.position`, puis `exercises.position`, en excluant :
    - les exercices dont l'élève a une session terminée **commencée avant le début de `D`** ;
    - les exercices qui ont une assignation active dans une de ses classes : ceux-là sont du travail de l'enseignant (priorité stricte), et le rattachement automatique les sortirait de toute façon de « fait seul ».

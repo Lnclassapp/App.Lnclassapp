@@ -79,6 +79,20 @@ module Queries
         assert_empty row.questions
       end
 
+      # CA-16, ADR-0091 §4.4 : l'élève voit l'énoncé et le type, ni valeur ni ordre ; l'enseignant voit la solution.
+      test "nouveaux types : aucun élément sans reveal ; avec reveal, les éléments, la marge et le côté droit des paires" do
+        number = create_kind_question(exercise: @exercise, question_type: "numeric", answers: [ "3,5" ], numeric_tolerance: BigDecimal("0.1"))
+        pairs = create_kind_question(exercise: @exercise, question_type: "matching", answers: [ %w[a 1], %w[b 2], %w[c 3] ])
+
+        hidden = detail(reveal: false).questions.last(2)
+        assert_equal [ [], [] ], hidden.map(&:answers)
+        assert_equal [ nil, %w[numeric matching] ], [ hidden.first.numeric_tolerance, hidden.map(&:kind_name) ]
+
+        shown = detail(reveal: true).questions.last(2)
+        assert_equal [ number.id, BigDecimal("0.1"), [ "3,5" ] ], [ shown.first.id, shown.first.numeric_tolerance, shown.first.answers.map(&:content) ]
+        assert_equal [ pairs.id, %w[1 2 3] ], [ shown.last.id, shown.last.answers.map(&:match_content) ]
+      end
+
       test "un exercice inconnu donne nil" do
         assert_nil detail(reveal: true, public_id: "inconnu")
       end

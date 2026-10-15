@@ -66,7 +66,7 @@ class Assessment::StudentProgressTest < ApplicationSystemTestCase
   end
 
   def assert_progress_sentence(sentence)
-    assert_selector "#session_result #session_progress", exact_text: sentence
+    assert_selector "#session_progress", exact_text: sentence
     assert_no_forbidden_words
   end
 

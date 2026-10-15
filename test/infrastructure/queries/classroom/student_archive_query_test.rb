@@ -45,9 +45,11 @@ module Queries
         finished(title: "Autre élève", completed_at: newer, student: create_student)
 
         assert_equal [ StudentArchiveQuery::ResultRow.new(exercise_title: "Équations", material_name: "Mathématiques",
-                                                          material_category: "science", score_percent: 80, completed_at: newer),
+                                                          material_slug: @maths.slug, material_category: "science",
+                                                          score_percent: 80, completed_at: newer),
                        StudentArchiveQuery::ResultRow.new(exercise_title: "Fractions", material_name: "Mathématiques",
-                                                          material_category: "science", score_percent: 45, completed_at: older) ],
+                                                          material_slug: @maths.slug, material_category: "science",
+                                                          score_percent: 45, completed_at: older) ],
                      archive.results
       end
 
@@ -58,9 +60,27 @@ module Queries
                      StudentArchiveQuery.new(results_limit: 2).call(student_id: @student.id).results.map(&:exercise_title)
       end
 
-      test "an archive exists from one classroom or one finished exercise; two queries, whatever the volume" do
+      # historique-eleve (UDR-0090 §3.1): the blue card tells the real total, the list stays capped.
+      test "the completed count is the real total past the limit, finished exercises only, his own only" do
+        3.times { |day| finished(title: "Exercice #{day}", completed_at: Time.zone.local(2026, 1, day + 1)) }
+        create_exercise_session(student: @student, status: "started")
+        finished(title: "Autre élève", completed_at: 1.day.ago, student: create_student)
+
+        capped = StudentArchiveQuery.new(results_limit: 2).call(student_id: @student.id)
+
+        assert_equal 2, capped.results.size
+        assert_equal 3, capped.completed_count
+      end
+
+      test "a completed count of zero without any finished exercise" do
+        create_exercise_session(student: @student, status: "started")
+
+        assert_equal 0, archive.completed_count
+      end
+
+      test "an archive exists from one classroom or one finished exercise; three queries, whatever the volume" do
         assert_not StudentArchiveQuery.new.any?(student_id: @student.id)
-        assert_equal StudentArchiveQuery::Archive.new(classrooms: [], results: []), archive
+        assert_equal StudentArchiveQuery::Archive.new(classrooms: [], results: [], completed_count: 0), archive
 
         create_exercise_session(student: @student, status: "started")
         assert_not StudentArchiveQuery.new.any?(student_id: @student.id)
@@ -69,7 +89,7 @@ module Queries
 
         joined(create_classroom(school: @school), joined_at: 1.year.ago, left_at: 1.day.ago)
         assert StudentArchiveQuery.new.any?(student_id: create_student(classroom: create_classroom).id)
-        assert_queries_count(2) { archive }
+        assert_queries_count(3) { archive }
       end
     end
   end

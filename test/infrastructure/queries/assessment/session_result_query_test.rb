@@ -104,6 +104,58 @@ module Queries
         assert_empty second.answers
       end
 
+      # ADR-0091 §4.4 : « Ton choix » par type ; la solution seulement avec reveal.
+      def kind_review(reveal:)
+        exercise = create_exercise(questions: 0)
+        blank = create_kind_question(exercise:, question_type: "fill_blank", content: "La capitale est ___ .", answers: %w[Abidjan])
+        number = create_kind_question(exercise:, question_type: "numeric", answers: [ "3,5" ], numeric_tolerance: BigDecimal("0.1"))
+        steps = create_kind_question(exercise:, question_type: "ordering", answers: %w[A B C])
+        pairs = create_kind_question(exercise:, question_type: "matching", answers: [ %w[a 1], %w[b 2], %w[c 3] ])
+        session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 0)
+        attempt = ->(question, ids: [], text: nil) do
+          Orm::QuestionAttempt.create!(exercise_session: session, question:, correct: false, selected_answer_ids: ids,
+                                       response_text: text, answered_at: Time.current)
+        end
+        attempt.(blank, text: "Abidjn")
+        attempt.(number, text: "3,7")
+        attempt.(steps, ids: steps.answers.order(:position).map(&:id).reverse)
+        attempt.(pairs, ids: pairs.answers.order(:position).map(&:id).rotate)
+        binds = []
+        callback = ->(*, payload) { binds.concat(payload[:type_casted_binds]) if payload[:sql].include?('FROM "answers"') }
+        review = ActiveSupport::Notifications.subscribed(callback, "sql.active_record") { result(reveal:, session:).review }
+        [ review, binds ]
+      end
+
+      test "nouveaux types, sans reveal : la réponse de l'élève seule ; les trous et le nombre ne lisent aucune ligne answers" do
+        (blank, number, steps, pairs), binds = kind_review(reveal: false)
+
+        assert_equal [ "Abidjn", "3,7" ], [ blank.response_text, number.response_text ]
+        assert_equal %w[C B A], steps.answers.map(&:content)
+        assert_equal [ %w[a 2], %w[b 3], %w[c 1] ], pairs.pairs.map(&:deconstruct)
+        assert_equal [ [], nil ], [ [ blank, number, steps, pairs ].flat_map(&:solution), number.numeric_tolerance ]
+        assert_equal %w[fill_blank numeric ordering matching], [ blank, number, steps, pairs ].map(&:kind_name)
+        assert_empty [ blank.id, number.id ] & binds
+        assert_includes binds, steps.id
+      end
+
+      test "nouveaux types, avec reveal : la solution s'ajoute à la réponse de l'élève" do
+        (blank, number, steps, pairs), = kind_review(reveal: true)
+
+        assert_equal [ %w[Abidjan], [ "3,5" ], BigDecimal("0.1") ], [ blank.solution, number.solution, number.numeric_tolerance ]
+        assert_equal [ %w[A B C], [ "a → 1", "b → 2", "c → 3" ] ], [ steps.solution, pairs.solution ]
+        assert_equal %w[C B A], steps.answers.map(&:content)
+      end
+
+      test "un relier sans tentative n'a aucune paire de l'élève" do
+        exercise = create_exercise(questions: 0)
+        create_kind_question(exercise:, question_type: "matching", answers: [ %w[a 1], %w[b 2], %w[c 3] ])
+        session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 0)
+
+        review = result(reveal: true, session:).review.sole
+        assert_equal [ [], nil ], [ review.pairs, review.correct ]
+        assert_equal [ "a → 1", "b → 2", "c → 3" ], review.solution
+      end
+
       test "enseignant : seulement celui d'une classe active où l'élève est encore inscrit" do
         classroom = create_classroom
         Orm::ClassroomStudent.create!(joined_via: "standard", classroom:, student: @student, primary: true, joined_at: Time.current)

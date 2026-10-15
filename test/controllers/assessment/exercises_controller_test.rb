@@ -31,7 +31,7 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#exercise_header", text: /SVT/
     assert_select "#exercise_header", text: /Tle D/
     assert_select "#exercise_header", text: /#{I18n.t("#{scope}.show.exercise_types.evaluation")}/
-    assert_select "#exercise_header a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']"
+    assert_select "a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']"
     assert_select "#exercise_questions [data-controller=math] li.question", 2
     assert_select "#exercise_questions", text: /Question 1/
     assert_select "#exercise_questions", text: /Proposition 4/
@@ -78,15 +78,16 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
       assert_select "*", text: /Acquis/
       assert_select "*", text: /#{I18n.t("#{scope}.student_progress.badge_level", level: "Or")}/
       assert_select "*", text: /#{I18n.t("#{scope}.student_progress.completed", count: 2)}/
-      assert_select "a[href='#{exercise_session_path(started.public_id)}']", text: I18n.t("#{scope}.student_progress.resume")
+      # UDR-0087 §3.1 : la reprise dit sa question (aucune réponse encore : la première).
+      assert_select "a[href='#{exercise_session_path(started.public_id)}']", text: I18n.t("#{scope}.student_progress.resume_at", number: 1)
       assert_select "form[method=post][action='#{exercise_sessions_path(@exercise.public_id)}']", 1 do
         assert_select "input[type=hidden][name=restart][value=true]"
         assert_select "button[type=submit]", text: I18n.t("#{scope}.student_progress.restart")
       end
       assert_select "button", text: I18n.t("#{scope}.student_progress.start"), count: 0
-      # « Recommencer » s'explique dans son infobulle, plus dans un paragraphe permanent (R4).
-      assert_select "details", text: /#{Regexp.escape(I18n.t("#{scope}.student_progress.restart_hint"))}/
-      assert_select "p", text: /#{Regexp.escape(I18n.t("#{scope}.student_progress.restart_hint"))}/, count: 0
+      # UDR-0087 §3.1 : sous « Recommencer », une ligne courte, reliée au bouton.
+      assert_select "button[aria-describedby=restart-note]"
+      assert_select "p#restart-note", text: I18n.t("#{scope}.student_progress.restart_note")
     end
     assert_no_match(/#{correct_mark}/, response.body)
   end
@@ -109,6 +110,39 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#exercise_questions [data-reveal-target]", 0
     assert_select "form[action='#{exercise_sessions_path(@exercise.public_id)}']", 0
     assert_select "a[href='#{edit_teams_exercise_path(@exercise.public_id)}']", 0
+  end
+
+  test "la meilleure note est verte dès « 14/20 » affiché : 68 % oui, 67 % non" do
+    sign_in_as @student
+    session = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 67)
+    get exercise_path(@exercise.public_id)
+    assert_select "#student_progress dd span.text-success", 0
+
+    session.update!(score_percent: 68)
+    get exercise_path(@exercise.public_id)
+    assert_select "#student_progress dd span.text-success", text: "14/20"
+  end
+
+  # CA-16, ADR-0091 §4.4 : l'enseignant voit la solution des nouveaux types ; l'élève ni valeur, ni réponse, ni ordre.
+  test "nouveaux types : la solution pour l'enseignant, l'énoncé et le type seuls pour l'élève" do
+    create_kind_question(exercise: @exercise, question_type: "fill_blank", content: "La capitale est ___ .", answers: %w[Yamoussoukro])
+    create_kind_question(exercise: @exercise, question_type: "numeric", content: "Combien ?", answers: [ "42,75" ],
+                         numeric_tolerance: BigDecimal("0.25"))
+    create_kind_question(exercise: @exercise, question_type: "ordering", content: "Range.", answers: %w[Prophase Métaphase Anaphase])
+    create_kind_question(exercise: @exercise, question_type: "matching", content: "Relie.", answers: [ %w[Gauche1 Droite1], %w[Gauche2 Droite2], %w[Gauche3 Droite3] ])
+
+    sign_in_as create_teacher
+    get exercise_path(@exercise.public_id)
+    assert_select "#exercise_questions [data-correct]", text: /Yamoussoukro/
+    assert_select "#exercise_questions [data-correct]", text: /42,75.*0,25/m
+    assert_select "#exercise_questions [data-correct] ol li", text: "Métaphase"
+    assert_select "#exercise_questions [data-correct] li", text: "Gauche2 → Droite2"
+
+    sign_in_as @student
+    get exercise_path(@exercise.public_id)
+    assert_select "#exercise_questions li.question", 6
+    assert_select "#exercise_questions", text: /#{I18n.t("#{scope}.questions_preview.question_types.matching")}/
+    %w[Yamoussoukro 42,75 Prophase Métaphase Gauche1 Droite1].each { assert_no_match(/#{it}/, response.body) }
   end
 
   # RE-22 — UDR-0069 §3.8 : après l'en-tête, la carte « Assigner à mes classes », une bascule par classe de l'enseignant
