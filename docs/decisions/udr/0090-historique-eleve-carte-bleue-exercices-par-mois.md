@@ -1,14 +1,14 @@
 # UDR-0090 : Historique de l'élève — carte bleue du total, exercices rangés par mois avec l'icône de la matière, note verte dès 14/20
 <!-- index
 titre: Historique de l'élève : total, exercices par mois, vert dès 14/20
-statut: Proposé
+statut: Accepté
 adr-lie: —
 problematique: Élève : « Mon historique » dans le cadre de l'accueil, ouvert depuis le menu de l'avatar ; carte bleue du nombre total d'exercices terminés ; exercices par mois avec l'icône de la matière ; note verte dès 14/20 (et non plus dès 10/20) ; deux colonnes dès 1 024 px ; aucun filtre, aucune ligne cliquable. Amende UDR-0057
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-10-15 |
 | **Chantier** | [`docs/chantiers/historique-eleve`](../../chantiers/historique-eleve/memo.md) |
 | **ADR lié** | — (contenu inchangé : ADR-0036, ADR-0040) |
@@ -45,13 +45,13 @@ L'historique a été redessiné sur la toile https://claude.ai/artifact/V8DwH6oM
 
 - **Mois** : un titre par mois (`h3`, « Octobre 2026 »), du plus récent au plus ancien.
 - **Ligne** :
-  - l'icône de la matière (`ui_subject_bubble` taille `sm`, par `material_category`) ;
+  - l'illustration de la matière dans sa pastille teintée (`subject_illustration`, par le slug de la matière, comme les bulles de l'accueil, UDR-0069 §3.3) ; une pastille et non `ui_subject_bubble`, qui est un lien ;
   - le titre de l'exercice ;
   - la matière et la date ;
   - la note /20 à droite, dans une pastille : `bg-success-soft text-success` si `score_percent ≥ 70`, sinon `bg-mist text-ink`. Jamais de rouge.
 - **Ancien seuil** : `PASS_THRESHOLD` (50 %) ne sert plus à la couleur de cette page.
 - **Pas de lien** : aucune ligne n'en est un (UDR-0013).
-- **« Voir plus »** : par pas de 10, comme aujourd'hui. Les titres de mois suivent les lignes révélées.
+- **« Voir plus »** : par pas de 10, comme aujourd'hui. Les titres de mois suivent les lignes révélées : une section de mois sans ligne visible est masquée en CSS (utilitaire `ui-reveal-group`, `:has`), sans changer le contrôleur `reveal`.
 
 ### 3.3 « Mes classes »
 
