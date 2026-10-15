@@ -28,7 +28,7 @@ module Dtos
 
       # nil quand le champ n'est pas posté : seule une question à texte l'envoie, même vide.
       def response_text=(value)
-        @response_text = value&.to_s&.strip
+        @response_text = value.nil? ? nil : value.to_s.strip
       end
 
       attr_reader :response_text

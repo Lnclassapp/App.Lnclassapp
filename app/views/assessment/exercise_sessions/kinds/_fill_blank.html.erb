@@ -4,10 +4,8 @@
 <%# locals: (f:, question:) -%>
 <% before, after = question.content.split(Entities::Assessment::QuestionKinds::FillBlank::MARKER, 2) %>
 <legend class="font-display text-xl font-extrabold text-balance text-ink"><%= t("assessment.exercise_sessions.kinds.fill_blank.legend") %></legend>
-<div class="rounded-card border border-line bg-white p-4 text-lg leading-loose whitespace-pre-line text-ink sm:p-5">
-  <%= before %><%= f.text_field :response_text, value: nil, required: true, maxlength: Dtos::Assessment::AttemptInput::RESPONSE_TEXT_MAX,
+<div class="rounded-card border border-line bg-white p-4 text-lg leading-loose whitespace-pre-line text-ink sm:p-5"><%= before %><%= f.text_field :response_text, value: nil, required: true, maxlength: Dtos::Assessment::AttemptInput::RESPONSE_TEXT_MAX,
                                 autocomplete: "off", autocapitalize: "off", autocorrect: "off", spellcheck: false,
                                 "aria-label": question.content.sub(Entities::Assessment::QuestionKinds::FillBlank::MARKER,
                                                                    t("assessment.exercise_sessions.kinds.fill_blank.blank")),
-                                class: "mx-1 inline-block min-w-28 max-w-full rounded-t-ln border-0 border-b-2 border-brand-strong bg-brand-soft px-3 py-1 text-center font-bold text-ink field-sizing-content focus:outline-2 focus:outline-offset-2 focus:outline-brand" %><%= after %>
-</div>
+                                class: "mx-1 inline-block min-w-28 max-w-full rounded-t-ln border-0 border-b-2 border-brand-strong bg-brand-soft px-3 py-1 text-center font-bold text-ink field-sizing-content focus:outline-2 focus:outline-offset-2 focus:outline-brand" %><%= after %></div>

@@ -41,7 +41,7 @@
           </div>
         <% end %>
         <div class="<%= tile %>">
-          <dt><span class="<%= label %>"><%= t(".mastery") %></span><%= stat_info_tip t("shared.info_tips.mastery"), label: t(".mastery") %></dt>
+          <dt class="flex items-center justify-center gap-1"><span class="<%= label %>"><%= t(".mastery") %></span><%= stat_info_tip t("shared.info_tips.mastery"), label: t(".mastery") %></dt>
           <% mastery = Entities::Assessment::Grading.mastery_for(result.score_percent) %>
           <dd class="mt-2"><%= ui_badge mastery_label(result.score_percent), size: :sm,
                                         tone: { acquired: :success, fragile: :gold, struggling: :neutral }.fetch(mastery) %></dd>

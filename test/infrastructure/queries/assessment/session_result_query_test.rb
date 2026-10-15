@@ -146,6 +146,16 @@ module Queries
         assert_equal %w[C B A], steps.answers.map(&:content)
       end
 
+      test "un relier sans tentative n'a aucune paire de l'élève" do
+        exercise = create_exercise(questions: 0)
+        create_kind_question(exercise:, question_type: "matching", answers: [ %w[a 1], %w[b 2], %w[c 3] ])
+        session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 0)
+
+        review = result(reveal: true, session:).review.sole
+        assert_equal [ [], nil ], [ review.pairs, review.correct ]
+        assert_equal [ "a → 1", "b → 2", "c → 3" ], review.solution
+      end
+
       test "enseignant : seulement celui d'une classe active où l'élève est encore inscrit" do
         classroom = create_classroom
         Orm::ClassroomStudent.create!(joined_via: "standard", classroom:, student: @student, primary: true, joined_at: Time.current)

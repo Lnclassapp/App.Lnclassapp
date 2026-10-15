@@ -9,7 +9,7 @@
   <h2 id="student_progress_title" class="font-display text-xl font-extrabold"><%= t(".title") %></h2>
   <dl class="mt-4 grid grid-cols-2 gap-3 min-[700px]:grid-cols-4">
     <div class="<%= tile %>">
-      <dt><span class="<%= label %>"><%= t(".best_score") %></span></dt>
+      <dt class="flex items-center gap-1"><span class="<%= label %>"><%= t(".best_score") %></span></dt>
       <dd class="mt-1 font-display text-xl font-extrabold tabular-nums">
         <% if progress.best_score_percent %>
           <span class="<%= "text-success" if progress.best_score_percent >= Entities::Assessment::Grading::MASTERY_THRESHOLD %>"><%= grade_label(progress.best_score_percent) %></span>
@@ -19,7 +19,7 @@
       </dd>
     </div>
     <div class="<%= tile %>">
-      <dt><span class="<%= label %>"><%= t(".mastery") %></span><%= stat_info_tip t("shared.info_tips.mastery"), label: t(".mastery") %></dt>
+      <dt class="flex items-center gap-1"><span class="<%= label %>"><%= t(".mastery") %></span><%= stat_info_tip t("shared.info_tips.mastery"), label: t(".mastery") %></dt>
       <dd class="mt-1">
         <% if progress.mastery %>
           <%= ui_badge t("assessment.badges.mastery.#{progress.mastery}"),
@@ -30,7 +30,7 @@
       </dd>
     </div>
     <div class="<%= tile %>">
-      <dt><span class="<%= label %>"><%= t(".badge") %></span><%= stat_info_tip t("shared.info_tips.badges"), label: t(".badge") %></dt>
+      <dt class="flex items-center gap-1"><span class="<%= label %>"><%= t(".badge") %></span><%= stat_info_tip t("shared.info_tips.badges"), label: t(".badge") %></dt>
       <dd class="mt-1 text-sm font-bold">
         <% if progress.badge_level %>
           <span class="inline-flex items-center gap-1.5">
@@ -42,7 +42,7 @@
       </dd>
     </div>
     <div class="<%= tile %>">
-      <dt><span class="<%= label %>"><%= t(".sessions") %></span></dt>
+      <dt class="flex items-center gap-1"><span class="<%= label %>"><%= t(".sessions") %></span></dt>
       <dd class="mt-1 text-sm font-bold tabular-nums"><%= t(".completed", count: progress.completed_count) %></dd>
     </div>
   </dl>

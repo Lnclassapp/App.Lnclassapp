@@ -26,6 +26,13 @@
 - Lot A : « Valider » désactivé tant que rien n'est choisi rend le chemin « valider à vide » injouable dans un navigateur ; `test/system/error_paths_test.rb` vérifie désormais le bouton désactivé, le refus 422 reste couvert par le test du contrôleur.
 - Lot A : « n/T » est dans l'en-tête, hors du frame ; « Question suivante » sans requête le recopie depuis `data-counter` de la carte (`assessment--next-question`), et le stream remplace « reprendre à la question N » de la confirmation.
 
+- Lots B à G : les libellés en capitales (`uppercase`) changent le texte que lit Capybara ; quatre assertions de tests système passent en recherche insensible à la casse, et l'infobulle sort du libellé pour garder sa casse.
+- Lot D : le texte à trous unifie aussi l'apostrophe typographique (’) avec l'apostrophe droite : un clavier de téléphone tape l'une, l'enseignant l'autre ; ce n'est pas une faute de frappe (écart assumé à la lettre de l'ADR-0091 §4.3).
+- Lot D : la largeur du blanc suit ce que l'élève écrit (`field-sizing-content`), et non la longueur moyenne des réponses acceptées (UDR-0087 §3.4) : celle-ci aurait donné un indice sur la solution.
+- Lot 0 : deux exécutions de la suite lancées en même temps sur les mêmes bases de test se sont bloquées (deadlocks) ; une seule exécution à la fois.
+- Lots B à G : sur une machine chargée, la suite complète hors système dépasse 20 minutes ; les lots d'interface ont été vérifiés par les répertoires touchés (domaine, intégration, contrôleurs, design), la suite complète par `bin/ci-quiet` au Lot H.
+- Budget des tests système (ADR-0069 §9) : le chantier ajoute quatre fichiers (15,4 s enregistrées) à une branche `accueil-eleve` qui en avait déjà ajouté 9,9 s ; la somme dépasse 15 s, à trancher par le porteur (dérogation ou fusion séparée).
+
 ## Ce qu'on a appris sur la codebase
 
 - Tout le moteur supposait « cocher parmi des propositions » : CHECK sur `question_type`, `selected_answer_ids` non vide, `correct?` par égalité d'ensembles d'ids.
@@ -33,6 +40,10 @@
 - « Quitter la session » n'était qu'un lien : la session reste `started` et se reprend.
 - Le shell rend l'en-tête et les barres sur toutes les pages, sauf dans l'app Android : pas de mode concentré avant ce chantier.
 - Les trois formats d'import (`exercises`, `essentials`, `course-tree`) partagent la même forme de question.
+- `Data.define` accepte un champ facultatif en surchargeant `initialize(champ: nil, **) = super` : toutes les constructions existantes de `Question`, `Answer` et des nœuds d'import restent valides.
+- Un `fieldset` désactivé n'envoie pas ses champs : le formulaire de l'équipe garde un panneau par type, un seul actif.
+- Un champ `required` caché (`display: none`) compte pour `checkValidity()` : les listes de repli de l'ordre et de relier rendent « Valider » prêt ou non, sans code de plus.
+- Minitest 6 n'a plus `minitest/mock` : un double se pose par `define_singleton_method` et se retire dans `ensure`.
 
 ## Dette laissée derrière
 
@@ -40,12 +51,15 @@
 |---|---|---|
 | Points partiels (ordre, relier) | Refusés par le porteur pour garder la note intacte | — |
 | Tolérance aux fautes de frappe (texte à trous) | Refusée par le porteur | — |
+| La saisie d'un nombre ou d'un texte refusée (422) est vidée au re-rendu | Le formulaire de la séance n'a pas d'objet ; l'erreur s'affiche, l'élève retape | — |
+| Revue par sous-agents (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) | Outil d'agents absent de la session d'exécution ; revue faite à la main sur la fuite de la solution | À lancer sur la PR |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
+| **Livré le** | 2026-10-15 (branche `feature/exercice-eleve`, PR à ouvrir par l'orchestrateur) |
 | **PR** | |
+| **`bin/ci-quiet`** | Rouge (2026-10-15) : budget système dépassé (25,3 s dont 9,9 s d'`accueil-eleve`, à trancher) ; couverture 100 % manquée par `daily_exercise_query.rb:14` (stub d'`accueil-eleve`) et trois branches de ce chantier, couvertes depuis ; tests système déjà rouges hors du chantier (connexion, invitations : `sign_in_test`, `team_invitation_test`, `public_pages_test`, `staff_invitation_test` sur le format du numéro) et `classroom_archival_test` instable sous charge (vert seul) |
 | **ADR produits** | ADR-0091 |
 | **UDR produits** | UDR-0087 |
