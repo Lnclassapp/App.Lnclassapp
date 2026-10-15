@@ -45,7 +45,10 @@ Toile : https://claude.ai/artifact/NTPyZWmFK4oK9z9jMgvWL5 (téléphone d'abord).
 | À 20/20, « Recommencer » disparaît-il du résultat ? | Oui, comme aujourd'hui (porteur, 2026-10-15). | Seul « Revoir l'exercice » reste. |
 | Que change la tablette ? | Passons à la tablette (porteur, 2026-10-15). | Page de l'exercice et résultat centrés (720 px au plus), « Ta progression » sur une ligne de quatre cases ; en séance, la question et les réponses sur 640 px au centre, la barre de progression sur toute la largeur ; la confirmation pour quitter devient une fenêtre au centre. |
 | Que change l'ordinateur ? | Passons à l'ordinateur (porteur, 2026-10-15). | À partir de 1024 px : menu à gauche ; page de l'exercice sur deux colonnes (présentation et progression à gauche, aperçu des questions à droite) ; résultat sur deux colonnes (note et boutons à gauche, correction à droite) ; la séance garde le mode concentré, au centre. |
+| Quels types de questions ajouter ? | Les quatre proposés : texte à trous, réponse en nombre, remettre dans l'ordre, relier (porteur, 2026-10-15). | **Texte à trous** : un champ dans la phrase. **Réponse en nombre** : un grand champ, clavier numérique, bouton ± (le clavier Android n'a pas toujours le signe moins), virgule acceptée. **Remettre dans l'ordre** : flèches monter / descendre sur chaque étape (pas de glisser-déposer, plus fiable au doigt et au lecteur d'écran). **Relier** : toucher un élément à gauche puis à droite ; un numéro relie les deux. Après la réponse, « Ton choix » montre la réponse de l'élève, jamais la bonne. C'est le plus gros chantier : le moteur (entités, notation, saisie des enseignants, import) ne connaît aujourd'hui que Vrai / Faux et les choix ; à découper en lots, un type par lot. |
 
 ## Questions ouvertes
 
-1. Types de questions : le porteur trouve la liste actuelle trop limitée (Vrai / Faux, choix unique, 2 ou 3 propositions correctes). Lesquels ajouter ?
+1. Texte à trous : quelles réponses accepter (majuscules, accents, fautes légères, plusieurs mots justes) ?
+2. Réponse en nombre : accepter une marge (arrondi) ou seulement la valeur exacte ?
+3. Remettre dans l'ordre et relier : une seule note par question, ou des points partiels quand une partie est juste ?
