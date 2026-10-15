@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage |
+| **Statut** | en pause (porteur, 2026-10-15) |
 | **Ouvert le** | 2026-10-15 |
 | **Branche** | `Develop` (cadrage, docs seules) ; le code passera par une PR |
 | **Programme** | — |
@@ -40,6 +40,7 @@ Toile : https://claude.ai/artifact/2GWogAXzCziL8dR3FqcdGt (téléphone d'abord).
 |---|---|---|
 | Quelle page après le parcours d'exercice ? | La page de révision (porteur, 2026-10-15). | Le chantier couvre la page du cours et la page de la fiche essentielle. |
 | Les fiches essentielles restent-elles telles quelles ? | Non : elles deviennent les « fiches de révision », et leur contenu est découpé en rubriques (porteur, 2026-10-15). | On applique les décisions du chantier `contenu-en-blocs` : une fiche de révision par leçon avec un sommaire, les fiches essentielles en deviennent les parties ; rubriques Tu dois savoir, À retenir, En clair (à masquer), Méthode, Exemple rédigé, Attention, Tableau, Document, Figure ; lexique en bulle et en bas de fiche, sources ; fond Seyès, écriture manuscrite, une couleur par rubrique ; exercices par partie (Comprendre, Appliquer, S'évaluer). La page du cours devient la fiche de révision. Accueil : « Fiches de révision à revoir » ; résultat d'exercice : « Relis ta fiche de révision ». |
+| On continue la fiche de révision maintenant ? | Non : on la saute pour le moment (porteur, 2026-10-15). | Chantier en pause après la maquette téléphone ; les trois questions ouvertes attendent la reprise. |
 
 ## Questions ouvertes
 
