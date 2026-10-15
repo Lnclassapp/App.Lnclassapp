@@ -343,6 +343,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#student_home_gaps", text: including(tl("pending_gaps.title"))
     assert_select "#student_home_gaps a[href='#{course_essential_path(@course.slug, @essential.slug)}']", text: "La méiose"
+    # ADR-0090 §4.1 : ouvrir la fiche la retient ; un préchargement au survol la servirait sans l'ouvrir.
+    assert_select "#student_home_gaps ul[data-turbo-prefetch=false] a[href='#{course_essential_path(@course.slug, @essential.slug)}']"
     assert_select "#student_home_gaps button", text: including(I18n.t("components.reveal.more")), count: 0
   end
 

@@ -314,4 +314,74 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to new_session_path
   end
+
+  # ── Lecture retenue (chantier cours-eleve, ADR-0090 §4.1) ────────────────────
+
+  def reads_of(user) = Orm::EssentialRead.where(student_id: user.id)
+
+  test "CA-7, CA-12: the student's opening of a sheet is kept, once, with the time of the last opening" do
+    sign_in_as @student
+    first = Time.current.change(usec: 0)
+    last = first + 40.minutes
+
+    travel_to(first) { get page_path }
+    assert_response :success
+    travel_to(last) { get page_path }
+
+    assert_equal [ [ @essential.id, first, last ] ], reads_of(@student).pluck(:essential_id, :first_read_at, :last_read_at)
+  end
+
+  test "a link prefetched by Turbo on hover is not an opening: no read, the page still answers" do
+    sign_in_as @student
+
+    [ { "X-Sec-Purpose" => "prefetch" }, { "Sec-Purpose" => "prefetch;prerender" }, { "Purpose" => "prefetch" } ].each do |headers|
+      get(page_path, headers:)
+      assert_response :success
+    end
+
+    assert_equal 0, Orm::EssentialRead.count
+  end
+
+  test "CA-11: a teacher or a team member opening a sheet leaves no read" do
+    [ create_teacher, create_team_member ].each do |user|
+      sign_in_as user
+      get page_path
+
+      assert_response :success
+      sign_out
+    end
+
+    assert_equal 0, Orm::EssentialRead.count
+  end
+
+  test "a sheet the student may not read (draft, another level, another course) leaves no read" do
+    draft = create_essential(course: @course, status: "draft")
+    other_level = create_essential(course: create_course(level: create_level))
+    sign_in_as @student
+
+    [ page_path(draft), page_path(other_level), course_essential_path(create_course.slug, @essential.slug) ].each do |path|
+      get path
+      assert_response :not_found
+    end
+
+    assert_equal 0, Orm::EssentialRead.count
+  end
+
+  test "a failure of the recording never blocks the sheet: it is reported as handled, with the sheet and the student" do
+    sign_in_as @student
+    repository = Repositories::Assessment::EssentialReadRepository
+    repository.alias_method :original_record, :record
+    repository.define_method(:record) { |student_id:, essential_id:, at:| raise ActiveRecord::ConnectionTimeoutError, "pool épuisé" }
+
+    report = assert_error_reported(ActiveRecord::ConnectionTimeoutError) { get page_path }
+
+    assert_response :success
+    assert_select "#essential_header h1", text: "La méiose"
+    assert report.handled
+    assert_equal({ essential_id: @essential.id, student_id: @student.id }, report.context.slice(:essential_id, :student_id))
+    assert_equal 0, Orm::EssentialRead.count
+  ensure
+    repository.alias_method :record, :original_record
+    repository.remove_method :original_record
+  end
 end

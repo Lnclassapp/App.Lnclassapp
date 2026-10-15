@@ -13,6 +13,8 @@
 | 2026-10-15 | Ouvrir une fiche suffit à la compter comme lue | Confirmé par le porteur ; pas de mesure de lecture réelle | ADR-0090 §5 |
 | 2026-10-15 | Lot 0 : `RecordEssentialRead` reçoit `ReadPublishedPolicy` et la rejoue | `test/architecture/use_case_policies_test.rb` (ADR-0028) refuse un use case sans `policy:` ; le contrôleur la passe déjà, le second appel ne lit pas la base | Non |
 | 2026-10-15 | Lot 0 : `essential_reads` rejoint la liste fermée des cascades de `schema_constraints_test` | ADR-0090 §4.1 décide `on_delete: cascade` vers `essentials` ; une fiche n'est jamais supprimée par l'application | ADR-0090 |
+| 2026-10-15 | Lot A : `Classroom::ClassroomEssentialsController` n'enregistre rien | Il n'admet que l'enseignant et l'équipe (`allow_roles :teacher, :team`) : un élève n'y arrive jamais, l'appel serait du code mort | Non |
+| 2026-10-15 | Lot A : un préchargement Turbo (`X-Sec-Purpose: prefetch`) n'est pas une ouverture ; les liens de l'élève vers une fiche ne préchargent pas | Turbo 8 précharge au survol et sert ensuite la page depuis son cache : sans cela, un survol compterait comme lu et un clic après survol ne compterait pas | Non |
 | 2026-10-15 | Lot 0 : la fabrique de test `create_material` pose le rang du programme par slug | Les tests existants de l'accueil et de l'exercice du jour gardent leur ordre sans réécriture | Non |
 
 ## Ce qui a dérapé
