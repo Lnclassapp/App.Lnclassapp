@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage |
+| **Statut** | planification |
 | **Ouvert le** | 2026-10-15 |
 | **Branche** | `Develop` (cadrage, docs seules) ; le code passera par une PR |
 | **Programme** | — |
@@ -47,8 +47,10 @@ Toile : https://claude.ai/artifact/NTPyZWmFK4oK9z9jMgvWL5 (téléphone d'abord).
 | Que change l'ordinateur ? | Passons à l'ordinateur (porteur, 2026-10-15). | À partir de 1024 px : menu à gauche ; page de l'exercice sur deux colonnes (présentation et progression à gauche, aperçu des questions à droite) ; résultat sur deux colonnes (note et boutons à gauche, correction à droite) ; la séance garde le mode concentré, au centre. |
 | Quels types de questions ajouter ? | Les quatre proposés : texte à trous, réponse en nombre, remettre dans l'ordre, relier (porteur, 2026-10-15). | **Texte à trous** : un champ dans la phrase. **Réponse en nombre** : un grand champ, clavier numérique, bouton ± (le clavier Android n'a pas toujours le signe moins), virgule acceptée. **Remettre dans l'ordre** : flèches monter / descendre sur chaque étape (pas de glisser-déposer, plus fiable au doigt et au lecteur d'écran). **Relier** : toucher un élément à gauche puis à droite ; un numéro relie les deux. Après la réponse, « Ton choix » montre la réponse de l'élève, jamais la bonne. C'est le plus gros chantier : le moteur (entités, notation, saisie des enseignants, import) ne connaît aujourd'hui que Vrai / Faux et les choix ; à découper en lots, un type par lot. |
 
-## Questions ouvertes
+## Questions fermées (porteur, 2026-10-15)
 
-1. Texte à trous : quelles réponses accepter (majuscules, accents, fautes légères, plusieurs mots justes) ?
-2. Réponse en nombre : accepter une marge (arrondi) ou seulement la valeur exacte ?
-3. Remettre dans l'ordre et relier : une seule note par question, ou des points partiels quand une partie est juste ?
+1. **Texte à trous** : juste sans tenir compte des majuscules, des accents ni des espaces en trop ; l'enseignant peut saisir plusieurs réponses justes ; une faute de frappe est fausse.
+2. **Réponse en nombre** : marge facultative fixée par l'enseignant pour chaque question, sinon la valeur exacte ; « 3,5 » et « 3.5 » valent pareil.
+3. **Remettre dans l'ordre et relier** : tout juste ou faux, sans points partiels ; le calcul de la note ne change pas.
+
+Suite : PRD, ADR-0091, UDR-0087 et plan de lots écrits le 2026-10-15 ; le code se fait dans une PR, après celle d'`accueil-eleve`.
