@@ -124,9 +124,9 @@ export default class extends Controller {
   }
 
   // UDR-0084 §3.10 : une entrée cachée à cette largeur (menu de l'avatar : destinations sous lg, aide sous 700 px) ne
-  // reçoit pas le focus ; les flèches passent dessus.
+  // reçoit pas le focus ; les flèches passent dessus. getClientRects plutôt que checkVisibility, absent avant Safari 17.4.
   get items() {
     return [...this.menuTarget.querySelectorAll('[role="menuitem"]:not([aria-disabled="true"])')]
-      .filter((item) => item.checkVisibility())
+      .filter((item) => item.getClientRects().length > 0)
   }
 }
