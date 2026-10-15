@@ -29,6 +29,7 @@ La page d'accueil publique est dessinée et ses décisions sont prises : l'accue
 - Le paiement lui-même : la tuile ouvre le parcours existant.
 - La lecture hors ligne (chantier à part, promis par la pastille de la page d'accueil).
 - Une barre d'onglets en bas de l'écran (refusée le 2026-10-14).
+- Un compteur de jours d'affilée ou de badges en haut de l'accueil (refusé le 2026-10-15).
 - Le parent : il ne voit rien de l'accueil de son enfant ; pas de changement de compte sur un téléphone partagé (2026-10-15).
 
 ## Ce que le grill a révélé
@@ -43,6 +44,7 @@ La page d'accueil publique est dessinée et ses décisions sont prises : l'accue
 | Quel exercice Lnclass propose-t-il ? | Une matière différente chaque jour, à tour de rôle, pour couvrir tout le programme (porteur, 2026-10-15). | Règle : chaque jour, la matière suivante dans le tour des matières du niveau de l'élève, et dans cette matière le premier exercice publié qu'il n'a pas encore fait. La proposition reste la même toute la journée (heure d'Abidjan), elle ne change pas à chaque ouverture. Une matière sans exercice publié pour son niveau est sautée. |
 | L'élève a fini l'exercice proposé du jour : que montre la carte ? | « Bravo, à demain ! » avec la matière de demain : un seul exercice proposé par jour (porteur, 2026-10-15). | Un nouvel état de la carte : « fait aujourd'hui », qui annonce la matière du lendemain. La limite ne touche que la proposition : l'élève peut toujours ouvrir d'autres exercices depuis la grille des matières. |
 | L'enseignant donne un exercice à rendre : que devient l'exercice proposé par Lnclass ? | Il ne revient que lorsque tout le travail de l'enseignant est fait (porteur, 2026-10-15). | La carte du haut a une priorité stricte : d'abord le travail de l'enseignant (en retard, puis par date limite), ensuite seulement l'exercice proposé. Un travail en retard bloque la proposition tant qu'il n'est pas fait. Le tour des matières avance avec le calendrier, qu'une proposition ait été affichée ou non. |
+| Quel chiffre en haut de l'accueil, comme le solde de Wave ? | Aucun : prénom et classe seulement (porteur, 2026-10-15). | Le haut de l'accueil reste sobre : salutation, prénom, classe. Pas de nouvelle donnée à calculer ni à stocker. |
 
 ## Cas limites identifiés
 
