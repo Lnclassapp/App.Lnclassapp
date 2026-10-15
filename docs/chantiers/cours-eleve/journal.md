@@ -8,8 +8,9 @@
 |---|---|---|---|
 | 2026-10-15 | Une ligne par fiche ouverte (`essential_reads`) plutôt qu'une progression par cours | « Tout lu » reste juste quand un cours gagne ou perd une fiche | ADR-0090 |
 | 2026-10-15 | `materials.position` remplace `SUBJECT_ORDER` | Une seule source d'ordre pour l'accueil, l'exercice du jour et Cours | ADR-0090 |
-| 2026-10-15 | « Commencer » et « Revoir » ouvrent la page du cours, « Reprendre » la dernière fiche ouverte | Le porteur a validé « Reprendre » à la dernière fiche ; les deux autres gardent le point d'entrée actuel | UDR-0085 §3.3 |
-| 2026-10-15 | Le code attend la fusion de la PR `accueil-eleve` | En-tête, menu de l'avatar et fin de la barre du bas y sont livrés | Non |
+| 2026-10-15 | « Commencer » et « Revoir » ouvrent la page du cours, « Reprendre » la dernière fiche ouverte | Confirmé par le porteur le 2026-10-15 | UDR-0085 §3.3 |
+| 2026-10-15 | Le code attend la fusion de la PR `accueil-eleve` | En-tête, menu de l'avatar et fin de la barre du bas y sont livrés ; confirmé par le porteur | Non |
+| 2026-10-15 | Ouvrir une fiche suffit à la compter comme lue | Confirmé par le porteur ; pas de mesure de lecture réelle | ADR-0090 §5 |
 
 ## Ce qui a dérapé
 
