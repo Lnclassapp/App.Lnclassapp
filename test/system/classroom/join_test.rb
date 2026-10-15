@@ -69,6 +69,28 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     assert_equal 0, Orm::User.where(role: "student", contact: "0701020304").count
   end
 
+  # UDR-0088 §3.4 (CA-4, CA-6, CA-7) at 390 px: the link's classroom in section 1, the gender as a pill, a 9-digit number
+  # refused under the number with the focus on it.
+  test "CA-6, CA-7 at 390 px: the link's banner in section 1, a 9-digit number refused under it, the focus on it" do
+    with_mobile_viewport do
+      visit join_classroom_path(@classroom.reload.link_token)
+
+      assert_selector "#auth-welcome-card", text: "Bienvenue sur Lnclass"
+      within("#student-registration-section-classroom") do
+        assert_selector "#classroom-preview", text: "6ème 1 — Lycée Classique d'Abidjan"
+        assert_link I18n.t("#{FORM}.other_classroom")
+      end
+      fill_in_the_student
+      assert_selector "#student-registration-gender label:has(input:checked)", text: I18n.t("genders.female")
+      fill_in "student_registration[contact]", with: "070102030"
+      click_on I18n.t("#{FORM}.submit")
+
+      assert_selector "#student_registration_contact_error", text: I18n.t("#{ERRORS}.contact.invalid")
+      assert_selector "#student_registration_contact[aria-invalid=true]:focus"
+    end
+    assert_equal 0, Orm::User.where(role: "student").count
+  end
+
   test "IL-10: « Ce n'est pas ta classe ? » goes back to the cascade, and the student lands in the other classroom" do
     visit join_classroom_path(@classroom.reload.link_token)
     click_on I18n.t("#{FORM}.other_classroom")
