@@ -58,6 +58,7 @@ La page d'accueil est la première pièce de la refonte visuelle que le porteur 
 | Au téléphone, quel titre et quel bleu, face à la maquette de bienvenue (« Forcément, tu comprends », bleu `#00a0ff`) ? | « Tu comprends chap chap », en bleu foncé ; boutons en pilule côte à côte, « Enseignant(e) » à contour bleu (porteur, 2026-10-15). | La maquette de bienvenue sert de référence de mise en page au téléphone, mais pas pour le titre ni pour la couleur. Le bouton secondaire passe du fond bleu pâle au contour `brand-strong`. |
 | Quel en-tête sur tablette et ordinateur ? | Aucun : ni logo, ni barre de navigation, ni « Se connecter » (porteur, 2026-10-15). | La page commence directement par le haut de page, et la connexion passe seulement par les modales de rôle. Le lien « Se connecter » sort aussi du pied de page. |
 | Quel haut de page sur ordinateur ? | Celui de la page d'accueil actuelle (pastille « Plateforme éducative », « Avec Lnclass, tu comprends chap chap ! », phrase, « Je suis élève » / « Je suis enseignant », six matières en pastilles), avec la photo à droite à la place des quatre cartes (porteur, 2026-10-15). | Boutons à coins de 12 px (et non en pilule) sur grand écran. Les couleurs restent celles du design system (`brand-strong`, `brand-soft`, `paper`). Sur tablette, la photo passe au-dessus et le texte se centre. « Espace établissement » et les liens des applications ne sont plus dans le haut de page sur grand écran. |
+| Que garde la page longue sur tablette et ordinateur ? | Seulement le haut de page : les sections (matières, étapes, fonctionnalités, enseignants, établissements) et le pied de page sont retirés (porteur, 2026-10-15). | Tablette et ordinateur tiennent aussi sur un seul écran : sur ordinateur, texte à gauche et photo à droite ; sur tablette, la photo en haut et le texte dessous. Les liens légaux n'ont plus de place sur aucun écran, et « Espace établissement » n'a plus de section vers laquelle pointer. La réponse « page longue » plus haut est remplacée. |
 
 ## Cas limites identifiés
 
@@ -65,7 +66,7 @@ La page d'accueil est la première pièce de la refonte visuelle que le porteur 
 
 ## Questions encore ouvertes
 
-- **Liens légaux au téléphone** : la page figée n'a plus de pied de page ; où placer confidentialité, conditions et CGV ?
+- **Liens légaux** : plus aucun écran n'a de pied de page ; où placer confidentialité, conditions et CGV ?
 - **Couleur des boutons.** La maquette multi-écrans garde le bleu `#00a0ff` avec un texte blanc (contraste 2,8:1), alors que le porteur a choisi le bleu foncé `brand-strong`. On retient sa réponse écrite tant qu'il ne dit pas le contraire.
 - **Photo.** La maquette la décrit comme « à remplacer en production par une vraie photo », alors que le porteur garde l'image générée. On retient l'image générée.
 - **Où mène « Espace établissement » ?** Troisième modale (« Se connecter » et « Créer l'espace de mon établissement »), lien direct vers l'inscription de la direction, ou retrait du lien.
