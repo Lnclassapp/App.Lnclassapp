@@ -42,7 +42,8 @@ Toile : https://claude.ai/artifact/5YCL2xGDiioqcrvEBr6W1B (téléphone d'abord).
 | « Exercices assignés » répète « À faire » de l'accueil : on garde les deux ? | Oui (porteur, 2026-10-15). | Les deux listes restent, avec les mêmes échéances et le même ordre. |
 | « Inviter mon enseignant » ajoute une action à une page qui n'en a pas (UDR-0057 R1) : on modifie la règle ? | Oui (porteur, 2026-10-15). | L'UDR du chantier amende UDR-0057 R1 : Ma classe a une seule action, « Inviter mon enseignant », et seulement quand la classe n'a aucun enseignant sur Lnclass. |
 | Que change la tablette ? | Passons à la tablette (porteur, 2026-10-15). | À partir de 700 px, la page se centre (720 px au plus) ; le bandeau des cours montre deux cartes et demie ; les listes restent sur une colonne ; « Besoin d'aide ? » en entier dans l'en-tête. |
+| Que change l'ordinateur ? | Passons à l'ordinateur (porteur, 2026-10-15). | À partir de 1024 px (ordinateur et tablette à l'horizontale) : menu à gauche avec « Ma classe » actif, quatre cartes de cours visibles dans le bandeau, « Exercices assignés » et « Exercices traités » côte à côte. |
 
 ## Questions ouvertes
 
-Aucune. Suite : l'ordinateur.
+Aucune pour les maquettes. Suite : PRD, UDR et plan de lots, puis le code dans une PR.
