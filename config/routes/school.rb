@@ -12,3 +12,6 @@ patch "teachers/current-school", to: "school/current_schools#update", as: :teach
 get "teachers/schools", to: "school/teacher_schools#index", as: :teacher_schools
 post "teachers/schools", to: "school/teacher_schools#create"
 delete "teachers/schools/:public_id", to: "school/teacher_schools#destroy", as: :teacher_school
+# UDR-0099 §3.4 : le lien /i/<jeton> ouvert par un enseignant connecté y mène ; un clic rattache.
+get "teachers/schools/join/:token", to: "school/teacher_school_joins#new", as: :teacher_school_join
+post "teachers/schools/join/:token", to: "school/teacher_school_joins#create"
