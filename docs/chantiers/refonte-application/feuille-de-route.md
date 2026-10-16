@@ -614,8 +614,8 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | AS-13 | Recommencer un exercice | ✅ | V1 (Lot C) — livrée 2026-09-27 (#33) | — |
 | AS-14 | Détecter une lacune après un échec | 💀 | V5 (F-21) — livrée en avance avec la V1, 2026-09-27 (#33) : à la clôture de session, seuil de résolution 75 % (ADR-0043 amendé) | Une détection branchée sur un use case que le parcours réel n'appelle pas |
 | AS-15 | Résoudre une lacune après une réussite | 💀 | V5 (F-21) — livrée en avance avec la V1, 2026-09-27 (#33) : à la clôture de session, seuil de résolution 75 % (ADR-0043 amendé) | Idem |
-| AS-16 | Lancer une session de remédiation | ❌ | V5 | Un bouton qui appelle un helper de route inexistant |
-| AS-17 | Suivre les remédiations de sa classe | ❌ | V5 | `NoMethodError` sur panneau fermé |
+| AS-16 | Lancer une session de remédiation | ❌ | V5 — en PR (`remediation-ciblee`, 2026-10-16) : par `StartExerciseSession`, sans use case dédié (ADR-0101 « Proposé ») | Un bouton qui appelle un helper de route inexistant |
+| AS-17 | Suivre les remédiations de sa classe | ❌ | V5 — en PR (`remediation-ciblee`, 2026-10-16) : page de la classe et fiche vue depuis la classe, sans attendre `rapports-de-classe` (UDR-0121 « Proposé ») | `NoMethodError` sur panneau fermé |
 | AS-18 | Assigner un exercice à une classe | ❌ | V1 (Lot D) (= CL-20) — livrée 2026-09-27 (#33) | Une réponse `204` qui laisse le bouton inchangé ; `assigned_by_id` qui reçoit un id de profil pour une clé vers `users` |
 | AS-19 | Retirer un exercice d'une classe | ⚠️ | V1 (Lot D) (= CL-20) — livrée 2026-09-27 (#33) | — |
 | AS-20 | Exercices d'un chapitre dans une classe | ❌ | V1 (Lot D) (= CL-12) — livrée 2026-09-27 (#33) | — |

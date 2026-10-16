@@ -90,7 +90,7 @@ L'enseignant prépare sa prochaine séance depuis la page de sa classe : jours d
 | `pending_title` | « Élèves à revoir » |
 | `lifted_title` | « Fiche levée » |
 | `since` | « depuis le %{date} » |
-| `failures` | other : « %{count} essais sous la moyenne » |
+| `failures` | other : « %{count} sessions sous la moyenne » (« essai » est interdit par l’UDR-0007 ; corrigé à l’exécution) |
 | `lifted_on` | « le %{date} » |
 
 ### 3.3 Commun

@@ -205,9 +205,9 @@ class Classroom::ClassroomEssentialsControllerTest < ActionDispatch::Integration
     assert_select "#classroom_essential_gaps_pending" do
       assert_select "h2, h3", text: gaps_tl("pending_title")
       assert_select "li", 2
-      assert_select "li:nth-child(1)", text: /Awa Bamba.*depuis le 12 oct\..*3 essais sous la moyenne/m
+      assert_select "li:nth-child(1)", text: /Awa Bamba.*depuis le 12 oct\..*3 sessions sous la moyenne/m
       assert_select "li:nth-child(2)", text: /Bintou Diallo.*depuis le 13 oct\./m
-      assert_select "li:nth-child(2)", text: /essais/, count: 0
+      assert_select "li:nth-child(2)", text: /sous la moyenne/, count: 0
     end
     assert_select "#classroom_essential_gaps_lifted li", text: /Yao Kouassi.*le 14 oct\./m
     assert_select "#classroom_essential_gaps", text: /remédiation|seul/i, count: 0

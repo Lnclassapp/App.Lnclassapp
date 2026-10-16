@@ -166,6 +166,7 @@ Travail mis de côté par le porteur. Les vagues V2 à V6 y sont placées le 202
 | [`accueil-eleve`](accueil-eleve/memo.md) | **Livré** le 2026-10-15, fusionné dans `Develop` ([#241](https://github.com/Lnclassapp/App.Lnclassapp/pull/241)) : en-tête au logo et menu de l'avatar (plus de barre du bas élève sur le web), accueil en une colonne, exercice du jour et « Inviter mon enseignant », « Fait seul (7 j) » chez l'enseignant et la direction (ADR-0089, UDR-0084) |
 | [`tests-numero-connexion`](tests-numero-connexion/memo.md) | **Livré** le 2026-10-15, fusionné dans `Develop` ([#248](https://github.com/Lnclassapp/App.Lnclassapp/pull/248)) : cinq tests système alignés sur la connexion au numéro en chiffres seuls (UDR-0060 §3.2), rouges sur `Develop` depuis le 2026-10-11 |
 | [`tests-toast-masque-clic`](tests-toast-masque-clic/memo.md) | **Livré** le 2026-10-15, fusionné dans `Develop` ([#249](https://github.com/Lnclassapp/App.Lnclassapp/pull/249)) : un toast ne masque plus le clic suivant dans les tests système (`dismiss_toasts` partagé), deux tests instables stabilisés |
+| [`remediation-ciblee`](remediation-ciblee/memo.md) | PR ouverte vers `Develop` (2026-10-16), lots A à D ; décisions prises sur recommandation, à confirmer par le porteur (Q1 à Q12) ; ADR-0101 et UDR-0119 à 0121 « Proposé » | V5 : la fiche à revoir propose et démarre un autre exercice, le résultat dit si la fiche est levée (règle sur 20), l'enseignant voit les fiches à revoir de sa classe et qui les a levées (AS-16, AS-17) |
 
 ## Cycle de vie
 
