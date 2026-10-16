@@ -127,3 +127,9 @@ Conclusion de l'inventaire : **aucune table nouvelle n'est nécessaire pour le r
 - Les questions 1 à 8, 10 et 11 ci-dessus, **à faire répondre par le porteur avant le Lot 0** (la 9 relève de `enseignant-plusieurs-matieres`).
 - Ordre avec `enseignant-plusieurs-matieres` : les deux chantiers touchent les lectures de l'enseignant (accueil, catalogue). Le premier dont le Lot 0 fusionne fixe les contrats ; l'autre s'y rebase.
 - Vérifier en production qu'aucune ligne `teacher_schools` n'a `primary = false` (`SELECT COUNT(*) FROM teacher_schools WHERE NOT "primary"`). S'il y en a, le Lot 0 dit lesquelles et pourquoi avant toute écriture.
+
+## Réponses du porteur (2026-10-16)
+
+- Recommandations acceptées.
+- Q9 : les matières de l'enseignant sont choisies **par établissement** (voir `enseignant-plusieurs-matieres`).
+- Ordre : ce chantier passe avant `enseignant-plusieurs-matieres`, jamais en même temps (9 fichiers communs).

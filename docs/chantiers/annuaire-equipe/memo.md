@@ -112,3 +112,7 @@ Le porteur a lancé les vagues V2 à V6 ; `annuaire-equipe` est le chantier rest
 ## Questions encore ouvertes
 
 Q1 à Q8 ci-dessus. Aucune ligne de code avant leur réponse : Q1 décide du Lot E, Q2 et Q7 du contenu des Lots C et D, Q4 du périmètre du Lot A.
+
+## Réponses du porteur (2026-10-16)
+
+- **Chantier reporté** par le porteur (« laisse ce chantier pour le moment »). Rien ne démarre.

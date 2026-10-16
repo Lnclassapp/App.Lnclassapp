@@ -77,3 +77,7 @@ Enfin, rien ne permet de **changer** le sous-rôle d'un membre : l'action `team_
 
 - Les dix questions du grill, ci-dessus, attendent la réponse du porteur. Le PRD, l'ADR-0100 et les UDR-0116 à 0118 sont écrits sur les recommandations ; une réponse différente se reporte dans ces fichiers **avant** le Lot 0.
 - Liste des membres de l'équipe en production et de leur sous-rôle (question 7) : à sortir avant le déploiement.
+
+## Réponses du porteur (2026-10-16)
+
+- **Chantier reporté** par le porteur (« laisse-le d'abord »). Rien ne démarre. La faille relevée (un membre « Contenu » a presque les droits d'un admin) reste ouverte.

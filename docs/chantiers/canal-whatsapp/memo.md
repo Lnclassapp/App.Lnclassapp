@@ -115,3 +115,7 @@ Toutes celles de la table ci-dessus, Q1 à Q12, jusqu'à la réponse du porteur.
 
 - **Juristes** : base légale du traitement, consentement d'un mineur, transfert vers Meta (Q4).
 - **Démarches Meta** : RCCM, vérification de l'entreprise, numéro dédié, approbation du modèle d'avis (Q7).
+
+## Réponses du porteur (2026-10-16)
+
+- **Chantier gelé.** Le porteur demande ce qu'il faut faire et propose un lien `wa.me` vers le support avec un texte prêt qui présente la personne qui écrit. Ce besoin (l'utilisateur nous écrit) est différent de ce chantier (Lnclass envoie des avis) : il est traité par le petit chantier `aide-whatsapp-message-pret`. Les démarches Meta (RCCM, numéro dédié, tarif, avis juridique) restent le préalable de ce chantier-ci.
