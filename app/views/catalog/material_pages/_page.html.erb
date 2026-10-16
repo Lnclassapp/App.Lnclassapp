@@ -1,0 +1,38 @@
+<%# 🌐 UI · catalog/material_pages/_page — une page de 24 cartes d'une matière, groupées par niveau, puis le frame différé de la suivante %>
+<%# Rôle : un groupe continué d'une page à l'autre ne répète pas son titre (after_level) ; un niveau choisi n'a pas de titre de groupe, le h1 le porte %>
+<%# ADR  : 0076 (§4.2 : hors de l'écran à l'arrivée) · UDR : 0114 (§3.3), 0013 (amendement du 2026-10-05) · nested : page chargée dans le frame de la précédente %>
+<%# locals: (page:, nested: false) -%>
+<% previous = (after_level if nested) %>
+<% page.groups.each do |group| %>
+  <% grid = capture do %>
+    <ul class="grid grid-cols-1 gap-3 min-[700px]:grid-cols-2 lg:grid-cols-3">
+      <%= render partial: "catalog/public/course_card", collection: group.cards, as: :card %>
+    </ul>
+  <% end %>
+  <% if page.selected_level || group.level.slug == previous %>
+    <div class="<%= class_names("mt-3" => nested) %>"><%= grid %></div>
+  <% else %>
+    <section id="level_group_<%= group.level.slug %>" aria-labelledby="level_group_<%= group.level.slug %>_title"
+             class="<%= class_names("pt-8" => nested) %>">
+      <h2 id="level_group_<%= group.level.slug %>_title" class="mb-3 flex items-center gap-3">
+        <span class="font-display text-xl leading-tight font-extrabold"><%= group.level.name %></span>
+        <%= ui_badge t("catalog.public.courses_count", count: group.count), tone: :brand, size: :sm %>
+      </h2>
+      <%= grid %>
+    </section>
+  <% end %>
+  <% previous = group.level.slug %>
+<% end %>
+<% if page.page < page.pages %>
+  <% next_page = page.page + 1 %>
+  <% next_path = public_material_path(page.material.slug, niveau: page.selected_level&.slug, serie: page.selected_series&.slug,
+                                      page: next_page, after_level: page.groups.last.level.slug) %>
+  <%# Demandé quand il entre à l'écran ; sans JavaScript, le bouton ouvre la page suivante. %>
+  <%= turbo_frame_tag "material_courses_page_#{next_page}", src: next_path, loading: :lazy, target: "_top",
+                      class: "mt-3 block transition-opacity aria-busy:opacity-50" do %>
+    <div class="flex justify-center py-2">
+      <%= ui_button t("catalog.material_pages.page.more"), href: next_path, variant: :secondary,
+                    data: { turbo_frame: "material_courses_page_#{next_page}" } %>
+    </div>
+  <% end %>
+<% end %>
