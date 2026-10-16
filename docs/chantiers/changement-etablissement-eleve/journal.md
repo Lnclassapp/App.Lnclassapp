@@ -18,6 +18,8 @@
 | 2026-10-16 | Lot A : la confirmation relit la classe visée (`ClassroomChangePreviewQuery`) et renvoie à « Changer de classe » une classe hors cascade (422), la classe actuelle (422) ou une classe complète (403) ; le retrait n'est dit qu'à l'envoi | Montrer la page sans rien écrire ; la garde reste `ChangeClassroom` | — |
 | 2026-10-16 | Lot A : le rappel « Tu es en … » est le sous-titre de `ui_page_header` (`text-mute`), pas un paragraphe `text-sm` à part | Composant existant ; un seul écart de taille de texte | UDR-0102 §3.1 (écart mineur) |
 | 2026-10-16 | Lot A : un seul test système (parcours JS cascade → confirmation → accueil) ; refus, sans JS, lien et rôles en tests contrôleur | Budget système de 15 s par chantier (ADR-0069 §9) | — |
+| 2026-10-16 | Lot B : la ligne Classe réutilise la clé `student_information.change` (« Changer ») ; aucune clé nouvelle dans `identity/profiles.fr.yml` | La clé existait pour le Numéro | — |
+| 2026-10-16 | Lot B : l'entrée par le profil est jouée au début du test système du Lot A, pas dans `profile_test.rb` | Budget système ; un seul démarrage de navigateur | — |
 
 ## Ce qui a dérapé
 

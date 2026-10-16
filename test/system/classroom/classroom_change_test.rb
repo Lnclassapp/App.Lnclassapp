@@ -1,8 +1,8 @@
 require "application_system_test_case"
 
-# ADR-0095, UDR-0102 (§3.1, §3.2), in a real browser at 390 px: a student whose classroom is active opens « Changer de
-# classe », finds their classroom disabled with « Ta classe », changes school with « Changer », picks a level and a
-# classroom, reads the confirmation and confirms; they land on the home of the new classroom with the welcome toast.
+# ADR-0095, UDR-0101, UDR-0102 (§3.1, §3.2), in a real browser at 390 px: a student whose classroom is active opens
+# « Changer de classe » from the « Classe » row of their profile, finds their classroom disabled with « Ta classe »,
+# changes school with « Changer », picks a level and a classroom, reads the confirmation and confirms; they land on the home of the new classroom with the welcome toast.
 class Classroom::ClassroomChangeTest < ApplicationSystemTestCase
   PICKER = "classroom.student_registrations.class_picker".freeze
   PAGE = "classroom.student_classroom_changes".freeze
@@ -21,8 +21,11 @@ class Classroom::ClassroomChangeTest < ApplicationSystemTestCase
 
   test "the student changes school by the cascade, confirms, and lands in the new classroom" do
     with_mobile_viewport do
-      visit new_student_classroom_change_path
+      # UDR-0101 : depuis le profil, la ligne Classe ouvre la page, hors de la fenêtre.
+      visit profile_path
+      find("#profile_information a[aria-label='Changer classe, 2nde A']").click
 
+      assert_current_path new_student_classroom_change_path
       within("turbo-frame#picker_levels") { choose "2nde" }
       within("turbo-frame#picker_classrooms") do
         assert_selector :radio_button, "2nde A #{I18n.t("#{PICKER}.current")}", disabled: true
