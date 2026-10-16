@@ -2,7 +2,7 @@
 
 > Les specs sont figées ici. Toute évolution après la phase 3 se fait par modification explicite de ce fichier, pas par improvisation dans le code.
 >
-> **Statut : proposé.** Écrit sur les recommandations du [memo](memo.md) (Q1 à Q8). Une réponse contraire du porteur amende ce fichier avant le code.
+> **Statut : figé le 2026-10-16** sur les réponses du porteur (memo). **Q6 = non** : le Lot B (chiffres de la classe, CL-14) est retiré ; ses lignes sont barrées ci-dessous. Le Lot C part en correctif séparé (`fix/classe-archivee-sous-pages`).
 
 ## 1. Contexte
 
@@ -12,15 +12,15 @@ Une classe ne se corrige plus après sa création : ni son nom, ni son plafond (
 
 | Acteur | Peut | Ne peut pas |
 |---|---|---|
-| Team | Modifier le nom et le plafond de toute classe active de l'année en cours, quel que soit le statut de l'établissement ; lire les chiffres de toute classe | Changer le niveau, la série, l'année d'une classe |
+| Team | Modifier le nom et le plafond de toute classe active de l'année en cours, quel que soit le statut de l'établissement | Changer le niveau, la série, l'année d'une classe |
 | SchoolStaff (direction) | Modifier le nom et le plafond d'une classe active de l'année en cours, dans son seul établissement, s'il est actif | Toucher une classe d'un autre établissement (404) ; créer une classe au nom libre |
-| Teacher | Lire les chiffres de sa classe (devoirs donnés, taux de rendu, moyenne) | Modifier une classe (aucune entrée ; requête directe refusée) |
+| Teacher | ~~Lire les chiffres de sa classe~~ (Lot B retiré) | Modifier une classe (aucune entrée ; requête directe refusée) |
 | Student | Voir le nouveau nom de sa classe ; entrer dans une classe dont le plafond a été relevé | Tout geste de ce chantier |
 
 Règles d'autorisation :
 
 - Modifier : `Policies::School::ManageSchoolStructurePolicy` (celle de « + », « − » et de l'archivage), appelée une fois l'établissement lu.
-- Lire les chiffres : `Policies::Classroom::ReadClassroomPolicy`, accès `show_roster` (enseignant de la classe, équipe).
+- ~~Lire les chiffres : `Policies::Classroom::ReadClassroomPolicy`, accès `show_roster` (enseignant de la classe, équipe).~~ (Lot B retiré)
 - Sous-pages d'une classe : leurs policies actuelles, précédées du refus de toute classe archivée (404).
 
 ## 3. Parcours utilisateur
@@ -33,7 +33,7 @@ Règles d'autorisation :
 4. Elle saisit « A » et « 95 », puis « Enregistrer ».
 5. La modale se ferme, la carte affiche « 6ème A », un toast dit « Classe 6ème A enregistrée ».
 
-### Chemin nominal — chiffres de la classe
+### ~~Chemin nominal — chiffres de la classe~~ (Lot B retiré, Q6 = non)
 
 1. L'enseignant ouvre la page de sa classe.
 2. Sous l'en-tête, trois tuiles : « Devoirs donnés », « Taux de rendu », « Moyenne », mêmes chiffres que la page de la direction pour la même classe.
@@ -117,7 +117,7 @@ Alors la classe ajoutée s'appelle « 6ème 3 »
 Alors un toast confirme l'enregistrement
 Et aucune ligne d'audit n'est écrite
 
-# Lot B — chiffres de la classe
+# Lot B — chiffres de la classe : RETIRÉ (Q6 = non, 2026-10-16), scénarios gardés pour mémoire
 
 Étant donné qu'un enseignant enseigne en « Tle D 1 », où 3 devoirs ont été donnés à 10 élèves
 Quand il ouvre la page de sa classe
@@ -132,7 +132,7 @@ Alors la tuile « Moyenne » affiche « — » et le texte « non calculé » po
 Quand il demande la page de la classe
 Alors il reçoit 403, comme aujourd'hui
 
-# Lot C — une classe archivée n'a plus de page
+# Lot C — une classe archivée n'a plus de page : correctif séparé (fix/classe-archivee-sous-pages)
 
 Étant donné que la classe « Tle D 1 » est archivée
 Quand son enseignant ouvre l'un de ses cours, un essentiel, le suivi d'un exercice assigné ou ses jours de séance
@@ -155,14 +155,14 @@ Alors la page s'affiche comme avant l'archivage
 
 ## 6. Décisions rattachées
 
-- [ADR-0098](../../decisions/adr/0098-modifier-une-classe-nom-au-prefixe-du-bareme-et-plafond.md) — Modifier une classe : suffixe du nom et plafond, par la direction et l'équipe *(Proposé)*
-- [UDR-0110](../../decisions/udr/0110-modale-modifier-la-classe.md) — Modale « Modifier la classe » *(Proposé)*
-- [UDR-0111](../../decisions/udr/0111-entree-modifier-du-menu-de-la-carte-de-classe.md) — Entrée « Modifier la classe » du menu ⋮ des cartes *(Proposé)*
-- [UDR-0112](../../decisions/udr/0112-chiffres-de-la-classe-pour-l-enseignant-et-l-equipe.md) — Chiffres de la classe sur la page de l'enseignant et de l'équipe *(Proposé)*
+- [ADR-0098](../../decisions/adr/0098-modifier-une-classe-nom-au-prefixe-du-bareme-et-plafond.md) — Modifier une classe : suffixe du nom et plafond, par la direction et l'équipe *(Accepté)*
+- [UDR-0110](../../decisions/udr/0110-modale-modifier-la-classe.md) — Modale « Modifier la classe » *(Accepté)*
+- [UDR-0111](../../decisions/udr/0111-entree-modifier-du-menu-de-la-carte-de-classe.md) — Entrée « Modifier la classe » du menu ⋮ des cartes *(Accepté)*
+- [UDR-0112](../../decisions/udr/0112-chiffres-de-la-classe-pour-l-enseignant-et-l-equipe.md) — Chiffres de la classe sur la page de l'enseignant et de l'équipe *(Abandonnée)*
 
 ## 7. Mesures
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Requêtes SQL de la page d'une classe (enseignant, 30 élèves, 5 devoirs) | à mesurer au Lot B | avant + 2 au plus, quel que soit le nombre d'élèves | |
+| Requêtes SQL de la page d'une classe (enseignant, 30 élèves, 5 devoirs) | — | — | sans objet (Lot B retiré) |
 | Sous-pages d'une classe archivée lisibles | 4 | 0 | |

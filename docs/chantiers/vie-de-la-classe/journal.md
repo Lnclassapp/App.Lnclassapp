@@ -10,6 +10,9 @@
 | 2026-10-16 | Recommander le préfixe du barème fixe et un suffixe libre | La cascade de l'élève et le « + » restent vrais ; un nom libre les casse | ADR-0098 (proposé) |
 | 2026-10-16 | Recommander l'équipe et la direction, pas l'enseignant | Même policy que « + », « − » et l'archivage ; l'enseignant se déclare sans validation (ADR-0085 §5) | ADR-0098 (proposé) |
 | 2026-10-16 | Ne pas renommer `shared/_classroom_archive_menu` en y ajoutant « Modifier » | Le renommage toucherait locales et appelants sans rien changer pour l'utilisateur | Non (UDR-0111) |
+| 2026-10-16 | Réponses du porteur : recommandations acceptées sauf Q6 ; Lot B retiré, Lot C en correctif séparé | « pas de moyenne de classe » ; la dette des sous-pages archivées part tout de suite sur `fix/classe-archivee-sous-pages` | ADR-0098, UDR-0110, UDR-0111 acceptés ; UDR-0112 abandonnée |
+| 2026-10-16 | Lot 0 : le DTO ne porte que `suffix` et `max_students` | L'établissement et la classe sont des arguments du use case, comme `ArchiveClassroom` ; les répéter dans le DTO ferait deux sources | Non |
+| 2026-10-16 | Lot 0 : la longueur du nom complet n'est pas validée par le DTO | Elle dépend du préfixe, que seul le use case connaît (niveau et série de la classe lue) | Non (ADR-0098 §4) |
 
 ## Ce qui a dérapé
 

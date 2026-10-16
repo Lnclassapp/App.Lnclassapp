@@ -39,6 +39,8 @@ scope "teams", module: "teams" do
       end
     end
     resources :level_archivals, only: :create, path: "level-archivals"
+    # ADR-0098 : modifier le nom (suffixe) et le plafond d'une classe (modale de l'UDR-0110, menu ⋮ de l'UDR-0111).
+    resources :classroom_settings, only: %i[edit update], path: "classroom-settings", param: :public_id
     # ADR-0065 : inviter la direction depuis la fiche (modale de l'UDR-0052).
     resources :staff_invitations, only: %i[new create], path: "staff-invitations"
     # ADR-0077 : retirer une direction, la restaurer avant sa suppression (public_id du compte).

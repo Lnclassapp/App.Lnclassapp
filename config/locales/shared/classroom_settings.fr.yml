@@ -1,0 +1,39 @@
+# ADR-0098, UDR-0110 : modale « Modifier la classe » (équipe et direction) — champs, aides, erreurs.
+fr:
+  activemodel:
+    attributes:
+      dtos/classroom/classroom_settings_input:
+        suffix: "Nom"
+        max_students: "Plafond d'élèves"
+    errors:
+      models:
+        dtos/classroom/classroom_settings_input:
+          attributes:
+            base:
+              archived: "Cette classe est archivée : restaurez-la pour la modifier."
+            suffix:
+              blank: "Saisissez la fin du nom."
+              too_long: "Le nom complet tient en 15 caractères au plus (%{prefix} + %{count})."
+              taken: "Ce nom est déjà pris dans l'établissement cette année (classes archivées comprises)."
+            max_students:
+              blank: "Entre 1 et 150 élèves."
+              not_a_number: "Entre 1 et 150 élèves."
+              not_an_integer: "Entre 1 et 150 élèves."
+              in: "Entre 1 et 150 élèves."
+              below_headcount:
+                one: "La classe compte déjà %{count} élève : le plafond ne peut pas être plus bas."
+                other: "La classe compte déjà %{count} élèves : le plafond ne peut pas être plus bas."
+  shared:
+    classroom_settings_form:
+      name: "Nom"
+      name_hint: "Le niveau et la série ne changent pas. 15 caractères au plus en tout."
+      free_name_hint: "Le nom actuel, « %{name} », sera remplacé."
+      max_students_hint:
+        zero: "La classe n'a pas encore d'élève. Entre 1 et 150."
+        one: "La classe compte 1 élève. Entre 1 et 150."
+        other: "La classe compte %{count} élèves. Entre %{count} et 150."
+      cancel: "Annuler"
+      submit: "Enregistrer"
+      submitting: "Enregistrement…"
+    classroom_settings:
+      archived: "Cette classe est archivée : restaurez-la pour la modifier."

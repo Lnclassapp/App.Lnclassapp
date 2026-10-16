@@ -3,7 +3,7 @@
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
 >
-> **Aucun lot ne démarre avant les réponses du porteur aux questions Q1 à Q8 du [memo](memo.md).** Le plan suit les recommandations ; une réponse contraire le modifie d'abord (Q6 = « non » retire le Lot B ; Q8 = « non » retire le Lot C).
+> **Réponses du porteur (2026-10-16)** : recommandations acceptées, sauf **Q6 = « non »** : le **Lot B est retiré** (UDR-0112 abandonnée), et la locale de son titre sort du Lot 0. Le **Lot C** part tout de suite en correctif séparé, sur `fix/classe-archivee-sous-pages` : il n'est plus dans cette branche. Restent ici le Lot 0 puis le Lot A, un commit chacun, sur `feature/vie-de-la-classe`.
 
 ## Graphe
 
@@ -31,7 +31,7 @@ Trois agents au plus en même temps : Lot 0 et Lot C, puis Lot A, Lot B et Lot C
                      `config/locales/shared/classroom_settings.fr.yml` *(formulaire, aides, erreurs, toasts — UDR-0110)*
                      `config/locales/shared/classroom_archival.fr.yml` *(entrée « Modifier la classe » — UDR-0111)*
                      `config/locales/teams/classroom_settings.fr.yml` · `config/locales/school_admin/classroom_settings.fr.yml` *(titres, flash)*
-                     `config/locales/classroom/classrooms.fr.yml` *(titre « Chiffres de la classe » — UDR-0112)*
+                     ~~`config/locales/classroom/classrooms.fr.yml`~~ *(Lot B retiré)*
                      `test/domain/entities/classroom/classroom_numbering_test.rb`
                      `test/domain/dtos/classroom/classroom_settings_input_test.rb`
 - **Dépend de**    : réponses du porteur (Q1 à Q4, Q6)
@@ -64,9 +64,9 @@ Trois agents au plus en même temps : Lot 0 et Lot C, puis Lot A, Lot B et Lot C
 
 ---
 
-## Lot B — Chiffres de la classe (enseignant et équipe)
+## ~~Lot B — Chiffres de la classe (enseignant et équipe)~~ — RETIRÉ
 
-*Retiré si Q6 = « laisser CL-14 à `rapports-de-classe` ».*
+*Retiré le 2026-10-16 : Q6 = « non » (« pas de moyenne de classe »). Gardé pour mémoire, rien n'en est livré.*
 
 - **Couche**       : infrastructure (lecture) + delivery + ui
 - **Fichiers**     : `app/infrastructure/queries/school/student_work_query.rb` *(`figures(public_id:)`, mêmes définitions que `classroom`)*
@@ -81,9 +81,9 @@ Trois agents au plus en même temps : Lot 0 et Lot C, puis Lot A, Lot B et Lot C
 
 ---
 
-## Lot C — Une classe archivée n'a plus aucune page
+## Lot C — Une classe archivée n'a plus aucune page — correctif séparé
 
-*Retiré si Q8 = « non ». Aucune vue nouvelle : la page 404 existe.*
+*Q8 = « oui », mais livré à part, sur `fix/classe-archivee-sous-pages` (décision du porteur, 2026-10-16). Aucune vue nouvelle : la page 404 existe.*
 
 - **Couche**       : delivery
 - **Fichiers**     : `app/controllers/classroom/classroom_courses_controller.rb`

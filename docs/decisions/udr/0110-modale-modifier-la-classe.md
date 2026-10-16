@@ -1,14 +1,14 @@
 # UDR-0110 : Modale « Modifier la classe » — préfixe fixe, suffixe et plafond
 <!-- index
 titre: Modale « Modifier la classe » : préfixe fixe, suffixe et plafond
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-16)*
 adr-lie: [0098](../adr/0098-modifier-une-classe-nom-au-prefixe-du-bareme-et-plafond.md)
 problematique: Comment l'équipe et la direction changent le nom et le plafond d'une classe sans pouvoir sortir du préfixe du barème, avec l'effectif sous les yeux et les refus sous leur champ.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-16)* |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/vie-de-la-classe`](../../chantiers/vie-de-la-classe/memo.md) |
 | **ADR lié** | [ADR-0098](../adr/0098-modifier-une-classe-nom-au-prefixe-du-bareme-et-plafond.md) |
