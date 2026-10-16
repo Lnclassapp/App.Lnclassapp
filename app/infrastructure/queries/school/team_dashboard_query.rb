@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::TeamDashboardQuery
 # Rôle : pilotage de l'équipe (TR-10, TR-12) : indicateurs, élèves par niveau, par DRENA ou par établissement, derniers inscrits
-# ADR  : 0040, 0041, 0049, 0062, 0082, 0084, 0086 · UDR : 0049, 0078 · un nombre fixe de requêtes groupées, quel que soit le volume
+# ADR  : 0040, 0041, 0049, 0062, 0082, 0084, 0086, 0094 · UDR : 0049, 0078 · un nombre fixe de requêtes groupées, quel que soit le volume
 module Queries
   module School
     class TeamDashboardQuery
@@ -104,9 +104,11 @@ module Queries
         territorial ? in_drena(scope) : scope
       end
 
-      # Un enseignant est rattaché à la DRENA de son établissement principal (ADR-0030).
+      # Un rattachement par établissement, principal ou non (ADR-0094 §4.6, amende l'ADR-0062) : un enseignant compte dans
+      # chaque DRENA où il est rattaché, et une ligne de DRENA est la somme de ses établissements ; le national compte les
+      # comptes, une fois (accounts_by_role).
       def teacher_placements
-        in_drena(Orm::TeacherSchool.joins(:teacher, :school).where(primary: true, users: { anonymized_at: nil }))
+        in_drena(Orm::TeacherSchool.joins(:teacher, :school).where(users: { anonymized_at: nil }))
       end
 
       def in_drena(scope) = @drena_id ? scope.where(schools: { drena_id: @drena_id }) : scope

@@ -36,8 +36,8 @@ module UseCases
       end
 
       setup do
-        @classroom = Entities::Classroom::Classroom.new(id: 3, public_id: "cls3b", name: "3ème B", teacher_ids: [ 7 ], level_id: 4)
-        archived = Entities::Classroom::Classroom.new(id: 4, public_id: "clsold", name: "3ème A", teacher_ids: [ 7 ], level_id: 4,
+        @classroom = Entities::Classroom::Classroom.new(school_id: 1, id: 3, public_id: "cls3b", name: "3ème B", teacher_ids: [ 7 ], level_id: 4)
+        archived = Entities::Classroom::Classroom.new(school_id: 1, id: 4, public_id: "clsold", name: "3ème A", teacher_ids: [ 7 ], level_id: 4,
                                                       status: "archived")
         @classrooms = FakeClassrooms.new(@classroom, archived)
         @session_days = FakeSessionDays.new([ 7, 3 ] => [ 1, 4 ])

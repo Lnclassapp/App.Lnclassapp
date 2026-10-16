@@ -1,13 +1,13 @@
 # 🔌 INFRA · Repositories::Identity::SessionRepository
 # Rôle : sessions serveur adressées par l'empreinte de leur jeton ; jamais le jeton en clair
-# ADR  : 0031, 0050, 0055
+# ADR  : 0031, 0050, 0055, 0094
 module Repositories
   module Identity
     class SessionRepository
       include Ports::Identity::SessionRepositoryPort
 
       COLUMNS = %w[sessions.id sessions.user_id users.role sessions.created_at sessions.last_seen_at
-                   sessions.second_factor_verified_at totp_credentials.confirmed_at].freeze
+                   sessions.second_factor_verified_at totp_credentials.confirmed_at sessions.current_school_id].freeze
 
       def create(user_id:, token_digest:, ip:, user_agent:, at:)
         Orm::Session.create!(user_id:, token_digest:, ip_address: ip.to_s.first(45).presence,
@@ -20,9 +20,15 @@ module Repositories
                           .where(token_digest:).pick(*COLUMNS.map { Arel.sql(it) })
         return if row.nil?
 
-        id, user_id, role, created_at, last_seen_at, verified_at, confirmed_at = row
+        id, user_id, role, created_at, last_seen_at, verified_at, confirmed_at, current_school_id = row
         Entities::Identity::SessionState.new(id:, user_id:, role:, created_at:, last_seen_at:,
-                                             second_factor_verified_at: verified_at, second_factor_confirmed: !confirmed_at.nil?)
+                                             second_factor_verified_at: verified_at, second_factor_confirmed: !confirmed_at.nil?,
+                                             current_school_id:)
+      end
+
+      def set_current_school(id:, school_id:)
+        Orm::Session.where(id:).update_all(current_school_id: school_id)
+        true
       end
 
       def touch(id:, at:)

@@ -49,7 +49,7 @@ module UseCases
       end
 
       test "IL-11 : l'enseignant de la classe change le lien ; la classe rendue porte le nouveau jeton, l'ancien est remplacé" do
-        result = change(actor(:teacher))
+        result = change(actor(:teacher, school_id: 7))
 
         assert result.success?
         assert_equal "cls-3e2", result.value.public_id
@@ -60,15 +60,15 @@ module UseCases
       end
 
       test "IL-11 : la classe est lue sous verrou, dans la transaction" do
-        change(actor(:teacher))
+        change(actor(:teacher, school_id: 7))
 
         assert_equal [ [ "cls-3e2", 1 ] ], @classrooms.locked
         assert_equal 1, @transaction.calls
       end
 
       test "IL-11 : un second enseignant de la classe change le même lien, celui de la classe" do
-        first = change(actor(:teacher)).value.link_token
-        second = change(actor(:teacher, user_id: 2)).value.link_token
+        first = change(actor(:teacher, school_id: 7)).value.link_token
+        second = change(actor(:teacher, user_id: 2, school_id: 7)).value.link_token
 
         assert_not_equal first, second
         assert_equal second, @classrooms.link_token_of("cls-3e2")
@@ -108,7 +108,7 @@ module UseCases
       test "une classe archivée garde son jeton : :forbidden, raison classroom_archived" do
         @classroom.status = "archived"
 
-        result = change(actor(:teacher))
+        result = change(actor(:teacher, school_id: 7))
 
         assert_equal :forbidden, result.code
         assert_equal({ base: [ :classroom_archived ] }, result.errors)

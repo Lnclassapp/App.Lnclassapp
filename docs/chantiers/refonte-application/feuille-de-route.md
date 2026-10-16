@@ -275,7 +275,7 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 | **Déjà livré (hors ordre)** | CL-05 (partager le lien de classe sur WhatsApp), par `croissance-parrainage` (#71) |
 | **Reste : `rapports-de-classe`** (8 features) | CL-13, CL-14, CL-15, AS-21, AS-22, AS-23, AS-24, AS-25 ; plus la partie V3 de TR-05 (activité des élèves sur l'accueil enseignant) et de TR-32 (cache des rapports) |
 | **Reste : `vie-de-la-classe`** (2 features) | CL-02 (modifier une classe, **déplacée de la V1 le 2026-09-28**), CL-03 (archiver au lieu de supprimer). Sans ID d'inventaire : année scolaire et archivage (ADR-0041), code révocable et régénérable, retrait d'un élève, changement de classe par l'enseignant ou l'équipe (ADR-0040), libération des codes d'adhésion à l'archivage (dette de la V1), reconduction des classes à la rentrée (ADR-0041) |
-| **Reste : `multi-etablissements-enseignant`** (1 feature) | ID-27 |
+| **`multi-etablissements-enseignant`** (1 feature) | ID-27 — PR prête le 2026-10-16 (ADR-0094) |
 | **`multi-classes-eleve`** | Aucune feature d'inventaire : sélecteur de classe et adhésions non principales (ADR-0040, contradictions C-12 et C-28 fermées) |
 | **Pourquoi CL-02 est ici** | Modifier une classe touche aux contrats de l'ADR-0041 (plafond d'effectif, année, code) que ce chantier ouvre, et à la numérotation des classes générées (ADR-0030, ADR-0059) : renommer « Tle D 3 » casse la règle « plus haut numéro + 1 ». Aucun lot de la V1 ne la portait. La direction pourra modifier ses classes si la V2 lui en donne le droit (Q3) |
 | **Tables** | Aucune table nouvelle : `classrooms.school_year`, `status` et `archived_at` existent depuis la V1 (ADR-0041) |
@@ -398,7 +398,7 @@ Deux vagues ne se chevauchent que si elles ne partagent ni fichier ni contrat ([
 | Q4 | V2, V3, V4 | ADR-0057, 0059, 0063 et 0064, UDR-0044, 0046 et 0050 sont en production avec leurs défauts du 2026-09-28 : les acceptes-tu tels quels ? **Répondue le 2026-09-28 : acceptées telles quelles.** |
 | Q5 | V3 | Le multi-classes de l'élève (cours du soir, ADR-0040) est-il demandé ? Sinon, `multi-classes-eleve` sort du plan |
 | Q6 | V3 | CL-02 : quels champs d'une classe se modifient (nom, plafond d'effectif, statut) ? Renommer une classe générée casse la numérotation de l'ADR-0059 |
-| Q7 | V3 | Un enseignant rejoint un second établissement comment : avec le code de cet établissement (ADR-0057), ou rattaché par sa direction (ID-09) ? |
+| Q7 | V3 | ~~Un enseignant rejoint un second établissement comment : avec le code de cet établissement (ADR-0057), ou rattaché par sa direction (ID-09) ?~~ Tranchée le 2026-10-16 (ADR-0094) : par lui-même, par le lien d'invitation de l'établissement ou par sa DRENA ; pas de rattachement par la direction |
 | Q8 | V3 | Archivage de fin d'année (ADR-0041) : à quelle date, et faut-il un outil de reconduction des classes à la rentrée ? |
 | Q9 | V4 | Matrice des sous-rôles (ADR-0038) pour les pages livrées après elle : Pilotage, Croissance, validation des comptes en attente, barème et génération des classes. Qui voit quoi ? |
 | Q10 | V4 | PWA : installation seule, ou aussi un usage hors ligne ? Le hors-ligne demande un ADR (service worker, cache, budget de l'ADR-0051) |
@@ -469,7 +469,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | ID-24 | Changer de rôle | ❌ absent | **écartée** : aucun besoin exprimé | — |
 | ID-25 | Espace parent | ❌ absent | **écartée** — retirée du plan le 2026-09-22 (hors périmètre depuis le 2026-09-18) | Un rôle déclaré sans espace, qui retombe sur `/` |
 | ID-26 | Bannière d'installation PWA | ⚠️ | V4 (`installation-pwa`) | « Installée » enregistré sur iOS sans installation ; n'importe quelle valeur d'enum acceptée |
-| ID-27 | Enseigner dans plusieurs établissements | ⚠️ | V3 (`multi-etablissements-enseignant`, F-06) | `schools.first` sans ordre |
+| ID-27 | Enseigner dans plusieurs établissements | ⚠️ | V3 (`multi-etablissements-enseignant`, F-06) — PR prête le 2026-10-16 (ADR-0094) | `schools.first` sans ordre |
 | ID-28 | Normaliser et valider le contact | ⚠️ | V1 (0b, F-28) — livrée 2026-09-27 (#33) | — (règle juste, à reprendre) |
 | ID-29 | Générer l'identifiant public et le slug | ⚠️ | V1 (Lot 0a, F-05) — livrée 2026-09-27 (#33) | Un préfixe qui révèle le rôle ; le repli sur l'identifiant entier |
 | ID-30 | Comptes démo qui occupent des numéros | ⚠️ | **écartée** — retirée du plan le 2026-09-22 | Des démos stockées dans `users` |

@@ -249,8 +249,9 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   test "a forged POST of a Tle D exercise to the teacher's 3ème 1 or Tle C 1: 422 other_level, nothing written" do
     tle = create_level(name: "Tle")
     tle_d = create_exercise(essential: create_essential(course: create_course(level: tle, series: create_series(name: "D"))))
-    third = create_classroom(name: "3ème 1", level: create_level(name: "3ème"))
-    tle_c = create_classroom(name: "Tle C 1", level: tle, series: create_series(name: "C"))
+    school = create_school
+    third = create_classroom(school:, name: "3ème 1", level: create_level(name: "3ème"))
+    tle_c = create_classroom(school:, name: "Tle C 1", level: tle, series: create_series(name: "C"))
     sign_in_as create_teacher(classrooms: [ third, tle_c ])
 
     [ third, tle_c ].each do |classroom|

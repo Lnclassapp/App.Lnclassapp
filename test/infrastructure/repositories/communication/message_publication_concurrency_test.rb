@@ -21,7 +21,7 @@ module Repositories
           @release = release
         end
 
-        def live_of(author_id:, now:)
+        def live_of(author_id:, now:, school_id: nil)
           super.tap do
             @held << true
             @release.pop(timeout: 10)

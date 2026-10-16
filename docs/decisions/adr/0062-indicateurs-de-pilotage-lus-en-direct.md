@@ -52,7 +52,7 @@ Trois questions restaient ouvertes :
 | Compte actif | Compte non anonymisé (`anonymized_at` vide, ADR-0036) |
 | Élève placé | Élève non anonymisé qui a une classe **principale**, non quittée, **active**, de l'**année scolaire en cours** (ADR-0040, ADR-0041) |
 | DRENA d'un élève | Celle de l'établissement de sa classe de placement ; un élève non placé n'en a pas |
-| DRENA d'un enseignant | Celle de son établissement **principal** (ADR-0030) |
+| DRENA d'un enseignant | ~~Celle de son établissement principal (ADR-0030)~~ — amendé le 2026-10-16 (ADR-0094 §4.6) : celle de **chaque** établissement où il est rattaché ; il compte dans chacun, et une ligne de DRENA reste la somme de ses établissements. Le total national compte les comptes, une fois |
 | DRENA d'un membre de l'équipe | Aucune : sous un filtre DRENA, l'équipe n'est pas comptée |
 | Nouvel inscrit | Compte actif créé dans la période |
 | Élève actif | Élève qui a **commencé** au moins une session d'exercice dans la période, quel qu'en soit le statut |
@@ -181,7 +181,7 @@ Lectures groupées : un `GROUP BY` par dimension (rôle, niveau, DRENA) ; la cou
 *Chantier [`docs/chantiers/reorganisation-equipe-enseignant`](../../chantiers/reorganisation-equipe-enseignant/prd.md), [UDR-0068](../udr/0068-configuration-et-pilotage-par-etablissement.md) §3.6. Statut : proposé, accepté avec le plan du chantier. Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
 - **Nouvelle lecture** `Queries::School::DrenaSchoolsQuery`, servie par le pilotage sous filtre DRENA : les établissements de la DRENA et, pour chacun, classes, enseignants, élèves et élèves actifs.
-- **Mêmes définitions** que `TeamDashboardQuery#drena_rows`, établissement par établissement : classes actives de l'année scolaire ; enseignants rattachés à titre principal, non anonymisés ; élèves placés (classe principale, non quittée, active, de l'année) ; élèves placés ayant commencé une session dans la période. Une définition qui change, change pour les deux lectures.
+- **Mêmes définitions** que `TeamDashboardQuery#drena_rows`, établissement par établissement : classes actives de l'année scolaire ; enseignants rattachés (principal ou non, depuis l'ADR-0094), non anonymisés ; élèves placés (classe principale, non quittée, active, de l'année) ; élèves placés ayant commencé une session dans la période. Une définition qui change, change pour les deux lectures.
 - **Liste** : les établissements actifs, plus tout établissement non actif qui compte encore une classe, un enseignant ou un élève, pour que **la somme des établissements égale la ligne de la DRENA** (critère RE-08, testé).
 - **Nombre de requêtes fixe** (le total, puis une page de 25 aux chiffres calculés par agrégats groupés ou sous-requêtes), quel que soit le nombre d'établissements ; tri par élèves décroissants, nom, id ; recherche par `Queries::Shared::TextSearch` sur le nom.
 - **Aucun cache** : la page d'établissements n'entre pas dans le cache des chiffres de l'année (second amendement du 2026-09-29) ; `CACHE_VERSION` reste 1.
@@ -216,3 +216,8 @@ Lectures groupées : un `GROUP BY` par dimension (rôle, niveau, DRENA) ; la cou
 - `test/infrastructure/queries/school/team_dashboard_query_test.rb` : la vue nationale « année » garde son cache ; le nombre de requêtes reste indépendant du volume.
 - `PERF=1 test/performance/school/heavy_screens_budget_test.rb` : la page filtrée de la plus grande DRENA, en 7 jours et en année (entrée chaude), sous 300 ms p95.
 
+
+
+## Amendement du 2026-10-16 — un enseignant de plusieurs établissements (ADR-0094 §4.6)
+
+Chantier `multi-etablissements-enseignant`, Lot D. `DrenaSchoolsQuery#teachers_by_school` et `TeamDashboardQuery#teacher_placements` comptent les **rattachements** non anonymisés (toutes les lignes `teacher_schools`), plus seulement le principal. Un enseignant de deux établissements d'une même DRENA y compte deux fois ; RE-08 tient (la somme des établissements = la ligne de la DRENA) ; la vue nationale compte les comptes enseignants une fois (`accounts_by_role`). Aucune requête de plus. Vérification : `drena_schools_query_test.rb` (ME-23).

@@ -247,6 +247,58 @@ module Repositories
         assert Orm::TeacherSchool.exists?(teacher: colleague, school: here)
         assert_equal 0, @repository.detach_teacher(teacher_id: teacher.id, school_id: here.id)
       end
+
+      # ADR-0094 §4.5 : rattacher sous le plafond, sans doublon.
+      test "attach_teacher_within_cap attaches below the cap, refuses a school already attached and the cap" do
+        teacher = create_teacher(school: nil)
+        first, second, third, fourth = Array.new(4) { create_school }
+
+        assert @repository.attach_teacher_within_cap(teacher_id: teacher.id, school_id: first.id, primary: true, cap: 3, at: @at).success?
+        assert @repository.attach_teacher_within_cap(teacher_id: teacher.id, school_id: second.id, primary: false, cap: 3, at: @at).success?
+        already = @repository.attach_teacher_within_cap(teacher_id: teacher.id, school_id: second.id, primary: false, cap: 3, at: @at)
+        assert_equal [ :conflict, { base: [ :already_attached ] } ], [ already.code, already.errors ]
+        assert @repository.attach_teacher_within_cap(teacher_id: teacher.id, school_id: third.id, primary: false, cap: 3, at: @at).success?
+        full = @repository.attach_teacher_within_cap(teacher_id: teacher.id, school_id: fourth.id, primary: false, cap: 3, at: @at)
+
+        assert_equal [ :conflict, { base: [ :schools_limit ] } ], [ full.code, full.errors ]
+        assert_equal [ [ first.id, true, @at ], [ second.id, false, @at ], [ third.id, false, @at ] ],
+                     Orm::TeacherSchool.where(teacher:).order(:id).pluck(:school_id, :primary, :created_at)
+      end
+
+      test "attach_teacher_within_cap counts only this teacher's schools" do
+        school = create_school
+        3.times { create_teacher(school:) }
+        teacher = create_teacher
+
+        assert @repository.attach_teacher_within_cap(teacher_id: teacher.id, school_id: school.id, primary: false, cap: 2, at: @at).success?
+      end
+
+      test "school_ids_for lists the primary school first, then by attachment date" do
+        teacher = create_teacher(school: nil)
+        older, primary, newer = Array.new(3) { create_school }
+        Orm::TeacherSchool.create!(teacher:, school: newer, primary: false, created_at: @at + 2.days)
+        Orm::TeacherSchool.create!(teacher:, school: older, primary: false, created_at: @at)
+        Orm::TeacherSchool.create!(teacher:, school: primary, primary: true, created_at: @at + 1.day)
+
+        assert_equal [ primary.id, older.id, newer.id ], @repository.school_ids_for(teacher_id: teacher.id)
+        assert_equal [], @repository.school_ids_for(teacher_id: create_teacher(school: nil).id)
+      end
+
+      test "promote_primary keeps a remaining primary school, otherwise marks the oldest remaining one" do
+        teacher = create_teacher(school: nil)
+        primary, older, newer = Array.new(3) { create_school }
+        Orm::TeacherSchool.create!(teacher:, school: newer, primary: false, created_at: @at + 2.days)
+        Orm::TeacherSchool.create!(teacher:, school: older, primary: false, created_at: @at + 1.day)
+        Orm::TeacherSchool.create!(teacher:, school: primary, primary: true, created_at: @at)
+
+        assert_equal primary.id, @repository.promote_primary(teacher_id: teacher.id)
+        @repository.detach_teacher(teacher_id: teacher.id, school_id: primary.id)
+
+        assert_equal older.id, @repository.promote_primary(teacher_id: teacher.id)
+        assert_equal [ [ older.id, true ], [ newer.id, false ] ],
+                     Orm::TeacherSchool.where(teacher:).order(:created_at).pluck(:school_id, :primary)
+        assert_nil @repository.promote_primary(teacher_id: create_teacher(school: nil).id)
+      end
     end
   end
 end

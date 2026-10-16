@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::School::SchoolRepositoryPort
 # Rôle : contrat des établissements, de leur code d'établissement et du rattachement des enseignants
-# ADR  : 0030, 0036, 0039, 0056, 0057, 0063, 0071, 0083 · UDR : 0079 · aucune recherche par code national (IE-21)
+# ADR  : 0030, 0036, 0039, 0056, 0057, 0063, 0071, 0083, 0094 · UDR : 0079 · aucune recherche par code national (IE-21)
 module Ports
   module School
     module SchoolRepositoryPort
@@ -84,9 +84,27 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #attach_teacher"
       end
 
+      # ADR-0094 §4.5 : sous le verrou de la ligne users de l'enseignant, compte ses établissements puis insère ; deux
+      # « Rejoindre » simultanés ne dépassent pas `cap`.
+      # → Result | failure(:conflict, errors: { base: [:already_attached] }) | failure(:conflict, errors: { base: [:schools_limit] })
+      def attach_teacher_within_cap(teacher_id:, school_id:, primary:, cap:, at:)
+        raise NotImplementedError, "#{self.class} doit implémenter #attach_teacher_within_cap"
+      end
+
       # → Integer | nil
       def primary_school_id_for(teacher_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #primary_school_id_for"
+      end
+
+      # Les établissements d'un enseignant, le principal en premier, puis par date de rattachement. → [Integer]
+      def school_ids_for(teacher_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #school_ids_for"
+      end
+
+      # Après un retrait ou un départ (ADR-0094 §4.4) : si aucune ligne principale ne reste, marque la plus ancienne.
+      # → Integer | nil (l'établissement principal)
+      def promote_primary(teacher_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #promote_primary"
       end
 
       # Retrait par la direction (ADR-0071) : supprime le rattachement à cet établissement, jamais à un autre.
