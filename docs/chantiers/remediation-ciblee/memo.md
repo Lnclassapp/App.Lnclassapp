@@ -104,3 +104,7 @@ Le grill a porté sur le code réel, pas sur l'ADR-0043. Il a trouvé que le lan
 ## Questions encore ouvertes
 
 - Q1 à Q12 ci-dessus, en attente du porteur. Le PRD, l'ADR-0101 et les UDR-0119 à 0121 sont écrits **selon les recommandations** ; une réponse contraire les modifie avant le code.
+
+## Réponses du porteur (2026-10-16)
+
+- Recommandations acceptées.

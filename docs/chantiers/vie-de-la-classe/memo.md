@@ -89,3 +89,9 @@ La porte de la V3 attend CL-02 depuis la clôture de la V1 (2026-09-28). L'impor
 ## Questions encore ouvertes
 
 - Les réponses Q1 à Q8. Le PRD et le plan suivent les recommandations ; une réponse contraire les amende avant le code.
+
+## Réponses du porteur (2026-10-16)
+
+- Recommandations acceptées, **sauf Q6** : pas de chiffres de classe sur la page (le porteur : « pas de moyenne de classe »). Le Lot B sort du chantier, l'UDR-0112 est abandonnée.
+- Q7 : la fin d'année et la rentrée sont laissées pour le moment ; aucun chantier `rentree-scolaire` n'est ouvert.
+- Le Lot C (classe archivée) part tout de suite en correctif séparé.

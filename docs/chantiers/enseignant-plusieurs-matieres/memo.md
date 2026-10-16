@@ -154,3 +154,9 @@ Conclusion : le changement tient en **une table de jointure** et en la réécrit
 - Les questions 1 à 11 ci-dessus, **à faire répondre par le porteur avant le Lot 0**.
 - Ordre avec `multi-etablissements-enseignant` : le premier des deux chantiers dont le Lot A (lectures de l'enseignant) fusionne fixe la forme de `TeacherHomeQuery::Row` ; l'autre s'y rebase (plan, « Articulation »).
 - Compter en production les enseignants (`SELECT COUNT(*) FROM teacher_profiles`) avant le Lot 0 : la migration copie une ligne par profil, le nombre doit être retrouvé à l'identique dans `teacher_materials`.
+
+## Réponses du porteur (2026-10-16)
+
+- Recommandations acceptées, **sauf Q1 et Q7** : de 1 à 3 matières, ajoutées par l'enseignant dans son profil, valables dans toutes ses classes **au sein d'un établissement**. Les matières sont donc attachées au rattachement enseignant-établissement, pas au compte : un enseignant de deux établissements peut avoir des matières différentes dans chacun. L'ADR-0103, le PRD et les UDR-0125 à 0127 sont amendés au Lot 0.
+- Les écrans montrent toutes ses matières (de l'établissement courant) ensemble ; avec une seule matière, rien ne change.
+- Ordre : démarre après la fusion de `multi-etablissements-enseignant`.
