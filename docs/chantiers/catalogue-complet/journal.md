@@ -17,6 +17,7 @@
 ## Ce qui a dérapé
 
 - La feuille de route appelle CA-17, CA-21 et CA-23 « pages publiques » alors que l'inventaire de l'ancienne application les décrit « tout connecté » (CA-17, CA-21) et « `team` » (CA-23). L'écart n'avait jamais été posé au porteur : c'est la question 1.
+- Lot A : `assert_queries_count` ne compte pas les requêtes servies par le cache de requêtes d'Active Record ; un test qui lit deux fois la même page dans un même test doit mesurer la première lecture.
 
 ## Ce qu'on a appris sur la codebase
 

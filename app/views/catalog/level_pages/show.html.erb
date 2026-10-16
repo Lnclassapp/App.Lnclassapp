@@ -1,0 +1,49 @@
+<%# 🌐 UI · catalog/level_pages/show — Espace Niveau public, /niveaux/:slug : séries en pastilles, cours publiés groupés par matière %>
+<%# Rôle : 6 cartes par matière puis « Voir les N cours » vers la page matière filtrée ; un appel à l'action en tête et en pied ; vide, noindex %>
+<%# UDR  : 0113 (§3.3, §3.4, §3.7) · ADR : 0099 · PRD : CC-03 à CC-08 %>
+<% materials = @space.groups.map { it.material.name } %>
+<% listed = (materials.size > 3 ? [ *materials.first(3), "…" ] : materials).join(", ") %>
+<% title = t(".title", level: @space.name) %>
+<% page_title title %>
+<% content_for :head do %>
+  <%= render "catalog/public/head", title:, description: t(".description", level: @space.name, materials: listed.presence || t(".none")),
+                                     canonical: canonical_url(public_level_path(@space.slug)), index: @space.total_count.positive? %>
+<% end %>
+<div class="flex min-h-screen flex-col bg-paper">
+  <%= render "catalog/public/header" %>
+  <main id="public_catalog" class="mx-auto w-full max-w-page flex-1 px-gutter py-8">
+    <%= ui_back_link t(".back"), href: public_levels_path %>
+    <h1 class="font-display text-3xl leading-tight font-extrabold text-balance"><%= title %></h1>
+    <% if @space.groups.any? %>
+      <p class="mt-2 text-mute">
+        <%= t(".summary", courses: t("catalog.public.published_count", count: @space.total_count),
+                          materials: t("catalog.public.materials_count", count: @space.groups.size)) %>
+      </p>
+      <% if @space.series.any? %>
+        <nav aria-label="<%= t(".series_label") %>">
+          <ul id="level_series" class="mt-4 flex flex-wrap gap-2">
+            <% @space.series.each do |slug, name| %>
+              <li>
+                <%= link_to "#{@space.name} #{name}", public_level_series_path(@space.slug, slug),
+                      class: "inline-flex min-h-tap items-center rounded-full border border-line bg-white px-4 text-sm font-bold text-ink hover:border-brand focus-visible:outline-2 focus-visible:outline-brand" %>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
+      <% end %>
+      <%= render "catalog/public/call_to_action", id: "level_cta_top", spacing: "mt-6" %>
+      <div id="level_groups" class="mt-8 space-y-8">
+        <% @space.groups.each do |group| %>
+          <%= render "catalog/public/material_group", group:, href: public_material_path(group.material.slug, niveau: @space.slug) %>
+        <% end %>
+      </div>
+      <%= render "catalog/public/call_to_action", id: "level_cta_bottom", spacing: "mt-10" %>
+    <% else %>
+      <p class="mt-2 text-mute"><%= t(".none") %></p>
+      <div id="level_empty" class="mt-8">
+        <%= ui_empty_state title: t(".empty.title"), icon: "book-open", action: { label: t(".empty.action"), href: public_levels_path } %>
+      </div>
+    <% end %>
+  </main>
+  <%= render "catalog/public/footer" %>
+</div>
