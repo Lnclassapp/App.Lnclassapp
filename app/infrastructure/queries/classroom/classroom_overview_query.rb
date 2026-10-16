@@ -5,10 +5,12 @@ module Queries
   module Classroom
     class ClassroomOverviewQuery
       # students : nil sans show_roster (ReadClassroomPolicy) — la liste nominative n'est alors même pas lue.
+      # students_total : les élèves qui répondent à la recherche (toute la classe sans recherche), dont students ne rend que les
+      # page × PER_PAGE premiers (ADR-0097 §4.7) ; nil sans show_roster.
       # new_students_count : les nouveaux de toute la classe, quelle que soit la recherche ; nil sans show_roster.
       # session_days : jours (1 = lundi … 6 = samedi) de l'enseignant pour la classe, [] s'il ne les a pas renseignés ;
       # nil sans teacher_id (l'équipe n'a pas de jours, ADR-0072 §4.2).
-      Overview = Data.define(:students, :new_students_count, :session_days, :assignments, :courses)
+      Overview = Data.define(:students, :students_total, :new_students_count, :session_days, :assignments, :courses)
       # last_session_public_id : la dernière session terminée, dont l'enseignant ouvre le résultat ; nil sans session.
       # photo_version : nil sans photo (ADR-0060).
       # contact : toujours masqué (« 07 •• •• •• 04 »), pour tout lecteur ; le numéro complet ne quitte pas cette requête
@@ -29,6 +31,8 @@ module Queries
                            classroom_students.joined_at].freeze
       # ADR-0085 §4.4 : un élève est « nouveau » pendant 7 jours après son arrivée ; calcul de lecture, sans colonne.
       NEW_FOR = 7.days
+      # ADR-0097 §4.7 : la liste des élèves se lit trente par trente, cumulativement.
+      PER_PAGE = 30
       # ADR-0089 §4.2 : la fenêtre de « fait seul », aujourd'hui compris.
       SELF_PRACTICE_DAYS = 7
       # UDR-0081 §3.7 : les nouveaux d'abord, du plus récent au plus ancien ; les autres (NULL) gardent l'ordre par nom.
@@ -43,23 +47,26 @@ module Queries
       # search : « Chercher un élève » ; vide ou nil → toute la liste. Il ne filtre que les élèves de cette classe.
       # teacher_id : l'enseignant qui regarde (ses jours, sa matière) ; nil pour l'équipe, qui voit toutes les matières.
       # today : la date d'Abidjan (Time.zone) qui clôt la fenêtre de « fait seul » ; jamais Date.today (fuseau du serveur).
+      # page : entier ≥ 1, la liste rend les page × PER_PAGE premiers élèves (ADR-0097 §4.7).
       # → Overview | nil
-      def call(public_id:, show_roster:, search: nil, teacher_id: nil, show_follow_up: false, today: Time.zone.today)
+      def call(public_id:, show_roster:, search: nil, teacher_id: nil, show_follow_up: false, today: Time.zone.today, page: 1)
         id, level_id, series_id = Orm::Classroom.where(public_id:).pick(:id, :level_id, :series_id)
         return if id.nil?
 
         since = Time.current - NEW_FOR
-        Overview.new(students: (students(id, search, since, today) if show_roster),
+        students = (students(id, search, since, today) if show_roster)
+        Overview.new(students:, students_total: students&.size,
                      new_students_count: (new_students_count(id, since) if show_roster),
                      session_days: (session_days(teacher_id, id) if teacher_id),
                      assignments: assignments(id, show_follow_up), courses: courses(level_id, series_id, teacher_id))
       end
 
       # ADR-0089 §4.2 : une session « fait seul » est terminée, standard (les remédiations restent hors du compte) et sans
-      # assignation ; son jour est celui de started_at à Abidjan, dans les SELF_PRACTICE_DAYS derniers jours, today compris.
-      # DirectionHomeQuery reprend cette définition. → relation d'Orm::ExerciseSession
-      def self.self_practice(today)
-        window = (today - (SELF_PRACTICE_DAYS - 1)).in_time_zone...(today + 1).in_time_zone
+      # assignation ; son jour est celui de started_at à Abidjan, dans les `days` derniers jours, today compris.
+      # DirectionHomeQuery et la fiche d'un élève (StudentFileQuery, 30 jours) reprennent cette définition.
+      # → relation d'Orm::ExerciseSession
+      def self.self_practice(today, days: SELF_PRACTICE_DAYS)
+        window = (today - (days - 1)).in_time_zone...(today + 1).in_time_zone
         Orm::ExerciseSession.where(status: "completed", kind: "standard", classroom_assignment_id: nil, started_at: window)
       end
 

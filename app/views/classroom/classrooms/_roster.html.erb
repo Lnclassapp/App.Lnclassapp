@@ -3,7 +3,7 @@
 <%# ADR  : 0028, 0032, 0060, 0067, 0083 (§4.4 bis), 0085, 0089 (§4.2) · UDR : 0007, 0020, 0027, 0042, 0047, 0054, 0077 (§3.4), 0079 (§3.8 ter), 0081 (§3.7), 0084 (§3.7) · les entrées du menu visent _top : leurs réponses sont des streams %>
 <%# new_count, can_remove : par défaut ceux que la page de la classe a lus (@overview, @can_remove_students) ; le stream du
     retrait (classroom_students/destroy) les passe, avec focus_title pour rendre le focus au titre (UDR-0081 §3.7). -%>
-<%# locals: (classroom:, students:, search: "", new_count: @overview&.new_students_count.to_i, can_remove: @can_remove_students == true, focus_title: false) -%>
+<%# locals: (classroom:, students:, search: "", total: @overview&.students_total.to_i, page: @page || 1, new_count: @overview&.new_students_count.to_i, can_remove: @can_remove_students == true, focus_title: false) -%>
 <section id="classroom_roster" aria-labelledby="classroom_roster_title" class="min-w-0">
   <%# UDR-0081 §3.7 : le compte des nouveaux est dans le titre, lu avec lui ; la même balise est rendue par le stream du retrait. %>
   <%= render "classroom/classrooms/roster_title", count: classroom.active_students_count, new_count:, focus: focus_title %>

@@ -16,7 +16,8 @@ module Queries
       def overview(show_roster: true, **) = ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster:, **)
 
       test "l'aperçu porte les élèves et leurs nouveaux, les jours de séance, les exercices assignés et les cours" do
-        assert_equal %i[students new_students_count session_days assignments courses], ClassroomOverviewQuery::Overview.members
+        assert_equal %i[students students_total new_students_count session_days assignments courses],
+                     ClassroomOverviewQuery::Overview.members
       end
 
       test "jours de séance : ceux de l'enseignant pour cette classe, triés ; vides s'il n'en a pas ; nil pour l'équipe" do

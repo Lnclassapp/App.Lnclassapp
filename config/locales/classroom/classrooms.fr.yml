@@ -38,6 +38,12 @@ fr:
         count:
           one: "%{count} élève"
           other: "%{count} élèves"
+        # UDR-0108 §3.3 (ADR-0097 §4.7) : trente élèves, puis « Voir les 30 suivants ».
+        count_partial: "%{shown} sur %{total}"
+        more:
+          one: "Voir le dernier"
+          other: "Voir les %{count} suivants"
+        open_file: "Ouvrir la fiche de %{name}"
         no_match: "Aucun élève ne correspond"
         clear_search: "Effacer la recherche"
         last_score: "Dernier score"

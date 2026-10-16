@@ -1,8 +1,8 @@
 # Jeu de données de mesure du chantier cache-ecrans-lourds, à l'échelle de la feuille de route (ADR-0039 §7) : 500
 # établissements et leurs ~34 000 classes, 4 000 enseignants, 40 000 élèves, 200 cours complets, leurs devoirs et
-# ~300 000 sessions d'exercice sur 60 jours, sur une base qui porte le référentiel de db/seeds ; et le blog (ADR-0074) :
-# 30 articles publiés de 1 500 mots, chacun avec sa couverture et cinq images dans le texte, plus deux brouillons et un
-# archivé.
+# ~300 000 sessions d'exercice sur 60 jours et leurs tentatives de question, sur une base qui porte le référentiel
+# de db/seeds ; et le blog (ADR-0074) : 30 articles publiés de 1 500 mots, chacun avec sa couverture et cinq images
+# dans le texte, plus deux brouillons et un archivé.
 #
 #   bin/rails runner script/perf/seed_dataset.rb
 #
@@ -131,7 +131,7 @@ module PerfDataset
     ids = insert(Orm::User, placements.each_with_index.map do |_, index|
       user_row(contact: format("05%08d", TEACHER_CONTACT + index + 1), role: "teacher", created_at: days_ago(150))
     end, returning: %w[id])
-    insert(Orm::TeacherProfile, ids.map { |id| { user_id: id, material_id: pick(materials), onboarding_completed_at: now, created_at: now, updated_at: now } })
+    insert(Orm::TeacherProfile, ids.map { |id| { user_id: id, material_id: pick(materials), joined_via: "standard", onboarding_completed_at: now, created_at: now, updated_at: now } })
     insert(Orm::TeacherSchool, ids.zip(placements).map { |id, school| { teacher_id: id, school_id: school.id, primary: true, created_at: now } })
     teachers = Hash.new { |hash, key| hash[key] = [] }
     teacher_classrooms = ids.zip(placements).each_with_index.flat_map do |(id, school), index|
@@ -157,7 +157,7 @@ module PerfDataset
                anonymized: index >= focus_seats.size && (index % 100).zero?)
     end, returning: %w[id])
     insert(Orm::ClassroomStudent, ids.zip(seats, joined).map do |id, classroom_id, joined_at|
-      { student_id: id, classroom_id:, primary: true, joined_at: }
+      { student_id: id, classroom_id:, primary: true, joined_at:, joined_via: "standard" }
     end)
     log "#{ids.size} élèves dans #{seats.uniq.size} classes"
     ids.zip(seats).group_by(&:last).transform_values { it.map(&:first) }
@@ -272,7 +272,22 @@ module PerfDataset
     end
     insert(Orm::ExerciseSession, rows)
     log "#{rows.size} sessions d'exercice"
+    seed_attempts
     derive_badges_and_gaps
+  end
+
+  # Dette D4 de rapports-exercices, réparée par rapports-de-classe (Lot 0) : une tentative par question répondue, juste
+  # pour les correct_count premières, sur la première proposition (la juste) ou la deuxième. Sans elles, les taux par
+  # question de la page de suivi (ADR-0079 §4.5) ne se mesurent pas au volume réel.
+  def seed_attempts
+    ActiveRecord::Base.connection.execute(<<~SQL.squish)
+      INSERT INTO question_attempts (exercise_session_id, question_id, correct, selected_answer_ids, answered_at)
+      SELECT s.id, q.id, q.position <= s.correct_count, ARRAY[a.id], COALESCE(s.completed_at, s.started_at)
+        FROM exercise_sessions s
+        JOIN questions q ON q.exercise_id = s.exercise_id AND q.position <= s.answered_count
+        JOIN answers a ON a.question_id = q.id AND a.position = CASE WHEN q.position <= s.correct_count THEN 1 ELSE 2 END
+    SQL
+    log "#{Orm::QuestionAttempt.count} tentatives de question"
   end
 
   def sessions_for(student_id, given)
@@ -326,7 +341,7 @@ module PerfDataset
     pending = insert(Orm::User, (1..150).map do |index|
       user_row(contact: format("05%08d", TEACHER_CONTACT + TEACHERS + index), role: "teacher", created_at: days_ago(30))
     end, returning: %w[id])
-    insert(Orm::TeacherProfile, pending.map { { user_id: it, material_id: pick(materials), created_at: now, updated_at: now } })
+    insert(Orm::TeacherProfile, pending.map { { user_id: it, material_id: pick(materials), joined_via: "standard", created_at: now, updated_at: now } })
     insert(Orm::SchoolJoinRequest, pending.map do |id|
       created_at = days_ago(30)
       { public_id:, teacher_id: id, school_id: pick(adopting).id, status: "pending", created_at:, updated_at: created_at }
@@ -386,7 +401,7 @@ module PerfDataset
 
   def report
     %w[schools classrooms users classroom_students teacher_classrooms courses essentials exercises questions answers
-       classroom_assignments exercise_sessions exercise_badges knowledge_gaps referrals referral_shares articles
+       classroom_assignments exercise_sessions question_attempts exercise_badges knowledge_gaps referrals referral_shares articles
        article_images].each do |table|
       log format("%-22s %9d", table, ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{table}"))
     end

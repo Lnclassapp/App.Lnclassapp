@@ -43,6 +43,19 @@ fr:
           other: "%{count} en baisse"
       no_trend: "Pas encore de progrès à lire : chaque élève n'a fait qu'une session."
       unreliable: "Moins de 5 élèves ont fait l'exercice : la tendance n'est pas encore fiable."
+      # AS-23 (ADR-0097 §4.6, UDR-0109 §3.3) : une phrase par cas, choisie par Entities::Assessment::NextStep.
+      next_step:
+        label: "Prochain geste :"
+        remind:
+          one: "Relancez l'élève qui ne l'a pas encore fait : la lecture de la classe sera fiable à partir de %{min}."
+          other: "Relancez les %{count} élèves qui ne l'ont pas encore fait : la lecture de la classe sera fiable à partir de %{min}."
+        look_at_each: "Tous les élèves l'ont fait. La classe est trop petite pour une tendance : regardez chaque élève."
+        revisit_notion: "La plupart des élèves sont en difficulté : reprenez la notion avant d'avancer."
+        revisit_questions: "La notion se met en place : reprenez en classe les questions marquées, puis avancez."
+        watch_decline:
+          one: "La classe a compris. Un élève est en baisse : voyez-le dans sa catégorie."
+          other: "La classe a compris. %{count} élèves sont en baisse : voyez-les dans leur catégorie."
+        move_on: "La classe a compris : vous pouvez avancer."
       empty:
         title: "Personne n'a encore fait cet exercice."
         description: "La compréhension s'affiche dès le premier exercice rendu."
