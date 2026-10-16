@@ -15,6 +15,15 @@
 | 2026-10-16 | Q9 : la matière n'est pas touchée ; point d'extension = la ligne `teacher_schools` (rattachement enseignant-établissement), où `enseignant-plusieurs-matieres` rangera les matières par établissement | Le porteur veut les matières choisies par établissement, dans le chantier suivant | ADR-0094 §9 |
 | 2026-10-16 | Lot 0 : un seul agent exécute les lots A à D à la suite, sur la branche de chantier (pas de worktrees de lot) | Les lots restent disjoints (tableau de collision) ; un commit par lot | — |
 | 2026-10-16 | `SessionState#current_school_id` a la valeur par défaut `nil` (constructeur de `Data`) | Les doubles de session des tests existants ne changent pas ; une session sans établissement courant vaut « le principal » | — |
+| 2026-10-16 | Réponse MET-4 : chaque établissement est un espace autonome ; une classe d'un autre établissement ne s'ouvre plus (Q11 renversée) ; un test de non-fuite par écran | Décision du porteur | ADR-0094 §10, UDR-0098 §3.5 |
+| 2026-10-16 | Lot A : le refus `:other_school` est rendu une seule fois, par `RendersResult` (retour à l'accueil, toast), au lieu d'un traitement par contrôleur | Toutes les pages d'une classe (page, suivi, « Assigner », jours, déclaration) passent par lui | ADR-0094 §10 |
+| 2026-10-16 | Lot A : plafond des annonces d'un enseignant compté par établissement (`Message#cap_school_id`) | Sans cela, publier dans A archivait une annonce de B et l'encadré du plafond nommait des annonces de B | ADR-0094 §10 (amende 0081 §4.1) |
+| 2026-10-16 | Réponse MET-8 : deux liens d'invitation ; nouveau Lot E après A et B | Décision du porteur ; les fichiers d'invitation sont ceux du Lot A | ADR-0094 §11 (Lot E) |
+| 2026-10-16 | Lot B : le lien `/i/<jeton>` ouvert connecté redirige vers `GET /teachers/schools/join/:token` (contrôleur authentifié, dans le shell) au lieu d'une page rendue par `TeacherRegistrationsController` | Le shell, la session et la garde de rôle viennent avec `AuthenticatedController` ; l'écran d'attente garde sa propre route | UDR-0099 §3.4 (précision) |
+| 2026-10-16 | Lot B : l'écran d'attente (`PendingSchoolJoinsController`) reste réservé à l'enseignant sans établissement ; un enseignant rattaché ajoute depuis « Mes établissements » | Un même use case, deux portes ; la session ne passe sur le nouvel établissement que depuis « Mes établissements » | — |
+| 2026-10-16 | Lot C : `sessions.current_school_id` en `ON DELETE SET NULL`, seule exception à « toute clé étrangère restreint » ; ajoutée à la liste fermée de `schema_constraints_test.rb` | Un établissement supprimé (sans rattachement) ne doit pas être bloqué par une session qui le désignait | ADR-0094 §4.1 |
+| 2026-10-16 | Lot E : un jeton par rattachement (`teacher_schools.invite_token`) pour « Inviter un collègue de mon établissement » ; `teacher_profiles.referral_token` devient le parrainage (`source: "sponsor"`, déjà admis par la base) | Le lien suit l'établissement courant sans jeton par session ; le parrainage garde le parrain | ADR-0094 §11 |
+| 2026-10-16 | Fabrique de test `create_teacher` : par défaut, l'établissement de sa première classe | Avec le cloisonnement, un enseignant rattaché à un autre établissement que ses classes ne les voyait plus ; les tests existants supposaient un seul établissement implicite | — |
 
 ## Vérification en production (Lot 0) — à lancer par le porteur
 
@@ -45,6 +54,9 @@ Si la requête 1 rend autre chose que 0 : ces lignes deviennent des établisseme
 ## Ce qui a dérapé
 
 - Rien au Lot 0.
+- Lot A : l'agent précédent a été arrêté au milieu du lot (≈ 60 fichiers non commités). Repris tel quel ; seule la page d'une classe d'un autre établissement a changé de sens entre-temps (réponse MET-4) : le test ME-12 écrit pour « la page s'ouvre » a été réécrit.
+- Le Lot 0 avait laissé deux tests rouges sans les voir : la liste des liens du panneau (« Mes établissements » ajouté) dans `account_panel_test.rb` et `teacher_header_test.rb`, et la règle « toute clé étrangère restreint » (`sessions.current_school_id`). Corrigés au Lot A et au Lot C.
+- Lots exécutés à la suite dans un seul arbre de travail, commités ensuite lot par lot : le `bin/ci` complet n'a été joué que sur l'état final ; les commits intermédiaires ont passé le pre-commit (tests des fichiers touchés, joués sur l'arbre final), pas un `bin/ci` chacun. Les fichiers communs à deux lots sont dans le premier qui les touche, dans leur forme finale.
 
 ## Ce qu'on a appris sur la codebase
 
@@ -58,20 +70,27 @@ Si la requête 1 rend autre chose que 0 : ces lignes deviennent des établisseme
 - Les comptes d'enseignants du pilotage sont incohérents entre eux : `DrenaSchoolsQuery` et `TeamDashboardQuery` (DRENA) comptent le principal, `TeamDashboardQuery` (par établissement) et `SchoolsQuery` comptent toutes les lignes.
 - Les sessions sont en base (`sessions`, jeton haché) : l'établissement courant s'y range sans cookie supplémentaire.
 - La page d'une classe nomme déjà son établissement (`classroom/classrooms/_header`).
+- Les annonces reçues étaient déjà bornées par `reader.school_id` : passer l'établissement courant dans l'acteur a suffi. « Mes annonces », la modification et le plafond de 3 (ADR-0081) lisaient l'auteur seul : il a fallu les borner à l'établissement.
+- `referrals.source` admettait déjà `sponsor` (migration de l'ADR-0063) sans qu'aucun chemin ne l'écrive : le parrainage sans établissement s'y est posé sans migration de contrainte.
 
 ## Dette laissée derrière
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | La recherche de comptes de l'équipe (`AccountSearchQuery`) n'affiche que l'établissement principal d'un enseignant | Hors du besoin de la direction ; un changement d'écran de l'équipe demanderait une UDR de plus | `annuaire-equipe` (V2, backlog) |
-| Lien personnel « Inviter un collègue » limité à l'établissement principal | Un jeton par enseignant (ADR-0063) ; un lien par établissement est un autre modèle | à décider si le besoin apparaît |
+| ~~Lien personnel « Inviter un collègue » limité à l'établissement principal~~ | Levée par la réponse MET-8 (Lot E) | — |
+| Plafond de 3 annonces en ligne compté par établissement pour l'enseignant, par auteur pour l'équipe et la direction | L'équipe écrit des annonces nationales et par établissement ; changer son plafond est une autre décision | à décider si le besoin apparaît |
+| Matières par établissement | Point d'extension posé (ligne `teacher_schools`, lectures qui reçoivent `school_id:`) | `enseignant-plusieurs-matieres` (part de cette branche) |
+| Vérification sur appareil Lnclass Teacher (redirection de `/teachers/menu` après un changement d'établissement, UDR-0098 §3.2) | Pas d'appareil Android dans la session | recette par le porteur |
+| Sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) | Non disponibles dans la session d'exécution | à lancer sur la PR avant la fusion |
 | Une matière par enseignant pour tous ses établissements | `teacher_profiles.material_id` unique ; demande du porteur traitée à part | `enseignant-plusieurs-matieres` (cadré en parallèle) |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | ADR-0094 (Proposé) |
-| **UDR produits** | UDR-0098, UDR-0099, UDR-0100 (Proposé) |
+| **Livré le** | 2026-10-16 (PR prête vers `Develop`, fusion par le porteur) |
+| **PR** | `feature/multi-etablissements-enseignant` → `Develop` |
+| **Migrations** | `20261016140000_add_current_school_id_to_sessions` (Lot 0), `20261016150000_add_invite_token_to_teacher_schools` (Lot E) |
+| **ADR produits** | ADR-0094 (Accepté, amendé §10 MET-4 et §11 MET-8) ; amendements des ADR-0030, 0062, 0071, 0083 |
+| **UDR produits** | UDR-0098 (Accepté, §3.5 amendé, §3.6 ajouté), UDR-0099, UDR-0100 (Accepté) |
