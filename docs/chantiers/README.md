@@ -36,23 +36,20 @@ Un programme suit [`../workflows/programme.md`](../workflows/programme.md) : il 
 
 ## Chantiers ouverts
 
-Tous issus de l'audit du 2026-09-18, qui a remis la suite de tests en marche après une longue panne silencieuse. Chaque memo contient le diagnostic et la reproduction — la phase 1 est déjà à moitié faite.
-
-| Gravité | Chantier | En une phrase |
-|---|---|---|
-| 🔴 | [`catalog-lecture-ecriture-incompatibles`](catalog-lecture-ecriture-incompatibles/memo.md) | Deux familles d'entités Course incompatibles → édition et suppression de cours cassées |
-| 🟠 | [`message-repository-fuite-activerecord`](message-repository-fuite-activerecord/memo.md) | Des objets ActiveRecord dans `Entities::Message` → violation de la Règle d'Or |
-| 🟡 | [`classroom-code-adhesion-trop-long`](classroom-code-adhesion-trop-long/memo.md) | Code d'adhésion de 6 caractères pour une colonne `limit: 5` |
-| 🟡 | [`dette-contrats-ports-et-injection`](dette-contrats-ports-et-injection/memo.md) | Quatre cas où le contrat déclaré n'est pas le contrat consommé |
-| 🔵 | [`acteurs-fantomes-parent-examsubject`](acteurs-fantomes-parent-examsubject/memo.md) | `Parent` et `ExamSubject` déclarés partout, persistés nulle part — décision produit |
-| 🟢 | [`hitl-refs-adr-obsoletes`](hitl-refs-adr-obsoletes/memo.md) | 36 fichiers citent les anciens numéros d'ADR (0014→0022, 0015→0023) |
+Aucun chantier d'audit ouvert : les six du 2026-09-18 restés ouverts visaient du code que la refonte a remplacé ; ils sont clos comme obsolètes le 2026-10-16 (ci-dessous).
 
 ### Fermés
 
-Les deux premiers viennent de l'audit ; `teams-dashboard-cours-recents` est un correctif de la même semaine.
+Les six premiers et les deux suivants viennent de l'audit ; `teams-dashboard-cours-recents` est un correctif de la même semaine.
 
 | Gravité | Chantier | Statut | En une phrase |
 |---|---|---|---|
+| 🔴 | [`catalog-lecture-ecriture-incompatibles`](catalog-lecture-ecriture-incompatibles/memo.md) | abandonné, obsolète (refonte), clos le 2026-10-16 | Deux familles d'entités Course incompatibles : le code visé n'existe plus |
+| 🟠 | [`message-repository-fuite-activerecord`](message-repository-fuite-activerecord/memo.md) | abandonné, obsolète (refonte), clos le 2026-10-16 | Objets ActiveRecord dans `Entities::Message` : le repository a été réécrit |
+| 🟡 | [`classroom-code-adhesion-trop-long`](classroom-code-adhesion-trop-long/memo.md) | abandonné, obsolète (refonte), clos le 2026-10-16 | Code d'adhésion trop long : la colonne n'existe plus |
+| 🟡 | [`dette-contrats-ports-et-injection`](dette-contrats-ports-et-injection/memo.md) | abandonné, obsolète (refonte), clos le 2026-10-16 | Contrats de ports non tenus : les use cases visés n'existent plus |
+| 🔵 | [`acteurs-fantomes-parent-examsubject`](acteurs-fantomes-parent-examsubject/memo.md) | abandonné, obsolète (refonte), clos le 2026-10-16 | `Parent` et `ExamSubject` : plus déclarés nulle part |
+| 🟢 | [`hitl-refs-adr-obsoletes`](hitl-refs-adr-obsoletes/memo.md) | abandonné, obsolète (refonte), clos le 2026-10-16 | Anciens numéros d'ADR : plus cités dans `app/` |
 | 🔴🔴 | [`queries-constantes-orm-disparues`](queries-constantes-orm-disparues/memo.md) | livré, fermé le 2026-09-24 | **Aucun élève ni enseignant ne peut se connecter.** Constantes ORM disparues + association manquante + deux boucles de redirection infinies |
 | 🟠 | [`classroom-assignment-belongs-to-casses`](classroom-assignment-belongs-to-casses/memo.md) | livré, fermé le 2026-09-24 | Trois `belongs_to` scopés qui lèvent `PG::UndefinedTable` (3 tests attendent en `skip`) |
 | — | [`teams-dashboard-cours-recents`](teams-dashboard-cours-recents/memo.md) | livré le 2026-09-23 | Le tableau de bord de l'équipe (`/teams/dashboard`) répondait 500 : `find_courses` appelé sur un repository qui ne l'a pas |
