@@ -22,6 +22,8 @@
 | 2026-10-16 | Lot B : l'entrée par le profil est jouée au début du test système du Lot A, pas dans `profile_test.rb` | Budget système ; un seul démarrage de navigateur | — |
 | 2026-10-16 | Lot C : `/c/<jeton>` d'une autre classe ouverte mène l'élève inscrit à la confirmation (303) ; sa propre classe, un lien mort ou celui d'une classe archivée le ramènent à l'accueil, comme avant | UDR-0102 §3.3 « comportements actuels » : l'élève inscrit n'était jamais renvoyé vers la cascade | — |
 | 2026-10-16 | Lot C : couvert en test contrôleur, pas dans `test/system/classroom/join_test.rb` | Budget système ; la page de confirmation est déjà jouée dans le test système du Lot A | — |
+| 2026-10-16 | Lot D : formats de date dans la locale de l'historique (`classrooms.day` « %-d %b », `day_year` « %-d %b %Y ») plutôt qu'un format `:short_day_month` global | Le format nommé par l'UDR-0103 n'existe pas ; la ligne d'exercice lit déjà le sien dans la même locale | UDR-0103 §3.2 (écart mineur) |
+| 2026-10-16 | Lot D : couvert en tests contrôleur et query ; `test/system/classroom/student_archive_test.rb` inchangé | Budget système ; le test système existant passe avec la nouvelle ligne | — |
 
 ## Ce qui a dérapé
 

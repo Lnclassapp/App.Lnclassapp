@@ -1,7 +1,12 @@
 <%# 🌐 UI · classroom/student_archives/show — « Mon historique » de l'élève, même sans classe active, redessiné (historique-eleve) %>
 <%# Rôle : carte bleue du total, exercices terminés par mois (3 lignes puis « Voir plus » par 10), puis ses classes ; deux colonnes dès 1 024 px %>
-<%# ADR  : 0036, 0040 · UDR : 0006, 0057, 0084, 0090 · aucune ligne n'est un lien (UDR-0013), aucun filtre %>
+<%# ADR  : 0036, 0040, 0095 · UDR : 0006, 0057, 0084, 0090, 0103 · aucune ligne n'est un lien (UDR-0013), aucun filtre %>
 <% page_title t(".page_title") %>
+<%# UDR-0103 §3.2 : « 12 oct. », avec l'année quand elle n'est pas l'année en cours ; « depuis le … » ou « du … au … ». %>
+<% day = ->(time) { l(time.to_date, format: t(".classrooms.#{time.year == Time.zone.today.year ? :day : :day_year}")) } %>
+<% archive_period = lambda do |row|
+     row.left_at ? t(".classrooms.between", from: day.(row.joined_at), to: day.(row.left_at)) : t(".classrooms.since", date: day.(row.joined_at))
+   end %>
 <% count = @archive.completed_count %>
 
 <%# UDR-0090 §3.4 : une colonne pleine, puis 720 px centrés dès 700 px ; dès 1 024 px, toute la largeur, sur trois tiers. %>
@@ -58,11 +63,16 @@
                   <%= ui_icon "academic-cap", size: :md %>
                 </span>
                 <div class="min-w-0 flex-1">
-                  <div class="flex items-baseline justify-between gap-3">
-                    <p class="truncate font-display font-bold text-ink"><%= classroom.name %></p>
-                    <span class="shrink-0 text-sm text-mute tabular-nums"><%= classroom.school_year %></span>
+                  <%# UDR-0103 §3.2 : nom, badge « Actuelle », période à droite ; au téléphone, la période passe à la ligne plutôt que de tronquer le nom. %>
+                  <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                    <p class="min-w-0 font-display font-bold break-words text-ink"><%= classroom.name %></p>
+                    <% if classroom.current %>
+                      <%= ui_badge t(".classrooms.current"), tone: :brand, size: :sm %>
+                    <% end %>
+                    <span class="ml-auto shrink-0 text-sm text-mute tabular-nums"><%= archive_period.(classroom) %></span>
                   </div>
-                  <p class="line-clamp-2 text-sm text-mute"><%= t(".classrooms.detail", level: classroom.level_name, school: classroom.school_name) %></p>
+                  <p class="line-clamp-2 text-sm text-mute"><%= t(".classrooms.detail", level: classroom.level_name, school: classroom.school_name,
+                                                                                         year: classroom.school_year) %></p>
                 </div>
               <% end %>
             <% end %>

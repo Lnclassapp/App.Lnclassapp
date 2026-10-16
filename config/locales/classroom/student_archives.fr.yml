@@ -15,7 +15,14 @@ fr:
           note: "Ils restent ici, même si tu changes de classe."
         classrooms:
           title: "Mes classes"
-          detail: "%{level} · %{school}"
+          # UDR-0103 §3.2 : l'année scolaire passe dans le détail ; la période et « Actuelle » à droite du nom.
+          detail: "%{level} · %{school} · %{year}"
+          current: "Actuelle"
+          since: "depuis le %{date}"
+          between: "du %{from} au %{to}"
+          # « 12 oct. », « 15 sept. 2025 »
+          day: "%-d %b"
+          day_year: "%-d %b %Y"
           empty: "Aucune classe pour l'instant"
           empty_description: "Les classes que tu rejoins restent ici, même après les avoir quittées."
         results:
