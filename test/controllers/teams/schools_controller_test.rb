@@ -221,6 +221,18 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "dialog#regenerate-school-code", text: /K7M-4QZ/
   end
 
+  test "RM-13 (UDR-0106): the code block says when the code last changed, between the code and its hint; nothing if never" do
+    changed = create_school(drena: @drena, school_code_rotated_at: Time.zone.local(2026, 10, 16, 9))
+    never = create_school(drena: @drena)
+    sign_in_as @member
+
+    get school_path(changed.public_id)
+    assert_select "#school_code #school_code_value + p#school_code_rotated_at.text-xs.text-mute", text: "Changé le 16 octobre 2026"
+
+    get school_path(never.public_id)
+    assert_select "#school_code_rotated_at", 0
+  end
+
   test "IE-15: each teacher of the list reads « Inscription : » and their arrival channel, the colleague named when known" do
     school = create_school(drena: @drena)
     awa = create_teacher(school:, first_name: "Awa", last_name: "Koné", joined_via: "standard")

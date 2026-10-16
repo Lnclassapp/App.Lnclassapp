@@ -94,6 +94,12 @@
           </div>
           <span id="school_code_value" aria-labelledby="school_code_label"
                 class="font-mono text-2xl font-bold tracking-widest text-ink"><%= code %></span>
+          <%# UDR-0106 : la date du dernier changement, unitaire ou de masse, explique un code périmé ; rien s'il n'a jamais changé. %>
+          <% if school.school_code_rotated_at %>
+            <p id="school_code_rotated_at" class="mt-1 text-xs text-mute">
+              <%= t(".school_code_rotated_at", date: l(school.school_code_rotated_at.to_date, format: :long)) %>
+            </p>
+          <% end %>
           <p class="mt-1 text-sm text-mute"><%= t(".school_code_hint") %></p>
         </div>
         <div class="flex flex-wrap items-center gap-3">
