@@ -133,3 +133,5 @@ Conclusion de l'inventaire : **aucune table nouvelle n'est nécessaire pour le r
 - Recommandations acceptées.
 - Q9 : les matières de l'enseignant sont choisies **par établissement** (voir `enseignant-plusieurs-matieres`).
 - Ordre : ce chantier passe avant `enseignant-plusieurs-matieres`, jamais en même temps (9 fichiers communs).
+- **Q4 (et Q3)** : chaque établissement a son interface autonome et complète (classes, niveaux, annonces, à faire…). Un seul compte, un seul numéro de téléphone, plusieurs établissements : l'établissement courant cloisonne tout l'espace enseignant.
+- **Q8** : deux liens séparés. « Inviter un collègue de mon établissement » : lien rattaché à l'établissement courant. « Inviter un autre collègue » : lien sans établissement (parrainage), le collègue choisit son établissement.
