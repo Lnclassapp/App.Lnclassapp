@@ -320,4 +320,80 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#session_progress", 0
   end
+
+  # UDR-0120, ADR-0101 §4.3 : une ligne dit à l'élève ce qu'il advient de sa fiche ; l'enseignant et l'équipe ne la lisent pas.
+  def gap_outcome(key, **) = I18n.t("#{scope}.gap_outcome.#{key}", **)
+
+  def failed_then_remediated(score_percent)
+    @session.update!(score_percent: 30)
+    gap = create_gap(student: @student, essential: @essential, source_session: @session)
+    travel 1.minute
+    [ gap, complete(score_percent:, gap:) ]
+  end
+
+  test "fiche : la session qui ouvre la lacune le dit à l'élève, avec la règle sur 20 et le lien vers la fiche" do
+    failed_then_remediated(70)
+    sign_in_as @student
+
+    show
+
+    assert_select "#session_gap_outcome.bg-warning-soft" do
+      assert_select "p.font-bold", text: gap_outcome("opened.message")
+      assert_select "p", text: "Relis « Division cellulaire », puis obtiens au moins 15/20 à l'un de ses exercices."
+      assert_select "a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']", text: gap_outcome("open_essential")
+    end
+    assert_no_match(/75 %/, response.body)
+  end
+
+  test "fiche : une remédiation à 14/20 garde « Félicitations ! » et ses confettis, et dit « Encore à revoir »" do
+    _, remediation = failed_then_remediated(70)
+    sign_in_as @student
+
+    show remediation
+
+    assert_select "h1", text: I18n.t("#{scope}.show.headline.success")
+    assert_select "[data-controller='assessment--confetti']", 1
+    assert_select "#session_gap_outcome p.font-bold", text: gap_outcome("still_pending.message")
+    assert_select "#session_gap_outcome p", text: "Pour lever « Division cellulaire », vise au moins 15/20."
+  end
+
+  test "fiche : la remédiation qui lève la fiche lit « Fiche levée ! », sans lien, après la phrase de progrès" do
+    gap, remediation = failed_then_remediated(80)
+    gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: remediation)
+    sign_in_as @student
+
+    show remediation
+
+    assert_select "#session_gap_outcome.bg-success-soft" do
+      assert_select "p.font-bold", text: gap_outcome("lifted.message")
+      assert_select "p", text: "« Division cellulaire » n'est plus à revoir."
+      assert_select "a", 0
+    end
+    assert_match(/id="session_progress".*id="session_gap_outcome"/m, response.body)
+  end
+
+  test "fiche : relu après une levée par une autre session, le résultat d'une remédiation ne dit rien de la fiche" do
+    gap, short = failed_then_remediated(60)
+    travel 1.minute
+    gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: complete(score_percent: 90, gap:))
+    sign_in_as @student
+
+    show short
+
+    assert_select "#session_gap_outcome", 0
+  end
+
+  test "fiche : l'enseignant et l'équipe ne lisent pas la ligne de l'élève" do
+    gap, remediation = failed_then_remediated(80)
+    gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: remediation)
+
+    [ create_teacher(classrooms: [ @classroom ]), create_team_member ].each do |reader|
+      sign_in_as reader
+
+      show remediation
+
+      assert_response :success
+      assert_select "#session_gap_outcome", 0
+    end
+  end
 end

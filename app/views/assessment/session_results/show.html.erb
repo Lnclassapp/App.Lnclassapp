@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/session_results/show — résultat d'une session terminée (AS-11 à AS-13) %>
-<%# Rôle : badge, « Félicitations ! » (dès 14/20) ou « Courage ! », note (verte dès 14/20) et maîtrise, progrès, « Recommencer » (caché à 20/20), correction %>
-<%# ADR  : 0033, 0054, 0079, 0091 · UDR : 0007, 0023, 0054, 0057, 0073, 0087 §3.6 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
+<%# Rôle : badge, « Félicitations ! » (dès 14/20) ou « Courage ! », note (verte dès 14/20) et maîtrise, progrès, effet sur la fiche, « Recommencer » (caché à 20/20), correction %>
+<%# ADR  : 0033, 0054, 0079, 0091, 0101 · UDR : 0007, 0023, 0054, 0057, 0073, 0087 §3.6, 0120 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
 <% result = @result %>
 <%# UDR-0087 §3.6 : le titre, la couleur de la note et les confettis dès « 14/20 » affiché, la règle de l'historique, de
     « Ma classe » et de l'accueil (68 % s'affiche 14/20). %>
@@ -62,6 +62,10 @@
     <%# UDR-0073 : la phrase de progrès parle à l'élève seul, à partir de sa deuxième session. %>
     <% if @owner && result.progress %>
       <%= render "assessment/session_results/progress", progress: result.progress %>
+    <% end %>
+    <%# UDR-0120 : l'effet de la session sur sa fiche, à l'élève seul, sous son progrès. %>
+    <% if @owner && result.gap_outcome %>
+      <%= render "assessment/session_results/gap_outcome", outcome: result.gap_outcome, essential: result.essential %>
     <% end %>
 
     <div class="grid grid-cols-1 gap-3">
