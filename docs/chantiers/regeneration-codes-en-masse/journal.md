@@ -29,6 +29,12 @@ Le chantier ne lit aucun fichier envoyé. Il écrit en masse deux secrets d'acc�
 | 2026-10-16 | Garde de course dans l'`UPDATE … RETURNING id` ; `classrooms.link_token_rotated_at` ajoutée, posée aussi par « Changer le lien » | Atomique ; sert la reprise ; le geste unitaire ne change pas pour l'utilisateur | ADR-0096 §3, §4.4 |
 | 2026-10-16 | Reprise réelle : `resume` d'un rapport `validating`/`importing` quand Solid Queue relance le job | Sans elle, un job tué laisse un rapport bloqué 10 minutes et la relance re-change tout | ADR-0096 §4.3 |
 | 2026-10-16 | `admin` seulement ; ni affichage ni export ; aucune notification ; gestes unitaires inchangés ; classes archivées non touchées ; année en cours par défaut | Recommandations appliquées, **à confirmer par le porteur** | ADR-0096 §4.7 |
+| 2026-10-16 | Lots exécutés dans l'ordre 0 → B → A → C | Le lancement (A) met en file le job (B) : son test de contrôleur a besoin des jobs | Non |
+| 2026-10-16 | Le menu « Codes » est remplacé par un `turbo-stream` glissé dans chaque réponse du frame « schools » | Hors du frame, il gardait les filtres du premier chargement : filtrer une DRENA puis ouvrir « Codes » comptait toute la liste (RM-01) | Non (UDR-0104 §3 l'annonçait sans dire comment) |
+| 2026-10-16 | Le 422 « nombre faux » recompte par la query de la modale, pas par `Result#value` | `Shared::Result.failure` ne porte pas de valeur ; la query lit les mêmes scopes (ADR-0096 §4.5) | Non |
+| 2026-10-16 | Champs du formulaire sous `code_regeneration[…]` (`target`, `selection[…]`, `current_year_only`, `typed_count`) | `ui_field` lit un objet de formulaire ; la sélection voyage toujours en champs cachés, jamais une liste d'identifiants | Non |
+| 2026-10-16 | Le 422 répond en `turbo-stream` (remplace le frame « modal ») ; le formulaire vise `_top` | Une redirection vers le rapport doit quitter le frame ; une erreur doit rester dans la modale | Non |
+| 2026-10-16 | Durée du test système enregistrée à 3,0 s, ramenée à l'échelle du poste de référence | Poste à 4 cœurs, charge ~40 : `school_code_test` y prend 2,2 fois sa durée enregistrée ; mesuré ici 6,5 s hors démarrage de Puma | Non |
 
 ## Mesures (`PERF=1`, 2026-10-16)
 

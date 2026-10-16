@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/_header — en-tête de la fiche d'un établissement, remplacé par les streams update et deactivate %>
-<%# Rôle : nom, sigle, DRENA, type, cycle, statut, code (direction) et lien /i/ de l'équipe ; menu ⋮ : inviter la direction, modifier, régénérer, désactiver %>
-<%# ADR  : 0030, 0036, 0057, 0063, 0065, 0083 · UDR : 0006, 0036, 0042, 0044, 0050, 0052, 0054, 0079 (§3.7) · Stimulus : clipboard %>
+<%# Rôle : nom, sigle, DRENA, type, cycle, statut, code (direction, date du dernier changement) et lien /i/ de l'équipe ; menu ⋮ : inviter la direction, modifier, régénérer le code, les liens des classes (admin), désactiver %>
+<%# ADR  : 0030, 0036, 0057, 0063, 0065, 0083, 0096 · UDR : 0006, 0036, 0042, 0044, 0050, 0052, 0054, 0079 (§3.7), 0104, 0106 · Stimulus : clipboard %>
 <% active = school.status != "inactive" %>
 <%# Seul un établissement actif reçoit une classe ou une direction : ni désactivé, ni en brouillon (porteur, 2026-09-27 ; ADR-0065) %>
 <% accepts_classrooms = school.status == "active" %>
@@ -53,6 +53,11 @@
           <% end %>
           <%= ui_dropdown_item t(".edit"), href: edit_school_path(school.public_id), icon: "pencil-square", frame: "modal" %>
           <%= ui_dropdown_item t(".regenerate_code"), dialog: "regenerate-school-code", icon: "arrow-path" %>
+          <%# UDR-0104 : les liens des classes de cet établissement, équipe admin seulement ; la modale les compte. %>
+          <% if can_regenerate_codes_in_bulk? %>
+            <%= ui_dropdown_item t(".regenerate_classroom_links"), href: new_code_regeneration_path(target: "classroom_links", school: school.public_id),
+                                                                  icon: "link", frame: "modal", tone: :danger %>
+          <% end %>
           <% if active %>
             <%= ui_dropdown_item t(".deactivate"), dialog: "deactivate-school-header", icon: "no-symbol" %>
           <% end %>
