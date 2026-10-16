@@ -10,6 +10,11 @@
 | 2026-10-16 | Chantier relancé avec les vagues V2 à V6 ; cadrage seul (memo, PRD, ADR, UDR, plan), code après validation du porteur | Demande du porteur | — |
 | 2026-10-16 | Recommandation : l'élève déclenche lui-même, sans validation ; départ = `left_at` sans retrait ; résultats sur l'élève ; aucune migration | Inventaire du code : tout existe sauf le geste ; moteur « aucune étape ne dépend d'un absent » de l'ADR-0085 | ADR-0095 (Proposé) |
 | 2026-10-16 | Changement dans le même établissement inclus (même use case) | Les erreurs de classe à l'inscription en libre-service sont le cas le plus fréquent | ADR-0095 §4, à confirmer (question 5) |
+| 2026-10-16 | Porteur : recommandations acceptées, l'élève seul change de classe ; ADR-0095 et UDR-0101 à 0103 acceptées | Réponses du porteur | ADR-0095 (Accepté) |
+| 2026-10-16 | Lot 0 : la classe d'arrivée est verrouillée **avant** la lecture de la classe actuelle | Deux envois simultanés vers la même classe : le second lit la nouvelle classe et reçoit `same_classroom` au lieu de rouvrir la ligne et d'écrire une seconde trace | ADR-0095 §4.1 (note d'exécution) |
+| 2026-10-16 | Lot 0 : trace `classroom.student_moved` avec les identifiants internes (`from_classroom_id`, `to_classroom_id`, `to_school_id`, `via`) | Les identifiants publics de la classe quittée demandaient une lecture que le port des adhésions ne donne pas ; aucun port changé | ADR-0095 §4.1 (note d'exécution) |
+| 2026-10-16 | Lot 0 : `ClassroomDesignation#designate` reprend « lien ou cascade » et le refus du lien mort ou archivé | Partagé par `JoinAsStudent` et `ChangeClassroom`, sans copie | — |
+| 2026-10-16 | Lot 0 : la cascade accepte le scope `student_classroom_change` (`DrenaSchoolsController::PICKER_SCOPES`) | Les listes de la cascade nomment leurs champs d'après la page | — |
 
 ## Ce qui a dérapé
 
