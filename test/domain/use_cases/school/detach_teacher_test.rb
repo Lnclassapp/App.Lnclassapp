@@ -29,6 +29,9 @@ module UseCases
           @attachments.reject! { it == [ teacher_id, school_id ] }
           before - @attachments.size
         end
+
+        # The oldest remaining school: the first pair left for the teacher (ADR-0094 §4.5).
+        def promote_primary(teacher_id:) = @attachments.find { it.first == teacher_id }&.last
       end
 
       class FakeUsers
@@ -123,6 +126,18 @@ module UseCases
         assert_equal %w[active active active archived active active], @assignments.assignments.map(&:status)
         assert_empty @departures.departures
         assert_empty @audit.events
+      end
+
+      # ME-20 (ADR-0094 §4.4): withdrawn from his primary school, he keeps B, which becomes primary; nothing of B moves.
+      test "ME-20 : retiré de A, il garde B, devenu principal ; ses classes et devoirs de B restent" do
+        @schools.attachments << [ 41, SCHOOL_B ]
+
+        assert detach.success?
+
+        assert_equal [ [ 43, 33 ], [ 41, SCHOOL_B ] ], @schools.attachments
+        assert_equal SCHOOL_B, @schools.promote_primary(teacher_id: 41)
+        assert_includes @teachings.declarations, [ 41, 201, SCHOOL_B ]
+        assert_equal "active", @assignments.assignments[4].status
       end
 
       test "GD-14 : rattachement et déclarations retirés, 3 devoirs actifs archivés par la direction, départ ouvert, audité" do

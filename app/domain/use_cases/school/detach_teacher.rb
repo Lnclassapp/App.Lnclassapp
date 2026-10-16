@@ -1,6 +1,7 @@
 # 🧠 DOMAINE · UseCases::School::DetachTeacher
-# Rôle : la direction retire un enseignant de son établissement actif : rattachement, classes et devoirs actifs, en une transaction
-# ADR  : 0026, 0028, 0071 · UDR : 0056
+# Rôle : la direction retire un enseignant de son établissement actif : rattachement, classes et devoirs actifs, en une transaction ;
+#        s'il lui reste un établissement, le plus ancien devient principal
+# ADR  : 0026, 0028, 0071, 0094 · UDR : 0056, 0100
 module UseCases
   module School
     class DetachTeacher
@@ -57,6 +58,8 @@ module UseCases
           assignments_archived: @assignments.archive_all_by_teacher_in_school(teacher_id: teacher.id, school_id:,
                                                                               archived_by_id: actor.user_id, at: now)
         )
+        # ADR-0094 §4.4 (ME-20) : retiré de son principal, il garde ses autres établissements, sans écran d'attente.
+        @schools.promote_primary(teacher_id: teacher.id)
         @departures.record(teacher_id: teacher.id, school_id:, detached_by_id: actor.user_id, at: now)
         record(actor, school_id, detached, now)
         Shared::Result.success(detached)

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · SchoolAdmin::TeacherReinstatementsController
 # Rôle : « Réintégrer » un enseignant retiré, sans confirmation ; la ligne part de « Enseignants retirés » sans rechargement
-# ADR  : 0028, 0071 · UDR : 0056 · l'établissement est celui du compte, jamais un paramètre
+# ADR  : 0028, 0071, 0094 · UDR : 0056, 0100 (§3.3) · l'établissement est celui du compte, jamais un paramètre
 module SchoolAdmin
   class TeacherReinstatementsController < BaseController
     # Un rattachement refusé par la base (il a rejoint ailleurs entre-temps) : il n'est plus à réintégrer, 404.
@@ -8,6 +8,7 @@ module SchoolAdmin
 
     def create
       result = reinstate.call(actor: current_actor, school_id: current_actor.school_id, teacher_public_id: params[:public_id].to_s)
+      return refuse_at_cap if schools_limit?(result)
       return refuse(REFUSALS.fetch(result.code, :not_found)) if result.failure?
 
       @teacher = result.value
@@ -19,6 +20,17 @@ module SchoolAdmin
     end
 
     private
+
+    def schools_limit?(result) = result.code == :conflict && Array(result.errors[:base]).include?(:schools_limit)
+
+    # UDR-0100 §3.3 : la ligne reste ; le toast dit pourquoi, sans nommer d'autre établissement.
+    def refuse_at_cap
+      message = t(".schools_limit", name: Repositories::Identity::UserRepository.new.find_by_public_id(public_id: params[:public_id].to_s).first_name)
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: helpers.turbo_stream_toast(message, type: :error), status: :unprocessable_entity }
+        format.html { redirect_to school_admin_departed_teachers_path, alert: message, status: :see_other }
+      end
+    end
 
     # Turbo Stream : un toast au motif de la direction (UDR-0056 §3.0) ; HTML : les pages 403 et 404 communes.
     def refuse(code)
