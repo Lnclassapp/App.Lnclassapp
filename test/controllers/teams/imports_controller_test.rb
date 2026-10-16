@@ -389,6 +389,76 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-status=validating] > div:first-child", text: /Recherche des établissements/
   end
 
+  # UDR-0105, RM-12, RM-23: the reports of the mass regenerations, with their own words, their selection, and no code.
+  test "a regeneration of the codes: listed and filtered, its selection under the title, its own counters, no code" do
+    drena = create_drena(name: "Abidjan 1")
+    school = create_school(drena:)
+    author = create_team_member(first_name: "Awa", last_name: "Koné", second_factor: false)
+    report = create_import_report(kind: "school_codes", checksum_sha256: nil, imported_by: author, status: "completed",
+                                  total_count: 3, imported_count: 1, skipped_count: 1, error_count: 1, finished_at: Time.current,
+                                  details: { "selection" => { "drena" => drena.public_id, "school_type" => "private", "status" => "active",
+                                                              "school_year" => nil }, "expected_count" => 3 },
+                                  import_errors: [ { "path" => "Lycée Moderne", "code" => "write_failed", "params" => {} } ])
+    sign_in_as create_team_member(team_role: "content")
+
+    get teams_imports_path(kind: "school_codes")
+
+    assert_select "#imports tr", 1
+    assert_select "nav a[aria-current=page]", text: "Régénération des codes"
+
+    get teams_import_path(report.public_id)
+
+    assert_response :success
+    assert_select "h1", "Régénération des codes"
+    assert_select "#code_regeneration_selection", "Sélection : DRENA Abidjan 1 · Privé · Active"
+    assert_select "dt", text: "Codes changés"
+    assert_select "dt", text: "Déjà changés"
+    assert_select "dt", text: "Établissements traités"
+    assert_select "#import_skipped_tip", text: /Déjà changés/
+    assert_select "li", text: /Attendus au lancement : 3/
+    assert_select "li", text: /selection/i, count: 0
+    assert_select "#import_errors li", text: /Lycée Moderne\s*L'enregistrement de cet élément n'a pas abouti\./
+    assert_no_match school.school_code, response.body
+    assert_no_match Entities::School::SchoolCode.display(school.school_code), response.body
+  end
+
+  test "a regeneration of the links names its school and its year, speaks of classrooms, and of all the schools without filter" do
+    school = create_school(name: "Lycée Moderne de Cocody")
+    links = create_import_report(kind: "classroom_links", checksum_sha256: nil, status: "importing", processed_count: 40,
+                                 details: { "selection" => { "school" => school.public_id, "school_year" => "2026-2027" }, "expected_count" => 80 })
+    codes = create_import_report(kind: "school_codes", checksum_sha256: nil, status: "failed", finished_at: Time.current,
+                                 details: { "selection" => { "school_year" => nil }, "expected_count" => 3912 })
+    sign_in_as @member
+
+    get teams_import_path(links.public_id)
+
+    assert_select "h1", "Régénération des liens des classes"
+    assert_select "#code_regeneration_selection", "Sélection : Lycée Moderne de Cocody · année 2026-2027"
+    assert_select "#import_status", text: /Changement des liens…/
+    assert_select "#import_status", text: /40 classes traitées/
+    assert_select "#import_status", text: /Régénération en cours/
+
+    get teams_import_path(codes.public_id)
+
+    assert_select "#code_regeneration_selection", "Sélection : Tous les établissements"
+    assert_select "[role=alert]", text: /La régénération s'est arrêtée sur une erreur imprévue/
+  end
+
+  test "the selection of a regeneration survives a deleted DRENA or school, and every year for the links" do
+    gone_drena = create_import_report(kind: "school_codes", checksum_sha256: nil, status: "queued",
+                                      details: { "selection" => { "drena" => "disparue", "search" => "moderne" }, "expected_count" => 1 })
+    gone_school = create_import_report(kind: "classroom_links", checksum_sha256: nil, status: "completed", finished_at: Time.current,
+                                       details: { "selection" => { "school" => "disparu", "school_year" => nil }, "expected_count" => 1 })
+    sign_in_as @member
+
+    get teams_import_path(gone_drena.public_id)
+    assert_select "#code_regeneration_selection", "Sélection : DRENA supprimée · « moderne »"
+    assert_select "#import_status", text: /La régénération attend son tour\./
+
+    get teams_import_path(gone_school.public_id)
+    assert_select "#code_regeneration_selection", "Sélection : Établissement supprimé · toutes les années"
+  end
+
   test "a teacher may not read the report of a generation" do
     report = create_import_report(kind: "classrooms", checksum_sha256: nil)
     sign_in_as create_teacher

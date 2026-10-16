@@ -1,6 +1,9 @@
 <%# 🌐 UI · teams/imports/_status — suivi d'un import, frame rechargé chaque seconde tant que l'import tourne %>
 <%# Rôle : phase et progression pendant l'import ; à la fin, compteurs, détails, bilan par fichier et erreurs ; rejet : son motif %>
-<%# ADR  : 0039, 0056, 0068 · UDR : 0006, 0043, 0055 · Stimulus : teams--import-status · libellés propres au type : report_text %>
+<%# ADR  : 0039, 0056, 0068, 0096 · UDR : 0006, 0043, 0055, 0105 · Stimulus : teams--import-status · libellés propres au type : report_text %>
+<%# Régénération de masse (UDR-0105) : la sélection est dans le sous-titre, pas dans les détails ; « Déjà changés » s'explique. %>
+<% regeneration = Entities::Catalog::ImportKind::CODE_REGENERATIONS.include?(import.kind) %>
+<% details = import.details.except("selection") %>
 <%# Pas de src sur le frame : Turbo le chargerait dès son arrivée ; le contrôleur le pose au premier rechargement. %>
 <%= turbo_frame_tag "import_status",
                     data: { controller: "teams--import-status", teams__import_status_url_value: teams_import_path(import.public_id) } do %>
@@ -28,11 +31,16 @@
           </div>
         <% end %>
       </dl>
-      <% if import.details.any? %>
+      <% if regeneration %>
+        <p id="import_skipped_tip" class="-mt-2 flex items-center gap-1 text-sm text-mute">
+          <%= report_text(import, "counters.skipped") %><%= ui_info_tip t(".skipped_tip"), label: report_text(import, "counters.skipped") %>
+        </p>
+      <% end %>
+      <% if details.any? %>
         <div>
           <h3 class="mb-2 text-sm font-medium"><%= t(".details_title") %></h3>
           <ul class="space-y-1 text-sm">
-            <% import.details.each do |key, value| %>
+            <% details.each do |key, value| %>
               <li><%= t(".details.#{key}", default: key.to_s.humanize) %> : <span class="font-medium tabular-nums"><%= value %></span></li>
             <% end %>
           </ul>

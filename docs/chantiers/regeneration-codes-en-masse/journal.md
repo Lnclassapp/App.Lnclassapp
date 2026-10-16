@@ -30,6 +30,17 @@ Le chantier ne lit aucun fichier envoyé. Il écrit en masse deux secrets d'acc�
 | 2026-10-16 | Reprise réelle : `resume` d'un rapport `validating`/`importing` quand Solid Queue relance le job | Sans elle, un job tué laisse un rapport bloqué 10 minutes et la relance re-change tout | ADR-0096 §4.3 |
 | 2026-10-16 | `admin` seulement ; ni affichage ni export ; aucune notification ; gestes unitaires inchangés ; classes archivées non touchées ; année en cours par défaut | Recommandations appliquées, **à confirmer par le porteur** | ADR-0096 §4.7 |
 
+## Mesures (`PERF=1`, 2026-10-16)
+
+`test/performance/school/regenerate_codes_in_bulk_performance_test.rb`, base PostgreSQL de test, poste de 4 cœurs partagé par une dizaine d'agents :
+
+| Geste | Volume | Durée | Requêtes SQL |
+|---|---|---|---|
+| Codes d'établissement | 3 900 établissements (20 lots) | 4,2 s | 132 |
+| Liens des classes | 20 000 classes (100 lots) | 33,1 s | 611 |
+
+Le nombre de requêtes par lot est fixe (~6 : lecture, savepoint, `UPDATE … RETURNING`, `INSERT` de l'audit, avancement). La durée des liens est sous la cible de 60 s ; 60 000 classes en production feraient ~100 s, ce qui reste un job d'arrière-plan suivi par son rapport.
+
 ## Ce qui a dérapé
 
 - **La ligne du backlog était périmée.** « Régénère le code d'établissement (donc le lien d'inscription des enseignants) » était vrai le 2026-10-01, faux depuis le 2026-10-07 (ADR-0083). Rien dans le backlog ne le signalait.

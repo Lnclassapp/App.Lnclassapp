@@ -126,9 +126,7 @@ module Repositories
       def usage_of(classroom_id) = USAGES.find { |_, model| model.exists?(classroom_id:) }&.first
 
       def link_regeneration_scope(selection, school_year, created_before)
-        scope = Orm::Classroom.where(status: "active", created_at: ..created_before,
-                                     school_id: Orm::School.regeneration_selection(selection).select(:id))
-        school_year ? scope.where(school_year:) : scope
+        Orm::Classroom.link_regeneration(selection, school_year).where(created_at: ..created_before)
       end
 
       def attributes_of(classroom)

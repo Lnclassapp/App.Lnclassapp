@@ -220,6 +220,6 @@ Et un tirage qui heurte l'index unique est rejoué objet par objet
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
 | Clics pour changer les codes d'une DRENA de 200 établissements | ~800 (ouvrir la fiche, ⋮, régénérer, confirmer) | 3 (menu, action, confirmer) | |
-| Durée du job pour 3 900 établissements (`PERF=1`) | — | < 60 s | |
-| Durée du job pour 20 000 classes (`PERF=1`) | — | < 60 s | |
-| Requêtes SQL par lot de 200 | — | fixe (lecture du lot, une mise à jour, une insertion d'audit, avancement du rapport) | |
+| Durée du job pour 3 900 établissements (`PERF=1`) | — | < 60 s | 4,2 s (2026-10-16, poste partagé) |
+| Durée du job pour 20 000 classes (`PERF=1`) | — | < 60 s | 33,1 s (2026-10-16, 4 cœurs partagés par une dizaine d'agents) |
+| Requêtes SQL par lot de 200 | — | fixe (lecture du lot, une mise à jour, une insertion d'audit, avancement du rapport) | fixe : 132 requêtes pour 20 lots d'établissements, 611 pour 100 lots de classes (~6 par lot, savepoint compris) |
