@@ -19,11 +19,14 @@
 | 2026-10-16 | Lot A : la phrase d'aide du code de récupération (« Un élève qui a perdu son code secret… ») suit l'action sur la fiche, en tête de « Gérer » ; l'UDR-0107 §3.6 ne la mentionnait pas | Elle explique une action qui quitte la liste (Q4) | Non |
 | 2026-10-16 | Lot A : « Fait le » d'un exercice fait est la date de la **première** session faite (`first_done`), comme le retard ; le score affiché est le meilleur | Une seule définition de la date, celle du suivi (ADR-0072 §4.4) | Non |
 | 2026-10-16 | Lot 0 : les clés de `classroom_students.fr.yml` sont rangées par partial (`show`, `identity`, `summary`, `assignments`, `self_practice`, `manage`), et non toutes sous `show` comme l'écrit l'UDR-0107 §3.10 | Règle d'or I18n : `t(".clé")` dans chaque partial, dont la portée est celle du partial | Non |
+| 2026-10-16 | Lot C : le nom d'un élève du suivi passe par un seul helper, `comprehension_student_name(student, classroom)`, pour les trois listes (catégorie, rendus en retard, pas encore faits) : lien `_top` vers la fiche, texte seul dans une classe archivée | Une règle (UDR-0109 §3.1, §3.4) écrite une fois ; la vue ne teste pas le statut de la classe | Non |
+| 2026-10-16 | Lot C : la clé `assessment.comprehension.unreliable` est supprimée ; le prochain geste `:remind` / `:look_at_each` dit la borne à sa place | Plus rien ne la lit (UDR-0109 §3.3) | Non |
 
 ## Ce qui a dérapé
 
 - **Lot 0 — jeu de mesure de l'ADR-0067 cassé une deuxième fois (dette D4).** Sur une base neuve, `script/perf/dataset.rb` s'arrêtait à `teacher_profiles.joined_via` (non nul, sans défaut) ; `classroom_students.joined_via` aurait suivi. Réparé : `joined_via: "standard"` pour les deux. Il ne semait toujours aucune tentative de question : ajout de `seed_attempts` (une tentative par question répondue, juste pour les `correct_count` premières). Semé en 183 s : 312 065 sessions, **1 452 043 tentatives**, 40 000 élèves.
 - **La page de la classe a encore grossi depuis `rapports-exercices`** : 403,6 Ko mesurés au Lot 0 (et non 231,6 Ko), dont **320,1 Ko pour la liste des élèves** (55 lignes, 58 `<dialog>`). Mesure « avant » ci-dessous.
+- **Lots B et C — durées des tests système mesurées sur une machine chargée** (charge de 17 à 30 pour 4 cœurs, une dizaine d'agents). Au Lot B, les six fichiers relancés ont pris 2,47 fois leur durée enregistrée (155 s contre 62,7 s, nouveau test exclu) : `script/ci/test_timings.yml` reçoit les durées mesurées divisées par 2,47 (croissance : + 3,8 s). Au Lot C, `comprehension_test.rb` gagne un clic et une page (la fiche) : 7,9 → 8,5 s estimés. `boucle_pedagogique_test.rb` a échoué deux fois sous cette charge, à deux endroits différents et antérieurs au passage modifié (inscription de l'enseignant, publication d'un cours) : sa durée reste celle de `Develop`, à confirmer par `bin/ci-quiet`.
 
 ## Mesures (ADR-0067, jeu `script/perf/dataset.rb`, mode production, 30 requêtes après 3 de chauffe)
 
@@ -39,7 +42,7 @@ Lot B : la liste des élèves passe de 320,1 Ko (55 lignes, 58 `<dialog>`) à 33
 
 Le nombre de requêtes SQL de la fiche ne dépend pas du nombre d'assignations : vérifié par `student_file_query_test.rb` (même compte à 1 et à 10 assignations). Le jeu ne donne que 8 assignations actives à la classe mesurée (10 semées, dont 2 archivées).
 
-- **Lot B — durées des tests système mesurées sur une machine chargée** (charge ≈ 17 pour 4 cœurs, une dizaine d'agents). Les six fichiers relancés ont pris 2,47 fois leur durée enregistrée (155 s contre 62,7 s, nouveau test exclu) : `script/ci/test_timings.yml` reçoit les durées mesurées divisées par 2,47 (croissance du lot : + 3,8 s). `boucle_pedagogique_test.rb` a échoué deux fois sous cette charge, à deux endroits différents et antérieurs au passage modifié (inscription de l'enseignant, publication d'un cours) : sa durée reste celle de `Develop`, à confirmer par `bin/ci-quiet`.
+Lot C : la page de suivi passe de 52,6 à 60,5 Ko (noms en liens, prochain geste), le cadre « Fragile » de 21,9 à 28,7 Ko, au même nombre de requêtes (19 et 15). Les temps de cette mesure (charge ≈ 30 pour 4 cœurs) ne sont pas lisibles : suivi p50 116,5 / p95 184,0 ms, cadre 64,4 / 87,7 ms, et la page de la classe, inchangée par le lot, mesurée en même temps à 102,6 / 178,2 ms contre 80,0 / 151,8 au Lot B.
 
 ## Ce qu'on a appris sur la codebase
 

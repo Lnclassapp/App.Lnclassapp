@@ -42,7 +42,7 @@ module Assessment
       assert_equal [ "Pas encore fait · 1", "Pas encore faits · 7" ], [ 1, 7 ].map { t("#{scope}.pending.title", count: it) }
       %w[categories_label questions_title students_title question_number no_attempt first_rate first_rate_label to_revisit
          to_revisit_label].each { assert I18n.exists?("#{scope}.section.#{it}", :fr), it }
-      %w[no_trend unreliable empty.title empty.description empty_category].each { assert I18n.exists?("#{scope}.#{it}", :fr), it }
+      %w[no_trend empty.title empty.description empty_category].each { assert I18n.exists?("#{scope}.#{it}", :fr), it }
     end
 
     test "the small circle: a dot of the category, then « label · done/present »" do
@@ -97,6 +97,40 @@ module Assessment
         assert_dom "span.whitespace-nowrap.text-sm.text-ink", text: "Pas encore lisible · 4/25"
       end
       assert_dom ".truncate", count: 0
+    end
+
+    # rapports-de-classe, Lot C (AS-23 ; ADR-0097 §4.6, UDR-0109 §3.2) : la vue ne choisit pas, elle traduit.
+    def detail(done:, present:, dominant: nil, decline: 0)
+      Queries::Assessment::ComprehensionDetailQuery::Detail.new(
+        done:, present:, category: dominant, readable: Entities::Assessment::Comprehension.readable?(done),
+        category_counts: {}, trend_counts: { progress: 0, flat: 0, decline: }, selected: :struggling, questions: [], students: []
+      )
+    end
+
+    def next_step_sentence(comprehension)
+      step, options = comprehension_next_step(comprehension)
+      t("assessment.comprehension.next_step.#{step}", **options)
+    end
+
+    test "the warning « pas encore fiable » is gone: the next step says the bound (UDR-0109 §3.3)" do
+      assert_not I18n.exists?("assessment.comprehension.unreliable", :fr)
+    end
+
+    test "the next step: nothing when nobody did it; the counts and the bound interpolated" do
+      assert_nil comprehension_next_step(detail(done: 0, present: 25))
+      assert_equal [ :remind, { count: 22, min: 5 } ], comprehension_next_step(detail(done: 3, present: 25))
+      assert_equal "Relancez les 22 élèves qui ne l'ont pas encore fait : la lecture de la classe sera fiable à partir de 5.",
+                   next_step_sentence(detail(done: 3, present: 25))
+      assert_equal "Relancez l'élève qui ne l'a pas encore fait : la lecture de la classe sera fiable à partir de 5.",
+                   next_step_sentence(detail(done: 4, present: 5))
+      assert_equal [ :look_at_each, {} ], comprehension_next_step(detail(done: 4, present: 4))
+      assert_equal [ :revisit_notion, {} ], comprehension_next_step(detail(done: 6, present: 6, dominant: :struggling))
+      assert_equal [ :revisit_questions, {} ], comprehension_next_step(detail(done: 6, present: 9, dominant: :fragile))
+      assert_equal "La classe a compris. 2 élèves sont en baisse : voyez-les dans leur catégorie.",
+                   next_step_sentence(detail(done: 9, present: 9, dominant: :acquired, decline: 2))
+      assert_equal "La classe a compris. Un élève est en baisse : voyez-le dans sa catégorie.",
+                   next_step_sentence(detail(done: 9, present: 9, dominant: :acquired, decline: 1))
+      assert_equal "La classe a compris : vous pouvez avancer.", next_step_sentence(detail(done: 9, present: 9, dominant: :acquired))
     end
   end
 end

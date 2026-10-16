@@ -95,6 +95,16 @@ class Classroom::ComprehensionTest < ApplicationSystemTestCase
       assert_equal [ "Zoé Abo", "Ibrahim Diallo", "Marc Touré" ], all("li").map(&:text)
     end
     assert_no_text(/\bessais?\b/i)
+
+    # rapports-de-classe, Lot C (AS-23, UDR-0109 §3.2) : lecture fiable, dominante « Acquis », Paul Zadi en baisse.
+    assert_selector "#comprehension_next_step",
+                    text: "Prochain geste : La classe a compris. Un élève est en baisse : voyez-le dans sa catégorie."
+    # UDR-0109 §3.1 : un nom d'une catégorie ouvre la fiche en page entière, hors du cadre des catégories.
+    within("#comprehension_panel") { click_on "Paul Zadi" }
+    paul = Orm::User.find_by!(first_name: "Paul", last_name: "Zadi")
+    assert_current_path classroom_student_path(@classroom.public_id, paul.public_id)
+    assert_selector "h1", text: "Paul Zadi"
+    assert_no_selector "turbo-frame#comprehension_frame"
   end
 
   test "un élève de la classe qui force l'adresse du suivi est refusé (403)" do
@@ -165,7 +175,8 @@ class Classroom::ComprehensionTest < ApplicationSystemTestCase
       assert_selector "li[aria-label='Question 3 : 0#{NBSP}% de réussite, 25#{NBSP}% à la première session, à reprendre en classe']",
                       text: "À reprendre en classe"
       assert_selector "ol li", text: "À reprendre en classe", count: 1
-      students = all("ul li").map { it.find("span", match: :first).text }
+      # rapports-de-classe, Lot C (UDR-0109 §3.1) : chaque nom est le lien vers la fiche de l'élève.
+      students = all("ul li").map { it.find("a").text }
       assert_equal [ "Paul Zadi", "Fanta Sylla", "Aya Konan", "Bakary Adou" ], students
       assert_selector "ul li", text: /Paul Zadi\s+65 %\s+En baisse/
       assert_selector "ul li", text: /Aya Konan\s+67 %\s+1 session/

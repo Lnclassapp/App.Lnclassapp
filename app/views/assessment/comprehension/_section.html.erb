@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/comprehension/_section — section « Compréhension » du suivi d'un exercice assigné, enseignant et équipe %>
-<%# Rôle : grand cercle, synthèse des signes, catégories en liens d'un Turbo Frame (?category=), puis questions et élèves de la catégorie %>
-<%# ADR  : 0079 · UDR : 0072 (§3.5, §3.6, §3.8) · sans JavaScript, un lien de catégorie recharge la page entière %>
+<%# Rôle : grand cercle, synthèse des signes, prochain geste, catégories en liens d'un Turbo Frame (?category=), puis questions et élèves de la catégorie (liens vers leur fiche) %>
+<%# ADR  : 0079, 0097 (§4.6) · UDR : 0072 (§3.5, §3.6, §3.8), 0109 · sans JavaScript, un lien de catégorie recharge la page entière %>
 <%# locals: (comprehension:, classroom:, assignment_public_id:) -%>
 <% percent = ->(rate) { number_to_percentage(rate, precision: 0, format: "%n\u00A0%") } %>
 <section id="comprehension" aria-labelledby="comprehension_title" class="mb-8">
@@ -30,8 +30,14 @@
             <% end %>
           </p>
         </div>
-        <% unless comprehension.readable %>
-          <p class="mt-4 text-sm text-mute"><%= t("assessment.comprehension.unreliable") %></p>
+        <%# UDR-0109 §3.2 (AS-23) : le geste est choisi par le domaine (Entities::Assessment::NextStep) ; la vue le traduit. %>
+        <% step, options = comprehension_next_step(comprehension) %>
+        <% if step %>
+          <p id="comprehension_next_step" class="mt-4 flex items-start gap-2 border-t border-line pt-4 text-sm text-ink">
+            <%= ui_icon "light-bulb", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-brand-strong" %>
+            <span><span class="font-semibold"><%= t("assessment.comprehension.next_step.label") %></span>
+              <%= t("assessment.comprehension.next_step.#{step}", **options) %></span>
+          </p>
         <% end %>
       <% end %>
 
@@ -96,7 +102,8 @@
             <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
               <% comprehension.students.each do |student| %>
                 <li class="flex items-center justify-between gap-3 px-4 py-3 sm:px-5">
-                  <span class="min-w-0 truncate font-medium"><%= student.display_name %></span>
+                  <%# UDR-0109 §3.1 : le nom mène à la fiche, hors du cadre (_top) ; texte seul dans une classe archivée. %>
+                  <%= comprehension_student_name(student, classroom) %>
                   <span class="flex shrink-0 items-center gap-3 text-sm">
                     <span class="tabular-nums"><%= percent.(student.best) %></span>
                     <span class="flex items-center gap-1 text-mute">
