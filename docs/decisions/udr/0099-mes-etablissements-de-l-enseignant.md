@@ -1,14 +1,14 @@
 # UDR-0099 : « Mes établissements » de l'enseignant — liste, ajout par DRENA puis établissement, « Quitter » confirmé, et lien d'invitation ouvert connecté qui propose de rejoindre
 <!-- index
 titre: « Mes établissements » de l'enseignant — liste, ajout par DRENA puis établissement, « Quitter » confirmé, et lien d'invitation ouvert connecté qui propose de rejoindre
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-16)*
 adr-lie: [0094](../adr/0094-enseignant-multi-etablissements-et-etablissement-courant.md)
 problematique: Page `/teachers/schools` : cartes d'établissement (principal, courant), « Aller dans cet établissement », menu ⋮ « Quitter l'établissement » confirmé en modale (pas pour le dernier) ; carte « Ajouter un établissement » (sélecteur DRENA + frame des établissements, repli sans JavaScript) masquée au plafond ; `GET /i/:token` connecté : carte « Rejoindre <établissement> ? » ou carte d'état (déjà dedans, plafond, lien plus valable). Amende UDR-0079 §3.6, 0042
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/multi-etablissements-enseignant`](../../chantiers/multi-etablissements-enseignant/prd.md) — critères ME-01 à ME-06, ME-13 à ME-16 |
 | **ADR lié** | [ADR-0094](../adr/0094-enseignant-multi-etablissements-et-etablissement-courant.md) |

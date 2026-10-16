@@ -70,6 +70,30 @@ module Repositories
         assert_equal 1, Orm::Session.count
       end
 
+      # ADR-0094 §4.1 : l'établissement courant d'une session d'enseignant, relu avec elle ; une autre session ne bouge pas.
+      test "set_current_school stores the current school of this session only, and the session reads it back" do
+        school = create_school
+        teacher = create_teacher(school:)
+        id = create_for(teacher)
+        other = create_for(teacher, digest: "f" * 64)
+
+        assert_nil @repository.find_by_token_digest(token_digest: "d" * 64).current_school_id
+        assert @repository.set_current_school(id:, school_id: school.id)
+
+        assert_equal school.id, @repository.find_by_token_digest(token_digest: "d" * 64).current_school_id
+        assert_nil Orm::Session.find(other).current_school_id
+      end
+
+      test "a deleted school leaves the session without a current school" do
+        school = create_school
+        id = create_for(create_teacher(school: nil))
+        @repository.set_current_school(id:, school_id: school.id)
+
+        school.delete
+
+        assert_nil @repository.find_by_token_digest(token_digest: "d" * 64).current_school_id
+      end
+
       test "destroy_all_except keeps the given session of the account, and only it" do
         student = create_student
         kept = create_for(student)

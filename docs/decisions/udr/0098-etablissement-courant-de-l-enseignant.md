@@ -1,14 +1,14 @@
 # UDR-0098 : Établissement courant de l'enseignant — choisi dans le panneau du compte, nommé dans l'en-tête, seul visible sur l'accueil, le catalogue, l'assignation et les annonces
 <!-- index
 titre: Établissement courant de l'enseignant — choisi dans le panneau du compte, nommé dans l'en-tête, seul visible sur l'accueil, le catalogue, l'assignation et les annonces
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-16)*
 adr-lie: [0094](../adr/0094-enseignant-multi-etablissements-et-etablissement-courant.md)
 problematique: Rubrique « Établissement » du panneau du compte (site et `/teachers/menu` de Lnclass Teacher) à partir de deux établissements, un bouton par établissement, le courant coché ; ligne de détail = établissement courant ; accueil, catalogue, cibles d'assignation, activités et annonces bornés à l'établissement courant ; page d'une classe hors établissement courant nommée. Rien ne change pour un enseignant d'un seul établissement. Amende UDR-0082 §3.2, 0077, 0069
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/multi-etablissements-enseignant`](../../chantiers/multi-etablissements-enseignant/prd.md) — critères ME-07 à ME-12 |
 | **ADR lié** | [ADR-0094](../adr/0094-enseignant-multi-etablissements-et-etablissement-courant.md) |

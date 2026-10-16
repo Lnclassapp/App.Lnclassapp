@@ -2,7 +2,7 @@
 
 > Les specs sont figées ici. Toute évolution après la phase 3 se fait par modification explicite de ce fichier, pas par improvisation dans le code.
 >
-> **Écrit sur les recommandations du memo** (questions 1 à 8, 10 et 11, non encore répondues par le porteur ; la 9 relève de `enseignant-plusieurs-matieres`). Une réponse différente amende ce PRD avant le Lot 0.
+> **Écrit sur les recommandations du memo** (questions 1 à 8, 10 et 11), **acceptées par le porteur le 2026-10-16** ; la 9 relève de `enseignant-plusieurs-matieres` (matières choisies par établissement, chantier suivant).
 
 ## 1. Contexte
 
@@ -216,10 +216,10 @@ Scénario: ME-24 — national et fiche d'établissement
 
 ## 6. Décisions rattachées
 
-- [ADR-0094](../../decisions/adr/0094-enseignant-multi-etablissements-et-etablissement-courant.md) — établissement courant par session, rattachement par l'enseignant, plafond 3, amende 0030, 0062, 0071, 0083 (Proposé).
-- [UDR-0098](../../decisions/udr/0098-etablissement-courant-de-l-enseignant.md) — établissement courant de l'enseignant (Proposé).
-- [UDR-0099](../../decisions/udr/0099-mes-etablissements-de-l-enseignant.md) — « Mes établissements » et lien ouvert connecté (Proposé).
-- [UDR-0100](../../decisions/udr/0100-enseignant-partage-vu-par-chaque-direction.md) — l'enseignant partagé vu par chaque direction (Proposé).
+- [ADR-0094](../../decisions/adr/0094-enseignant-multi-etablissements-et-etablissement-courant.md) — établissement courant par session, rattachement par l'enseignant, plafond 3, amende 0030, 0062, 0071, 0083 (Accepté, 2026-10-16).
+- [UDR-0098](../../decisions/udr/0098-etablissement-courant-de-l-enseignant.md) — établissement courant de l'enseignant (Accepté, 2026-10-16).
+- [UDR-0099](../../decisions/udr/0099-mes-etablissements-de-l-enseignant.md) — « Mes établissements » et lien ouvert connecté (Accepté, 2026-10-16).
+- [UDR-0100](../../decisions/udr/0100-enseignant-partage-vu-par-chaque-direction.md) — l'enseignant partagé vu par chaque direction (Accepté, 2026-10-16).
 
 ## 7. Mesures
 

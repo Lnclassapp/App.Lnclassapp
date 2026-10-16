@@ -168,7 +168,7 @@ Aucun fichier n'est listé par deux lots parallèles. `SchoolRepository` (Lot 0)
 
 ## Portes de sortie
 
-- [ ] Réponses du porteur consignées au memo ; ADR-0094 et UDR-0098 à 0100 « Accepté »
+- [x] Réponses du porteur consignées au memo ; ADR-0094 et UDR-0098 à 0100 « Accepté »
 - [ ] Tous les lots sont `Done`
 - [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : deux directions et un enseignant partagé, parcours ME-01 à ME-22 refaits dans l'application, sur le site et dans Lnclass Teacher
 - [ ] `bin/ci-quiet` vert, verdict écrit dans la PR (CI GitHub coupée, ADR-0069) ; pureté du domaine, rubocop, tests, parcours système, brakeman

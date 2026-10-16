@@ -27,6 +27,10 @@ module Entities
         assert_not AuditAction.valid?("message.archived")
       end
 
+      test "l'enseignant trace son départ d'un établissement (ADR-0094)" do
+        assert AuditAction.valid?("teacher.left")
+      end
+
       test "la direction trace le retrait et la réintégration d'un enseignant (ADR-0071)" do
         %w[teacher.detached teacher.reinstated].each { assert AuditAction.valid?(it), it }
       end

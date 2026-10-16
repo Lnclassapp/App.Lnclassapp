@@ -203,7 +203,10 @@ class NavigationHelperTest < ActionView::TestCase
     assert_equal [ "/students/menu", "/teachers/menu" ], %i[student teacher].map { account_panel_page_path(it) }
     assert_equal [ [ "/profile", "user-circle" ], [ "/courses", "book-open" ] ],
                  account_panel_links(:student).map { it.values_at(:href, :icon) }
+    # UDR-0098 §3.1 : « Mes établissements » après « Mon profil », quel que soit le nombre d'établissements.
     assert_equal [ { label: I18n.t("shared.navigation.profile"), href: "/profile", icon: "user-circle" },
+                   { label: I18n.t("shared.navigation.account_panel.schools.link"), href: "/teachers/schools",
+                     icon: "building-office-2" },
                    { label: I18n.t("shared.navigation.account_panel.invite"), href: "/teachers/invite", icon: "user-plus" } ],
                  account_panel_links(:teacher)
   end

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Identity::UserRepository
 # Rôle : lit et modifie les comptes, vérifie le PIN par bcrypt en temps constant, construit l'acteur, anonymise un compte
-# ADR  : 0026, 0028, 0036, 0050, 0055, 0065, 0077, 0082, 0084
+# ADR  : 0026, 0028, 0036, 0050, 0055, 0065, 0077, 0082, 0084, 0094
 module Repositories
   module Identity
     class UserRepository
@@ -54,19 +54,25 @@ module Repositories
         true
       end
 
-      def actor_for(user_id:)
+      def actor_for(user_id:, current_school_id: nil)
         user = Orm::User.find(user_id)
-        Entities::Identity::Actor.new(user_id:, role: user.role.to_sym, team_role: user.team_role, school_id: school_id_of(user))
+        Entities::Identity::Actor.new(user_id:, role: user.role.to_sym, team_role: user.team_role,
+                                      school_id: school_id_of(user, current_school_id))
       end
 
       private
 
-      # L'école principale d'un enseignant ; le rattachement actif d'une direction (ADR-0065) : archivée, elle n'en a
-      # aucun et une session survivante la mène à l'écran d'attente (ADR-0077 §4.2).
-      def school_id_of(user)
+      # Le rattachement actif d'une direction (ADR-0065) : archivée, elle n'en a aucun et une session survivante la mène
+      # à l'écran d'attente (ADR-0077 §4.2). L'établissement courant d'un enseignant s'il y est encore rattaché, sinon
+      # son principal, en une requête (ADR-0094 §4.2) : une session vers un établissement quitté retombe sur le principal.
+      def school_id_of(user, current_school_id)
         return Orm::SchoolStaff.active.where(user_id: user.id).pick(:school_id) if user.role == "school_admin"
 
-        Orm::TeacherSchool.where(teacher_id: user.id, primary: true).pick(:school_id)
+        Orm::TeacherSchool.where(teacher_id: user.id)
+                          .where("teacher_schools.primary OR teacher_schools.school_id = ?", current_school_id)
+                          .order(Arel.sql(Orm::TeacherSchool.sanitize_sql([ "teacher_schools.school_id = ? DESC NULLS LAST",
+                                                                            current_school_id ])))
+                          .pick(:school_id)
       end
 
       def archived_school_admin?(user)

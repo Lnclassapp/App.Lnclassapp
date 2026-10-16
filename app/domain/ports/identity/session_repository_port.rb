@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Identity::SessionRepositoryPort
 # Rôle : contrat des sessions serveur, adressées par l'empreinte de leur jeton
-# ADR  : 0031, 0050, 0055
+# ADR  : 0031, 0050, 0055, 0094
 module Ports
   module Identity
     module SessionRepositoryPort
@@ -22,6 +22,11 @@ module Ports
       # → true
       def mark_second_factor_verified(id:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #mark_second_factor_verified"
+      end
+
+      # Établissement courant d'une session d'enseignant (ADR-0094 §4.1) ; nil le remet sur son principal. → true
+      def set_current_school(id:, school_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #set_current_school"
       end
 
       # → true

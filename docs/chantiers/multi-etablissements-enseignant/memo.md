@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage — questions au porteur ouvertes (voir « Ce que le grill a révélé ») |
+| **Statut** | exécution — réponses du porteur consignées le 2026-10-16 (voir « Réponses du porteur ») |
 | **Ouvert le** | 2026-10-16 (reporté par le porteur le 2026-09-28, relancé avec les vagues V2 à V6) |
 | **Branche** | `docs/cadrage-multi-etablissements-enseignant` (cadrage), puis `feature/multi-etablissements-enseignant` |
 | **Programme** | `refonte-application` — vague **V3** (feature ID-27 ; ID-09, SC-23 et la question Q7 de la [feuille de route](../refonte-application/feuille-de-route.md#questions-à-poser-au-porteur)) |

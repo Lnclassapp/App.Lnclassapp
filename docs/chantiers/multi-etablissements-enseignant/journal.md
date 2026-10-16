@@ -11,10 +11,40 @@
 | 2026-10-16 | Recommandation : l'enseignant rejoint lui-même ; la direction ne rattache pas par numéro (ID-09, SC-23 réinterprétés) | Pas de rattachement sans accord, pas de recherche d'un compte par numéro ; lève la dépendance à l'espace direction complet (V2, backlog) | ADR-0094 §3, option E (Proposé) |
 | 2026-10-16 | Recommandation : établissement courant par session (`sessions.current_school_id`), principal stable | Aucune policy à réécrire ; le lien personnel « Inviter un collègue » reste résolu vers le principal sans dériver | ADR-0094 §3, option C (Proposé) |
 | 2026-10-16 | Pilotage : un enseignant compte dans chaque établissement où il est rattaché, la DRENA reste la somme de ses établissements | Le critère RE-08 de l'ADR-0062 (somme des établissements = ligne de la DRENA) l'impose dès qu'on compte par établissement | ADR-0094 §4.6, amende 0062 (Proposé) |
+| 2026-10-16 | Réponses du porteur : recommandations acceptées ; ADR-0094 et UDR-0098 à 0100 passées à « Accepté » au Lot 0 | Décision du porteur (memo, « Réponses du porteur ») | ADR-0094 §9 |
+| 2026-10-16 | Q9 : la matière n'est pas touchée ; point d'extension = la ligne `teacher_schools` (rattachement enseignant-établissement), où `enseignant-plusieurs-matieres` rangera les matières par établissement | Le porteur veut les matières choisies par établissement, dans le chantier suivant | ADR-0094 §9 |
+| 2026-10-16 | Lot 0 : un seul agent exécute les lots A à D à la suite, sur la branche de chantier (pas de worktrees de lot) | Les lots restent disjoints (tableau de collision) ; un commit par lot | — |
+| 2026-10-16 | `SessionState#current_school_id` a la valeur par défaut `nil` (constructeur de `Data`) | Les doubles de session des tests existants ne changent pas ; une session sans établissement courant vaut « le principal » | — |
+
+## Vérification en production (Lot 0) — à lancer par le porteur
+
+Aucun chemin n'a jamais écrit de ligne `teacher_schools` secondaire ; il ne devrait y en avoir aucune. Le porteur lance, **avant la mise en production** de ce chantier, sur la base de production (lecture seule) :
+
+```sql
+-- 1. Nombre de rattachements secondaires (attendu : 0)
+SELECT COUNT(*) FROM teacher_schools WHERE NOT "primary";
+
+-- 2. S'il y en a : lesquels, et l'enseignant a-t-il un principal ?
+SELECT ts.teacher_id, ts.school_id, ts.created_at,
+       EXISTS (SELECT 1 FROM teacher_schools p WHERE p.teacher_id = ts.teacher_id AND p."primary") AS has_primary
+FROM teacher_schools ts
+WHERE NOT ts."primary"
+ORDER BY ts.teacher_id, ts.created_at;
+
+-- 3. Aucun enseignant ne dépasse le plafond de 3 (attendu : aucune ligne)
+SELECT teacher_id, COUNT(*) FROM teacher_schools GROUP BY teacher_id HAVING COUNT(*) > 3;
+```
+
+| Requête | Résultat en production | Date |
+|---|---|---|
+| 1 | *à remplir par le porteur* | |
+| 3 | *à remplir par le porteur* | |
+
+Si la requête 1 rend autre chose que 0 : ces lignes deviennent des établissements secondaires visibles par l'enseignant dès la mise en production (rubrique « Établissement » du panneau). Les noter ici avec leur origine avant de déployer.
 
 ## Ce qui a dérapé
 
-- Rien encore : chantier en cadrage.
+- Rien au Lot 0.
 
 ## Ce qu'on a appris sur la codebase
 

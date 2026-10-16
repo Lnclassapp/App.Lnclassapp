@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::School::SchoolRepository
 # Rôle : traduit Orm::School ↔ Entities::School::School ; codes d'établissement, insertion en masse, génération, enseignants
-# ADR  : 0030, 0036, 0039, 0056, 0057, 0063, 0071, 0083 · UDR : 0079 · aucune recherche par code national (IE-21)
+# ADR  : 0030, 0036, 0039, 0056, 0057, 0063, 0071, 0083, 0094 · UDR : 0079 · aucune recherche par code national (IE-21)
 module Repositories
   module School
     class SchoolRepository
@@ -97,8 +97,38 @@ module Repositories
         ::Shared::Result.failure(:conflict)
       end
 
+      ALREADY_ATTACHED = { base: [ :already_attached ] }.freeze
+      SCHOOLS_LIMIT = { base: [ :schools_limit ] }.freeze
+
+      # Verrou de la ligne users (ADR-0094 §4.5) : deux « Rejoindre » simultanés du même enseignant se sérialisent, le
+      # second compte la ligne du premier. Savepoint : un refus ne casse pas la transaction du use case.
+      def attach_teacher_within_cap(teacher_id:, school_id:, primary:, cap:, at:)
+        Orm::TeacherSchool.transaction(requires_new: true) do
+          Orm::User.where(id: teacher_id).lock.pick(:id)
+          attached = Orm::TeacherSchool.where(teacher_id:).pluck(:school_id)
+          next ::Shared::Result.failure(:conflict, errors: ALREADY_ATTACHED) if attached.include?(school_id)
+          next ::Shared::Result.failure(:conflict, errors: SCHOOLS_LIMIT) if attached.size >= cap
+
+          Orm::TeacherSchool.create!(teacher_id:, school_id:, primary:, created_at: at)
+          ::Shared::Result.success
+        end
+      end
+
       def primary_school_id_for(teacher_id:)
         Orm::TeacherSchool.where(teacher_id:, primary: true).pick(:school_id)
+      end
+
+      def school_ids_for(teacher_id:)
+        Orm::TeacherSchool.where(teacher_id:).order(primary: :desc, created_at: :asc, id: :asc).pluck(:school_id)
+      end
+
+      def promote_primary(teacher_id:)
+        current = primary_school_id_for(teacher_id:)
+        return current if current
+
+        oldest = Orm::TeacherSchool.where(teacher_id:).order(:created_at, :id).first
+        oldest&.update_columns(primary: true)
+        oldest&.school_id
       end
 
       def detach_teacher(teacher_id:, school_id:) = Orm::TeacherSchool.where(teacher_id:, school_id:).delete_all

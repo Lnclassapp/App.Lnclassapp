@@ -1,13 +1,13 @@
 # ADR-0094 : Un enseignant se rattache lui-même à trois établissements au plus, travaille dans un établissement courant gardé par sa session, et chaque direction n'agit que sur son rattachement
 <!-- index
 titre: Un enseignant se rattache lui-même à trois établissements au plus, travaille dans un établissement courant gardé par sa session, et chaque direction n'agit que sur son rattachement
-statut: Proposé — *amende 0030, 0062, 0071, 0083 ; complète 0028, 0063*
+statut: Accepté *(porteur, 2026-10-16)* — *amende 0030, 0062, 0071, 0083 ; complète 0028, 0063*
 problematique: `teacher_schools` inchangée (lignes secondaires enfin écrites) ; `sessions.current_school_id` ; `actor.school_id` = établissement courant vérifié à chaque requête, défaut le principal ; `JoinSchoolWithCode` élargi (écran d'attente, lien `/i/<jeton>` connecté, « Ajouter un établissement ») sous verrou et plafond 3 ; `LeaveSchool` ; `SwitchCurrentSchool` ; `DetachTeacher` promeut un principal ; `ReinstateTeacher` rattache en secondaire. Chantier `multi-etablissements-enseignant`.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/multi-etablissements-enseignant`](../../chantiers/multi-etablissements-enseignant/prd.md) — critères ME-01 à ME-24 |
 | **Remplace** | — |
@@ -238,4 +238,4 @@ end
 
 ## 9. Points à confirmer par le porteur
 
-Les questions 1 à 8, 10 et 11 du [memo](../../chantiers/multi-etablissements-enseignant/memo.md#ce-que-le-grill-a-révélé). Cette décision suit les recommandations ; elle passe à « Accepté » une fois les réponses consignées, et s'amende avant le Lot 0 si une réponse diffère.
+Tranchés par le porteur le 2026-10-16 ([memo](../../chantiers/multi-etablissements-enseignant/memo.md#réponses-du-porteur-2026-10-16)) : les recommandations des questions 1 à 8, 10 et 11 sont acceptées telles quelles. Question 9 : les matières de l'enseignant seront choisies **par établissement**, par le chantier `enseignant-plusieurs-matieres`, qui démarre après celui-ci. Point d'extension laissé : la ligne `teacher_schools` (un rattachement enseignant-établissement) est l'endroit où ce chantier rangera les matières ; aucune lecture ni aucun geste de ce chantier ne suppose une matière unique par établissement.
