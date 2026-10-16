@@ -8,6 +8,9 @@
 |---|---|---|---|
 | 2026-10-16 | Slug `remediation-ciblee` au lieu de `remediation` (feuille de route §5, V5) | Demande de l'orchestrateur au lancement des vagues V2 à V6 | Non |
 | 2026-10-16 | Cadrage écrit selon les recommandations Q1 à Q12, statut « Proposé » partout | Le code attend la validation du porteur | ADR-0101 (Proposé) |
+| 2026-10-16 | **Lots A à D lancés en autonomie, à la demande du porteur : décisions prises sur recommandation, à confirmer par le porteur (questions REM-1 à REM-12 = Q1 à Q12 du memo).** ADR-0101 et UDR-0119 à 0121 restent « Proposé » | Le porteur a demandé l'exécution sans attendre ses réponses | Non |
+| 2026-10-16 | Lot A : `RemediationPick` reçoit des candidats dont l'`id` est l'identifiant public de l'exercice (`PickCandidate`) | `ExerciseRow` n'expose pas l'id ; la règle ne compare que des identifiants, et la source se lit dans la même requête que la lacune (jointure sur la session source) | Non |
+| 2026-10-16 | Lot A : l'aide reçoit `pass_grade` et `remediation_grade` au lieu de réécrire `pass` et `remediation` (UDR-0119 §3) | Les autres réponses (badges, maîtrise) gardent leurs pourcentages : les mêmes variables ne peuvent pas porter deux unités | Non |
 
 ## Ce qui a dérapé
 

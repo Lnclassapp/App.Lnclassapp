@@ -16,8 +16,10 @@ fr:
         no_content: "Cette fiche essentielle n'a pas encore de contenu."
         gap_title: "Fiche essentielle à revoir"
         gap_since: "Depuis le %{date}"
-        gap_body: "Relis son contenu, puis obtiens au moins %{threshold} % à l'un de ses exercices : elle ne sera plus à revoir."
+        # UDR-0119 : la règle se lit sur 20 ; grade = Grading.grade_on_20(REMEDIATION_THRESHOLD).
+        gap_body: "Relis son contenu, puis obtiens au moins %{grade}/20 à l'un de ses exercices : elle ne sera plus à revoir."
         gap_action: "Refaire un exercice"
+        gap_exercise: "Exercice proposé : %{title}"
         exercises_title: "Exercices"
         exercises_count:
           zero: "Aucun exercice"

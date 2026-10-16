@@ -161,6 +161,42 @@ module Queries
         assert_equal gap.public_id, pending.public_id
         assert_equal gap.created_at.to_i, pending.opened_at.to_i
       end
+
+      # ADR-0101 §4.2, UDR-0119 : la lacune porte l'exercice proposé, choisi par RemediationPick.
+      def failed_on(exercise)
+        create_gap(student: @student, essential: @essential,
+                   source_session: create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 30))
+      end
+
+      test "the gap offers a fixation other than the failed exercise, read through the source session" do
+        failed = create_exercise(essential: @essential, title: "Thalès 1", exercise_type: "evaluation", position: 1)
+        create_exercise(essential: @essential, title: "Thalès 2", exercise_type: "evaluation", position: 2)
+        fixation = create_exercise(essential: @essential, title: "Thalès 3", exercise_type: "fixation", position: 3)
+        failed_on(failed)
+
+        offered = detail(student_id: @student.id).pending_gap.exercise
+
+        assert_equal [ fixation.public_id, "Thalès 3" ], offered.to_h.values_at(:public_id, :title)
+      end
+
+      test "an archived exercise is never offered; the failed one comes back when it is the only one left" do
+        failed = create_exercise(essential: @essential, title: "Thalès 1", exercise_type: "evaluation", position: 1)
+        create_exercise(essential: @essential, title: "Thalès 3", exercise_type: "fixation", position: 3, status: "archived")
+        failed_on(failed)
+
+        assert_equal "Thalès 1", detail(student_id: @student.id).pending_gap.exercise.title
+      end
+
+      test "a sheet without published exercise: the gap offers nothing" do
+        failed = create_exercise(essential: @essential, title: "Thalès 1", position: 1)
+        failed_on(failed)
+        failed.update!(status: "archived", archived_at: Time.current)
+
+        gap = detail(student_id: @student.id).pending_gap
+
+        refute_nil gap
+        assert_nil gap.exercise
+      end
     end
   end
 end

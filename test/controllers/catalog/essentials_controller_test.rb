@@ -91,8 +91,54 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#essential_gap", text: /#{I18n.t("#{scope}.show.gap_title")}/
     assert_select "#essential_gap", text: /12 septembre 2026/
     # UDR-0015, amendement du 2026-10-02 : la règle pour lever la lacune passe dans l'infobulle du titre.
-    assert_select "#essential_gap details", text: /#{Entities::Assessment::Grading::REMEDIATION_THRESHOLD} %/
-    assert_select "#essential_gap > div > p", text: /#{Entities::Assessment::Grading::REMEDIATION_THRESHOLD} %/, count: 0
+    # UDR-0119 : la règle se lit sur 20, jamais en pourcentage.
+    assert_select "#essential_gap details", text: /au moins 15\/20/
+    assert_no_match(/75 %/, response.body)
+  end
+
+  # UDR-0119, ADR-0101 §4.2 : le bouton démarre l'exercice proposé (une fixation autre que l'exercice raté), d'un tap.
+  test "the gap's button posts to a session of the offered exercise and names it" do
+    fixation = create_exercise(essential: @essential, title: "Thalès 3", exercise_type: "fixation", position: 3)
+    create_gap(student: @student, essential: @essential,
+               source_session: create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 30))
+    sign_in_as @student
+
+    get page_path
+
+    assert_select "#essential_gap form#essential_gap_form[method=post][action='#{exercise_sessions_path(fixation.public_id)}']" do
+      assert_select "button#essential_gap_action[type=submit][aria-describedby=essential_gap_exercise]",
+                    text: I18n.t("#{scope}.show.gap_action")
+    end
+    assert_select "#essential_gap p#essential_gap_exercise", text: "Exercice proposé : Thalès 3"
+    assert_select "#essential_gap a[href='#{exercise_path(@exercise.public_id)}']", 0
+  end
+
+  test "the gap's button starts a remediation session of the offered exercise" do
+    gap = create_gap(student: @student, essential: @essential,
+                     source_session: create_exercise_session(student: @student, exercise: @exercise, status: "completed",
+                                                             score_percent: 30))
+    other = create_exercise(essential: @essential, title: "Thalès 2", exercise_type: "evaluation", position: 2)
+    sign_in_as @student
+
+    assert_difference -> { Orm::ExerciseSession.count }, 1 do
+      post exercise_sessions_path(other.public_id)
+    end
+
+    session = Orm::ExerciseSession.order(:id).last
+    assert_equal [ other.id, "remediation", gap.id ], [ session.exercise_id, session.kind, session.knowledge_gap_id ]
+    assert_redirected_to exercise_session_path(session.public_id)
+  end
+
+  test "a gap on a sheet without published exercise: the box stays, without button" do
+    create_gap(student: @student, essential: @essential,
+               source_session: create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 30))
+    @exercise.update!(status: "archived", archived_at: Time.current)
+    sign_in_as @student
+
+    get page_path
+
+    assert_select "#essential_gap"
+    assert_select "#essential_gap form, #essential_gap_exercise", 0
   end
 
   test "beyond 3 exercises, the student sees 3 rows then « Voir plus », the others rendered hidden" do
