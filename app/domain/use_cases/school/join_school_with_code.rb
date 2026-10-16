@@ -1,7 +1,7 @@
 # 🧠 DOMAINE · UseCases::School::JoinSchoolWithCode
 # Rôle : un enseignant rejoint un établissement actif, choisi dans sa DRENA ou par un lien /i/<jeton>, jamais celui qui l'a
 #        retiré, trois au plus ; le premier est le principal, un suivant devient l'établissement courant de sa session
-# ADR  : 0028, 0063, 0071, 0083, 0094 · UDR : 0056, 0079, 0099
+# ADR  : 0028, 0063, 0071, 0083, 0094, 0103 · UDR : 0056, 0079, 0099
 module UseCases
   module School
     class JoinSchoolWithCode
@@ -22,9 +22,12 @@ module UseCases
 
       # join_requests : Ports::School::JoinRequestRepositoryPort ; seule une demande en attente va à la policy (ADR-0071 §4.5).
       # Le nom de la classe reste celui de la voie par code (ADR-0083 §4.3), pour limiter le diff.
+      # teacher_materials : Ports::Identity::TeacherMaterialRepositoryPort ; l'établissement ajouté reçoit les matières de
+      # l'établissement courant (ADR-0103 §4.4).
       def initialize(schools:, drenas:, departures:, join_requests:, invite_links:, sessions:, audit_log:, policy:, transaction:,
-                     clock:)
+                     clock:, teacher_materials:)
         @schools = schools
+        @teacher_materials = teacher_materials
         @drenas = drenas
         @departures = departures
         @join_requests = join_requests
@@ -92,6 +95,7 @@ module UseCases
                                                       cap: Entities::School::TeacherSchools::MAX, at: now)
         raise Aborted, attached if attached.failure?
 
+        @teacher_materials.inherit(teacher_id: actor.user_id, school_id: school.id, from_school_id: actor.school_id, at: now)
         @audit_log.record(action: "school.changed", actor_id: actor.user_id, at: now, subject_type: "School",
                           subject_id: school.id, metadata: { change: "teacher_joined", via: })
         @sessions.set_current_school(id: session_id, school_id: school.id) if session_id && !primary

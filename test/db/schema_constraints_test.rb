@@ -45,7 +45,8 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "knowledge_gaps" => [ [ %w[student_id essential_id], "status='pending'" ] ],
     "import_reports" => [ [ %w[kind], "status=ANYARRAY['queued','validating','importing']" ] ],
     "classroom_plan_entries" => [ [ %w[school_type level_id series_id], "series_idISNOTNULL" ], [ %w[school_type level_id], "series_idISNULL" ] ],
-    "teacher_school_departures" => [ [ %w[teacher_id school_id], "reinstated_atISNULL" ] ]
+    "teacher_school_departures" => [ [ %w[teacher_id school_id], "reinstated_atISNULL" ] ],
+    "teacher_school_materials" => [ [ %w[teacher_id school_id material_id], nil ] ] # ADR-0103 §4.1
   }.freeze
 
   # table => { column => allowed values } for every string enumeration.

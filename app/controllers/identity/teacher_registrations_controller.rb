@@ -93,7 +93,8 @@ module Identity
         taxonomy: Repositories::Catalog::TaxonomyRepository.new, sessions: Repositories::Identity::SessionRepository.new,
         referrals: Repositories::Identity::ReferralRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
         policy: Policies::Identity::RegisterTeacherPolicy.new,
-        transaction: Repositories::Shared::Transaction.new, digest_key: secret_digest_key, clock: Time.zone
+        transaction: Repositories::Shared::Transaction.new, digest_key: secret_digest_key, clock: Time.zone,
+        teacher_materials: Repositories::Identity::TeacherMaterialRepository.new
       )
     end
   end

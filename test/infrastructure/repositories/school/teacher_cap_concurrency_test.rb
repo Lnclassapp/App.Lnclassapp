@@ -17,6 +17,7 @@ class TeacherCapConcurrencyTest < ActiveSupport::TestCase
 
   teardown do
     Orm::TeacherSchool.where(teacher_id: @teacher.id).delete_all
+    Orm::TeacherSchoolMaterial.where(teacher_id: @teacher.id).delete_all
     profiles = Orm::TeacherProfile.where(user_id: @teacher.id)
     materials = profiles.pluck(:material_id)
     profiles.delete_all

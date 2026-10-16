@@ -37,7 +37,8 @@ module School
       UseCases::School::VouchForTeacher.new(
         join_requests: Repositories::School::JoinRequestRepository.new, schools: Repositories::School::SchoolRepository.new,
         referrals: Repositories::Identity::ReferralRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
-        policy: Policies::School::VouchPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
+        policy: Policies::School::VouchPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone,
+        teacher_materials: Repositories::Identity::TeacherMaterialRepository.new
       )
     end
   end

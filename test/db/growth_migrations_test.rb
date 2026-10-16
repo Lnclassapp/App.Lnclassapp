@@ -34,6 +34,7 @@ class GrowthMigrationsTest < ActiveSupport::TestCase
     # later test would fail on a missing column.
     migrate(:up) if @down
     Orm::TeacherSchool.where(teacher_id: @teacher_ids).delete_all
+    Orm::TeacherSchoolMaterial.where(teacher_id: @teacher_ids).delete_all
     Orm::TeacherProfile.where(user_id: @teacher_ids).delete_all
     Orm::User.where(id: @teacher_ids).delete_all
     Orm::School.where(id: @school_ids).delete_all

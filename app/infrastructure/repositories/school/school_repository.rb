@@ -46,6 +46,8 @@ module Repositories
         end
 
         Orm::Classroom.where(school_id: id).delete_all
+        # Les matières d'un enseignant parti de lui-même (ADR-0103) ne sont pas un historique : elles partent avec lui.
+        Orm::TeacherSchoolMaterial.where(school_id: id).delete_all
         Orm::School.where(id:).delete_all
         ::Shared::Result.success
       end

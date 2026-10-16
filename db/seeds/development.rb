@@ -25,6 +25,12 @@ Orm::TeacherProfile.create!(user: teacher, material: svt, joined_via: "standard"
 unless Orm::TeacherSchool.exists?(teacher_id: teacher.id)
   Orm::TeacherSchool.create!(teacher_id: teacher.id, school_id: classroom.school_id, primary: true)
 end
+# ADR-0103 : ses matières dans l'établissement ; Koffi Yao est bivalent, SVT puis Physique-Chimie (UDR-0126, UDR-0127).
+[ svt, Orm::Material.find_by!(slug: "physique-chimie") ].each_with_index do |material, rank|
+  Orm::TeacherSchoolMaterial.find_or_create_by!(teacher_id: teacher.id, school_id: classroom.school_id, material:) do |row|
+    row.created_at = Time.current + rank.seconds
+  end
+end
 unless Orm::TeacherClassroom.exists?(teacher_id: teacher.id, classroom:)
   Orm::TeacherClassroom.create!(teacher_id: teacher.id, classroom:)
 end

@@ -11,10 +11,31 @@
 | 2026-10-16 | Pas de matière principale, ordre d'ajout | Un drapeau sans usage demanderait un geste « Définir comme principale » | Oui, ADR-0103 §4.1 |
 | 2026-10-16 | Remplacer toute la liste, jamais ajouter une matière à la fois | Le plafond tient sans verrou entre deux onglets | Oui, ADR-0103 §4.4 |
 | 2026-10-16 | Migration en deux temps (copie + écriture double, puis retrait au Lot Z) | Les lots parallèles ne cassent pas les lectures pas encore converties | Oui, ADR-0103 §4.6 |
+| 2026-10-16 | **Réponse du porteur (Q1, Q7)** : matières par rattachement enseignant-établissement, et non par enseignant | « plusieurs disciplines au sein de l'établissement » ; l'établissement courant cloisonne déjà tout l'espace enseignant (ADR-0094 §10) | Oui, ADR-0103 §4 (option F) |
+| 2026-10-16 | Table `teacher_school_materials` à la clé `(teacher_id, school_id)`, **sans FK** vers la ligne `teacher_schools` | La liste survit à un retrait : « Enseignants retirés » la montre, une réintégration la retrouve ; une FK l'aurait effacée | Oui, ADR-0103 §4.1 |
+| 2026-10-16 | Port nouveau `TeacherMaterialRepositoryPort`, et non `TeacherProfileRepositoryPort#replace_materials` | La liste dépend de l'établissement, pas du profil | Oui, ADR-0103 §4.3 |
+| 2026-10-16 | Un nouveau rattachement **hérite** d'une liste (`inherit`) : celle de l'établissement, sinon celle d'où il l'ajoute, sinon la dernière | Aucun écran ne demande la matière en rejoignant un établissement ; sans liste, il n'aurait aucun cours | Oui, ADR-0103 §4.4 |
+| 2026-10-16 | Migration : copie pour chaque rattachement **et** chaque retrait ouvert | Un enseignant retiré retrouve sa matière s'il est réintégré, même après le retrait de la colonne | Oui, ADR-0103 §4.6 |
 
 ## Ce qui a dérapé
 
 - `origin/Develop` a avancé pendant le cadrage (fusion des cadrages `multi-etablissements-enseignant` et `espace-direction`) : la branche a été avancée en avance rapide avant d'écrire, pour lire l'ADR-0094 réellement fusionné.
+
+## Migration en production
+
+Avant le Lot 0, puis après la migration, la même requête doit donner le même nombre (attendu = copié) :
+
+```sql
+-- Attendu : une ligne par rattachement, plus une par retrait encore ouvert sans rattachement à cet établissement.
+SELECT
+  (SELECT COUNT(*) FROM teacher_schools ts JOIN teacher_profiles tp ON tp.user_id = ts.teacher_id)
+  + (SELECT COUNT(*) FROM teacher_school_departures d JOIN teacher_profiles tp ON tp.user_id = d.teacher_id
+     WHERE d.reinstated_at IS NULL
+       AND NOT EXISTS (SELECT 1 FROM teacher_schools ts WHERE ts.teacher_id = d.teacher_id AND ts.school_id = d.school_id))
+  AS attendu,
+  (SELECT COUNT(*) FROM teacher_school_materials) AS copie;   -- après la migration seulement
+-- Et pour mémoire : SELECT COUNT(*) FROM teacher_profiles; (un enseignant sans rattachement ni retrait n'a rien à copier)
+```
 
 ## Ce qu'on a appris sur la codebase
 

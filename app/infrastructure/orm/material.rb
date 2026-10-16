@@ -10,6 +10,8 @@ module Orm
     has_frozen_slug from: :name
 
     has_many :teacher_profiles, class_name: "Orm::TeacherProfile", inverse_of: :material, dependent: :restrict_with_error
+    has_many :teacher_school_materials, class_name: "Orm::TeacherSchoolMaterial", inverse_of: :material,
+                                        dependent: :restrict_with_error
     has_many :courses, class_name: "Orm::Course", inverse_of: :material, dependent: :restrict_with_error
   end
 end

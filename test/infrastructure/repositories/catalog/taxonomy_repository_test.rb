@@ -112,6 +112,14 @@ module Repositories
         assert_equal :conflict, @repository.delete_material(id: teacher_material.id).code
       end
 
+      test "ADR-0103 §4.5 : la seconde matière d'un enseignant la retient aussi" do
+        second = create_material
+        create_teacher(materials: [ create_material, second ])
+
+        assert_equal({ base: [ :referenced ] }, @repository.delete_material(id: second.id).errors)
+        assert Orm::Material.exists?(second.id)
+      end
+
       test "lie une série à un niveau une seule fois, et délie un couple inutilisé" do
         level, series = create_level, create_series
 

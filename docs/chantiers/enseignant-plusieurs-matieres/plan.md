@@ -4,6 +4,22 @@
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
 >
 > **Préalable au Lot 0** : les questions 1 à 11 du [memo](memo.md#ce-que-le-grill-a-révélé) répondues par le porteur ; l'ADR-0103 et les UDR-0125 à 0127 passées à « Accepté » (amendées si une réponse diffère) ; le nombre de `teacher_profiles` en production relevé ; l'ordre avec `multi-etablissements-enseignant` fixé (§ Articulation).
+>
+> **Préalable rempli le 2026-10-16.** Réponses du porteur : recommandations acceptées sauf Q1 et Q7 — les matières sont attachées au **rattachement enseignant-établissement**. ADR-0103 et UDR-0125 à 0127 amendés et acceptés au Lot 0. Ordre : ce chantier part de la branche `feature/multi-etablissements-enseignant` (PR #250) et fusionne après elle. Requête de comptage pour la production : [journal](journal.md).
+
+## Amendement du Lot 0 (réponses du porteur)
+
+Ce qui change dans les lots ci-dessous, sans changer leur découpage :
+
+| Prévu | Livré |
+|---|---|
+| Table `teacher_materials(teacher_id, material_id)`, `Orm::TeacherMaterial` | Table `teacher_school_materials(teacher_id, school_id, material_id)`, `Orm::TeacherSchoolMaterial` : une liste par rattachement, sans FK vers `teacher_schools` (la liste survit à un retrait) |
+| `TeacherProfileRepositoryPort#replace_materials`, `TeacherProfile#material_ids` | Port **nouveau** `Ports::Identity::TeacherMaterialRepositoryPort` (`material_ids_for`, `replace`, `inherit`) et `Repositories::Identity::TeacherMaterialRepository` ; l'entité du profil perd `material_id` au Lot Z |
+| `RegistrationRepositoryPort#create_teacher(material_ids:)` | `create_teacher` garde `material_id` (écriture double) jusqu'au Lot Z, qui le retire ; `RegisterTeacher` écrit la liste après le rattachement |
+| — | Lot 0 : `JoinSchoolWithCode`, `ReinstateTeacher`, `ReviewJoinRequest`, `VouchForTeacher` donnent une liste au nouveau rattachement (`inherit`) ; `SchoolRepository#delete_if_unreferenced` efface les listes d'un établissement supprimé |
+| `TeacherMaterialsQuery.tags_for(teacher_ids:)` | `TeacherMaterialsQuery#tags_for(teacher_ids:, school_id:)` et `#for_pairs` ; `TeacherMaterialsQuery.label` (nom ou noms courts) |
+| `ManageOwnMaterialsPolicy` : un enseignant | un enseignant **avec un établissement courant** ; la liste modifiée est celle de `actor.school_id` |
+| Lots en parallèle (A, B, C, D) | Exécutés à la suite par un seul agent, un commit par lot, dans l'ordre 0, A, B, C, D, Z |
 
 ## Graphe
 

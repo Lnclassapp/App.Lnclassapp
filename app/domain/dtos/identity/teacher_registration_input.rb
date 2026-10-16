@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Identity::TeacherRegistrationInput
 # Rôle : forme de l'inscription enseignant : nom et prénoms (ADR-0037), établissement de la DRENA ou d'un jeton d'invitation
-# ADR  : 0026, 0030, 0037, 0050, 0063, 0083 · UDR : 0024, 0079
+# ADR  : 0026, 0030, 0037, 0050, 0063, 0083, 0103 · UDR : 0024, 0079, 0125
 module Dtos
   module Identity
     class TeacherRegistrationInput < PersonNameInput
@@ -14,6 +14,8 @@ module Dtos
       attribute :drena_public_id, :string
       attribute :school_public_id, :string
       attribute :material_slug, :string
+      # ADR-0103 §4.4 : « Autre matière (facultatif) » ; la même que la première n'est pas une erreur.
+      attribute :second_material_slug, :string
       # Jeton d'un lien /i/<jeton> (ADR-0083 §4.1), porté par un champ caché ; mal formé, il est oublié.
       attribute :invite_token, :string
 

@@ -580,6 +580,15 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "span.bg-gold\\/20", text: "Mathématiques"
   end
 
+  test "ui_subject_badges draws one badge per subject, in order, in a wrapping row (ADR-0103 §4.5)" do
+    tag = Data.define(:name, :category)
+    show ui_subject_badges([ tag.new("Physique-Chimie", "science"), tag.new("Français", "literature") ], size: :sm, gap: "gap-1")
+
+    assert_select "div.flex.flex-wrap.gap-1 > span", 2
+    assert_select "div > span:first-child", text: "Physique-Chimie"
+    assert_select "div > span:last-child", text: "Français"
+  end
+
   test "ui_subject_badge falls back to neutral for an unknown or missing category" do
     show ui_subject_badge("Latin", category: :ancient) + ui_subject_badge("Latin", category: nil, size: :sm)
 

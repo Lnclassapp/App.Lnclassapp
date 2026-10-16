@@ -39,13 +39,15 @@ module UseCases
                                          Request.new(id: 6, public_id: "req-6", teacher_id: 42, school_id: 31, status: "approved", teacher_name: "Yao"))
         @schools = FakeSchools.new(Entities::School::School.new(id: 31, status: "active"))
         @audit = FakeAuditLog.new
+        @materials = FakeTeacherMaterials.new
         @transaction = FakeTransaction.new
         @sponsor = Entities::Identity::Actor.new(user_id: 7, role: :teacher, school_id: 31)
       end
 
       def vouch(public_id: "req-5", actor: @sponsor, referrals: (@referrals = FakeReferrals.new))
         VouchForTeacher.new(join_requests: @requests, schools: @schools, referrals:, audit_log: @audit,
-                            policy: Policies::School::VouchPolicy.new, transaction: @transaction, clock: Clock.new(NOW))
+                            policy: Policies::School::VouchPolicy.new, transaction: @transaction, clock: Clock.new(NOW),
+                            teacher_materials: @materials)
                        .call(actor:, public_id:)
       end
 
@@ -56,6 +58,7 @@ module UseCases
         assert_equal "Awa Koné", result.value.teacher_name
         assert_equal [ [ :approve, 5, 7, "sponsor", NOW ] ], @requests.writes
         assert_equal [ [ 7, 41, 31, "sponsor", NOW ] ], @referrals.referrals
+        assert_equal [ [ :inherit, 41, 31, nil, NOW ] ], @materials.calls
         assert_equal [ { action: "school.changed", actor_id: 7, at: NOW, subject_type: "School", subject_id: 31,
                          metadata: { change: "join_request_vouched", join_request: "req-5", teacher_id: 41 } } ], @audit.events
         assert_equal 1, @transaction.calls

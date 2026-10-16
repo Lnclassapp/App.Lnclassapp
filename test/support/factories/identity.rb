@@ -29,21 +29,37 @@ module Factories
     # ADR-0083 §4.2: joined_via, the arrival channel, has no default in the database.
     # ADR-0094: by default, the teacher belongs to the school of their first classroom; the home, the catalogue and
     # « Assigner » only read the classrooms of the current school.
-    def create_teacher(school: :default, material: create_material, onboarded: true, classrooms: [], joined_via: "standard",
-                       **attributes)
+    # ADR-0103: `materials`, the teacher's subjects in that school, in order (default: `material` alone).
+    def create_teacher(school: :default, material: create_material, materials: nil, onboarded: true, classrooms: [],
+                       joined_via: "standard", **attributes)
       school = classrooms.first&.school || create_school if school == :default
+      materials ||= [ material ]
       create_user(role: "teacher", **attributes).tap do |teacher|
-        Orm::TeacherProfile.create!(user: teacher, material:, joined_via:, onboarding_completed_at: (Time.current if onboarded))
+        Orm::TeacherProfile.create!(user: teacher, material: materials.first, joined_via:,
+                                    onboarding_completed_at: (Time.current if onboarded))
         # school: nil — a teacher without a primary school: a pending account (ADR-0030, ADR-0063).
-        Orm::TeacherSchool.create!(teacher:, school:, primary: true) if school
+        if school
+          Orm::TeacherSchool.create!(teacher:, school:, primary: true)
+          set_teacher_materials(teacher, school, materials)
+        end
         classrooms.each { |classroom| Orm::TeacherClassroom.create!(teacher:, classroom:) }
       end
     end
 
     # ADR-0094: one more school for a teacher, secondary unless `primary: true`. Returns the row (its invite_token is the
-    # link « Inviter un collègue de mon établissement », §11).
-    def add_teacher_school(teacher, school, primary: false, at: Time.current)
-      Orm::TeacherSchool.create!(teacher:, school:, primary:, created_at: at).reload
+    # link « Inviter un collègue de mon établissement », §11). ADR-0103: `materials` there, by default those of his first school.
+    def add_teacher_school(teacher, school, primary: false, at: Time.current, materials: nil)
+      row = Orm::TeacherSchool.create!(teacher:, school:, primary:, created_at: at).reload
+      first = Orm::TeacherSchoolMaterial.where(teacher:).in_order.first&.school_id
+      materials ||= Orm::TeacherSchoolMaterial.where(teacher:, school_id: first).in_order.map(&:material)
+      set_teacher_materials(teacher, school, materials, at:)
+      row
+    end
+
+    # ADR-0103: replaces the teacher's subjects in that school, in the given order.
+    def set_teacher_materials(teacher, school, materials, at: Time.current)
+      Orm::TeacherSchoolMaterial.where(teacher:, school:).delete_all
+      materials.each_with_index { |material, index| Orm::TeacherSchoolMaterial.create!(teacher:, school:, material:, created_at: at + index.seconds) }
     end
 
     # ADR-0065: a direction account attached to its school, signing in by PIN alone. ADR-0077: joined by invitation or

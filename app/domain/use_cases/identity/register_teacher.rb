@@ -1,7 +1,7 @@
 # 🧠 DOMAINE · UseCases::Identity::RegisterTeacher
 # Rôle : inscrit un enseignant (rôle imposé) dans l'établissement de sa DRENA ou de son lien, note et audite sa voie, ouvre sa session ;
 #        le lien de parrainage d'un collègue (sans établissement) note le parrain, l'établissement est choisi
-# ADR  : 0026, 0028, 0030, 0050, 0063, 0083, 0094 (§11) · UDR : 0024, 0050, 0079
+# ADR  : 0026, 0028, 0030, 0050, 0063, 0083, 0094 (§11), 0103 · UDR : 0024, 0050, 0079, 0125
 module UseCases
   module Identity
     class RegisterTeacher
@@ -25,9 +25,11 @@ module UseCases
         end
       end
 
+      # teacher_materials : Ports::Identity::TeacherMaterialRepositoryPort, ses matières dans l'établissement (ADR-0103).
       def initialize(registrations:, schools:, drenas:, invite_links:, taxonomy:, sessions:, referrals:, audit_log:, policy:,
-                     transaction:, digest_key:, clock:)
+                     transaction:, digest_key:, clock:, teacher_materials:)
         @registrations = registrations
+        @teacher_materials = teacher_materials
         @schools = schools
         @drenas = drenas
         @invite_links = invite_links
@@ -52,11 +54,18 @@ module UseCases
         material = @taxonomy.find_material(slug: dto.material_slug)
         return Shared::Result.failure(:invalid, errors: { material_slug: [ :inclusion ] }) if material.nil?
 
+        # ADR-0103 §4.4 : la seconde, facultative ; la même que la première est oubliée par TeacherMaterials.
+        second_slug = dto.second_material_slug.presence
+        second = second_slug && @taxonomy.find_material(slug: second_slug)
+        return Shared::Result.failure(:invalid, errors: { second_material_slug: [ :inclusion ] }) if second_slug && second.nil?
+
+        material_ids = Entities::Identity::TeacherMaterials.build([ material.id, second&.id ]).value
+
         link = invite_link(dto.invite_token)
         destination = link && !link.sponsor ? invited(link) : chosen(dto, sponsor: link)
         return destination if destination.is_a?(Shared::Result)
 
-        register(dto, destination, material, ip, user_agent)
+        register(dto, destination, material_ids, ip, user_agent)
       rescue Aborted => e
         e.result
       end
@@ -92,12 +101,13 @@ module UseCases
         Destination.new(school_id: school.id, channel: sponsor ? COLLEAGUE : STANDARD, referrer_id: sponsor&.referrer_id, source: SPONSOR)
       end
 
-      def register(dto, destination, material, ip, user_agent)
+      def register(dto, destination, material_ids, ip, user_agent)
         now = @clock.now
         @transaction.call do
-          user = written(@registrations.create_teacher(user: user_from(dto), pin: dto.pin, material_id: material.id,
+          user = written(@registrations.create_teacher(user: user_from(dto), pin: dto.pin, material_id: material_ids.first,
                                                        joined_via: destination.channel))
           written(@schools.attach_teacher(teacher_id: user.id, school_id: destination.school_id, primary: true, at: now))
+          @teacher_materials.replace(teacher_id: user.id, school_id: destination.school_id, material_ids:, at: now)
           record_referral(destination, user, now)
           # ADR-0083 §4.4 bis (IE-23) : comme le rattachement depuis l'écran d'attente, avec la voie en plus.
           @audit_log.record(action: "school.changed", actor_id: user.id, at: now, subject_type: "School",

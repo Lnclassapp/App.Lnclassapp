@@ -26,7 +26,8 @@ module Teams
     def review
       UseCases::School::ReviewJoinRequest.new(
         join_requests: Repositories::School::JoinRequestRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
-        policy: Policies::School::ManageSchoolPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
+        policy: Policies::School::ManageSchoolPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone,
+        teacher_materials: Repositories::Identity::TeacherMaterialRepository.new
       )
     end
   end

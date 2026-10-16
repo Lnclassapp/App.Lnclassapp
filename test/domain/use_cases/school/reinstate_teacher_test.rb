@@ -93,9 +93,10 @@ module UseCases
                     elsewhere: {}, refuse_attach: nil, schools: [ @school, @other ])
         @schools = FakeSchools.new(*schools, elsewhere:, refuse_attach:)
         @departures = FakeDepartures.new(*departures)
+        @materials = FakeTeacherMaterials.new
         ReinstateTeacher.new(users: FakeUsers.new(*users), schools: @schools, departures: @departures, audit_log: @audit,
                              policy: Policies::School::ManageSchoolTeachersPolicy.new, transaction: @transaction,
-                             clock: Clock.new(NOW)).call(actor:, school_id:, teacher_public_id:)
+                             clock: Clock.new(NOW), teacher_materials: @materials).call(actor:, school_id:, teacher_public_id:)
       end
 
       test "GD-19 : réattaché à l'établissement en école principale, départ clos, journal teacher.reinstated" do
@@ -105,6 +106,7 @@ module UseCases
         assert_equal @teacher, result.value
         assert_equal [ { teacher_id: 50, school_id: 31, primary: true, cap: 3, at: NOW } ], @schools.attached
         assert_equal [ { id: 9, reinstated_by_id: 7, at: NOW } ], @departures.closed
+        assert_equal [ [ :inherit, 50, 31, nil, NOW ] ], @materials.calls, "ADR-0103 §4.4 : il retrouve ses matières de cet établissement"
         assert_equal [ { action: "teacher.reinstated", actor_id: 7, at: NOW, subject_type: "User", subject_id: 50,
                          metadata: { school_id: 31 } } ], @audit.events
         assert_equal 1, @transaction.calls

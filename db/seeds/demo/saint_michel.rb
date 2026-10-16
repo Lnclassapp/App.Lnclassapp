@@ -146,6 +146,7 @@ teachers = [ [ "0510000001", "Koné", "Ibrahim", "male", "mathematiques" ], [ "0
   teacher = account.call(contact, role: "teacher", last_name:, first_name:, gender:)
   Orm::TeacherProfile.create!(user: teacher, material:, joined_via: "standard", onboarding_completed_at: clock.now) unless teacher.teacher_profile
   Orm::TeacherSchool.create!(teacher_id: teacher.id, school_id: school.id, primary: true) unless Orm::TeacherSchool.exists?(teacher_id: teacher.id)
+  Orm::TeacherSchoolMaterial.find_or_create_by!(teacher_id: teacher.id, school_id: school.id, material:) { it.created_at = clock.now }
   Orm::TeacherClassroom.create!(teacher_id: teacher.id, classroom:) unless Orm::TeacherClassroom.exists?(teacher_id: teacher.id, classroom:)
   [ teacher, courses.select { it.material_id == material.id } ]
 end
@@ -175,6 +176,7 @@ colleagues.each.with_index(1) do |(material_slug, people), material_rank|
     teacher = account.call(format("0511%d%05d", material_rank, rank), role: "teacher", last_name:, first_name:, gender:)
     Orm::TeacherProfile.create!(user: teacher, material:, joined_via: "standard", onboarding_completed_at: clock.now) unless teacher.teacher_profile
     Orm::TeacherSchool.create!(teacher_id: teacher.id, school_id: school.id, primary: true) unless Orm::TeacherSchool.exists?(teacher_id: teacher.id)
+    Orm::TeacherSchoolMaterial.find_or_create_by!(teacher_id: teacher.id, school_id: school.id, material:) { it.created_at = clock.now }
     teacher
   end
   eligible = classrooms_by_rank.select do |room|
