@@ -130,3 +130,4 @@ Le grill a changé le chantier sur quatre points par rapport à la conception du
 
 - Recommandations acceptées, **sauf Q5** : la direction ne change pas un élève de classe. Le changement de classe se fait par l'élève lui-même (`changement-etablissement-eleve`). Le Lot D, l'UDR-0093 et les scénarios du changement de classe sortent du chantier ; le PRD, le plan et l'ADR-0092 sont amendés au Lot 0.
 - Ordre : ce chantier démarre après `multi-etablissements-enseignant` (policies de la direction sur les enseignants communes aux deux).
+- **Q4** : aucune direction n'est inscrite aujourd'hui (Lnclass n'est pas encore lancé). Pas de cas « compte existant sans fonction » : la fonction est obligatoire pour toute direction, dès l'inscription ou l'invitation. Le geste « préciser sa fonction » pour les comptes existants sort du Lot B.
