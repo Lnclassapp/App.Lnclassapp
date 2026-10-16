@@ -43,18 +43,7 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     assert_selector "#classroom_roster li", count: 2
     assert_selector "#student_#{@awa.public_id}", text: "Awa Bamba"
     assert_selector "#student_#{@awa.public_id}", text: "100 %"
-    # UDR-0077 §3.4 : le code de récupération est dans le menu ⋮ de la ligne ; il ouvre toujours la modale du code.
-    assert_no_selector "#student_#{@koffi.public_id} button", text: I18n.t("#{scope}.roster.issue_code")
     assert_no_page_reload do
-      click_menu_action("#student_#{@koffi.public_id}", I18n.t("#{scope}.roster.issue_code"))
-      assert_selector "turbo-frame#modal dialog#pin-recovery-code-modal[open]"
-      assert_toast I18n.t("identity.pin_recovery_codes.create.issued")
-      click_on I18n.t("identity.pin_recovery_codes.code.close")
-    end
-
-    assert_no_page_reload do
-      # Fermée, la modale rend le focus au ⋮ de la ligne : la page reste descendue sur la liste, et « Copier » passe sous
-      # l'en-tête fixe, où le clic tomberait sur un autre bouton. On le ramène au milieu de l'écran, comme le ferait l'enseignant.
       # La barre latérale a son propre « Copier le lien » (parrainage, UDR-0069 §3.6) : on vise celui du bloc de la classe.
       copy = within("#classroom_link") { find_button(I18n.t("#{scope}.link.copy")) }
       scroll_to(copy, align: :center)
@@ -64,6 +53,17 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     end
     assert_equal URI.join(page.current_url, join_classroom_path(@classroom.reload.link_token)).to_s,
                  page.evaluate_async_script("navigator.clipboard.readText().then(arguments[0])")
+
+    # rapports-de-classe (memo Q4, UDR-0108 §3.2) : la ligne n'a plus de menu ⋮ ; le nom mène à la fiche, où le code de
+    # récupération ouvre toujours la modale du code.
+    assert_no_selector "#student_#{@koffi.public_id} button[aria-haspopup=menu]"
+    assert_no_page_reload do
+      issue_recovery_code_from_roster("#student_#{@koffi.public_id}")
+      assert_selector "turbo-frame#modal dialog#pin-recovery-code-modal[open]"
+      assert_toast I18n.t("identity.pin_recovery_codes.create.issued")
+      click_on I18n.t("identity.pin_recovery_codes.code.close")
+    end
+    assert_current_path classroom_student_path(@classroom.public_id, @koffi.public_id)
   end
 
   test "une copie refusée par le navigateur le dit" do
@@ -149,13 +149,13 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
 
       assert_selector "#classroom_session_days", text: I18n.t("#{scope}.session_days.unset")
       assert_selector "#assignment_#{assignment.public_id}", text: "0 fait · 2 pas encore faits"
-      # UDR-0077 §3.4 : les cours en bande, avant les exercices ; ⋮ de l'élève sur la ligne de son nom.
+      # UDR-0077 §3.4 : les cours en bande, avant les exercices. UDR-0108 : la note de l'élève sur la ligne de son nom.
       assert_operator find("#classroom_courses").rect.y, :<, find("#assigned_exercises").rect.y
       assert_selector "#classroom_courses ul[data-communication--carousel-target=track] > li", count: 3
       within("#student_#{@koffi.public_id}") do
         avatar = find(".ui-avatar", match: :first).rect
-        menu = find("button[aria-haspopup=menu]").rect
-        assert_in_delta avatar.y + (avatar.height / 2), menu.y + (menu.height / 2), 8, "⋮ n'est pas sur la ligne de l'élève"
+        grade = find("#grade_#{@koffi.public_id}").rect
+        assert_in_delta avatar.y + (avatar.height / 2), grade.y + (grade.height / 2), 8, "la note n'est pas sur la ligne de l'élève"
         # « Aucune session terminée » ne doit pas écraser le nom.
         assert_selector "p", exact_text: "Koffi Yao"
         name = find("p", exact_text: "Koffi Yao")

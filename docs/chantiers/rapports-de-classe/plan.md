@@ -61,6 +61,9 @@ Trois lots verticaux après le socle : **trois agents** en parallèle.
 
 ## Lot B — Liste des élèves : le nom mène à la fiche, trente par trente (CL-15)
 
+> **Amendé le 2026-10-16 (porteur, Q5)** : la liste se découpe d'abord par note sur 20 (UDR-0108 §3.8). Fichier de plus :
+> `app/domain/entities/classroom/roster_grade.rb` (règle des groupes) et son test `test/domain/entities/classroom/roster_grade_test.rb`.
+
 - **Couche**       : infrastructure + delivery + ui
 - **Fichiers**     : `app/infrastructure/queries/classroom/classroom_overview_query.rb` *(pagination cumulative `PER_PAGE = 30`, `students_total`, lectures par élève sur les seules lignes rendues — ADR-0097 §4.7)*
                      `app/controllers/classroom/classrooms_controller.rb` *(lit `page`, entier ≥ 1, sinon 1 ; `@page`)*

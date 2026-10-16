@@ -16,7 +16,7 @@ module Queries
       def overview(show_roster: true, **) = ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster:, **)
 
       test "l'aperçu porte les élèves et leurs nouveaux, les jours de séance, les exercices assignés et les cours" do
-        assert_equal %i[students students_total new_students_count session_days assignments courses],
+        assert_equal %i[students students_total grade_group grade_counts new_students_count session_days assignments courses],
                      ClassroomOverviewQuery::Overview.members
       end
 
@@ -313,6 +313,123 @@ module Queries
 
         assert_equal few, count_queries { overview(today: TODAY) }
         assert_equal [ 1, 1, 1, 1 ], overview(today: TODAY).students.map(&:self_practice_count)
+      end
+
+      # rapports-de-classe, Lot B (CL-15 ; ADR-0097 §4.7, UDR-0108) : dans un groupe, trente élèves, puis trente de plus,
+      # cumulativement. Sans exercice fait, tous sont dans « Pas encore de note ».
+      def roster_of(count, last_name: "Élève", joined_at: 1.month.ago)
+        Array.new(count) { |index| create_student(classroom: @classroom, first_name: format("N%02d", index), last_name:, joined_at:) }
+      end
+
+      test "CL-15 : trente élèves par page, cumulés ; students_total compte toute la classe" do
+        roster_of(65)
+
+        assert_equal 30, ClassroomOverviewQuery::PER_PAGE
+        assert_equal "none", overview.grade_group
+        assert_equal [ 30, 65 ], overview.then { [ it.students.size, it.students_total ] }
+        assert_equal [ 60, 65 ], overview(page: 2).then { [ it.students.size, it.students_total ] }
+        assert_equal [ 65, 65 ], overview(page: 3).then { [ it.students.size, it.students_total ] }
+        assert_equal [ 65, 65 ], overview(page: 9).then { [ it.students.size, it.students_total ] }
+        assert_equal overview.students.map(&:public_id), overview(page: 2).students.first(30).map(&:public_id)
+      end
+
+      test "CL-15 : une page nulle, négative ou qui n'est pas un entier vaut la première" do
+        roster_of(31)
+
+        [ 0, -1, nil, "2", 1.5 ].each { assert_equal 30, overview(page: it).students.size, it.inspect }
+      end
+
+      test "CL-15 : les nouveaux restent en tête de la première page" do
+        roster_of(63)
+        newcomers = Array.new(2) { |index| create_student(classroom: @classroom, last_name: "Arrivé#{index}", joined_at: (3 + index).days.ago) }
+
+        assert_equal newcomers.map(&:public_id), overview.students.first(2).map(&:public_id)
+        assert_equal 2, overview.new_students_count
+      end
+
+      test "CL-15 : avec une recherche, le total est celui des élèves qui y répondent" do
+        roster_of(40, last_name: "Koné")
+        roster_of(5, last_name: "Bamba")
+
+        assert_equal [ 30, 40 ], overview(search: "kon").then { [ it.students.size, it.students_total ] }
+        assert_equal [ 40, 40 ], overview(search: "kon", page: 2).then { [ it.students.size, it.students_total ] }
+        assert_equal [ nil, nil, nil ], overview(show_roster: false).to_h.values_at(:students_total, :grade_group, :grade_counts)
+      end
+
+      # Décision du porteur du 2026-10-16 (UDR-0108 amendée) : la liste se découpe par note sur 20, la moyenne des meilleurs
+      # scores aux exercices assignés à la classe ; trente par trente dans un groupe.
+      def graded(scores, first_name: "Élève")
+        create_student(classroom: @classroom, first_name:, last_name: "N#{factory_sequence}", joined_at: 1.month.ago).tap do |student|
+          scores.each_with_index do |score, index|
+            @assignments[index] ||= create_assignment(classroom: @classroom, assignable: create_exercise)
+            exercise = Orm::Exercise.find(@assignments[index].assignable_id)
+            create_exercise_session(student:, exercise:, status: "completed", score_percent: score,
+                                    classroom_assignment: @assignments[index])
+          end
+        end
+      end
+
+      test "CL-15 : la note d'un élève est la moyenne sur 20 de ses meilleurs scores aux exercices assignés à la classe" do
+        @assignments = []
+        awa = graded([ 40, 60 ], first_name: "Awa")
+        exercise = Orm::Exercise.find(@assignments[0].assignable_id)
+        create_exercise_session(student: awa, exercise:, status: "completed", score_percent: 20, classroom_assignment: @assignments[0])
+        create_exercise_session(student: awa, exercise:, classroom_assignment: @assignments[0])
+        create_exercise_session(student: awa, status: "completed", score_percent: 100)
+        archived = create_assignment(classroom: @classroom, assignable: create_exercise, status: "archived")
+        create_exercise_session(student: awa, exercise: Orm::Exercise.find(archived.assignable_id), status: "completed",
+                                score_percent: 100, classroom_assignment: archived)
+        elsewhere = create_assignment(classroom: create_classroom, assignable: exercise)
+        create_exercise_session(student: awa, exercise:, status: "completed", score_percent: 100, classroom_assignment: elsewhere)
+        gap = create_gap(student: awa, essential: Orm::Exercise.find(@assignments[1].assignable_id).essential)
+        create_exercise_session(student: awa, exercise: Orm::Exercise.find(@assignments[1].assignable_id), status: "completed",
+                                score_percent: 80, classroom_assignment: @assignments[1], gap:)
+
+        # (40 + 80) / 2 = 60 % : 12 sur 20 — la remédiation sur l'exercice assigné compte, rien d'autre.
+        assert_equal [ [ awa.public_id, 12 ] ], overview(note: "11-15").students.map { [ it.public_id, it.grade ] }
+      end
+
+      test "CL-15 : un groupe par note, le premier non vide depuis 0–10 par défaut ; le compte de chaque groupe" do
+        @assignments = []
+        good = Array.new(2) { graded([ 60 ]) }
+        best = graded([ 95 ])
+        3.times { create_student(classroom: @classroom) }
+
+        result = overview
+
+        assert_equal({ "0-10" => 0, "11-15" => 2, "16-20" => 1, "none" => 3 }, result.grade_counts)
+        assert_equal "11-15", result.grade_group
+        assert_equal good.map(&:public_id).sort, result.students.map(&:public_id).sort
+        assert_equal [ 2, [ 12, 12 ] ], [ result.students_total, result.students.map(&:grade) ]
+        assert_equal [ best.public_id ], overview(note: "16-20").students.map(&:public_id)
+        assert_equal [ 3, [ nil ] ], overview(note: "none").then { [ it.students_total, it.students.map(&:grade).uniq ] }
+        assert_equal [ "0-10", [] ], overview(note: "0-10").then { [ it.grade_group, it.students ] }
+        assert_equal "11-15", overview(note: "12-14").grade_group
+      end
+
+      test "CL-15 : la recherche porte sur toute la classe, quel que soit le groupe" do
+        @assignments = []
+        graded([ 30 ], first_name: "Koné")
+        graded([ 95 ], first_name: "Koné")
+        create_student(classroom: @classroom, first_name: "Koné")
+        graded([ 60 ], first_name: "Awa")
+
+        result = overview(search: "kon", note: "11-15")
+
+        assert_nil result.grade_group
+        assert_equal [ 3, 3 ], [ result.students.size, result.students_total ]
+        assert_equal({ "0-10" => 1, "11-15" => 1, "16-20" => 1, "none" => 1 }, result.grade_counts)
+      end
+
+      test "CL-15 : le nombre de requêtes ne dépend ni de la page, ni du groupe, ni de l'effectif" do
+        @assignments = []
+        roster_of(31)
+        first = count_queries { overview(today: TODAY) }
+        graded([ 50, 70 ])
+        graded([ 90 ])
+
+        assert_equal first, count_queries { overview(today: TODAY, page: 2) }
+        assert_equal first, count_queries { overview(today: TODAY, note: "11-15") }
       end
 
       def count_queries(&)

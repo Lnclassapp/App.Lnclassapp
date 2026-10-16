@@ -84,7 +84,7 @@ class Finitions::AccountPagesTest < ApplicationSystemTestCase
     sign_in_as teacher
     visit classroom_path(@classroom.public_id)
 
-    click_menu_action("[id='student_#{@student.public_id}']", I18n.t("classroom.classrooms.roster.issue_code"))
+    issue_recovery_code_from_roster("[id='student_#{@student.public_id}']")
 
     within "turbo-frame#modal dialog#pin-recovery-code-modal[open]" do
       assert_match(/\A\d{4} \d{4}\z/, find("#pin-recovery-code").text)

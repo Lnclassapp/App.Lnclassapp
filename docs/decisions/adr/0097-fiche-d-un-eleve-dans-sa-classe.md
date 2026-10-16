@@ -129,6 +129,12 @@ Règle pure, `Entities::Assessment::NextStep.for(done:, pending:, readable:, dom
 - `PER_PAGE = 30`, constante de la query.
 - Les lectures par élève (dernière session, photos, « fait seul ») ne portent que sur les lignes rendues.
 
+**Amendement du 2026-10-16 (porteur, réponse à Q5).** La liste se découpe d'abord **par note sur 20** : moyenne des meilleurs
+scores de l'élève aux exercices assignés actifs de la classe, arrondie par `Grading.grade_on_20` ; groupes 0–10, 11–15, 16–20
+et « pas encore de note » (`Entities::Classroom::RosterGrade`). `call` reçoit `note:` ; `Overview` gagne `grade_group` (nil avec
+une recherche, qui porte sur toute la classe) et `grade_counts` ; `StudentRow` gagne `grade`. Les notes de toute la classe se
+lisent en une requête ; la pagination par trente vaut à l'intérieur du groupe. Aucune moyenne de classe.
+
 ### 4.8 Lecture, cache, budget
 
 - **Aucun cache.** Lecture en direct, comme l'ADR-0079 §4.6.

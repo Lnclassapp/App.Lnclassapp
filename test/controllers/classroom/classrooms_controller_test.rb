@@ -72,12 +72,14 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_#{awa.public_id}", text: /85 %/
     assert_select "#student_#{awa.public_id} a[href='#{exercise_session_result_path(session.public_id)}']",
                   text: I18n.t("#{scope}.roster.see_result")
-    # CA-8 (UDR-0077 §3.4) : le code de récupération est une entrée du menu ⋮ de la ligne, qui nomme l'élève.
-    assert_select "#student_#{awa.public_id} button[aria-haspopup=menu][aria-controls='student-actions-#{awa.public_id}'][aria-label=?]",
-                  I18n.t("#{scope}.roster.actions_label", name: "Awa Bamba")
-    assert_select "#student-actions-#{awa.public_id}[role=menu] a[role=menuitem][href='#{account_pin_recovery_codes_path(awa.public_id)}']" \
-                  "[data-turbo-method=post][data-turbo-frame=_top]", text: I18n.t("#{scope}.roster.issue_code")
+    # rapports-de-classe (UDR-0108 §3.2, memo Q4) : la photo et le nom mènent à la fiche ; plus de menu ⋮ ni de fenêtre de
+    # retrait sur la ligne : le code de récupération et le retrait sont sur la fiche.
+    assert_select "#student_#{awa.public_id} a[href='#{classroom_student_path(@classroom.public_id, awa.public_id)}']" \
+                  "[data-turbo-frame=_top]", text: /Awa Bamba/
+    assert_select "#classroom_roster button[aria-haspopup=menu], #classroom_roster dialog, #classroom_roster [role=menu]", 0
+    assert_select "#classroom_roster a[href='#{account_pin_recovery_codes_path(awa.public_id)}']", 0
     assert_select "#classroom_roster form[action='#{account_pin_recovery_codes_path(awa.public_id)}']", 0
+    assert_select "#classroom_roster_more", 0
     assert_select "#classroom_roster", text: /#{I18n.t("#{scope}.roster.no_score")}/
     assert_select "#classroom_roster a", text: I18n.t("#{scope}.roster.see_result"), count: 1
   end
@@ -542,40 +544,105 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h2#classroom_roster_title span", 0
   end
 
-  # IL-14 (UDR-0081 §3.7) : dernier item du menu ⋮, séparé par un filet ; la modale nomme l'élève ; DELETE vers la ligne.
-  test "IL-14 : « Retirer de la classe » termine le menu ⋮ de chaque ligne et ouvre une confirmation qui nomme l'élève" do
+  # rapports-de-classe (memo Q4, UDR-0108 §3.2) : « Retirer de la classe » a quitté la ligne pour la fiche de l'élève.
+  test "Q4 : aucune ligne n'a de menu ⋮ ni de fenêtre de retrait, pour l'enseignant comme pour l'équipe" do
     koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
-    sign_in_as @teacher
 
-    get classroom_path(@classroom.public_id, q: "koffi")
+    [ @teacher, create_team_member ].each do |reader|
+      sign_in_as reader
+      get classroom_path(@classroom.public_id)
 
-    dialog = "remove-student-#{koffi.public_id}"
-    assert_select "#student-actions-#{koffi.public_id}[role=menu]" do
-      assert_select "> :last-child[role=menuitem][aria-controls='#{dialog}'][aria-haspopup=dialog].ui-menu-item-danger",
-                    text: I18n.t("#{scope}.roster.remove")
-      assert_select "> [role=separator] + [aria-controls='#{dialog}']"
-      assert_select "button[aria-controls='#{dialog}'] svg"
-    end
-    assert_select "#student_#{koffi.public_id} dialog##{dialog}" do
-      assert_select "h2", text: I18n.t("#{scope}.roster.remove_title", name: "Koffi Yao")
-      assert_select "p", text: I18n.t("#{scope}.roster.remove_warning", name: "Koffi Yao")
-      assert_select "form##{dialog}-form[method=post][action='#{classroom_student_path(@classroom.public_id, koffi.public_id)}']" \
-                    "[data-turbo-frame=_top]" do
-        assert_select "input[name=_method][value=delete]"
-        assert_select "input[type=hidden][name=q][value=koffi]"
-      end
-      assert_select "button[data-action='modal#close']", text: I18n.t("#{scope}.roster.cancel")
-      assert_select "button[type=submit][form='#{dialog}-form']", text: I18n.t("#{scope}.roster.remove_confirm")
+      assert_select "#student_#{koffi.public_id} a[href='#{classroom_student_path(@classroom.public_id, koffi.public_id)}']"
+      assert_select "dialog#remove-student-#{koffi.public_id}, #student-actions-#{koffi.public_id}", 0
+      sign_out
     end
   end
 
-  test "IL-14 : l'équipe a aussi « Retirer de la classe »" do
-    koffi = create_student(classroom: @classroom)
-    sign_in_as create_team_member
+  # rapports-de-classe, Lot B (CL-15 ; ADR-0097 §4.7, UDR-0108 §3.3, §3.4) : trente élèves, puis « Voir les suivants ».
+  def roster_of(count)
+    Array.new(count) { |index| create_student(classroom: @classroom, first_name: format("N%02d", index), last_name: "Élève", joined_at: 1.month.ago) }
+  end
+
+  test "CL-15 : 31 élèves, la liste en montre 30, « 30 sur 31 », et « Voir le dernier » vise la page 2 dans le cadre" do
+    students = roster_of(31)
+    sign_in_as @teacher
 
     get classroom_path(@classroom.public_id)
 
-    assert_select "dialog#remove-student-#{koffi.public_id}", 1
+    assert_select "#classroom_roster_list li[id^=student_]", 30
+    assert_select "#classroom_roster_count[aria-live=polite]", text: I18n.t("#{scope}.roster.count_partial", shown: 30, total: 31)
+    assert_select "#classroom_roster_more a[href='#{classroom_path(@classroom.public_id, note: 'none', page: 2, anchor: 'classroom_roster')}']" \
+                  "[data-turbo-frame=classroom_roster_list][data-turbo-action=replace]",
+                  text: I18n.t("#{scope}.roster.more", count: 1)
+    assert_select "#student_#{students.last.public_id}", 0
+
+    get classroom_path(@classroom.public_id, page: 2)
+
+    assert_select "#classroom_roster_list li[id^=student_]", 31
+    assert_select "#classroom_roster_count", text: I18n.t("#{scope}.roster.count", count: 31)
+    assert_select "#classroom_roster_more", 0
+    # UDR-0108 §3.3 : le focus va au lien de la première ligne ajoutée.
+    assert_select "#student_#{students.last.public_id} a[autofocus]", 1
+    assert_select "#classroom_roster_list a[autofocus]", 1
+  end
+
+  test "CL-15 : « Voir les suivants » garde la recherche ; le formulaire de recherche ne transmet pas la page" do
+    roster_of(31)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id, q: "élève")
+
+    assert_select "#classroom_roster_more a[href='#{classroom_path(@classroom.public_id, q: 'élève', page: 2, anchor: 'classroom_roster')}']"
+    assert_select "form#classroom-roster-search input[name=page]", 0
+  end
+
+  # Décision du porteur du 2026-10-16 (UDR-0108 amendée) : la liste par note sur 20, un groupe à la fois.
+  test "CL-15 : le sélecteur des notes compte chaque groupe, ouvre le premier non vide, et chaque groupe est un lien" do
+    assignment = create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher)
+    good = hand_in(assignment, 60).student
+    hand_in(assignment, 95)
+    waiting = create_student(classroom: @classroom)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "nav#classroom_roster_groups[aria-label=?]", I18n.t("#{scope}.roster.groups_label") do
+      { "0-10" => 0, "11-15" => 1, "16-20" => 1, "none" => 1 }.each do |key, count|
+        assert_select "a#classroom_roster_group_#{key.tr('-', '_')}[href='#{classroom_path(@classroom.public_id, note: key, anchor: 'classroom_roster')}']" \
+                      "[data-turbo-action=advance]", text: /#{I18n.t("#{scope}.roster.groups.#{key}")}\s+#{count}/
+      end
+      assert_select "a[aria-current=true]", 1
+      assert_select "a#classroom_roster_group_11_15[aria-current=true]"
+    end
+    assert_select "#classroom_roster_list li[id^=student_]", 1
+    assert_select "#grade_#{good.public_id}", text: /#{I18n.t("#{scope}.roster.grade", grade: 12)}/
+
+    get classroom_path(@classroom.public_id, note: "none")
+
+    assert_select "#classroom_roster_list li[id^=student_]", 1
+    assert_select "#grade_#{waiting.public_id}", text: /—/
+
+    get classroom_path(@classroom.public_id, note: "0-10")
+
+    assert_select "#classroom_roster_count", text: I18n.t("#{scope}.roster.empty_group")
+    assert_select "#classroom_roster_list li[id^=student_]", 0
+
+    get classroom_path(@classroom.public_id, q: "Awa")
+
+    assert_select "#classroom_roster_groups a[aria-current]", 0
+  end
+
+  test "CL-15 : une page nulle, négative ou qui n'est pas un nombre montre la première page" do
+    roster_of(31)
+    sign_in_as @teacher
+
+    %w[-1 abc 0 2x 1.5].each do |page|
+      get classroom_path(@classroom.public_id, page:)
+
+      assert_response :success
+      assert_select "#classroom_roster_list li[id^=student_]", 30, page
+      assert_select "#classroom_roster_list a[autofocus]", 0
+    end
   end
 
   test "un élève, même de cette classe, reçoit 403 sans le code ni la liste" do
@@ -615,7 +682,8 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     create_exercise_session(student: awa, status: "completed", started_at: 3.days.ago, completed_at: 3.days.ago)
     sign_in_as @teacher
 
-    get classroom_path(@classroom.public_id)
+    # Koffi a une note, Awa pas encore (groupes de l'UDR-0108 amendée) : la recherche porte sur toute la classe.
+    get classroom_path(@classroom.public_id, q: "a")
 
     assert_select "#classroom_roster div#self_practice_heading.hidden.sm\\:flex", text: /#{Regexp.escape(I18n.t("#{scope}.roster.self_practice"))}/
     assert_select "#self_practice_#{awa.public_id}.hidden.sm\\:block", text: /#{Regexp.escape(I18n.t("#{scope}.roster.self_practice"))}\s+1/

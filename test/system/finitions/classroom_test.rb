@@ -116,7 +116,7 @@ class Finitions::ClassroomTest < ApplicationSystemTestCase
     sign_in_as @teacher
     visit classroom_path(@classroom.public_id, q: "awa")
 
-    click_menu_action("#student_#{@awa.public_id}", t("#{SCOPE}.roster.issue_code"))
+    issue_recovery_code_from_roster("#student_#{@awa.public_id}")
 
     assert_selector "dialog[open]", text: "Awa Bamba"
     assert_no_selector "dialog[open] [data-controller=clipboard]"
