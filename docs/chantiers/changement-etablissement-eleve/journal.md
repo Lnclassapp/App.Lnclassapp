@@ -20,6 +20,8 @@
 | 2026-10-16 | Lot A : un seul test système (parcours JS cascade → confirmation → accueil) ; refus, sans JS, lien et rôles en tests contrôleur | Budget système de 15 s par chantier (ADR-0069 §9) | — |
 | 2026-10-16 | Lot B : la ligne Classe réutilise la clé `student_information.change` (« Changer ») ; aucune clé nouvelle dans `identity/profiles.fr.yml` | La clé existait pour le Numéro | — |
 | 2026-10-16 | Lot B : l'entrée par le profil est jouée au début du test système du Lot A, pas dans `profile_test.rb` | Budget système ; un seul démarrage de navigateur | — |
+| 2026-10-16 | Lot C : `/c/<jeton>` d'une autre classe ouverte mène l'élève inscrit à la confirmation (303) ; sa propre classe, un lien mort ou celui d'une classe archivée le ramènent à l'accueil, comme avant | UDR-0102 §3.3 « comportements actuels » : l'élève inscrit n'était jamais renvoyé vers la cascade | — |
+| 2026-10-16 | Lot C : couvert en test contrôleur, pas dans `test/system/classroom/join_test.rb` | Budget système ; la page de confirmation est déjà jouée dans le test système du Lot A | — |
 
 ## Ce qui a dérapé
 
