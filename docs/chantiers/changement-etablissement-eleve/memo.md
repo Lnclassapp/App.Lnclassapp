@@ -100,3 +100,8 @@ Un élève qui a une classe active ne peut rejoindre aucune autre classe. `JoinA
 
 - Les questions 1 à 9 ci-dessus, à trancher par le porteur avant le Lot 0.
 - Faut-il, plus tard, un écran d'équipe des changements (lecture de `classroom.student_moved`) ? Hors périmètre ici.
+
+## Réponses du porteur (2026-10-16)
+
+- Recommandations acceptées. Le changement de classe se fait **par l'élève lui-même seulement** ; la direction n'a pas ce geste (`espace-direction` Q5 retirée).
+- Q9 : la rentrée 2027 est laissée pour le moment, aucun chantier `rentree-scolaire` n'est ouvert.

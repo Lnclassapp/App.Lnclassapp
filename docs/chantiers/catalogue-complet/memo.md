@@ -96,3 +96,7 @@ Grill tenu par l'agent sur l'inventaire et les décisions en vigueur ; les répo
 ## Questions encore ouvertes
 
 Les questions 1 à 12 ci-dessus, à trancher par le porteur. Les décisions des questions 1 à 7 conditionnent l'ADR-0099 et les trois UDR ; si une réponse diffère de la recommandation, ces documents sont réécrits avant le Lot 0.
+
+## Réponses du porteur (2026-10-16)
+
+- Recommandations acceptées. Les maquettes (Q12) sont les captures à 390 px et sur ordinateur jointes à la PR.

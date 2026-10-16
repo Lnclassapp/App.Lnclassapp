@@ -117,3 +117,8 @@ Chantiers livrés lus pour cet inventaire : [`rapports-exercices`](../rapports-e
 - Q1 à Q8 ci-dessus, à trancher par le porteur avant le Lot 0.
 - La fenêtre de 30 jours pour « fait seul » (Q2) est une première valeur ; elle n'aura qu'une définition dans le code.
 - Le jeu de mesure de l'ADR-0067 sème-t-il assez de tentatives de questions pour mesurer la page de suivi ? (dette D4 de `rapports-exercices`) À vérifier au Lot 0 ; la fiche n'en lit pas.
+
+## Réponses du porteur (2026-10-16)
+
+- Recommandations acceptées, **sauf Q5** : la liste des élèves est découpée **par note sur 20 : 0–10, 11–15, 16–20** (plus « Pas encore de note »), au lieu de pages de 30 sans ordre. UDR-0108 amendée.
+- Q7 confirmée : pas de moyenne de classe.

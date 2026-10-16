@@ -91,3 +91,7 @@ Le porteur a demandé de lancer les vagues V2 à V6 (2026-10-16). Mais la raison
 
 - Q0 à Q6 : en attente du porteur.
 - **Le code sur la fiche n'est pas sous `secret_response`**, alors que l'infobulle le dit « secret » depuis l'ADR-0083. Hors périmètre ; à signaler à `inscription-direction-sans-code`, qui supprimera le code, ou à traiter en bugfix si ce chantier tarde.
+
+## Réponses du porteur (2026-10-16)
+
+- Le porteur demande « le code de quoi exactement ». Réponse : le **code d'établissement** (6 caractères, par exemple `k7m2qx`), qui ne sert plus qu'à inscrire une direction. Recommandation maintenue : abandonner. En attente de sa réponse ; rien ne démarre.
