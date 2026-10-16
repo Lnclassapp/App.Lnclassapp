@@ -1,13 +1,13 @@
 # ADR-0094 : Un enseignant se rattache lui-même à trois établissements au plus, travaille dans un établissement courant gardé par sa session, et chaque direction n'agit que sur son rattachement
 <!-- index
 titre: Un enseignant se rattache lui-même à trois établissements au plus, travaille dans un établissement courant gardé par sa session, et chaque direction n'agit que sur son rattachement
-statut: Accepté *(porteur, 2026-10-16)* — *amende 0030, 0062, 0071, 0083 ; complète 0028, 0063*
+statut: Accepté *(porteur, 2026-10-16 ; amendé le 2026-10-16 : MET-4, MET-8)* — *amende 0030, 0062, 0071, 0081, 0083 ; complète 0028, 0063*
 problematique: `teacher_schools` inchangée (lignes secondaires enfin écrites) ; `sessions.current_school_id` ; `actor.school_id` = établissement courant vérifié à chaque requête, défaut le principal ; `JoinSchoolWithCode` élargi (écran d'attente, lien `/i/<jeton>` connecté, « Ajouter un établissement ») sous verrou et plafond 3 ; `LeaveSchool` ; `SwitchCurrentSchool` ; `DetachTeacher` promeut un principal ; `ReinstateTeacher` rattache en secondaire. Chantier `multi-etablissements-enseignant`.
 -->
 
 | | |
 |---|---|
-| **Statut** | Accepté (porteur, 2026-10-16) |
+| **Statut** | Accepté (porteur, 2026-10-16) — amendé le 2026-10-16 (§10, MET-4 ; §11, MET-8) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/multi-etablissements-enseignant`](../../chantiers/multi-etablissements-enseignant/prd.md) — critères ME-01 à ME-24 |
 | **Remplace** | — |
@@ -93,8 +93,8 @@ ORDER BY (school_id = $2) DESC LIMIT 1
 | `Policies::School::JoinSchoolWithCodePolicy#call(actor:, pending_request:, schools_count:)` (**amendée**) | `teacher`, sans demande `pending`, et `schools_count < TeacherSchools::MAX` → succès. `schools_count` 0 : l'écran d'attente, comme avant ; ≥ 1 : un établissement de plus. Au plafond : `:forbidden` avec `errors: { base: [:schools_limit] }` |
 | `Policies::School::SwitchCurrentSchoolPolicy#call(actor:, attached:)` (**nouvelle**) | `teacher` et `attached` (une ligne `teacher_schools` existe pour cet établissement) → succès ; sinon `:forbidden` |
 | `Policies::School::LeaveSchoolPolicy#call(actor:, attached:, schools_count:)` (**nouvelle**) | `teacher`, `attached` et `schools_count >= 2` → succès ; dernier établissement : `:forbidden` avec `errors: { base: [:last_school] }` ; non rattaché : `:not_found` |
-| `Policies::Identity::InviteColleaguePolicy#call(actor:, school:, primary_school_id:)` (**amendée**) | `teacher`, `school` actif et `school.id == primary_school_id` → succès. L'appelant (`ColleagueInvitation`, `RecordReferralShare`) lit le principal par `primary_school_id_for`, plus `actor.school_id` : le lien personnel mène toujours au principal (§4.6), quel que soit l'établissement courant |
-| `ManageSchoolTeachersPolicy`, `ManageSchoolStructurePolicy`, `DeclareTeachingPolicy`, `PublishPolicy`, `TeachPolicy`, `ReadClassroomPolicy`, `VouchPolicy` | **Inchangées.** Elles lisent l'établissement courant à travers `actor.school_id` |
+| ~~`Policies::Identity::InviteColleaguePolicy#call(actor:, school:, primary_school_id:)`~~ | **Remplacé au §11 (MET-8)** : la policy garde sa forme d'origine, sur l'établissement courant |
+| `ManageSchoolTeachersPolicy`, `ManageSchoolStructurePolicy`, `DeclareTeachingPolicy`, `PublishPolicy`, `VouchPolicy` | **Inchangées.** Elles lisent l'établissement courant à travers `actor.school_id`. `TeachPolicy`, `ReadClassroomPolicy` et les policies d'une classe : **amendées** au §10 (MET-4) |
 
 ### 4.4 Use cases
 
@@ -133,7 +133,7 @@ Rejoindre ne crée **aucune** ligne `school_join_requests` (ADR-0083 §4.3) et n
 | `Queries::School::TeacherSchoolsQuery#call(teacher_id:, current_school_id:)` (**nouvelle**) | Établissements de l'enseignant : `public_id`, nom, sigle, DRENA, `primary`, `current` ; une requête. Lue par le panneau du compte et « Mes établissements » |
 | `TeacherHomeQuery`, `TeacherFollowUpsQuery`, `CatalogAssignmentTargetsQuery`, `TeacherAudienceQuery` | Reçoivent `school_id:` (l'établissement courant) et ne lisent que les classes de cet établissement |
 | `ShellUserQuery`, `ProfileQuery` | La ligne de détail de l'enseignant nomme l'**établissement courant** |
-| `ReferralQuery` (page « Inviter un collègue ») | Nomme l'établissement principal, vers lequel mène le lien |
+| `ReferralQuery` (page « Inviter un collègue ») | ~~Nomme l'établissement principal~~ — remplacé au §11 (MET-8) : le lien de l'établissement courant et le lien de parrainage |
 | `DepartedTeachersQuery` | Perd la condition « sans établissement principal » (`WITHOUT_SCHOOL`) : la condition devient « pas rattaché à **cet** établissement » |
 | `DrenaSchoolsQuery`, `TeamDashboardQuery` (comptes par DRENA) | Comptent les **rattachements** (toutes les lignes `teacher_schools` non anonymisées), plus seulement le principal (memo, question 10). La ligne d'une DRENA reste la somme de ses établissements (critère RE-08 de l'ADR-0062) : un enseignant de deux établissements d'une même DRENA y compte deux fois |
 | `SchoolTeachersQuery`, `StudentWorkQuery`, `SchoolActivityQuery`, `SchoolDetailQuery`, `GrowthMetricsQuery` | **Inchangées** : déjà bornées à un établissement, ou comptées une fois au national |
@@ -239,3 +239,47 @@ end
 ## 9. Points à confirmer par le porteur
 
 Tranchés par le porteur le 2026-10-16 ([memo](../../chantiers/multi-etablissements-enseignant/memo.md#réponses-du-porteur-2026-10-16)) : les recommandations des questions 1 à 8, 10 et 11 sont acceptées telles quelles. Question 9 : les matières de l'enseignant seront choisies **par établissement**, par le chantier `enseignant-plusieurs-matieres`, qui démarre après celui-ci. Point d'extension laissé : la ligne `teacher_schools` (un rattachement enseignant-établissement) est l'endroit où ce chantier rangera les matières ; aucune lecture ni aucun geste de ce chantier ne suppose une matière unique par établissement.
+
+## 10. Amendement du 2026-10-16 — chaque établissement est un espace autonome (réponse MET-4)
+
+> Réponse du porteur ([memo](../../chantiers/multi-etablissements-enseignant/memo.md#réponses-du-porteur-2026-10-16), Q3 et Q4) : « un compte, un numéro de téléphone, plusieurs établissements ; chaque établissement a son interface autonome et complète (classes, niveaux, annonces, à faire…) ; l'établissement courant cloisonne tout l'espace enseignant ». Elle **remplace la recommandation de la question 11** (la page d'une classe d'un autre établissement s'ouvrait) et complète les §4.3 et §4.6.
+
+**Règle.** Tout ce que l'enseignant lit ou fait porte sur l'établissement courant. Une donnée d'un autre de ses établissements n'existe pas tant qu'il n'y est pas passé, même par son adresse.
+
+| Où | Changement |
+|---|---|
+| `Policies::Classroom::ClassroomTeacher` (**nouveau**, Ruby pur) | Fait commun : `teaches?(actor, classroom)` = lié par `teacher_classrooms` **et** `classroom.school_id == actor.school_id` ; `elsewhere?` = lié, mais dans un autre établissement ; `OTHER_SCHOOL` = `:forbidden`, `errors: { base: [:other_school] }` |
+| `TeachPolicy`, `ReadClassroomPolicy`, `FollowAssignmentPolicy`, `SetSessionDaysPolicy` (**amendées**, §4.3 disait « inchangées ») | `teaches?` remplace `teacher_ids.include?` ; `elsewhere?` → `OTHER_SCHOOL`. `AssignPolicy` suit `TeachPolicy` |
+| `ManageClassroomMembersPolicy` (**amendée**) | `teaches?` ; hors établissement courant : `:not_found`, comme pour un inconnu |
+| `RendersResult` | `OTHER_SCHOOL` → HTML : `303` vers l'accueil, toast « Cette classe n'est pas dans l'établissement où vous êtes. Changez d'établissement depuis votre compte. » ; Turbo Stream : le même toast en `403`. Aucun établissement n'est nommé |
+| `ManageOwnPolicy` (annonces, **amendée**) | L'annonce d'un enseignant n'existe (`:not_found`) que dans l'établissement où il l'a écrite |
+| Plafond des annonces (amende l'ADR-0081 §4.1) | `Message#cap_school_id` : une annonce à des classes (celle d'un enseignant) se compte **par établissement** ; les autres, par auteur comme avant. `MessageRepositoryPort#live_of(author_id:, now:, school_id: nil)` ; `AuthoredMessagesQuery#page` et `#departing` reçoivent `school_id:` pour l'enseignant |
+| `JoinRequestsQuery#for_colleague(teacher_id:, school_id:)` | Les demandes de l'établissement courant (n'était que le principal) |
+| Lectures déjà bornées au Lot A | Accueil (classes, niveaux, activités), sélection des classes, catalogue, cibles d'« Assigner », annonces reçues (`ReadableMessages`, par `reader.school_id`), « Mes annonces », formulaire d'annonce, en-tête et profil |
+
+**Preuve.** Un test de non-fuite par écran (`test/controllers/school/current_school_isolation_test.rb`) : dans A, le contenu de la page (`main`) ne contient ni le nom de B, ni ses classes, ni ses niveaux, ni ses exercices à suivre, ni ses annonces ; les pages d'une classe de B, de son suivi et de son « Assigner » renvoient à l'accueil ; l'annonce de B est introuvable. Seul le panneau du compte nomme B : c'est le sélecteur.
+
+**Point d'extension (chantier `enseignant-plusieurs-matieres`).** La ligne `teacher_schools` est le rattachement enseignant-établissement ; les matières par établissement s'y attachent (table fille `teacher_school_materials`, ou colonne). Toutes les lectures de l'enseignant reçoivent déjà `school_id:` (l'établissement courant) : la matière de l'établissement courant s'y lira sans changer leurs appelants. Ce chantier ne lit encore que `teacher_profiles.material_id`.
+
+**Coût consenti.** Un lien partagé vers une classe de B, ouvert dans A, ne l'affiche pas : l'enseignant passe dans B depuis son compte, puis rouvre le lien.
+
+## 11. Amendement du 2026-10-16 — deux liens d'invitation (réponse MET-8)
+
+> Réponse du porteur (memo, Q8) : « deux liens séparés. "Inviter un collègue de mon établissement" : lien rattaché à l'établissement courant. "Inviter un autre collègue" : lien sans établissement (parrainage), le collègue choisit son établissement. » Elle **remplace** la recommandation de la question 8 (« le lien personnel mène toujours au principal »), l'amendement de `InviteColleaguePolicy` du §4.3 (`primary_school_id:`, retiré) et le coût « Le lien personnel ne mène qu'au principal » du §5. Elle complète l'ADR-0063 et l'ADR-0083 §4.1.
+
+**Données.** Migration `teacher_schools.invite_token` (`varchar(12)`, défaut tiré par la base comme `referral_token`, index unique, contrainte `^[0-9a-f]{12}$`) : **un lien par rattachement enseignant-établissement**. `teacher_profiles.referral_token` devient le **lien de parrainage**, sans établissement. Le jeton d'un établissement quitté disparaît avec sa ligne : son lien devient inconnu.
+
+**Résolution** (`InviteLinkRepository#resolve`, ordre ADR-0083 §5 prolongé) : 1. `teacher_schools.invite_token` → l'établissement de la ligne, voie `colleague`, le collègue en parrain ; 2. `teacher_profiles.referral_token` → `InviteLink(sponsor: true, school_id: nil)`, valide tant que le collègue n'est pas anonymisé ; 3. direction ; 4. équipe.
+
+| Où | Règle |
+|---|---|
+| `InviteLinkRepositoryPort::InviteLink` | `+ sponsor` (défaut `false`) ; `valid?` : un parrainage vaut par son parrain, un autre lien par son établissement actif |
+| `RegisterTeacher` | Lien d'établissement : l'établissement du lien (inchangé), parrainage `source: "link"`. **Parrainage** : l'établissement choisi (DRENA puis établissement, mêmes erreurs neutres), voie `colleague`, parrainage `source: "sponsor"` (valeur déjà admise par `referrals_source_values`) avec l'établissement choisi |
+| `JoinSchoolWithCode` (lien ouvert connecté) | Un parrainage ne rattache à rien : `:invalid` `invite_invalid` ; la page dit « Ce lien sert à inscrire un nouveau collègue » |
+| `InviteColleaguePolicy#call(actor:, school:)` | Revient à sa forme d'origine : `school` est l'**établissement courant** (`actor.school_id`), actif |
+| `ReferralQuery#call(teacher_id:, school_id:)` | `Row(school_name, school_token, referral_token, referred_count)` : le lien de l'établissement courant et le lien de parrainage ; le compteur compte tous les filleuls |
+| `RecordReferralShare` | Inchangé (sa forme d'origine) : un partage compté, quel que soit le lien |
+
+**Écrans** : UDR-0098 §3.6.
+
+**Coûts consentis.** Un lien d'établissement déjà partagé cesse de marcher si l'enseignant quitte cet établissement. Les liens « personnels » déjà partagés avant ce chantier (le jeton du profil) deviennent des liens de parrainage : l'invité choisit son établissement au lieu de l'avoir rempli ; Lnclass n'est pas encore lancé (réponse DIR-4 du porteur), aucun lien n'a circulé.

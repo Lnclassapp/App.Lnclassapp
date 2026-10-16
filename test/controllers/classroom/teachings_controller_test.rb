@@ -77,6 +77,7 @@ class Classroom::TeachingsControllerTest < ActionDispatch::IntegrationTest
     assert_empty declared_ids
   end
 
+  # UDR-0098 §3.5: the refusal of another school says what to do, without naming any school.
   test "a classroom of another school or an archived one: 403 with a toast, nothing changes" do
     elsewhere = create_classroom(level: @level, name: "6ème 1")
     archived = create_classroom(school: @school, level: @level, name: "6ème 9", status: "archived")
@@ -85,7 +86,10 @@ class Classroom::TeachingsControllerTest < ActionDispatch::IntegrationTest
 
     post classroom_teaching_path(elsewhere.public_id), as: :turbo_stream
     assert_response :forbidden
-    assert_select "turbo-stream[action=append][target=toasts]", text: /#{Regexp.escape(I18n.t('errors.codes.forbidden'))}/
+    assert_select "turbo-stream[action=append][target=toasts]", text: /#{Regexp.escape(I18n.t('errors.codes.other_school'))}/
+    post classroom_teaching_path(elsewhere.public_id)
+    assert_redirected_to teacher_home_path
+    assert_equal I18n.t("errors.codes.other_school"), flash[:alert]
     post classroom_teaching_path(archived.public_id), as: :turbo_stream
     assert_response :forbidden
     delete classroom_teaching_path(archived.public_id), as: :turbo_stream

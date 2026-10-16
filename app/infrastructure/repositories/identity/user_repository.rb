@@ -68,11 +68,7 @@ module Repositories
       def school_id_of(user, current_school_id)
         return Orm::SchoolStaff.active.where(user_id: user.id).pick(:school_id) if user.role == "school_admin"
 
-        Orm::TeacherSchool.where(teacher_id: user.id)
-                          .where("teacher_schools.primary OR teacher_schools.school_id = ?", current_school_id)
-                          .order(Arel.sql(Orm::TeacherSchool.sanitize_sql([ "teacher_schools.school_id = ? DESC NULLS LAST",
-                                                                            current_school_id ])))
-                          .pick(:school_id)
+        Orm::TeacherSchool.where(teacher_id: user.id).current_or_primary(current_school_id).pick(:school_id)
       end
 
       def archived_school_admin?(user)

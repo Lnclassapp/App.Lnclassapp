@@ -68,6 +68,15 @@ module Queries
                      [ row.role, row.school_name, row.material_name, row.classroom_name ]
       end
 
+      # ADR-0094 §4.6 : le profil nomme l'établissement courant de l'enseignant.
+      test "a teacher of two schools shows the current one" do
+        teacher = create_teacher(school: create_school(name: "Lycée moderne d'Abobo"))
+        other = create_school(name: "Collège Saint-Michel")
+        Orm::TeacherSchool.create!(teacher:, school: other, primary: false)
+
+        assert_equal "Collège Saint-Michel", @query.call(user_id: teacher.id, current_school_id: other.id).school_name
+      end
+
       test "a team member shows their team role, a school admin only their role; an unknown account is nil" do
         assert_equal [ :team, "content" ], @query.call(user_id: create_team_member(team_role: "content").id).then { [ it.role, it.team_role ] }
         assert_equal :school_admin, @query.call(user_id: create_user(role: "school_admin").id).role

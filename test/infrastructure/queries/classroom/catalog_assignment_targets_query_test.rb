@@ -19,8 +19,8 @@ module Queries
         @teacher = create_teacher(school: @school, classrooms: [ @tle_d1 ])
       end
 
-      def targets(course: @course, teacher: @teacher, exercises: [ @first, @second ], **)
-        CatalogAssignmentTargetsQuery.new.call(teacher_id: teacher.id, course_slug: course.slug,
+      def targets(course: @course, teacher: @teacher, exercises: [ @first, @second ], school: @school, **)
+        CatalogAssignmentTargetsQuery.new.call(teacher_id: teacher.id, school_id: school.id, course_slug: course.slug,
                                                exercise_public_ids: exercises.map(&:public_id), **)
       end
 
@@ -109,8 +109,20 @@ module Queries
         assert_empty result.states
       end
 
+      # ME-07 (ADR-0094 §4.6) : « Assigner » ne propose que les classes de l'établissement courant, homonymes comprises.
+      test "seules les classes de l'établissement courant" do
+        other = create_school
+        there = create_classroom(school: other, level: @tle, series: @d, name: "Tle D 1")
+        Orm::TeacherSchool.create!(teacher: @teacher, school: other, primary: false)
+        Orm::TeacherClassroom.create!(teacher: @teacher, classroom: there)
+
+        assert_equal [ @tle_d1.public_id ], targets.classrooms.map(&:public_id)
+        assert_equal [ there.public_id ], targets(school: other).classrooms.map(&:public_id)
+      end
+
       test "un cours inconnu : nil" do
-        assert_nil CatalogAssignmentTargetsQuery.new.call(teacher_id: @teacher.id, course_slug: "inconnu", exercise_public_ids: [])
+        assert_nil CatalogAssignmentTargetsQuery.new.call(teacher_id: @teacher.id, school_id: @school.id, course_slug: "inconnu",
+                                                          exercise_public_ids: [])
       end
 
       test "deux requêtes au plus, quel que soit le nombre d'exercices et de classes" do
