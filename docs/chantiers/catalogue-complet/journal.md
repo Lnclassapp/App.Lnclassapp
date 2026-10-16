@@ -9,6 +9,10 @@
 | 2026-10-16 | Cadrage écrit sur les recommandations de l'agent, en attente des réponses du porteur aux questions 1 à 12 | Le porteur a demandé de lancer V2 à V6 ; le cadrage doit être validé avant le code | ADR-0099, UDR-0113 à 0115, toutes « Proposé » |
 | 2026-10-16 | Pas de lot pour CA-01, CA-02, CA-03, AS-01 | L'inventaire du code les montre livrées (`politique-cache`, `interface-enseignant-organisation`, `catalogue-niveau-eleve`, `cours-eleve`) ou couverte sous sa forme corrigée (page d'une fiche) | Non : constat d'inventaire, écrit dans le memo |
 | 2026-10-16 | Une requête par page publique, sur un socle commun `PublicCourses` | Quatre lots parallèles ne peuvent pas partager un fichier de requête | Oui, ADR-0099 §4.2 |
+| 2026-10-16 | Le porteur accepte les recommandations (questions 1 à 12) ; les maquettes sont les captures de la PR | Réponses du porteur du 2026-10-16 (memo) | ADR-0099, UDR-0113 à 0115 passées « Accepté » au Lot 0 |
+| 2026-10-16 | Lot 0 : un lien de retour (`ui_back_link`) remplace le fil d'Ariane prévu par les UDR-0113 à 0115 | L'UDR-0054 §3.2 n'admet qu'un retour à chevron, et le garde-fou FU-11 (`test/views/page_titles_test.rb`) refuse « breadcrumb » et « Fil d'Ariane » dans les vues | Amendement écrit dans les UDR-0113 §3.1, 0114 §3.2, 0115 §3.2 |
+| 2026-10-16 | Lot 0 : la ligne de groupe (6 cartes et nombre de cours par matière) sort d'**une** requête, par `ROW_NUMBER()` et `COUNT(*) OVER (PARTITION BY material_id)` ; `series_pairs` donne les séries visibles de tous les niveaux en une requête | Tenir trois requêtes par page (ADR-0099 §4.5) : le niveau, ses séries, ses groupes | Non : détail de `PublicCourses` |
+| 2026-10-16 | Les titres disent le nom du niveau tel qu'il est en base (« Cours de Tle »), pas « Terminale » comme les exemples du PRD | Le slug est figé (ADR-0029) mais le nom suit le référentiel (memo, cas limites) : renommer « Tle » en « Terminale » dans `/teams/levels` change les titres sans casser une adresse | Non : à décider par l'équipe Contenu |
 
 ## Ce qui a dérapé
 
