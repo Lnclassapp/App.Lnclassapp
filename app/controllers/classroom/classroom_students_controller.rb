@@ -1,9 +1,18 @@
 # 🌐 DELIVERY · Classroom::ClassroomStudentsController
-# Rôle : retirer un élève de la classe (IL-14), en Turbo Stream : ligne, titre de la liste, effectif, toast ; page de la direction re-demandée ; repli HTML : retour à la classe
-# ADR  : 0028, 0065, 0085 (§4.5) · UDR : 0006, 0081 (§3.7) · 403 (classe archivée comprise) et 404 en toast (RendersResult) ; `q` : la recherche de la liste
+# Rôle : fiche d'un élève dans sa classe (CL-13) ; retrait (IL-14) en Turbo Stream, ou 303 vers la classe depuis la fiche (origin=file)
+# ADR  : 0028, 0065, 0085 (§4.5), 0097 · UDR : 0006, 0081 (§3.7), 0107 · 403 et 404 par RendersResult ; `q` : la recherche de la liste
 module Classroom
   class ClassroomStudentsController < AuthenticatedController
     allow_roles :teacher, :school_admin, :team
+
+    # ADR-0097 §4.1, §4.2 : classe inconnue ou archivée, 404 ; la policy avant toute lecture de l'élève (un enseignant
+    # d'une autre classe reçoit 403, jamais une indication de présence) ; élève absent de la classe, 404.
+    def show
+      @header = Queries::Classroom::ClassroomHeaderQuery.new.call(public_id: params[:classroom_public_id])
+      return render_not_found if @header.nil? || @header.status == "archived"
+
+      render_result read_roster_policy, success: ->(_) { load_file }
+    end
 
     def destroy
       render_result remove_student.call(actor: current_actor, classroom_public_id: params[:classroom_public_id],
@@ -13,11 +22,28 @@ module Classroom
 
     private
 
+    # La fiche lit la liste des élèves : ReadClassroomPolicy sans show_roster (l'élève de la classe) est un refus.
+    def read_roster_policy
+      result = Policies::Classroom::ReadClassroomPolicy.new.call(actor: current_actor, classroom: @header)
+      result.failure? || result.value.show_roster ? result : Shared::Result.failure(:forbidden)
+    end
+
+    def load_file
+      @file = Queries::Classroom::StudentFileQuery.new.call(classroom_public_id: @header.public_id,
+                                                            student_public_id: params[:student_public_id])
+      return render_not_found if @file.nil?
+
+      @can_remove = Policies::Classroom::ManageClassroomMembersPolicy.new.call(actor: current_actor, classroom: @header).success?
+    end
+
     # Un second retrait (IL-21) répond comme le premier : la ligne part, le compte est relu, aucune erreur.
+    # Depuis la fiche (UDR-0107 §3.6, origin=file), la fiche n'existe plus : 303 vers la page de la classe, quel que soit le format.
     def respond_removed(removal)
       @student = removal.student
       @notice = t("classroom.classrooms.roster.removed", name: @student.display_name)
       public_id = removal.classroom.public_id
+      return redirect_to(classroom_page(public_id), notice: @notice, status: :see_other) if params[:origin] == "file"
+
       respond_to do |format|
         format.turbo_stream do
           @direction_page = current_actor.school_admin?

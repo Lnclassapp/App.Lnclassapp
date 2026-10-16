@@ -11,6 +11,8 @@
 | 2026-10-16 | « Fait », retard, catégorie et signe de la fiche viennent des mêmes queries que la page de suivi | Un seul chiffre par fait | ADR-0097 §4.3 |
 | 2026-10-16 | **Décisions prises sur recommandation, à confirmer par le porteur (questions RAP-1 à RAP-8, memo Q1 à Q8).** Le porteur n'a pas répondu ; il a demandé de lancer les lots en autonomie. Le code applique la recommandation de chaque question : Q1 features livrées fermées ; Q2 fiche en deux sections (exercices de la classe, « fait seul » 30 jours) ; Q3 badges de la classe ; Q4 code de récupération et retrait sur la fiche ; Q5 trente puis « Voir les suivants » ; Q6 prochain geste en six cas ; Q7 **aucun chiffre de classe ajouté, CL-14 considérée livrée** ; Q8 `public_id` dans le HTML du suivi. ADR-0097 et UDR-0107 à 0109 restent « Proposé » | Consigne du porteur : avancer sans bloquer sur les questions | Non |
 | 2026-10-16 | Lot 0 : deux contrats de plus que le plan, gelés au socle parce que la fiche les lit — `AssignmentScores.for(student_id:)` (scores d'un seul élève, même définition) et `ClassroomOverviewQuery.self_practice(today, days:)` (la fiche lit 30 jours, la liste 7, une seule définition) | Ne rien réinventer (ADR-0097 §2.3) : la fiche réutilise les définitions au lieu de les recopier | Non |
+| 2026-10-16 | Lot A : la phrase d'aide du code de récupération (« Un élève qui a perdu son code secret… ») suit l'action sur la fiche, en tête de « Gérer » ; l'UDR-0107 §3.6 ne la mentionnait pas | Elle explique une action qui quitte la liste (Q4) | Non |
+| 2026-10-16 | Lot A : « Fait le » d'un exercice fait est la date de la **première** session faite (`first_done`), comme le retard ; le score affiché est le meilleur | Une seule définition de la date, celle du suivi (ADR-0072 §4.4) | Non |
 | 2026-10-16 | Lot 0 : les clés de `classroom_students.fr.yml` sont rangées par partial (`show`, `identity`, `summary`, `assignments`, `self_practice`, `manage`), et non toutes sous `show` comme l'écrit l'UDR-0107 §3.10 | Règle d'or I18n : `t(".clé")` dans chaque partial, dont la portée est celle du partial | Non |
 
 ## Ce qui a dérapé
@@ -25,8 +27,14 @@
 | Page de la classe (55 élèves) | avant (Lot 0) | 92,2 | 138,6 | 23 | 402,2 | 25,2 |
 | Page de suivi | avant (Lot 0) | 34,0 | 54,4 | 19 | 52,6 | 8,4 |
 | Page de suivi, cadre « Fragile » | avant (Lot 0) | 25,5 | 36,1 | 15 | 21,9 | 3,5 |
+| Fiche d'un élève (8 exercices actifs, 10 sessions ; 60 requêtes mesurées) | Lot A | 31,5 | 49,0 | 19 | 55,4 | 10,5 |
+
+Le nombre de requêtes SQL de la fiche ne dépend pas du nombre d'assignations : vérifié par `student_file_query_test.rb` (même compte à 1 et à 10 assignations). Le jeu ne donne que 8 assignations actives à la classe mesurée (10 semées, dont 2 archivées).
 
 ## Ce qu'on a appris sur la codebase
+
+- `script/ci/record_timings` ne lit pas la durée du premier test système d'un lancement : la bannière de Puma s'imprime sur la même ligne que son nom. Durée du nouveau `student_file_test.rb` (4,2 s) inscrite à la main.
+- La suite unitaire complète exige 100 % de lignes et de branches (`test/test_helper.rb`) : tout Ruby nouveau de `app/` est couvert par les tests unitaires et de contrôleur, jamais par les tests système (`COVERAGE=0`).
 
 - `ClassroomHeaderQuery::Row` n'expose pas l'`id` de la classe : une query qui en part prend le `public_id`.
 - `ClassroomStudentsController` admet aussi la direction (`school_admin`) pour le retrait ; `#show` doit la refuser par la policy, pas par `allow_roles`.

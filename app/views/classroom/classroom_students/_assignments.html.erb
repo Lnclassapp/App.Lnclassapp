@@ -1,0 +1,59 @@
+<%# 🌐 UI · classroom/classroom_students/_assignments — « Exercices de la classe » sur la fiche d'un élève %>
+<%# Rôle : une ligne par assignation active, dans l'ordre de la page de la classe : titre (vers le suivi), matière, échéance, état ; catégorie, signe, sessions et meilleure session si fait %>
+<%# ADR  : 0072 (§4.4), 0079, 0097 (§4.3) · UDR : 0062, 0072, 0107 (§3.4) · couleur jamais seule : catégorie, signe et échéance sont écrits %>
+<%# locals: (classroom:, assignments:) -%>
+<% link = "underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+<section id="student_file_assignments" aria-labelledby="student_file_assignments_title">
+  <h2 id="student_file_assignments_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title") %></h2>
+  <% if assignments.empty? %>
+    <%= ui_empty_state title: t(".empty.title"), description: t(".empty.description"), icon: "clipboard-document-list" %>
+  <% else %>
+    <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
+      <% assignments.each do |assignment| %>
+        <li id="assignment_<%= assignment.public_id %>" class="px-4 py-3 sm:px-5">
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0 space-y-1">
+              <%= link_to assignment.exercise_title, classroom_assignment_path(classroom.public_id, assignment.public_id),
+                          class: "block py-1 font-medium text-ink break-words #{link}" %>
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-mute">
+                <%= ui_subject_badge assignment.material_name, category: assignment.material_category, size: :sm %>
+                <span class="<%= "font-medium text-warning" if assignment.status == :overdue %>"><%= due_for_teacher(assignment.due_on) %></span>
+              </div>
+            </div>
+            <div class="shrink-0 text-right">
+              <% case assignment.status %>
+              <% when :done, :late %>
+                <p class="font-display text-lg font-extrabold tabular-nums"><%= number_to_percentage(assignment.best, precision: 0, format: "%n %") %></p>
+                <p class="text-xs text-mute"><%= t(assignment.status == :late ? ".late_on" : ".done_on", date: l(assignment.done_on, format: :due_short)) %></p>
+              <% when :overdue %>
+                <%= ui_badge t(".overdue"), tone: :warning, size: :sm %>
+              <% else %>
+                <p class="text-sm text-mute"><%= t(".not_done") %></p>
+              <% end %>
+            </div>
+          </div>
+          <% if assignment.best %>
+            <div class="mt-2 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-sm">
+              <p class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span class="flex items-center gap-1.5">
+                  <span class="<%= class_names("size-2.5 rounded-full", comprehension_dot_class(assignment.category)) %>" aria-hidden="true"></span>
+                  <%= comprehension_label(assignment.category) %>
+                </span>
+                <% if assignment.trend %>
+                  <span class="flex items-center gap-1 text-mute">
+                    <%= ui_icon trend_icon(assignment.trend), variant: :mini, size: :sm %><%= trend_label(assignment.trend) %>
+                  </span>
+                <% end %>
+              </p>
+              <p class="flex flex-wrap items-center justify-end gap-x-3 gap-y-1">
+                <span class="text-mute tabular-nums"><%= t(".sessions", count: assignment.sessions_count) %></span>
+                <%= link_to t(".best_session"), exercise_session_result_path(assignment.best_session_public_id),
+                            class: "py-1 text-xs font-medium text-brand-strong #{link}" %>
+              </p>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>
