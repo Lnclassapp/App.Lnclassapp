@@ -12,10 +12,13 @@
 | 2026-10-16 | Lot A : `RemediationPick` reçoit des candidats dont l'`id` est l'identifiant public de l'exercice (`PickCandidate`) | `ExerciseRow` n'expose pas l'id ; la règle ne compare que des identifiants, et la source se lit dans la même requête que la lacune (jointure sur la session source) | Non |
 | 2026-10-16 | Lot A : l'aide reçoit `pass_grade` et `remediation_grade` au lieu de réécrire `pass` et `remediation` (UDR-0119 §3) | Les autres réponses (badges, maîtrise) gardent leurs pourcentages : les mêmes variables ne peuvent pas porter deux unités | Non |
 | 2026-10-16 | Lot B : `SessionResultQuery` calcule `gap_outcome` pour tout lecteur (une requête sur `knowledge_gaps`) ; seule la vue le réserve au propriétaire | La query ne connaît pas le lecteur ; la règle « élève seul » vit avec `@owner`, comme la phrase de progrès (UDR-0073) | Non |
+| 2026-10-16 | Lot C : `ClassroomGapsQuery#summary` et `#detail` prennent l'identifiant public de la classe et les slugs (au lieu de `classroom_id` et `essential_id`, ADR-0101 §4.4) et un `show_roster:` | Ni `ClassroomHeaderQuery` ni `ClassroomEssentialQuery` n'exposent d'id : les modifier aurait touché des fichiers que `rapports-de-classe` change en parallèle. La présence et la fiche se résolvent en sous-requêtes, une requête par méthode. `show_roster` passe dans la query, comme `ClassroomOverviewQuery`, pour que la branche « rien n'est lu » soit testée (couverture 100 % des branches) alors que `allow_roles` ne laisse jamais passer un lecteur sans liste | Non |
+| 2026-10-16 | Lot C : les deux cartes de la fiche dans la classe montrent 3 lignes puis « Voir plus » (UDR-0121 §3.2 disait 5) | `ui_reveal_item` et `ui_reveal_more` portent la limite commune de 3 (`REVEAL_LIMIT`) ; une limite par liste demanderait de changer le composant partagé | Non — à confirmer par le porteur |
+| 2026-10-16 | Lot C : le sous-titre du bloc de la classe calcule « 10/20 » depuis `PASS_THRESHOLD` | Même règle que l'UDR-0119 : aucun seuil écrit en dur | Non |
 
 ## Ce qui a dérapé
 
-- Rien pour l'instant : phase de cadrage.
+- **Le jeu de mesure de l'ADR-0067 ne se sème plus** : `script/perf/dataset.rb` n'écrit pas `joined_via` (`teacher_profiles`, `classroom_students`), colonne `NOT NULL` sans défaut depuis l'ADR-0083. La mesure du Lot C a posé un défaut le temps du semis, sur la base de test seulement. La page entière (`script/perf/measure_screens.rb`, mode production) n'a donc pas été remesurée : seul le SQL ajouté l'a été, très loin du budget de 100 ms. Correctif du jeu à faire dans un chantier à part.
 
 ## Ce qu'on a appris sur la codebase
 

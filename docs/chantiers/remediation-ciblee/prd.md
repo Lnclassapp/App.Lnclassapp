@@ -190,6 +190,8 @@ Fonctionnalité: L'enseignant suit les fiches à revoir de sa classe (AS-17)
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Requêtes SQL de la page de classe | à mesurer (Lot C) | + 1 au plus, quel que soit le nombre d'élèves | |
-| Requêtes SQL de la fiche vue depuis la classe | à mesurer (Lot C) | + 1 au plus | |
-| Page de classe, p95, jeu de l'ADR-0067 | à mesurer (Lot C) | dans le budget de 100 ms de l'ADR-0067, ou écart noté | |
+| Requêtes SQL de la page de classe | 20 (enseignant, 1 ou 30 élèves à revoir) | + 1 au plus, quel que soit le nombre d'élèves | **21** à 1 et à 30 élèves (+ 1, sur `knowledge_gaps`) |
+| Requêtes SQL de la fiche vue depuis la classe | 17 | + 1 au plus | **18** à 1 et à 30 élèves (+ 1) |
+| Page de classe, p95, jeu de l'ADR-0067 | à mesurer (Lot C) | dans le budget de 100 ms de l'ADR-0067, ou écart noté | SQL ajouté seul, 30 lectures après 3 de chauffe : `summary` **5,5 ms** (classe mesurée de l'enseignant `0520000001`, 55 élèves, aucune fiche à revoir dans sa matière) et **6,5 ms** (classe la plus touchée, lue par l'équipe : 12 cours, 10 fiches) ; `detail` **3,8 ms** (16 à revoir). Page entière non remesurée : voir le journal |
+
+Mesure du 2026-10-16, base de test, jeu `script/perf/dataset.rb` corrigé comme dans `remediation-comptee-faite` : 14 775 sessions passées en remédiation, une lacune levée par sa dernière remédiation à 75 % ou plus (6 417 levées, 80 563 en attente), puis `VACUUM ANALYZE`. Requêtes comptées par requête HTTP réelle, hors `SCHEMA` et `TRANSACTION`.

@@ -173,4 +173,73 @@ class Classroom::ClassroomEssentialsControllerTest < ActionDispatch::Integration
     assert_select toggle_id("Exercise", @phases.public_id), text: including("Pour jeu. 8 oct.")
     assert_select toggle_id("Exercise", @brassage.public_id), text: including("Sans date limite"), count: 0
   end
+
+  # AS-17, UDR-0121 §3.2, ADR-0101 §4.4 : qui est à revoir sur la fiche, et qui l'a levée cette année.
+  def gaps_tl(key, **) = I18n.t("classroom.classroom_essentials.gaps.#{key}", **)
+
+  def gap(student, status: "pending", **attributes)
+    source_session = create_exercise_session(student:, exercise: @phases, status: "completed", score_percent: 30)
+    create_gap(student:, essential: @essential, status:, source_session:, **attributes)
+  end
+
+  def thales_class
+    awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
+    bintou = create_student(classroom: @classroom, first_name: "Bintou", last_name: "Diallo")
+    yao = create_student(classroom: @classroom, first_name: "Yao", last_name: "Kouassi")
+    gap(awa, created_at: Time.zone.local(2026, 10, 12, 8), failed_sessions_count: 3)
+    gap(bintou, created_at: Time.zone.local(2026, 10, 13, 8))
+    gap(yao, status: "self_corrected", resolved_at: Time.zone.local(2026, 10, 14, 9))
+    [ awa, bintou, yao ]
+  end
+
+  test "the teacher reads the students to review, oldest first, then those who lifted the sheet, above the exercises" do
+    travel_to Time.zone.local(2026, 10, 16, 10)
+    @classroom.update!(school_year: "2026-2027")
+    students = thales_class
+    sign_in_as @teacher
+
+    get page_path
+
+    assert_response :success
+    assert_select "#classroom_essential_gaps h2", text: gaps_tl("title")
+    assert_select "#classroom_essential_gaps_pending" do
+      assert_select "h2, h3", text: gaps_tl("pending_title")
+      assert_select "li", 2
+      assert_select "li:nth-child(1)", text: /Awa Bamba.*depuis le 12 oct\..*3 essais sous la moyenne/m
+      assert_select "li:nth-child(2)", text: /Bintou Diallo.*depuis le 13 oct\./m
+      assert_select "li:nth-child(2)", text: /essais/, count: 0
+    end
+    assert_select "#classroom_essential_gaps_lifted li", text: /Yao Kouassi.*le 14 oct\./m
+    assert_select "#classroom_essential_gaps", text: /remédiation|seul/i, count: 0
+    assert_match(/id="classroom_essential_gaps".*id="classroom_essential_exercises"/m, response.body)
+    students.each { assert_no_match(/#{it.public_id}/, response.body) }
+  end
+
+  test "only lifts: the lifted card alone; no gap: no section" do
+    sign_in_as create_team_member
+
+    get page_path
+
+    assert_select "#classroom_essential_gaps", 0
+
+    gap(create_student(classroom: @classroom), status: "remediated", resolved_at: Time.current)
+    get page_path
+
+    assert_select "#classroom_essential_gaps_lifted"
+    assert_select "#classroom_essential_gaps_pending", 0
+  end
+
+  test "another teacher, the school staff and a student of the classroom never read a name" do
+    awa, = thales_class
+    intruders = [ create_teacher(classrooms: [ create_classroom ]), create_school_admin(school: @classroom.school), awa ]
+
+    intruders.each do |intruder|
+      sign_in_as intruder
+
+      get page_path
+
+      assert_response :forbidden
+      assert_no_match(/Bintou Diallo/, response.body)
+    end
+  end
 end
