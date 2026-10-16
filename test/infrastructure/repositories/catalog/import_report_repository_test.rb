@@ -149,6 +149,31 @@ module Repositories
         assert_equal 1_001, found.error_count
         assert_equal "schools[999].name", found.import_errors.last.path
       end
+
+      test "ADR-0096: a code regeneration report keeps its selection, has no file, and gives back its launch" do
+        details = { "selection" => { "drena" => "abc" }, "expected_count" => 3 }
+        report = @repository.create(kind: "school_codes", checksum_sha256: nil, imported_by_id: @member.id, at: @at, details:).value
+
+        assert_equal [ "school_codes", details, @at ], [ report.kind, report.details, report.created_at ]
+        assert_equal details, @repository.find(id: report.id).details
+        assert @repository.create(kind: "classroom_links", checksum_sha256: nil, imported_by_id: @member.id, at: @at).success?
+        assert_equal :conflict, @repository.create(kind: "school_codes", checksum_sha256: nil, imported_by_id: @member.id, at: @at).code
+      end
+
+      test "ADR-0096: resume takes again a report claimed by a job that died, never a queued nor a finished one" do
+        report = create_report
+        assert_not @repository.resume(id: report.id, at: @at)
+
+        @repository.claim(id: report.id, at: @at)
+        assert @repository.resume(id: report.id, at: @at + 1.hour)
+        assert_equal @at + 1.hour, @repository.find(id: report.id).started_at
+
+        @repository.advance(id: report.id, status: "importing", processed_count: 0)
+        assert @repository.resume(id: report.id, at: @at)
+
+        @repository.finish(id: report.id, status: "failed", counts: {}, details: {}, errors: [], at: @at)
+        assert_not @repository.resume(id: report.id, at: @at)
+      end
     end
   end
 end

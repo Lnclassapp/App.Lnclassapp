@@ -1,0 +1,122 @@
+# Régénération de masse des codes d'établissement et des liens des classes (chantier regeneration-codes-en-masse) —
+# ADR-0096, UDR-0104 (menu, modale), UDR-0105 (rapport), UDR-0106 (date sur la fiche)
+fr:
+  activemodel:
+    errors:
+      models:
+        dtos/school/code_regeneration_input:
+          attributes:
+            typed_count:
+              mismatch: "Ce n'est pas le nombre à régénérer."
+  teams:
+    schools:
+      index:
+        codes_menu: "Codes"
+        codes_menu_label: "Codes et liens des classes"
+        regenerate_school_codes: "Régénérer les codes d'établissement"
+        regenerate_classroom_links: "Régénérer les liens des classes"
+        regenerate_empty: "%{action} (aucun établissement)"
+      header:
+        regenerate_classroom_links: "Régénérer les liens des classes"
+        school_code_rotated_at: "Changé le %{date}"
+    code_regenerations:
+      new:
+        page_title:
+          school_codes: "Régénérer les codes d'établissement"
+          classroom_links: "Régénérer les liens des classes"
+        back: "Établissements"
+      form:
+        title:
+          school_codes: "Régénérer les codes d'établissement"
+          classroom_links: "Régénérer les liens des classes"
+        # Phrase principale : le nombre et la portée sont en gras (UDR-0104).
+        question:
+          school_codes:
+            drena_html: "Régénérer le code de <strong>%{count}</strong> établissements de la DRENA <strong>%{drena}</strong> ?"
+            all_html: "Régénérer le code de <strong>%{count}</strong> établissements ?"
+          classroom_links:
+            school_html: "Régénérer le lien de <strong>%{count}</strong> classes de <strong>%{school}</strong> ?"
+            drena_html: "Régénérer le lien de <strong>%{count}</strong> classes de la DRENA <strong>%{drena}</strong> ?"
+            all_html: "Régénérer le lien de <strong>%{count}</strong> classes ?"
+        filters: "Filtres : %{filters}"
+        search: "« %{search} »"
+        current_year: "Classes de l'année %{year} seulement."
+        all_years: "Classes de toutes les années."
+        include_past_years: "Inclure les années passées"
+        current_year_only: "Seulement l'année %{year}"
+        rules:
+          school_codes:
+            - "Les anciens codes cessent aussitôt de fonctionner."
+            - "Les directions déjà inscrites et les enseignants ne sont pas touchés ; les liens d'invitation ne changent pas."
+            - "Rien n'est envoyé : vous transmettrez le nouveau code depuis la fiche de l'établissement."
+          classroom_links:
+            - "Les anciens liens cessent aussitôt de fonctionner : un élève qui en ouvre un arrive sur l'inscription standard."
+            - "Les élèves déjà inscrits restent dans leur classe ; les classes archivées ne sont pas touchées."
+            - "Rien n'est envoyé : l'enseignant ou la direction partage le nouveau lien depuis la page de la classe."
+        background: "Le changement se fait en arrière-plan ; vous suivrez son avancement dans un rapport."
+        typed_count_label: "Tapez %{count} pour confirmer"
+        empty:
+          school_codes: "Aucun établissement à régénérer."
+          classroom_links: "Aucune classe à régénérer."
+        cancel: "Annuler"
+        confirm:
+          school_codes: "Régénérer les codes"
+          classroom_links: "Régénérer les liens"
+      create:
+        started:
+          school_codes: "Régénération des codes lancée."
+          classroom_links: "Régénération des liens des classes lancée."
+        already_running_title: "Régénération déjà en cours"
+        already_running:
+          school_codes: "Une régénération des codes est déjà en cours : voici son avancement."
+          classroom_links: "Une régénération des liens des classes est déjà en cours : voici son avancement."
+    imports:
+      show:
+        # Seconde ligne du sous-titre d'un rapport de régénération (UDR-0105) : la sélection, jamais un code.
+        selection:
+          label: "Sélection : %{parts}"
+          all: "Tous les établissements"
+          drena: "DRENA %{name}"
+          unknown_drena: "DRENA supprimée"
+          unknown_school: "Établissement supprimé"
+          school_year: "année %{year}"
+          all_years: "toutes les années"
+      status:
+        skipped_tip: "Leur code ou leur lien avait déjà été changé depuis le lancement, un par un ou par une reprise : il n'a pas été changé une seconde fois."
+        details:
+          expected_count: "Attendus au lancement"
+        by_kind:
+          school_codes:
+            statuses:
+              validating: "Préparation"
+              importing: "Régénération en cours"
+            phases:
+              queued: "La régénération attend son tour."
+              validating: "Préparation de la régénération…"
+              importing: "Changement des codes…"
+            processed:
+              one: "%{count} établissement traité"
+              other: "%{count} établissements traités"
+            counters:
+              imported: "Codes changés"
+              skipped: "Déjà changés"
+              errors: "En erreur"
+              total: "Établissements traités"
+            failed: "La régénération s'est arrêtée sur une erreur imprévue. Relancée, elle ne change pas de nouveau ce qui l'a déjà été depuis son lancement."
+          classroom_links:
+            statuses:
+              validating: "Préparation"
+              importing: "Régénération en cours"
+            phases:
+              queued: "La régénération attend son tour."
+              validating: "Préparation de la régénération…"
+              importing: "Changement des liens…"
+            processed:
+              one: "%{count} classe traitée"
+              other: "%{count} classes traitées"
+            counters:
+              imported: "Liens changés"
+              skipped: "Déjà changés"
+              errors: "En erreur"
+              total: "Classes traitées"
+            failed: "La régénération s'est arrêtée sur une erreur imprévue. Relancée, elle ne change pas de nouveau ce qui l'a déjà été depuis son lancement."

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::ImportReportRepository
 # Rôle : rapports d'import ; un seul en cours par type (index partiel), progression et bilan persistés
-# ADR  : 0039, 0068
+# ADR  : 0039, 0068, 0096
 module Repositories
   module Catalog
     class ImportReportRepository
@@ -8,9 +8,9 @@ module Repositories
 
       Kind = Entities::Catalog::ImportKind
 
-      def create(kind:, checksum_sha256:, imported_by_id:, at:, files: [])
+      def create(kind:, checksum_sha256:, imported_by_id:, at:, files: [], details: {})
         record = Orm::ImportReport.new(kind:, checksum_sha256:, imported_by_id:, status: "queued", files: files.map { dump_file(it) },
-                                       created_at: at, updated_at: at)
+                                       details:, created_at: at, updated_at: at)
         # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::ImportReport.transaction(requires_new: true) { record.save! }
         ::Shared::Result.success(map_to_entity(record))
@@ -40,6 +40,10 @@ module Repositories
                          .update_all(status: "validating", started_at: at, updated_at: at) == 1
       end
 
+      def resume(id:, at:)
+        Orm::ImportReport.where(id:, status: %w[validating importing]).update_all(started_at: at, updated_at: at) == 1
+      end
+
       def advance(id:, status:, processed_count:, format_version: nil)
         changes = { status:, processed_count:, updated_at: Time.current }
         changes[:format_version] = format_version if format_version
@@ -65,7 +69,7 @@ module Repositories
           skipped_count: record.skipped_count, error_count: record.error_count, processed_count: record.processed_count,
           details: record.details, import_errors: record.import_errors.map { |error| map_error(error) },
           imported_by_id: record.imported_by_id, started_at: record.started_at, finished_at: record.finished_at,
-          files: record.files.map { |file| map_file(file) }
+          files: record.files.map { |file| map_file(file) }, created_at: record.created_at
         )
       end
 

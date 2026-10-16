@@ -71,7 +71,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "classroom_students" => { "joined_via" => %w[standard link code] }, # ADR-0085 §4.4
     "referral_shares" => { "channel" => %w[whatsapp sms copy native] },
     "school_join_requests" => { "status" => %w[pending approved rejected], "decided_via" => %w[team sponsor] },
-    "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms drenas],
+    "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms drenas school_codes classroom_links], # ADR-0096
                           "status" => %w[queued validating importing completed rejected failed] },
     "classroom_plan_entries" => { "school_type" => %w[public private] },
     "articles" => { "status" => %w[draft published archived], "signature" => %w[team author] }, # ADR-0074 §4.1
@@ -162,6 +162,18 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { last.update_column(:link_token, "ABCDEF012345") } }
     assert_raises(ActiveRecord::RecordNotUnique) { connection.transaction(requires_new: true) { last.update_column(:link_token, tokens.first) } }
     assert_raises(ActiveRecord::NotNullViolation) { connection.transaction(requires_new: true) { last.update_column(:link_token, nil) } }
+  end
+
+  test "ADR-0096: a link change is dated, empty until the first one" do
+    column = connection.columns("classrooms").find { |candidate| candidate.name == "link_token_rotated_at" }
+    assert_equal [ true, nil, :datetime ], [ column.null, column.default, column.type ]
+  end
+
+  test "ADR-0096: the mass regenerations have reports without a file, hence without checksum" do
+    member = create_team_member(second_factor: false)
+    %w[school_codes classroom_links].each do |kind|
+      assert Orm::ImportReport.create!(kind:, status: "completed", imported_by: member, checksum_sha256: nil).persisted?, kind
+    end
   end
 
   test "IL-22: a membership has a mandatory arrival channel, without default, among the three (ADR-0085 §4.4)" do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_15_100100) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_16_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -228,6 +228,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_15_100100) do
     t.string "status", default: "active", null: false
     t.datetime "updated_at", null: false
     t.string "link_token", limit: 12, default: -> { "substr(replace((gen_random_uuid())::text, '-'::text, ''::text), 1, 12)" }, null: false
+    t.datetime "link_token_rotated_at"
     t.index ["level_id"], name: "index_classrooms_on_level_id"
     t.index ["link_token"], name: "index_classrooms_on_link_token", unique: true
     t.index ["public_id"], name: "index_classrooms_on_public_id", unique: true
@@ -400,8 +401,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_15_100100) do
     t.index ["kind", "created_at"], name: "index_import_reports_on_kind_and_created_at"
     t.index ["kind"], name: "index_import_reports_one_running_per_kind", unique: true, where: "((status)::text = ANY (ARRAY[('queued'::character varying)::text, ('validating'::character varying)::text, ('importing'::character varying)::text]))"
     t.index ["public_id"], name: "index_import_reports_on_public_id", unique: true
-    t.check_constraint "kind::text = 'classrooms'::text OR checksum_sha256 IS NOT NULL", name: "import_reports_checksum_unless_generation"
-    t.check_constraint "kind::text = ANY (ARRAY['schools'::character varying::text, 'course_tree'::character varying::text, 'essentials'::character varying::text, 'exercises'::character varying::text, 'classrooms'::character varying::text, 'drenas'::character varying::text])", name: "import_reports_kind_values"
+    t.check_constraint "(kind::text = ANY (ARRAY['classrooms'::character varying, 'school_codes'::character varying, 'classroom_links'::character varying]::text[])) OR checksum_sha256 IS NOT NULL", name: "import_reports_checksum_unless_generation"
+    t.check_constraint "kind::text = ANY (ARRAY['schools'::character varying, 'course_tree'::character varying, 'essentials'::character varying, 'exercises'::character varying, 'classrooms'::character varying, 'drenas'::character varying, 'school_codes'::character varying, 'classroom_links'::character varying]::text[])", name: "import_reports_kind_values"
     t.check_constraint "status::text <> 'completed'::text OR total_count = (imported_count + skipped_count + error_count)", name: "import_reports_completed_counts_add_up"
     t.check_constraint "status::text = ANY (ARRAY['queued'::character varying::text, 'validating'::character varying::text, 'importing'::character varying::text, 'completed'::character varying::text, 'rejected'::character varying::text, 'failed'::character varying::text])", name: "import_reports_status_values"
   end

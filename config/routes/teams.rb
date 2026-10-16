@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes de l'espace équipe ; tout contrôleur hérite de Teams::BaseController
 # Rôle : référentiel, DRENA, établissements, contenu, blog, illustrations d'annonce, imports, invitations, comptes, jobs
-# ADR  : 0031, 0034, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074, 0077, 0081 · UDR : 0067, 0068, 0070, 0075
+# ADR  : 0031, 0034, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074, 0077, 0081, 0096 · UDR : 0067, 0068, 0070, 0075, 0104
 get "teams", to: "teams/homes#show", as: :team_home # gelé
 # ADR-0062, UDR-0049 : le pilotage, nom de route gelé par l'UDR-0006 (entrée « Pilotage » de la navigation équipe).
 get "teams/dashboard", to: "teams/dashboards#show", as: :team_dashboard
@@ -15,6 +15,8 @@ scope "teams", module: "teams" do
   end
   # ADR-0056 : génération des classes manquantes, suivie dans son rapport (teams/imports). Avant `schools` : chemin fixe.
   post "schools/classroom-generations", to: "classroom_generations#create", as: :classroom_generations
+  # ADR-0096 : régénération de masse des codes d'établissement ou des liens des classes (équipe admin). Avant `schools`.
+  resources :code_regenerations, only: %i[new create], path: "schools/code-regenerations"
   # Aucun formulaire de création : les établissements n'entrent que par import JSON (teams/imports, kind « schools »).
   resources :schools, param: :public_id, except: %i[new create] do
     member do

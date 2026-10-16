@@ -1,94 +1,95 @@
-# Plan d'exécution — Régénérer en une fois le code de plusieurs établissements
+# Plan d'exécution — Régénérer en une fois les codes d'établissement et les liens des classes
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
 >
-> **Ce plan n'est exécuté qu'après la réponse du porteur à Q0** ([memo](memo.md#ce-que-le-grill-a-révélé)) et l'acceptation de l'ADR-0096 et des UDR-0104 à 0106. Il suit les recommandations Q1 à Q7 ; une réponse différente le modifie avant le Lot 0.
+> **Amendé le 2026-10-16** après la réponse du porteur (Q0 : gardé, élargi aux liens des classes). ADR-0096 et UDR-0104 à 0106 acceptés ; les choix « à confirmer » (memo) sont appliqués. Exécuté en séquence dans une seule session (0 → A → B → C), un commit par lot.
 
 ## Graphe
 
 ```
-Lot 0 — SOCLE (séquentiel) : migration, contrats, scope de sélection partagé, adaptateurs, routes, locales
+Lot 0 — SOCLE (séquentiel) : migration, contrats, scope de sélection partagé, adaptateurs, routes, locales, docs amendées
   ↓
-  ├─► Lot A « lancer depuis la liste »          ┐
-  ├─► Lot B « exécuter et suivre le rapport »   ├─ en parallèle, fichiers disjoints
-  └─► Lot C « date du changement sur la fiche » ┘
+  ├─► Lot A « lancer depuis la liste et la fiche »          ┐
+  ├─► Lot B « exécuter (moteur commun, deux jobs) et suivre » ├─ en parallèle, fichiers disjoints
+  └─► Lot C « date du changement sur la fiche »             ┘
   ↓
-Preuve : parcours complet RM-01 → RM-02 par un challenger (A + B fusionnés)
+Preuve : parcours complet RM-01 → RM-02, RM-15 → RM-18 dans l'application (A + B fusionnés)
 ```
-
-4 lots. Les adaptateurs (repositories) sont au Lot 0 : A et B lisent le même `SchoolRepository` et le même `ImportReportRepository`, qui remonteraient de toute façon au socle.
 
 ---
 
 ## Lot 0 — Socle
 
 - **Couche**       : infrastructure + domaine (contrats) + fichiers partagés
-- **Fichiers**     : `db/migrate/<horodatage>_add_school_codes_to_import_report_kinds.rb` · `db/schema.rb`
-                     `app/domain/entities/catalog/import_kind.rb` (`SCHOOL_CODE_REGENERATION`, `REPORT_POLICIES`)
-                     `app/domain/entities/school/code_regeneration_candidate.rb`
+- **Fichiers**     : `db/migrate/<horodatage>_add_code_regeneration_reports.rb` · `db/schema.rb`
+                     `app/domain/entities/catalog/import_kind.rb` (`SCHOOL_CODE_REGENERATION`, `CLASSROOM_LINK_REGENERATION`, `REPORT_POLICIES`)
+                     `app/domain/entities/catalog/import_report.rb` (`created_at`)
+                     `app/domain/entities/school/regeneration_candidate.rb`
                      `app/domain/dtos/school/school_selection.rb` · `app/domain/dtos/school/code_regeneration_input.rb`
-                     `app/domain/policies/school/regenerate_school_codes_policy.rb`
-                     `app/domain/ports/school/school_repository_port.rb` (3 méthodes)
-                     `app/domain/ports/catalog/import_report_repository_port.rb` (`create(details:)`)
+                     `app/domain/policies/school/regenerate_codes_in_bulk_policy.rb`
+                     `app/domain/ports/school/school_repository_port.rb` (3 méthodes) · `app/domain/ports/classroom/classroom_repository_port.rb` (3 méthodes, `rotate_link_token` précisé)
+                     `app/domain/ports/catalog/import_report_repository_port.rb` (`create(details:)`, `resume`)
                      `app/domain/ports/identity/audit_log_port.rb` (`record_many`)
                      `app/infrastructure/orm/school.rb` (scope `list_filtered`)
                      `app/infrastructure/queries/school/schools_query.rb` (scope partagé, `school_code_rotated_at`)
                      `app/infrastructure/queries/school/school_detail_query.rb` (`school_code_rotated_at`)
-                     `app/infrastructure/repositories/school/school_repository.rb` (`count_for_code_regeneration`, `code_regeneration_batch`, `replace_school_codes`)
-                     `app/infrastructure/repositories/catalog/import_report_repository.rb` (`details:`)
-                     `app/infrastructure/repositories/identity/audit_log_repository.rb` (`record_many`)
+                     `app/infrastructure/repositories/school/school_repository.rb` · `app/infrastructure/repositories/classroom/classroom_repository.rb`
+                     `app/infrastructure/repositories/catalog/import_report_repository.rb` · `app/infrastructure/repositories/identity/audit_log_repository.rb`
                      `config/routes/teams.rb` (`schools/code-regenerations`, avant `resources :schools`) · `config/initializers/imports.rb`
-                     `config/locales/teams/schools.fr.yml` · `config/locales/teams/imports.fr.yml` · `config/locales/shared/common.fr.yml`
-                     `config/locales/teams/school_code_regenerations.fr.yml` *(nouveau)*
-- **Dépend de**    : — *(et de la réponse à Q0)*
-- **Test associé** : `test/domain/policies/school/regenerate_school_codes_policy_test.rb`
-                     `test/domain/dtos/school/school_selection_test.rb`
-                     `test/infrastructure/repositories/school/school_repository_test.rb` (sélection identique à la liste, `created_before`, `replace_school_codes` et index unique)
-                     `test/infrastructure/repositories/catalog/import_report_repository_test.rb` · `test/infrastructure/repositories/identity/audit_log_repository_test.rb`
-                     `test/db/schema_constraints_test.rb` (`kind` `school_codes`, checksum nul)
+                     `config/locales/teams/code_regenerations.fr.yml` *(nouveau)* · `config/locales/shared/common.fr.yml`
+                     memo, PRD, plan, journal ; ADR-0096 ; UDR-0104 à 0106
+- **Dépend de**    : — (réponse du porteur à Q0 : reçue le 2026-10-16)
+- **Test associé** : `test/domain/policies/school/regenerate_codes_in_bulk_policy_test.rb`
+                     `test/domain/dtos/school/school_selection_test.rb` · `test/domain/dtos/school/code_regeneration_input_test.rb`
+                     `test/infrastructure/repositories/school/school_repository_code_regeneration_test.rb` (sélection identique à la liste, `created_before`, garde, index unique)
+                     `test/infrastructure/repositories/classroom/classroom_repository_link_regeneration_test.rb` (classes actives, année, garde, `rotate_link_token` date)
+                     `test/infrastructure/repositories/catalog/import_report_repository_test.rb` (`details`, `resume`) · `test/infrastructure/repositories/identity/audit_log_repository_test.rb` (`record_many`)
+                     `test/db/schema_constraints_test.rb` (deux `kind`, checksum nul, `link_token_rotated_at`)
                      `test/infrastructure/queries/school/schools_query_test.rb` (filtres inchangés après extraction du scope)
-- **Done quand**   : les contrats de l'ADR-0096 §4.4 sont gelés et implémentés ; la liste « Établissements » filtre exactement comme avant (tests de la query verts sans modification d'attente) ; `bin/rails runner "puts Policies::School::RegenerateSchoolCodesPolicy.name, Dtos::School::SchoolSelection.name, Entities::School::CodeRegenerationCandidate.name"` passe
+- **Done quand**   : les contrats de l'ADR-0096 §4.4 sont gelés et implémentés ; la liste « Établissements » filtre exactement comme avant ; `bin/rails runner` charge les constantes nouvelles
 
 ---
 
-## Lot A — Lancer la régénération depuis la liste
+## Lot A — Lancer depuis la liste et la fiche
 
 - **Couche**       : domaine + delivery + ui
-- **Fichiers**     : `app/domain/use_cases/school/start_school_code_regeneration.rb`
-                     `app/controllers/teams/school_code_regenerations_controller.rb` (`new`, `create`)
-                     `app/views/teams/school_code_regenerations/new.html.erb` · `app/views/teams/school_code_regenerations/_form.html.erb`
-                     `app/views/teams/schools/index.html.erb` (menu « Codes », UDR-0104)
+- **Fichiers**     : `app/domain/use_cases/school/start_code_regeneration.rb`
+                     `app/infrastructure/queries/school/code_regeneration_preview_query.rb`
+                     `app/controllers/teams/code_regenerations_controller.rb` (`new`, `create`) · `app/controllers/teams/schools_controller.rb` (helper)
+                     `app/views/teams/code_regenerations/new.html.erb` · `app/views/teams/code_regenerations/_form.html.erb`
+                     `app/views/teams/schools/index.html.erb` (menu « Codes ») · `app/views/teams/schools/_header.html.erb` (entrée ⋮, UDR-0104)
 - **Dépend de**    : Lot 0
-- **Test associé** : `test/domain/use_cases/school/start_school_code_regeneration_test.rb` (vide, nombre tapé, DRENA seule, `:conflict`, `details` sans code)
-                     `test/controllers/teams/school_code_regenerations_controller_test.rb` (403 `content`/`field`/direction, 422, redirections)
-                     `test/system/teams/school_code_regeneration_test.rb` (RM-01, RM-06, RM-07, RM-09 ; captures 390 px et ordinateur, menu ouvert)
-- **Done quand**   : un `admin` filtre une DRENA, ouvre « Codes » → « Régénérer les codes », voit le bon nombre, confirme, et arrive sur un rapport `school_codes` en file ; sans filtre, un nombre faux est refusé avec le nombre à jour ; `content` et `field` ne voient pas le menu
+- **Test associé** : `test/domain/use_cases/school/start_code_regeneration_test.rb` (deux cibles, vide, nombre tapé, DRENA seule, établissement seul, année, `:conflict`, `details` sans code)
+                     `test/controllers/teams/code_regenerations_controller_test.rb` (403 `content`/`field`/direction/enseignant, 404 cible inconnue, 422, redirections)
+                     `test/system/teams/code_regeneration_test.rb` (RM-01, RM-06, RM-07, RM-09, RM-15, RM-16 ; captures 390 px et ordinateur, menu ouvert)
+- **Done quand**   : un `admin` filtre une DRENA, ouvre « Codes », voit le bon nombre pour chaque cible, confirme, et arrive sur un rapport en file ; depuis une fiche, idem pour les liens sans nombre à taper ; `content` et `field` ne voient ni le menu ni l'entrée
 
 ---
 
-## Lot B — Exécuter et suivre le rapport
+## Lot B — Exécuter et suivre les rapports
 
 - **Couche**       : domaine + infrastructure + ui
-- **Fichiers**     : `app/domain/use_cases/school/regenerate_school_codes.rb`
-                     `app/jobs/school/regenerate_school_codes_job.rb`
-                     `app/views/teams/imports/show.html.erb` (ligne « Sélection », UDR-0105)
+- **Fichiers**     : `app/domain/use_cases/school/regenerate_in_bulk.rb` (moteur) · `app/domain/use_cases/school/regenerate_school_codes.rb`
+                     `app/domain/use_cases/classroom/regenerate_classroom_links.rb`
+                     `app/jobs/school/regenerate_school_codes_job.rb` · `app/jobs/classroom/regenerate_classroom_links_job.rb`
+                     `app/views/teams/imports/show.html.erb` (ligne « Sélection ») · `app/views/teams/imports/_status.html.erb` (détails sans la sélection, infobulle)
+                     `app/helpers/teams/code_regeneration_helper.rb`
 - **Dépend de**    : Lot 0
-- **Test associé** : `test/domain/use_cases/school/regenerate_school_codes_test.rb` (lots, déjà changés, collision et rejeu, droit retiré, compteurs, audit avec `report_public_id`)
-                     `test/jobs/school/regenerate_school_codes_job_test.rb` (RM-02, RM-03, RM-04, RM-05, RM-14 sur une vraie base)
-                     `test/infrastructure/import_reports_without_secrets_test.rb` (RM-12)
-                     `test/controllers/teams/imports_controller_test.rb` (rapport `school_codes` : titre, compteurs renommés, aucun code)
-                     `test/performance/school/regenerate_school_codes_performance_test.rb` (`PERF=1`, 3 900 établissements < 60 s)
-- **Done quand**   : un rapport `school_codes` créé à la main (fabrique) est exécuté par le job ; les codes de la sélection changent, les autres non ; l'écran du rapport affiche « Codes changés / Déjà changés / En erreur » et la sélection, sans aucun code
+- **Test associé** : `test/domain/use_cases/school/regenerate_school_codes_test.rb` · `test/domain/use_cases/classroom/regenerate_classroom_links_test.rb` (lots, déjà changés, garde à l'écriture, collision et rejeu, droit retiré, reprise, second passage, audit)
+                     `test/jobs/school/regenerate_school_codes_job_test.rb` · `test/jobs/classroom/regenerate_classroom_links_job_test.rb` (RM-02 à RM-05, RM-14, RM-17 à RM-21, RM-23, RM-24 sur une vraie base)
+                     `test/controllers/teams/imports_controller_test.rb` (rapports : titre, compteurs renommés, sélection, aucun code)
+                     `test/performance/school/regenerate_codes_in_bulk_performance_test.rb` (`PERF=1`)
+- **Done quand**   : un rapport créé à la main (fabrique) est exécuté par chaque job ; les codes ou liens de la sélection changent, les autres non ; l'écran du rapport affiche ses compteurs et sa sélection, sans aucun code
 
 ---
 
 ## Lot C — Date du dernier changement sur la fiche
 
 - **Couche**       : ui
-- **Fichiers**     : `app/views/teams/schools/_header.html.erb`
-- **Dépend de**    : Lot 0
-- **Test associé** : `test/system/teams/school_code_test.rb` (RM-13 : date après « Régénérer le code », absente sur un code jamais changé ; captures 390 px et ordinateur)
+- **Fichiers**     : `app/views/teams/schools/_header.html.erb` *(propriétaire : Lot A ; exécution séquentielle après A)*
+- **Dépend de**    : Lot 0, Lot A
+- **Test associé** : `test/system/teams/school_code_test.rb` (RM-13 : date après « Régénérer le code », absente sur un code jamais changé)
 - **Done quand**   : la fiche d'un établissement dont le code a changé affiche « Changé le … » sous le code, y compris juste après une régénération unitaire (stream)
 
 ---
@@ -97,29 +98,25 @@ Preuve : parcours complet RM-01 → RM-02 par un challenger (A + B fusionnés)
 
 | Fichier | Lot propriétaire |
 |---|---|
-| `config/routes/teams.rb` | Lot 0 |
-| `config/initializers/imports.rb` | Lot 0 |
-| `config/locales/teams/schools.fr.yml` · `teams/imports.fr.yml` · `shared/common.fr.yml` · `teams/school_code_regenerations.fr.yml` | Lot 0 |
+| `config/routes/teams.rb` · `config/initializers/imports.rb` | Lot 0 |
+| `config/locales/teams/code_regenerations.fr.yml` · `shared/common.fr.yml` | Lot 0 |
 | `db/schema.rb` | Lot 0 |
-| `app/infrastructure/repositories/school/school_repository.rb` | Lot 0 |
-| `app/infrastructure/repositories/catalog/import_report_repository.rb` | Lot 0 |
-| `app/infrastructure/queries/school/schools_query.rb` · `school_detail_query.rb` | Lot 0 |
+| repositories (école, classe, rapports, audit) · queries de la liste et de la fiche | Lot 0 |
 | `app/views/teams/schools/index.html.erb` | Lot A |
-| `app/views/teams/imports/show.html.erb` | Lot B |
-| `app/views/teams/schools/_header.html.erb` | Lot C |
+| `app/views/teams/schools/_header.html.erb` | Lot A, puis Lot C (dépendance explicite : C après A) |
+| `app/views/teams/imports/show.html.erb` · `_status.html.erb` | Lot B |
+| `test/system/teams/code_regeneration_test.rb` | Lot A |
 | `test/system/teams/school_code_test.rb` | Lot C |
-| `test/system/teams/school_code_regeneration_test.rb` | Lot A |
 
-Aucun fichier n'est listé par deux lots parallèles.
+`_header.html.erb` est touché par A (entrée ⋮) et C (date) : C dépend donc de A, ils ne sont pas parallèles.
 
 ## Portes de sortie
 
-- [ ] Q0 à Q6 tranchées par le porteur ; ADR-0096 et UDR-0104 à 0106 acceptés
+- [x] Q0 tranchée par le porteur (2026-10-16) ; ADR-0096 et UDR-0104 à 0106 acceptés ; Q1 à Q7 appliquées, à confirmer
 - [ ] Tous les lots sont `Done`
-- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : parcours RM-01 → RM-02 → RM-03 → RM-13 refait dans l'application, avec des données réelles de DRENA
-- [ ] Captures 390 px et ordinateur : liste avec menu « Codes » ouvert, modale (DRENA seule, et nombre à taper), rapport en cours et terminé, fiche avec la date
+- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : parcours RM-01 → RM-02, RM-15 → RM-18 refait dans l'application
+- [ ] Captures 390 px et ordinateur : liste avec menu « Codes » ouvert, modales (DRENA seule, nombre à taper, fiche), rapports
 - [ ] Pureté du domaine, rubocop, tests, parcours système, brakeman : `bin/ci-quiet` au vert, écrit dans la PR
-- [ ] Sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) : une fois, sur le diff final (policy, route, use case touchés)
 - [ ] Bench `PERF=1` chiffré dans `journal.md`
 - [ ] ADR et UDR indexés par `script/docs/build_index` au commit de clôture ; ligne de `docs/chantiers/README.md` mise à jour à la clôture
 - [ ] `journal.md` complété

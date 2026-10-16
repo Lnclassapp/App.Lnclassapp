@@ -1,13 +1,14 @@
 # 🧠 DOMAINE · Ports::Catalog::ImportReportRepositoryPort
 # Rôle : contrat des rapports d'import, un seul import en cours par type
-# ADR  : 0039, 0056, 0068
+# ADR  : 0039, 0056, 0068, 0096
 module Ports
   module Catalog
     module ImportReportRepositoryPort
       # Rapport queued ; checksum_sha256 nil pour un rapport sans fichier (génération des classes, ADR-0056) ;
-      # files : [Entities::Catalog::ImportFileReport] en attente, dans l'ordre d'envoi (ADR-0068).
+      # files : [Entities::Catalog::ImportFileReport] en attente, dans l'ordre d'envoi (ADR-0068) ; details : ce que le lancement
+      # mémorise (sélection d'une régénération, ADR-0096), jamais un secret.
       # → Result(Entities::Catalog::ImportReport) | failure(:conflict, errors: { kind: [:already_running] })
-      def create(kind:, checksum_sha256:, imported_by_id:, at:, files: [])
+      def create(kind:, checksum_sha256:, imported_by_id:, at:, files: [], details: {})
         raise NotImplementedError, "#{self.class} doit implémenter #create"
       end
 
@@ -30,6 +31,11 @@ module Ports
       # UPDATE … SET status = 'validating' WHERE status = 'queued'. → Boolean (false : déjà pris)
       def claim(id:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #claim"
+      end
+
+      # ADR-0096 : reprend un rapport validating ou importing (job tué puis relancé), started_at = at. → Boolean
+      def resume(id:, at:)
+        raise NotImplementedError, "#{self.class} doit implémenter #resume"
       end
 
       # Progression, au plus une écriture toutes les 100 racines. → true

@@ -1,11 +1,11 @@
-# Memo — Régénérer en une fois le code de plusieurs établissements
+# Memo — Régénérer en une fois les codes d'établissement et les liens des classes
 
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage (questions au porteur ouvertes, Q0 bloquante) |
+| **Statut** | exécution : Q0 tranchée par le porteur le 2026-10-16 (gardé, élargi aux liens des classes) ; recommandations Q1 à Q7 appliquées, **à confirmer par le porteur** |
 | **Ouvert le** | 2026-10-16 |
-| **Branche** | `feature/regeneration-codes-en-masse` (cadrage sur `docs/cadrage-regeneration-codes-en-masse`) |
+| **Branche** | `feature/regeneration-codes-en-masse` |
 | **Programme** | `refonte-application`, vague V2 : sorti de [`gestion-etablissement-direction`](../gestion-etablissement-direction/memo.md) (précision du porteur, 2026-10-01) |
 
 ---
@@ -40,9 +40,9 @@ Précédent pour une action de masse de l'équipe : la **génération des classe
 
 ## Pour qui
 
-- **L'équipe (Team)** : elle ferme d'un geste les codes d'un ensemble d'établissements (une DRENA, un filtre, tous), par exemple après la diffusion d'une liste de codes.
+- **L'équipe (Team), membres `admin`** : elle ferme d'un geste les codes d'un ensemble d'établissements (une DRENA, un filtre, tous), par exemple après la diffusion d'une liste de codes ; et, depuis le 2026-10-16, les liens des classes de ces établissements, ou d'un seul établissement depuis sa fiche (un lien de classe qui a trop circulé).
 - **La direction (SchoolStaff)** : celle qui est inscrite n'est pas touchée (elle se connecte par numéro et code secret, et ne voit pas le code). Celle qui s'inscrira devra recevoir le nouveau code de l'équipe.
-- **L'enseignant, l'élève** : rien ne change (aucun lien `/i/` ni `/c/` n'est touché).
+- **L'enseignant, l'élève** : rien ne change pour le code d'établissement. Pour les **liens des classes** (élargissement du 2026-10-16) : l'ancien lien `/c/<jeton>` d'une classe régénérée cesse de marcher ; l'élève déjà inscrit reste dans sa classe ; l'enseignant et la direction partagent le nouveau lien depuis la page de la classe, comme après « Changer le lien ».
 
 ## Pourquoi maintenant
 
@@ -51,8 +51,9 @@ Le porteur a demandé de lancer les vagues V2 à V6 (2026-10-16). Mais la raison
 ## Hors périmètre
 
 - **Régénérer les jetons des liens d'invitation** (`/i/<jeton>` : direction, équipe, parrainage) : stables par décision (ADR-0083 §4.1).
-- **Régénérer les liens des classes** (`/c/<jeton>`, ADR-0085).
-- **Transmettre les nouveaux codes** : ni export, ni envoi par SMS, WhatsApp ou annonce, ni liste des codes à l'écran. L'équipe lit le code sur la fiche, comme aujourd'hui (Q6).
+- **Les classes archivées** : leur lien ne marche déjà plus ; le geste de masse ne les touche pas.
+- **Ajouter un audit à « Changer le lien »** (un par un) : le geste unitaire reste inchangé (réponse du porteur).
+- **Transmettre les nouveaux codes ou liens** : ni export, ni envoi par SMS, WhatsApp ou annonce, ni liste des codes à l'écran. L'équipe lit le code sur la fiche, comme aujourd'hui (Q6).
 - **Retirer les directions inscrites avec un ancien code** : le geste existe un par un (ADR-0077) ; aucun retrait en masse.
 - **Annuler une régénération** (rendre les anciens codes) : impossible, comme un par un.
 - **Une rotation automatique** et planifiée des codes.
@@ -89,9 +90,39 @@ Le porteur a demandé de lancer les vagues V2 à V6 (2026-10-16). Mais la raison
 
 ## Questions encore ouvertes
 
-- Q0 à Q6 : en attente du porteur.
+- Q0 : tranchée (gardé, élargi aux liens des classes). Q1 à Q7 : recommandations appliquées, à confirmer par le porteur.
 - **Le code sur la fiche n'est pas sous `secret_response`**, alors que l'infobulle le dit « secret » depuis l'ADR-0083. Hors périmètre ; à signaler à `inscription-direction-sans-code`, qui supprimera le code, ou à traiter en bugfix si ce chantier tarde.
 
 ## Réponses du porteur (2026-10-16)
 
-- Le porteur demande « le code de quoi exactement ». Réponse : le **code d'établissement** (6 caractères, par exemple `k7m2qx`), qui ne sert plus qu'à inscrire une direction. Recommandation maintenue : abandonner. En attente de sa réponse ; rien ne démarre.
+1. Le porteur demande « le code de quoi exactement ». Réponse : le **code d'établissement** (6 caractères, par exemple `k7m2qx`), qui ne sert plus qu'à inscrire une direction. Recommandation de l'agent : abandonner.
+2. **Réponse du porteur : « non, garde la régénération des codes d'établissement et de la classe »**, et travail en toute autonomie.
+
+**Q0 tranchée : on garde le chantier, élargi aux liens des classes.** « Le code de la classe » du porteur est le **jeton du lien de classe** `/c/<jeton>` (ADR-0085) : depuis l'ADR-0085, une classe n'a plus d'autre code (inventaire ci-dessous). Le chantier livre donc **deux gestes de masse** : régénérer les codes d'établissement d'une sélection, régénérer les liens des classes d'une sélection.
+
+**Conflit noté, décision prise en connaissance de cause.** Le chantier prévu `inscription-direction-sans-code` doit supprimer le code d'établissement et « Régénérer le code ». S'il passe, la moitié « codes d'établissement » de ce chantier partira avec lui (use case, job, `kind` `school_codes`, menu) ; la moitié « liens des classes » reste. Le porteur a gardé les deux en sachant cela : ce chantier ne retarde ni ne bloque l'autre, et l'ADR-0096 dit ce qu'il faudra retirer.
+
+**Recommandations appliquées sans attendre, à confirmer par le porteur :**
+
+| Sujet | Appliqué | Pourquoi |
+|---|---|---|
+| Qui lance | **Membres `admin` de l'équipe seulement**, pour les deux gestes de masse. `content`, `field`, la direction et l'enseignant n'ont ni le menu ni la route (403). | Un geste qui coupe des milliers de liens en un clic ; `DeleteUserPolicy` fait déjà ce tri. |
+| Transmission | Les nouveaux codes et liens **ne sont ni affichés ni exportés en masse** : le rapport donne des nombres, jamais un code ni un jeton. | `import_reports.details` est en clair, sans durée, et l'écran des imports n'est pas sous `secret_response` (Q6). |
+| Notification | **Aucune** : ni direction, ni enseignant, ni élève. | Q3 ; un lien de classe se repartage depuis la page de la classe. |
+| Geste un par un | **Inchangé** : « Régénérer le code » sur la fiche (toute l'équipe) et « Changer le lien » d'une classe (enseignant de la classe, direction, équipe). | Le porteur n'a rien demandé sur l'unitaire. |
+| Ancien lien de classe | **Cesse aussitôt de fonctionner**, comme après « Changer le lien » : l'élève qui l'ouvre arrive sur l'inscription standard avec l'alerte « lien invalide ». | Même règle que le geste un par un (ADR-0085 §4.1). |
+| Classes touchées | Les classes **actives** des établissements de la sélection ; option « année scolaire en cours seulement », cochée par défaut. Une classe archivée n'est pas touchée (son lien ne marche déjà plus, et « Changer le lien » la refuse). | Un lien d'une classe active d'une année passée marche encore (`JoinPreviewQuery#link` ne lit pas l'année) : l'option a un effet réel. |
+| Sélection des classes | Depuis la liste « Établissements » : les classes des établissements filtrés. Depuis la fiche d'un établissement : ses classes. | Demande du porteur relayée par le cadrage. |
+
+## Inventaire côté classe (2026-10-16)
+
+| Pièce | Fichier | Ce qu'elle fait |
+|---|---|---|
+| Stockage | `classrooms.link_token` (`db/schema.rb`) | 12 caractères hexadécimaux, `NOT NULL`, **unique** (`index_classrooms_on_link_token`), `CHECK` `^[0-9a-f]{12}$` (`classrooms_link_token_format`). Aucune date de changement avant ce chantier. |
+| Génération | `DEFAULT substr(replace(gen_random_uuid()::text, '-', ''), 1, 12)` ; `ClassroomRepository::LINK_TOKEN_SQL` | **Tiré par la base**, à la création comme au remplacement : une seule source de sa forme (ADR-0085 §4.1). `GenerateMissingClassrooms` et l'import ne le tirent pas. |
+| Remplacement un par un | `UseCases::Classroom::ChangeClassroomLink` → `ClassroomRepositoryPort#rotate_link_token(id:)` | Sous le verrou de la classe (`lock_by_public_id`, le même que l'adhésion d'un élève) ; refusé pour une classe archivée (`:forbidden`, `classroom_archived`). |
+| Policy | `Policies::Classroom::ManageClassroomMembersPolicy` | L'**enseignant de la classe**, la **direction** de son établissement, **toute l'équipe** (`admin`, `content`, `field`) ; hors périmètre : `:not_found` ; élève : `:forbidden`. |
+| Delivery | `PATCH /classrooms/:public_id/link` → `Classroom::ClassroomLinksController#update` | Bloc `#classroom_link` remplacé (Turbo Stream) et toast ; repli HTML. Vu sur la page de la classe (enseignant, équipe) et sur celle de la direction. |
+| Audit | — | **Aucun** : « Changer le lien » n'écrit pas au journal. Le geste de masse en écrit un (ADR-0096 amendé) ; l'asymétrie est notée au journal. |
+| Ancien lien | `lock_by_link_token` → `nil` ; `JoinPreviewQuery#link` → `nil` ; `Classroom::JoinsController#load_link` | Jeton inconnu ou remplacé : la page d'inscription standard s'ouvre avec l'alerte « lien invalide », voie `standard`. Un élève déjà inscrit n'est pas touché. |
+| Autre code de classe | `classrooms.join_code`, `join_code_rotated_at`, `Entities::Classroom::JoinCode` | **Supprimés** (ADR-0085 §4.1, dernier lot d'`inscription-eleve-sans-code`) : absents de `db/schema.rb`. Un ancien code de 5 caractères dans `/c/<code>` est traité comme un jeton inconnu. Il n'y a **plus aucun autre code de classe**. |

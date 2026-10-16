@@ -1,11 +1,11 @@
 # 🔌 INFRA · Queries::School::SchoolDetailQuery
 # Rôle : fiche d'un établissement (SC-05) : en-tête, code et lien de l'équipe, classes par niveau et leur lien (jamais de code de classe), enseignants, leur voie et leur parrain ici
-# ADR  : 0026, 0030, 0041, 0057, 0063, 0083, 0085, 0088 · UDR : 0036, 0044, 0050, 0079, 0081 (§3.7), 0083
+# ADR  : 0026, 0030, 0041, 0057, 0063, 0083, 0085, 0088, 0096 · UDR : 0036, 0044, 0050, 0079, 0081 (§3.7), 0083, 0106
 module Queries
   module School
     class SchoolDetailQuery
       Detail = Data.define(:public_id, :name, :sigle, :drena_name, :school_type, :cycle, :status, :school_code, :school_year, :levels,
-                           :teachers, :national_code, :team_invite_token, :archives_shown) do
+                           :teachers, :national_code, :team_invite_token, :archives_shown, :school_code_rotated_at) do
         # Les classes archivées ne comptent dans aucun total (ADR-0088).
         def classrooms_count = levels.sum { it.classrooms.size }
       end
@@ -19,7 +19,8 @@ module Queries
       TeacherRow = Data.define(:name, :material_name, :material_category, :primary, :joined_via, :referrer_name)
 
       SCHOOL_COLUMNS = %w[schools.id schools.public_id schools.name schools.sigle drenas.name schools.school_type schools.cycle
-                          schools.status schools.school_code schools.national_code schools.team_invite_token].freeze
+                          schools.status schools.school_code schools.national_code schools.team_invite_token
+                          schools.school_code_rotated_at].freeze
       CLASSROOM_COLUMNS = %w[classrooms.id classrooms.public_id classrooms.name classrooms.link_token classrooms.status
                              levels.name levels.position series.name levels.slug classrooms.archived_at].freeze
       # ADR-0088 : une classe archivée reste visible sept jours.
@@ -30,13 +31,14 @@ module Queries
 
       # → Detail | nil
       def call(public_id:, school_year: Entities::Classroom::SchoolYear.current(Date.current), archives: false, now: Time.current)
-        id, public_id, name, sigle, drena_name, school_type, cycle, status, school_code, national_code, team_invite_token =
+        id, public_id, name, sigle, drena_name, school_type, cycle, status, school_code, national_code, team_invite_token,
+          school_code_rotated_at =
           Orm::School.joins(:drena).where(public_id:).pick(*SCHOOL_COLUMNS)
         return if id.nil?
 
         Detail.new(public_id:, name:, sigle:, drena_name:, school_type:, cycle:, status:, school_code:, school_year:,
                    levels: levels(id, school_year, archives, now), teachers: teachers(id), national_code:, team_invite_token:,
-                   archives_shown: archives)
+                   archives_shown: archives, school_code_rotated_at:)
       end
 
       private
