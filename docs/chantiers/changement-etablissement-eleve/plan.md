@@ -130,7 +130,7 @@ Aucun fichier listé par deux lots parallèles.
 - [x] Tous les lots sont `Done`
 - [x] Un rôle distinct de l'auteur a **exécuté** le résultat : parcours cascade, parcours lien, refus (classe complète) joués dans un navigateur par l'agent de clôture ; sans JS prouvé par les tests contrôleur
 - [ ] `bin/ci-quiet` vert, écrit dans la PR (CI GitHub coupée, ADR-0069) — **non** : toutes les étapes vertes sauf la suite système, rouge par charge de la machine (toasts de 5 s expirés, charge ≈ 50 sur 4 cœurs) ; verdict détaillé dans la PR, à rejouer avant la fusion
-- [ ] Revue `security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer` sur le diff final (use case et routes touchés) — non lancée (pas d'outil de sous-agent à la clôture), à faire avant la fusion
+- [x] Revue `security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer` sur le diff final (use case et routes touchés) — lancée par le coordinateur sur la PR #252, constats traités (journal, 2026-10-19)
 - [x] Captures 390 px et ordinateur de chaque écran envoyées au porteur
 - [x] Index ADR/UDR régénérés par `script/docs/build_index` et ligne du chantier dans `docs/chantiers/README.md`, au commit de clôture
 - [x] `journal.md` complété

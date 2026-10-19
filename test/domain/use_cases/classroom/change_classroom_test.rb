@@ -68,11 +68,12 @@ module UseCases
       class FakeMemberships
         include Ports::Classroom::MembershipRepositoryPort
 
-        def initialize(journal, primary:, removed_from:, refuse:)
+        def initialize(journal, primary:, removed_from:, refuse:, leaves: true)
           @journal = journal
           @primary = primary
           @removed_from = removed_from
           @refuse = refuse
+          @leaves = leaves
         end
 
         def primary_for(student_id:)
@@ -87,7 +88,7 @@ module UseCases
 
         def leave_primary(student_id:, at:)
           @journal << [ :leave, student_id, at ]
-          true
+          @leaves
         end
 
         def add_primary(classroom_id:, student_id:, via:, at:)
@@ -135,20 +136,20 @@ module UseCases
       def link(token = TOKEN) = Dtos::Classroom::StudentRegistrationInput.new(link_token: token)
 
       def change(actor: @student, dto: choice, classrooms: [ classroom ], schools: [ @school ], primary: membership,
-                 removed_from: [], refuse: false)
+                 removed_from: [], refuse: false, leaves: true, ip: nil)
         ChangeClassroom.new(classrooms: FakeClassrooms.new(@journal, classrooms), schools: FakeSchools.new(*schools),
                             taxonomy: FakeTaxonomy.new(@level),
-                            memberships: FakeMemberships.new(@journal, primary:, removed_from:, refuse:),
+                            memberships: FakeMemberships.new(@journal, primary:, removed_from:, refuse:, leaves:),
                             audit_log: FakeAuditLog.new(@journal), policy: Policies::Classroom::JoinPolicy.new,
                             transaction: @transaction, clock: Clock.new(NOW))
-                       .call(actor:, dto:)
+                       .call(actor:, dto:, ip:)
       end
 
       def written = @journal.select { %i[leave add audit].include?(it.first) }
 
-      def moved(via: "standard")
+      def moved(via: "standard", ip: nil)
         [ :audit, "classroom.student_moved", 41, NOW, "User", 41,
-          { from_classroom_id: 5, to_classroom_id: 7, to_school_id: 3, via: }, nil ]
+          { from_classroom_id: 5, to_classroom_id: 7, to_school_id: 3, via: }, ip ]
       end
 
       test "a student whose classroom is active leaves it and enters the chosen one, way « standard », and the move is traced" do
@@ -233,11 +234,41 @@ module UseCases
         assert_equal 0, @transaction.calls
       end
 
-      test "atomicity: if the new membership fails, the old one is not left and nothing is traced" do
+      # La course entre deux classes : l'index index_classroom_students_one_active_primary refuse la seconde adhésion
+      # active ; l'élève lit un « Réessaie » neutre, pas « déjà inscrit dans cette classe ».
+      test "atomicity: if the new membership fails, the old one is not left, nothing is traced, a neutral conflict" do
         result = change(refuse: true)
 
-        assert_equal [ :conflict, { base: [ :already_member ] } ], [ result.code, result.errors ]
+        assert_equal [ :conflict, { base: [ :change_conflict ] } ], [ result.code, result.errors ]
         assert_empty written
+      end
+
+      test "ADR-0050: the move is traced with the address of the request" do
+        assert change(ip: "203.0.113.9").success?
+        assert_equal moved(ip: "203.0.113.9"), @journal.last
+      end
+
+      test "nothing left to leave (closed meanwhile): :forbidden no_active_classroom, nothing written" do
+        result = change(leaves: false)
+
+        assert_equal [ :forbidden, { base: [ :no_active_classroom ] } ], [ result.code, result.errors ]
+        assert_empty written
+      end
+
+      test "an archived classroom chosen by the cascade is refused under the classroom field" do
+        result = change(classrooms: [ classroom(status: "archived") ])
+
+        assert_equal [ :invalid, { classroom_public_id: [ :unavailable ] } ], [ result.code, result.errors ]
+        assert_empty written
+      end
+
+      test "the current classroom, even full, is same_classroom before any JoinPolicy reason" do
+        [ choice, link ].each do |dto|
+          @journal.clear
+          result = change(dto:, primary: membership(classroom_id: 7), classrooms: [ classroom(active_students_count: 80) ])
+
+          assert_equal [ :invalid, { base: [ :same_classroom ] } ], [ result.code, result.errors ]
+        end
       end
     end
   end

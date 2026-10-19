@@ -7,6 +7,9 @@ module UseCases
       ACTION = "classroom.student_moved".freeze
       NO_ACTIVE_CLASSROOM = { base: [ :no_active_classroom ] }.freeze
       SAME_CLASSROOM = { base: [ :same_classroom ] }.freeze
+      # La garantie « une seule classe active » tient à l'index index_classroom_students_one_active_primary : une course
+      # entre deux classes (deux onglets) fait échouer la seconde adhésion ; l'élève lit un « Réessaie » neutre.
+      CONFLICT = { base: [ :change_conflict ] }.freeze
 
       # L'échec de la nouvelle adhésion traverse la transaction pour rouvrir l'ancienne, puis ressort en Result.
       class Aborted < StandardError
@@ -28,12 +31,14 @@ module UseCases
       end
 
       # dto : Dtos::Classroom::StudentRegistrationInput ; link_token (voie « link »), sinon la cascade (voie « standard »).
+      # ip : l'adresse de la requête, gardée dans la trace (ADR-0050, effacée après coup par l'ADR-0080).
       # → success(Entities::Classroom::Classroom, la classe d'arrivée) | :forbidden (rôle, no_active_classroom, raison de
-      #   JoinPolicy, classroom_archived) | :invalid (same_classroom, classe hors cascade) | :not_found (lien mort) | :conflict
-      def call(actor:, dto:)
+      #   JoinPolicy, classroom_archived) | :invalid (same_classroom, classe hors cascade) | :not_found (lien mort) |
+      #   :conflict (change_conflict)
+      def call(actor:, dto:, ip: nil)
         return Shared::Result.failure(:forbidden) unless actor&.student?
 
-        @transaction.call { change(actor, dto) }
+        @transaction.call { change(actor, dto, ip) }
       rescue Aborted => e
         e.result
       end
@@ -42,7 +47,7 @@ module UseCases
 
       # La classe d'arrivée est verrouillée avant de lire la classe actuelle : un second envoi simultané vers la même
       # classe attend le premier, puis lit la nouvelle classe et tombe sur same_classroom (rien de plus n'est écrit).
-      def change(actor, dto)
+      def change(actor, dto, ip)
         destination = @designation.designate(dto)
         return destination if destination.is_a?(Shared::Result)
 
@@ -53,7 +58,7 @@ module UseCases
         allowed = allowed(actor, destination)
         return allowed if allowed.failure?
 
-        move(actor.user_id, current, destination)
+        move(actor.user_id, current, destination, ip)
       end
 
       # ADR-0085 §4.3 : le retrait ne ferme que la voie standard ; le lien le lève.
@@ -65,14 +70,17 @@ module UseCases
       end
 
       # ADR-0095 §4.2 : un départ, pas un retrait (left_at seul) ; la trace distingue le départ volontaire d'un archivage.
-      def move(student_id, current, destination)
+      # Rien à quitter (adhésion close entre-temps) ou nouvelle adhésion refusée : tout est annulé.
+      def move(student_id, current, destination, ip)
         now = @clock.now
         classroom = destination.classroom
-        @memberships.leave_primary(student_id:, at: now)
-        added = @memberships.add_primary(classroom_id: classroom.id, student_id:, via: destination.via, at: now)
-        raise Aborted, added if added.failure?
+        left = @memberships.leave_primary(student_id:, at: now)
+        raise Aborted, Shared::Result.failure(:forbidden, errors: NO_ACTIVE_CLASSROOM) unless left
 
-        @audit_log.record(action: ACTION, actor_id: student_id, at: now, subject_type: "User", subject_id: student_id,
+        added = @memberships.add_primary(classroom_id: classroom.id, student_id:, via: destination.via, at: now)
+        raise Aborted, Shared::Result.failure(:conflict, errors: CONFLICT) if added.failure?
+
+        @audit_log.record(action: ACTION, actor_id: student_id, at: now, ip:, subject_type: "User", subject_id: student_id,
                           metadata: { from_classroom_id: current.classroom_id, to_classroom_id: classroom.id,
                                       to_school_id: classroom.school_id, via: destination.via })
         Shared::Result.success(classroom)

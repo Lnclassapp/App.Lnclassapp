@@ -187,10 +187,14 @@ class Classroom::StudentClassroomChangesControllerTest < ActionDispatch::Integra
     send_change(link_token: "cccccccccccc")
 
     assert_redirected_to new_student_classroom_change_path
+    follow_redirect!
+
+    assert_select "#classroom-link-invalid[role=alert]", text: I18n.t("#{NEW}.link_invalid")
 
     send_change(student_classroom_change: cascade(@c, school: @cocody))
 
     assert_response :unprocessable_entity
+    assert_select "#student_classroom_change_classroom_public_id_error", text: I18n.t("#{ERRORS}.classroom_public_id.unavailable")
 
     @c.update!(max_students: 1)
     create_student(classroom: @c)
@@ -217,8 +221,11 @@ class Classroom::StudentClassroomChangesControllerTest < ActionDispatch::Integra
 
     send_change
 
+    # Classe archivée entre la confirmation et l'envoi : « Choisis ta classe » dit pourquoi.
     assert_redirected_to new_student_classroom_choice_path
+    assert_equal refusal_message(:no_active_classroom), flash[:alert]
     assert_equal [ [ @a.id, "standard" ] ], open_memberships
+    assert_empty moves
   end
 
   test "the sixth sending of a minute receives 429, nothing more is written" do
@@ -232,12 +239,20 @@ class Classroom::StudentClassroomChangesControllerTest < ActionDispatch::Integra
     assert_equal [ [ @a.id, "standard" ] ], open_memberships
   end
 
-  test "a visitor is sent to sign in; a teacher or a direction is refused" do
+  test "a visitor is sent to sign in on every action; a teacher, a direction or the team is refused" do
     get new_student_classroom_change_path
 
     assert_redirected_to new_session_path
 
-    [ create_teacher, create_user(role: "school_admin") ].each do |user|
+    get confirm_student_classroom_change_path, params: { link_token: @c.link_token }
+
+    assert_redirected_to new_session_path
+
+    send_change
+
+    assert_redirected_to new_session_path
+
+    [ create_teacher, create_user(role: "school_admin"), create_team_member ].each do |user|
       sign_in_as user
       get new_student_classroom_change_path
 
@@ -249,5 +264,222 @@ class Classroom::StudentClassroomChangesControllerTest < ActionDispatch::Integra
       sign_out
     end
     assert_empty moves
+  end
+
+  test "ADR-0095 §4.4: the eleventh link confirmation of a minute receives 429, without anything of the classroom" do
+    sign_in_as @student
+
+    10.times { get confirm_student_classroom_change_path, params: { link_token: "cccccccccccc" } }
+
+    assert_redirected_to new_student_classroom_change_path
+
+    get confirm_student_classroom_change_path, params: { link_token: @c.link_token }
+
+    assert_response :too_many_requests
+    assert_select "[role=alert]", text: I18n.t("errors.codes.rate_limited")
+    assert_select "h1", text: "Changer de classe"
+    assert_no_match(/#{@c.public_id}|#{@c.link_token}|2nde C/, response.body)
+  end
+
+  test "ADR-0085 §4.1: the link confirmation shares the counter of /c/<jeton>" do
+    sign_in_as @student
+
+    10.times { get join_classroom_path("cccccccccccc") }
+    get confirm_student_classroom_change_path, params: { link_token: @c.link_token }
+
+    assert_response :too_many_requests
+  end
+
+  test "ADR-0050: the move is traced with the address of the request" do
+    sign_in_as @student
+
+    post student_classroom_change_path, params: { student_classroom_change: cascade }, env: { "REMOTE_ADDR" => "203.0.113.9" }
+
+    assert_equal [ "203.0.113.9" ], moves.pluck(:ip_address)
+  end
+
+  test "ADR-0088: the link of an archived classroom says so at the confirmation, as at the sending (403)" do
+    @c.update!(status: "archived", archived_at: Time.current)
+    sign_in_as @student
+
+    get confirm_student_classroom_change_path, params: { link_token: @c.link_token }
+
+    assert_response :forbidden
+    assert_select "[role=alert]", text: refusal_message(:classroom_archived)
+    assert_select "#classroom-link-invalid", 0
+  end
+
+  test "a classroom archived between the confirmation and the sending: by the link 403 with the reason, by the cascade 422" do
+    sign_in_as @student
+    get confirm_student_classroom_change_path, params: { link_token: @c.link_token }
+    @c.update!(status: "archived", archived_at: Time.current)
+
+    send_change(link_token: @c.link_token)
+
+    assert_response :forbidden
+    assert_select "[role=alert]", text: refusal_message(:classroom_archived)
+
+    send_change
+
+    assert_response :unprocessable_entity
+    assert_select "#student_classroom_change_classroom_public_id_error", text: I18n.t("#{ERRORS}.classroom_public_id.unavailable")
+    assert_equal [ [ @a.id, "standard" ] ], open_memberships
+    assert_empty moves
+  end
+
+  test "the same sending twice (double tap): the second is same_classroom, one open membership, one trace" do
+    sign_in_as @student
+
+    send_change
+    send_change
+
+    assert_response :unprocessable_entity
+    assert_select "[role=alert]", text: refusal_message(:same_classroom)
+    assert_equal [ [ @c.id, "standard" ] ], open_memberships
+    assert_equal 1, moves.count
+  end
+
+  test "own classroom full: same_classroom, never classroom_full, at the confirmation as at the sending" do
+    @a.update!(max_students: 1)
+    sign_in_as @student
+
+    get confirm_student_classroom_change_path, params: { link_token: @a.link_token }
+
+    assert_response :unprocessable_entity
+    assert_select "[role=alert]", text: refusal_message(:same_classroom)
+
+    send_change(link_token: @a.link_token)
+
+    assert_response :unprocessable_entity
+    assert_select "[role=alert]", text: refusal_message(:same_classroom)
+  end
+
+  test "ADR-0085 §4.3: the link lifts the removal on the same row, removal cleared" do
+    Orm::ClassroomStudent.create!(classroom: @c, student: @student, primary: true, joined_at: 60.days.ago, left_at: 40.days.ago,
+                                  removed_at: 40.days.ago, removed_by_id: create_teacher.id, joined_via: "standard")
+    sign_in_as @student
+
+    send_change(link_token: @c.link_token)
+
+    assert_equal [ [ "link", nil, nil, nil ] ],
+                 Orm::ClassroomStudent.where(student: @student, classroom: @c).pluck(:joined_via, :left_at, :removed_at, :removed_by_id)
+  end
+
+  test "back to 2nde A by the cascade after A → C: the same row reopened, two moves" do
+    sign_in_as @student
+
+    send_change
+    send_change(student_classroom_change: cascade(@a, school: @cocody))
+
+    assert_redirected_to student_home_path
+    assert_equal [ nil ], Orm::ClassroomStudent.where(student: @student, classroom: @a).pluck(:left_at)
+    assert_equal [ [ @a.id, "standard" ] ], open_memberships
+    assert_equal 2, moves.count
+  end
+
+  # add_primary of the real repository answers `behaviour` (a lambda) for the duration of the block.
+  def with_add_primary(behaviour)
+    repository = Repositories::Classroom::MembershipRepository
+    repository.alias_method :original_add_primary, :add_primary
+    repository.define_method(:add_primary, behaviour)
+    yield
+  ensure
+    repository.alias_method :add_primary, :original_add_primary
+    repository.remove_method :original_add_primary
+  end
+
+  test "a race between two classrooms (:conflict): a neutral « Réessaie », the old membership kept, a warning without contact" do
+    sign_in_as @student
+    logs = StringIO.new
+    Rails.logger.broadcast_to(log = ActiveSupport::Logger.new(logs))
+
+    with_add_primary(->(**) { Shared::Result.failure(:conflict, errors: { base: [ :already_member ] }) }) do
+      send_change
+      send_change(link_token: @c.link_token)
+    end
+
+    assert_response :conflict
+    assert_select "[role=alert]", text: refusal_message(:change_conflict)
+    assert_equal [ [ @a.id, "standard" ] ], open_memberships
+    assert_empty moves
+    assert_equal 2, logs.string.scan(/classroom\.change_conflict user_id=#{@student.id} to_classroom=#{@c.public_id}$/).size
+    assert_no_match(/#{@c.link_token}/, logs.string)
+    assert_no_match(/#{@student.contact}/, logs.string)
+  ensure
+    Rails.logger.stop_broadcasting_to(log) if log
+  end
+
+  test "atomicity with the real repositories: a failing new membership leaves the old one open, nothing traced" do
+    sign_in_as @student
+
+    assert_raises(RuntimeError) { with_add_primary(->(**) { raise "panne" }) { send_change } }
+
+    assert_equal [ [ @a.id, "standard" ] ], open_memberships
+    assert_empty moves
+  end
+
+  test "ADR-0095 §4.3: the results follow the student; the old follow-up loses them, the new one does not gain them" do
+    teacher_a = create_teacher(school: @cocody, classrooms: [ @a ], first_name: "Ibrahim", last_name: "Traoré")
+    teacher_c = create_teacher(school: @viateur, classrooms: [ @c ], first_name: "Moussa", last_name: "Diallo")
+    exercise = create_exercise(title: "Fractions")
+    assignment_a = create_assignment(classroom: @a, assignable: exercise, by: teacher_a)
+    assignment_c = create_assignment(classroom: @c, assignable: exercise, by: teacher_c)
+    create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 75, classroom_assignment: assignment_a)
+    sign_in_as @student
+
+    send_change
+    get student_archive_path
+
+    assert_select "#student_archive_results li", 1 do
+      assert_select "p", "Fractions"
+      assert_select "[data-grade]", text: %r{15/20}
+    end
+    rows = css_select("#student_archive_classrooms li")
+    assert_select rows.first, "p", "2nde C"
+    assert_select rows.first, "span", "Actuelle"
+    assert_select rows.last, "p", "2nde A"
+    assert_select rows.last, "span", text: /\Adu .+ au .+\z/
+    sign_out
+
+    sign_in_as teacher_a
+    get classroom_assignment_path(@a.public_id, assignment_a.public_id)
+
+    assert_equal %w[0 0], css_select("#follow_up_counts dd").map { it.text.strip }
+    assert_no_match(/Awa/, response.body)
+    sign_out
+
+    sign_in_as teacher_c
+    get classroom_assignment_path(@c.public_id, assignment_c.public_id)
+
+    assert_equal %w[0 1], css_select("#follow_up_counts dd").map { it.text.strip }
+  end
+
+  test "chained: the old classroom no longer lists the student, the new one marks them « Nouveau », the old direction lists them" do
+    teacher_a = create_teacher(school: @cocody, classrooms: [ @a ], first_name: "Ibrahim", last_name: "Traoré")
+    teacher_c = create_teacher(school: @viateur, classrooms: [ @c ], first_name: "Moussa", last_name: "Diallo")
+    create_student(classroom: @a, first_name: "Koffi", last_name: "Yao")
+    roster = "classroom.classrooms.roster"
+    sign_in_as @student
+
+    send_change
+    sign_out
+
+    sign_in_as teacher_a
+    get classroom_path(@a.public_id)
+
+    assert_select "h2#classroom_roster_title", text: /#{I18n.t("#{roster}.title", count: 1)}/
+    assert_select "#student_#{@student.public_id}", 0
+    sign_out
+
+    sign_in_as teacher_c
+    get classroom_path(@c.public_id)
+
+    assert_select "#student_#{@student.public_id} span", text: I18n.t("#{roster}.new")
+    sign_out
+
+    sign_in_as create_school_admin(school: @cocody, first_name: "Aya", last_name: "Brou")
+    get school_admin_departed_students_path
+
+    assert_select "#departed_students tbody tr th[scope=row]", "Awa Koné"
   end
 end

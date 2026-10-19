@@ -4,8 +4,10 @@
 module Classroom
   class JoinsController < ApplicationController
     allow_unauthenticated_access
-    # ADR-0041, ADR-0085 §4.1 : l'aperçu et l'entrée partagent le compteur ; au-delà, rien n'est révélé.
-    rate_limit to: 10, within: 1.minute, by: -> { request.remote_ip }, with: -> { refuse_too_many }
+    # ADR-0041, ADR-0085 §4.1 : l'aperçu et l'entrée partagent le compteur ; au-delà, rien n'est révélé. La confirmation
+    # d'un changement par lien (StudentClassroomChangesController) compte dans le même compteur.
+    LINK_RATE_LIMIT = { to: 10, within: 1.minute, scope: "classroom/joins" }.freeze
+    rate_limit **LINK_RATE_LIMIT, by: -> { request.remote_ip }, with: -> { refuse_too_many }
     before_action :refuse_other_roles
     # UDR-0102 §3.3 : l'élève déjà dans une classe active va à la confirmation du changement ; son envoi ici reste
     # refusé par JoinAsStudent, en 403 (IL-18).

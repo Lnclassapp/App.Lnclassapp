@@ -6,10 +6,15 @@ module Classroom
     include ClassPicker
 
     FIELDS = %i[drena_public_id school_public_id level_slug classroom_public_id].freeze
+    STATUSES = { forbidden: :forbidden, conflict: :conflict }.freeze
+    NO_CLASSROOM_SCOPE = "activemodel.errors.models.dtos/classroom/student_registration_input.attributes.base".freeze
 
     allow_roles :student
     # ADR-0095 §4.4 : 5 envois par minute et par compte, comme l'inscription.
     rate_limit to: 5, within: 1.minute, only: :create, by: -> { current_actor.user_id }, with: -> { refuse_too_many }
+    # ADR-0085 §4.1 : la confirmation par lien dit si un jeton ouvre une classe ; elle partage le compteur de /c/<jeton>.
+    rate_limit **JoinsController::LINK_RATE_LIMIT, only: :confirm, if: :link?, by: -> { request.remote_ip },
+                                                   with: -> { refuse_too_many }
     # L'élève sans classe active choisit la sienne par « Choisis ta classe » (JoinAsStudent).
     before_action :load_current, only: %i[new confirm]
 
@@ -24,7 +29,7 @@ module Classroom
     def confirm
       @form = submitted
       @destination = link? ? preview.linked(token: @form.link_token) : chosen(@form)
-      return redirect_to(new_student_classroom_change_path, flash: { link_invalid: true }, status: :see_other) if link? && @destination.nil?
+      return refuse_link if link? && @destination.nil?
 
       attribute, error, status = refusal
       render_change_page(@form, side: @destination, status:) { it.errors.add(attribute, error) } if error
@@ -33,12 +38,13 @@ module Classroom
     # ADR-0095 §4.4 : seul cet envoi change la classe ; la garde est ChangeClassroom.
     def create
       dto = submitted
-      result = change.call(actor: current_actor, dto:)
+      result = change.call(actor: current_actor, dto:, ip: request.remote_ip)
       return redirect_to(student_home_path, notice: t(".welcome", classroom: result.value.name), status: :see_other) if result.success?
       return redirect_to(new_student_classroom_change_path, flash: { link_invalid: true }, status: :see_other) if result.code == :not_found
 
       side = preview.linked(token: dto.link_token)
-      render_change_page(dto, side:, status: result.code == :forbidden ? :forbidden : :unprocessable_entity) { add_errors(result) }
+      log_conflict(side&.public_id || dto.classroom_public_id) if result.code == :conflict
+      render_change_page(dto, side:, status: STATUSES.fetch(result.code, :unprocessable_entity)) { add_errors(result) }
     end
 
     private
@@ -52,10 +58,19 @@ module Classroom
       render_change_page(submitted, status: :too_many_requests) { it.errors.add(:base, t("errors.codes.rate_limited")) }
     end
 
-    # La page « Changer de classe » avec une raison en tête ou sous la classe, la cascade sur la classe visée.
+    # ADR-0088 : le lien d'une classe archivée dit son motif, comme à l'envoi ; tout autre lien mort, « plus valable ».
+    def refuse_link
+      return redirect_to(new_student_classroom_change_path, flash: { link_invalid: true }, status: :see_other) unless
+        preview.archived_link?(token: @form.link_token)
+
+      render_change_page(@form, status: :forbidden) { it.errors.add(:base, :classroom_archived) }
+    end
+
+    # La page « Changer de classe » avec une raison en tête ou sous la classe, la cascade sur la classe visée. Sans classe
+    # active (archivée entre la confirmation et l'envoi) : « Choisis ta classe », qui dit pourquoi.
     def render_change_page(dto, status:, side: nil)
       @current ||= preview.current(student_id: current_actor.user_id)
-      return redirect_to(new_student_classroom_choice_path, status: :see_other) unless @current
+      return redirect_to(new_student_classroom_choice_path, alert: t(:no_active_classroom, scope: NO_CLASSROOM_SCOPE), status: :see_other) unless @current
 
       @form = dto.link_token ? Dtos::Classroom::StudentRegistrationInput.new(**cascade_of(side || @current)) : dto
       yield @form
@@ -92,6 +107,11 @@ module Classroom
     def picker_params = (params.permit(student_classroom_change: FIELDS)[:student_classroom_change] || {}).to_h.symbolize_keys
 
     def preview = @preview ||= Queries::Classroom::ClassroomChangePreviewQuery.new
+
+    # Aucun contact dans le journal : l'élève et la classe visée, par leurs identifiants.
+    def log_conflict(to_classroom)
+      Rails.logger.warn("classroom.change_conflict user_id=#{current_actor.user_id} to_classroom=#{to_classroom}")
+    end
 
     def change
       UseCases::Classroom::ChangeClassroom.new(

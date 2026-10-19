@@ -26,13 +26,18 @@
 | 2026-10-16 | Lot D : couvert en tests contrôleur et query ; `test/system/classroom/student_archive_test.rb` inchangé | Budget système ; le test système existant passe avec la nouvelle ligne | — |
 | 2026-10-16 | Clôture : l'année scolaire du détail de « Mes classes » ne se coupe plus à son tiret (`whitespace-nowrap`, clé `detail_html`) | Vu sur la capture à 390 px : « 2026- / 2027 » sur deux lignes | — |
 | 2026-10-16 | Clôture : `origin/Develop` fusionnée (merge) avant la PR ; documentation seule, sans conflit | Règle de clôture | — |
+| 2026-10-19 | Revues de la PR #252 (sécurité, échecs silencieux, tests) : la confirmation par lien compte dans le compteur de `/c/<jeton>` (10 par minute et par adresse, `JoinsController::LINK_RATE_LIMIT`) | La confirmation disait si un jeton ouvre une classe : un oracle de jeton sans limite | ADR-0085 §4.1 (même compteur) |
+| 2026-10-19 | Revues : la trace `classroom.student_moved` garde l'adresse de la requête ; `leave_primary` dit s'il a clos une adhésion, et rien à quitter annule le changement (`no_active_classroom`) | ADR-0050, ADR-0080 ; un départ écrit sans adhésion close aurait ouvert une seconde classe sans trace juste | — |
+| 2026-10-19 | Revues : course entre deux classes (`:conflict`) → « Ton changement n'a pas pu se faire. Réessaie. » (409) et un avertissement au journal (élève et classe visée, sans contact) ; la garantie « une seule classe active » est l'index `index_classroom_students_one_active_primary` | `already_member` (« déjà inscrit dans cette classe ») était faux pour une autre classe | — |
+| 2026-10-19 | Revues : le lien d'une classe archivée dit son motif dès la confirmation (403 `classroom_archived`) ; l'envoi refusé faute de classe active mène à « Choisis ta classe » avec ce motif en toast | Même refus à la confirmation et à l'envoi | — |
+| 2026-10-19 | Revues : tests ajoutés — résultats qui suivent l'élève (historique, suivis des deux classes), double envoi, classe archivée avant l'envoi, retour dans l'ancienne classe, classe actuelle complète, atomicité avec les vrais repositories, effets chez l'enseignant et la direction | Constats `pr-test-analyzer` | — |
 
 ## Ce qui a dérapé
 
 - L'agent des lots A à D a été arrêté avant la clôture ; un second agent a repris la branche (5 commits, rien en cours), fusionné `Develop`, pris les captures, lancé `bin/ci-quiet` et ouvert la PR.
 - Le test de query du Lot D lisait deux fois `40.days.ago` : sous charge, les deux appels tombaient de part et d'autre d'une seconde (rouge dans `bin/ci-quiet`). Un seul instant, lu une fois.
 - Premier `bin/ci-quiet` : la suite système s'est effondrée (« tab crashed », 295 tests, machine partagée saturée). Relancée une fois (16 échecs), puis les fichiers en échec seuls (7 échecs) : toasts de 5 s expirés avant l'assertion, charge ≈ 50 sur 4 cœurs, dans des parcours que le chantier ne change pas (dont trois de `join_test.rb` : l'inscription d'un visiteur, que le Lot C laisse passer tel quel). Le test système du chantier et celui de l'historique passent.
-- Les revues `security-reviewer`, `silent-failure-hunter` et `pr-test-analyzer` n'ont pas pu être lancées : la session de clôture n'avait pas d'outil de sous-agent. Relecture faite à la main du use case, du contrôleur, de `JoinsController` et des routes ; à refaire par un sous-agent avant la fusion.
+- Les revues `security-reviewer`, `silent-failure-hunter` et `pr-test-analyzer` n'ont pas pu être lancées par la session de clôture ; le coordinateur les a lancées sur la PR #252 : aucun constat critique, six corrections et dix tests traités dans un commit (lignes du 2026-10-19).
 
 ## Ce qu'on a appris sur la codebase
 
@@ -55,6 +60,6 @@
 | | |
 |---|---|
 | **Livré le** | 2026-10-16 (PR vers `Develop`, non fusionnée) |
-| **PR** | [`feature/changement-etablissement-eleve` → `Develop`](https://github.com/Lnclassapp/App.Lnclassapp/pulls?q=is%3Apr+head%3Afeature%2Fchangement-etablissement-eleve) |
+| **PR** | [#252](https://github.com/Lnclassapp/App.Lnclassapp/pull/252) |
 | **ADR produits** | ADR-0095 |
 | **UDR produits** | UDR-0101, UDR-0102, UDR-0103 |

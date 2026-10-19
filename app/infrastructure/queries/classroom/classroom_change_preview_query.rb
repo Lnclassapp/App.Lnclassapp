@@ -32,6 +32,12 @@ module Queries
         side(classrooms.where(link_token: token, status: "active", schools: { status: "active" }))
       end
 
+      # ADR-0088 : le jeton d'une classe archivée d'un établissement actif, pour dire le motif plutôt qu'un lien mort.
+      # Un jeton nil (mal formé) ne trouve rien : link_token est NOT NULL.
+      def archived_link?(token:)
+        Orm::Classroom.joins(:school).where(link_token: token, status: "archived", schools: { status: "active" }).exists?
+      end
+
       private
 
       def classrooms = Orm::Classroom.joins(:level, school: :drena)
