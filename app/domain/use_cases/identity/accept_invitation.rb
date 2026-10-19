@@ -1,13 +1,25 @@
 # 🧠 DOMAINE · UseCases::Identity::AcceptInvitation
 # Rôle : le lien d'invitation crée un compte, une seule fois : team (second facteur enrôlé à la première connexion), ou
 #        direction rattachée à son seul établissement, dans la même transaction
-# ADR  : 0026, 0028 (exempté de policy : le visiteur n'a que le lien), 0031, 0038, 0050, 0065 · UDR : 0019, 0052
+# ADR  : 0026, 0028 (exempté de policy : le visiteur n'a que le lien), 0031, 0038, 0050, 0065, 0092 · UDR : 0019, 0052
 module UseCases
   module Identity
     class AcceptInvitation
       # Type d'invitation → rôle du compte créé (ADR-0038, ADR-0065).
       ROLES = { "team" => "team", "school_staff" => "school_admin" }.freeze
       CONTACT_TAKEN = { base: [ :contact_taken ] }.freeze
+      # ADR-0092 §4.3 : un chef d'établissement est arrivé par le code entre l'invitation et son acceptation.
+      HEAD_TAKEN = { base: [ :head_taken ] }.freeze
+
+      # Un refus après la création du compte traverse la transaction pour l'annuler, puis ressort en Result.
+      class Aborted < StandardError
+        attr_reader :result
+
+        def initialize(result)
+          @result = result
+          super("acceptation annulée : #{result.code}")
+        end
+      end
 
       def initialize(invitations:, registrations:, staffs:, audit_log:, transaction:, digest_key:, clock:)
         @invitations = invitations
@@ -29,13 +41,16 @@ module UseCases
       end
 
       # dto : Dtos::Identity::InvitationAcceptanceInput. Le lien périmé l'emporte sur un formulaire invalide.
-      # → success(User) | :not_found | :expired | :invalid | :conflict (numéro devenu un compte entre-temps)
+      # → success(User) | :not_found | :expired | :invalid | :conflict (numéro devenu un compte entre-temps, ou chef
+      #   d'établissement devenu actif entre-temps pour une invitation de chef)
       def call(token:, dto:)
         checked = check(token:)
         return checked if checked.failure?
         return Shared::Result.failure(:invalid, errors: dto.errors.to_hash) unless dto.valid?
 
         @transaction.call { accept(checked.value, dto, @clock.now) }
+      rescue Aborted => e
+        e.result
       end
 
       private
@@ -53,14 +68,21 @@ module UseCases
         Shared::Result.success(user)
       end
 
+      # La fonction choisie par l'équipe (invitations.position) devient celle du rattachement (ADR-0092 §4.2).
       def attach_staff(invitation, user, now)
-        @staffs.attach(user_id: user.id, school_id: invitation.school_id, invited_by_id: invitation.invited_by_id, at: now)
+        attached = @staffs.attach(user_id: user.id, school_id: invitation.school_id, invited_by_id: invitation.invited_by_id,
+                                  position: invitation.position, at: now)
+        case attached
+        when :attached then nil
+        when :head_taken then raise Aborted, Shared::Result.failure(:conflict, errors: HEAD_TAKEN)
+        else raise ArgumentError, "unexpected outcome from attach: #{attached.inspect}"
+        end
       end
 
       def metadata(invitation)
         return { team_role: invitation.team_role } if invitation.kind == "team"
 
-        { kind: invitation.kind, school_id: invitation.school_id }
+        { kind: invitation.kind, school_id: invitation.school_id, position: invitation.position }
       end
 
       def user_from(invitation, dto)

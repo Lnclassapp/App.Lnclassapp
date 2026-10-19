@@ -1,14 +1,14 @@
 # UDR-0092 : Fonction de direction — à l'inscription, à l'invitation, dans le bloc « Direction » ; gestes masqués au rang vie scolaire
 <!-- index
 titre: Fonction de direction à l'inscription, à l'invitation et dans le bloc « Direction » ; gestes par rang
-statut: Proposé
+statut: Accepté
 adr-lie: [0092](../adr/0092-fonctions-de-direction-droits-par-rang-et-changement-de-classe.md)
 problematique: Où la direction choisit et lit sa fonction, comment l'équipe la corrige, et quels gestes disparaissent pour l'éducateur et la secrétaire. Amende UDR-0056, 0070 (§3.1, §3.4), 0083.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16 ; DIR-4 : « Préciser ma fonction » retiré) |
 | **Date** | 2026-10-16 |
 | **Chantier** | `docs/chantiers/espace-direction` |
 | **ADR lié** | ADR-0092 |
@@ -24,7 +24,7 @@ Le bloc « Direction » (UDR-0070 §3.4) ne montre qu'un nom et une date d'arriv
 
 - **Un `fieldset` « Fonction » à quatre radios** sur l'inscription de la direction et sur l'invitation par l'équipe, plutôt qu'une liste déroulante : quatre choix courts se lisent d'un coup d'œil au téléphone et se touchent sans ouvrir de menu (même choix que les cycles en radio, UDR-0005 ter).
 - **La fonction s'affiche sous le nom**, dans la ligne existante du bloc « Direction », avant la date d'arrivée : pas de colonne de plus.
-- **Préciser ou changer une fonction passe par le menu ⋮ de la ligne** (UDR-0042) et une modale à radios, comme le retrait.
+- **Changer une fonction passe par le menu ⋮ de la ligne, côté équipe seulement** (UDR-0042) et une modale à radios, comme le retrait. Toute direction a une fonction dès son arrivée (réponse DIR-4) : il n'y a rien à « préciser ».
 - **Un geste refusé n'est pas montré.** Les contrôleurs calculent l'affichage par la policy (jamais par une règle recopiée dans la vue) ; une note dit pourquoi les gestes manquent.
 
 ## 3. Règles d'implémentation
@@ -43,20 +43,14 @@ Le bloc « Direction » (UDR-0070 §3.4) ne montre qu'un nom et une date d'arriv
 ### 3.2 Libellé dans le bloc « Direction » — `shared/_school_staff`
 
 - Sur chaque `<li id="school_staff_<public_id>">`, sous le nom (`font-medium`), la ligne existante devient : « %{fonction} · Depuis le %{date} · avec le code » (ou « · sur invitation »).
-- Sans fonction : « Fonction à préciser », en `text-warning` ; le reste de la ligne en `text-mute`.
+- La fonction en `font-medium text-ink`, le reste de la ligne en `text-mute`.
 - La mention « (vous) » reste après le nom.
 - Le libellé de `deputy` suit le type de l'établissement affiché (§4.1 de l'ADR-0092).
 - Lu par `Queries::School::SchoolStaffQuery#active_for`, dont la ligne gagne `position` (Lot 0).
 
-### 3.3 « Préciser ma fonction » — direction, sur sa propre ligne
+### 3.3 « Préciser ma fonction » — retiré
 
-- Rendu seulement si la ligne est celle de la direction connectée **et** sa fonction est vide **et** l'établissement est actif.
-- Sur sa propre ligne, qui n'avait pas de menu (UDR-0070 §3.4), un menu ⋮ apparaît avec un seul `ui_dropdown_item` « Préciser ma fonction », icône `identification`, `href: edit_school_admin_staff_position_path(public_id)`, `data: { turbo_frame: "modal" }`.
-- Note sous la liste, si la fonction est vide : « Précisez votre fonction : elle décide de vos gestes et ne se changera ensuite que par l'équipe Lnclass. » (`text-xs text-mute`).
-- Modale `ui_modal id: "staff-position", title: "Votre fonction", size: :sm` : les quatre radios du §3.1 (libellé `deputy` selon le type), puis « Annuler » et « Enregistrer » (`variant: :brand`, `type: :submit`).
-- Vue `school_admin/staff_positions/edit`, chargée à la demande dans le frame `modal` (page complète sans JavaScript, comme la confirmation de retrait d'un enseignant, UDR-0056) ; `form_with url: school_admin_staff_position_path(public_id), method: :patch`. Route du Lot 0 : `resources :staff_positions, only: %i[edit update], path: "staff-positions", param: :public_id`, dans le `scope "school"`.
-- Succès : `turbo_stream.replace "school_staff_<public_id>"` (ligne avec sa fonction, sans menu), `turbo_stream.remove` de la note, toast « Votre fonction est enregistrée. »
-- Erreurs : `head_taken` → modale re-rendue en 422 avec le message du §3.1 ; 403 (fonction déjà renseignée) → toast « Votre fonction ne se change que par l'équipe Lnclass. »
+Retiré par la réponse DIR-4 du porteur (2026-10-16) : aucune direction n'est inscrite, la fonction est obligatoire à l'inscription et à l'invitation ; il n'existe pas de compte sans fonction. Une direction n'a toujours pas de menu sur sa propre ligne (UDR-0070 §3.4).
 
 ### 3.4 « Changer la fonction » — équipe, sur la fiche de l'établissement
 
@@ -79,7 +73,7 @@ Pour une direction `educator` ou `secretary`, les contrôleurs posent les drapea
 | `school_admin/departed_teachers/index` | « Réintégrer » | `@manageable` (`ManageSchoolTeachersPolicy`) |
 
 - Ce qui **reste** : le lien d'invitation (copie, WhatsApp), la page de classe avec « Changer le lien », « Retirer de la classe », « Changer de classe » (UDR-0093), la recherche d'élève (UDR-0094), toutes les lectures.
-- Une note, une seule fois par page touchée, sous le titre du bloc concerné, `text-xs text-mute` : « Votre fonction (%{fonction}) ne permet pas ces gestes. Le chef d'établissement ou son adjoint peut les faire. » Aucune note pour le rang gestion.
+- Une note, une seule fois par page touchée, sous l'en-tête de la page (une page peut toucher deux blocs : « Établissement » a les classes et la direction), `text-xs text-mute`, avec l'icône `information-circle` : « Votre fonction (%{fonction}) ne permet pas ces gestes. Le chef d'établissement ou son adjoint peut les faire. » Aucune note pour le rang gestion.
 - Une requête forgée reçoit 403 et le toast existant de la page (« Vous ne pouvez pas … »).
 
 ### 3.6 États
@@ -92,7 +86,7 @@ Pour une direction `educator` ou `secretary`, les contrôleurs posent les drapea
 ### 3.7 Accessibilité
 
 - Chaque groupe de radios est un `fieldset` avec `legend` ; l'erreur est annoncée (`role="alert"`) et reliée au groupe.
-- Le libellé de fonction n'est pas porté par la seule couleur (« Fonction à préciser » est écrit).
+- Le libellé de fonction est écrit, jamais porté par la seule couleur.
 - Menus ⋮ : label « Actions pour %{name} » (inchangé), focus rendu au bouton ⋮ après fermeture de la modale.
 - Cibles ≥ 48 px (`min-h-tap`).
 
@@ -102,3 +96,10 @@ Pour une direction `educator` ou `secretary`, les contrôleurs posent les drapea
 - L'UDR-0056 et l'UDR-0083 : leurs gestes ne sont rendus qu'au rang gestion.
 - Aucune vue ne recopie la règle de rang : elle passe toujours par une policy.
 - Interdit : afficher une fonction ailleurs que dans le bloc « Direction » ; proposer une fonction libre.
+
+## 5. Écarts de l'implémentation (2026-10-16)
+
+- La ligne de chaque direction est un partiel (`shared/_school_staff_row`), remplacé seul par le Turbo Stream du changement de fonction ; le bloc entier reste remplacé par la restauration.
+- Le groupe de radios est un partiel commun (`shared/_staff_position_fieldset`) : inscription (légende au style des rubriques), invitation et changement par l'équipe.
+- Changer vers la même fonction ferme la modale sans écrire ni journaliser.
+- Une invitation de chef acceptée alors qu'un autre chef est arrivé entre-temps est refusée à l'acceptation : « Votre établissement a déjà un chef d'établissement sur Lnclass. Demandez à l'équipe Lnclass une nouvelle invitation. »

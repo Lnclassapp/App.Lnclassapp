@@ -72,7 +72,7 @@ module UseCases
         @school = school(31, "active")
         @other = school(32, "active")
         @teacher = user(id: 50, public_id: "usr-awa")
-        @admin = Entities::Identity::Actor.new(user_id: 7, role: :school_admin, school_id: 31)
+        @admin = Entities::Identity::Actor.new(user_id: 7, role: :school_admin, school_id: 31, staff_position: "head")
         @audit = FakeAudit.new
         @transaction = FakeTransaction.new
       end

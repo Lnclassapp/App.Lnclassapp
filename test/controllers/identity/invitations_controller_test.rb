@@ -3,6 +3,8 @@ require "test_helper"
 # F-16, ID-04 replaced, ADR-0038, UDR-0019: the invitation link is the only way to a team account; it works once,
 # within 72 h; no public route creates a team account.
 class Identity::InvitationsControllerTest < ActionDispatch::IntegrationTest
+  ACCEPTANCE_ERRORS = "activemodel.errors.models.dtos/identity/invitation_acceptance_input.attributes".freeze
+
   setup do
     @invitation = create_invitation(contact: "0100000009", team_role: "content")
   end
@@ -89,6 +91,21 @@ class Identity::InvitationsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "invitation", Orm::SchoolStaff.joins(:user).find_by!(users: { contact: "0500000007" }).joined_via
     follow_redirect!
     assert_select "input[name='session[contact]'][value='05 00 00 00 07']"
+  end
+
+  # ED-12 (ADR-0092 §4.3) : un chef est arrivé entre l'invitation et son acceptation ; le compte créé est annulé avec le reste.
+  test "ED-12: a head invitation accepted after another head arrived is refused with a message, nothing is created, the link stays open" do
+    school = create_school
+    create_school_admin(school:, position: "head")
+    invitation = create_invitation(kind: "school_staff", contact: "0500000011", school:, position: "head")
+
+    post accept_invitation_path(invitation.token), params: acceptance_params
+
+    assert_response :unprocessable_entity
+    assert_select "form#invitation-acceptance-form [role=alert]", text: /#{Regexp.escape(I18n.t("#{ACCEPTANCE_ERRORS}.base.head_taken"))}/
+    assert_not Orm::User.exists?(contact: "0500000011")
+    assert_nil invitation.reload.accepted_at
+    assert_nil session[:login_contact]
   end
 
   test "FU-33: an invalid form keeps nothing for the sign-in page" do

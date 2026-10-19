@@ -24,7 +24,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "schools" => [ [ %w[drena_id name], nil ], [ %w[school_code], nil ], [ %w[national_code], "national_codeISNOTNULL" ],
                    [ %w[direction_invite_token], nil ], [ %w[team_invite_token], nil ] ],
     "teacher_schools" => [ [ %w[teacher_id school_id], nil ], [ %w[teacher_id], "primary" ], [ %w[invite_token], nil ] ],
-    "school_staffs" => [ [ %w[user_id], nil ] ],
+    "school_staffs" => [ [ %w[user_id], nil ], [ %w[school_id], "position='head'ANDarchived_atISNULL" ] ],
     "levels" => [ [ %w[name], nil ], [ %w[position], nil ] ],
     "series" => [ [ %w[name], nil ] ],
     "level_series" => [ [ %w[level_id series_id], nil ] ],
@@ -53,7 +53,8 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "users" => { "gender" => %w[male female], "role" => %w[student teacher school_admin team], "team_role" => %w[admin content field] },
     "login_attempts" => { "kind" => %w[pin second_factor] },
     "invitations" => { "kind" => %w[team school_staff], "team_role" => %w[admin content field],
-                       "position" => %w[principal censor educator secretary] },
+                       "position" => %w[head deputy educator secretary] }, # ADR-0092 §4.2
+    "school_staffs" => { "position" => %w[head deputy educator secretary], "joined_via" => %w[invitation code] },
     "schools" => { "school_type" => %w[public private mixed], "cycle" => %w[first both], "status" => %w[draft active inactive] },
     "levels" => { "cycle" => %w[first second] },
     "materials" => { "category" => %w[literature science other] },
@@ -276,9 +277,38 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     school = create_school
     admin = create_school_admin(school:)
 
-    assert_raises(ActiveRecord::RecordNotUnique) { Orm::SchoolStaff.create!(user: admin, school: create_school) }
-    assert_equal %w[archived_at archived_by_id created_at id invited_by_id joined_via school_id user_id],
+    assert_raises(ActiveRecord::RecordNotUnique) { Orm::SchoolStaff.create!(user: admin, school: create_school, position: "deputy") }
+    assert_equal %w[archived_at archived_by_id created_at id invited_by_id joined_via position school_id user_id],
                  connection.columns("school_staffs").map(&:name).sort
+  end
+
+  # ADR-0092 §4.2 : quatre fonctions, obligatoires (réponse DIR-4 du porteur).
+  test "ED-01: a direction has one position out of four, never none" do
+    staff = Orm::SchoolStaff.find_by!(user: create_school_admin)
+
+    %w[head deputy educator secretary].each { assert staff.update_columns(position: it) }
+    [ "principal", "censor", "" ].each do |position|
+      assert_raises(ActiveRecord::CheckViolation, position) do
+        connection.transaction(requires_new: true) { staff.update_columns(position:) }
+      end
+    end
+    assert_raises(ActiveRecord::NotNullViolation) do
+      connection.transaction(requires_new: true) { staff.update_columns(position: nil) }
+    end
+  end
+
+  # ADR-0092 §4.3 : l'index partiel tranche, même sans le verrou du repository.
+  test "ED-02: one active head per school; an archived head does not count, another school neither" do
+    school = create_school
+    create_school_admin(school:, position: "head")
+    second = Orm::SchoolStaff.find_by!(user: create_school_admin(school:))
+
+    assert_raises(ActiveRecord::RecordNotUnique) do
+      connection.transaction(requires_new: true) { second.update_columns(position: "head") }
+    end
+    assert create_school_admin(school: create_school, position: "head")
+    archived = create_school_admin(school:, position: "head", archived_at: Time.current)
+    assert_equal "head", Orm::SchoolStaff.find_by!(user: archived).position
   end
 
   # ADR-0077 §4.1 : une arrivée vaut invitation ou code ; archivé et auteur du retrait vont ensemble.
@@ -286,7 +316,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     admin = create_school_admin
     staff = Orm::SchoolStaff.find_by!(user: admin)
     bare = create_user(role: "school_admin")
-    connection.execute("INSERT INTO school_staffs (user_id, school_id, created_at) VALUES (#{bare.id}, #{staff.school_id}, now())")
+    connection.execute("INSERT INTO school_staffs (user_id, school_id, position, created_at) VALUES (#{bare.id}, #{staff.school_id}, 'deputy', now())")
 
     assert_equal "invitation", Orm::SchoolStaff.find_by!(user: bare).joined_via
     assert_raises(ActiveRecord::CheckViolation) do
@@ -299,13 +329,23 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     assert_not_nil staff.reload.archived_at
   end
 
-  test "DS-01: a school staff invitation needs a school, not a position" do
+  # ADR-0092 §4.2 : la fonction choisie par l'équipe, obligatoire, parmi les quatre.
+  test "DS-01, ED-14: a school staff invitation needs a school and a position" do
     school = create_school
 
-    assert_nil create_invitation(kind: "school_staff", school:, position: nil).position
+    assert_equal "educator", create_invitation(kind: "school_staff", school:, position: "educator").position
     assert_raises(ActiveRecord::CheckViolation) do
       Orm::Invitation.transaction(requires_new: true) do
-        Orm::Invitation.create!(kind: "school_staff", contact: "0700000009", token_digest: "x" * 64, expires_at: 1.day.from_now)
+        Orm::Invitation.create!(kind: "school_staff", contact: "0700000009", token_digest: "x" * 64, expires_at: 1.day.from_now,
+                                position: "deputy")
+      end
+    end
+    [ nil, "principal" ].each do |position|
+      assert_raises(ActiveRecord::CheckViolation, position.inspect) do
+        Orm::Invitation.transaction(requires_new: true) do
+          Orm::Invitation.create!(kind: "school_staff", contact: "0700000008", school:, token_digest: "y" * 64,
+                                  expires_at: 1.day.from_now, position:)
+        end
       end
     end
   end

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Identity::SchoolStaffRegistrationInput
-# Rôle : forme de l'inscription de la direction ; aucun rôle ni matière saisis, l'établissement est désigné par son code
-# ADR  : 0037, 0057, 0077 · UDR : 0070
+# Rôle : forme de l'inscription de la direction ; sa fonction, sans rôle ni matière, l'établissement désigné par son code
+# ADR  : 0037, 0057, 0077, 0092 · UDR : 0070, 0092
 module Dtos
   module Identity
     class SchoolStaffRegistrationInput < PersonNameInput
@@ -9,6 +9,7 @@ module Dtos
       attribute :pin, :string
       attribute :pin_confirmation, :string
       attribute :school_code, :string
+      attribute :position, :string
 
       attr_reader :raw_contact, :raw_school_code
 
@@ -17,6 +18,7 @@ module Dtos
       validates :pin, confirmation: true
       validate :contact_given
       validate :school_code_well_formed
+      validate :position_chosen
 
       def contact=(raw)
         @raw_contact = raw.to_s
@@ -36,6 +38,11 @@ module Dtos
         return unless contact.nil?
 
         errors.add(:contact, raw_contact.blank? ? :blank : :invalid)
+      end
+
+      # Une des quatre fonctions, obligatoire (réponse DIR-4 du porteur) ; une valeur forgée se dit comme un oubli.
+      def position_chosen
+        errors.add(:position, :blank) unless Entities::School::StaffPosition.valid?(position)
       end
 
       # La forme seule, sans recherche (ADR-0057).
