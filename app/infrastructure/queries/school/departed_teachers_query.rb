@@ -24,8 +24,7 @@ module Queries
       private
 
       def rows(school_id)
-        materials = Queries::Identity::TeacherMaterialsQuery.column(teacher: "teacher_school_departures.teacher_id",
-                                                                    school: "teacher_school_departures.school_id")
+        materials = Queries::Identity::TeacherMaterialsQuery.column(:teacher_school_departures)
         Orm::TeacherSchoolDeparture.joins(:teacher)
                                    .where(school_id:, reinstated_at: nil, users: { anonymized_at: nil })
                                    .where(NOT_BACK)

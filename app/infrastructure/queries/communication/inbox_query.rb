@@ -35,7 +35,7 @@ module Queries
       COLUMNS = [ "messages.id", "messages.public_id", "messages.title", "messages.body", "messages.illustration",
                   "messages.illustration_id", "messages.theme", "messages.edited_at", "users.role", "users.gender",
                   "users.last_name", "users.anonymized_at",
-                  Queries::Identity::TeacherMaterialsQuery.column(teacher: "messages.author_id", school: "messages.school_id") ].freeze
+                  Queries::Identity::TeacherMaterialsQuery.column(:messages) ].freeze
       ILLUSTRATION_ID = COLUMNS.index("messages.illustration_id")
 
       # illustrations : Ports::Communication::IllustrationRepositoryPort, qui rend les dessins de l'équipe des cartes.

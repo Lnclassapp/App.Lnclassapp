@@ -13,7 +13,7 @@ module Queries
       PENDING = "pending".freeze
       FULL_NAME = Arel.sql("users.first_name || ' ' || users.last_name")
       COLUMNS = [ "school_join_requests.public_id", FULL_NAME,
-                  Queries::Identity::TeacherMaterialsQuery.column(teacher: "school_join_requests.teacher_id"),
+                  Queries::Identity::TeacherMaterialsQuery.column(:school_join_requests),
                   "school_join_requests.created_at" ].freeze
 
       # → [TeamRow], la plus ancienne d'abord

@@ -16,9 +16,9 @@ class JoinRequestConcurrencyTest < ActiveSupport::TestCase
   teardown do
     Orm::SchoolJoinRequest.where(school: @school).delete_all
     ids = @teachers.map(&:id)
-    profiles = Orm::TeacherProfile.where(user_id: ids)
-    materials = Orm::TeacherSchoolMaterial.where(teacher_id: profiles.select(:user_id)).pluck(:material_id)
-    profiles.delete_all
+    materials = Orm::TeacherSchoolMaterial.where(teacher_id: ids).pluck(:material_id)
+    Orm::TeacherSchoolMaterial.where(teacher_id: ids).delete_all
+    Orm::TeacherProfile.where(user_id: ids).delete_all
     Orm::User.where(id: ids).delete_all
     Orm::Material.where(id: materials).delete_all
     drena = @school.drena_id

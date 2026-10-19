@@ -38,8 +38,7 @@ module Queries
                           .where(school_id:, users: { anonymized_at: nil })
                           .order("users.last_name", "users.first_name")
                           .pluck(:teacher_id, "users.public_id", "users.first_name", FULL_NAME,
-                                 Queries::Identity::TeacherMaterialsQuery.column(teacher: "teacher_schools.teacher_id",
-                                                                                 school: "teacher_schools.school_id"))
+                                 Queries::Identity::TeacherMaterialsQuery.column(:teacher_schools))
       end
 
       def classroom_names(school_id, school_year)

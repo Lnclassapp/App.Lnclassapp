@@ -26,8 +26,7 @@ module Queries
       # ADR-0088 : une classe archivée reste visible sept jours.
       ARCHIVE_WINDOW = 7.days
       FULL_NAME = Arel.sql("users.first_name || ' ' || users.last_name")
-      TEACHER_COLUMNS = [ FULL_NAME, Queries::Identity::TeacherMaterialsQuery.column(teacher: "teacher_schools.teacher_id",
-                                                                                     school: "teacher_schools.school_id"),
+      TEACHER_COLUMNS = [ FULL_NAME, Queries::Identity::TeacherMaterialsQuery.column(:teacher_schools),
                           :primary, "teacher_profiles.joined_via",
                           Arel.sql("referrers.last_name || ' ' || referrers.first_name") ].freeze
 
