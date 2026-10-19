@@ -5,6 +5,8 @@ require "test_helper"
 class SupportConfigTest < ActiveSupport::TestCase
   ENVIRONMENTS = %w[development test production].freeze
   KEYS = %i[phone whatsapp hours whatsapp_reply].freeze
+  # UDR-0128 §3.2 : chiffres seuls, indicatif compris, sans 0 de tête, 12 ou 13 chiffres ; ou vide (ligne supprimée).
+  NUMBER = /\A([1-9]\d{11,12})?\z/
 
   def support(env) = Rails.application.config_for(:support, env:)
 
@@ -20,9 +22,14 @@ class SupportConfigTest < ActiveSupport::TestCase
     ENVIRONMENTS.each do |env|
       %i[phone whatsapp].each do |key|
         value = support(env)[key].to_s
-        assert_match(/\A([1-9]\d{11,12})?\z/, value, "#{env}.#{key} : chiffres seuls, indicatif 225 compris, sans + ni 0 de tête")
+        assert_match(NUMBER, value, "#{env}.#{key} : chiffres seuls, indicatif 225 compris, sans + ni 0 de tête")
       end
     end
+  end
+
+  test "the number pattern refuses a leading 0 and a missing country code, and accepts 2250584258085" do
+    %w[0225058425808 0584258085].each { assert_no_match NUMBER, it, it }
+    assert_match NUMBER, "2250584258085"
   end
 
   test "the application reads the support data of its environment" do

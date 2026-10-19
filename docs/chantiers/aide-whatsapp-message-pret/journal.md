@@ -9,6 +9,7 @@
 | 2026-10-16 | Le test de la configuration refuse un numéro qui commence par 0 | `wa.me/0584258085` n'ouvre aucune conversation | Non |
 | 2026-10-16 | Plus d'identifiant public dans le message | Consigne du porteur : pas d'identifiant interne ; la personne ne le connaît pas | Non (UDR-0128 §2) |
 | 2026-10-16 | « Besoin d'aide ? » dans l'en-tête de la direction | Le porteur demande la carte ouverte pour la direction ; elle n'y avait aucun accès | Non (UDR-0128 §3.4, amende UDR-0006) |
+| 2026-10-19 | Élève : prénom seul dans le message ; enseignant(e) et direction gardent le nom complet | Décision du porteur : le texte part vers Meta dès le clic (il est dans l'URL), et un élève peut être mineur | Non (UDR-0128 §2, §3.1) |
 
 ## Ce qui a dérapé
 

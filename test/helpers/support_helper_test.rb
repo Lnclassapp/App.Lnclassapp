@@ -64,16 +64,18 @@ class SupportHelperTest < ActionView::TestCase
     assert_equal %i[faq whatsapp call], support_contacts.map(&:key)
   end
 
-  # UDR-0128 §3.1 : élève connecté — nom, rôle et classe, établissement ; rien d'autre.
-  test "a signed-in student gets a message with their name, classroom and school" do
+  # UDR-0128 §3.1 : élève connecté — prénom seul (le texte part vers Meta, l'élève est peut-être mineur), rôle et
+  # classe, établissement ; rien d'autre.
+  test "a signed-in student gets a message with their first name only, classroom and school" do
     about = About.new(gender: "female", classroom: "Tle D 1", school: "Lycée moderne de Cocody")
+    text = text_of(account(:student, about:))
 
-    assert_equal "Bonjour Lnclass, je suis Awa Koné, élève de Tle D 1, Lycée moderne de Cocody. Ma question : ",
-                 text_of(account(:student, about:))
+    assert_equal "Bonjour Lnclass, je suis Awa, élève de Tle D 1, Lycée moderne de Cocody. Ma question : ", text
+    assert_not_includes text, "Koné"
   end
 
-  test "a student without an active classroom is introduced as a student, without classroom nor school" do
-    assert_equal "Bonjour Lnclass, je suis Awa Koné, élève. Ma question : ", text_of(account(:student))
+  test "a student without an active classroom is introduced by first name as a student, without classroom nor school" do
+    assert_equal "Bonjour Lnclass, je suis Awa, élève. Ma question : ", text_of(account(:student))
   end
 
   # UDR-0128 §3.1 : « enseignant » ou « enseignante » selon le genre du compte, sa matière, son établissement principal.
@@ -91,6 +93,13 @@ class SupportHelperTest < ActionView::TestCase
                  text_of(account(:teacher, name: "Yao Kouassi", about: About.new(gender: "male")))
   end
 
+  test "a teacher with a subject but no primary school gets the subject without a trailing comma" do
+    about = About.new(gender: "female", material: "Mathématiques")
+
+    assert_equal "Bonjour Lnclass, je suis Awa Koné, enseignante de Mathématiques. Ma question : ",
+                 text_of(account(:teacher, about:))
+  end
+
   # UDR-0128 §3.1 : la fonction n'est pas enregistrée ; « membre de la direction » et l'établissement.
   test "a school admin gets a message with their name, the direction and the school" do
     about = About.new(gender: "male", school: "Collège Notre-Dame")
@@ -99,15 +108,18 @@ class SupportHelperTest < ActionView::TestCase
                  text_of(account(:school_admin, name: "Koffi Yao", about:))
   end
 
-  # UDR-0128 §3.1 : aucun identifiant, même public (ADR-0029) : le nom et l'établissement suffisent au support.
-  test "the message never carries an identifier, even the public one" do
-    about = About.new(gender: "female", classroom: "Tle D 1", school: "Lycée moderne de Cocody")
+  test "a school admin without a school is introduced by name and the direction alone" do
+    assert_equal "Bonjour Lnclass, je suis Koffi Yao, membre de la direction. Ma question : ",
+                 text_of(account(:school_admin, name: "Koffi Yao", about: About.new(gender: "male")))
+  end
 
-    %i[student teacher school_admin].each do |role|
-      text = text_of(account(role, about:))
-      assert_not_includes text, "ELV-7K2M9Q", role
-      assert_not_includes text, "identifiant", role
-    end
+  # UDR-0128 §3.1 : aucun identifiant, même public (ADR-0029) : le nom et l'établissement suffisent au support.
+  test "the message is exactly the introduction, even when the account has a public id" do
+    about = About.new(gender: "female", classroom: "Tle D 1", school: "Lycée moderne de Cocody")
+    user = account(:student, about:)
+
+    assert_equal "ELV-7K2M9Q", user.public_id
+    assert_equal "Bonjour Lnclass, je suis Awa, élève de Tle D 1, Lycée moderne de Cocody. Ma question : ", text_of(user)
   end
 
   test "a team member, a visitor and a shell without data get the plain message" do
@@ -126,10 +138,10 @@ class SupportHelperTest < ActionView::TestCase
     query = href.delete_prefix(WA)
 
     assert_match %r{\Ahttps://wa\.me/2250700000000\?text=[A-Za-z0-9%._~-]+\z}, href
-    assert_includes query, "N%27Guessan"
+    assert_includes query, "d%27Abidjan"
     assert_includes query, "1%C3%A8re"
     assert_includes query, "%20%26%20Co"
-    assert_equal "Bonjour Lnclass, je suis Ahou N'Guessan, élève de 1ère A, Lycée d'Abidjan & Co. Ma question : ",
+    assert_equal "Bonjour Lnclass, je suis Ahou, élève de 1ère A, Lycée d'Abidjan & Co. Ma question : ",
                  URI.decode_www_form_component(query)
   end
 end

@@ -1,7 +1,7 @@
 require "test_helper"
 
 # UDR-0128 (aide-whatsapp-message-pret, CA-1 à CA-5) : la ligne WhatsApp de la carte d'aide ouvre une conversation avec
-# un message prêt qui présente la personne connectée (nom, rôle, établissement) ; un visiteur reçoit le message simple.
+# un message prêt qui présente la personne connectée (nom, rôle, établissement ; l'élève, par son prénom seul) ; un visiteur reçoit le message simple.
 # Le message ne porte jamais le numéro de la personne (WhatsApp le transmet déjà), ni son PIN, ni un code, ni un
 # identifiant. Les données viennent de la lecture du shell déjà faite pour l'en-tête : aucune requête de plus
 # (test/infrastructure/queries/identity/shell_user_query_test.rb). La direction reçoit la carte dans son en-tête
@@ -24,7 +24,7 @@ class Communication::HelpSheetWhatsappMessageTest < ActionDispatch::IntegrationT
     assert_no_match(/\d{4,}/, message)
   end
 
-  test "CA-1: a signed-in student opens WhatsApp with a message giving their name, classroom and school" do
+  test "CA-1: a signed-in student opens WhatsApp with a message giving their first name only, classroom and school" do
     classroom = create_classroom(name: "Tle D 1", school: create_school(name: "Lycée moderne de Cocody"))
     student = create_student(classroom:, first_name: "Awa", last_name: "Koné")
     sign_in_as student
@@ -33,8 +33,8 @@ class Communication::HelpSheetWhatsappMessageTest < ActionDispatch::IntegrationT
 
     assert_response :success
     message = whatsapp_message
-    assert_equal "Bonjour Lnclass, je suis Awa Koné, élève de Tle D 1, Lycée moderne de Cocody. Ma question : ",
-                 message
+    assert_equal "Bonjour Lnclass, je suis Awa, élève de Tle D 1, Lycée moderne de Cocody. Ma question : ", message
+    assert_not_includes message, "Koné"
     assert_no_secret student, message
   end
 

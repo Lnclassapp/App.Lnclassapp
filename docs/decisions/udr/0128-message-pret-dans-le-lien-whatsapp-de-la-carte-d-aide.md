@@ -3,7 +3,7 @@
 titre: Message prêt dans le lien WhatsApp de la carte d'aide
 statut: Accepté
 adr-lie: [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md)
-problematique: La ligne WhatsApp de la carte d'aide ouvre une conversation vide : le support doit demander qui écrit. Le lien devient `wa.me/<numéro>?text=<message encodé>` : élève (nom, classe, établissement), enseignant(e) (nom, matière, établissement), direction (nom, établissement) ; équipe et visiteur : « Bonjour Lnclass, ma question : ». Jamais un numéro, un secret ni un identifiant. La direction gagne « Besoin d'aide ? » dans son en-tête. Amende UDR-0061 §3.4 et UDR-0006.
+problematique: La ligne WhatsApp de la carte d'aide ouvre une conversation vide : le support doit demander qui écrit. Le lien devient `wa.me/<numéro>?text=<message encodé>` : élève (prénom seul, classe, établissement), enseignant(e) (nom, matière, établissement), direction (nom, établissement) ; équipe et visiteur : « Bonjour Lnclass, ma question : ». Jamais un numéro, un secret ni un identifiant. La direction gagne « Besoin d'aide ? » dans son en-tête. Amende UDR-0061 §3.4 et UDR-0006.
 -->
 
 | | |
@@ -23,7 +23,7 @@ Quand une personne touche « Chatter avec le support » dans la carte d'aide, Wh
 
 ## 2. Décision
 
-Le lien WhatsApp porte un **message prêt**, que WhatsApp écrit dans le champ de saisie : la personne le relit, le modifie si elle veut, puis envoie. Le message présente la personne connectée avec ce que le shell a déjà lu pour l'en-tête : nom, rôle (avec la classe ou la matière), établissement. Pas de formulaire, pas d'écran en plus, pas de service tiers. La direction reçoit « Besoin d'aide ? » dans son en-tête, comme l'enseignant.
+Le lien WhatsApp porte un **message prêt**, que WhatsApp écrit dans le champ de saisie : la personne le relit, le modifie si elle veut, puis envoie. Le message présente la personne connectée avec ce que le shell a déjà lu pour l'en-tête : nom, rôle (avec la classe ou la matière), établissement. **L'élève n'y met que son prénom** : le texte part vers Meta dès le clic (il est dans l'URL, avant même que la personne envoie), et un élève peut être mineur ; les autres rôles gardent leur nom complet. Pas de formulaire, pas d'écran en plus, pas de service tiers. La direction reçoit « Besoin d'aide ? » dans son en-tête, comme l'enseignant.
 
 **Pourquoi pas d'identifiant**, même le `public_id` (ADR-0029) : la personne ne le connaît pas, il n'a aucun sens pour elle dans un message qu'elle relit, et le porteur l'a exclu (« pas d'identifiant interne »). Le nom, l'établissement et le numéro, que WhatsApp transmet, suffisent au support. **Pourquoi pas la page d'origine** : aucune page ne pose de titre lisible dans le shell, et une adresse porterait des `public_id`.
 
@@ -33,13 +33,14 @@ Le lien WhatsApp porte un **message prêt**, que WhatsApp écrit dans le champ d
 
 | Qui | Message |
 |---|---|
-| Élève avec une classe active | « Bonjour Lnclass, je suis Awa Koné, élève de Tle D 1, Lycée moderne de Cocody. Ma question : » |
-| Élève sans classe active | « Bonjour Lnclass, je suis Awa Koné, élève. Ma question : » |
+| Élève avec une classe active | « Bonjour Lnclass, je suis Awa, élève de Tle D 1, Lycée moderne de Cocody. Ma question : » |
+| Élève sans classe active | « Bonjour Lnclass, je suis Awa, élève. Ma question : » |
 | Enseignant(e) | « Bonjour Lnclass, je suis Yao Kouassi, enseignant de Mathématiques, Lycée moderne de Cocody. Ma question : » — « enseignante » pour un compte `female` |
 | Enseignant(e) sans matière ni établissement principal | « …, enseignant. Ma question : » |
 | Direction | « Bonjour Lnclass, je suis Koffi Yao, membre de la direction, Collège Notre-Dame. Ma question : » |
 | Équipe, visiteur (connexion, inscription élève), shell sans données | « Bonjour Lnclass, ma question : » |
 
+- **Élève : prénom seul** (`ShellUser#first_name`), jamais le nom de famille ; enseignant(e) et direction : nom complet.
 - Les éléments absents sont omis, avec leur virgule (UDR-0057 §2.5) : jamais « élève de , ».
 - L'établissement suit après une virgule plutôt que « au … » : l'article dépend du nom (« au Lycée », « à l'École », « à la Cité ») et n'est pas enregistré.
 - La fonction de la direction n'est pas enregistrée : « membre de la direction ».

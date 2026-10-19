@@ -8,7 +8,7 @@ La ligne WhatsApp de la carte d'aide ouvre une conversation vide ([memo](memo.md
 
 | Acteur | Peut | Ne peut pas |
 |---|---|---|
-| Élève | Ouvrir WhatsApp avec nom, classe, établissement | Voir les données d'un autre compte |
+| Élève | Ouvrir WhatsApp avec son prénom seul, sa classe, son établissement | Voir les données d'un autre compte |
 | Enseignant(e) | Idem avec sa matière et son établissement principal | — |
 | Visiteur | Ouvrir WhatsApp avec le message simple | — |
 | Direction | Ouvrir la carte depuis son en-tête, WhatsApp avec nom, « membre de la direction », établissement | — |
@@ -21,7 +21,7 @@ Aucune règle d'autorisation nouvelle : le message ne lit que la personne connec
 ### Chemin nominal
 
 1. L'élève touche « Besoin d'aide ? », puis « Chatter avec le support ».
-2. WhatsApp s'ouvre sur la conversation du support, le champ rempli : « Bonjour Lnclass, je suis Awa Koné, élève de Tle D 1, Lycée moderne de Cocody. Ma question : ».
+2. WhatsApp s'ouvre sur la conversation du support, le champ rempli : « Bonjour Lnclass, je suis Awa, élève de Tle D 1, Lycée moderne de Cocody. Ma question : ».
 3. Elle écrit sa question à la suite et envoie.
 
 ### Chemins alternatifs et erreurs
@@ -29,7 +29,7 @@ Aucune règle d'autorisation nouvelle : le message ne lit que la personne connec
 | Situation | Comportement attendu |
 |---|---|
 | Visiteur (connexion, inscription élève) | « Bonjour Lnclass, ma question : » |
-| Élève sans classe active | « …, élève. Ma question : » |
+| Élève sans classe active | « Bonjour Lnclass, je suis Awa, élève. Ma question : » |
 | Numéro WhatsApp absent de la configuration | Pas de ligne WhatsApp (inchangé) |
 | Numéro configuré avec un 0 de tête | Le test de la configuration échoue avant la mise en ligne |
 
@@ -40,7 +40,8 @@ Scénario: CA-1 — élève connecté
   Étant donné l'élève Awa Koné, en Tle D 1 au Lycée moderne de Cocody
   Quand elle ouvre la carte d'aide
   Alors le lien WhatsApp est wa.me/<numéro configuré>?text=<message encodé>
-  Et le message décodé est « Bonjour Lnclass, je suis Awa Koné, élève de Tle D 1, Lycée moderne de Cocody. Ma question : »
+  Et le message décodé est « Bonjour Lnclass, je suis Awa, élève de Tle D 1, Lycée moderne de Cocody. Ma question : »
+  Et il ne contient pas son nom de famille (le texte part vers Meta dès le clic ; un élève peut être mineur)
   Et il ne contient ni son numéro, ni son code secret, ni aucun identifiant
 
 Scénario: CA-2 — enseignant connecté
