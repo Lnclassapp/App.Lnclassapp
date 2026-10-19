@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage — en attente de validation du porteur |
+| **Statut** | livré — PR prête vers `Develop` (2026-10-16), recommandations Q1 à Q12 acceptées par le porteur |
 | **Ouvert le** | 2026-10-16 |
 | **Branche** | `docs/cadrage-remediation-ciblee` (cadrage, docs seules) ; le code passera par `feature/remediation-ciblee` et une PR |
 | **Programme** | `refonte-application`, vague **V5** ([feuille de route §5](../refonte-application/feuille-de-route.md#v5--remédiation-et-lacunes)) : AS-16 et AS-17. La feuille de route nomme ce chantier `remediation` ; il s'appelle `remediation-ciblee` |
@@ -103,7 +103,7 @@ Le grill a porté sur le code réel, pas sur l'ADR-0043. Il a trouvé que le lan
 
 ## Questions encore ouvertes
 
-- Q1 à Q12 ci-dessus, en attente du porteur. Le PRD, l'ADR-0101 et les UDR-0119 à 0121 sont écrits **selon les recommandations** ; une réponse contraire les modifie avant le code.
+- Aucune. Q1 à Q12 : recommandations acceptées par le porteur le 2026-10-16 (ci-dessous) ; l'ADR-0101 et les UDR-0119 à 0121 passent « Accepté ».
 
 ## Réponses du porteur (2026-10-16)
 

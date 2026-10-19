@@ -67,6 +67,25 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #replace_school_code"
       end
 
+      # ADR-0096 §4.4 : établissements de la sélection (Dtos::School::SchoolSelection, mêmes filtres que la liste) créés avant
+      # `created_before`. → Integer
+      def count_for_code_regeneration(selection:, created_before:)
+        raise NotImplementedError, "#{self.class} doit implémenter #count_for_code_regeneration"
+      end
+
+      # Les mêmes, id > after_id, par id croissant, `limit` au plus ; label = nom, rotated_at = school_code_rotated_at.
+      # → [Entities::School::RegenerationCandidate]
+      def code_regeneration_batch(selection:, created_before:, after_id:, limit:)
+        raise NotImplementedError, "#{self.class} doit implémenter #code_regeneration_batch"
+      end
+
+      # rows : [{ id:, school_code: }] ; un seul UPDATE qui pose le code et school_code_rotated_at = at, seulement là où le code
+      # n'a pas changé depuis `unchanged_since` (course avec le geste un par un, reprise). Un code pris lève l'erreur d'unicité :
+      # l'appelant écrit dans TransactionPort#attempt. → [Integer] (ids écrits)
+      def replace_school_codes(rows:, at:, unchanged_since:)
+        raise NotImplementedError, "#{self.class} doit implémenter #replace_school_codes"
+      end
+
       # Candidats à la génération des classes manquantes (ADR-0056) : statut active ou draft, aucune classe (active ou
       # archivée) de school_year, id > after_id, par id croissant, `limit` au plus. → [Inserted]
       def without_classrooms(school_year:, after_id:, limit:)

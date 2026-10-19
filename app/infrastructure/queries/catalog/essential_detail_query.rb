@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Catalog::EssentialDetailQuery
-# Rôle : une fiche essentielle, son cours et ses exercices ; pour un élève, sa progression, ses assignations et sa lacune
-# ADR  : 0026, 0028, 0033, 0035, 0043, 0048, 0072 · UDR : 0015
+# Rôle : une fiche essentielle, son cours et ses exercices ; pour un élève, sa progression, ses assignations, sa lacune et l'exercice proposé
+# ADR  : 0026, 0028, 0033, 0035, 0043, 0048, 0072, 0101 · UDR : 0015, 0119
 module Queries
   module Catalog
     class EssentialDetailQuery
@@ -12,7 +12,10 @@ module Queries
       # started_session_public_id valent nil.
       ExerciseRow = Data.define(:public_id, :title, :description, :exercise_type, :status, :questions_count,
                                 :assigned_to_my_classroom, :badge_level, :best_score_percent, :started_session_public_id)
-      GapRow = Data.define(:public_id, :opened_at)
+      # exercise : l'ExerciseRow proposé pour lever la lacune (ADR-0101 §4.2), ou nil sans exercice publié.
+      GapRow = Data.define(:public_id, :opened_at, :exercise)
+      # RemediationPick lit id et exercise_type : l'identifiant public suffit pour écarter l'exercice raté.
+      PickCandidate = Data.define(:id, :exercise_type, :row)
 
       HEADER_COLUMNS = %w[essentials.id essentials.slug essentials.name essentials.subtitle essentials.status
                           courses.slug courses.name courses.status levels.name series.name materials.name
@@ -28,9 +31,9 @@ module Queries
                         .where(slug:, courses: { slug: course_slug }).pick(*HEADER_COLUMNS)
         return if essential_id.nil?
 
+        exercises = exercises(essential_id, student_id, include_unpublished)
         Row.new(essential: essential_row(essential_id, values.take(4)), course: CourseRow.new(*values.drop(4)),
-                exercises: exercises(essential_id, student_id, include_unpublished),
-                pending_gap: pending_gap(essential_id, student_id))
+                exercises:, pending_gap: pending_gap(essential_id, student_id, exercises))
       end
 
       private
@@ -72,12 +75,21 @@ module Queries
                                 .pluck(:assignable_id).to_set
       end
 
-      # Une seule lacune en attente par élève et par fiche, garantie en base (ADR-0043).
-      def pending_gap(essential_id, student_id)
+      # Une seule lacune en attente par élève et par fiche, garantie en base (ADR-0043). L'exercice raté est celui de la
+      # session source ; l'exercice proposé se choisit parmi les exercices publiés déjà lus (ADR-0101 §4.2).
+      def pending_gap(essential_id, student_id, exercises)
         return if student_id.nil?
 
-        public_id, opened_at = Orm::KnowledgeGap.where(student_id:, essential_id:, status: "pending").pick(:public_id, :created_at)
-        GapRow.new(public_id:, opened_at:) if public_id
+        public_id, opened_at, source_public_id =
+          Orm::KnowledgeGap.joins(source_session: :exercise).where(student_id:, essential_id:, status: "pending")
+                           .pick(:public_id, :created_at, "exercises.public_id")
+        GapRow.new(public_id:, opened_at:, exercise: offered_exercise(exercises, source_public_id)) if public_id
+      end
+
+      def offered_exercise(exercises, source_public_id)
+        candidates = exercises.select { it.status == "published" }
+                              .map { PickCandidate.new(id: it.public_id, exercise_type: it.exercise_type, row: it) }
+        Entities::Assessment::RemediationPick.call(exercises: candidates, source_exercise_id: source_public_id)&.row
       end
     end
   end
