@@ -1,14 +1,14 @@
 # UDR-0103 : Historique de l'élève — « Mes classes » dit la période de chaque classe et marque la classe actuelle
 <!-- index
 titre: Historique élève : période de chaque classe, classe actuelle marquée
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-16)*
 adr-lie: [0095](../adr/0095-l-eleve-change-lui-meme-de-classe-et-d-etablissement.md)
 problematique: Élève qui a changé de classe dans l'année : deux classes de la même année se distinguent par leur période (« depuis le 12 oct. » / « du 15 sept. au 12 oct. ») ; la classe actuelle porte le badge « Actuelle ». Amende UDR-0090 §3.3
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-16)* |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/changement-etablissement-eleve`](../../chantiers/changement-etablissement-eleve/memo.md) |
 | **ADR lié** | [ADR-0095](../adr/0095-l-eleve-change-lui-meme-de-classe-et-d-etablissement.md) |
