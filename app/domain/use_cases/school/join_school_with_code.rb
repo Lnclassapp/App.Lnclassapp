@@ -52,7 +52,7 @@ module UseCases
         return destination if destination.is_a?(Shared::Result)
 
         school, via = destination
-        @transaction.call { join(actor, school, via, primary: schools_count.zero?, session_id:, now: @clock.now) }
+        @transaction.call { join(actor, school, via, session_id:, now: @clock.now) }
       rescue Aborted => e
         e.result
       end
@@ -86,15 +86,16 @@ module UseCases
         @drenas.find_by_public_id(public_id: drena_public_id)&.id == school.drena_id
       end
 
-      # Sous le verrou du compte (attach_teacher_within_cap) : déjà rattaché ou plafond atteint par un autre onglet.
-      def join(actor, school, via, primary:, session_id:, now:)
-        attached = @schools.attach_teacher_within_cap(teacher_id: actor.user_id, school_id: school.id, primary:,
+      # Sous le verrou du compte (attach_teacher_within_cap) : déjà rattaché ou plafond atteint par un autre onglet. Le
+      # principal est décidé sous ce verrou et rendu : un autre onglet a pu rattacher un établissement depuis la lecture.
+      def join(actor, school, via, session_id:, now:)
+        attached = @schools.attach_teacher_within_cap(teacher_id: actor.user_id, school_id: school.id,
                                                       cap: Entities::School::TeacherSchools::MAX, at: now)
         raise Aborted, attached if attached.failure?
 
         @audit_log.record(action: "school.changed", actor_id: actor.user_id, at: now, subject_type: "School",
                           subject_id: school.id, metadata: { change: "teacher_joined", via: })
-        @sessions.set_current_school(id: session_id, school_id: school.id) if session_id && !primary
+        @sessions.set_current_school(id: session_id, school_id: school.id) if session_id && !attached.value
         Shared::Result.success(school)
       end
     end

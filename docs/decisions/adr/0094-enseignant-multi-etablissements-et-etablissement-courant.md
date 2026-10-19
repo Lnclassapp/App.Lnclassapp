@@ -102,11 +102,11 @@ ORDER BY (school_id = $2) DESC LIMIT 1
 
 | Use case | Signature | Écritures | Refus | Audit |
 |---|---|---|---|---|
-| `School::JoinSchoolWithCode` (**amendé**) | `call(actor:, dto:)` ; `dto` : `SchoolJoinInput` (DRENA → établissement) **ou** `SchoolInviteJoinInput` (`token`) | `attach_teacher_within_cap(teacher_id:, school_id:, primary: schools_count.zero?, cap: MAX, at:)` ; si `primary: false`, la session passe sur le nouvel établissement (`set_current_school`) | `:forbidden` (policy, plafond) ; `:invalid` `school_public_id: [:inclusion]` (même erreur neutre : inconnu, inactif, autre DRENA, **départ ouvert**, lien invalide) ; `:conflict` `base: [:already_attached]` (déjà rattaché) ; `:conflict` `base: [:schools_limit]` (plafond atteint sous verrou) | `school.changed`, `{ change: "teacher_joined", via: "standard" \| "colleague" \| "direction" \| "team" }` |
-| `School::SwitchCurrentSchool` (**nouveau**) | `call(actor:, session_id:, school_public_id:)` | `SessionRepositoryPort#set_current_school(id:, school_id:)` | `:forbidden` (policy) ; `:not_found` (établissement inconnu) | aucun : un choix d'affichage |
-| `School::LeaveSchool` (**nouveau**) | `call(actor:, school_public_id:)` | `withdraw_all_in_school` ; `archive_all_by_teacher_in_school(archived_by_id: actor.user_id)` ; `detach_teacher` ; `promote_primary` ; **pas** de `teacher_school_departures` (il peut revenir) | `:forbidden` (dernier établissement) ; `:not_found` (non rattaché) | `teacher.left`, sujet le compte, `{ school_id:, classrooms_count:, assignments_archived: }` |
-| `School::DetachTeacher` (**amendé**, ADR-0071) | inchangée | après `detach_teacher` : `promote_primary(teacher_id:)` | inchangés | inchangé |
-| `School::ReinstateTeacher` (**amendé**, ADR-0071) | inchangée | `attach_teacher_within_cap(primary: schools_count.zero?)` ; ferme le départ | `:not_found` : pas de départ ouvert, ou anonymisé (« a un établissement » n'est plus un refus) ; **`:conflict` `base: [:schools_limit]`** au plafond | inchangé |
+| `School::JoinSchoolWithCode` (**amendé**) | `call(actor:, dto:)` ; `dto` : `SchoolJoinInput` (DRENA → établissement) **ou** `SchoolInviteJoinInput` (`token`) | `attach_teacher_within_cap(teacher_id:, school_id:, cap: MAX, at:)`, qui décide et rend le principal sous le verrou ; s'il rend `false`, la session passe sur le nouvel établissement (`set_current_school`) | `:forbidden` (policy, plafond) ; `:invalid` `school_public_id: [:inclusion]` (même erreur neutre : inconnu, inactif, autre DRENA, **départ ouvert**, lien invalide) ; `:conflict` `base: [:already_attached]` (déjà rattaché) ; `:conflict` `base: [:schools_limit]` (plafond atteint sous verrou) | `school.changed`, `{ change: "teacher_joined", via: "standard" \| "colleague" \| "direction" \| "team" }` |
+| `School::SwitchCurrentSchool` (**nouveau**) | `call(actor:, session_id:, school_public_id:)` | `SessionRepositoryPort#set_current_school(id:, school_id:)` | `:forbidden` (policy) ; `:not_found` (établissement inconnu, ou session révoquée entre-temps : 0 ligne) | aucun : un choix d'affichage |
+| `School::LeaveSchool` (**nouveau**) | `call(actor:, school_public_id:)` | sous `lock_teacher`, la règle rejouée sur un compte frais ; `withdraw_all_in_school` ; `archive_all_by_teacher_in_school(archived_by_id: actor.user_id)` ; `detach_teacher` ; `promote_primary` ; **pas** de `teacher_school_departures` (il peut revenir) | `:forbidden` (dernier établissement) ; `:not_found` (non rattaché) | `teacher.left`, sujet le compte, `{ school_id:, classrooms_count:, assignments_archived: }` |
+| `School::DetachTeacher` (**amendé**, ADR-0071) | inchangée | `lock_teacher` d'abord ; après `detach_teacher` : `promote_primary(teacher_id:)` | inchangés | inchangé |
+| `School::ReinstateTeacher` (**amendé**, ADR-0071) | inchangée | `attach_teacher_within_cap` (principal décidé sous le verrou) ; ferme le départ | `:not_found` : pas de départ ouvert, ou anonymisé (« a un établissement » n'est plus un refus) ; **`:conflict` `base: [:schools_limit]`** au plafond | inchangé |
 
 `Entities::Identity::AuditAction::ALL` gagne `teacher.left`.
 
@@ -116,11 +116,12 @@ Rejoindre ne crée **aucune** ligne `school_join_requests` (ADR-0083 §4.3) et n
 
 | Port | Méthode | Contrat |
 |---|---|---|
-| `Ports::School::SchoolRepositoryPort` | `attach_teacher_within_cap(teacher_id:, school_id:, primary:, cap:, at:)` (**nouveau**) | Verrouille la ligne `users` de l'enseignant (`FOR UPDATE`), compte ses lignes, insère. → `Result` succès \| `:conflict` `already_attached` \| `:conflict` `schools_limit` |
+| `Ports::School::SchoolRepositoryPort` | `attach_teacher_within_cap(teacher_id:, school_id:, cap:, at:)` (**nouveau**) | Verrouille la ligne `users` de l'enseignant (`FOR UPDATE`), compte ses lignes, insère, principale si c'est la première. → `Result(Boolean : principale)` \| `:conflict` `already_attached` (aussi un doublon de l'index unique) \| `:conflict` `schools_limit` |
+| | `lock_teacher(teacher_id:)` (**nouveau**, revue de la PR) | Verrouille la ligne `users` jusqu'à la fin de la transaction : quitter et retirer comptent après lui. → `true` |
 | | `school_ids_for(teacher_id:)` (**nouveau**) | `[Integer]`, le principal en premier, puis par `created_at`, `id` |
-| | `promote_primary(teacher_id:)` (**nouveau**) | Si aucune ligne principale ne reste, marque la plus ancienne. → `Integer \| nil` (l'établissement principal) |
+| | `promote_primary(teacher_id:)` (**nouveau**) | Si aucune ligne principale ne reste, marque la plus ancienne (`update_all`, compte lu). → `Integer \| nil` (l'établissement principal ; `nil` aussi si la ligne a disparu avant d'être marquée) |
 | | `attach_teacher`, `detach_teacher`, `primary_school_id_for` | Inchangés |
-| `Ports::Identity::SessionRepositoryPort` | `set_current_school(id:, school_id:)` (**nouveau**) | `true` |
+| `Ports::Identity::SessionRepositoryPort` | `set_current_school(id:, school_id:)` (**nouveau**) | `Integer` (sessions modifiées) |
 | `Ports::Identity::UserRepositoryPort` | `actor_for(user_id:, current_school_id: nil)` (**amendé**) | `Entities::Identity::Actor` (§4.2) |
 | `Ports::Identity::InviteLinkRepositoryPort` | `resolve(token:)` | Inchangé |
 
@@ -198,24 +199,29 @@ end
 ```ruby
 # app/infrastructure/repositories/school/school_repository.rb (extrait)
 # Verrou de la ligne users : deux « Rejoindre » simultanés ne dépassent pas le plafond (même motif que attach_by_code, ADR-0077).
-def attach_teacher_within_cap(teacher_id:, school_id:, primary:, cap:, at:)
+# Le principal se décide sous le verrou (revue de la PR) : jamais d'après une lecture faite avant lui.
+def attach_teacher_within_cap(teacher_id:, school_id:, cap:, at:)
   Orm::TeacherSchool.transaction(requires_new: true) do
-    Orm::User.where(id: teacher_id).lock.pick(:id)
-    return ::Shared::Result.failure(:conflict, errors: { base: [ :already_attached ] }) if Orm::TeacherSchool.exists?(teacher_id:, school_id:)
-    return ::Shared::Result.failure(:conflict, errors: { base: [ :schools_limit ] }) if Orm::TeacherSchool.where(teacher_id:).count >= cap
+    lock_teacher(teacher_id:)
+    attached = Orm::TeacherSchool.where(teacher_id:).pluck(:school_id)
+    next ::Shared::Result.failure(:conflict, errors: ALREADY_ATTACHED) if attached.include?(school_id)
+    next ::Shared::Result.failure(:conflict, errors: SCHOOLS_LIMIT) if attached.size >= cap
 
-    Orm::TeacherSchool.create!(teacher_id:, school_id:, primary:, created_at: at)
+    Orm::TeacherSchool.create!(teacher_id:, school_id:, primary: attached.empty?, created_at: at)
+    ::Shared::Result.success(attached.empty?)
   end
-  ::Shared::Result.success
+rescue ActiveRecord::RecordNotUnique
+  ::Shared::Result.failure(:conflict, errors: ALREADY_ATTACHED)
 end
 
 def promote_primary(teacher_id:)
   current = primary_school_id_for(teacher_id:)
   return current if current
 
-  oldest = Orm::TeacherSchool.where(teacher_id:).order(:created_at, :id).first
-  oldest&.update_columns(primary: true)
-  oldest&.school_id
+  id, school_id = Orm::TeacherSchool.where(teacher_id:).order(:created_at, :id).pick(:id, :school_id)
+  return if id.nil?
+
+  school_id unless Orm::TeacherSchool.where(id:).update_all(primary: true).zero?
 end
 ```
 

@@ -22,14 +22,19 @@ module UseCases
         def primary_for(student_id:) = (@membership if student_id == STUDENT.id)
       end
 
+      # La classe 3 est dans l'établissement 1, la classe 9 dans l'établissement 2.
       class FakeTeachings
         include Ports::Classroom::TeachingRepositoryPort
 
-        def classroom_ids_for(teacher_id:) = { 5 => [ 3 ], 6 => [ 9 ] }.fetch(teacher_id, [])
+        SCHOOL_OF = { 3 => 1, 9 => 2 }.freeze
+
+        def classroom_ids_for(teacher_id:, school_id: nil)
+          { 5 => [ 3, 9 ], 6 => [ 9 ] }.fetch(teacher_id, []).select { school_id.nil? || SCHOOL_OF[it] == school_id }
+        end
       end
 
-      def membership(status: "active")
-        Entities::Classroom::Membership.new(classroom_id: 3, student_id: STUDENT.id, primary: true, joined_at: Time.utc(2026, 9, 1),
+      def membership(status: "active", classroom_id: 3)
+        Entities::Classroom::Membership.new(classroom_id:, student_id: STUDENT.id, primary: true, joined_at: Time.utc(2026, 9, 1),
                                             left_at: nil, classroom_status: status)
       end
 
@@ -39,7 +44,8 @@ module UseCases
                         .call(actor:, target_public_id: public_id)
       end
 
-      def actor(user_id, role) = Entities::Identity::Actor.new(user_id:, role:)
+      # Un enseignant est dans son établissement courant : le 1 par défaut.
+      def actor(user_id, role, school_id: (1 if role == :teacher)) = Entities::Identity::Actor.new(user_id:, role:, school_id:)
 
       test "the student, the team and the teacher of the student's classroom read the photo" do
         [ actor(20, :student), actor(7, :team), actor(5, :teacher) ].each do |reader|
@@ -60,6 +66,15 @@ module UseCases
         assert_equal :forbidden, read(actor(5, :teacher), membership: nil).code
         assert_equal :forbidden, read(actor(6, :teacher), public_id: TEACHER_USER.public_id).code
         assert_equal :forbidden, read(nil).code
+      end
+
+      # Revue de la PR #250, constat 3 (ADR-0094 §10) : l'enseignant de A et de B, passé dans A, ne lit pas la photo de
+      # l'élève de sa classe de B ; passé dans B, si.
+      test "a teacher in A is refused the photo of a student of his classroom of B; in B, he reads it" do
+        in_b = membership(classroom_id: 9)
+
+        assert_equal :forbidden, read(actor(5, :teacher), membership: in_b).code
+        assert read(actor(5, :teacher, school_id: 2), membership: in_b).success?
       end
 
       test "an unknown account, or an account without a photo: not found" do

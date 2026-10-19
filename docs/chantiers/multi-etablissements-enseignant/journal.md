@@ -85,6 +85,18 @@ Si la requête 1 rend autre chose que 0 : ces lignes deviennent des établisseme
 | Sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) | Non disponibles dans la session d'exécution | à lancer sur la PR avant la fusion |
 | Une matière par enseignant pour tous ses établissements | `teacher_profiles.material_id` unique ; demande du porteur traitée à part | `enseignant-plusieurs-matieres` (cadré en parallèle) |
 
+## Revue de la PR #250 (sécurité, échecs avalés, tests) — corrigée le 2026-10-16
+
+| Constat | Correction | Preuve |
+|---|---|---|
+| Principal calculé avant le verrou (`JoinSchoolWithCode`, `ReinstateTeacher`) : 500 (`RecordNotUnique`) sur deux « Rejoindre » simultanés sans établissement | `attach_teacher_within_cap` décide `primary = attached.empty?` sous le verrou et le rend ; le use case place la session d'après cette valeur ; `RecordNotUnique` → `:conflict already_attached` | `teacher_primary_concurrency_test.rb` (deux jonctions ; réintégration + jonction), `school_repository_test.rb`, `join_school_with_code_test.rb` |
+| Départ compté hors verrou (`LeaveSchool`, `DetachTeacher`) ; `promote_primary` ignorait les lignes modifiées : zéro établissement ou aucun principal | Port `lock_teacher` en tête de transaction ; `LeaveSchool` rejoue sa policy sous le verrou ; `promote_primary` en `update_all` compté (`nil` si 0) | `teacher_leave_concurrency_test.rb` (deux départs ; départ + retrait ; ligne disparue), `detach_teacher_test.rb` |
+| Trois contrôles hors établissement courant (§10) : résultats de session, code PIN, photo | `school_id: actor.school_id` (`teaches_student?`, `classroom_ids_for`) | `session_result_query_test.rb`, `issue_pin_recovery_code_test.rb`, `read_account_photo_test.rb` |
+| `set_current_school` rendait `true` sans ligne | Rend le nombre de lignes ; `SwitchCurrentSchool` : `:not_found` à 0 | `session_repository_test.rb`, `switch_current_school_test.rb` |
+| Sous filtre DRENA, « comptes enseignants » comptait un enseignant par établissement | `distinct.count(:teacher_id)` ; lignes inchangées (ME-23) ; `CACHE_VERSION` 6 | `team_dashboard_query_test.rb` |
+
+Tests ajoutés aussi : plafond de 3 annonces par établissement (modification, publication programmée), `AuthoredMessagesQuery` par `school_id`, non-fuite d'un cours et d'un essentiel d'un niveau présent dans A et B, badge « Établissement secondaire », modale « Retirer », rôles refusés (`/i/<jeton>`, jonction, `current_schools`, `teacher_schools`), `rate_limit` de la jonction par lien, message du plafond, `joined_via` inchangé (ME-02), retour dans B après l'avoir quitté (ME-13). ADR-0094 §4.4, §4.5 et §6 mis à jour (signature du port, `lock_teacher`).
+
 ## Clôture
 
 | | |

@@ -24,7 +24,8 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #mark_second_factor_verified"
       end
 
-      # Établissement courant d'une session d'enseignant (ADR-0094 §4.1) ; nil le remet sur son principal. → true
+      # Établissement courant d'une session d'enseignant (ADR-0094 §4.1) ; nil le remet sur son principal.
+      # → Integer (sessions modifiées : 0 si elle a été révoquée entre-temps)
       def set_current_school(id:, school_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #set_current_school"
       end

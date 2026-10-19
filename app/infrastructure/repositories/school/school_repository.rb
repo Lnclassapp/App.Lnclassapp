@@ -101,17 +101,27 @@ module Repositories
       SCHOOLS_LIMIT = { base: [ :schools_limit ] }.freeze
 
       # Verrou de la ligne users (ADR-0094 §4.5) : deux « Rejoindre » simultanés du même enseignant se sérialisent, le
-      # second compte la ligne du premier. Savepoint : un refus ne casse pas la transaction du use case.
-      def attach_teacher_within_cap(teacher_id:, school_id:, primary:, cap:, at:)
+      # second compte la ligne du premier ; le principal se décide ici, sous le verrou, jamais avant. Savepoint : un refus
+      # ne casse pas la transaction du use case. Un doublon venu d'un chemin sans verrou (index unique) : :conflict.
+      def attach_teacher_within_cap(teacher_id:, school_id:, cap:, at:)
         Orm::TeacherSchool.transaction(requires_new: true) do
-          Orm::User.where(id: teacher_id).lock.pick(:id)
+          lock_teacher(teacher_id:)
           attached = Orm::TeacherSchool.where(teacher_id:).pluck(:school_id)
           next ::Shared::Result.failure(:conflict, errors: ALREADY_ATTACHED) if attached.include?(school_id)
           next ::Shared::Result.failure(:conflict, errors: SCHOOLS_LIMIT) if attached.size >= cap
 
+          primary = attached.empty?
           Orm::TeacherSchool.create!(teacher_id:, school_id:, primary:, created_at: at)
-          ::Shared::Result.success
+          ::Shared::Result.success(primary)
         end
+      rescue ActiveRecord::RecordNotUnique
+        ::Shared::Result.failure(:conflict, errors: ALREADY_ATTACHED)
+      end
+
+      # FOR UPDATE sur la ligne users, tenu jusqu'à la fin de la transaction de l'appelant.
+      def lock_teacher(teacher_id:)
+        Orm::User.where(id: teacher_id).lock.pick(:id)
+        true
       end
 
       def primary_school_id_for(teacher_id:)
@@ -122,13 +132,16 @@ module Repositories
         Orm::TeacherSchool.where(teacher_id:).order(primary: :desc, created_at: :asc, id: :asc).pluck(:school_id)
       end
 
+      # Le nombre de lignes marquées est lu : la plus ancienne supprimée entre-temps par une autre transaction, rien n'est
+      # promu et nil le dit.
       def promote_primary(teacher_id:)
         current = primary_school_id_for(teacher_id:)
         return current if current
 
-        oldest = Orm::TeacherSchool.where(teacher_id:).order(:created_at, :id).first
-        oldest&.update_columns(primary: true)
-        oldest&.school_id
+        id, school_id = Orm::TeacherSchool.where(teacher_id:).order(:created_at, :id).pick(:id, :school_id)
+        return if id.nil?
+
+        school_id unless Orm::TeacherSchool.where(id:).update_all(primary: true).zero?
       end
 
       def detach_teacher(teacher_id:, school_id:) = Orm::TeacherSchool.where(teacher_id:, school_id:).delete_all

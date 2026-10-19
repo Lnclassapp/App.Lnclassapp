@@ -46,10 +46,15 @@ module UseCases
       private
 
       # Mêmes effets qu'un retrait par la direction dans cet établissement (ADR-0071), sans barrière de retour ; les
-      # sessions, résultats et devoirs archivés restent (ADR-0036). Deux départs simultanés (deux appareils) : la ligne déjà
-      # supprimée, ou plus aucun établissement après celui-ci, annulent tout.
+      # sessions, résultats et devoirs archivés restent (ADR-0036). Sous le verrou du compte, la règle est rejouée sur un
+      # compte frais : deux départs simultanés (deux appareils), ou un départ et un retrait par la direction, se
+      # sérialisent. La ligne déjà supprimée, ou plus aucun établissement après celui-ci, annulent tout.
       def leave(actor, school, now)
         teacher_id = actor.user_id
+        @schools.lock_teacher(teacher_id:)
+        school_ids = @schools.school_ids_for(teacher_id:)
+        allowed = @policy.call(actor:, attached: school_ids.include?(school.id), schools_count: school_ids.size)
+        raise Aborted, allowed if allowed.failure?
         raise Aborted, Shared::Result.failure(:not_found) if @schools.detach_teacher(teacher_id:, school_id: school.id).zero?
         left = Left.new(school:, classrooms_count: @teachings.withdraw_all_in_school(teacher_id:, school_id: school.id),
                         assignments_archived: @assignments.archive_all_by_teacher_in_school(teacher_id:, school_id: school.id,

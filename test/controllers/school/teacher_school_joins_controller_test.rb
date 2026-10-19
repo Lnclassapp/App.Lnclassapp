@@ -100,13 +100,28 @@ class School::TeacherSchoolJoinsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ [ @a.id, true ] ], attached
   end
 
-  test "a student or a direction opening the link signed in goes to their home, as before" do
+  test "a student, a direction or the team opening the link signed in goes to their home, as before; joining is refused" do
     sign_out
-    sign_in_as create_school_admin(school: @a)
-    get teacher_invite_link_path(@b.direction_invite_token)
-    assert_response :redirect
-    assert_not_equal teacher_school_join_path(@b.direction_invite_token), URI(response.location).path
-    get teacher_school_join_path(@b.direction_invite_token)
-    assert_response :forbidden
+    [ create_student, create_school_admin(school: @a), create_team_member ].each do |user|
+      sign_in_as user
+      get teacher_invite_link_path(@b.direction_invite_token)
+      assert_response :redirect, user.role
+      assert_not_equal teacher_school_join_path(@b.direction_invite_token), URI(response.location).path
+      get teacher_school_join_path(@b.direction_invite_token)
+      assert_response :forbidden, user.role
+      post teacher_school_join_path(@b.direction_invite_token)
+      assert_response :forbidden, user.role
+      sign_out
+    end
+    assert_not Orm::TeacherSchool.exists?(school: @b)
+  end
+
+  test "beyond 10 requests a minute: 429, nothing is read nor written" do
+    11.times { get teacher_school_join_path(@b.direction_invite_token) }
+    assert_response :too_many_requests
+
+    post teacher_school_join_path(@b.direction_invite_token)
+    assert_response :too_many_requests
+    assert_equal [ [ @a.id, true ] ], attached
   end
 end

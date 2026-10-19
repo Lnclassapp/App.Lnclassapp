@@ -16,10 +16,12 @@ module UseCases
 
         attr_reader :attached
 
-        def initialize(*schools, refuse_attach: nil, already: [])
+        # posed : ce que le dépôt décide sous le verrou, quand un autre onglet a changé ses établissements depuis la lecture.
+        def initialize(*schools, refuse_attach: nil, already: [], posed: nil)
           @schools = schools.index_by(&:public_id)
           @refuse_attach = refuse_attach
           @already = already
+          @posed = posed
           @attached = []
         end
 
@@ -27,11 +29,13 @@ module UseCases
         def find_by_id(id:) = @schools.values.find { it.id == id }
         def school_ids_for(teacher_id:) = @already
 
-        def attach_teacher_within_cap(teacher_id:, school_id:, primary:, cap:, at:)
+        # Le principal se décide ici, sous le verrou (ADR-0094 §4.5) : le premier établissement.
+        def attach_teacher_within_cap(teacher_id:, school_id:, cap:, at:)
           return Shared::Result.failure(:conflict, errors: { base: [ @refuse_attach ] }) if @refuse_attach
 
+          primary = @posed.nil? ? @already.empty? : @posed
           @attached << { teacher_id:, school_id:, primary:, cap:, at: }
-          Shared::Result.success
+          Shared::Result.success(primary)
         end
       end
 
@@ -48,7 +52,7 @@ module UseCases
         attr_reader :moves
 
         def initialize = @moves = []
-        def set_current_school(id:, school_id:) = (@moves << [ id, school_id ]) && true
+        def set_current_school(id:, school_id:) = (@moves << [ id, school_id ]) && 1
       end
 
       class FakeDrenas
@@ -122,8 +126,8 @@ module UseCases
         "dddddddddddd" => Link.new(school_id: nil, school_active: false, channel: "colleague", referrer_id: 9)
       }.freeze
 
-      def use_case(departures:, request:, refuse_attach:, already:)
-        @schools = FakeSchools.new(@a, @b, @inactive, @draft, @elsewhere, refuse_attach:, already:)
+      def use_case(departures:, request:, refuse_attach:, already:, posed: nil)
+        @schools = FakeSchools.new(@a, @b, @inactive, @draft, @elsewhere, refuse_attach:, already:, posed:)
         @join_requests = FakeJoinRequests.new(request)
         @sessions = FakeSessions.new
         JoinSchoolWithCode.new(schools: @schools, drenas: FakeDrenas.new(@abidjan, @bouake), departures: FakeDepartures.new(*departures),
@@ -133,8 +137,8 @@ module UseCases
       end
 
       def join(school_public_id, drena: "drena-1", actor: @teacher, departures: [ departure(school_id: 31) ], request: nil,
-               refuse_attach: nil, already: [])
-        use_case(departures:, request:, refuse_attach:, already:)
+               refuse_attach: nil, already: [], posed: nil)
+        use_case(departures:, request:, refuse_attach:, already:, posed:)
           .call(actor:, dto: Dtos::School::SchoolJoinInput.new(drena_public_id: drena, school_public_id:), session_id: 5)
       end
 
@@ -160,6 +164,15 @@ module UseCases
         assert_equal @b, result.value
         assert_equal [ false ], @schools.attached.map { it[:primary] }
         assert_equal [ [ 5, 32 ] ], @sessions.moves
+      end
+
+      # Revue de la PR #250, constat 1 : la session suit ce que le dépôt a posé sous le verrou, pas la lecture d'avant.
+      test "la session suit le principal posé sous le verrou : un autre onglet a rattaché, ou retiré, un établissement" do
+        assert join("sch-32", already: [], posed: false).success?
+        assert_equal [ [ 5, 32 ] ], @sessions.moves, "un autre onglet l'a rattaché d'abord : B est secondaire, la session y passe"
+
+        assert join("sch-32", already: [ 34 ], posed: true).success?
+        assert_empty @sessions.moves, "il a quitté son seul établissement entre-temps : B est principal"
       end
 
       test "ME-01 : par le lien de la direction ou d'un collègue : secondaire, la voie dans le journal" do

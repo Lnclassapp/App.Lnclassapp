@@ -88,8 +88,10 @@ class School::CurrentSchoolsControllerTest < ActionDispatch::IntegrationTest
 
     phone.get teacher_home_path
 
-    assert_match "Lycée moderne d&#39;Abobo", phone.response.body
+    assert_select phone.document_root_element, "#account_schools button[aria-current=true]", text: /Lycée moderne d'Abobo/
     assert_select phone.document_root_element, "a[href='#{classroom_path(@b6.public_id)}']", count: 0
+    get teacher_home_path
+    assert_select "#account_schools button[aria-current=true]", text: /Collège Saint-Michel/
   end
 
   # MET-4 (owner, 2026-10-16): each school is a self-contained space; a classroom of B does not open from A.
@@ -113,7 +115,7 @@ class School::CurrentSchoolsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "students, directions and the team cannot switch" do
-    [ create_student(classroom: @a6), create_school_admin(school: @a) ].each do |user|
+    [ create_student(classroom: @a6), create_school_admin(school: @a), create_team_member ].each do |user|
       sign_in_as user
       switch_to @a
       assert_response :forbidden

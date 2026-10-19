@@ -11,6 +11,7 @@ module UseCases
       end
 
       # session_id : la session courante, jamais un paramètre. → Result(Entities::School::School) | :forbidden | :not_found
+      #   (établissement inconnu, ou session révoquée entre-temps : rien n'est écrit, rien n'est annoncé)
       def call(actor:, session_id:, school_public_id:)
         return Shared::Result.failure(:forbidden) unless actor&.teacher?
 
@@ -20,7 +21,8 @@ module UseCases
         allowed = @policy.call(actor:, attached: @schools.school_ids_for(teacher_id: actor.user_id).include?(school.id))
         return allowed if allowed.failure?
 
-        @sessions.set_current_school(id: session_id, school_id: school.id)
+        return Shared::Result.failure(:not_found) if @sessions.set_current_school(id: session_id, school_id: school.id).zero?
+
         Shared::Result.success(school)
       end
     end
