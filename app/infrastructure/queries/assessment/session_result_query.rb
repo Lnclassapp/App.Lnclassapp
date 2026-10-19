@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Assessment::SessionResultQuery
-# Rôle : résultat d'une session terminée (score, note, maîtrise, badge, progrès, effet sur la fiche) et sa correction
-# ADR  : 0028, 0033, 0043, 0054, 0079, 0091, 0101 · UDR : 0007, 0023, 0073, 0087, 0120 · sécurité n° 29
+# Rôle : résultat d'une session terminée (score, note, maîtrise, badge, progrès, effet sur la fiche) et sa correction ; sans reveal, seuls les choix
+# ADR  : 0028, 0033, 0043, 0054, 0079, 0091, 0094, 0101 · UDR : 0007, 0023, 0073, 0087, 0120 · sécurité n° 29
 module Queries
   module Assessment
     class SessionResultQuery
@@ -50,10 +50,11 @@ module Queries
                 gap_outcome: gap_outcome(id, kind, knowledge_gap_id))
       end
 
-      # Fait teaches_student de ReadSessionPolicy : l'élève est encore inscrit dans une classe active de l'enseignant.
-      def teaches_student?(student_id:, teacher_id:)
+      # Fait teaches_student de ReadSessionPolicy : l'élève est encore inscrit dans une classe active de l'enseignant, de
+      # son établissement courant (ADR-0094 §10 : un élève d'un autre de ses établissements n'existe pas, même par l'adresse).
+      def teaches_student?(student_id:, teacher_id:, school_id:)
         Orm::ClassroomStudent.joins(:classroom)
-                             .where(student_id:, left_at: nil, classrooms: { status: "active" })
+                             .where(student_id:, left_at: nil, classrooms: { status: "active", school_id: })
                              .where(classroom_id: Orm::TeacherClassroom.where(teacher_id:).select(:classroom_id))
                              .exists?
       end

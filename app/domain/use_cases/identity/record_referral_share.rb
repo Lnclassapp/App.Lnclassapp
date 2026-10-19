@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::RecordReferralShare
 # Rôle : enregistre un clic « Partager » (canal, date) d'un enseignant d'un établissement actif ; rien d'autre n'est gardé
-# ADR  : 0028, 0049, 0063 · UDR : 0050
+# ADR  : 0028, 0049, 0063, 0094 (§11 : les deux liens, depuis l'établissement courant) · UDR : 0050, 0098 (§3.6)
 module UseCases
   module Identity
     class RecordReferralShare

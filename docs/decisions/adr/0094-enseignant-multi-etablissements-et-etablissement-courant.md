@@ -1,13 +1,13 @@
 # ADR-0094 : Un enseignant se rattache lui-même à trois établissements au plus, travaille dans un établissement courant gardé par sa session, et chaque direction n'agit que sur son rattachement
 <!-- index
 titre: Un enseignant se rattache lui-même à trois établissements au plus, travaille dans un établissement courant gardé par sa session, et chaque direction n'agit que sur son rattachement
-statut: Proposé — *amende 0030, 0062, 0071, 0083 ; complète 0028, 0063*
+statut: Accepté *(porteur, 2026-10-16 ; amendé le 2026-10-16 : MET-4, MET-8)* — *amende 0030, 0062, 0071, 0081, 0083 ; complète 0028, 0063*
 problematique: `teacher_schools` inchangée (lignes secondaires enfin écrites) ; `sessions.current_school_id` ; `actor.school_id` = établissement courant vérifié à chaque requête, défaut le principal ; `JoinSchoolWithCode` élargi (écran d'attente, lien `/i/<jeton>` connecté, « Ajouter un établissement ») sous verrou et plafond 3 ; `LeaveSchool` ; `SwitchCurrentSchool` ; `DetachTeacher` promeut un principal ; `ReinstateTeacher` rattache en secondaire. Chantier `multi-etablissements-enseignant`.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16) — amendé le 2026-10-16 (§10, MET-4 ; §11, MET-8) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/multi-etablissements-enseignant`](../../chantiers/multi-etablissements-enseignant/prd.md) — critères ME-01 à ME-24 |
 | **Remplace** | — |
@@ -93,8 +93,8 @@ ORDER BY (school_id = $2) DESC LIMIT 1
 | `Policies::School::JoinSchoolWithCodePolicy#call(actor:, pending_request:, schools_count:)` (**amendée**) | `teacher`, sans demande `pending`, et `schools_count < TeacherSchools::MAX` → succès. `schools_count` 0 : l'écran d'attente, comme avant ; ≥ 1 : un établissement de plus. Au plafond : `:forbidden` avec `errors: { base: [:schools_limit] }` |
 | `Policies::School::SwitchCurrentSchoolPolicy#call(actor:, attached:)` (**nouvelle**) | `teacher` et `attached` (une ligne `teacher_schools` existe pour cet établissement) → succès ; sinon `:forbidden` |
 | `Policies::School::LeaveSchoolPolicy#call(actor:, attached:, schools_count:)` (**nouvelle**) | `teacher`, `attached` et `schools_count >= 2` → succès ; dernier établissement : `:forbidden` avec `errors: { base: [:last_school] }` ; non rattaché : `:not_found` |
-| `Policies::Identity::InviteColleaguePolicy#call(actor:, school:, primary_school_id:)` (**amendée**) | `teacher`, `school` actif et `school.id == primary_school_id` → succès. L'appelant (`ColleagueInvitation`, `RecordReferralShare`) lit le principal par `primary_school_id_for`, plus `actor.school_id` : le lien personnel mène toujours au principal (§4.6), quel que soit l'établissement courant |
-| `ManageSchoolTeachersPolicy`, `ManageSchoolStructurePolicy`, `DeclareTeachingPolicy`, `PublishPolicy`, `TeachPolicy`, `ReadClassroomPolicy`, `VouchPolicy` | **Inchangées.** Elles lisent l'établissement courant à travers `actor.school_id` |
+| ~~`Policies::Identity::InviteColleaguePolicy#call(actor:, school:, primary_school_id:)`~~ | **Remplacé au §11 (MET-8)** : la policy garde sa forme d'origine, sur l'établissement courant |
+| `ManageSchoolTeachersPolicy`, `ManageSchoolStructurePolicy`, `DeclareTeachingPolicy`, `PublishPolicy`, `VouchPolicy` | **Inchangées.** Elles lisent l'établissement courant à travers `actor.school_id`. `TeachPolicy`, `ReadClassroomPolicy` et les policies d'une classe : **amendées** au §10 (MET-4) |
 
 ### 4.4 Use cases
 
@@ -102,11 +102,11 @@ ORDER BY (school_id = $2) DESC LIMIT 1
 
 | Use case | Signature | Écritures | Refus | Audit |
 |---|---|---|---|---|
-| `School::JoinSchoolWithCode` (**amendé**) | `call(actor:, dto:)` ; `dto` : `SchoolJoinInput` (DRENA → établissement) **ou** `SchoolInviteJoinInput` (`token`) | `attach_teacher_within_cap(teacher_id:, school_id:, primary: schools_count.zero?, cap: MAX, at:)` ; si `primary: false`, la session passe sur le nouvel établissement (`set_current_school`) | `:forbidden` (policy, plafond) ; `:invalid` `school_public_id: [:inclusion]` (même erreur neutre : inconnu, inactif, autre DRENA, **départ ouvert**, lien invalide) ; `:conflict` `base: [:already_attached]` (déjà rattaché) ; `:conflict` `base: [:schools_limit]` (plafond atteint sous verrou) | `school.changed`, `{ change: "teacher_joined", via: "standard" \| "colleague" \| "direction" \| "team" }` |
-| `School::SwitchCurrentSchool` (**nouveau**) | `call(actor:, session_id:, school_public_id:)` | `SessionRepositoryPort#set_current_school(id:, school_id:)` | `:forbidden` (policy) ; `:not_found` (établissement inconnu) | aucun : un choix d'affichage |
-| `School::LeaveSchool` (**nouveau**) | `call(actor:, school_public_id:)` | `withdraw_all_in_school` ; `archive_all_by_teacher_in_school(archived_by_id: actor.user_id)` ; `detach_teacher` ; `promote_primary` ; **pas** de `teacher_school_departures` (il peut revenir) | `:forbidden` (dernier établissement) ; `:not_found` (non rattaché) | `teacher.left`, sujet le compte, `{ school_id:, classrooms_count:, assignments_archived: }` |
-| `School::DetachTeacher` (**amendé**, ADR-0071) | inchangée | après `detach_teacher` : `promote_primary(teacher_id:)` | inchangés | inchangé |
-| `School::ReinstateTeacher` (**amendé**, ADR-0071) | inchangée | `attach_teacher_within_cap(primary: schools_count.zero?)` ; ferme le départ | `:not_found` : pas de départ ouvert, ou anonymisé (« a un établissement » n'est plus un refus) ; **`:conflict` `base: [:schools_limit]`** au plafond | inchangé |
+| `School::JoinSchoolWithCode` (**amendé**) | `call(actor:, dto:)` ; `dto` : `SchoolJoinInput` (DRENA → établissement) **ou** `SchoolInviteJoinInput` (`token`) | `attach_teacher_within_cap(teacher_id:, school_id:, cap: MAX, at:)`, qui décide et rend le principal sous le verrou ; s'il rend `false`, la session passe sur le nouvel établissement (`set_current_school`) | `:forbidden` (policy, plafond) ; `:invalid` `school_public_id: [:inclusion]` (même erreur neutre : inconnu, inactif, autre DRENA, **départ ouvert**, lien invalide) ; `:conflict` `base: [:already_attached]` (déjà rattaché) ; `:conflict` `base: [:schools_limit]` (plafond atteint sous verrou) | `school.changed`, `{ change: "teacher_joined", via: "standard" \| "colleague" \| "direction" \| "team" }` |
+| `School::SwitchCurrentSchool` (**nouveau**) | `call(actor:, session_id:, school_public_id:)` | `SessionRepositoryPort#set_current_school(id:, school_id:)` | `:forbidden` (policy) ; `:not_found` (établissement inconnu, ou session révoquée entre-temps : 0 ligne) | aucun : un choix d'affichage |
+| `School::LeaveSchool` (**nouveau**) | `call(actor:, school_public_id:)` | sous `lock_teacher`, la règle rejouée sur un compte frais ; `withdraw_all_in_school` ; `archive_all_by_teacher_in_school(archived_by_id: actor.user_id)` ; `detach_teacher` ; `promote_primary` ; **pas** de `teacher_school_departures` (il peut revenir) | `:forbidden` (dernier établissement) ; `:not_found` (non rattaché) | `teacher.left`, sujet le compte, `{ school_id:, classrooms_count:, assignments_archived: }` |
+| `School::DetachTeacher` (**amendé**, ADR-0071) | inchangée | `lock_teacher` d'abord ; après `detach_teacher` : `promote_primary(teacher_id:)` | inchangés | inchangé |
+| `School::ReinstateTeacher` (**amendé**, ADR-0071) | inchangée | `attach_teacher_within_cap` (principal décidé sous le verrou) ; ferme le départ | `:not_found` : pas de départ ouvert, ou anonymisé (« a un établissement » n'est plus un refus) ; **`:conflict` `base: [:schools_limit]`** au plafond | inchangé |
 
 `Entities::Identity::AuditAction::ALL` gagne `teacher.left`.
 
@@ -116,11 +116,12 @@ Rejoindre ne crée **aucune** ligne `school_join_requests` (ADR-0083 §4.3) et n
 
 | Port | Méthode | Contrat |
 |---|---|---|
-| `Ports::School::SchoolRepositoryPort` | `attach_teacher_within_cap(teacher_id:, school_id:, primary:, cap:, at:)` (**nouveau**) | Verrouille la ligne `users` de l'enseignant (`FOR UPDATE`), compte ses lignes, insère. → `Result` succès \| `:conflict` `already_attached` \| `:conflict` `schools_limit` |
+| `Ports::School::SchoolRepositoryPort` | `attach_teacher_within_cap(teacher_id:, school_id:, cap:, at:)` (**nouveau**) | Verrouille la ligne `users` de l'enseignant (`FOR UPDATE`), compte ses lignes, insère, principale si c'est la première. → `Result(Boolean : principale)` \| `:conflict` `already_attached` (aussi un doublon de l'index unique) \| `:conflict` `schools_limit` |
+| | `lock_teacher(teacher_id:)` (**nouveau**, revue de la PR) | Verrouille la ligne `users` jusqu'à la fin de la transaction : quitter et retirer comptent après lui. → `true` |
 | | `school_ids_for(teacher_id:)` (**nouveau**) | `[Integer]`, le principal en premier, puis par `created_at`, `id` |
-| | `promote_primary(teacher_id:)` (**nouveau**) | Si aucune ligne principale ne reste, marque la plus ancienne. → `Integer \| nil` (l'établissement principal) |
+| | `promote_primary(teacher_id:)` (**nouveau**) | Si aucune ligne principale ne reste, marque la plus ancienne (`update_all`, compte lu). → `Integer \| nil` (l'établissement principal ; `nil` aussi si la ligne a disparu avant d'être marquée) |
 | | `attach_teacher`, `detach_teacher`, `primary_school_id_for` | Inchangés |
-| `Ports::Identity::SessionRepositoryPort` | `set_current_school(id:, school_id:)` (**nouveau**) | `true` |
+| `Ports::Identity::SessionRepositoryPort` | `set_current_school(id:, school_id:)` (**nouveau**) | `Integer` (sessions modifiées) |
 | `Ports::Identity::UserRepositoryPort` | `actor_for(user_id:, current_school_id: nil)` (**amendé**) | `Entities::Identity::Actor` (§4.2) |
 | `Ports::Identity::InviteLinkRepositoryPort` | `resolve(token:)` | Inchangé |
 
@@ -133,7 +134,7 @@ Rejoindre ne crée **aucune** ligne `school_join_requests` (ADR-0083 §4.3) et n
 | `Queries::School::TeacherSchoolsQuery#call(teacher_id:, current_school_id:)` (**nouvelle**) | Établissements de l'enseignant : `public_id`, nom, sigle, DRENA, `primary`, `current` ; une requête. Lue par le panneau du compte et « Mes établissements » |
 | `TeacherHomeQuery`, `TeacherFollowUpsQuery`, `CatalogAssignmentTargetsQuery`, `TeacherAudienceQuery` | Reçoivent `school_id:` (l'établissement courant) et ne lisent que les classes de cet établissement |
 | `ShellUserQuery`, `ProfileQuery` | La ligne de détail de l'enseignant nomme l'**établissement courant** |
-| `ReferralQuery` (page « Inviter un collègue ») | Nomme l'établissement principal, vers lequel mène le lien |
+| `ReferralQuery` (page « Inviter un collègue ») | ~~Nomme l'établissement principal~~ — remplacé au §11 (MET-8) : le lien de l'établissement courant et le lien de parrainage |
 | `DepartedTeachersQuery` | Perd la condition « sans établissement principal » (`WITHOUT_SCHOOL`) : la condition devient « pas rattaché à **cet** établissement » |
 | `DrenaSchoolsQuery`, `TeamDashboardQuery` (comptes par DRENA) | Comptent les **rattachements** (toutes les lignes `teacher_schools` non anonymisées), plus seulement le principal (memo, question 10). La ligne d'une DRENA reste la somme de ses établissements (critère RE-08 de l'ADR-0062) : un enseignant de deux établissements d'une même DRENA y compte deux fois |
 | `SchoolTeachersQuery`, `StudentWorkQuery`, `SchoolActivityQuery`, `SchoolDetailQuery`, `GrowthMetricsQuery` | **Inchangées** : déjà bornées à un établissement, ou comptées une fois au national |
@@ -198,24 +199,29 @@ end
 ```ruby
 # app/infrastructure/repositories/school/school_repository.rb (extrait)
 # Verrou de la ligne users : deux « Rejoindre » simultanés ne dépassent pas le plafond (même motif que attach_by_code, ADR-0077).
-def attach_teacher_within_cap(teacher_id:, school_id:, primary:, cap:, at:)
+# Le principal se décide sous le verrou (revue de la PR) : jamais d'après une lecture faite avant lui.
+def attach_teacher_within_cap(teacher_id:, school_id:, cap:, at:)
   Orm::TeacherSchool.transaction(requires_new: true) do
-    Orm::User.where(id: teacher_id).lock.pick(:id)
-    return ::Shared::Result.failure(:conflict, errors: { base: [ :already_attached ] }) if Orm::TeacherSchool.exists?(teacher_id:, school_id:)
-    return ::Shared::Result.failure(:conflict, errors: { base: [ :schools_limit ] }) if Orm::TeacherSchool.where(teacher_id:).count >= cap
+    lock_teacher(teacher_id:)
+    attached = Orm::TeacherSchool.where(teacher_id:).pluck(:school_id)
+    next ::Shared::Result.failure(:conflict, errors: ALREADY_ATTACHED) if attached.include?(school_id)
+    next ::Shared::Result.failure(:conflict, errors: SCHOOLS_LIMIT) if attached.size >= cap
 
-    Orm::TeacherSchool.create!(teacher_id:, school_id:, primary:, created_at: at)
+    Orm::TeacherSchool.create!(teacher_id:, school_id:, primary: attached.empty?, created_at: at)
+    ::Shared::Result.success(attached.empty?)
   end
-  ::Shared::Result.success
+rescue ActiveRecord::RecordNotUnique
+  ::Shared::Result.failure(:conflict, errors: ALREADY_ATTACHED)
 end
 
 def promote_primary(teacher_id:)
   current = primary_school_id_for(teacher_id:)
   return current if current
 
-  oldest = Orm::TeacherSchool.where(teacher_id:).order(:created_at, :id).first
-  oldest&.update_columns(primary: true)
-  oldest&.school_id
+  id, school_id = Orm::TeacherSchool.where(teacher_id:).order(:created_at, :id).pick(:id, :school_id)
+  return if id.nil?
+
+  school_id unless Orm::TeacherSchool.where(id:).update_all(primary: true).zero?
 end
 ```
 
@@ -238,4 +244,48 @@ end
 
 ## 9. Points à confirmer par le porteur
 
-Les questions 1 à 8, 10 et 11 du [memo](../../chantiers/multi-etablissements-enseignant/memo.md#ce-que-le-grill-a-révélé). Cette décision suit les recommandations ; elle passe à « Accepté » une fois les réponses consignées, et s'amende avant le Lot 0 si une réponse diffère.
+Tranchés par le porteur le 2026-10-16 ([memo](../../chantiers/multi-etablissements-enseignant/memo.md#réponses-du-porteur-2026-10-16)) : les recommandations des questions 1 à 8, 10 et 11 sont acceptées telles quelles. Question 9 : les matières de l'enseignant seront choisies **par établissement**, par le chantier `enseignant-plusieurs-matieres`, qui démarre après celui-ci. Point d'extension laissé : la ligne `teacher_schools` (un rattachement enseignant-établissement) est l'endroit où ce chantier rangera les matières ; aucune lecture ni aucun geste de ce chantier ne suppose une matière unique par établissement.
+
+## 10. Amendement du 2026-10-16 — chaque établissement est un espace autonome (réponse MET-4)
+
+> Réponse du porteur ([memo](../../chantiers/multi-etablissements-enseignant/memo.md#réponses-du-porteur-2026-10-16), Q3 et Q4) : « un compte, un numéro de téléphone, plusieurs établissements ; chaque établissement a son interface autonome et complète (classes, niveaux, annonces, à faire…) ; l'établissement courant cloisonne tout l'espace enseignant ». Elle **remplace la recommandation de la question 11** (la page d'une classe d'un autre établissement s'ouvrait) et complète les §4.3 et §4.6.
+
+**Règle.** Tout ce que l'enseignant lit ou fait porte sur l'établissement courant. Une donnée d'un autre de ses établissements n'existe pas tant qu'il n'y est pas passé, même par son adresse.
+
+| Où | Changement |
+|---|---|
+| `Policies::Classroom::ClassroomTeacher` (**nouveau**, Ruby pur) | Fait commun : `teaches?(actor, classroom)` = lié par `teacher_classrooms` **et** `classroom.school_id == actor.school_id` ; `elsewhere?` = lié, mais dans un autre établissement ; `OTHER_SCHOOL` = `:forbidden`, `errors: { base: [:other_school] }` |
+| `TeachPolicy`, `ReadClassroomPolicy`, `FollowAssignmentPolicy`, `SetSessionDaysPolicy` (**amendées**, §4.3 disait « inchangées ») | `teaches?` remplace `teacher_ids.include?` ; `elsewhere?` → `OTHER_SCHOOL`. `AssignPolicy` suit `TeachPolicy` |
+| `ManageClassroomMembersPolicy` (**amendée**) | `teaches?` ; hors établissement courant : `:not_found`, comme pour un inconnu |
+| `RendersResult` | `OTHER_SCHOOL` → HTML : `303` vers l'accueil, toast « Cette classe n'est pas dans l'établissement où vous êtes. Changez d'établissement depuis votre compte. » ; Turbo Stream : le même toast en `403`. Aucun établissement n'est nommé |
+| `ManageOwnPolicy` (annonces, **amendée**) | L'annonce d'un enseignant n'existe (`:not_found`) que dans l'établissement où il l'a écrite |
+| Plafond des annonces (amende l'ADR-0081 §4.1) | `Message#cap_school_id` : une annonce à des classes (celle d'un enseignant) se compte **par établissement** ; les autres, par auteur comme avant. `MessageRepositoryPort#live_of(author_id:, now:, school_id: nil)` ; `AuthoredMessagesQuery#page` et `#departing` reçoivent `school_id:` pour l'enseignant |
+| `JoinRequestsQuery#for_colleague(teacher_id:, school_id:)` | Les demandes de l'établissement courant (n'était que le principal) |
+| Lectures déjà bornées au Lot A | Accueil (classes, niveaux, activités), sélection des classes, catalogue, cibles d'« Assigner », annonces reçues (`ReadableMessages`, par `reader.school_id`), « Mes annonces », formulaire d'annonce, en-tête et profil |
+
+**Preuve.** Un test de non-fuite par écran (`test/controllers/school/current_school_isolation_test.rb`) : dans A, le contenu de la page (`main`) ne contient ni le nom de B, ni ses classes, ni ses niveaux, ni ses exercices à suivre, ni ses annonces ; les pages d'une classe de B, de son suivi et de son « Assigner » renvoient à l'accueil ; l'annonce de B est introuvable. Seul le panneau du compte nomme B : c'est le sélecteur.
+
+**Point d'extension (chantier `enseignant-plusieurs-matieres`).** La ligne `teacher_schools` est le rattachement enseignant-établissement ; les matières par établissement s'y attachent (table fille `teacher_school_materials`, ou colonne). Toutes les lectures de l'enseignant reçoivent déjà `school_id:` (l'établissement courant) : la matière de l'établissement courant s'y lira sans changer leurs appelants. Ce chantier ne lit encore que `teacher_profiles.material_id`.
+
+**Coût consenti.** Un lien partagé vers une classe de B, ouvert dans A, ne l'affiche pas : l'enseignant passe dans B depuis son compte, puis rouvre le lien.
+
+## 11. Amendement du 2026-10-16 — deux liens d'invitation (réponse MET-8)
+
+> Réponse du porteur (memo, Q8) : « deux liens séparés. "Inviter un collègue de mon établissement" : lien rattaché à l'établissement courant. "Inviter un autre collègue" : lien sans établissement (parrainage), le collègue choisit son établissement. » Elle **remplace** la recommandation de la question 8 (« le lien personnel mène toujours au principal »), l'amendement de `InviteColleaguePolicy` du §4.3 (`primary_school_id:`, retiré) et le coût « Le lien personnel ne mène qu'au principal » du §5. Elle complète l'ADR-0063 et l'ADR-0083 §4.1.
+
+**Données.** Migration `teacher_schools.invite_token` (`varchar(12)`, défaut tiré par la base comme `referral_token`, index unique, contrainte `^[0-9a-f]{12}$`) : **un lien par rattachement enseignant-établissement**. `teacher_profiles.referral_token` devient le **lien de parrainage**, sans établissement. Le jeton d'un établissement quitté disparaît avec sa ligne : son lien devient inconnu.
+
+**Résolution** (`InviteLinkRepository#resolve`, ordre ADR-0083 §5 prolongé) : 1. `teacher_schools.invite_token` → l'établissement de la ligne, voie `colleague`, le collègue en parrain ; 2. `teacher_profiles.referral_token` → `InviteLink(sponsor: true, school_id: nil)`, valide tant que le collègue n'est pas anonymisé ; 3. direction ; 4. équipe.
+
+| Où | Règle |
+|---|---|
+| `InviteLinkRepositoryPort::InviteLink` | `+ sponsor` (défaut `false`) ; `valid?` : un parrainage vaut par son parrain, un autre lien par son établissement actif |
+| `RegisterTeacher` | Lien d'établissement : l'établissement du lien (inchangé), parrainage `source: "link"`. **Parrainage** : l'établissement choisi (DRENA puis établissement, mêmes erreurs neutres), voie `colleague`, parrainage `source: "sponsor"` (valeur déjà admise par `referrals_source_values`) avec l'établissement choisi |
+| `JoinSchoolWithCode` (lien ouvert connecté) | Un parrainage ne rattache à rien : `:invalid` `invite_invalid` ; la page dit « Ce lien sert à inscrire un nouveau collègue » |
+| `InviteColleaguePolicy#call(actor:, school:)` | Revient à sa forme d'origine : `school` est l'**établissement courant** (`actor.school_id`), actif |
+| `ReferralQuery#call(teacher_id:, school_id:)` | `Row(school_name, school_token, referral_token, referred_count)` : le lien de l'établissement courant et le lien de parrainage ; le compteur compte tous les filleuls |
+| `RecordReferralShare` | Inchangé (sa forme d'origine) : un partage compté, quel que soit le lien |
+
+**Écrans** : UDR-0098 §3.6.
+
+**Coûts consentis.** Un lien d'établissement déjà partagé cesse de marcher si l'enseignant quitte cet établissement. Les liens « personnels » déjà partagés avant ce chantier (le jeton du profil) deviennent des liens de parrainage : l'invité choisit son établissement au lieu de l'avoir rempli ; Lnclass n'est pas encore lancé (réponse DIR-4 du porteur), aucun lien n'a circulé.

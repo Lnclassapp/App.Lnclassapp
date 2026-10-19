@@ -144,7 +144,7 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
 
   test "IE-06, IE-09: a colleague's link shows the school and counts the referral; an unknown link warns" do
     referrer = create_teacher(school: @school)
-    token = Orm::TeacherProfile.find_by!(user: referrer).referral_token
+    token = Orm::TeacherSchool.find_by!(teacher: referrer).invite_token
 
     visit teacher_invite_link_path("cccccccccccc")
     assert_selector "#invite-link-invalid", text: t("identity.teacher_registrations.new.invite_invalid")

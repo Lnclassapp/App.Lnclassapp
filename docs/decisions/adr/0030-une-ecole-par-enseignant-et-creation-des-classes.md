@@ -1,7 +1,7 @@
 # ADR-0030 : Une école visible par enseignant en V1, `teacher_schools` avec drapeau « principale », classes générées à la création de l'établissement puis gérées par l'équipe et la direction
 <!-- index
 titre: Une école visible par enseignant en V1, `teacher_schools` avec drapeau « principale », classes générées à la création de l'établissement puis gérées par l'équipe et la direction
-statut: Accepté — *remplace 0004 §2 et §3.1*
+statut: Accepté — *remplace 0004 §2 et §3.1* — *amendé par [0094](./0094-enseignant-multi-etablissements-et-etablissement-courant.md) (trois établissements, établissement courant)*
 problematique: Index partiel « une principale » ; l'enseignant déclare ses classes dans son école ; onboarding persisté ; `schools.cycle` explicite ; classes par défaut générées par slug de niveau et de série dans la transaction de l'école ; gestion par `team` (V1) puis `school_admin` (V2). F-06.
 -->
 
@@ -196,3 +196,7 @@ Ces totaux dépendent des liaisons `level_series` en base : un niveau ou une sé
 ## Amendement du 2026-09-28 — compte en attente (ADR-0063)
 
 *Chantier `docs/chantiers/croissance-parrainage`.* Un enseignant sans école principale n'accède qu'à l'écran d'attente et à la déconnexion (garde de `AuthenticatedController`). L'inscription sans code (code national ou DRENA → établissement) crée ce compte, avec une demande `school_join_requests` que l'équipe ou un garant du même établissement décide.
+
+## Amendement du 2026-10-16 — plusieurs établissements (ADR-0094)
+
+*Chantier `docs/chantiers/multi-etablissements-enseignant`.* La règle « une ligne `teacher_schools` par enseignant » est levée : **trois au plus** (`Entities::School::TeacherSchools::MAX`), sans changer le schéma de la table. « L'école visible est toujours l'école principale » devient « l'établissement visible est l'**établissement courant** de la session (`sessions.current_school_id`), le principal par défaut ». « Seule l'équipe change l'école d'un enseignant » devient « l'enseignant rejoint et quitte lui-même un établissement » (lien `/i/<jeton>` ouvert connecté, ou DRENA puis établissement). Le principal reste le premier rattachement ; il n'est remplacé, par le plus ancien restant, que si l'enseignant le quitte ou en est retiré. Détail : [ADR-0094](./0094-enseignant-multi-etablissements-et-etablissement-courant.md).

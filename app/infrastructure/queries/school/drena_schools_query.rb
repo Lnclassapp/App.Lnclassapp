@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::DrenaSchoolsQuery
 # Rôle : pilotage sous filtre DRENA (RE-07 à RE-10) : ses établissements et leurs classes, enseignants, élèves et élèves actifs
-# ADR  : 0062, 0067 · UDR : 0068 · définitions de la ligne DRENA, lues avec les chiffres de TeamDashboardQuery (même cache)
+# ADR  : 0062, 0067, 0094 · UDR : 0068 · définitions de la ligne DRENA, lues avec les chiffres de TeamDashboardQuery (même cache)
 module Queries
   module School
     class DrenaSchoolsQuery
@@ -70,9 +70,10 @@ module Queries
                       .group("classrooms.school_id").select("classrooms.school_id", "COUNT(*) AS classrooms_count")
       end
 
-      # Enseignants rattachés à titre principal, non anonymisés (ADR-0030).
+      # Enseignants rattachés, non anonymisés, principal ou non : un enseignant compte dans chaque établissement où il est
+      # rattaché, la DRENA reste la somme de ses établissements (ADR-0094 §4.6, amende l'ADR-0062).
       def teachers_by_school
-        Orm::TeacherSchool.joins(:teacher, :school).where(primary: true, users: { anonymized_at: nil }, schools: { drena_id: @drena_id })
+        Orm::TeacherSchool.joins(:teacher, :school).where(users: { anonymized_at: nil }, schools: { drena_id: @drena_id })
                           .group("teacher_schools.school_id").select("teacher_schools.school_id", "COUNT(*) AS teachers_count")
       end
 

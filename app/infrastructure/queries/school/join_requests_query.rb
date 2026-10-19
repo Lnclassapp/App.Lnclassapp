@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::JoinRequestsQuery
 # Rôle : demandes en attente, lues par l'équipe (fiche, avec le numéro), par un collègue actif (accueil, sans numéro), et leur état
-# ADR  : 0028, 0063 · UDR : 0050
+# ADR  : 0028, 0063, 0094 · UDR : 0050
 module Queries
   module School
     class JoinRequestsQuery
@@ -20,10 +20,11 @@ module Queries
                .pluck(*COLUMNS.dup.insert(2, "users.contact")).map { TeamRow.new(*it) }
       end
 
-      # Demandes de l'école principale d'un enseignant ; nil sans école ou sans demande. → Colleagues | nil
-      def for_colleague(teacher_id:)
-        school_id, school_name = Orm::TeacherSchool.joins(:school).where(teacher_id:, primary: true).pick(:school_id, "schools.name")
-        return if school_id.nil?
+      # Demandes de l'établissement courant d'un enseignant (school_id = actor.school_id, ADR-0094) ; nil s'il n'y est pas
+      # rattaché ou sans demande. → Colleagues | nil
+      def for_colleague(teacher_id:, school_id:)
+        school_name = Orm::TeacherSchool.joins(:school).where(teacher_id:, school_id:).pick("schools.name")
+        return if school_name.nil?
 
         requests = pending.where(school_id:).where.not(teacher_id:).pluck(*COLUMNS).map { ColleagueRow.new(*it) }
         Colleagues.new(school_name:, requests:) if requests.any?

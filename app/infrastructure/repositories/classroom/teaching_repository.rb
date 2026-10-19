@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::TeachingRepository
 # Rôle : déclarations d'enseignement (teacher_classrooms), idempotentes ; les retirer efface d'abord les jours de séance liés
-# ADR  : 0030, 0071, 0072
+# ADR  : 0030, 0071, 0072, 0094
 module Repositories
   module Classroom
     class TeachingRepository
@@ -21,8 +21,10 @@ module Repositories
         true
       end
 
-      def classroom_ids_for(teacher_id:)
-        Orm::TeacherClassroom.where(teacher_id:).order(:classroom_id).pluck(:classroom_id)
+      def classroom_ids_for(teacher_id:, school_id: nil)
+        scope = Orm::TeacherClassroom.where(teacher_id:)
+        scope = scope.where(classroom_id: Orm::Classroom.where(school_id:).select(:id)) if school_id
+        scope.order(:classroom_id).pluck(:classroom_id)
       end
 
       # Deux DELETE bornés aux classes de l'établissement (sous-requête), toutes années confondues : les jours de séance,

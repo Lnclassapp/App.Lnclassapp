@@ -186,6 +186,22 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav a[aria-current=page]", text: I18n.t("shared.navigation.schools")
   end
 
+  # ADR-0094 §4.6 : l'enseignant dont cet établissement n'est pas le principal porte le badge « Établissement secondaire » ;
+  # celui dont c'est le principal, non.
+  test "ME: a teacher for whom the school is a secondary one carries « Établissement secondaire », the others do not" do
+    school = create_school(drena: @drena)
+    add_teacher_school(create_teacher(school: create_school, first_name: "Ibrahim", last_name: "Koné"), school)
+    create_teacher(school:, first_name: "Awa", last_name: "Traoré")
+    sign_in_as @member
+
+    get school_path(school.public_id)
+
+    assert_select "#school_teachers li", text: /Ibrahim Koné.*Établissement secondaire/m
+    assert_select "#school_teachers li", text: /Awa Traoré/ do |items|
+      assert_no_match(/Établissement secondaire/, items.text)
+    end
+  end
+
   test "CE-06, IE-08: a school's page shows the direction's code, the team's invitation link, and « Régénérer le code » in the menu" do
     school = create_school(drena: @drena, name: "Lycée Classique d'Abidjan", school_code: "k7m4qz")
     sign_in_as @member

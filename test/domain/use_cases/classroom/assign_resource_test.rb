@@ -85,8 +85,8 @@ module UseCases
 
       setup do
         # Niveau 6 (6ème), sans série : les contenus ci-dessous sont de ce niveau, sauf « tle-d » (UDR-0013, 2026-10-01).
-        @classroom = Entities::Classroom::Classroom.new(id: 3, public_id: "cls6e1", name: "6ème 1", teacher_ids: [ 7, 8 ], level_id: 6)
-        archived = Entities::Classroom::Classroom.new(id: 4, public_id: "clsold", name: "6ème 2", teacher_ids: [ 7 ], status: "archived",
+        @classroom = Entities::Classroom::Classroom.new(school_id: 1, id: 3, public_id: "cls6e1", name: "6ème 1", teacher_ids: [ 7, 8 ], level_id: 6)
+        archived = Entities::Classroom::Classroom.new(school_id: 1, id: 4, public_id: "clsold", name: "6ème 2", teacher_ids: [ 7 ], status: "archived",
                                                       level_id: 6)
         @classrooms = FakeClassrooms.new(@classroom, archived)
         @resources = {

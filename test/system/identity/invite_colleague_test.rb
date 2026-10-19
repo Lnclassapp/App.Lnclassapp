@@ -13,7 +13,7 @@ class Identity::InviteColleagueTest < ApplicationSystemTestCase
     @school = create_school(drena: create_drena(name: "Abidjan 1"), name: "Lycée Moderne de Cocody", school_code: "k7m4qz")
     create_material(name: "SVT", shortname: "SVT")
     @teacher = create_teacher(school: @school, first_name: "Awa")
-    @token = Orm::TeacherProfile.find_by!(user: @teacher).referral_token
+    @token = Orm::TeacherSchool.find_by!(teacher: @teacher).invite_token
     page.driver.browser.execute_cdp("Browser.grantPermissions", permissions: %w[clipboardReadWrite clipboardSanitizedWrite])
   end
 
@@ -97,7 +97,7 @@ class Identity::InviteColleagueTest < ApplicationSystemTestCase
       assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
              "la page déborde en largeur"
       growth_shot("390-inviter-un-collegue", desktop: false)
-      click_on I18n.t("#{INVITE}.copy")
+      within("#invite_colleagues") { click_on I18n.t("#{INVITE}.copy") }
 
       assert_toast I18n.t("shared.clipboard.copied_link")
       Timeout.timeout(10) { sleep 0.1 until shares == %w[copy] }

@@ -1,15 +1,17 @@
 # 🧠 DOMAINE · Policies::School::JoinSchoolWithCodePolicy
-# Rôle : rejoindre un établissement par son code : l'enseignant sans établissement ni demande en attente
-# ADR  : 0028, 0063, 0071
+# Rôle : rejoindre un établissement : l'enseignant sans demande en attente, sous le plafond de 3 établissements
+# ADR  : 0028, 0063, 0071, 0094
 module Policies
   module School
     class JoinSchoolWithCodePolicy
       # pending_request : sa demande en attente, ou nil. Une demande décidée (approuvée, refusée) n'empêche pas : l'appelant
-      # ne la passe pas.
-      def call(actor:, pending_request:)
-        return Shared::Result.success if actor&.teacher? && actor.school_id.nil? && pending_request.nil?
+      # ne la passe pas. schools_count : ses rattachements ; 0, l'écran d'attente ; 1 ou 2, un établissement de plus
+      # (ADR-0094 §4.3).
+      def call(actor:, pending_request:, schools_count:)
+        return Shared::Result.failure(:forbidden) unless actor&.teacher? && pending_request.nil?
+        return Shared::Result.failure(:forbidden, errors: { base: [ :schools_limit ] }) if schools_count >= Entities::School::TeacherSchools::MAX
 
-        Shared::Result.failure(:forbidden)
+        Shared::Result.success
       end
     end
   end

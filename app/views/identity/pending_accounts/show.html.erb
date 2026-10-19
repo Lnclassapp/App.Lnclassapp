@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/pending_accounts/show — compte sans accueil : élève sans classe, enseignant sans école ou en attente %>
 <%# Rôle : écran de sortie, sans redirection ; issues : choisir sa classe ou voir son historique (élève), DRENA puis établissement (enseignant) %>
-<%# ADR  : 0030, 0036, 0040, 0063, 0071, 0083, 0085 · UDR : 0006, 0050, 0054, 0056, 0079 (§3.9) %>
+<%# ADR  : 0030, 0036, 0040, 0063, 0071, 0083, 0085, 0094 · UDR : 0006, 0050, 0054, 0056, 0079 (§3.9), 0099 (§3.2 : formulaire partagé) %>
 <% page_title t(".page_title") %>
 <div id="pending_account">
   <% if @school_join %>
@@ -17,33 +17,9 @@
       <% if @rate_limited %>
         <%= ui_error_state title: t(".rate_limited.title"), message: t(".rate_limited.message") %>
       <% else %>
-        <%# Repli sans JavaScript (UDR-0024 §2.4) : la DRENA choisie revient en GET et liste ses établissements. %>
-        <form id="school-join-drena" action="<%= pending_account_path %>" method="get"></form>
-        <%= form_with model: @school_join, scope: :school_join, url: pending_school_join_path, id: "school-join-form",
-                      class: "flex flex-col gap-4",
-                      data: { controller: "school--drena-schools",
-                              "school--drena-schools-url-value": drena_schools_path("__drena__", scope: :school_join) } do |form| %>
-          <% if @school_join.errors[:base].any? %>
-            <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
-              <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
-              <p><%= @school_join.errors[:base].to_sentence %></p>
-            </div>
-          <% end %>
-          <div class="space-y-2">
-            <%= ui_field form, :drena_public_id, as: :select, choices: @drena_options, prompt: t(".drena_prompt"),
-                         form: "school-join-drena", data: { action: "change->school--drena-schools#load" } %>
-            <%# Repli sans JavaScript : noscript plutôt qu'un attribut posé par Stimulus, que le morphing du 422 effacerait. %>
-            <noscript>
-              <%= ui_button t(".show_schools"), type: :submit, variant: :secondary, size: :sm, icon: "magnifying-glass",
-                            form: "school-join-drena" %>
-            </noscript>
-          </div>
-          <%# Avec JavaScript, le frame vient de /drenas/:id/schools?scope=school_join (ADR-0083 §4.5) : mêmes champs, même scope. %>
-          <%= render template: "school/drena_schools/index",
-                     locals: { schools: @school_options, drena_public_id: @school_join.drena_public_id, registration: @school_join,
-                               scope: :school_join } %>
-          <%= ui_button t(".join"), type: :submit, variant: :brand, full: true %>
-        <% end %>
+        <%= render "school/teacher_schools/join_fields", school_join: @school_join, drena_options: @drena_options,
+                                                         school_options: @school_options, get_url: pending_account_path,
+                                                         post_url: pending_school_join_path, submit_label: t(".join") %>
       <% end %>
       <%= ui_button t(".sign_out"), href: session_path, method: :delete, variant: :secondary, full: true %>
     </div>
