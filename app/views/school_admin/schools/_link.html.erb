@@ -1,13 +1,14 @@
 <%# 🌐 UI · school_admin/schools/_link — lien d'invitation des enseignants de la direction (stable : ni code ni « Changer le lien ») %>
 <%# Rôle : lien /i/<jeton de la direction>, « Copier le lien », « Partager sur WhatsApp » %>
-<%# ADR  : 0071, 0083 (§4.1) · UDR : 0050, 0056, 0079 (§3.7) · Stimulus : clipboard (ui_copy_button) · WhatsApp : lien sortant %>
+<%# ADR  : 0071, 0083 (§4.1), 0094 · UDR : 0050, 0056, 0079 (§3.7), 0100 (§3.4 : la phrase d'aide) · Stimulus : clipboard (ui_copy_button) · WhatsApp : lien sortant %>
 <% link = teacher_invite_link_url(school.direction_invite_token) %>
 <div id="school_link_block">
   <p class="flex flex-col gap-1">
     <span id="school_link_label" class="text-sm text-mute"><%= t(".label") %></span>
-    <a id="school_link_value" href="<%= link %>" aria-labelledby="school_link_label"
+    <a id="school_link_value" href="<%= link %>" aria-labelledby="school_link_label" aria-describedby="school_link_hint"
        class="font-mono text-sm break-all text-brand-strong"><%= link %></a>
   </p>
+  <p id="school_link_hint" class="mt-2 text-sm text-mute"><%= t(".hint") %></p>
   <div class="mt-4 flex flex-col gap-3 sm:flex-row">
     <%= ui_copy_button link, label: t(".copy"), copied: t(".copied"), aria_label: t(".copy_label"), icon: "link" %>
     <%= ui_button t(".share_whatsapp"), href: whatsapp_share_url(t(".share_message", school: school.name, link:)), variant: :brand,

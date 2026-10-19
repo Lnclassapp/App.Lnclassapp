@@ -1,6 +1,7 @@
 # 🧠 DOMAINE · UseCases::School::ReinstateTeacher
-# Rôle : la direction réintègre un enseignant qu'elle a retiré : rattaché de nouveau, sans classe ni devoir rendu ; départ clos
-# ADR  : 0028, 0071 · UDR : 0056
+# Rôle : la direction réintègre un enseignant qu'elle a retiré : rattaché de nouveau (en plus de ses autres établissements, dans
+#        le plafond), sans classe ni devoir rendu ; départ clos
+# ADR  : 0028, 0071, 0094 · UDR : 0056, 0100 (§3.3)
 module UseCases
   module School
     class ReinstateTeacher
@@ -17,7 +18,8 @@ module UseCases
       end
 
       # school_id : current_actor.school_id, jamais un paramètre. L'établissement est lu, puis autorisé (ADR-0071 §4.3).
-      # → Result(Entities::Identity::User) | :forbidden | :not_found | :conflict (rattachement refusé par la base)
+      # → Result(Entities::Identity::User) | :forbidden | :not_found | :conflict (base schools_limit : plafond atteint ;
+      #   already_attached), rien n'est écrit
       def call(actor:, school_id:, teacher_public_id:)
         school = @schools.find_by_id(id: school_id)
         allowed = @policy.call(actor:, school:)
@@ -32,18 +34,19 @@ module UseCases
 
       private
 
-      # Un départ ouvert de cet établissement, et aucun établissement depuis : sinon, rien à réintégrer.
+      # Un départ ouvert de cet établissement, qu'il ait rejoint un autre établissement depuis ou non (ADR-0094 §4.4).
       def reinstatable(teacher, school)
         return if teacher.role != TEACHER || teacher.anonymized?
-        return if @schools.primary_school_id_for(teacher_id: teacher.id)
 
         @departures.open_for(teacher_id: teacher.id, school_id: school.id)
       end
 
-      # Le rattachement est la première écriture : refusé, rien n'a été écrit avant lui.
+      # Le rattachement est la première écriture, sous le verrou du compte et le plafond : refusé, rien n'a été écrit avant
+      # lui. Principal s'il n'a aucun autre établissement, secondaire sinon : le dépôt en décide sous le verrou.
       def reinstate(actor, teacher, departure, now)
         @transaction.call do
-          attached = @schools.attach_teacher(teacher_id: teacher.id, school_id: departure.school_id, primary: true, at: now)
+          attached = @schools.attach_teacher_within_cap(teacher_id: teacher.id, school_id: departure.school_id,
+                                                        cap: Entities::School::TeacherSchools::MAX, at: now)
           next attached if attached.failure?
 
           @departures.close(id: departure.id, reinstated_by_id: actor.user_id, at: now)
