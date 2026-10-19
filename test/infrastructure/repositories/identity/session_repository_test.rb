@@ -78,10 +78,17 @@ module Repositories
         other = create_for(teacher, digest: "f" * 64)
 
         assert_nil @repository.find_by_token_digest(token_digest: "d" * 64).current_school_id
-        assert @repository.set_current_school(id:, school_id: school.id)
+        assert_equal 1, @repository.set_current_school(id:, school_id: school.id)
 
         assert_equal school.id, @repository.find_by_token_digest(token_digest: "d" * 64).current_school_id
         assert_nil Orm::Session.find(other).current_school_id
+      end
+
+      test "set_current_school on a session revoked meanwhile writes nothing and says so" do
+        id = create_for(create_teacher(school: nil))
+        Orm::Session.where(id:).delete_all
+
+        assert_equal 0, @repository.set_current_school(id:, school_id: create_school.id)
       end
 
       test "a deleted school leaves the session without a current school" do

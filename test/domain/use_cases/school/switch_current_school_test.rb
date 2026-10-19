@@ -21,8 +21,15 @@ module UseCases
 
         attr_reader :writes
 
-        def initialize = @writes = []
-        def set_current_school(id:, school_id:) = (@writes << [ id, school_id ]) && true
+        # revoked : ids de sessions supprimées entre la lecture et l'écriture (déconnexion sur un autre appareil).
+        def initialize(revoked: []) = (@writes = []) && (@revoked = revoked)
+
+        def set_current_school(id:, school_id:)
+          return 0 if @revoked.include?(id)
+
+          @writes << [ id, school_id ]
+          1
+        end
       end
 
       setup do
@@ -38,6 +45,14 @@ module UseCases
 
         assert_equal B, result.value
         assert_equal [ [ 5, 32 ] ], @sessions.writes
+      end
+
+      # Revue de la PR #250, constat 4 : aucune ligne écrite, aucun succès annoncé.
+      test "a session revoked meanwhile is not found: no « switched to B » for a session that no longer exists" do
+        use_case = SwitchCurrentSchool.new(schools: FakeSchools.new({ 7 => [ 31, 32 ] }), sessions: FakeSessions.new(revoked: [ 5 ]),
+                                           policy: Policies::School::SwitchCurrentSchoolPolicy.new)
+
+        assert_equal :not_found, use_case.call(actor: teacher, session_id: 5, school_public_id: "sb").code
       end
 
       test "a school the teacher is not attached to is refused, and the session is not written" do

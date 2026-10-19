@@ -1,6 +1,6 @@
 # 🌐 UI · PublicPagesHelper — liens vers les pages publiques en ligne (mission, données, CGU, CGV)
-# Rôle : une seule liste, lue par le pied de page de la homepage, /aide et la carte d'aide ; « Blog » dès un article publié
-# UDR  : 0063 (§3.1, §3.4), 0066 (§3.5)
+# Rôle : une seule liste, lue par le pied de page de la homepage, /aide et la carte d'aide ; « Blog » dès un article publié, « Les cours par niveau » dès un cours publié
+# UDR  : 0063 (§3.1, §3.4), 0066 (§3.5), 0113 (§3.9)
 module PublicPagesHelper
   # → [[libellé, chemin], …] des pages demandées qui sont en ligne, dans l'ordre de PagesController::PAGES.
   def public_page_links(pages = Communication::PagesController::PAGES)
@@ -18,5 +18,13 @@ module PublicPagesHelper
     return @blog_link if defined?(@blog_link)
 
     @blog_link = ([ t("public_pages.links.blog"), blog_path ] if Queries::Communication::PublishedArticlesQuery.new.any?)
+  end
+
+  # → [libellé, chemin] de la liste des niveaux s'il existe au moins un cours publié, sinon nil (UDR-0113 §3.9). Une
+  # requête par rendu. Lu par le pied de page de la homepage.
+  def catalog_link
+    return @catalog_link if defined?(@catalog_link)
+
+    @catalog_link = ([ t("public_pages.links.catalog"), public_levels_path ] if Queries::Catalog::PublicCourses.any?)
   end
 end

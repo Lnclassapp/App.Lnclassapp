@@ -29,6 +29,7 @@ class School::TeacherSchoolsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "ME-02: joining B from the page: secondary, the session moves to B, on to the classrooms of B" do
+    @teacher.teacher_profile.update!(joined_via: "direction")
     sign_in_as @teacher
     join @b
 
@@ -38,6 +39,7 @@ class School::TeacherSchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ @b.id ], Orm::Session.where(user_id: @teacher.id).pluck(:current_school_id)
     assert_equal({ "change" => "teacher_joined", "via" => "standard" }, Orm::AuditEvent.where(action: "school.changed").last.metadata)
     assert_not Orm::SchoolJoinRequest.exists?(teacher: @teacher), "ME-06 : aucune demande"
+    assert_equal "direction", @teacher.teacher_profile.reload.joined_via, "ME-06 : la voie d'arrivée ne change pas"
   end
 
   test "two schools: a menu to leave each, « Aller dans » the other one" do
@@ -64,6 +66,7 @@ class School::TeacherSchoolsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :unprocessable_entity
     assert_select "#schools_limit"
+    assert_match "Vous avez atteint 3 établissements.", response.body
     assert_equal 3, attached.size
   end
 
@@ -89,6 +92,10 @@ class School::TeacherSchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to teacher_schools_path
     assert_equal t("school.teacher_schools.destroy.left", school: "Collège Saint-Michel"), flash[:notice]
     assert_equal [ [ @a.id, true ] ], attached
+
+    join @b
+    assert_redirected_to teacher_classrooms_path, "aucun départ n'est noté : il peut revenir"
+    assert_equal [ [ @a.id, true ], [ @b.id, false ] ], attached
   end
 
   test "ME-15: a forged DELETE of the last school is refused and changes nothing; a stranger's school is not found" do
@@ -119,12 +126,17 @@ class School::TeacherSchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ [ @a.id, true ] ], attached
   end
 
-  test "students, directions and the team have no « Mes établissements »" do
-    [ create_student, create_school_admin(school: @a) ].each do |user|
+  test "students, directions and the team have no « Mes établissements », and can neither join nor leave" do
+    [ create_student, create_school_admin(school: @a), create_team_member ].each do |user|
       sign_in_as user
       get teacher_schools_path
-      assert_response :forbidden
+      assert_response :forbidden, user.role
+      join @b
+      assert_response :forbidden, user.role
+      delete teacher_school_path(@a.public_id)
+      assert_response :forbidden, user.role
       sign_out
     end
+    assert_equal [ [ @a.id, true ] ], attached
   end
 end

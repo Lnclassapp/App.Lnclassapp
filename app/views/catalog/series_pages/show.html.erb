@@ -1,0 +1,59 @@
+<%# 🌐 UI · catalog/series_pages/show — page publique d'un niveau et de sa série, /niveaux/:niveau/:serie : « Cours de Terminale D » %>
+<%# Rôle : la série en pastille active puis les autres séries ; cours de la série et cours communs du niveau, par matière, 6 par matière ; vide, noindex %>
+<%# UDR  : 0115 (§3.2 à §3.5), 0113 (§3.1) · ADR : 0099 · PRD : CC-14 à CC-18 %>
+<% level = @result.level %>
+<% series = @result.series %>
+<% materials = @result.groups.map { it.material.name } %>
+<% listed = (materials.size > 3 ? [ *materials.first(3), "…" ] : materials).join(", ") %>
+<% title = t(".title", level: level.name, series: series.name) %>
+<% page_title title %>
+<% content_for :head do %>
+  <%= render "catalog/public/head", title:, description: t(".description", level: level.name, series: series.name, materials: listed.presence || t(".none")),
+                                     canonical: canonical_url(public_level_series_path(level.slug, series.slug)), index: @result.total_count.positive? %>
+<% end %>
+<div class="flex min-h-screen flex-col bg-paper">
+  <%= render "catalog/public/header" %>
+  <main id="public_catalog" class="mx-auto w-full max-w-page flex-1 px-gutter py-8">
+    <%= ui_back_link level.name, href: public_level_path(level.slug) %>
+    <h1 class="font-display text-3xl leading-tight font-extrabold text-balance"><%= title %></h1>
+    <% if @result.groups.any? %>
+      <p class="mt-2 text-mute">
+        <%= t(@result.common ? ".summary_with_common" : ".summary", level: level.name,
+              courses: t("catalog.public.published_count", count: @result.total_count),
+              materials: t("catalog.public.materials_count", count: @result.groups.size)) %>
+      </p>
+      <% if @result.siblings.any? %>
+        <nav aria-label="<%= t(".series_label") %>">
+          <ul id="series_siblings" class="mt-4 flex flex-wrap gap-2">
+            <li>
+              <span aria-current="page" class="inline-flex min-h-tap items-center rounded-full border border-brand bg-brand px-4 text-sm font-bold text-white">
+                <%= "#{level.name} #{series.name}" %>
+              </span>
+            </li>
+            <% @result.siblings.each do |slug, name| %>
+              <li>
+                <%= link_to "#{level.name} #{name}", public_level_series_path(level.slug, slug),
+                      class: "inline-flex min-h-tap items-center rounded-full border border-line bg-white px-4 text-sm font-bold text-ink hover:border-brand focus-visible:outline-2 focus-visible:outline-brand" %>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
+      <% end %>
+      <%= render "catalog/public/call_to_action", id: "series_cta_top", spacing: "mt-6" %>
+      <div id="series_groups" class="mt-8 space-y-8">
+        <% @result.groups.each do |group| %>
+          <%= render "catalog/public/material_group", group:,
+                                                      href: public_material_path(group.material.slug, niveau: level.slug, serie: series.slug) %>
+        <% end %>
+      </div>
+      <%= render "catalog/public/call_to_action", id: "series_cta_bottom", spacing: "mt-10" %>
+    <% else %>
+      <p class="mt-2 text-mute"><%= t(".none") %></p>
+      <div id="series_empty" class="mt-8">
+        <%= ui_empty_state title: t(".empty.title", level: level.name, series: series.name), icon: "book-open",
+                           action: { label: t(".empty.action", level: level.name), href: public_level_path(level.slug) } %>
+      </div>
+    <% end %>
+  </main>
+  <%= render "catalog/public/footer" %>
+</div>

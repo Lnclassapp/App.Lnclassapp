@@ -45,11 +45,10 @@ module UseCases
       end
 
       # Le rattachement est la première écriture, sous le verrou du compte et le plafond : refusé, rien n'a été écrit avant
-      # lui. Principal s'il n'a aucun autre établissement, secondaire sinon.
+      # lui. Principal s'il n'a aucun autre établissement, secondaire sinon : le dépôt en décide sous le verrou.
       def reinstate(actor, teacher, departure, now)
         @transaction.call do
-          primary = @schools.school_ids_for(teacher_id: teacher.id).empty?
-          attached = @schools.attach_teacher_within_cap(teacher_id: teacher.id, school_id: departure.school_id, primary:,
+          attached = @schools.attach_teacher_within_cap(teacher_id: teacher.id, school_id: departure.school_id,
                                                         cap: Entities::School::TeacherSchools::MAX, at: now)
           next attached if attached.failure?
 

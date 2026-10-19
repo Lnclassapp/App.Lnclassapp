@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::IssuePinRecoveryCode
 # Rôle : l'enseignant ou l'équipe émet un code de récupération du PIN ; seule l'empreinte est gardée, le code en clair sort une fois
-# ADR  : 0026, 0028, 0032, 0050 · UDR : 0020
+# ADR  : 0026, 0028, 0032, 0050, 0094 · UDR : 0020
 module UseCases
   module Identity
     class IssuePinRecoveryCode
@@ -31,14 +31,15 @@ module UseCases
 
       private
 
-      # Fait de la policy : l'élève est dans sa classe principale, active, que l'enseignant a déclarée.
+      # Fait de la policy : l'élève est dans sa classe principale, active, que l'enseignant a déclarée dans son établissement
+      # courant (ADR-0094 §10 : une classe d'un autre de ses établissements n'existe pas, même par son adresse).
       def teaches?(actor, target)
-        return false unless actor&.teacher? && target.student?
+        return false unless actor&.teacher? && actor.school_id && target.student?
 
         membership = @memberships.primary_for(student_id: target.id)
         return false unless membership&.classroom_active?
 
-        @teachings.classroom_ids_for(teacher_id: actor.user_id).include?(membership.classroom_id)
+        @teachings.classroom_ids_for(teacher_id: actor.user_id, school_id: actor.school_id).include?(membership.classroom_id)
       end
 
       def issue(actor, target, code, now)

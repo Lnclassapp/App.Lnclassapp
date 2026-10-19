@@ -1,0 +1,64 @@
+<%# 🌐 UI · catalog/material_pages/show — page publique d'une matière, /matieres/:slug : pastilles de niveau, cours publiés par niveau, 24 par page %>
+<%# Rôle : ?niveau= (et ?serie=, repris de la page série) filtrent et titrent ; la page suivante se charge au défilement ; vide, noindex %>
+<%# UDR  : 0114 (§3.2, §3.4 à §3.6), 0113 (§3.1) · ADR : 0099 · PRD : CC-09 à CC-13, CC-17 %>
+<% material = @page.material %>
+<% level = @page.selected_level %>
+<% series = @page.selected_series %>
+<% level_label = [ level&.name, series&.name ].compact.join(" ") %>
+<% title = level ? t(".title_with_level", material: material.name, level: level_label) : material.name %>
+<% tab_title = level ? title : t(".page_title", material: material.name) %>
+<% filters = { niveau: level&.slug, serie: series&.slug }.compact %>
+<% illustration = subject_illustration(material.slug) %>
+<% page_title tab_title %>
+<% content_for :head do %>
+  <% description = level ? t(".description_with_level", material: material.name, level: level_label) : t(".description", material: material.name) %>
+  <%= render "catalog/public/head", title: tab_title, description:, canonical: canonical_url(public_material_path(material.slug, **filters)),
+                                     index: @page.total_count.positive? %>
+<% end %>
+<div class="flex min-h-screen flex-col bg-paper">
+  <%= render "catalog/public/header" %>
+  <main id="public_catalog" class="mx-auto w-full max-w-page flex-1 px-gutter py-8">
+    <% if series %>
+      <%= ui_back_link level_label, href: public_level_series_path(level.slug, series.slug) %>
+    <% elsif level %>
+      <%= ui_back_link level.name, href: public_level_path(level.slug) %>
+    <% else %>
+      <%= ui_back_link t(".back"), href: public_levels_path %>
+    <% end %>
+    <div id="material_title" class="flex items-center gap-3">
+      <span class="<%= class_names("grid size-12 shrink-0 place-items-center rounded-full", illustration.tint) %>">
+        <%= image_tag illustration.path, alt: "", class: "size-8", "aria-hidden": true %>
+      </span>
+      <h1 class="font-display text-2xl leading-tight font-extrabold text-balance sm:text-3xl"><%= title %></h1>
+    </div>
+    <% if @page.total_count.positive? %>
+      <p class="mt-2 text-mute"><%= t(".summary", count: @page.total_count) %></p>
+      <nav aria-label="<%= t(".levels_label") %>">
+        <ul id="material_levels" class="mt-4 flex flex-wrap gap-2">
+          <% pills = [ [ t(".all_levels"), public_material_path(material.slug), level.nil?, nil ] ] %>
+          <% @page.levels.each do |slug, name, count| %>
+            <% pills << [ t(".level_pill", level: name, count:), public_material_path(material.slug, niveau: slug), level&.slug == slug,
+                          t(".level_pill_label", level: name, courses: t("catalog.public.courses_count", count:)) ] %>
+          <% end %>
+          <% pills.each do |label, href, active, aria_label| %>
+            <li>
+              <%= link_to label, href, "aria-current": ("page" if active), "aria-label": aria_label,
+                    class: class_names("inline-flex min-h-tap items-center rounded-full border px-4 text-sm font-bold focus-visible:outline-2 focus-visible:outline-brand",
+                                       active ? "border-brand bg-brand text-white" : "border-line bg-white text-ink hover:border-brand") %>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+      <%= render "catalog/public/call_to_action", id: "material_cta_top", spacing: "mt-6" %>
+      <div id="material_groups" class="mt-8 space-y-8">
+        <%= render "catalog/material_pages/page", page: @page %>
+      </div>
+      <%= render "catalog/public/call_to_action", id: "material_cta_bottom", spacing: "mt-10" %>
+    <% else %>
+      <div id="material_empty" class="mt-8">
+        <%= ui_empty_state title: t(".empty.title"), icon: "book-open", action: { label: t(".empty.action"), href: public_levels_path } %>
+      </div>
+    <% end %>
+  </main>
+  <%= render "catalog/public/footer" %>
+</div>
