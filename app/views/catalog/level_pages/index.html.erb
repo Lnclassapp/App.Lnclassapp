@@ -1,0 +1,44 @@
+<%# 🌐 UI · catalog/level_pages/index — liste publique des niveaux, /niveaux : premier et second cycle, un niveau par case %>
+<%# Rôle : seuls les niveaux qui ont un cours publié, avec leur nombre de cours et leurs séries ; vide, « Les cours arrivent bientôt. » et noindex %>
+<%# UDR  : 0113 (§3.2, §3.4) · ADR : 0099 · PRD : CC-01, CC-02 %>
+<% page_title t(".page_title") %>
+<% content_for :head do %>
+  <%= render "catalog/public/head", title: t(".title"), description: t(".description"), canonical: canonical_url(public_levels_path),
+                                     index: @levels.any? %>
+<% end %>
+<div class="flex min-h-screen flex-col bg-paper">
+  <%= render "catalog/public/header" %>
+  <main id="public_catalog" class="mx-auto w-full max-w-page flex-1 px-gutter py-8">
+    <%= ui_back_link t(".back"), href: root_path %>
+    <h1 class="font-display text-3xl leading-tight font-extrabold text-balance"><%= t(".title") %></h1>
+    <p class="mt-2 text-mute"><%= t(".lead") %></p>
+    <% if @levels.any? %>
+      <% cycles = @levels.group_by(&:cycle) %>
+      <% %w[first second].select { cycles.key?(it) }.each do |cycle| %>
+        <section id="cycle_<%= cycle %>" aria-labelledby="cycle_<%= cycle %>_title" class="mt-8">
+          <h2 id="cycle_<%= cycle %>_title" class="font-display text-xl font-extrabold"><%= t(".cycles.#{cycle}") %></h2>
+          <ul class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            <% cycles.fetch(cycle).each do |level| %>
+              <li>
+                <%= link_to public_level_path(level.slug), id: "level_#{level.slug}",
+                      class: "block h-full min-h-tap rounded-card border border-line bg-white p-4 shadow-card transition hover:border-brand focus-visible:outline-2 focus-visible:outline-brand" do %>
+                  <span class="block font-display text-lg font-extrabold text-ink"><%= level.name %></span>
+                  <span class="block text-sm text-mute"><%= t("catalog.public.courses_count", count: level.count) %></span>
+                  <% if level.series.any? %>
+                    <span class="mt-1 block text-xs text-mute"><%= t(".series", count: level.series.size, names: level.series.map(&:last).join(", ")) %></span>
+                  <% end %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </section>
+      <% end %>
+    <% else %>
+      <div id="levels_empty" class="mt-8">
+        <%= ui_empty_state title: t(".empty"), icon: "book-open" %>
+      </div>
+    <% end %>
+    <%= render "catalog/public/call_to_action", id: "levels_cta", spacing: "mt-10" %>
+  </main>
+  <%= render "catalog/public/footer" %>
+</div>
