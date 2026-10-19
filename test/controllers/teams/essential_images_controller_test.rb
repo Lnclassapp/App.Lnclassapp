@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0089 §4.7, UDR-0084 §3.0 : l'éditeur de fiche envoie une image en multipart ; 201 avec exactement public_id, sgid,
+# ADR-0104 §4.7, UDR-0129 §3.0 : l'éditeur de fiche envoie une image en multipart ; 201 avec exactement public_id, sgid,
 # url, width, height ; 422 { error } en français ; 403 pour qui ne gère pas les images ; 401 en JSON sans session.
 # Un refus ne laisse rien : ni ligne essential_images, ni blob.
 class Teams::EssentialImagesControllerTest < ActionDispatch::IntegrationTest

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::EssentialImageStorePort
 # Rôle : contrat du stockage des images de fiche (service Active Storage, bucket en production) : envoyer, compter, servir, purger
-# ADR  : 0047, 0060, 0089
+# ADR  : 0047, 0060, 0104
 module Ports
   module Catalog
     module EssentialImageStorePort

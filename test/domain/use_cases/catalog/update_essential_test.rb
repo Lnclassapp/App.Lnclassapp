@@ -69,7 +69,7 @@ module UseCases
                      [ sent.id, sent.slug, sent.course_id, sent.position, sent.author_id, sent.status, sent.course_status ]
       end
 
-      test "ADR-0089 : les textes de remplacement saisis vont au repository avec la fiche" do
+      test "ADR-0104 : les textes de remplacement saisis vont au repository avec la fiche" do
         sent = nil
         @essentials.define_singleton_method(:update) { |essential:| (sent = essential) && Shared::Result.success(essential) }
 

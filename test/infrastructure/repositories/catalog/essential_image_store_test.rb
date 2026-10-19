@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0089 §4.7 : une image de fiche est une ligne d'essential_images et son fichier sur le service Active Storage, né
+# ADR-0104 §4.7 : une image de fiche est une ligne d'essential_images et son fichier sur le service Active Storage, né
 # analysé ; elle se lit avec le slug de sa fiche ; elle se compte par fiche ; une orpheline de plus de 48 h est purgée.
 module Repositories
   module Catalog

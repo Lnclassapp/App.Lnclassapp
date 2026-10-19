@@ -239,7 +239,7 @@ module UseCases
                      report.import_errors.map { it.values_at("path", "code") }
       end
 
-      # ADR-0089 §4.3, §4.6 : l'import annonce les images, il n'en crée aucune.
+      # ADR-0104 §4.3, §4.6 : l'import annonce les images, il n'en crée aucune.
       test "an image slot in a sheet and an image description on a question are written as they are" do
         illustrated = course("Le circuit électrique")
         essential = illustrated["essentials"][0]

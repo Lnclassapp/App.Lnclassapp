@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::Exercise
 # Rôle : un exercice d'une fiche, ses questions, et les faits de publication de ses parents
-# ADR  : 0035, 0036, 0054, 0089
+# ADR  : 0035, 0036, 0054, 0104
 module Entities
   module Assessment
     class Exercise
@@ -34,7 +34,7 @@ module Entities
       # Au moins une question, toutes bien construites (ADR-0035).
       def publishable? = questions.any? && questions.all? { |question| question.structure_errors.empty? }
 
-      # Les questions dont l'image manque ou n'a pas de texte de remplacement, par numéro (ADR-0089 §4.4) → { 2 => [:image_missing] }.
+      # Les questions dont l'image manque ou n'a pas de texte de remplacement, par numéro (ADR-0104 §4.4) → { 2 => [:image_missing] }.
       def image_errors = questions.each_with_index.to_h { |question, index| [ index + 1, question.image_errors ] }.reject { _2.empty? }
 
       # Une question tentée ne se modifie plus (ADR-0036, ADR-0054).

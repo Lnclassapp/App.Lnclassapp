@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0089 §4.7 : une image envoyée puis jamais enregistrée est supprimée après 48 h ; le nombre est journalisé, zéro compris.
+# ADR-0104 §4.7 : une image envoyée puis jamais enregistrée est supprimée après 48 h ; le nombre est journalisé, zéro compris.
 class Assessment::PurgeOrphanQuestionImagesJobTest < ActiveJob::TestCase
   test "supprime l'orpheline de 49 h, garde celle de 47 h, et journalise le nombre" do
     stale = create_question_image(created_at: 49.hours.ago)

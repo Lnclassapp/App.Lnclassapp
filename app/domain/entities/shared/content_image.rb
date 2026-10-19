@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Shared::ContentImage
 # Rôle : une image d'un contenu pédagogique (fiche ou question) et ses plafonds, lus par les vues, le JavaScript et le serveur
-# ADR  : 0060, 0074, 0089 · UDR : 0084
+# ADR  : 0060, 0074, 0104 · UDR : 0129
 module Entities
   module Shared
     # owner_id : la fiche ou la question qui cite l'image ; nil entre l'envoi et le premier enregistrement.
@@ -11,7 +11,7 @@ module Entities
 
       def alt? = !alt.to_s.strip.empty?
     end
-    # Ce que lit Entities::Shared::ImageHeader : ni GIF, ni WebP animé, ni SVG (ADR-0089 §4.1).
+    # Ce que lit Entities::Shared::ImageHeader : ni GIF, ni WebP animé, ni SVG (ADR-0104 §4.1).
     ContentImage::CONTENT_TYPES = %w[image/jpeg image/png image/webp].freeze
     # L'élève révise sur téléphone, avec peu de données : 300 Ko au plus par image (grill, question 6).
     ContentImage::MAX_KILOBYTES = 300

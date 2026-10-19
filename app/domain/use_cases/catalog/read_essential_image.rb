@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::ReadEssentialImage
 # Rôle : lire les octets d'une image de fiche sous la règle de lecture de sa fiche ; gardée par le navigateur si la fiche est lisible de tous
-# ADR  : 0026, 0028, 0035, 0089 · UDR : 0084
+# ADR  : 0026, 0028, 0035, 0104 · UDR : 0129
 module UseCases
   module Catalog
     class ReadEssentialImage

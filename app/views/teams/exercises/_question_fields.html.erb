@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/exercises/_question_fields — une question du formulaire : image, énoncé, type, explication, propositions %>
 <%# Rôle : rendue par fields_for, ou clonée depuis <template> ; ses propositions ont leur propre contrôleur nested-form ; son image, assessment--question-image %>
-<%# ADR  : 0054, 0089 · UDR : 0007, 0017, 0084 · Stimulus : teams--nested-form, assessment--question-image (errors : « questions[i] ») %>
+<%# ADR  : 0054, 0104 · UDR : 0007, 0017, 0129 · Stimulus : teams--nested-form, assessment--question-image (errors : « questions[i] ») %>
 <fieldset data-nested-question class="relative rounded-card border border-line bg-white p-4 counter-question">
   <legend class="float-left w-full pr-14 font-medium text-ink">
     <%= t(".legend") %> <span class="question-number"></span>

@@ -57,7 +57,7 @@ module Entities
         assert_equal [ [ "essentials[2].name", "blank" ], [ "essentials[2].exercises[0].exercise_type", "invalid_value" ] ], codes(errors)
       end
 
-      # ADR-0089 §4.3 : un emplacement que le motif ne lit pas ne serait compté nulle part ; l'import le refuse à sa place.
+      # ADR-0104 §4.3 : un emplacement que le motif ne lit pas ne serait compté nulle part ; l'import le refuse à sa place.
       test "une fiche : un emplacement d'image trop long, dans une liste ou vide est refusé, un emplacement bien écrit passe" do
         content = "<p>[[image: une pile]]</p><p>[[image: #{'a' * 151}]]</p><ul><li>[[image: une lampe]]</li></ul><p>[[image: ]]</p>"
 

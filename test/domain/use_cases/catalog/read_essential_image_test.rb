@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0089 §4.5 : une image de fiche se lit sous la règle de lecture de sa fiche. Fiche et cours publiés : tout connecté,
+# ADR-0104 §4.5 : une image de fiche se lit sous la règle de lecture de sa fiche. Fiche et cours publiés : tout connecté,
 # en cache navigateur ; brouillon, archivée ou image pas encore rattachée : l'équipe seulement, jamais gardée ; sinon
 # introuvable. Le fichier n'est lu qu'à la demande.
 module UseCases

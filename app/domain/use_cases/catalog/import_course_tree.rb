@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::ImportCourseTree
 # Rôle : adaptateur d'import des cours complets (fiches, exercices, questions, propositions), tout en draft
-# ADR  : 0035, 0039, 0089 · UDR : 0038
+# ADR  : 0035, 0039, 0104 · UDR : 0038
 module UseCases
   module Catalog
     class ImportCourseTree
@@ -105,7 +105,7 @@ module UseCases
       end
 
       # L'ancienne application nomme is_correct ce que le schéma nomme correct. L'image d'une question n'arrive que par sa
-      # description (ADR-0089 §4.6) : le schéma a déjà refusé toute autre forme.
+      # description (ADR-0104 §4.6) : le schéma a déjà refusé toute autre forme.
       def question_node(question, index)
         answers = question["answers"].each_with_index.map do |answer, rank|
           Node::AnswerNode.new(position: rank + 1, content: answer["content"].strip,

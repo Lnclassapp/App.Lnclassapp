@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Assessment::QuestionImageStorePort
 # Rôle : contrat du stockage de l'image d'une question (service Active Storage, bucket en production) : envoyer, servir, purger
-# ADR  : 0047, 0060, 0089
+# ADR  : 0047, 0060, 0104
 module Ports
   module Assessment
     module QuestionImageStorePort

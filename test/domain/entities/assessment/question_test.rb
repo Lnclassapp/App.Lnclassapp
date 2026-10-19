@@ -49,7 +49,7 @@ module Entities
         assert_equal %w[true_false single_choice multiple_correct_2 multiple_correct_3], Question::TYPES
       end
 
-      # ADR-0089 §4.4 : ce qui manque pour publier, sans gêner l'enregistrement d'un brouillon.
+      # ADR-0104 §4.4 : ce qui manque pour publier, sans gêner l'enregistrement d'un brouillon.
       test "image_errors : description sans image, image sans texte de remplacement, ou rien" do
         base = question("true_false", true, false)
         image = ->(alt) { Entities::Shared::ContentImage.new(public_id: "p", alt:) }

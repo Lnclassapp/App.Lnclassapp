@@ -36,7 +36,7 @@ module Repositories
         assert_equal "courses[0].essentials[3].a/b~c", ImportSchemaValidator.json_path("/courses/0/essentials/3/a~1b~0c")
       end
 
-      # ADR-0089 §4.6 : l'image d'une question est un ajout compatible de la version 1.
+      # ADR-0104 §4.6 : l'image d'une question est un ajout compatible de la version 1.
       test "course-tree v1 : les leçons rédigées du dépôt restent valides, l'image d'une question n'admet que sa description" do
         validator = ImportSchemaValidator.new
         lessons = Rails.root.glob("docs/contenus/lecons-traitees/**/*.json")

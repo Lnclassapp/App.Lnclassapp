@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::CreateEssential
 # Rôle : l'équipe crée une fiche essentielle en brouillon, à la suite des fiches de son cours ; nom unique dans le cours
-# ADR  : 0026, 0028, 0035, 0089
+# ADR  : 0026, 0028, 0035, 0104
 module UseCases
   module Catalog
     class CreateEssential

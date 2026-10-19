@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::ImageSlot
 # Rôle : un emplacement d'image annoncé par l'import dans le texte d'une fiche, « [[image: description]] » seul dans son paragraphe
-# ADR  : 0089 · UDR : 0084
+# ADR  : 0104 · UDR : 0129
 module Entities
   module Catalog
     ImageSlot = Data.define(:description) do

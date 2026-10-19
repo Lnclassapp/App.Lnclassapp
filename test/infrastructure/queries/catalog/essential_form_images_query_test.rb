@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0089, UDR-0084 §3.1 : la modale de fiche montre, dans l'ordre du texte, les images de la fiche ou encore à personne,
+# ADR-0104, UDR-0129 §3.1 : la modale de fiche montre, dans l'ordre du texte, les images de la fiche ou encore à personne,
 # avec le texte saisi, sinon l'enregistré. Une image d'une autre fiche n'est pas montrée.
 module Queries
   module Catalog

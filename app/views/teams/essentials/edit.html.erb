@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/essentials/edit — modification d'une fiche essentielle, servie dans le frame « modal » %>
 <%# Rôle : le contenu enregistré est rechargé dans l'éditeur ; le statut est affiché, il ne se change pas ici %>
-<%# ADR  : 0035, 0047, 0051, 0089 · UDR : 0006, 0007, 0016, 0054, 0084 %>
+<%# ADR  : 0035, 0047, 0051, 0104 · UDR : 0006, 0007, 0016, 0054, 0129 %>
 <%= turbo_frame_tag "modal" do %>
   <%= stylesheet_link_tag "trix" %>
   <%= ui_modal title: t(".title"), id: "essential-modal", size: :lg, open: true, document_title: page_title(t(".title")) do |modal| %>

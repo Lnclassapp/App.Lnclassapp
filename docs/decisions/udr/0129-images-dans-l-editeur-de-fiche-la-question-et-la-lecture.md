@@ -1,8 +1,8 @@
-# UDR-0084 : Insérer une image dans une fiche ou une question, remplir les emplacements de l'import, et la montrer à l'élève
+# UDR-0129 : Insérer une image dans une fiche ou une question, remplir les emplacements de l'import, et la montrer à l'élève
 <!-- index
 titre: Images dans l'éditeur de fiche, la question et la lecture élève
 statut: Proposé
-adr-lie: [0089](../adr/0089-images-des-fiches-et-des-questions.md)
+adr-lie: [0104](../adr/0104-images-des-fiches-et-des-questions.md)
 problematique: Où et comment l'équipe insère une image (emplacement annoncé ou libre), écrit son texte de remplacement, et comment l'élève la voit sur téléphone sans payer d'avance
 -->
 
@@ -11,7 +11,7 @@ problematique: Où et comment l'équipe insère une image (emplacement annoncé 
 | **Statut** | Proposé |
 | **Date** | 2026-10-10 |
 | **Chantier** | `docs/chantiers/images-dans-les-cours` |
-| **ADR lié** | ADR-0089 |
+| **ADR lié** | ADR-0104 |
 | **Complète** | UDR-0067 (éditeur d'article en mode images, réutilisé) · UDR-0016 (modale de fiche) · UDR-0014 (éditeur riche) |
 | **Remplacé par** | — |
 
@@ -26,12 +26,12 @@ L'équipe importe une leçon dont le texte annonce des images (`[[image: …]]` 
 - **Même éditeur que le blog**, pas un nouveau : la modale de fiche passe `rich-text-editor` en mode images (UDR-0067 §3.4) et réutilise `communication--image-alts` pour les textes de remplacement. Un seul geste à apprendre pour l'équipe.
 - **L'emplacement est remplacé, pas complété** : insérer une image quand le curseur est dans un emplacement remplace le paragraphe entier et copie la description dans le texte de remplacement. On évite ainsi l'emplacement oublié à côté d'une image déjà là.
 - **Un compteur au-dessus de l'éditeur** (« 2 images à insérer ») plutôt qu'un surlignage dans Trix : Trix ne permet pas de styler un paragraphe selon son texte sans le modifier.
-- **Question : un champ image unique au-dessus de l'énoncé**, pas d'éditeur riche : l'énoncé reste un texte simple (ADR-0089 §4.2).
+- **Question : un champ image unique au-dessus de l'énoncé**, pas d'éditeur riche : l'énoncé reste un texte simple (ADR-0104 §4.2).
 - **Lecture élève : `<img loading="lazy">` avec `width`/`height`**, sans JavaScript : la mise en page ne saute pas et rien n'est chargé avant le défilement.
 
 ## 3. Règles d'implémentation
 
-> Contrat d'exécution. Chaque nouveau fichier de `app/` porte l'en-tête HITL et cite « UDR : 0084 ».
+> Contrat d'exécution. Chaque nouveau fichier de `app/` porte l'en-tête HITL et cite « UDR : 0129 ».
 
 ### 3.0 Routes et constantes (contrat du Lot 0)
 

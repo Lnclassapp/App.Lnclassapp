@@ -60,7 +60,7 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
         # ADR-0060: no direct upload address, the Active Storage routes are not drawn.
         assert_select "trix-editor#essential_content[data-direct-upload-url=''][data-blob-url-template='']"
         assert_select "input[type=hidden][name='essential[content]']", 1
-        # ADR-0089: images go through the team endpoint, one at a time, a new sheet without its slug.
+        # ADR-0104: images go through the team endpoint, one at a time, a new sheet without its slug.
         assert_select "#essential_editor[data-rich-text-editor-attachments-value=true]" \
                       "[data-rich-text-editor-upload-url-value='#{teams_essential_images_path}']" \
                       "[data-rich-text-editor-upload-field-value='essential_image[file]']" \
@@ -131,7 +131,7 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 2, Orm::Essential.where(name: "Brassage génétique").count
   end
 
-  # ADR-0089: only the sheet images sent through the team endpoint stay in the text; anything else is dropped.
+  # ADR-0104: only the sheet images sent through the team endpoint stay in the text; anything else is dropped.
   test "an attachment that is not a sheet image, sent past the editor, leaves the text" do
     sign_in_as @member
 
@@ -145,7 +145,7 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_not_includes body, "ailleurs.example"
   end
 
-  test "ADR-0089: the cited images are attached with their text alternative, and the edit form lists them in order" do
+  test "ADR-0104: the cited images are attached with their text alternative, and the edit form lists them in order" do
     first = create_essential_image
     second = create_essential_image(fixture: "photos/photo.png")
     attachment = ->(image) { %(<action-text-attachment sgid="#{image.attachable_sgid}"></action-text-attachment>) }

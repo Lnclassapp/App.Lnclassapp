@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/exercises/_form — titre, description, type et questions d'un exercice, dans la grande modale %>
 <%# Rôle : questions imbriquées ajoutées et retirées par clonage de <template> ; verrouillées, elles sont en lecture seule %>
-<%# ADR  : 0036, 0054, 0089 · UDR : 0007, 0017, 0084 · Stimulus : teams--nested-form %>
+<%# ADR  : 0036, 0054, 0104 · UDR : 0007, 0017, 0129 · Stimulus : teams--nested-form %>
 <%= form_with model: input, scope: :exercise, url:, method:, id: "exercise-form", class: "space-y-5" do |form| %>
   <% if input.errors[:base].any? %>
     <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
@@ -29,7 +29,7 @@
             <p class="text-xs font-medium text-mute">
               <%= t(".locked_question", position: question.position, type: t("teams.exercises.question_types.#{question.question_type}")) %>
             </p>
-            <%# UDR-0084 §3.2 : déjà tentée, l'image reste visible au-dessus de l'énoncé, sans bouton. %>
+            <%# UDR-0129 §3.2 : déjà tentée, l'image reste visible au-dessus de l'énoncé, sans bouton. %>
             <% if question.image %>
               <figure class="mt-2 flex items-start gap-3">
                 <%= image_tag question_image_path(question.image.public_id), alt: question.image.alt.to_s, loading: "lazy",

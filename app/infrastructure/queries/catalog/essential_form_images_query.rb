@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Catalog::EssentialFormImagesQuery
 # Rôle : images du texte d'une fiche pour la modale (ordre du texte, sgid, adresse, texte de remplacement)
-# ADR  : 0089 · UDR : 0084
+# ADR  : 0104 · UDR : 0129
 module Queries
   module Catalog
     class EssentialFormImagesQuery

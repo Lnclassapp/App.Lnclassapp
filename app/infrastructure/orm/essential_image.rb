@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::EssentialImage
 # Rôle : image d'une fiche, vérifiée, sans métadonnées ; pièce jointe Action Text du texte de la fiche par sgid
-# ADR  : 0029, 0060, 0089
+# ADR  : 0029, 0060, 0104
 module Orm
   class EssentialImage < ApplicationRecord
     include HasPublicId
@@ -11,7 +11,7 @@ module Orm
     belongs_to :essential, class_name: "Orm::Essential", optional: true, inverse_of: :images
     has_one_attached :file
 
-    # Rendu de lecture d'une image du texte (UDR-0084 §3.3), qui reçoit la ligne (public_id, alt, width, height).
+    # Rendu de lecture d'une image du texte (UDR-0129 §3.3), qui reçoit la ligne (public_id, alt, width, height).
     def to_attachable_partial_path = "catalog/essentials/body_image"
 
     # Dans l'éditeur (to_trix_html), aucun partiel : Trix montre l'image par son adresse et ses dimensions.

@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# ADR-0089 §4.4, UDR-0084 §3.2 et §3.4 : la question 2 attend son image, l'exercice refuse de se publier en la nommant ;
+# ADR-0104 §4.4, UDR-0129 §3.2 et §3.4 : la question 2 attend son image, l'exercice refuse de se publier en la nommant ;
 # l'équipe ajoute l'image dans la modale (la description devient son texte de remplacement), publie, et l'élève du niveau
 # voit l'image au-dessus de l'énoncé, chargée à la demande et à ses dimensions.
 class Assessment::QuestionImageTest < ApplicationSystemTestCase

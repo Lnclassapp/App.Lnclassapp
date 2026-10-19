@@ -128,7 +128,7 @@ module Repositories
         assert_empty repository.draft_public_ids(essential_id: drafted.id)
       end
 
-      # ADR-0089 : une question cite son image par public_id ; l'enregistrement la rattache (si elle n'est à personne), écrit
+      # ADR-0104 : une question cite son image par public_id ; l'enregistrement la rattache (si elle n'est à personne), écrit
       # son texte de remplacement, et supprime l'image remplacée ou retirée. FK RESTRICT : une question remplacée perd son
       # image avant de partir.
       def illustrated(content, image: nil, alt: nil, description: nil)
@@ -136,7 +136,7 @@ module Repositories
                                image: image && Entities::Shared::ContentImage.new(public_id: image.public_id, alt:))
       end
 
-      test "ADR-0089 : crée un exercice dont une question porte son image et sa description, relues" do
+      test "ADR-0104 : crée un exercice dont une question porte son image et sa description, relues" do
         image = create_question_image(fixture: "photos/photo.png")
 
         created = @repository.create(exercise: exercise(questions: [ illustrated("Q1", image:, alt: "Une pile", description: "Un circuit"),
@@ -149,7 +149,7 @@ module Repositories
         assert_equal Orm::Question.find_by!(exercise_id: created.id, position: 1).id, image.reload.question_id
       end
 
-      test "ADR-0089 : remplacer les questions garde l'image citée, supprime la remplacée et le journalise" do
+      test "ADR-0104 : remplacer les questions garde l'image citée, supprime la remplacée et le journalise" do
         kept = create_question_image
         replaced = create_question_image
         fresh = create_question_image
@@ -167,7 +167,7 @@ module Repositories
         assert_includes logs, "[ExerciseRepository] images supprimées ids=[#{replaced.id}] public_ids=[\"#{replaced.public_id}\"]"
       end
 
-      test "ADR-0089 : une image d'un autre exercice, citée deux fois ou inconnue refuse l'écriture au lieu d'être perdue" do
+      test "ADR-0104 : une image d'un autre exercice, citée deux fois ou inconnue refuse l'écriture au lieu d'être perdue" do
         foreign = create_question_image(question: create_exercise.questions.first)
         twice = create_question_image
         unknown = Struct.new(:public_id).new("inconnue")
@@ -183,7 +183,7 @@ module Repositories
         assert_nil twice.reload.question_id
       end
 
-      test "ADR-0089 : une question réécrite sans description d'image n'en garde aucune" do
+      test "ADR-0104 : une question réécrite sans description d'image n'en garde aucune" do
         created = @repository.create(exercise: exercise(questions: [ illustrated("Q1", description: "Un circuit") ]))
 
         updated = @repository.update(exercise: exercise(id: created.id, questions: [ illustrated("Q1") ]), replace_questions: true)
@@ -191,7 +191,7 @@ module Repositories
         assert_nil updated.questions.first.image_description
       end
 
-      test "ADR-0089 : retirer toutes les questions supprime leurs images sans heurter la clé étrangère" do
+      test "ADR-0104 : retirer toutes les questions supprime leurs images sans heurter la clé étrangère" do
         image = create_question_image
         created = @repository.create(exercise: exercise(questions: [ illustrated("Q1", image:, alt: "a") ]))
 

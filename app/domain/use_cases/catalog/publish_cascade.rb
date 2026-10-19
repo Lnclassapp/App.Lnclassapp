@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::PublishCascade
 # Rôle : « Tout publier » : un cours (ou une fiche), puis ses fiches et ses exercices brouillons, en une transaction
-# ADR  : 0026, 0028, 0035 (amendement du 2026-10-01), 0089 · réutilise PublishCourse, PublishEssential, PublishExercise
+# ADR  : 0026, 0028, 0035 (amendement du 2026-10-01), 0104 · réutilise PublishCourse, PublishEssential, PublishExercise
 module UseCases
   module Catalog
     class PublishCascade
@@ -25,7 +25,7 @@ module UseCases
       # est publiée si elle ne l'est pas (brouillon ou archivée), avec les règles de son use case ; chaque publication est
       # inscrite au journal par son use case.
       # → Result(Summary) | :forbidden | :not_found | :conflict — alors rien n'est écrit : base parent_not_published,
-      #   image_slots_left ou image_alts_blank (racine fiche), ou essential_not_ready avec name (une fiche du cours, ADR-0089)
+      #   image_slots_left ou image_alts_blank (racine fiche), ou essential_not_ready avec name (une fiche du cours, ADR-0104)
       def call(actor:, root:, slug:)
         raise ArgumentError, "racine inconnue : #{root}" unless ROOTS.include?(root)
 
@@ -58,7 +58,7 @@ module UseCases
                                            skipped: drafts.size - exercises))
       end
 
-      # ADR-0089 §4.4 : toutes les fiches brouillons du cours sont vérifiées avant toute écriture ; la première qui n'est pas
+      # ADR-0104 §4.4 : toutes les fiches brouillons du cours sont vérifiées avant toute écriture ; la première qui n'est pas
       # prête (emplacement d'image restant, image sans texte de remplacement) refuse tout et se nomme.
       def first_essential_not_ready(course)
         @essentials.draft_slugs(course_id: course.id).each do |slug|

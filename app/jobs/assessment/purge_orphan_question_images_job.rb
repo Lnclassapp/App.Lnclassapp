@@ -1,6 +1,6 @@
 # 🔌 INFRASTRUCTURE · Assessment::PurgeOrphanQuestionImagesJob
 # Rôle : supprime chaque jour les images de question envoyées puis jamais enregistrées depuis plus de 48 h, fichier compris
-# ADR  : 0047, 0089
+# ADR  : 0047, 0104
 module Assessment
   class PurgeOrphanQuestionImagesJob < ApplicationJob
     GRACE_PERIOD = 48.hours

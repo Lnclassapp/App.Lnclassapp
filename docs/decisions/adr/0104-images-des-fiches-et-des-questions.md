@@ -1,4 +1,4 @@
-# ADR-0089 : Les fiches et les questions portent des images vérifiées, envoyées par l'équipe, annoncées par l'import et exigées avant publication
+# ADR-0104 : Les fiches et les questions portent des images vérifiées, envoyées par l'équipe, annoncées par l'import et exigées avant publication
 <!-- index
 titre: Images des fiches et des questions : tables par contexte, emplacements de l'import, plafonds mobiles, service sous la règle de lecture
 statut: Proposé
@@ -74,7 +74,7 @@ Contraintes de départ, tirées du grill (memo) :
 
 ### 4.3 Emplacements d'une fiche
 
-Un emplacement est un paragraphe dont tout le texte est `[[image: <description>]]`, description de 1 à 150 caractères. `Entities::Catalog::ImageSlot.scan(html)` les lit (Ruby pur, expression régulière sur le texte des `<p>`). Ils traversent `RichTextSanitizer` et Trix comme du texte ordinaire : aucune balise nouvelle. L'éditeur remplace l'emplacement par l'image insérée (UDR-0084) et pré-remplit son texte de remplacement avec la description.
+Un emplacement est un paragraphe dont tout le texte est `[[image: <description>]]`, description de 1 à 150 caractères. `Entities::Catalog::ImageSlot.scan(html)` les lit (Ruby pur, expression régulière sur le texte des `<p>`). Ils traversent `RichTextSanitizer` et Trix comme du texte ordinaire : aucune balise nouvelle. L'éditeur remplace l'emplacement par l'image insérée (UDR-0129) et pré-remplit son texte de remplacement avec la description.
 
 ### 4.4 Conditions de publication
 

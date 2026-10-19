@@ -125,7 +125,7 @@ module UseCases
         assert_equal [ :conflict, { base: [ :write_failed ] } ], update(refuse: true).then { [ it.code, it.errors ] }
       end
 
-      test "ADR-0089 : une image citée qu'une question ne peut plus prendre refuse l'écriture" do
+      test "ADR-0104 : une image citée qu'une question ne peut plus prendre refuse l'écriture" do
         assert_equal [ :invalid, { questions: [ :image_unavailable ] } ], update(refuse: :image).then { [ it.code, it.errors ] }
       end
     end

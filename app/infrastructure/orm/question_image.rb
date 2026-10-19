@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::QuestionImage
 # Rôle : l'image d'une question, vérifiée, sans métadonnées ; une au plus par question (index unique partiel)
-# ADR  : 0029, 0060, 0089
+# ADR  : 0029, 0060, 0104
 module Orm
   class QuestionImage < ApplicationRecord
     include HasPublicId

@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/essentials/new — création d'une fiche essentielle dans un cours, servie dans le frame « modal » %>
 <%# Rôle : nom, sous-titre et contenu riche (Trix, CSS posé ici) ; échec en 422 ici, succès en Turbo Stream %>
-<%# ADR  : 0035, 0047, 0051, 0089 · UDR : 0006, 0007, 0016, 0054, 0084 %>
+<%# ADR  : 0035, 0047, 0051, 0104 · UDR : 0006, 0007, 0016, 0054, 0129 %>
 <%= turbo_frame_tag "modal" do %>
   <%= stylesheet_link_tag "trix" %>
   <%= ui_modal title: t(".title"), id: "essential-modal", size: :lg, open: true, document_title: page_title(t(".title")) do |modal| %>

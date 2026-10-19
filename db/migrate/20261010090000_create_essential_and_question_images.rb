@@ -1,4 +1,4 @@
-# ADR-0089 §4.2, Lot 0 of images-dans-les-cours: a sheet (catalog) and a question (assessment) carry checked images
+# ADR-0104 §4.2, Lot 0 of images-dans-les-cours: a sheet (catalog) and a question (assessment) carry checked images
 # without metadata, at most 300 KB and 1200 px a side. NULL owner between upload and the first save that cites them.
 # A question has at most one image (partial unique index). Nothing is deleted through a foreign key (RESTRICT, ADR-0036):
 # the store detaches and destroys an image before its question or sheet goes. The import announces a question's image by its description.

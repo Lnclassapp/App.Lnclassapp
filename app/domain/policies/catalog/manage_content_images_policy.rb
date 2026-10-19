@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Policies::Catalog::ManageContentImagesPolicy
 # Rôle : envoyer, remplacer, retirer une image de cours, ou lire une image pas encore rattachée : l'équipe `admin` et `content` seules
-# ADR  : 0028, 0038, 0089
+# ADR  : 0028, 0038, 0104
 module Policies
   module Catalog
     # Plus étroite que ManageContentPolicy (toute l'équipe) : le rôle terrain ne touche pas aux images (PRD §2, grill question 11).

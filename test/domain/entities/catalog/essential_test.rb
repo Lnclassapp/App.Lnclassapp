@@ -30,7 +30,7 @@ module Entities
         assert_not build(status: "archived").readable_chain_published?
       end
 
-      # ADR-0089 §4.3-§4.4 : emplacements restants et images sans texte de remplacement empêchent de publier.
+      # ADR-0104 §4.3-§4.4 : emplacements restants et images sans texte de remplacement empêchent de publier.
       test "image_publish_errors" do
         image = ->(id, alt) { Entities::Shared::ContentImage.new(public_id: id, alt:) }
 

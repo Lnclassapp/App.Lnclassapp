@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Assessment::QuestionInput
 # Rôle : une question saisie : énoncé, explication, type, propositions et image ; la structure par type reste à l'entité Question
-# ADR  : 0026, 0054, 0089 · UDR : 0007, 0017, 0084
+# ADR  : 0026, 0054, 0104 · UDR : 0007, 0017, 0129
 module Dtos
   module Assessment
     class QuestionInput
@@ -10,7 +10,7 @@ module Dtos
       attribute :content, :string
       attribute :explanation, :string
       attribute :question_type, :string
-      # ADR-0089 : l'image envoyée (son public_id), son texte de remplacement, et l'image annoncée par l'import.
+      # ADR-0104 : l'image envoyée (son public_id), son texte de remplacement, et l'image annoncée par l'import.
       attribute :image_public_id, :string
       attribute :image_alt, :string
       attribute :image_description, :string

@@ -282,8 +282,8 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_equal tl("transition.refusals.transition_not_allowed"), flash[:alert]
   end
 
-  # ADR-0089 §4.4, UDR-0084 §3.2 : la question 2 attend son image ; l'image envoyée se rattache à l'enregistrement.
-  test "ADR-0089: a question waiting for its image blocks the publication, and names the question" do
+  # ADR-0104 §4.4, UDR-0129 §3.2 : la question 2 attend son image ; l'image envoyée se rattache à l'enregistrement.
+  test "ADR-0104: a question waiting for its image blocks the publication, and names the question" do
     exercise = create_exercise(essential: @essential, status: "draft", questions: 2)
     exercise.questions.second.update!(image_description: "Un circuit simple")
     sign_in_as @member
@@ -295,7 +295,7 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "draft", exercise.reload.status
   end
 
-  test "ADR-0089: the edit form offers the expected image, and saving attaches the uploaded image with its text" do
+  test "ADR-0104: the edit form offers the expected image, and saving attaches the uploaded image with its text" do
     exercise = create_exercise(essential: @essential, status: "draft", questions: 1)
     exercise.questions.first.update!(image_description: "Un circuit simple")
     image = create_question_image
@@ -317,7 +317,7 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "published", exercise.reload.status
   end
 
-  test "ADR-0089: an image without its alternative text shows « À compléter » in the form" do
+  test "ADR-0104: an image without its alternative text shows « À compléter » in the form" do
     exercise = create_exercise(essential: @essential, status: "draft", questions: 1)
     image = create_question_image(question: exercise.questions.first)
     sign_in_as @member
@@ -329,7 +329,7 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
   end
 
   # PRD : « Cette question n'a pas besoin d'image » efface la description ; la question ne bloque plus la publication.
-  test "ADR-0089: dropping the image description makes the exercise publishable" do
+  test "ADR-0104: dropping the image description makes the exercise publishable" do
     exercise = create_exercise(essential: @essential, status: "draft", questions: 1)
     exercise.questions.first.update!(image_description: "Un circuit simple")
     sign_in_as @member
@@ -343,7 +343,7 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "published", exercise.reload.status
   end
 
-  test "ADR-0089: citing the image of another exercise is refused with its reason, and nothing is written" do
+  test "ADR-0104: citing the image of another exercise is refused with its reason, and nothing is written" do
     exercise = create_exercise(essential: @essential, status: "draft", questions: 1)
     foreign = create_question_image(question: create_exercise(essential: @essential).questions.first)
     sign_in_as @member
@@ -357,7 +357,7 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_not_equal exercise.questions.first.id, foreign.reload.question_id
   end
 
-  test "ADR-0089, UDR-0084 §3.2: once tried, a question shows its image read only, without any button" do
+  test "ADR-0104, UDR-0129 §3.2: once tried, a question shows its image read only, without any button" do
     exercise = create_exercise(essential: @essential, questions: 1)
     image = create_question_image(question: exercise.questions.first, alt: "Une pile")
     create_exercise_session(exercise:)

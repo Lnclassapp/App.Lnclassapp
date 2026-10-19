@@ -1,10 +1,10 @@
 # 🧠 DOMAINE · UseCases::Assessment::CreateExercise
 # Rôle : l'équipe crée en brouillon un exercice d'une fiche essentielle, avec ses questions et propositions, en une écriture
-# ADR  : 0026, 0028, 0035, 0039, 0054, 0089 · UDR : 0017
+# ADR  : 0026, 0028, 0035, 0039, 0054, 0104 · UDR : 0017
 module UseCases
   module Assessment
     class CreateExercise
-      # Une question cite une image qu'elle ne peut plus prendre (ADR-0089) : rien n'est écrit, le formulaire le dit.
+      # Une question cite une image qu'elle ne peut plus prendre (ADR-0104) : rien n'est écrit, le formulaire le dit.
       IMAGE_UNAVAILABLE = Shared::Result.failure(:invalid, errors: { questions: [ :image_unavailable ] })
 
       def initialize(exercises:, essentials:, transaction:, policy:)

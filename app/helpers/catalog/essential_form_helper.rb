@@ -1,13 +1,13 @@
 # 🌐 UI · Catalog::EssentialFormHelper — éditeur de fiche en mode images dans la modale de l'équipe
 # Rôle : données de #essential_editor (mode images, plafonds d'un contenu, messages) lues par rich-text-editor ; texte au format de Trix
-# ADR  : 0051, 0089 · UDR : 0084
+# ADR  : 0051, 0104 · UDR : 0129
 module Catalog
   module EssentialFormHelper
     IMAGE = Entities::Shared::ContentImage
     # Jetons remplacés ici ; %{name}, %{reason} et %{number} le sont par le navigateur.
     SERVER_TOKENS = /%\{(max_bytes|max_count)\}/
 
-    # → le hash data de #essential_editor. Les plafonds viennent de ContentImage, jamais d'un chiffre écrit (UDR-0084 §3.0).
+    # → le hash data de #essential_editor. Les plafonds viennent de ContentImage, jamais d'un chiffre écrit (UDR-0129 §3.0).
     # squeeze : la qualité baisse jusqu'à 300 Ko ; field : le nom du fichier attendu par Teams::EssentialImagesController.
     def essential_editor_data(upload_url:)
       {
@@ -27,7 +27,7 @@ module Catalog
     # Le texte enregistré (pièces jointes par sgid) ou envoyé (figures de Trix), au format que Trix charge.
     def essential_editor_content(html) = ActionText::Content.new(html.to_s).to_trix_html
 
-    # Les emplacements annoncés par l'import et pas encore remplacés (UDR-0084 §3.1.1).
+    # Les emplacements annoncés par l'import et pas encore remplacés (UDR-0129 §3.1.1).
     def essential_image_slots(html) = Entities::Catalog::ImageSlot.scan(html)
 
     private

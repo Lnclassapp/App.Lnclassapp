@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::UploadEssentialImage
 # Rôle : l'équipe Administration et Contenu envoie une image de fiche, vérifiée et sans métadonnées, rattachée à aucune fiche
-# ADR  : 0026, 0028, 0060, 0089 · UDR : 0084
+# ADR  : 0026, 0028, 0060, 0104 · UDR : 0129
 module UseCases
   module Catalog
     class UploadEssentialImage

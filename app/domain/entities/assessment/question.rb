@@ -1,9 +1,9 @@
 # 🧠 DOMAINE · Entities::Assessment::Question
 # Rôle : vérifie la forme d'une réponse, la corrige par identifiants et contrôle la structure d'une question
-# ADR  : 0039, 0054, 0089
+# ADR  : 0039, 0054, 0104
 module Entities
   module Assessment
-    # answers : [Answer] ; image_description : l'image annoncée par l'import (ADR-0089 §4.6) ; image : Shared::ContentImage | nil.
+    # answers : [Answer] ; image_description : l'image annoncée par l'import (ADR-0104 §4.6) ; image : Shared::ContentImage | nil.
     Question = Data.define(:id, :position, :content, :explanation, :question_type, :answers, :image_description, :image) do
       def initialize(id:, position:, content:, explanation:, question_type:, answers:, image_description: nil, image: nil)
         super
@@ -38,7 +38,7 @@ module Entities
 
       def structure_errors = Question.structure_errors_for(question_type:, answers:)
 
-      # Ce qui manque pour publier, sans gêner l'enregistrement d'un brouillon (ADR-0089 §4.4) → [Symbol].
+      # Ce qui manque pour publier, sans gêner l'enregistrement d'un brouillon (ADR-0104 §4.4) → [Symbol].
       def image_errors
         return [ :image_alt_blank ] if image && !image.alt?
         return [ :image_missing ] if image.nil? && !image_description.to_s.strip.empty?

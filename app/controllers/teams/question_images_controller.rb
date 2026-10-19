@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::QuestionImagesController
 # Rôle : le formulaire d'exercice envoie l'image d'une question ; 201 { public_id, url, width, height }, 422 { error }, 403 et 401 en JSON
-# ADR  : 0026, 0028, 0049, 0060, 0089 · UDR : 0084
+# ADR  : 0026, 0028, 0049, 0060, 0104 · UDR : 0129
 module Teams
   class QuestionImagesController < BaseController
     # ADR-0049 : un compte de l'équipe n'envoie pas plus de 60 images par minute ; les non rattachées attendent la purge.
@@ -9,7 +9,7 @@ module Teams
 
     def create
       result = upload.call(actor: current_actor, dto: Dtos::Shared::ContentImageInput.new(file: uploaded_file))
-      # La raison est déjà rédigée en français par le serveur : le formulaire l'affiche telle quelle (UDR-0084 §3.2).
+      # La raison est déjà rédigée en français par le serveur : le formulaire l'affiche telle quelle (UDR-0129 §3.2).
       return render(json: { error: result.errors.values.flatten.first }, status: :unprocessable_entity) if result.code == :invalid
 
       render_result result, success: lambda { |image|

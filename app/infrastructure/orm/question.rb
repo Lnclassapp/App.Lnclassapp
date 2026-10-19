@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Question
 # Rôle : table questions, questions d'un exercice et leurs propositions ordonnées
-# ADR  : 0054, 0089
+# ADR  : 0054, 0104
 module Orm
   class Question < ApplicationRecord
     self.table_name = "questions"

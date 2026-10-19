@@ -64,7 +64,7 @@ scope "teams/blog", as: :teams do
   end
 end
 
-# ADR-0089 §4.7, UDR-0084 §3.0 : envoi d'une image de fiche (paramètre essential : slug, absent à la création) ou de question.
+# ADR-0104 §4.7, UDR-0129 §3.0 : envoi d'une image de fiche (paramètre essential : slug, absent à la création) ou de question.
 scope "teams", as: :teams do
   post "essential-images", to: "teams/essential_images#create", as: :essential_images
   post "question-images", to: "teams/question_images#create", as: :question_images

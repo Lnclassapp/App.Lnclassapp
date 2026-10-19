@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::EssentialImageStore
 # Rôle : images de fiche en lignes essential_images et fichiers sur le service Active Storage (bucket) : envoyer, compter, servir, purger
-# ADR  : 0047, 0060, 0089
+# ADR  : 0047, 0060, 0104
 module Repositories
   module Catalog
     class EssentialImageStore

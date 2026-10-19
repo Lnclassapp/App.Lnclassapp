@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0089 §4.5 : dans le texte d'une fiche, une image se cite par son sgid et se montre par son adresse Lnclass.
+# ADR-0104 §4.5 : dans le texte d'une fiche, une image se cite par son sgid et se montre par son adresse Lnclass.
 module Orm
   class EssentialImageTest < ActiveSupport::TestCase
     test "la pièce jointe porte l'adresse Lnclass de l'image et ses dimensions, et se rend par le partiel de lecture" do

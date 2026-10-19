@@ -61,7 +61,7 @@ Règles d'écriture :
 
 ## Les images
 
-Une image est produite **après** l'import, dans Claude Design, par l'équipe, à partir de la description que tu écris. Ta description est donc une **commande de dessin** : précise, concrète, complète (ADR-0089).
+Une image est produite **après** l'import, dans Claude Design, par l'équipe, à partir de la description que tu écris. Ta description est donc une **commande de dessin** : précise, concrète, complète (ADR-0104).
 
 ### Dans une fiche : l'emplacement `[[image: …]]`
 

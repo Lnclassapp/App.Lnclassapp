@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Décisions : [ADR-0089](../../decisions/adr/0089-images-des-fiches-et-des-questions.md) · [UDR-0084](../../decisions/udr/0084-images-dans-l-editeur-de-fiche-la-question-et-la-lecture.md)
+> Décisions : [ADR-0104](../../decisions/adr/0104-images-des-fiches-et-des-questions.md) · [UDR-0129](../../decisions/udr/0129-images-dans-l-editeur-de-fiche-la-question-et-la-lecture.md)
 
 ## Graphe
 

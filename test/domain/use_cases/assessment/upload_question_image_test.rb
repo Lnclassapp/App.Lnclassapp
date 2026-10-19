@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0089 §4.7 : l'équipe admin et contenu envoie l'image d'une question ; le serveur croit les octets, refuse avec sa
+# ADR-0104 §4.7 : l'équipe admin et contenu envoie l'image d'une question ; le serveur croit les octets, refuse avec sa
 # raison ce qui n'est pas une image de 300 Ko et 1200 px au plus, et n'écrit alors rien.
 module UseCases
   module Assessment

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Catalog::EssentialInput
 # Rôle : saisie d'une fiche essentielle : nom (150), sous-titre (150), contenu HTML de l'éditeur riche et ses images, textes de remplacement
-# ADR  : 0026, 0035, 0047, 0089 · UDR : 0007, 0016, 0084
+# ADR  : 0026, 0035, 0047, 0104 · UDR : 0007, 0016, 0129
 module Dtos
   module Catalog
     class EssentialInput
@@ -15,7 +15,7 @@ module Dtos
       attribute :subtitle, :string
       # Le HTML produit par l'éditeur, gardé en chaîne : le domaine ne connaît pas Action Text.
       attribute :content, :string
-      # image_alts : { public_id => texte de remplacement } (champs essential[image_alts][<public_id>], ADR-0089). Les images
+      # image_alts : { public_id => texte de remplacement } (champs essential[image_alts][<public_id>], ADR-0104). Les images
       # elles-mêmes sont des pièces jointes du contenu : le repository n'en garde que les images de fiche admises.
       attr_writer :image_alts
 

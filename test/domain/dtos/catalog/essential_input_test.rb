@@ -35,7 +35,7 @@ module Dtos
         assert_equal({ name: "Brassage génétique", subtitle: "", content: "" }, essential.essential_attributes)
       end
 
-      # ADR-0089 : une fiche accepte des images, pièces jointes de son contenu ; c'est le repository qui n'en garde que les
+      # ADR-0104 : une fiche accepte des images, pièces jointes de son contenu ; c'est le repository qui n'en garde que les
       # images de fiche admises (RichTextSanitizer), la saisie ne les filtre plus.
       test "une pièce jointe d'image passe la saisie ; les textes de remplacement sont resserrés et bornés à 150 caractères" do
         essential = input(content: '<action-text-attachment sgid="x"></action-text-attachment>',

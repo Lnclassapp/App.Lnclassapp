@@ -43,7 +43,7 @@ module Factories
       Orm::Essential.create!(course:, name:, position:, content:, author:, **factory_publication(status), **attributes)
     end
 
-    # ADR-0089 : une image de fiche vérifiée et stockée comme par l'envoi de l'équipe, rattachée ou non à une fiche.
+    # ADR-0104 : une image de fiche vérifiée et stockée comme par l'envoi de l'équipe, rattachée ou non à une fiche.
     def create_essential_image(essential: nil, alt: nil, fixture: "photos/photo.jpg", created_at: nil)
       input = Dtos::Shared::ContentImageInput.new(file: StringIO.new(file_fixture(fixture).binread))
       raise ArgumentError, "#{fixture} n'est pas une image de contenu : #{input.errors.full_messages}" unless input.valid?

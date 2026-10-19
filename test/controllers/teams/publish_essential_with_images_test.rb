@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0089 §4.4, UDR-0084 §3.1 : une fiche avec un emplacement d'image restant ne se publie pas, ni seule ni par « Tout
+# ADR-0104 §4.4, UDR-0129 §3.1 : une fiche avec un emplacement d'image restant ne se publie pas, ni seule ni par « Tout
 # publier » ; le refus (422) en donne la raison, nombre ou fiche nommée, et rien n'est écrit.
 class Teams::PublishEssentialWithImagesTest < ActionDispatch::IntegrationTest
   SLOTS = "<p>[[image: une pile et une lampe]]</p><p>Texte.</p><p>[[image: un interrupteur ouvert]]</p>".freeze
