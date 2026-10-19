@@ -39,7 +39,7 @@ class Identity::AccountPanelTest < ApplicationSystemTestCase
       end
       within(panel) do
         assert_text "Awa Traoré"
-        assert_equal [ tn(:profile), tn("account_panel.invite") ], all("nav a", minimum: 2).map(&:text)
+        assert_equal [ tn(:profile), tn("account_panel.schools.link"), tn("account_panel.invite") ], all("nav a", minimum: 3).map(&:text)
         assert_selector "button[role=switch]", visible: true
         assert_button tn(:sign_out)
       end

@@ -161,16 +161,33 @@ module Queries
         Orm::ClassroomStudent.create!(joined_via: "standard", classroom:, student: @student, primary: true, joined_at: Time.current)
         teacher = create_teacher(classrooms: [ classroom ])
         query = SessionResultQuery.new
+        school_id = classroom.school_id
 
-        assert query.teaches_student?(student_id: @student.id, teacher_id: teacher.id)
-        assert_not query.teaches_student?(student_id: @student.id, teacher_id: create_teacher(classrooms: [ create_classroom ]).id)
+        assert query.teaches_student?(student_id: @student.id, teacher_id: teacher.id, school_id:)
+        other = create_classroom
+        assert_not query.teaches_student?(student_id: @student.id, teacher_id: create_teacher(classrooms: [ other ]).id,
+                                          school_id: other.school_id)
 
         classroom.update!(status: "archived", archived_at: Time.current)
-        assert_not query.teaches_student?(student_id: @student.id, teacher_id: teacher.id)
+        assert_not query.teaches_student?(student_id: @student.id, teacher_id: teacher.id, school_id:)
 
         classroom.update!(status: "active", archived_at: nil)
         Orm::ClassroomStudent.where(student: @student).update_all(left_at: Time.current)
-        assert_not query.teaches_student?(student_id: @student.id, teacher_id: teacher.id)
+        assert_not query.teaches_student?(student_id: @student.id, teacher_id: teacher.id, school_id:)
+      end
+
+      # Revue de la PR #250, constat 3 (ADR-0094 §10) : l'élève d'une classe de B n'existe pas pour l'enseignant passé dans A.
+      test "enseignant de A et de B : l'élève de sa classe de B, lu depuis A, n'est pas le sien" do
+        classroom_b = create_classroom
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: classroom_b, student: @student, primary: true,
+                                      joined_at: Time.current)
+        a = create_school
+        teacher = create_teacher(school: a, classrooms: [ classroom_b ])
+        add_teacher_school(teacher, classroom_b.school)
+        query = SessionResultQuery.new
+
+        assert_not query.teaches_student?(student_id: @student.id, teacher_id: teacher.id, school_id: a.id)
+        assert query.teaches_student?(student_id: @student.id, teacher_id: teacher.id, school_id: classroom_b.school_id)
       end
 
       test "progrès : nil à la première session de l'élève sur l'exercice" do

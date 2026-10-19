@@ -10,17 +10,24 @@ module Entities
       # Les blocs dont tout le texte a la forme « [[image: …]] » sans que le motif les lise (dans une liste ou un titre,
       # mis en gras, vides, trop longs) : sans cela, ils ne seraient comptés nulle part et l'élève les lirait tels quels.
       # Au milieu d'une phrase, le texte reste un texte.
+      #
+      # Le motif est à coût quadratique sur un texte hostile (« <p> » sans fin, répétés) : il a un délai (menace.md, n° 13).
+      # Passé le délai, le texte est compté comme mal écrit (1), donc refusé, plutôt que de tenir le serveur.
       def self.malformed_count(html)
         attempts = html.to_s.scan(ImageSlot::BLOCK).count do |_tag, inner|
           text = inner.gsub(/<[^>]*>/, "").strip
           text.start_with?(ImageSlot::MARKER) && text.end_with?("]]")
         end
         attempts - scan(html).size
+      rescue Regexp::TimeoutError
+        1
       end
     end
     ImageSlot::DESCRIPTION_MAX = 150
     ImageSlot::MARKER = "[[image:"
-    ImageSlot::BLOCK = %r{<(p|div|li|h[1-6]|blockquote)\b[^>]*>(.*?)</\1>}m
+    ImageSlot::BLOCK_TIMEOUT = 0.5
+    ImageSlot::BLOCK = Regexp.new(%r{<(p|div|li|h[1-6]|blockquote)\b[^>]*>(.*?)</\1>}.source, Regexp::MULTILINE,
+                                  timeout: ImageSlot::BLOCK_TIMEOUT)
     # <p> à l'import, <div> une fois le texte enregistré par Trix (son bloc par défaut) : les deux sont des paragraphes.
     ImageSlot::PATTERN = %r{<(p|div)>\s*\[\[image:\s*([^\]<\s][^\]<]{0,#{ImageSlot::DESCRIPTION_MAX - 1}}?)\s*\]\]\s*</\1>}
   end

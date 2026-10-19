@@ -14,10 +14,10 @@ module Queries
         @teacher = create_teacher(school: @school, material: @svt, classrooms: [ @classroom ])
       end
 
-      def home(teacher = @teacher, **) = TeacherHomeQuery.new.call(teacher_id: teacher.id, **)
+      def home(teacher = @teacher, school: @school, **) = TeacherHomeQuery.new.call(teacher_id: teacher.id, school_id: school.id, **)
       def card(row = home) = row.classrooms.sole
 
-      test "the header: primary school, subject and its category" do
+      test "the header: current school, subject and its category" do
         row = home
 
         assert_equal [ "Lycée Classique d'Abidjan", "SVT", "science" ],
@@ -115,6 +115,23 @@ module Queries
         create_teacher(school: @school, classrooms: [ create_classroom(school: @school, level: create_level(name: "6ème"), name: "6ème 1") ])
 
         assert_equal [ [ @tle.slug, nil, "Tle" ] ], levels
+      end
+
+      # ME-07 (ADR-0094 §4.6, UDR-0098 §3.3) : deux « 6ème 1 », une par établissement ; l'accueil ne lit que celle de
+      # l'établissement courant, et nomme cet établissement.
+      test "only the classrooms and course levels of the current school, named after it" do
+        other = create_school(name: "Collège Saint-Michel")
+        sixth = create_level(name: "6ème", position: 1)
+        here = create_classroom(school: @school, level: sixth, name: "6ème 1")
+        there = create_classroom(school: other, level: create_level(name: "5ème", position: 2), name: "6ème 1")
+        Orm::TeacherSchool.create!(teacher: @teacher, school: other, primary: false)
+        [ here, there ].each { Orm::TeacherClassroom.create!(teacher: @teacher, classroom: it) }
+
+        in_other = home(school: other)
+
+        assert_equal [ here.public_id, @classroom.public_id ], home.classrooms.map(&:public_id)
+        assert_equal [ "Collège Saint-Michel", [ there.public_id ], [ "5ème" ] ],
+                     [ in_other.school_name, in_other.classrooms.map(&:public_id), in_other.course_levels.map(&:label) ]
       end
 
       test "course levels: none without a declared classroom" do

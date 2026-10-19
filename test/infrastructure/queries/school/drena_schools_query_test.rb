@@ -85,8 +85,22 @@ class Queries::School::DrenaSchoolsQueryTest < ActiveSupport::TestCase
     create_student.tap { Orm::ClassroomStudent.create!(joined_via: "standard", classroom:, student: it, primary: false, joined_at: Time.current) }
     placed_student(create_classroom(school:, level: @level, status: "archived"))
 
-    assert_equal [ 1, 1, 1, 0 ], figures(schools.rows.sole)
-    assert_equal [ 1, 1, 1, 1 ], figures(schools(period: "30d").rows.sole)
+    # ADR-0094 §4.6: the teacher attached here as a secondary school counts here too.
+    assert_equal [ 1, 2, 1, 0 ], figures(schools.rows.sole)
+    assert_equal [ 1, 2, 1, 1 ], figures(schools(period: "30d").rows.sole)
+  end
+
+  # ME-23 (ADR-0094 §4.6, amends ADR-0062): a teacher of two schools of the DRENA counts in each; the DRENA row stays the
+  # sum of its schools; the national count of teacher accounts counts him once.
+  test "ME-23: a teacher of two schools of the DRENA counts in each, and the DRENA row is their sum" do
+    first, second = create_school(drena: @abidjan, name: "A"), create_school(drena: @abidjan, name: "B")
+    create_teacher(school: first).tap { add_teacher_school(it, second) }
+
+    assert_equal [ 1, 1 ], schools.rows.sort_by(&:name).map(&:teachers_count)
+    assert_equal 2, drena_row.teachers_count
+    national = Queries::School::TeamDashboardQuery.new(cache: ActiveSupport::Cache::NullStore.new)
+                                                  .call(period: Period.parse("7d", today: Date.current), drena_public_id: nil)
+    assert_equal 1, national.accounts.teachers
   end
 
   test "an inactive or draft school is listed, marked by its status, only while it still has figures" do

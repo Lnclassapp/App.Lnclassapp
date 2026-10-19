@@ -31,6 +31,12 @@ threads threads_count, threads_count
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 port ENV.fetch("PORT", 3000)
 
+# Body size limit, checked before Rack reads or writes anything: 55 MB. The largest legitimate request is the
+# course_tree import (50 MB in total, app/domain/entities/catalog/import_kind.rb) plus its multipart envelope.
+# Anonymous and global, it also covers the endpoints that read an uploaded file (threat A in
+# docs/chantiers/images-dans-les-cours/menace.md). Puma answers 413 beyond it.
+http_content_length_limit 55 * 1024 * 1024
+
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
 

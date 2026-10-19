@@ -104,6 +104,8 @@ Remplacer une image crée une nouvelle ligne ; l'ancienne, plus citée, est supp
 
 `POST /teams/essential-images` et `POST /teams/question-images` (JSON, comme `Teams::ArticleImagesController`), paramètre `essential` / `question` (public_id ou slug) pour tenir le plafond par fiche. Les images envoyées et jamais citées depuis 48 h sont purgées chaque jour (`Catalog::PurgeOrphanEssentialImagesJob`, `Assessment::PurgeOrphanQuestionImagesJob`, `config/recurring.yml`).
 
+Parades de volume et de coût, ajoutées après la revue de sécurité (détail : [`menace.md`](../../chantiers/images-dans-les-cours/menace.md)) : au plus 30 images citées par fiche, refusées à l'enregistrement (`content.too_many_images`) et pas seulement à l'envoi ; 60 envois par minute **et 300 par jour** et par compte ; texte d'une fiche plafonné à 200 Ko (DTO et schémas d'import) ; `ImageSlot::BLOCK` borné à 0,5 s, un texte qui le dépasse étant refusé comme « mal écrit » ; corps de requête limité à 55 Mo par Puma (`config/puma.rb`, l'import `course_tree` pouvant faire 50 Mo).
+
 ## 5. Conséquences
 
 ### 🟢 Positives
@@ -151,4 +153,5 @@ def self.call(html, image_ids: nil, image_model: "Orm::ArticleImage")
 - `test/domain/dtos/shared/content_image_input_test.rb` : 300 Ko, 1200 px, SVG déguisé, EXIF retiré.
 - `test/controllers/catalog/essential_images_controller_test.rb` : 404 brouillon, 404 hors niveau, `Cache-Control` privé d'une heure, 404 journalisé sans fichier.
 - `test/infrastructure/repositories/catalog/import_schema_validator_test.rb` : ancien fichier valide, description vide refusée.
+- `test/controllers/teams/essentials_controller_test.rb` : 31 images citées refusées (création et mise à jour), texte de plus de 200 Ko refusé ; `test/controllers/teams/essential_images_controller_test.rb` et `question_images_controller_test.rb` : 429 au 301e envoi du jour ; `test/domain/entities/catalog/image_slot_test.rb` : texte hostile refusé en moins d'une seconde.
 - Contraintes `CHECK` en base : un octet de trop échoue même hors du domaine.

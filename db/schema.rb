@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_15_100100) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_16_150000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -753,6 +753,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_15_100100) do
     t.string "token_digest", limit: 64, null: false
     t.string "user_agent", limit: 255
     t.bigint "user_id", null: false
+    t.bigint "current_school_id"
     t.index ["token_digest"], name: "index_sessions_on_token_digest", unique: true
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
@@ -970,9 +971,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_15_100100) do
     t.boolean "primary", default: false, null: false
     t.bigint "school_id", null: false
     t.bigint "teacher_id", null: false
+    t.string "invite_token", limit: 12, default: -> { "substr(replace((gen_random_uuid())::text, '-'::text, ''::text), 1, 12)" }, null: false
+    t.index ["invite_token"], name: "index_teacher_schools_on_invite_token", unique: true
     t.index ["school_id"], name: "index_teacher_schools_on_school_id"
     t.index ["teacher_id", "school_id"], name: "index_teacher_schools_on_teacher_id_and_school_id", unique: true
     t.index ["teacher_id"], name: "index_teacher_schools_one_primary", unique: true, where: "\"primary\""
+    t.check_constraint "invite_token::text ~ '^[0-9a-f]{12}$'::text", name: "teacher_schools_invite_token_format"
   end
 
   create_table "totp_credentials", force: :cascade do |t|
@@ -1092,6 +1096,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_15_100100) do
   add_foreign_key "school_staffs", "users", column: "invited_by_id", on_delete: :restrict
   add_foreign_key "school_staffs", "users", on_delete: :restrict
   add_foreign_key "schools", "drenas", on_delete: :restrict
+  add_foreign_key "sessions", "schools", column: "current_school_id", on_delete: :nullify
   add_foreign_key "sessions", "users", on_delete: :cascade
   add_foreign_key "solid_queue_batch_executions", "solid_queue_batches", column: "batch_id", on_delete: :cascade
   add_foreign_key "solid_queue_batch_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

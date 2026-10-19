@@ -8,6 +8,9 @@ module Entities
 
       NAME_MAX = 150
       SUBTITLE_MAX = 150
+      # Plafond anti-abus du texte d'une fiche, en caractères (200 Ko) : une fiche de cours en tient dix fois moins. Il borne
+      # le temps des motifs qui relisent le texte (menace.md, n° 13) ; le schéma d'import en porte le même chiffre.
+      CONTENT_MAX = 200 * 1024
 
       attr_accessor :id, :slug, :course_id, :position, :author_id, :status, :published_at, :archived_at,
                     :content, :course_status

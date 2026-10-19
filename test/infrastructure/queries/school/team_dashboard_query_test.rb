@@ -213,6 +213,19 @@ class Queries::School::TeamDashboardQueryTest < ActiveSupport::TestCase
     assert_equal 2, dashboard(drena: there.public_id).recent_signups.size
   end
 
+  # Revue de la PR #250, constat 5 (ADR-0094 §4.6) : les lignes d'établissements font la somme (ME-23), mais un chiffre
+  # intitulé « comptes » compte des comptes distincts.
+  test "under a DRENA filter, a teacher of two of its schools is one teacher account" do
+    drena = create_drena
+    first, second = Array.new(2) { create_school(drena:) }
+    add_teacher_school(create_teacher(school: first), second)
+
+    board = dashboard(drena: drena.public_id)
+
+    assert_equal 1, board.accounts.teachers
+    assert_equal 2, board.school_rows.sum(&:teachers_count), "chaque établissement le compte (ME-23)"
+  end
+
   # CA-11 (ADR-0082 §4.4): accounts that opened Lnclass from the installed app's icon during the period, by role.
   test "app openers count the students and teachers who opened the installed app in the period, never the anonymized" do
     since = Period.parse("7d", today: Date.current).since.in_time_zone

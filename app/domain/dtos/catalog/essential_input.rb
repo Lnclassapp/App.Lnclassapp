@@ -21,6 +21,7 @@ module Dtos
 
       validates :name, presence: true, length: { maximum: Entities::Catalog::Essential::NAME_MAX }
       validates :subtitle, length: { maximum: Entities::Catalog::Essential::SUBTITLE_MAX }
+      validates :content, length: { maximum: Entities::Catalog::Essential::CONTENT_MAX }
       validate :image_alts_fit
 
       def name = super.to_s.squish

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Communication::Message
 # Rôle : une annonce (carte courte et signée) de l'équipe, d'une direction ou d'un enseignant ; listes fermées et bornes
-# ADR  : 0045, 0078, 0081 · UDR : 0071, 0075
+# ADR  : 0045, 0078, 0081, 0094 · UDR : 0071, 0075
 module Entities
   module Communication
     # Contrat gelé au Lot 0 (ADR-0078 §6). « Terminée » n'est pas un statut : une annonce publiée dont ends_at est passée
@@ -20,6 +20,11 @@ module Entities
       # Archivée ou retirée : ni modification, ni republication (ADR-0078 §4.2).
       def frozen? = %w[archived withdrawn].include?(status)
       def by_classrooms? = audience == "classrooms"
+
+      # ADR-0094 (MET-4) : le plafond se compte par établissement pour les annonces d'un enseignant (à ses classes),
+      # chaque établissement étant un espace autonome ; par auteur pour les autres. → Integer | nil (tout l'auteur)
+      def cap_school_id = self.class.cap_school_id(audience:, school_id:)
+      def self.cap_school_id(audience:, school_id:) = (school_id if audience == "classrooms")
 
       # Officielle = écrite par une direction ; rien ne le stocke (ADR-0078 §4.2).
       def official?(author_role:) = author_role == :school_admin
@@ -44,7 +49,8 @@ module Entities
     # ADR-0081 §4.2, UDR-0075 §3.1 : la liste fermée des thèmes, dans cet ordre ; libellés communication.themes.<clé>.
     Message::THEMES = %w[ciel lagune menthe citron mangue corail hibiscus lavande indigo nuit].freeze
     Message::DEFAULT_THEME = "ciel"
-    # ADR-0081 §4.1 : une annonce reste en ligne 30 jours après sa parution ; un auteur en a 3 en ligne au plus.
+    # ADR-0081 §4.1 : une annonce reste en ligne 30 jours après sa parution ; un auteur en a 3 en ligne au plus
+    # (un enseignant : 3 par établissement, ADR-0094).
     Message::DURATION = 30.days
     Message::LIVE_CAP = 3
   end

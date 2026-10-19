@@ -27,14 +27,23 @@ module Factories
     end
 
     # ADR-0083 §4.2: joined_via, the arrival channel, has no default in the database.
-    def create_teacher(school: create_school, material: create_material, onboarded: true, classrooms: [], joined_via: "standard",
+    # ADR-0094: by default, the teacher belongs to the school of their first classroom; the home, the catalogue and
+    # « Assigner » only read the classrooms of the current school.
+    def create_teacher(school: :default, material: create_material, onboarded: true, classrooms: [], joined_via: "standard",
                        **attributes)
+      school = classrooms.first&.school || create_school if school == :default
       create_user(role: "teacher", **attributes).tap do |teacher|
         Orm::TeacherProfile.create!(user: teacher, material:, joined_via:, onboarding_completed_at: (Time.current if onboarded))
         # school: nil — a teacher without a primary school: a pending account (ADR-0030, ADR-0063).
         Orm::TeacherSchool.create!(teacher:, school:, primary: true) if school
         classrooms.each { |classroom| Orm::TeacherClassroom.create!(teacher:, classroom:) }
       end
+    end
+
+    # ADR-0094: one more school for a teacher, secondary unless `primary: true`. Returns the row (its invite_token is the
+    # link « Inviter un collègue de mon établissement », §11).
+    def add_teacher_school(teacher, school, primary: false, at: Time.current)
+      Orm::TeacherSchool.create!(teacher:, school:, primary:, created_at: at).reload
     end
 
     # ADR-0065: a direction account attached to its school, signing in by PIN alone. ADR-0077: joined by invitation or

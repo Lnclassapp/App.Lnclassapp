@@ -17,6 +17,10 @@ module Repositories
       # Une image citée, prise entre-temps par une autre fiche : le geste se refait (elle ne sera plus admise).
       WRITE_FAILED = ::Shared::Result.failure(:conflict, errors: { base: [ :write_failed ] })
 
+      # Plus d'images citées que le plafond (30) : refusé avant tout rattachement. Le plafond de l'envoi ne compte que les
+      # images déjà rattachées à la fiche : des images orphelines (envoyées sans slug) le contourneraient (menace.md, n° 11).
+      TOO_MANY_IMAGES = ::Shared::Result.failure(:invalid, errors: { content: [ :too_many_images ] })
+
       class ImageTaken < StandardError; end
 
       def find_by_slug(slug:)
@@ -73,6 +77,7 @@ module Repositories
       def save(record, essential)
         canonical = essential.content.nil? ? nil : ActionText::Content.new(essential.content).to_html
         return UNREADABLE if unreadable?(canonical)
+        return TOO_MANY_IMAGES if cited_ids(canonical).size > Entities::Shared::ContentImage::MAX_PER_ESSENTIAL
         return IMAGE_UNAVAILABLE unless all_admissible?(canonical, record)
 
         Orm::Essential.transaction(requires_new: true) do

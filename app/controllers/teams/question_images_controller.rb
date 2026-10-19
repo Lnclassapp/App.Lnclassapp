@@ -4,8 +4,11 @@
 module Teams
   class QuestionImagesController < BaseController
     # ADR-0049 : un compte de l'équipe n'envoie pas plus de 60 images par minute ; les non rattachées attendent la purge.
-    rate_limit to: 60, within: 1.minute, only: :create, by: -> { current_actor.user_id },
+    rate_limit to: 60, within: 1.minute, only: :create, by: -> { current_actor.user_id }, name: "minute",
                with: -> { render json: { error: t("errors.codes.rate_limited") }, status: :too_many_requests }
+    # ADR-0105, menace.md n° 11 : et pas plus de 300 par jour (le plafond par minute seul laisse 86 400 envois par jour).
+    rate_limit to: 300, within: 1.day, only: :create, by: -> { current_actor.user_id }, name: "daily",
+               with: -> { render json: { error: t("errors.codes.rate_limited_daily") }, status: :too_many_requests }
 
     def create
       result = upload.call(actor: current_actor, dto: Dtos::Shared::ContentImageInput.new(file: uploaded_file))

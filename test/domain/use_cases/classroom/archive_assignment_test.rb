@@ -38,9 +38,9 @@ module UseCases
       end
 
       setup do
-        @classroom = Entities::Classroom::Classroom.new(id: 3, public_id: "cls6e1", name: "6ème 1", teacher_ids: [ 7 ])
-        @other = Entities::Classroom::Classroom.new(id: 5, public_id: "cls6e3", name: "6ème 3", teacher_ids: [ 7 ])
-        archived_classroom = Entities::Classroom::Classroom.new(id: 4, public_id: "clsold", teacher_ids: [ 7 ], status: "archived")
+        @classroom = Entities::Classroom::Classroom.new(school_id: 1, id: 3, public_id: "cls6e1", name: "6ème 1", teacher_ids: [ 7 ])
+        @other = Entities::Classroom::Classroom.new(school_id: 1, id: 5, public_id: "cls6e3", name: "6ème 3", teacher_ids: [ 7 ])
+        archived_classroom = Entities::Classroom::Classroom.new(school_id: 1, id: 4, public_id: "clsold", teacher_ids: [ 7 ], status: "archived")
         meiose = Entities::Classroom::Assignable.new(type: "Exercise", id: 30, key: "ex-meiose", name: "Méiose")
         @assignments = FakeAssignments.new(
           assignment(1, "asgactive", 3, meiose),

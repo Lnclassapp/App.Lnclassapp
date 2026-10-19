@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Assessment::SessionResultsController
 # Rôle : résultat d'une session terminée, pour l'élève propriétaire, l'enseignant d'une de ses classes actives et l'équipe
-# ADR  : 0026, 0028, 0033, 0054 · UDR : 0007, 0023 · lecture seule, aucun stream
+# ADR  : 0026, 0028, 0033, 0054, 0094 · UDR : 0007, 0023 · lecture seule, aucun stream
 module Assessment
   class SessionResultsController < AuthenticatedController
     include ReadsOwnLevel
@@ -34,7 +34,7 @@ module Assessment
     def teaches?(session)
       return false unless current_actor.teacher?
 
-      query.teaches_student?(student_id: session.student_id, teacher_id: current_actor.user_id)
+      query.teaches_student?(student_id: session.student_id, teacher_id: current_actor.user_id, school_id: current_actor.school_id)
     end
 
     def query

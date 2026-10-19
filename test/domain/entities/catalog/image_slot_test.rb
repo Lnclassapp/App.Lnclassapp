@@ -29,6 +29,19 @@ module Entities
         assert_equal 0, ImageSlot.malformed_count(nil)
       end
 
+      # Menace n° 13 : le motif des blocs est à coût quadratique sur un « <p> » jamais refermé ; il a un délai (0,5 s), et le
+      # texte qui le dépasse est compté comme mal écrit, donc refusé.
+      test "un texte hostile (balises jamais refermées) est refusé en moins d'une seconde, sans tenir le serveur" do
+        [ %(<span title="<p>">x</span>) * 20_000, "<p>" * 40_000 ].each do |hostile|
+          started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+          count = ImageSlot.malformed_count(hostile)
+          elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - started
+
+          assert_operator count, :>, 0
+          assert_operator elapsed, :<, 1.0, "malformed_count a pris #{elapsed.round(2)} s"
+        end
+      end
+
       test "un texte nul ou sans emplacement n'en a aucun" do
         assert_empty ImageSlot.scan(nil)
         assert_empty ImageSlot.scan("<p>Rien à insérer.</p>")

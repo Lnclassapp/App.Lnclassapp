@@ -1,9 +1,10 @@
 # 🌐 DELIVERY · Identity::PendingSchoolJoinsController
 # Rôle : « Rejoindre cet établissement » de l'écran d'attente : l'établissement choisi dans sa DRENA rattache l'enseignant
-# ADR  : 0028, 0063, 0071, 0083 · UDR : 0050, 0056, 0079
+# ADR  : 0028, 0063, 0071, 0083, 0094 · UDR : 0050, 0056, 0079
 module Identity
   class PendingSchoolJoinsController < AuthenticatedController
     include PendingAccountsController::SchoolChoice
+    include JoinsSchool
 
     FIELDS = %i[drena_public_id school_public_id].freeze
 
@@ -12,9 +13,13 @@ module Identity
 
     SCREEN = "identity/pending_accounts/show".freeze
 
+    # L'écran d'attente est celui de l'enseignant sans établissement : rattaché, il ajoute un établissement depuis
+    # « Mes établissements » (ADR-0094, UDR-0099).
     def create
+      return render_forbidden if current_actor.school_id
+
       @form = @school_join = form_input
-      result = join.call(actor: current_actor, dto: @school_join)
+      result = join_school.call(actor: current_actor, dto: @school_join)
       prepare_screen
       render_result result, form: SCREEN, success: lambda { |school|
         redirect_to_home notice: t(".welcome", school: school.name), status: :see_other
@@ -41,15 +46,6 @@ module Identity
       @school_join = Dtos::School::SchoolJoinInput.new
       prepare_screen
       render SCREEN, status: :too_many_requests
-    end
-
-    def join
-      UseCases::School::JoinSchoolWithCode.new(
-        schools: Repositories::School::SchoolRepository.new, drenas: Repositories::School::DrenaRepository.new,
-        departures: Repositories::School::TeacherDepartureRepository.new,
-        join_requests: Repositories::School::JoinRequestRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
-        policy: Policies::School::JoinSchoolWithCodePolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
-      )
     end
   end
 end

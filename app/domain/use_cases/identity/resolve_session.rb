@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::ResolveSession
 # Rôle : retrouve la session d'un jeton, l'expire ou la rafraîchit, et construit l'acteur
-# ADR  : 0028, 0031, 0050
+# ADR  : 0028, 0031, 0050, 0094
 module UseCases
   module Identity
     class ResolveSession
@@ -46,7 +46,7 @@ module UseCases
       def actor_for(session)
         return if session.team? && !session.verified?
 
-        @users.actor_for(user_id: session.user_id)
+        @users.actor_for(user_id: session.user_id, current_school_id: session.current_school_id)
       end
     end
   end

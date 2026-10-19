@@ -169,6 +169,55 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # Menace n° 11 : le plafond de 30 images vaut à l'enregistrement, pas seulement à l'envoi (des images orphelines le contournent).
+  def cite(images) = images.map { %(<action-text-attachment sgid="#{it.attachable_sgid}"></action-text-attachment>) }.join
+
+  test "ADR-0105: updating a sheet that cites 31 orphan images is refused (422), and no image is attached" do
+    essential = create_essential(course: @course, name: "La méiose")
+    images = Array.new(Entities::Shared::ContentImage::MAX_PER_ESSENTIAL + 1) { create_essential_image }
+    sign_in_as @member
+
+    patch teams_essential_path(essential.slug), params: essential_params(content: "<div>Texte</div>#{cite(images)}"), as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_select "#essential_content_error", text: including(error_message(:content, :too_many_images))
+    assert_equal 0, Orm::EssentialImage.where.not(essential_id: nil).count
+    assert_equal 31, Orm::EssentialImage.count
+    assert_equal "<p>L'essentiel à retenir.</p>", essential.reload.content.body.to_html
+  end
+
+  test "ADR-0105: creating a sheet that cites 31 images is refused (422), and nothing is written" do
+    images = Array.new(Entities::Shared::ContentImage::MAX_PER_ESSENTIAL + 1) { create_essential_image }
+    sign_in_as @member
+
+    post teams_course_essentials_path(@course.slug), params: essential_params(content: "<div>Texte</div>#{cite(images)}"), as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_equal 0, Orm::Essential.count
+    assert_equal 0, Orm::EssentialImage.where.not(essential_id: nil).count
+  end
+
+  test "ADR-0105: a sheet that cites exactly 30 images is saved" do
+    images = Array.new(Entities::Shared::ContentImage::MAX_PER_ESSENTIAL) { create_essential_image }
+    sign_in_as @member
+
+    post teams_course_essentials_path(@course.slug), params: essential_params(content: "<div>Texte</div>#{cite(images)}"), as: :turbo_stream
+
+    assert_response :success
+    assert_equal 30, Orm::EssentialImage.where(essential_id: Orm::Essential.sole.id).count
+  end
+
+  test "menace n° 13: a text of more than 200 KB is refused (422), and nothing is written" do
+    sign_in_as @member
+
+    post teams_course_essentials_path(@course.slug),
+         params: essential_params(content: "<div>#{'a' * Entities::Catalog::Essential::CONTENT_MAX}</div>"), as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_select "#essential_content_error", text: including(error_message(:content, :too_long))
+    assert_equal 0, Orm::Essential.count
+  end
+
   test "without Turbo, a creation leads back to the course with a notice" do
     sign_in_as @member
 

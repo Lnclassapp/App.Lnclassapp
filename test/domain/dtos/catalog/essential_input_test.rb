@@ -20,6 +20,14 @@ module Dtos
                      essential.essential_attributes)
       end
 
+      test "le contenu compte 200 Ko au plus (menace n° 13) ; le plafond lui-même est admis" do
+        limit = Entities::Catalog::Essential::CONTENT_MAX
+
+        assert_equal 204_800, limit
+        assert input(content: "a" * limit).valid?
+        assert errors_of(content: "a" * (limit + 1)).of_kind?(:content, :too_long)
+      end
+
       test "le nom est obligatoire et compte 150 caractères au plus, comme le sous-titre" do
         assert errors_of(name: nil).of_kind?(:name, :blank)
         assert errors_of(name: "   ").of_kind?(:name, :blank)
