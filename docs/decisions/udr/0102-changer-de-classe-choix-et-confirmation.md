@@ -1,14 +1,14 @@
 # UDR-0102 : « Changer de classe » — la cascade à trois étapes, puis une page de confirmation qui dit ce qui change
 <!-- index
 titre: « Changer de classe » : cascade puis confirmation
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-16)*
 adr-lie: [0095](../adr/0095-l-eleve-change-lui-meme-de-classe-et-d-etablissement.md)
 problematique: Élève à classe active : page « Changer de classe » qui reprend la cascade d'UDR-0091 (établissement actuel replié, sa classe marquée « Ta classe »), puis page « Confirmer le changement » (de → vers, ce qui suit l'élève, ce qu'il quitte) avec « Oui, changer de classe » ; le lien /c/<jeton> d'une autre classe mène à la même confirmation ; sans JS en GET puis POST
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-16)* |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/changement-etablissement-eleve`](../../chantiers/changement-etablissement-eleve/memo.md) |
 | **ADR lié** | [ADR-0095](../adr/0095-l-eleve-change-lui-meme-de-classe-et-d-etablissement.md) |

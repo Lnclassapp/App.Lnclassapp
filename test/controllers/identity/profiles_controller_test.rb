@@ -35,7 +35,7 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#profile_information[aria-labelledby=profile_information_title]" do
       assert_select "#profile_information_title", "Mes informations"
       rows = css_select("#profile_information li").map { it.text.squish }
-      assert_equal [ "Photo Aucune photo Ajouter", "Nom Aya Koné Modifier", "Numéro 07 01 02 03 04 Changer", "Classe 3e B",
+      assert_equal [ "Photo Aucune photo Ajouter", "Nom Aya Koné Modifier", "Numéro 07 01 02 03 04 Changer", "Classe 3e B Changer",
                      "Établissement Lycée Classique d'Abidjan", "Inscrit le 1 septembre 2026" ], rows
       { edit_profile_photo_path => "Ajouter photo, Aucune photo", edit_profile_name_path => "Modifier nom, Aya Koné",
         edit_profile_contact_path => "Changer numéro, 07 01 02 03 04" }.each do |path, label|
@@ -43,7 +43,12 @@ class Identity::ProfilesControllerTest < ActionDispatch::IntegrationTest
           assert_select "svg", 2
         end
       end
-      assert_select "a", 3
+      # UDR-0101 §3.1 : la ligne Classe ouvre « Changer de classe » en pleine page, pas dans la fenêtre.
+      assert_select "li > a.min-h-tap[href='#{new_student_classroom_change_path}'][data-turbo-frame=_top]" \
+                    "[aria-label='Changer classe, 3e B']" do
+        assert_select "svg", 2
+      end
+      assert_select "a", 4
     end
   end
 
