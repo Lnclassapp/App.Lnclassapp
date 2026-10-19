@@ -3,9 +3,9 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage — questions au porteur ouvertes (Q1 à Q9) |
+| **Statut** | exécution — réponses du porteur reçues le 2026-10-16 (Q5 retirée, DIR-4) |
 | **Ouvert le** | 2026-10-16 |
-| **Branche** | `docs/cadrage-espace-direction` (cadrage) ; code : `feature/espace-direction`, après Q9 |
+| **Branche** | `docs/cadrage-espace-direction` (cadrage) ; code : `feature/espace-direction-v2`, depuis `feature/multi-etablissements-enseignant` |
 | **Programme** | `refonte-application`, vague V2 ([feuille de route §5](../refonte-application/feuille-de-route.md#v2--organisation-scolaire-et-espace-direction)) |
 
 ---

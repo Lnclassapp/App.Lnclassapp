@@ -101,14 +101,18 @@ module Repositories
         assert_equal school.id, @repository.actor_for(user_id: admin.id, current_school_id: create_school.id).school_id
       end
 
-      # ADR-0065 : une direction se connecte par PIN, et son acteur porte l'établissement de son rattachement.
-      test "a school admin signs in by PIN and their actor carries their school" do
+      # ADR-0065 : une direction se connecte par PIN, et son acteur porte l'établissement de son rattachement. ED-05 (ADR-0092) :
+      # et sa fonction ; tout autre rôle n'en a pas.
+      test "ED-05: a school admin signs in by PIN and their actor carries their school and their position" do
         school = create_school
-        admin = create_school_admin(school:, pin: "1357")
+        admin = create_school_admin(school:, pin: "1357", position: "educator")
 
         assert_equal admin.id, @repository.authenticate(contact: admin.contact, pin: "1357").id
-        assert_equal Entities::Identity::Actor.new(user_id: admin.id, role: :school_admin, school_id: school.id),
+        assert_equal Entities::Identity::Actor.new(user_id: admin.id, role: :school_admin, school_id: school.id, staff_position: "educator"),
                      @repository.actor_for(user_id: admin.id)
+        [ create_teacher(school:), create_student, create_team_member(second_factor: false) ].each do |user|
+          assert_nil @repository.actor_for(user_id: user.id).staff_position, user.role
+        end
       end
 
       # ADR-0077 §4.2 : un compte direction archivé reçoit le refus d'un mauvais PIN ; une session survivante mène à l'attente.

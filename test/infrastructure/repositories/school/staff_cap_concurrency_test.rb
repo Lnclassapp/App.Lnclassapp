@@ -28,7 +28,7 @@ class StaffCapConcurrencyTest < ActiveSupport::TestCase
       Thread.new do
         gate.pop
         ActiveRecord::Base.connection_pool.with_connection do
-          Repositories::School::StaffRepository.new.attach_by_code(user_id: candidate.id, school_id: @school.id, cap: 3,
+          Repositories::School::StaffRepository.new.attach_by_code(user_id: candidate.id, school_id: @school.id, cap: 3, position: "deputy",
                                                                     at: Time.current)
         end
       end
@@ -36,7 +36,7 @@ class StaffCapConcurrencyTest < ActiveSupport::TestCase
     ATTEMPTS.times { gate << true }
     results = threads.map(&:value)
 
-    assert_equal 1, results.count(true)
+    assert_equal 1, results.count(:attached)
     assert_equal 3, Orm::SchoolStaff.where(school: @school, joined_via: "code").count
   end
 end

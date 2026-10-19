@@ -1,11 +1,14 @@
 # 🌐 DELIVERY · SchoolAdmin::SchoolsController
 # Rôle : « Établissement » de la direction : lien d'inscription des enseignants, bloc « Direction », bloc « Classes par niveau »
-# ADR  : 0006, 0071, 0077 · UDR : 0056, 0070 · l'établissement est celui du compte, jamais un paramètre
+# ADR  : 0006, 0071, 0077, 0092 · UDR : 0056, 0070, 0092 (§3.5) · l'établissement est celui du compte, jamais un paramètre
 module SchoolAdmin
   class SchoolsController < BaseController
     def show
       @school = Queries::School::OwnSchoolQuery.new.call(school_id: current_actor.school_id)
       @level_classrooms = Queries::School::LevelClassroomsQuery.new.call(public_id: @school.public_id)
+      # « + » et « − » par la policy de la structure (UDR-0092 §3.5) ; la note dit pourquoi ils manquent au rang vie scolaire.
+      @structure_manageable = gesture_allowed?(Policies::School::ManageSchoolStructurePolicy, @school)
+      @rank_note = rank_note(@school, @structure_manageable)
       load_school_staff
     end
 
@@ -26,7 +29,8 @@ module SchoolAdmin
 
     def staff_entity(row)
       Entities::School::Staff.new(user_id: row.user_id, user_public_id: row.public_id, school_id: current_actor.school_id,
-                                  joined_via: row.joined_via, joined_at: row.joined_at, archived_at: nil, archived_by_id: nil)
+                                  joined_via: row.joined_via, joined_at: row.joined_at, archived_at: nil, archived_by_id: nil,
+                                  position: row.position)
     end
   end
 end

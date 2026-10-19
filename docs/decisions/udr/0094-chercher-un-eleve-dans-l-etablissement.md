@@ -1,14 +1,14 @@
 # UDR-0094 : Chercher un élève dans tout l'établissement, depuis l'accueil de la direction
 <!-- index
 titre: Recherche d'un élève dans l'établissement, depuis la carte « Établissement » de l'accueil de la direction
-statut: Proposé
+statut: Accepté
 adr-lie: [0092](../adr/0092-fonctions-de-direction-droits-par-rang-et-changement-de-classe.md)
 problematique: La direction ne retrouve un élève qu'en ouvrant sa classe ; un champ sur l'accueil et une page de résultats qui mène à la classe filtrée. Amende UDR-0074 §3.3.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16, Q6) |
 | **Date** | 2026-10-16 |
 | **Chantier** | `docs/chantiers/espace-direction` |
 | **ADR lié** | ADR-0092 (aucune donnée nouvelle ; lecture seule) |
@@ -18,13 +18,13 @@ problematique: La direction ne retrouve un élève qu'en ouvrant sa classe ; un 
 
 ## 1. Contexte
 
-La direction lit ses élèves classe par classe : accueil → niveau → classe → recherche dans la classe (UDR-0074, UDR-0081 §3.7). Un parent appelle pour « Kouassi Aya » : la direction ne sait pas sa classe, et ouvre les classes une à une. Pour changer un élève de classe (UDR-0093), il faut d'abord le trouver.
+La direction lit ses élèves classe par classe : accueil → niveau → classe → recherche dans la classe (UDR-0074, UDR-0081 §3.7). Un parent appelle pour « Kouassi Aya » : la direction ne sait pas sa classe, et ouvre les classes une à une. Pour retirer un élève de sa classe, il faut d'abord le trouver.
 
 ## 2. Décision
 
 - **Un champ « Chercher un élève » dans la carte « Établissement » de l'accueil**, plutôt qu'une entrée de navigation de plus : la direction y arrive à chaque connexion, et la navigation a déjà ses entrées (UDR-0006).
 - **Une page de résultats à part** (`GET`, adresse partageable, bouton retour du navigateur), plutôt qu'une liste qui s'ouvre sous le champ : elle marche sans JavaScript et au téléphone.
-- **Chaque résultat mène à la page de sa classe, filtrée sur son nom** (paramètre `q` existant de `school_admin/classrooms#show`) : aucune fiche d'élève nouvelle ; les gestes (changer de classe, retirer) sont sur sa ligne.
+- **Chaque résultat mène à la page de sa classe, filtrée sur son nom** (paramètre `q` existant de `school_admin/classrooms#show`) : aucune fiche d'élève nouvelle ; le geste (retirer) est sur sa ligne. Toutes les fonctions de direction y ont accès (ADR-0092 §4.3).
 - **Le nom seul** : jamais le numéro de téléphone, ni en critère ni en résultat.
 
 ## 3. Règles d'implémentation
@@ -67,3 +67,9 @@ La direction lit ses élèves classe par classe : accueil → niveau → classe 
 - L'UDR-0074 §3.3 : la carte « Établissement » gagne un formulaire en bas.
 - Le budget HTML de l'accueil (ADR-0067, < 150 Ko) inclut le champ ; la page de résultats tient sous 100 ms en p95 pour 2 000 élèves.
 - Interdit : chercher par numéro de téléphone ; afficher des élèves d'un autre établissement ou retirés.
+
+## 5. Écarts de l'implémentation (2026-10-16)
+
+- Le nom s'affiche « Prénom Nom », comme sur la page de classe (le filtre `q` de `school_admin/classrooms#show` le retrouve tel quel) ; le libellé accessible reste « %{nom}, %{classe} ».
+- Le formulaire est un partiel (`school_admin/student_searches/_form`), le même sur la carte et sur la page de résultats ; le bouton « Chercher » passe sous le champ au téléphone, à droite dès `sm`.
+- Les lignes ne portent aucun identifiant d'élève : `student_result_<rang>`.

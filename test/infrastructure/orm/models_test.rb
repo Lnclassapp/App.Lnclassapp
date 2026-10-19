@@ -123,7 +123,7 @@ class Orm::ModelsTest < ActiveSupport::TestCase
     Orm::BackupCode.create!(user: team, code_digest: "b" * 64)
     recovery = Orm::PinRecoveryCode.create!(user: graph[:student], issued_by: graph[:teacher], code_digest: "c" * 64,
                                             expires_at: 15.minutes.from_now)
-    invitation = Orm::Invitation.create!(kind: "school_staff", contact: "0700000009", school: graph[:school], position: "principal",
+    invitation = Orm::Invitation.create!(kind: "school_staff", contact: "0700000009", school: graph[:school], position: "head",
                                          invited_by: team, token_digest: "d" * 64, expires_at: 72.hours.from_now)
 
     assert_equal 1, team.sessions.count

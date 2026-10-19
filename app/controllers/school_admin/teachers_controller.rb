@@ -1,13 +1,15 @@
 # 🌐 DELIVERY · SchoolAdmin::TeachersController
 # Rôle : « Enseignants » de la direction, la confirmation de leur retrait (lue à la demande) et le retrait (DetachTeacher)
-# ADR  : 0065, 0067, 0071 · UDR : 0006, 0052, 0056 · l'établissement est celui du compte, jamais un paramètre
+# ADR  : 0065, 0067, 0071, 0092 · UDR : 0006, 0052, 0056, 0092 (§3.5) · l'établissement est celui du compte, jamais un paramètre
 module SchoolAdmin
   class TeachersController < BaseController
     def index
       @overview = teachers_query.call(school_id: current_actor.school_id)
-      # Gestes affichés sur un établissement actif seulement, le serveur refuse de toute façon (UDR-0056 §2.6) ; BaseController
-      # a déjà refusé une direction sans établissement.
-      @manageable = Queries::School::OwnSchoolQuery.new.call(school_id: current_actor.school_id).active?
+      # « Retirer » par la policy des enseignants : établissement actif (UDR-0056 §2.6) et rang « gestion » (UDR-0092 §3.5) ;
+      # le serveur refuse de toute façon. BaseController a déjà refusé une direction sans établissement.
+      school = Queries::School::OwnSchoolQuery.new.call(school_id: current_actor.school_id)
+      @manageable = gesture_allowed?(manage_teachers.class, school)
+      @rank_note = rank_note(school, @manageable)
     end
 
     # UDR-0056, amendement du 2026-10-04 : la confirmation n'est plus copiée dans chaque ligne, elle arrive dans le frame

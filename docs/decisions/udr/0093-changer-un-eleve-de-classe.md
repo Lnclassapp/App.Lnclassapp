@@ -1,18 +1,21 @@
 # UDR-0093 : « Changer de classe » sur la page d'une classe de la direction
 <!-- index
 titre: Changer un élève de classe depuis la page de classe de la direction
-statut: Proposé
+statut: Abandonnée
 adr-lie: [0092](../adr/0092-fonctions-de-direction-droits-par-rang-et-changement-de-classe.md)
 problematique: Où la direction change un élève de classe, comment elle choisit la classe cible, et ce que voient l'ancienne et la nouvelle classe. Amende UDR-0081 §3.7.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Abandonnée (porteur, 2026-10-16, Q5 : la direction ne change pas un élève de classe ; l'élève le fait lui-même, chantier `changement-etablissement-eleve`) |
 | **Date** | 2026-10-16 |
 | **Chantier** | `docs/chantiers/espace-direction` |
 | **ADR lié** | ADR-0092 |
 | **Remplacé par** | — |
+
+
+> **Abandonnée.** Le porteur a retiré le geste (Q5 du memo d'`espace-direction`, 2026-10-16). Rien de cette UDR n'a été construit ; elle reste pour l'historique. La direction garde « Retirer de la classe » (UDR-0081 §3.7).
 
 ---
 
