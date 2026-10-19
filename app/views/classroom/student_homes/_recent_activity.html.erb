@@ -24,7 +24,7 @@
                 <%# Vert dès « 14/20 » affiché (MASTERY_THRESHOLD sur 20, 68 % compris, UDR-0090 §4), à l'encre dessous ; jamais en rouge ni en ambre. %>
                 <% grading = Entities::Assessment::Grading %>
                 <span data-grade class="<%= class_names("block font-display text-base font-extrabold",
-                                                        grading.grade_on_20(session.score_percent) >= grading.grade_on_20(grading::MASTERY_THRESHOLD) ? "text-success" : "text-ink") %>"><%= grade_label(session.score_percent) %></span>
+                                                        grading.reaches?(session.score_percent, grading::MASTERY_THRESHOLD) ? "text-success" : "text-ink") %>"><%= grade_label(session.score_percent) %></span>
                 <span class="block text-xs text-mute"><%= t(".completed", time: time_ago_in_words(session.completed_at)) %></span>
               </span>
             <% end %>

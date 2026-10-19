@@ -22,14 +22,14 @@ module Catalog
       get public_level_series_path("tle", "d")
 
       assert_response :success
-      assert_select "h1", "Cours de Tle D"
-      assert_select "title", "Cours de Tle D · Lnclass"
+      assert_select "h1", "Fiches de cours de Tle D"
+      assert_select "title", "Fiches de cours de Tle D · Lnclass"
       assert_equal [ "Suites", "Philosophie morale" ], texts("#series_groups h3")
       assert_no_match "Mécanique", response.body
-      assert_select "main p.text-mute", "2 cours publiés, en 2 matières, dont les cours communs à toutes les séries de Tle."
+      assert_select "main p.text-mute", "2 fiches de cours publiées, en 2 matières, dont les fiches de cours communes à toutes les séries de Tle."
       assert_select "main nav a[href='/niveaux/tle']", text: "Tle"
       assert_select "head link[rel=canonical][href='https://lnclass.com/niveaux/tle/d']"
-      assert_select "head meta[name=description][content='Les cours de Tle D sur Lnclass : Mathématiques, Philosophie.']"
+      assert_select "head meta[name=description][content='Les fiches de cours de Tle D sur Lnclass : Mathématiques, Philosophie.']"
       assert_select "head meta[name=robots]", 0
     end
 
@@ -38,7 +38,7 @@ module Catalog
 
       get public_level_series_path("tle", "d")
 
-      assert_select "main p.text-mute", "1 cours publié, en 1 matière."
+      assert_select "main p.text-mute", "1 fiche de cours publiée, en 1 matière."
     end
 
     test "CC-15: a series not attached to the level, an unknown level or series is not found" do
@@ -69,7 +69,7 @@ module Catalog
       get public_level_series_path("tle", "d")
 
       assert_select "#group_mathematiques li", 6
-      assert_select "#group_mathematiques_more[href=?]", "/matieres/mathematiques?niveau=tle&serie=d", text: "Voir les 8 cours"
+      assert_select "#group_mathematiques_more[href=?]", "/matieres/mathematiques?niveau=tle&serie=d", text: "Voir les 8 fiches de cours"
       assert_select "#group_mathematiques h2 a[href=?]", "/matieres/mathematiques?niveau=tle&serie=d"
     end
 
@@ -79,7 +79,7 @@ module Catalog
       get public_level_series_path("tle", "a1")
 
       assert_response :success
-      assert_select "#series_empty", text: /Les cours de Tle A1 arrivent bientôt\./
+      assert_select "#series_empty", text: /Les fiches de cours de Tle A1 arrivent bientôt\./
       assert_select "#series_empty a[href='/niveaux/tle']", "Voir la Tle"
       assert_select "head meta[name=robots][content=noindex]"
 
@@ -106,7 +106,7 @@ module Catalog
       get public_level_series_path("tle", "d")
 
       assert_equal [ "Suites" ], texts("#series_groups h3")
-      assert_select "#group_mathematiques h2", text: /1 cours/
+      assert_select "#group_mathematiques h2", text: /1 fiche de cours/
       assert_no_match(/Intégrales|Limites/, response.body)
     end
 

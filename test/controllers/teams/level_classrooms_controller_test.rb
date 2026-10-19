@@ -43,6 +43,19 @@ class Teams::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
+  # ADR-0098, PRD vie-de-la-classe : une classe renommée libère son numéro, le « + » le reprend.
+  test "« + » après le renommage de « 6ème 3 » en « 6ème A » ajoute « 6ème 3 »" do
+    sign_in_as @member
+    @sixths.last.destroy!
+    @sixths[2].update!(name: "6ème A")
+
+    post add_path, params: { level: "6eme", series: "" }, as: :turbo_stream
+
+    assert_response :success
+    assert_equal [ "6ème 1", "6ème 2", "6ème 3", "6ème A" ], Orm::Classroom.where(level_id: @levels["6eme"].id).order(:name).pluck(:name)
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(tc("create.done", name: "6ème 3"))
+  end
+
   test "CN-02 : « + » crée la 6ème 5 de l'année, tracée ; toast avec le code, bloc remplacé, fiche re-demandée" do
     sign_in_as @member
 

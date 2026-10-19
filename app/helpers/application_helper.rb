@@ -5,7 +5,9 @@ module ApplicationHelper
   # Une connexion ou une déconnexion change le nonce CSP (ADR-0049) : une visite Turbo, qui garderait la CSP de la page
   # précédente, recharge alors le document entier. Le flash est gardé pour la page rechargée, qui affiche le toast.
   # Un chargement hors Turbo reçoit déjà la bonne CSP : ni rechargement, ni flash gardé.
+  # Une page d'erreur rendue pour le cadre « modal » (RendersResult#render_error_page) demande aussi la visite entière.
   def document_reload_tag
+    return tag.meta(name: "turbo-visit-control", content: "reload") if @reload_document
     return unless flash[Authentication::RELOAD_FLASH] && request.headers["X-Turbo-Request-Id"]
 
     flash.keep

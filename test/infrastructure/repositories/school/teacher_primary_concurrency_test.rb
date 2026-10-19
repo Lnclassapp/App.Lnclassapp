@@ -31,9 +31,10 @@ class TeacherPrimaryConcurrencyTest < ActiveSupport::TestCase
     Orm::TeacherSchoolDeparture.where(teacher_id: @teacher.id).delete_all
     Orm::SchoolStaff.where(user_id: users).delete_all
     Orm::TeacherSchool.where(teacher_id: @teacher.id).delete_all
-    profiles = Orm::TeacherProfile.where(user_id: @teacher.id)
-    materials = profiles.pluck(:material_id)
-    profiles.delete_all
+    rows = Orm::TeacherSchoolMaterial.where(teacher_id: @teacher.id)
+    materials = rows.pluck(:material_id)
+    rows.delete_all
+    Orm::TeacherProfile.where(user_id: @teacher.id).delete_all
     Orm::User.where(id: users).delete_all
     Orm::Material.where(id: materials).delete_all
     Orm::School.where(id: [ @a.id, @b.id ]).delete_all
@@ -47,16 +48,18 @@ class TeacherPrimaryConcurrencyTest < ActiveSupport::TestCase
       departures: Repositories::School::TeacherDepartureRepository.new, join_requests: Repositories::School::JoinRequestRepository.new,
       invite_links: Repositories::Identity::InviteLinkRepository.new, sessions: Repositories::Identity::SessionRepository.new,
       audit_log: Repositories::Identity::AuditLogRepository.new, policy: SlowJoinPolicy.new,
-      transaction: Repositories::Shared::Transaction.new, clock: Time.zone
+      transaction: Repositories::Shared::Transaction.new, clock: Time.zone,
+      teacher_materials: Repositories::Identity::TeacherMaterialRepository.new
     ).call(actor:, dto: Dtos::School::SchoolJoinInput.new(drena_public_id: @drena.public_id, school_public_id: school.public_id))
   end
 
   def reinstate
-    actor = Entities::Identity::Actor.new(user_id: @admin.id, role: :school_admin, school_id: @a.id)
+    actor = Entities::Identity::Actor.new(user_id: @admin.id, role: :school_admin, school_id: @a.id, staff_position: "head")
     UseCases::School::ReinstateTeacher.new(
       users: Repositories::Identity::UserRepository.new, schools: Repositories::School::SchoolRepository.new,
       departures: Repositories::School::TeacherDepartureRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
-      policy: SlowReinstatePolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
+      policy: SlowReinstatePolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone,
+      teacher_materials: Repositories::Identity::TeacherMaterialRepository.new
     ).call(actor:, school_id: @a.id, teacher_public_id: @teacher.public_id)
   end
 

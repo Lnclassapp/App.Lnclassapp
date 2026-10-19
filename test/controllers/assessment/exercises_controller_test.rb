@@ -40,7 +40,7 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
 
     # UDR-0021, amendement du 2026-10-02 : la fiche n'est nommée que par le lien retour (R6) ; l'aide passe en infobulle (R4).
     assert_select "#exercise_context", text: "Génétique et évolution"
-    assert_select "#exercise_header", text: /Fiche essentielle :/, count: 0
+    assert_select "#exercise_header", text: /Fiche de révision :|Fiche essentielle/, count: 0
     assert_select "#exercise_questions_title details", text: /#{I18n.t("#{scope}.questions_preview.student_hint")}/
     assert_select "#exercise_questions p", text: /#{I18n.t("#{scope}.questions_preview.student_hint")}/, count: 0
     assert_select "#exercise_questions[data-controller=reveal][data-reveal-step-value='3']"
@@ -106,6 +106,7 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_progress", 0
     # Décision du porteur (2026-10-02) : l'enseignant garde l'écran inchangé — contexte complet, toutes les questions.
     assert_select "#exercise_context", text: I18n.t("#{scope}.show.context", course: "Génétique et évolution", essential: "La méiose")
+    assert_select "#exercise_context", text: "Génétique et évolution · Fiche de révision : La méiose"
     assert_select "#exercise_questions[data-controller=reveal]", 0
     assert_select "#exercise_questions [data-reveal-target]", 0
     assert_select "form[action='#{exercise_sessions_path(@exercise.public_id)}']", 0

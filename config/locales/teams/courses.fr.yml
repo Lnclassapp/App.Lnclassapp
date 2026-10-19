@@ -14,15 +14,15 @@ fr:
         dtos/catalog/course_input:
           attributes:
             name:
-              blank: "Indiquez le nom du cours."
+              blank: "Indiquez le nom de la fiche de cours."
               too_long: "Le nom compte %{count} caractères au plus."
-              taken: "Un cours de ce niveau, de cette série et de cette matière porte déjà ce nom."
+              taken: "Une fiche de cours de ce niveau, de cette série et de cette matière porte déjà ce nom."
             subtitle:
               too_long: "Le sous-titre compte %{count} caractères au plus."
             level_slug:
               blank: "Choisissez un niveau."
               inclusion: "Ce niveau n'existe pas."
-              assigned_elsewhere: "Ce cours est assigné à des classes d'un autre niveau ou d'une autre série. Retirez ces assignations avant de le changer."
+              assigned_elsewhere: "Cette fiche de cours est assignée à des classes d'un autre niveau ou d'une autre série. Retirez ces assignations avant de le changer."
             series_slug:
               inclusion: "Cette série n'existe pas."
               not_allowed: "Cette série n'est pas ouverte à ce niveau."
@@ -33,28 +33,28 @@ fr:
     courses:
       form:
         name_placeholder: "Ex. : Génétique et évolution"
-        subtitle_hint: "Facultatif, 150 caractères au plus. Il s'affiche sous le nom, sur la carte du cours."
+        subtitle_hint: "Facultatif, 150 caractères au plus. Il s'affiche sous le nom, sur la carte de la fiche de cours."
         level_prompt: "Choisir un niveau"
         no_series: "Aucune série"
         series_hint: "Seules les séries ouvertes à un niveau sont proposées, rangées sous ce niveau."
         material_prompt: "Choisir une matière"
-        content_placeholder: "Présentez le cours : ce que l'élève va apprendre, les notions à connaître…"
+        content_placeholder: "Présentez la fiche de cours : ce que l'élève va apprendre, les notions à connaître…"
         content_hint: "Texte seul : gras, italique, titres, listes, citations et liens. Les images et les fichiers ne sont pas acceptés."
       new:
-        title: "Nouveau cours"
-        draft_notice: "Le cours est créé en brouillon ; il se publie ensuite depuis sa page."
-        submit: "Créer le cours"
+        title: "Nouvelle fiche de cours"
+        draft_notice: "La fiche de cours est créée en brouillon ; elle se publie ensuite depuis sa page."
+        submit: "Créer la fiche de cours"
         cancel: "Annuler"
       edit:
-        title: "Modifier le cours"
-        status_notice: "Le statut se change depuis la page du cours, jamais dans ce formulaire."
+        title: "Modifier la fiche de cours"
+        status_notice: "Le statut se change depuis la page de la fiche de cours, jamais dans ce formulaire."
         submit: "Enregistrer"
         cancel: "Annuler"
       create:
-        created: "Cours « %{name} » créé (brouillon)."
+        created: "Fiche de cours « %{name} » créée (brouillon)."
       update:
-        updated: "Cours « %{name} » modifié."
+        updated: "Fiche de cours « %{name} » modifiée."
       transition:
-        published: "Cours « %{name} » publié : il est visible des élèves et des enseignants."
-        archived: "Cours « %{name} » archivé : il n'est plus visible des élèves ni des enseignants."
-        refused: "Le cours « %{name} » est déjà dans cet état ou ne peut pas prendre ce statut. Rechargez la page pour voir son statut actuel."
+        published: "Fiche de cours « %{name} » publiée : elle est visible des élèves et des enseignants."
+        archived: "Fiche de cours « %{name} » archivée : elle n'est plus visible des élèves ni des enseignants."
+        refused: "La fiche de cours « %{name} » est déjà dans cet état ou ne peut pas prendre ce statut. Rechargez la page pour voir son statut actuel."

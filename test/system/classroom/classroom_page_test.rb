@@ -103,7 +103,7 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
 
   test "l'enseignant lit ses jours, le suivi d'un exercice qui nomme les seuls rendus en retard, et ouvre un cours de sa classe" do
     [ 1, 4 ].each { Orm::ClassroomSessionDay.create!(teacher: @teacher, classroom: @classroom, weekday: it) }
-    svt = Orm::TeacherProfile.find_by!(user: @teacher).material
+    svt = Orm::TeacherSchoolMaterial.find_by!(teacher: @teacher).material
     tle_course = create_course(level: @classroom.level, series: @classroom.series, material: svt, name: "La cellule")
     essential = create_essential(course: tle_course, name: "La mitose")
     exercise = create_exercise(essential:, title: "Phases de la mitose")
@@ -135,15 +135,18 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     within("#pending_students") { assert_link "Awa Bamba", href: classroom_student_path(@classroom.public_id, @awa.public_id) }
 
     click_on "Tle D 1"
+    # UDR-0130 : la section de la classe nomme l'objet, la page de la fiche de cours liste ses révisions.
+    within("#classroom_courses") { assert_selector "h2", text: "Fiches de cours" }
     within("#classroom_courses") { click_on "La cellule" }
     assert_current_path classroom_course_path(@classroom.public_id, tle_course.slug)
+    assert_selector "#classroom_course_essentials_title", text: "Révisions de la leçon"
     assert_selector "#classroom_course_essentials a", text: "La mitose"
   end
 
   test "sur un téléphone, les blocs de la classe et le suivi tiennent dans la largeur" do
     assignment = create_assignment(classroom: @classroom, assignable: create_exercise(title: "Un titre d'exercice assez long pour un écran étroit"),
                                    by: @teacher)
-    svt = Orm::TeacherProfile.find_by!(user: @teacher).material
+    svt = Orm::TeacherSchoolMaterial.find_by!(teacher: @teacher).material
     3.times { create_course(level: @classroom.level, series: @classroom.series, material: svt, name: "Cours de la bande #{it}") }
     with_mobile_viewport do
       visit classroom_path(@classroom.public_id)

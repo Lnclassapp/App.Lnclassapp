@@ -346,6 +346,9 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     get student_home_path
 
     assert_select "#student_home_gaps", text: including(tl("pending_gaps.title"))
+    # UDR-0130 §2 : « Fiches à revoir », sans « de révision » redondant.
+    assert_select "#student_home_gaps", text: including("Fiches à revoir")
+    assert_select "#student_home_gaps", text: /essentielle/i, count: 0
     assert_select "#student_home_gaps a[href='#{course_essential_path(@course.slug, @essential.slug)}']", text: "La méiose"
     # ADR-0090 §4.1 : ouvrir la fiche la retient ; un préchargement au survol la servirait sans l'ouvrir.
     assert_select "#student_home_gaps ul[data-turbo-prefetch=false] a[href='#{course_essential_path(@course.slug, @essential.slug)}']"

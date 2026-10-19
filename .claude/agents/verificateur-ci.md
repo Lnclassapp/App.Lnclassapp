@@ -11,6 +11,8 @@ Tu es un vérificateur. Tu lances, tu relis, tu rapportes. Tu ne corriges rien e
 
 Le répertoire de travail (worktree) à vérifier et, éventuellement, le chemin d'un **verrou `flock`** à respecter. Place-toi dans ce répertoire et ne le quitte pas.
 
+Tu es appelé une seule fois par PR, sur son head final, après les revues et leurs corrections ; une CI rouge corrigée se rejoue. Le SHA que tu notes est celui qui sera fusionné.
+
 ## Méthode
 
 1. Note le SHA vérifié : `git rev-parse HEAD`, et `git status --short` (si l'arbre n'est pas propre, dis-le dans le verdict).

@@ -9,9 +9,26 @@ module Queries
         school = create_school(name: "Lycée classique d'Abidjan")
         student = create_student(first_name: "Awa", last_name: "Koné", classroom: create_classroom(school:, name: "Tle D 1"))
 
+        about = ShellUserQuery::About.new(gender: "female", classroom: "Tle D 1", school: "Lycée classique d'Abidjan")
         assert_equal ShellUserQuery::Row.new(name: "Awa Koné", role: :student, detail: "Tle D 1 · Lycée classique d'Abidjan",
-                                             public_id: student.public_id, photo_version: nil),
+                                             public_id: student.public_id, photo_version: nil, about:),
                      @query.call(user_id: student.id)
+      end
+
+      # UDR-0128 : le message prêt de WhatsApp lit les mêmes éléments, séparés, sans requête de plus que l'en-tête.
+      test "the parts of the detail come apart, with the gender, in the same queries as before" do
+        teacher = create_teacher(school: create_school(name: "Lycée moderne de Cocody"), material: create_material(name: "Mathématiques"),
+                                 gender: "male")
+        admin = create_school_admin(school: create_school(name: "Collège Notre-Dame"))
+        student = create_student(classroom: create_classroom(name: "Tle D 1"))
+
+        assert_queries_count(3) { @query.call(user_id: teacher.id) }
+        assert_queries_count(2) { @query.call(user_id: admin.id) }
+        assert_queries_count(2) { @query.call(user_id: student.id) }
+        assert_equal ShellUserQuery::About.new(gender: "male", material: "Mathématiques", school: "Lycée moderne de Cocody"),
+                     @query.call(user_id: teacher.id).about
+        assert_equal ShellUserQuery::About.new(gender: "female", school: "Collège Notre-Dame"), @query.call(user_id: admin.id).about
+        assert_equal ShellUserQuery::About.new(gender: "female"), @query.call(user_id: create_team_member.id).about
       end
 
       test "a student without a classroom has no detail" do
@@ -52,10 +69,27 @@ module Queries
         primary = create_school(name: "Lycée moderne d'Abobo")
         other = create_school(name: "Collège Saint-Michel")
         teacher = create_teacher(school: primary, material: create_material(name: "SVT"))
-        Orm::TeacherSchool.create!(teacher:, school: other, primary: false)
+        add_teacher_school(teacher, other)
 
         assert_equal "SVT · Collège Saint-Michel", @query.call(user_id: teacher.id, current_school_id: other.id).detail
         assert_equal "SVT · Lycée moderne d'Abobo", @query.call(user_id: teacher.id, current_school_id: create_school.id).detail
+      end
+
+      # EPM-14 (UDR-0126 §3.5) : plusieurs matières, les noms courts ; celles de l'établissement courant seulement.
+      test "a teacher of two subjects shows their short names, those of the current school only" do
+        pc = create_material(name: "Physique-Chimie", shortname: "PC")
+        svt = create_material(name: "SVT", shortname: "SVT")
+        primary = create_school(name: "Lycée A")
+        other = create_school(name: "Lycée B")
+        teacher = create_teacher(school: primary, materials: [ pc, svt ])
+        add_teacher_school(teacher, other, materials: [ svt ])
+
+        assert_equal "PC, SVT · Lycée A", @query.call(user_id: teacher.id, current_school_id: primary.id).detail
+        assert_equal "SVT · Lycée B", @query.call(user_id: teacher.id, current_school_id: other.id).detail
+      end
+
+      test "a teacher without any school has no detail" do
+        assert_nil @query.call(user_id: create_teacher(school: nil).id).detail
       end
 
       test "a team member has no detail, an unknown account is nil" do

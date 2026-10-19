@@ -1,7 +1,7 @@
 # 🔌 INFRA · Queries::Classroom::ClassroomEssentialQuery
 # Rôle : une fiche publiée vue depuis une classe (CL-12, AS-20) : ses exercices publiés, leur assignation, leur échéance et la
 #        réussite de la classe ; et si l'enseignant doit encore donner ses jours de séance (UDR-0062 §3.4)
-# ADR  : 0026, 0035, 0048, 0072 · UDR : 0029, 0062
+# ADR  : 0026, 0035, 0048, 0072, 0106 · UDR : 0029, 0062
 module Queries
   module Classroom
     class ClassroomEssentialQuery
@@ -12,7 +12,7 @@ module Queries
       EssentialRow = Data.define(:slug, :name, :subtitle)
       # Décision du porteur (2026-09-27) : la réussite est la part des élèves en réussite, pas une moyenne de scores.
       # completed_students_count : élèves présents qui ont terminé au moins une session ;
-      # passed_students_count : parmi eux, ceux dont le meilleur score atteint PASS_THRESHOLD ;
+      # passed_students_count : parmi eux, ceux dont le meilleur score atteint la note de PASS_THRESHOLD (Grading.reaches?, ADR-0106) ;
       # success_percent : leur part arrondie, nil sans session.
       # due_on : l'échéance figée de l'assignation active (ADR-0072 §4.3), nil sans assignation ou sans jours.
       ExerciseRow = Data.define(:public_id, :title, :questions_count, :assignment_public_id, :due_on, :success_percent,
@@ -66,7 +66,8 @@ module Queries
       end
 
       def success(best_scores)
-        passed = best_scores.count { it >= Entities::Assessment::Grading::PASS_THRESHOLD }
+        grading = Entities::Assessment::Grading
+        passed = best_scores.count { grading.reaches?(it, grading::PASS_THRESHOLD) }
         percent = (passed * 100.0 / best_scores.size).round unless best_scores.empty?
         { success_percent: percent, passed_students_count: passed, completed_students_count: best_scores.size }
       end

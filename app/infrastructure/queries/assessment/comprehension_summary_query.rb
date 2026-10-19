@@ -5,7 +5,7 @@ module Queries
   module Assessment
     module ComprehensionSummaryQuery
       # category : la dominante des meilleurs scores, nil sous 5 élèves (pas encore lisible) ;
-      # badge_counts : { bronze:, silver:, gold:, diamond: }, Grading.badge_for(meilleur score) ; sous 50, pas de palier.
+      # badge_counts : { bronze:, silver:, gold:, diamond: }, Grading.badge_for(meilleur score) ; sous 10/20 (48 %), pas de palier.
       Summary = Data.define(:category, :badge_counts)
 
       # → { assignment_id => Summary }, une entrée par id demandé, même sans aucun fait.

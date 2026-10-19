@@ -1,14 +1,14 @@
 # Contenus pédagogiques
 
-Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **progressions** qui créent les cours de l'année, le **prompt** qui rédige une leçon complète (cours, fiches essentielles, exercices), et les **leçons déjà traitées**. Ce dossier ne contient pas de code, seulement des fichiers importables et leur mode d'emploi.
+Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **progressions** qui créent les fiches de cours de l'année, le **prompt** qui rédige une leçon complète (fiche de cours, fiches de révision, exercices), et les **leçons déjà traitées**. Ce dossier ne contient pas de code, seulement des fichiers importables et leur mode d'emploi.
 
 | Fichier | Rôle |
 |---|---|
-| [`progressions-2026-2027/`](progressions-2026-2027/) | Les 10 premières leçons de la progression DPFC 2026-2027, par matière, niveau et série : 13 fichiers `lnclass.course-tree` (1 056 cours sans fiche), à importer depuis **Imports → Cours complets**, **après** les leçons traitées. Détail et couverture : [`progressions-2026-2027/README.md`](progressions-2026-2027/README.md) |
-| [`prompt-redaction.md`](prompt-redaction.md) | Le prompt à donner à un modèle pour rédiger une leçon : règle de l'analogie, structure d'une fiche, 3 exercices par fiche, contraintes de l'application. Il produit **un seul fichier** `lnclass.course-tree` : le cours, ses fiches et leurs exercices |
+| [`progressions-2026-2027/`](progressions-2026-2027/) | Les 10 premières leçons de la progression DPFC 2026-2027, par matière, niveau et série : 13 fichiers `lnclass.course-tree` (1 056 fiches de cours sans fiche de révision), à importer depuis **Imports → Fiches de cours complètes**, **après** les leçons traitées. Détail et couverture : [`progressions-2026-2027/README.md`](progressions-2026-2027/README.md) |
+| [`prompt-redaction.md`](prompt-redaction.md) | Le prompt à donner à un modèle pour rédiger une leçon : règle de l'analogie, structure d'une fiche de révision, 3 exercices par fiche de révision, images annoncées et leur style, contraintes de l'application. Il produit **un seul fichier** `lnclass.course-tree` : la fiche de cours, ses fiches de révision et leurs exercices |
 | [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour un niveau et une série (Tle D, 1ère D, 3ème…), il prend les 3 premières leçons de chaque matière du niveau (jusqu’à 18), les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture indépendante) et les range dans `lecons-traitees/`. Un appel = un niveau |
 | [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle mécanique d’un fichier de leçon contre les règles du prompt : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s’il y a une erreur |
-| [`lecons-traitees/`](lecons-traitees/) | Les leçons déjà rédigées avec ce prompt, un fichier `lnclass.course-tree` par cours complet, rangées par niveau et série, puis par matière. Pour l’instant `tle-d/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Histoire-Géographie, Philosophie et Français) et `3eme/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Français, Histoire-Géographie et EDHC) |
+| [`lecons-traitees/`](lecons-traitees/) | Les leçons déjà rédigées avec ce prompt, un fichier `lnclass.course-tree` par fiche de cours complète, rangées par niveau et série, puis par matière. Pour l’instant `tle-d/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Histoire-Géographie, Philosophie et Français) et `3eme/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Français, Histoire-Géographie et EDHC) |
 
 ## Le principe
 
@@ -23,27 +23,32 @@ Exemple de référence, le théorème des gendarmes : deux policiers tiennent un
 
 ## Utiliser le prompt
 
-1. Copier le prompt, puis remplir son bloc **ENTRÉE** : intitulé exact de la leçon (celui de la progression), niveau, série, matière, rang dans la progression.
-2. Importer le JSON obtenu depuis **Imports → Cours complets**. **Un seul import** crée le cours, ses fiches essentielles et les exercices de chaque fiche, en brouillon. On peut choisir **jusqu'à 50 fichiers d'un coup** (50 Mo au total, 500 cours au plus) : ils forment un seul import, avec une ligne de bilan par fichier. Un même cours présent dans deux fichiers de l'envoi n'est importé dans aucun des deux.
-3. Faire relire le contenu par un enseignant de la discipline, puis publier.
-4. Ranger le fichier dans `lecons-traitees/<niveau>-<série>/<matière>/` (le slug de la matière : `mathematiques`, `physique-chimie`, `svt`, `histoire-geographie`, `philosophie`, `francais`…) et ajouter une ligne au tableau ci-dessous.
+1. **Rédiger.** Copier le prompt, puis remplir son bloc **ENTRÉE** : intitulé exact de la leçon (celui de la progression), niveau, série, matière, rang dans la progression. Le JSON obtenu annonce ses images : `<p>[[image: description]]</p>` dans le texte d'une fiche de révision, `"image": { "description": "…" }` sur une question (voir « Les images » dans le prompt).
+2. **Importer** le JSON depuis **Imports → Fiches de cours complètes**. **Un seul import** crée la fiche de cours, ses fiches de révision et les exercices de chaque fiche de révision, en brouillon. On peut choisir **jusqu'à 50 fichiers d'un coup** (50 Mo au total, 500 fiches de cours au plus) : ils forment un seul import, avec une ligne de bilan par fichier. Une même fiche de cours présente dans deux fichiers de l'envoi n'est importé dans aucun des deux. L'import ne crée aucune image : il garde les emplacements et les descriptions.
+3. **Produire chaque image dans Claude Design**, à partir de sa description et du style du prompt (ludique, lisible sur téléphone, symboles justes), puis l'exporter en **PNG ou WebP**. L'image est allégée par le navigateur à l'envoi (300 Ko et 1200 pixels de côté au plus).
+4. **Insérer chaque image.** Dans une fiche de révision : l'ouvrir en modification, placer le curseur dans l'emplacement « Image à insérer : … » et cliquer **Insérer une image** ; l'image remplace l'emplacement et son texte de remplacement est pré-rempli avec la description. Dans une question : modifier l'exercice et cliquer **Ajouter l'image** sur la question. On peut aussi ajouter une image non annoncée, ou retirer un emplacement inutile.
+5. **Faire relire, puis publier.** Un enseignant de la discipline relit le texte **et les images**. Une fiche de révision ou un exercice ne se publie pas tant qu'il reste un emplacement vide, une question qui attend son image, ou une image sans texte de remplacement.
+
+Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/<matière>/` (le slug de la matière : `mathematiques`, `physique-chimie`, `svt`, `histoire-geographie`, `philosophie`, `francais`…) et ajouter une ligne au tableau ci-dessous.
+
+**Leçons rédigées avant les images** (ADR-0105) : elles restent en texte seul, sans reprise en masse, puisqu'un import ne met jamais à jour une fiche de cours existante. C'est le cas de toutes les leçons de `lecons-traitees/` à ce jour et de toute leçon importée avant le 2026-10-10. Une image peut toujours s'y ajouter à la main, dans l'éditeur de la fiche de révision.
 
 Pour toutes les matières d’un niveau d’un coup, utiliser plutôt [`prompt-redaction-lot.md`](prompt-redaction-lot.md).
 
 ## Ordre des imports
 
-Un import ne met jamais à jour l'existant : un cours déjà présent (même nom, niveau, matière et série) est **ignoré** comme doublon, fiches comprises. D'où l'ordre :
+Un import ne met jamais à jour l'existant : une fiche de cours déjà présente (même nom, niveau, matière et série) est **ignorée** comme doublon, fiches de révision comprises. D'où l'ordre :
 
-1. **D'abord les leçons traitées** (`lecons-traitees/`) : elles créent les cours complets.
-2. **Ensuite les progressions** (`progressions-2026-2027/`) : elles créent les autres cours de l'année, vides, et ignorent ceux qui existent déjà.
+1. **D'abord les leçons traitées** (`lecons-traitees/`) : elles créent les fiches de cours complètes.
+2. **Ensuite les progressions** (`progressions-2026-2027/`) : elles créent les autres fiches de cours de l'année, vides, et ignorent celles qui existent déjà.
 
-Si la progression a déjà été importée, le cours de la leçon existe vide, et l'import du cours complet sera ignoré. Un cours ne se supprime pas, et un cours archivé compte encore comme doublon. Il faut donc **renommer** le cours vide dans l'écran des cours (par exemple « Limites et continuité (vide) »), l'archiver, puis importer le cours complet.
+Si la progression a déjà été importée, la fiche de cours de la leçon existe vide, et l'import de la fiche de cours complète sera ignoré. Une fiche de cours ne se supprime pas, et une fiche de cours archivée compte encore comme doublon. Il faut donc **renommer** la fiche de cours vide dans l'écran des fiches de cours (par exemple « Limites et continuité (vide) »), l'archiver, puis importer la fiche de cours complète.
 
 ## Leçons traitées
 
 ### Tle D — `lecons-traitees/tle-d/`
 
-| Fichier | Cours | Fiches | Exercices | Questions |
+| Fichier | Fiche de cours | Fiches de révision | Exercices | Questions |
 |---|---|---:|---:|---:|
 | `mathematiques/limites-et-continuite.json` | Limites et continuité (Maths) | 3 | 9 | 51 |
 | `mathematiques/probabilite-conditionnelle-et-variable-aleatoire.json` | Probabilité conditionnelle et variable aléatoire (Maths) | 3 | 9 | 54 |
@@ -64,9 +69,9 @@ Si la progression a déjà été importée, le cours de la leçon existe vide, e
 | `francais/la-dissertation-litteraire.json` | La dissertation littéraire | 3 | 9 | 52 |
 | `francais/preparation-a-l-oral-du-baccalaureat.json` | Préparation à l'oral du Baccalauréat | 3 | 9 | 51 |
 
-Les 9 leçons d'Histoire-Géographie, de Philosophie et de Français ont d'abord eu **un exercice par fiche** (format court de démonstration, 2026-10-06). Elles ont été **complétées le 2026-10-10** à 3 exercices par fiche (Comprendre, Appliquer, S'évaluer), soit 54 exercices et 311 questions ajoutés, avec le prompt [`prompt-redaction.md`](prompt-redaction.md). Chacune a ensuite été relue par un second rédacteur (calculs refaits, dates et faits vérifiés), et les défauts trouvés ont été corrigés, dans l'ancien contenu comme dans le nouveau : par exemple « 17 États africains entrent à l'ONU en 1960 » (16 États africains, 17 nouveaux membres avec Chypre), la citation de Socrate donnée comme texte exact, ou « le dernier mot du poème » qui était l'avant-dernier vers. Les 18 leçons de Tle D passent `script/contenus/valider.rb` et s'importent ensemble sans erreur sur une base jetable : 18 cours, 55 fiches, 165 exercices, 949 questions, 3 835 propositions. Aucun enseignant ne les a encore relues.
+Les 9 leçons d'Histoire-Géographie, de Philosophie et de Français ont d'abord eu **un exercice par fiche de révision** (format court de démonstration, 2026-10-06). Elles ont été **complétées le 2026-10-10** à 3 exercices par fiche de révision (Comprendre, Appliquer, S'évaluer), soit 54 exercices et 311 questions ajoutés, avec le prompt [`prompt-redaction.md`](prompt-redaction.md). Chacune a ensuite été relue par un second rédacteur (calculs refaits, dates et faits vérifiés), et les défauts trouvés ont été corrigés, dans l'ancien contenu comme dans le nouveau : par exemple « 17 États africains entrent à l'ONU en 1960 » (16 États africains, 17 nouveaux membres avec Chypre), la citation de Socrate donnée comme texte exact, ou « le dernier mot du poème » qui était l'avant-dernier vers. Les 18 leçons de Tle D passent `script/contenus/valider.rb` et s'importent ensemble sans erreur sur une base jetable : 18 cours, 55 fiches, 165 exercices, 949 questions, 3 835 propositions. Aucun enseignant ne les a encore relues.
 
-**Attention à l'import.** Un cours déjà présent est ignoré, jamais mis à jour. Si l'ancienne version de ces 9 leçons est déjà dans une base (développement, Staging ou main), il faut **renommer puis archiver** l'ancien cours avant d'importer la version complète.
+**Attention à l'import.** Une fiche de cours déjà présente est ignorée, jamais mise à jour. Si l'ancienne version de ces 9 leçons est déjà dans une base (développement, Staging ou main), il faut **renommer puis archiver** l'ancienne fiche de cours avant d'importer la version complète.
 
 À faire valider par un enseignant, en plus de la liste ci-dessous :
 
@@ -74,13 +79,13 @@ Les 9 leçons d'Histoire-Géographie, de Philosophie et de Français ont d'abord
 - **Philosophie** : « La connaissance de l'homme » présente Durkheim et le fait social, proches de la leçon 4 (La vie en société). Le titre de sa dernière fiche parle de « la découverte de l'inconscient ». Dans « La dissertation philosophique » et « Le commentaire de texte philosophique », la méthode (problème, enjeu, plan dialectique) doit être cohérente avec celle de l'enseignant.
 - **Français** : « Préparation à l'oral du Baccalauréat » décrit un déroulement de l'épreuve en quatre temps que personne n'a confronté au programme ivoirien ; sa méthode est proche du commentaire composé (leçon 4). Le niveau de certains sujets inventés de « La dissertation littéraire » est peut-être bas pour une Terminale.
 
-Les 5 leçons 2 et 3 de Maths, de Physique et de SVT (2026-10-06) suivent le prompt complet, 3 exercices par fiche. Elles ont été importées sans erreur par la vraie chaîne d'import. Aucun enseignant ne les a encore relues. « Mouvement du centre d'inertie d'un solide » a 4 fiches : le mouvement circulaire uniforme, confirmé au programme par le porteur, en a une à lui.
+Les 5 leçons 2 et 3 de Maths, de Physique et de SVT (2026-10-06) suivent le prompt complet, 3 exercices par fiche de révision. Elles ont été importées sans erreur par la vraie chaîne d'import. Aucun enseignant ne les a encore relues. « Mouvement du centre d'inertie d'un solide » a 4 fiches de révision : le mouvement circulaire uniforme, confirmé au programme par le porteur, en a une à lui.
 
-Les 4 premiers fichiers ont été importés le 2026-09-29 sur une base neuve, par la vraie chaîne d'import, **sans aucune erreur** : 4 cours, 12 fiches, 36 exercices, 203 questions, 786 propositions. Les progressions de Maths, Physique-Chimie et SVT importées ensuite ont ignoré ces 4 cours comme doublons et créé les autres.
+Les 4 premiers fichiers ont été importés le 2026-09-29 sur une base neuve, par la vraie chaîne d'import, **sans aucune erreur** : 4 fiches de cours, 12 fiches de révision, 36 exercices, 203 questions, 786 propositions. Les progressions de Maths, Physique-Chimie et SVT importées ensuite ont ignoré ces 4 fiches de cours comme doublons et créé les autres.
 
 À faire valider par un enseignant, car le programme détaillé n'était pas disponible :
 
-- **Maths** : les asymptotes ne sont pas traitées, faute de place en 3 fiches. Dans « Dérivabilité et étude de fonctions », l'inégalité des accroissements finis et les dérivées successives ne le sont pas non plus (signalées dans le sous-titre de la dernière fiche). Deux explications de « Limites et continuité » dépassent 400 caractères (450 et 444).
+- **Maths** : les asymptotes ne sont pas traitées, faute de place en 3 fiches de révision. Dans « Dérivabilité et étude de fonctions », l'inégalité des accroissements finis et les dérivées successives ne le sont pas non plus (signalées dans le sous-titre de la dernière fiche de révision). Deux explications de « Limites et continuité » dépassent 400 caractères (450 et 444).
 - **Physique** : il faut vérifier que le repère de Frenet et le recours à une primitive sont au programme.
 - **Chimie** : il faut vérifier que la règle de Markovnikov est au programme. DNPH, Fehling et Schiff chevauchent peut-être la leçon suivante sur les aldéhydes et cétones.
 - **SVT** : l'hCG, le corps jaune et la progestérone sont traités au minimum, parce qu'ils relèvent aussi de la leçon suivante.
@@ -463,6 +468,6 @@ Les 3 premières leçons de chaque matière de Seconde (progression DPFC 2026-20
 
 ## Contraintes de l'application, vérifiées pendant le test
 
-- **Pas de tableau dans une fiche.** L'application supprime `table`, `tr`, `td` et `th`, et ne garde que le texte des cellules. Les balises conservées sont `h2`, `h3`, `p`, `ul`, `ol`, `li`, `strong`, `em` et `blockquote`.
-- **Formules KaTeX** (`$…$`, `$$…$$`). Elles sont rendues dans les fiches, les questions, les propositions et les explications, mais pas dans les noms ni les titres. L'extension chimie `\ce` n'est pas chargée : on écrit les formules chimiques en indices Unicode (CH₃–CH₂–OH).
+- **Pas de tableau dans une fiche de révision.** L'application supprime `table`, `tr`, `td` et `th`, et ne garde que le texte des cellules. Les balises conservées sont `h2`, `h3`, `p`, `ul`, `ol`, `li`, `strong`, `em` et `blockquote`.
+- **Formules KaTeX** (`$…$`, `$$…$$`). Elles sont rendues dans les fiches de révision, les questions, les propositions et les explications, mais pas dans les noms ni les titres. L'extension chimie `\ce` n'est pas chargée : on écrit les formules chimiques en indices Unicode (CH₃–CH₂–OH).
 - **Ordre des propositions.** L'application les mélange à chaque session.

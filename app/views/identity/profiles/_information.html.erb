@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/profiles/_information — carte « Mes informations » de l'enseignant, de la direction et de l'équipe (ProfileQuery::Row) %>
 <%# Rôle : photo, nom, numéro, rôle, inscription ; remplacée par profile_names/update ; l'élève a la sienne (_student_information) %>
-<%# ADR  : 0055, 0060, 0065 · UDR : 0006, 0041, 0047, 0052, 0057, 0089 (branche élève sortie) %>
+<%# ADR  : 0055, 0060, 0065, 0103 · UDR : 0006, 0041, 0047, 0052, 0057, 0089 (branche élève sortie), 0125 (§3.2 : matières) %>
 <%= ui_card id: "profile_information", "aria-labelledby": "profile_information_title" do %>
   <h2 id="profile_information_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".title") %></h2>
   <div class="mt-4 flex items-center gap-4">
@@ -47,10 +47,23 @@
         <dt class="text-mute"><%= t(".school") %></dt>
         <dd class="mt-0.5 font-medium text-ink"><%= profile.school_name || t(".missing") %></dd>
       </div>
-      <div class="py-3">
-        <dt class="text-mute"><%= t(".material") %></dt>
-        <dd class="mt-0.5 font-medium text-ink"><%= profile.material_name || t(".missing") %></dd>
-      </div>
+      <%# UDR-0125 §3.2 : les matières de l'établissement courant, modifiables ; sans établissement, ni ligne ni bouton. %>
+      <% if profile.school_name %>
+        <div id="profile_materials" class="flex flex-wrap items-center justify-between gap-3 py-3">
+          <div class="min-w-0">
+            <dt class="text-mute"><%= t(".materials", count: [ profile.materials.size, 1 ].max) %></dt>
+            <dd class="mt-1">
+              <% if profile.materials.any? %>
+                <%= ui_subject_badges profile.materials, size: :sm %>
+              <% else %>
+                <span class="font-medium text-ink"><%= t(".missing") %></span>
+              <% end %>
+            </dd>
+          </div>
+          <%= ui_button t(".edit_materials"), href: edit_profile_materials_path, variant: :secondary, size: :sm, icon: "pencil-square",
+                                              "aria-label": t(".edit_materials_label"), data: { turbo_frame: "modal" } %>
+        </div>
+      <% end %>
     <% when :school_admin %>
       <div class="py-3">
         <dt class="text-mute"><%= t(".school") %></dt>

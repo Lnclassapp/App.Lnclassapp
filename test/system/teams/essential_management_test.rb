@@ -110,7 +110,10 @@ class Teams::EssentialManagementTest < ApplicationSystemTestCase
     JS
 
     assert_no_selector "trix-editor#essential_content figure"
-    assert_equal "", find("input[name='essential[content]']", visible: false).value
+    # Trix writes an empty document as "" or as "<div></div>" depending on when its change event fires: neither holds a file.
+    content = find("input[name='essential[content]']", visible: false).value.to_s
+    assert_no_match(/figure|attachment/, content)
+    assert_empty content.gsub(%r{</?div>}, "")
     assert_no_csp_violation
   end
 

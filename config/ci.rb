@@ -13,6 +13,15 @@ require_relative "../script/ci/plan"
 # Fail-safe: if git cannot compare (no origin/Develop), `system` returns false and the audit runs.
 yarn_audit = ENV["CI"] || !system("git diff --quiet origin/Develop -- package.json yarn.lock", err: File::NULL)
 
+# The paths that can move the import performance (ADR-0039): a wide list, better to play the tests for nothing than miss one.
+PERF_PATHS = %w[
+  app/domain app/infrastructure app/jobs db lib Gemfile.lock config/database.yml config/ci.rb
+  script/ci test/performance test/test_helper.rb
+].freeze
+# Left out of the comparison: the recorded durations of the split move on almost every pull request
+# (script/ci/record_timings) and change nothing for a local run, which never splits.
+PERF_IGNORED = %w[script/ci/test_timings.yml].freeze
+
 # `bin/rails test` alone still runs the guards, locally; bin/ci runs them once, in their own steps.
 guards_excluded = "test/{system/**/*,dummy/**/*,fixtures/**/*,guards/**/*,domain/domain_purity}_test.rb"
 
@@ -67,9 +76,18 @@ CI_PLAN = CiPlan.define do
   # ADR-0039 : bulk imports under 2 minutes. Skipped by `bin/rails test` without PERF.
   # ADR-0067 : the screen budgets (*_budget_test.rb) seed 312 000 sessions, ≈ 2 min 30 : they run before each
   # recette and in the chantiers that touch those screens, never in bin/ci.
+  # Locally, the step plays only when the tree differs from origin/Develop on PERF_PATHS (the condition lives in the
+  # shell command, so the title and the files stay the same for the guards and for GitHub). It plays too under CI
+  # (GitHub), and when git cannot compare (fail-safe, as for the Yarn audit): `git diff --quiet` answers 1 for a
+  # difference and 128 for an error, both non-zero. The promotion into Staging replays it (ADR-0069 §9).
   perf_files = CiPlan.files("test/performance/**/*_test.rb") - CiPlan.files("test/performance/**/*_budget_test.rb")
   sharded "perf", files: perf_files do |files, part|
-    step [ "Tests: Import performance", part ].compact.join(" "), "env PERF=1 COVERAGE=0 bin/rails test #{files.join(' ')} -v"
+    play = "env PERF=1 COVERAGE=0 bin/rails test #{files.join(' ')} -v"
+    skip = "echo 'Import performance skipped locally: nothing changed since origin/Develop in #{PERF_PATHS.join(' ')}'"
+    ignored = PERF_IGNORED.map { "':(exclude)#{it}'" }.join(" ")
+    step [ "Tests: Import performance", part ].compact.join(" "),
+         "if [ -n \"${CI:-}\" ] || ! git diff --quiet origin/Develop -- #{PERF_PATHS.join(' ')} #{ignored} 2>/dev/null; " \
+         "then #{play}; else #{skip}; fi"
   end
 
   # ADR-0051 : gzip ceilings, on freshly compiled assets.

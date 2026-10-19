@@ -131,8 +131,10 @@ module PerfDataset
     ids = insert(Orm::User, placements.each_with_index.map do |_, index|
       user_row(contact: format("05%08d", TEACHER_CONTACT + index + 1), role: "teacher", created_at: days_ago(150))
     end, returning: %w[id])
-    insert(Orm::TeacherProfile, ids.map { |id| { user_id: id, material_id: pick(materials), joined_via: "standard", onboarding_completed_at: now, created_at: now, updated_at: now } })
+    insert(Orm::TeacherProfile, ids.map { |id| { user_id: id, joined_via: "standard", onboarding_completed_at: now, created_at: now, updated_at: now } })
     insert(Orm::TeacherSchool, ids.zip(placements).map { |id, school| { teacher_id: id, school_id: school.id, primary: true, created_at: now } })
+    # ADR-0103 : une matière par enseignant, dans son établissement.
+    insert(Orm::TeacherSchoolMaterial, ids.zip(placements).map { |id, school| { teacher_id: id, school_id: school.id, material_id: pick(materials), created_at: now } })
     teachers = Hash.new { |hash, key| hash[key] = [] }
     teacher_classrooms = ids.zip(placements).each_with_index.flat_map do |(id, school), index|
       taught = classrooms.fetch(school.id).map(&:first).sample(index.zero? ? 6 : 4, random: RNG)
@@ -341,11 +343,14 @@ module PerfDataset
     pending = insert(Orm::User, (1..150).map do |index|
       user_row(contact: format("05%08d", TEACHER_CONTACT + TEACHERS + index), role: "teacher", created_at: days_ago(30))
     end, returning: %w[id])
-    insert(Orm::TeacherProfile, pending.map { { user_id: it, material_id: pick(materials), joined_via: "standard", created_at: now, updated_at: now } })
-    insert(Orm::SchoolJoinRequest, pending.map do |id|
+    insert(Orm::TeacherProfile, pending.map { { user_id: it, joined_via: "standard", created_at: now, updated_at: now } })
+    requests = pending.map do |id|
       created_at = days_ago(30)
       { public_id:, teacher_id: id, school_id: pick(adopting).id, status: "pending", created_at:, updated_at: created_at }
-    end)
+    end
+    insert(Orm::SchoolJoinRequest, requests)
+    # ADR-0103 §4.6 : la liste d'une demande en attente, dans l'établissement demandé.
+    insert(Orm::TeacherSchoolMaterial, requests.map { { teacher_id: it[:teacher_id], school_id: it[:school_id], material_id: pick(materials), created_at: now } })
     pairs = teachers.flat_map { |school_id, list| list.map(&:first).each_cons(2).map { |referrer, referee| [ school_id, referrer, referee ] } }
     insert(Orm::Referral, pairs.sample(1_200, random: RNG).map do |school_id, referrer_id, referee_id|
       { school_id:, referrer_id:, referee_id:, source: RNG.rand < 0.8 ? "link" : "sponsor", created_at: days_ago(90) }
@@ -395,7 +400,7 @@ module PerfDataset
   # La direction de l'établissement focus (ADR-0065).
   def seed_admin(focus)
     id = insert(Orm::User, [ user_row(contact: ADMIN_CONTACT, role: "school_admin", created_at: days_ago(30)) ], returning: %w[id]).first
-    insert(Orm::SchoolStaff, [ { user_id: id, school_id: focus.id, created_at: now } ])
+    insert(Orm::SchoolStaff, [ { user_id: id, school_id: focus.id, position: "head", created_at: now } ])
     log "direction #{ADMIN_CONTACT} de « #{focus.name} »"
   end
 

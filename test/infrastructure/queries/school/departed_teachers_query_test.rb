@@ -12,8 +12,10 @@ module Queries
         @maths = create_material(name: "Mathématiques", category: "science")
       end
 
-      def departed(school: @school, detached_at: 2.days.ago, reinstated: false, **attributes)
+      def departed(school: @school, detached_at: 2.days.ago, reinstated: false, material: create_material, **attributes)
         create_teacher(school: nil, **attributes).tap do |teacher|
+          # ADR-0103 §4.1 : sa liste de cet établissement survit au retrait.
+          set_teacher_materials(teacher, school, [ material ])
           create_teacher_departure(teacher:, school:, detached_by: @admin, detached_at:, reinstated:)
         end
       end
@@ -32,12 +34,11 @@ module Queries
         departed(last_name: "Anonyme").update!(anonymized_at: Time.current)
         departed(school: @other, last_name: "DeB")
 
-        row = ->(user, name, at) { DepartedTeachersQuery::Row.new(public_id: user.public_id, name:, material_name: "Mathématiques",
-                                                                   material_category: "science", detached_at: at) }
-        assert_equal DepartedTeachersQuery::Overview.new(
-          school_name: "Lycée Moderne de Bouaké", school_active: true,
-          teachers: [ row.(awa, "Awa Koné", detached_at), row.(elsewhere, "Yao Ailleurs", detached_at - 1.day) ]
-        ), overview
+        result = overview
+        assert_equal [ [ awa.public_id, "Awa Koné", detached_at ], [ elsewhere.public_id, "Yao Ailleurs", detached_at - 1.day ] ],
+                     result.teachers.map { [ it.public_id, it.name, it.detached_at ] }
+        assert_equal [ [ "Mathématiques" ], [ "Mathématiques" ] ], result.teachers.map { it.materials.map(&:name) }
+        assert_equal [ "Lycée Moderne de Bouaké", true ], [ result.school_name, result.school_active ]
       end
 
       test "du plus récent au plus ancien ; sans retrait, une liste vide ; l'établissement inactif est dit" do

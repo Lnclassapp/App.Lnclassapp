@@ -1,0 +1,9 @@
+<%# 🌐 UI · school_admin/shared/_rank_note — « Votre fonction (…) ne permet pas ces gestes », une fois par page touchée %>
+<%# Rôle : rendue seulement si le contrôleur a posé la note (policy refusée sur un établissement actif : rang vie scolaire) %>
+<%# ADR  : 0092 (§4.3) · UDR : 0092 (§3.5) · locals: (note:) %>
+<%# locals: (note:) -%>
+<% if note %>
+  <p id="rank_note" class="-mt-2 mb-6 flex items-start gap-1.5 text-xs text-mute">
+    <%= ui_icon "information-circle", variant: :mini, size: :sm, class: "mt-px" %><span><%= note %></span>
+  </p>
+<% end %>

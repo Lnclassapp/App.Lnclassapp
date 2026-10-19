@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes de l'espace équipe ; tout contrôleur hérite de Teams::BaseController
 # Rôle : référentiel, DRENA, établissements, contenu, blog, illustrations d'annonce, imports, invitations, comptes, jobs
-# ADR  : 0031, 0034, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074, 0077, 0081, 0096 · UDR : 0067, 0068, 0070, 0075, 0104
+# ADR  : 0031, 0034, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074, 0077, 0081, 0092, 0096 · UDR : 0067, 0068, 0070, 0075, 0092, 0104
 get "teams", to: "teams/homes#show", as: :team_home # gelé
 # ADR-0062, UDR-0049 : le pilotage, nom de route gelé par l'UDR-0006 (entrée « Pilotage » de la navigation équipe).
 get "teams/dashboard", to: "teams/dashboards#show", as: :team_dashboard
@@ -41,11 +41,14 @@ scope "teams", module: "teams" do
       end
     end
     resources :level_archivals, only: :create, path: "level-archivals"
+    # ADR-0098 : modifier le nom (suffixe) et le plafond d'une classe (modale de l'UDR-0110, menu ⋮ de l'UDR-0111).
+    resources :classroom_settings, only: %i[edit update], path: "classroom-settings", param: :public_id
     # ADR-0065 : inviter la direction depuis la fiche (modale de l'UDR-0052).
     resources :staff_invitations, only: %i[new create], path: "staff-invitations"
-    # ADR-0077 : retirer une direction, la restaurer avant sa suppression (public_id du compte).
+    # ADR-0077 : retirer une direction, la restaurer avant sa suppression (public_id du compte). ADR-0092 : changer sa fonction.
     resources :staff_members, only: :destroy, path: "staff", param: :public_id, controller: "school_staff_members" do
       resource :restoration, only: :create, controller: "school_staff_restorations"
+      resource :position, only: %i[edit update], controller: "school_staff_positions"
     end
   end
   resources :levels, param: :slug, except: :show
@@ -64,6 +67,12 @@ scope "teams/blog", as: :teams do
   resources :articles, path: "", controller: "teams/articles", param: :public_id, only: %i[index new create edit update] do
     member { patch :publish; patch :archive }
   end
+end
+
+# ADR-0105 §4.7, UDR-0129 §3.0 : envoi d'une image de fiche (paramètre essential : slug, absent à la création) ou de question.
+scope "teams", as: :teams do
+  post "essential-images", to: "teams/essential_images#create", as: :essential_images
+  post "question-images", to: "teams/question_images#create", as: :question_images
 end
 
 namespace :teams do

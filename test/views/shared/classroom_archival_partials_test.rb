@@ -6,13 +6,14 @@ class ClassroomArchivalPartialsTest < ActiveSupport::TestCase
 
   def classroom_menu(archived: false, students_count: 12, teachers_count: 1)
     render("classroom_archive_menu", name: "6ème 1", public_id: "abc", archived:, students_count:, teachers_count:,
-                                    archive_path: "/archive", restore_path: "/restore")
+                                    archive_path: "/archive", restore_path: "/restore", edit_path: "/edit")
   end
 
   test "la carte d'une classe active propose « Archiver » avec une confirmation qui chiffre l'impact" do
     html = classroom_menu
 
     assert_includes html.text, "Archiver la classe"
+    assert_equal "modal", html.at_css("a[href='/edit'][role=menuitem]")["data-turbo-frame"]
     assert_includes html.text, "12 élèves et 1 enseignant ne la verront plus"
     assert_includes html.text, "Rien n'est supprimé"
     assert_equal "/archive", html.at_css("form#archive-classroom-abc-form")["action"]
@@ -24,6 +25,7 @@ class ClassroomArchivalPartialsTest < ActiveSupport::TestCase
 
     assert_includes html.text, "Restaurer la classe"
     assert_not_includes html.text, "Archiver la classe"
+    assert_nil html.at_css("a[href='/edit']"), "UDR-0111 : une archivée se restaure avant de se modifier"
     assert_equal "/restore", html.at_css("a[href='/restore']")["href"]
     assert_nil html.at_css("form")
   end

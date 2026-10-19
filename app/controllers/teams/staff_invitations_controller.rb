@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::StaffInvitationsController
 # Rôle : l'équipe invite la direction d'un établissement en modale, depuis sa fiche ; le lien s'affiche une fois, dans la modale
-# ADR  : 0026, 0028, 0031, 0038, 0065 · UDR : 0019, 0052
+# ADR  : 0026, 0028, 0031, 0038, 0065, 0092 · UDR : 0019, 0052, 0092
 module Teams
   class StaffInvitationsController < BaseController
     # La règle avant l'établissement : un membre qui ne peut pas inviter reçoit 403 que l'établissement existe ou non.
@@ -38,7 +38,8 @@ module Teams
     end
 
     def form_input
-      Dtos::Identity::SchoolStaffInvitationInput.new(school_public_id: @school.public_id, contact: params.expect(invitation: [ :contact ])[:contact])
+      fields = params.expect(invitation: %i[contact position])
+      Dtos::Identity::SchoolStaffInvitationInput.new(school_public_id: @school.public_id, contact: fields[:contact], position: fields[:position])
     end
 
     def policy = Policies::Identity::InviteSchoolStaffPolicy.new
@@ -46,7 +47,8 @@ module Teams
     def invite
       UseCases::Identity::InviteSchoolStaff.new(
         invitations: Repositories::Identity::InvitationRepository.new, users: Repositories::Identity::UserRepository.new,
-        schools: Repositories::School::SchoolRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
+        schools: Repositories::School::SchoolRepository.new, staffs: Repositories::School::StaffRepository.new,
+        audit_log: Repositories::Identity::AuditLogRepository.new,
         transaction: Repositories::Shared::Transaction.new, policy:, digest_key: secret_digest_key, clock: Time.zone
       )
     end

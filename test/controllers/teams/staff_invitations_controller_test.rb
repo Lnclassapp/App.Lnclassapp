@@ -1,14 +1,15 @@
 require "test_helper"
 
 # DS-01 to DS-04, ADR-0065, UDR-0052: from the page of an active school, the team invites its management in the modal
-# frame; the link shows once, in the modal; the link creates a school admin attached to that school.
+# frame; the link shows once, in the modal; the link creates a school admin attached to that school. ED-14, ED-15
+# (ADR-0092, UDR-0092 §3.1): the team chooses the position, required; a second active head is refused in 422.
 class Teams::StaffInvitationsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @school = create_school(name: "Lycée Moderne de Bouaké")
     @member = create_team_member(team_role: "field")
   end
 
-  def invitation_params(contact: "07 99 00 00 09") = { invitation: { contact: } }
+  def invitation_params(contact: "07 99 00 00 09", position: "educator") = { invitation: { contact:, position: } }
 
   test "DS-04: a content member, a school admin, a teacher and a student receive 403, and nothing is written" do
     [ create_team_member(team_role: "content"), create_school_admin(school: @school), create_teacher(school: @school),
@@ -82,7 +83,10 @@ class Teams::StaffInvitationsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_select "form#staff-invitation-form[action='#{school_staff_invitations_path(@school.public_id)}'][method=post]" do
       assert_select "input[type=tel][name='invitation[contact]'][required]"
-      assert_select "input[type=radio]", 0
+      assert_select "input[type=radio][name='invitation[position]'][required]", count: 4
+      assert_select "input[type=radio][checked]", 0
+      # ED-03 : établissement public, l'adjoint.
+      assert_select "label", text: I18n.t("shared.staff_positions.deputy_public")
     end
     assert_select "button[type=submit][form=staff-invitation-form]", "Créer l'invitation"
     assert_select "[data-modal-document-title-value='Inviter la direction · Équipe · Lnclass'] dialog#staff-invitation-modal"
@@ -97,14 +101,14 @@ class Teams::StaffInvitationsControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", text: "Inviter la direction · Équipe · Lnclass"
   end
 
-  test "DS-01: an invitation for this school, without position: toast, and the link replaces the form in the modal" do
+  test "DS-01, ED-14: an invitation for this school, with its position: toast, and the link replaces the form in the modal" do
     sign_in_as @member
 
     post school_staff_invitations_path(@school.public_id), params: invitation_params, as: :turbo_stream
 
     assert_response :success
     invitation = Orm::Invitation.sole
-    assert_equal [ "school_staff", "0799000009", @school.id, nil, nil, @member.id ],
+    assert_equal [ "school_staff", "0799000009", @school.id, "educator", nil, @member.id ],
                  [ invitation.kind, invitation.contact, invitation.school_id, invitation.position, invitation.team_role, invitation.invited_by_id ]
     assert_in_delta 72.hours.from_now, invitation.expires_at, 5.seconds
     assert_secret_response(stream: true)
@@ -119,8 +123,30 @@ class Teams::StaffInvitationsControllerTest < ActionDispatch::IntegrationTest
       assert_select "[data-clipboard-text-value='#{link}'] template[data-clipboard-target=copied]", text: /Lien copié\./
     end
     assert_no_link_in_flash
-    assert_equal({ "kind" => "school_staff", "school_id" => @school.id },
+    assert_equal({ "kind" => "school_staff", "school_id" => @school.id, "position" => "educator" },
                  Orm::AuditEvent.find_by!(action: "invitation.sent", actor_id: @member.id).metadata)
+  end
+
+  test "ED-14: without a position, 422 under the group in the modal, without invitation" do
+    sign_in_as @member
+
+    post school_staff_invitations_path(@school.public_id), params: invitation_params(position: ""), headers: { "Turbo-Frame" => "modal" }
+
+    assert_response :unprocessable_entity
+    assert_select "#invitation_position_error[role=alert]", text: "Choisissez une fonction."
+    assert_not Orm::Invitation.exists?
+  end
+
+  test "ED-15: a head of school while the head is active: 422 under the group, without invitation" do
+    create_school_admin(school: @school, position: "head")
+    sign_in_as @member
+
+    post school_staff_invitations_path(@school.public_id), params: invitation_params(position: "head"), headers: { "Turbo-Frame" => "modal" }
+
+    assert_response :unprocessable_entity
+    assert_select "#invitation_position_error", text: "Cet établissement a déjà un chef d'établissement actif."
+    assert_select "input[name='invitation[position]'][value=head][checked]"
+    assert_not Orm::Invitation.exists?
   end
 
   test "without Turbo, the link is rendered in the page, never in a flash" do
@@ -157,7 +183,7 @@ class Teams::StaffInvitationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "#invitation_contact_error", "Ce numéro a déjà un compte Lnclass."
 
-    create_invitation(kind: "school_staff", school: @school, position: nil, contact: "0799000009")
+    create_invitation(kind: "school_staff", school: @school, position: "deputy", contact: "0799000009")
     post school_staff_invitations_path(@school.public_id), params: invitation_params, headers: { "Turbo-Frame" => "modal" }
     assert_select "#invitation_contact_error", "Une invitation attend déjà ce numéro."
 
@@ -169,7 +195,7 @@ class Teams::StaffInvitationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "DS-03: the link says which school the account joins, then creates a school admin attached to it alone" do
-    invitation = create_invitation(kind: "school_staff", school: @school, position: nil, invited_by: @member, contact: "0799000009")
+    invitation = create_invitation(kind: "school_staff", school: @school, position: "secretary", invited_by: @member, contact: "0799000009")
 
     get invitation_path(invitation.token)
     assert_response :success
@@ -184,7 +210,7 @@ class Teams::StaffInvitationsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Votre compte est créé. Connectez-vous avec votre numéro et votre code secret.", flash[:notice]
     user = Orm::User.find_by!(contact: "0799000009")
     assert_equal [ "school_admin", nil ], [ user.role, user.team_role ]
-    assert_equal [ [ @school.id, @member.id ] ], Orm::SchoolStaff.where(user_id: user.id).pluck(:school_id, :invited_by_id)
+    assert_equal [ [ @school.id, @member.id, "secretary" ] ], Orm::SchoolStaff.where(user_id: user.id).pluck(:school_id, :invited_by_id, :position)
     assert_equal user.id, invitation.reload.accepted_user_id
   end
 

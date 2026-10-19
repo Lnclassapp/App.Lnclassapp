@@ -1,0 +1,10 @@
+<%# 🌐 UI · teams/school_staff_positions/update — l'équipe a changé la fonction d'une direction (ED-23) %>
+<%# Rôle : toast, la ligne de la direction re-rendue avec sa nouvelle fonction, sans rechargement de la page %>
+<%# ADR  : 0092 · UDR : 0006, 0092 (§3.4) %>
+<%= turbo_stream_toast @notice, type: :success %>
+<% row = @staff.find { it.public_id == @target.user_public_id } %>
+<% if row %>
+  <%= turbo_stream.replace "school_staff_#{row.public_id}", partial: "shared/school_staff_row",
+                           locals: { row:, viewer_id: nil, removable: @removable, school_type: @school.school_type, position_url: @position_url,
+                                     remove_url: ->(public_id) { school_staff_member_path(@school.public_id, public_id) } } %>
+<% end %>

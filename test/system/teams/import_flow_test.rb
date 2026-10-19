@@ -69,7 +69,7 @@ class Teams::ImportFlowTest < ApplicationSystemTestCase
           assert_text "Rejeté"
           assert_selector "[role=alert]", text: "rejeté en bloc"
           assert_selector "#import_errors li",
-                          text: /\Aformat\s+Ce fichier est un import « Fiches essentielles » \(format lnclass\.essentials\), pas un import « Établissements »/
+                          text: /\Aformat\s+Ce fichier est un import « Fiches de révision » \(format lnclass\.essentials\), pas un import « Établissements »/
         end
       end
     end

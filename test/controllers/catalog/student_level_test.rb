@@ -31,6 +31,7 @@ class Catalog::StudentLevelTest < ActionDispatch::IntegrationTest
     # UDR-0013, amendement du 2026-10-02 (UDR-0057) : plus de sous-titre ; la portée du catalogue passe dans l'infobulle, et
     # le badge de niveau quitte les cartes.
     assert_select "#main details", text: /#{Regexp.escape(tl("student_scope"))}/
+    assert_select "#main details", text: /Tu vois seulement les fiches de cours de ton niveau\./
     assert_no_match(/#{Regexp.escape(tl("subtitle"))}|Les cours de ton niveau, par matière/, response.body)
     assert_select "#courses_groups", text: /Tle/, count: 0
   end

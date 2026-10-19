@@ -32,9 +32,10 @@ class TeacherLeaveConcurrencyTest < ActiveSupport::TestCase
     Orm::TeacherSchoolDeparture.where(teacher_id: @teacher.id).delete_all
     Orm::SchoolStaff.where(user_id: users).delete_all
     Orm::TeacherSchool.where(teacher_id: @teacher.id).delete_all
-    profiles = Orm::TeacherProfile.where(user_id: @teacher.id)
-    materials = profiles.pluck(:material_id)
-    profiles.delete_all
+    rows = Orm::TeacherSchoolMaterial.where(teacher_id: @teacher.id)
+    materials = rows.pluck(:material_id)
+    rows.delete_all
+    Orm::TeacherProfile.where(user_id: @teacher.id).delete_all
     Orm::User.where(id: users).delete_all
     Orm::Material.where(id: materials).delete_all
     Orm::School.where(id: [ @a.id, @b.id, @c&.id ].compact).delete_all
@@ -50,7 +51,7 @@ class TeacherLeaveConcurrencyTest < ActiveSupport::TestCase
   end
 
   def detach(school)
-    actor = Entities::Identity::Actor.new(user_id: @admin.id, role: :school_admin, school_id: school.id)
+    actor = Entities::Identity::Actor.new(user_id: @admin.id, role: :school_admin, school_id: school.id, staff_position: "head")
     UseCases::School::DetachTeacher.new(
       schools: Repositories::School::SchoolRepository.new, users: Repositories::Identity::UserRepository.new,
       teachings: Repositories::Classroom::TeachingRepository.new, assignments: Repositories::Classroom::AssignmentRepository.new,

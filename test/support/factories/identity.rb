@@ -29,30 +29,50 @@ module Factories
     # ADR-0083 §4.2: joined_via, the arrival channel, has no default in the database.
     # ADR-0094: by default, the teacher belongs to the school of their first classroom; the home, the catalogue and
     # « Assigner » only read the classrooms of the current school.
-    def create_teacher(school: :default, material: create_material, onboarded: true, classrooms: [], joined_via: "standard",
-                       **attributes)
+    # ADR-0103: `materials`, the teacher's subjects in that school, in order (default: `material` alone).
+    # A teacher without school (school: nil) has no list: `material` is then ignored, and none is created.
+    def create_teacher(school: :default, material: nil, materials: nil, onboarded: true, classrooms: [],
+                       joined_via: "standard", **attributes)
       school = classrooms.first&.school || create_school if school == :default
       create_user(role: "teacher", **attributes).tap do |teacher|
-        Orm::TeacherProfile.create!(user: teacher, material:, joined_via:, onboarding_completed_at: (Time.current if onboarded))
+        Orm::TeacherProfile.create!(user: teacher, joined_via:, onboarding_completed_at: (Time.current if onboarded))
         # school: nil — a teacher without a primary school: a pending account (ADR-0030, ADR-0063).
-        Orm::TeacherSchool.create!(teacher:, school:, primary: true) if school
+        if school
+          Orm::TeacherSchool.create!(teacher:, school:, primary: true)
+          set_teacher_materials(teacher, school, materials || [ material || create_material ])
+        end
         classrooms.each { |classroom| Orm::TeacherClassroom.create!(teacher:, classroom:) }
       end
     end
 
     # ADR-0094: one more school for a teacher, secondary unless `primary: true`. Returns the row (its invite_token is the
-    # link « Inviter un collègue de mon établissement », §11).
-    def add_teacher_school(teacher, school, primary: false, at: Time.current)
-      Orm::TeacherSchool.create!(teacher:, school:, primary:, created_at: at).reload
+    # link « Inviter un collègue de mon établissement », §11). ADR-0103: `materials` there, by default those of his first school.
+    def add_teacher_school(teacher, school, primary: false, at: Time.current, materials: nil)
+      row = Orm::TeacherSchool.create!(teacher:, school:, primary:, created_at: at).reload
+      first = Orm::TeacherSchoolMaterial.where(teacher:).in_order.first&.school_id
+      materials ||= Orm::TeacherSchoolMaterial.where(teacher:, school_id: first).in_order.map(&:material)
+      set_teacher_materials(teacher, school, materials, at:)
+      row
+    end
+
+    # ADR-0103: replaces the teacher's subjects in that school, in the given order.
+    def set_teacher_materials(teacher, school, materials, at: Time.current)
+      Orm::TeacherSchoolMaterial.where(teacher:, school:).delete_all
+      # Ranked by the second before `at`: a later write (`replace`, at `Time.current`) comes after them.
+      materials.each_with_index do |material, index|
+        Orm::TeacherSchoolMaterial.create!(teacher:, school:, material:, created_at: at - (materials.size - index).seconds)
+      end
     end
 
     # ADR-0065: a direction account attached to its school, signing in by PIN alone. ADR-0077: joined by invitation or
-    # by the school's code, on `joined_at`; archived by `archived_by` on `archived_at`.
+    # by the school's code, on `joined_at`; archived by `archived_by` on `archived_at`. ADR-0092: its position, « deputy »
+    # by default (management rank, and any number of them per school, unlike « head »).
     def create_school_admin(school: create_school, invited_by: nil, joined_via: "invitation", joined_at: Time.current,
-                            archived_at: nil, archived_by: nil, **attributes)
+                            archived_at: nil, archived_by: nil, position: "deputy", **attributes)
       create_user(role: "school_admin", **attributes).tap do |admin|
         archived_by ||= create_team_member(second_factor: false) if archived_at
-        Orm::SchoolStaff.create!(user: admin, school:, invited_by:, joined_via:, created_at: joined_at, archived_at:, archived_by:)
+        Orm::SchoolStaff.create!(user: admin, school:, invited_by:, joined_via:, position:, created_at: joined_at, archived_at:,
+                                 archived_by:)
       end
     end
 
@@ -70,7 +90,7 @@ module Factories
 
     # Returns the invitation; `invitation.token` is the clear token of its URL.
     def create_invitation(kind: "team", contact: nil, team_role: ("content" if kind == "team"), school: nil,
-                          position: ("principal" if kind == "school_staff"), invited_by: nil,
+                          position: ("deputy" if kind == "school_staff"), invited_by: nil,
                           token: SecureRandom.base58(32), expires_at: 72.hours.from_now, **attributes)
       school ||= create_school if kind == "school_staff"
       contact ||= format("07%08d", factory_sequence)

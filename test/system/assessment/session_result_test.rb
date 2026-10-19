@@ -116,7 +116,38 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     assert_button I18n.t("#{SCOPE}.show.restart")
   end
 
+  # UDR-0054, amendement « survol » ; chantier infobulle-badges-hors-ecran. #session_badge est animé (animate-slide-up) :
+  # si l'animation garde un transform, il devient le repère de la bulle fixe, qui part loin de l'icône et sort de l'écran.
+  test "sur ordinateur, la bulle des badges s'ouvre au survol sous l'icône, dans la fenêtre" do
+    visit exercise_session_result_path(completed_session(correct: 9).public_id)
+    assert_selector "#session_badge[aria-label='#{badge('Or')}']"
+    wait_for_animations("session_badge")
+
+    find("#session_badge summary").hover
+    assert_selector "#session_badge details[open]"
+
+    page.document.synchronize do
+      icon, panel, width = page.evaluate_script(<<~JS)
+        (() => {
+          const box = el => { const r = el.getBoundingClientRect(); return { left: r.left, right: r.right, top: r.top, bottom: r.bottom } }
+          return [ box(document.querySelector("#session_badge summary")), box(document.querySelector("#session_badge [data-info-tip-target=panel]")), innerWidth ]
+        })()
+      JS
+      assert_in_delta icon["left"], panel["left"], 1, "la bulle n'est pas alignée sur le bord gauche de l'icône"
+      assert_in_delta icon["bottom"] + 4, panel["top"], 1, "la bulle ne commence pas juste sous l'icône"
+      assert_operator panel["right"], :<=, width - 16, "la bulle sort de la fenêtre"
+    end
+  end
+
   private
+
+  # Attend la fin des animations d'entrée de l'élément (0,3 s, motion-safe) avant toute mesure.
+  def wait_for_animations(id)
+    page.document.synchronize do
+      done = page.evaluate_script("document.getElementById('#{id}').getAnimations().every(a => a.playState === 'finished')")
+      raise Capybara::ExpectationNotMet, "#{id} s'anime encore" unless done
+    end
+  end
 
   def badge(level) = I18n.t("#{SCOPE}.badge.label", level:)
 

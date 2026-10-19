@@ -21,6 +21,16 @@ class Teams::RowActionsMenuTest < ApplicationSystemTestCase
     JS
   end
 
+  # True when the whole element lies at least `gap` px inside the screen on both sides (the margin `nudge()` keeps).
+  def inside_screen_with_margin?(selector, gap = 8)
+    page.evaluate_script(<<~JS)
+      (() => {
+        const box = document.querySelector(#{selector.to_json}).getBoundingClientRect()
+        return box.left >= #{gap} && box.right <= document.documentElement.clientWidth - #{gap}
+      })()
+    JS
+  end
+
   test "Supprimer in the menu of the last row opens its confirmation, which deletes the DRENA" do
     create_drena(name: "Abidjan 1")
     last = create_drena(name: "Bouaké")
@@ -124,6 +134,28 @@ class Teams::RowActionsMenuTest < ApplicationSystemTestCase
       assert reachable?("#school-actions-#{school.public_id} [role=menuitem]:last-child"), "le menu sort de l'écran"
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
+    end
+  end
+
+  # UDR-0042, amendement du 2026-10-12 : sur téléphone, le ⋮ d'un en-tête passe sous le titre, à gauche ; son menu,
+  # aligné à droite du bouton, sortait de l'écran par la gauche. Il est décalé pour tenir dans l'écran.
+  test "on a phone, the menu of a course header opens whole inside the screen" do
+    course = create_course(name: "La cellule")
+
+    with_mobile_viewport do
+      visit course_path(course.slug)
+      find("button[aria-controls='course-actions-menu']").click
+      menu = "#course-actions-menu"
+
+      assert_selector menu, visible: true
+      assert reachable?("#{menu} [role=menuitem]:first-child"), "le menu sort de l'écran par la gauche"
+      assert reachable?("#{menu} [role=menuitem]:last-child"), "le menu sort de l'écran"
+      assert inside_screen_with_margin?(menu), "le menu est à moins de 8 px d'un bord de l'écran"
+
+      # Refermé, le décalage est rendu : le menu repart de sa place d'origine à la réouverture.
+      find("button[aria-controls='course-actions-menu']").click
+      assert_no_selector menu, visible: true
+      assert_equal "", page.evaluate_script("document.querySelector(#{menu.to_json}).style.translate")
     end
   end
 end

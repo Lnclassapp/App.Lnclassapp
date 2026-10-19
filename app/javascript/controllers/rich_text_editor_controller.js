@@ -1,6 +1,6 @@
 // ⚡ FRONT · rich_text_editor_controller — éditeur riche (Trix) des cours, des fiches et du blog
-// Rôle : charge Trix à la demande, hors du bundle commun ; refuse tout fichier ; images pour le blog seul, sur valeur `attachments` ; laisse le focus aux autres champs
-// ADR  : 0047, 0049, 0051, 0074 · UDR : 0014, 0016, 0067 · usage : stylesheet_link_tag("trix") ; data-rich-text-editor-lang-value + rich_textarea
+// Rôle : charge Trix à la demande, hors du bundle commun ; refuse tout fichier ; images pour le blog et les fiches, sur valeur `attachments` ; laisse le focus aux autres champs
+// ADR  : 0047, 0049, 0051, 0074, 0105 · UDR : 0014, 0016, 0067, 0129 · usage : stylesheet_link_tag("trix") ; data-rich-text-editor-lang-value + rich_textarea
 import { Controller } from "@hotwired/stimulus"
 
 // Without the attachments value (courses, sheets) the editor accepts no attachment: nothing reaches the bucket from it,
@@ -38,6 +38,10 @@ export default class extends Controller {
     lang: Object,
     attachments: { type: Boolean, default: false },
     uploadUrl: String,
+    // The form name of the file sent; absent, lib/image_upload's (« article_image[file] », the blog).
+    uploadField: String,
+    // Sheets (ADR-0105 §4.1): the quality drops until the image fits under maxBytes.
+    squeeze: { type: Boolean, default: false },
     accept: Array,
     maxBytes: Number,
     maxSide: Number,
@@ -166,9 +170,12 @@ export default class extends Controller {
       try {
         if (!prepareImage) throw new Error("image_upload")
         const full = this.editor.getDocument().getAttachments().length >= this.maxCountValue
-        const ready = await prepareImage(file, { accept: this.acceptValue, maxSide: this.maxSideValue, maxBytes: this.maxBytesValue, full })
+        const ready = await prepareImage(file, { accept: this.acceptValue, maxSide: this.maxSideValue, maxBytes: this.maxBytesValue,
+                                                 full, squeeze: this.squeezeValue })
         this.shrunk.add(ready)
         this.names.set(ready, file.name)
+        // Last moment to move the selection: a sheet's slot controller selects the slot paragraph, which the image replaces.
+        this.dispatch("inserting", { detail: { file: ready } })
         this.editor.insertFile(ready)
       } catch (error) {
         inserted = false
@@ -205,7 +212,8 @@ export default class extends Controller {
       const { uploadImage } = await this.module()
       const sent = this.queue.then(() => {
         this.statusTarget.textContent = this.messagesValue.uploading
-        return uploadImage(file, { url: this.uploadUrlValue, timeout: this.uploadTimeoutValue || undefined,
+        return uploadImage(file, { url: this.uploadUrlValue, field: this.uploadFieldValue || undefined,
+                                   timeout: this.uploadTimeoutValue || undefined,
                                    onProgress: (percent) => attachment.setUploadProgress(percent) })
       })
       this.queue = sent.catch(() => {})
@@ -214,7 +222,7 @@ export default class extends Controller {
       if (!this.inText(attachment)) return true
 
       attachment.setAttributes({ sgid: image.sgid, url: image.url, width: image.width, height: image.height })
-      this.dispatch("uploaded", { detail: { publicId: image.public_id, sgid: image.sgid, url: image.url } })
+      this.dispatch("uploaded", { detail: { publicId: image.public_id, sgid: image.sgid, url: image.url, file } })
       return true
     } catch (error) {
       if (this.inText(attachment)) attachment.remove()

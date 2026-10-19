@@ -104,12 +104,20 @@ module Repositories
       test "un niveau ou une série liés, une classe ou un enseignant les retiennent aussi" do
         pair = link_level_series
         classroom = create_classroom
-        teacher_material = create_teacher.teacher_profile.material
+        teacher_material = create_material.tap { create_teacher(material: it) }
 
         assert_equal :conflict, @repository.delete_level(id: pair.level_id).code
         assert_equal :conflict, @repository.delete_series(id: pair.series_id).code
         assert_equal :conflict, @repository.delete_level(id: classroom.level_id).code
         assert_equal :conflict, @repository.delete_material(id: teacher_material.id).code
+      end
+
+      test "ADR-0103 §4.5 : la seconde matière d'un enseignant la retient aussi" do
+        second = create_material
+        create_teacher(materials: [ create_material, second ])
+
+        assert_equal({ base: [ :referenced ] }, @repository.delete_material(id: second.id).errors)
+        assert Orm::Material.exists?(second.id)
       end
 
       test "lie une série à un niveau une seule fois, et délie un couple inutilisé" do

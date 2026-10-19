@@ -45,11 +45,11 @@ module UseCases
           @taken = taken
         end
 
-        def create_teacher(user:, pin:, material_id:, joined_via:)
-          @received = { user:, pin:, material_id:, joined_via: }
+        def create_teacher(user:, pin:, joined_via:)
+          @received = { user:, pin:, joined_via: }
           return Shared::Result.failure(:conflict, errors: { contact: [ :taken ] }) if @taken.include?(user.contact)
 
-          @journal << [ :user, user.contact, user.role, material_id, joined_via ]
+          @journal << [ :user, user.contact, user.role, joined_via ]
           Shared::Result.success(Entities::Identity::User.new(id: 41, public_id: "usr-41", last_name: user.last_name,
                                                               first_name: user.first_name, contact: user.contact,
                                                               gender: user.gender, role: "teacher"))
@@ -143,6 +143,18 @@ module UseCases
         end
       end
 
+      # ADR-0103 §4.4: the subjects of the new attachment, into the same journal.
+      class FakeTeacherMaterials
+        include Ports::Identity::TeacherMaterialRepositoryPort
+
+        def initialize(journal) = @journal = journal
+
+        def replace(teacher_id:, school_id:, material_ids:, at:)
+          @journal << [ :materials, teacher_id, school_id, material_ids, at ]
+          true
+        end
+      end
+
       # Into the same journal: the audit line is rolled back with the account (ADR-0083 §4.4 bis).
       class FakeAudit
         include Ports::Identity::AuditLogPort
@@ -169,7 +181,9 @@ module UseCases
                            cycle: "both", status: "active")
         ]
         @taxonomy = FakeTaxonomy.new(Entities::Catalog::Material.new(id: 5, slug: "svt", name: "SVT", shortname: "SVT",
-                                                                     category: "science"))
+                                                                     category: "science"),
+                                     Entities::Catalog::Material.new(id: 6, slug: "physique-chimie", name: "Physique-Chimie",
+                                                                     shortname: "PC", category: "science"))
       end
 
       def register(actor: nil, taken: [], refuse_attach: false, refuse_referral: false, **attributes)
@@ -183,7 +197,8 @@ module UseCases
           registrations: @registrations, schools: FakeSchools.new(@journal, *@schools_list, refuse_attach:),
           drenas: FakeDrenas.new, invite_links: @invite_links, taxonomy: @taxonomy, sessions: FakeSessions.new(@journal),
           referrals: FakeReferrals.new(@journal, refuse: refuse_referral), audit_log: FakeAudit.new(@journal),
-          policy: Policies::Identity::RegisterTeacherPolicy.new, transaction: @transaction, digest_key: KEY, clock: Clock.new(NOW)
+          policy: Policies::Identity::RegisterTeacherPolicy.new, transaction: @transaction, digest_key: KEY, clock: Clock.new(NOW),
+          teacher_materials: FakeTeacherMaterials.new(@journal)
         ).call(actor:, dto:, ip: "1.2.3.4", user_agent: "Chrome")
       end
 
@@ -197,8 +212,9 @@ module UseCases
         assert_equal [ 41, "0501020304", "teacher" ], [ result.value.user.id, result.value.user.contact, result.value.user.role ]
         token = result.value.token
         assert_operator token.length, :>=, 43
-        assert_equal [ [ :user, "0501020304", "teacher", 5, "standard" ],
+        assert_equal [ [ :user, "0501020304", "teacher", "standard" ],
                        [ :teacher_school, 41, 31, true, NOW ],
+                       [ :materials, 41, 31, [ 5 ], NOW ],
                        audit_line("standard"),
                        [ :session, 41, Entities::Identity::SecretDigest.hmac(token, key: KEY), "1.2.3.4", "Chrome", NOW ] ],
                      @journal
@@ -206,6 +222,26 @@ module UseCases
                      [ user_received.last_name, user_received.first_name, user_received.gender, @registrations.received[:pin] ]
         assert_equal 1, @transaction.calls
         assert_empty @invite_links.lookups, "sans jeton, aucun lien n'est cherché"
+      end
+
+      test "EPM-02: a second subject is kept after the first, in the school of the attachment (ADR-0103 §4.4)" do
+        result = register(material_slug: "physique-chimie", second_material_slug: "svt")
+
+        assert result.success?
+        assert_equal [ :user, "0501020304", "teacher", "standard" ], @journal[0]
+        assert_includes @journal, [ :materials, 41, 31, [ 6, 5 ], NOW ]
+      end
+
+      test "EPM-03: the same subject twice is kept once, without error" do
+        assert register(second_material_slug: "svt").success?
+        assert_includes @journal, [ :materials, 41, 31, [ 5 ], NOW ]
+      end
+
+      test "EPM-03: an unknown second subject is refused on its field, nothing is written" do
+        result = register(second_material_slug: "latin")
+
+        assert_equal [ :invalid, { second_material_slug: [ :inclusion ] } ], [ result.code, result.errors ]
+        assert_empty @journal
       end
 
       test "IE-01: no join request is written: the use case has no join request port at all" do
@@ -235,9 +271,9 @@ module UseCases
 
         assert result.success?
         assert_equal [ "0a1b2c3d4e5f" ], @invite_links.lookups
-        assert_equal [ :user, "0501020304", "teacher", 5, "colleague" ], @journal[0]
+        assert_equal [ :user, "0501020304", "teacher", "colleague" ], @journal[0]
         assert_equal [ :teacher_school, 41, 31, true, NOW ], @journal[1]
-        assert_equal [ :referral, 7, 41, 31, "link", NOW ], @journal[2]
+        assert_equal [ :referral, 7, 41, 31, "link", NOW ], @journal[3]
         assert_equal 1, @transaction.calls
       end
 
@@ -254,7 +290,7 @@ module UseCases
           @journal.clear
 
           assert register(invite_token: token, drena_public_id: nil, school_public_id: nil).success?, channel
-          assert_equal [ [ :user, "0501020304", "teacher", 5, channel ], [ :teacher_school, 41, 31, true, NOW ] ],
+          assert_equal [ [ :user, "0501020304", "teacher", channel ], [ :teacher_school, 41, 31, true, NOW ] ],
                        @journal.first(2), channel
           assert_not(@journal.any? { it.first == :referral }, channel)
         end
@@ -272,7 +308,7 @@ module UseCases
           @journal.clear
 
           assert register(invite_token: token).success?, token
-          assert_equal [ :user, "0501020304", "teacher", 5, "standard" ], @journal[0], token
+          assert_equal [ :user, "0501020304", "teacher", "standard" ], @journal[0], token
           assert_equal [ :teacher_school, 41, 31, true, NOW ], @journal[1], token
           assert_not(@journal.any? { it.first == :referral }, token)
         end

@@ -43,6 +43,20 @@ class SchoolAdmin::TeachersControllerTest < ActionDispatch::IntegrationTest
     Orm::User.where(role: "teacher").pluck(:contact).compact.each { assert_not_includes response.body, it }
   end
 
+  # EPM-22 (UDR-0127 §3.5) : la colonne « Matières », un badge par matière de cet établissement.
+  test "EPM-22 : un enseignant de deux matières porte deux badges dans « Matières »" do
+    pc = create_material(name: "Physique-Chimie", category: "science")
+    svt = create_material(name: "SVT", category: "science")
+    teacher = create_teacher(school: @school, materials: [ pc, svt ])
+    sign_in_as @admin
+
+    get school_admin_teachers_path
+
+    assert_select "thead th", text: "Matières"
+    assert_equal [ "Physique-Chimie", "SVT" ],
+                 css_select("tr#teacher_#{teacher.public_id} td div.flex-wrap > span").map { it.text.strip }
+  end
+
   test "un enseignant sans matière connue : « — » lu « non calculé »" do
     teacher = create_user(role: "teacher", first_name: "Awa", last_name: "Koné")
     Orm::TeacherSchool.create!(teacher:, school: @school, primary: true)

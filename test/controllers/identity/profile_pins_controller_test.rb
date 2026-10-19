@@ -159,4 +159,34 @@ class Identity::ProfilePinsControllerTest < ActionDispatch::IntegrationTest
     assert_select "head meta[name=turbo-visit-control][content=reload]"
     assert_select "#session-form"
   end
+
+  # ED-70, ED-71 (chantier espace-direction, Lot F) : la recette du changement de PIN avec un compte de direction.
+  test "ED-70: a direction changes its PIN under its current PIN, then signs in with the new one; pin.changed without PIN" do
+    admin = create_school_admin
+    sign_in_as admin
+
+    patch profile_pin_path, params: { pin_change: { current_pin: "2468", pin: "1357", pin_confirmation: "1357" } }
+
+    assert_redirected_to profile_path
+    assert Orm::User.authenticate_by(contact: admin.contact, pin: "1357")
+    event = Orm::AuditEvent.find_by!(action: "pin.changed")
+    assert_equal admin.id, event.actor_id
+    PINS.each { assert_not_includes event.metadata.to_json, it }
+    sign_out
+    sign_in_as admin, pin: "1357"
+    get school_admin_classrooms_path
+    assert_response :success
+  end
+
+  test "ED-71: a wrong current PIN is refused to a direction in 422, its PIN kept" do
+    admin = create_school_admin
+    sign_in_as admin
+
+    patch profile_pin_path, params: { pin_change: { current_pin: "0000", pin: "1357", pin_confirmation: "1357" } },
+                            headers: { "Turbo-Frame" => "modal" }
+
+    assert_response :unprocessable_entity
+    assert Orm::User.authenticate_by(contact: admin.contact, pin: "2468")
+    assert_not Orm::AuditEvent.exists?(action: "pin.changed")
+  end
 end

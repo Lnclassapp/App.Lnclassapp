@@ -1,14 +1,14 @@
 # UDR-0126 : Plusieurs matières dans le catalogue et l'accueil de l'enseignant — toutes ensemble, rangées par matière, un filtre « Matière » limité aux siennes
 <!-- index
 titre: Plusieurs matières dans le catalogue et l'accueil de l'enseignant
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-16 ; matières par établissement)*
 adr-lie: [0103](../adr/0103-matieres-de-l-enseignant-par-une-table-de-jointure.md)
 problematique: Le catalogue, l'accueil et l'en-tête de l'enseignant ne connaissent qu'une matière. Avec plusieurs : catalogue groupé par matière (titres de groupe de l'élève), filtre « Matière » réduit aux siennes (≥ 640 px) ; en-tête de l'accueil, un badge par matière ; bulles « Cours » par niveau, illustration générique, vers toutes ses matières ; « Activités » avec badge ; score moyen sur toutes. Une seule matière : rien ne change. Amende UDR-0026, 0069, 0077.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16) — matières par rattachement enseignant-établissement |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/enseignant-plusieurs-matieres`](../../chantiers/enseignant-plusieurs-matieres/memo.md) — Lot B |
 | **ADR lié** | [ADR-0103](../adr/0103-matieres-de-l-enseignant-par-une-table-de-jointure.md) §4.5 |
@@ -22,6 +22,8 @@ problematique: Le catalogue, l'accueil et l'en-tête de l'enseignant ne connaiss
 Le catalogue de l'enseignant ne montre que **sa** matière (UDR-0077 §3.2), sans liste « Matière ». Son accueil porte un badge de matière, des bulles « Cours » à l'illustration de cette matière, un score moyen et des « Activités » limités à elle (UDR-0026, UDR-0069, UDR-0077 §3.1). Un enseignant de PC et SVT n'y trouve jamais la SVT.
 
 ## 2. Décision
+
+> **Réponse du porteur (2026-10-16)** : « ses matières » se lit **dans l'établissement courant** (ADR-0103 §4). Changer d'établissement depuis le compte change aussi les matières de l'accueil, du catalogue et de l'en-tête ; aucun second sélecteur.
 
 1. **Règle d'or : une seule matière, aucun écran ne change.** Tout ce qui suit ne s'applique qu'au-delà d'une matière (`materials.size > 1`).
 2. **Toutes ses matières ensemble**, pas de « matière courante » à basculer (memo Q5) : un enseignant de PC et de SVT de la même classe ne doit pas changer de mode entre deux gestes.

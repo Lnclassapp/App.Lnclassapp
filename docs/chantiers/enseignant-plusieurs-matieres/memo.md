@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage — questions au porteur ouvertes (voir « Ce que le grill a révélé ») |
+| **Statut** | exécution — questions répondues par le porteur le 2026-10-16 (voir « Réponses du porteur ») |
 | **Ouvert le** | 2026-10-16 (demande du porteur : « et enseignant avec plusieurs disciplines au sein de l'établissement ») |
 | **Branche** | `docs/cadrage-enseignant-plusieurs-matieres` (cadrage), puis `feature/enseignant-plusieurs-matieres` |
 | **Programme** | `refonte-application` — chantier hors vague, né de la question 9 de [`multi-etablissements-enseignant`](../multi-etablissements-enseignant/memo.md#ce-que-le-grill-a-révélé) |

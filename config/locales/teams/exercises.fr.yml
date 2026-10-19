@@ -28,6 +28,11 @@ fr:
             questions:
               invalid: "Certaines questions sont incomplètes : complétez les champs signalés."
               needed_while_published: "Un exercice publié garde au moins une question."
+              # ADR-0105 : une image citée n'est plus disponible (prise par une autre question, citée deux fois ou effacée).
+              image_unavailable: "Une image de question n'est plus disponible : rechargez l'exercice, renvoyez l'image, puis enregistrez de nouveau."
+              # ADR-0105 §4.4 : un exercice publié ne perd pas l'image d'une question ni son texte de remplacement.
+              image_missing: "Cette question attend son image : l'exercice est publié, ajoutez-la avant d'enregistrer."
+              image_alt_blank: "L'image de cette question n'a pas de texte de remplacement : l'exercice est publié, complétez-le avant d'enregistrer."
               true_false_needs_two_answers: "Une question Vrai / Faux a exactement 2 propositions."
               too_few_answers: "Ajoutez au moins une proposition incorrecte en plus des propositions correctes."
               wrong_correct_count: "Le nombre de propositions correctes ne correspond pas au type de la question."
@@ -73,7 +78,7 @@ fr:
         matching: "Relier"
       new:
         title: "Nouvel exercice"
-        essential: "Fiche essentielle : %{name}"
+        essential: "Fiche de révision : %{name}"
         submit: "Créer l'exercice"
         cancel: "Annuler"
       edit:
@@ -133,5 +138,5 @@ fr:
         archived: "Exercice « %{title} » archivé."
         refusals:
           transition_not_allowed: "Cet exercice est déjà dans cet état ou ne peut pas prendre ce statut. Rechargez la page pour voir son statut actuel."
-          parent_not_published: "Publiez d'abord la fiche essentielle et son cours."
+          parent_not_published: "Publiez d'abord la fiche de révision et sa fiche de cours."
           not_publishable: "Ajoutez au moins une question bien construite avant de publier l'exercice."

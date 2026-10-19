@@ -120,7 +120,7 @@ module Queries
         card = rows["Nouvelles fiches"].card
         assert_kind_of InboxQuery::MessageCard, card
         assert_equal [ fiche.public_id, :teacher, "Kouassi", "SVT", true, true, false ],
-                     [ card.public_id, card.author_role, card.last_name, card.material_name, card.audio?, card.edited?, card.dismissed? ]
+                     [ card.public_id, card.author_role, card.last_name, card.materials.sole.name, card.audio?, card.edited?, card.dismissed? ]
         assert_equal [ "Collège Les Lauriers", "published", NOW - 1.hour, Date.new(2026, 11, 3) ],
                      rows["Nouvelles fiches"].to_h.values_at(:school_name, :status, :at, :last_day)
         assert_equal [ nil, "published", Time.zone.local(2026, 10, 3, 8), Date.new(2026, 11, 1) ],

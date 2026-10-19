@@ -1,0 +1,48 @@
+<%# 🌐 UI · teams/exercises/_question_image_fields — l'image d'une question, au-dessus de l'énoncé (UDR-0129 §3.2) %>
+<%# Rôle : image envoyée avec son texte de remplacement, ou image annoncée par l'import à ajouter, ou ajout discret ; l'envoi passe par le JavaScript %>
+<%# ADR  : 0105 · UDR : 0129 · Stimulus : assessment--question-image %>
+<% caps = Entities::Shared::ContentImage %>
+<% question = form.object %>
+<% image_id = question.image_public_id %>
+<% description = question.image_description %>
+<% messages = t("teams.exercises.question_fields.image_messages").transform_values { it.gsub("%{max_bytes}", number_to_human_size(caps::MAX_BYTES)) } %>
+<% alt_missing = image_id.present? && question.image_alt.blank? %>
+<%= tag.div class: "space-y-2",
+            data: { controller: "assessment--question-image",
+                    "assessment--question-image-upload-url-value": teams_question_images_path,
+                    "assessment--question-image-accept-value": caps::CONTENT_TYPES.to_json,
+                    "assessment--question-image-max-side-value": caps::MAX_SIDE,
+                    "assessment--question-image-max-bytes-value": caps::MAX_BYTES,
+                    "assessment--question-image-messages-value": messages.to_json } do %>
+  <%= form.hidden_field :image_public_id, data: { "assessment--question-image-target": "publicId" } %>
+  <%= form.hidden_field :image_description, data: { "assessment--question-image-target": "description" } %>
+  <%= tag.figure class: "flex items-start gap-3", hidden: image_id.blank?, data: { "assessment--question-image-target": "preview" } do %>
+    <%= tag.img src: (question_image_path(image_id) if image_id), alt: "", class: "size-20 shrink-0 rounded-sm bg-mist object-cover",
+                data: { "assessment--question-image-target": "img" } %>
+    <div class="min-w-0 flex-1 space-y-1.5">
+      <label for="<%= form.field_id(:image_alt) %>" class="block text-sm font-medium text-ink"><%= t("teams.exercises.question_fields.image_alt_label") %></label>
+      <%= tag.span ui_badge(t("teams.exercises.question_fields.image_alt_missing"), tone: :warning, size: :sm), hidden: !alt_missing,
+                   data: { "assessment--question-image-target": "missing" } %>
+      <%= form.text_field :image_alt, maxlength: caps::ALT_MAX, autocomplete: "off", class: field_classes(:text, false, nil),
+                                      data: { "assessment--question-image-target": "alt", action: "input->assessment--question-image#mark" } %>
+      <div class="flex flex-wrap gap-2">
+        <%= ui_button t("teams.exercises.question_fields.replace_image"), variant: :ghost, size: :sm, icon: "photo", data: { action: "assessment--question-image#pick" } %>
+        <%= ui_button t("teams.exercises.question_fields.remove_image"), variant: :ghost, size: :sm, icon: "trash", data: { action: "assessment--question-image#remove" } %>
+      </div>
+    </div>
+  <% end %>
+  <%= tag.div class: "rounded-ln border border-dashed border-warning bg-warning-soft p-3", hidden: image_id.present? || description.blank?,
+              data: { "assessment--question-image-target": "expected" } do %>
+    <p class="text-sm text-ink" data-assessment--question-image-target="expectedText"><%= t("teams.exercises.question_fields.image_expected", description:) if description %></p>
+    <div class="mt-2 flex flex-wrap items-center gap-3">
+      <%= ui_button t("teams.exercises.question_fields.add_image"), variant: :secondary, size: :sm, icon: "photo", data: { action: "assessment--question-image#pick" } %>
+      <%= ui_button t("teams.exercises.question_fields.drop_description"), variant: :ghost, size: :sm, data: { action: "assessment--question-image#dropDescription" } %>
+    </div>
+  <% end %>
+  <%= tag.div hidden: image_id.present? || description.present?, data: { "assessment--question-image-target": "addPlain" } do %>
+    <%= ui_button t("teams.exercises.question_fields.add_image"), variant: :ghost, size: :sm, icon: "photo", data: { action: "assessment--question-image#pick" } %>
+  <% end %>
+  <input type="file" hidden accept="<%= caps::CONTENT_TYPES.join(",") %>"
+         data-assessment--question-image-target="file" data-action="change->assessment--question-image#upload">
+  <p class="text-sm text-mute empty:hidden" aria-live="polite" data-assessment--question-image-target="status"></p>
+<% end %>

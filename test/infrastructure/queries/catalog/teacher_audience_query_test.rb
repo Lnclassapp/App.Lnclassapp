@@ -24,7 +24,8 @@ module Queries
 
         scope = scope_of(teacher)
 
-        assert_equal maths.id, scope.material_id
+        assert_equal [ maths.id ], scope.material_ids
+        assert_not scope.several_materials?
         assert_equal [ [ seconde.id, nil ], [ tle.id, d.id ] ].sort_by(&:first), scope.audience.pairs.sort_by(&:first)
       end
 
@@ -34,7 +35,7 @@ module Queries
         fifth = create_level(name: "5ème")
         teacher = create_teacher(school: @school, classrooms: [ create_classroom(school: @school, level: sixth),
                                                                  create_classroom(school: other, level: fifth) ])
-        Orm::TeacherSchool.create!(teacher:, school: other, primary: false)
+        add_teacher_school(teacher, other)
 
         assert_equal [ [ sixth.id, nil ] ], scope_of(teacher).audience.pairs
         assert_equal [ [ fifth.id, nil ] ], scope_of(teacher, school: other).audience.pairs
@@ -46,7 +47,19 @@ module Queries
         scope = scope_of(create_teacher(school: @school, material: svt))
 
         assert scope.audience.empty?
-        assert_equal svt.id, scope.material_id
+        assert_equal [ svt.id ], scope.material_ids
+      end
+
+      # EPM-12, EPM-11 (ADR-0103) : ses matières de l'établissement courant, dans l'ordre ; pas celles d'un autre.
+      test "ses matières de l'établissement courant, dans l'ordre, et seulement celles-là" do
+        pc, svt = create_material(name: "Physique-Chimie"), create_material(name: "SVT")
+        other = create_school
+        teacher = create_teacher(school: @school, materials: [ pc, svt ])
+        add_teacher_school(teacher, other, materials: [ svt ])
+
+        assert_equal [ pc.id, svt.id ], scope_of(teacher).material_ids
+        assert scope_of(teacher).several_materials?
+        assert_equal [ "SVT" ], scope_of(teacher, school: other).materials.map(&:name)
       end
     end
   end
