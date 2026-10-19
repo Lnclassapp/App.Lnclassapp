@@ -1,6 +1,7 @@
 <%# 🌐 UI · classroom/teacher_homes/_follow_ups — « Activités » de l'accueil enseignant : les exercices à suivre %>
 <%# Rôle : un exercice assigné par ligne (titre vers son suivi, classe, échéance, élèves qui ne l'ont pas fait) ; 3 lignes puis « Voir plus » %>
-<%# ADR  : 0072 · UDR : 0057 (R3), 0062 (§3.1), 0077 §3.1 · locals: (follow_ups: [TeacherFollowUpsQuery::Row], icon:) %>
+<%# ADR  : 0072, 0103 · UDR : 0057 (R3), 0062 (§3.1), 0077 §3.1, 0126 §3.4 · locals: (follow_ups: [TeacherFollowUpsQuery::Row], icon:, badges: false) %>
+<%# locals: (follow_ups:, icon:, badges: false) -%>
 <%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon:, id: "teacher_home_activity",
             data: (ui_reveal_data if follow_ups.any?) do %>
   <% if follow_ups.empty? %>
@@ -14,6 +15,8 @@
             <%= link_to follow_up.exercise_title, classroom_assignment_path(follow_up.classroom_public_id, follow_up.public_id),
                         class: "block truncate font-medium text-ink after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-brand" %>
             <p class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-mute">
+              <%# UDR-0126 §3.4 : la matière de l'exercice, pour l'enseignant de plusieurs matières seulement. %>
+              <% if badges %><%= ui_subject_badge follow_up.material_name, category: follow_up.material_category, size: :sm %><% end %>
               <span><%= follow_up.classroom_name %></span><%= due_badge(follow_up.due_on) %>
             </p>
             <p class="text-sm tabular-nums"><%= t(".pending", count: follow_up.pending, present: follow_up.present) %></p>

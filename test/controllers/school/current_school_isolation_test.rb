@@ -41,6 +41,25 @@ class School::CurrentSchoolIsolationTest < ActionDispatch::IntegrationTest
       new_announcement_path, profile_path, teacher_invite_path ].each { assert_nothing_of_b(it) }
   end
 
+  # EPM-11 (ADR-0103, réponse du porteur) : les matières de B n'existent pas dans A — ni en-tête, ni accueil, ni catalogue,
+  # ni profil ; « Mes matières » ne change que A.
+  test "the subjects of B are nowhere in A, and « Mes matières » only changes A" do
+    svt = create_material(name: "Sciences de la vie")
+    set_teacher_materials(@teacher, @b, [ svt ])
+    create_course(level: @a6.level, material: svt, name: "Le vivant")
+
+    [ teacher_home_path, courses_path, profile_path ].each do |path|
+      get path
+      assert_no_match "Sciences de la vie", response.body, path
+      assert_no_match "Le vivant", response.body, path
+    end
+
+    patch profile_materials_path, params: { profile_materials: { material_slugs: [ svt.slug ] } }
+
+    assert_equal [ svt.id ], Orm::TeacherSchoolMaterial.where(teacher: @teacher, school: @a).pluck(:material_id)
+    assert_equal [ svt.id ], Orm::TeacherSchoolMaterial.where(teacher: @teacher, school: @b).pluck(:material_id)
+  end
+
   test "a course and an exercise of a level taught only in B offer no classroom of B to assign" do
     assert_nothing_of_b(course_path(@course6.slug))
     get exercise_path(@exercise4.public_id)

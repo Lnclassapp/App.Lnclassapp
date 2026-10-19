@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/teacher_homes/show — accueil enseignant (TR-05) %>
 <%# Rôle : sections de HOME_SECTIONS[:teacher] (classes en bande, cours par niveau, annonces, exercices à suivre), collègues en attente, invitation sur téléphone %>
-<%# ADR  : 0026, 0048, 0063, 0076, 0078 · UDR : 0006, 0078, 0007, 0026, 0050, 0054, 0069, 0071 §3.5, 0077 §3.1, 0098 §3.3 · titre « Accueil · Enseignant · Lnclass » %>
+<%# ADR  : 0026, 0048, 0063, 0076, 0078 · UDR : 0006, 0078, 0007, 0026, 0050, 0054, 0069, 0071 §3.5, 0077 §3.1, 0098 §3.3, 0126 (§3.2 : un badge par matière) · titre « Accueil · Enseignant · Lnclass » %>
 <% page_title t(".page_title") %>
 <%# Grand écran : la carte « Parrainage » de la barre latérale vient avec la page, sans frame à demander (ADR-0076 §4.2). %>
 <% content_for :sidebar_referral, render("identity/referrals/sidebar_card", invite: @invite, frame: NavigationHelper::SIDEBAR_FRAME_OPTIONS) %>
@@ -16,7 +16,7 @@
                 t(".subtitle", school: @home.school_name)
               end %>
 <%= ui_page_header title: t(".greeting", name: shell_user.first_name), subtitle: do %>
-  <%= ui_subject_badge @home.material_name, category: @home.material_category %>
+  <%= ui_subject_badges @home.materials %>
 <% end %>
 
 <div class="grid gap-5">
@@ -50,7 +50,8 @@
         <% end %>
       <% end %>
     <% elsif key == :courses %>
-      <%= ui_card title: t(".courses_title"), subtitle: t(".courses_subtitle", material: @home.material_name), icon:,
+      <% courses_subtitle = @home.several_materials? ? t(".courses_subtitle_many") : t(".courses_subtitle", material: @home.materials.first&.name) %>
+      <%= ui_card title: t(".courses_title"), subtitle: courses_subtitle, icon:,
                   id: "teacher_home_courses" do |card| %>
         <%= render "course_levels", home: @home, invite: @invite %>
         <% card.footer do %>
@@ -63,7 +64,7 @@
         <%= render "communication/messages/carousel", carousel: @announcements, dismissible: false %>
       <% end %>
     <% elsif key == :activity %>
-      <%= render "follow_ups", follow_ups: @follow_ups, icon: %>
+      <%= render "follow_ups", follow_ups: @follow_ups, icon:, badges: @home.several_materials? %>
     <% end %>
   <% end %>
   <% if @pending_colleagues %>

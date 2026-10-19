@@ -259,6 +259,26 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # EPM-13, EPM-16 (UDR-0126 §3.2 to §3.4) : deux badges, des bulles génériques vers toutes ses matières, un badge par activité.
+  test "EPM-13: a teacher of two subjects reads both badges, generic bubbles to all his subjects, a badge on each activity" do
+    pc = create_material(name: "Physique-Chimie", category: "science")
+    teacher = create_teacher(school: @school, materials: [ pc, @svt ], classrooms: [ @classroom ])
+    create_student(classroom: @classroom)
+    exercise = create_exercise(essential: create_essential(course: create_course(material: pc, level: @tle)))
+    create_assignment(classroom: @classroom, assignable: exercise, by: teacher, due_on: Date.current + 1)
+    sign_in_as teacher
+
+    get teacher_home_path
+
+    assert_select "#main", text: /Physique-Chimie\s*SVT/
+    assert_select "#teacher_home_courses", text: including(tl("show.courses_subtitle_many"))
+    assert_select "a#course_level_tle[href='#{courses_path(level: 'tle')}']" do
+      assert_select "img[src='#{illustration('generique')}']"
+      assert_select ".sr-only", text: ", cours de vos matières"
+    end
+    assert_select "#teacher_home_activity li", text: /Physique-Chimie/
+  end
+
   test "RE-18: a teacher whose primary school is inactive sees neither the « Inviter » bubble nor the invitation block" do
     @school.update!(status: "inactive")
     sign_in_as @teacher
