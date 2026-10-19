@@ -305,7 +305,8 @@ Ces écarts sont les premiers que voit un nouvel utilisateur, surtout au télép
   - **Épinglée par un clic**, la bulle retourne dans le flux.
 - **Vérification** :
   - `test/system/design_system_test.rb` : ouverture au survol en bulle fixe, sans que l'icône bouge ; fermeture au départ du pointeur ; clic qui garde ouvert, de retour dans le flux ; clic suivant qui ferme ;
-  - `test/helpers/components_helper_test.rb` : le contrôleur et ses actions sont posés.
+  - `test/helpers/components_helper_test.rb` : le contrôleur et ses actions sont posés ;
+  - chantier [`infobulle-badges-hors-ecran`](../../chantiers/infobulle-badges-hors-ecran/memo.md) : une bulle fixe dépend de son repère, qu'un `transform` laissé par une animation d'entrée (`both`) déplace. `test/system/assessment/session_result_test.rb` mesure la bulle du badge au survol sur la page de résultat (bord gauche sur l'icône, `top` à 4 px sous elle, dans la fenêtre à 16 px) ; `test/system/identity/account_panel_test.rb` vérifie que le tiroir « Mon compte » ouvert n'a aucun `transform`. Les animations d'entrée remplissent en `backwards`.
 
 ## Amendement du 2026-10-06 — le retour de l'élève
 

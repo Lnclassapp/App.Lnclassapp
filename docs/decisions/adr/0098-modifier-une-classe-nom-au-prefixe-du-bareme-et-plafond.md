@@ -1,13 +1,13 @@
 # ADR-0098 : Modifier une classe — seul le suffixe du nom et le plafond changent, par la direction et l'équipe
 <!-- index
 titre: Modifier une classe : seul le suffixe du nom et le plafond changent, par la direction et l'équipe
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-16)*
 problematique: CL-02. `UpdateClassroom` sous `ManageSchoolStructurePolicy` (équipe, direction de son établissement actif) ; préfixe du barème fixe, suffixe libre, 15 caractères ; plafond 1 à 150 et jamais sous l'effectif présent, jugé sous le verrou de la classe ; classe active de l'année en cours ; audit `school.changed` `classroom_updated`. Amende 0041, précise 0059.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-16)* |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/vie-de-la-classe`](../../chantiers/vie-de-la-classe/memo.md) |
 | **Remplace** | — (amende [ADR-0041](./0041-vie-d-une-classe-annee-scolaire-et-code.md), précise [ADR-0059](./0059-ajuster-les-classes-d-un-niveau.md), voir §8) |
@@ -132,9 +132,6 @@ end
 - **Précise** l'ADR-0059 : un nom renommé garde son préfixe ; seuls les suffixes numériques entrent dans le maximum.
 - **Étend** la `ManageSchoolStructurePolicy` (ADR-0059, ADR-0071, ADR-0088) à la modification d'une classe.
 
-## 9. Points à confirmer par le porteur
+## 9. Réponses du porteur (2026-10-16)
 
-- Q1 : équipe et direction, pas l'enseignant.
-- Q2 : le nom et le plafond seulement.
-- Q3 : plafond refusé sous l'effectif présent.
-- Q4 : préfixe du barème fixe, suffixe libre.
+Q1 à Q4 confirmées telles que recommandées : équipe et direction (pas l'enseignant) ; le nom et le plafond seulement ; plafond refusé sous l'effectif présent, jugé sous le verrou de la classe ; préfixe du barème fixe, suffixe libre, nom pris refusé (archivées comprises).

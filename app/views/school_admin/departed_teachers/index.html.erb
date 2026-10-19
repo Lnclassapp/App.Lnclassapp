@@ -1,6 +1,6 @@
 <%# 🌐 UI · school_admin/departed_teachers/index — « Enseignants retirés » de la direction (GD-21) %>
 <%# Rôle : une ligne par départ ouvert : nom, matière, date du retrait ; « Réintégrer » sur un établissement actif seulement %>
-<%# ADR  : 0071, 0092 · UDR : 0005, 0054, 0056, 0092 (§3.5) · « Réintégrer » si la policy l'accorde %>
+<%# ADR  : 0071, 0092, 0103 · UDR : 0005, 0054, 0056, 0092 (§3.5), 0127 (§3.5 matières) · « Réintégrer » si la policy l'accorde %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "teachers" %>
 <%= link_to t(".back"), school_admin_teachers_path, id: "back-to-teachers",
@@ -16,8 +16,8 @@
           <div class="flex min-w-0 flex-col gap-1">
             <span class="font-medium text-ink"><%= teacher.name %></span>
             <span>
-              <% if teacher.material_name %>
-                <%= ui_subject_badge teacher.material_name, category: teacher.material_category, size: :sm %>
+              <% if teacher.materials.any? %>
+                <%= ui_subject_badges teacher.materials, size: :sm, gap: "gap-1" %>
               <% else %>
                 <span aria-hidden="true">—</span><span class="sr-only"><%= t(".missing") %></span>
               <% end %>

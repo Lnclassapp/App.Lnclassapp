@@ -4,6 +4,22 @@
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
 >
 > **Préalable au Lot 0** : les questions 1 à 11 du [memo](memo.md#ce-que-le-grill-a-révélé) répondues par le porteur ; l'ADR-0103 et les UDR-0125 à 0127 passées à « Accepté » (amendées si une réponse diffère) ; le nombre de `teacher_profiles` en production relevé ; l'ordre avec `multi-etablissements-enseignant` fixé (§ Articulation).
+>
+> **Préalable rempli le 2026-10-16.** Réponses du porteur : recommandations acceptées sauf Q1 et Q7 — les matières sont attachées au **rattachement enseignant-établissement**. ADR-0103 et UDR-0125 à 0127 amendés et acceptés au Lot 0. Ordre : ce chantier part de la branche `feature/multi-etablissements-enseignant` (PR #250) et fusionne après elle. Requête de comptage pour la production : [journal](journal.md).
+
+## Amendement du Lot 0 (réponses du porteur)
+
+Ce qui change dans les lots ci-dessous, sans changer leur découpage :
+
+| Prévu | Livré |
+|---|---|
+| Table `teacher_materials(teacher_id, material_id)`, `Orm::TeacherMaterial` | Table `teacher_school_materials(teacher_id, school_id, material_id)`, `Orm::TeacherSchoolMaterial` : une liste par rattachement, sans FK vers `teacher_schools` (la liste survit à un retrait) |
+| `TeacherProfileRepositoryPort#replace_materials`, `TeacherProfile#material_ids` | Port **nouveau** `Ports::Identity::TeacherMaterialRepositoryPort` (`material_ids_for`, `replace`, `inherit`) et `Repositories::Identity::TeacherMaterialRepository` ; l'entité du profil perd `material_id` au Lot Z |
+| `RegistrationRepositoryPort#create_teacher(material_ids:)` | `create_teacher` garde `material_id` (écriture double) jusqu'au Lot Z, qui le retire ; `RegisterTeacher` écrit la liste après le rattachement |
+| — | Lot 0 : `JoinSchoolWithCode`, `ReinstateTeacher`, `ReviewJoinRequest`, `VouchForTeacher` donnent une liste au nouveau rattachement (`inherit`) ; `SchoolRepository#delete_if_unreferenced` efface les listes d'un établissement supprimé |
+| `TeacherMaterialsQuery.tags_for(teacher_ids:)` | `TeacherMaterialsQuery#tags_for(teacher_ids:, school_id:)` et `#for_pairs` ; `TeacherMaterialsQuery.label` (nom ou noms courts) |
+| `ManageOwnMaterialsPolicy` : un enseignant | un enseignant **avec un établissement courant** ; la liste modifiée est celle de `actor.school_id` |
+| Lots en parallèle (A, B, C, D) | Exécutés à la suite par un seul agent, un commit par lot, dans l'ordre 0, A, B, C, D, Z |
 
 ## Graphe
 
@@ -141,11 +157,12 @@ Règle : le chantier lancé en premier termine ces lots et fusionne ; l'autre re
 
 ## Portes de sortie
 
-- [ ] Tous les lots sont `Done`, Lot Z compris
-- [ ] Le nombre de lignes `teacher_materials` après migration égale celui de `teacher_profiles` (relevé avant le Lot 0)
+- [x] Tous les lots sont `Done`, Lot Z compris (0, A, B, C, D, Z : un commit chacun)
+- [ ] Le nombre de lignes `teacher_school_materials` après migration égale l'« attendu » de la requête du journal (à relever en production)
 - [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : inscription avec deux matières, ajout au profil, catalogue, page de classe, annonce, « Enseignants » ; et un enseignant d'une seule matière ne voit **aucun** changement
-- [ ] Captures 390 px et ordinateur de chaque écran modifié envoyées au porteur (jamais commitées)
+- [x] Captures 390 px et ordinateur de chaque écran modifié envoyées au porteur (jamais commitées)
 - [ ] Pureté du domaine, rubocop, tests, parcours système : au vert ; `bin/ci-quiet` écrit dans la PR
 - [ ] Sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) sur le diff final : une policy, un use case et une route sont touchés
-- [ ] ADR-0103 et UDR-0125 à 0127 à « Accepté », index régénérés par `script/docs/build_index` au commit de clôture ; amendements reportés dans les ADR et UDR amendés (ADR-0083, ADR-0101 §4.4, UDR-0026, 0027, 0041, 0052, 0062, 0069, 0071, 0077, 0079, 0100, 0121)
-- [ ] `journal.md` complété
+- [x] ADR-0103 et UDR-0125 à 0127 à « Accepté », index régénérés par `script/docs/build_index` au commit de clôture
+- [ ] Amendements reportés dans les ADR et UDR amendés (ADR-0083, ADR-0101 §4.4, UDR-0026, 0027, 0041, 0052, 0062, 0069, 0071, 0077, 0079, 0100, 0121)
+- [x] `journal.md` complété

@@ -44,7 +44,7 @@ class Orm::ModelsTest < ActiveSupport::TestCase
   end
 
   test "every V1 table has its Orm model with an explicit table name" do
-    assert_equal 48, MODELS.size # + essential_images, question_images (ADR-0105), essential_reads (ADR-0090), referrals, referral_shares, school_join_requests (ADR-0063), school_staffs (ADR-0065), rich_text_row (ADR-0068), teacher_school_departures (ADR-0071), classroom_session_days (ADR-0072), account_deletion_requests (ADR-0036), articles, article_images (ADR-0074), messages, message_classrooms, message_dismissals (ADR-0078), message_illustrations (ADR-0081)
+    assert_equal 49, MODELS.size # + essential_images, question_images (ADR-0105), teacher_school_materials (ADR-0103), essential_reads (ADR-0090), referrals, referral_shares, school_join_requests (ADR-0063), school_staffs (ADR-0065), rich_text_row (ADR-0068), teacher_school_departures (ADR-0071), classroom_session_days (ADR-0072), account_deletion_requests (ADR-0036), articles, article_images (ADR-0074), messages, message_classrooms, message_dismissals (ADR-0078), message_illustrations (ADR-0081)
     MODELS.each { |model| assert model.table_name.present? && model.table_exists?, model.name }
   end
 
@@ -72,8 +72,9 @@ class Orm::ModelsTest < ActiveSupport::TestCase
 
   test "the whole pedagogical loop is navigable through the associations" do
     graph => { team:, teacher:, student:, level:, series:, school:, classroom:, course:, essential:, exercise:, question:, session: }
-    Orm::TeacherProfile.create!(user: teacher, material: graph[:material], joined_via: "standard")
+    Orm::TeacherProfile.create!(user: teacher, joined_via: "standard")
     Orm::TeacherSchool.create!(teacher:, school:, primary: true)
+    Orm::TeacherSchoolMaterial.create!(teacher:, school:, material: graph[:material], created_at: Time.current)
     Orm::TeacherClassroom.create!(teacher:, classroom:)
     Orm::ClassroomStudent.create!(joined_via: "standard", classroom:, student:, primary: true, joined_at: Time.current)
     gap = Orm::KnowledgeGap.create!(student:, essential:, source_session: session)
@@ -85,7 +86,7 @@ class Orm::ModelsTest < ActiveSupport::TestCase
     assert_equal [ "Vrai", "Faux" ], exercise.questions.first.answers.map(&:content)
     assert_equal graph[:assignment], session.classroom_assignment
     assert_equal gap.public_id, gap.to_param
-    assert_equal teacher.teacher_profile.material, graph[:material]
+    assert_equal [ teacher ], graph[:material].teacher_school_materials.map(&:teacher)
     assert_equal [ teacher ], school.teacher_schools.map(&:teacher)
     assert_equal [ student ], classroom.classroom_students.map(&:student)
     assert_equal [ teacher ], classroom.teacher_classrooms.map(&:teacher)

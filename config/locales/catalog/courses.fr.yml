@@ -5,22 +5,29 @@ fr:
       index:
         page_title: "Cours"
         title: "Cours"
-        subtitle: "Les cours du programme, par matière et par niveau."
+        subtitle: "Les fiches de cours du programme, par matière et par niveau."
         # UDR-0013, amendement du 2026-10-02 : la portée du catalogue de l'élève, en infobulle (UDR-0057 R4).
-        student_scope: "Tu vois seulement les cours de ton niveau."
-        student_scope_label: "Quels cours ?"
+        student_scope: "Tu vois seulement les fiches de cours de ton niveau."
+        student_scope_label: "Quelles fiches de cours ?"
         # UDR-0077 §3.2 : l'enseignant, sa matière aux niveaux de ses classes.
-        teacher_subtitle: "Les cours de %{material}, aux niveaux de vos classes."
-        teacher_no_class_title: "Déclarez vos classes pour voir vos cours"
-        teacher_no_class_description: "Les cours de votre matière, aux niveaux de vos classes, apparaîtront ici."
+        teacher_subtitle: "Les fiches de cours de %{material}, aux niveaux de vos classes."
+        # UDR-0126 §3.1 (ADR-0103) : l'enseignant de plusieurs matières
+        teacher_subtitle_many: "Les fiches de cours de %{materials}, aux niveaux de vos classes."
+        # ADR-0103 §4.6 : aucune matière dans l'établissement courant
+        teacher_subtitle_none: "Choisissez vos matières pour voir les fiches de cours qui vous concernent."
+        teacher_no_material_title: "Choisissez vos matières"
+        teacher_no_material_description: "Les fiches de cours de vos matières, aux niveaux de vos classes, apparaîtront ici."
+        teacher_no_material_action: "Choisir mes matières"
+        teacher_no_class_title: "Déclarez vos classes pour voir vos fiches de cours"
+        teacher_no_class_description: "Les fiches de cours de votre matière, aux niveaux de vos classes, apparaîtront ici."
         teacher_no_class_action: "Déclarer mes classes"
         # UDR-0077, amendement du 2026-10-06 : quitter les filtres, à toutes les largeurs.
         reset: "Tout voir"
-        new_course: "Nouveau cours"
-        import: "Importer des cours"
+        new_course: "Nouvelle fiche de cours"
+        import: "Importer des fiches de cours"
         filters:
-          label: "Filtrer les cours"
-          search: "Rechercher un cours"
+          label: "Filtrer les fiches de cours"
+          search: "Rechercher une fiche de cours"
           level: "Niveau"
           # UDR-0069 §3.4 : enseignant et équipe seulement.
           series: "Série"
@@ -28,47 +35,48 @@ fr:
           all_levels: "Tous les niveaux"
           all_series: "Toutes les séries"
           all_materials: "Toutes les matières"
+          all_teacher_materials: "Toutes vos matières"
           submit: "Filtrer"
         total:
-          zero: "Aucun cours"
-          one: "1 cours"
-          other: "%{count} cours"
-        empty_title: "Aucun cours pour l'instant"
-        empty_description: "Les cours publiés apparaîtront ici."
-        no_class_title: "Rejoins ta classe pour voir tes cours"
-        no_class_description: "Les cours de ton niveau apparaîtront ici dès que tu seras dans une classe de cette année."
-        no_match_title: "Aucun cours ne correspond"
+          zero: "Aucune fiche de cours"
+          one: "%{count} fiche de cours"
+          other: "%{count} fiches de cours"
+        empty_title: "Aucune fiche de cours pour l'instant"
+        empty_description: "Les fiches de cours publiées apparaîtront ici."
+        no_class_title: "Rejoins ta classe pour voir tes fiches de cours"
+        no_class_description: "Les fiches de cours de ton niveau apparaîtront ici dès que tu seras dans une classe de cette année."
+        no_match_title: "Aucune fiche de cours ne correspond"
         no_match_description: "Essayez un autre nom, un autre niveau ou une autre matière."
         # UDR-0085 §3.5 : l'élève n'a plus que la recherche.
         student_no_match_description: "Essaye un autre mot."
         clear_search: "Effacer la recherche"
       # Lot E4 (politique-cache, UDR-0013 amendement du 2026-10-05) : les cartes par pages de 24, chargées au défilement.
       page:
-        more: "Afficher plus de cours"
-      # UDR-0085 §3.2 : le titre d'un groupe de l'élève (matière, nombre de cours sur toute la recherche).
+        more: "Afficher plus de fiches de cours"
+      # UDR-0085 §3.2 : le titre d'un groupe de l'élève (matière, nombre de fiches de cours sur toute la recherche).
       course_group_title:
         count:
-          one: "1 cours"
-          other: "%{count} cours"
+          one: "1 fiche de cours"
+          other: "%{count} fiches de cours"
         label:
-          one: "%{material}, 1 cours, voir la matière"
-          other: "%{material}, %{count} cours, voir la matière"
+          one: "%{material}, 1 fiche de cours, voir la matière"
+          other: "%{material}, %{count} fiches de cours, voir la matière"
       course_card:
-        open: "Ouvrir le cours"
-        # UDR-0085 §3.3 : le bouton de l'élève dit où il en est ; la carte entière est le lien, son nom porte celui du cours.
+        open: "Ouvrir la fiche de cours"
+        # UDR-0085 §3.3 : le bouton de l'élève dit où il en est ; la carte entière est le lien, son nom porte celui de la fiche de cours.
         progress:
-          new: "Commencer le cours"
-          started: "Reprendre le cours"
-          done: "Revoir le cours"
+          new: "Commencer la fiche de cours"
+          started: "Reprendre la fiche de cours"
+          done: "Revoir la fiche de cours"
       show:
         page_title: "%{name}"
         back: "Cours"
-        content_title: "Contenu du cours"
-        essentials_title: "Essentielles de la leçon"
-        empty: "Aucune fiche essentielle pour ce cours."
-        empty_description: "Les fiches essentielles publiées de ce cours apparaîtront ici."
+        content_title: "Contenu de la fiche de cours"
+        essentials_title: "Révisions de la leçon"
+        empty: "Aucune fiche de révision pour cette fiche de cours."
+        empty_description: "Les fiches de révision publiées de cette fiche de cours apparaîtront ici."
       role_actions:
-        menu: "Actions sur le cours « %{name} »"
+        menu: "Actions sur la fiche de cours « %{name} »"
         edit: "Modifier"
-        new_essential: "Nouvelle fiche essentielle"
-        import_essentials: "Importer des fiches essentielles"
+        new_essential: "Nouvelle fiche de révision"
+        import_essentials: "Importer des fiches de révision"

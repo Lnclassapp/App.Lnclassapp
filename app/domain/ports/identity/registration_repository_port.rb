@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Identity::RegistrationRepositoryPort
 # Rôle : contrat de création des comptes ; appelé dans la transaction du use case
-# ADR  : 0026, 0030, 0038, 0050, 0077, 0083
+# ADR  : 0026, 0030, 0038, 0050, 0077, 0083, 0103
 module Ports
   module Identity
     module RegistrationRepositoryPort
@@ -11,8 +11,9 @@ module Ports
       end
 
       # Crée aussi la ligne teacher_profiles, avec sa voie d'arrivée. joined_via ∈ Entities::Identity::ArrivalChannel::ALL
-      # (ADR-0083 §4.2). → Result(User) | failure(:conflict, …)
-      def create_teacher(user:, pin:, material_id:, joined_via:)
+      # (ADR-0083 §4.2). Ses matières s'écrivent par établissement (TeacherMaterialRepositoryPort, ADR-0103).
+      # → Result(User) | failure(:conflict, …)
+      def create_teacher(user:, pin:, joined_via:)
         raise NotImplementedError, "#{self.class} doit implémenter #create_teacher"
       end
 

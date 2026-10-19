@@ -130,10 +130,11 @@ module UseCases
         @schools = FakeSchools.new(@a, @b, @inactive, @draft, @elsewhere, refuse_attach:, already:, posed:)
         @join_requests = FakeJoinRequests.new(request)
         @sessions = FakeSessions.new
+        @materials = FakeTeacherMaterials.new
         JoinSchoolWithCode.new(schools: @schools, drenas: FakeDrenas.new(@abidjan, @bouake), departures: FakeDepartures.new(*departures),
                                join_requests: @join_requests, invite_links: FakeInviteLinks.new(LINKS), sessions: @sessions,
                                audit_log: @audit, policy: Policies::School::JoinSchoolWithCodePolicy.new,
-                               transaction: @transaction, clock: Clock.new(NOW))
+                               transaction: @transaction, clock: Clock.new(NOW), teacher_materials: @materials)
       end
 
       def join(school_public_id, drena: "drena-1", actor: @teacher, departures: [ departure(school_id: 31) ], request: nil,
@@ -164,6 +165,18 @@ module UseCases
         assert_equal @b, result.value
         assert_equal [ false ], @schools.attached.map { it[:primary] }
         assert_equal [ [ 5, 32 ] ], @sessions.moves
+      end
+
+      test "EPM-20 : l'établissement ajouté reçoit les matières de l'établissement courant (ADR-0103 §4.4)" do
+        join("sch-32", actor: Entities::Identity::Actor.new(user_id: 50, role: :teacher, school_id: 34), already: [ 34 ])
+
+        assert_equal [ [ :inherit, 50, 32, 34, NOW ] ], @materials.calls
+      end
+
+      test "EPM-20 : un rattachement refusé ne transmet aucune matière" do
+        join("sch-35")
+
+        assert_empty @materials.calls
       end
 
       # Revue de la PR #250, constat 1 : la session suit ce que le dépôt a posé sous le verrou, pas la lecture d'avant.

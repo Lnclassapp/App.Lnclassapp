@@ -1,14 +1,14 @@
 # UDR-0111 : Entrée « Modifier la classe » du menu ⋮ des cartes de classe (fiche de l'équipe, niveau de la direction)
 <!-- index
 titre: Entrée « Modifier la classe » du menu ⋮ des cartes de classe
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-16)*
 adr-lie: [0098](../adr/0098-modifier-une-classe-nom-au-prefixe-du-bareme-et-plafond.md)
 problematique: Où l'équipe et la direction trouvent la modification d'une classe, à côté de l'archivage, sans nouveau bouton sur la carte.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-16)* |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/vie-de-la-classe`](../../chantiers/vie-de-la-classe/memo.md) |
 | **ADR lié** | [ADR-0098](../adr/0098-modifier-une-classe-nom-au-prefixe-du-bareme-et-plafond.md) · amende [UDR-0083](0083-menu-d-archivage-de-la-classe-et-du-niveau.md) |

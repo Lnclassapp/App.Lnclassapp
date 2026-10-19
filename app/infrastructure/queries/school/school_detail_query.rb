@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::School::SchoolDetailQuery
 # Rôle : fiche d'un établissement (SC-05) : en-tête, code et lien de l'équipe, classes par niveau et leur lien (jamais de code de classe), enseignants, leur voie et leur parrain ici
-# ADR  : 0026, 0030, 0041, 0057, 0063, 0083, 0085, 0088, 0096 · UDR : 0036, 0044, 0050, 0079, 0081 (§3.7), 0083, 0106
+# ADR  : 0026, 0030, 0041, 0057, 0063, 0083, 0085, 0088, 0096, 0103 · UDR : 0036, 0044, 0050, 0079, 0081 (§3.7), 0083, 0106, 0127 (§3.5)
 module Queries
   module School
     class SchoolDetailQuery
@@ -16,7 +16,8 @@ module Queries
       ClassroomRow = Data.define(:public_id, :name, :link_token, :students_count, :teacher_names, :status)
       # joined_via : voie d'arrivée (ADR-0083 §4.2) ; referrer_name : « NOM Prénoms » du parrain, nil sans parrain, anonymisé,
       # ou parrain d'un autre établissement (l'enseignant parrainé ailleurs puis rattaché ici garde sa voie, sans nom).
-      TeacherRow = Data.define(:name, :material_name, :material_category, :primary, :joined_via, :referrer_name)
+      # materials : ses matières dans cet établissement (ADR-0103).
+      TeacherRow = Data.define(:name, :materials, :primary, :joined_via, :referrer_name)
 
       SCHOOL_COLUMNS = %w[schools.id schools.public_id schools.name schools.sigle drenas.name schools.school_type schools.cycle
                           schools.status schools.school_code schools.national_code schools.team_invite_token
@@ -26,7 +27,8 @@ module Queries
       # ADR-0088 : une classe archivée reste visible sept jours.
       ARCHIVE_WINDOW = 7.days
       FULL_NAME = Arel.sql("users.first_name || ' ' || users.last_name")
-      TEACHER_COLUMNS = [ FULL_NAME, "materials.name", "materials.category", :primary, "teacher_profiles.joined_via",
+      TEACHER_COLUMNS = [ FULL_NAME, Queries::Identity::TeacherMaterialsQuery.column(:teacher_schools),
+                          :primary, "teacher_profiles.joined_via",
                           Arel.sql("referrers.last_name || ' ' || referrers.first_name") ].freeze
 
       # → Detail | nil
@@ -75,12 +77,14 @@ module Queries
       def teachers(school_id)
         Orm::TeacherSchool.joins(:teacher)
                           .joins("LEFT JOIN teacher_profiles ON teacher_profiles.user_id = teacher_schools.teacher_id")
-                          .joins("LEFT JOIN materials ON materials.id = teacher_profiles.material_id")
                           .joins("LEFT JOIN referrals ON referrals.referee_id = teacher_schools.teacher_id " \
                                  "AND referrals.school_id = teacher_schools.school_id")
                           .joins("LEFT JOIN users referrers ON referrers.id = referrals.referrer_id AND referrers.anonymized_at IS NULL")
                           .where(school_id:).order(primary: :desc).order("users.last_name", "users.first_name")
-                          .pluck(*TEACHER_COLUMNS).map { TeacherRow.new(*it) }
+                          .pluck(*TEACHER_COLUMNS).map do |name, tags, primary, joined_via, referrer_name|
+                            TeacherRow.new(name:, materials: Queries::Identity::TeacherMaterialsQuery.from_json(tags), primary:,
+                                           joined_via:, referrer_name:)
+                          end
       end
     end
   end

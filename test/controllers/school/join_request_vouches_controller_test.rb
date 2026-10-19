@@ -6,8 +6,8 @@ class School::JoinRequestVouchesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @school = create_school(name: "Lycée Classique d'Abidjan")
     @sponsor = create_teacher(school: @school, first_name: "Yao")
-    @teacher = create_teacher(school: nil, first_name: "Awa", last_name: "Koné", material: create_material(name: "SVT", category: "science"))
-    @join_request = create_join_request(school: @school, teacher: @teacher)
+    @teacher = create_teacher(school: nil, first_name: "Awa", last_name: "Koné")
+    @join_request = create_join_request(school: @school, teacher: @teacher, materials: [ create_material(name: "SVT", category: "science") ])
   end
 
   test "CP-13: the home of an active colleague lists the pending request with « Je confirme », without the number" do

@@ -76,7 +76,7 @@ module UseCases
         full = upload(jpeg, essential_slug: "pleine")
 
         assert_equal :invalid, full.code
-        assert_equal [ "30 images au plus par fiche." ], full.errors[:file]
+        assert_equal [ "30 images au plus par fiche de révision." ], full.errors[:file]
         assert upload(jpeg, essential_slug: "presque").success?
         assert_equal :not_found, upload(jpeg, essential_slug: "inconnue").code
         assert_equal 1, @store.writes.size

@@ -24,15 +24,15 @@ module Catalog
       get public_levels_path
 
       assert_response :success
-      assert_select "h1", "Les cours par niveau"
-      assert_equal [ "6ème 1 cours", "3ème 2 cours" ], texts("#cycle_first li a")
+      assert_select "h1", "Les fiches de cours par niveau"
+      assert_equal [ "6ème 1 fiche de cours", "3ème 2 fiches de cours" ], texts("#cycle_first li a")
       assert_equal "Premier cycle", css_select("#cycle_first h2").first.text.squish
       assert_select "#cycle_second h2", "Second cycle"
-      assert_select "#cycle_second li a[href='/niveaux/tle']", text: /Tle\s+1 cours\s+Séries A1, A2, C, D/
+      assert_select "#cycle_second li a[href='/niveaux/tle']", text: /Tle\s+1 fiche de cours\s+Séries A1, A2, C, D/
       assert_select "a[href='/niveaux/5eme']", 0
       assert_select "head meta[name=robots]", 0
       assert_select "head link[rel=canonical][href='https://lnclass.com/niveaux']"
-      assert_select "title", "Les cours par niveau · Lnclass"
+      assert_select "title", "Les fiches de cours par niveau · Lnclass"
     end
 
     test "CC-02: without a published course, /niveaux says the courses are coming and is not indexed" do
@@ -41,7 +41,7 @@ module Catalog
       get public_levels_path
 
       assert_response :success
-      assert_select "#levels_empty", text: /Les cours arrivent bientôt\./
+      assert_select "#levels_empty", text: /Les fiches de cours arrivent bientôt\./
       assert_select "head meta[name=robots][content=noindex]"
       assert_select "#cycle_first, #cycle_second", 0
     end
@@ -54,16 +54,16 @@ module Catalog
       get public_level_path("tle")
 
       assert_response :success
-      assert_select "h1", "Cours de Tle"
-      assert_select "title", "Cours de Tle · Lnclass"
-      assert_select "main p.text-mute", text: "4 cours publiés, en 3 matières."
+      assert_select "h1", "Fiches de cours de Tle"
+      assert_select "title", "Fiches de cours de Tle · Lnclass"
+      assert_select "main p.text-mute", text: "4 fiches de cours publiées, en 3 matières."
       assert_equal %w[group_mathematiques group_svt group_philosophie], css_select("#level_groups > section").map { it["id"] }
-      assert_select "#group_mathematiques h2 a[href=?]", "/matieres/mathematiques?niveau=tle", text: /Mathématiques\s+2 cours/
-      assert_select "head meta[name=description][content='Les cours de Tle sur Lnclass : Mathématiques, SVT, Philosophie.']"
+      assert_select "#group_mathematiques h2 a[href=?]", "/matieres/mathematiques?niveau=tle", text: /Mathématiques\s+2 fiches de cours/
+      assert_select "head meta[name=description][content='Les fiches de cours de Tle sur Lnclass : Mathématiques, SVT, Philosophie.']"
       assert_select "head link[rel=canonical][href='https://lnclass.com/niveaux/tle']"
     end
 
-    test "CC-04: six cards per material, then « Voir les 9 cours » to the material page filtered on the level" do
+    test "CC-04: six cards per material, then « Voir les 9 fiches de cours » to the material page filtered on the level" do
       9.times { |index| course("tle", "mathematiques", name: "Cours #{index}") }
       course("tle", "svt")
       course("tle", "physique-chimie")
@@ -72,9 +72,9 @@ module Catalog
       get public_level_path("tle")
 
       assert_select "#group_mathematiques li", 6
-      assert_select "#group_mathematiques_more[href=?]", "/matieres/mathematiques?niveau=tle", text: "Voir les 9 cours"
+      assert_select "#group_mathematiques_more[href=?]", "/matieres/mathematiques?niveau=tle", text: "Voir les 9 fiches de cours"
       assert_select "#group_svt_more", 0
-      assert_select "head meta[name=description][content='Les cours de Tle sur Lnclass : Mathématiques, Physique-Chimie, SVT, ….']"
+      assert_select "head meta[name=description][content='Les fiches de cours de Tle sur Lnclass : Mathématiques, Physique-Chimie, SVT, ….']"
     end
 
     test "CC-05: a series pill only for a series with a course of its own or a common one" do
@@ -95,14 +95,14 @@ module Catalog
 
       get public_levels_path
       assert_select "#cycle_second li", 1
-      assert_select "#level_tle", text: /1 cours/
+      assert_select "#level_tle", text: /1 fiche de cours/
       assert_no_match(/1ère|Intégrales|Limites|Brouillon secret/, response.body)
 
       get public_level_path("tle")
       assert_select "#group_mathematiques li", 1
       assert_select "#group_mathematiques h3", "Suites"
       assert_select "#group_mathematiques p", "Arithmétiques et géométriques"
-      assert_match "1 cours publié, en 1 matière.", response.body
+      assert_match "1 fiche de cours publiée, en 1 matière.", response.body
       assert_no_match(/Intégrales|Limites|Brouillon secret|Cours retiré/, response.body)
     end
 
@@ -133,16 +133,16 @@ module Catalog
       assert_select "#level_cta_top, #level_cta_bottom", 2
     end
 
-    test "CC-08: a signed-in student is offered « Voir mes cours », a teacher « Ouvrir le catalogue », both on the same page" do
+    test "CC-08: a signed-in student is offered « Voir mes fiches de cours », a teacher « Ouvrir le catalogue », both on the same page" do
       published = course("tle", "mathematiques", series: @series.fetch("d"))
 
       sign_in_as create_student_for(published)
       get public_level_path("tle")
       assert_response :success
-      assert_select "#level_cta_top a[href='#{courses_path}']", "Voir mes cours"
+      assert_select "#level_cta_top a[href='#{courses_path}']", "Voir mes fiches de cours"
       assert_select "a[href='#{new_student_registration_path}']", 0
       assert_select "header a[href='#{root_path}']", text: "Mon espace"
-      assert_select "title", "Cours de Tle · Élève · Lnclass"
+      assert_select "title", "Fiches de cours de Tle · Élève · Lnclass"
 
       sign_in_as create_teacher
       get public_levels_path
@@ -162,14 +162,14 @@ module Catalog
       end
     end
 
-    test "CC-08: a signed-in student reads « Voir mes cours » on the series page" do
+    test "CC-08: a signed-in student reads « Voir mes fiches de cours » on the series page" do
       published = course("tle", "mathematiques", series: @series.fetch("d"))
       sign_in_as create_student_for(published)
 
       get public_level_series_path("tle", "d")
 
       assert_response :success
-      assert_select "a[href='#{courses_path}']", text: "Voir mes cours", minimum: 1
+      assert_select "a[href='#{courses_path}']", text: "Voir mes fiches de cours", minimum: 1
     end
 
     test "CC-08: a teacher waiting for a school reads the page, then is sent to the pending account from the catalogue" do
@@ -240,7 +240,7 @@ module Catalog
       get public_level_path("tle")
 
       assert_no_match "Suites", response.body
-      assert_select "#level_empty", text: /Les cours de ce niveau arrivent bientôt\./
+      assert_select "#level_empty", text: /Les fiches de cours de ce niveau arrivent bientôt\./
       assert_select "#level_empty a[href='#{public_levels_path}']", "Voir les autres niveaux"
       assert_select "head meta[name=robots][content=noindex]"
     end
@@ -264,7 +264,7 @@ module Catalog
                      .map { it["name"] || it["rel"] || it["property"] }
       assert_select "head meta[property='og:url'][content='https://lnclass.com/niveaux/tle']"
       assert_select "head meta[property='og:type'][content=website]"
-      assert_select "footer a[href='#{public_levels_path}']", "Les cours par niveau"
+      assert_select "footer a[href='#{public_levels_path}']", "Les fiches de cours par niveau"
     end
   end
 end

@@ -18,7 +18,7 @@ module Queries
         assert_equal "07 01 02 03 04", row.grouped_contact
         assert_equal "Tle D 1", row.classroom_name
         assert_equal Date.new(2026, 9, 1), row.registered_on
-        assert_nil row.material_name
+        assert_empty row.materials
       end
 
       # UDR-0089 §3.2: the school of the student's active primary classroom, nil without one.
@@ -64,8 +64,20 @@ module Queries
 
         row = @query.call(user_id: teacher.id)
 
-        assert_equal [ :teacher, "Lycée moderne de Cocody", "SVT", nil ],
-                     [ row.role, row.school_name, row.material_name, row.classroom_name ]
+        assert_equal [ :teacher, "Lycée moderne de Cocody", [ "SVT" ], nil ],
+                     [ row.role, row.school_name, row.materials.map(&:name), row.classroom_name ]
+      end
+
+      # EPM-06 (UDR-0125 §3.2) : les matières de l'établissement affiché, dans l'ordre, avec leur slug (cases cochées).
+      test "a teacher shows the subjects of the current school, in order" do
+        pc, svt = create_material(name: "Physique-Chimie"), create_material(name: "SVT")
+        school, other = create_school, create_school
+        teacher = create_teacher(school:, materials: [ svt, pc ])
+        add_teacher_school(teacher, other, materials: [ pc ])
+
+        assert_equal [ svt.slug, pc.slug ], @query.call(user_id: teacher.id, current_school_id: school.id).materials.map(&:slug)
+        assert_equal [ pc.slug ], @query.call(user_id: teacher.id, current_school_id: other.id).materials.map(&:slug)
+        assert_empty @query.call(user_id: create_teacher(school: nil).id).materials
       end
 
       # ADR-0094 §4.6 : le profil nomme l'établissement courant de l'enseignant.

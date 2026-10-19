@@ -3,6 +3,9 @@
 # and the clock of a run under ten minutes fail here, in the lint group, before any test runs.
 require "minitest/autorun"
 require "yaml"
+require "fileutils"
+require "open3"
+require "tmpdir"
 load File.expand_path("../../config/ci.rb", __dir__) unless defined?(CI_PLAN)
 
 class CiPlanTest < Minitest::Test
@@ -124,6 +127,49 @@ class CiPlanTest < Minitest::Test
     assert_includes played, "test/performance/catalog/import_course_tree_performance_test.rb"
   end
 
+  # The import performance (≈ 1 min 30) plays locally only when the tree moved on the paths that can change it, always
+  # under CI (GitHub), and whenever git cannot compare. The condition is the shell one of the step, played here in a
+  # throwaway repository whose `bin/rails` is replaced by `echo` : the step prints « test » when it plays.
+  def test_the_import_performance_plays_under_ci_on_a_difference_or_when_git_cannot_compare
+    perf = CI_PLAN.steps_for("perf").last.command
+
+    %w[app/domain app/infrastructure app/jobs db test/performance].each do |path|
+      assert_includes PERF_PATHS, path
+    end
+    CiPlan.files("test/performance/**/*_test.rb").grep_v(/_budget_test/).each { assert_includes perf, it }
+
+    in_repository do |repo|
+      assert_skipped run_perf(perf, repo), "un arbre identique à origin/Develop saute la perf"
+      FileUtils.mkdir_p(File.join(repo, "app/views"))
+      File.write(File.join(repo, "app/views/page.erb"), "x")
+      git(repo, "add", "-A")
+      assert_skipped run_perf(perf, repo), "un chemin hors de la liste la saute encore"
+      assert_played run_perf(perf, repo, "CI" => "true"), "sous CI (GitHub), elle joue"
+
+      FileUtils.mkdir_p(File.join(repo, "script/ci"))
+      File.write(File.join(repo, "script/ci/test_timings.yml"), "x")
+      git(repo, "add", "-A")
+      assert_skipped run_perf(perf, repo), "les durées enregistrées du découpage ne la jouent pas"
+      File.write(File.join(repo, "script/ci/plan.rb"), "x")
+      git(repo, "add", "-A")
+      assert_played run_perf(perf, repo), "un autre fichier de script/ci la joue"
+      git(repo, "rm", "-q", "-f", "--cached", "script/ci/plan.rb", "script/ci/test_timings.yml")
+      FileUtils.rm_rf(File.join(repo, "script"))
+
+      %w[app/domain app/infrastructure app/jobs db test/performance].each do |path|
+        FileUtils.mkdir_p(File.join(repo, path))
+        File.write(File.join(repo, path, "touched.rb"), "x")
+        git(repo, "add", "-A")
+        assert_played run_perf(perf, repo), "un écart sur #{path} la joue"
+        git(repo, "rm", "-q", "-f", "--cached", File.join(path, "touched.rb"))
+        FileUtils.rm_f(File.join(repo, path, "touched.rb"))
+      end
+
+      git(repo, "update-ref", "-d", "refs/remotes/origin/Develop")
+      assert_played run_perf(perf, repo), "sans origin/Develop, elle joue (fail-safe)"
+    end
+  end
+
   # ADR-0069 : Dependabot follows the road of any change, Develop then the promotions, one grouped pull request
   # per ecosystem (17 of the 43 runs of 2026-10-01 were its eight pull requests and their merges on main).
   def test_dependabot_targets_develop_with_one_grouped_pull_request
@@ -178,5 +224,41 @@ class CiPlanTest < Minitest::Test
 
   def test_a_group_list_keeps_the_order_of_the_full_run
     assert_equal CI_PLAN.steps_for("unit,seeds").map(&:title), CI_PLAN.steps_for("seeds, unit").map(&:title)
+  end
+
+  private
+
+  # A git hook (the pre-commit) exports GIT_DIR and GIT_INDEX_FILE: left in place, they would point every command below
+  # at the real repository instead of the throwaway one.
+  def clean_git_env = ENV.keys.grep(/\AGIT_/).to_h { [ it, nil ] }
+
+  def git(repo, *args)
+    Open3.capture2e(clean_git_env, "git", "-C", repo, "-c", "user.name=t", "-c", "user.email=t@t", *args)
+  end
+
+  # A repository whose HEAD is origin/Develop, with one file under each directory of the performance paths.
+  def in_repository
+    Dir.mktmpdir do |repo|
+      %w[app/domain app/infrastructure app/jobs db lib test/performance].each do |dir|
+        FileUtils.mkdir_p(File.join(repo, dir))
+        File.write(File.join(repo, dir, "base.rb"), "x")
+      end
+      git(repo, "init", "-q")
+      git(repo, "add", "-A")
+      git(repo, "commit", "-q", "-m", "base")
+      git(repo, "update-ref", "refs/remotes/origin/Develop", "HEAD")
+      yield repo
+    end
+  end
+
+  def run_perf(command, repo, env = {})
+    Open3.capture2e(clean_git_env.merge("CI" => nil).merge(env), "sh", "-c", command.gsub("bin/rails", "echo"), chdir: repo).first
+  end
+
+  def assert_played(output, message) = assert_match(/^test test\//, output, message)
+
+  def assert_skipped(output, message)
+    assert_match(/skipped locally/, output, message)
+    refute_match(/^test test\//, output, message)
   end
 end

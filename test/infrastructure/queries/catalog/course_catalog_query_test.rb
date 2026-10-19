@@ -151,12 +151,23 @@ module Queries
       end
 
       # CA-5 (UDR-0077 §3.2) : l'enseignant, sa matière seule, aux niveaux (et séries) de ses classes.
-      test "material_id restreint à une matière ; avec l'audience d'un enseignant, sa matière à ses niveaux seulement" do
-        assert_equal [ @cellule, @genetique ].map(&:slug), catalog(:teacher, material_id: @svt.id).map(&:slug)
+      test "material_ids restreint à ses matières ; avec l'audience d'un enseignant, ses matières à ses niveaux seulement" do
+        assert_equal [ @cellule, @genetique ].map(&:slug), catalog(:teacher, material_ids: [ @svt.id ]).map(&:slug)
 
         audience = Entities::Catalog::LevelAudience.new(pairs: [ [ @tle.id, @genetique.series_id ] ])
-        assert_equal [ @genetique.slug ], catalog(:teacher, audience:, material_id: @svt.id).map(&:slug)
-        assert_empty catalog(:teacher, audience: Entities::Catalog::LevelAudience.none, material_id: @svt.id)
+        assert_equal [ @genetique.slug ], catalog(:teacher, audience:, material_ids: [ @svt.id ]).map(&:slug)
+        assert_empty catalog(:teacher, audience: Entities::Catalog::LevelAudience.none, material_ids: [ @svt.id ])
+      end
+
+      # EPM-12 (UDR-0126 §3.1) : plusieurs matières, rangées par matière avec leurs comptes ; ?material= hors portée : rien.
+      test "a teacher of two subjects: both, grouped by subject, counted by subject; a filter outside them gives nothing" do
+        page = CourseCatalogQuery.new.call(actor: actor(:teacher), material_ids: [ @svt.id, @philo.id ], group_by_material: true)
+
+        assert_equal 3, page.total_count
+        assert_equal({ @svt.slug => 2, @philo.slug => 1 }, page.material_counts)
+        assert_equal 2, page.rows.map(&:material_slug).chunk_while { _1 == _2 }.count, "une suite de cartes par matière"
+        assert_empty catalog(:teacher, material_ids: [ @svt.id ], material: @philo.slug)
+        assert_equal({}, CourseCatalogQuery.new.call(actor: actor(:teacher), material_ids: [ @svt.id ]).material_counts)
       end
 
       test "le filtre par matière et le filtre par niveau se combinent, par slug" do

@@ -76,7 +76,7 @@ class SchoolAdmin::LevelsControllerTest < ActionDispatch::IntegrationTest
       assert_equal [ first, second, third ].map { "classroom_#{it.public_id}" }, cards.map { it["id"] }
     end
     [ first, second, third ].each do |klass|
-      assert_select "#{card(klass)} a", count: 1
+      assert_select "#{card(klass)} > a", count: 1
       assert_select "#{card(klass)} a[href=?]", school_admin_classroom_path(klass.public_id) do
         assert_select "span.rounded-full.bg-tint-indigo img[alt=''][aria-hidden=true][src*=?]", "levels/3eme", count: 1
         assert_select "p", text: klass.name

@@ -44,7 +44,8 @@ module SchoolAdmin
       UseCases::School::ReinstateTeacher.new(
         users: Repositories::Identity::UserRepository.new, schools: Repositories::School::SchoolRepository.new,
         departures: Repositories::School::TeacherDepartureRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
-        policy: Policies::School::ManageSchoolTeachersPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
+        policy: Policies::School::ManageSchoolTeachersPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone,
+        teacher_materials: Repositories::Identity::TeacherMaterialRepository.new
       )
     end
   end

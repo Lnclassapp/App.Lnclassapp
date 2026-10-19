@@ -11,7 +11,6 @@ module Repositories
         profile = @repository.find_by_user_id(user_id: teacher.id)
 
         assert_equal teacher.id, profile.user_id
-        assert_equal teacher.teacher_profile.material_id, profile.material_id
         assert_not profile.onboarded?
       end
 

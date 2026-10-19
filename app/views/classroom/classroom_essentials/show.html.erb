@@ -2,8 +2,8 @@
 <%# Rôle : en-tête de la fiche, élèves à revoir et fiche levée, puis ses exercices publiés, chacun avec sa bascule (échéance, modale des jours) et la réussite %>
 <%#        de la classe ; la fiche ne s'assigne plus %>
 <%# ADR  : 0048, 0072, 0101 · UDR : 0006, 0007, 0028, 0029 (amendée le 2026-10-02), 0054, 0062 (§3.4), 0069 (§3.8), 0121 · retour : le cours dans la classe %>
+<%# Une classe archivée n'a plus cette page (404, Lot C de vie-de-la-classe) : chaque exercice garde sa bascule. %>
 <% essential = @essential.essential %>
-<% active = @classroom.status == "active" %>
 <% page_title essential.name %>
 <% content_for :nav_key, "classrooms" %>
 <%= ui_back_link @essential.course_name, href: classroom_course_path(@classroom.public_id, @essential.course_slug) %>
@@ -16,9 +16,6 @@
       <p class="text-mute"><%= essential.subtitle %></p>
     <% end %>
   </div>
-  <% unless active %>
-    <p class="mt-5 rounded-ln bg-warning-soft px-4 py-3 text-sm text-warning"><%= t(".archived_notice") %></p>
-  <% end %>
 <% end %>
 
 <%# UDR-0121 §3.2 : qui aider, au-dessus de quoi assigner ; absent sans lacune. %>
@@ -29,9 +26,7 @@
 <section id="classroom_essential_exercises" aria-labelledby="classroom_essential_exercises_title">
   <div class="mb-4">
     <h2 id="classroom_essential_exercises_title" class="font-display text-xl font-extrabold"><%= t(".exercises_title") %></h2>
-    <% if active %>
-      <p class="mt-1 text-sm text-mute"><%= t(".hint") %></p>
-    <% end %>
+    <p class="mt-1 text-sm text-mute"><%= t(".hint") %></p>
   </div>
   <% if @essential.exercises.empty? %>
     <%= ui_empty_state title: t(".empty"), description: t(".empty_description"), icon: "clipboard-document-list" %>
@@ -51,19 +46,10 @@
               <% end %>
             </p>
           </div>
-          <% if active %>
-            <%= render "classroom/assignments/toggle", classroom_public_id: @classroom.public_id, assignable_type: "Exercise",
-                       assignable_key: exercise.public_id, assignable_name: exercise.title, classroom_name: @classroom.name,
-                       assignment_public_id: exercise.assignment_public_id, due_on: exercise.due_on,
-                       needs_session_days: @essential.needs_session_days %>
-          <% elsif exercise.assignment_public_id %>
-            <div class="flex shrink-0 flex-wrap items-center gap-2">
-              <%= ui_badge t("classroom.assignments.toggle.assigned"), tone: :success, icon: "check" %>
-              <% if exercise.due_on %>
-                <span class="text-sm text-mute"><%= due_for_teacher(exercise.due_on) %></span>
-              <% end %>
-            </div>
-          <% end %>
+          <%= render "classroom/assignments/toggle", classroom_public_id: @classroom.public_id, assignable_type: "Exercise",
+                     assignable_key: exercise.public_id, assignable_name: exercise.title, classroom_name: @classroom.name,
+                     assignment_public_id: exercise.assignment_public_id, due_on: exercise.due_on,
+                     needs_session_days: @essential.needs_session_days %>
         </li>
       <% end %>
     </ul>

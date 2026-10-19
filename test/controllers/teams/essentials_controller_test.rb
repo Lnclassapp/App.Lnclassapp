@@ -91,6 +91,16 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=refresh]:not([request-id])", 1
   end
 
+  # UDR-0130 §3: the toast's exact value is set by the decision, so it is written out here.
+  test "l'équipe crée une fiche de révision" do
+    sign_in_as @member
+
+    post teams_course_essentials_path(@course.slug), params: essential_params(name: "Réciproque"), as: :turbo_stream
+
+    assert_response :success
+    assert_select "turbo-stream[action=append][target=toasts]", text: including("Fiche de révision « Réciproque » créée (brouillon).")
+  end
+
   test "an unknown course has no creation form, and receives no essential" do
     sign_in_as @member
 
@@ -333,6 +343,18 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=append][target=toasts] [role=alert]", text: including(tl("transition.parent_not_published"))
     assert_select "turbo-stream[action=replace]", 0
     assert_equal "draft", essential.reload.status
+  end
+
+  # UDR-0130 §3 (error state): the refusal's exact value is set by the decision, so it is written out here.
+  test "la fiche de révision d'une fiche de cours en brouillon ne se publie pas, et le refus le dit" do
+    essential = create_essential(course: create_course(status: "draft"), status: "draft")
+    sign_in_as @member
+
+    patch publish_teams_essential_path(essential.slug), as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_select "turbo-stream[action=append][target=toasts] [role=alert]",
+                  text: including("La fiche de cours de cette fiche de révision n'est pas publiée : publiez d'abord la fiche de cours.")
   end
 
   test "archiving keeps the exercises, their sessions and the assignments: nothing cascades" do

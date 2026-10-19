@@ -1,14 +1,14 @@
 # UDR-0125 : Matières de l'enseignant — une seconde matière facultative à l'inscription, une ligne « Matières » modifiable en modale sur le profil
 <!-- index
 titre: Matières de l'enseignant à l'inscription et au profil
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-16 ; matières par établissement)*
 adr-lie: [0103](../adr/0103-matieres-de-l-enseignant-par-une-table-de-jointure.md), [0083](../adr/0083-inscription-enseignant-en-deux-voies.md)
 problematique: L'enseignant ne choisit qu'une matière, à l'inscription, et ne peut plus la changer. Inscription : « Matière enseignée » puis « Autre matière (facultatif) », deux listes simples. Profil : ligne « Matières » (badges), « Modifier » ouvre la modale « Mes matières » (cases, 1 à 3) ; refus sous le groupe, toast au succès. Amende UDR-0079 et UDR-0041.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16) — matières par rattachement enseignant-établissement |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/enseignant-plusieurs-matieres`](../../chantiers/enseignant-plusieurs-matieres/memo.md) — Lot A |
 | **ADR lié** | [ADR-0103](../adr/0103-matieres-de-l-enseignant-par-une-table-de-jointure.md) §4.4 |
@@ -22,6 +22,8 @@ problematique: L'enseignant ne choisit qu'une matière, à l'inscription, et ne 
 L'enseignant bivalent (PC et SVT, Maths et PC) choisit une matière à l'inscription et n'a ensuite aucun moyen d'en déclarer une seconde : la ligne « Matière » de « Mon profil » est en lecture seule (UDR-0041). Son seul recours est un second compte.
 
 ## 2. Décision
+
+> **Réponse du porteur (2026-10-16)** : les matières sont celles du **rattachement enseignant-établissement** (ADR-0103 §4). « Mes matières » remplace la liste de l'**établissement courant** ; les autres établissements de l'enseignant gardent la leur. Un enseignant sans établissement courant n'a ni la ligne ni la modale.
 
 1. **Inscription : deux listes simples**, pas de cases à cocher. La première reste obligatoire ; la seconde, « Autre matière (facultatif) », couvre la bivalence. Une liste de 6 à 15 cases rallongerait un formulaire déjà long sur téléphone, pour la majorité qui n'a qu'une matière (memo Q11).
 2. **Profil : une modale « Mes matières »** avec des cases, sur le modèle des autres modifications du profil (UDR-0041, UDR-0006). C'est là qu'on ajoute la troisième, qu'on retire ou qu'on corrige.
@@ -99,7 +101,7 @@ Même gabarit que `identity/profile_names/edit.html.erb` (frame `modal`, `profil
 |---|---|
 | `edit.title` | « Mes matières » |
 | `edit.label` | « Les matières que vous enseignez » |
-| `edit.hint` | « 1 à 3 matières. Votre catalogue, vos classes et votre accueil montrent les cours de chacune. » |
+| `edit.hint` | « 1 à 3 matières, pour %{school}. Votre catalogue, vos classes et votre accueil y montrent les cours de chacune. » |
 | `edit.kept_assignments` | « Retirer une matière ne retire pas les exercices déjà assignés. » |
 | `edit.submit` · `edit.cancel` | « Enregistrer » · « Annuler » |
 | `update.updated` | « Vos matières sont enregistrées. » |

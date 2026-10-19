@@ -1,7 +1,9 @@
 <%# 🌐 UI · classroom/teacher_homes/_course_levels — bulles de la section « Cours » de l'accueil enseignant %>
 <%# Rôle : une bulle par couple niveau-série enseigné, vers le catalogue filtré, puis « Inviter » : WhatsApp avec le lien /i/<jeton> %>
-<%# ADR  : 0026, 0063, 0083 · UDR : 0069 (§3.3, §3.5), 0079 (§3.7) · Stimulus : identity--share (partage compté « whatsapp ») %>
+<%# ADR  : 0026, 0063, 0083, 0103 · UDR : 0069 (§3.3, §3.5), 0079 (§3.7), 0126 (§3.3 : plusieurs matières) · Stimulus : identity--share (partage compté « whatsapp ») %>
 <%# locals: (home:, invite:) -%>
+<%# UDR-0126 §3.3 : une matière, son illustration et son filtre ; plusieurs, l'illustration générique et toutes ses matières. %>
+<% single = home.materials.first unless home.several_materials? %>
 <% if home.course_levels.empty? %>
   <p id="teacher_home_courses_empty" class="mb-4 text-sm text-mute"><%= t(".empty") %></p>
 <% end %>
@@ -11,9 +13,9 @@
       <% home.course_levels.each do |level| %>
         <li>
           <%= ui_subject_bubble label: level.label,
-                                href: courses_path({ level: level.level_slug, series: level.series_slug, material: home.material_slug }.compact),
-                                illustration: subject_illustration(home.material_slug),
-                                sr_suffix: t(".sr_level", material: home.material_name),
+                                href: courses_path({ level: level.level_slug, series: level.series_slug, material: single&.slug }.compact),
+                                illustration: subject_illustration(single&.slug),
+                                sr_suffix: single ? t(".sr_level", material: single.name) : t(".sr_level_many"),
                                 id: "course_level_#{[ level.level_slug, level.series_slug ].compact.join('_')}" %>
         </li>
       <% end %>

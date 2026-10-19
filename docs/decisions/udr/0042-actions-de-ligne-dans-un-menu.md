@@ -116,3 +116,12 @@ Un menu plutôt qu'une rangée d'icônes : le libellé reste lisible, la destruc
 - **Quand** : un tableau dont le nombre de lignes fait peser les confirmations copiées sur le budget de HTML de l'ADR-0067 (« Enseignants » : 60 confirmations, 198 Ko). Un tableau court garde ses `<dialog>` de ligne.
 - **Règles** : l'action `GET` applique la policy de l'écriture qu'elle confirme **avant toute lecture**, et refuse comme elle (403, 404) ; titre, texte, boutons, ids et formulaire sont ceux de la `<dialog>` qu'elle remplace ; focus sur « Annuler » à l'ouverture et retour au ⋮ à la fermeture (amendement du 2026-09-29) ; « Annuler », Échap ou le fond vident le frame, et l'entrée recharge la confirmation.
 - Premier écran : « Enseignants » de la direction (UDR-0056 §3.3, amendé). Preuve : `test/controllers/school_admin/teachers_controller_test.rb`, `test/system/school_admin/teachers_test.rb`.
+
+## Amendement du 2026-10-12 — un menu absolu ne sort jamais de l'écran
+
+*Demande du porteur du 2026-10-12, au challenger du chantier [`renommage-fiche-revision`](../../chantiers/renommage-fiche-revision/memo.md).*
+
+- **Constat** : à 390 px, le ⋮ de l'en-tête d'une fiche de cours passe sous le titre, à gauche. Son menu, aligné à droite du bouton (`right-0`), sortait de l'écran par la gauche : « Modifier » et le début des libellés étaient coupés.
+- **Règle** : un menu **absolu** (sans `fixed`) est décalé horizontalement à l'ouverture, de ce qui dépasse, pour garder 8 px de marge de chaque côté de l'écran. Le décalage passe par la propriété CSS `translate`. Il est remis à zéro à la fermeture. Le menu `fixed` garde son placement (§3).
+- **Implémentation** : `dropdown_controller#nudge`, appelé par `place` pour tout menu non `fixed`. Aucune vue ne change.
+- **Preuve** : `test/system/teams/row_actions_menu_test.rb`, « on a phone, the menu of a course header opens whole inside the screen ». Ce test était rouge avant le correctif.

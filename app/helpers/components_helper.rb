@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069, 0071, 0076, 0079, 0080, 0084 · ADR : 0009, 0049, 0067, 0083
+# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069, 0071, 0076, 0079, 0080, 0084, 0127 · ADR : 0009, 0049, 0067, 0083, 0103
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -356,6 +356,11 @@ module ComponentsHelper
   def ui_subject_badge(label, category:, size: :md)
     config = SUBJECT_CATEGORIES.fetch(category.to_s.to_sym, SUBJECT_FALLBACK)
     ui_badge(label, tone: config[:tone], size:, icon: config[:icon])
+  end
+
+  # ADR-0103 §4.5 : les matières d'un enseignant, dans l'ordre (MaterialTag : name, category), un badge chacune.
+  def ui_subject_badges(tags, size: :md, gap: "gap-1.5")
+    tag.div(safe_join(tags.map { ui_subject_badge(it.name, category: it.category, size:) }), class: class_names("flex flex-wrap", gap))
   end
 
   # Photo si `src:`, sinon initiales (premier et dernier mot) sur une couleur stable dérivée de `tone_seed:` (le

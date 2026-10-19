@@ -1,14 +1,14 @@
 # UDR-0127 : Plusieurs matières sur la page de classe et dans les listes — une bande de cours par matière, un badge par fiche à revoir, toutes les matières à côté du nom
 <!-- index
 titre: Plusieurs matières sur la page de classe, dans les devoirs et à côté du nom
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-16 ; matières par établissement)*
 adr-lie: [0103](../adr/0103-matieres-de-l-enseignant-par-une-table-de-jointure.md), [0101](../adr/0101-remediation-implicite-exercice-propose-et-lecture-enseignant.md)
 problematique: La page de classe ne montre que les cours de la matière unique de l'enseignant. Avec plusieurs : bloc « Cours » en une bande par matière (titre badge), fiches à revoir avec badge, exercices assignés et suivi inchangés ; signature « M. Kouassi · PC, SVT » ; colonne « Matières » (badges) pour la direction et l'équipe. Une seule matière : rien ne change. Amende UDR-0027, 0062, 0121, 0071 §3.2, 0052, 0100.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16) — matières par rattachement enseignant-établissement |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/enseignant-plusieurs-matieres`](../../chantiers/enseignant-plusieurs-matieres/memo.md) — Lots C et D |
 | **ADR lié** | [ADR-0103](../adr/0103-matieres-de-l-enseignant-par-une-table-de-jointure.md) §4.5 · [ADR-0101](../adr/0101-remediation-implicite-exercice-propose-et-lecture-enseignant.md) §4.4 (amendé) |
@@ -22,6 +22,8 @@ problematique: La page de classe ne montre que les cours de la matière unique d
 Sur la page d'une classe, le bloc « Cours » est le seul chemin de l'enseignant vers les exercices (UDR-0062 §3.4) : il ne montre que les cours de **sa** matière. Un enseignant de PC et SVT de la 3ème 2 ne peut donc pas assigner un exercice de SVT depuis sa classe. Ailleurs, son nom s'accompagne d'**une** matière : signature d'annonce, « Enseignants » de la direction, fiche d'établissement de l'équipe.
 
 ## 2. Décision
+
+> **Réponse du porteur (2026-10-16)** : « ses matières » se lit **dans l'établissement de la classe**, qui est l'établissement courant (ADR-0094 §10). La signature d'une annonce lit la liste de l'établissement de l'annonce ; les listes de la direction et de l'équipe, celle de l'établissement affiché ; les comptes de l'équipe comptent un enseignant dans chacune de ses matières.
 
 1. **Une seule matière : rien ne change.**
 2. **Une bande par matière** dans le bloc « Cours », dans l'ordre de ses matières : il cherche « un cours de SVT pour la 3ème », pas « un cours parmi vingt ». Une bande unique mélangée l'obligerait à lire chaque badge.

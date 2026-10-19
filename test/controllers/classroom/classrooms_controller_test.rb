@@ -20,6 +20,17 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
   def scope = "classroom.classrooms"
 
+  # ADR-0098, UDR-0111 : modifier une classe est un geste de l'équipe et de la direction, pas de l'enseignant.
+  test "l'enseignant de la classe n'a ni lien ni texte « Modifier la classe »" do
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_response :success
+    assert_select "a[href*='classroom-settings'], a[href*='classroom_settings']", count: 0
+    assert_no_match(/Modifier la classe/, response.body)
+  end
+
   test "l'enseignant de la classe voit l'en-tête, le bloc du lien et ses élèves, sans code ni « Cours assignés »" do
     course = create_course(name: "Nombres entiers", material: create_material(name: "Mathématiques", category: "science"))
     create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course:)), by: @teacher)
@@ -360,10 +371,13 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     get classroom_path(classroom.public_id)
 
     assert_select "section#classroom_courses h2", text: I18n.t("#{scope}.courses.title")
+    # UDR-0130 : une section de la page nomme l'objet, « Fiches de cours », et compte ses fiches de révision.
+    assert_select "section#classroom_courses h2", text: "Fiches de cours"
     assert_select "section#classroom_courses li", 1
     assert_select "#classroom_course_#{genetics.slug}" do
       assert_select "a[href='#{classroom_course_path(classroom.public_id, genetics.slug)}']", text: "Génétique et évolution"
       assert_select "p", text: /#{I18n.t("#{scope}.courses.essentials", count: 1)}/
+      assert_select "p", text: /1 fiche de révision/
     end
     assert_no_match(/Fonctions|Autre niveau/, response.body)
   end
@@ -393,6 +407,40 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
       assert_select "li[id^='assignment_'][hidden]", 1
       assert_select "button[data-reveal-target=button]", text: /Voir plus/
     end
+  end
+
+  # EPM-18, EPM-19 (UDR-0127 §3.1, §3.3) : une bande par matière, titrée ; le collègue d'une autre matière ne voit que la
+  # sienne, mais tous deux voient les exercices assignés de l'autre, avec leur badge.
+  test "EPM-18 : l'enseignant de deux matières lit une bande par matière ; son collègue, la sienne et les exercices de l'autre" do
+    pc = create_material(name: "Physique-Chimie", category: "science")
+    svt = create_material(name: "SVT", category: "science")
+    maths = create_material(name: "Mathématiques", category: "science")
+    level = create_level(name: "3ème")
+    classroom = create_classroom(school: @school, level:, name: "3ème 2")
+    both = create_teacher(school: @school, materials: [ pc, svt ], classrooms: [ classroom ])
+    colleague = create_teacher(school: @school, material: maths, classrooms: [ classroom ])
+    optics = create_course(level:, material: pc, name: "Optique")
+    cells = create_course(level:, material: svt, name: "La cellule")
+    create_course(level:, material: maths, name: "Fonctions")
+    create_assignment(classroom:, assignable: create_exercise(title: "Les tissus", essential: create_essential(course: cells)), by: both)
+    sign_in_as both
+
+    get classroom_path(classroom.public_id)
+
+    assert_equal [ "classroom_courses_#{pc.slug}", "classroom_courses_#{svt.slug}" ],
+                 css_select("#classroom_courses div[id^=classroom_courses_]").map { it["id"] }
+    assert_select "#classroom_courses_#{pc.slug} h3", text: /Physique-Chimie/
+    assert_select "#classroom_courses_#{pc.slug} ul[aria-label='Fiches de cours de Physique-Chimie'] #classroom_course_#{optics.slug}"
+    assert_no_match(/Fonctions/, response.body)
+    sign_out
+    sign_in_as colleague
+
+    get classroom_path(classroom.public_id)
+
+    assert_select "#classroom_courses h3", 0
+    assert_select "#classroom_courses li", 1
+    assert_select "#assigned_exercises", text: /Les tissus/
+    assert_select "#assigned_exercises", text: /SVT/
   end
 
   test "bloc « Cours » sans cours publié : l'état vide" do
@@ -636,7 +684,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
   def class_with_gaps
     maths = create_material(name: "Mathématiques")
-    @teacher.teacher_profile.update!(material: maths)
+    set_teacher_materials(@teacher, @classroom.school, [ maths ])
     course = create_course(level: @classroom.level, material: maths, name: "Géométrie")
     thales = create_essential(course:, name: "Théorème de Thalès")
     physics = create_essential(course: create_course(level: @classroom.level, name: "Optique"), name: "Lentilles")
@@ -675,7 +723,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
   test "fiches à revoir : trois lignes, puis « Voir plus » qui révèle la suite sans requête" do
     maths = create_material(name: "Mathématiques")
-    @teacher.teacher_profile.update!(material: maths)
+    set_teacher_materials(@teacher, @classroom.school, [ maths ])
     course = create_course(level: @classroom.level, material: maths)
     students = 4.times.map { create_student(classroom: @classroom) }
     { "Une" => 1, "Quatre" => 4, "Deux" => 2, "Trois" => 3 }.each do |name, count|

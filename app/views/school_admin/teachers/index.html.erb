@@ -1,6 +1,6 @@
 <%# 🌐 UI · school_admin/teachers/index — « Enseignants » de la direction (DS-06, GD-14) %>
 <%# Rôle : une ligne par enseignant : nom, matière, classes de l'année ; établissement actif : menu ⋮ « Retirer », confirmation à la demande %>
-<%# ADR  : 0065, 0067, 0071 · UDR : 0005, 0042, 0052, 0054, 0056 %>
+<%# ADR  : 0065, 0067, 0071 · UDR : 0005, 0042, 0052, 0054, 0056 · UDR-0127 §3.5 (matières) %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "teachers" %>
 <%= ui_page_header title: t(".title"), subtitle: t(".subtitle", school: @overview.school_name, count: @overview.teachers.size) do %>
@@ -32,8 +32,9 @@
 
 <tr id="teacher_<%= teacher.public_id %>">
 <th scope="row" class="px-4 py-3 font-medium text-ink"><%= teacher.name %></th>
-<% if teacher.material_name %>
-<td class="px-4 py-3"><%= ui_subject_badge teacher.material_name, category: teacher.material_category, size: :sm %></td>
+<% if teacher.materials.any? %>
+<%# UDR-0127 §3.5 : un badge par matière ; trois passent à la ligne dans leur cellule, sans élargir le tableau. %>
+<td class="px-4 py-3"><%= ui_subject_badges teacher.materials, size: :sm, gap: "gap-1" %></td>
 <% else %>
 <td class="px-4 py-3"><span aria-hidden="true">—</span><span class="sr-only"><%= t(".missing") %></span></td>
 <% end %>

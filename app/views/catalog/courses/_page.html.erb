@@ -1,9 +1,11 @@
 <%# 🌐 UI · catalog/courses/_page — une page de cartes du catalogue, puis le frame différé de la suivante %>
-<%# Rôle : 24 cartes (CourseCatalogQuery::PER_PAGE), icônes dessinées une fois par page ; élève : groupes par matière, titre non répété d'une page à l'autre (after_material) ; au bas, la page suivante, chargée au défilement, ou son lien sans JavaScript %>
-<%# ADR  : 0035, 0067, 0076 (§4.2 : hors de l'écran à l'arrivée), 0090 · UDR : 0013 (amendement du 2026-10-05), 0057, 0077, 0085 (§3.2, §3.4) · nested : page chargée dans le frame de la précédente %>
+<%# Rôle : 24 cartes (CourseCatalogQuery::PER_PAGE), icônes dessinées une fois par page ; élève et enseignant de plusieurs matières : groupes par matière, titre non répété d'une page à l'autre (after_material) ; au bas, la page suivante, chargée au défilement, ou son lien sans JavaScript %>
+<%# ADR  : 0035, 0067, 0076 (§4.2 : hors de l'écran à l'arrivée), 0090, 0103 · UDR : 0013 (amendement du 2026-10-05), 0057, 0077, 0085 (§3.2, §3.4), 0126 (§3.1) · nested : page chargée dans le frame de la précédente %>
 <%# locals: (page:, nested: false) -%>
 <% team = current_actor.team? %>
 <% student = current_actor.student? %>
+<%# UDR-0126 §3.1 : les titres de groupe de l'élève, sur la grille de l'enseignant ; sans titre dans une seule matière filtrée. %>
+<% teacher_grouped = teacher_grouped? %>
 <% filters = @filters.compact_blank %>
 <%# Une carte porte ses icônes (matière, flèche, coche) : dessinées une fois par page, reprises par <use> (ADR-0067) ; les
     pages suivantes préfixent leurs <symbol>, pour qu'aucun id ne se répète dans la page. %>
@@ -35,6 +37,27 @@
         <% previous = first.material_slug %>
       <% end %>
     </div>
+  <% elsif teacher_grouped %>
+    <% previous = (after_material if nested) %>
+    <div id="<%= nested ? "courses_groups_page_#{page.page}" : "courses_groups" %>" class="<%= class_names("space-y-6", "mt-5" => nested) %>">
+      <% page.rows.chunk_while { |one, other| one.material_slug == other.material_slug }.each do |rows| %>
+        <% first = rows.first %>
+        <% grid = capture do %>
+          <ul class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            <%= render partial: "catalog/courses/course_card", collection: rows, as: :course, locals: { show_status: false } %>
+          </ul>
+        <% end %>
+        <% if @filters[:material].present? || first.material_slug == previous %>
+          <div><%= grid %></div>
+        <% else %>
+          <section id="courses_group_<%= first.material_slug %>" aria-labelledby="courses_group_<%= first.material_slug %>_title">
+            <%= render "catalog/courses/course_group_title", course: first, count: page.material_counts.fetch(first.material_slug) %>
+            <%= grid %>
+          </section>
+        <% end %>
+        <% previous = first.material_slug %>
+      <% end %>
+    </div>
   <% else %>
     <ul id="<%= nested ? "courses_list_page_#{page.page}" : "courses_list" %>" class="<%= class_names("grid gap-5 sm:grid-cols-2 xl:grid-cols-3", "mt-5" => nested) %>">
       <%= render partial: "catalog/courses/course_card", collection: page.rows, as: :course, locals: { show_status: team } %>
@@ -43,7 +66,7 @@
 <% end %>
 <% if page.page < page.pages %>
   <% next_page = page.page + 1 %>
-  <% next_path = courses_path(**filters, page: next_page, after_material: (page.rows.last.material_slug if student)) %>
+  <% next_path = courses_path(**filters, page: next_page, after_material: (page.rows.last.material_slug if student || teacher_grouped)) %>
   <%# Demandé quand il entre à l'écran ; le bouton vise ce frame (sans JavaScript, il ouvre la page suivante). %>
   <%= turbo_frame_tag "courses_page_#{next_page}", src: next_path, loading: :lazy, target: "_top", class: (student ? "mt-3 block" : "mt-5 block") do %>
     <div class="flex justify-center py-2">

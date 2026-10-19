@@ -10,8 +10,7 @@ module Repositories
         record = Orm::TeacherProfile.find_by(user_id:)
         return if record.nil?
 
-        Entities::Identity::TeacherProfile.new(user_id: record.user_id, material_id: record.material_id,
-                                               onboarding_completed_at: record.onboarding_completed_at)
+        Entities::Identity::TeacherProfile.new(user_id: record.user_id, onboarding_completed_at: record.onboarding_completed_at)
       end
 
       # Idempotent : une date déjà posée n'est jamais déplacée.

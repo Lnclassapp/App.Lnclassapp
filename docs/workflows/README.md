@@ -83,8 +83,9 @@ C'est la phase que la v1 n'avait pas, et c'est celle qui manquait le plus.
 
 1. **Contradiction empirique** — un rôle distinct de celui qui a écrit le code **exécute** : il lance les tests, ouvre l'application, refait le parcours, mesure. Il ne relit pas le code, il le met à l'épreuve.
 2. **Les portes** — pureté du domaine, rubocop, tests, parcours système, brakeman. Voir [ce qui bloque](../guide/conventions.md#7-ce-qui-bloque).
-3. **PR unique** vers `Develop`, référençant le chantier, l'ADR et l'UDR.
-4. **Clôture** — `journal.md` du chantier mis à jour : ce qui a été appris, ce qui a dérapé, ce qui reste ouvert.
+3. **Une CI complète par PR.** Entre deux lots, la preuve est légère : les tests des fichiers touchés, et `bin/system-changed` quand le lot touche une vue, un contrôleur, un composant, du CSS ou du Stimulus ([onboarding §4](../guide/onboarding.md)). `bin/ci-quiet` se joue **une seule fois par PR**, sur son head final, après les revues et leurs corrections. Une CI rouge corrigée se rejoue : le head a changé.
+4. **PR unique** vers `Develop`, référençant le chantier, l'ADR et l'UDR.
+5. **Clôture** — `journal.md` du chantier mis à jour : ce qui a été appris, ce qui a dérapé, ce qui reste ouvert.
 
 > Un reviewer qui lit du code ne prouve rien. Un challenger qui l'exécute prouve.
 

@@ -1,12 +1,13 @@
 # 🔌 INFRA · Queries::School::DepartedTeachersQuery
 # Rôle : « Enseignants retirés » de la direction : départs ouverts de l'établissement, enseignant qui n'y est plus rattaché,
 #        qu'il ait un autre établissement ou non ; rien n'en dit l'autre établissement
-# ADR  : 0006, 0071, 0094 · UDR : 0056, 0100 (§3.3) · deux requêtes, quel que soit le volume
+# ADR  : 0006, 0071, 0094, 0103 · UDR : 0056, 0100 (§3.3), 0127 (§3.5) · deux requêtes, quel que soit le volume
 module Queries
   module School
     class DepartedTeachersQuery
       Overview = Data.define(:school_name, :school_active, :teachers)
-      Row = Data.define(:public_id, :name, :material_name, :material_category, :detached_at)
+      # materials : ses matières dans cet établissement, gardées après le retrait (ADR-0103 §4.1).
+      Row = Data.define(:public_id, :name, :materials, :detached_at)
 
       ACTIVE = "active".freeze
       FULL_NAME = Arel.sql("users.first_name || ' ' || users.last_name")
@@ -23,14 +24,15 @@ module Queries
       private
 
       def rows(school_id)
+        materials = Queries::Identity::TeacherMaterialsQuery.column(:teacher_school_departures)
         Orm::TeacherSchoolDeparture.joins(:teacher)
-                                   .joins("LEFT JOIN teacher_profiles ON teacher_profiles.user_id = teacher_school_departures.teacher_id")
-                                   .joins("LEFT JOIN materials ON materials.id = teacher_profiles.material_id")
                                    .where(school_id:, reinstated_at: nil, users: { anonymized_at: nil })
                                    .where(NOT_BACK)
                                    .order(detached_at: :desc, id: :desc)
-                                   .pluck("users.public_id", FULL_NAME, "materials.name", "materials.category", :detached_at)
-                                   .map { Row.new(*it) }
+                                   .pluck("users.public_id", FULL_NAME, materials, :detached_at)
+                                   .map do |public_id, name, tags, detached_at|
+                                     Row.new(public_id:, name:, materials: Queries::Identity::TeacherMaterialsQuery.from_json(tags), detached_at:)
+                                   end
       end
     end
   end

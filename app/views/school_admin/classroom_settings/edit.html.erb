@@ -1,0 +1,15 @@
+<%# 🌐 UI · school_admin/classroom_settings/edit — « Modifier la classe », servie dans le frame « modal » de la page d'un niveau %>
+<%# Rôle : modale ouverte dès son arrivée ; un refus la re-rend en 422 avec la saisie ; sans JavaScript, une page complète %>
+<%# ADR  : 0065, 0098 · UDR : 0110, 0111, 0054 · l'établissement est celui du compte %>
+<% title = t(".title", name: @settings.name) %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title:, id: "classroom-settings-modal", open: true, size: :sm, document_title: page_title(title) do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t("shared.classroom_settings_form.cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t("shared.classroom_settings_form.submit"), type: :submit, form: "classroom-settings-form", icon: "check",
+                    data: { turbo_submits_with: t("shared.classroom_settings_form.submitting") } %>
+    <% end %>
+    <%= render "shared/classroom_settings_form", input: @form, settings: @settings,
+                                                 url: school_admin_classroom_setting_path(@settings.public_id) %>
+  <% end %>
+<% end %>

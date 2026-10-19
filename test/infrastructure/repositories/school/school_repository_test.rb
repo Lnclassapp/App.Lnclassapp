@@ -126,6 +126,15 @@ module Repositories
         assert_not Orm::Classroom.exists?(classroom.id)
       end
 
+      test "ADR-0103 : la liste de matières d'un enseignant parti de lui-même part avec l'établissement" do
+        record = create_school(drena: @drena)
+        teacher = create_teacher(school: record)
+        Orm::TeacherSchool.where(teacher:).delete_all
+
+        assert @repository.delete_if_unreferenced(id: record.id).success?
+        assert_not Orm::TeacherSchoolMaterial.exists?(teacher_id: teacher.id)
+      end
+
       test "refuse de supprimer un établissement dont une classe a un élève, un enseignant ou une assignation" do
         uses = {
           student: ->(classroom) { create_student(classroom:) },
