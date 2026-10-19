@@ -397,7 +397,7 @@ Deux vagues ne se chevauchent que si elles ne partagent ni fichier ni contrat ([
 | Q3 | V2 | La direction crée-t-elle des classes (SC-19), ou ajoute-t-elle seulement la suivante d'un niveau comme l'équipe (ADR-0059) ? Modifie-t-elle ses classes (CL-02, V3) ? **Répondue le 2026-09-28 : ni l'un ni l'autre pour l'instant ; les classes restent à l'équipe.** |
 | Q4 | V2, V3, V4 | ADR-0057, 0059, 0063 et 0064, UDR-0044, 0046 et 0050 sont en production avec leurs défauts du 2026-09-28 : les acceptes-tu tels quels ? **Répondue le 2026-09-28 : acceptées telles quelles.** |
 | Q5 | V3 | Le multi-classes de l'élève (cours du soir, ADR-0040) est-il demandé ? Sinon, `multi-classes-eleve` sort du plan |
-| Q6 | V3 | CL-02 : quels champs d'une classe se modifient (nom, plafond d'effectif, statut) ? Renommer une classe générée casse la numérotation de l'ADR-0059 |
+| Q6 | V3 | CL-02 : quels champs d'une classe se modifient (nom, plafond d'effectif, statut) ? Renommer une classe générée casse la numérotation de l'ADR-0059. **Répondue le 2026-10-16 : le nom (après le préfixe fixe du barème) et le plafond, par l'équipe et la direction (ADR-0098).** |
 | Q7 | V3 | Un enseignant rejoint un second établissement comment : avec le code de cet établissement (ADR-0057), ou rattaché par sa direction (ID-09) ? |
 | Q8 | V3 | Archivage de fin d'année (ADR-0041) : à quelle date, et faut-il un outil de reconduction des classes à la rentrée ? |
 | Q9 | V4 | Matrice des sous-rôles (ADR-0038) pour les pages livrées après elle : Pilotage, Croissance, validation des comptes en attente, barème et génération des classes. Qui voit quoi ? |
@@ -533,7 +533,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | ID | Feature | État | Vague | Ne pas reproduire |
 |---|---|---|---|---|
 | CL-01 | Créer une classe (équipe) | ❌ | V1 (Lot D : « les classes sont créées par l'équipe », [`plan.md`](plan.md) §1) — livrée 2026-09-27 (#33) | Un slug passé à `find_by_id` ; un code de 6 caractères pour une colonne de 5 |
-| CL-02 | Modifier une classe | ❌ | V3 (`vie-de-la-classe`) — **déplacée de V1 le 2026-09-28** : aucun lot de la V1 ne la portait (ajout et retrait seulement, `classes-par-niveau`) ; elle touche au plafond et au code de l'ADR-0041 et à la numérotation de l'ADR-0059 | Un échec muet |
+| CL-02 | Modifier une classe | ✅ | V3 (`vie-de-la-classe`) — **livrée le 2026-10-16** (ADR-0098 : nom après le préfixe du barème et plafond, équipe et direction). **déplacée de V1 le 2026-09-28** : aucun lot de la V1 ne la portait (ajout et retrait seulement, `classes-par-niveau`) ; elle touche au plafond et au code de l'ADR-0041 et à la numérotation de l'ADR-0059 | Un échec muet |
 | CL-03 | Supprimer une classe | ⚠️ | V3 (`vie-de-la-classe` : archivage, F-19) | Une suppression définitive qui détruit l'historique des assignations |
 | CL-04 | Générer et afficher le code d'adhésion | ⚠️ | V1 (Lot D) — livrée 2026-09-27 (#33) | Un affichage tantôt en minuscules, tantôt en majuscules |
 | CL-05 | Partager le lien de classe sur WhatsApp | 💀 | V3 (`vie-de-la-classe`) — livrée 2026-09-28 (#71), hors ordre des vagues : chantier `croissance-parrainage` | — |

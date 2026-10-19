@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::ClassroomRepository
-# Rôle : traduit Orm::Classroom ↔ Entities::Classroom::Classroom  ; jeton du lien, verrou, génération en masse, retrait d'une classe vide
-# ADR  : 0030, 0039, 0041, 0059, 0085, 0088
+# Rôle : traduit Orm::Classroom ↔ Entities::Classroom::Classroom  ; jeton du lien, verrou, génération en masse, retrait d'une classe vide, nom et plafond
+# ADR  : 0030, 0039, 0041, 0059, 0085, 0088, 0098
 module Repositories
   module Classroom
     class ClassroomRepository
@@ -86,6 +86,22 @@ module Repositories
 
         record.update_columns(status: "active", archived_at: nil, updated_at: at)
         ::Shared::Result.success(map_to_entity(record))
+      end
+
+      # ADR-0098 : le verrou est celui de l'adhésion d'un élève (lock_by_public_id, lock_by_link_token) ; l'effectif lu dessous
+      # ne bouge plus avant l'écriture. Savepoint : un nom pris (index unique, archivées comprises) ne casse pas la transaction.
+      def update_settings(id:, name:, max_students:)
+        record = Orm::Classroom.lock.find_by(id:)
+        return ::Shared::Result.failure(:not_found) if record.nil?
+        return ::Shared::Result.failure(:conflict, errors: { base: [ :archived ] }) if record.status == "archived"
+
+        headcount = Orm::ClassroomStudent.where(classroom_id: id, left_at: nil).count
+        return ::Shared::Result.failure(:conflict, errors: { max_students: [ :below_headcount ], headcount: }) if max_students < headcount
+
+        Orm::Classroom.transaction(requires_new: true) { record.update!(name:, max_students:) }
+        ::Shared::Result.success(map_to_entity(record))
+      rescue ActiveRecord::RecordNotUnique
+        ::Shared::Result.failure(:conflict, errors: { suffix: [ :taken ] })
       end
 
       def archive_level(school_id:, school_year:, level_id:, at:)

@@ -116,10 +116,10 @@ Aucun fichier n'apparaît dans deux lots parallèles.
 
 ## Portes de sortie
 
-- [ ] Tous les lots sont `Done`
-- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : parcours refait en équipe, en direction (son établissement et un autre), en enseignant, en élève
-- [ ] Pureté du domaine, rubocop, tests, parcours système, brakeman : `bin/ci-quiet` au vert, verdict écrit dans la PR
-- [ ] Sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) une fois, sur le diff final : use case, policy et routes touchés
-- [ ] ADR-0098 et UDR-0110 à 0112 passés à `Accepté` ; index régénérés par `script/docs/build_index` au commit de clôture
-- [ ] Feuille de route et `features-refonte.md` : CL-02, CL-03, CL-14, CL-15 cochées selon Q6 ; Q5, Q6 et Q8 de la feuille de route marquées répondues ; dette des codes rayée ; `rentree-scolaire` inscrite (Q7)
-- [ ] `journal.md` complété
+- [x] Tous les lots sont `Done` : Lot 0 et Lot A ; Lot B retiré (Q6) ; Lot C hors de cette branche (`fix/classe-archivee-sous-pages`)
+- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : parcours refait en équipe, en direction (son établissement et un autre), en enseignant, en élève — *à faire par le porteur ou un relecteur sur la PR*
+- [x] Pureté du domaine, rubocop, tests, parcours système, brakeman : `bin/ci-quiet`, verdict écrit dans la PR
+- [ ] Sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) une fois, sur le diff final : use case, policy et routes touchés — *non lancés dans la session d'exécution (aucun outil de sous-agent), à lancer sur la PR*
+- [x] ADR-0098, UDR-0110 et UDR-0111 passés à `Accepté`, UDR-0112 à `Abandonnée` ; index régénérés par `script/docs/build_index` au commit de clôture
+- [x] Feuille de route : CL-02 cochée, Q6 de la feuille de route marquée répondue. CL-14 reste à `rapports-de-classe` (Q6 du memo = non) ; Q7 : aucun chantier `rentree-scolaire` ouvert (porteur)
+- [x] `journal.md` complété

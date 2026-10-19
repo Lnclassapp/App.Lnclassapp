@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | exécution — Lots 0 et A sur `feature/vie-de-la-classe` ; Lot B retiré ; Lot C en correctif séparé (`fix/classe-archivee-sous-pages`) |
+| **Statut** | livré (Lots 0 et A, PR `feature/vie-de-la-classe`) ; Lot B retiré ; Lot C en correctif séparé (`fix/classe-archivee-sous-pages`) |
 | **Ouvert le** | 2026-10-16 |
 | **Branche** | `docs/cadrage-vie-de-la-classe` (cadrage, docs seules) ; le code passera par `feature/vie-de-la-classe` et une PR |
 | **Programme** | `refonte-application`, vague V3 ([feuille de route §5](../refonte-application/feuille-de-route.md#v3--suivi-pédagogique-enseignant)) |

@@ -31,7 +31,7 @@ L'équipe (fiche d'un établissement) et la direction (page d'un niveau) doivent
 > Cette section est un **contrat d'exécution**. Un agent l'applique littéralement.
 
 **Structure**
-- Formulaire partagé : `app/views/shared/_classroom_settings_form.html.erb`, `locals: (input:, url:, prefix:, headcount:)`. Rendu par `teams/classroom_settings/edit` et `school_admin/classroom_settings/edit`.
+- Formulaire partagé : `app/views/shared/_classroom_settings_form.html.erb`, `locals: (input:, url:, settings:)`, `settings` étant la ligne de `Queries::Classroom::ClassroomSettingsQuery` (nom, préfixe, suffixe, place du suffixe, effectif) *(précisé à l'exécution, 2026-10-16)*. Rendu par `teams/classroom_settings/edit` et `school_admin/classroom_settings/edit`.
 - `edit.html.erb` (chaque espace) : `turbo_frame_tag "modal"` → `ui_modal title: t(".title", name: <nom actuel>), id: "classroom-settings-modal", open: true, size: :sm, document_title: page_title(t(".title", name:))`.
 - Pied : « Annuler » (`ui_button variant: :secondary, data: { action: "modal#close" }`) · « Enregistrer » (`ui_button type: :submit, form: "classroom-settings-form", icon: "check"`).
 - Corps, dans l'ordre :
@@ -50,7 +50,7 @@ L'équipe (fiche d'un établissement) et la direction (page d'un niveau) doivent
 - Envoi : `form_with model: input, scope: :classroom_settings, url:, method: :patch, id: "classroom-settings-form"`.
 - Échec de validation (`:invalid`, `:conflict` sur `suffix` ou `max_students`) : la modale est re-rendue en **422** avec la saisie, l'erreur sous son champ.
 - `:conflict` `archived` : `turbo_stream` qui ferme la modale, toast neutre « Cette classe est archivée : restaurez-la pour la modifier. », page rafraîchie (`turbo_stream.refresh`).
-- Succès : `turbo_stream` qui ferme la modale, remplace la carte comme l'archivage (UDR-0083 : `classroom_<public_id>` ou le groupe `level_<slug>`) et émet le toast « Classe <nouveau nom> enregistrée. ». Sans JavaScript : redirection 303 vers la fiche (équipe) ou la page du niveau (direction), message flash identique.
+- Succès : `turbo_stream` qui ferme la modale, re-demande la page par morphing (`turbo_stream.refresh`, comme « Ajouter une classe » ; la carte y prend son nouveau nom) *(précisé à l'exécution, 2026-10-16)* et émet le toast « Classe <nouveau nom> enregistrée. ». Sans JavaScript : redirection 303 vers la fiche (équipe) ou la page du niveau (direction), message flash identique.
 - Aucun contrôleur Stimulus nouveau : `modal` existant.
 
 **États obligatoires**

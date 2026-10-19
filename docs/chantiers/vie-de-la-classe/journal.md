@@ -13,31 +13,8 @@
 | 2026-10-16 | Réponses du porteur : recommandations acceptées sauf Q6 ; Lot B retiré, Lot C en correctif séparé | « pas de moyenne de classe » ; la dette des sous-pages archivées part tout de suite sur `fix/classe-archivee-sous-pages` | ADR-0098, UDR-0110, UDR-0111 acceptés ; UDR-0112 abandonnée |
 | 2026-10-16 | Lot 0 : le DTO ne porte que `suffix` et `max_students` | L'établissement et la classe sont des arguments du use case, comme `ArchiveClassroom` ; les répéter dans le DTO ferait deux sources | Non |
 | 2026-10-16 | Lot 0 : la longueur du nom complet n'est pas validée par le DTO | Elle dépend du préfixe, que seul le use case connaît (niveau et série de la classe lue) | Non (ADR-0098 §4) |
-
-## Ce qui a dérapé
-
-- La feuille de route (2026-09-28) rangeait ici le code régénérable, le retrait d'un élève, le changement de classe et l'archivage : tous livrés ailleurs entre le 2026-10-07 et le 2026-10-10. Un cadrage écrit sur la seule feuille de route aurait planifié du travail fait.
-
-## Ce qu'on a appris sur la codebase
-
-- `classrooms` a déjà tout ce qu'il faut : `name` (15), `max_students` (1 à 150, `CHECK`), index unique `(school_id, school_year, name)` qui couvre les archivées. Aucune migration.
-- `ClassroomNumbering.last` range un nom sans numéro avant « 1 » ; `next_name` ignore les noms sans numéro : un renommage en lettres ne casse ni « + » ni « − ».
-- Le verrou de ligne de la classe est pris par `RegisterStudent`, `JoinAsStudent` et `delete_if_unused` : le contrôle du plafond doit le prendre aussi.
-- Trois sous-pages lisent `ClassroomHeaderQuery`, les jours de séance lisent l'entité du repository ; les deux exposent déjà `status` : le refus d'une classe archivée ne demande aucune requête de plus.
-- Seule la page de la direction a les trois chiffres de la classe (`StudentWorkQuery#classroom`) ; la page de l'enseignant n'en a aucun.
-
-## Dette laissée derrière
-
-| Quoi | Pourquoi reporté | Chantier de suivi |
-|---|---|---|
-| Archivage de l'année écoulée et passage des élèves à la rentrée | Hors périmètre (memo Q7) ; échéance le 2027-09-01 | `rentree-scolaire`, à ouvrir avant juin 2027 |
-| Gestes de l'enseignant non confirmé sur sa classe (lien, retrait) | Hors périmètre ; coût consigné dans l'ADR-0085 §5 | à ouvrir |
-
-## Clôture
-
-| | |
-|---|---|
-| **Livré le** | |
-| **PR** | |
-| **ADR produits** | ADR-0098 *(proposé)* |
-| **UDR produits** | UDR-0110, UDR-0111, UDR-0112 *(proposées)* |
+| 2026-10-16 | Lot A : une query `ClassroomSettingsQuery` pour la modale (préfixe, suffixe, effectif), absente du plan | La modale doit montrer le préfixe et l'effectif avant tout envoi ; le use case ne sert pas la lecture | Non |
+| 2026-10-16 | Lot A : un concern `ClassroomSettingsActions` porte `edit` et `update` des deux espaces | Les deux contrôleurs ne diffèrent que par l'établissement et le retour sans JavaScript ; la policy des gestes de structure garde aussi la lecture de la modale | Non |
+| 2026-10-16 | Lot A : le succès re-demande la page par morphing au lieu de remplacer la carte | Comme « Ajouter une classe » : la carte peut changer de place (« 6ème A » passe avant « 6ème 1 ») | UDR-0110 précisée |
+| 2026-10-16 | Lot A : le champ du suffixe est écrit à la main, pas par `ui_field` | Le préfixe doit se glisser entre le libellé et le champ, sur la même ligne ; mêmes classes, même aide, même erreur reliée | Non |
+| 2026-10-16 | Lot A : un refus « classe archivée » répond 422 en Turbo Stream (toast neutre, page rafraîchie) | Comme les autres conflits de l'archivage (UDR-0083) | Non |
