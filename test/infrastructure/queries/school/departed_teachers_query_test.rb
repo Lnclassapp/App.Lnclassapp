@@ -12,10 +12,10 @@ module Queries
         @maths = create_material(name: "Mathématiques", category: "science")
       end
 
-      def departed(school: @school, detached_at: 2.days.ago, reinstated: false, **attributes)
+      def departed(school: @school, detached_at: 2.days.ago, reinstated: false, material: create_material, **attributes)
         create_teacher(school: nil, **attributes).tap do |teacher|
           # ADR-0103 §4.1 : sa liste de cet établissement survit au retrait.
-          set_teacher_materials(teacher, school, [ teacher.teacher_profile.material ])
+          set_teacher_materials(teacher, school, [ material ])
           create_teacher_departure(teacher:, school:, detached_by: @admin, detached_at:, reinstated:)
         end
       end

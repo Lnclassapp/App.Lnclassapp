@@ -104,8 +104,7 @@ module UseCases
       def register(dto, destination, material_ids, ip, user_agent)
         now = @clock.now
         @transaction.call do
-          user = written(@registrations.create_teacher(user: user_from(dto), pin: dto.pin, material_id: material_ids.first,
-                                                       joined_via: destination.channel))
+          user = written(@registrations.create_teacher(user: user_from(dto), pin: dto.pin, joined_via: destination.channel))
           written(@schools.attach_teacher(teacher_id: user.id, school_id: destination.school_id, primary: true, at: now))
           @teacher_materials.replace(teacher_id: user.id, school_id: destination.school_id, material_ids:, at: now)
           record_referral(destination, user, now)

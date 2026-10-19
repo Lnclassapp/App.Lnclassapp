@@ -104,7 +104,7 @@ module Repositories
       test "un niveau ou une série liés, une classe ou un enseignant les retiennent aussi" do
         pair = link_level_series
         classroom = create_classroom
-        teacher_material = create_teacher.teacher_profile.material
+        teacher_material = create_material.tap { create_teacher(material: it) }
 
         assert_equal :conflict, @repository.delete_level(id: pair.level_id).code
         assert_equal :conflict, @repository.delete_series(id: pair.series_id).code

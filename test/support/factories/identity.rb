@@ -30,17 +30,16 @@ module Factories
     # ADR-0094: by default, the teacher belongs to the school of their first classroom; the home, the catalogue and
     # « Assigner » only read the classrooms of the current school.
     # ADR-0103: `materials`, the teacher's subjects in that school, in order (default: `material` alone).
-    def create_teacher(school: :default, material: create_material, materials: nil, onboarded: true, classrooms: [],
+    # A teacher without school (school: nil) has no list: `material` is then ignored, and none is created.
+    def create_teacher(school: :default, material: nil, materials: nil, onboarded: true, classrooms: [],
                        joined_via: "standard", **attributes)
       school = classrooms.first&.school || create_school if school == :default
-      materials ||= [ material ]
       create_user(role: "teacher", **attributes).tap do |teacher|
-        Orm::TeacherProfile.create!(user: teacher, material: materials.first, joined_via:,
-                                    onboarding_completed_at: (Time.current if onboarded))
+        Orm::TeacherProfile.create!(user: teacher, joined_via:, onboarding_completed_at: (Time.current if onboarded))
         # school: nil — a teacher without a primary school: a pending account (ADR-0030, ADR-0063).
         if school
           Orm::TeacherSchool.create!(teacher:, school:, primary: true)
-          set_teacher_materials(teacher, school, materials)
+          set_teacher_materials(teacher, school, materials || [ material || create_material ])
         end
         classrooms.each { |classroom| Orm::TeacherClassroom.create!(teacher:, classroom:) }
       end

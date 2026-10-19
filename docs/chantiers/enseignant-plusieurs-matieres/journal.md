@@ -59,6 +59,12 @@ SELECT
 - Les seeds (`db/seeds/development.rb`, `db/seeds/demo/saint_michel.rb`) et les fabriques de test créent `Orm::TeacherProfile` directement : ils doivent écrire `teacher_materials` dès le Lot 0, sinon un enseignant de démo n'a aucune matière.
 - `ClassroomGapsQuery` (ADR-0101 §4.4) n'est pas encore codée : elle hérite des matières par les slugs des cours de la page de classe, sans code propre.
 
+## Lot Z
+
+- `teacher_profiles.material_id` retirée (`20261016170000`) : `bin/rails db:rollback` puis `db:migrate` repassent ; le retour remplit la colonne avec la première matière de l'établissement principal. La commande de l'ADR-0103 §7 (`grep -rn "teacher_profiles.material_id\|TeacherProfile.*material_id\|teacher_profile: :material" app db/seeds test/support`) ne trouve rien.
+- La fabrique `create_teacher(school: nil)` ne crée plus de matière (aucune liste où la ranger) ; `create_join_request(materials:)` pose celle d'une demande en attente.
+- `script/perf/dataset.rb` écrit une liste par enseignant et par demande en attente.
+
 ## Dette laissée derrière
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
@@ -66,6 +72,8 @@ SELECT
 | Matière par liaison enseignant-classe (option D de l'ADR-0103) | Bruit de la page de classe non encore constaté | à ouvrir si le porteur le constate |
 | L'équipe ne peut pas corriger les matières d'un enseignant | Aucun besoin exprimé | — |
 | Restreindre l'assignation aux matières de l'enseignant | Le catalogue est une lecture, pas un droit (UDR-0077) | — |
+| Badge de matière sur « Fiches à revoir » (UDR-0127 §3.2) | Le bloc n'existe pas encore | `remediation-ciblee` |
+| Un enseignant sans aucune liste (ni rattachement, ni retrait, ni demande au moment de la migration) rejoint un établissement sans matière ; son profil propose « Modifier » sur une ligne vide | Cas sans donnée à copier | — |
 
 ## Clôture
 

@@ -144,7 +144,7 @@ teachers = [ [ "0510000001", "Koné", "Ibrahim", "male", "mathematiques" ], [ "0
            .map do |contact, last_name, first_name, gender, material_slug|
   material = Orm::Material.find_by!(slug: material_slug)
   teacher = account.call(contact, role: "teacher", last_name:, first_name:, gender:)
-  Orm::TeacherProfile.create!(user: teacher, material:, joined_via: "standard", onboarding_completed_at: clock.now) unless teacher.teacher_profile
+  Orm::TeacherProfile.create!(user: teacher, joined_via: "standard", onboarding_completed_at: clock.now) unless teacher.teacher_profile
   Orm::TeacherSchool.create!(teacher_id: teacher.id, school_id: school.id, primary: true) unless Orm::TeacherSchool.exists?(teacher_id: teacher.id)
   Orm::TeacherSchoolMaterial.find_or_create_by!(teacher_id: teacher.id, school_id: school.id, material:) { it.created_at = clock.now }
   Orm::TeacherClassroom.create!(teacher_id: teacher.id, classroom:) unless Orm::TeacherClassroom.exists?(teacher_id: teacher.id, classroom:)
@@ -171,10 +171,10 @@ declare = UseCases::Classroom::DeclareTeaching.new(
 )
 colleagues.each.with_index(1) do |(material_slug, people), material_rank|
   material = Orm::Material.find_by!(slug: material_slug)
-  staff = teachers.map(&:first).select { it.teacher_profile.material_id == material.id }
+  staff = teachers.map(&:first).select { Orm::TeacherSchoolMaterial.exists?(teacher_id: it.id, school_id: school.id, material:) }
   staff += people.each.with_index(1).map do |(last_name, first_name, gender), rank|
     teacher = account.call(format("0511%d%05d", material_rank, rank), role: "teacher", last_name:, first_name:, gender:)
-    Orm::TeacherProfile.create!(user: teacher, material:, joined_via: "standard", onboarding_completed_at: clock.now) unless teacher.teacher_profile
+    Orm::TeacherProfile.create!(user: teacher, joined_via: "standard", onboarding_completed_at: clock.now) unless teacher.teacher_profile
     Orm::TeacherSchool.create!(teacher_id: teacher.id, school_id: school.id, primary: true) unless Orm::TeacherSchool.exists?(teacher_id: teacher.id)
     Orm::TeacherSchoolMaterial.find_or_create_by!(teacher_id: teacher.id, school_id: school.id, material:) { it.created_at = clock.now }
     teacher

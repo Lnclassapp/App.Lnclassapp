@@ -33,12 +33,6 @@ module Repositories
         assert_equal [ @svt.id, @maths.id ], ids
       end
 
-      test "replace writes the first subject twice, in teacher_profiles.material_id (ADR-0103 §4.6, until the lot Z)" do
-        assert @repository.replace(teacher_id: @teacher.id, school_id: @school.id, material_ids: [ @maths.id ], at: Time.current)
-
-        assert_equal @maths.id, @teacher.teacher_profile.reload.material_id
-      end
-
       test "inherit gives a new school the list of the school it is added from" do
         other, third = create_school, create_school
         add_teacher_school(@teacher, other, materials: [ @svt, @maths ])

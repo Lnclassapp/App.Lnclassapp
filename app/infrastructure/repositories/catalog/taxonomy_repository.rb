@@ -71,8 +71,7 @@ module Repositories
 
       def delete_material(id:)
         # ADR-0103 §4.5 : refusée tant qu'un enseignant la porte, dans l'un de ses établissements.
-        delete(Orm::Material, id, Orm::Course.exists?(material_id: id) || Orm::TeacherProfile.exists?(material_id: id) ||
-                                  Orm::TeacherSchoolMaterial.exists?(material_id: id))
+        delete(Orm::Material, id, Orm::Course.exists?(material_id: id) || Orm::TeacherSchoolMaterial.exists?(material_id: id))
       end
 
       def link(level_id:, series_id:, at:)

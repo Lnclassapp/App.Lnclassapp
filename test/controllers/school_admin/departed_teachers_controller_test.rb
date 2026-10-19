@@ -11,9 +11,9 @@ class SchoolAdmin::DepartedTeachersControllerTest < ActionDispatch::IntegrationT
 
   def t(key, **) = I18n.t("school_admin.departed_teachers.index.#{key}", **)
 
-  def departed(school: @school, detached_at: 2.days.ago, **attributes)
+  def departed(school: @school, detached_at: 2.days.ago, material: create_material, **attributes)
     create_teacher(school: nil, **attributes).tap do |teacher|
-      set_teacher_materials(teacher, school, [ teacher.teacher_profile.material ]) # ADR-0103 §4.1 : gardée après le retrait
+      set_teacher_materials(teacher, school, [ material ]) # ADR-0103 §4.1 : gardée après le retrait
       create_teacher_departure(teacher:, school:, detached_by: @admin, detached_at:)
     end
   end

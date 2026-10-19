@@ -72,8 +72,9 @@ class Orm::ModelsTest < ActiveSupport::TestCase
 
   test "the whole pedagogical loop is navigable through the associations" do
     graph => { team:, teacher:, student:, level:, series:, school:, classroom:, course:, essential:, exercise:, question:, session: }
-    Orm::TeacherProfile.create!(user: teacher, material: graph[:material], joined_via: "standard")
+    Orm::TeacherProfile.create!(user: teacher, joined_via: "standard")
     Orm::TeacherSchool.create!(teacher:, school:, primary: true)
+    Orm::TeacherSchoolMaterial.create!(teacher:, school:, material: graph[:material], created_at: Time.current)
     Orm::TeacherClassroom.create!(teacher:, classroom:)
     Orm::ClassroomStudent.create!(joined_via: "standard", classroom:, student:, primary: true, joined_at: Time.current)
     gap = Orm::KnowledgeGap.create!(student:, essential:, source_session: session)
@@ -85,7 +86,7 @@ class Orm::ModelsTest < ActiveSupport::TestCase
     assert_equal [ "Vrai", "Faux" ], exercise.questions.first.answers.map(&:content)
     assert_equal graph[:assignment], session.classroom_assignment
     assert_equal gap.public_id, gap.to_param
-    assert_equal teacher.teacher_profile.material, graph[:material]
+    assert_equal [ teacher ], graph[:material].teacher_school_materials.map(&:teacher)
     assert_equal [ teacher ], school.teacher_schools.map(&:teacher)
     assert_equal [ student ], classroom.classroom_students.map(&:student)
     assert_equal [ teacher ], classroom.teacher_classrooms.map(&:teacher)

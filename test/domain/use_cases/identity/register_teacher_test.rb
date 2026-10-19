@@ -45,11 +45,11 @@ module UseCases
           @taken = taken
         end
 
-        def create_teacher(user:, pin:, material_id:, joined_via:)
-          @received = { user:, pin:, material_id:, joined_via: }
+        def create_teacher(user:, pin:, joined_via:)
+          @received = { user:, pin:, joined_via: }
           return Shared::Result.failure(:conflict, errors: { contact: [ :taken ] }) if @taken.include?(user.contact)
 
-          @journal << [ :user, user.contact, user.role, material_id, joined_via ]
+          @journal << [ :user, user.contact, user.role, joined_via ]
           Shared::Result.success(Entities::Identity::User.new(id: 41, public_id: "usr-41", last_name: user.last_name,
                                                               first_name: user.first_name, contact: user.contact,
                                                               gender: user.gender, role: "teacher"))
@@ -212,7 +212,7 @@ module UseCases
         assert_equal [ 41, "0501020304", "teacher" ], [ result.value.user.id, result.value.user.contact, result.value.user.role ]
         token = result.value.token
         assert_operator token.length, :>=, 43
-        assert_equal [ [ :user, "0501020304", "teacher", 5, "standard" ],
+        assert_equal [ [ :user, "0501020304", "teacher", "standard" ],
                        [ :teacher_school, 41, 31, true, NOW ],
                        [ :materials, 41, 31, [ 5 ], NOW ],
                        audit_line("standard"),
@@ -228,7 +228,7 @@ module UseCases
         result = register(material_slug: "physique-chimie", second_material_slug: "svt")
 
         assert result.success?
-        assert_equal [ :user, "0501020304", "teacher", 6, "standard" ], @journal[0]
+        assert_equal [ :user, "0501020304", "teacher", "standard" ], @journal[0]
         assert_includes @journal, [ :materials, 41, 31, [ 6, 5 ], NOW ]
       end
 
@@ -271,7 +271,7 @@ module UseCases
 
         assert result.success?
         assert_equal [ "0a1b2c3d4e5f" ], @invite_links.lookups
-        assert_equal [ :user, "0501020304", "teacher", 5, "colleague" ], @journal[0]
+        assert_equal [ :user, "0501020304", "teacher", "colleague" ], @journal[0]
         assert_equal [ :teacher_school, 41, 31, true, NOW ], @journal[1]
         assert_equal [ :referral, 7, 41, 31, "link", NOW ], @journal[3]
         assert_equal 1, @transaction.calls
@@ -290,7 +290,7 @@ module UseCases
           @journal.clear
 
           assert register(invite_token: token, drena_public_id: nil, school_public_id: nil).success?, channel
-          assert_equal [ [ :user, "0501020304", "teacher", 5, channel ], [ :teacher_school, 41, 31, true, NOW ] ],
+          assert_equal [ [ :user, "0501020304", "teacher", channel ], [ :teacher_school, 41, 31, true, NOW ] ],
                        @journal.first(2), channel
           assert_not(@journal.any? { it.first == :referral }, channel)
         end
@@ -308,7 +308,7 @@ module UseCases
           @journal.clear
 
           assert register(invite_token: token).success?, token
-          assert_equal [ :user, "0501020304", "teacher", 5, "standard" ], @journal[0], token
+          assert_equal [ :user, "0501020304", "teacher", "standard" ], @journal[0], token
           assert_equal [ :teacher_school, 41, 31, true, NOW ], @journal[1], token
           assert_not(@journal.any? { it.first == :referral }, token)
         end

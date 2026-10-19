@@ -47,7 +47,7 @@ class GrowthMigrationsTest < ActiveSupport::TestCase
     @teacher_ids = teachers.map(&:id)
     @school_ids = Orm::TeacherSchool.where(teacher_id: @teacher_ids).pluck(:school_id)
     @drena_ids = Orm::School.where(id: @school_ids).pluck(:drena_id)
-    @material_ids = Orm::TeacherProfile.where(user_id: @teacher_ids).pluck(:material_id)
+    @material_ids = Orm::TeacherSchoolMaterial.where(teacher_id: @teacher_ids).pluck(:material_id)
     before = school_rows
 
     migrate(:down)
