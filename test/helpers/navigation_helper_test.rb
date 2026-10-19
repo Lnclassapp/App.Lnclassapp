@@ -69,6 +69,14 @@ class NavigationHelperTest < ActionView::TestCase
     assert_equal "Configuration", I18n.t("shared.navigation.sidebar.secondary_label.team")
   end
 
+  # UDR-0084 §3.3 : l'élève n'a plus de barre du bas ; son menu de l'avatar porte ses destinations, inchangées.
+  test "the student has no bottom bar, every other role keeps it" do
+    assert_not bottom_bar?(:student)
+    assert_not bottom_bar?("student")
+    assert(%i[teacher team school_admin].all? { bottom_bar?(it) })
+    assert_equal %i[home courses classroom], navigation_for(:student).map(&:key)
+  end
+
   test "the other roles have no secondary list and no « Plus »" do
     %i[student teacher school_admin].each do |role|
       assert_empty secondary_navigation_for(role)

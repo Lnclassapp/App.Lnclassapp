@@ -7,8 +7,9 @@ require "application_system_test_case"
 # an exercise is the only assignable kind: two exercises of the sheet are assigned.
 # AN-22 (chantier annonces, UDR-0071 §3.1): « Annonces » closes the navigation of the teacher and of the direction, and the
 # secondary list of the team; the student has none.
-# UDR-0080 §3.1, §3.2 (app-android), UDR-0082 §3.1, §3.2 (Lnclass Teacher): the student's and the teacher's header has
-# no logo and no account menu; they come back home by « Accueil » and sign out from the account panel opened by the avatar.
+# UDR-0082 §3.1, §3.2 (Lnclass Teacher): the teacher's header has no logo and no account menu; they come back home by
+# « Accueil » and sign out from the account panel opened by the avatar. UDR-0084 §3.1–3.3 (accueil-eleve): the student's
+# header has the logo again, and the avatar opens a menu, from which they sign out; they have no bottom bar any more.
 class RoleHomesTest < ApplicationSystemTestCase
   setup do
     svt = create_material(name: "SVT", category: "science")
@@ -36,11 +37,13 @@ class RoleHomesTest < ApplicationSystemTestCase
   test "AN-22 — the student reaches their home, then every destination of their navigation, « Annonces » not among them" do
     sign_in_as @student
 
-    assert_home student_home_path, greeting: I18n.t("classroom.student_homes.show.greeting", name: "Aya")
+    # UDR-0084 §3.5: no greeting any more; the page is named by a hidden « Accueil » title.
+    assert_home student_home_path
+    assert_selector "h1.sr-only", text: I18n.t("classroom.student_homes.show.page_title"), visible: :all
     assert_selector "#student_home_classroom", text: "Tle D 1"
     within(MAIN_SIDEBAR_NAV) { assert_no_link tn(:announcements) }
     assert_navigation active: { home: student_home_path, courses: courses_path, classroom: student_classroom_path }
-    assert_signs_out_from_panel
+    assert_signs_out_from_avatar_menu
   end
 
   test "AN-22 — the teacher reaches their home, then every destination of their navigation, « Annonces » last" do
@@ -96,12 +99,33 @@ class RoleHomesTest < ApplicationSystemTestCase
     within(MAIN_SIDEBAR_NAV) { assert_selector "a[aria-current='page'][href='#{announcements_path}']", text: tn(:announcements) }
   end
 
-  test "on a phone, the student opens every destination from the bottom bar" do
+  # CA-5 (accueil-eleve, UDR-0084 §3.3): on a phone, the student has no bottom bar any more and reaches every
+  # destination from the avatar menu; the teacher keeps theirs.
+  test "CA-5 — on a phone, the student opens every destination from the avatar menu, without bottom bar; the teacher keeps it" do
     sign_in_as @student
 
     with_mobile_viewport do
-      assert_navigation active: { home: student_home_path, courses: courses_path, classroom: student_classroom_path },
-                        nav: "nav.bottom-0"
+      # A fresh visit: the sign-in toast, at the top of a phone, would cover the avatar.
+      visit student_home_path
+      assert_no_selector "nav.bottom-0"
+      { home: student_home_path, courses: courses_path, classroom: student_classroom_path }.each do |key, path|
+        with_avatar_menu { click_link tn(key) }
+
+        assert_current_path path
+        assert_no_selector "nav.bottom-0"
+        with_avatar_menu { assert_selector "a[role=menuitem][aria-current='page'][href='#{path}']", text: tn(key) }
+      end
+    end
+
+    with_avatar_menu { click_on tn(:sign_out) }
+    assert_current_path root_path
+    sign_in_as @teacher
+
+    with_mobile_viewport do
+      assert_current_path teacher_home_path
+      within("nav.bottom-0", visible: true) do
+        assert_equal %i[home classrooms courses announcements].map { tn(it) }, all("a[href]").map { it.text.squish }
+      end
     end
   end
 
@@ -208,6 +232,35 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_current_path root_path
     visit student_home_path
     assert_current_path new_session_path
+  end
+
+  # UDR-0084 §3.2: the student's « Mon profil » and « Se déconnecter » live in the menu opened by the avatar.
+  def assert_signs_out_from_avatar_menu
+    with_avatar_menu { assert_selector "a[role=menuitem]:not([aria-current])", text: tn(:profile) }
+    find("#avatar-menu a[role=menuitem][href='#{profile_path}']", text: tn(:profile)).click
+
+    assert_current_path profile_path
+    assert_selector "aside nav"
+    assert_selector "h1", text: I18n.t("identity.profiles.show.title")
+    with_avatar_menu { assert_selector "a[role=menuitem][aria-current='page'][href='#{profile_path}']", text: tn(:profile) }
+    find("#avatar-menu button[role=menuitem]", text: tn(:sign_out)).click
+
+    assert_current_path root_path
+    visit student_home_path
+    assert_current_path new_session_path
+  end
+
+  # As with_account_menu: the avatar menu is reopened on the document now shown.
+  def with_avatar_menu(&)
+    attempts = 0
+    begin
+      find("header button#avatar-menu-button").click if page.has_no_selector?("#avatar-menu", visible: true, wait: 0)
+      within("#avatar-menu", visible: true, &)
+    rescue Minitest::Assertion, Capybara::ElementNotFound, Selenium::WebDriver::Error::StaleElementReferenceError
+      raise if (attempts += 1) >= 3
+
+      retry
+    end
   end
 
   # As with_account_menu: the panel is reopened on the document now shown.

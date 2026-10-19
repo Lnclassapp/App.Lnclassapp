@@ -82,3 +82,11 @@ Revue du diff réuni (security-reviewer, silent-failure-hunter, pr-test-analyzer
 - **Couverture** : une branche manquait (`ReadQuestionImage`, image non rattachée lue sans compte) ; test ajouté.
 - **`bin/ci` local** : vert hors échecs connus de la machine (5 erreurs PostgreSQL 18 `RestrictViolation`, inscription sans JavaScript, blog `drop_generated_image`). Quatre tests système (archivage ×2, AN-22, IL-08) ont dépassé leur délai sous la charge de la suite et passent seuls ; aucun ne touche aux images.
 - **Machine** : `npx` absent, contourné pour la session par un `npx` local qui lance `node_modules/.bin`.
+
+## 2026-10-19 — Fusion de `Develop` (types de questions, ADR-0091)
+
+- **Décisions renumérotées** : ADR-0104 et UDR-0129 (0089, 0084 et 0128 pris ailleurs).
+- **Image et types de question réunis** : `Question`, `QuestionInput`, `QuestionNode`, `SessionPlayQuery::Question` portent la marge, les éléments et l'image. L'image d'import passe par `QuestionNode.from_import`, commun aux trois imports ; seul `lnclass.course-tree` admet `image`, les deux autres n'en reçoivent donc jamais.
+- **Carte de question** : l'image reste avant le `fieldset`, la `legend` étant désormais rendue par le partial du type.
+- **Requêtes** : envoyer une réponse coûte 25 requêtes au lieu de 23 : + 2 fixes (images de l'exercice chargées d'un bloc, image de la question suivante), jamais une par question.
+- **`db/schema.rb`** : régénéré en jouant la migration du chantier sur le schéma de `Develop` ; trois contraintes `CHECK` changent d'écriture (rendu de PostgreSQL 18), pas de sens.

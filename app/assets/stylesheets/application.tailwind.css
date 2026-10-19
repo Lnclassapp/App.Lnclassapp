@@ -312,6 +312,11 @@
   padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
 }
 
+/* UDR-0087 §3.2 — bouton d'action collé au bas de la séance : 16 px au moins, la zone sûre si elle est plus haute */
+@utility pb-safe-action {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
 /* Élément collant posé juste au-dessus de la barre basse (« Question suivante », chantier ux-pages-eleve) */
 @utility bottom-above-bar {
   bottom: calc(var(--spacing-bar) + env(safe-area-inset-bottom));
@@ -349,6 +354,14 @@
 
 @utility ui-card-link {
   @apply transition duration-300 ease-out hover:-translate-y-1 hover:border-brand/40 hover:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+}
+
+/* UDR-0090 §3.2 : un groupe de lignes d'une liste à « Voir plus » (le mois de l'historique) reste masqué tant qu'aucune
+   de ses lignes n'est révélée ; son titre apparaît avec la première, sans JavaScript à lui. */
+@utility ui-reveal-group {
+  &:not(:has(li:not([hidden]))) {
+    display: none;
+  }
 }
 
 /* Lot E6 (politique-cache) : boutons, bouton icône, menu ⋮, boîte de dialogue et avatar, sur le même principe ; une
@@ -467,6 +480,23 @@
   }
 }
 
+/* UDR-0089 §3.4 — `ui_modal placement: :phone_sheet` : la même feuille, sous 700 px seulement (palier du téléphone,
+   UDR-0086 §3.5) ; dès 700 px, la modale centrée de ses utilitaires. */
+@media (max-width: 43.74rem) {
+  dialog.dialog-phone-sheet {
+    margin: auto 0 0;
+    width: 100%;
+    max-width: none;
+    min-height: 25vh;
+    min-height: 25dvh;
+    max-height: 90vh;
+    max-height: 90dvh;
+    overflow-y: auto;
+    border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
 /* UDR-0080 §3.2 — `ui_modal placement: :drawer` : un panneau ancré à gauche, sur toute la hauteur, à toutes les
    largeurs ; il glisse depuis la gauche, en mouvement autorisé seulement. Hors couche, comme la feuille ci-dessus. */
 dialog.dialog-drawer {
@@ -520,9 +550,10 @@ dialog.dialog-drawer {
 
 /* UDR-0005, amendement du 2026-10-06 — sous 640 px, une carte de premier niveau du shell va bord à bord : la marge
    d'écran (`data-bleed`, `px-gutter`) est rendue à la carte, qui perd ses arrondis et ses bords latéraux. Restent dans
-   la marge : une carte dans une carte, dans une modale, dans un carrousel, ou côte à côte avec une autre. */
+   la marge : une carte dans une carte, dans une modale, dans un carrousel, ou côte à côte avec une autre.
+   UDR-0085 §3.4 — les cartes des groupes de « Cours » de l'élève (`data-bleed-keep`) restent dans la marge, arrondies. */
 @media (width < 40rem) {
-  [data-bleed] .rounded-card.shadow-card:not(.rounded-card .rounded-card, dialog *, .snap-x *, .flex:not(.flex-col) > *,
+  [data-bleed] .rounded-card.shadow-card:not(.rounded-card .rounded-card, dialog *, .snap-x *, [data-bleed-keep] *, .flex:not(.flex-col) > *,
                                             [class~="grid-cols-2"] > *, [class~="grid-cols-3"] > *, [class~="grid-cols-4"] > *) {
     margin-inline: calc(-1 * var(--spacing-gutter));
     border-inline-width: 0;

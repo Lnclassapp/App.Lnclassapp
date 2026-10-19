@@ -17,7 +17,7 @@ class Queries::School::DirectionHomeQueryTest < ActiveSupport::TestCase
   end
 
   # Les définitions se lisent en direct ; le cache de 5 minutes a ses propres tests, plus bas (AD-23).
-  def home(school: @school, cache: ActiveSupport::Cache::NullStore.new) = Query.new(cache:).call(school_id: school.id)
+  def home(school: @school, cache: ActiveSupport::Cache::NullStore.new, **) = Query.new(cache:).call(school_id: school.id, **)
 
   def classroom(name, level: @third, school: @school, taught: true, **)
     create_classroom(school:, level:, name:, **).tap do |klass|
@@ -124,9 +124,10 @@ class Queries::School::DirectionHomeQueryTest < ActiveSupport::TestCase
     classroom("5ème 1", level: @fifth, status: "archived")
     classroom("5ème 2", level: @fifth, school: create_school)
 
-    assert_equal [ Query::LevelBubble.new(slug: "6eme", name: "6ème", classrooms_count: 1, submission_rate: nil),
-                   Query::LevelBubble.new(slug: "3eme", name: "3ème", classrooms_count: 1, submission_rate: nil),
-                   Query::LevelBubble.new(slug: "tle", name: "Tle", classrooms_count: 2, submission_rate: nil) ], home.levels
+    assert_equal [ Query::LevelBubble.new(slug: "6eme", name: "6ème", classrooms_count: 1, submission_rate: nil, self_practice_count: 0),
+                   Query::LevelBubble.new(slug: "3eme", name: "3ème", classrooms_count: 1, submission_rate: nil, self_practice_count: 0),
+                   Query::LevelBubble.new(slug: "tle", name: "Tle", classrooms_count: 2, submission_rate: nil, self_practice_count: 0) ],
+                 home.levels
   end
 
   test "AD-07: a level's rate sums its classrooms: Σ handed in × 100 / Σ (students × assignments), rounded" do
@@ -158,6 +159,55 @@ class Queries::School::DirectionHomeQueryTest < ActiveSupport::TestCase
     assert_equal [ Query::Figures.new(classrooms: 0, students: 0, teachers: 1), [], [ :teachers_without_classroom ] ],
                  [ found.figures, found.levels, found.alerts.map(&:kind) ]
     assert_equal "Lycée Classique d'Abidjan", home(school: other).school_name
+  end
+
+  # CA-17 (accueil-eleve, ADR-0089 §4.2, UDR-0084 §3.7) : « Faits seul (7 j) » d'un niveau compte les sessions terminées,
+  # standard, sans assignation, commencées dans les 7 derniers jours d'Abidjan par ses élèves présents, dans cet établissement.
+  TODAY = Date.new(2026, 10, 15)
+
+  def practise(student, days_ago = 3, **)
+    create_exercise_session(student:, exercise: @exercise, status: "completed", started_at: (TODAY - days_ago).in_time_zone + 10.hours, **)
+  end
+
+  test "CA-17: each level counts its present students' self-practice sessions of the last 7 days, once each" do
+    sixth_one, sixth_two, third = classroom("6ème 1", level: @sixth), classroom("6ème 2", level: @sixth), classroom("3ème 1")
+    awa = create_student(classroom: sixth_one)
+    practise(awa)
+    practise(awa, 0)
+    practise(awa, 8)
+    both = create_student(classroom: sixth_one)
+    Orm::ClassroomStudent.create!(joined_via: "standard", classroom: sixth_two, student: both, primary: false, joined_at: Time.current)
+    practise(both, 6)
+    koffi = create_student(classroom: third)
+    practise(koffi, 1)
+    practise(koffi, 1, classroom_assignment_id: assignment(third).id)
+    practise(koffi, 1, gap: create_gap(student: koffi, source_session: practise(koffi, 30, score_percent: 40)))
+    create_exercise_session(student: koffi, exercise: create_exercise, started_at: TODAY.in_time_zone + 10.hours)
+    gone = create_student(classroom: third)
+    practise(gone)
+    Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
+    practise(create_student(classroom: third, anonymized_at: Time.current))
+    practise(create_student(classroom: classroom("3ème 9", status: "archived")))
+
+    assert_equal({ "6eme" => 3, "3eme" => 1 }, home(today: TODAY).levels.to_h { [ it.slug, it.self_practice_count ] })
+  end
+
+  test "CA-17: another school's direction never counts this school's sessions, and the other way round" do
+    other = create_school(name: "Lycée Classique d'Abidjan")
+    practise(create_student(classroom: classroom("6ème 1", level: @sixth)))
+    practise(create_student(classroom: classroom("6ème A", level: @sixth, school: other, taught: false)), 2)
+    practise(create_student(classroom: classroom("6ème B", level: @sixth, school: other, taught: false)), 2)
+
+    assert_equal [ 1 ], home(today: TODAY).levels.map(&:self_practice_count)
+    assert_equal [ 2 ], home(school: other, today: TODAY).levels.map(&:self_practice_count)
+  end
+
+  test "CA-17: by default the window ends today in Abidjan; a level without self-practice counts 0" do
+    practise(create_student(classroom: classroom("6ème 1", level: @sixth)))
+    classroom("3ème 1")
+
+    travel_to(Time.zone.local(2026, 10, 15, 12)) { assert_equal [ 1, 0 ], home.levels.map(&:self_practice_count) }
+    travel_to(Time.zone.local(2026, 10, 22, 12)) { assert_equal [ 0, 0 ], home.levels.map(&:self_practice_count) }
   end
 
   test "the number of queries does not follow the number of classrooms, and stays within 12" do

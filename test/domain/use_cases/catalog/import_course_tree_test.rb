@@ -173,6 +173,21 @@ module UseCases
         assert_equal "<p>Cours 1</p>", Orm::Course.find_by!(name: "Écologie").content.body.to_html
       end
 
+      # CA-14, ADR-0091 §4.5 : tolerance et match s'importent aussi par les cours complets.
+      test "tolerance and match are imported with the course tree" do
+        node = course("Nouveaux types")
+        node["essentials"][0]["exercises"][0]["questions"] = [
+          { "content" => "Combien ?", "question_type" => "numeric", "tolerance" => 0.5, "answers" => [ { "content" => "3" } ] },
+          { "content" => "Relie.", "question_type" => "matching", "answers" => %w[a b c].map { { "content" => it, "match" => it.upcase } } }
+        ]
+
+        report = run_import(document(node))
+
+        assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count)
+        assert_equal BigDecimal("0.5"), Orm::Question.find_by!(question_type: "numeric").numeric_tolerance
+        assert_equal %w[A B C], Orm::Question.find_by!(question_type: "matching").answers.order(:position).pluck(:match_content)
+      end
+
       test "an error deep in the tree is reported at its exact path, and its course leaves no row" do
         courses = course_tree_document(courses: 4, essentials: 2, exercises: 1, questions: 3, answers: 4)["courses"]
         courses[3]["essentials"][1]["exercises"][0]["questions"][2]["answers"].each { it["correct"] = true }

@@ -1,7 +1,12 @@
 <%# 🌐 UI · teams/exercises/_question_fields — une question du formulaire : image, énoncé, type, explication, propositions %>
 <%# Rôle : rendue par fields_for, ou clonée depuis <template> ; ses propositions ont leur propre contrôleur nested-form ; son image, assessment--question-image %>
-<%# ADR  : 0054, 0104 · UDR : 0007, 0017, 0129 · Stimulus : teams--nested-form, assessment--question-image (errors : « questions[i] ») %>
-<fieldset data-nested-question class="relative rounded-card border border-line bg-white p-4 counter-question">
+<%# ADR  : 0054, 0091, 0104 · UDR : 0007, 0017, 0087, 0129 · Stimulus : teams--nested-form, teams--question-kind, assessment--question-image (errors : structure, « questions[i] ») %>
+<% kinds = Entities::Assessment::Question::KIND_NAMES.values.select { lookup_context.exists?("kinds/#{it}_fields", [ "teams/exercises" ], true) } %>
+<% types = Entities::Assessment::Question::TYPES.select { kinds.include?(Entities::Assessment::Question.kind_name_for(it)) } %>
+<% kind = Entities::Assessment::Question.kind_name_for(form.object.question_type) || "choice" %>
+<%= tag.fieldset class: "relative rounded-card border border-line bg-white p-4 counter-question",
+                 data: { nested_question: true, controller: "teams--question-kind",
+                         teams__question_kind_kinds_value: types.to_h { [ it, Entities::Assessment::Question.kind_name_for(it) ] }.to_json } do %>
   <legend class="float-left w-full pr-14 font-medium text-ink">
     <%= t(".legend") %> <span class="question-number"></span>
   </legend>
@@ -18,28 +23,17 @@
     <%= ui_field form, :content, as: :textarea, rows: 2, required: true, placeholder: t(".content_placeholder") %>
     <div class="grid gap-4 sm:grid-cols-2">
       <%= ui_field form, :question_type, as: :select, required: true,
-                                         choices: Entities::Assessment::Question::TYPES.map { [ t("teams.exercises.question_types.#{it}"), it ] } %>
+                                         choices: types.map { [ t("teams.exercises.question_types.#{it}"), it ] },
+                                         data: { teams__question_kind_target: "select", action: "teams--question-kind#switch" } %>
       <%= ui_field form, :explanation, hint: t(".explanation_hint") %>
     </div>
-    <div class="space-y-2" data-controller="teams--nested-form" data-teams--nested-form-placeholder-value="NEW_ANSWER"
-         data-teams--nested-form-item-value="[data-nested-answer]">
-      <p class="text-sm font-medium text-ink"><%= t(".answers") %></p>
-      <% if form.object.errors[:answers].any? %>
-        <p id="<%= form.field_id(:answers) %>_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
-          <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= form.object.errors[:answers].to_sentence %>
-        </p>
+    <%# ADR-0091 §4.5 : un panneau par famille de types ; seul celui du type choisi est actif, donc envoyé. Un panneau
+        n'existe qu'une fois son partial livré : un type sans le sien n'est pas proposé. %>
+    <% Entities::Assessment::Question::KIND_NAMES.each_value.select { kinds.include?(it) }.each do |name| %>
+      <%= tag.fieldset class: "min-w-0", hidden: name != kind, disabled: name != kind,
+                       data: { teams__question_kind_target: "panel", kind: name } do %>
+        <%= render "teams/exercises/kinds/#{name}_fields", form: %>
       <% end %>
-      <div data-teams--nested-form-target="list" class="space-y-2">
-        <%= form.fields_for :answers do |answer_form| %>
-          <%= render "answer_fields", form: answer_form %>
-        <% end %>
-      </div>
-      <template data-teams--nested-form-target="template">
-        <%= form.fields_for :answers, Dtos::Assessment::AnswerInput.new, child_index: "NEW_ANSWER" do |answer_form| %>
-          <%= render "answer_fields", form: answer_form %>
-        <% end %>
-      </template>
-      <%= ui_button t(".add_answer"), variant: :ghost, size: :sm, icon: "plus", data: { action: "teams--nested-form#add" } %>
-    </div>
+    <% end %>
   </div>
-</fieldset>
+<% end %>

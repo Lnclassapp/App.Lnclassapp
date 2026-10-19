@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_10_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_15_100100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -79,6 +79,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_10_090000) do
     t.integer "position", null: false
     t.bigint "question_id", null: false
     t.datetime "updated_at", null: false
+    t.string "match_content", limit: 500
     t.index ["question_id", "position"], name: "index_answers_on_question_id_and_position", unique: true
   end
 
@@ -210,7 +211,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_10_090000) do
     t.index ["removed_by_id"], name: "index_classroom_students_on_removed_by_id", where: "(removed_by_id IS NOT NULL)"
     t.index ["student_id"], name: "index_classroom_students_one_active_primary", unique: true, where: "(\"primary\" AND (left_at IS NULL))"
     t.check_constraint "(removed_at IS NULL) = (removed_by_id IS NULL)", name: "classroom_students_removed_by_iff_removed"
-    t.check_constraint "joined_via::text = ANY (ARRAY['standard'::character varying, 'link'::character varying, 'code'::character varying]::text[])", name: "classroom_students_joined_via_values"
+    t.check_constraint "joined_via::text = ANY (ARRAY['standard'::character varying::text, 'link'::character varying::text, 'code'::character varying::text])", name: "classroom_students_joined_via_values"
     t.check_constraint "removed_at IS NULL OR left_at IS NOT NULL", name: "classroom_students_removed_only_when_left"
   end
 
@@ -288,6 +289,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_10_090000) do
     t.check_constraint "byte_size >= 1 AND byte_size <= 307200", name: "essential_images_byte_size"
     t.check_constraint "content_type::text = ANY (ARRAY['image/jpeg'::character varying, 'image/png'::character varying, 'image/webp'::character varying]::text[])", name: "essential_images_content_type_values"
     t.check_constraint "width >= 1 AND width <= 1200 AND height >= 1 AND height <= 1200", name: "essential_images_sides"
+  end
+
+  create_table "essential_reads", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "essential_id", null: false
+    t.datetime "first_read_at", null: false
+    t.datetime "last_read_at", null: false
+    t.bigint "student_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["essential_id"], name: "index_essential_reads_on_essential_id"
+    t.index ["student_id", "essential_id"], name: "index_essential_reads_on_student_id_and_essential_id", unique: true
+    t.index ["student_id", "last_read_at"], name: "index_essential_reads_on_student_id_and_last_read_at"
   end
 
   create_table "essentials", force: :cascade do |t|
@@ -493,6 +506,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_10_090000) do
     t.string "category", null: false
     t.datetime "created_at", null: false
     t.string "name", limit: 40, null: false
+    t.integer "position"
     t.string "shortname", limit: 10, null: false
     t.string "slug", null: false
     t.datetime "updated_at", null: false
@@ -589,9 +603,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_10_090000) do
     t.bigint "exercise_session_id", null: false
     t.bigint "question_id", null: false
     t.bigint "selected_answer_ids", null: false, array: true
+    t.string "response_text", limit: 200
     t.index ["exercise_session_id", "question_id"], name: "index_question_attempts_on_exercise_session_id_and_question_id", unique: true
     t.index ["question_id"], name: "index_question_attempts_on_question_id"
-    t.check_constraint "cardinality(selected_answer_ids) > 0", name: "question_attempts_selected_answer_ids_present"
+    t.check_constraint "cardinality(selected_answer_ids) > 0 OR response_text IS NOT NULL", name: "question_attempts_selected_answer_ids_present"
   end
 
   create_table "question_images", force: :cascade do |t|
@@ -619,10 +634,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_10_090000) do
     t.integer "position", null: false
     t.string "question_type", null: false
     t.datetime "updated_at", null: false
+    t.decimal "numeric_tolerance", precision: 12, scale: 4
     t.string "image_description", limit: 150
     t.index ["exercise_id", "position"], name: "index_questions_on_exercise_id_and_position", unique: true
     t.check_constraint "image_description IS NULL OR char_length(btrim(image_description::text)) >= 1", name: "questions_image_description_present"
-    t.check_constraint "question_type::text = ANY (ARRAY['true_false'::character varying::text, 'single_choice'::character varying::text, 'multiple_correct_2'::character varying::text, 'multiple_correct_3'::character varying::text])", name: "questions_question_type_values"
+    t.check_constraint "numeric_tolerance >= 0::numeric", name: "questions_numeric_tolerance_positive"
+    t.check_constraint "question_type::text = ANY (ARRAY['true_false'::character varying::text, 'single_choice'::character varying::text, 'multiple_correct_2'::character varying::text, 'multiple_correct_3'::character varying::text, 'fill_blank'::character varying::text, 'numeric'::character varying::text, 'ordering'::character varying::text, 'matching'::character varying::text])", name: "questions_question_type_values"
   end
 
   create_table "referral_shares", force: :cascade do |t|
@@ -688,7 +705,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_10_090000) do
   create_table "schools", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "cycle", default: "both", null: false
-    t.string "direction_invite_token", limit: 12, default: -> { "substr(replace((gen_random_uuid())::text, '-'::text, ''::text), 1, 12)" }, null: false
     t.bigint "drena_id", null: false
     t.string "name", limit: 150, null: false
     t.string "national_code", limit: 6
@@ -698,8 +714,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_10_090000) do
     t.string "school_type", null: false
     t.string "sigle", limit: 20
     t.string "status", default: "active", null: false
-    t.string "team_invite_token", limit: 12, default: -> { "substr(replace((gen_random_uuid())::text, '-'::text, ''::text), 1, 12)" }, null: false
     t.datetime "updated_at", null: false
+    t.string "direction_invite_token", limit: 12, default: -> { "substr(replace((gen_random_uuid())::text, '-'::text, ''::text), 1, 12)" }, null: false
+    t.string "team_invite_token", limit: 12, default: -> { "substr(replace((gen_random_uuid())::text, '-'::text, ''::text), 1, 12)" }, null: false
     t.index "translate(lower((name)::text), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_schools_on_searchable_name", using: :gin
     t.index "translate(lower((sigle)::text), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_schools_on_searchable_sigle", using: :gin
     t.index ["direction_invite_token"], name: "index_schools_on_direction_invite_token", unique: true
@@ -921,12 +938,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_10_090000) do
 
   create_table "teacher_profiles", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.string "joined_via", null: false
     t.bigint "material_id", null: false
     t.datetime "onboarding_completed_at"
     t.string "referral_token", limit: 12, default: -> { "substr(replace((gen_random_uuid())::text, '-'::text, ''::text), 1, 12)" }, null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.string "joined_via", null: false
     t.index ["material_id"], name: "index_teacher_profiles_on_material_id"
     t.index ["referral_token"], name: "index_teacher_profiles_on_referral_token", unique: true
     t.index ["user_id"], name: "index_teacher_profiles_on_user_id", unique: true
@@ -969,9 +986,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_10_090000) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.datetime "android_opened_at"
     t.datetime "anonymized_at"
-    t.datetime "app_opened_at"
     t.string "contact", limit: 10
     t.datetime "created_at", null: false
     t.string "first_name", limit: 80, null: false
@@ -982,6 +997,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_10_090000) do
     t.string "role", null: false
     t.string "team_role"
     t.datetime "updated_at", null: false
+    t.datetime "app_opened_at"
+    t.datetime "android_opened_at"
     t.index "translate(lower((((first_name)::text || ' '::text) || (last_name)::text)), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_users_on_searchable_full_name", using: :gin
     t.index "translate(lower((((last_name)::text || ' '::text) || (first_name)::text)), 'àâäçéèêëîïôöùûüÿÀÂÄÇÉÈÊËÎÏÔÖÙÛÜŸ'::text, 'aaaceeeeiioouuuyaaaceeeeiioouuuy'::text) gin_trgm_ops", name: "index_users_on_searchable_reversed_name", using: :gin
     t.index ["contact"], name: "index_users_on_contact", unique: true, where: "(contact IS NOT NULL)"
@@ -1024,6 +1041,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_10_090000) do
   add_foreign_key "courses", "series", on_delete: :restrict
   add_foreign_key "courses", "users", column: "author_id", on_delete: :restrict
   add_foreign_key "essential_images", "essentials", on_delete: :restrict
+  add_foreign_key "essential_reads", "essentials", on_delete: :cascade
+  add_foreign_key "essential_reads", "users", column: "student_id", on_delete: :restrict
   add_foreign_key "essentials", "courses", on_delete: :restrict
   add_foreign_key "essentials", "users", column: "author_id", on_delete: :restrict
   add_foreign_key "exercise_badges", "exercise_sessions", on_delete: :restrict

@@ -72,7 +72,8 @@ class Classroom::ClassroomEssentialsControllerTest < ActionDispatch::Integration
     assert_select "#classroom_essential_exercises", text: including(tl("empty"))
   end
 
-  test "an archived classroom shows the assignment states without any toggle" do
+  # vie-de-la-classe, Lot C (Q8) : une classe archivée n'a plus de page, même pour son enseignant (était : états sans bascule).
+  test "an archived classroom: 404 for its teacher" do
     archived = create_classroom(status: "archived")
     teacher = create_teacher(classrooms: [ archived ])
     create_assignment(classroom: archived, assignable: @phases, by: teacher)
@@ -80,12 +81,8 @@ class Classroom::ClassroomEssentialsControllerTest < ActionDispatch::Integration
 
     get page_path(archived)
 
-    assert_response :success
-    assert_select "p", text: including(tl("archived_notice"))
-    assert_select "form[action*=assignments]", 0
-    assert_select "#classroom_essential_exercises", text: including(toggle(:assigned))
-    assert_select "[role=group]", 0
-    assert_select "#classroom_essential_exercises", text: including(tl("hint")), count: 0
+    assert_response :not_found
+    assert_select "#classroom_essential_exercises", 0
   end
 
   test "the team reads the page with its toggles" do

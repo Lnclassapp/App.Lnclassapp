@@ -1,55 +1,34 @@
 require "application_system_test_case"
 
-# CL-22, CL-10 (volet élève) — UDR-0011, UDR-0076 §3.2. L'élève ouvre « Ma classe » depuis la navigation, sans
-# rechargement de page : le code de sa classe en majuscules, les cours de ses exercices assignés en bande défilante,
-# 3 exercices assignés puis « Voir plus », ses exercices traités au meilleur score.
+# CL-22, CL-10 (volet élève) — UDR-0011, UDR-0076 §3.2, UDR-0086 (ma-classe-eleve). L'élève ouvre « Ma classe » depuis le
+# menu de l'avatar, sans rechargement de page : plus de retour « Accueil », la carte de la classe sans code, les cours de
+# ses exercices assignés en bande défilante, 3 exercices assignés puis « Voir plus », ses exercices traités au meilleur
+# score ; sur ordinateur, les deux listes côte à côte et « Ma classe » actif dans le menu de gauche.
 class Classroom::StudentClassroomTest < ApplicationSystemTestCase
+  DESKTOP_VIEWPORT = [ 1280, 900 ].freeze
+
   setup do
     @classroom = create_classroom(name: "Tle D 1", school: create_school(name: "Lycée Classique"),
                                   level: create_level(name: "Tle"), series: create_series(name: "D"))
     @student = create_student(classroom: @classroom, first_name: "Aya")
+    create_teacher(school: @classroom.school, classrooms: [ @classroom ])
     # UDR-0013, amendement du 2026-10-01 : le cours de l'exercice assigné est du niveau et de la série de la classe.
     @course = create_course(name: "Génétique et évolution", material: create_material(name: "SVT", category: "science"),
                             level: @classroom.level, series: @classroom.series)
     @essential = create_essential(course: @course)
     (1..4).each do |rank|
-      create_assignment(classroom: @classroom, assignable: create_exercise(essential: @essential, title: "Exercice #{rank}"),
+      create_assignment(classroom: @classroom, assignable: create_exercise(essential: @essential, title: "Devoir #{rank}"),
                         assigned_at: rank.hours.ago)
     end
     done = create_exercise(essential: @essential, title: "Méiose, le bilan")
     create_exercise_session(student: @student, exercise: done, status: "completed", score_percent: 80)
   end
 
-  def tl(key, **) = I18n.t("classroom.student_classrooms.#{key}", **)
+  def tn(key) = I18n.t("shared.navigation.#{key}")
+  def rect(id) = page.evaluate_script("document.getElementById(#{id.to_json}).getBoundingClientRect().toJSON()")
 
-  test "the student sees their classroom without code, the course band, 3 assigned exercises then « Voir plus », and their score" do
-    sign_in_as @student
-
-    assert_no_page_reload do
-      click_on I18n.t("shared.navigation.classroom"), match: :first
-      assert_current_path student_classroom_path
-    end
-    within "#student_classroom_header" do
-      assert_selector "h2", text: "Tle D 1"
-      assert_no_selector "[id*=join_code]"
-    end
-    within("#student_classroom_courses") { assert_link "Génétique et évolution", href: course_path(@course.slug) }
-    within "#student_classroom_treated" do
-      assert_link "Méiose, le bilan"
-      assert_text "16/20"
-    end
-    within "#student_classroom_assigned" do
-      assert_selector "li", count: 3
-      assert_no_text "Exercice 4"
-      click_on I18n.t("components.reveal.more")
-      assert_selector "li", count: 4
-      assert_text "Exercice 4"
-    end
-  end
-
-  # UDR-0011 (UDR-0057), UDR-0076 §3.2 : à 390 px, aucune action principale, chaque liste à 3 lignes au plus, aucune
-  # page qui défile en largeur (seule la bande des cours défile) ; l'aide du code s'ouvre au toucher.
-  test "at 390 px, Ma classe passes the sobriety rule and opens the code help" do
+  # CA-1, CA-5 : à 390 px, depuis le menu de l'avatar ; « Ma classe » en surbrillance, ni retour « Accueil » ni barre du bas.
+  test "at 390 px, from the avatar menu: no « Accueil » link, the classroom, 3 assigned exercises then « Voir plus », the score" do
     # Challenger : avec trois cours, la bande élargissait toute la page (485 px pour 390) ; seule la bande doit défiler.
     # Audit ux-pages-eleve (2026-10-06) : un titre d'exercice réel, tronqué sur une ligne, l'élargissait aussi (611 px).
     create_assignment(classroom: @classroom, assigned_at: 1.minute.ago, assignable: create_exercise(
@@ -62,12 +41,54 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
     sign_in_as @student
 
     with_mobile_viewport do
+      visit student_home_path
+      assert_no_page_reload do
+        find("header button#avatar-menu-button").click
+        within("#avatar-menu") { click_link tn(:classroom) }
+        assert_current_path student_classroom_path
+      end
+
+      assert_no_selector "#main nav[aria-label='#{I18n.t('components.back_link.label')}']"
+      assert_no_selector "nav.bottom-0"
+      find("header button#avatar-menu-button").click
+      assert_selector "#avatar-menu a[aria-current=page].bg-brand-soft[href='#{student_classroom_path}']", text: tn(:classroom)
+      page.send_keys(:escape)
+
+      within "#student_classroom_header" do
+        assert_selector "h2", text: "Tle D 1"
+        assert_no_selector "[id*=join_code]"
+      end
+      within("#student_classroom_courses") { assert_link "Génétique et évolution", href: course_path(@course.slug) }
+      within "#student_classroom_treated" do
+        assert_link "Méiose, le bilan"
+        assert_text "16/20"
+      end
+      assert_single_primary_action
+      assert_list_capped "#student_classroom_treated ul"
+      within "#student_classroom_assigned" do
+        assert_selector "li", count: 3
+        assert_no_text "Devoir 4"
+        click_on I18n.t("components.reveal.more")
+        assert_selector "li", count: 7
+        assert_text "Devoir 4"
+      end
+      assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+    end
+  end
+
+  # CA-7 : à 1 280 px, « Exercices assignés » et « Exercices traités » côte à côte, « Ma classe » actif à gauche.
+  test "at 1 280 px, the assigned and the treated exercises side by side, « Ma classe » active in the left menu" do
+    sign_in_as @student
+
+    with_mobile_viewport(DESKTOP_VIEWPORT) do
       visit student_classroom_path
 
-      assert_single_primary_action
-      assert_list_capped "#student_classroom_assigned ul"
-      assert_list_capped "#student_classroom_treated ul"
-      assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
+      assert_selector "aside a[aria-current=page][href='#{student_classroom_path}']", text: tn(:classroom), visible: true
+      assigned = rect("student_classroom_assigned")
+      treated = rect("student_classroom_treated")
+      assert_in_delta assigned["top"], treated["top"], 1, "les deux listes ne sont pas sur la même ligne"
+      assert_operator treated["left"], :>=, assigned["right"], "« Exercices traités » n'est pas à droite"
+      assert_operator rect("student_classroom")["width"], :<=, 960
     end
   end
 end

@@ -29,6 +29,17 @@ module Factories
       end
     end
 
+    # ADR-0091: a question of one of the four new types. answers: texts, or [left, right] for matching; all correct.
+    def create_kind_question(exercise:, question_type:, answers:, content: "Question #{factory_sequence}", numeric_tolerance: nil,
+                             explanation: nil, position: exercise.questions.maximum(:position).to_i + 1)
+      exercise.questions.create!(position:, content:, question_type:, numeric_tolerance:, explanation:).tap do |question|
+        answers.each_with_index do |answer, rank|
+          text, match_content = Array(answer)
+          question.answers.create!(position: rank + 1, content: text, match_content:, correct: true)
+        end
+      end
+    end
+
     # A completed session carries its score; a gap makes it a remediation session (ADR-0043).
     # Not create_session: ActionDispatch::Integration::Runner#create_session would hide it in controller and system tests.
     def create_exercise_session(student: create_student, exercise: create_exercise, status: "started", score_percent: nil, gap: nil,
@@ -53,6 +64,11 @@ module Factories
     def create_badge(student: create_student, exercise: create_exercise, level: "gold",
                      session: create_exercise_session(student:, exercise:, status: "completed"))
       Orm::ExerciseBadge.create!(student:, exercise:, exercise_session: session, level:, awarded_at: Time.current)
+    end
+
+    # ADR-0090 §4.1 : a student opened an essential.
+    def create_essential_read(student: create_student, essential: create_essential, at: Time.current, first_read_at: at)
+      Orm::EssentialRead.create!(student:, essential:, first_read_at:, last_read_at: at)
     end
 
     def create_gap(student: create_student, essential: create_essential, status: "pending",

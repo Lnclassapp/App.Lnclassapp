@@ -1,18 +1,19 @@
 # 🔌 INFRA · Queries::Classroom::StudentHomeQuery
-# Rôle : accueil élève (CL-23, TR-04, AS-36) : classe, matières, exercices assignés triés par échéance, activité, lacunes ; sans classe, la dernière et un retrait récent
-# ADR  : 0026, 0033, 0035, 0043, 0048, 0072, 0085 · UDR : 0010, 0062 (§3.2 ordre, §3.3 `late_material_slugs`), 0076 (§3.1, §3.2), 0081 (§3.5)
+# Rôle : accueil élève (CL-23, TR-04, AS-36) : classe, matières, exercices assignés triés par échéance, lacunes ; l'activité, à part (cadre différé) ; sans classe, la dernière et un retrait récent
+# ADR  : 0026, 0033, 0035, 0043, 0048, 0072, 0085, 0089, 0090 · UDR : 0010, 0062 (§3.2 ordre, §3.3 `late_material_slugs`), 0076 (§3.1, §3.2), 0081 (§3.5), 0084 (§3.8)
 module Queries
   module Classroom
     class StudentHomeQuery
       # late_material_slugs : les matières où un exercice est en retard pour l'élève, pastille de « Mes matières » (UDR-0062
-      # §3.3, UDR-0076 §3.1) ; subjects : les matières qui ont un cours publié de son niveau.
+      # §3.3, UDR-0076 §3.1) ; subjects : les matières qui ont un cours publié de son niveau. L'activité récente n'y est plus :
+      # seul le cadre différé la lit, par recent_sessions (chantier accueil-eleve, PRD §7).
       Row = Data.define(:school_name, :level_name, :classroom_name, :classmates_count,
-                        :assigned_exercises, :recent_sessions, :pending_gaps, :late_material_slugs, :subjects)
+                        :assigned_exercises, :pending_gaps, :late_material_slugs, :subjects)
       # badge_level : bronze, silver, gold, diamond ou nil ; started_session_public_id : la session à reprendre, ou nil ;
-      # due_on : l'échéance de l'assignation (ADR-0072), nil sans jours de séance.
-      ExerciseRow = Data.define(:public_id, :title, :material_name, :material_category, :badge_level,
+      # due_on : l'échéance de l'assignation (ADR-0072), nil sans jours de séance ; material_slug : la pastille illustrée.
+      ExerciseRow = Data.define(:public_id, :title, :material_name, :material_category, :material_slug, :badge_level,
                                 :best_score_percent, :completed_count, :started_session_public_id, :due_on)
-      SessionRow = Data.define(:public_id, :exercise_title, :score_percent, :completed_at)
+      SessionRow = Data.define(:public_id, :exercise_title, :material_name, :material_slug, :score_percent, :completed_at)
       GapRow = Data.define(:essential_name, :essential_slug, :course_slug)
       SubjectRow = Data.define(:slug, :name)
       # L'élève sans classe active (UDR-0081 §3.5) : la DRENA et l'établissement de sa dernière classe principale, qui
@@ -25,9 +26,8 @@ module Queries
       RECENT_REMOVAL = 7.days
       # La dernière adhésion principale : celle encore ouverte (classe archivée) d'abord, puis la plus récemment quittée.
       LAST_FIRST = Arel.sql("classroom_students.left_at DESC NULLS FIRST, classroom_students.joined_at DESC, classroom_students.id DESC")
-      # L'ordre de la grille de la charte (§9) ; une matière hors de cette liste suit, par nom.
-      SUBJECT_ORDER = %w[mathematiques maths physique-chimie pc svt francais histoire-geographie histoire-geo hg edhc
-                         philosophie philo].freeze
+      # L'ordre du programme (ADR-0090 §4.2) : le rang de la matière, puis son nom ; une matière sans rang suit, par nom.
+      PROGRAM_ORDER = [ Arel.sql("materials.position ASC NULLS LAST"), "materials.name" ].freeze
       HEADER_COLUMNS = [ "classrooms.id", "schools.name", "levels.name", "classrooms.name" ].freeze
       EXERCISE_COLUMNS = [ "exercises.id", "exercises.public_id", "exercises.title", "materials.name", "materials.category",
                            "materials.slug", "courses.id", "essentials.position", "exercises.position" ].freeze
@@ -43,8 +43,7 @@ module Queries
 
         exercises = assigned_with_slugs(classroom_id, student_id)
         Row.new(school_name:, level_name:, classroom_name:, classmates_count: Orm::ClassroomStudent.where(classroom_id:, left_at: nil).count,
-                assigned_exercises: exercises.map(&:last), recent_sessions: recent_sessions(student_id:),
-                pending_gaps: pending_gaps(student_id), late_material_slugs: late_material_slugs(exercises, today),
+                assigned_exercises: exercises.map(&:last), pending_gaps: pending_gaps(student_id), late_material_slugs: late_material_slugs(exercises, today),
                 subjects: subjects(student_id))
       end
 
@@ -61,13 +60,13 @@ module Queries
                           recent_removal_at: (removed_at if removed_at && removed_at >= now - RECENT_REMOVAL))
       end
 
-      # Lue seule par le frame différé de l'activité récente.
+      # Lue seule par le frame différé de l'activité récente. → [SessionRow]
       def recent_sessions(student_id:)
-        Orm::ExerciseSession.joins(exercise: { essential: :course }).where(student_id:, status: "completed")
+        Orm::ExerciseSession.joins(exercise: { essential: { course: :material } }).where(student_id:, status: "completed")
                             .merge(own_level(student_id))
                             .order(completed_at: :desc, id: :desc).limit(RECENT_SESSIONS)
-                            .pluck(:public_id, "exercises.title", :score_percent, :completed_at)
-                            .map { |public_id, exercise_title, score_percent, completed_at| SessionRow.new(public_id:, exercise_title:, score_percent:, completed_at:) }
+                            .pluck(:public_id, "exercises.title", "materials.name", "materials.slug", :score_percent, :completed_at)
+                            .map { |values| SessionRow.new(*values) }
       end
 
       private
@@ -115,17 +114,18 @@ module Queries
         rows.map do |id, public_id, title, material_name, material_category, material_slug, *program_order|
           best_score_percent, completed_count = completed.fetch(id, [ nil, 0 ])
           assigned_at, due_on = assignments.fetch(id)
-          row = ExerciseRow.new(public_id:, title:, material_name:, material_category:, badge_level: badges[id], best_score_percent:,
-                                completed_count:, started_session_public_id: started[id], due_on:)
+          row = ExerciseRow.new(public_id:, title:, material_name:, material_category:, material_slug:, badge_level: badges[id],
+                                best_score_percent:, completed_count:, started_session_public_id: started[id], due_on:)
           [ urgency(row, assigned_at, *program_order), material_slug, row ]
         end
       end
 
-      # UDR-0076 §3.1 : une matière par cours publié du niveau de l'élève, une seule fois, dans l'ordre de la charte.
+      # UDR-0076 §3.1 : une matière par cours publié du niveau de l'élève, une seule fois, dans l'ordre du programme
+      # (materials.position, ADR-0090 §4.2). DISTINCT impose de lire les colonnes du tri.
       def subjects(student_id)
         Orm::Material.joins(:courses).merge(own_level(student_id)).where(courses: { status: "published" }).distinct
-                     .pluck(:slug, :name).map { |slug, name| SubjectRow.new(slug:, name:) }
-                     .sort_by { [ SUBJECT_ORDER.index(it.slug) || SUBJECT_ORDER.size, it.name ] }
+                     .order(*PROGRAM_ORDER).pluck(:slug, :name, :position)
+                     .map { |slug, name, _position| SubjectRow.new(slug:, name:) }
       end
 
       # Une lacune dont la fiche n'est plus publiée n'a plus de page à ouvrir : elle n'est pas proposée.

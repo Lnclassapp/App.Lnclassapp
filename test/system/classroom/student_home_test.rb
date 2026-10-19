@@ -52,7 +52,6 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
     sign_in_as @student
 
     assert_current_path student_home_path
-    assert_selector "h1", text: tl("show.greeting", name: "Aya")
     assert_selector "#student_home_classroom", text: "Tle D 1"
     within(row("La mitose")) { assert_text "SVT" }
     within("turbo-frame#student_home_recent_activity") { assert_link text: /La mitose/ }
@@ -64,15 +63,15 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
   end
 
   # PRD §4, « Accueil élève — ordinateur (UDR-0058 §3.3) ».
-  test "on a computer, the greeting alone, no help, lines of a title, a subject and one button, 3 lines then « Voir plus »" do
+  # UDR-0084 §3.5: no « Bonjour » any more, the classroom card opens the page.
+  test "on a computer, no greeting, no help, lines of a title, a subject and one button, 3 lines then « Voir plus »" do
     assign_four_exercises
     sign_in_as @student
 
     with_desktop_viewport do
       visit student_home_path
 
-      assert_selector "h1", text: tl("show.greeting", name: "Aya")
-      within(find("h1").find(:xpath, "..")) { assert_no_selector "p" }
+      assert_no_text "Bonjour"
       assert_no_text "Lycée Classique · Tle D 1"
       within("#student_home_exercises") do
         assert_no_selector "#student_home_help"
@@ -179,8 +178,9 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
   end
 
   # Challenger d'interface-eleve-organisation : une ligne avec son échéance et son bouton élargissait la carte « À faire »,
-  # case de la grille sans min-w-0, et toute la page avec elle (405 px pour 390).
-  test "on a phone, the home and its bottom bar are visible, without horizontal scrolling" do
+  # case de la grille sans min-w-0, et toute la page avec elle (405 px pour 390). La barre du bas de l'élève est partie
+  # (UDR-0084 §3.3) : son absence se vérifie dans test/system/role_homes_test.rb.
+  test "on a phone, the home is visible without horizontal scrolling" do
     Orm::ClassroomAssignment.find_by!(assignable_id: @meiose.id).update!(due_on: Time.zone.today + 4)
     @meiose.update!(title: "La méiose et la formation des gamètes chez les mammifères")
     sign_in_as @student
@@ -189,9 +189,100 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
       visit student_home_path
 
       assert_selector "#student_home_exercises li", count: 2
-      assert_selector "nav.bottom-0", visible: :visible
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
+    end
+  end
+
+  # Chantier accueil-eleve, UDR-0084 §3.4, §3.5 and §3.10, on a phone and on a computer.
+  VIEWPORTS = { "phone" => MOBILE_VIEWPORT, "computer" => DESKTOP_VIEWPORT }.freeze
+  HOME_BLOCKS = %w[student_home_classroom student_home_subjects student_home_announcements student_home_exercises
+                   student_home_activity].freeze
+
+  # [id, top, left, width] of each block of the home, in the order of the page.
+  def home_blocks
+    page.evaluate_script(<<~JS)
+      Array.from(document.querySelectorAll("#student_home > [id]")).map(function (block) {
+        var box = block.getBoundingClientRect();
+        return [block.id, Math.round(box.top), Math.round(box.left), Math.round(box.width)];
+      })
+    JS
+  end
+
+  def column_width = page.evaluate_script("Math.round(document.getElementById('student_home').getBoundingClientRect().width)")
+  def grid_columns(list) = page.evaluate_script("getComputedStyle(document.querySelector('#{list}')).gridTemplateColumns.split(' ').length")
+
+  VIEWPORTS.each do |device, size|
+    test "CA-6 — on a #{device}, one column: Ma classe, Mes matières, Annonces, À faire, Mes activités récentes, without « Bonjour »" do
+      create_message(author: create_team_member(second_factor: false), title: "Rentrée", published_at: 1.hour.ago, audience: "all")
+      sign_in_as @student
+
+      with_mobile_viewport(size) do
+        visit student_home_path
+
+        assert_selector "#student_home_announcements article", text: "Rentrée"
+        blocks = home_blocks
+        assert_equal HOME_BLOCKS, blocks.map(&:first)
+        # Une seule colonne : chaque bloc commence sous le précédent et couvre toute la colonne (sous 640 px, une carte
+        # va bord à bord, UDR-0005) ; au téléphone, la colonne prend toute la largeur moins les marges.
+        width = column_width
+        blocks.each_cons(2) { |above, below| assert_operator below[1], :>, above[1], "#{below[0]} n'est pas sous #{above[0]}" }
+        blocks.each { |id, _, _, block_width| assert_operator block_width, :>=, width, "#{id} ne couvre pas la colonne" }
+        assert_operator width, :<=, 960
+        assert_equal page.evaluate_script("document.documentElement.clientWidth") - 32, width if device == "phone"
+        within("#main") do
+          assert_no_text "Bonjour"
+          assert_no_text "Aya"
+        end
+
+        within("#student_home_classroom") do
+          assert_text "Tle D 1"
+          assert_text "Lycée Classique"
+          link = find_link(tl("classroom_card.enter"), href: student_classroom_path)
+          # UDR-0084 §3.5 : la porte ouverte devant, la flèche après.
+          assert_equal %w[svg svg], link.evaluate_script("[this.firstElementChild.tagName, this.lastElementChild.tagName]").map(&:downcase)
+        end
+      end
+    end
+
+    test "CA-7 — on a #{device}, « PC » and « HG » in the grid, their full name for screen readers" do
+      level = @classroom.level
+      %w[Mathématiques Physique-Chimie Français Histoire-Géographie EDHC Philosophie].each do |name|
+        create_course(material: create_material(name:, category: "literature"), level:)
+      end
+      sign_in_as @student
+
+      with_mobile_viewport(size) do
+        visit student_home_path
+
+        within("nav#student_home_subject_bubbles") do
+          { "physique-chimie" => [ "PC", "Physique-Chimie" ], "histoire-geographie" => [ "HG", "Histoire-Géographie" ] }
+            .each do |slug, (short, full)|
+            within("a#subject_#{slug}[title='#{full}']") do
+              assert_selector "span[aria-hidden=true]", exact_text: short
+              assert_selector "span.sr-only", exact_text: full, visible: :all
+              assert_no_selector "span:not(.sr-only)", exact_text: full
+            end
+          end
+        end
+        assert_equal device == "phone" ? 4 : 6, grid_columns("#student_home_subject_bubbles ul")
+      end
+    end
+
+    test "CA-4 — on a #{device}, the avatar without a photo says « KA » with its « + », the same colour at every visit" do
+      student = create_student(classroom: @classroom, first_name: "Koné", last_name: "Awa")
+      sign_in_as student
+
+      with_mobile_viewport(size) do
+        visit student_home_path
+        avatar = find("header .ui-avatar", text: "KA")
+        assert avatar.find(:xpath, "..").has_selector?("[aria-hidden=true]", text: "+", visible: :all)
+        tone = avatar[:class]
+
+        visit student_home_path
+
+        assert_equal tone, find("header .ui-avatar", text: "KA")[:class]
+      end
     end
   end
 end

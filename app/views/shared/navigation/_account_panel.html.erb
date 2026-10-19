@@ -1,11 +1,21 @@
-<%# 🌐 UI · shared/navigation/_account_panel — panneau du compte : identité, liens du rôle (NavigationHelper::ACCOUNT_PANELS), thème, déconnexion %>
-<%# Rôle : sur le site, <dialog> latérale ouverte par l'avatar de l'en-tête ; `page: true` rend le seul contenu (/students/menu, /teachers/menu) %>
-<%# UDR  : 0080 §3.1, §3.2, §3.6 · 0082 §3.2 · 0061 (déclencheur-lien : sans JavaScript, l'avatar mène à la page du panneau) · locals : user, page %>
+<%# 🌐 UI · shared/navigation/_account_panel — panneau du compte : identité, liens du rôle (NavigationHelper::ACCOUNT_PANELS ; élève : ceux du menu de l'avatar), thème, déconnexion %>
+<%# Rôle : sur le site, <dialog> latérale ouverte par l'avatar de l'en-tête (enseignant) ; `page: true` rend le seul contenu (/students/menu, /teachers/menu) %>
+<%# UDR  : 0080 §3.1, §3.2, §3.6 · 0082 §3.2 · 0084 §3.2 (liens 3 à 7 pour l'élève) · 0061 (déclencheur-lien : sans JavaScript, l'avatar mène à la page du panneau) · locals : user, page %>
 <% link_class = "flex min-h-tap w-full items-center gap-3 rounded-ln px-3 text-sm font-medium
                  focus-visible:outline-2 focus-visible:outline-brand" %>
+<%# UDR-0084 §3.2 : la page /students/menu de l'app Android reprend les liens 3 à 7 du menu de l'avatar du web. %>
+<% student = user.role.to_sym == :student %>
+<% links = if student
+             [ { label: t("shared.navigation.profile"), href: profile_path, icon: "user-circle" },
+               { label: t("shared.navigation.avatar_menu.history"), href: student_archive_path, icon: "archive-box" },
+               ({ label: t("shared.navigation.avatar_menu.add_photo"), href: edit_profile_photo_path, icon: "camera" } unless user.avatar_url),
+               { label: t("shared.help_sheet.trigger"), href: help_path, icon: "headset" } ].compact
+           else
+             account_panel_links(user.role)
+           end %>
 <% content = capture do %>
   <div class="flex items-center gap-3 border-b border-line pb-4">
-    <%= ui_avatar user.name, src: user.avatar_url, size: :lg %>
+    <%= ui_avatar user.name, src: user.avatar_url, size: :lg, tone_seed: (user.public_id if student) %>
     <div class="min-w-0">
       <p class="truncate font-display font-extrabold text-ink"><%= user.name %></p>
       <% if user.detail %><p class="truncate text-sm text-mute"><%= user.detail %></p><% end %>
@@ -13,7 +23,7 @@
   </div>
   <nav aria-label="<%= t("shared.navigation.account_panel.label") %>" class="py-2">
     <ul>
-      <% account_panel_links(user.role).each do |link| %>
+      <% links.each do |link| %>
         <li>
           <%= link_to link[:href], class: class_names(link_class, "text-ink hover:bg-mist"), "aria-current": ("page" if current_page?(link[:href])) do %>
             <%= ui_icon link[:icon], class: "text-mute" %><span><%= link[:label] %></span>

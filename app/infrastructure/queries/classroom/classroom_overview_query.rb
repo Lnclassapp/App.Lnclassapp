@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::ClassroomOverviewQuery
 # Rôle : corps de la page d'une classe (CL-10) : jours de séance de l'enseignant, exercices assignés et leurs comptes, cours, élèves au numéro masqué (nouveaux, voie)
-# ADR  : 0026, 0028, 0048, 0060, 0062, 0072, 0079, 0083 (§4.4 bis), 0085 · UDR : 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0079 (§3.8 ter), 0081 (§3.7)
+# ADR  : 0026, 0028, 0048, 0060, 0062, 0072, 0079, 0083 (§4.4 bis), 0085, 0089 (§4.2) · UDR : 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0079 (§3.8 ter), 0081 (§3.7), 0084 (§3.7)
 module Queries
   module Classroom
     class ClassroomOverviewQuery
@@ -15,8 +15,9 @@ module Queries
       # (ADR-0083 §4.4 bis : protéger les élèves).
       # joined_via : Entities::Classroom::StudentArrivalChannel.
       # newcomer : arrivé depuis moins de NEW_FOR (ADR-0085 §4.4).
+      # self_practice_count : sessions « fait seul » des SELF_PRACTICE_DAYS derniers jours (ADR-0089 §4.2), 0 sans aucune.
       StudentRow = Data.define(:public_id, :display_name, :contact, :last_score_percent, :last_session_public_id, :photo_version,
-                               :joined_via, :newcomer)
+                               :joined_via, :newcomer, :self_practice_count)
       # counts : AssignmentFollowUpQuery::Counts, nil sans show_follow_up (FollowAssignmentPolicy, ADR-0072 §4.5).
       # comprehension : Assessment::ComprehensionSummaryQuery::Summary (ADR-0079), nil sans show_follow_up, comme counts.
       AssignmentRow = Data.define(:public_id, :exercise_title, :material_name, :material_category, :due_on, :counts,
@@ -28,6 +29,8 @@ module Queries
                            classroom_students.joined_at].freeze
       # ADR-0085 §4.4 : un élève est « nouveau » pendant 7 jours après son arrivée ; calcul de lecture, sans colonne.
       NEW_FOR = 7.days
+      # ADR-0089 §4.2 : la fenêtre de « fait seul », aujourd'hui compris.
+      SELF_PRACTICE_DAYS = 7
       # UDR-0081 §3.7 : les nouveaux d'abord, du plus récent au plus ancien ; les autres (NULL) gardent l'ordre par nom.
       NEWCOMERS_FIRST = "CASE WHEN classroom_students.joined_at > ? THEN classroom_students.joined_at END DESC NULLS LAST".freeze
       # « Awa Bamba » se trouve par « awa », « bamba » ou « awa bamba » (UDR-0054 §3.9).
@@ -39,21 +42,30 @@ module Queries
 
       # search : « Chercher un élève » ; vide ou nil → toute la liste. Il ne filtre que les élèves de cette classe.
       # teacher_id : l'enseignant qui regarde (ses jours, sa matière) ; nil pour l'équipe, qui voit toutes les matières.
+      # today : la date d'Abidjan (Time.zone) qui clôt la fenêtre de « fait seul » ; jamais Date.today (fuseau du serveur).
       # → Overview | nil
-      def call(public_id:, show_roster:, search: nil, teacher_id: nil, show_follow_up: false)
+      def call(public_id:, show_roster:, search: nil, teacher_id: nil, show_follow_up: false, today: Time.zone.today)
         id, level_id, series_id = Orm::Classroom.where(public_id:).pick(:id, :level_id, :series_id)
         return if id.nil?
 
         since = Time.current - NEW_FOR
-        Overview.new(students: (students(id, search, since) if show_roster),
+        Overview.new(students: (students(id, search, since, today) if show_roster),
                      new_students_count: (new_students_count(id, since) if show_roster),
                      session_days: (session_days(teacher_id, id) if teacher_id),
                      assignments: assignments(id, show_follow_up), courses: courses(level_id, series_id, teacher_id))
       end
 
+      # ADR-0089 §4.2 : une session « fait seul » est terminée, standard (les remédiations restent hors du compte) et sans
+      # assignation ; son jour est celui de started_at à Abidjan, dans les SELF_PRACTICE_DAYS derniers jours, today compris.
+      # DirectionHomeQuery reprend cette définition. → relation d'Orm::ExerciseSession
+      def self.self_practice(today)
+        window = (today - (SELF_PRACTICE_DAYS - 1)).in_time_zone...(today + 1).in_time_zone
+        Orm::ExerciseSession.where(status: "completed", kind: "standard", classroom_assignment_id: nil, started_at: window)
+      end
+
       private
 
-      def students(classroom_id, search, since)
+      def students(classroom_id, search, since, today)
         scope = Orm::ClassroomStudent.joins(:student).where(classroom_id:, left_at: nil)
         rows = Queries::Shared::TextSearch.apply(scope, search, columns: [ STUDENT_NAME ])
                                           .order(Arel.sql(Orm::ClassroomStudent.sanitize_sql_array([ NEWCOMERS_FIRST, since ])),
@@ -61,12 +73,13 @@ module Queries
                                           .pluck(*STUDENT_COLUMNS)
         sessions = last_sessions(rows.map(&:first))
         photos = Queries::Identity::PhotoVersions.for(user_ids: rows.map(&:first))
+        practice = self.class.self_practice(today).where(student_id: rows.map(&:first)).group(:student_id).count
 
         rows.map do |id, public_id, first_name, last_name, contact, joined_via, joined_at|
           score, session_public_id = sessions[id]
           StudentRow.new(public_id:, display_name: "#{first_name} #{last_name}", contact: Entities::Identity::Contact.mask(contact),
                          last_score_percent: score, last_session_public_id: session_public_id, photo_version: photos[id],
-                         joined_via:, newcomer: joined_at > since)
+                         joined_via:, newcomer: joined_at > since, self_practice_count: practice.fetch(id, 0))
         end
       end
 

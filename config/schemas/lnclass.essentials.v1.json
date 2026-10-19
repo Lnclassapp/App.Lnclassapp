@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Import des fiches essentielles d'un cours, version 1 (ADR-0039, UDR-0039)",
-  "description": "Enveloppe { format, version, course, essentials[] }. course est le slug du cours cible, obligatoire. Chaque fiche porte ses exercices : exercises[] → questions[] → answers[], avec les clés de l'import des cours complets. La présence des noms et la structure des questions sont vérifiées par l'adaptateur, pour que l'erreur soit notée à la clé canonique. La clé status est ignorée : tout naît en brouillon.",
+  "description": "Enveloppe { format, version, course, essentials[] }. course est le slug du cours cible, obligatoire. Chaque fiche porte ses exercices : exercises[] → questions[] → answers[], avec les clés de l'import des cours complets. La présence des noms et la structure des questions sont vérifiées par l'adaptateur, pour que l'erreur soit notée à la clé canonique. tolerance (marge d’une question numeric) et match (côté droit d’une paire matching) sont facultatives (ADR-0091). La clé status est ignorée : tout naît en brouillon.",
   "type": "object",
   "required": ["format", "version", "course", "essentials"],
   "additionalProperties": false,
@@ -52,6 +52,7 @@
         "content": { "$ref": "#/$defs/text" },
         "question_type": { "$ref": "#/$defs/text" },
         "explanation": { "$ref": "#/$defs/text" },
+        "tolerance": { "type": ["number", "null"], "minimum": 0, "maximum": 99999999.9999 },
         "answers": {
           "type": "array",
           "items": { "$ref": "#/$defs/answer" }
@@ -64,7 +65,8 @@
       "properties": {
         "content": { "type": ["string", "null"], "maxLength": 500 },
         "correct": { "type": ["boolean", "null"] },
-        "is_correct": { "type": ["boolean", "null"] }
+        "is_correct": { "type": ["boolean", "null"] },
+        "match": { "type": ["string", "null"], "maxLength": 500 }
       }
     }
   }

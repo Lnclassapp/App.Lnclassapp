@@ -15,6 +15,8 @@ module Repositories
       TABLES = %w[courses essentials exercises questions answers action_text_rich_texts].freeze
       # Identifiants, horodatages de création et auteur : ils changent d'une base à l'autre, pas le contenu.
       IGNORED = %w[id public_id created_at updated_at author_id record_id].freeze
+      # ADR-0091 : colonnes venues après l'instantané ; ces leçons n'ont que des choix, elles restent vides (vérifié à part).
+      ADDED_LATER = %w[numeric_tolerance match_content].freeze
 
       setup do
         seed_referential
@@ -55,7 +57,7 @@ module Repositories
           lines = created(table).map do |row|
             path = path_of(table, row, paths)
             paths[[ table, row["id"] ]] = path
-            line = row.except(*IGNORED, "course_id", "essential_id", "exercise_id", "question_id")
+            line = row.except(*IGNORED, *ADDED_LATER, "course_id", "essential_id", "exercise_id", "question_id")
             # ADR-0104 : colonne née après l'instantané ; une leçon sans image l'écrit vide, ce que l'instantané ne connaît pas.
             line.delete("image_description") if line.key?("image_description") && line["image_description"].nil?
             taxonomy.each { |column, by_id| line[column] = by_id[row[column]] if row.key?(column) }
@@ -87,6 +89,7 @@ module Repositories
         TABLES.each do |table|
           expected.fetch(table).zip(actual.fetch(table)).each { |want, got| assert_equal want, got, "#{table} #{want['path']}" }
         end
+        assert_equal [ nil ], (created("questions").map { it["numeric_tolerance"] } + created("answers").map { it["match_content"] }).uniq
         assert_equal 4, written.fetch(:imported)
         assert_equal [ @author.id ], %w[courses essentials exercises].flat_map { |table| created(table).map { it["author_id"] } }.uniq
       end

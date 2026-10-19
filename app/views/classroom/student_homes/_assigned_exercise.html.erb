@@ -1,17 +1,21 @@
-<%# 🌐 UI · classroom/student_homes/_assigned_exercise — un exercice assigné : titre (lien), matière, échéance, un bouton %>
+<%# 🌐 UI · classroom/student_homes/_assigned_exercise — un exercice assigné : pastille de la matière, titre (lien), matière, échéance, un bouton %>
 <%# Rôle : « Commencer » (POST) ou « Reprendre » (session en cours), principal sur la 1re ligne (la plus urgente) seulement %>
-<%# ADR  : 0054, 0072 · UDR : 0057 §2.4, 0058 §3.3, 0062 §3.2 (échéance par due_badge, aucune une fois terminé) %>
+<%# ADR  : 0054, 0072 · UDR : 0057 §2.4, 0058 §3.3, 0062 §3.2 (échéance par due_badge, aucune une fois terminé), 0084 §3.8 %>
 <%# locals: (exercise:, index:) -%>
 <% variant = index.zero? ? :primary : :secondary %>
-<%= tag.li class: "flex items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6", **ui_reveal_item(index) do %>
+<% illustration = subject_illustration(exercise.material_slug) %>
+<%= tag.li class: "flex items-center gap-3 py-3 first:pt-0 last:pb-0 sm:gap-4", **ui_reveal_item(index) do %>
+  <span class="<%= class_names("grid size-11 shrink-0 place-items-center rounded-full", illustration.tint) %>" aria-hidden="true">
+    <%= image_tag illustration.path, alt: "", class: "size-7", loading: "lazy" %>
+  </span>
   <div class="min-w-0 flex-1 space-y-1">
     <%# 2 lignes au plus : le titre reste lisible à côté du bouton, sur un téléphone de 360 px. %>
     <p class="line-clamp-2 font-medium break-words text-ink">
       <%= link_to exercise.title, exercise_path(exercise.public_id),
                   class: "rounded-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
     </p>
-    <div class="flex flex-wrap items-center gap-2">
-      <%= ui_subject_badge exercise.material_name, category: exercise.material_category, size: :sm %>
+    <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-mute">
+      <span><%= exercise.material_name %></span>
       <%= due_badge exercise.due_on, done: exercise.completed_count.positive?, size: :sm %>
     </div>
   </div>

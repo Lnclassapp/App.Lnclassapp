@@ -69,6 +69,32 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     assert_equal 0, Orm::User.where(role: "student", contact: "0701020304").count
   end
 
+  # UDR-0088 §3.4 (CA-4, CA-6, CA-7) at 390 px: the link's classroom in section 1, the gender as a pill, a 9-digit number
+  # refused under the number with the focus on it.
+  test "CA-6, CA-7 at 390 px: the link's banner in section 1, a 9-digit number refused under it, the focus on it" do
+    with_mobile_viewport do
+      visit join_classroom_path(@classroom.reload.link_token)
+
+      assert_selector "#auth-welcome-card", text: "Bienvenue sur Lnclass"
+      within("#student-registration-section-classroom") do
+        assert_selector "#classroom-preview", text: "6ème 1 — Lycée Classique d'Abidjan"
+        assert_link I18n.t("#{FORM}.other_classroom")
+      end
+      fill_in_the_student
+      assert_selector "#student-registration-gender label:has(input:checked)", text: I18n.t("genders.female")
+      # UDR-0088 §3.4, §3.7 : de vraies radios, 44 px de haut ; la flèche du clavier passe à l'autre pastille.
+      assert_equal [ 44 ], all("#student-registration-gender label").map { evaluate_script("arguments[0].getBoundingClientRect().height", it).round }.uniq
+      find_field(I18n.t("genders.female")).send_keys(:right)
+      assert_checked_field I18n.t("genders.male")
+      fill_in "student_registration[contact]", with: "070102030"
+      click_on I18n.t("#{FORM}.submit")
+
+      assert_selector "#student_registration_contact_error", text: I18n.t("#{ERRORS}.contact.invalid")
+      assert_selector "#student_registration_contact[aria-invalid=true]:focus"
+    end
+    assert_equal 0, Orm::User.where(role: "student").count
+  end
+
   test "IL-10: « Ce n'est pas ta classe ? » goes back to the cascade, and the student lands in the other classroom" do
     visit join_classroom_path(@classroom.reload.link_token)
     click_on I18n.t("#{FORM}.other_classroom")
@@ -116,11 +142,12 @@ class Classroom::JoinTest < ApplicationSystemTestCase
 
   private
 
-  # Each list of the cascade arrives in its frame once its parent is chosen (UDR-0081 §3.3).
+  # Each step of the cascade arrives in its frame once its parent is chosen (UDR-0081 §3.3); the level is a pill, the
+  # classroom a box, both real radios (UDR-0091 §3.1).
   def choose_classroom(name)
     select "Abidjan 1", from: "student_registration[drena_public_id]"
     select "Lycée Classique d'Abidjan", from: "student_registration[school_public_id]"
-    select "6ème", from: "student_registration[level_slug]"
+    within("turbo-frame#picker_levels") { choose "6ème" }
     within("turbo-frame#picker_classrooms") { choose name }
   end
 

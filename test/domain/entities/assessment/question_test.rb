@@ -46,7 +46,29 @@ module Entities
 
         assert copy.answers.all? { it.correct.nil? }
         assert_equal [ 1, 2 ], copy.answer_ids
-        assert_equal %w[true_false single_choice multiple_correct_2 multiple_correct_3], Question::TYPES
+      end
+
+      # ADR-0091 §4.3 : huit types ; les quatre de toujours passent par Choice sans changer de comportement.
+      test "huit types, chacun délégué à sa classe de règles" do
+        assert_equal %w[true_false single_choice multiple_correct_2 multiple_correct_3 fill_blank numeric ordering matching],
+                     Question::TYPES
+        assert_equal [ QuestionKinds::Choice ], Question::TYPES.first(4).map { Question.kind_for(it) }.uniq
+        assert_equal [ QuestionKinds::FillBlank, QuestionKinds::Numeric, QuestionKinds::Ordering, QuestionKinds::Matching ],
+                     Question::TYPES.last(4).map { Question.kind_for(it) }
+        assert_equal %w[choice fill_blank numeric ordering matching], Question::TYPES.map { Question.kind_name_for(it) }.uniq
+        assert_nil Question.kind_for("open")
+        assert_nil Question.kind_name_for(nil)
+        assert_equal "choice", question(:true_false, true, false).kind_name
+        assert_equal Question::EXPECTED, QuestionKinds::Choice::EXPECTED
+      end
+
+      test "la marge et le côté droit d'une paire sont facultatifs" do
+        assert_nil question("single_choice", true, false).numeric_tolerance
+        assert_nil Answer.new(id: 1, position: 1, content: "a", correct: true).match_content
+        assert_equal [ 3, 1, 2 ], Question.new(id: 1, position: 1, content: "?", explanation: nil, question_type: "ordering",
+                                               answers: [ Answer.new(id: 2, position: 3, content: "c", correct: true),
+                                                          Answer.new(id: 3, position: 1, content: "a", correct: true),
+                                                          Answer.new(id: 1, position: 2, content: "b", correct: true) ]).ids_by_position
       end
 
       # ADR-0104 §4.4 : ce qui manque pour publier, sans gêner l'enregistrement d'un brouillon.

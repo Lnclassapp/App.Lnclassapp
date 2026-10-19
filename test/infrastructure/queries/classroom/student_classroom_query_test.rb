@@ -33,9 +33,46 @@ module Queries
 
         assert_equal [ @classroom.public_id, "Tle D 1", "Tle", "D", "Lycée Classique", "2026-2027" ],
                      row.to_h.values_at(:public_id, :classroom_name, :level_name, :series_name, :school_name, :school_year)
-        assert_equal %i[public_id classroom_name level_name series_name school_name school_year courses assigned_exercises
-                        treated_exercises], row.to_h.keys
+        assert_equal %i[public_id classroom_name level_name series_name school_name school_year has_teacher courses
+                        assigned_exercises treated_exercises], row.to_h.keys
         assert_no_match "Yapo", row.inspect
+      end
+
+      # UDR-0086 §3.3 (ma-classe-eleve): « Aucun enseignant sur Lnclass » reads teacher_classrooms, in the same query
+      # as the header; a teacher of another classroom of the same school does not count.
+      # ADR-0067: the count is pinned, with or without a teacher (relevé le 2026-10-15).
+      QUERIES = 6
+
+      test "has_teacher: false without a teacher in the classroom, true with one, in the same number of queries" do
+        create_teacher(school: @classroom.school, classrooms: [ create_classroom(school: @classroom.school) ])
+        assert_equal false, classroom.has_teacher
+        assert_equal QUERIES, count_queries { classroom }
+
+        create_teacher(school: @classroom.school, classrooms: [ @classroom ])
+
+        assert_equal true, classroom.has_teacher
+        assert_equal QUERIES, count_queries { classroom }
+      end
+
+      # An anonymized teacher (users.anonymized_at) is no longer on Lnclass: the invitation must show.
+      test "has_teacher: false when the only teacher of the classroom is anonymized" do
+        teacher = create_teacher(school: @classroom.school, classrooms: [ @classroom ])
+        Orm::User.where(id: teacher.id).update_all(anonymized_at: Time.current)
+
+        assert_equal false, classroom.has_teacher
+
+        create_teacher(school: @classroom.school, classrooms: [ @classroom ])
+        assert_equal true, classroom.has_teacher
+      end
+
+      # Only the primary classroom counts: a teacher in a secondary classroom of the student does not hide the invitation.
+      test "has_teacher: false when only a secondary classroom of the student has a teacher" do
+        secondary = create_classroom(school: @classroom.school)
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: secondary, student: @student, primary: false,
+                                      joined_at: Time.current)
+        create_teacher(school: @classroom.school, classrooms: [ secondary ])
+
+        assert_equal false, classroom.has_teacher
       end
 
       test "a classroom without series" do
@@ -106,8 +143,9 @@ module Queries
         rows = classroom.treated_exercises
 
         assert_equal [ [ "Refait", 80 ], [ "Une fois", 65 ] ], rows.map { [ it.title, it.best_score_percent ] }
-        assert_equal [ last.public_id, twice.public_id, "SVT", "science" ],
-                     rows.first.to_h.values_at(:last_session_public_id, :exercise_public_id, :material_name, :material_category)
+        assert_equal [ last.public_id, twice.public_id, "SVT", "svt", "science" ],
+                     rows.first.to_h.values_at(:last_session_public_id, :exercise_public_id, :material_name, :material_slug,
+                                               :material_category)
       end
 
       # UDR-0076 §3.2 : le travail terminé reste à l'élève quand l'exercice est dépublié ensuite, comme « Mes activités

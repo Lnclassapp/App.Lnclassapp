@@ -26,9 +26,12 @@ module Factories
       Orm::LevelSeries.create!(level:, series:)
     end
 
-    def create_material(name: nil, category: "science", shortname: nil)
+    def create_material(name: nil, category: "science", shortname: nil, position: :program)
       sequence = factory_sequence
-      Orm::Material.create!(name: name || "Matière #{sequence}", shortname: shortname || "M#{sequence}", category:)
+      name ||= "Matière #{sequence}"
+      # The program rank of ADR-0090 §4.2, as the migration and the team's creation give it; any other has none.
+      position = Repositories::Catalog::ProgramOrder.rank(name.parameterize) if position == :program
+      Orm::Material.create!(name:, shortname: shortname || "M#{sequence}", category:, position:)
     end
 
     def create_course(level: create_level, material: create_material, series: nil, name: "Cours #{factory_sequence}",
