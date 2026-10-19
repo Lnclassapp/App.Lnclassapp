@@ -2,7 +2,7 @@
 <!-- index
 titre: Un `Result` partagé pour les use cases, des objets de lecture typés pour les queries, des entités et des DTO sans ActiveRecord
 statut: Accepté — *remplace 0006, 0012 §3.1, 0021, 0022 §2.A-C*
-problematique: `Shared::Result` (`value`, `code`, `errors`) et six codes d'erreur fermés ; lectures par queries renvoyant des `Data` ; `ActiveModel` toléré dans entités et DTO ; domaine interdit à `ActiveRecord`, `Orm::`, `Repositories::`, `Queries::`. F-01 + F-03.
+problematique: `Shared::Result` (`value`, `code`, `errors`) et sept codes d'erreur fermés ; lectures par queries renvoyant des `Data` ; `ActiveModel` toléré dans entités et DTO ; domaine interdit à `ActiveRecord`, `Orm::`, `Repositories::`, `Queries::`. F-01 + F-03.
 -->
 
 | | |
@@ -50,8 +50,9 @@ L'ancien dépôt n'a aucun contrat de retour : `OpenStruct`, `Struct` locaux, ex
 | `:conflict` | l'état ne permet pas l'action (question déjà répondue, élément encore référencé) ; `errors[:base]` explique | 422 |
 | `:locked` | compte verrouillé (ADR-0050) ; `errors[:retry_after]` | 429 |
 | `:expired` | jeton ou code périmé (ADR-0032, ADR-0038) | 422 |
+| `:unavailable` | la file a refusé le travail demandé ; rien n'a été changé (ADR-0096 §4.8) | aucune traduction automatique : le contrôleur du use case redirige avec un message à réessayer |
 
-Ajouter un code demande d'amender cet ADR.
+Ajouter un code demande d'amender cet ADR. *Amendé le 2026-10-19 (ADR-0096 §4.8) : septième code, `:unavailable`.*
 
 **Lectures.** Le chemin de l'ADR-0006 §3.2 est retenu : un contrôleur appelle directement une query `Queries::<Contexte>::<Nom>Query`, jamais un use case. Une query renvoie un objet `Data` (défini dans la query, constante `Row`), un tableau de `Row`, ou `nil` ; jamais une relation, jamais un `Hash`, jamais un modèle `Orm::`. Les agrégations se font en SQL (règle anti-`group_by` de l'ADR-0006, reprise telle quelle). L'autorisation d'une lecture est traitée par l'ADR-0028. Les `ViewObjects` et le use case CRUD générique de l'ADR-0012 sont abandonnés. `BrowseCatalog` et `ViewCourse` (ADR-0022 §2.C) ne sont pas repris.
 

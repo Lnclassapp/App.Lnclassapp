@@ -1,0 +1,15 @@
+<%# 🌐 UI · teams/schools/_codes_menu — menu « Codes » de la liste des établissements, équipe admin %>
+<%# Rôle : « Régénérer les codes d'établissement » et « … les liens des classes » de la sélection filtrée ; désactivés sans établissement %>
+<%# ADR  : 0096 · UDR : 0043, 0045, 0104 · rendu par index, puis remplacé par chaque réponse du frame « schools » (filtres changés) %>
+<% query = filters.compact_blank %>
+<div id="schools-codes-menu-slot" class="contents">
+  <%= ui_dropdown label: t("teams.schools.index.codes_menu_label"), id: "schools-codes-menu", fixed: true,
+                  trigger: tag.span(safe_join([ ui_icon("key", size: :sm), t("teams.schools.index.codes_menu") ], " "),
+                                    class: "flex items-center gap-2 pl-2 text-sm font-semibold whitespace-nowrap text-ink") do %>
+    <% { "school_codes" => %w[regenerate_school_codes arrow-path], "classroom_links" => %w[regenerate_classroom_links link] }.each do |target, (key, icon)| %>
+      <% label = t("teams.schools.index.#{key}") %>
+      <%= ui_dropdown_item empty ? t("teams.schools.index.regenerate_empty", action: label) : label,
+                           href: (new_code_regeneration_path(target:, **query) unless empty), icon:, frame: "modal", tone: :danger %>
+    <% end %>
+  <% end %>
+</div>

@@ -1,7 +1,7 @@
 # PRD — Remédiation ciblée
 
 > Les specs sont figées ici. Toute évolution après la phase 3 se fait par modification explicite de ce fichier, pas par improvisation dans le code.
-> **Écrit selon les recommandations du [memo](memo.md#ce-que-le-grill-a-révélé) (Q1 à Q12), en attente de validation du porteur.**
+> **Écrit selon les recommandations du [memo](memo.md#ce-que-le-grill-a-révélé) (Q1 à Q12), acceptées par le porteur le 2026-10-16.**
 
 ## 1. Contexte
 
@@ -34,7 +34,7 @@ La lacune s'ouvre et se lève déjà à la clôture (ADR-0043), et toute session
 ### Chemin nominal — enseignant (AS-17)
 
 1. M. Koné ouvre la page de sa 3ème B. Un bloc « Fiches à revoir » liste « Théorème de Thalès · 4 élèves », puis les autres fiches.
-2. Il ouvre la fiche : la page « fiche dans la classe » montre, au-dessus des exercices, la section « Élèves à revoir » (Awa Bamba, depuis le 12 octobre, 3 essais sous la moyenne ; …) et « Fiche levée » (Yao Kouassi, le 14 octobre ; …).
+2. Il ouvre la fiche : la page « fiche dans la classe » montre, au-dessus des exercices, la section « Élèves à revoir » (Awa Bamba, depuis le 12 oct., 3 sessions sous la moyenne ; …) et « Fiche levée » (Yao Kouassi, le 14 oct. ; …).
 
 ### Chemins alternatifs et erreurs
 
@@ -121,8 +121,8 @@ Fonctionnalité: L'enseignant suit les fiches à revoir de sa classe (AS-17)
   Contexte:
     Étant donné la 3ème B de l'année 2026-2027, enseignée par M. Koné (mathématiques)
     Et la fiche publiée « Théorème de Thalès » d'un cours de mathématiques de 3ème
-    Et les élèves présents Awa (fiche à revoir depuis le 12 octobre, 3 échecs), Bintou (fiche à revoir, 1 échec)
-    Et Yao, dont la fiche a été levée le 14 octobre
+    Et les élèves présents Awa (fiche à revoir depuis le 12 oct., 3 échecs), Bintou (fiche à revoir, 1 échec)
+    Et Yao, dont la fiche a été levée le 14 oct.
 
   Scénario: Le bloc de la page de classe compte les élèves à revoir par fiche
     Quand M. Koné ouvre la page de la 3ème B
@@ -149,9 +149,9 @@ Fonctionnalité: L'enseignant suit les fiches à revoir de sa classe (AS-17)
   Scénario: La fiche dans la classe nomme les élèves
     Quand M. Koné ouvre « Théorème de Thalès » depuis la 3ème B
     Alors la section « Élèves à revoir » liste Awa puis Bintou, la plus ancienne lacune d'abord
-    Et Awa porte « depuis le 12 octobre » et « 3 essais sous la moyenne »
-    Et Bintou ne porte pas de compte d'essais
-    Et la section « Fiche levée » liste Yao avec « le 14 octobre »
+    Et Awa porte « depuis le 12 oct. » et « 3 sessions sous la moyenne »
+    Et Bintou ne porte pas de compte de sessions sous la moyenne
+    Et la section « Fiche levée » liste Yao avec « le 14 oct. »
     Et aucune mention ne distingue une remédiation d'une correction seule
 
   Scénario: Élève parti ou anonymisé
@@ -190,6 +190,8 @@ Fonctionnalité: L'enseignant suit les fiches à revoir de sa classe (AS-17)
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Requêtes SQL de la page de classe | à mesurer (Lot C) | + 1 au plus, quel que soit le nombre d'élèves | |
-| Requêtes SQL de la fiche vue depuis la classe | à mesurer (Lot C) | + 1 au plus | |
-| Page de classe, p95, jeu de l'ADR-0067 | à mesurer (Lot C) | dans le budget de 100 ms de l'ADR-0067, ou écart noté | |
+| Requêtes SQL de la page de classe | 20 (enseignant, 1 ou 30 élèves à revoir) | + 1 au plus, quel que soit le nombre d'élèves | **21** à 1 et à 30 élèves (+ 1, sur `knowledge_gaps`) |
+| Requêtes SQL de la fiche vue depuis la classe | 17 | + 1 au plus | **18** à 1 et à 30 élèves (+ 1) |
+| Page de classe, p95, jeu de l'ADR-0067 | à mesurer (Lot C) | dans le budget de 100 ms de l'ADR-0067, ou écart noté | SQL ajouté seul, 30 lectures après 3 de chauffe : `summary` **5,5 ms** (classe mesurée de l'enseignant `0520000001`, 55 élèves, aucune fiche à revoir dans sa matière) et **6,5 ms** (classe la plus touchée, lue par l'équipe : 12 cours, 10 fiches) ; `detail` **3,8 ms** (16 à revoir). Page entière non remesurée : voir le journal |
+
+Mesure du 2026-10-16, base de test, jeu `script/perf/dataset.rb` corrigé comme dans `remediation-comptee-faite` : 14 775 sessions passées en remédiation, une lacune levée par sa dernière remédiation à 75 % ou plus (6 417 levées, 80 563 en attente), puis `VACUUM ANALYZE`. Requêtes comptées par requête HTTP réelle, hors `SCHEMA` et `TRANSACTION`.

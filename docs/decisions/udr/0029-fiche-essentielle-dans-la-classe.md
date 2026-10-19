@@ -1,14 +1,14 @@
 # UDR-0029 : Fiche essentielle dans la classe — ses exercices publiés, leur bascule d'assignation et la réussite de la classe
 <!-- index
 titre: Fiche essentielle dans la classe
-statut: Accepté — *amendé le 2026-10-02 : plus de bascule de fiche ; date limite de l'exercice (UDR-0062)*
+statut: Accepté — *amendé le 2026-10-02 : plus de bascule de fiche ; date limite de l'exercice (UDR-0062)* — *amendé le 2026-10-16 : élèves à revoir et fiche levée (UDR-0121)*
 adr-lie: [0048](../adr/0048-statuts-d-assignation-active-et-archived.md), [0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md)
 problematique: Ses exercices publiés, leur bascule d'assignation et la réussite de la classe
 -->
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `fonctions-espace-eleve` : plus d'assignation de cours ni de fiche (UDR-0062)* |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `fonctions-espace-eleve` : plus d'assignation de cours ni de fiche (UDR-0062)* — *amendée le 2026-10-16 (acceptée par le porteur) par le chantier `remediation-ciblee` : section `#classroom_essential_gaps` ([UDR-0121](0121-fiches-a-revoir-de-la-classe-pour-l-enseignant.md))* |
 | **Date** | 2026-09-26 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot D6, critères CL-12, AS-20 |
 | **ADR lié** | [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) (active/archived) · [ADR-0035](../adr/0035-cycle-de-vie-et-propriete-du-contenu.md) (seul un contenu publié s'assigne) · [UDR-0028](0028-cours-dans-la-classe-et-bascule-d-assignation.md) (bascule d'assignation) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) (vocabulaire) |

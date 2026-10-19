@@ -3,6 +3,8 @@
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
 > **Plan écrit selon les recommandations du [memo](memo.md#ce-que-le-grill-a-révélé).** Il ne démarre qu'après validation de Q1 à Q12 par le porteur ; une réponse contraire le modifie d'abord.
+>
+> **2026-10-16 : lots A à D exécutés en autonomie, à la demande du porteur, sur les recommandations ; recommandations acceptées par le porteur le même jour (voir le [journal](journal.md)).**
 
 ## Graphe
 
@@ -22,7 +24,7 @@ Lot 0 — sans objet (aucun contrat partagé, aucun fichier partagé : voir ci-d
 
 ---
 
-## Lot A — L'élève : la fiche propose un exercice choisi et le démarre d'un tap
+## Lot A — L'élève : la fiche propose un exercice choisi et le démarre d'un tap — ✅ Done
 
 - **Couche**       : domaine + infrastructure + ui
 - **Fichiers**     : `app/domain/entities/assessment/remediation_pick.rb` *(nouveau)*
@@ -40,7 +42,7 @@ Lot 0 — sans objet (aucun contrat partagé, aucun fichier partagé : voir ci-d
 
 ---
 
-## Lot B — L'élève : le résultat dit ce qu'il advient de sa fiche
+## Lot B — L'élève : le résultat dit ce qu'il advient de sa fiche — ✅ Done
 
 - **Couche**       : domaine + infrastructure + ui
 - **Fichiers**     : `app/domain/entities/assessment/gap_outcome.rb` *(nouveau)*
@@ -56,7 +58,7 @@ Lot 0 — sans objet (aucun contrat partagé, aucun fichier partagé : voir ci-d
 
 ---
 
-## Lot C — L'enseignant : les fiches à revoir de sa classe
+## Lot C — L'enseignant : les fiches à revoir de sa classe — ✅ Done
 
 - **Couche**       : infrastructure + delivery + ui
 - **Fichiers**     : `app/infrastructure/queries/assessment/classroom_gaps_query.rb` *(nouveau)*
@@ -76,7 +78,7 @@ Lot 0 — sans objet (aucun contrat partagé, aucun fichier partagé : voir ci-d
 
 ---
 
-## Lot D — Preuve bout en bout
+## Lot D — Preuve bout en bout — ✅ Done
 
 - **Couche**       : tests système
 - **Fichiers**     : `test/system/assessment/remediation_test.rb` *(nouveau)*
@@ -121,10 +123,10 @@ Lot 0 — sans objet (aucun contrat partagé, aucun fichier partagé : voir ci-d
 
 ## Portes de sortie
 
-- [ ] Q1 à Q12 répondues ; ADR-0101 et UDR-0119 à 0121 passées « Accepté »
-- [ ] Tous les lots sont `Done`
-- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : tests lancés, parcours élève puis enseignant refait dans l'application
-- [ ] Captures envoyées au porteur, non commitées : fiche, résultat (3 états), page de classe, fiche dans la classe, à 390 px et sur ordinateur, en clair et en sombre
-- [ ] `bin/ci-quiet` au vert, verdict collé dans la PR (CI GitHub coupée, ADR-0069)
-- [ ] Revue par sous-agents sur le diff final (une policy n'est pas touchée, mais une page nominative l'est) : `security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`
-- [ ] Commit de clôture : `script/docs/build_index` pour les index ADR/UDR ; `docs/chantiers/README.md` mis à jour une fois ; feuille de route (AS-16, AS-17 livrées ; V5 close) ; ADR-0043 marqué « amendé par 0101 » ; `journal.md` complété
+- [x] Q1 à Q12 répondues (recommandations acceptées, 2026-10-16) ; ADR-0101 et UDR-0119 à 0121 passées « Accepté »
+- [x] Tous les lots sont `Done`
+- [x] Un rôle distinct de l'auteur a **exécuté** le résultat : tests lancés, parcours élève puis enseignant refait dans l'application (session de clôture, distincte de celle des lots : parcours rejoué dans Chromium pour les captures, `bin/ci-quiet` complet)
+- [x] Captures envoyées au porteur, non commitées : fiche, résultat (3 états), page de classe, fiche dans la classe, aide, à 390 px et sur ordinateur, en clair et en sombre (28 images)
+- [x] `bin/ci-quiet` au vert, verdict collé dans la PR (CI GitHub coupée, ADR-0069)
+- [ ] Revue par sous-agents sur le diff final (une policy n'est pas touchée, mais une page nominative l'est) : `security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer` — **non lancée** : la session de clôture n'a pas d'outil de sous-agent ; à faire avant la fusion
+- [x] Commit de clôture : `script/docs/build_index` pour les index ADR/UDR ; `docs/chantiers/README.md` mis à jour une fois ; feuille de route (AS-16, AS-17 livrées ; V5 close) ; ADR-0043 marqué « amendé par 0101 » ; `journal.md` complété

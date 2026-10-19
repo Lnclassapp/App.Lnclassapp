@@ -21,9 +21,29 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #lock_by_link_token"
       end
 
-      # ADR-0085 §4.1 : tire un nouveau jeton, l'ancien est invalide aussitôt. → String (le nouveau jeton)
+      # ADR-0085 §4.1 : tire un nouveau jeton, l'ancien est invalide aussitôt ; date le changement (link_token_rotated_at,
+      # ADR-0096). → String (le nouveau jeton)
       def rotate_link_token(id:)
         raise NotImplementedError, "#{self.class} doit implémenter #rotate_link_token"
+      end
+
+      # ADR-0096 §4.4 : classes actives des établissements de la sélection (Dtos::School::SchoolSelection), de school_year
+      # (nil : toutes les années), créées avant `created_before`. → Integer
+      def count_for_link_regeneration(selection:, school_year:, created_before:)
+        raise NotImplementedError, "#{self.class} doit implémenter #count_for_link_regeneration"
+      end
+
+      # Les mêmes, id > after_id, par id croissant, `limit` au plus ; label = « établissement · classe », rotated_at =
+      # link_token_rotated_at ; jamais le jeton. → [Entities::School::RegenerationCandidate]
+      def link_regeneration_batch(selection:, school_year:, created_before:, after_id:, limit:)
+        raise NotImplementedError, "#{self.class} doit implémenter #link_regeneration_batch"
+      end
+
+      # Un seul UPDATE : nouveau jeton tiré par la base et link_token_rotated_at = at, pour les classes actives dont le lien
+      # n'a pas changé depuis `unchanged_since`. Un jeton pris lève l'erreur d'unicité (TransactionPort#attempt).
+      # → [Integer] (ids écrits)
+      def rotate_link_tokens(ids:, at:, unchanged_since:)
+        raise NotImplementedError, "#{self.class} doit implémenter #rotate_link_tokens"
       end
 
       # → Result(Classroom) | failure(:conflict, errors: { name: [:taken] })
