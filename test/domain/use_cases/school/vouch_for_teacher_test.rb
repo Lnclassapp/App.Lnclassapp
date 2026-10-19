@@ -78,6 +78,7 @@ module UseCases
         assert_equal :conflict, vouch.code
         assert_empty @referrals.referrals
         assert_empty @audit.events
+        assert_empty @materials.calls
       end
 
       test "m5: a teacher of another school, or the team, reads not found — the request is not confirmed to exist" do

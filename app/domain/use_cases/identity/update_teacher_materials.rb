@@ -35,17 +35,23 @@ module UseCases
       def store(actor, materials, ip)
         before = @teacher_materials.material_ids_for(teacher_id: actor.user_id, school_id: actor.school_id)
         after = materials.map(&:id)
-        # Rien ne change : aucune écriture, aucune trace.
-        return Shared::Result.success if before == after
+        # Rien ne change (même ensemble, quel que soit l'ordre envoyé) : aucune écriture, aucune trace.
+        return Shared::Result.success if before.sort == after.sort
 
         now = @clock.now
         @transaction.call do
-          @teacher_materials.replace(teacher_id: actor.user_id, school_id: actor.school_id, material_ids: after, at: now)
+          written = @teacher_materials.replace(teacher_id: actor.user_id, school_id: actor.school_id, material_ids: after, at: now)
+          # Retiré de l'établissement entre-temps : rien n'est écrit, rien n'est tracé.
+          next Shared::Result.failure(:forbidden) unless written
+
           @audit_log.record(action: "profile.materials_changed", actor_id: actor.user_id, at: now, subject_type: "User",
-                            subject_id: actor.user_id, metadata: { school_id: actor.school_id, from: before, to: after }, ip:)
+                            subject_id: actor.user_id, metadata: { school_id: actor.school_id, from: before, to: stored_order(before, after) }, ip:)
           Shared::Result.success
         end
       end
+
+      # L'ordre réellement stocké : les matières gardées gardent leur rang, les nouvelles suivent dans l'ordre envoyé.
+      def stored_order(before, after) = (before & after) + (after - before)
     end
   end
 end

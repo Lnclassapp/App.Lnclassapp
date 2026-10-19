@@ -10,7 +10,8 @@ module Ports
       end
 
       # Remplace TOUTE la liste (déjà bornée par Entities::Identity::TeacherMaterials), dans la transaction de l'appelant ;
-      # les matières gardées conservent leur rang, les nouvelles suivent dans l'ordre donné. → true
+      # les matières gardées conservent leur rang, les nouvelles suivent dans l'ordre donné. Verrouille le rattachement
+      # (teacher_id, school_id) : deux remplacements simultanés se suivent. → true ; false sans rattachement, rien n'est écrit
       def replace(teacher_id:, school_id:, material_ids:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #replace"
       end

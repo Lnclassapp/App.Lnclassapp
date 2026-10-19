@@ -55,10 +55,16 @@ class School::CurrentSchoolIsolationTest < ActionDispatch::IntegrationTest
       assert_no_match "Le vivant", response.body, path
     end
 
-    patch profile_materials_path, params: { profile_materials: { material_slugs: [ svt.slug ] } }
+    english = create_material(name: "Anglais")
+    patch profile_materials_path, params: { profile_materials: { material_slugs: [ english.slug ] } }
 
-    assert_equal [ svt.id ], Orm::TeacherSchoolMaterial.where(teacher: @teacher, school: @a).pluck(:material_id)
-    assert_equal [ svt.id ], Orm::TeacherSchoolMaterial.where(teacher: @teacher, school: @b).pluck(:material_id)
+    assert_equal [ english.id ], Orm::TeacherSchoolMaterial.where(teacher: @teacher, school: @a).pluck(:material_id)
+    assert_equal [ svt.id ], Orm::TeacherSchoolMaterial.where(teacher: @teacher, school: @b).pluck(:material_id),
+                 "la liste de B garde sa propre matière"
+    [ teacher_home_path, courses_path ].each do |path|
+      get path
+      assert_no_match "Sciences de la vie", response.body, path
+    end
   end
 
   test "a course and an exercise of a level taught only in B offer no classroom of B to assign" do

@@ -36,8 +36,8 @@ module UseCases
         @teacher = Entities::Identity::Actor.new(user_id: 50, role: :teacher, school_id: 31)
       end
 
-      def update(*slugs, actor: @teacher)
-        UpdateTeacherMaterials.new(teacher_materials: @materials, taxonomy: @taxonomy, audit_log: @audit, transaction: @transaction,
+      def update(*slugs, actor: @teacher, materials: @materials)
+        UpdateTeacherMaterials.new(teacher_materials: materials, taxonomy: @taxonomy, audit_log: @audit, transaction: @transaction,
                                    policy: Policies::Identity::ManageOwnMaterialsPolicy.new, clock: Clock.new(NOW))
                               .call(actor:, dto: Dtos::Identity::TeacherMaterialsInput.new(material_slugs: slugs), ip: "1.2.3.4")
       end
@@ -83,6 +83,28 @@ module UseCases
       test "the same list writes nothing and succeeds, without audit" do
         assert update("physique-chimie", "svt").success?
         assert_nothing_written
+      end
+
+      test "the same subjects in another order write nothing and succeed, without audit" do
+        assert update("svt", "physique-chimie").success?
+        assert_nothing_written
+      end
+
+      test "the audit records the order really stored: the kept subjects first, the new ones after" do
+        assert update("mathematiques", "svt", "physique-chimie").success?
+
+        assert_equal [ [ :replace, 50, 31, [ 7, 6, 5 ], NOW ] ], @materials.calls
+        assert_equal({ school_id: 31, from: [ 5, 6 ], to: [ 5, 6, 7 ] }, @audit.events.sole[:metadata])
+      end
+
+      test "a teacher detached from the school meanwhile is refused, nothing is audited" do
+        materials = FakeTeacherMaterials.new({ [ 50, 31 ] => [ 5, 6 ] }, detached: [ [ 50, 31 ] ])
+
+        result = update("svt", "mathematiques", materials:)
+
+        assert_equal :forbidden, result.code
+        assert_empty materials.calls
+        assert_empty @audit.events
       end
 
       test "EPM-08 to EPM-10: a student, a direction, the team and a teacher without school are refused" do

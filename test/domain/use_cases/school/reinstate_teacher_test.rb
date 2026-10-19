@@ -158,6 +158,7 @@ module UseCases
         assert_equal [ :conflict, { base: [ :schools_limit ] } ], [ result.code, result.errors ]
         assert_empty @departures.closed
         assert_empty @audit.events
+        assert_empty @materials.calls
       end
 
       test "un rattachement refusé par la base : conflict, départ ouvert, aucun journal" do
@@ -166,6 +167,7 @@ module UseCases
         assert_equal :conflict, result.code
         assert_empty @departures.closed
         assert_empty @audit.events
+        assert_empty @materials.calls
       end
 
       private

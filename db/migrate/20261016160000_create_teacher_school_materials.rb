@@ -2,7 +2,10 @@
 # rattachement enseignant-établissement (réponse du porteur du 2026-10-16, point d'extension de l'ADR-0094 §10). Clé du
 # rattachement (teacher_id, school_id), sans FK vers teacher_schools : la liste survit à un retrait et revient avec lui.
 # Copie de teacher_profiles.material_id pour CHAQUE rattachement, puis pour chaque retrait encore ouvert et chaque demande
-# en attente (l'établissement demandé) ; la colonne reste, écrite en double, jusqu'au Lot Z. Rejouable dans les deux sens.
+# en attente (l'établissement demandé), puis, pour tout enseignant qui n'a encore aucune ligne (demande refusée, sans
+# rattachement ni retrait ouvert), une dernière copie sur l'établissement de sa dernière demande, quel que soit son statut :
+# sans elle sa matière serait perdue au Lot Z et `inherit` ne trouverait rien. La colonne reste, écrite en double, jusqu'au
+# Lot Z. Rejouable dans les deux sens.
 class CreateTeacherSchoolMaterials < ActiveRecord::Migration[8.1]
   def up
     create_table :teacher_school_materials do |t|
@@ -39,6 +42,18 @@ class CreateTeacherSchoolMaterials < ActiveRecord::Migration[8.1]
              school_join_requests.created_at
       FROM school_join_requests JOIN teacher_profiles ON teacher_profiles.user_id = school_join_requests.teacher_id
       WHERE school_join_requests.status = 'pending'
+      ON CONFLICT DO NOTHING
+    SQL
+    # Filet : l'enseignant resté sans aucune ligne (demande refusée, annulée...) garde sa matière sur l'établissement de sa
+    # dernière demande ; `inherit` la retrouve comme dernière liste écrite. Sans demande du tout : rien.
+    execute <<~SQL.squish
+      INSERT INTO teacher_school_materials (teacher_id, school_id, material_id, created_at)
+      SELECT DISTINCT ON (school_join_requests.teacher_id) school_join_requests.teacher_id, school_join_requests.school_id,
+             teacher_profiles.material_id, school_join_requests.created_at
+      FROM school_join_requests JOIN teacher_profiles ON teacher_profiles.user_id = school_join_requests.teacher_id
+      WHERE teacher_profiles.material_id IS NOT NULL
+        AND NOT EXISTS (SELECT 1 FROM teacher_school_materials tsm WHERE tsm.teacher_id = school_join_requests.teacher_id)
+      ORDER BY school_join_requests.teacher_id, school_join_requests.created_at DESC, school_join_requests.id DESC
       ON CONFLICT DO NOTHING
     SQL
   end

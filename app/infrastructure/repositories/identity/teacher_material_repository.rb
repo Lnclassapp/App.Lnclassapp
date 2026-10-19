@@ -11,6 +11,10 @@ module Repositories
       end
 
       def replace(teacher_id:, school_id:, material_ids:, at:)
+        # Verrou du rattachement : deux enregistrements simultanés se suivent, jamais plus de trois lignes (ADR-0103 §4.4).
+        # Plus de rattachement (retiré entre-temps) : rien n'est écrit.
+        return false unless Orm::TeacherSchool.where(teacher_id:, school_id:).lock.pick(:id)
+
         rows = Orm::TeacherSchoolMaterial.where(teacher_id:, school_id:)
         rows.where.not(material_id: material_ids).delete_all
         kept = rows.pluck(:material_id)

@@ -33,6 +33,14 @@ module Repositories
         assert_equal [ @svt.id, @maths.id ], ids
       end
 
+      test "replace writes nothing and answers false for a teacher without attachment to that school" do
+        other = create_school
+
+        assert_equal false, @repository.replace(teacher_id: @teacher.id, school_id: other.id, material_ids: [ @svt.id ], at: Time.current)
+        assert_equal [], ids(other)
+        assert_equal [ @pc.id ], ids, "sa liste de l'établissement rattaché ne bouge pas"
+      end
+
       test "inherit gives a new school the list of the school it is added from" do
         other, third = create_school, create_school
         add_teacher_school(@teacher, other, materials: [ @svt, @maths ])

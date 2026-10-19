@@ -39,8 +39,14 @@
     </div>
   <% elsif teacher %>
     <%# UDR-0126 §3.1 : une matière, son nom ; plusieurs, « Physique-Chimie et SVT ». %>
-    <% subtitle = teacher.several_materials? ? t(".teacher_subtitle_many", materials: teacher.materials.map(&:name).to_sentence) :
-                                              t(".teacher_subtitle", material: teacher.materials.first&.name) %>
+    <%# Sans aucune matière dans l'établissement courant : jamais « Les cours de , aux niveaux… » (ADR-0103 §4.6). %>
+    <% subtitle = if teacher.materials.empty?
+                    t(".teacher_subtitle_none")
+                  elsif teacher.several_materials?
+                    t(".teacher_subtitle_many", materials: teacher.materials.map(&:name).to_sentence)
+                  else
+                    t(".teacher_subtitle", material: teacher.materials.first.name)
+                  end %>
     <%= ui_page_header title: t(".title"), subtitle: %>
   <% else %>
     <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") %>
@@ -141,6 +147,12 @@
         <% end %>
       <% elsif student && student_audience.empty? %>
         <%= ui_empty_state title: t(".no_class_title"), description: t(".no_class_description"), icon: "user-group" %>
+      <% elsif teacher&.materials&.empty? %>
+        <%# ADR-0103 §4.6 : l'enseignant sans liste dans cet établissement est invité à la faire, jamais laissé devant une page vide. %>
+        <%= ui_empty_state title: t(".teacher_no_material_title"), description: t(".teacher_no_material_description"), icon: "book-open" do %>
+          <%= ui_button t(".teacher_no_material_action"), href: edit_profile_materials_path, variant: :secondary, icon: "pencil-square",
+                                                           data: { turbo_frame: "modal" } %>
+        <% end %>
       <% elsif teacher&.audience&.empty? %>
         <%= ui_empty_state title: t(".teacher_no_class_title"), description: t(".teacher_no_class_description"), icon: "user-group" do %>
           <%= ui_button t(".teacher_no_class_action"), href: teacher_classrooms_path, variant: :secondary, icon: "pencil-square" %>

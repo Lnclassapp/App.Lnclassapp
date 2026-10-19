@@ -65,6 +65,14 @@ SELECT
 - La fabrique `create_teacher(school: nil)` ne crée plus de matière (aucune liste où la ranger) ; `create_join_request(materials:)` pose celle d'une demande en attente.
 - `script/perf/dataset.rb` écrit une liste par enseignant et par demande en attente.
 
+## Corrections après les trois revues (PR 261)
+
+- **Enseignant sans aucune matière** (revue échecs silencieux) : une demande refusée sans rattachement ni retrait ouvert perdait sa matière au Lot Z. La migration `20261016160000` ajoute une 4e copie, sur l'établissement de sa dernière demande, quel que soit son statut. Quand la liste de l'établissement courant est vide, le catalogue et l'accueil (cours, activités) montrent « Choisissez vos matières » avec un lien vers la modale « Mes matières ».
+- **Faux audit** : « liste identique » compare des ensembles ; `to:` suit l'ordre stocké.
+- **Course au-delà de 3 matières** (revue sécurité) : `replace` verrouille le rattachement ; test de concurrence `teacher_material_concurrency_test.rb` (20 tours de deux listes disjointes de 3).
+- **PR 256 fusionnée avant nous** : `ClassroomOverviewQuery#course_scope` et `shown_course?` lisent `teacher_school_materials` (établissement de la classe) ; c'était le dernier lecteur de `teacher_profiles.material_id`.
+- **Tests** : demande refusée à la migration, `down` du Lot Z avec un secondaire plus ancien, réintégration de bout en bout, PATCH sans établissement, `@materials.calls` vide aux refus, isolation A/B avec deux matières différentes.
+
 ## Dette laissée derrière
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
@@ -73,7 +81,7 @@ SELECT
 | L'équipe ne peut pas corriger les matières d'un enseignant | Aucun besoin exprimé | — |
 | Restreindre l'assignation aux matières de l'enseignant | Le catalogue est une lecture, pas un droit (UDR-0077) | — |
 | Badge de matière sur « Fiches à revoir » (UDR-0127 §3.2) | Le bloc n'existe pas encore | `remediation-ciblee` |
-| Un enseignant sans aucune liste (ni rattachement, ni retrait, ni demande au moment de la migration) rejoint un établissement sans matière ; son profil propose « Modifier » sur une ligne vide | Cas sans donnée à copier | — |
+| Un enseignant sans aucune demande ni rattachement ni retrait à la migration n'a aucune matière à copier (cas sans donnée) | Rien à récupérer ; le catalogue et l'accueil l'invitent à « Choisir mes matières » | — |
 
 ## Clôture
 

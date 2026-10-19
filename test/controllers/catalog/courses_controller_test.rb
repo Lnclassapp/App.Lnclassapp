@@ -26,6 +26,21 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   # L'ancien écran « Assigner un cours » (UDR-0030, dépréciée) : sa route n'existe plus.
   def assignments_href(slug) = "/courses/#{slug}/assignments"
 
+  # ADR-0103 §4.6: no list in the current school (a rejected request lost to the migration, then nothing inherited).
+  test "a teacher without any subject in the current school is invited to choose them, with no broken subtitle" do
+    teacher = create_teacher(school: create_school, classrooms: [ create_classroom(level: @tle) ])
+    Orm::TeacherSchoolMaterial.where(teacher_id: teacher.id).delete_all
+    sign_in_as teacher
+
+    get courses_path
+
+    assert_response :success
+    assert_select "#main", text: including(tl("index.teacher_subtitle_none"))
+    assert_select "#main", text: /Les cours de ,/, count: 0
+    assert_select "#courses_empty", text: including(tl("index.teacher_no_material_title"))
+    assert_select "#courses_empty #{modal_link(edit_profile_materials_path)}"
+  end
+
   test "a visitor is sent to the sign-in" do
     get courses_path
     assert_redirected_to new_session_path

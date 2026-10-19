@@ -50,10 +50,21 @@
         <% end %>
       <% end %>
     <% elsif key == :courses %>
-      <% courses_subtitle = @home.several_materials? ? t(".courses_subtitle_many") : t(".courses_subtitle", material: @home.materials.first&.name) %>
+      <%# ADR-0103 §4.6 : sans matière dans cet établissement, une invitation à les choisir, jamais un sous-titre cassé. %>
+      <% courses_subtitle = if @home.materials.empty?
+                              t(".courses_subtitle_none")
+                            elsif @home.several_materials?
+                              t(".courses_subtitle_many")
+                            else
+                              t(".courses_subtitle", material: @home.materials.first.name)
+                            end %>
       <%= ui_card title: t(".courses_title"), subtitle: courses_subtitle, icon:,
                   id: "teacher_home_courses" do |card| %>
-        <%= render "course_levels", home: @home, invite: @invite %>
+        <% if @home.materials.empty? %>
+          <%= render "choose_materials", id: "teacher_home_courses_no_materials" %>
+        <% else %>
+          <%= render "course_levels", home: @home, invite: @invite %>
+        <% end %>
         <% card.footer do %>
           <%= ui_button t(".all_courses"), href: courses_path, variant: :ghost, size: :sm, icon_end: "arrow-right" %>
         <% end %>
@@ -64,7 +75,7 @@
         <%= render "communication/messages/carousel", carousel: @announcements, dismissible: false %>
       <% end %>
     <% elsif key == :activity %>
-      <%= render "follow_ups", follow_ups: @follow_ups, icon:, badges: @home.several_materials? %>
+      <%= render "follow_ups", follow_ups: @follow_ups, icon:, badges: @home.several_materials?, no_materials: @home.materials.empty? %>
     <% end %>
   <% end %>
   <% if @pending_colleagues %>

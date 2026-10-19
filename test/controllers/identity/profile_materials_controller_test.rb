@@ -115,6 +115,17 @@ class Identity::ProfileMaterialsControllerTest < ActionDispatch::IntegrationTest
     assert_not Orm::TeacherSchoolMaterial.where.not(teacher: @teacher).exists?
   end
 
+  test "EPM-10: a teacher without school is refused, nothing is written" do
+    pending = create_teacher(school: nil)
+    sign_in_as pending
+
+    save(@svt.slug)
+
+    assert_redirected_to pending_account_path
+    assert_not Orm::TeacherSchoolMaterial.exists?(teacher: pending)
+    assert_not Orm::AuditEvent.exists?(action: "profile.materials_changed")
+  end
+
   test "a visitor is sent to the sign-in" do
     get edit_profile_materials_path
 

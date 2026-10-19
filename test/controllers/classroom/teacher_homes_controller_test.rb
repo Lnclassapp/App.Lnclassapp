@@ -29,6 +29,22 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     create_teacher(school: @school, material: create_material(name: "Mathématiques"), classrooms:)
   end
 
+  # ADR-0103 §4.6: no list in the current school: the courses and the activities invite to choose, nothing reads « de , ».
+  test "a teacher without any subject in the current school is invited to choose them in Courses and Activities" do
+    Orm::TeacherSchoolMaterial.where(teacher_id: @teacher.id).delete_all
+    sign_in_as @teacher
+
+    get teacher_home_path
+
+    assert_response :success
+    [ "#teacher_home_courses_no_materials", "#teacher_home_activity_no_materials" ].each do |id|
+      assert_select id, text: including(tl("choose_materials.title"))
+      assert_select "#{id} a[href='#{edit_profile_materials_path}'][data-turbo-frame=modal]"
+    end
+    assert_select "#teacher_home_courses", text: including(tl("show.courses_subtitle_none"))
+    assert_select "#teacher_home_course_levels", 0
+  end
+
   test "a configured teacher sees their classrooms, each with its headcount, active assignments and average score" do
     exercise = create_exercise(essential: create_essential(course: create_course(material: @svt)))
     2.times { create_exercise_session(student: create_student(classroom: @classroom), exercise:, status: "completed", score_percent: 70) }

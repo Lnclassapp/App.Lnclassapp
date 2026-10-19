@@ -4,14 +4,18 @@ class FakeTeacherMaterials
 
   attr_reader :calls, :lists
 
-  def initialize(lists = {})
+  # detached: the [teacher_id, school_id] pairs with no attachment any more: replace writes nothing and answers false.
+  def initialize(lists = {}, detached: [])
     @lists = lists
+    @detached = detached
     @calls = []
   end
 
   def material_ids_for(teacher_id:, school_id:) = @lists.fetch([ teacher_id, school_id ], [])
 
   def replace(teacher_id:, school_id:, material_ids:, at:)
+    return false if @detached.include?([ teacher_id, school_id ])
+
     @calls << [ :replace, teacher_id, school_id, material_ids, at ]
     @lists[[ teacher_id, school_id ]] = material_ids
     true

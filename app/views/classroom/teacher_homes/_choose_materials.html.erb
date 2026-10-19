@@ -1,0 +1,9 @@
+<%# 🌐 UI · classroom/teacher_homes/_choose_materials — invitation de l'enseignant sans matière dans l'établissement courant %>
+<%# Rôle : état vide « Choisissez vos matières » vers la modale « Mes matières » (accueil : cours et activités) %>
+<%# ADR  : 0103 (§4.6) · UDR : 0125 (§3.3) %>
+<%# locals: (id:) -%>
+<div id="<%= id %>">
+  <%= ui_empty_state title: t(".title"), description: t(".description"), icon: "book-open" do %>
+    <%= ui_button t(".action"), href: edit_profile_materials_path, variant: :secondary, icon: "pencil-square", data: { turbo_frame: "modal" } %>
+  <% end %>
+</div>
