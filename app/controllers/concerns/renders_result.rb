@@ -8,6 +8,7 @@ module RendersResult
   FORM_STATUSES = { invalid: :unprocessable_entity, conflict: :unprocessable_entity, expired: :unprocessable_entity,
                     locked: :too_many_requests }.freeze
   ERROR_PAGES = { forbidden: "errors/forbidden", not_found: "errors/not_found" }.freeze
+  MODAL_FRAME = "modal"
   # ADR-0094 §4.3 : le refus d'une classe hors de l'établissement courant (ReadClassroomPolicy, TeachPolicy,
   # DeclareTeachingPolicy) ; il ne nomme aucun établissement.
   OTHER_SCHOOL = :other_school
@@ -49,8 +50,12 @@ module RendersResult
   def render_forbidden = render_error_page(:forbidden)
   def render_not_found = render_error_page(:not_found)
 
+  # Dans le cadre « modal », la page d'erreur porte la balise de rechargement : Turbo quitte le cadre et l'affiche entière,
+  # au lieu de n'y mettre que le cadre « modal » vide du layout (document_reload_tag). Les autres cadres (une recherche)
+  # gardent leur état d'erreur avec « Réessayer » (UDR-0054 §3.9) : seul le cadre manquant le déclenche.
   def render_error_page(code)
     status = code
+    @reload_document = turbo_frame_request_id == MODAL_FRAME
     respond_to do |format|
       format.html { render ERROR_PAGES.fetch(code), status:, layout: "application" }
       format.json { render json: { error: code }, status: }

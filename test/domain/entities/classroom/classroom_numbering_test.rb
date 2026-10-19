@@ -31,6 +31,21 @@ module Entities
         assert_equal "6ème b", ClassroomNumbering.last(names: [ "6ème a", "6ème b" ])
         assert_nil ClassroomNumbering.last(names: [])
       end
+
+      # ADR-0098 : seul le suffixe se saisit ; le préfixe du barème est toujours devant.
+      test "le nom complet est le préfixe, une espace, puis le suffixe compacté" do
+        assert_equal "6ème A", ClassroomNumbering.full_name(prefix: "6ème", suffix: "  A ")
+        assert_equal "Tle D Excellence 2", ClassroomNumbering.full_name(prefix: "Tle D", suffix: "Excellence   2")
+        assert_equal "6ème ", ClassroomNumbering.full_name(prefix: "6ème", suffix: nil)
+      end
+
+      test "le suffixe d'un nom de ce préfixe ; vide pour un nom qui n'en vient pas" do
+        assert_equal "3", ClassroomNumbering.suffix_of(name: "6ème 3", prefix: "6ème")
+        assert_equal "Excellence 2", ClassroomNumbering.suffix_of(name: "Tle D Excellence 2", prefix: "Tle D")
+        assert_equal "", ClassroomNumbering.suffix_of(name: "Tle C 3", prefix: "Tle D")
+        assert_equal "", ClassroomNumbering.suffix_of(name: "Tle D", prefix: "Tle D")
+        assert_equal "", ClassroomNumbering.suffix_of(name: "6èmeA", prefix: "6ème")
+      end
     end
   end
 end

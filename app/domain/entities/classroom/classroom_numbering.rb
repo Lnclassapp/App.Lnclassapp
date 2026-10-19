@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Classroom::ClassroomNumbering
-# Rôle : nom de la classe suivante d'un niveau (préfixe du barème, plus grand numéro + 1) et dernière classe d'un niveau
-# ADR  : 0030, 0041, 0059
+# Rôle : préfixe du barème, classe suivante d'un niveau (plus grand numéro + 1), dernière classe, nom d'une classe renommée
+# ADR  : 0030, 0041, 0059, 0098
 module Entities
   module Classroom
     module ClassroomNumbering
@@ -15,6 +15,12 @@ module Entities
 
       # L'ordre de la fiche (SchoolDetailQuery) : numéro final, puis nom ; un nom sans numéro passe avant « 1 ». → String | nil
       def self.last(names:) = names.max_by { [ it[/\d+\z/].to_i, it ] }
+
+      # ADR-0098 : seul le suffixe se saisit, le préfixe du barème reste devant.
+      def self.full_name(prefix:, suffix:) = "#{prefix} #{suffix.to_s.squish}"
+
+      # Le suffixe d'un nom de ce préfixe, ou "" quand le nom n'en vient pas (saisie libre d'avant l'ADR-0098).
+      def self.suffix_of(name:, prefix:) = name.delete_prefix("#{prefix} ").then { it == name ? "" : it }
     end
   end
 end
