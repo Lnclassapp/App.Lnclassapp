@@ -1,7 +1,7 @@
 # ADR-0043 : Remédiation déclenchée par le seul use case de clôture, session de remédiation marquée, une lacune en attente par fiche garantie en base
 <!-- index
 titre: Remédiation déclenchée par le seul use case de clôture, session de remédiation marquée, une lacune en attente par fiche garantie en base
-statut: Accepté — *remplace 0018 §3*
+statut: Accepté — *remplace 0018 §3* — *amendé par [0101](./0101-remediation-implicite-exercice-propose-et-lecture-enseignant.md) (§4, §7), 2026-10-16*
 problematique: Lacune ouverte ou résolue par `CloseExerciseSession` ; `exercise_sessions.kind` ; index partiel `(student_id, essential_id)` en attente. F-21.
 -->
 
@@ -12,6 +12,7 @@ problematique: Lacune ouverte ou résolue par `CloseExerciseSession` ; `exercise
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-21**, bloque la V5 |
 | **Remplace** | [ADR-0018](./0018-remediation-just-in-time-et-historique-lacunes.md) §3 |
 | **Remplacé par** | — |
+| **Amendé par** | [ADR-0101](./0101-remediation-implicite-exercice-propose-et-lecture-enseignant.md) : §4 (démarrage par `StartExerciseSession`, pas de `StartRemediationSession` ; visibilité enseignant) et §7 (vérification) |
 
 ---
 

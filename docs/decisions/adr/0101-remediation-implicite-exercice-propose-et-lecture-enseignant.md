@@ -1,13 +1,13 @@
 # ADR-0101 : La remédiation se lance par `StartExerciseSession`, l'exercice proposé se choisit à la lecture, l'enseignant lit les lacunes de sa classe sous `ReadClassroomPolicy`
 <!-- index
 titre: Remédiation implicite, exercice proposé à la lecture, lecture des lacunes par l'enseignant
-statut: Proposé — *amende 0043 §4 et §7*
+statut: Accepté — *amende 0043 §4 et §7*
 problematique: AS-16 et AS-17 sans `StartRemediationSession` : qui lance une remédiation, quel exercice proposer, ce que l'enseignant lit des lacunes.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-10-16, porteur : recommandations Q1 à Q12 acceptées) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/remediation-ciblee`](../../chantiers/remediation-ciblee/memo.md), programme `refonte-application`, V5 |
 | **Remplace** | — |

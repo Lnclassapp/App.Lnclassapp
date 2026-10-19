@@ -1,14 +1,14 @@
 # UDR-0087 : Parcours d'exercice de l'élève — page de l'exercice, séance en mode concentré, quatre nouveaux types de questions, résultat
 <!-- index
 titre: Parcours d'exercice de l'élève : mode concentré, nouveaux types
-statut: Accepté
+statut: Accepté — *amendé le 2026-10-16 : effet de la session sur la fiche (UDR-0120)*
 adr-lie: [0091](../adr/0091-quatre-nouveaux-types-de-questions-sur-les-tables-existantes.md)
 problematique: Élève : page de l'exercice et résultat dans le cadre de l'accueil (deux colonnes dès 1 024 px), séance sans en-tête ni menus (croix, barre, « 3/5 », bouton collé en bas), confirmation pour quitter (feuille puis fenêtre), saisie des types trous, nombre (bouton ±), ordre (flèches) et relier (toucher-toucher), « Ton choix » sans jamais la bonne réponse. Amende UDR-0021, 0022, 0023, 0006, 0017, 0040
 -->
 
 | | |
 |---|---|
-| **Statut** | Accepté |
+| **Statut** | Accepté — *amendée le 2026-10-16 (acceptée par le porteur) par le chantier `remediation-ciblee` : §3.6, un bloc de plus ([UDR-0120](0120-effet-de-la-session-sur-la-fiche-dans-le-resultat.md))* |
 | **Date** | 2026-10-15 |
 | **Chantier** | [`docs/chantiers/exercice-eleve`](../../chantiers/exercice-eleve/memo.md) |
 | **ADR lié** | [ADR-0091](../adr/0091-quatre-nouveaux-types-de-questions-sur-les-tables-existantes.md) (types, notation, rien de la solution dans la page) |

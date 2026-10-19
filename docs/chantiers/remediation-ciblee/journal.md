@@ -17,6 +17,8 @@
 | 2026-10-16 | Lot C : le sous-titre du bloc de la classe calcule « 10/20 » depuis `PASS_THRESHOLD` | Même règle que l'UDR-0119 : aucun seuil écrit en dur | Non |
 | 2026-10-16 | Lot D : un seul test système (6,8 s enregistrées), sessions de 2 questions | Budget de 15 s par chantier (ADR-0069 §9) ; tous les autres cas sont prouvés au niveau du contrôleur et de la query | Non |
 | 2026-10-16 | « 3 essais sous la moyenne » devient « 3 sessions sous la moyenne » (UDR-0121 §3.2, PRD §4 corrigés) | « Essai » est interdit par l'UDR-0007 (vocabulaire : une `ExerciseSession` est une « session ») ; la garde `test/i18n/locale_files_test.rb` l'a refusé au premier `bin/ci` | Non |
+| 2026-10-16 | Réponses du porteur : recommandations Q1 à Q12 acceptées. ADR-0101 et UDR-0119 à 0121 passent « Accepté » ; ADR-0043, UDR-0015, UDR-0027, UDR-0029 et UDR-0087 marqués amendés | Fusion d'`origin/Develop` (commit `docs(cadrage V2–V6): réponses du porteur du 2026-10-16`) | Oui (statuts) |
+| 2026-10-16 | UDR-0121 §3.2 réécrite à 3 lignes (limite commune du composant) au lieu de 5 | Le texte doit décrire ce qui est livré ; l'écart est signalé au porteur dans la PR | Non |
 
 ## Ce qui a dérapé
 
@@ -43,8 +45,7 @@
 | Jeu de mesure de l'ADR-0067 sans session de remédiation | Déjà noté par `remediation-comptee-faite` | voir ce chantier |
 | `script/perf/dataset.rb` n'écrit pas `joined_via` : le jeu ne se sème plus | Hors périmètre ; la page de classe entière n'a pas été remesurée en mode production | à ouvrir (`perf`) |
 | `record_timings` rate le premier test système d'un processus | Hors périmètre | à ouvrir (CI) |
-| Revue par les sous-agents (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) et rôle distinct qui rejoue le parcours | Non lancés depuis cette session d'exécution | avant la fusion de la PR |
-| ADR-0043 marqué « amendé par 0101 », ADR-0101 et UDR-0119 à 0121 passées « Accepté » | Attendent la réponse du porteur à Q1–Q12 | à la confirmation |
+| Revue par les sous-agents (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) | Non lancée : ni la session des lots ni celle de clôture n'avaient d'outil de sous-agent. Le parcours a été rejoué par la session de clôture (captures, `bin/ci-quiet`) | avant la fusion de la PR |
 | Limite de 5 lignes des cartes de la fiche dans la classe (UDR-0121) ramenée à 3 | Limite commune du composant | si le porteur tient à 5 |
 
 ## Clôture
@@ -53,5 +54,5 @@
 |---|---|
 | **Livré le** | 2026-10-16 (PR prête, non fusionnée) |
 | **PR** | `feature/remediation-ciblee` → `Develop` |
-| **ADR produits** | ADR-0101 (Proposé) |
-| **UDR produits** | UDR-0119, UDR-0120, UDR-0121 (Proposé) |
+| **ADR produits** | ADR-0101 (Accepté, amende l'ADR-0043 §4 et §7) |
+| **UDR produits** | UDR-0119, UDR-0120, UDR-0121 (Accepté) |

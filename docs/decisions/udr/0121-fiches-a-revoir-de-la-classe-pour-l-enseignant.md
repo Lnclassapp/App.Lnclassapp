@@ -1,14 +1,14 @@
 # UDR-0121 : Fiches à revoir de la classe — un bloc sur la page de la classe, les noms sur la fiche vue depuis la classe
 <!-- index
 titre: Fiches à revoir de la classe, pour l'enseignant
-statut: Proposé
+statut: Accepté
 adr-lie: [0101](../adr/0101-remediation-implicite-exercice-propose-et-lecture-enseignant.md), [0043](../adr/0043-remediation-declenchee-par-la-cloture.md), [0079](../adr/0079-lecture-de-la-comprehension-d-un-exercice-assigne.md)
 problematique: L'enseignant ne voit aucune lacune. Page de classe : bloc `#classroom_gaps` (fiche, nombre d'élèves à revoir, 3 lignes puis « Voir plus »). Fiche dans la classe : section `#classroom_essential_gaps` « Élèves à revoir » et « Fiche levée ». Amende UDR-0027 et UDR-0029.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-10-16, porteur : recommandations Q1 à Q12 acceptées) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/remediation-ciblee`](../../chantiers/remediation-ciblee/memo.md) — Lot C, AS-17 |
 | **ADR lié** | [ADR-0101](../adr/0101-remediation-implicite-exercice-propose-et-lecture-enseignant.md) §4.4 · [ADR-0041](../adr/0041-vie-d-une-classe-annee-scolaire-et-code.md) (année scolaire) · [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) §4.5 (pas de noms pour la direction) |
@@ -75,7 +75,7 @@ L'enseignant prépare sa prochaine séance depuis la page de sa classe : jours d
 </section>
 ```
 
-- **Carte « Élèves à revoir »** : `ui_card title: t(".pending_title"), icon: "light-bulb", id: "classroom_essential_gaps_pending"`, avec `card.actions { ui_badge pending.size, tone: :warning, size: :sm }`. Elle contient un `ul.divide-y.divide-line` dans un conteneur `ui_reveal_data` (5 lignes, puis `ui_reveal_more`). Chaque `li.flex.flex-wrap.items-baseline.justify-between.gap-x-3.gap-y-1.py-3` contient :
+- **Carte « Élèves à revoir »** : `ui_card title: t(".pending_title"), icon: "light-bulb", id: "classroom_essential_gaps_pending"`, avec `card.actions { ui_badge pending.size, tone: :warning, size: :sm }`. Elle contient un `ul.divide-y.divide-line` dans un conteneur `ui_reveal_data` (3 lignes, limite commune `REVEAL_LIMIT` du composant, puis `ui_reveal_more` ; 5 au cadrage, ramené à 3 à l’exécution, voir le journal du chantier). Chaque `li.flex.flex-wrap.items-baseline.justify-between.gap-x-3.gap-y-1.py-3` contient :
   - `span.font-medium.text-ink` : le nom affiché ;
   - `span.text-sm.text-mute` : `t(".since", date: l(row.opened_on, format: :short))`, puis, si `row.failed_sessions_count >= 2`, ` · ` et `t(".failures", count: row.failed_sessions_count)`.
 - **Carte « Fiche levée »** : `ui_card title: t(".lifted_title"), icon: "check-badge", id: "classroom_essential_gaps_lifted"`, avec `card.actions { ui_badge lifted.size, tone: :success, size: :sm }`. Mêmes lignes, sauf le texte de droite : `t(".lifted_on", date: l(row.resolved_on, format: :short))`.

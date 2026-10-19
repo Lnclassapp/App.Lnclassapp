@@ -23,7 +23,7 @@ La V1 est en production sur lnclass.com depuis le **2026-09-27** (PR #33 et #36 
 | **V2** Direction et comptes | Partie « profil, PIN, photo » de `mon-compte` : [`profil-utilisateur`](../profil-utilisateur/memo.md) (ADR-0055, UDR-0041, #37), [`photo-de-profil`](../photo-de-profil/memo.md) (ADR-0060, UDR-0047, #50 ; durcie par #65 et #75, en production par #78) | [`espace-direction-simple`](../espace-direction-simple/memo.md) : planifié (ADR-0065, UDR-0052, proposés) | Au backlog : `espace-direction` complet, `annuaire-equipe` |
 | **V3** Suivi enseignant | Partage du lien de classe sur WhatsApp (CL-05), par `croissance-parrainage` (#71) | — | `rapports-de-classe`, `vie-de-la-classe` (dont CL-02, venue de V1), `multi-etablissements-enseignant`, `multi-classes-eleve` (si confirmé) : 11 features |
 | **V4** Contenu et back-office | [`pilotage-equipe`](../pilotage-equipe/memo.md) (ADR-0062, UDR-0049, #51) : TR-10, TR-11, TR-12 | — | `catalogue-complet` (dont CA-23, venue de V2), `installation-pwa`, `sous-roles-equipe` : 9 features |
-| **V5** Remédiation | Détection et résolution des lacunes (AS-14, AS-15), livrées en avance avec la V1 (ADR-0043 amendé) | — | `remediation` : session de remédiation (AS-16), suivi par l'enseignant (AS-17) |
+| **V5** Remédiation | Détection et résolution des lacunes (AS-14, AS-15), livrées en avance avec la V1 (ADR-0043 amendé). AS-16 et AS-17 par [`remediation-ciblee`](../remediation-ciblee/memo.md) (ADR-0101, UDR-0119 à 0121, acceptés le 2026-10-16) : **V5 close** à la fusion de sa PR | — | — |
 | **V6** Communication | — | `canal-whatsapp`, cadré par une autre session (PR #70, non fusionnée), **rattaché à la V6** le 2026-09-28 | `annonces` (10 features), puis `canal-whatsapp` |
 | **V8** À décider | — | — | Une décision produit |
 | **Hors plan** | [`code-etablissement`](../code-etablissement/memo.md) (ADR-0057, UDR-0044, #49), [`classes-par-niveau`](../classes-par-niveau/memo.md) (ADR-0059, UDR-0046, #48), [`bareme-classes`](../bareme-classes/memo.md) (ADR-0058, UDR-0045, #52), [`croissance-parrainage`](../croissance-parrainage/memo.md) (ADR-0063, UDR-0050, #71), CI parallèle [`ci-rapide`](../ci-rapide/journal.md) (ADR-0064, #53). Rattachement : §5, « Chantiers hors plan » | — | Backlog : [`verification-whatsapp`](../verification-whatsapp/memo.md), rattaché à la V4 s'il reprend |
@@ -51,7 +51,7 @@ V3  Suivi pédagogique enseignant    │
     rapports, multi-établissements  │
  │                                  │
  └──────────────┬───────────────────┘
-V5  Remédiation et lacunes            à concevoir — n'a jamais tourné
+V5  Remédiation et lacunes            livrée par remediation-ciblee (2026-10-16)
  │
 V6  Communication                     annonces
 
@@ -305,13 +305,13 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 | Champ | Contenu |
 |---|---|
 | **Objectif** | Un élève en échec sur une notion voit une remédiation ciblée ; l'enseignant voit qui est en difficulté, qui s'est corrigé seul, qui a réussi sa remédiation |
-| **Chantier** | `remediation` |
+| **Chantier** | [`remediation-ciblee`](../remediation-ciblee/memo.md) (nommé `remediation` jusqu'au 2026-10-16) |
 | **Déjà livré (avec la V1)** | La clôture de session ouvre et résout les lacunes (AS-14, AS-15 ; seuil de résolution 75 %, amendement de l'ADR-0043 du 2026-09-27). `knowledge_gaps` existe, et `exercise_sessions.kind` accepte déjà `remediation` |
-| **Reste** (2 features) | AS-16 (l'élève lance une session de remédiation, `Assessment::StartRemediationSession`), AS-17 (l'enseignant suit les remédiations de sa classe) |
+| **Reste** | Rien. AS-16 et AS-17 livrées par `remediation-ciblee` (2026-10-16) : la remédiation se lance par `StartExerciseSession`, sans `StartRemediationSession` (ADR-0101, amende l'ADR-0043 §4) ; l'enseignant la suit sur la page de sa classe et sur la fiche vue depuis la classe (UDR-0121) |
 | **Tables** | Aucune : le schéma de l'ADR-0043 est posé depuis la V1 |
 | **Décisions préalables** | F-21 (ADR-0043, amendé le 2026-09-27) : `Accepté`. Aucune question ouverte : l'ADR fixe le choix de l'exercice de remédiation |
-| **Dépend de** | V1 pour AS-16, côté élève ; V3 (`rapports-de-classe`) pour AS-17, qui s'affiche dans les rapports de l'enseignant |
-| **Porte** | Inchangée : le parcours **réel** de l'élève crée et résout les lacunes, et lance la remédiation |
+| **Dépend de** | V1. La dépendance d'AS-17 à `rapports-de-classe` est tombée le 2026-10-16 (memo Q7) |
+| **Porte** | Inchangée : le parcours **réel** de l'élève crée et résout les lacunes, et lance la remédiation. **Franchie** le 2026-10-16 : `test/system/assessment/remediation_test.rb` |
 
 ### V6 — Communication
 
@@ -357,7 +357,7 @@ Chantiers hors plan **non livrés**, rattachés le 2026-09-28 :
 | **1. V2** | `espace-direction-simple` (2026-09-28) ; `espace-direction` complet et `annuaire-equipe` au backlog | **V4 `catalogue-complet`** dès le départ ; **V4 `installation-pwa`** si le gabarit du shell a un seul propriétaire | Q1 à Q4 répondues ; C-31 tranchée dans l'UDR du chantier |
 | **2. V3** | `rapports-de-classe` et `vie-de-la-classe` (page classe attribuée au Lot 0) ; puis `multi-etablissements-enseignant` ; `multi-classes-eleve` si Q5 = oui | **V4 `sous-roles-equipe`** (policies de l'équipe, disjointes de celles de l'enseignant) ; **V5, lot AS-16** (côté élève) | V2 livrée et recettée ; Q5 à Q8 répondues |
 | **3. V4** | `sous-roles-equipe`, après `annuaire-equipe` | V3 | Q9 répondue ; amendement de l'ADR-0038 accepté |
-| **4. V5** | `remediation` : AS-16 peut partir dès l'étape 2, AS-17 attend `rapports-de-classe` | V3, V6 | `rapports-de-classe` livré pour AS-17 |
+| **4. V5** | ~~`remediation` : AS-16 peut partir dès l'étape 2, AS-17 attend `rapports-de-classe`~~ livrée par `remediation-ciblee` le 2026-10-16, sans attendre `rapports-de-classe` | V3, V6 | `rapports-de-classe` livré pour AS-17 |
 | **5. V6** | `annonces`, puis `canal-whatsapp` | V5 (contextes `assessment` et `communication` disjoints ; seuls les accueils sont partagés, à attribuer au Lot 0) | V2 livrée (audience `school_admin`) ; ADR du canal accepté (Q11 à Q14) |
 
 La règle du [planning roulant](../../workflows/programme.md#3-planifier--feuille-de-routemd) tient : à l'étape 1, seuls les chantiers de la V2 et `catalogue-complet` ouvrent leur dossier ; les autres attendent leur étape.
@@ -614,8 +614,8 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | AS-13 | Recommencer un exercice | ✅ | V1 (Lot C) — livrée 2026-09-27 (#33) | — |
 | AS-14 | Détecter une lacune après un échec | 💀 | V5 (F-21) — livrée en avance avec la V1, 2026-09-27 (#33) : à la clôture de session, seuil de résolution 75 % (ADR-0043 amendé) | Une détection branchée sur un use case que le parcours réel n'appelle pas |
 | AS-15 | Résoudre une lacune après une réussite | 💀 | V5 (F-21) — livrée en avance avec la V1, 2026-09-27 (#33) : à la clôture de session, seuil de résolution 75 % (ADR-0043 amendé) | Idem |
-| AS-16 | Lancer une session de remédiation | ❌ | V5 — en PR (`remediation-ciblee`, 2026-10-16) : par `StartExerciseSession`, sans use case dédié (ADR-0101 « Proposé ») | Un bouton qui appelle un helper de route inexistant |
-| AS-17 | Suivre les remédiations de sa classe | ❌ | V5 — en PR (`remediation-ciblee`, 2026-10-16) : page de la classe et fiche vue depuis la classe, sans attendre `rapports-de-classe` (UDR-0121 « Proposé ») | `NoMethodError` sur panneau fermé |
+| AS-16 | Lancer une session de remédiation | ✅ | V5 — livrée par `remediation-ciblee` (2026-10-16) : par `StartExerciseSession`, sans use case dédié ; la fiche propose et démarre un autre exercice (ADR-0101, UDR-0119, UDR-0120) | Un bouton qui appelle un helper de route inexistant |
+| AS-17 | Suivre les remédiations de sa classe | ✅ | V5 — livrée par `remediation-ciblee` (2026-10-16) : page de la classe et fiche vue depuis la classe, sans attendre `rapports-de-classe` (UDR-0121) | `NoMethodError` sur panneau fermé |
 | AS-18 | Assigner un exercice à une classe | ❌ | V1 (Lot D) (= CL-20) — livrée 2026-09-27 (#33) | Une réponse `204` qui laisse le bouton inchangé ; `assigned_by_id` qui reçoit un id de profil pour une clé vers `users` |
 | AS-19 | Retirer un exercice d'une classe | ⚠️ | V1 (Lot D) (= CL-20) — livrée 2026-09-27 (#33) | — |
 | AS-20 | Exercices d'un chapitre dans une classe | ❌ | V1 (Lot D) (= CL-12) — livrée 2026-09-27 (#33) | — |

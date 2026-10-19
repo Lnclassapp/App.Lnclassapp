@@ -1,7 +1,7 @@
 # PRD — Remédiation ciblée
 
 > Les specs sont figées ici. Toute évolution après la phase 3 se fait par modification explicite de ce fichier, pas par improvisation dans le code.
-> **Écrit selon les recommandations du [memo](memo.md#ce-que-le-grill-a-révélé) (Q1 à Q12), en attente de validation du porteur.**
+> **Écrit selon les recommandations du [memo](memo.md#ce-que-le-grill-a-révélé) (Q1 à Q12), acceptées par le porteur le 2026-10-16.**
 
 ## 1. Contexte
 
