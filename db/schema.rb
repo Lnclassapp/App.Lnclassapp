@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_16_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_16_150000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -211,7 +211,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_120000) do
     t.index ["removed_by_id"], name: "index_classroom_students_on_removed_by_id", where: "(removed_by_id IS NOT NULL)"
     t.index ["student_id"], name: "index_classroom_students_one_active_primary", unique: true, where: "(\"primary\" AND (left_at IS NULL))"
     t.check_constraint "(removed_at IS NULL) = (removed_by_id IS NULL)", name: "classroom_students_removed_by_iff_removed"
-    t.check_constraint "joined_via::text = ANY (ARRAY['standard'::character varying, 'link'::character varying, 'code'::character varying]::text[])", name: "classroom_students_joined_via_values"
+    t.check_constraint "joined_via::text = ANY (ARRAY['standard'::character varying::text, 'link'::character varying::text, 'code'::character varying::text])", name: "classroom_students_joined_via_values"
     t.check_constraint "removed_at IS NULL OR left_at IS NOT NULL", name: "classroom_students_removed_only_when_left"
   end
 
@@ -604,7 +604,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_120000) do
     t.decimal "numeric_tolerance", precision: 12, scale: 4
     t.index ["exercise_id", "position"], name: "index_questions_on_exercise_id_and_position", unique: true
     t.check_constraint "numeric_tolerance >= 0::numeric", name: "questions_numeric_tolerance_positive"
-    t.check_constraint "question_type::text = ANY (ARRAY['true_false'::character varying, 'single_choice'::character varying, 'multiple_correct_2'::character varying, 'multiple_correct_3'::character varying, 'fill_blank'::character varying, 'numeric'::character varying, 'ordering'::character varying, 'matching'::character varying]::text[])", name: "questions_question_type_values"
+    t.check_constraint "question_type::text = ANY (ARRAY['true_false'::character varying::text, 'single_choice'::character varying::text, 'multiple_correct_2'::character varying::text, 'multiple_correct_3'::character varying::text, 'fill_blank'::character varying::text, 'numeric'::character varying::text, 'ordering'::character varying::text, 'matching'::character varying::text])", name: "questions_question_type_values"
   end
 
   create_table "referral_shares", force: :cascade do |t|
@@ -718,6 +718,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_120000) do
     t.string "token_digest", limit: 64, null: false
     t.string "user_agent", limit: 255
     t.bigint "user_id", null: false
+    t.bigint "current_school_id"
     t.index ["token_digest"], name: "index_sessions_on_token_digest", unique: true
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
@@ -912,7 +913,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_120000) do
     t.index ["material_id"], name: "index_teacher_profiles_on_material_id"
     t.index ["referral_token"], name: "index_teacher_profiles_on_referral_token", unique: true
     t.index ["user_id"], name: "index_teacher_profiles_on_user_id", unique: true
-    t.check_constraint "joined_via::text = ANY (ARRAY['standard'::character varying, 'colleague'::character varying, 'direction'::character varying, 'team'::character varying, 'code'::character varying]::text[])", name: "teacher_profiles_joined_via_values"
+    t.check_constraint "joined_via::text = ANY (ARRAY['standard'::character varying::text, 'colleague'::character varying::text, 'direction'::character varying::text, 'team'::character varying::text, 'code'::character varying::text])", name: "teacher_profiles_joined_via_values"
     t.check_constraint "referral_token::text ~ '^[0-9a-f]{12}$'::text", name: "teacher_profiles_referral_token_format"
   end
 
@@ -935,9 +936,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_120000) do
     t.boolean "primary", default: false, null: false
     t.bigint "school_id", null: false
     t.bigint "teacher_id", null: false
+    t.string "invite_token", limit: 12, default: -> { "substr(replace((gen_random_uuid())::text, '-'::text, ''::text), 1, 12)" }, null: false
+    t.index ["invite_token"], name: "index_teacher_schools_on_invite_token", unique: true
     t.index ["school_id"], name: "index_teacher_schools_on_school_id"
     t.index ["teacher_id", "school_id"], name: "index_teacher_schools_on_teacher_id_and_school_id", unique: true
     t.index ["teacher_id"], name: "index_teacher_schools_one_primary", unique: true, where: "\"primary\""
+    t.check_constraint "invite_token::text ~ '^[0-9a-f]{12}$'::text", name: "teacher_schools_invite_token_format"
   end
 
   create_table "totp_credentials", force: :cascade do |t|
@@ -1055,6 +1059,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_120000) do
   add_foreign_key "school_staffs", "users", column: "invited_by_id", on_delete: :restrict
   add_foreign_key "school_staffs", "users", on_delete: :restrict
   add_foreign_key "schools", "drenas", on_delete: :restrict
+  add_foreign_key "sessions", "schools", column: "current_school_id", on_delete: :nullify
   add_foreign_key "sessions", "users", on_delete: :cascade
   add_foreign_key "solid_queue_batch_executions", "solid_queue_batches", column: "batch_id", on_delete: :cascade
   add_foreign_key "solid_queue_batch_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

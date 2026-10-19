@@ -9,7 +9,7 @@ class Identity::SidebarReferralTest < ApplicationSystemTestCase
   setup do
     @school = create_school(name: "Lycée Classique d'Abidjan", school_code: "k7m4qz")
     @teacher = create_teacher(school: @school, first_name: "Aya")
-    @token = Orm::TeacherProfile.find_by!(user: @teacher).referral_token
+    @token = Orm::TeacherSchool.find_by!(teacher: @teacher).invite_token
     3.times { create_referral(referrer: @teacher) }
   end
 

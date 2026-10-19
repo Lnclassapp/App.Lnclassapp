@@ -1,0 +1,74 @@
+<%# 🌐 UI · school/teacher_schools/index — « Mes établissements » de l'enseignant %>
+<%# Rôle : une carte par établissement (principal, « Vous êtes ici », « Aller dans… », ⋮ « Quitter » confirmé), puis « Ajouter un établissement » sous le plafond %>
+<%# ADR  : 0094 · UDR : 0006, 0042, 0054, 0098 (§3.1), 0099 (§3.1 à §3.3) · Stimulus : dropdown, modal, school--drena-schools %>
+<% page_title t(".page_title") %>
+<% max = Entities::School::TeacherSchools::MAX %>
+<%= ui_page_header title: t(".title"), subtitle: t(".subtitle", count: teacher_schools.size, max:) %>
+
+<div class="flex max-w-3xl flex-col gap-6">
+  <section id="teacher_schools" aria-label="<%= t(".title") %>">
+    <ul class="flex flex-col gap-3">
+      <% teacher_schools.each do |school| %>
+        <% dialog_id = "leave-school-#{school.public_id}" %>
+        <li id="teacher_school_<%= school.public_id %>">
+          <%= ui_card padding: :md do %>
+            <div class="flex items-start justify-between gap-3">
+              <div class="min-w-0">
+                <p class="truncate font-display font-extrabold text-ink" title="<%= school.name %>">
+                  <%= school.name %><% if school.sigle.present? %> (<%= school.sigle %>)<% end %>
+                </p>
+                <p class="text-sm text-mute"><%= school.drena_name %></p>
+                <% if school.primary || school.current %>
+                  <div class="mt-2 flex flex-wrap gap-1.5">
+                    <% if school.primary %><%= ui_badge t(".primary"), size: :sm %><% end %>
+                    <% if school.current %><%= ui_badge t(".current"), size: :sm, tone: :brand %><% end %>
+                  </div>
+                <% end %>
+              </div>
+              <% if teacher_schools.size > 1 %>
+                <%= ui_dropdown label: t(".actions", school: school.name), id: "teacher-school-menu-#{school.public_id}" do %>
+                  <%= ui_dropdown_item t(".leave"), dialog: dialog_id, icon: "arrow-right-start-on-rectangle", tone: :danger %>
+                <% end %>
+              <% end %>
+            </div>
+            <% unless school.current %>
+              <%= button_to teacher_current_school_path, method: :patch, params: { school_public_id: school.public_id },
+                            form: { id: "go-school-#{school.public_id}", class: "mt-3" },
+                            "aria-label": t(".go_label", school: school.name),
+                            class: "inline-flex min-h-tap cursor-pointer items-center gap-2 rounded-ln border border-line bg-white px-4 text-sm font-semibold text-ink hover:bg-mist focus-visible:outline-2 focus-visible:outline-brand" do %>
+                <span><%= t(".go") %></span><%= ui_icon "arrow-right", size: :sm %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <% if teacher_schools.size > 1 %>
+            <%= ui_modal title: t(".leave_title", school: school.name), id: dialog_id, size: :sm, described_by: "#{dialog_id}-description" do |modal| %>
+              <% modal.footer do %>
+                <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+                <%= ui_button t(".leave_confirm"), type: :submit, form: "#{dialog_id}-form", variant: :danger %>
+              <% end %>
+              <p id="<%= dialog_id %>-description" class="text-sm text-mute"><%= t(".leave_warning") %></p>
+              <%= form_with url: teacher_school_path(school.public_id), method: :delete, id: "#{dialog_id}-form" do %><% end %>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+
+  <% if teacher_schools.size < max %>
+    <%= ui_card id: "add_school", padding: :md do %>
+      <h2 class="font-display text-lg font-extrabold text-ink"><%= t(".add_title") %></h2>
+      <p class="mt-1 mb-4 text-sm text-mute"><%= t(".add_description") %></p>
+      <% if @rate_limited %>
+        <%= ui_error_state title: t("identity.pending_accounts.show.rate_limited.title"),
+                           message: t("identity.pending_accounts.show.rate_limited.message") %>
+      <% else %>
+        <%= render "school/teacher_schools/join_fields", school_join: @school_join, drena_options: @drena_options,
+                                                         school_options: @school_options, get_url: teacher_schools_path,
+                                                         post_url: teacher_schools_path, submit_label: t(".join") %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <p id="schools_limit" class="text-sm text-mute"><%= t(".limit", max:) %></p>
+  <% end %>
+</div>

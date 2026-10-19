@@ -75,9 +75,38 @@ class SchoolAdmin::TeacherReinstatementsControllerTest < ActionDispatch::Integra
     assert_nil Orm::TeacherSchoolDeparture.find_by(teacher: from_b).reinstated_at
   end
 
-  test "rattaché ailleurs entre-temps, déjà réintégré, inconnu : 404 ; en HTML, la page 404" do
+  # ME-21, ME-22 (ADR-0094 §4.4, UDR-0100 §3.3): joined elsewhere since, he is reinstated as a secondary school; at the
+  # cap, a toast says why, nothing else of the other schools, and the row stays.
+  test "ME-21 : rattaché ailleurs entre-temps : réintégré en secondaire, sans rien dire de l'autre établissement" do
     Orm::TeacherSchool.create!(teacher: @teacher, school: @other, primary: true)
     sign_in_as @admin
+
+    reinstate
+
+    assert_response :success
+    assert_equal [ [ @other.id, true ], [ @school.id, false ] ], Orm::TeacherSchool.where(teacher: @teacher).order(:created_at, :id).pluck(:school_id, :primary)
+    assert_not_includes response.body, "Lycée Classique d&#39;Abidjan"
+  end
+
+  test "ME-22 : au plafond : un toast dit pourquoi, la ligne reste, rien n'est écrit ; en HTML, retour à la liste" do
+    [ @other, create_school, create_school ].each_with_index { |school, i| Orm::TeacherSchool.create!(teacher: @teacher, school:, primary: i.zero?) }
+    sign_in_as @admin
+
+    reinstate
+    assert_response :unprocessable_entity
+    assert_select "turbo-stream[action=append][target=toasts]", text: /#{Regexp.escape(t("schools_limit", name: "Awa"))}/
+    assert_select "turbo-stream[action=remove]", 0
+    reinstate(format: :html)
+    assert_redirected_to school_admin_departed_teachers_path
+    assert_equal t("schools_limit", name: "Awa"), flash[:alert]
+    assert_equal 3, Orm::TeacherSchool.where(teacher: @teacher).count
+    assert_nil Orm::TeacherSchoolDeparture.find_by(teacher: @teacher).reinstated_at
+  end
+
+  test "déjà réintégré, inconnu : 404 ; en HTML, la page 404" do
+    sign_in_as @admin
+    reinstate
+    assert_response :success
 
     reinstate
     assert_response :not_found

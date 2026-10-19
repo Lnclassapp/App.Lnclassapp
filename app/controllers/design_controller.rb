@@ -30,7 +30,7 @@ class DesignController < ApplicationController
 
   # Le guide de style (hors production) reste ouvert : il ne montre aucune donnée.
   allow_unauthenticated_access
-  helper_method :shell_user
+  helper_method :shell_user, :teacher_schools
 
   def index
     @sample = Sample.new
@@ -84,4 +84,7 @@ class DesignController < ApplicationController
   def shell_user
     NavigationHelper::ShellUser.new(name: t("design.shell.names.#{@role}"), role: @role, detail: t("design.shell.details.#{@role}"))
   end
+
+  # La démonstration du shell n'a pas de compte : pas de rubrique « Établissement » (UDR-0098 §3.1).
+  def teacher_schools = []
 end

@@ -27,6 +27,10 @@ module Entities
         assert_not AuditAction.valid?("message.archived")
       end
 
+      test "l'enseignant trace son départ d'un établissement (ADR-0094)" do
+        assert AuditAction.valid?("teacher.left")
+      end
+
       test "le changement de classe par l'élève est tracé (ADR-0095 §4.4)" do
         assert AuditAction.valid?("classroom.student_moved")
       end

@@ -75,7 +75,7 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_no_match "Tle D 1", response.body
     assert_no_match "Méiose, les étapes", response.body
-    assert_empty Queries::Classroom::TeacherFollowUpsQuery.new.call(teacher_id: @teacher.id)
+    assert_empty Queries::Classroom::TeacherFollowUpsQuery.new.call(teacher_id: @teacher.id, school_id: @school.id)
     selection = Queries::Classroom::TeachingSelectionQuery.new.call(school_id: @school.id, teacher_id: @teacher.id)
     assert_empty selection.levels.flat_map { |level| level.classrooms.map(&:name) }
     assert_no_difference -> { Orm::ClassroomAssignment.count } do

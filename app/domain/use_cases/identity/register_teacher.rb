@@ -1,15 +1,19 @@
 # 🧠 DOMAINE · UseCases::Identity::RegisterTeacher
-# Rôle : inscrit un enseignant (rôle imposé) dans l'établissement de sa DRENA ou de son lien, note et audite sa voie, ouvre sa session
-# ADR  : 0026, 0028, 0030, 0050, 0063, 0083 · UDR : 0024, 0050, 0079
+# Rôle : inscrit un enseignant (rôle imposé) dans l'établissement de sa DRENA ou de son lien, note et audite sa voie, ouvre sa session ;
+#        le lien de parrainage d'un collègue (sans établissement) note le parrain, l'établissement est choisi
+# ADR  : 0026, 0028, 0030, 0050, 0063, 0083, 0094 (§11) · UDR : 0024, 0050, 0079
 module UseCases
   module Identity
     class RegisterTeacher
       Registered = Data.define(:user, :token)
-      # L'établissement désigné et la voie qui y mène ; referrer_id : le collègue du lien, sinon nil.
-      Destination = Data.define(:school_id, :channel, :referrer_id)
+      # L'établissement désigné et la voie qui y mène ; referrer_id : le collègue du lien, sinon nil ; source : celle du
+      # parrainage (« link » : le lien d'un établissement ; « sponsor » : le lien de parrainage, ADR-0094 §11).
+      Destination = Data.define(:school_id, :channel, :referrer_id, :source)
       ROLE = "teacher".freeze
       STANDARD = "standard".freeze
       COLLEAGUE = "colleague".freeze
+      LINK = "link".freeze
+      SPONSOR = "sponsor".freeze
 
       # Un refus après la création du compte traverse la transaction pour l'annuler, puis ressort en Result.
       class Aborted < StandardError
@@ -48,7 +52,8 @@ module UseCases
         material = @taxonomy.find_material(slug: dto.material_slug)
         return Shared::Result.failure(:invalid, errors: { material_slug: [ :inclusion ] }) if material.nil?
 
-        destination = invited(dto.invite_token) || chosen(dto)
+        link = invite_link(dto.invite_token)
+        destination = link && !link.sponsor ? invited(link) : chosen(dto, sponsor: link)
         return destination if destination.is_a?(Shared::Result)
 
         register(dto, destination, material, ip, user_agent)
@@ -58,15 +63,21 @@ module UseCases
 
       private
 
-      # Résolu de nouveau à l'envoi (ADR-0083 §4.1) : un lien valide l'emporte sur l'établissement envoyé. Un lien devenu
-      # invalide retombe, sans rien dire, sur la voie standard.
-      def invited(token)
+      # Résolu de nouveau à l'envoi (ADR-0083 §4.1). Un lien devenu invalide retombe, sans rien dire, sur la voie standard.
+      # → InviteLink valide | nil
+      def invite_link(token)
         link = token && @invite_links.resolve(token:)
-        Destination.new(school_id: link.school_id, channel: link.channel, referrer_id: link.referrer_id) if link&.valid?
+        link if link&.valid?
       end
 
-      # Inconnu, inactif, en brouillon ou d'une autre DRENA : la même erreur sur l'établissement.
-      def chosen(dto)
+      # Le lien d'un établissement l'emporte sur l'établissement envoyé.
+      def invited(link)
+        Destination.new(school_id: link.school_id, channel: link.channel, referrer_id: link.referrer_id, source: LINK)
+      end
+
+      # Inconnu, inactif, en brouillon ou d'une autre DRENA : la même erreur sur l'établissement. sponsor : le lien de
+      # parrainage d'un collègue (ADR-0094 §11), qui laisse choisir l'établissement et note le parrain ; sinon nil.
+      def chosen(dto, sponsor:)
         missing = { drena_public_id: dto.drena_public_id, school_public_id: dto.school_public_id }.select { |_, id| id.blank? }
         return Shared::Result.failure(:invalid, errors: missing.transform_values { [ :blank ] }) if missing.any?
 
@@ -78,7 +89,7 @@ module UseCases
           return Shared::Result.failure(:invalid, errors: { school_public_id: [ :inclusion ] })
         end
 
-        Destination.new(school_id: school.id, channel: STANDARD, referrer_id: nil)
+        Destination.new(school_id: school.id, channel: sponsor ? COLLEAGUE : STANDARD, referrer_id: sponsor&.referrer_id, source: SPONSOR)
       end
 
       def register(dto, destination, material, ip, user_agent)
@@ -101,7 +112,7 @@ module UseCases
         return unless destination.channel == COLLEAGUE
 
         @referrals.record_referral(referrer_id: destination.referrer_id, referee_id: user.id, school_id: destination.school_id,
-                                   source: "link", at: now)
+                                   source: destination.source, at: now)
       end
 
       def user_from(dto)

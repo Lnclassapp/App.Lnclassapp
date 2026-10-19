@@ -1,15 +1,16 @@
 # 🔌 INFRA · Queries::Catalog::TeacherAudienceQuery
-# Rôle : la portée du catalogue d'un enseignant : sa matière, et les (niveau, série) de ses classes actives de l'année
-# ADR  : 0035, 0041 · UDR : 0077 §3.2 · une lecture, pas une règle d'accès : un cours hors portée reste ouvert par son adresse
+# Rôle : la portée du catalogue d'un enseignant : sa matière, et les (niveau, série) de ses classes actives de l'année dans l'établissement courant
+# ADR  : 0035, 0041, 0094 · UDR : 0077 §3.2 · une lecture, pas une règle d'accès : un cours hors portée reste ouvert par son adresse
 module Queries
   module Catalog
     class TeacherAudienceQuery
       # audience : Entities::Catalog::LevelAudience (vide sans classe de l'année) ; material_id : sa matière.
       Scope = Data.define(:audience, :material_id)
 
-      def call(teacher_id:, today: Date.current)
+      # school_id : l'établissement courant (actor.school_id, ADR-0094 §4.6).
+      def call(teacher_id:, school_id:, today: Date.current)
         pairs = Orm::Classroom.joins(:teacher_classrooms)
-                              .where(teacher_classrooms: { teacher_id: }, status: "active",
+                              .where(teacher_classrooms: { teacher_id: }, school_id:, status: "active",
                                      school_year: Entities::Classroom::SchoolYear.current(today))
                               .distinct.pluck(:level_id, :series_id)
         Scope.new(audience: Entities::Catalog::LevelAudience.new(pairs:),

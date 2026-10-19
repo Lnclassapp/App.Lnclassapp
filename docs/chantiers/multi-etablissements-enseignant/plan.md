@@ -15,8 +15,11 @@ Lot 0 — SOCLE (séquentiel) : migration, acteur = établissement courant, port
   ├─► Lot A  Établissement courant (UDR-0098)              ┐
   ├─► Lot B  Rejoindre et quitter (UDR-0099)               │
   ├─► Lot C  Chaque direction ne voit que sa part (UDR-0100) ├─ en parallèle
-  └─► Lot D  Pilotage de l'équipe par rattachement          ┘
+  ├─► Lot D  Pilotage de l'équipe par rattachement          │
+  └─► Lot E  Deux liens d'invitation (MET-8)                ┘  (après A : mêmes fichiers d'invitation)
 ```
+
+> **Amendement du 2026-10-16 (réponses MET-4 et MET-8).** Le Lot A s'étend à tout l'espace enseignant (policies d'une classe, annonces, collègues en attente, test de non-fuite par écran, ADR-0094 §10). Le lien « Inviter un collègue » vers le principal est remplacé par deux liens : c'est le Lot E, qui suit A. Les lots sont exécutés à la suite par un seul agent, sur la branche du chantier (journal).
 
 Vagues de dispatch :
 
@@ -146,6 +149,22 @@ Contrats gelés : les signatures de l'ADR-0094 §4.5 ; `TeacherSchoolsQuery::Row
 
 ---
 
+## Lot E — Deux liens d'invitation (MET-8)
+
+- **Couche**       : infrastructure (migration `teacher_schools.invite_token`, repositories, query) + domaine + delivery + ui
+- **Fichiers**     : `db/migrate/2026101…_add_invite_token_to_teacher_schools.rb` · `db/schema.rb`
+                     `app/domain/ports/identity/invite_link_repository_port.rb` *(InviteLink + `sponsor`)* · `app/infrastructure/repositories/identity/invite_link_repository.rb`
+                     `app/domain/use_cases/identity/register_teacher.rb` *(lien de parrainage : établissement choisi, parrainage noté)*
+                     `app/domain/policies/identity/invite_colleague_policy.rb` · `app/domain/use_cases/identity/record_referral_share.rb` · `app/controllers/concerns/colleague_invitation.rb`
+                     `app/infrastructure/queries/identity/referral_query.rb` · `app/views/identity/referrals/*` · `app/views/classroom/teacher_homes/_course_levels.html.erb`
+                     `app/controllers/identity/teacher_registrations_controller.rb` · `app/views/identity/teacher_registrations/*`
+                     `config/locales/identity/referrals.fr.yml` · `config/locales/identity/teacher_registrations.fr.yml`
+- **Dépend de**    : Lot A (mêmes fichiers d'invitation), Lot B (lien ouvert connecté)
+- **Test associé** : `test/infrastructure/repositories/identity/invite_link_repository_test.rb` · `test/domain/use_cases/identity/register_teacher_test.rb`
+                     `test/domain/policies/identity/invite_colleague_policy_test.rb` · `test/infrastructure/queries/identity/referral_query_test.rb`
+                     `test/controllers/identity/referrals_controller_test.rb` · `test/system/identity/two_invite_links_test.rb` *(ME-26 à ME-29)*
+- **Done quand**   : la page « Inviter un collègue » montre deux liens, celui de l'établissement courant (le collègue arrive dans cet établissement) et celui de parrainage (le collègue choisit son établissement, le parrainage est compté) ; captures à 390 px et sur ordinateur
+
 ## Vérification de collision
 
 | Fichier | Lot propriétaire |
@@ -168,11 +187,11 @@ Aucun fichier n'est listé par deux lots parallèles. `SchoolRepository` (Lot 0)
 
 ## Portes de sortie
 
-- [ ] Réponses du porteur consignées au memo ; ADR-0094 et UDR-0098 à 0100 « Accepté »
-- [ ] Tous les lots sont `Done`
+- [x] Réponses du porteur consignées au memo ; ADR-0094 et UDR-0098 à 0100 « Accepté »
+- [x] Tous les lots sont `Done` (0, A, B, C, D, E ; un commit chacun)
 - [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : deux directions et un enseignant partagé, parcours ME-01 à ME-22 refaits dans l'application, sur le site et dans Lnclass Teacher
-- [ ] `bin/ci-quiet` vert, verdict écrit dans la PR (CI GitHub coupée, ADR-0069) ; pureté du domaine, rubocop, tests, parcours système, brakeman
+- [x] `bin/ci-quiet` vert, verdict écrit dans la PR (CI GitHub coupée, ADR-0069) ; pureté du domaine, rubocop, tests, parcours système, brakeman
 - [ ] Sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) une fois, sur le diff final : policies, use cases et routes sont touchés
-- [ ] Captures envoyées au porteur (jamais commitées) : chaque écran modifié à 390 px et sur ordinateur, panneau et menus ouverts
-- [ ] Index ADR et UDR régénérés par `script/docs/build_index` au commit de clôture ; ligne du chantier dans `docs/chantiers/README.md` et §6 de la feuille de route (ID-27, ID-09, SC-23, Q7) mis à jour à la clôture
-- [ ] `journal.md` complété
+- [x] Captures envoyées au porteur (jamais commitées) : chaque écran modifié à 390 px et sur ordinateur, panneau et menus ouverts
+- [x] Index ADR et UDR régénérés par `script/docs/build_index` au commit de clôture ; ligne du chantier dans `docs/chantiers/README.md` et §6 de la feuille de route (ID-27, Q7) mis à jour à la clôture (ID-09 et SC-23 restent à `espace-direction`)
+- [x] `journal.md` complété

@@ -23,7 +23,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "drenas" => [ [ %w[name], nil ] ],
     "schools" => [ [ %w[drena_id name], nil ], [ %w[school_code], nil ], [ %w[national_code], "national_codeISNOTNULL" ],
                    [ %w[direction_invite_token], nil ], [ %w[team_invite_token], nil ] ],
-    "teacher_schools" => [ [ %w[teacher_id school_id], nil ], [ %w[teacher_id], "primary" ] ],
+    "teacher_schools" => [ [ %w[teacher_id school_id], nil ], [ %w[teacher_id], "primary" ], [ %w[invite_token], nil ] ],
     "school_staffs" => [ [ %w[user_id], nil ] ],
     "levels" => [ [ %w[name], nil ], [ %w[position], nil ] ],
     "series" => [ [ %w[name], nil ] ],
@@ -85,6 +85,8 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
   MESSAGE_CASCADES = %w[message_classrooms message_dismissals].freeze
   # ADR-0090 §4.1 : the reads of an essential go with it (never its student, who is erased first, ADR-0036).
   ESSENTIAL_CASCADES = %w[essential_reads].freeze
+  # ADR-0094 §4.1 : the current school of a session is only a display choice; a deleted school puts it back on the primary.
+  NULLIFIES = [ %w[sessions current_school_id] ].freeze
   FRAMEWORK_TABLES = /\A(active_storage_|action_text_|solid_(queue|cache|cable)_|schema_migrations|ar_internal_metadata)/
 
   def connection = ActiveRecord::Base.connection
@@ -139,6 +141,19 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { profile.update_column(:referral_token, "ABC") } }
     assert_raises(ActiveRecord::RecordNotUnique) do
       connection.transaction(requires_new: true) { profile.update_column(:referral_token, tokens.first) }
+    end
+  end
+
+  test "ME-26: every attachment of a teacher draws its own invite token of 12 hexadecimal characters (ADR-0094 §11)" do
+    teacher = create_teacher
+    rows = [ Orm::TeacherSchool.find_by!(teacher:), add_teacher_school(teacher, create_school), Orm::TeacherSchool.find_by!(teacher: create_teacher) ]
+    tokens = rows.map(&:invite_token)
+
+    assert_equal 3, tokens.uniq.size
+    assert(tokens.all? { it.match?(/\A[0-9a-f]{12}\z/) }, tokens.inspect)
+    assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { rows.first.update_column(:invite_token, "ABC") } }
+    assert_raises(ActiveRecord::RecordNotUnique) do
+      connection.transaction(requires_new: true) { rows.first.update_column(:invite_token, tokens.last) }
     end
   end
 
@@ -524,6 +539,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
                   (MESSAGE_CASCADES.include?(table) && foreign_key.to_table == "messages") ||
                   (ESSENTIAL_CASCADES.include?(table) && foreign_key.to_table == "essentials")
         expected = cascade ? :cascade : :restrict
+        expected = :nullify if NULLIFIES.include?([ table, foreign_key.column ])
 
         assert_equal expected, foreign_key.on_delete, "#{table}.#{foreign_key.column}"
       end

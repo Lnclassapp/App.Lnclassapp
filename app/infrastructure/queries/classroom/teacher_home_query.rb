@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::TeacherHomeQuery
-# Rôle : accueil enseignant (TR-05) : école, matière, classes déclarées de l'année (effectif, assignations, score), niveaux enseignés
-# ADR  : 0026, 0041, 0048 · UDR : 0026, 0069
+# Rôle : accueil enseignant (TR-05) : établissement courant, matière, classes déclarées de l'année dans cet établissement, niveaux enseignés
+# ADR  : 0026, 0041, 0048, 0094 · UDR : 0026, 0069, 0098
 module Queries
   module Classroom
     class TeacherHomeQuery
@@ -15,14 +15,14 @@ module Queries
       COLUMNS = [ "classrooms.id", "classrooms.public_id", "classrooms.name", "levels.name", "levels.position", "levels.slug",
                   "series.slug", "series.name" ].freeze
 
-      # today : fixe l'année scolaire (ADR-0041).
-      def call(teacher_id:, today: Date.current)
+      # school_id : l'établissement courant (actor.school_id, ADR-0094 §4.6) ; today : fixe l'année scolaire (ADR-0041).
+      def call(teacher_id:, school_id:, today: Date.current)
         material_id, material_name, material_category, material_slug =
           Orm::TeacherProfile.joins(:material).where(user_id: teacher_id)
                              .pick(:material_id, "materials.name", "materials.category", "materials.slug")
-        rows = classroom_rows(teacher_id, today)
+        rows = classroom_rows(teacher_id, school_id, today)
 
-        Row.new(school_name: Orm::TeacherSchool.joins(:school).where(teacher_id:, primary: true).pick("schools.name"),
+        Row.new(school_name: Orm::School.where(id: school_id).pick(:name),
                 material_name:, material_category:, material_slug:, classrooms: classrooms(rows, material_id),
                 course_levels: course_levels(rows))
       end
@@ -30,9 +30,9 @@ module Queries
       private
 
       # Les niveaux enseignés se lisent sur les mêmes lignes que les classes : aucune requête de plus (UDR-0069 §3.3).
-      def classroom_rows(teacher_id, today)
+      def classroom_rows(teacher_id, school_id, today)
         Orm::Classroom.joins(:level, :teacher_classrooms).left_joins(:series)
-                      .where(teacher_classrooms: { teacher_id: }, status: "active",
+                      .where(teacher_classrooms: { teacher_id: }, school_id:, status: "active",
                              school_year: Entities::Classroom::SchoolYear.current(today))
                       .pluck(*COLUMNS)
       end
