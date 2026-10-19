@@ -196,7 +196,7 @@ Et le pied de page a un lien « Les cours par niveau » vers /niveaux
 
 # CC-23 Budget
 Quand on mesure les quatre pages avec script/perf/audit_pages.rb sur le jeu de l'ADR-0067
-Alors chacune répond en moins de 100 ms serveur, pèse moins de 150 Ko de HTML et fait au plus trois requêtes SQL de lecture du catalogue
+Alors chacune répond en moins de 100 ms serveur, pèse moins de 150 Ko de HTML et fait au plus trois requêtes SQL de lecture du catalogue (quatre pour la page matière avec le filtre de série)
 ```
 
 ## 5. Modélisation préliminaire

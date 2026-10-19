@@ -55,11 +55,12 @@ module Queries
         [ scope.where(series_id: [ nil, series_id ]), total_count, Named.new(slug:, name:), Named.new(slug: series_slug, name: series_name) ]
       end
 
-      # Les cartes de la page, par niveau ; le compte d'un groupe est celui du niveau dans la matière.
+      # Les cartes de la page, par niveau ; le compte d'un groupe est celui du niveau dans la matière. Un niveau publié entre la
+      # requête des comptes et celle des cartes n'y est pas : son groupe n'a ni nom ni compte, donc pas de titre (la page rend la grille).
       def groups(cards, counts)
         levels = counts.to_h { |_, slug, name, count| [ slug, [ Named.new(slug:, name:), count ] ] }
         cards.chunk_while { |one, other| one.level_slug == other.level_slug }.map do |chunk|
-          level, count = levels.fetch(chunk.first.level_slug)
+          level, count = levels.fetch(chunk.first.level_slug) { [ Named.new(slug: chunk.first.level_slug, name: nil), nil ] }
           Group.new(level:, count:, cards: chunk)
         end
       end

@@ -16,7 +16,7 @@ module Queries
         create_course(level: @tle, material: @maths, status: "draft")
         create_course(level: @referential[:levels].fetch("5eme"), material: @maths, status: "archived")
 
-        levels = PublicLevelsQuery.new.levels
+        levels = assert_queries_count(2) { PublicLevelsQuery.new.levels }
 
         assert_equal [ [ "3eme", "3ème", "first", 1, [] ], [ "tle", "Tle", "second", 1, [ [ "d", "D" ] ] ] ],
                      levels.map { it.to_h.values }

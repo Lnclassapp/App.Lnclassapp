@@ -78,7 +78,6 @@ module Queries
 
         assert_equal [ "a1", "c", "d" ], pairs.map(&:second)
         assert_equal Time.zone.local(2026, 10, 1, 8), pairs.find { it.second == "a1" }.last
-        assert_includes [ a1, c ].map(&:slug), pairs.first.second
       end
 
       test "series_pairs of one level leaves the other levels out" do

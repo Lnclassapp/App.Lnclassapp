@@ -18,6 +18,7 @@
 | 2026-10-16 | Lot D : `script/perf/audit_pages.rb` n'est pas modifié | Il part déjà de toutes les routes GET sans paramètre (dont `/niveaux`) et suit les liens de chaque page, profil visiteur compris : les quatre pages y entrent seules | Non |
 | 2026-10-16 | Lot D : le plan du site reste en cache public d'une heure, sans session (ADR-0074 §4.6) ; seules les pages HTML du catalogue sont sans cache partagé | Le plan du site ne porte ni cookie ni jeton ; un cours dépublié en sort au plus une heure après | Non : ADR-0099 §4.4 et §4.5 inchangés |
 | 2026-10-16 | Les titres disent le nom du niveau tel qu'il est en base (« Cours de Tle »), pas « Terminale » comme les exemples du PRD | Le slug est figé (ADR-0029) mais le nom suit le référentiel (memo, cas limites) : renommer « Tle » en « Terminale » dans `/teams/levels` change les titres sans casser une adresse | Non : à décider par l'équipe Contenu |
+| 2026-10-19 | Revues de la PR #255 : CC-23 amendé (« au plus trois, quatre avec le filtre de série » pour la page matière) ; un niveau publié entre la requête des comptes et celle des cartes rend sa grille sans titre de groupe au lieu de lever `KeyError` | La série rattachée et son compte ne se déduisent pas des comptes par niveau (décision du Lot B) ; une transaction en lecture seule pour deux requêtes est plus lourde que de tolérer l'absence | Non |
 
 ## Ce qui a dérapé
 

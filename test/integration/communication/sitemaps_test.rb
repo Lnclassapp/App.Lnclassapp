@@ -72,6 +72,9 @@ module Communication
     end
 
     test "without a published course, the sitemap has no catalogue address" do
+      referential = seed_referential
+      create_course(level: referential[:levels].fetch("tle"), material: referential[:materials].fetch("mathematiques"), status: "archived")
+
       get sitemap_path
 
       assert_no_match(%r{/niveaux|/matieres}, response.body)

@@ -1,5 +1,5 @@
 <%# 🌐 UI · catalog/material_pages/_page — une page de 24 cartes d'une matière, groupées par niveau, puis le frame différé de la suivante %>
-<%# Rôle : un groupe continué d'une page à l'autre ne répète pas son titre (after_level) ; un niveau choisi n'a pas de titre de groupe, le h1 le porte %>
+<%# Rôle : un groupe continué d'une page à l'autre ne répète pas son titre (after_level) ; un niveau choisi n'a pas de titre de groupe, le h1 le porte ; un niveau sans nom (publié en cours de requête) non plus %>
 <%# ADR  : 0076 (§4.2 : hors de l'écran à l'arrivée) · UDR : 0114 (§3.3), 0013 (amendement du 2026-10-05) · nested : page chargée dans le frame de la précédente %>
 <%# locals: (page:, nested: false) -%>
 <% previous = (after_level if nested) %>
@@ -9,7 +9,7 @@
       <%= render partial: "catalog/public/course_card", collection: group.cards, as: :card %>
     </ul>
   <% end %>
-  <% if page.selected_level || group.level.slug == previous %>
+  <% if page.selected_level || group.level.slug == previous || group.level.name.nil? %>
     <div class="<%= class_names("mt-3" => nested) %>"><%= grid %></div>
   <% else %>
     <section id="level_group_<%= group.level.slug %>" aria-labelledby="level_group_<%= group.level.slug %>_title"

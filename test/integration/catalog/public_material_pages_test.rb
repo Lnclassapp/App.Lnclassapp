@@ -91,11 +91,32 @@ module Catalog
 
       [ public_material_path("inconnue"), public_material_path("mathematiques", niveau: "inconnu"),
         public_material_path("mathematiques", serie: "d"), public_material_path("mathematiques", niveau: "tle", serie: "inconnue"),
+        "/matieres/mathematiques?niveau=tle&serie[]=d",
         public_material_path("mathematiques", niveau: "tle", serie: "a"), "/matieres/mathematiques?niveau[]=tle" ].each do |path|
         get path
 
         assert_response :not_found, path
       end
+    end
+
+    test "CC-07: the material page links to no content and its cards hold no link nor button" do
+      published = course("tle", @maths, name: "Suites", subtitle: "Arithmétiques")
+      create_essential(course: published, name: "Fiche des suites")
+
+      get public_material_path("mathematiques")
+
+      assert_select "article", 1
+      assert_select "article a, article button", 0
+      assert_select "a[href^='/courses/'], a[href*='/essentials/'], a[href^='/exercises']", 0
+    end
+
+    test "a foreign Turbo-Frame id gets the full page, not the cards frame" do
+      course("tle", @maths)
+
+      get public_material_path("mathematiques"), headers: { "Turbo-Frame" => "autre" }
+
+      assert_response :success
+      assert_match(/<html/, response.body)
     end
 
     test "CC-13: a material without published course says its courses are coming and is not indexed" do
@@ -149,6 +170,7 @@ module Catalog
 
       get public_material_path("mathematiques")
       assert_no_match(/public/, response.headers["Cache-Control"])
+      assert_match(/private/, response.headers["Cache-Control"])
       assert_select "#material_cta_top a[href='#{new_student_registration_path}']", "Créer mon compte élève"
 
       sign_in_as create_student_for(published)

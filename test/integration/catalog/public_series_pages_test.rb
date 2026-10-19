@@ -87,6 +87,17 @@ module Catalog
       assert_select "a[href='/niveaux/tle/a1']", 0
     end
 
+    test "CC-07: the series page links to no content and its cards hold no link nor button" do
+      published = course("mathematiques", name: "Suites", series: @series.fetch("d"))
+      create_essential(course: published, name: "Fiche des suites")
+
+      get public_level_series_path("tle", "d")
+
+      assert_select "article", 1
+      assert_select "article a, article button", 0
+      assert_select "a[href^='/courses/'], a[href*='/essentials/'], a[href^='/exercises']", 0
+    end
+
     test "CC-06: neither a draft nor an archived course of the series, nor their count" do
       course("mathematiques", name: "Suites", series: @series.fetch("d"))
       course("mathematiques", name: "Intégrales", series: @series.fetch("d"), status: "draft")
@@ -107,6 +118,7 @@ module Catalog
 
       assert_response :success
       assert_no_match(/public/, response.headers["Cache-Control"])
+      assert_match(/private/, response.headers["Cache-Control"])
       assert_select "#series_cta_top a[href='#{courses_path}']", "Ouvrir le catalogue"
     end
   end

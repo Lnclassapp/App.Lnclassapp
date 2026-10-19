@@ -42,6 +42,23 @@ module Queries
         assert_equal [ PublicMaterialQuery::Named.new(slug: "d", name: "D"), 2 ], [ page.selected_series, page.total_count ]
       end
 
+      test "a level published between the counts and the cards is rendered without a group title, not a KeyError" do
+        course("3eme", name: "Fractions")
+        query = PublicMaterialQuery.new
+        test = self
+        late = Module.new do
+          define_method(:selection) do |*args, **options|
+            super(*args, **options).tap { test.course("tle", name: "Suites") }
+          end
+        end
+        query.singleton_class.prepend(late)
+
+        page = query.call(slug: "mathematiques")
+
+        assert_equal [ [ "3eme", "3ème", 1 ], [ "tle", nil, nil ] ], page.groups.map { [ it.level.slug, it.level.name, it.count ] }
+        assert_equal [ [ "Fractions" ], [ "Suites" ] ], page.groups.map { it.cards.map(&:name) }
+      end
+
       test "24 cards a page; a page out of range, or forged, is the nearest one" do
         30.times { |index| course("tle", name: format("Cours %02d", index)) }
 

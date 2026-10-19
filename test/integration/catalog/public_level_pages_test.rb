@@ -150,6 +150,65 @@ module Catalog
       assert_select "#levels_cta a[href='#{courses_path}']", "Ouvrir le catalogue"
     end
 
+    test "CC-08: a visitor is offered the student account and the sign-in on the four pages" do
+      course("tle", "mathematiques", series: @series.fetch("d"))
+
+      [ public_levels_path, public_level_path("tle"), public_material_path("mathematiques"), public_level_series_path("tle", "d") ].each do |path|
+        get path
+
+        assert_response :success, path
+        assert_select "a[href='#{new_student_registration_path}']", text: "Créer mon compte élève", minimum: 1
+        assert_select "a[href='#{new_session_path}']", text: "J'ai déjà un compte", minimum: 1
+      end
+    end
+
+    test "CC-08: a signed-in student reads « Voir mes cours » on the series page" do
+      published = course("tle", "mathematiques", series: @series.fetch("d"))
+      sign_in_as create_student_for(published)
+
+      get public_level_series_path("tle", "d")
+
+      assert_response :success
+      assert_select "a[href='#{courses_path}']", text: "Voir mes cours", minimum: 1
+    end
+
+    test "CC-08: a teacher waiting for a school reads the page, then is sent to the pending account from the catalogue" do
+      course("tle", "mathematiques")
+      sign_in_as create_teacher(school: nil)
+
+      get public_level_path("tle")
+      assert_response :success
+
+      get courses_path
+      assert_redirected_to pending_account_path
+    end
+
+    test "CC-08: a team member and a school direction are offered the catalogue and never read a draft" do
+      course("tle", "mathematiques", name: "Suites")
+      course("tle", "mathematiques", name: "Intégrales", status: "draft")
+
+      [ create_team_member(team_role: "content"), create_school_admin ].each do |member|
+        sign_in_as member
+
+        get public_level_path("tle")
+
+        assert_response :success, member.role
+        assert_select "#level_cta_top a[href='#{courses_path}']", "Ouvrir le catalogue"
+        assert_no_match "Intégrales", response.body
+        delete session_path
+      end
+    end
+
+    test "CC-23: with about 200 published courses, the level space stays under 150 Ko of HTML" do
+      materials = @materials.values
+      200.times { |index| course("tle", materials[index % materials.size].slug, name: format("Cours %03d", index), subtitle: "Description du cours #{index}") }
+
+      get public_level_path("tle")
+
+      assert_response :success
+      assert_operator response.body.bytesize, :<, 150.kilobytes
+    end
+
     test "CC-19: a Tle D student reads the titles of 6e, but neither the 6e catalogue nor a 6e course" do
       own = course("tle", "mathematiques", name: "Suites", series: @series.fetch("d"))
       other = course("6eme", "mathematiques", name: "Les nombres entiers")
@@ -173,6 +232,7 @@ module Catalog
       [ public_levels_path, public_level_path("tle") ].each do |path|
         get path
         assert_no_match(/public/, response.headers["Cache-Control"])
+        assert_match(/private/, response.headers["Cache-Control"])
       end
       assert_match "Suites", response.body
 
