@@ -52,7 +52,7 @@ module Assessment
     end
 
     # UDR-0109 §3.1 : le nom d'un élève du suivi mène à sa fiche dans la classe, hors du cadre des catégories (_top). Le suivi
-    # d'une classe archivée répond 404 (ADR-0088, #251), comme sa fiche : le lien vise toujours une fiche lisible.
+    # d'une classe archivée répond 404 (ADR-0088, PR 251), comme sa fiche : le lien vise toujours une fiche lisible.
     # student : répond à display_name et public_id.
     def comprehension_student_name(student, classroom)
       link_to student.display_name, classroom_student_path(classroom.public_id, student.public_id), data: { turbo_frame: "_top" },
