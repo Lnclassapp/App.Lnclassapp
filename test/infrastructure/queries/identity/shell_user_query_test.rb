@@ -69,10 +69,27 @@ module Queries
         primary = create_school(name: "Lycée moderne d'Abobo")
         other = create_school(name: "Collège Saint-Michel")
         teacher = create_teacher(school: primary, material: create_material(name: "SVT"))
-        Orm::TeacherSchool.create!(teacher:, school: other, primary: false)
+        add_teacher_school(teacher, other)
 
         assert_equal "SVT · Collège Saint-Michel", @query.call(user_id: teacher.id, current_school_id: other.id).detail
         assert_equal "SVT · Lycée moderne d'Abobo", @query.call(user_id: teacher.id, current_school_id: create_school.id).detail
+      end
+
+      # EPM-14 (UDR-0126 §3.5) : plusieurs matières, les noms courts ; celles de l'établissement courant seulement.
+      test "a teacher of two subjects shows their short names, those of the current school only" do
+        pc = create_material(name: "Physique-Chimie", shortname: "PC")
+        svt = create_material(name: "SVT", shortname: "SVT")
+        primary = create_school(name: "Lycée A")
+        other = create_school(name: "Lycée B")
+        teacher = create_teacher(school: primary, materials: [ pc, svt ])
+        add_teacher_school(teacher, other, materials: [ svt ])
+
+        assert_equal "PC, SVT · Lycée A", @query.call(user_id: teacher.id, current_school_id: primary.id).detail
+        assert_equal "SVT · Lycée B", @query.call(user_id: teacher.id, current_school_id: other.id).detail
+      end
+
+      test "a teacher without any school has no detail" do
+        assert_nil @query.call(user_id: create_teacher(school: nil).id).detail
       end
 
       test "a team member has no detail, an unknown account is nil" do

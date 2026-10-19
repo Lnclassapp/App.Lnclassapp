@@ -13,7 +13,10 @@ module Factories
       Orm::ReferralShare.create!(user:, channel:, created_at:)
     end
 
-    def create_join_request(school: create_school, teacher: create_teacher(school: nil), status: "pending", **attributes)
+    # ADR-0103 §4.6 : une demande en attente porte la liste de l'établissement demandé (`materials`, comme la migration la
+    # copie) ; sans `materials`, aucune.
+    def create_join_request(school: create_school, teacher: create_teacher(school: nil), status: "pending", materials: [], **attributes)
+      set_teacher_materials(teacher, school, materials) if materials.any?
       decided = status == "pending" ? {} : { decided_at: Time.current, decided_via: "team" }
       Orm::SchoolJoinRequest.create!(school:, teacher:, status:, **decided, **attributes)
     end

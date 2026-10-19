@@ -32,9 +32,10 @@ class TeacherLeaveConcurrencyTest < ActiveSupport::TestCase
     Orm::TeacherSchoolDeparture.where(teacher_id: @teacher.id).delete_all
     Orm::SchoolStaff.where(user_id: users).delete_all
     Orm::TeacherSchool.where(teacher_id: @teacher.id).delete_all
-    profiles = Orm::TeacherProfile.where(user_id: @teacher.id)
-    materials = profiles.pluck(:material_id)
-    profiles.delete_all
+    rows = Orm::TeacherSchoolMaterial.where(teacher_id: @teacher.id)
+    materials = rows.pluck(:material_id)
+    rows.delete_all
+    Orm::TeacherProfile.where(user_id: @teacher.id).delete_all
     Orm::User.where(id: users).delete_all
     Orm::Material.where(id: materials).delete_all
     Orm::School.where(id: [ @a.id, @b.id, @c&.id ].compact).delete_all

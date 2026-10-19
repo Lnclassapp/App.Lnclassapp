@@ -95,7 +95,12 @@ fr:
       courses:
         title: "Fiches de cours"
         empty_title: "Aucune fiche de cours publiée pour cette classe"
-        empty_description: "Les fiches de cours de votre matière pour ce niveau apparaîtront ici dès leur publication."
+        empty_description: "Les fiches de cours de vos matières pour ce niveau apparaîtront ici dès leur publication."
+        # UDR-0127 §3.1 (ADR-0103) : une bande par matière, pour l'enseignant de plusieurs matières
+        band_label: "Fiches de cours de %{material}"
+        count:
+          one: "%{count} fiche de cours"
+          other: "%{count} fiches de cours"
         essentials:
           one: "%{count} fiche de révision"
           other: "%{count} fiches de révision"

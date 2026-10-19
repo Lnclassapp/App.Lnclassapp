@@ -119,9 +119,29 @@ module Queries
         assert_equal %w[Botanique Génétique], courses.map(&:name)
         assert_equal ClassroomOverviewQuery::CourseRow.new(slug: genetics.slug, name: "Génétique", subtitle: "Hérédité", level_name: "Tle",
                                                            series_name: "D", material_name: "SVT", material_category: "science",
-                                                           essentials_count: 2), courses.last
+                                                           essentials_count: 2, material_slug: svt.slug), courses.last
         assert_equal 0, courses.first.essentials_count
         assert_equal %w[Fonctions Botanique Génétique], overview.courses.map(&:name)
+      end
+
+      # EPM-18, EPM-19 (UDR-0127 §3.1, ADR-0103 §4.5) : ses matières de l'établissement de la classe, dans son ordre ; deux
+      # enseignants d'une classe ne voient chacun que les leurs ; la liste d'un autre de ses établissements ne compte pas.
+      test "cours : ceux de ses matières dans l'établissement de la classe, rangés dans son ordre" do
+        tle = create_level(name: "Tle")
+        @classroom = create_classroom(level: tle)
+        svt = create_material(name: "SVT")
+        pc = create_material(name: "Physique-Chimie")
+        maths = create_material(name: "Mathématiques")
+        both = create_teacher(materials: [ svt, pc ], classrooms: [ @classroom ])
+        add_teacher_school(both, create_school, materials: [ maths ])
+        colleague = create_teacher(material: maths, classrooms: [ @classroom ])
+        [ [ pc, "Optique" ], [ svt, "Génétique" ], [ maths, "Fonctions" ], [ svt, "Botanique" ] ].each do |material, name|
+          create_course(level: tle, material:, name:)
+        end
+
+        assert_equal [ %w[svt Botanique], %w[svt Génétique], %w[physique-chimie Optique] ],
+                     overview(teacher_id: both.id).courses.map { [ it.material_slug, it.name ] }
+        assert_equal %w[Fonctions], overview(teacher_id: colleague.id).courses.map(&:name)
       end
 
       test "un exercice assigné ne casse rien (CS#B8)" do
@@ -274,6 +294,19 @@ module Queries
         assert_not shown_for.call(other_level)
         assert_not shown_for.call(draft)
         assert_not query.shown_course?(public_id: "inconnue", course_slug: shown.slug)
+      end
+
+      # ADR-0103 §4.5 : les matières de l'enseignant sont celles de l'établissement de la classe, pas celles d'un autre.
+      test "shown_course? : seules comptent ses matières dans l'établissement de la classe" do
+        here, elsewhere = create_material(name: "SVT"), create_material(name: "Histoire")
+        teacher = create_teacher(material: here, classrooms: [ @classroom ])
+        add_teacher_school(teacher, create_school, materials: [ elsewhere ])
+        mine = create_course(level: @classroom.level, material: here)
+        theirs = create_course(level: @classroom.level, material: elsewhere)
+        query = ClassroomOverviewQuery.new
+
+        assert query.shown_course?(public_id: @classroom.public_id, course_slug: mine.slug, teacher_id: teacher.id)
+        assert_not query.shown_course?(public_id: @classroom.public_id, course_slug: theirs.slug, teacher_id: teacher.id)
       end
 
       # CA-16 (accueil-eleve, ADR-0089 §4.2, UDR-0084 §3.7) : « Fait seul (7 j) » compte les sessions terminées, standard,

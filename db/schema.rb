@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_16_161500) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_16_170000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -944,13 +944,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_161500) do
 
   create_table "teacher_profiles", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.bigint "material_id", null: false
     t.datetime "onboarding_completed_at"
     t.string "referral_token", limit: 12, default: -> { "substr(replace((gen_random_uuid())::text, '-'::text, ''::text), 1, 12)" }, null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.string "joined_via", null: false
-    t.index ["material_id"], name: "index_teacher_profiles_on_material_id"
     t.index ["referral_token"], name: "index_teacher_profiles_on_referral_token", unique: true
     t.index ["user_id"], name: "index_teacher_profiles_on_user_id", unique: true
     t.check_constraint "joined_via::text = ANY (ARRAY['standard'::character varying::text, 'colleague'::character varying::text, 'direction'::character varying::text, 'team'::character varying::text, 'code'::character varying::text])", name: "teacher_profiles_joined_via_values"
@@ -969,6 +967,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_161500) do
     t.index ["school_id", "detached_at"], name: "index_teacher_school_departures_on_school_id_and_detached_at"
     t.index ["teacher_id", "school_id"], name: "index_teacher_school_departures_one_open", unique: true, where: "(reinstated_at IS NULL)"
     t.check_constraint "(reinstated_at IS NULL) = (reinstated_by_id IS NULL)", name: "teacher_school_departures_reinstated_together"
+  end
+
+  create_table "teacher_school_materials", force: :cascade do |t|
+    t.bigint "teacher_id", null: false
+    t.bigint "school_id", null: false
+    t.bigint "material_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["material_id"], name: "index_teacher_school_materials_on_material_id"
+    t.index ["school_id"], name: "index_teacher_school_materials_on_school_id"
+    t.index ["teacher_id", "school_id", "material_id"], name: "index_teacher_school_materials_unique", unique: true
   end
 
   create_table "teacher_schools", force: :cascade do |t|
@@ -1113,12 +1121,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_161500) do
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "teacher_classrooms", "classrooms", on_delete: :restrict
   add_foreign_key "teacher_classrooms", "users", column: "teacher_id", on_delete: :restrict
-  add_foreign_key "teacher_profiles", "materials", on_delete: :restrict
   add_foreign_key "teacher_profiles", "users", on_delete: :restrict
   add_foreign_key "teacher_school_departures", "schools", on_delete: :restrict
   add_foreign_key "teacher_school_departures", "users", column: "detached_by_id", on_delete: :restrict
   add_foreign_key "teacher_school_departures", "users", column: "reinstated_by_id", on_delete: :restrict
   add_foreign_key "teacher_school_departures", "users", column: "teacher_id", on_delete: :restrict
+  add_foreign_key "teacher_school_materials", "materials", on_delete: :restrict
+  add_foreign_key "teacher_school_materials", "schools", on_delete: :restrict
+  add_foreign_key "teacher_school_materials", "users", column: "teacher_id", on_delete: :restrict
   add_foreign_key "teacher_schools", "schools", on_delete: :restrict
   add_foreign_key "teacher_schools", "users", column: "teacher_id", on_delete: :restrict
   add_foreign_key "totp_credentials", "users", on_delete: :cascade

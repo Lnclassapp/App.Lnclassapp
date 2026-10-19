@@ -13,7 +13,8 @@ module JoinsSchool
       join_requests: Repositories::School::JoinRequestRepository.new,
       invite_links: Repositories::Identity::InviteLinkRepository.new, sessions: Repositories::Identity::SessionRepository.new,
       audit_log: Repositories::Identity::AuditLogRepository.new, policy: Policies::School::JoinSchoolWithCodePolicy.new,
-      transaction: Repositories::Shared::Transaction.new, clock: Time.zone
+      transaction: Repositories::Shared::Transaction.new, clock: Time.zone,
+      teacher_materials: Repositories::Identity::TeacherMaterialRepository.new
     )
   end
 end

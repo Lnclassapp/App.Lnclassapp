@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/index — catalogue des cours (CA-01), pour tous les rôles connectés %>
-<%# Rôle : recherche et filtres (téléphone compris) qui visent le frame « courses » ; élève : son niveau, recherche seule, groupes par matière, vue d'une matière ; enseignant : sa matière à ses niveaux ; équipe : création et import %>
-<%# ADR  : 0028, 0035, 0076, 0090 · UDR : 0006, 0013 (amendements du 2026-10-02 et du 2026-10-05), 0057, 0069, 0077 §3.2 (amendement du 2026-10-06), 0085 (élève) · par pages de 24 %>
+<%# Rôle : recherche et filtres (téléphone compris) qui visent le frame « courses » ; élève : son niveau, recherche seule, groupes par matière, vue d'une matière ; enseignant : ses matières à ses niveaux, groupées au-delà d'une ; équipe : création et import %>
+<%# ADR  : 0028, 0035, 0076, 0090 · UDR : 0006, 0013 (amendements du 2026-10-02 et du 2026-10-05), 0057, 0069, 0077 §3.2 (amendement du 2026-10-06), 0085 (élève), 0126 §3.1 (plusieurs matières) · par pages de 24 %>
 <% team = current_actor.team? %>
 <%# UDR-0013, amendement du 2026-10-01 : l'élève ne voit que son niveau ; le filtre par niveau ne lui sert plus. %>
 <% student = current_actor.student? %>
@@ -38,8 +38,16 @@
       <%= ui_info_tip t(".student_scope"), label: t(".student_scope_label") %>
     </div>
   <% elsif teacher %>
-    <% teacher_material = filter_options.materials.find { it.id == teacher.material_id } %>
-    <%= ui_page_header title: t(".title"), subtitle: t(".teacher_subtitle", material: teacher_material&.name) %>
+    <%# UDR-0126 §3.1 : une matière, son nom ; plusieurs, « Physique-Chimie et SVT ». %>
+    <%# Sans aucune matière dans l'établissement courant : jamais « Les cours de , aux niveaux… » (ADR-0103 §4.6). %>
+    <% subtitle = if teacher.materials.empty?
+                    t(".teacher_subtitle_none")
+                  elsif teacher.several_materials?
+                    t(".teacher_subtitle_many", materials: teacher.materials.map(&:name).to_sentence)
+                  else
+                    t(".teacher_subtitle", material: teacher.materials.first.name)
+                  end %>
+    <%= ui_page_header title: t(".title"), subtitle: %>
   <% else %>
     <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") %>
   <% end %>
@@ -69,14 +77,19 @@
     <% series = filter_options.series_by_level.values.flatten.uniq(&:slug).sort_by(&:name) %>
     <% levels = filter_options.levels %>
     <% if teacher %>
-      <%# UDR-0077 §3.2 : ses niveaux et ses séries seulement ; pas de liste « Matière », il n'en a qu'une. %>
+      <%# UDR-0077 §3.2 : ses niveaux et ses séries seulement ; la liste « Matière » ne propose que ses matières, et seulement
+          s'il en a plusieurs (UDR-0126 §3.1). %>
       <% levels = levels.select { |level| teacher.audience.pairs.any? { it.first == level.id } } %>
       <% series = series.select { |one| teacher.audience.pairs.any? { it.last == one.id } } %>
     <% end %>
     <% selects = {
          level: [ [ t(".filters.all_levels"), "" ], *levels.map { [ it.name, it.slug ] } ],
          series: ([ [ t(".filters.all_series"), "" ], *series.map { [ it.name, it.slug ] } ] unless teacher && series.empty?),
-         material: ([ [ t(".filters.all_materials"), "" ], *filter_options.materials.map { [ it.name, it.slug ] } ] unless teacher)
+         material: (if teacher
+                      [ [ t(".filters.all_teacher_materials"), "" ], *teacher.materials.map { [ it.name, it.slug ] } ] if teacher.several_materials?
+                    else
+                      [ [ t(".filters.all_materials"), "" ], *filter_options.materials.map { [ it.name, it.slug ] } ]
+                    end)
        }.compact %>
     <%# Recherche pendant la frappe (UDR-0054 §3.9) : le champ reste hors du frame ; « Filtrer » sert sans JavaScript. %>
     <%# UDR-0077, amendement du 2026-10-06 (décision du porteur) : visible sur téléphone aussi, une colonne sous 640 px. %>
@@ -89,7 +102,8 @@
                                data: { action: "search#queue" } %>
       </div>
       <% selects.each do |name, choices| %>
-        <div class="space-y-1.5">
+        <%# UDR-0126 §3.1 : la liste des matières de l'enseignant n'existe que sur ordinateur ; ses groupes font le tri sur téléphone. %>
+        <div class="<%= class_names("space-y-1.5", "hidden sm:block" => teacher && name == :material) %>">
           <%= label_tag "filter_#{name}", t(".filters.#{name}"), class: "block text-sm font-medium text-ink" %>
           <div class="relative">
             <%= select_tag name, options_for_select(choices, @filters[name]), id: "filter_#{name}", class: select_class,
@@ -133,6 +147,12 @@
         <% end %>
       <% elsif student && student_audience.empty? %>
         <%= ui_empty_state title: t(".no_class_title"), description: t(".no_class_description"), icon: "user-group" %>
+      <% elsif teacher&.materials&.empty? %>
+        <%# ADR-0103 §4.6 : l'enseignant sans liste dans cet établissement est invité à la faire, jamais laissé devant une page vide. %>
+        <%= ui_empty_state title: t(".teacher_no_material_title"), description: t(".teacher_no_material_description"), icon: "book-open" do %>
+          <%= ui_button t(".teacher_no_material_action"), href: edit_profile_materials_path, variant: :secondary, icon: "pencil-square",
+                                                           data: { turbo_frame: "modal" } %>
+        <% end %>
       <% elsif teacher&.audience&.empty? %>
         <%= ui_empty_state title: t(".teacher_no_class_title"), description: t(".teacher_no_class_description"), icon: "user-group" do %>
           <%= ui_button t(".teacher_no_class_action"), href: teacher_classrooms_path, variant: :secondary, icon: "pencil-square" %>

@@ -8,7 +8,8 @@ module Queries
       setup do
         @school = create_school(name: "Lycée Classique d'Abidjan")
         @svt = create_material(name: "SVT", category: "science")
-        @awa = create_teacher(school: nil, material: @svt, first_name: "Awa", last_name: "Koné", contact: "0501020304")
+        @awa = create_teacher(school: nil, first_name: "Awa", last_name: "Koné", contact: "0501020304")
+        set_teacher_materials(@awa, @school, [ @svt ]) # ADR-0103 §4.6 : la liste d'une demande en attente, copiée
         @request = create_join_request(school: @school, teacher: @awa, created_at: 2.days.ago)
         @newer = create_join_request(school: @school, created_at: 1.day.ago)
         create_join_request(school: @school, status: "rejected")
@@ -19,7 +20,8 @@ module Queries
         rows = JoinRequestsQuery.new.for_school(school_public_id: @school.public_id)
 
         assert_equal [ @request.public_id, @newer.public_id ], rows.map(&:public_id)
-        assert_equal [ "Awa Koné", "0501020304", "SVT", "science" ], rows.first.to_h.values_at(:name, :contact, :material_name, :material_category)
+        assert_equal [ "Awa Koné", "0501020304" ], rows.first.to_h.values_at(:name, :contact)
+        assert_equal [ [ "SVT", "science" ] ], rows.first.materials.map { [ it.name, it.category ] }
       end
 
       test "for an active colleague: the same list without the number, and the school's name" do

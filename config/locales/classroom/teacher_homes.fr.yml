@@ -18,6 +18,10 @@ fr:
         classrooms_empty_description: "Déclarez les classes où vous enseignez : vous les retrouverez ici."
         courses_title: "Fiches de cours"
         courses_subtitle: "Les fiches de cours de vos niveaux en %{material}"
+        # UDR-0126 §3.3 (ADR-0103) : l'enseignant de plusieurs matières
+        courses_subtitle_many: "Les fiches de cours de vos niveaux, dans vos matières"
+        # ADR-0103 §4.6 : aucune matière dans l'établissement courant
+        courses_subtitle_none: "Choisissez vos matières pour voir vos fiches de cours"
         all_courses: "Voir tout le catalogue"
       # UDR-0077 §3.1 : les exercices assignés à suivre cette semaine.
       follow_ups:
@@ -28,10 +32,15 @@ fr:
         pending:
           one: "1 élève sur %{present} ne l'a pas fait"
           other: "%{count} élèves sur %{present} ne l'ont pas fait"
+      choose_materials:
+        title: "Choisissez vos matières"
+        description: "Vos cours et vos exercices à suivre dépendent des matières que vous enseignez dans cet établissement."
+        action: "Choisir mes matières"
       course_levels:
         label: "Vos niveaux et actions"
         empty: "Déclarez vos classes pour retrouver ici les fiches de cours de vos niveaux."
         sr_level: ", fiches de cours de %{material}"
+        sr_level_many: ", fiches de cours de vos matières"
         invite: "Inviter"
         # UDR-0079 §3.7 : la bulle ouvre WhatsApp ; l'espace en tête sépare le suffixe du libellé lu « Inviter ».
         invite_sr: " sur WhatsApp"

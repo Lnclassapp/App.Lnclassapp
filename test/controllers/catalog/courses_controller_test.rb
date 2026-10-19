@@ -26,6 +26,21 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   # L'ancien écran « Assigner un cours » (UDR-0030, dépréciée) : sa route n'existe plus.
   def assignments_href(slug) = "/courses/#{slug}/assignments"
 
+  # ADR-0103 §4.6: no list in the current school (a rejected request lost to the migration, then nothing inherited).
+  test "a teacher without any subject in the current school is invited to choose them, with no broken subtitle" do
+    teacher = create_teacher(school: create_school, classrooms: [ create_classroom(level: @tle) ])
+    Orm::TeacherSchoolMaterial.where(teacher_id: teacher.id).delete_all
+    sign_in_as teacher
+
+    get courses_path
+
+    assert_response :success
+    assert_select "#main", text: including(tl("index.teacher_subtitle_none"))
+    assert_select "#main", text: /Les cours de ,/, count: 0
+    assert_select "#courses_empty", text: including(tl("index.teacher_no_material_title"))
+    assert_select "#courses_empty #{modal_link(edit_profile_materials_path)}"
+  end
+
   test "a visitor is sent to the sign-in" do
     get courses_path
     assert_redirected_to new_session_path
@@ -469,6 +484,34 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     # UDR-0013, amendement du 2026-10-05 (ter) : le badge de matière reste sur chaque carte, pour tous les rôles.
     assert_select "#course_#{own.slug} div.mb-4", text: including("Mathématiques")
     assert_select "#course_#{own.slug} div.mb-4", text: including("Tle D")
+    assert_select "#courses_groups, h2[id^=courses_group_]", 0
+  end
+
+  # EPM-12 (UDR-0126 §3.1) : deux matières, rangées par matière ; « Matière » limitée aux siennes, sur ordinateur.
+  test "EPM-12: a teacher of two subjects sees both, grouped, with a « Matière » list of his subjects only" do
+    pc = create_material(name: "Physique-Chimie", category: "science")
+    other = create_material(name: "Mathématiques")
+    d = @course.series
+    mechanics = create_course(name: "Mécanique", level: @tle, series: d, material: pc)
+    foreign = create_course(name: "Probabilités", level: @tle, series: d, material: other)
+    link_level_series(level: @tle, series: d)
+    sign_in_as create_teacher(materials: [ pc, @svt ], classrooms: [ create_classroom(level: @tle, series: d) ])
+
+    get courses_path
+
+    assert_select "#main", text: including(tl("index.teacher_subtitle_many", materials: "Physique-Chimie et SVT"))
+    assert_select "#courses_groups section#courses_group_#{pc.slug} #course_#{mechanics.slug}"
+    assert_select "#courses_groups section#courses_group_#{@svt.slug} #course_#{@course.slug}"
+    assert_select "#course_#{foreign.slug}", 0
+    assert_select "form#courses-filters div.hidden select[name=material]" do
+      assert_equal [ [ "", "Toutes vos matières" ], [ pc.slug, "Physique-Chimie" ], [ @svt.slug, "SVT" ] ],
+                   css_select("select[name=material] option").map { [ it["value"], it.text ] }
+    end
+
+    get courses_path(material: other.slug)
+
+    assert_select "#courses_empty"
+    assert_select "#courses_reset"
   end
 
   test "CA-5: a draft or archived course of the teacher's subject and levels stays out of their catalogue" do

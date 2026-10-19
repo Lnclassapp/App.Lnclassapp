@@ -1,14 +1,17 @@
 # 🧠 DOMAINE · UseCases::School::ReinstateTeacher
 # Rôle : la direction réintègre un enseignant qu'elle a retiré : rattaché de nouveau (en plus de ses autres établissements, dans
 #        le plafond), sans classe ni devoir rendu ; départ clos
-# ADR  : 0028, 0071, 0094 · UDR : 0056, 0100 (§3.3)
+# ADR  : 0028, 0071, 0094, 0103 · UDR : 0056, 0100 (§3.3)
 module UseCases
   module School
     class ReinstateTeacher
       TEACHER = "teacher".freeze
 
-      def initialize(users:, schools:, departures:, audit_log:, policy:, transaction:, clock:)
+      # teacher_materials : Ports::Identity::TeacherMaterialRepositoryPort ; il retrouve ses matières de cet établissement
+      # (ADR-0103 §4.4).
+      def initialize(users:, schools:, departures:, audit_log:, policy:, transaction:, clock:, teacher_materials:)
         @users = users
+        @teacher_materials = teacher_materials
         @schools = schools
         @departures = departures
         @audit_log = audit_log
@@ -49,6 +52,7 @@ module UseCases
                                                         cap: Entities::School::TeacherSchools::MAX, at: now)
           next attached if attached.failure?
 
+          @teacher_materials.inherit(teacher_id: teacher.id, school_id: departure.school_id, from_school_id: nil, at: now)
           @departures.close(id: departure.id, reinstated_by_id: actor.user_id, at: now)
           @audit_log.record(action: "teacher.reinstated", actor_id: actor.user_id, at: now, subject_type: "User",
                             subject_id: teacher.id, metadata: { school_id: departure.school_id })

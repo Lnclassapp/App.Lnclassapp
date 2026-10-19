@@ -42,6 +42,30 @@ class SchoolAdmin::TeacherReinstatementsControllerTest < ActionDispatch::Integra
     assert_select "turbo-stream[action=replace]", 0
   end
 
+  # ADR-0103 §4.4 (EPM-15): the list survives the removal, whatever he writes elsewhere meanwhile, and comes back with him.
+  test "removed, then writing another list elsewhere, then reinstated: his list is back, in its order" do
+    pc, svt, maths = create_material(name: "Physique-Chimie"), create_material(name: "SVT"), create_material(name: "Mathématiques")
+    teacher = create_teacher(school: @school, materials: [ pc, svt ])
+    add_teacher_school(teacher, @other, materials: [ pc, svt ])
+    list = ->(school) { Orm::TeacherSchoolMaterial.where(teacher:, school:).in_order.pluck(:material_id) }
+    sign_in_as @admin
+    delete school_admin_teacher_path(teacher.public_id), as: :turbo_stream
+    assert_response :success
+    sign_out
+
+    sign_in_as teacher
+    patch profile_materials_path, params: { profile_materials: { material_slugs: [ maths.slug ] } }
+    assert_equal [ maths.id ], list.call(@other)
+    sign_out
+
+    sign_in_as @admin
+    post school_admin_teacher_reinstatement_path(teacher.public_id), as: :turbo_stream
+
+    assert_response :success
+    assert_equal [ pc.id, svt.id ], list.call(@school)
+    assert_equal [ maths.id ], list.call(@other), "l'autre établissement garde la sienne"
+  end
+
   test "le dernier réintégré : la liste devient l'état vide" do
     sign_in_as @admin
 

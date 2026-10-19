@@ -41,14 +41,10 @@ module Repositories
       end
 
       test "create_teacher also creates the teacher profile, with its arrival channel (ADR-0083 §4.2)" do
-        material = create_material
-
-        result = @repository.create_teacher(user: person(contact: "0501020304"), pin: "2468", material_id: material.id,
-                                            joined_via: "colleague")
+        result = @repository.create_teacher(user: person(contact: "0501020304"), pin: "2468", joined_via: "colleague")
 
         assert_equal "teacher", result.value.role
         profile = Orm::TeacherProfile.find_by!(user_id: result.value.id)
-        assert_equal material.id, profile.material_id
         assert_equal "colleague", profile.joined_via
         assert_nil profile.onboarding_completed_at
       end
@@ -58,7 +54,7 @@ module Repositories
 
         assert_no_difference "Orm::TeacherProfile.count" do
           assert_equal :conflict, @repository.create_teacher(user: person(contact: "0501020304"), pin: "2468",
-                                                             material_id: create_material.id, joined_via: "standard").code
+                                                             joined_via: "standard").code
         end
       end
 

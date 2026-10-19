@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Catalog::CourseCatalogQuery
-# Rôle : cartes du catalogue (CA-01), filtrées par niveau, série, matière et nom (FU-47), par page ; publiés hors équipe ; élève : son niveau, groupé par matière dans l'ordre du programme, avec son avancement ; enseignant : sa matière à ses niveaux
-# ADR  : 0026, 0028, 0035, 0076, 0090 · UDR : 0013 (amendement du 2026-10-05), 0054, 0069, 0077 §3.2, 0085
+# Rôle : cartes du catalogue (CA-01), filtrées par niveau, série, matière et nom (FU-47), par page ; publiés hors équipe ; élève : son niveau, groupé par matière dans l'ordre du programme, avec son avancement ; enseignant : ses matières à ses niveaux, groupé par matière au-delà d'une
+# ADR  : 0026, 0028, 0035, 0076, 0090, 0103 · UDR : 0013 (amendement du 2026-10-05), 0054, 0069, 0077 §3.2, 0085, 0126 §3.1
 module Queries
   module Catalog
     class CourseCatalogQuery
@@ -13,7 +13,7 @@ module Queries
       # cartes, les suivantes chargées au défilement. 24 tient en lignes pleines sur 1, 2 ou 3 colonnes.
       PER_PAGE = 24
       # material_counts : { slug de matière => nombre de cours } sur toute la recherche, pas seulement la page (titres des
-      # groupes de l'élève, UDR-0085 §3.2) ; {} hors élève.
+      # groupes de l'élève, UDR-0085 §3.2, et de l'enseignant de plusieurs matières, UDR-0126 §3.1) ; {} sinon.
       Page = Data.define(:rows, :total_count, :page, :pages, :material_counts)
       NEUTRAL = [ :new, nil ].freeze
 
@@ -27,18 +27,20 @@ module Queries
       # series : slug, appliqué seulement avec un niveau (UDR-0069 §3.4) : cours sans série et cours de cette série.
       # search : fragment du nom du cours, sans casse ni accents (UDR-0054 §3.9) ; vide, il est ignoré.
       # audience : Entities::Catalog::LevelAudience d'un élève (la règle de ReadOwnLevelPolicy) ou d'un enseignant (ses
-      # classes, UDR-0077 §3.2) ; nil pour les autres rôles. material_id : la matière de l'enseignant ; nil, aucune restriction.
+      # classes, UDR-0077 §3.2) ; nil pour les autres rôles. material_ids : les matières de l'enseignant (ADR-0103) ; nil,
+      # aucune restriction. group_by_material : l'enseignant de plusieurs matières, rangé comme l'élève (UDR-0126 §3.1).
       # page : entier, hors bornes ramené à la plus proche (une adresse forgée « page[]=2 » vaut 1).
       # Deux requêtes : le compte, puis les cartes de la page. L'élève : les comptes par matière (qui donnent le total), les
       # cartes, puis l'avancement des cours de la page (une requête, sans requête par carte). → Page
-      def call(actor:, page: 1, **filters)
+      def call(actor:, page: 1, group_by_material: false, **filters)
         scope = filtered(actor:, **filters)
         student_id = actor.user_id if actor.student?
-        material_counts = student_id ? scope.group("materials.slug").count : {}
-        total_count = student_id ? material_counts.values.sum : scope.count
+        grouped = student_id || group_by_material
+        material_counts = grouped ? scope.group("materials.slug").count : {}
+        total_count = grouped ? material_counts.values.sum : scope.count
         pages = [ total_count.fdiv(PER_PAGE).ceil, 1 ].max
         page = page.to_s.to_i.clamp(1, pages)
-        rows = scope.order(*(student_id ? PROGRAM_ORDER : CATALOG_ORDER)).offset((page - 1) * PER_PAGE).limit(PER_PAGE)
+        rows = scope.order(*(grouped ? PROGRAM_ORDER : CATALOG_ORDER)).offset((page - 1) * PER_PAGE).limit(PER_PAGE)
                     .pluck("courses.id", *COLUMNS)
         progress = student_id ? progress_by_course(student_id, rows.map(&:first)) : {}
         rows = rows.map { |id, *values| Row.new(*values, *progress.fetch(id, NEUTRAL)) }
@@ -47,12 +49,12 @@ module Queries
 
       private
 
-      def filtered(actor:, level: nil, series: nil, material: nil, search: nil, audience: nil, material_id: nil)
+      def filtered(actor:, level: nil, series: nil, material: nil, search: nil, audience: nil, material_ids: nil)
         scope = Orm::Course.joins(:level, :material).left_joins(:series)
         # La règle de ReadPublishedPolicy : l'équipe lit tout, les autres ne lisent que le publié.
         scope = scope.where(status: "published") unless actor.team?
         scope = scope.merge(AudienceFilter.courses(audience)) if audience
-        scope = scope.where(material_id:) if material_id
+        scope = scope.where(material_id: material_ids) if material_ids
         if level.present?
           scope = scope.where(levels: { slug: level })
           scope = of_series(scope, series) if series.present?
