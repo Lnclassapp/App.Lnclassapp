@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::ClassroomOverviewQuery
 # Rôle : corps de la page d'une classe (CL-10) : jours de séance de l'enseignant, exercices assignés et leurs comptes, cours, élèves au numéro masqué (nouveaux, voie)
-# ADR  : 0026, 0028, 0048, 0060, 0062, 0072, 0079, 0083 (§4.4 bis), 0085, 0089 (§4.2) · UDR : 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0079 (§3.8 ter), 0081 (§3.7), 0084 (§3.7)
+# ADR  : 0026, 0028, 0048, 0060, 0062, 0072, 0079, 0083 (§4.4 bis), 0085, 0089 (§4.2), 0103 · UDR : 0027, 0047, 0054, 0062 (§3.4), 0072 (§3.4), 0079 (§3.8 ter), 0081 (§3.7), 0084 (§3.7), 0127 (§3.1)
 module Queries
   module Classroom
     class ClassroomOverviewQuery
@@ -22,8 +22,9 @@ module Queries
       # comprehension : Assessment::ComprehensionSummaryQuery::Summary (ADR-0079), nil sans show_follow_up, comme counts.
       AssignmentRow = Data.define(:public_id, :exercise_title, :material_name, :material_category, :due_on, :counts,
                                   :comprehension)
+      # material_slug : une bande par matière pour l'enseignant de plusieurs matières (UDR-0127 §3.1).
       CourseRow = Data.define(:slug, :name, :subtitle, :level_name, :series_name, :material_name, :material_category,
-                              :essentials_count)
+                              :essentials_count, :material_slug)
 
       STUDENT_COLUMNS = %w[users.id users.public_id users.first_name users.last_name users.contact classroom_students.joined_via
                            classroom_students.joined_at].freeze
@@ -38,21 +39,23 @@ module Queries
       ASSIGNMENT_COLUMNS = %w[classroom_assignments.id classroom_assignments.public_id exercises.title materials.name
                               materials.category classroom_assignments.due_on].freeze
       COURSE_COLUMNS = %w[courses.id courses.slug courses.name courses.subtitle levels.name series.name materials.name
-                          materials.category].freeze
+                          materials.category materials.slug materials.id].freeze
 
       # search : « Chercher un élève » ; vide ou nil → toute la liste. Il ne filtre que les élèves de cette classe.
-      # teacher_id : l'enseignant qui regarde (ses jours, sa matière) ; nil pour l'équipe, qui voit toutes les matières.
+      # teacher_id : l'enseignant qui regarde (ses jours, ses matières dans l'établissement de la classe, ADR-0103) ; nil
+      # pour l'équipe, qui voit toutes les matières.
       # today : la date d'Abidjan (Time.zone) qui clôt la fenêtre de « fait seul » ; jamais Date.today (fuseau du serveur).
       # → Overview | nil
       def call(public_id:, show_roster:, search: nil, teacher_id: nil, show_follow_up: false, today: Time.zone.today)
-        id, level_id, series_id = Orm::Classroom.where(public_id:).pick(:id, :level_id, :series_id)
+        id, level_id, series_id, school_id = Orm::Classroom.where(public_id:).pick(:id, :level_id, :series_id, :school_id)
         return if id.nil?
 
         since = Time.current - NEW_FOR
         Overview.new(students: (students(id, search, since, today) if show_roster),
                      new_students_count: (new_students_count(id, since) if show_roster),
                      session_days: (session_days(teacher_id, id) if teacher_id),
-                     assignments: assignments(id, show_follow_up), courses: courses(level_id, series_id, teacher_id))
+                     assignments: assignments(id, show_follow_up),
+                     courses: courses(level_id, series_id, (Orm::TeacherSchoolMaterial.where(teacher_id:, school_id:).in_order.pluck(:material_id) if teacher_id)))
       end
 
       # ADR-0089 §4.2 : une session « fait seul » est terminée, standard (les remédiations restent hors du compte) et sans
@@ -118,16 +121,18 @@ module Queries
       end
 
       # Bloc « Cours » (UDR-0062 §3.4, memo Q18) : le chemin de l'enseignant vers les exercices. La règle d'AudienceFilter
-      # (niveau de la classe, série vide ou la sienne), réduite à la matière de l'enseignant.
-      def courses(level_id, series_id, teacher_id)
+      # (niveau de la classe, série vide ou la sienne), réduite aux matières de l'enseignant dans l'établissement de la classe
+      # (material_ids, ADR-0103 §4.5), rangées dans son ordre ; nil : toutes, par nom (l'équipe).
+      def courses(level_id, series_id, material_ids)
         scope = Orm::Course.joins(:level, :material).left_joins(:series)
                            .where(status: "published", level_id:, series_id: [ nil, series_id ].uniq)
-        scope = scope.where(material_id: Orm::TeacherProfile.where(user_id: teacher_id).select(:material_id)) if teacher_id
+        scope = scope.where(material_id: material_ids) if material_ids
         rows = scope.order("materials.name", "courses.name", "courses.id").pluck(*COURSE_COLUMNS)
+        rows = rows.sort_by.with_index { |row, index| [ material_ids.index(row.last), index ] } if material_ids
         essentials = Orm::Essential.where(course_id: rows.map(&:first), status: "published").group(:course_id).count
-        rows.map do |id, slug, name, subtitle, level_name, series_name, material_name, material_category|
+        rows.map do |id, slug, name, subtitle, level_name, series_name, material_name, material_category, material_slug|
           CourseRow.new(slug:, name:, subtitle:, level_name:, series_name:, material_name:, material_category:,
-                        essentials_count: essentials.fetch(id, 0))
+                        essentials_count: essentials.fetch(id, 0), material_slug:)
         end
       end
     end

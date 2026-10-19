@@ -119,9 +119,29 @@ module Queries
         assert_equal %w[Botanique Génétique], courses.map(&:name)
         assert_equal ClassroomOverviewQuery::CourseRow.new(slug: genetics.slug, name: "Génétique", subtitle: "Hérédité", level_name: "Tle",
                                                            series_name: "D", material_name: "SVT", material_category: "science",
-                                                           essentials_count: 2), courses.last
+                                                           essentials_count: 2, material_slug: svt.slug), courses.last
         assert_equal 0, courses.first.essentials_count
         assert_equal %w[Fonctions Botanique Génétique], overview.courses.map(&:name)
+      end
+
+      # EPM-18, EPM-19 (UDR-0127 §3.1, ADR-0103 §4.5) : ses matières de l'établissement de la classe, dans son ordre ; deux
+      # enseignants d'une classe ne voient chacun que les leurs ; la liste d'un autre de ses établissements ne compte pas.
+      test "cours : ceux de ses matières dans l'établissement de la classe, rangés dans son ordre" do
+        tle = create_level(name: "Tle")
+        @classroom = create_classroom(level: tle)
+        svt = create_material(name: "SVT")
+        pc = create_material(name: "Physique-Chimie")
+        maths = create_material(name: "Mathématiques")
+        both = create_teacher(materials: [ svt, pc ], classrooms: [ @classroom ])
+        add_teacher_school(both, create_school, materials: [ maths ])
+        colleague = create_teacher(material: maths, classrooms: [ @classroom ])
+        [ [ pc, "Optique" ], [ svt, "Génétique" ], [ maths, "Fonctions" ], [ svt, "Botanique" ] ].each do |material, name|
+          create_course(level: tle, material:, name:)
+        end
+
+        assert_equal [ %w[svt Botanique], %w[svt Génétique], %w[physique-chimie Optique] ],
+                     overview(teacher_id: both.id).courses.map { [ it.material_slug, it.name ] }
+        assert_equal %w[Fonctions], overview(teacher_id: colleague.id).courses.map(&:name)
       end
 
       test "un exercice assigné ne casse rien (CS#B8)" do

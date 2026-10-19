@@ -42,6 +42,8 @@ SELECT
 
 ## Ce qu'on a appris sur la codebase
 
+- Lot C : `classroom/classrooms/_gaps.html.erb` (« Fiches à revoir », ADR-0101 §4.4) n'existe pas encore sur la base : la règle d'UDR-0127 §3.2 s'appliquera à la livraison de `remediation-ciblee` ; elle lira `@overview.courses` (avec `material_slug`) sans code de ce chantier.
+
 - **Aucune policy ne lit la matière** : le catalogue est restreint par lecture (UDR-0077), un cours d'une autre matière reste ouvert et assignable par son adresse. Le chantier ne touche donc à aucun droit.
 - **`teacher_classrooms` admet déjà plusieurs enseignants par classe** (unique `teacher_id, classroom_id`), et « Exercices assignés » montre toutes les assignations de la classe, avec un badge : deux enseignants d'une classe se voient déjà.
 - **Le badge de matière des cartes du catalogue n'est plus masqué** pour l'enseignant : l'UDR-0077 §3.2 (R6) l'avait retiré, son amendement du 2026-10-06 (bis) l'a rétabli.
