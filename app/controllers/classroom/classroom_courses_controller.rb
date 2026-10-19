@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::ClassroomCoursesController
 # Rôle : un cours vu depuis une classe (CL-11) : ses fiches essentielles publiées, chacune avec sa bascule d'assignation
-# ADR  : 0026, 0028, 0048 · UDR : 0006, 0028
+# ADR  : 0026, 0028, 0048, 0088 · UDR : 0006, 0028
 module Classroom
   class ClassroomCoursesController < AuthenticatedController
     # Comme la page de la classe (D4) : l'élève lit ses cours sur ses propres pages.
@@ -8,7 +8,8 @@ module Classroom
 
     def show
       @classroom = Queries::Classroom::ClassroomHeaderQuery.new.call(public_id: params[:classroom_public_id])
-      return render_not_found if @classroom.nil?
+      # vie-de-la-classe, Lot C (ADR-0088, Q8) : une classe archivée n'a plus de page, quel que soit le rôle ; elle se restaure.
+      return render_not_found if @classroom.nil? || @classroom.status == "archived"
 
       render_result Policies::Classroom::ReadClassroomPolicy.new.call(actor: current_actor, classroom: @classroom),
                     success: ->(_access) { load_course }

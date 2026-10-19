@@ -352,7 +352,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_select "button[type=submit]:not([name])", text: including(tl("new.submit"))
   end
 
-  test "the days modal: 404 for an unknown or unpublished exercise, 403 for the team, another teacher or an archived classroom" do
+  test "the days modal: 404 for an unknown or unpublished exercise or an archived classroom, 403 for the team or another teacher" do
     draft = create_exercise(essential: @essential, status: "draft")
     sign_in_as @teacher
     [ draft.public_id, "inconnu" ].each do |key|
@@ -362,10 +362,12 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     sign_out
 
     archived = create_classroom(status: "archived", level: @course.level)
-    [ [ create_team_member, @classroom ], [ create_teacher, @classroom ], [ create_teacher(classrooms: [ archived ]), archived ] ].each do |user, classroom|
+    # vie-de-la-classe, Lot C (Q8) : une classe archivée n'a plus de page, la modale comprise.
+    [ [ create_team_member, @classroom, :forbidden ], [ create_teacher, @classroom, :forbidden ],
+      [ create_teacher(classrooms: [ archived ]), archived, :not_found ] ].each do |user, classroom, status|
       sign_in_as user
       get new_classroom_assignment_path(classroom.public_id, assignable_key: @exercise.public_id)
-      assert_response :forbidden
+      assert_response status
       sign_out
     end
   end
