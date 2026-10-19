@@ -24,10 +24,15 @@
 | 2026-10-16 | Lot C : couvert en test contrôleur, pas dans `test/system/classroom/join_test.rb` | Budget système ; la page de confirmation est déjà jouée dans le test système du Lot A | — |
 | 2026-10-16 | Lot D : formats de date dans la locale de l'historique (`classrooms.day` « %-d %b », `day_year` « %-d %b %Y ») plutôt qu'un format `:short_day_month` global | Le format nommé par l'UDR-0103 n'existe pas ; la ligne d'exercice lit déjà le sien dans la même locale | UDR-0103 §3.2 (écart mineur) |
 | 2026-10-16 | Lot D : couvert en tests contrôleur et query ; `test/system/classroom/student_archive_test.rb` inchangé | Budget système ; le test système existant passe avec la nouvelle ligne | — |
+| 2026-10-16 | Clôture : l'année scolaire du détail de « Mes classes » ne se coupe plus à son tiret (`whitespace-nowrap`, clé `detail_html`) | Vu sur la capture à 390 px : « 2026- / 2027 » sur deux lignes | — |
+| 2026-10-16 | Clôture : `origin/Develop` fusionnée (merge) avant la PR ; documentation seule, sans conflit | Règle de clôture | — |
 
 ## Ce qui a dérapé
 
-- …
+- L'agent des lots A à D a été arrêté avant la clôture ; un second agent a repris la branche (5 commits, rien en cours), fusionné `Develop`, pris les captures, lancé `bin/ci-quiet` et ouvert la PR.
+- Le test de query du Lot D lisait deux fois `40.days.ago` : sous charge, les deux appels tombaient de part et d'autre d'une seconde (rouge dans `bin/ci-quiet`). Un seul instant, lu une fois.
+- Premier `bin/ci-quiet` : la suite système s'est effondrée (« tab crashed », 295 tests, machine partagée saturée). Relancée une fois (16 échecs), puis les fichiers en échec seuls (7 échecs) : toasts de 5 s expirés avant l'assertion, charge ≈ 50 sur 4 cœurs, dans des parcours que le chantier ne change pas (dont trois de `join_test.rb` : l'inscription d'un visiteur, que le Lot C laisse passer tel quel). Le test système du chantier et celui de l'historique passent.
+- Les revues `security-reviewer`, `silent-failure-hunter` et `pr-test-analyzer` n'ont pas pu être lancées : la session de clôture n'avait pas d'outil de sous-agent. Relecture faite à la main du use case, du contrôleur, de `JoinsController` et des routes ; à refaire par un sous-agent avant la fusion.
 
 ## Ce qu'on a appris sur la codebase
 
@@ -49,7 +54,7 @@
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
+| **Livré le** | 2026-10-16 (PR vers `Develop`, non fusionnée) |
+| **PR** | [`feature/changement-etablissement-eleve` → `Develop`](https://github.com/Lnclassapp/App.Lnclassapp/pulls?q=is%3Apr+head%3Afeature%2Fchangement-etablissement-eleve) |
 | **ADR produits** | ADR-0095 |
 | **UDR produits** | UDR-0101, UDR-0102, UDR-0103 |

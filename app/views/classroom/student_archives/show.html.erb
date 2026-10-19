@@ -71,8 +71,8 @@
                     <% end %>
                     <span class="ml-auto shrink-0 text-sm text-mute tabular-nums"><%= archive_period.(classroom) %></span>
                   </div>
-                  <p class="line-clamp-2 text-sm text-mute"><%= t(".classrooms.detail", level: classroom.level_name, school: classroom.school_name,
-                                                                                         year: classroom.school_year) %></p>
+                  <p class="line-clamp-2 text-sm text-mute"><%= t(".classrooms.detail_html", level: classroom.level_name, school: classroom.school_name,
+                                                                                              year: tag.span(classroom.school_year, class: "whitespace-nowrap")) %></p>
                 </div>
               <% end %>
             <% end %>

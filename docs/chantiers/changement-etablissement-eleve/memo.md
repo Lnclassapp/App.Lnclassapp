@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | exécution — réponses du porteur reçues le 2026-10-16 |
+| **Statut** | livré (PR vers `Develop`, 2026-10-16) — réponses du porteur reçues le 2026-10-16 |
 | **Ouvert le** | 2026-10-16 *(reporté le 2026-09-28, relancé avec les vagues V2 à V6)* |
 | **Branche** | `docs/cadrage-changement-etablissement-eleve` (cadrage) ; `feature/changement-etablissement-eleve` (code) |
 | **Programme** | `refonte-application` — hors vague, ligne du backlog de [`docs/chantiers/README.md`](../README.md#backlog) ; recoupe le « changement de classe par l'enseignant ou l'équipe » de `vie-de-la-classe` (V3, [feuille de route §5](../refonte-application/feuille-de-route.md#v3--suivi-pédagogique-enseignant)) |

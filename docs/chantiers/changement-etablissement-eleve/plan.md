@@ -127,10 +127,10 @@ Aucun fichier listé par deux lots parallèles.
 ## Portes de sortie
 
 - [x] Réponses du porteur aux questions 1 à 9 consignées dans le memo ; ADR-0095 et UDR-0101 à 0103 acceptées
-- [ ] Tous les lots sont `Done`
-- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : parcours cascade, parcours lien, refus, sans JS
-- [ ] `bin/ci-quiet` vert, écrit dans la PR (CI GitHub coupée, ADR-0069)
-- [ ] Revue `security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer` sur le diff final (use case et routes touchés)
-- [ ] Captures 390 px et ordinateur de chaque écran envoyées au porteur
-- [ ] Index ADR/UDR régénérés par `script/docs/build_index` et ligne du chantier dans `docs/chantiers/README.md`, au commit de clôture
-- [ ] `journal.md` complété
+- [x] Tous les lots sont `Done`
+- [x] Un rôle distinct de l'auteur a **exécuté** le résultat : parcours cascade, parcours lien, refus (classe complète) joués dans un navigateur par l'agent de clôture ; sans JS prouvé par les tests contrôleur
+- [ ] `bin/ci-quiet` vert, écrit dans la PR (CI GitHub coupée, ADR-0069) — **non** : toutes les étapes vertes sauf la suite système, rouge par charge de la machine (toasts de 5 s expirés, charge ≈ 50 sur 4 cœurs) ; verdict détaillé dans la PR, à rejouer avant la fusion
+- [ ] Revue `security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer` sur le diff final (use case et routes touchés) — non lancée (pas d'outil de sous-agent à la clôture), à faire avant la fusion
+- [x] Captures 390 px et ordinateur de chaque écran envoyées au porteur
+- [x] Index ADR/UDR régénérés par `script/docs/build_index` et ligne du chantier dans `docs/chantiers/README.md`, au commit de clôture
+- [x] `journal.md` complété

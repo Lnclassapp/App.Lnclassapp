@@ -43,13 +43,15 @@ module Queries
       # UDR-0103 §3.1 : la classe actuelle, non quittée et active, est la seule marquée ; deux classes de la même année se
       # distinguent par leur période.
       test "UDR-0103: after a change of classroom, the one he left keeps its period, the active one is current" do
+        # Un seul instant par date : deux appels à 40.days.ago peuvent tomber de part et d'autre d'une seconde.
+        joined_at = 40.days.ago.change(usec: 0)
         moved_at = 3.days.ago.change(usec: 0)
-        joined(create_classroom(school: @school, name: "2nde A"), joined_at: 40.days.ago.change(usec: 0), left_at: moved_at)
+        joined(create_classroom(school: @school, name: "2nde A"), joined_at:, left_at: moved_at)
         joined(create_classroom(school: create_school(name: "Collège Saint-Viateur"), name: "2nde C"), joined_at: moved_at)
 
         rows = archive.classrooms
 
-        assert_equal [ [ "2nde C", moved_at, nil, true ], [ "2nde A", 40.days.ago.change(usec: 0), moved_at, false ] ],
+        assert_equal [ [ "2nde C", moved_at, nil, true ], [ "2nde A", joined_at, moved_at, false ] ],
                      rows.map { [ it.name, it.joined_at, it.left_at, it.current ] }
         assert_equal 1, rows.map(&:school_year).uniq.size
       end
