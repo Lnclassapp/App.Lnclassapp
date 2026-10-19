@@ -47,6 +47,23 @@ module Repositories
         assert_equal :conflict, result.code
       end
 
+      test "attempt_with_cause tells a collision from any other refusal, with the class of the exception" do
+        create_drena(name: "DRENA Bouaké")
+
+        collision = @transaction.attempt_with_cause do
+          Orm::Drena.insert_all!([ { name: "DRENA Bouaké", public_id: SecureRandom.base58(14), slug: "drena-bouake",
+                                     created_at: Time.current, updated_at: Time.current } ])
+        end
+        other = @transaction.attempt_with_cause { Orm::Drena.create!(name: nil) }
+
+        assert_equal [ :conflict, { base: [ :write_failed ], cause: [ :collision ], exception: [ "ActiveRecord::RecordNotUnique" ] } ],
+                     [ collision.code, collision.errors ]
+        assert_equal [ :conflict, { base: [ :write_failed ], cause: [ :other ], exception: [ "ActiveRecord::RecordInvalid" ] } ],
+                     [ other.code, other.errors ]
+        assert_equal :written, @transaction.attempt_with_cause { :written }.value
+        assert_raises(ArgumentError) { @transaction.attempt_with_cause { raise ArgumentError } }
+      end
+
       test "attempt lets any other exception through" do
         assert_raises(ArgumentError) { @transaction.attempt { raise ArgumentError } }
       end

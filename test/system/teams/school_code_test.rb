@@ -3,6 +3,7 @@ require "application_system_test_case"
 # CE-06, CE-07, FU-26 (ADR-0057, UDR-0044, UDR-0054): on a school's page, the team reads the school code, copies it and its sign-up link,
 # and regenerates it from the ⋮ menu after a confirmation — without reloading the page. The old code stops working.
 # IE-08 (ADR-0083 §4.1, UDR-0079 §3.7): the code is for the direction; the link copied is the team's /i/<token>.
+# RM-13 (UDR-0106): the date of the last change appears under the code once it has changed, never before.
 class Teams::SchoolCodeTest < ApplicationSystemTestCase
   HEADER = "teams.schools.header".freeze
 
@@ -34,8 +35,9 @@ class Teams::SchoolCodeTest < ApplicationSystemTestCase
     end
   end
 
-  test "CE-07: « Régénérer le code » asks first; cancel keeps it, confirming replaces it and the old one is refused" do
+  test "CE-07, RM-13: « Régénérer le code » asks first; cancel keeps it, confirming replaces it, dates it, and the old one is refused" do
     visit school_path(@school.public_id)
+    assert_no_selector "#school_code_rotated_at"
 
     assert_no_page_reload do
       click_menu_action("#school_header", I18n.t("#{HEADER}.regenerate_code"))
@@ -53,6 +55,7 @@ class Teams::SchoolCodeTest < ApplicationSystemTestCase
       new_code = Entities::School::SchoolCode.display(@school.reload.school_code)
       assert_toast I18n.t("teams.school_codes.update.done", code: new_code)
       assert_selector "#school_code_value", exact_text: new_code
+      assert_selector "#school_code_rotated_at", exact_text: "Changé le #{I18n.l(Date.current, format: :long)}"
       assert_selector "a#school_code_link", text: %r{/i/#{@school.team_invite_token}\z}
       assert_no_selector "#school_header dialog[open]"
     end

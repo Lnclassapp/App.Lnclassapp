@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::ImportsController
 # Rôle : écran des imports de l'équipe : liste, téléversement en modale, suivi rechargé tant que l'import tourne
-# ADR  : 0026, 0039, 0056, 0068 · UDR : 0006, 0043, 0055
+# ADR  : 0026, 0039, 0056, 0068, 0096 · UDR : 0006, 0043, 0055, 0105
 module Teams
   class ImportsController < BaseController
     STATUS_FRAME = "import_status".freeze
@@ -36,6 +36,7 @@ module Teams
       @import = report_row(params[:public_id])
       return render_not_found if @import.nil?
 
+      @regeneration_scope = regeneration_scope(@import)
       render_result Entities::Catalog::ImportKind.authorize_report(kind: @import.kind, actor: current_actor), success: lambda { |_|
         render partial: "status", locals: { import: @import } if turbo_frame_request_id == STATUS_FRAME
       }
@@ -64,6 +65,13 @@ module Teams
     end
 
     def report_row(public_id) = Queries::Catalog::ImportReportQuery.new.call(public_id:)
+
+    # UDR-0105 : une régénération de masse nomme sa sélection (DRENA, établissement) ; jamais un code.
+    def regeneration_scope(import)
+      return unless Entities::Catalog::ImportKind::CODE_REGENERATIONS.include?(import.kind)
+
+      Queries::School::CodeRegenerationPreviewQuery.new.scope(Dtos::School::SchoolSelection.from(import.details["selection"]))
+    end
 
     def start_import
       UseCases::Catalog::StartImport.new(

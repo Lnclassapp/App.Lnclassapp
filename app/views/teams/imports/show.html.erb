@@ -1,14 +1,19 @@
 <%# 🌐 UI · teams/imports/show — page de suivi d'un import %>
 <%# Rôle : retour « Imports », en-tête du rapport (type, fichier, auteur, date), puis le suivi rechargé tant que l'import tourne %>
-<%# ADR  : 0039, 0056, 0068 · UDR : 0006, 0043, 0054, 0055 · « Imports » reste actif dans la navigation %>
+<%# ADR  : 0039, 0056, 0068, 0096 · UDR : 0006, 0043, 0054, 0055, 0105 · « Imports » reste actif dans la navigation %>
 <% content_for :nav_key, "imports" %>
 <% kind = t("import_kinds.#{@import.kind}") %>
 <%# Un rapport sans fichier (génération des classes, UDR-0043) porte le nom de son type, sans « Import : ». %>
 <% import_kind = Entities::Catalog::ImportKind.valid?(@import.kind) %>
 <% page_title(import_kind ? t(".page_titles.#{@import.kind}") : kind) %>
-<%= ui_page_header title: (import_kind ? t(".title", kind:) : kind), back: { label: t(".back"), href: teams_imports_path },
-                   subtitle: t(import_kind ? ".subtitle" : ".subtitle_without_file", filename: import_files_label(@import),
-                               author: @import.imported_by_name, date: l(@import.created_at, format: :short)) %>
+<% subtitle = t(import_kind ? ".subtitle" : ".subtitle_without_file", filename: import_files_label(@import),
+                author: @import.imported_by_name, date: l(@import.created_at, format: :short)) %>
+<%# UDR-0105 : une régénération de masse dit sa sélection sur une seconde ligne, jamais un code. %>
+<% if @regeneration_scope %>
+  <% subtitle = safe_join([ subtitle, tag.span(code_regeneration_selection_label(@import, @regeneration_scope), id: "code_regeneration_selection",
+                                                                                                         class: "mt-1 block text-sm") ]) %>
+<% end %>
+<%= ui_page_header title: (import_kind ? t(".title", kind:) : kind), back: { label: t(".back"), href: teams_imports_path }, subtitle: %>
 <%= ui_card do %>
   <%= render "status", import: @import %>
 <% end %>
