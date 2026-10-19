@@ -20,6 +20,17 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
   def scope = "classroom.classrooms"
 
+  # ADR-0098, UDR-0111 : modifier une classe est un geste de l'équipe et de la direction, pas de l'enseignant.
+  test "l'enseignant de la classe n'a ni lien ni texte « Modifier la classe »" do
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_response :success
+    assert_select "a[href*='classroom-settings'], a[href*='classroom_settings']", count: 0
+    assert_no_match(/Modifier la classe/, response.body)
+  end
+
   test "l'enseignant de la classe voit l'en-tête, le bloc du lien et ses élèves, sans code ni « Cours assignés »" do
     course = create_course(name: "Nombres entiers", material: create_material(name: "Mathématiques", category: "science"))
     create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course:)), by: @teacher)
@@ -360,10 +371,13 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     get classroom_path(classroom.public_id)
 
     assert_select "section#classroom_courses h2", text: I18n.t("#{scope}.courses.title")
+    # UDR-0130 : une section de la page nomme l'objet, « Fiches de cours », et compte ses fiches de révision.
+    assert_select "section#classroom_courses h2", text: "Fiches de cours"
     assert_select "section#classroom_courses li", 1
     assert_select "#classroom_course_#{genetics.slug}" do
       assert_select "a[href='#{classroom_course_path(classroom.public_id, genetics.slug)}']", text: "Génétique et évolution"
       assert_select "p", text: /#{I18n.t("#{scope}.courses.essentials", count: 1)}/
+      assert_select "p", text: /1 fiche de révision/
     end
     assert_no_match(/Fonctions|Autre niveau/, response.body)
   end
@@ -416,7 +430,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ "classroom_courses_#{pc.slug}", "classroom_courses_#{svt.slug}" ],
                  css_select("#classroom_courses div[id^=classroom_courses_]").map { it["id"] }
     assert_select "#classroom_courses_#{pc.slug} h3", text: /Physique-Chimie/
-    assert_select "#classroom_courses_#{pc.slug} ul[aria-label='Cours de Physique-Chimie'] #classroom_course_#{optics.slug}"
+    assert_select "#classroom_courses_#{pc.slug} ul[aria-label='Fiches de cours de Physique-Chimie'] #classroom_course_#{optics.slug}"
     assert_no_match(/Fonctions/, response.body)
     sign_out
     sign_in_as colleague

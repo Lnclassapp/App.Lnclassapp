@@ -2,9 +2,9 @@ require "application_system_test_case"
 
 # Chantier remediation-ciblee (PRD §3 et §4, Lot D), dans un navigateur réel. Un seul parcours, des sessions de 2 questions
 # (ADR-0069 §9). La porte V5 de la feuille de route : le parcours réel de l'élève ouvre la lacune, lance la remédiation et
-# la lève. L'élève rate « Thalès 1 » (« Cette fiche passe à revoir »), retrouve la fiche sur son accueil, touche « Refaire
-# un exercice », qui démarre « Thalès 3 » (fixation, ADR-0101 §4.2), réussit (« Fiche levée ! ») ; la fiche quitte son
-# accueil. Puis l'enseignant de la classe lit l'élève dans « Fiche levée ». Les autres cas sont prouvés au niveau du
+# la lève. L'élève rate « Thalès 1 » (« Cette fiche de révision passe à revoir »), retrouve la fiche sur son accueil, touche « Refaire
+# un exercice », qui démarre « Thalès 3 » (fixation, ADR-0101 §4.2), réussit (« Fiche de révision levée ! ») ; la fiche quitte son
+# accueil. Puis l'enseignant de la classe lit l'élève dans « Fiche de révision levée ». Les autres cas sont prouvés au niveau du
 # contrôleur et de la query.
 class Assessment::RemediationTest < ApplicationSystemTestCase
   RESULTS = "assessment.session_results".freeze
@@ -13,7 +13,7 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
   # Le POST de la fiche, puis la page de la session, sous une suite chargée (session_result_test.rb).
   START_WAIT = 10
 
-  test "l'élève rate, refait l'exercice proposé et lève la fiche ; l'enseignant le lit dans « Fiche levée »" do
+  test "l'élève rate, refait l'exercice proposé et lève la fiche ; l'enseignant le lit dans « Fiche de révision levée »" do
     maths = create_material(name: "Mathématiques")
     course = create_course(material: maths, name: "Géométrie")
     classroom = create_classroom(level: course.level, series: course.series)
@@ -28,7 +28,7 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     visit exercise_path(failed.public_id)
     click_on I18n.t("assessment.exercises.student_progress.start")
     play(correct: 0)
-    assert_selector "#session_gap_outcome", text: I18n.t("#{RESULTS}.gap_outcome.opened.message")
+    assert_selector "#session_gap_outcome", text: "Cette fiche de révision passe à revoir."
 
     visit student_home_path
     within("#student_home_gaps") { click_on "Théorème de Thalès" }
@@ -36,7 +36,7 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     click_on I18n.t("catalog.essentials.show.gap_action")
     remediation = play(correct: QUESTIONS)
     assert_equal "remediation", Orm::ExerciseSession.find_by!(public_id: remediation).kind
-    assert_selector "#session_gap_outcome", text: I18n.t("#{RESULTS}.gap_outcome.lifted.message")
+    assert_selector "#session_gap_outcome", text: "Fiche de révision levée !"
 
     visit student_home_path
     assert_no_selector "#student_home_gaps"
@@ -44,6 +44,7 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     sign_out
     sign_in_as teacher
     visit classroom_essential_path(classroom.public_id, course.slug, thales.slug)
+    assert_selector "#classroom_essential_gaps_lifted", text: "Fiche de révision levée"
     assert_selector "#classroom_essential_gaps_lifted li", text: "Awa Bamba"
     assert_no_selector "#classroom_essential_gaps_pending"
   end

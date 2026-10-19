@@ -1,14 +1,14 @@
 # UDR-0112 : Chiffres de la classe sur la page de l'enseignant et de l'équipe — les trois tuiles de la direction
 <!-- index
 titre: Chiffres de la classe sur la page de l'enseignant et de l'équipe
-statut: Proposé
+statut: Abandonnée *(porteur, 2026-10-16 : « pas de moyenne de classe »)*
 adr-lie: —
 problematique: CL-14. L'enseignant ne voit pas devoirs donnés, taux de rendu et moyenne de sa classe, que la direction lit déjà ; les mêmes tuiles, mêmes définitions, sous l'en-tête de la page d'une classe.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Abandonnée *(porteur, 2026-10-16 : « pas de moyenne de classe »)* |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/vie-de-la-classe`](../../chantiers/vie-de-la-classe/memo.md) |
 | **ADR lié** | — (aucune règle ne change : définitions de l'UDR-0074 et seuil de `StudentWorkQuery::MIN_STUDENTS_FOR_AVERAGE`) · amende [UDR-0027](0027-page-classe.md) |

@@ -109,7 +109,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
   end
 
   # CC-22 (UDR-0113 §3.9) : dès un cours publié, la bande lit les matières publiées, dans l'ordre du programme, chacune
-  # vers sa page ; « Les cours par niveau » mène le pied de page.
+  # vers sa page ; « Les fiches de cours par niveau » mène le pied de page.
   test "CC-22: the subjects with a published course lead to their page, in the program order, and the footer to /niveaux" do
     level = create_level
     create_course(level:, material: create_material(name: "SVT"))
@@ -124,10 +124,10 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_select "#matieres a span", minimum: 2
     assert_no_match(/Philosophie/, css_select("#matieres").first.text)
     assert_equal [ "/niveaux", blog_path ], css_select("footer #public_pages li a").first(2).map { it["href"] }
-    assert_select "footer #public_pages a[href='/niveaux']", "Les cours par niveau"
+    assert_select "footer #public_pages a[href='/niveaux']", "Les fiches de cours par niveau"
   end
 
-  test "CC-22: without a published course, the seven subjects stay, without link, and the footer has no « Les cours par niveau »" do
+  test "CC-22: without a published course, the seven subjects stay, without link, and the footer has no « Les fiches de cours par niveau »" do
     create_course(status: "draft")
 
     get root_url
@@ -279,6 +279,15 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_select "footer #public_pages a[href='#{blog_path}']", "Blog"
   ensure
     Communication::PagesController.define_singleton_method(:online?, online)
+  end
+
+  # UDR-0130 §2 : les objets publiés sont des fiches de cours et des fiches de révision ; « cours » au sens courant reste.
+  test "the visitor reads « fiches de cours, fiches de révision et exercices », never « essentielle »" do
+    get root_url
+
+    assert_select "#fonctionnalites p", text: /Des fiches de cours, fiches de révision et exercices de la 6e à la Terminale/
+    assert_select "#hero img[alt=?]", "Deux élèves révisent leurs cours avec Lnclass sur leur téléphone"
+    assert_no_match(/essentielle/i, response.body)
   end
 
   # UDR-0062 §4 : l'enseignant n'assigne plus que des exercices ; la landing ne promet plus de cours assignés.

@@ -1,9 +1,12 @@
 # 🧠 DOMAINE · Ports::Classroom::ClassroomRepositoryPort
 # Rôle : contrat de persistance des classes, du jeton de leur lien et de la génération par défaut
-# ADR  : 0030, 0039, 0041, 0059, 0085, 0088
+# ADR  : 0030, 0039, 0041, 0059, 0085, 0088, 0098
 module Ports
   module Classroom
     module ClassroomRepositoryPort
+      # ADR-0098 : la classe telle que lue sous le verrou avant l'écriture, puis telle qu'écrite.
+      SettingsChange = Data.define(:before, :after)
+
       # Avec teacher_ids et active_students_count. → Entities::Classroom::Classroom | nil
       def find_by_public_id(public_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_public_id"
@@ -87,6 +90,13 @@ module Ports
       #   | failure(:conflict, errors: { base: [:not_archived] })
       def restore(id:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #restore"
+      end
+
+      # ADR-0098 : dans la transaction de l'appelant, verrouille la classe (comme l'adhésion d'un élève), compte l'effectif présent
+      # sous ce verrou, puis écrit le nom et le plafond. → Result(SettingsChange : l'état lu sous verrou, l'état écrit) | failure(:not_found)
+      #   | failure(:conflict, errors: { base: [:archived] } | { max_students: [:below_headcount], headcount: n } | { suffix: [:taken] })
+      def update_settings(id:, name:, max_students:)
+        raise NotImplementedError, "#{self.class} doit implémenter #update_settings"
       end
 
       # ADR-0088 : archive les classes ACTIVES d'un niveau (toutes séries) d'un établissement pour l'année. → Integer (classes archivées)

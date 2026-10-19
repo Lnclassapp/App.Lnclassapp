@@ -1,0 +1,41 @@
+<%# 🌐 UI · shared/_classroom_settings_form — « Modifier la classe » : préfixe fixe collé au champ du suffixe, puis le plafond %>
+<%# Rôle : le nom ne sort jamais du préfixe du barème ; l'effectif présent est la borne basse du plafond, écrite dans son aide %>
+<%# ADR  : 0098 · UDR : 0110 · settings : Queries::Classroom::ClassroomSettingsQuery::Row %>
+<%# locals: (input:, url:, settings:) -%>
+<% classroom = Entities::Classroom::Classroom %>
+<%= form_with model: input, scope: :classroom_settings, url:, method: :patch, id: "classroom-settings-form", class: "space-y-5" do |form| %>
+  <% if input.errors[:base].any? %>
+    <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <p><%= input.errors[:base].to_sentence %></p>
+    </div>
+  <% end %>
+  <%# Écrit à la main plutôt que par ui_field : le préfixe se glisse entre le libellé et le champ, sur la même ligne. %>
+  <% suffix_id = form.field_id(:suffix) %>
+  <% suffix_error = input.errors[:suffix].first %>
+  <div class="space-y-1.5">
+    <%= form.label :suffix, class: "block text-sm font-medium text-ink" do %>
+      <%= t(".name") %><span class="text-error" aria-hidden="true"> *</span>
+    <% end %>
+    <div class="flex">
+      <span id="classroom-settings-prefix" class="flex shrink-0 items-center rounded-l-ln border border-r-0 border-line bg-mist px-3 font-medium text-ink"><%= settings.prefix %></span>
+      <%= form.text_field :suffix, required: true, maxlength: settings.suffix_max, autocomplete: "off",
+                          class: class_names(ComponentsHelper::FIELD_INPUT, "min-h-tap min-w-0 flex-1 rounded-l-none",
+                                             ComponentsHelper::FIELD_STATES[suffix_error ? :invalid : :valid]),
+                          "aria-invalid": ("true" if suffix_error),
+                          "aria-describedby": [ "classroom-settings-prefix", "#{suffix_id}_hint", ("#{suffix_id}_error" if suffix_error) ].compact.join(" "),
+                          data: { autofocus_target: "field" } %>
+    </div>
+    <p id="<%= suffix_id %>_hint" class="text-sm text-mute">
+      <%= t(".name_hint") %>
+      <%= t(".free_name_hint", name: settings.name) if settings.free_name? %>
+    </p>
+    <% if suffix_error %>
+      <p id="<%= suffix_id %>_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+        <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= suffix_error %>
+      </p>
+    <% end %>
+  </div>
+  <%= ui_field form, :max_students, as: :number, required: true, min: [ settings.headcount, 1 ].max,
+               max: classroom::MAX_STUDENTS_LIMIT, step: 1, hint: t(".max_students_hint", count: settings.headcount) %>
+<% end %>

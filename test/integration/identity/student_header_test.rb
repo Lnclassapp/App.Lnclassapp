@@ -105,4 +105,19 @@ class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
     assert_select "#avatar-menu a[role=menuitem][href='#{courses_path}'][aria-current=page].bg-brand-soft"
     assert_select "#avatar-menu a[role=menuitem][href='#{student_home_path}']:not([aria-current])"
   end
+
+  # ADR-0098 : « Modifier la classe » renomme la classe ; l'élève la lit au nom du jour, sans rien refaire.
+  test "a classroom renamed by the team shows its new name on the student's home" do
+    classroom = create_classroom(name: "6ème 3", school: create_school(name: "Lycée moderne 2"))
+    sign_in_as create_student(classroom:)
+    get student_home_path
+    assert_select "p", text: "6ème 3"
+
+    classroom.update!(name: "6ème A")
+    get student_home_path
+
+    assert_response :success
+    assert_select "p", text: "6ème A"
+    assert_select "p", text: "6ème 3", count: 0
+  end
 end

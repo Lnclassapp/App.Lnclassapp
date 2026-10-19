@@ -39,12 +39,12 @@ class Catalog::ImportEssentialsTest < ApplicationSystemTestCase
 
     assert_no_page_reload do
       find("button[aria-controls='course-actions-menu']").click
-      click_on "Importer des fiches essentielles"
+      click_on I18n.t("catalog.courses.role_actions.import_essentials")
       within "turbo-frame#modal dialog[open]" do
         assert_selector "#import-help-essentials h3", text: "Format du fichier"
         assert_selector "#import-help-course code", text: @course.slug
         assert_selector "#import-help-example", text: %("course": "#{@course.slug}")
-        assert_selector "#import-help-essentials", text: "Tout arrive en brouillon, à la suite des fiches essentielles du cours"
+        assert_selector "#import-help-essentials", text: "Tout arrive en brouillon, à la suite des fiches de révision de la fiche de cours"
         assert_selector "#import-help-keys details[open] code", text: "subtitle"
         find("summary", text: "Exercice").click
         assert_selector "#import-help-keys code", text: "exercise_type"
@@ -78,7 +78,7 @@ class Catalog::ImportEssentialsTest < ApplicationSystemTestCase
     open_in_modal(new_teams_import_path(kind: "essentials"))
 
     within "turbo-frame#modal dialog[open] #import-help-course" do
-      assert_text "Citez le cours cible par son slug"
+      assert_text "Citez la fiche de cours cible par son slug"
       assert_no_selector "input[name='course']", visible: :all
     end
     assert_selector "#import-help-example", text: %("course": "genetique-et-evolution")

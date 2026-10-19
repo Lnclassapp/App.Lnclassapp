@@ -1,6 +1,6 @@
 <%# 🌐 UI · school_admin/levels/_classroom_card — une classe sur la page de son niveau (AD-09, AD-22) %>
 <%# Rôle : illustration du niveau et pastille du taux de rendu, effectif, devoirs, taux et moyenne ; toute la carte mène à la classe, sauf l'archivée (badge, effectif grisé, sans page) ; menu ⋮ au-dessus du lien %>
-<%# ADR  : 0065, 0088 · UDR : 0074 (§3.5, §3.8), 0083 · pastille décorative, toujours doublée de son texte sr-only ; sans signal, ni l'une ni l'autre %>
+<%# ADR  : 0065, 0088, 0098 · UDR : 0074 (§3.5, §3.8), 0083, 0111 · pastille décorative, toujours doublée de son texte sr-only ; sans signal, ni l'une ni l'autre %>
 <%# locals: (classroom:, illustration:, signal:, manageable:) -%>
 <% figure = lambda do |value|
      next tag.span(t("school_admin.classrooms.percent", value:), class: "font-medium text-ink") unless value.nil?
@@ -57,7 +57,8 @@
       <%= render "shared/classroom_archive_menu", name: classroom.name, public_id: classroom.public_id, archived: classroom.archived?,
                                                   students_count: classroom.students_count, teachers_count: classroom.teachers_count,
                                                   archive_path: archive_school_admin_classroom_archival_path(classroom.public_id),
-                                                  restore_path: restore_school_admin_classroom_archival_path(classroom.public_id) %>
+                                                  restore_path: restore_school_admin_classroom_archival_path(classroom.public_id),
+                                                  edit_path: edit_school_admin_classroom_setting_path(classroom.public_id) %>
     </div>
   <% end %>
 </li>

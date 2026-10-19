@@ -219,6 +219,7 @@ class Classroom::ClassroomEssentialsControllerTest < ActionDispatch::Integration
       assert_select "li:nth-child(2)", text: /sous la moyenne/, count: 0
       assert_select "li:nth-child(3)", text: /Kofi Traoré.*2 sessions sous la moyenne/m
     end
+    assert_select "#classroom_essential_gaps_lifted h3, #classroom_essential_gaps_lifted h2", text: "Fiche de révision levée"
     assert_select "#classroom_essential_gaps_lifted li", 2
     assert_select "#classroom_essential_gaps_lifted li", text: /Yao Kouassi.*le 14 oct\./m
     assert_select "#classroom_essential_gaps_lifted li", text: /Zoé Koné.*le 15 oct\./m

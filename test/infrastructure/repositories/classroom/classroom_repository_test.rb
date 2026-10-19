@@ -185,6 +185,54 @@ module Repositories
         assert found.archived?
         assert_equal @at, found.archived_at
       end
+
+      # ADR-0098 : nom et plafond, jamais sous l'effectif présent, jamais sur une classe archivée, jamais un nom pris.
+      test "écrit le nom et le plafond d'une classe active et la relit" do
+        record = create_classroom(school: @school, level: @level, name: "6ème 3")
+        3.times { create_student(classroom: record) }
+
+        result = ClassroomRepository.new.update_settings(id: record.id, name: "6ème A", max_students: 3)
+
+        assert result.success?
+        after = result.value.after
+        assert_equal [ "6ème A", 3, 3 ], [ after.name, after.max_students, after.active_students_count ]
+        assert_equal [ "6ème 3", 80 ], [ result.value.before.name, result.value.before.max_students ], "l'état lu sous le verrou, avant l'écriture"
+        assert_equal [ "6ème A", 3 ], [ record.reload.name, record.max_students ]
+      end
+
+      test "refuse un plafond sous l'effectif présent ; un élève parti ne compte pas" do
+        record = create_classroom(school: @school, level: @level, name: "6ème 3")
+        42.times { create_student(classroom: record) }
+        create_student.tap { Orm::ClassroomStudent.create!(classroom: record, student: it, primary: false, joined_via: "standard", joined_at: @at, left_at: @at) }
+
+        result = ClassroomRepository.new.update_settings(id: record.id, name: "6ème 3", max_students: 40)
+
+        assert_equal [ :conflict, { max_students: [ :below_headcount ], headcount: 42 } ], [ result.code, result.errors ]
+        assert_equal 80, record.reload.max_students
+        assert ClassroomRepository.new.update_settings(id: record.id, name: "6ème 3", max_students: 42).success?
+      end
+
+      test "refuse une classe archivée et une classe inconnue" do
+        record = create_classroom(school: @school, level: @level, name: "6ème 3", status: "archived")
+
+        assert_equal({ base: [ :archived ] }, ClassroomRepository.new.update_settings(id: record.id, name: "6ème A", max_students: 90).errors)
+        assert_equal "6ème 3", record.reload.name
+        assert_equal :not_found, ClassroomRepository.new.update_settings(id: 0, name: "6ème A", max_students: 90).code
+      end
+
+      test "refuse un nom pris dans l'établissement et l'année, même par une classe archivée, sans casser la transaction" do
+        create_classroom(school: @school, level: @level, name: "6ème A", status: "archived")
+        record = create_classroom(school: @school, level: @level, name: "6ème 3")
+        create_classroom(school: create_school, level: @level, name: "6ème B")
+
+        Orm::Classroom.transaction do
+          taken = ClassroomRepository.new.update_settings(id: record.id, name: "6ème A", max_students: 80)
+
+          assert_equal [ :conflict, { suffix: [ :taken ] } ], [ taken.code, taken.errors ]
+          assert ClassroomRepository.new.update_settings(id: record.id, name: "6ème B", max_students: 80).success?
+        end
+        assert_equal "6ème B", record.reload.name
+      end
     end
   end
 end

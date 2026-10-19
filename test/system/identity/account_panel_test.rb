@@ -50,6 +50,24 @@ class Identity::AccountPanelTest < ApplicationSystemTestCase
     end
   end
 
+  # UDR-0054, amendement « survol » ; chantier infobulle-badges-hors-ecran. Une fois glissé, le tiroir ne garde aucun
+  # transform : sinon il devient le repère des descendants en position fixe (infobulles au survol) et les décale.
+  test "once open, the account panel keeps no transform" do
+    sign_in_as create_teacher(first_name: "Awa", last_name: "Traoré")
+
+    with_mobile_viewport do
+      visit teacher_home_path
+      find(TRIGGER).click
+      find("dialog#account_panel[open]", visible: true)
+      page.document.synchronize do
+        finished = page.evaluate_script("document.getElementById('account_panel').getAnimations().every(a => a.playState === 'finished')")
+        raise Capybara::ExpectationNotMet, "le panneau glisse encore" unless finished
+      end
+
+      assert_equal "none", page.evaluate_script("getComputedStyle(document.getElementById('account_panel')).transform")
+    end
+  end
+
   test "CA-19: at 390 px, the student's /students/menu lists the links of the avatar menu, the switch and sign-out" do
     sign_in_as create_student(classroom: create_classroom(name: "Tle D 1"), first_name: "Aya", last_name: "Kouassi")
 

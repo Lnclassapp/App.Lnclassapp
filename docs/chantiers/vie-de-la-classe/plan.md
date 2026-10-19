@@ -3,7 +3,7 @@
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
 >
-> **Aucun lot ne démarre avant les réponses du porteur aux questions Q1 à Q8 du [memo](memo.md).** Le plan suit les recommandations ; une réponse contraire le modifie d'abord (Q6 = « non » retire le Lot B ; Q8 = « non » retire le Lot C).
+> **Réponses du porteur (2026-10-16)** : recommandations acceptées, sauf **Q6 = « non »** : le **Lot B est retiré** (UDR-0112 abandonnée), et la locale de son titre sort du Lot 0. Le **Lot C** part tout de suite en correctif séparé, sur `fix/classe-archivee-sous-pages` : il n'est plus dans cette branche. Restent ici le Lot 0 puis le Lot A, un commit chacun, sur `feature/vie-de-la-classe`.
 
 ## Graphe
 
@@ -31,7 +31,7 @@ Trois agents au plus en même temps : Lot 0 et Lot C, puis Lot A, Lot B et Lot C
                      `config/locales/shared/classroom_settings.fr.yml` *(formulaire, aides, erreurs, toasts — UDR-0110)*
                      `config/locales/shared/classroom_archival.fr.yml` *(entrée « Modifier la classe » — UDR-0111)*
                      `config/locales/teams/classroom_settings.fr.yml` · `config/locales/school_admin/classroom_settings.fr.yml` *(titres, flash)*
-                     `config/locales/classroom/classrooms.fr.yml` *(titre « Chiffres de la classe » — UDR-0112)*
+                     ~~`config/locales/classroom/classrooms.fr.yml`~~ *(Lot B retiré)*
                      `test/domain/entities/classroom/classroom_numbering_test.rb`
                      `test/domain/dtos/classroom/classroom_settings_input_test.rb`
 - **Dépend de**    : réponses du porteur (Q1 à Q4, Q6)
@@ -59,14 +59,14 @@ Trois agents au plus en même temps : Lot 0 et Lot C, puis Lot A, Lot B et Lot C
                      `test/controllers/school_admin/classroom_settings_controller_test.rb`
                      `test/system/school/classroom_settings_test.rb` · `script/ci/test_timings.yml`
 - **Dépend de**    : Lot 0
-- **Test associé** : `test/domain/use_cases/classroom/update_classroom_test.rb` (droits, année passée, archivée, rien de changé sans audit) ; repository (`below_headcount`, `archived`, `taken` contre une archivée) ; concurrence (adhésion et baisse du plafond au 80ᵉ siège) ; système (renommer « 6ème 3 » en « 6ème A », puis « + » ajoute « 6ème 3 »)
+- **Test associé** : `test/domain/use_cases/classroom/update_classroom_test.rb` (droits, année passée, archivée, rien de changé sans audit) ; repository (`below_headcount`, `archived`, `taken` contre une archivée) ; concurrence (adhésion et baisse du plafond au 80ᵉ siège) ; système (renommer « 6ème 3 » en « 6ème A » après un nom pris) ; contrôleur (« + » ajoute « 6ème 3 » après le renommage, `Teams::LevelClassroomsControllerTest`)
 - **Done quand**   : l'équipe sur la fiche d'un établissement et la direction sur la page d'un niveau ouvrent ⋮ → « Modifier la classe », changent suffixe et plafond, voient la carte mise à jour et le toast ; l'élève voit le nouveau nom ; captures 390 px et ordinateur (menu ouvert, modale, erreur sous le champ) envoyées au porteur
 
 ---
 
-## Lot B — Chiffres de la classe (enseignant et équipe)
+## ~~Lot B — Chiffres de la classe (enseignant et équipe)~~ — RETIRÉ
 
-*Retiré si Q6 = « laisser CL-14 à `rapports-de-classe` ».*
+*Retiré le 2026-10-16 : Q6 = « non » (« pas de moyenne de classe »). Gardé pour mémoire, rien n'en est livré.*
 
 - **Couche**       : infrastructure (lecture) + delivery + ui
 - **Fichiers**     : `app/infrastructure/queries/school/student_work_query.rb` *(`figures(public_id:)`, mêmes définitions que `classroom`)*
@@ -81,9 +81,9 @@ Trois agents au plus en même temps : Lot 0 et Lot C, puis Lot A, Lot B et Lot C
 
 ---
 
-## Lot C — Une classe archivée n'a plus aucune page
+## Lot C — Une classe archivée n'a plus aucune page — correctif séparé
 
-*Retiré si Q8 = « non ». Aucune vue nouvelle : la page 404 existe.*
+*Q8 = « oui », mais livré à part, sur `fix/classe-archivee-sous-pages` (décision du porteur, 2026-10-16). Aucune vue nouvelle : la page 404 existe.*
 
 - [x] **Done** le 2026-10-16, branche `fix/classe-archivee-sous-pages`. Ajouté au périmètre : `app/controllers/classroom/assignments_controller.rb` (`new`, la modale des jours, seule autre page `GET` sous `/classrooms/:id/…`) et les tests qui exigeaient l'ancienne lecture (`classroom_courses`, `classroom_essentials`, `assignment_follow_ups`, `session_days`, `assignments`). Les écritures gardent leur 403 « classe archivée » (journal, menace du Lot C).
 
@@ -118,10 +118,10 @@ Aucun fichier n'apparaît dans deux lots parallèles.
 
 ## Portes de sortie
 
-- [ ] Tous les lots sont `Done`
-- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : parcours refait en équipe, en direction (son établissement et un autre), en enseignant, en élève
-- [ ] Pureté du domaine, rubocop, tests, parcours système, brakeman : `bin/ci-quiet` au vert, verdict écrit dans la PR
-- [ ] Sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) une fois, sur le diff final : use case, policy et routes touchés
-- [ ] ADR-0098 et UDR-0110 à 0112 passés à `Accepté` ; index régénérés par `script/docs/build_index` au commit de clôture
-- [ ] Feuille de route et `features-refonte.md` : CL-02, CL-03, CL-14, CL-15 cochées selon Q6 ; Q5, Q6 et Q8 de la feuille de route marquées répondues ; dette des codes rayée ; `rentree-scolaire` inscrite (Q7)
-- [ ] `journal.md` complété
+- [x] Tous les lots sont `Done` : Lot 0 et Lot A ; Lot B retiré (Q6) ; Lot C livré par la PR #251 (`fix/classe-archivee-sous-pages`), fusionné dans cette branche
+- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : parcours refait en équipe, en direction (son établissement et un autre), en enseignant, en élève — *à faire par le porteur ou un relecteur sur la PR*
+- [x] Pureté du domaine, rubocop, tests, parcours système, brakeman : `bin/ci-quiet`, verdict écrit dans la PR
+- [ ] Sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) une fois, sur le diff final : use case, policy et routes touchés — *non lancés dans la session d'exécution (aucun outil de sous-agent), à lancer sur la PR*
+- [x] ADR-0098, UDR-0110 et UDR-0111 passés à `Accepté`, UDR-0112 à `Abandonnée` ; index régénérés par `script/docs/build_index` au commit de clôture
+- [x] Feuille de route : CL-02 cochée, Q6 de la feuille de route marquée répondue. CL-14 reste à `rapports-de-classe` (Q6 du memo = non) ; Q7 : aucun chantier `rentree-scolaire` ouvert (porteur)
+- [x] `journal.md` complété

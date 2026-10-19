@@ -28,6 +28,8 @@ scope "school-admin", module: "school_admin", as: "school_admin" do
       end
     end
     resources :level_archivals, only: :create, path: "level-archivals"
+    # ADR-0098 : modifier le nom (suffixe) et le plafond d'une classe de l'établissement (UDR-0110, UDR-0111).
+    resources :classroom_settings, only: %i[edit update], path: "classroom-settings", param: :public_id
     # ADR-0077 : retirer une autre direction de l'établissement (public_id du compte).
     resources :staff_members, only: :destroy, path: "staff", param: :public_id
   end
