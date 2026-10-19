@@ -72,7 +72,11 @@ module UseCases
       def attach_staff(invitation, user, now)
         attached = @staffs.attach(user_id: user.id, school_id: invitation.school_id, invited_by_id: invitation.invited_by_id,
                                   position: invitation.position, at: now)
-        raise Aborted, Shared::Result.failure(:conflict, errors: HEAD_TAKEN) if attached == :head_taken
+        case attached
+        when :attached then nil
+        when :head_taken then raise Aborted, Shared::Result.failure(:conflict, errors: HEAD_TAKEN)
+        else raise ArgumentError, "unexpected outcome from attach: #{attached.inspect}"
+        end
       end
 
       def metadata(invitation)

@@ -75,6 +75,30 @@ class SchoolAdmin::StudentSearchesControllerTest < ActionDispatch::IntegrationTe
     assert_select "#student_search_truncated", ts("show.truncated", count: 20)
   end
 
+  test "ED-64: exactly twenty results are twenty rows, without the sentence that says to refine" do
+    20.times { create_student(classroom: @sixth, first_name: "Élève #{it}", last_name: "Koné") }
+    sign_in_as @admin
+
+    get school_admin_student_search_path(q: "kone")
+
+    assert_select "#student_search_list li", 20
+    assert_select "#student_search_truncated", 0
+  end
+
+  test "ED-62: a Kouassi of another school never appears, even with a forged school_id" do
+    other = create_school
+    create_student(classroom: create_classroom(school: other, name: "6ème 1"), first_name: "Ailleurs", last_name: "Kouassi")
+    sign_in_as @admin
+
+    [ {}, { school_id: other.id }, { school_id: other.public_id } ].each do |forged|
+      get school_admin_student_search_path(q: "kouassi", **forged)
+
+      assert_select "#student_search_list li", 1
+      assert_select "#student_search_list", text: /Aya Kouassi/
+      assert_select "#student_search_list", text: /Ailleurs/, count: 0
+    end
+  end
+
   test "ED-65: a phone number finds nobody, and no response carries one" do
     sign_in_as @admin
 

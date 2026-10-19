@@ -70,14 +70,17 @@ module UseCases
 
         attr_reader :received
 
-        def initialize(journal, taken:, head: false)
+        # outcome : un code que le port ne promet pas, pour vérifier que le cas d'usage ne le prend pas pour un succès.
+        def initialize(journal, taken:, head: false, outcome: nil)
           @journal = journal
           @taken = taken
           @head = head
+          @outcome = outcome
         end
 
         def attach_by_code(user_id:, school_id:, cap:, position:, at:)
           @received = { user_id:, school_id:, cap:, position:, at: }
+          return @outcome if @outcome
           return :cap_reached if @taken >= cap
           return :head_taken if @head && position == "head"
 
@@ -123,9 +126,9 @@ module UseCases
         )
       end
 
-      def register(actor: nil, taken_contacts: [], taken_places: 0, head: false, **attributes)
+      def register(actor: nil, taken_contacts: [], taken_places: 0, head: false, outcome: nil, **attributes)
         @registrations = FakeRegistrations.new(@journal, taken: taken_contacts)
-        @staffs = FakeStaffs.new(@journal, taken: taken_places, head:)
+        @staffs = FakeStaffs.new(@journal, taken: taken_places, head:, outcome:)
         dto = Dtos::Identity::SchoolStaffRegistrationInput.new(
           last_name: "Kouassi", first_name: "Aya", gender: "female", contact: "07 01 02 03 04", pin: "4821",
           pin_confirmation: "4821", school_code: "K7M-4QZ", position: "secretary", **attributes
@@ -190,6 +193,13 @@ module UseCases
 
       test "ED-11: le chef d'établissement s'inscrit quand la place est libre" do
         assert register(position: "head").success?
+      end
+
+      test "un code d'attache inconnu du port lève une ArgumentError et annule le compte, il n'ouvre pas de session" do
+        error = assert_raises(ArgumentError) { register(outcome: :unexpected) }
+
+        assert_match(/unexpected/, error.message)
+        assert_empty @journal
       end
 
       test "ED-12: un second chef d'établissement est refusé, le compte créé est annulé, sans nommer le chef actif" do

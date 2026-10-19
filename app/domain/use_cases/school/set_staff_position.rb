@@ -36,12 +36,14 @@ module UseCases
 
       # « Même fonction » n'écrit rien et ne journalise rien : la modale se ferme comme après un changement.
       def change(actor, target, position)
-        case @staff.set_position(user_id: target.user_id, position:)
+        outcome, previous = @staff.set_position(user_id: target.user_id, position:)
+        case outcome
         when :head_taken then Shared::Result.failure(:conflict, errors: HEAD_TAKEN)
         when :not_found then Shared::Result.failure(:not_found)
         when :set
+          # « from » : la fonction lue sous le verrou par le repository, pas celle de la cible lue avant.
           @audit_log.record(action: ACTION, actor_id: actor.user_id, at: @clock.now, subject_type: "User", subject_id: target.user_id,
-                            metadata: { school_id: target.school_id, from: target.position, to: position })
+                            metadata: { school_id: target.school_id, from: previous, to: position })
           changed(target, position)
         else changed(target, position)
         end

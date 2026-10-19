@@ -16,8 +16,10 @@ module UseCases
         attr_reader :rows, :writes
 
         # gone : la direction est retirée entre sa lecture et le verrou de l'établissement.
-        def initialize(*rows, head_active: false, gone: false)
+        # locked_previous : la fonction lue sous le verrou, quand elle diffère de celle que la cible portait à la première lecture.
+        def initialize(*rows, head_active: false, gone: false, locked_previous: nil)
           @rows = rows
+          @locked_previous = locked_previous
           @head_active = head_active
           @gone = gone
           @writes = []
@@ -33,7 +35,7 @@ module UseCases
 
           @writes << [ user_id, position ]
           @rows[@rows.index(row)] = row.with(position:)
-          :set
+          [ :set, @locked_previous || row.position ]
         end
       end
 
@@ -54,8 +56,9 @@ module UseCases
                                     archived_at:, archived_by_id: archived_at && 99, position:)
       end
 
-      def change(position:, target: "u2", actor: @field, rows: [ staff(2, position: "secretary") ], head_active: false, gone: false)
-        @staff = FakeStaff.new(*rows, head_active:, gone:)
+      def change(position:, target: "u2", actor: @field, rows: [ staff(2, position: "secretary") ], head_active: false, gone: false,
+                 locked_previous: nil)
+        @staff = FakeStaff.new(*rows, head_active:, gone:, locked_previous:)
         SetStaffPosition.new(staff: @staff, users: FakeUsers.new, audit_log: @audit, policy: Policies::School::SetStaffPositionPolicy.new,
                              transaction: @transaction, clock: Clock.new(NOW))
                         .call(actor:, target_public_id: target, dto: Dtos::School::StaffPositionInput.new(position:))
@@ -69,6 +72,13 @@ module UseCases
         assert_equal [ [ 2, "educator" ] ], @staff.writes
         assert_equal [ { action: "school_staff.position_set", actor_id: 50, at: NOW, subject_type: "User", subject_id: 2,
                          metadata: { school_id: SCHOOL_A, from: "secretary", to: "educator" } } ], @audit.events
+      end
+
+      test "the audit records the old position read under the lock, not the one the target carried when first read" do
+        result = change(position: "educator", locked_previous: "deputy")
+
+        assert result.success?
+        assert_equal [ "deputy", "educator" ], @audit.events.first[:metadata].values_at(:from, :to)
       end
 
       test "the same position succeeds without writing nor auditing" do

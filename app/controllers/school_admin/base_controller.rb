@@ -18,9 +18,10 @@ module SchoolAdmin
     end
 
     # La note « Votre fonction (…) ne permet pas ces gestes » : sur un établissement actif dont la policy refuse le geste à
-    # cette direction, c'est sa fonction qui l'en prive (rang « vie scolaire »). → String | nil
-    def rank_note(school, allowed)
-      return if allowed || school.status != Policies::School::ManageSchoolStructurePolicy::ACTIVE
+    # cette direction, c'est sa fonction qui l'en prive (rang « vie scolaire »). hideable : la page a un geste à cacher à ce
+    # rang (une classe, un enseignant) ; sans lui, la note annoncerait une privation que la page ne montre pas. → String | nil
+    def rank_note(school, allowed, hideable:)
+      return if allowed || !hideable || school.status != Policies::School::ManageSchoolStructurePolicy::ACTIVE
 
       key = Entities::School::StaffPosition.label_key(current_actor.staff_position, school_type: school.school_type)
       t("school_admin.shared.rank_note", position: t("shared.staff_positions.#{key}"))

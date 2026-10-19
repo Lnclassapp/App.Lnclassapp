@@ -23,7 +23,7 @@ module Ports
       end
 
       # L'équipe change la fonction d'une direction active, sous le verrou de l'établissement.
-      # → :set | :unchanged (même fonction) | :head_taken | :not_found (absent ou archivé)
+      # → [:set, ancienne_fonction] (lue sous le verrou, pour le journal) | :unchanged (même fonction) | :head_taken | :not_found (absent ou archivé)
       def set_position(user_id:, position:)
         raise NotImplementedError, "#{self.class} doit implémenter #set_position"
       end

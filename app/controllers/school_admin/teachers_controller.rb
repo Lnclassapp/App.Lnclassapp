@@ -9,7 +9,7 @@ module SchoolAdmin
       # le serveur refuse de toute façon. BaseController a déjà refusé une direction sans établissement.
       school = Queries::School::OwnSchoolQuery.new.call(school_id: current_actor.school_id)
       @manageable = gesture_allowed?(manage_teachers.class, school)
-      @rank_note = rank_note(school, @manageable)
+      @rank_note = rank_note(school, @manageable, hideable: @overview.teachers.any?)
     end
 
     # UDR-0056, amendement du 2026-10-04 : la confirmation n'est plus copiée dans chaque ligne, elle arrive dans le frame

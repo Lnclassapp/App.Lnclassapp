@@ -114,10 +114,34 @@ class SchoolAdmin::SchoolLifeRightsTest < ActionDispatch::IntegrationTest
     get school_admin_classroom_path(@sixths.first.public_id)
     assert_response :success
     assert_select "#rank_note", 0
+    assert_select ".ui-menu-item span", text: I18n.t("classroom.classrooms.link.change")
+    assert_select ".ui-menu-item span", text: I18n.t("classroom.classrooms.roster.remove")
 
     delete classroom_student_path(@sixths.first.public_id, student.public_id), as: :turbo_stream
     assert_response :success
     assert_not_nil Orm::ClassroomStudent.find_by!(student:, classroom: @sixths.first).left_at
+  end
+
+  test "ED-33: the note appears only where the page has a gesture to hide: an empty « Enseignants » page of an educator has none" do
+    school = create_school(school_type: "public", cycle: "both")
+    educator = create_school_admin(school: school, position: "educator")
+    sign_in_as educator
+
+    get school_admin_teachers_path
+    assert_response :success
+    assert_select "#rank_note", 0
+
+    get school_admin_departed_teachers_path
+    assert_response :success
+    assert_select "#rank_note", 0
+
+    classroom = create_classroom(school:, level: @levels["6eme"], name: "6ème 1")
+    create_teacher(school:, classrooms: [ classroom ])
+    get school_admin_teachers_path
+    assert_select "#rank_note", text: note("educator")
+
+    get school_admin_level_path("6eme")
+    assert_select "#rank_note", text: note("educator")
   end
 
   test "ED-35: the head and the deputy add a classroom, archive one and withdraw a teacher, as before" do

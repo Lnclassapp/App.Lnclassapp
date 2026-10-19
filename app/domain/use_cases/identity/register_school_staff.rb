@@ -67,9 +67,12 @@ module UseCases
       end
 
       def attach(user, school, position, now)
-        case @staffs.attach_by_code(user_id: user.id, school_id: school.id, cap: Entities::School::Staff::CODE_CAP, position:, at: now)
+        outcome = @staffs.attach_by_code(user_id: user.id, school_id: school.id, cap: Entities::School::Staff::CODE_CAP, position:, at: now)
+        case outcome
+        when :attached then nil
         when :cap_reached then raise Aborted, Shared::Result.failure(:conflict, errors: CAP_REACHED)
         when :head_taken then raise Aborted, Shared::Result.failure(:conflict, errors: HEAD_TAKEN)
+        else raise ArgumentError, "unexpected outcome from attach_by_code: #{outcome.inspect}"
         end
       end
 

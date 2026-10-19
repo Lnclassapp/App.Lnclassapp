@@ -44,7 +44,7 @@ module Repositories
           next :unchanged if current == position
           next :head_taken if position == HEAD && head_taken?(school_id:, except_user_id: user_id)
 
-          guarded { Orm::SchoolStaff.where(user_id:).update_all(position:) && :set }
+          guarded { Orm::SchoolStaff.where(user_id:).update_all(position:) && [ :set, current ] }
         end
       end
 

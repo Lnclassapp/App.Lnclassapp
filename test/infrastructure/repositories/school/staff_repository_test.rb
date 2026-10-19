@@ -68,7 +68,7 @@ module Repositories
       test "ED-23: set_position changes the position of an active direction; same position, :unchanged" do
         admin = create_school_admin(school: @school, position: "secretary")
 
-        assert_equal :set, @repository.set_position(user_id: admin.id, position: "educator")
+        assert_equal [ :set, "secretary" ], @repository.set_position(user_id: admin.id, position: "educator")
         assert_equal "educator", Orm::SchoolStaff.find_by!(user_id: admin.id).position
         assert_equal :unchanged, @repository.set_position(user_id: admin.id, position: "educator")
       end
@@ -94,6 +94,22 @@ module Repositories
           assert_equal :head_taken, repository.attach(user_id: admin.id, school_id: @school.id, invited_by_id: nil, position: "head", at: @at)
           assert Orm::SchoolStaff.where(school_id: @school.id).exists?, "the transaction still reads"
         end
+      end
+
+      test "ED-02: restore and set_position also fall back on the partial index: :head_taken, no exception, the transaction intact" do
+        former = create_school_admin(school: @school, position: "head", archived_at: @at)
+        admin = create_school_admin(school: @school, position: "secretary")
+        create_school_admin(school: @school, position: "head")
+        repository = StaffRepository.new
+        def repository.head_taken?(**) = false
+
+        Orm::SchoolStaff.transaction do
+          assert_equal :head_taken, repository.restore(user_id: former.id, cap: 3)
+          assert_equal :head_taken, repository.set_position(user_id: admin.id, position: "head")
+          assert Orm::SchoolStaff.where(school_id: @school.id).exists?, "the transaction still reads"
+        end
+        assert_not_nil Orm::SchoolStaff.find_by!(user_id: former.id).archived_at
+        assert_equal "secretary", Orm::SchoolStaff.find_by!(user_id: admin.id).position
       end
 
       test "ID-02, ID-03: the cap counts the active accounts by code only, of this school" do

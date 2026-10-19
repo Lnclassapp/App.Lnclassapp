@@ -11,7 +11,7 @@ module SchoolAdmin
 
       # Menus d'archivage par la policy de la structure (UDR-0092 §3.5) ; ?archives=1 montre toutes les archivées.
       @manageable = gesture_allowed?(Policies::School::ManageSchoolStructurePolicy, @school)
-      @rank_note = rank_note(@school, @manageable)
+      @rank_note = rank_note(@school, @manageable, hideable: @level.classrooms.any?)
     end
   end
 end

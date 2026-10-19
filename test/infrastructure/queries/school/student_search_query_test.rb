@@ -40,6 +40,16 @@ module Queries
         assert_equal [ "Aya Kouassi", "Brou Kouassi" ], names("kouassi")
       end
 
+      test "ED-62: never a student of a classroom of last year, nor one with a non-primary membership only" do
+        past = create_classroom(school: @school, name: "6ème 9", school_year: current_school_year(on: 1.year.ago))
+        create_student(classroom: past, first_name: "Passé", last_name: "Kouassi")
+        secondary = create_student(first_name: "Secondaire", last_name: "Kouassi")
+        Orm::ClassroomStudent.create!(classroom: @sixth, student: secondary, primary: false, joined_at: Time.current,
+                                      joined_via: "standard")
+
+        assert_equal [ "Aya Kouassi", "Brou Kouassi" ], names("kouassi")
+      end
+
       test "ED-63: under three letters, nothing is read" do
         assert_no_queries { assert_empty names("ko") }
         assert_no_queries { assert_empty names("  ko  ") }

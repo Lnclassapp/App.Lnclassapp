@@ -31,6 +31,25 @@ class AddPositionToSchoolStaffsMigrationTest < ActiveSupport::TestCase
     assert_nil team.reload.position
   end
 
+  # Le down rend les anciennes valeurs : head et deputy n'existaient pas, ils redeviennent NULL ; educator et secretary restent ;
+  # « principal » est de nouveau accepté, et une invitation de direction sans fonction passe (la contrainte « staff_has_position »
+  # n'existe plus).
+  test "down: head and deputy invitations lose their position, principal is accepted again, a direction invitation may have none" do
+    invited = { "0700000021" => "head", "0700000022" => "deputy", "0700000023" => "educator", "0700000024" => "secretary" }
+              .to_h { |contact, position| [ create_invitation(kind: "school_staff", contact:, position:).id, position ] }
+
+    migrate(:down)
+
+    assert_equal [ nil, nil, "educator", "secretary" ], Orm::Invitation.where(id: invited.keys).order(:id).pluck(:position)
+    assert_equal "principal", create_invitation(kind: "school_staff", contact: "0700000025", position: "principal").reload.position
+    assert_nil create_invitation(kind: "school_staff", contact: "0700000026", position: nil).reload.position
+    assert_raises(ActiveRecord::CheckViolation) do
+      Orm::Invitation.transaction(requires_new: true) do
+        create_invitation(kind: "school_staff", contact: "0700000027", position: "head")
+      end
+    end
+  end
+
   test "the migration reruns both ways without failing" do
     migrate(:down)
     migrate(:down)

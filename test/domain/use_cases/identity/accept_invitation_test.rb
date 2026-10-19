@@ -55,9 +55,15 @@ module UseCases
 
         attr_reader :attached
 
-        def initialize(head: false) = @head = head
+        # outcome : un code que le port ne promet pas, pour vérifier que le cas d'usage ne le prend pas pour un succès.
+        def initialize(head: false, outcome: nil)
+          @head = head
+          @outcome = outcome
+        end
 
         def attach(user_id:, school_id:, invited_by_id:, position:, at:)
+          return @outcome if @outcome
+
           return :head_taken if @head && position == "head"
 
           (@attached ||= []) << { user_id:, school_id:, invited_by_id:, position:, at: }
@@ -79,10 +85,10 @@ module UseCases
                                            invited_by_id: 7, expires_at: NOW + 1.hour, **staff.to_h, **attributes)
       end
 
-      def use_case(invitation: self.invitation, taken: false, head: false)
+      def use_case(invitation: self.invitation, taken: false, head: false, outcome: nil)
         @invitations = FakeInvitations.new(invitation)
         @registrations = FakeRegistrations.new(taken:)
-        @staffs = FakeStaffs.new(head:)
+        @staffs = FakeStaffs.new(head:, outcome:)
         @audit = FakeAudit.new
         @transaction = FakeTransaction.new
         AcceptInvitation.new(invitations: @invitations, registrations: @registrations, staffs: @staffs, audit_log: @audit,
@@ -129,6 +135,15 @@ module UseCases
       test "ED-14: the position chosen by the team becomes the position of the attachment" do
         assert use_case(invitation: invitation(kind: "school_staff", position: "head")).call(token: TOKEN, dto: form).success?
         assert_equal "head", @staffs.attached.sole[:position]
+      end
+
+      test "an attach outcome unknown to the port raises an ArgumentError instead of passing for a success" do
+        error = assert_raises(ArgumentError) do
+          use_case(invitation: invitation(kind: "school_staff"), outcome: :unexpected).call(token: TOKEN, dto: form)
+        end
+
+        assert_match(/unexpected/, error.message)
+        assert_empty @invitations.accepted
       end
 
       test "a head invitation accepted after another head arrived is a conflict, nothing accepted nor audited" do

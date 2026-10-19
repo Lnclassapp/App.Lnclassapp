@@ -8,7 +8,7 @@ module SchoolAdmin
       @level_classrooms = Queries::School::LevelClassroomsQuery.new.call(public_id: @school.public_id)
       # « + » et « − » par la policy de la structure (UDR-0092 §3.5) ; la note dit pourquoi ils manquent au rang vie scolaire.
       @structure_manageable = gesture_allowed?(Policies::School::ManageSchoolStructurePolicy, @school)
-      @rank_note = rank_note(@school, @structure_manageable)
+      @rank_note = rank_note(@school, @structure_manageable, hideable: true)
       load_school_staff
     end
 

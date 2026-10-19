@@ -7,7 +7,7 @@ module SchoolAdmin
       @overview = Queries::School::DepartedTeachersQuery.new.call(school_id: current_actor.school_id)
       school = Queries::School::OwnSchoolQuery.new.call(school_id: current_actor.school_id)
       @manageable = gesture_allowed?(Policies::School::ManageSchoolTeachersPolicy, school)
-      @rank_note = rank_note(school, @manageable)
+      @rank_note = rank_note(school, @manageable, hideable: @overview.teachers.any?)
     end
   end
 end
