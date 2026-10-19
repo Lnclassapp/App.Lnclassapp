@@ -16,6 +16,7 @@
 | Condition, `CI=true` | Même arbre que #237 | joue | joue (9 ms) | idem |
 | Condition, sans `origin/Develop` | Même arbre que #237, référence inexistante | joue | joue (14 ms) | idem |
 | `bin/ci` complet | | 16 min 19 s | à mesurer à la fin du chantier | `tmp/ci.log` |
+| `bin/ci` complets par PR | Une PR de plusieurs lots | 2 | 1 (à confirmer à la clôture) | Nombre de passages de `bin/ci-quiet` écrits dans la PR avant la fusion |
 
 ## Ce qui a dérapé
 
