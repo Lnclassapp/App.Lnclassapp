@@ -77,6 +77,15 @@ module Queries
         Orm::ExerciseSession.where(status: "completed", kind: "standard", classroom_assignment_id: nil, started_at: window)
       end
 
+      # ADR-0101 §4.4 : le cours est-il l'un de ceux que la page de la classe affiche pour cet acteur (niveau, série, et matière
+      # de l'enseignant ; toute matière pour l'équipe) ? Une seule requête. → true | false
+      def shown_course?(public_id:, course_slug:, teacher_id: nil)
+        level_id, series_id = Orm::Classroom.where(public_id:).pick(:level_id, :series_id)
+        return false if level_id.nil?
+
+        course_scope(level_id, series_id, teacher_id).where(slug: course_slug).exists?
+      end
+
       private
 
       # Décision du porteur du 2026-10-16 : sans recherche, les élèves d'un groupe de note ; avec, toute la classe. Les notes de
@@ -162,15 +171,19 @@ module Queries
       # Bloc « Cours » (UDR-0062 §3.4, memo Q18) : le chemin de l'enseignant vers les exercices. La règle d'AudienceFilter
       # (niveau de la classe, série vide ou la sienne), réduite à la matière de l'enseignant.
       def courses(level_id, series_id, teacher_id)
-        scope = Orm::Course.joins(:level, :material).left_joins(:series)
-                           .where(status: "published", level_id:, series_id: [ nil, series_id ].uniq)
-        scope = scope.where(material_id: Orm::TeacherProfile.where(user_id: teacher_id).select(:material_id)) if teacher_id
-        rows = scope.order("materials.name", "courses.name", "courses.id").pluck(*COURSE_COLUMNS)
+        rows = course_scope(level_id, series_id, teacher_id)
+               .order("materials.name", "courses.name", "courses.id").pluck(*COURSE_COLUMNS)
         essentials = Orm::Essential.where(course_id: rows.map(&:first), status: "published").group(:course_id).count
         rows.map do |id, slug, name, subtitle, level_name, series_name, material_name, material_category|
           CourseRow.new(slug:, name:, subtitle:, level_name:, series_name:, material_name:, material_category:,
                         essentials_count: essentials.fetch(id, 0))
         end
+      end
+
+      def course_scope(level_id, series_id, teacher_id)
+        scope = Orm::Course.joins(:level, :material).left_joins(:series)
+                           .where(status: "published", level_id:, series_id: [ nil, series_id ].uniq)
+        teacher_id ? scope.where(material_id: Orm::TeacherProfile.where(user_id: teacher_id).select(:material_id)) : scope
       end
     end
   end

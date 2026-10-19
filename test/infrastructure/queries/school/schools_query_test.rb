@@ -53,7 +53,7 @@ module Queries
         assert_equal SchoolsQuery::Row.new(public_id: school.public_id, name: "Lycée Classique d'Abidjan", sigle: "LCA",
                                            drena_public_id: drena.public_id, drena_name: "Abidjan 1", school_type: "mixed", cycle: "first", status: "draft",
                                            classrooms_count: 2, teachers_count: 1, school_code: "k7m4qz", national_code: nil,
-                                           team_invite_token: school.reload.team_invite_token),
+                                           team_invite_token: school.reload.team_invite_token, school_code_rotated_at: nil),
                      query.rows.sole
       end
 

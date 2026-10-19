@@ -26,8 +26,8 @@ module Shared
       assert_equal({ name: [ :blank ] }, result.errors)
     end
 
-    test "accepte chacun des six codes de la liste fermée" do
-      assert_equal %i[forbidden not_found invalid conflict locked expired], Result::ERROR_CODES
+    test "accepte chacun des sept codes de la liste fermée" do
+      assert_equal %i[forbidden not_found invalid conflict locked expired unavailable], Result::ERROR_CODES
 
       Result::ERROR_CODES.each { |code| assert_equal code, Result.failure(code).code }
     end

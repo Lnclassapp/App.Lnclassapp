@@ -291,6 +291,63 @@ module Queries
         assert_equal counts.first, counts.last
         assert_equal 2, counts.first.last
       end
+
+      # ADR-0101 §4.3, UDR-0120 : l'effet de cette session sur sa fiche, lu en une requête sur knowledge_gaps.
+      def completed(score_percent, gap: nil)
+        travel 1.minute
+        create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent:, gap:)
+      end
+
+      def gap_opened_by(session) = create_gap(student: @student, essential: @essential, source_session: session)
+
+      test "effet sur la fiche : nil sans lacune liée" do
+        assert_nil result.gap_outcome
+      end
+
+      test "effet sur la fiche : :opened pour la session qui a ouvert la lacune, même relue après sa levée" do
+        failed = completed(30)
+        gap = gap_opened_by(failed)
+
+        assert_equal :opened, result(session: failed).gap_outcome
+
+        gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: completed(80, gap:))
+        assert_equal :opened, result(session: failed).gap_outcome
+      end
+
+      test "effet sur la fiche : :lifted pour la session qui l'a levée, remédiation ou correction seule" do
+        gap = gap_opened_by(completed(30))
+        lifting = completed(80, gap:)
+        gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: lifting)
+        other = gap_opened_by(completed(20))
+        alone = completed(90)
+        other.update!(status: "self_corrected", resolved_at: Time.current, resolved_by_session: alone)
+
+        assert_equal [ :lifted, :lifted ], [ lifting, alone ].map { result(session: it).gap_outcome }
+      end
+
+      test "effet sur la fiche : :still_pending pour une remédiation qui laisse la fiche à revoir" do
+        gap = gap_opened_by(completed(30))
+
+        assert_equal :still_pending, result(session: completed(70, gap:)).gap_outcome
+      end
+
+      test "effet sur la fiche : nil pour une remédiation dont une autre session a levé la fiche" do
+        gap = gap_opened_by(completed(30))
+        short = completed(60, gap:)
+        gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: completed(90, gap:))
+
+        assert_nil result(session: short).gap_outcome
+      end
+
+      test "effet sur la fiche : une seule requête sur knowledge_gaps" do
+        gap = gap_opened_by(completed(30))
+        session = completed(70, gap:)
+        statements = []
+        callback = ->(*, payload) { statements << payload[:sql] if payload[:sql].include?('FROM "knowledge_gaps"') }
+        ActiveSupport::Notifications.subscribed(callback, "sql.active_record") { result(session:) }
+
+        assert_equal 1, statements.size
+      end
     end
   end
 end

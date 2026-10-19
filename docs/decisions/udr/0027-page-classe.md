@@ -1,14 +1,14 @@
 # UDR-0027 : Page classe — en-tête et code copiable, cours assignés, liste des élèves, pour l'enseignant de la classe et l'équipe
 <!-- index
 titre: Page classe
-statut: Accepté — *amendé le 2026-10-02 : jours de séance, exercices assignés, cours (UDR-0062)*
+statut: Accepté — *amendé le 2026-10-02 : jours de séance, exercices assignés, cours (UDR-0062)* — *amendé le 2026-10-16 : bloc « Fiches à revoir » (UDR-0121)*
 adr-lie: [0028](../adr/0028-policies-de-domaine-par-use-case.md), [0032](../adr/0032-recuperation-assistee-du-pin.md), [0048](../adr/0048-statuts-d-assignation-active-et-archived.md)
 problematique: En-tête et code copiable, cours assignés, liste des élèves, pour l'enseignant de la classe et l'équipe
 -->
 
 | | |
 |---|---|
-| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `fonctions-espace-eleve` : plus d'assignation de cours ni de fiche (UDR-0062)* |
+| **Statut** | Accepté (2026-09-27, porteur) — *amendée le 2026-10-02 (acceptée par le porteur) par le chantier `fonctions-espace-eleve` : plus d'assignation de cours ni de fiche (UDR-0062)* — *amendée le 2026-10-16 (acceptée par le porteur) par le chantier `remediation-ciblee` : bloc `#classroom_gaps` ([UDR-0121](0121-fiches-a-revoir-de-la-classe-pour-l-enseignant.md))* |
 | **Date** | 2026-09-25 |
 | **Chantier** | [`docs/chantiers/boucle-pedagogique`](../../chantiers/boucle-pedagogique/plan.md) — Lot D4, critères CL-10, CL-04 (affichage), ID-15 (bouton de l'enseignant), TR-cadre-4 |
 | **ADR lié** | [ADR-0028](../adr/0028-policies-de-domaine-par-use-case.md) (`ReadClassroomPolicy`, fait `show_roster`) · [ADR-0032](../adr/0032-recuperation-assistee-du-pin.md) (code de récupération) · [ADR-0048](../adr/0048-statuts-d-assignation-active-et-archived.md) (assignations actives) · [UDR-0005](0005-design-system-fondateur.md) · [UDR-0006](0006-shell-applicatif-par-role.md) · [UDR-0007](0007-vocabulaire-de-la-fiche-essentielle-et-de-l-evaluation.md) · UDR-0020 du Lot B8 (modale du code) |
