@@ -92,7 +92,7 @@ module UseCases
         ClassroomEntity.new(id:, public_id: "cls-#{id}", school_id:, level_id:, series_id:, school_year:, name:, status:, max_students:)
       end
 
-      def direction(of:) = Entities::Identity::Actor.new(user_id: 4, role: :school_admin, school_id: of)
+      def direction(of:) = Entities::Identity::Actor.new(user_id: 4, role: :school_admin, school_id: of, staff_position: "head")
 
       setup do
         @classrooms = FakeClassrooms.new([ classroom(1, "6ème 3"), classroom(2, "Tle D 2", level_id: TLE, series_id: SERIES_D),
@@ -190,8 +190,10 @@ module UseCases
         assert_equal 1, @classrooms.writes.size
       end
 
-      test "l'enseignant et l'élève ne modifient aucune classe" do
-        [ Entities::Identity::Actor.new(user_id: 8, role: :teacher), Entities::Identity::Actor.new(user_id: 9, role: :student) ].each do |actor|
+      test "l'enseignant, l'élève et la direction de rang « vie scolaire » ne modifient aucune classe" do
+        educator = Entities::Identity::Actor.new(user_id: 10, role: :school_admin, school_id: 5, staff_position: "educator")
+        [ Entities::Identity::Actor.new(user_id: 8, role: :teacher), Entities::Identity::Actor.new(user_id: 9, role: :student),
+          educator ].each do |actor|
           assert_equal :forbidden, update("cls-1", actor:).code
         end
         assert_empty @classrooms.writes
