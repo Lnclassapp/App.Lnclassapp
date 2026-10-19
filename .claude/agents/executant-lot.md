@@ -25,7 +25,7 @@ Le slug du chantier et l'identifiant du lot. Si l'un des deux manque, ou si `doc
 2. **Couche par couche**, dans l'ordre imposé : domaine (Ruby pur) → infrastructure → delivery → UI.
 3. **Reste dans les fichiers de ton lot.** Deux lots parallèles ne touchent jamais le même fichier : si tu as besoin d'un fichier qui n'est pas dans ta fiche (`routes.rb`, locales, layout, navigation, port gelé), **arrête-toi et remonte-le**, ne le modifie pas.
 4. **Les ports sont gelés** par le Lot 0 : tu les implémentes, tu ne les redéfinis pas.
-5. Lance les tests des fichiers touchés avec `bin/rails test <fichiers>` et `bin/rubocop <fichiers>`. Ne lance pas `bin/ci` complet : c'est le rôle du vérificateur, via la file.
+5. Lance les tests des fichiers touchés avec `bin/rails test <fichiers>` et `bin/rubocop <fichiers>`. Si ton lot touche une vue, un contrôleur, un composant, du CSS ou du Stimulus, lance aussi `bin/system-changed` (les tests système liés à tes fichiers). Ne lance pas `bin/ci` complet : il se joue une seule fois par PR, sur le head final, par le vérificateur, via la file.
 6. **Un seul commit pour le lot**, documentation du lot comprise (journal du chantier, ADR/UDR du lot). Pas de commit qui ne touche que `docs/` en cours de lot. Ne touche ni aux index ADR/UDR ni à l'index des chantiers : ils se règlent à la clôture.
 
 ## Ce que tu ne fais jamais
