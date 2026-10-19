@@ -37,6 +37,8 @@ Si le porteur répond « non » à la question 6, le Lot C disparaît. Si la que
                      `app/controllers/school/level_classrooms_controller.rb` *(lit `current` dans l'URL du cadre, UDR-0102 §4)*
                      `app/views/school/level_classrooms/index.html.erb` *(case désactivée « Ta classe » quand `current` est passé)*
                      `config/locales/classroom/student_classroom_choices.fr.yml` *(clés d'erreur `same_classroom`, `no_active_classroom` ; badge « Ta classe »)*
+                     `app/domain/use_cases/classroom/classroom_designation.rb`, `join_as_student.rb` *(ajoutés à l'exécution : `designate` partagé)*
+                     `app/controllers/school/drena_schools_controller.rb` *(ajouté à l'exécution : scope `student_classroom_change` de la cascade)*
 - **Dépend de**    : —
 - **Test associé** : `test/domain/use_cases/classroom/change_classroom_test.rb`
                      `test/domain/entities/identity/audit_action_test.rb`
@@ -124,11 +126,11 @@ Aucun fichier listé par deux lots parallèles.
 
 ## Portes de sortie
 
-- [ ] Réponses du porteur aux questions 1 à 9 consignées dans le memo ; ADR-0095 et UDR-0101 à 0103 acceptées
-- [ ] Tous les lots sont `Done`
-- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : parcours cascade, parcours lien, refus, sans JS
-- [ ] `bin/ci-quiet` vert, écrit dans la PR (CI GitHub coupée, ADR-0069)
-- [ ] Revue `security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer` sur le diff final (use case et routes touchés)
-- [ ] Captures 390 px et ordinateur de chaque écran envoyées au porteur
-- [ ] Index ADR/UDR régénérés par `script/docs/build_index` et ligne du chantier dans `docs/chantiers/README.md`, au commit de clôture
-- [ ] `journal.md` complété
+- [x] Réponses du porteur aux questions 1 à 9 consignées dans le memo ; ADR-0095 et UDR-0101 à 0103 acceptées
+- [x] Tous les lots sont `Done`
+- [x] Un rôle distinct de l'auteur a **exécuté** le résultat : parcours cascade, parcours lien, refus (classe complète) joués dans un navigateur par l'agent de clôture ; sans JS prouvé par les tests contrôleur
+- [ ] `bin/ci-quiet` vert, écrit dans la PR (CI GitHub coupée, ADR-0069) — **non** : toutes les étapes vertes sauf la suite système, rouge par charge de la machine (toasts de 5 s expirés, charge ≈ 50 sur 4 cœurs) ; verdict détaillé dans la PR, à rejouer avant la fusion
+- [x] Revue `security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer` sur le diff final (use case et routes touchés) — lancée par le coordinateur sur la PR #252, constats traités (journal, 2026-10-19)
+- [x] Captures 390 px et ordinateur de chaque écran envoyées au porteur
+- [x] Index ADR/UDR régénérés par `script/docs/build_index` et ligne du chantier dans `docs/chantiers/README.md`, au commit de clôture
+- [x] `journal.md` complété

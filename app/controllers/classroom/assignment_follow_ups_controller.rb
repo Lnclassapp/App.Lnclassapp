@@ -1,13 +1,14 @@
 # 🌐 DELIVERY · Classroom::AssignmentFollowUpsController
 # Rôle : suivi d'un exercice assigné (UDR-0062 §3.5, UDR-0072 §3.5) : comptes, compréhension, rendus en retard et pas encore faits
-# ADR  : 0026, 0072, 0079 · UDR : 0062, 0072 · FollowAssignmentPolicy avant toute lecture : élève, autre enseignant, direction → 403
+# ADR  : 0026, 0072, 0079, 0088 · UDR : 0062, 0072 · FollowAssignmentPolicy avant toute lecture : élève, autre enseignant, direction → 403
 module Classroom
   class AssignmentFollowUpsController < AuthenticatedController
     allow_roles :teacher, :team
 
     def show
       @classroom = Queries::Classroom::ClassroomHeaderQuery.new.call(public_id: params[:classroom_public_id])
-      return render_not_found if @classroom.nil?
+      # vie-de-la-classe, Lot C (ADR-0088, Q8) : une classe archivée n'a plus de page, quel que soit le rôle ; elle se restaure.
+      return render_not_found if @classroom.nil? || @classroom.status == "archived"
 
       render_result Policies::Classroom::FollowAssignmentPolicy.new.call(actor: current_actor, classroom: @classroom),
                     success: ->(_) { load_follow_up }
