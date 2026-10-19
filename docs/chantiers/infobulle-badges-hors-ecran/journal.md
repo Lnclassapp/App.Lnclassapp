@@ -47,6 +47,13 @@ Le test de reproduction se place donc dans le test système de la page de résul
 - Toute infobulle future du tiroir « Mon compte » (`shared/navigation/_account_panel.html.erb`) serait décalée de la même façon.
 - Corrigé dans ce lot, sur décision du porteur.
 
+### Trou de test comblé
+
+- `test/system/assessment/session_result_test.rb` : sur ordinateur, au survol du « i » de `#session_badge`, la bulle a son `left` sur l'icône (à 1 px), son `top` à `bottom` + 4 px, et finit à 16 px au plus du bord droit. Avant correctif : `left` 1070 contre 562 (écart 507,8 px).
+- `test/system/identity/account_panel_test.rb` : tiroir « Mon compte » ouvert et animation finie, `getComputedStyle(dialog).transform` vaut `none`. Avant correctif : `matrix(1, 0, 0, 1, 0, 0)`.
+- Correctif : `both` devient `backwards` pour `--animate-slide-up` et `dialog.dialog-drawer[open]`, sans toucher au contrôleur ni aux vues.
+- Effets de bord écartés : `test/system/assessment/`, `test/system/identity/` et `test/system/design_system_test.rb` verts (114 runs, 0 échec). Les animations n'ont pas de délai : le remplissage `backwards` ne change que l'état après la fin, l'élément retrouve son style propre. Reste au challenger (phase 5) : le coup d'œil sur l'animation d'entrée (modale, toast, tiroir) dans l'application.
+
 ## Dette laissée derrière
 
 | Quoi | Pourquoi reporté | Chantier de suivi |

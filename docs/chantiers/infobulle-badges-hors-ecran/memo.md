@@ -48,12 +48,12 @@ Captures : celles de la PR 263, `1-resultat-infobulle-badges-ordinateur.png` (en
 - [x] Symptôme et étapes de reproduction écrits dans `memo.md`
 - [x] Bug reproduit dans l'application (navigateur réel) avant toute ligne de code
 - [x] Rapport root cause rendu : fichier, ligne, chaîne d'appels, raison du trou de test (`journal.md`)
-- [ ] Test de reproduction écrit **avant** le correctif
-- [ ] Test lancé et **rouge**, pour la bonne raison (message vérifié)
-- [ ] Correctif appliqué dans la couche de la **cause**, pas du symptôme
-- [ ] Test au vert · suite du contexte borné au vert
+- [x] Test de reproduction écrit **avant** le correctif
+- [x] Test lancé et **rouge**, pour la bonne raison (message vérifié)
+- [x] Correctif appliqué dans la couche de la **cause**, pas du symptôme
+- [x] Test au vert · suite du contexte borné au vert
 - [ ] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
 - [x] Données déjà corrompues : aucune (défaut d'affichage)
 - [ ] Challenger a rejoué les étapes de reproduction dans l'application
-- [ ] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
-- [ ] `journal.md` : cause, trou de test comblé, effets de bord écartés
+- [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
+- [x] `journal.md` : cause, trou de test comblé, effets de bord écartés
