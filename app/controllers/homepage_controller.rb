@@ -1,18 +1,23 @@
 # 🌐 DELIVERY · HomepageController
-# Rôle : sert la page d'accueil publique ; une personne connectée est envoyée vers son accueil, l'ouverture depuis l'app installée datée
-# ADR  : 0001, 0050, 0082, 0084, 0086
+# Rôle : sert la page d'accueil publique et ses matières publiées ; une personne connectée est envoyée vers son accueil, l'ouverture de l'app datée
+# ADR  : 0001, 0050, 0082, 0084, 0086, 0099 · UDR : 0113 (§3.9)
 class HomepageController < ApplicationController
   allow_unauthenticated_access
 
   def index
-    return unless authenticated?
+    return redirect_signed_in if authenticated?
 
+    # UDR-0113 §3.9 : la bande « Matières » mène aux pages matière, pour un visiteur seulement.
+    @public_materials = Queries::Catalog::HomepageMaterialsQuery.new.call
+  end
+
+  private
+
+  def redirect_signed_in
     channel = app_open_channel
     record_app_open(channel) if channel
     redirect_to_home
   end
-
-  private
 
   # ADR-0082 §4.3 : l'icône de l'app installée ouvre « /?source=app » (canal :pwa). ADR-0084 §4.6, ADR-0086 §4.6 : une
   # coque Android reconnue, élèves ou enseignants, ouvre « /?source=android » (canal :android), compté seulement s'il

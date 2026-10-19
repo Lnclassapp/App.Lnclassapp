@@ -85,6 +85,8 @@ Trois agents au plus en même temps : Lot 0 et Lot C, puis Lot A, Lot B et Lot C
 
 *Retiré si Q8 = « non ». Aucune vue nouvelle : la page 404 existe.*
 
+- [x] **Done** le 2026-10-16, branche `fix/classe-archivee-sous-pages`. Ajouté au périmètre : `app/controllers/classroom/assignments_controller.rb` (`new`, la modale des jours, seule autre page `GET` sous `/classrooms/:id/…`) et les tests qui exigeaient l'ancienne lecture (`classroom_courses`, `classroom_essentials`, `assignment_follow_ups`, `session_days`, `assignments`). Les écritures gardent leur 403 « classe archivée » (journal, menace du Lot C).
+
 - **Couche**       : delivery
 - **Fichiers**     : `app/controllers/classroom/classroom_courses_controller.rb`
                      `app/controllers/classroom/classroom_essentials_controller.rb`

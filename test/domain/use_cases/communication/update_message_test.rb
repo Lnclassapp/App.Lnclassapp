@@ -214,6 +214,27 @@ module UseCases
         assert_equal 3, Orm::Message.where(author: @kamate, status: "published").count
       end
 
+      # ADR-0094 §10 (amende l'ADR-0081 §4.1) : l'annonce d'un enseignant à ses classes se compte par établissement. Trois en
+      # ligne dans B ; un brouillon publié dans A n'archive rien de B.
+      test "ME — a teacher's draft published in A archives none of his three live announcements in B" do
+        saint_michel = create_school(name: "Collège Saint-Michel")
+        b2 = create_classroom(school: saint_michel, name: "4ème 2")
+        add_teacher_school(@kouassi, saint_michel)
+        Orm::TeacherClassroom.create!(teacher: @kouassi, classroom: b2)
+        in_b = [ 25, 27, 29 ].map do |day|
+          create_message(author: @kouassi, title: "B, #{day} septembre", audience: "classrooms", classrooms: [ b2 ],
+                         published_at: Time.zone.local(2026, 9, day, 8))
+        end
+        draft = create_message(author: @kouassi, title: "Sortie au musée", audience: "classrooms", classrooms: [ @b3 ],
+                               status: "draft", published_at: nil)
+
+        result = update(@kouassi, draft)
+
+        assert_equal "published", draft.reload.status
+        assert_empty result.value.archived
+        assert_equal %w[published published published], statuses(in_b)
+      end
+
       test "AV-03 — a scheduled announcement its author publishes now archives the oldest live one" do
         live = three_live
         scheduled = create_message(author: @kamate, status: "scheduled", published_at: Time.zone.local(2026, 10, 10, 8), school: @lauriers)

@@ -122,6 +122,21 @@ Quel que soit le cycle :
 
 ---
 
+## Quel modèle pour quel rôle
+
+Règle : **le plus petit modèle qui fait le travail** ; on monte d'un cran quand la tâche exige du jugement (sécurité, concurrence, architecture, décision métier). Décision : [ADR-0104](../decisions/adr/0104-routage-des-modeles-par-role.md).
+
+| Rôle | Modèle |
+|---|---|
+| Orchestrateur (session principale) : cadrage, décisions, arbitrage des revues, fusions | **Opus** |
+| Sous-agents de revue : `security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer` | **Opus** |
+| Agents d'exécution (`executant-lot`) : lots, tests et corrections à partir d'un plan cadré | **Sonnet** |
+| Vérifications pures (`verificateur-ci`) : `bin/ci-quiet`, tests système relancés, verdict | **Haiku** |
+
+Où l'appliquer : le champ `model:` du frontmatter de chaque agent de `.claude/agents/` ; le paramètre `model` à l'appel d'un agent pour une tâche précise ; `/model` pour la session principale.
+
+---
+
 ## Déclencher un cycle
 
 Le processus est outillé. Dans Claude Code :

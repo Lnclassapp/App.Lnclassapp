@@ -1,0 +1,7 @@
+<%# 🌐 UI · catalog/material_pages/_page_frame — réponse du frame différé « material_courses_page_<n> » : la page n, sans layout %>
+<%# Rôle : les cartes de la page demandée et le frame de la suivante, dans le frame qui les a demandées %>
+<%# ADR  : 0076 · UDR : 0114 (§3.3) %>
+<%# locals: (page:) -%>
+<%= turbo_frame_tag turbo_frame_request_id, target: "_top" do %>
+  <%= render "catalog/material_pages/page", page:, nested: true %>
+<% end %>

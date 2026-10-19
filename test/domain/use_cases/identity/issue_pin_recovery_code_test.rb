@@ -38,11 +38,17 @@ module UseCases
         end
       end
 
+      # La classe 3 est dans l'établissement 1, la classe 8 dans l'établissement 2.
       class FakeTeachings
         include Ports::Classroom::TeachingRepositoryPort
 
+        SCHOOL_OF = { 3 => 1, 8 => 2 }.freeze
+
         def initialize(classroom_ids) = @classroom_ids = classroom_ids
-        def classroom_ids_for(teacher_id:) = @classroom_ids.fetch(teacher_id, [])
+
+        def classroom_ids_for(teacher_id:, school_id: nil)
+          @classroom_ids.fetch(teacher_id, []).select { school_id.nil? || SCHOOL_OF[it] == school_id }
+        end
       end
 
       class FakePinRecoveries
@@ -76,6 +82,17 @@ module UseCases
                                  transaction: @transaction, policy: Policies::Identity::IssuePinRecoveryCodePolicy.new,
                                  digest_key: KEY, clock: Clock.new(NOW))
                             .call(actor:, target_public_id: target)
+      end
+
+      # Revue de la PR #250, constat 3 (ADR-0094 §10) : l'enseignant de A et de B, passé dans A, n'émet rien pour l'élève de
+      # sa classe de B.
+      test "a teacher in A is refused for a student of his classroom of B; back in B, he issues it" do
+        in_b = { STUDENT.id => membership(classroom_id: 8) }
+
+        assert_equal :forbidden, issue(memberships: in_b, taught: { 5 => [ 3, 8 ] }).code
+        assert_nil @pin_recoveries.issued
+        assert issue(actor: Entities::Identity::Actor.new(user_id: 5, role: :teacher, school_id: 2), memberships: in_b,
+                     taught: { 5 => [ 3, 8 ] }).success?
       end
 
       test "a teacher issues a code for a student of an active classroom they teach: digest only, 15 min, audited" do

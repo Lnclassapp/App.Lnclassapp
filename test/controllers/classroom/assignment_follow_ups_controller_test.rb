@@ -427,33 +427,22 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_no_match(/Parti/, response.body)
   end
 
-  test "an archived classroom stays readable: the « Compréhension » section, and a category can be chosen" do
+  # vie-de-la-classe, Lot C (Q8) : le suivi nominatif d'une classe archivée n'est plus lisible (était : lisible, catégories comprises).
+  test "an archived classroom: 404 for its teacher, a category changes nothing" do
     classroom = create_classroom(school: @school, status: "archived")
     Orm::TeacherClassroom.create!(teacher: @teacher, classroom:)
     assignment = create_assignment(classroom:, assignable: create_exercise(essential: @exercise.essential), by: @teacher)
-    [ 100, 90, 80, 60, 40 ].each_with_index do |score_percent, index|
-      student = create_student(classroom:, first_name: "Élève", last_name: "N#{index}")
-      create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed", score_percent:,
-                              classroom_assignment: assignment)
-    end
+    student = create_student(classroom:, first_name: "Élève", last_name: "N3")
+    create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed", score_percent: 60,
+                            classroom_assignment: assignment)
     sign_in_as @teacher
 
-    get classroom_assignment_path(classroom.public_id, assignment.public_id)
+    [ {}, { category: "fragile" } ].each do |params|
+      get classroom_assignment_path(classroom.public_id, assignment.public_id), params: params
 
-    assert_response :success
-    assert_select "section#comprehension h2#comprehension_title", text: "Compréhension"
-    assert_select "#comprehension_frame span", text: "Acquis"
-    assert_select "nav a[aria-current=true][href$='category=acquired']"
-
-    get classroom_assignment_path(classroom.public_id, assignment.public_id), params: { category: "fragile" }
-
-    assert_response :success
-    assert_select "nav a[aria-current=true][href$='category=fragile']", text: /Fragile\s*1/
-    assert_select "#comprehension_panel ul li", 1 do
-      assert_select "span", text: "Élève N3"
+      assert_response :not_found
+      assert_no_match "Élève N3", response.body
     end
-    # UDR-0109 §3.4 : the file answers 404 in an archived classroom, so the names are not links there.
-    assert_select "#comprehension_panel ul li a, #pending_students li a, #late_students li a", 0
   end
 
   test "a student, a teacher of another classroom and the direction asking for a category get 403, and a body without any reading" do

@@ -81,8 +81,11 @@ module Finitions
       end
 
       click_on tc("reset")
+      # Turbo affiche d'abord l'aperçu en cache de /courses (3 cours, le champ tel qu'il était à la mise en cache), puis la
+      # page reçue : les assertions attendent la page reçue, jamais l'aperçu.
+      assert_no_selector "html[data-turbo-preview]"
       assert_selector "#courses_groups li", count: 3
-      assert_equal "", search_field.value
+      assert_field tc("filters.search"), with: ""
     end
 
     test "FU-14 : sur la page d'un cours, le seul retour est « Cours », vers le catalogue" do

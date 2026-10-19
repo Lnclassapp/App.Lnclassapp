@@ -1,14 +1,14 @@
 # UDR-0114 : Page publique d'une matière `/matieres/:slug` — cours publiés groupés par niveau, filtre de niveau en pastilles, 24 par page
 <!-- index
 titre: Page publique d'une matière (CA-21) : cours publiés par niveau, pastilles de niveau, 24 par page chargées au défilement
-statut: Proposé
+statut: Accepté
 adr-lie: [0099](../adr/0099-pages-publiques-du-catalogue-lues-sans-compte-indexees-sans-cache-html.md)
 problematique: Page matière lisible sans compte : en-tête à l'icône de la matière, pastilles « Tous les niveaux » puis un niveau (`?niveau=`, `?serie=` repris de la page série), cours groupés par niveau dans l'ordre des niveaux, 24 cartes puis la suite au défilement (mécanisme de CA-03). Gabarit de l'UDR-0113. Chantier `catalogue-complet`.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/catalogue-complet`](../../chantiers/catalogue-complet/memo.md) — questions 1 à 4, 6, 8, 12 du grill ; [PRD](../../chantiers/catalogue-complet/prd.md) CC-09 à CC-13 |
 | **ADR lié** | [ADR-0099](../adr/0099-pages-publiques-du-catalogue-lues-sans-compte-indexees-sans-cache-html.md) · [ADR-0076](../adr/0076-politique-de-cache-reglee-sur-les-allers-retours.md) §4.2 (frame différé hors de l'écran à l'arrivée) |
@@ -48,7 +48,7 @@ Page = Data.define(:material, :levels, :selected_level, :selected_series, :group
 
 Gabarit de l'UDR-0113 §3.1 (en-tête, `main#public_catalog`, pied). De haut en bas :
 
-1. Fil d'Ariane : « Accueil » › « Niveaux » › nom de la matière (sans niveau) ; avec niveau : « Accueil » › « Niveaux » › niveau (lien `public_level_path`) › matière ; avec série : … › « Terminale D » (lien `public_level_series_path`) › matière.
+1. Retour (UDR-0113 §3.1, amendé) : « Les cours par niveau » (`public_levels_path`) sans niveau ; avec niveau, le nom du niveau (`public_level_path`) ; avec série, « Terminale D » (`public_level_series_path`).
 2. En-tête de matière, repris de l'UDR-0085 §3.1 : `div#material_title.flex.items-center.gap-3` ; pastille `size-12.rounded-full` teintée (`subject_illustration(slug).tint`) avec son image `size-8`, `alt=""` ; `h1.font-display.text-2xl.font-extrabold.sm:text-3xl` : nom de la matière, suivi, si un niveau est choisi, de « en Terminale » ou « en Terminale D » (`t(".title_with_level", material:, level:)`).
 3. `p.mt-2.text-mute` : « N cours publiés. »
 4. **Pastilles de niveau** : `nav aria-label="Niveaux"` > `ul.mt-4.flex.flex-wrap.gap-2`. Première pastille « Tous les niveaux » → `public_material_path(slug)` ; puis une par niveau de `levels`, « Terminale · 12 » → `public_material_path(slug, niveau: level_slug)`. Pastille active : `bg-brand.text-white.border-brand` et `aria-current="page"` ; les autres : `border.border-line.bg-white.text-ink`. Toutes `inline-flex.min-h-tap.items-center.rounded-full.px-4.text-sm.font-bold`. Avec `serie`, la pastille du niveau est active et le lien « Tous les niveaux » enlève aussi la série.

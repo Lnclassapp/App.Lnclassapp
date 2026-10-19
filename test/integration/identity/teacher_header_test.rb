@@ -30,7 +30,8 @@ class Identity::TeacherHeaderTest < ActionDispatch::IntegrationTest
     assert_select "header dialog#account_panel.dialog-drawer" do
       assert_select "p", /Lycée moderne 2/
       links = css_select("header dialog#account_panel nav[aria-label='#{tn('account_panel.label')}'] li a")
-      assert_equal [ [ profile_path, tn(:profile) ], [ teacher_invite_path, tn("account_panel.invite") ] ],
+      assert_equal [ [ profile_path, tn(:profile) ], [ teacher_schools_path, tn("account_panel.schools.link") ],
+                     [ teacher_invite_path, tn("account_panel.invite") ] ],
                    links.map { [ it["href"], it.text.strip ] }
       assert_select "form[action='#{session_path}'] button", tn(:sign_out)
     end

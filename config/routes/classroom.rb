@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes du contexte classroom
 # Rôle : inscription de l'élève, adhésion par lien, lien d'une classe, fiche et retrait d'un élève, accueils élève et enseignant, historique de l'élève, page de classe, assignations, jours de séance et suivi
-# ADR  : 0030, 0036, 0040, 0041, 0048, 0072, 0084, 0085, 0086, 0097
+# ADR  : 0030, 0036, 0040, 0041, 0048, 0072, 0084, 0085, 0086, 0095, 0097
 # IL-02 (ADR-0085, Lot F) : plus de code de classe ; l'ancienne entrée mène à l'inscription élève.
 get "join", to: redirect("/student-signup")
 get "c/:code", to: "classroom/joins#new", as: :join_classroom
@@ -11,6 +11,10 @@ post "student-signup", to: "classroom/student_registrations#create", as: :studen
 # ADR-0085 §4.3 : l'élève sans classe active (classe archivée, ou retiré) en choisit une par la même cascade.
 get "students/classroom/new", to: "classroom/student_classroom_choices#new", as: :new_student_classroom_choice
 post "students/classroom", to: "classroom/student_classroom_choices#create", as: :student_classroom_choices
+# ADR-0095 : l'élève à classe active change de classe ; seule la confirmation (POST) écrit.
+get "students/classroom/change", to: "classroom/student_classroom_changes#new", as: :new_student_classroom_change
+get "students/classroom/change/confirm", to: "classroom/student_classroom_changes#confirm", as: :confirm_student_classroom_change
+post "students/classroom/change", to: "classroom/student_classroom_changes#create", as: :student_classroom_change
 
 get "students", to: "classroom/student_homes#show", as: :student_home                       # gelé
 get "students/classroom", to: "classroom/student_classrooms#show", as: :student_classroom   # gelé

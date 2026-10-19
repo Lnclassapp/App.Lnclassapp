@@ -90,6 +90,18 @@ class V1RoutesTest < ActionDispatch::IntegrationTest
                  first_match("/classrooms/#{id}/students/pqrstuvwxyzabc", method: "DELETE"))
   end
 
+  # ADR-0095 §6: the student with an active classroom changes it from a page, confirms it, then sends it.
+  test "ADR-0095: « Changer de classe », its confirmation and its sending" do
+    assert_equal "/students/classroom/change", helpers.new_student_classroom_change_path
+    assert_equal "/students/classroom/change/confirm", helpers.confirm_student_classroom_change_path
+    assert_equal "/students/classroom/change", helpers.student_classroom_change_path
+    assert_equal({ controller: "classroom/student_classroom_changes", action: "new" }, first_match("/students/classroom/change"))
+    assert_equal({ controller: "classroom/student_classroom_changes", action: "confirm" },
+                 first_match("/students/classroom/change/confirm"))
+    assert_equal({ controller: "classroom/student_classroom_changes", action: "create" },
+                 first_match("/students/classroom/change", method: "POST"))
+  end
+
   # IE-02 (ADR-0083 §4.1, §4.3): a teacher signs up by /teacher-signup or by an invite link /i/<token>; the code link
   # /e/<code> and the sign-up without a code are gone.
   test "IE-02: /i/:token opens the sign-up; /e/:code and /teacher-signup/without-code are not routed" do
@@ -124,5 +136,18 @@ class V1RoutesTest < ActionDispatch::IntegrationTest
       assert_equal({ controller:, action: }, first_match(path, method:), "#{method} #{path}")
     end
     assert_not_includes NavigationHelper::DESTINATIONS.values.flatten, :teams_growth_path
+  end
+
+  # ADR-0094 §4.4 : l'établissement courant, « Mes établissements », rejoindre et quitter.
+  test "the teacher's schools routes are drawn" do
+    { [ "/teachers/current-school", "PATCH" ] => "school/current_schools#update",
+      [ "/teachers/schools", "GET" ] => "school/teacher_schools#index",
+      [ "/teachers/schools", "POST" ] => "school/teacher_schools#create",
+      [ "/teachers/schools/s1", "DELETE" ] => "school/teacher_schools#destroy" }.each do |(path, method), target|
+      controller, action = target.split("#")
+      assert_equal({ controller:, action: }, first_match(path, method:), "#{method} #{path}")
+    end
+    assert_equal [ "/teachers/current-school", "/teachers/schools", "/teachers/schools/s1" ],
+                 [ helpers.teacher_current_school_path, helpers.teacher_schools_path, helpers.teacher_school_path("s1") ]
   end
 end

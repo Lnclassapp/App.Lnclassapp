@@ -171,6 +171,20 @@ module Repositories
         assert_equal @repository.find_by_public_id(public_id: newest.public_id), live.last
       end
 
+      # ADR-0094 (MET-4): a teacher's cap is counted per school; without a school, all the author's live messages.
+      test "live_of with a school gives only the author's live messages of that school" do
+        other = create_school
+        Orm::TeacherSchool.create!(teacher: @teacher, school: other, primary: false)
+        here = posted(published_at: NOW - 1.day)
+        there = create_message(author: @teacher, audience: "classrooms", school: other,
+                               classrooms: [ create_classroom(school: other) ], published_at: NOW - 2.days)
+
+        live = Orm::Message.transaction { @repository.live_of(author_id: @teacher.id, now: NOW, school_id: @school.id) }
+
+        assert_equal [ here.public_id ], live.map(&:public_id)
+        assert_equal [ there, here ].map(&:public_id), live_of.map(&:public_id)
+      end
+
       # A published message counts whatever its published_at: it was published when written, and a concurrent request
       # that read its clock before taking the lock must still count the message the other one has just published.
       test "AV-04 — only a published message not yet ended is live: ends_at > now; draft, scheduled, archived, withdrawn are not" do

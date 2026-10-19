@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/assignment_follow_ups/show — suivi d'un exercice assigné, enseignant de la classe et équipe %>
 <%# Rôle : en-tête (classe, exercice, échéance), trois chiffres en dl, compréhension, rendus en retard puis pas encore faits, nommés %>
-<%# ADR  : 0072, 0079, 0097 (§4.9) · UDR : 0062 (§3.5, §3.9), 0072 (§3.5, §3.5 bis), 0109 (§3.1) · chaque nom mène à la fiche de l'élève, sauf dans une classe archivée %>
+<%# ADR  : 0072, 0079, 0097 (§4.9) · UDR : 0062 (§3.5, §3.9), 0072 (§3.5, §3.5 bis), 0109 (§3.1) · chaque nom mène à la fiche de l'élève ; classe archivée : 404 (ADR-0088) %>
 <% follow_up = @follow_up %>
 <% counts = follow_up.counts %>
 <% page_title follow_up.exercise_title %>

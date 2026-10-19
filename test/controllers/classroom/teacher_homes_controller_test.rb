@@ -218,7 +218,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
 
     get teacher_home_path
 
-    link = teacher_invite_link_url(Orm::TeacherProfile.find_by!(user: @teacher).referral_token)
+    link = teacher_invite_link_url(Orm::TeacherSchool.find_by!(teacher: @teacher).invite_token)
     message = I18n.t("identity.referrals.invite.message", school: "Lycée Classique d'Abidjan", link:)
     assert_match %r{/i/\h{12}\z}, link
     assert_select "#teacher_home_course_levels li[data-controller='identity--share']" \

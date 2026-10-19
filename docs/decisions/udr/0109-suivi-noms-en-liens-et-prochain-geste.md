@@ -88,7 +88,7 @@ Vocabulaire vérifié par `locale_files_test` : « session », jamais « essai �
 | **Lisible** | phrase selon la dominante et les élèves en baisse |
 | **Chargement** | inchangé (`aria-busy` du cadre) |
 | **Erreur** | inchangé : 403, 404 |
-| **Classe archivée** | inchangé, tout reste lisible ; les liens vers la fiche répondent 404 (la fiche suit la page de la classe, ADR-0088) : **les noms ne sont pas des liens** quand la classe est archivée |
+| **Classe archivée** | 404, comme la page de la classe et la fiche (ADR-0088, `vie-de-la-classe` Lot C, #251) : aucun nom n'y est donc rendu ; tant que le suivi est lisible, chaque nom est un lien |
 
 ### 3.5 Accessibilité
 

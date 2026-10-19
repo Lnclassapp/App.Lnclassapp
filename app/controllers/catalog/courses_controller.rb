@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Catalog::CoursesController
 # Rôle : catalogue filtré, cherché par nom (frame « courses »), par pages chargées au défilement, et page d'un cours ; élève : son niveau, groupé par matière, vue d'une matière ; enseignant : sa matière à ses niveaux
-# ADR  : 0026, 0028, 0035, 0076, 0090 · UDR : 0006, 0013 (amendement du 2026-10-05), 0054, 0069, 0077, 0085
+# ADR  : 0026, 0028, 0035, 0076, 0090, 0094 · UDR : 0006, 0013 (amendement du 2026-10-05), 0054, 0069, 0077, 0085
 module Catalog
   class CoursesController < AuthenticatedController
     include ReadsOwnLevel
@@ -51,7 +51,8 @@ module Catalog
     def teacher_scope
       return unless current_actor.teacher?
 
-      @teacher_scope ||= Queries::Catalog::TeacherAudienceQuery.new.call(teacher_id: current_actor.user_id)
+      @teacher_scope ||= Queries::Catalog::TeacherAudienceQuery.new.call(teacher_id: current_actor.user_id,
+                                                                         school_id: current_actor.school_id)
     end
 
     # UDR-0085 §3.1 : la vue d'une matière de l'élève (?material=<slug>, l'adresse des bulles « Mes matières ») ; nil sur
