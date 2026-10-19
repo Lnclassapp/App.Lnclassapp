@@ -28,8 +28,9 @@ module Repositories
         record && map_to_entity(record)
       end
 
+      # Le dernier signe de vie d'un rapport en cours est son updated_at (rafraîchi par claim, resume et advance), pas son début.
       def fail_stale(kind:, before:, at:)
-        running = Orm::ImportReport.where(status: %w[validating importing], started_at: ...before)
+        running = Orm::ImportReport.where(status: %w[validating importing], updated_at: ...before)
         never_claimed = Orm::ImportReport.where(status: "queued", created_at: ...before)
         Orm::ImportReport.where(kind:).merge(running.or(never_claimed))
                          .update_all(status: "failed", finished_at: at, updated_at: at)
@@ -47,8 +48,7 @@ module Repositories
       def advance(id:, status:, processed_count:, format_version: nil)
         changes = { status:, processed_count:, updated_at: Time.current }
         changes[:format_version] = format_version if format_version
-        Orm::ImportReport.where(id:).update_all(changes)
-        true
+        Orm::ImportReport.where(id:, status: Entities::Catalog::ImportReport::RUNNING).update_all(changes) == 1
       end
 
       def finish(id:, status:, counts:, details:, errors:, at:, files: nil)
@@ -56,8 +56,7 @@ module Repositories
                     import_errors: errors.first(Kind::MAX_ERRORS).map { |error| error.to_h.transform_keys(&:to_s) },
                     finished_at: at, updated_at: at }
         changes[:files] = files.map { dump_file(it) } unless files.nil?
-        Orm::ImportReport.where(id:).update_all(changes)
-        true
+        Orm::ImportReport.where(id:, status: Entities::Catalog::ImportReport::RUNNING).update_all(changes) == 1
       end
 
       private

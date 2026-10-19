@@ -12,7 +12,7 @@ module UseCases
       class FakeReports
         include Ports::Catalog::ImportReportRepositoryPort
 
-        attr_reader :created, :stale
+        attr_reader :created, :stale, :finished
 
         def initialize(running: [])
           @running = running
@@ -21,6 +21,11 @@ module UseCases
         def fail_stale(kind:, before:, at:)
           @stale = [ kind, before, at ]
           0
+        end
+
+        def finish(id:, status:, counts:, details:, errors:, at:, files: nil)
+          @finished = { id:, status:, counts:, details:, errors: errors.map { [ it.path, it.code ] }, at: }
+          true
         end
 
         def create(kind:, checksum_sha256:, imported_by_id:, at:, files: [], details: {})
@@ -40,7 +45,12 @@ module UseCases
 
         attr_reader :enqueued
 
-        def enqueue(kind:, report_id:) = (@enqueued = [ kind, report_id ]) && true
+        def initialize(accepts: true) = @accepts = accepts
+
+        def enqueue(kind:, report_id:)
+          @enqueued = [ kind, report_id ]
+          @accepts
+        end
       end
 
       class FakeSchools
@@ -124,8 +134,10 @@ module UseCases
         assert_equal :invalid, start(selection: {}, typed_count: nil).code
         assert_nil @reports.created
         assert_nil @queue.enqueued
+        assert_nil @reports.stale, "a refused number must not touch any report"
 
         assert start(selection: {}, typed_count: " 214 ").success?
+        assert_equal [ "school_codes", NOW - UseCases::Catalog::StartImport::STALE_AFTER, NOW ], @reports.stale
       end
 
       test "RM-07: an empty selection is refused before the typed number, and nothing is created" do
@@ -135,6 +147,7 @@ module UseCases
 
         assert_equal [ :invalid, { base: [ :empty ] } ], [ result.code, result.errors ]
         assert_nil @reports.created
+        assert_nil @reports.stale
       end
 
       test "RM-08: a regeneration of the same kind already running gives :conflict, and nothing is queued" do
@@ -155,6 +168,16 @@ module UseCases
         assert_nil @schools.asked
         assert_nil @classrooms.asked
         assert_nil @reports.stale
+      end
+
+      test "a job the queue refuses fails the report with its reason and gives :unavailable, so that nothing stays queued for ever" do
+        @queue = FakeQueue.new(accepts: false)
+
+        result = start
+
+        assert_equal [ :unavailable, {} ], [ result.code, result.errors ]
+        assert_equal({ id: 41, status: "failed", counts: { total_count: 0, imported_count: 0, skipped_count: 0, error_count: 0 },
+                       details: @reports.created[:details], errors: [ [ "$", "not_enqueued" ] ], at: NOW }, @reports.finished)
       end
 
       test "an unknown target is invalid, and nothing is read" do

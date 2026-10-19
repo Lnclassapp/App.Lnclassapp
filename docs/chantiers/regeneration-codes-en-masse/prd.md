@@ -50,7 +50,7 @@ Règle d'autorisation : `Policies::School::RegenerateCodesInBulkPolicy` (nouvell
 | Compte `content` ou `field`, ou direction | Pas d'action dans le menu ; `GET`/`POST` de la route : 403 |
 | Collision de code dans un lot | Lot rejoué établissement par établissement ; les échecs restants comptent « en erreur », avec le nom de l'établissement |
 | Établissement régénéré un par un pendant le job | Compté « déjà changé », son code n'est pas touché une seconde fois |
-| Job interrompu | Le lancement suivant libère le rapport bloqué depuis 10 minutes (`fail_stale`) ; il est marqué « Échec » |
+| Job interrompu | Arrêt propre : Solid Queue rejoue le job, la reprise saute ce qui a déjà changé. Processus tué net : le rapport est dit « bloqué » à l'écran après 10 minutes sans avancée ; le lancement suivant le passe « Échec » (`fail_stale`, sur `updated_at`), et relancer change de nouveau ce qui l'avait été |
 | Rôle `admin` retiré avant le démarrage du job | Le rapport passe « Échec » sans rien écrire |
 | Lien d'une classe changé un par un (« Changer le lien ») pendant le job | Compté « déjà changé » ; le lien posé par l'enseignant n'est pas écrasé |
 | Job relancé par Solid Queue après la mort de son processus | Il reprend le même rapport ; ce qui a déjà été changé est compté « déjà changé » |

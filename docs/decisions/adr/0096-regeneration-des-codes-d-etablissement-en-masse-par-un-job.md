@@ -86,24 +86,25 @@ Le chantier `inscription-direction-sans-code`, prévu, supprimera le code d'éta
 `call(actor:, dto:)`, `dto` : `Dtos::School::CodeRegenerationInput(target:, selection:, current_year_only:, typed_count:)` ; `target ∈ { "school_codes", "classroom_links" }` ; `selection` : `Dtos::School::SchoolSelection(drena:, school_type:, cycle:, status:, search:, school:)`, normalisé comme les filtres de la liste (`school` : `public_id` d'un établissement ; présent, il remplace les filtres) ; `#scoped?` : `drena` ou `school` présent.
 
 1. Policy → `:forbidden`.
-2. `fail_stale(kind: target, before: now - StartImport::STALE_AFTER, at: now)`.
-3. `count` : `schools.count_for_code_regeneration(selection:, created_before: now)` ou `classrooms.count_for_link_regeneration(selection:, school_year:, created_before: now)`, avec `school_year = SchoolYear.current(now)` si `current_year_only`, sinon `nil` (toutes années). `0` → `:invalid`, `{ base: [:empty] }`.
-4. Hors d'une sélection `scoped?` : `typed_count != count` → `:invalid`, `{ typed_count: [:mismatch] }`, avec le nombre dans `Result#value` pour le réafficher.
+2. `count` : `schools.count_for_code_regeneration(selection:, created_before: now)` ou `classrooms.count_for_link_regeneration(selection:, school_year:, created_before: now)`, avec `school_year = SchoolYear.current(now)` si `current_year_only`, sinon `nil` (toutes années). `0` → `:invalid`, `{ base: [:empty] }`.
+3. Hors d'une sélection `scoped?` : `typed_count != count` → `:invalid`, `{ typed_count: [:mismatch] }`, avec le nombre dans `Result#value` pour le réafficher.
+4. `fail_stale(kind: target, before: now - StartImport::STALE_AFTER, at: now)` (jugé sur `updated_at`), **après** la validation : un nombre refusé ne touche aucun rapport.
 5. `reports.create(kind: target, checksum_sha256: nil, imported_by_id:, at: now, details: { "selection" => selection.to_h.merge("school_year" => school_year), "expected_count" => count })` ; l'index « un seul en cours par `kind` » donne `:conflict`.
-6. `queue.enqueue(kind: target, report_id:)`.
+6. `queue.enqueue(kind: target, report_id:)` ; `false` → rapport `failed` (motif `not_enqueued`) et `:unavailable` (§4.8).
 
-→ `Result(ImportReport) | :forbidden | :invalid | :conflict`. Rien n'est écrit dans `schools` ni `classrooms` ici.
+→ `Result(ImportReport) | :forbidden | :invalid | :conflict | :unavailable`. Rien n'est écrit dans `schools` ni `classrooms` ici.
 
 ### 4.3 Exécution — moteur `UseCases::School::RegenerateInBulk`
 
-Classe de base du domaine ; deux use cases concrets : `UseCases::School::RegenerateSchoolCodes` et `UseCases::Classroom::RegenerateClassroomLinks`. Deux jobs fins (`School::RegenerateSchoolCodesJob`, `Classroom::RegenerateClassroomLinksJob`, `limits_concurrency to: 1`, `discard_on ActiveJob::DeserializationError`) les câblent sur les repositories réels.
+Classe de base du domaine ; deux use cases concrets : `UseCases::School::RegenerateSchoolCodes` et `UseCases::Classroom::RegenerateClassroomLinks`. Deux jobs fins (`School::RegenerateSchoolCodesJob`, `Classroom::RegenerateClassroomLinksJob`, `limits_concurrency to: 1, duration: STALE_AFTER` (le verrou tombe avec la limite d'un rapport sans signe de vie), `discard_on ActiveJob::DeserializationError`) les câblent sur les repositories réels.
 
-- `claim` le rapport ; s'il est déjà pris, `resume` (rapport `validating` ou `importing` d'un job tué et relancé par Solid Queue) ; sinon `:conflict` (`already_claimed`) et rien n'est écrit : **exécuter deux fois le même rapport ne change rien de plus**.
-- Relit l'auteur et **revérifie la policy** : refus → rapport `failed`, rien d'écrit.
+- `claim` le rapport ; s'il est déjà pris, `resume` (rapport `validating` ou `importing` d'un job que Solid Queue relance **après un arrêt propre** du processus) ; sinon `:conflict` (`already_claimed`) et rien n'est écrit : **exécuter deux fois le même rapport ne change rien de plus**.
+- **Un processus tué net n'est pas rejoué** (Solid Queue 1.7 ne relance qu'après un arrêt propre) : le rapport reste `importing`. Il est dit **bloqué** à l'écran dès que son `updated_at` (rafraîchi à chaque lot) dépasse `STALE_AFTER`, sans attendre un nouveau lancement, et passé `failed` (`fail_stale`, jugé sur `updated_at`) au prochain lancement du même genre, **après** la validation de ce lancement. `advance` et `finish` ne touchent qu'un rapport encore en cours et rendent `false` sinon : le moteur s'arrête alors, sans rien écrire de plus.
+- Relit l'auteur et **revérifie la policy** : refus (droit retiré, ou compte anonymisé — `actor_for` ne rend alors aucun acteur) → rapport `failed` **avec son motif** (`ImportError` `forbidden`, affiché dans le rapport), rien d'écrit.
 - `launched_at = report.created_at`. Puis, tant que le lot n'est pas vide : `batch` (candidats `Entities::School::RegenerationCandidate(id, public_id, label, school_id, rotated_at)`, par `id` croissant) ;
   - un candidat dont `rotated_at >= launched_at` est compté `skipped` (« déjà changé »), sans écriture ;
   - les autres sont écrits par `@transaction.attempt { ids = replace(...) ; @audit_log.record_many(entries: lignes des ids écrits) }` ; la garde SQL (§4.4) écarte un candidat changé entre la lecture et l'écriture : il est compté `skipped` ;
-  - lot refusé (`:conflict` : code ou jeton déjà pris) : rejoué objet par objet, 5 tirages au plus (ADR-0057) ; un échec restant compte `error`, avec le **libellé** de l'objet comme chemin (nom de l'établissement, ou « établissement · classe »), jamais un code ;
+  - lot refusé : rejoué objet par objet ; un objet n'est rejoué (5 tirages au plus, ADR-0057) que sur **collision** (`RecordNotUnique`, code ou jeton déjà pris) ; toute autre cause (`TransactionPort#attempt_with_cause`) : une seule tentative, un `Rails.logger.warn` avec le `public_id` du rapport et le libellé de l'objet, jamais le code ; un échec restant compte `error` (`write_failed`, avec la classe de l'exception), avec le **libellé** de l'objet comme chemin (nom de l'établissement, ou « établissement · classe »), jamais un code ;
   - `@reports.advance(id:, status: "importing", processed_count:)`.
 - Fin : `finish(counts: { imported: changés, skipped: déjà changés, error: }, details: ceux du lancement, errors:)` ; journal `import.run` avec le `kind`.
 - **Codes d'établissement** : `taken = schools.taken_school_codes` (une fois) ; codes tirés par `SchoolCode.generate_unique(count:, taken:)` ; `replace_school_codes(rows:, at:, unchanged_since: launched_at)`.
@@ -147,12 +148,19 @@ Une migration :
 
 Appliqués sans attendre : `admin` seulement ; ni affichage ni export en masse des nouveaux codes et liens ; aucune notification ; gestes un par un inchangés ; l'ancien lien de classe cesse aussitôt de marcher ; classes archivées non touchées ; option « année en cours seulement » cochée par défaut.
 
+### 4.8 Corrections après revue (2026-10-19)
+
+- **Rapport bloqué** : un processus tué net ne rejoue rien (§4.3). L'écran dit « bloqué » dès que `updated_at` dépasse `STALE_AFTER` (message : relancer depuis la liste ; les codes déjà changés le seront de nouveau) ; `fail_stale` juge sur `updated_at` et non `started_at`, et n'est appelé qu'après la validation du lancement ; `limits_concurrency` des deux jobs porte `duration: STALE_AFTER`.
+- **Rapport `failed`** : l'écran garde les compteurs et la liste des motifs ; le droit retiré ou le compte anonymisé de l'auteur y laisse le motif `forbidden` ; une mise en file refusée, le motif `not_enqueued`.
+- **Mise en file refusée** : `ImportQueuePort#enqueue` rend `false` quand `perform_later` rend `false` (ActiveJob 8.1 avale l'`EnqueueError`) ; le lancement passe alors le rapport `failed` et rend `:unavailable`, septième code de `Shared::Result` (amende l'ADR-0026).
+- **Compte anonymisé** : `UserRepositoryPort#actor_for` ne rend aucun acteur pour un compte anonymisé ; la policy le refuse comme un visiteur.
+
 ## 5. Conséquences
 
 ### 🟢 Positives
 
 - Une DRENA ou tout le pays change de codes, ou de liens de classes, en trois gestes, sans bloquer l'application.
-- Relancer ou reprendre est sans risque : un objet changé depuis le lancement — par le job lui-même avant une panne, ou un par un pendant le job — est sauté, et la garde est dans l'`UPDATE`, pas dans une lecture préalable.
+- **Reprendre le même rapport** est sans risque : un objet changé depuis le lancement — par le job lui-même avant une panne, ou un par un pendant le job — est sauté, et la garde est dans l'`UPDATE`, pas dans une lecture préalable. **Relancer après un arrêt** (rapport `failed`, nouveau rapport, nouveau `created_at`) change de nouveau ce qui l'avait déjà été : l'écran le dit.
 - Aucun code ni jeton hors de leurs tables : le rapport et le journal n'en portent pas ; l'écran des imports n'a pas besoin de `secret_response`.
 - Suivi, historique et reprise sont ceux des imports : aucun écran de suivi nouveau.
 
@@ -196,5 +204,6 @@ end
 - `test/domain/use_cases/school/regenerate_school_codes_test.rb` et `test/domain/use_cases/classroom/regenerate_classroom_links_test.rb` : lots, « déjà changé », garde au moment de l'écriture, collision puis rejeu, droit retiré, reprise d'un rapport pris, second passage sans effet, `record_many` avec `report_public_id`.
 - `test/infrastructure/repositories/school/school_repository_code_regeneration_test.rb` et `test/infrastructure/repositories/classroom/classroom_repository_link_regeneration_test.rb` : sélection identique à la liste, `created_before`, garde `unchanged_since`, index unique.
 - `test/jobs/school/regenerate_school_codes_job_test.rb` et `test/jobs/classroom/regenerate_classroom_links_job_test.rb` : bout en bout sur une vraie base ; aucun code ni jeton dans `import_reports` ni dans `audit_events.metadata`.
+- `test/support/fake_transaction.rb`, `test/infrastructure/repositories/shared/transaction_test.rb` : collision ou autre refus, rejeu ou non ; `test/infrastructure/repositories/catalog/import_report_repository_test.rb` : `fail_stale` sur `updated_at`, `advance` et `finish` d'un rapport encore en cours ; `test/controllers/teams/imports_controller_test.rb` : rapport bloqué, rapport échoué avec ses compteurs et son motif ; `test/integration/school/code_regeneration_end_to_end_test.rb` : l'ancien code et l'ancien lien ne marchent plus.
 - `test/db/schema_constraints_test.rb` : les deux `kind` acceptés, checksum nul pour eux, `link_token_rotated_at` nul.
 - `test/system/teams/code_regeneration_test.rb` : lancement depuis la liste et depuis la fiche, nombre tapé, rapport.

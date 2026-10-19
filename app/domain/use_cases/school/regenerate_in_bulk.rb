@@ -7,7 +7,8 @@ module UseCases
     # `replace(candidates, at:, unchanged_since:)` → [ids écrits] et `audit_entry(candidate)` → sujet et métadonnées.
     class RegenerateInBulk
       BATCH_SIZE = 200
-      # Un code tiré déjà pris est refusé par l'index unique : un objet est rejoué cinq fois au plus (ADR-0057).
+      # Un code tiré déjà pris est refusé par l'index unique : un objet est rejoué cinq fois au plus, sur collision seulement ;
+      # tout autre refus de la base n'est tenté qu'une fois (ADR-0057, ADR-0096 §4.3).
       ATTEMPTS = 5
 
       # reports : Ports::Catalog::ImportReportRepositoryPort ; users : Ports::Identity::UserRepositoryPort ;
@@ -23,11 +24,13 @@ module UseCases
         @batch_size = batch_size
       end
 
-      # → Result(ImportReport completed) | :conflict (ni à prendre ni à reprendre : déjà fini, ou inconnu) | :forbidden
-      # (droit retiré : failed). Une exception imprévue passe le rapport failed, puis remonte au job.
+      # → Result(ImportReport completed) | :conflict (ni à prendre ni à reprendre : déjà fini, ou inconnu ; ou plus en cours en
+      # chemin : passé failed par un nouveau lancement) | :forbidden (droit retiré ou compte anonymisé : failed, avec son motif).
+      # Une exception imprévue passe le rapport failed, puis remonte au job.
       def call(report_id:)
         now = @clock.now
-        # Repris : Solid Queue relance le job d'un processus mort ; la garde « inchangé depuis le lancement » évite le double.
+        # Repris : Solid Queue ne relance un job qu'après un arrêt propre du processus ; un processus tué net laisse le rapport
+        # importing jusqu'au prochain lancement, qui le passe failed (fail_stale). La garde « inchangé depuis le lancement » évite le double.
         unless @reports.claim(id: report_id, at: now) || @reports.resume(id: report_id, at: now)
           return Shared::Result.failure(:conflict, errors: { base: [ :already_claimed ] })
         end
@@ -46,20 +49,28 @@ module UseCases
 
       def run(report)
         actor = @users.actor_for(user_id: report.imported_by_id)
-        if @policy.call(actor:).failure?
-          finish(report, "failed")
-          return Shared::Result.failure(:forbidden)
-        end
+        return forbid(report) if @policy.call(actor:).failure?
+        return stopped unless @reports.advance(id: report.id, status: "importing", processed_count: 0)
 
-        @reports.advance(id: report.id, status: "importing", processed_count: 0)
         prepare
-        regenerate(report)
-        finish(report, "completed")
+        return stopped unless regenerate(report) && finish(report, "completed")
+
         audit(report)
         Shared::Result.success(@reports.find(id: report.id))
       end
 
+      # Le motif est au rapport (UDR-0105) : le droit de l'auteur a été retiré, ou son compte anonymisé, depuis le lancement.
+      def forbid(report)
+        @tally.note([ Entities::Catalog::ImportError.new(path: "$", code: "forbidden") ])
+        finish(report, "failed")
+        Shared::Result.failure(:forbidden)
+      end
+
+      # Un nouveau lancement a passé ce rapport failed (fail_stale) pendant que le job tournait encore : il s'arrête sans rien dire de plus.
+      def stopped = Shared::Result.failure(:conflict, errors: { base: [ :no_longer_running ] })
+
       # La sélection est rejouée lot après lot, bornée au lancement : un objet créé ensuite n'en est pas (RM-14).
+      # → false si le rapport n'est plus en cours (advance refusé) : le moteur s'arrête.
       def regenerate(report)
         selection = Dtos::School::SchoolSelection.from(report.details["selection"])
         school_year = report.details.dig("selection", "school_year")
@@ -71,8 +82,9 @@ module UseCases
 
           write_batch(batch, report)
           after_id = batch.last.id
-          @reports.advance(id: report.id, status: "importing", processed_count: done += batch.size)
+          return false unless @reports.advance(id: report.id, status: "importing", processed_count: done += batch.size)
         end
+        true
       end
 
       # Changé depuis le lancement (un par un, ou avant la mort du job) : compté « déjà changé », jamais réécrit.
@@ -84,16 +96,27 @@ module UseCases
         written = @transaction.attempt { write(fresh, report) }
         return count(fresh, written.value) if written.success?
 
-        # Lot refusé (code ou jeton déjà pris) : rejoué objet par objet.
+        # Lot refusé : rejoué objet par objet.
         fresh.each { write_one(it, report) }
       end
 
+      # Rejoué seulement sur collision (code ou jeton déjà pris, un autre sera tiré) ; toute autre cause : une seule tentative.
       def write_one(candidate, report)
+        refusal = nil
         ATTEMPTS.times do
-          written = @transaction.attempt { write([ candidate ], report) }
+          written = @transaction.attempt_with_cause { write([ candidate ], report) }
           return count([ candidate ], written.value) if written.success?
+
+          refusal = written
+          break unless written.errors[:cause] == [ :collision ]
         end
-        @tally.invalid([ Entities::Catalog::ImportError.new(path: candidate.label, code: "write_failed", params: {}) ])
+        refuse(candidate, report, refusal.errors.fetch(:exception).first)
+      end
+
+      # L'objet est en erreur avec la classe de l'exception ; le journal nomme le rapport et l'objet, jamais un code ni un jeton.
+      def refuse(candidate, report, exception)
+        Rails.logger.warn("[regeneration] écriture refusée : rapport #{report.public_id}, #{candidate.label}, #{exception}")
+        @tally.invalid([ Entities::Catalog::ImportError.new(path: candidate.label, code: "write_failed", params: { exception: }) ])
       end
 
       # Un seul UPDATE gardé, puis une ligne d'audit par objet écrit, dans la même transaction. → [ids écrits]

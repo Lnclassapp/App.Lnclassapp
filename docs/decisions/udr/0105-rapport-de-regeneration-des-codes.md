@@ -50,7 +50,8 @@ Après « Régénérer les codes d'établissement » ou « Régénérer les lien
 | `counters.skipped` | « Déjà changés » | « Déjà changés » |
 | `counters.errors` | « En erreur » | « En erreur » |
 | `counters.total` | « Établissements traités » | « Classes traitées » |
-| `failed` | « La régénération s'est arrêtée sur une erreur imprévue. Relancée, elle ne change pas de nouveau ce qui l'a déjà été depuis son lancement. » | idem |
+| `failed` | « La régénération s'est arrêtée avant la fin. Ce qui a été changé le reste. Les codes déjà changés le seront de nouveau si vous la relancez : une nouvelle régénération repart du début de la sélection. » ; sous le message, les compteurs et le motif de l'arrêt s'il y en a un (droit retiré, file indisponible) | idem, « liens » |
+| `stalled` (rapport en cours sans avancée depuis 10 minutes) | « Cette régénération semble bloquée : elle n'a pas avancé depuis plus de 10 minutes, son traitement s'est probablement interrompu. Relancez-la depuis la liste des établissements : les codes déjà changés le seront de nouveau. » | idem, « liens » |
 | `details.expected_count` | « Attendus au lancement » | idem |
 | `import_kinds.<kind>` | « Régénération des codes » | « Régénération des liens des classes » |
 

@@ -19,6 +19,7 @@ module Dtos
         assert_equal 3912, input(typed_count: "3.912").typed_count
         assert_nil input(typed_count: "").typed_count
         assert_nil input(typed_count: "douze").typed_count
+        assert_nil input(typed_count: "12345678").typed_count
         assert_nil input.typed_count
       end
 

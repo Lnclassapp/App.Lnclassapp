@@ -46,16 +46,46 @@ module Repositories
         assert_equal :conflict, @repository.create(kind: "classrooms", checksum_sha256: nil, imported_by_id: @member.id, at: @at).code
       end
 
-      test "fail_stale passe failed les rapports commencés avant la limite, et eux seuls" do
-        stale = create_import_report(kind: "schools", status: "importing", started_at: @at - 11.minutes)
-        fresh = create_import_report(kind: "essentials", status: "validating", started_at: @at - 5.minutes)
-        other = create_import_report(kind: "exercises", status: "importing", started_at: @at - 2.hours)
+      test "fail_stale passe failed les rapports sans signe de vie depuis la limite, et eux seuls" do
+        stale = create_import_report(kind: "schools", status: "importing", started_at: @at - 11.minutes, updated_at: @at - 11.minutes)
+        fresh = create_import_report(kind: "essentials", status: "validating", started_at: @at - 5.minutes, updated_at: @at - 5.minutes)
+        other = create_import_report(kind: "exercises", status: "importing", started_at: @at - 2.hours, updated_at: @at - 2.hours)
 
         assert_equal 1, @repository.fail_stale(kind: "schools", before: @at - 10.minutes, at: @at)
         assert_equal [ "failed", @at ], stale.reload.attributes.values_at("status", "finished_at")
         assert_equal "validating", fresh.reload.status
         assert_equal "importing", other.reload.status
         assert create_report
+      end
+
+      test "fail_stale juge sur la dernière avancée, pas sur le début : un rapport qui avance n'est pas rendu failed" do
+        report = create_import_report(kind: "school_codes", checksum_sha256: nil, status: "importing", started_at: @at - 2.hours,
+                                      updated_at: @at - 2.hours)
+        @repository.advance(id: report.id, status: "importing", processed_count: 200)
+
+        assert_equal 0, @repository.fail_stale(kind: "school_codes", before: @at - 10.minutes, at: @at)
+        assert_equal "importing", report.reload.status
+
+        report.update_columns(updated_at: @at - 11.minutes)
+
+        assert_equal 1, @repository.fail_stale(kind: "school_codes", before: @at - 10.minutes, at: @at)
+        assert_equal "failed", report.reload.status
+      end
+
+      test "advance et finish ne touchent qu'un rapport encore en cours, et rendent false sinon" do
+        report = create_import_report(kind: "school_codes", checksum_sha256: nil, status: "failed", finished_at: @at, processed_count: 7,
+                                      updated_at: @at - 1.hour)
+
+        assert_equal false, @repository.advance(id: report.id, status: "importing", processed_count: 200)
+        assert_equal false, @repository.finish(id: report.id, status: "completed", counts: { imported_count: 9 }, details: {}, errors: [], at: @at)
+        assert_equal [ "failed", 7, 0 ], report.reload.values_at(:status, :processed_count, :imported_count)
+        assert_equal @at - 1.hour, report.updated_at
+
+        running = create_import_report(kind: "classroom_links", checksum_sha256: nil, status: "importing")
+
+        assert_equal true, @repository.advance(id: running.id, status: "importing", processed_count: 5)
+        assert_equal true, @repository.finish(id: running.id, status: "completed", counts: {}, details: {}, errors: [], at: @at)
+        assert_equal false, @repository.advance(id: running.id, status: "importing", processed_count: 6)
       end
 
       test "fail_stale passe aussi failed un rapport resté en file au-delà de la limite (job jamais pris)" do

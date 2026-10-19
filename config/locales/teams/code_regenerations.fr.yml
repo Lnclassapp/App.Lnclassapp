@@ -66,11 +66,16 @@ fr:
         started:
           school_codes: "Régénération des codes lancée."
           classroom_links: "Régénération des liens des classes lancée."
+        unavailable: "La régénération n'a pas pu être lancée. Réessayez dans un instant."
         already_running_title: "Régénération déjà en cours"
         already_running:
           school_codes: "Une régénération des codes est déjà en cours : voici son avancement."
           classroom_links: "Une régénération des liens des classes est déjà en cours : voici son avancement."
     imports:
+      # Motifs propres aux rapports de régénération (ImportError forbidden, not_enqueued).
+      error_codes:
+        forbidden: "Le droit de lancer cette régénération a été retiré à son auteur (ou son compte a été anonymisé) : rien n'a été changé après ce retrait."
+        not_enqueued: "La régénération n'a pas pu être mise en file : rien n'a été changé."
       show:
         # Seconde ligne du sous-titre d'un rapport de régénération (UDR-0105) : la sélection, jamais un code.
         selection:
@@ -82,6 +87,7 @@ fr:
           school_year: "année %{year}"
           all_years: "toutes les années"
       status:
+        stalled: "Ce traitement semble bloqué : il n'a pas avancé depuis plus de %{minutes} minutes. Relancez-le depuis l'écran des imports."
         skipped_tip: "Leur code ou leur lien avait déjà été changé depuis le lancement, un par un ou par une reprise : il n'a pas été changé une seconde fois."
         details:
           expected_count: "Attendus au lancement"
@@ -102,7 +108,8 @@ fr:
               skipped: "Déjà changés"
               errors: "En erreur"
               total: "Établissements traités"
-            failed: "La régénération s'est arrêtée sur une erreur imprévue. Relancée, elle ne change pas de nouveau ce qui l'a déjà été depuis son lancement."
+            failed: "La régénération s'est arrêtée avant la fin. Ce qui a été changé le reste. Les codes déjà changés le seront de nouveau si vous la relancez : une nouvelle régénération repart du début de la sélection."
+            stalled: "Cette régénération semble bloquée : elle n'a pas avancé depuis plus de %{minutes} minutes, son traitement s'est probablement interrompu. Relancez-la depuis la liste des établissements : les codes déjà changés le seront de nouveau."
           classroom_links:
             statuses:
               validating: "Préparation"
@@ -119,4 +126,5 @@ fr:
               skipped: "Déjà changés"
               errors: "En erreur"
               total: "Classes traitées"
-            failed: "La régénération s'est arrêtée sur une erreur imprévue. Relancée, elle ne change pas de nouveau ce qui l'a déjà été depuis son lancement."
+            failed: "La régénération s'est arrêtée avant la fin. Ce qui a été changé le reste. Les liens déjà changés le seront de nouveau si vous la relancez : une nouvelle régénération repart du début de la sélection."
+            stalled: "Cette régénération semble bloquée : elle n'a pas avancé depuis plus de %{minutes} minutes, son traitement s'est probablement interrompu. Relancez-la depuis la liste des établissements : les liens déjà changés le seront de nouveau."

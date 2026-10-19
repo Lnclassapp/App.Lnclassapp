@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Identity::UserRepository
 # Rôle : lit et modifie les comptes, vérifie le PIN par bcrypt en temps constant, construit l'acteur, anonymise un compte
-# ADR  : 0026, 0028, 0036, 0050, 0055, 0065, 0077, 0082, 0084, 0094
+# ADR  : 0026, 0028, 0036, 0050, 0055, 0065, 0077, 0082, 0084, 0094, 0096
 module Repositories
   module Identity
     class UserRepository
@@ -54,8 +54,11 @@ module Repositories
         true
       end
 
+      # Un compte anonymisé n'agit plus : nil, comme un visiteur (ADR-0096 §4.1).
       def actor_for(user_id:, current_school_id: nil)
         user = Orm::User.find(user_id)
+        return if user.anonymized_at
+
         Entities::Identity::Actor.new(user_id:, role: user.role.to_sym, team_role: user.team_role,
                                       school_id: school_id_of(user, current_school_id))
       end

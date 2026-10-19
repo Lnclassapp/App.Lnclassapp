@@ -34,13 +34,16 @@ class Teams::CodeRegenerationsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::ImportReport.count
   end
 
-  test "RM-09: content and field see neither the « Codes » menu of the list nor the entry of the card" do
-    sign_in_as create_team_member(team_role: "field")
+  test "RM-09, RM-22: content and field see neither the « Codes » menu of the list nor the entry of the card" do
+    %w[content field].each do |team_role|
+      sign_in_as create_team_member(team_role:)
 
-    get schools_path
-    assert_select "#schools-codes-menu", 0
-    get school_path(@lycee.public_id)
-    assert_select "a[href*='code-regenerations']", 0
+      get schools_path
+      assert_select "#schools-codes-menu", 0
+      get school_path(@lycee.public_id)
+      assert_select "a[href*='code-regenerations']", 0
+      sign_out
+    end
   end
 
   test "the admin sees the « Codes » menu right of « Classes », with both actions carrying the filters of the list" do
@@ -211,15 +214,33 @@ class Teams::CodeRegenerationsControllerTest < ActionDispatch::IntegrationTest
 
   test "RM-08: while a regeneration of the same kind runs, the admin is led to it with an information toast" do
     running = create_import_report(kind: "school_codes", checksum_sha256: nil, status: "importing", started_at: Time.current)
+    create_import_report(kind: "classroom_links", checksum_sha256: nil, status: "completed", finished_at: Time.current,
+                                       created_at: 1.minute.ago)
+    running.update_columns(created_at: 1.hour.ago)
     sign_in_as @admin
 
     assert_no_enqueued_jobs { regenerate }
 
+    assert_equal 1, Orm::ImportReport.where(kind: "school_codes").count
     assert_redirected_to teams_import_path(running.public_id)
     follow_redirect!
     assert_select "#toasts [data-toast-type=info]" do
       assert_select "p.font-semibold", text: "Régénération déjà en cours"
       assert_select "p.text-mute", text: "Une régénération des codes est déjà en cours : voici son avancement."
     end
+  end
+
+  test "a job the queue refuses: the report is failed with its reason, nothing stays queued, the admin is told to retry" do
+    sign_in_as @admin
+
+    stub_any_instance(Repositories::Catalog::ImportQueue, :enqueue, ->(**) { false }) { regenerate }
+
+    report = Orm::ImportReport.sole
+    assert_equal "failed", report.status
+    assert_equal [ "not_enqueued" ], report.import_errors.pluck("code")
+    assert_redirected_to teams_imports_path
+    assert_response :see_other
+    assert_equal "La régénération n'a pas pu être lancée. Réessayez dans un instant.", flash[:alert]
+    assert_enqueued_jobs 0
   end
 end

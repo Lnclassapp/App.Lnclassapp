@@ -12,12 +12,13 @@ module UseCases
       class FakeClassrooms
         include Ports::Classroom::ClassroomRepositoryPort
 
-        attr_reader :rotated, :batches
+        attr_reader :rotated, :batches, :writes
 
         def initialize(candidates, refused: [])
           @candidates = candidates
           @refused = refused
           @rotated = []
+          @writes = []
           @batches = []
         end
 
@@ -30,6 +31,7 @@ module UseCases
           raise FakeTransaction::Refused if ids.size > 1 && ids.intersect?(@refused)
 
           @rotated.concat(ids)
+          @writes << [ ids, at, unchanged_since ]
           ids
         end
       end
@@ -54,6 +56,7 @@ module UseCases
         assert regenerate(classrooms).success?
 
         assert_equal [ 10, 11 ], @classrooms.rotated
+        assert_equal [ [ [ 10, 11 ], LAUNCH + 1.minute, LAUNCH ] ], @classrooms.writes
         assert_equal [ { "school" => "lycee42" }, "2026-2027", LAUNCH ], @classrooms.batches.first
         assert_equal({ total_count: 2, imported_count: 2, skipped_count: 0, error_count: 0 }, @reports.finished[:counts])
       end

@@ -18,11 +18,13 @@ module Teams
     end
 
     # Succès : le rapport, rechargé tant qu'il tourne. Déjà en cours : état attendu ; toast d'information et rapport de celle
-    # qui tourne. Nombre faux ou sélection vide : la modale revient, recomptée (422).
+    # qui tourne. Nombre faux ou sélection vide : la modale revient, recomptée (422). File indisponible : rien n'est changé,
+    # le rapport est failed et l'équipe est invitée à réessayer.
     def create
       @form = form_input
       result = start.call(actor: current_actor, dto: @form)
       return redirect_to_running if result.code == :conflict
+      return redirect_to_unavailable if result.code == :unavailable
       return refuse(result) if result.code == :invalid
 
       render_result result, success: lambda { |report|
@@ -64,6 +66,10 @@ module Teams
       redirect_to teams_import_path(running.public_id), status: :see_other, flash: {
         info: { "title" => t(".already_running_title"), "message" => t(".already_running.#{@form.target}") }
       }
+    end
+
+    def redirect_to_unavailable
+      redirect_to teams_imports_path, status: :see_other, flash: { alert: t(".unavailable") }
     end
 
     def start

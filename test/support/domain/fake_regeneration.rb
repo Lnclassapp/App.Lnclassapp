@@ -8,7 +8,11 @@ module FakeRegeneration
 
     attr_reader :report, :advances, :finished
 
-    def initialize(kind:, status: "queued", details: { "selection" => { "drena" => "abidjan-1" }, "expected_count" => 3 })
+    # advance_refused_after : nombre d'avancées acceptées avant que le rapport ne soit plus en cours (passé failed par ailleurs).
+    def initialize(kind:, status: "queued", details: { "selection" => { "drena" => "abidjan-1" }, "expected_count" => 3 },
+                   advance_refused_after: nil, finish_refused: false)
+      @advance_refused_after = advance_refused_after
+      @finish_refused = finish_refused
       @report = Entities::Catalog::ImportReport.new(
         id: 1, public_id: "rapport1", kind:, status:, format_version: nil, total_count: 0, imported_count: 0, skipped_count: 0,
         error_count: 0, processed_count: 0, details:, import_errors: [], imported_by_id: 7, started_at: nil, finished_at: nil,
@@ -22,15 +26,17 @@ module FakeRegeneration
     def find(id:) = @report
 
     def advance(id:, status:, processed_count:, format_version: nil)
+      return false if @advance_refused_after && @advances.size >= @advance_refused_after
+
       @advances << processed_count
       @report = @report.with(status:, processed_count:)
       true
     end
 
     def finish(id:, status:, counts:, details:, errors:, at:)
-      @finished = { status:, counts:, details:, errors: errors.map { [ it.path, it.code ] } }
+      @finished = { status:, counts:, details:, errors: errors.map { [ it.path, it.code ] }, error_params: errors.map(&:params) }
       @report = @report.with(status:, **counts, details:, import_errors: errors, finished_at: at)
-      true
+      !@finish_refused
     end
   end
 
@@ -38,7 +44,7 @@ module FakeRegeneration
     include Ports::Identity::UserRepositoryPort
 
     def initialize(actor) = @actor = actor
-    def actor_for(user_id:) = @actor
+    def actor_for(user_id:, current_school_id: nil) = (@actor if user_id == 7)
   end
 
   class AuditLog

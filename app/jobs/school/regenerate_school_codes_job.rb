@@ -4,7 +4,8 @@
 module School
   class RegenerateSchoolCodesJob < ApplicationJob
     # Une seule régénération des codes à la fois : une seconde attend que la première soit finie.
-    limits_concurrency to: 1, key: ->(_report_id) { self.class.name }
+    # Le verrou tombe après la limite d'un rapport sans signe de vie : un job tué net ne bloque pas le suivant (ADR-0096 §4.3).
+    limits_concurrency to: 1, key: ->(_report_id) { self.class.name }, duration: UseCases::Catalog::StartImport::STALE_AFTER.seconds
     discard_on ActiveJob::DeserializationError
 
     def perform(report_id)

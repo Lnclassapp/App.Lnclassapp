@@ -67,4 +67,50 @@ class Classroom::RegenerateClassroomLinksJobTest < ActiveJob::TestCase
     assert_equal tokens, classrooms.map { it.reload.link_token }
     assert_equal 2, events.count
   end
+
+  test "the right withdrawn before the run: the report fails with its reason, no link changes, no school.changed" do
+    active = classroom(name: "6e 1")
+    token = active.link_token
+    report = launch
+    @author.update!(team_role: "content")
+
+    Classroom::RegenerateClassroomLinksJob.perform_now(report.id)
+
+    assert_equal "failed", report.reload.status
+    assert_equal [ "forbidden" ], report.import_errors.pluck("code")
+    assert_equal token, active.reload.link_token
+    assert_equal 0, Orm::AuditEvent.where(action: "school.changed").count
+  end
+
+  test "RM-21: a job that died is resumed: the link changed after the launch stays as it is, the other changes" do
+    done = classroom(name: "6e 1")
+    done.update_columns(link_token_rotated_at: @launch + 5.seconds)
+    waiting = classroom(name: "6e 2")
+    tokens = [ done.link_token, waiting.link_token ]
+    report = launch
+    report.update_columns(status: "importing", started_at: @launch + 1.second, processed_count: 1)
+
+    Classroom::RegenerateClassroomLinksJob.perform_now(report.id)
+
+    assert_equal [ "completed", 2, 1, 1, 0 ], report.reload.values_at(:status, :total_count, :imported_count, :skipped_count, :error_count)
+    assert_equal tokens.first, done.reload.link_token
+    assert_not_equal tokens.last, waiting.reload.link_token
+    assert_equal [ waiting.public_id ], Orm::AuditEvent.where(action: "school.changed").map { it.metadata["classroom_public_id"] }
+  end
+
+  test "an unexpected failure fails the report, then reaches the job" do
+    classroom(name: "6e 1")
+    report = launch
+
+    stub_any_instance(Repositories::Classroom::ClassroomRepository, :link_regeneration_batch, ->(**) { raise "x" }) do
+      assert_raises(RuntimeError) { Classroom::RegenerateClassroomLinksJob.perform_now(report.id) }
+    end
+
+    assert_equal "failed", report.reload.status
+  end
+
+  test "the lock of the job falls after the limit of a report without sign of life, so that a killed job blocks no one" do
+    assert_equal UseCases::Catalog::StartImport::STALE_AFTER.seconds, Classroom::RegenerateClassroomLinksJob.concurrency_duration
+    assert_equal 1, Classroom::RegenerateClassroomLinksJob.concurrency_limit
+  end
 end

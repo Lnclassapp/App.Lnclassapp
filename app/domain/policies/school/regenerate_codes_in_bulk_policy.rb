@@ -4,6 +4,7 @@
 module Policies
   module School
     class RegenerateCodesInBulkPolicy
+      # actor nil : visiteur, ou auteur anonymisé depuis le lancement (UserRepositoryPort#actor_for) : refusé.
       def call(actor:)
         return Shared::Result.success if actor&.team? && actor.team_role == "admin"
 

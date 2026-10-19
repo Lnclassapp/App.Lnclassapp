@@ -22,8 +22,8 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_public_id"
       end
 
-      # Passe failed les rapports validating ou importing commencés avant `before` (job tué), et les rapports queued créés
-      # avant `before` (job jamais pris). → Integer
+      # Passe failed les rapports validating ou importing sans signe de vie (updated_at, rafraîchi par claim, resume et advance)
+      # depuis `before` (job tué), et les rapports queued créés avant `before` (job jamais pris). → Integer
       def fail_stale(kind:, before:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #fail_stale"
       end
@@ -38,14 +38,16 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #resume"
       end
 
-      # Progression, au plus une écriture toutes les 100 racines. → true
+      # Progression, au plus une écriture toutes les 100 racines. Ne touche qu'un rapport encore en cours : un rapport passé failed
+      # entre-temps (fail_stale) ne repart pas. → Boolean (false : le rapport n'est plus en cours, l'appelant s'arrête)
       def advance(id:, status:, processed_count:, format_version: nil)
         raise NotImplementedError, "#{self.class} doit implémenter #advance"
       end
 
       # status ∈ completed, rejected, failed ; counts : { total_count:, imported_count:, skipped_count:, error_count: } ;
       # errors : [Entities::Catalog::ImportError], tronqué à ImportKind::MAX_ERRORS ;
-      # files : [Entities::Catalog::ImportFileReport] traités, ou nil pour garder ceux du rapport. → true
+      # files : [Entities::Catalog::ImportFileReport] traités, ou nil pour garder ceux du rapport. Comme advance, ne touche qu'un
+      # rapport encore en cours. → Boolean (false : déjà terminé ou passé failed, rien n'est écrit)
       def finish(id:, status:, counts:, details:, errors:, at:, files: nil)
         raise NotImplementedError, "#{self.class} doit implémenter #finish"
       end

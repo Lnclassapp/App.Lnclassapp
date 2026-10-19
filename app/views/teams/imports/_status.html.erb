@@ -17,20 +17,21 @@
 
     <% case import.status %>
     <% when "queued", "validating", "importing" %>
-      <div class="space-y-2">
-        <p class="text-sm font-medium"><%= report_text(import, "phases.#{import.status}") %></p>
-        <progress class="h-2 w-full overflow-hidden rounded-full accent-brand" aria-label="<%= report_text(import, "phases.#{import.status}") %>"></progress>
-        <p class="text-sm text-mute"><%= report_text(import, "processed", count: import.processed_count) %></p>
-      </div>
+      <%# Aucun signe de vie depuis la limite : le job est mort (ADR-0096 §4.3). Le suivi continue, au cas où il reprendrait. %>
+      <% if import_stalled?(import) %>
+        <div class="space-y-2">
+          <div id="import_stalled" role="alert" class="rounded-ln bg-warning-soft px-4 py-3 text-sm font-medium text-ink"><%= report_text(import, "stalled", minutes: import_stale_minutes) %></div>
+          <p class="text-sm text-mute"><%= report_text(import, "processed", count: import.processed_count) %></p>
+        </div>
+      <% else %>
+        <div class="space-y-2">
+          <p class="text-sm font-medium"><%= report_text(import, "phases.#{import.status}") %></p>
+          <progress class="h-2 w-full overflow-hidden rounded-full accent-brand" aria-label="<%= report_text(import, "phases.#{import.status}") %>"></progress>
+          <p class="text-sm text-mute"><%= report_text(import, "processed", count: import.processed_count) %></p>
+        </div>
+      <% end %>
     <% when "completed" %>
-      <dl class="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <% { imported: import.imported_count, skipped: import.skipped_count, errors: import.error_count, total: import.total_count }.each do |counter, value| %>
-          <div class="rounded-ln bg-mist px-4 py-3">
-            <dt class="text-xs text-mute"><%= report_text(import, "counters.#{counter}") %></dt>
-            <dd id="import_counter_<%= counter %>" class="font-display text-2xl font-extrabold tabular-nums"><%= value %></dd>
-          </div>
-        <% end %>
-      </dl>
+      <%= render "teams/imports/counters", import: %>
       <% if regeneration %>
         <%# Un <details> ne vit pas dans un <p> : le navigateur fermerait le paragraphe avant lui. %>
         <div id="import_skipped_tip" class="-mt-2 text-sm text-mute">
@@ -61,6 +62,13 @@
       <%= render "teams/imports/import_errors", import: %>
     <% when "failed" %>
       <div role="alert" class="rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error"><%= report_text(import, "failed") %></div>
+      <%# Une régénération échouée a pu changer des codes avant de s'arrêter : elle le dit, et le motif de l'arrêt (UDR-0105). %>
+      <% if regeneration %>
+        <%= render "teams/imports/counters", import: %>
+        <% if import.import_errors.any? %>
+          <%= render "teams/imports/import_errors", import: %>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
 <% end %>

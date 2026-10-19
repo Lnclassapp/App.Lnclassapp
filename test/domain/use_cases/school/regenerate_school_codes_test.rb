@@ -14,18 +14,23 @@ module UseCases
       class FakeSchools
         include Ports::School::SchoolRepositoryPort
 
-        attr_reader :codes, :batches, :writes
+        attr_reader :codes, :batches, :writes, :taken_reads
 
-        def initialize(candidates, collisions: {}, changed_meanwhile: [])
+        def initialize(candidates, collisions: {}, changed_meanwhile: [], other_refusals: [])
           @candidates = candidates
           @collisions = collisions.dup
+          @other_refusals = other_refusals
+          @taken_reads = 0
           @changed_meanwhile = changed_meanwhile
           @codes = {}
           @batches = []
           @writes = 0
         end
 
-        def taken_school_codes = Set["aaaaaa"]
+        def taken_school_codes
+          @taken_reads += 1
+          Set["aaaaaa"]
+        end
 
         def code_regeneration_batch(selection:, created_before:, after_id:, limit:)
           @batches << [ selection.to_h, created_before, after_id, limit ]
@@ -34,6 +39,8 @@ module UseCases
 
         def replace_school_codes(rows:, at:, unchanged_since:)
           @writes += 1
+          raise FakeTransaction::OtherRefusal if rows.any? { @other_refusals.include?(it[:id]) }
+
           refused = rows.find { (@collisions[it[:id]] || 0).positive? }
           if refused
             @collisions[refused[:id]] -= 1
@@ -74,7 +81,22 @@ module UseCases
         assert_equal [ 0, 2, 4, 5 ], @schools.batches.map { it[2] }
         assert_equal [ [ { "drena" => "abidjan-1" }, LAUNCH, 0, 2 ] ], @schools.batches.first(1)
         assert_equal({ status: "completed", counts: { total_count: 5, imported_count: 5, skipped_count: 0, error_count: 0 },
-                       details: { "selection" => { "drena" => "abidjan-1" }, "expected_count" => 3 }, errors: [] }, @reports.finished)
+                       details: { "selection" => { "drena" => "abidjan-1" }, "expected_count" => 3 }, errors: [], error_params: [] }, @reports.finished)
+      end
+
+      test "RM-02: the codes already taken are read once and given to every draw, which completes them" do
+        draws = []
+        original = Entities::School::SchoolCode.method(:generate_unique)
+        spy = lambda { |**options|
+          before = options[:taken].dup
+          original.call(**options).tap { draws << [ options[:count], before ] }
+        }
+
+        stub_method(Entities::School::SchoolCode, :generate_unique, spy) { regenerate(schools(3), batch_size: 2) }
+
+        assert_equal 1, @schools.taken_reads
+        assert_equal [ 2, 1 ], draws.map(&:first)
+        assert_equal [ Set["aaaaaa"], 3 ], [ draws.first.last, draws.last.last.size ]
       end
 
       test "RM-05, RM-12: one audit line per school, with the report and never the code; then one import.run" do
@@ -123,13 +145,69 @@ module UseCases
         assert_equal [ 1, 2 ], @audit.many.map { it[:subject_id] }.sort
       end
 
-      test "the right withdrawn before the start fails the report without writing anything" do
+      test "a refusal that is not a collision is tried once, put in error with its exception class, and logged without any code" do
+        warnings = []
+
+        stub_method(Rails.logger, :warn, ->(message) { warnings << message }) do
+          regenerate(schools(3), other_refusals: [ 2 ])
+        end
+
+        assert_equal [ 1, 3 ], @schools.codes.keys.sort
+        assert_equal 1 + 1 + 1 + 1, @schools.writes
+        assert_equal({ total_count: 3, imported_count: 2, skipped_count: 0, error_count: 1 }, @reports.finished[:counts])
+        assert_equal [ [ "Lycée 2", "write_failed" ] ], @reports.finished[:errors]
+        assert_equal [ { exception: "FakeTransaction::OtherRefusal" } ], @reports.finished[:error_params]
+        assert_equal 1, warnings.size
+        assert_match(/rapport1.*Lycée 2.*FakeTransaction::OtherRefusal/, warnings.first)
+        refute(warnings.any? { |message| @schools.codes.values.map(&:first).any? { message.include?(it) } })
+      end
+
+      test "the right withdrawn before the start fails the report with its reason, without writing anything" do
         result = regenerate(schools(2), actor: Fake::FIELD)
 
         assert_equal :forbidden, result.code
         assert_equal "failed", @reports.finished[:status]
+        assert_equal [ [ "$", "forbidden" ] ], @reports.finished[:errors]
         assert_empty @schools.codes
         assert_empty @schools.batches
+      end
+
+      test "an anonymized author has no actor any more: the report fails with its reason, nothing is written" do
+        result = regenerate(schools(2), actor: nil)
+
+        assert_equal :forbidden, result.code
+        assert_equal [ "failed", [ [ "$", "forbidden" ] ] ], @reports.finished.values_at(:status, :errors)
+        assert_empty @schools.codes
+      end
+
+      test "a report already failed as stale when the job starts is not run at all" do
+        @reports = Fake::Reports.new(kind: "school_codes", advance_refused_after: 0)
+
+        result = regenerate(schools(2))
+
+        assert_equal [ :conflict, { base: [ :no_longer_running ] } ], [ result.code, result.errors ]
+        assert_empty @schools.batches
+        assert_nil @reports.finished
+      end
+
+      test "a report no longer running (failed as stale meanwhile) stops the run at the first batch it cannot advance" do
+        @reports = Fake::Reports.new(kind: "school_codes", advance_refused_after: 2)
+
+        result = regenerate(schools(5), batch_size: 2)
+
+        assert_equal [ :conflict, { base: [ :no_longer_running ] } ], [ result.code, result.errors ]
+        assert_equal [ 1, 2, 3, 4 ], @schools.codes.keys
+        assert_nil @reports.finished
+        assert_empty @audit.events
+      end
+
+      test "a report failed as stale just before the end is not closed nor audited as a run" do
+        @reports = Fake::Reports.new(kind: "school_codes", finish_refused: true)
+
+        result = regenerate(schools(2))
+
+        assert_equal [ :conflict, { base: [ :no_longer_running ] } ], [ result.code, result.errors ]
+        assert_empty @audit.events
       end
 
       test "RM-21: a finished report run again changes nothing" do

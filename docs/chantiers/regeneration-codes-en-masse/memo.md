@@ -81,7 +81,7 @@ Le porteur a demandé de lancer les vagues V2 à V6 (2026-10-16). Mais la raison
 - **Sélection vide** (filtre sans résultat) : l'action est refusée, rien n'est mis en file.
 - **Une régénération de masse déjà en cours** : on est renvoyé vers son rapport, avec un message d'information (comme la génération des classes).
 - **Collision** entre un code tiré et un code pris entre-temps (import, régénération un par un) : le lot est rejoué établissement par établissement, avec les 5 tirages de l'ADR-0057 ; un établissement qui échoue encore passe « en erreur », les autres sont écrits.
-- **Job interrompu** (redémarrage) : le rapport bloqué depuis 10 minutes est libéré par le lancement suivant (`fail_stale`) ; une reprise ne touche que les établissements dont le code n'a pas changé depuis le lancement.
+- **Job interrompu** : après un arrêt propre, Solid Queue rejoue le job et la reprise ne touche que ce qui n'a pas changé depuis le lancement ; un processus tué net laisse le rapport « bloqué » (dit à l'écran après 10 minutes sans avancée), libéré par le lancement suivant (`fail_stale`), qui change de nouveau ce qui l'avait été.
 - **Une direction en train de s'inscrire** avec l'ancien code : son envoi reçoit l'erreur neutre « Code d'établissement invalide » (`RegisterSchoolStaff`, inchangé).
 - **Droit retiré pendant le job** (le compte `admin` perd son rôle) : le job revérifie la policy de l'auteur au démarrage et passe le rapport en échec, comme l'ADR-0056.
 - **Import d'établissements pendant le job** : les établissements créés après le lancement ne sont pas pris.
