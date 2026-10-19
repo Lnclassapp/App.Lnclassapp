@@ -142,4 +142,18 @@ class Teams::SchoolStaffRestorationsControllerTest < ActionDispatch::Integration
     assert_not_nil staff_of(@aya).archived_at
     assert_not Orm::AuditEvent.exists?(action: "school_staff.restored")
   end
+
+  # ED-25 (ADR-0092 §4.3, UDR-0092 §3.4) : l'ancien chef ne se restaure pas tant qu'un autre chef est actif.
+  test "ED-25: the former head is not restored while another head is active: 409, the toast, nothing written" do
+    former = create_school_admin(school: @school, first_name: "Jean", last_name: "Kouamé", position: "head", archived_at: 2.days.ago)
+    create_school_admin(school: @school, position: "head")
+
+    sign_in_as @admin
+    restore former, as: :turbo_stream
+
+    assert_response :conflict
+    assert_select "turbo-stream[action=append][target=toasts]", text: /#{Regexp.escape(ts('head_taken'))}/
+    assert_not_nil staff_of(former).archived_at
+    assert_not Orm::AuditEvent.exists?(action: "school_staff.restored")
+  end
 end
