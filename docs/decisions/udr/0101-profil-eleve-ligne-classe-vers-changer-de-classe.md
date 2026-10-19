@@ -1,14 +1,14 @@
 # UDR-0101 : Profil de l'élève — la ligne « Classe » ouvre « Changer de classe »
 <!-- index
 titre: Profil élève : la ligne Classe ouvre « Changer de classe »
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-16)*
 adr-lie: [0095](../adr/0095-l-eleve-change-lui-meme-de-classe-et-d-etablissement.md)
 problematique: Élève à classe active : la ligne « Classe » du profil devient une ligne à toucher, action « Changer », qui ouvre la page « Changer de classe » en pleine page (pas en fenêtre) ; « Établissement » reste en lecture seule. Amende UDR-0089 §3.2
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-16)* |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/changement-etablissement-eleve`](../../chantiers/changement-etablissement-eleve/memo.md) |
 | **ADR lié** | [ADR-0095](../adr/0095-l-eleve-change-lui-meme-de-classe-et-d-etablissement.md) |

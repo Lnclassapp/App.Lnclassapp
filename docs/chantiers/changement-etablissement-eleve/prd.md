@@ -1,7 +1,7 @@
 # PRD — Un élève change de classe ou d'établissement en cours de scolarité
 
 > Les specs sont figées ici. Toute évolution après la phase 3 se fait par modification explicite de ce fichier, pas par improvisation dans le code.
-> **État : proposé.** Écrit sur les recommandations du [memo](memo.md#ce-que-le-grill-a-révélé) ; à relire après les réponses du porteur aux questions 1 à 9.
+> **État : figé (2026-10-16).** Recommandations du [memo](memo.md#ce-que-le-grill-a-révélé) acceptées par le porteur.
 
 ## 1. Contexte
 
@@ -44,7 +44,7 @@ Règles d'autorisation : `allow_roles :student` sur le contrôleur ; `UseCases::
 | Élève sans classe active ouvre « Changer de classe » | Redirection vers « Choisis ta classe » |
 | La classe choisie est sa classe actuelle (envoi forcé) | Retour à « Changer de classe », alerte « Tu es déjà dans cette classe. » (422) |
 | Classe devenue complète avant l'envoi | Retour à « Changer de classe », alerte « Cette classe est complète. » (403) ; l'élève reste dans sa classe |
-| Classe archivée avant l'envoi | Alerte « Cette classe n'accepte plus d'élèves. » (403) ; l'élève reste dans sa classe |
+| Classe archivée avant l'envoi | Par la cascade : erreur sous le champ classe (422, la classe n'est plus proposée) ; par le lien : alerte « Cette classe est archivée. Choisis ta classe. » (403, message partagé d'UDR-0081). L'élève reste dans sa classe *(amendé le 2026-10-16 à l'exécution : messages existants réutilisés)* |
 | Classe dont il a été retiré, par la cascade | Alerte de retrait existante (« Tu ne peux pas rejoindre cette classe… ») (403) |
 | Classe dont il a été retiré, par le lien | Changement accepté ; le retrait est levé (ADR-0085 §4.3) |
 | Lien mort (jeton inconnu ou changé) | « Changer de classe » avec l'alerte « lien plus valable » |
@@ -157,10 +157,10 @@ Fonctionnalité: Un élève change de classe ou d'établissement
 
 ## 6. Décisions rattachées
 
-- [ADR-0095](../../decisions/adr/0095-l-eleve-change-lui-meme-de-classe-et-d-etablissement.md) — l'élève change lui-même de classe, sans validation ; ancienne adhésion close sans retrait *(Proposé ; amende ADR-0040, ADR-0085 §4.3)*
-- [UDR-0101](../../decisions/udr/0101-profil-eleve-ligne-classe-vers-changer-de-classe.md) — profil : la ligne Classe ouvre « Changer de classe » *(Proposé ; amende UDR-0089)*
-- [UDR-0102](../../decisions/udr/0102-changer-de-classe-choix-et-confirmation.md) — « Changer de classe » : cascade puis confirmation ; lien d'une autre classe *(Proposé)*
-- [UDR-0103](../../decisions/udr/0103-historique-eleve-periode-de-chaque-classe.md) — historique : période de chaque classe *(Proposé ; amende UDR-0090)*
+- [ADR-0095](../../decisions/adr/0095-l-eleve-change-lui-meme-de-classe-et-d-etablissement.md) — l'élève change lui-même de classe, sans validation ; ancienne adhésion close sans retrait *(Accepté ; amende ADR-0040, ADR-0085 §4.3)*
+- [UDR-0101](../../decisions/udr/0101-profil-eleve-ligne-classe-vers-changer-de-classe.md) — profil : la ligne Classe ouvre « Changer de classe » *(Accepté ; amende UDR-0089)*
+- [UDR-0102](../../decisions/udr/0102-changer-de-classe-choix-et-confirmation.md) — « Changer de classe » : cascade puis confirmation ; lien d'une autre classe *(Accepté)*
+- [UDR-0103](../../decisions/udr/0103-historique-eleve-periode-de-chaque-classe.md) — historique : période de chaque classe *(Accepté ; amende UDR-0090)*
 
 ## 7. Mesures
 

@@ -100,7 +100,8 @@ class School::DrenaSchoolsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "IL-04: the student scopes render the picker_schools frame, its select chained to the levels" do
-    { "student_registration" => "student_registration", "student_classroom_choice" => "student_classroom_choice" }.each do |scope, name|
+    { "student_registration" => "student_registration", "student_classroom_choice" => "student_classroom_choice",
+      "student_classroom_change" => "student_classroom_change" }.each do |scope, name|
       get drena_schools_path(@drena.public_id, scope:), headers: { "Turbo-Frame" => "picker_schools" }
 
       assert_response :success
