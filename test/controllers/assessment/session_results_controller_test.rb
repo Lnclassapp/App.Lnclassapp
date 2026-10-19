@@ -351,9 +351,9 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     show
 
     assert_select "#session_gap_outcome.bg-warning-soft" do
-      assert_select "p.font-bold", text: gap_outcome("opened.message")
+      assert_select "p.font-bold", text: "Cette fiche de révision passe à revoir."
       assert_select "p", text: "Relis « Division cellulaire », puis obtiens au moins 15/20 à l'un de ses exercices."
-      assert_select "a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']", text: gap_outcome("open_essential")
+      assert_select "a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']", text: "Revoir la fiche de révision"
     end
     assert_no_match(/75 %/, response.body)
   end
@@ -369,11 +369,11 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#session_gap_outcome p.font-bold", text: gap_outcome("still_pending.message")
     assert_select "#session_gap_outcome p", text: "Pour lever « Division cellulaire », vise au moins 15/20."
     assert_select "#session_gap_outcome a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']",
-                  text: gap_outcome("open_essential")
+                  text: "Revoir la fiche de révision"
   end
 
   # Décision du porteur (2026-10-19, ADR-0101 §4.5) : 74 % s'affiche 15/20, la note lue fait foi et lève la fiche.
-  test "fiche : une remédiation à 74 % lit 15/20 et « Fiche levée ! » : la note et l'effet sur la fiche s'accordent" do
+  test "fiche : une remédiation à 74 % lit 15/20 et « Fiche de révision levée ! » : la note et l'effet sur la fiche s'accordent" do
     gap, remediation = failed_then_remediated(74)
     decision = Entities::Assessment::GapDecision.call(score_percent: 74, pending_gap: gap, session_kind: remediation.kind)
     assert_equal :remediated, decision
@@ -383,11 +383,11 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     show remediation
 
     assert_select "*", text: /15\s*\/\s*20/
-    assert_select "#session_gap_outcome.bg-success-soft p.font-bold", text: gap_outcome("lifted.message")
+    assert_select "#session_gap_outcome.bg-success-soft p.font-bold", text: "Fiche de révision levée !"
     assert_select "#session_gap_outcome a", 0
   end
 
-  test "fiche : la remédiation qui lève la fiche lit « Fiche levée ! », sans lien, après la phrase de progrès" do
+  test "fiche : la remédiation qui lève la fiche lit « Fiche de révision levée ! », sans lien, après la phrase de progrès" do
     gap, remediation = failed_then_remediated(80)
     gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: remediation)
     sign_in_as @student
@@ -395,7 +395,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     show remediation
 
     assert_select "#session_gap_outcome.bg-success-soft" do
-      assert_select "p.font-bold", text: gap_outcome("lifted.message")
+      assert_select "p.font-bold", text: "Fiche de révision levée !"
       assert_select "p", text: "« Division cellulaire » n'est plus à revoir."
       assert_select "a", 0
     end

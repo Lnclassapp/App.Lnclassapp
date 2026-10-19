@@ -251,6 +251,17 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_equal %w[draft draft], [ empty.reload.status, orphan.reload.status ]
   end
 
+  # UDR-0130 §3: the refusal's exact value is set by the decision, so it is written out here.
+  test "un exercice d'une fiche de révision en brouillon ne se publie pas : publiez d'abord ses parents" do
+    orphan = create_exercise(essential: create_essential(status: "draft"), status: "draft")
+    sign_in_as @member
+
+    patch publish_teams_exercise_path(orphan.public_id), as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_select "turbo-stream[action=append][target=toasts]", text: including("Publiez d'abord la fiche de révision et sa fiche de cours.")
+  end
+
   test "TR-cadre-6: archiving keeps the sessions, their attempts and the badges; no route deletes an exercise (AS-05)" do
     exercise = create_exercise(essential: @essential, title: "Méiose")
     sessions = Array.new(3) { create_exercise_session(exercise:, status: "completed") }

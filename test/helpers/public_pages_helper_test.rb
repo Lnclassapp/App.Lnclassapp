@@ -61,14 +61,14 @@ class PublicPagesHelperTest < ActionView::TestCase
     assert_queries_count(1) { 2.times { assert_nil blog_link } }
   end
 
-  test "CC-22: no « Les cours par niveau » link while no course is published, then the link to /niveaux" do
+  test "CC-22: no « Les fiches de cours par niveau » link while no course is published, then the link to /niveaux" do
     create_course(status: "draft")
     assert_nil catalog_link
 
     remove_instance_variable(:@catalog_link)
     create_course
 
-    assert_equal [ "Les cours par niveau", "/niveaux" ], catalog_link
+    assert_equal [ "Les fiches de cours par niveau", "/niveaux" ], catalog_link
     assert_queries_count(0) { catalog_link }
   end
 end
