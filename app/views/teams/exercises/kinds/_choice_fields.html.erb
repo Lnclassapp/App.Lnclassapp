@@ -1,0 +1,23 @@
+<%# 🌐 UI · teams/exercises/kinds/_choice_fields — propositions d'une question à cocher : texte et case « correcte » %>
+<%# Rôle : Vrai / Faux, choix unique, 2 ou 3 propositions correctes ; rendu par _question_fields dans le panneau du type %>
+<%# ADR  : 0054, 0091 · UDR : 0007, 0017, 0087 §3.7 · Stimulus : teams--nested-form %>
+<div class="space-y-2" data-controller="teams--nested-form" data-teams--nested-form-placeholder-value="NEW_ANSWER"
+     data-teams--nested-form-item-value="[data-nested-answer]">
+  <p class="text-sm font-medium text-ink"><%= t("teams.exercises.question_fields.answers") %></p>
+  <% if form.object.errors[:answers].any? %>
+    <p id="<%= form.field_id(:answers) %>_error" class="flex items-center gap-1.5 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= form.object.errors[:answers].to_sentence %>
+    </p>
+  <% end %>
+  <div data-teams--nested-form-target="list" class="space-y-2">
+    <%= form.fields_for :answers do |answer_form| %>
+      <%= render "teams/exercises/answer_fields", form: answer_form %>
+    <% end %>
+  </div>
+  <template data-teams--nested-form-target="template">
+    <%= form.fields_for :answers, Dtos::Assessment::AnswerInput.new, child_index: "NEW_ANSWER" do |answer_form| %>
+      <%= render "teams/exercises/answer_fields", form: answer_form %>
+    <% end %>
+  </template>
+  <%= ui_button t("teams.exercises.question_fields.add_answer"), variant: :ghost, size: :sm, icon: "plus", data: { action: "teams--nested-form#add" } %>
+</div>

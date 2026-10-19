@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage |
+| **Statut** | planification |
 | **Ouvert le** | 2026-10-15 |
 | **Branche** | `Develop` (cadrage, docs seules) ; le code passera par une PR |
 | **Programme** | — |
@@ -54,4 +54,4 @@ Toile : https://claude.ai/artifact/78wguP9ZtQc1g5LrtcxTy4 (téléphone d'abord).
 
 ## Questions ouvertes
 
-Aucune pour les maquettes. Suite : PRD, UDR et plan de lots, puis le code dans une PR.
+Aucune. PRD, ADR-0090, UDR-0085 et plan de lots écrits le 2026-10-15 ; le code se fait dans une PR, après celle d'`accueil-eleve`.

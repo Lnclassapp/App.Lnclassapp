@@ -14,7 +14,8 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
 
   def open_photo_modal
     visit profile_path
-    within("#profile_information") { click_on(stored.attached? ? "Changer ma photo" : "Ajouter une photo") }
+    # UDR-0089 §3.2 : la ligne « Photo » entière ouvre la fenêtre.
+    within("#profile_information") { find("a[href='#{edit_profile_photo_path}']", text: stored.attached? ? "Ta photo" : "Aucune photo").click }
     assert_selector "turbo-frame#modal dialog[open]", text: "Ma photo"
   end
 
@@ -57,26 +58,27 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
 
       assert_toast "Ta photo est enregistrée."
       assert_no_selector "turbo-frame#modal dialog[open]"
-      assert_photo_loaded "#profile_information img[alt='Aya Koné']"
-      assert_photo_loaded "header a[aria-controls=account_panel] img[alt='Aya Koné']"
+      assert_photo_loaded "#profile_identity img[alt='Aya Koné']"
+      assert_photo_loaded "header button#avatar-menu-button img[alt='Aya Koné']"
     end
     assert_equal Entities::Shared::ImageHeader::Facts.new(format: :webp, width: 480, height: 480, metadata: false), stored_facts
     assert Orm::AuditEvent.exists?(action: "profile.photo_changed", actor_id: @student.id)
     screenshot("2-profil-avec-photo")
-    # UDR-0080 §3.2 : le menu du compte de l'élève est devenu le panneau ouvert par l'avatar.
-    find("header a[aria-controls=account_panel]").click
-    assert_photo_loaded "dialog#account_panel[open] img.size-14[alt='Aya Koné']"
-    screenshot("3-panneau-du-compte")
-    find("dialog#account_panel[open]").send_keys(:escape)
-    assert_no_selector "dialog#account_panel[open]"
+    # UDR-0084 §3.2 : sur le web, l'avatar de l'élève ouvre son menu, qui reprend la photo ; avec elle, plus d'« Ajouter ma photo ».
+    find("header button#avatar-menu-button").click
+    assert_photo_loaded "#avatar-menu img.size-10[alt='Aya Koné']"
+    assert_no_selector "#avatar-menu a[href='#{edit_profile_photo_path}']"
+    screenshot("3-menu-de-l-avatar")
+    page.send_keys(:escape)
+    assert_no_selector "#avatar-menu", visible: true
 
     open_photo_modal
     assert_no_page_reload do
       within("turbo-frame#modal dialog[open]") { click_on "Retirer ma photo" }
 
       assert_toast "Ta photo est retirée."
-      within("#profile_information") { assert_selector "[role=img][aria-label='Aya Koné']", text: "AK" }
-      assert_selector "header a[aria-controls=account_panel] [role=img]", text: "AK"
+      within("#profile_identity") { assert_selector "[role=img][aria-label='Aya Koné']", text: "AK" }
+      assert_selector "header button#avatar-menu-button [role=img]", text: "AK"
     end
     assert_not stored.attached?
   end
@@ -149,8 +151,8 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
       within("turbo-frame#modal dialog[open]") { click_on "Enregistrer" }
 
       assert_toast "Ta photo est enregistrée."
-      assert_photo_loaded "#profile_information img[alt='Aya Koné']"
-      assert_photo_loaded "header a[aria-controls=account_panel] img[alt='Aya Koné']"
+      assert_photo_loaded "#profile_identity img[alt='Aya Koné']"
+      assert_photo_loaded "header button#avatar-menu-button img[alt='Aya Koné']"
       assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
       find("#toasts button[data-action='toast#dismiss']").click
       assert_no_selector "#toasts [data-controller=toast]"

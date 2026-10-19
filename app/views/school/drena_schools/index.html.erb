@@ -1,6 +1,6 @@
 <%# 🌐 UI · school/drena_schools/index — frame « schools » (enseignant) ou « picker_schools » (cascade élève) : établissements actifs d'une DRENA %>
 <%# Rôle : servi seul au changement de DRENA, ou rendu dans un formulaire (scope de ses champs) ; enseignant : la DRENA voyage avec la liste, invite gardée après un 422 %>
-<%# ADR  : 0029, 0030, 0083, 0085 · UDR : 0024, 0079, 0081 (§3.3) %>
+<%# ADR  : 0029, 0030, 0083, 0085 · UDR : 0024, 0079, 0081 (§3.3), 0091 (§3.2) %>
 <%# locals: (schools:, drena_public_id:, registration: nil, scope: :teacher_registration, picker: false, rate_limited: false) -%>
 <% if picker %>
   <%# Cascade élève : vide sans DRENA, « introuvable » sans établissement, erreur au-delà du débit (UDR-0081 §3.3). %>
@@ -18,10 +18,11 @@
                          description: t("classroom.student_registrations.class_picker.not_found_description"), icon: "academic-cap" %>
     <% elsif schools %>
       <%= fields scope, model: registration do |fields| %>
+        <%# Rails n'écrit l'invite que sans établissement choisi : « Changer » la remet d'après data-prompt (UDR-0091 §3.2). %>
+        <% prompt = t("classroom.student_registrations.class_picker.school_prompt") %>
         <%= ui_field fields, :school_public_id, as: :select, label: t(".label"), required: true,
-                     choices: schools.map { [ it.name, it.public_id ] },
-                     prompt: t("classroom.student_registrations.class_picker.school_prompt"),
-                     data: { action: "change->classroom--class-picker#loadLevels" } %>
+                     choices: schools.map { [ it.name, it.public_id ] }, prompt:,
+                     data: { action: "change->classroom--class-picker#loadLevels", prompt: } %>
       <% end %>
     <% end %>
   <% end %>

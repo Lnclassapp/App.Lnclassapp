@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision |
+| **Statut** | planification |
 | **Ouvert le** | 2026-10-15 |
 | **Branche** | `Develop` (cadrage, docs seules) ; le code passera par une PR |
 | **Programme** | — |
@@ -24,7 +24,7 @@ La page d'accueil publique est dessinée et ses décisions sont prises : l'accue
 
 ## Hors périmètre
 
-- L'accueil de l'enseignant, de la direction et de l'équipe.
+- L'accueil de l'enseignant, de la direction et de l'équipe, sauf l'ajout du chiffre « fait seul » (page de la classe, accueil de la direction).
 - Le contenu des pages ouvertes depuis l'accueil (exercice, matière, historique, paiement) : seul leur point d'entrée change.
 - Le paiement lui-même : la tuile ouvre le parcours existant.
 - La lecture hors ligne (chantier à part, promis par la pastille de la page d'accueil).
@@ -55,6 +55,7 @@ La page d'accueil publique est dessinée et ses décisions sont prises : l'accue
 | Comment s'affiche « Mes matières » ? | Quatre matières par ligne au téléphone, six sur tablette et ordinateur ; Physique-Chimie s'écrit « PC » et Histoire-Géo « HG » sous l'icône (porteur, 2026-10-15). | Avec six matières, le téléphone montre une ligne de quatre puis une de deux. Les abréviations ne valent que pour la grille : le nom complet reste dans les listes (À faire, activités récentes) et pour les lecteurs d'écran. |
 | Que dit le bouton de « Ma classe » ? | « Entrer en classe », avec l'icône d'une porte ouverte devant et la flèche après (porteur, 2026-10-15). | Demandé pour le téléphone ; le même libellé est repris sur tablette et ordinateur pour garder une seule clé de traduction. |
 | Garde-t-on la barre d'onglets en bas du téléphone (Accueil, Cours, Ma classe) ? | Non, on la retire (porteur, 2026-10-15). | Au téléphone et sur tablette, ces trois liens passent en tête du menu de l'avatar, la page en cours en surbrillance ; sur ordinateur, le menu de gauche reste. À reporter dans l'UDR (amende UDR-0080). |
+| Un chantier pour le dessin, un autre pour l'exercice du jour ? | Non : toute la phase en un seul chantier (PRD, ADR, UDR, plan par lots), le 2026-10-15, après avoir d'abord choisi de séparer. | Le chantier couvre le nouvel accueil, l'exercice du jour, le travail « fait seul » vu par l'enseignant et la direction, et « Inviter mon enseignant ». Une seule PR ; documents écrits ici, code dans une nouvelle session. |
 
 ## Cas limites identifiés
 
@@ -68,5 +69,9 @@ La page d'accueil publique est dessinée et ses décisions sont prises : l'accue
 ## Questions encore ouvertes
 
 - **Rentrée, élève sans classe de la nouvelle année** : laissé de côté par le porteur (2026-10-15). On garde le comportement actuel (catalogue vide, invitation à rejoindre sa classe) tant qu'il n'est pas tranché.
-- **Où apparaît le travail « fait seul »** dans les vues de l'enseignant et de la direction : page de la classe, fiche de l'élève, chiffres de l'établissement ? À dessiner.
-- **Texte du message d'invitation de l'enseignant** (WhatsApp) et page d'arrivée de l'enseignant invité.
+
+## Questions fermées (confirmées par le porteur le 2026-10-15)
+
+- **Où apparaît le travail « fait seul »** : pour l'enseignant, une colonne « Fait seul (7 j) » dans la liste des élèves de la page de la classe ; pour la direction, un chiffre « Faits seul (7 j) » par niveau sur son accueil, à côté du taux de rendu. Rien dans les comptes d'un exercice donné. Voir UDR-0084 §3.7.
+- **Message d'invitation de l'enseignant** : « Bonjour ! Je suis en %{classroom} à %{school}. Sur Lnclass, vous pouvez nous donner des exercices et suivre nos résultats. Inscrivez-vous ici : %{link} ». Le lien ouvre l'inscription enseignant existante (`/teacher-signup`) ; l'élève n'a pas de jeton de parrainage, l'établissement n'est donc pas prérempli. Voir ADR-0089 §4.3.
+- **Icônes** : le casque d'aide et la porte ouverte n'existent pas dans Heroicons ; ils sont dessinés au Lot 0 (UDR-0084 §3.1).

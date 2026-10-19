@@ -91,6 +91,21 @@ module Dtos
         assert_equal [ [ "Vrai", true ] ], input.questions.first.answers.map { [ it.content, it.correct ] }
       end
 
+      # ADR-0091 §4.5 : la marge d'un nombre et le côté droit d'une paire reviennent dans le formulaire d'édition.
+      test "from_exercise rend la marge en décimal lisible et le côté droit des paires" do
+        number = Entities::Assessment::Question.new(id: 4, position: 1, content: "Q", explanation: nil, question_type: "numeric",
+                                                    numeric_tolerance: BigDecimal("0.25"),
+                                                    answers: [ Entities::Assessment::Answer.new(id: 5, position: 1, content: "3,5", correct: true) ])
+        pair = Entities::Assessment::Answer.new(id: 6, position: 1, content: "a", correct: true, match_content: "A")
+        exercise = Entities::Assessment::Exercise.new(title: "Méiose", exercise_type: "fixation",
+                                                      questions: [ number, number.with(question_type: "matching", numeric_tolerance: nil, answers: [ pair ]) ])
+
+        first, second = ExerciseInput.from_exercise(exercise).questions
+        assert_equal [ "0.25", nil ], [ first.numeric_tolerance, second.numeric_tolerance ]
+        assert_equal [ "A" ], second.answers.map(&:match_content)
+        assert_equal BigDecimal("0.25"), first.to_entity(position: 1).numeric_tolerance
+      end
+
       test "une erreur de structure posée sur « questions[1] » se traduit sans lire d'attribut de ce nom" do
         input = ExerciseInput.new(title: "Méiose", exercise_type: "fixation")
         input.errors.add(:"questions[1]", :wrong_correct_count)

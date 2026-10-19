@@ -11,10 +11,12 @@ fr:
         content: "Énoncé"
         explanation: "Explication"
         question_type: "Type de question"
+        numeric_tolerance: "Marge acceptée"
         answers: "Propositions"
       dtos/assessment/answer_input:
         content: "Proposition"
         correct: "Proposition correcte"
+        match_content: "Côté droit"
     errors:
       models:
         dtos/assessment/exercise_input:
@@ -29,12 +31,28 @@ fr:
               true_false_needs_two_answers: "Une question Vrai / Faux a exactement 2 propositions."
               too_few_answers: "Ajoutez au moins une proposition incorrecte en plus des propositions correctes."
               wrong_correct_count: "Le nombre de propositions correctes ne correspond pas au type de la question."
+              not_available: "Ce type de question n'est pas encore disponible."
+              blank_marker: "Écrivez ___ (trois tirets bas) une seule fois dans l'énoncé, là où l'élève répond."
+              accepted_answers_count: "Donnez de 1 à 5 réponses acceptées."
+              numeric_needs_one_value: "Donnez une seule valeur attendue."
+              numeric_value_unreadable: "La valeur attendue doit être un nombre, par exemple -3,5."
+              negative_tolerance: "La marge doit être positive ou nulle."
+              steps_count: "Donnez de 3 à 6 étapes, dans le bon ordre."
+              pairs_count: "Donnez de 3 à 5 paires."
+              missing_match: "Complétez le côté droit de chaque paire."
+              duplicate_match: "Deux paires ont le même côté droit : chacun doit être unique."
+              duplicate_left: "Deux paires ont le même côté gauche : chacun doit être unique."
+              duplicate_steps: "Deux étapes ont le même texte : l'ordre serait ambigu."
+              duplicate_accepted: "Deux réponses acceptées sont identiques (sans compter majuscules, accents et espaces)."
+              tolerance_out_of_range: "La marge doit être un nombre d'au plus 99 999 999,9999, avec 4 décimales au plus."
         dtos/assessment/question_input:
           attributes:
             content:
               blank: "Saisissez l'énoncé de la question."
             answers:
               invalid: "Complétez ou retirez les propositions vides."
+            numeric_tolerance:
+              not_a_number: "La marge doit être un nombre, par exemple 0,1."
         dtos/assessment/answer_input:
           attributes:
             content:
@@ -49,6 +67,10 @@ fr:
         single_choice: "Choix unique"
         multiple_correct_2: "2 propositions correctes"
         multiple_correct_3: "3 propositions correctes"
+        fill_blank: "Texte à trous"
+        numeric: "Réponse en nombre"
+        ordering: "Remettre dans l'ordre"
+        matching: "Relier"
       new:
         title: "Nouvel exercice"
         essential: "Fiche essentielle : %{name}"
@@ -77,6 +99,27 @@ fr:
         add_answer: "Ajouter une proposition"
         content_placeholder: "Énoncé de la question"
         explanation_hint: "Montrée à l'élève après sa réponse. Facultative."
+      kinds:
+        fill_blank:
+          hint: "Écrivez ___ (trois tirets bas) dans l'énoncé, là où l'élève répond."
+          answers: "Réponses acceptées (1 à 5)"
+          placeholder: "Réponse acceptée"
+          add: "Ajouter une réponse acceptée"
+        numeric:
+          value: "Valeur attendue"
+          value_placeholder: "-3,5"
+          tolerance: "Marge acceptée"
+          tolerance_hint: "Facultative. Sans marge, seule la valeur exacte est juste."
+        ordering:
+          hint: "Écrivez les étapes dans le bon ordre : l'élève les recevra mélangées."
+          answers: "Étapes (3 à 6)"
+          placeholder: "Étape"
+          add: "Ajouter une étape"
+        matching:
+          pairs: "Paires (3 à 5)"
+          left: "Gauche"
+          right: "Droite"
+          add: "Ajouter une paire"
       answer_fields:
         placeholder: "Texte de la proposition"
         correct: "Proposition correcte"

@@ -1,0 +1,53 @@
+<%# 🌐 UI · shared/navigation/_avatar_menu — menu de l'avatar de l'élève sur le web : identité, destinations (sous lg), compte, aide (sous 700 px), déconnexion %>
+<%# Rôle : bouton avatar seul (badge « + » sans photo) qui ouvre un menu de 288 px ancré à droite ; remplace le panneau du compte de l'élève sur le web %>
+<%# UDR  : 0084 §3.1, §3.2, §3.4, §3.10 · Stimulus : dropdown (flèches, Échap, clic dehors, focus rendu à l'avatar) · locals : user %>
+<div class="relative" data-controller="dropdown" data-action="keydown->dropdown#keydown">
+  <button type="button" id="avatar-menu-button" aria-haspopup="menu" aria-expanded="false" aria-controls="avatar-menu"
+          aria-label="<%= t("shared.navigation.avatar_menu.open", name: user.name) %>"
+          data-dropdown-target="button" data-action="dropdown#toggle"
+          class="grid size-tap cursor-pointer place-items-center rounded-full transition hover:bg-ink/5
+                 focus-visible:outline-2 focus-visible:outline-brand">
+    <%= ui_avatar user.name, src: user.avatar_url, size: :sm, add_photo: true, tone_seed: user.public_id %>
+  </button>
+  <div id="avatar-menu" role="menu" aria-label="<%= t("shared.navigation.account_panel.label") %>" data-dropdown-target="menu" hidden
+       class="absolute right-0 z-30 mt-2 w-72 rounded-card border border-line bg-white p-1.5
+              shadow-pop animate-fade-in">
+    <div class="flex items-center gap-3 border-b border-line px-3 pt-2 pb-3">
+      <%= ui_avatar user.name, src: user.avatar_url, size: :md, tone_seed: user.public_id %>
+      <div class="min-w-0">
+        <p class="truncate font-semibold text-ink"><%= user.name %></p>
+        <% if user.detail %><p class="truncate text-xs text-mute"><%= user.detail %></p><% end %>
+      </div>
+    </div>
+    <%# Au-delà de lg, le menu de gauche montre déjà ces destinations : le menu ne les répète pas. %>
+    <%# Page en cours : le fond bg-brand-soft reste au focus (pas le gris de ui-menu-item-default) ; un anneau inset marque le focus clavier. %>
+    <div class="border-b border-line py-1.5 lg:hidden">
+      <% navigation_for(user.role).each do |destination| %>
+        <% path = nav_path(destination) %>
+        <% active = nav_active?(destination, path) %>
+        <%= link_to path, role: "menuitem", tabindex: -1, "aria-current": ("page" if active),
+                    class: class_names("ui-menu-item",
+                                       active ? "bg-brand-soft text-ink focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand" : "ui-menu-item-default") do %>
+          <%= ui_icon destination.icon, class: active ? "text-brand-strong" : "opacity-70" %>
+          <span><%= t("shared.navigation.#{destination.key}") %></span>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="pt-1.5">
+      <%= ui_dropdown_item t("shared.navigation.profile"), href: profile_path, icon: "user-circle" %>
+      <%= ui_dropdown_item t("shared.navigation.avatar_menu.history"), href: student_archive_path, icon: "archive-box" %>
+      <% unless user.avatar_url %>
+        <%= ui_dropdown_item t("shared.navigation.avatar_menu.add_photo"), href: edit_profile_photo_path, icon: "camera" %>
+      <% end %>
+      <%# Dès 700 px, « Besoin d'aide ? » est dans l'en-tête ; en dessous, il ouvre ici la même carte d'aide. %>
+      <div class="min-[700px]:hidden">
+        <%= ui_dropdown_item t("shared.help_sheet.trigger"), icon: "headset", dialog: "help-sheet" %>
+      </div>
+    </div>
+    <div role="separator" class="my-1.5 border-t border-line"></div>
+    <%= button_to session_path, method: :delete, role: "menuitem", tabindex: -1,
+                  class: "ui-menu-item ui-menu-item-danger cursor-pointer" do %>
+      <%= ui_icon "arrow-right-start-on-rectangle", class: "opacity-70" %><span><%= t("shared.navigation.sign_out") %></span>
+    <% end %>
+  </div>
+</div>

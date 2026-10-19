@@ -1,11 +1,12 @@
 # 🌐 UI · NavigationHelper — shell applicatif unique, paramétré par le rôle
 # Rôle : destinations de chaque rôle (bureau = mobile), état actif, compte, sections de l'accueil
-# UDR  : 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074, 0076, 0077, 0080 (§3.2), 0082 (§3.2)
+# UDR  : 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074, 0076, 0077, 0080 (§3.2), 0082 (§3.2), 0084 (§3.3)
 module NavigationHelper
   Destination = Data.define(:key, :route, :icon)
   # Ce que le shell affiche de la personne connectée. Le contrôleur qui rend `layout "shell"` l'expose par `helper_method :shell_user`.
-  ShellUser = Data.define(:name, :role, :detail, :avatar_url) do
-    def initialize(name:, role:, detail: nil, avatar_url: nil) = super
+  # public_id : graine de la couleur stable de l'avatar sans photo (UDR-0084 §3.4).
+  ShellUser = Data.define(:name, :role, :detail, :avatar_url, :public_id) do
+    def initialize(name:, role:, detail: nil, avatar_url: nil, public_id: nil) = super
 
     # L'accueil salue par le prénom, comme l'ancienne application.
     def first_name = name.split.first
@@ -93,6 +94,11 @@ module NavigationHelper
   # « Plus » est actif quand la page ouverte est l'une de ses entrées.
   def more_active?(role)
     secondary_navigation_for(role).any? { nav_active?(it) }
+  end
+
+  # UDR-0084 §3.3 : l'élève n'a plus de barre du bas, son menu de l'avatar porte ses destinations ; les autres la gardent.
+  def bottom_bar?(role)
+    role.to_sym != :student
   end
 
   # Frames différés de la barre latérale du rôle, sauf celui dont la source est la page ouverte (elle porte déjà le bloc).

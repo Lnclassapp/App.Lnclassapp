@@ -35,6 +35,19 @@ module Repositories
         assert created.publishable?
       end
 
+      test "écrit et relit la marge d'un nombre et le côté droit des paires (ADR-0091)" do
+        number = Question.new(id: nil, position: nil, content: "Combien ?", explanation: nil, question_type: "numeric",
+                              numeric_tolerance: BigDecimal("0.05"), answers: [ Answer.new(id: nil, position: nil, content: "3,5", correct: true) ])
+        pairs = Question.new(id: nil, position: nil, content: "Relie.", explanation: nil, question_type: "matching",
+                             answers: %w[a b c].map { Answer.new(id: nil, position: nil, content: it, correct: true, match_content: it.upcase) })
+
+        created = @repository.create(exercise: exercise(questions: [ number, pairs ]))
+
+        assert_equal [ BigDecimal("0.05"), nil ], created.questions.map(&:numeric_tolerance)
+        assert_equal %w[A B C], created.questions.last.answers.map(&:match_content)
+        assert_nil created.questions.first.answers.first.match_content
+      end
+
       test "garde la position et le statut fournis" do
         created = @repository.create(exercise: exercise(position: 9, status: "published", questions: [ question("Q", position: 4) ]))
 

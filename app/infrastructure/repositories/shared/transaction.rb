@@ -8,7 +8,8 @@ module Repositories
 
       WRITE_FAILURES = [
         ActiveRecord::RecordNotUnique, ActiveRecord::RecordInvalid, ActiveRecord::InvalidForeignKey,
-        ActiveRecord::NotNullViolation, ActiveRecord::CheckViolation, ActiveRecord::LockWaitTimeout
+        ActiveRecord::NotNullViolation, ActiveRecord::CheckViolation, ActiveRecord::LockWaitTimeout,
+        ActiveRecord::RangeError
       ].freeze
 
       def call(&) = ActiveRecord::Base.transaction(&)

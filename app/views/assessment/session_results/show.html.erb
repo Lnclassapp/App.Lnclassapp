@@ -1,22 +1,28 @@
 <%# 🌐 UI · assessment/session_results/show — résultat d'une session terminée (AS-11 à AS-13) %>
-<%# Rôle : badge, titre, note et maîtrise (élève, avec son progrès ; score et questions justes hors élève), « Recommencer », correction %>
-<%# ADR  : 0033, 0054, 0079 · UDR : 0007, 0023, 0054, 0057, 0073 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
+<%# Rôle : badge, « Félicitations ! » (dès 14/20) ou « Courage ! », note (verte dès 14/20) et maîtrise, progrès, « Recommencer » (caché à 20/20), correction %>
+<%# ADR  : 0033, 0054, 0079, 0091 · UDR : 0007, 0023, 0054, 0057, 0073, 0087 §3.6 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
 <% result = @result %>
-<% tone = result.score_percent >= Entities::Assessment::Grading::PASS_THRESHOLD ? :success : :error %>
+<%# UDR-0087 §3.6 : le titre, la couleur de la note et les confettis dès « 14/20 » affiché, la règle de l'historique, de
+    « Ma classe » et de l'accueil (68 % s'affiche 14/20). %>
+<% grading = Entities::Assessment::Grading %>
+<% tone = grading.grade_on_20(result.score_percent) >= grading.grade_on_20(grading::MASTERY_THRESHOLD) ? :success : :error %>
+<% tile = "rounded-ln bg-mist px-3 py-3 text-center" %>
+<% label = "text-2xs font-bold tracking-wide text-mute uppercase" %>
 <% page_title t(".page_title", title: result.exercise.title) %>
-<div class="mx-auto max-w-2xl space-y-8">
-  <%= ui_back_link result.essential.name, href: course_essential_path(result.essential.course_slug, result.essential.slug) %>
-
-  <section id="session_result" aria-labelledby="session_result_title"
-           <%= tag.attributes(data: { controller: "assessment--confetti" }) if @owner && tone == :success %>>
-    <%= ui_card padding: :lg, class: "text-center" do %>
-      <div class="flex flex-col items-center gap-4">
+<%= ui_back_link result.essential.name, href: course_essential_path(result.essential.course_slug, result.essential.slug) %>
+<%# UDR-0087 §3.6 : une colonne de 720 px dès 700 px ; dès 1 024 px, la note et les boutons à gauche, la correction à droite. %>
+<div class="mx-auto grid w-full max-w-180 grid-cols-1 gap-6 lg:max-w-none lg:grid-cols-2 lg:items-start">
+  <div class="grid grid-cols-1 gap-4">
+    <section id="session_result" aria-labelledby="session_result_title"
+             class="rounded-card border border-line bg-white p-5 text-center shadow-card sm:p-6"
+             <%= tag.attributes(data: { controller: "assessment--confetti" }) if @owner && tone == :success %>>
+      <div class="flex flex-col items-center gap-3">
         <%= render "assessment/session_results/badge", level: result.badge_level, earned_now: result.earned_now %>
         <div class="space-y-2">
           <h1 id="session_result_title" class="font-display text-3xl font-extrabold tracking-tight"><%= t(".headline.#{tone}") %></h1>
           <% if @owner %>
             <% cheers = t(".cheers.#{tone}") %>
-            <p class="text-ink"><%= cheers[result.session_public_id.sum % cheers.size] %></p>
+            <p class="text-ink text-balance"><%= cheers[result.session_public_id.sum % cheers.size] %></p>
           <% else %>
             <p class="font-medium text-ink"><%= t(".student", name: result.student_name) %></p>
           <% end %>
@@ -25,63 +31,65 @@
       </div>
 
       <%# L'élève lit sa note sur 20, forme unique de la note (UDR-0023, 2026-10-02) ; l'enseignant et l'équipe gardent les 4 termes. %>
-      <dl class="mt-8 grid grid-cols-2 gap-4 border-t border-line pt-6 <%= "sm:grid-cols-4" unless @owner %>">
-        <div>
-          <dt class="<%= Assessment::StatHelper::LABEL %>"><%= t(".grade") %></dt>
-          <dd class="mt-1 font-display text-2xl font-extrabold tabular-nums"><%= grade_label(result.score_percent) %></dd>
+      <dl class="mt-6 grid grid-cols-2 gap-3 <%= "sm:grid-cols-4" unless @owner %>">
+        <div class="<%= tile %>">
+          <dt class="<%= label %>"><%= t(".grade") %></dt>
+          <dd id="session_grade" class="mt-1 font-display text-3xl font-extrabold tabular-nums <%= "text-success" if tone == :success %>"><%= grade_label(result.score_percent) %></dd>
         </div>
         <% unless @owner %>
-          <div>
-            <dt class="<%= Assessment::StatHelper::LABEL %>"><%= t(".score") %></dt>
+          <div class="<%= tile %>">
+            <dt class="<%= label %>"><%= t(".score") %></dt>
             <dd class="mt-1 font-display text-2xl font-extrabold tabular-nums"><%= t(".score_value", score: result.score_percent) %></dd>
           </div>
         <% end %>
-        <div>
-          <dt class="<%= Assessment::StatHelper::LABEL %>"><%= t(".mastery") %><%= stat_info_tip t("shared.info_tips.mastery"), label: t(".mastery") %></dt>
-          <dd class="mt-1 font-medium"><%= mastery_label(result.score_percent) %></dd>
+        <div class="<%= tile %>">
+          <dt class="flex items-center justify-center gap-1"><span class="<%= label %>"><%= t(".mastery") %></span><%= stat_info_tip t("shared.info_tips.mastery"), label: t(".mastery") %></dt>
+          <% mastery = Entities::Assessment::Grading.mastery_for(result.score_percent) %>
+          <dd class="mt-2"><%= ui_badge mastery_label(result.score_percent), size: :sm,
+                                        tone: { acquired: :success, fragile: :gold, struggling: :neutral }.fetch(mastery) %></dd>
         </div>
         <% unless @owner %>
-          <div>
-            <dt class="<%= Assessment::StatHelper::LABEL %>"><%= t(".correct") %></dt>
+          <div class="<%= tile %>">
+            <dt class="<%= label %>"><%= t(".correct") %></dt>
             <dd class="mt-1 font-medium tabular-nums">
               <%= t(".correct_value", count: result.correct_count, total: result.question_count) %>
             </dd>
           </div>
         <% end %>
       </dl>
+    </section>
 
-      <%# UDR-0073 : la phrase de progrès parle à l'élève seul, à partir de sa deuxième session. %>
-      <% if @owner && result.progress %>
-        <%= render "assessment/session_results/progress", progress: result.progress %>
-      <% end %>
-
-      <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-        <% if @can_restart && result.score_percent < Entities::Assessment::Grading::PERFECT_THRESHOLD %>
-          <%= form_with url: exercise_sessions_path(result.exercise.public_id), method: :post, id: "restart-exercise-form",
-                        class: "contents" do %>
-            <%= ui_button t(".restart"), type: :submit, variant: :brand, icon: "arrow-path" %>
-          <% end %>
-        <% end %>
-        <%= ui_button t(".exercise_link"), href: exercise_path(result.exercise.public_id), variant: :secondary, icon: "book-open" %>
-      </div>
+    <%# UDR-0073 : la phrase de progrès parle à l'élève seul, à partir de sa deuxième session. %>
+    <% if @owner && result.progress %>
+      <%= render "assessment/session_results/progress", progress: result.progress %>
     <% end %>
-  </section>
 
-  <%= tag.section id: "session_review", "aria-labelledby": "session_review_title", class: "space-y-4",
+    <div class="grid grid-cols-1 gap-3">
+      <% if @can_restart && result.score_percent < Entities::Assessment::Grading::PERFECT_THRESHOLD %>
+        <%= form_with url: exercise_sessions_path(result.exercise.public_id), method: :post, id: "restart-exercise-form" do %>
+          <%= ui_button t(".restart"), type: :submit, variant: :brand, size: :lg, full: true, icon: "arrow-path" %>
+        <% end %>
+      <% end %>
+      <%= ui_button t(".exercise_link"), href: exercise_path(result.exercise.public_id), variant: :secondary, size: :lg, full: true %>
+    </div>
+  </div>
+
+  <%= tag.section id: "session_review", "aria-labelledby": "session_review_title",
+                  class: "rounded-card border border-line bg-white p-5 shadow-card sm:p-6",
                   data: (ui_reveal_data(step: 3) if @owner) do %>
-    <div>
+    <div class="mb-2">
       <h2 id="session_review_title" class="font-display text-xl font-extrabold"><%= t(".review_title") %></h2>
       <% unless @owner %>
         <p class="mt-1 text-sm text-mute"><%= @reveal ? t(".review_hint_reveal") : t(".review_hint_student") %></p>
       <% end %>
     </div>
-    <ol class="space-y-4" data-controller="math">
+    <ol class="divide-y divide-line" data-controller="math">
       <% result.review.each_with_index do |question, index| %>
         <%= render "assessment/session_results/question_review", question:, reveal: @reveal, owner: @owner, index: %>
       <% end %>
     </ol>
     <% if @owner %>
-      <%= ui_reveal_more result.review.size %>
+      <div class="mt-2"><%= ui_reveal_more result.review.size %></div>
     <% end %>
   <% end %>
 </div>

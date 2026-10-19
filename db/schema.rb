@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_08_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_15_100100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -79,6 +79,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_08_120000) do
     t.integer "position", null: false
     t.bigint "question_id", null: false
     t.datetime "updated_at", null: false
+    t.string "match_content", limit: 500
     t.index ["question_id", "position"], name: "index_answers_on_question_id_and_position", unique: true
   end
 
@@ -271,6 +272,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_08_120000) do
     t.index ["name"], name: "index_drenas_on_name", unique: true
     t.index ["public_id"], name: "index_drenas_on_public_id", unique: true
     t.index ["slug"], name: "index_drenas_on_slug", unique: true
+  end
+
+  create_table "essential_reads", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "essential_id", null: false
+    t.datetime "first_read_at", null: false
+    t.datetime "last_read_at", null: false
+    t.bigint "student_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["essential_id"], name: "index_essential_reads_on_essential_id"
+    t.index ["student_id", "essential_id"], name: "index_essential_reads_on_student_id_and_essential_id", unique: true
+    t.index ["student_id", "last_read_at"], name: "index_essential_reads_on_student_id_and_last_read_at"
   end
 
   create_table "essentials", force: :cascade do |t|
@@ -476,6 +489,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_08_120000) do
     t.string "category", null: false
     t.datetime "created_at", null: false
     t.string "name", limit: 40, null: false
+    t.integer "position"
     t.string "shortname", limit: 10, null: false
     t.string "slug", null: false
     t.datetime "updated_at", null: false
@@ -572,9 +586,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_08_120000) do
     t.bigint "exercise_session_id", null: false
     t.bigint "question_id", null: false
     t.bigint "selected_answer_ids", null: false, array: true
+    t.string "response_text", limit: 200
     t.index ["exercise_session_id", "question_id"], name: "index_question_attempts_on_exercise_session_id_and_question_id", unique: true
     t.index ["question_id"], name: "index_question_attempts_on_question_id"
-    t.check_constraint "cardinality(selected_answer_ids) > 0", name: "question_attempts_selected_answer_ids_present"
+    t.check_constraint "cardinality(selected_answer_ids) > 0 OR response_text IS NOT NULL", name: "question_attempts_selected_answer_ids_present"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -585,8 +600,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_08_120000) do
     t.integer "position", null: false
     t.string "question_type", null: false
     t.datetime "updated_at", null: false
+    t.decimal "numeric_tolerance", precision: 12, scale: 4
     t.index ["exercise_id", "position"], name: "index_questions_on_exercise_id_and_position", unique: true
-    t.check_constraint "question_type::text = ANY (ARRAY['true_false'::character varying::text, 'single_choice'::character varying::text, 'multiple_correct_2'::character varying::text, 'multiple_correct_3'::character varying::text])", name: "questions_question_type_values"
+    t.check_constraint "numeric_tolerance >= 0::numeric", name: "questions_numeric_tolerance_positive"
+    t.check_constraint "question_type::text = ANY (ARRAY['true_false'::character varying, 'single_choice'::character varying, 'multiple_correct_2'::character varying, 'multiple_correct_3'::character varying, 'fill_blank'::character varying, 'numeric'::character varying, 'ordering'::character varying, 'matching'::character varying]::text[])", name: "questions_question_type_values"
   end
 
   create_table "referral_shares", force: :cascade do |t|
@@ -987,6 +1004,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_08_120000) do
   add_foreign_key "courses", "materials", on_delete: :restrict
   add_foreign_key "courses", "series", on_delete: :restrict
   add_foreign_key "courses", "users", column: "author_id", on_delete: :restrict
+  add_foreign_key "essential_reads", "essentials", on_delete: :cascade
+  add_foreign_key "essential_reads", "users", column: "student_id", on_delete: :restrict
   add_foreign_key "essentials", "courses", on_delete: :restrict
   add_foreign_key "essentials", "users", column: "author_id", on_delete: :restrict
   add_foreign_key "exercise_badges", "exercise_sessions", on_delete: :restrict

@@ -107,6 +107,8 @@ class School::DrenaSchoolsControllerTest < ActionDispatch::IntegrationTest
       assert_select "turbo-frame#schools", 0
       assert_select "turbo-frame#picker_schools.block.transition-opacity[aria-live=polite]" do
         assert_select "select[name='#{name}[school_public_id]'][required][data-action='change->classroom--class-picker#loadLevels']"
+        # UDR-0091 §3.2 : « Changer » remet l'invite, que Rails n'écrit pas quand un établissement est choisi.
+        assert_select "select[data-prompt=?]", I18n.t("classroom.student_registrations.class_picker.school_prompt")
         assert_select "option[value='']", text: I18n.t("classroom.student_registrations.class_picker.school_prompt")
         assert_equal [ "Collège Voltaire", "Lycée Classique d'Abidjan" ], css_select("option[value!='']").map(&:text)
         assert_select "label[for='#{name}_school_public_id']", text: /#{I18n.t("school.drena_schools.index.label")}/

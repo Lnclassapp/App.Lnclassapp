@@ -60,18 +60,8 @@ module UseCases
         Node::ExerciseNode.new(
           public_id: SecureRandom.base58(PUBLIC_ID_LENGTH), essential_id:, title: exercise["title"].squish,
           description: exercise["description"].to_s.strip.presence, exercise_type: exercise["exercise_type"], position: nil,
-          questions: exercise["questions"].each_with_index.map { |question, rank| question_node(question, rank) }
+          questions: exercise["questions"].each_with_index.map { |question, rank| Node::QuestionNode.from_import(question, position: rank + 1) }
         )
-      end
-
-      # L'ancienne application nomme is_correct ce que le schéma nomme correct.
-      def question_node(question, index)
-        answers = question["answers"].each_with_index.map do |answer, rank|
-          Node::AnswerNode.new(position: rank + 1, content: answer["content"].strip,
-                               correct: answer.fetch("correct") { answer["is_correct"] } == true)
-        end
-        Node::QuestionNode.new(position: index + 1, content: question["content"].strip, explanation: question["explanation"].to_s.strip.presence,
-                               question_type: question["question_type"], answers:)
       end
     end
   end

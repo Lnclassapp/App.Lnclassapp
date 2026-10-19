@@ -1,0 +1,15 @@
+<%# 🌐 UI · assessment/session_results/kinds/_numeric_review — « Ton choix » d'une réponse en nombre, dans la correction %>
+<%# Rôle : la saisie de l'élève ; avec reveal seulement (enseignant, équipe), la valeur attendue et sa marge %>
+<%# ADR  : 0091 §4.4 · UDR : 0023, 0087 §3.6 %>
+<%# locals: (question:, reveal:) -%>
+<% if question.response_text %>
+  <p class="text-sm text-mute"><%= t("assessment.session_results.question_review.selected") %> : <strong class="text-ink"><%= question.response_text %></strong></p>
+<% end %>
+<% if reveal && question.solution.any? %>
+  <p class="mt-1 text-sm text-success" data-correct>
+    <%= t("assessment.session_results.question_review.expected") %> : <strong><%= question.solution.first %></strong>
+    <% if question.numeric_tolerance&.positive? %>
+      <%= t("assessment.exercises.solution.tolerance", tolerance: question.numeric_tolerance.to_s("F").delete_suffix(".0").tr(".", ",")) %>
+    <% end %>
+  </p>
+<% end %>

@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage |
+| **Statut** | livré (code sur `feature/ma-classe-eleve`, PR à ouvrir après `accueil-eleve`) |
 | **Ouvert le** | 2026-10-15 |
 | **Branche** | `Develop` (cadrage, docs seules) ; le code passera par une PR |
 | **Programme** | — |
@@ -46,4 +46,4 @@ Toile : https://claude.ai/artifact/5YCL2xGDiioqcrvEBr6W1B (téléphone d'abord).
 
 ## Questions ouvertes
 
-Aucune pour les maquettes. Suite : PRD, UDR et plan de lots, puis le code dans une PR.
+Aucune. PRD, UDR-0086 et plan de lots écrits le 2026-10-15 (pas d’ADR) ; le code se fait dans une PR, après celle d’`accueil-eleve`.

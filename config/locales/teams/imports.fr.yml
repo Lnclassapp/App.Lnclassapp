@@ -2,6 +2,28 @@
 fr:
   teams:
     imports:
+      question_examples:
+        title: "Exemples des autres types de questions"
+      # Une phrase par règle de structure d'une question (Question.structure_errors_for, ADR-0039 et ADR-0091).
+      question_rules:
+        true_false_needs_two_answers: "Une question Vrai / Faux a exactement 2 propositions."
+        too_few_answers: "Ajoutez au moins une proposition incorrecte en plus des propositions correctes."
+        wrong_correct_count: "Le nombre de propositions correctes ne correspond pas au type de la question."
+        blank_marker: "Écrivez ___ (trois tirets bas) une seule fois dans l'énoncé, là où l'élève répond."
+        accepted_answers_count: "Donnez de 1 à 5 réponses acceptées."
+        duplicate_accepted: "Deux réponses acceptées sont identiques (sans compter majuscules, accents et espaces)."
+        numeric_needs_one_value: "Donnez une seule valeur attendue."
+        numeric_value_unreadable: "La valeur attendue doit être un nombre, par exemple -3,5."
+        negative_tolerance: "La marge doit être positive ou nulle."
+        tolerance_out_of_range: "La marge doit être un nombre d'au plus 99 999 999,9999, avec 4 décimales au plus."
+        tolerance_not_allowed: "La marge (tolerance) ne vaut que pour une question numeric."
+        steps_count: "Donnez de 3 à 6 étapes, dans le bon ordre."
+        duplicate_steps: "Deux étapes ont le même texte : l'ordre serait ambigu."
+        pairs_count: "Donnez de 3 à 5 paires."
+        missing_match: "Complétez le côté droit (match) de chaque paire."
+        duplicate_match: "Deux paires ont le même côté droit : chacun doit être unique."
+        duplicate_left: "Deux paires ont le même côté gauche : chacun doit être unique."
+        match_not_allowed: "Le côté droit (match) ne vaut que pour une question matching."
       statuses:
         queued: "En file d'attente"
         validating: "Vérification"

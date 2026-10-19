@@ -603,4 +603,25 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to new_session_path
   end
+
+  # CA-16 (accueil-eleve, ADR-0089 §4.2, UDR-0084 §3.7) : la colonne « Fait seul (7 j) » ; 0 s'écrit « — », en text-mute ;
+  # au téléphone, la ligne sous le nom. Les comptes de l'exercice donné ne bougent pas.
+  test "CA-16 : « Fait seul (7 j) » vaut 1 pour l'élève qui a fini un exercice non donné il y a 3 jours, « — » pour l'autre" do
+    exercise = create_exercise
+    assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
+    awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
+    koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
+    create_exercise_session(student: koffi, exercise:, status: "completed", classroom_assignment: assignment)
+    create_exercise_session(student: awa, status: "completed", started_at: 3.days.ago, completed_at: 3.days.ago)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "#classroom_roster div#self_practice_heading.hidden.sm\\:flex", text: /#{Regexp.escape(I18n.t("#{scope}.roster.self_practice"))}/
+    assert_select "#self_practice_#{awa.public_id}.hidden.sm\\:block", text: /#{Regexp.escape(I18n.t("#{scope}.roster.self_practice"))}\s+1/
+    assert_select "#self_practice_#{koffi.public_id} span.text-mute", text: "—"
+    assert_select "#self_practice_line_#{awa.public_id}.sm\\:hidden", text: "Fait seul : 1 cette semaine"
+    assert_select "#self_practice_line_#{koffi.public_id}", text: "Fait seul : 0 cette semaine"
+    assert_select "#assignment_#{assignment.public_id} p", text: /\A\s*1 fait\b.*1 pas encore fait\s*\z/
+  end
 end
