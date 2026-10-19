@@ -55,7 +55,7 @@ module Queries
                      new_students_count: (new_students_count(id, since) if show_roster),
                      session_days: (session_days(teacher_id, id) if teacher_id),
                      assignments: assignments(id, show_follow_up),
-                     courses: courses(level_id, series_id, (Orm::TeacherSchoolMaterial.where(teacher_id:, school_id:).in_order.pluck(:material_id) if teacher_id)))
+                     courses: courses(level_id, series_id, teacher_material_ids(teacher_id, school_id)))
       end
 
       # ADR-0089 §4.2 : une session « fait seul » est terminée, standard (les remédiations restent hors du compte) et sans
@@ -66,7 +66,21 @@ module Queries
         Orm::ExerciseSession.where(status: "completed", kind: "standard", classroom_assignment_id: nil, started_at: window)
       end
 
+      # ADR-0101 §4.4 : le cours est-il l'un de ceux que la page de la classe affiche pour cet acteur (niveau, série, et matière
+      # de l'enseignant ; toute matière pour l'équipe) ? Une seule requête. → true | false
+      def shown_course?(public_id:, course_slug:, teacher_id: nil)
+        level_id, series_id, school_id = Orm::Classroom.where(public_id:).pick(:level_id, :series_id, :school_id)
+        return false if level_id.nil?
+
+        course_scope(level_id, series_id, teacher_material_ids(teacher_id, school_id)).where(slug: course_slug).exists?
+      end
+
       private
+
+      # Ses matières dans l'établissement de la classe, dans l'ordre d'ajout (ADR-0103 §4.5) ; nil pour l'équipe.
+      def teacher_material_ids(teacher_id, school_id)
+        Orm::TeacherSchoolMaterial.where(teacher_id:, school_id:).in_order.pluck(:material_id) if teacher_id
+      end
 
       def students(classroom_id, search, since, today)
         scope = Orm::ClassroomStudent.joins(:student).where(classroom_id:, left_at: nil)
@@ -124,16 +138,19 @@ module Queries
       # (niveau de la classe, série vide ou la sienne), réduite aux matières de l'enseignant dans l'établissement de la classe
       # (material_ids, ADR-0103 §4.5), rangées dans son ordre ; nil : toutes, par nom (l'équipe).
       def courses(level_id, series_id, material_ids)
-        scope = Orm::Course.joins(:level, :material).left_joins(:series)
-                           .where(status: "published", level_id:, series_id: [ nil, series_id ].uniq)
-        scope = scope.where(material_id: material_ids) if material_ids
-        rows = scope.order("materials.name", "courses.name", "courses.id").pluck(*COURSE_COLUMNS)
+        rows = course_scope(level_id, series_id, material_ids).order("materials.name", "courses.name", "courses.id").pluck(*COURSE_COLUMNS)
         rows = rows.sort_by.with_index { |row, index| [ material_ids.index(row.last), index ] } if material_ids
         essentials = Orm::Essential.where(course_id: rows.map(&:first), status: "published").group(:course_id).count
         rows.map do |id, slug, name, subtitle, level_name, series_name, material_name, material_category, material_slug|
           CourseRow.new(slug:, name:, subtitle:, level_name:, series_name:, material_name:, material_category:,
                         essentials_count: essentials.fetch(id, 0), material_slug:)
         end
+      end
+
+      def course_scope(level_id, series_id, material_ids)
+        scope = Orm::Course.joins(:level, :material).left_joins(:series)
+                           .where(status: "published", level_id:, series_id: [ nil, series_id ].uniq)
+        material_ids ? scope.where(material_id: material_ids) : scope
       end
     end
   end

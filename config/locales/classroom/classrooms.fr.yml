@@ -104,3 +104,10 @@ fr:
         essentials:
           one: "%{count} fiche essentielle"
           other: "%{count} fiches essentielles"
+      # UDR-0121 §3.1, ADR-0101 §4.4 : les fiches à revoir de la classe (AS-17) ; « 10/20 » = Grading.grade_on_20(PASS_THRESHOLD).
+      gaps:
+        title: "Fiches à revoir"
+        subtitle: "Des élèves ont eu moins de %{grade}/20 sur ces fiches et ne les ont pas encore levées."
+        students:
+          one: "1 élève"
+          other: "%{count} élèves"

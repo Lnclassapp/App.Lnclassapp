@@ -277,6 +277,38 @@ module Queries
         assert_nil ClassroomOverviewQuery.new.call(public_id: "inconnue", show_roster: true)
       end
 
+      # ADR-0101 §8 : « Revoir la fiche » ne lit les lacunes que d'un cours que la page de la classe montre.
+      test "shown_course? : un cours publié du niveau de la classe, dans les matières de l'enseignant ; rien d'autre" do
+        material = create_material
+        teacher = create_teacher(material:, classrooms: [ @classroom ])
+        shown = create_course(level: @classroom.level, material:)
+        other_material = create_course(level: @classroom.level)
+        other_level = create_course
+        draft = create_course(level: @classroom.level, material:, status: "draft")
+        query = ClassroomOverviewQuery.new
+        shown_for = ->(course, **options) { query.shown_course?(public_id: @classroom.public_id, course_slug: course.slug, **options) }
+
+        assert shown_for.call(shown, teacher_id: teacher.id)
+        assert_not shown_for.call(other_material, teacher_id: teacher.id)
+        assert shown_for.call(other_material)
+        assert_not shown_for.call(other_level)
+        assert_not shown_for.call(draft)
+        assert_not query.shown_course?(public_id: "inconnue", course_slug: shown.slug)
+      end
+
+      # ADR-0103 §4.5 : les matières de l'enseignant sont celles de l'établissement de la classe, pas celles d'un autre.
+      test "shown_course? : seules comptent ses matières dans l'établissement de la classe" do
+        here, elsewhere = create_material(name: "SVT"), create_material(name: "Histoire")
+        teacher = create_teacher(material: here, classrooms: [ @classroom ])
+        add_teacher_school(teacher, create_school, materials: [ elsewhere ])
+        mine = create_course(level: @classroom.level, material: here)
+        theirs = create_course(level: @classroom.level, material: elsewhere)
+        query = ClassroomOverviewQuery.new
+
+        assert query.shown_course?(public_id: @classroom.public_id, course_slug: mine.slug, teacher_id: teacher.id)
+        assert_not query.shown_course?(public_id: @classroom.public_id, course_slug: theirs.slug, teacher_id: teacher.id)
+      end
+
       # CA-16 (accueil-eleve, ADR-0089 §4.2, UDR-0084 §3.7) : « Fait seul (7 j) » compte les sessions terminées, standard,
       # sans assignation, commencées dans les 7 derniers jours d'Abidjan, aujourd'hui compris.
       def practise(student, days_ago, hour: 10, **)
