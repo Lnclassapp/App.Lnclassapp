@@ -275,6 +275,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_161500) do
     t.index ["slug"], name: "index_drenas_on_slug", unique: true
   end
 
+  create_table "essential_images", force: :cascade do |t|
+    t.string "public_id", limit: 14, null: false
+    t.bigint "essential_id"
+    t.string "alt", limit: 150
+    t.string "content_type", null: false
+    t.integer "byte_size", null: false
+    t.integer "width", null: false
+    t.integer "height", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["essential_id"], name: "index_essential_images_on_essential_id"
+    t.index ["public_id"], name: "index_essential_images_on_public_id", unique: true
+    t.check_constraint "byte_size >= 1 AND byte_size <= 307200", name: "essential_images_byte_size"
+    t.check_constraint "content_type::text = ANY (ARRAY['image/jpeg'::character varying, 'image/png'::character varying, 'image/webp'::character varying]::text[])", name: "essential_images_content_type_values"
+    t.check_constraint "width >= 1 AND width <= 1200 AND height >= 1 AND height <= 1200", name: "essential_images_sides"
+  end
+
   create_table "essential_reads", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "essential_id", null: false
@@ -594,6 +611,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_161500) do
     t.check_constraint "cardinality(selected_answer_ids) > 0 OR response_text IS NOT NULL", name: "question_attempts_selected_answer_ids_present"
   end
 
+  create_table "question_images", force: :cascade do |t|
+    t.string "public_id", limit: 14, null: false
+    t.bigint "question_id"
+    t.string "alt", limit: 150
+    t.string "content_type", null: false
+    t.integer "byte_size", null: false
+    t.integer "width", null: false
+    t.integer "height", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["public_id"], name: "index_question_images_on_public_id", unique: true
+    t.index ["question_id"], name: "index_question_images_on_question_id", unique: true, where: "(question_id IS NOT NULL)"
+    t.check_constraint "byte_size >= 1 AND byte_size <= 307200", name: "question_images_byte_size"
+    t.check_constraint "content_type::text = ANY (ARRAY['image/jpeg'::character varying, 'image/png'::character varying, 'image/webp'::character varying]::text[])", name: "question_images_content_type_values"
+    t.check_constraint "width >= 1 AND width <= 1200 AND height >= 1 AND height <= 1200", name: "question_images_sides"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.text "content", null: false
     t.datetime "created_at", null: false
@@ -603,7 +637,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_161500) do
     t.string "question_type", null: false
     t.datetime "updated_at", null: false
     t.decimal "numeric_tolerance", precision: 12, scale: 4
+    t.string "image_description", limit: 150
     t.index ["exercise_id", "position"], name: "index_questions_on_exercise_id_and_position", unique: true
+    t.check_constraint "image_description IS NULL OR char_length(btrim(image_description::text)) >= 1", name: "questions_image_description_present"
     t.check_constraint "numeric_tolerance >= 0::numeric", name: "questions_numeric_tolerance_positive"
     t.check_constraint "question_type::text = ANY (ARRAY['true_false'::character varying::text, 'single_choice'::character varying::text, 'multiple_correct_2'::character varying::text, 'multiple_correct_3'::character varying::text, 'fill_blank'::character varying::text, 'numeric'::character varying::text, 'ordering'::character varying::text, 'matching'::character varying::text])", name: "questions_question_type_values"
   end
@@ -1013,6 +1049,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_161500) do
   add_foreign_key "courses", "materials", on_delete: :restrict
   add_foreign_key "courses", "series", on_delete: :restrict
   add_foreign_key "courses", "users", column: "author_id", on_delete: :restrict
+  add_foreign_key "essential_images", "essentials", on_delete: :restrict
   add_foreign_key "essential_reads", "essentials", on_delete: :cascade
   add_foreign_key "essential_reads", "users", column: "student_id", on_delete: :restrict
   add_foreign_key "essentials", "courses", on_delete: :restrict
@@ -1050,6 +1087,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_161500) do
   add_foreign_key "pin_recovery_codes", "users", on_delete: :cascade
   add_foreign_key "question_attempts", "exercise_sessions", on_delete: :restrict
   add_foreign_key "question_attempts", "questions", on_delete: :restrict
+  add_foreign_key "question_images", "questions", on_delete: :restrict
   add_foreign_key "questions", "exercises", on_delete: :restrict
   add_foreign_key "referral_shares", "users", on_delete: :restrict
   add_foreign_key "referrals", "schools", on_delete: :restrict

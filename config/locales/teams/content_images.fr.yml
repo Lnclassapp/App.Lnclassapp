@@ -1,0 +1,82 @@
+# Images des fiches et des questions (chantier images-dans-les-cours) — ADR-0105, UDR-0129. Toutes les clés des lots A à D.
+fr:
+  activemodel:
+    attributes:
+      dtos/shared/content_image_input:
+        file: "Image"
+      dtos/catalog/essential_input:
+        image_alts: "Textes de remplacement"
+    errors:
+      models:
+        # Mêmes raisons côté serveur et côté navigateur (UDR-0129 §3.1, image_messages).
+        dtos/shared/content_image_input:
+          attributes:
+            file:
+              blank: "Choisissez une image."
+              content_type: "Ce format n'est pas accepté : JPEG, PNG ou WebP fixe seulement."
+              too_heavy: "L'image dépasse %{count} Ko, même allégée."
+              too_large: "L'image dépasse %{count} pixels de côté."
+              unreadable: "Ce fichier n'est pas une image lisible."
+              too_many: "%{count} images au plus par fiche."
+        dtos/catalog/essential_input:
+          image_alt_blank: "Saisissez le texte de remplacement de l'image %{number} : il est obligatoire pour publier."
+  teams:
+    essentials:
+      form:
+        content_hint_images: "Titres, gras, italique, listes, citations et formules entre $…$. Images JPEG, PNG ou WebP : %{max_bytes} et %{max_side} pixels de côté au plus, allégées avant l'envoi."
+        insert_image: "Insérer une image"
+        slots_left:
+          one: "1 image à insérer"
+          other: "%{count} images à insérer"
+        slot: "Image à insérer : %{description}"
+        # Les lignes de textes de remplacement reprennent celles de l'article (teams/articles/_image_alt_row, UDR-0067 §3.4.2).
+        image_messages:
+          refused: "« %{name} » n'a pas été ajoutée. %{reason}"
+          format: "Ce format n'est pas accepté : JPEG, PNG ou WebP fixe seulement."
+          too_heavy: "L'image dépasse %{max_bytes}, même allégée."
+          too_many: "%{max_count} images au plus par fiche."
+          web_image: "Une image copiée d'une autre page web n'est pas acceptée : enregistrez-la, puis insérez-la."
+          forbidden: "Vous ne pouvez pas ajouter d'image à une fiche."
+          failed: "L'envoi a échoué. Vérifiez votre connexion, puis réessayez."
+          expired: "Votre session a expiré. Reconnectez-vous dans un autre onglet pour garder cette fiche ouverte, puis réessayez."
+          uploading: "Envoi de l'image en cours…"
+          uploaded: "Image %{number} ajoutée. Vérifiez son texte de remplacement sous l'éditeur."
+          waiting: "Envoi de l'image en cours : la fiche s'enregistrera ensuite."
+          not_saved: "La fiche n'est pas enregistrée : une image n'a pas pu être ajoutée. Retirez-la ou renvoyez-la, puis enregistrez de nouveau."
+      transition:
+        image_slots_unreadable: "Le texte de cette fiche est trop complexe à relire : simplifiez la mise en forme (listes, blocs imbriqués), puis réessayez."
+        image_slots_malformed:
+          one: "Un emplacement d'image de cette fiche est mal écrit : « [[image: description]] » doit être seul dans son paragraphe, avec une description de 150 caractères au plus. Corrigez-le ou retirez-le avant de publier."
+          other: "%{count} emplacements d'image de cette fiche sont mal écrits : « [[image: description]] » doit être seul dans son paragraphe, avec une description de 150 caractères au plus. Corrigez-les ou retirez-les avant de publier."
+        image_slots_left:
+          one: "Il reste 1 image à insérer dans cette fiche."
+          other: "Il reste %{count} images à insérer dans cette fiche."
+        image_alts_blank: "Une image de cette fiche n'a pas de texte de remplacement : complétez-le avant de publier."
+    courses:
+      transition:
+        essential_unreadable: "Le texte de la fiche « %{name} » est trop complexe à relire : simplifiez sa mise en forme. Rien n'a été publié."
+        essential_not_ready: "La fiche « %{name} » n'est pas prête : il lui manque une image ou un texte de remplacement. Rien n'a été publié."
+    exercises:
+      question_fields:
+        image_expected: "Image à insérer : %{description}"
+        add_image: "Ajouter l'image"
+        replace_image: "Remplacer l'image"
+        remove_image: "Retirer l'image"
+        drop_description: "Cette question n'a pas besoin d'image"
+        image_alt_label: "Texte de remplacement de l'image"
+        image_alt_missing: "À compléter"
+        image_locked: "Cette question a déjà été tentée : son image ne se modifie plus."
+        image_messages:
+          refused: "L'image n'a pas été ajoutée. %{reason}"
+          format: "Ce format n'est pas accepté : JPEG, PNG ou WebP fixe seulement."
+          too_heavy: "L'image dépasse %{max_bytes}, même allégée."
+          forbidden: "Vous ne pouvez pas ajouter d'image à une question."
+          failed: "L'envoi a échoué. Vérifiez votre connexion, puis réessayez."
+          expired: "Votre session a expiré. Reconnectez-vous dans un autre onglet, puis réessayez."
+          uploading: "Envoi de l'image en cours…"
+          waiting: "Envoi de l'image en cours : l'exercice s'enregistrera ensuite."
+          not_saved: "L'exercice n'est pas enregistré : une image n'a pas pu être ajoutée. Retirez-la ou renvoyez-la, puis enregistrez de nouveau."
+      transition:
+        refusals:
+          image_missing: "La question %{number} attend son image."
+          image_alt_blank: "L'image de la question %{number} n'a pas de texte de remplacement."

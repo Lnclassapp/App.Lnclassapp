@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::ImportCourseTree
 # Rôle : adaptateur d'import des cours complets (fiches, exercices, questions, propositions), tout en draft
-# ADR  : 0035, 0039 · UDR : 0038
+# ADR  : 0035, 0039, 0105 · UDR : 0038
 module UseCases
   module Catalog
     class ImportCourseTree
@@ -103,7 +103,6 @@ module UseCases
           questions: exercise["questions"].each_with_index.map { |question, rank| Node::QuestionNode.from_import(question, position: rank + 1) }
         )
       end
-
 
       # Une série est facultative : ContentNode a déjà refusé une série donnée mais inconnue.
       def series_id(name, lookup)

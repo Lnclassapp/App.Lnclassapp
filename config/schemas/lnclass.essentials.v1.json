@@ -16,13 +16,14 @@
   },
   "$defs": {
     "text": { "type": ["string", "null"] },
+    "essential_content": { "description": "Texte d'une fiche : 200 Ko (204800 caractères) au plus (ADR-0105, menace.md n° 13).", "type": ["string", "null"], "maxLength": 204800 },
     "essential": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "name": { "$ref": "#/$defs/text" },
         "subtitle": { "$ref": "#/$defs/text" },
-        "content": { "$ref": "#/$defs/text" },
+        "content": { "$ref": "#/$defs/essential_content" },
         "status": { "$ref": "#/$defs/text" },
         "exercises": {
           "type": "array",

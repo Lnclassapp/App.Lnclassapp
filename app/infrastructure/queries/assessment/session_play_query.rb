@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Assessment::SessionPlayQuery
-# Rôle : écran d'une session : progression, prochaine question sans aucune correction ni id révélateur, verdict de la question tentée
-# ADR  : 0028, 0054, 0091 (§4.4 : rien de la solution dans la page) · UDR : 0007, 0022, 0087
+# Rôle : écran d'une session : progression, prochaine question sans aucune correction ni id révélateur, son image, verdict de la question tentée
+# ADR  : 0028, 0054, 0091 (§4.4 : rien de la solution dans la page), 0105 · UDR : 0007, 0022, 0087, 0129
 module Queries
   module Assessment
     class SessionPlayQuery
@@ -10,13 +10,13 @@ module Queries
         # Rang de la question où l'élève reprendra (UDR-0087 §3.3).
         def resume_number = answered_count + 1
       end
-      # number : rang de la question dans l'exercice. Par type (ADR-0091 §4.4) :
+      # number : rang de la question dans l'exercice ; image : son image au-dessus de l'énoncé, ou nil (ADR-0105). Par type (ADR-0091 §4.4) :
       # - answers : les propositions mélangées d'une question à cocher, avec leur id ; vide pour tout autre type ;
       # - items : les étapes (ordering) ou la colonne de droite (matching), mélangées, sans id : seul leur indice d'affichage ;
       # - prompts : la colonne de gauche d'un matching, dans l'ordre des positions, sans id.
       # Trous et nombre : rien de tout cela, aucune ligne answers n'est lue.
-      Question = Data.define(:id, :number, :content, :question_type, :answers, :items, :prompts) do
-        def initialize(items: [], prompts: [], **) = super
+      Question = Data.define(:id, :number, :content, :question_type, :answers, :items, :prompts, :image) do
+        def initialize(items: [], prompts: [], image: nil, **) = super
         def kind_name = Entities::Assessment::Question.kind_name_for(question_type)
         def expected_count = Entities::Assessment::Question::EXPECTED.fetch(question_type.to_sym)
         def multiple? = expected_count > 1
@@ -25,6 +25,8 @@ module Queries
       Answer = Data.define(:id, :content, :index)
       Item = Data.define(:index, :content)
       Pair = Data.define(:left, :right)
+      # Assez pour <img> : adresse, texte de remplacement, dimensions contre le saut de mise en page (UDR-0129 §3.4).
+      Image = Data.define(:public_id, :alt, :width, :height)
       # correct : verdict de la tentative ; selected_answers : les seules propositions que l'élève a cochées (choix), ou ses
       # étapes dans son ordre (ordering) ; response_text : son texte (trous, nombre) ; pairs : ses paires (matching).
       Feedback = Data.define(:question_id, :number, :content, :explanation, :correct, :question_type, :selected_answers,
@@ -61,8 +63,13 @@ module Queries
         return if index.nil?
 
         question_id, content, _explanation, question_type = questions[index]
-        Question.new(id: question_id, number: index + 1, content:, question_type:, answers: [],
+        Question.new(id: question_id, number: index + 1, content:, question_type:, answers: [], image: image(question_id),
                      **displayed(session_id, question_id, question_type))
+      end
+
+      def image(question_id)
+        row = Orm::QuestionImage.where(question_id:).pick(:public_id, :alt, :width, :height)
+        row && Image.new(*row)
       end
 
       # Ce que la page montre avant la réponse, par type ; les identifiants ne servent qu'au mélange, ici, côté serveur.

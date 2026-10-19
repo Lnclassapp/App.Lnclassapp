@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::ContentTreeWriterPort
 # Rôle : contrat d'écriture en masse d'arbres de contenu déjà validés et identifiés, tout en draft
-# ADR  : 0035, 0039, 0068, 0091
+# ADR  : 0035, 0039, 0068, 0091, 0105
 module Ports
   module Catalog
     module ContentTreeWriterPort
@@ -9,11 +9,13 @@ module Ports
       AnswerNode = Data.define(:position, :content, :correct, :match_content) do
         def initialize(match_content: nil, **) = super
       end
-      QuestionNode = Data.define(:position, :content, :explanation, :question_type, :answers, :numeric_tolerance) do
-        def initialize(numeric_tolerance: nil, **) = super
+      # image_description : l'image annoncée par l'import, jamais l'image (ADR-0105 §4.6) ; nil sans image.
+      QuestionNode = Data.define(:position, :content, :explanation, :question_type, :answers, :numeric_tolerance, :image_description) do
+        def initialize(numeric_tolerance: nil, image_description: nil, **) = super
 
         # Une question d'un fichier d'import déjà validé (ContentNode), commune aux trois imports. L'ancienne application
         # nomme is_correct ce que le schéma nomme correct ; hors choix, chaque élément est juste (ADR-0091 §4.2).
+        # L'image n'arrive que par sa description, et seul le schéma lnclass.course-tree l'admet (ADR-0105 §4.6).
         def self.from_import(question, position:)
           choice = Entities::Assessment::Question.kind_name_for(question["question_type"]) == "choice"
           answers = question["answers"].each_with_index.map do |answer, rank|
@@ -22,7 +24,8 @@ module Ports
                            match_content: answer["match"].to_s.strip.presence)
           end
           new(position:, content: question["content"].strip, explanation: question["explanation"].to_s.strip.presence,
-              question_type: question["question_type"], numeric_tolerance: question["tolerance"]&.then { BigDecimal(it.to_s) }, answers:)
+              question_type: question["question_type"], numeric_tolerance: question["tolerance"]&.then { BigDecimal(it.to_s) }, answers:,
+              image_description: question.dig("image", "description")&.squish)
         end
       end
       ExerciseNode = Data.define(:public_id, :essential_id, :title, :description, :exercise_type, :position, :questions)

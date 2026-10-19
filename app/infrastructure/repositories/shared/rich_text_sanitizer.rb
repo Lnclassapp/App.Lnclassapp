@@ -1,11 +1,11 @@
 # 🔌 INFRA · Repositories::Shared::RichTextSanitizer
-# Rôle : assainit tout HTML écrit dans un contenu riche (liste blanche de Rails) ; sans pièce jointe, sauf les images admises d'un article
-# ADR  : 0039, 0049, 0068, 0074 · UDR : 0014, 0067
+# Rôle : assainit tout HTML écrit dans un contenu riche (liste blanche de Rails) ; sans pièce jointe, sauf les images admises d'un article ou d'une fiche
+# ADR  : 0039, 0049, 0068, 0074, 0105 · UDR : 0014, 0067, 0129
 module Repositories
   module Shared
     # Retire <script>, <style>, <iframe>, les attributs on*, les liens javascript: et les <action-text-attachment> :
     # les cours, les fiches et les imports n'acceptent aucune pièce jointe, et Trix n'est pas un garde-fou pour une
-    # requête forgée. Seul l'adaptateur des articles passe image_ids (ADR-0074 §4.5).
+    # requête forgée. Seuls les adaptateurs des articles et des fiches passent image_ids (ADR-0074 §4.5, ADR-0105).
     module RichTextSanitizer
       ATTACHMENT = "action-text-attachment"
 
@@ -18,12 +18,13 @@ module Repositories
       # html : String | nil → String | nil. Loofah élague d'abord les balises dangereuses avec leur contenu,
       # pour qu'un <script> ne laisse pas son code en texte ; la liste blanche de Rails règle ensuite les attributs.
       # Une seule analyse (ADR-0068 §4) : les deux filtres passent sur le même fragment.
-      # image_ids : nil (aucune pièce jointe, comportement des cours) ou Set des id d'Orm::ArticleImage admis.
-      def self.call(html, image_ids: nil)
+      # image_ids : nil (aucune pièce jointe, comportement des cours) ou Set des id admis de image_model
+      # (« Orm::ArticleImage » pour un article, « Orm::EssentialImage » pour une fiche).
+      def self.call(html, image_ids: nil, image_model: ArticleScrubber::IMAGE_MODEL)
         return html if html.nil?
         return Loofah.html5_fragment(html).scrub!(:prune).scrub!(SCRUBBER).to_s unless image_ids
 
-        Loofah.html5_fragment(html).scrub!(ArticlePrune.new).scrub!(ArticleScrubber.new(image_ids)).to_s
+        Loofah.html5_fragment(html).scrub!(ArticlePrune.new).scrub!(ArticleScrubber.new(image_ids, image_model:)).to_s
       end
 
       # L'élagage de Loofah, qui épargne la seule balise inconnue de Loofah qu'un article garde : la pièce jointe. Son
@@ -38,9 +39,10 @@ module Repositories
         ATTACHMENT_ATTRIBUTES = %w[sgid content-type width height caption filename filesize presentation].freeze
         IMAGE_MODEL = "Orm::ArticleImage"
 
-        def initialize(image_ids)
+        def initialize(image_ids, image_model: IMAGE_MODEL)
           super()
           @image_ids = image_ids
+          @image_model = image_model
           self.tags = Rails::HTML5::SafeListSanitizer.allowed_tags.to_a - %w[img] + [ ATTACHMENT ]
           self.attributes = Rails::HTML5::SafeListSanitizer.allowed_attributes
         end
@@ -57,7 +59,7 @@ module Repositories
           return super unless node.name == ATTACHMENT
 
           gid = SignedGlobalID.parse(node["sgid"].to_s, for: ActionText::Attachable::LOCATOR_NAME)
-          gid&.model_name == IMAGE_MODEL && @image_ids.include?(gid.model_id.to_i)
+          gid&.model_name == @image_model && @image_ids.include?(gid.model_id.to_i)
         end
 
         def scrub_attributes(node)

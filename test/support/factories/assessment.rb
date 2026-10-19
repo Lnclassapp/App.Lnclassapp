@@ -16,6 +16,19 @@ module Factories
       end
     end
 
+    # ADR-0105 : une image de question vérifiée et stockée comme par l'envoi de l'équipe, rattachée ou non à une question.
+    def create_question_image(question: nil, alt: nil, fixture: "photos/photo.jpg", created_at: nil)
+      input = Dtos::Shared::ContentImageInput.new(file: StringIO.new(file_fixture(fixture).binread))
+      raise ArgumentError, "#{fixture} n'est pas une image de contenu : #{input.errors.full_messages}" unless input.valid?
+
+      stored = Repositories::Assessment::QuestionImageStore.new.store(data: input.data, content_type: input.content_type,
+                                                                      width: input.width, height: input.height)
+      Orm::QuestionImage.find_by!(public_id: stored.public_id).tap do |image|
+        columns = { question_id: question&.id, alt:, created_at: }.compact
+        image.update_columns(columns) if columns.any?
+      end
+    end
+
     # ADR-0091: a question of one of the four new types. answers: texts, or [left, right] for matching; all correct.
     def create_kind_question(exercise:, question_type:, answers:, content: "Question #{factory_sequence}", numeric_tolerance: nil,
                              explanation: nil, position: exercise.questions.maximum(:position).to_i + 1)
