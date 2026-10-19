@@ -15,6 +15,7 @@
 - Les cinq vues qui recopiaient `grade_on_20(x) >= grade_on_20(MASTERY_THRESHOLD)` (et un `>= 14` en dur dans `_treated_exercise`) étaient déjà « alignées » mais dupliquaient l'arrondi : elles passent par `reaches?`.
 - Cinq tests de domaine et de requête codaient les anciennes bornes (49/50, 69/70) : réécrits aux nouvelles (47/48, 67/68).
 - Les numéros ADR-0105 et UDR-0128 étaient déjà pris (PR 238 et aide WhatsApp sur `Develop`) ; UDR-0129 et 0130 sont réservés par les PR 238 et 237. Renumérotés ADR-0106 et UDR-0131 à la reprise, lignes de la PR seulement : les UDR-0128 de l'aide WhatsApp restent.
+- Revues de la reprise : rien en sécurité ; ajoutés un garde-fou d'architecture (aucune comparaison brute à un `*_THRESHOLD` dans `app/`, hors `perfect?`) et le test de la page de résultat à 98 % (20/20, Or, « Recommencer »).
 
 ## Ce qu'on a appris sur la codebase
 
@@ -25,4 +26,4 @@
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Rattrapage des badges déjà décernés (élèves à 48 %, 68 %, 78 %) | Pas demandé ; chantier de données | à ouvrir si le porteur le veut |
+| Rattrapage des badges déjà décernés (élèves à 48 %, 68 %, 78 %) : d'ici là, la page de l'exercice (badge enregistré) peut dire un palier sous la page de résultat (recalculé), ADR-0106 §5 | Pas demandé ; chantier de données | à ouvrir si le porteur le veut |

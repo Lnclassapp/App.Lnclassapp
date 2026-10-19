@@ -85,7 +85,7 @@ Les textes qui citaient un seuil en pourcentage (infobulles « Badge » et « Ma
 ### 🔴 Coûts consentis
 
 - Les seuils effectifs baissent de 1 à 2 points (§4.1) : un élève à 48 % obtient Bronze, un exercice à 48 % de bonnes réponses n'est plus « à revoir ».
-- **Les badges déjà décernés ne sont pas recalculés.** Un badge s'écrit à la clôture et ne descend jamais (ADR-0033) ; un élève dont la meilleure session valait 48 %, 68 % ou 78 % garde le palier d'avant jusqu'à sa prochaine session. Si le porteur veut un rattrapage, c'est un chantier de données à part.
+- **Les badges déjà décernés ne sont pas recalculés.** Un badge s'écrit à la clôture et ne descend jamais (ADR-0033) ; un élève dont la meilleure session valait 48 %, 68 % ou 78 % garde le palier d'avant tant qu'une **nouvelle** session n'atteint pas elle-même la note du palier (`award` compare le score de la session close au badge enregistré, pas le meilleur score). D'ici là, les écrans qui recalculent le palier (page de résultat, synthèse de compréhension de l'enseignant) peuvent dire un palier au-dessus du badge enregistré (page de l'exercice). Si le porteur veut un rattrapage, c'est un chantier de données à part.
 - Le Diamant ne suit pas la règle : 98 % et 99 % s'affichent 20/20 sans Diamant. C'est voulu (§4.3), mais ça se verra sur un exercice de 50 questions ou plus.
 
 ## 6. Comment vérifier que la décision est respectée
