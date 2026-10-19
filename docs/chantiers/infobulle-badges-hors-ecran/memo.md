@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | décision |
+| **Statut** | livré |
 | **Ouvert le** | 2026-10-19 |
 | **Branche** | `fix/infobulle-badges-hors-ecran` |
 | **Programme** | — |
@@ -52,8 +52,8 @@ Captures : celles de la PR 263, `1-resultat-infobulle-badges-ordinateur.png` (en
 - [x] Test lancé et **rouge**, pour la bonne raison (message vérifié)
 - [x] Correctif appliqué dans la couche de la **cause**, pas du symptôme
 - [x] Test au vert · suite du contexte borné au vert
-- [ ] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
+- [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours (slide-up et drawer-in se jouent, puis `transform: none` ; au toucher à 390 px, infobulle dans le flux)
 - [x] Données déjà corrompues : aucune (défaut d'affichage)
-- [ ] Challenger a rejoué les étapes de reproduction dans l'application
+- [x] Challenger a rejoué les étapes de reproduction dans l'application (bulle à `left 582 / top 341`, plus de défilement horizontal ; captures envoyées au porteur)
 - [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
 - [x] `journal.md` : cause, trou de test comblé, effets de bord écartés

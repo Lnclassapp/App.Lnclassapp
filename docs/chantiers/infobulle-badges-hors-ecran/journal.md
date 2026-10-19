@@ -64,7 +64,7 @@ Le test de reproduction se place donc dans le test système de la page de résul
 
 | | |
 |---|---|
-| **Livré le** | |
-| **PR** | |
+| **Livré le** | 2026-10-19 |
+| **PR** | [#265](https://github.com/Lnclassapp/App.Lnclassapp/pull/265) |
 | **ADR produits** | — |
 | **UDR produits** | — |
