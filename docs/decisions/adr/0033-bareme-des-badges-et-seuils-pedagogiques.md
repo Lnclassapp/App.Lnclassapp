@@ -1,7 +1,7 @@
 # ADR-0033 : Quatre badges de Bronze à Diamant, des seuils pédagogiques nommés, l'avancement et le score dans deux champs
 <!-- index
 titre: Quatre badges de Bronze à Diamant, des seuils pédagogiques nommés, l'avancement et le score dans deux champs
-statut: Accepté — *remplace 0008 §3 (badges) et §4*
+statut: Accepté — *remplace 0008 §3 (badges) et §4* — *amendé par [0105](./0105-les-seuils-pedagogiques-se-lisent-sur-la-note-affichee.md) (seuils lus sur la note sur 20), 2026-10-19*
 problematique: Bronze 50, Argent 70, Or 80, Diamant 100 (sans faute) ; un badge par élève et exercice, montée stricte ; `PASS_THRESHOLD`, `MASTERY_THRESHOLD`, `GOLD_THRESHOLD`, `PERFECT_THRESHOLD` ; `progress_percent` et `score_percent`. F-10 + F-11.
 -->
 
@@ -12,6 +12,7 @@ problematique: Bronze 50, Argent 70, Or 80, Diamant 100 (sans faute) ; un badge 
 | **Chantier** | `docs/chantiers/refonte-application` — décisions de fondation **F-10** et **F-11**, bloque la V1 (Lot C) |
 | **Remplace** | [ADR-0008](./0008-moteur-evaluation-et-gamification.md) §3 (barème et remplacement des badges) et §4 (échelles affichées) |
 | **Remplacé par** | — |
+| **Amendé par** | [ADR-0105](./0105-les-seuils-pedagogiques-se-lisent-sur-la-note-affichee.md) : §4, les seuils 50, 70 et 80 se lisent sur la note sur 20 (Bronze dès 48 %, Argent dès 68 %, Or dès 78 %) ; le Diamant reste le sans-faute |
 
 ---
 

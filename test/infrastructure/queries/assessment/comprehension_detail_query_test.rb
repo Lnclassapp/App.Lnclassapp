@@ -136,7 +136,7 @@ module Queries
         assert_equal [ 33, nil, 100 ], questions.map(&:rate)
       end
 
-      test "progress per question: the first session reads 0 % where the best reads 100 %; under 50 % it is to revisit" do
+      test "progress per question: the first session reads 0 % where the best reads 100 %; under 10/20 it is to revisit" do
         student(scores: [ 40, 60 ], answers: [ { 1 => true, 2 => false, 3 => false }, { 1 => true, 2 => true, 3 => false } ])
         student(scores: [ 30, 65 ], answers: [ { 1 => false, 2 => false, 3 => false }, { 1 => false, 2 => true, 3 => false } ])
 
@@ -147,12 +147,13 @@ module Queries
         assert_equal [ false, false, true ], questions.map(&:to_revisit)
       end
 
-      test "a question at 49 % is to revisit" do
-        35.times { |index| student(scores: [ 90 ], answers: [ { 1 => index < 17 } ]) }
+      # ADR-0105: the rate reads like a score. 49 % displays 10/20, the grade of the pass threshold: not to revisit.
+      test "a question at 49 % reads 10/20 and is not to revisit, one at 46 % reads 9/20 and is" do
+        35.times { |index| student(scores: [ 90 ], answers: [ { 1 => index < 17, 2 => index < 16 } ]) }
 
-        question = detail.questions.first
+        first, second = detail.questions.first(2)
 
-        assert_equal [ 49, true ], [ question.rate, question.to_revisit ]
+        assert_equal [ [ 49, false ], [ 46, true ] ], [ [ first.rate, first.to_revisit ], [ second.rate, second.to_revisit ] ]
       end
 
       test "without a student of two sessions in the category, no rate at the first session" do
@@ -190,7 +191,7 @@ module Queries
       end
 
       test "the students of a category: declining, stagnant, single session, stable, progressing, then by name" do
-        student("Koffi", "Progres", scores: [ 50, 68 ])
+        student("Koffi", "Progres", scores: [ 50, 67 ])
         student("Awa", "Seule", scores: [ 55 ])
         student("Jean", "Baisse", scores: [ 65, 50 ])
         student("Zoé", "Achi", scores: [ 58 ])
@@ -198,7 +199,7 @@ module Queries
         student("Yao", "Achi", scores: [ 52 ])
 
         assert_equal [ [ "Jean Baisse", 65, :decline ], [ "Ali Stagne", 62, :stagnant ], [ "Yao Achi", 52, nil ],
-                       [ "Zoé Achi", 58, nil ], [ "Awa Seule", 55, nil ], [ "Koffi Progres", 68, :progress ] ],
+                       [ "Zoé Achi", 58, nil ], [ "Awa Seule", 55, nil ], [ "Koffi Progres", 67, :progress ] ],
                      detail(category: :fragile).students.map { [ it.display_name, it.best, it.trend ] }
 
         student("Marc", "Progres", scores: [ 60, 90 ])

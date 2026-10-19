@@ -71,11 +71,13 @@ module Queries
       test "la réussite de la classe : part de ses élèves présents dont le meilleur score atteint le seuil, par exercice" do
         alice = create_student(classroom: @classroom)
         bruno = create_student(classroom: @classroom)
+        carla = create_student(classroom: @classroom)
         gone = create_student(classroom: @classroom)
         Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
         create_exercise_session(student: alice, exercise: @first, status: "completed", score_percent: 40)
         create_exercise_session(student: alice, exercise: @first, status: "completed", score_percent: 80)
-        create_exercise_session(student: bruno, exercise: @first, status: "completed", score_percent: 49)
+        create_exercise_session(student: bruno, exercise: @first, status: "completed", score_percent: 47)
+        create_exercise_session(student: carla, exercise: @first, status: "completed", score_percent: 48)
         create_exercise_session(student: bruno, exercise: @first, status: "started")
         create_exercise_session(student: bruno, exercise: @second, status: "started")
         create_exercise_session(student: gone, exercise: @second, status: "completed", score_percent: 10)
@@ -83,8 +85,9 @@ module Queries
 
         row = query
 
-        # Alice réussit par son meilleur score (80), Bruno non (49) ; un élève parti ou d'une autre classe ne compte pas.
-        assert_equal [ [ 50, 1, 2 ], [ nil, 0, 0 ] ],
+        # ADR-0105 : la note affichée décide. Alice réussit par son meilleur score (80), Carla à 48 % (10/20), Bruno non à
+        # 47 % (9/20) ; un élève parti ou d'une autre classe ne compte pas.
+        assert_equal [ [ 67, 2, 3 ], [ nil, 0, 0 ] ],
                      row.exercises.map { [ it.success_percent, it.passed_students_count, it.completed_students_count ] }
       end
 

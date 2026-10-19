@@ -15,6 +15,8 @@ module Entities
         assert_equal [ 10, 9 ], [ 49, 47 ].map { Grading.grade_on_20(it) }
         assert_equal :none, decide(49, nil)
         assert_equal :none, decide(49, :gap)
+        assert_equal :none, decide(48, :gap)
+        assert_equal [ true, false ], [ 48, 47 ].map { Grading.reaches?(it, Grading::PASS_THRESHOLD) }
         assert_equal :open, decide(47, nil)
         assert_equal :increment, decide(47, :gap)
       end

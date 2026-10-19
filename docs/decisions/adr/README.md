@@ -166,6 +166,8 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0065](./0065-espace-direction-simple-en-lecture-seule.md) | **§4** ligne « Devoir rendu » et « Les sessions de remédiation ne comptent pas » : une session de remédiation rattachée au devoir le rend, et entre dans les moyennes. | complément du 2026-10-04 dans l'ADR, chantier [`remediation-comptee-faite`](../../chantiers/remediation-comptee-faite/memo.md) |
 | [0072](./0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) | **§1 point 1 et §4.4** « `standard` » : côté direction aussi, « rendu » est une session terminée rattachée à l'assignation, quel que soit son `kind`. | complément du 2026-10-04 (ter) dans l'ADR, chantier [`remediation-comptee-faite`](../../chantiers/remediation-comptee-faite/memo.md) |
 | [0067](./0067-budgets-de-temps-serveur-des-ecrans.md) | **§4 levier 1** : `index_exercise_sessions_handed_in` perd sa condition `kind = 'standard'` (même nom, même clé, même `INCLUDE`). Budgets inchangés. | note du 2026-10-04 dans l'ADR, chantier [`remediation-comptee-faite`](../../chantiers/remediation-comptee-faite/memo.md) |
+| [0033](./0033-bareme-des-badges-et-seuils-pedagogiques.md) | **§4** : Bronze à 50 %, Argent à 70 %, Or à 80 % se lisent sur le pourcentage brut. Les valeurs et les noms des seuils restent ; le Diamant reste le sans-faute. | [0105](./0105-les-seuils-pedagogiques-se-lisent-sur-la-note-affichee.md) *(amendement, accepté)* |
+| [0101](./0101-remediation-implicite-exercice-propose-et-lecture-enseignant.md) | **§4.5, dernière phrase** : « les autres seuils restent sur le pourcentage brut ». | [0105](./0105-les-seuils-pedagogiques-se-lisent-sur-la-note-affichee.md) *(amendement, accepté)* |
 
 ---
 
