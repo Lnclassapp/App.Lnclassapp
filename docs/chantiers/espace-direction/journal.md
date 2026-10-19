@@ -41,13 +41,15 @@
 | Archiver l'ancienne branche distante `feature/espace-direction` sous l'étiquette `archive/espace-direction-2026-09-28` | Laissée telle quelle sur consigne ; l'archivage revient au porteur | porteur |
 | Mesures « avant / après » du PRD §7 (page de classe, accueil, recherche p95) | Pas de base de mesure dans la session | à relever sur la recette |
 | Second facteur de la direction | Hors périmètre (ADR-0065) | — |
-| Feuille de route §5 et §6 périmées pour la V2 | Interdit de toucher les index pendant le cadrage | clôture de ce chantier |
+| Feuille de route §5 et §6 périmées pour la V2 (ID-11, ID-20, SC-11, SC-12, SC-16, SC-20, SC-25 désormais faits ; ID-10 = SC-21 sorti par Q5) | La feuille de route est partagée par les chantiers ouverts en parallèle : sa mise à jour revient au porteur, après la fusion | porteur |
+| Sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) non lancés sur le diff final | Non disponibles dans la session de l'exécutant | à lancer sur la PR |
+| « Anciens élèves » : son champ de recherche n'a pas `min-h-tap` (hauteur réduite), même défaut que corrigé ici pour « Chercher un élève » | Hors périmètre | `finitions` |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | |
-| **PR** | |
-| **ADR produits** | ADR-0092 (Proposé) |
-| **UDR produits** | UDR-0092, UDR-0093, UDR-0094 (Proposé) |
+| **Livré le** | 2026-10-19 (PR prête, fusion par le porteur ; #250 déjà fusionnée dans `Develop`) |
+| **PR** | `feature/espace-direction-v2` → `Develop` |
+| **ADR produits** | ADR-0092 (Accepté) |
+| **UDR produits** | UDR-0092, UDR-0094 (Accepté) ; UDR-0093 (Abandonnée) |

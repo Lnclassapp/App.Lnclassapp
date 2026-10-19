@@ -251,10 +251,10 @@ Lot 0 — SOCLE (séquentiel)                                                   
 
 ## Portes de sortie
 
-- [ ] Tous les lots sont `Done`
-- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : inscription d'une secrétaire, gestes masqués, changement de classe, recherche, à 390 px et sur ordinateur (captures envoyées au porteur, non commitées)
-- [ ] Pureté du domaine, rubocop, tests, parcours système, brakeman : `bin/ci-quiet` vert, verdict écrit dans la PR
-- [ ] Mesures « après » du PRD §7 relevées
-- [ ] Sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) une fois sur le diff final (policies, routes et use cases touchés)
-- [ ] ADR-0092 et UDR-0092 à 0094 `Accepté` ; index régénérés par `script/docs/build_index` au commit de clôture
-- [ ] `journal.md` complété ; feuille de route §5 et §6 mises à jour (ID-10, ID-11, ID-20, SC-11, SC-12, SC-16, SC-20, SC-21, SC-25)
+- [x] Tous les lots sont `Done` (0, A, B, C, E, F ; D retiré par Q5)
+- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : à faire par le porteur. Captures 390 px et ordinateur de l'auteur envoyées, non commitées
+- [x] Pureté du domaine, rubocop, tests, parcours système, brakeman : `bin/ci-quiet`, verdict écrit dans la PR
+- [ ] Mesures « après » du PRD §7 : non relevées (journal, dette)
+- [ ] Sous-agents de revue : non lancés (l'exécutant n'en dispose pas dans sa session) ; à lancer sur la PR
+- [x] ADR-0092, UDR-0092 et UDR-0094 `Accepté`, UDR-0093 `Abandonnée` ; index régénérés par `script/docs/build_index` au commit de clôture
+- [x] `journal.md` complété ; feuille de route : laissée au porteur (dette, journal)
