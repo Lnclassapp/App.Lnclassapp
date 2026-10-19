@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | en cours |
+| **Statut** | livré |
 | **Ouvert le** | 2026-10-19 |
 | **Branche** | `perf/ci-perf-a-la-demande` |
 
