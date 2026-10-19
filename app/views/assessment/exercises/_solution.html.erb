@@ -1,0 +1,29 @@
+<%# 🌐 UI · assessment/exercises/_solution — la solution d'une question d'un nouveau type, pour qui a reveal (CA-16) %>
+<%# Rôle : trous (réponses acceptées), nombre (valeur et marge), ordre (étapes numérotées), relier (paires) ; jamais rendu pour l'élève %>
+<%# ADR  : 0091 §4.2, §4.4 · UDR : 0021, 0087 §3.1 · question : QuestionRow d'ExerciseDetailQuery, lue avec reveal %>
+<%# locals: (question:) -%>
+<% answers = question.answers %>
+<div class="rounded-ln bg-success-soft px-3 py-2 text-sm text-ink">
+  <p class="flex items-center gap-1.5 font-semibold text-success">
+    <%= ui_icon "check-circle", variant: :mini, size: :sm %><%= t("assessment.exercises.solution.title") %>
+  </p>
+  <% case question.kind_name %>
+  <% when "fill_blank" %>
+    <p class="mt-1"><%= safe_join(answers.map { tag.strong(it.content) }, t("assessment.exercises.solution.or")) %></p>
+  <% when "numeric" %>
+    <p class="mt-1">
+      <strong><%= answers.first&.content %></strong>
+      <% if question.numeric_tolerance&.positive? %>
+        <%= t("assessment.exercises.solution.tolerance", tolerance: question.numeric_tolerance.to_s("F").delete_suffix(".0").tr(".", ",")) %>
+      <% end %>
+    </p>
+  <% when "ordering" %>
+    <ol class="mt-1 list-inside list-decimal space-y-0.5">
+      <% answers.each do |answer| %><li><%= answer.content %></li><% end %>
+    </ol>
+  <% when "matching" %>
+    <ul class="mt-1 space-y-0.5">
+      <% answers.each do |answer| %><li><%= answer.content %> → <%= answer.match_content %></li><% end %>
+    </ul>
+  <% end %>
+</div>

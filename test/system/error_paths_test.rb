@@ -47,7 +47,9 @@ class ErrorPathsTest < ApplicationSystemTestCase
 
   # --- Réponse vide (AS-09) -----------------------------------------------------------------------------------
 
-  test "a student who validates without choosing gets the error in the question card, then answers normally" do
+  # UDR-0087 §3.2 (CA-1): « Valider » stays disabled until an answer is chosen; the blank answer refused by the server
+  # (422 in the card) is covered by the controller test, the only way to send it now.
+  test "a student cannot validate without choosing, then answers normally" do
     exercise = create_exercise(title: "Méiose")
     # UDR-0013, amendement du 2026-10-01 : la classe de l'élève est du niveau du cours de l'exercice.
     classroom = create_classroom(level: exercise.essential.course.level)
@@ -56,12 +58,9 @@ class ErrorPathsTest < ApplicationSystemTestCase
 
     sign_in_as student
     click_on t("classroom.student_homes.assigned_exercise.start")
-    assert_selector "#question-card", text: t("assessment.exercise_sessions.question_card.number", number: 1, total: 2)
+    assert_selector "#question-card", text: /#{t("assessment.exercise_sessions.question_card.number", number: 1, total: 2)}/i
 
-    assert_no_page_reload do
-      click_on t("assessment.exercise_sessions.question_card.submit")
-      assert_selector "#question-card #attempt-errors", text: attempt_error(:answer_ids, :blank)
-    end
+    assert_button t("assessment.exercise_sessions.question_card.submit"), disabled: true
     assert_equal 0, Orm::QuestionAttempt.count
 
     assert_no_page_reload do
@@ -236,10 +235,6 @@ class ErrorPathsTest < ApplicationSystemTestCase
 
   def join_refusal(reason)
     t("activemodel.errors.models.dtos/classroom/student_registration_input.attributes.base.#{reason}")
-  end
-
-  def attempt_error(attribute, reason)
-    t("activemodel.errors.models.dtos/assessment/attempt_input.attributes.#{attribute}.#{reason}")
   end
 
   def already_running

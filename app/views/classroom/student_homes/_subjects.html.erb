@@ -1,14 +1,15 @@
-<%# 🌐 UI · classroom/student_homes/_subjects — « Mes matières » de l'accueil élève, en bulles illustrées %>
-<%# Rôle : une bulle par matière de son niveau, vers le catalogue filtré ; pastille ambre si un exercice y est en retard %>
-<%# UDR  : 0062 §3.3, 0069 §3.3 (bulles ; amendements du 2026-10-06 : abréviations sous 640 px, plus de « Tous les cours »), 0076 §3.1 %>
-<%# charte §9 : jamais de compteur ; la pastille est dite par sr_suffix %>
+<%# 🌐 UI · classroom/student_homes/_subjects — « Mes matières » de l'accueil élève, grille de bulles illustrées %>
+<%# Rôle : une bulle par matière de son niveau, vers le catalogue filtré ; « PC », « HG » dans la grille, nom entier lu ; pastille ambre si un exercice y est en retard %>
+<%# UDR  : 0062 §3.3, 0069 §3.3, 0076 §3.1, 0084 §3.5 (4 colonnes, 6 dès 700 px), §3.10 · charte §9 : jamais de compteur ; la pastille est dite par sr_suffix %>
 <%# locals: (subjects:, late_slugs:, icon:) -%>
-<%= ui_card title: t(".title"), icon:, id: "student_home_subjects", class: "max-sm:pt-3" do %>
+<section id="student_home_subjects" aria-labelledby="student_home_subjects_title" class="space-y-4">
+  <h2 id="student_home_subjects_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".title") %></h2>
   <% if subjects.empty? %>
     <%= ui_empty_state title: t(".empty"), icon: %>
   <% else %>
     <nav id="student_home_subject_bubbles" aria-label="<%= t(".label") %>">
-      <ul class="grid grid-cols-4 gap-y-4 sm:grid-cols-6">
+      <%# UDR-0086 §3.5 : le palier de 700 px s'écrit min-[700px]:, sans token de point de rupture. %>
+      <ul class="grid grid-cols-4 gap-y-4 min-[700px]:grid-cols-6">
         <% subjects.each do |subject| %>
           <% late = late_slugs.include?(subject.slug) %>
           <li>
@@ -21,4 +22,4 @@
       </ul>
     </nav>
   <% end %>
-<% end %>
+</section>

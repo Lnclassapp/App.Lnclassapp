@@ -61,7 +61,7 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     get join_classroom_path(token.upcase)
 
     assert_response :success
-    assert_select "h2", text: I18n.t("classroom.student_registrations.new.title")
+    assert_select "h1", text: I18n.t("classroom.student_registrations.new.title")
     assert_select "form#student-registration-form[action='#{student_registrations_path}'][method=post]" do
       assert_select "#classroom-preview", text: /6ème 1 — Lycée Classique d'Abidjan/
       assert_select "#classroom-preview", text: /Niveau : 6ème/

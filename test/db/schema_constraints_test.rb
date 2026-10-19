@@ -83,6 +83,8 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
   CASCADES = %w[sessions login_attempts totp_credentials backup_codes pin_recovery_codes].freeze
   # ADR-0078 §4.1 : the targeted classrooms and the dismissals of an announcement go with it.
   MESSAGE_CASCADES = %w[message_classrooms message_dismissals].freeze
+  # ADR-0090 §4.1 : the reads of an essential go with it (never its student, who is erased first, ADR-0036).
+  ESSENTIAL_CASCADES = %w[essential_reads].freeze
   FRAMEWORK_TABLES = /\A(active_storage_|action_text_|solid_(queue|cache|cable)_|schema_migrations|ar_internal_metadata)/
 
   def connection = ActiveRecord::Base.connection
@@ -322,6 +324,16 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::InvalidForeignKey) { connection.transaction(requires_new: true) { Orm::School.where(id: school.id).delete_all } }
   end
 
+  # ADR-0090 §4.1 : une lecture par élève et par fiche ; l'élève ne part pas sous ses lectures, la fiche les emporte.
+  test "CA-12: an essential read is unique per student and essential, restrict on the student, cascade on the essential" do
+    keys = connection.foreign_keys("essential_reads").to_h { [ it.column, [ it.to_table, it.on_delete ] ] }
+
+    assert_equal({ "student_id" => [ "users", :restrict ], "essential_id" => [ "essentials", :cascade ] }, keys)
+    assert(connection.indexes("essential_reads").any? { it.unique && it.columns == %w[student_id essential_id] })
+    assert_equal %w[created_at essential_id first_read_at last_read_at student_id updated_at],
+                 connection.columns("essential_reads").reject(&:null).map(&:name).without("id").sort
+  end
+
   # ADR-0074 §4.1 : un article, ses images ; la base refuse ce que le domaine refuse déjà.
   test "BL: the database refuses an article or an image the blog must never hold" do
     author = create_team_member(team_role: "content", second_factor: false)
@@ -497,7 +509,8 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     application_tables.each do |table|
       connection.foreign_keys(table).each do |foreign_key|
         cascade = (CASCADES.include?(table) && foreign_key.to_table == "users" && foreign_key.column == "user_id") ||
-                  (MESSAGE_CASCADES.include?(table) && foreign_key.to_table == "messages")
+                  (MESSAGE_CASCADES.include?(table) && foreign_key.to_table == "messages") ||
+                  (ESSENTIAL_CASCADES.include?(table) && foreign_key.to_table == "essentials")
         expected = cascade ? :cascade : :restrict
 
         assert_equal expected, foreign_key.on_delete, "#{table}.#{foreign_key.column}"

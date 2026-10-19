@@ -7,6 +7,10 @@ module Teams
     def import_error_message(error)
       params = error.params.to_h.symbolize_keys
       return format_mismatch_message(params) if error.code == "format_mismatch"
+      # ADR-0091 : une phrase par règle de structure, la phrase générique pour une règle sans la sienne.
+      if error.code == "question_structure"
+        return t("teams.imports.question_rules.#{params[:rule]}", default: t("teams.imports.error_codes.question_structure"))
+      end
       return t("teams.imports.error_codes.#{error.code}", **params) unless error.code == "schema"
 
       generic = t("teams.imports.error_codes.schema")

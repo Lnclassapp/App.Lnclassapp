@@ -1,4 +1,4 @@
-# Accueil élève (plan boucle-pedagogique, Lot A2, CL-23, TR-04, AS-36) — UDR-0007, UDR-0058 §3.3 (interface-epuree, Lot A), UDR-0076 §3.1 ; sans classe active, UDR-0081 §3.5
+# Accueil élève (plan boucle-pedagogique, Lot A2, CL-23, TR-04, AS-36) — UDR-0007, UDR-0058 §3.3 (interface-epuree, Lot A), UDR-0076 §3.1 ; sans classe active, UDR-0081 §3.5 ; accueil-eleve, UDR-0084, ADR-0089
 fr:
   classroom:
     student_homes:
@@ -7,6 +7,7 @@ fr:
         greeting: "Bonjour, %{name}"
         todo_title: "À faire"
         todo_subtitle: "Les exercices assignés à ta classe"
+        todo_subtitle_daily: "Ce qui t'attend aujourd'hui"
         todo_progress: "%{done} sur %{total} faits"
         todo_empty: "Aucun exercice assigné pour l'instant"
         todo_empty_description: "Les exercices que tes enseignants assignent à ta classe apparaîtront ici."
@@ -26,6 +27,8 @@ fr:
           one: "1 élève"
           other: "%{count} élèves"
         open: "Entrer"
+        # UDR-0084 §3.5 : le bouton redessiné, porte ouverte devant et flèche après.
+        enter: "Entrer en classe"
       assigned_exercise:
         start: "Commencer"
         start_label: "Commencer l'exercice « %{title} »"
@@ -49,3 +52,18 @@ fr:
       pending_gaps:
         title: "Fiches essentielles à revoir"
         subtitle: "Relis-les, puis refais un de leurs exercices."
+      # UDR-0084 §3.6, ADR-0089 §4.1 : carte de l'exercice du jour, dans « À faire », sans travail de l'enseignant.
+      daily_exercise:
+        badge: "Exercice du jour"
+        start: "Commencer"
+        start_label: "Commencer l'exercice du jour « %{title} »"
+        done: "Bravo, à demain !"
+        tomorrow: "Demain : %{subject}"
+        none: "Rien à te proposer aujourd'hui."
+      # UDR-0084 §3.6, ADR-0089 §4.3 : sous la carte du jour, dans les trois états ; partage WhatsApp.
+      invite_teacher:
+        prompt: "Ton enseignant n'est pas encore sur Lnclass ?"
+        action: "Inviter mon enseignant"
+        # UDR-0086 §3.7 : le nom du bouton seul de « Ma classe » (standalone), qui commence par le texte visible.
+        action_label: "Inviter mon enseignant sur WhatsApp"
+        message: "Bonjour ! Je suis en %{classroom} à %{school}. Sur Lnclass, vous pouvez nous donner des exercices et suivre nos résultats. Inscrivez-vous ici : %{link}"

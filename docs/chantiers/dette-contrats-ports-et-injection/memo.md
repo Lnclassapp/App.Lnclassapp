@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | refactoring |
-| **Statut** | cadrage |
+| **Statut** | abandonné — obsolète depuis la refonte (vérifié le 2026-10-16) |
 | **Ouvert le** | 2026-09-18 |
 | **Branche** | `refactor/dette-contrats-ports-et-injection` |
 | **Gravité** | 🟡 **Moyenne — dette structurelle, pas de casse visible** |
@@ -66,3 +66,7 @@ Ces quatre points ont été découverts en écrivant les tests, et chacun a **fo
 ## Questions encore ouvertes
 
 - Combien d'autres ports déclarent un contrat différent de celui que leurs use cases consomment ? Un audit automatisé est-il possible (comparer les méthodes appelées sur une dépendance injectée aux méthodes déclarées par le port) ?
+
+## Clôture (2026-10-16)
+
+Abandonné : le défaut n'existe plus dans le code actuel. Vérification : `purge_demo_students.rb` et `manage_classroom_assignment.rb`, sièges des quatre cas, n'existent plus. Rien à corriger.

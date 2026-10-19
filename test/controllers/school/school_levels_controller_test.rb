@@ -2,7 +2,7 @@ require "test_helper"
 
 # IL-04, IL-06 (ADR-0085 §4.2, UDR-0081 §3.3): the levels of a school, public and limited to 30 requests a minute — the
 # « picker_levels » frame of the student cascade. Only the levels that have an active classroom this year; never a
-# classroom, a headcount nor a teacher.
+# classroom, a headcount nor a teacher. UDR-0091: as pills, real radios.
 class School::SchoolLevelsControllerTest < ActionDispatch::IntegrationTest
   PICKER = "classroom.student_registrations.class_picker".freeze
 
@@ -19,30 +19,42 @@ class School::SchoolLevelsControllerTest < ActionDispatch::IntegrationTest
     get school_picker_levels_path(school_public_id, **params), headers: { "Turbo-Frame" => "picker_levels" }
   end
 
-  test "IL-04: the frame lists the levels with an active classroom, in order, for a visitor" do
+  # UDR-0091 §3.1 : des pastilles de 40 px, de vrais radios ; la pastille choisie en brand ; leur nombre annoncé.
+  test "IL-04: the frame lists the levels with an active classroom, in order, as pills, for a visitor" do
     levels(scope: "student_registration")
 
     assert_response :success
     assert_select "turbo-frame#picker_levels.block.transition-opacity[aria-live=polite]" do
-      assert_select "label[for='student_registration_level_slug']", text: /#{I18n.t("#{PICKER}.level")}/
-      assert_select "select[name='student_registration[level_slug]'][required]" \
-                    "[data-action='change->classroom--class-picker#loadClassrooms']"
-      assert_select "option[value='']", text: I18n.t("#{PICKER}.level_prompt")
-      assert_equal [ "6ème", "3ème" ], css_select("option[value!='']").map(&:text)
+      assert_select ".sr-only", text: I18n.t("#{PICKER}.levels_found", count: 2)
+      assert_select "div.flex.flex-wrap label.h-10.rounded-full.has-checked\\:bg-brand-strong.has-checked\\:text-white", 2
+      assert_equal [ "6ème", "3ème" ], css_select("label").map { it.text.strip }
+      assert_select "label input[type=radio][name='student_registration[level_slug]'][required]" \
+                    "[data-action='change->classroom--class-picker#loadClassrooms']", 2
+      assert_select "input[type=radio][value='#{@sixieme.slug}']:not([checked])"
+      assert_select "select", 0
     end
     assert_no_match(/2nde|3e 2|6e 1/, response.body)
     assert_not_includes response.body, @classroom.public_id
   end
 
+  test "UDR-0091 §3.6: a single level is announced in the singular" do
+    single = create_school
+    create_classroom(school: single, level: @sixieme)
+
+    levels(single.public_id)
+
+    assert_select "turbo-frame#picker_levels .sr-only", text: "1 niveau trouvé."
+  end
+
   test "the fields follow the scope of the page: sign-up by default, or « choose your classroom »" do
     levels(scope: "student_classroom_choice")
 
-    assert_select "select[name='student_classroom_choice[level_slug]']"
+    assert_select "input[type=radio][name='student_classroom_choice[level_slug]']", 2
 
     [ "", "user", "teacher_registration" ].each do |scope|
       levels(scope:)
 
-      assert_select "select[name='student_registration[level_slug]']", 1, scope
+      assert_select "input[type=radio][name='student_registration[level_slug]']", 2, scope
     end
   end
 
@@ -56,7 +68,7 @@ class School::SchoolLevelsControllerTest < ActionDispatch::IntegrationTest
       assert_response :success
       assert_select "turbo-frame#picker_levels", text: /#{Regexp.escape(I18n.t("#{PICKER}.not_found_title"))}/
       assert_select "turbo-frame#picker_levels", text: /#{Regexp.escape(I18n.t("#{PICKER}.not_found_description"))}/
-      assert_select "select", 0
+      assert_select "input", 0
     end
   end
 
@@ -72,6 +84,6 @@ class School::SchoolLevelsControllerTest < ActionDispatch::IntegrationTest
     assert_response :too_many_requests
     assert_select "turbo-frame#picker_levels [role=alert]", text: /#{Regexp.escape(I18n.t("#{PICKER}.rate_limited"))}/
     assert_select "turbo-frame#picker_levels a[href='#{school_picker_levels_path(@school.public_id, scope: 'student_registration')}']"
-    assert_select "select", 0
+    assert_select "input", 0
   end
 end

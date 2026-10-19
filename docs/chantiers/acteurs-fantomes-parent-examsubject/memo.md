@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix (défensif) |
-| **Statut** | décision — cadrage terminé, prêt à planifier |
+| **Statut** | abandonné — obsolète depuis la refonte (vérifié le 2026-10-16) |
 | **Ouvert le** | 2026-09-18 |
 | **Branche** | `fix/acteurs-fantomes-parent-examsubject` |
 | **Gravité** | 🟡 **Moyenne — un état invalide peut être écrit en base** |
@@ -76,3 +76,7 @@ Les deux concepts **restent dans le glossaire et dans les entités**, marqués �
 
 - L'ADR-0002 (authentification par contact téléphonique) prévoyait-il le rôle Parent ?
 - `.Business/` contient de la documentation produit — le rôle Parent y figure-t-il comme engagement commercial ?
+
+## Clôture (2026-10-16)
+
+Abandonné : le défaut n'existe plus dans le code actuel. Vérification : `entities/exam_subject.rb` n'existe plus et aucune classe `Parent` ne reste dans `app/`. Rien à corriger.

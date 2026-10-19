@@ -186,6 +186,25 @@ module Queries
         assert_equal 6, follow_up.counts.late
       end
 
+      # CA-16 (accueil-eleve, ADR-0089 §4.2) : « fait seul » est une session terminée, standard, sans assignation. Elle ne
+      # change pas les comptes du travail donné, même sur l'exercice assigné.
+      test "CA-16: a self-practice session, even on the assigned exercise, changes no Counts" do
+        done = create_student(classroom: @classroom)
+        alone = create_student(classroom: @classroom)
+        hand_in(done, at: Time.zone.local(2026, 10, 7, 10))
+        read = -> { [ follow_up.counts, AssignmentFollowUpQuery.counts(classroom_id: @classroom.id, assignment_ids: [ @assignment.id ]) ] }
+        before = read.call
+
+        [ alone, done ].each do |student|
+          [ @exercise, create_exercise(essential: @exercise.essential) ].each do |exercise|
+            create_exercise_session(student:, exercise:, status: "completed", completed_at: Time.zone.local(2026, 10, 7, 11))
+          end
+        end
+
+        assert_equal before, read.call
+        assert_equal AssignmentFollowUpQuery::Counts.new(done: 1, late: 0, pending: 1), read.call.first
+      end
+
       def count_queries(&)
         count = 0
         counter = ->(*, payload) { count += 1 unless payload[:name] == "SCHEMA" }
