@@ -97,6 +97,14 @@ module UseCases
         assert_equal({ total_count: 3, imported_count: 2, skipped_count: 1, error_count: 0 }, @reports.finished[:counts])
       end
 
+      test "RM-21: a batch whose every school changed since the launch writes nothing, not even an empty statement" do
+        regenerate([ Fake.candidate(1, "A", rotated_at: LAUNCH), Fake.candidate(2, "B", rotated_at: LAUNCH + 1.second) ])
+
+        assert_equal 0, @schools.writes
+        assert_empty @audit.many
+        assert_equal({ total_count: 2, imported_count: 0, skipped_count: 2, error_count: 0 }, @reports.finished[:counts])
+      end
+
       test "RM-10: a school changed between the read and the write is left by the guard of the UPDATE, and counted already changed" do
         regenerate(schools(3), changed_meanwhile: [ 2 ])
 

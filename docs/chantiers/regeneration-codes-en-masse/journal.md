@@ -49,6 +49,10 @@ Le nombre de requêtes par lot est fixe (~6 : lecture, savepoint, `UPDATE … RE
 
 ## Ce qui a dérapé
 
+- **Le menu « Codes » gardait les filtres du premier chargement.** Hors du frame « schools », il ne voyait pas un filtre changé dans la liste : la modale recomptait juste, mais sur toute la liste. Vu en écrivant le test système ; corrigé par un `turbo-stream` dans la réponse du frame.
+- **Le premier `bin/ci-quiet` (2026-10-16, charge ~40 sur 4 cœurs) a trouvé trois vrais défauts** : les deux use cases concrets recevaient `policy:` par `**` (le garde ADR-0028 lit la signature), `new.html.erb` n'appelait pas `page_title` (seul son partial le faisait), une branche du moteur (lot entièrement « déjà changé ») sans test. Corrigés ; les autres échecs (minuterie d'`ImageHeader`, concurrence de `StaffRestore`, cinq tests système d'autres écrans) sont passés relancés seuls.
+- **Une infobulle dans un `<p>`.** `ui_info_tip` est un `<details>` : dans un paragraphe, le navigateur fermait le `<p>` et l'icône tombait seule sous la ligne. Vu sur les captures ; le conteneur est un `<div>`.
+
 - **La ligne du backlog était périmée.** « Régénère le code d'établissement (donc le lien d'inscription des enseignants) » était vrai le 2026-10-01, faux depuis le 2026-10-07 (ADR-0083). Rien dans le backlog ne le signalait.
 - **Le cadrage avait exclu les liens de classe** (« stables ou un par un ») ; le porteur les voulait. « Le code de la classe » n'existait plus dans le code depuis l'ADR-0085 : il fallait traduire la demande en « jeton du lien de classe ».
 
@@ -70,6 +74,8 @@ Le nombre de requêtes par lot est fixe (~6 : lecture, savepoint, `UPDATE … RE
 | `ManageSchoolStructurePolicy` autorise encore la direction à régénérer le code, sans route | Aucun effet visible | `inscription-direction-sans-code` |
 | « Changer le lien » (un par un) n'écrit pas d'audit, la masse si | Le porteur a gardé l'unitaire inchangé | à ouvrir si le porteur le demande |
 | La date de changement d'un lien de classe n'est affichée nulle part | Pas d'UDR sur la page de la classe | à ouvrir si utile |
+| Recette par un rôle distinct (parcours RM-01 → RM-02, RM-15 → RM-18 dans l'application) | L'agent n'a pas d'autre rôle que l'auteur | le porteur, sur la PR |
+| Q1 à Q7 et les choix du memo (admin seul, ni export ni notification, année en cours par défaut) appliqués sans confirmation | Réponses attendues du porteur | ce chantier, si le porteur en change un |
 | Export ou envoi des nouveaux codes et liens | Rien de secret dans un rapport ; demande sa propre menace | à ouvrir si le porteur le demande |
 | Moitié `school_codes` à retirer avec le code d'établissement | Décision du porteur en connaissance de cause | `inscription-direction-sans-code` |
 
@@ -77,7 +83,7 @@ Le nombre de requêtes par lot est fixe (~6 : lecture, savepoint, `UPDATE … RE
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
+| **Livré le** | 2026-10-16 (PR prête vers `Develop`, non fusionnée) |
+| **PR** | voir la PR de la branche `feature/regeneration-codes-en-masse` |
 | **ADR produits** | ADR-0096 *(Accepté, amendé)* |
 | **UDR produits** | UDR-0104, UDR-0105, UDR-0106 *(Acceptées, amendées)* |

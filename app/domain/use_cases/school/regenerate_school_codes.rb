@@ -5,8 +5,9 @@ module UseCases
   module School
     class RegenerateSchoolCodes < RegenerateInBulk
       # schools : Ports::School::SchoolRepositoryPort ; les autres dépendances : celles du moteur.
-      def initialize(schools:, **)
-        super(**)
+      # policy : nommée ici, pour que chaque use case concret déclare la policy qu'il reçoit (ADR-0028).
+      def initialize(schools:, policy:, **)
+        super(policy:, **)
         @schools = schools
       end
 

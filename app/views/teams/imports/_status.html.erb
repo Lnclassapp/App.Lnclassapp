@@ -32,9 +32,10 @@
         <% end %>
       </dl>
       <% if regeneration %>
-        <p id="import_skipped_tip" class="-mt-2 flex items-center gap-1 text-sm text-mute">
-          <%= report_text(import, "counters.skipped") %><%= ui_info_tip t(".skipped_tip"), label: report_text(import, "counters.skipped") %>
-        </p>
+        <%# Un <details> ne vit pas dans un <p> : le navigateur fermerait le paragraphe avant lui. %>
+        <div id="import_skipped_tip" class="-mt-2 text-sm text-mute">
+          <%= report_text(import, "counters.skipped") %> <%= ui_info_tip t(".skipped_tip"), label: report_text(import, "counters.skipped") %>
+        </div>
       <% end %>
       <% if details.any? %>
         <div>

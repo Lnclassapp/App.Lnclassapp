@@ -5,8 +5,9 @@ module UseCases
   module Classroom
     class RegenerateClassroomLinks < UseCases::School::RegenerateInBulk
       # classrooms : Ports::Classroom::ClassroomRepositoryPort ; les autres dépendances : celles du moteur.
-      def initialize(classrooms:, **)
-        super(**)
+      # policy : nommée ici, pour que chaque use case concret déclare la policy qu'il reçoit (ADR-0028).
+      def initialize(classrooms:, policy:, **)
+        super(policy:, **)
         @classrooms = classrooms
       end
 

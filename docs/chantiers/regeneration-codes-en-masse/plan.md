@@ -21,6 +21,8 @@ Preuve : parcours complet RM-01 → RM-02, RM-15 → RM-18 dans l'application (A
 
 ## Lot 0 — Socle
 
+- **Statut**       : Done (2026-10-16)
+
 - **Couche**       : infrastructure + domaine (contrats) + fichiers partagés
 - **Fichiers**     : `db/migrate/<horodatage>_add_code_regeneration_reports.rb` · `db/schema.rb`
                      `app/domain/entities/catalog/import_kind.rb` (`SCHOOL_CODE_REGENERATION`, `CLASSROOM_LINK_REGENERATION`, `REPORT_POLICIES`)
@@ -53,6 +55,8 @@ Preuve : parcours complet RM-01 → RM-02, RM-15 → RM-18 dans l'application (A
 
 ## Lot A — Lancer depuis la liste et la fiche
 
+- **Statut**       : Done (2026-10-16)
+
 - **Couche**       : domaine + delivery + ui
 - **Fichiers**     : `app/domain/use_cases/school/start_code_regeneration.rb`
                      `app/infrastructure/queries/school/code_regeneration_preview_query.rb`
@@ -68,6 +72,8 @@ Preuve : parcours complet RM-01 → RM-02, RM-15 → RM-18 dans l'application (A
 ---
 
 ## Lot B — Exécuter et suivre les rapports
+
+- **Statut**       : Done (2026-10-16)
 
 - **Couche**       : domaine + infrastructure + ui
 - **Fichiers**     : `app/domain/use_cases/school/regenerate_in_bulk.rb` (moteur) · `app/domain/use_cases/school/regenerate_school_codes.rb`
@@ -85,6 +91,8 @@ Preuve : parcours complet RM-01 → RM-02, RM-15 → RM-18 dans l'application (A
 ---
 
 ## Lot C — Date du dernier changement sur la fiche
+
+- **Statut**       : Done (2026-10-16)
 
 - **Couche**       : ui
 - **Fichiers**     : `app/views/teams/schools/_header.html.erb` *(propriétaire : Lot A ; exécution séquentielle après A)*
@@ -113,10 +121,10 @@ Preuve : parcours complet RM-01 → RM-02, RM-15 → RM-18 dans l'application (A
 ## Portes de sortie
 
 - [x] Q0 tranchée par le porteur (2026-10-16) ; ADR-0096 et UDR-0104 à 0106 acceptés ; Q1 à Q7 appliquées, à confirmer
-- [ ] Tous les lots sont `Done`
-- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : parcours RM-01 → RM-02, RM-15 → RM-18 refait dans l'application
-- [ ] Captures 390 px et ordinateur : liste avec menu « Codes » ouvert, modales (DRENA seule, nombre à taper, fiche), rapports
-- [ ] Pureté du domaine, rubocop, tests, parcours système, brakeman : `bin/ci-quiet` au vert, écrit dans la PR
-- [ ] Bench `PERF=1` chiffré dans `journal.md`
-- [ ] ADR et UDR indexés par `script/docs/build_index` au commit de clôture ; ligne de `docs/chantiers/README.md` mise à jour à la clôture
-- [ ] `journal.md` complété
+- [x] Tous les lots sont `Done` (ordre d'exécution 0 → B → A → C, voir le journal)
+- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : parcours RM-01 → RM-02, RM-15 → RM-18 refait dans l'application — **à faire par le porteur** sur la PR ; l'agent l'a rejoué en navigateur (test système, captures)
+- [x] Captures 390 px et ordinateur : liste avec menu « Codes » ouvert, modales (DRENA seule, nombre à taper, fiche), rapports, fiche datée — envoyées au porteur, non commitées
+- [x] Pureté du domaine, rubocop, tests, parcours système, brakeman : `bin/ci-quiet` au vert, écrit dans la PR
+- [x] Bench `PERF=1` chiffré dans `journal.md`
+- [x] ADR et UDR indexés par `script/docs/build_index` au commit de clôture ; ligne de `docs/chantiers/README.md` mise à jour à la clôture
+- [x] `journal.md` complété
