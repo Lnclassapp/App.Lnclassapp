@@ -58,9 +58,8 @@ class Assessment::QuestionImageTest < ApplicationSystemTestCase
           assert_selector "[data-assessment--question-image-target=status]", text: t("teams.exercises.question_fields.image_messages.uploading")
         end
         within("turbo-frame#modal dialog[open]") { click_on t("teams.exercises.edit.submit") }
-        within(questions[1]) do
-          assert_selector "[data-assessment--question-image-target=status]", text: t("teams.exercises.question_fields.image_messages.waiting")
-        end
+        assert_selector "turbo-frame#modal dialog[open] [data-assessment--question-image-target=status]",
+                        text: t("teams.exercises.question_fields.image_messages.waiting")
         assert_equal 0, Orm::QuestionImage.count, "« Enregistrer » attend l'envoi en cours"
         release.call
       end

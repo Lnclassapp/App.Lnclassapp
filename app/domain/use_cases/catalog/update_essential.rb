@@ -39,23 +39,23 @@ module UseCases
         # Les textes de remplacement saisis ; le repository les écrit sur les images que cite le contenu (ADR-0105).
         essential.images = dto.images
         # ADR-0074 §4.2, ADR-0105 : une fiche en ligne ne perd jamais un texte de remplacement et ne reçoit pas d'emplacement.
-        return @transaction.call { @essentials.update(essential:) } unless current.published?
+        if current.published?
+          ready = PublishEssential.images_ready(essential)
+          return refuse_images(dto, ready, essential.images.map(&:public_id)) if ready.failure?
+        end
 
-        ready = PublishEssential.images_ready(essential)
-        return refuse_images(dto, ready, essential.images.map(&:public_id)) if ready.failure?
-
-        write_published(dto, essential)
+        write(dto, essential)
       end
 
       private
 
-      # Le premier contrôle ne voit que les textes de remplacement envoyés : une image neuve citée sans sa clé le franchit. Le second
-      # porte sur la fiche relue après l'écriture, textes de la base fusionnés avec la saisie ; refusée, la transaction est annulée
-      # (menace.md, n° 15).
-      def write_published(dto, essential)
+      # Le premier contrôle ne voit que les textes de remplacement envoyés (et la fiche telle qu'elle était lue hors verrou) : une image
+      # neuve citée sans sa clé le franchit. Le second porte sur la fiche relue après l'écriture, sous le verrou de la ligne : statut
+      # et textes de la base fusionnés avec la saisie ; refusée, la transaction est annulée (menace.md, n° 15).
+      def write(dto, essential)
         @transaction.call do
           @essentials.update(essential:).tap do |result|
-            next if result.failure?
+            next if result.failure? || !result.value.published?
 
             ready = PublishEssential.images_ready(result.value)
             raise Refused.new(ready, result.value) if ready.failure?

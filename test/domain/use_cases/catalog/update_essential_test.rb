@@ -116,10 +116,11 @@ module UseCases
         end
       end
 
-      def reread_with(*images)
+      def reread_with(*images, status: nil)
         @essentials.define_singleton_method(:update) do |essential:|
           @updates += 1
           saved = essential.dup
+          saved.status = status if status
           saved.images = images.map { |public_id, alt| Entities::Shared::ContentImage.new(public_id:, alt:) }
           Shared::Result.success(saved)
         end
@@ -140,11 +141,34 @@ module UseCases
         probe = @transaction = RollbackProbe.new
         reread_with([ "img1", "Une pile" ], [ "img2", "Une lampe" ])
 
-        assert update(image_alts: { "img2" => "Une lampe" }).success?
+        result = update(image_alts: { "img2" => "Une lampe" })
+
+        assert result.success?
+        assert_equal [ "Une pile", "Une lampe" ], result.value.images.map(&:alt)
         assert_not probe.rolled_back
       end
 
-      test "menace n° 15 : une fiche publiée dont le texte relu garde un emplacement d'image est refusée sur le texte" do
+      # La fiche est brouillon à la lecture, publiée à l'écriture (publication concurrente) : le contrôle suit la fiche relue sous verrou.
+      test "menace n° 15 : une fiche lue brouillon et relue publiée, avec une image sans texte de remplacement, est refusée, l'écriture annulée" do
+        probe = @transaction = RollbackProbe.new
+        reread_with([ "img1", nil ], status: "published")
+
+        result = update(slug: "genetique-la-mitose")
+
+        assert_equal [ :invalid, [ :"image_alts.img1" ] ], [ result.code, result.errors.keys ]
+        assert_equal [ 1, true ], [ @essentials.updates, probe.rolled_back ]
+      end
+
+      test "menace n° 15 : une fiche brouillon relue brouillon enregistre ses images sans texte de remplacement" do
+        probe = @transaction = RollbackProbe.new
+        reread_with([ "img1", nil ])
+
+        assert update(slug: "genetique-la-mitose").success?
+        assert_not probe.rolled_back
+      end
+
+      test "menace n° 15 : une fiche publiée dont le texte relu garde un emplacement d'image est refusée sur le texte, l'écriture annulée" do
+        probe = @transaction = RollbackProbe.new
         @essentials.define_singleton_method(:update) do |essential:|
           saved = essential.dup
           saved.content = "<p>[[image: une pile]]</p>"
@@ -154,6 +178,7 @@ module UseCases
         result = update
 
         assert_equal [ :invalid, [ :content ] ], [ result.code, result.errors.keys ]
+        assert probe.rolled_back
       end
 
       test "ADR-0105 : un brouillon garde ses emplacements et ses textes de remplacement vides" do

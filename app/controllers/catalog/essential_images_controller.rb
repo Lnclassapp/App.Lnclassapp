@@ -34,6 +34,9 @@ module Catalog
     # La ligne existe mais pas son fichier (donnée incohérente) : 404 plutôt qu'une image vide, et une trace pour l'exploitant.
     def missing_file
       Rails.logger.error("[Catalog::EssentialImagesController] fichier absent public_id=#{params[:public_id]}")
+      # Un 404 n'est jamais gardé (ni cache public, ni ETag) : une fois le fichier restauré, l'adresse doit servir l'image.
+      response.headers["Cache-Control"] = UNPUBLISHED_CACHE
+      response.headers.delete("ETag")
       head :not_found
     end
 

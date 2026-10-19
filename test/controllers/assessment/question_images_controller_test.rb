@@ -89,6 +89,8 @@ class Assessment::QuestionImagesControllerTest < ActionDispatch::IntegrationTest
     logs = capture_log { fetch }
 
     assert_response :not_found
+    assert_equal "private, no-store", response.headers["Cache-Control"]
+    assert_nil response.headers["ETag"]
     assert_includes logs, "[Assessment::QuestionImagesController] fichier absent public_id=#{@image.public_id}"
   end
 
@@ -101,6 +103,8 @@ class Assessment::QuestionImagesControllerTest < ActionDispatch::IntegrationTest
     logs = capture_log { fetch }
 
     assert_response :not_found
+    assert_equal "private, no-store", response.headers["Cache-Control"]
+    assert_nil response.headers["ETag"]
     assert_includes logs, "[Assessment::QuestionImagesController] fichier absent public_id=#{@image.public_id}"
   end
 end

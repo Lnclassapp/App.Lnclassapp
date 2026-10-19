@@ -179,7 +179,7 @@ class Teams::PublishEssentialWithImagesTest < ActionDispatch::IntegrationTest
     assert_equal "Une lampe", image.reload.alt
   end
 
-  # Menace n° 14 : le contrôle porte sur la fiche telle qu'elle sera enregistrée, pas sur les seuls textes envoyés par le formulaire.
+  # Menace n° 15 : le contrôle porte sur la fiche telle qu'elle sera enregistrée, pas sur les seuls textes envoyés par le formulaire.
   def cite(*images)
     images.map { %(<action-text-attachment sgid="#{it.attachable_sgid}" content-type="#{it.content_type}"></action-text-attachment>) }.join
   end
@@ -261,6 +261,22 @@ class Teams::PublishEssentialWithImagesTest < ActionDispatch::IntegrationTest
     end
     assert_not_equal "Autre nom", essential.reload.name
     assert_not_equal essential.id, elsewhere.reload.essential_id
+  end
+
+  test "modifier une fiche publiée en remplaçant son image par une image neuve sans clé est refusé (422) : l'ancienne image garde son fichier" do
+    essential, image = published_with_image
+    fresh = create_essential_image(fixture: "photos/photo.png")
+    bytes = image.file.download
+    sign_in_as @member
+
+    perform_enqueued_jobs do
+      patch_essential(essential, content: "<p>Texte.</p>#{cite(fresh)}")
+    end
+
+    assert_response :unprocessable_entity
+    assert_equal [ essential.id, "Une pile", true, bytes ],
+                 [ image.reload.essential_id, image.alt, image.file.attached?, image.file.download ]
+    assert_nil fresh.reload.essential_id
   end
 
   test "modifier une fiche publiée avec un texte trop complexe à relire est refusé (422) et journalisé avec le slug" do

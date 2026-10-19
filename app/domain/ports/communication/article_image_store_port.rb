@@ -20,7 +20,7 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #find"
       end
 
-      # Les octets du fichier, lus sur le service (le bucket en production). → String | nil (image inconnue)
+      # Les octets du fichier, lus sur le service (le bucket en production). → String | nil (image inconnue, ou fichier absent du bucket alors que la ligne existe)
       def download(public_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #download"
       end

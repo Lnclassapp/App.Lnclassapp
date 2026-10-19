@@ -128,6 +128,8 @@ class Communication::ArticleImagesTest < ActionDispatch::IntegrationTest
     logs = capture_log { get blog_image_path(@cover.public_id) }
 
     assert_response :not_found
+    assert_equal "private, no-store", response.headers["Cache-Control"]
+    assert_nil response.headers["ETag"]
     assert_includes logs, "[Communication::ArticleImagesController] fichier absent public_id=#{@cover.public_id}"
   end
 
@@ -139,6 +141,8 @@ class Communication::ArticleImagesTest < ActionDispatch::IntegrationTest
     logs = capture_log { get blog_image_path(@cover.public_id) }
 
     assert_response :not_found
+    assert_equal "private, no-store", response.headers["Cache-Control"]
+    assert_nil response.headers["ETag"]
     assert_includes logs, "[Communication::ArticleImagesController] fichier absent public_id=#{@cover.public_id}"
   end
 
