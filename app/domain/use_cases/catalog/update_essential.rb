@@ -4,6 +4,17 @@
 module UseCases
   module Catalog
     class UpdateEssential
+      # Annule l'écriture d'une fiche publiée dont les images, relues, ne seraient pas complètes (menace.md, n° 15).
+      class Refused < StandardError
+        attr_reader :ready, :saved
+
+        def initialize(ready, saved)
+          @ready = ready
+          @saved = saved
+          super("images de la fiche incomplètes")
+        end
+      end
+
       def initialize(essentials:, transaction:, policy:)
         @essentials = essentials
         @transaction = transaction
@@ -28,21 +39,37 @@ module UseCases
         # Les textes de remplacement saisis ; le repository les écrit sur les images que cite le contenu (ADR-0105).
         essential.images = dto.images
         # ADR-0074 §4.2, ADR-0105 : une fiche en ligne ne perd jamais un texte de remplacement et ne reçoit pas d'emplacement.
-        if current.published?
-          ready = PublishEssential.images_ready(essential)
-          return refuse_images(dto, ready) if ready.failure?
-        end
-        @transaction.call { @essentials.update(essential:) }
+        return @transaction.call { @essentials.update(essential:) } unless current.published?
+
+        ready = PublishEssential.images_ready(essential)
+        return refuse_images(dto, ready, essential.images.map(&:public_id)) if ready.failure?
+
+        write_published(dto, essential)
       end
 
       private
 
+      # Le premier contrôle ne voit que les textes de remplacement envoyés : une image neuve citée sans sa clé le franchit. Le second
+      # porte sur la fiche relue après l'écriture, textes de la base fusionnés avec la saisie ; refusée, la transaction est annulée
+      # (menace.md, n° 15).
+      def write_published(dto, essential)
+        @transaction.call do
+          @essentials.update(essential:).tap do |result|
+            next if result.failure?
+
+            ready = PublishEssential.images_ready(result.value)
+            raise Refused.new(ready, result.value) if ready.failure?
+          end
+        end
+      rescue Refused => e
+        refuse_images(dto, e.ready, e.saved.images.map(&:public_id))
+      end
+
       # Les raisons de PublishEssential.images_ready, posées sur la saisie : le texte (emplacements), ou l'image sans texte de
-      # remplacement, numérotée dans l'ordre du formulaire.
-      def refuse_images(dto, ready)
+      # remplacement, numérotée dans l'ordre des images de la fiche (order).
+      def refuse_images(dto, ready, order)
         reason = ready.errors.fetch(:base).first
         if reason == :image_alts_blank
-          order = dto.image_alts.keys
           ready.errors.fetch(:image_alts).each { |id| dto.errors.add(:"image_alts.#{id}", :image_alt_blank, number: order.index(id).to_i + 1) }
         else
           dto.errors.add(:content, reason)

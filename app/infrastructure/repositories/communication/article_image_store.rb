@@ -30,6 +30,9 @@ module Repositories
                            .find_by(active_storage_attachments: { name: "file", record_type: Orm::ArticleImage.name,
                                                                   record_id: Orm::ArticleImage.where(public_id:).select(:id) })
                            &.download
+      rescue ActiveStorage::FileNotFoundError
+        # La ligne du blob existe, pas son fichier (bucket vidé) : comme une ligne sans blob, le contrôleur répond 404 et le journalise.
+        nil
       end
 
       # Une couverture n'est jamais purgée, même détachée. Le fichier part après validation (purge_later, ADR-0047).

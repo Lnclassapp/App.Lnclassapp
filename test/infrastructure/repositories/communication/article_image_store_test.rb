@@ -56,6 +56,14 @@ module Repositories
         assert_nil @store.download(public_id: "inconnu0000000")
       end
 
+      test "download rend nil quand la ligne du blob existe mais pas son fichier" do
+        stored = @store.store(data: @webp, content_type: "image/webp", width: 64, height: 48)
+        blob = Orm::ArticleImage.find_by!(public_id: stored.public_id).file.blob
+        blob.service.delete(blob.key)
+
+        assert_nil @store.download(public_id: stored.public_id)
+      end
+
       test "purge_orphans supprime les images jamais rattachées envoyées avant la limite, et leur fichier" do
         limit = 48.hours.ago
         old = create_article_image(created_at: 49.hours.ago)

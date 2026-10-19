@@ -122,6 +122,26 @@ class Communication::ArticleImagesTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
+  test "une ligne sans son fichier répond 404 et le journal le dit, au lieu d'une image vide" do
+    @cover.file.purge
+
+    logs = capture_log { get blog_image_path(@cover.public_id) }
+
+    assert_response :not_found
+    assert_includes logs, "[Communication::ArticleImagesController] fichier absent public_id=#{@cover.public_id}"
+  end
+
+  # Le bucket a perdu le fichier alors que la ligne du blob existe : Active Storage lève FileNotFoundError, qui ne doit pas être un 500.
+  test "une ligne dont le blob existe mais pas le fichier dans le bucket répond 404 et le journal le dit" do
+    blob = @cover.file.blob
+    blob.service.delete(blob.key)
+
+    logs = capture_log { get blog_image_path(@cover.public_id) }
+
+    assert_response :not_found
+    assert_includes logs, "[Communication::ArticleImagesController] fichier absent public_id=#{@cover.public_id}"
+  end
+
   test "envoyée par un membre Contenu, l'image se lit aussitôt à son adresse en « private, no-store », jamais par Active Storage" do
     sign_in_as create_team_member(team_role: "content")
 

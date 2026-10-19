@@ -42,6 +42,8 @@ module UseCases
         @team = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "content")
       end
 
+      def blank_alt_message(number) = I18n.t("activemodel.errors.models.dtos/catalog/essential_input.image_alt_blank", number:)
+
       def update(actor: @team, slug: "genetique-la-meiose", **attributes)
         dto = Dtos::Catalog::EssentialInput.new(name: "La Méiose", subtitle: "", content: "<div><em>Nouveau</em></div>", **attributes)
         UpdateEssential.new(essentials: @essentials, transaction: @transaction, policy: Policies::Catalog::ManageContentPolicy.new)
@@ -84,7 +86,7 @@ module UseCases
 
         assert_equal :invalid, result.code
         assert_equal [ :"image_alts.img2" ], result.errors.keys
-        assert_equal I18n.t("activemodel.errors.models.dtos/catalog/essential_input.image_alt_blank", number: 2), result.errors.values.flatten.first
+        assert_equal blank_alt_message(2), result.errors.values.flatten.first
         assert_equal 0, @essentials.updates
       end
 
@@ -99,6 +101,59 @@ module UseCases
         end
         assert_equal messages, [ slot, malformed, unreadable ].map { it.errors.fetch(:content).first }
         assert_equal 0, @essentials.updates
+      end
+
+      # Menace n° 15 : le repository rend la fiche relue, textes de la base fusionnés avec la saisie. Une image neuve citée sans sa clé
+      # y figure sans texte de remplacement ; la transaction est annulée.
+      class RollbackProbe < FakeTransaction
+        attr_reader :rolled_back
+
+        def call
+          super
+        rescue StandardError
+          @rolled_back = true
+          raise
+        end
+      end
+
+      def reread_with(*images)
+        @essentials.define_singleton_method(:update) do |essential:|
+          @updates += 1
+          saved = essential.dup
+          saved.images = images.map { |public_id, alt| Entities::Shared::ContentImage.new(public_id:, alt:) }
+          Shared::Result.success(saved)
+        end
+      end
+
+      test "menace n° 15 : une fiche publiée dont l'image neuve n'a pas de texte de remplacement une fois relue est refusée, l'écriture annulée" do
+        probe = @transaction = RollbackProbe.new
+        reread_with([ "img1", "Une pile" ], [ "img2", nil ])
+
+        result = update(image_alts: { "img1" => "Une pile" })
+
+        assert_equal [ :invalid, [ :"image_alts.img2" ] ], [ result.code, result.errors.keys ]
+        assert_equal blank_alt_message(2), result.errors.values.flatten.first
+        assert_equal [ 1, true ], [ @essentials.updates, probe.rolled_back ]
+      end
+
+      test "menace n° 15 : une fiche publiée dont toutes les images relues ont leur texte de remplacement est enregistrée, sans annulation" do
+        probe = @transaction = RollbackProbe.new
+        reread_with([ "img1", "Une pile" ], [ "img2", "Une lampe" ])
+
+        assert update(image_alts: { "img2" => "Une lampe" }).success?
+        assert_not probe.rolled_back
+      end
+
+      test "menace n° 15 : une fiche publiée dont le texte relu garde un emplacement d'image est refusée sur le texte" do
+        @essentials.define_singleton_method(:update) do |essential:|
+          saved = essential.dup
+          saved.content = "<p>[[image: une pile]]</p>"
+          Shared::Result.success(saved)
+        end
+
+        result = update
+
+        assert_equal [ :invalid, [ :content ] ], [ result.code, result.errors.keys ]
       end
 
       test "ADR-0105 : un brouillon garde ses emplacements et ses textes de remplacement vides" do

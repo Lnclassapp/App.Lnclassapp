@@ -26,7 +26,16 @@ module Communication
       response.headers["Cache-Control"] = image.public ? PUBLIC_CACHE : PRIVATE_CACHE
       return if image.public && !stale?(etag: params[:public_id])
 
-      send_data image.data.call, type: image.content_type, disposition: :inline, filename: "image"
+      data = image.data.call
+      return missing_file if data.nil?
+
+      send_data data, type: image.content_type, disposition: :inline, filename: "image"
+    end
+
+    # La ligne existe mais pas son fichier (donnée incohérente) : 404 plutôt qu'une image vide, et une trace pour l'exploitant.
+    def missing_file
+      Rails.logger.error("[Communication::ArticleImagesController] fichier absent public_id=#{params[:public_id]}")
+      head :not_found
     end
 
     def read
