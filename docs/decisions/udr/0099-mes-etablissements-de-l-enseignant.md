@@ -1,14 +1,14 @@
 # UDR-0099 : « Mes établissements » de l'enseignant — liste, ajout par DRENA puis établissement, « Quitter » confirmé, et lien d'invitation ouvert connecté qui propose de rejoindre
 <!-- index
 titre: « Mes établissements » de l'enseignant — liste, ajout par DRENA puis établissement, « Quitter » confirmé, et lien d'invitation ouvert connecté qui propose de rejoindre
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-16)*
 adr-lie: [0094](../adr/0094-enseignant-multi-etablissements-et-etablissement-courant.md)
 problematique: Page `/teachers/schools` : cartes d'établissement (principal, courant), « Aller dans cet établissement », menu ⋮ « Quitter l'établissement » confirmé en modale (pas pour le dernier) ; carte « Ajouter un établissement » (sélecteur DRENA + frame des établissements, repli sans JavaScript) masquée au plafond ; `GET /i/:token` connecté : carte « Rejoindre <établissement> ? » ou carte d'état (déjà dedans, plafond, lien plus valable). Amende UDR-0079 §3.6, 0042
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/multi-etablissements-enseignant`](../../chantiers/multi-etablissements-enseignant/prd.md) — critères ME-01 à ME-06, ME-13 à ME-16 |
 | **ADR lié** | [ADR-0094](../adr/0094-enseignant-multi-etablissements-et-etablissement-courant.md) |
@@ -87,7 +87,9 @@ li#teacher_school_<public_id>
 | Lien invalide (inconnu, établissement inactif, collègue anonymisé ou sans cet établissement) | `ui_empty_state` « Ce lien n'est plus valable », texte « Ajoutez l'établissement depuis « Mes établissements ». », bouton « Mes établissements ». Jamais de 404, jamais de raison (comme l'inscription) |
 | Établissement qui l'a retiré | **Même rendu que « Lien valide »** ; le `POST` répond l'erreur neutre « Ce lien n'est plus valable » (rien n'est révélé, ADR-0071) |
 
-Le jeton voyage en champ caché ; le serveur le résout de nouveau au `POST` (ADR-0083 §4.1).
+Le jeton voyage dans l'adresse ; le serveur le résout de nouveau au `POST` (ADR-0083 §4.1).
+
+> **Précision d'implémentation (Lot B, 2026-10-16).** `GET /i/:token` d'un enseignant rattaché redirige vers `GET /teachers/schools/join/:token` (`School::TeacherSchoolJoinsController#new`, page `school/teacher_school_joins/new`, dans le shell de l'enseignant) ; « Rejoindre l'établissement » envoie `POST /teachers/schools/join/:token`. Un refus du `POST` re-rend la page (`422`) dans l'état qui le dit : déjà dedans, plafond, ou « Ce lien n'est plus valable ». Les autres comptes connectés gardent le renvoi vers leur accueil ; un enseignant sans établissement garde l'écran d'attente.
 
 ### États obligatoires
 

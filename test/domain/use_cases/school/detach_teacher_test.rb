@@ -15,19 +15,29 @@ module UseCases
       class FakeSchools
         include Ports::School::SchoolRepositoryPort
 
-        attr_reader :attachments
+        attr_reader :attachments, :calls
 
         def initialize(schools:, attachments:)
           @schools = schools
           @attachments = attachments
+          @calls = []
         end
+
+        def lock_teacher(teacher_id:) = (@calls << [ :lock_teacher, teacher_id ]) && true
 
         def find_by_id(id:) = @schools.find { it.id == id }
 
         def detach_teacher(teacher_id:, school_id:)
+          @calls << [ :detach_teacher, teacher_id ]
           before = @attachments.size
           @attachments.reject! { it == [ teacher_id, school_id ] }
           before - @attachments.size
+        end
+
+        # The oldest remaining school: the first pair left for the teacher (ADR-0094 §4.5).
+        def promote_primary(teacher_id:)
+          @calls << [ :promote_primary, teacher_id ]
+          @attachments.find { it.first == teacher_id }&.last
         end
       end
 
@@ -123,6 +133,19 @@ module UseCases
         assert_equal %w[active active active archived active active], @assignments.assignments.map(&:status)
         assert_empty @departures.departures
         assert_empty @audit.events
+      end
+
+      # ME-20 (ADR-0094 §4.4): withdrawn from his primary school, he keeps B, which becomes primary; nothing of B moves.
+      test "ME-20 : retiré de A, il garde B, devenu principal ; ses classes et devoirs de B restent" do
+        @schools.attachments << [ 41, SCHOOL_B ]
+
+        assert detach.success?
+
+        assert_equal [ [ 43, 33 ], [ 41, SCHOOL_B ] ], @schools.attachments
+        assert_equal [ [ :lock_teacher, 41 ], [ :detach_teacher, 41 ], [ :promote_primary, 41 ] ], @schools.calls,
+                     "sous le verrou du compte, le retrait puis la promotion du plus ancien restant"
+        assert_includes @teachings.declarations, [ 41, 201, SCHOOL_B ]
+        assert_equal "active", @assignments.assignments[4].status
       end
 
       test "GD-14 : rattachement et déclarations retirés, 3 devoirs actifs archivés par la direction, départ ouvert, audité" do

@@ -1,14 +1,14 @@
 # UDR-0115 : Page publique d'un niveau et de sa série `/niveaux/:niveau/:serie` — « Terminale D », cours de la série et cours communs
 <!-- index
 titre: Page publique d'un niveau et de sa série (CA-23) : « Terminale D », cours de la série et cours communs du niveau, par matière
-statut: Proposé
+statut: Accepté
 adr-lie: [0099](../adr/0099-pages-publiques-du-catalogue-lues-sans-compte-indexees-sans-cache-html.md)
 problematique: Page série lisible sans compte, sous la forme niveau × série : pastilles des autres séries du niveau, cours publiés de la série et cours sans série du niveau groupés par matière, 6 par matière puis « Voir les N cours » vers la page matière (`?niveau=&serie=`). Gabarit et partials de l'UDR-0113. Chantier `catalogue-complet`.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/catalogue-complet`](../../chantiers/catalogue-complet/memo.md) — questions 1, 3 à 5, 8, 12 du grill ; [PRD](../../chantiers/catalogue-complet/prd.md) CC-14 à CC-18 |
 | **ADR lié** | [ADR-0099](../adr/0099-pages-publiques-du-catalogue-lues-sans-compte-indexees-sans-cache-html.md) · [ADR-0034](../adr/0034-reprise-des-donnees-et-referentiel-seede.md) (slugs des séries) |
@@ -47,7 +47,7 @@ Result = Data.define(:level, :series, :sibling_series, :groups, :total_count)
 
 Gabarit de l'UDR-0113 §3.1. De haut en bas :
 
-1. Fil d'Ariane : « Accueil » › « Niveaux » › « Terminale » (`public_level_path`) › « Terminale D ».
+1. Retour (UDR-0113 §3.1, amendé) : le nom du niveau, « Terminale » (`public_level_path`).
 2. `h1.font-display.text-3xl.font-extrabold` : `t(".title", level:, series:)` → « Cours de Terminale D » ; `p.mt-2.text-mute` : « N cours publiés, en M matières, dont les cours communs à toutes les séries de Terminale. » (la seconde moitié seulement s'il existe au moins un cours sans série).
 3. **Autres séries** (si `sibling_series` n'est pas vide) : `nav aria-label="Autres séries"` > `ul.mt-4.flex.flex-wrap.gap-2`, pastilles de l'UDR-0113 §3.3 point 3 ; la série courante est rendue en premier, active (`bg-brand.text-white.border-brand`, `aria-current="page"`, sans lien).
 4. `_call_to_action id: "series_cta_top"`, `mt-6`.

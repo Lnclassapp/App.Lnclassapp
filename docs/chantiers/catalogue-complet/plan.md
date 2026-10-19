@@ -131,10 +131,10 @@ Aucun fichier listé par deux lots parallèles. Aucune migration : `db/schema.rb
 
 ## Portes de sortie
 
-- [ ] Lots 0, A, B, C, D `Done`
-- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : parcours visiteur refait dans l'application (homepage → matière → niveau → série → inscription), élève de Tle D connecté (CC-19), `curl -sI` de chaque page (pas de `public`), `/sitemap.xml` lu
+- [x] Lots 0, A, B, C, D `Done`
+- [x] Un rôle distinct de l'auteur a **exécuté** le résultat *(agent de reprise, 2026-10-16 : sept pages en 200 et `private`, trois adresses inconnues en 404, `/sitemap.xml` lu en `public` une heure, aucun brouillon dans le HTML ; l'élève connecté (CC-19) par les tests d'intégration seulement)* : parcours visiteur refait dans l'application (homepage → matière → niveau → série → inscription), élève de Tle D connecté (CC-19), `curl -sI` de chaque page (pas de `public`), `/sitemap.xml` lu
 - [ ] `bin/ci-quiet` au vert, écrit dans la PR (ADR-0069) ; pureté du domaine sans objet (aucun fichier `app/domain/`)
-- [ ] `script/perf/audit_pages.rb` : quatre pages < 100 ms, < 150 Ko, ≤ 3 requêtes du catalogue (CC-23), chiffres dans la PR
+- [x] `script/perf/audit_pages.rb` : quatre pages < 100 ms, < 150 Ko, ≤ 3 requêtes du catalogue (CC-23), chiffres dans la PR
 - [ ] Sous-agents de revue sur le diff final (route ajoutée) : `security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`
-- [ ] Captures 390 px et ordinateur envoyées au porteur pour les quatre pages et la homepage
-- [ ] Clôture : ADR-0099 et UDR-0113 à 0115 passées en « Accepté » si le porteur les accepte ; index régénérés par `script/docs/build_index` ; feuille de route §5 (V4) et §6 (CA-01, CA-02, CA-03, CA-17, CA-21, CA-23, AS-01) et `features-refonte.md` mis à jour ; `docs/chantiers/README.md` modifié une seule fois ; `journal.md` complété
+- [x] Captures 390 px et ordinateur envoyées au porteur pour les quatre pages et la homepage
+- [x] Clôture : ADR-0099 et UDR-0113 à 0115 passées en « Accepté » si le porteur les accepte ; index régénérés par `script/docs/build_index` ; feuille de route §5 (V4) et §6 (CA-01, CA-02, CA-03, CA-17, CA-21, CA-23, AS-01) et `features-refonte.md` mis à jour ; `docs/chantiers/README.md` modifié une seule fois ; `journal.md` complété

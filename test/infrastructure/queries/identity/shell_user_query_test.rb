@@ -64,6 +64,17 @@ module Queries
         assert_equal "Mathématiques · Lycée moderne de Cocody", @query.call(user_id: teacher.id).detail
       end
 
+      # ME-08 (UDR-0098 §3.1) : la ligne de détail nomme l'établissement courant ; un établissement quitté, le principal.
+      test "a teacher of two schools shows the current one, and the primary one for a school they left" do
+        primary = create_school(name: "Lycée moderne d'Abobo")
+        other = create_school(name: "Collège Saint-Michel")
+        teacher = create_teacher(school: primary, material: create_material(name: "SVT"))
+        Orm::TeacherSchool.create!(teacher:, school: other, primary: false)
+
+        assert_equal "SVT · Collège Saint-Michel", @query.call(user_id: teacher.id, current_school_id: other.id).detail
+        assert_equal "SVT · Lycée moderne d'Abobo", @query.call(user_id: teacher.id, current_school_id: create_school.id).detail
+      end
+
       test "a team member has no detail, an unknown account is nil" do
         row = @query.call(user_id: create_team_member(first_name: "Kam", last_name: "Kara").id)
 

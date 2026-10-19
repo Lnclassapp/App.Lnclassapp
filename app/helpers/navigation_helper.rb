@@ -1,6 +1,6 @@
 # 🌐 UI · NavigationHelper — shell applicatif unique, paramétré par le rôle
 # Rôle : destinations de chaque rôle (bureau = mobile), état actif, compte, sections de l'accueil
-# UDR  : 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074, 0076, 0077, 0080 (§3.2), 0082 (§3.2), 0084 (§3.3)
+# UDR  : 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074, 0076, 0077, 0080 (§3.2), 0082 (§3.2), 0084 (§3.3), 0098 (§3.1)
 module NavigationHelper
   Destination = Data.define(:key, :route, :icon)
   # Ce que le shell affiche de la personne connectée. Le contrôleur qui rend `layout "shell"` l'expose par `helper_method :shell_user`.
@@ -48,7 +48,10 @@ module NavigationHelper
   ACCOUNT_PANELS = {
     student: { page: :student_menu_path, links: [ [ "shared.navigation.profile", :profile_path, "user-circle" ],
                                                   [ "shared.navigation.courses", :courses_path, "book-open" ] ] },
+    # UDR-0098 §3.1 : « Mes établissements » après « Mon profil », quel que soit le nombre d'établissements.
     teacher: { page: :teacher_menu_path, links: [ [ "shared.navigation.profile", :profile_path, "user-circle" ],
+                                                  [ "shared.navigation.account_panel.schools.link", :teacher_schools_path,
+                                                    "building-office-2" ],
                                                   [ "shared.navigation.account_panel.invite", :teacher_invite_path, "user-plus" ] ] }
   }.freeze
   # Sections de l'accueil de chaque rôle (squelette) — reprises des fils d'accueil de l'ancienne application.

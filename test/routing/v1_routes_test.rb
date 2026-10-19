@@ -137,4 +137,17 @@ class V1RoutesTest < ActionDispatch::IntegrationTest
     end
     assert_not_includes NavigationHelper::DESTINATIONS.values.flatten, :teams_growth_path
   end
+
+  # ADR-0094 §4.4 : l'établissement courant, « Mes établissements », rejoindre et quitter.
+  test "the teacher's schools routes are drawn" do
+    { [ "/teachers/current-school", "PATCH" ] => "school/current_schools#update",
+      [ "/teachers/schools", "GET" ] => "school/teacher_schools#index",
+      [ "/teachers/schools", "POST" ] => "school/teacher_schools#create",
+      [ "/teachers/schools/s1", "DELETE" ] => "school/teacher_schools#destroy" }.each do |(path, method), target|
+      controller, action = target.split("#")
+      assert_equal({ controller:, action: }, first_match(path, method:), "#{method} #{path}")
+    end
+    assert_equal [ "/teachers/current-school", "/teachers/schools", "/teachers/schools/s1" ],
+                 [ helpers.teacher_current_school_path, helpers.teacher_schools_path, helpers.teacher_school_path("s1") ]
+  end
 end

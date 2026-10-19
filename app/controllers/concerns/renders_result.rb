@@ -1,12 +1,16 @@
 # 🌐 DELIVERY · RendersResult — traduit un Shared::Result en réponse HTTP
-# Rôle : succès → bloc du contrôleur ; échec → 403/404 (HTML, JSON, Turbo Stream), formulaire en 422, 429, ou connexion
-# ADR  : 0026, 0050
+# Rôle : succès → bloc du contrôleur ; échec → 403/404 (HTML, JSON, Turbo Stream), formulaire en 422, 429, ou connexion ;
+#        classe d'un autre établissement de l'enseignant → retour à l'accueil, avec quoi faire
+# ADR  : 0026, 0050, 0094 · UDR : 0098 (§3.5)
 module RendersResult
   extend ActiveSupport::Concern
 
   FORM_STATUSES = { invalid: :unprocessable_entity, conflict: :unprocessable_entity, expired: :unprocessable_entity,
                     locked: :too_many_requests }.freeze
   ERROR_PAGES = { forbidden: "errors/forbidden", not_found: "errors/not_found" }.freeze
+  # ADR-0094 §4.3 : le refus d'une classe hors de l'établissement courant (ReadClassroomPolicy, TeachPolicy,
+  # DeclareTeachingPolicy) ; il ne nomme aucun établissement.
+  OTHER_SCHOOL = :other_school
 
   private
 
@@ -15,7 +19,8 @@ module RendersResult
     return success.call(result.value) if result.success?
 
     case result.code
-    when :forbidden, :not_found then render_error_page(result.code)
+    when :forbidden then other_school?(result) ? render_other_school : render_error_page(:forbidden)
+    when :not_found then render_error_page(:not_found)
     when :expired then form ? render_form(form, result) : redirect_to(main_app.new_session_path, alert: t("errors.session_expired"))
     else render_form(form, result)
     end
@@ -26,6 +31,19 @@ module RendersResult
     @form = form_input
     @form.errors.add(:base, t("errors.codes.rate_limited"))
     render form, status: :too_many_requests
+  end
+
+  def other_school?(result) = Array(result.errors[:base]).include?(OTHER_SCHOOL)
+
+  # UDR-0098 §3.5 (amendée le 2026-10-16) : chaque établissement est un espace autonome ; l'enseignant revient à
+  # l'accueil de son établissement courant, avec le geste qui ouvre l'autre (le panneau du compte).
+  def render_other_school
+    message = t("errors.codes.other_school")
+    respond_to do |format|
+      format.html { redirect_to main_app.teacher_home_path, alert: message, status: :see_other }
+      format.json { render json: { error: :forbidden }, status: :forbidden }
+      format.turbo_stream { render turbo_stream: helpers.turbo_stream_toast(message, type: :error), status: :forbidden }
+    end
   end
 
   def render_forbidden = render_error_page(:forbidden)

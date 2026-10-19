@@ -243,6 +243,24 @@ module UseCases
         assert_equal [ [ @kamate.id, result.value.message.id ] ], published_events.pluck(:actor_id, :subject_id), "l'archivage n'est pas journalisé"
       end
 
+      # ADR-0094 (MET-4): each school of a teacher is a self-contained space; his cap of 3 is counted per school.
+      test "a teacher with 3 live announcements in another school publishes in this one: nothing is archived there" do
+        add_teacher_school(@kouassi, @bouake)
+        elsewhere = create_classroom(school: @bouake, name: "Tle D 1")
+        Orm::TeacherClassroom.create!(teacher: @kouassi, classroom: elsewhere)
+        live = [ 25, 27, 29 ].map do |day|
+          create_message(author: @kouassi, audience: "classrooms", classrooms: [ elsewhere ], school: @bouake,
+                         published_at: Time.zone.local(2026, 9, day, 8))
+        end
+        mine = create_message(author: @kouassi, audience: "classrooms", classrooms: [ @b3 ], published_at: Time.zone.local(2026, 9, 20, 8))
+        Array.new(2) { create_message(author: @kouassi, audience: "classrooms", classrooms: [ @b3 ], published_at: Time.zone.local(2026, 9, 21, 8)) }
+
+        result = create(@kouassi, audience: "classrooms", classroom_public_ids: [ @b3.public_id ])
+
+        assert_equal %w[published published published], statuses(live), "Lycée de Bouaké : intouché"
+        assert_equal [ mine.public_id ], result.value.archived.map(&:public_id)
+      end
+
       # Phase 5 (test analysis 2.1), on the real base: the archiving by the cap, the announcement and its journal are
       # written in one transaction, which the failure of its file undoes entirely.
       test "AV-03 — a publication whose file cannot be stored writes nothing: the oldest live one stays live" do
@@ -344,7 +362,7 @@ module UseCases
           @release = release
         end
 
-        def live_of(author_id:, now:)
+        def live_of(author_id:, now:, school_id: nil)
           super.tap do
             @held << true
             @release.pop(timeout: 10)

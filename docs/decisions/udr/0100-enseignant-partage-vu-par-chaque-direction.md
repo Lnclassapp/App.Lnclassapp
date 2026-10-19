@@ -1,14 +1,14 @@
 # UDR-0100 : Un enseignant partagé vu par chaque direction — sa seule part dans « Enseignants », « Enseignants retirés » et l'activité, une phrase sous le lien d'invitation
 <!-- index
 titre: Un enseignant partagé vu par chaque direction — sa seule part dans « Enseignants », « Enseignants retirés » et l'activité, une phrase sous le lien d'invitation
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-16)*
 adr-lie: [0094](../adr/0094-enseignant-multi-etablissements-et-etablissement-courant.md)
 problematique: Aucune mention d'un autre établissement dans les écrans de la direction (consigne négative, testée) ; « Enseignants retirés » montre aussi l'enseignant parti ailleurs, « Réintégrer » le rattache en plus de ses autres établissements, refus au plafond par un toast neutre ; phrase d'aide sous le lien d'invitation de la direction ; badge « Établissement secondaire » de la fiche équipe inchangé. Amende UDR-0056 §3.3, §3.4 et UDR-0079 §3.7
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/multi-etablissements-enseignant`](../../chantiers/multi-etablissements-enseignant/prd.md) — critères ME-17 à ME-22 |
 | **ADR lié** | [ADR-0094](../adr/0094-enseignant-multi-etablissements-et-etablissement-courant.md) |

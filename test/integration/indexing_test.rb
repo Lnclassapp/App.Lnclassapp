@@ -5,9 +5,15 @@ require "test_helper"
 class IndexingTest < ActionDispatch::IntegrationTest
   NOINDEX = "noindex, nofollow".freeze
 
+  # Les pages du catalogue (ADR-0099) sont publiques : /niveaux et la page d'une matière ont un cours publié à lister.
+  setup do
+    referential = seed_referential
+    create_course(level: referential[:levels].fetch("tle"), material: referential[:materials].fetch("mathematiques"))
+  end
+
   test "the production hosts are indexed: no X-Robots-Tag on a public page" do
     %w[lnclass.com www.lnclass.com].each do |host|
-      [ root_path, blog_path, help_path ].each do |path|
+      [ root_path, blog_path, help_path, public_levels_path, public_material_path("mathematiques") ].each do |path|
         get path, headers: { "HOST" => host }
 
         assert_response :success
@@ -18,7 +24,8 @@ class IndexingTest < ActionDispatch::IntegrationTest
 
   test "every other host is closed to search engines, on public pages, the sign-in page and robots.txt" do
     %w[app-staging.lnclass.com app-develop.lnclass.com applnclassapp-staging-b274.up.railway.app www.example.com].each do |host|
-      [ root_path, blog_path, help_path, new_session_path, robots_path ].each do |path|
+      [ root_path, blog_path, help_path, public_levels_path, public_material_path("mathematiques"), new_session_path,
+         robots_path ].each do |path|
         get path, headers: { "HOST" => host }
 
         assert_response :success

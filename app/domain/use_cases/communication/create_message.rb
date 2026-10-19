@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::CreateMessage
 # Rôle : l'équipe, une direction ou un enseignant rédige une annonce : brouillon, programmée, ou publiée tout de suite sous le plafond de 3
-# ADR  : 0028, 0045, 0078, 0081 · UDR : 0071, 0075
+# ADR  : 0028, 0045, 0078, 0081, 0094 · UDR : 0071, 0075
 module UseCases
   module Communication
     class CreateMessage
@@ -16,8 +16,9 @@ module UseCases
         # En tête de la transaction de la parution : live_of verrouille le compte auteur jusqu'à sa fin, et rend ses
         # annonces en ligne. Deux parutions du même auteur se suivent : une annonce existante qui paraît se relit APRÈS
         # ce verrou, quand une parution concurrente de la même annonce est finie et se voit (phase 5, F1).
+        # school_id : Message#cap_school_id, l'établissement des annonces d'un enseignant (ADR-0094), sinon nil.
         # → [Message en ligne], la plus ancienne d'abord
-        def lock_author(author_id, now) = @messages.live_of(author_id:, now:)
+        def lock_author(author_id, now, school_id) = @messages.live_of(author_id:, now:, school_id:)
 
         # Les plus anciennes de live sont archivées jusqu'à ce qu'il en reste LIVE_CAP - 1. L'annonce qui paraît n'est
         # pas comptée : relue sous le verrou, elle n'est pas encore en ligne. Une annonce figée entre-temps n'est pas
@@ -151,7 +152,8 @@ module UseCases
 
       # Publiée tout de suite : une parution, sous le plafond (ADR-0081 §4.1) ; brouillon et programmée n'archivent rien.
       def create(actor, dto, targets, now, illustration_id)
-        archived = dto.status == "published" ? make_room(lock_author(actor.user_id, now)) : []
+        cap_school_id = Entities::Communication::Message.cap_school_id(audience: targets.audience, school_id: targets.school_id)
+        archived = dto.status == "published" ? make_room(lock_author(actor.user_id, now, cap_school_id)) : []
         message = @messages.create(message: Entities::Communication::Message.new(
           author_id: actor.user_id, **written(dto, targets, illustration_id)
         ))
