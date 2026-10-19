@@ -44,6 +44,23 @@ module Repositories
         assert_equal "10.0.0.2", recent.reload.ip_address
         assert_equal 0, @repository.erase_ips_before(at:, batch_size: 2)
       end
+
+      test "ADR-0096: record_many appends many events in one statement, and refuses an action outside the list" do
+        member = create_team_member(second_factor: false)
+        at = Time.current.change(usec: 0)
+        entries = Array.new(3) do |index|
+          { action: "school.changed", actor_id: member.id, at:, subject_type: "School", subject_id: index + 1,
+            metadata: { change: "code_regenerated", public_id: "p#{index}" } }
+        end
+
+        assert_equal 3, @repository.record_many(entries:)
+        events = Orm::AuditEvent.where(action: "school.changed").order(:subject_id)
+        assert_equal [ 1, 2, 3 ], events.map(&:subject_id)
+        assert_equal [ member.id, at, { "change" => "code_regenerated", "public_id" => "p0" }, nil ],
+                     events.first.values_at(:actor_id, :created_at, :metadata, :ip_address)
+        assert_equal 0, @repository.record_many(entries: [])
+        assert_raises(ArgumentError) { @repository.record_many(entries: [ entries.first.merge(action: "school.hacked") ]) }
+      end
     end
   end
 end

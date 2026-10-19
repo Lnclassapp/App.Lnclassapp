@@ -61,6 +61,15 @@ module Repositories
         assert_nil @repository.authenticate(contact: record.contact, pin: "1357")
       end
 
+      test "actor_for gives no actor to an anonymized account, whatever its role" do
+        admin = create_team_member(team_role: "admin", second_factor: false)
+        assert_equal :team, @repository.actor_for(user_id: admin.id).role
+
+        admin.update_columns(anonymized_at: Time.current)
+
+        assert_nil @repository.actor_for(user_id: admin.id)
+      end
+
       test "actor_for gives the teacher their primary school" do
         school = create_school
         teacher = create_teacher(school:)
