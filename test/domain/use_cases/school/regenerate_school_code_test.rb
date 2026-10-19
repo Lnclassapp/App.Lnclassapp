@@ -56,7 +56,7 @@ module UseCases
         @other = Entities::School::School.new(id: 32, public_id: "sch-lmb", drena_id: 1, name: "Lycée Moderne de Bouaké",
                                               school_type: "public", cycle: "both", status: "active", school_code: "abc234")
         @team = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "field")
-        @direction = Entities::Identity::Actor.new(user_id: 8, role: :school_admin, school_id: 31)
+        @direction = Entities::Identity::Actor.new(user_id: 8, role: :school_admin, school_id: 31, staff_position: "head")
       end
 
       def regenerate(public_id: "sch-lca", actor: @team, conflicts: 0)

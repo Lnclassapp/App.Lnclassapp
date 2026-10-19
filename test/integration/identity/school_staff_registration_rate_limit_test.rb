@@ -37,6 +37,6 @@ class Identity::SchoolStaffRegistrationRateLimitTest < ActionDispatch::Integrati
 
   def registration_params(**overrides)
     { last_name: "Kouassi", first_name: "Aya", gender: "female", contact: "07 01 02 03 04", pin: "4821",
-      pin_confirmation: "4821", school_code: "K7M-4QZ", **overrides }
+      pin_confirmation: "4821", school_code: "K7M-4QZ", position: "secretary", **overrides }
   end
 end

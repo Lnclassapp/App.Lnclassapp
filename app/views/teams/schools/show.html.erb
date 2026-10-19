@@ -30,7 +30,8 @@
     <section id="school_teachers" aria-labelledby="school_teachers_title" class="min-w-0">
       <div class="mb-8">
         <%= render "shared/school_staff", staff: @staff, by_code_count: @by_code_count, viewer_id: nil, removable: @removable,
-                                          remove_url: ->(public_id) { school_staff_member_path(@school.public_id, public_id) }, newcomer: false %>
+                                          remove_url: ->(public_id) { school_staff_member_path(@school.public_id, public_id) }, newcomer: false,
+                                          school_type: @school.school_type, position_url: @position_url %>
         <% if @archived_staff.any? %>
           <%= render "teams/schools/archived_staff", school_public_id: @school.public_id, rows: @archived_staff, can_restore: @can_restore %>
         <% else %>

@@ -47,12 +47,14 @@ module Factories
     end
 
     # ADR-0065: a direction account attached to its school, signing in by PIN alone. ADR-0077: joined by invitation or
-    # by the school's code, on `joined_at`; archived by `archived_by` on `archived_at`.
+    # by the school's code, on `joined_at`; archived by `archived_by` on `archived_at`. ADR-0092: its position, « deputy »
+    # by default (management rank, and any number of them per school, unlike « head »).
     def create_school_admin(school: create_school, invited_by: nil, joined_via: "invitation", joined_at: Time.current,
-                            archived_at: nil, archived_by: nil, **attributes)
+                            archived_at: nil, archived_by: nil, position: "deputy", **attributes)
       create_user(role: "school_admin", **attributes).tap do |admin|
         archived_by ||= create_team_member(second_factor: false) if archived_at
-        Orm::SchoolStaff.create!(user: admin, school:, invited_by:, joined_via:, created_at: joined_at, archived_at:, archived_by:)
+        Orm::SchoolStaff.create!(user: admin, school:, invited_by:, joined_via:, position:, created_at: joined_at, archived_at:,
+                                 archived_by:)
       end
     end
 
@@ -70,7 +72,7 @@ module Factories
 
     # Returns the invitation; `invitation.token` is the clear token of its URL.
     def create_invitation(kind: "team", contact: nil, team_role: ("content" if kind == "team"), school: nil,
-                          position: ("principal" if kind == "school_staff"), invited_by: nil,
+                          position: ("deputy" if kind == "school_staff"), invited_by: nil,
                           token: SecureRandom.base58(32), expires_at: 72.hours.from_now, **attributes)
       school ||= create_school if kind == "school_staff"
       contact ||= format("07%08d", factory_sequence)

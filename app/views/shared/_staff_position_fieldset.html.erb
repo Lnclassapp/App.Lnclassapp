@@ -1,0 +1,24 @@
+<%# 🌐 UI · shared/_staff_position_fieldset — groupe « Fonction » à quatre radios (inscription, invitation, changement par l'équipe) %>
+<%# Rôle : aucune radio cochée par défaut ; libellé du rang 2 selon school_type (nil : les deux) ; erreur annoncée sous le groupe %>
+<%# ADR  : 0092 · UDR : 0092 (§3.1, §3.7) · section : la légende prend le style des rubriques du formulaire d'inscription %>
+<%# locals: (form:, legend:, school_type: nil, required: true, section: false) -%>
+<% error = form.object.errors[:position].first %>
+<% error_id = "#{form.object_name}_position_error" %>
+<fieldset id="<%= form.object_name %>_position" class="space-y-1.5" <%= tag.attributes("aria-describedby": (error_id if error)) %>>
+  <legend class="<%= section ? "mb-3 text-xs font-semibold tracking-wider text-mute uppercase" : "mb-1.5 block text-sm font-medium text-ink" %>">
+    <%= legend %><% if required %><span class="text-error" aria-hidden="true"> *</span><% end %>
+  </legend>
+  <div class="grid gap-2 sm:grid-cols-2">
+    <% Entities::School::StaffPosition::ALL.each do |position| %>
+      <label class="flex min-h-tap cursor-pointer items-center gap-3 rounded-ln border border-line bg-white px-4 py-2 transition has-checked:border-brand has-checked:bg-brand-soft">
+        <%= form.radio_button :position, position, required:, class: "size-5 shrink-0 accent-brand", "aria-invalid": ("true" if error) %>
+        <span class="text-sm font-medium text-ink"><%= t("shared.staff_positions.#{Entities::School::StaffPosition.label_key(position, school_type:)}") %></span>
+      </label>
+    <% end %>
+  </div>
+  <% if error %>
+    <p id="<%= error_id %>" role="alert" class="flex items-center gap-1.5 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "shrink-0" %><%= error %>
+    </p>
+  <% end %>
+</fieldset>

@@ -1,11 +1,12 @@
 <%# 🌐 UI · school_admin/departed_teachers/index — « Enseignants retirés » de la direction (GD-21) %>
 <%# Rôle : une ligne par départ ouvert : nom, matière, date du retrait ; « Réintégrer » sur un établissement actif seulement %>
-<%# ADR  : 0071 · UDR : 0005, 0054, 0056 %>
+<%# ADR  : 0071, 0092 · UDR : 0005, 0054, 0056, 0092 (§3.5) · « Réintégrer » si la policy l'accorde %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "teachers" %>
 <%= link_to t(".back"), school_admin_teachers_path, id: "back-to-teachers",
             class: "mb-4 inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
 <%= ui_page_header title: t(".title"), subtitle: @overview.school_name %>
+<%= render "school_admin/shared/rank_note", note: @rank_note %>
 
 <% if @overview.teachers.any? %>
   <%= ui_card id: "departed_teachers", padding: :none do %>
@@ -25,7 +26,7 @@
             <% date = teacher.detached_at.to_date %>
             <span class="text-sm text-mute"><%= t(".detached_on", date: date.day == 1 ? "1er #{l(date, format: "%B %Y")}" : l(date, format: :long)) %></span>
           </div>
-          <% if @overview.school_active %>
+          <% if @manageable %>
             <%= form_with url: school_admin_teacher_reinstatement_path(teacher.public_id), method: :post,
                           id: "reinstate-#{teacher.public_id}-form" do %>
               <%= ui_button t(".reinstate"), type: :submit, variant: :secondary, size: :sm, icon: "arrow-uturn-left",
