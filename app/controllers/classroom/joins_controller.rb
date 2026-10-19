@@ -1,14 +1,17 @@
 # 🌐 DELIVERY · Classroom::JoinsController
 # Rôle : /c/<jeton> ouvre l'inscription élève, la classe déjà choisie, ou l'entrée de l'élève sans classe ; tout autre paramètre (ancien code compris), la voie standard avec l'alerte
-# ADR  : 0026, 0028, 0040, 0041, 0050, 0085, 0088 · UDR : 0081, 0083
+# ADR  : 0026, 0028, 0040, 0041, 0050, 0085, 0088, 0095 · UDR : 0081, 0083, 0102
 module Classroom
   class JoinsController < ApplicationController
     allow_unauthenticated_access
-    # ADR-0041, ADR-0085 §4.1 : l'aperçu et l'entrée partagent le compteur ; au-delà, rien n'est révélé.
-    rate_limit to: 10, within: 1.minute, by: -> { request.remote_ip }, with: -> { refuse_too_many }
+    # ADR-0041, ADR-0085 §4.1 : l'aperçu et l'entrée partagent le compteur ; au-delà, rien n'est révélé. La confirmation
+    # d'un changement par lien (StudentClassroomChangesController) compte dans le même compteur.
+    LINK_RATE_LIMIT = { to: 10, within: 1.minute, scope: "classroom/joins" }.freeze
+    rate_limit **LINK_RATE_LIMIT, by: -> { request.remote_ip }, with: -> { refuse_too_many }
     before_action :refuse_other_roles
-    # IL-18 : l'élève déjà dans une classe active n'a rien à rejoindre ; son envoi est refusé par JoinAsStudent, en 403.
-    before_action :send_enrolled_student_home, only: :new
+    # UDR-0102 §3.3 : l'élève déjà dans une classe active va à la confirmation du changement ; son envoi ici reste
+    # refusé par JoinAsStudent, en 403 (IL-18).
+    before_action :send_enrolled_student_on, only: :new
     before_action :load_link
 
     # Le visiteur reçoit la page d'inscription, la classe dans son bandeau ; l'élève sans classe, la carte et son bouton ;
@@ -56,8 +59,16 @@ module Classroom
       render_forbidden unless current_actor && current_actor.student?
     end
 
-    def send_enrolled_student_home
-      redirect_to student_home_path if current_actor && Queries::Identity::HomeDestinationQuery.new.enrolled?(actor: current_actor)
+    # Le lien d'une autre classe ouverte : « Changer de classe ? » ; sa propre classe, un lien mort ou archivé : l'accueil.
+    def send_enrolled_student_on
+      preview = Queries::Classroom::ClassroomChangePreviewQuery.new
+      current = current_actor && preview.current(student_id: current_actor.user_id)
+      return unless current
+
+      target = preview.linked(token: link_token)
+      return redirect_to(confirm_student_classroom_change_path(link_token:), status: :see_other) if target && target.public_id != current.public_id
+
+      redirect_to student_home_path
     end
 
     # Lien invalide (jeton inconnu ou changé, classe archivée, établissement inactif, ancien code) : la voie standard,
