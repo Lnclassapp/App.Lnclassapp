@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0104 §4.1 : plafonds d'une image de fiche ou de question ; un texte de remplacement fait d'espaces n'en est pas un.
+# ADR-0105 §4.1 : plafonds d'une image de fiche ou de question ; un texte de remplacement fait d'espaces n'en est pas un.
 module Entities
   module Shared
     class ContentImageTest < ActiveSupport::TestCase

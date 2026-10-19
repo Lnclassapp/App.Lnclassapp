@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0104 §4.5 : l'image d'une question se lit sous la règle de lecture de son exercice : publiée (exercice, fiche et
+# ADR-0105 §4.5 : l'image d'une question se lit sous la règle de lecture de son exercice : publiée (exercice, fiche et
 # cours publiés), elle se lit par toute personne connectée et se garde dans le navigateur ; brouillon ou non rattachée,
 # l'équipe seule la lit, sans cache. Sinon elle est introuvable, et son fichier n'est jamais lu.
 module UseCases

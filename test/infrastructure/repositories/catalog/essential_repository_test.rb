@@ -98,7 +98,7 @@ module Repositories
         assert_equal [ first.slug, second.slug ], @repository.draft_slugs(course_id: @course.id)
       end
 
-      # ADR-0104 : une image de fiche est une pièce jointe Action Text de son contenu, par sgid.
+      # ADR-0105 : une image de fiche est une pièce jointe Action Text de son contenu, par sgid.
       def attachment(image)
         %(<action-text-attachment sgid="#{image.attachable_sgid}" content-type="#{image.content_type}" ) +
           %(width="#{image.width}" height="#{image.height}"></action-text-attachment>)
@@ -109,7 +109,7 @@ module Repositories
         entity
       end
 
-      test "ADR-0104 : les images citées sont rattachées avec leur texte de remplacement, dans l'ordre du texte" do
+      test "ADR-0105 : les images citées sont rattachées avec leur texte de remplacement, dans l'ordre du texte" do
         first = create_essential_image
         second = create_essential_image(fixture: "photos/photo.png")
         content = "<p>Avant</p>#{attachment(second)}<p>Entre</p>#{attachment(first)}"
@@ -122,7 +122,7 @@ module Repositories
         assert_equal created.images.map(&:public_id), @repository.find_by_slug(slug: created.slug).images.map(&:public_id)
       end
 
-      test "ADR-0104 : une image d'article n'est pas admise ; une image retirée du texte est supprimée, et le journal le dit" do
+      test "ADR-0105 : une image d'article n'est pas admise ; une image retirée du texte est supprimée, et le journal le dit" do
         article = create_article_image
         kept = create_essential_image
         dropped = create_essential_image
@@ -138,7 +138,7 @@ module Repositories
         assert_includes logs, "[EssentialRepository] images supprimées ids=[#{dropped.id}] public_ids=[\"#{dropped.public_id}\"]"
       end
 
-      test "ADR-0104 : une image d'une autre fiche ou purgée refuse le texte au lieu d'être retirée sans rien dire" do
+      test "ADR-0105 : une image d'une autre fiche ou purgée refuse le texte au lieu d'être retirée sans rien dire" do
         image = create_essential_image
         created = @repository.create(essential: essential(content: attachment(image))).value
         other = create_essential_image(essential: create_essential)
@@ -155,7 +155,7 @@ module Repositories
         assert_equal [ image.public_id ], @repository.find_by_slug(slug: created.slug).images.map(&:public_id)
       end
 
-      test "ADR-0104 : un texte de remplacement absent de la saisie est gardé ; vidé, il s'efface" do
+      test "ADR-0105 : un texte de remplacement absent de la saisie est gardé ; vidé, il s'efface" do
         image = create_essential_image
         created = @repository.create(essential: with_alts(essential(content: attachment(image)), image.public_id => "Une pile")).value
 
@@ -165,7 +165,7 @@ module Repositories
         assert_nil image.reload.alt
       end
 
-      test "ADR-0104 : un sgid illisible refuse le texte, rien n'est écrit, aucune image n'est détruite" do
+      test "ADR-0105 : un sgid illisible refuse le texte, rien n'est écrit, aucune image n'est détruite" do
         image = create_essential_image
         created = @repository.create(essential: essential(content: attachment(image))).value
         created.content = %(<action-text-attachment sgid="altere"></action-text-attachment>)
@@ -175,7 +175,7 @@ module Repositories
         assert_includes @repository.find_by_slug(slug: created.slug).content, image.attachable_sgid
       end
 
-      test "ADR-0104 : une image citée prise entre-temps par une autre fiche fait échouer l'écriture, rien n'est écrit" do
+      test "ADR-0105 : une image citée prise entre-temps par une autre fiche fait échouer l'écriture, rien n'est écrit" do
         image = create_essential_image
         other = create_essential
         @repository.define_singleton_method(:sanitized_content) do |canonical, record|
@@ -188,7 +188,7 @@ module Repositories
         assert_equal [ other.id ], Orm::Essential.ids
       end
 
-      test "ADR-0104 : les figures de Trix envoyées par l'éditeur deviennent des pièces jointes" do
+      test "ADR-0105 : les figures de Trix envoyées par l'éditeur deviennent des pièces jointes" do
         image = create_essential_image
         figure = %(<figure data-trix-attachment="#{ERB::Util.html_escape({ sgid: image.attachable_sgid, contentType: image.content_type }.to_json)}"></figure>)
 

@@ -79,7 +79,7 @@ module UseCases
         assert_nil @audit.events
       end
 
-      # ADR-0104 §4.4 : une image annoncée qui manque, ou une image sans texte de remplacement, bloque la publication.
+      # ADR-0105 §4.4 : une image annoncée qui manque, ou une image sans texte de remplacement, bloque la publication.
       test "la question 2 attend son image : conflit numéroté, rien n'est écrit" do
         result = publish(second: { image_description: "Un circuit simple" })
 

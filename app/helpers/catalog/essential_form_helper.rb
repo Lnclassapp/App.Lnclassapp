@@ -1,6 +1,6 @@
 # 🌐 UI · Catalog::EssentialFormHelper — éditeur de fiche en mode images dans la modale de l'équipe
 # Rôle : données de #essential_editor (mode images, plafonds d'un contenu, messages) lues par rich-text-editor ; texte au format de Trix
-# ADR  : 0051, 0104 · UDR : 0129
+# ADR  : 0051, 0105 · UDR : 0129
 module Catalog
   module EssentialFormHelper
     IMAGE = Entities::Shared::ContentImage

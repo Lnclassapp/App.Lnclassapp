@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0104 §4.3 : un emplacement est un paragraphe dont tout le texte est « [[image: description]] ».
+# ADR-0105 §4.3 : un emplacement est un paragraphe dont tout le texte est « [[image: description]] ».
 module Entities
   module Catalog
     class ImageSlotTest < ActiveSupport::TestCase

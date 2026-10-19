@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Assessment::PublishExercise
 # Rôle : l'équipe publie (ou republie) un exercice qui a au moins une question bien construite, illustrée si annoncé, sous une fiche publiée
-# ADR  : 0026, 0028, 0035, 0054, 0104 · UDR : 0017, 0129
+# ADR  : 0026, 0028, 0035, 0054, 0105 · UDR : 0017, 0129
 module UseCases
   module Assessment
     class PublishExercise
@@ -14,7 +14,7 @@ module UseCases
 
       # → Result(Exercise) | :forbidden | :not_found
       #   | :conflict, base: [:transition_not_allowed | :parent_not_published | :not_publishable]
-      #   | :conflict, base: [:image_missing | :image_alt_blank], number: [N] (la première question en cause, ADR-0104 §4.4)
+      #   | :conflict, base: [:image_missing | :image_alt_blank], number: [N] (la première question en cause, ADR-0105 §4.4)
       def call(actor:, public_id:)
         allowed = @policy.call(actor:)
         return allowed if allowed.failure?

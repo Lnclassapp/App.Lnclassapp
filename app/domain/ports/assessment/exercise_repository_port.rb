@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Assessment::ExerciseRepositoryPort
 # Rôle : contrat de persistance des exercices, de leurs questions et de leurs propositions
-# ADR  : 0035, 0036, 0039, 0054, 0104
+# ADR  : 0035, 0036, 0039, 0054, 0105
 module Ports
   module Assessment
     module ExerciseRepositoryPort

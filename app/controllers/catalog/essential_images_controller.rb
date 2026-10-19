@@ -1,12 +1,12 @@
 # 🌐 DELIVERY · Catalog::EssentialImagesController
 # Rôle : sert une image de fiche, seul chemin d'une image du texte d'une fiche, sous la règle de lecture de sa fiche et du niveau de l'élève
-# ADR  : 0047, 0104 · UDR : 0129
+# ADR  : 0047, 0105 · UDR : 0129
 module Catalog
   class EssentialImagesController < AuthenticatedController
     include ReadsOwnLevel
 
     # Le catalogue est sous connexion : jamais de cache public ni de relais partagé, seulement le navigateur du lecteur.
-    # Une heure, puis revalidation par ETag : la règle de lecture est rejouée, une fiche retirée ne reste pas lisible (ADR-0104 §4.5).
+    # Une heure, puis revalidation par ETag : la règle de lecture est rejouée, une fiche retirée ne reste pas lisible (ADR-0105 §4.5).
     PUBLISHED_CACHE = "max-age=3600, private"
     UNPUBLISHED_CACHE = "private, no-store"
 

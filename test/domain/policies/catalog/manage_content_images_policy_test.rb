@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0104, PRD §2 : seules l'équipe `admin` et `content` gèrent les images de cours.
+# ADR-0105, PRD §2 : seules l'équipe `admin` et `content` gèrent les images de cours.
 module Policies
   module Catalog
     class ManageContentImagesPolicyTest < ActiveSupport::TestCase

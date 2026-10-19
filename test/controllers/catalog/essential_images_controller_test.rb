@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0104 §4.5 : une image de fiche se sert sous la règle de lecture de sa fiche : un élève du niveau la lit si la fiche
+# ADR-0105 §4.5 : une image de fiche se sert sous la règle de lecture de sa fiche : un élève du niveau la lit si la fiche
 # et son cours sont publiés, gardée une heure par son seul navigateur puis revalidée ; brouillon, hors niveau ou remplacée : 404 ;
 # sans connexion : jamais.
 class Catalog::EssentialImagesControllerTest < ActionDispatch::IntegrationTest

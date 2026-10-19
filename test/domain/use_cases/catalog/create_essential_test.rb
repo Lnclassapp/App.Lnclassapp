@@ -69,7 +69,7 @@ module UseCases
         assert_equal 1, @transaction.calls
       end
 
-      test "ADR-0104 : les textes de remplacement saisis vont au repository avec la fiche" do
+      test "ADR-0105 : les textes de remplacement saisis vont au repository avec la fiche" do
         essential = create(image_alts: { "img1" => "Une pile" }).value
 
         assert_equal [ [ "img1", "Une pile" ] ], essential.images.map { [ it.public_id, it.alt ] }

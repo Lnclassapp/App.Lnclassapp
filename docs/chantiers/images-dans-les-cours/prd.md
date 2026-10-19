@@ -191,7 +191,7 @@ Scénario: une description d'image invalide est refusée
 
 ## 6. Décisions rattachées
 
-- [ADR-0104](../../decisions/adr/0104-images-des-fiches-et-des-questions.md) — images des fiches et des questions : tables par contexte, emplacements textuels, plafonds, service sous la règle de lecture, conditions de publication, schéma d'import. Amende ADR-0074 (moteur 2) et ADR-0051.
+- [ADR-0105](../../decisions/adr/0105-images-des-fiches-et-des-questions.md) — images des fiches et des questions : tables par contexte, emplacements textuels, plafonds, service sous la règle de lecture, conditions de publication, schéma d'import. Amende ADR-0074 (moteur 2) et ADR-0051.
 - [UDR-0129](../../decisions/udr/0129-images-dans-l-editeur-de-fiche-la-question-et-la-lecture.md) — insertion d'une image dans l'éditeur de fiche et de question, emplacements, textes de remplacement, rendu élève.
 
 ## 7. Mesures

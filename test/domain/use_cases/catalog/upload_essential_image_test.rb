@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0104 §4.1, §4.7 : l'équipe Administration et Contenu envoie une image de fiche ; le serveur croit les octets, refuse
+# ADR-0105 §4.1, §4.7 : l'équipe Administration et Contenu envoie une image de fiche ; le serveur croit les octets, refuse
 # avec sa raison ce qui n'est pas une petite image (300 Ko, 1200 px), n'écrit alors rien, et refuse la 31e image d'une fiche.
 module UseCases
   module Catalog

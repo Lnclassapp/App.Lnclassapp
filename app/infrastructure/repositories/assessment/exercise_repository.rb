@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::ExerciseRepository
 # Rôle : traduit Orm::Exercise, ses questions, propositions et images ↔ Entities::Assessment::Exercise, avec la publication des parents
-# ADR  : 0035, 0036, 0039, 0054, 0091, 0104
+# ADR  : 0035, 0036, 0039, 0054, 0091, 0105
 module Repositories
   module Assessment
     class ExerciseRepository
@@ -33,7 +33,7 @@ module Repositories
         record.update!(editable_attributes(exercise))
         if replace_questions
           question_ids = Orm::Question.where(exercise_id: record.id).select(:id)
-          # FK RESTRICT (ADR-0104) : les images quittent leurs questions avant elles, puis seules celles qui ne sont plus
+          # FK RESTRICT (ADR-0105) : les images quittent leurs questions avant elles, puis seules celles qui ne sont plus
           # citées partent, fichier compris.
           previous = Orm::QuestionImage.where(question_id: question_ids).pluck(:id)
           Orm::QuestionImage.where(id: previous).update_all(question_id: nil)

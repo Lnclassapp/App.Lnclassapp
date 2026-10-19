@@ -115,7 +115,7 @@ module Dtos
         assert_equal "Méiose", input.read_attribute_for_validation(:title)
       end
 
-      # ADR-0104 : l'image d'une question (son adresse, son texte de remplacement) et l'image annoncée par l'import.
+      # ADR-0105 : l'image d'une question (son adresse, son texte de remplacement) et l'image annoncée par l'import.
       test "une question porte son image et sa description, jusqu'à l'entité et retour" do
         questions = params[:questions_attributes].dup
         questions["0"] = questions["0"].merge(image_public_id: " ImAgE000000001 ", image_alt: "  Une pile  ", image_description: " Un circuit ")

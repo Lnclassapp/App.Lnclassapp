@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0104 §4.7 : l'image d'une question est une ligne de question_images (une au plus par question) et son fichier ;
+# ADR-0105 §4.7 : l'image d'une question est une ligne de question_images (une au plus par question) et son fichier ;
 # elle se lit avec l'exercice de sa question ; une orpheline de plus de 48 h est purgée.
 module Repositories
   module Assessment

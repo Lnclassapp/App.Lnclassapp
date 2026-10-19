@@ -58,7 +58,7 @@ module Repositories
             path = path_of(table, row, paths)
             paths[[ table, row["id"] ]] = path
             line = row.except(*IGNORED, *ADDED_LATER, "course_id", "essential_id", "exercise_id", "question_id")
-            # ADR-0104 : colonne née après l'instantané ; une leçon sans image l'écrit vide, ce que l'instantané ne connaît pas.
+            # ADR-0105 : colonne née après l'instantané ; une leçon sans image l'écrit vide, ce que l'instantané ne connaît pas.
             line.delete("image_description") if line.key?("image_description") && line["image_description"].nil?
             taxonomy.each { |column, by_id| line[column] = by_id[row[column]] if row.key?(column) }
             { "path" => path }.merge(line)

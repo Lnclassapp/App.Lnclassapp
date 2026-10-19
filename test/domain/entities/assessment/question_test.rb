@@ -71,7 +71,7 @@ module Entities
                                                           Answer.new(id: 1, position: 2, content: "b", correct: true) ]).ids_by_position
       end
 
-      # ADR-0104 §4.4 : ce qui manque pour publier, sans gêner l'enregistrement d'un brouillon.
+      # ADR-0105 §4.4 : ce qui manque pour publier, sans gêner l'enregistrement d'un brouillon.
       test "image_errors : description sans image, image sans texte de remplacement, ou rien" do
         base = question("true_false", true, false)
         image = ->(alt) { Entities::Shared::ContentImage.new(public_id: "p", alt:) }

@@ -1,12 +1,12 @@
 # 🌐 DELIVERY · Assessment::QuestionImagesController
 # Rôle : sert l'image d'une question sous la règle de lecture de son exercice : cache navigateur privé d'une heure si publiée
-# ADR  : 0028, 0035, 0047, 0104 · UDR : 0129
+# ADR  : 0028, 0035, 0047, 0105 · UDR : 0129
 module Assessment
   class QuestionImagesController < AuthenticatedController
     include ReadsOwnLevel
 
     # Le catalogue est sous connexion : une image publiée ne se garde qu'une heure dans le navigateur, jamais dans un relais ;
-    # passé ce délai, la revalidation rejoue la règle de lecture (ADR-0104 §4.5).
+    # passé ce délai, la revalidation rejoue la règle de lecture (ADR-0105 §4.5).
     PUBLISHED_CACHE = "max-age=3600, private"
     PRIVATE_CACHE = "private, no-store"
 

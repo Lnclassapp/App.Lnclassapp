@@ -1,6 +1,6 @@
 // ⚡ FRONT · rich_text_editor_controller — éditeur riche (Trix) des cours, des fiches et du blog
 // Rôle : charge Trix à la demande, hors du bundle commun ; refuse tout fichier ; images pour le blog et les fiches, sur valeur `attachments` ; laisse le focus aux autres champs
-// ADR  : 0047, 0049, 0051, 0074, 0104 · UDR : 0014, 0016, 0067, 0129 · usage : stylesheet_link_tag("trix") ; data-rich-text-editor-lang-value + rich_textarea
+// ADR  : 0047, 0049, 0051, 0074, 0105 · UDR : 0014, 0016, 0067, 0129 · usage : stylesheet_link_tag("trix") ; data-rich-text-editor-lang-value + rich_textarea
 import { Controller } from "@hotwired/stimulus"
 
 // Without the attachments value (courses, sheets) the editor accepts no attachment: nothing reaches the bucket from it,
@@ -40,7 +40,7 @@ export default class extends Controller {
     uploadUrl: String,
     // The form name of the file sent; absent, lib/image_upload's (« article_image[file] », the blog).
     uploadField: String,
-    // Sheets (ADR-0104 §4.1): the quality drops until the image fits under maxBytes.
+    // Sheets (ADR-0105 §4.1): the quality drops until the image fits under maxBytes.
     squeeze: { type: Boolean, default: false },
     accept: Array,
     maxBytes: Number,

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::QuestionImagesController
 # Rôle : le formulaire d'exercice envoie l'image d'une question ; 201 { public_id, url, width, height }, 422 { error }, 403 et 401 en JSON
-# ADR  : 0026, 0028, 0049, 0060, 0104 · UDR : 0129
+# ADR  : 0026, 0028, 0049, 0060, 0105 · UDR : 0129
 module Teams
   class QuestionImagesController < BaseController
     # ADR-0049 : un compte de l'équipe n'envoie pas plus de 60 images par minute ; les non rattachées attendent la purge.

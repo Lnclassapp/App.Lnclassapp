@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Essential
 # Rôle : table essentials, fiches essentielles d'un cours ; slug tiré du cours puis de la fiche
-# ADR  : 0029, 0035, 0104
+# ADR  : 0029, 0035, 0105
 module Orm
   class Essential < ApplicationRecord
     include HasFrozenSlug

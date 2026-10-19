@@ -1,6 +1,6 @@
 // ⚡ FRONT · assessment/question_image_controller — l'image d'une question dans le formulaire d'exercice (UDR-0129 §3.2)
 // Rôle : choisir, alléger (300 Ko, 1200 px) et envoyer l'image ; la description annoncée devient son texte de remplacement ; retirer l'image ou la description
-// ADR  : 0060, 0104 · UDR : 0129 · lib/image_upload chargé par import(), à la demande
+// ADR  : 0060, 0105 · UDR : 0129 · lib/image_upload chargé par import(), à la demande
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {

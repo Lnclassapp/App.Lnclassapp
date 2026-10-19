@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::QuestionImageStore
 # Rôle : images de question en lignes question_images et fichiers sur le service Active Storage (bucket) : envoyer, servir, purger
-# ADR  : 0047, 0060, 0104
+# ADR  : 0047, 0060, 0105
 module Repositories
   module Assessment
     class QuestionImageStore

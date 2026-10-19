@@ -1,9 +1,9 @@
 // ⚡ FRONT · lib/image_upload — prépare une image (article, fiche, question) dans le navigateur, puis l'envoie à l'endpoint de l'équipe
 // Rôle : chargé par import() seulement : plus grand côté borné, WebP 0,82 (JPEG à défaut), sans métadonnées ; fiche et question : qualité abaissée jusqu'au plafond
-// ADR  : 0051, 0060, 0074, 0104 · UDR : 0067 (§3.4.3), 0129 · mêmes règles de réduction que identity/photo_picker_controller.js
+// ADR  : 0051, 0060, 0074, 0105 · UDR : 0067 (§3.4.3), 0129 · mêmes règles de réduction que identity/photo_picker_controller.js
 
 const QUALITY = 0.82
-// squeeze (sheets and questions, 300 KB, ADR-0104 §4.1): the qualities tried in turn until the image fits.
+// squeeze (sheets and questions, 300 KB, ADR-0105 §4.1): the qualities tried in turn until the image fits.
 const SQUEEZED_QUALITIES = [QUALITY, 0.7, 0.55]
 // An upload that never answers (a stalled connection) is given up: the editor and « Enregistrer » are free again.
 export const UPLOAD_TIMEOUT = 60_000

@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/essentials/_form — nom, sous-titre, contenu et images d'une fiche essentielle, dans la modale %>
 <%# Rôle : éditeur Trix en mode images (UDR-0129 §3.1) : emplacements à remplir, insertion, textes de remplacement ; valeurs saisies conservées %>
-<%# ADR  : 0035, 0047, 0051, 0104 · UDR : 0005, 0016, 0067, 0129 · Stimulus : rich-text-editor, communication--image-alts, catalog--essential-image-slots %>
+<%# ADR  : 0035, 0047, 0051, 0105 · UDR : 0005, 0016, 0067, 0129 · Stimulus : rich-text-editor, communication--image-alts, catalog--essential-image-slots %>
 <%# locals: (input:, url:, method:, images:, upload_url:) -%>
 <% caps = Entities::Shared::ContentImage %>
 <% slots = essential_image_slots(input.content) %>
@@ -46,7 +46,7 @@
     </div>
     <input id="essential_image_files" type="file" hidden accept="<%= caps::CONTENT_TYPES.join(",") %>"
            data-rich-text-editor-target="fileInput" data-action="change->rich-text-editor#insertPicked">
-    <%# Aucun envoi par Active Storage : les images passent par l'endpoint de l'équipe (ADR-0104 §4.7). %>
+    <%# Aucun envoi par Active Storage : les images passent par l'endpoint de l'équipe (ADR-0105 §4.7). %>
     <%= form.rich_textarea :content, value: essential_editor_content(input.content),
           "aria-describedby": [ "essential_content_hint", ("essential_content_error" if content_error) ].compact.join(" "),
           "aria-invalid": ("true" if content_error), data: rich_text_without_uploads,

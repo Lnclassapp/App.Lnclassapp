@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0104 §4.7, UDR-0129 §3.0 : le formulaire d'exercice envoie l'image d'une question en multipart ; 201 avec exactement
+# ADR-0105 §4.7, UDR-0129 §3.0 : le formulaire d'exercice envoie l'image d'une question en multipart ; 201 avec exactement
 # public_id, url, width, height ; 422 { error } en français ; 403 pour qui n'est pas de l'équipe Administration ou Contenu.
 # Un refus ne laisse rien : ni ligne question_images, ni blob.
 class Teams::QuestionImagesControllerTest < ActionDispatch::IntegrationTest

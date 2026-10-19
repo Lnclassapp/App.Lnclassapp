@@ -6,7 +6,7 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-10-19 | Avant la fusion de `Develop` : décisions renumérotées ADR-0104 et UDR-0129 | `Develop` avait donné 0089 (exercice du jour) et 0084 (accueil élève) à d'autres chantiers. Seules les lignes écrites par cette branche ont changé | Non |
+| 2026-10-19 | Avant la fusion de `Develop` : décisions renumérotées ADR-0105 et UDR-0129 | `Develop` avait donné 0089 (exercice du jour) et 0084 (accueil élève) à d'autres chantiers. Seules les lignes écrites par cette branche ont changé | Non |
 
 ## Ce qui a dérapé
 
@@ -34,7 +34,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 |---|---|
 | **Livré le** | 2026-10-14 |
 | **PR** | |
-| **ADR produits** | ADR-0104 |
+| **ADR produits** | ADR-0105 |
 | **UDR produits** | UDR-0129 |
 
 ## 2026-10-10 — Lot 0
@@ -67,8 +67,8 @@ Revue du diff réuni (security-reviewer, silent-failure-hunter, pr-test-analyzer
 
 - **Plus de perte d'image sans message.** Question : une image citée qu'elle ne peut pas prendre (autre exercice, citée deux fois, inconnue, purgée) lève `ExerciseRepositoryPort::ImageUnavailable`. La transaction s'annule et le use case rend `:invalid`, `questions: [:image_unavailable]`. Fiche : un sgid valide hors des images admises rend `content: [:image_unavailable]` au lieu d'être retiré par l'assainisseur.
 - **Suppressions journalisées** : `[EssentialRepository]` et `[ExerciseRepository] images supprimées ids=… public_ids=…`.
-- **Emplacement mal écrit** : un bloc entier `[[image: …]]` que le motif ne lit pas (liste, titre, gras, vide, plus de 150 caractères) est refusé. À l'import, c'est `image_slot_malformed` sur `….content` ; à la publication, `image_slots_malformed` passe avant `image_slots_left`. Au milieu d'une phrase, l'emplacement reste du texte (ADR-0104 §4.3 inchangé).
-- **Cache** : `max-age=3600, private` au lieu de `max-age=31536000, private, immutable`. Après une heure, la revalidation par ETag rejoue la règle de lecture. Une ligne sans son fichier répond 404 et le journal le dit. ADR-0104 §4.5 révisé.
+- **Emplacement mal écrit** : un bloc entier `[[image: …]]` que le motif ne lit pas (liste, titre, gras, vide, plus de 150 caractères) est refusé. À l'import, c'est `image_slot_malformed` sur `….content` ; à la publication, `image_slots_malformed` passe avant `image_slots_left`. Au milieu d'une phrase, l'emplacement reste du texte (ADR-0105 §4.3 inchangé).
+- **Cache** : `max-age=3600, private` au lieu de `max-age=31536000, private, immutable`. Après une heure, la revalidation par ETag rejoue la règle de lecture. Une ligne sans son fichier répond 404 et le journal le dit. ADR-0105 §4.5 révisé.
 - **Envois** : `rate_limit` de 60 par minute et par compte sur les deux `create`. Le 429 porte son texte, que `image_upload.js` affiche comme un 422.
 - **Formulaire verrouillé** : l'image d'une question déjà tentée s'affiche en lecture seule avec `image_locked` (UDR-0129 §3.2). La dette du Lot C est soldée.
 - **Clés retirées** : `teams.essentials.form.image_alt_label`, `image_alt_hint` et `image_alt_missing`, que rien ne lisait. La ligne de texte de remplacement de la fiche reprend celle de l'article.
@@ -85,7 +85,7 @@ Revue du diff réuni (security-reviewer, silent-failure-hunter, pr-test-analyzer
 
 ## 2026-10-19 — Fusion de `Develop` (types de questions, ADR-0091)
 
-- **Décisions renumérotées** : ADR-0104 et UDR-0129 (0089, 0084 et 0128 pris ailleurs).
+- **Décisions renumérotées** : ADR-0105 et UDR-0129 (0089, 0084 et 0128 pris ailleurs).
 - **Image et types de question réunis** : `Question`, `QuestionInput`, `QuestionNode`, `SessionPlayQuery::Question` portent la marge, les éléments et l'image. L'image d'import passe par `QuestionNode.from_import`, commun aux trois imports ; seul `lnclass.course-tree` admet `image`, les deux autres n'en reçoivent donc jamais.
 - **Carte de question** : l'image reste avant le `fieldset`, la `legend` étant désormais rendue par le partial du type.
 - **Requêtes** : envoyer une réponse coûte 25 requêtes au lieu de 23 : + 2 fixes (images de l'exercice chargées d'un bloc, image de la question suivante), jamais une par question.

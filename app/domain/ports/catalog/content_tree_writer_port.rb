@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::ContentTreeWriterPort
 # Rôle : contrat d'écriture en masse d'arbres de contenu déjà validés et identifiés, tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0104
+# ADR  : 0035, 0039, 0068, 0091, 0105
 module Ports
   module Catalog
     module ContentTreeWriterPort
@@ -9,13 +9,13 @@ module Ports
       AnswerNode = Data.define(:position, :content, :correct, :match_content) do
         def initialize(match_content: nil, **) = super
       end
-      # image_description : l'image annoncée par l'import, jamais l'image (ADR-0104 §4.6) ; nil sans image.
+      # image_description : l'image annoncée par l'import, jamais l'image (ADR-0105 §4.6) ; nil sans image.
       QuestionNode = Data.define(:position, :content, :explanation, :question_type, :answers, :numeric_tolerance, :image_description) do
         def initialize(numeric_tolerance: nil, image_description: nil, **) = super
 
         # Une question d'un fichier d'import déjà validé (ContentNode), commune aux trois imports. L'ancienne application
         # nomme is_correct ce que le schéma nomme correct ; hors choix, chaque élément est juste (ADR-0091 §4.2).
-        # L'image n'arrive que par sa description, et seul le schéma lnclass.course-tree l'admet (ADR-0104 §4.6).
+        # L'image n'arrive que par sa description, et seul le schéma lnclass.course-tree l'admet (ADR-0105 §4.6).
         def self.from_import(question, position:)
           choice = Entities::Assessment::Question.kind_name_for(question["question_type"]) == "choice"
           answers = question["answers"].each_with_index.map do |answer, rank|

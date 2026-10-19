@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/exercises/_form — titre, description, type et questions d'un exercice, dans la grande modale %>
 <%# Rôle : questions imbriquées ajoutées et retirées par clonage de <template> ; verrouillées, elles sont en lecture seule %>
-<%# ADR  : 0036, 0054, 0104 · UDR : 0007, 0017, 0129 · Stimulus : teams--nested-form %>
+<%# ADR  : 0036, 0054, 0105 · UDR : 0007, 0017, 0129 · Stimulus : teams--nested-form %>
 <%= form_with model: input, scope: :exercise, url:, method:, id: "exercise-form", class: "space-y-5" do |form| %>
   <% if input.errors[:base].any? %>
     <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">

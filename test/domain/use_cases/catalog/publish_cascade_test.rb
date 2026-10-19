@@ -130,9 +130,9 @@ module UseCases
         assert_equal 0, @transaction.calls
       end
 
-      # ADR-0104 §4.4 : « Tout publier » vérifie toutes les fiches brouillons avant d'écrire ; une seule pas prête refuse
+      # ADR-0105 §4.4 : « Tout publier » vérifie toutes les fiches brouillons avant d'écrire ; une seule pas prête refuse
       # tout, et le refus nomme la fiche.
-      test "ADR-0104 : une fiche brouillon avec un emplacement d'image refuse le cours entier, la nomme, et rien n'est tenté" do
+      test "ADR-0105 : une fiche brouillon avec un emplacement d'image refuse le cours entier, la nomme, et rien n'est tenté" do
         @essentials = FakeEssentials.new(
           Essential.new(id: 10, slug: "meiose", course_id: 1, name: "La méiose", status: "draft", content: "<p>Prête</p>"),
           Essential.new(id: 12, slug: "mitose", course_id: 1, name: "La mitose", status: "draft", content: "<p>[[image: une cellule]]</p>"),
@@ -148,7 +148,7 @@ module UseCases
         assert_empty @exercises.asked
       end
 
-      test "ADR-0104 : une image sans texte de remplacement dans une fiche brouillon refuse aussi un cours déjà publié" do
+      test "ADR-0105 : une image sans texte de remplacement dans une fiche brouillon refuse aussi un cours déjà publié" do
         incomplete = Essential.new(id: 13, slug: "illustree", course_id: 2, name: "Illustrée", status: "draft", content: "<p>x</p>")
         incomplete.images = [ Entities::Shared::ContentImage.new(public_id: "ko", alt: nil) ]
         @essentials = FakeEssentials.new(incomplete, drafts: { 2 => %w[illustree] })
@@ -159,7 +159,7 @@ module UseCases
         assert_empty @publish_essential.calls
       end
 
-      test "ADR-0104 : la racine fiche suit la règle de PublishEssential, qui répond son refus tel quel" do
+      test "ADR-0105 : la racine fiche suit la règle de PublishEssential, qui répond son refus tel quel" do
         @publish_essential = FakePublish.new({ "meiose" => :image_slots_left })
 
         result = cascade(:essential, "meiose")

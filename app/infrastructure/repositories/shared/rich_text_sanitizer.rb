@@ -1,11 +1,11 @@
 # 🔌 INFRA · Repositories::Shared::RichTextSanitizer
 # Rôle : assainit tout HTML écrit dans un contenu riche (liste blanche de Rails) ; sans pièce jointe, sauf les images admises d'un article ou d'une fiche
-# ADR  : 0039, 0049, 0068, 0074, 0104 · UDR : 0014, 0067, 0129
+# ADR  : 0039, 0049, 0068, 0074, 0105 · UDR : 0014, 0067, 0129
 module Repositories
   module Shared
     # Retire <script>, <style>, <iframe>, les attributs on*, les liens javascript: et les <action-text-attachment> :
     # les cours, les fiches et les imports n'acceptent aucune pièce jointe, et Trix n'est pas un garde-fou pour une
-    # requête forgée. Seuls les adaptateurs des articles et des fiches passent image_ids (ADR-0074 §4.5, ADR-0104).
+    # requête forgée. Seuls les adaptateurs des articles et des fiches passent image_ids (ADR-0074 §4.5, ADR-0105).
     module RichTextSanitizer
       ATTACHMENT = "action-text-attachment"
 

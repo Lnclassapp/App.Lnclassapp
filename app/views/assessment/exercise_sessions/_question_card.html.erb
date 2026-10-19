@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercise_sessions/_question_card — une question à répondre, dans le frame « question » %>
 <%# Rôle : « Question n sur T », son image éventuelle, l'énoncé, la saisie de son type (kinds/_<type>), « Valider » collé en bas, désactivé tant que la réponse est incomplète %>
-<%# ADR  : 0054, 0091 §4.4 (aucune correction, aucun id révélateur), 0104 · UDR : 0007, 0022, 0057, 0087 §3.2, §3.4, 0129 · Stimulus : math, assessment--answer %>
+<%# ADR  : 0054, 0091 §4.4 (aucune correction, aucun id révélateur), 0105 · UDR : 0007, 0022, 0057, 0087 §3.2, §3.4, 0129 · Stimulus : math, assessment--answer %>
 <%# locals: (play:, question:, form:) -%>
 <% errors = form ? form.errors[:answer_ids] + form.errors[:response_text] + form.errors[:display_order] + form.errors[:base] : [] %>
 <%= turbo_frame_tag "question", class: "flex flex-1 flex-col" do %>

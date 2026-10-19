@@ -16,7 +16,7 @@ module Factories
       end
     end
 
-    # ADR-0104 : une image de question vérifiée et stockée comme par l'envoi de l'équipe, rattachée ou non à une question.
+    # ADR-0105 : une image de question vérifiée et stockée comme par l'envoi de l'équipe, rattachée ou non à une question.
     def create_question_image(question: nil, alt: nil, fixture: "photos/photo.jpg", created_at: nil)
       input = Dtos::Shared::ContentImageInput.new(file: StringIO.new(file_fixture(fixture).binread))
       raise ArgumentError, "#{fixture} n'est pas une image de contenu : #{input.errors.full_messages}" unless input.valid?

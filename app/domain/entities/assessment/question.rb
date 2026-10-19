@@ -1,10 +1,10 @@
 # 🧠 DOMAINE · Entities::Assessment::Question
 # Rôle : une question d'exercice ; sa structure, la forme d'une réponse et la correction sont déléguées à son type
-# ADR  : 0039, 0054, 0091 (§4.3 : un type par classe, sous question_kinds/), 0104
+# ADR  : 0039, 0054, 0091 (§4.3 : un type par classe, sous question_kinds/), 0105
 module Entities
   module Assessment
     # answers : [Answer], dans l'ordre des positions ; numeric_tolerance : marge d'un type numeric (BigDecimal | nil) ;
-    # image_description : l'image annoncée par l'import (ADR-0104 §4.6) ; image : Shared::ContentImage | nil.
+    # image_description : l'image annoncée par l'import (ADR-0105 §4.6) ; image : Shared::ContentImage | nil.
     Question = Data.define(:id, :position, :content, :explanation, :question_type, :answers, :numeric_tolerance,
                            :image_description, :image) do
       # Les six premiers attributs sont obligatoires ; la marge et l'image sont facultatives.
@@ -42,7 +42,7 @@ module Entities
 
       def structure_errors = Question.structure_errors_for(question_type:, answers:, content:, numeric_tolerance:)
 
-      # Ce qui manque pour publier, sans gêner l'enregistrement d'un brouillon (ADR-0104 §4.4) → [Symbol].
+      # Ce qui manque pour publier, sans gêner l'enregistrement d'un brouillon (ADR-0105 §4.4) → [Symbol].
       def image_errors
         return [ :image_alt_blank ] if image && !image.alt?
         return [ :image_missing ] if image.nil? && !image_description.to_s.strip.empty?

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::ImportCourseTree
 # Rôle : adaptateur d'import des cours complets (fiches, exercices, questions, propositions), tout en draft
-# ADR  : 0035, 0039, 0104 · UDR : 0038
+# ADR  : 0035, 0039, 0105 · UDR : 0038
 module UseCases
   module Catalog
     class ImportCourseTree

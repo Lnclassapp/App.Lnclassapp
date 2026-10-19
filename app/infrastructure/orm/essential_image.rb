@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::EssentialImage
 # Rôle : image d'une fiche, vérifiée, sans métadonnées ; pièce jointe Action Text du texte de la fiche par sgid
-# ADR  : 0029, 0060, 0104
+# ADR  : 0029, 0060, 0105
 module Orm
   class EssentialImage < ApplicationRecord
     include HasPublicId

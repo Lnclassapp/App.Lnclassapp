@@ -102,9 +102,9 @@ module UseCases
         assert_equal :not_found, publish("inconnue").code
       end
 
-      # ADR-0104 §4.4 : une fiche ne se publie pas tant qu'un emplacement d'image reste ou qu'une image n'a pas de texte de
+      # ADR-0105 §4.4 : une fiche ne se publie pas tant qu'un emplacement d'image reste ou qu'une image n'a pas de texte de
       # remplacement ; rien n'est écrit. Une fiche sans emplacement ni image se publie comme avant.
-      test "ADR-0104 : des emplacements restants refusent la publication, avec leur nombre, sans rien écrire" do
+      test "ADR-0105 : des emplacements restants refusent la publication, avec leur nombre, sans rien écrire" do
         @essentials = FakeEssentials.new(Essential.new(id: 20, slug: "slots", course_id: 1, name: "Slots", status: "draft",
                                                        course_status: "published",
                                                        content: "<p>[[image: une pile]]</p><p>Texte</p><p>[[image: une lampe]]</p>"))
@@ -117,7 +117,7 @@ module UseCases
         assert_empty @audit_log.records
       end
 
-      test "ADR-0104 : un emplacement mal écrit refuse la publication avant les emplacements restants, sans rien écrire" do
+      test "ADR-0105 : un emplacement mal écrit refuse la publication avant les emplacements restants, sans rien écrire" do
         @essentials = FakeEssentials.new(Essential.new(id: 23, slug: "mal-ecrit", course_id: 1, name: "Mal écrit", status: "draft",
                                                        course_status: "published",
                                                        content: "<p>[[image: une pile]]</p><ul><li>[[image: une lampe]]</li></ul>"))
@@ -128,7 +128,7 @@ module UseCases
         assert_empty @essentials.transitions
       end
 
-      test "ADR-0104 : une image sans texte de remplacement refuse la publication, sans rien écrire" do
+      test "ADR-0105 : une image sans texte de remplacement refuse la publication, sans rien écrire" do
         essential = Essential.new(id: 21, slug: "alts", course_id: 1, name: "Alts", status: "draft", course_status: "published",
                                   content: "<p>Texte</p>")
         essential.images = [ Entities::Shared::ContentImage.new(public_id: "ok", alt: "Une pile"),
@@ -142,7 +142,7 @@ module UseCases
         assert_empty @essentials.transitions
       end
 
-      test "ADR-0104 : une fiche dont chaque image a son texte de remplacement, sans emplacement, se publie" do
+      test "ADR-0105 : une fiche dont chaque image a son texte de remplacement, sans emplacement, se publie" do
         essential = Essential.new(id: 22, slug: "illustree", course_id: 1, name: "Illustrée", status: "draft",
                                   course_status: "published", content: "<p>Voir [[image: ceci]] dans la phrase.</p>")
         essential.images = [ Entities::Shared::ContentImage.new(public_id: "ok", alt: "Une pile") ]

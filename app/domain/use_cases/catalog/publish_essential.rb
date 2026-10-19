@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::PublishEssential
 # Rôle : l'équipe publie une fiche brouillon ou archivée, seulement si son cours est publié et ses images complètes ; inscrit au journal
-# ADR  : 0026, 0028, 0035, 0050, 0104
+# ADR  : 0026, 0028, 0035, 0050, 0105
 module UseCases
   module Catalog
     class PublishEssential
@@ -12,7 +12,7 @@ module UseCases
         @clock = clock
       end
 
-      # ADR-0104 §4.4 : ce qui manque à une fiche pour être publiée → Result(nil) | :conflict, rien n'est écrit :
+      # ADR-0105 §4.4 : ce qui manque à une fiche pour être publiée → Result(nil) | :conflict, rien n'est écrit :
       # base: image_slots_malformed puis image_slots_left (count : emplacements mal écrits ou restants), puis
       # base: image_alts_blank (image_alts: public_id sans alt).
       def self.images_ready(essential)

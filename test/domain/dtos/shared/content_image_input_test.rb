@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0104 §4.1 : la vérification de l'image d'article, aux plafonds d'un contenu pédagogique (300 Ko, 1200 px). Le reste
+# ADR-0105 §4.1 : la vérification de l'image d'article, aux plafonds d'un contenu pédagogique (300 Ko, 1200 px). Le reste
 # (formats, métadonnées) est éprouvé par Dtos::Communication::ArticleImageInputTest, sur le même code.
 module Dtos
   module Shared

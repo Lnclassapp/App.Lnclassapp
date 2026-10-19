@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Assessment::SessionPlayQuery
 # Rôle : écran d'une session : progression, prochaine question sans aucune correction ni id révélateur, son image, verdict de la question tentée
-# ADR  : 0028, 0054, 0091 (§4.4 : rien de la solution dans la page), 0104 · UDR : 0007, 0022, 0087, 0129
+# ADR  : 0028, 0054, 0091 (§4.4 : rien de la solution dans la page), 0105 · UDR : 0007, 0022, 0087, 0129
 module Queries
   module Assessment
     class SessionPlayQuery
@@ -10,7 +10,7 @@ module Queries
         # Rang de la question où l'élève reprendra (UDR-0087 §3.3).
         def resume_number = answered_count + 1
       end
-      # number : rang de la question dans l'exercice ; image : son image au-dessus de l'énoncé, ou nil (ADR-0104). Par type (ADR-0091 §4.4) :
+      # number : rang de la question dans l'exercice ; image : son image au-dessus de l'énoncé, ou nil (ADR-0105). Par type (ADR-0091 §4.4) :
       # - answers : les propositions mélangées d'une question à cocher, avec leur id ; vide pour tout autre type ;
       # - items : les étapes (ordering) ou la colonne de droite (matching), mélangées, sans id : seul leur indice d'affichage ;
       # - prompts : la colonne de gauche d'un matching, dans l'ordre des positions, sans id.

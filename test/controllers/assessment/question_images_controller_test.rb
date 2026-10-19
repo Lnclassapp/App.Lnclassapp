@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0104 §4.5 : l'image d'une question se sert sous la règle de lecture de son exercice. Publiée : en cache navigateur
+# ADR-0105 §4.5 : l'image d'une question se sert sous la règle de lecture de son exercice. Publiée : en cache navigateur
 # privé d'une heure, puis revalidée : 304 sur son ETag. Brouillon ou non rattachée : l'équipe seule, jamais gardée. Un élève hors du
 # niveau, ou un brouillon pour l'élève : 404. Sans connexion : pas d'image.
 class Assessment::QuestionImagesControllerTest < ActionDispatch::IntegrationTest

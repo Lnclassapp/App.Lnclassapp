@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# ADR-0104, UDR-0129 §3.1 and §3.3 — Lot A of images-dans-les-cours. A Contenu member opens the sheet's « Modifier », puts
+# ADR-0105, UDR-0129 §3.1 and §3.3 — Lot A of images-dans-les-cours. A Contenu member opens the sheet's « Modifier », puts
 # the cursor in the slot « [[image: …]] » left by the import and inserts an image: it replaces the slot, its text
 # alternative is the slot's description, the counter is gone. The student of the level then reads the image in the sheet,
 # served by Lnclass, lazily. The refusals (403, 422, 31st image, 404 out of level, draft or replaced) are proven at the

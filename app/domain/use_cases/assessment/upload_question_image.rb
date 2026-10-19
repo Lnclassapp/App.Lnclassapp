@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Assessment::UploadQuestionImage
 # Rôle : l'équipe Administration et Contenu envoie l'image d'une question, vérifiée et sans métadonnées, rattachée à aucune question
-# ADR  : 0026, 0028, 0060, 0104 · UDR : 0129
+# ADR  : 0026, 0028, 0060, 0105 · UDR : 0129
 module UseCases
   module Assessment
     class UploadQuestionImage

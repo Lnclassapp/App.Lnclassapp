@@ -31,7 +31,7 @@ Exemple de référence, le théorème des gendarmes : deux policiers tiennent un
 
 Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/<matière>/` (le slug de la matière : `mathematiques`, `physique-chimie`, `svt`, `histoire-geographie`, `philosophie`, `francais`…) et ajouter une ligne au tableau ci-dessous.
 
-**Leçons rédigées avant les images** (ADR-0104) : elles restent en texte seul, sans reprise en masse, puisqu'un import ne met jamais à jour un cours existant. C'est le cas de toutes les leçons de `lecons-traitees/` à ce jour et de toute leçon importée avant le 2026-10-10. Une image peut toujours s'y ajouter à la main, dans l'éditeur de la fiche.
+**Leçons rédigées avant les images** (ADR-0105) : elles restent en texte seul, sans reprise en masse, puisqu'un import ne met jamais à jour un cours existant. C'est le cas de toutes les leçons de `lecons-traitees/` à ce jour et de toute leçon importée avant le 2026-10-10. Une image peut toujours s'y ajouter à la main, dans l'éditeur de la fiche.
 
 Pour toutes les matières d’un niveau d’un coup, utiliser plutôt [`prompt-redaction-lot.md`](prompt-redaction-lot.md).
 

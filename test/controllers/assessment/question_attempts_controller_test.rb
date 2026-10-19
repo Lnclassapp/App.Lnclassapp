@@ -240,7 +240,7 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
   end
 
   # PRD §7 : 22 requêtes avant le chantier, 23 après (la lettre affichée de « Ton choix ») ; la cible était « avant + 1 ».
-  # ADR-0104 : + 2 requêtes fixes, jamais une par question : les images de l'exercice chargé d'un bloc, celle de la question suivante.
+  # ADR-0105 : + 2 requêtes fixes, jamais une par question : les images de l'exercice chargé d'un bloc, celle de la question suivante.
   test "envoyer une réponse coûte 25 requêtes SQL" do
     sign_in_as @student
     get exercise_session_path(@session.public_id)

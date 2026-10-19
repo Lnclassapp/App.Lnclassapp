@@ -1,10 +1,10 @@
 # 🧠 DOMAINE · UseCases::Assessment::ReadQuestionImage
 # Rôle : lire les octets de l'image d'une question sous la règle de lecture de son exercice ; non rattachée, l'équipe seule
-# ADR  : 0026, 0028, 0035, 0104 · UDR : 0129
+# ADR  : 0026, 0028, 0035, 0105 · UDR : 0129
 module UseCases
   module Assessment
     class ReadQuestionImage
-      # public : exercice lisible de tous (chaîne publiée) : le navigateur la garde, en cache privé (ADR-0104 §4.5).
+      # public : exercice lisible de tous (chaîne publiée) : le navigateur la garde, en cache privé (ADR-0105 §4.5).
       # exercise_public_id : pour la règle du niveau de l'élève, tenue par le contrôleur (ReadsOwnLevel) ; nil si non rattachée.
       Image = Data.define(:content_type, :public, :exercise_public_id, :data)
 

@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# ADR-0104 §4.4, UDR-0129 §3.1 : depuis le menu ⋮, une fiche dont il reste des emplacements d'image ne se publie pas, et
+# ADR-0105 §4.4, UDR-0129 §3.1 : depuis le menu ⋮, une fiche dont il reste des emplacements d'image ne se publie pas, et
 # « Tout publier » sur son cours non plus ; le toast d'erreur en donne la raison, sans rechargement de page.
 class Catalog::PublishEssentialWithImagesTest < ApplicationSystemTestCase
   SLOTS = "<p>[[image: une pile et une lampe]]</p><p>Le courant circule.</p><p>[[image: un interrupteur ouvert]]</p>".freeze

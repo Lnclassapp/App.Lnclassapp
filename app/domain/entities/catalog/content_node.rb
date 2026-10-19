@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::ContentNode
 # Rôle : validateurs des cours, fiches et exercices importés, partagés par les trois imports de contenu
-# ADR  : 0035, 0039, 0091 (§4.5 : tolerance et match), 0104
+# ADR  : 0035, 0039, 0091 (§4.5 : tolerance et match), 0105
 module Entities
   module Catalog
     module ContentNode
@@ -53,14 +53,14 @@ module Entities
         errors + misplaced_keys(hash, raw_answers, path) + structure_errors(hash, answers, path) + image_errors(hash["image"], path)
       end
 
-      # ADR-0104 §4.6 : le schéma a vérifié la forme et la longueur ; une description faite d'espaces n'en est pas une.
+      # ADR-0105 §4.6 : le schéma a vérifié la forme et la longueur ; une description faite d'espaces n'en est pas une.
       def self.image_errors(image, path)
         return [] unless image.is_a?(Hash) && image["description"].is_a?(String)
 
         text(image, "description", nil, "#{path}.image")
       end
 
-      # ADR-0104 §4.3 : un « [[image: » que le motif ne reconnaît pas ne serait jamais compté ; l'élève le lirait tel quel.
+      # ADR-0105 §4.3 : un « [[image: » que le motif ne reconnaît pas ne serait jamais compté ; l'élève le lirait tel quel.
       def self.image_slot_errors(content, path)
         malformed = ImageSlot.malformed_count(content)
         malformed.positive? ? [ error("#{path}.content", "image_slot_malformed", count: malformed) ] : []

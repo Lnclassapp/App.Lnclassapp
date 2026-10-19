@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::EssentialRepository
 # Rôle : traduit Orm::Essential, son contenu riche (Action Text) et ses images ↔ Entities::Catalog::Essential, avec le statut du cours
-# ADR  : 0029, 0035, 0039, 0104
+# ADR  : 0029, 0035, 0039, 0105
 module Repositories
   module Catalog
     class EssentialRepository
@@ -66,7 +66,7 @@ module Repositories
 
       private
 
-      # ADR-0104 : le contenu est canonisé (figures de Trix → pièces jointes) et refusé s'il cite un sgid illisible. Puis,
+      # ADR-0105 : le contenu est canonisé (figures de Trix → pièces jointes) et refusé s'il cite un sgid illisible. Puis,
       # dans un point de sauvegarde, il est assaini avec les seules images admises (celles de la fiche et celles qui ne
       # sont encore à personne), la fiche écrite, les images citées rattachées avec leurs textes de remplacement, celles
       # qu'il ne cite plus supprimées (fichier purgé après validation).

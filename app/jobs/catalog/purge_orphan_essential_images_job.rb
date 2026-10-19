@@ -1,6 +1,6 @@
 # 🔌 INFRASTRUCTURE · Catalog::PurgeOrphanEssentialImagesJob
 # Rôle : supprime chaque jour les images de fiche envoyées puis jamais enregistrées depuis plus de 48 h, fichier compris
-# ADR  : 0047, 0104
+# ADR  : 0047, 0105
 module Catalog
   class PurgeOrphanEssentialImagesJob < ApplicationJob
     GRACE_PERIOD = 48.hours

@@ -1,6 +1,6 @@
 // ⚡ FRONT · catalog/essential_image_slots_controller — emplacements « [[image: …]] » de l'import, dans l'éditeur de fiche
 // Rôle : compteur et liste des emplacements restants ; une image insérée dans un emplacement le remplace et reprend sa description en texte de remplacement
-// ADR  : 0104 · UDR : 0129 (§3.1) · écoute rich-text-editor:inserting|uploaded et trix-change, sur #essential_editor
+// ADR  : 0105 · UDR : 0129 (§3.1) · écoute rich-text-editor:inserting|uploaded et trix-change, sur #essential_editor
 import { Controller } from "@hotwired/stimulus"
 
 // Same rule as Entities::Catalog::ImageSlot: the whole text of a paragraph, description of 1 to 150 characters.
