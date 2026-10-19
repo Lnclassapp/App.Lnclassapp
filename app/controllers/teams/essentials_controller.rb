@@ -29,7 +29,9 @@ module Teams
     def update
       @form = form_input
       @images = form_images.call(content: @form.content, image_alts: @form.image_alts, essential_slug: @essential.slug)
-      render_result update_essential.call(actor: current_actor, slug: @essential.slug, dto: @form), form: :edit,
+      result = update_essential.call(actor: current_actor, slug: @essential.slug, dto: @form)
+      log_unreadable_text(slug: @essential.slug) if @form.errors.of_kind?(:content, :image_slots_unreadable)
+      render_result result, form: :edit,
                     success: ->(essential) { respond_written(essential, :updated, courses_path) }
     end
 
@@ -71,6 +73,7 @@ module Teams
       result = use_case.call(actor: current_actor, slug: params[:slug])
       @reason = result.errors.fetch(:base).first if result.code == :conflict
       @reason_count = result.errors[:count]
+      log_unreadable_text(slug: params[:slug]) if @reason == :image_slots_unreadable
       return respond_transition(:unprocessable_entity, alert: t("teams.essentials.transition.#{@reason}", count: @reason_count)) if @reason
 
       render_result result, success: lambda { |essential|

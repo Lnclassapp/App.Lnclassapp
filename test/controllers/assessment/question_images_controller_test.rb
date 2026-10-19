@@ -91,4 +91,16 @@ class Assessment::QuestionImagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
     assert_includes logs, "[Assessment::QuestionImagesController] fichier absent public_id=#{@image.public_id}"
   end
+
+  # Le bucket a perdu le fichier alors que la ligne du blob existe : Active Storage lève FileNotFoundError, qui ne doit pas être un 500.
+  test "une ligne dont le blob existe mais pas le fichier dans le bucket répond 404 et le journal le dit" do
+    blob = @image.file.blob
+    blob.service.delete(blob.key)
+    sign_in_as @student
+
+    logs = capture_log { fetch }
+
+    assert_response :not_found
+    assert_includes logs, "[Assessment::QuestionImagesController] fichier absent public_id=#{@image.public_id}"
+  end
 end

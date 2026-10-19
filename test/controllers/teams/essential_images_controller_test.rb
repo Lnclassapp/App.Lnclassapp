@@ -50,6 +50,32 @@ class Teams::EssentialImagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
   end
 
+  # ADR-0105 §4.1 : le type se lit dans les octets, jamais dans le nom ni dans le type annoncé.
+  test "422 : un SVG nommé schema.png et annoncé image/png est refusé sur son vrai format, rien n'est stocké" do
+    sign_in_as @member
+    svg = Rack::Test::UploadedFile.new(StringIO.new(%(<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"></svg>)),
+                                       "image/png", true, original_filename: "schema.png")
+
+    assert_nothing_stored { upload(svg) }
+
+    assert_response :unprocessable_entity
+    assert_equal({ "error" => "Ce format n'est pas accepté : JPEG, PNG ou WebP fixe seulement." }, json)
+  end
+
+  test "201 : un PNG envoyé comme x.jpg en image/jpeg est enregistré pour ce qu'il est, image/png, sous le nom image.png" do
+    sign_in_as @member
+    png = Rack::Test::UploadedFile.new(file_fixture("photos/photo.png"), "image/jpeg", true, original_filename: "x.jpg")
+
+    assert_difference -> { Orm::EssentialImage.count }, 1 do
+      upload(png)
+    end
+
+    assert_response :created
+    image = Orm::EssentialImage.find_by!(public_id: json["public_id"])
+    assert_equal [ "image/png", "image.png" ], [ image.content_type, image.file.filename.to_s ]
+    assert_equal "image/png", image.file.blob.content_type
+  end
+
   test "avec une fiche : la 31e image est refusée en 422, une fiche inconnue en 404" do
     sign_in_as @member
     essential = create_essential(status: "draft")
@@ -87,6 +113,14 @@ class Teams::EssentialImagesControllerTest < ActionDispatch::IntegrationTest
 
       assert_response :too_many_requests
       assert_equal({ "error" => I18n.t("errors.codes.rate_limited_daily") }, json)
+
+      # Le plafond est par compte (menace.md, n° 11) : un second compte Contenu n'est pas limité par les envois du premier.
+      sign_out
+      sign_in_as create_team_member(team_role: "content")
+      send_one.call
+
+      assert_response :unprocessable_entity
+      assert_equal({ "error" => "Choisissez une image." }, json)
     end
   end
 

@@ -79,7 +79,8 @@ Un emplacement est un paragraphe dont tout le texte est `[[image: <description>]
 ### 4.4 Conditions de publication
 
 - `PublishEssential` : `:conflict` `base: [:image_slots_left]` (avec `count`) si `ImageSlot.scan` trouve un emplacement ; `:invalid` `:"image_alts.<public_id>"` pour chaque image sans texte de remplacement.
-- `PublishCascade` (« Tout publier ») : vérifie toutes les fiches **avant** d'écrire ; un refus nomme la fiche ; rien n'est publié.
+- `PublishCascade` (« Tout publier ») : vérifie toutes les fiches **avant** d'écrire ; un refus nomme la fiche (`essential_not_ready`, ou `essential_unreadable` pour un texte trop complexe à relire) ; rien n'est publié. Un exercice laissé en brouillon pour une image est compté à part (`skipped_images`) de ceux sans question complète, avec son propre message.
+- `UpdateEssential` et `UpdateExercise` appliquent les mêmes règles à un contenu **déjà publié** (comme `UpdateArticle`, ADR-0074 §4.2) : `PublishEssential.images_ready` et `Exercise#image_errors`, rendues en `:invalid` ; un texte de remplacement ne se vide pas, un emplacement ne s'ajoute pas, une question ne perd pas son image. Un brouillon enregistre tout.
 - `PublishExercise` : `Entities::Assessment::Question#structure_errors` gagne `:image_missing` (description sans image) et `:image_alt_blank` ; `publishable?` les lit déjà.
 - Une question **tentée** ne se modifie plus (ADR-0036, ADR-0054) : son image non plus.
 
@@ -104,7 +105,7 @@ Remplacer une image crée une nouvelle ligne ; l'ancienne, plus citée, est supp
 
 `POST /teams/essential-images` et `POST /teams/question-images` (JSON, comme `Teams::ArticleImagesController`), paramètre `essential` / `question` (public_id ou slug) pour tenir le plafond par fiche. Les images envoyées et jamais citées depuis 48 h sont purgées chaque jour (`Catalog::PurgeOrphanEssentialImagesJob`, `Assessment::PurgeOrphanQuestionImagesJob`, `config/recurring.yml`).
 
-Parades de volume et de coût, ajoutées après la revue de sécurité (détail : [`menace.md`](../../chantiers/images-dans-les-cours/menace.md)) : au plus 30 images citées par fiche, refusées à l'enregistrement (`content.too_many_images`) et pas seulement à l'envoi ; 60 envois par minute **et 300 par jour** et par compte ; texte d'une fiche plafonné à 200 Ko (DTO et schémas d'import) ; `ImageSlot::BLOCK` borné à 0,5 s, un texte qui le dépasse étant refusé comme « mal écrit » ; corps de requête limité à 55 Mo par Puma (`config/puma.rb`, l'import `course_tree` pouvant faire 50 Mo).
+Parades de volume et de coût, ajoutées après la revue de sécurité (détail : [`menace.md`](../../chantiers/images-dans-les-cours/menace.md)) : au plus 30 images citées par fiche, refusées à l'enregistrement (`content.too_many_images`) et pas seulement à l'envoi ; 60 envois par minute **et 300 par jour** et par compte ; texte d'une fiche plafonné à 200 Ko (DTO et schémas d'import) ; `ImageSlot::BLOCK` borné à 0,25 s par recherche **et** une échéance globale de 0,5 s sur tout l'appel, un texte qui dépasse l'un ou l'autre étant refusé comme « trop complexe à relire » (`image_slots_unreadable`), jamais compté comme un emplacement mal écrit ; corps de requête limité à 55 Mo par Puma (`config/puma.rb`, l'import `course_tree` pouvant faire 50 Mo).
 
 ## 5. Conséquences
 
@@ -119,6 +120,7 @@ Parades de volume et de coût, ajoutées après la revue de sécurité (détail 
 
 - **Deux tables, deux stores, deux contrôleurs de service** quasi jumeaux : le prix de l'étanchéité catalogue / évaluation.
 - **Un emplacement est du texte** : une faute de frappe (`[image: …]`) n'est pas reconnue et passe la publication. Un bloc entier de forme `[[image: …]]` que le motif ne lit pas (liste, titre, gras, vide, trop long) est en revanche refusé à l'import (`image_slot_malformed`) et à la publication (`image_slots_malformed`). Le prompt et le validateur de la méthode de rédaction en portent la forme exacte.
+- **Un texte trop complexe est refusé** : au-delà de 0,5 s de relecture des blocs (listes ou blocs imbriqués par milliers), la publication et l'import répondent « trop complexe à relire : simplifiez la mise en forme » (`image_slots_unreadable`), sans dire combien d'emplacements sont en cause. Un texte de cours réel est lu en quelques millisecondes.
 - **Cache privé d'une heure** : chaque élève revalide chaque image au plus une fois par heure (pas de relais partagé).
 - **300 Ko / 1200 px** : une image très détaillée (carte) peut perdre en lisibilité ; l'équipe la recadre.
 - **Travail manuel** : chaque image est produite dans Claude Design puis envoyée à la main, fiche par fiche.
@@ -147,7 +149,7 @@ def self.call(html, image_ids: nil, image_model: "Orm::ArticleImage")
 
 ## 7. Comment vérifier que la décision est respectée
 
-- `test/domain/entities/catalog/image_slot_test.rb` : emplacements reconnus, et ignorés hors d'un paragraphe seul.
+- `test/domain/entities/catalog/image_slot_test.rb` : emplacements reconnus, et ignorés hors d'un paragraphe seul ; textes hostiles et segmenté refusés (`ImageSlot::Unreadable`) en moins d'une seconde, texte long légitime lu.
 - `test/domain/use_cases/catalog/publish_essential_test.rb` et `publish_cascade_test.rb` : refus avec emplacement restant ou alt vide.
 - `test/domain/use_cases/assessment/publish_exercise_test.rb` : refus `image_missing`.
 - `test/domain/dtos/shared/content_image_input_test.rb` : 300 Ko, 1200 px, SVG déguisé, EXIF retiré.

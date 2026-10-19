@@ -100,6 +100,15 @@ module UseCases
         assert_equal [ 1, 1, 0 ], [ result.value.essentials, result.value.exercises, result.value.skipped ]
       end
 
+      # ADR-0105 §4.4 : un exercice refusé pour une image se compte à part, pour que le bilan ne dise pas qu'il n'a pas de question.
+      test "ADR-0105 : les exercices restés en brouillon pour une image sont comptés à part de ceux sans question complète" do
+        @publish_exercise = FakePublish.new({ "ex-a" => :image_missing, "ex-b" => :image_alt_blank, "ex-c" => :not_publishable })
+
+        summary = cascade(:course, "genetique").value
+
+        assert_equal [ 0, 3, 2 ], [ summary.exercises, summary.skipped, summary.skipped_images ]
+      end
+
       test "une fiche : elle, puis ses exercices brouillons ; aucune autre fiche" do
         result = cascade(:essential, "meiose")
 
@@ -146,6 +155,16 @@ module UseCases
         assert_empty @publish_course.calls
         assert_empty @publish_essential.calls
         assert_empty @exercises.asked
+      end
+
+      test "menace n° 13 : une fiche brouillon au texte trop complexe à relire refuse le cours entier avec son propre motif" do
+        @essentials = FakeEssentials.new(Essential.new(id: 14, slug: "complexe", course_id: 2, name: "Complexe", status: "draft",
+                                                       content: "<p>" * 40_000), drafts: { 2 => %w[complexe] })
+
+        result = cascade(:course, "publie")
+
+        assert_equal({ base: [ :essential_unreadable ], name: "Complexe" }, result.errors)
+        assert_empty @publish_essential.calls
       end
 
       test "ADR-0105 : une image sans texte de remplacement dans une fiche brouillon refuse aussi un cours déjà publié" do

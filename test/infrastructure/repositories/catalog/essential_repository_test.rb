@@ -122,20 +122,38 @@ module Repositories
         assert_equal created.images.map(&:public_id), @repository.find_by_slug(slug: created.slug).images.map(&:public_id)
       end
 
-      test "ADR-0105 : une image d'article n'est pas admise ; une image retirée du texte est supprimée, et le journal le dit" do
-        article = create_article_image
+      test "ADR-0105 : une image retirée du texte est supprimée avec son fichier, et le journal le dit" do
         kept = create_essential_image
         dropped = create_essential_image
         created = @repository.create(essential: essential(content: attachment(kept) + attachment(dropped))).value
 
-        created.content = attachment(kept) + attachment(article)
+        created.content = attachment(kept)
         logs = capture_log { @updated = @repository.update(essential: with_alts(created, kept.public_id => "Gardée")).value }
 
         assert_equal [ kept.public_id ], @updated.images.map(&:public_id)
         assert_equal "Gardée", kept.reload.alt
-        assert_not_includes @updated.content, article.attachable_sgid
         assert_not Orm::EssentialImage.exists?(dropped.id)
         assert_includes logs, "[EssentialRepository] images supprimées ids=[#{dropped.id}] public_ids=[\"#{dropped.public_id}\"]"
+      end
+
+      # Le modèle de la pièce jointe compte, pas seulement l'identifiant : l'image d'un article n'est pas une image de fiche,
+      # même si une ligne de ce numéro existait. L'assainir la retirerait sans rien dire : le texte est refusé.
+      test "ADR-0105 : une pièce jointe qui n'est pas une image de fiche (image d'article, de question) refuse le texte" do
+        kept = create_essential_image
+        created = @repository.create(essential: essential(content: attachment(kept))).value
+        article = create_article_image
+        question = create_question_image
+
+        [ article, question ].each do |foreign|
+          sgid = foreign.to_sgid(expires_in: nil, for: ActionText::Attachable::LOCATOR_NAME)
+          created.content = attachment(kept) + %(<action-text-attachment sgid="#{sgid}" content-type="image/jpeg"></action-text-attachment>)
+          result = @repository.update(essential: created)
+
+          assert_equal [ :invalid, { content: [ :image_unavailable ] } ], [ result.code, result.errors ]
+          assert_equal created.id, kept.reload.essential_id
+        end
+        assert_equal [ :invalid, { content: [ :image_unavailable ] } ],
+                     @repository.create(essential: essential(content: attachment(create_article_image))).then { [ it.code, it.errors ] }
       end
 
       test "ADR-0105 : une image d'une autre fiche ou purgée refuse le texte au lieu d'être retirée sans rien dire" do

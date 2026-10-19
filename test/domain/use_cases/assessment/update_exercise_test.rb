@@ -121,6 +121,28 @@ module UseCases
         assert update(status: "published").success?
       end
 
+      # ADR-0074 §4.2, ADR-0105 §4.4 : un exercice en ligne ne perd ni l'image d'une question ni son texte de remplacement.
+      test "ADR-0105 : un exercice publié refuse une image sans texte de remplacement ou une image annoncée sans image" do
+        blank_alt = update(status: "published", questions_attributes: { "0" => NEW_QUESTION["0"].merge(image_public_id: "img1", image_alt: " ") })
+        missing = update(status: "published",
+                         questions_attributes: { "0" => NEW_QUESTION["0"], "1" => NEW_QUESTION["0"].merge(image_description: "Une pile") })
+        wrong = update(status: "published",
+                       questions_attributes: { "0" => NEW_QUESTION["0"].merge(question_type: "multiple_correct_2", image_public_id: "img1") })
+
+        assert_equal [ :invalid, { "questions[0]": [ :image_alt_blank ] } ], [ blank_alt.code, blank_alt.errors ]
+        assert_equal [ :invalid, { "questions[1]": [ :image_missing ] } ], [ missing.code, missing.errors ]
+        assert_equal %i[too_few_answers wrong_correct_count image_alt_blank], wrong.errors.fetch(:"questions[0]")
+        assert_empty @exercises.updates
+      end
+
+      test "ADR-0105 : un brouillon enregistre une image sans texte de remplacement, un exercice publié une image complète" do
+        draft = update(status: "draft", questions_attributes: { "0" => NEW_QUESTION["0"].merge(image_public_id: "img1", image_alt: "") })
+        complete = update(status: "published", questions_attributes: { "0" => NEW_QUESTION["0"].merge(image_public_id: "img1", image_alt: "Une pile") })
+
+        assert draft.success?
+        assert complete.success?
+      end
+
       test "une écriture refusée par la base est un conflit" do
         assert_equal [ :conflict, { base: [ :write_failed ] } ], update(refuse: true).then { [ it.code, it.errors ] }
       end

@@ -78,6 +78,33 @@ module UseCases
         assert_equal [ [ "img1", "Une pile" ] ], sent.images.map { [ it.public_id, it.alt ] }
       end
 
+      # ADR-0074 §4.2, ADR-0105 §4.4 : une fiche en ligne ne perd pas un texte de remplacement et ne reçoit pas d'emplacement.
+      test "ADR-0105 : une fiche publiée dont un texte de remplacement est vidé est refusée, la saisie nomme l'image" do
+        result = update(image_alts: { "img1" => "Une pile", "img2" => " " })
+
+        assert_equal :invalid, result.code
+        assert_equal [ :"image_alts.img2" ], result.errors.keys
+        assert_equal I18n.t("activemodel.errors.models.dtos/catalog/essential_input.image_alt_blank", number: 2), result.errors.values.flatten.first
+        assert_equal 0, @essentials.updates
+      end
+
+      test "ADR-0105 : une fiche publiée refuse un emplacement d'image, mal écrit ou illisible, sans rien écrire" do
+        slot = update(content: "<p>[[image: une pile]]</p>")
+        malformed = update(content: "<ul><li>[[image: une pile]]</li></ul>")
+        unreadable = update(content: "<p>" * 40_000)
+
+        assert_equal [ :invalid ] * 3, [ slot, malformed, unreadable ].map(&:code)
+        messages = %i[image_slots_left image_slots_malformed image_slots_unreadable].map do
+          I18n.t("activemodel.errors.models.dtos/catalog/essential_input.attributes.content.#{it}")
+        end
+        assert_equal messages, [ slot, malformed, unreadable ].map { it.errors.fetch(:content).first }
+        assert_equal 0, @essentials.updates
+      end
+
+      test "ADR-0105 : un brouillon garde ses emplacements et ses textes de remplacement vides" do
+        assert update(slug: "genetique-la-mitose", content: "<p>[[image: une pile]]</p>", image_alts: { "img1" => "" }).success?
+      end
+
       test "hors équipe, rien ne change, même pour une fiche inconnue" do
         teacher = Entities::Identity::Actor.new(user_id: 8, role: :teacher, school_id: 3)
 

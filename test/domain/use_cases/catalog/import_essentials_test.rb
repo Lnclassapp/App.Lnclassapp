@@ -71,6 +71,24 @@ module UseCases
 
       def positions(course = @course) = course.essentials.order(:position).pluck(:name, :position)
 
+      # Menace n° 13 : le plafond de 200 Ko du texte d'une fiche est celui du schéma, au caractère près.
+      test "a sheet text of exactly 204,800 characters is imported, 204,801 is refused by the schema at its path" do
+        limit = Entities::Catalog::Essential::CONTENT_MAX
+
+        report = run_import(document(essential("Exacte", content: "a" * limit), essential("Dépassée", content: "a" * (limit + 1))))
+
+        assert_equal 204_800, limit
+        assert_equal [ 2, 1, 1 ], report.values_at(:total_count, :imported_count, :error_count)
+        assert_equal [ [ "essentials[1].content", "schema" ] ], report.import_errors.map { it.values_at("path", "code") }
+        assert_equal [ "Exacte" ], @course.essentials.pluck(:name)
+      end
+
+      test "a sheet text too complex to read is refused with its own code at its path" do
+        item = validate(essential("Hostile", content: %(<span title="<p>">x</span>) * 7_000))
+
+        assert_equal [ [ "essentials[0].content", "image_slots_unreadable" ] ], error_pairs(item)
+      end
+
       test "honours the importer contract, and validate_root writes nothing" do
         assert_importer_contract ImportEssentials, adapter:, root: essential, context: context
         assert_equal ImportEssentials::POLICY, Entities::Catalog::ImportKind.fetch(ImportEssentials::KIND).policy

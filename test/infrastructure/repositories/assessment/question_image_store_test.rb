@@ -44,10 +44,33 @@ module Repositories
         old = create_question_image(created_at: 49.hours.ago)
         recent = create_question_image(created_at: 47.hours.ago)
         attached = create_question_image(question: create_exercise.questions.first, created_at: 30.days.ago)
+        blob = old.file.blob
+        kept_blobs = [ recent, attached ].map { it.file.blob.id }
 
         assert_equal 1, perform_enqueued_jobs { @store.purge_orphans(before: 48.hours.ago) }
         assert_equal [ recent, attached ].map(&:id).sort, Orm::QuestionImage.pluck(:id).sort
         assert_not Orm::QuestionImage.exists?(old.id)
+        assert_not ActiveStorage::Blob.exists?(blob.id), "le fichier de l'orpheline part avec sa ligne"
+        assert_equal kept_blobs.sort, ActiveStorage::Blob.where(id: kept_blobs).ids.sort
+      end
+
+      # Menace n° 11 : une image rattachée entre la lecture des orphelines et la purge garde sa ligne et son fichier.
+      test "purge_orphans laisse l'image rattachée entre la lecture des orphelines et la purge" do
+        raced = create_question_image(created_at: 49.hours.ago)
+        question = create_exercise.questions.first
+        @store.define_singleton_method(:orphan_ids) { |before:| super(before:).tap { raced.update_columns(question_id: question.id) } }
+
+        assert_equal 0, perform_enqueued_jobs { @store.purge_orphans(before: 48.hours.ago) }
+        assert_equal question.id, raced.reload.question_id
+        assert ActiveStorage::Blob.exists?(raced.file.blob.id)
+      end
+
+      test "download rend nil quand la ligne du blob existe mais pas son fichier" do
+        stored = @store.store(data: @webp, content_type: "image/webp", width: 64, height: 48)
+        blob = Orm::QuestionImage.find_by!(public_id: stored.public_id).file.blob
+        blob.service.delete(blob.key)
+
+        assert_nil @store.download(public_id: stored.public_id)
       end
 
       test "une question a au plus une image" do

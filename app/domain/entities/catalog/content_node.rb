@@ -64,6 +64,8 @@ module Entities
       def self.image_slot_errors(content, path)
         malformed = ImageSlot.malformed_count(content)
         malformed.positive? ? [ error("#{path}.content", "image_slot_malformed", count: malformed) ] : []
+      rescue ImageSlot::Unreadable
+        [ error("#{path}.content", "image_slots_unreadable") ]
       end
 
       # ADR-0091 §4.5 : tolerance n'a de sens que pour un nombre, match que pour relier ; ailleurs, une clé ignorée

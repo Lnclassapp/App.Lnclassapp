@@ -271,6 +271,35 @@ module UseCases
         assert_equal 0, Orm::QuestionImage.count
       end
 
+      # Menace n° 13 : le plafond de 200 Ko du texte d'une fiche est celui du schéma, au caractère près.
+      test "a sheet text of exactly 204,800 characters is imported, 204,801 is refused by the schema at its path" do
+        limit = Entities::Catalog::Essential::CONTENT_MAX
+        exact = course("Exact")
+        exact["essentials"][0]["content"] = "a" * limit
+        over = course("Dépassé")
+        over["essentials"][0]["content"] = "a" * (limit + 1)
+
+        report = run_import(document(exact, over))
+
+        assert_equal 204_800, limit
+        assert_equal [ 2, 1, 1 ], report.values_at(:total_count, :imported_count, :error_count)
+        assert_equal [ [ "courses[1].essentials[0].content", "schema" ] ], report.import_errors.map { it.values_at("path", "code") }
+        assert_equal limit, Orm::Essential.joins(:course).find_by!(courses: { name: "Exact" }).content.body.to_plain_text.length
+      end
+
+      # Menace n° 13 : un texte trop complexe à relire est refusé à son chemin avec son propre code, et journalisé sans son contenu.
+      test "a sheet text too complex to read is refused with its own code, and the report is logged without the content" do
+        hostile = course("Hostile")
+        hostile["essentials"][0]["content"] = %(<span title="<p>">x</span>) * 7_000
+
+        logs = capture_log { @report = run_import(document(hostile, course("Simple"))) }
+
+        assert_equal [ 2, 1, 1 ], @report.values_at(:total_count, :imported_count, :error_count)
+        assert_equal [ [ "courses[0].essentials[0].content", "image_slots_unreadable" ] ], @report.import_errors.map { it.values_at("path", "code") }
+        assert_includes logs, "[ImportReportRepository] image_slots_unreadable report=#{@report.id} paths=[\"courses[0].essentials[0].content\"]"
+        assert_not_includes logs, "span title"
+      end
+
       test "an image description empty, blank, too long, missing, with an unknown key, or an image not an object is refused at its path" do
         cases = { "" => "schema", "   " => "blank", "a" * 151 => "schema" }.map do |description, code|
           [ { "description" => description }, code, "courses[0].essentials[0].exercises[0].questions[0].image.description" ]

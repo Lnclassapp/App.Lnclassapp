@@ -343,6 +343,27 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "published", exercise.reload.status
   end
 
+  # ADR-0074 §4.2 : un exercice en ligne ne perd ni l'image d'une question ni son texte de remplacement.
+  test "ADR-0105: a published exercise cannot lose the alternative text of an image or leave a question without its image" do
+    exercise = create_exercise(essential: @essential, status: "published", questions: 1)
+    image = create_question_image(question: exercise.questions.first, alt: "Une pile")
+    sign_in_as @member
+
+    questions = { "0" => meiosis_questions["0"].merge(image_public_id: image.public_id, image_alt: " ") }
+    patch teams_exercise_path(exercise.public_id), params: exercise_params(title: "Autre titre", questions:), as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_select "form#exercise-form [role=alert]", text: /#{Regexp.escape(error_of(:exercise_input, :questions, :image_alt_blank))}/
+    assert_equal "Une pile", image.reload.alt
+
+    questions = { "0" => meiosis_questions["0"].merge(image_description: "Un circuit simple") }
+    patch teams_exercise_path(exercise.public_id), params: exercise_params(title: "Autre titre", questions:), as: :turbo_stream
+
+    assert_response :unprocessable_entity
+    assert_select "form#exercise-form [role=alert]", text: /#{Regexp.escape(error_of(:exercise_input, :questions, :image_missing))}/
+    assert_not_equal "Autre titre", exercise.reload.title
+  end
+
   test "ADR-0105: citing the image of another exercise is refused with its reason, and nothing is written" do
     exercise = create_exercise(essential: @essential, status: "draft", questions: 1)
     foreign = create_question_image(question: create_exercise(essential: @essential).questions.first)

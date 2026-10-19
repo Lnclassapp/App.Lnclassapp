@@ -90,3 +90,14 @@ Revue du diff réuni (security-reviewer, silent-failure-hunter, pr-test-analyzer
 - **Carte de question** : l'image reste avant le `fieldset`, la `legend` étant désormais rendue par le partial du type.
 - **Requêtes** : envoyer une réponse coûte 25 requêtes au lieu de 23 : + 2 fixes (images de l'exercice chargées d'un bloc, image de la question suivante), jamais une par question.
 - **`db/schema.rb`** : régénéré en jouant la migration du chantier sur le schéma de `Develop` ; trois contraintes `CHECK` changent d'écriture (rendu de PostgreSQL 18), pas de sens.
+
+## 2026-10-19 — Corrections après les revues « tests » et « échecs silencieux »
+
+- **Regex contournable** : le délai de 0,5 s valait pour chaque recherche de `scan`, pas pour l'appel. Un texte segmenté (« `<li>` » × 200 puis « `<p></p>` », 203 000 caractères) prenait 44,7 s et rendait 0, sans erreur. `malformed_count` a désormais une échéance globale de 0,5 s (horloge monotone, vérifiée à chaque correspondance) et un délai de 0,25 s par recherche ; le même texte est refusé en 0,25 s. Le dépassement lève `ImageSlot::Unreadable` et ne se lit plus « 1 emplacement mal écrit » : `image_slots_unreadable` à la publication et à l'import, `essential_unreadable` dans « Tout publier ». Journalisé avec le slug (ou le rapport et le chemin à l'import), jamais le contenu. Menace n° 13 réécrite.
+- **Contenu publié** : `UpdateEssential` applique `PublishEssential.images_ready` et `UpdateExercise` `Exercise#image_errors` à un contenu publié, en `:invalid`, comme `UpdateArticle` (ADR-0074 §4.2). Un brouillon enregistre tout. Le DTO de la fiche lit enfin `image_alts.<public_id>` (erreur posée sur ce nom).
+- **Formulaire d'exercice** : « Enregistrer » attend l'envoi d'une image de question en cours (mécanisme `hold` de l'éditeur riche) ; envoi refusé : l'exercice n'est pas enregistré et le dit.
+- **« Tout publier »** : un exercice laissé en brouillon pour une image reçoit son message (`skipped_images`), distinct de « pas de question complète ».
+- **Images d'un autre type** : un texte de fiche qui cite l'image d'un article ou d'une question est refusé (`image_unavailable`), plus retiré sans rien dire. Même chose dans l'autre sens pour un article (`image_unreadable`).
+- **Purge** : chaque orpheline est verrouillée (`FOR UPDATE SKIP LOCKED`) puis relue sans fiche ni question avant `destroy!`. Fichier absent du bucket (ligne du blob présente) : 404 journalisé, plus un 500.
+- **Tests ajoutés** : plafond 204 800 / 204 801 aux deux imports ; blob purgé pour les images de question ; SVG déguisé en PNG et PNG envoyé comme `x.jpg` ; plafond du jour par compte ; test système de l'enregistrement pendant l'envoi.
+- **PRD §4** : le critère de cache dit `max-age=3600, private`.

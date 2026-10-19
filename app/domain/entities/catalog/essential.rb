@@ -35,11 +35,15 @@ module Entities
       # Les emplacements annoncés par l'import et pas encore remplacés par une image (ADR-0105 §4.3).
       def image_slots = ImageSlot.scan(content)
 
-      # Ce qui empêche de publier : emplacements mal écrits, emplacements restants et images sans texte de remplacement
-      # → { Symbol => valeur }.
+      # Ce qui empêche de publier : texte trop complexe à relire, emplacements mal écrits, emplacements restants et images
+      # sans texte de remplacement → { Symbol => valeur }. Un texte illisible est le seul motif rendu : on ne sait rien de plus.
       def image_publish_errors
         errors = {}
-        malformed = ImageSlot.malformed_count(content)
+        begin
+          malformed = ImageSlot.malformed_count(content)
+        rescue ImageSlot::Unreadable
+          return { image_slots_unreadable: true }
+        end
         errors[:image_slots_malformed] = malformed if malformed.positive?
         errors[:image_slots_left] = image_slots.size if image_slots.any?
         missing = images.reject(&:alt?).map(&:public_id)

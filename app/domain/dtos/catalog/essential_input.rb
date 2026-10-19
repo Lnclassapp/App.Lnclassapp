@@ -35,6 +35,13 @@ module Dtos
       # Les textes de remplacement saisis, que le repository écrit sur les images citées par le contenu.
       def images = image_alts.map { |public_id, alt| Entities::Shared::ContentImage.new(public_id:, alt:) }
 
+      # Une erreur posée sur « image_alts.<public_id> » se lit dans image_alts (comme pour un article).
+      def read_attribute_for_validation(attribute)
+        return image_alts[attribute.to_s.delete_prefix("image_alts.")] if attribute.to_s.start_with?("image_alts.")
+
+        super
+      end
+
       private
 
       def image_alts_fit

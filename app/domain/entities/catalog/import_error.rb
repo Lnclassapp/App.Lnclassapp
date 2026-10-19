@@ -22,7 +22,7 @@ module Entities
                                too_large].freeze
     ImportError::ELEMENT = %w[schema blank too_long unknown_level unknown_series unknown_material unknown_drena
                               series_not_allowed invalid_value question_structure write_failed national_code_taken taken no_latin_character
-                              duplicate_in_files image_slot_malformed forbidden not_enqueued].freeze
+                              duplicate_in_files image_slot_malformed image_slots_unreadable forbidden not_enqueued].freeze
     ImportError::CODES = (ImportError::BLOCKING + ImportError::ELEMENT).freeze
   end
 end

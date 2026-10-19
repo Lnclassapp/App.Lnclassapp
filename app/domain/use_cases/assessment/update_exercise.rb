@@ -53,7 +53,9 @@ module UseCases
         )
       end
 
-      # Invariants, structure de chaque question, puis au moins une question tant que l'exercice est publié.
+      # Invariants, structure de chaque question, puis, tant que l'exercice est publié, au moins une question et ses images
+      # complètes (ADR-0074 §4.2, ADR-0105 §4.4) : une question qui attend son image, ou dont l'image n'a pas de texte de
+      # remplacement, est refusée comme à la publication.
       def errors_of(current, exercise)
         return exercise.errors.to_hash unless exercise.valid?
 
@@ -61,7 +63,13 @@ module UseCases
           [ :"questions[#{index}]", question.structure_errors ] if question.structure_errors.any?
         end.to_h
         errors[:questions] = [ :needed_while_published ] if current.published? && exercise.questions.empty?
-        errors
+        errors.merge(published_image_errors(current, exercise)) { |_question, rules, images| rules + images }
+      end
+
+      def published_image_errors(current, exercise)
+        return {} unless current.published?
+
+        exercise.image_errors.to_h { |number, codes| [ :"questions[#{number - 1}]", [ codes.first ] ] }
       end
     end
   end

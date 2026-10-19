@@ -128,6 +128,16 @@ module UseCases
         assert_empty @essentials.transitions
       end
 
+      test "menace n° 13 : un texte trop complexe à relire refuse la publication avec son propre motif, sans rien écrire" do
+        @essentials = FakeEssentials.new(Essential.new(id: 24, slug: "complexe", course_id: 1, name: "Complexe", status: "draft",
+                                                       course_status: "published", content: "<p>" * 40_000))
+
+        result = publish("complexe")
+
+        assert_equal [ :conflict, { base: [ :image_slots_unreadable ] } ], [ result.code, result.errors ]
+        assert_empty @essentials.transitions
+      end
+
       test "ADR-0105 : une image sans texte de remplacement refuse la publication, sans rien écrire" do
         essential = Essential.new(id: 21, slug: "alts", course_id: 1, name: "Alts", status: "draft", course_status: "published",
                                   content: "<p>Texte</p>")

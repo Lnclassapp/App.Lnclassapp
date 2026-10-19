@@ -11,7 +11,7 @@ module Repositories
       # Une pièce jointe dont le sgid ne se vérifie pas : l'assainir la retirerait, et l'image qu'elle désignait serait
       # détruite comme n'étant plus citée. Le texte est refusé, rien n'est écrit (comme un article, ADR-0074).
       UNREADABLE = ::Shared::Result.failure(:invalid, errors: { content: [ :invalid ] })
-      # Un sgid valide dont l'image n'est plus admise (celle d'une autre fiche, ou purgée) : l'assainir la retirerait sans
+      # Un sgid valide dont l'image n'est plus admise (celle d'une autre fiche, d'un autre type, ou purgée) : l'assainir la retirerait sans
       # rien dire. Le texte est refusé, rien n'est écrit.
       IMAGE_UNAVAILABLE = ::Shared::Result.failure(:invalid, errors: { content: [ :image_unavailable ] })
       # Une image citée, prise entre-temps par une autre fiche : le geste se refait (elle ne sera plus admise).
@@ -78,7 +78,7 @@ module Repositories
         canonical = essential.content.nil? ? nil : ActionText::Content.new(essential.content).to_html
         return UNREADABLE if unreadable?(canonical)
         return TOO_MANY_IMAGES if cited_ids(canonical).size > Entities::Shared::ContentImage::MAX_PER_ESSENTIAL
-        return IMAGE_UNAVAILABLE unless all_admissible?(canonical, record)
+        return IMAGE_UNAVAILABLE if foreign_attachment?(canonical) || !all_admissible?(canonical, record)
 
         Orm::Essential.transaction(requires_new: true) do
           previous = record.new_record? ? [] : record.images.ids
@@ -97,6 +97,15 @@ module Repositories
       end
 
       def admissible(record) = Orm::EssentialImage.where(essential_id: [ nil, record.id ].uniq)
+
+      # Une pièce jointe lisible qui n'est pas une image de fiche (celle d'un article, d'une question) : l'assainir la
+      # retirerait sans rien dire. Le texte est refusé, rien n'est écrit.
+      def foreign_attachment?(html)
+        Nokogiri::HTML5.fragment(html.to_s).css(ATTACHMENT).any? do |node|
+          gid = SignedGlobalID.parse(node["sgid"].to_s, for: ActionText::Attachable::LOCATOR_NAME)
+          gid && gid.model_name != IMAGE_MODEL
+        end
+      end
 
       def all_admissible?(canonical, record)
         cited = cited_ids(canonical)

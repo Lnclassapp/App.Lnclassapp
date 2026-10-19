@@ -4,6 +4,8 @@
 module PublishCascade
   extend ActiveSupport::Concern
 
+  UNREADABLE = %i[image_slots_unreadable essential_unreadable].freeze
+
   def publish_all
     result = publish_cascade.call(actor: current_actor, root: cascade_root, slug: params[:slug])
     return cascade_refused(result) if result.code == :conflict
@@ -17,12 +19,18 @@ module PublishCascade
   # ou une fiche du cours qui n'est pas prête (essential_not_ready, nommée, ADR-0105 §4.4).
   def cascade_refused(result)
     reason = result.errors.fetch(:base).first
-    scope = reason == :essential_not_ready ? "teams.courses.transition" : "teams.essentials.transition"
+    scope = %i[essential_not_ready essential_unreadable].include?(reason) ? "teams.courses.transition" : "teams.essentials.transition"
+    log_unreadable_text(slug: params[:slug], name: result.errors[:name]) if (result.errors[:base] & UNREADABLE).any?
     message = t("#{scope}.#{reason}", **result.errors.slice(:count, :name))
     respond_to do |format|
       format.turbo_stream { render turbo_stream: helpers.turbo_stream_toast(message, type: :error), status: :unprocessable_entity }
       format.html { redirect_back_or_to courses_path, alert: message, status: :see_other }
     end
+  end
+
+  # Le texte d'une fiche trop complexe à relire (menace.md, n° 13) : la fiche est nommée au journal, jamais son contenu.
+  def log_unreadable_text(slug:, name: nil)
+    Rails.logger.warn("[#{self.class.name}] image_slots_unreadable slug=#{slug} name=#{name.inspect}")
   end
 
   def cascade_done(summary)
@@ -39,7 +47,9 @@ module PublishCascade
     scope = "teams.publish_cascade"
     counts = { essentials: t("#{scope}.essentials", count: summary.essentials), exercises: t("#{scope}.exercises", count: summary.exercises) }
     done = [ :success, t("#{scope}.done.#{cascade_root}", name: summary.root.name, **counts) ]
-    summary.skipped.zero? ? [ done ] : [ done, [ :warning, t("#{scope}.skipped", count: summary.skipped) ] ]
+    incomplete = summary.skipped - summary.skipped_images
+    warnings = { skipped_images: summary.skipped_images, skipped: incomplete }.reject { _2.zero? }
+    [ done, *warnings.map { |key, count| [ :warning, t("#{scope}.#{key}", count:) ] } ]
   end
 
   def publish_cascade

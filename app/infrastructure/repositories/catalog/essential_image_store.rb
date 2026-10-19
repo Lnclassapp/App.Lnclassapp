@@ -32,12 +32,26 @@ module Repositories
                            .find_by(active_storage_attachments: { name: "file", record_type: Orm::EssentialImage.name,
                                                                   record_id: Orm::EssentialImage.where(public_id:).select(:id) })
                            &.download
+      rescue ActiveStorage::FileNotFoundError
+        # La ligne du blob existe, pas son fichier (bucket vidé) : comme une ligne sans blob, le contrôleur répond 404 et le journalise.
+        nil
       end
 
       # Le fichier part après validation (purge_later, ADR-0047).
+      # Chaque image est verrouillée (SKIP LOCKED : une image en cours de rattachement est laissée) puis relue sans essential_id avant
+      # destroy! : une image rattachée entre la lecture et la purge ne perd pas son fichier (menace.md, n° 11).
       def purge_orphans(before:)
-        Orm::EssentialImage.where(essential_id: nil, created_at: ...before).each(&:destroy!).size
+        orphan_ids(before:).count do |id|
+          Orm::EssentialImage.transaction do
+            image = Orm::EssentialImage.lock("FOR UPDATE SKIP LOCKED").find_by(id:, essential_id: nil)
+            image&.destroy!
+          end
+        end
       end
+
+      private
+
+      def orphan_ids(before:) = Orm::EssentialImage.where(essential_id: nil, created_at: ...before).ids
     end
   end
 end

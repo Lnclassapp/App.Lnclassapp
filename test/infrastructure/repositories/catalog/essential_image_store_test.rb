@@ -67,6 +67,25 @@ module Repositories
         assert_not ActiveStorage::Blob.exists?(blob.id)
       end
 
+      # Menace n° 11 : une image rattachée entre la lecture des orphelines et la purge garde sa ligne et son fichier.
+      test "purge_orphans laisse l'image rattachée entre la lecture des orphelines et la purge" do
+        raced = create_essential_image(created_at: 49.hours.ago)
+        essential = create_essential
+        @store.define_singleton_method(:orphan_ids) { |before:| super(before:).tap { raced.update_columns(essential_id: essential.id) } }
+
+        assert_equal 0, perform_enqueued_jobs { @store.purge_orphans(before: 48.hours.ago) }
+        assert_equal essential.id, raced.reload.essential_id
+        assert ActiveStorage::Blob.exists?(raced.file.blob.id)
+      end
+
+      test "download rend nil quand la ligne du blob existe mais pas son fichier" do
+        stored = @store.store(data: @webp, content_type: "image/webp", width: 64, height: 48)
+        blob = Orm::EssentialImage.find_by!(public_id: stored.public_id).file.blob
+        blob.service.delete(blob.key)
+
+        assert_nil @store.download(public_id: stored.public_id)
+      end
+
       test "une fiche ne part pas avec ses images (RESTRICT, ADR-0036)" do
         essential = create_essential
         create_essential_image(essential:)

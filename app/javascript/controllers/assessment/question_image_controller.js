@@ -1,20 +1,56 @@
 // ⚡ FRONT · assessment/question_image_controller — l'image d'une question dans le formulaire d'exercice (UDR-0129 §3.2)
 // Rôle : choisir, alléger (300 Ko, 1200 px) et envoyer l'image ; la description annoncée devient son texte de remplacement ; retirer l'image ou la description
-// ADR  : 0060, 0105 · UDR : 0129 · lib/image_upload chargé par import(), à la demande
+// ADR  : 0060, 0105 · UDR : 0129 · lib/image_upload chargé par import(), à la demande ; « Enregistrer » attend l'envoi en cours
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["publicId", "description", "preview", "img", "alt", "missing", "expected", "addPlain", "file", "status"]
   static values = { uploadUrl: String, accept: Array, maxSide: Number, maxBytes: Number, messages: Object }
 
+  connect() {
+    this.pending = null
+    this.form = this.element.closest("form")
+    this.form?.addEventListener("submit", this.hold)
+  }
+
+  disconnect() {
+    this.form?.removeEventListener("submit", this.hold)
+  }
+
   pick() {
     this.fileTarget.click()
   }
 
-  async upload() {
+  upload() {
     const file = this.fileTarget.files[0]
     if (!file) return
     this.fileTarget.value = ""
+    const work = this.send(file)
+    this.pending = work
+    work.finally(() => {
+      if (this.pending === work) this.pending = null
+    })
+  }
+
+  // « Enregistrer » during an upload: the exercise is saved once the image is sent. A refused or failed image, and the
+  // exercise would leave without it (or with the previous one), the refusal hidden by the closing modal: it is not saved,
+  // the modal stays open, and says so.
+  hold = (event) => {
+    if (!this.pending) return
+
+    event.preventDefault()
+    event.stopImmediatePropagation()
+    this.say(this.messagesValue.waiting)
+    const { submitter } = event
+    this.pending.then((sent) => {
+      if (sent) return this.form.requestSubmit(submitter)
+
+      this.say(`${this.failure} ${this.messagesValue.not_saved}`.trim(), true)
+    })
+  }
+
+  // → true if the image is sent, false if it was refused or failed (this.failure then says why).
+  async send(file) {
     this.say(this.messagesValue.uploading)
     try {
       const { prepareImage, uploadImage } = await import("../../lib/image_upload")
@@ -28,8 +64,11 @@ export default class extends Controller {
       this.show()
       this.mark()
       this.altTarget.focus()
+      return true
     } catch (error) {
-      this.say(this.reason(error), true)
+      this.failure = this.reason(error)
+      this.say(this.failure, true)
+      return false
     }
   }
 

@@ -128,7 +128,7 @@ Scénario: une image de cours n'est pas lisible sans connexion
 
 Scénario: une image publiée se garde dans le navigateur seulement
   Quand un élève lit une image de fiche publiée
-  Alors la réponse porte « Cache-Control: max-age=31536000, private, immutable »
+  Alors la réponse porte « Cache-Control: max-age=3600, private » et une revalidation par ETag rejoue la règle de lecture
 
 Scénario: une image remplacée n'est plus servie
   Étant donné une fiche publiée avec une image

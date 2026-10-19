@@ -44,6 +44,7 @@ fr:
           waiting: "Envoi de l'image en cours : la fiche s'enregistrera ensuite."
           not_saved: "La fiche n'est pas enregistrée : une image n'a pas pu être ajoutée. Retirez-la ou renvoyez-la, puis enregistrez de nouveau."
       transition:
+        image_slots_unreadable: "Le texte de cette fiche est trop complexe à relire : simplifiez la mise en forme (listes, blocs imbriqués), puis réessayez."
         image_slots_malformed:
           one: "Un emplacement d'image de cette fiche est mal écrit : « [[image: description]] » doit être seul dans son paragraphe, avec une description de 150 caractères au plus. Corrigez-le ou retirez-le avant de publier."
           other: "%{count} emplacements d'image de cette fiche sont mal écrits : « [[image: description]] » doit être seul dans son paragraphe, avec une description de 150 caractères au plus. Corrigez-les ou retirez-les avant de publier."
@@ -53,6 +54,7 @@ fr:
         image_alts_blank: "Une image de cette fiche n'a pas de texte de remplacement : complétez-le avant de publier."
     courses:
       transition:
+        essential_unreadable: "Le texte de la fiche « %{name} » est trop complexe à relire : simplifiez sa mise en forme. Rien n'a été publié."
         essential_not_ready: "La fiche « %{name} » n'est pas prête : il lui manque une image ou un texte de remplacement. Rien n'a été publié."
     exercises:
       question_fields:
@@ -72,6 +74,8 @@ fr:
           failed: "L'envoi a échoué. Vérifiez votre connexion, puis réessayez."
           expired: "Votre session a expiré. Reconnectez-vous dans un autre onglet, puis réessayez."
           uploading: "Envoi de l'image en cours…"
+          waiting: "Envoi de l'image en cours : l'exercice s'enregistrera ensuite."
+          not_saved: "L'exercice n'est pas enregistré : une image n'a pas pu être ajoutée. Retirez-la ou renvoyez-la, puis enregistrez de nouveau."
       transition:
         refusals:
           image_missing: "La question %{number} attend son image."

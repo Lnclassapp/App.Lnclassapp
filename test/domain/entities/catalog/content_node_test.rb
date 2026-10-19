@@ -68,6 +68,13 @@ module Entities
         assert_empty ContentNode.validate_essential({ "name" => "Le circuit", "content" => "<p>[[image: une pile]]</p>" }, path: "f")
       end
 
+      # Menace n° 13 : un texte trop complexe à relire a son motif, pas celui d'un emplacement mal écrit.
+      test "une fiche : un texte trop complexe à relire est refusé avec son propre motif" do
+        errors = ContentNode.validate_essential({ "name" => "Le circuit", "content" => "<p>" * 40_000 }, path: "essentials[1]")
+
+        assert_equal [ [ "essentials[1].content", "image_slots_unreadable" ] ], codes(errors)
+      end
+
       test "un exercice : au moins une question, cohérence de l'ADR-0039" do
         assert_empty ContentNode.validate_exercise(exercise("questions" => [ question("true_false"), question("multiple_correct_2", answers: answers(true, true, false)) ]), path: "e")
         assert_equal [ [ "e.questions", "blank" ] ], codes(ContentNode.validate_exercise(exercise("questions" => nil), path: "e"))

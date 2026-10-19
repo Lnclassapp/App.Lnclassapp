@@ -13,6 +13,10 @@ fr:
             name:
               taken: "est déjà pris par une autre fiche essentielle de ce cours"
             content:
+              # ADR-0105 §4.4 : une fiche publiée ne reçoit pas d'emplacement d'image ; rien n'est écrit.
+              image_slots_unreadable: "est trop complexe à relire : simplifiez la mise en forme (listes, blocs imbriqués), puis enregistrez de nouveau"
+              image_slots_malformed: "contient un emplacement d'image mal écrit : « [[image: description]] » doit être seul dans son paragraphe, avec une description de 150 caractères au plus"
+              image_slots_left: "contient un emplacement d'image à remplacer : insérez l'image ou retirez l'emplacement, la fiche est publiée"
               # ADR-0105 : une pièce jointe dont la signature ne se vérifie plus ; rien n'est écrit.
               invalid: "contient une image qui n'a pas pu être relue : rechargez la fiche, puis réessayez"
               # ADR-0105 : plus de 200 Ko de texte (menace.md, n° 13) ; rien n'est écrit.

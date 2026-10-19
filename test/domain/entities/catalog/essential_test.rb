@@ -43,6 +43,11 @@ module Entities
         assert_equal({ image_alts_blank: [ "ko" ] }, with_images.image_publish_errors)
         assert_empty build.images
       end
+
+      # Menace n° 13 : un texte trop complexe à relire est un motif à part, jamais « 1 emplacement mal écrit ».
+      test "image_publish_errors : un texte trop complexe à relire est refusé pour lui-même, sans autre motif" do
+        assert_equal({ image_slots_unreadable: true }, build(content: "<p>" * 40_000).image_publish_errors)
+      end
     end
   end
 end

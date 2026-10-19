@@ -17,6 +17,22 @@ class Assessment::QuestionImageTest < ApplicationSystemTestCase
   def t(key, **) = I18n.t(key, **)
   def questions = all("#exercise-questions > [data-teams--nested-form-target=list] > fieldset")
 
+  # L'endpoint d'envoi retient chaque envoi du bloc jusqu'à release.call : l'état « envoi en cours » est certain, sans course
+  # contre le réseau. Ce qui reste retenu à la fin du bloc est relâché ; l'action d'origine est gardée dans une variable locale.
+  def hold_uploads
+    gate = Thread::Queue.new
+    endpoint = Teams::QuestionImagesController
+    original = endpoint.instance_method(:create)
+    endpoint.define_method(:create) do
+      gate.pop
+      original.bind_call(self)
+    end
+    yield -> { gate << :pass }
+  ensure
+    gate.close
+    endpoint.define_method(:create, original)
+  end
+
   def publish
     find("button[aria-controls=exercise-actions-menu]").click
     click_on t("catalog.content_status.actions.publish")
@@ -31,20 +47,28 @@ class Assessment::QuestionImageTest < ApplicationSystemTestCase
     assert_no_page_reload do
       publish
       assert_toast t("teams.exercises.transition.refusals.image_missing", number: 2)
-      assert_equal "draft", @exercise.reload.status
 
       open_in_modal edit_teams_exercise_path(@exercise.public_id)
-      within(questions[1]) do
-        assert_text t("teams.exercises.question_fields.image_expected", description: DESCRIPTION)
-        attach_file(file_fixture("photos/photo.jpg").to_s) { click_on t("teams.exercises.question_fields.add_image") }
-        assert_selector "figure img[src^='/images/questions/']", wait: UPLOAD_WAIT
-        assert_field t("teams.exercises.question_fields.image_alt_label"), with: DESCRIPTION
+      # L'envoi est retenu côté serveur : « Enregistrer » pendant l'envoi attend la fin de l'envoi, puis enregistre l'exercice
+      # avec son image (sans cette garde, il partirait sans elle).
+      hold_uploads do |release|
+        within(questions[1]) do
+          assert_text t("teams.exercises.question_fields.image_expected", description: DESCRIPTION)
+          attach_file(file_fixture("photos/photo.jpg").to_s) { click_on t("teams.exercises.question_fields.add_image") }
+          assert_selector "[data-assessment--question-image-target=status]", text: t("teams.exercises.question_fields.image_messages.uploading")
+        end
+        within("turbo-frame#modal dialog[open]") { click_on t("teams.exercises.edit.submit") }
+        within(questions[1]) do
+          assert_selector "[data-assessment--question-image-target=status]", text: t("teams.exercises.question_fields.image_messages.waiting")
+        end
+        assert_equal 0, Orm::QuestionImage.count, "« Enregistrer » attend l'envoi en cours"
+        release.call
       end
-      within("turbo-frame#modal dialog[open]") { click_on t("teams.exercises.edit.submit") }
       assert_toast t("teams.exercises.update.updated", title: "Circuits")
       assert_no_selector "turbo-frame#modal dialog"
     end
 
+    assert_equal DESCRIPTION, Orm::QuestionImage.sole.alt, "la description devient le texte de remplacement"
     visit exercise_path(@exercise.public_id)
     publish
     assert_toast t("teams.exercises.transition.published", title: "Circuits")

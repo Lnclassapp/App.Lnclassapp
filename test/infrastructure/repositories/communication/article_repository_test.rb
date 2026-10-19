@@ -110,6 +110,22 @@ module Repositories
         assert_equal [], article.images
       end
 
+      # L'image d'une fiche ou d'une question n'est pas une image d'article : l'assainir la retirerait sans rien dire.
+      test "une image de fiche ou de question citée par le texte refuse le texte, comme un sgid illisible, rien n'est écrit" do
+        own = create_article_image
+        article = create(body: article_body_with(own))
+
+        [ create_essential_image, create_question_image ].each do |foreign|
+          sgid = foreign.to_sgid(expires_in: nil, for: ActionText::Attachable::LOCATOR_NAME)
+          cited = %(<action-text-attachment sgid="#{sgid}" content-type="image/jpeg"></action-text-attachment>)
+          result = @repository.update(id: article.id, dto: input(body: article_body_with(own) + cited), at: @at + 1.day)
+
+          assert_equal [ :invalid, { body: [ :image_unreadable ] } ], [ result.code, result.errors ]
+        end
+        assert_equal article.id, own.reload.article_id
+        assert_equal [ own.id ], cited_ids(article)
+      end
+
       test "une pièce jointe dont le sgid ne se vérifie pas : :invalid sur le texte, aucune image n'est détruite ni rattachée" do
         first = create_article_image
         second = create_article_image

@@ -29,17 +29,48 @@ module Entities
         assert_equal 0, ImageSlot.malformed_count(nil)
       end
 
-      # Menace n° 13 : le motif des blocs est à coût quadratique sur un « <p> » jamais refermé ; il a un délai (0,5 s), et le
-      # texte qui le dépasse est compté comme mal écrit, donc refusé.
-      test "un texte hostile (balises jamais refermées) est refusé en moins d'une seconde, sans tenir le serveur" do
+      # Menace n° 13 : le motif des blocs est à coût quadratique sur un « <p> » jamais refermé ; il a un délai par recherche, et
+      # tout l'appel a une échéance. Le texte qui dépasse l'un ou l'autre est refusé « trop complexe à relire » (ImageSlot::Unreadable),
+      # jamais compté comme un emplacement mal écrit.
+      test "un texte hostile (balises jamais refermées) est refusé comme illisible en moins d'une seconde" do
         [ %(<span title="<p>">x</span>) * 20_000, "<p>" * 40_000 ].each do |hostile|
-          started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-          count = ImageSlot.malformed_count(hostile)
-          elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - started
+          elapsed = measure { assert_raises(ImageSlot::Unreadable) { ImageSlot.malformed_count(hostile) } }
 
-          assert_operator count, :>, 0
           assert_operator elapsed, :<, 1.0, "malformed_count a pris #{elapsed.round(2)} s"
         end
+      end
+
+      # Chaque recherche réussit vite (le délai par recherche ne la voit pas) mais toutes ensemble tiennent le serveur : 44 s
+      # mesurées avant l'échéance globale, pour 203 000 caractères, sous le plafond de 200 Ko.
+      test "un texte segmenté (« <li> » × 200 puis « <p></p> », répété) est refusé comme illisible en moins d'une seconde" do
+        unit = "<li>" * 200 + "<p></p>"
+        segmented = unit * (Essential::CONTENT_MAX * 99 / 100 / unit.size)
+
+        assert_operator segmented.size, :<, Essential::CONTENT_MAX
+        elapsed = measure { assert_raises(ImageSlot::Unreadable) { ImageSlot.malformed_count(segmented) } }
+
+        assert_operator elapsed, :<, 1.0, "malformed_count a pris #{elapsed.round(2)} s"
+      end
+
+      test "l'échéance globale arrête la lecture à la première correspondance qui la dépasse" do
+        assert_raises(ImageSlot::Unreadable) { ImageSlot.malformed_count("<p>a</p><p>b</p>", within: -1) }
+        assert_equal 0, ImageSlot.malformed_count("<p>a</p><p>b</p>", within: 5)
+      end
+
+      test "un texte long et légitime (plus de 180 Ko de paragraphes, de listes et de titres) est lu en entier" do
+        block = "<h2>Titre</h2><p>Un paragraphe de cours assez long, avec <strong>du gras</strong> et des formules.</p>" \
+                "<ul><li>Un point</li><li>Un autre point</li></ul>"
+        legitimate = block * (190 * 1024 / block.size) + "<p>[[image: une pile]]</p>"
+
+        assert_operator legitimate.size, :>, 180 * 1024
+        assert_equal 0, ImageSlot.malformed_count(legitimate)
+        assert_equal 1, ImageSlot.scan(legitimate).size
+      end
+
+      def measure
+        started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        yield
+        Process.clock_gettime(Process::CLOCK_MONOTONIC) - started
       end
 
       test "un texte nul ou sans emplacement n'en a aucun" do

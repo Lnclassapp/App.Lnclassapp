@@ -13,10 +13,12 @@ module UseCases
       end
 
       # ADR-0105 §4.4 : ce qui manque à une fiche pour être publiée → Result(nil) | :conflict, rien n'est écrit :
-      # base: image_slots_malformed puis image_slots_left (count : emplacements mal écrits ou restants), puis
-      # base: image_alts_blank (image_alts: public_id sans alt).
+      # base: image_slots_unreadable (texte trop complexe à relire), image_slots_malformed puis image_slots_left (count :
+      # emplacements mal écrits ou restants), puis base: image_alts_blank (image_alts: public_id sans alt).
       def self.images_ready(essential)
         errors = essential.image_publish_errors
+        return Shared::Result.failure(:conflict, errors: { base: [ :image_slots_unreadable ] }) if errors.key?(:image_slots_unreadable)
+
         %i[image_slots_malformed image_slots_left].each do |reason|
           return Shared::Result.failure(:conflict, errors: { base: [ reason ], count: errors[reason] }) if errors.key?(reason)
         end
@@ -28,7 +30,7 @@ module UseCases
       end
 
       # → Result(Essential relue) | :forbidden | :not_found
-      #   | :conflict (base: parent_not_published | transition_not_allowed | image_slots_malformed | image_slots_left | image_alts_blank)
+      #   | :conflict (base: parent_not_published | transition_not_allowed | image_slots_unreadable | image_slots_malformed | image_slots_left | image_alts_blank)
       def call(actor:, slug:)
         allowed = @policy.call(actor:)
         return allowed if allowed.failure?
