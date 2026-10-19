@@ -14,5 +14,5 @@ module Shared
     def success? = code.nil?
     def failure? = !success?
   end
-  Result::ERROR_CODES = %i[forbidden not_found invalid conflict locked expired].freeze
+  Result::ERROR_CODES = %i[forbidden not_found invalid conflict locked expired unavailable].freeze
 end
