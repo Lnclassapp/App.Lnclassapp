@@ -200,4 +200,4 @@ Fonctionnalité: Matières d'un enseignant
 |---|---|---|---|
 | Requêtes de « Enseignants » (direction) à 1 et 30 enseignants | constant | constant (pas de N+1 par les matières) | |
 | Requêtes de l'accueil enseignant | à mesurer au Lot 0 | +0 (les matières se lisent avec le profil) | |
-| Lignes `teacher_school_materials` après migration | — | = rattachements + retraits ouverts (requête du journal) | |
+| Lignes `teacher_school_materials` après migration | — | = rattachements + retraits ouverts + demandes en attente (requête du journal) | |

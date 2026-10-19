@@ -23,15 +23,25 @@ module Queries
         assert_equal SchoolTeachersQuery::Overview.new(
           school_name: "Lycée Moderne de Bouaké",
           teachers: [ SchoolTeachersQuery::TeacherRow.new(public_id: awa.public_id, first_name: "Awa", name: "Awa Koné",
-                                                          material_name: "Mathématiques",
-                                                          material_category: "science", classroom_names: [ "2nde C 1", "Tle D 2" ]) ]
+                                                          materials: overview.teachers.first.materials,
+                                                          classroom_names: [ "2nde C 1", "Tle D 2" ]) ]
         ), overview
+        assert_equal [ [ "Mathématiques", "science" ] ], overview.teachers.first.materials.map { [ it.name, it.category ] }
+      end
+
+      # EPM-22 (UDR-0127 §3.5) : toutes ses matières ici, dans l'ordre ; pas celles d'un autre de ses établissements.
+      test "EPM-22 : un enseignant de deux matières porte ses deux matières de cet établissement" do
+        pc = create_material(name: "Physique-Chimie")
+        awa = create_teacher(school: @school, materials: [ pc, @maths ])
+        add_teacher_school(awa, create_school, materials: [ create_material(name: "Philosophie") ])
+
+        assert_equal [ "Physique-Chimie", "Mathématiques" ], overview.teachers.sole.materials.map(&:name)
       end
 
       test "DS-06 : enseignants de l'établissement, principal ou non, par nom ; ni anonymisé, ni en attente, ni d'ailleurs" do
         create_teacher(school: @school, first_name: "Yao", last_name: "Brou")
         secondary = create_teacher(school: create_school, first_name: "Awa", last_name: "Koné")
-        Orm::TeacherSchool.create!(teacher: secondary, school: @school, primary: false)
+        add_teacher_school(secondary, @school)
         create_teacher(school: @school, last_name: "Anonyme").update!(anonymized_at: Time.current)
         create_join_request(school: @school, teacher: create_teacher(school: nil, last_name: "Attente"))
         create_teacher(school: create_school, last_name: "Ailleurs")
@@ -76,7 +86,7 @@ module Queries
         2.times { seed.call }
 
         assert_equal single, count_queries { assert_equal 3, overview.teachers.size }
-        assert_equal 3, single
+        assert_equal 3, single, "ADR-0103 : les matières viennent avec la ligne de chaque enseignant"
       end
 
       # Lot 3 of ecrans-direction-lents (UDR-0056, amendment of 2026-10-04): the confirmation « Retirer » loaded on demand

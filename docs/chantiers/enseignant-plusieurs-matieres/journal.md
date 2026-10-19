@@ -19,6 +19,9 @@
 
 ## Ce qui a dérapé
 
+- Lot D : une requête de plus par liste (les matières) dépassait les budgets de requêtes de l'accueil de la direction (12) et de la modération (4). Les listes lisent désormais les matières dans leur propre requête (`TeacherMaterialsQuery.column`, `json_agg` corrélé).
+- Lot D : les demandes en attente (enseignant sans rattachement) n'avaient pas de liste ; la migration du Lot 0 les copie aussi (sinon leur matière disparaissait au Lot Z).
+
 - Lot A : la ligne de détail de l'en-tête est rendue dans la barre latérale sur ordinateur, pas dans `header` ; et `click_on` de Capybara ne lit pas `aria-label` : le test système vise le lien par son attribut.
 - Lot A : les fabriques rangeaient les matières **après** `Time.current` ; une matière ajoutée ensuite par `replace` passait devant. Elles les rangent désormais dans la seconde qui précède.
 
@@ -35,9 +38,14 @@ SELECT
   + (SELECT COUNT(*) FROM teacher_school_departures d JOIN teacher_profiles tp ON tp.user_id = d.teacher_id
      WHERE d.reinstated_at IS NULL
        AND NOT EXISTS (SELECT 1 FROM teacher_schools ts WHERE ts.teacher_id = d.teacher_id AND ts.school_id = d.school_id))
+  + (SELECT COUNT(*) FROM school_join_requests r JOIN teacher_profiles tp ON tp.user_id = r.teacher_id
+     WHERE r.status = 'pending'
+       AND NOT EXISTS (SELECT 1 FROM teacher_schools ts WHERE ts.teacher_id = r.teacher_id AND ts.school_id = r.school_id)
+       AND NOT EXISTS (SELECT 1 FROM teacher_school_departures d WHERE d.teacher_id = r.teacher_id
+                       AND d.school_id = r.school_id AND d.reinstated_at IS NULL))
   AS attendu,
   (SELECT COUNT(*) FROM teacher_school_materials) AS copie;   -- après la migration seulement
--- Et pour mémoire : SELECT COUNT(*) FROM teacher_profiles; (un enseignant sans rattachement ni retrait n'a rien à copier)
+-- Et pour mémoire : SELECT COUNT(*) FROM teacher_profiles; (un enseignant sans rattachement, retrait ni demande n'a rien à copier)
 ```
 
 ## Ce qu'on a appris sur la codebase

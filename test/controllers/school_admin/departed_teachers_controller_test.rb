@@ -13,6 +13,7 @@ class SchoolAdmin::DepartedTeachersControllerTest < ActionDispatch::IntegrationT
 
   def departed(school: @school, detached_at: 2.days.ago, **attributes)
     create_teacher(school: nil, **attributes).tap do |teacher|
+      set_teacher_materials(teacher, school, [ teacher.teacher_profile.material ]) # ADR-0103 §4.1 : gardée après le retrait
       create_teacher_departure(teacher:, school:, detached_by: @admin, detached_at:)
     end
   end
@@ -59,7 +60,7 @@ class SchoolAdmin::DepartedTeachersControllerTest < ActionDispatch::IntegrationT
   end
 
   test "un enseignant sans matière : un tiret, « non calculé » pour le lecteur d'écran" do
-    Orm::TeacherProfile.where(user: departed).delete_all
+    Orm::TeacherSchoolMaterial.where(teacher: departed).delete_all
     sign_in_as @admin
 
     get school_admin_departed_teachers_path

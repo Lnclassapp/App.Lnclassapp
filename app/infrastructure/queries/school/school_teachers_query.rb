@@ -1,11 +1,12 @@
 # 🔌 INFRA · Queries::School::SchoolTeachersQuery
-# Rôle : « Enseignants » de la direction : enseignants non anonymisés, matière, classes de l'année ; un enseignant pour « Retirer »
-# ADR  : 0062, 0063, 0065, 0067, 0071 · UDR : 0052, 0056 · trois requêtes, quel que soit le volume ; une pour la confirmation
+# Rôle : « Enseignants » de la direction : enseignants non anonymisés, matières ici, classes de l'année ; un enseignant pour « Retirer »
+# ADR  : 0062, 0063, 0065, 0067, 0071, 0103 · UDR : 0052, 0056, 0127 (§3.5) · trois requêtes, quel que soit le volume ; une pour la confirmation
 module Queries
   module School
     class SchoolTeachersQuery
       Overview = Data.define(:school_name, :teachers)
-      TeacherRow = Data.define(:public_id, :first_name, :name, :material_name, :material_category, :classroom_names)
+      # materials : [Identity::TeacherMaterialsQuery::MaterialTag] de l'enseignant dans cet établissement (ADR-0103).
+      TeacherRow = Data.define(:public_id, :first_name, :name, :materials, :classroom_names)
       Teacher = Data.define(:public_id, :first_name, :name)
 
       FULL_NAME = Arel.sql("users.first_name || ' ' || users.last_name")
@@ -13,8 +14,9 @@ module Queries
       # school_id vient toujours du compte de la direction (ADR-0065), jamais de l'adresse.
       def call(school_id:, school_year: Entities::Classroom::SchoolYear.current(Date.current))
         classrooms = classroom_names(school_id, school_year)
-        teachers = teachers(school_id).map do |id, public_id, first_name, name, material_name, material_category|
-          TeacherRow.new(public_id:, first_name:, name:, material_name:, material_category:, classroom_names: classrooms.fetch(id, []))
+        teachers = teachers(school_id).map do |id, public_id, first_name, name, materials|
+          TeacherRow.new(public_id:, first_name:, name:, materials: Queries::Identity::TeacherMaterialsQuery.from_json(materials),
+                         classroom_names: classrooms.fetch(id, []))
         end
         Overview.new(school_name: Orm::School.where(id: school_id).pick(:name), teachers:)
       end
@@ -33,11 +35,11 @@ module Queries
       # Un enseignant en attente n'a pas de ligne teacher_schools (ADR-0063) : il n'en est pas.
       def teachers(school_id)
         Orm::TeacherSchool.joins(:teacher)
-                          .joins("LEFT JOIN teacher_profiles ON teacher_profiles.user_id = teacher_schools.teacher_id")
-                          .joins("LEFT JOIN materials ON materials.id = teacher_profiles.material_id")
                           .where(school_id:, users: { anonymized_at: nil })
                           .order("users.last_name", "users.first_name")
-                          .pluck(:teacher_id, "users.public_id", "users.first_name", FULL_NAME, "materials.name", "materials.category")
+                          .pluck(:teacher_id, "users.public_id", "users.first_name", FULL_NAME,
+                                 Queries::Identity::TeacherMaterialsQuery.column(teacher: "teacher_schools.teacher_id",
+                                                                                 school: "teacher_schools.school_id"))
       end
 
       def classroom_names(school_id, school_year)

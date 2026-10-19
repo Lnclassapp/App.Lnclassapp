@@ -1,16 +1,17 @@
 # 🔌 INFRA · Queries::Communication::InboxQuery
 # Rôle : cartes d'annonces lisibles — carrousel de l'accueil élève, liste « Reçues » paginée — en un nombre fixe de requêtes
-# ADR  : 0067, 0078, 0081 · UDR : 0071 (§3.2, §3.5, §3.7), 0075 (§3.1, §3.2)
+# ADR  : 0067, 0078, 0081, 0103 · UDR : 0071 (§3.2, §3.5, §3.7), 0075 (§3.1, §3.2), 0127 (§3.4)
 module Queries
   module Communication
     class InboxQuery
       # La carte (UDR-0071 §3.2), objet de lecture partagé par le carrousel, la liste et la modération (Lot C).
-      # author_role : :team, :school_admin ou :teacher ; gender, last_name, material_name (enseignant) : la signature ;
+      # author_role : :team, :school_admin ou :teacher ; gender, last_name, materials (enseignant : ses matières dans
+      # l'établissement de l'annonce, ADR-0103) : la signature ;
       # anonymized : l'auteur a été anonymisé (ADR-0036), la signature ne garde que sa fonction.
       # illustration : ce que rend announcement_illustration, une clé de base (String) ou l'Entities::Communication::Illustration
       # de l'équipe, retirée ou non (ADR-0081 §4.3) ; theme : une clé de Message::THEMES (UDR-0075 §3.1).
       MessageCard = Data.define(:public_id, :title, :body, :illustration, :theme, :author_role, :gender, :last_name,
-                                :material_name, :anonymized, :official, :image, :audio, :edited, :dismissed) do
+                                :materials, :anonymized, :official, :image, :audio, :edited, :dismissed) do
         # Sans thème, la carte garde l'apparence d'avant les thèmes : « Ciel », le défaut de la base.
         def initialize(theme: Entities::Communication::Message::DEFAULT_THEME, **) = super
 
@@ -33,7 +34,8 @@ module Queries
       AUTHOR_ORDER = Arel.sql("CASE users.role WHEN 'school_admin' THEN 0 WHEN 'teacher' THEN 1 ELSE 2 END")
       COLUMNS = [ "messages.id", "messages.public_id", "messages.title", "messages.body", "messages.illustration",
                   "messages.illustration_id", "messages.theme", "messages.edited_at", "users.role", "users.gender",
-                  "users.last_name", "users.anonymized_at", "materials.name" ].freeze
+                  "users.last_name", "users.anonymized_at",
+                  Queries::Identity::TeacherMaterialsQuery.column(teacher: "messages.author_id", school: "messages.school_id") ].freeze
       ILLUSTRATION_ID = COLUMNS.index("messages.illustration_id")
 
       # illustrations : Ports::Communication::IllustrationRepositoryPort, qui rend les dessins de l'équipe des cartes.
@@ -68,8 +70,9 @@ module Queries
       # Les cartes d'une relation d'annonces, dans son ordre : la ligne et son auteur, puis ses fichiers, puis les dessins
       # de l'équipe de toutes les cartes, puis les rejets du lecteur (dismissed_by), soit quatre requêtes au plus. Sans
       # dessin de l'équipe, la requête des dessins ne part pas (where(id: []) ne touche pas la base) : trois, comme avant.
+      # Les matières de l'auteur (ADR-0103), celles de l'établissement de l'annonce, viennent avec la ligne.
       def cards(messages, dismissed_by: nil)
-        rows = messages.left_joins(author: { teacher_profile: :material }).pluck(*COLUMNS)
+        rows = messages.left_joins(:author).pluck(*COLUMNS)
         ids = rows.map(&:first)
         files = ActiveStorage::Attachment.where(record_type: Orm::Message.name, record_id: ids).pluck(:record_id, :name).to_set
         drawings = @illustrations.find_all_by_ids(ids: rows.filter_map { it[ILLUSTRATION_ID] }.uniq)
@@ -81,9 +84,9 @@ module Queries
 
       # Une annonce porte une clé de base ou un dessin de l'équipe, jamais les deux (contrainte de la base, ADR-0081 §4.3).
       def card_of(row, files, drawings, dismissed)
-        id, public_id, title, body, key, illustration_id, theme, edited_at, role, gender, last_name, anonymized_at, material_name = row
+        id, public_id, title, body, key, illustration_id, theme, edited_at, role, gender, last_name, anonymized_at, tags = row
         MessageCard.new(public_id:, title:, body:, illustration: key || drawings.fetch(illustration_id), theme:,
-                        author_role: role.to_sym, gender:, last_name:, material_name:,
+                        author_role: role.to_sym, gender:, last_name:, materials: Queries::Identity::TeacherMaterialsQuery.from_json(tags),
                         anonymized: !anonymized_at.nil?, official: role == "school_admin", image: files.include?([ id, "image" ]),
                         audio: files.include?([ id, "audio" ]), edited: !edited_at.nil?, dismissed: dismissed.include?(id))
       end

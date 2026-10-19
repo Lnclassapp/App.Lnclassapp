@@ -1,8 +1,8 @@
 # ADR-0103 §4.6, temps 1 (chantier enseignant-plusieurs-matieres) : les matières d'un enseignant sont celles d'un
 # rattachement enseignant-établissement (réponse du porteur du 2026-10-16, point d'extension de l'ADR-0094 §10). Clé du
 # rattachement (teacher_id, school_id), sans FK vers teacher_schools : la liste survit à un retrait et revient avec lui.
-# Copie de teacher_profiles.material_id pour CHAQUE rattachement, puis pour chaque retrait encore ouvert ; la colonne reste,
-# écrite en double, jusqu'au Lot Z. Rejouable dans les deux sens.
+# Copie de teacher_profiles.material_id pour CHAQUE rattachement, puis pour chaque retrait encore ouvert et chaque demande
+# en attente (l'établissement demandé) ; la colonne reste, écrite en double, jusqu'au Lot Z. Rejouable dans les deux sens.
 class CreateTeacherSchoolMaterials < ActiveRecord::Migration[8.1]
   def up
     create_table :teacher_school_materials do |t|
@@ -31,6 +31,14 @@ class CreateTeacherSchoolMaterials < ActiveRecord::Migration[8.1]
              teacher_school_departures.detached_at
       FROM teacher_school_departures JOIN teacher_profiles ON teacher_profiles.user_id = teacher_school_departures.teacher_id
       WHERE teacher_school_departures.reinstated_at IS NULL
+      ON CONFLICT DO NOTHING
+    SQL
+    execute <<~SQL.squish
+      INSERT INTO teacher_school_materials (teacher_id, school_id, material_id, created_at)
+      SELECT school_join_requests.teacher_id, school_join_requests.school_id, teacher_profiles.material_id,
+             school_join_requests.created_at
+      FROM school_join_requests JOIN teacher_profiles ON teacher_profiles.user_id = school_join_requests.teacher_id
+      WHERE school_join_requests.status = 'pending'
       ON CONFLICT DO NOTHING
     SQL
   end

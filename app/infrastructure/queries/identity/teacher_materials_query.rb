@@ -10,6 +10,21 @@ module Queries
       COLUMNS = %w[teacher_school_materials.teacher_id teacher_school_materials.school_id materials.id materials.name
                    materials.shortname materials.category materials.slug].freeze
 
+      # Colonne à ajouter à la requête d'une liste (aucune requête de plus) : les matières de l'enseignant de la ligne dans
+      # l'établissement de la ligne, en JSON, dans l'ordre d'ajout. teacher et school : colonnes SQL de confiance (jamais
+      # une saisie). school nil : toutes ses listes (une demande en attente). Lue par .from_json.
+      def self.column(teacher:, school: nil)
+        scoped = school ? " AND tsm.school_id = #{school}" : ""
+        Arel.sql("(SELECT COALESCE(json_agg(json_build_array(m.id, m.name, m.shortname, m.category, m.slug) " \
+                 "ORDER BY tsm.created_at, tsm.id), '[]') FROM teacher_school_materials tsm " \
+                 "JOIN materials m ON m.id = tsm.material_id WHERE tsm.teacher_id = #{teacher}#{scoped})")
+      end
+
+      # value : le JSON de .column, déjà décodé par le pilote. → [MaterialTag], sans doublon (une matière de deux établissements).
+      def self.from_json(value)
+        value.map { MaterialTag.new(*it) }.uniq(&:id)
+      end
+
       # Le libellé d'une liste : « Physique-Chimie » ; « PC, SVT » ; nil sans matière.
       def self.label(tags)
         return tags.first&.name if tags.size < 2
