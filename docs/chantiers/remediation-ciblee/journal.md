@@ -36,6 +36,8 @@
 - **Aucune lecture enseignant de `knowledge_gaps`** : seuls l'accueil élève, la fiche et l'effaceur de données la lisent.
 - La feuille de route fait dépendre AS-17 de `rapports-de-classe`, qui n'est pas ouvert. Pourtant sa tranche « exercices » est livrée (#164), et les deux pages de classe qui accueillent AS-17 existent.
 
+- **Revue de la PR (2026-10-19)** : la fiche dans la classe ne montrait « Élèves à revoir / Fiche levée » qu'au nom du cours demandé, sans vérifier qu'il figure sur la page de la classe (ADR-0101 §4.4). `ClassroomOverviewQuery#shown_course?` applique le filtre de `#courses` (niveau, série, matière de l'enseignant ; toutes pour l'équipe) ; hors périmètre, `@gaps = nil` et la fiche reste lisible. Tests ajoutés : reprise d'une session commencée, 3 lignes visibles + 1 masquée, pluriel « 2 sessions » et levée `remediated`, année scolaire de la classe, exercice proposé sans fixation, 403 sans requête sur `knowledge_gaps`, lien « Revoir la fiche ». Bornes 73-74 % / 48-49 % (note arrondie contre pourcentage brut) : en attente du porteur.
+
 ## Dette laissée derrière
 
 | Quoi | Pourquoi reporté | Chantier de suivi |

@@ -19,17 +19,26 @@ module Classroom
     private
 
     def load_essential(access)
+      teacher_id = current_actor.user_id if current_actor.teacher?
       @essential = Queries::Classroom::ClassroomEssentialQuery.new.call(classroom_public_id: @classroom.public_id,
                                                                         course_slug: params[:course_slug],
-                                                                        essential_slug: params[:essential_slug],
-                                                                        teacher_id: (current_actor.user_id if current_actor.teacher?))
+                                                                        essential_slug: params[:essential_slug], teacher_id:)
       return render_not_found if @essential.nil?
 
-      # UDR-0121 §3.2 : qui est à revoir, qui a levé la fiche pendant l'année de la classe (ADR-0101 §4.4).
-      @gaps = Queries::Assessment::ClassroomGapsQuery.new.detail(classroom_public_id: @classroom.public_id,
-                                                                 course_slug: @essential.course_slug,
-                                                                 essential_slug: @essential.essential.slug,
-                                                                 school_year: @classroom.school_year, show_roster: access.show_roster)
+      @gaps = gaps(access, teacher_id)
+    end
+
+    # UDR-0121 §3.2 : qui est à revoir, qui a levé la fiche pendant l'année de la classe (ADR-0101 §4.4). Le bloc ne vaut que
+    # pour les cours que la page de la classe affiche (comme ClassroomsController#gaps) : hors de ce périmètre, il n'y en a pas.
+    def gaps(access, teacher_id)
+      shown = Queries::Classroom::ClassroomOverviewQuery.new.shown_course?(public_id: @classroom.public_id,
+                                                                          course_slug: @essential.course_slug, teacher_id:)
+      return unless shown
+
+      Queries::Assessment::ClassroomGapsQuery.new.detail(classroom_public_id: @classroom.public_id,
+                                                         course_slug: @essential.course_slug,
+                                                         essential_slug: @essential.essential.slug,
+                                                         school_year: @classroom.school_year, show_roster: access.show_roster)
     end
   end
 end

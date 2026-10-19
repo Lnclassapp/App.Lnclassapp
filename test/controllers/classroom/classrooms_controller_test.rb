@@ -688,6 +688,8 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#classroom_gaps[data-controller=reveal]" do
       assert_equal %w[Quatre Trois Deux Une], css_select("#classroom_gaps li a").map { it.text.strip }
+      assert_select "li:not([hidden])", 3
+      assert_select "li[hidden]", 1
       assert_select "li[hidden]", text: /Une/
       assert_select "button[data-action='reveal#more']"
     end

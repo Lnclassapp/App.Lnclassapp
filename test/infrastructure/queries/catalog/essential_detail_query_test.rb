@@ -187,6 +187,16 @@ module Queries
         assert_equal "Thalès 1", detail(student_id: @student.id).pending_gap.exercise.title
       end
 
+      test "without a fixation, the gap offers the first other exercise by position, not by creation order" do
+        failed = create_exercise(essential: @essential, title: "Thalès 1", exercise_type: "evaluation", position: 1)
+        create_exercise(essential: @essential, title: "Thalès 4", exercise_type: "evaluation", position: 4)
+        create_exercise(essential: @essential, title: "Thalès 2", exercise_type: "evaluation", position: 2)
+        create_exercise(essential: @essential, title: "Thalès 3", exercise_type: "evaluation", position: 3, status: "archived")
+        failed_on(failed)
+
+        assert_equal "Thalès 2", detail(student_id: @student.id).pending_gap.exercise.title
+      end
+
       test "a sheet without published exercise: the gap offers nothing" do
         failed = create_exercise(essential: @essential, title: "Thalès 1", position: 1)
         failed_on(failed)

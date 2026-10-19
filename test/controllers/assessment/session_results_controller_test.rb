@@ -355,6 +355,8 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-controller='assessment--confetti']", 1
     assert_select "#session_gap_outcome p.font-bold", text: gap_outcome("still_pending.message")
     assert_select "#session_gap_outcome p", text: "Pour lever « Division cellulaire », vise au moins 15/20."
+    assert_select "#session_gap_outcome a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']",
+                  text: gap_outcome("open_essential")
   end
 
   test "fiche : la remédiation qui lève la fiche lit « Fiche levée ! », sans lien, après la phrase de progrès" do

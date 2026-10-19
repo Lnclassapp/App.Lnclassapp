@@ -34,7 +34,7 @@ La lacune s'ouvre et se lève déjà à la clôture (ADR-0043), et toute session
 ### Chemin nominal — enseignant (AS-17)
 
 1. M. Koné ouvre la page de sa 3ème B. Un bloc « Fiches à revoir » liste « Théorème de Thalès · 4 élèves », puis les autres fiches.
-2. Il ouvre la fiche : la page « fiche dans la classe » montre, au-dessus des exercices, la section « Élèves à revoir » (Awa Bamba, depuis le 12 octobre, 3 sessions sous la moyenne ; …) et « Fiche levée » (Yao Kouassi, le 14 octobre ; …).
+2. Il ouvre la fiche : la page « fiche dans la classe » montre, au-dessus des exercices, la section « Élèves à revoir » (Awa Bamba, depuis le 12 oct., 3 sessions sous la moyenne ; …) et « Fiche levée » (Yao Kouassi, le 14 oct. ; …).
 
 ### Chemins alternatifs et erreurs
 
@@ -121,8 +121,8 @@ Fonctionnalité: L'enseignant suit les fiches à revoir de sa classe (AS-17)
   Contexte:
     Étant donné la 3ème B de l'année 2026-2027, enseignée par M. Koné (mathématiques)
     Et la fiche publiée « Théorème de Thalès » d'un cours de mathématiques de 3ème
-    Et les élèves présents Awa (fiche à revoir depuis le 12 octobre, 3 échecs), Bintou (fiche à revoir, 1 échec)
-    Et Yao, dont la fiche a été levée le 14 octobre
+    Et les élèves présents Awa (fiche à revoir depuis le 12 oct., 3 échecs), Bintou (fiche à revoir, 1 échec)
+    Et Yao, dont la fiche a été levée le 14 oct.
 
   Scénario: Le bloc de la page de classe compte les élèves à revoir par fiche
     Quand M. Koné ouvre la page de la 3ème B
@@ -149,9 +149,9 @@ Fonctionnalité: L'enseignant suit les fiches à revoir de sa classe (AS-17)
   Scénario: La fiche dans la classe nomme les élèves
     Quand M. Koné ouvre « Théorème de Thalès » depuis la 3ème B
     Alors la section « Élèves à revoir » liste Awa puis Bintou, la plus ancienne lacune d'abord
-    Et Awa porte « depuis le 12 octobre » et « 3 sessions sous la moyenne »
+    Et Awa porte « depuis le 12 oct. » et « 3 sessions sous la moyenne »
     Et Bintou ne porte pas de compte de sessions sous la moyenne
-    Et la section « Fiche levée » liste Yao avec « le 14 octobre »
+    Et la section « Fiche levée » liste Yao avec « le 14 oct. »
     Et aucune mention ne distingue une remédiation d'une correction seule
 
   Scénario: Élève parti ou anonymisé

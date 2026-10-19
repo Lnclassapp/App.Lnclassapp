@@ -129,6 +129,23 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to exercise_session_path(session.public_id)
   end
 
+  # PRD §3 : une session commencée de l'exercice proposé se reprend ; le bouton n'en recommence pas une (pas de restart).
+  test "the gap's button resumes a started session of the offered exercise instead of starting another" do
+    create_gap(student: @student, essential: @essential,
+               source_session: create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 30))
+    offered = create_exercise(essential: @essential, title: "Thalès 2", exercise_type: "fixation", position: 2)
+    started = create_exercise_session(student: @student, exercise: offered, status: "started")
+    sign_in_as @student
+
+    get page_path
+
+    assert_select "#essential_gap_form input[name=restart]", 0
+    assert_no_difference -> { Orm::ExerciseSession.count } do
+      post exercise_sessions_path(offered.public_id)
+    end
+    assert_redirected_to exercise_session_path(started.public_id)
+  end
+
   test "a gap on a sheet without published exercise: the box stays, without button" do
     create_gap(student: @student, essential: @essential,
                source_session: create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 30))
