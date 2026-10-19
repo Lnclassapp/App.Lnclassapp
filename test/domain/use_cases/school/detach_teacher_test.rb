@@ -104,7 +104,7 @@ module UseCases
         @departures = FakeDepartures.new
         @audit = FakeAuditLog.new
         @transaction = FakeTransaction.new
-        @direction = Entities::Identity::Actor.new(user_id: 7, role: :school_admin, school_id: SCHOOL_A)
+        @direction = Entities::Identity::Actor.new(user_id: 7, role: :school_admin, school_id: SCHOOL_A, staff_position: "head")
       end
 
       def school(id, status: "active") = Entities::School::School.new(id:, status:)
@@ -181,7 +181,7 @@ module UseCases
       end
 
       test "GD-17 : la direction d'un établissement inactif et l'équipe reçoivent forbidden ; rien n'est écrit" do
-        inactive = Entities::Identity::Actor.new(user_id: 8, role: :school_admin, school_id: 33)
+        inactive = Entities::Identity::Actor.new(user_id: 8, role: :school_admin, school_id: 33, staff_position: "head")
         team = Entities::Identity::Actor.new(user_id: 9, role: :team, team_role: :admin)
 
         assert_equal :forbidden, detach(teacher_public_id: "zadi", actor: inactive).code
