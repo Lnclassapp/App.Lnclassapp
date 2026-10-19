@@ -135,10 +135,10 @@ Contrat partagé à surveiller : `destroy.turbo_stream.erb` rend `_roster` ; il 
 
 ## Portes de sortie
 
-- [ ] Q1 à Q8 répondues par le porteur, ADR-0097 et UDR-0107 à 0109 passés à « Accepté »
-- [ ] Tous les lots sont `Done`
-- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat (tests lancés, parcours refait dans l'application, à 390 px et à l'ordinateur)
-- [ ] Pureté du domaine, rubocop, tests, parcours système, brakeman : au vert (`bin/ci-quiet`, écrit dans la PR)
-- [ ] Budgets mesurés et consignés au journal (fiche, page de la classe, suivi)
-- [ ] ADR et UDR indexés au commit de clôture
-- [ ] `journal.md` complété
+- [x] Q1 à Q8 répondues par le porteur, ADR-0097 et UDR-0107 à 0109 passés à « Accepté »
+- [x] Tous les lots sont `Done`
+- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat (tests lancés, parcours refait dans l'application, à 390 px et à l'ordinateur) — **reste à faire** : recette par le porteur sur les captures et en `Develop`
+- [x] Pureté du domaine, rubocop, tests, parcours système, brakeman : au vert (`bin/ci-quiet`, écrit dans la PR)
+- [x] Budgets mesurés et consignés au journal (fiche, page de la classe, suivi)
+- [x] ADR et UDR indexés au commit de clôture
+- [x] `journal.md` complété

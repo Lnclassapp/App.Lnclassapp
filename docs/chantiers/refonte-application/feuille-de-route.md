@@ -544,9 +544,9 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | CL-10 | Fiche d'une de ses classes | ❌ | V1 (Lot D) — livrée 2026-09-27 (#33) | La fiche qui casse dès le premier exercice assigné |
 | CL-11 | Consulter un cours dans sa classe | ❌ | V1 (Lot D) — livrée 2026-09-27 (#33) | — |
 | CL-12 | Consulter une fiche dans sa classe | ❌ | V1 (Lot D) — livrée 2026-09-27 (#33) | — |
-| CL-13 | Fiche d'un élève de sa classe | ❌ | V3 (`rapports-de-classe`) | — |
-| CL-14 | Tableau de bord générique d'une classe | ❌ | V3, fusionné avec CL-10 | Une classe ouverte à tout connecté ; 3 compteurs sur 4 toujours vides |
-| CL-15 | Liste paginée des élèves d'une classe | ⚠️ | V3 | Un cache de ligne jamais invalidé ; une liste ouverte à tout connecté |
+| CL-13 | Fiche d'un élève de sa classe | ❌ | V3 (`rapports-de-classe`) — PR `rapports-de-classe` prête le 2026-10-16, à fusionner | — |
+| CL-14 | Tableau de bord générique d'une classe | ❌ | V3, fusionné avec CL-10 — fermée par `rapports-de-classe` (memo Q7) : livrée par CL-10 (#33) et `rapports-exercices` (#164), sans chiffre de classe | Une classe ouverte à tout connecté ; 3 compteurs sur 4 toujours vides |
+| CL-15 | Liste paginée des élèves d'une classe | ⚠️ | V3 (`rapports-de-classe`) — PR `rapports-de-classe` prête le 2026-10-16, à fusionner : liste par note sur 20, puis par trente | Un cache de ligne jamais invalidé ; une liste ouverte à tout connecté |
 | CL-16 | Assigner ou retirer un cours | 💀 | V1 (Lot D) — livrée 2026-09-27 (#33) | Réassigner une ressource retirée lève `RecordNotUnique` au lieu de la réactiver |
 | CL-17 | Assigner ou retirer une fiche | 💀 | V1 (Lot D) — livrée 2026-09-27 (#33) | Idem |
 | CL-18 | Cours dans le contexte d'une classe (chemin générique) | ❌ | **écartée** : doublon de CL-11 | — |
@@ -619,11 +619,11 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | AS-18 | Assigner un exercice à une classe | ❌ | V1 (Lot D) (= CL-20) — livrée 2026-09-27 (#33) | Une réponse `204` qui laisse le bouton inchangé ; `assigned_by_id` qui reçoit un id de profil pour une clé vers `users` |
 | AS-19 | Retirer un exercice d'une classe | ⚠️ | V1 (Lot D) (= CL-20) — livrée 2026-09-27 (#33) | — |
 | AS-20 | Exercices d'un chapitre dans une classe | ❌ | V1 (Lot D) (= CL-12) — livrée 2026-09-27 (#33) | — |
-| AS-21 | Rapport de synthèse d'un exercice | ❌ | V3 (`rapports-de-classe`) | « Tentatives » qui compte des sessions ; des niveaux de badge affichés en anglais |
-| AS-22 | Rapport détaillé par question et par élève | ❌ | V3 | Un taux de réussite qui dépasse 100 % dès qu'un élève recommence ; des questions numérotées par `id` |
-| AS-23 | Message d'encouragement à l'enseignant | ❌ | V3 | 36 phrases en dur dans la vue |
-| AS-24 | Détail d'un élève | ⚠️ | V3 (= CL-13) | Un mur de badges qui mélange toutes les classes |
-| AS-25 | Compteurs de badges de la classe sur la carte | ⚠️ | V3 | Une requête par carte (N+1) |
+| AS-21 | Rapport de synthèse d'un exercice | ❌ | V3 (`rapports-de-classe`) — livrée 2026-10-07 (#164) par `rapports-exercices` | « Tentatives » qui compte des sessions ; des niveaux de badge affichés en anglais |
+| AS-22 | Rapport détaillé par question et par élève | ❌ | V3 — livrée en grande partie 2026-10-07 (#164) par `rapports-exercices` ; noms vers la fiche : PR `rapports-de-classe` prête le 2026-10-16, à fusionner | Un taux de réussite qui dépasse 100 % dès qu'un élève recommence ; des questions numérotées par `id` |
+| AS-23 | Message d'encouragement à l'enseignant | ❌ | V3 — « prochain geste » en six cas : PR `rapports-de-classe` prête le 2026-10-16, à fusionner | 36 phrases en dur dans la vue |
+| AS-24 | Détail d'un élève | ⚠️ | V3 (= CL-13) — PR `rapports-de-classe` prête le 2026-10-16, à fusionner | Un mur de badges qui mélange toutes les classes |
+| AS-25 | Compteurs de badges de la classe sur la carte | ⚠️ | V3 — livrée 2026-10-07 (#164) par `rapports-exercices` | Une requête par carte (N+1) |
 | AS-26 | Simuler les sessions des démos | 💀 | **écartée** — retirée du plan le 2026-09-22 | — |
 | AS-27 | Catalogue de sujets d'examen (élève) | ❌ | **écartée** — retirée du plan le 2026-09-22 | — |
 | AS-28 | Consulter un sujet (paywall) | ❌ | **écartée** — retirée du plan le 2026-09-22 | — |
@@ -648,7 +648,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | TR-02 | Redirection selon le rôle | ⚠️ | V1 (0b) (= ID-13) — livrée 2026-09-27 (#33) | La boucle infinie de l'enseignant sans école |
 | TR-03 | « Espace Etabl. » à 2 000 FCFA | ❌ | **écartée** — retirée du plan le 2026-09-22 | Un lien vers une route inexistante |
 | TR-04 | Fil d'accueil élève | ❌ | V1 (Lot A / D, F-31) — livrée 2026-09-27 (#33) · annonces en V6 | Un écran d'accueil sans test système (il levait une exception sans alerte) |
-| TR-05 | Fil d'accueil enseignant | ❌ | V1 (Lot D) — livrée 2026-09-27 (#33) · activité des élèves en V3 | Idem |
+| TR-05 | Fil d'accueil enseignant | ❌ | V1 (Lot D) — livrée 2026-09-27 (#33) · activité des élèves en V3 : livrée 2026-10-07 (#183) par `interface-enseignant-organisation` | Idem |
 | TR-06 | Gains « Prepa » en FCFA | 💀 | **écartée** — retirée du plan le 2026-09-22 | — |
 | TR-07 | `/teachers/dashboard` | 💀 | **écartée** : page d'échafaudage vide ; le tableau de bord de classe est livré en V3 | — |
 | TR-08 | `/teachers/setup` | 💀 | **écartée** : remplacée par un onboarding à état persisté (V1, Lot D) | — |
@@ -675,7 +675,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | TR-29 | Import des DRENA en arrière-plan | 💀 | **écartée** (= SC-02) | — |
 | TR-30 | Démos : générer et simuler | 💀 | **écartée** — retirée du plan le 2026-09-22 | — |
 | TR-31 | Purge horaire des jobs terminés | ⚠️ | V0 (F-30) — livrée 2026-09-25 (#6) | Un job récurrent qui dépend d'un worker jamais lancé |
-| TR-32 | Cache des agrégats et référentiels | ✅ | V0 (installation) — livrée 2026-09-25 (#6) · V3 (rapports) | Un cache actif en production seulement |
+| TR-32 | Cache des agrégats et référentiels | ✅ | V0 (installation) — livrée 2026-09-25 (#6) · V3 (rapports) : fermée sans cache, lecture en direct (ADR-0079 §4.6) | Un cache actif en production seulement |
 | TR-33 | Temps réel (Solid Cable) | 💀 | **écartée** — retirée du plan le 2026-09-22 | — |
 | TR-34 | Sonde de santé `/up` | ❌ | V0 (garde-fou n° 6) — livrée 2026-09-25 (#6) | — |
 | TR-35 | Refus des navigateurs anciens | ✅ | V0 (F-29) — livrée 2026-09-25 (#6) | Un 406 sur les Android d'entrée de gamme du public cible |

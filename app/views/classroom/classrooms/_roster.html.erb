@@ -79,9 +79,9 @@
             <% students.each_with_index do |student, index| %>
               <li id="student_<%= student.public_id %>" class="flex items-center gap-3 px-4 py-3">
                 <%# UDR-0108 §3.2 : la photo et le nom forment un seul lien vers la fiche ; après « Voir les suivants », le focus
-                    va au lien de la première ligne ajoutée (autofocus, honoré par Turbo au rendu du cadre). %>
-                <%= link_to classroom_student_path(classroom.public_id, student.public_id), data: { turbo_frame: "_top" },
-                            autofocus: (true if index == first_added),
+                    va au lien de la première ligne ajoutée, par le contrôleur autofocus (UDR-0054 §3.3 : jamais l'attribut). %>
+                <% focus = { controller: "autofocus", autofocus_target: "field" } if index == first_added %>
+                <%= link_to classroom_student_path(classroom.public_id, student.public_id), data: { turbo_frame: "_top", **focus.to_h },
                             class: "group flex min-w-0 flex-1 items-center gap-3 rounded-ln focus-visible:outline-2 focus-visible:outline-brand" do %>
                   <span aria-hidden="true" class="shrink-0">
                     <%= ui_avatar student.display_name, src: account_photo_src(student.public_id, student.photo_version), size: :sm %>

@@ -1,13 +1,13 @@
 # ADR-0097 : La fiche d'un élève se lit dans sa classe, en direct, sur les exercices assignés à cette classe
 <!-- index
 titre: Fiche d'un élève dans sa classe, liste par trente, prochain geste
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-16)*
 problematique: Fiche d'un élève (CL-13, AS-24) lue dans une classe, sous ReadClassroomPolicy (show_roster), élève présent seulement (404 sinon) : exercices assignés à la classe avec fait, retard, meilleur score, catégorie et signe de l'ADR-0079, badges d'après ces meilleurs scores, « fait seul » sur 30 jours ; requêtes en nombre fixe, aucun cache. Liste des élèves de la page classe par trente (cumulatif, `page`). Règle « prochain geste » en six cas sur la page de suivi (AS-23)
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16 : recommandations du memo, Q5 amendée) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/rapports-de-classe`](../../chantiers/rapports-de-classe/memo.md) |
 | **S'appuie sur** | [ADR-0079](0079-lecture-de-la-comprehension-d-un-exercice-assigne.md) (catégorie, signe, sessions de l'assignation), [ADR-0072](0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) §4.4 (fait, retard, présent), [ADR-0089](0089-exercice-du-jour-calcule-a-la-lecture-et-fait-seul-deduit.md) §4.2 (« fait seul »), [ADR-0033](0033-bareme-des-badges-et-seuils-pedagogiques.md) (seuils, badges), [ADR-0067](0067-budgets-de-temps-serveur-des-ecrans.md) (budgets) |

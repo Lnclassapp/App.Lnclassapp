@@ -268,8 +268,8 @@ Scénario: les lectures existantes ne bougent pas
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
 | Page de la classe, 55 élèves et 7 exercices (jeu ADR-0067) : HTML | 231,6 Ko (`rapports-exercices`) ; 402,2 Ko re-mesurés au Lot 0 | < 150 Ko | 114,2 Ko (journal) |
-| Page de la classe : p95 serveur | 153,4 ms ; à re-mesurer au Lot B | < 100 ms visé ; au moins pas pire | |
-| Fiche d'un élève, 10 exercices assignés : p95 / HTML | — | < 100 ms / < 150 Ko | |
-| Requêtes SQL de la fiche à 1 et à 10 exercices | — | même nombre | |
-| Page de suivi : p95 / HTML | 78,9 ms / 39,0 Ko | < 100 ms / < 150 Ko | |
-| Téléphone 390 px : fiche, page de la classe, suivi | — | aucun défilement horizontal | |
+| Page de la classe : p95 serveur | 153,4 ms ; 138,6 ms au Lot 0 | < 100 ms visé ; au moins pas pire | 151,8 ms sur machine chargée (charge ≈ 16) : à re-mesurer au calme ; vue p50 de 54,3 à 28,5 ms |
+| Fiche d'un élève, 10 exercices assignés : p95 / HTML | — | < 100 ms / < 150 Ko | 49,0 ms / 55,4 Ko (8 exercices actifs, journal) |
+| Requêtes SQL de la fiche à 1 et à 10 exercices | — | même nombre | même nombre (`student_file_query_test.rb`) |
+| Page de suivi : p95 / HTML | 78,9 ms / 39,0 Ko | < 100 ms / < 150 Ko | 60,5 Ko ; p95 non lisible (charge ≈ 30), 54,4 ms au Lot 0 |
+| Téléphone 390 px : fiche, page de la classe, suivi | — | aucun défilement horizontal | aucun (tests système et captures) |

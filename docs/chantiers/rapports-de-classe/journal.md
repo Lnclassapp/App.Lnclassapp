@@ -14,7 +14,7 @@
 | 2026-10-16 | **Lot B, Q5 amendée par le porteur** : la liste des élèves se découpe **par note sur 20** (0–10, 11–15, 16–20, « Pas encore de note »), note = moyenne des meilleurs scores aux exercices assignés actifs de la classe, `Grading.grade_on_20` ; sélecteur à liens (`?note=0-10`), premier groupe non vide par défaut ; trente puis « Voir les suivants » dans un groupe ; recherche sur toute la classe. Règle `Entities::Classroom::RosterGrade` ; notes lues en une requête | Décision du porteur du 2026-10-16 | UDR-0108 §3.8, ADR-0097 §4.7 (amendements), PRD |
 | 2026-10-16 | Lot B : une colonne « Note » (12/20) sur chaque ligne de la liste | Le groupe ne dit qu'un intervalle ; la note de l'élève dit où il en est | UDR-0108 §3.8 |
 | 2026-10-16 | Lot B : la phrase d'aide du code de récupération quitte la liste (elle est sur la fiche) | L'action n'est plus sur la liste | Non |
-| 2026-10-16 | Lot B : les clés du menu ⋮ et de la fenêtre de retrait de la liste sont supprimées (`actions_label`, `issue_code`, `issue_code_hint`, `remove*`, `cancel`), avec `open_file`, jamais lue ; `removed` (toast) reste | Plus rien ne les lit ; l'Intégration n'a plus à le faire | UDR-0108 §3.7 |
+| 2026-10-16 | Lot B : les clés de la liste que plus rien ne lit sont supprimées (`issue_code`, `issue_code_hint`, `open_file`) ; celles du menu ⋮ et de la confirmation restent pour la page de la direction (correction à la clôture) | Plus rien ne les lit ; l'Intégration n'a plus à le faire | UDR-0108 §3.7 |
 | 2026-10-16 | Lot 0 : deux contrats de plus que le plan, gelés au socle parce que la fiche les lit — `AssignmentScores.for(student_id:)` (scores d'un seul élève, même définition) et `ClassroomOverviewQuery.self_practice(today, days:)` (la fiche lit 30 jours, la liste 7, une seule définition) | Ne rien réinventer (ADR-0097 §2.3) : la fiche réutilise les définitions au lieu de les recopier | Non |
 | 2026-10-16 | Lot A : la phrase d'aide du code de récupération (« Un élève qui a perdu son code secret… ») suit l'action sur la fiche, en tête de « Gérer » ; l'UDR-0107 §3.6 ne la mentionnait pas | Elle explique une action qui quitte la liste (Q4) | Non |
 | 2026-10-16 | Lot A : « Fait le » d'un exercice fait est la date de la **première** session faite (`first_done`), comme le retard ; le score affiché est le meilleur | Une seule définition de la date, celle du suivi (ADR-0072 §4.4) | Non |
@@ -44,6 +44,9 @@ Le nombre de requêtes SQL de la fiche ne dépend pas du nombre d'assignations :
 
 Lot C : la page de suivi passe de 52,6 à 60,5 Ko (noms en liens, prochain geste), le cadre « Fragile » de 21,9 à 28,7 Ko, au même nombre de requêtes (19 et 15). Les temps de cette mesure (charge ≈ 30 pour 4 cœurs) ne sont pas lisibles : suivi p50 116,5 / p95 184,0 ms, cadre 64,4 / 87,7 ms, et la page de la classe, inchangée par le lot, mesurée en même temps à 102,6 / 178,2 ms contre 80,0 / 151,8 au Lot B.
 
+- **Clôture — deux régressions du Lot B trouvées par `bin/ci-quiet`.** (1) Six clés du menu ⋮ supprimées de `classroom.classrooms.roster` sont encore lues par la page de la classe de la direction (`school_admin/classrooms/show.html.erb`, par `t("#{roster}.…")`, que la recherche des clés n'avait pas vue) : `actions_label`, `remove`, `remove_title`, `remove_warning`, `remove_confirm`, `cancel` sont rendues ; seules `issue_code`, `issue_code_hint` et `open_file` restent supprimées. (2) L'attribut `autofocus` sur la première ligne ajoutée est refusé par `page_titles_test` (UDR-0054 §3.3) : il est remplacé par le contrôleur `autofocus` existant, comme le titre de la liste après un retrait ; UDR-0108 §3.3 corrigée.
+- **Clôture — CI sur une machine saturée** (charge de 30 à 104 pour 4 cœurs) : deux lancements de `bin/ci-quiet` arrêtés, tests système en « tab crashed ». Hors du chantier : `image_header_test` (test de durée, 1,9 s pour 0,5 s sous charge) et l'avis Yarn 1240992 dont la date de réexamen (2026-10-17) est passée, rouge aussi sur `Develop` (chantier `audit-yarn-braces`).
+
 ## Ce qu'on a appris sur la codebase
 
 - `script/ci/record_timings` ne lit pas la durée du premier test système d'un lancement : la bannière de Puma s'imprime sur la même ligne que son nom. Durée du nouveau `student_file_test.rb` (4,2 s) inscrite à la main.
@@ -66,7 +69,7 @@ Lot C : la page de suivi passe de 52,6 à 60,5 Ko (noms en liens, prochain geste
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | ADR-0097 (Proposé) |
-| **UDR produits** | UDR-0107, UDR-0108, UDR-0109 (Proposé) |
+| **Livré le** | 2026-10-16 (PR prête vers `Develop`, non fusionnée) |
+| **PR** | `feature/rapports-de-classe` → `Develop` |
+| **ADR produits** | ADR-0097 (Accepté) |
+| **UDR produits** | UDR-0107, UDR-0108 (amendée : groupes de note), UDR-0109 (Accepté) |

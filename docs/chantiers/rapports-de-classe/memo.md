@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage (questions au porteur ouvertes) |
+| **Statut** | livré en PR (2026-10-16), à fusionner |
 | **Ouvert le** | 2026-10-16 |
 | **Branche** | `docs/cadrage-rapports-de-classe` (cadrage, docs seules) ; le code passera par `feature/rapports-de-classe` et une PR |
 | **Programme** | `refonte-application`, vague V3 ([feuille de route §5](../refonte-application/feuille-de-route.md#v3--suivi-pédagogique-enseignant)), premier chantier de la vague ; la V5 (AS-17) en dépend |

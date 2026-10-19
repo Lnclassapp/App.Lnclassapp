@@ -582,8 +582,8 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_roster_count", text: I18n.t("#{scope}.roster.count", count: 31)
     assert_select "#classroom_roster_more", 0
     # UDR-0108 §3.3 : le focus va au lien de la première ligne ajoutée.
-    assert_select "#student_#{students.last.public_id} a[autofocus]", 1
-    assert_select "#classroom_roster_list a[autofocus]", 1
+    assert_select "#student_#{students.last.public_id} a[data-controller=autofocus][data-autofocus-target=field]", 1
+    assert_select "#classroom_roster_list [data-controller=autofocus]", 1
   end
 
   test "CL-15 : « Voir les suivants » garde la recherche ; le formulaire de recherche ne transmet pas la page" do
@@ -641,7 +641,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
       assert_response :success
       assert_select "#classroom_roster_list li[id^=student_]", 30, page
-      assert_select "#classroom_roster_list a[autofocus]", 0
+      assert_select "#classroom_roster_list [data-controller=autofocus]", 0
     end
   end
 

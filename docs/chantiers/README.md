@@ -128,6 +128,7 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`inscription-eleve-sans-code`](inscription-eleve-sans-code/prd.md) | livré (PR vers `Develop`) | L'élève s'inscrit sans code de classe : par la cascade DRENA → établissement → niveau → classe, ou par le lien `/c/<jeton>` de sa classe ; nouveaux arrivés marqués, retrait d'un élève par quiconque gère la classe ; le code de classe et `/join` sont retirés (ADR-0085, UDR-0081) |
 | [`import-second-cycle-force`](import-second-cycle-force/memo.md) | livré sur `Develop` (2026-10-10) ; réparation `bin/rails schools:grant_second_cycle` à lancer sur Develop | Tout établissement importé reçoit la 6ème à la Tle, quel que soit son nom ; réparation unique des établissements importés au premier cycle seul (ADR-0087) |
 | [`archivage-classes`](archivage-classes/memo.md) | livré sur `Develop` (2026-10-10) ; challenger : 7/7 après correctifs | La direction et l'équipe archivent et restaurent une classe ou un niveau depuis le menu ⋮, même peuplé, après confirmation ; archivée visible 7 jours puis masquée ; plus de page ni d'inscription pour une classe archivée (ADR-0088, UDR-0083) |
+| [`rapports-de-classe`](rapports-de-classe/memo.md) | livré (PR vers `Develop`, 2026-10-16) | V3 : la fiche d'un élève dans sa classe (exercices assignés, badges de la classe, « fait seul »), la liste des élèves par note sur 20 (0–10, 11–15, 16–20, « Pas encore de note »), les noms du suivi en liens vers la fiche et un « prochain geste » en six cas (ADR-0097, UDR-0107 à UDR-0109) |
 
 ## Backlog
 

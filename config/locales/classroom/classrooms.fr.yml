@@ -65,7 +65,9 @@ fr:
         self_practice_line: "Fait seul : %{count} cette semaine"
         # UDR-0079 §3.8 ter (memo Q23) : le numéro d'un élève est masqué pour tout lecteur de la classe.
         contact_masked: "Numéro masqué pour protéger les élèves"
-        # ADR-0085 §4.4, §4.5, UDR-0081 §3.7 : nouveaux arrivés (7 jours), voie d'arrivée ; toast du retrait, lancé depuis la fiche (UDR-0108).
+        # ADR-0085 §4.4, §4.5, UDR-0081 §3.7 : nouveaux arrivés (7 jours), voie d'arrivée, retrait d'un élève. La liste de
+        # l'enseignant n'a plus de menu ⋮ (UDR-0108) ; le menu et la confirmation restent lus par la page de la classe de la
+        # direction (school_admin/classrooms/show).
         new: "Nouveau"
         new_count:
           one: "%{count} nouveau"
@@ -73,6 +75,12 @@ fr:
         via:
           standard: "Inscrit seul"
           link: "Par le lien"
+        actions_label: "Actions pour %{name}"
+        remove: "Retirer de la classe"
+        remove_title: "Retirer %{name} de la classe ?"
+        remove_warning: "%{name} quittera cette classe. Son compte et son travail sont gardés. Il pourra revenir avec le lien de la classe."
+        remove_confirm: "Retirer"
+        cancel: "Annuler"
         removed: "%{name} a été retiré de la classe."
         empty_title: "Aucun élève inscrit"
         empty_description: "Partagez le lien de la classe : les premiers inscrits apparaîtront ici."

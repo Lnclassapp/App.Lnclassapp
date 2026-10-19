@@ -1,14 +1,14 @@
 # UDR-0109 : Page de suivi d'un exercice assigné — les noms mènent à la fiche, une phrase « prochain geste » en tête de la compréhension
 <!-- index
 titre: Suivi : noms en liens, prochain geste
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-16)*
 adr-lie: [0097](../adr/0097-fiche-d-un-eleve-dans-sa-classe.md)
 problematique: Page de suivi, enseignant et équipe : chaque nom (élèves d'une catégorie, rendus en retard, pas encore faits) devient un lien vers la fiche de l'élève (UDR-0107), hors du Turbo Frame des catégories ; une phrase « Prochain geste » choisie par Entities::Assessment::NextStep remplace l'avertissement « pas encore fiable » dans la carte du grand cercle. Amende UDR-0072 §3.5 et §3.5 bis (identifiants d'élève dans le HTML)
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16 : recommandations du memo, Q5 amendée) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/rapports-de-classe`](../../chantiers/rapports-de-classe/prd.md) |
 | **ADR lié** | [ADR-0097](../adr/0097-fiche-d-un-eleve-dans-sa-classe.md) §4.6 (règle du prochain geste), §4.9 (identifiants) · [ADR-0079](../adr/0079-lecture-de-la-comprehension-d-un-exercice-assigne.md) |
