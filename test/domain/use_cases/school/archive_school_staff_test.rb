@@ -68,12 +68,12 @@ module UseCases
         @sessions = FakeSessions.new([ 2, 2, 1, 3 ])
         @audit = FakeAuditLog.new
         @transaction = FakeTransaction.new
-        @kofi = Entities::Identity::Actor.new(user_id: 1, role: :school_admin, school_id: SCHOOL_A)
+        @kofi = Entities::Identity::Actor.new(user_id: 1, role: :school_admin, school_id: SCHOOL_A, staff_position: "head")
       end
 
       def staff(user_id, public_id: "u#{user_id}", school_id: SCHOOL_A, days: 10, archived_at: nil, joined_via: "code")
         Entities::School::Staff.new(user_id:, user_public_id: public_id, school_id:, joined_via:, joined_at: NOW - (days * DAY),
-                                    archived_at:, archived_by_id: archived_at && 99)
+                                    archived_at:, archived_by_id: archived_at && 99, position: "deputy")
       end
 
       def user(id, first_name, last_name) = Entities::Identity::User.new(id:, public_id: "u#{id}", role: "school_admin", first_name:, last_name:)
@@ -109,7 +109,7 @@ module UseCases
       end
 
       test "ID-13 : un nouvel arrivant est refusé, rien n'est écrit" do
-        aya = Entities::Identity::Actor.new(user_id: 2, role: :school_admin, school_id: SCHOOL_A)
+        aya = Entities::Identity::Actor.new(user_id: 2, role: :school_admin, school_id: SCHOOL_A, staff_position: "head")
 
         assert_equal :forbidden, archive(target_public_id: "u1", actor: aya).code
         assert_not row(1).archived?

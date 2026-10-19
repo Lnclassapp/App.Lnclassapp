@@ -2,8 +2,9 @@ require "test_helper"
 
 module UseCases
   module Identity
-    # DS-01, DS-02, ADR-0065: the team invites the management of an active school; no position, one pending invitation
-    # per number, the clear token leaves once.
+    # DS-01, DS-02, ADR-0065: the team invites the management of an active school; one pending invitation per number, the
+    # clear token leaves once. ED-14, ED-15 (ADR-0092): the invitation carries the position chosen by the team; a second
+    # head of school is refused before any write.
     class InviteSchoolStaffTest < ActiveSupport::TestCase
       NOW = Time.utc(2026, 9, 29, 12)
       KEY = "k" * 32
@@ -34,7 +35,8 @@ module UseCases
           return Shared::Result.failure(:conflict, errors: { contact: [ :already_invited ] }) if @pending.key?(contact)
 
           @created << { kind:, contact:, team_role:, invited_by_id:, token_digest:, expires_at:, school_id:, position: }
-          Shared::Result.success(Entities::Identity::Invitation.new(id: 31, kind:, contact:, school_id:, invited_by_id:, expires_at:))
+          Shared::Result.success(Entities::Identity::Invitation.new(id: 31, kind:, contact:, school_id:, invited_by_id:, expires_at:,
+                                                                    position:))
         end
       end
 
@@ -62,6 +64,14 @@ module UseCases
         def find_by_public_id(public_id:) = @schools.find { it.public_id == public_id }
       end
 
+      # Ports::School::StaffRepositoryPort#head_taken?: `heads` are the schools whose head is active.
+      class FakeStaffs
+        include Ports::School::StaffRepositoryPort
+
+        def initialize(heads) = @heads = heads
+        def head_taken?(school_id:, except_user_id: nil) = @heads.include?(school_id)
+      end
+
       class FakeAudit
         include Ports::Identity::AuditLogPort
 
@@ -75,17 +85,18 @@ module UseCases
                                      cycle: "both", status:)
       end
 
-      def invite(contact: "07 00 00 00 09", school_public_id: "bouake", actor: FIELD, schools: [ school ], pending: {}, accounts: [])
+      def invite(contact: "07 00 00 00 09", school_public_id: "bouake", actor: FIELD, schools: [ school ], pending: {}, accounts: [],
+                 position: "educator", heads: [])
         @invitations = FakeInvitations.new(pending:)
         @audit = FakeAudit.new
         @transaction = FakeTransaction.new
         InviteSchoolStaff.new(invitations: @invitations, users: FakeUsers.new(contacts: accounts), schools: FakeSchools.new(schools),
-                              audit_log: @audit, transaction: @transaction, policy: Policies::Identity::InviteSchoolStaffPolicy.new,
-                              digest_key: KEY, clock: Clock.new(NOW))
-                         .call(actor:, dto: Dtos::Identity::SchoolStaffInvitationInput.new(contact:, school_public_id:))
+                              staffs: FakeStaffs.new(heads), audit_log: @audit, transaction: @transaction,
+                              policy: Policies::Identity::InviteSchoolStaffPolicy.new, digest_key: KEY, clock: Clock.new(NOW))
+                         .call(actor:, dto: Dtos::Identity::SchoolStaffInvitationInput.new(contact:, school_public_id:, position:))
       end
 
-      test "DS-01: a management invitation for this school, without position, 72 h, audited, the clear token returned once" do
+      test "DS-01, ED-14: a management invitation for this school, with its position, 72 h, audited, the clear token returned once" do
         result = invite
 
         assert result.success?
@@ -93,11 +104,11 @@ module UseCases
         assert_match(/\A[1-9A-HJ-NP-Za-km-z]{32}\z/, token)
         assert_equal [ { kind: "school_staff", contact: "0700000009", team_role: nil, invited_by_id: 7,
                          token_digest: Entities::Identity::SecretDigest.hmac(token, key: KEY), expires_at: NOW + 72.hours,
-                         school_id: 2, position: nil } ], @invitations.created
+                         school_id: 2, position: "educator" } ], @invitations.created
         assert_equal 31, result.value.invitation.id
         assert_equal 1, @transaction.calls
         assert_equal [ { action: "invitation.sent", actor_id: 7, at: NOW, subject_type: "Invitation", subject_id: 31,
-                         metadata: { kind: "school_staff", school_id: 2 } } ], @audit.events
+                         metadata: { kind: "school_staff", school_id: 2, position: "educator" } } ], @audit.events
       end
 
       test "DS-02: an inactive or draft school is invalid on the school, before any write" do
@@ -109,6 +120,27 @@ module UseCases
           assert_empty @invitations.created
           assert_equal 0, @transaction.calls
         end
+      end
+
+      test "ED-14: the position is required, one of the four" do
+        [ nil, "", "principal" ].each do |position|
+          result = invite(position:)
+
+          assert_equal :invalid, result.code, position.inspect
+          assert_equal [ :position ], result.errors.keys, position.inspect
+        end
+        assert_empty @invitations.created
+      end
+
+      test "ED-15: a head of school is refused while another head is active, before any write" do
+        result = invite(position: "head", heads: [ 2 ])
+
+        assert_equal :conflict, result.code
+        assert_equal({ position: [ :head_taken ] }, result.errors)
+        assert_empty @invitations.created
+        assert_equal 0, @transaction.calls
+        assert invite(position: "head", heads: [ 99 ]).success?, "the head of another school does not count"
+        assert invite(position: "deputy", heads: [ 2 ]).success?, "another position passes"
       end
 
       test "an unknown school is not found" do

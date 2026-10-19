@@ -1,6 +1,6 @@
-<%# 🌐 UI · shared/navigation/_header — en-tête du shell : élève (logo, aide, thème, menu de l'avatar) ; enseignant (avatar, aide, thème) ; sinon logo, rôle, menu du compte %>
-<%# Rôle : filet de couleur du rôle en haut ; la direction et l'équipe gardent l'en-tête d'origine %>
-<%# UDR  : 0006, 0065 (interrupteur à côté de l'avatar, lg+), 0061 (entrées de page :account_menu), 0080 §3.1, 0082 §3.1, 0084 §3.1 %>
+<%# 🌐 UI · shared/navigation/_header — en-tête du shell : élève (logo, aide, thème, menu de l'avatar) ; enseignant (avatar, aide, thème) ; sinon logo, rôle, (aide de la direction), menu du compte %>
+<%# Rôle : filet de couleur du rôle en haut ; la direction et l'équipe gardent l'en-tête d'origine, la direction y gagne « Besoin d'aide ? » %>
+<%# UDR  : 0006, 0065 (interrupteur à côté de l'avatar, lg+), 0061 (entrées de page :account_menu), 0080 §3.1, 0082 §3.1, 0084 §3.1, 0128 %>
 <header class="sticky top-0 z-40 h-bar border-b border-line bg-paper/90 backdrop-blur">
   <div class="absolute inset-x-0 top-0 h-1 <%= role_accent(user.role) %>" aria-hidden="true"></div>
   <% if user.role.to_sym == :student %>
@@ -12,7 +12,7 @@
         <span class="font-display text-xl font-extrabold tracking-tight">Lnclass</span>
       <% end %>
       <div class="flex items-center gap-1">
-        <%= render "shared/help_sheet", trigger_icon: "headset",
+        <%= render "shared/help_sheet", trigger_icon: "headset", user:,
                                         trigger_class: "hidden! min-[700px]:inline-flex! font-bold! text-brand-strong!" %>
         <%= render "shared/theme_switch", variant: :icon, wrapper: nil %>
         <%= render "shared/navigation/avatar_menu", user: %>
@@ -23,7 +23,7 @@
     <div class="flex h-full items-center justify-between gap-3 px-gutter lg:px-8">
       <%= render "shared/navigation/account_panel", user: %>
       <div class="flex items-center gap-1">
-        <%= render "shared/help_sheet", trigger_class: nil %>
+        <%= render "shared/help_sheet", trigger_class: nil, user: %>
         <%= render "shared/theme_switch", variant: :icon, wrapper: nil %>
       </div>
     </div>
@@ -36,6 +36,8 @@
       <% end %>
       <div class="flex items-center gap-3">
         <span class="hidden sm:inline-flex"><%= ui_role_badge user.role %></span>
+        <%# UDR-0128 §3.4 : la direction écrit au support, avec son message prêt ; l'équipe, c'est le support. %>
+        <%= render "shared/help_sheet", trigger_class: nil, user: user if user.role.to_sym == :school_admin %>
         <%= render "shared/theme_switch", variant: :icon, wrapper: "max-lg:hidden" %>
         <%= ui_dropdown label: t(".account"), id: "account-menu",
               trigger: safe_join([ ui_avatar(user.name, src: user.avatar_url, size: :sm), tag.span(user.name, class: "hidden text-sm font-medium md:inline") ]) do %>

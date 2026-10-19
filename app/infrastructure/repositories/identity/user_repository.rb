@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Identity::UserRepository
 # Rôle : lit et modifie les comptes, vérifie le PIN par bcrypt en temps constant, construit l'acteur, anonymise un compte
-# ADR  : 0026, 0028, 0036, 0050, 0055, 0065, 0077, 0082, 0084, 0094, 0096
+# ADR  : 0026, 0028, 0036, 0050, 0055, 0065, 0077, 0082, 0084, 0092, 0094, 0096
 module Repositories
   module Identity
     class UserRepository
@@ -59,19 +59,19 @@ module Repositories
         user = Orm::User.find(user_id)
         return if user.anonymized_at
 
-        Entities::Identity::Actor.new(user_id:, role: user.role.to_sym, team_role: user.team_role,
-                                      school_id: school_id_of(user, current_school_id))
+        school_id, staff_position = school_of(user, current_school_id)
+        Entities::Identity::Actor.new(user_id:, role: user.role.to_sym, team_role: user.team_role, school_id:, staff_position:)
       end
 
       private
 
-      # Le rattachement actif d'une direction (ADR-0065) : archivée, elle n'en a aucun et une session survivante la mène
-      # à l'écran d'attente (ADR-0077 §4.2). L'établissement courant d'un enseignant s'il y est encore rattaché, sinon
-      # son principal, en une requête (ADR-0094 §4.2) : une session vers un établissement quitté retombe sur le principal.
-      def school_id_of(user, current_school_id)
-        return Orm::SchoolStaff.active.where(user_id: user.id).pick(:school_id) if user.role == "school_admin"
+      # Le rattachement actif d'une direction (ADR-0065) et sa fonction (ADR-0092), en une requête : archivée, elle n'en a
+      # aucun et une session survivante la mène à l'écran d'attente (ADR-0077 §4.2). L'établissement courant d'un enseignant
+      # s'il y est encore rattaché, sinon son principal, en une requête (ADR-0094 §4.2). → [school_id, staff_position]
+      def school_of(user, current_school_id)
+        return Orm::SchoolStaff.active.where(user_id: user.id).pick(:school_id, :position) || [] if user.role == "school_admin"
 
-        Orm::TeacherSchool.where(teacher_id: user.id).current_or_primary(current_school_id).pick(:school_id)
+        [ Orm::TeacherSchool.where(teacher_id: user.id).current_or_primary(current_school_id).pick(:school_id), nil ]
       end
 
       def archived_school_admin?(user)

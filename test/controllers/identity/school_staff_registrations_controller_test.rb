@@ -2,6 +2,7 @@ require "test_helper"
 
 # ID-01 to ID-06 (ADR-0077, UDR-0070 §3.1): a visitor registers as the direction of an active school with its code; the
 # role is always school_admin; at most 3 active directions by the code; the new direction lands on « Travail des élèves ».
+# ED-10 to ED-12 (ADR-0092, UDR-0092 §3.1): « Votre fonction », four radios, none checked, required; one active head.
 class Identity::SchoolStaffRegistrationsControllerTest < ActionDispatch::IntegrationTest
   ERRORS = "activemodel.errors.models.dtos/identity/school_staff_registration_input.attributes".freeze
   PAGE = "identity.school_staff_registrations.new".freeze
@@ -27,6 +28,10 @@ class Identity::SchoolStaffRegistrationsControllerTest < ActionDispatch::Integra
       assert_select "input[type=password][name='school_staff_registration[pin]'][inputmode=numeric][maxlength='4']"
       assert_select "input[type=password][name='school_staff_registration[pin_confirmation]']"
       assert_select "fieldset > legend", text: I18n.t("#{FORM}.school")
+      assert_select "fieldset#school_staff_registration_position > legend", text: /#{I18n.t("#{FORM}.position")}/
+      assert_select "input[type=radio][name='school_staff_registration[position]'][required]", count: 4
+      assert_select "input[type=radio][name='school_staff_registration[position]'][checked]", 0
+      assert_select "fieldset#school_staff_registration_position label", text: I18n.t("shared.staff_positions.deputy_any")
       assert_select "button[type=submit][data-turbo-submits-with='#{I18n.t("#{FORM}.submitting")}']", text: I18n.t("#{FORM}.submit")
     end
     assert_select "[name*=material], [name*=role]", 0
@@ -51,13 +56,13 @@ class Identity::SchoolStaffRegistrationsControllerTest < ActionDispatch::Integra
     admin = Orm::User.find_by!(contact: "0701020304")
     assert_equal [ "school_admin", nil, "Kouassi", "Aya Marie", "female" ],
                  [ admin.role, admin.team_role, admin.last_name, admin.first_name, admin.gender ]
-    assert_equal [ [ @school.id, "code", nil, nil ] ],
-                 Orm::SchoolStaff.where(user: admin).pluck(:school_id, :joined_via, :archived_at, :invited_by_id)
+    assert_equal [ [ @school.id, "code", nil, nil, "secretary" ] ],
+                 Orm::SchoolStaff.where(user: admin).pluck(:school_id, :joined_via, :archived_at, :invited_by_id, :position)
     assert Orm::User.authenticate_by(contact: "0701020304", pin: "4821")
     assert_equal 1, Orm::Session.where(user: admin).count
     assert cookies[:session_token].present?
     event = Orm::AuditEvent.find_by!(action: "school_staff.registered")
-    assert_equal [ admin.id, "User", admin.id, { "school_id" => @school.id, "joined_via" => "code" } ],
+    assert_equal [ admin.id, "User", admin.id, { "school_id" => @school.id, "joined_via" => "code", "position" => "secretary" } ],
                  [ event.actor_id, event.subject_type, event.subject_id, event.metadata ]
 
     follow_redirect!
@@ -130,6 +135,34 @@ class Identity::SchoolStaffRegistrationsControllerTest < ActionDispatch::Integra
     assert_not Orm::SchoolStaff.exists?(school: @school)
   end
 
+  test "ED-10: without a position, or with a forged one, 422 under the group, no account" do
+    [ nil, "principal" ].each do |position|
+      post school_staff_registrations_path, params: { school_staff_registration: registration_params(position:) }
+
+      assert_refused :position, I18n.t("#{ERRORS}.position.blank")
+      assert_select "fieldset#school_staff_registration_position[aria-describedby=school_staff_registration_position_error]"
+    end
+  end
+
+  test "ED-12: a second head of school is refused in 422 under the group, without the head's name, the choice kept" do
+    create_school_admin(school: @school, position: "head", first_name: "Jean-Baptiste", last_name: "Kouamé")
+
+    post school_staff_registrations_path, params: { school_staff_registration: registration_params(position: "head") }
+
+    assert_refused :position, I18n.t("#{ERRORS}.position.head_taken")
+    assert_select "input[name='school_staff_registration[position]'][value=head][checked]"
+    assert_no_match(/Kouamé/, response.body)
+  end
+
+  test "ED-11: an educator registers while the head is active" do
+    create_school_admin(school: @school, position: "head")
+
+    post school_staff_registrations_path, params: { school_staff_registration: registration_params(position: "educator") }
+
+    assert_redirected_to school_admin_classrooms_path
+    assert_equal "educator", Orm::SchoolStaff.joins(:user).where(users: { contact: "0701020304" }).pick(:position)
+  end
+
   test "an error keeps the entries as typed, not the PINs" do
     post school_staff_registrations_path,
          params: { school_staff_registration: registration_params(school_code: "k7m 4qz", pin_confirmation: "1357") }
@@ -154,7 +187,7 @@ class Identity::SchoolStaffRegistrationsControllerTest < ActionDispatch::Integra
 
   def registration_params(**overrides)
     { last_name: "Kouassi", first_name: "Aya Marie", gender: "female", contact: "07 01 02 03 04", pin: "4821",
-      pin_confirmation: "4821", school_code: "K7M-4QZ", **overrides }
+      pin_confirmation: "4821", school_code: "K7M-4QZ", position: "secretary", **overrides }
   end
 
   def assert_refused(attribute, message)

@@ -66,10 +66,11 @@ tle = Orm::Level.find_by!(slug: "tle")
 series_d = Orm::Series.find_by!(slug: "d")
 classroom = Orm::Classroom.find_by!(school:, level: tle, series: series_d, name: "Tle D 1")
 
-# 2. La direction : le directeur et un second compte de direction (3 au plus par établissement, ADR-0077).
-[ [ "0710000001", "Kouamé", "Jean-Baptiste", "male" ], [ "0710000002", "Diabaté", "Aminata", "female" ] ].each do |contact, last_name, first_name, gender|
+# 2. La direction : le chef d'établissement et une secrétaire (3 au plus par le code, ADR-0077 ; fonctions, ADR-0092).
+[ [ "0710000001", "Kouamé", "Jean-Baptiste", "male", "head" ],
+  [ "0710000002", "Diabaté", "Aminata", "female", "secretary" ] ].each do |contact, last_name, first_name, gender, position|
   user = account.call(contact, role: "school_admin", last_name:, first_name:, gender:)
-  Orm::SchoolStaff.create!(user:, school:, joined_via: "invitation", created_at: clock.now) unless Orm::SchoolStaff.exists?(user:)
+  Orm::SchoolStaff.create!(user:, school:, position:, joined_via: "invitation", created_at: clock.now) unless Orm::SchoolStaff.exists?(user:)
 end
 users = Repositories::Identity::UserRepository.new
 

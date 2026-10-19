@@ -385,7 +385,7 @@ module PerfDataset
   # La direction de l'établissement focus (ADR-0065).
   def seed_admin(focus)
     id = insert(Orm::User, [ user_row(contact: ADMIN_CONTACT, role: "school_admin", created_at: days_ago(30)) ], returning: %w[id]).first
-    insert(Orm::SchoolStaff, [ { user_id: id, school_id: focus.id, created_at: now } ])
+    insert(Orm::SchoolStaff, [ { user_id: id, school_id: focus.id, position: "head", created_at: now } ])
     log "direction #{ADMIN_CONTACT} de « #{focus.name} »"
   end
 

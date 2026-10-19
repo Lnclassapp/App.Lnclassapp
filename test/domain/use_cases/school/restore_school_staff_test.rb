@@ -17,9 +17,11 @@ module UseCases
         attr_reader :rows, :caps
 
         # by_code_active : the active arrivals by the code the repository counts, besides the rows.
-        def initialize(*rows, by_code_active: 0)
+        # head_active : un chef d'établissement actif, autre que la cible (ADR-0092 §4.3).
+        def initialize(*rows, by_code_active: 0, head_active: false)
           @rows = rows
           @by_code_active = by_code_active
+          @head_active = head_active
           @caps = []
         end
 
@@ -30,6 +32,7 @@ module UseCases
           row = @rows.find { it.user_id == user_id }
           return :not_archived unless row&.archived?
           return :cap_reached if row.by_code? && @by_code_active >= cap
+          return :head_taken if row.head? && @head_active
 
           @rows[@rows.index(row)] = row.with(archived_at: nil, archived_by_id: nil)
           :restored
@@ -58,7 +61,7 @@ module UseCases
 
       def staff(user_id, public_id: "u#{user_id}", archived_at: nil, joined_via: "code")
         Entities::School::Staff.new(user_id:, user_public_id: public_id, school_id: SCHOOL_A, joined_via:, joined_at: NOW - (20 * DAY),
-                                    archived_at:, archived_by_id: archived_at && 99)
+                                    archived_at:, archived_by_id: archived_at && 99, position: "deputy")
       end
 
       def user(id, first_name, last_name) = Entities::Identity::User.new(id:, public_id: "u#{id}", role: "school_admin", first_name:, last_name:)
@@ -82,6 +85,17 @@ module UseCases
         assert_equal 1, @transaction.calls
         assert_equal [ { action: "school_staff.restored", actor_id: 50, at: NOW, subject_type: "User", subject_id: 2,
                          metadata: { school_id: SCHOOL_A, joined_via: "code" } } ], @audit.events
+      end
+
+      test "ED-25 : l'ancien chef ne se restaure pas tant qu'un autre chef est actif ; 409 head_taken, rien n'est écrit" do
+        former = staff(2, public_id: "aya", archived_at: NOW - DAY).with(position: "head")
+        @staff = FakeStaff.new(former, head_active: true)
+
+        result = restore
+        assert_equal :conflict, result.code
+        assert_equal({ base: [ :head_taken ] }, result.errors)
+        assert row(2).archived?
+        assert_nil @audit.events.presence
       end
 
       test "ID-20 : 3 actives par le code : 409 cap_reached, Aya reste archivée ; une invitée se restaure" do

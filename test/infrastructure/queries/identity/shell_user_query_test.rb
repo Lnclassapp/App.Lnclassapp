@@ -9,9 +9,26 @@ module Queries
         school = create_school(name: "Lycée classique d'Abidjan")
         student = create_student(first_name: "Awa", last_name: "Koné", classroom: create_classroom(school:, name: "Tle D 1"))
 
+        about = ShellUserQuery::About.new(gender: "female", classroom: "Tle D 1", school: "Lycée classique d'Abidjan")
         assert_equal ShellUserQuery::Row.new(name: "Awa Koné", role: :student, detail: "Tle D 1 · Lycée classique d'Abidjan",
-                                             public_id: student.public_id, photo_version: nil),
+                                             public_id: student.public_id, photo_version: nil, about:),
                      @query.call(user_id: student.id)
+      end
+
+      # UDR-0128 : le message prêt de WhatsApp lit les mêmes éléments, séparés, sans requête de plus que l'en-tête.
+      test "the parts of the detail come apart, with the gender, in the same queries as before" do
+        teacher = create_teacher(school: create_school(name: "Lycée moderne de Cocody"), material: create_material(name: "Mathématiques"),
+                                 gender: "male")
+        admin = create_school_admin(school: create_school(name: "Collège Notre-Dame"))
+        student = create_student(classroom: create_classroom(name: "Tle D 1"))
+
+        assert_queries_count(3) { @query.call(user_id: teacher.id) }
+        assert_queries_count(2) { @query.call(user_id: admin.id) }
+        assert_queries_count(2) { @query.call(user_id: student.id) }
+        assert_equal ShellUserQuery::About.new(gender: "male", material: "Mathématiques", school: "Lycée moderne de Cocody"),
+                     @query.call(user_id: teacher.id).about
+        assert_equal ShellUserQuery::About.new(gender: "female", school: "Collège Notre-Dame"), @query.call(user_id: admin.id).about
+        assert_equal ShellUserQuery::About.new(gender: "female"), @query.call(user_id: create_team_member.id).about
       end
 
       test "a student without a classroom has no detail" do

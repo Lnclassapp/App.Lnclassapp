@@ -1,5 +1,6 @@
 # Données publiques du support, affichées dans la carte d'aide (UDR-0061 §3.4), lues par config.x.support.
-# Numéros : chiffres seuls, indicatif 225 compris, sans « + » (test/config/support_config_test.rb). Une clé vide
+# Numéros : chiffres seuls, indicatif 225 compris, sans « + » ni 0 de tête, comme wa.me l'exige : 2250584258085, jamais
+# 0584258085 (test/config/support_config_test.rb, UDR-0128). Une clé vide
 # supprime sa ligne de la carte ; la ligne FAQ est toujours là. Jamais dans les credentials : ces numéros sont publics.
 # Un changement passe par une PR, comme la FAQ (Q14). Valeurs fournies par le porteur ; une valeur absente reste vide,
 # jamais inventée.

@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercise_sessions/_question_card — une question à répondre, dans le frame « question » %>
-<%# Rôle : « Question n sur T », l'énoncé, la saisie de son type (kinds/_<type>), « Valider » collé en bas, désactivé tant que la réponse est incomplète %>
-<%# ADR  : 0054, 0091 §4.4 (aucune correction, aucun id révélateur) · UDR : 0007, 0022, 0057, 0087 §3.2, §3.4 · Stimulus : math, assessment--answer %>
+<%# Rôle : « Question n sur T », son image éventuelle, l'énoncé, la saisie de son type (kinds/_<type>), « Valider » collé en bas, désactivé tant que la réponse est incomplète %>
+<%# ADR  : 0054, 0091 §4.4 (aucune correction, aucun id révélateur), 0105 · UDR : 0007, 0022, 0057, 0087 §3.2, §3.4, 0129 · Stimulus : math, assessment--answer %>
 <%# locals: (play:, question:, form:) -%>
 <% errors = form ? form.errors[:answer_ids] + form.errors[:response_text] + form.errors[:display_order] + form.errors[:base] : [] %>
 <%= turbo_frame_tag "question", class: "flex flex-1 flex-col" do %>
@@ -11,6 +11,11 @@
                                                          action: "input->assessment--answer#check change->assessment--answer#check" } do |f| %>
       <%= f.hidden_field :question_id, value: question.id %>
       <p class="mb-2 text-xs font-bold tracking-wide text-mute uppercase"><%= t(".number", number: question.number, total: play.question_count) %></p>
+      <%# Avant le fieldset : la legend, rendue par le partial du type, en reste le premier enfant (UDR-0129 §3.4). %>
+      <% if (image = question.image) %>
+        <%= tag.img src: question_image_path(image.public_id), alt: image.alt.to_s, width: image.width, height: image.height,
+                    loading: "lazy", decoding: "async", class: "mb-4 h-auto max-h-72 w-full rounded-ln bg-mist object-contain" %>
+      <% end %>
       <%# La légende (l'énoncé) est rendue par le partial du type : celle des trous est la consigne, la phrase porte le champ. %>
       <fieldset class="min-w-0 space-y-4" <%= tag.attributes("aria-describedby": ("attempt-errors" if errors.any?)) %>>
         <%= render "assessment/exercise_sessions/kinds/#{question.kind_name}", f:, question: %>

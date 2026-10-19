@@ -240,7 +240,8 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
   end
 
   # PRD §7 : 22 requêtes avant le chantier, 23 après (la lettre affichée de « Ton choix ») ; la cible était « avant + 1 ».
-  test "envoyer une réponse coûte 23 requêtes SQL" do
+  # ADR-0105 : + 2 requêtes fixes, jamais une par question : les images de l'exercice chargé d'un bloc, celle de la question suivante.
+  test "envoyer une réponse coûte 25 requêtes SQL" do
     sign_in_as @student
     get exercise_session_path(@session.public_id)
     count = 0
@@ -251,7 +252,7 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
     ActiveSupport::Notifications.subscribed(counter, "sql.active_record") { answer @first, right(@first) }
 
     assert_response :success
-    assert_equal 23, count
+    assert_equal 25, count
   end
 
   # PostgreSQL refuse l'octet nul : la saisie est refusée en 422, jamais en erreur 500.

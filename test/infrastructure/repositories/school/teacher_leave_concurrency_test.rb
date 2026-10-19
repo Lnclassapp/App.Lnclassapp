@@ -51,7 +51,7 @@ class TeacherLeaveConcurrencyTest < ActiveSupport::TestCase
   end
 
   def detach(school)
-    actor = Entities::Identity::Actor.new(user_id: @admin.id, role: :school_admin, school_id: school.id)
+    actor = Entities::Identity::Actor.new(user_id: @admin.id, role: :school_admin, school_id: school.id, staff_position: "head")
     UseCases::School::DetachTeacher.new(
       schools: Repositories::School::SchoolRepository.new, users: Repositories::Identity::UserRepository.new,
       teachings: Repositories::Classroom::TeachingRepository.new, assignments: Repositories::Classroom::AssignmentRepository.new,
