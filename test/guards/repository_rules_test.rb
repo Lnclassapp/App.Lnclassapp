@@ -58,8 +58,9 @@ class RepositoryRulesTest < Minitest::Test
   # audit-yarn-braces). Past that date the guard fails: the exception is re-examined, never forgotten.
   AUDIT_EXCEPTIONS = {
     # braces <= 3.0.3 (GHSA-vfj7-8cjw-p6xm), stack exhaustion on deeply nested patterns; build-time only
-    # (@tailwindcss/cli -> @parcel/watcher, fast-glob -> micromatch), no patched version published on 2026-10-03.
-    "1240992" => Date.new(2026, 10, 17)
+    # (@tailwindcss/cli -> @parcel/watcher, fast-glob -> micromatch), no patched version published on 2026-10-03 nor on
+    # 2026-10-19 (latest: 3.0.3).
+    "1240992" => Date.new(2026, 10, 31)
   }.freeze
 
   def test_every_ignored_yarn_advisory_is_registered_with_a_review_date
