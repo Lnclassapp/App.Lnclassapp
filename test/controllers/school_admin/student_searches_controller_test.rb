@@ -44,7 +44,7 @@ class SchoolAdmin::StudentSearchesControllerTest < ActionDispatch::IntegrationTe
     assert_includes response.body, "Aya Kouassi"
   end
 
-  test "ED-63: under three letters, the hint and no list; without a term, the form alone, focused" do
+  test "ED-63: under three letters, the hint and no list; without a term, the form alone" do
     sign_in_as @admin
 
     get school_admin_student_search_path(q: "ko")
@@ -52,7 +52,7 @@ class SchoolAdmin::StudentSearchesControllerTest < ActionDispatch::IntegrationTe
     assert_select "#student_search_list", 0
 
     get school_admin_student_search_path
-    assert_select "#student_search_page_q[autofocus]"
+    assert_select "#student_search_page_q:not([autofocus])"
     assert_select "#student_search_too_short, #student_search_list", 0
   end
 

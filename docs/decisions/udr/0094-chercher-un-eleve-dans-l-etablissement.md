@@ -73,3 +73,4 @@ La direction lit ses élèves classe par classe : accueil → niveau → classe 
 - Le nom s'affiche « Prénom Nom », comme sur la page de classe (le filtre `q` de `school_admin/classrooms#show` le retrouve tel quel) ; le libellé accessible reste « %{nom}, %{classe} ».
 - Le formulaire est un partiel (`school_admin/student_searches/_form`), le même sur la carte et sur la page de résultats ; le bouton « Chercher » passe sous le champ au téléphone, à droite dès `sm`.
 - Les lignes ne portent aucun identifiant d'élève : `student_result_<rang>`.
+- Pas d'`autofocus` sur la page de résultats : l'UDR-0054 §3.3 l'interdit hors d'`ui_field` (garde `page_titles_test`).

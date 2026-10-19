@@ -17,6 +17,7 @@ class Teams::StaffInvitationTest < ApplicationSystemTestCase
       within "turbo-frame#modal dialog[open]" do
         assert_text "La personne invitée verra les enseignants et le travail des élèves de Lycée Moderne de Bouaké."
         fill_in "invitation[contact]", with: teacher.contact
+        find("label", text: "Secrétaire").click
         click_on "Créer l'invitation"
 
         assert_selector "#invitation_contact_error", text: "Ce numéro a déjà un compte Lnclass."

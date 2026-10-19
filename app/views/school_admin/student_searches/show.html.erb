@@ -6,7 +6,7 @@
 <%= ui_page_header title: t(".title"), back: { label: t(".back"), href: school_admin_classrooms_path } %>
 
 <%= ui_card id: "student_search", padding: :md do %>
-  <%= render "form", value: @search, autofocus: @search.empty?, id: "student_search_page" %>
+  <%= render "form", value: @search, id: "student_search_page" %>
 
   <div id="student_search_results" class="mt-5 border-t border-line pt-4">
     <% if @search.empty? %>
