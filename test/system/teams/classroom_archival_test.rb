@@ -18,12 +18,15 @@ class Teams::ClassroomArchivalTest < ApplicationSystemTestCase
 
   def card(classroom) = "li#classroom_#{classroom.public_id}"
 
-  # Opens a ⋮ menu and clicks its item. The page can still be hydrating or morphing (Turbo refresh) when the first click
-  # lands, and the item found can be replaced before it is clicked: both clicks are retried together.
-  def click_menu_item(label, item, text)
+  # Opens a ⋮ menu and clicks its item, then waits for `opens` when given. The page can still be a Turbo cache preview,
+  # hydrating or morphing when the clicks land (FU-47): the real page is awaited, and both clicks are retried together
+  # until what the item opens is there.
+  def click_menu_item(label, item, text, opens: nil)
     3.times do
+      assert_no_selector "html[data-turbo-preview]"
       find("button[aria-label='#{label}']").click
-      return find(item, text:, wait: 2).click
+      find(item, text:, wait: 2).click
+      return opens ? find(opens, wait: 2) : nil
     rescue Capybara::ElementNotFound, Selenium::WebDriver::Error::StaleElementReferenceError
       next
     end
@@ -33,7 +36,8 @@ class Teams::ClassroomArchivalTest < ApplicationSystemTestCase
   test "archiver une classe peuplée après la confirmation chiffrée, puis la restaurer" do
     visit school_path(@school.public_id)
 
-    click_menu_item("Actions de la classe 6ème 1", "#classroom-menu-#{@classroom.public_id} button[role=menuitem]", "Archiver la classe")
+    click_menu_item("Actions de la classe 6ème 1", "#classroom-menu-#{@classroom.public_id} button[role=menuitem]", "Archiver la classe",
+                    opens: "dialog#archive-classroom-#{@classroom.public_id}[open]")
 
     within "dialog#archive-classroom-#{@classroom.public_id}[open]" do
       assert_text "3 élèves et 1 enseignant ne la verront plus"
@@ -63,7 +67,8 @@ class Teams::ClassroomArchivalTest < ApplicationSystemTestCase
     assert_no_selector card(@old)
     assert_link "Afficher les archives (1)"
 
-    click_menu_item("Actions du niveau 6ème", "#level-menu-6eme button[role=menuitem]", "Archiver le niveau")
+    click_menu_item("Actions du niveau 6ème", "#level-menu-6eme button[role=menuitem]", "Archiver le niveau",
+                    opens: "dialog#archive-level-6eme[open]")
     within "dialog#archive-level-6eme[open]" do
       assert_text "Archiver les 2 classes de 6ème ?"
       assert_text "3 élèves et 1 enseignant"
