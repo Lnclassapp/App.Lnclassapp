@@ -4,6 +4,9 @@
 module Ports
   module Classroom
     module ClassroomRepositoryPort
+      # ADR-0098 : la classe telle que lue sous le verrou avant l'écriture, puis telle qu'écrite.
+      SettingsChange = Data.define(:before, :after)
+
       # Avec teacher_ids et active_students_count. → Entities::Classroom::Classroom | nil
       def find_by_public_id(public_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_public_id"
@@ -70,7 +73,7 @@ module Ports
       end
 
       # ADR-0098 : dans la transaction de l'appelant, verrouille la classe (comme l'adhésion d'un élève), compte l'effectif présent
-      # sous ce verrou, puis écrit le nom et le plafond. → Result(Classroom) | failure(:not_found)
+      # sous ce verrou, puis écrit le nom et le plafond. → Result(SettingsChange : l'état lu sous verrou, l'état écrit) | failure(:not_found)
       #   | failure(:conflict, errors: { base: [:archived] } | { max_students: [:below_headcount], headcount: n } | { suffix: [:taken] })
       def update_settings(id:, name:, max_students:)
         raise NotImplementedError, "#{self.class} doit implémenter #update_settings"

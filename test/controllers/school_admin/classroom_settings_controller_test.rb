@@ -90,15 +90,75 @@ class SchoolAdmin::ClassroomSettingsControllerTest < ActionDispatch::Integration
     assert_equal 0, Orm::AuditEvent.count
   end
 
-  test "un enseignant ou un élève reçoit 403" do
+  test "un enseignant ou un élève reçoit 403, à l'ouverture comme à l'envoi" do
     [ create_teacher(school: @school, classrooms: [ @classroom ]), create_student(classroom: @classroom) ].each do |outsider|
       sign_in_as outsider
 
+      get edit_path
+      assert_response :forbidden
       patch update_path, params: settings, as: :turbo_stream
       assert_response :forbidden
       sign_out
     end
 
     assert_equal [ "Tle D 2", 80 ], stored
+    assert_equal 0, Orm::AuditEvent.count
+  end
+
+  test "un membre de l'équipe n'a pas cet espace : 403 sur /school-admin, et la classe reste telle quelle" do
+    sign_in_as create_team_member
+
+    get edit_path
+    assert_response :forbidden
+    patch update_path, params: settings, as: :turbo_stream
+    assert_response :forbidden
+
+    assert_equal [ "Tle D 2", 80 ], stored
+    assert_equal 0, Orm::AuditEvent.count
+  end
+
+  test "la classe d'une année passée : 404 à l'ouverture et à l'envoi, elle n'a pas changé" do
+    past = create_classroom(school: @school, level: @tle, name: "Tle D 5", school_year: "2020-2021")
+    sign_in_as @admin
+
+    get edit_path(past)
+    assert_response :not_found
+    patch update_path(past), params: settings, as: :turbo_stream
+    assert_response :not_found
+
+    assert_equal [ "Tle D 5", 80 ], stored(past)
+    assert_equal 0, Orm::AuditEvent.count
+  end
+
+  test "sans JavaScript, une classe archivée entre-temps : retour à la page du niveau avec l'alerte, le nom ne change pas" do
+    sign_in_as @admin
+    @classroom.update!(status: "archived", archived_at: Time.current)
+
+    patch update_path, params: settings(suffix: "Bilingue")
+
+    assert_redirected_to school_admin_level_path(@tle.slug)
+    assert_equal 303, response.status
+    assert_equal I18n.t("shared.classroom_settings.archived"), flash[:alert]
+    assert_equal "Tle D 2", stored.first
+  end
+
+  test "la modale d'une classe archivée entre deux affichages le dit dans le cadre « modal »" do
+    sign_in_as @admin
+    @classroom.update!(status: "archived", archived_at: Time.current)
+
+    get edit_path, headers: { "Turbo-Frame" => "modal" }
+
+    assert_response :success
+    assert_select "turbo-frame#modal dialog[open]", text: including(I18n.t("shared.classroom_settings.archived"))
+    assert_select "turbo-frame#modal form", count: 0
+  end
+
+  test "un refus en cadre (403) demande à Turbo la page d'erreur entière" do
+    sign_in_as create_student(classroom: @classroom)
+
+    get edit_path, headers: { "Turbo-Frame" => "modal" }
+
+    assert_response :forbidden
+    assert_select "meta[name=turbo-visit-control][content=reload]"
   end
 end

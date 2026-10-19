@@ -122,7 +122,103 @@ class Teams::ClassroomSettingsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=refresh]"
     assert_equal "6ème 3", stored.first
     get edit_path
+    assert_response :success
+    assert_select "turbo-frame#modal", text: including(error(:base, :archived))
+  end
+
+  test "sans JavaScript, une classe archivée entre-temps : retour à la fiche avec l'alerte, le nom ne change pas" do
+    sign_in_as @member
+    @classroom.update!(status: "archived", archived_at: Time.current)
+
+    patch update_path, params: settings
+
+    assert_redirected_to school_path(@school.public_id)
+    assert_equal 303, response.status
+    assert_equal I18n.t("shared.classroom_settings.archived"), flash[:alert]
+    assert_equal "6ème 3", stored.first
+  end
+
+  test "la modale d'une classe archivée entre deux affichages le dit dans le cadre « modal » au lieu de le laisser vide" do
+    sign_in_as @member
+    @classroom.update!(status: "archived", archived_at: Time.current)
+
+    get edit_path, headers: { "Turbo-Frame" => "modal" }
+
+    assert_response :success
+    assert_select "turbo-frame#modal dialog[open]", text: including(I18n.t("shared.classroom_settings.archived"))
+    assert_select "turbo-frame#modal form", count: 0
+  end
+
+  test "un refus en cadre (403, 404) demande à Turbo la page d'erreur entière, pas un cadre vide ; hors cadre, rien" do
+    sign_in_as create_student(classroom: @classroom)
+
+    get edit_path, headers: { "Turbo-Frame" => "modal" }
+    assert_response :forbidden
+    assert_select "meta[name=turbo-visit-control][content=reload]"
+
+    get edit_path
+    assert_response :forbidden
+    assert_select "meta[name=turbo-visit-control]", count: 0
+  end
+
+  test "un refus 404 en cadre porte aussi la balise de rechargement" do
+    sign_in_as @member
+
+    get edit_path(create_classroom(school: create_school, level: @levels["6eme"], name: "6ème 3")), headers: { "Turbo-Frame" => "modal" }
+
     assert_response :not_found
+    assert_select "meta[name=turbo-visit-control][content=reload]"
+  end
+
+  test "un échec sans erreur nommée garde un message visible sous le titre de la modale" do
+    sign_in_as @member
+    refusing = Object.new.tap { |fake| fake.define_singleton_method(:call) { |**| Shared::Result.failure(:conflict) } }
+    UseCases::Classroom::UpdateClassroom.define_singleton_method(:new) { |**| refusing }
+
+    patch update_path, params: settings
+
+    assert_response :unprocessable_entity
+    assert_select "form#classroom-settings-form [role=alert]", text: I18n.t("errors.codes.conflict")
+  ensure
+    UseCases::Classroom::UpdateClassroom.singleton_class.remove_method(:new)
+  end
+
+  test "le plafond relevé d'une classe complète : la cascade d'inscription ne la marque plus « Complète »" do
+    level = @levels["6eme"]
+    full = create_classroom(school: @school, level:, name: "6ème 5", max_students: 2)
+    2.times { create_student(classroom: full) }
+    picker = lambda do
+      get school_picker_classrooms_path(@school.public_id, level.slug, scope: "student_registration"),
+          headers: { "Turbo-Frame" => "picker_classrooms" }
+    end
+    complete = I18n.t("classroom.student_registrations.class_picker.full")
+
+    picker.call
+    assert_select "input[type=radio][value='#{full.public_id}'][disabled]"
+    assert_select "label", text: including(complete)
+
+    sign_in_as @member
+    patch update_path(full), params: settings(suffix: "5", max_students: 3), as: :turbo_stream
+    assert_response :success
+    sign_out
+
+    picker.call
+    assert_select "input[type=radio][value='#{full.public_id}']:not([disabled])"
+    assert_select "label", text: including(complete), count: 0
+  end
+
+  test "le niveau, la série et le nom complet ne se changent pas : seuls le suffixe et le plafond comptent" do
+    sign_in_as @member
+    before = Orm::Classroom.where(id: @tle_d.id).pick(:level_id, :series_id)
+    other_series = Orm::Series.where.not(id: @tle_d.series_id).pick(:id)
+
+    patch update_path(@tle_d), params: { classroom_settings: { suffix: "3", max_students: 90, name: "Tle C 3",
+                                                               level_id: @levels["6eme"].id, series_id: other_series } },
+                               as: :turbo_stream
+
+    assert_response :success
+    assert_equal [ "Tle D 3", 90 ], stored(@tle_d)
+    assert_equal before, Orm::Classroom.where(id: @tle_d.id).pick(:level_id, :series_id)
   end
 
   test "enregistrer sans rien changer : toast, aucune trace" do

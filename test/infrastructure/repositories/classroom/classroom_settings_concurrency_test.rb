@@ -25,18 +25,29 @@ class ClassroomSettingsConcurrencyTest < ActiveSupport::TestCase
     Orm::Drena.where(id: drena).delete_all
   end
 
-  # Comme ClassroomDesignation puis JoinAsStudent : la classe verrouillée, refus si complète, sinon l'adhésion.
+  # Le verrou de la classe est pris par ClassroomDesignation ; `hold` fait attendre l'élève une fois la classe verrouillée.
+  class HoldingClassrooms < Repositories::Classroom::ClassroomRepository
+    def initialize(hold)
+      super()
+      @hold = hold
+    end
+
+    def lock_by_public_id(public_id:) = super.tap { @hold&.call }
+  end
+
+  # Le vrai parcours d'adhésion : JoinAsStudent, qui désigne la classe par ClassroomDesignation, sous verrou.
   def join(hold: nil)
     ActiveRecord::Base.connection_pool.with_connection do
-      Orm::Classroom.transaction do
-        classroom = Repositories::Classroom::ClassroomRepository.new.lock_by_public_id(public_id: @classroom.public_id)
-        hold&.call
-        next :full if classroom.full?
+      result = UseCases::Classroom::JoinAsStudent.new(
+        classrooms: HoldingClassrooms.new(hold), schools: Repositories::School::SchoolRepository.new,
+        taxonomy: Repositories::Catalog::TaxonomyRepository.new, memberships: Repositories::Classroom::MembershipRepository.new,
+        policy: Policies::Classroom::JoinPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
+      ).call(actor: Entities::Identity::Actor.new(user_id: @newcomer.id, role: :student),
+             dto: Dtos::Classroom::StudentRegistrationInput.new(school_public_id: @school.public_id, level_slug: @level.slug,
+                                                                classroom_public_id: @classroom.public_id))
+      next :joined if result.success?
 
-        Repositories::Classroom::MembershipRepository.new.add_primary(classroom_id: classroom.id, student_id: @newcomer.id,
-                                                                       via: "standard", at: Time.current)
-        :joined
-      end
+      result.errors[:base] == [ :classroom_full ] ? :full : result
     end
   end
 

@@ -194,7 +194,9 @@ module Repositories
         result = ClassroomRepository.new.update_settings(id: record.id, name: "6ème A", max_students: 3)
 
         assert result.success?
-        assert_equal [ "6ème A", 3, 3 ], [ result.value.name, result.value.max_students, result.value.active_students_count ]
+        after = result.value.after
+        assert_equal [ "6ème A", 3, 3 ], [ after.name, after.max_students, after.active_students_count ]
+        assert_equal [ "6ème 3", 80 ], [ result.value.before.name, result.value.before.max_students ], "l'état lu sous le verrou, avant l'écriture"
         assert_equal [ "6ème A", 3 ], [ record.reload.name, record.max_students ]
       end
 

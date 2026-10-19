@@ -11,9 +11,10 @@ module ClassroomSettingsActions
     before_action :authorize_structure, :load_settings, only: :edit
   end
 
-  # Une classe archivée n'a pas de modale : on la restaure d'abord (UDR-0111).
+  # Une classe archivée n'a pas de modale de saisie : la sienne dit de la restaurer d'abord (UDR-0111). Un 404 vide
+  # laisserait le cadre « modal » sans rien à montrer.
   def edit
-    return render_not_found if settings.archived?
+    return render "shared/classroom_settings/archived" if settings.archived?
 
     @form = Dtos::Classroom::ClassroomSettingsInput.new(suffix: settings.suffix, max_students: settings.max_students)
   end
@@ -71,7 +72,9 @@ module ClassroomSettingsActions
   # Le préfixe et la place du suffixe, l'effectif sous verrou : les messages les citent (UDR-0110).
   def add_settings_errors(result)
     options = { suffix: { prefix: settings.prefix, count: settings.suffix_max }, max_students: { count: result.errors[:headcount] } }
-    result.errors.except(:headcount).each do |attribute, messages|
+    named = result.errors.except(:headcount)
+    @form.errors.add(:base, t("errors.codes.#{result.code}")) if named.empty?
+    named.each do |attribute, messages|
       messages.each do |message|
         @form.errors.add(attribute, message, **options.fetch(attribute, {})) unless @form.errors.added?(attribute, message)
       end

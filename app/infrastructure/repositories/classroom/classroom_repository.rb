@@ -98,8 +98,9 @@ module Repositories
         headcount = Orm::ClassroomStudent.where(classroom_id: id, left_at: nil).count
         return ::Shared::Result.failure(:conflict, errors: { max_students: [ :below_headcount ], headcount: }) if max_students < headcount
 
+        before = map_to_entity(record)
         Orm::Classroom.transaction(requires_new: true) { record.update!(name:, max_students:) }
-        ::Shared::Result.success(map_to_entity(record))
+        ::Shared::Result.success(Ports::Classroom::ClassroomRepositoryPort::SettingsChange.new(before:, after: map_to_entity(record)))
       rescue ActiveRecord::RecordNotUnique
         ::Shared::Result.failure(:conflict, errors: { suffix: [ :taken ] })
       end

@@ -20,6 +20,17 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
   def scope = "classroom.classrooms"
 
+  # ADR-0098, UDR-0111 : modifier une classe est un geste de l'équipe et de la direction, pas de l'enseignant.
+  test "l'enseignant de la classe n'a ni lien ni texte « Modifier la classe »" do
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_response :success
+    assert_select "a[href*='classroom-settings'], a[href*='classroom_settings']", count: 0
+    assert_no_match(/Modifier la classe/, response.body)
+  end
+
   test "l'enseignant de la classe voit l'en-tête, le bloc du lien et ses élèves, sans code ni « Cours assignés »" do
     course = create_course(name: "Nombres entiers", material: create_material(name: "Mathématiques", category: "science"))
     create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course:)), by: @teacher)

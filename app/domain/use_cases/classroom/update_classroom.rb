@@ -39,7 +39,7 @@ module UseCases
 
         @transaction.call do
           changed = @classrooms.update_settings(id: classroom.id, name:, max_students: dto.max_students)
-          changed.success? ? record(actor, school, classroom, changed.value) : changed
+          changed.success? ? record(actor, school, changed.value) : changed
         end
       end
 
@@ -58,7 +58,10 @@ module UseCases
         NUMBERING.prefix(level_name: level.name, series_name: series&.name)
       end
 
-      def record(actor, school, before, after)
+      # La trace dit l'état lu sous le verrou de la classe : celui d'avant l'écriture, même si une autre a passé depuis la lecture.
+      def record(actor, school, change)
+        before = change.before
+        after = change.after
         @audit_log.record(action: "school.changed", actor_id: actor.user_id, at: @clock.now, subject_type: "School",
                           subject_id: school.id,
                           metadata: { change: "classroom_updated", classroom_public_id: after.public_id, name: after.name,

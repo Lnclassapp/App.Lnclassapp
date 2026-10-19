@@ -49,8 +49,11 @@ module RendersResult
   def render_forbidden = render_error_page(:forbidden)
   def render_not_found = render_error_page(:not_found)
 
+  # Dans un cadre (une modale), la page d'erreur porte la balise de rechargement : Turbo quitte le cadre et l'affiche entière,
+  # au lieu de n'y mettre que le cadre « modal » vide du layout (document_reload_tag).
   def render_error_page(code)
     status = code
+    @reload_document = turbo_frame_request?
     respond_to do |format|
       format.html { render ERROR_PAGES.fetch(code), status:, layout: "application" }
       format.json { render json: { error: code }, status: }
