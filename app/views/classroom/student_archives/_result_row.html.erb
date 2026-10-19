@@ -15,7 +15,7 @@
     <p class="mt-0.5 text-sm text-mute"><%= t(".detail", material: result.material_name, date: l(result.completed_at.to_date, format: t(".date_format"))) %></p>
   </div>
   <span data-grade class="<%= class_names("shrink-0 rounded-full px-3 py-1.5 text-sm font-bold tabular-nums",
-                                          grade >= grading.grade_on_20(grading::MASTERY_THRESHOLD) ? "bg-success-soft text-success" : "border border-line bg-mist text-ink") %>">
+                                          grading.reaches?(result.score_percent, grading::MASTERY_THRESHOLD) ? "bg-success-soft text-success" : "border border-line bg-mist text-ink") %>">
     <span aria-hidden="true"><%= grade_label(result.score_percent) %></span><span class="sr-only"><%= t(".grade_spoken", grade:) %></span>
   </span>
 <% end %>
