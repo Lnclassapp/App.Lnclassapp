@@ -442,6 +442,13 @@ module Queries
         assert_equal [ [ awa.public_id, 12 ] ], overview(note: "11-15").students.map { [ it.public_id, it.grade ] }
       end
 
+      test "CL-15 : la moyenne non entière s'arrondit comme la note affichée (52,5 % : 11 sur 20, groupe 11–15)" do
+        @assignments = []
+        awa = graded([ 50, 55 ], first_name: "Awa")
+
+        assert_equal [ [ awa.public_id, 11 ] ], overview(note: "11-15").students.map { [ it.public_id, it.grade ] }
+      end
+
       test "CL-15 : un groupe par note, le premier non vide depuis 0–10 par défaut ; le compte de chaque groupe" do
         @assignments = []
         good = Array.new(2) { graded([ 60 ]) }

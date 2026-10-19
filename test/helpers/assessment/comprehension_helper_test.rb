@@ -126,6 +126,12 @@ module Assessment
       assert_equal [ :look_at_each, {} ], comprehension_next_step(detail(done: 4, present: 4))
       assert_equal [ :revisit_notion, {} ], comprehension_next_step(detail(done: 6, present: 6, dominant: :struggling))
       assert_equal [ :revisit_questions, {} ], comprehension_next_step(detail(done: 6, present: 9, dominant: :fragile))
+      assert_equal "Tous les élèves l'ont fait. La classe est trop petite pour une tendance : regardez chaque élève.",
+                   next_step_sentence(detail(done: 4, present: 4))
+      assert_equal "La plupart des élèves sont en difficulté : reprenez la notion avant d'avancer.",
+                   next_step_sentence(detail(done: 6, present: 6, dominant: :struggling))
+      assert_equal "La notion se met en place : reprenez en classe les questions marquées, puis avancez.",
+                   next_step_sentence(detail(done: 6, present: 9, dominant: :fragile))
       assert_equal "La classe a compris. 2 élèves sont en baisse : voyez-les dans leur catégorie.",
                    next_step_sentence(detail(done: 9, present: 9, dominant: :acquired, decline: 2))
       assert_equal "La classe a compris. Un élève est en baisse : voyez-le dans sa catégorie.",
