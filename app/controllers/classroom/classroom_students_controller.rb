@@ -11,7 +11,10 @@ module Classroom
       @header = Queries::Classroom::ClassroomHeaderQuery.new.call(public_id: params[:classroom_public_id])
       return render_not_found if @header.nil? || @header.status == "archived"
 
-      render_result read_roster_policy, success: ->(_) { load_file }
+      # La fiche lit la liste des élèves : ReadClassroomPolicy ne l'accorde sans show_roster qu'à l'élève de la classe, que
+      # allow_roles refuse déjà (403) ; restent l'enseignant de la classe et l'équipe, avec show_roster.
+      render_result Policies::Classroom::ReadClassroomPolicy.new.call(actor: current_actor, classroom: @header),
+                    success: ->(_) { load_file }
     end
 
     def destroy
@@ -21,12 +24,6 @@ module Classroom
     end
 
     private
-
-    # La fiche lit la liste des élèves : ReadClassroomPolicy sans show_roster (l'élève de la classe) est un refus.
-    def read_roster_policy
-      result = Policies::Classroom::ReadClassroomPolicy.new.call(actor: current_actor, classroom: @header)
-      result.failure? || result.value.show_roster ? result : Shared::Result.failure(:forbidden)
-    end
 
     def load_file
       @file = Queries::Classroom::StudentFileQuery.new.call(classroom_public_id: @header.public_id,
