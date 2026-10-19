@@ -86,13 +86,14 @@ class Classroom::SessionDaysControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::ClassroomSessionDay.count
   end
 
-  test "an archived classroom: 403, nothing written" do
+  # vie-de-la-classe, Lot C (Q8) : la modale d'une classe archivée n'existe plus (404) ; l'envoi reste refusé par le use case.
+  test "an archived classroom: 404 for the modal, 403 for the update, nothing written" do
     archived = create_classroom(status: "archived")
     teacher = create_teacher(classrooms: [ archived ])
     sign_in_as teacher
 
     get edit_classroom_session_days_path(archived.public_id)
-    assert_response :forbidden
+    assert_response :not_found
     update(%w[1], classroom: archived, as: :turbo_stream)
     assert_response :forbidden
     assert_equal 0, Orm::ClassroomSessionDay.count
