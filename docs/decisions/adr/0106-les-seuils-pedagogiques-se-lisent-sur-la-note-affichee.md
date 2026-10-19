@@ -1,4 +1,4 @@
-# ADR-0105 : Les seuils pédagogiques se lisent sur la note affichée sur 20, partout, par un seul endroit : `Grading.reaches?`
+# ADR-0106 : Les seuils pédagogiques se lisent sur la note affichée sur 20, partout, par un seul endroit : `Grading.reaches?`
 <!-- index
 titre: Les seuils pédagogiques se lisent sur la note affichée sur 20, partout
 statut: Accepté — *amende 0033 §4 et 0101 §4.5*
@@ -72,7 +72,7 @@ Le seuil de `PERFECT_THRESHOLD` (100) n'est pas dans ce tableau : voir §4.3.
 
 ### 4.5 Textes
 
-Les textes qui citaient un seuil en pourcentage (infobulles « Badge » et « Maîtrise », FAQ) se lisent sur 20 et se calculent depuis `Grading`, jamais en dur (UDR-0128).
+Les textes qui citaient un seuil en pourcentage (infobulles « Badge » et « Maîtrise », FAQ) se lisent sur 20 et se calculent depuis `Grading`, jamais en dur (UDR-0131).
 
 ## 5. Conséquences
 

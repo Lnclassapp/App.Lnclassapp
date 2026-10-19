@@ -3,7 +3,7 @@ require "test_helper"
 module Entities
   module Assessment
     class GradingTest < ActiveSupport::TestCase
-      # ADR-0105 : la note affichée sur 20 décide. Bronze dès 10/20 (48 %), Argent dès 14/20 (68 %), Or dès 16/20 (78 %).
+      # ADR-0106 : la note affichée sur 20 décide. Bronze dès 10/20 (48 %), Argent dès 14/20 (68 %), Or dès 16/20 (78 %).
       test "badge aux bornes des paliers, lus sur la note sur 20" do
         assert_nil Grading.badge_for(47)
         { 48 => :bronze, 67 => :bronze, 68 => :silver, 77 => :silver, 78 => :gold, 97 => :gold, 99 => :gold,

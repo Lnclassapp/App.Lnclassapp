@@ -71,8 +71,8 @@ Aucune migration, aucune route.
 
 ## 6. Décisions rattachées
 
-- ADR-0105 — Les seuils pédagogiques se lisent sur la note affichée (amende ADR-0033 §4 et ADR-0101 §4.5).
-- UDR-0128 — Paliers et maîtrise lus sur 20 dans les infobulles et la FAQ.
+- ADR-0106 — Les seuils pédagogiques se lisent sur la note affichée (amende ADR-0033 §4 et ADR-0101 §4.5).
+- UDR-0131 — Paliers et maîtrise lus sur 20 dans les infobulles et la FAQ.
 
 ## 7. Mesures
 

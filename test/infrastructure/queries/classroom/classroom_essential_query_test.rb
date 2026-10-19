@@ -85,7 +85,7 @@ module Queries
 
         row = query
 
-        # ADR-0105 : la note affichée décide. Alice réussit par son meilleur score (80), Carla à 48 % (10/20), Bruno non à
+        # ADR-0106 : la note affichée décide. Alice réussit par son meilleur score (80), Carla à 48 % (10/20), Bruno non à
         # 47 % (9/20) ; un élève parti ou d'une autre classe ne compte pas.
         assert_equal [ [ 67, 2, 3 ], [ nil, 0, 0 ] ],
                      row.exercises.map { [ it.success_percent, it.passed_students_count, it.completed_students_count ] }

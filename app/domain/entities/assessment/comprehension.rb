@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::Comprehension
 # Rôle : lecture de la compréhension d'un exercice assigné : catégorie, signe de progrès, dominante, seuil de lecture
-# ADR  : 0033, 0079, 0105
+# ADR  : 0033, 0079, 0106
 module Entities
   module Assessment
     module Comprehension

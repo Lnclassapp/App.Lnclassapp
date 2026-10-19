@@ -102,7 +102,7 @@ Ce que l'élève lit fait foi. `GapDecision` ne compare plus le pourcentage brut
 | de 10 à 14/20 | 48 à 72 % | rien ne change |
 | < 10/20 | 0 à 47 % | ouvre la fiche, ou compte un échec de plus |
 
-Conséquences : 74 % (15/20) et 73 % (15/20) lèvent ; 72 % (14/20) non ; 49 % et 48 % (10/20) n'ouvrent plus ; 47 % (9/20) ouvre. Le seul appelant est `CloseExerciseSession#settle_gap`. Les autres seuils (maîtrise, badges, taux de réussite de la classe, « à revoir », ADR-0033) se lisent eux aussi sur la note affichée : [ADR-0105](0105-les-seuils-pedagogiques-se-lisent-sur-la-note-affichee.md), par `Grading.reaches?`, que `GapDecision` appelle.
+Conséquences : 74 % (15/20) et 73 % (15/20) lèvent ; 72 % (14/20) non ; 49 % et 48 % (10/20) n'ouvrent plus ; 47 % (9/20) ouvre. Le seul appelant est `CloseExerciseSession#settle_gap`. Les autres seuils (maîtrise, badges, taux de réussite de la classe, « à revoir », ADR-0033) se lisent eux aussi sur la note affichée : [ADR-0106](0106-les-seuils-pedagogiques-se-lisent-sur-la-note-affichee.md), par `Grading.reaches?`, que `GapDecision` appelle.
 
 ## 5. Conséquences
 

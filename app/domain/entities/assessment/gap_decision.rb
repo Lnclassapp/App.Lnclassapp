@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::GapDecision
 # Rôle : décide de l'effet d'une clôture sur la lacune d'une fiche, sur la note affichée sur 20
-# ADR  : 0033, 0043, 0101 (§4.5), 0105
+# ADR  : 0033, 0043, 0101 (§4.5), 0106
 module Entities
   module Assessment
     module GapDecision

@@ -24,7 +24,7 @@ class Communication::HelpControllerTest < ActionDispatch::IntegrationTest
   test "the answers quote the thresholds of the domain, not copies of them" do
     get help_path
 
-    # UDR-0128 : les paliers et la maîtrise se lisent sur 20, comme les notes de l'élève.
+    # UDR-0131 : les paliers et la maîtrise se lisent sur 20, comme les notes de l'élève.
     assert_select "#help_question_badges", text: /Bronze dès #{GRADING.grade_on_20(GRADING::PASS_THRESHOLD)}\/20/
     assert_select "#help_question_badges", text: /Argent dès #{GRADING.grade_on_20(GRADING::MASTERY_THRESHOLD)}\/20/
     assert_select "#help_question_badges", text: /Or dès #{GRADING.grade_on_20(GRADING::GOLD_THRESHOLD)}\/20/

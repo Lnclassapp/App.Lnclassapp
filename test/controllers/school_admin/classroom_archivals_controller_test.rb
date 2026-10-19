@@ -295,7 +295,8 @@ class SchoolAdmin::ClassroomArchivalsControllerTest < ActionDispatch::Integratio
     level_page
 
     assert_select "ul#level_classrooms > li", count: 2
-    assert_select "dialog", count: 0
+    # La carte d'aide de l'en-tête (UDR-0128 §3.4) est la seule <dialog> : la page n'en offre aucune.
+    assert_select "main dialog", count: 0
     assert_select "[id^=classroom-menu], [id^=level-menu]", count: 0
     assert_select "[data-turbo-method=patch]", count: 0
   end

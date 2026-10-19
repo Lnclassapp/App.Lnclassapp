@@ -4,7 +4,7 @@ require "test_helper"
 module Entities
   module Assessment
     class ComprehensionTest < ActiveSupport::TestCase
-      # ADR-0105: the displayed grade decides. 47 % reads 9/20, 48 % reads 10/20, 67 % reads 13/20, 68 % reads 14/20.
+      # ADR-0106: the displayed grade decides. 47 % reads 9/20, 48 % reads 10/20, 67 % reads 13/20, 68 % reads 14/20.
       test "the category of a student is the mastery of his best score, at 47, 48, 67 and 68" do
         assert_equal %i[struggling fragile fragile acquired], [ 47, 48, 67, 68 ].map { Comprehension.category_for(it) }
       end

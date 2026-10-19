@@ -76,7 +76,7 @@ Des vues recopiaient `grade_on_20(score) >= grade_on_20(MASTERY_THRESHOLD)`, voi
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
 | Le Diamant suit-il la règle ? | Non : c'est un fait (aucune faute), pas un seuil sur un score. 98 % = 20/20 n'est pas un sans-faute. | `Grading.perfect?` explicite, test à 98 / 99 / 100 ; consigne notée dans l'ADR. |
-| Les textes « Bronze à partir de 50 % » restent-ils vrais ? | Non : Bronze s'obtient dès 48 %. Un texte faux est pire qu'un texte absent. | Les textes se lisent sur 20, calculés depuis `Grading` (jamais recopiés). UDR-0128. |
+| Les textes « Bronze à partir de 50 % » restent-ils vrais ? | Non : Bronze s'obtient dès 48 %. Un texte faux est pire qu'un texte absent. | Les textes se lisent sur 20, calculés depuis `Grading` (jamais recopiés). UDR-0131. |
 | Les badges déjà décernés ? | Un badge s'écrit à la clôture et ne descend jamais. Aucun recalcul : un élève à 48 %, 68 % ou 78 % déjà clôturé garde son palier d'avant ; la prochaine session appliquera la règle. | Aucune migration ; noté dans l'ADR (conséquences). |
 | Une moyenne de classe est-elle une décision ? | Non, une statistique. | Gardées telles quelles, raison ci-dessus. |
 | Le point de couleur des questions de compréhension (`mastery_for(question.rate)`) suit-il ? | Oui, c'est la même échelle Acquis / Fragile / En difficulté. | Suit sans changement de vue. |

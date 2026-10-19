@@ -22,7 +22,7 @@ module Assessment
       assert_equal [ "14/20", "20/20", "0/20" ], [ 70, 100, 0 ].map { grade_label(it) }
     end
 
-    # UDR-0128 : les infobulles se lisent sur 20, calculées depuis les seuils, jamais en pourcentage.
+    # UDR-0131 : les infobulles se lisent sur 20, calculées depuis les seuils, jamais en pourcentage.
     test "les infobulles des badges et de la maîtrise citent des notes sur 20 tirées de Grading" do
       assert_equal "Bronze dès 10/20, Argent dès 14/20, Or dès 16/20, Diamant : toutes les réponses justes.", badges_tip
       assert_equal "Acquis : 14/20 et plus. Fragile : de 10 à 13/20. En difficulté : moins de 10/20.", mastery_tip

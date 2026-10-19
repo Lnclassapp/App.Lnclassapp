@@ -147,7 +147,7 @@ module Queries
         assert_equal [ false, false, true ], questions.map(&:to_revisit)
       end
 
-      # ADR-0105: the rate reads like a score. 49 % displays 10/20, the grade of the pass threshold: not to revisit.
+      # ADR-0106: the rate reads like a score. 49 % displays 10/20, the grade of the pass threshold: not to revisit.
       test "a question at 49 % reads 10/20 and is not to revisit, one at 46 % reads 9/20 and is" do
         35.times { |index| student(scores: [ 90 ], answers: [ { 1 => index < 17, 2 => index < 16 } ]) }
 

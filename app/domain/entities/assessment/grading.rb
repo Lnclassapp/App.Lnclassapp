@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::Grading
 # Rôle : seuils pédagogiques nommés, score, note sur 20, maîtrise et palier de badge, tous lus sur la note affichée
-# ADR  : 0033, 0043, 0105
+# ADR  : 0033, 0043, 0106
 module Entities
   module Assessment
     module Grading
@@ -16,7 +16,7 @@ module Entities
       # Les paliers qui se lisent sur la note affichée, du plus haut au plus bas : le Diamant n'en fait pas partie.
       GRADED_LEVELS = %i[gold silver bronze].freeze
 
-      # Décision du porteur (2026-10-19, ADR-0105) : ce que l'élève lit fait foi. Un score atteint un seuil quand sa note
+      # Décision du porteur (2026-10-19, ADR-0106) : ce que l'élève lit fait foi. Un score atteint un seuil quand sa note
       # sur 20 (grade_on_20, le seul endroit de l'arrondi) atteint celle du seuil : 68 % s'affiche 14/20 et atteint 70.
       # Toute règle « réussi / acquis / à revoir » passe par ici ; aucune ne compare le pourcentage brut à un seuil.
       def self.reaches?(score_percent, threshold) = grade_on_20(score_percent) >= grade_on_20(threshold)

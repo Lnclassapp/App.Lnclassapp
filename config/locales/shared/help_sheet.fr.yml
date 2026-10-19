@@ -14,6 +14,20 @@ fr:
         # Sans horaires ni délai fournis par le porteur : une ligne courte, jamais une valeur inventée.
         hint_default: "Réponse par message"
         external: "(ouvre WhatsApp)"
+        # UDR-0128 : message prêt du lien wa.me, modifiable avant l'envoi : nom, rôle, établissement. Jamais le numéro
+        # (WhatsApp le transmet), ni le PIN, ni un code, ni un identifiant. Espace final : on écrit à la suite.
+        message:
+          plain: "Bonjour Lnclass, ma question : "
+          introduced: "Bonjour Lnclass, je suis %{who}. Ma question : "
+          student: "élève de %{classroom}"
+          student_alone: "élève"
+          teacher:
+            male: "enseignant de %{material}"
+            female: "enseignante de %{material}"
+          teacher_alone:
+            male: "enseignant"
+            female: "enseignante"
+          school_admin: "membre de la direction"
       call:
         title: "Appeler le service client"
         hint: "%{hours}"
