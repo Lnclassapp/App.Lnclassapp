@@ -1,7 +1,7 @@
 # UDR-0061 : Carte d'aide et FAQ — « Besoin d'aide ? » ouvre une carte à trois options : questions fréquentes, WhatsApp, appel
 <!-- index
 titre: Carte d'aide et FAQ
-statut: FAQ : Accepté *(porteur, 2026-10-02, construction directe)* · carte d'aide : Accepté *(porteur, 2026-10-02 : « lance les lots »)* — *amendée le 2026-10-06 : FAQ dans le shell une fois connecté, liens de 48 px* — *amendée par [0066](./0066-blog-public-liste-article-et-partage.md) (pied de la carte d'aide)*
+statut: FAQ : Accepté *(porteur, 2026-10-02, construction directe)* · carte d'aide : Accepté *(porteur, 2026-10-02 : « lance les lots »)* — *amendée le 2026-10-06 : FAQ dans le shell une fois connecté, liens de 48 px* — *amendée par [0066](./0066-blog-public-liste-article-et-partage.md) (pied de la carte d'aide)* — *amendée par [0128](./0128-message-pret-dans-le-lien-whatsapp-de-la-carte-d-aide.md) (message prêt du lien WhatsApp)*
 adr-lie: [0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md)
 problematique: `/aide` publique (`Communication::HelpController`), une question par `<details>`, textes dans `communication/help.fr.yml`, seuils lus dans `Grading` ; « Besoin d'aide ? » sur l'accueil élève ; carte `ui_modal placement: :sheet` (feuille basse sous `lg`, au moins 25 %, hauteur du contenu ; modale au-dessus) : FAQ, WhatsApp (`wa.me`), appel (`tel:`), numéros et horaires dans `config/support.yml`
 -->
@@ -12,7 +12,7 @@ problematique: `/aide` publique (`Communication::HelpController`), une question 
 | **Date** | 2026-10-02 |
 | **Chantier** | [`docs/chantiers/fonctions-espace-eleve`](../../chantiers/fonctions-espace-eleve/memo.md) — grill Q4, Q13, Q14 ; [PRD](../../chantiers/fonctions-espace-eleve/prd.md) |
 | **ADR lié** | [ADR-0049](../adr/0049-mesure-d-audience-cote-serveur-et-csp-stricte.md) (aucun script tiers, CSP stricte) · [UDR-0057](0057-ecrans-eleve-epures.md) (règle R1 à R6, deux familles) · [UDR-0058](0058-accueil-eleve.md) (accueil élève) · [UDR-0060](0060-connexion-et-recuperation-du-pin.md) (motif des écrans d'entrée) · [UDR-0054](0054-finitions-d-interface.md) (retour, titre, focus) · [UDR-0005](0005-design-system-fondateur.md) (tokens, `ui_modal`) · [UDR-0063](0063-pages-publiques-mission-confidentialite-cgu-cgv.md) (pages publiques liées depuis `/aide`) |
-| **Amendé par** | [UDR-0066](0066-blog-public-liste-article-et-partage.md) : §3.3 point 3 et §3.5 (pied de la carte d'aide) |
+| **Amendé par** | [UDR-0066](0066-blog-public-liste-article-et-partage.md) : §3.3 point 3 et §3.5 (pied de la carte d'aide) · [UDR-0128](0128-message-pret-dans-le-lien-whatsapp-de-la-carte-d-aide.md) : §3.4 (le lien WhatsApp porte un message prêt) |
 | **Remplacé par** | — |
 
 ---
@@ -112,6 +112,7 @@ Les trois ronds ont la **même teinte**. L'exemple du porteur teinte chaque rond
 - Fichier lu au démarrage par `config.x.support = config_for(:support)` (`config/application.rb`). Clés : `phone` et `whatsapp` (chiffres seuls, indicatif `225` compris, sans `+`), `hours` (texte court affiché tel quel, ex. « Lun.–ven., 08:00–18:00 »), `whatsapp_reply` (délai de réponse, texte court). Valeurs fixes et fictives en `test`.
 - **Pas dans les credentials** : ces numéros sont publics, affichés à chaque élève. Les ranger avec des secrets les rendrait illisibles en revue et exigerait la clé maîtresse pour les changer. Un changement de numéro passe par une PR, comme la FAQ (Q14).
 - **Valeurs à fournir par le porteur** (memo, question ouverte) : numéro d'appel, numéro WhatsApp, horaires, délai de réponse WhatsApp.
+- *Amendé par l'[UDR-0128](0128-message-pret-dans-le-lien-whatsapp-de-la-carte-d-aide.md) (2026-10-16) : le lien WhatsApp est `wa.me/<numéro>?text=<message prêt>`, et un numéro ne commence jamais par 0.*
 - Un helper `SupportHelper#support_contacts` rend les lignes disponibles. **Une clé vide supprime sa ligne** (UDR-0057 §2.5) : sans `whatsapp`, pas de ligne WhatsApp ; sans `phone`, pas de ligne d'appel. La ligne FAQ est toujours là, donc la carte n'est jamais vide.
 
 ### 3.5 Libellés — `config/locales/shared/help_sheet.fr.yml`

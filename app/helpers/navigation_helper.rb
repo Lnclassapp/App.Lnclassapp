@@ -4,9 +4,10 @@
 module NavigationHelper
   Destination = Data.define(:key, :route, :icon)
   # Ce que le shell affiche de la personne connectée. Le contrôleur qui rend `layout "shell"` l'expose par `helper_method :shell_user`.
-  # public_id : graine de la couleur stable de l'avatar sans photo (UDR-0084 §3.4).
-  ShellUser = Data.define(:name, :role, :detail, :avatar_url, :public_id) do
-    def initialize(name:, role:, detail: nil, avatar_url: nil, public_id: nil) = super
+  # public_id : graine de la couleur stable de l'avatar sans photo (UDR-0084 §3.4). about : éléments du détail, séparés,
+  # pour le message prêt de WhatsApp (ShellUserQuery::About, UDR-0128) ; nil donne le message simple.
+  ShellUser = Data.define(:name, :role, :detail, :avatar_url, :public_id, :about) do
+    def initialize(name:, role:, detail: nil, avatar_url: nil, public_id: nil, about: nil) = super
 
     # L'accueil salue par le prénom, comme l'ancienne application.
     def first_name = name.split.first

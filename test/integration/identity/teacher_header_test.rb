@@ -3,7 +3,7 @@ require "test_helper"
 # CA-T6 (app-android, Lnclass Teacher) — UDR-0082 §3.1, §3.2. The teacher gets the student's header: no logo, no role
 # badge, the avatar on the left opens the account panel (a link to /teachers/menu without JavaScript), « Besoin
 # d'aide ? » and the light / dark switch on the right. The panel lists « Mon profil » then « Inviter un collègue ».
-# The direction keeps the header it had: logo, role badge, account menu.
+# The direction keeps the header it had: logo, role badge, account menu; UDR-0128 §3.4 adds « Besoin d'aide ? ».
 class Identity::TeacherHeaderTest < ActionDispatch::IntegrationTest
   TRIGGER = "a[href='/teachers/menu'][data-action='modal#open'][aria-haspopup=dialog][aria-controls=account_panel]".freeze
 
@@ -46,7 +46,7 @@ class Identity::TeacherHeaderTest < ActionDispatch::IntegrationTest
     assert_select "dialog#account_panel nav a[href='#{profile_path}']:not([aria-current])"
   end
 
-  test "CA-T6: the direction keeps the logo, the role badge, the account menu and the switch from lg" do
+  test "CA-T6: the direction keeps the logo, the role badge, the account menu and the switch from lg, and gets the help" do
     sign_in_as create_school_admin
 
     get school_admin_classrooms_path
@@ -57,6 +57,7 @@ class Identity::TeacherHeaderTest < ActionDispatch::IntegrationTest
     assert_select "header .ui-badge", text: I18n.t("shared.roles.school_admin")
     assert_select "header button[aria-haspopup=menu][aria-controls=account-menu]", 1
     assert_select "header div[data-controller=theme].max-lg\\:hidden", 1
-    assert_select "header [aria-controls=account_panel], #account_panel, header [aria-controls=help-sheet]", 0
+    assert_select "header a[aria-controls=help-sheet]", 1
+    assert_select "header [aria-controls=account_panel], #account_panel", 0
   end
 end
