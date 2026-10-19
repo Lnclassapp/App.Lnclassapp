@@ -10,6 +10,7 @@ fr:
         pin: "Code secret"
         pin_confirmation: "Confirmation du code secret"
         school_code: "Code d'établissement"
+        position: "Votre fonction"
     errors:
       models:
         dtos/identity/school_staff_registration_input:
@@ -39,6 +40,10 @@ fr:
               blank: "Saisissez le code de votre établissement."
               invalid: "Code d'établissement invalide. Il compte 6 caractères, par exemple K7M-4QZ."
               inclusion: "Code d'établissement invalide. Vérifiez-le auprès de vos enseignants."
+            # ADR-0092, UDR-0092 §3.1 : obligatoire ; un second chef d'établissement actif est refusé, sans nommer le premier.
+            position:
+              blank: "Choisissez votre fonction."
+              head_taken: "Votre établissement a déjà un chef d'établissement sur Lnclass. Choisissez votre fonction ou contactez l'équipe Lnclass."
   identity:
     school_staff_registrations:
       new:
@@ -61,6 +66,7 @@ fr:
         school: "Établissement"
         school_code_placeholder: "K7M-4QZ"
         school_code_hint: "6 caractères, celui que vos enseignants utilisent pour s'inscrire."
+        position: "Votre fonction"
         security: "Sécurité"
         pin_hint: "4 chiffres, que vous seul connaissez."
         submit: "Créer mon compte"

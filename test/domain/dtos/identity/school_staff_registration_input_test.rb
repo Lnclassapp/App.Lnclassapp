@@ -1,14 +1,14 @@
 require "test_helper"
 
 # ADR-0077, UDR-0070 §3.1: the form of the direction registration — the person, the number, the school code and the PIN;
-# neither role nor subject.
+# neither role nor subject. ED-10 (ADR-0092): the position, one of four, required.
 module Dtos
   module Identity
     class SchoolStaffRegistrationInputTest < ActiveSupport::TestCase
       def build(**overrides)
         SchoolStaffRegistrationInput.new(last_name: " Kouassi ", first_name: "Aya  Marie", gender: "female",
                                          contact: "07 01 02 03 04", pin: "2468", pin_confirmation: "2468",
-                                         school_code: "k7m-4QZ", **overrides)
+                                         school_code: "k7m-4QZ", position: "secretary", **overrides)
       end
 
       def errors(**overrides) = build(**overrides).tap(&:validate).errors
@@ -19,6 +19,11 @@ module Dtos
         assert input.valid?
         assert_equal [ "Kouassi", "Aya Marie", "0701020304", "07 01 02 03 04", "k7m4qz", " k7m 4QZ " ],
                      [ input.last_name, input.first_name, input.contact, input.raw_contact, input.school_code, input.raw_school_code ]
+      end
+
+      test "ED-10 : exige une des quatre fonctions ; une valeur forgée se dit comme un oubli" do
+        [ nil, "", "principal" ].each { assert errors(position: it).of_kind?(:position, :blank), it.inspect }
+        assert_empty errors(position: "head")[:position]
       end
 
       test "hérite des règles du nom et exige un genre connu" do

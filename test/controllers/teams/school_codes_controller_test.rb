@@ -13,7 +13,7 @@ class Teams::SchoolCodesControllerTest < ActionDispatch::IntegrationTest
 
   def staff_params(school_code:)
     { last_name: "Kouassi", first_name: "Aya Marie", gender: "female", contact: "0701020304", pin: "4821",
-      pin_confirmation: "4821", school_code: }
+      pin_confirmation: "4821", school_code:, position: "secretary" }
   end
 
   test "CE-07: the regeneration replaces the code, replaces the header and says the new code; the teachers stay" do

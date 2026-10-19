@@ -9,16 +9,26 @@
 | 2026-10-16 | Le chantier repart d'un dossier neuf sur `Develop`, sans reprendre la conception du 2026-09-28 (branche `feature/espace-direction`) | Six chantiers livrés depuis en couvrent la plus grande part ; le code de classe a disparu (ADR-0085) ; les numéros ADR-0065 à 0067 et UDR-0052, 0053 de cette branche sont pris | Non (memo, Q9) |
 | 2026-10-16 | Périmètre réduit à quatre manques vérifiés dans le code : fonctions et droits, changement de classe, recherche d'un élève, recette du PIN côté direction | Inventaire du memo | Non |
 | 2026-10-16 | PRD, ADR-0092 et UDR-0092 à 0094 écrits sur les recommandations de l'agent, en attendant les réponses du porteur (Q1 à Q9) | Le porteur valide le cadrage avant le code | ADR-0092 (Proposé) |
+| 2026-10-16 | Q5 retirée : la direction ne change pas un élève de classe ; Lot D, UDR-0093 (Abandonnée) et ED-40 à ED-51 sortent | Réponse du porteur : l'élève change lui-même de classe (`changement-etablissement-eleve`) | ADR-0092 amendé |
+| 2026-10-16 | DIR-4 : fonction obligatoire (`NOT NULL`) à l'inscription et à l'invitation ; « Préciser ma fonction » sort du Lot B ; `StaffPosition.management?(nil)` devient faux (la règle se ferme par défaut) | Aucune direction n'est inscrite, Lnclass n'est pas lancé | ADR-0092 §4.2, §4.3 |
+| 2026-10-16 | Migration face à des lignes existantes : valeur posée `deputy` (rang gestion, aucun chef inventé), pas d'échec | Un échec bloquerait chaque base de développement semée (deux directions en démo) pour un cas que la production n'a pas ; prouvé par un test de migration | ADR-0092 §4.2 |
+| 2026-10-16 | Le chef unique est relu sous le verrou de la ligne `schools` (celui du plafond de l'ADR-0077) ; l'index partiel tranche en dernier recours dans un point de sauvegarde | Deux inscriptions simultanées se sérialisent sans erreur 500 (ED-13) | ADR-0092 §4.3 |
+| 2026-10-16 | Code parti de `feature/multi-etablissements-enseignant` (PR #250), branche `feature/espace-direction-v2` | Les policies de la direction sur les enseignants et l'acteur (établissement courant) sont communs aux deux chantiers | Non |
+| 2026-10-16 | La note du rang « vie scolaire » se place sous l'en-tête de la page, une fois, plutôt que sous chaque bloc | « Établissement » touche deux blocs (classes, direction) ; une seule phrase suffit | UDR-0092 §3.5 |
 
 ## Ce qui a dérapé
 
 - 2026-10-16 : `git checkout -b` a créé la branche de cadrage et mis à jour l'arbre, mais n'a pas basculé `HEAD` (verrou de `.git/config` tenu par un autre agent, écriture de l'amont refusée). Corrigé par `git symbolic-ref`, l'index étant déjà identique à `origin/Develop`. À surveiller quand plusieurs agents créent des branches en même temps dans des worktrees du même dépôt.
 
+- 2026-10-16 : session interrompue par une erreur d'accès (403) sans rapport avec le travail ; reprise dans le même worktree, rien de perdu. Les assets n'étaient pas construits dans le worktree (`yarn install`, `yarn build`, `yarn build:css` nécessaires avant les tests de contrôleur).
+- Le test `ImageHeaderTest` « 1 MB … en moins d'une demi-seconde » échoue sous la charge de la machine partagée (≈ 10 agents sur 4 cœurs) ; il passe isolé. Sans rapport avec ce chantier.
+
 ## Ce qu'on a appris sur la codebase
 
 - La fiche V2 de la feuille de route (2026-09-28) est périmée : elle donne 22 features restantes à `espace-direction` ; au 2026-10-16, 12 sont faites ou sans objet et 2 sont sorties de la V2. La feuille de route n'a pas été mise à jour par `gestion-etablissement-direction`, `inscription-direction`, `accueil-direction` ni `archivage-classes`.
 - `invitations.position` existe depuis l'ADR-0044 et n'est jamais écrite : la fonction choisie à l'invitation a déjà sa colonne.
-- `MembershipRepositoryPort#add_primary` rouvre une adhésion close (retrait levé) : le changement de classe n'a besoin d'aucune méthode de port nouvelle.
+- `invitations.position` portait une contrainte sur les valeurs de l'ADR-0044 (`principal`, `censor`) : la migration la remplace et la rend obligatoire pour une invitation de direction.
+- `Entities::Identity::Actor` a une valeur par défaut pour chaque champ optionnel : ajouter `staff_position: nil` ne touche aucun des ~170 appelants de test ; seuls les tests qui attendaient un succès d'une direction sur les trois policies ont dû dire sa fonction.
 - Les drapeaux d'affichage des gestes de la direction sont calculés de trois façons (`@school.active?` dans la vue, `@manageable` dans le contrôleur, lambda de policy pour le bloc « Direction ») : le Lot 0 les unifie par la policy avant que le Lot C change les règles.
 - Le changement de lien d'invitation par la direction a été retiré par l'ADR-0083 (Q10 d'`inscription-enseignant`) : « code d'établissement » dans l'index du backlog ne désigne plus un geste à faire.
 
@@ -28,15 +38,18 @@
 |---|---|---|
 | Matricule MENA | Recommandé hors périmètre (Q7) | `abonnement-mobile-money` s'il en a besoin |
 | Tableau de bord par période, historique, export | Recommandé hors périmètre (Q8) | à ouvrir après retour de directions réelles |
-| Forcer le choix de la fonction des comptes antérieurs | Recommandé : garder leurs droits (Q4) | à décider après comptage en production |
+| Archiver l'ancienne branche distante `feature/espace-direction` sous l'étiquette `archive/espace-direction-2026-09-28` | Laissée telle quelle sur consigne ; l'archivage revient au porteur | porteur |
+| Mesures « avant / après » du PRD §7 (page de classe, accueil, recherche p95) | Pas de base de mesure dans la session | à relever sur la recette |
 | Second facteur de la direction | Hors périmètre (ADR-0065) | — |
-| Feuille de route §5 et §6 périmées pour la V2 | Interdit de toucher les index pendant le cadrage | clôture de ce chantier |
+| Feuille de route §5 et §6 périmées pour la V2 (ID-11, ID-20, SC-11, SC-12, SC-16, SC-20, SC-25 désormais faits ; ID-10 = SC-21 sorti par Q5) | La feuille de route est partagée par les chantiers ouverts en parallèle : sa mise à jour revient au porteur, après la fusion | porteur |
+| Sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) non lancés sur le diff final | Non disponibles dans la session de l'exécutant | à lancer sur la PR |
+| « Anciens élèves » : son champ de recherche n'a pas `min-h-tap` (hauteur réduite), même défaut que corrigé ici pour « Chercher un élève » | Hors périmètre | `finitions` |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | |
-| **PR** | |
-| **ADR produits** | ADR-0092 (Proposé) |
-| **UDR produits** | UDR-0092, UDR-0093, UDR-0094 (Proposé) |
+| **Livré le** | 2026-10-19 (PR prête, fusion par le porteur ; #250 déjà fusionnée dans `Develop`) |
+| **PR** | `feature/espace-direction-v2` → `Develop` |
+| **ADR produits** | ADR-0092 (Accepté) |
+| **UDR produits** | UDR-0092, UDR-0094 (Accepté) ; UDR-0093 (Abandonnée) |

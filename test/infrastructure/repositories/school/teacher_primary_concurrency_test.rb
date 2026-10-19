@@ -52,7 +52,7 @@ class TeacherPrimaryConcurrencyTest < ActiveSupport::TestCase
   end
 
   def reinstate
-    actor = Entities::Identity::Actor.new(user_id: @admin.id, role: :school_admin, school_id: @a.id)
+    actor = Entities::Identity::Actor.new(user_id: @admin.id, role: :school_admin, school_id: @a.id, staff_position: "head")
     UseCases::School::ReinstateTeacher.new(
       users: Repositories::Identity::UserRepository.new, schools: Repositories::School::SchoolRepository.new,
       departures: Repositories::School::TeacherDepartureRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,

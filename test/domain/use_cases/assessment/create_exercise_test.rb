@@ -28,6 +28,7 @@ module UseCases
         end
 
         def create(exercise:)
+          raise ImageUnavailable if @refuse == :image
           raise FakeTransaction::Refused if @refuse
 
           exercise.id = 40
@@ -148,6 +149,12 @@ module UseCases
         result = create(exercises: FakeExercises.new(refuse: true))
 
         assert_equal [ :conflict, { base: [ :write_failed ] } ], [ result.code, result.errors ]
+      end
+
+      test "ADR-0105 : une image citée qu'une question ne peut plus prendre refuse l'écriture, sans exception" do
+        result = create(exercises: FakeExercises.new(refuse: :image))
+
+        assert_equal [ :invalid, { questions: [ :image_unavailable ] } ], [ result.code, result.errors ]
       end
     end
   end

@@ -55,9 +55,19 @@ module UseCases
 
         attr_reader :attached
 
-        def attach(user_id:, school_id:, invited_by_id:, at:)
-          (@attached ||= []) << { user_id:, school_id:, invited_by_id:, at: }
-          true
+        # outcome : un code que le port ne promet pas, pour vérifier que le cas d'usage ne le prend pas pour un succès.
+        def initialize(head: false, outcome: nil)
+          @head = head
+          @outcome = outcome
+        end
+
+        def attach(user_id:, school_id:, invited_by_id:, position:, at:)
+          return @outcome if @outcome
+
+          return :head_taken if @head && position == "head"
+
+          (@attached ||= []) << { user_id:, school_id:, invited_by_id:, position:, at: }
+          :attached
         end
       end
 
@@ -70,15 +80,15 @@ module UseCases
       end
 
       def invitation(kind: "team", **attributes)
-        staff = { school_id: 2 } if kind == "school_staff"
+        staff = { school_id: 2, position: "educator" } if kind == "school_staff"
         Entities::Identity::Invitation.new(id: 31, kind:, contact: "0700000009", team_role: ("content" if kind == "team"),
                                            invited_by_id: 7, expires_at: NOW + 1.hour, **staff.to_h, **attributes)
       end
 
-      def use_case(invitation: self.invitation, taken: false)
+      def use_case(invitation: self.invitation, taken: false, head: false, outcome: nil)
         @invitations = FakeInvitations.new(invitation)
         @registrations = FakeRegistrations.new(taken:)
-        @staffs = FakeStaffs.new
+        @staffs = FakeStaffs.new(head:, outcome:)
         @audit = FakeAudit.new
         @transaction = FakeTransaction.new
         AcceptInvitation.new(invitations: @invitations, registrations: @registrations, staffs: @staffs, audit_log: @audit,
@@ -114,11 +124,36 @@ module UseCases
         user = @registrations.created.sole[:user]
         assert_equal [ "Koné", "Awa Marie", "0700000009", "female", "school_admin", nil ],
                      [ user.last_name, user.first_name, user.contact, user.gender, user.role, user.team_role ]
-        assert_equal [ { user_id: 44, school_id: 2, invited_by_id: 7, at: NOW } ], @staffs.attached
+        assert_equal [ { user_id: 44, school_id: 2, invited_by_id: 7, position: "educator", at: NOW } ], @staffs.attached
         assert_equal [ { id: 31, user_id: 44, at: NOW } ], @invitations.accepted
         assert_equal 1, @transaction.calls
         assert_equal [ { action: "invitation.accepted", actor_id: 44, at: NOW, subject_type: "Invitation", subject_id: 31,
-                         metadata: { kind: "school_staff", school_id: 2 } } ], @audit.events
+                         metadata: { kind: "school_staff", school_id: 2, position: "educator" } } ], @audit.events
+      end
+
+      # ED-14 (ADR-0092 §4.2) : la fonction choisie par l'équipe devient celle du rattachement.
+      test "ED-14: the position chosen by the team becomes the position of the attachment" do
+        assert use_case(invitation: invitation(kind: "school_staff", position: "head")).call(token: TOKEN, dto: form).success?
+        assert_equal "head", @staffs.attached.sole[:position]
+      end
+
+      test "an attach outcome unknown to the port raises an ArgumentError instead of passing for a success" do
+        error = assert_raises(ArgumentError) do
+          use_case(invitation: invitation(kind: "school_staff"), outcome: :unexpected).call(token: TOKEN, dto: form)
+        end
+
+        assert_match(/unexpected/, error.message)
+        assert_empty @invitations.accepted
+      end
+
+      test "a head invitation accepted after another head arrived is a conflict, nothing accepted nor audited" do
+        result = use_case(invitation: invitation(kind: "school_staff", position: "head"), head: true).call(token: TOKEN, dto: form)
+
+        assert_equal :conflict, result.code
+        assert_equal({ base: [ :head_taken ] }, result.errors)
+        assert_nil @staffs.attached
+        assert_empty @invitations.accepted
+        assert_nil @audit.events
       end
 
       test "check finds a pending management invitation" do

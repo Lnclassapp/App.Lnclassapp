@@ -68,7 +68,7 @@ module UseCases
         ClassroomEntity.new(id:, public_id: "cls-#{id}", school_id:, level_id:, school_year:, name:, status:)
       end
 
-      def direction(of:) = Entities::Identity::Actor.new(user_id: 4, role: :school_admin, school_id: of)
+      def direction(of:) = Entities::Identity::Actor.new(user_id: 4, role: :school_admin, school_id: of, staff_position: "head")
 
       setup do
         @classrooms = FakeClassrooms.new([ classroom(1, "6ème 1"), classroom(2, "6ème 2"), classroom(3, "6ème 3", status: "archived"),

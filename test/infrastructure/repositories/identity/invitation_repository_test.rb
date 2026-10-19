@@ -35,10 +35,10 @@ module Repositories
 
         result = @repository.create(kind: "school_staff", contact: "0701020305", team_role: nil, invited_by_id: @admin.id,
                                     token_digest: SecureRandom.hex(32), expires_at: @expires_at,
-                                    school_id: school.id, position: "censor")
+                                    school_id: school.id, position: "deputy")
 
         assert result.success?
-        assert_equal [ "school_staff", school.id, "censor", nil ],
+        assert_equal [ "school_staff", school.id, "deputy", nil ],
                      [ result.value.kind, result.value.school_id, result.value.position, result.value.team_role ]
       end
 
