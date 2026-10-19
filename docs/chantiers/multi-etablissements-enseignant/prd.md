@@ -2,7 +2,9 @@
 
 > Les specs sont figées ici. Toute évolution après la phase 3 se fait par modification explicite de ce fichier, pas par improvisation dans le code.
 >
-> **Écrit sur les recommandations du memo** (questions 1 à 8, 10 et 11, non encore répondues par le porteur ; la 9 relève de `enseignant-plusieurs-matieres`). Une réponse différente amende ce PRD avant le Lot 0.
+> **Écrit sur les recommandations du memo** (questions 1 à 8, 10 et 11), **acceptées par le porteur le 2026-10-16** ; la 9 relève de `enseignant-plusieurs-matieres` (matières choisies par établissement, chantier suivant).
+>
+> **Amendé le 2026-10-16 par les réponses MET-4 et MET-8** du porteur : chaque établissement est un espace autonome et complet (la page d'une classe d'un autre établissement ne s'ouvre plus : ME-12 réécrit, ME-25 ajouté) ; deux liens d'invitation séparés (ME-26 à ME-29, remplacent « le lien personnel mène au principal »).
 
 ## 1. Contexte
 
@@ -12,7 +14,7 @@ Un enseignant n'a aujourd'hui qu'un établissement, alors que la table `teacher_
 
 | Acteur | Peut | Ne peut pas |
 |---|---|---|
-| Teacher (rattaché) | Rejoindre un établissement actif de son choix (lien `/i/<jeton>` ouvert connecté, ou DRENA → établissement) tant qu'il en a moins de 3 ; passer d'un établissement à l'autre ; quitter un établissement s'il lui en reste un autre ; tout ce qu'il fait aujourd'hui, **dans l'établissement courant** | Rejoindre un établissement qui l'a retiré (départ ouvert) ; dépasser 3 établissements ; quitter son dernier établissement ; se déclarer dans une classe, publier une annonce ou inviter hors de l'établissement courant (ou du principal pour l'invitation) |
+| Teacher (rattaché) | Partager deux liens : celui de l'établissement courant et son lien de parrainage, sans établissement (MET-8) ; rejoindre un établissement actif de son choix (lien `/i/<jeton>` ouvert connecté, ou DRENA → établissement) tant qu'il en a moins de 3 ; passer d'un établissement à l'autre ; quitter un établissement s'il lui en reste un autre ; tout ce qu'il fait aujourd'hui, **dans l'établissement courant** | Rejoindre un établissement qui l'a retiré (départ ouvert) ; dépasser 3 établissements ; quitter son dernier établissement ; se déclarer dans une classe, publier une annonce ou inviter vers un établissement hors de l'établissement courant |
 | Teacher (sans établissement) | Inchangé : écran d'attente, DRENA → établissement (ADR-0071, 0083) | — |
 | SchoolAdmin | Voir, retirer et réintégrer un enseignant **dans son établissement** (ADR-0071), même s'il en a d'autres ; partager son lien d'invitation | Voir quoi que ce soit d'un autre établissement de l'enseignant ; rattacher un enseignant par son numéro |
 | Team | Voir tous les rattachements (fiche d'établissement, badge « Établissement secondaire ») ; pilotage par établissement et par DRENA | Retirer un enseignant (inchangé, ADR-0071) |
@@ -51,7 +53,7 @@ Règles d'autorisation : `JoinSchoolWithCodePolicy` (amendée), `SwitchCurrentSc
 | La direction de A retire M. Koné, A étant son principal | Il garde B, qui devient principal ; pas d'écran d'attente ; B ne voit rien changer |
 | La direction de A réintègre M. Koné, qui a B | Rattaché à A en plus de B (secondaire) ; au plafond, toast neutre et rien n'est écrit |
 | Session sur un établissement quitté ou retiré | La page suivante est dans le principal, sans message |
-| Une classe de B ouverte alors qu'il est dans A | La page s'ouvre, nomme B ; se déclarer ou écrire une annonce y est refusé avec « Changez d'établissement depuis votre compte » |
+| Une classe de B ouverte alors qu'il est dans A | Retour à l'accueil de A, toast « Cette classe n'est pas dans l'établissement où vous êtes. Changez d'établissement depuis votre compte. » ; rien de B n'est montré (MET-4) |
 | Compte élève, direction ou équipe connecté qui ouvre `/i/<jeton>` | Renvoi vers son accueil, inchangé |
 
 ## 4. Critères d'acceptation
@@ -123,11 +125,18 @@ Scénario: ME-11 — un établissement courant par appareil
   Quand il passe dans B sur la première
   Alors la seconde reste dans son établissement
 
-Scénario: ME-12 — gestes liés à l'établissement courant
+Scénario: ME-12 — une classe d'un autre établissement ne s'ouvre pas (amendé, MET-4)
   Étant donné un enseignant dans A, déclaré dans une classe de B
-  Quand il ouvre la page de cette classe
-  Alors elle s'affiche et nomme B
-  Et se déclarer dans une autre classe de B, ou écrire une annonce à une classe de B, est refusé
+  Quand il ouvre la page de cette classe, son suivi ou « Assigner »
+  Alors il revient à l'accueil de A avec « Changez d'établissement depuis votre compte »
+  Et se déclarer dans une autre classe de B, archiver un devoir de B ou écrire une annonce à une classe de B est refusé, rien n'est écrit
+
+Scénario: ME-25 — l'établissement courant cloisonne tout l'espace enseignant (MET-4)
+  Étant donné un enseignant dans A, rattaché à B, avec une classe, un devoir, une annonce et un niveau enseignés dans B seulement
+  Quand il ouvre l'accueil, « Classes », le catalogue, un cours, un exercice, « Annonces », « Mes annonces », « Nouvelle annonce », « Mon profil » ou « Inviter un collègue »
+  Alors aucune de ces pages ne contient le nom de B, ni sa classe, ni son niveau, ni son devoir, ni son annonce
+  Et « Modifier » l'annonce de B depuis A répond « introuvable »
+  Et une annonce publiée dans A n'archive aucune annonce en ligne de B (plafond de 3 par établissement)
 
 # Quitter (UDR-0099)
 
@@ -192,6 +201,28 @@ Scénario: ME-22 — réintégrer au plafond
   Alors elle voit « ne peut pas être réintégré pour l'instant : il a atteint le nombre d'établissements autorisé »
   Et rien n'est écrit, la ligne reste
 
+# Deux liens d'invitation (MET-8, ADR-0094 §11, UDR-0098 §3.6)
+
+Scénario: ME-26 — le lien de l'établissement courant
+  Étant donné un enseignant dans B, rattaché à A et B
+  Quand il ouvre « Inviter un collègue »
+  Alors le premier lien est celui de B (« Inviter un collègue de B »)
+  Et un collègue qui s'inscrit par ce lien est rattaché à B, voie « colleague », parrainage « link » dans B
+
+Scénario: ME-27 — le lien de parrainage, sans établissement
+  Quand il ouvre « Inviter un collègue »
+  Alors le second lien, « Inviter un autre collègue », ne nomme aucun établissement
+  Et ouvert sans compte, il nomme le collègue qui invite et laisse choisir la DRENA puis l'établissement
+
+Scénario: ME-28 — inscription par le lien de parrainage
+  Quand un nouvel enseignant s'inscrit par ce lien dans l'établissement C de son choix
+  Alors il est rattaché à C, voie « colleague »
+  Et le parrainage est compté au collègue, source « sponsor », établissement C
+
+Scénario: ME-29 — lien de parrainage ouvert par un enseignant déjà inscrit
+  Quand un enseignant connecté ouvre le lien de parrainage d'un collègue
+  Alors il voit « Ce lien sert à inscrire un nouveau collègue » et rien n'est écrit
+
 # Équipe
 
 Scénario: ME-23 — pilotage par établissement et par DRENA
@@ -209,17 +240,17 @@ Scénario: ME-24 — national et fiche d'établissement
 
 | Couche | Éléments prévus |
 |---|---|
-| Domaine | `Entities::School::TeacherSchools::MAX` ; `SessionState#current_school_id` ; `AuditAction` + `teacher.left` ; policies `JoinSchoolWithCodePolicy` et `InviteColleaguePolicy` (amendées), `SwitchCurrentSchoolPolicy`, `LeaveSchoolPolicy` ; use cases `JoinSchoolWithCode` (amendé), `SwitchCurrentSchool`, `LeaveSchool`, `DetachTeacher` et `ReinstateTeacher` (amendés), `ResolveSession` (passe la session) ; DTO `SchoolInviteJoinInput` ; ports `SchoolRepositoryPort` (+ `attach_teacher_within_cap`, `school_ids_for`, `promote_primary`), `SessionRepositoryPort` (+ `set_current_school`), `UserRepositoryPort#actor_for(current_school_id:)` |
+| Domaine | `Policies::Classroom::ClassroomTeacher` (MET-4) ; `Message#cap_school_id` (MET-4) ; `Entities::School::TeacherSchools::MAX` ; `SessionState#current_school_id` ; `AuditAction` + `teacher.left` ; policies `JoinSchoolWithCodePolicy` et `InviteColleaguePolicy` (amendées), `SwitchCurrentSchoolPolicy`, `LeaveSchoolPolicy` ; use cases `JoinSchoolWithCode` (amendé), `SwitchCurrentSchool`, `LeaveSchool`, `DetachTeacher` et `ReinstateTeacher` (amendés), `ResolveSession` (passe la session) ; DTO `SchoolInviteJoinInput` ; ports `SchoolRepositoryPort` (+ `attach_teacher_within_cap`, `school_ids_for`, `promote_primary`), `SessionRepositoryPort` (+ `set_current_school`), `UserRepositoryPort#actor_for(current_school_id:)` |
 | Infrastructure | Migration `sessions.current_school_id` ; `SchoolRepository`, `SessionRepository`, `UserRepository` ; queries `TeacherSchoolsQuery` (nouvelle), `TeacherHomeQuery`, `TeacherFollowUpsQuery`, `CatalogAssignmentTargetsQuery`, `TeacherAudienceQuery`, `ShellUserQuery`, `ProfileQuery`, `ReferralQuery`, `DepartedTeachersQuery`, `DrenaSchoolsQuery`, `TeamDashboardQuery` |
 | Delivery | `School::CurrentSchoolsController#update`, `School::TeacherSchoolsController#index/create/destroy`, `Identity::TeacherRegistrationsController#invite` (connecté), `ColleagueInvitation` (principal) ; routes dans `config/routes/school.rb` |
 | UI | Panneau du compte, accueil enseignant, sélection des classes, page d'une classe (UDR-0098) ; `school/teacher_schools/index`, `_join_fields`, `identity/teacher_registrations/join` (UDR-0099) ; `school_admin/schools/_link` (UDR-0100) |
 
 ## 6. Décisions rattachées
 
-- [ADR-0094](../../decisions/adr/0094-enseignant-multi-etablissements-et-etablissement-courant.md) — établissement courant par session, rattachement par l'enseignant, plafond 3, amende 0030, 0062, 0071, 0083 (Proposé).
-- [UDR-0098](../../decisions/udr/0098-etablissement-courant-de-l-enseignant.md) — établissement courant de l'enseignant (Proposé).
-- [UDR-0099](../../decisions/udr/0099-mes-etablissements-de-l-enseignant.md) — « Mes établissements » et lien ouvert connecté (Proposé).
-- [UDR-0100](../../decisions/udr/0100-enseignant-partage-vu-par-chaque-direction.md) — l'enseignant partagé vu par chaque direction (Proposé).
+- [ADR-0094](../../decisions/adr/0094-enseignant-multi-etablissements-et-etablissement-courant.md) — établissement courant par session, rattachement par l'enseignant, plafond 3, amende 0030, 0062, 0071, 0083 (Accepté, 2026-10-16).
+- [UDR-0098](../../decisions/udr/0098-etablissement-courant-de-l-enseignant.md) — établissement courant de l'enseignant (Accepté, 2026-10-16).
+- [UDR-0099](../../decisions/udr/0099-mes-etablissements-de-l-enseignant.md) — « Mes établissements » et lien ouvert connecté (Accepté, 2026-10-16).
+- [UDR-0100](../../decisions/udr/0100-enseignant-partage-vu-par-chaque-direction.md) — l'enseignant partagé vu par chaque direction (Accepté, 2026-10-16).
 
 ## 7. Mesures
 

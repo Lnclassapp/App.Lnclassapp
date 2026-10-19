@@ -1,7 +1,7 @@
 # ADR-0083 : L'enseignant s'inscrit par la voie standard ou par un lien d'invitation à jeton, sans code d'établissement, et sa voie d'arrivée est enregistrée
 <!-- index
 titre: L'enseignant s'inscrit par la voie standard ou par un lien d'invitation à jeton, sans code d'établissement, et sa voie d'arrivée est enregistrée
-statut: Accepté *(porteur, 2026-10-07)* — *amende 0037 (saisie), 0057 et 0063 (côté enseignant), 0071 (« Changer le lien »), 0073 (nouvelles inscriptions)*
+statut: Accepté *(porteur, 2026-10-07)* — *amende 0037 (saisie), 0057 et 0063 (côté enseignant), 0071 (« Changer le lien »), 0073 (nouvelles inscriptions)* — *amendé par [0094](./0094-enseignant-multi-etablissements-et-etablissement-courant.md) (trois établissements, établissement courant)*
 problematique: Un seul use case `RegisterTeacher` ; `/i/<jeton>` : `referral_token` (collègue), `schools.direction_invite_token`, `schools.team_invite_token` ; `teacher_profiles.joined_via` (`standard`, `colleague`, `direction`, `team`, `code` historique) repris de l'existant ; rattachement immédiat, plus d'écriture dans `school_join_requests` ; nom complet coupé au premier mot, corrigeable, deux colonnes inchangées ; écran d'attente par établissement choisi. Code d'établissement gardé pour la direction. Chantier `inscription-enseignant`.
 -->
 
@@ -190,3 +190,7 @@ add_column :teacher_profiles, :joined_via, :string, null: false, default: "code"
 - `test/system/identity/teacher_signup_test.rb` : deux champs « Nom » et « Prénom(s) », aucun « Nom complet » ; aucun « PIN » affiché.
 - `test/system/identity/teacher_signup_test.rb` : aucun champ « Code d'établissement » sur `/teacher-signup` ni sur l'écran d'attente.
 - `test/db/growth_migrations_test.rb` : la nouvelle migration figure dans `LATER`.
+
+## Amendement du 2026-10-16 — lien ouvert par un enseignant connecté (ADR-0094)
+
+*Chantier `docs/chantiers/multi-etablissements-enseignant`.* Un enseignant **connecté** qui ouvre un lien `/i/<jeton>` valide n'est plus renvoyé vers son accueil : la page lui propose « Rejoindre <établissement> ? » ([UDR-0099](../udr/0099-mes-etablissements-de-l-enseignant.md) §3.4). Le jeton est résolu de nouveau au `POST /teachers/schools` ; le rattachement est **secondaire** (le principal ne change pas), sans demande en attente, et `teacher_profiles.joined_via` ne change pas : la voie (`direction`, `team`, `colleague`) est écrite dans l'audit `school.changed`. Les autres rôles connectés gardent le renvoi vers leur accueil. Détail : [ADR-0094](./0094-enseignant-multi-etablissements-et-etablissement-courant.md) §4.4.

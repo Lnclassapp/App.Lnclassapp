@@ -1,0 +1,42 @@
+<%# 🌐 UI · school/teacher_school_joins/new — lien /i/<jeton> ouvert connecté : « Rejoindre <établissement> ? » ou l'état du lien %>
+<%# Rôle : confirmer (POST), déjà dedans (« Aller dans cet établissement »), plafond, lien de parrainage ou lien plus valable (« Mes établissements ») %>
+<%# ADR  : 0083, 0094 · UDR : 0006, 0054, 0099 (§3.4) · Queries::School::InviteJoinQuery::Row %>
+<% page_title t(".page_title") %>
+<div class="mx-auto max-w-lg">
+  <% case @invite.state %>
+  <% when :confirm %>
+    <%= ui_card id: "join_school", padding: :md do %>
+      <h1 class="font-display text-xl font-extrabold text-ink"><%= t(".confirm.title", school: @invite.school_name) %></h1>
+      <p class="mt-1 text-sm text-mute">
+        <%= t(".confirm.origin", drena: @invite.drena_name,
+                                 inviter: @invite.inviter || t(".inviters.#{@invite.channel}")) %>
+      </p>
+      <p class="mt-4 text-sm text-ink"><%= t(".confirm.description") %></p>
+      <div class="mt-6 flex flex-col gap-3">
+        <%= button_to teacher_school_join_path(params[:token].to_s), method: :post, form: { id: "join-school-form" },
+                      class: "inline-flex min-h-tap w-full cursor-pointer items-center justify-center gap-2 rounded-ln bg-brand px-5 font-semibold text-white hover:bg-brand-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" do %>
+          <%= t(".confirm.join") %>
+        <% end %>
+        <%= ui_button t(".confirm.cancel"), href: teacher_home_path, variant: :secondary, full: true %>
+      </div>
+    <% end %>
+  <% when :already %>
+    <%= ui_empty_state title: t(".already.title", school: @invite.school_name), icon: "building-library", heading: :h1 do %>
+      <%= button_to teacher_current_school_path, method: :patch, params: { school_public_id: @invite.school_public_id },
+                    form: { id: "go-school-form" },
+                    class: "inline-flex min-h-tap cursor-pointer items-center gap-2 rounded-ln bg-brand px-5 font-semibold text-white hover:bg-brand-strong focus-visible:outline-2 focus-visible:outline-brand" do %>
+        <%= t(".already.go") %>
+      <% end %>
+    <% end %>
+  <% when :limit %>
+    <%= ui_empty_state title: t(".limit.title", max: Entities::School::TeacherSchools::MAX), description: t(".limit.description"),
+                       icon: "building-library", heading: :h1,
+                       action: { label: t(".schools"), href: teacher_schools_path, variant: :brand } %>
+  <% when :sponsor %>
+    <%= ui_empty_state title: t(".sponsor.title"), description: t(".sponsor.description"), icon: "user-plus", heading: :h1,
+                       action: { label: t(".schools"), href: teacher_schools_path, variant: :brand } %>
+  <% else %>
+    <%= ui_empty_state title: t(".invalid.title"), description: t(".invalid.description"), icon: "link-slash", heading: :h1,
+                       action: { label: t(".schools"), href: teacher_schools_path, variant: :brand } %>
+  <% end %>
+</div>

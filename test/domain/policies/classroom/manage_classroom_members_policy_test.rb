@@ -10,7 +10,7 @@ module Policies
       def actor(role, user_id: 1, school_id: nil) = Entities::Identity::Actor.new(user_id:, role:, school_id:)
 
       test "IL-12: l'enseignant de la classe, la direction de son établissement et l'équipe" do
-        assert call(actor(:teacher)).success?
+        assert call(actor(:teacher, school_id: SCHOOL_ID)).success?
         assert call(actor(:school_admin, user_id: 5, school_id: SCHOOL_ID)).success?
         assert call(actor(:team, user_id: 9)).success?
       end
@@ -22,6 +22,11 @@ module Policies
       test "IL-12: la classe n'existe pas pour la direction d'un autre établissement, ni pour une direction sans établissement" do
         assert_equal :not_found, call(actor(:school_admin, school_id: SCHOOL_ID + 1)).code
         assert_equal :not_found, call(actor(:school_admin)).code
+      end
+
+      # ADR-0094 (amendement du 2026-10-16) : une classe d'un autre de ses établissements n'existe pas tant qu'il n'y est pas.
+      test "la classe n'existe pas pour son enseignant quand un autre de ses établissements est courant" do
+        assert_equal :not_found, call(actor(:teacher, school_id: SCHOOL_ID + 1)).code
       end
 
       test "IL-12: refuse un élève et l'anonyme" do

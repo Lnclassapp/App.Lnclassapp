@@ -2,14 +2,16 @@ require "test_helper"
 
 # CP-01, CP-05 to CP-07 (ADR-0063, UDR-0050): « Inviter un collègue », on its page and on the teacher home: the personal
 # link, WhatsApp, SMS, copy and native share, and the counter. Only a teacher of an active school sees the block.
-# IE-06 (ADR-0083 §4.1, UDR-0079 §3.7): the personal link is /i/<token>, without the school's code.
+# IE-06 (ADR-0083 §4.1, UDR-0079 §3.7): the links are /i/<token>, without the school's code.
+# ME-26, ME-27 (ADR-0094 §11, MET-8): two links, the one of the current school, then the sponsor link without school.
 class Identity::ReferralsControllerTest < ActionDispatch::IntegrationTest
   PAGE = "identity.referrals".freeze
 
   setup do
     @school = create_school(name: "Lycée Classique d'Abidjan", school_code: "k7m4qz")
     @teacher = create_teacher(school: @school)
-    @token = Orm::TeacherProfile.find_by!(user: @teacher).referral_token
+    @token = Orm::TeacherSchool.find_by!(teacher: @teacher).invite_token
+    @sponsor_token = Orm::TeacherProfile.find_by!(user: @teacher).referral_token
   end
 
   def link = teacher_invite_link_url(@token)
@@ -40,8 +42,41 @@ class Identity::ReferralsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_includes share_message, "Lycée Classique d'Abidjan"
     # ADR-0083: an invited colleague has no code to look for any more.
-    assert_select "#invite_colleagues", text: /vos collègues de Lycée Classique d'Abidjan s'inscrivent avec votre établissement déjà rempli/
+    assert_select "#invite_colleagues h2", text: "Inviter un collègue de Lycée Classique d'Abidjan"
+    assert_select "#invite_colleagues", text: /vos collègues de Lycée Classique d'Abidjan s'inscrivent avec l'établissement déjà rempli/
     assert_no_match(/code/i, css_select("#invite_colleagues").text)
+  end
+
+  test "ME-27: the page then shows the sponsor link, without school, and its ways to share it" do
+    sign_in_as @teacher
+
+    get teacher_invite_path
+
+    sponsor_link = teacher_invite_link_url(@sponsor_token)
+    message = I18n.t("#{PAGE}.sponsor.message", link: sponsor_link)
+    assert_not_equal @token, @sponsor_token
+    assert_select "#invite_colleagues + #invite_others"
+    assert_select "#invite_others" do
+      assert_select "h2", text: I18n.t("#{PAGE}.sponsor.title")
+      assert_select "a#sponsor_link[href='#{sponsor_link}']", text: sponsor_link
+      assert_select "#sponsor_share_actions[data-identity--share-link-value='#{sponsor_link}']"
+      assert_select "a[href='https://wa.me/?text=#{ERB::Util.url_encode(message)}'][data-identity--share-channel-param=whatsapp]"
+      assert_select "[data-clipboard-text-value='#{sponsor_link}'] button[aria-label=\"#{I18n.t("#{PAGE}.sponsor.copy_label")}\"]"
+    end
+    assert_no_match "Lycée Classique", css_select("#invite_others").text
+  end
+
+  test "ME-26: in his second school, the first link is that school's" do
+    second = create_school(name: "Collège Saint-Michel")
+    token = add_teacher_school(@teacher, second).invite_token
+    sign_in_as @teacher
+    patch teacher_current_school_path, params: { school_public_id: second.public_id }
+
+    get teacher_invite_path
+
+    assert_select "#invite_colleagues h2", text: "Inviter un collègue de Collège Saint-Michel"
+    assert_select "a#referral_link[href='#{teacher_invite_link_url(token)}']"
+    assert_select "a#sponsor_link[href='#{teacher_invite_link_url(@sponsor_token)}']"
   end
 
   test "CP-06: the counter says how many colleagues signed up thanks to the teacher" do

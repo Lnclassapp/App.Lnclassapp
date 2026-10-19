@@ -218,6 +218,23 @@ module Queries
         assert_empty departing
       end
 
+      # ADR-0094 §10 : « Mes annonces » et ce qu'une parution archiverait se lisent dans l'établissement courant de
+      # l'enseignant. Trois annonces en ligne dans B ; depuis A, ni la page ni le départ ne les nomment.
+      test "ME — for a teacher, the page and what would leave are read in the school given, never in his other school" do
+        abobo, saint_michel = create_school(name: "Lycée moderne d'Abobo"), create_school(name: "Collège Saint-Michel")
+        a1, b1 = create_classroom(school: abobo, name: "3ème 1"), create_classroom(school: saint_michel, name: "4ème 2")
+        kone = create_teacher(school: abobo, classrooms: [ a1, b1 ])
+        add_teacher_school(kone, saint_michel)
+        [ 1, 2, 3 ].each do |day|
+          create_message(author: kone, title: "B #{day}", audience: "classrooms", classrooms: [ b1 ], published_at: Time.zone.local(2026, 10, day, 8))
+        end
+        create_message(author: kone, title: "A 1", audience: "classrooms", classrooms: [ a1 ], published_at: Time.zone.local(2026, 10, 1, 8))
+
+        assert_equal [ "A 1" ], @query.page(author_id: kone.id, page: 1, now: NOW, school_id: abobo.id).rows.map(&:title)
+        assert_empty @query.departing(author_id: kone.id, now: NOW, school_id: abobo.id)
+        assert_equal [ "B 1" ], @query.departing(author_id: kone.id, now: NOW, school_id: saint_michel.id).map(&:title)
+      end
+
       test "AV-06 — the announcement that would leave is read in one query, without lock: the publication counts again under it" do
         3.times { create_message(author: @kamate, published_at: Time.zone.local(2026, 10, it + 1, 8)) }
 
