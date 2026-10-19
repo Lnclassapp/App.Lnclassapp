@@ -3,12 +3,12 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage — en attente des réponses du porteur (questions 1 à 9) |
+| **Statut** | livré (PR vers `Develop`, 2026-10-16) — réponses du porteur reçues le 2026-10-16 |
 | **Ouvert le** | 2026-10-16 *(reporté le 2026-09-28, relancé avec les vagues V2 à V6)* |
 | **Branche** | `docs/cadrage-changement-etablissement-eleve` (cadrage) ; `feature/changement-etablissement-eleve` (code) |
 | **Programme** | `refonte-application` — hors vague, ligne du backlog de [`docs/chantiers/README.md`](../README.md#backlog) ; recoupe le « changement de classe par l'enseignant ou l'équipe » de `vie-de-la-classe` (V3, [feuille de route §5](../refonte-application/feuille-de-route.md#v3--suivi-pédagogique-enseignant)) |
 
-Décisions : [ADR-0095](../../decisions/adr/0095-l-eleve-change-lui-meme-de-classe-et-d-etablissement.md) · [UDR-0101](../../decisions/udr/0101-profil-eleve-ligne-classe-vers-changer-de-classe.md) · [UDR-0102](../../decisions/udr/0102-changer-de-classe-choix-et-confirmation.md) · [UDR-0103](../../decisions/udr/0103-historique-eleve-periode-de-chaque-classe.md) — toutes « Proposé ».
+Décisions : [ADR-0095](../../decisions/adr/0095-l-eleve-change-lui-meme-de-classe-et-d-etablissement.md) · [UDR-0101](../../decisions/udr/0101-profil-eleve-ligne-classe-vers-changer-de-classe.md) · [UDR-0102](../../decisions/udr/0102-changer-de-classe-choix-et-confirmation.md) · [UDR-0103](../../decisions/udr/0103-historique-eleve-periode-de-chaque-classe.md) — toutes « Accepté » (porteur, 2026-10-16).
 
 ---
 

@@ -29,8 +29,7 @@ module Repositories
       end
 
       def leave_primary(student_id:, at:)
-        Orm::ClassroomStudent.where(student_id:, primary: true, left_at: nil).update_all(left_at: at)
-        true
+        Orm::ClassroomStudent.where(student_id:, primary: true, left_at: nil).update_all(left_at: at).positive?
       end
 
       def remove(classroom_id:, student_id:, removed_by_id:, at:)
