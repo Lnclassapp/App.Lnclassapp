@@ -166,6 +166,7 @@ Travail mis de côté par le porteur. Les vagues V2 à V6 y sont placées le 202
 | [`accueil-eleve`](accueil-eleve/memo.md) | **Livré** le 2026-10-15, fusionné dans `Develop` ([#241](https://github.com/Lnclassapp/App.Lnclassapp/pull/241)) : en-tête au logo et menu de l'avatar (plus de barre du bas élève sur le web), accueil en une colonne, exercice du jour et « Inviter mon enseignant », « Fait seul (7 j) » chez l'enseignant et la direction (ADR-0089, UDR-0084) |
 | [`tests-numero-connexion`](tests-numero-connexion/memo.md) | **Livré** le 2026-10-15, fusionné dans `Develop` ([#248](https://github.com/Lnclassapp/App.Lnclassapp/pull/248)) : cinq tests système alignés sur la connexion au numéro en chiffres seuls (UDR-0060 §3.2), rouges sur `Develop` depuis le 2026-10-11 |
 | [`tests-toast-masque-clic`](tests-toast-masque-clic/memo.md) | **Livré** le 2026-10-15, fusionné dans `Develop` ([#249](https://github.com/Lnclassapp/App.Lnclassapp/pull/249)) : un toast ne masque plus le clic suivant dans les tests système (`dismiss_toasts` partagé), deux tests instables stabilisés |
+| [`aide-whatsapp-message-pret`](aide-whatsapp-message-pret/memo.md) | **Livré** le 2026-10-16 (PR vers `Develop`) : la ligne WhatsApp de la carte d'aide ouvre la conversation avec un message prêt qui présente l'élève, l'enseignant ou la direction (nom, rôle, établissement, aucun identifiant), message simple pour un visiteur ; « Besoin d'aide ? » dans l'en-tête de la direction ; remplace à court terme `canal-whatsapp` ; textes à confirmer par le porteur (UDR-0128) |
 
 ## Cycle de vie
 

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · ShellLayout — ce dont le shell a besoin : la personne connectée, sous la forme d'un ShellUser
 # Rôle : fournit shell_user aux contrôleurs qui rendent layouts/shell (espaces connectés, et /aide pour un compte connecté)
-# ADR  : 0060 · UDR : 0006, 0061 (amendement du 2026-10-06), 0084 (§3.4)
+# ADR  : 0060 · UDR : 0006, 0061 (amendement du 2026-10-06), 0084 (§3.4), 0128 (about : message WhatsApp prêt)
 module ShellLayout
   extend ActiveSupport::Concern
 
@@ -14,7 +14,7 @@ module ShellLayout
   def shell_user
     @shell_user ||= Queries::Identity::ShellUserQuery.new.call(user_id: current_session.user_id).then do |row|
       NavigationHelper::ShellUser.new(name: row.name, role: row.role, detail: row.detail, public_id: row.public_id,
-                                      avatar_url: helpers.account_photo_src(row.public_id, row.photo_version))
+                                      avatar_url: helpers.account_photo_src(row.public_id, row.photo_version), about: row.about)
     end
   end
 end

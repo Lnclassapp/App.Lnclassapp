@@ -14,11 +14,13 @@ class SupportConfigTest < ActiveSupport::TestCase
     end
   end
 
-  test "a number is digits only, country code included, 12 or 13 digits, or left empty" do
+  # UDR-0128 §3.2 : wa.me n'accepte que le format international sans « + » ni zéro de tête : 0584258085 (sans
+  # indicatif) n'ouvre aucune conversation ; la Côte d'Ivoire, c'est 225 suivi des 10 chiffres, 2250584258085.
+  test "a number is digits only, country code included and not starting with 0, 12 or 13 digits, or left empty" do
     ENVIRONMENTS.each do |env|
       %i[phone whatsapp].each do |key|
         value = support(env)[key].to_s
-        assert_match(/\A(\d{12,13})?\z/, value, "#{env}.#{key} : chiffres seuls, indicatif 225 compris, sans +")
+        assert_match(/\A([1-9]\d{11,12})?\z/, value, "#{env}.#{key} : chiffres seuls, indicatif 225 compris, sans + ni 0 de tête")
       end
     end
   end
