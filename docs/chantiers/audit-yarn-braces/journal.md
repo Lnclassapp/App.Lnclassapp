@@ -5,6 +5,7 @@
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
 | 2026-10-03 | Ignorer l'avis `1240992` jusqu'au 2026-10-17, sous garde-fou daté | Porteur : option 1 ; aucune version corrigée, dépendance de build seulement | Non |
+| 2026-10-19 | Report du réexamen au 2026-10-31 | `braces` reste en 3.0.3 (dernière version publiée) ; `yarn npm audit --environment production` ne remonte rien : l'avis ne touche que le build, pas le runtime servi | Non |
 
 ## Ce qui a dérapé
 
@@ -14,7 +15,7 @@
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Retirer la dérogation dès que `braces` publie une version corrigée (puis `yarn up braces`) | Aucune version corrigée le 2026-10-03 | Réexamen le 2026-10-17, imposé par le garde-fou |
+| Retirer la dérogation dès que `braces` publie une version corrigée (puis `yarn up braces`) | Aucune version corrigée le 2026-10-03 | Réexamen le 2026-10-31, imposé par le garde-fou |
 
 ## Clôture
 

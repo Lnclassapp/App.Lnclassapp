@@ -16,7 +16,7 @@ class SchoolAdmin::SharedTeacherIsolationTest < ActionDispatch::IntegrationTest
     @kone = create_teacher(school: @a, classrooms: [ @a3, @b4 ], first_name: "Ibrahim", last_name: "Koné")
     add_teacher_school(@kone, @b)
     exercise = create_exercise(title: "Exercice de Saint-Michel")
-    create_assignment(classroom: @b4, assignable: exercise, by: @kone, due_on: Date.current + 2)
+    @in_b = create_assignment(classroom: @b4, assignable: exercise, by: @kone, due_on: Date.current + 2)
     create_message(author: @kone, audience: "classrooms", classrooms: [ @b4 ], title: "Sortie de Saint-Michel")
     @direction_a = create_school_admin(school: @a)
     @direction_b = create_school_admin(school: @b)
@@ -42,6 +42,15 @@ class SchoolAdmin::SharedTeacherIsolationTest < ActionDispatch::IntegrationTest
     assert_select "main", text: /Ibrahim Koné.*3ème 1/m
   end
 
+  # UDR-0100 §3.1 : la confirmation « Retirer » ne dit pas qu'il a un autre établissement.
+  test "ME-19: the « Retirer » confirmation never hints at another school" do
+    sign_in_as @direction_a
+    get school_admin_teacher_removal_path(@kone.public_id)
+
+    assert_response :success
+    assert_no_match(/autre établissement|secondaire/i, response.body)
+  end
+
   test "ME-17: the direction of B sees M. Koné with « 4ème 2 » only" do
     sign_in_as @direction_b
     get school_admin_teachers_path
@@ -57,6 +66,8 @@ class SchoolAdmin::SharedTeacherIsolationTest < ActionDispatch::IntegrationTest
     sign_out
 
     assert_equal [ [ @b.id, true ] ], Orm::TeacherSchool.where(teacher: @kone).pluck(:school_id, :primary)
+    assert_equal "active", @in_b.reload.status, "son devoir de B reste actif"
+    assert_equal [ @b4.id ], Orm::TeacherClassroom.where(teacher: @kone).pluck(:classroom_id), "sa classe de B lui reste"
     sign_in_as @kone
     get teacher_home_path
     assert_response :success

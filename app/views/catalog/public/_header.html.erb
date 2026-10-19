@@ -1,0 +1,17 @@
+<%# 🌐 UI · catalog/public/_header — en-tête des pages publiques du catalogue : le logo, puis « Se connecter » ou « Mon espace » %>
+<%# Rôle : copie de l'en-tête de la homepage (UDR-0059) ; une personne connectée retrouve son accueil par « Mon espace » %>
+<%# UDR  : 0113 (§3.1), 0059 · ADR : 0099 (§4.2) %>
+<header class="sticky top-0 z-50 border-b border-ink/10 bg-paper/90 backdrop-blur">
+  <nav aria-label="<%= t(".label") %>" class="mx-auto flex h-bar max-w-page items-center justify-between gap-4 px-gutter">
+    <%= link_to root_path, "aria-label": t(".home"),
+          class: "flex min-h-tap items-center gap-2.5 rounded-full focus-visible:outline-2 focus-visible:outline-brand" do %>
+      <%= image_tag brand_logo, alt: "", width: 36, height: 36, class: "size-9 rounded-sm" %>
+      <span class="font-display text-xl font-extrabold tracking-tight">Lnclass</span>
+    <% end %>
+    <% if current_actor %>
+      <%= ui_button t(".my_space"), href: root_path, variant: :secondary, size: :sm, icon: "home" %>
+    <% else %>
+      <%= ui_button t(".sign_in"), href: new_session_path, variant: :secondary, size: :sm, icon: "arrow-right-end-on-rectangle" %>
+    <% end %>
+  </nav>
+</header>

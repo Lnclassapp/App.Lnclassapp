@@ -1,0 +1,92 @@
+# Pages publiques du catalogue (ADR-0099, UDR-0113 à 0115) : gabarit commun, liste des niveaux, Espace Niveau, page
+# niveau × série, page matière. Textes impersonnels ; l'appel à l'action tutoie l'élève (UDR-0113 §3.5). Vocabulaire de
+# l'UDR-0007 : « cours », « matière », « niveau », « série ».
+fr:
+  catalog:
+    public:
+      courses_count:
+        one: "1 cours"
+        other: "%{count} cours"
+      published_count:
+        one: "1 cours publié"
+        other: "%{count} cours publiés"
+      materials_count:
+        one: "1 matière"
+        other: "%{count} matières"
+      see_all:
+        one: "Voir le cours"
+        other: "Voir les %{count} cours"
+      header:
+        label: "Navigation principale"
+        home: "Lnclass, accueil"
+        sign_in: "Se connecter"
+        my_space: "Mon espace"
+      footer:
+        label: "Plus sur Lnclass"
+      head:
+        image_alt: "Lnclass, le programme ivoirien de la 6e à la Terminale"
+      call_to_action:
+        visitor_title: "Ces cours t'attendent sur Lnclass."
+        sign_up: "Créer mon compte élève"
+        sign_in: "J'ai déjà un compte"
+        student_title: "Les cours de ta classe t'attendent dans ton espace."
+        my_courses: "Voir mes cours"
+        member_title: "Le catalogue complet est dans l'espace connecté."
+        catalog: "Ouvrir le catalogue"
+      material_group:
+        # Nom accessible du titre de groupe, qui mène à la page matière (UDR-0113 §3.8).
+        label: "%{material}, %{courses}, voir les cours de la matière"
+    level_pages:
+      index:
+        page_title: "Les cours par niveau"
+        back: "Accueil"
+        title: "Les cours par niveau"
+        lead: "Du collège au lycée, le programme ivoirien sur Lnclass."
+        description: "Les cours de Lnclass de la 6e à la Terminale : choisissez un niveau."
+        cycles:
+          first: "Premier cycle"
+          second: "Second cycle"
+        series:
+          one: "Série %{names}"
+          other: "Séries %{names}"
+        empty: "Les cours arrivent bientôt."
+      show:
+        title: "Cours de %{level}"
+        back: "Les cours par niveau"
+        summary: "%{courses}, en %{materials}."
+        none: "Aucun cours publié pour l'instant."
+        series_label: "Séries"
+        description: "Les cours de %{level} sur Lnclass : %{materials}."
+        empty:
+          title: "Les cours de ce niveau arrivent bientôt."
+          action: "Voir les autres niveaux"
+    series_pages:
+      show:
+        title: "Cours de %{level} %{series}"
+        summary: "%{courses}, en %{materials}."
+        summary_with_common: "%{courses}, en %{materials}, dont les cours communs à toutes les séries de %{level}."
+        none: "Aucun cours publié pour l'instant."
+        series_label: "Autres séries"
+        description: "Les cours de %{level} %{series} sur Lnclass : %{materials}."
+        empty:
+          title: "Les cours de %{level} %{series} arrivent bientôt."
+          action: "Voir la %{level}"
+    material_pages:
+      show:
+        page_title: "Cours de %{material}"
+        title_with_level: "%{material} en %{level}"
+        back: "Les cours par niveau"
+        summary:
+          one: "1 cours publié."
+          other: "%{count} cours publiés."
+        levels_label: "Niveaux"
+        all_levels: "Tous les niveaux"
+        level_pill: "%{level} · %{count}"
+        level_pill_label: "%{level}, %{courses}"
+        description: "Les cours de %{material} sur Lnclass, de la 6e à la Terminale."
+        description_with_level: "Les cours de %{material} en %{level} sur Lnclass."
+        empty:
+          title: "Les cours de cette matière arrivent bientôt."
+          action: "Voir les niveaux"
+      page:
+        more: "Afficher plus de cours"

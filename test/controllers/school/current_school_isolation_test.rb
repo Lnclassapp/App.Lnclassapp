@@ -13,8 +13,8 @@ class School::CurrentSchoolIsolationTest < ActionDispatch::IntegrationTest
     fourth = create_level(name: "4ème", position: 3)
     @course6 = create_course(level: sixth, material:, name: "Nombres entiers")
     @course4 = create_course(level: fourth, material:, name: "Puissances de dix")
-    @exercise4 = create_exercise(essential: create_essential(course: @course4, name: "Écriture scientifique"),
-                                 title: "Exercice de Saint-Michel")
+    @essential4 = create_essential(course: @course4, name: "Écriture scientifique")
+    @exercise4 = create_exercise(essential: @essential4, title: "Exercice de Saint-Michel")
     @a6 = create_classroom(school: @a, level: sixth, name: "6ème 1")
     @b4 = create_classroom(school: @b, level: fourth, name: "4ème 2")
     @teacher = create_teacher(school: @a, material:, classrooms: [ @a6, @b4 ], first_name: "Ibrahim", last_name: "Koné")
@@ -31,6 +31,7 @@ class School::CurrentSchoolIsolationTest < ActionDispatch::IntegrationTest
   def assert_nothing_of_b(path)
     get path
     assert_response :success, path
+    assert_select "main", { count: 1 }, path
     content = css_select("main").text
     B_MARKERS.each { |marker| assert_no_match marker, content, "#{path} : #{marker}" }
     assert_select "main a[href*='#{@b4.public_id}']", { count: 0 }, path
@@ -47,6 +48,33 @@ class School::CurrentSchoolIsolationTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "main", text: /4ème 2/, count: 0
     assert_select "main a[href*='#{@b4.public_id}'], main form[action*='#{@b4.public_id}']", count: 0
+  end
+
+  # A level taught in both schools: its course and its essential name nothing of B.
+  test "a course and an essential of a level taught in A and in B: nothing of B" do
+    create_classroom(school: @a, level: @b4.level, name: "4ème 5").tap { Orm::TeacherClassroom.create!(teacher: @teacher, classroom: it) }
+
+    [ course_path(@course4.slug), course_essential_path(@course4.slug, @essential4.slug) ].each do |path|
+      get path
+      assert_response :success, path
+      assert_select "main", { count: 1 }, path
+      assert_no_match "4ème 2", css_select("main").text, path
+      assert_no_match "Collège Saint-Michel", css_select("main").text, path
+      assert_select "main a[href*='#{@b4.public_id}'], main form[action*='#{@b4.public_id}']", { count: 0 }, path
+    end
+  end
+
+  # ADR-0094 §10 : trois annonces en ligne dans B ; depuis A, le formulaire (« celle-ci partira ») et « Mes annonces »
+  # n'en nomment aucune.
+  test "three live announcements in B: the form and « Mes annonces » in A name none of them" do
+    titles = [ "Cantine de Saint-Michel", "Chorale de Saint-Michel" ]
+    titles.each { create_message(author: @teacher, audience: "classrooms", classrooms: [ @b4 ], title: it) }
+
+    [ new_announcement_path, my_announcements_path ].each do |path|
+      get path
+      assert_response :success, path
+      [ *titles, "Sortie de Saint-Michel" ].each { assert_no_match it, css_select("main").text, "#{path} : #{it}" }
+    end
   end
 
   test "a classroom of B, its exercise to follow and its announcement are refused from A, and nothing is written" do

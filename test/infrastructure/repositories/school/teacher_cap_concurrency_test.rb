@@ -33,7 +33,7 @@ class TeacherCapConcurrencyTest < ActiveSupport::TestCase
         gate.pop
         ActiveRecord::Base.connection_pool.with_connection do
           Repositories::School::SchoolRepository.new.attach_teacher_within_cap(teacher_id: @teacher.id, school_id: school.id,
-                                                                             primary: false, cap: 3, at: Time.current)
+                                                                             cap: 3, at: Time.current)
         end
       end
     end

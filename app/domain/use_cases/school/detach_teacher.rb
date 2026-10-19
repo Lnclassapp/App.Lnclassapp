@@ -47,9 +47,11 @@ module UseCases
 
       private
 
-      # Le rattachement est supprimé d'abord : zéro ligne, c'est qu'il n'était pas de cet établissement (ou déjà retiré
-      # dans un autre onglet) ; rien d'autre n'est écrit.
+      # Sous le verrou du compte (ADR-0094 §4.5) : un départ de l'enseignant au même moment attend, puis compte ce qui
+      # reste. Le rattachement est supprimé d'abord : zéro ligne, c'est qu'il n'était pas de cet établissement (ou déjà
+      # retiré dans un autre onglet) ; rien d'autre n'est écrit.
       def detach(actor, school_id, teacher, now)
+        @schools.lock_teacher(teacher_id: teacher.id)
         raise Aborted, Shared::Result.failure(:not_found) if @schools.detach_teacher(teacher_id: teacher.id, school_id:).zero?
 
         detached = Detached.new(

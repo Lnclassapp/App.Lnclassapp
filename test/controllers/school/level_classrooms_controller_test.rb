@@ -81,6 +81,33 @@ class School::LevelClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[type=radio][name='student_registration[classroom_public_id]']", 2
   end
 
+  # UDR-0102 §3.1, §4 : « Changer de classe » passe la classe actuelle de l'élève ; sa case est désactivée et dit « Ta classe ».
+  test "UDR-0102: the current classroom is disabled with « Ta classe », in place of « Complète », and nothing more is said" do
+    create_student(classroom: @un)
+
+    classrooms(scope: "student_classroom_change", current: @deux.public_id)
+
+    assert_select "input[type=radio][name='student_classroom_change[classroom_public_id]']", 2
+    assert_select "label.opacity-60", 2
+    assert_select "label.opacity-60", text: /3e 2/ do
+      assert_select "input[type=radio][disabled][value='#{@deux.public_id}']"
+      assert_select "span", text: I18n.t("#{PICKER}.current")
+      assert_select "span", text: I18n.t("#{PICKER}.full"), count: 0
+    end
+    assert_select "label", text: /3e 1/ do
+      assert_select "span", text: I18n.t("#{PICKER}.full")
+    end
+  end
+
+  test "UDR-0102: without current, or with a forged one, no box says « Ta classe »" do
+    [ {}, { current: "x'>&lt;b" }, { current: "cls-inconnu" } ].each do |params|
+      classrooms(**params)
+
+      assert_select "input[type=radio][disabled]", 0
+      assert_no_match(/#{I18n.t("#{PICKER}.current")}/, response.body)
+    end
+  end
+
   test "IL-06: a level without an active classroom, a closed school or an unknown one: « not on Lnclass yet »" do
     closed = create_school(status: "inactive")
     create_classroom(school: closed, level: @level)

@@ -47,6 +47,39 @@ module Communication
                    sitemap_urls
     end
 
+    # CC-21 (ADR-0099 §4.4) : après le blog, /niveaux puis les niveaux, les couples niveau × série et les matières qui ont un
+    # cours publié, en adresses canoniques, avec la date du cours le plus récent ; jamais une adresse à paramètre.
+    test "CC-21: the sitemap lists the public catalogue pages that have a published course, and those only" do
+      referential = seed_referential
+      tle = referential[:levels].fetch("tle")
+      maths = referential[:materials].fetch("mathematiques")
+      suites = create_course(level: tle, material: maths, series: referential[:series].fetch("d"))
+      sixieme = create_course(level: referential[:levels].fetch("6eme"), material: referential[:materials].fetch("svt"))
+      create_course(level: referential[:levels].fetch("5eme"), material: maths, status: "draft")
+      suites.update_columns(updated_at: Time.zone.local(2026, 10, 10, 8))
+      sixieme.update_columns(updated_at: Time.zone.local(2026, 10, 12, 9))
+
+      get sitemap_path
+
+      catalog = sitemap_urls.drop_while { !it.first.include?("/niveaux") }
+      assert_equal [ [ "https://lnclass.com/niveaux", "2026-10-12T09:00:00Z" ],
+                     [ "https://lnclass.com/niveaux/6eme", "2026-10-12T09:00:00Z" ],
+                     [ "https://lnclass.com/niveaux/tle", "2026-10-10T08:00:00Z" ],
+                     [ "https://lnclass.com/niveaux/tle/d", "2026-10-10T08:00:00Z" ],
+                     [ "https://lnclass.com/matieres/mathematiques", "2026-10-10T08:00:00Z" ],
+                     [ "https://lnclass.com/matieres/svt", "2026-10-12T09:00:00Z" ] ], catalog
+      assert_no_match(%r{/niveaux/5eme|/niveaux/tle/c|[?&](page|niveau|serie)=}, response.body)
+    end
+
+    test "without a published course, the sitemap has no catalogue address" do
+      referential = seed_referential
+      create_course(level: referential[:levels].fetch("tle"), material: referential[:materials].fetch("mathematiques"), status: "archived")
+
+      get sitemap_path
+
+      assert_no_match(%r{/niveaux|/matieres}, response.body)
+    end
+
     test "the sitemap is a valid urlset document" do
       get sitemap_path
 

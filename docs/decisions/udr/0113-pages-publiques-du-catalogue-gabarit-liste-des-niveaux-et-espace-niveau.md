@@ -1,14 +1,14 @@
 # UDR-0113 : Pages publiques du catalogue — gabarit commun, liste des niveaux `/niveaux` et Espace Niveau `/niveaux/:slug`
 <!-- index
 titre: Pages publiques du catalogue : gabarit commun, liste des niveaux, Espace Niveau (CA-17)
-statut: Proposé
+statut: Accepté
 adr-lie: [0099](../adr/0099-pages-publiques-du-catalogue-lues-sans-compte-indexees-sans-cache-html.md)
 problematique: Gabarit des pages publiques du catalogue (en-tête de la homepage, appel à l'action selon la session, pied, balises), liste des niveaux par cycle, Espace Niveau : séries en pastilles, cours publiés groupés par matière dans l'ordre du programme, 6 cartes par matière puis « Voir les N cours ». Cartes sans lien. Points d'entrée : bande « Matières » de la homepage en liens, « Les cours par niveau » au pied (amende 0064, 0063 §3.4). Chantier `catalogue-complet`.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/catalogue-complet`](../../chantiers/catalogue-complet/memo.md) — questions 1, 3, 4, 6, 8, 12 du grill ; [PRD](../../chantiers/catalogue-complet/prd.md) CC-01 à CC-08, CC-19 à CC-22 |
 | **ADR lié** | [ADR-0099](../adr/0099-pages-publiques-du-catalogue-lues-sans-compte-indexees-sans-cache-html.md) · [ADR-0067](../adr/0067-budgets-de-temps-serveur-des-ecrans.md) · [ADR-0090](../adr/0090-lecture-des-fiches-par-l-eleve-et-rang-des-matieres.md) (rang des matières) |
@@ -49,13 +49,13 @@ Un visiteur qui se demande si Lnclass couvre « la Terminale » n'a rien à ouvr
 
 **Conteneur de page** : `catalog/public/_header`, puis `main#public_catalog.mx-auto.w-full.max-w-page.px-gutter.py-8` (pleine largeur jusqu'à 1 200 px, marge `px-gutter` de 16 px au téléphone), puis `_footer`.
 
-**Fil d'Ariane** : `nav aria-label="Fil d'Ariane"` > `ol.flex.flex-wrap.gap-x-2.text-sm.text-mute` en tête de `main`, séparateur `ui_icon "chevron-right", variant: :mini` (`aria-hidden`). Dernier élément en `aria-current="page"`, sans lien.
+**Retour** (amendé au Lot 0, 2026-10-16) : un seul `ui_back_link` en tête de `main`, libellé du nom de la page d'arrivée, comme partout ailleurs (UDR-0054 §3.2). Le fil d'Ariane prévu au cadrage est abandonné : l'UDR-0054 l'interdit et le garde-fou FU-11 (`test/views/page_titles_test.rb`) le refuse. Le chemin parcouru reste lisible par le retour et le `h1`.
 
 ### 3.2 Liste des niveaux — `catalog/level_pages/index.html.erb`
 
 De haut en bas :
 
-1. Fil d'Ariane : « Accueil » (`root_path`) › « Niveaux ».
+1. Retour : « Accueil » (`root_path`).
 2. `h1.font-display.text-3xl.font-extrabold` « Les cours par niveau » ; `p.mt-2.text-mute` « Du collège au lycée, le programme ivoirien sur Lnclass. »
 3. Deux `section` : « Premier cycle » et « Second cycle » (`levels.cycle`), `h2.font-display.text-xl.font-extrabold`. Une section sans niveau listé n'est pas rendue.
 4. Dans chaque section, `ul.grid.grid-cols-2.gap-3.sm:grid-cols-3.lg:grid-cols-4` ; un niveau = `li` > `link_to public_level_path(slug)`, `rounded-card.border.border-line.bg-white.p-4.shadow-card.min-h-tap.block`, nom en `font-display.text-lg.font-extrabold`, puis `text-sm.text-mute` « N cours » ; ses séries en `text-xs.text-mute` (« Séries A, C, D »), si elles existent.
@@ -67,7 +67,7 @@ Un niveau **sans cours publié** n'est pas listé. Aucun niveau listé : `ui_emp
 
 De haut en bas :
 
-1. Fil d'Ariane : « Accueil » › « Niveaux » (`public_levels_path`) › nom du niveau.
+1. Retour : « Les cours par niveau » (`public_levels_path`).
 2. `h1` : `t(".title", level: name)` → « Cours de Terminale » ; `p.mt-2.text-mute` : « N cours publiés, en M matières. »
 3. **Séries** (si le niveau en a) : `nav aria-label="Séries"` > `ul.mt-4.flex.flex-wrap.gap-2` ; une pastille par série, `link_to public_level_series_path(level, series)`, `inline-flex.min-h-tap.items-center.rounded-full.border.border-line.bg-white.px-4.text-sm.font-bold.text-ink`, texte « Terminale D ». Une série sans cours publié propre **ni** cours commun du niveau n'est pas rendue.
 4. `_call_to_action id: "level_cta_top"`, `mt-6`.

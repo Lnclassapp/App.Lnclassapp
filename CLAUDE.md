@@ -33,6 +33,18 @@ Chiffres et preuves : [`docs/chantiers/sobriete-tokens/memo.md`](docs/chantiers/
 
 ---
 
+## Choix du modèle
+
+Règle et table : [`docs/workflows/README.md`](docs/workflows/README.md#quel-modèle-pour-quel-rôle), décision [ADR-0104](docs/decisions/adr/0104-routage-des-modeles-par-role.md).
+
+- **Opus** : l'orchestrateur (cadrage, décisions, arbitrage, fusions) et les sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`).
+- **Sonnet** : l'exécution d'un lot déjà cadré (`executant-lot`), tests et corrections compris.
+- **Haiku** : les vérifications pures (`verificateur-ci` : `bin/ci-quiet`, tests système relancés, verdict).
+- Le plus petit modèle qui fait le travail ; on monte d'un cran dès qu'il faut du jugement (sécurité, concurrence, architecture, décision métier).
+- Appliquer : `model:` dans `.claude/agents/`, paramètre `model` à l'appel d'un agent, `/model` pour la session.
+
+---
+
 ## Avant de coder
 
 **Tout travail suit [`docs/workflows/README.md`](docs/workflows/README.md)** — c'est le seul processus valide, en 5 phases : Cadrer → Décider → Planifier → Exécuter → Prouver.

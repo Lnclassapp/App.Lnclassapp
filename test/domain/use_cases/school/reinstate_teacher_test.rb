@@ -25,11 +25,13 @@ module UseCases
         def find_by_id(id:) = @schools[id]
         def school_ids_for(teacher_id:) = @elsewhere.fetch(teacher_id, [])
 
-        def attach_teacher_within_cap(teacher_id:, school_id:, primary:, cap:, at:)
+        # Le principal se décide ici, sous le verrou (ADR-0094 §4.5) : aucun autre établissement.
+        def attach_teacher_within_cap(teacher_id:, school_id:, cap:, at:)
           return Shared::Result.failure(:conflict, errors: { base: [ @refuse_attach ] }) if @refuse_attach
 
+          primary = school_ids_for(teacher_id:).empty?
           @attached << { teacher_id:, school_id:, primary:, cap:, at: }
-          Shared::Result.success
+          Shared::Result.success(primary)
         end
       end
 

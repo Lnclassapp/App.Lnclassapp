@@ -26,10 +26,7 @@ module Repositories
                                              current_school_id:)
       end
 
-      def set_current_school(id:, school_id:)
-        Orm::Session.where(id:).update_all(current_school_id: school_id)
-        true
-      end
+      def set_current_school(id:, school_id:) = Orm::Session.where(id:).update_all(current_school_id: school_id)
 
       def touch(id:, at:)
         Orm::Session.where(id:).update_all(last_seen_at: at)

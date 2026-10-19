@@ -3,9 +3,9 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage — questions au porteur ouvertes |
+| **Statut** | livré le 2026-10-16 — PR prête vers `Develop` (recommandations acceptées par le porteur le 2026-10-16) |
 | **Ouvert le** | 2026-10-16 |
-| **Branche** | `docs/cadrage-catalogue-complet` (cadrage, docs seules) ; le code passera par `feature/catalogue-complet` et une PR |
+| **Branche** | `docs/cadrage-catalogue-complet` (cadrage, docs seules) ; code sur `feature/catalogue-complet`, une PR vers `Develop` |
 | **Programme** | [`refonte-application`](../refonte-application/feuille-de-route.md), vague **V4**, premier chantier de la vague |
 
 ---
