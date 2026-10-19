@@ -96,12 +96,12 @@ module Finitions
       within "main" do
         assert_selector "nav", count: 1
         assert_selector "nav[aria-label='#{t('components.back_link.label')}'] a[href='#{courses_path}']",
-                        text: t("catalog.courses.show.back")
+                        text: "Cours"
         assert_no_link "SVT"
         # UDR-0130 : la liste des fiches de révision d'une fiche de cours.
         assert_selector "#course_essentials_title", text: "Révisions de la leçon"
       end
-      within("main nav") { click_on t("catalog.courses.show.back") }
+      within("main nav") { click_on "Cours" }
       assert_current_path courses_path
       assert_title "Cours · Élève · Lnclass"
       assert_selector "#courses_total", text: /\A\d+ fiches? de cours\z/

@@ -28,7 +28,7 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     visit exercise_path(failed.public_id)
     click_on I18n.t("assessment.exercises.student_progress.start")
     play(correct: 0)
-    assert_selector "#session_gap_outcome", text: I18n.t("#{RESULTS}.gap_outcome.opened.message")
+    assert_selector "#session_gap_outcome", text: "Cette fiche de révision passe à revoir."
 
     visit student_home_path
     within("#student_home_gaps") { click_on "Théorème de Thalès" }
@@ -36,7 +36,7 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     click_on I18n.t("catalog.essentials.show.gap_action")
     remediation = play(correct: QUESTIONS)
     assert_equal "remediation", Orm::ExerciseSession.find_by!(public_id: remediation).kind
-    assert_selector "#session_gap_outcome", text: I18n.t("#{RESULTS}.gap_outcome.lifted.message")
+    assert_selector "#session_gap_outcome", text: "Fiche de révision levée !"
 
     visit student_home_path
     assert_no_selector "#student_home_gaps"
@@ -44,6 +44,7 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     sign_out
     sign_in_as teacher
     visit classroom_essential_path(classroom.public_id, course.slug, thales.slug)
+    assert_selector "#classroom_essential_gaps_lifted", text: "Fiche de révision levée"
     assert_selector "#classroom_essential_gaps_lifted li", text: "Awa Bamba"
     assert_no_selector "#classroom_essential_gaps_pending"
   end

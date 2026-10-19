@@ -21,6 +21,16 @@ class Teams::RowActionsMenuTest < ApplicationSystemTestCase
     JS
   end
 
+  # True when the whole element lies at least `gap` px inside the screen on both sides (the margin `nudge()` keeps).
+  def inside_screen_with_margin?(selector, gap = 8)
+    page.evaluate_script(<<~JS)
+      (() => {
+        const box = document.querySelector(#{selector.to_json}).getBoundingClientRect()
+        return box.left >= #{gap} && box.right <= document.documentElement.clientWidth - #{gap}
+      })()
+    JS
+  end
+
   test "Supprimer in the menu of the last row opens its confirmation, which deletes the DRENA" do
     create_drena(name: "Abidjan 1")
     last = create_drena(name: "Bouaké")
@@ -140,6 +150,12 @@ class Teams::RowActionsMenuTest < ApplicationSystemTestCase
       assert_selector menu, visible: true
       assert reachable?("#{menu} [role=menuitem]:first-child"), "le menu sort de l'écran par la gauche"
       assert reachable?("#{menu} [role=menuitem]:last-child"), "le menu sort de l'écran"
+      assert inside_screen_with_margin?(menu), "le menu est à moins de 8 px d'un bord de l'écran"
+
+      # Refermé, le décalage est rendu : le menu repart de sa place d'origine à la réouverture.
+      find("button[aria-controls='course-actions-menu']").click
+      assert_no_selector menu, visible: true
+      assert_equal "", page.evaluate_script("document.querySelector(#{menu.to_json}).style.translate")
     end
   end
 end

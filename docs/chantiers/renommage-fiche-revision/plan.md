@@ -186,6 +186,20 @@ remédiation ciblée, images des fiches, régénération des codes…) disent en
 
 ---
 
+## Lot F — Corrections de la revue de PR
+
+**Objectif** : traiter les constats des sous-agents de revue sur le diff final (39bd16ad), sans élargir le chantier.
+
+**Fichiers**
+- `config/locales/catalog/courses.fr.yml` : retirer `catalog.courses.index.back_home`, clé orpheline remise par la fusion 55dc8dfa alors que `Develop` l'avait supprimée (3cbe68ec) ; aucune vue ne l'appelle.
+- `test/controllers/assessment/session_results_controller_test.rb`, `test/system/assessment/remediation_test.rb` et le test de la page de classe qui affiche `lifted_title` : chaque valeur de l'amendement du 2026-10-19 s'écrit en clair (« Fiche de révision levée ! », « Cette fiche de révision passe à revoir. », « Revoir la fiche de révision », « Fiche de révision levée »), en plus ou à la place de `I18n.t`.
+- `test/controllers/catalog/courses_controller_test.rb` (vers les lignes 418 et 559) et `test/system/finitions/catalog_and_student_test.rb` (99, 104) : le lien retour `catalog.courses.show.back` s'écrit « Cours » en clair.
+- `test/system/teams/row_actions_menu_test.rb` : le menu ⋮ tient dans l'écran avec sa marge de 8 px (`nudge()`, `gap = 8`), pas seulement `left >= 0` ; ajouter que `style.translate` est vide une fois le menu refermé.
+
+**Hors lot (décidé)** : la garde de vocabulaire reste limitée à « essentielle » (PRD §5) ; « Fiche à revoir dans la classe » est gardé, famille de « Fiche(s) à revoir ».
+
+**Done quand** : les tests touchés passent, tests système compris ; un seul commit.
+
 ## Dispatch
 
 ```

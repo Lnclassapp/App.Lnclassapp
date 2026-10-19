@@ -415,7 +415,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     filtered = courses_path(material: @svt.slug)
 
     get course_path(@course.slug), headers: { "Referer" => "http://www.example.com#{filtered}" }
-    assert_select back, filtered, text: tl("show.back")
+    assert_select back, filtered, text: "Cours"
 
     get course_path(@course.slug), headers: { "Referer" => "http://www.example.com#{student_home_path}" }
     assert_select back, courses_path
@@ -556,7 +556,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", text: "Génétique et évolution · Élève · Lnclass"
     # FU-14 : le seul retour est « Cours », vers le catalogue ; le fil complet a disparu.
     assert_select "main nav", 1
-    assert_select "nav[aria-label=?] a[href='#{courses_path}']", I18n.t("components.back_link.label"), text: tl("show.back")
+    assert_select "nav[aria-label=?] a[href='#{courses_path}']", I18n.t("components.back_link.label"), text: "Cours"
     assert_no_match(/href="#{Regexp.escape(courses_path)}\?material=/, response.body)
     assert_select "main [aria-current=page]", 0
     assert_select "#course_header h1", text: "Génétique et évolution"
