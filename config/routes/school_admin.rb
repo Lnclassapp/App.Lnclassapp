@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes de l'espace direction ; tout contrôleur hérite de SchoolAdmin::BaseController
 # Rôle : lectures de la direction sur son seul établissement, et ses gestes (classes d'un niveau, enseignants, directions)
-# ADR  : 0036, 0065, 0071, 0077, 0083, 0088 · UDR : 0052, 0056, 0070, 0074, 0079 · l'établissement vient toujours du compte, jamais d'un paramètre
+# ADR  : 0036, 0065, 0071, 0077, 0083, 0088, 0092 · UDR : 0052, 0056, 0070, 0074, 0079, 0094 · l'établissement vient toujours du compte
 scope "school-admin", module: "school_admin", as: "school_admin" do
   resources :classrooms, only: %i[index show], param: :public_id
   # UDR-0074 §3.8, §3.11 : la page d'un niveau, par son slug figé ; l'activité récente, frame différé de l'accueil.
@@ -8,6 +8,8 @@ scope "school-admin", module: "school_admin", as: "school_admin" do
   get "activity", to: "activities#show", as: :activity
   # ADR-0036, lot R de fonctions-espace-eleve : l'établissement quitté garde les résultats obtenus chez lui.
   get "students/departed", to: "departed_students#index", as: :departed_students
+  # UDR-0094 : chercher un élève par son nom dans tout l'établissement, depuis l'accueil.
+  get "students/search", to: "student_searches#show", as: :student_search
   # Avant `resources :teachers` : « departed » n'est pas un public_id.
   get "teachers/departed", to: "departed_teachers#index", as: :departed_teachers
   resources :teachers, only: %i[index destroy], param: :public_id

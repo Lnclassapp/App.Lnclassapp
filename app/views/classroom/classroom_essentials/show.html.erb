@@ -1,7 +1,7 @@
 <%# 🌐 UI · classroom/classroom_essentials/show — une fiche essentielle vue depuis une classe (CL-12, AS-20) %>
-<%# Rôle : en-tête de la fiche, puis ses exercices publiés, chacun avec sa bascule (échéance, modale des jours) et la réussite %>
+<%# Rôle : en-tête de la fiche, élèves à revoir et fiche levée, puis ses exercices publiés, chacun avec sa bascule (échéance, modale des jours) et la réussite %>
 <%#        de la classe ; la fiche ne s'assigne plus %>
-<%# ADR  : 0048, 0072 · UDR : 0006, 0007, 0028, 0029 (amendée le 2026-10-02), 0054, 0062 (§3.4), 0069 (§3.8) · retour : le cours dans la classe %>
+<%# ADR  : 0048, 0072, 0101 · UDR : 0006, 0007, 0028, 0029 (amendée le 2026-10-02), 0054, 0062 (§3.4), 0069 (§3.8), 0121 · retour : le cours dans la classe %>
 <%# Une classe archivée n'a plus cette page (404, Lot C de vie-de-la-classe) : chaque exercice garde sa bascule. %>
 <% essential = @essential.essential %>
 <% page_title essential.name %>
@@ -16,6 +16,11 @@
       <p class="text-mute"><%= essential.subtitle %></p>
     <% end %>
   </div>
+<% end %>
+
+<%# UDR-0121 §3.2 : qui aider, au-dessus de quoi assigner ; absent sans lacune. %>
+<% if @gaps && (@gaps.pending.any? || @gaps.lifted.any?) %>
+  <%= render "gaps", detail: @gaps %>
 <% end %>
 
 <section id="classroom_essential_exercises" aria-labelledby="classroom_essential_exercises_title">

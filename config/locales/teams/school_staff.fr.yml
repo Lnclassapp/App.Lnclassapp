@@ -18,3 +18,27 @@ fr:
       create:
         done: "%{name} est de nouveau dans la direction."
         cap_reached: "Les 3 places de direction par le code sont prises : retirez d'abord un compte."
+        # ADR-0092 §4.3, UDR-0092 §3.4 : la restauration d'un ancien chef ne crée pas deux chefs.
+        head_taken: "Cet établissement a déjà un chef d'établissement actif. Changez d'abord une fonction."
+    # ADR-0092, UDR-0092 §3.4 : l'équipe change la fonction d'une direction, depuis la fiche de l'établissement.
+    school_staff_positions:
+      edit:
+        title: "Fonction de %{name}"
+        legend: "Fonction"
+        cancel: "Annuler"
+        submit: "Enregistrer"
+        submitting: "Enregistrement…"
+        back: "Retour à l'établissement"
+      update:
+        done: "La fonction de %{name} est enregistrée."
+  activemodel:
+    attributes:
+      dtos/school/staff_position_input:
+        position: "Fonction"
+    errors:
+      models:
+        dtos/school/staff_position_input:
+          attributes:
+            position:
+              blank: "Choisissez une fonction."
+              head_taken: "Cet établissement a déjà un chef d'établissement actif."

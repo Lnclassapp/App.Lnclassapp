@@ -163,7 +163,7 @@ module UseCases
         assert_empty @audit.events
       end
 
-      def direction(of:) = Entities::Identity::Actor.new(user_id: 11, role: :school_admin, school_id: of)
+      def direction(of:) = Entities::Identity::Actor.new(user_id: 11, role: :school_admin, school_id: of, staff_position: "head")
 
       test "GD-08 : la direction de son établissement actif ajoute la « 6ème 5 », tracée à son nom" do
         result = add(actor: direction(of: 5))

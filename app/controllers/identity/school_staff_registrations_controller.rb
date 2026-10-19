@@ -1,9 +1,9 @@
 # 🌐 DELIVERY · Identity::SchoolStaffRegistrationsController
 # Rôle : inscription publique de la direction avec le code d'établissement (limitée en débit) ; succès : session, « Travail des élèves »
-# ADR  : 0028, 0050, 0057, 0077 · UDR : 0070
+# ADR  : 0028, 0050, 0057, 0077, 0092 · UDR : 0070, 0092
 module Identity
   class SchoolStaffRegistrationsController < ApplicationController
-    FIELDS = %i[last_name first_name gender contact pin pin_confirmation school_code].freeze
+    FIELDS = %i[last_name first_name gender contact pin pin_confirmation school_code position].freeze
 
     allow_unauthenticated_access
     rate_limit to: 5, within: 1.minute, only: :create, by: -> { request.remote_ip }, with: -> { refuse_too_many }

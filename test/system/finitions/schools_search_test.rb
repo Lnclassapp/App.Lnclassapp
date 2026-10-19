@@ -89,6 +89,7 @@ module Finitions
         within "turbo-frame#modal dialog[open]" do
           assert_equal page.evaluate_script("document.activeElement.name"), "invitation[contact]"
           fill_in "invitation[contact]", with: "07 99 00 00 09"
+          find("label", text: I18n.t("shared.staff_positions.secretary")).click
           click_on I18n.t("teams.staff_invitations.new.submit")
         end
         within "turbo-frame#modal dialog#staff-invitation-created-modal[open]" do

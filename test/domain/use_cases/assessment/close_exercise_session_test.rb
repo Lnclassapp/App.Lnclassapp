@@ -140,13 +140,28 @@ module UseCases
       end
 
       test "échec avec une lacune en attente : elle compte un échec de plus" do
-        close(correct: 49, pending_gap: gap)
+        close(correct: 47, pending_gap: gap)
 
         assert_equal [ [ :increment, { id: 70 } ] ], @gaps.calls
       end
 
-      test "réussite sous le seuil de remédiation : la lacune reste en attente, sans nouvel échec" do
+      # Décision du porteur (2026-10-19, ADR-0101 §4.5) : la note affichée sur 20 décide, pas le pourcentage brut.
+      test "49 % s'affiche 10/20 : ni ouverture, ni échec de plus" do
+        close(correct: 49)
+        assert_empty @gaps.calls
+
+        close(correct: 49, pending_gap: gap)
+        assert_empty @gaps.calls
+      end
+
+      test "74 % s'affiche 15/20 : la lacune est remédiée" do
         close(correct: 74, pending_gap: gap, kind: "remediation")
+
+        assert_equal [ [ :resolve, { id: 70, status: "remediated", session_id: 5, at: NOW } ] ], @gaps.calls
+      end
+
+      test "réussite sous le seuil de remédiation : la lacune reste en attente, sans nouvel échec" do
+        close(correct: 72, pending_gap: gap, kind: "remediation")
 
         assert_empty @gaps.calls
       end

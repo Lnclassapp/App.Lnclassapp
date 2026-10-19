@@ -115,7 +115,8 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
     open_sheet
 
     within sheet do
-      assert_selector "a[href='https://wa.me/2250700000000'][target=_blank][rel~=noopener]", text: tr("whatsapp.title")
+      # UDR-0128 : le lien porte le message prêt (test/integration/communication/help_sheet_whatsapp_message_test.rb).
+      assert_selector "a[href^='https://wa.me/2250700000000?text=Bonjour'][target=_blank][rel~=noopener]", text: tr("whatsapp.title")
       assert_selector "a[href='tel:+2250700000001']", text: tr("call.title")
       click_on tr("faq.title")
     end

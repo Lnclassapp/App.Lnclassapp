@@ -92,6 +92,17 @@ module Queries
         assert_nil play(feedback_question_id: nil).last_feedback
       end
 
+      # ADR-0105, UDR-0129 §3.4 : la question porte son image (adresse, texte de remplacement, dimensions) ; sans image, nil.
+      test "la prochaine question porte son image ; une question sans image n'en porte pas" do
+        image = create_question_image(question: @questions.second, alt: "Une pile", fixture: "photos/photo.png")
+        create_attempt(session: @session, question: @questions.first)
+
+        assert_equal SessionPlayQuery::Image.new(public_id: image.public_id, alt: "Une pile", width: 64, height: 48),
+                     play.next_question.image
+        create_attempt(session: @session, question: @questions.second)
+        assert_nil play.next_question.image
+      end
+
       # CA-9, ADR-0091 §4.4 : rien de la solution dans les données de la page.
       def kind_session(question_type, answers, **options)
         exercise = create_exercise(questions: 0)
@@ -183,7 +194,7 @@ module Queries
       end
 
       test "type de question : nombre de propositions à cocher" do
-        question = SessionPlayQuery::Question.new(id: 1, number: 1, content: "Q", question_type: "multiple_correct_3", answers: [])
+        question = SessionPlayQuery::Question.new(id: 1, number: 1, content: "Q", question_type: "multiple_correct_3", answers: [], image: nil)
 
         assert_equal [ 3, true ], [ question.expected_count, question.multiple? ]
         assert_not question.with(question_type: "true_false").multiple?

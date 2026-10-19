@@ -1,12 +1,14 @@
 # 🧠 DOMAINE · Entities::Assessment::Question
 # Rôle : une question d'exercice ; sa structure, la forme d'une réponse et la correction sont déléguées à son type
-# ADR  : 0039, 0054, 0091 (§4.3 : un type par classe, sous question_kinds/)
+# ADR  : 0039, 0054, 0091 (§4.3 : un type par classe, sous question_kinds/), 0105
 module Entities
   module Assessment
-    # answers : [Answer], dans l'ordre des positions ; numeric_tolerance : marge d'un type numeric (BigDecimal | nil).
-    Question = Data.define(:id, :position, :content, :explanation, :question_type, :answers, :numeric_tolerance) do
-      # Les sept autres attributs sont obligatoires ; seule la marge est facultative.
-      def initialize(numeric_tolerance: nil, **) = super
+    # answers : [Answer], dans l'ordre des positions ; numeric_tolerance : marge d'un type numeric (BigDecimal | nil) ;
+    # image_description : l'image annoncée par l'import (ADR-0105 §4.6) ; image : Shared::ContentImage | nil.
+    Question = Data.define(:id, :position, :content, :explanation, :question_type, :answers, :numeric_tolerance,
+                           :image_description, :image) do
+      # Les six premiers attributs sont obligatoires ; la marge et l'image sont facultatives.
+      def initialize(numeric_tolerance: nil, image_description: nil, image: nil, **) = super
 
       # Classe de règles du type (QuestionKinds::Choice, FillBlank…), ou nil pour un type inconnu.
       def self.kind_for(question_type)
@@ -39,6 +41,14 @@ module Entities
       def correct?(response) = kind.correct?(self, response)
 
       def structure_errors = Question.structure_errors_for(question_type:, answers:, content:, numeric_tolerance:)
+
+      # Ce qui manque pour publier, sans gêner l'enregistrement d'un brouillon (ADR-0105 §4.4) → [Symbol].
+      def image_errors
+        return [ :image_alt_blank ] if image && !image.alt?
+        return [ :image_missing ] if image.nil? && !image_description.to_s.strip.empty?
+
+        []
+      end
 
       # Copie montrable avant une tentative : aucune proposition ne dit si elle est correcte.
       def without_correction = with(answers: answers.map { |answer| answer.with(correct: nil) })

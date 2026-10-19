@@ -119,6 +119,7 @@ Quel que soit le cycle :
 - **Optimiser sans mesure avant et après.** Sans chiffres, ce n'est pas une optimisation, c'est une intuition.
 - **Écrire une vue sans UDR.** C'est ce qui produit des interfaces incohérentes d'une session à l'autre.
 - **Livrer sans qu'un rôle distinct ait exécuté le résultat.**
+- **Pousser sur une PR dont on n'est pas l'assigné.** Une PR, un pilote ([conventions §3](../guide/conventions.md#une-pr-un-pilote)).
 
 ---
 

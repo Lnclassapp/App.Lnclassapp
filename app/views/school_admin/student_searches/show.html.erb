@@ -1,0 +1,42 @@
+<%# 🌐 UI · school_admin/student_searches/show — « Chercher un élève » dans tout l'établissement (ED-60 à ED-66) %>
+<%# Rôle : formulaire, puis 20 élèves au plus (nom, classe, niveau), chacun vers sa classe filtrée sur son nom ; état vide, « 3 lettres » %>
+<%# ADR  : 0092 · UDR : 0094 (§3.2 à §3.4) · aucune donnée de contact, aucune photo, aucune note dans les résultats %>
+<% page_title t(".page_title") %>
+<% content_for :nav_key, "home" %>
+<%= ui_page_header title: t(".title"), back: { label: t(".back"), href: school_admin_classrooms_path } %>
+
+<%= ui_card id: "student_search", padding: :md do %>
+  <%= render "form", value: @search, id: "student_search_page" %>
+
+  <div id="student_search_results" class="mt-5 border-t border-line pt-4">
+    <% if @search.empty? %>
+      <%# Vide : le formulaire seul. %>
+    <% elsif !@searchable %>
+      <p id="student_search_too_short" class="text-sm text-mute"><%= t(".too_short") %></p>
+    <% elsif @students.empty? %>
+      <%= ui_empty_state title: t(".empty"), icon: "magnifying-glass" do %>
+        <%= ui_button t(".clear"), href: school_admin_student_search_path, variant: :secondary %>
+      <% end %>
+    <% else %>
+      <p aria-live="polite" class="mb-2 text-sm text-mute"><%= t(".count", count: @students.size) %></p>
+      <ul id="student_search_list" class="divide-y divide-line">
+        <% @students.each_with_index do |student, index| %>
+          <li id="student_result_<%= index %>">
+            <%= link_to school_admin_classroom_path(student.classroom_public_id, q: student.display_name),
+                        "aria-label": t(".result_label", name: student.display_name, classroom: student.classroom_name),
+                        class: "flex min-h-tap items-center justify-between gap-3 py-3 focus-visible:outline-2 focus-visible:outline-brand" do %>
+              <span class="min-w-0">
+                <span class="block truncate font-medium text-ink"><%= student.display_name %></span>
+                <span class="block text-sm text-mute"><%= t(".classroom", classroom: student.classroom_name, level: student.level_name) %></span>
+              </span>
+              <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "text-mute" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+      <% if @truncated %>
+        <p id="student_search_truncated" class="mt-3 text-sm text-mute"><%= t(".truncated", count: @students.size) %></p>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

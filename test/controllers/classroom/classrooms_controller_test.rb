@@ -635,4 +635,84 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#self_practice_line_#{koffi.public_id}", text: "Fait seul : 0 cette semaine"
     assert_select "#assignment_#{assignment.public_id} p", text: /\A\s*1 fait\b.*1 pas encore fait\s*\z/
   end
+
+  # AS-17, UDR-0121 §3.1, ADR-0101 §4.4 : le bloc « Fiches à revoir » de la page de classe.
+  def gaps_tl(key, **) = I18n.t("#{scope}.gaps.#{key}", **)
+
+  def gap_on(essential, student)
+    source_session = create_exercise_session(student:, exercise: create_exercise(essential:, questions: 1), status: "completed",
+                                             score_percent: 30)
+    create_gap(student:, essential:, source_session:)
+  end
+
+  def class_with_gaps
+    maths = create_material(name: "Mathématiques")
+    @teacher.teacher_profile.update!(material: maths)
+    course = create_course(level: @classroom.level, material: maths, name: "Géométrie")
+    thales = create_essential(course:, name: "Théorème de Thalès")
+    physics = create_essential(course: create_course(level: @classroom.level, name: "Optique"), name: "Lentilles")
+    awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
+    bintou = create_student(classroom: @classroom, first_name: "Bintou", last_name: "Diallo")
+    [ awa, bintou ].each { gap_on(thales, it) }
+    gap_on(physics, awa)
+    [ course, thales ]
+  end
+
+  test "fiches à revoir : l'enseignant voit la fiche de sa matière et son nombre d'élèves, entre exercices et élèves" do
+    course, thales = class_with_gaps
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_response :success
+    assert_select "#classroom_gaps h2", text: gaps_tl("title")
+    assert_select "#classroom_gaps ul[data-turbo-prefetch=false] li", 1
+    assert_select "#classroom_gaps li a[href='#{classroom_essential_path(@classroom.public_id, course.slug, thales.slug)}']",
+                  text: "Théorème de Thalès"
+    assert_select "#classroom_gaps li", text: /#{gaps_tl("students", count: 2)}/
+    assert_select "#classroom_gaps", text: /Lentilles/, count: 0
+    assert_match(/id="assigned_exercises".*id="classroom_gaps".*id="classroom_roster"/m, response.body)
+  end
+
+  test "fiches à revoir : l'équipe voit toutes les matières" do
+    class_with_gaps
+    sign_in_as create_team_member
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "#classroom_gaps li", 2
+    assert_select "#classroom_gaps li", text: /Lentilles.*#{gaps_tl("students", count: 1)}/m
+  end
+
+  test "fiches à revoir : trois lignes, puis « Voir plus » qui révèle la suite sans requête" do
+    maths = create_material(name: "Mathématiques")
+    @teacher.teacher_profile.update!(material: maths)
+    course = create_course(level: @classroom.level, material: maths)
+    students = 4.times.map { create_student(classroom: @classroom) }
+    { "Une" => 1, "Quatre" => 4, "Deux" => 2, "Trois" => 3 }.each do |name, count|
+      essential = create_essential(course:, name:)
+      students.first(count).each { gap_on(essential, it) }
+    end
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "#classroom_gaps[data-controller=reveal]" do
+      assert_equal %w[Quatre Trois Deux Une], css_select("#classroom_gaps li a").map { it.text.strip }
+      assert_select "li:not([hidden])", 3
+      assert_select "li[hidden]", 1
+      assert_select "li[hidden]", text: /Une/
+      assert_select "button[data-action='reveal#more']"
+    end
+  end
+
+  test "fiches à revoir : aucun bloc sans fiche à revoir" do
+    create_student(classroom: @classroom)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_response :success
+    assert_select "#classroom_gaps", 0
+  end
 end

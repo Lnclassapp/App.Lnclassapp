@@ -1,10 +1,10 @@
 # 🔌 INFRA · Queries::School::SchoolStaffQuery
 # Rôle : les comptes direction d'un établissement (bloc « Direction », bandeau d'arrivée) et les directions retirées (équipe)
-# ADR  : 0065, 0077 · UDR : 0070 · une requête par lecture, quel que soit le volume
+# ADR  : 0065, 0077, 0092 · UDR : 0070, 0092 · une requête par lecture, quel que soit le volume
 module Queries
   module School
     class SchoolStaffQuery
-      Row = Data.define(:user_id, :public_id, :name, :joined_via, :joined_at)
+      Row = Data.define(:user_id, :public_id, :name, :joined_via, :joined_at, :position)
       # gender : accorde « retiré » ou « retirée » (suites-inscription-direction).
       ArchivedRow = Data.define(:public_id, :name, :school_public_id, :school_name, :archived_by_name, :archived_at, :joined_via,
                                 :gender) do
@@ -14,7 +14,8 @@ module Queries
       CODE = "code".freeze
       FULL_NAME = Arel.sql("users.first_name || ' ' || users.last_name")
       AUTHOR_NAME = Arel.sql("authors.first_name || ' ' || authors.last_name")
-      ROW = [ "school_staffs.user_id", "users.public_id", FULL_NAME, "school_staffs.joined_via", "school_staffs.created_at" ].freeze
+      ROW = [ "school_staffs.user_id", "users.public_id", FULL_NAME, "school_staffs.joined_via", "school_staffs.created_at",
+              "school_staffs.position" ].freeze
 
       # Les directions actives, de la plus ancienne à la plus récente.
       def active_for(school_id:) = rows(active(school_id).order("school_staffs.created_at", "school_staffs.id"))

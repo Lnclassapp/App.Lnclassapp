@@ -70,6 +70,19 @@ module Entities
                                                           Answer.new(id: 3, position: 1, content: "a", correct: true),
                                                           Answer.new(id: 1, position: 2, content: "b", correct: true) ]).ids_by_position
       end
+
+      # ADR-0105 §4.4 : ce qui manque pour publier, sans gêner l'enregistrement d'un brouillon.
+      test "image_errors : description sans image, image sans texte de remplacement, ou rien" do
+        base = question("true_false", true, false)
+        image = ->(alt) { Entities::Shared::ContentImage.new(public_id: "p", alt:) }
+
+        assert_empty base.image_errors
+        assert_equal [ :image_missing ], base.with(image_description: "Une pile").image_errors
+        assert_empty base.with(image_description: "  ").image_errors
+        assert_equal [ :image_alt_blank ], base.with(image: image.(" ")).image_errors
+        assert_empty base.with(image_description: "Une pile", image: image.("Une pile")).image_errors
+        assert_empty base.with(image_description: "Une pile").structure_errors
+      end
     end
   end
 end

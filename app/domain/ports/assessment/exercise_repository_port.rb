@@ -1,9 +1,13 @@
 # 🧠 DOMAINE · Ports::Assessment::ExerciseRepositoryPort
 # Rôle : contrat de persistance des exercices, de leurs questions et de leurs propositions
-# ADR  : 0035, 0036, 0039, 0054
+# ADR  : 0035, 0036, 0039, 0054, 0105
 module Ports
   module Assessment
     module ExerciseRepositoryPort
+      # Levée par create et update quand une question cite une image qu'elle ne peut pas prendre (déjà à une autre
+      # question, citée deux fois, inconnue ou purgée) : la transaction s'annule, le use case la rend en :invalid.
+      ImageUnavailable = Class.new(StandardError)
+
       # Avec questions, propositions et parents_published. → Entities::Assessment::Exercise | nil
       def find_by_public_id(public_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_public_id"
@@ -14,12 +18,12 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #find"
       end
 
-      # Exercice, questions et propositions. → Entities::Assessment::Exercise
+      # Exercice, questions, propositions et images. → Entities::Assessment::Exercise ; lève ImageUnavailable
       def create(exercise:)
         raise NotImplementedError, "#{self.class} doit implémenter #create"
       end
 
-      # replace_questions : remplace questions et propositions (interdit dès qu'une session existe). → Exercise
+      # replace_questions : remplace questions et propositions (interdit dès qu'une session existe). → Exercise ; lève ImageUnavailable
       def update(exercise:, replace_questions:)
         raise NotImplementedError, "#{self.class} doit implémenter #update"
       end

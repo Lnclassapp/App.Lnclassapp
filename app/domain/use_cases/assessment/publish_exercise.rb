@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Assessment::PublishExercise
-# Rôle : l'équipe publie (ou republie) un exercice qui a au moins une question bien construite, sous une fiche publiée
-# ADR  : 0026, 0028, 0035, 0054 · UDR : 0017
+# Rôle : l'équipe publie (ou republie) un exercice qui a au moins une question bien construite, illustrée si annoncé, sous une fiche publiée
+# ADR  : 0026, 0028, 0035, 0054, 0105 · UDR : 0017, 0129
 module UseCases
   module Assessment
     class PublishExercise
@@ -14,6 +14,7 @@ module UseCases
 
       # → Result(Exercise) | :forbidden | :not_found
       #   | :conflict, base: [:transition_not_allowed | :parent_not_published | :not_publishable]
+      #   | :conflict, base: [:image_missing | :image_alt_blank], number: [N] (la première question en cause, ADR-0105 §4.4)
       def call(actor:, public_id:)
         allowed = @policy.call(actor:)
         return allowed if allowed.failure?
@@ -26,11 +27,14 @@ module UseCases
                                                                  parent_published: exercise.parents_published)
         return transition if transition.failure?
         return Shared::Result.failure(:conflict, errors: { base: [ :not_publishable ] }) unless exercise.publishable?
+        return image_refusal(*exercise.image_errors.first) if exercise.image_errors.any?
 
         @transaction.call { publish(actor, exercise) }
       end
 
       private
+
+      def image_refusal(number, codes) = Shared::Result.failure(:conflict, errors: { base: [ codes.first ], number: [ number ] })
 
       def publish(actor, exercise)
         now = @clock.now
