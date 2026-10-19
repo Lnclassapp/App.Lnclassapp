@@ -179,6 +179,106 @@ class Teams::PublishEssentialWithImagesTest < ActionDispatch::IntegrationTest
     assert_equal "Une lampe", image.reload.alt
   end
 
+  # Menace n° 15 : le contrôle porte sur la fiche telle qu'elle sera enregistrée, pas sur les seuls textes envoyés par le formulaire.
+  def cite(*images)
+    images.map { %(<action-text-attachment sgid="#{it.attachable_sgid}" content-type="#{it.content_type}"></action-text-attachment>) }.join
+  end
+
+  def published_with_image
+    essential = create_essential(course: @course, status: "published", content: "<p>Texte.</p>")
+    image = create_essential_image(essential:, alt: "Une pile")
+    essential.update!(content: "<p>Texte.</p>#{cite(image)}")
+    [ essential, image ]
+  end
+
+  def patch_essential(essential, content:, image_alts: nil)
+    patch teams_essential_path(essential.slug), as: :turbo_stream,
+                                                params: { essential: { name: "Autre nom", content:, image_alts: }.compact }
+  end
+
+  def blank_alt_message(number) = I18n.t("activemodel.errors.models.dtos/catalog/essential_input.image_alt_blank", number:)
+
+  test "modifier une fiche publiée sans renvoyer la clé d'une image déjà là garde son texte de remplacement" do
+    essential, image = published_with_image
+    sign_in_as @member
+
+    patch_essential(essential, content: "<p>Autre texte.</p>#{cite(image)}")
+
+    assert_response :success
+    assert_equal [ "Autre nom", "Une pile" ], [ essential.reload.name, image.reload.alt ]
+  end
+
+  test "modifier une fiche publiée en citant une image neuve sans envoyer sa clé est refusé (422), rien n'est écrit" do
+    essential, image = published_with_image
+    fresh = create_essential_image(fixture: "photos/photo.png")
+    sign_in_as @member
+
+    patch_essential(essential, content: "<p>Texte.</p>#{cite(image, fresh)}")
+
+    assert_response :unprocessable_entity
+    assert_select "li#article_image_#{fresh.public_id}", text: including(blank_alt_message(2))
+    assert_equal [ nil, nil ], [ fresh.reload.essential_id, fresh.alt ]
+    assert_not_equal "Autre nom", essential.reload.name
+  end
+
+  test "modifier une fiche publiée en citant une image neuve avec une clé vide est refusé (422), rien n'est écrit" do
+    essential, image = published_with_image
+    fresh = create_essential_image(fixture: "photos/photo.png")
+    sign_in_as @member
+
+    patch_essential(essential, content: "<p>Texte.</p>#{cite(image, fresh)}", image_alts: { fresh.public_id => "" })
+
+    assert_response :unprocessable_entity
+    assert_nil fresh.reload.essential_id
+    assert_not_equal "Autre nom", essential.reload.name
+  end
+
+  test "modifier une fiche publiée en citant une image neuve avec son texte de remplacement l'enregistre" do
+    essential, image = published_with_image
+    fresh = create_essential_image(fixture: "photos/photo.png")
+    sign_in_as @member
+
+    patch_essential(essential, content: "<p>Texte.</p>#{cite(image, fresh)}", image_alts: { fresh.public_id => "Une lampe" })
+
+    assert_response :success
+    assert_equal [ essential.id, "Une lampe" ], [ fresh.reload.essential_id, fresh.alt ]
+  end
+
+  test "modifier une fiche publiée en citant une image indisponible (autre fiche, autre type, disparue) est refusé (422), rien n'est écrit" do
+    essential, image = published_with_image
+    elsewhere = create_essential_image(essential: create_essential(course: @course), alt: "Ailleurs")
+    vanished = create_essential_image(fixture: "photos/photo.png")
+    vanished_cite = cite(vanished)
+    vanished.destroy!
+    sign_in_as @member
+
+    [ cite(elsewhere), cite(create_article_image), vanished_cite ].each do |unavailable|
+      patch_essential(essential, content: "<p>Texte.</p>#{cite(image)}#{unavailable}")
+
+      assert_response :unprocessable_entity
+      assert_select "#essential_content_error",
+                    text: including(I18n.t("activemodel.errors.models.dtos/catalog/essential_input.attributes.content.image_unavailable"))
+    end
+    assert_not_equal "Autre nom", essential.reload.name
+    assert_not_equal essential.id, elsewhere.reload.essential_id
+  end
+
+  test "modifier une fiche publiée en remplaçant son image par une image neuve sans clé est refusé (422) : l'ancienne image garde son fichier" do
+    essential, image = published_with_image
+    fresh = create_essential_image(fixture: "photos/photo.png")
+    bytes = image.file.download
+    sign_in_as @member
+
+    perform_enqueued_jobs do
+      patch_essential(essential, content: "<p>Texte.</p>#{cite(fresh)}")
+    end
+
+    assert_response :unprocessable_entity
+    assert_equal [ essential.id, "Une pile", true, bytes ],
+                 [ image.reload.essential_id, image.alt, image.file.attached?, image.file.download ]
+    assert_nil fresh.reload.essential_id
+  end
+
   test "modifier une fiche publiée avec un texte trop complexe à relire est refusé (422) et journalisé avec le slug" do
     essential = create_essential(course: @course, status: "published")
     sign_in_as @member

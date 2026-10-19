@@ -11,12 +11,15 @@ module UseCases
       class FakeEssentials
         include Ports::Catalog::EssentialRepositoryPort
 
-        attr_reader :transitions
+        attr_reader :transitions, :locked
 
         def initialize(*essentials)
           @stored = essentials
           @transitions = []
+          @locked = []
         end
+
+        def lock(id:) = (@locked << id) && true
 
         def find_by_slug(slug:) = @stored.find { it.slug == slug }
 
@@ -150,6 +153,25 @@ module UseCases
         assert_equal :conflict, result.code
         assert_equal({ base: [ :image_alts_blank ], image_alts: [ "ko" ] }, result.errors)
         assert_empty @essentials.transitions
+      end
+
+      # Menace n° 15 : une modification concurrente écrit une image sans texte de remplacement entre le premier contrôle et le verrou.
+      test "menace n° 15 : la fiche est relue sous verrou, et une image sans texte de remplacement apparue entre-temps refuse la publication" do
+        essential = Essential.new(id: 25, slug: "course", course_id: 1, name: "Course", status: "draft", course_status: "published",
+                                  content: "<p>Texte</p>")
+        @essentials = FakeEssentials.new(essential)
+        reads = 0
+        @essentials.define_singleton_method(:find_by_slug) do |slug:|
+          reads += 1
+          essential.images = [ Entities::Shared::ContentImage.new(public_id: "neuve", alt: nil) ] if reads > 1
+          essential
+        end
+
+        result = publish("course")
+
+        assert_equal [ :conflict, { base: [ :image_alts_blank ], image_alts: [ "neuve" ] } ], [ result.code, result.errors ]
+        assert_equal [ [ 25 ], [] ], [ @essentials.locked, @essentials.transitions ]
+        assert_empty @audit_log.records
       end
 
       test "ADR-0105 : une fiche dont chaque image a son texte de remplacement, sans emplacement, se publie" do

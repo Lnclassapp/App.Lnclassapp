@@ -35,8 +35,14 @@ module Repositories
                                 status: essential.status || "draft"), essential)
       end
 
+      # La ligne est verrouillée avant d'être lue : le statut que voit le use case est celui qui sera écrit (menace.md, n° 15).
       def update(essential:)
-        save(Orm::Essential.find(essential.id), essential)
+        save(Orm::Essential.lock.find(essential.id), essential)
+      end
+
+      def lock(id:)
+        Orm::Essential.lock.find(id)
+        true
       end
 
       # La première publication pose published_at ; l'archivage pose archived_at (ADR-0035).

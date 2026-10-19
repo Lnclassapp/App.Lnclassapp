@@ -50,7 +50,13 @@ module UseCases
 
       private
 
+      # Verrou puis relecture : une modification concurrente qui vient d'écrire une image sans texte de remplacement est vue ici, et
+      # une modification qui suit attend ce verrou et voit la fiche publiée (menace.md, n° 15).
       def publish(actor, essential)
+        @essentials.lock(id: essential.id)
+        ready = PublishEssential.images_ready(@essentials.find_by_slug(slug: essential.slug))
+        return ready if ready.failure?
+
         at = @clock.now
         @essentials.transition(id: essential.id, to: "published", at:)
         @audit_log.record(action: "content.published", actor_id: actor.user_id, at:, subject_type: "Essential",

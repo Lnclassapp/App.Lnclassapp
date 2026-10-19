@@ -89,6 +89,8 @@ class Catalog::EssentialImagesControllerTest < ActionDispatch::IntegrationTest
     logs = capture_log { get essential_image_path(@image.public_id) }
 
     assert_response :not_found
+    assert_equal "private, no-store", response.headers["Cache-Control"]
+    assert_nil response.headers["ETag"]
     assert_includes logs, "[Catalog::EssentialImagesController] fichier absent public_id=#{@image.public_id}"
   end
 
@@ -101,6 +103,8 @@ class Catalog::EssentialImagesControllerTest < ActionDispatch::IntegrationTest
     logs = capture_log { get essential_image_path(@image.public_id) }
 
     assert_response :not_found
+    assert_equal "private, no-store", response.headers["Cache-Control"]
+    assert_nil response.headers["ETag"]
     assert_includes logs, "[Catalog::EssentialImagesController] fichier absent public_id=#{@image.public_id}"
   end
 end

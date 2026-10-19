@@ -14,6 +14,22 @@ module Repositories
                                          content: "<p>Deux cellules filles.</p>", **attributes)
       end
 
+      # Menace n° 15 : update et lock prennent le verrou de la ligne, tenu jusqu'à la fin de la transaction.
+      test "lock et update verrouillent la ligne de la fiche" do
+        saved = create_essential(course: @course, status: "draft")
+        statements = []
+        collect = ->(*, payload) { statements << payload[:sql] if payload[:sql].match?(/FROM "essentials".*FOR UPDATE/m) }
+
+        ActiveSupport::Notifications.subscribed(collect, "sql.active_record") do
+          Orm::Essential.transaction do
+            assert @repository.lock(id: saved.id)
+            @repository.update(essential: essential(id: saved.id, name: saved.name))
+          end
+        end
+
+        assert_equal 2, statements.size
+      end
+
       test "crée une fiche brouillon en fin de cours, puis la relit par slug avec le statut du cours" do
         create_essential(course: @course)
 
