@@ -79,7 +79,7 @@ SELECT
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
+| **Livré le** | 2026-10-19 (PR prête vers `Develop`, après la PR #250) |
+| **PR** | branche `feature/enseignant-plusieurs-matieres`, partie de `feature/multi-etablissements-enseignant` |
 | **ADR produits** | ADR-0103 |
 | **UDR produits** | UDR-0125, UDR-0126, UDR-0127 |

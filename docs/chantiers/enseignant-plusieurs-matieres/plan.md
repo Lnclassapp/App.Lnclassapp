@@ -157,11 +157,12 @@ Règle : le chantier lancé en premier termine ces lots et fusionne ; l'autre re
 
 ## Portes de sortie
 
-- [ ] Tous les lots sont `Done`, Lot Z compris
-- [ ] Le nombre de lignes `teacher_materials` après migration égale celui de `teacher_profiles` (relevé avant le Lot 0)
+- [x] Tous les lots sont `Done`, Lot Z compris (0, A, B, C, D, Z : un commit chacun)
+- [ ] Le nombre de lignes `teacher_school_materials` après migration égale l'« attendu » de la requête du journal (à relever en production)
 - [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : inscription avec deux matières, ajout au profil, catalogue, page de classe, annonce, « Enseignants » ; et un enseignant d'une seule matière ne voit **aucun** changement
-- [ ] Captures 390 px et ordinateur de chaque écran modifié envoyées au porteur (jamais commitées)
+- [x] Captures 390 px et ordinateur de chaque écran modifié envoyées au porteur (jamais commitées)
 - [ ] Pureté du domaine, rubocop, tests, parcours système : au vert ; `bin/ci-quiet` écrit dans la PR
 - [ ] Sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) sur le diff final : une policy, un use case et une route sont touchés
-- [ ] ADR-0103 et UDR-0125 à 0127 à « Accepté », index régénérés par `script/docs/build_index` au commit de clôture ; amendements reportés dans les ADR et UDR amendés (ADR-0083, ADR-0101 §4.4, UDR-0026, 0027, 0041, 0052, 0062, 0069, 0071, 0077, 0079, 0100, 0121)
-- [ ] `journal.md` complété
+- [x] ADR-0103 et UDR-0125 à 0127 à « Accepté », index régénérés par `script/docs/build_index` au commit de clôture
+- [ ] Amendements reportés dans les ADR et UDR amendés (ADR-0083, ADR-0101 §4.4, UDR-0026, 0027, 0041, 0052, 0062, 0069, 0071, 0077, 0079, 0100, 0121)
+- [x] `journal.md` complété
