@@ -18,11 +18,12 @@ class Teams::ClassroomArchivalTest < ApplicationSystemTestCase
 
   def card(classroom) = "li#classroom_#{classroom.public_id}"
 
-  # Opens a ⋮ menu and returns its item. The page can still be hydrating or morphing (Turbo refresh) when the first click lands.
-  def open_menu_item(label, item, text)
+  # Opens a ⋮ menu and clicks its item. The page can still be hydrating or morphing (Turbo refresh) when the first click
+  # lands, and the item found can be replaced before it is clicked: both clicks are retried together.
+  def click_menu_item(label, item, text)
     3.times do
       find("button[aria-label='#{label}']").click
-      return find(item, text:, wait: 2)
+      return find(item, text:, wait: 2).click
     rescue Capybara::ElementNotFound, Selenium::WebDriver::Error::StaleElementReferenceError
       next
     end
@@ -32,7 +33,7 @@ class Teams::ClassroomArchivalTest < ApplicationSystemTestCase
   test "archiver une classe peuplée après la confirmation chiffrée, puis la restaurer" do
     visit school_path(@school.public_id)
 
-    open_menu_item("Actions de la classe 6ème 1", "#classroom-menu-#{@classroom.public_id} button[role=menuitem]", "Archiver la classe").click
+    click_menu_item("Actions de la classe 6ème 1", "#classroom-menu-#{@classroom.public_id} button[role=menuitem]", "Archiver la classe")
 
     within "dialog#archive-classroom-#{@classroom.public_id}[open]" do
       assert_text "3 élèves et 1 enseignant ne la verront plus"
@@ -45,7 +46,7 @@ class Teams::ClassroomArchivalTest < ApplicationSystemTestCase
 
     # La fiche est re-demandée après l'archivage (morphing) : on attend qu'elle soit posée avant d'ouvrir le menu suivant.
     visit school_path(@school.public_id)
-    open_menu_item("Actions de la classe 6ème 1", "#classroom-menu-#{@classroom.public_id} a[role=menuitem]", "Restaurer la classe").click
+    click_menu_item("Actions de la classe 6ème 1", "#classroom-menu-#{@classroom.public_id} a[role=menuitem]", "Restaurer la classe")
 
     assert_toast "Classe « 6ème 1 » restaurée."
     assert_no_selector "#{card(@classroom)}", text: "Archivée"
@@ -62,7 +63,7 @@ class Teams::ClassroomArchivalTest < ApplicationSystemTestCase
     assert_no_selector card(@old)
     assert_link "Afficher les archives (1)"
 
-    open_menu_item("Actions du niveau 6ème", "#level-menu-6eme button[role=menuitem]", "Archiver le niveau").click
+    click_menu_item("Actions du niveau 6ème", "#level-menu-6eme button[role=menuitem]", "Archiver le niveau")
     within "dialog#archive-level-6eme[open]" do
       assert_text "Archiver les 2 classes de 6ème ?"
       assert_text "3 élèves et 1 enseignant"
