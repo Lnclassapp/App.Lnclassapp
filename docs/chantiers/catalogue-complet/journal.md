@@ -21,7 +21,13 @@
 
 ## Ce qui a dérapé
 
+- L'agent exécutant a été arrêté avant la clôture ; un agent de reprise a fusionné `origin/Develop` (docs seules, sans conflit), refait le parcours visiteur sur un serveur local (`curl` de chaque page, `/sitemap.xml`, brouillon absent du HTML) et clos le chantier.
+- `bin/ci-quiet` sur une machine saturée (charge 55 puis 94 sur 4 cœurs, une dizaine de CI en parallèle) : tests système en échec en masse sur des écrans que le chantier ne touche pas, puis passage tué ; relancé une fois dans la file commune (`flock`). Le garde-fou `test_no_ignored_yarn_advisory_is_past_its_review_date` échoue depuis le 2026-10-18 sur toutes les branches : l'avis Yarn `1240992` (`braces`) devait être réexaminé le 2026-10-17 (chantier `audit-yarn-braces`), hors de ce chantier.
+
 - La feuille de route appelle CA-17, CA-21 et CA-23 « pages publiques » alors que l'inventaire de l'ancienne application les décrit « tout connecté » (CA-17, CA-21) et « `team` » (CA-23). L'écart n'avait jamais été posé au porteur : c'est la question 1.
+- Le jeu de mesure `script/perf/seed_dataset.rb` ne tourne plus : `teacher_profiles.joined_via` (ADR-0083) est obligatoire et le jeu ne le remplit pas. La mesure de CC-23 a été faite sur 200 cours publiés semés à part (hors dépôt), avec `audit_pages.rb` en profil visiteur.
+- `script/ci/record_timings` associe une durée au fichier par le nom court de la classe : un test système et un test d'intégration de même nom (`PublicLevelPagesTest`) se confondent. Les tests système s'appellent `…JourneyTest`.
+- La première tentative de commit du Lot D a échoué au pre-commit sur une machine chargée (semis du jeu de mesure en parallèle) ; la seconde, identique, est passée.
 - Lot A : `assert_queries_count` ne compte pas les requêtes servies par le cache de requêtes d'Active Record ; un test qui lit deux fois la même page dans un même test doit mesurer la première lecture.
 
 ## Ce qu'on a appris sur la codebase
@@ -30,6 +36,8 @@
 - `ReadPublishedPolicy` refuse un acteur `nil` : toute lecture anonyme du catalogue doit passer par une requête qui filtre le publié elle-même.
 - Le blog a posé tout l'outillage du référencement (`canonical_url`, `_head`, plan du site, `X-Robots-Tag` hors production) ; le catalogue le reprend sans le modifier.
 - La bande « Matières » de la homepage est une liste écrite en dur dans la vue, sans lien.
+- Une sous-requête passée en jointure écrite (`joins("… (#{relation.to_sql}) …")`) qui joint `levels` fait renommer par Active Record la jointure d'association `:level` de la requête englobante : écrire alors toutes les jointures.
+- Le frame différé n'est « hors de l'écran à l'arrivée » qu'à condition que la page soit assez haute : 24 cartes sans description tiennent dans un écran d'ordinateur de test.
 
 ## Dette laissée derrière
 
@@ -39,12 +47,15 @@
 | Cache HTML des pages publiques (gabarit sans session) | ADR-0076 ; trafic non mesuré | À rouvrir sur mesure du trafic |
 | Liste « Tous les exercices » pour l'équipe | Question 9 : AS-01 fermée sous sa forme corrigée | À ouvrir si le besoin se confirme |
 | Q9, matrice des sous-rôles | Hors de ce chantier | `sous-roles-equipe` |
+| Noms des niveaux du référentiel (« Tle », « 6ème ») dans les titres publics | Le nom est celui de la base ; « Terminale » demande un renommage par l'équipe, pas du code | Équipe Contenu, dans `/teams/levels` |
+| Jeu de mesure `script/perf/dataset.rb` cassé (`joined_via`) | Hors du périmètre ; contourné pour CC-23 | À réparer au prochain chantier qui mesure |
+| Revue par les sous-agents (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) | Ni l'agent exécutant ni l'agent de reprise n'avaient d'outil pour lancer d'autres agents | Avant la fusion de la PR |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | ADR-0099 (Proposé) |
-| **UDR produits** | UDR-0113, UDR-0114, UDR-0115 (Proposé) |
+| **Livré le** | 2026-10-16 |
+| **PR** | `feature/catalogue-complet` → `Develop`, prête, non fusionnée |
+| **ADR produits** | ADR-0099 (Accepté) |
+| **UDR produits** | UDR-0113, UDR-0114, UDR-0115 (Accepté ; retour à chevron au lieu du fil d'Ariane) |

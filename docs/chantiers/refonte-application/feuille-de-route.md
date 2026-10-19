@@ -291,7 +291,7 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 | **Objectif** | L'équipe pilote la plateforme : catalogue complet (filtres, pagination, pages niveau, matière et série), tableau de bord équipe, installation PWA, sous-rôles appliqués. Les imports en masse sont livrés en V1 |
 | **Chantiers, dans l'ordre** | 1. `catalogue-complet`, qui peut démarrer **avec** la V2 (contexte `catalog`, disjoint de la V2 ; voir le tableau de collision). 2. `installation-pwa`, en parallèle de la V2 si le gabarit du shell a un seul propriétaire. 3. `sous-roles-equipe`, **après** `annuaire-equipe` : il réécrit toutes les policies de l'équipe, y compris celles de l'annuaire |
 | **Déjà livré (hors ordre)** | [`pilotage-equipe`](../pilotage-equipe/memo.md) (ADR-0062, UDR-0049, #51) : TR-10, TR-11, TR-12, et la partie V4 de TR-09. [`croissance-parrainage`](../croissance-parrainage/memo.md) (ADR-0063, UDR-0050, #71), hors plan, rattaché ici. La fiche d'un compte (ID-21, ID-22) reste en V2 |
-| **Reste : `catalogue-complet`** (6 features) | CA-02, CA-03, CA-17, CA-21, CA-23 (venue de la V2 le 2026-09-28), AS-01 ; plus la partie V4 de CA-01 |
+| **`catalogue-complet`** (6 features) | **Livré** le 2026-10-16 (PR de `feature/catalogue-complet`) : CA-17, CA-21, CA-23 en pages publiques (ADR-0099, UDR-0113 à 0115) ; CA-01, CA-02, CA-03 constatées livrées hors ordre ; AS-01 fermée |
 | **Reste : `installation-pwa`** (3 features) | ID-26, TR-24, TR-25 |
 | **Reste : `sous-roles-equipe`** | Aucune feature d'inventaire : la matrice de l'ADR-0038 (`admin`, `content`, `field`), un test de refus par case vide |
 | **Tables** | ~~Colonnes `users.install_banner_status` et `users.install_banner_last_changed_at` (§7.1)~~ : abandonnées le 2026-10-07 (ADR-0082 §4.5, le bandeau ne garde rien sur le serveur) ; `installation-pwa` ajoute `users.app_opened_at` (ADR-0082 §4.3). `team_role` existe depuis la V1 |
@@ -565,9 +565,9 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 
 | ID | Feature | État | Vague | Ne pas reproduire |
 |---|---|---|---|---|
-| CA-01 | Parcourir le catalogue publié | ⚠️ | V1 (Lot B, liste simple) — livrée 2026-09-27 (#33) · V4 (`catalogue-complet`) | Un niveau et une matière qui ne filtrent pas les brouillons |
-| CA-02 | Filtrer par niveau ou matière | ⚠️ | V4 | — |
-| CA-03 | Pagination infinie | 💀 | V4 | Un lien de page jamais rendu |
+| CA-01 | Parcourir le catalogue publié | ⚠️ | V1 (Lot B, liste simple) — livrée 2026-09-27 (#33) · V4 (`catalogue-complet`) — **livrée hors ordre**, constatée le 2026-10-16 (brouillons filtrés en SQL hors équipe) | Un niveau et une matière qui ne filtrent pas les brouillons |
+| CA-02 | Filtrer par niveau ou matière | ⚠️ | V4 — **livrée hors ordre**, constatée le 2026-10-16 (`interface-enseignant-organisation`, `catalogue-niveau-eleve`, `cours-eleve`) | — |
+| CA-03 | Pagination infinie | 💀 | V4 — **livrée hors ordre**, constatée le 2026-10-16 (`politique-cache`, lot E4) | Un lien de page jamais rendu |
 | CA-04 | Consulter un cours | ✅ | V1 (Lot B) — livrée 2026-09-27 (#33) | Un brouillon lisible par URL directe |
 | CA-05 | Créer un cours | ⚠️ | V1 (Lot B) — livrée 2026-09-27 (#33) | Aucun point d'entrée dans l'interface |
 | CA-06 | Modifier un cours | ❌ | V1 (Lot B) — livrée 2026-09-27 (#33) | Deux familles d'entités incompatibles (C-19) |
@@ -581,13 +581,13 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | CA-14 | Supprimer une fiche | ✅ | V1 (Lot B, archivage) — livrée 2026-09-27 (#33) | Idem ; cascade |
 | CA-15 | Importer des fiches dans un cours | 💀 | V1 (`import-contenu`, ADR-0039) — livrée 2026-09-27 (#33) | Un import synchrone ouvert à tout connecté |
 | CA-16 | Lister les niveaux | ✅ | V1 (écran de l'équipe, ADR-0034) — livrée 2026-09-27 (#33) | — |
-| CA-17 | Espace Niveau | ⚠️ | V4 (`catalogue-complet`) | — |
+| CA-17 | Espace Niveau | ⚠️ | V4 (`catalogue-complet`) — **livrée 2026-10-16** (`catalogue-complet`) : `/niveaux` et `/niveaux/:slug`, publics (ADR-0099, UDR-0113) | — |
 | CA-18 | Gérer les niveaux | ⚠️ | V1 (écran de l'équipe, ADR-0034) — livrée 2026-09-27 (#33) | Supprimer un niveau détruit ses classes |
 | CA-19 | Associer des séries à un niveau | ✅ | V1 (ADR-0034) — livrée 2026-09-27 (#33) | — |
 | CA-20 | Lister les matières | ⚠️ | V1 (écran de l'équipe, ADR-0034) — livrée 2026-09-27 (#33) | — |
-| CA-21 | Page matière | ⚠️ | V4 | — |
+| CA-21 | Page matière | ⚠️ | V4 — **livrée 2026-10-16** (`catalogue-complet`) : `/matieres/:slug`, publique (UDR-0114) | — |
 | CA-22 | Gérer les matières | ⚠️ | V1 (ADR-0034, `category` obligatoire) — livrée 2026-09-27 (#33) | `category` laissée à `NULL` ; une clé de cache jamais invalidée |
-| CA-23 | Pages des séries | ❌ | V4 (`catalogue-complet`) — **déplacée de V2 le 2026-09-28** : page publique du catalogue, avec CA-17 et CA-21 | — |
+| CA-23 | Pages des séries | ❌ | V4 (`catalogue-complet`) — **déplacée de V2 le 2026-09-28** : page publique du catalogue, avec CA-17 et CA-21 — **livrée 2026-10-16** (`catalogue-complet`) : `/niveaux/:niveau/:serie` (UDR-0115) | — |
 | CA-24 | Gérer les séries | ⚠️ | V1 (ADR-0034) — livrée 2026-09-27 (#33) | — |
 | CA-25 | Taxonomie depuis l'onglet « Setup » | ⚠️ | V1 (= TR-13, ADR-0034) — livrée 2026-09-27 (#33) | — |
 | CA-26 | Icône et couleur de la matière | ✅ | V1 (Lot B, UDR) — livrée 2026-09-27 (#33) | Une couleur déduite du nom au lieu de `category` |
@@ -599,7 +599,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 
 | ID | Feature | État | Vague | Ne pas reproduire |
 |---|---|---|---|---|
-| AS-01 | Parcourir tous les exercices de la plateforme | ⚠️ | V4 (`catalogue-complet`) | Une page liée nulle part ; une carte mise en cache sans l'utilisateur ni le rôle dans la clé |
+| AS-01 | Parcourir tous les exercices de la plateforme | ⚠️ | V4 (`catalogue-complet`) — **fermée** le 2026-10-16 : couverte par la page d'une fiche (exercices publiés) ; une liste transverse serait un nouveau chantier | Une page liée nulle part ; une carte mise en cache sans l'utilisateur ni le rôle dans la clé |
 | AS-02 | Consulter le détail d'un exercice | ⚠️ | V1 (Lot C) — livrée 2026-09-27 (#33) | — |
 | AS-03 | Créer un exercice par le formulaire | ❌ | V1 (Lot B), **construite** de zéro — livrée 2026-09-27 (#33) | « + Ajouter une question » inerte (contrôleur Stimulus absent) ; des questions jamais persistées ; un titre passé en `titleize` |
 | AS-04 | Modifier un exercice | ❌ | V1 (Lot B) — livrée 2026-09-27 (#33) | Idem |
