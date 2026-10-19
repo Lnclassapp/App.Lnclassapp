@@ -9,6 +9,7 @@
 | 2026-10-19 | Les moyennes (accueil enseignant, « Réussite moyenne » de l'équipe, travail des élèves) ne changent pas | Des statistiques, pas des décisions ; arrondir avant de moyenner changerait le chiffre sans rien décider. | Oui, ADR-0106 §4.4 |
 | 2026-10-19 | Infobulles et FAQ lues sur 20, calculées depuis `Grading` | Un texte « Bronze à partir de 50 % » devenait faux (Bronze dès 48 %). | UDR-0131 |
 | 2026-10-19 | Les badges déjà décernés ne sont pas recalculés | Un badge s'écrit à la clôture et ne descend jamais ; aucune migration demandée. | Oui, ADR-0106 §5 |
+| 2026-10-19 | Pas de rattrapage des badges déjà décernés : l'écart entre la page de l'exercice (badge enregistré) et la page de résultat (recalculé) est assumé | Décision du porteur à la reprise (« b, on laisse ainsi ») | Oui, ADR-0106 §5 |
 
 ## Ce qui a dérapé
 
