@@ -210,6 +210,19 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "form[action='#{exercise_sessions_path(@exercise.public_id)}']", 0
   end
 
+  # ADR-0106 §4.3 : le Diamant est le sans-faute, pas une note. 98 % s'affiche 20/20 mais reste Or et garde « Recommencer ».
+  test "98 % s'affiche 20/20 : Or, pas Diamant, et « Recommencer » reste" do
+    almost = complete(score_percent: 98)
+    create_badge(student: @student, exercise: @exercise, level: "gold", session: almost)
+    sign_in_as @student
+
+    show almost
+
+    assert_select "#session_result", text: /20\/20/
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Or")
+    assert_select "button[type=submit]", text: I18n.t("#{scope}.show.restart")
+  end
+
   test "progrès : aucune phrase à la première session" do
     sign_in_as @student
 

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::Comprehension
 # Rôle : lecture de la compréhension d'un exercice assigné : catégorie, signe de progrès, dominante, seuil de lecture
-# ADR  : 0033, 0079
+# ADR  : 0033, 0079, 0106
 module Entities
   module Assessment
     module Comprehension
@@ -21,7 +21,7 @@ module Entities
         return :decline if best - scores.last >= PROGRESS_MARGIN
         return :progress if best - scores.first >= PROGRESS_MARGIN
 
-        best >= Grading::MASTERY_THRESHOLD ? :stable : :stagnant
+        Grading.reaches?(best, Grading::MASTERY_THRESHOLD) ? :stable : :stagnant
       end
 
       # counts : { struggling: n, fragile: n, acquired: n } → la catégorie la plus nombreuse, la plus fragile à égalité ; nil sans élève.
@@ -33,7 +33,8 @@ module Entities
 
       def self.readable?(done) = done >= MIN_DONE_FOR_READING
 
-      def self.to_revisit?(rate) = !rate.nil? && rate < Grading::PASS_THRESHOLD
+      # rate : part de bonnes réponses à la question, en % entier. Comme un score, elle se lit sur 20 : 48 % s'affiche 10/20.
+      def self.to_revisit?(rate) = !rate.nil? && !Grading.reaches?(rate, Grading::PASS_THRESHOLD)
     end
   end
 end

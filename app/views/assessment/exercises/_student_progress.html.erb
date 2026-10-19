@@ -13,14 +13,14 @@
       <dd class="mt-1 font-display text-xl font-extrabold tabular-nums">
         <% if progress.best_score_percent %>
           <% grading = Entities::Assessment::Grading %>
-          <span class="<%= "text-success" if grading.grade_on_20(progress.best_score_percent) >= grading.grade_on_20(grading::MASTERY_THRESHOLD) %>"><%= grade_label(progress.best_score_percent) %></span>
+          <span class="<%= "text-success" if grading.reaches?(progress.best_score_percent, grading::MASTERY_THRESHOLD) %>"><%= grade_label(progress.best_score_percent) %></span>
         <% else %>
           <span class="text-mute"><%= t(".no_score") %></span>
         <% end %>
       </dd>
     </div>
     <div class="<%= tile %>">
-      <dt class="flex items-center gap-1"><span class="<%= label %>"><%= t(".mastery") %></span><%= stat_info_tip t("shared.info_tips.mastery"), label: t(".mastery") %></dt>
+      <dt class="flex items-center gap-1"><span class="<%= label %>"><%= t(".mastery") %></span><%= stat_info_tip mastery_tip, label: t(".mastery") %></dt>
       <dd class="mt-1">
         <% if progress.mastery %>
           <%= ui_badge t("assessment.badges.mastery.#{progress.mastery}"),
@@ -31,7 +31,7 @@
       </dd>
     </div>
     <div class="<%= tile %>">
-      <dt class="flex items-center gap-1"><span class="<%= label %>"><%= t(".badge") %></span><%= stat_info_tip t("shared.info_tips.badges"), label: t(".badge") %></dt>
+      <dt class="flex items-center gap-1"><span class="<%= label %>"><%= t(".badge") %></span><%= stat_info_tip badges_tip, label: t(".badge") %></dt>
       <dd class="mt-1 text-sm font-bold">
         <% if progress.badge_level %>
           <span class="inline-flex items-center gap-1.5">
