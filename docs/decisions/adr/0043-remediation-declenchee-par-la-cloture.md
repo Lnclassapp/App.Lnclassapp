@@ -137,5 +137,6 @@ Le tableau « À la clôture » du §4 devient :
 | `score_percent >= REMEDIATION_THRESHOLD`, lacune en attente, session `standard` | `self_corrected` |
 
 - `Entities::Assessment::Grading::REMEDIATION_THRESHOLD = 75` ; `GapDecision` l'applique. Les seuils de réussite (50), de maîtrise (70) et des badges (ADR-0033) ne changent pas.
+- Précisé le 2026-10-19 (ADR-0101 §4.5) : les seuils 50 et 75 s'appliquent à la note affichée sur 20 (10/20 et 15/20), pas au pourcentage brut.
 - L'encart de la fiche essentielle annonce ce seuil à l'élève (« obtiens au moins 75 % à l'un de ses exercices »).
 - Le PRD (AS-11, qui disait 70 %) est aligné sur ce seuil.

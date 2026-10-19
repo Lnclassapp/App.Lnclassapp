@@ -359,6 +359,21 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
                   text: gap_outcome("open_essential")
   end
 
+  # Décision du porteur (2026-10-19, ADR-0101 §4.5) : 74 % s'affiche 15/20, la note lue fait foi et lève la fiche.
+  test "fiche : une remédiation à 74 % lit 15/20 et « Fiche levée ! » : la note et l'effet sur la fiche s'accordent" do
+    gap, remediation = failed_then_remediated(74)
+    decision = Entities::Assessment::GapDecision.call(score_percent: 74, pending_gap: gap, session_kind: remediation.kind)
+    assert_equal :remediated, decision
+    gap.update!(status: decision.to_s, resolved_at: Time.current, resolved_by_session: remediation)
+    sign_in_as @student
+
+    show remediation
+
+    assert_select "*", text: /15\s*\/\s*20/
+    assert_select "#session_gap_outcome.bg-success-soft p.font-bold", text: gap_outcome("lifted.message")
+    assert_select "#session_gap_outcome a", 0
+  end
+
   test "fiche : la remédiation qui lève la fiche lit « Fiche levée ! », sans lien, après la phrase de progrès" do
     gap, remediation = failed_then_remediated(80)
     gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: remediation)
