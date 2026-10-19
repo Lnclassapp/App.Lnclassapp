@@ -4,6 +4,7 @@ fr:
     attributes:
       dtos/identity/school_staff_invitation_input:
         contact: "Numéro de la personne invitée"
+        position: "Fonction"
         school: "Établissement"
     errors:
       models:
@@ -16,6 +17,10 @@ fr:
               already_invited: "Une invitation attend déjà ce numéro."
             school:
               inactive: "Cet établissement n'est pas actif."
+            # ADR-0092, UDR-0092 §3.1.
+            position:
+              blank: "Choisissez une fonction."
+              head_taken: "Cet établissement a déjà un chef d'établissement actif."
   teams:
     staff_invitations:
       new:
@@ -23,6 +28,7 @@ fr:
         intro: "La personne invitée verra les enseignants et le travail des élèves de %{school}."
         contact_placeholder: "07 00 00 00 00"
         contact_hint: "10 chiffres. Ce numéro lui servira à se connecter."
+        position: "Fonction"
         submit: "Créer l'invitation"
         cancel: "Annuler"
       create:

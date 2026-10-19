@@ -2,6 +2,8 @@ require "test_helper"
 
 # ID-01 to ID-06 (ADR-0077 §4.3): a visitor registers as the direction of an active school with its code; the role is
 # always school_admin; the account is attached by the code under the cap, or not created at all; the session opens.
+# ED-10 to ED-12 (ADR-0092 §4.3): the position is required, kept on the attachment and in the journal; a second head of
+# school is refused (position: head_taken) and the account created before is rolled back.
 module UseCases
   module Identity
     class RegisterSchoolStaffTest < ActiveSupport::TestCase
@@ -61,24 +63,26 @@ module UseCases
         def find_by_school_code(school_code:) = @schools.find { it.school_code == school_code }
       end
 
-      # Ports::School::StaffRepositoryPort#attach_by_code: the cap is counted by the adapter under a lock; here, `taken`
-      # directions by the code are already there.
+      # Ports::School::StaffRepositoryPort#attach_by_code: the cap and the single head are checked by the adapter under a lock;
+      # here, `taken` directions by the code are already there, and `head` says whether an active head is.
       class FakeStaffs
         include Ports::School::StaffRepositoryPort
 
         attr_reader :received
 
-        def initialize(journal, taken:)
+        def initialize(journal, taken:, head: false)
           @journal = journal
           @taken = taken
+          @head = head
         end
 
-        def attach_by_code(user_id:, school_id:, cap:, at:)
-          @received = { user_id:, school_id:, cap:, at: }
-          return false if @taken >= cap
+        def attach_by_code(user_id:, school_id:, cap:, position:, at:)
+          @received = { user_id:, school_id:, cap:, position:, at: }
+          return :cap_reached if @taken >= cap
+          return :head_taken if @head && position == "head"
 
-          @journal << [ :staff, user_id, school_id, "code", at ]
-          true
+          @journal << [ :staff, user_id, school_id, "code", position, at ]
+          :attached
         end
       end
 
@@ -119,12 +123,12 @@ module UseCases
         )
       end
 
-      def register(actor: nil, taken_contacts: [], taken_places: 0, **attributes)
+      def register(actor: nil, taken_contacts: [], taken_places: 0, head: false, **attributes)
         @registrations = FakeRegistrations.new(@journal, taken: taken_contacts)
-        @staffs = FakeStaffs.new(@journal, taken: taken_places)
+        @staffs = FakeStaffs.new(@journal, taken: taken_places, head:)
         dto = Dtos::Identity::SchoolStaffRegistrationInput.new(
           last_name: "Kouassi", first_name: "Aya", gender: "female", contact: "07 01 02 03 04", pin: "4821",
-          pin_confirmation: "4821", school_code: "K7M-4QZ", **attributes
+          pin_confirmation: "4821", school_code: "K7M-4QZ", position: "secretary", **attributes
         )
         RegisterSchoolStaff.new(
           registrations: @registrations, schools: @schools, staffs: @staffs, sessions: FakeSessions.new(@journal),
@@ -141,9 +145,10 @@ module UseCases
         token = result.value.token
         assert_operator token.length, :>=, 43
         assert_equal [ [ :user, "0701020304", "school_admin" ],
-                       [ :staff, 41, 31, "code", NOW ],
+                       [ :staff, 41, 31, "code", "secretary", NOW ],
                        [ :session, 41, Entities::Identity::SecretDigest.hmac(token, key: KEY), "1.2.3.4", "Chrome", NOW ],
-                       [ :audit, "school_staff.registered", 41, "User", 41, { school_id: 31, joined_via: "code" }, "1.2.3.4", NOW ] ],
+                       [ :audit, "school_staff.registered", 41, "User", 41, { school_id: 31, joined_via: "code", position: "secretary" },
+                         "1.2.3.4", NOW ] ],
                      @journal
         assert_equal [ "Kouassi", "Aya", "female", "4821" ],
                      [ @registrations.received[:user].last_name, @registrations.received[:user].first_name,
@@ -163,6 +168,41 @@ module UseCases
         assert_equal({ base: [ :cap_reached ] }, result.errors)
         assert_empty @journal
         assert_equal 1, @transaction.calls
+      end
+
+      test "ED-10: sans fonction, ou avec une fonction hors de la liste, rien n'est créé" do
+        [ nil, "", "principal", "proviseur" ].each do |position|
+          result = register(position:)
+
+          assert_equal :invalid, result.code, position.inspect
+          assert_equal [ I18n.t("#{ERRORS}.position.blank") ], result.errors[:position], position.inspect
+        end
+        assert_equal "Choisissez votre fonction.", I18n.t("#{ERRORS}.position.blank")
+        assert_empty @journal
+        assert_equal 0, @transaction.calls
+      end
+
+      test "ED-11: la fonction choisie passe au rattachement et au journal" do
+        assert register(position: "deputy").success?
+        assert_equal "deputy", @staffs.received[:position]
+        assert_equal({ school_id: 31, joined_via: "code", position: "deputy" }, @journal.find { it.first == :audit }[5])
+      end
+
+      test "ED-11: le chef d'établissement s'inscrit quand la place est libre" do
+        assert register(position: "head").success?
+      end
+
+      test "ED-12: un second chef d'établissement est refusé, le compte créé est annulé, sans nommer le chef actif" do
+        result = register(position: "head", head: true)
+
+        assert_equal :conflict, result.code
+        assert_equal({ position: [ :head_taken ] }, result.errors)
+        assert_empty @journal
+        assert_not_includes I18n.t("#{ERRORS}.position.head_taken"), "%{"
+      end
+
+      test "ED-12: une autre fonction passe quand le chef est déjà actif" do
+        assert register(position: "educator", head: true).success?
       end
 
       test "ID-03: sous le plafond, le compte est créé" do
