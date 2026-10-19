@@ -1,6 +1,6 @@
-<%# 🌐 UI · identity/school_staff_registrations/_form — formulaire d'inscription de la direction, en quatre rubriques %>
-<%# Rôle : vous, contact, établissement (désigné par son code, sans matière), sécurité ; erreurs en 422, plafond en alerte (base) %>
-<%# ADR  : 0037, 0057, 0077 · UDR : 0024, 0044, 0070 (§3.1) %>
+<%# 🌐 UI · identity/school_staff_registrations/_form — formulaire d'inscription de la direction, en cinq rubriques %>
+<%# Rôle : vous, contact, établissement (par son code), fonction, sécurité ; erreurs en 422, plafond en alerte (base) %>
+<%# ADR  : 0037, 0057, 0077, 0092 · UDR : 0024, 0044, 0070 (§3.1), 0092 (§3.1) %>
 <%= form_with model: @form, scope: :school_staff_registration, url: school_staff_registrations_path,
               id: "school-staff-registration-form", class: "space-y-6" do |form| %>
   <% if @form.errors[:base].any? %>
@@ -48,6 +48,8 @@
                  autocapitalize: "characters", spellcheck: false, placeholder: t(".school_code_placeholder"),
                  hint: t(".school_code_hint"), class: "font-display tracking-widest uppercase" %>
   </fieldset>
+
+  <%= render "shared/staff_position_fieldset", form:, legend: t(".position"), section: true %>
 
   <fieldset class="space-y-4">
     <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".security") %></legend>

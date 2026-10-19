@@ -1,0 +1,22 @@
+<%# 🌐 UI · teams/school_staff_positions/edit — « Fonction de <nom> », modale de l'équipe servie dans le frame « modal » %>
+<%# Rôle : quatre radios, la fonction actuelle cochée ; refus (chef déjà actif) sous le groupe, en 422 ; page complète sans frame %>
+<%# ADR  : 0092 · UDR : 0052, 0054, 0092 (§3.4) %>
+<% title = t(".title", name: @user.display_name) %>
+<% page_title title %>
+<% unless turbo_frame_request? %>
+  <%= link_to t(".back"), school_path(@school.public_id), id: "back-to-school",
+              class: "mb-4 inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
+<% end %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title:, id: "staff-position-modal", size: :sm, open: true do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, variant: :brand, form: "staff-position-form",
+                                  data: { turbo_submits_with: t(".submitting") } %>
+    <% end %>
+    <%= form_with model: @form, scope: :staff_position, url: school_staff_member_position_path(@school.public_id, @target.user_public_id),
+                  method: :patch, id: "staff-position-form", class: "text-left" do |form| %>
+      <%= render "shared/staff_position_fieldset", form:, legend: t(".legend"), school_type: @school.school_type %>
+    <% end %>
+  <% end %>
+<% end %>

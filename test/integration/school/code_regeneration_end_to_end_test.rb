@@ -20,7 +20,7 @@ class School::CodeRegenerationEndToEndTest < ActionDispatch::IntegrationTest
   def register_direction(school_code)
     post school_staff_registrations_path, params: { school_staff_registration: {
       last_name: "Kouassi", first_name: "Aya Marie", gender: "female", contact: "07 01 02 03 04", pin: "4821",
-      pin_confirmation: "4821", school_code:
+      pin_confirmation: "4821", school_code:, position: "head"
     } }
   end
 

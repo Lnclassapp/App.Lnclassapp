@@ -1,6 +1,6 @@
 <%# 🌐 UI · school_admin/classrooms/_school_card — carte « Établissement » de l'accueil de la direction (AD-02 à AD-05) %>
-<%# Rôle : nom, type et année ; trois chiffres ; une ligne par alerte, vers l'endroit où l'on agit, ou « Rien à signaler » %>
-<%# UDR  : 0049 (tuiles), 0074 (§3.3) · l'ordre et le contenu des alertes viennent du domaine (Entities::School::DirectionAlerts) %>
+<%# Rôle : nom, type et année ; trois chiffres ; alertes vers l'endroit où l'on agit, ou « Rien à signaler » ; « Chercher un élève » %>
+<%# UDR  : 0049 (tuiles), 0074 (§3.3), 0094 (§3.1) · l'ordre et le contenu des alertes viennent du domaine (DirectionAlerts) %>
 <%# locals: (home:) -%>
 <% link_class = "flex w-fit min-h-tap items-center gap-1 font-medium text-brand-strong focus-visible:outline-2 focus-visible:outline-brand" %>
 <% footer_link_class = "inline-flex min-h-tap items-center gap-1 text-sm font-medium text-brand-strong focus-visible:outline-2 focus-visible:outline-brand" %>
@@ -47,6 +47,11 @@
       <% end %>
     </ul>
   <% end %>
+
+  <%# UDR-0094 §3.1 : rendu aussi pour un établissement inactif (une lecture). %>
+  <div id="direction_home_student_search" class="mt-5 border-t border-line pt-4">
+    <%= render "school_admin/student_searches/form" %>
+  </div>
 
   <% card.footer do %>
     <div class="flex flex-wrap gap-x-4">

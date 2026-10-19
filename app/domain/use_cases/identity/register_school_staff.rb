@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::RegisterSchoolStaff
-# Rôle : inscrit une direction (rôle imposé) par le code d'un établissement actif, sous le plafond, et ouvre sa session
-# ADR  : 0028, 0050, 0057, 0077 · UDR : 0070
+# Rôle : inscrit une direction (fonction choisie) par le code d'un établissement actif, sous le plafond et le chef unique
+# ADR  : 0028, 0050, 0057, 0077, 0092 · UDR : 0070, 0092 · ouvre sa session
 module UseCases
   module Identity
     class RegisterSchoolStaff
@@ -9,6 +9,7 @@ module UseCases
       JOINED_VIA = "code".freeze
       INVALID_CODE = { school_code: [ :inclusion ] }.freeze
       CAP_REACHED = { base: [ :cap_reached ] }.freeze
+      HEAD_TAKEN = { position: [ :head_taken ] }.freeze
 
       # Un refus après la création du compte traverse la transaction pour l'annuler, puis ressort en Result.
       class Aborted < StandardError
@@ -33,7 +34,8 @@ module UseCases
       end
 
       # dto : Dtos::Identity::SchoolStaffRegistrationInput.
-      # → success(Registered) | :forbidden (déjà connecté) | :invalid | :conflict (numéro pris, ou plafond atteint)
+      # → success(Registered) | :forbidden (déjà connecté) | :invalid | :conflict (numéro pris, plafond atteint, ou chef
+      #   d'établissement déjà actif : position: [:head_taken], sans nommer le chef)
       def call(actor:, dto:, ip:, user_agent:)
         allowed = @policy.call(actor:)
         return allowed if allowed.failure?
@@ -50,18 +52,27 @@ module UseCases
 
       private
 
-      # Le plafond est compté sous le verrou de l'établissement (ADR-0077 §6) : refusé, il annule le compte créé.
+      # Le plafond et le chef unique sont vérifiés sous le verrou de l'établissement (ADR-0077 §6, ADR-0092 §4.3) : refusés,
+      # ils annulent le compte créé.
       def register(dto, school, ip, user_agent)
         now = @clock.now
         @transaction.call do
           user = written(@registrations.create_school_admin(user: user_from(dto), pin: dto.pin))
-          attached = @staffs.attach_by_code(user_id: user.id, school_id: school.id, cap: Entities::School::Staff::CODE_CAP, at: now)
-          raise Aborted, Shared::Result.failure(:conflict, errors: CAP_REACHED) unless attached
-
+          attach(user, school, dto.position, now)
           token = open_session(user, ip, user_agent, now)
-          @audit_log.record(action: "school_staff.registered", actor_id: user.id, at: now, subject_type: "User",
-                            subject_id: user.id, metadata: { school_id: school.id, joined_via: JOINED_VIA }, ip:)
+          @audit_log.record(action: "school_staff.registered", actor_id: user.id, at: now, subject_type: "User", subject_id: user.id,
+                            metadata: { school_id: school.id, joined_via: JOINED_VIA, position: dto.position }, ip:)
           Shared::Result.success(Registered.new(user:, token:))
+        end
+      end
+
+      def attach(user, school, position, now)
+        outcome = @staffs.attach_by_code(user_id: user.id, school_id: school.id, cap: Entities::School::Staff::CODE_CAP, position:, at: now)
+        case outcome
+        when :attached then nil
+        when :cap_reached then raise Aborted, Shared::Result.failure(:conflict, errors: CAP_REACHED)
+        when :head_taken then raise Aborted, Shared::Result.failure(:conflict, errors: HEAD_TAKEN)
+        else raise ArgumentError, "unexpected outcome from attach_by_code: #{outcome.inspect}"
         end
       end
 

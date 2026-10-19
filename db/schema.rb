@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_16_150000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_16_161500) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -443,8 +443,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_150000) do
     t.index ["kind", "contact"], name: "index_invitations_one_pending", unique: true, where: "((accepted_at IS NULL) AND (revoked_at IS NULL))"
     t.index ["school_id"], name: "index_invitations_on_school_id"
     t.index ["token_digest"], name: "index_invitations_on_token_digest", unique: true
-    t.check_constraint "\"position\"::text = ANY (ARRAY['principal'::character varying::text, 'censor'::character varying::text, 'educator'::character varying::text, 'secretary'::character varying::text])", name: "invitations_position_values"
+    t.check_constraint "\"position\"::text = ANY (ARRAY['head'::character varying, 'deputy'::character varying, 'educator'::character varying, 'secretary'::character varying]::text[])", name: "invitations_position_values"
     t.check_constraint "contact::text ~ '^0[157][0-9]{8}$'::text", name: "invitations_contact_format"
+    t.check_constraint "kind::text <> 'school_staff'::text OR \"position\" IS NOT NULL", name: "invitations_staff_has_position"
     t.check_constraint "kind::text <> 'school_staff'::text OR school_id IS NOT NULL", name: "invitations_staff_has_school"
     t.check_constraint "kind::text <> 'team'::text OR team_role IS NOT NULL", name: "invitations_team_has_role"
     t.check_constraint "kind::text = ANY (ARRAY['team'::character varying::text, 'school_staff'::character varying::text])", name: "invitations_kind_values"
@@ -693,13 +694,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_16_150000) do
     t.string "joined_via", default: "invitation", null: false
     t.bigint "school_id", null: false
     t.bigint "user_id", null: false
+    t.string "position", null: false
     t.index ["archived_at"], name: "index_school_staffs_on_archived_at", where: "(archived_at IS NOT NULL)"
     t.index ["archived_by_id"], name: "index_school_staffs_on_archived_by_id"
     t.index ["invited_by_id"], name: "index_school_staffs_on_invited_by_id"
     t.index ["school_id", "joined_via"], name: "index_school_staffs_on_school_id_and_joined_via", where: "(archived_at IS NULL)"
     t.index ["school_id"], name: "index_school_staffs_on_school_id"
+    t.index ["school_id"], name: "index_school_staffs_one_active_head", unique: true, where: "(((\"position\")::text = 'head'::text) AND (archived_at IS NULL))"
     t.index ["user_id"], name: "index_school_staffs_on_user_id", unique: true
     t.check_constraint "(archived_at IS NULL) = (archived_by_id IS NULL)", name: "school_staffs_archived_together"
+    t.check_constraint "\"position\"::text = ANY (ARRAY['head'::character varying, 'deputy'::character varying, 'educator'::character varying, 'secretary'::character varying]::text[])", name: "school_staffs_position_values"
     t.check_constraint "joined_via::text = ANY (ARRAY['invitation'::character varying::text, 'code'::character varying::text])", name: "school_staffs_joined_via_values"
   end
 

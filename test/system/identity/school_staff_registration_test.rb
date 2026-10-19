@@ -2,7 +2,8 @@ require "application_system_test_case"
 
 # ID-01, ID-02, ID-09 (ADR-0077, UDR-0070 §3.1, §3.2): from the homepage, at 390 px and without horizontal scroll, a
 # visitor follows one of the three entries to the direction registration, registers with the code of their school and
-# lands on « Travail des élèves » with the toast; the fourth account by the code reads the refusal of the cap.
+# lands on « Travail des élèves » with the toast; the fourth account by the code reads the refusal of the cap. ED-11
+# (ADR-0092, UDR-0092 §3.1): « Votre fonction » is chosen with the rest, and the « Direction » block reads it.
 class Identity::SchoolStaffRegistrationTest < ApplicationSystemTestCase
   FORM = "identity.school_staff_registrations.form".freeze
   ERRORS = "activemodel.errors.models.dtos/identity/school_staff_registration_input.attributes".freeze
@@ -37,7 +38,7 @@ class Identity::SchoolStaffRegistrationTest < ApplicationSystemTestCase
       assert no_horizontal_scroll?, "l'accueil de la direction défile en largeur à 390 px"
     end
     admin = Orm::User.find_by!(contact: "0701020304", role: "school_admin")
-    assert_equal [ [ @school.id, "code" ] ], Orm::SchoolStaff.where(user: admin).pluck(:school_id, :joined_via)
+    assert_equal [ [ @school.id, "code", "secretary" ] ], Orm::SchoolStaff.where(user: admin).pluck(:school_id, :joined_via, :position)
   end
 
   test "ID-02: the fourth account by the code reads the refusal of the cap, without reloading, and no account exists" do
@@ -65,6 +66,7 @@ class Identity::SchoolStaffRegistrationTest < ApplicationSystemTestCase
     find("label", text: I18n.t("genders.female")).click
     fill_in "school_staff_registration[contact]", with: "07 01 02 03 04"
     fill_in "school_staff_registration[school_code]", with: school_code
+    find("label", text: I18n.t("shared.staff_positions.secretary")).click
     fill_in "school_staff_registration[pin]", with: "4821"
     fill_in "school_staff_registration[pin_confirmation]", with: "4821"
   end

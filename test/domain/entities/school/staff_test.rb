@@ -6,8 +6,14 @@ module Entities
     class StaffTest < ActiveSupport::TestCase
       NOW = Time.utc(2026, 10, 4, 12)
 
-      def staff(joined_at: NOW, archived_at: nil, joined_via: "code")
-        Staff.new(user_id: 1, user_public_id: "u", school_id: 2, joined_via:, joined_at:, archived_at:, archived_by_id: nil)
+      def staff(joined_at: NOW, archived_at: nil, joined_via: "code", position: "deputy")
+        Staff.new(user_id: 1, user_public_id: "u", school_id: 2, joined_via:, joined_at:, archived_at:, archived_by_id: nil, position:)
+      end
+
+      # ADR-0092 : la fonction est portée par le rattachement ; seul « head » est chef d'établissement.
+      test "only the head position is the head of the school" do
+        assert staff(position: "head").head?
+        assert_not staff(position: "deputy").head?
       end
 
       test "the cap, the newcomer window and the retention are those of the decision" do

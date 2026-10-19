@@ -4,13 +4,30 @@ require "test_helper"
 module Policies
   module School
     class ManageSchoolTeachersPolicyTest < ActiveSupport::TestCase
-      def actor(role, school_id: nil, team_role: nil) = Entities::Identity::Actor.new(user_id: 1, role:, team_role:, school_id:)
+      # ADR-0092 : une direction a une fonction ; « head » par défaut, rang « gestion ».
+      def actor(role, school_id: nil, team_role: nil, staff_position: ("head" if role == :school_admin))
+        Entities::Identity::Actor.new(user_id: 1, role:, team_role:, school_id:, staff_position:)
+      end
       def school(id: 7, status: "active") = Entities::School::School.new(id:, status:)
 
       setup { @policy = ManageSchoolTeachersPolicy.new }
 
       test "autorise la direction sur son établissement actif" do
         assert @policy.call(actor: actor(:school_admin, school_id: 7), school:).success?
+      end
+
+      test "ED-35: autorise le chef d'établissement et l'adjoint (ou directeur des études)" do
+        %w[head deputy].each do |staff_position|
+          assert @policy.call(actor: actor(:school_admin, school_id: 7, staff_position:), school:).success?, staff_position
+        end
+      end
+
+      # ED-31 : retrait et réintégration passent tous deux par cette policy.
+      test "ED-31: refuse l'éducateur et la secrétaire sur leur établissement actif, et une direction sans fonction" do
+        [ "educator", "secretary", nil ].each do |staff_position|
+          assert_equal :forbidden, @policy.call(actor: actor(:school_admin, school_id: 7, staff_position:), school:).code,
+                       staff_position.inspect
+        end
       end
 
       test "refuse la direction de A sur B" do
