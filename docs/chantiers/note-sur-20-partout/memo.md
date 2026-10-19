@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature (règle métier + textes d'écran) |
-| **Statut** | planifié |
+| **Statut** | PR prête vers `Develop` (2026-10-19) |
 | **Ouvert le** | 2026-10-19 |
 | **Branche** | `feature/note-sur-20-partout` |
 | **Programme** | — |

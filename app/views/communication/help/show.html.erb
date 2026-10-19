@@ -1,11 +1,11 @@
 <%# 🌐 UI · communication/help/show — « Questions fréquentes » : dans le shell une fois connecté, sinon écran d'entrée %>
 <%# Rôle : connecté, en-tête de page et retour vers l'accueil du rôle ; visiteur, logo, retour, un seul h1 ; seuils du domaine %>
-<%# UDR  : 0061 (FAQ ; amendement du 2026-10-06), 0063 (§3.4), 0057 (R3 non appliquée : la liste est l'objet de la page), 0060, 0054, 0119 %>
+<%# UDR  : 0061 (FAQ ; amendement du 2026-10-06), 0063 (§3.4), 0057 (R3 non appliquée : la liste est l'objet de la page), 0060, 0054, 0119, 0128 %>
 <% page_title t(".page_title") %>
 <% grading = Entities::Assessment::Grading %>
-<% thresholds = { pass: grading::PASS_THRESHOLD, mastery: grading::MASTERY_THRESHOLD, gold: grading::GOLD_THRESHOLD,
-                  perfect: grading::PERFECT_THRESHOLD, remediation: grading::REMEDIATION_THRESHOLD,
-                  pass_grade: grading.grade_on_20(grading::PASS_THRESHOLD),
+<%# UDR-0128 : les seuils se lisent sur 20, comme les notes de l'élève. %>
+<% thresholds = { pass_grade: grading.grade_on_20(grading::PASS_THRESHOLD), mastery_grade: grading.grade_on_20(grading::MASTERY_THRESHOLD),
+                  gold_grade: grading.grade_on_20(grading::GOLD_THRESHOLD),
                   remediation_grade: grading.grade_on_20(grading::REMEDIATION_THRESHOLD), example_grade: grading.grade_on_20(80) } %>
 <% if in_shell? %>
   <div class="max-w-2xl">

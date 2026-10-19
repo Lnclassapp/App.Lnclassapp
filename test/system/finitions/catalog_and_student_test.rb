@@ -141,8 +141,8 @@ module Finitions
       visit exercise_path(@exercise.public_id)
       assert_title "Méiose et ADN · Élève · Lnclass"
       within "#student_progress" do
-        assert_info_tip t("assessment.exercises.student_progress.mastery"), t("shared.info_tips.mastery")
-        assert_info_tip t("assessment.exercises.student_progress.badge"), t("shared.info_tips.badges")
+        assert_info_tip t("assessment.exercises.student_progress.mastery"), ApplicationController.helpers.mastery_tip
+        assert_info_tip t("assessment.exercises.student_progress.badge"), ApplicationController.helpers.badges_tip
       end
       click_on "La méiose", match: :first
       assert_current_path course_essential_path(@course.slug, @essential.slug)
@@ -150,8 +150,8 @@ module Finitions
       visit exercise_session_result_path(session.public_id)
       assert_title "Résultat de Méiose et ADN · Élève · Lnclass"
       assert_link "La méiose", href: course_essential_path(@course.slug, @essential.slug)
-      assert_info_tip t("assessment.session_results.show.mastery"), t("shared.info_tips.mastery")
-      within("#session_badge") { assert_info_tip t("assessment.session_results.badge.help"), t("shared.info_tips.badges") }
+      assert_info_tip t("assessment.session_results.show.mastery"), ApplicationController.helpers.mastery_tip
+      within("#session_badge") { assert_info_tip t("assessment.session_results.badge.help"), ApplicationController.helpers.badges_tip }
 
       started = create_exercise_session(student: @student, exercise: @exercise)
       visit exercise_session_path(started.public_id)

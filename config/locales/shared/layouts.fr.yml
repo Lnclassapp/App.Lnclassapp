@@ -23,6 +23,7 @@ fr:
     # Textes d'infobulle communs à plusieurs écrans (UDR-0054 §3.4, à valider par le porteur dans la PR).
     # Les textes propres à un écran vont dans la locale de l'écran.
     info_tips:
-      badges: "Bronze à partir de 50 %, Argent à partir de 70 %, Or à partir de 80 %, Diamant à 100 %."
-      mastery: "Acquis : 70 % et plus. Fragile : de 50 à 69 %. En difficulté : moins de 50 %."
+      # UDR-0128 : les paliers se lisent sur 20 ; les notes viennent de Grading (BadgesHelper#badges_tip, #mastery_tip).
+      badges: "Bronze dès %{bronze}/20, Argent dès %{silver}/20, Or dès %{gold}/20, Diamant : toutes les réponses justes."
+      mastery: "Acquis : %{acquired}/20 et plus. Fragile : de %{fragile} à %{below_acquired}/20. En difficulté : moins de %{fragile}/20."
       school_status: "Brouillon : pas encore ouvert aux inscriptions. Actif : les enseignants s'y inscrivent. Désactivé : il n'apparaît plus à l'inscription ni à la création de classe."
