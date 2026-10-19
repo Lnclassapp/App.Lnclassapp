@@ -45,7 +45,7 @@ module UseCases
         current = @memberships.primary_for(student_id: actor.user_id)
         return Shared::Result.failure(:forbidden, errors: ALREADY_ENROLLED) if current&.classroom_active?
 
-        destination = designated(dto)
+        destination = @designation.designate(dto)
         return destination if destination.is_a?(Shared::Result)
 
         allowed = allowed(actor, destination)
@@ -60,20 +60,6 @@ module UseCases
         via_link = destination.via == ClassroomDesignation::LINK
         removed = !via_link && @memberships.removed_from?(classroom_id: classroom.id, student_id: actor.user_id)
         @policy.call(actor:, classroom:, via_link:, removed:)
-      end
-
-      # Avec un jeton, la classe du lien, qui ne retombe pas sur la cascade (ADR-0085 §4.1) ; sans, la classe choisie.
-      def designated(dto)
-        return @designation.chosen(dto) unless dto.link_token
-
-        @designation.linked(dto.link_token) || unavailable_link(dto.link_token)
-      end
-
-      # ADR-0088 : le lien d'une classe archivée dit pourquoi il refuse ; tout autre lien mort reste inconnu.
-      def unavailable_link(token)
-        return Shared::Result.failure(:not_found) unless @designation.archived_link?(token)
-
-        Shared::Result.failure(:forbidden, errors: { base: [ :classroom_archived ] })
       end
 
       # IL-17 : l'adhésion à la classe archivée est close dans la même transaction que la nouvelle.

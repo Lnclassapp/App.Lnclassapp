@@ -1,14 +1,15 @@
 # 🌐 DELIVERY · Classroom::SessionDaysController
 # Rôle : l'enseignant de la classe modifie ses jours de séance dans la modale ouverte depuis la page de la classe ; succès :
 #        toast et page rafraîchie par morphing ; tout décocher vaut « non renseigné » ; les échéances données ne bougent pas
-# ADR  : 0026, 0028, 0072 · UDR : 0006, 0062 (§3.4)
+# ADR  : 0026, 0028, 0072, 0088 · UDR : 0006, 0062 (§3.4)
 module Classroom
   class SessionDaysController < AuthenticatedController
     allow_roles :teacher
 
     def edit
       @classroom = classrooms.find_by_public_id(public_id: params[:classroom_public_id])
-      return render_not_found if @classroom.nil?
+      # vie-de-la-classe, Lot C (ADR-0088, Q8) : une classe archivée n'a plus de page, quel que soit le rôle ; elle se restaure.
+      return render_not_found if @classroom.nil? || @classroom.archived?
 
       render_result Policies::Classroom::SetSessionDaysPolicy.new.call(actor: current_actor, classroom: @classroom),
                     success: lambda { |_|

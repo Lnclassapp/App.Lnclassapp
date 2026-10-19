@@ -1,10 +1,11 @@
 <%# 🌐 UI · classroom/student_registrations/_class_picker — la cascade en trois étapes numérotées : établissement, niveau, classe %>
 <%# Rôle : établissement connu replié en une ligne avec « Changer » (DRENA et établissement en listes derrière) ; niveaux en pastilles, classes en cases ; repli GET %>
-<%# ADR  : 0062, 0085 · UDR : 0024, 0081 (§3.3), 0091 %>
-<%# locals: (form:, drenas:, schools:, levels:, classrooms:, scope:, framed: false) -%>
+<%# ADR  : 0062, 0085, 0095 · UDR : 0024, 0081 (§3.3), 0091, 0102 (§3.1) %>
+<%# locals: (form:, drenas:, schools:, levels:, classrooms:, scope:, framed: false, current_classroom_public_id: nil) -%>
 <%# Partagé par l'inscription et par « Choisis ta classe » (UDR-0081 §3.5, UDR-0091 §3.4) : schools, levels, classrooms valent nil tant que
     leur parent n'est pas choisi. Le formulaire hôte porte le contrôleur, ses trois adresses et la cible submit. framed : chaque étape
-    dans sa carte (« Choisis ta classe ») ; sans, les étapes se suivent dans la carte de l'inscription. %>
+    dans sa carte (« Choisis ta classe ») ; sans, les étapes se suivent dans la carte de l'inscription. current_classroom_public_id :
+    « Changer de classe » (UDR-0102 §3.1) marque la classe actuelle ; l'hôte l'ajoute aussi (current=) à l'adresse du cadre des classes. %>
 <% registration = form.object %>
 <%# Des niveaux listés : l'établissement envoyé appartient à sa DRENA (ClassPicker), la ligne repliée peut les nommer. Sans
     l'un des deux (DRENA absente ou discordante), pas de ligne repliée : les deux listes restent ouvertes. %>
@@ -70,7 +71,7 @@
 
   <%= tag.div class: card_class do %><%= tag.fieldset id: "class-picker-step-classroom", class: step_class do %>
     <%= legend.call(3, :step_classroom) %>
-    <%= render template: "school/level_classrooms/index", locals: { classrooms:, registration:, scope: } %>
+    <%= render template: "school/level_classrooms/index", locals: { classrooms:, registration:, scope:, current: current_classroom_public_id } %>
     <p class="hidden text-sm text-mute peer-empty:block peer-aria-busy:hidden"><%= t(".level_first") %></p>
   <% end %><% end %>
 

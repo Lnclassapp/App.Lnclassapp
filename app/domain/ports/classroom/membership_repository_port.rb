@@ -16,7 +16,8 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #add_primary"
       end
 
-      # Pose left_at sur l'adhésion principale active (JoinAsStudent). → true
+      # Pose left_at sur l'adhésion principale active (JoinAsStudent, ChangeClassroom).
+      # → true si une adhésion a été close, false s'il n'y en avait aucune
       def leave_primary(student_id:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #leave_primary"
       end
