@@ -1,0 +1,12 @@
+<%# 🌐 UI · catalog/public/_footer — pied des pages publiques du catalogue : « Les cours par niveau », le blog, les pages publiques %>
+<%# Rôle : une seule liste, celle de la homepage (UDR-0063 §3.4, UDR-0066 §3.5), précédée du lien vers /niveaux %>
+<%# UDR  : 0113 (§3.1, §3.9) %>
+<footer class="border-t border-ink/10">
+  <div class="mx-auto max-w-page px-gutter py-8">
+    <ul id="public_catalog_footer" aria-label="<%= t(".label") %>" class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-mute">
+      <% [ [ t("public_pages.links.catalog"), public_levels_path ], blog_link, *public_page_links ].compact.each do |label, href| %>
+        <li><%= link_to label, href, class: "inline-flex min-h-tap items-center hover:text-ink focus-visible:outline-2 focus-visible:outline-brand" %></li>
+      <% end %>
+    </ul>
+  </div>
+</footer>

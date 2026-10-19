@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | refactoring |
-| **Statut** | cadrage |
+| **Statut** | abandonné — obsolète depuis la refonte (vérifié le 2026-10-16) |
 | **Ouvert le** | 2026-09-18 |
 | **Branche** | `refactor/message-repository-fuite-activerecord` |
 | **Gravité** | 🟠 **Haute — violation de la Règle d'Or « Zéro Couplage »** |
@@ -57,3 +57,7 @@ Deux raisons :
 
 - Y a-t-il d'autres repositories qui fuient de la même façon ? Un audit des `map_to_entity` s'impose avant de conclure.
 - Défaut mineur rattaché au même fichier : `message_repository.rb:21-27`, `find_by_slug` utilise `rescue StandardError` + `return` **depuis un bloc `ensure`**, ce qui avale toute exception et rend le flux opaque. À traiter au passage.
+
+## Clôture (2026-10-16)
+
+Abandonné : le défaut n'existe plus dans le code actuel. Vérification : `message_repository.rb` (réécrit par `annonces-v2`, #179) ne transmet plus `content`, `image_cover` ni `message_audio` à l'entité ; la garde de pureté du domaine est verte. Rien à corriger.

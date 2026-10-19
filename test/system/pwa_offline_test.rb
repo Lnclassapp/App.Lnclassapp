@@ -10,7 +10,7 @@ class PwaOfflineTest < ApplicationSystemTestCase
   test "CA-3, CA-4 — without network a signed-in student sees « Pas de connexion », never their page, then « Réessayer » brings it back" do
     student = create_student(classroom: create_classroom, first_name: "Aïcha", last_name: "Bamba")
     sign_in_as student
-    assert_text I18n.t("classroom.student_homes.show.greeting", name: "Aïcha")
+    assert_link I18n.t("classroom.student_homes.classroom_card.enter")
     home = page.current_path
 
     assert_equal "#{Capybara.current_session.server.base_url}/", service_worker_scope
@@ -29,7 +29,7 @@ class PwaOfflineTest < ApplicationSystemTestCase
     end
 
     click_link "Réessayer"
-    assert_text I18n.t("classroom.student_homes.show.greeting", name: "Aïcha")
+    assert_link I18n.t("classroom.student_homes.classroom_card.enter")
     assert_current_path home
   end
 

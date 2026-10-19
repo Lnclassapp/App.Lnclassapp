@@ -1,0 +1,37 @@
+# « Mes établissements » de l'enseignant : liste, ajout, départ — ADR-0094, UDR-0099 (chantier multi-etablissements-enseignant)
+fr:
+  activemodel:
+    errors:
+      models:
+        dtos/school/school_join_input:
+          attributes:
+            base:
+              already_attached: "Vous êtes déjà dans cet établissement."
+              schools_limit: "Vous avez atteint 3 établissements."
+  school:
+    teacher_schools:
+      index:
+        page_title: "Mes établissements"
+        title: "Mes établissements"
+        subtitle:
+          one: "%{count} établissement sur %{max}"
+          other: "%{count} établissements sur %{max}"
+        primary: "Principal"
+        current: "Vous êtes ici"
+        actions: "Actions pour %{school}"
+        go: "Aller dans cet établissement"
+        go_label: "Aller dans %{school}"
+        leave: "Quitter l'établissement"
+        leave_title: "Quitter %{school} ?"
+        leave_warning: "Vous ne verrez plus cet établissement ni ses classes. Vos devoirs encore actifs dans ses classes seront archivés : les élèves ne les verront plus à faire. Les classes, les élèves et leurs résultats restent. Vous pourrez le rejoindre de nouveau."
+        leave_confirm: "Quitter"
+        cancel: "Annuler"
+        add_title: "Ajouter un établissement"
+        add_description: "Choisissez votre DRENA, puis l'établissement. Vous y serez rattaché tout de suite."
+        join: "Rejoindre l'établissement"
+        limit: "Vous avez atteint %{max} établissements. Quittez-en un pour en ajouter un autre."
+      create:
+        joined: "Vous avez rejoint %{school}. Sélectionnez vos classes."
+      destroy:
+        left: "Vous avez quitté %{school}."
+        last_school: "Vous ne pouvez pas quitter votre seul établissement."

@@ -1,0 +1,10 @@
+<%# 🌐 UI · teams/code_regenerations/new — confirmation d'une régénération de masse, lue à la demande %>
+<%# Rôle : servie dans le frame « modal » depuis le menu « Codes » de la liste ou le menu ⋮ de la fiche ; sans frame, page complète %>
+<%# ADR  : 0096 · UDR : 0054, 0104 %>
+<% page_title t(".page_title.#{@form.target}") %>
+<% content_for :nav_key, "schools" %>
+<%# Page complète seulement : le retour à la liste, puisque « Annuler » ne fait rien sans JavaScript (UDR-0054). %>
+<% unless turbo_frame_request? %>
+  <%= link_to t(".back"), schools_path, id: "back-to-schools", class: "mb-4 inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
+<% end %>
+<%= render "form" %>

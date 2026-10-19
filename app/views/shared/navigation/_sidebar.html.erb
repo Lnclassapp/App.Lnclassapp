@@ -1,10 +1,11 @@
 <%# 🌐 UI · shared/navigation/_sidebar — navigation bureau (lg et plus) %>
 <%# Rôle : carte de profil, destinations du rôle (les mêmes que la barre basse), 2e carte « Configuration » et frames différés du rôle %>
-<%# UDR  : 0006, 0068 (§3.2), 0069 (§3.6) · ADR : 0076 (§4.2) %>
+<%# UDR  : 0006, 0068 (§3.2), 0069 (§3.6), 0084 (§3.4) · ADR : 0076 (§4.2) %>
 <% secondary = secondary_navigation_for(user.role) %>
 <aside class="fixed top-bar bottom-0 left-0 hidden w-rail overflow-y-auto border-r border-line bg-paper p-4 lg:block">
   <div class="flex items-center gap-3 rounded-card border border-line bg-white p-4 shadow-card">
-    <%= ui_avatar user.name, src: user.avatar_url %>
+    <%# UDR-0084 §3.4 : l'élève sans photo a la même couleur qu'à l'avatar de l'en-tête (graine public_id) ; les autres rôles inchangés. %>
+    <%= ui_avatar user.name, src: user.avatar_url, tone_seed: (user.public_id if user.role.to_sym == :student) %>
     <div class="min-w-0">
       <p class="truncate font-semibold"><%= user.name %></p>
       <% if user.detail %><p class="line-clamp-2 text-xs text-mute"><%= user.detail %></p><% end %>

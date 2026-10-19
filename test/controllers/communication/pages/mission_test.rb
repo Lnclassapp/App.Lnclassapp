@@ -50,7 +50,7 @@ class Communication::MissionPageTest < ActionDispatch::IntegrationTest
     assert_select "section[aria-labelledby='comment-nous-le-faisons'] li", text: /^Sans traceur/
   end
 
-  # UDR-0084 §2 : la mission nomme les fiches de cours et les fiches de révision ; « comprendre leurs cours » reste.
+  # UDR-0130 §2 : la mission nomme les fiches de cours et les fiches de révision ; « comprendre leurs cours » reste.
   test "the mission names « fiches de cours, fiches de révision et exercices », never « essentielle »" do
     get mission_path
 

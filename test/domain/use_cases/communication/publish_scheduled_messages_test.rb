@@ -136,6 +136,26 @@ module UseCases
       end
 
       # Phase 5 (F1): the announcement is read again after the lock, when a publication of it by its author has ended.
+      # ADR-0094 §10 (amende l'ADR-0081 §4.1) : l'annonce d'un enseignant à ses classes se compte par établissement. Trois en
+      # ligne dans B ; celle programmée dans A, publiée par le job, n'archive rien de B.
+      test "ME — a teacher's scheduled announcement in A, published by the job, archives none of his three live ones in B" do
+        a, b = create_school(name: "Lycée moderne d'Abobo"), create_school(name: "Collège Saint-Michel")
+        a1, b1 = create_classroom(school: a, name: "3ème 1"), create_classroom(school: b, name: "4ème 2")
+        kone = create_teacher(school: a, classrooms: [ a1, b1 ], last_name: "Koné")
+        add_teacher_school(kone, b)
+        in_b = [ 25, 27, 29 ].map do |day|
+          create_message(author: kone, title: "B, #{day} septembre", audience: "classrooms", classrooms: [ b1 ],
+                         published_at: Time.zone.local(2026, 9, day, 8))
+        end
+        in_a = create_message(author: kone, title: "Devoir de lundi", audience: "classrooms", classrooms: [ a1 ], status: "scheduled",
+                              published_at: Time.zone.local(2026, 10, 1, 9))
+
+        publish
+
+        assert_equal "published", in_a.reload.status
+        assert_equal %w[published published published], statuses(in_b)
+      end
+
       test "AV-05 — in the transaction of each publication: the author locked, the announcement read again, the oldest archived, its status" do
         three_live
         transaction = SpyTransaction.new

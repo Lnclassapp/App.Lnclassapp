@@ -47,7 +47,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
 
     # UDR-0015, amendement du 2026-10-02 (UDR-0057) : surtitre sans le cours, que le retour nomme déjà ; plus d'aide « Badges ».
     assert_select "#essential_header p", text: I18n.t("#{scope}.show.student_eyebrow")
-    # UDR-0084 : le surtitre nomme la fiche de révision, jamais la « fiche essentielle ».
+    # UDR-0130 : le surtitre nomme la fiche de révision, jamais la « fiche essentielle ».
     assert_select "#essential_header p", text: "Fiche de révision"
     assert_select "#essential_header", text: /essentielle/i, count: 0
     assert_select "#essential_badges_help", 0
@@ -92,12 +92,75 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     get page_path
 
     assert_select "#essential_gap", text: /#{I18n.t("#{scope}.show.gap_title")}/
-    # UDR-0084 §2 : « Fiche à revoir », sans « de révision » redondant.
+    # UDR-0130 §2 : « Fiche à revoir », sans « de révision » redondant.
     assert_select "#essential_gap_title", text: "Fiche à revoir"
     assert_select "#essential_gap", text: /12 septembre 2026/
     # UDR-0015, amendement du 2026-10-02 : la règle pour lever la lacune passe dans l'infobulle du titre.
-    assert_select "#essential_gap details", text: /#{Entities::Assessment::Grading::REMEDIATION_THRESHOLD} %/
-    assert_select "#essential_gap > div > p", text: /#{Entities::Assessment::Grading::REMEDIATION_THRESHOLD} %/, count: 0
+    # UDR-0119 : la règle se lit sur 20, jamais en pourcentage.
+    assert_select "#essential_gap details", text: /au moins 15\/20/
+    assert_no_match(/75 %/, response.body)
+  end
+
+  # UDR-0119, ADR-0101 §4.2 : le bouton démarre l'exercice proposé (une fixation autre que l'exercice raté), d'un tap.
+  test "the gap's button posts to a session of the offered exercise and names it" do
+    fixation = create_exercise(essential: @essential, title: "Thalès 3", exercise_type: "fixation", position: 3)
+    create_gap(student: @student, essential: @essential,
+               source_session: create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 30))
+    sign_in_as @student
+
+    get page_path
+
+    assert_select "#essential_gap form#essential_gap_form[method=post][action='#{exercise_sessions_path(fixation.public_id)}']" do
+      assert_select "button#essential_gap_action[type=submit][aria-describedby=essential_gap_exercise]",
+                    text: I18n.t("#{scope}.show.gap_action")
+    end
+    assert_select "#essential_gap p#essential_gap_exercise", text: "Exercice proposé : Thalès 3"
+    assert_select "#essential_gap a[href='#{exercise_path(@exercise.public_id)}']", 0
+  end
+
+  test "the gap's button starts a remediation session of the offered exercise" do
+    gap = create_gap(student: @student, essential: @essential,
+                     source_session: create_exercise_session(student: @student, exercise: @exercise, status: "completed",
+                                                             score_percent: 30))
+    other = create_exercise(essential: @essential, title: "Thalès 2", exercise_type: "evaluation", position: 2)
+    sign_in_as @student
+
+    assert_difference -> { Orm::ExerciseSession.count }, 1 do
+      post exercise_sessions_path(other.public_id)
+    end
+
+    session = Orm::ExerciseSession.order(:id).last
+    assert_equal [ other.id, "remediation", gap.id ], [ session.exercise_id, session.kind, session.knowledge_gap_id ]
+    assert_redirected_to exercise_session_path(session.public_id)
+  end
+
+  # PRD §3 : une session commencée de l'exercice proposé se reprend ; le bouton n'en recommence pas une (pas de restart).
+  test "the gap's button resumes a started session of the offered exercise instead of starting another" do
+    create_gap(student: @student, essential: @essential,
+               source_session: create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 30))
+    offered = create_exercise(essential: @essential, title: "Thalès 2", exercise_type: "fixation", position: 2)
+    started = create_exercise_session(student: @student, exercise: offered, status: "started")
+    sign_in_as @student
+
+    get page_path
+
+    assert_select "#essential_gap_form input[name=restart]", 0
+    assert_no_difference -> { Orm::ExerciseSession.count } do
+      post exercise_sessions_path(offered.public_id)
+    end
+    assert_redirected_to exercise_session_path(started.public_id)
+  end
+
+  test "a gap on a sheet without published exercise: the box stays, without button" do
+    create_gap(student: @student, essential: @essential,
+               source_session: create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 30))
+    @exercise.update!(status: "archived", archived_at: Time.current)
+    sign_in_as @student
+
+    get page_path
+
+    assert_select "#essential_gap"
+    assert_select "#essential_gap form, #essential_gap_exercise", 0
   end
 
   test "beyond 3 exercises, the student sees 3 rows then « Voir plus », the others rendered hidden" do
@@ -304,6 +367,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
       end
       sign_out
     end
+    assert_equal 0, Orm::EssentialRead.count
   end
 
   test "an unknown sheet, or a sheet read under another course, answers 404" do
@@ -316,7 +380,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
-  # UDR-0084 §3 : le renommage ne touche aucune adresse ; un lien partagé avant lui s'ouvre sans redirection.
+  # UDR-0130 §3 : le renommage ne touche aucune adresse ; un lien partagé avant lui s'ouvre sans redirection.
   test "a link shared before the renaming, /courses/<course>/essentials/<sheet>, still opens without redirect" do
     sign_in_as @student
 
@@ -330,5 +394,108 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     get page_path
 
     assert_redirected_to new_session_path
+  end
+
+  # ── Lecture retenue (chantier cours-eleve, ADR-0090 §4.1) ────────────────────
+
+  def reads_of(user) = Orm::EssentialRead.where(student_id: user.id)
+
+  test "CA-7, CA-12: the student's opening of a sheet is kept, once, with the time of the last opening" do
+    sign_in_as @student
+    first = Time.current.change(usec: 0)
+    last = first + 40.minutes
+
+    travel_to(first) { get page_path }
+    assert_response :success
+    travel_to(last) { get page_path }
+
+    assert_equal [ [ @essential.id, first, last ] ], reads_of(@student).pluck(:essential_id, :first_read_at, :last_read_at)
+  end
+
+  test "a link prefetched by Turbo on hover is not an opening: no read, the page still answers" do
+    sign_in_as @student
+
+    [ { "X-Sec-Purpose" => "prefetch" }, { "Sec-Purpose" => "prefetch;prerender" }, { "Purpose" => "prefetch" } ].each do |headers|
+      get(page_path, headers:)
+      assert_response :success
+    end
+
+    assert_equal 0, Orm::EssentialRead.count
+  end
+
+  test "a prefetch of a sheet already read leaves its last opening unchanged" do
+    read = create_essential_read(student: @student, essential: @essential, at: 2.days.ago.change(usec: 0))
+    sign_in_as @student
+
+    get page_path, headers: { "X-Sec-Purpose" => "prefetch" }
+
+    assert_equal read.last_read_at, read.reload.last_read_at
+  end
+
+  test "a student without a classroom of the year opens no sheet (404) and leaves no read" do
+    sign_in_as create_student
+
+    get page_path
+
+    assert_response :not_found
+    assert_equal 0, Orm::EssentialRead.count
+  end
+
+  test "CA-11: a teacher or a team member opening a sheet leaves no read" do
+    [ create_teacher, create_team_member ].each do |user|
+      sign_in_as user
+      get page_path
+
+      assert_response :success
+      sign_out
+    end
+
+    assert_equal 0, Orm::EssentialRead.count
+  end
+
+  test "a sheet the student may not read (draft, another level, another course) leaves no read" do
+    draft = create_essential(course: @course, status: "draft")
+    other_level = create_essential(course: create_course(level: create_level))
+    sign_in_as @student
+
+    [ page_path(draft), page_path(other_level), course_essential_path(create_course.slug, @essential.slug) ].each do |path|
+      get path
+      assert_response :not_found
+    end
+
+    assert_equal 0, Orm::EssentialRead.count
+  end
+
+  # The recording raises `error` for the duration of the block.
+  def with_failing_record(error)
+    repository = Repositories::Assessment::EssentialReadRepository
+    repository.alias_method :original_record, :record
+    repository.define_method(:record) { |student_id:, essential_id:, at:| raise error }
+    yield
+  ensure
+    repository.alias_method :record, :original_record
+    repository.remove_method :original_record
+  end
+
+  test "an outage of the recording never blocks the sheet: it is reported as handled, with the sheet and the student" do
+    sign_in_as @student
+
+    [ ActiveRecord::ConnectionTimeoutError.new("pool épuisé"), ActiveRecord::InvalidForeignKey.new("fiche supprimée") ].each do |error|
+      report = with_failing_record(error) { assert_error_reported(error.class) { get page_path } }
+
+      assert_response :success
+      assert_select "#essential_header h1", text: "La méiose"
+      assert report.handled
+      assert_equal({ essential_id: @essential.id, student_id: @student.id }, report.context.slice(:essential_id, :student_id))
+    end
+    assert_equal 0, Orm::EssentialRead.count
+  end
+
+  test "any other database error is a bug: it is raised, not swallowed" do
+    sign_in_as @student
+
+    with_failing_record(ActiveRecord::StatementInvalid.new("syntaxe")) do
+      assert_raises(ActiveRecord::StatementInvalid) { get page_path }
+    end
   end
 end

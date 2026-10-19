@@ -267,17 +267,17 @@
 
 | | ID | Feature | État ancien | Vague / précision | Ne pas reproduire |
 |---|---|---|---|---|---|
-| ☐ | CA-02 | Filtrer par niveau ou matière | ⚠️ | V4 | — |
-| ☐ | CA-03 | Pagination infinie | 💀 | V4 | Un lien de page jamais rendu |
-| ☐ | CA-17 | Espace Niveau | ⚠️ | V4 (`catalogue-complet`) | — |
-| ☐ | CA-21 | Page matière | ⚠️ | V4 | — |
-| ☐ | CA-23 | Pages des séries | ❌ | V4 (`catalogue-complet`) — **déplacée de V2 le 2026-09-28** : page publique du catalogue, avec CA-17 et CA-21 | — |
+| ☑ | CA-02 | Filtrer par niveau ou matière | ⚠️ | V4 — livrée hors ordre, constatée le 2026-10-16 | — |
+| ☑ | CA-03 | Pagination infinie | 💀 | V4 — livrée hors ordre, constatée le 2026-10-16 | Un lien de page jamais rendu |
+| ☑ | CA-17 | Espace Niveau | ⚠️ | V4 (`catalogue-complet`) — livrée 2026-10-16 | — |
+| ☑ | CA-21 | Page matière | ⚠️ | V4 (`catalogue-complet`) — livrée 2026-10-16 | — |
+| ☑ | CA-23 | Pages des séries | ❌ | V4 (`catalogue-complet`) — **déplacée de V2 le 2026-09-28** : page publique du catalogue, avec CA-17 et CA-21 — livrée 2026-10-16 | — |
 
 ### Évaluation — `AS`
 
 | | ID | Feature | État ancien | Vague / précision | Ne pas reproduire |
 |---|---|---|---|---|---|
-| ☐ | AS-01 | Parcourir tous les exercices de la plateforme | ⚠️ | V4 (`catalogue-complet`) | Une page liée nulle part ; une carte mise en cache sans l'utilisateur ni le rôle dans la clé |
+| ☑ | AS-01 | Parcourir tous les exercices de la plateforme | ⚠️ | V4 (`catalogue-complet`) — fermée 2026-10-16 (page d'une fiche) | Une page liée nulle part ; une carte mise en cache sans l'utilisateur ni le rôle dans la clé |
 
 ### Transverse — `TR`
 

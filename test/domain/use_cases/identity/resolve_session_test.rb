@@ -23,17 +23,23 @@ module UseCases
       class FakeUsers
         include Ports::Identity::UserRepositoryPort
 
-        def actor_for(user_id:) = Entities::Identity::Actor.new(user_id:, role: :team, team_role: "admin")
+        attr_reader :current_school_id
+
+        def actor_for(user_id:, current_school_id: nil)
+          @current_school_id = current_school_id
+          Entities::Identity::Actor.new(user_id:, role: :team, team_role: "admin")
+        end
       end
 
-      def session(role: "student", created_at: NOW - 1.day, last_seen_at: NOW - 1.minute, verified_at: nil)
+      def session(role: "student", created_at: NOW - 1.day, last_seen_at: NOW - 1.minute, verified_at: nil, current_school_id: nil)
         Entities::Identity::SessionState.new(id: 5, user_id: 9, role:, created_at:, last_seen_at:, second_factor_verified_at: verified_at,
-                                             second_factor_confirmed: true)
+                                             second_factor_confirmed: true, current_school_id:)
       end
 
       def resolve(session, token: "token")
         @sessions = FakeSessions.new(session)
-        ResolveSession.new(sessions: @sessions, users: FakeUsers.new, policy: Policies::Identity::SessionPolicy.new, digest_key: "key",
+        @users = FakeUsers.new
+        ResolveSession.new(sessions: @sessions, users: @users, policy: Policies::Identity::SessionPolicy.new, digest_key: "key",
                            clock: Clock.new(NOW)).call(token:)
       end
 
@@ -61,6 +67,15 @@ module UseCases
         assert_nil @sessions.touched
         assert_equal 9, result.value.actor.user_id
         assert_equal 5, result.value.session.id
+      end
+
+      # ADR-0094 §4.2 : l'acteur est construit avec l'établissement courant de la session ; le dépôt le vérifie.
+      test "the actor is built with the current school of the session" do
+        assert resolve(session(role: "teacher", current_school_id: 42)).success?
+        assert_equal 42, @users.current_school_id
+
+        resolve(session(role: "teacher"))
+        assert_nil @users.current_school_id
       end
 
       test "after 5 minutes the last visit is rewritten" do

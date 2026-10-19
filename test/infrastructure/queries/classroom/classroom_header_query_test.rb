@@ -58,7 +58,7 @@ module Queries
         teacher = create_teacher(school:, classrooms: [ classroom ])
         row = ClassroomHeaderQuery.new.call(public_id: classroom.public_id)
 
-        assert row.link_shown_to?(actor(teacher, :teacher))
+        assert row.link_shown_to?(actor(teacher, :teacher, school_id: school.id))
         assert row.link_shown_to?(actor(create_school_admin(school:), :school_admin, school_id: school.id))
         assert row.link_shown_to?(actor(create_team_member(second_factor: false), :team))
       end

@@ -45,8 +45,8 @@ module Ports
       # Deux parutions du même auteur se suivent donc ; une ligne qui le référence (journal d'audit) s'écrit toujours. En ligne = published et now < ends_at (published_at n'est pas comparé : une
       # parution qui a lu son horloge avant le verrou compte celle qui vient d'avoir lieu) ; brouillon, programmée,
       # archivée, retirée et terminée ne comptent pas. → [Message] avec leurs classes, la plus ancienne d'abord
-      # (published_at, puis id)
-      def live_of(author_id:, now:)
+      # (published_at, puis id). school_id (ADR-0094) : seulement les annonces de cet établissement ; nil : toutes.
+      def live_of(author_id:, now:, school_id: nil)
         raise NotImplementedError, "#{self.class} doit implémenter #live_of"
       end
 

@@ -242,6 +242,23 @@ class SchoolAdmin::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[title]", count: 0
   end
 
+  # CA-17 (accueil-eleve, ADR-0089 §4.2, UDR-0084 §3.7): next to the level's rate, « Faits seul (7 j) : N », outside the
+  # bubble's link; another school's student is never counted.
+  test "CA-17: the 2nde bubble reads « Faits seul (7 j) : 1 » for a session done alone 3 days ago, not another school's" do
+    student = create_student(classroom: @classroom)
+    create_exercise_session(student:, status: "completed", started_at: 3.days.ago, completed_at: 3.days.ago)
+    intruder = Orm::ClassroomStudent.find_by!(classroom: @other).student
+    create_exercise_session(student: intruder, status: "completed", started_at: 1.day.ago, completed_at: 1.day.ago)
+    sign_in_as @admin
+
+    get school_admin_classrooms_path
+
+    assert_select "nav#direction_home_level_bubbles li" do
+      assert_select "a#level_2nde + p#level_2nde_self_practice", text: /\A\s*Faits seul\s+\(7 j\) : 1\s*\z/
+    end
+    assert_select "a#level_2nde p", count: 0
+  end
+
   test "AD-07: without any dot, the levels have no legend" do
     sign_in_as @admin
 

@@ -107,7 +107,7 @@ Scénario: les CGU nomment les nouveaux objets sans nouvelle version
 ## 6. Décisions rattachées
 
 - **ADR : aucun.** Ni port, ni table, ni dépendance, ni contrat ne bouge. Les clés d'import JSON, les routes et les noms de classes restent identiques.
-- **UDR-0084** — Vocabulaire « Fiche de cours » et « Fiche de révision ». Elle remplace, pour ces deux objets, la ligne `Essential` et l'amendement du 2026-09-30 de l'UDR-0007.
+- **UDR-0130** — Vocabulaire « Fiche de cours » et « Fiche de révision ». Elle remplace, pour ces deux objets, la ligne `Essential` et l'amendement du 2026-09-30 de l'UDR-0007.
 
 ## 7. Mesures
 

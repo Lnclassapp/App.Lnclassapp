@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Règles d'écriture : [UDR-0084](../../decisions/udr/0084-vocabulaire-fiche-de-cours-et-fiche-de-revision.md) §3, appliquée littéralement.
+> Règles d'écriture : [UDR-0130](../../decisions/udr/0130-vocabulaire-fiche-de-cours-et-fiche-de-revision.md) §3, appliquée littéralement.
 
 ## Particularité du chantier
 
@@ -140,7 +140,7 @@ Le test de garde du Lot 0 est **rouge** à son merge, et c'est voulu : il liste 
                      `docs/contenus/prompt-redaction.md`
 - **Dépend de**    : Lot 0
 - **Test associé** : pas de test automatisé de la doc. La vérification est mécanique : `grep -rniE "fiches? essentielles?" docs/guide docs/contenus/README.md docs/contenus/prompt-redaction.md docs/README.md` ne renvoie que les mentions explicites de l'ancien nom (« anciennement « Fiche essentielle » »). Le prompt de rédaction garde ses clés JSON `essentials`.
-- **Done quand**   : le glossaire (§3 et §8) donne « Fiche de cours » pour `Course` et « Fiche de révision » pour `Essential`, ajoute « Fiche essentielle » aux interdits d'écran et renvoie à l'UDR-0084. Le prompt de rédaction demande des « fiches de révision ».
+- **Done quand**   : le glossaire (§3 et §8) donne « Fiche de cours » pour `Course` et « Fiche de révision » pour `Essential`, ajoute « Fiche essentielle » aux interdits d'écran et renvoie à l'UDR-0130. Le prompt de rédaction demande des « fiches de révision ».
 
 ---
 
@@ -162,7 +162,7 @@ Consignes à chaque agent de lot :
 
 - chemins **absolus** et `git -C <worktree>` ;
 - **interdiction de toucher un fichier absent de son champ `Fichiers`**. S'il en a besoin, il s'arrête et remonte ;
-- il applique l'UDR-0084 §3 à la lettre : accords au féminin, faux amis intacts, rubrique « Cours » intacte ;
+- il applique l'UDR-0130 §3 à la lettre : accords au féminin, faux amis intacts, rubrique « Cours » intacte ;
 - il lance les tests de ses fichiers ; le test de garde reste rouge tant que les autres lots ne sont pas mergés.
 
 ## Vérification de collision

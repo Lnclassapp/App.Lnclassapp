@@ -1,4 +1,10 @@
-# UDR-0084 : Vocabulaire d'interface — « Fiche de cours » et « Fiche de révision »
+# UDR-0130 : Vocabulaire d'interface — « Fiche de cours » et « Fiche de révision »
+<!-- index
+titre: Vocabulaire « Fiche de cours » et « Fiche de révision »
+statut: Proposé
+adr-lie: —
+problematique: « Cours » devient « Fiche de cours » et « Fiche essentielle » devient « Fiche de révision » à l'écran ; la rubrique « Cours » garde son nom ; « Révisions de la leçon » ; « Fiche(s) à revoir ». Remplace la ligne `Essential` et l'amendement du 2026-09-30 de l'UDR-0007. Numéro 0084 pris sur Develop le 2026-10-15, renuméroté 0130
+-->
 
 | | |
 |---|---|

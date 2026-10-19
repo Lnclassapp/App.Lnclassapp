@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Assessment::QuestionAttemptsController
 # Rôle : l'élève répond à une question de son niveau ; verdict et progression en Turbo Stream, erreur de saisie en 422
-# ADR  : 0026, 0028, 0054 · UDR : 0006, 0007, 0022
+# ADR  : 0026, 0028, 0054, 0091 (§4.4 : texte ou indices d'affichage) · UDR : 0006, 0007, 0022, 0087
 module Assessment
   class QuestionAttemptsController < AuthenticatedController
     include ReadsOwnLevel
@@ -13,7 +13,8 @@ module Assessment
       return if own_session? && refuse_out_of_level(session_public_id: params[:public_id])
 
       @form = Dtos::Assessment::AttemptInput.new(session_public_id: params[:public_id],
-                                                 **params.expect(attempt: [ :question_id, { answer_ids: [] } ]).to_h.symbolize_keys)
+                                                 **params.expect(attempt: [ :question_id, :response_text, { answer_ids: [], display_order: [] } ])
+                                                                       .to_h.symbolize_keys)
       result = submit_attempt.call(actor: current_actor, dto: @form)
       return refuse_answer(result) if result.code == :invalid
       return answer_again(result) if result.code == :conflict

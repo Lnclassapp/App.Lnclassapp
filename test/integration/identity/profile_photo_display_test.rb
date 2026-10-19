@@ -9,22 +9,16 @@ class Identity::ProfilePhotoDisplayTest < ActionDispatch::IntegrationTest
     @src = account_photo_path(@student.public_id, v: Queries::Identity::PhotoVersions.for(user_ids: [ @student.id ])[@student.id])
   end
 
-  test "the avatar of the header (UDR-0080), the sidebar and the profile card show the photo; « Changer ma photo » opens the modal" do
+  test "the avatar of the header (UDR-0084), the sidebar and the profile card show the photo; « Changer ma photo » opens the modal" do
     sign_in_as @student
 
     get profile_path
 
-    assert_select "header a[aria-controls=account_panel] img.ui-avatar[alt='Aya Koné'][src='#{@src}']"
+    assert_select "header button#avatar-menu-button img.ui-avatar[alt='Aya Koné'][src='#{@src}']"
     assert_select "aside img[alt='Aya Koné'][src='#{@src}']"
-    assert_select "#profile_information" do
-      # UDR-0041, amendment of 2026-10-02: for the student, the avatar is the value of the « Photo » row, the
-      # sentence is left to screen readers.
-      assert_select "img.size-14[alt='Aya Koné'][src='#{@src}']", count: 1
-      assert_select "dt", "Photo"
-      assert_select "dd span[aria-hidden=true] img.size-14[src='#{@src}']"
-      assert_select "dd span.sr-only", "Ta photo remplace tes initiales."
-      assert_select "a[href='#{edit_profile_photo_path}'][data-turbo-frame=modal]", text: /Changer ma photo/
-    end
+    # UDR-0089 §3.1, §3.2: for the student, the photo is in the blue card, its row says « Ta photo » and opens the modal.
+    assert_select "#profile_identity span[aria-hidden=true] img.size-28[alt='Aya Koné'][src='#{@src}']", count: 1
+    assert_select "#profile_information a[href='#{edit_profile_photo_path}'][data-turbo-frame=modal]", text: /Photo\s+Ta photo\s+Changer/
   end
 
   test "without a photo, the initials stay and the profile offers to add one" do
@@ -32,11 +26,10 @@ class Identity::ProfilePhotoDisplayTest < ActionDispatch::IntegrationTest
 
     get profile_path
 
-    assert_select "header a[aria-controls=account_panel] [role=img][aria-label='Awa Traoré']", text: "AT"
+    assert_select "header button#avatar-menu-button [role=img][aria-label='Awa Traoré']", text: "AT"
     assert_select "header img[src*='/photo']", 0
-    assert_select "#profile_information dd span[aria-hidden=true] [role=img][aria-label='Awa Traoré']", text: "AT"
-    assert_select "#profile_information dd span.sr-only", "Aucune photo : tes initiales s'affichent."
-    assert_select "#profile_information a[href='#{edit_profile_photo_path}']", text: /Ajouter une photo/
+    assert_select "#profile_identity span[aria-hidden=true] [role=img][aria-label='Awa Traoré']", text: "AT"
+    assert_select "#profile_information a[href='#{edit_profile_photo_path}']", text: /Photo\s+Aucune photo\s+Ajouter/
   end
 
   test "the teacher sees the photo in the class list, the team on the account it finds" do

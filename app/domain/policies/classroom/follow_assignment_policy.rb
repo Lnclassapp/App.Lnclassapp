@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Policies::Classroom::FollowAssignmentPolicy
 # Rôle : suivre un exercice assigné (comptes et retardataires nommés) : l'enseignant de la classe et l'équipe seulement
-# ADR  : 0028, 0072
+# ADR  : 0028, 0072, 0094
 module Policies
   module Classroom
     class FollowAssignmentPolicy
@@ -8,7 +8,8 @@ module Policies
       def call(actor:, classroom:)
         return Shared::Result.failure(:forbidden) if actor.nil?
         return Shared::Result.success if actor.team?
-        return Shared::Result.success if actor.teacher? && classroom.teacher_ids.include?(actor.user_id)
+        return Shared::Result.success if ClassroomTeacher.teaches?(actor, classroom)
+        return ClassroomTeacher::OTHER_SCHOOL if ClassroomTeacher.elsewhere?(actor, classroom)
 
         Shared::Result.failure(:forbidden)
       end

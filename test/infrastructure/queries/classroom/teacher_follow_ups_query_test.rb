@@ -16,7 +16,7 @@ module Queries
         @students = Array.new(3) { create_student(classroom: @classroom) }
       end
 
-      def follow_ups(teacher = @teacher) = TeacherFollowUpsQuery.new.call(teacher_id: teacher.id, today: @today)
+      def follow_ups(teacher = @teacher, school: @school) = TeacherFollowUpsQuery.new.call(teacher_id: teacher.id, school_id: school.id, today: @today)
 
       def svt_exercise(title) = create_exercise(title:, essential: create_essential(course: create_course(material: @svt, level: @tle)))
 
@@ -121,6 +121,20 @@ module Queries
 
         assert_equal 4, follow_ups.size
         assert_equal one, count_queries { follow_ups }
+      end
+
+      # ME-07 (ADR-0094 §4.6) : les exercices à suivre de l'établissement courant seulement.
+      test "only the assignments of the current school" do
+        other = create_school
+        there = create_classroom(school: other, level: @tle, name: "Tle D 2", school_year: "2026-2027")
+        Orm::TeacherSchool.create!(teacher: @teacher, school: other, primary: false)
+        Orm::TeacherClassroom.create!(teacher: @teacher, classroom: there)
+        create_student(classroom: there)
+        here_assignment = assign("Ici", due_on: @today + 1)
+        there_assignment = assign("Là-bas", due_on: @today + 1, classroom: there)
+
+        assert_equal [ here_assignment.public_id ], follow_ups.map(&:public_id)
+        assert_equal [ there_assignment.public_id ], follow_ups(school: other).map(&:public_id)
       end
 
       test "a teacher without a classroom has nothing to follow" do

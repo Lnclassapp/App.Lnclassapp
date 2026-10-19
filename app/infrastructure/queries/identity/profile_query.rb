@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Identity::ProfileQuery
 # Rôle : ce que « Mon profil » montre du compte connecté, selon son rôle (lecture seule)
-# ADR  : 0055, 0060, 0065 · UDR : 0041, 0047, 0052
+# ADR  : 0055, 0060, 0065, 0094 · UDR : 0041, 0047, 0052, 0089 (établissement de l'élève)
 module Queries
   module Identity
     class ProfileQuery
@@ -14,29 +14,33 @@ module Queries
 
       COLUMNS = [ :first_name, :last_name, :contact, :role, :team_role, "users.created_at", :public_id, PhotoVersions::CHECKSUM ].freeze
 
-      # → Row | nil ; classe principale de l'élève, école principale et matière de l'enseignant, établissement de la direction,
-      # sinon nil
-      def call(user_id:)
+      # → Row | nil ; classe principale active de l'élève et son établissement (UDR-0089), école principale et matière de
+      # l'enseignant (son établissement courant, current_school_id = actor.school_id, ADR-0094 §4.6), établissement de la
+      # direction, sinon nil
+      def call(user_id:, current_school_id: nil)
         first_name, last_name, contact, role, team_role, created_at, public_id, checksum =
           Orm::User.left_joins(photo_attachment: :blob).where(id: user_id).pick(*COLUMNS)
         return if role.nil?
 
+        classroom_name, school_name = role == "student" ? student_classroom(user_id) : [ nil, school_name(user_id, role, current_school_id) ]
         Row.new(first_name:, last_name:, contact:, role: role.to_sym, team_role:, registered_on: created_at.in_time_zone.to_date,
                 public_id:, photo_version: PhotoVersions.of(checksum),
-                classroom_name: (classroom_name(user_id) if role == "student"),
-                school_name: school_name(user_id, role),
+                classroom_name:, school_name:,
                 material_name: (material_name(user_id) if role == "teacher"))
       end
 
       private
 
-      def classroom_name(user_id)
-        Orm::ClassroomStudent.joins(:classroom).where(student_id: user_id, primary: true, left_at: nil).pick("classrooms.name")
+      # → [classe, établissement], ou [nil, nil] sans classe principale active
+      def student_classroom(user_id)
+        Orm::ClassroomStudent.joins(classroom: :school).where(student_id: user_id, primary: true, left_at: nil)
+                             .pick("classrooms.name", "schools.name") || [ nil, nil ]
       end
 
-      def school_name(user_id, role)
+      def school_name(user_id, role, current_school_id)
         case role
-        when "teacher" then Orm::TeacherSchool.joins(:school).where(teacher_id: user_id, primary: true).pick("schools.name")
+        when "teacher"
+          Orm::TeacherSchool.joins(:school).where(teacher_id: user_id).current_or_primary(current_school_id).pick("schools.name")
         when "school_admin" then Orm::SchoolStaff.joins(:school).where(user_id:).pick("schools.name")
         end
       end

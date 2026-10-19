@@ -1,0 +1,8 @@
+<%# 🌐 UI · shared/_auth_help — « Besoin d'aide ? » en haut à droite de la connexion et de l'inscription élève %>
+<%# Rôle : ouvre shared/_help_sheet ; sans JavaScript, le déclencheur mène à /aide. Ces pages n'ont pas le shell, donc pas son en-tête %>
+<%# UDR  : 0061, 0080 (§3.3), 0084 (§3.1 : gras, brand-strong, casque), 0088 (§3.2) %>
+<%# Dans l'app Android, la barre native ne porte l'aide qu'après la connexion (pont bridge--account, rendu par le shell) :
+    sur ces pages, le bouton reste donc rendu (UDR-0080 §3.3). %>
+<div id="auth-help" class="flex min-h-bar items-center justify-end px-gutter lg:px-8">
+  <%= render "shared/help_sheet", trigger_icon: "headset", trigger_class: "font-bold! text-brand-strong!" %>
+</div>

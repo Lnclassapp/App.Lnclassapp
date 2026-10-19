@@ -6,8 +6,9 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-10-12 | Le chantier, ouvert pour « Fiche de révision », renomme aussi « Cours » en « Fiche de cours » | Décision du porteur au grill (question 6) | Non : UDR-0084 |
+| 2026-10-12 | Le chantier, ouvert pour « Fiche de révision », renomme aussi « Cours » en « Fiche de cours » | Décision du porteur au grill (question 6) | Non : UDR-0130 |
 | 2026-10-12 | UDR numérotée 0084 | 0078 à 0083 déjà pris sur d'autres branches | — |
+| 2026-10-19 | UDR renumérotée 0130 à la mise à jour sur `Develop` | `Develop` a pris 0084 le 2026-10-15 (accueil élève) et 0129 est pris sur une autre branche | — |
 | 2026-10-12 | Correctif du menu ⋮ qui sort de l'écran à 390 px, ajouté au chantier | Vu par le challenger sur les captures, défaut antérieur au chantier ; le porteur demande de le corriger ici | Non : amendement de l'UDR-0042 |
 
 ## Ce qui a dérapé

@@ -1,6 +1,6 @@
 // ⚡ FRONT · dropdown_controller — menu déroulant au motif WAI-ARIA « menu button »
 // Rôle : bascule, flèches / Début / Fin, Échap rend le focus au bouton, clic extérieur et Tab ferment ; ouvre une <dialog>
-// UDR  : 0005, 0042, 0054 · émet modal:opened sur la <dialog> ouverte par `openDialog`
+// UDR  : 0005, 0042, 0054, 0084 (§3.10, entrées cachées sautées) · émet modal:opened sur la <dialog> ouverte par `openDialog`
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -137,7 +137,10 @@ export default class extends Controller {
     }
   }
 
+  // UDR-0084 §3.10 : une entrée cachée à cette largeur (menu de l'avatar : destinations sous lg, aide sous 700 px) ne
+  // reçoit pas le focus ; les flèches passent dessus. getClientRects plutôt que checkVisibility, absent avant Safari 17.4.
   get items() {
     return [...this.menuTarget.querySelectorAll('[role="menuitem"]:not([aria-disabled="true"])')]
+      .filter((item) => item.getClientRects().length > 0)
   }
 }

@@ -150,7 +150,7 @@ class Communication::PagesControllerTest < ActionDispatch::IntegrationTest
     (1..6).each { assert_select "h2#section-#{it}", "Section #{it}" }
   end
 
-  # UDR-0084 §3 : le 1er paragraphe de « 4. Le contenu » nomme les nouveaux objets ; pas de nouvelle version des CGU.
+  # UDR-0130 §3 : le 1er paragraphe de « 4. Le contenu » nomme les nouveaux objets ; pas de nouvelle version des CGU.
   test "les CGU nomment les nouveaux objets sans nouvelle version" do
     CONTROLLER.view_paths = @view_paths
 

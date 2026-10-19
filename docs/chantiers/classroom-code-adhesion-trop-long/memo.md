@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | cadrage |
+| **Statut** | abandonné — obsolète depuis la refonte (vérifié le 2026-10-16) |
 | **Ouvert le** | 2026-09-18 |
 | **Branche** | `fix/classroom-code-adhesion-trop-long` |
 | **Gravité** | 🟡 **Moyenne — création de classe cassée sur un chemin** |
@@ -49,3 +49,7 @@ Toute évolution du mécanisme d'adhésion (durée de vie du code, révocation, 
 ## Questions encore ouvertes
 
 - Combien de classes la plateforme prévoit-elle à 2 ans ? C'est cette réponse qui fixe la longueur, pas l'inverse.
+
+## Clôture (2026-10-16)
+
+Abandonné : le défaut n'existe plus dans le code actuel. Vérification : la colonne `classrooms.unique_code` n'existe plus ; le code de la classe est tiré par le repository. Rien à corriger.

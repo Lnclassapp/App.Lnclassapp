@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::School::SchoolRepository
-# Rôle : traduit Orm::School ↔ Entities::School::School ; codes d'établissement, insertion en masse, génération, enseignants
-# ADR  : 0030, 0036, 0039, 0056, 0057, 0063, 0071, 0083 · UDR : 0079 · aucune recherche par code national (IE-21)
+# Rôle : traduit Orm::School ↔ Entities::School::School ; codes d'établissement (un par un, en masse), insertion en masse, génération, enseignants
+# ADR  : 0030, 0036, 0039, 0056, 0057, 0063, 0071, 0083, 0094, 0096 · UDR : 0079 · aucune recherche par code national (IE-21)
 module Repositories
   module School
     class SchoolRepository
@@ -74,6 +74,32 @@ module Repositories
         ::Shared::Result.failure(:conflict)
       end
 
+      # ADR-0096 §4.5 : la sélection est celle de la liste (Orm::School.list_filtered), bornée au lancement.
+      def count_for_code_regeneration(selection:, created_before:)
+        regeneration_scope(selection, created_before).count
+      end
+
+      def code_regeneration_batch(selection:, created_before:, after_id:, limit:)
+        regeneration_scope(selection, created_before).where(id: (after_id + 1)..).order(:id).limit(limit)
+                                                     .pluck(:id, :public_id, :name, :school_code_rotated_at)
+                                                     .map { |id, public_id, name, rotated_at| candidate(id, public_id, name, rotated_at) }
+      end
+
+      # Un seul UPDATE … FROM (VALUES …) ; la garde « inchangé depuis » est dans la requête, sous le verrou de ligne de
+      # l'UPDATE : un « Régénérer le code » concurrent passe avant (et la ligne est écartée) ou après. Pas de rescue : un code
+      # pris lève, l'appelant écrit dans TransactionPort#attempt.
+      def replace_school_codes(rows:, at:, unchanged_since:)
+        return [] if rows.empty?
+
+        values = rows.map { |row| Orm::School.sanitize_sql_array([ "(?::bigint, ?)", row.fetch(:id), row.fetch(:school_code) ]) }
+        Orm::School.connection.exec_query(Orm::School.sanitize_sql_array([ <<~SQL.squish, at, at, unchanged_since ])).rows.flatten
+          UPDATE schools SET school_code = v.code, school_code_rotated_at = ?, updated_at = ?
+          FROM (VALUES #{values.join(', ')}) AS v(id, code)
+          WHERE schools.id = v.id AND (schools.school_code_rotated_at IS NULL OR schools.school_code_rotated_at < ?)
+          RETURNING schools.id
+        SQL
+      end
+
       # NOT EXISTS sur l'index (school_id, school_year, name) des classes ; lecture par clé, sans OFFSET.
       def without_classrooms(school_year:, after_id:, limit:)
         classrooms = Orm::Classroom.where(school_year:).where("classrooms.school_id = schools.id")
@@ -97,8 +123,51 @@ module Repositories
         ::Shared::Result.failure(:conflict)
       end
 
+      ALREADY_ATTACHED = { base: [ :already_attached ] }.freeze
+      SCHOOLS_LIMIT = { base: [ :schools_limit ] }.freeze
+
+      # Verrou de la ligne users (ADR-0094 §4.5) : deux « Rejoindre » simultanés du même enseignant se sérialisent, le
+      # second compte la ligne du premier ; le principal se décide ici, sous le verrou, jamais avant. Savepoint : un refus
+      # ne casse pas la transaction du use case. Un doublon venu d'un chemin sans verrou (index unique) : :conflict.
+      def attach_teacher_within_cap(teacher_id:, school_id:, cap:, at:)
+        Orm::TeacherSchool.transaction(requires_new: true) do
+          lock_teacher(teacher_id:)
+          attached = Orm::TeacherSchool.where(teacher_id:).pluck(:school_id)
+          next ::Shared::Result.failure(:conflict, errors: ALREADY_ATTACHED) if attached.include?(school_id)
+          next ::Shared::Result.failure(:conflict, errors: SCHOOLS_LIMIT) if attached.size >= cap
+
+          primary = attached.empty?
+          Orm::TeacherSchool.create!(teacher_id:, school_id:, primary:, created_at: at)
+          ::Shared::Result.success(primary)
+        end
+      rescue ActiveRecord::RecordNotUnique
+        ::Shared::Result.failure(:conflict, errors: ALREADY_ATTACHED)
+      end
+
+      # FOR UPDATE sur la ligne users, tenu jusqu'à la fin de la transaction de l'appelant.
+      def lock_teacher(teacher_id:)
+        Orm::User.where(id: teacher_id).lock.pick(:id)
+        true
+      end
+
       def primary_school_id_for(teacher_id:)
         Orm::TeacherSchool.where(teacher_id:, primary: true).pick(:school_id)
+      end
+
+      def school_ids_for(teacher_id:)
+        Orm::TeacherSchool.where(teacher_id:).order(primary: :desc, created_at: :asc, id: :asc).pluck(:school_id)
+      end
+
+      # Le nombre de lignes marquées est lu : la plus ancienne supprimée entre-temps par une autre transaction, rien n'est
+      # promu et nil le dit.
+      def promote_primary(teacher_id:)
+        current = primary_school_id_for(teacher_id:)
+        return current if current
+
+        id, school_id = Orm::TeacherSchool.where(teacher_id:).order(:created_at, :id).pick(:id, :school_id)
+        return if id.nil?
+
+        school_id unless Orm::TeacherSchool.where(id:).update_all(primary: true).zero?
       end
 
       def detach_teacher(teacher_id:, school_id:) = Orm::TeacherSchool.where(teacher_id:, school_id:).delete_all
@@ -106,6 +175,14 @@ module Repositories
       private
 
       def attributes_of(school) = ATTRIBUTES.index_with { |attribute| school.public_send(attribute) }
+
+      def regeneration_scope(selection, created_before)
+        Orm::School.regeneration_selection(selection).where(created_at: ..created_before)
+      end
+
+      def candidate(id, public_id, name, rotated_at)
+        Entities::School::RegenerationCandidate.new(id:, public_id:, label: name, school_id: id, rotated_at:)
+      end
 
       # Une demande d'enseignant (même décidée) ou un parrainage le référencent aussi (ADR-0063) : l'historique reste.
       def referenced?(school_id, classroom_ids)

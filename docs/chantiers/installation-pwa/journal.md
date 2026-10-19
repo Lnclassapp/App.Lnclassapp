@@ -45,7 +45,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-07 (lots 0 à D) ; invitation en fenêtre sur l'accueil le 2026-10-08 |
+| **PR** | [#199](https://github.com/Lnclassapp/App.Lnclassapp/pull/199) (dernière reprise) ; reste : recette sur un vrai Android |
+| **ADR produits** | ADR-0082 |
+| **UDR produits** | UDR-0078 |

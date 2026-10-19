@@ -2,7 +2,7 @@
 name: silent-failure-hunter
 description: Traque dans un diff Lnclass les échecs avalés (rescue trop large, Result en échec ignoré, job qui échoue sans trace, valeur par défaut qui masque une erreur). À lancer sur tout diff qui touche un repository, un job, un use case ou un import.
 tools: Read, Grep, Glob, Bash
-model: sonnet
+model: opus
 ---
 
 <!-- Adapté de ECC (github.com/affaan-m/ECC, agents/silent-failure-hunter.md), licence MIT, © 2026 Affaan Mustafa. Réécrit pour Lnclass. -->

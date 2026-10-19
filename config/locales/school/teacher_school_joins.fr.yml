@@ -1,0 +1,30 @@
+# Lien /i/<jeton> ouvert par un enseignant connecté — ADR-0094 §4.4, UDR-0099 §3.4 (chantier multi-etablissements-enseignant)
+fr:
+  school:
+    teacher_school_joins:
+      new:
+        page_title: "Rejoindre un établissement"
+        schools: "Mes établissements"
+        inviters:
+          direction: "la direction"
+          team: "l'équipe Lnclass"
+          colleague: "un collègue"
+        confirm:
+          title: "Rejoindre %{school} ?"
+          origin: "%{drena} · invité par %{inviter}"
+          description: "Vous garderez vos autres établissements. Vous pourrez passer de l'un à l'autre depuis votre compte."
+          join: "Rejoindre l'établissement"
+          cancel: "Annuler"
+        already:
+          title: "Vous êtes déjà dans %{school}"
+          go: "Aller dans cet établissement"
+        limit:
+          title: "Vous avez déjà %{max} établissements"
+          description: "Quittez-en un depuis « Mes établissements » pour en rejoindre un autre."
+        # ADR-0094 §11 : le lien de parrainage d'un collègue, ouvert par un enseignant déjà inscrit
+        sponsor:
+          title: "Ce lien sert à inscrire un nouveau collègue"
+          description: "Vous avez déjà un compte : ajoutez un établissement depuis « Mes établissements »."
+        invalid:
+          title: "Ce lien n'est plus valable"
+          description: "Ajoutez l'établissement depuis « Mes établissements »."

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Communication::AuthoredMessagesController
 # Rôle : « Mes annonces » et le formulaire d'annonce (nouvelle, modifiée) de l'équipe, d'une direction ou d'un enseignant ; encadré et toast du plafond
-# ADR  : 0026, 0028, 0045, 0078, 0081 · UDR : 0071 (§3.7, §3.8), 0075 (§3.3)
+# ADR  : 0026, 0028, 0045, 0078, 0081, 0094 · UDR : 0071 (§3.7, §3.8), 0075 (§3.3)
 module Communication
   class AuthoredMessagesController < AuthenticatedController
     allow_roles :teacher, :school_admin, :team
@@ -12,7 +12,7 @@ module Communication
                   :published_at, { classroom_public_ids: [] } ].freeze
 
     def index
-      @page = query.page(author_id: current_actor.user_id, page: params[:page], now: Time.zone.now)
+      @page = query.page(author_id: current_actor.user_id, page: params[:page], now: Time.zone.now, school_id: teacher_school_id)
     end
 
     # L'équipe venue de la fiche d'un établissement (?school=<public_id>) le vise d'abord.
@@ -116,8 +116,11 @@ module Communication
     def departing
       return [] if @message&.status == "published"
 
-      query.departing(author_id: current_actor.user_id, now: Time.zone.now)
+      query.departing(author_id: current_actor.user_id, now: Time.zone.now, school_id: teacher_school_id)
     end
+
+    # ADR-0094 (MET-4) : l'enseignant ne voit que les annonces de son établissement courant ; les autres rôles, toutes.
+    def teacher_school_id = (current_actor.school_id if current_actor.teacher?)
     def edited = @edited ||= query.edited(@message)
 
     def query = @query ||= Queries::Communication::AuthoredMessagesQuery.new

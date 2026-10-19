@@ -104,21 +104,90 @@ module Queries
         assert_empty second.answers
       end
 
+      # ADR-0091 §4.4 : « Ton choix » par type ; la solution seulement avec reveal.
+      def kind_review(reveal:)
+        exercise = create_exercise(questions: 0)
+        blank = create_kind_question(exercise:, question_type: "fill_blank", content: "La capitale est ___ .", answers: %w[Abidjan])
+        number = create_kind_question(exercise:, question_type: "numeric", answers: [ "3,5" ], numeric_tolerance: BigDecimal("0.1"))
+        steps = create_kind_question(exercise:, question_type: "ordering", answers: %w[A B C])
+        pairs = create_kind_question(exercise:, question_type: "matching", answers: [ %w[a 1], %w[b 2], %w[c 3] ])
+        session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 0)
+        attempt = ->(question, ids: [], text: nil) do
+          Orm::QuestionAttempt.create!(exercise_session: session, question:, correct: false, selected_answer_ids: ids,
+                                       response_text: text, answered_at: Time.current)
+        end
+        attempt.(blank, text: "Abidjn")
+        attempt.(number, text: "3,7")
+        attempt.(steps, ids: steps.answers.order(:position).map(&:id).reverse)
+        attempt.(pairs, ids: pairs.answers.order(:position).map(&:id).rotate)
+        binds = []
+        callback = ->(*, payload) { binds.concat(payload[:type_casted_binds]) if payload[:sql].include?('FROM "answers"') }
+        review = ActiveSupport::Notifications.subscribed(callback, "sql.active_record") { result(reveal:, session:).review }
+        [ review, binds ]
+      end
+
+      test "nouveaux types, sans reveal : la réponse de l'élève seule ; les trous et le nombre ne lisent aucune ligne answers" do
+        (blank, number, steps, pairs), binds = kind_review(reveal: false)
+
+        assert_equal [ "Abidjn", "3,7" ], [ blank.response_text, number.response_text ]
+        assert_equal %w[C B A], steps.answers.map(&:content)
+        assert_equal [ %w[a 2], %w[b 3], %w[c 1] ], pairs.pairs.map(&:deconstruct)
+        assert_equal [ [], nil ], [ [ blank, number, steps, pairs ].flat_map(&:solution), number.numeric_tolerance ]
+        assert_equal %w[fill_blank numeric ordering matching], [ blank, number, steps, pairs ].map(&:kind_name)
+        assert_empty [ blank.id, number.id ] & binds
+        assert_includes binds, steps.id
+      end
+
+      test "nouveaux types, avec reveal : la solution s'ajoute à la réponse de l'élève" do
+        (blank, number, steps, pairs), = kind_review(reveal: true)
+
+        assert_equal [ %w[Abidjan], [ "3,5" ], BigDecimal("0.1") ], [ blank.solution, number.solution, number.numeric_tolerance ]
+        assert_equal [ %w[A B C], [ "a → 1", "b → 2", "c → 3" ] ], [ steps.solution, pairs.solution ]
+        assert_equal %w[C B A], steps.answers.map(&:content)
+      end
+
+      test "un relier sans tentative n'a aucune paire de l'élève" do
+        exercise = create_exercise(questions: 0)
+        create_kind_question(exercise:, question_type: "matching", answers: [ %w[a 1], %w[b 2], %w[c 3] ])
+        session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 0)
+
+        review = result(reveal: true, session:).review.sole
+        assert_equal [ [], nil ], [ review.pairs, review.correct ]
+        assert_equal [ "a → 1", "b → 2", "c → 3" ], review.solution
+      end
+
       test "enseignant : seulement celui d'une classe active où l'élève est encore inscrit" do
         classroom = create_classroom
         Orm::ClassroomStudent.create!(joined_via: "standard", classroom:, student: @student, primary: true, joined_at: Time.current)
         teacher = create_teacher(classrooms: [ classroom ])
         query = SessionResultQuery.new
+        school_id = classroom.school_id
 
-        assert query.teaches_student?(student_id: @student.id, teacher_id: teacher.id)
-        assert_not query.teaches_student?(student_id: @student.id, teacher_id: create_teacher(classrooms: [ create_classroom ]).id)
+        assert query.teaches_student?(student_id: @student.id, teacher_id: teacher.id, school_id:)
+        other = create_classroom
+        assert_not query.teaches_student?(student_id: @student.id, teacher_id: create_teacher(classrooms: [ other ]).id,
+                                          school_id: other.school_id)
 
         classroom.update!(status: "archived", archived_at: Time.current)
-        assert_not query.teaches_student?(student_id: @student.id, teacher_id: teacher.id)
+        assert_not query.teaches_student?(student_id: @student.id, teacher_id: teacher.id, school_id:)
 
         classroom.update!(status: "active", archived_at: nil)
         Orm::ClassroomStudent.where(student: @student).update_all(left_at: Time.current)
-        assert_not query.teaches_student?(student_id: @student.id, teacher_id: teacher.id)
+        assert_not query.teaches_student?(student_id: @student.id, teacher_id: teacher.id, school_id:)
+      end
+
+      # Revue de la PR #250, constat 3 (ADR-0094 §10) : l'élève d'une classe de B n'existe pas pour l'enseignant passé dans A.
+      test "enseignant de A et de B : l'élève de sa classe de B, lu depuis A, n'est pas le sien" do
+        classroom_b = create_classroom
+        Orm::ClassroomStudent.create!(joined_via: "standard", classroom: classroom_b, student: @student, primary: true,
+                                      joined_at: Time.current)
+        a = create_school
+        teacher = create_teacher(school: a, classrooms: [ classroom_b ])
+        add_teacher_school(teacher, classroom_b.school)
+        query = SessionResultQuery.new
+
+        assert_not query.teaches_student?(student_id: @student.id, teacher_id: teacher.id, school_id: a.id)
+        assert query.teaches_student?(student_id: @student.id, teacher_id: teacher.id, school_id: classroom_b.school_id)
       end
 
       test "progrès : nil à la première session de l'élève sur l'exercice" do
@@ -221,6 +290,63 @@ module Queries
 
         assert_equal counts.first, counts.last
         assert_equal 2, counts.first.last
+      end
+
+      # ADR-0101 §4.3, UDR-0120 : l'effet de cette session sur sa fiche, lu en une requête sur knowledge_gaps.
+      def completed(score_percent, gap: nil)
+        travel 1.minute
+        create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent:, gap:)
+      end
+
+      def gap_opened_by(session) = create_gap(student: @student, essential: @essential, source_session: session)
+
+      test "effet sur la fiche : nil sans lacune liée" do
+        assert_nil result.gap_outcome
+      end
+
+      test "effet sur la fiche : :opened pour la session qui a ouvert la lacune, même relue après sa levée" do
+        failed = completed(30)
+        gap = gap_opened_by(failed)
+
+        assert_equal :opened, result(session: failed).gap_outcome
+
+        gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: completed(80, gap:))
+        assert_equal :opened, result(session: failed).gap_outcome
+      end
+
+      test "effet sur la fiche : :lifted pour la session qui l'a levée, remédiation ou correction seule" do
+        gap = gap_opened_by(completed(30))
+        lifting = completed(80, gap:)
+        gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: lifting)
+        other = gap_opened_by(completed(20))
+        alone = completed(90)
+        other.update!(status: "self_corrected", resolved_at: Time.current, resolved_by_session: alone)
+
+        assert_equal [ :lifted, :lifted ], [ lifting, alone ].map { result(session: it).gap_outcome }
+      end
+
+      test "effet sur la fiche : :still_pending pour une remédiation qui laisse la fiche à revoir" do
+        gap = gap_opened_by(completed(30))
+
+        assert_equal :still_pending, result(session: completed(70, gap:)).gap_outcome
+      end
+
+      test "effet sur la fiche : nil pour une remédiation dont une autre session a levé la fiche" do
+        gap = gap_opened_by(completed(30))
+        short = completed(60, gap:)
+        gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: completed(90, gap:))
+
+        assert_nil result(session: short).gap_outcome
+      end
+
+      test "effet sur la fiche : une seule requête sur knowledge_gaps" do
+        gap = gap_opened_by(completed(30))
+        session = completed(70, gap:)
+        statements = []
+        callback = ->(*, payload) { statements << payload[:sql] if payload[:sql].include?('FROM "knowledge_gaps"') }
+        ActiveSupport::Notifications.subscribed(callback, "sql.active_record") { result(session:) }
+
+        assert_equal 1, statements.size
       end
     end
   end

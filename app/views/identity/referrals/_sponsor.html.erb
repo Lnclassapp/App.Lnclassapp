@@ -1,0 +1,25 @@
+<%# 🌐 UI · identity/referrals/_sponsor — bloc « Inviter un autre collègue » : le lien de parrainage, sans établissement (ReferralQuery::Row) %>
+<%# Rôle : lien /i/<jeton de parrainage>, WhatsApp, SMS, copier, partage natif (comptés par identity--share) ; le collègue choisit son établissement %>
+<%# ADR  : 0049, 0063, 0094 (§11) · UDR : 0050, 0098 (§3.6) · Stimulus : identity--share, clipboard (copie comptée sur clipboard:copied) %>
+<%# locals: (invite:) -%>
+<% link = teacher_invite_link_url(invite.referral_token) %>
+<% message = t("identity.referrals.sponsor.message", link:) %>
+<%= ui_card title: t("identity.referrals.sponsor.title"), subtitle: t("identity.referrals.sponsor.subtitle"),
+            icon: "share", id: "invite_others" do %>
+  <p class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t("identity.referrals.sponsor.link_label") %></p>
+  <a id="sponsor_link" href="<%= link %>" class="mt-1 block text-sm font-medium break-all text-brand-strong underline-offset-4 hover:underline"><%= link %></a>
+
+  <div id="sponsor_share_actions" class="mt-5 flex flex-wrap gap-3" data-controller="identity--share"
+       data-identity--share-url-value="<%= teacher_referral_shares_path %>" data-identity--share-link-value="<%= link %>"
+       data-identity--share-text-value="<%= message %>" data-action="clipboard:copied->identity--share#recordCopy">
+    <%= ui_button t("identity.referrals.invite.whatsapp"), href: whatsapp_share_url(message), variant: :brand, icon: "chat-bubble-left-right",
+                  target: "_blank", rel: "noopener",
+                  data: { action: "identity--share#record", "identity--share-channel-param": "whatsapp" } %>
+    <%= ui_button t("identity.referrals.invite.sms"), href: sms_share_url(message), variant: :secondary, icon: "device-phone-mobile",
+                  data: { action: "identity--share#record", "identity--share-channel-param": "sms" } %>
+    <%= ui_copy_button link, label: t("identity.referrals.invite.copy"), aria_label: t("identity.referrals.sponsor.copy_label"),
+                             copied: t("shared.clipboard.copied_link"), variant: :secondary, size: :md, icon: "link" %>
+    <%= ui_button t("identity.referrals.invite.native"), variant: :secondary, icon: "share", hidden: true,
+                  data: { action: "identity--share#native", "identity--share-target": "native" } %>
+  </div>
+<% end %>

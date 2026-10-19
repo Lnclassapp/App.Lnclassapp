@@ -1,17 +1,10 @@
 require "application_system_test_case"
 
-# AS-07 à AS-11 (UDR-0022) : dans sa session, l'élève valide sans rien cocher (erreur dans la carte), puis répond aux deux
-# questions ; le verdict et la progression arrivent après chaque réponse, et la dernière propose « Voir mon résultat » —
-# tout sans rechargement de page, sur un bureau comme à 390 px. Aucune proposition correcte n'est montrée. UDR-0076 §3.3 :
-# la question suivante arrive avec le verdict, « Question suivante » l'affiche sans requête.
+# AS-07 à AS-11 (UDR-0022), UDR-0087 §3.2–3.3 (CA-1 à CA-3) : la séance en mode concentré, sans en-tête ni menus ; la croix,
+# la barre et « n/T » en haut ; « Valider » collé en bas et désactivé tant que rien n'est choisi. Le verdict et la question
+# suivante arrivent sans rechargement (UDR-0076 §3.3). La croix demande confirmation : « Continuer l'exercice » referme la
+# feuille, « Quitter » ramène à la page de l'exercice, la session restant ouverte. Aucune proposition correcte n'est montrée.
 class Assessment::ExerciseSessionTest < ApplicationSystemTestCase
-  # La page de résultat (Lot C3), que Turbo précharge au survol de « Voir mon résultat », n'est pas encore fusionnée :
-  # une doublure répond sur sa route, comme dans test/system/classroom/join_test.rb. Un contrôleur fusionné est
-  # chargeable : la doublure s'efface d'elle-même.
-  unless Object.const_defined?("Assessment::SessionResultsController")
-    Assessment.const_set(:SessionResultsController, Class.new(AuthenticatedController) { def show = render(html: "résultat", layout: true) })
-  end
-
   SCOPE = "assessment.exercise_sessions".freeze
 
   setup do
@@ -26,51 +19,48 @@ class Assessment::ExerciseSessionTest < ApplicationSystemTestCase
     assert_current_path student_home_path
   end
 
-  test "réponse vide, puis deux réponses corrigées une à une, jusqu'au lien du résultat, sans rechargement" do
+  test "mode concentré : ni en-tête ni menus, « Valider » désactivé puis deux réponses corrigées sans rechargement" do
     play_the_session
   end
 
-  test "le même parcours sur un écran de 390 px" do
-    with_mobile_viewport { play_the_session }
-  end
-
-  # UDR-0022, amendement du 2026-10-02 (UDR-0057) : à 390 × 844, une seule action principale et au plus 5 blocs avant
-  # le pli, sur la question comme sur son verdict ; la consigne n'est donnée que pour plusieurs réponses (R4, R6).
-  test "à 390 px, la session suit la règle de sobriété ; « Coche N propositions. » seulement pour plusieurs réponses" do
-    @second.update!(question_type: "multiple_correct_2")
-
+  test "à 390 px : la croix ouvre la feuille ; « Continuer » la referme, « Quitter » mène à la page, la session reste ouverte" do
     with_mobile_viewport do
       visit exercise_session_path(@session.public_id)
-
-      within("#question-card") { assert_no_selector "fieldset > p" }
-      assert_single_primary_action
-      assert_blocks_above_fold "#main .max-w-2xl > *"
-
       choose wrong_answer(@first).content
       click_on I18n.t("#{SCOPE}.question_card.submit")
-      within("#feedback-card") { assert_text I18n.t("#{SCOPE}.feedback_card.encouragement.error") }
-      assert_single_primary_action
-      assert_blocks_above_fold "#main .max-w-2xl > *"
+      assert_selector "#feedback-card"
 
-      click_on I18n.t("#{SCOPE}.feedback_card.next")
-      within("#question-card") do
-        assert_selector "fieldset > p", exact_text: I18n.t("#{SCOPE}.question_card.hint", count: 2)
-        assert_no_text "Plusieurs propositions correctes"
+      quit_cross.click
+      within("dialog#quit-dialog[open]") do
+        assert_text I18n.t("#{SCOPE}.quit_dialog.title")
+        assert_text I18n.t("#{SCOPE}.quit_dialog.resume", number: 2)
+        click_on I18n.t("#{SCOPE}.quit_dialog.continue")
       end
-      assert_single_primary_action
+      assert_no_selector "dialog#quit-dialog[open]"
+      assert_selector "#feedback-card"
+      # CA-1 : l'action colle au bas de l'écran.
+      assert page.evaluate_script("Math.abs(document.querySelector('#feedback-actions').getBoundingClientRect().bottom - window.innerHeight) < 2")
+
+      quit_cross.click
+      within("dialog#quit-dialog[open]") { click_on I18n.t("#{SCOPE}.quit_dialog.quit") }
+      assert_current_path exercise_path(@session.exercise.public_id)
     end
+    assert_equal [ "started", 1 ], @session.reload.values_at(:status, :answered_count)
   end
 
   private
 
   def play_the_session
     visit exercise_session_path(@session.public_id)
-    assert_selector "h1", text: "Méiose"
+    assert_no_selector "header.sticky.z-40"
+    assert_no_selector "aside"
+    assert_equal I18n.t("#{SCOPE}.quit_dialog.trigger"), page.evaluate_script(<<~JS)
+      (document.querySelector("a[href], button:not([disabled]), input, select, textarea") || {}).getAttribute("aria-label")
+    JS
+    assert_selector "#progress_counter", text: "1/2"
+    assert_button I18n.t("#{SCOPE}.question_card.submit"), disabled: true
 
     assert_no_page_reload do
-      within("#question-card") { click_on I18n.t("#{SCOPE}.question_card.submit") }
-      assert_selector "#attempt-errors", text: I18n.t("activemodel.errors.models.dtos/assessment/attempt_input.attributes.answer_ids.blank")
-
       choose wrong_answer(@first).content
       click_on I18n.t("#{SCOPE}.question_card.submit")
       within("#feedback-card") do
@@ -85,6 +75,7 @@ class Assessment::ExerciseSessionTest < ApplicationSystemTestCase
       click_on I18n.t("#{SCOPE}.feedback_card.next")
       assert_selector "#question-card", text: "La méiose réduit-elle le nombre de chromosomes ?"
       assert_equal requests, server_requests, "« Question suivante » ne doit rien demander au serveur"
+      assert_selector "#progress_counter", text: "2/2"
       assert_equal "La méiose réduit-elle le nombre de chromosomes ?", page.evaluate_script("document.activeElement.textContent").strip
       choose right_answer(@second).content
       click_on I18n.t("#{SCOPE}.question_card.submit")
@@ -94,6 +85,8 @@ class Assessment::ExerciseSessionTest < ApplicationSystemTestCase
     end
     assert_equal [ "completed", 50 ], @session.reload.values_at(:status, :score_percent)
   end
+
+  def quit_cross = find("a[aria-label='#{I18n.t("#{SCOPE}.quit_dialog.trigger")}']")
 
   # Les requêtes du document (fetch de Turbo, formulaires, frames), lues dans le Resource Timing du navigateur.
   def server_requests = page.evaluate_script(<<~JS)

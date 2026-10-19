@@ -1,6 +1,6 @@
 require "test_helper"
 
-# PR-01, ADR-0055, UDR-0041: what « Mon profil » shows of the signed-in account, by role.
+# PR-01, ADR-0055, UDR-0041, UDR-0089: what « Mon profil » shows of the signed-in account, by role.
 module Queries
   module Identity
     class ProfileQueryTest < ActiveSupport::TestCase
@@ -18,8 +18,19 @@ module Queries
         assert_equal "07 01 02 03 04", row.grouped_contact
         assert_equal "Tle D 1", row.classroom_name
         assert_equal Date.new(2026, 9, 1), row.registered_on
-        assert_nil row.school_name
         assert_nil row.material_name
+      end
+
+      # UDR-0089 §3.2: the school of the student's active primary classroom, nil without one.
+      test "a student shows the school of their active primary classroom, and none without it" do
+        student = create_student(classroom: create_classroom(school: create_school(name: "Lycée Classique d'Abidjan"), name: "3e B"))
+        create_student(classroom: create_classroom(school: create_school(name: "Autre école")))
+
+        assert_equal [ "3e B", "Lycée Classique d'Abidjan" ], @query.call(user_id: student.id).then { [ it.classroom_name, it.school_name ] }
+
+        Orm::ClassroomStudent.where(student_id: student.id).update_all(left_at: Time.current)
+        assert_nil @query.call(user_id: student.id).school_name
+        assert_nil @query.call(user_id: create_student.id).school_name
       end
 
       test "a student without a primary classroom, or who left it, has none" do
@@ -30,6 +41,24 @@ module Queries
         assert_nil @query.call(user_id: create_student.id).classroom_name
       end
 
+      test "a student who left their primary classroom has neither classroom nor school, even with an active secondary one" do
+        student = create_student(classroom: create_classroom(school: create_school(name: "École A"), name: "3e A"))
+        Orm::ClassroomStudent.where(student_id: student.id).update_all(left_at: Time.current)
+        Orm::ClassroomStudent.create!(classroom: create_classroom(school: create_school(name: "École B"), name: "3e B"),
+                                      student:, primary: false, joined_at: Time.current, joined_via: "standard")
+
+        assert_equal [ nil, nil ], @query.call(user_id: student.id).then { [ it.classroom_name, it.school_name ] }
+      end
+
+      test "a student who changed school shows the school of their new primary classroom" do
+        student = create_student(classroom: create_classroom(school: create_school(name: "École A"), name: "3e A"))
+        Orm::ClassroomStudent.where(student_id: student.id).update_all(left_at: 1.day.ago)
+        Orm::ClassroomStudent.create!(classroom: create_classroom(school: create_school(name: "École B"), name: "3e B"),
+                                      student:, primary: true, joined_at: Time.current, joined_via: "standard")
+
+        assert_equal [ "3e B", "École B" ], @query.call(user_id: student.id).then { [ it.classroom_name, it.school_name ] }
+      end
+
       test "a teacher shows their primary school and subject" do
         teacher = create_teacher(school: create_school(name: "Lycée moderne de Cocody"), material: create_material(name: "SVT"))
 
@@ -37,6 +66,15 @@ module Queries
 
         assert_equal [ :teacher, "Lycée moderne de Cocody", "SVT", nil ],
                      [ row.role, row.school_name, row.material_name, row.classroom_name ]
+      end
+
+      # ADR-0094 §4.6 : le profil nomme l'établissement courant de l'enseignant.
+      test "a teacher of two schools shows the current one" do
+        teacher = create_teacher(school: create_school(name: "Lycée moderne d'Abobo"))
+        other = create_school(name: "Collège Saint-Michel")
+        Orm::TeacherSchool.create!(teacher:, school: other, primary: false)
+
+        assert_equal "Collège Saint-Michel", @query.call(user_id: teacher.id, current_school_id: other.id).school_name
       end
 
       test "a team member shows their team role, a school admin only their role; an unknown account is nil" do

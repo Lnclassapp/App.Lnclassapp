@@ -251,7 +251,7 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_equal %w[draft draft], [ empty.reload.status, orphan.reload.status ]
   end
 
-  # UDR-0084 §3: the refusal's exact value is set by the decision, so it is written out here.
+  # UDR-0130 §3: the refusal's exact value is set by the decision, so it is written out here.
   test "un exercice d'une fiche de révision en brouillon ne se publie pas : publiez d'abord ses parents" do
     orphan = create_exercise(essential: create_essential(status: "draft"), status: "draft")
     sign_in_as @member

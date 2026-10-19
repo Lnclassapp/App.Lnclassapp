@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::TeachingsController
 # Rôle : déclarer ou retirer une classe enseignée, en Turbo Stream (bascule et compteur) ; repli HTML : retour à la liste
-# ADR  : 0026, 0028, 0030 · UDR : 0006, 0025
+# ADR  : 0026, 0028, 0030, 0094 · UDR : 0006, 0025, 0098 (§3.5, refus rendu par RendersResult)
 module Classroom
   class TeachingsController < AuthenticatedController
     allow_roles :teacher

@@ -15,24 +15,25 @@ class Catalog::StudentLevelTest < ActionDispatch::IntegrationTest
 
   def tl(key, **) = I18n.t("catalog.courses.index.#{key}", **)
 
-  test "the catalogue of a Tle D student lists Tle D and common Tle courses only, without the level filter" do
+  test "the catalogue of a Tle D student lists Tle D and common Tle courses only, without any list filter" do
     sign_in_as @student
 
     get courses_path
 
     assert_response :success
-    assert_select "#courses_list > li", 2
+    assert_select "#courses_groups li", 2
     assert_select "#course_#{@own.slug}"
     assert_select "#course_#{@common.slug}"
     assert_select "#course_#{@other.slug}", 0
     assert_select "select[name=level]", 0
-    assert_select "select[name=material]"
+    # CA-2 (UDR-0085 §3.1) : plus de liste « Matière » non plus.
+    assert_select "select[name=material]", 0
     # UDR-0013, amendement du 2026-10-02 (UDR-0057) : plus de sous-titre ; la portée du catalogue passe dans l'infobulle, et
     # le badge de niveau quitte les cartes.
     assert_select "#main details", text: /#{Regexp.escape(tl("student_scope"))}/
     assert_select "#main details", text: /Tu vois seulement les fiches de cours de ton niveau\./
     assert_no_match(/#{Regexp.escape(tl("subtitle"))}|Les cours de ton niveau, par matière/, response.body)
-    assert_select "#courses_list", text: /Tle/, count: 0
+    assert_select "#courses_groups", text: /Tle/, count: 0
   end
 
   test "a course, a sheet and an exercise of another level answer 404 to the student, and no session starts" do
@@ -60,7 +61,7 @@ class Catalog::StudentLevelTest < ActionDispatch::IntegrationTest
     sign_in_as create_student
 
     get courses_path
-    assert_select "#courses_list", 0
+    assert_select "#courses_groups", 0
     assert_select "#courses_empty", text: /#{Regexp.escape(tl("no_class_title"))}/
     sign_out
 

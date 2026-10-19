@@ -249,8 +249,9 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   test "a forged POST of a Tle D exercise to the teacher's 3ème 1 or Tle C 1: 422 other_level, nothing written" do
     tle = create_level(name: "Tle")
     tle_d = create_exercise(essential: create_essential(course: create_course(level: tle, series: create_series(name: "D"))))
-    third = create_classroom(name: "3ème 1", level: create_level(name: "3ème"))
-    tle_c = create_classroom(name: "Tle C 1", level: tle, series: create_series(name: "C"))
+    school = create_school
+    third = create_classroom(school:, name: "3ème 1", level: create_level(name: "3ème"))
+    tle_c = create_classroom(school:, name: "Tle C 1", level: tle, series: create_series(name: "C"))
     sign_in_as create_teacher(classrooms: [ third, tle_c ])
 
     [ third, tle_c ].each do |classroom|
@@ -351,7 +352,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_select "button[type=submit]:not([name])", text: including(tl("new.submit"))
   end
 
-  test "the days modal: 404 for an unknown or unpublished exercise, 403 for the team, another teacher or an archived classroom" do
+  test "the days modal: 404 for an unknown or unpublished exercise or an archived classroom, 403 for the team or another teacher" do
     draft = create_exercise(essential: @essential, status: "draft")
     sign_in_as @teacher
     [ draft.public_id, "inconnu" ].each do |key|
@@ -361,10 +362,12 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     sign_out
 
     archived = create_classroom(status: "archived", level: @course.level)
-    [ [ create_team_member, @classroom ], [ create_teacher, @classroom ], [ create_teacher(classrooms: [ archived ]), archived ] ].each do |user, classroom|
+    # vie-de-la-classe, Lot C (Q8) : une classe archivée n'a plus de page, la modale comprise.
+    [ [ create_team_member, @classroom, :forbidden ], [ create_teacher, @classroom, :forbidden ],
+      [ create_teacher(classrooms: [ archived ]), archived, :not_found ] ].each do |user, classroom, status|
       sign_in_as user
       get new_classroom_assignment_path(classroom.public_id, assignable_key: @exercise.public_id)
-      assert_response :forbidden
+      assert_response status
       sign_out
     end
   end

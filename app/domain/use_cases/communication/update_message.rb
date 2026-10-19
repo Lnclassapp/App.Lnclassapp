@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::UpdateMessage
 # Rôle : son auteur modifie une annonce ; publiée, elle garde ses dates et revient chez ceux qui l'avaient masquée ; sa parution suit le plafond de 3, une fois ; elle garde son dessin de l'équipe
-# ADR  : 0028, 0045, 0078, 0081 · UDR : 0071, 0075
+# ADR  : 0028, 0045, 0078, 0081, 0094 · UDR : 0071, 0075
 module UseCases
   module Communication
     class UpdateMessage
@@ -53,7 +53,7 @@ module UseCases
       # archivé ni journalisé une seconde fois (phase 5, F1). Sinon, une parution suit le plafond (ADR-0081 §4.1) et se
       # journalise ; un brouillon ou une programmée n'archive rien.
       def save(read, dto, targets, now, illustration_id)
-        live = lock_author(read.author_id, now)
+        live = lock_author(read.author_id, now, read.cap_school_id)
         message = @messages.find_by_public_id(public_id: read.public_id)
         return modify(message, dto, targets, now, illustration_id) if message.status == "published"
 

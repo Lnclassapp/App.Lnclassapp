@@ -84,7 +84,7 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=refresh]:not([request-id])", 1
   end
 
-  # UDR-0084 §3: the toast's exact value is set by the decision, so it is written out here.
+  # UDR-0130 §3: the toast's exact value is set by the decision, so it is written out here.
   test "l'équipe crée une fiche de révision" do
     sign_in_as @member
 
@@ -262,7 +262,7 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "draft", essential.reload.status
   end
 
-  # UDR-0084 §3 (error state): the refusal's exact value is set by the decision, so it is written out here.
+  # UDR-0130 §3 (error state): the refusal's exact value is set by the decision, so it is written out here.
   test "la fiche de révision d'une fiche de cours en brouillon ne se publie pas, et le refus le dit" do
     essential = create_essential(course: create_course(status: "draft"), status: "draft")
     sign_in_as @member

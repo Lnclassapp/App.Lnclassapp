@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Identity::ReadAccountPhoto
 # Rôle : lire la photo d'un compte sous la règle de lecture d'un compte : soi, l'équipe, l'enseignant pour un élève qu'il enseigne
-# ADR  : 0028, 0060
+# ADR  : 0028, 0060, 0094
 module UseCases
   module Identity
     class ReadAccountPhoto
@@ -27,14 +27,14 @@ module UseCases
       private
 
       # Fait de la policy : la classe principale de l'élève, active ou archivée (comme la liste nominative), est déclarée
-      # par l'enseignant.
+      # par l'enseignant dans son établissement courant (ADR-0094 §10).
       def teaches?(actor, target)
-        return false unless actor&.teacher? && target.student?
+        return false unless actor&.teacher? && actor.school_id && target.student?
 
         membership = @memberships.primary_for(student_id: target.id)
         return false if membership.nil?
 
-        @teachings.classroom_ids_for(teacher_id: actor.user_id).include?(membership.classroom_id)
+        @teachings.classroom_ids_for(teacher_id: actor.user_id, school_id: actor.school_id).include?(membership.classroom_id)
       end
     end
   end

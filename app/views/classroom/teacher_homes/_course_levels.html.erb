@@ -18,7 +18,8 @@
         </li>
       <% end %>
       <% if invite %>
-        <% link = teacher_invite_link_url(invite.referral_token) %>
+        <%# ADR-0094 §11 : le lien de l'établissement courant (UDR-0098 §3.6). %>
+        <% link = teacher_invite_link_url(invite.school_token) %>
         <% message = t("identity.referrals.invite.message", school: invite.school_name, link:) %>
         <li data-controller="identity--share" data-identity--share-url-value="<%= teacher_referral_shares_path %>"
             data-identity--share-link-value="<%= link %>" data-identity--share-text-value="<%= message %>">

@@ -1,0 +1,15 @@
+<%# 🌐 UI · classroom/student_classrooms/_no_teacher — « Aucun enseignant sur Lnclass pour l'instant », sous la carte de la classe %>
+<%# Rôle : la seule action de « Ma classe », et seulement si la classe n'a aucun enseignant : le partage WhatsApp de l'accueil %>
+<%# ADR  : 0089 §4.3 · UDR : 0057 R1 (amendée), 0084 §3.6, 0086 §3.3, §3.7 %>
+<%# locals: (classroom:) -%>
+<section id="student_classroom_no_teacher" aria-labelledby="student_classroom_no_teacher_title"
+         class="flex flex-col items-center gap-2 rounded-card border border-line bg-white p-5 text-center shadow-card sm:p-6">
+  <span class="grid size-12 place-items-center rounded-full bg-brand-soft text-brand-strong" aria-hidden="true">
+    <%= ui_icon "user-plus" %>
+  </span>
+  <h2 id="student_classroom_no_teacher_title" class="font-display text-lg leading-tight font-extrabold text-balance"><%= t(".title") %></h2>
+  <p class="max-w-prose text-sm text-mute text-balance"><%= t(".description") %></p>
+  <%# Le même message que sur l'accueil (ADR-0089 §4.3) : une seule clé, un seul partial. %>
+  <%= render "classroom/student_homes/invite_teacher", classroom: classroom.classroom_name, school: classroom.school_name,
+                                                       standalone: true %>
+</section>

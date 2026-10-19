@@ -23,7 +23,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "drenas" => [ [ %w[name], nil ] ],
     "schools" => [ [ %w[drena_id name], nil ], [ %w[school_code], nil ], [ %w[national_code], "national_codeISNOTNULL" ],
                    [ %w[direction_invite_token], nil ], [ %w[team_invite_token], nil ] ],
-    "teacher_schools" => [ [ %w[teacher_id school_id], nil ], [ %w[teacher_id], "primary" ] ],
+    "teacher_schools" => [ [ %w[teacher_id school_id], nil ], [ %w[teacher_id], "primary" ], [ %w[invite_token], nil ] ],
     "school_staffs" => [ [ %w[user_id], nil ] ],
     "levels" => [ [ %w[name], nil ], [ %w[position], nil ] ],
     "series" => [ [ %w[name], nil ] ],
@@ -71,7 +71,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "classroom_students" => { "joined_via" => %w[standard link code] }, # ADR-0085 §4.4
     "referral_shares" => { "channel" => %w[whatsapp sms copy native] },
     "school_join_requests" => { "status" => %w[pending approved rejected], "decided_via" => %w[team sponsor] },
-    "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms drenas],
+    "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms drenas school_codes classroom_links], # ADR-0096
                           "status" => %w[queued validating importing completed rejected failed] },
     "classroom_plan_entries" => { "school_type" => %w[public private] },
     "articles" => { "status" => %w[draft published archived], "signature" => %w[team author] }, # ADR-0074 §4.1
@@ -83,6 +83,10 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
   CASCADES = %w[sessions login_attempts totp_credentials backup_codes pin_recovery_codes].freeze
   # ADR-0078 §4.1 : the targeted classrooms and the dismissals of an announcement go with it.
   MESSAGE_CASCADES = %w[message_classrooms message_dismissals].freeze
+  # ADR-0090 §4.1 : the reads of an essential go with it (never its student, who is erased first, ADR-0036).
+  ESSENTIAL_CASCADES = %w[essential_reads].freeze
+  # ADR-0094 §4.1 : the current school of a session is only a display choice; a deleted school puts it back on the primary.
+  NULLIFIES = [ %w[sessions current_school_id] ].freeze
   FRAMEWORK_TABLES = /\A(active_storage_|action_text_|solid_(queue|cache|cable)_|schema_migrations|ar_internal_metadata)/
 
   def connection = ActiveRecord::Base.connection
@@ -140,6 +144,19 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     end
   end
 
+  test "ME-26: every attachment of a teacher draws its own invite token of 12 hexadecimal characters (ADR-0094 §11)" do
+    teacher = create_teacher
+    rows = [ Orm::TeacherSchool.find_by!(teacher:), add_teacher_school(teacher, create_school), Orm::TeacherSchool.find_by!(teacher: create_teacher) ]
+    tokens = rows.map(&:invite_token)
+
+    assert_equal 3, tokens.uniq.size
+    assert(tokens.all? { it.match?(/\A[0-9a-f]{12}\z/) }, tokens.inspect)
+    assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { rows.first.update_column(:invite_token, "ABC") } }
+    assert_raises(ActiveRecord::RecordNotUnique) do
+      connection.transaction(requires_new: true) { rows.first.update_column(:invite_token, tokens.last) }
+    end
+  end
+
   test "IE-14: a teacher profile has a mandatory arrival channel, without default, among the five (ADR-0083 §4.2)" do
     column = connection.columns("teacher_profiles").find { |candidate| candidate.name == "joined_via" }
     assert_equal [ false, nil ], [ column.null, column.default ]
@@ -160,6 +177,18 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::CheckViolation) { connection.transaction(requires_new: true) { last.update_column(:link_token, "ABCDEF012345") } }
     assert_raises(ActiveRecord::RecordNotUnique) { connection.transaction(requires_new: true) { last.update_column(:link_token, tokens.first) } }
     assert_raises(ActiveRecord::NotNullViolation) { connection.transaction(requires_new: true) { last.update_column(:link_token, nil) } }
+  end
+
+  test "ADR-0096: a link change is dated, empty until the first one" do
+    column = connection.columns("classrooms").find { |candidate| candidate.name == "link_token_rotated_at" }
+    assert_equal [ true, nil, :datetime ], [ column.null, column.default, column.type ]
+  end
+
+  test "ADR-0096: the mass regenerations have reports without a file, hence without checksum" do
+    member = create_team_member(second_factor: false)
+    %w[school_codes classroom_links].each do |kind|
+      assert Orm::ImportReport.create!(kind:, status: "completed", imported_by: member, checksum_sha256: nil).persisted?, kind
+    end
   end
 
   test "IL-22: a membership has a mandatory arrival channel, without default, among the three (ADR-0085 §4.4)" do
@@ -320,6 +349,16 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     create_teacher_departure(teacher:, school:, detached_by: create_user(role: "school_admin"))
     assert_raises(ActiveRecord::InvalidForeignKey) { connection.transaction(requires_new: true) { Orm::User.where(id: teacher.id).delete_all } }
     assert_raises(ActiveRecord::InvalidForeignKey) { connection.transaction(requires_new: true) { Orm::School.where(id: school.id).delete_all } }
+  end
+
+  # ADR-0090 §4.1 : une lecture par élève et par fiche ; l'élève ne part pas sous ses lectures, la fiche les emporte.
+  test "CA-12: an essential read is unique per student and essential, restrict on the student, cascade on the essential" do
+    keys = connection.foreign_keys("essential_reads").to_h { [ it.column, [ it.to_table, it.on_delete ] ] }
+
+    assert_equal({ "student_id" => [ "users", :restrict ], "essential_id" => [ "essentials", :cascade ] }, keys)
+    assert(connection.indexes("essential_reads").any? { it.unique && it.columns == %w[student_id essential_id] })
+    assert_equal %w[created_at essential_id first_read_at last_read_at student_id updated_at],
+                 connection.columns("essential_reads").reject(&:null).map(&:name).without("id").sort
   end
 
   # ADR-0074 §4.1 : un article, ses images ; la base refuse ce que le domaine refuse déjà.
@@ -497,8 +536,10 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     application_tables.each do |table|
       connection.foreign_keys(table).each do |foreign_key|
         cascade = (CASCADES.include?(table) && foreign_key.to_table == "users" && foreign_key.column == "user_id") ||
-                  (MESSAGE_CASCADES.include?(table) && foreign_key.to_table == "messages")
+                  (MESSAGE_CASCADES.include?(table) && foreign_key.to_table == "messages") ||
+                  (ESSENTIAL_CASCADES.include?(table) && foreign_key.to_table == "essentials")
         expected = cascade ? :cascade : :restrict
+        expected = :nullify if NULLIFIES.include?([ table, foreign_key.column ])
 
         assert_equal expected, foreign_key.on_delete, "#{table}.#{foreign_key.column}"
       end

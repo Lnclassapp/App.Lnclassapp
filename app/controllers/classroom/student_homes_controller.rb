@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::StudentHomesController
 # Rôle : accueil élève (CL-23, TR-04, AS-36) et son carrousel d'annonces ; sans classe principale active, « Choisis ta classe » et, une fois, le retrait
-# ADR  : 0026, 0030, 0040, 0078, 0085 · UDR : 0006, 0010, 0071, 0081 (§3.5)
+# ADR  : 0026, 0030, 0040, 0078, 0085, 0089 (§4.1) · UDR : 0006, 0010, 0071, 0081 (§3.5), 0084 (§3.6)
 module Classroom
   class StudentHomesController < AuthenticatedController
     RECENT_ACTIVITY_FRAME = "student_home_recent_activity".freeze
@@ -17,6 +17,8 @@ module Classroom
       return no_classroom if @home.nil?
 
       @announcements = announcements
+      # ADR-0089 §4.1 : l'exercice du jour n'est calculé que sans travail de l'enseignant (priorité stricte).
+      @daily = daily_exercise if @home.assigned_exercises.empty?
     end
 
     private
@@ -37,6 +39,8 @@ module Classroom
       session[REMOVAL_NOTICE] = removed_at
       flash.now[:warning] = t(".removed")
     end
+
+    def daily_exercise = Queries::Assessment::DailyExerciseQuery.new.call(student_id: current_actor.user_id, today: Time.zone.today)
 
     # UDR-0071 §3.5 : les cartes du carrousel par la règle de lecture, en un nombre fixe de requêtes (ADR-0067).
     def announcements

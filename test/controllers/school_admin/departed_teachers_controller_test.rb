@@ -17,10 +17,12 @@ class SchoolAdmin::DepartedTeachersControllerTest < ActionDispatch::IntegrationT
     end
   end
 
-  test "GD-21 : un seul enseignant retiré listé, avec la date de son retrait et son bouton « Réintégrer »" do
+  # ME-21 (UDR-0100 §3.3): « Yao Ailleurs », who has joined another school since, is listed too, without that school.
+  test "GD-21, ME-21 : les enseignants retirés listés, avec la date de leur retrait et leur bouton « Réintégrer »" do
     awa = departed(first_name: "Awa", last_name: "Koné", material: create_material(name: "Mathématiques"),
                    detached_at: Time.zone.local(2026, 9, 28, 10))
-    departed(last_name: "Ailleurs").tap { Orm::TeacherSchool.create!(teacher: it, school: @other, primary: true) }
+    departed(first_name: "Yao", last_name: "Ailleurs", detached_at: Time.zone.local(2026, 9, 20, 10))
+      .tap { Orm::TeacherSchool.create!(teacher: it, school: @other, primary: true) }
     departed(school: @other, last_name: "DeB")
     sign_in_as @admin
 
@@ -32,7 +34,7 @@ class SchoolAdmin::DepartedTeachersControllerTest < ActionDispatch::IntegrationT
     assert_select "a#back-to-teachers[href='#{school_admin_teachers_path}']", text: /#{t('back')}/
     assert_select "h1", text: t("title")
     assert_select "main", text: /Lycée Moderne de Bouaké/
-    assert_select "#departed_teachers ul[aria-label=?] > li", t("list_label"), 1
+    assert_select "#departed_teachers ul[aria-label=?] > li", t("list_label"), 2
     assert_select "li#departed_teacher_#{awa.public_id}" do
       assert_select ".font-medium", text: "Awa Koné"
       assert_select "*", text: /Mathématiques/
@@ -41,7 +43,8 @@ class SchoolAdmin::DepartedTeachersControllerTest < ActionDispatch::IntegrationT
         assert_select "button[type=submit][aria-label=?]", t("reinstate_label", name: "Awa Koné"), text: /#{t('reinstate')}/
       end
     end
-    assert_not_includes response.body, "Ailleurs"
+    assert_select "main", text: /Yao Ailleurs/
+    assert_not_includes response.body, @other.name.gsub("'", "&#39;")
     assert_not_includes response.body, "DeB"
   end
 

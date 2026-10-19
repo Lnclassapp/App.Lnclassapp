@@ -23,7 +23,11 @@ series_by_level.each do |level, names|
     Orm::LevelSeries.create!(**pair) unless Orm::LevelSeries.exists?(**pair)
   end
 end
-materials.each { |name, shortname, category| by_slug.call(Orm::Material, name, shortname:, category:) }
+# The program rank of ADR-0090 §4.2, from the table the migration and the team's creation read.
+materials.each do |name, shortname, category|
+  position = Repositories::Catalog::ProgramOrder.rank(name.parameterize)
+  by_slug.call(Orm::Material, name, shortname:, category:, position:).update!(position:)
+end
 
 require Rails.root.join("db/migrate/20260928140100_fill_classroom_plan_entries").to_s
 FillClassroomPlanEntries.fill

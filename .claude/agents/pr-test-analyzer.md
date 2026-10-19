@@ -2,7 +2,7 @@
 name: pr-test-analyzer
 description: Vérifie que les tests d'une PR Lnclass prouvent vraiment le comportement (chaque critère d'acceptation du PRD a son test, chaque refus de policy est testé, les assertions vérifient quelque chose). À lancer avant d'ouvrir la PR d'un chantier. Ne remplace pas le challenger de la phase 5, qui exécute.
 tools: Read, Grep, Glob, Bash
-model: sonnet
+model: opus
 ---
 
 <!-- Adapté de ECC (github.com/affaan-m/ECC, agents/pr-test-analyzer.md), licence MIT, © 2026 Affaan Mustafa. Réécrit pour Lnclass. -->

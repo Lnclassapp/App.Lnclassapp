@@ -41,13 +41,27 @@ fr:
         no_class_description: "Les fiches de cours de ton niveau apparaîtront ici dès que tu seras dans une classe de cette année."
         no_match_title: "Aucune fiche de cours ne correspond"
         no_match_description: "Essayez un autre nom, un autre niveau ou une autre matière."
-        student_no_match_description: "Essaye un autre nom ou une autre matière."
+        # UDR-0085 §3.5 : l'élève n'a plus que la recherche.
+        student_no_match_description: "Essaye un autre mot."
         clear_search: "Effacer la recherche"
       # Lot E4 (politique-cache, UDR-0013 amendement du 2026-10-05) : les cartes par pages de 24, chargées au défilement.
       page:
         more: "Afficher plus de fiches de cours"
+      # UDR-0085 §3.2 : le titre d'un groupe de l'élève (matière, nombre de fiches de cours sur toute la recherche).
+      course_group_title:
+        count:
+          one: "1 fiche de cours"
+          other: "%{count} fiches de cours"
+        label:
+          one: "%{material}, 1 fiche de cours, voir la matière"
+          other: "%{material}, %{count} fiches de cours, voir la matière"
       course_card:
         open: "Ouvrir la fiche de cours"
+        # UDR-0085 §3.3 : le bouton de l'élève dit où il en est ; la carte entière est le lien, son nom porte celui de la fiche de cours.
+        progress:
+          new: "Commencer la fiche de cours"
+          started: "Reprendre la fiche de cours"
+          done: "Revoir la fiche de cours"
       show:
         page_title: "%{name}"
         back: "Cours"

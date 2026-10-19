@@ -91,7 +91,7 @@ class Teams::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=refresh]:not([request-id])"
   end
 
-  # UDR-0084 §3: the toast's exact value is set by the decision, so it is written out here.
+  # UDR-0130 §3: the toast's exact value is set by the decision, so it is written out here.
   test "l'équipe crée une fiche de cours" do
     sign_in_as @member
 

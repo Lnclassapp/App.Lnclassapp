@@ -43,7 +43,7 @@ class Teams::SeriesControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", t("teams.series.index.title")
     assert_select "a[data-turbo-frame=modal][href='#{new_series_path}']", text: t("teams.series.index.new")
     assert_select "#series tr", 2
-    assert_select "th[scope=col]", text: "Fiches de cours" # UDR-0084 §3
+    assert_select "th[scope=col]", text: "Fiches de cours" # UDR-0130 §3
     assert_select "#series tr:first-child", text: /A/
     assert_select "#series_d", text: /Tle/
     assert_select "#series_d a[data-turbo-frame=modal][href='#{edit_series_path('d')}']"

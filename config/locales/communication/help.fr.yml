@@ -1,6 +1,7 @@
 # Questions fréquentes (/aide) — UDR-0061, construite directement à la demande du porteur (2026-10-02) ;
 # « En retard » ajoutée par le lot des échéances (UDR-0062 §4, ADR-0072 §4.4 : rien ne se ferme après la date).
-# Les seuils (%{pass}, %{mastery}, %{gold}, %{perfect}, %{remediation}) et l'exemple de note viennent de
+# Les seuils (%{pass}, %{mastery}, %{gold}, %{perfect}, %{remediation}), leurs notes sur 20 (%{pass_grade},
+# %{remediation_grade}, UDR-0119) et l'exemple de note viennent de
 # Entities::Assessment::Grading : la FAQ ne recopie aucun chiffre du barème.
 fr:
   communication:
@@ -35,7 +36,8 @@ fr:
             answer: "Elle dit où tu en es sur un exercice : Acquis à partir de %{mastery} %, Fragile à partir de %{pass} %, En difficulté sous %{pass} %."
           gaps:
             question: "Pourquoi une fiche de révision est-elle « à revoir » ?"
-            answer: "Quand tu obtiens moins de %{pass} % à un exercice, sa fiche de révision passe « à revoir ». Relis-la, puis obtiens au moins %{remediation} % à l'un de ses exercices : elle ne sera plus à revoir."
+            # UDR-0119 : sur 20, comme toutes les notes de l'élève.
+            answer: "Quand tu obtiens moins de %{pass_grade}/20 à un exercice, sa fiche de révision passe « à revoir ». Relis-la, puis obtiens au moins %{remediation_grade}/20 à l'un de ses exercices : elle ne sera plus à revoir."
           retry:
             question: "Puis-je refaire un exercice ?"
             answer: "Oui, autant de fois que tu veux. Ta meilleure note et ton badge restent acquis. « Recommencer » abandonne la session en cours et repart de la première question."

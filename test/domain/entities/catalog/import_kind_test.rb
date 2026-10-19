@@ -64,12 +64,25 @@ module Entities
 
         assert_equal "classrooms", ImportKind::CLASSROOM_GENERATION
         assert_not ImportKind.valid?("classrooms")
-        assert_equal %w[schools course_tree essentials exercises drenas classrooms], ImportKind::REPORT_KINDS
+        assert_equal %w[schools course_tree essentials exercises drenas classrooms school_codes classroom_links], ImportKind::REPORT_KINDS
         assert ImportKind.authorize_report(kind: "classrooms", actor: team).success?
         assert_equal :forbidden, ImportKind.authorize_report(kind: "classrooms", actor: teacher).code
         assert_equal :forbidden, ImportKind.authorize_report(kind: :exercises, actor: teacher).code
         assert ImportKind.authorize_report(kind: "exercises", actor: team).success?
         assert_raises(KeyError) { ImportKind.authorize_report(kind: "regions", actor: team) }
+      end
+
+      test "ADR-0096: the mass regenerations are report kinds without file, read by the whole team" do
+        team = Identity::Actor.new(user_id: 1, role: :team, team_role: "content")
+        teacher = Identity::Actor.new(user_id: 2, role: :teacher)
+
+        assert_equal %w[school_codes classroom_links], ImportKind::CODE_REGENERATIONS
+        assert_equal %w[classrooms school_codes classroom_links], ImportKind::WITHOUT_FILE
+        ImportKind::CODE_REGENERATIONS.each do |kind|
+          assert_not ImportKind.valid?(kind)
+          assert ImportKind.authorize_report(kind:, actor: team).success?
+          assert_equal :forbidden, ImportKind.authorize_report(kind:, actor: teacher).code
+        end
       end
     end
   end

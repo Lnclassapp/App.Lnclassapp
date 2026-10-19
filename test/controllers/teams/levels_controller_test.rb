@@ -56,7 +56,7 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
     get levels_path
 
     assert_select "#levels tr", 2
-    assert_select "th[scope=col]", text: "Fiches de cours" # UDR-0084 §3
+    assert_select "th[scope=col]", text: "Fiches de cours" # UDR-0130 §3
     assert_select "#levels tr:first-child#level_6eme", text: /6ème\s+6eme\s+1\s+#{tl('cycles.first')}/
     assert_select "#level_tle", text: /#{tl('cycles.second')}\s+D\s+1\s+0/
     assert_select "#level_tle [role=menu] a[role=menuitem][data-turbo-frame=modal][href='#{edit_level_path('tle')}']", text: including(tl("level_row.edit"))

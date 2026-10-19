@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069, 0071, 0076, 0079, 0080 · ADR : 0009, 0049, 0067, 0083
+# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069, 0071, 0076, 0079, 0080, 0084 · ADR : 0009, 0049, 0067, 0083
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -38,7 +38,8 @@ module ComponentsHelper
     end
   end
 
-  ICON_ROOT = Rails.root.join("vendor/heroicons")
+  # UDR-0084 §3.1 : Heroicons d'abord, puis les icônes maison dessinées dans son style (casque, porte ouverte).
+  ICON_ROOTS = [ Rails.root.join("vendor/heroicons"), Rails.root.join("vendor/lnclass-icons") ].freeze
   ICON_SETS = { outline: "24/outline", solid: "24/solid", mini: "20/solid" }.freeze
   ICON_SIZES = { sm: "size-4", md: "size-5", lg: "size-6", xl: "size-8" }.freeze
   ICON_CACHE = {} # rubocop:disable Style/MutableConstant -- cache des SVG lus sur disque
@@ -86,11 +87,15 @@ module ComponentsHelper
   # Au téléphone, les options s'empilent toujours ; les colonnes ne s'ouvrent qu'à partir de `sm`.
   RADIO_COLUMNS = { 1 => nil, 2 => "sm:grid-cols-2", 3 => "sm:grid-cols-3" }.freeze
 
-  MODAL_SIZES = { sm: "sm:max-w-sm", md: "sm:max-w-lg", lg: "sm:max-w-2xl" }.freeze
+  # UDR-0089 §3.4 : `:form` (480 px) pour les fenêtres de formulaire de l'élève.
+  MODAL_SIZES = { sm: "sm:max-w-sm", form: "sm:max-w-120", md: "sm:max-w-lg", lg: "sm:max-w-2xl" }.freeze
   # UDR-0061 §3.3 : `:sheet` est une feuille basse sous lg (`.dialog-sheet`, application.tailwind.css), centrée au-dessus.
+  # UDR-0089 §3.4 : `:phone_sheet`, la même feuille sous 700 px seulement (palier du téléphone, UDR-0086 §3.5).
   # Mouvement réduit : ui-dialog ne glisse qu'en motion-safe (motion-reduce:animate-none, moins spécifique que open:, ne
   # l'arrêtait pas).
-  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet", drawer: "dialog-drawer" }.freeze
+  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet", phone_sheet: "dialog-phone-sheet", drawer: "dialog-drawer" }.freeze
+  # Poignée d'une feuille, cachée dès que la feuille redevient une modale centrée.
+  SHEET_HANDLES = { sheet: "lg:hidden", phone_sheet: "min-[700px]:hidden" }.freeze
   DROPDOWN_ALIGNS = { start: "left-0", end: "right-0" }.freeze
   DROPDOWN_TONES = { default: "ui-menu-item-default", danger: "ui-menu-item-danger" }.freeze
 
@@ -137,10 +142,15 @@ module ComponentsHelper
   SIGNAL_DOTS = { green: "bg-signal-green", yellow: "bg-signal-yellow", red: "bg-signal-red", warning: "bg-warning" }.freeze
 
   AVATAR_SIZES = { sm: "size-8 text-xs", md: "size-10 text-sm", lg: "size-14 text-lg", xl: "size-28 text-3xl" }.freeze
+  # Chaque ton passe AA avec son texte, en clair comme en sombre (test/design/dark_mode_test.rb) : tous peuvent être tirés.
   AVATAR_TONES = {
     brand: "bg-brand text-ink", teacher: "bg-teacher text-ink", school: "bg-school text-white",
     team: "bg-team text-white", gold: "bg-gold text-ink"
   }.freeze
+  # UDR-0084 §3.4 : pastille « + » d'un avatar sans photo, 16 px à la taille sm.
+  AVATAR_BADGE_SIZES = { sm: "size-4 text-2xs", md: "size-5 text-xs", lg: "size-6 text-sm", xl: "size-8 text-base" }.freeze
+  AVATAR_BADGE = "absolute -right-0.5 -bottom-0.5 grid place-items-center rounded-full bg-brand-strong font-bold leading-none " \
+                 "text-white ring-2 ring-white"
 
   TOAST_TYPES = {
     success: { icon: "check-circle", tone: "text-success", bar: "bg-success", delay: 5000 },
@@ -153,7 +163,8 @@ module ComponentsHelper
   LOADING_VARIANTS = %i[spinner skeleton].freeze
   LOADING_WIDTHS = %w[w-full w-5/6 w-2/3].freeze
 
-  # Icône heroicons vendorée (vendor/heroicons, MIT). Décorative par défaut ; `label:` la rend lisible.
+  # Icône heroicons vendorée (vendor/heroicons, MIT), sinon maison (vendor/lnclass-icons). Décorative par défaut ;
+  # `label:` la rend lisible.
   def ui_icon(name, variant: :outline, size: :md, label: nil, **html)
     set = option!(ICON_SETS, variant, "ui_icon variant")
     svg = heroicon_source(set, name.to_s)
@@ -275,16 +286,17 @@ module ComponentsHelper
   # (UDR-0080 §3.2) ; `:center` (défaut) ne change rien.
   # `trigger_full:` étire le déclencheur sur toute la largeur de sa cellule : une entrée de rôle de la page d'accueil (UDR-0064).
   # `described_by:` l'id du texte qui explique une confirmation, lu à l'ouverture (aria-describedby, UDR-0083).
+  # `trigger_label:` fait du déclencheur un bouton icône (`trigger_icon:`), sans texte, nommé par ce libellé (UDR-0087 §3.2).
   def ui_modal(title:, id: nil, size: :md, trigger: nil, trigger_variant: :secondary, trigger_icon: nil, open: false,
                document_title: nil, trigger_href: nil, trigger_size: :md, trigger_full: false, trigger_class: nil,
-               placement: :center, described_by: nil, &block)
+               placement: :center, described_by: nil, trigger_label: nil, &block)
     slots = Slots.new(self)
     body = block ? capture(slots, &block) : nil
     render "components/modal", id: id || "modal-#{title.parameterize}", title:, trigger:, trigger_variant:,
            trigger_icon:, trigger_href:, trigger_size:, trigger_full:, trigger_class:, open:, body:, slots:, document_title:,
            size_class: option!(MODAL_SIZES, size, "ui_modal size"),
-           placement_class: option!(MODAL_PLACEMENTS, placement, "ui_modal placement"), sheet: placement.to_sym == :sheet,
-           described_by:
+           placement_class: option!(MODAL_PLACEMENTS, placement, "ui_modal placement"), handle_class: SHEET_HANDLES[placement.to_sym],
+           described_by:, trigger_label:
   end
 
   # Menu déroulant. `trigger:` remplace le bouton icône par un contenu libre (avatar + nom, par exemple).
@@ -334,7 +346,7 @@ module ComponentsHelper
 
   # Bulle ronde teintée, illustration 40 px, libellé dessous (UDR-0069 §3.3, charte §9) ; sr_suffix complète le nom accessible.
   # signal (UDR-0074 §3.5) : nil, :green, :yellow ou :red — pastille décorative, que sr_suffix doit dire.
-  # short_label : libellé affiché sous 640 px (« PC ») ; le nom entier reste le nom accessible.
+  # short_label : libellé seul visible (« PC »), à toutes les tailles (UDR-0084 §3.5) ; le nom entier reste lu et en title.
   # link_html (UDR-0079 §3.7) : attributs ajoutés au lien (target, rel, data), vide par défaut : rendu inchangé sans lui.
   def ui_subject_bubble(label:, href:, illustration:, short_label: nil, sr_suffix: nil, id: nil, signal: nil, link_html: {})
     dot = (option!(SIGNAL_DOTS, signal, "ui_subject_bubble signal") if signal)
@@ -346,16 +358,22 @@ module ComponentsHelper
     ui_badge(label, tone: config[:tone], size:, icon: config[:icon])
   end
 
-  # Photo si `src:`, sinon initiales (premier et dernier mot) sur une couleur stable dérivée du nom.
-  def ui_avatar(name, src: nil, size: :md, tone: nil)
+  # Photo si `src:`, sinon initiales (premier et dernier mot) sur une couleur stable dérivée de `tone_seed:` (le
+  # public_id du compte, UDR-0084 §3.4), à défaut du nom. `add_photo: true` pose la pastille « + », sans photo seulement.
+  def ui_avatar(name, src: nil, size: :md, tone: nil, tone_seed: nil, add_photo: false)
     classes = class_names("ui-avatar",
                           option!(AVATAR_SIZES, size, "ui_avatar size"))
     # Photo de profil (ADR-0060, UDR-0047) : une seule taille servie, recadrée par le rond ; hors écran, pas chargée.
     return image_tag(src, alt: name, loading: "lazy", decoding: "async", class: class_names(classes, "object-cover")) if src
 
-    tone ||= AVATAR_TONES.keys[name.to_s.sum % AVATAR_TONES.size]
-    tag.span(avatar_initials(name), role: "img", "aria-label": name,
-                                    class: class_names(classes, option!(AVATAR_TONES, tone, "ui_avatar tone")))
+    tone ||= AVATAR_TONES.keys[(tone_seed || name).to_s.sum % AVATAR_TONES.size]
+    avatar = tag.span(avatar_initials(name), role: "img", "aria-label": name,
+                                             class: class_names(classes, option!(AVATAR_TONES, tone, "ui_avatar tone")))
+    return avatar unless add_photo
+
+    # Décorative : « Ajouter ma photo » est écrit dans le menu de l'avatar.
+    badge = tag.span("+", "aria-hidden": "true", class: class_names(AVATAR_BADGE, AVATAR_BADGE_SIZES.fetch(size.to_sym)))
+    tag.span(avatar + badge, class: "relative inline-flex shrink-0")
   end
 
   # Le message est rendu côté serveur, dans le HTML du toast : il survit au Turbo Stream comme à la redirection.
@@ -506,8 +524,8 @@ module ComponentsHelper
 
   def heroicon_source(set, name)
     ICON_CACHE[[ set, name ]] ||= begin
-      path = ICON_ROOT.join(set, "#{name}.svg")
-      raise ArgumentError, "ui_icon : icône « #{name} » absente de vendor/heroicons/#{set}" unless name.match?(/\A[a-z0-9-]+\z/) && path.file?
+      path = (ICON_ROOTS.map { it.join(set, "#{name}.svg") }.find(&:file?) if name.match?(/\A[a-z0-9-]+\z/))
+      raise ArgumentError, "ui_icon : icône « #{name} » absente de vendor/heroicons/#{set} et de vendor/lnclass-icons/#{set}" unless path
 
       path.read.strip
     end

@@ -7,6 +7,8 @@ require "test_helper"
 module Queries
   module Classroom
     class ClassroomOverviewQueryTest < ActiveSupport::TestCase
+      TODAY = Date.new(2026, 10, 15)
+
       setup do
         @classroom = create_classroom
       end
@@ -253,6 +255,89 @@ module Queries
 
       test "une classe inconnue n'a pas de page" do
         assert_nil ClassroomOverviewQuery.new.call(public_id: "inconnue", show_roster: true)
+      end
+
+      # ADR-0101 §8 : « Revoir la fiche » ne lit les lacunes que d'un cours que la page de la classe montre.
+      test "shown_course? : un cours publié du niveau de la classe, dans les matières de l'enseignant ; rien d'autre" do
+        material = create_material
+        teacher = create_teacher(material:, classrooms: [ @classroom ])
+        shown = create_course(level: @classroom.level, material:)
+        other_material = create_course(level: @classroom.level)
+        other_level = create_course
+        draft = create_course(level: @classroom.level, material:, status: "draft")
+        query = ClassroomOverviewQuery.new
+        shown_for = ->(course, **options) { query.shown_course?(public_id: @classroom.public_id, course_slug: course.slug, **options) }
+
+        assert shown_for.call(shown, teacher_id: teacher.id)
+        assert_not shown_for.call(other_material, teacher_id: teacher.id)
+        assert shown_for.call(other_material)
+        assert_not shown_for.call(other_level)
+        assert_not shown_for.call(draft)
+        assert_not query.shown_course?(public_id: "inconnue", course_slug: shown.slug)
+      end
+
+      # CA-16 (accueil-eleve, ADR-0089 §4.2, UDR-0084 §3.7) : « Fait seul (7 j) » compte les sessions terminées, standard,
+      # sans assignation, commencées dans les 7 derniers jours d'Abidjan, aujourd'hui compris.
+      def practise(student, days_ago, hour: 10, **)
+        create_exercise_session(student:, status: "completed", started_at: (TODAY - days_ago).in_time_zone + hour.hours, **)
+      end
+
+      test "CA-16 : un exercice non donné terminé il y a 3 jours compte 1 ; il y a 8 jours, 0" do
+        recent = create_student(classroom: @classroom, last_name: "Bamba", joined_at: 1.month.ago)
+        old = create_student(classroom: @classroom, last_name: "Yao", joined_at: 1.month.ago)
+        practise(recent, 3)
+        practise(old, 8)
+
+        assert_equal [ 1, 0 ], overview(today: TODAY).students.map(&:self_practice_count)
+      end
+
+      test "CA-16 : la fenêtre va du 6e jour avant, à minuit d'Abidjan, à la fin d'aujourd'hui" do
+        student = create_student(classroom: @classroom)
+        practise(student, 6, hour: 0)
+        practise(student, 0, hour: 23)
+        practise(student, 7, hour: 23)
+        practise(student, -1, hour: 0)
+
+        assert_equal 2, overview(today: TODAY).students.sole.self_practice_count
+      end
+
+      test "CA-16 : une session assignée, une remédiation, une session commencée ou celle d'un autre élève ne comptent pas" do
+        student = create_student(classroom: @classroom)
+        exercise = create_exercise
+        assignment = create_assignment(classroom: @classroom, assignable: exercise)
+        practise(student, 1, exercise:, classroom_assignment: assignment)
+        source = practise(student, 20, score_percent: 40)
+        practise(student, 1, gap: create_gap(student:, source_session: source))
+        create_exercise_session(student:, started_at: Time.zone.local(2026, 10, 14, 10))
+        practise(create_student(classroom: create_classroom), 1)
+        practise(student, 2)
+
+        assert_equal 1, overview(today: TODAY).students.sole.self_practice_count
+      end
+
+      test "CA-16 : sans show_roster, le compte n'est pas lu ; par défaut, aujourd'hui est la date d'Abidjan" do
+        student = create_student(classroom: @classroom)
+        practise(student, 3)
+
+        assert_nil overview(show_roster: false, today: TODAY).students
+        travel_to(Time.zone.local(2026, 10, 15, 12)) { assert_equal 1, overview.students.sole.self_practice_count }
+        travel_to(Time.zone.local(2026, 10, 22, 12)) { assert_equal 0, overview.students.sole.self_practice_count }
+      end
+
+      test "CA-16 : le compte de toute la liste se lit en une requête, quel que soit le nombre d'élèves" do
+        practise(create_student(classroom: @classroom), 1)
+        few = count_queries { overview(today: TODAY) }
+        3.times { practise(create_student(classroom: @classroom), 2) }
+
+        assert_equal few, count_queries { overview(today: TODAY) }
+        assert_equal [ 1, 1, 1, 1 ], overview(today: TODAY).students.map(&:self_practice_count)
+      end
+
+      def count_queries(&)
+        count = 0
+        counter = ->(*, payload) { count += 1 unless payload[:name] == "SCHEMA" }
+        ActiveSupport::Notifications.subscribed(counter, "sql.active_record", &)
+        count
       end
     end
   end

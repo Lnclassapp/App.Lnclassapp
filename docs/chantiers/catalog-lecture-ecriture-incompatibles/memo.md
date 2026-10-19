@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | cadrage |
+| **Statut** | abandonné — obsolète depuis la refonte (vérifié le 2026-10-16) |
 | **Ouvert le** | 2026-09-18 |
 | **Branche** | `fix/catalog-lecture-ecriture-incompatibles` |
 | **Gravité** | 🔴 **Critique — édition et suppression de cours cassées** |
@@ -73,3 +73,7 @@ Un test existant, `test/domain/use_cases/catalog/create_course_test.rb`, est **v
 
 - L'ADR-0022 documente-t-il explicitement la séparation des deux familles, ou est-elle implicite ?
 - `find_exercises_for_essential` de `CourseRepository` doit-il être réparé ou supprimé, la façade déléguant déjà au bon `Repositories::Assessment::ExerciseRepository` ?
+
+## Clôture (2026-10-16)
+
+Abandonné : le défaut n'existe plus dans le code actuel. Vérification : `ManageResource`, `Entities::Course` (racine) et `repositories/catalog_repository.rb` n'existent plus ; la création et l'édition d'un cours par l'équipe sont couvertes par `test/system/teams/course_management_test.rb` (vert sur `Develop`), l'archivage par `ArchiveCourse`. Rien à corriger.

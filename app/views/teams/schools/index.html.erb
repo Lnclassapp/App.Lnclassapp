@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/index — liste nationale des établissements (SC-04) %>
-<%# Rôle : « Importer des établissements » (principale), puis le menu « Classes » : génération confirmée, barème ; filtres et pages dans le frame « schools » %>
-<%# ADR  : 0030, 0036, 0056, 0058, 0083 · UDR : 0006, 0036, 0043, 0045, 0054, 0079 · sans code d'établissement (IE-21) ; recherche pendant la frappe %>
+<%# Rôle : « Importer des établissements » (principale), menus « Classes » (génération, barème) et « Codes » (régénérations de masse, admin) ; filtres et pages dans le frame « schools » %>
+<%# ADR  : 0030, 0036, 0056, 0058, 0083, 0096 · UDR : 0006, 0036, 0043, 0045, 0054, 0079, 0104 · sans code d'établissement (IE-21) ; recherche pendant la frappe %>
 <% page_title t(".page_title") %>
 <% unless list_frame_request? %>
   <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
@@ -14,6 +14,10 @@
                                         class: "flex items-center gap-2 pl-2 text-sm font-semibold whitespace-nowrap text-ink") do %>
         <%= ui_dropdown_item t(".generate"), dialog: "generate-classrooms-modal", icon: "sparkles" %>
         <%= ui_dropdown_item t(".classroom_plan"), href: classroom_plan_path, icon: "calculator" %>
+      <% end %>
+      <%# UDR-0104 : régénérations de masse de la sélection filtrée, équipe admin seulement ; la modale recompte. %>
+      <% if can_regenerate_codes_in_bulk? %>
+        <%= render "codes_menu", filters: @filters, empty: @page.total_count.zero? %>
       <% end %>
     </div>
     <%= ui_modal title: t(".generate_title"), id: "generate-classrooms-modal" do |modal| %>
@@ -36,6 +40,10 @@
 <% end %>
 
 <%= turbo_frame_tag "schools", class: "block transition-opacity aria-busy:opacity-50", data: { turbo_action: "advance" } do %>
+  <%# Le menu « Codes » est hors du frame : un filtre changé dans le frame le remplace, pour qu'il porte la sélection affichée. %>
+  <% if list_frame_request? && can_regenerate_codes_in_bulk? %>
+    <%= turbo_stream.replace "schools-codes-menu-slot", partial: "teams/schools/codes_menu", locals: { filters: @filters, empty: @page.total_count.zero? } %>
+  <% end %>
   <p id="schools_total" class="mb-3 text-sm text-mute" aria-live="polite"><%= t(".total", count: @page.total_count) %></p>
   <% if @page.rows.any? %>
     <%# Une ligne porte ses icônes, son menu ⋮ et ses modales : dessinées une fois dans le frame, reprises par <use> (ADR-0067). %>

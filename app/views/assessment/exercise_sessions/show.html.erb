@@ -1,14 +1,22 @@
-<%# 🌐 UI · assessment/exercise_sessions/show — une session d'exercice de l'élève (AS-07 à AS-10) %>
-<%# Rôle : progression, puis le frame « question » : la prochaine question, remplacée par son verdict sans rechargement %>
-<%# ADR  : 0054 · UDR : 0007, 0022, 0054 · retour « Quitter la session », seule exception au nom de la page d'arrivée %>
+<%# 🌐 UI · assessment/exercise_sessions/show — une session d'exercice de l'élève, en mode concentré (AS-07 à AS-10) %>
+<%# Rôle : ni en-tête ni menus ; en haut la croix « Quitter la session », la barre et « 3/5 » ; puis le frame « question », remplacé par son verdict %>
+<%# ADR  : 0054, 0091 · UDR : 0007, 0022, 0087 §3.2–3.3 · la croix ouvre la confirmation ; sans JavaScript, elle mène à la page de l'exercice %>
 <% page_title t(".page_title", title: @play.exercise_title) %>
-<div class="mx-auto max-w-2xl space-y-6">
-  <%= ui_back_link t(".quit"), href: exercise_path(@play.exercise_public_id) %>
-  <header class="space-y-4">
-    <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= @play.exercise_title %></h1>
-    <%= render "assessment/exercise_sessions/progress_bar", play: @play %>
+<% content_for :focus, "1" %>
+<div class="flex min-h-dvh flex-col">
+  <header class="sticky top-0 z-20 border-b border-line bg-paper">
+    <%# UDR-0087 §3.10 : la croix est le premier élément focalisable de la page. %>
+    <div class="flex items-center gap-3 px-gutter py-3 sm:gap-4 sm:px-6">
+      <%= render "assessment/exercise_sessions/quit_dialog", play: @play %>
+      <h1 class="sr-only"><%= @play.exercise_title %></h1>
+      <%= render "assessment/exercise_sessions/progress_bar", play: @play,
+                 number: @play.next_question&.number || @play.question_count %>
+    </div>
   </header>
-  <% if @play.next_question %>
-    <%= render "assessment/exercise_sessions/question_card", play: @play, question: @play.next_question, form: @form %>
-  <% end %>
+  <%# UDR-0087 §3.2 : pleine largeur au téléphone, 640 px au centre dès 700 px ; le bouton d'action colle au bas. %>
+  <div class="mx-auto flex w-full max-w-160 flex-1 flex-col px-gutter pt-6 min-[700px]:px-0">
+    <% if @play.next_question %>
+      <%= render "assessment/exercise_sessions/question_card", play: @play, question: @play.next_question, form: @form %>
+    <% end %>
+  </div>
 </div>
