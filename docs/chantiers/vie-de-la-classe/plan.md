@@ -118,7 +118,7 @@ Aucun fichier n'apparaît dans deux lots parallèles.
 
 ## Portes de sortie
 
-- [x] Tous les lots sont `Done` : Lot 0 et Lot A ; Lot B retiré (Q6) ; Lot C hors de cette branche (`fix/classe-archivee-sous-pages`)
+- [x] Tous les lots sont `Done` : Lot 0 et Lot A ; Lot B retiré (Q6) ; Lot C livré par la PR #251 (`fix/classe-archivee-sous-pages`), fusionné dans cette branche
 - [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : parcours refait en équipe, en direction (son établissement et un autre), en enseignant, en élève — *à faire par le porteur ou un relecteur sur la PR*
 - [x] Pureté du domaine, rubocop, tests, parcours système, brakeman : `bin/ci-quiet`, verdict écrit dans la PR
 - [ ] Sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) une fois, sur le diff final : use case, policy et routes touchés — *non lancés dans la session d'exécution (aucun outil de sous-agent), à lancer sur la PR*

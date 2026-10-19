@@ -38,7 +38,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | — | Les deux dettes de compteur sont soldées dans ce chantier : la colonne « Classes » de la liste de l'équipe et le « − » ne comptent plus les archivées | — |
-| Sous-pages d'une classe archivée (cours, essentiels, élèves, suivi) encore lisibles par ses membres ; seule la page principale renvoie 404 | Constat bas de la revue de sécurité (2026-10-10) : policy appliquée, aucune fuite entre rôles ni établissements | à ouvrir |
+| ~~Sous-pages d'une classe archivée (cours, essentiels, élèves, suivi) encore lisibles par ses membres ; seule la page principale renvoie 404~~ | Constat bas de la revue de sécurité (2026-10-10) : policy appliquée, aucune fuite entre rôles ni établissements | **soldée** le 2026-10-16 : [`vie-de-la-classe`](../vie-de-la-classe/journal.md), Lot C (PR #251), toute sous-page d'une classe archivée répond 404 |
 | `schools:grant_second_cycle` ne laisse aucune trace d'audit | Constat bas de la revue de sécurité ; tâche unique, lancée sur Develop | à ouvrir si la tâche resert |
 
 ## Ce qui a dérapé
