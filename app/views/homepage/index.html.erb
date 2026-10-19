@@ -1,9 +1,9 @@
 <%# 🌐 UI · homepage/index — page d'accueil publique : un écran, une décision %>
 <%# Rôle : le héros porte les deux entrées de rôle (modales, TR-01) ; la page descend du général au particulier et ne promet que la V1 %>
-<%# UDR  : 0064, 0059 (entrées dans le héros), 0063 (§3.4, pied), 0066 (§3.5), 0070 (§3.2, direction), 0012 (§2), 0054 · ADR : 0049, 0051 %>
+<%# UDR  : 0064, 0059 (entrées dans le héros), 0063 (§3.4, pied), 0066 (§3.5), 0070 (§3.2, direction), 0012 (§2), 0054, 0113 (§3.9) · ADR : 0049, 0051, 0099 %>
 <% page_title t(".page_title") %>
-<%# Les matières que Lnclass propose, dans l'ordre de la grille de l'accueil élève (UDR-0058 §3), EDHC au 1er cycle et Philosophie au 2nd ;
-    la teinte vient de la catégorie du référentiel (ADR-0034). %>
+<%# Tant qu'aucun cours n'est publié, les matières que Lnclass propose, dans l'ordre de la grille de l'accueil élève (UDR-0058 §3),
+    EDHC au 1er cycle et Philosophie au 2nd ; la teinte vient de la catégorie du référentiel (ADR-0034). %>
 <% subjects = [ [ "Mathématiques", :science ], [ "Physique-Chimie", :science ], [ "SVT", :science ], [ "Français", :literature ],
                 [ "Histoire-Géographie", :literature ], [ "EDHC", :literature ], [ "Philosophie", :literature ] ] %>
 <% features = { exercises: "clipboard-document-check", curriculum: "academic-cap", badges: "trophy", light: "device-phone-mobile" } %>
@@ -61,12 +61,21 @@
       </div>
     </section>
 
-    <%# ---------- Matières : les sept du référentiel, sans « et plus encore » ---------- %>
+    <%# ---------- Matières : celles qui ont un cours publié, chacune vers sa page (UDR-0113 §3.9) ; sinon les sept du référentiel, sans lien ---------- %>
     <section id="matieres" aria-labelledby="matieres-title" class="border-b border-ink/10 bg-white">
       <div class="mx-auto flex max-w-page flex-wrap items-center justify-center gap-2 px-gutter py-5 sm:justify-start">
         <h2 id="matieres-title" class="w-full text-center text-sm font-medium text-mute sm:mr-2 sm:w-auto sm:text-left"><%= t(".subjects.label") %></h2>
-        <% subjects.each do |name, category| %>
-          <%= ui_subject_badge name, category: %>
+        <% if @public_materials.present? %>
+          <% @public_materials.each do |slug, name, category| %>
+            <%= link_to public_material_path(slug),
+                  class: "inline-flex min-h-tap items-center rounded-full focus-visible:outline-2 focus-visible:outline-brand" do %>
+              <%= ui_subject_badge name, category: %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <% subjects.each do |name, category| %>
+            <%= ui_subject_badge name, category: %>
+          <% end %>
         <% end %>
       </div>
     </section>
@@ -175,9 +184,9 @@
         <li><%= link_to t(".footer.sign_in"), new_session_path, class: "inline-flex min-h-tap items-center hover:text-ink" %></li>
       </ul>
     </div>
-    <%# UDR-0063 §3.4, UDR-0066 §3.5 : seconde liste, « Plus sur Lnclass » : « Blog » dès un article publié, puis les pages
-        publiques en ligne seulement ; absente tant qu'aucun lien n'existe %>
-    <% if (public_links = [ blog_link, *public_page_links ].compact).any? %>
+    <%# UDR-0063 §3.4, UDR-0066 §3.5, UDR-0113 §3.9 : seconde liste, « Plus sur Lnclass » : « Les cours par niveau » dès un
+        cours publié, « Blog » dès un article publié, puis les pages publiques en ligne seulement ; absente tant qu'aucun lien n'existe %>
+    <% if (public_links = [ catalog_link, blog_link, *public_page_links ].compact).any? %>
       <div class="mx-auto max-w-page px-gutter pb-8">
         <ul id="public_pages" aria-label="<%= t(".footer.public_pages") %>"
             class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-mute sm:justify-end">

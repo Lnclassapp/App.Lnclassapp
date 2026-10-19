@@ -50,7 +50,7 @@ L'équipe (fiche d'un établissement) et la direction (page d'un niveau) doivent
 - Envoi : `form_with model: input, scope: :classroom_settings, url:, method: :patch, id: "classroom-settings-form"`.
 - Échec de validation (`:invalid`, `:conflict` sur `suffix` ou `max_students`) : la modale est re-rendue en **422** avec la saisie, l'erreur sous son champ.
 - `:conflict` `archived` : `turbo_stream` qui ferme la modale, toast neutre « Cette classe est archivée : restaurez-la pour la modifier. », page rafraîchie (`turbo_stream.refresh`).
-- Modale ouverte sur une classe archivée entre deux affichages : modale courte « Classe archivée » (même message, bouton « Fermer »), jamais un 404 qui laisserait le cadre vide. Autre refus (403, 404) dans le cadre : la page d'erreur entière (`turbo-visit-control: reload`).
+- Modale ouverte sur une classe archivée entre deux affichages : modale courte « Classe archivée » (même message, bouton « Fermer »), jamais un 404 qui laisserait le cadre vide. Autre refus (403, 404) dans le cadre « modal » : la page d'erreur entière (`turbo-visit-control: reload`).
 - Succès : `turbo_stream` qui ferme la modale, re-demande la page par morphing (`turbo_stream.refresh`, comme « Ajouter une classe » ; la carte y prend son nouveau nom) *(précisé à l'exécution, 2026-10-16)* et émet le toast « Classe <nouveau nom> enregistrée. ». Sans JavaScript : redirection 303 vers la fiche (équipe) ou la page du niveau (direction), message flash identique.
 - Aucun contrôleur Stimulus nouveau : `modal` existant.
 

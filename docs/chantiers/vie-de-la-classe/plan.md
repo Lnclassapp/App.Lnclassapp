@@ -59,7 +59,7 @@ Trois agents au plus en même temps : Lot 0 et Lot C, puis Lot A, Lot B et Lot C
                      `test/controllers/school_admin/classroom_settings_controller_test.rb`
                      `test/system/school/classroom_settings_test.rb` · `script/ci/test_timings.yml`
 - **Dépend de**    : Lot 0
-- **Test associé** : `test/domain/use_cases/classroom/update_classroom_test.rb` (droits, année passée, archivée, rien de changé sans audit) ; repository (`below_headcount`, `archived`, `taken` contre une archivée) ; concurrence (adhésion et baisse du plafond au 80ᵉ siège) ; système (renommer « 6ème 3 » en « 6ème A », puis « + » ajoute « 6ème 3 »)
+- **Test associé** : `test/domain/use_cases/classroom/update_classroom_test.rb` (droits, année passée, archivée, rien de changé sans audit) ; repository (`below_headcount`, `archived`, `taken` contre une archivée) ; concurrence (adhésion et baisse du plafond au 80ᵉ siège) ; système (renommer « 6ème 3 » en « 6ème A » après un nom pris) ; contrôleur (« + » ajoute « 6ème 3 » après le renommage, `Teams::LevelClassroomsControllerTest`)
 - **Done quand**   : l'équipe sur la fiche d'un établissement et la direction sur la page d'un niveau ouvrent ⋮ → « Modifier la classe », changent suffixe et plafond, voient la carte mise à jour et le toast ; l'élève voit le nouveau nom ; captures 390 px et ordinateur (menu ouvert, modale, erreur sous le champ) envoyées au porteur
 
 ---

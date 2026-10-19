@@ -1,15 +1,15 @@
 # ADR-0099 : Les pages Niveau, Série et Matière se lisent sans compte, ne montrent que les titres des cours publiés, s'indexent en production et ne passent par aucun cache HTML
 <!-- index
 titre: Pages publiques du catalogue (niveau, série, matière) : lues sans compte, titres des cours publiés seulement, indexées en production, sans cache HTML
-statut: Proposé — *amende 0035, 0074 ; confirme 0076 ; complète 0029, 0067*
+statut: Accepté — *amende 0035, 0074 ; confirme 0076 ; complète 0029, 0067*
 problematique: Première lecture anonyme du catalogue (CA-17, CA-21, CA-23) : requêtes `Queries::Catalog::Public*` filtrées sur le publié en SQL, rien au-delà du nom et de la description d'un cours ; adresses françaises à slug figé ; plan du site étendu, `noindex` des pages vides ; aucun cache HTML partagé (ADR-0076), nombre fixe de requêtes. Chantier `catalogue-complet`.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16) |
 | **Date** | 2026-10-16 |
-| **Chantier** | [`docs/chantiers/catalogue-complet`](../../chantiers/catalogue-complet/memo.md) — questions 1 à 8 du grill, en attente du porteur |
+| **Chantier** | [`docs/chantiers/catalogue-complet`](../../chantiers/catalogue-complet/memo.md) — questions 1 à 8 du grill, recommandations acceptées par le porteur le 2026-10-16 |
 | **Amende** | [ADR-0035](./0035-cycle-de-vie-et-propriete-du-contenu.md) (lecture : titres des cours publiés lisibles par tous) · [ADR-0074](./0074-blog-public-articles-images-et-referencement.md) §4.6 (le plan du site gagne les pages du catalogue) |
 | **Confirme** | [ADR-0076](./0076-politique-de-cache-reglee-sur-les-allers-retours.md) §4.1 (aucun HTML en cache partagé, même public) |
 | **Complète** | [ADR-0029](./0029-identifiants-exposes-public-id-et-slugs.md) (slugs figés, adresses du contenu public) · [ADR-0067](./0067-budgets-de-temps-serveur-des-ecrans.md) (quatre écrans budgétés) |

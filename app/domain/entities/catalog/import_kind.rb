@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::ImportKind
 # Rôle : registre fermé des cinq types d'import (format, racines, cible, plafonds, policy) et des types de rapport
-# ADR  : 0028, 0039, 0056, 0066, 0068
+# ADR  : 0028, 0039, 0056, 0066, 0068, 0096
 module Entities
   module Catalog
     module ImportKind
@@ -47,7 +47,12 @@ module Entities
       # Rapport sans fichier suivi par le même écran : la génération des classes manquantes (ADR-0056). Pas un type
       # d'import : ni format, ni téléversement.
       CLASSROOM_GENERATION = "classrooms"
-      REPORT_POLICIES = ALL.transform_values(&:policy).merge(CLASSROOM_GENERATION => Policies::School::ManageSchoolPolicy).freeze
+      # Régénérations de masse (ADR-0096) : rapports sans fichier ni code ; toute l'équipe les lit, seul admin les lance.
+      SCHOOL_CODE_REGENERATION = "school_codes"
+      CLASSROOM_LINK_REGENERATION = "classroom_links"
+      CODE_REGENERATIONS = [ SCHOOL_CODE_REGENERATION, CLASSROOM_LINK_REGENERATION ].freeze
+      WITHOUT_FILE = [ CLASSROOM_GENERATION, *CODE_REGENERATIONS ].freeze
+      REPORT_POLICIES = ALL.transform_values(&:policy).merge(WITHOUT_FILE.index_with { Policies::School::ManageSchoolPolicy }).freeze
       REPORT_KINDS = REPORT_POLICIES.keys.freeze
 
       def self.valid?(kind) = ALL.key?(kind.to_s)

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::ClassroomRepository
-# Rôle : traduit Orm::Classroom ↔ Entities::Classroom::Classroom  ; jeton du lien, verrou, génération en masse, retrait d'une classe vide, nom et plafond
-# ADR  : 0030, 0039, 0041, 0059, 0085, 0088, 0098
+# Rôle : traduit Orm::Classroom ↔ Entities::Classroom::Classroom ; jeton du lien (un par un, en masse), verrou, génération en masse, retrait d'une classe vide, nom et plafond
+# ADR  : 0030, 0039, 0041, 0059, 0085, 0088, 0096, 0098
 module Repositories
   module Classroom
     class ClassroomRepository
@@ -27,9 +27,37 @@ module Repositories
       end
 
       # Le jeton est tiré par la base, comme à la création : une seule source de sa forme (ADR-0085 §4.1).
+      # ADR-0096 : la date du changement sert de garde au geste de masse, qui ne change pas de nouveau ce lien.
       def rotate_link_token(id:)
-        Orm::Classroom.where(id:).update_all([ "link_token = #{LINK_TOKEN_SQL}, updated_at = ?", Time.current ])
+        now = Time.current
+        Orm::Classroom.where(id:).update_all([ "link_token = #{LINK_TOKEN_SQL}, link_token_rotated_at = ?, updated_at = ?", now, now ])
         Orm::Classroom.where(id:).pick(:link_token)
+      end
+
+      # ADR-0096 §4.4 : les classes actives des établissements de la sélection de la liste, bornées au lancement.
+      def count_for_link_regeneration(selection:, school_year:, created_before:)
+        link_regeneration_scope(selection, school_year, created_before).count
+      end
+
+      def link_regeneration_batch(selection:, school_year:, created_before:, after_id:, limit:)
+        link_regeneration_scope(selection, school_year, created_before)
+          .joins(:school).where(id: (after_id + 1)..).order(:id).limit(limit)
+          .pluck(:id, :public_id, "schools.name", :name, :school_id, :link_token_rotated_at)
+          .map do |id, public_id, school_name, name, school_id, rotated_at|
+            Entities::School::RegenerationCandidate.new(id:, public_id:, label: "#{school_name} · #{name}", school_id:, rotated_at:)
+          end
+      end
+
+      # Un seul UPDATE, jetons tirés par la base ; la garde « active et inchangée depuis » est dans la requête, sous le verrou de
+      # ligne de l'UPDATE (le même que « Changer le lien » et l'adhésion d'un élève). Un jeton pris lève (TransactionPort#attempt).
+      def rotate_link_tokens(ids:, at:, unchanged_since:)
+        return [] if ids.empty?
+
+        Orm::Classroom.connection.exec_query(Orm::Classroom.sanitize_sql_array([ <<~SQL.squish, at, at, ids, unchanged_since ])).rows.flatten
+          UPDATE classrooms SET link_token = #{LINK_TOKEN_SQL}, link_token_rotated_at = ?, updated_at = ?
+          WHERE id IN (?) AND status = 'active' AND (link_token_rotated_at IS NULL OR link_token_rotated_at < ?)
+          RETURNING id
+        SQL
       end
 
       # Un nom pris dans l'école et l'année donne :conflict. Savepoint : traduit seulement une violation d'index unique,
@@ -113,6 +141,10 @@ module Repositories
       private
 
       def usage_of(classroom_id) = USAGES.find { |_, model| model.exists?(classroom_id:) }&.first
+
+      def link_regeneration_scope(selection, school_year, created_before)
+        Orm::Classroom.link_regeneration(selection, school_year).where(created_at: ..created_before)
+      end
 
       def attributes_of(classroom)
         { school_id: classroom.school_id, level_id: classroom.level_id, series_id: classroom.series_id,

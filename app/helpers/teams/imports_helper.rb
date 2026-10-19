@@ -1,6 +1,6 @@
 # 🌐 UI · Teams::ImportsHelper — message d'une erreur du rapport d'import, nom d'un import de plusieurs fichiers
-# Rôle : une erreur de schéma se lit comme une phrase selon son mot-clé json_schemer, jamais comme le mot-clé brut
-# ADR  : 0039, 0066, 0068 · UDR : 0053, 0055
+# Rôle : une erreur de schéma se lit comme une phrase selon son mot-clé json_schemer, jamais comme le mot-clé brut ; un rapport sans signe de vie se dit bloqué
+# ADR  : 0039, 0066, 0068, 0096 · UDR : 0053, 0055, 0105
 module Teams
   module ImportsHelper
     # Le mot-clé reste dans les données du rapport ; seul son affichage est traduit, avec une phrase générique par défaut.
@@ -32,6 +32,15 @@ module Teams
         [ "#{key.camelize(:lower)}Text", t("teams.imports.new.files_summary.#{key}") ]
       end
     end
+
+    # ADR-0096 §4.3 : un job tué net ne laisse aucune trace ; un rapport en cours sans signe de vie (updated_at, rafraîchi à chaque
+    # lot) depuis la limite des imports est donc dit bloqué à l'écran, sans attendre un nouveau lancement.
+    def import_stalled?(import)
+      Entities::Catalog::ImportReport::RUNNING.include?(import.status) &&
+        import.updated_at < Time.current - UseCases::Catalog::StartImport::STALE_AFTER
+    end
+
+    def import_stale_minutes = UseCases::Catalog::StartImport::STALE_AFTER / 60
 
     private
 

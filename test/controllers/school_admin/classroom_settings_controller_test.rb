@@ -161,4 +161,13 @@ class SchoolAdmin::ClassroomSettingsControllerTest < ActionDispatch::Integration
     assert_response :forbidden
     assert_select "meta[name=turbo-visit-control][content=reload]"
   end
+
+  test "un refus dans un autre cadre (une recherche) ne demande pas la page entière : le cadre garde son état d'erreur" do
+    sign_in_as create_student(classroom: @classroom)
+
+    get edit_path, headers: { "Turbo-Frame" => "classroom_roster_list" }
+
+    assert_response :forbidden
+    assert_select "meta[name=turbo-visit-control]", count: 0
+  end
 end

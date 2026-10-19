@@ -1,0 +1,20 @@
+<%# 🌐 UI · catalog/public/_call_to_action — le seul appel à l'action d'une page publique du catalogue, selon la session %>
+<%# Rôle : visiteur → « Créer mon compte élève » et « J'ai déjà un compte » ; élève → « Voir mes cours » ; autre rôle → « Ouvrir le catalogue » %>
+<%# UDR  : 0113 (§3.1, §3.5 : tutoiement de l'élève) · ADR : 0099 (§4.2) %>
+<%# locals: (id:, spacing: nil) -%>
+<div id="<%= id %>" class="<%= class_names("rounded-card bg-brand-soft p-5 text-center", spacing) %>">
+  <% if current_actor.nil? %>
+    <p class="font-display text-lg font-extrabold text-ink"><%= t(".visitor_title") %></p>
+    <div class="mt-4 flex flex-col items-center gap-1">
+      <%= ui_button t(".sign_up"), href: new_student_registration_path, icon_end: "arrow-right" %>
+      <%= link_to t(".sign_in"), new_session_path,
+            class: "inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+    </div>
+  <% elsif current_actor.student? %>
+    <p class="font-display text-lg font-extrabold text-ink"><%= t(".student_title") %></p>
+    <div class="mt-4 flex justify-center"><%= ui_button t(".my_courses"), href: courses_path, icon_end: "arrow-right" %></div>
+  <% else %>
+    <p class="font-display text-lg font-extrabold text-ink"><%= t(".member_title") %></p>
+    <div class="mt-4 flex justify-center"><%= ui_button t(".catalog"), href: courses_path, icon_end: "arrow-right" %></div>
+  <% end %>
+</div>

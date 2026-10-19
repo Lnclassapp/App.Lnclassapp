@@ -204,7 +204,7 @@ class ErrorPathsTest < ApplicationSystemTestCase
   end
 
   test "an import interrupted for more than 10 minutes no longer blocks the next one and ends failed" do
-    stale = create_import_report(kind: "schools", status: "importing", started_at: 11.minutes.ago)
+    stale = create_import_report(kind: "schools", status: "importing", started_at: 11.minutes.ago, updated_at: 11.minutes.ago)
 
     sign_in_as create_team_member
     click_on t("shared.navigation.imports"), match: :first

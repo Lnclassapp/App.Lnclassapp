@@ -1,14 +1,14 @@
 # UDR-0106 : Le bloc « Code d'établissement » de la fiche dit quand le code a changé pour la dernière fois
 <!-- index
 titre: Le bloc « Code d'établissement » de la fiche dit quand le code a changé pour la dernière fois
-statut: Proposé
+statut: Accepté
 adr-lie: [0096](../adr/0096-regeneration-des-codes-d-etablissement-en-masse-par-un-job.md)
 problematique: Ligne « Changé le 16 octobre 2026 » sous le code, depuis `school_code_rotated_at` (unitaire ou en masse), absente si le code n'a jamais changé ; re-rendue avec l'en-tête après une régénération unitaire.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-16 : chantier gardé et élargi aux liens des classes)* |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/regeneration-codes-en-masse`](../../chantiers/regeneration-codes-en-masse/prd.md) — RM-13 |
 | **ADR lié** | ADR-0096 |
@@ -58,3 +58,4 @@ Après une régénération de masse, personne n'est prévenu (memo, Q3). Quand u
 
 - La date ne distingue pas un changement unitaire d'un changement de masse : pour le savoir, l'équipe lit le journal d'audit (`report_public_id` présent pour la masse).
 - Quand `inscription-direction-sans-code` retirera le code, cette ligne part avec le bloc.
+- **Amendement du 2026-10-16 (liens des classes)** : la date du dernier changement d'un lien de classe (`classrooms.link_token_rotated_at`) est enregistrée mais **n'est affichée nulle part** ; le bloc « Lien de la classe » (UDR-0081 §3.6) ne change pas. L'afficher demanderait une UDR sur la page de la classe.

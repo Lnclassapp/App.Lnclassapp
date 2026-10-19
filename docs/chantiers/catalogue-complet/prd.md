@@ -2,7 +2,7 @@
 
 > Les specs sont figées ici. Toute évolution après la phase 3 se fait par modification explicite de ce fichier, pas par improvisation dans le code.
 >
-> **Statut : proposé.** Écrit sur les recommandations du [memo](memo.md#ce-que-le-grill-a-révélé) ; une réponse du porteur qui diffère d'une recommandation (questions 1 à 7) le fait réécrire avant le Lot 0.
+> **Statut : accepté le 2026-10-16.** Le porteur a accepté les recommandations du [memo](memo.md#ce-que-le-grill-a-révélé). Écart d'exécution : le nom du niveau est celui du référentiel (« Tle », pas « Terminale » des exemples) ; le fil d'Ariane devient un lien de retour (UDR-0054).
 
 ## 1. Contexte
 
@@ -196,7 +196,7 @@ Et le pied de page a un lien « Les cours par niveau » vers /niveaux
 
 # CC-23 Budget
 Quand on mesure les quatre pages avec script/perf/audit_pages.rb sur le jeu de l'ADR-0067
-Alors chacune répond en moins de 100 ms serveur, pèse moins de 150 Ko de HTML et fait au plus trois requêtes SQL de lecture du catalogue
+Alors chacune répond en moins de 100 ms serveur, pèse moins de 150 Ko de HTML et fait au plus trois requêtes SQL de lecture du catalogue (quatre pour la page matière avec le filtre de série)
 ```
 
 ## 5. Modélisation préliminaire
@@ -220,8 +220,8 @@ Alors chacune répond en moins de 100 ms serveur, pèse moins de 150 Ko de HTML 
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Pages du catalogue lisibles sans compte | 0 | `/niveaux` + 1 par niveau, couple niveau × série et matière ayant un cours publié | |
-| Adresses du catalogue dans `/sitemap.xml` | 0 | idem | |
-| Temps serveur de chaque page (ADR-0067) | — | < 100 ms | |
-| Requêtes SQL du catalogue par page | — | ≤ 3 | |
-| Poids du HTML | — | < 150 Ko | |
+| Pages du catalogue lisibles sans compte | 0 | `/niveaux` + 1 par niveau, couple niveau × série et matière ayant un cours publié | Atteint (tests d'intégration CC-01 à CC-18) |
+| Adresses du catalogue dans `/sitemap.xml` | 0 | idem | Atteint (CC-21) |
+| Temps serveur de chaque page (ADR-0067) | — | < 100 ms | p50 de 16 à 23 ms (`audit_pages.rb`, visiteur, 200 cours publiés), 23 à 60 ms sur une seconde mesure, machine partagée |
+| Requêtes SQL du catalogue par page | — | ≤ 3 | 2 (`/niveaux`) ou 3 ; 4 pour la page matière avec `?serie=` ; plus 1 pour le lien « Blog » du pied |
+| Poids du HTML | — | < 150 Ko | 10 à 26 Ko |

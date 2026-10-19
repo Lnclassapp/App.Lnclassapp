@@ -1,7 +1,8 @@
 require "application_system_test_case"
 
 # ADR-0098, UDR-0110, UDR-0111 : sur la fiche d'un établissement, l'équipe ouvre « Modifier la classe » dans le menu ⋮ de
-# « 6ème 3 », voit un nom pris refusé sous le champ, renomme en « 6ème A » et relève le plafond ; le « + » ajoute ensuite « 6ème 3 ».
+# « 6ème 3 », voit un nom pris refusé sous le champ, renomme en « 6ème A » et relève le plafond. Le « + » qui ajoute ensuite
+# « 6ème 3 » est prouvé au niveau contrôleur (Teams::LevelClassroomsControllerTest) : il n'a rien de propre au navigateur.
 class School::ClassroomSettingsTest < ApplicationSystemTestCase
   setup do
     levels = seed_referential[:levels]
@@ -27,7 +28,7 @@ class School::ClassroomSettingsTest < ApplicationSystemTestCase
     flunk "le menu de #{classroom.name} ne s'est pas ouvert"
   end
 
-  test "renommer « 6ème 3 » en « 6ème A » après un nom pris, puis le « + » ajoute « 6ème 3 »" do
+  test "renommer « 6ème 3 » en « 6ème A » après un nom pris" do
     visit school_path(@school.public_id)
     open_edit(@sixths.last)
 
@@ -49,8 +50,5 @@ class School::ClassroomSettingsTest < ApplicationSystemTestCase
     # La fiche re-demandée par morphing garde les boutons « Copier le lien » que le contrôleur clipboard avait montrés.
     @sixths.each { assert_selector "li#classroom_#{it.public_id} button", text: "Copier le lien" }
     assert_equal [ "6ème A", 95 ], @sixths.last.reload.then { [ it.name, it.max_students ] }
-
-    within("#level_classrooms_6eme") { click_on "Ajouter une classe de 6ème" }
-    assert_toast "Classe « 6ème 3 » ajoutée."
   end
 end
