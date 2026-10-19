@@ -1,7 +1,7 @@
 # 🌐 DELIVERY · Classroom::AssignmentsController
 # Rôle : assigner et retirer un exercice d'une classe (Turbo Stream qui remplace la bascule) ; la modale des jours de séance
 #        (`new`) et son envoi, avec les jours cochés ou « Plus tard »
-# ADR  : 0026, 0028, 0048, 0072 · UDR : 0006, 0028, 0062
+# ADR  : 0026, 0028, 0048, 0072, 0088 · UDR : 0006, 0028, 0062
 module Classroom
   class AssignmentsController < AuthenticatedController
     allow_roles :teacher, :team
@@ -12,7 +12,8 @@ module Classroom
     # UDR-0062 §3.4 : « Quels jours voyez-vous la <classe> ? », servie dans le frame « modal », lisible sans JavaScript.
     def new
       @classroom = classrooms.find_by_public_id(public_id: params[:classroom_public_id])
-      return render_not_found if @classroom.nil?
+      # vie-de-la-classe, Lot C (ADR-0088, Q8) : une classe archivée n'a plus de page, quel que soit le rôle ; elle se restaure.
+      return render_not_found if @classroom.nil? || @classroom.archived?
 
       render_result days_step_allowed, success: lambda { |_|
         @exercise = exercise(params[:assignable_key])
