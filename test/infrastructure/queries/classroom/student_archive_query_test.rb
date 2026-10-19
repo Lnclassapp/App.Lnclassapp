@@ -23,17 +23,37 @@ module Queries
         Orm::ClassroomStudent.create!(joined_via: "standard", classroom:, student: @student, primary: true, joined_at:, left_at:)
       end
 
-      test "the classrooms he left or that were archived, most recent first, with their school and school year" do
+      test "the classrooms he left or that were archived, most recent first, with their school, school year and period" do
+        archived_at = 2.years.ago.change(usec: 0)
+        left = [ 1.year.ago.change(usec: 0), 1.month.ago.change(usec: 0) ]
         joined(create_classroom(school: @school, name: "4ème 2", level: create_level(name: "4ème"), status: "archived",
-                                school_year: "2024-2025"), joined_at: 2.years.ago)
+                                school_year: "2024-2025"), joined_at: archived_at)
         joined(create_classroom(school: create_school(name: "Collège Voltaire"), name: "3ème 4", level: create_level(name: "3ème"),
-                                school_year: "2025-2026"), joined_at: 1.year.ago, left_at: 1.month.ago)
+                                school_year: "2025-2026"), joined_at: left.first, left_at: left.last)
         create_student(classroom: create_classroom(school: @school))
 
         assert_equal [ StudentArchiveQuery::ClassroomRow.new(name: "3ème 4", level_name: "3ème", school_name: "Collège Voltaire",
-                                                             school_year: "2025-2026"),
+                                                             school_year: "2025-2026", joined_at: left.first, left_at: left.last,
+                                                             current: false),
                        StudentArchiveQuery::ClassroomRow.new(name: "4ème 2", level_name: "4ème", school_name: "Lycée Moderne de Bouaké",
-                                                             school_year: "2024-2025") ], archive.classrooms
+                                                             school_year: "2024-2025", joined_at: archived_at, left_at: nil,
+                                                             current: false) ], archive.classrooms
+      end
+
+      # UDR-0103 §3.1 : la classe actuelle, non quittée et active, est la seule marquée ; deux classes de la même année se
+      # distinguent par leur période.
+      test "UDR-0103: after a change of classroom, the one he left keeps its period, the active one is current" do
+        # Un seul instant par date : deux appels à 40.days.ago peuvent tomber de part et d'autre d'une seconde.
+        joined_at = 40.days.ago.change(usec: 0)
+        moved_at = 3.days.ago.change(usec: 0)
+        joined(create_classroom(school: @school, name: "2nde A"), joined_at:, left_at: moved_at)
+        joined(create_classroom(school: create_school(name: "Collège Saint-Viateur"), name: "2nde C"), joined_at: moved_at)
+
+        rows = archive.classrooms
+
+        assert_equal [ [ "2nde C", moved_at, nil, true ], [ "2nde A", joined_at, moved_at, false ] ],
+                     rows.map { [ it.name, it.joined_at, it.left_at, it.current ] }
+        assert_equal 1, rows.map(&:school_year).uniq.size
       end
 
       test "every finished exercise, most recent first, out of any level; neither started ones nor another student's" do

@@ -31,8 +31,10 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", "Mon historique"
     assert_select "#student_archive_classrooms li", 1 do
       assert_select "p", "3ème 4"
-      assert_select "p", "3ème · Lycée Moderne de Bouaké"
-      assert_select "span", "2025-2026"
+      # UDR-0103 §3.2 : l'année passe dans le détail ; à droite, la période ; une classe archivée non quittée, sans badge.
+      assert_select "p", "3ème · Lycée Moderne de Bouaké · 2025-2026"
+      assert_select "span", /\Adepuis le \d+ \S+\z/
+      assert_select "span", text: "Actuelle", count: 0
     end
     assert_select "#student_archive_summary", text: /1\s+exercice terminé/
     assert_select "#student_archive_results li", 1 do
@@ -41,6 +43,30 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
       assert_select "[data-grade]", text: /15\/20/
     end
     assert_select "#student_archive_results a", 0
+  end
+
+  # UDR-0103 §3.2 (ADR-0095): after a change of classroom, « Actuelle » and « depuis le … » on the new one, « du … au … »
+  # on the one left; the year only when it is not the current one.
+  test "UDR-0103: the current classroom says « Actuelle » and since when, the one left its period" do
+    travel_to Time.zone.local(2026, 10, 16, 9) do
+      moved_at = Time.zone.local(2026, 10, 12, 8)
+      student = create_student
+      Orm::ClassroomStudent.create!(classroom: @classroom, student:, primary: true, joined_via: "standard",
+                                    joined_at: Time.zone.local(2025, 9, 15, 8), left_at: moved_at)
+      Orm::ClassroomStudent.create!(classroom: create_classroom(school: @school, name: "2nde C"), student:, primary: true,
+                                    joined_via: "link", joined_at: moved_at)
+      sign_in_as student
+
+      get student_archive_path
+
+      rows = css_select("#student_archive_classrooms li")
+      assert_equal 2, rows.size
+      assert_select rows.first, "p", "2nde C"
+      assert_select rows.first, "span", "Actuelle"
+      assert_select rows.first, "span", "depuis le 12 oct."
+      assert_select rows.last, "span", "du 15 sept. 2025 au 12 oct."
+      assert_select rows.last, "span", text: "Actuelle", count: 0
+    end
   end
 
   # historique-eleve (UDR-0090 §3.2, CA-3): a heading per month, most recent first; each row with its subject illustration.

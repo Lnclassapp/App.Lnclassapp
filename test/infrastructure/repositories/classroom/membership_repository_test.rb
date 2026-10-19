@@ -104,6 +104,22 @@ module Repositories
         assert_not @repository.removed_from?(classroom_id: classroom.id, student_id: @student.id)
       end
 
+      # ADR-0095 §4.2 : un élève parti de lui-même (left_at seul) revient par la voie standard ; la ligne est rouverte.
+      test "ADR-0095: revenir dans une classe quittée sans retrait rouvre la même adhésion, sans doublon" do
+        first = create_classroom
+        second = create_classroom
+        @repository.add_primary(classroom_id: first.id, student_id: @student.id, via: "link", at: @at)
+        @repository.leave_primary(student_id: @student.id, at: @at + 1.day)
+        @repository.add_primary(classroom_id: second.id, student_id: @student.id, via: "standard", at: @at + 1.day)
+        @repository.leave_primary(student_id: @student.id, at: @at + 2.days)
+
+        assert @repository.add_primary(classroom_id: first.id, student_id: @student.id, via: "standard", at: @at + 2.days).success?
+
+        assert_equal [ [ first.id, @at + 2.days, nil, nil, "standard" ], [ second.id, @at + 1.day, @at + 2.days, nil, "standard" ] ],
+                     Orm::ClassroomStudent.where(student: @student).order(:joined_at).reverse_order
+                                          .pluck(:classroom_id, :joined_at, :left_at, :removed_at, :joined_via)
+      end
+
       test "revenir dans une classe alors qu'une autre est principale donne :conflict et laisse le retrait" do
         classroom = create_classroom
         @repository.add_primary(classroom_id: classroom.id, student_id: @student.id, via: "standard", at: @at)

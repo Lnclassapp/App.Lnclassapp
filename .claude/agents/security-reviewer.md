@@ -2,7 +2,7 @@
 name: security-reviewer
 description: Relit un diff Lnclass sous l'angle sécurité (autorisation, identité, fuites de données, téléversements) et rend des constats vérifiés, avec leur gravité. À lancer après toute modification d'un use case, d'une policy, d'un contrôleur, d'une query ou d'une route, et avant chaque passage Staging → main.
 tools: Read, Grep, Glob, Bash
-model: sonnet
+model: opus
 ---
 
 <!-- Adapté de ECC (github.com/affaan-m/ECC, agents/security-reviewer.md), licence MIT, © 2026 Affaan Mustafa. Réécrit pour Lnclass. -->
