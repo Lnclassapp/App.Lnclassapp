@@ -25,7 +25,11 @@ class Communication::HelpControllerTest < ActionDispatch::IntegrationTest
     get help_path
 
     assert_select "#help_question_badges", text: /Or à partir de #{GRADING::GOLD_THRESHOLD} %/
-    assert_select "#help_question_gaps", text: /au moins #{GRADING::REMEDIATION_THRESHOLD} %/
+    # UDR-0119 : la règle de la fiche à revoir se lit sur 20, calculée depuis les seuils.
+    assert_select "#help_question_gaps", text: /moins de #{GRADING.grade_on_20(GRADING::PASS_THRESHOLD)}\/20/
+    assert_select "#help_question_gaps", text: /au moins #{GRADING.grade_on_20(GRADING::REMEDIATION_THRESHOLD)}\/20/
+    assert_select "#help_question_gaps", text: /10\/20.*15\/20/m
+    assert_select "#help_question_gaps", text: /%/, count: 0
     assert_select "#help_question_grade", text: /16\/20/
   end
 

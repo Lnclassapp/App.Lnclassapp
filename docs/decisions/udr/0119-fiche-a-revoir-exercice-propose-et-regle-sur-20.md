@@ -1,14 +1,14 @@
 # UDR-0119 : Fiche à revoir — l'encart propose un exercice choisi, le démarre d'un tap, et donne la règle sur 20
 <!-- index
 titre: Fiche à revoir : exercice proposé, démarrage direct, règle sur 20
-statut: Proposé
+statut: Accepté
 adr-lie: [0101](../adr/0101-remediation-implicite-exercice-propose-et-lecture-enseignant.md), [0043](../adr/0043-remediation-declenchee-par-la-cloture.md)
 problematique: Encart `#essential_gap` de la fiche (élève) : le bouton mène au premier exercice et la règle se lit en %. Il démarre l'exercice choisi par `RemediationPick`, le nomme, et la règle se lit « 15/20 » ; l'aide aussi. Amende UDR-0015 §2.6 et son amendement R4.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-10-16, porteur : recommandations Q1 à Q12 acceptées) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/remediation-ciblee`](../../chantiers/remediation-ciblee/memo.md) — Lot A, AS-16 |
 | **ADR lié** | [ADR-0101](../adr/0101-remediation-implicite-exercice-propose-et-lecture-enseignant.md) §4.1, §4.2 · [ADR-0043](../adr/0043-remediation-declenchee-par-la-cloture.md) (seuil 75, amendement du 2026-09-27) |

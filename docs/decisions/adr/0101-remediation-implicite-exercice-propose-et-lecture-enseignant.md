@@ -1,13 +1,13 @@
 # ADR-0101 : La remédiation se lance par `StartExerciseSession`, l'exercice proposé se choisit à la lecture, l'enseignant lit les lacunes de sa classe sous `ReadClassroomPolicy`
 <!-- index
 titre: Remédiation implicite, exercice proposé à la lecture, lecture des lacunes par l'enseignant
-statut: Proposé — *amende 0043 §4 et §7*
+statut: Accepté — *amende 0043 §4 et §7*
 problematique: AS-16 et AS-17 sans `StartRemediationSession` : qui lance une remédiation, quel exercice proposer, ce que l'enseignant lit des lacunes.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (2026-10-16, porteur : recommandations Q1 à Q12 acceptées) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/remediation-ciblee`](../../chantiers/remediation-ciblee/memo.md), programme `refonte-application`, V5 |
 | **Remplace** | — |
@@ -92,6 +92,18 @@ La règle ne lit que des colonnes existantes. Elle parle de **cette** session : 
 
 La direction ne lit rien (ADR-0072 §4.5). L'élève ne lit que ses propres lacunes, comme aujourd'hui.
 
+### 4.5 Les seuils se lisent sur la note affichée (décision du porteur, 2026-10-19)
+
+Ce que l'élève lit fait foi. `GapDecision` ne compare plus le pourcentage brut à `PASS_THRESHOLD` (50) et `REMEDIATION_THRESHOLD` (75) : il compare `Grading.grade_on_20(score_percent)` à `Grading.grade_on_20(seuil)`, soit 10/20 et 15/20. L'arrondi de la note vit dans `grade_on_20`, un seul endroit ; aucun seuil n'est recopié.
+
+| Note affichée | Pourcentages concernés | Effet sur la fiche |
+|---|---|---|
+| ≥ 15/20 | 73 à 100 % | lève la fiche en attente (`remediated` ou `self_corrected`) |
+| de 10 à 14/20 | 48 à 72 % | rien ne change |
+| < 10/20 | 0 à 47 % | ouvre la fiche, ou compte un échec de plus |
+
+Conséquences : 74 % (15/20) et 73 % (15/20) lèvent ; 72 % (14/20) non ; 49 % et 48 % (10/20) n'ouvrent plus ; 47 % (9/20) ouvre. Le seul appelant est `CloseExerciseSession#settle_gap`. Les autres seuils (maîtrise, badges, taux de réussite de la classe, ADR-0033) restent sur le pourcentage brut et ne sont pas touchés.
+
 ## 5. Conséquences
 
 ### 🟢 Positives
@@ -161,5 +173,5 @@ end
 
 ## 8. Remplace, complète, amende
 
-- **Amende** l'ADR-0043 §4 : « Démarrage d'une remédiation » est remplacé par §4.1 et §4.2 ; « Visibilité » côté enseignant par §4.4. Le §7 est remplacé par le §7 ci-dessus. Le reste de l'ADR-0043 et son amendement du 2026-09-27 (seuil 75) sont inchangés.
+- **Amende** l'ADR-0043 §4 : « Démarrage d'une remédiation » est remplacé par §4.1 et §4.2 ; « Visibilité » côté enseignant par §4.4. Le §7 est remplacé par le §7 ci-dessus. Le reste de l'ADR-0043 et son amendement du 2026-09-27 (seuil 75) sont inchangés, sauf que les seuils 50 et 75 se lisent sur la note affichée (§4.5).
 - **S'appuie sur** l'ADR-0079 §4.1 (la remédiation compte comme « fait »), l'ADR-0041 (année scolaire), l'ADR-0072 §4.5 (la direction ne lit pas de noms).

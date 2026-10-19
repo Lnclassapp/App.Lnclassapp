@@ -1,16 +1,18 @@
 # 🔌 INFRA · Queries::Assessment::SessionResultQuery
-# Rôle : résultat d'une session terminée (score, note, maîtrise, badge, progrès) et sa correction ; sans reveal, seuls les choix
-# ADR  : 0028, 0033, 0043, 0054, 0079, 0091, 0094 · UDR : 0007, 0023, 0073, 0087 · sécurité n° 29
+# Rôle : résultat d'une session terminée (score, note, maîtrise, badge, progrès, effet sur la fiche) et sa correction ; sans reveal, seuls les choix
+# ADR  : 0028, 0033, 0043, 0054, 0079, 0091, 0094, 0101 · UDR : 0007, 0023, 0073, 0087, 0120 · sécurité n° 29
 module Queries
   module Assessment
     class SessionResultQuery
       # badge_level : palier du score de cette session (Grading), nil sous le seuil ; earned_now : le badge de l'élève
       # sur l'exercice vient de cette session. progress : Progress, nil à la première session, remédiation comprise (UDR-0073).
+      # gap_outcome : GapOutcome de cette session sur sa fiche (:opened, :lifted, :still_pending) ou nil (UDR-0120).
       Row = Data.define(:session_public_id, :student_id, :student_name, :exercise, :essential, :score_percent, :grade_on_20,
-                        :correct_count, :question_count, :mastery, :badge_level, :earned_now, :progress, :review)
+                        :correct_count, :question_count, :mastery, :badge_level, :earned_now, :progress, :review, :gap_outcome)
       # trend : Comprehension.trend_for ; les trois notes sur 20, du premier, du meilleur et du dernier score (cette session).
       Progress = Data.define(:trend, :first_grade, :best_grade, :current_grade)
       ExerciseRow = Data.define(:public_id, :title)
+      GapFacts = Data.define(:id, :status, :source_session_id, :resolved_by_session_id)
       EssentialRow = Data.define(:slug, :name, :course_slug)
       # correct : verdict de la tentative (nil sans tentative). « Ton choix » par type (ADR-0091 §4.4) : answers (propositions
       # d'un choix, étapes d'un ordre dans l'ordre de l'élève), response_text (trous, nombre), pairs (relier). solution et
@@ -29,12 +31,13 @@ module Queries
       SESSION_COLUMNS = %w[exercise_sessions.id exercise_sessions.public_id exercise_sessions.student_id users.first_name
                            users.last_name exercise_sessions.score_percent exercise_sessions.correct_count
                            exercise_sessions.question_count exercises.id exercises.public_id exercises.title essentials.slug
-                           essentials.name courses.slug exercise_sessions.completed_at].freeze
+                           essentials.name courses.slug exercise_sessions.completed_at exercise_sessions.kind
+                           exercise_sessions.knowledge_gap_id].freeze
 
       # reveal : décidé en amont par RevealAnswersPolicy. → Row | nil
       def call(public_id:, reveal:)
         id, public_id, student_id, first_name, last_name, score_percent, correct_count, question_count, exercise_id,
-          exercise_public_id, title, essential_slug, essential_name, course_slug, completed_at =
+          exercise_public_id, title, essential_slug, essential_name, course_slug, completed_at, kind, knowledge_gap_id =
           Orm::ExerciseSession.joins(:student, exercise: { essential: :course }).where(public_id:).pick(*SESSION_COLUMNS)
         return if id.nil?
 
@@ -43,7 +46,8 @@ module Queries
                 essential: EssentialRow.new(slug: essential_slug, name: essential_name, course_slug:),
                 correct_count:, question_count:, **grading(score_percent),
                 earned_now: Orm::ExerciseBadge.exists?(exercise_session_id: id),
-                progress: progress(id, student_id, exercise_id, completed_at), review: review(id, exercise_id, reveal))
+                progress: progress(id, student_id, exercise_id, completed_at), review: review(id, exercise_id, reveal),
+                gap_outcome: gap_outcome(id, kind, knowledge_gap_id))
       end
 
       # Fait teaches_student de ReadSessionPolicy : l'élève est encore inscrit dans une classe active de l'enseignant, de
@@ -75,6 +79,16 @@ module Queries
         grade = Entities::Assessment::Grading.method(:grade_on_20)
         Progress.new(trend: Entities::Assessment::Comprehension.trend_for(scores), first_grade: grade.(scores.first),
                      best_grade: grade.(scores.max), current_grade: grade.(scores.last))
+      end
+
+      # Une requête : la lacune que la session a ouverte, sinon levée, sinon ciblée (ADR-0101 §6). Le résultat suit
+      # resolved_by_session_id, pas knowledge_gap_id : deux onglets peuvent lever une autre lacune que celle ciblée.
+      def gap_outcome(session_id, kind, knowledge_gap_id)
+        gaps = Orm::KnowledgeGap.where(source_session_id: session_id).or(Orm::KnowledgeGap.where(resolved_by_session_id: session_id))
+                                .or(Orm::KnowledgeGap.where(id: knowledge_gap_id))
+                                .pluck(:id, :status, :source_session_id, :resolved_by_session_id).map { GapFacts.new(*it) }
+        gap = gaps.find { it.source_session_id == session_id } || gaps.find { it.resolved_by_session_id == session_id } || gaps.first
+        Entities::Assessment::GapOutcome.call(session_id:, session_kind: kind, knowledge_gap_id:, gap:)
       end
 
       def review(session_id, exercise_id, reveal)
