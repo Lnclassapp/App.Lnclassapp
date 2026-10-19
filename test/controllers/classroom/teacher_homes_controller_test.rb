@@ -61,7 +61,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "CA-1 (UDR-0077 §3.1): « Mes classes », « Cours », the announcements, then « Activités »" do
+  test "CA-1 (UDR-0077 §3.1, UDR-0130): « Mes classes », « Fiches de cours », the announcements, then « Activités »" do
     create_message(author: create_team_member(second_factor: false), title: "Conseil de classe", audience: "teachers")
     sign_in_as @teacher
 
@@ -71,7 +71,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     assert_equal %w[teacher_home_classrooms teacher_home_courses student_home_announcements teacher_home_activity],
                  css_select(sections).map { it["id"] }
     assert_select "#teacher_home_classrooms h2", text: "Mes classes"
-    assert_select "#teacher_home_courses h2", text: "Cours"
+    assert_select "#teacher_home_courses h2", text: "Fiches de cours"
     assert_select "#teacher_home_activity h2", text: "Activités"
     assert_select "#teacher_home_activity", text: including("Bientôt"), count: 0
   end
@@ -193,7 +193,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
 
     get teacher_home_path
 
-    assert_select "#teacher_home_courses", text: including("Les cours de vos niveaux en Mathématiques")
+    assert_select "#teacher_home_courses", text: including("Les fiches de cours de vos niveaux en Mathématiques")
     assert_select "nav#teacher_home_course_levels[aria-label='Vos niveaux et actions'] > ul.grid.grid-cols-4"
     assert_equal %w[course_level_3eme course_level_1ere_a course_level_tle_d course_level_invite], bubble_ids
     { "3eme" => [ "3ème", courses_path(level: "3eme", material: "mathematiques") ],
@@ -201,7 +201,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
       "tle_d" => [ "Tle D", courses_path(level: "tle", series: "d", material: "mathematiques") ] }.each do |key, (label, href)|
       assert_select "a#course_level_#{key}[href='#{href}']", text: including(label) do
         assert_select "img[src='#{illustration('maths')}'][alt='']"
-        assert_select ".sr-only", text: ", cours de Mathématiques"
+        assert_select ".sr-only", text: ", fiches de cours de Mathématiques"
       end
     end
     assert_select "a#course_level_invite", text: including("Inviter") do
@@ -242,7 +242,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
 
     get teacher_home_path
 
-    assert_select "#teacher_home_courses_empty", text: "Déclarez vos classes pour retrouver ici les cours de vos niveaux."
+    assert_select "#teacher_home_courses_empty", text: "Déclarez vos classes pour retrouver ici les fiches de cours de vos niveaux."
     assert_equal %w[course_level_invite], bubble_ids
     assert_select "#teacher_home_courses a[href='#{courses_path}']", text: including("Voir tout le catalogue")
   end
@@ -255,7 +255,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "a#course_level_tle[href='#{courses_path(level: 'tle', material: english.slug)}']" do
       assert_select "img[src='#{illustration('generique')}']"
-      assert_select ".sr-only", text: ", cours de Anglais"
+      assert_select ".sr-only", text: ", fiches de cours de Anglais"
     end
   end
 

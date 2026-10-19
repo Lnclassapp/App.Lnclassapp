@@ -92,8 +92,9 @@ module UseCases
                             .call(actor:, session: session(question_count: total, kind:, status:), essential_id: 9)
       end
 
-      test "bornes du barème : 49 rien, 50 Bronze, 69 Bronze, 70 Argent, 79 Argent, 80 Or, 99 Or, 100 Diamant" do
-        { 49 => nil, 50 => :bronze, 69 => :bronze, 70 => :silver, 79 => :silver, 80 => :gold, 99 => :gold, 100 => :diamond }
+      # ADR-0106 : le palier se lit sur la note affichée (10, 14 et 16/20), le Diamant reste le sans-faute.
+      test "bornes du barème : 47 rien, 48 Bronze, 67 Bronze, 68 Argent, 77 Argent, 78 Or, 99 Or, 100 Diamant" do
+        { 47 => nil, 48 => :bronze, 67 => :bronze, 68 => :silver, 77 => :silver, 78 => :gold, 99 => :gold, 100 => :diamond }
           .each do |score, level|
             row = close(correct: score).value
 

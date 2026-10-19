@@ -96,12 +96,15 @@ module Finitions
       within "main" do
         assert_selector "nav", count: 1
         assert_selector "nav[aria-label='#{t('components.back_link.label')}'] a[href='#{courses_path}']",
-                        text: t("catalog.courses.show.back")
+                        text: "Cours"
         assert_no_link "SVT"
+        # UDR-0130 : la liste des fiches de révision d'une fiche de cours.
+        assert_selector "#course_essentials_title", text: "Révisions de la leçon"
       end
-      within("main nav") { click_on t("catalog.courses.show.back") }
+      within("main nav") { click_on "Cours" }
       assert_current_path courses_path
       assert_title "Cours · Élève · Lnclass"
+      assert_selector "#courses_total", text: /\A\d+ fiches? de cours\z/
     end
 
     # UDR-0058 §3.3 (R4) : l'aide « Badges » / « Maîtrise » quitte l'accueil ; la page de l'exercice les explique.
@@ -131,6 +134,7 @@ module Finitions
 
       visit course_essential_path(@course.slug, @essential.slug)
       assert_title "La méiose · Élève · Lnclass"
+      assert_selector "#essential_header p", exact_text: "Fiche de révision"
       click_on "Génétique et évolution"
       assert_current_path course_path(@course.slug)
 
@@ -141,8 +145,8 @@ module Finitions
       visit exercise_path(@exercise.public_id)
       assert_title "Méiose et ADN · Élève · Lnclass"
       within "#student_progress" do
-        assert_info_tip t("assessment.exercises.student_progress.mastery"), t("shared.info_tips.mastery")
-        assert_info_tip t("assessment.exercises.student_progress.badge"), t("shared.info_tips.badges")
+        assert_info_tip t("assessment.exercises.student_progress.mastery"), ApplicationController.helpers.mastery_tip
+        assert_info_tip t("assessment.exercises.student_progress.badge"), ApplicationController.helpers.badges_tip
       end
       click_on "La méiose", match: :first
       assert_current_path course_essential_path(@course.slug, @essential.slug)
@@ -150,8 +154,8 @@ module Finitions
       visit exercise_session_result_path(session.public_id)
       assert_title "Résultat de Méiose et ADN · Élève · Lnclass"
       assert_link "La méiose", href: course_essential_path(@course.slug, @essential.slug)
-      assert_info_tip t("assessment.session_results.show.mastery"), t("shared.info_tips.mastery")
-      within("#session_badge") { assert_info_tip t("assessment.session_results.badge.help"), t("shared.info_tips.badges") }
+      assert_info_tip t("assessment.session_results.show.mastery"), ApplicationController.helpers.mastery_tip
+      within("#session_badge") { assert_info_tip t("assessment.session_results.badge.help"), ApplicationController.helpers.badges_tip }
 
       started = create_exercise_session(student: @student, exercise: @exercise)
       visit exercise_session_path(started.public_id)

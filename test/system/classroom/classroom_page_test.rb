@@ -134,8 +134,11 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     within("#pending_students") { assert_text "Awa Bamba" }
 
     click_on "Tle D 1"
+    # UDR-0130 : la section de la classe nomme l'objet, la page de la fiche de cours liste ses révisions.
+    within("#classroom_courses") { assert_selector "h2", text: "Fiches de cours" }
     within("#classroom_courses") { click_on "La cellule" }
     assert_current_path classroom_course_path(@classroom.public_id, tle_course.slug)
+    assert_selector "#classroom_course_essentials_title", text: "Révisions de la leçon"
     assert_selector "#classroom_course_essentials a", text: "La mitose"
   end
 

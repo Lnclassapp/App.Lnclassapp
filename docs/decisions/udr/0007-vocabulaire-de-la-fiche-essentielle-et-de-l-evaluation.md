@@ -1,7 +1,7 @@
 # UDR-0007 : Vocabulaire d'interface — « Fiche essentielle », « Exercice », « Session », « Tentative », quatre badges, jamais « Quiz »
 <!-- index
 titre: Vocabulaire de la fiche essentielle et de l'évaluation
-statut: Accepté
+statut: Accepté · `Essential` remplacé par 0130
 adr-lie: —
 problematique: remplace le vocabulaire des UDR-0001 et 0003
 -->
@@ -12,7 +12,9 @@ problematique: remplace le vocabulaire des UDR-0001 et 0003
 | **Date** | 2026-09-25 |
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-32**, étendue à C-48 ; bloque la V1 (Lot B) |
 | **ADR lié** | [ADR-0033](../adr/0033-bareme-des-badges-et-seuils-pedagogiques.md) (noms des badges) · [ADR-0054](../adr/0054-moteur-d-evaluation-soumission-et-cloture.md) (sessions et tentatives) · [ADR-0053](../adr/0053-validation-collaborative-requalifiee.md) (aucun label de conformité) |
-| **Remplacé par** | — |
+| **Remplacé par** | [UDR-0130](0130-vocabulaire-fiche-de-cours-et-fiche-de-revision.md) **pour la ligne `Essential` et l'amendement du 2026-09-30** ; le reste fait foi |
+
+> **Remplacée en partie (2026-10-12).** « Fiche essentielle » devient « Fiche de révision » et « Cours » devient « Fiche de cours » : voir l'[UDR-0130](0130-vocabulaire-fiche-de-cours-et-fiche-de-revision.md). Exercice, session, tentative, proposition et badges restent régis ici.
 
 ---
 

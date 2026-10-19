@@ -56,6 +56,7 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
     get levels_path
 
     assert_select "#levels tr", 2
+    assert_select "th[scope=col]", text: "Fiches de cours" # UDR-0130 §3
     assert_select "#levels tr:first-child#level_6eme", text: /6ème\s+6eme\s+1\s+#{tl('cycles.first')}/
     assert_select "#level_tle", text: /#{tl('cycles.second')}\s+D\s+1\s+0/
     assert_select "#level_tle [role=menu] a[role=menuitem][data-turbo-frame=modal][href='#{edit_level_path('tle')}']", text: including(tl("level_row.edit"))
@@ -265,7 +266,7 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "turbo-stream[action=append][target=toasts] [role=alert]", text: including(tl("destroy.referenced_title"))
     assert_select "turbo-stream[action=append][target=toasts] [role=alert]",
-                  text: including(tl("destroy.referenced", name: "Tle", usage: "1 série, 1 classe et 1 cours"))
+                  text: including(tl("destroy.referenced", name: "Tle", usage: "1 série, 1 classe et 1 fiche de cours"))
     assert_select "turbo-stream[action=replace][target=level_tle] tr#level_tle"
     assert_select "turbo-stream[action=remove]", 0
     assert_equal [ 1, 1, 1, 1 ], [ Orm::Level.count, Orm::LevelSeries.count, Orm::Classroom.count, Orm::Course.count ]
@@ -282,6 +283,6 @@ class Teams::LevelsControllerTest < ActionDispatch::IntegrationTest
 
     delete level_path("tle")
     assert_redirected_to levels_path
-    assert_equal tl("destroy.referenced_alert", name: "Tle", usage: "1 cours"), flash[:alert]
+    assert_equal tl("destroy.referenced_alert", name: "Tle", usage: "1 fiche de cours"), flash[:alert]
   end
 end

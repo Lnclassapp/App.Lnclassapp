@@ -50,6 +50,16 @@ class Communication::MissionPageTest < ActionDispatch::IntegrationTest
     assert_select "section[aria-labelledby='comment-nous-le-faisons'] li", text: /^Sans traceur/
   end
 
+  # UDR-0130 §2 : la mission nomme les fiches de cours et les fiches de révision ; « comprendre leurs cours » reste.
+  test "the mission names « fiches de cours, fiches de révision et exercices », never « essentielle »" do
+    get mission_path
+
+    assert_select "section[aria-labelledby='ce-que-nous-faisons'] li", text: /fiches de cours, fiches de révision et exercices/
+    assert_select "section[aria-labelledby='pour-qui'] li", text: /avec les fiches de révision/
+    assert_select "section[aria-labelledby='faire-comprendre'] p", text: /à comprendre leurs cours/
+    assert_no_match(/essentielle/i, response.body)
+  end
+
   private
 
   def sections = I18n.t("communication.pages.mission.sections", locale: :fr)
