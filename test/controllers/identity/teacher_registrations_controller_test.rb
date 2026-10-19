@@ -88,6 +88,28 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert cookies[:session_token].present?
   end
 
+  # EPM-02, EPM-03 (UDR-0125 §3.1): « Autre matière (facultatif) », right after the subject, not required.
+  test "EPM-02: a second subject is offered, optional, and saved after the first in the school of the sign-up" do
+    pc = create_material(name: "Physique-Chimie", shortname: "PC")
+    get new_teacher_registration_path
+
+    assert_select "select[name='teacher_registration[second_material_slug]']:not([required]) option[value='']", text: "Aucune autre matière"
+    assert_select "label[for=teacher_registration_second_material_slug]", text: /Autre matière \(facultatif\)/
+
+    post teacher_registrations_path, params: { teacher_registration: registration_params(material_slug: pc.slug, second_material_slug: @material.slug) }
+
+    assert_redirected_to teacher_classrooms_path
+    assert_equal [ [ @school.id, pc.id ], [ @school.id, @material.id ] ],
+                 Orm::TeacherSchoolMaterial.where(teacher: new_teacher).in_order.pluck(:school_id, :material_id)
+  end
+
+  test "EPM-03: an unknown second subject is refused in 422 under its field, both lists kept" do
+    post teacher_registrations_path, params: { teacher_registration: registration_params(second_material_slug: "latin") }
+
+    assert_refused :second_material_slug, "Cette matière n'existe pas. Choisissez-en une autre."
+    assert_select "select[name='teacher_registration[material_slug]'] option[selected][value='#{@material.slug}']"
+  end
+
   test "IE-03: the name and the first names are saved as typed, spaces reduced, case kept" do
     post teacher_registrations_path,
          params: { teacher_registration: registration_params(last_name: " N'GUESSAN ", first_name: "Konan  Jean-Baptiste") }

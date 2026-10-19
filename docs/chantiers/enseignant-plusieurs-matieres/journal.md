@@ -19,6 +19,9 @@
 
 ## Ce qui a dérapé
 
+- Lot A : la ligne de détail de l'en-tête est rendue dans la barre latérale sur ordinateur, pas dans `header` ; et `click_on` de Capybara ne lit pas `aria-label` : le test système vise le lien par son attribut.
+- Lot A : les fabriques rangeaient les matières **après** `Time.current` ; une matière ajoutée ensuite par `replace` passait devant. Elles les rangent désormais dans la seconde qui précède.
+
 - `origin/Develop` a avancé pendant le cadrage (fusion des cadrages `multi-etablissements-enseignant` et `espace-direction`) : la branche a été avancée en avance rapide avant d'écrire, pour lire l'ADR-0094 réellement fusionné.
 
 ## Migration en production

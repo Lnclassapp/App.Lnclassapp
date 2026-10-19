@@ -1,0 +1,25 @@
+# Profil : « Mes matières » de l'enseignant, dans son établissement courant (chantier enseignant-plusieurs-matieres, Lot A) — ADR-0103, UDR-0125
+fr:
+  activemodel:
+    attributes:
+      dtos/identity/teacher_materials_input:
+        material_slugs: "Les matières que vous enseignez"
+    errors:
+      models:
+        dtos/identity/teacher_materials_input:
+          attributes:
+            material_slugs:
+              blank: "Gardez au moins une matière."
+              too_many: "3 matières au plus."
+              inclusion: "Cette matière n'existe plus. Rechargez la page."
+  identity:
+    profile_materials:
+      edit:
+        title: "Mes matières"
+        label: "Les matières que vous enseignez"
+        hint: "1 à 3 matières, pour %{school}. Votre catalogue, vos classes et votre accueil y montrent les cours de chacune."
+        kept_assignments: "Retirer une matière ne retire pas les exercices déjà assignés."
+        submit: "Enregistrer"
+        cancel: "Annuler"
+      update:
+        updated: "Vos matières sont enregistrées."

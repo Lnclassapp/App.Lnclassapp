@@ -59,7 +59,10 @@ module Factories
     # ADR-0103: replaces the teacher's subjects in that school, in the given order.
     def set_teacher_materials(teacher, school, materials, at: Time.current)
       Orm::TeacherSchoolMaterial.where(teacher:, school:).delete_all
-      materials.each_with_index { |material, index| Orm::TeacherSchoolMaterial.create!(teacher:, school:, material:, created_at: at + index.seconds) }
+      # Ranked by the second before `at`: a later write (`replace`, at `Time.current`) comes after them.
+      materials.each_with_index do |material, index|
+        Orm::TeacherSchoolMaterial.create!(teacher:, school:, material:, created_at: at - (materials.size - index).seconds)
+      end
     end
 
     # ADR-0065: a direction account attached to its school, signing in by PIN alone. ADR-0077: joined by invitation or
