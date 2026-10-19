@@ -102,9 +102,11 @@ class School::CurrentSchoolIsolationTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "a classroom of B, its exercise to follow and its announcement are refused from A, and nothing is written" do
+  # rapports-de-classe (ADR-0097 §4.2) : la fiche d'un élève suit ReadClassroomPolicy, donc l'établissement courant.
+  test "a classroom of B, its exercise to follow, a student's file and its announcement are refused from A, and nothing is written" do
+    student = create_student(classroom: @b4, first_name: "Aya", last_name: "Saint-Michel")
     [ classroom_path(@b4.public_id), classroom_assignment_path(@b4.public_id, @assignment.public_id),
-      new_classroom_assignment_path(@b4.public_id) ].each do |path|
+      new_classroom_assignment_path(@b4.public_id), classroom_student_path(@b4.public_id, student.public_id) ].each do |path|
       get path
       assert_redirected_to teacher_home_path, path
       assert_equal I18n.t("errors.codes.other_school"), flash[:alert]

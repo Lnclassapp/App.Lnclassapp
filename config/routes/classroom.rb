@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes du contexte classroom
-# Rôle : inscription de l'élève, adhésion par lien, lien d'une classe, retrait d'un élève, accueils élève et enseignant, historique de l'élève, page de classe, assignations, jours de séance et suivi
-# ADR  : 0030, 0036, 0040, 0041, 0048, 0072, 0084, 0085, 0086, 0095
+# Rôle : inscription de l'élève, adhésion par lien, lien d'une classe, fiche et retrait d'un élève, accueils élève et enseignant, historique de l'élève, page de classe, assignations, jours de séance et suivi
+# ADR  : 0030, 0036, 0040, 0041, 0048, 0072, 0084, 0085, 0086, 0095, 0097
 # IL-02 (ADR-0085, Lot F) : plus de code de classe ; l'ancienne entrée mène à l'inscription élève.
 get "join", to: redirect("/student-signup")
 get "c/:code", to: "classroom/joins#new", as: :join_classroom
@@ -32,9 +32,10 @@ post "teachers/onboarding", to: "classroom/teacher_onboardings#create", as: :tea
 
 get "classrooms/:public_id", to: "classroom/classrooms#show", as: :classroom
 # ADR-0085 §4.1, §4.5 : changer le lien de la classe, retirer un élève (ManageClassroomMembersPolicy).
+# ADR-0097 §4.1 : la fiche d'un élève dans sa classe, au même chemin que son retrait.
 patch "classrooms/:public_id/link", to: "classroom/classroom_links#update", as: :classroom_link
-delete "classrooms/:classroom_public_id/students/:student_public_id", to: "classroom/classroom_students#destroy",
-                                                                      as: :classroom_student
+get "classrooms/:classroom_public_id/students/:student_public_id", to: "classroom/classroom_students#show", as: :classroom_student
+delete "classrooms/:classroom_public_id/students/:student_public_id", to: "classroom/classroom_students#destroy"
 get "classrooms/:classroom_public_id/courses/:course_slug", to: "classroom/classroom_courses#show", as: :classroom_course
 get "classrooms/:classroom_public_id/courses/:course_slug/essentials/:essential_slug",
     to: "classroom/classroom_essentials#show", as: :classroom_essential

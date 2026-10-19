@@ -134,6 +134,29 @@ Scénario: budget
 
 ### Page de la classe : liste des élèves (Lot B)
 
+> **Amendé le 2026-10-16 (réponse du porteur à Q5)** : la liste se découpe par note sur 20 (UDR-0108 §3.8). Les scénarios
+> « 30 élèves par page » valent à l'intérieur d'un groupe ; les scénarios ci-dessous les complètent.
+
+```gherkin
+Scénario: la liste par note sur 20
+  Étant donné une classe où 1 élève a 12/20 (moyenne de ses meilleurs scores aux exercices assignés), 1 a 19/20 et 1 n'a rien fait
+  Quand l'enseignant ouvre la page de la classe
+  Alors le sélecteur montre « 0 à 10 · 0 », « 11 à 15 · 1 », « 16 à 20 · 1 », « Pas encore de note · 1 »
+  Et le groupe « 11 à 15 », premier non vide depuis 0–10, est ouvert
+  Et chaque groupe est un lien (?note=0-10) qui marche sans JavaScript
+
+Scénario: la note ne lit que les exercices assignés de la classe
+  Étant donné une session faite seul, une session d'un exercice retiré, une session de la même assignation d'une autre classe
+  Alors aucune ne compte dans la note ; une remédiation sur l'exercice assigné compte
+
+Scénario: la recherche porte sur toute la classe
+  Quand l'enseignant cherche « kon »
+  Alors la liste montre les élèves de toute la classe dont le nom contient « kon », sans groupe courant
+
+Scénario: pas de moyenne de classe
+  Alors la page ne montre aucune moyenne de la classe
+```
+
 ```gherkin
 Scénario: le nom mène à la fiche
   Quand l'enseignant touche le nom d'un élève dans la liste
@@ -244,9 +267,9 @@ Scénario: les lectures existantes ne bougent pas
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Page de la classe, 55 élèves et 7 exercices (jeu ADR-0067) : HTML | 231,6 Ko (`rapports-exercices`) ; à re-mesurer au Lot B | < 150 Ko | |
-| Page de la classe : p95 serveur | 153,4 ms ; à re-mesurer au Lot B | < 100 ms visé ; au moins pas pire | |
-| Fiche d'un élève, 10 exercices assignés : p95 / HTML | — | < 100 ms / < 150 Ko | |
-| Requêtes SQL de la fiche à 1 et à 10 exercices | — | même nombre | |
-| Page de suivi : p95 / HTML | 78,9 ms / 39,0 Ko | < 100 ms / < 150 Ko | |
-| Téléphone 390 px : fiche, page de la classe, suivi | — | aucun défilement horizontal | |
+| Page de la classe, 55 élèves et 7 exercices (jeu ADR-0067) : HTML | 231,6 Ko (`rapports-exercices`) ; 402,2 Ko re-mesurés au Lot 0 | < 150 Ko | 114,2 Ko (journal) |
+| Page de la classe : p95 serveur | 153,4 ms ; 138,6 ms au Lot 0 | < 100 ms visé ; au moins pas pire | 151,8 ms sur machine chargée (charge ≈ 16) : à re-mesurer au calme ; vue p50 de 54,3 à 28,5 ms |
+| Fiche d'un élève, 10 exercices assignés : p95 / HTML | — | < 100 ms / < 150 Ko | 49,0 ms / 55,4 Ko (8 exercices actifs, journal) |
+| Requêtes SQL de la fiche à 1 et à 10 exercices | — | même nombre | même nombre (`student_file_query_test.rb`) |
+| Page de suivi : p95 / HTML | 78,9 ms / 39,0 Ko | < 100 ms / < 150 Ko | 60,5 Ko ; p95 non lisible (charge ≈ 30), 54,4 ms au Lot 0 |
+| Téléphone 390 px : fiche, page de la classe, suivi | — | aucun défilement horizontal | aucun (tests système et captures) |

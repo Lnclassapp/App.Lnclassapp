@@ -1,6 +1,6 @@
 # 🌐 UI · Assessment::ComprehensionHelper — couleur, icône et libellé de la compréhension d'un exercice assigné
 # Rôle : seul endroit où une catégorie ou un signe de progrès devient une classe, une icône ou un texte (écrans enseignant)
-# ADR  : 0033, 0079 · UDR : 0072 (§3.2, §3.3)
+# ADR  : 0033, 0079, 0097 (§4.6) · UDR : 0072 (§3.2, §3.3), 0109 (§3.2)
 module Assessment
   module ComprehensionHelper
     DOT_CLASSES = { struggling: "bg-struggling", fragile: "bg-fragile", acquired: "bg-success" }.freeze
@@ -34,6 +34,30 @@ module Assessment
 
     def trend_label(trend)
       t("assessment.comprehension.trends.#{trend || :single}")
+    end
+
+    # AS-23 (ADR-0097 §4.6, UDR-0109 §3.2) : le prochain geste d'une lecture (ComprehensionDetailQuery::Detail), choisi par le
+    # domaine ; la vue ne fait que le traduire. → [ symbole, interpolations de assessment.comprehension.next_step.* ] | nil
+    def comprehension_next_step(comprehension)
+      pending = comprehension.present - comprehension.done
+      decline = comprehension.trend_counts.fetch(:decline)
+      step = Entities::Assessment::NextStep.for(done: comprehension.done, pending:, readable: comprehension.readable,
+                                                dominant: comprehension.category, decline:)
+      case step
+      when nil then nil
+      when :remind then [ step, { count: pending, min: Entities::Assessment::Comprehension::MIN_DONE_FOR_READING } ]
+      when :watch_decline then [ step, { count: decline } ]
+      else [ step, {} ]
+      end
+    end
+
+    # UDR-0109 §3.1 : le nom d'un élève du suivi mène à sa fiche dans la classe, hors du cadre des catégories (_top). Le suivi
+    # d'une classe archivée répond 404 (ADR-0088, PR 251), comme sa fiche : le lien vise toujours une fiche lisible.
+    # student : répond à display_name et public_id.
+    def comprehension_student_name(student, classroom)
+      link_to student.display_name, classroom_student_path(classroom.public_id, student.public_id), data: { turbo_frame: "_top" },
+              class: "min-w-0 truncate font-medium block py-1 text-ink underline-offset-4 hover:underline " \
+                     "focus-visible:outline-2 focus-visible:outline-brand"
     end
 
     def comprehension_badge_class(level, count)

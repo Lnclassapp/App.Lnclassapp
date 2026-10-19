@@ -209,6 +209,13 @@ module Queries
                      detail(category: :acquired).students.map { [ it.display_name, it.trend ] }
       end
 
+      # ADR-0097 §4.9 : le nom d'un élève d'une catégorie mène à sa fiche, par son public_id.
+      test "a student of a category carries his public_id" do
+        awa = student("Awa", "Bamba", scores: [ 55 ])
+
+        assert_equal [ awa.public_id ], detail(category: :fragile).students.map(&:public_id)
+      end
+
       # Stagnant means a best score under MASTERY_THRESHOLD, stable one from it: they never share a category. The single
       # session sits between declining and stable in the same list, whatever the names say.
       test "in one list, the single session comes after declining and before stable and progressing, against the name order" do

@@ -17,6 +17,7 @@
 # La page d'un niveau de la direction est lue sur son niveau le plus fourni en classes.
 # Le suivi d'un exercice assigné (UDR-0072, ADR-0079) est lu sur l'assignation active la plus faite de la classe mesurée :
 # la page entière, puis le seul cadre d'une catégorie choisie (Turbo-Frame comprehension_frame).
+# La fiche d'un élève (ADR-0097, UDR-0107) est lue sur l'élève présent de la classe mesurée qui a le plus de sessions.
 require "json"
 require "zlib"
 
@@ -89,6 +90,9 @@ module PerfScreens
     follow_up = Orm::ClassroomAssignment.where(classroom: teacher_classroom, status: "active")
                                         .order(Arel.sql("#{done} DESC"), :id).pick(:public_id)
     follow_up_path = "/classrooms/#{teacher_classroom.public_id}/assignments/#{follow_up}"
+    sessions = "(SELECT COUNT(*) FROM exercise_sessions s WHERE s.student_id = classroom_students.student_id)"
+    file_student = Orm::ClassroomStudent.joins(:student).where(classroom: teacher_classroom, left_at: nil, users: { anonymized_at: nil })
+                                        .order(Arel.sql("#{sessions} DESC"), :id).pick("users.public_id")
     article = Orm::Article.where(status: "published").order(published_at: :desc, id: :desc).pick(:slug) or
       raise "aucun article publié : semer le jeu (script/perf/seed_dataset.rb)"
     [
@@ -110,6 +114,7 @@ module PerfScreens
       [ "classroom_show", :teacher, "/classrooms/#{teacher_classroom.public_id}" ],
       [ "assignment_follow_up", :teacher, follow_up_path ],
       [ "assignment_follow_up_fragile", :teacher, "#{follow_up_path}?category=fragile", { "Turbo-Frame" => "comprehension_frame" } ],
+      [ "student_file", :teacher, "/classrooms/#{teacher_classroom.public_id}/students/#{file_student}" ],
       [ "classroom_course", :teacher, "/classrooms/#{teacher_classroom.public_id}/courses/#{course.slug}" ],
       [ "course_assignments", :teacher, "/courses/#{course.slug}/assignments" ],
       [ "courses_teacher", :teacher, "/courses" ],

@@ -61,6 +61,9 @@ Trois lots verticaux après le socle : **trois agents** en parallèle.
 
 ## Lot B — Liste des élèves : le nom mène à la fiche, trente par trente (CL-15)
 
+> **Amendé le 2026-10-16 (porteur, Q5)** : la liste se découpe d'abord par note sur 20 (UDR-0108 §3.8). Fichier de plus :
+> `app/domain/entities/classroom/roster_grade.rb` (règle des groupes) et son test `test/domain/entities/classroom/roster_grade_test.rb`.
+
 - **Couche**       : infrastructure + delivery + ui
 - **Fichiers**     : `app/infrastructure/queries/classroom/classroom_overview_query.rb` *(pagination cumulative `PER_PAGE = 30`, `students_total`, lectures par élève sur les seules lignes rendues — ADR-0097 §4.7)*
                      `app/controllers/classroom/classrooms_controller.rb` *(lit `page`, entier ≥ 1, sinon 1 ; `@page`)*
@@ -132,10 +135,10 @@ Contrat partagé à surveiller : `destroy.turbo_stream.erb` rend `_roster` ; il 
 
 ## Portes de sortie
 
-- [ ] Q1 à Q8 répondues par le porteur, ADR-0097 et UDR-0107 à 0109 passés à « Accepté »
-- [ ] Tous les lots sont `Done`
-- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat (tests lancés, parcours refait dans l'application, à 390 px et à l'ordinateur)
-- [ ] Pureté du domaine, rubocop, tests, parcours système, brakeman : au vert (`bin/ci-quiet`, écrit dans la PR)
-- [ ] Budgets mesurés et consignés au journal (fiche, page de la classe, suivi)
-- [ ] ADR et UDR indexés au commit de clôture
-- [ ] `journal.md` complété
+- [x] Q1 à Q8 répondues par le porteur, ADR-0097 et UDR-0107 à 0109 passés à « Accepté »
+- [x] Tous les lots sont `Done`
+- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat (tests lancés, parcours refait dans l'application, à 390 px et à l'ordinateur) — **reste à faire** : recette par le porteur sur les captures et en `Develop`
+- [x] Pureté du domaine, rubocop, tests, parcours système, brakeman : au vert (`bin/ci-quiet`, écrit dans la PR)
+- [x] Budgets mesurés et consignés au journal (fiche, page de la classe, suivi)
+- [x] ADR et UDR indexés au commit de clôture
+- [x] `journal.md` complété

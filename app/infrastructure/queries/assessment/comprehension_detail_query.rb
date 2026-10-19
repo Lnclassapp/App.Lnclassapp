@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Assessment::ComprehensionDetailQuery
 # Rôle : section « Compréhension » du suivi : catégories, signes, taux par question et élèves d'une catégorie (UDR-0072 §3.5)
-# ADR  : 0026, 0072, 0079 · appelée après FollowAssignmentPolicy seulement : elle nomme des élèves ; requêtes en nombre constant
+# ADR  : 0026, 0072, 0079, 0097 (§4.9) · après FollowAssignmentPolicy seulement : elle nomme des élèves ; requêtes en nombre constant
 module Queries
   module Assessment
     class ComprehensionDetailQuery
@@ -10,7 +10,8 @@ module Queries
       Detail = Data.define(:done, :present, :category, :readable, :category_counts, :trend_counts, :selected, :questions, :students)
       # rate, first_rate : pourcentages arrondis, nil sans tentative ; first_rate nil aussi sans élève à deux sessions.
       QuestionRate = Data.define(:number, :content, :rate, :first_rate, :to_revisit)
-      StudentRow = Data.define(:display_name, :best, :trend)
+      # public_id : celui de l'élève, le lien vers sa fiche dans la classe (ADR-0097 §4.9).
+      StudentRow = Data.define(:public_id, :display_name, :best, :trend)
 
       # « Sans évolution » regroupe stable et stagne ; les élèves sans signe n'entrent pas dans la synthèse (ADR-0079 §4.3).
       TREND_GROUPS = { progress: :progress, stable: :flat, stagnant: :flat, decline: :decline }.freeze
@@ -70,10 +71,11 @@ module Queries
       # Ceux qui ont le plus besoin de l'enseignant d'abord (ADR-0079 §4.7), puis par nom.
       def students(members)
         by_student = members.index_by(&:student_id)
-        Orm::User.where(id: by_student.keys).order(:last_name, :first_name, :id).pluck(:id, :first_name, :last_name)
-                 .map do |id, first_name, last_name|
+        Orm::User.where(id: by_student.keys).order(:last_name, :first_name, :id).pluck(:id, :public_id, :first_name, :last_name)
+                 .map do |id, public_id, first_name, last_name|
                    scores = by_student.fetch(id).scores
-                   StudentRow.new(display_name: "#{first_name} #{last_name}", best: scores.max, trend: Comprehension.trend_for(scores))
+                   StudentRow.new(public_id:, display_name: "#{first_name} #{last_name}", best: scores.max,
+                                  trend: Comprehension.trend_for(scores))
                  end
                  .each_with_index.sort_by { |row, rank| [ Comprehension::TREND_ORDER.index(row.trend), rank ] }.map(&:first)
       end

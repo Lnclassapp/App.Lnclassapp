@@ -6,6 +6,7 @@ require "application_system_test_case"
 # and a second removal closes the standard way again.
 class Classroom::StudentRemovalTest < ApplicationSystemTestCase
   ROSTER = "classroom.classrooms.roster".freeze
+  FILE = "classroom.classroom_students.manage".freeze
   CHOICE = "classroom.student_classroom_choices.new".freeze
   CHOICE_ERRORS = "activemodel.errors.models.dtos/classroom/student_registration_input.attributes.base".freeze
 
@@ -77,13 +78,16 @@ class Classroom::StudentRemovalTest < ApplicationSystemTestCase
 
   private
 
-  # From the classroom page: the ⋮ menu of Koffi's row, then the confirmation; the row leaves and the count drops.
+  # From the classroom page: Koffi's name opens his file (rapports-de-classe, memo Q4), « Retirer de la classe » there, then
+  # the confirmation; back on the classroom page, the row is gone and the count drops.
   def remove_koffi
     visit classroom_path(@classroom.public_id)
     assert_selector "#classroom_roster_count", text: "2"
-    click_menu_action("#student_#{@koffi.public_id}", I18n.t("#{ROSTER}.remove"))
-    within("dialog#remove-student-#{@koffi.public_id}") { click_on I18n.t("#{ROSTER}.remove_confirm") }
+    within("#student_#{@koffi.public_id}") { find("a[href*='/students/']").click }
+    click_on I18n.t("#{FILE}.remove")
+    within("dialog#remove-student-#{@koffi.public_id}") { click_on I18n.t("#{FILE}.remove_confirm") }
 
+    assert_current_path classroom_path(@classroom.public_id)
     assert_toast I18n.t("#{ROSTER}.removed", name: "Koffi YAO")
     assert_no_selector "#student_#{@koffi.public_id}"
     assert_selector "#classroom_roster_count", text: "1"

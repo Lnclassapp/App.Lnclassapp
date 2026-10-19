@@ -38,6 +38,21 @@ fr:
         count:
           one: "%{count} élève"
           other: "%{count} élèves"
+        # UDR-0108 §3.3 (ADR-0097 §4.7) : trente élèves, puis « Voir les 30 suivants ».
+        count_partial: "%{shown} sur %{total}"
+        # Décision du porteur du 2026-10-16 (UDR-0108 amendée) : la liste par note sur 20.
+        groups_label: "Élèves par note sur 20"
+        groups:
+          0-10: "0 à 10"
+          11-15: "11 à 15"
+          16-20: "16 à 20"
+          none: "Pas encore de note"
+        empty_group: "Aucun élève dans ce groupe"
+        grade_label: "Note"
+        grade: "%{grade}/20"
+        more:
+          one: "Voir le dernier"
+          other: "Voir les %{count} suivants"
         no_match: "Aucun élève ne correspond"
         clear_search: "Effacer la recherche"
         last_score: "Dernier score"
@@ -50,11 +65,9 @@ fr:
         self_practice_line: "Fait seul : %{count} cette semaine"
         # UDR-0079 §3.8 ter (memo Q23) : le numéro d'un élève est masqué pour tout lecteur de la classe.
         contact_masked: "Numéro masqué pour protéger les élèves"
-        issue_code: "Générer un code de récupération"
-        # UDR-0077 §3.4 : le menu ⋮ de la ligne d'un élève.
-        actions_label: "Actions pour %{name}"
-        issue_code_hint: "Un élève qui a perdu son code secret le réinitialise avec un code de récupération, valable 15 minutes."
-        # ADR-0085 §4.4, §4.5, UDR-0081 §3.7 : nouveaux arrivés (7 jours), voie d'arrivée, retrait d'un élève.
+        # ADR-0085 §4.4, §4.5, UDR-0081 §3.7 : nouveaux arrivés (7 jours), voie d'arrivée, retrait d'un élève. La liste de
+        # l'enseignant n'a plus de menu ⋮ (UDR-0108) ; le menu et la confirmation restent lus par la page de la classe de la
+        # direction (school_admin/classrooms/show).
         new: "Nouveau"
         new_count:
           one: "%{count} nouveau"
@@ -62,6 +75,7 @@ fr:
         via:
           standard: "Inscrit seul"
           link: "Par le lien"
+        actions_label: "Actions pour %{name}"
         remove: "Retirer de la classe"
         remove_title: "Retirer %{name} de la classe ?"
         remove_warning: "%{name} quittera cette classe. Son compte et son travail sont gardés. Il pourra revenir avec le lien de la classe."

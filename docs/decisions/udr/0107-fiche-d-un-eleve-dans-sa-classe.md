@@ -1,14 +1,14 @@
 # UDR-0107 : Fiche d'un élève dans sa classe — en-tête, trois chiffres et badges, exercices de la classe, « fait seul », gérer
 <!-- index
 titre: Fiche d'un élève dans sa classe
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-16)*
 adr-lie: [0097](../adr/0097-fiche-d-un-eleve-dans-sa-classe.md)
 problematique: Enseignant de la classe et équipe : une page par élève présent (`/classrooms/:id/students/:id`) ; carte d'en-tête (photo, nom, numéro masqué, arrivée), trois chiffres et badges de la classe, exercices assignés avec état, meilleur score, catégorie, signe et lien vers la meilleure session, « fait seul » sur 30 jours, puis « Gérer » (code de récupération, retrait). Lisible sans JavaScript, une colonne au téléphone
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-16 : recommandations du memo, Q5 amendée) |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/rapports-de-classe`](../../chantiers/rapports-de-classe/prd.md) |
 | **ADR lié** | [ADR-0097](../adr/0097-fiche-d-un-eleve-dans-sa-classe.md) (ce que lit la fiche) · [ADR-0079](../adr/0079-lecture-de-la-comprehension-d-un-exercice-assigne.md) (catégorie, signe) · [ADR-0072](../adr/0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (fait, retard) |
