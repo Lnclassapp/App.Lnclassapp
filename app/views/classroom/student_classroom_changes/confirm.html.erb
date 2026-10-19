@@ -1,0 +1,72 @@
+<%# 🌐 UI · classroom/student_classroom_changes/confirm — « Changer de classe ? » : ce que l'élève quitte, ce qu'il rejoint, ce qui le suit %>
+<%# Rôle : bloc « de → vers » (dl), ce qui suit l'élève, ce qu'il quitte ; « Oui, changer de classe » (POST, champs reçus en caché) ou « Annuler » %>
+<%# ADR  : 0095 · UDR : 0102 (§3.2, §3.3, §3.7) %>
+<% page_title t(".page_title") %>
+<% via_link = @form.link_token.present? %>
+<% other_school = @destination.school_public_id != @current.school_public_id %>
+<% sides = [ [ :leaving, @current, "bg-white", "text-ink" ], [ :joining, @destination, "bg-brand-soft", "text-brand-strong" ] ] %>
+<div class="grid w-full max-w-160 grid-cols-1">
+  <%= ui_page_header title: t(".title") %>
+
+  <%= ui_card padding: :md do %>
+    <dl class="flex flex-col gap-2">
+      <% sides.each_with_index do |(key, side, background, color), index| %>
+        <% if index.positive? %>
+          <div class="flex justify-center text-mute" aria-hidden="true"><%= ui_icon "arrow-down", variant: :mini %></div>
+        <% end %>
+        <div class="flex flex-col">
+          <dt class="px-4 text-sm font-medium text-mute"><%= t(".#{key}") %></dt>
+          <dd class="<%= class_names("mt-1 rounded-ln px-4 py-3", background) %>">
+            <span class="flex flex-wrap items-center gap-2">
+              <span class="<%= class_names("font-display text-lg leading-tight font-bold", color) %>"><%= side.name %></span>
+              <% if key == :joining && other_school %>
+                <%= ui_badge t(".other_school"), tone: :brand, size: :sm %>
+              <% end %>
+            </span>
+            <span class="mt-0.5 block text-sm text-mute"><%= t(".details", level: side.level_name, school: side.school_name) %></span>
+            <% if key == :joining && via_link %>
+              <span class="mt-0.5 block text-xs text-mute"><%= t(".via_link") %></span>
+            <% end %>
+          </dd>
+        </div>
+      <% end %>
+    </dl>
+  <% end %>
+
+  <section class="mt-6" aria-labelledby="classroom-change-follows">
+    <h2 id="classroom-change-follows" class="font-display text-base font-bold text-ink"><%= t(".follows_title") %></h2>
+    <ul class="mt-2 space-y-2">
+      <% %i[results gaps account].each do |key| %>
+        <li class="flex items-start gap-2 text-sm text-ink">
+          <%= ui_icon "check-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-success" %><%= t(".follows.#{key}") %>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+
+  <section class="mt-6" aria-labelledby="classroom-change-leaves">
+    <h2 id="classroom-change-leaves" class="font-display text-base font-bold text-ink"><%= t(".leaves_title") %></h2>
+    <ul class="mt-2 space-y-2">
+      <% %i[work teacher].each do |key| %>
+        <li class="flex items-start gap-2 text-sm text-ink">
+          <%= ui_icon "information-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-mute" %><%= t(".leaves.#{key}", classroom: @current.name) %>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+
+  <%# UDR-0102 §3.2 : seul ce bouton écrit ; les champs reçus repartent tels quels, la classe est relue par ChangeClassroom. %>
+  <%= form_with url: student_classroom_change_path, method: :post, id: "student-classroom-change-confirm",
+                class: "mt-8 flex flex-col gap-3 sm:flex-row-reverse sm:justify-start" do %>
+    <% if via_link %>
+      <%= hidden_field_tag :link_token, @form.link_token %>
+    <% else %>
+      <% Classroom::StudentClassroomChangesController::FIELDS.each do |field| %>
+        <%= hidden_field_tag "student_classroom_change[#{field}]", @form.public_send(field), id: nil %>
+      <% end %>
+    <% end %>
+    <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, class: "w-full sm:w-auto" %>
+    <%= ui_button t(".cancel"), variant: :ghost, size: :lg, href: via_link ? student_home_path : new_student_classroom_change_path,
+                                class: "w-full sm:w-auto" %>
+  <% end %>
+</div>

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::ClassroomDesignation
-# Rôle : la classe que désigne un élève, celle d'un lien valide ou celle choisie dans la cascade, et sa voie ; règle commune à RegisterStudent et JoinAsStudent
-# ADR  : 0040, 0041, 0085, 0088 · UDR : 0081
+# Rôle : la classe que désigne un élève, celle d'un lien valide ou celle choisie dans la cascade, et sa voie ; règle commune à RegisterStudent, JoinAsStudent et ChangeClassroom
+# ADR  : 0040, 0041, 0085, 0088, 0095 · UDR : 0081
 module UseCases
   module Classroom
     class ClassroomDesignation
@@ -16,6 +16,15 @@ module UseCases
         @schools = schools
         @taxonomy = taxonomy
         @clock = clock
+      end
+
+      # Avec un jeton, la classe du lien, qui ne retombe pas sur la cascade (ADR-0085 §4.1) ; sans, la classe choisie.
+      # ADR-0088 : le lien d'une classe archivée dit pourquoi il refuse ; tout autre lien mort reste inconnu.
+      # → Destination | failure(:invalid) | failure(:not_found) | failure(:forbidden, classroom_archived)
+      def designate(dto)
+        return chosen(dto) unless dto.link_token
+
+        linked(dto.link_token) || unavailable_link(dto.link_token)
       end
 
       # ADR-0085 §4.1 : le lien n'ouvre qu'une classe active d'un établissement actif, verrouillée (ADR-0041).
@@ -43,6 +52,12 @@ module UseCases
       end
 
       private
+
+      def unavailable_link(token)
+        return Shared::Result.failure(:not_found) unless archived_link?(token)
+
+        Shared::Result.failure(:forbidden, errors: { base: [ :classroom_archived ] })
+      end
 
       # Active, de l'année en cours, du niveau et de l'établissement envoyés, établissement actif.
       def listed?(classroom, dto)

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · School::LevelClassroomsController
 # Rôle : classes actives d'un niveau d'un établissement actif, publiques et limitées en débit : frame « picker_classrooms »
-# ADR  : 0026, 0050, 0062, 0085 · UDR : 0081
+# ADR  : 0026, 0050, 0062, 0085, 0095 · UDR : 0081, 0102
 module School
   class LevelClassroomsController < ApplicationController
     allow_unauthenticated_access
@@ -11,10 +11,13 @@ module School
     def index
       classrooms = Queries::Classroom::LevelClassroomsQuery.new.call(school_public_id: params[:school_public_id],
                                                                      level_slug: params[:level_slug])
-      render locals: { classrooms:, registration: nil, scope: DrenaSchoolsController.picker_scope(params[:scope]) }
+      render locals: { classrooms:, registration: nil, scope: DrenaSchoolsController.picker_scope(params[:scope]), current: }
     end
 
     private
+
+    # UDR-0102 §4 : la classe actuelle de l'élève qui change de classe, seulement pour désactiver sa case ; rien n'en est révélé.
+    def current = Dtos::Classroom::StudentRegistrationInput.new(classroom_public_id: params[:current]).classroom_public_id
 
     def refuse_too_many
       render :index, status: :too_many_requests, locals: { classrooms: [], registration: nil, rate_limited: true,

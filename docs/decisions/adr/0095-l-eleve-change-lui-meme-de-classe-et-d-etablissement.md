@@ -1,13 +1,13 @@
 # ADR-0095 : L'élève qui a une classe active en change lui-même, vers une classe de son établissement ou d'un autre, sans validation ; l'ancienne adhésion est close, jamais retirée
 <!-- index
 titre: L'élève change lui-même de classe ou d'établissement, sans validation ; l'ancienne adhésion est close, pas retirée
-statut: Proposé — *amende 0040 (élève connecté à classe active), 0085 §4.3 (JoinAsStudent)*
+statut: Accepté *(porteur, 2026-10-16)* — *amende 0040 (élève connecté à classe active), 0085 §4.3 (JoinAsStudent)*
 problematique: `UseCases::Classroom::ChangeClassroom` pour l'élève à classe active ; cascade ou lien ; confirmation explicite ; `left_at` sans `removed_at` sur l'ancienne adhésion, nouvelle adhésion principale dans la même transaction ; résultats sur l'élève ; trace `classroom.student_moved`
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté *(porteur, 2026-10-16 : recommandations du memo ; l'élève seul déclenche le changement)* |
 | **Date** | 2026-10-16 |
 | **Chantier** | [`docs/chantiers/changement-etablissement-eleve`](../../chantiers/changement-etablissement-eleve/memo.md) |
 | **Remplace** | — *(amende ADR-0040 §4 « Règles de la V1 » et §5 « Coûts consentis » ; ADR-0085 §4.3)* |
@@ -75,10 +75,13 @@ L'adhésion sait déjà tout ce qu'il faut : une ligne par élève et par classe
   - classe désignée = sa classe actuelle → `:invalid`, `base: [:same_classroom]` ;
   - `ClassroomDesignation` : classe hors cascade (`:invalid`), lien mort (`:not_found`), lien d'une classe archivée (`:forbidden`, `classroom_archived`) ;
   - `Policies::Classroom::JoinPolicy` inchangée : archivée, complète, retiré de cette classe sans le lien.
+- *Exécution (2026-10-16)* : la classe d'arrivée est désignée (et verrouillée) **avant** la lecture de la classe actuelle. Un second envoi simultané vers la même classe attend le premier sous le verrou, lit alors la nouvelle classe et reçoit `same_classroom` : rien de plus n'est écrit. L'élève sans classe active n'atteint pas l'envoi (le contrôleur le renvoie à « Choisis ta classe ») ; s'il l'atteint, une classe mal désignée passe avant `no_active_classroom`.
+- `ClassroomDesignation#designate(dto)` porte le choix « lien ou cascade » et le refus du lien mort ou archivé, partagés avec `JoinAsStudent`.
 - Dans une transaction, sous le verrou de la classe d'arrivée (pris par `ClassroomDesignation`) :
   1. `memberships.leave_primary(student_id:, at: now)` ;
   2. `memberships.add_primary(classroom_id:, student_id:, via:, at: now)` — rouvre une ancienne adhésion à cette classe s'il en a une ;
-  3. `audit_log.record(action: "classroom.student_moved", actor_id: élève, subject_type: "User", subject_id: élève, metadata: { from_classroom_public_id:, to_classroom_public_id:, from_school_public_id:, to_school_public_id:, via: })`.
+  3. `audit_log.record(action: "classroom.student_moved", actor_id: élève, subject_type: "User", subject_id: élève, metadata: { from_classroom_id:, to_classroom_id:, to_school_id:, via: })`.
+     *Exécution (2026-10-16)* : identifiants internes, comme les autres traces (`school_id` d'`invite_school_staff`) ; l'établissement de départ se lit par `from_classroom_id`. Les identifiants publics auraient demandé une lecture de plus de la classe quittée, que `MembershipRepositoryPort` ne donne pas.
 - Un échec de l'étape 2 annule l'étape 1 (même mécanisme `Aborted` que `JoinAsStudent`).
 - `→ success(Entities::Classroom::Classroom)` (la classe d'arrivée).
 - Le port `MembershipRepositoryPort` ne change pas. `Entities::Identity::AuditAction::ALL` reçoit `classroom.student_moved`.
@@ -179,6 +182,6 @@ post "students/classroom/change",         to: "classroom/student_classroom_chang
 - `test/system/classroom/classroom_change_test.rb` : parcours complet profil → choix → confirmation → accueil de la nouvelle classe ; l'ancienne classe ne le liste plus.
 - **Non vérifiable automatiquement** : qu'un élève qui saute de classe en classe soit repéré. La décision tient à la lecture du journal d'audit.
 
-## 8. Points à confirmer par le porteur
+## 8. Réponses du porteur
 
-Questions 1 à 9 du [memo](../../chantiers/changement-etablissement-eleve/memo.md#ce-que-le-grill-a-révélé). Une réponse différente de la recommandation change le §4 avant tout code.
+Le 2026-10-16, le porteur a accepté les recommandations des questions 1 à 9 du [memo](../../chantiers/changement-etablissement-eleve/memo.md#réponses-du-porteur-2026-10-16) : le changement de classe se fait **par l'élève lui-même seulement**, ni la direction ni l'enseignant n'ont ce geste.
