@@ -97,6 +97,8 @@ Si la requête 1 rend autre chose que 0 : ces lignes deviennent des établisseme
 
 Tests ajoutés aussi : plafond de 3 annonces par établissement (modification, publication programmée), `AuthoredMessagesQuery` par `school_id`, non-fuite d'un cours et d'un essentiel d'un niveau présent dans A et B, badge « Établissement secondaire », modale « Retirer », rôles refusés (`/i/<jeton>`, jonction, `current_schools`, `teacher_schools`), `rate_limit` de la jonction par lien, message du plafond, `joined_via` inchangé (ME-02), retour dans B après l'avoir quitté (ME-13). ADR-0094 §4.4, §4.5 et §6 mis à jour (signature du port, `lock_teacher`).
 
+FU-47 (`test/system/finitions/catalog_and_student_test.rb`) échouait aussi sur `Develop` (2 passages sur 3) : après « Tout voir », Turbo montre l'aperçu en cache de `/courses` (3 cours, champ encore rempli) avant la page reçue, et le test lisait la valeur du champ pendant l'aperçu. Le test attend désormais la page reçue (`html[data-turbo-preview]` absent, `assert_field … with: ""`).
+
 ## Clôture
 
 | | |
