@@ -48,6 +48,8 @@ Lot C : la page de suivi passe de 52,6 à 60,5 Ko (noms en liens, prochain geste
 - **Clôture — deux régressions du Lot B trouvées par `bin/ci-quiet`.** (1) Six clés du menu ⋮ supprimées de `classroom.classrooms.roster` sont encore lues par la page de la classe de la direction (`school_admin/classrooms/show.html.erb`, par `t("#{roster}.…")`, que la recherche des clés n'avait pas vue) : `actions_label`, `remove`, `remove_title`, `remove_warning`, `remove_confirm`, `cancel` sont rendues ; seules `issue_code`, `issue_code_hint` et `open_file` restent supprimées. (2) L'attribut `autofocus` sur la première ligne ajoutée est refusé par `page_titles_test` (UDR-0054 §3.3) : il est remplacé par le contrôleur `autofocus` existant, comme le titre de la liste après un retrait ; UDR-0108 §3.3 corrigée.
 - **Clôture — CI sur une machine saturée** (charge de 30 à 104 pour 4 cœurs) : deux lancements de `bin/ci-quiet` arrêtés, tests système en « tab crashed ». Hors du chantier : `image_header_test` (test de durée, 1,9 s pour 0,5 s sous charge) et l'avis Yarn 1240992 dont la date de réexamen (2026-10-17) est passée, rouge aussi sur `Develop` (chantier `audit-yarn-braces`).
 
+- Reprise (2026-10-19) : un `?page=` géant débordait le `LIMIT` (bigint) et répondait 500 ; borné à `MAX_PAGE` (la classe la plus grande tient entière). Tests ajoutés : affichage « en retard » et « échéance passée » de la fiche, rendu le jour de l'échéance, 403 de l'autre enseignant pour un élève parti ou inconnu.
+
 ## Ce qu'on a appris sur la codebase
 
 - `script/ci/record_timings` ne lit pas la durée du premier test système d'un lancement : la bannière de Puma s'imprime sur la même ligne que son nom. Durée du nouveau `student_file_test.rb` (4,2 s) inscrite à la main.
@@ -65,6 +67,7 @@ Lot C : la page de suivi passe de 52,6 à 60,5 Ko (noms en liens, prochain geste
 |---|---|---|
 | Lacunes et remédiations d'un élève sur sa fiche | V5 (AS-17) | `remediation` |
 | Retour de la page de résultat vers la fiche | La page de résultat a un seul lien de retour (UDR-0023) | — |
+| Retrait en Turbo Stream de l'enseignant et de l'équipe (sans `origin=file`) : plus aucun écran ne l'envoie depuis Q4, et son compte relu ignore le groupe de note et la page (un ancien onglet verrait le compte d'un autre groupe) | Revue de la reprise (2026-10-19) : la supprimer change l'UDR-0081 §3.7 et quatre tests IL-14 ; à trancher hors de cette PR | — |
 
 ## Clôture
 

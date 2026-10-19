@@ -349,6 +349,7 @@ module Queries
         assert_equal [ 60, 65 ], overview(page: 2).then { [ it.students.size, it.students_total ] }
         assert_equal [ 65, 65 ], overview(page: 3).then { [ it.students.size, it.students_total ] }
         assert_equal [ 65, 65 ], overview(page: 9).then { [ it.students.size, it.students_total ] }
+        assert_equal [ 65, 65 ], overview(page: 10**20).then { [ it.students.size, it.students_total ] }
         assert_equal overview.students.map(&:public_id), overview(page: 2).students.first(30).map(&:public_id)
       end
 

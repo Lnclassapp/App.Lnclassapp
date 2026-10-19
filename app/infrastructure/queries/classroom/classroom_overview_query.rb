@@ -39,6 +39,9 @@ module Queries
       NO_ROSTER = { students: nil, students_total: nil, grade_group: nil, grade_counts: nil }.freeze
       # ADR-0097 §4.7 : la liste des élèves se lit trente par trente, cumulativement, dans son groupe de note.
       PER_PAGE = 30
+      # Une classe a au plus MAX_STUDENTS_LIMIT élèves : au-delà de cette page, la liste est déjà entière. Un ?page= géant ne
+      # déborde donc jamais le LIMIT (bigint) de PostgreSQL.
+      MAX_PAGE = (Entities::Classroom::Classroom::MAX_STUDENTS_LIMIT / PER_PAGE.to_f).ceil
       # ADR-0089 §4.2 : la fenêtre de « fait seul », aujourd'hui compris.
       SELF_PRACTICE_DAYS = 7
       # UDR-0081 §3.7 : les nouveaux d'abord, du plus récent au plus ancien ; les autres (NULL) gardent l'ordre par nom.
@@ -120,7 +123,7 @@ module Queries
 
       def students(scope, grades, since, today, page)
         rows = scope.order(Arel.sql(Orm::ClassroomStudent.sanitize_sql_array([ NEWCOMERS_FIRST, since ])), "users.last_name", "users.first_name")
-                    .limit(PER_PAGE * (page.is_a?(Integer) && page.positive? ? page : 1))
+                    .limit(PER_PAGE * (page.is_a?(Integer) && page.positive? ? [ page, MAX_PAGE ].min : 1))
                     .pluck(*STUDENT_COLUMNS)
         sessions = last_sessions(rows.map(&:first))
         photos = Queries::Identity::PhotoVersions.for(user_ids: rows.map(&:first))

@@ -645,6 +645,16 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "CL-15 : une page géante ne déborde pas : la liste entière, sans erreur" do
+    roster_of(31)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id, page: "99999999999999999999")
+
+    assert_response :success
+    assert_select "#classroom_roster_list li[id^=student_]", 31
+  end
+
   test "un élève, même de cette classe, reçoit 403 sans le code ni la liste" do
     student = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
     create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")

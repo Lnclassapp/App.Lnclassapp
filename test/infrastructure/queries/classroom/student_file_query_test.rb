@@ -90,6 +90,15 @@ module Queries
                      overdue.to_h.values_at(:status, :done_on, :best, :category, :trend, :sessions_count, :best_session_public_id)
       end
 
+      test "handed in on its due date is done, not late; the day after is late" do
+        on_time = assign("Le jour même", due_on: TODAY - 1)
+        late = assign("Le lendemain", due_on: TODAY - 1)
+        hand_in(on_time, 80, at: Time.zone.local(2026, 10, 14, 23, 50))
+        hand_in(late, 80, at: Time.zone.local(2026, 10, 15, 0, 5))
+
+        assert_equal({ "Le jour même" => :done, "Le lendemain" => :late }, file.assignments.to_h { [ it.exercise_title, it.status ] })
+      end
+
       test "not done: pending before its due date or without one, overdue after; due today is not overdue" do
         future = assign("Demain", due_on: TODAY + 1)
         today = assign("Aujourd'hui", due_on: TODAY)

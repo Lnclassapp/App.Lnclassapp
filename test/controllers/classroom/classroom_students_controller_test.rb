@@ -276,6 +276,29 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     end
   end
 
+  # ADR-0097 §4.3, PRD Lot A scénario 2 : une échéance passée se lit, rendu en retard ou pas encore fait, jamais en couleur seule.
+  test "CL-13 : rendu en retard et échéance passée : la date du rendu, « Pas encore fait », la colonne « En retard »" do
+    due_on = Time.zone.today - 3
+    assign = ->(title) { create_assignment(classroom: @classroom, assignable: create_exercise(title:), by: @teacher, due_on:,
+                                           assigned_at: (due_on - 1).in_time_zone.change(hour: 8)) }
+    late = assign.("La méiose")
+    overdue = assign.("Les volcans")
+    create_exercise_session(student: @koffi, exercise: Orm::Exercise.find(late.assignable_id), status: "completed", score_percent: 60,
+                            classroom_assignment: late, completed_at: 1.day.ago)
+    sign_in_as @teacher
+
+    show_file
+
+    assert_select "dl#student_file_counts" do
+      assert_select "div", text: /#{ft('summary.late')}\s+1/
+    end
+    assert_select "li#assignment_#{late.public_id}", text: /#{ft('assignments.late_on', date: I18n.l(1.day.ago.to_date, format: :due_short))}/
+    assert_select "li#assignment_#{late.public_id}", text: /#{ft('assignments.sessions', count: 1)}/
+    assert_select "li#assignment_#{overdue.public_id}", text: /#{ft('assignments.overdue')}/
+    assert_select "li#assignment_#{overdue.public_id} span.font-medium.text-warning", 1
+    assert_select "li#assignment_#{late.public_id} span.font-medium.text-warning", 0
+  end
+
   test "CL-13 : sans exercice assigné ni fait seul, deux états vides et les badges à zéro" do
     sign_in_as @teacher
 
@@ -315,6 +338,17 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
       assert_no_match(/Koffi/, response.body)
       sign_out
     end
+  end
+
+  # ADR-0097 §4.2 : la policy passe avant toute lecture de l'élève ; un élève parti ou inconnu donne le même 403.
+  test "refus : un enseignant d'une autre classe reçoit 403 aussi pour un élève parti ou inconnu, jamais une indication de présence" do
+    membership(@awa).update!(left_at: Time.current)
+    sign_in_as create_teacher(school: @school, classrooms: [ create_classroom(school: @school) ])
+
+    show_file @awa
+    assert_response :forbidden
+    get classroom_student_path(@classroom.public_id, "inconnu")
+    assert_response :forbidden
   end
 
   test "sans connexion, la fiche renvoie à la connexion" do
