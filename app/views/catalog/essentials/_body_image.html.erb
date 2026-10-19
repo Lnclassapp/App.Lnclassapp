@@ -1,0 +1,8 @@
+<%# 🌐 UI · catalog/essentials/_body_image — image du texte d'une fiche, rendue par Action Text (to_attachable_partial_path) %>
+<%# Rôle : local essential_image (la pièce jointe, qui délègue à Orm::EssentialImage) ; servie par Lnclass, dimensions posées, à la demande %>
+<%# ADR  : 0105 (§4.5) · UDR : 0129 (§3.3 : pas de légende, pas de lien vers l'image en grand, aucun JavaScript) %>
+<% image = essential_image %>
+<figure class="my-6">
+  <%= image_tag essential_image_path(image.public_id), alt: image.alt.to_s, width: image.width, height: image.height,
+                                                       loading: :lazy, decoding: :async, class: "mx-auto h-auto max-w-full rounded-ln bg-mist" %>
+</figure>

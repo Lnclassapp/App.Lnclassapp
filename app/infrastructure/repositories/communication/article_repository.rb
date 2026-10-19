@@ -8,6 +8,7 @@ module Repositories
 
       ATTACHMENT = Repositories::Shared::RichTextSanitizer::ATTACHMENT
       IMAGE_MODEL = "Orm::ArticleImage"
+      FOREIGN_IMAGE_MODELS = %w[Orm::EssentialImage Orm::QuestionImage].freeze
       SLUG_INDEX = "index_articles_on_slug"
       # Deux collisions de slug concurrentes de suite, ou une image prise entre-temps par un autre article : le geste se
       # refait (il trouvera un slug libre ; l'image prise ne sera plus admise).
@@ -61,7 +62,7 @@ module Repositories
       # (fichier purgé après validation).
       def save(record, dto:, at:)
         canonical = ActionText::Content.new(dto.body).to_html
-        return UNREADABLE if unreadable?(canonical)
+        return UNREADABLE if unreadable?(canonical) || foreign_image?(canonical)
 
         cover = dto.cover_public_id && admissible(record).find_by(public_id: dto.cover_public_id)
         return ::Shared::Result.failure(:invalid, errors: { cover_public_id: [ :invalid ] }) if dto.cover_public_id && cover.nil?
@@ -104,6 +105,15 @@ module Repositories
       def sanitized_body(canonical, record)
         admitted = admissible(record).where(id: cited_ids(canonical)).ids.to_set
         Repositories::Shared::RichTextSanitizer.call(canonical, image_ids: admitted)
+      end
+
+      # Le sgid lisible d'une image de fiche ou de question : l'assainir la retirerait sans rien dire (même refus qu'un sgid
+      # illisible). Les autres pièces jointes (un compte, par exemple) partent comme avant.
+      def foreign_image?(html)
+        Nokogiri::HTML5.fragment(html).css(ATTACHMENT).any? do |node|
+          gid = SignedGlobalID.parse(node["sgid"].to_s, for: ActionText::Attachable::LOCATOR_NAME)
+          FOREIGN_IMAGE_MODELS.include?(gid&.model_name)
+        end
       end
 
       def unreadable?(html)

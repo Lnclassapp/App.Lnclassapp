@@ -57,6 +57,24 @@ module Entities
         assert_equal [ [ "essentials[2].name", "blank" ], [ "essentials[2].exercises[0].exercise_type", "invalid_value" ] ], codes(errors)
       end
 
+      # ADR-0105 §4.3 : un emplacement que le motif ne lit pas ne serait compté nulle part ; l'import le refuse à sa place.
+      test "une fiche : un emplacement d'image trop long, dans une liste ou vide est refusé, un emplacement bien écrit passe" do
+        content = "<p>[[image: une pile]]</p><p>[[image: #{'a' * 151}]]</p><ul><li>[[image: une lampe]]</li></ul><p>[[image: ]]</p>"
+
+        errors = ContentNode.validate_essential({ "name" => "Le circuit", "content" => content }, path: "essentials[0]")
+
+        assert_equal [ [ "essentials[0].content", "image_slot_malformed" ] ], codes(errors)
+        assert_equal({ count: 3 }, errors.first.params)
+        assert_empty ContentNode.validate_essential({ "name" => "Le circuit", "content" => "<p>[[image: une pile]]</p>" }, path: "f")
+      end
+
+      # Menace n° 13 : un texte trop complexe à relire a son motif, pas celui d'un emplacement mal écrit.
+      test "une fiche : un texte trop complexe à relire est refusé avec son propre motif" do
+        errors = ContentNode.validate_essential({ "name" => "Le circuit", "content" => "<p>" * 40_000 }, path: "essentials[1]")
+
+        assert_equal [ [ "essentials[1].content", "image_slots_unreadable" ] ], codes(errors)
+      end
+
       test "un exercice : au moins une question, cohérence de l'ADR-0039" do
         assert_empty ContentNode.validate_exercise(exercise("questions" => [ question("true_false"), question("multiple_correct_2", answers: answers(true, true, false)) ]), path: "e")
         assert_equal [ [ "e.questions", "blank" ] ], codes(ContentNode.validate_exercise(exercise("questions" => nil), path: "e"))

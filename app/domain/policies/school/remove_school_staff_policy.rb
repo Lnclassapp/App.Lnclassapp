@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Policies::School::RemoveSchoolStaffPolicy
-# Rôle : retirer un compte direction : l'équipe admin/field partout ; une autre direction du même établissement actif, après 7 jours
-# ADR  : 0028, 0071, 0077 (§4.3, §6)
+# Rôle : retirer un compte direction : l'équipe admin/field partout ; une direction de rang « gestion » du même établissement
+# ADR  : 0028, 0071, 0077 (§4.3, §6), 0092 (§4.3) · actif, après 7 jours ; l'éducateur et la secrétaire : 403
 module Policies
   module School
     class RemoveSchoolStaffPolicy
@@ -13,6 +13,7 @@ module Policies
         return Shared::Result.success if actor&.team? && TEAM_ROLES.include?(actor.team_role)
         return Shared::Result.failure(:forbidden) unless actor&.school_admin? && actor_staff && !actor_staff.archived?
         return Shared::Result.failure(:not_found) unless target.school_id == actor.school_id
+        return Shared::Result.failure(:forbidden) unless actor.school_management?
         return Shared::Result.failure(:forbidden) if !school&.active? || target.user_id == actor.user_id || actor_staff.newcomer?(now)
 
         Shared::Result.success

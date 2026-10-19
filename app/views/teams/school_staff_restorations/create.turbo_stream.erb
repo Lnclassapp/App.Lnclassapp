@@ -12,4 +12,5 @@
 <%= turbo_stream.replace "school_staff", partial: "shared/school_staff",
                                          locals: { staff: @staff, by_code_count: @by_code_count, viewer_id: nil,
                                                    remove_url: ->(public_id) { school_staff_member_path(@school.public_id, public_id) },
-                                                   removable: @removable, newcomer: false } %>
+                                                   removable: @removable, newcomer: false, school_type: @school.school_type,
+                                                   position_url: @position_url } %>

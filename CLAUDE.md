@@ -13,6 +13,8 @@ Lnclass est une plateforme éducative (LMS) en Rails 8, construite en **architec
 
 **PR prêtes.** Une PR sans conflit avec sa base s'ouvre directement « prête », jamais en brouillon.
 
+**Une PR, un pilote.** Seul l'assigné GitHub d'une PR pousse sur sa branche. Avant de toucher une PR, on vérifie son assigné : si c'est quelqu'un d'autre, on commente sans pousser. Règle complète : [`docs/guide/conventions.md`](docs/guide/conventions.md#une-pr-un-pilote).
+
 **Captures d'écran.** Tout travail d'interface (UI/UX) se montre au porteur en images : chaque écran modifié à 390 px (téléphone) et sur ordinateur, menus ouverts si besoin. Les captures sont envoyées, jamais commitées.
 
 ---

@@ -1,6 +1,6 @@
-<%# 🌐 UI · teams/exercises/_question_fields — une question du formulaire : énoncé, type, explication, propositions %>
-<%# Rôle : rendue par fields_for, ou clonée depuis <template> ; ses propositions ont leur propre contrôleur nested-form %>
-<%# ADR  : 0054, 0091 · UDR : 0007, 0017, 0087 · Stimulus : teams--nested-form, teams--question-kind (errors : structure, « questions[i] ») %>
+<%# 🌐 UI · teams/exercises/_question_fields — une question du formulaire : image, énoncé, type, explication, propositions %>
+<%# Rôle : rendue par fields_for, ou clonée depuis <template> ; ses propositions ont leur propre contrôleur nested-form ; son image, assessment--question-image %>
+<%# ADR  : 0054, 0091, 0105 · UDR : 0007, 0017, 0087, 0129 · Stimulus : teams--nested-form, teams--question-kind, assessment--question-image (errors : structure, « questions[i] ») %>
 <% kinds = Entities::Assessment::Question::KIND_NAMES.values.select { lookup_context.exists?("kinds/#{it}_fields", [ "teams/exercises" ], true) } %>
 <% types = Entities::Assessment::Question::TYPES.select { kinds.include?(Entities::Assessment::Question.kind_name_for(it)) } %>
 <% kind = Entities::Assessment::Question.kind_name_for(form.object.question_type) || "choice" %>
@@ -19,6 +19,7 @@
         <p><%= errors.to_sentence %></p>
       </div>
     <% end %>
+    <%= render "question_image_fields", form: %>
     <%= ui_field form, :content, as: :textarea, rows: 2, required: true, placeholder: t(".content_placeholder") %>
     <div class="grid gap-4 sm:grid-cols-2">
       <%= ui_field form, :question_type, as: :select, required: true,

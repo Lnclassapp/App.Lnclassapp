@@ -1,9 +1,12 @@
 # 🧠 DOMAINE · UseCases::Assessment::UpdateExercise
 # Rôle : l'équipe modifie un exercice ; après une première session, seuls son titre et sa description changent
-# ADR  : 0026, 0028, 0035, 0036, 0054 · UDR : 0017
+# ADR  : 0026, 0028, 0035, 0036, 0054, 0105 · UDR : 0017
 module UseCases
   module Assessment
     class UpdateExercise
+      # Une question cite une image qu'elle ne peut plus prendre (ADR-0105) : rien n'est écrit, le formulaire le dit.
+      IMAGE_UNAVAILABLE = Shared::Result.failure(:invalid, errors: { questions: [ :image_unavailable ] })
+
       def initialize(exercises:, transaction:, policy:)
         @exercises = exercises
         @transaction = transaction
@@ -11,7 +14,7 @@ module UseCases
       end
 
       # dto : Dtos::Assessment::ExerciseInput. Sans session, ses questions remplacent toutes les questions enregistrées.
-      # → Result(Exercise) | :forbidden | :not_found | :invalid (dont base: [:questions_locked]) | :conflict
+      # → Result(Exercise) | :forbidden | :not_found | :invalid (dont base: [:questions_locked], questions: [:image_unavailable]) | :conflict
       def call(actor:, public_id:, dto:)
         allowed = @policy.call(actor:)
         return allowed if allowed.failure?
@@ -28,6 +31,8 @@ module UseCases
         return Shared::Result.failure(:invalid, errors:) if errors.any?
 
         @transaction.attempt { @exercises.update(exercise:, replace_questions: !locked) }
+      rescue Ports::Assessment::ExerciseRepositoryPort::ImageUnavailable
+        IMAGE_UNAVAILABLE
       end
 
       private
@@ -48,7 +53,9 @@ module UseCases
         )
       end
 
-      # Invariants, structure de chaque question, puis au moins une question tant que l'exercice est publié.
+      # Invariants, structure de chaque question, puis, tant que l'exercice est publié, au moins une question et ses images
+      # complètes (ADR-0074 §4.2, ADR-0105 §4.4) : une question qui attend son image, ou dont l'image n'a pas de texte de
+      # remplacement, est refusée comme à la publication.
       def errors_of(current, exercise)
         return exercise.errors.to_hash unless exercise.valid?
 
@@ -56,7 +63,13 @@ module UseCases
           [ :"questions[#{index}]", question.structure_errors ] if question.structure_errors.any?
         end.to_h
         errors[:questions] = [ :needed_while_published ] if current.published? && exercise.questions.empty?
-        errors
+        errors.merge(published_image_errors(current, exercise)) { |_question, rules, images| rules + images }
+      end
+
+      def published_image_errors(current, exercise)
+        return {} unless current.published?
+
+        exercise.image_errors.to_h { |number, codes| [ :"questions[#{number - 1}]", [ codes.first ] ] }
       end
     end
   end

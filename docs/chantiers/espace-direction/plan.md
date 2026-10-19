@@ -6,11 +6,18 @@
 
 ## Préalables au Lot 0
 
-- [ ] Q1 à Q9 du [memo](memo.md) tranchées par le porteur ; PRD, ADR et UDR alignés sur ses réponses.
-- [ ] ADR-0092 et UDR-0092 à 0094 passés de `Proposé` à `Accepté`.
-- [ ] Branche de code créée selon Q9 (`feature/espace-direction` recréée depuis `Develop`, ou `feature/espace-direction-v2`).
-- [ ] Comptes de direction sans fonction comptés sur la production (memo, questions ouvertes).
-- [ ] Mesures « avant » du PRD §7 relevées (page de classe de la direction, HTML de l'accueil).
+- [x] Q1 à Q9 du [memo](memo.md) tranchées par le porteur (2026-10-16) ; PRD, ADR et UDR alignés au Lot 0.
+- [x] ADR-0092, UDR-0092 et UDR-0094 `Accepté` ; UDR-0093 `Abandonnée` (Q5).
+- [x] Branche de code : `feature/espace-direction-v2`, partie de `feature/multi-etablissements-enseignant` (PR #250, policies de la direction sur les enseignants communes). L'ancienne `feature/espace-direction` reste telle quelle.
+- [x] Comptes de direction sans fonction en production : **aucun** (DIR-4, Lnclass n'est pas lancé).
+- [ ] Mesures « avant » du PRD §7 : non relevées (pas de base de mesure dans la session ; voir journal).
+
+## Amendement du Lot 0 (2026-10-16, réponses du porteur)
+
+- **Lot D retiré** (Q5) : la direction ne change pas un élève de classe. Aucune voie `transfer`, aucun `MoveStudent`, aucune modale.
+- **Lot B réduit** (DIR-4) : « Préciser ma fonction » sort ; il reste « Changer la fonction » par l'équipe et la restauration d'un ancien chef (ED-25). `school_admin/staff_positions` n'existe pas.
+- **La fonction est obligatoire** : `school_staffs.position` `NOT NULL` ; une invitation de direction porte sa fonction.
+- **Exécution** : un seul agent, les lots s'enchaînent dans l'ordre 0, A, B, C, E, F (un commit chacun, documentation comprise) ; le tableau de collision reste valable pour les lots restants.
 
 ## Graphe
 
@@ -26,7 +33,6 @@ Lot 0 — SOCLE (séquentiel)                                                   
   ├─► Lot A « Choisir sa fonction en arrivant »         ┐                                │
   ├─► Lot B « Préciser ou changer une fonction »        │                                │
   ├─► Lot C « Droits par fonction »                     ├─ en parallèle, fichiers disjoints
-  ├─► Lot D « Changer un élève de classe »              │                                │
   └─► Lot E « Trouver un élève dans l'établissement »   ┘ ◄──────────────────────────────┘
 ```
 
@@ -116,7 +122,7 @@ Lot 0 — SOCLE (séquentiel)                                                   
 
 ---
 
-## Lot B — Préciser ou changer une fonction
+## Lot B — Changer une fonction (réduit par DIR-4 : sans « Préciser ma fonction » ni `school_admin/staff_positions`)
 
 - **Couche**       : domaine + delivery + ui
 - **Fichiers**     : app/domain/use_cases/school/set_staff_position.rb (nouveau)
@@ -159,7 +165,9 @@ Lot 0 — SOCLE (séquentiel)                                                   
 
 ---
 
-## Lot D — Changer un élève de classe
+## Lot D — Changer un élève de classe (retiré, Q5)
+
+> Retiré par le porteur le 2026-10-16. Le contenu ci-dessous reste pour l'historique ; rien n'en est construit.
 
 - **Couche**       : domaine + infrastructure (requête) + delivery + ui
 - **Fichiers**     : app/domain/use_cases/classroom/move_student.rb (nouveau)
@@ -243,10 +251,10 @@ Lot 0 — SOCLE (séquentiel)                                                   
 
 ## Portes de sortie
 
-- [ ] Tous les lots sont `Done`
-- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : inscription d'une secrétaire, gestes masqués, changement de classe, recherche, à 390 px et sur ordinateur (captures envoyées au porteur, non commitées)
-- [ ] Pureté du domaine, rubocop, tests, parcours système, brakeman : `bin/ci-quiet` vert, verdict écrit dans la PR
-- [ ] Mesures « après » du PRD §7 relevées
-- [ ] Sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) une fois sur le diff final (policies, routes et use cases touchés)
-- [ ] ADR-0092 et UDR-0092 à 0094 `Accepté` ; index régénérés par `script/docs/build_index` au commit de clôture
-- [ ] `journal.md` complété ; feuille de route §5 et §6 mises à jour (ID-10, ID-11, ID-20, SC-11, SC-12, SC-16, SC-20, SC-21, SC-25)
+- [x] Tous les lots sont `Done` (0, A, B, C, E, F ; D retiré par Q5)
+- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat : à faire par le porteur. Captures 390 px et ordinateur de l'auteur envoyées, non commitées
+- [x] Pureté du domaine, rubocop, tests, parcours système, brakeman : `bin/ci-quiet`, verdict écrit dans la PR
+- [ ] Mesures « après » du PRD §7 : non relevées (journal, dette)
+- [ ] Sous-agents de revue : non lancés (l'exécutant n'en dispose pas dans sa session) ; à lancer sur la PR
+- [x] ADR-0092, UDR-0092 et UDR-0094 `Accepté`, UDR-0093 `Abandonnée` ; index régénérés par `script/docs/build_index` au commit de clôture
+- [x] `journal.md` complété ; feuille de route : laissée au porteur (dette, journal)

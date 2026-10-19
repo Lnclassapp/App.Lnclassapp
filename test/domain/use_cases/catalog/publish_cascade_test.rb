@@ -100,6 +100,15 @@ module UseCases
         assert_equal [ 1, 1, 0 ], [ result.value.essentials, result.value.exercises, result.value.skipped ]
       end
 
+      # ADR-0105 §4.4 : un exercice refusé pour une image se compte à part, pour que le bilan ne dise pas qu'il n'a pas de question.
+      test "ADR-0105 : les exercices restés en brouillon pour une image sont comptés à part de ceux sans question complète" do
+        @publish_exercise = FakePublish.new({ "ex-a" => :image_missing, "ex-b" => :image_alt_blank, "ex-c" => :not_publishable })
+
+        summary = cascade(:course, "genetique").value
+
+        assert_equal [ 0, 3, 2 ], [ summary.exercises, summary.skipped, summary.skipped_images ]
+      end
+
       test "une fiche : elle, puis ses exercices brouillons ; aucune autre fiche" do
         result = cascade(:essential, "meiose")
 
@@ -128,6 +137,54 @@ module UseCases
         assert_raises(ArgumentError) { cascade(:exercise, "ex-a") }
         assert_empty @publish_course.calls
         assert_equal 0, @transaction.calls
+      end
+
+      # ADR-0105 §4.4 : « Tout publier » vérifie toutes les fiches brouillons avant d'écrire ; une seule pas prête refuse
+      # tout, et le refus nomme la fiche.
+      test "ADR-0105 : une fiche brouillon avec un emplacement d'image refuse le cours entier, la nomme, et rien n'est tenté" do
+        @essentials = FakeEssentials.new(
+          Essential.new(id: 10, slug: "meiose", course_id: 1, name: "La méiose", status: "draft", content: "<p>Prête</p>"),
+          Essential.new(id: 12, slug: "mitose", course_id: 1, name: "La mitose", status: "draft", content: "<p>[[image: une cellule]]</p>"),
+          drafts: { 1 => %w[meiose mitose] }
+        )
+
+        result = cascade(:course, "genetique")
+
+        assert_equal :conflict, result.code
+        assert_equal({ base: [ :essential_not_ready ], name: "La mitose" }, result.errors)
+        assert_empty @publish_course.calls
+        assert_empty @publish_essential.calls
+        assert_empty @exercises.asked
+      end
+
+      test "menace n° 13 : une fiche brouillon au texte trop complexe à relire refuse le cours entier avec son propre motif" do
+        @essentials = FakeEssentials.new(Essential.new(id: 14, slug: "complexe", course_id: 2, name: "Complexe", status: "draft",
+                                                       content: "<p>" * 40_000), drafts: { 2 => %w[complexe] })
+
+        result = cascade(:course, "publie")
+
+        assert_equal({ base: [ :essential_unreadable ], name: "Complexe" }, result.errors)
+        assert_empty @publish_essential.calls
+      end
+
+      test "ADR-0105 : une image sans texte de remplacement dans une fiche brouillon refuse aussi un cours déjà publié" do
+        incomplete = Essential.new(id: 13, slug: "illustree", course_id: 2, name: "Illustrée", status: "draft", content: "<p>x</p>")
+        incomplete.images = [ Entities::Shared::ContentImage.new(public_id: "ko", alt: nil) ]
+        @essentials = FakeEssentials.new(incomplete, drafts: { 2 => %w[illustree] })
+
+        result = cascade(:course, "publie")
+
+        assert_equal({ base: [ :essential_not_ready ], name: "Illustrée" }, result.errors)
+        assert_empty @publish_essential.calls
+      end
+
+      test "ADR-0105 : la racine fiche suit la règle de PublishEssential, qui répond son refus tel quel" do
+        @publish_essential = FakePublish.new({ "meiose" => :image_slots_left })
+
+        result = cascade(:essential, "meiose")
+
+        assert_equal({ base: [ :image_slots_left ] }, result.errors)
+        assert_empty @exercises.asked
       end
     end
   end

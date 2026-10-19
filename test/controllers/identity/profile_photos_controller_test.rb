@@ -175,4 +175,17 @@ class Identity::ProfilePhotosControllerTest < ActionDispatch::IntegrationTest
     assert_not_includes stored.download, "Exif"
     assert_not_includes stored.download, "SECRETCAM"
   end
+
+  # ED-72 (chantier espace-direction, Lot F) : la recette de la photo avec un compte de direction.
+  test "ED-72: a direction adds its photo from « Mon profil »; the avatar of its header shows it" do
+    admin = create_school_admin(first_name: "Kofi", last_name: "Yao")
+    sign_in_as admin
+
+    patch profile_photo_path, params: { profile_photo: { photo: upload("photo.jpg") } }, headers: TURBO_STREAM
+
+    assert_response :success
+    assert Orm::User.find(admin.id).photo.attached?
+    get school_admin_classrooms_path
+    assert_select "header img[src^='#{account_photo_path(admin.public_id)}?v=']"
+  end
 end

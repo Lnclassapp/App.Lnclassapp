@@ -7,6 +7,7 @@
   <%= ui_button t(".departed"), href: school_admin_departed_teachers_path, variant: :secondary, size: :sm, icon: "archive-box" %>
 <% end %>
 
+<%= render "school_admin/shared/rank_note", note: @rank_note %>
 <% if @overview.teachers.any? %>
   <%# Une ligne porte trois icônes (matière, ⋮, menu) : dessinées une fois pour la page, reprises par <use> (ADR-0067). %>
   <%= ui_icon_sprite do %>

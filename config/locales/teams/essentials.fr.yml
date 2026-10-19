@@ -13,14 +13,24 @@ fr:
             name:
               taken: "est déjà pris par une autre fiche de révision de cette fiche de cours"
             content:
-              attachment: "n'accepte que du texte : les pièces jointes et les images ne sont pas acceptées"
+              # ADR-0105 §4.4 : une fiche publiée ne reçoit pas d'emplacement d'image ; rien n'est écrit.
+              image_slots_unreadable: "est trop complexe à relire : simplifiez la mise en forme (listes, blocs imbriqués), puis enregistrez de nouveau"
+              image_slots_malformed: "contient un emplacement d'image mal écrit : « [[image: description]] » doit être seul dans son paragraphe, avec une description de 150 caractères au plus"
+              image_slots_left: "contient un emplacement d'image à remplacer : insérez l'image ou retirez l'emplacement, la fiche est publiée"
+              # ADR-0105 : une pièce jointe dont la signature ne se vérifie plus ; rien n'est écrit.
+              invalid: "contient une image qui n'a pas pu être relue : rechargez la fiche, puis réessayez"
+              # ADR-0105 : plus de 200 Ko de texte (menace.md, n° 13) ; rien n'est écrit.
+              too_long: "dépasse 200 Ko de texte : scindez la fiche en deux, puis enregistrez de nouveau"
+              # ADR-0105 : plus de 30 images citées par le texte (menace.md, n° 11) ; rien n'est rattaché.
+              too_many_images: "cite plus de 30 images : retirez-en, ou scindez la fiche en deux, puis enregistrez de nouveau"
+              # ADR-0105 : une image citée appartient à une autre fiche ou a été effacée ; rien n'est écrit.
+              image_unavailable: "contient une image qui n'est plus disponible (copiée d'une autre fiche, ou effacée) : retirez-la ou renvoyez-la, puis enregistrez de nouveau"
   teams:
     essentials:
       form:
         name_placeholder: "Ex. : Brassage génétique par la méiose"
         name_hint: "150 caractères au plus, unique dans la fiche de cours. La casse saisie est gardée."
         subtitle_placeholder: "Ex. : Les deux divisions et leurs conséquences"
-        content_hint: "Titres, gras, italique, listes, citations et formules entre $…$. Pas de pièce jointe ni d'image."
       new:
         title: "Nouvelle fiche de révision"
         course: "Fiche de cours : %{name}"
