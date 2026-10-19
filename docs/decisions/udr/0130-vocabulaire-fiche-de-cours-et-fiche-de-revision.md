@@ -110,3 +110,19 @@ Le mot « cours » au **sens scolaire courant** reste libre (« comprendre leurs
   - l'exception `ALLOWED` passe à « Révisions de la leçon » sous les deux mêmes clés.
 - **Contenus** (`docs/contenus/`) : le prompt de rédaction et le guide parlent de « fiche de révision ». Les clés JSON (`essentials`) ne changent pas.
 - Les chantiers `contenu-en-blocs` et `questions-enrichies` écrivent leurs textes avec ces termes dès leur cadrage.
+
+## 5. Amendements
+
+### 2026-10-19 — Les textes arrivés par `Develop` depuis le 12/10 (Lot E du chantier)
+
+Deux décisions du porteur, prises à la reprise du chantier après la fusion de `Develop` :
+
+1. **Catalogue public** (`catalog.public.*`, `catalog.level_pages.*`, `catalog.series_pages.*`, `catalog.material_pages.*`, `communication.public_pages.catalog`) : **tout** se renomme, titres compris.
+   - « Les cours par niveau » devient « Les fiches de cours par niveau », « Cours de %{level} » devient « Fiches de cours de %{level} », « 1 cours publié » devient « 1 fiche de cours publiée », « Voir le cours » devient « Voir la fiche de cours », « Voir mes cours » devient « Voir mes fiches de cours ».
+   - Les trois valeurs de la rubrique « Cours » de l'application (§3, valeurs imposées : `shared.navigation.courses`, `catalog.courses.index.*`, `catalog.courses.show.back`) ne changent pas : le catalogue public est une page publique, pas la rubrique.
+2. **Remédiation** (phrases et titres de la lacune, de sa levée et des textes d'images de la fiche de révision) : renommage strict.
+   - Seuls les deux titres « Fiche à revoir » et « Fiches à revoir » (exception 3 du §2) gardent « Fiche » seul.
+   - « Fiche levée ! » devient « Fiche de révision levée ! », « Revoir la fiche » devient « Revoir la fiche de révision », « Cette fiche passe à revoir » devient « Cette fiche de révision passe à revoir », « ces fiches » devient « ces fiches de révision ».
+   - Même règle pour les textes d'images : « images au plus par fiche » devient « images au plus par fiche de révision ».
+
+Restent libres : « en cours » (« Régénération en cours », « Envoi de l'image en cours… »), « cours » au sens scolaire courant, et « fiche » qui ne nomme pas `Essential` (« la fiche de l'établissement »).

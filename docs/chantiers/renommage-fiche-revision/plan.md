@@ -144,6 +144,48 @@ Le test de garde du Lot 0 est **rouge** à son merge, et c'est voulu : il liste 
 
 ---
 
+## Lot E — Les textes arrivés par `Develop` depuis le 12/10 suivent l'UDR-0130
+
+Reprise du 2026-10-19, après la fusion de `Develop` (`0deb294c`). Les textes ajoutés depuis `6371636d` (catalogue public,
+remédiation ciblée, images des fiches, régénération des codes…) disent encore « cours » ou « fiche » pour nommer
+`Course` ou `Essential`. Repérage : `git diff 6371636d origin/Develop -- config/locales`, lignes ajoutées.
+
+- **Couche**       : ui
+- **Fichiers**     : `config/locales/catalog/public.fr.yml`
+                     `config/locales/teams/content_images.fr.yml`
+                     `config/locales/catalog/courses.fr.yml`
+                     `config/locales/teams/essentials.fr.yml`
+                     `config/locales/assessment/session_results.fr.yml`
+                     `config/locales/classroom/classroom_essentials.fr.yml`
+                     `config/locales/classroom/classrooms.fr.yml`
+                     `config/locales/assessment/exercises.fr.yml`
+                     `config/locales/communication/help.fr.yml`
+                     `config/locales/communication/public_pages.fr.yml`
+                     les tests qui lisent ces valeurs en dur (`grep` des anciennes chaînes dans `test/`)
+                     `docs/decisions/udr/0130-vocabulaire-fiche-de-cours-et-fiche-de-revision.md` (amendement)
+- **Dépend de**    : fusion de `Develop` (`0deb294c`)
+- **Règles**       : l'UDR-0130 §2 et §3 (valeurs seules, accords au féminin, comptes `one`/`other`), plus deux décisions
+                     du porteur du 2026-10-19 :
+                     1. **Catalogue public** (`catalog/public.fr.yml`) : **tout** se renomme, titres compris (« Les fiches
+                        de cours par niveau », « Fiches de cours de %{level} », « 1 fiche de cours publiée », « Voir la
+                        fiche de cours », « Commencer la fiche de cours »…). Les valeurs imposées de l'UDR-0130 (rubrique
+                        « Cours » de l'application : `shared.navigation.courses`, `catalog.courses.index.*`,
+                        `catalog.courses.show.back`) ne changent pas.
+                     2. **Remédiation** : renommage strict. Seuls les deux titres « Fiche à revoir » et « Fiches à revoir »
+                        gardent « Fiche » seul ; « Fiche levée ! » devient « Fiche de révision levée ! », « Revoir la
+                        fiche » devient « Revoir la fiche de révision », « Cette fiche passe à revoir » devient « Cette
+                        fiche de révision passe à revoir », « ces fiches » devient « ces fiches de révision ».
+                     Restent libres : « en cours » (« Régénération en cours », « Envoi de l'image en cours… »), « cours »
+                     au sens scolaire courant, et « fiche » qui ne nomme pas `Essential` (« la fiche de l'établissement »).
+                     Une phrase trop longue après renommage se reformule sans perdre son sens ; jamais de clé renommée.
+- **Test associé** : les tests existants qui lisent ces valeurs (ils passent par `I18n.t` ou citent la chaîne) ; le
+                     garde-fou `test/i18n/locale_files_test.rb`.
+- **Done quand**   : `git diff 6371636d HEAD -- config/locales` n'ajoute plus aucune valeur qui nomme `Course` par
+                     « cours » ni `Essential` par « fiche » seul, hors « Fiche(s) à revoir » ; l'UDR-0130 porte
+                     l'amendement du 2026-10-19 (catalogue public renommé, famille de la remédiation renommée).
+
+---
+
 ## Dispatch
 
 ```

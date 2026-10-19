@@ -83,7 +83,7 @@ class Teams::EssentialImagesControllerTest < ActionDispatch::IntegrationTest
 
     assert_nothing_stored { upload(jpeg, essential: essential.slug) }
     assert_response :unprocessable_entity
-    assert_equal({ "error" => "30 images au plus par fiche." }, json)
+    assert_equal({ "error" => "30 images au plus par fiche de révision." }, json)
 
     assert_nothing_stored { upload(jpeg, essential: "inconnue") }
     assert_response :not_found

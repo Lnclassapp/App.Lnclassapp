@@ -25,13 +25,13 @@ module Catalog
 
       assert_response :success
       assert_select "h1", "Physique-Chimie"
-      assert_select "title", "Cours de Physique-Chimie · Lnclass"
-      assert_select "main p.text-mute", "4 cours publiés."
+      assert_select "title", "Fiches de cours de Physique-Chimie · Lnclass"
+      assert_select "main p.text-mute", "4 fiches de cours publiées."
       assert_equal %w[level_group_4eme level_group_3eme level_group_tle], css_select("#material_groups > section").map { it["id"] }
-      assert_select "#level_group_4eme h2", text: /4ème\s+2 cours/
+      assert_select "#level_group_4eme h2", text: /4ème\s+2 fiches de cours/
       assert_equal [ "Tous les niveaux", "4ème · 2", "3ème · 1", "Tle · 1" ], texts("#material_levels a")
       assert_select "#material_levels a[aria-current=page]", "Tous les niveaux"
-      assert_select "#material_levels a[aria-label='4ème, 2 cours'][href=?]", "/matieres/physique-chimie?niveau=4eme"
+      assert_select "#material_levels a[aria-label='4ème, 2 fiches de cours'][href=?]", "/matieres/physique-chimie?niveau=4eme"
       assert_select "head link[rel=canonical][href='https://lnclass.com/matieres/physique-chimie']"
       assert_select "head meta[name=robots]", 0
     end
@@ -63,7 +63,7 @@ module Catalog
       assert_response :success
       assert_select "h1", "Mathématiques en Tle D"
       assert_equal [ "Logique", "Suites" ], texts("#material_groups h3")
-      assert_select "main p.text-mute", "2 cours publiés."
+      assert_select "main p.text-mute", "2 fiches de cours publiées."
       assert_select "#material_levels a[aria-current=page]", "Tle · 3"
       assert_select "#material_levels a[href='/matieres/mathematiques']", "Tous les niveaux"
       assert_select "main nav a[href='/niveaux/tle/d']", text: "Tle D"
@@ -125,7 +125,7 @@ module Catalog
       get public_material_path("mathematiques")
 
       assert_response :success
-      assert_select "#material_empty", text: /Les cours de cette matière arrivent bientôt\./
+      assert_select "#material_empty", text: /Les fiches de cours de cette matière arrivent bientôt\./
       assert_select "#material_empty a[href='#{public_levels_path}']", "Voir les niveaux"
       assert_select "#material_levels", 0
       assert_select "head meta[name=robots][content=noindex]"
@@ -140,7 +140,7 @@ module Catalog
       assert_select "#material_groups article", 24
       next_path = "/matieres/mathematiques?after_level=tle&page=2"
       assert_select "turbo-frame#material_courses_page_2[loading=lazy][target=_top][src=?]", next_path
-      assert_select "turbo-frame#material_courses_page_2 a[href=?]", next_path, text: "Afficher plus de cours"
+      assert_select "turbo-frame#material_courses_page_2 a[href=?]", next_path, text: "Afficher plus de fiches de cours"
 
       get next_path, headers: { "Turbo-Frame" => "material_courses_page_2" }
       assert_response :success
@@ -150,7 +150,7 @@ module Catalog
 
       get public_material_path("mathematiques", page: 2)
       assert_select "#material_groups article", 6
-      assert_select "#material_groups section#level_group_tle h2", text: /Tle\s+18 cours/
+      assert_select "#material_groups section#level_group_tle h2", text: /Tle\s+18 fiches de cours/
       assert_select "head link[rel=canonical][href='https://lnclass.com/matieres/mathematiques']"
       assert_select "turbo-frame[id^=material_courses_page]", 0
     end
@@ -176,7 +176,7 @@ module Catalog
       sign_in_as create_student_for(published)
       get public_material_path("mathematiques")
       assert_response :success
-      assert_select "#material_cta_bottom a[href='#{courses_path}']", "Voir mes cours"
+      assert_select "#material_cta_bottom a[href='#{courses_path}']", "Voir mes fiches de cours"
 
       published.update!(status: "archived")
       get public_material_path("mathematiques")

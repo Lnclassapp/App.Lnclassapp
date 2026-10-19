@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
 # UDR-0113 §3.2, §3.3 (PRD : chemin nominal 7, puis 2 et 3) : sur un téléphone de 390 px, un visiteur ouvre /niveaux,
-# choisit la Terminale, voit ses séries et ses cours par matière, puis suit « Voir les N cours » ; aucune page ne défile
+# choisit la Terminale, voit ses séries et ses cours par matière, puis suit « Voir les N fiches de cours » ; aucune page ne défile
 # sur le côté.
 class PublicLevelPagesJourneyTest < ApplicationSystemTestCase
   setup do
@@ -19,16 +19,16 @@ class PublicLevelPagesJourneyTest < ApplicationSystemTestCase
   test "a visitor goes from /niveaux to the Terminale, then to all its mathematics courses, on a phone" do
     with_mobile_viewport do
       visit public_levels_path
-      assert_selector "h1", text: "Les cours par niveau"
+      assert_selector "h1", text: "Les fiches de cours par niveau"
       assert_no_sideways_scroll "/niveaux"
 
       click_on "Tle"
-      assert_selector "h1", text: "Cours de Tle"
+      assert_selector "h1", text: "Fiches de cours de Tle"
       assert_selector "#level_series a", text: "Tle D"
       assert_selector "#group_mathematiques li", count: 6
       assert_no_sideways_scroll "/niveaux/tle"
 
-      click_on "Voir les 8 cours"
+      click_on "Voir les 8 fiches de cours"
       assert_selector "h1", text: "Mathématiques en Tle"
       assert_selector "#material_groups article", count: 8
       assert_current_path public_material_path("mathematiques", niveau: "tle")

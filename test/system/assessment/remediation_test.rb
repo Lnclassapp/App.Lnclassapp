@@ -2,9 +2,9 @@ require "application_system_test_case"
 
 # Chantier remediation-ciblee (PRD §3 et §4, Lot D), dans un navigateur réel. Un seul parcours, des sessions de 2 questions
 # (ADR-0069 §9). La porte V5 de la feuille de route : le parcours réel de l'élève ouvre la lacune, lance la remédiation et
-# la lève. L'élève rate « Thalès 1 » (« Cette fiche passe à revoir »), retrouve la fiche sur son accueil, touche « Refaire
-# un exercice », qui démarre « Thalès 3 » (fixation, ADR-0101 §4.2), réussit (« Fiche levée ! ») ; la fiche quitte son
-# accueil. Puis l'enseignant de la classe lit l'élève dans « Fiche levée ». Les autres cas sont prouvés au niveau du
+# la lève. L'élève rate « Thalès 1 » (« Cette fiche de révision passe à revoir »), retrouve la fiche sur son accueil, touche « Refaire
+# un exercice », qui démarre « Thalès 3 » (fixation, ADR-0101 §4.2), réussit (« Fiche de révision levée ! ») ; la fiche quitte son
+# accueil. Puis l'enseignant de la classe lit l'élève dans « Fiche de révision levée ». Les autres cas sont prouvés au niveau du
 # contrôleur et de la query.
 class Assessment::RemediationTest < ApplicationSystemTestCase
   RESULTS = "assessment.session_results".freeze
@@ -13,7 +13,7 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
   # Le POST de la fiche, puis la page de la session, sous une suite chargée (session_result_test.rb).
   START_WAIT = 10
 
-  test "l'élève rate, refait l'exercice proposé et lève la fiche ; l'enseignant le lit dans « Fiche levée »" do
+  test "l'élève rate, refait l'exercice proposé et lève la fiche ; l'enseignant le lit dans « Fiche de révision levée »" do
     maths = create_material(name: "Mathématiques")
     course = create_course(material: maths, name: "Géométrie")
     classroom = create_classroom(level: course.level, series: course.series)

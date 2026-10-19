@@ -82,8 +82,8 @@ class HomepageTest < ApplicationSystemTestCase
     end
   end
 
-  # CC-22 (UDR-0113 §3.9) : a subject of the band opens its public page; « Les cours par niveau » in the footer opens /niveaux.
-  test "CC-22: a visitor follows a subject of the band, then « Les cours par niveau » of the footer" do
+  # CC-22 (UDR-0113 §3.9) : a subject of the band opens its public page; « Les fiches de cours par niveau » in the footer opens /niveaux.
+  test "CC-22: a visitor follows a subject of the band, then « Les fiches de cours par niveau » of the footer" do
     level = create_level(name: "3ème", position: 4, cycle: "first")
     create_course(name: "Électricité", level:, material: create_material(name: "Physique-Chimie"))
 
@@ -93,8 +93,8 @@ class HomepageTest < ApplicationSystemTestCase
     assert_selector "#material_groups h3", text: "Électricité"
 
     visit root_path
-    within("footer") { click_on "Les cours par niveau" }
-    assert_selector "h1", text: "Les cours par niveau"
+    within("footer") { click_on "Les fiches de cours par niveau" }
+    assert_selector "h1", text: "Les fiches de cours par niveau"
     assert_selector "#cycle_first a", text: "3ème"
   end
 
