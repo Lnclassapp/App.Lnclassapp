@@ -152,5 +152,6 @@ Précisions qui font partie de la décision :
 - **Constat** : à partir de 16:47 UTC le 2026-10-04, GitHub n'attribue plus de runner aux jobs du dépôt (`runner_id: 0`, aucun pas exécuté, aucun log), à chaque tentative ; « plan » puis « ci » échouent en 3 s. La cause est du côté du compte GitHub (minutes ou limite de dépenses Actions, ou incident), pas du code.
 - **Décision** : la CI est **coupée** jusqu'à nouvel ordre. Le job « plan » ne tourne que si la **variable de dépôt `CI_ENABLED` vaut `true`** (*Settings → Secrets and variables → Actions → Variables*). Absente, « plan » est sauté, et tout ce qui le suit avec, comme pour un brouillon : ni runner, ni échec.
 - **Pendant la coupure**, la preuve d'une PR est `bin/ci` joué en local (ou au moins `bin/rails test`, les tests système du chantier, rubocop, brakeman), écrite dans la PR ; le garde du budget système et les autres gardes restent joués par le pre-commit.
-- **Réactiver** : créer la variable `CI_ENABLED=true` ; aucun changement de code. Retirer l'interrupteur du workflow (et de `test/guards/ci_plan_test.rb`) quand la cause est réglée.
+- **Réactiver** : créer la variable `CI_ENABLED=true` ; aucun changement de code.
+- **Réactivée le 2026-10-20** pour les seules PR vers `Staging` et `main`, en tâches de 5 minutes au plus ([ADR-0107](0107-la-preuve-d-une-pr-suit-ce-qu-elle-touche.md)). Retirer l'interrupteur du workflow (et de `test/guards/ci_plan_test.rb`) quand la cause est réglée.
 
