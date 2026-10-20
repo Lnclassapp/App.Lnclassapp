@@ -26,6 +26,21 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   # L'ancien écran « Assigner un cours » (UDR-0030, dépréciée) : sa route n'existe plus.
   def assignments_href(slug) = "/courses/#{slug}/assignments"
 
+  # ADR-0103 §4.6: no list in the current school (a rejected request lost to the migration, then nothing inherited).
+  test "a teacher without any subject in the current school is invited to choose them, with no broken subtitle" do
+    teacher = create_teacher(school: create_school, classrooms: [ create_classroom(level: @tle) ])
+    Orm::TeacherSchoolMaterial.where(teacher_id: teacher.id).delete_all
+    sign_in_as teacher
+
+    get courses_path
+
+    assert_response :success
+    assert_select "#main", text: including(tl("index.teacher_subtitle_none"))
+    assert_select "#main", text: /Les cours de ,/, count: 0
+    assert_select "#courses_empty", text: including(tl("index.teacher_no_material_title"))
+    assert_select "#courses_empty #{modal_link(edit_profile_materials_path)}"
+  end
+
   test "a visitor is sent to the sign-in" do
     get courses_path
     assert_redirected_to new_session_path
@@ -44,21 +59,44 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "title", text: "#{tl("index.page_title")} · Élève · Lnclass"
     assert_select "h1", text: tl("index.title")
-    assert_select "turbo-frame#courses[data-turbo-action=advance][target=_top] #courses_list > li", 2
-    assert_select "#courses_list li:first-child", text: /Philosophie.*La conscience/m
+    assert_select "turbo-frame#courses[data-turbo-action=advance][target=_top] #courses_groups li", 2
+    # CA-1 (UDR-0085 §3.2, ADR-0090 §4.2) : un groupe par matière, dans l'ordre du programme, SVT (3) avant Philosophie (7).
+    assert_equal %w[courses_group_svt courses_group_philosophie], css_select("#courses_groups > section").map { it["id"] }
+    # UDR-0085 §3.4 : sous 640 px, ses cartes restent dans la marge, arrondies (exception à UDR-0005).
+    assert_select "#courses_groups[data-bleed-keep]"
+    assert_select "section#courses_group_svt[aria-labelledby=courses_group_svt_title] h2#courses_group_svt_title" do
+      assert_select "a[href='#{courses_path(material: @svt.slug)}'][aria-label='#{tl("course_group_title.label", material: "SVT", count: 1)}']" do
+        assert_select "img[src*='subjects/svt']"
+        assert_select "span", text: "SVT"
+        assert_select "span", text: tl("course_group_title.count", count: 1)
+      end
+    end
+    # CA-1, CA-6 (UDR-0085 §3.3) : la carte ne répète pas la matière ; rien lu, « Commencer le cours » ouvre le cours.
     assert_select "#course_#{@course.slug} a[href='#{course_path(@course.slug)}']" do
-      assert_select "*", text: including("SVT")
-      # UDR-0013, amendement du 2026-10-02 : l'élève ne voit que son niveau ; le badge de niveau quitte ses cartes.
+      assert_select "*", text: including("SVT"), count: 0
       assert_select "*", text: including("Tle D"), count: 0
-      assert_select "h2", text: "Génétique et évolution"
-      assert_select "*", text: including("Du gène à l'espèce")
-      # UDR-0013, amendement du 2026-10-05 ter : le pied « Ouvrir le cours → » est rétabli.
-      assert_select "*", text: including(tl("course_card.open"))
+      assert_select "h3", text: "Génétique et évolution"
+      assert_select "p.line-clamp-2", text: including("Du gène à l'espèce")
+      assert_select "*", text: including(tl("course_card.progress.new"))
+      assert_select "*", text: including(tl("course_card.open")), count: 0
     end
     assert_no_match(/Brouillon de cours|Cours archivé/, response.body)
     assert_no_match(including(status_label(:published)), response.body)
     assert_select "a[href='#{new_teams_course_path}']", 0
     assert_select "a[href^='#{new_teams_import_path}']", 0
+  end
+
+  # UDR-0130 §2 : la rubrique garde son nom court « Cours » ; le compteur nomme l'objet, « fiches de cours ».
+  test "a student opens the « Cours » tab and reads « 3 fiches de cours »" do
+    create_course(name: "Thalès", level: @tle, material: create_material(name: "Mathématiques"))
+    sign_in_as create_student_for(@course)
+
+    get courses_path
+
+    assert_response :success
+    assert_select "a[href='#{courses_path}'][aria-current=page]", text: "Cours"
+    assert_select "h1", text: "Cours"
+    assert_select "#courses_total", text: "3 fiches de cours"
   end
 
   test "the team sees every course with its status, and opens « Nouveau cours » and « Importer des cours » in the modal" do
@@ -144,8 +182,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     sign_in_as create_student_for(@course)
     get courses_path
 
-    assert_equal %w[material], css_select("form#courses-filters select").map { it["name"] }
-    assert_select "label[for=filter_series]", 0
+    # CA-2 (UDR-0085 §3.1) : l'élève n'a plus que la recherche.
+    assert_empty css_select("form#courses-filters select")
+    assert_select "form#courses-filters input[type=search][name=q]"
   end
 
   test "a series in the address only narrows a student's catalogue, never widens it" do
@@ -154,7 +193,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     get courses_path(level: @tle.slug, series: "c")
 
-    assert_select "#courses_list > li", 1
+    assert_select "#courses_groups li", 1
     assert_select "#course_#{@published.slug}"
   end
 
@@ -200,6 +239,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#courses_total", text: tl("index.total", count: 0)
     assert_select "#courses_empty", text: including(tl("index.no_match_title"))
+    # CA-5 (UDR-0085 §3.5)
+    assert_select "#courses_empty", text: including(tl("index.student_no_match_description"))
     assert_select "#courses_empty a[href='#{courses_path}']", text: tl("index.clear_search")
   end
 
@@ -209,7 +250,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     get courses_path(level: @tle.slug, material: @philo.slug), headers: { "Turbo-Frame" => "courses" }
 
     assert_response :success
-    assert_select "turbo-frame#courses #courses_list > li", 1
+    assert_select "turbo-frame#courses #courses_groups li", 1
     assert_select "#course_#{@published.slug}"
     assert_select "h1", 0
     assert_select "form#courses-filters", 0
@@ -227,48 +268,158 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     Orm::Course.where(status: "published").update_all(status: "draft")
     get courses_path
 
-    assert_select "#courses_empty", text: including(tl("index.empty_title"))
+    assert_select "#courses_empty", text: including("Aucune fiche de cours pour l'instant")
   end
 
-  # UDR-0013, amendement du 2026-10-02 (UDR-0057), décision du porteur : élève seulement. Amendement du 2026-10-05 ter :
-  # la carte garde le badge de la matière filtrée, et son pied « Ouvrir le cours → ».
-  test "a student's catalogue has no subtitle but an info tip, and its cards keep the filtered subject" do
+  # UDR-0013, amendement du 2026-10-02 (UDR-0057) : pas de sous-titre, une infobulle. CA-13, CA-14 (UDR-0085 §3.1) : la
+  # vue d'une matière (l'adresse des bulles « Mes matières ») porte son icône et son nom, sans lien « Tous les cours » ni
+  # titre de groupe ; la recherche y reste limitée à la matière.
+  test "CA-13: a student's catalogue has an info tip; the view of a subject is titled by the subject, search kept inside it" do
+    create_course(name: "Mitose", level: @tle, material: @svt)
     sign_in_as create_student_for(@course)
 
-    get courses_path(material: @svt.slug)
-
+    get courses_path
     assert_select "h1", text: tl("index.title")
     assert_no_match(including(tl("index.subtitle")), response.body)
     assert_select "#main details", text: including(tl("index.student_scope")) do
       assert_select "summary", text: including(tl("index.student_scope_label"))
     end
-    assert_select "#course_#{@course.slug}" do
-      assert_select "h2", text: "Génétique et évolution"
-      assert_select "div.mb-4 > span", 1
-      assert_select "div.mb-4 > span", text: "SVT"
-      assert_select "*", text: including("Tle"), count: 0
-      assert_select "div.border-t", text: including(tl("course_card.open"))
+
+    get courses_path(material: @svt.slug)
+
+    assert_select "title", text: "SVT · Élève · Lnclass"
+    assert_select "#courses_material_title" do
+      assert_select "img[src*='subjects/svt']"
+      assert_select "h1", text: "SVT"
     end
+    assert_select "#main details", 0
+    assert_select "form#courses-filters input[type=hidden][name=material][value='#{@svt.slug}']"
+    assert_select "#courses_groups h2", 0
+    assert_select "#courses_groups li", 2
+    assert_select "#course_#{@published.slug}", 0
+    assert_select "a[href='#{courses_path}']", text: /Tous les cours/, count: 0
+    assert_select "#courses_reset", 0
+
+    get courses_path(material: @svt.slug, q: "mito"), headers: { "Turbo-Frame" => "courses" }
+    assert_select "#courses_groups li", 1
+    assert_select "#courses_reset[href='#{courses_path(material: @svt.slug)}']", text: tl("index.reset")
 
     get courses_path(material: @philo.slug, q: "zzz"), headers: { "Turbo-Frame" => "courses" }
     assert_select "#courses_empty", text: including(tl("index.student_no_match_description"))
+    assert_select "#courses_empty a[href='#{courses_path(material: @philo.slug)}']", text: tl("index.clear_search")
   end
 
-  # UDR-0054, amendment of 2026-10-06: the student's catalogue, filtered or not, brings back to « Accueil »; the team's
-  # catalogue, a destination of its navigation, has no back link.
-  test "the student's catalogue, filtered or not, brings back to « Accueil »; the team's has no back link" do
+  # CA-3 (UDR-0085 §2) : une lecture d'élève en base ne change rien pour l'enseignant ni pour l'équipe.
+  test "CA-3: with a student's read in base, the teacher and the team keep « Ouvrir le cours », without any progress" do
+    create_essential_read(student: create_student_for(@course), essential: create_essential(course: @course))
+    teacher = create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle, series: @course.series) ])
+
+    [ teacher, create_team_member ].each do |user|
+      sign_in_as user
+      get courses_path
+
+      assert_select "#course_#{@course.slug}", text: including(tl("course_card.open"))
+      %w[new started done].each { assert_no_match(including(tl("course_card.progress.#{it}")), response.body) }
+      assert_select "#courses_groups", 0
+      assert_select "#courses_list svg.text-success", 0
+      sign_out
+    end
+  end
+
+  def queries_of(path)
+    get path
+    count = 0
+    counter = ->(*, payload) { count += 1 unless payload[:name] == "SCHEMA" }
+    ActiveSupport::Notifications.subscribed(counter, "sql.active_record") { get path }
+    count
+  end
+
+  # PRD §7 : le nombre de requêtes de la page ne dépend ni du nombre de cours ni des lectures (au plus 14).
+  test "GET /courses as a student: the same number of queries for 2 courses and for 25 courses with reads, at most 14" do
+    student = create_student_for(@course)
+    sign_in_as student
+    paths = [ courses_path, courses_path(q: "e"), courses_path(material: @svt.slug) ]
+    few = paths.map { queries_of(it) }
+
+    23.times do |index|
+      course = create_course(name: "Cours #{index}", level: @tle, material: @svt)
+      create_essential_read(student:, essential: create_essential(course:))
+    end
+    many = paths.map { queries_of(it) }
+
+    assert_equal few, many
+    assert(many.all? { it <= 14 }, many.inspect)
+  end
+
+  test "an unknown subject in the student's address gives the « Cours » title and no course, never an error" do
     sign_in_as create_student_for(@course)
 
-    [ courses_path, courses_path(material: @svt.slug) ].each do |path|
-      get path
+    get courses_path(material: "inconnue", page: 2, after_material: [ "x" ])
 
-      assert_select "nav[aria-label=?] a[href=?]", I18n.t("components.back_link.label"), student_home_path, text: tl("index.back_home")
+    assert_response :success
+    assert_select "h1", text: tl("index.title")
+    assert_select "#courses_material_title", 0
+    assert_select "#courses_empty", text: including(tl("index.empty_title"))
+  end
+
+  # UDR-0085 §3.1 : l'élève revient par le menu (avatar, menu de gauche), plus par un lien « Accueil » ; l'équipe n'en a pas.
+  test "neither the student's catalogue nor the team's has a back link" do
+    [ create_student_for(@course), create_team_member ].each do |user|
+      sign_in_as user
+      [ courses_path, courses_path(material: @svt.slug) ].each do |path|
+        get path
+
+        assert_select "nav[aria-label=?]", I18n.t("components.back_link.label"), 0
+      end
+      sign_out
     end
+  end
 
-    sign_in_as create_team_member
+  # CA-7, CA-8 (UDR-0085 §3.3) : le bouton dit où en est l'élève ; « Reprendre » rouvre la dernière fiche lue (sans
+  # préchargement, qui la servirait sans l'ouvrir), « Revoir » porte la coche verte et ouvre le cours.
+  test "CA-6, CA-7, CA-8: the card says Commencer, Reprendre (last sheet read) or Revoir (green check)" do
+    student = create_student_for(@course)
+    first = create_essential(course: @course, name: "La méiose")
+    second = create_essential(course: @course, name: "La mitose")
+    sign_in_as student
+
+    create_essential_read(student:, essential: second)
+    get courses_path
+    assert_select "#course_#{@course.slug} a[href='#{course_essential_path(@course.slug, second.slug)}'][data-turbo-prefetch=false]",
+                  text: including(tl("course_card.progress.started"))
+    assert_select "#course_#{@course.slug} svg.text-success", 0
+    assert_select "#course_#{@published.slug} a[href='#{course_path(@published.slug)}']", text: including(tl("course_card.progress.new"))
+
+    create_essential_read(student:, essential: first, at: 1.day.ago)
+    get courses_path
+    assert_select "#course_#{@course.slug} a[href='#{course_path(@course.slug)}']" do
+      assert_select "*", text: including(tl("course_card.progress.done"))
+      assert_select "svg.text-success", 1
+    end
+  end
+
+  # CA-15 (UDR-0085 §3.2) : 24 cartes ; la page suivante reçoit la matière de la dernière carte et ne répète pas son titre.
+  test "CA-15: the next page carries after_material and does not repeat the title of the open group" do
+    maths = create_material(name: "Mathématiques")
+    30.times { |index| create_course(name: format("Algèbre %02d", index), level: @tle, material: maths) }
+    sign_in_as create_student_for(@course)
+    next_path = courses_path(page: 2, after_material: "mathematiques")
+
     get courses_path
 
-    assert_select "nav[aria-label=?]", I18n.t("components.back_link.label"), 0
+    assert_select "#courses_total", text: tl("index.total", count: 32)
+    assert_select "#courses_groups > section", 1
+    assert_select "#courses_group_mathematiques h2", text: including(tl("course_group_title.count", count: 30))
+    assert_select "#courses_groups li", 24
+    assert_select "turbo-frame#courses_page_2[loading=lazy][src='#{next_path}']"
+
+    get next_path, headers: { "Turbo-Frame" => "courses_page_2" }
+
+    assert_select "#courses_groups_page_2 > div:first-child li", 6
+    assert_select "#courses_groups_page_2 h2", 2
+    assert_select "#courses_group_mathematiques", 0
+    assert_equal %w[courses_group_svt courses_group_philosophie], css_select("#courses_groups_page_2 > section").map { it["id"] }
+    assert_icons_drawn_once "turbo-frame#courses_page_2"
   end
 
   # UDR-0054 §3.2: from the filtered catalogue, « Cours » brings back to the same filter; from anywhere else, or from
@@ -279,7 +430,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     filtered = courses_path(material: @svt.slug)
 
     get course_path(@course.slug), headers: { "Referer" => "http://www.example.com#{filtered}" }
-    assert_select back, filtered, text: tl("show.back")
+    assert_select back, filtered, text: "Cours"
 
     get course_path(@course.slug), headers: { "Referer" => "http://www.example.com#{student_home_path}" }
     assert_select back, courses_path
@@ -333,6 +484,34 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     # UDR-0013, amendement du 2026-10-05 (ter) : le badge de matière reste sur chaque carte, pour tous les rôles.
     assert_select "#course_#{own.slug} div.mb-4", text: including("Mathématiques")
     assert_select "#course_#{own.slug} div.mb-4", text: including("Tle D")
+    assert_select "#courses_groups, h2[id^=courses_group_]", 0
+  end
+
+  # EPM-12 (UDR-0126 §3.1) : deux matières, rangées par matière ; « Matière » limitée aux siennes, sur ordinateur.
+  test "EPM-12: a teacher of two subjects sees both, grouped, with a « Matière » list of his subjects only" do
+    pc = create_material(name: "Physique-Chimie", category: "science")
+    other = create_material(name: "Mathématiques")
+    d = @course.series
+    mechanics = create_course(name: "Mécanique", level: @tle, series: d, material: pc)
+    foreign = create_course(name: "Probabilités", level: @tle, series: d, material: other)
+    link_level_series(level: @tle, series: d)
+    sign_in_as create_teacher(materials: [ pc, @svt ], classrooms: [ create_classroom(level: @tle, series: d) ])
+
+    get courses_path
+
+    assert_select "#main", text: including(tl("index.teacher_subtitle_many", materials: "Physique-Chimie et SVT"))
+    assert_select "#courses_groups section#courses_group_#{pc.slug} #course_#{mechanics.slug}"
+    assert_select "#courses_groups section#courses_group_#{@svt.slug} #course_#{@course.slug}"
+    assert_select "#course_#{foreign.slug}", 0
+    assert_select "form#courses-filters div.hidden select[name=material]" do
+      assert_equal [ [ "", "Toutes vos matières" ], [ pc.slug, "Physique-Chimie" ], [ @svt.slug, "SVT" ] ],
+                   css_select("select[name=material] option").map { [ it["value"], it.text ] }
+    end
+
+    get courses_path(material: other.slug)
+
+    assert_select "#courses_empty"
+    assert_select "#courses_reset"
   end
 
   test "CA-5: a draft or archived course of the teacher's subject and levels stays out of their catalogue" do
@@ -361,7 +540,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   # dans le frame, quitte les filtres à toutes les largeurs.
   test "CA-6: the search and filters show on a phone too, for every role; a filtered list offers « Tout voir » at every width" do
     teacher = create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle, series: @course.series) ])
-    [ create_student_for(@course), teacher, create_team_member ].each do |user|
+    [ teacher, create_team_member ].each do |user|
       sign_in_as user
 
       get courses_path
@@ -378,9 +557,23 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # CA-2, CA-4 (UDR-0085 §3.1) : chez l'élève, « Tout voir » n'apparaît que pendant une recherche, et l'efface.
+  test "CA-2, CA-4: the student's « Tout voir » shows only while searching; the found courses stay under their subject" do
+    sign_in_as create_student_for(@course)
+
+    get courses_path
+    assert_select "form#courses-filters.flex"
+    assert_select "#courses_reset", 0
+
+    get courses_path(q: "geneti"), headers: { "Turbo-Frame" => "courses" }
+    assert_select "#courses_reset.min-h-tap[href='#{courses_path}']", text: tl("index.reset")
+    assert_select "#courses_group_svt li#course_#{@course.slug}"
+    assert_select "#courses_group_philosophie", 0
+  end
+
   test "the colour and icon of a subject come from its category, never from its name (CA-26)" do
     create_course(name: "Analyse", level: @tle, material: create_material(name: "Mathématiques", category: "literature"))
-    sign_in_as create_student_for(@course)
+    sign_in_as create_team_member
 
     get courses_path
 
@@ -406,7 +599,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", text: "Génétique et évolution · Élève · Lnclass"
     # FU-14 : le seul retour est « Cours », vers le catalogue ; le fil complet a disparu.
     assert_select "main nav", 1
-    assert_select "nav[aria-label=?] a[href='#{courses_path}']", I18n.t("components.back_link.label"), text: tl("show.back")
+    assert_select "nav[aria-label=?] a[href='#{courses_path}']", I18n.t("components.back_link.label"), text: "Cours"
     assert_no_match(/href="#{Regexp.escape(courses_path)}\?material=/, response.body)
     assert_select "main [aria-current=page]", 0
     assert_select "#course_header h1", text: "Génétique et évolution"
@@ -418,8 +611,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_essentials li", 1
     assert_select "#course_essentials a[href='#{course_essential_path(@course.slug, meiose.slug)}']", text: "La méiose"
     assert_select "#course_essentials", text: including("Deux divisions")
-    # Épuration (2026-09-30) : « Essentielles de la leçon », sans le nombre d'exercices de chaque fiche.
-    assert_select "#course_essentials_title", text: "Essentielles de la leçon"
+    # Épuration (2026-09-30), UDR-0130 : « Révisions de la leçon », sans le nombre d'exercices de chaque fiche.
+    assert_select "#course_essentials_title", text: "Révisions de la leçon"
+    assert_select "#course_content[aria-label=?]", "Contenu de la fiche de cours"
     assert_select "#course_essentials", text: /exercice/, count: 0
     assert_no_match(/Fiche en brouillon/, response.body)
     assert_select "#content_status_course_#{@course.slug}", 0
@@ -434,6 +628,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     get course_path(@course.slug)
 
+    # ADR-0090 §4.1 : ouvrir une fiche la retient ; un préchargement au survol la servirait sans l'ouvrir.
+    assert_select "section#course_essentials[data-turbo-prefetch=false]"
     assert_select "#course_essentials [data-controller=reveal]" do
       assert_select "li", 4
       assert_select "li[hidden]", 1
@@ -493,6 +689,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#content_status_course_#{@draft.slug}", text: including(status_label(:draft)) do
       assert_select "form, a", 0
     end
+    assert_match including("Actions sur la fiche de cours « Brouillon de cours »"), response.body
     assert_select "#course-actions-menu" do
       assert_select "a[role=menuitem][data-turbo-method=patch][href='#{publish_teams_course_path(@draft.slug)}']"
       assert_select "a[role=menuitem][data-turbo-method=patch][href='#{publish_all_teams_course_path(@draft.slug)}']",
@@ -554,7 +751,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     get course_path(bare.slug)
 
-    assert_select "#course_essentials", text: including(tl("show.empty"))
+    assert_select "#course_essentials", text: including("Aucune fiche de révision pour cette fiche de cours.")
     assert_select "#course_content", 0
   end
 

@@ -333,7 +333,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_text "100 %"
     end
     assert_no_page_reload do
-      click_menu_action("[id='student_#{student.public_id}']", t("classroom.classrooms.roster.issue_code"))
+      issue_recovery_code_from_roster("[id='student_#{student.public_id}']")
       assert_toast t("identity.pin_recovery_codes.create.issued")
       within "turbo-frame#modal dialog#pin-recovery-code-modal[open]" do
         assert_text "Aya Kouassi"
@@ -346,6 +346,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     # The last score in the roster leads to the detailed result (decision of the porteur, 2026-09-27). The blocks of
     # Lot E push the roster to the foot of the page, under the toast of the code just issued: it leaves after 5 s.
     assert_no_selector "[data-controller=toast]", wait: 10
+    # The code was issued from the student's file (rapports-de-classe, memo Q4): back to the classroom page.
+    find("nav[aria-label='Retour'] a").click
     within("[id='student_#{student.public_id}']") { click_on t("classroom.classrooms.roster.see_result") }
     assert_current_path exercise_session_result_path(session.public_id)
     assert_text t("assessment.session_results.show.student", name: "Aya Kouassi")

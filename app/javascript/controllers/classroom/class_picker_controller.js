@@ -1,6 +1,6 @@
 // ⚡ FRONT · classroom/class_picker_controller — cascade DRENA → établissement → niveau → classe de l'inscription élève
-// Rôle : chaque choix pose le src du frame suivant et vide ceux d'après ; « Créer mon compte » attend une classe cochée ; liste absente → erreur
-// ADR  : 0051, 0085 · UDR : 0081 (§3.3), sur le modèle de school/drena_schools_controller
+// Rôle : chaque choix pose le src du frame suivant et vide ceux d'après ; « Changer » rouvre les listes ; l'envoi attend une classe cochée ; liste absente → erreur
+// ADR  : 0051, 0085 · UDR : 0081 (§3.3), 0091 (§3.2 : action change), sur le modèle de school/drena_schools_controller
 import { Controller } from "@hotwired/stimulus"
 
 const DRENA = "__drena__"
@@ -8,7 +8,7 @@ const SCHOOL = "__school__"
 const LEVEL = "__level__"
 
 export default class extends Controller {
-  static targets = ["schools", "levels", "classrooms", "submit", "loadError"]
+  static targets = ["schools", "levels", "classrooms", "submit", "loadError", "schoolSummary", "schoolFields"]
   static values = { schoolsUrl: String, levelsUrl: String, classroomsUrl: String }
 
   // Un re-rendu 422 est un morphing : il remet le bouton du serveur (actif) sans reconnecter le contrôleur.
@@ -36,6 +36,24 @@ export default class extends Controller {
     if (!value) return this.clear(this.levelsTarget)
 
     this.show(this.levelsTarget, this.levelsUrlValue.replace(SCHOOL, encodeURIComponent(value)))
+  }
+
+  // UDR-0091 §3.2 : « Changer » (un lien, pour le repli sans JavaScript) remplace la ligne repliée par la DRENA et
+  // l'établissement, celui-ci à choisir de nouveau ; le niveau et la classe se vident, le focus va à la DRENA.
+  change(event) {
+    if (!this.hasSchoolFieldsTarget) return
+
+    event.preventDefault()
+    if (this.hasSchoolSummaryTarget) this.schoolSummaryTarget.hidden = true
+    this.schoolFieldsTarget.hidden = false
+    const school = this.schoolsTarget.querySelector("select")
+    if (school) {
+      // Rails n'écrit l'invite que sans établissement choisi : elle revient ici, d'après data-prompt.
+      if (!school.querySelector("option[value='']")) school.prepend(new Option(school.dataset.prompt || "", ""))
+      school.value = ""
+    }
+    this.clear(this.levelsTarget, this.classroomsTarget)
+    this.schoolFieldsTarget.querySelector("select")?.focus()
   }
 
   loadClassrooms({ target: { value } }) {

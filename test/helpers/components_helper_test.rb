@@ -34,6 +34,16 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_raises(ArgumentError) { ui_icon("home", variant: :duotone) }
   end
 
+  # UDR-0084 §3.1 : le casque et la porte ouverte n'existent pas dans Heroicons ; ui_icon les prend dans vendor/lnclass-icons.
+  test "ui_icon falls back on the Lnclass icons when Heroicons has none" do
+    show ui_icon("headset") + ui_icon("door-open", size: :sm, label: "Entrer")
+
+    assert_select "svg.shrink-0.size-5[aria-hidden=true][focusable=false][viewBox='0 0 24 24'][stroke=currentColor] path", minimum: 1
+    assert_select "svg.size-4[role=img][aria-label=Entrer]"
+    assert_select "svg[data-slot]", 2
+    assert_raises(ArgumentError) { ui_icon("headset", variant: :mini) }
+  end
+
   test "ui_icon_sprite draws each icon of its block once, in a <symbol> after the block, taken back by <use>" do
     show(ui_icon_sprite { safe_join([ ui_icon("home"), ui_icon("home", size: :lg), ui_icon("home", variant: :mini, label: "Accueil") ]) })
 
@@ -363,6 +373,15 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "dialog#account_panel .sheet-handle", 0
   end
 
+  # UDR-0087 §3.3 : quitter la séance, une feuille sous 700 px, ouverte par une croix seule, lien sans JavaScript.
+  test "ui_modal as a compact sheet, opened by an icon-only trigger named by its label" do
+    show ui_modal(title: "Quitter ?", id: "quit", placement: :phone_sheet, trigger_label: "Quitter la session",
+                  trigger_icon: "x-mark", trigger_href: "/exercises/1")
+
+    assert_select "dialog#quit.dialog-phone-sheet .sheet-handle.min-\\[700px\\]\\:hidden"
+    assert_select "a[href='/exercises/1'][aria-label='Quitter la session'][aria-controls=quit][data-action='modal#open']", text: ""
+  end
+
   test "ui_modal without trigger nor block keeps an explicit id" do
     show ui_modal(title: "Info", id: "info")
 
@@ -400,6 +419,28 @@ class ComponentsHelperTest < ActionView::TestCase
     # Mouvement réduit : ui-dialog ne glisse qu'en motion-safe (revue de la PR #191), la feuille n'a plus à l'arrêter.
     assert_select "dialog#help-sheet.ui-dialog.dialog-sheet.sm\\:max-w-sm"
     assert_select "dialog#help-sheet > span.sheet-handle.lg\\:hidden[aria-hidden=true]", 1
+  end
+
+  # UDR-0089 §3.4 : `placement: :phone_sheet` est une feuille sous 700 px seulement, sa poignée cachée dès 700 px ;
+  # `size: :form` la borne à 480 px une fois centrée.
+  test "ui_modal placed as a phone sheet hides its handle from 700 px and can be 480 px wide" do
+    show ui_modal(title: "Changer mon code secret", id: "pin", size: :form, placement: :phone_sheet) { "Corps" }
+
+    assert_select "dialog#pin.ui-dialog.dialog-phone-sheet.sm\\:max-w-120:not(.dialog-sheet)"
+    assert_select "dialog#pin > span.sheet-handle.min-\\[700px\\]\\:hidden[aria-hidden=true]:not(.lg\\:hidden)", 1
+  end
+
+  # UDR-0089 §3.4, palier 700-1 023 px : la feuille de :phone_sheet cesse sous 700 px (43,75 rem), et non à lg comme :sheet ;
+  # au-delà, la <dialog> garde ses utilitaires de modale centrée (m-auto, sm:max-w-120).
+  test "the phone sheet stops at 700 px in the stylesheet, where the dialog is centred again" do
+    css = Rails.root.join("app/assets/stylesheets/application.tailwind.css").read
+    rule = css[/@media \(max-width: ([\d.]+)rem\) \{\s*dialog\.dialog-phone-sheet \{[^}]*\}/]
+
+    assert rule, "règle de .dialog-phone-sheet introuvable"
+    assert_in_delta 43.75, rule[/max-width: ([\d.]+)rem/, 1].to_f, 0.02, "la feuille doit s'arrêter à 700 px"
+    assert_no_match(/dialog\.dialog-phone-sheet/, css.sub(rule, ""), "aucune autre règle ne la place")
+    show ui_modal(title: "Changer mon code secret", id: "pin", size: :form, placement: :phone_sheet) { "Corps" }
+    assert_select "dialog#pin.ui-dialog.sm\\:max-w-120"
   end
 
   test "ui_modal keeps its centred rendering by default, and refuses an unknown placement" do
@@ -539,6 +580,15 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "span.bg-gold\\/20", text: "Mathématiques"
   end
 
+  test "ui_subject_badges draws one badge per subject, in order, in a wrapping row (ADR-0103 §4.5)" do
+    tag = Data.define(:name, :category)
+    show ui_subject_badges([ tag.new("Physique-Chimie", "science"), tag.new("Français", "literature") ], size: :sm, gap: "gap-1")
+
+    assert_select "div.flex.flex-wrap.gap-1 > span", 2
+    assert_select "div > span:first-child", text: "Physique-Chimie"
+    assert_select "div > span:last-child", text: "Français"
+  end
+
   test "ui_subject_badge falls back to neutral for an unknown or missing category" do
     show ui_subject_badge("Latin", category: :ancient) + ui_subject_badge("Latin", category: nil, size: :sm)
 
@@ -655,6 +705,26 @@ class ComponentsHelperTest < ActionView::TestCase
     show ui_avatar("Awa", src: "/a.png", size: :sm)
 
     assert_select "img[alt=Awa][src='/a.png'].size-8"
+  end
+
+  # UDR-0084 §3.4 : la couleur suit le compte (public_id), pas le nom ; seuls les tons lisibles (AA) sont tirés.
+  test "ui_avatar takes its tone from a seed: same seed, same tone, whatever the name" do
+    tones = %w[01HZX4 01HZX5 01HZX6 01HZX7 01HZX8 01HZX9 01HZXA 01HZXB].map { avatar_tone(ui_avatar("Awa Koné", tone_seed: it)) }
+
+    assert_equal avatar_tone(ui_avatar("Awa Koné", tone_seed: "01HZX4")), avatar_tone(ui_avatar("Kouassi Yao", tone_seed: "01HZX4"))
+    assert_operator tones.uniq.size, :>, 1
+    assert_not_includes tones, nil
+    assert_equal ComponentsHelper::AVATAR_TONES[:school], avatar_tone(ui_avatar("Awa", tone: :school, tone_seed: "01HZX4"))
+  end
+
+  # UDR-0084 §3.4 : la pastille « + » invite à ajouter sa photo ; décorative, seulement sans photo.
+  test "ui_avatar adds the « + » badge without a photo only" do
+    show ui_avatar("Awa Koné", size: :sm, add_photo: true)
+
+    assert_select "span.relative.inline-flex > span.ui-avatar[role=img][aria-label='Awa Koné']", text: "AK"
+    assert_select "span.relative > span[aria-hidden=true].rounded-full.bg-brand-strong.text-white.size-4", text: "+"
+    assert_not_includes ui_avatar("Awa Koné", src: "/a.png", add_photo: true), "+"
+    assert_not_includes ui_avatar("Awa Koné"), "+"
   end
 
   # ADR-0060, UDR-0047: a photo is round, cropped to fill, loaded lazily; the xl size serves the photo modal.
@@ -942,6 +1012,9 @@ class ComponentsHelperTest < ActionView::TestCase
     node = Nokogiri::HTML5.fragment(node.to_s) unless node.respond_to?(:css)
     node.css("svg path").map { it["d"] }
   end
+
+  # Classes de couleur d'un avatar d'initiales : le ton tiré dans AVATAR_TONES.
+  def avatar_tone(html) = ComponentsHelper::AVATAR_TONES.values.find { html.include?(it) }
 
   def show(html)
     self.rendered = self.class.content_class.new(html.to_s)

@@ -26,9 +26,12 @@ module Factories
       Orm::LevelSeries.create!(level:, series:)
     end
 
-    def create_material(name: nil, category: "science", shortname: nil)
+    def create_material(name: nil, category: "science", shortname: nil, position: :program)
       sequence = factory_sequence
-      Orm::Material.create!(name: name || "Matière #{sequence}", shortname: shortname || "M#{sequence}", category:)
+      name ||= "Matière #{sequence}"
+      # The program rank of ADR-0090 §4.2, as the migration and the team's creation give it; any other has none.
+      position = Repositories::Catalog::ProgramOrder.rank(name.parameterize) if position == :program
+      Orm::Material.create!(name:, shortname: shortname || "M#{sequence}", category:, position:)
     end
 
     def create_course(level: create_level, material: create_material, series: nil, name: "Cours #{factory_sequence}",
@@ -41,6 +44,19 @@ module Factories
                          content: "<p>L'essentiel à retenir.</p>", author: course.author, **attributes)
       position ||= course.essentials.maximum(:position).to_i + 1
       Orm::Essential.create!(course:, name:, position:, content:, author:, **factory_publication(status), **attributes)
+    end
+
+    # ADR-0105 : une image de fiche vérifiée et stockée comme par l'envoi de l'équipe, rattachée ou non à une fiche.
+    def create_essential_image(essential: nil, alt: nil, fixture: "photos/photo.jpg", created_at: nil)
+      input = Dtos::Shared::ContentImageInput.new(file: StringIO.new(file_fixture(fixture).binread))
+      raise ArgumentError, "#{fixture} n'est pas une image de contenu : #{input.errors.full_messages}" unless input.valid?
+
+      stored = Repositories::Catalog::EssentialImageStore.new.store(data: input.data, content_type: input.content_type,
+                                                                    width: input.width, height: input.height)
+      Orm::EssentialImage.find_by!(public_id: stored.public_id).tap do |image|
+        columns = { essential_id: essential&.id, alt:, created_at: }.compact
+        image.update_columns(columns) if columns.any?
+      end
     end
 
     # Returns { levels:, series:, materials: }, each indexed by slug.

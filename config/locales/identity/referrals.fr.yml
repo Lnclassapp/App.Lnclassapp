@@ -6,12 +6,13 @@ fr:
         page_title: "Inviter un collègue"
         back: "Classes"
         title: "Inviter un collègue"
-        subtitle: "Vos collègues s'inscrivent avec votre lien : leur établissement est déjà rempli."
+        subtitle: "Deux liens : l'un pour vos collègues de votre établissement, l'autre pour tous les autres."
         closed_title: "L'invitation n'est pas ouverte"
         closed_description: "Seul un enseignant d'un établissement actif peut inviter ses collègues."
+      # ADR-0094 §11 (MET-8) : le lien de l'établissement courant
       invite:
-        title: "Inviter un collègue"
-        subtitle: "Partagez votre lien : vos collègues de %{school} s'inscrivent avec votre établissement déjà rempli."
+        title: "Inviter un collègue de %{school}"
+        subtitle: "Partagez ce lien : vos collègues de %{school} s'inscrivent avec l'établissement déjà rempli."
         count:
           zero: "Aucun collègue inscrit grâce à vous pour l'instant."
           one: "1 collègue inscrit grâce à vous"
@@ -19,13 +20,20 @@ fr:
         count_label:
           one: "collègue inscrit grâce à vous"
           other: "collègues inscrits grâce à vous"
-        link_label: "Votre lien d'invitation"
+        link_label: "Le lien de votre établissement"
         message: "Bonjour ! J'utilise Lnclass avec mes classes à %{school}. Inscris-toi comme enseignant avec ce lien, l'établissement est déjà rempli : %{link}"
         whatsapp: "WhatsApp"
         sms: "SMS"
         copy: "Copier le lien"
         copy_label: "Copier votre lien d'invitation"
         native: "Partager…"
+      # ADR-0094 §11 (MET-8) : le lien de parrainage, sans établissement
+      sponsor:
+        title: "Inviter un autre collègue"
+        subtitle: "Pour un collègue d'un autre établissement : il choisit le sien en s'inscrivant."
+        link_label: "Votre lien de parrainage"
+        message: "Bonjour ! J'utilise Lnclass avec mes classes. Inscris-toi comme enseignant avec ce lien, tu choisiras ton établissement : %{link}"
+        copy_label: "Copier votre lien de parrainage"
       # Le compteur, le message, « WhatsApp », « Copier le lien » et le badge sont ceux du bloc (invite.*, ambassador.*).
       sidebar_card:
         title: "Parrainage"

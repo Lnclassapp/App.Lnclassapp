@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::School::SchoolRepositoryPort
 # Rôle : contrat des établissements, de leur code d'établissement et du rattachement des enseignants
-# ADR  : 0030, 0036, 0039, 0056, 0057, 0063, 0071, 0083 · UDR : 0079 · aucune recherche par code national (IE-21)
+# ADR  : 0030, 0036, 0039, 0056, 0057, 0063, 0071, 0083, 0094 · UDR : 0079 · aucune recherche par code national (IE-21)
 module Ports
   module School
     module SchoolRepositoryPort
@@ -67,6 +67,25 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #replace_school_code"
       end
 
+      # ADR-0096 §4.4 : établissements de la sélection (Dtos::School::SchoolSelection, mêmes filtres que la liste) créés avant
+      # `created_before`. → Integer
+      def count_for_code_regeneration(selection:, created_before:)
+        raise NotImplementedError, "#{self.class} doit implémenter #count_for_code_regeneration"
+      end
+
+      # Les mêmes, id > after_id, par id croissant, `limit` au plus ; label = nom, rotated_at = school_code_rotated_at.
+      # → [Entities::School::RegenerationCandidate]
+      def code_regeneration_batch(selection:, created_before:, after_id:, limit:)
+        raise NotImplementedError, "#{self.class} doit implémenter #code_regeneration_batch"
+      end
+
+      # rows : [{ id:, school_code: }] ; un seul UPDATE qui pose le code et school_code_rotated_at = at, seulement là où le code
+      # n'a pas changé depuis `unchanged_since` (course avec le geste un par un, reprise). Un code pris lève l'erreur d'unicité :
+      # l'appelant écrit dans TransactionPort#attempt. → [Integer] (ids écrits)
+      def replace_school_codes(rows:, at:, unchanged_since:)
+        raise NotImplementedError, "#{self.class} doit implémenter #replace_school_codes"
+      end
+
       # Candidats à la génération des classes manquantes (ADR-0056) : statut active ou draft, aucune classe (active ou
       # archivée) de school_year, id > after_id, par id croissant, `limit` au plus. → [Inserted]
       def without_classrooms(school_year:, after_id:, limit:)
@@ -84,9 +103,34 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #attach_teacher"
       end
 
+      # ADR-0094 §4.5 : sous le verrou de la ligne users de l'enseignant, compte ses établissements puis insère ; deux
+      # « Rejoindre » simultanés ne dépassent pas `cap`. Le principal se décide sous le verrou : le premier établissement.
+      # → Result(Boolean : la ligne posée est principale) | failure(:conflict, errors: { base: [:already_attached] }) (aussi un
+      #   doublon de l'index unique) | failure(:conflict, errors: { base: [:schools_limit] })
+      def attach_teacher_within_cap(teacher_id:, school_id:, cap:, at:)
+        raise NotImplementedError, "#{self.class} doit implémenter #attach_teacher_within_cap"
+      end
+
+      # Verrouille la ligne users de l'enseignant jusqu'à la fin de la transaction en cours : quitter et retirer comptent ses
+      # établissements après lui (ADR-0094 §4.5). → true
+      def lock_teacher(teacher_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #lock_teacher"
+      end
+
       # → Integer | nil
       def primary_school_id_for(teacher_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #primary_school_id_for"
+      end
+
+      # Les établissements d'un enseignant, le principal en premier, puis par date de rattachement. → [Integer]
+      def school_ids_for(teacher_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #school_ids_for"
+      end
+
+      # Après un retrait ou un départ (ADR-0094 §4.4) : si aucune ligne principale ne reste, marque la plus ancienne.
+      # → Integer | nil (l'établissement principal ; nil : plus aucune ligne, ou la plus ancienne a disparu avant d'être marquée)
+      def promote_primary(teacher_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #promote_primary"
       end
 
       # Retrait par la direction (ADR-0071) : supprime le rattachement à cet établissement, jamais à un autre.

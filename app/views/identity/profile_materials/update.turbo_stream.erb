@@ -1,0 +1,6 @@
+<%# 🌐 UI · identity/profile_materials/update — succès de « Mes matières » %>
+<%# Rôle : toast, modale refermée, carte #profile_information rendue de nouveau avec les badges %>
+<%# ADR  : 0103 · UDR : 0006, 0125 (§3.3) %>
+<%= turbo_stream_toast t(".updated"), type: :success %>
+<%= turbo_stream.update "modal", "" %>
+<%= turbo_stream.replace "profile_information", partial: "identity/profiles/information", locals: { profile: @profile } %>

@@ -100,10 +100,11 @@ module Queries
 
         cards = page.cards.index_by(&:title)
 
-        assert_equal [ fiches.public_id, "Elles sont en ligne.", "sheets", :teacher, "male", "Kouassi", "SVT" ],
-                     cards["Nouvelles fiches"].to_h.values_at(:public_id, :body, :illustration, :author_role, :gender, :last_name, :material_name)
+        assert_equal [ fiches.public_id, "Elles sont en ligne.", "sheets", :teacher, "male", "Kouassi", [ "SVT" ] ],
+                     cards["Nouvelles fiches"].to_h.values_at(:public_id, :body, :illustration, :author_role, :gender, :last_name, :materials)
+                                              .then { [ *it[0..5], it[6].map(&:name) ] }
         assert_equal [ false, false, true, true, false ], %i[official? image? audio? edited? anonymized?].map { cards["Nouvelles fiches"].public_send(it) }
-        assert_equal [ :school_admin, "female", "Kamaté", nil ], cards["Devoirs communs"].to_h.values_at(:author_role, :gender, :last_name, :material_name)
+        assert_equal [ :school_admin, "female", "Kamaté", [] ], cards["Devoirs communs"].to_h.values_at(:author_role, :gender, :last_name, :materials)
         assert_equal [ true, true, false, false ], %i[official? image? audio? edited?].map { cards["Devoirs communs"].public_send(it) }
         assert_equal [ :team, false, false, false ], [ cards["Rentrée numérique"].author_role, cards["Rentrée numérique"].official?,
                                                        cards["Rentrée numérique"].image?, cards["Rentrée numérique"].audio? ]
@@ -151,9 +152,19 @@ module Queries
         assert_equal [ "nuit", "Bus scolaire" ], [ card.theme, card.illustration.name ]
       end
 
+      # EPM-21 (ADR-0103 §4.5, UDR-0127 §3.4) : les matières de l'auteur dans l'établissement de l'annonce, dans l'ordre.
+      test "a teacher's card carries his subjects of the school of the announcement, in order" do
+        pc = create_material(name: "Physique-Chimie", shortname: "PC")
+        set_teacher_materials(@kouassi, @school, [ pc, Orm::Material.find_by!(name: "SVT") ])
+        add_teacher_school(@kouassi, create_school, materials: [ create_material(name: "Philosophie") ])
+        from_teacher("Sortie")
+
+        assert_equal %w[Physique-Chimie SVT], page.cards.sole.materials.map(&:name)
+      end
+
       test "a card built without a theme takes « Ciel », the look before the themes" do
         card = InboxQuery::MessageCard.new(public_id: "msg", title: "Titre", body: "Texte.", illustration: "info", author_role: :team,
-                                           gender: nil, last_name: "Traoré", material_name: nil, anonymized: false, official: false,
+                                           gender: nil, last_name: "Traoré", materials: [], anonymized: false, official: false,
                                            image: false, audio: false, edited: false, dismissed: false)
 
         assert_equal Entities::Communication::Message::DEFAULT_THEME, card.theme

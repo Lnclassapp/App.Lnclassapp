@@ -42,6 +42,8 @@ module UseCases
         @team = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "content")
       end
 
+      def blank_alt_message(number) = I18n.t("activemodel.errors.models.dtos/catalog/essential_input.image_alt_blank", number:)
+
       def update(actor: @team, slug: "genetique-la-meiose", **attributes)
         dto = Dtos::Catalog::EssentialInput.new(name: "La Méiose", subtitle: "", content: "<div><em>Nouveau</em></div>", **attributes)
         UpdateEssential.new(essentials: @essentials, transaction: @transaction, policy: Policies::Catalog::ManageContentPolicy.new)
@@ -67,6 +69,120 @@ module UseCases
 
         assert_equal [ 10, "genetique-la-meiose", 1, 2, 3, "published", "published" ],
                      [ sent.id, sent.slug, sent.course_id, sent.position, sent.author_id, sent.status, sent.course_status ]
+      end
+
+      test "ADR-0105 : les textes de remplacement saisis vont au repository avec la fiche" do
+        sent = nil
+        @essentials.define_singleton_method(:update) { |essential:| (sent = essential) && Shared::Result.success(essential) }
+
+        update(image_alts: { "img1" => " Une pile " })
+
+        assert_equal [ [ "img1", "Une pile" ] ], sent.images.map { [ it.public_id, it.alt ] }
+      end
+
+      # ADR-0074 §4.2, ADR-0105 §4.4 : une fiche en ligne ne perd pas un texte de remplacement et ne reçoit pas d'emplacement.
+      test "ADR-0105 : une fiche publiée dont un texte de remplacement est vidé est refusée, la saisie nomme l'image" do
+        result = update(image_alts: { "img1" => "Une pile", "img2" => " " })
+
+        assert_equal :invalid, result.code
+        assert_equal [ :"image_alts.img2" ], result.errors.keys
+        assert_equal blank_alt_message(2), result.errors.values.flatten.first
+        assert_equal 0, @essentials.updates
+      end
+
+      test "ADR-0105 : une fiche publiée refuse un emplacement d'image, mal écrit ou illisible, sans rien écrire" do
+        slot = update(content: "<p>[[image: une pile]]</p>")
+        malformed = update(content: "<ul><li>[[image: une pile]]</li></ul>")
+        unreadable = update(content: "<p>" * 40_000)
+
+        assert_equal [ :invalid ] * 3, [ slot, malformed, unreadable ].map(&:code)
+        messages = %i[image_slots_left image_slots_malformed image_slots_unreadable].map do
+          I18n.t("activemodel.errors.models.dtos/catalog/essential_input.attributes.content.#{it}")
+        end
+        assert_equal messages, [ slot, malformed, unreadable ].map { it.errors.fetch(:content).first }
+        assert_equal 0, @essentials.updates
+      end
+
+      # Menace n° 15 : le repository rend la fiche relue, textes de la base fusionnés avec la saisie. Une image neuve citée sans sa clé
+      # y figure sans texte de remplacement ; la transaction est annulée.
+      class RollbackProbe < FakeTransaction
+        attr_reader :rolled_back
+
+        def call
+          super
+        rescue StandardError
+          @rolled_back = true
+          raise
+        end
+      end
+
+      def reread_with(*images, status: nil)
+        @essentials.define_singleton_method(:update) do |essential:|
+          @updates += 1
+          saved = essential.dup
+          saved.status = status if status
+          saved.images = images.map { |public_id, alt| Entities::Shared::ContentImage.new(public_id:, alt:) }
+          Shared::Result.success(saved)
+        end
+      end
+
+      test "menace n° 15 : une fiche publiée dont l'image neuve n'a pas de texte de remplacement une fois relue est refusée, l'écriture annulée" do
+        probe = @transaction = RollbackProbe.new
+        reread_with([ "img1", "Une pile" ], [ "img2", nil ])
+
+        result = update(image_alts: { "img1" => "Une pile" })
+
+        assert_equal [ :invalid, [ :"image_alts.img2" ] ], [ result.code, result.errors.keys ]
+        assert_equal blank_alt_message(2), result.errors.values.flatten.first
+        assert_equal [ 1, true ], [ @essentials.updates, probe.rolled_back ]
+      end
+
+      test "menace n° 15 : une fiche publiée dont toutes les images relues ont leur texte de remplacement est enregistrée, sans annulation" do
+        probe = @transaction = RollbackProbe.new
+        reread_with([ "img1", "Une pile" ], [ "img2", "Une lampe" ])
+
+        result = update(image_alts: { "img2" => "Une lampe" })
+
+        assert result.success?
+        assert_equal [ "Une pile", "Une lampe" ], result.value.images.map(&:alt)
+        assert_not probe.rolled_back
+      end
+
+      # La fiche est brouillon à la lecture, publiée à l'écriture (publication concurrente) : le contrôle suit la fiche relue sous verrou.
+      test "menace n° 15 : une fiche lue brouillon et relue publiée, avec une image sans texte de remplacement, est refusée, l'écriture annulée" do
+        probe = @transaction = RollbackProbe.new
+        reread_with([ "img1", nil ], status: "published")
+
+        result = update(slug: "genetique-la-mitose")
+
+        assert_equal [ :invalid, [ :"image_alts.img1" ] ], [ result.code, result.errors.keys ]
+        assert_equal [ 1, true ], [ @essentials.updates, probe.rolled_back ]
+      end
+
+      test "menace n° 15 : une fiche brouillon relue brouillon enregistre ses images sans texte de remplacement" do
+        probe = @transaction = RollbackProbe.new
+        reread_with([ "img1", nil ])
+
+        assert update(slug: "genetique-la-mitose").success?
+        assert_not probe.rolled_back
+      end
+
+      test "menace n° 15 : une fiche publiée dont le texte relu garde un emplacement d'image est refusée sur le texte, l'écriture annulée" do
+        probe = @transaction = RollbackProbe.new
+        @essentials.define_singleton_method(:update) do |essential:|
+          saved = essential.dup
+          saved.content = "<p>[[image: une pile]]</p>"
+          Shared::Result.success(saved)
+        end
+
+        result = update
+
+        assert_equal [ :invalid, [ :content ] ], [ result.code, result.errors.keys ]
+        assert probe.rolled_back
+      end
+
+      test "ADR-0105 : un brouillon garde ses emplacements et ses textes de remplacement vides" do
+        assert update(slug: "genetique-la-mitose", content: "<p>[[image: une pile]]</p>", image_alts: { "img1" => "" }).success?
       end
 
       test "hors équipe, rien ne change, même pour une fiche inconnue" do

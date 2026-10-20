@@ -7,6 +7,8 @@ require "test_helper"
 module Queries
   module Classroom
     class ClassroomOverviewQueryTest < ActiveSupport::TestCase
+      TODAY = Date.new(2026, 10, 15)
+
       setup do
         @classroom = create_classroom
       end
@@ -14,7 +16,8 @@ module Queries
       def overview(show_roster: true, **) = ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster:, **)
 
       test "l'aperçu porte les élèves et leurs nouveaux, les jours de séance, les exercices assignés et les cours" do
-        assert_equal %i[students new_students_count session_days assignments courses], ClassroomOverviewQuery::Overview.members
+        assert_equal %i[students students_total grade_group grade_counts new_students_count session_days assignments courses],
+                     ClassroomOverviewQuery::Overview.members
       end
 
       test "jours de séance : ceux de l'enseignant pour cette classe, triés ; vides s'il n'en a pas ; nil pour l'équipe" do
@@ -117,9 +120,29 @@ module Queries
         assert_equal %w[Botanique Génétique], courses.map(&:name)
         assert_equal ClassroomOverviewQuery::CourseRow.new(slug: genetics.slug, name: "Génétique", subtitle: "Hérédité", level_name: "Tle",
                                                            series_name: "D", material_name: "SVT", material_category: "science",
-                                                           essentials_count: 2), courses.last
+                                                           essentials_count: 2, material_slug: svt.slug), courses.last
         assert_equal 0, courses.first.essentials_count
         assert_equal %w[Fonctions Botanique Génétique], overview.courses.map(&:name)
+      end
+
+      # EPM-18, EPM-19 (UDR-0127 §3.1, ADR-0103 §4.5) : ses matières de l'établissement de la classe, dans son ordre ; deux
+      # enseignants d'une classe ne voient chacun que les leurs ; la liste d'un autre de ses établissements ne compte pas.
+      test "cours : ceux de ses matières dans l'établissement de la classe, rangés dans son ordre" do
+        tle = create_level(name: "Tle")
+        @classroom = create_classroom(level: tle)
+        svt = create_material(name: "SVT")
+        pc = create_material(name: "Physique-Chimie")
+        maths = create_material(name: "Mathématiques")
+        both = create_teacher(materials: [ svt, pc ], classrooms: [ @classroom ])
+        add_teacher_school(both, create_school, materials: [ maths ])
+        colleague = create_teacher(material: maths, classrooms: [ @classroom ])
+        [ [ pc, "Optique" ], [ svt, "Génétique" ], [ maths, "Fonctions" ], [ svt, "Botanique" ] ].each do |material, name|
+          create_course(level: tle, material:, name:)
+        end
+
+        assert_equal [ %w[svt Botanique], %w[svt Génétique], %w[physique-chimie Optique] ],
+                     overview(teacher_id: both.id).courses.map { [ it.material_slug, it.name ] }
+        assert_equal %w[Fonctions], overview(teacher_id: colleague.id).courses.map(&:name)
       end
 
       test "un exercice assigné ne casse rien (CS#B8)" do
@@ -253,6 +276,227 @@ module Queries
 
       test "une classe inconnue n'a pas de page" do
         assert_nil ClassroomOverviewQuery.new.call(public_id: "inconnue", show_roster: true)
+      end
+
+      # ADR-0101 §8 : « Revoir la fiche » ne lit les lacunes que d'un cours que la page de la classe montre.
+      test "shown_course? : un cours publié du niveau de la classe, dans les matières de l'enseignant ; rien d'autre" do
+        material = create_material
+        teacher = create_teacher(material:, classrooms: [ @classroom ])
+        shown = create_course(level: @classroom.level, material:)
+        other_material = create_course(level: @classroom.level)
+        other_level = create_course
+        draft = create_course(level: @classroom.level, material:, status: "draft")
+        query = ClassroomOverviewQuery.new
+        shown_for = ->(course, **options) { query.shown_course?(public_id: @classroom.public_id, course_slug: course.slug, **options) }
+
+        assert shown_for.call(shown, teacher_id: teacher.id)
+        assert_not shown_for.call(other_material, teacher_id: teacher.id)
+        assert shown_for.call(other_material)
+        assert_not shown_for.call(other_level)
+        assert_not shown_for.call(draft)
+        assert_not query.shown_course?(public_id: "inconnue", course_slug: shown.slug)
+      end
+
+      # ADR-0103 §4.5 : les matières de l'enseignant sont celles de l'établissement de la classe, pas celles d'un autre.
+      test "shown_course? : seules comptent ses matières dans l'établissement de la classe" do
+        here, elsewhere = create_material(name: "SVT"), create_material(name: "Histoire")
+        teacher = create_teacher(material: here, classrooms: [ @classroom ])
+        add_teacher_school(teacher, create_school, materials: [ elsewhere ])
+        mine = create_course(level: @classroom.level, material: here)
+        theirs = create_course(level: @classroom.level, material: elsewhere)
+        query = ClassroomOverviewQuery.new
+
+        assert query.shown_course?(public_id: @classroom.public_id, course_slug: mine.slug, teacher_id: teacher.id)
+        assert_not query.shown_course?(public_id: @classroom.public_id, course_slug: theirs.slug, teacher_id: teacher.id)
+      end
+
+      # CA-16 (accueil-eleve, ADR-0089 §4.2, UDR-0084 §3.7) : « Fait seul (7 j) » compte les sessions terminées, standard,
+      # sans assignation, commencées dans les 7 derniers jours d'Abidjan, aujourd'hui compris.
+      def practise(student, days_ago, hour: 10, **)
+        create_exercise_session(student:, status: "completed", started_at: (TODAY - days_ago).in_time_zone + hour.hours, **)
+      end
+
+      test "CA-16 : un exercice non donné terminé il y a 3 jours compte 1 ; il y a 8 jours, 0" do
+        recent = create_student(classroom: @classroom, last_name: "Bamba", joined_at: 1.month.ago)
+        old = create_student(classroom: @classroom, last_name: "Yao", joined_at: 1.month.ago)
+        practise(recent, 3)
+        practise(old, 8)
+
+        assert_equal [ 1, 0 ], overview(today: TODAY).students.map(&:self_practice_count)
+      end
+
+      test "CA-16 : la fenêtre va du 6e jour avant, à minuit d'Abidjan, à la fin d'aujourd'hui" do
+        student = create_student(classroom: @classroom)
+        practise(student, 6, hour: 0)
+        practise(student, 0, hour: 23)
+        practise(student, 7, hour: 23)
+        practise(student, -1, hour: 0)
+
+        assert_equal 2, overview(today: TODAY).students.sole.self_practice_count
+      end
+
+      test "CA-16 : une session assignée, une remédiation, une session commencée ou celle d'un autre élève ne comptent pas" do
+        student = create_student(classroom: @classroom)
+        exercise = create_exercise
+        assignment = create_assignment(classroom: @classroom, assignable: exercise)
+        practise(student, 1, exercise:, classroom_assignment: assignment)
+        source = practise(student, 20, score_percent: 40)
+        practise(student, 1, gap: create_gap(student:, source_session: source))
+        create_exercise_session(student:, started_at: Time.zone.local(2026, 10, 14, 10))
+        practise(create_student(classroom: create_classroom), 1)
+        practise(student, 2)
+
+        assert_equal 1, overview(today: TODAY).students.sole.self_practice_count
+      end
+
+      test "CA-16 : sans show_roster, le compte n'est pas lu ; par défaut, aujourd'hui est la date d'Abidjan" do
+        student = create_student(classroom: @classroom)
+        practise(student, 3)
+
+        assert_nil overview(show_roster: false, today: TODAY).students
+        travel_to(Time.zone.local(2026, 10, 15, 12)) { assert_equal 1, overview.students.sole.self_practice_count }
+        travel_to(Time.zone.local(2026, 10, 22, 12)) { assert_equal 0, overview.students.sole.self_practice_count }
+      end
+
+      test "CA-16 : le compte de toute la liste se lit en une requête, quel que soit le nombre d'élèves" do
+        practise(create_student(classroom: @classroom), 1)
+        few = count_queries { overview(today: TODAY) }
+        3.times { practise(create_student(classroom: @classroom), 2) }
+
+        assert_equal few, count_queries { overview(today: TODAY) }
+        assert_equal [ 1, 1, 1, 1 ], overview(today: TODAY).students.map(&:self_practice_count)
+      end
+
+      # rapports-de-classe, Lot B (CL-15 ; ADR-0097 §4.7, UDR-0108) : dans un groupe, trente élèves, puis trente de plus,
+      # cumulativement. Sans exercice fait, tous sont dans « Pas encore de note ».
+      def roster_of(count, last_name: "Élève", joined_at: 1.month.ago)
+        Array.new(count) { |index| create_student(classroom: @classroom, first_name: format("N%02d", index), last_name:, joined_at:) }
+      end
+
+      test "CL-15 : trente élèves par page, cumulés ; students_total compte toute la classe" do
+        roster_of(65)
+
+        assert_equal 30, ClassroomOverviewQuery::PER_PAGE
+        assert_equal "none", overview.grade_group
+        assert_equal [ 30, 65 ], overview.then { [ it.students.size, it.students_total ] }
+        assert_equal [ 60, 65 ], overview(page: 2).then { [ it.students.size, it.students_total ] }
+        assert_equal [ 65, 65 ], overview(page: 3).then { [ it.students.size, it.students_total ] }
+        assert_equal [ 65, 65 ], overview(page: 9).then { [ it.students.size, it.students_total ] }
+        assert_equal [ 65, 65 ], overview(page: 10**20).then { [ it.students.size, it.students_total ] }
+        assert_equal overview.students.map(&:public_id), overview(page: 2).students.first(30).map(&:public_id)
+      end
+
+      test "CL-15 : une page nulle, négative ou qui n'est pas un entier vaut la première" do
+        roster_of(31)
+
+        [ 0, -1, nil, "2", 1.5 ].each { assert_equal 30, overview(page: it).students.size, it.inspect }
+      end
+
+      test "CL-15 : les nouveaux restent en tête de la première page" do
+        roster_of(63)
+        newcomers = Array.new(2) { |index| create_student(classroom: @classroom, last_name: "Arrivé#{index}", joined_at: (3 + index).days.ago) }
+
+        assert_equal newcomers.map(&:public_id), overview.students.first(2).map(&:public_id)
+        assert_equal 2, overview.new_students_count
+      end
+
+      test "CL-15 : avec une recherche, le total est celui des élèves qui y répondent" do
+        roster_of(40, last_name: "Koné")
+        roster_of(5, last_name: "Bamba")
+
+        assert_equal [ 30, 40 ], overview(search: "kon").then { [ it.students.size, it.students_total ] }
+        assert_equal [ 40, 40 ], overview(search: "kon", page: 2).then { [ it.students.size, it.students_total ] }
+        assert_equal [ nil, nil, nil ], overview(show_roster: false).to_h.values_at(:students_total, :grade_group, :grade_counts)
+      end
+
+      # Décision du porteur du 2026-10-16 (UDR-0108 amendée) : la liste se découpe par note sur 20, la moyenne des meilleurs
+      # scores aux exercices assignés à la classe ; trente par trente dans un groupe.
+      def graded(scores, first_name: "Élève")
+        create_student(classroom: @classroom, first_name:, last_name: "N#{factory_sequence}", joined_at: 1.month.ago).tap do |student|
+          scores.each_with_index do |score, index|
+            @assignments[index] ||= create_assignment(classroom: @classroom, assignable: create_exercise)
+            exercise = Orm::Exercise.find(@assignments[index].assignable_id)
+            create_exercise_session(student:, exercise:, status: "completed", score_percent: score,
+                                    classroom_assignment: @assignments[index])
+          end
+        end
+      end
+
+      test "CL-15 : la note d'un élève est la moyenne sur 20 de ses meilleurs scores aux exercices assignés à la classe" do
+        @assignments = []
+        awa = graded([ 40, 60 ], first_name: "Awa")
+        exercise = Orm::Exercise.find(@assignments[0].assignable_id)
+        create_exercise_session(student: awa, exercise:, status: "completed", score_percent: 20, classroom_assignment: @assignments[0])
+        create_exercise_session(student: awa, exercise:, classroom_assignment: @assignments[0])
+        create_exercise_session(student: awa, status: "completed", score_percent: 100)
+        archived = create_assignment(classroom: @classroom, assignable: create_exercise, status: "archived")
+        create_exercise_session(student: awa, exercise: Orm::Exercise.find(archived.assignable_id), status: "completed",
+                                score_percent: 100, classroom_assignment: archived)
+        elsewhere = create_assignment(classroom: create_classroom, assignable: exercise)
+        create_exercise_session(student: awa, exercise:, status: "completed", score_percent: 100, classroom_assignment: elsewhere)
+        gap = create_gap(student: awa, essential: Orm::Exercise.find(@assignments[1].assignable_id).essential)
+        create_exercise_session(student: awa, exercise: Orm::Exercise.find(@assignments[1].assignable_id), status: "completed",
+                                score_percent: 80, classroom_assignment: @assignments[1], gap:)
+
+        # (40 + 80) / 2 = 60 % : 12 sur 20 — la remédiation sur l'exercice assigné compte, rien d'autre.
+        assert_equal [ [ awa.public_id, 12 ] ], overview(note: "11-15").students.map { [ it.public_id, it.grade ] }
+      end
+
+      test "CL-15 : la moyenne non entière s'arrondit comme la note affichée (52,5 % : 11 sur 20, groupe 11–15)" do
+        @assignments = []
+        awa = graded([ 50, 55 ], first_name: "Awa")
+
+        assert_equal [ [ awa.public_id, 11 ] ], overview(note: "11-15").students.map { [ it.public_id, it.grade ] }
+      end
+
+      test "CL-15 : un groupe par note, le premier non vide depuis 0–10 par défaut ; le compte de chaque groupe" do
+        @assignments = []
+        good = Array.new(2) { graded([ 60 ]) }
+        best = graded([ 95 ])
+        3.times { create_student(classroom: @classroom) }
+
+        result = overview
+
+        assert_equal({ "0-10" => 0, "11-15" => 2, "16-20" => 1, "none" => 3 }, result.grade_counts)
+        assert_equal "11-15", result.grade_group
+        assert_equal good.map(&:public_id).sort, result.students.map(&:public_id).sort
+        assert_equal [ 2, [ 12, 12 ] ], [ result.students_total, result.students.map(&:grade) ]
+        assert_equal [ best.public_id ], overview(note: "16-20").students.map(&:public_id)
+        assert_equal [ 3, [ nil ] ], overview(note: "none").then { [ it.students_total, it.students.map(&:grade).uniq ] }
+        assert_equal [ "0-10", [] ], overview(note: "0-10").then { [ it.grade_group, it.students ] }
+        assert_equal "11-15", overview(note: "12-14").grade_group
+      end
+
+      test "CL-15 : la recherche porte sur toute la classe, quel que soit le groupe" do
+        @assignments = []
+        graded([ 30 ], first_name: "Koné")
+        graded([ 95 ], first_name: "Koné")
+        create_student(classroom: @classroom, first_name: "Koné")
+        graded([ 60 ], first_name: "Awa")
+
+        result = overview(search: "kon", note: "11-15")
+
+        assert_nil result.grade_group
+        assert_equal [ 3, 3 ], [ result.students.size, result.students_total ]
+        assert_equal({ "0-10" => 1, "11-15" => 1, "16-20" => 1, "none" => 1 }, result.grade_counts)
+      end
+
+      test "CL-15 : le nombre de requêtes ne dépend ni de la page, ni du groupe, ni de l'effectif" do
+        @assignments = []
+        roster_of(31)
+        first = count_queries { overview(today: TODAY) }
+        graded([ 50, 70 ])
+        graded([ 90 ])
+
+        assert_equal first, count_queries { overview(today: TODAY, page: 2) }
+        assert_equal first, count_queries { overview(today: TODAY, note: "11-15") }
+      end
+
+      def count_queries(&)
+        count = 0
+        counter = ->(*, payload) { count += 1 unless payload[:name] == "SCHEMA" }
+        ActiveSupport::Notifications.subscribed(counter, "sql.active_record", &)
+        count
       end
     end
   end

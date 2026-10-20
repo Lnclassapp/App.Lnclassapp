@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Assessment::SubmitQuestionAttempt
 # Rôle : l'élève répond une fois à une question de sa session ouverte ; la dernière réponse clôt la session
-# ADR  : 0026, 0028, 0054
+# ADR  : 0026, 0028, 0054, 0091 (§4.4 : indices d'affichage relus par AnswerShuffle)
 module UseCases
   module Assessment
     class SubmitQuestionAttempt
@@ -17,7 +17,7 @@ module UseCases
       end
 
       # dto : Dtos::Assessment::AttemptInput.
-      # → Result(Submitted) | :not_found | :forbidden | :invalid (answer_ids)
+      # → Result(Submitted) | :not_found | :forbidden | :invalid (answer_ids, response_text ou display_order)
       #   | :conflict (base: already_answered, ou session_closed : session terminée ou abandonnée, ADR-0054)
       def call(actor:, dto:)
         @transaction.call do
@@ -41,17 +41,32 @@ module UseCases
       def answer(actor, session, dto)
         exercise = @exercises.find(id: session.exercise_id)
         question = exercise.questions.find { it.id == dto.question_id }
-        unless question && question.well_formed?(dto.answer_ids)
-          return Shared::Result.failure(:invalid, errors: { answer_ids: [ :wrong_selection ] })
-        end
+        return Shared::Result.failure(:invalid, errors: { answer_ids: [ :wrong_selection ] }) if question.nil?
 
-        correct = question.correct?(dto.answer_ids)
-        recorded = @sessions.record_attempt(session_id: session.id, question_id: question.id, selected_answer_ids: dto.answer_ids,
-                                            correct:, at: @clock.now)
+        response = response_for(question, session, dto)
+        return Shared::Result.failure(:invalid, errors: question.kind::INVALID) unless question.well_formed?(response)
+
+        correct = question.correct?(response)
+        recorded = @sessions.record_attempt(session_id: session.id, question_id: question.id, correct:, at: @clock.now,
+                                            selected_answer_ids: response.is_a?(String) ? [] : response,
+                                            response_text: (response if response.is_a?(String)))
         return Shared::Result.failure(:conflict, errors: { base: [ :already_answered ] }) if recorded == :duplicate
 
         Shared::Result.success(Submitted.new(session_public_id: session.public_id, question_id: question.id, correct:,
                                              closed: close(actor, session, exercise)))
+      end
+
+      # Ce que la question corrige : le texte saisi, les identifiants cochés, ou ceux que désignent les indices d'affichage
+      # (ADR-0091 §4.4), reconstitués par le mélange de la session ; dans l'ordre de l'élève.
+      def response_for(question, session, dto)
+        case question.kind::INPUT
+        when :response_text then dto.response_text.to_s
+        when :display_order
+          shuffled = Entities::Assessment::AnswerShuffle.for(session_id: session.id, question_id: question.id, ids: question.answer_ids,
+                                                             avoid: question.ids_by_position)
+          Entities::Assessment::AnswerShuffle.pick(shuffled, dto.display_order)
+        else dto.answer_ids
+        end
       end
 
       # À la dernière réponse, la clôture se fait dans la même transaction (ADR-0054). Sa policy est celle qui vient

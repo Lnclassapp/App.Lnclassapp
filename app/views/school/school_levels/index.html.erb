@@ -1,13 +1,14 @@
-<%# 🌐 UI · school/school_levels/index — frame « picker_levels » de la cascade élève : niveaux qui ont une classe active %>
-<%# Rôle : servi seul au choix d'un établissement, ou rendu dans le formulaire (scope de ses champs) ; vide, introuvable, erreur ou liste %>
-<%# ADR  : 0062, 0085 · UDR : 0081 (§3.3) %>
+<%# 🌐 UI · school/school_levels/index — frame « picker_levels » de la cascade élève : niveaux qui ont une classe active, en pastilles %>
+<%# Rôle : servi seul au choix d'un établissement, ou rendu dans l'étape 2 du formulaire (scope de ses champs) ; vide, introuvable, erreur ou pastilles radio %>
+<%# ADR  : 0062, 0085 · UDR : 0081 (§3.3), 0091 (§3.1 : pastilles de 40 px, la choisie en brand ; §3.6 : vrais radios, nombre annoncé) %>
 <%# locals: (levels:, registration: nil, scope: :student_registration, rate_limited: false) -%>
 <% page_title t(".page_title") %>
-<%= turbo_frame_tag "picker_levels", class: "block transition-opacity aria-busy:opacity-50", "aria-live": "polite",
+<%# Le tiret qui ferme le « do » : sans liste, le frame reste vraiment vide (:empty), et l'étape montre « Choisis d'abord ton établissement. » (peer-empty). %>
+<%= turbo_frame_tag "picker_levels", class: "peer block transition-opacity aria-busy:opacity-50", "aria-live": "polite",
                                      data: { "classroom--class-picker-target": "levels",
                                              action: "turbo:frame-missing->classroom--class-picker#missing " \
                                                      "turbo:fetch-request-error->classroom--class-picker#missing " \
-                                                     "turbo:frame-load->classroom--class-picker#sync" } do %>
+                                                     "turbo:frame-load->classroom--class-picker#sync" } do -%>
   <% if rate_limited %>
     <%= ui_error_state title: t("classroom.student_registrations.class_picker.load_error"),
                        message: t("classroom.student_registrations.class_picker.rate_limited"),
@@ -17,9 +18,18 @@
                        description: t("classroom.student_registrations.class_picker.not_found_description"), icon: "academic-cap" %>
   <% elsif levels %>
     <%= fields scope, model: registration do |fields| %>
-      <%= ui_field fields, :level_slug, as: :select, label: t("classroom.student_registrations.class_picker.level"), required: true,
-                   choices: levels.map { [ it.name, it.slug ] }, prompt: t("classroom.student_registrations.class_picker.level_prompt"),
-                   data: { action: "change->classroom--class-picker#loadClassrooms" } %>
+      <p class="sr-only"><%= t("classroom.student_registrations.class_picker.levels_found", count: levels.size) %></p>
+      <div class="flex flex-wrap gap-2">
+        <% levels.each do |level| %>
+          <%# Le radio, sans apparence, couvre toute la pastille : le doigt, la souris et les flèches du clavier le trouvent. %>
+          <label class="relative inline-flex h-10 min-w-16 items-center justify-center rounded-full border border-line bg-white px-5 font-display text-sm font-bold text-ink transition has-checked:border-brand-strong has-checked:bg-brand-strong has-checked:text-white">
+            <%= fields.radio_button :level_slug, level.slug, required: true,
+                                    class: "absolute inset-0 cursor-pointer appearance-none rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
+                                    data: { action: "change->classroom--class-picker#loadClassrooms" } %>
+            <%= level.name %>
+          </label>
+        <% end %>
+      </div>
     <% end %>
   <% end %>
 <% end %>

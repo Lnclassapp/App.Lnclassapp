@@ -1,0 +1,34 @@
+<%# 🌐 UI · classroom/classroom_students/_self_practice — « Fait seul · 30 derniers jours » sur la fiche d'un élève %>
+<%# Rôle : les exercices faits sans assignation, du plus récent au plus ancien (20 au plus, et le total) : titre, matière, date, score, résultat %>
+<%# ADR  : 0089 (§4.2), 0097 (§4.4) · UDR : 0107 (§3.5) · un seul lien par ligne %>
+<%# locals: (rows:, total:) -%>
+<% days = Queries::Classroom::StudentFileQuery::SELF_PRACTICE_DAYS %>
+<section id="student_file_self_practice" aria-labelledby="student_file_self_practice_title">
+  <h2 id="student_file_self_practice_title" class="mb-2 font-display text-xl font-extrabold"><%= t(".title", days:) %></h2>
+  <% if rows.empty? %>
+    <%= ui_empty_state title: t(".empty", days:), icon: "sparkles" %>
+  <% else %>
+    <p class="mb-3 text-sm text-mute">
+      <%= t(".hint") %>
+      <% if total > rows.size %><%= t(".truncated", shown: rows.size, total:) %><% end %>
+    </p>
+    <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
+      <% rows.each do |row| %>
+        <li class="flex items-center justify-between gap-3 px-4 py-3 sm:px-5">
+          <div class="min-w-0 space-y-1">
+            <p class="font-medium break-words"><%= row.exercise_title %></p>
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-mute">
+              <%= ui_subject_badge row.material_name, category: row.material_category, size: :sm %>
+              <span><%= l(row.completed_at.to_date, format: :due_short) %></span>
+            </div>
+          </div>
+          <div class="shrink-0 text-right">
+            <p class="font-medium tabular-nums"><%= number_to_percentage(row.score_percent, precision: 0, format: "%n %") %></p>
+            <%= link_to t(".see_result"), exercise_session_result_path(row.session_public_id),
+                        class: "block py-1 text-xs font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>

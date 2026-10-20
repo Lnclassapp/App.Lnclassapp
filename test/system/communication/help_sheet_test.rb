@@ -8,10 +8,12 @@ require "application_system_test_case"
 # se prouve sans navigateur (test/controllers/classroom/student_homes_controller_test.rb), la lecture de /blog sans
 # détour aussi (BL-20, test/integration/communication/articles_test.rb). Amendement du 2026-10-06 : sous lg, le bouton
 # quitte l'accueil. UDR-0080 §3.1 (app-android) : « Besoin d'aide ? » est dans l'en-tête de l'élève, à toute largeur ;
-# il ne passe plus par le menu du compte.
+# il ne passe plus par le menu du compte. UDR-0084 §3.1, §3.2 (accueil-eleve) : dès 700 px seulement ; en dessous, il
+# est dans le menu de l'avatar, et le focus revient à l'avatar.
 class Communication::HelpSheetTest < ApplicationSystemTestCase
   DESKTOP_VIEWPORT = [ 1280, 900 ].freeze
   TRIGGER = "a[aria-controls=help-sheet]".freeze
+  AVATAR = "header button#avatar-menu-button".freeze
 
   setup { sign_in_as create_student(classroom: create_classroom) }
 
@@ -20,7 +22,12 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
 
   # L'entrée glisse de 0,75 rem (open:animate-slide-up) : la boîte se mesure une fois l'animation finie.
   def open_sheet
-    click_on tr("trigger")
+    if page.has_selector?("header #{TRIGGER}", visible: true, wait: 0)
+      click_on tr("trigger")
+    else
+      find(AVATAR).click
+      within("#avatar-menu") { click_on tr("trigger") }
+    end
     assert_selector "dialog#help-sheet[open]", visible: true
     page.document.synchronize do
       settled = page.evaluate_script(<<~JS)
@@ -66,7 +73,7 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
     end
   end
 
-  test "on a phone, the focus lands on « Questions fréquentes », even with « Blog » in the footer; Escape gives it back" do
+  test "on a phone, the focus lands on « Questions fréquentes », even with « Blog » in the footer; Escape gives it to the avatar" do
     create_article
     with_mobile_viewport do
       visit student_home_path
@@ -77,7 +84,7 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
 
       sheet.send_keys(:escape)
       assert_no_selector "dialog#help-sheet", visible: true
-      assert trigger_focused?, "le focus n'est pas revenu sur « Besoin d'aide ? »"
+      assert page.evaluate_script("document.activeElement.matches('#{AVATAR}')"), "le focus n'est pas revenu sur l'avatar"
     end
   end
 
@@ -108,7 +115,8 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
     open_sheet
 
     within sheet do
-      assert_selector "a[href='https://wa.me/2250700000000'][target=_blank][rel~=noopener]", text: tr("whatsapp.title")
+      # UDR-0128 : le lien porte le message prêt (test/integration/communication/help_sheet_whatsapp_message_test.rb).
+      assert_selector "a[href^='https://wa.me/2250700000000?text=Bonjour'][target=_blank][rel~=noopener]", text: tr("whatsapp.title")
       assert_selector "a[href='tel:+2250700000001']", text: tr("call.title")
       click_on tr("faq.title")
     end

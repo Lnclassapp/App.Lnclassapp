@@ -1,11 +1,12 @@
 <%# 🌐 UI · shared/_help_sheet — carte d'aide « Besoin d'aide ? » : questions fréquentes, WhatsApp, appel %>
 <%# Rôle : feuille basse sous lg, modale centrée au-dessus (ui_modal placement: :sheet) ; lignes de SupportHelper %>
-<%# UDR  : 0061 (§3.2 à §3.8), 0066 (§3.5, pied), 0057, 0054 · ADR : 0049 · sans JS, le déclencheur mène à /aide ; focus : 1re ligne %>
+<%# UDR  : 0061 (§3.2 à §3.8), 0066 (§3.5, pied), 0057, 0054, 0084 (§3.1), 0128 · ADR : 0049 · sans JS, le déclencheur mène à /aide ; focus : 1re ligne ; locals : trigger_class, trigger_icon, user %>
 <%= ui_modal id: "help-sheet", title: t(".title"), size: :sm, placement: :sheet,
              trigger: t(".trigger"), trigger_href: help_path, trigger_variant: :ghost, trigger_size: :sm,
-             trigger_icon: "question-mark-circle", trigger_class: local_assigns[:trigger_class] do %>
+             trigger_icon: local_assigns.fetch(:trigger_icon, "question-mark-circle"), trigger_class: local_assigns[:trigger_class] do %>
   <ul class="-my-2 divide-y divide-line">
-    <% support_contacts.each_with_index do |contact, index| %>
+    <%# UDR-0128 : user (ShellUser de l'en-tête, déjà lu) écrit le message prêt de WhatsApp ; sans lui, le message simple. %>
+    <% support_contacts(user: local_assigns[:user]).each_with_index do |contact, index| %>
       <% id = "help-sheet-#{contact.key}" %>
       <li>
         <%# Nom accessible : le titre ; la ligne grise (horaires, délai) en description. %>

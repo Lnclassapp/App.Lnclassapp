@@ -47,7 +47,7 @@ module Finitions
     test "FU-47 : le catalogue se cherche pendant la frappe, sans accents, et l'état vide propose d'effacer la recherche" do
       sign_in_as @student
       visit courses_path
-      assert_selector "#courses_list > li", count: 3
+      assert_selector "#courses_groups li", count: 3
       assert_no_button tc("filters.submit")
       before = history_length
 
@@ -55,11 +55,11 @@ module Finitions
         # Un seul caractère ne part pas : « m » ne garderait que « Mathématiques 3e ».
         search_field.fill_in with: "m"
         sleep 0.6
-        assert_selector "#courses_list > li", count: 3
+        assert_selector "#courses_groups li", count: 3
 
         search_field.fill_in with: "mathematiques"
-        assert_selector "#courses_list > li", count: 1
-        assert_selector "#courses_list", text: "Mathématiques 3e"
+        assert_selector "#courses_groups li", count: 1
+        assert_selector "#courses_groups", text: "Mathématiques 3e"
         assert_selector "#courses_total", text: tc("total", count: 1)
         assert_current_path(/q=mathematiques/)
         assert_equal before, history_length, "la frappe empile l'historique"
@@ -72,16 +72,20 @@ module Finitions
         end
 
         search_field.fill_in with: ""
-        assert_selector "#courses_list > li", count: 3
+        assert_selector "#courses_groups li", count: 3
 
-        select "Maths", from: tc("filters.material")
-        assert_selector "#courses_list > li", count: 1
-        assert_current_path(/material=#{@maths.slug}/)
+        # UDR-0085 §3.1 (CA-2) : plus de liste « Matière » chez l'élève ; « Tout voir » efface la recherche.
+        assert_no_select tc("filters.material")
+        search_field.fill_in with: "mathematiques"
+        assert_selector "#courses_groups li", count: 1
       end
 
       click_on tc("reset")
-      assert_selector "#courses_list > li", count: 3
-      assert_equal "", search_field.value
+      # Turbo affiche d'abord l'aperçu en cache de /courses (3 cours, le champ tel qu'il était à la mise en cache), puis la
+      # page reçue : les assertions attendent la page reçue, jamais l'aperçu.
+      assert_no_selector "html[data-turbo-preview]"
+      assert_selector "#courses_groups li", count: 3
+      assert_field tc("filters.search"), with: ""
     end
 
     test "FU-14 : sur la page d'un cours, le seul retour est « Cours », vers le catalogue" do
@@ -92,12 +96,15 @@ module Finitions
       within "main" do
         assert_selector "nav", count: 1
         assert_selector "nav[aria-label='#{t('components.back_link.label')}'] a[href='#{courses_path}']",
-                        text: t("catalog.courses.show.back")
+                        text: "Cours"
         assert_no_link "SVT"
+        # UDR-0130 : la liste des fiches de révision d'une fiche de cours.
+        assert_selector "#course_essentials_title", text: "Révisions de la leçon"
       end
-      within("main nav") { click_on t("catalog.courses.show.back") }
+      within("main nav") { click_on "Cours" }
       assert_current_path courses_path
       assert_title "Cours · Élève · Lnclass"
+      assert_selector "#courses_total", text: /\A\d+ fiches? de cours\z/
     end
 
     # UDR-0058 §3.3 (R4) : l'aide « Badges » / « Maîtrise » quitte l'accueil ; la page de l'exercice les explique.
@@ -127,6 +134,7 @@ module Finitions
 
       visit course_essential_path(@course.slug, @essential.slug)
       assert_title "La méiose · Élève · Lnclass"
+      assert_selector "#essential_header p", exact_text: "Fiche de révision"
       click_on "Génétique et évolution"
       assert_current_path course_path(@course.slug)
 
@@ -137,8 +145,8 @@ module Finitions
       visit exercise_path(@exercise.public_id)
       assert_title "Méiose et ADN · Élève · Lnclass"
       within "#student_progress" do
-        assert_info_tip t("assessment.exercises.student_progress.mastery"), t("shared.info_tips.mastery")
-        assert_info_tip t("assessment.exercises.student_progress.badge"), t("shared.info_tips.badges")
+        assert_info_tip t("assessment.exercises.student_progress.mastery"), ApplicationController.helpers.mastery_tip
+        assert_info_tip t("assessment.exercises.student_progress.badge"), ApplicationController.helpers.badges_tip
       end
       click_on "La méiose", match: :first
       assert_current_path course_essential_path(@course.slug, @essential.slug)
@@ -146,13 +154,14 @@ module Finitions
       visit exercise_session_result_path(session.public_id)
       assert_title "Résultat de Méiose et ADN · Élève · Lnclass"
       assert_link "La méiose", href: course_essential_path(@course.slug, @essential.slug)
-      assert_info_tip t("assessment.session_results.show.mastery"), t("shared.info_tips.mastery")
-      within("#session_badge") { assert_info_tip t("assessment.session_results.badge.help"), t("shared.info_tips.badges") }
+      assert_info_tip t("assessment.session_results.show.mastery"), ApplicationController.helpers.mastery_tip
+      within("#session_badge") { assert_info_tip t("assessment.session_results.badge.help"), ApplicationController.helpers.badges_tip }
 
       started = create_exercise_session(student: @student, exercise: @exercise)
       visit exercise_session_path(started.public_id)
       assert_title "Méiose et ADN · Élève · Lnclass"
-      assert_link t("assessment.exercise_sessions.show.quit"), href: exercise_path(@exercise.public_id)
+      # UDR-0087 §3.2 : en mode concentré, la croix « Quitter la session » mène à la page de l'exercice.
+      assert_selector "a[href='#{exercise_path(@exercise.public_id)}'][aria-label='#{t("assessment.exercise_sessions.quit_dialog.trigger")}']"
     end
 
     # UDR-0077, amendement du 2026-10-06 : à 390 px, la recherche et les filtres restent ; un catalogue filtré offre « Tout voir ».
@@ -163,7 +172,7 @@ module Finitions
       with_mobile_viewport do
         visit courses_path(q: "genetique")
         assert_selector "#courses-filters"
-        assert_selector "#courses_list > li", count: 1
+        assert_selector "#courses_groups li", count: 1
         assert_link tc("reset"), href: courses_path
         assert_no_horizontal_scroll "le catalogue filtré"
 

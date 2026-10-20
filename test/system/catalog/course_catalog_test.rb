@@ -23,19 +23,22 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
 
   def t(key, **) = I18n.t(key, **)
 
-  test "a student filters the catalogue by subject without a page reload, then opens a course whose formula KaTeX renders" do
+  # UDR-0085 §3.1 (CA-2, CA-4) : l'élève n'a plus de liste « Matière » ; il cherche, et les cours trouvés restent sous
+  # le titre de leur matière.
+  test "a student searches the catalogue without a page reload, then opens a course whose formula KaTeX renders" do
     # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe de Tle, le niveau des deux cours.
     sign_in_as create_student_for(@course)
     visit courses_path
-    assert_selector "#courses_list > li", count: 2
+    assert_selector "#courses_groups li", count: 2
 
     assert_no_page_reload do
-      # Au changement de la liste, sans « Filtrer », caché avec JavaScript (UDR-0054 §3.9).
+      # Pendant la frappe, sans « Filtrer », caché avec JavaScript (UDR-0054 §3.9).
       assert_no_button t("catalog.courses.index.filters.submit")
-      select "SVT", from: t("catalog.courses.index.filters.material")
-      assert_selector "#courses_list > li", count: 1
-      assert_selector "#course_#{@course.slug}"
-      assert_current_path(/\A#{courses_path}\?.*material=#{@svt.slug}/)
+      assert_no_select t("catalog.courses.index.filters.material")
+      fill_in t("catalog.courses.index.filters.search"), with: "généti"
+      assert_selector "#courses_groups li", count: 1
+      assert_selector "#courses_group_svt #course_#{@course.slug}"
+      assert_current_path(/\A#{courses_path}\?.*q=/)
     end
 
     assert_no_page_reload do
@@ -169,25 +172,23 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     end
   end
 
-  # UDR-0013, amendement du 2026-10-02 (UDR-0057) : le catalogue filtré par matière et la page cours, vus par l'élève à
-  # 390 × 844, passent la règle de sobriété ; le niveau quitte les cartes. Amendement du 2026-10-05 ter : la matière
-  # filtrée y reste (badge), avec le pied « Ouvrir le cours → ».
-  test "on a phone, the student's catalogue filtered by subject and the course page pass the sobriety rule" do
+  # UDR-0013, amendement du 2026-10-02 (UDR-0057) : la vue d'une matière et la page cours, vues par l'élève à 390 × 844,
+  # passent la règle de sobriété. UDR-0085 §3.3 : la carte ne porte ni matière ni niveau, et son bouton dit « Commencer ».
+  test "on a phone, the student's view of a subject and the course page pass the sobriety rule" do
     %w[Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
     sign_in_as create_student_for(@course)
 
     with_mobile_viewport do
       visit courses_path(material: @svt.slug)
-      assert_selector "#courses_list > li", count: 1
+      assert_selector "#courses_material_title h1", text: "SVT"
+      assert_selector "#courses_groups li", count: 1
       assert_single_primary_action
-      assert_blocks_above_fold "#main > div > *", max: 5
+      assert_blocks_above_fold "#student_courses > *", max: 5
       within("#course_#{@course.slug}") do
-        assert_text "SVT"
-        assert_text t("catalog.courses.course_card.open")
+        assert_text t("catalog.courses.course_card.progress.new")
+        assert_no_text "SVT"
         assert_no_text "Tle"
       end
-      assert_selector "#main details summary", visible: :all,
-                                               text: t("components.info_tip.label", label: t("catalog.courses.index.student_scope_label"))
 
       visit course_path(@course.slug)
       assert_single_primary_action

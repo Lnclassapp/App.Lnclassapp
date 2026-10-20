@@ -20,6 +20,20 @@ module Queries
         assert_equal [ 0, 0 ], rows.first.to_h.values_at(:courses_count, :teachers_count)
       end
 
+      # EPM-23 (ADR-0103 §4.5) : un enseignant compte dans chacune de ses matières, une fois même dans deux établissements ;
+      # un enseignant retiré de partout ne compte plus.
+      test "un enseignant de deux matières compte dans chacune, une seule fois" do
+        pc = create_material(name: "Physique-Chimie", shortname: "PC")
+        svt = create_material(name: "SVT", shortname: "SVT")
+        both = create_teacher(materials: [ pc, svt ])
+        add_teacher_school(both, create_school, materials: [ svt ])
+        gone = create_teacher(material: svt)
+        Orm::TeacherSchool.where(teacher: gone).delete_all
+
+        counts = MaterialsQuery.new.call.to_h { [ it.shortname, it.teachers_count ] }
+        assert_equal [ 1, 1 ], counts.values_at("PC", "SVT")
+      end
+
       test "aucune matière : liste vide" do
         assert_empty MaterialsQuery.new.call
       end

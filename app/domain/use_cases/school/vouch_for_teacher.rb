@@ -1,11 +1,13 @@
 # 🧠 DOMAINE · UseCases::School::VouchForTeacher
 # Rôle : un enseignant actif du même établissement se porte garant d'un collègue en attente : rattaché aussitôt, il devient son parrain
-# ADR  : 0026, 0028, 0063 · UDR : 0050
+# ADR  : 0026, 0028, 0063, 0103 · UDR : 0050
 module UseCases
   module School
     class VouchForTeacher
-      def initialize(join_requests:, schools:, referrals:, audit_log:, policy:, transaction:, clock:)
+      # teacher_materials : Ports::Identity::TeacherMaterialRepositoryPort ; le rattaché reçoit sa dernière liste (ADR-0103 §4.4).
+      def initialize(join_requests:, schools:, referrals:, audit_log:, policy:, transaction:, clock:, teacher_materials:)
         @join_requests = join_requests
+        @teacher_materials = teacher_materials
         @schools = schools
         @referrals = referrals
         @audit_log = audit_log
@@ -29,6 +31,7 @@ module UseCases
           approved = @join_requests.approve(id: request.id, decided_by_id: actor.user_id, via: "sponsor", at: now)
           next approved if approved.failure?
 
+          @teacher_materials.inherit(teacher_id: request.teacher_id, school_id: request.school_id, from_school_id: nil, at: now)
           sponsor(actor, request, now)
           Shared::Result.success(request)
         end

@@ -20,6 +20,8 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   end
 
   def referral_token_of(teacher) = Orm::TeacherProfile.find_by!(user: teacher).referral_token
+  # ADR-0094 §11 (MET-8): the colleague's link for his school is the token of his attachment.
+  def school_token_of(teacher) = Orm::TeacherSchool.find_by!(teacher:).invite_token
   def new_teacher = Orm::User.find_by!(contact: "0501020304")
   def joined_via = Orm::TeacherProfile.find_by!(user: new_teacher).joined_via
 
@@ -84,6 +86,28 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_equal 0, Orm::SchoolJoinRequest.count
     assert Orm::User.authenticate_by(contact: "0501020304", pin: "4821")
     assert cookies[:session_token].present?
+  end
+
+  # EPM-02, EPM-03 (UDR-0125 §3.1): « Autre matière (facultatif) », right after the subject, not required.
+  test "EPM-02: a second subject is offered, optional, and saved after the first in the school of the sign-up" do
+    pc = create_material(name: "Physique-Chimie", shortname: "PC")
+    get new_teacher_registration_path
+
+    assert_select "select[name='teacher_registration[second_material_slug]']:not([required]) option[value='']", text: "Aucune autre matière"
+    assert_select "label[for=teacher_registration_second_material_slug]", text: /Autre matière \(facultatif\)/
+
+    post teacher_registrations_path, params: { teacher_registration: registration_params(material_slug: pc.slug, second_material_slug: @material.slug) }
+
+    assert_redirected_to teacher_classrooms_path
+    assert_equal [ [ @school.id, pc.id ], [ @school.id, @material.id ] ],
+                 Orm::TeacherSchoolMaterial.where(teacher: new_teacher).in_order.pluck(:school_id, :material_id)
+  end
+
+  test "EPM-03: an unknown second subject is refused in 422 under its field, both lists kept" do
+    post teacher_registrations_path, params: { teacher_registration: registration_params(second_material_slug: "latin") }
+
+    assert_refused :second_material_slug, "Cette matière n'existe pas. Choisissez-en une autre."
+    assert_select "select[name='teacher_registration[material_slug]'] option[selected][value='#{@material.slug}']"
   end
 
   test "IE-03: the name and the first names are saved as typed, spaces reduced, case kept" do
@@ -173,7 +197,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   end
 
   test "IE-06: the colleague's link shows the school and its DRENA, carries the token hidden, and keeps a way out" do
-    token = referral_token_of(create_teacher(school: @school))
+    token = school_token_of(create_teacher(school: @school))
 
     get teacher_invite_link_path(token)
 
@@ -194,7 +218,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     referrer = create_teacher(school: @school)
 
     post teacher_registrations_path,
-         params: { teacher_registration: registration_params(invite_token: referral_token_of(referrer), drena_public_id: nil,
+         params: { teacher_registration: registration_params(invite_token: school_token_of(referrer), drena_public_id: nil,
                                                              school_public_id: nil) }
 
     assert_redirected_to teacher_classrooms_path
@@ -202,6 +226,45 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_equal "colleague", joined_via
     assert_equal [ [ referrer.id, @school.id, "link" ] ],
                  Orm::Referral.where(referee: new_teacher).pluck(:referrer_id, :school_id, :source)
+  end
+
+  # ME-27, ME-28 (ADR-0094 §11, MET-8): the colleague's sponsor link has no school: the page names him and lists the
+  # schools of the DRENA chosen; the sign-up records his referral with the school chosen, source « sponsor ».
+  test "ME-27: the sponsor link names the colleague, keeps the token, and lets the school be chosen" do
+    token = referral_token_of(create_teacher(school: create_school, first_name: "Awa", last_name: "Traoré"))
+
+    get teacher_invite_link_path(token)
+
+    assert_response :success
+    assert_select "#sponsor-preview", text: /Awa Traoré vous invite sur Lnclass/
+    assert_select "form#teacher-registration-form input[type=hidden][name='teacher_registration[invite_token]'][value='#{token}']"
+    assert_select "select[name='teacher_registration[drena_public_id]']"
+    assert_select "form#teacher-signup-drena[action='#{teacher_invite_link_path(token)}']"
+    assert_select "#school-preview, #invite-link-invalid", 0
+    get teacher_invite_link_path(token), params: { teacher_registration: { drena_public_id: @drena.public_id } }
+    assert_select "select[name='teacher_registration[school_public_id]'] option", text: "Lycée Moderne de Cocody"
+  end
+
+  test "ME-28: signing up by the sponsor link attaches to the school chosen, way « colleague », referral « sponsor »" do
+    referrer = create_teacher(school: create_school)
+
+    post teacher_registrations_path, params: { teacher_registration: registration_params(invite_token: referral_token_of(referrer)) }
+
+    assert_redirected_to teacher_classrooms_path
+    assert_equal [ [ @school.id, true ] ], Orm::TeacherSchool.where(teacher: new_teacher).pluck(:school_id, :primary)
+    assert_equal "colleague", joined_via
+    assert_equal [ [ referrer.id, @school.id, "sponsor" ] ], Orm::Referral.where(referee: new_teacher).pluck(:referrer_id, :school_id, :source)
+  end
+
+  test "ME-28: by the sponsor link, a school must still be chosen; the error keeps the colleague's banner" do
+    token = referral_token_of(create_teacher(first_name: "Awa", last_name: "Traoré"))
+
+    post teacher_registrations_path,
+         params: { teacher_registration: registration_params(invite_token: token, drena_public_id: nil, school_public_id: nil) }
+
+    assert_refused :drena_public_id, I18n.t("#{ERRORS}.drena_public_id.blank")
+    assert_select "#sponsor-preview", text: /Awa Traoré/
+    assert_equal 0, Orm::Referral.count
   end
 
   test "IE-07, IE-08: the direction's and the team's links give their way, without referral" do
@@ -223,9 +286,9 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
 
   test "IE-09: an unknown link, one of an inactive school or of a withdrawn colleague opens the standard page in 200" do
     closed = create_school(drena: @drena, name: "Lycée fermé", status: "inactive")
-    withdrawn = create_teacher(school: nil)
+    withdrawn = create_teacher(school: @school, anonymized_at: Time.current)
 
-    [ "cccccccccccc", "not-a-token", closed.team_invite_token, referral_token_of(withdrawn) ].each do |token|
+    [ "cccccccccccc", "not-a-token", closed.team_invite_token, school_token_of(withdrawn), referral_token_of(withdrawn) ].each do |token|
       get teacher_invite_link_path(token)
 
       assert_response :success, token
@@ -240,7 +303,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     referrer = create_teacher(school: create_school(drena: @drena, status: "inactive"))
 
     post teacher_registrations_path,
-         params: { teacher_registration: registration_params(invite_token: referral_token_of(referrer)) }
+         params: { teacher_registration: registration_params(invite_token: school_token_of(referrer)) }
 
     assert_redirected_to teacher_classrooms_path
     assert_equal "standard", joined_via
@@ -287,7 +350,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   end
 
   test "IE-10: from a colleague's link, « Ce n'est pas votre établissement ? » then the sign-up: way « standard », no referral" do
-    get teacher_invite_link_path(referral_token_of(create_teacher(school: @school)))
+    get teacher_invite_link_path(school_token_of(create_teacher(school: @school)))
     other_school = css_select("a#other-school").first["href"]
 
     get other_school
@@ -325,14 +388,15 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_no_match(/Lycée Moderne de Cocody/, response.body)
   end
 
-  test "IE-13: a signed-in person who opens the page or a link is sent home; a POST is refused" do
+  # IE-13, amended by ADR-0094 (UDR-0099 §3.4): a signed-in teacher who opens a link is asked to join its school.
+  test "IE-13: a signed-in person who opens the page is sent home, a teacher who opens a link is asked to join; a POST is refused" do
     sign_in_as create_teacher
 
     get new_teacher_registration_path
     assert_redirected_to teacher_home_path
 
     get teacher_invite_link_path(@school.team_invite_token)
-    assert_redirected_to teacher_home_path
+    assert_redirected_to teacher_school_join_path(@school.team_invite_token)
 
     post teacher_registrations_path, params: { teacher_registration: registration_params }
     assert_response :forbidden

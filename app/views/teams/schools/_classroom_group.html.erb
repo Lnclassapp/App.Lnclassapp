@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/_classroom_group — les classes d'un niveau, sur la fiche d'un établissement %>
-<%# Rôle : une carte par classe : nom (lien vers sa page), effectif, enseignants, menu ⋮ (archiver, restaurer), « Copier le lien » si la classe et l'établissement sont actifs ; archivées en fin de niveau %>
-<%# ADR  : 0030, 0041, 0085, 0088 · UDR : 0036, 0081 (§3.7 : le lien se copie ici, il se change sur la page de la classe), 0083 %>
+<%# Rôle : une carte par classe : nom (lien vers sa page), effectif, enseignants, menu ⋮ (modifier, archiver, restaurer), « Copier le lien » si la classe et l'établissement sont actifs ; archivées en fin de niveau %>
+<%# ADR  : 0030, 0041, 0085, 0088 · UDR : 0036, 0081 (§3.7 : le lien se copie ici, il se change sur la page de la classe), 0083, 0111 %>
 <%# locals: (level:, school_active:, school_public_id:, archives_shown:) -%>
 <% heading_id = "level_#{level.slug}_title" %>
 <%# scroll-mt : l'ancre #level_<slug> du bouton des archives ne passe pas sous la barre fixe. %>
@@ -42,7 +42,8 @@
             <%= render "shared/classroom_archive_menu", name: classroom.name, public_id: classroom.public_id, archived:,
                                                         students_count: classroom.students_count, teachers_count: classroom.teacher_names.size,
                                                         archive_path: archive_school_classroom_archival_path(school_public_id, classroom.public_id),
-                                                        restore_path: restore_school_classroom_archival_path(school_public_id, classroom.public_id) %>
+                                                        restore_path: restore_school_classroom_archival_path(school_public_id, classroom.public_id),
+                                                        edit_path: edit_school_classroom_setting_path(school_public_id, classroom.public_id) %>
           </div>
         </div>
         <dl class="mt-3 grid grid-cols-2 gap-2 text-sm">

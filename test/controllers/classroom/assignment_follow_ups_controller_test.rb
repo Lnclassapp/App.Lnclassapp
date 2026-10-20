@@ -5,6 +5,8 @@ require "test_helper"
 # teacher and the school's direction get 403, a visitor goes to the sign-in page. The policy runs before any reading.
 # Lot B of rapports-exercices (ADR-0079, UDR-0072 §3.5, §3.5 bis, §3.6): the « Compréhension » section, its categories
 # as links in a Turbo Frame (?category=), and the students not done yet, named.
+# Lot C of rapports-de-classe (ADR-0097 §4.6, §4.9, UDR-0109): every name leads to the student's file in this classroom
+# (out of the frame of the categories), and a « next step » sentence heads the « Compréhension » section.
 class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::IntegrationTest
   DUE_ON = Date.new(2026, 10, 8)
 
@@ -64,12 +66,19 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_select "section#late_students", text: /Kouassi|Pas-Encore/, count: 0
   end
 
-  test "no student identifier in the HTML of the follow-up" do
+  def file_path(student, classroom: @classroom) = classroom_student_path(classroom.public_id, student.public_id)
+
+  test "Q8: every name leads to the student's file: the categories (out of their frame), the late ones, the ones not done yet" do
     sign_in_as @teacher
 
     get follow_up_path
 
-    [ *@late, @on_time, @pending ].each { assert_no_match(/#{it.public_id}/, response.body) }
+    [ *@late, @on_time ].each do |student|
+      assert_select "#comprehension_frame #comprehension_panel ul li a[href='#{file_path(student)}'][data-turbo-frame=_top]",
+                    text: "#{student.first_name} #{student.last_name}"
+    end
+    @late.each { assert_select "section#late_students li a[href='#{file_path(it)}'][data-turbo-frame=_top]" }
+    assert_select "section#pending_students li a[href='#{file_path(@pending)}'][data-turbo-frame=_top]", text: "Zoé Pas-Encore"
   end
 
   test "the team reads it too, and comes back to the classroom" do
@@ -190,7 +199,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
       assert_select "span", text: "Acquis"
       assert_select "span", text: "6/10"
       assert_select "p#comprehension_trends", text: "1 en progrès · 2 sans évolution · 1 en baisse"
-      assert_select "p", text: I18n.t("assessment.comprehension.unreliable"), count: 0
+      assert_select "p#comprehension_next_step", text: /#{I18n.t('assessment.comprehension.next_step.label')}\s+La classe a compris\. Un élève est en baisse/
       assert_select "nav[aria-label=Catégories] a", 3
       { struggling: [ "En difficulté", 2 ], fragile: [ "Fragile", 1 ], acquired: [ "Acquis", 3 ] }.each do |category, (label, count)|
         assert_select "nav a[href='#{classroom_assignment_path(@classroom.public_id, @quiz.public_id, category:)}']", text: /#{label}\s*#{count}/
@@ -236,7 +245,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
         assert_match(/\A\s*#{name}\s*#{percent(best)}\s*#{sign}\s*\z/, item.text)
       end
     end
-    assert_select "#comprehension_panel ul li a", 0
+    assert_select "#comprehension_panel ul li a[data-turbo-frame=_top]", 3
   end
 
   test "the category in the address: ?category=fragile chooses « Fragile »; an unknown one is ignored" do
@@ -247,7 +256,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
 
     assert_select "nav a[aria-current=true][href$='category=fragile']", text: /Fragile/
     assert_select "#comprehension_panel ul li", 1 do
-      assert_select "span", text: "Fanta Fragile"
+      assert_select "a[data-turbo-frame=_top]", text: "Fanta Fragile"
       assert_select "span", text: "Stagne"
     end
     assert_select "#comprehension_panel ol li:first-child", text: /#{percent(100)}/
@@ -286,7 +295,8 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
       assert_select "span.size-14.bg-line"
       assert_select "span", text: "Pas encore lisible"
       assert_select "span", text: "3/4"
-      assert_select "p", text: I18n.t("assessment.comprehension.unreliable")
+      # UDR-0109 §3.2 : the next step replaces the warning « pas encore fiable », and says the bound.
+      assert_select "p#comprehension_next_step", text: /Relancez l'élève qui ne l'a pas encore fait : la lecture de la classe sera fiable à partir de 5\./
       assert_select "p#comprehension_trends", text: I18n.t("assessment.comprehension.no_trend")
       assert_select "nav a[aria-current=true][href$='category=acquired']"
       assert_select "#comprehension_panel ul li", 3
@@ -306,7 +316,7 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_select "#comprehension_frame" do
       assert_select "p", text: I18n.t("assessment.comprehension.empty.title")
       assert_select "p", text: I18n.t("assessment.comprehension.empty.description")
-      assert_select "nav, #comprehension_panel, #comprehension_trends", 0
+      assert_select "nav, #comprehension_panel, #comprehension_trends, #comprehension_next_step", 0
     end
   end
 
@@ -330,11 +340,11 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
         assert_equal [ "Paul Attente", "Rita Attente", "Awa Bamba", "Sali Commencé", "Moussa Diallo", "Zoé Pas-Encore", "Koffi Yao" ],
                      items.map { it.text.strip }
       end
-      assert_select "ul li a", 0
+      assert_select "ul li a", 7
+      [ @pending, started ].each { assert_select "ul li a[href='#{file_path(it)}']" }
     end
     assert_select "#pending_students", text: /Parti|Yme|Kouassi/, count: 0
     assert_operator response.body.index("pending_students_title"), :>, response.body.index("comprehension_title")
-    [ @pending, started ].each { assert_no_match(/#{it.public_id}/, response.body) }
   end
 
   test "one student not done yet: « Pas encore fait · 1 », after the late ones" do
@@ -417,30 +427,21 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
     assert_no_match(/Parti/, response.body)
   end
 
-  test "an archived classroom stays readable: the « Compréhension » section, and a category can be chosen" do
+  # vie-de-la-classe, Lot C (Q8) : le suivi nominatif d'une classe archivée n'est plus lisible (était : lisible, catégories comprises).
+  test "an archived classroom: 404 for its teacher, a category changes nothing" do
     classroom = create_classroom(school: @school, status: "archived")
     Orm::TeacherClassroom.create!(teacher: @teacher, classroom:)
     assignment = create_assignment(classroom:, assignable: create_exercise(essential: @exercise.essential), by: @teacher)
-    [ 100, 90, 80, 60, 40 ].each_with_index do |score_percent, index|
-      student = create_student(classroom:, first_name: "Élève", last_name: "N#{index}")
-      create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed", score_percent:,
-                              classroom_assignment: assignment)
-    end
+    student = create_student(classroom:, first_name: "Élève", last_name: "N3")
+    create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed", score_percent: 60,
+                            classroom_assignment: assignment)
     sign_in_as @teacher
 
-    get classroom_assignment_path(classroom.public_id, assignment.public_id)
+    [ {}, { category: "fragile" } ].each do |params|
+      get classroom_assignment_path(classroom.public_id, assignment.public_id), params: params
 
-    assert_response :success
-    assert_select "section#comprehension h2#comprehension_title", text: "Compréhension"
-    assert_select "#comprehension_frame span", text: "Acquis"
-    assert_select "nav a[aria-current=true][href$='category=acquired']"
-
-    get classroom_assignment_path(classroom.public_id, assignment.public_id), params: { category: "fragile" }
-
-    assert_response :success
-    assert_select "nav a[aria-current=true][href$='category=fragile']", text: /Fragile\s*1/
-    assert_select "#comprehension_panel ul li", 1 do
-      assert_select "span", text: "Élève N3"
+      assert_response :not_found
+      assert_no_match "Élève N3", response.body
     end
   end
 

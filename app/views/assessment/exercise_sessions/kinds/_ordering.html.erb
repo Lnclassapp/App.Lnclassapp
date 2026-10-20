@@ -1,0 +1,38 @@
+<%# 🌐 UI · assessment/exercise_sessions/kinds/_ordering — remettre dans l'ordre : flèches « Monter » et « Descendre » %>
+<%# Rôle : les étapes dans l'ordre mélangé de la session, numérotées ; l'ordre de départ est déjà une réponse ; aucun id dans la page %>
+<%# ADR  : 0091 §4.4 (indices d'affichage) · UDR : 0087 §3.4, §3.10 · Stimulus : assessment--ordering ; sans JavaScript, une liste de choix par rang %>
+<%# locals: (f:, question:) -%>
+<% scope = "assessment.exercise_sessions.kinds.ordering" %>
+<legend class="font-display text-xl font-extrabold text-balance whitespace-pre-line text-ink"><%= question.content %></legend>
+<p class="text-sm text-mute"><%= t("#{scope}.hint") %></p>
+<div data-controller="assessment--ordering" data-assessment--ordering-up-value="<%= t("#{scope}.up", n: "%{n}") %>"
+     data-assessment--ordering-down-value="<%= t("#{scope}.down", n: "%{n}") %>" data-assessment--ordering-moved-value="<%= t("#{scope}.moved", n: "%{n}") %>">
+  <ol hidden data-assessment--ordering-target="list" class="space-y-3" aria-label="<%= t("#{scope}.steps") %>">
+    <% question.items.each_with_index do |item, rank| %>
+      <li data-assessment--ordering-target="item" data-index="<%= item.index %>"
+          class="flex min-h-tap items-center gap-3 rounded-ln border-2 border-line bg-white py-2 pr-2 pl-3">
+        <span data-rank class="grid size-8 shrink-0 place-items-center rounded-full bg-brand-strong text-sm font-bold text-white tabular-nums"><%= rank + 1 %></span>
+        <span class="min-w-0 flex-1 font-medium text-ink"><%= item.content %></span>
+        <% %w[up down].each do |direction| %>
+          <button type="button" data-direction="<%= direction %>" data-action="assessment--ordering#<%= direction %>"
+                  aria-label="<%= t("#{scope}.#{direction}", n: rank + 1) %>"
+                  class="grid size-11 shrink-0 cursor-pointer place-items-center rounded-ln bg-mist text-ink hover:bg-line disabled:cursor-default disabled:opacity-30 focus-visible:outline-2 focus-visible:outline-brand">
+            <%= ui_icon "chevron-#{direction}", size: :sm %>
+          </button>
+        <% end %>
+      </li>
+    <% end %>
+  </ol>
+  <p class="sr-only" role="status" aria-live="polite" data-assessment--ordering-target="status"></p>
+  <%# Repli sans JavaScript, et lieu de l'envoi dans tous les cas : pour chaque rang, l'indice d'affichage de l'étape. %>
+  <div data-assessment--ordering-target="fallback" class="space-y-2">
+    <% question.items.each_with_index do |_item, rank| %>
+      <div class="flex items-center gap-3">
+        <%= label_tag "attempt_display_order_#{rank}", t("#{scope}.rank", n: rank + 1), class: "w-24 shrink-0 text-sm font-medium text-ink" %>
+        <%= select_tag "attempt[display_order][]", options_for_select(question.items.map { [ it.content, it.index ] }, rank),
+                       id: "attempt_display_order_#{rank}", required: true, data: { assessment__ordering_target: "select" },
+                       class: class_names(ComponentsHelper::FIELD_INPUT, "min-h-tap min-w-0 flex-1", ComponentsHelper::FIELD_STATES[:valid]) %>
+      </div>
+    <% end %>
+  </div>
+</div>

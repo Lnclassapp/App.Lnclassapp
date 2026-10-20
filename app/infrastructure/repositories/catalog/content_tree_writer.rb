@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::ContentTreeWriter
 # Rôle : écrit en masse des arbres de contenu validés (cours → fiches → exercices → questions → propositions), tout en draft
-# ADR  : 0035, 0039, 0068
+# ADR  : 0035, 0039, 0068, 0091, 0105
 module Repositories
   module Catalog
     class ContentTreeWriter
@@ -8,8 +8,9 @@ module Repositories
 
       NATURAL_KEYS = { "Orm::Course" => %w[slug], "Orm::Essential" => %w[slug], "Orm::RichTextRow" => [] }.freeze
       EXERCISE_COLUMNS = %w[id public_id essential_id title description exercise_type position author_id status created_at updated_at].freeze
-      QUESTION_COLUMNS = %w[id exercise_id position content explanation question_type created_at updated_at].freeze
-      ANSWER_COLUMNS = %w[question_id position content correct created_at updated_at].freeze
+      QUESTION_COLUMNS = %w[id exercise_id position content explanation question_type numeric_tolerance image_description created_at
+                            updated_at].freeze
+      ANSWER_COLUMNS = %w[question_id position content correct match_content created_at updated_at].freeze
       # Format texte de COPY : ces quatre caractères seraient lus comme séparateurs ou échappements.
       COPY_ESCAPES = { "\\" => "\\\\", "\t" => "\\t", "\n" => "\\n", "\r" => "\\r" }.freeze
       COPY_SPECIALS = /[\\\t\n\r]/
@@ -76,13 +77,14 @@ module Repositories
 
       def copy_line(row) = "#{row.map { |value| copy_value(value) }.join("\t")}\n"
 
-      # NULL vaut \N, un booléen t ou f ; un texte est échappé, un entier écrit tel quel.
+      # NULL vaut \N, un booléen t ou f ; un texte est échappé, un décimal écrit sans exposant, un entier tel quel.
       def copy_value(value)
         case value
         when nil then "\\N"
         when true then "t"
         when false then "f"
         when String then value.match?(COPY_SPECIALS) ? value.gsub(COPY_SPECIALS, COPY_ESCAPES) : value
+        when BigDecimal then value.to_s("F")
         else value.to_s
         end
       end
@@ -109,12 +111,13 @@ module Repositories
 
       # Dans l'ordre de QUESTION_COLUMNS.
       def question_row(id, exercise_id, node)
-        [ id, exercise_id, node.position, node.content, node.explanation, node.question_type, @copy_at, @copy_at ]
+        [ id, exercise_id, node.position, node.content, node.explanation, node.question_type, node.numeric_tolerance, node.image_description,
+          @copy_at, @copy_at ]
       end
 
       # Dans l'ordre d'ANSWER_COLUMNS.
       def answer_row(question_id, node)
-        [ question_id, node.position, node.content, node.correct, @copy_at, @copy_at ]
+        [ question_id, node.position, node.content, node.correct, node.match_content, @copy_at, @copy_at ]
       end
 
       # Le contenu importé est assaini avant d'entrer dans le contenu riche ; un contenu vide ne crée pas de ligne.

@@ -113,7 +113,7 @@ module UseCases
 
       def staff(user_id, archived_at)
         Entities::School::Staff.new(user_id:, user_public_id: "pub#{user_id}", school_id: 9, joined_via: "code",
-                                    joined_at: archived_at - 86_400, archived_at:, archived_by_id: 5)
+                                    joined_at: archived_at - 86_400, archived_at:, archived_by_id: 5, position: "deputy")
       end
 
       def purge(staffs:, actor: nil, failing_photo: nil, restored: [])

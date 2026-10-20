@@ -1,7 +1,7 @@
-<%# 🌐 UI · shared/_classroom_archive_menu — menu ⋮ d'une carte de classe : archiver (confirmé) ou restaurer %>
-<%# Rôle : « Archiver la classe » ouvre une confirmation qui chiffre l'impact ; « Restaurer la classe » agit tout de suite %>
-<%# ADR  : 0088 · UDR : 0083, 0042, 0056 · Stimulus : dropdown, modal %>
-<%# locals: (name:, public_id:, archived:, students_count:, teachers_count:, archive_path:, restore_path:) -%>
+<%# 🌐 UI · shared/_classroom_archive_menu — menu ⋮ d'une carte de classe : modifier, archiver (confirmé) ou restaurer %>
+<%# Rôle : « Modifier la classe » ouvre sa modale ; « Archiver » une confirmation qui chiffre l'impact ; « Restaurer » agit tout de suite %>
+<%# ADR  : 0088, 0098 · UDR : 0083, 0042, 0056, 0111 · Stimulus : dropdown, modal %>
+<%# locals: (name:, public_id:, archived:, students_count:, teachers_count:, archive_path:, restore_path:, edit_path:) -%>
 <% dialog_id = "archive-classroom-#{public_id}" %>
 <%# Au-dessus du lien étiré de la carte (z-10), comme « Copier le lien ». %>
 <div class="relative z-10">
@@ -9,6 +9,8 @@
     <% if archived %>
       <%= ui_dropdown_item t(".restore"), href: restore_path, method: :patch, icon: "arrow-uturn-left" %>
     <% else %>
+      <%# UDR-0111 : le geste fréquent et réversible avant le geste lourd ; une archivée se restaure d'abord. %>
+      <%= ui_dropdown_item t(".edit"), href: edit_path, icon: "pencil-square", frame: "modal" %>
       <%= ui_dropdown_item t(".archive"), dialog: dialog_id, icon: "archive-box", tone: :danger %>
     <% end %>
   <% end %>

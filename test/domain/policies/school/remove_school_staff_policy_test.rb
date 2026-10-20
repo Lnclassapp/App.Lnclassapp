@@ -10,12 +10,15 @@ module Policies
       SCHOOL_A = 7
       SCHOOL_B = 8
 
-      def actor(role, user_id: 1, school_id: nil, team_role: nil) = Entities::Identity::Actor.new(user_id:, role:, team_role:, school_id:)
+      # ADR-0092 : une direction a une fonction ; « head » par défaut, rang « gestion ».
+      def actor(role, user_id: 1, school_id: nil, team_role: nil, staff_position: ("head" if role == :school_admin))
+        Entities::Identity::Actor.new(user_id:, role:, team_role:, school_id:, staff_position:)
+      end
       def school(id: SCHOOL_A, status: "active") = Entities::School::School.new(id:, status:)
 
       def staff(user_id:, school_id: SCHOOL_A, days: 10, archived_at: nil)
         Entities::School::Staff.new(user_id:, user_public_id: "u#{user_id}", school_id:, joined_via: "code", joined_at: NOW - (days * DAY),
-                                    archived_at:, archived_by_id: archived_at && 99)
+                                    archived_at:, archived_by_id: archived_at && 99, position: "deputy")
       end
 
       setup do
@@ -44,6 +47,19 @@ module Policies
       test "ID-11, ID-12 : une direction arrivée depuis 7 jours ou plus retire une autre direction de son établissement" do
         assert call.success?
         assert call(actor_staff: staff(user_id: 1, days: 7)).success?, "7 jours tout juste"
+      end
+
+      test "ED-35: l'adjoint (ou directeur des études) retire aussi une direction" do
+        assert call(actor: actor(:school_admin, user_id: 1, school_id: SCHOOL_A, staff_position: "deputy")).success?
+      end
+
+      # ED-32 : une secrétaire arrivée depuis 30 jours ne retire pas le chef d'établissement.
+      test "ED-32: l'éducateur et la secrétaire sont refusés, même anciens, même contre le chef" do
+        head = staff(user_id: 2, days: 40).with(position: "head")
+        %w[educator secretary].each do |staff_position|
+          assert_equal :forbidden, call(actor: actor(:school_admin, user_id: 1, school_id: SCHOOL_A, staff_position:),
+                                        actor_staff: staff(user_id: 1, days: 30), target: head).code, staff_position
+        end
       end
 
       test "ID-13 : un nouvel arrivant (moins de 7 jours) est refusé" do

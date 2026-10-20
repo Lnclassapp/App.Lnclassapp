@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::EssentialsController
 # Rôle : fiches essentielles d'un cours : création et modification en modale, publication (seule ou avec ses exercices) et archivage
-# ADR  : 0026, 0028, 0035 · UDR : 0006, 0007, 0016
+# ADR  : 0026, 0028, 0035, 0105 · UDR : 0006, 0007, 0016, 0129
 module Teams
   class EssentialsController < BaseController
     include PublishCascade
@@ -10,22 +10,28 @@ module Teams
 
     def new
       @form = Dtos::Catalog::EssentialInput.new(course_slug: @course.slug)
+      @images = []
     end
 
     def create
       @form = form_input(course_slug: @course.slug)
+      @images = form_images.call(content: @form.content, image_alts: @form.image_alts)
       render_result create_essential.call(actor: current_actor, dto: @form), form: :new,
                     success: ->(essential) { respond_written(essential, :created, course_path(@course.slug)) }
     end
 
     def edit
       @form = Dtos::Catalog::EssentialInput.new(name: @essential.name, subtitle: @essential.subtitle, content: @essential.content)
+      @images = form_images.call(content: @essential.content, essential_slug: @essential.slug)
     end
 
     # Sans Turbo, retour au catalogue : la fiche ne connaît que l'identifiant de son cours, pas son slug.
     def update
       @form = form_input
-      render_result update_essential.call(actor: current_actor, slug: @essential.slug, dto: @form), form: :edit,
+      @images = form_images.call(content: @form.content, image_alts: @form.image_alts, essential_slug: @essential.slug)
+      result = update_essential.call(actor: current_actor, slug: @essential.slug, dto: @form)
+      log_unreadable_text(slug: @essential.slug) if @form.errors.of_kind?(:content, :image_slots_unreadable)
+      render_result result, form: :edit,
                     success: ->(essential) { respond_written(essential, :updated, courses_path) }
     end
 
@@ -47,7 +53,9 @@ module Teams
     end
 
     def form_input(**attributes)
-      Dtos::Catalog::EssentialInput.new(params.expect(essential: %i[name subtitle content]).merge(attributes))
+      # ADR-0105 : image_alts, { public_id => texte de remplacement } des images du texte (UDR-0129 §3.1).
+      Dtos::Catalog::EssentialInput.new(params.expect(essential: [ :name, :subtitle, :content, { image_alts: {} } ]).to_h
+                                              .symbolize_keys.merge(attributes))
     end
 
     # La page hôte (cours, fiche) appartient à d'autres lots : le stream la rafraîchit par morphing.
@@ -59,12 +67,14 @@ module Teams
       end
     end
 
-    # Refus (cours non publié, transition interdite) : 422 et toast d'erreur, le panneau de statut reste tel quel.
-    # Sans Turbo, retour à la page d'où le bouton a été cliqué.
+    # Refus (cours non publié, transition interdite, image manquante) : 422 et toast d'erreur, le panneau de statut reste tel
+    # quel. Sans Turbo, retour à la page d'où le bouton a été cliqué. @reason_count : emplacements d'image restants (ADR-0105).
     def transition(use_case)
       result = use_case.call(actor: current_actor, slug: params[:slug])
       @reason = result.errors.fetch(:base).first if result.code == :conflict
-      return respond_transition(:unprocessable_entity, alert: t("teams.essentials.transition.#{@reason}")) if @reason
+      @reason_count = result.errors[:count]
+      log_unreadable_text(slug: params[:slug]) if @reason == :image_slots_unreadable
+      return respond_transition(:unprocessable_entity, alert: t("teams.essentials.transition.#{@reason}", count: @reason_count)) if @reason
 
       render_result result, success: lambda { |essential|
         @essential = essential
@@ -79,6 +89,7 @@ module Teams
       end
     end
 
+    def form_images = Queries::Catalog::EssentialFormImagesQuery.new
     def course_repository = Repositories::Catalog::CourseRepository.new
     def essential_repository = Repositories::Catalog::EssentialRepository.new
 

@@ -1,13 +1,19 @@
 <%# 🌐 UI · catalog/courses/index — catalogue des cours (CA-01), pour tous les rôles connectés %>
-<%# Rôle : recherche et filtres (téléphone compris) qui visent le frame « courses » ; élève : son niveau, épuré ; enseignant : sa matière à ses niveaux ; équipe : création et import %>
-<%# ADR  : 0028, 0035, 0076 · UDR : 0006, 0013 (amendements du 2026-10-02 et du 2026-10-05), 0054 (élève : retour « Accueil », amendement du 2026-10-06), 0057, 0069, 0077 §3.2 (amendement du 2026-10-06) · grille non plafonnée à 3, par pages de 24 %>
-<% page_title t(".page_title") %>
-<% content_for :nav_key, "courses" %>
+<%# Rôle : recherche et filtres (téléphone compris) qui visent le frame « courses » ; élève : son niveau, recherche seule, groupes par matière, vue d'une matière ; enseignant : ses matières à ses niveaux, groupées au-delà d'une ; équipe : création et import %>
+<%# ADR  : 0028, 0035, 0076, 0090 · UDR : 0006, 0013 (amendements du 2026-10-02 et du 2026-10-05), 0057, 0069, 0077 §3.2 (amendement du 2026-10-06), 0085 (élève), 0126 §3.1 (plusieurs matières) · par pages de 24 %>
 <% team = current_actor.team? %>
 <%# UDR-0013, amendement du 2026-10-01 : l'élève ne voit que son niveau ; le filtre par niveau ne lui sert plus. %>
 <% student = current_actor.student? %>
+<%# UDR-0085 §3.1 : la vue d'une matière de l'élève, titrée par la matière. %>
+<% material = student_material %>
+<% page_title(material ? material.name : t(".page_title")) %>
+<% content_for :nav_key, "courses" %>
 <%# UDR-0077 §3.2 : l'enseignant ne lit que sa matière, aux niveaux (et séries) de ses classes de l'année. %>
 <% teacher = teacher_scope %>
+<%# UDR-0085 §3.1 : l'élève n'a que la recherche ; la matière de sa vue n'est pas un filtre qu'il quitte. %>
+<% filtered = (student ? @filters.except(:material) : @filters).values.any?(&:present?) %>
+<% reset_path = courses_path(material: material&.slug) %>
+<% body = capture do %>
 <% unless list_frame_request? %>
   <% if team %>
     <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") do %>
@@ -15,75 +21,117 @@
                                   data: { turbo_frame: "modal" } %>
       <%= ui_button t(".new_course"), href: new_teams_course_path, icon: "plus", data: { turbo_frame: "modal" } %>
     <% end %>
+  <% elsif material %>
+    <%# UDR-0085 §3.1 : l'icône et le nom de la matière ; pas de lien « Tous les cours », on revient par le menu. %>
+    <% illustration = subject_illustration(material.slug) %>
+    <div id="courses_material_title" class="mb-6 flex items-center gap-3">
+      <span class="<%= class_names("grid size-12 shrink-0 place-items-center rounded-full", illustration.tint) %>">
+        <%= image_tag illustration.path, alt: "", class: "size-8", "aria-hidden": true %>
+      </span>
+      <h1 class="min-w-0 font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= material.name %></h1>
+    </div>
   <% elsif student %>
-    <%# UDR-0013, amendement du 2026-10-02 (UDR-0057 R4) : la portée du catalogue passe du sous-titre à l'infobulle, collée au
-        titre (UDR-0077, amendement du 2026-10-06) : en action de ui_page_header, elle restait seule sous le titre sur téléphone.
-        UDR-0054, amendement du 2026-10-06 : chez l'élève, toute page autre que l'Accueil y ramène, filtrée ou non. %>
-    <%= ui_back_link t(".back_home"), href: student_home_path %>
+    <%# UDR-0013, amendement du 2026-10-02 (UDR-0057 R4) : la portée du catalogue en infobulle, collée au titre. UDR-0085
+        §3.1 : plus de lien « Accueil », l'élève revient par le menu de l'avatar ou le menu de gauche. %>
     <div class="mb-6 flex flex-wrap items-center gap-x-1">
       <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= t(".title") %></h1>
       <%= ui_info_tip t(".student_scope"), label: t(".student_scope_label") %>
     </div>
   <% elsif teacher %>
-    <% material = filter_options.materials.find { it.id == teacher.material_id } %>
-    <%= ui_page_header title: t(".title"), subtitle: t(".teacher_subtitle", material: material&.name) %>
+    <%# UDR-0126 §3.1 : une matière, son nom ; plusieurs, « Physique-Chimie et SVT ». %>
+    <%# Sans aucune matière dans l'établissement courant : jamais « Les cours de , aux niveaux… » (ADR-0103 §4.6). %>
+    <% subtitle = if teacher.materials.empty?
+                    t(".teacher_subtitle_none")
+                  elsif teacher.several_materials?
+                    t(".teacher_subtitle_many", materials: teacher.materials.map(&:name).to_sentence)
+                  else
+                    t(".teacher_subtitle", material: teacher.materials.first.name)
+                  end %>
+    <%= ui_page_header title: t(".title"), subtitle: %>
   <% else %>
     <%= ui_page_header title: t(".title"), subtitle: t(".subtitle") %>
   <% end %>
 
-  <% select_class = class_names(ComponentsHelper::FIELD_INPUT, ComponentsHelper::FIELD_SHAPES[:select], ComponentsHelper::FIELD_STATES[:valid]) %>
-  <%# UDR-0069 §3.4 : une série sert plusieurs niveaux ; la liste la donne une fois, par nom. %>
-  <% series = filter_options.series_by_level.values.flatten.uniq(&:slug).sort_by(&:name) %>
-  <% levels = filter_options.levels %>
-  <% if teacher %>
-    <%# UDR-0077 §3.2 : ses niveaux et ses séries seulement ; pas de liste « Matière », il n'en a qu'une. %>
-    <% levels = levels.select { |level| teacher.audience.pairs.any? { it.first == level.id } } %>
-    <% series = series.select { |one| teacher.audience.pairs.any? { it.last == one.id } } %>
-  <% end %>
-  <% selects = {
-       level: ([ [ t(".filters.all_levels"), "" ], *levels.map { [ it.name, it.slug ] } ] unless student),
-       series: ([ [ t(".filters.all_series"), "" ], *series.map { [ it.name, it.slug ] } ] unless student || (teacher && series.empty?)),
-       material: ([ [ t(".filters.all_materials"), "" ], *filter_options.materials.map { [ it.name, it.slug ] } ] unless teacher)
-     }.compact %>
-  <%# Recherche pendant la frappe (UDR-0054 §3.9) : le champ reste hors du frame ; « Filtrer » sert sans JavaScript. %>
-  <%# UDR-0077, amendement du 2026-10-06 (décision du porteur) : visible sur téléphone aussi, une colonne sous 640 px. %>
-  <%= form_with url: courses_path, method: :get, id: "courses-filters", html: { role: "search", "aria-label": t(".filters.label") },
-                data: { turbo_frame: "courses", turbo_action: "advance", controller: "search" },
-                class: "mb-6 grid items-end gap-3 rounded-card border border-line bg-white p-3 shadow-card sm:grid-cols-2 sm:p-4 lg:grid-cols-4" do |form| %>
-    <%# Une seule liste (l'élève : « Matière ») : la recherche la partage avec elle sur une ligne, sur ordinateur. %>
-    <div class="<%= class_names("sm:col-span-2", selects.size == 1 ? "lg:col-span-3" : "lg:col-span-4") %>">
-      <%= ui_field form, :q, as: :search, label: t(".filters.search"), name: "q", value: @filters[:q], autocomplete: "off",
-                             data: { action: "search#queue" } %>
-    </div>
-    <% selects.each do |name, choices| %>
-      <div class="space-y-1.5">
-        <%= label_tag "filter_#{name}", t(".filters.#{name}"), class: "block text-sm font-medium text-ink" %>
-        <div class="relative">
-          <%= select_tag name, options_for_select(choices, @filters[name]), id: "filter_#{name}", class: select_class,
-                               data: { action: "change->search#submit" } %>
-          <%= ui_icon "chevron-down", variant: :mini, class: "pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-mute" %>
-        </div>
+  <% if student %>
+    <%# UDR-0085 §3.1 : un seul champ, pleine largeur, cherché pendant la frappe ; « Filtrer » sert sans JavaScript. %>
+    <%= form_with url: courses_path, method: :get, id: "courses-filters", html: { role: "search", "aria-label": t(".filters.label") },
+                  data: { turbo_frame: "courses", turbo_action: "advance", controller: "search" }, class: "mb-6 flex items-center gap-3" do %>
+      <% if material %>
+        <%= hidden_field_tag :material, material.slug, id: nil %>
+      <% end %>
+      <div class="relative min-w-0 flex-1">
+        <%= label_tag :q, t(".filters.search"), class: "sr-only" %>
+        <%= ui_icon "magnifying-glass", class: "pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-mute" %>
+        <%= search_field_tag :q, @filters[:q], id: "q", placeholder: t(".filters.search"), autocomplete: "off",
+                                               data: { action: "search#queue" },
+                                               class: "block min-h-tap w-full rounded-full border border-line bg-white py-3 pr-4 pl-12 text-base text-ink shadow-card placeholder:text-mute focus:border-brand focus:outline-2 focus:outline-brand" %>
       </div>
+      <div data-search-target="button">
+        <%= ui_button t(".filters.submit"), type: :submit, icon: "funnel" %>
+      </div>
+      <template data-search-target="error"><%= ui_error_state retry_href: "#" %></template>
     <% end %>
-    <%# Sans JavaScript, « Filtrer » ; avec, la cellule entière se cache (plus d'« Effacer » seul) : « Tout voir », dans le
-        frame, quitte le filtre (UDR-0077, amendement du 2026-10-06). %>
-    <div class="flex flex-wrap gap-3 sm:col-span-2 lg:col-span-1 lg:justify-end" data-search-target="button">
-      <%= ui_button t(".filters.submit"), type: :submit, icon: "funnel" %>
-    </div>
-    <%# UDR-0054 §3.9 : réponse non 2xx → le contrôleur search pose cet état dans le frame. %>
-    <template data-search-target="error"><%= ui_error_state retry_href: "#" %></template>
+  <% else %>
+    <% select_class = class_names(ComponentsHelper::FIELD_INPUT, ComponentsHelper::FIELD_SHAPES[:select], ComponentsHelper::FIELD_STATES[:valid]) %>
+    <%# UDR-0069 §3.4 : une série sert plusieurs niveaux ; la liste la donne une fois, par nom. %>
+    <% series = filter_options.series_by_level.values.flatten.uniq(&:slug).sort_by(&:name) %>
+    <% levels = filter_options.levels %>
+    <% if teacher %>
+      <%# UDR-0077 §3.2 : ses niveaux et ses séries seulement ; la liste « Matière » ne propose que ses matières, et seulement
+          s'il en a plusieurs (UDR-0126 §3.1). %>
+      <% levels = levels.select { |level| teacher.audience.pairs.any? { it.first == level.id } } %>
+      <% series = series.select { |one| teacher.audience.pairs.any? { it.last == one.id } } %>
+    <% end %>
+    <% selects = {
+         level: [ [ t(".filters.all_levels"), "" ], *levels.map { [ it.name, it.slug ] } ],
+         series: ([ [ t(".filters.all_series"), "" ], *series.map { [ it.name, it.slug ] } ] unless teacher && series.empty?),
+         material: (if teacher
+                      [ [ t(".filters.all_teacher_materials"), "" ], *teacher.materials.map { [ it.name, it.slug ] } ] if teacher.several_materials?
+                    else
+                      [ [ t(".filters.all_materials"), "" ], *filter_options.materials.map { [ it.name, it.slug ] } ]
+                    end)
+       }.compact %>
+    <%# Recherche pendant la frappe (UDR-0054 §3.9) : le champ reste hors du frame ; « Filtrer » sert sans JavaScript. %>
+    <%# UDR-0077, amendement du 2026-10-06 (décision du porteur) : visible sur téléphone aussi, une colonne sous 640 px. %>
+    <%= form_with url: courses_path, method: :get, id: "courses-filters", html: { role: "search", "aria-label": t(".filters.label") },
+                  data: { turbo_frame: "courses", turbo_action: "advance", controller: "search" },
+                  class: "mb-6 grid items-end gap-3 rounded-card border border-line bg-white p-3 shadow-card sm:grid-cols-2 sm:p-4 lg:grid-cols-4" do |form| %>
+      <%# Une seule liste (l'enseignant sans série : « Niveau ») : la recherche la partage avec elle sur une ligne, sur ordinateur. %>
+      <div class="<%= class_names("sm:col-span-2", selects.size == 1 ? "lg:col-span-3" : "lg:col-span-4") %>">
+        <%= ui_field form, :q, as: :search, label: t(".filters.search"), name: "q", value: @filters[:q], autocomplete: "off",
+                               data: { action: "search#queue" } %>
+      </div>
+      <% selects.each do |name, choices| %>
+        <%# UDR-0126 §3.1 : la liste des matières de l'enseignant n'existe que sur ordinateur ; ses groupes font le tri sur téléphone. %>
+        <div class="<%= class_names("space-y-1.5", "hidden sm:block" => teacher && name == :material) %>">
+          <%= label_tag "filter_#{name}", t(".filters.#{name}"), class: "block text-sm font-medium text-ink" %>
+          <div class="relative">
+            <%= select_tag name, options_for_select(choices, @filters[name]), id: "filter_#{name}", class: select_class,
+                                 data: { action: "change->search#submit" } %>
+            <%= ui_icon "chevron-down", variant: :mini, class: "pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-mute" %>
+          </div>
+        </div>
+      <% end %>
+      <%# Sans JavaScript, « Filtrer » ; avec, la cellule entière se cache (plus d'« Effacer » seul) : « Tout voir », dans le
+          frame, quitte le filtre (UDR-0077, amendement du 2026-10-06). %>
+      <div class="flex flex-wrap gap-3 sm:col-span-2 lg:col-span-1 lg:justify-end" data-search-target="button">
+        <%= ui_button t(".filters.submit"), type: :submit, icon: "funnel" %>
+      </div>
+      <%# UDR-0054 §3.9 : réponse non 2xx → le contrôleur search pose cet état dans le frame. %>
+      <template data-search-target="error"><%= ui_error_state retry_href: "#" %></template>
+    <% end %>
   <% end %>
 <% end %>
 
 <%# target _top : une carte ouvre la page du cours, pas le frame. %>
 <%= turbo_frame_tag "courses", target: "_top", data: { turbo_action: "advance" }, class: "block transition-opacity aria-busy:opacity-50" do %>
-  <% filtered = @filters.values.any?(&:present?) %>
   <div class="mb-3 flex items-center justify-between gap-3">
-    <p id="courses_total" class="text-sm text-mute" aria-live="polite"><%= t(".total", count: @page.total_count) %></p>
+    <p id="courses_total" class="<%= class_names("text-sm text-mute", "font-semibold text-ink" => student) %>" aria-live="polite"><%= t(".total", count: @page.total_count) %></p>
     <%# Le seul moyen de quitter les filtres, à toutes les largeurs (UDR-0077, amendement du 2026-10-06) : rendu dans le frame,
-        il suit chaque filtrage ; target _top, il recharge aussi la recherche. %>
+        il suit chaque filtrage ; target _top, il recharge aussi la recherche. L'élève : pendant une recherche seulement,
+        dans sa matière s'il en regarde une (UDR-0085 §3.1). %>
     <% if filtered %>
-      <%= link_to t(".reset"), courses_path, id: "courses_reset",
+      <%= link_to t(".reset"), reset_path, id: "courses_reset",
                   class: "inline-flex min-h-tap items-center px-2 text-sm font-medium text-brand-strong" %>
     <% end %>
   </div>
@@ -95,10 +143,16 @@
       <% if filtered %>
         <%= ui_empty_state title: t(".no_match_title"), description: t(student ? ".student_no_match_description" : ".no_match_description"),
                            icon: "magnifying-glass" do %>
-          <%= ui_button t(".clear_search"), href: courses_path, variant: :secondary, icon: "x-mark" %>
+          <%= ui_button t(".clear_search"), href: reset_path, variant: :secondary, icon: "x-mark" %>
         <% end %>
       <% elsif student && student_audience.empty? %>
         <%= ui_empty_state title: t(".no_class_title"), description: t(".no_class_description"), icon: "user-group" %>
+      <% elsif teacher&.materials&.empty? %>
+        <%# ADR-0103 §4.6 : l'enseignant sans liste dans cet établissement est invité à la faire, jamais laissé devant une page vide. %>
+        <%= ui_empty_state title: t(".teacher_no_material_title"), description: t(".teacher_no_material_description"), icon: "book-open" do %>
+          <%= ui_button t(".teacher_no_material_action"), href: edit_profile_materials_path, variant: :secondary, icon: "pencil-square",
+                                                           data: { turbo_frame: "modal" } %>
+        <% end %>
       <% elsif teacher&.audience&.empty? %>
         <%= ui_empty_state title: t(".teacher_no_class_title"), description: t(".teacher_no_class_description"), icon: "user-group" do %>
           <%= ui_button t(".teacher_no_class_action"), href: teacher_classrooms_path, variant: :secondary, icon: "pencil-square" %>
@@ -109,3 +163,6 @@
     </div>
   <% end %>
 <% end %>
+<% end %>
+<%# UDR-0085 §3.4 : la colonne de l'élève, comme son accueil — pleine, 720 px dès 700 px, 960 px au plus dès 1 024 px. %>
+<%= student ? tag.div(body, id: "student_courses", class: "mx-auto w-full max-w-180 lg:max-w-240") : body %>

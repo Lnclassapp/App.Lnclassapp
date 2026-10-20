@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Identity::UserRepositoryPort
 # Rôle : contrat de lecture des comptes et de leur PIN (bcrypt côté repository) ; anonymisation d'un compte
-# ADR  : 0026, 0028, 0036, 0050, 0055, 0082, 0084
+# ADR  : 0026, 0028, 0036, 0050, 0055, 0082, 0084, 0094
 module Ports
   module Identity
     module UserRepositoryPort
@@ -51,8 +51,9 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #mark_app_opened"
       end
 
-      # → Entities::Identity::Actor ; school_id = école principale de l'enseignant, sinon nil
-      def actor_for(user_id:)
+      # → Entities::Identity::Actor | nil (compte anonymisé : il n'agit plus, comme un visiteur) ; school_id d'un enseignant = current_school_id s'il y est rattaché, sinon son école
+      # principale, sinon nil (ADR-0094 §4.2) ; current_school_id est ignoré pour les autres rôles
+      def actor_for(user_id:, current_school_id: nil)
         raise NotImplementedError, "#{self.class} doit implémenter #actor_for"
       end
     end

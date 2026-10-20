@@ -116,7 +116,7 @@ class Finitions::ClassroomTest < ApplicationSystemTestCase
     sign_in_as @teacher
     visit classroom_path(@classroom.public_id, q: "awa")
 
-    click_menu_action("#student_#{@awa.public_id}", t("#{SCOPE}.roster.issue_code"))
+    issue_recovery_code_from_roster("#student_#{@awa.public_id}")
 
     assert_selector "dialog[open]", text: "Awa Bamba"
     assert_no_selector "dialog[open] [data-controller=clipboard]"
@@ -153,14 +153,14 @@ class Finitions::ClassroomTest < ApplicationSystemTestCase
     link = find("a#referral_link")[:href]
     assert_match %r{/i/\h{12}\z}, link
 
-    click_on t("identity.referrals.invite.copy")
+    within("#invite_colleagues") { click_on t("identity.referrals.invite.copy") }
 
     assert_toast t("shared.clipboard.copied_link")
     assert_equal link, clipboard
     Timeout.timeout(10) { sleep 0.1 until shares == %w[copy] }
 
     page.execute_script("navigator.clipboard.writeText = () => Promise.reject(new Error('refusé'))")
-    click_on t("identity.referrals.invite.copy")
+    within("#invite_colleagues") { click_on t("identity.referrals.invite.copy") }
 
     assert_toast t("shared.clipboard.failed")
     sleep 0.5
@@ -170,7 +170,7 @@ class Finitions::ClassroomTest < ApplicationSystemTestCase
   test "IE-20 : la bulle « Inviter » de l'accueil ouvre WhatsApp avec le lien /i/<jeton>, et le partage est compté" do
     sign_in_as @teacher
     visit teacher_home_path
-    token = Orm::TeacherProfile.find_by!(user: @teacher).referral_token
+    token = Orm::TeacherSchool.find_by!(teacher: @teacher).invite_token
 
     whatsapp = window_opened_by { find("a#course_level_invite").click }
     whatsapp.close

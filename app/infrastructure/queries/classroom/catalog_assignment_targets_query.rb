@@ -1,7 +1,7 @@
 # 🔌 INFRA · Queries::Classroom::CatalogAssignmentTargetsQuery
 # Rôle : les classes de l'enseignant où assigner un exercice depuis le catalogue (niveau et série du cours), l'assignation
 #        active de chaque exercice dans chacune, et si la modale des jours doit s'ouvrir — deux requêtes au plus
-# ADR  : 0026, 0035 (amendement du 2026-10-01), 0041, 0072 · UDR : 0062 (§3.4), 0069 (§3.8)
+# ADR  : 0026, 0035 (amendement du 2026-10-01), 0041, 0072, 0094 · UDR : 0062 (§3.4), 0069 (§3.8)
 module Queries
   module Classroom
     class CatalogAssignmentTargetsQuery
@@ -21,13 +21,13 @@ module Queries
       SQL
 
       # Les pages du catalogue ne lisent que le slug du cours et le public_id des exercices : la query les prend tels quels.
-      # today : fixe l'année scolaire (ADR-0041). → Targets | nil (cours inconnu)
-      def call(teacher_id:, course_slug:, exercise_public_ids:, today: Date.current)
+      # school_id : l'établissement courant (ADR-0094 §4.6) ; today : fixe l'année scolaire (ADR-0041). → Targets | nil (cours inconnu)
+      def call(teacher_id:, school_id:, course_slug:, exercise_public_ids:, today: Date.current)
         level_id, series_id, level_name, series_name =
           Orm::Course.joins(:level).left_joins(:series).where(slug: course_slug).pick(*COURSE_COLUMNS)
         return if level_id.nil?
 
-        rows = rows(teacher_id, level_id, series_id, exercise_public_ids, today)
+        rows = rows(teacher_id, school_id, level_id, series_id, exercise_public_ids, today)
         Targets.new(scope_label: [ level_name, series_name ].compact.join(" "), classrooms: classrooms(rows), states: states(rows))
       end
 
@@ -35,9 +35,9 @@ module Queries
 
       # Une ligne par (classe, assignation active d'un exercice demandé), une seule ligne sans assignation : la règle de
       # l'élève (LevelAudience) — le niveau du cours et, si le cours a une série, cette série ; sans série, toutes.
-      def rows(teacher_id, level_id, series_id, exercise_public_ids, today)
+      def rows(teacher_id, school_id, level_id, series_id, exercise_public_ids, today) # rubocop:disable Metrics/ParameterLists -- une lecture, six critères
         scope = Orm::Classroom.joins(:teacher_classrooms)
-                              .where(teacher_classrooms: { teacher_id: }, status: "active", level_id:,
+                              .where(teacher_classrooms: { teacher_id: }, school_id:, status: "active", level_id:,
                                      school_year: Entities::Classroom::SchoolYear.current(today))
         scope = scope.where(series_id:) if series_id
         scope.joins("LEFT OUTER JOIN (#{active_assignments(exercise_public_ids).to_sql}) states " \

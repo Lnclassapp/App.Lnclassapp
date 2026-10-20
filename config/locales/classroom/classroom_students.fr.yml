@@ -1,0 +1,52 @@
+# La fiche d'un élève dans sa classe (CL-13, AS-24 ; ADR-0097, UDR-0107 §3.10) — écran enseignant et équipe.
+# Une clé par partial de classroom/classroom_students (lecture paresseuse t(".clé")). « session », jamais « essai » (UDR-0007).
+fr:
+  classroom:
+    classroom_students:
+      show:
+        title: "%{name} · %{classroom}"
+      identity:
+        context: "%{classroom} · %{school}"
+        new: "Nouveau"
+        contact: "Numéro"
+        contact_masked: "Numéro masqué pour protéger les élèves"
+        joined: "Arrivé le"
+        joined_via: "%{date}, %{via}"
+        via:
+          link: "par le lien"
+      summary:
+        counts_label: "Exercices de la classe"
+        done: "Faits"
+        done_of: "sur %{count}"
+        late: "En retard"
+        pending: "Pas encore faits"
+        badges_title: "Badges dans cette classe"
+      assignments:
+        title: "Exercices de la classe"
+        empty:
+          title: "Aucun exercice assigné à la classe."
+          description: "Les exercices que vous assignez apparaîtront ici."
+        done_on: "Fait le %{date}"
+        late_on: "Rendu en retard le %{date}"
+        not_done: "Pas encore fait"
+        overdue: "Pas encore fait"
+        sessions:
+          one: "%{count} session"
+          other: "%{count} sessions"
+        best_session: "Voir la meilleure session"
+      self_practice:
+        title: "Fait seul · %{days} derniers jours"
+        hint: "Exercices faits sans qu'on les lui ait assignés."
+        truncated: "Les %{shown} plus récents sur %{total}."
+        empty: "Aucun exercice fait seul ces %{days} derniers jours."
+        see_result: "Voir le résultat"
+      # UDR-0107 §3.6 (memo Q4) : les actions quittent le menu ⋮ de la ligne de la liste pour la fiche.
+      manage:
+        title: "Gérer"
+        issue_code: "Code de récupération"
+        issue_code_hint: "Un élève qui a perdu son code secret le réinitialise avec un code de récupération, valable 15 minutes."
+        remove: "Retirer de la classe"
+        remove_title: "Retirer %{name} de la classe ?"
+        remove_warning: "%{name} quittera cette classe. Son compte et son travail sont gardés. Il pourra revenir avec le lien de la classe."
+        cancel: "Annuler"
+        remove_confirm: "Retirer"

@@ -67,6 +67,13 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     end
   end
 
+  # rapports-de-classe (memo Q4, UDR-0107 §3.6, UDR-0108 §3.2): a student's actions live on his file, opened by his name in
+  # the roster of the classroom page. Opens the file from the row, then asks for the PIN recovery code there.
+  def issue_recovery_code_from_roster(row)
+    within(row) { find("a[href*='/students/']").click }
+    click_on I18n.t("classroom.classroom_students.manage.issue_code")
+  end
+
   # Trix is loaded on demand (ADR-0051, rich_text_editor_controller): <trix-editor> is in the page before its editor is
   # attached. Keys sent in between are refused (element not interactable) or typed into a bare element that Trix then
   # overwrites with its empty hidden input: the text is silently lost. Wait for the editor before touching it.

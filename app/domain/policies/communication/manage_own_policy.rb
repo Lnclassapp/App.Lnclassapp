@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Policies::Communication::ManageOwnPolicy
 # Rôle : seul son auteur modifie, programme ou archive une annonce ; pour tout autre, elle n'existe pas ; archivée ou retirée, elle est figée
-# ADR  : 0028, 0078 · UDR : 0071
+# ADR  : 0028, 0078, 0094 · UDR : 0071
 module Policies
   module Communication
     class ManageOwnPolicy
@@ -8,6 +8,8 @@ module Policies
       # un autre que l'auteur reçoit not_found (ADR-0078 §4.2) ; retirer n'est pas modifier.
       def call(actor:, message:)
         return Shared::Result.failure(:not_found) unless actor && message && message.author_id == actor.user_id
+        # ADR-0094 (MET-4) : l'annonce d'un enseignant n'existe que dans l'établissement où il l'a écrite.
+        return Shared::Result.failure(:not_found) if actor.teacher? && message.school_id != actor.school_id
         return Shared::Result.failure(:conflict) if message.frozen?
 
         Shared::Result.success

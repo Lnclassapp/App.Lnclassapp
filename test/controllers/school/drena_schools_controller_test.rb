@@ -100,13 +100,16 @@ class School::DrenaSchoolsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "IL-04: the student scopes render the picker_schools frame, its select chained to the levels" do
-    { "student_registration" => "student_registration", "student_classroom_choice" => "student_classroom_choice" }.each do |scope, name|
+    { "student_registration" => "student_registration", "student_classroom_choice" => "student_classroom_choice",
+      "student_classroom_change" => "student_classroom_change" }.each do |scope, name|
       get drena_schools_path(@drena.public_id, scope:), headers: { "Turbo-Frame" => "picker_schools" }
 
       assert_response :success
       assert_select "turbo-frame#schools", 0
       assert_select "turbo-frame#picker_schools.block.transition-opacity[aria-live=polite]" do
         assert_select "select[name='#{name}[school_public_id]'][required][data-action='change->classroom--class-picker#loadLevels']"
+        # UDR-0091 §3.2 : « Changer » remet l'invite, que Rails n'écrit pas quand un établissement est choisi.
+        assert_select "select[data-prompt=?]", I18n.t("classroom.student_registrations.class_picker.school_prompt")
         assert_select "option[value='']", text: I18n.t("classroom.student_registrations.class_picker.school_prompt")
         assert_equal [ "Collège Voltaire", "Lycée Classique d'Abidjan" ], css_select("option[value!='']").map(&:text)
         assert_select "label[for='#{name}_school_public_id']", text: /#{I18n.t("school.drena_schools.index.label")}/

@@ -1,7 +1,7 @@
 # ADR-0071 : La direction change le lien des enseignants, ajuste ses classes et retire ou réintègre un enseignant, sur son seul établissement actif ; un retrait se trace et barre le retour par le code
 <!-- index
 titre: La direction change le lien des enseignants, ajuste ses classes et retire ou réintègre un enseignant, sur son seul établissement actif ; un retrait se trace et barre le retour par le code
-statut: Accepté *(2026-10-01)* — *amende 0065, 0057, 0059, 0030 ; amendé par [0072](./0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (jours de séance retirés)*
+statut: Accepté *(2026-10-01)* — *amende 0065, 0057, 0059, 0030 ; amendé par [0072](./0072-assignation-d-exercices-et-echeance-a-la-prochaine-seance.md) (jours de séance retirés)* — *amendé par [0094](./0094-enseignant-multi-etablissements-et-etablissement-courant.md) (trois établissements, établissement courant)*
 problematique: `ManageSchoolStructurePolicy` (équipe, ou direction de l'établissement actif) pour « + », « − » et le code ; `ManageSchoolTeachersPolicy` (direction seule) pour retirer et réintégrer ; devoirs actifs de l'enseignant retiré archivés ; table `teacher_school_departures` ; `JoinSchoolWithCode` pour un enseignant sans établissement. Chantier `gestion-etablissement-direction`. *(0069 et 0070 sont pris par des branches ouvertes.)*
 -->
 
@@ -215,3 +215,14 @@ Tranchés par le porteur le 2026-10-01 :
 - La réintégration ne rend **ni les classes ni les devoirs archivés** : **confirmé** (« oui pour la réintégration »).
 - L'enseignant retiré n'est **pas prévenu** avant le retrait, et reste en session jusqu'à sa requête suivante : **confirmé** (« pas de prévention avant le retrait »).
 - Un enseignant sans établissement (retiré, ou dont la demande a été refusée) rejoint un autre établissement **par le code ou par le lien d'invitation** : **confirmé et élargi au lien** (« il peut rejoindre un autre établissement soit avec le code, soit avec le lien d'invitation »). Le lien `/e/<code>`, ouvert par un enseignant connecté sans établissement, mène à l'écran d'attente avec le code déjà rempli ; il confirme par « Rejoindre l'établissement » (même use case `JoinSchoolWithCode`, mêmes refus). Amende `Identity::TeacherRegistrationsController#with_code`, qui renvoyait tout compte connecté vers son accueil.
+
+## Amendement du 2026-10-16 — enseignant de plusieurs établissements (ADR-0094)
+
+*Chantier `docs/chantiers/multi-etablissements-enseignant`.* Chaque direction n'agit que sur le rattachement de **son** établissement :
+
+- `DetachTeacher` supprime la ligne de cet établissement puis, dans la même transaction, **promeut un principal** (`promote_primary`) : un enseignant retiré de son principal qui a un autre établissement le garde, n'est pas mis en attente et ne perd rien ailleurs.
+- `ReinstateTeacher` rattache **en secondaire** un enseignant qui a déjà un établissement (« a un établissement » n'est plus un refus) ; au plafond de trois, `:conflict` `schools_limit` et rien n'est écrit.
+- `DepartedTeachersQuery` montre aussi l'enseignant parti ailleurs : la condition « sans établissement principal » devient « plus rattaché à cet établissement ».
+- `JoinSchoolWithCodePolicy` accepte un enseignant déjà rattaché, sous le plafond. Un départ ouvert interdit toujours de rejoindre seul l'établissement qui l'a retiré, par toutes les voies, lien compris.
+
+Détail : [ADR-0094](./0094-enseignant-multi-etablissements-et-etablissement-courant.md) §4.4.

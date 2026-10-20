@@ -45,7 +45,8 @@ module Queries
         row = follow_up
 
         assert_equal AssignmentFollowUpQuery::Counts.new(done: 2, late: 1, pending: 1), row.counts
-        assert_equal [ AssignmentFollowUpQuery::LateStudent.new(display_name: "Koffi Yao", done_on: Date.new(2026, 10, 9)) ],
+        assert_equal [ AssignmentFollowUpQuery::LateStudent.new(public_id: late.public_id, display_name: "Koffi Yao",
+                                                                done_on: Date.new(2026, 10, 9)) ],
                      row.late_students
       end
 
@@ -77,16 +78,18 @@ module Queries
       test "a remediation session is doing the exercise: alone on the assignment, it is done, late after the due date" do
         late = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
         on_time = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
-        create_student(classroom: @classroom, first_name: "Jean", last_name: "Kouassi")
+        jean = create_student(classroom: @classroom, first_name: "Jean", last_name: "Kouassi")
         hand_in(late, at: Time.zone.local(2026, 10, 9, 10), gap: create_gap(student: late, essential: @exercise.essential))
         hand_in(on_time, at: Time.zone.local(2026, 10, 8, 10), gap: create_gap(student: on_time, essential: @exercise.essential))
 
         row = follow_up
 
         assert_equal AssignmentFollowUpQuery::Counts.new(done: 2, late: 1, pending: 1), row.counts
-        assert_equal [ AssignmentFollowUpQuery::LateStudent.new(display_name: "Koffi Yao", done_on: Date.new(2026, 10, 9)) ],
+        assert_equal [ AssignmentFollowUpQuery::LateStudent.new(public_id: late.public_id, display_name: "Koffi Yao",
+                                                                done_on: Date.new(2026, 10, 9)) ],
                      row.late_students
-        assert_equal [ AssignmentFollowUpQuery::PendingStudent.new(display_name: "Jean Kouassi") ], row.pending_students
+        assert_equal [ AssignmentFollowUpQuery::PendingStudent.new(public_id: jean.public_id, display_name: "Jean Kouassi") ],
+                     row.pending_students
       end
 
       test "the first done session decides, whatever its kind: a remediation on time, then a standard one late, is on time" do
@@ -121,15 +124,16 @@ module Queries
       end
 
       test "the students not done yet are named by last name, then first name; one with only a started session among them" do
-        [ %w[Zoé Bamba], %w[Awa Bamba], %w[Koffi Achi] ].each { |first_name, last_name| create_student(classroom: @classroom, first_name:, last_name:) }
+        zoe, awa, koffi = [ %w[Zoé Bamba], %w[Awa Bamba], %w[Koffi Achi] ].map { |first_name, last_name| create_student(classroom: @classroom, first_name:, last_name:) }
         started = create_student(classroom: @classroom, first_name: "Jean", last_name: "Kouassi")
         create_exercise_session(student: started, exercise: @exercise, classroom_assignment: @assignment)
         hand_in(create_student(classroom: @classroom, first_name: "Fait", last_name: "Déjà"), at: Time.zone.local(2026, 10, 7, 10))
 
         row = follow_up
 
-        assert_equal [ AssignmentFollowUpQuery::PendingStudent.new(display_name: "Koffi Achi"), AssignmentFollowUpQuery::PendingStudent.new(display_name: "Awa Bamba"),
-                       AssignmentFollowUpQuery::PendingStudent.new(display_name: "Zoé Bamba"), AssignmentFollowUpQuery::PendingStudent.new(display_name: "Jean Kouassi") ],
+        # ADR-0097 §4.9 : chaque nom porte le public_id de l'élève, celui du lien vers sa fiche.
+        assert_equal [ [ koffi, "Koffi Achi" ], [ awa, "Awa Bamba" ], [ zoe, "Zoé Bamba" ], [ started, "Jean Kouassi" ] ]
+                       .map { |student, name| AssignmentFollowUpQuery::PendingStudent.new(public_id: student.public_id, display_name: name) },
                      row.pending_students
         assert_equal row.counts.pending, row.pending_students.size
       end
@@ -184,6 +188,25 @@ module Queries
 
         assert_equal few, count_queries { follow_up }
         assert_equal 6, follow_up.counts.late
+      end
+
+      # CA-16 (accueil-eleve, ADR-0089 §4.2) : « fait seul » est une session terminée, standard, sans assignation. Elle ne
+      # change pas les comptes du travail donné, même sur l'exercice assigné.
+      test "CA-16: a self-practice session, even on the assigned exercise, changes no Counts" do
+        done = create_student(classroom: @classroom)
+        alone = create_student(classroom: @classroom)
+        hand_in(done, at: Time.zone.local(2026, 10, 7, 10))
+        read = -> { [ follow_up.counts, AssignmentFollowUpQuery.counts(classroom_id: @classroom.id, assignment_ids: [ @assignment.id ]) ] }
+        before = read.call
+
+        [ alone, done ].each do |student|
+          [ @exercise, create_exercise(essential: @exercise.essential) ].each do |exercise|
+            create_exercise_session(student:, exercise:, status: "completed", completed_at: Time.zone.local(2026, 10, 7, 11))
+          end
+        end
+
+        assert_equal before, read.call
+        assert_equal AssignmentFollowUpQuery::Counts.new(done: 1, late: 0, pending: 1), read.call.first
       end
 
       def count_queries(&)

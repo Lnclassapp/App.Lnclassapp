@@ -15,6 +15,17 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
                                     assigned_at: 1.day.ago)
   end
 
+  # vie-de-la-classe, Lot C (Q8, PRD §3) : chaque page sous /classrooms/<classe>/…, avec le rôle qui l'ouvre sur une classe active.
+  PAGES = {
+    "a course" => [ %i[teacher team], -> { classroom_course_path(@classroom.public_id, @course.slug) } ],
+    "an essential" => [ %i[teacher team], -> { classroom_essential_path(@classroom.public_id, @course.slug, @exercise.essential.slug) } ],
+    "the follow-up of an assignment" => [ %i[teacher team], -> { classroom_assignment_path(@classroom.public_id, @assignment.public_id) } ],
+    "the session days" => [ %i[teacher], -> { edit_classroom_session_days_path(@classroom.public_id) } ],
+    "the days step of an assignment" => [ %i[teacher], lambda {
+      new_classroom_assignment_path(@classroom.public_id, assignable_key: create_exercise(essential: @exercise.essential).public_id)
+    } ]
+  }.freeze
+
   def repository = Repositories::Classroom::ClassroomRepository.new
   def archive!(classroom = @classroom) = repository.archive(id: classroom.id, at: Time.current)
   def restore!(classroom = @classroom) = repository.restore(id: classroom.id, at: Time.current)
@@ -64,7 +75,7 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_no_match "Tle D 1", response.body
     assert_no_match "Méiose, les étapes", response.body
-    assert_empty Queries::Classroom::TeacherFollowUpsQuery.new.call(teacher_id: @teacher.id)
+    assert_empty Queries::Classroom::TeacherFollowUpsQuery.new.call(teacher_id: @teacher.id, school_id: @school.id)
     selection = Queries::Classroom::TeachingSelectionQuery.new.call(school_id: @school.id, teacher_id: @teacher.id)
     assert_empty selection.levels.flat_map { |level| level.classrooms.map(&:name) }
     assert_no_difference -> { Orm::ClassroomAssignment.count } do
@@ -112,5 +123,60 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to new_student_registration_path
     assert flash[:link_invalid]
+  end
+
+  # Une session par rôle, ouverte une fois : la connexion de l'équipe (second facteur) est limitée à 5 par minute.
+  def sessions_for(roles, team)
+    roles.to_h { |role| [ role, open_session.tap { it.sign_in_as(role == :team ? team : @teacher) } ] }
+  end
+
+  def statuses(sessions, path)
+    sessions.transform_values { |session| session.get(session.instance_exec(&path)).then { session.response.status } }
+  end
+
+  PAGES.each do |page, (roles, path)|
+    test "#{page} of an archived classroom answers 404 to #{roles.join(' and ')}, and is readable again once the team restores it" do
+      team = create_team_member
+      sessions = sessions_for(roles, team)
+      assert_equal roles.to_h { [ it, 200 ] }, statuses(sessions, path)
+
+      archive!
+      assert_equal roles.to_h { [ it, 404 ] }, statuses(sessions, path)
+
+      restorer = sessions[:team] || open_session.tap { it.sign_in_as(team) }
+      restorer.patch restore_school_classroom_archival_path(@school.public_id, @classroom.public_id), as: :turbo_stream
+      assert_equal 200, restorer.response.status
+      assert_equal roles.to_h { [ it, 200 ] }, statuses(sessions, path)
+    end
+  end
+
+  test "the student and the direction never enter a sub-page, archived or not: the role is refused before the classroom is read" do
+    archive!
+    [ @student, create_school_admin(school: @school) ].each do |user|
+      sign_in_as user
+      get classroom_assignment_path(@classroom.public_id, @assignment.public_id)
+      assert_response :forbidden
+      get classroom_course_path(@classroom.public_id, @course.slug)
+      assert_response :forbidden
+      sign_out
+    end
+  end
+
+  test "the direction keeps its restore gesture: its page of the archived classroom is 404, then readable once restored" do
+    admin = create_school_admin(school: @school)
+    archive!
+    sign_in_as admin
+    get school_admin_classroom_path(@classroom.public_id)
+    assert_response :not_found
+
+    patch restore_school_admin_classroom_archival_path(@classroom.public_id), as: :turbo_stream
+    assert_response :success
+    get school_admin_classroom_path(@classroom.public_id)
+    assert_response :success
+    sign_out
+
+    sign_in_as @teacher
+    get classroom_course_path(@classroom.public_id, @course.slug)
+    assert_response :success
   end
 end

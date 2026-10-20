@@ -31,15 +31,104 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", "Mon historique"
     assert_select "#student_archive_classrooms li", 1 do
       assert_select "p", "3ème 4"
-      assert_select "p", "3ème · Lycée Moderne de Bouaké"
-      assert_select "span", "2025-2026"
+      # UDR-0103 §3.2 : l'année passe dans le détail ; à droite, la période ; une classe archivée non quittée, sans badge.
+      assert_select "p", "3ème · Lycée Moderne de Bouaké · 2025-2026"
+      assert_select "span", /\Adepuis le \d+ \S+\z/
+      assert_select "span", text: "Actuelle", count: 0
     end
+    assert_select "#student_archive_summary", text: /1\s+exercice terminé/
     assert_select "#student_archive_results li", 1 do
       assert_select "p", "Fractions"
-      assert_select "span", "12 mars 2026"
-      assert_select "span", "15/20"
+      assert_select "p", "Mathématiques · 12 mars"
+      assert_select "[data-grade]", text: /15\/20/
     end
     assert_select "#student_archive_results a", 0
+  end
+
+  # UDR-0103 §3.2 (ADR-0095): after a change of classroom, « Actuelle » and « depuis le … » on the new one, « du … au … »
+  # on the one left; the year only when it is not the current one.
+  test "UDR-0103: the current classroom says « Actuelle » and since when, the one left its period" do
+    travel_to Time.zone.local(2026, 10, 16, 9) do
+      moved_at = Time.zone.local(2026, 10, 12, 8)
+      student = create_student
+      Orm::ClassroomStudent.create!(classroom: @classroom, student:, primary: true, joined_via: "standard",
+                                    joined_at: Time.zone.local(2025, 9, 15, 8), left_at: moved_at)
+      Orm::ClassroomStudent.create!(classroom: create_classroom(school: @school, name: "2nde C"), student:, primary: true,
+                                    joined_via: "link", joined_at: moved_at)
+      sign_in_as student
+
+      get student_archive_path
+
+      rows = css_select("#student_archive_classrooms li")
+      assert_equal 2, rows.size
+      assert_select rows.first, "p", "2nde C"
+      assert_select rows.first, "span", "Actuelle"
+      assert_select rows.first, "span", "depuis le 12 oct."
+      assert_select rows.last, "span", "du 15 sept. 2025 au 12 oct."
+      assert_select rows.last, "span", text: "Actuelle", count: 0
+    end
+  end
+
+  # historique-eleve (UDR-0090 §3.2, CA-3): a heading per month, most recent first; each row with its subject illustration.
+  test "the finished exercises are grouped by month, most recent first, each with the illustration of its subject" do
+    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 70,
+                            completed_at: Time.zone.local(2026, 10, 14, 9))
+    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 60,
+                            completed_at: Time.zone.local(2026, 9, 28, 9))
+    sign_in_as @student
+
+    get student_archive_path
+
+    assert_select "#student_archive_summary", text: /3\s+exercices terminés/
+    assert_equal [ "Octobre 2026", "Septembre 2026", "Mars 2026" ],
+                 css_select("#student_archive_results section h3").map { it.text.strip }
+    assert_select "#student_archive_results section", 3 do |sections|
+      assert_select sections.first, "li", 1
+    end
+    assert_select "#student_archive_results li img[alt='']", 3
+  end
+
+  # CA-4 and CA-5: green from 14/20 (70 %), at the ink below; never red; no row is a link (UDR-0013).
+  test "a grade is green from 14/20, at the ink below, never red, read out « sur 20 », and no row is a link" do
+    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 70,
+                            completed_at: Time.zone.local(2026, 3, 14, 9))
+    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 60,
+                            completed_at: Time.zone.local(2026, 3, 13, 9))
+    # 68 % shows « 14/20 » (rounded): the colour follows the grade read, not the raw percentage; 67 % shows 13/20.
+    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 68,
+                            completed_at: Time.zone.local(2026, 3, 11, 9))
+    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 67,
+                            completed_at: Time.zone.local(2026, 3, 10, 9))
+    sign_in_as @student
+
+    get student_archive_path
+
+    assert_select "#student_archive_results [data-grade].bg-success-soft", 3
+    assert_select "#student_archive_results [data-grade].bg-success-soft", text: /14\/20/, count: 2
+    assert_select "#student_archive_results [data-grade].bg-success-soft", text: /15\/20/
+    assert_select "#student_archive_results [data-grade].bg-mist", text: /12\/20/
+    assert_select "#student_archive_results [data-grade].bg-mist", text: /13\/20/
+    assert_select "#student_archive_results [data-grade] .sr-only", text: "12 sur 20"
+    assert_select "#student_archive_results [class*=error], #student_archive_results [class*=danger]", 0
+    assert_select "#student_archive_results a", 0
+  end
+
+  # CA-2: the blue card counts every finished exercise, not only the rows the list keeps.
+  test "the blue card shows the real total even when the list is capped" do
+    2.times { create_exercise_session(student: @student, exercise: @exercise, status: "completed") }
+    sign_in_as @student
+
+    query = Queries::Classroom::StudentArchiveQuery
+    capped = query.new(results_limit: 2)
+    query.define_singleton_method(:new) { |*, **| capped }
+    begin
+      get student_archive_path
+    ensure
+      query.singleton_class.remove_method(:new)
+    end
+
+    assert_select "#student_archive_summary", text: /3\s+exercices terminés/
+    assert_select "#student_archive_results li", 2
   end
 
   test "a student who never joined a classroom keeps the first exit screen, and an empty archive says what to expect" do
@@ -47,10 +136,12 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
 
     get pending_account_path
     assert_select "h1", text: "Tu n'as pas encore de classe"
-    assert_select "a[href='#{student_archive_path}']", 0
+    # The page itself; the avatar menu of the header always offers « Mon historique » (UDR-0084 §3.2).
+    assert_select "main a[href='#{student_archive_path}']", 0
 
     get student_archive_path
     assert_response :success
+    assert_select "#student_archive_summary", text: /Aucun exercice terminé pour l'instant/
     assert_select "#student_archive_classrooms", text: /Aucune classe pour l'instant/
     assert_select "#student_archive_results", text: /Aucun exercice terminé/
   end
@@ -63,7 +154,7 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#student_archive_results li", 5
     assert_select "#student_archive_results li:not([hidden])", 3
-    assert_select "#student_archive_results [data-controller=reveal] button[data-action='reveal#more']"
+    assert_select "#student_archive_results [data-controller=reveal][data-reveal-step-value='10'] button[data-action='reveal#more']"
   end
 
   test "a student with an active classroom reads it too; a teacher, a school management and the team are refused" do

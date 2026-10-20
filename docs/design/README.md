@@ -18,3 +18,7 @@ Le design system de Lnclass est fixé par [UDR-0005](../decisions/udr/0005-desig
 1. Un nouveau token passe par le `@theme` **et** par une UDR.
 2. Un nouveau composant a sa méthode dans `ComponentsHelper`, son exemple sur `/design` et son test système.
 3. [`.interface-design/system.md`](../../.interface-design/system.md) (palette `slate/blue`) est historique : l'UDR-0005 le remplace.
+
+## Maquettes
+
+- [`maquettes/signalement-erreurs/`](maquettes/signalement-erreurs/) : prototype du signalement d'erreurs par un enseignant sur une fiche (module JavaScript autonome et page de démonstration). Il n'est pas branché à l'application.

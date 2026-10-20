@@ -1,0 +1,28 @@
+<%# 🌐 UI · identity/profiles/_student — « Mon profil » de l'élève : carte bleue, « Mes informations », code secret, « Se déconnecter » %>
+<%# Rôle : une colonne (pleine, 720 px dès 700 px), deux dans 960 px dès lg ; « Apparence » sous lg seulement · locals : profile %>
+<%# ADR  : 0055 · UDR : 0041 (amendée), 0065, 0084 (cadre de l'accueil), 0089 §3.1 à §3.5 %>
+<%# grid-cols-1 = minmax(0, 1fr) : un nom long ne peut pas élargir la colonne. Le même cadre que l'accueil (UDR-0084 §3.5). %>
+<div id="student_profile" class="mx-auto grid w-full max-w-180 grid-cols-1 gap-4 lg:max-w-240 lg:grid-cols-2 lg:items-start">
+  <div class="lg:col-span-2">
+    <%= ui_page_header title: t(".title"), back: { label: t(".back"), href: home_path_for(current_actor.role) } %>
+  </div>
+  <%= render "student_identity", profile: %>
+  <%= render "student_information", profile: %>
+
+  <div class="grid grid-cols-1 gap-4">
+    <%= ui_card id: "profile_security", "aria-labelledby": "profile_security_title" do %>
+      <h2 id="profile_security_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".security_title") %></h2>
+      <p class="mt-1 text-sm text-mute"><%= t(".security_reminder") %></p>
+      <%= render "student_row", icon: "lock-closed", label: t(".pin_label"), value: t(".pin_value"), action: t(".change"),
+                                href: edit_profile_pin_path, aria_label: t(".change_pin"), wrapper: :div %>
+    <% end %>
+
+    <%# Dès lg, la lune de l'en-tête remplace la carte « Apparence » (UDR-0065). %>
+    <%= render "shared/theme_switch", variant: :card, wrapper: "lg:hidden" %>
+
+    <%# UDR-0089 §3.3 : la même action que le menu de l'avatar, sans confirmation ; un vrai bouton de formulaire. %>
+    <%= form_with url: session_path, method: :delete, id: "profile_sign_out" do %>
+      <%= ui_button t(".sign_out"), type: :submit, variant: :secondary, icon: "arrow-right-start-on-rectangle", full: true %>
+    <% end %>
+  </div>
+</div>

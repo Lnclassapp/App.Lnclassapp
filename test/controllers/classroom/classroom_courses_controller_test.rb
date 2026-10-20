@@ -32,7 +32,9 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_select "#classroom_course_essentials li", text: /Brouillon/, count: 0
     assert_select "a[href='#{classroom_essential_path(@classroom.public_id, @course.slug, @meiose.slug)}']", text: "La méiose"
     assert_select "a[href='#{classroom_essential_path(@classroom.public_id, @course.slug, @mitose.slug)}']", text: "La mitose"
-    assert_select "#classroom_course_essentials_title", text: "Essentielles de la leçon"
+    # UDR-0130 : la même valeur exacte que la page de la fiche de cours dans le catalogue.
+    assert_select "#classroom_course_essentials_title", text: "Révisions de la leçon"
+    assert_equal I18n.t("catalog.courses.show.essentials_title"), I18n.t("classroom.classroom_courses.show.essentials_title")
     assert_select "#classroom_course_essentials", text: /exercice/, count: 0
     no_toggle
   end
@@ -45,7 +47,7 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
 
     assert_response :success
     assert_no_match including(toggle(:assign)), response.body
-    assert_no_match(/Assignez une fiche essentielle/, response.body)
+    assert_no_match(/Assignez une fiche/, response.body)
     no_toggle
   end
 
@@ -57,9 +59,11 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
 
     assert_response :success
     assert_select "#classroom_course_essentials", text: including(tl("empty"))
+    assert_select "#classroom_course_essentials", text: including("Aucune fiche de révision pour cette fiche de cours.")
   end
 
-  test "an archived classroom shows its notice, without any toggle nor « Assigné » badge" do
+  # vie-de-la-classe, Lot C (Q8) : une classe archivée n'a plus de page, même pour son enseignant (était : avis « archivée »).
+  test "an archived classroom: 404 for its teacher" do
     archived = create_classroom(status: "archived")
     teacher = create_teacher(classrooms: [ archived ])
     create_assignment(classroom: archived, assignable: create_exercise(essential: @meiose), by: teacher, status: "active")
@@ -67,10 +71,8 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
 
     get classroom_course_path(archived.public_id, @course.slug)
 
-    assert_response :success
-    assert_select "p", text: including(tl("archived_notice"))
-    assert_select "#classroom_course_essentials", text: including(toggle(:assigned)), count: 0
-    no_toggle
+    assert_response :not_found
+    assert_no_match "Génétique et évolution", response.body
   end
 
   test "the team reads the page, without any toggle either" do

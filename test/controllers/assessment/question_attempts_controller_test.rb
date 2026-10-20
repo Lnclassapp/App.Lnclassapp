@@ -46,14 +46,17 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
       assert_select "turbo-frame#question #feedback-card", text: /#{I18n.t("#{scope}.feedback_card.verdict.error")}/
       assert_select "#feedback-card", text: /La méiose donne quatre cellules/
       assert_select "#feedback-card", text: /#{I18n.t("#{scope}.feedback_card.selected")}/
-      assert_select "#feedback-card li", text: wrong(@first).content, count: 1
       # Le choix dans un span : un `li.flex` ferait du texte et de chaque formule KaTeX autant de colonnes (2026-10-06).
       assert_select "#feedback-card li.flex > span.min-w-0", text: wrong(@first).content, count: 1
       assert_select "a[href='#{exercise_session_path(@session.public_id)}']", text: I18n.t("#{scope}.feedback_card.next")
-      # Sous lg, « Question suivante » colle au-dessus de la barre du bas, qui reste visible (décision du porteur, 2026-10-06).
-      assert_select "#feedback-card.overflow-clip #feedback-actions.sticky a.w-full", 1
+      # UDR-0087 §3.2 : « Question suivante » colle au bas de l'écran, pleine largeur.
+      assert_select "#feedback-card #feedback-actions.sticky.bottom-0 a.w-full", 1
     end
     assert_select "turbo-stream[action=replace][target=progress_bar] template progress[value='50']"
+    # UDR-0087 §3.2–3.3 : « 1/2 » reste celui de la question tentée ; la confirmation pour quitter reprendra à la question 2.
+    assert_select "turbo-stream[action=replace][target=progress_bar] template #progress_counter", text: /1\/2/
+    assert_select "turbo-stream[action=replace][target=quit_resume] template #quit_resume",
+                  text: I18n.t("#{scope}.quit_dialog.resume", number: 2)
   end
 
   # UDR-0076 §3.3 (CA-7), ADR-0076 : la question suivante arrive avec le verdict, dans un <template> de la carte ; « Question
@@ -64,7 +67,7 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
     answer @first, wrong(@first)
 
     assert_select "turbo-stream[action=replace][target=question] template turbo-frame#question " \
-                  "#feedback-card[data-controller='assessment--next-question']" do
+                  "#feedback-card[data-controller~='assessment--next-question']" do
       assert_select "a[href=?][data-action='assessment--next-question#show'][data-turbo-prefetch=false]",
                     exercise_session_path(@session.public_id), text: I18n.t("#{scope}.feedback_card.next")
       assert_select "template[data-assessment--next-question-target=question] turbo-frame#question #question-card" do
@@ -100,7 +103,7 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
 
     assert_no_match right(@first).content, response.body
     assert_no_match(/proposition correcte|data-correct/i, response.body)
-    assert_select "#feedback-card li" do |items|
+    assert_select "#feedback-card li span.min-w-0" do |items|
       assert_equal [ wrong(@first).content ], items.map { it.text.strip }
     end
   end
@@ -114,8 +117,8 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
     answer @second, found, chosen_wrong
 
     assert_select "#feedback-card", text: /#{I18n.t("#{scope}.feedback_card.verdict.error")}/
-    assert_select "#feedback-card li" do |items|
-      assert_equal [ found.content, chosen_wrong.content ], items.map { it.text.strip }
+    assert_select "#feedback-card li span.min-w-0" do |items|
+      assert_equal [ found.content, chosen_wrong.content ].sort, items.map { it.text.strip }.sort
     end
     assert_no_match missed.content, response.body
   end
@@ -234,5 +237,33 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
     assert_response :unprocessable_entity
     assert_select "h1", text: "Méiose"
     assert_select "#attempt-errors", text: I18n.t("#{ERRORS}.answer_ids.blank")
+  end
+
+  # PRD §7 : 22 requêtes avant le chantier, 23 après (la lettre affichée de « Ton choix ») ; la cible était « avant + 1 ».
+  # ADR-0105 : + 2 requêtes fixes, jamais une par question : les images de l'exercice chargé d'un bloc, celle de la question suivante.
+  test "envoyer une réponse coûte 25 requêtes SQL" do
+    sign_in_as @student
+    get exercise_session_path(@session.public_id)
+    count = 0
+    counter = lambda do |*, payload|
+      count += 1 unless payload[:name] == "SCHEMA" || payload[:sql] =~ /\A\s*(BEGIN|COMMIT|SAVEPOINT|RELEASE|ROLLBACK)/
+    end
+
+    ActiveSupport::Notifications.subscribed(counter, "sql.active_record") { answer @first, right(@first) }
+
+    assert_response :success
+    assert_equal 25, count
+  end
+
+  # PostgreSQL refuse l'octet nul : la saisie est refusée en 422, jamais en erreur 500.
+  test "un texte saisi avec un octet nul est refusé (422), rien n'est écrit" do
+    question = create_kind_question(exercise: @exercise, question_type: "fill_blank", answers: %w[Abidjan], content: "Capitale : ___ .")
+    sign_in_as @student
+
+    post exercise_session_attempts_path(@session.public_id), headers: TURBO,
+                                                             params: { attempt: { question_id: question.id, response_text: "Abi\0djan" } }
+
+    assert_response :unprocessable_entity
+    assert_equal 0, Orm::QuestionAttempt.count
   end
 end

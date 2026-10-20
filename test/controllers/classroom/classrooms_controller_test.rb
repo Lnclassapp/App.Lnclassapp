@@ -20,6 +20,17 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
   def scope = "classroom.classrooms"
 
+  # ADR-0098, UDR-0111 : modifier une classe est un geste de l'équipe et de la direction, pas de l'enseignant.
+  test "l'enseignant de la classe n'a ni lien ni texte « Modifier la classe »" do
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_response :success
+    assert_select "a[href*='classroom-settings'], a[href*='classroom_settings']", count: 0
+    assert_no_match(/Modifier la classe/, response.body)
+  end
+
   test "l'enseignant de la classe voit l'en-tête, le bloc du lien et ses élèves, sans code ni « Cours assignés »" do
     course = create_course(name: "Nombres entiers", material: create_material(name: "Mathématiques", category: "science"))
     create_assignment(classroom: @classroom, assignable: create_exercise(essential: create_essential(course:)), by: @teacher)
@@ -72,12 +83,14 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_#{awa.public_id}", text: /85 %/
     assert_select "#student_#{awa.public_id} a[href='#{exercise_session_result_path(session.public_id)}']",
                   text: I18n.t("#{scope}.roster.see_result")
-    # CA-8 (UDR-0077 §3.4) : le code de récupération est une entrée du menu ⋮ de la ligne, qui nomme l'élève.
-    assert_select "#student_#{awa.public_id} button[aria-haspopup=menu][aria-controls='student-actions-#{awa.public_id}'][aria-label=?]",
-                  I18n.t("#{scope}.roster.actions_label", name: "Awa Bamba")
-    assert_select "#student-actions-#{awa.public_id}[role=menu] a[role=menuitem][href='#{account_pin_recovery_codes_path(awa.public_id)}']" \
-                  "[data-turbo-method=post][data-turbo-frame=_top]", text: I18n.t("#{scope}.roster.issue_code")
+    # rapports-de-classe (UDR-0108 §3.2, memo Q4) : la photo et le nom mènent à la fiche ; plus de menu ⋮ ni de fenêtre de
+    # retrait sur la ligne : le code de récupération et le retrait sont sur la fiche.
+    assert_select "#student_#{awa.public_id} a[href='#{classroom_student_path(@classroom.public_id, awa.public_id)}']" \
+                  "[data-turbo-frame=_top]", text: /Awa Bamba/
+    assert_select "#classroom_roster button[aria-haspopup=menu], #classroom_roster dialog, #classroom_roster [role=menu]", 0
+    assert_select "#classroom_roster a[href='#{account_pin_recovery_codes_path(awa.public_id)}']", 0
     assert_select "#classroom_roster form[action='#{account_pin_recovery_codes_path(awa.public_id)}']", 0
+    assert_select "#classroom_roster_more", 0
     assert_select "#classroom_roster", text: /#{I18n.t("#{scope}.roster.no_score")}/
     assert_select "#classroom_roster a", text: I18n.t("#{scope}.roster.see_result"), count: 1
   end
@@ -360,10 +373,13 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     get classroom_path(classroom.public_id)
 
     assert_select "section#classroom_courses h2", text: I18n.t("#{scope}.courses.title")
+    # UDR-0130 : une section de la page nomme l'objet, « Fiches de cours », et compte ses fiches de révision.
+    assert_select "section#classroom_courses h2", text: "Fiches de cours"
     assert_select "section#classroom_courses li", 1
     assert_select "#classroom_course_#{genetics.slug}" do
       assert_select "a[href='#{classroom_course_path(classroom.public_id, genetics.slug)}']", text: "Génétique et évolution"
       assert_select "p", text: /#{I18n.t("#{scope}.courses.essentials", count: 1)}/
+      assert_select "p", text: /1 fiche de révision/
     end
     assert_no_match(/Fonctions|Autre niveau/, response.body)
   end
@@ -393,6 +409,40 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
       assert_select "li[id^='assignment_'][hidden]", 1
       assert_select "button[data-reveal-target=button]", text: /Voir plus/
     end
+  end
+
+  # EPM-18, EPM-19 (UDR-0127 §3.1, §3.3) : une bande par matière, titrée ; le collègue d'une autre matière ne voit que la
+  # sienne, mais tous deux voient les exercices assignés de l'autre, avec leur badge.
+  test "EPM-18 : l'enseignant de deux matières lit une bande par matière ; son collègue, la sienne et les exercices de l'autre" do
+    pc = create_material(name: "Physique-Chimie", category: "science")
+    svt = create_material(name: "SVT", category: "science")
+    maths = create_material(name: "Mathématiques", category: "science")
+    level = create_level(name: "3ème")
+    classroom = create_classroom(school: @school, level:, name: "3ème 2")
+    both = create_teacher(school: @school, materials: [ pc, svt ], classrooms: [ classroom ])
+    colleague = create_teacher(school: @school, material: maths, classrooms: [ classroom ])
+    optics = create_course(level:, material: pc, name: "Optique")
+    cells = create_course(level:, material: svt, name: "La cellule")
+    create_course(level:, material: maths, name: "Fonctions")
+    create_assignment(classroom:, assignable: create_exercise(title: "Les tissus", essential: create_essential(course: cells)), by: both)
+    sign_in_as both
+
+    get classroom_path(classroom.public_id)
+
+    assert_equal [ "classroom_courses_#{pc.slug}", "classroom_courses_#{svt.slug}" ],
+                 css_select("#classroom_courses div[id^=classroom_courses_]").map { it["id"] }
+    assert_select "#classroom_courses_#{pc.slug} h3", text: /Physique-Chimie/
+    assert_select "#classroom_courses_#{pc.slug} ul[aria-label='Fiches de cours de Physique-Chimie'] #classroom_course_#{optics.slug}"
+    assert_no_match(/Fonctions/, response.body)
+    sign_out
+    sign_in_as colleague
+
+    get classroom_path(classroom.public_id)
+
+    assert_select "#classroom_courses h3", 0
+    assert_select "#classroom_courses li", 1
+    assert_select "#assigned_exercises", text: /Les tissus/
+    assert_select "#assigned_exercises", text: /SVT/
   end
 
   test "bloc « Cours » sans cours publié : l'état vide" do
@@ -542,40 +592,115 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h2#classroom_roster_title span", 0
   end
 
-  # IL-14 (UDR-0081 §3.7) : dernier item du menu ⋮, séparé par un filet ; la modale nomme l'élève ; DELETE vers la ligne.
-  test "IL-14 : « Retirer de la classe » termine le menu ⋮ de chaque ligne et ouvre une confirmation qui nomme l'élève" do
+  # rapports-de-classe (memo Q4, UDR-0108 §3.2) : « Retirer de la classe » a quitté la ligne pour la fiche de l'élève.
+  test "Q4 : aucune ligne n'a de menu ⋮ ni de fenêtre de retrait, pour l'enseignant comme pour l'équipe" do
     koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
-    sign_in_as @teacher
 
-    get classroom_path(@classroom.public_id, q: "koffi")
+    [ @teacher, create_team_member ].each do |reader|
+      sign_in_as reader
+      get classroom_path(@classroom.public_id)
 
-    dialog = "remove-student-#{koffi.public_id}"
-    assert_select "#student-actions-#{koffi.public_id}[role=menu]" do
-      assert_select "> :last-child[role=menuitem][aria-controls='#{dialog}'][aria-haspopup=dialog].ui-menu-item-danger",
-                    text: I18n.t("#{scope}.roster.remove")
-      assert_select "> [role=separator] + [aria-controls='#{dialog}']"
-      assert_select "button[aria-controls='#{dialog}'] svg"
-    end
-    assert_select "#student_#{koffi.public_id} dialog##{dialog}" do
-      assert_select "h2", text: I18n.t("#{scope}.roster.remove_title", name: "Koffi Yao")
-      assert_select "p", text: I18n.t("#{scope}.roster.remove_warning", name: "Koffi Yao")
-      assert_select "form##{dialog}-form[method=post][action='#{classroom_student_path(@classroom.public_id, koffi.public_id)}']" \
-                    "[data-turbo-frame=_top]" do
-        assert_select "input[name=_method][value=delete]"
-        assert_select "input[type=hidden][name=q][value=koffi]"
-      end
-      assert_select "button[data-action='modal#close']", text: I18n.t("#{scope}.roster.cancel")
-      assert_select "button[type=submit][form='#{dialog}-form']", text: I18n.t("#{scope}.roster.remove_confirm")
+      assert_select "#student_#{koffi.public_id} a[href='#{classroom_student_path(@classroom.public_id, koffi.public_id)}']"
+      assert_select "dialog#remove-student-#{koffi.public_id}, #student-actions-#{koffi.public_id}", 0
+      sign_out
     end
   end
 
-  test "IL-14 : l'équipe a aussi « Retirer de la classe »" do
-    koffi = create_student(classroom: @classroom)
-    sign_in_as create_team_member
+  # rapports-de-classe, Lot B (CL-15 ; ADR-0097 §4.7, UDR-0108 §3.3, §3.4) : trente élèves, puis « Voir les suivants ».
+  def roster_of(count)
+    Array.new(count) { |index| create_student(classroom: @classroom, first_name: format("N%02d", index), last_name: "Élève", joined_at: 1.month.ago) }
+  end
+
+  test "CL-15 : 31 élèves, la liste en montre 30, « 30 sur 31 », et « Voir le dernier » vise la page 2 dans le cadre" do
+    students = roster_of(31)
+    sign_in_as @teacher
 
     get classroom_path(@classroom.public_id)
 
-    assert_select "dialog#remove-student-#{koffi.public_id}", 1
+    assert_select "#classroom_roster_list li[id^=student_]", 30
+    assert_select "#classroom_roster_count[aria-live=polite]", text: I18n.t("#{scope}.roster.count_partial", shown: 30, total: 31)
+    assert_select "#classroom_roster_more a[href='#{classroom_path(@classroom.public_id, note: 'none', page: 2, anchor: 'classroom_roster')}']" \
+                  "[data-turbo-frame=classroom_roster_list][data-turbo-action=replace]",
+                  text: I18n.t("#{scope}.roster.more", count: 1)
+    assert_select "#student_#{students.last.public_id}", 0
+
+    get classroom_path(@classroom.public_id, page: 2)
+
+    assert_select "#classroom_roster_list li[id^=student_]", 31
+    assert_select "#classroom_roster_count", text: I18n.t("#{scope}.roster.count", count: 31)
+    assert_select "#classroom_roster_more", 0
+    # UDR-0108 §3.3 : le focus va au lien de la première ligne ajoutée.
+    assert_select "#student_#{students.last.public_id} a[data-controller=autofocus][data-autofocus-target=field]", 1
+    assert_select "#classroom_roster_list [data-controller=autofocus]", 1
+  end
+
+  test "CL-15 : « Voir les suivants » garde la recherche ; le formulaire de recherche ne transmet pas la page" do
+    roster_of(31)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id, q: "élève")
+
+    assert_select "#classroom_roster_more a[href='#{classroom_path(@classroom.public_id, q: 'élève', page: 2, anchor: 'classroom_roster')}']"
+    assert_select "form#classroom-roster-search input[name=page]", 0
+  end
+
+  # Décision du porteur du 2026-10-16 (UDR-0108 amendée) : la liste par note sur 20, un groupe à la fois.
+  test "CL-15 : le sélecteur des notes compte chaque groupe, ouvre le premier non vide, et chaque groupe est un lien" do
+    assignment = create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher)
+    good = hand_in(assignment, 60).student
+    hand_in(assignment, 95)
+    waiting = create_student(classroom: @classroom)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "nav#classroom_roster_groups[aria-label=?]", I18n.t("#{scope}.roster.groups_label") do
+      { "0-10" => 0, "11-15" => 1, "16-20" => 1, "none" => 1 }.each do |key, count|
+        assert_select "a#classroom_roster_group_#{key.tr('-', '_')}[href='#{classroom_path(@classroom.public_id, note: key, anchor: 'classroom_roster')}']" \
+                      "[data-turbo-action=advance]", text: /#{I18n.t("#{scope}.roster.groups.#{key}")}\s+#{count}/
+      end
+      assert_select "a[aria-current=true]", 1
+      assert_select "a#classroom_roster_group_11_15[aria-current=true]"
+    end
+    assert_select "#classroom_roster_list li[id^=student_]", 1
+    assert_select "#grade_#{good.public_id}", text: /#{I18n.t("#{scope}.roster.grade", grade: 12)}/
+
+    get classroom_path(@classroom.public_id, note: "none")
+
+    assert_select "#classroom_roster_list li[id^=student_]", 1
+    assert_select "#grade_#{waiting.public_id}", text: /—/
+
+    get classroom_path(@classroom.public_id, note: "0-10")
+
+    assert_select "#classroom_roster_count", text: I18n.t("#{scope}.roster.empty_group")
+    assert_select "#classroom_roster_list li[id^=student_]", 0
+
+    get classroom_path(@classroom.public_id, q: "Awa")
+
+    assert_select "#classroom_roster_groups a[aria-current]", 0
+  end
+
+  test "CL-15 : une page nulle, négative ou qui n'est pas un nombre montre la première page" do
+    roster_of(31)
+    sign_in_as @teacher
+
+    %w[-1 abc 0 2x 1.5].each do |page|
+      get classroom_path(@classroom.public_id, page:)
+
+      assert_response :success
+      assert_select "#classroom_roster_list li[id^=student_]", 30, page
+      assert_select "#classroom_roster_list [data-controller=autofocus]", 0
+    end
+  end
+
+  test "CL-15 : une page géante ne déborde pas : la liste entière, sans erreur" do
+    roster_of(31)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id, page: "99999999999999999999")
+
+    assert_response :success
+    assert_select "#classroom_roster_list li[id^=student_]", 31
   end
 
   test "un élève, même de cette classe, reçoit 403 sans le code ni la liste" do
@@ -602,5 +727,107 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     get classroom_path(@classroom.public_id)
 
     assert_redirected_to new_session_path
+  end
+
+  # CA-16 (accueil-eleve, ADR-0089 §4.2, UDR-0084 §3.7) : la colonne « Fait seul (7 j) » ; 0 s'écrit « — », en text-mute ;
+  # au téléphone, la ligne sous le nom. Les comptes de l'exercice donné ne bougent pas.
+  test "CA-16 : « Fait seul (7 j) » vaut 1 pour l'élève qui a fini un exercice non donné il y a 3 jours, « — » pour l'autre" do
+    exercise = create_exercise
+    assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
+    awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
+    koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao")
+    create_exercise_session(student: koffi, exercise:, status: "completed", classroom_assignment: assignment)
+    create_exercise_session(student: awa, status: "completed", started_at: 3.days.ago, completed_at: 3.days.ago)
+    sign_in_as @teacher
+
+    # Koffi a une note, Awa pas encore (groupes de l'UDR-0108 amendée) : la recherche porte sur toute la classe.
+    get classroom_path(@classroom.public_id, q: "a")
+
+    assert_select "#classroom_roster div#self_practice_heading.hidden.sm\\:flex", text: /#{Regexp.escape(I18n.t("#{scope}.roster.self_practice"))}/
+    assert_select "#self_practice_#{awa.public_id}.hidden.sm\\:block", text: /#{Regexp.escape(I18n.t("#{scope}.roster.self_practice"))}\s+1/
+    assert_select "#self_practice_#{koffi.public_id} span.text-mute", text: "—"
+    assert_select "#self_practice_line_#{awa.public_id}.sm\\:hidden", text: "Fait seul : 1 cette semaine"
+    assert_select "#self_practice_line_#{koffi.public_id}", text: "Fait seul : 0 cette semaine"
+    assert_select "#assignment_#{assignment.public_id} p", text: /\A\s*1 fait\b.*1 pas encore fait\s*\z/
+  end
+
+  # AS-17, UDR-0121 §3.1, ADR-0101 §4.4 : le bloc « Fiches à revoir » de la page de classe.
+  def gaps_tl(key, **) = I18n.t("#{scope}.gaps.#{key}", **)
+
+  def gap_on(essential, student)
+    source_session = create_exercise_session(student:, exercise: create_exercise(essential:, questions: 1), status: "completed",
+                                             score_percent: 30)
+    create_gap(student:, essential:, source_session:)
+  end
+
+  def class_with_gaps
+    maths = create_material(name: "Mathématiques")
+    set_teacher_materials(@teacher, @classroom.school, [ maths ])
+    course = create_course(level: @classroom.level, material: maths, name: "Géométrie")
+    thales = create_essential(course:, name: "Théorème de Thalès")
+    physics = create_essential(course: create_course(level: @classroom.level, name: "Optique"), name: "Lentilles")
+    awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba")
+    bintou = create_student(classroom: @classroom, first_name: "Bintou", last_name: "Diallo")
+    [ awa, bintou ].each { gap_on(thales, it) }
+    gap_on(physics, awa)
+    [ course, thales ]
+  end
+
+  test "fiches à revoir : l'enseignant voit la fiche de sa matière et son nombre d'élèves, entre exercices et élèves" do
+    course, thales = class_with_gaps
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_response :success
+    assert_select "#classroom_gaps h2", text: gaps_tl("title")
+    assert_select "#classroom_gaps ul[data-turbo-prefetch=false] li", 1
+    assert_select "#classroom_gaps li a[href='#{classroom_essential_path(@classroom.public_id, course.slug, thales.slug)}']",
+                  text: "Théorème de Thalès"
+    assert_select "#classroom_gaps li", text: /#{gaps_tl("students", count: 2)}/
+    assert_select "#classroom_gaps", text: /Lentilles/, count: 0
+    assert_match(/id="assigned_exercises".*id="classroom_gaps".*id="classroom_roster"/m, response.body)
+  end
+
+  test "fiches à revoir : l'équipe voit toutes les matières" do
+    class_with_gaps
+    sign_in_as create_team_member
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "#classroom_gaps li", 2
+    assert_select "#classroom_gaps li", text: /Lentilles.*#{gaps_tl("students", count: 1)}/m
+  end
+
+  test "fiches à revoir : trois lignes, puis « Voir plus » qui révèle la suite sans requête" do
+    maths = create_material(name: "Mathématiques")
+    set_teacher_materials(@teacher, @classroom.school, [ maths ])
+    course = create_course(level: @classroom.level, material: maths)
+    students = 4.times.map { create_student(classroom: @classroom) }
+    { "Une" => 1, "Quatre" => 4, "Deux" => 2, "Trois" => 3 }.each do |name, count|
+      essential = create_essential(course:, name:)
+      students.first(count).each { gap_on(essential, it) }
+    end
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "#classroom_gaps[data-controller=reveal]" do
+      assert_equal %w[Quatre Trois Deux Une], css_select("#classroom_gaps li a").map { it.text.strip }
+      assert_select "li:not([hidden])", 3
+      assert_select "li[hidden]", 1
+      assert_select "li[hidden]", text: /Une/
+      assert_select "button[data-action='reveal#more']"
+    end
+  end
+
+  test "fiches à revoir : aucun bloc sans fiche à revoir" do
+    create_student(classroom: @classroom)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_response :success
+    assert_select "#classroom_gaps", 0
   end
 end

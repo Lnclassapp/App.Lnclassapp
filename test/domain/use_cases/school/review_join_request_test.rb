@@ -12,13 +12,15 @@ module UseCases
         @requests = FakeJoinRequests.new(Request.new(id: 5, public_id: "req-5", teacher_id: 41, school_id: 31, status: "pending", teacher_name: "Awa Koné"),
                                          Request.new(id: 6, public_id: "req-6", teacher_id: 42, school_id: 31, status: "rejected", teacher_name: "Yao"))
         @audit = FakeAuditLog.new
+        @materials = FakeTeacherMaterials.new
         @transaction = FakeTransaction.new
         @team = Entities::Identity::Actor.new(user_id: 7, role: :team, team_role: "field")
       end
 
       def review(public_id: "req-5", decision: "approve", actor: @team)
         ReviewJoinRequest.new(join_requests: @requests, audit_log: @audit, policy: Policies::School::ManageSchoolPolicy.new,
-                              transaction: @transaction, clock: Clock.new(NOW)).call(actor:, public_id:, decision:)
+                              transaction: @transaction, clock: Clock.new(NOW), teacher_materials: @materials)
+                         .call(actor:, public_id:, decision:)
       end
 
       def audited(change) = { action: "school.changed", actor_id: 7, at: NOW, subject_type: "School", subject_id: 31,
@@ -31,6 +33,7 @@ module UseCases
         assert_equal "Awa Koné", result.value.teacher_name
         assert_equal [ [ :approve, 5, 7, "team", NOW ] ], @requests.writes
         assert_equal [ audited("join_request_approved") ], @audit.events
+        assert_equal [ [ :inherit, 41, 31, nil, NOW ] ], @materials.calls
         assert_equal 1, @transaction.calls
       end
 
@@ -38,6 +41,7 @@ module UseCases
         assert review(decision: "reject").success?
         assert_equal [ [ :reject, 5, 7, NOW ] ], @requests.writes
         assert_equal [ audited("join_request_rejected") ], @audit.events
+        assert_empty @materials.calls
       end
 
       test "a request already decided is a conflict, nothing is written" do
@@ -56,6 +60,7 @@ module UseCases
 
         assert_equal :conflict, review.code
         assert_empty @audit.events
+        assert_empty @materials.calls
       end
 
       test "an unknown decision is invalid; an unknown request is not found" do

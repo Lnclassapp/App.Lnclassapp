@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Communication::AuthoredMessagesQuery
 # Rôle : « Mes annonces » (20 par page, « Terminée » déduite, thème) et ce que montre le formulaire, dont les annonces qui partiraient
-# ADR  : 0026, 0078, 0081 · UDR : 0071 (§3.7, §3.8), 0075 (§3.1, §3.3)
+# ADR  : 0026, 0078, 0081, 0094 · UDR : 0071 (§3.7, §3.8), 0075 (§3.1, §3.3), 0098 (§3.4)
 module Queries
   module Communication
     class AuthoredMessagesQuery
@@ -29,9 +29,10 @@ module Queries
                   "messages.updated_at", "messages.withdrawn_at", "messages.theme" ].freeze
 
       # Quatre requêtes, quel que soit le nombre d'annonces, de classes et de dessins : le compte, les lignes, leurs
-      # classes, leurs dessins de l'équipe.
-      def page(author_id:, page:, now:)
+      # classes, leurs dessins de l'équipe. school_id : l'établissement courant d'un enseignant (ADR-0094), nil sinon.
+      def page(author_id:, page:, now:, school_id: nil)
         scope = Orm::Message.where(author_id:)
+        scope = scope.where(school_id:) if school_id
         pages = [ scope.count.fdiv(PER_PAGE).ceil, 1 ].max
         page = page.to_s.to_i.clamp(1, pages) # to_s : page[]=2 donne un tableau
         records = scope.left_joins(:school).order(created_at: :desc, id: :desc).offset((page - 1) * PER_PAGE).limit(PER_PAGE)
@@ -46,9 +47,11 @@ module Queries
       # En ligne comme pour live_of : publiée, et now < ends_at. Une parution en laisse LIVE_CAP - 1 : un auteur à plus de
       # LIVE_CAP (données antérieures au chantier) en perd plusieurs, toutes rendues (UDR-0075, amendement de la phase 5).
       # → [Departing] la plus ancienne d'abord ; vide sous LIVE_CAP
-      def departing(author_id:, now:)
-        live = Orm::Message.where(author_id:, status: "published").where("ends_at > ?", now).order(:published_at, :id)
-                           .pluck(:public_id, :title)
+      # school_id : comme live_of, l'établissement courant d'un enseignant (ADR-0094), nil sinon.
+      def departing(author_id:, now:, school_id: nil)
+        live = Orm::Message.where(author_id:, status: "published").where("ends_at > ?", now)
+        live = live.where(school_id:) if school_id
+        live = live.order(:published_at, :id).pluck(:public_id, :title)
         live.first([ live.size - (Entities::Communication::Message::LIVE_CAP - 1), 0 ].max).map { Departing.new(*it) }
       end
 

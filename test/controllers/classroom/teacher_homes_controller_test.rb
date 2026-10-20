@@ -29,6 +29,22 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     create_teacher(school: @school, material: create_material(name: "Mathématiques"), classrooms:)
   end
 
+  # ADR-0103 §4.6: no list in the current school: the courses and the activities invite to choose, nothing reads « de , ».
+  test "a teacher without any subject in the current school is invited to choose them in Courses and Activities" do
+    Orm::TeacherSchoolMaterial.where(teacher_id: @teacher.id).delete_all
+    sign_in_as @teacher
+
+    get teacher_home_path
+
+    assert_response :success
+    [ "#teacher_home_courses_no_materials", "#teacher_home_activity_no_materials" ].each do |id|
+      assert_select id, text: including(tl("choose_materials.title"))
+      assert_select "#{id} a[href='#{edit_profile_materials_path}'][data-turbo-frame=modal]"
+    end
+    assert_select "#teacher_home_courses", text: including(tl("show.courses_subtitle_none"))
+    assert_select "#teacher_home_course_levels", 0
+  end
+
   test "a configured teacher sees their classrooms, each with its headcount, active assignments and average score" do
     exercise = create_exercise(essential: create_essential(course: create_course(material: @svt)))
     2.times { create_exercise_session(student: create_student(classroom: @classroom), exercise:, status: "completed", score_percent: 70) }
@@ -61,7 +77,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "CA-1 (UDR-0077 §3.1): « Mes classes », « Cours », the announcements, then « Activités »" do
+  test "CA-1 (UDR-0077 §3.1, UDR-0130): « Mes classes », « Fiches de cours », the announcements, then « Activités »" do
     create_message(author: create_team_member(second_factor: false), title: "Conseil de classe", audience: "teachers")
     sign_in_as @teacher
 
@@ -71,7 +87,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     assert_equal %w[teacher_home_classrooms teacher_home_courses student_home_announcements teacher_home_activity],
                  css_select(sections).map { it["id"] }
     assert_select "#teacher_home_classrooms h2", text: "Mes classes"
-    assert_select "#teacher_home_courses h2", text: "Cours"
+    assert_select "#teacher_home_courses h2", text: "Fiches de cours"
     assert_select "#teacher_home_activity h2", text: "Activités"
     assert_select "#teacher_home_activity", text: including("Bientôt"), count: 0
   end
@@ -193,7 +209,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
 
     get teacher_home_path
 
-    assert_select "#teacher_home_courses", text: including("Les cours de vos niveaux en Mathématiques")
+    assert_select "#teacher_home_courses", text: including("Les fiches de cours de vos niveaux en Mathématiques")
     assert_select "nav#teacher_home_course_levels[aria-label='Vos niveaux et actions'] > ul.grid.grid-cols-4"
     assert_equal %w[course_level_3eme course_level_1ere_a course_level_tle_d course_level_invite], bubble_ids
     { "3eme" => [ "3ème", courses_path(level: "3eme", material: "mathematiques") ],
@@ -201,7 +217,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
       "tle_d" => [ "Tle D", courses_path(level: "tle", series: "d", material: "mathematiques") ] }.each do |key, (label, href)|
       assert_select "a#course_level_#{key}[href='#{href}']", text: including(label) do
         assert_select "img[src='#{illustration('maths')}'][alt='']"
-        assert_select ".sr-only", text: ", cours de Mathématiques"
+        assert_select ".sr-only", text: ", fiches de cours de Mathématiques"
       end
     end
     assert_select "a#course_level_invite", text: including("Inviter") do
@@ -218,7 +234,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
 
     get teacher_home_path
 
-    link = teacher_invite_link_url(Orm::TeacherProfile.find_by!(user: @teacher).referral_token)
+    link = teacher_invite_link_url(Orm::TeacherSchool.find_by!(teacher: @teacher).invite_token)
     message = I18n.t("identity.referrals.invite.message", school: "Lycée Classique d'Abidjan", link:)
     assert_match %r{/i/\h{12}\z}, link
     assert_select "#teacher_home_course_levels li[data-controller='identity--share']" \
@@ -242,7 +258,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
 
     get teacher_home_path
 
-    assert_select "#teacher_home_courses_empty", text: "Déclarez vos classes pour retrouver ici les cours de vos niveaux."
+    assert_select "#teacher_home_courses_empty", text: "Déclarez vos classes pour retrouver ici les fiches de cours de vos niveaux."
     assert_equal %w[course_level_invite], bubble_ids
     assert_select "#teacher_home_courses a[href='#{courses_path}']", text: including("Voir tout le catalogue")
   end
@@ -255,8 +271,28 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "a#course_level_tle[href='#{courses_path(level: 'tle', material: english.slug)}']" do
       assert_select "img[src='#{illustration('generique')}']"
-      assert_select ".sr-only", text: ", cours de Anglais"
+      assert_select ".sr-only", text: ", fiches de cours de Anglais"
     end
+  end
+
+  # EPM-13, EPM-16 (UDR-0126 §3.2 to §3.4) : deux badges, des bulles génériques vers toutes ses matières, un badge par activité.
+  test "EPM-13: a teacher of two subjects reads both badges, generic bubbles to all his subjects, a badge on each activity" do
+    pc = create_material(name: "Physique-Chimie", category: "science")
+    teacher = create_teacher(school: @school, materials: [ pc, @svt ], classrooms: [ @classroom ])
+    create_student(classroom: @classroom)
+    exercise = create_exercise(essential: create_essential(course: create_course(material: pc, level: @tle)))
+    create_assignment(classroom: @classroom, assignable: exercise, by: teacher, due_on: Date.current + 1)
+    sign_in_as teacher
+
+    get teacher_home_path
+
+    assert_select "#main", text: /Physique-Chimie\s*SVT/
+    assert_select "#teacher_home_courses", text: including(tl("show.courses_subtitle_many"))
+    assert_select "a#course_level_tle[href='#{courses_path(level: 'tle')}']" do
+      assert_select "img[src='#{illustration('generique')}']"
+      assert_select ".sr-only", text: ", fiches de cours de vos matières"
+    end
+    assert_select "#teacher_home_activity li", text: /Physique-Chimie/
   end
 
   test "RE-18: a teacher whose primary school is inactive sees neither the « Inviter » bubble nor the invitation block" do

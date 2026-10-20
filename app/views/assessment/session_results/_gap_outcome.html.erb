@@ -1,0 +1,18 @@
+<%# 🌐 UI · assessment/session_results/_gap_outcome — ce qu'il advient de la fiche : à revoir, levée ou encore à revoir %>
+<%# Rôle : une ligne sous la phrase de progrès, message puis consigne sur 20 ; lien vers la fiche tant qu'elle est à revoir %>
+<%# ADR  : 0043, 0101 §4.3 · UDR : 0120, 0087 §3.6 · propriétaire seul · titre et confettis inchangés %>
+<%# locals: (outcome:, essential:) -%>
+<% lifted = outcome == :lifted %>
+<% grade = Entities::Assessment::Grading.grade_on_20(Entities::Assessment::Grading::REMEDIATION_THRESHOLD) %>
+<div id="session_gap_outcome" class="flex items-start gap-3 rounded-card px-4 py-4 text-sm text-ink <%= lifted ? "bg-success-soft" : "bg-warning-soft" %>">
+  <%= ui_icon lifted ? "check-badge" : "light-bulb", variant: :mini, size: :sm, class: "mt-0.5 #{lifted ? "text-success" : "text-warning"}" %>
+  <div class="min-w-0 space-y-1">
+    <p class="font-bold"><%= t(".#{outcome}.message") %></p>
+    <p><%= t(".#{outcome}.hint", essential: essential.name, grade:) %></p>
+    <% unless lifted %>
+      <%= link_to t(".open_essential"), course_essential_path(essential.course_slug, essential.slug),
+                  class: "inline-flex min-h-tap items-center font-medium text-brand underline-offset-2 hover:underline
+                          focus-visible:outline-2 focus-visible:outline-brand" %>
+    <% end %>
+  </div>
+</div>

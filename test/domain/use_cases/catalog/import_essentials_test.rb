@@ -71,6 +71,24 @@ module UseCases
 
       def positions(course = @course) = course.essentials.order(:position).pluck(:name, :position)
 
+      # Menace n° 13 : le plafond de 200 Ko du texte d'une fiche est celui du schéma, au caractère près.
+      test "a sheet text of exactly 204,800 characters is imported, 204,801 is refused by the schema at its path" do
+        limit = Entities::Catalog::Essential::CONTENT_MAX
+
+        report = run_import(document(essential("Exacte", content: "a" * limit), essential("Dépassée", content: "a" * (limit + 1))))
+
+        assert_equal 204_800, limit
+        assert_equal [ 2, 1, 1 ], report.values_at(:total_count, :imported_count, :error_count)
+        assert_equal [ [ "essentials[1].content", "schema" ] ], report.import_errors.map { it.values_at("path", "code") }
+        assert_equal [ "Exacte" ], @course.essentials.pluck(:name)
+      end
+
+      test "a sheet text too complex to read is refused with its own code at its path" do
+        item = validate(essential("Hostile", content: %(<span title="<p>">x</span>) * 7_000))
+
+        assert_equal [ [ "essentials[0].content", "image_slots_unreadable" ] ], error_pairs(item)
+      end
+
       test "honours the importer contract, and validate_root writes nothing" do
         assert_importer_contract ImportEssentials, adapter:, root: essential, context: context
         assert_equal ImportEssentials::POLICY, Entities::Catalog::ImportKind.fetch(ImportEssentials::KIND).policy
@@ -179,6 +197,21 @@ module UseCases
         assert_equal [ [ "Brassage génétique", 1 ], [ "Mutation", 2 ] ], positions
         assert_equal before, positions(other)
         assert_equal [ @course.id ], Orm::Essential.where(author_id: @author.id).distinct.pluck(:course_id)
+      end
+
+      # CA-14, ADR-0091 §4.5 : tolerance et match s'importent aussi par les fiches.
+      test "tolerance and match are imported with the essentials" do
+        node = essential("Nouveaux types")
+        node["exercises"][0]["questions"] = [
+          { "content" => "Combien ?", "question_type" => "numeric", "tolerance" => 0.5, "answers" => [ { "content" => "3" } ] },
+          { "content" => "Relie.", "question_type" => "matching", "answers" => %w[a b c].map { { "content" => it, "match" => it.upcase } } }
+        ]
+
+        report = run_import(document(node))
+
+        assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count)
+        assert_equal BigDecimal("0.5"), Orm::Question.find_by!(question_type: "numeric").numeric_tolerance
+        assert_equal %w[A B C], Orm::Question.find_by!(question_type: "matching").answers.order(:position).pluck(:match_content)
       end
 
       test "an unknown course slug is rejected in bloc, with zero writes; a missing one is refused by the schema" do

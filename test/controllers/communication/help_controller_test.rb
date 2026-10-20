@@ -24,8 +24,18 @@ class Communication::HelpControllerTest < ActionDispatch::IntegrationTest
   test "the answers quote the thresholds of the domain, not copies of them" do
     get help_path
 
-    assert_select "#help_question_badges", text: /Or à partir de #{GRADING::GOLD_THRESHOLD} %/
-    assert_select "#help_question_gaps", text: /au moins #{GRADING::REMEDIATION_THRESHOLD} %/
+    # UDR-0131 : les paliers et la maîtrise se lisent sur 20, comme les notes de l'élève.
+    assert_select "#help_question_badges", text: /Bronze dès #{GRADING.grade_on_20(GRADING::PASS_THRESHOLD)}\/20/
+    assert_select "#help_question_badges", text: /Argent dès #{GRADING.grade_on_20(GRADING::MASTERY_THRESHOLD)}\/20/
+    assert_select "#help_question_badges", text: /Or dès #{GRADING.grade_on_20(GRADING::GOLD_THRESHOLD)}\/20/
+    assert_select "#help_question_mastery", text: /Acquis dès #{GRADING.grade_on_20(GRADING::MASTERY_THRESHOLD)}\/20/
+    assert_select "#help_question_mastery", text: /Fragile dès #{GRADING.grade_on_20(GRADING::PASS_THRESHOLD)}\/20/
+    assert_select "#help_question_badges, #help_question_mastery", text: /%/, count: 0
+    # UDR-0119 : la règle de la fiche à revoir se lit sur 20, calculée depuis les seuils.
+    assert_select "#help_question_gaps", text: /moins de #{GRADING.grade_on_20(GRADING::PASS_THRESHOLD)}\/20/
+    assert_select "#help_question_gaps", text: /au moins #{GRADING.grade_on_20(GRADING::REMEDIATION_THRESHOLD)}\/20/
+    assert_select "#help_question_gaps", text: /10\/20.*15\/20/m
+    assert_select "#help_question_gaps", text: /%/, count: 0
     assert_select "#help_question_grade", text: /16\/20/
   end
 

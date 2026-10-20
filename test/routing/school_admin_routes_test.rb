@@ -46,6 +46,9 @@ class SchoolAdminRoutesTest < ActionDispatch::IntegrationTest
              [ "PATCH", "/school-admin/school/classroom-archivals/:public_id/archive(.:format)" ],
              [ "PATCH", "/school-admin/school/classroom-archivals/:public_id/restore(.:format)" ],
              [ "POST", "/school-admin/school/level-archivals(.:format)" ],
+             # ADR-0098 : modifier le nom et le plafond d'une classe.
+             [ "PATCH", "/school-admin/school/classroom-settings/:public_id(.:format)" ],
+             [ "PUT", "/school-admin/school/classroom-settings/:public_id(.:format)" ],
              # ADR-0077 : retirer une autre direction.
              [ "DELETE", "/school-admin/school/staff/:public_id(.:format)" ] ].freeze
 

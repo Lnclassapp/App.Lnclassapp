@@ -1,0 +1,10 @@
+<%# 🌐 UI · assessment/exercise_sessions/kinds/_ordering_feedback — « Ton choix » d'un ordre : les étapes dans l'ordre de l'élève %>
+<%# Rôle : numérotées comme il les a rangées ; faux, rien n'est marqué juste ou faux, et le bon ordre n'est jamais montré %>
+<%# ADR  : 0091 §4.4 · UDR : 0087 §3.5 · bordure verte pour une bonne réponse, neutre sinon %>
+<%# locals: (feedback:) -%>
+<ol aria-labelledby="feedback-selected"
+    class="space-y-1.5 rounded-ln border-2 px-4 py-3 font-medium text-ink <%= feedback.correct ? "border-success bg-success-soft" : "border-line bg-white" %>">
+  <% feedback.selected_answers.each_with_index do |step, rank| %>
+    <li><%= rank + 1 %>. <span><%= step.content %></span></li>
+  <% end %>
+</ol>

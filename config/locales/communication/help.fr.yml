@@ -1,6 +1,7 @@
 # Questions fréquentes (/aide) — UDR-0061, construite directement à la demande du porteur (2026-10-02) ;
 # « En retard » ajoutée par le lot des échéances (UDR-0062 §4, ADR-0072 §4.4 : rien ne se ferme après la date).
-# Les seuils (%{pass}, %{mastery}, %{gold}, %{perfect}, %{remediation}) et l'exemple de note viennent de
+# Les seuils lus sur 20 (%{pass_grade}, %{mastery_grade}, %{gold_grade}, %{remediation_grade}, UDR-0119, UDR-0131) et
+# l'exemple de note viennent de
 # Entities::Assessment::Grading : la FAQ ne recopie aucun chiffre du barème.
 fr:
   communication:
@@ -29,13 +30,14 @@ fr:
             answer: "Elle vient de la part de bonnes réponses : 8 bonnes réponses sur 10, c'est 80 %, soit %{example_grade}/20. Sur la page d'un exercice, « Meilleure note » garde ton meilleur résultat."
           badges:
             question: "Comment gagner un badge ?"
-            answer: "En réussissant un exercice : Bronze à partir de %{pass} %, Argent à partir de %{mastery} %, Or à partir de %{gold} %, Diamant à %{perfect} %, sans aucune faute. Tu as un seul badge par exercice, et il ne peut que monter."
+            answer: "En réussissant un exercice : Bronze dès %{pass_grade}/20, Argent dès %{mastery_grade}/20, Or dès %{gold_grade}/20, Diamant quand toutes les réponses sont justes. Tu as un seul badge par exercice, et il ne peut que monter."
           mastery:
             question: "Que veut dire « Maîtrise » ?"
-            answer: "Elle dit où tu en es sur un exercice : Acquis à partir de %{mastery} %, Fragile à partir de %{pass} %, En difficulté sous %{pass} %."
+            answer: "Elle dit où tu en es sur un exercice : Acquis dès %{mastery_grade}/20, Fragile dès %{pass_grade}/20, En difficulté sous %{pass_grade}/20."
           gaps:
-            question: "Pourquoi une fiche est-elle « à revoir » ?"
-            answer: "Quand tu obtiens moins de %{pass} % à un exercice, sa fiche essentielle passe « à revoir ». Relis-la, puis obtiens au moins %{remediation} % à l'un de ses exercices : elle ne sera plus à revoir."
+            question: "Pourquoi une fiche de révision est-elle « à revoir » ?"
+            # UDR-0119 : sur 20, comme toutes les notes de l'élève.
+            answer: "Quand tu obtiens moins de %{pass_grade}/20 à un exercice, sa fiche de révision passe « à revoir ». Relis-la, puis obtiens au moins %{remediation_grade}/20 à l'un de ses exercices : elle ne sera plus à revoir."
           retry:
             question: "Puis-je refaire un exercice ?"
             answer: "Oui, autant de fois que tu veux. Ta meilleure note et ton badge restent acquis. « Recommencer » abandonne la session en cours et repart de la première question."

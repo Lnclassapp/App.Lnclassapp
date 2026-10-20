@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Communication::MessageRepository
 # Rôle : annonces et leurs classes ciblées, écrites ensemble ; rejets effacés ; programmées venues, publiées par leur seul statut ; en ligne sous verrou
-# ADR  : 0029, 0045, 0078, 0081
+# ADR  : 0029, 0045, 0078, 0081, 0094
 module Repositories
   module Communication
     class MessageRepository
@@ -49,12 +49,13 @@ module Repositories
       # parution du même auteur attend ici, puis lit ce que la première a écrit. Trois requêtes : verrou, lignes, classes.
       # FOR NO KEY UPDATE (phase 5) : il exclut une autre parution, mais pas une ligne qui référence l'auteur par clé
       # étrangère (journal d'audit…, FOR KEY SHARE), que FOR UPDATE bloquerait pendant tout le téléversement.
-      def live_of(author_id:, now:)
+      def live_of(author_id:, now:, school_id: nil)
         Orm::User.where(id: author_id).lock("FOR NO KEY UPDATE").pluck(:id)
         # published_at n'est pas comparé à now : une annonce publiée l'a été en s'écrivant, et une parution concurrente qui a
         # lu son horloge avant le verrou doit compter celle que l'autre vient de publier.
         records = Orm::Message.where(author_id:, status: "published").where("ends_at > ?", now)
-                              .order(:published_at, :id).to_a
+        records = records.where(school_id:) if school_id
+        records = records.order(:published_at, :id).to_a
         classroom_ids = classroom_ids_of(records.map(&:id))
         records.map { entity(it, classroom_ids.fetch(it.id, [])) }
       end

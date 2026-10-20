@@ -1,0 +1,6 @@
+<%# 🌐 UI · assessment/exercise_sessions/kinds/_numeric_feedback — « Ton choix » d'une réponse en nombre : la saisie %>
+<%# Rôle : ce que l'élève a écrit, tel quel ; jamais la valeur attendue %>
+<%# ADR  : 0091 §4.4 · UDR : 0087 §3.5 · bordure verte pour une bonne réponse, neutre sinon %>
+<%# locals: (feedback:) -%>
+<p aria-labelledby="feedback-selected"
+   class="flex min-h-tap items-center rounded-ln border-2 px-4 py-3 font-display text-xl font-extrabold text-ink tabular-nums <%= feedback.correct ? "border-success bg-success-soft" : "border-line bg-white" %>"><%= feedback.response_text %></p>

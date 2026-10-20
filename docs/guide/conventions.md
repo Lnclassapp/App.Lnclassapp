@@ -110,6 +110,20 @@ Création d'un worktree de lot — **depuis la branche de chantier**, jamais dep
 git worktree add ../lnclass-lot-a -b feature/<slug>-lot-a feature/<slug>
 ```
 
+### Une PR, un pilote
+
+Une PR n'a qu'**un pilote** à la fois : la seule personne qui pousse sur sa branche. C'est l'**assigné** de la PR sur GitHub. On ne se fie pas à l'auteur, car plusieurs coéquipiers peuvent ouvrir des PR avec le même compte.
+
+1. **Avant de toucher une PR**, regarder son assigné.
+   - Si elle n'a pas d'assigné : s'assigner, puis commenter « Je la prends ».
+   - Si elle a un autre assigné : ne rien pousser. Commenter pour demander la main.
+2. **Pendant le travail**, l'assigné est seul à pousser. Les autres relisent et commentent : une suggestion passe par un commentaire de revue, jamais par un commit.
+3. **Pour passer la main**, le pilote commente « Je passe la main à @x », change l'assigné et cesse de pousser. Celui qui reprend commence par `git pull`.
+4. **Un agent Claude travaille pour un pilote.** Il ne pousse que sur la PR de la personne qui l'a lancé, et seulement si elle en est l'assignée.
+5. **Une PR sans pousse depuis 48 h** peut être reprise après un commentaire resté sans réponse 24 h.
+
+Un chantier sans PR se réserve de la même façon : on ouvre la PR tôt, sans conflit et prête, puis on s'assigne.
+
 Ne jamais committer directement sur `Develop`, `Staging` ni `main` : tout passe par une branche de chantier et une PR.
 
 **Exception mesurée** ([`sobriete-tokens`](../chantiers/sobriete-tokens/memo.md)) : un commit direct sur `Develop` est toléré pour de la documentation seule (memo, journal, ADR, UDR). Tout ce qui peut casser un autre poste passe par une PR : code applicatif, `config/`, `db/`, hooks, `bin/`, `.github/`, `.claude/settings.json`. Jamais de commit direct sur `Staging` ni `main`.

@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | refactoring |
-| **Statut** | cadrage |
+| **Statut** | abandonné — obsolète depuis la refonte (vérifié le 2026-10-16) |
 | **Ouvert le** | 2026-09-18 |
 | **Branche** | `refactor/hitl-refs-adr-obsoletes` |
 | **Gravité** | 🟢 **Faible — mécanique, mais 3 cas ambigus** |
@@ -65,3 +65,7 @@ Toute modification du contenu des fichiers au-delà de leur en-tête.
 ## Questions encore ouvertes
 
 - Profite-t-on du passage pour migrer les 36 en-têtes vers le format allégé, ou se limite-t-on à la correction des numéros ?
+
+## Clôture (2026-10-16)
+
+Abandonné : le défaut n'existe plus dans le code actuel. Vérification : les fichiers cités (`drena_dto.rb`, `school_dto.rb`, `manage_drena_test.rb`) ont disparu et `app/` ne cite plus l'ADR-0014 ni l'ADR-0015. Rien à corriger.

@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/exercises/transition — rendu par publish et archive %>
-<%# Rôle : succès → toast, statut et entrées du menu ⋮ remplacés ; refus (422) → toast d'erreur qui en donne la raison %>
-<%# ADR  : 0035, 0036 · UDR : 0006, 0017 %>
+<%# Rôle : succès → toast, statut et entrées du menu ⋮ remplacés ; refus (422) → toast d'erreur qui en donne la raison (et la question en cause) %>
+<%# ADR  : 0035, 0036, 0105 · UDR : 0006, 0017, 0129 %>
 <% if @refusal %>
   <%= turbo_stream_toast @refusal, type: :error %>
 <% else %>

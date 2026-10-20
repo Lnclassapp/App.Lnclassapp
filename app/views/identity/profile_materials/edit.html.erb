@@ -1,0 +1,19 @@
+<%# 🌐 UI · identity/profile_materials/edit — « Mes matières », servie dans le frame « modal » (ouverte sur le shell sans frame) %>
+<%# Rôle : cases des matières du référentiel, cochées : celles de l'établissement courant ; 1 à 3, règle du serveur ; 422 dans la modale %>
+<%# ADR  : 0103 (§4.4) · UDR : 0006, 0041, 0125 (§3.3) %>
+<% tab_title = page_title(t(".title")) %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title: t(".title"), id: "profile-materials-modal", **profile_modal_layout, open: true,
+                document_title: tab_title do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+      <%= ui_button t(".submit"), type: :submit, form: "profile-materials-form", icon: "check" %>
+    <% end %>
+    <%= form_with model: @form, scope: :profile_materials, url: profile_materials_path, method: :patch,
+                  id: "profile-materials-form" do |form| %>
+      <%= ui_checkbox_group form, :material_slugs, choices: material_options, label: t(".label"),
+                                                   hint: t(".hint", school: profile.school_name), columns: 2 %>
+      <p class="mt-3 text-sm text-mute"><%= t(".kept_assignments") %></p>
+    <% end %>
+  <% end %>
+<% end %>

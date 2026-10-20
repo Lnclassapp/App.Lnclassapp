@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Identity::ProfilePhotosController
 # Rôle : chacun ajoute, change ou retire sa photo dans la modale ; succès en Turbo Stream (toast, page rafraîchie), repli HTML
-# ADR  : 0026, 0028, 0060 · UDR : 0006, 0041 (élève tutoyé, 2026-10-06), 0047
+# ADR  : 0026, 0028, 0060, 0094 · UDR : 0006, 0041 (élève tutoyé, 2026-10-06), 0047
 module Identity
   class ProfilePhotosController < AuthenticatedController
     include Tone
@@ -41,7 +41,7 @@ module Identity
       photo if photo.is_a?(ActionDispatch::Http::UploadedFile)
     end
 
-    def profile = @profile ||= Queries::Identity::ProfileQuery.new.call(user_id: current_actor.user_id)
+    def profile = @profile ||= Queries::Identity::ProfileQuery.new.call(user_id: current_actor.user_id, current_school_id: current_actor.school_id)
     def own_user = users.find(id: current_actor.user_id)
     def users = @users ||= Repositories::Identity::UserRepository.new
 

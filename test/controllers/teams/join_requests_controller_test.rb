@@ -9,8 +9,8 @@ class Teams::JoinRequestsControllerTest < ActionDispatch::IntegrationTest
     @member = create_team_member
     @school = create_school(name: "Lycée Classique d'Abidjan")
     @svt = create_material(name: "SVT", category: "science")
-    @teacher = create_teacher(school: nil, material: @svt, first_name: "Awa", last_name: "Koné", contact: "0501020304")
-    @join_request = create_join_request(school: @school, teacher: @teacher)
+    @teacher = create_teacher(school: nil, first_name: "Awa", last_name: "Koné", contact: "0501020304")
+    @join_request = create_join_request(school: @school, teacher: @teacher, materials: [ @svt ])
   end
 
   def decide(decision, request: @join_request) = patch school_join_request_path(@school.public_id, request.public_id), params: { decision: }

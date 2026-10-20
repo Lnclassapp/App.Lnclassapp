@@ -186,6 +186,22 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav a[aria-current=page]", text: I18n.t("shared.navigation.schools")
   end
 
+  # ADR-0094 §4.6 : l'enseignant dont cet établissement n'est pas le principal porte le badge « Établissement secondaire » ;
+  # celui dont c'est le principal, non.
+  test "ME: a teacher for whom the school is a secondary one carries « Établissement secondaire », the others do not" do
+    school = create_school(drena: @drena)
+    add_teacher_school(create_teacher(school: create_school, first_name: "Ibrahim", last_name: "Koné"), school)
+    create_teacher(school:, first_name: "Awa", last_name: "Traoré")
+    sign_in_as @member
+
+    get school_path(school.public_id)
+
+    assert_select "#school_teachers li", text: /Ibrahim Koné.*Établissement secondaire/m
+    assert_select "#school_teachers li", text: /Awa Traoré/ do |items|
+      assert_no_match(/Établissement secondaire/, items.text)
+    end
+  end
+
   test "CE-06, IE-08: a school's page shows the direction's code, the team's invitation link, and « Régénérer le code » in the menu" do
     school = create_school(drena: @drena, name: "Lycée Classique d'Abidjan", school_code: "k7m4qz")
     sign_in_as @member
@@ -219,6 +235,18 @@ class Teams::SchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "dialog#regenerate-school-code form#regenerate-school-code-form[action='#{school_code_path(school.public_id)}'] " \
                   "input[name=_method][value=patch]"
     assert_select "dialog#regenerate-school-code", text: /K7M-4QZ/
+  end
+
+  test "RM-13 (UDR-0106): the code block says when the code last changed, between the code and its hint; nothing if never" do
+    changed = create_school(drena: @drena, school_code_rotated_at: Time.zone.local(2026, 10, 16, 9))
+    never = create_school(drena: @drena)
+    sign_in_as @member
+
+    get school_path(changed.public_id)
+    assert_select "#school_code #school_code_value + p#school_code_rotated_at.text-xs.text-mute", text: "Changé le 16 octobre 2026"
+
+    get school_path(never.public_id)
+    assert_select "#school_code_rotated_at", 0
   end
 
   test "IE-15: each teacher of the list reads « Inscription : » and their arrival channel, the colleague named when known" do

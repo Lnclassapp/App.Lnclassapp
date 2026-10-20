@@ -1,64 +1,42 @@
-<%# 🌐 UI · classroom/student_homes/show — accueil élève (CL-23, TR-04, AS-36), épuré par la règle de sobriété %>
-<%# Rôle : « Bonjour » seul, puis HOME_SECTIONS[:student] (classe, matières, annonces, à faire) et l'activité, différée ; sans classe, « Choisis ta classe » %>
-<%# ADR  : 0033, 0043, 0078, 0085 · UDR : 0006, 0078, 0057, 0058 §3.3, 0061, 0071 §3.5, 0076 §3.1, 0080, 0081 §3.5 · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
+<%# 🌐 UI · classroom/student_homes/show — accueil élève (CL-23, TR-04, AS-36), redessiné (chantier accueil-eleve) %>
+<%# Rôle : une colonne (pleine, puis 720 px dès 700 px, 960 px au plus dès 1 024 px) : classe, matières, annonces, à faire, activité différée ; sans classe, « Choisis ta classe » %>
+<%# ADR  : 0033, 0043, 0078, 0085, 0089 · UDR : 0057, 0071 §3.5, 0078, 0081 §3.5, 0084 §3.5 · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
 <% page_title t(".page_title") %>
-<%# UDR-0061, amendement du 2026-10-06 : sous lg, pas de « Bonjour » visible (la carte de classe monte en tête).
-    UDR-0080 §3.1 : « Besoin d'aide ? » est dans l'en-tête de l'élève, qui rend la carte d'aide une seule fois. %>
-<div class="lg:mb-6">
-  <h1 class="font-display text-3xl font-extrabold tracking-tight text-balance max-lg:sr-only"><%= t(".greeting", name: shell_user.first_name) %></h1>
-</div>
+<%# UDR-0084 §3.5 : ni « Bonjour » ni prénom ; la page garde son titre pour les lecteurs d'écran. %>
+<h1 class="sr-only"><%= t(".page_title") %></h1>
 
-<% if @home.nil? %>
-<%# UDR-0081 §3.5 : sans classe active, ni exercices ni matières ni activité à lire (tous suivent la classe) : la seule carte. %>
-<div id="student_home" class="grid grid-cols-1 gap-5 max-lg:-mt-2">
-  <%= render "no_classroom" %>
-</div>
-<% else %>
-<% exercises = @home.assigned_exercises %>
-<%# grid-cols-1 = minmax(0, 1fr) : une ligne longue (titre, bande de cartes) ne peut plus élargir la colonne, ni la page. %>
-<div id="student_home" class="grid grid-cols-1 gap-5 max-lg:-mt-2">
-  <% home_sections_for(:student).each do |key, icon| %>
-    <% if key == :todo %>
-      <%= ui_card title: t(".todo_title"), subtitle: t(".todo_subtitle"), icon:, id: "student_home_exercises",
-                  data: (ui_reveal_data if exercises.any?) do |card| %>
-        <% if exercises.empty? %>
-          <%= ui_empty_state title: t(".todo_empty"), description: t(".todo_empty_description"), icon: %>
-        <% else %>
-          <% card.actions do %>
-            <%= ui_badge t(".todo_progress", done: exercises.count { it.completed_count.positive? }, total: exercises.size),
-                         tone: :brand, size: :sm %>
-          <% end %>
-          <ul class="-mx-4 divide-y divide-line border-t border-line sm:-mx-6">
-            <% exercises.each_with_index do |exercise, index| %>
-              <%= render "assigned_exercise", exercise:, index: %>
-            <% end %>
-          </ul>
-          <%= ui_reveal_more exercises.size %>
+<%# grid-cols-1 = minmax(0, 1fr) : une ligne longue (titre, bande de cartes) ne peut plus élargir la colonne, ni la page.
+    max-w-180 (720 px) ne borne rien sous 700 px, où la colonne prend toute la largeur moins les marges. %>
+<div id="student_home" class="mx-auto grid w-full max-w-180 grid-cols-1 gap-6 lg:max-w-240">
+  <% if @home.nil? %>
+    <%# UDR-0081 §3.5 : sans classe active, ni exercices ni matières ni activité à lire (tous suivent la classe) : la seule carte. %>
+    <%= render "no_classroom" %>
+  <% else %>
+    <%# UDR-0084 §3.5 : le même ordre à toutes les tailles, celui de HOME_SECTIONS[:student]. %>
+    <% home_sections_for(:student).each do |key, icon| %>
+      <% if key == :classroom %>
+        <%= render "classroom_card", home: @home %>
+      <% elsif key == :subjects %>
+        <%= render "subjects", subjects: @home.subjects, late_slugs: @home.late_material_slugs, icon: %>
+      <% elsif key == :announcements %>
+        <%# UDR-0071 §3.5 : seulement si l'élève a au moins une annonce lisible, masquées comprises ; toutes masquées, la
+            section est rendue cachée (cible d'« Annuler »). %>
+        <% if @announcements.any_readable? %>
+          <%= render "communication/messages/carousel", carousel: @announcements, link: false %>
         <% end %>
+      <% elsif key == :todo %>
+        <%= render "todo", exercises: @home.assigned_exercises, gaps: @home.pending_gaps, icon:, daily: @daily,
+                           classroom: @home.classroom_name, school: @home.school_name %>
       <% end %>
-      <% if @home.pending_gaps.any? %>
-        <%= render "pending_gaps", gaps: @home.pending_gaps %>
-      <% end %>
-    <% elsif key == :announcements %>
-      <%# UDR-0071 §3.5 : seulement si l'élève a au moins une annonce lisible, masquées comprises. Amendement du 2026-10-06 :
-          sans « Toutes les annonces » ; toutes masquées, la section est rendue cachée (cible d'« Annuler »). %>
-      <% if @announcements.any_readable? %>
-        <%= render "communication/messages/carousel", carousel: @announcements, link: false %>
-      <% end %>
-    <% elsif key == :classroom %>
-      <%= render "classroom_card", home: @home, icon: %>
-    <% elsif key == :subjects %>
-      <%= render "subjects", subjects: @home.subjects, late_slugs: @home.late_material_slugs, icon: %>
     <% end %>
-  <% end %>
 
-  <%= ui_card title: t(".activity_title"), subtitle: t(".activity_subtitle"), icon: "bolt", id: "student_home_activity" do %>
-    <%= turbo_frame_tag Classroom::StudentHomesController::RECENT_ACTIVITY_FRAME, src: student_home_path, loading: :lazy,
-                        target: "_top" do %>
-      <%= ui_loading_state variant: :skeleton %>
+    <%= ui_card title: t(".activity_title"), subtitle: t(".activity_subtitle"), id: "student_home_activity" do %>
+      <%= turbo_frame_tag Classroom::StudentHomesController::RECENT_ACTIVITY_FRAME, src: student_home_path, loading: :lazy,
+                          target: "_top" do %>
+        <%= ui_loading_state variant: :skeleton %>
+      <% end %>
     <% end %>
   <% end %>
 </div>
-<% end %>
-<%# UDR-0078, amendement du 2026-10-07 : l'invitation à installer l'app, en pop-up, sur l'accueil seulement %>
+<%# UDR-0078, amendement du 2026-10-07 : l'invitation à installer l'app, en pop-up, sur l'accueil seulement ; en dernier. %>
 <%= render "shared/navigation/install_banner", role: "student" %>
