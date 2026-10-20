@@ -29,7 +29,7 @@ docs/decisions/udr/NNNN-titre-en-kebab-case.md
 - **4 chiffres**, séquentiels, jamais réutilisés. `0022`, pas `22` ni `ADR-0022`.
 - **kebab-case en français**, sans accent dans le nom de fichier : `0022-suppression-des-open-struct.md`.
 - ⚠️ La convention `NNNN_SCREAMING_SNAKE.md` de la v1 est **abandonnée**. Ne plus jamais l'utiliser.
-- Avant de créer un ADR, vérifier le dernier numéro dans l'index : `ls docs/decisions/adr/ | tail -3`.
+- **Le numéro se pose à la fusion, pas à l'ouverture** (chantier [`acceleration-du-flux`](../chantiers/acceleration-du-flux/memo.md)). Pendant le chantier, une décision s'appelle `XXXX-<slug>.md` et se cite `ADR-XXXX-<slug>` ou `UDR-XXXX-<slug>`. Au commit de clôture, `script/docs/build_index --number` lui donne le prochain numéro libre, renomme le fichier et réécrit ses références. Si `Develop` a pris ce numéro entre-temps, il suffit de fusionner `Develop` et de relancer la commande. `script/docs/build_index --check` refuse un `XXXX-` sur `Develop`, `Staging` et `main`.
 
 ### Chantiers
 
@@ -224,6 +224,16 @@ Ces règles ne sont pas des consignes : ce sont des tests qui refusent ton commi
 | Les parcours critiques passent en test système | CI |
 | L'en-tête HITL est présent sur tout fichier de `app/` | pre-commit |
 | Brakeman et bundler-audit ne remontent rien de nouveau | CI |
+| Une livraison ne supprime pas ce qu'elle ajoute ou recopie (migrations en deux temps, ci-dessous) | CI (`test/guards/migration_rules_test.rb`) |
+
+### Migrations en deux temps
+
+**Une livraison qu'on ne peut pas défaire n'est pas livrée.** Revenir à l'image précédente ne défait pas une migration ([`retour-arriere.md`](retour-arriere.md)) : l'ancien code doit donc tourner sur la nouvelle base.
+
+1. **Première livraison** : ajouter la colonne ou la table, recopier les données, basculer le code. L'ancienne colonne reste, elle n'est plus lue.
+2. **Livraison suivante** : supprimer l'ancienne colonne (`remove_column`, `drop_table`, `remove_reference`) ou finir un renommage (`rename_column`, `rename_table`).
+
+Une livraison, ce sont les migrations absentes de `origin/main`. La garde refuse qu'une même livraison crée ou recopie ce qu'elle supprime. Une suppression seule passe. Une exception s'écrit dans la migration, avec sa raison : `# migration-en-deux-temps: <raison>`. Le contre-exemple est la PR #268, qui recopiait `teacher_profiles.material_id` et supprimait la colonne dans la même livraison.
 
 ### Couverture de tests — 100 %
 
