@@ -101,15 +101,14 @@ Test de contrôle : reformule la cause en une phrase qui ne contient **pas** les
 Port mal découpé, règle métier logée dans un contrôleur, contrat de retour ambigu → ADR écrit **avant** le correctif :
 
 ```bash
-ls docs/decisions/adr/ | tail -3
-cp docs/decisions/adr/TEMPLATE.md docs/decisions/adr/NNNN-titre-en-kebab-case.md
+cp docs/decisions/adr/TEMPLATE.md docs/decisions/adr/XXXX-titre-en-kebab-case.md
 ```
 
-Puis indexe dans `docs/decisions/adr/README.md`.
+Cite-le `ADR-XXXX-<slug>` : le numéro et la ligne d'index se posent au commit de clôture (`script/docs/build_index --number`, `docs/guide/conventions.md` §2).
 
 ### 4.3 UDR — seulement si la correction change ce que l'utilisateur voit
 
-État d'erreur, libellé, parcours. Un bug purement backend n'en produit pas. Template : `docs/decisions/udr/TEMPLATE.md`, index `docs/decisions/udr/README.md`.
+État d'erreur, libellé, parcours. Un bug purement backend n'en produit pas. Template : `docs/decisions/udr/TEMPLATE.md`, copié en `docs/decisions/udr/XXXX-<slug>.md` et cité `UDR-XXXX-<slug>` jusqu'à la clôture.
 
 ## Étape 5 — PLANIFIER
 

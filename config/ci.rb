@@ -33,6 +33,14 @@ CI_PLAN = CiPlan.define do
     step "Guard: CI groups add up to bin/ci", "ruby -Itest test/guards/ci_plan_test.rb"
     step "Guard: System suite budget (15 s per chantier)", "ruby -Itest test/guards/system_budget_test.rb"
     step "Guard: Android shell (minSdk 28, variants, no signing key)", "ruby -Itest test/guards/android_project_test.rb"
+    # conventions.md §7: the delivery is what origin/main lacks. A GitHub checkout has no origin/main: it is fetched
+    # (depth 1) when missing, never otherwise, so a full local clone does not turn shallow. Without it, every migration is checked.
+    step "Guard: Migrations in two steps",
+         "{ git rev-parse -q --verify refs/remotes/origin/main >/dev/null || " \
+         "git fetch -q --depth=1 origin main:refs/remotes/origin/main; }; ruby -Itest test/guards/migration_rules_test.rb"
+    # conventions.md §2: the decision indexes are up to date, no number is taken twice, and no XXXX- decision reaches
+    # Develop, Staging or main (GITHUB_BASE_REF names the target of a pull request).
+    step "Guard: Decision index (numbers set at merge)", "script/docs/build_index --check"
 
     step "Style: Ruby", "bin/rubocop"
   end

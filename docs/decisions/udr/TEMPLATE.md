@@ -1,4 +1,4 @@
-# UDR-NNNN : [Titre — quelle surface d'interface]
+# UDR-XXXX : [Titre — quelle surface d'interface]
 <!-- index
 titre: [titre court de l'index]
 statut: Accepté
@@ -6,10 +6,10 @@ adr-lie: [NNNN](../adr/NNNN-slug.md)
 problematique: [une phrase : le problème d'interface que la décision tranche]
 -->
 <!--
-  Nom du fichier : NNNN-titre-en-kebab-case.md
+  Nom du fichier : XXXX-titre-en-kebab-case.md, cité UDR-XXXX-<slug> tant que le chantier est ouvert.
   Une UDR n'est pas un compte-rendu de design : c'est une CONSIGNE EXÉCUTABLE.
   Un agent doit pouvoir écrire la vue à partir de la seule section 3, sans poser de question.
-  Après création : ajouter la ligne correspondante dans docs/decisions/udr/README.md
+  Le numéro et la ligne d'index : script/docs/build_index --number, au commit de clôture.
 -->
 
 | | |

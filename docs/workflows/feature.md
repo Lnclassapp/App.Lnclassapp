@@ -41,7 +41,7 @@ Poids : **maximum**. C'est ici qu'on gagne ou qu'on perd le chantier.
 
 - Les critères d'acceptation du PRD (§4) sont écrits en Gherkin et **chacun devient un test**. Un critère non testable est un critère à réécrire.
 - L'UDR se rédige comme une consigne exécutable : tokens, états vide/chargement/erreur/succès, cible Turbo, `aria-*`. Un agent doit écrire la vue à partir de sa seule §3.
-- Numérotation ADR/UDR : `ls docs/decisions/adr/ | tail -3`, 4 chiffres, kebab-case ([conventions §2](../guide/conventions.md#2-nommage-des-fichiers)).
+- Numérotation ADR/UDR : `XXXX-<slug>.md` pendant le chantier, numéro posé à la clôture par `script/docs/build_index --number` ([conventions §2](../guide/conventions.md#2-nommage-des-fichiers)).
 
 **Ce qu'on peut sauter** : l'ADR, si le chantier n'ajoute qu'un use case sur des ports existants. **Jamais l'UDR dès qu'une vue bouge.**
 
@@ -105,8 +105,8 @@ Un lot vertical **n'a pas le droit de redéfinir un port**. S'il en a besoin, il
 - [ ] `memo.md` complet, section `Hors périmètre` non vide
 - [ ] Grill fait : ≥ 1 ligne dans `Ce que le grill a révélé`
 - [ ] `prd.md` : critères d'acceptation en Gherkin, tous testables
-- [ ] ADR écrit si un port / une table / un contrat apparaît, indexé dans `decisions/adr/README.md`
-- [ ] UDR écrite pour **chaque** vue créée ou modifiée, indexée dans `decisions/udr/README.md`
+- [ ] ADR écrit si un port / une table / un contrat apparaît, nommé `XXXX-<slug>.md` (numéro et index posés à la clôture)
+- [ ] UDR écrite pour **chaque** vue créée ou modifiée, nommée `XXXX-<slug>.md` (numéro et index posés à la clôture)
 - [ ] `plan.md` : 4 champs par lot, tableau de collision rempli
 - [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
 - [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord

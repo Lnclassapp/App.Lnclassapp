@@ -89,11 +89,10 @@ Leviers déjà entérinés sur ce projet (`docs/workflows/optimisation.md`) : s�
 **Pas d'ADR** si l'optimisation reste locale : index ajouté, `includes` correctement posé, `select` restreint.
 
 ```bash
-ls docs/decisions/adr/ | tail -3
-cp docs/decisions/adr/TEMPLATE.md docs/decisions/adr/NNNN-titre-en-kebab-case.md
+cp docs/decisions/adr/TEMPLATE.md docs/decisions/adr/XXXX-titre-en-kebab-case.md
 ```
 
-Indexe dans `docs/decisions/adr/README.md`.
+Cite-le `ADR-XXXX-<slug>` : le numéro et la ligne d'index se posent au commit de clôture (`script/docs/build_index --number`, `docs/guide/conventions.md` §2).
 
 **Pas d'UDR** — si l'écran change, ce n'est plus une optimisation : retour à l'étape 0.
 
