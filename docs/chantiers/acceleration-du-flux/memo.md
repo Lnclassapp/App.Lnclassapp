@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | refactoring (outillage et règles du processus, sans effet sur l'application) |
-| **Statut** | planifié |
+| **Statut** | livré |
 | **Ouvert le** | 2026-10-20 |
 | **Branche** | `refactor/acceleration-du-flux` |
 | **Programme** | — |
