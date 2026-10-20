@@ -83,7 +83,7 @@ C'est la phase que la v1 n'avait pas, et c'est celle qui manquait le plus.
 
 1. **Contradiction empirique** — un rôle distinct de celui qui a écrit le code **exécute** : il lance les tests, ouvre l'application, refait le parcours, mesure. Il ne relit pas le code, il le met à l'épreuve.
 2. **Les portes** — pureté du domaine, rubocop, tests, parcours système, brakeman. Voir [ce qui bloque](../guide/conventions.md#7-ce-qui-bloque).
-3. **Une CI complète par PR.** Entre deux lots, la preuve est légère : les tests des fichiers touchés, et `bin/system-changed` quand le lot touche une vue, un contrôleur, un composant, du CSS ou du Stimulus ([onboarding §4](../guide/onboarding.md)). `bin/ci-quiet` se joue **une seule fois par PR**, sur son head final, après les revues et leurs corrections. Une CI rouge corrigée se rejoue : le head a changé.
+3. **La preuve suit ce que la PR touche ; la CI complète tourne par train** ([ADR-0107](../decisions/adr/0107-la-preuve-d-une-pr-suit-ce-qu-elle-touche.md)). Entre deux lots : les tests des fichiers touchés, et `bin/system-changed` quand le lot touche une vue, un contrôleur, un composant, du CSS ou du Stimulus ([onboarding §4](../guide/onboarding.md)). `bin/ci-quiet` se joue une fois par PR, sur son head final, après les revues : il choisit le niveau (**doc** : Markdown seul, les gardes ; **pr** : `lint`, `security`, les tests du périmètre et `bin/system-changed` ; **train** : tout `bin/ci`) et ne rejoue pas un code déjà vert. La suite complète ne tourne qu'**une fois par train**, sur GitHub, à la PR de promotion vers `Staging`, en tâches parallèles de 5 minutes au plus. `bin/ci-quiet --plan` dit ce que la branche doit.
 4. **PR unique** vers `Develop`, référençant le chantier, l'ADR et l'UDR.
 5. **Clôture** — `journal.md` du chantier mis à jour : ce qui a été appris, ce qui a dérapé, ce qui reste ouvert.
 
@@ -134,6 +134,8 @@ Règle : **le plus petit modèle qui fait le travail** ; on monte d'un cran quan
 | Sous-agents de revue : `security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer` | **Opus** |
 | Agents d'exécution (`executant-lot`) : lots, tests et corrections à partir d'un plan cadré | **Sonnet** |
 | Vérifications pures (`verificateur-ci`) : `bin/ci-quiet`, tests système relancés, verdict | **Haiku** |
+| Recherche de code (`Explore`) : trouver un fichier, lire du code ou un journal | **Haiku** |
+| Tâches mécaniques hors lot (`chores`) : lancer une commande, lire un journal, renommer un fichier de doc ; jamais le code de `app/` | **Haiku** |
 
 Où l'appliquer : le champ `model:` du frontmatter de chaque agent de `.claude/agents/` ; le paramètre `model` à l'appel d'un agent pour une tâche précise ; `/model` pour la session principale.
 

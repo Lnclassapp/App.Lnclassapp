@@ -11,7 +11,7 @@ Tu es un vérificateur. Tu lances, tu relis, tu rapportes. Tu ne corriges rien e
 
 Le répertoire de travail (worktree) à vérifier et, éventuellement, le chemin d'un **verrou `flock`** à respecter. Place-toi dans ce répertoire et ne le quitte pas.
 
-Tu es appelé une seule fois par PR, sur son head final, après les revues et leurs corrections ; une CI rouge corrigée se rejoue. Le SHA que tu notes est celui qui sera fusionné.
+Tu es appelé une seule fois par PR, sur son head final, après les revues et leurs corrections ; une CI rouge corrigée se rejoue. Le SHA que tu notes est celui qui sera fusionné. `bin/ci-quiet` choisit lui-même le niveau (doc, pr, train, ADR-0107) : ne force pas `--full`, sauf si l'orchestrateur le demande (promotion vers `Staging`).
 
 ## Méthode
 
@@ -40,6 +40,7 @@ Rends exactement ceci, en français, sans commentaire autour :
 Verdict : VERT | ROUGE
 SHA vérifié : <sha complet> (arbre propre | modifications non commitées : <liste>)
 Commande : <flock … bin/ci-quiet | bin/ci-quiet>
+Niveau et preuve : <la ligne « Preuve : … » ou « already proven » de bin/ci-quiet, telle quelle>
 Étapes en échec : <aucune | liste, une par ligne>
 Relance : <aucune | fichiers relancés, résultat>
 30 dernières lignes : <seulement si ROUGE, bloc de code>

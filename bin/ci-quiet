@@ -1,17 +1,106 @@
-#!/usr/bin/env bash
-# Plays bin/ci with the full output in tmp/ci.log and prints only what a reader needs: the verdict, the failed steps and the last 30 lines.
-# Why: the whole output of bin/ci is read by the agent on every run (chantier sobriete-tokens, rule 5). Arguments and CI_GROUP pass through.
-set -uo pipefail
-cd "$(dirname "$0")/.."
-mkdir -p tmp
-bin/ci "$@" > tmp/ci.log 2>&1
-status=$?
-if [ "$status" -eq 0 ]; then
-  echo "bin/ci: green ($(wc -l < tmp/ci.log) lines in tmp/ci.log)"
-else
-  echo "bin/ci: RED (exit $status), full log in tmp/ci.log"
-  grep -n -E '^(Failure|Error):|^[0-9]+\) |FAILED|✗|❌' tmp/ci.log | head -20
-  echo "--- last 30 lines"
-  tail -30 tmp/ci.log
-fi
-exit "$status"
+#!/usr/bin/env ruby
+# Plays the CI the branch owes (ADR-0107: doc, pr or train, see script/ci/scope.rb) with the full output in tmp/ci.log,
+# and prints only what a reader needs: the verdict, the failed steps, the last 30 lines, and the proof line for the PR.
+# Why: the whole output of bin/ci is read by the agent on every run (chantier sobriete-tokens, rule 5).
+#
+#   bin/ci-quiet              the level of the branch; nothing runs when this code already has a green verdict
+#   bin/ci-quiet --full       the whole bin/ci (train), whatever the branch
+#   bin/ci-quiet --plan       the level, the tests and the commands, without running anything
+#   CI_GROUP=lint bin/ci-quiet   a subset of bin/ci, as before: no level, no verdict kept
+require "open3"
+require_relative "../script/ci/scope"
+
+Dir.chdir(File.expand_path("..", __dir__))
+LOG = "tmp/ci.log"
+FileUtils.mkdir_p("tmp")
+FileUtils.rm_f(LOG)
+
+def git(*args)
+  out, status = Open3.capture2("git", *args, err: File::NULL)
+  status.success? ? out : nil
+end
+
+def play(title, env, *command)
+  File.open(LOG, "a") do |log|
+    log.puts "=== #{title}"
+    log.flush
+    started = Time.now
+    system(env, *command, out: log, err: log).tap do |green|
+      log.puts "#{green ? '✅' : '❌'} #{title} #{green ? 'passed' : 'failed'} in #{(Time.now - started).round(1)}s"
+    end
+  end
+end
+
+def report(green, status, label)
+  if green
+    puts "bin/ci: green, #{label} (#{File.foreach(LOG).count} lines in #{LOG})"
+  else
+    puts "bin/ci: RED (exit #{status}), #{label}, full log in #{LOG}"
+    failures = File.foreach(LOG).each_with_index.select { |line, _| line.match?(/^(Failure|Error):|^[0-9]+\) |FAILED|✗|❌/) }
+    failures.first(20).each { |line, index| puts "#{index + 1}:#{line}" }
+    puts "--- last 30 lines"
+    puts File.readlines(LOG).last(30)
+  end
+end
+
+if ENV["CI_GROUP"].to_s.strip != ""
+  green = play("bin/ci", {}, "bin/ci", *ARGV)
+  report(green, $?.exitstatus, "CI_GROUP=#{ENV['CI_GROUP']}")
+  exit(green ? 0 : 1)
+end
+
+base = ENV.fetch("BASE", "origin/Develop")
+branch = git("rev-parse", "--abbrev-ref", "HEAD").to_s.strip
+head = git("rev-parse", "HEAD").to_s.strip
+merge_base = git("merge-base", base, "HEAD")&.strip
+pending = git("status", "--porcelain").to_s.lines.map { it[3..].strip.split(" -> ").last }
+changed = merge_base ? git("diff", "--name-only", merge_base, "HEAD").to_s.lines.map(&:strip) + pending : []
+# Fail-safe: when git cannot compare with the base, the whole suite runs.
+level = merge_base ? CiScope.level(branch:, changed: changed.uniq, full: ARGV.include?("--full")) : :train
+
+tests = level == :pr ? CiScope.tests_for(changed.uniq, test_files: Dir["test/**/*_test.rb"]) : []
+# doc and pr play their steps directly, without the Setup of bin/ci (2 minutes): the machine is already set up.
+# The guards and the security steps come from config/ci.rb, so they never diverge from the full run.
+load File.expand_path("../config/ci.rb", __dir__) if level != :train
+commands =
+  case level
+  when :doc
+    CI_PLAN.steps_for("lint").select { it.title.start_with?("Guard:") }.map { [ it.title, {}, it.command ] }
+  when :pr
+    rubocop = CiScope.rubocop_targets(changed.uniq)
+    style = rubocop == :all ? [ "bin/rubocop" ] : ([ "bin/rubocop", "--force-exclusion", *rubocop ] if rubocop.any?)
+    guards = CI_PLAN.steps_for("lint").select { it.title.start_with?("Guard:") }
+    security = CI_PLAN.steps_for("security").drop(1)
+    [ *guards.map { [ it.title, {}, it.command ] },
+      ([ "Style: Ruby (#{rubocop == :all ? 'every file' : "#{rubocop.size} changed files"})", {}, *style ] if style),
+      *security.map { [ it.title, {}, it.command ] },
+      ([ "Tests: Rails (#{tests.size} files of the change)", { "COVERAGE" => "0" }, "bin/rails", "test", *tests ] if tests.any?),
+      [ "Tests: System (bin/system-changed)", { "BASE" => base }, "bin/system-changed" ] ].compact
+  else [ [ "bin/ci", {}, "bin/ci" ] ]
+  end
+
+if ARGV.include?("--plan")
+  puts "Niveau : #{level} (branche #{branch}, #{changed.uniq.size} fichier(s) changé(s) depuis #{base})"
+  commands.each { |title, *| puts "  #{title}" }
+  exit 0
+end
+
+fingerprint = CiScope.fingerprint(git("ls-tree", "-r", "HEAD").to_s)
+verdicts = CiScope::Verdicts.new("tmp/ci-verdicts")
+if pending.empty? && (known = verdicts.find(fingerprint, level))
+  puts "bin/ci: green, already proven for this code (nothing played). #{known}"
+  exit 0
+end
+puts "⚠️  Uncommitted changes: the run proves the work tree, no verdict is kept." if pending.any?
+
+started = Time.now
+green = commands.all? { |title, env, *command| play(title, env, *command) }
+status = $?&.exitstatus
+minutes, seconds = (Time.now - started).round.divmod(60)
+report(green, status, "level #{level}")
+exit 1 unless green
+
+proof = "Preuve : `bin/ci-quiet` niveau #{level} vert sur `#{head[0, 8]}` (empreinte `#{fingerprint[0, 12]}`), " \
+        "#{minutes} min #{seconds} s, le #{Time.now.strftime('%F %H:%M')}."
+puts proof
+verdicts.record(fingerprint, level, proof) if pending.empty? && git("rev-parse", "HEAD").to_s.strip == head
