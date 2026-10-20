@@ -27,8 +27,8 @@ Chiffres et preuves : [`docs/chantiers/sobriete-tokens/memo.md`](docs/chantiers/
 - **Un commit par lot**, documentation du lot comprise. Pas de commit qui ne touche que `docs/` en cours de lot.
 - **Index** ADR / UDR : générés par `script/docs/build_index` au commit de clôture, jamais édités à la main. Index des chantiers : modifié une seule fois, à la clôture.
 - **PR ou commit direct** : PR pour le code applicatif, `config/`, `db/`, hooks, `bin/`, `.github/`, `.claude/settings.json` ; commit direct sur `Develop` seulement pour de la documentation seule. Une PR par chantier.
-- **Pas de fusion sans preuve** : la CI GitHub est coupée (`CI_ENABLED` absente, ADR-0069), donc le `bin/ci` local est écrit dans la PR avant la fusion.
-- **Une CI complète par PR** : entre deux lots, tests des fichiers touchés et `bin/system-changed` ; `bin/ci-quiet` une seule fois, sur le head final, après les revues. Une CI rouge corrigée se rejoue.
+- **Pas de fusion sans preuve** : vers `Develop`, la ligne de preuve de `bin/ci-quiet` local est écrite dans la PR avant la fusion ; vers `Staging` et `main`, c'est le statut `ci` de GitHub (ADR-0069, ADR-0107).
+- **La CI suit ce que la PR touche** (ADR-0107) : entre deux lots, tests des fichiers touchés et `bin/system-changed` ; `bin/ci-quiet` une fois, sur le head final, après les revues. Il choisit le niveau (doc, pr, train), ne rejoue pas un code déjà vert et affiche la ligne de preuve à coller dans la PR. **La suite complète ne tourne qu'une fois par train** : sur GitHub, à la PR vers `Staging`, en tâches parallèles de 5 minutes au plus. Aucune tâche de CI ne dépasse 5 minutes.
 - **`bin/ci-quiet`** à la place de `bin/ci` pour les sessions d’agent : verdict, étapes en échec et 30 dernières lignes ; le journal complet est dans `tmp/ci.log`.
 - **Sous-agents de revue** (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) : une fois par PR, sur le diff final, et seulement au-delà de 150 lignes ou si un use case, une policy, une route ou un téléversement est touché.
 - **Menace écrite d'abord** pour tout code qui lit un fichier envoyé par un utilisateur (image, import) : 6 corrections JPEG successives en ont montré le coût.
@@ -43,6 +43,7 @@ Règle et table : [`docs/workflows/README.md`](docs/workflows/README.md#quel-mod
 - **Opus** : l'orchestrateur (cadrage, décisions, arbitrage, fusions) et les sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`).
 - **Sonnet** : l'exécution d'un lot déjà cadré (`executant-lot`), tests et corrections compris.
 - **Haiku** : les vérifications pures (`verificateur-ci` : `bin/ci-quiet`, tests système relancés, verdict).
+- **Déléguer à Haiku** la recherche (trouver un fichier, lire du code ou un journal) à l'agent `Explore`, et les tâches mécaniques hors lot (lancer une commande et lire sa sortie, renommer un fichier de doc) à l'agent `chores`. Jamais le code de `app/` : c'est `executant-lot`.
 - Le plus petit modèle qui fait le travail ; on monte d'un cran dès qu'il faut du jugement (sécurité, concurrence, architecture, décision métier).
 - Appliquer : `model:` dans `.claude/agents/`, paramètre `model` à l'appel d'un agent, `/model` pour la session.
 

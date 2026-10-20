@@ -50,6 +50,8 @@ Le porteur résume : « Il ne sert à rien de démarrer un train pour transporte
 | Sous-agents de revue : `security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer` | **Opus** | Concurrence, autorisation, échecs silencieux : du jugement (PR #250) |
 | Agents d'exécution : écrire les lots, les tests et les corrections à partir d'un plan déjà cadré | **Sonnet** | Le plan a déjà tranché ; reste à bien écrire |
 | Vérifications pures : lancer `bin/ci-quiet`, relancer des tests système, publier un verdict | **Haiku** | Aucune décision, seulement l'exécution et le compte rendu |
+| Recherche de code (`Explore`) : trouver un fichier, lire du code ou un journal, lister un dossier | **Haiku** | Localiser n'est pas juger ; l'Explore intégré héritait sinon d'Opus |
+| Tâches mécaniques hors lot (`chores`) : lancer une commande et résumer sa sortie, lire un journal, renommer un fichier de doc | **Haiku** | Aucune décision ; s'arrête au-delà de 2 fichiers ou dès qu'un choix se pose |
 
 Un agent d'exécution qui se heurte à une décision que le plan ne tranche pas **s'arrête et remonte** à l'orchestrateur ; il ne choisit pas lui-même.
 
@@ -77,7 +79,9 @@ Trois leviers, du plus durable au plus ponctuel :
 |---|---|
 | `security-reviewer.md`, `silent-failure-hunter.md`, `pr-test-analyzer.md` | `opus` |
 | `executant-lot.md` | `sonnet` |
-| `verificateur-ci.md` | `haiku` |
+| `verificateur-ci.md`, `Explore.md`, `chores.md` | `haiku` |
+
+`Explore.md` remplace l'agent Explore intégré de Claude Code, qui tourne sinon sur le modèle de la session. `chores` ne touche pas au code de `app/` : en-tête HITL, I18n, couches et « un commit par lot » relèvent d'`executant-lot`.
 
 2. **Paramètre `model` à l'appel d'un agent** (outil Agent) : il l'emporte sur le frontmatter. À utiliser pour monter ou descendre d'un cran sur une tâche précise, pas pour contourner la table.
 3. **`/model`** pour la session principale : Opus pour l'orchestration.
@@ -92,4 +96,4 @@ Aucune garde automatique : un mauvais `model:` coûte de l'argent, pas de l'int�
 grep -H '^model:' .claude/agents/*.md
 ```
 
-Les trois agents de revue doivent afficher `opus`, `executant-lot` `sonnet`, `verificateur-ci` `haiku`. La décision tiendra mal si les agents d'un plugin ou d'un nouvel auteur oublient le champ : à relire au moment d'ajouter un agent.
+Les trois agents de revue doivent afficher `opus`, `executant-lot` `sonnet`, `verificateur-ci`, `Explore` et `chores` `haiku`. La décision tiendra mal si les agents d'un plugin ou d'un nouvel auteur oublient le champ : à relire au moment d'ajouter un agent.

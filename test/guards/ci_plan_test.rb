@@ -1,8 +1,9 @@
 # Pure Ruby, no Rails boot: bin/ci is one list of steps, played whole by the jobs of the GitHub workflow
 # (feuille-de-route §2, garde-fou n° 4; ADR-0064, ADR-0069). The rules that keep the GitHub minutes within the quota
-# and the clock of a run under ten minutes fail here, in the lint group, before any test runs.
+# and every job under five minutes (ADR-0107) fail here, in the lint group, before any test runs.
 require "minitest/autorun"
 require "yaml"
+require "json"
 require "fileutils"
 require "open3"
 require "tmpdir"
@@ -11,9 +12,12 @@ load File.expand_path("../../config/ci.rb", __dir__) unless defined?(CI_PLAN)
 class CiPlanTest < Minitest::Test
   GITHUB = File.expand_path("../../.github", __dir__)
   WORKFLOW = File.join(GITHUB, "workflows/ci.yml")
-  # ADR-0069 §9 : the jobs that play bin/ci, side by side; « system » is a matrix of SYSTEM_PARTS parts.
+  # ADR-0069 §9, ADR-0107 : the jobs that play bin/ci, side by side; « unit » is a matrix of group lists drawn by
+  # « plan », « system » a matrix of SYSTEM_PARTS parts. No job runs longer than JOB_MINUTES (the owner's ceiling).
   TEST_JOBS = %w[unit system].freeze
-  SYSTEM_PARTS = 3
+  SYSTEM_PARTS = 6
+  PERF_PARTS = 2
+  JOB_MINUTES = 5
 
   def workflow = YAML.safe_load_file(WORKFLOW, aliases: true)
 
@@ -28,17 +32,19 @@ class CiPlanTest < Minitest::Test
 
   def draw_script = steps("plan").find { it["id"] == "draw" }["run"]
 
+  # The parts of « unit » the draw writes for a full run (&&) and for a partial one (||).
+  def unit_parts(operator) = JSON.parse(draw_script[/#{Regexp.escape(operator)} unit='(\[[^']*\])'/, 1])
+
   # The titles bin/ci plays for a selection, Setup left out.
   def titles(selection) = CI_PLAN.steps_for(selection).drop(1).map(&:title)
 
-  # ADR-0069 §9 : « plan » decides, « unit » and the parts of « system » play bin/ci side by side (a run stays
-  # under ten minutes of clock on any runner), « ci » is the one status the branches wait for. The only matrix is
-  # the parts of « system ».
+  # ADR-0069 §9 : « plan » decides, the parts of « unit » and « system » play bin/ci side by side, « ci » is the one
+  # status the branches wait for. The only matrices are the parts of « unit » and « system ».
   def test_plan_decides_the_test_jobs_play_bin_ci_and_ci_gives_the_verdict
     assert_equal %w[plan unit system ci], jobs.keys
     jobs.each do |name, job|
       assert_equal name, job["name"].to_s.split.first, "le job « #{name} » porte son nom"
-      assert_nil job["strategy"], "pas de matrice : #{name}" unless name == "system"
+      assert_nil job["strategy"], "pas de matrice : #{name}" unless TEST_JOBS.include?(name)
     end
     TEST_JOBS.each do |name|
       assert_equal "plan", jobs.dig(name, "needs")
@@ -50,20 +56,26 @@ class CiPlanTest < Minitest::Test
 
   # ADR-0069 §9 : the two jobs add up to bin/ci: on a full run (promotion, drawn pull request) every group once,
   # nothing twice; any other run that replays the suite leaves out the import performance tests only (ADR-0039),
-  # checked again at the promotion.
+  # checked again at the promotion. The unit suite is one part of its own: its coverage measures the whole suite.
   def test_the_two_jobs_add_up_to_bin_ci_and_a_partial_run_leaves_out_the_performance_tests_only
-    assert_equal "${{ needs.plan.outputs.unit }}", bin_ci("unit").dig("env", "CI_GROUP")
+    assert_equal "${{ fromJSON(needs.plan.outputs.unit) }}", jobs.dig("unit", "strategy", "matrix", "groups")
+    assert_equal "${{ matrix.groups }}", bin_ci("unit").dig("env", "CI_GROUP")
     assert_equal (1..SYSTEM_PARTS).to_a, jobs.dig("system", "strategy", "matrix", "part")
     assert_equal "system:${{ matrix.part }}/#{SYSTEM_PARTS}", bin_ci("system").dig("env", "CI_GROUP")
     split = CI_PLAN.split("system", SYSTEM_PARTS)
     assert_equal CiPlan.files("test/system/**/*_test.rb").sort, split.flatten.sort, "chaque fichier système dans une part, une seule"
-    full = draw_script[/&& unit="([a-z,]+)"/, 1]
-    partial = draw_script[/\|\| unit="([a-z,]+)"/, 1]
-    assert full && partial, "le tirage écrit les groupes de « unit » pour un run complet et pour un run partiel"
+    assert_includes unit_parts("&&"), "unit", "la suite unitaire, seule dans sa part"
+    assert_includes unit_parts("||"), "unit"
+    (1..PERF_PARTS).each { assert_includes unit_parts("&&"), "perf:#{it}/#{PERF_PARTS}" }
+    assert_equal CI_PLAN.steps_for("perf").last.command.scan(%r{test/performance/\S+}).sort, CI_PLAN.split("perf", PERF_PARTS).flatten.sort
+    full = unit_parts("&&").join(",")
+    partial = unit_parts("||").join(",")
+    groups = ->(selection) { selection.split(",").map { it.sub(/:.*/, "") }.uniq }
+    whole = ->(selection) { titles(selection).map { it.sub(%r{ \d+/\d+\z}, "") }.uniq }
 
-    assert_equal CI_PLAN.groups.keys.sort, (full.split(",") + [ "system" ]).sort, "un run complet joue chaque groupe une fois"
-    assert_equal CI_PLAN.groups.keys.sort - [ "perf" ], (partial.split(",") + [ "system" ]).sort, "le run partiel laisse « perf »"
-    assert_equal titles(nil).sort, (titles(full) + titles("system")).sort
+    assert_equal CI_PLAN.groups.keys.sort, (groups.(full) + [ "system" ]).sort, "un run complet joue chaque groupe une fois"
+    assert_equal CI_PLAN.groups.keys.sort - [ "perf" ], (groups.(partial) + [ "system" ]).sort, "le run partiel laisse « perf »"
+    assert_equal titles(nil).sort, (whole.(full) + titles("system")).sort
     assert_equal (titles(nil) - titles("perf")).sort, (titles(partial) + titles("system")).sort
   end
 
@@ -73,9 +85,16 @@ class CiPlanTest < Minitest::Test
     assert_equal [ "pull_request" ], triggers.keys
     assert_includes triggers.dig("pull_request", "types"), "ready_for_review"
     # Amendment of 2026-10-04: and only while the repository variable CI_ENABLED is « true » (the owner's switch).
-    assert_equal "${{ !github.event.pull_request.draft && vars.CI_ENABLED == 'true' }}", jobs.dig("plan", "if")
+    # ADR-0107 : and only into Staging and main, once per train; a pull request into Develop proves its change locally.
+    assert_equal "${{ !github.event.pull_request.draft && vars.CI_ENABLED == 'true' && " \
+                 "(github.base_ref == 'Staging' || github.base_ref == 'main') }}", jobs.dig("plan", "if")
     TEST_JOBS.each { |name| assert_equal "needs.plan.outputs.code == 'true'", jobs.dig(name, "if"), name }
     assert_equal "${{ !cancelled() && needs.plan.result != 'skipped' }}", jobs.dig("ci", "if")
+  end
+
+  # ADR-0107 : the owner's ceiling, five minutes, holds for every job: a part that grows past it turns the run red.
+  def test_no_job_runs_longer_than_five_minutes
+    jobs.each { |name, job| assert job["timeout-minutes"].to_i.between?(1, JOB_MINUTES), "#{name} : timeout-minutes ≤ #{JOB_MINUTES}" }
   end
 
   # ADR-0069 : a tree that already got a green « ci » is not replayed; only a run whose two jobs played the checks
