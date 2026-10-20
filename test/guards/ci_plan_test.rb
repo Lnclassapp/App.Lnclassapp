@@ -16,6 +16,7 @@ class CiPlanTest < Minitest::Test
   # « plan », « system » a matrix of SYSTEM_PARTS parts. No job runs longer than JOB_MINUTES (the owner's ceiling).
   TEST_JOBS = %w[unit system].freeze
   SYSTEM_PARTS = 6
+  PERF_PARTS = 2
   JOB_MINUTES = 5
 
   def workflow = YAML.safe_load_file(WORKFLOW, aliases: true)
@@ -65,12 +66,16 @@ class CiPlanTest < Minitest::Test
     assert_equal CiPlan.files("test/system/**/*_test.rb").sort, split.flatten.sort, "chaque fichier système dans une part, une seule"
     assert_includes unit_parts("&&"), "unit", "la suite unitaire, seule dans sa part"
     assert_includes unit_parts("||"), "unit"
+    (1..PERF_PARTS).each { assert_includes unit_parts("&&"), "perf:#{it}/#{PERF_PARTS}" }
+    assert_equal CI_PLAN.steps_for("perf").last.command.scan(%r{test/performance/\S+}).sort, CI_PLAN.split("perf", PERF_PARTS).flatten.sort
     full = unit_parts("&&").join(",")
     partial = unit_parts("||").join(",")
+    groups = ->(selection) { selection.split(",").map { it.sub(/:.*/, "") }.uniq }
+    whole = ->(selection) { titles(selection).map { it.sub(%r{ \d+/\d+\z}, "") }.uniq }
 
-    assert_equal CI_PLAN.groups.keys.sort, (full.split(",") + [ "system" ]).sort, "un run complet joue chaque groupe une fois"
-    assert_equal CI_PLAN.groups.keys.sort - [ "perf" ], (partial.split(",") + [ "system" ]).sort, "le run partiel laisse « perf »"
-    assert_equal titles(nil).sort, (titles(full) + titles("system")).sort
+    assert_equal CI_PLAN.groups.keys.sort, (groups.(full) + [ "system" ]).sort, "un run complet joue chaque groupe une fois"
+    assert_equal CI_PLAN.groups.keys.sort - [ "perf" ], (groups.(partial) + [ "system" ]).sort, "le run partiel laisse « perf »"
+    assert_equal titles(nil).sort, (whole.(full) + titles("system")).sort
     assert_equal (titles(nil) - titles("perf")).sort, (titles(partial) + titles("system")).sort
   end
 

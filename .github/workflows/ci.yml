@@ -7,8 +7,8 @@
 #   - a tree that already got a green « ci » is not replayed (a promotion, a re-run): about two minutes;
 #   - a pull request that touches documentation alone is green without playing the checks;
 #   - otherwise the whole bin/ci, in jobs side by side, none longer than five minutes (ADR-0107, the owner's ceiling):
-#     « unit » plays every group but the system tests, in three parts (the unit suite with its coverage, the other
-#     checks, the import performance on a full run); « system » plays the system tests in six parts of similar
+#     « unit » plays every group but the system tests, in parts (the unit suite with its coverage, the other
+#     checks, the import performance in two parts on a full run); « system » plays the system tests in six parts of similar
 #     duration (script/ci/test_timings.yml).
 #   - pull requests into Staging and main only (ADR-0107): a pull request into Develop proves its change locally,
 #     with bin/ci-quiet; the whole suite runs once per train, at the promotion.
@@ -78,8 +78,8 @@ jobs:
           echo "full=$full" | tee -a "$GITHUB_OUTPUT"
           # ADR-0069 §9, ADR-0107 : the parts of the « unit » job, side by side, under five minutes each; « system »
           # plays the system tests. The unit suite stays whole: its coverage threshold measures the whole suite. The
-          # import performance tests (ADR-0039) run on a full run only: the promotion into Staging plays them.
-          [ "$full" = true ] && unit='["unit","lint,security,seeds,assets","perf"]' || unit='["unit","lint,security,seeds,assets"]'
+          # import performance tests (ADR-0039) run on a full run only, in two parts: the promotion into Staging plays them.
+          [ "$full" = true ] && unit='["unit","lint,security,seeds,assets","perf:1/2","perf:2/2"]' || unit='["unit","lint,security,seeds,assets"]'
           echo "unit=$unit" | tee -a "$GITHUB_OUTPUT"
 
       # Has this exact tree already got a green « ci »? Any doubt (unreadable commit, API error) answers no.
@@ -111,7 +111,7 @@ jobs:
         run: echo "sha=$(git rev-parse 'HEAD^{tree}')" >> "$GITHUB_OUTPUT"
 
   # Every group but the system tests, in parts: the unit suite with its 100 % coverage; lint, security, seeds and
-  # assets; the import performance tests on a full run.
+  # assets; the import performance tests on a full run, in two parts.
   unit:
     name: unit ${{ matrix.groups }}
     needs: plan
