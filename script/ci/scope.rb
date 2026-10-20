@@ -1,11 +1,12 @@
 # What a branch owes before it merges, and whether it already paid it (ADR-0107, chantier ci-par-train).
 # bin/ci-quiet picks the level from the files the branch changed since origin/Develop:
 #
-#   doc    only Markdown outside the code (docs/, .claude/, the root): the guards and Rubocop, group lint
-#   pr     code: lint and security, the unit tests of the touched files and of their callers, the system tests
-#          bin/system-changed selects. No coverage threshold: it measures the whole suite only.
-#   train  Develop, Staging, main, --full, or a change to the dependencies, the test harness or the CI (BROAD):
-#          the whole bin/ci, coverage at 100 %.
+#   doc    only Markdown outside the code (docs/, .claude/, the root): the guards of the group lint
+#   pr     code: the guards, Rubocop on the changed files, the security group, the unit tests of the touched files
+#          and of their callers, the system tests bin/system-changed selects. No setup and no coverage threshold:
+#          it measures the whole suite only. Under 5 minutes.
+#   train  Develop, Staging, main, --full, or a change to the dependencies or the test harness (BROAD): the whole
+#          bin/ci, coverage at 100 %.
 #
 # A green run leaves tmp/ci-verdicts/<fingerprint>-<level>. The fingerprint is the tree of the commit without its
 # Markdown: a merge of Develop that brings only documents, or a fixed sentence after a review, proves nothing new.
@@ -17,12 +18,11 @@ class CiScope
   LEVELS = %i[doc pr train].freeze
   TRAIN_BRANCHES = %w[Develop Staging main].freeze
   CODE_DIRS = %r{\A(app|bin|config|db|lib|script|test)/}
-  # The changes a pr run cannot prove: the dependencies, the test harness and the CI itself. Everything else (a
-  # migration, a fixture, a factory, a locale, a route) plays the tests that name it; what they miss, the train catches.
-  BROAD = %r{
-    \A(Gemfile(\.lock)?|package\.json|yarn\.lock|\.ruby-version|\.rubocop\.yml|config/ci\.rb|bin/(ci|ci-quiet|setup)\z
-    |script/ci/(?!test_timings\.yml)|test/(test_helper\.rb|application_system_test_case\.rb))
-  }x
+  # The changes a pr run cannot prove: the dependencies and the test harness. Everything else (a migration, a fixture,
+  # a factory, a locale, a route, the CI itself) plays the tests that name it; what they miss, the train catches.
+  BROAD = %r{\A(Gemfile(\.lock)?|package\.json|yarn\.lock|\.ruby-version|test/(test_helper|application_system_test_case)\.rb)\z}
+  # Changing these restyles every file: Rubocop then inspects the whole tree.
+  RUBOCOP_WIDE = %w[.rubocop.yml Gemfile.lock].freeze
 
   def self.doc?(path) = path.end_with?(".md") && !path.match?(CODE_DIRS)
 
@@ -64,6 +64,17 @@ class CiScope
 
     folders = File.dirname(path).split("/")
     [ File.basename(path) ] + (2..folders.size).map { folders.first(it).join("/") }
+  end
+
+  # The files Rubocop inspects in a pr run, or :all when its configuration or its version moves.
+  def self.rubocop_targets(changed, ruby_script: ->(path) { File.foreach(path).first.to_s.include?("ruby") })
+    return :all if changed.any? { RUBOCOP_WIDE.include?(it) }
+
+    changed.select do |path|
+      next false unless File.exist?(path)
+
+      path.match?(/\.(rb|rake|gemspec)\z|\A(Gemfile|Rakefile|config\.ru)\z/) || (path.start_with?("bin/") && ruby_script.call(path))
+    end
   end
 
   def self.fingerprint(ls_tree)

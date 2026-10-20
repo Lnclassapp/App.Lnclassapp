@@ -25,6 +25,7 @@ La CI GitHub est coupée (ADR-0069) : la preuve de chaque PR est un `bin/ci-quie
 2. Ne jamais rejouer un code déjà vert.
 3. Aucun code non prouvé par la suite complète n'arrive sur `Staging`, donc en production.
 4. Appliqué par l'outil : l'agent lance `bin/ci-quiet` comme avant, l'outil choisit.
+5. **Une PR attend sa preuve 5 minutes au plus** (décision du porteur, 2026-10-20).
 
 ## 3. Options envisagées
 
@@ -40,9 +41,9 @@ La CI GitHub est coupée (ADR-0069) : la preuve de chaque PR est un `bin/ci-quie
 
 | Niveau | Quand | Ce qui tourne |
 |---|---|---|
-| **doc** | Seulement du Markdown hors du code (`docs/`, `.claude/`, la racine) | Groupe `lint` : gardes et Rubocop |
-| **pr** | Tout autre changement sur une branche de chantier | `lint` et `security`, les tests unitaires du périmètre, `bin/system-changed` ; sans seuil de couverture |
-| **train** | `Develop`, `Staging`, `main`, `--full`, ou un changement des dépendances, de l'outillage de test ou de la CI | Tout `bin/ci`, couverture à 100 % |
+| **doc** | Seulement du Markdown hors du code (`docs/`, `.claude/`, la racine) | Les gardes du groupe `lint` |
+| **pr** | Tout autre changement sur une branche de chantier | Les gardes, Rubocop sur les fichiers changés (tout l'arbre si `.rubocop.yml` ou `Gemfile.lock` change), le groupe `security`, les tests unitaires du périmètre, `bin/system-changed` ; sans installation ni seuil de couverture. **Moins de 5 minutes.** |
+| **train** | `Develop`, `Staging`, `main`, `--full`, ou un changement des dépendances ou du socle de test (`test_helper.rb`, `application_system_test_case.rb`) | Tout `bin/ci`, couverture à 100 % |
 
 Le périmètre d'une PR (`script/ci/scope.rb`) comprend les tests modifiés, le miroir de chaque fichier Ruby (la correspondance du pre-commit), et tout test qui nomme ce qui a changé : la constante d'un fichier Ruby, les méthodes d'une aide de `test/support/`, le jeu d'une fixture (`users(:`), le nom de tout autre fichier ou l'un de ses dossiers (`docs/contenus/lecons-traitees`).
 
@@ -52,7 +53,7 @@ Le périmètre d'une PR (`script/ci/scope.rb`) comprend les tests modifiés, le 
 
 ### 🟢 Positives
 
-- Sur les 28 dernières PR fusionnées (rejouées par `script/ci/scope.rb`) : 1 au niveau doc, 24 au niveau pr, 3 en train (CI, dépendances, outillage système). Une suite complète par promotion au lieu d'une par PR.
+- Sur les 28 dernières PR fusionnées (rejouées par `script/ci/scope.rb`) : 1 au niveau doc, 25 au niveau pr, 2 en train (dépendances, socle des tests système). Une suite complète par promotion au lieu d'une par PR.
 - Une PR de documentation se prouve en quelques secondes.
 - Une fusion de `Develop` qui n'apporte que du Markdown, ou une phrase corrigée après revue, ne rejoue rien.
 
@@ -61,6 +62,8 @@ Le périmètre d'une PR (`script/ci/scope.rb`) comprend les tests modifiés, le 
 - **Une régression hors du périmètre ou une couverture tombée sous 100 % se découvre au train**, pas à la PR. Elle peut rester quelques heures sur `Develop`, jamais atteindre `Staging`.
 - Le verdict gardé est local (`tmp/ci-verdicts/`) : il ne vaut que sur la machine qui l'a produit. La preuve qui compte reste la ligne écrite dans la PR.
 - Une aide de test partagée (fabriques) sélectionne une grande partie des tests unitaires : la suite système, les seeds, la perf et le budget des assets restent au train.
+- Le train, lui, dure ce que dure `bin/ci` (10 à 25 minutes sur un poste 4 cœurs) : une fois par promotion, pas par PR.
+- Les niveaux doc et pr ne jouent pas `bin/setup` : une machine qui n'est pas installée doit lancer `bin/setup` d'abord.
 
 ## 6. Notes d'implémentation
 

@@ -20,11 +20,14 @@ def git(*args)
   status.success? ? out : nil
 end
 
-def play(env, *command)
+def play(title, env, *command)
   File.open(LOG, "a") do |log|
-    log.puts "=== #{command.join(' ')}"
+    log.puts "=== #{title}"
     log.flush
-    system(env, *command, out: log, err: log)
+    started = Time.now
+    system(env, *command, out: log, err: log).tap do |green|
+      log.puts "#{green ? '✅' : '❌'} #{title} #{green ? 'passed' : 'failed'} in #{(Time.now - started).round(1)}s"
+    end
   end
 end
 
@@ -41,7 +44,7 @@ def report(green, status, label)
 end
 
 if ENV["CI_GROUP"].to_s.strip != ""
-  green = play({}, "bin/ci", *ARGV)
+  green = play("bin/ci", {}, "bin/ci", *ARGV)
   report(green, $?.exitstatus, "CI_GROUP=#{ENV['CI_GROUP']}")
   exit(green ? 0 : 1)
 end
@@ -56,20 +59,29 @@ changed = merge_base ? git("diff", "--name-only", merge_base, "HEAD").to_s.lines
 level = merge_base ? CiScope.level(branch:, changed: changed.uniq, full: ARGV.include?("--full")) : :train
 
 tests = level == :pr ? CiScope.tests_for(changed.uniq, test_files: Dir["test/**/*_test.rb"]) : []
+# doc and pr play their steps directly, without the Setup of bin/ci (2 minutes): the machine is already set up.
+# The guards and the security steps come from config/ci.rb, so they never diverge from the full run.
+load File.expand_path("../config/ci.rb", __dir__) if level != :train
 commands =
   case level
-  when :doc then [ [ { "CI_GROUP" => "lint" }, "bin/ci" ] ]
+  when :doc
+    CI_PLAN.steps_for("lint").select { it.title.start_with?("Guard:") }.map { [ it.title, {}, it.command ] }
   when :pr
-    [ [ { "CI_GROUP" => "lint,security" }, "bin/ci" ],
-      ([ { "COVERAGE" => "0" }, "bin/rails", "test", *tests ] if tests.any?),
-      [ { "BASE" => base }, "bin/system-changed" ] ].compact
-  else [ [ {}, "bin/ci" ] ]
+    rubocop = CiScope.rubocop_targets(changed.uniq)
+    style = rubocop == :all ? [ "bin/rubocop" ] : ([ "bin/rubocop", "--force-exclusion", *rubocop ] if rubocop.any?)
+    guards = CI_PLAN.steps_for("lint").select { it.title.start_with?("Guard:") }
+    security = CI_PLAN.steps_for("security").drop(1)
+    [ *guards.map { [ it.title, {}, it.command ] },
+      ([ "Style: Ruby (#{rubocop == :all ? 'every file' : "#{rubocop.size} changed files"})", {}, *style ] if style),
+      *security.map { [ it.title, {}, it.command ] },
+      ([ "Tests: Rails (#{tests.size} files of the change)", { "COVERAGE" => "0" }, "bin/rails", "test", *tests ] if tests.any?),
+      [ "Tests: System (bin/system-changed)", { "BASE" => base }, "bin/system-changed" ] ].compact
+  else [ [ "bin/ci", {}, "bin/ci" ] ]
   end
 
 if ARGV.include?("--plan")
   puts "Niveau : #{level} (branche #{branch}, #{changed.uniq.size} fichier(s) changé(s) depuis #{base})"
-  puts "Tests unitaires : #{tests.size}" if level == :pr
-  commands.each { |env, *command| puts "  #{env.map { "#{_1}=#{_2}" }.join(' ')} #{command.first(4).join(' ')}#{' …' if command.size > 4}".squeeze(" ") }
+  commands.each { |title, *| puts "  #{title}" }
   exit 0
 end
 
@@ -82,7 +94,7 @@ end
 puts "⚠️  Uncommitted changes: the run proves the work tree, no verdict is kept." if pending.any?
 
 started = Time.now
-green = commands.all? { |env, *command| play(env, *command) }
+green = commands.all? { |title, env, *command| play(title, env, *command) }
 status = $?&.exitstatus
 minutes, seconds = (Time.now - started).round.divmod(60)
 report(green, status, "level #{level}")

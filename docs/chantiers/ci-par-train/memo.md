@@ -31,12 +31,13 @@ Le porteur a demandé d'appliquer les règles sans prendre de relevé complet (2
 | Suites `bin/ci` complètes par PR fusionnée | 28 dernières PR fusionnées sur `Develop` (#237 à #266) | 28 (une par PR) | ≤ 5 | Règle en vigueur ; `git log --first-parent --merges origin/Develop` |
 | Suites complètes, journée du 2026-10-19 | 17 PR fusionnées | ≥ 17 | 1 ou 2 (par promotion) | `gh pr list --state merged --base Develop` |
 | Durée d'une suite complète | PR #262, poste du porteur | 10 min 17 s | — | Preuve écrite dans la PR #262 |
+| Attente de la preuve d'une PR | PR #270 (CI) | suite complète, interrompue après 20 min | ≤ 5 min | `bin/ci-quiet` chronométré |
 
 ## Mesure après
 
 | Métrique | Valeur après | Comment mesurée |
 |---|---|---|
-| Suites complètes pour les 28 mêmes PR | **3** (doc : 1, pr : 24, train : 3) | `CiScope.level` rejoué sur le diff de chaque fusion (`journal.md`) |
+| Suites complètes pour les 28 mêmes PR | **2** (doc : 1, pr : 25, train : 2) | `CiScope.level` rejoué sur le diff de chaque fusion (`journal.md`) |
 
 ## Hors périmètre
 

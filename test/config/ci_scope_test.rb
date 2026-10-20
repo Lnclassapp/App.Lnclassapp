@@ -18,15 +18,14 @@ class CiScopeTest < ActiveSupport::TestCase
   end
 
   test "a change no mapping can follow plays the whole suite" do
-    %w[Gemfile.lock yarn.lock config/ci.rb script/ci/plan.rb bin/ci test/test_helper.rb
-       test/application_system_test_case.rb].each do |path|
+    %w[Gemfile Gemfile.lock package.json yarn.lock test/test_helper.rb test/application_system_test_case.rb].each do |path|
       assert_equal :train, level([ "app/x.rb", path ]), path
     end
   end
 
-  test "a migration, a fixture, a route or the timings of the split stay at the pr level" do
+  test "a migration, a fixture, a route or the CI itself stays at the pr level" do
     %w[db/migrate/1_x.rb db/schema.rb test/fixtures/users.yml config/routes.rb config/initializers/x.rb
-       script/ci/test_timings.yml docs/contenus/a.json].each do |path|
+       config/ci.rb script/ci/plan.rb bin/ci-quiet test/support/x.rb .rubocop.yml docs/contenus/a.json].each do |path|
       assert_equal :pr, level([ "app/x.rb", path ]), path
     end
   end
@@ -76,6 +75,21 @@ class CiScopeTest < ActiveSupport::TestCase
     tests = CiScope.tests_for([ "app/controllers/school/years_controller.rb" ], test_files: files.keys, read: files.method(:[]))
 
     assert_equal [ "test/controllers/years_controller_test.rb" ], tests
+  end
+
+  test "Rubocop inspects the changed Ruby files, or the whole tree when its configuration moves" do
+    Dir.mktmpdir do |dir|
+      Dir.chdir(dir) do
+        FileUtils.mkdir_p(%w[app bin])
+        %w[app/x.rb app/y.html.erb bin/ruby_tool bin/shell_tool Gemfile].each { File.write(it, "") }
+        script = ->(path) { path == "bin/ruby_tool" }
+        changed = %w[app/x.rb app/y.html.erb app/gone.rb bin/ruby_tool bin/shell_tool Gemfile docs/a.md]
+
+        assert_equal %w[app/x.rb bin/ruby_tool Gemfile], CiScope.rubocop_targets(changed, ruby_script: script)
+        assert_equal :all, CiScope.rubocop_targets([ "app/x.rb", ".rubocop.yml" ], ruby_script: script)
+        assert_empty CiScope.rubocop_targets([ "docs/a.md" ], ruby_script: script)
+      end
+    end
   end
 
   test "the fingerprint ignores the Markdown outside the code, nothing else" do
