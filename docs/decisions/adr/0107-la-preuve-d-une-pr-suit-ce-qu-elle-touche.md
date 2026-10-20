@@ -25,7 +25,7 @@ La CI GitHub est coupée (ADR-0069) : la preuve de chaque PR est un `bin/ci-quie
 2. Ne jamais rejouer un code déjà vert.
 3. Aucun code non prouvé par la suite complète n'arrive sur `Staging`, donc en production.
 4. Appliqué par l'outil : l'agent lance `bin/ci-quiet` comme avant, l'outil choisit.
-5. **Une PR attend sa preuve 5 minutes au plus** (décision du porteur, 2026-10-20).
+5. **Aucune preuve, aucun test, aucune tâche de CI ne dépasse 5 minutes**, la suite complète comprise (décision du porteur, 2026-10-20).
 
 ## 3. Options envisagées
 
@@ -47,7 +47,7 @@ La CI GitHub est coupée (ADR-0069) : la preuve de chaque PR est un `bin/ci-quie
 
 Le périmètre d'une PR (`script/ci/scope.rb`) comprend les tests modifiés, le miroir de chaque fichier Ruby (la correspondance du pre-commit), et tout test qui nomme ce qui a changé : la constante d'un fichier Ruby, les méthodes d'une aide de `test/support/`, le jeu d'une fixture (`users(:`), le nom de tout autre fichier ou l'un de ses dossiers (`docs/contenus/lecons-traitees`).
 
-**La promotion.** La PR `Develop → Staging` porte la ligne de preuve train de `bin/ci-quiet`, jouée sur le head de `Develop` qu'elle promeut. Sans cette ligne, elle ne fusionne pas. Un train rouge ne se rejoue pas en entier : on rejoue les seuls tests en échec sur chaque fusion du train (`git log --first-parent --merges`) jusqu'à trouver la PR fautive, qui est corrigée par une nouvelle PR.
+**La promotion.** La PR `Develop → Staging` est prouvée par la CI GitHub (variable `CI_ENABLED`, réactivée le 2026-10-20), qui ne tourne plus que sur les PR vers `Staging` et `main`. La suite y est découpée en tâches parallèles de **5 minutes au plus** (`timeout-minutes: 5`, garde `test/guards/ci_plan_test.rb`) : `unit` en trois parts (la suite unitaire et sa couverture ; lint, sécurité, seeds et assets ; la perf des imports) et `system` en six parts équilibrées (≈ 167 s de tests enregistrés chacune). Sans `ci` vert, elle ne fusionne pas. `bin/ci-quiet --full` reste possible en local, mais il n'est plus la preuve d'une promotion : sur un poste 4 cœurs, il dure 10 à 25 minutes. Un train rouge ne se rejoue pas en entier : on rejoue les seuls tests en échec sur chaque fusion du train (`git log --first-parent --merges`) jusqu'à trouver la PR fautive, qui est corrigée par une nouvelle PR.
 
 ## 5. Conséquences
 
@@ -62,7 +62,8 @@ Le périmètre d'une PR (`script/ci/scope.rb`) comprend les tests modifiés, le 
 - **Une régression hors du périmètre ou une couverture tombée sous 100 % se découvre au train**, pas à la PR. Elle peut rester quelques heures sur `Develop`, jamais atteindre `Staging`.
 - Le verdict gardé est local (`tmp/ci-verdicts/`) : il ne vaut que sur la machine qui l'a produit. La preuve qui compte reste la ligne écrite dans la PR.
 - Une aide de test partagée (fabriques) sélectionne une grande partie des tests unitaires : la suite système, les seeds, la perf et le budget des assets restent au train.
-- Le train, lui, dure ce que dure `bin/ci` (10 à 25 minutes sur un poste 4 cœurs) : une fois par promotion, pas par PR.
+- Le train joue sur GitHub en tâches parallèles : le dépôt est public, les minutes sont gratuites. Si GitHub n'attribue plus de runner (constat du 2026-10-04, ADR-0069), la promotion attend : la suite locale ne tient pas en 5 minutes.
+- Une part qui grossit au-delà de 5 minutes rend la CI rouge : il faut alors ajouter une part (`SYSTEM_PARTS`) ou alléger les tests, jamais relever le plafond sans décision du porteur.
 - Les niveaux doc et pr ne jouent pas `bin/setup` : une machine qui n'est pas installée doit lancer `bin/setup` d'abord.
 
 ## 6. Notes d'implémentation
