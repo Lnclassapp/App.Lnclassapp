@@ -6,14 +6,16 @@
 #   script/docs/build_index            # rewrites the two READMEs
 #   script/docs/build_index --number   # numbers the pending decisions (XXXX-<slug>.md), then rewrites the READMEs
 #   script/docs/build_index --check    # exits 1 on a stale README, a number taken twice, or a pending decision on
-#                                      # Develop, Staging or main (or a pull request into one); writes nothing
+#                                      # Develop, Staging, main, a pull request into one, or an unknown branch;
+#                                      # writes nothing
 #
 # Block, one `key: value` per line: titre, statut, date (only when it differs from the **Date** row of the header),
 # adr-lie (UDR only), problematique. The number and the link come from the file name.
 #
 # A number is set when the chantier merges, never when it opens (conventions.md §2, chantier acceleration-du-flux): a
 # decision is written XXXX-<slug>.md and cited ADR-XXXX-<slug> / UDR-XXXX-<slug>. --number gives each pending decision
-# the next free number of its kind, in the order of the slugs, renames it with `git mv` and rewrites its references.
+# the next free number of its kind, in the order of the slugs, renames it with `git mv` and rewrites its references in
+# every file git knows (tracked, or untracked and not ignored).
 KINDS = {
   "adr" => { columns: [ "N°", "Titre", "Statut", "Date", "Problématique" ], keys: %w[titre statut date problematique] },
   "udr" => { columns: [ "N°", "Titre", "Statut", "Date", "ADR lié", "Problématique" ], keys: %w[titre statut date adr-lie problematique] }
@@ -23,8 +25,6 @@ FINISH = "<!-- index:end -->".freeze
 REPO = File.expand_path("../..", __dir__)
 ROOT = File.join(REPO, "docs/decisions")
 PENDING = "XXXX".freeze
-# Where a reference to a pending decision is rewritten, besides CLAUDE.md.
-CITING = %w[docs app config db test .claude].freeze
 LONG_BRANCHES = %w[Develop Staging main].freeze
 
 def metadata(path)
@@ -52,15 +52,19 @@ def duplicates
   end
 end
 
-# The current branch, and the target of the pull request under GitHub Actions.
+# The current branch (GITHUB_REF_NAME on a detached head), and the target of the pull request under GitHub Actions.
+# An unknown branch counts as a long one: --check then refuses a pending decision rather than letting it through.
 def branches
   head = IO.popen([ "git", "-C", REPO, "rev-parse", "--abbrev-ref", "HEAD" ], err: File::NULL, &:read).to_s.strip
+  head = ENV["GITHUB_REF_NAME"].to_s if [ "", "HEAD" ].include?(head)
+  head = "unknown branch" if head.empty?
   [ head, ENV["GITHUB_BASE_REF"].to_s ]
 end
 
 def citing_files
-  files = CITING.flat_map { Dir.glob(File.join(REPO, it, "**", "*"), File::FNM_DOTMATCH) }
-  (files + [ File.join(REPO, "CLAUDE.md") ]).select { File.file?(it) }
+  listed = IO.popen([ "git", "-C", REPO, "ls-files", "-z", "--cached", "--others", "--exclude-standard" ], &:read)
+  abort "git ls-files failed: no reference rewritten" unless $?.success?
+  listed.split("\0").uniq.map { File.join(REPO, it) }.select { File.file?(it) }
 end
 
 def number_pending
@@ -73,15 +77,22 @@ def number_pending
   shared = renames.group_by { it[1] }.select { |_, same| same.size > 1 }.keys
   abort "an ADR and an UDR share the slug #{shared.join(', ')}: rename one" if shared.any?
 
+  # A rename that fails stops the run, after the references of the decisions already renamed are rewritten: a rerun
+  # no longer sees those as pending.
+  done = []
   renames.each do |kind, slug, number|
     from = File.join(ROOT, kind, "#{PENDING}-#{slug}.md")
     to = File.join(ROOT, kind, "#{number}-#{slug}.md")
     tracked = system("git", "-C", REPO, "ls-files", "--error-unmatch", from, out: File::NULL, err: File::NULL)
-    tracked ? system("git", "-C", REPO, "mv", from, to) || abort("git mv #{relative(from)} failed") : File.rename(from, to)
+    unless tracked ? system("git", "-C", REPO, "mv", from, to) : File.rename(from, to)
+      rewrite_references(done)
+      abort "git mv #{relative(from)} failed; #{done.size} decision(s) numbered before it, rerun --number for the rest"
+    end
     File.write(to, File.read(to).gsub(/\b#{kind.upcase}-#{PENDING}(?![\w-])/, "#{kind.upcase}-#{number}"))
+    done << [ kind, slug, number ]
     puts "#{kind.upcase}-#{PENDING}-#{slug} → #{kind.upcase}-#{number} (#{relative(to)})"
   end
-  rewrite_references(renames) if renames.any?
+  rewrite_references(done) if done.any?
 end
 
 def rewrite_references(renames)
@@ -131,7 +142,7 @@ end
 
 exit unless check
 
-long = branches & LONG_BRANCHES
+long = branches & (LONG_BRANCHES + [ "unknown branch" ])
 unnumbered = long.any? ? KINDS.keys.flat_map { pending(it) } : []
 problems = taken_twice
 problems += [ "stale index: #{stale.map { "docs/decisions/#{it}/README.md" }.join(', ')} (run script/docs/build_index)" ] if stale.any?

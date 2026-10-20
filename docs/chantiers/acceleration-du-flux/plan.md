@@ -92,7 +92,7 @@ Clôture — build_index, journal.md, ligne de docs/chantiers/README.md
 ## Portes de sortie
 
 - [x] Les lots A, B et C sont `Done`
-- [ ] Un rôle distinct de l'auteur a **exécuté** `build_index --number` sur un ADR `XXXX-`, et la garde B sur une branche qui refait la #268
-- [ ] `bin/ci-quiet` (niveau pr) vert, ligne de preuve dans la PR
-- [ ] `silent-failure-hunter` et `pr-test-analyzer` une fois sur le diff final
+- [x] Un rôle distinct de l'auteur a **exécuté** `build_index --number` sur un ADR `XXXX-`, et la garde B sur une branche qui refait la #268
+- [x] `bin/ci-quiet` (niveau pr) vert, ligne de preuve dans la PR
+- [x] `silent-failure-hunter` et `pr-test-analyzer` une fois sur le diff final
 - [x] `script/docs/build_index` relancé, `journal.md` complété, ligne du chantier ajoutée à `docs/chantiers/README.md`

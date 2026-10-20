@@ -26,22 +26,24 @@ class BuildIndexTest < ActiveSupport::TestCase
     end
   end
 
-  test "the references are rewritten in docs, app, config, db, test, CLAUDE.md and .claude" do
+  test "the references are rewritten in every file git knows, ignored files left out" do
     in_repository do |repo|
       decision(repo, "adr/XXXX-mon-choix.md", "ADR-XXXX")
       decision(repo, "udr/XXXX-mon-ecran.md", "UDR-XXXX", adr: "[XXXX](../adr/XXXX-mon-choix.md)")
-      citing = %w[docs/chantiers/x/memo.md app/x.rb config/x.yml db/x.rb test/x_test.rb CLAUDE.md .claude/skills/x/SKILL.md]
+      citing = %w[docs/chantiers/x/memo.md app/x.rb config/x.yml db/x.rb test/x_test.rb CLAUDE.md .claude/skills/x/SKILL.md
+                  .github/workflows/ci.yml lib/x.rb Dockerfile]
       citing.each do |path|
         write(repo, path, "[ADR-XXXX-mon-choix](../decisions/adr/XXXX-mon-choix.md), UDR-XXXX-mon-ecran, ADR-XXXX-mon-choix-bis\n")
       end
-      write(repo, "vendor/x.md", "ADR-XXXX-mon-choix\n")
+      write(repo, ".gitignore", "tmp/\n")
+      write(repo, "tmp/x.md", "ADR-XXXX-mon-choix\n")
 
       build_index(repo, "--number")
 
       citing.each do |path|
         assert_equal "[ADR-0002](../decisions/adr/0002-mon-choix.md), UDR-0001, ADR-XXXX-mon-choix-bis\n", read(repo, path), path
       end
-      assert_equal "ADR-XXXX-mon-choix\n", read(repo, "vendor/x.md"), "hors des dossiers nommés"
+      assert_equal "ADR-XXXX-mon-choix\n", read(repo, "tmp/x.md"), "un fichier ignoré par git"
       assert_includes read(repo, "docs/decisions/udr/README.md"), "| [0002](../adr/0002-mon-choix.md) |", "l'ADR lié de l'UDR"
     end
   end
@@ -76,6 +78,9 @@ class BuildIndexTest < ActiveSupport::TestCase
       end
       git(repo, "checkout", "-q", "-B", "refactor/x")
       assert_not build_index(repo, "--check", "GITHUB_BASE_REF" => "Staging").last.success?, "une PR vers Staging"
+      git(repo, "checkout", "-q", "--detach")
+      assert_not build_index(repo, "--check").last.success?, "une tête détachée, branche inconnue"
+      assert build_index(repo, "--check", "GITHUB_REF_NAME" => "refactor/x").last.success?, "nommée par GitHub"
     end
   end
 
@@ -88,9 +93,38 @@ class BuildIndexTest < ActiveSupport::TestCase
         output, status = build_index(repo, option)
 
         assert_not status.success?, option
-        assert_includes output, "0001", option
+        assert_includes output, "ADR-0001 taken twice", option
       end
       assert_equal %w[0001-autre.md 0001-premier.md XXXX-mon-choix.md], decisions(repo, "adr"), "rien n'a bougé"
+    end
+  end
+
+  test "an ADR and an UDR sharing a slug stop the run, before any rename" do
+    in_repository do |repo|
+      decision(repo, "adr/XXXX-meme.md", "ADR-XXXX")
+      decision(repo, "udr/XXXX-meme.md", "UDR-XXXX")
+      output, status = build_index(repo, "--number")
+
+      assert_not status.success?
+      assert_includes output, "share the slug meme"
+      assert_equal %w[0001-premier.md XXXX-meme.md], decisions(repo, "adr")
+    end
+  end
+
+  test "a rename that fails stops the run, with the references of the decisions already numbered rewritten" do
+    in_repository do |repo|
+      decision(repo, "adr/XXXX-a.md", "ADR-XXXX")
+      decision(repo, "adr/XXXX-b.md", "ADR-XXXX")
+      git(repo, "add", "docs/decisions/adr/XXXX-b.md")
+      git(repo, "commit", "-q", "-m", "b")
+      write(repo, "docs/x.md", "ADR-XXXX-a, ADR-XXXX-b\n")
+      write(repo, ".git/index.lock", "")
+
+      output, status = build_index(repo, "--number")
+
+      assert_not status.success?
+      assert_includes output, "git mv docs/decisions/adr/XXXX-b.md failed"
+      assert_equal "ADR-0002, ADR-XXXX-b\n", read(repo, "docs/x.md")
     end
   end
 
@@ -103,7 +137,7 @@ class BuildIndexTest < ActiveSupport::TestCase
 
   def build_index(repo, *args)
     env = args.last.is_a?(Hash) ? args.pop : {}
-    Open3.capture2e({ "GITHUB_BASE_REF" => nil }.merge(env), File.join(repo, "script/docs/build_index"), *args, chdir: repo)
+    Open3.capture2e({ "GITHUB_BASE_REF" => nil, "GITHUB_REF_NAME" => nil }.merge(env), File.join(repo, "script/docs/build_index"), *args, chdir: repo)
   end
 
   def read(repo, path) = File.read(File.join(repo, path))
@@ -136,7 +170,7 @@ class BuildIndexTest < ActiveSupport::TestCase
       FileUtils.cp(SCRIPT, File.join(repo, "script/docs/build_index"))
       %w[adr udr].each { write(repo, "docs/decisions/#{it}/README.md", "<!-- index:start -->\n<!-- index:end -->\n") }
       decision(repo, "adr/0001-premier.md", "ADR-0001")
-      build_index(repo)
+      assert build_index(repo).last.success?
       git(repo, "init", "-q", "-b", "refactor/x")
       git(repo, "add", "-A")
       git(repo, "commit", "-q", "-m", "base")

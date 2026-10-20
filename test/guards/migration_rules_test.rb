@@ -38,7 +38,7 @@ module MigrationRules
       end
       next if line.match?(/^\s*#/)
 
-      if (down = line.match(/^(\s*)(?:def\s+(?:self\.)?down\b|.*\b\w+\.down\b)/))
+      if (down = line.match(/^(\s*)(?:def\s+(?:self\.)?down\b|.*\b\w+\.down\s*(?:do\b|\{))/))
         closing = /^#{down[1]}end\b/ unless line.match?(/\bdef\s+(?:self\.)?down\s*=|\.down\s*\{.*\}|\bend\s*$/)
         next
       end
@@ -54,6 +54,21 @@ module MigrationRules
     code.scan(/\bremove_(?:reference|belongs_to)[\s(]+#{NAME}#{ARG}/) { |table, ref| gone << [ table, "#{ref}_id" ] }
     code.scan(/\brename_column[\s(]+#{NAME}#{ARG}/) { |table, column| gone << [ table, column ] }
     code.scan(/\b(?:drop_table|rename_table)[\s(]+#{NAME}/) { gone << [ it[0], nil ] }
+    code.scan(/^([ \t]*)change_table[\s(]+#{NAME}[^\n]*\|(\w+)\|\n(.*?)^\1end\b/m) do |_, table, var, body|
+      body.scan(/\b#{var}\.remove[\s(]+#{NAME}((?:#{ARG})*)/) do |first, rest|
+        gone << [ table, first ]
+        rest.scan(/#{ARG}/) { gone << [ table, it[0] ] }
+      end
+      body.scan(/\b#{var}\.rename[\s(]+#{NAME}/) { gone << [ table, it[0] ] }
+      body.scan(/\b#{var}\.remove_(?:references|belongs_to)[\s(]+#{NAME}/) { gone << [ table, "#{it[0]}_id" ] }
+    end
+    # The same operations written in SQL.
+    table = /\bALTER\s+TABLE\s+(?:IF\s+EXISTS\s+)?"?(\w+)"?\s+/i
+    code.scan(/#{table}DROP\s+(?!CONSTRAINT\b|DEFAULT\b|NOT\b|IDENTITY\b|EXPRESSION\b)(?:COLUMN\s+)?(?:IF\s+EXISTS\s+)?"?(\w+)/i) do
+      gone << it
+    end
+    code.scan(/#{table}RENAME\s+(?!CONSTRAINT\b)(?:COLUMN\s+)?"?(\w+)/i) { |name, column| gone << [ name, column.casecmp?("to") ? nil : column ] }
+    code.scan(/\bDROP\s+TABLE\s+(?:IF\s+EXISTS\s+)?"?(\w+)/i) { gone << [ it[0], nil ] }
     gone.reject { %w[if_exists type].include?(it[1]) }.uniq
   end
 
@@ -71,14 +86,16 @@ module MigrationRules
     code.match?(/\badd_column[\s(]+[:"']?#{t}["']?,\s*[:"']?#{c}["']?\W/) ||
       code.match?(/\badd_(?:reference|belongs_to)[\s(]+[:"']?#{t}["']?,\s*[:"']?#{reference}["']?\W/) ||
       code.match?(/\brename_column[\s(]+[:"']?#{t}["']?#{ARG},\s*[:"']?#{c}["']?\W/) ||
-      code.match?(/\b#{t}\.#{c}\b/) || in_change_table?(code, t, c, reference)
+      code.match?(/\b#{t}\.#{c}\b/) || in_change_table?(code, t, c, reference) ||
+      # An unqualified copy: `UPDATE table SET … column …`, or `update_all` naming the column.
+      code.match?(/\bUPDATE\s+"?#{t}"?\s+SET\b[^;"]*\b#{c}\b/i) || code.match?(/\bupdate_all[\s(]+[^)\n]*\b#{c}\b/)
   end
 
   # `t.string :column` or `t.references :reference` inside `change_table :table do |t|`.
   def in_change_table?(code, table, column, reference)
     code.scan(/^([ \t]*)change_table[\s(]+[:"']?#{table}["']?[^\n]*\|(\w+)\|\n(.*?)^\1end\b/m).any? do |_, var, body|
       body.match?(/\b#{var}\.(?:references|belongs_to)[\s(]+[:"']?#{reference}["']?\W/) ||
-        body.match?(/\b#{var}\.\w+[\s(]+[:"']?#{column}["']?\W/)
+        body.match?(/\b#{var}\.(?!remove|rename)\w+[\s(]+[:"']?#{column}["']?\W/)
     end
   end
 
@@ -150,21 +167,32 @@ class MigrationRulesTest < Minitest::Test
   end
 
   def test_an_addition_or_a_copy_then_a_removal_in_one_delivery_is_refused
-    {
-      "add_column :lessons, :summary, :text" => "remove_column :lessons, :summary",
-      "add_reference :lessons, :material, foreign_key: true" => "remove_reference :lessons, :material",
-      "change_table :lessons do |t|\n    t.string :slug\n  end" => "remove_columns :lessons, :title, :slug",
-      "execute \"UPDATE lessons SET body = old_lessons.body FROM old_lessons\"" => "drop_table :old_lessons",
-      "create_table :drafts do |t|\n    t.text :body\n  end" => "rename_table :drafts, :notes",
-      "add_column :lessons, :heading, :string" => "rename_column :lessons, :heading, :title"
-    }.each do |first, second|
-      in_repository do |repo|
-        migration(repo, "2_first", "  #{first}\n")
-        migration(repo, "3_second", "  #{second}\n")
+    [
+      [ "add_column :lessons, :summary, :text", "remove_column :lessons, :summary" ],
+      [ "add_reference :lessons, :material, foreign_key: true", "remove_reference :lessons, :material" ],
+      [ "change_table :lessons do |t|\n    t.string :slug\n  end", "remove_columns :lessons, :title, :slug" ],
+      [ "execute \"UPDATE lessons SET body = old_lessons.body FROM old_lessons\"", "drop_table :old_lessons" ],
+      [ "create_table :drafts do |t|\n    t.text :body\n  end", "rename_table :drafts, :notes" ],
+      [ "add_column :lessons, :heading, :string", "rename_column :lessons, :heading, :title" ],
+      [ "add_column :lessons, :summary, :text", "change_table :lessons do |t|\n    t.remove :title, :summary\n  end" ],
+      [ "add_column :lessons, :heading, :string", "change_table :lessons do |t|\n    t.rename :heading, :title\n  end" ],
+      [ "add_reference :lessons, :material", "change_table :lessons do |t|\n    t.remove_references :material\n  end" ],
+      [ "execute \"UPDATE lessons SET summary = body\"", "remove_column :lessons, :body" ],
+      [ "Lesson.update_all(\"summary = body\")", "remove_column :lessons, :body" ],
+      [ "add_column :lessons, :summary, :text", "execute 'ALTER TABLE lessons DROP COLUMN IF EXISTS summary'" ],
+      [ "add_column :lessons, :heading, :string", "execute 'ALTER TABLE lessons RENAME COLUMN heading TO title'" ],
+      [ "create_table :drafts", "execute 'DROP TABLE drafts'" ]
+    ].each { |first, second| assert_equal 1, delivered(first, second).size, "#{first} / #{second}" }
+  end
 
-        assert_equal 1, violations(repo).size, "#{first} / #{second}"
-      end
-    end
+  def test_another_column_or_an_option_is_not_what_the_delivery_removes
+    [
+      [ "add_column :lessons, :summary, :text", "remove_column :lessons, :body" ],
+      [ "execute \"UPDATE lessons SET summary = lessons.title\"", "remove_column :lessons, :body" ],
+      [ "add_column :lessons, :type, :string", "remove_column :lessons, :summary, type: :text" ],
+      [ "add_column :notes, :if_exists, :boolean", "remove_column :lessons, :summary, if_exists: true" ],
+      [ "execute 'ALTER TABLE lessons ADD COLUMN summary text'", "execute 'ALTER TABLE lessons DROP CONSTRAINT summary_check'" ]
+    ].each { |first, second| assert_empty delivered(first, second), "#{first} / #{second}" }
   end
 
   def test_a_removal_alone_is_accepted
@@ -191,6 +219,7 @@ class MigrationRulesTest < Minitest::Test
       RUBY
       migration(repo, "2_other", <<~RUBY)
         def change
+          # remove_column :schools, :code
           reversible { |dir| dir.down { remove_column :schools, :code } }
           reversible do |dir|
             dir.down do
@@ -201,6 +230,14 @@ class MigrationRulesTest < Minitest::Test
       RUBY
 
       assert_empty violations(repo)
+      migration(repo, "3_last", <<~RUBY)
+        def change
+          reversible { |dir| dir.down { add_column :schools, :name, :string } }
+          say "going down" if direction.down?
+          remove_column :schools, :code
+        end
+      RUBY
+      assert_equal 1, violations(repo).size, "ce qui suit une ligne « down » reste contrôlé"
     end
   end
 
@@ -234,6 +271,15 @@ class MigrationRulesTest < Minitest::Test
   private
 
   def violations(repo) = MigrationRules.violations(MigrationRules.delivery(repo).first, root: repo)
+
+  # The messages for a delivery of two migrations, `first` then `second`.
+  def delivered(first, second)
+    in_repository do |repo|
+      migration(repo, "2_first", "  #{first}\n")
+      migration(repo, "3_second", "  #{second}\n")
+      violations(repo)
+    end
+  end
 
   def migration(repo, name, body) = File.write(File.join(repo, "db/migrate/#{name}.rb"), body)
 
