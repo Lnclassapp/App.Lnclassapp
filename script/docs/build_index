@@ -3,18 +3,29 @@
 # `<!-- index … -->` block that each ADR / UDR carries under its title (chantier sobriete-tokens: no more
 # hand-edited rows, no more conflicts to merge by hand in the shared README).
 #
-#   script/docs/build_index           # rewrites the two READMEs
-#   script/docs/build_index --check   # exits 1 and names the stale README, writes nothing
+#   script/docs/build_index            # rewrites the two READMEs
+#   script/docs/build_index --number   # numbers the pending decisions (XXXX-<slug>.md), then rewrites the READMEs
+#   script/docs/build_index --check    # exits 1 on a stale README, a number taken twice, or a pending decision on
+#                                      # Develop, Staging or main (or a pull request into one); writes nothing
 #
 # Block, one `key: value` per line: titre, statut, date (only when it differs from the **Date** row of the header),
 # adr-lie (UDR only), problematique. The number and the link come from the file name.
+#
+# A number is set when the chantier merges, never when it opens (conventions.md §2, chantier acceleration-du-flux): a
+# decision is written XXXX-<slug>.md and cited ADR-XXXX-<slug> / UDR-XXXX-<slug>. --number gives each pending decision
+# the next free number of its kind, in the order of the slugs, renames it with `git mv` and rewrites its references.
 KINDS = {
   "adr" => { columns: [ "N°", "Titre", "Statut", "Date", "Problématique" ], keys: %w[titre statut date problematique] },
   "udr" => { columns: [ "N°", "Titre", "Statut", "Date", "ADR lié", "Problématique" ], keys: %w[titre statut date adr-lie problematique] }
 }.freeze
 START = "<!-- index:start -->".freeze
 FINISH = "<!-- index:end -->".freeze
-ROOT = File.expand_path("../../docs/decisions", __dir__)
+REPO = File.expand_path("../..", __dir__)
+ROOT = File.join(REPO, "docs/decisions")
+PENDING = "XXXX".freeze
+# Where a reference to a pending decision is rewritten, besides CLAUDE.md.
+CITING = %w[docs app config db test .claude].freeze
+LONG_BRANCHES = %w[Develop Staging main].freeze
 
 def metadata(path)
   text = File.read(path)
@@ -25,9 +36,72 @@ def metadata(path)
   fields
 end
 
+def numbered(kind) = Dir[File.join(ROOT, kind, "[0-9][0-9][0-9][0-9]-*.md")].sort
+
+def pending(kind) = Dir[File.join(ROOT, kind, "#{PENDING}-*.md")].sort
+
+def relative(path) = path.delete_prefix("#{REPO}/")
+
+# → one message per number that two files of a kind share.
+def duplicates
+  KINDS.keys.flat_map do |kind|
+    numbered(kind).group_by { File.basename(it)[0, 4] }.select { |_, files| files.size > 1 }.map do |number, files|
+      "#{kind.upcase}-#{number} taken twice: #{files.map { relative(it) }.join(', ')} (rename the one of this branch " \
+        "#{PENDING}-<slug>.md, cite it #{kind.upcase}-#{PENDING}-<slug>, then run script/docs/build_index --number)"
+    end
+  end
+end
+
+# The current branch, and the target of the pull request under GitHub Actions.
+def branches
+  head = IO.popen([ "git", "-C", REPO, "rev-parse", "--abbrev-ref", "HEAD" ], err: File::NULL, &:read).to_s.strip
+  [ head, ENV["GITHUB_BASE_REF"].to_s ]
+end
+
+def citing_files
+  files = CITING.flat_map { Dir.glob(File.join(REPO, it, "**", "*"), File::FNM_DOTMATCH) }
+  (files + [ File.join(REPO, "CLAUDE.md") ]).select { File.file?(it) }
+end
+
+def number_pending
+  renames = KINDS.keys.flat_map do |kind|
+    last = numbered(kind).map { File.basename(it)[0, 4].to_i }.max.to_i
+    pending(kind).each_with_index.map do |path, index|
+      [ kind, File.basename(path, ".md").delete_prefix("#{PENDING}-"), format("%04d", last + 1 + index) ]
+    end
+  end
+  shared = renames.group_by { it[1] }.select { |_, same| same.size > 1 }.keys
+  abort "an ADR and an UDR share the slug #{shared.join(', ')}: rename one" if shared.any?
+
+  renames.each do |kind, slug, number|
+    from = File.join(ROOT, kind, "#{PENDING}-#{slug}.md")
+    to = File.join(ROOT, kind, "#{number}-#{slug}.md")
+    tracked = system("git", "-C", REPO, "ls-files", "--error-unmatch", from, out: File::NULL, err: File::NULL)
+    tracked ? system("git", "-C", REPO, "mv", from, to) || abort("git mv #{relative(from)} failed") : File.rename(from, to)
+    File.write(to, File.read(to).gsub(/\b#{kind.upcase}-#{PENDING}(?![\w-])/, "#{kind.upcase}-#{number}"))
+    puts "#{kind.upcase}-#{PENDING}-#{slug} → #{kind.upcase}-#{number} (#{relative(to)})"
+  end
+  rewrite_references(renames) if renames.any?
+end
+
+def rewrite_references(renames)
+  citing_files.each do |file|
+    text = File.binread(file).force_encoding(Encoding::UTF_8)
+    next unless text.valid_encoding? && text.include?("#{PENDING}-")
+
+    updated = renames.reduce(text) do |current, (kind, slug, number)|
+      s = Regexp.escape(slug)
+      current.gsub(/\[#{PENDING}\]\(([^)\s]*?)#{PENDING}-#{s}\.md\)/) { "[#{number}](#{$1}#{number}-#{slug}.md)" }
+             .gsub(/(?<![\w-])#{PENDING}-#{s}\.md/, "#{number}-#{slug}.md")
+             .gsub(/\b#{kind.upcase}-#{PENDING}-#{s}(?![\w-])/, "#{kind.upcase}-#{number}")
+    end
+    File.write(file, updated) unless updated == text
+  end
+end
+
 def table(kind)
   spec = KINDS.fetch(kind)
-  rows = Dir[File.join(ROOT, kind, "[0-9][0-9][0-9][0-9]-*.md")].sort.map do |path|
+  rows = numbered(kind).map do |path|
     file = File.basename(path)
     fields = metadata(path)
     missing = spec[:keys] - fields.keys
@@ -38,17 +112,31 @@ def table(kind)
   [ "| #{spec[:columns].join(' | ')} |", "| #{([ '---' ] * spec[:columns].size).map { |s| ":#{s}" }.join(' | ')} |", *rows ].join("\n")
 end
 
+check = ARGV.include?("--check")
+taken_twice = duplicates
+if ARGV.include?("--number")
+  abort taken_twice.join("\n") if taken_twice.any?
+  number_pending
+end
+
 stale = KINDS.keys.reject do |kind|
   readme = File.join(ROOT, kind, "README.md")
   current = File.read(readme)
-  region = /#{Regexp.escape(START)}\n.*?\n#{Regexp.escape(FINISH)}/m
+  region = /#{Regexp.escape(START)}\n(?:.*?\n)?#{Regexp.escape(FINISH)}/m
   abort "#{readme}: markers #{START} / #{FINISH} missing" unless current.match?(region)
   updated = current.sub(region) { "#{START}\n#{table(kind)}\n#{FINISH}" }
-  File.write(readme, updated) unless ARGV.include?("--check") || updated == current
+  File.write(readme, updated) unless check || updated == current
   updated == current
 end
 
-if ARGV.include?("--check") && stale.any?
-  warn "stale index: #{stale.map { |kind| "docs/decisions/#{kind}/README.md" }.join(', ')} (run script/docs/build_index)"
-  exit 1
+exit unless check
+
+long = branches & LONG_BRANCHES
+unnumbered = long.any? ? KINDS.keys.flat_map { pending(it) } : []
+problems = taken_twice
+problems += [ "stale index: #{stale.map { "docs/decisions/#{it}/README.md" }.join(', ')} (run script/docs/build_index)" ] if stale.any?
+if unnumbered.any?
+  problems += [ "pending decision on #{long.join(', ')}: #{unnumbered.map { relative(it) }.join(', ')} " \
+                "(run script/docs/build_index --number on the chantier branch)" ]
 end
+abort problems.join("\n") if problems.any?
