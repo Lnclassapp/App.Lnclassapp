@@ -38,6 +38,9 @@ CI_PLAN = CiPlan.define do
     step "Guard: Migrations in two steps",
          "{ git rev-parse -q --verify refs/remotes/origin/main >/dev/null || " \
          "git fetch -q --depth=1 origin main:refs/remotes/origin/main; }; ruby -Itest test/guards/migration_rules_test.rb"
+    # conventions.md §2: the decision indexes are up to date, no number is taken twice, and no XXXX- decision reaches
+    # Develop, Staging or main (GITHUB_BASE_REF names the target of a pull request).
+    step "Guard: Decision index (numbers set at merge)", "script/docs/build_index --check"
 
     step "Style: Ruby", "bin/rubocop"
   end
