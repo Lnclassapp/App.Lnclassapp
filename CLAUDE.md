@@ -43,6 +43,7 @@ Règle et table : [`docs/workflows/README.md`](docs/workflows/README.md#quel-mod
 - **Opus** : l'orchestrateur (cadrage, décisions, arbitrage, fusions) et les sous-agents de revue (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`).
 - **Sonnet** : l'exécution d'un lot déjà cadré (`executant-lot`), tests et corrections compris.
 - **Haiku** : les vérifications pures (`verificateur-ci` : `bin/ci-quiet`, tests système relancés, verdict).
+- **Déléguer à Haiku** la recherche (trouver un fichier, lire du code ou un journal) à l'agent `Explore`, et les tâches mécaniques hors lot (lancer une commande et lire sa sortie, renommer un fichier de doc) à l'agent `chores`. Jamais le code de `app/` : c'est `executant-lot`.
 - Le plus petit modèle qui fait le travail ; on monte d'un cran dès qu'il faut du jugement (sécurité, concurrence, architecture, décision métier).
 - Appliquer : `model:` dans `.claude/agents/`, paramètre `model` à l'appel d'un agent, `/model` pour la session.
 
