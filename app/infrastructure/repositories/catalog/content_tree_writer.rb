@@ -17,7 +17,11 @@ module Repositories
 
       # Une table après l'autre, parents d'abord : les ids des cours et des fiches sont relus par slug, ceux des exercices et
       # des questions sont réservés d'avance. Exercices, questions et propositions s'écrivent par COPY (ADR-0068 §4).
+      # Les contrôles de clé étrangère gardent le plan choisi quand la table parente était presque vide : un parcours
+      # complet par ligne, coût quadratique (10 000 exercices au-delà de 5 min sur une base neuve). Sans parcours
+      # séquentiel, jusqu'à la fin de la transaction du lot, ils passent par la clé primaire.
       def write(author_id:, at:, courses: [], essentials: [], exercises: [])
+        connection.execute("SET LOCAL enable_seqscan = off")
         @author_id = author_id
         @at = at
         @copy_at = copy_timestamp(at)
