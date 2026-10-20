@@ -148,7 +148,7 @@ module UseCases
         assert_equal :not_found, remove("cls-3", actor: direction(of: 5), school_public_id: "inconnu").code
       end
 
-      def direction(of:) = Entities::Identity::Actor.new(user_id: 11, role: :school_admin, school_id: of)
+      def direction(of:) = Entities::Identity::Actor.new(user_id: 11, role: :school_admin, school_id: of, staff_position: "head")
 
       test "GD-09 : la direction retire la dernière classe jamais utilisée de son établissement, tracée à son nom" do
         result = remove("cls-3", actor: direction(of: 5))

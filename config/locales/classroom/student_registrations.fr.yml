@@ -1,4 +1,4 @@
-# Inscription élève sans code de classe : voie standard (DRENA → établissement → niveau → classe) et lien de classe, et les deux listes publiques de la cascade — ADR-0050, ADR-0083, ADR-0085, UDR-0007, UDR-0054, UDR-0079, UDR-0081
+# Inscription élève sans code de classe (rubriques numérotées, genre en pastilles : UDR-0088 §3.4) : voie standard (DRENA → établissement → niveau → classe) et lien de classe, et les deux listes publiques de la cascade — ADR-0050, ADR-0083, ADR-0085, UDR-0007, UDR-0054, UDR-0079, UDR-0081
 fr:
   activemodel:
     attributes:
@@ -48,7 +48,6 @@ fr:
     student_registrations:
       new:
         page_title: "Inscription élève"
-        logo_home: "Lnclass, accueil"
         welcome: "Bienvenue sur Lnclass"
         welcome_hint: "Ton espace d'apprentissage pour mieux comprendre tes cours, t'exercer et réussir tes examens."
         title: "Créer ton compte élève"
@@ -72,14 +71,26 @@ fr:
           ko: "Les codes ne concordent pas."
         submit: "Créer mon compte"
       # UDR-0081 §3.3 : la cascade, partagée par l'inscription et par « Choisis ta classe » ; ses trois listes y puisent leurs textes.
+      # UDR-0091 : trois étapes numérotées, l'établissement replié avec « Changer », les niveaux en pastilles, les classes en cases.
       class_picker:
+        step_school: "Ton établissement"
+        step_level: "Ton niveau"
+        step_classroom: "Ta classe"
+        change: "Changer"
+        change_label: "Changer d'établissement"
+        drena_name: "DRENA %{name}"
+        school_first: "Choisis d'abord ton établissement."
+        level_first: "Choisis d'abord ton niveau."
+        levels_found:
+          one: "1 niveau trouvé."
+          other: "%{count} niveaux trouvés."
+        classrooms_found:
+          one: "1 classe trouvée."
+          other: "%{count} classes trouvées."
         drena: "DRENA"
         drena_prompt: "Choisis ta DRENA"
         continue: "Continuer"
         school_prompt: "Choisis ton établissement"
-        level: "Niveau"
-        level_prompt: "Choisis ton niveau"
-        classroom: "Classe"
         full: "Complète"
         not_found_title: "Ta classe n'est pas encore sur Lnclass."
         not_found_description: "Préviens ton enseignant ou la direction de ton établissement."

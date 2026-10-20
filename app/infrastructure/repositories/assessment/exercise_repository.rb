@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::ExerciseRepository
-# Rôle : traduit Orm::Exercise, ses questions et propositions ↔ Entities::Assessment::Exercise, avec la publication des parents
-# ADR  : 0035, 0036, 0039, 0054
+# Rôle : traduit Orm::Exercise, ses questions, propositions et images ↔ Entities::Assessment::Exercise, avec la publication des parents
+# ADR  : 0035, 0036, 0039, 0054, 0091, 0105
 module Repositories
   module Assessment
     class ExerciseRepository
@@ -33,9 +33,14 @@ module Repositories
         record.update!(editable_attributes(exercise))
         if replace_questions
           question_ids = Orm::Question.where(exercise_id: record.id).select(:id)
+          # FK RESTRICT (ADR-0105) : les images quittent leurs questions avant elles, puis seules celles qui ne sont plus
+          # citées partent, fichier compris.
+          previous = Orm::QuestionImage.where(question_id: question_ids).pluck(:id)
+          Orm::QuestionImage.where(id: previous).update_all(question_id: nil)
           Orm::Answer.where(question_id: question_ids).delete_all
           Orm::Question.where(exercise_id: record.id).delete_all
           write_questions(record.id, exercise.questions)
+          destroy_uncited(previous)
         end
         find_by_public_id(public_id: record.public_id)
       end
@@ -74,7 +79,7 @@ module Repositories
 
       private
 
-      def hydrated = Orm::Exercise.includes({ essential: :course }, questions: :answers)
+      def hydrated = Orm::Exercise.includes({ essential: :course }, questions: %i[answers image])
 
       def editable_attributes(exercise)
         { title: exercise.title, description: exercise.description, exercise_type: exercise.exercise_type }
@@ -83,12 +88,32 @@ module Repositories
       def write_questions(exercise_id, questions)
         questions.each_with_index do |question, index|
           record = Orm::Question.create!(exercise_id:, position: question.position || index + 1, content: question.content,
-                                         explanation: question.explanation, question_type: question.question_type)
+                                         explanation: question.explanation, question_type: question.question_type,
+                                         numeric_tolerance: question.numeric_tolerance, image_description: question.image_description)
+          attach_image(record.id, question.image)
           question.answers.each_with_index do |answer, rank|
             Orm::Answer.create!(question_id: record.id, position: answer.position || rank + 1, content: answer.content,
-                                correct: answer.correct)
+                                correct: answer.correct, match_content: answer.match_content)
           end
         end
+      end
+
+      # Seule une image qui n'est à aucune question se rattache : une image d'une autre question reste où elle est, et
+      # l'enregistrement est refusé plutôt que d'écrire la question sans son image.
+      def attach_image(question_id, image)
+        return if image.nil?
+
+        attached = Orm::QuestionImage.where(public_id: image.public_id, question_id: nil).update_all(question_id:, alt: image.alt.presence)
+        raise Ports::Assessment::ExerciseRepositoryPort::ImageUnavailable if attached != 1
+      end
+
+      # Les images que les nouvelles questions ne citent plus partent avec leur fichier ; le journal garde lesquelles.
+      def destroy_uncited(previous)
+        uncited = Orm::QuestionImage.where(id: previous, question_id: nil).to_a
+        return if uncited.empty?
+
+        uncited.each(&:destroy!)
+        Rails.logger.info("[ExerciseRepository] images supprimées ids=#{uncited.map(&:id)} public_ids=#{uncited.map(&:public_id)}")
       end
 
       def map_to_entity(record)
@@ -104,11 +129,19 @@ module Repositories
       def map_question(record)
         Entities::Assessment::Question.new(
           id: record.id, position: record.position, content: record.content, explanation: record.explanation,
-          question_type: record.question_type,
+          question_type: record.question_type, numeric_tolerance: record.numeric_tolerance,
+          image_description: record.image_description, image: map_image(record.image),
           answers: record.answers.map do |answer|
-            Entities::Assessment::Answer.new(id: answer.id, position: answer.position, content: answer.content, correct: answer.correct)
+            Entities::Assessment::Answer.new(id: answer.id, position: answer.position, content: answer.content, correct: answer.correct,
+                                             match_content: answer.match_content)
           end
         )
+      end
+
+      def map_image(image)
+        image && Entities::Shared::ContentImage.new(public_id: image.public_id, id: image.id, owner_id: image.question_id, alt: image.alt,
+                                                    content_type: image.content_type, byte_size: image.byte_size,
+                                                    width: image.width, height: image.height)
       end
     end
   end

@@ -43,18 +43,7 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     assert_selector "#classroom_roster li", count: 2
     assert_selector "#student_#{@awa.public_id}", text: "Awa Bamba"
     assert_selector "#student_#{@awa.public_id}", text: "100 %"
-    # UDR-0077 §3.4 : le code de récupération est dans le menu ⋮ de la ligne ; il ouvre toujours la modale du code.
-    assert_no_selector "#student_#{@koffi.public_id} button", text: I18n.t("#{scope}.roster.issue_code")
     assert_no_page_reload do
-      click_menu_action("#student_#{@koffi.public_id}", I18n.t("#{scope}.roster.issue_code"))
-      assert_selector "turbo-frame#modal dialog#pin-recovery-code-modal[open]"
-      assert_toast I18n.t("identity.pin_recovery_codes.create.issued")
-      click_on I18n.t("identity.pin_recovery_codes.code.close")
-    end
-
-    assert_no_page_reload do
-      # Fermée, la modale rend le focus au ⋮ de la ligne : la page reste descendue sur la liste, et « Copier » passe sous
-      # l'en-tête fixe, où le clic tomberait sur un autre bouton. On le ramène au milieu de l'écran, comme le ferait l'enseignant.
       # La barre latérale a son propre « Copier le lien » (parrainage, UDR-0069 §3.6) : on vise celui du bloc de la classe.
       copy = within("#classroom_link") { find_button(I18n.t("#{scope}.link.copy")) }
       scroll_to(copy, align: :center)
@@ -64,6 +53,17 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     end
     assert_equal URI.join(page.current_url, join_classroom_path(@classroom.reload.link_token)).to_s,
                  page.evaluate_async_script("navigator.clipboard.readText().then(arguments[0])")
+
+    # rapports-de-classe (memo Q4, UDR-0108 §3.2) : la ligne n'a plus de menu ⋮ ; le nom mène à la fiche, où le code de
+    # récupération ouvre toujours la modale du code.
+    assert_no_selector "#student_#{@koffi.public_id} button[aria-haspopup=menu]"
+    assert_no_page_reload do
+      issue_recovery_code_from_roster("#student_#{@koffi.public_id}")
+      assert_selector "turbo-frame#modal dialog#pin-recovery-code-modal[open]"
+      assert_toast I18n.t("identity.pin_recovery_codes.create.issued")
+      click_on I18n.t("identity.pin_recovery_codes.code.close")
+    end
+    assert_current_path classroom_student_path(@classroom.public_id, @koffi.public_id)
   end
 
   test "une copie refusée par le navigateur le dit" do
@@ -103,7 +103,7 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
 
   test "l'enseignant lit ses jours, le suivi d'un exercice qui nomme les seuls rendus en retard, et ouvre un cours de sa classe" do
     [ 1, 4 ].each { Orm::ClassroomSessionDay.create!(teacher: @teacher, classroom: @classroom, weekday: it) }
-    svt = Orm::TeacherProfile.find_by!(user: @teacher).material
+    svt = Orm::TeacherSchoolMaterial.find_by!(teacher: @teacher).material
     tle_course = create_course(level: @classroom.level, series: @classroom.series, material: svt, name: "La cellule")
     essential = create_essential(course: tle_course, name: "La mitose")
     exercise = create_exercise(essential:, title: "Phases de la mitose")
@@ -124,38 +124,42 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
 
     assert_current_path classroom_assignment_path(@classroom.public_id, assignment.public_id)
     assert_selector "h1", text: "Phases de la mitose"
+    # rapports-de-classe, Lot C (UDR-0109 §3.1) : chaque nom mène à la fiche de l'élève dans la classe.
     within "#late_students" do
       assert_selector "li", count: 1
-      assert_text "Koffi Yao"
+      assert_link "Koffi Yao", href: classroom_student_path(@classroom.public_id, @koffi.public_id)
       assert_text "Fait le ven. 9 oct."
       assert_no_text "Awa Bamba"
     end
     # ADR-0079 §4.8 : Awa n'a pas encore fait l'exercice ; elle est nommée pour être relancée, jamais parmi les retards.
-    within("#pending_students") { assert_text "Awa Bamba" }
+    within("#pending_students") { assert_link "Awa Bamba", href: classroom_student_path(@classroom.public_id, @awa.public_id) }
 
     click_on "Tle D 1"
+    # UDR-0130 : la section de la classe nomme l'objet, la page de la fiche de cours liste ses révisions.
+    within("#classroom_courses") { assert_selector "h2", text: "Fiches de cours" }
     within("#classroom_courses") { click_on "La cellule" }
     assert_current_path classroom_course_path(@classroom.public_id, tle_course.slug)
+    assert_selector "#classroom_course_essentials_title", text: "Révisions de la leçon"
     assert_selector "#classroom_course_essentials a", text: "La mitose"
   end
 
   test "sur un téléphone, les blocs de la classe et le suivi tiennent dans la largeur" do
     assignment = create_assignment(classroom: @classroom, assignable: create_exercise(title: "Un titre d'exercice assez long pour un écran étroit"),
                                    by: @teacher)
-    svt = Orm::TeacherProfile.find_by!(user: @teacher).material
+    svt = Orm::TeacherSchoolMaterial.find_by!(teacher: @teacher).material
     3.times { create_course(level: @classroom.level, series: @classroom.series, material: svt, name: "Cours de la bande #{it}") }
     with_mobile_viewport do
       visit classroom_path(@classroom.public_id)
 
       assert_selector "#classroom_session_days", text: I18n.t("#{scope}.session_days.unset")
       assert_selector "#assignment_#{assignment.public_id}", text: "0 fait · 2 pas encore faits"
-      # UDR-0077 §3.4 : les cours en bande, avant les exercices ; ⋮ de l'élève sur la ligne de son nom.
+      # UDR-0077 §3.4 : les cours en bande, avant les exercices. UDR-0108 : la note de l'élève sur la ligne de son nom.
       assert_operator find("#classroom_courses").rect.y, :<, find("#assigned_exercises").rect.y
       assert_selector "#classroom_courses ul[data-communication--carousel-target=track] > li", count: 3
       within("#student_#{@koffi.public_id}") do
         avatar = find(".ui-avatar", match: :first).rect
-        menu = find("button[aria-haspopup=menu]").rect
-        assert_in_delta avatar.y + (avatar.height / 2), menu.y + (menu.height / 2), 8, "⋮ n'est pas sur la ligne de l'élève"
+        grade = find("#grade_#{@koffi.public_id}").rect
+        assert_in_delta avatar.y + (avatar.height / 2), grade.y + (grade.height / 2), 8, "la note n'est pas sur la ligne de l'élève"
         # « Aucune session terminée » ne doit pas écraser le nom.
         assert_selector "p", exact_text: "Koffi Yao"
         name = find("p", exact_text: "Koffi Yao")

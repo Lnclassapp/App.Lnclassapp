@@ -1,16 +1,21 @@
 require "test_helper"
 
 # UDR-0070 §3.4 : le bloc « Direction » liste les comptes, leur arrivée et les places ; ⋮ « Retirer » seulement où permis.
+# UDR-0092 §3.2, §3.4 : la fonction sous le nom, le rang 2 selon le type d'établissement ; « Changer la fonction » pour l'équipe.
 class SchoolStaffPartialTest < ActionView::TestCase
   Row = Queries::School::SchoolStaffQuery::Row
 
   setup do
-    @kofi = Row.new(user_id: 1, public_id: "kofi", name: "Kofi Yao", joined_via: "invitation", joined_at: Time.zone.parse("2026-10-01 09:00"))
-    @aya = Row.new(user_id: 2, public_id: "aya", name: "Aya Kouassi", joined_via: "code", joined_at: Time.zone.parse("2026-09-04 09:00"))
+    @kofi = Row.new(user_id: 1, public_id: "kofi", name: "Kofi Yao", joined_via: "invitation", joined_at: Time.zone.parse("2026-10-01 09:00"),
+                    position: "head")
+    @aya = Row.new(user_id: 2, public_id: "aya", name: "Aya Kouassi", joined_via: "code", joined_at: Time.zone.parse("2026-09-04 09:00"),
+                   position: "deputy")
   end
 
-  def block(staff: [ @kofi, @aya ], removable: ->(row) { row.user_id != 1 }, remove_url: ->(id) { "/staff/#{id}" }, newcomer: false)
-    render partial: "shared/school_staff", locals: { staff:, by_code_count: 1, viewer_id: 1, remove_url:, removable:, newcomer: }
+  def block(staff: [ @kofi, @aya ], removable: ->(row) { row.user_id != 1 }, remove_url: ->(id) { "/staff/#{id}" }, newcomer: false,
+            school_type: "private", position_url: nil)
+    render partial: "shared/school_staff", locals: { staff:, by_code_count: 1, viewer_id: 1, remove_url:, removable:, newcomer:,
+                                                      school_type:, position_url: }
     Nokogiri::HTML.fragment(rendered)
   end
 
@@ -21,6 +26,22 @@ class SchoolStaffPartialTest < ActionView::TestCase
     assert_includes html.at_css("#school_staff_kofi").text, "(vous)"
     assert_includes html.at_css("#school_staff_kofi").text, "Depuis le 1er octobre 2026 · sur invitation"
     assert_includes html.at_css("#school_staff_aya").text, "Depuis le 4 septembre 2026 · avec le code"
+  end
+
+  test "ED-03, ED-04: each line reads its position, the deputy as the type of the school says" do
+    assert_includes block.at_css("#school_staff_kofi").text, "Chef d'établissement"
+    assert_includes block.at_css("#school_staff_aya").text, "Directeur des études"
+    assert_includes block(school_type: "public").at_css("#school_staff_aya").text, "Adjoint au chef d'établissement"
+  end
+
+  test "UDR-0092 §3.4: with a position_url, « Changer la fonction » comes first, then a rule, then the removal" do
+    html = block(position_url: ->(id) { "/position/#{id}" })
+
+    items = html.css("#staff-actions-aya [role=menuitem], #staff-actions-aya [role=separator]")
+    assert_equal [ "Changer la fonction", "", "Retirer de la direction" ], items.map { it.text.strip }
+    assert_equal "/position/aya", html.at_css("#staff-actions-aya a[role=menuitem]")["href"]
+    assert html.at_css("#staff-actions-kofi a[href='/position/kofi']"), "un compte non retirable garde « Changer la fonction »"
+    assert_nil html.at_css("#staff-actions-kofi [role=separator]")
   end
 
   test "the menu and its confirmation appear only on removable rows" do

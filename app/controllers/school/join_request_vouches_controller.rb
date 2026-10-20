@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · School::JoinRequestVouchesController
 # Rôle : « Je confirme » d'un enseignant actif pour un collègue en attente de son établissement ; ligne retirée et toast (stream)
-# ADR  : 0026, 0028, 0063 · UDR : 0050
+# ADR  : 0026, 0028, 0063, 0094 · UDR : 0050
 module School
   class JoinRequestVouchesController < AuthenticatedController
     allow_roles :teacher
@@ -14,7 +14,8 @@ module School
         respond_to do |format|
           format.turbo_stream do
             @request = request
-            @remaining = Queries::School::JoinRequestsQuery.new.for_colleague(teacher_id: current_actor.user_id)
+            @remaining = Queries::School::JoinRequestsQuery.new.for_colleague(teacher_id: current_actor.user_id,
+                                                                              school_id: current_actor.school_id)
           end
           format.html { redirect_to teacher_home_path, notice: @notice, status: :see_other }
         end
@@ -36,7 +37,8 @@ module School
       UseCases::School::VouchForTeacher.new(
         join_requests: Repositories::School::JoinRequestRepository.new, schools: Repositories::School::SchoolRepository.new,
         referrals: Repositories::Identity::ReferralRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
-        policy: Policies::School::VouchPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
+        policy: Policies::School::VouchPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone,
+        teacher_materials: Repositories::Identity::TeacherMaterialRepository.new
       )
     end
   end

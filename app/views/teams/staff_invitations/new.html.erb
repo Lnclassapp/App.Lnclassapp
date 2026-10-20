@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/staff_invitations/new — invitation de la direction d'un établissement, servie dans le frame « modal » %>
-<%# Rôle : le numéro seul ; établissement non actif en tête, autre refus sous le champ, en 422 ; succès : le lien remplace le formulaire %>
-<%# ADR  : 0038, 0050, 0065 · UDR : 0019, 0052, 0054 · l'onglet porte le titre de la modale tant qu'elle est ouverte %>
+<%# Rôle : le numéro et la fonction ; établissement non actif en tête, autre refus sous son champ, en 422 ; succès : le lien %>
+<%# ADR  : 0038, 0050, 0065, 0092 · UDR : 0019, 0052, 0054, 0092 (§3.1) · l'onglet porte le titre de la modale ouverte %>
 <%= turbo_frame_tag "modal" do %>
   <%= ui_modal title: t(".title"), id: "staff-invitation-modal", open: true, document_title: page_title(t(".title")) do |modal| %>
     <% modal.footer do %>
@@ -19,6 +19,7 @@
       <% end %>
       <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 15, inputmode: "tel",
                    autocomplete: "off", autofocus: true, placeholder: t(".contact_placeholder"), hint: t(".contact_hint") %>
+      <%= render "shared/staff_position_fieldset", form:, legend: t(".position"), school_type: @school.school_type %>
     <% end %>
   <% end %>
 <% end %>

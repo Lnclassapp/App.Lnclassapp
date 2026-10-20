@@ -2,6 +2,28 @@
 fr:
   teams:
     imports:
+      question_examples:
+        title: "Exemples des autres types de questions"
+      # Une phrase par règle de structure d'une question (Question.structure_errors_for, ADR-0039 et ADR-0091).
+      question_rules:
+        true_false_needs_two_answers: "Une question Vrai / Faux a exactement 2 propositions."
+        too_few_answers: "Ajoutez au moins une proposition incorrecte en plus des propositions correctes."
+        wrong_correct_count: "Le nombre de propositions correctes ne correspond pas au type de la question."
+        blank_marker: "Écrivez ___ (trois tirets bas) une seule fois dans l'énoncé, là où l'élève répond."
+        accepted_answers_count: "Donnez de 1 à 5 réponses acceptées."
+        duplicate_accepted: "Deux réponses acceptées sont identiques (sans compter majuscules, accents et espaces)."
+        numeric_needs_one_value: "Donnez une seule valeur attendue."
+        numeric_value_unreadable: "La valeur attendue doit être un nombre, par exemple -3,5."
+        negative_tolerance: "La marge doit être positive ou nulle."
+        tolerance_out_of_range: "La marge doit être un nombre d'au plus 99 999 999,9999, avec 4 décimales au plus."
+        tolerance_not_allowed: "La marge (tolerance) ne vaut que pour une question numeric."
+        steps_count: "Donnez de 3 à 6 étapes, dans le bon ordre."
+        duplicate_steps: "Deux étapes ont le même texte : l'ordre serait ambigu."
+        pairs_count: "Donnez de 3 à 5 paires."
+        missing_match: "Complétez le côté droit (match) de chaque paire."
+        duplicate_match: "Deux paires ont le même côté droit : chacun doit être unique."
+        duplicate_left: "Deux paires ont le même côté gauche : chacun doit être unique."
+        match_not_allowed: "Le côté droit (match) ne vaut que pour une question matching."
       statuses:
         queued: "En file d'attente"
         validating: "Vérification"
@@ -31,7 +53,9 @@ fr:
         write_failed: "L'enregistrement de cet élément n'a pas abouti."
         taken: "Ce nom est déjà pris par une autre DRENA."
         no_latin_character: "Le nom doit contenir au moins une lettre ou un chiffre latin."
-        duplicate_in_files: "Ce cours est aussi dans %{other} : aucun des deux n'est importé."
+        duplicate_in_files: "Cette fiche de cours est aussi dans %{other} : aucune des deux n'est importée."
+        image_slots_unreadable: "Texte trop complexe à relire : simplifiez la mise en forme."
+        image_slot_malformed: "Emplacement d'image mal écrit (%{count}) : « [[image: description]] » doit être seul dans son paragraphe, avec une description de 1 à 150 caractères."
       # Erreurs de schéma, par mot-clé json_schemer (Teams::ImportsHelper) ; les autres prennent error_codes.schema.
       schema_keywords:
         schema: "Clé inconnue : ce format ne la prévoit pas."
@@ -51,7 +75,7 @@ fr:
       index:
         page_title: "Imports"
         title: "Imports"
-        subtitle: "DRENA, établissements, cours, fiches essentielles et exercices importés depuis un fichier JSON."
+        subtitle: "DRENA, établissements, fiches de cours, fiches de révision et exercices importés depuis un fichier JSON."
         new: "Nouvel import"
         all: "Tous"
         filter_label: "Filtrer par type d'import"
@@ -71,14 +95,14 @@ fr:
         # Titre de l'onglet (UDR-0054 §3.1) : un seul segment, sans deux-points.
         page_titles:
           schools: "Importer des établissements"
-          course_tree: "Importer des cours complets"
-          essentials: "Importer des fiches essentielles"
+          course_tree: "Importer des fiches de cours complètes"
+          essentials: "Importer des fiches de révision"
           exercises: "Importer des exercices"
           drenas: "Importer des DRENA"
         file: "Fichier JSON"
         limits: "Un fichier .json de %{megabytes} Mo au plus, avec %{roots} éléments au plus."
         files: "Fichiers JSON"
-        limits_multiple: "Jusqu'à %{files} fichiers .json, %{total} Mo au total, %{megabytes} Mo au plus par fichier, %{roots} cours au plus en tout."
+        limits_multiple: "Jusqu'à %{files} fichiers .json, %{total} Mo au total, %{megabytes} Mo au plus par fichier, %{roots} fiches de cours au plus en tout."
         # Résumé de la sélection, écrit par le contrôleur teams--import-files (UDR-0055 §3.1).
         files_summary:
           one: "1 fichier · %{size}"
@@ -99,8 +123,8 @@ fr:
         # Titre de l'onglet (UDR-0054 §3.1) : un seul segment, sans deux-points.
         page_titles:
           schools: "Import d'établissements"
-          course_tree: "Import de cours complets"
-          essentials: "Import de fiches essentielles"
+          course_tree: "Import de fiches de cours complètes"
+          essentials: "Import de fiches de révision"
           exercises: "Import d'exercices"
           drenas: "Import de DRENA"
         title: "Import : %{kind}"

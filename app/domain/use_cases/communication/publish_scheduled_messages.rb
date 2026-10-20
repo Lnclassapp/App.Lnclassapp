@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Communication::PublishScheduledMessages
 # Rôle : publie les annonces programmées dont l'heure est venue, chacune sous le plafond de 3 de son auteur et journalisée
-# ADR  : 0045, 0078, 0081 · sans acteur ni policy (job) : exemption de test/architecture/use_case_policies_test.rb
+# ADR  : 0045, 0078, 0081, 0094 · sans acteur ni policy (job) : exemption de test/architecture/use_case_policies_test.rb
 module UseCases
   module Communication
     class PublishScheduledMessages
@@ -27,7 +27,7 @@ module UseCases
       # en ligne de son auteur (ADR-0081 §4.1). → true si elle est publiée
       def publish(due, now)
         @transaction.call do
-          live = lock_author(due.author_id, now)
+          live = lock_author(due.author_id, now, due.cap_school_id)
           message = @messages.find_by_public_id(public_id: due.public_id)
           next false unless message.status == "scheduled" && message.published_at <= now
 

@@ -1,0 +1,14 @@
+<%# 🌐 UI · classroom/student_archives/_month — un mois de « Mes exercices terminés » (« Octobre 2026 ») et ses lignes %>
+<%# Rôle : section titrée ; masquée tant qu'aucune de ses lignes n'est révélée, elle suit « Voir plus » sans JavaScript à elle %>
+<%# UDR  : 0057 (R3), 0090 §3.2, §3.6 · rows : [[ResultRow, index dans toute la liste], …] %>
+<%# locals: (month:, rows:) -%>
+<% title_id = "student_archive_month_#{month.strftime('%Y_%m')}" %>
+<%# ui-reveal-group (:has), et non le contrôleur reveal : le titre du mois apparaît avec sa première ligne révélée (UDR-0090 §3.2). %>
+<section aria-labelledby="<%= title_id %>" class="ui-reveal-group">
+  <h3 id="<%= title_id %>" class="pt-2 text-xs font-bold tracking-widest text-mute uppercase"><%= l(month, format: t(".format")).upcase_first %></h3>
+  <ul class="divide-y divide-line">
+    <% rows.each do |result, index| %>
+      <%= render "result_row", result:, index: %>
+    <% end %>
+  </ul>
+</section>

@@ -4,8 +4,9 @@ require "test_helper"
 module Entities
   module Assessment
     class ComprehensionTest < ActiveSupport::TestCase
-      test "the category of a student is the mastery of his best score, at 49, 50, 69 and 70" do
-        assert_equal %i[struggling fragile fragile acquired], [ 49, 50, 69, 70 ].map { Comprehension.category_for(it) }
+      # ADR-0106: the displayed grade decides. 47 % reads 9/20, 48 % reads 10/20, 67 % reads 13/20, 68 % reads 14/20.
+      test "the category of a student is the mastery of his best score, at 47, 48, 67 and 68" do
+        assert_equal %i[struggling fragile fragile acquired], [ 47, 48, 67, 68 ].map { Comprehension.category_for(it) }
       end
 
       test "the sign of progress follows first, best and last, with a margin of 10 points" do
@@ -16,9 +17,10 @@ module Entities
         }.each { |scores, trend| assert_equal trend, Comprehension.trend_for(scores), scores.join("-") }
       end
 
-      test "without any move, the sign is stable from the mastery threshold, stagnant just under it: 70-70 and 69-69" do
+      test "without any move, the sign is stable from the grade of the mastery threshold (14/20), stagnant under it: 68-68 and 67-67" do
+        assert_equal :stable, Comprehension.trend_for([ 68, 68 ])
         assert_equal :stable, Comprehension.trend_for([ 70, 70 ])
-        assert_equal :stagnant, Comprehension.trend_for([ 69, 69 ])
+        assert_equal :stagnant, Comprehension.trend_for([ 67, 67 ])
       end
 
       test "a single attempt has no sign" do
@@ -38,8 +40,10 @@ module Entities
         assert Comprehension.readable?(5)
       end
 
-      test "a question is to revisit under the pass threshold, never without attempts" do
-        assert Comprehension.to_revisit?(49)
+      test "a question is to revisit under the grade of the pass threshold (10/20), never without attempts" do
+        assert Comprehension.to_revisit?(47)
+        assert_not Comprehension.to_revisit?(48)
+        assert_not Comprehension.to_revisit?(49)
         assert_not Comprehension.to_revisit?(50)
         assert_not Comprehension.to_revisit?(nil)
       end

@@ -17,6 +17,7 @@ class Teams::StaffInvitationTest < ApplicationSystemTestCase
       within "turbo-frame#modal dialog[open]" do
         assert_text "La personne invitée verra les enseignants et le travail des élèves de Lycée Moderne de Bouaké."
         fill_in "invitation[contact]", with: teacher.contact
+        find("label", text: "Secrétaire").click
         click_on "Créer l'invitation"
 
         assert_selector "#invitation_contact_error", text: "Ce numéro a déjà un compte Lnclass."
@@ -47,7 +48,7 @@ class Teams::StaffInvitationTest < ApplicationSystemTestCase
         assert_selector "#session-form", wait: SIGN_IN_WAIT
         assert_toast "Votre compte est créé. Connectez-vous avec votre numéro et votre code secret."
         # UDR-0054 §3.8: « Se connecter » arrives with the number filled in, the focus on the PIN.
-        assert_field "session[contact]", with: "07 99 00 00 09"
+        assert_field "session[contact]", with: "0799000009"
         assert_selector "#session_pin:focus"
         fill_in "session[pin]", with: "4821"
         click_on I18n.t("identity.sessions.new.submit")

@@ -196,6 +196,7 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
         click_on t("teams.articles.edit_modal.submit")
       end
       assert_toast t("teams.articles.update.updated", title: article.title)
+      dismiss_toasts
       assert_no_selector "turbo-frame#modal dialog[open]"
       assert_no_selector "main[data-before-refresh]"
       assert_selector row, text: t("teams.articles.status.draft")
@@ -205,6 +206,7 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
 
       click_menu_action row, t("teams.articles.menu.publish")
       assert_toast t("teams.articles.transition.published", title: article.title)
+      dismiss_toasts # le toast couvrirait le menu ⋮ de la ligne
       assert_selector row, text: t("teams.articles.status.published")
       assert_equal "published", article.reload.status
 

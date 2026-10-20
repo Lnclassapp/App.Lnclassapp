@@ -1,0 +1,24 @@
+<%# 🌐 UI · identity/profiles/_student_information — « Mes informations » de l'élève (Queries::Identity::ProfileQuery::Row) %>
+<%# Rôle : Photo, Nom, Numéro, Classe (lignes à toucher), Établissement, Inscrit le (lecture seule) ; remplacée par profile_names/update %>
+<%# ADR  : 0055, 0060, 0095 · UDR : 0041 (amendée), 0047, 0089 §3.2 (sans classe : ni Classe ni Établissement), 0101 · locals : profile %>
+<%# locals: (profile:) -%>
+<% photo_value = t(".photo_value.#{profile.photo_version ? :present : :absent}") %>
+<%= ui_card id: "profile_information", "aria-labelledby": "profile_information_title" do %>
+  <h2 id="profile_information_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".title") %></h2>
+  <ul class="mt-2 divide-y divide-line">
+    <%= render "identity/profiles/student_row", icon: "camera", label: t(".photo"), value: photo_value,
+                                                action: t(profile.photo_version ? ".change" : ".add"), href: edit_profile_photo_path %>
+    <%= render "identity/profiles/student_row", icon: "user", label: t(".name"), value: profile.display_name, action: t(".edit"),
+                                                href: edit_profile_name_path %>
+    <%= render "identity/profiles/student_row", icon: "device-phone-mobile", label: t(".contact"), value: profile.grouped_contact,
+                                                action: t(".change"), href: edit_profile_contact_path %>
+    <% if profile.classroom_name %>
+      <%# UDR-0101 : « Changer de classe » en pleine page (cascade et confirmation), pas dans la fenêtre. %>
+      <%= render "identity/profiles/student_row", icon: "academic-cap", label: t(".classroom"), value: profile.classroom_name,
+                                                  action: t(".change"), href: new_student_classroom_change_path, frame: "_top" %>
+      <%= render "identity/profiles/student_row", icon: "building-office-2", label: t(".school"), value: profile.school_name %>
+    <% end %>
+    <%= render "identity/profiles/student_row", icon: "calendar", label: t(".registered_on"),
+                                                value: l(profile.registered_on, format: :long) %>
+  </ul>
+<% end %>

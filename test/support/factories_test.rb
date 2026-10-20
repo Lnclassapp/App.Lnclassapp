@@ -42,7 +42,7 @@ class FactoriesTest < ActiveSupport::TestCase
     assert_equal secret_digest(invitation.token), invitation.token_digest
     assert_equal secret_digest("87654321"), code.code_digest
     assert create_user(role: "teacher").authenticate_pin("2468")
-    assert_equal [ "principal", nil ], [ invitation.position, invitation.team_role ]
+    assert_equal [ "deputy", nil ], [ invitation.position, invitation.team_role ]
   end
 
   # ADR-0074 : the blog factories write what the application writes; their images are checked and stored by the adapter.

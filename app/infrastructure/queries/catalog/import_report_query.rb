@@ -1,11 +1,11 @@
 # 🔌 INFRA · Queries::Catalog::ImportReportQuery
-# Rôle : un rapport d'import pour l'écran de suivi : statut, progression, compteurs, détails et erreurs localisées
-# ADR  : 0026, 0039, 0068
+# Rôle : un rapport d'import pour l'écran de suivi : statut, progression, dernier signe de vie, compteurs, détails et erreurs localisées
+# ADR  : 0026, 0039, 0068, 0096
 module Queries
   module Catalog
     class ImportReportQuery
       Row = Data.define(:public_id, :kind, :filename, :status, :total_count, :imported_count, :skipped_count, :error_count,
-                        :imported_by_name, :created_at, :finished_at, :file_count, :processed_count, :details, :import_errors,
+                        :imported_by_name, :created_at, :finished_at, :file_count, :updated_at, :processed_count, :details, :import_errors,
                         :files)
       # Une erreur telle que RunImport l'a notée : chemin JSON, motif, valeurs du message, fichier d'un envoi multiple.
       ErrorRow = Data.define(:path, :code, :params, :file) do
@@ -15,7 +15,7 @@ module Queries
       FileRow = Data.define(:name, :status, :reason, :imported, :skipped, :errors)
 
       COLUMNS = (ImportReportsQuery::COLUMNS + [
-        "import_reports.processed_count", "import_reports.details", "import_reports.import_errors", "import_reports.files"
+        "import_reports.updated_at", "import_reports.processed_count", "import_reports.details", "import_reports.import_errors", "import_reports.files"
       ]).freeze
 
       def call(public_id:)

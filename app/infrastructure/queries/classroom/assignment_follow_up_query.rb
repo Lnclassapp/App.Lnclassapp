@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::AssignmentFollowUpQuery
 # Rôle : suivi d'un exercice assigné : faits (remédiation comprise), dont en retard, pas encore faits ; retards et restants nommés
-# ADR  : 0026, 0048, 0072, 0079 · UDR : 0062, 0072 · appelée après FollowAssignmentPolicy seulement : elle nomme des élèves
+# ADR  : 0026, 0048, 0072, 0079, 0097 (§4.9) · UDR : 0062, 0072, 0109 · après FollowAssignmentPolicy seulement : elle nomme des élèves
 module Queries
   module Classroom
     class AssignmentFollowUpQuery
@@ -8,8 +8,9 @@ module Queries
       # assigned_on, done_on : dates locales d'Abidjan.
       Row = Data.define(:public_id, :exercise_public_id, :exercise_title, :material_name, :material_category, :due_on,
                         :assigned_on, :counts, :late_students, :pending_students)
-      LateStudent = Data.define(:display_name, :done_on)
-      PendingStudent = Data.define(:display_name)
+      # public_id : celui de l'élève, le lien vers sa fiche dans la classe (ADR-0097 §4.9).
+      LateStudent = Data.define(:public_id, :display_name, :done_on)
+      PendingStudent = Data.define(:public_id, :display_name)
 
       # ADR-0072 §4.1 : une assignation ne porte plus qu'un exercice.
       EXERCISE = "JOIN exercises ON exercises.id = classroom_assignments.assignable_id " \
@@ -78,8 +79,10 @@ module Queries
 
         Orm::User.joins("JOIN (#{self.class.first_done(classroom_id, [ id ]).to_sql}) firsts ON firsts.student_id = users.id")
                  .where("firsts.done_on > ?", due_on).order(:last_name, :first_name, :id)
-                 .pluck(:first_name, :last_name, "firsts.done_on")
-                 .map { |first_name, last_name, done_on| LateStudent.new(display_name: "#{first_name} #{last_name}", done_on:) }
+                 .pluck(:public_id, :first_name, :last_name, "firsts.done_on")
+                 .map do |public_id, first_name, last_name, done_on|
+                   LateStudent.new(public_id:, display_name: "#{first_name} #{last_name}", done_on:)
+                 end
       end
 
       # Présents sans session faite sur l'assignation, une session seulement commencée comprise (ADR-0079 §4.8).
@@ -87,8 +90,8 @@ module Queries
         Orm::User.where(id: self.class.present_students(classroom_id).select(:student_id))
                  .joins("LEFT JOIN (#{self.class.first_done(classroom_id, [ id ]).to_sql}) firsts ON firsts.student_id = users.id")
                  .where(firsts: { student_id: nil }).order(:last_name, :first_name, :id)
-                 .pluck(:first_name, :last_name)
-                 .map { |first_name, last_name| PendingStudent.new(display_name: "#{first_name} #{last_name}") }
+                 .pluck(:public_id, :first_name, :last_name)
+                 .map { |public_id, first_name, last_name| PendingStudent.new(public_id:, display_name: "#{first_name} #{last_name}") }
       end
     end
   end

@@ -1,0 +1,6 @@
+<%# 🌐 UI · teams/classroom_settings/update — réponse de « Modifier la classe » de la fiche %>
+<%# Rôle : toast (« Classe … enregistrée. », ou classe archivée entre-temps), modale refermée, fiche re-demandée et fusionnée par morphing %>
+<%# ADR  : 0098 · UDR : 0110, 0083 %>
+<%= turbo_stream_toast @notice || @alert, type: @notice ? :success : :info %>
+<%= turbo_stream.update "modal" %>
+<%= turbo_stream.refresh(request_id: nil) %>

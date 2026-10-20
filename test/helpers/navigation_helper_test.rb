@@ -69,6 +69,14 @@ class NavigationHelperTest < ActionView::TestCase
     assert_equal "Configuration", I18n.t("shared.navigation.sidebar.secondary_label.team")
   end
 
+  # UDR-0084 §3.3 : l'élève n'a plus de barre du bas ; son menu de l'avatar porte ses destinations, inchangées.
+  test "the student has no bottom bar, every other role keeps it" do
+    assert_not bottom_bar?(:student)
+    assert_not bottom_bar?("student")
+    assert(%i[teacher team school_admin].all? { bottom_bar?(it) })
+    assert_equal %i[home courses classroom], navigation_for(:student).map(&:key)
+  end
+
   test "the other roles have no secondary list and no « Plus »" do
     %i[student teacher school_admin].each do |role|
       assert_empty secondary_navigation_for(role)
@@ -195,7 +203,10 @@ class NavigationHelperTest < ActionView::TestCase
     assert_equal [ "/students/menu", "/teachers/menu" ], %i[student teacher].map { account_panel_page_path(it) }
     assert_equal [ [ "/profile", "user-circle" ], [ "/courses", "book-open" ] ],
                  account_panel_links(:student).map { it.values_at(:href, :icon) }
+    # UDR-0098 §3.1 : « Mes établissements » après « Mon profil », quel que soit le nombre d'établissements.
     assert_equal [ { label: I18n.t("shared.navigation.profile"), href: "/profile", icon: "user-circle" },
+                   { label: I18n.t("shared.navigation.account_panel.schools.link"), href: "/teachers/schools",
+                     icon: "building-office-2" },
                    { label: I18n.t("shared.navigation.account_panel.invite"), href: "/teachers/invite", icon: "user-plus" } ],
                  account_panel_links(:teacher)
   end

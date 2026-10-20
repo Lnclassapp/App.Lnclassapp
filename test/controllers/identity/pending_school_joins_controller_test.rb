@@ -30,7 +30,7 @@ class Identity::PendingSchoolJoinsControllerTest < ActionDispatch::IntegrationTe
     assert_equal I18n.t("identity.pending_school_joins.create.welcome", school: "Lycée Classique d'Abidjan"), flash[:notice]
     assert_equal [ [ @b.id, true ] ], Orm::TeacherSchool.where(teacher: @teacher).pluck(:school_id, :primary)
     assert Orm::AuditEvent.exists?(action: "school.changed", actor_id: @teacher.id, subject_type: "School", subject_id: @b.id,
-                                   metadata: { "change" => "teacher_joined" })
+                                   metadata: { "change" => "teacher_joined", "via" => "standard" })
     follow_redirect!
     assert_response :success
   end

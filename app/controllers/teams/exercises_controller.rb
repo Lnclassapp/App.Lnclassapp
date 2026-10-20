@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::ExercisesController
 # Rôle : l'équipe crée et modifie en modale un exercice, ses questions et propositions ; le publie ou l'archive
-# ADR  : 0026, 0028, 0035, 0036, 0054 · UDR : 0006, 0017
+# ADR  : 0026, 0028, 0035, 0036, 0054, 0091, 0105 · UDR : 0006, 0017, 0087, 0129
 module Teams
   class ExercisesController < BaseController
     before_action :load_essential, only: %i[new create]
@@ -50,7 +50,8 @@ module Teams
     def form_input
       Dtos::Assessment::ExerciseInput.from_params(params.expect(exercise: [
         :title, :description, :exercise_type,
-        { questions_attributes: [ [ :content, :explanation, :question_type, { answers_attributes: [ [ :content, :correct ] ] } ] ] }
+        { questions_attributes: [ [ :content, :explanation, :question_type, :numeric_tolerance, :image_public_id, :image_alt,
+                                    :image_description, { answers_attributes: [ [ :content, :correct, :match_content ] ] } ] ] }
       ]).to_h)
     end
 
@@ -79,9 +80,10 @@ module Teams
       }
     end
 
-    # Refus d'une transition (sans question, fiche non publiée, retour interdit) : toast d'erreur qui en dit la raison.
+    # Refus d'une transition (sans question, fiche non publiée, retour interdit, image manquante) : toast d'erreur qui en
+    # dit la raison, et le numéro de la question en cause (ADR-0105 §4.4).
     def refuse_transition(result)
-      @refusal = t("teams.exercises.transition.refusals.#{result.errors.fetch(:base).first}")
+      @refusal = t("teams.exercises.transition.refusals.#{result.errors.fetch(:base).first}", number: result.errors[:number]&.first)
       respond_to do |format|
         format.turbo_stream { render :transition, status: :unprocessable_entity }
         format.html { redirect_to exercise_path(params[:public_id]), alert: @refusal, status: :see_other }

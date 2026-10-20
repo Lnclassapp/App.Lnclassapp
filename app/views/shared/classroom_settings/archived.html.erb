@@ -1,0 +1,12 @@
+<%# 🌐 UI · shared/classroom_settings/archived — « Modifier la classe » d'une classe archivée entre deux affichages %>
+<%# Rôle : modale courte dans le frame « modal » (équipe et direction) : la classe est archivée, on la restaure d'abord ; sans JavaScript, une page complète %>
+<%# ADR  : 0088, 0098 · UDR : 0111, 0054 · un cadre vide ne dirait rien à l'utilisateur %>
+<% title = t("shared.classroom_settings.archived_title") %>
+<%= turbo_frame_tag "modal" do %>
+  <%= ui_modal title:, id: "classroom-settings-modal", open: true, size: :sm, document_title: page_title(title) do |modal| %>
+    <% modal.footer do %>
+      <%= ui_button t("shared.classroom_settings.close"), variant: :secondary, data: { action: "modal#close" } %>
+    <% end %>
+    <p class="text-sm text-ink"><%= t("shared.classroom_settings.archived") %></p>
+  <% end %>
+<% end %>

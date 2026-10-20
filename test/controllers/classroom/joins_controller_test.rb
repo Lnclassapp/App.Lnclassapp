@@ -61,7 +61,7 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     get join_classroom_path(token.upcase)
 
     assert_response :success
-    assert_select "h2", text: I18n.t("classroom.student_registrations.new.title")
+    assert_select "h1", text: I18n.t("classroom.student_registrations.new.title")
     assert_select "form#student-registration-form[action='#{student_registrations_path}'][method=post]" do
       assert_select "#classroom-preview", text: /6ème 1 — Lycée Classique d'Abidjan/
       assert_select "#classroom-preview", text: /Niveau : 6ème/
@@ -162,14 +162,34 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     assert_not_nil Orm::ClassroomStudent.find_by!(student:, classroom: archived).left_at
   end
 
-  test "IL-18: a student in an active classroom opening a link is sent home; posting it is refused in 403 on the link page" do
+  # UDR-0102 §3.3 (ADR-0095) : le lien d'une autre classe mène à la confirmation du changement ; rien n'est écrit.
+  test "UDR-0102: a student in an active classroom opening the link of another classroom is sent to the confirmation" do
     current = create_classroom(school: @school, name: "6ème 4")
     student = create_student(classroom: current)
     sign_in_as student
 
-    get join_classroom_path(link_token)
+    get join_classroom_path(link_token.upcase)
 
-    assert_redirected_to student_home_path
+    assert_redirected_to confirm_student_classroom_change_path(link_token:)
+    assert_response :see_other
+    assert_equal [ [ current.id, nil ] ], Orm::ClassroomStudent.where(student:).pluck(:classroom_id, :left_at)
+  end
+
+  test "UDR-0102: the link of their own classroom, an archived or a dead link sends the enrolled student home, as before" do
+    sign_in_as create_student(classroom: @classroom)
+    archived = create_classroom(school: @school, status: "archived")
+
+    [ link_token, archived.link_token, "cccccccccccc", "kfm37" ].each do |token|
+      get join_classroom_path(token)
+
+      assert_redirected_to student_home_path, token
+    end
+  end
+
+  test "IL-18: a student in an active classroom posting a link is refused in 403 on the link page" do
+    current = create_classroom(school: @school, name: "6ème 4")
+    student = create_student(classroom: current)
+    sign_in_as student
 
     post join_classroom_path(link_token)
 

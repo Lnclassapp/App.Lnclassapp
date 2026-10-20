@@ -1,13 +1,15 @@
 # 🧠 DOMAINE · UseCases::School::ReviewJoinRequest
 # Rôle : l'équipe valide (rattache) ou refuse un enseignant inscrit sans code, depuis la fiche ; chaque décision est auditée
-# ADR  : 0026, 0028, 0063 · UDR : 0050
+# ADR  : 0026, 0028, 0063, 0103 · UDR : 0050
 module UseCases
   module School
     class ReviewJoinRequest
       DECISIONS = %w[approve reject].freeze
 
-      def initialize(join_requests:, audit_log:, policy:, transaction:, clock:)
+      # teacher_materials : Ports::Identity::TeacherMaterialRepositoryPort ; le rattaché reçoit sa dernière liste (ADR-0103 §4.4).
+      def initialize(join_requests:, audit_log:, policy:, transaction:, clock:, teacher_materials:)
         @join_requests = join_requests
+        @teacher_materials = teacher_materials
         @audit_log = audit_log
         @policy = policy
         @transaction = transaction
@@ -40,7 +42,9 @@ module UseCases
       def decide(request, decision, actor, now)
         return @join_requests.reject(id: request.id, decided_by_id: actor.user_id, at: now) if decision == "reject"
 
-        @join_requests.approve(id: request.id, decided_by_id: actor.user_id, via: "team", at: now)
+        approved = @join_requests.approve(id: request.id, decided_by_id: actor.user_id, via: "team", at: now)
+        @teacher_materials.inherit(teacher_id: request.teacher_id, school_id: request.school_id, from_school_id: nil, at: now) if approved.success?
+        approved
       end
 
       def record(actor, request, change, now)

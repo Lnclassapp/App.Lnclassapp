@@ -54,6 +54,20 @@ module Repositories
                      @repository.attempts(session_id: started.id).map { [ it.question_id, it.selected_answer_ids, it.correct ] }
       end
 
+      # ADR-0091 §4.1 : une réponse saisie (trous, nombre) s'enregistre sans proposition.
+      test "enregistre une réponse saisie, sans proposition, et la relit" do
+        started = @repository.start(session: session)
+        question = @exercise.questions.first
+
+        assert_equal :recorded, @repository.record_attempt(session_id: started.id, question_id: question.id, selected_answer_ids: [],
+                                                           response_text: "-3,5", correct: true, at: @at)
+        assert_equal [ [ [], "-3,5" ] ], @repository.attempts(session_id: started.id).map { [ it.selected_answer_ids, it.response_text ] }
+        assert_raises(ActiveRecord::StatementInvalid) do
+          Orm::QuestionAttempt.create!(exercise_session_id: started.id, question_id: @exercise.questions.second.id, selected_answer_ids: [],
+                                       correct: true, answered_at: @at)
+        end
+      end
+
       test "clôture une session ouverte avec son score, une seule fois" do
         started = @repository.start(session: session)
 

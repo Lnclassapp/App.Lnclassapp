@@ -1,0 +1,31 @@
+<%# 🌐 UI · school/teacher_schools/_join_fields — DRENA puis établissement, rejoindre (écran d'attente et « Mes établissements ») %>
+<%# Rôle : un seul formulaire de rattachement pour les deux écrans (UDR-0099 §3.2) ; repli sans JavaScript en GET vers get_url %>
+<%# ADR  : 0083, 0094 · UDR : 0024, 0079 (§3.9), 0099 (§3.2) · Stimulus : school--drena-schools %>
+<%# locals: (school_join:, drena_options:, school_options:, get_url:, post_url:, submit_label:) -%>
+<%# Repli sans JavaScript (UDR-0024 §2.4) : la DRENA choisie revient en GET et liste ses établissements. %>
+<form id="school-join-drena" action="<%= get_url %>" method="get"></form>
+<%= form_with model: school_join, scope: :school_join, url: post_url, id: "school-join-form", class: "flex flex-col gap-4",
+              data: { controller: "school--drena-schools",
+                      "school--drena-schools-url-value": drena_schools_path("__drena__", scope: :school_join) } do |form| %>
+  <% if school_join.errors[:base].any? %>
+    <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+      <p><%= school_join.errors[:base].to_sentence %></p>
+    </div>
+  <% end %>
+  <div class="space-y-2">
+    <%= ui_field form, :drena_public_id, as: :select, choices: drena_options,
+                 prompt: t("identity.pending_accounts.show.drena_prompt"),
+                 form: "school-join-drena", data: { action: "change->school--drena-schools#load" } %>
+    <%# Repli sans JavaScript : noscript plutôt qu'un attribut posé par Stimulus, que le morphing du 422 effacerait. %>
+    <noscript>
+      <%= ui_button t("identity.pending_accounts.show.show_schools"), type: :submit, variant: :secondary, size: :sm,
+                    icon: "magnifying-glass", form: "school-join-drena" %>
+    </noscript>
+  </div>
+  <%# Avec JavaScript, le frame vient de /drenas/:id/schools?scope=school_join (ADR-0083 §4.5) : mêmes champs, même scope. %>
+  <%= render template: "school/drena_schools/index",
+             locals: { schools: school_options, drena_public_id: school_join.drena_public_id, registration: school_join,
+                       scope: :school_join } %>
+  <%= ui_button submit_label, type: :submit, variant: :brand, full: true %>
+<% end %>

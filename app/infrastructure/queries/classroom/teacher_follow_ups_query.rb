@@ -1,42 +1,49 @@
 # 🔌 INFRA · Queries::Classroom::TeacherFollowUpsQuery
-# Rôle : « Activités » de l'accueil enseignant : les exercices assignés de ses classes, dans sa matière, à suivre cette semaine
-# ADR  : 0026, 0041, 0067, 0072, 0079 · UDR : 0077 §3.1 · nombre fixe de requêtes, quel que soit le nombre de classes
+# Rôle : « Activités » de l'accueil enseignant : les exercices assignés de ses classes, dans ses matières, à suivre cette semaine
+# ADR  : 0026, 0041, 0067, 0072, 0079, 0094, 0103 · UDR : 0077 §3.1, 0126 §3.4 · nombre fixe de requêtes, quel que soit le nombre de classes
 module Queries
   module Classroom
     class TeacherFollowUpsQuery
-      # pending : élèves présents qui ne l'ont pas encore fait ; present : élèves présents de la classe.
-      Row = Data.define(:public_id, :exercise_title, :classroom_public_id, :classroom_name, :due_on, :pending, :present)
+      # pending : élèves présents qui ne l'ont pas encore fait ; present : élèves présents de la classe ; material_name,
+      # material_category : la matière de l'exercice, badge de l'enseignant de plusieurs matières (UDR-0126 §3.4).
+      Row = Data.define(:public_id, :exercise_title, :classroom_public_id, :classroom_name, :due_on, :pending, :present,
+                        :material_name, :material_category)
 
       # Échéance dans les 7 prochains jours, ou passée depuis 14 jours au plus (UDR-0077 §3.1, memo).
       AHEAD = 7
       BEHIND = 14
 
       COLUMNS = %w[classroom_assignments.id classroom_assignments.public_id exercises.title classrooms.id classrooms.public_id
-                   classrooms.name classroom_assignments.due_on].freeze
+                   classrooms.name classroom_assignments.due_on materials.name materials.category].freeze
 
-      # today : fixe l'année scolaire (ADR-0041) et la fenêtre d'échéance. → [Row], échéance croissante, puis classe.
-      def call(teacher_id:, today: Date.current)
-        rows = assignments(teacher_id, today)
+      # school_id : l'établissement courant (ADR-0094 §4.6) ; today : fixe l'année scolaire (ADR-0041) et la fenêtre
+      # d'échéance. → [Row], échéance croissante, puis classe.
+      def call(teacher_id:, school_id:, today: Date.current)
+        rows = assignments(teacher_id, school_id, today)
         return [] if rows.empty?
 
         present = present_counts(rows.map { it[3] }.uniq)
         done = done_counts(rows.map(&:first))
-        rows.filter_map do |id, public_id, exercise_title, classroom_id, classroom_public_id, classroom_name, due_on|
+        rows.filter_map do |id, public_id, exercise_title, classroom_id, classroom_public_id, classroom_name, due_on, material_name, material_category|
           count = present.fetch(classroom_id, 0)
           pending = count - done.fetch(id, 0)
-          Row.new(public_id:, exercise_title:, classroom_public_id:, classroom_name:, due_on:, pending:, present: count) if pending.positive?
+          next unless pending.positive?
+
+          Row.new(public_id:, exercise_title:, classroom_public_id:, classroom_name:, due_on:, pending:, present: count,
+                  material_name:, material_category:)
         end
       end
 
       private
 
-      # Les assignations actives des classes actives de l'année où il enseigne, d'un exercice de sa matière.
-      def assignments(teacher_id, today)
+      # Les assignations actives des classes actives de l'année où il enseigne dans cet établissement, d'un exercice de l'une
+      # de ses matières de cet établissement (ADR-0103) : une matière retirée sort des « Activités », l'assignation reste.
+      def assignments(teacher_id, school_id, today)
         Orm::ClassroomAssignment.joins(:classroom).joins(AssignmentFollowUpQuery::EXERCISE)
                                 .where(status: "active", due_on: (today - BEHIND)..(today + AHEAD),
-                                       classrooms: { status: "active", school_year: Entities::Classroom::SchoolYear.current(today),
+                                       classrooms: { school_id:, status: "active", school_year: Entities::Classroom::SchoolYear.current(today),
                                                      id: Orm::TeacherClassroom.where(teacher_id:).select(:classroom_id) },
-                                       courses: { material_id: Orm::TeacherProfile.where(user_id: teacher_id).select(:material_id) })
+                                       courses: { material_id: Orm::TeacherSchoolMaterial.where(teacher_id:, school_id:).select(:material_id) })
                                 .order(:due_on, "classrooms.name", :id)
                                 .pluck(*COLUMNS)
       end

@@ -6,12 +6,12 @@ fr:
       kinds:
         essentials:
           title: "Format du fichier"
-          intro_html: "Un fichier JSON au format <code class=\"font-mono text-xs text-ink\">lnclass.essentials</code>, version 1. La clé <code class=\"font-mono text-xs text-ink\">course</code> de l'enveloppe désigne le cours par son slug ; chaque élément de <code class=\"font-mono text-xs text-ink\">essentials</code> est une fiche essentielle avec ses exercices, qui entre entière, ou pas du tout."
-          course: "Cours cible :"
+          intro_html: "Un fichier JSON au format <code class=\"font-mono text-xs text-ink\">lnclass.essentials</code>, version 1. La clé <code class=\"font-mono text-xs text-ink\">course</code> de l'enveloppe désigne la fiche de cours par son slug ; chaque élément de <code class=\"font-mono text-xs text-ink\">essentials</code> est une fiche de révision avec ses exercices, qui entre entière, ou pas du tout."
+          course: "Fiche de cours cible :"
           course_hint: "à recopier tel quel dans la clé course de l'enveloppe."
-          no_course_html: "Citez le cours cible par son slug, dans la clé <code class=\"font-mono text-xs text-ink\">course</code> : c'est la fin de l'adresse de sa page, après <code class=\"font-mono text-xs text-ink\">/courses/</code>. Un slug inconnu fait rejeter tout le fichier."
+          no_course_html: "Citez la fiche de cours cible par son slug, dans la clé <code class=\"font-mono text-xs text-ink\">course</code> : c'est la fin de l'adresse de sa page, après <code class=\"font-mono text-xs text-ink\">/courses/</code>. Un slug inconnu fait rejeter tout le fichier."
           nodes:
-            essential: "Fiche essentielle"
+            essential: "Fiche de révision"
             exercise: "Exercice"
             question: "Question"
             answer: "Proposition"
@@ -22,7 +22,7 @@ fr:
             answer: "answers[]"
           keys:
             essential:
-              name: "Nom de la fiche essentielle. Obligatoire, 150 caractères au plus, unique dans son cours."
+              name: "Nom de la fiche de révision. Obligatoire, 150 caractères au plus, unique dans sa fiche de cours."
               subtitle: "Sous-titre. Facultatif, 150 caractères au plus."
               content: "Contenu HTML. Facultatif ; le HTML est assaini."
               exercises: "Ses exercices, dans l'ordre. Facultatifs."
@@ -33,11 +33,13 @@ fr:
               questions: "Ses questions, dans l'ordre. Au moins une."
             question:
               content: "Énoncé. Obligatoire."
-              question_type: "true_false, single_choice, multiple_correct_2 ou multiple_correct_3. Vrai/Faux : 2 propositions dont 1 correcte ; sinon 1, 2 ou 3 correctes, et au moins une incorrecte en plus."
+              question_type: "true_false, single_choice, multiple_correct_2, multiple_correct_3, fill_blank, numeric, ordering ou matching. Vrai/Faux : 2 propositions dont 1 correcte ; choix : 1, 2 ou 3 correctes, et au moins une incorrecte en plus. Les quatre derniers : voir les exemples ci-dessous."
               explanation: "Explication de la correction. Facultative."
+              tolerance: "numeric seulement : la marge acceptée autour de la valeur (0.1). Facultative : sans elle, seule la valeur exacte est juste."
               answers: "Ses propositions, dans l'ordre."
             answer:
               content: "Texte de la proposition. Obligatoire, 500 caractères au plus."
-              correct: "true si la proposition est correcte ; false par défaut."
+              correct: "true si la proposition est correcte ; false par défaut. Inutile hors choix : chaque élément y est juste."
+              match: "matching seulement : le côté droit de la paire, content étant le côté gauche. 500 caractères au plus."
           example: "Exemple minimal"
-          drafts: "Tout arrive en brouillon, à la suite des fiches essentielles du cours, quelle que soit la clé status du fichier : relisez, puis publiez. Une fiche essentielle déjà présente dans ce cours (même nom, sans tenir compte des accents, de la casse ni des espaces) est ignorée et comptée ; elle n'est jamais modifiée."
+          drafts: "Tout arrive en brouillon, à la suite des fiches de révision de la fiche de cours, quelle que soit la clé status du fichier : relisez, puis publiez. Une fiche de révision déjà présente dans cette fiche de cours (même nom, sans tenir compte des accents, de la casse ni des espaces) est ignorée et comptée ; elle n'est jamais modifiée."

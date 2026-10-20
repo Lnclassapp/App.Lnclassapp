@@ -1,0 +1,15 @@
+<%# 🌐 UI · classroom/classroom_students/show — fiche d'un élève dans sa classe (CL-13, AS-24), enseignant de la classe et équipe %>
+<%# Rôle : une colonne : en-tête, chiffres et badges de la classe, exercices de la classe, « fait seul » sur 30 jours, « Gérer » %>
+<%# ADR  : 0097 · UDR : 0107 · lisible sans JavaScript ; aucun numéro complet, aucun badge ni session d'une autre classe %>
+<% file = @file %>
+<% page_title t(".title", name: file.student.display_name, classroom: @header.name) %>
+<% content_for :nav_key, "classrooms" %>
+<%= ui_back_link @header.name, href: classroom_path(@header.public_id) %>
+
+<div class="space-y-8">
+  <%= render "identity", classroom: @header, student: file.student %>
+  <%= render "summary", file: %>
+  <%= render "assignments", classroom: @header, assignments: file.assignments %>
+  <%= render "self_practice", rows: file.self_practice, total: file.self_practice_total %>
+  <%= render "manage", classroom: @header, student: file.student, can_remove: @can_remove %>
+</div>

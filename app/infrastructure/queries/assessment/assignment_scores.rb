@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Assessment::AssignmentScores
 # Rôle : lecture socle de la compréhension : scores des sessions faites (remédiation comprise) de chaque élève présent, sa première et sa meilleure session
-# ADR  : 0026, 0048, 0072, 0079 · une requête, quel que soit le nombre d'assignations ou d'élèves ; aucun cache
+# ADR  : 0026, 0048, 0072, 0079, 0097 (§4.3) · une requête, quel que soit le nombre d'assignations ou d'élèves ; aucun cache
 module Queries
   module Assessment
     module AssignmentScores
@@ -12,11 +12,13 @@ module Queries
       # « Fait » et « présent » : la définition de l'ADR-0072 §4.4, lue sur AssignmentFollowUpQuery.present_students.
       # Une session de remédiation sur l'exercice assigné, c'est faire cet exercice : elle compte (ADR-0079 §4.1).
       # Index : index_exercise_sessions_on_classroom_assignment_id (le partiel handed_in ne couvre que kind = 'standard').
-      def self.for(classroom_id:, assignment_ids:)
+      # student_id : la fiche d'un élève (ADR-0097 §4.3) ne lit que lui, présent ; nil, toute la classe.
+      def self.for(classroom_id:, assignment_ids:, student_id: nil)
         return {} if assignment_ids.empty?
 
-        Orm::ExerciseSession.where(classroom_assignment_id: assignment_ids, status: "completed",
-                                   student_id: Queries::Classroom::AssignmentFollowUpQuery.present_students(classroom_id).select(:student_id))
+        present = Queries::Classroom::AssignmentFollowUpQuery.present_students(classroom_id)
+        present = present.where(student_id:) if student_id
+        Orm::ExerciseSession.where(classroom_assignment_id: assignment_ids, status: "completed", student_id: present.select(:student_id))
                             .order(:classroom_assignment_id, :student_id, :completed_at, :id)
                             .pluck(:classroom_assignment_id, :student_id, :id, :score_percent)
                             .group_by(&:first)

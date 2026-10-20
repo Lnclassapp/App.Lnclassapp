@@ -1,11 +1,11 @@
 <%# 🌐 UI · teams/imports/kinds/_exercises — aide de l'import des exercices d'une fiche essentielle, dans la modale de téléversement %>
 <%# Rôle : slug de la fiche essentielle cible reçu en paramètre, clés acceptées à chaque étage, exemple minimal, brouillon et doublons %>
-<%# ADR  : 0035, 0039 · UDR : 0040 %>
+<%# ADR  : 0035, 0039, 0091 · UDR : 0040 %>
 <% essential = params[:essential].to_s.parameterize.presence %>
 <% own = ->(*keys) { keys.to_h { [ it, [ it ] ] } } %>
 <% tree = { "exercise" => UseCases::Assessment::ImportExercises::ALIASES.merge(own.("description", "exercise_type", "questions")),
-            "question" => own.("content", "question_type", "explanation", "answers"),
-            "answer" => { "content" => %w[content], "correct" => %w[correct is_correct] } } %>
+            "question" => own.("content", "question_type", "explanation", "tolerance", "answers"),
+            "answer" => { "content" => %w[content], "correct" => %w[correct is_correct], "match" => %w[match] } } %>
 <section id="import-help-exercises" aria-labelledby="import-help-exercises-title" class="space-y-4 rounded-ln bg-mist p-4 text-sm">
   <h3 id="import-help-exercises-title" class="font-medium text-ink"><%= t(".title") %></h3>
   <p class="text-mute"><%= t(".intro_html") %></p>
@@ -60,6 +60,7 @@
   ]
 }</code></pre>
   </div>
+  <%= render "teams/imports/question_examples" %>
 
   <div class="flex items-start gap-2 text-ink">
     <%= ui_icon "information-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-brand" %>

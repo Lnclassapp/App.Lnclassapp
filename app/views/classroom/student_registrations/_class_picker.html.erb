@@ -1,25 +1,79 @@
-<%# 🌐 UI · classroom/student_registrations/_class_picker — la cascade DRENA → établissement → niveau → classe %>
-<%# Rôle : quatre listes enchaînées (Stimulus classroom--class-picker sur le formulaire hôte), chaque frame vide tant que son parent n'est pas choisi ; repli GET %>
-<%# ADR  : 0062, 0085 · UDR : 0024, 0081 (§3.3) %>
-<%# locals: (form:, drenas:, schools:, levels:, classrooms:, scope:) -%>
-<%# Partagé par l'inscription et par « Choisis ta classe » (UDR-0081 §3.5) : schools, levels, classrooms valent nil tant que
-    leur parent n'est pas choisi. Le formulaire hôte porte le contrôleur, ses trois adresses et la cible submit. %>
-<div class="space-y-4">
-  <div class="space-y-2">
-    <%= ui_field form, :drena_public_id, as: :select, label: t(".drena"), required: true,
-                 choices: drenas.map { [ it.name, it.public_id ] }, prompt: t(".drena_prompt"),
-                 data: { action: "change->classroom--class-picker#loadSchools" } %>
-    <%# Repli sans JavaScript : la page revient en GET avec les choix faits, et le serveur rend la liste suivante. %>
-    <noscript>
-      <%= ui_button t(".continue"), type: :submit, variant: :secondary, size: :sm, icon_end: "arrow-right",
-                                    formaction: url_for(action: :new), formmethod: :get, formnovalidate: true %>
-    </noscript>
-  </div>
+<%# 🌐 UI · classroom/student_registrations/_class_picker — la cascade en trois étapes numérotées : établissement, niveau, classe %>
+<%# Rôle : établissement connu replié en une ligne avec « Changer » (DRENA et établissement en listes derrière) ; niveaux en pastilles, classes en cases ; repli GET %>
+<%# ADR  : 0062, 0085, 0095 · UDR : 0024, 0081 (§3.3), 0091, 0102 (§3.1) %>
+<%# locals: (form:, drenas:, schools:, levels:, classrooms:, scope:, framed: false, current_classroom_public_id: nil) -%>
+<%# Partagé par l'inscription et par « Choisis ta classe » (UDR-0081 §3.5, UDR-0091 §3.4) : schools, levels, classrooms valent nil tant que
+    leur parent n'est pas choisi. Le formulaire hôte porte le contrôleur, ses trois adresses et la cible submit. framed : chaque étape
+    dans sa carte (« Choisis ta classe ») ; sans, les étapes se suivent dans la carte de l'inscription. current_classroom_public_id :
+    « Changer de classe » (UDR-0102 §3.1) marque la classe actuelle ; l'hôte l'ajoute aussi (current=) à l'adresse du cadre des classes. %>
+<% registration = form.object %>
+<%# Des niveaux listés : l'établissement envoyé appartient à sa DRENA (ClassPicker), la ligne repliée peut les nommer. Sans
+    l'un des deux (DRENA absente ou discordante), pas de ligne repliée : les deux listes restent ouvertes. %>
+<% drena = drenas.find { it.public_id == registration.drena_public_id } %>
+<% school = (schools&.find { it.public_id == registration.school_public_id } if drena && levels) %>
+<%# La carte entoure le fieldset : une légende posée sur une bordure de fieldset chevaucherait le haut de la carte. %>
+<% card_class = class_names(ComponentsHelper::CARD_BASE, ComponentsHelper::CARD_PADDINGS[:md]) if framed %>
+<% step_class = "flex min-w-0 flex-col" %>
+<% legend = lambda do |number, key|
+     tag.legend(class: "mb-3 flex items-center gap-2 font-display text-base font-bold text-ink") do
+       safe_join([ tag.span(number, class: "grid size-6 shrink-0 place-items-center rounded-full bg-brand-soft text-xs font-bold text-brand-strong"),
+                   t(".#{key}") ], " ")
+     end
+   end %>
+<%# Avec JavaScript, Chrome rend le <noscript> inline : dans un bloc, il laisserait une ligne vide. Les étapes sont donc des
+    colonnes flex (le <noscript> y devient un élément vide, sans hauteur), et le bouton porte lui-même son écart. %>
+<% continue_button = lambda do
+     tag.noscript do
+       ui_button t(".continue"), type: :submit, variant: :secondary, size: :sm, icon_end: "arrow-right", class: "mt-3",
+                                 formaction: url_for(action: :new), formmethod: :get, formnovalidate: true
+     end
+   end %>
 
-  <%= render template: "school/drena_schools/index",
-             locals: { schools:, drena_public_id: form.object.drena_public_id, registration: form.object, scope:, picker: true } %>
-  <%= render template: "school/school_levels/index", locals: { levels:, registration: form.object, scope: } %>
-  <%= render template: "school/level_classrooms/index", locals: { classrooms:, registration: form.object, scope: } %>
+<div class="space-y-4">
+  <%= tag.div class: card_class do %><%= tag.fieldset id: "class-picker-step-school", class: step_class do %>
+    <%= legend.call(1, :step_school) %>
+    <% if school %>
+      <div id="class-picker-school-summary" class="flex items-center gap-3" data-classroom--class-picker-target="schoolSummary">
+        <span class="grid size-12 shrink-0 place-items-center rounded-ln bg-brand-soft text-brand-strong" aria-hidden="true">
+          <%= ui_icon "building-library" %>
+        </span>
+        <div class="min-w-0 flex-1">
+          <p class="font-display text-base leading-tight font-bold text-ink"><%= school.name %></p>
+          <p class="mt-0.5 text-sm text-mute"><%= t(".drena_name", name: drena.name) %></p>
+        </div>
+        <%# Sans JavaScript, un lien vers la page avec la DRENA seule : les deux listes s'ouvrent, l'établissement à choisir. %>
+        <%= ui_button t(".change"), variant: :ghost, size: :sm, href: url_for(action: :new, scope => { drena_public_id: drena.public_id }),
+                                    "aria-label": t(".change_label"), data: { action: "classroom--class-picker#change" } %>
+      </div>
+    <% end %>
+    <%# Repliées, les deux listes restent dans le formulaire : leurs choix partent avec lui. %>
+    <%= tag.div id: "class-picker-school-fields", class: "space-y-4", hidden: school.present?,
+                data: { "classroom--class-picker-target": "schoolFields" } do %>
+      <div class="flex flex-col">
+        <%= ui_field form, :drena_public_id, as: :select, label: t(".drena"), required: true,
+                     choices: drenas.map { [ it.name, it.public_id ] }, prompt: t(".drena_prompt"),
+                     data: { action: "change->classroom--class-picker#loadSchools" } %>
+        <%# Repli sans JavaScript : la page revient en GET avec les choix faits, et le serveur rend la liste suivante. %>
+        <%= continue_button.call %>
+      </div>
+      <%= render template: "school/drena_schools/index",
+                 locals: { schools:, drena_public_id: registration.drena_public_id, registration:, scope:, picker: true } %>
+    <% end %>
+  <% end %><% end %>
+
+  <%= tag.div class: card_class do %><%= tag.fieldset id: "class-picker-step-level", class: step_class do %>
+    <%= legend.call(2, :step_level) %>
+    <%= render template: "school/school_levels/index", locals: { levels:, registration:, scope: } %>
+    <%# Vide tant que l'établissement n'est pas choisi (et aussitôt vidé par « Changer ») : peer-empty, sans JavaScript. %>
+    <p class="hidden text-sm text-mute peer-empty:block peer-aria-busy:hidden"><%= t(".school_first") %></p>
+    <%= continue_button.call if levels.present? %>
+  <% end %><% end %>
+
+  <%= tag.div class: card_class do %><%= tag.fieldset id: "class-picker-step-classroom", class: step_class do %>
+    <%= legend.call(3, :step_classroom) %>
+    <%= render template: "school/level_classrooms/index", locals: { classrooms:, registration:, scope:, current: current_classroom_public_id } %>
+    <p class="hidden text-sm text-mute peer-empty:block peer-aria-busy:hidden"><%= t(".level_first") %></p>
+  <% end %><% end %>
 
   <%# Une liste qui n'arrive pas (réseau, réponse sans son frame) : le contrôleur pose cet état dans le frame, son adresse en reprise. %>
   <template data-classroom--class-picker-target="loadError">

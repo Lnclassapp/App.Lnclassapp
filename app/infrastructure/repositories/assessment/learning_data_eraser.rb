@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::LearningDataEraser
-# Rôle : efface ligne par ligne les sessions, réponses, badges et lacunes d'un élève supprimé, dans l'ordre des clés restrict
-# ADR  : 0036 (amendement 2), 0043
+# Rôle : efface ligne par ligne les sessions, réponses, badges, lacunes et fiches ouvertes d'un élève supprimé, dans l'ordre des clés restrict
+# ADR  : 0036 (amendement 2), 0043, 0090 (§4.1)
 module Repositories
   module Assessment
     class LearningDataEraser
@@ -24,6 +24,7 @@ module Repositories
         sessions.where.not(knowledge_gap_id: nil).update_all(kind: "standard", knowledge_gap_id: nil)
         Orm::QuestionAttempt.where(exercise_session_id: sessions.select(:id)).delete_all
         Orm::ExerciseBadge.where(student_id:).delete_all
+        Orm::EssentialRead.where(student_id:).delete_all
         gaps.delete_all
         sessions.delete_all
         true

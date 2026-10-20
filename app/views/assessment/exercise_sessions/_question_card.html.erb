@@ -1,44 +1,37 @@
 <%# 🌐 UI · assessment/exercise_sessions/_question_card — une question à répondre, dans le frame « question » %>
-<%# Rôle : radios (Vrai/Faux, choix unique) ou cases à cocher et « Coche N propositions. » (plusieurs correctes) ; aucune correction %>
-<%# ADR  : 0054 · UDR : 0007, 0022, 0057 · Stimulus : math (KaTeX) %>
-<% errors = form ? form.errors[:answer_ids] + form.errors[:base] : [] %>
-<%= turbo_frame_tag "question" do %>
-  <%= ui_card padding: :none, id: "question-card", class: "overflow-hidden" do %>
-    <div class="border-b border-line bg-mist px-4 py-3 sm:px-6">
-      <span class="text-sm font-medium text-mute"><%= t(".number", number: question.number, total: play.question_count) %></span>
-    </div>
+<%# Rôle : « Question n sur T », son image éventuelle, l'énoncé, la saisie de son type (kinds/_<type>), « Valider » collé en bas, désactivé tant que la réponse est incomplète %>
+<%# ADR  : 0054, 0091 §4.4 (aucune correction, aucun id révélateur), 0105 · UDR : 0007, 0022, 0057, 0087 §3.2, §3.4, 0129 · Stimulus : math, assessment--answer %>
+<%# locals: (play:, question:, form:) -%>
+<% errors = form ? form.errors[:answer_ids] + form.errors[:response_text] + form.errors[:display_order] + form.errors[:base] : [] %>
+<%= turbo_frame_tag "question", class: "flex flex-1 flex-col" do %>
+  <%# data-counter : « n/T » que « Question suivante » recopie dans l'en-tête, la question arrivant sans requête (UDR-0076 §3.3). %>
+  <div id="question-card" class="flex flex-1 flex-col" data-counter="<%= t("assessment.exercise_sessions.progress_bar.counter", number: question.number, total: play.question_count) %>">
     <%= form_with scope: :attempt, url: exercise_session_attempts_path(play.session_public_id), id: "attempt-form",
-                  class: "space-y-6 p-4 sm:p-6", data: { controller: "math" } do |f| %>
+                  class: "flex flex-1 flex-col", data: { controller: "math assessment--answer",
+                                                         action: "input->assessment--answer#check change->assessment--answer#check" } do |f| %>
       <%= f.hidden_field :question_id, value: question.id %>
-      <fieldset class="space-y-4" <%= tag.attributes("aria-describedby": ("attempt-errors" if errors.any?)) %>>
-        <legend class="text-lg font-semibold whitespace-pre-line text-ink"><%= question.content %></legend>
-        <% if question.multiple? %>
-          <p class="text-sm text-mute"><%= t(".hint", count: question.expected_count) %></p>
-        <% end %>
-        <div class="space-y-3">
-          <% question.answers.each do |answer| %>
-            <label class="flex min-h-tap cursor-pointer items-center gap-3 rounded-ln border border-line bg-white px-4 py-3 transition hover:bg-mist has-checked:border-brand has-checked:bg-brand-soft">
-              <% if question.multiple? %>
-                <%= check_box_tag "attempt[answer_ids][]", answer.id, false, id: "attempt_answer_#{answer.id}", class: ComponentsHelper::FIELD_CHECKBOX %>
-              <% else %>
-                <%= radio_button_tag "attempt[answer_ids][]", answer.id, false, id: "attempt_answer_#{answer.id}",
-                                     class: "size-5 shrink-0 cursor-pointer accent-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
-              <% end %>
-              <span class="font-medium text-ink"><%= answer.content %></span>
-            </label>
-          <% end %>
-        </div>
+      <p class="mb-2 text-xs font-bold tracking-wide text-mute uppercase"><%= t(".number", number: question.number, total: play.question_count) %></p>
+      <%# Avant le fieldset : la legend, rendue par le partial du type, en reste le premier enfant (UDR-0129 §3.4). %>
+      <% if (image = question.image) %>
+        <%= tag.img src: question_image_path(image.public_id), alt: image.alt.to_s, width: image.width, height: image.height,
+                    loading: "lazy", decoding: "async", class: "mb-4 h-auto max-h-72 w-full rounded-ln bg-mist object-contain" %>
+      <% end %>
+      <%# La légende (l'énoncé) est rendue par le partial du type : celle des trous est la consigne, la phrase porte le champ. %>
+      <fieldset class="min-w-0 space-y-4" <%= tag.attributes("aria-describedby": ("attempt-errors" if errors.any?)) %>>
+        <%= render "assessment/exercise_sessions/kinds/#{question.kind_name}", f:, question: %>
       </fieldset>
       <% if errors.any? %>
-        <div id="attempt-errors" role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+        <div id="attempt-errors" role="alert" class="mt-4 flex items-start gap-2 rounded-ln bg-warning-soft px-4 py-3 text-sm font-medium text-warning">
           <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
           <p><%= errors.to_sentence %></p>
         </div>
       <% end %>
-      <%# Pleine largeur sous 640 px : le pouce l'atteint des deux côtés. %>
-      <div class="border-t border-line pt-4 sm:flex sm:justify-end">
-        <%= ui_button t(".submit"), type: :submit, icon_end: "arrow-right", class: "w-full sm:w-auto" %>
+      <%# UDR-0087 §3.2 : collé en bas, au-dessus de la zone sûre ; pleine largeur, le pouce l'atteint des deux côtés. Sans
+          JavaScript, il reste actif : le serveur refuse une réponse incomplète (422). %>
+      <div class="sticky bottom-0 z-10 -mx-gutter mt-auto bg-paper px-gutter pt-6 pb-safe-action min-[700px]:mx-0 min-[700px]:px-0">
+        <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, full: true,
+                                    data: { assessment__answer_target: "submit" } %>
       </div>
     <% end %>
-  <% end %>
+  </div>
 <% end %>

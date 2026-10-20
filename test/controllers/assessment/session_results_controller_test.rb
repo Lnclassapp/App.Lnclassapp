@@ -48,15 +48,17 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
   def progress(key, **) = I18n.t("#{scope}.progress.#{key}", **)
 
-  test "l'élève voit sa note sur 20, sa maîtrise, son badge, « Félicitations ! » et les confettis, sans score redit" do
+  # UDR-0087 §3.6 : « Félicitations ! », la note verte et les confettis à partir de 14/20 ; 10/20 lit « Courage ! ».
+  test "l'élève voit sa note sur 20, sa maîtrise, son badge, « Courage ! » sous 14/20, sans score redit" do
     sign_in_as @student
 
     show
 
     assert_response :success
     assert_select "title", text: /Méiose/
-    assert_select "h1", text: I18n.t("#{scope}.show.headline.success")
-    assert_select "[data-controller='assessment--confetti']", 1
+    assert_select "h1", text: I18n.t("#{scope}.show.headline.error")
+    assert_select "[data-controller='assessment--confetti']", 0
+    assert_select "#session_grade.text-success", 0
     assert_select "#session_result", text: /10\/20/
     # UDR-0023, amendement du 2026-10-02 : la note sur 20 seule dit le résultat de l'élève — ni score, ni questions justes (R6).
     assert_select "#session_result dl dt", 2
@@ -73,6 +75,31 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # CA-11 : 16/20, « Félicitations ! », la note verte et les confettis.
+  test "à 16/20, « Félicitations ! », la note verte et les confettis" do
+    @session.update!(score_percent: 80)
+    sign_in_as @student
+
+    show
+
+    assert_select "h1", text: I18n.t("#{scope}.show.headline.success")
+    assert_select "#session_grade.text-success", text: "16/20"
+    assert_select "[data-controller='assessment--confetti']", 1
+  end
+
+  # UDR-0087 §3.6 : dès « 14/20 » affiché, la règle de l'historique, de « Ma classe » et de l'accueil.
+  test "70 % et 68 % s'affichent 14/20, « Félicitations ! » en vert ; 67 % s'affiche 13/20, « Courage ! »" do
+    sign_in_as @student
+
+    { 70 => [ "14/20", :success ], 68 => [ "14/20", :success ], 67 => [ "13/20", :error ] }.each do |score, (grade, tone)|
+      @session.update!(score_percent: score)
+      show
+      assert_select "h1", text: I18n.t("#{scope}.show.headline.#{tone}")
+      assert_select "#session_grade#{".text-success" if tone == :success}", text: grade
+      assert_select "#session_grade.text-success", 0 if tone == :error
+    end
+  end
+
   test "la revue de l'élève : ses choix, le verdict et l'explication, jamais une proposition juste qu'il n'a pas choisie" do
     sign_in_as @student
 
@@ -82,14 +109,14 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
       assert_select "*", text: /#{I18n.t("#{scope}.question_review.verdict.error")}/
       assert_select "*", text: /Combien de cellules donne la méiose \?/
       assert_select "*", text: /Quatre cellules filles\./
-      assert_select "li", text: wrong(@first).content, count: 1
-      # Le choix dans un span : un `li.flex` ferait du texte et de chaque formule KaTeX autant de colonnes (2026-10-06).
-      assert_select "li.flex > span.min-w-0", text: wrong(@first).content, count: 1
+      # UDR-0087 §3.6 : « Ton choix : … », ses seules propositions cochées.
+      assert_select "p", text: /#{I18n.t("#{scope}.question_review.selected")} :/
+      assert_select "strong > span", text: wrong(@first).content, count: 1
     end
     assert_select "#question_review_#{@second.id}", text: /#{I18n.t("#{scope}.question_review.verdict.success")}/
     assert_no_match right(@first).content, response.body
     assert_no_match(/#{I18n.t("#{scope}.question_review.correct")}|data-correct/, response.body)
-    assert_select "#question_review_#{@first.id} li", 1
+    assert_select "#question_review_#{@first.id} strong", 1
     # La correction se lit sans phrase d'aide (R4), 3 cartes puis « Voir plus » (R3) : 2 cartes ici, aucun bouton.
     assert_select "#session_review p", text: I18n.t("#{scope}.show.review_hint_student"), count: 0
     assert_select "#session_review[data-controller=reveal][data-reveal-step-value='3']"
@@ -183,6 +210,19 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "form[action='#{exercise_sessions_path(@exercise.public_id)}']", 0
   end
 
+  # ADR-0106 §4.3 : le Diamant est le sans-faute, pas une note. 98 % s'affiche 20/20 mais reste Or et garde « Recommencer ».
+  test "98 % s'affiche 20/20 : Or, pas Diamant, et « Recommencer » reste" do
+    almost = complete(score_percent: 98)
+    create_badge(student: @student, exercise: @exercise, level: "gold", session: almost)
+    sign_in_as @student
+
+    show almost
+
+    assert_select "#session_result", text: /20\/20/
+    assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Or")
+    assert_select "button[type=submit]", text: I18n.t("#{scope}.show.restart")
+  end
+
   test "progrès : aucune phrase à la première session" do
     sign_in_as @student
 
@@ -199,7 +239,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     expected = "Tu progresses : 6/20 à ta première session, 18/20 aujourd'hui."
     assert_equal expected, progress(:progress, first: 6, current: 18)
-    assert_select "#session_result dl + p#session_progress + div form#restart-exercise-form"
+    assert_select "#session_result + p#session_progress + div form#restart-exercise-form"
     assert_select "p#session_progress.text-sm.text-ink", text: expected
     assert_select "#session_progress svg.text-success[aria-hidden=true]", 1
   end
@@ -292,5 +332,98 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#session_progress", 0
+  end
+
+  # UDR-0120, ADR-0101 §4.3 : une ligne dit à l'élève ce qu'il advient de sa fiche ; l'enseignant et l'équipe ne la lisent pas.
+  def gap_outcome(key, **) = I18n.t("#{scope}.gap_outcome.#{key}", **)
+
+  def failed_then_remediated(score_percent)
+    @session.update!(score_percent: 30)
+    gap = create_gap(student: @student, essential: @essential, source_session: @session)
+    travel 1.minute
+    [ gap, complete(score_percent:, gap:) ]
+  end
+
+  test "fiche : la session qui ouvre la lacune le dit à l'élève, avec la règle sur 20 et le lien vers la fiche" do
+    failed_then_remediated(70)
+    sign_in_as @student
+
+    show
+
+    assert_select "#session_gap_outcome.bg-warning-soft" do
+      assert_select "p.font-bold", text: "Cette fiche de révision passe à revoir."
+      assert_select "p", text: "Relis « Division cellulaire », puis obtiens au moins 15/20 à l'un de ses exercices."
+      assert_select "a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']", text: "Revoir la fiche de révision"
+    end
+    assert_no_match(/75 %/, response.body)
+  end
+
+  test "fiche : une remédiation à 14/20 garde « Félicitations ! » et ses confettis, et dit « Encore à revoir »" do
+    _, remediation = failed_then_remediated(70)
+    sign_in_as @student
+
+    show remediation
+
+    assert_select "h1", text: I18n.t("#{scope}.show.headline.success")
+    assert_select "[data-controller='assessment--confetti']", 1
+    assert_select "#session_gap_outcome p.font-bold", text: gap_outcome("still_pending.message")
+    assert_select "#session_gap_outcome p", text: "Pour lever « Division cellulaire », vise au moins 15/20."
+    assert_select "#session_gap_outcome a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']",
+                  text: "Revoir la fiche de révision"
+  end
+
+  # Décision du porteur (2026-10-19, ADR-0101 §4.5) : 74 % s'affiche 15/20, la note lue fait foi et lève la fiche.
+  test "fiche : une remédiation à 74 % lit 15/20 et « Fiche de révision levée ! » : la note et l'effet sur la fiche s'accordent" do
+    gap, remediation = failed_then_remediated(74)
+    decision = Entities::Assessment::GapDecision.call(score_percent: 74, pending_gap: gap, session_kind: remediation.kind)
+    assert_equal :remediated, decision
+    gap.update!(status: decision.to_s, resolved_at: Time.current, resolved_by_session: remediation)
+    sign_in_as @student
+
+    show remediation
+
+    assert_select "*", text: /15\s*\/\s*20/
+    assert_select "#session_gap_outcome.bg-success-soft p.font-bold", text: "Fiche de révision levée !"
+    assert_select "#session_gap_outcome a", 0
+  end
+
+  test "fiche : la remédiation qui lève la fiche lit « Fiche de révision levée ! », sans lien, après la phrase de progrès" do
+    gap, remediation = failed_then_remediated(80)
+    gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: remediation)
+    sign_in_as @student
+
+    show remediation
+
+    assert_select "#session_gap_outcome.bg-success-soft" do
+      assert_select "p.font-bold", text: "Fiche de révision levée !"
+      assert_select "p", text: "« Division cellulaire » n'est plus à revoir."
+      assert_select "a", 0
+    end
+    assert_match(/id="session_progress".*id="session_gap_outcome"/m, response.body)
+  end
+
+  test "fiche : relu après une levée par une autre session, le résultat d'une remédiation ne dit rien de la fiche" do
+    gap, short = failed_then_remediated(60)
+    travel 1.minute
+    gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: complete(score_percent: 90, gap:))
+    sign_in_as @student
+
+    show short
+
+    assert_select "#session_gap_outcome", 0
+  end
+
+  test "fiche : l'enseignant et l'équipe ne lisent pas la ligne de l'élève" do
+    gap, remediation = failed_then_remediated(80)
+    gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: remediation)
+
+    [ create_teacher(classrooms: [ @classroom ]), create_team_member ].each do |reader|
+      sign_in_as reader
+
+      show remediation
+
+      assert_response :success
+      assert_select "#session_gap_outcome", 0
+    end
   end
 end

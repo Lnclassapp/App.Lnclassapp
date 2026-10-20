@@ -91,6 +91,21 @@ module Dtos
         assert_equal [ [ "Vrai", true ] ], input.questions.first.answers.map { [ it.content, it.correct ] }
       end
 
+      # ADR-0091 §4.5 : la marge d'un nombre et le côté droit d'une paire reviennent dans le formulaire d'édition.
+      test "from_exercise rend la marge en décimal lisible et le côté droit des paires" do
+        number = Entities::Assessment::Question.new(id: 4, position: 1, content: "Q", explanation: nil, question_type: "numeric",
+                                                    numeric_tolerance: BigDecimal("0.25"),
+                                                    answers: [ Entities::Assessment::Answer.new(id: 5, position: 1, content: "3,5", correct: true) ])
+        pair = Entities::Assessment::Answer.new(id: 6, position: 1, content: "a", correct: true, match_content: "A")
+        exercise = Entities::Assessment::Exercise.new(title: "Méiose", exercise_type: "fixation",
+                                                      questions: [ number, number.with(question_type: "matching", numeric_tolerance: nil, answers: [ pair ]) ])
+
+        first, second = ExerciseInput.from_exercise(exercise).questions
+        assert_equal [ "0.25", nil ], [ first.numeric_tolerance, second.numeric_tolerance ]
+        assert_equal [ "A" ], second.answers.map(&:match_content)
+        assert_equal BigDecimal("0.25"), first.to_entity(position: 1).numeric_tolerance
+      end
+
       test "une erreur de structure posée sur « questions[1] » se traduit sans lire d'attribut de ce nom" do
         input = ExerciseInput.new(title: "Méiose", exercise_type: "fixation")
         input.errors.add(:"questions[1]", :wrong_correct_count)
@@ -98,6 +113,32 @@ module Dtos
         assert_equal [ I18n.t("activemodel.errors.models.dtos/assessment/exercise_input.attributes.questions.wrong_correct_count") ],
                      input.errors[:"questions[1]"]
         assert_equal "Méiose", input.read_attribute_for_validation(:title)
+      end
+
+      # ADR-0105 : l'image d'une question (son adresse, son texte de remplacement) et l'image annoncée par l'import.
+      test "une question porte son image et sa description, jusqu'à l'entité et retour" do
+        questions = params[:questions_attributes].dup
+        questions["0"] = questions["0"].merge(image_public_id: " ImAgE000000001 ", image_alt: "  Une pile  ", image_description: " Un circuit ")
+        input = ExerciseInput.from_params(params(questions:))
+
+        assert input.valid?
+        question = input.question_entities.first
+        assert_equal Entities::Shared::ContentImage.new(public_id: "ImAgE000000001", alt: "Une pile"), question.image
+        assert_equal "Un circuit", question.image_description
+        assert_nil input.question_entities.last.image
+        assert_nil input.question_entities.last.image_description
+
+        back = ExerciseInput.from_exercise(Entities::Assessment::Exercise.new(title: "E", exercise_type: "fixation", questions: [ question ]))
+        assert_equal [ "ImAgE000000001", "Une pile", "Un circuit" ], back.questions.first.then { [ it.image_public_id, it.image_alt, it.image_description ] }
+      end
+
+      test "texte de remplacement et description de 150 caractères au plus" do
+        questions = params[:questions_attributes].dup
+        questions["0"] = questions["0"].merge(image_public_id: "ImAgE000000001", image_alt: "a" * 151, image_description: "b" * 151)
+        input = ExerciseInput.from_params(params(questions:))
+
+        assert_not input.valid?
+        assert_equal %i[image_alt image_description], input.questions.first.errors.attribute_names.sort
       end
     end
   end

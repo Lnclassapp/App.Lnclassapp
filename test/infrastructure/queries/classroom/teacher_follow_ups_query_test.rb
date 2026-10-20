@@ -16,7 +16,7 @@ module Queries
         @students = Array.new(3) { create_student(classroom: @classroom) }
       end
 
-      def follow_ups(teacher = @teacher) = TeacherFollowUpsQuery.new.call(teacher_id: teacher.id, today: @today)
+      def follow_ups(teacher = @teacher, school: @school) = TeacherFollowUpsQuery.new.call(teacher_id: teacher.id, school_id: school.id, today: @today)
 
       def svt_exercise(title) = create_exercise(title:, essential: create_essential(course: create_course(material: @svt, level: @tle)))
 
@@ -42,7 +42,8 @@ module Queries
 
         assert_equal [ "Respiration", "Photosynthèse" ], rows.map(&:exercise_title)
         assert_equal({ public_id: late.public_id, exercise_title: "Respiration", classroom_public_id: @classroom.public_id,
-                       classroom_name: "Tle D 2", due_on: @today - 1, pending: 3, present: 3 }, rows.first.to_h)
+                       classroom_name: "Tle D 2", due_on: @today - 1, pending: 3, present: 3, material_name: "SVT",
+                       material_category: "science" }, rows.first.to_h)
         assert_equal [ 2, 3 ], rows.last.to_h.values_at(:pending, :present)
       end
 
@@ -121,6 +122,37 @@ module Queries
 
         assert_equal 4, follow_ups.size
         assert_equal one, count_queries { follow_ups }
+      end
+
+      # ME-07 (ADR-0094 §4.6) : les exercices à suivre de l'établissement courant seulement.
+      test "only the assignments of the current school" do
+        other = create_school
+        there = create_classroom(school: other, level: @tle, name: "Tle D 2", school_year: "2026-2027")
+        add_teacher_school(@teacher, other)
+        Orm::TeacherClassroom.create!(teacher: @teacher, classroom: there)
+        create_student(classroom: there)
+        here_assignment = assign("Ici", due_on: @today + 1)
+        there_assignment = assign("Là-bas", due_on: @today + 1, classroom: there)
+
+        assert_equal [ here_assignment.public_id ], follow_ups.map(&:public_id)
+        assert_equal [ there_assignment.public_id ], follow_ups(school: other).map(&:public_id)
+      end
+
+      # EPM-16, EPM-17 (ADR-0103, memo Q9) : ses matières de l'établissement ; une matière retirée sort des « Activités ».
+      test "the assignments of each of his subjects; a subject removed takes its assignment out, which stays active" do
+        maths = create_material(name: "Mathématiques")
+        set_teacher_materials(@teacher, @school, [ @svt, maths ])
+        exercise = create_exercise(title: "Équations", essential: create_essential(course: create_course(material: maths, level: @tle)))
+        assignment = assign("Équations", due_on: @today + 1, exercise:)
+        assign("Photosynthèse", due_on: @today + 2)
+
+        assert_equal [ "Équations", "Photosynthèse" ], follow_ups.map(&:exercise_title)
+        assert_equal "Mathématiques", follow_ups.first.material_name
+
+        set_teacher_materials(@teacher, @school, [ @svt ])
+
+        assert_equal [ "Photosynthèse" ], follow_ups.map(&:exercise_title)
+        assert_equal "active", assignment.reload.status
       end
 
       test "a teacher without a classroom has nothing to follow" do

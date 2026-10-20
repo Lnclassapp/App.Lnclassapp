@@ -46,7 +46,7 @@
 | ☑ | TR-01 | Landing et modales élève / enseignant | ✅ | V0 (squelette, garde-fou n° 7) — livrée 2026-09-25 (#6) · V1 (contenu) — livrée 2026-09-27 (#33) | — |
 | ☑ | TR-26 | Mesure d'audience | ⚠️ | V0 (F-27) — livrée 2026-09-25 (#6) | Des identifiants en dur, sans consentement ni CSP |
 | ☑ | TR-31 | Purge horaire des jobs terminés | ⚠️ | V0 (F-30) — livrée 2026-09-25 (#6) | Un job récurrent qui dépend d'un worker jamais lancé |
-| ☑ | TR-32 | Cache des agrégats et référentiels | ✅ | V0 (installation) — livrée 2026-09-25 (#6) · V3 (rapports) | Un cache actif en production seulement |
+| ☑ | TR-32 | Cache des agrégats et référentiels | ✅ | V0 (installation) — livrée 2026-09-25 (#6) · V3 (rapports) : fermée sans cache, lecture en direct (ADR-0079 §4.6) | Un cache actif en production seulement |
 | ☑ | TR-34 | Sonde de santé `/up` | ❌ | V0 (garde-fou n° 6) — livrée 2026-09-25 (#6) | — |
 | ☑ | TR-35 | Refus des navigateurs anciens | ✅ | V0 (F-29) — livrée 2026-09-25 (#6) | Un 406 sur les Android d'entrée de gamme du public cible |
 | ☑ | TR-36 | Déploiement en production | ⚠️ | V0 (F-30) — livrée 2026-09-25 (#6) | Une configuration de déploiement non versionnée |
@@ -169,7 +169,7 @@
 |---|---|---|---|---|---|
 | ☑ | TR-02 | Redirection selon le rôle | ⚠️ | V1 (0b) (= ID-13) — livrée 2026-09-27 (#33) | La boucle infinie de l'enseignant sans école |
 | ☑ | TR-04 | Fil d'accueil élève | ❌ | V1 (Lot A / D, F-31) — livrée 2026-09-27 (#33) · annonces en V6 | Un écran d'accueil sans test système (il levait une exception sans alerte) |
-| ☑ | TR-05 | Fil d'accueil enseignant | ❌ | V1 (Lot D) — livrée 2026-09-27 (#33) · activité des élèves en V3 | Idem |
+| ☑ | TR-05 | Fil d'accueil enseignant | ❌ | V1 (Lot D) — livrée 2026-09-27 (#33) · activité des élèves en V3 : livrée 2026-10-07 (#183) par `interface-enseignant-organisation` | Idem |
 | ☑ | TR-09 | Fil d'accueil équipe | ✅ | V1 (Lot B, minimal) — livrée 2026-09-27 (#33) · V4 (`pilotage-equipe`) — livrée 2026-09-28 (#51) | — |
 | ☑ | TR-13 | « Configuration Plateforme » | ✅ | V1 (`referentiels-equipe`, ADR-0034) — livrée 2026-09-27 (#33) | — |
 | ☑ | TR-27 | Navigation par rôle | ⚠️ | V1 (Lot 0c, F-31) — livrée 2026-09-27 (#33) | 4 × 4 partials divergents |
@@ -240,19 +240,19 @@
 | ☐ | CL-02 | Modifier une classe | ❌ | V3 (`vie-de-la-classe`) — **déplacée de V1 le 2026-09-28** : aucun lot de la V1 ne la portait (ajout et retrait seulement, `classes-par-niveau`) ; elle touche au plafond et au code de l'ADR-0041 et à la numérotation de l'ADR-0059 | Un échec muet |
 | ☐ | CL-03 | Supprimer une classe | ⚠️ | V3 (`vie-de-la-classe` : archivage, F-19) | Une suppression définitive qui détruit l'historique des assignations |
 | ☑ | CL-05 | Partager le lien de classe sur WhatsApp | 💀 | V3 (`vie-de-la-classe`) — livrée 2026-09-28 (#71), hors ordre des vagues : chantier `croissance-parrainage` | — |
-| ☐ | CL-13 | Fiche d'un élève de sa classe | ❌ | V3 (`rapports-de-classe`) | — |
-| ☐ | CL-14 | Tableau de bord générique d'une classe | ❌ | V3, fusionné avec CL-10 | Une classe ouverte à tout connecté ; 3 compteurs sur 4 toujours vides |
-| ☐ | CL-15 | Liste paginée des élèves d'une classe | ⚠️ | V3 | Un cache de ligne jamais invalidé ; une liste ouverte à tout connecté |
+| ☐ | CL-13 | Fiche d'un élève de sa classe | ❌ | V3 (`rapports-de-classe`) — PR `rapports-de-classe` prête le 2026-10-16, à fusionner | — |
+| ☑ | CL-14 | Tableau de bord générique d'une classe | ❌ | V3, fusionné avec CL-10 — fermée par `rapports-de-classe` (memo Q7) : livrée par CL-10 (#33) et `rapports-exercices` (#164), sans chiffre de classe | Une classe ouverte à tout connecté ; 3 compteurs sur 4 toujours vides |
+| ☐ | CL-15 | Liste paginée des élèves d'une classe | ⚠️ | V3 (`rapports-de-classe`) — PR `rapports-de-classe` prête le 2026-10-16, à fusionner : liste par note sur 20, puis par trente | Un cache de ligne jamais invalidé ; une liste ouverte à tout connecté |
 
 ### Évaluation — `AS`
 
 | | ID | Feature | État ancien | Vague / précision | Ne pas reproduire |
 |---|---|---|---|---|---|
-| ☐ | AS-21 | Rapport de synthèse d'un exercice | ❌ | V3 (`rapports-de-classe`) | « Tentatives » qui compte des sessions ; des niveaux de badge affichés en anglais |
-| ☐ | AS-22 | Rapport détaillé par question et par élève | ❌ | V3 | Un taux de réussite qui dépasse 100 % dès qu'un élève recommence ; des questions numérotées par `id` |
-| ☐ | AS-23 | Message d'encouragement à l'enseignant | ❌ | V3 | 36 phrases en dur dans la vue |
-| ☐ | AS-24 | Détail d'un élève | ⚠️ | V3 (= CL-13) | Un mur de badges qui mélange toutes les classes |
-| ☐ | AS-25 | Compteurs de badges de la classe sur la carte | ⚠️ | V3 | Une requête par carte (N+1) |
+| ☑ | AS-21 | Rapport de synthèse d'un exercice | ❌ | V3 (`rapports-de-classe`) — livrée 2026-10-07 (#164) par `rapports-exercices` | « Tentatives » qui compte des sessions ; des niveaux de badge affichés en anglais |
+| ☐ | AS-22 | Rapport détaillé par question et par élève | ❌ | V3 — livrée en grande partie 2026-10-07 (#164) par `rapports-exercices` ; noms vers la fiche : PR `rapports-de-classe` prête le 2026-10-16, à fusionner | Un taux de réussite qui dépasse 100 % dès qu'un élève recommence ; des questions numérotées par `id` |
+| ☐ | AS-23 | Message d'encouragement à l'enseignant | ❌ | V3 — « prochain geste » en six cas : PR `rapports-de-classe` prête le 2026-10-16, à fusionner | 36 phrases en dur dans la vue |
+| ☐ | AS-24 | Détail d'un élève | ⚠️ | V3 (= CL-13) — PR `rapports-de-classe` prête le 2026-10-16, à fusionner | Un mur de badges qui mélange toutes les classes |
+| ☑ | AS-25 | Compteurs de badges de la classe sur la carte | ⚠️ | V3 — livrée 2026-10-07 (#164) par `rapports-exercices` | Une requête par carte (N+1) |
 
 
 ## V4 — Contenu à l'échelle et back-office équipe
@@ -267,17 +267,17 @@
 
 | | ID | Feature | État ancien | Vague / précision | Ne pas reproduire |
 |---|---|---|---|---|---|
-| ☐ | CA-02 | Filtrer par niveau ou matière | ⚠️ | V4 | — |
-| ☐ | CA-03 | Pagination infinie | 💀 | V4 | Un lien de page jamais rendu |
-| ☐ | CA-17 | Espace Niveau | ⚠️ | V4 (`catalogue-complet`) | — |
-| ☐ | CA-21 | Page matière | ⚠️ | V4 | — |
-| ☐ | CA-23 | Pages des séries | ❌ | V4 (`catalogue-complet`) — **déplacée de V2 le 2026-09-28** : page publique du catalogue, avec CA-17 et CA-21 | — |
+| ☑ | CA-02 | Filtrer par niveau ou matière | ⚠️ | V4 — livrée hors ordre, constatée le 2026-10-16 | — |
+| ☑ | CA-03 | Pagination infinie | 💀 | V4 — livrée hors ordre, constatée le 2026-10-16 | Un lien de page jamais rendu |
+| ☑ | CA-17 | Espace Niveau | ⚠️ | V4 (`catalogue-complet`) — livrée 2026-10-16 | — |
+| ☑ | CA-21 | Page matière | ⚠️ | V4 (`catalogue-complet`) — livrée 2026-10-16 | — |
+| ☑ | CA-23 | Pages des séries | ❌ | V4 (`catalogue-complet`) — **déplacée de V2 le 2026-09-28** : page publique du catalogue, avec CA-17 et CA-21 — livrée 2026-10-16 | — |
 
 ### Évaluation — `AS`
 
 | | ID | Feature | État ancien | Vague / précision | Ne pas reproduire |
 |---|---|---|---|---|---|
-| ☐ | AS-01 | Parcourir tous les exercices de la plateforme | ⚠️ | V4 (`catalogue-complet`) | Une page liée nulle part ; une carte mise en cache sans l'utilisateur ni le rôle dans la clé |
+| ☑ | AS-01 | Parcourir tous les exercices de la plateforme | ⚠️ | V4 (`catalogue-complet`) — fermée 2026-10-16 (page d'une fiche) | Une page liée nulle part ; une carte mise en cache sans l'utilisateur ni le rôle dans la clé |
 
 ### Transverse — `TR`
 

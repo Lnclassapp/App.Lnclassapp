@@ -1,0 +1,1094 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Ensemble des nombres réels",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "Mathématiques",
+      "series_name": "C",
+      "essentials": [
+        {
+          "name": "Les ensembles de nombres et leurs inclusions",
+          "subtitle": "Des entiers aux réels, en partant des ingrédients",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Reconnaître si un nombre est un entier naturel, un entier relatif, un décimal ou un rationnel.</li>\n<li>Savoir qu'un réel peut ne pas être rationnel, comme $\\sqrt{2}$.</li>\n<li>Utiliser les inclusions $\\mathbb{N}\\subset\\mathbb{Z}\\subset\\mathbb{D}\\subset\\mathbb{Q}\\subset\\mathbb{R}$.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Les ingrédients de la recette (les ensembles de nombres).</strong> Pour un gâteau, il faut $3$ œufs, un congélateur réglé à $-18$ °C, un quart de litre de lait et deux tiers de tasse de sucre. La diagonale d'un moule carré de côté $1$ dm mesure $\\sqrt{2}$ dm.</p>\n<p><em>Le pont.</em> $3$ œufs : un entier naturel. $-18$ °C : un entier relatif, car il peut être négatif. Un quart de litre, soit $0{,}25$ L : un décimal. Deux tiers de tasse : un rationnel qui n'est pas décimal. La diagonale $\\sqrt{2}$ : un réel qui n'est pas rationnel.</p>\n<p><em>Où l'image s'arrête.</em> La balance de cuisine n'affiche que des valeurs arrondies. Le nombre $\\sqrt{2}$ existe exactement, même si l'on ne peut afficher que $1{,}41$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Ensembles de nombres.</strong> $\\mathbb{N}$ : entiers naturels, $0$, $1$, $2$, ... ; $\\mathbb{Z}$ : entiers relatifs, positifs ou négatifs ; $\\mathbb{D}$ : décimaux, de la forme $\\frac{a}{10^n}$ avec $a\\in\\mathbb{Z}$ et $n\\in\\mathbb{N}$ ; $\\mathbb{Q}$ : rationnels, de la forme $\\frac{a}{b}$ avec $a\\in\\mathbb{Z}$, $b\\in\\mathbb{Z}$ et $b\\neq 0$ ; $\\mathbb{R}$ : réels, ceux que l'on peut placer sur une droite graduée.</p>\n<p><strong>Inclusions.</strong> $\\mathbb{N}\\subset\\mathbb{Z}\\subset\\mathbb{D}\\subset\\mathbb{Q}\\subset\\mathbb{R}$. Chaque ensemble est contenu dans le suivant.</p>\n<p><strong>Irrationnels.</strong> Un réel qui n'est pas rationnel est dit irrationnel. Par exemple, $\\sqrt{2}$ est irrationnel : c'est un réel, mais ce n'est pas un quotient de deux entiers.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Le nombre $\\frac{7}{4}$ est-il décimal ? Et le nombre $\\frac{1}{3}$ ?</strong></p>\n<ol>\n<li>Un nombre est décimal s'il s'écrit $\\frac{a}{10^n}$.</li>\n<li>Pour $\\frac{7}{4}$, on multiplie le haut et le bas par $25$ : $\\frac{7}{4}=\\frac{175}{100}=1{,}75$. Donc $\\frac{7}{4}$ est décimal.</li>\n<li>Pour $\\frac{1}{3}$, il faudrait $10^n=3a$ : le facteur $3$ devrait diviser $10^n$.</li>\n<li>Or $10^n=2^n\\times 5^n$ ne contient jamais le facteur $3$. Donc $\\frac{1}{3}$ n'est pas décimal.</li>\n<li>Pourtant $\\frac{1}{3}$ est rationnel : c'est un quotient de deux entiers.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Croire que tout rationnel est décimal. $\\frac{1}{3}$ est rationnel, mais son écriture $0{,}333\\ldots$ ne s'arrête jamais : ce n'est pas un décimal. Pour le repérer, simplifie la fraction et regarde si le dénominateur ne contient que les facteurs $2$ et $5$.</p>\n<h2>En une phrase</h2>\n<p>Les entiers et les décimaux sont des rationnels, et tous ces nombres sont des réels ; $\\sqrt{2}$ est un réel qui n'est pas rationnel.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître les ensembles de nombres",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Lequel de ces nombres n'est pas un entier relatif ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\frac{1}{2}$ n'est pas entier : il est compris entre $0$ et $1$. $-18$, $0$ et $7$ sont des entiers relatifs. L'erreur tentante est de croire qu'un nombre négatif n'est pas un entier relatif.",
+                  "answers": [
+                    {
+                      "content": "$-18$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Tout entier naturel est un entier relatif.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : $\\mathbb{N}\\subset\\mathbb{Z}$. Les entiers positifs ou nuls, comme $3$ œufs, font partie des entiers relatifs, qui ajoutent les entiers négatifs, comme $-18$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Tout nombre décimal est un rationnel.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : un décimal s'écrit $\\frac{a}{10^n}$, donc c'est un quotient de deux entiers. L'erreur tentante est de croire que la réciproque est vraie : $\\frac{1}{3}$ est rationnel mais n'est pas décimal.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la nature du nombre $\\sqrt{2}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\sqrt{2}$ est un réel, placé sur la droite graduée à la diagonale d'un carré de côté $1$. Il n'est pas rationnel. $1{,}41$ n'en est qu'une valeur approchée, et l'approximation ne fait pas de $\\sqrt{2}$ un décimal.",
+                  "answers": [
+                    {
+                      "content": "Un réel qui n'est pas rationnel.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un entier relatif.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un décimal, car $\\sqrt{2}\\approx 1{,}41$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un rationnel, car c'est une racine.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquels de ces nombres sont des rationnels ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\sqrt{9}=3$ est un entier, donc rationnel. $\\frac{2}{3}$ est un quotient de deux entiers. $\\sqrt{3}$ et $\\sqrt{2}+1$ ne sont pas rationnels. L'erreur tentante est de croire qu'une racine carrée est toujours irrationnelle.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{2}{3}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sqrt{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{9}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sqrt{2}+1$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Ranger des nombres dans les ensembles",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quel est le plus petit ensemble parmi $\\mathbb{N}$, $\\mathbb{Z}$, $\\mathbb{D}$ et $\\mathbb{Q}$ qui contient $-\\frac{3}{7}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$-\\frac{3}{7}$ n'est pas entier, donc il n'est ni dans $\\mathbb{Z}$ ni dans $\\mathbb{N}$. Il n'est pas décimal non plus : $7$ ne divise aucune puissance de $10$. Il appartient donc à $\\mathbb{Q}$, et seulement à $\\mathbb{Q}$ parmi ces ensembles.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{Q}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{Z}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{D}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $0{,}125$ est un décimal.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : $0{,}125=\\frac{125}{1000}=\\frac{125}{10^3}$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquelles de ces affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Tout entier naturel est un entier relatif, et tout décimal est un rationnel : les inclusions vont du plus petit ensemble vers le plus grand. L'erreur tentante est d'écrire l'inclusion inverse : $\\frac{1}{3}$ est rationnel mais n'est pas décimal.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{N}\\subset\\mathbb{Z}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{Z}\\subset\\mathbb{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{D}\\subset\\mathbb{Q}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{Q}\\subset\\mathbb{D}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, lequel est un décimal ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\frac{7}{4}=\\frac{175}{100}=1{,}75$. Pour $\\frac{1}{3}$ et $-\\frac{5}{6}$, le dénominateur contient le facteur $3$, qui ne divise aucune puissance de $10$. $\\sqrt{2}$ n'est pas rationnel.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{7}{4}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\frac{5}{6}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $\\sqrt{16}$ est un entier naturel.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : $\\sqrt{16}=4$. L'erreur tentante est de croire qu'une racine carrée n'est jamais un entier.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Classer des nombres",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Lequel de ces nombres est à la fois un entier relatif et un décimal, sans être un entier naturel ?",
+                  "question_type": "single_choice",
+                  "explanation": "$-7$ est un entier relatif, donc aussi un décimal : $-7=-\\frac{70}{10}$. Il n'est pas un entier naturel, car il est négatif. $5$ est un entier naturel, et $\\frac{1}{4}$ n'est pas un entier. $\\sqrt{2}$ n'est pas rationnel.",
+                  "answers": [
+                    {
+                      "content": "$-7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{1}{4}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi les nombres suivants, lesquels sont des rationnels ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$\\frac{4}{9}$ est un quotient d'entiers, $\\sqrt{25}=5$ et $-1{,}2=-\\frac{6}{5}$. $\\sqrt{5}$ et $\\sqrt{5}+1$ ne sont pas rationnels. L'erreur tentante est de croire qu'une racine carrée est toujours irrationnelle : $\\sqrt{25}$ est un entier.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{4}{9}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sqrt{25}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-1{,}2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\sqrt{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{5}+1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève affirme : « $\\frac{1}{3}$ est décimal, car il s'écrit $0{,}333\\ldots$ ». Que penses-tu de cette affirmation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un décimal a un nombre fini de chiffres après la virgule, et s'écrit $\\frac{a}{10^n}$. $0{,}333\\ldots$ n'en fait pas partie. Mais $\\frac{1}{3}$ est bien rationnel : c'est un quotient d'entiers.",
+                  "answers": [
+                    {
+                      "content": "Faux : $0{,}333\\ldots$ a une infinité de chiffres, et $\\frac{1}{3}$ ne s'écrit pas $\\frac{a}{10^n}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Vrai : tout nombre à virgule est décimal.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vrai : $0{,}333\\ldots$ est un décimal car il a une infinité de chiffres.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux : $\\frac{1}{3}$ n'est pas rationnel.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Entre deux entiers relatifs consécutifs, il existe toujours un autre entier relatif.",
+                  "question_type": "true_false",
+                  "explanation": "Faux : entre $2$ et $3$, il n'y a aucun entier. En revanche, entre deux décimaux, il existe toujours un autre décimal, et il en va de même pour deux rationnels.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquelles des affirmations sur les réels sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les rationnels font partie des réels, mais un réel n'est pas toujours rationnel : $\\sqrt{2}$ en est la preuve. Les entiers relatifs sont aussi des réels : ils se placent sur la droite graduée.",
+                  "answers": [
+                    {
+                      "content": "Tout rationnel est un réel.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tout réel est un rationnel.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{2}$ est un réel qui n'est pas rationnel.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les entiers relatifs ne sont pas des réels.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit ensemble parmi $\\mathbb{N}$, $\\mathbb{Z}$, $\\mathbb{D}$ et $\\mathbb{Q}$ qui contient $\\frac{3}{8}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\frac{3}{8}=\\frac{375}{1000}=0{,}375$ : c'est un décimal, donc $\\mathbb{D}$ est plus petit que $\\mathbb{Q}$. Il n'est pas entier, donc ni $\\mathbb{Z}$ ni $\\mathbb{N}$. L'erreur tentante est de choisir $\\mathbb{Q}$, qui convient mais n'est pas le plus petit.",
+                  "answers": [
+                    {
+                      "content": "$\\mathbb{D}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\mathbb{Z}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\mathbb{Q}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Les intervalles de nombres réels",
+          "subtitle": "Lire et écrire des plages de températures et de quantités",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Lire un intervalle et savoir si chacune de ses bornes est incluse.</li>\n<li>Écrire une condition sous forme d'intervalle.</li>\n<li>Trouver l'intersection de deux intervalles.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le réglage du four (un intervalle borné).</strong> La recette demande un four réglé à au moins $180$ °C, mais strictement moins de $200$ °C. Le four peut donc être à $180$ °C, à $195$ °C, mais pas à $200$ °C.</p>\n<p><em>Le pont.</em> L'ensemble des températures acceptables est un <strong>intervalle</strong> : $[180\\,;200[$. Le crochet fermé du côté de $180$ signifie que $180$ est inclus. Le crochet ouvert du côté de $200$ signifie que $200$ est exclu.</p>\n<p><em>Où l'image s'arrête.</em> Un thermostat n'affiche que des valeurs arrondies. L'intervalle, lui, contient tous les réels entre les bornes, même ceux qu'aucun thermostat ne peut afficher.</p>\n<p><strong>2. La sauce qui doit être assez épaisse (une demi-droite).</strong> La recette demande au moins $2$ cuillères de farine. La quantité $q$ vérifie donc $q\\ge 2$, sans limite supérieure.</p>\n<p><em>Le pont.</em> Cette condition s'écrit $q\\in[2\\,;+\\infty[$. Le symbole $+\\infty$ est toujours entouré d'un crochet ouvert, car on ne l'atteint jamais.</p>\n<p><em>Où l'image s'arrête.</em> $+\\infty$ n'est pas un nombre : c'est une façon de dire « sans limite ». On ne peut donc pas l'inclure dans un intervalle.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Intervalles bornés.</strong> $[a\\,;b]$ : les réels $x$ tels que $a\\le x\\le b$, bornes incluses. $]a\\,;b[$ : $a\\lt x\\lt b$, bornes exclues. $[a\\,;b[$ : $a\\le x\\lt b$. $]a\\,;b]$ : $a\\lt x\\le b$.</p>\n<p><strong>Demi-droites.</strong> $[a\\,;+\\infty[$ : $x\\ge a$. $]a\\,;+\\infty[$ : $x>a$. $]-\\infty\\,;b]$ : $x\\le b$. $]-\\infty\\,;b[$ : $x\\lt b$. Le symbole $\\infty$ est toujours entouré d'un crochet ouvert.</p>\n<p><strong>Intersection.</strong> $I\\cap J$ est l'ensemble des réels qui sont à la fois dans $I$ et dans $J$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Un four doit être réglé à une température $T$ telle que $180\\le T<200$. Donner l'intervalle, puis dire si $180$ et $200$ conviennent.</strong></p>\n<ol>\n<li>La condition $180\\le T$ inclut $180$ : crochet fermé à gauche.</li>\n<li>La condition $T<200$ exclut $200$ : crochet ouvert à droite.</li>\n<li>L'intervalle est donc $[180\\,;200[$.</li>\n<li>$180$ convient, puisque $180\\ge 180$ : il est dans l'intervalle.</li>\n<li>$200$ ne convient pas : le crochet est ouvert, donc $200$ est exclu.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Écrire le même crochet partout, par exemple $[180\\,;200]$ pour « $180\\le T<200$ ». Lis chaque crochet un à un : fermé si la borne est comprise, ouvert si elle est exclue. Et l'infini est toujours ouvert : $[2\\,;+\\infty]$ est une erreur.</p>\n<h2>En une phrase</h2>\n<p>Un intervalle est une plage de réels : le crochet est fermé si la borne est comprise, ouvert si elle ne l'est pas, et l'infini est toujours ouvert.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Lire un intervalle",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Le four doit être réglé à au moins $180$ °C, et strictement moins de $200$ °C. Quel intervalle traduit cette plage ?",
+                  "question_type": "single_choice",
+                  "explanation": "« Au moins $180$ » : $180$ est inclus, crochet fermé à gauche. « Strictement moins de $200$ » : $200$ est exclu, crochet ouvert à droite. L'erreur tentante est d'inverser les crochets.",
+                  "answers": [
+                    {
+                      "content": "$[180\\,;200[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]180\\,;200]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[180\\,;200]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]180\\,;200[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'intervalle $]2\\,;5]$ contient le réel $2$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux : le crochet ouvert à gauche exclut la borne $2$. En revanche, il contient $5$, car le crochet fermé à droite inclut $5$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le nombre $-3$ appartient à $]-\\infty\\,;-1]$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : $-3\\le -1$. Le crochet à droite est fermé, et tout nombre plus petit que $-1$ convient, sans borne à gauche.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle écriture traduit l'ensemble des réels $x$ tels que $x>4$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$x>4$ : $4$ est exclu, donc crochet ouvert à gauche. L'infini est toujours ouvert. L'erreur tentante est $[4\\,;+\\infty[$, qui inclut $4$.",
+                  "answers": [
+                    {
+                      "content": "$]4\\,;+\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[4\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;4[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]4\\,;+\\infty]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour l'intervalle $[-1\\,;3[$, lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$-1$ est inclus, car le crochet est fermé. $3$ est exclu, car le crochet est ouvert. $2{,}9$ est entre les deux bornes. La condition $-1\\lt x\\le 3$ exclut $-1$ et inclut $3$ : elle décrit $]-1\\,;3]$, pas $[-1\\,;3[$.",
+                  "answers": [
+                    {
+                      "content": "$-1$ appartient à l'intervalle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3$ appartient à l'intervalle.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2{,}9$ appartient à l'intervalle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-1\\lt x\\le 3$ décrit le même intervalle.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Traduire des conditions en intervalles",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Traduis $-2\\le x<5$ par un intervalle.",
+                  "question_type": "single_choice",
+                  "explanation": "$-2\\le x$ : $-2$ est inclus, crochet fermé. $x<5$ : $5$ est exclu, crochet ouvert. Donc $[-2\\,;5[$.",
+                  "answers": [
+                    {
+                      "content": "$[-2\\,;5[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-2\\,;5[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-2\\,;5]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-2\\,;5]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel intervalle correspond à $x\\le 7$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Ce sont les réels inférieurs ou égaux à $7$ : la demi-droite part de $-\\infty$, et $7$ est inclus. L'erreur tentante est $[7\\,;+\\infty[$, qui traduit $x\\ge 7$.",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty\\,;7]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty\\,;7[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[7\\,;+\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]7\\,;+\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ensemble des réels $x$ tels que $x\\ge 0$ s'écrit $[0\\,;+\\infty[$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $0$ est inclus, et le symbole $+\\infty$ est entouré d'un crochet ouvert.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On considère $A=[1\\,;6]$ et $B=]4\\,;9[$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$A\\cap B$ contient les réels présents dans les deux intervalles : de $4$, exclu car il n'est pas dans $B$, jusqu'à $6$, inclus car il est dans $A$. L'erreur tentante est de prendre $4$ : il n'appartient pas à $B$.",
+                  "answers": [
+                    {
+                      "content": "$A\\cap B=]4\\,;6]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5\\in A\\cap B$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4\\in A\\cap B$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9\\in A$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est le plus petit nombre de l'intervalle $[2\\,;5[$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$2$ appartient à l'intervalle, car le crochet est fermé à gauche, et aucun réel de $[2\\,;5[$ n'est plus petit que $2$. $5$ est exclu. $2{,}1$ est dans l'intervalle, mais il n'est pas le plus petit.",
+                  "answers": [
+                    {
+                      "content": "$2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2{,}1$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Plages et intersections",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un four doit être réglé à une température $T$ telle que $160\\le T\\le 190$. Quel intervalle décrit ces températures ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux bornes sont incluses : crochets fermés des deux côtés. L'erreur tentante est d'exclure les bornes, comme si « entre » voulait dire « strictement entre ».",
+                  "answers": [
+                    {
+                      "content": "$[160\\,;190]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[160\\,;190[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]160\\,;190]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]160\\,;190[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $I=[-3\\,;4[$ et $J=]0\\,;7]$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$0$ n'est pas dans $J$ (crochet ouvert), donc pas dans l'intersection. $4$ n'est pas dans $I$ (crochet ouvert). L'intersection garde les réels communs : $]0\\,;4[$. Pour la réunion, $-3$ est dans $I$ et $7$ dans $J$ : $I\\cup J=[-3\\,;7]$.",
+                  "answers": [
+                    {
+                      "content": "$I\\cap J=]0\\,;4[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$I\\cup J=[-3\\,;7]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0\\in I\\cap J$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4\\in I\\cap J$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève écrit : « $]-\\infty\\,;3]\\cap[1\\,;+\\infty[=[1\\,;3]$ ». Est-ce exact ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut $x\\le 3$ et $x\\ge 1$ : de $1$ à $3$. $1$ est inclus dans $[1\\,;+\\infty[$, et $3$ est inclus dans $]-\\infty\\,;3]$. L'erreur tentante est d'exclure les bornes.",
+                  "answers": [
+                    {
+                      "content": "Oui : l'intersection garde les réels entre $1$ et $3$, bornes incluses.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Non, c'est $]1\\,;3[$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, c'est $[1\\,;+\\infty[$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Non, l'intersection est vide.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le réel $4$ appartient à l'intervalle $]-\\infty\\,;4[$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux : le crochet ouvert à droite exclut $4$. Le côté $-\\infty$ n'a jamais de borne atteinte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "La largeur $L$ d'un pagne, en cm, vérifie $90\\le L<120$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$90\\le L$ inclut $90$. $L<120$ exclut $120$, mais $119{,}9$ convient. L'intervalle est donc $[90\\,;120[$, et non $]90\\,;120[$, qui exclurait $90$.",
+                  "answers": [
+                    {
+                      "content": "Une largeur de $90$ cm est possible.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une largeur de $120$ cm est possible.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une largeur de $119{,}9$ cm est possible.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$L$ appartient à l'intervalle $[90\\,;120[$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$L$ appartient à l'intervalle $]90\\,;120[$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac de ciment pèse au moins $25$ kg et strictement moins de $50$ kg. Quel intervalle contient les masses possibles $m$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "« Au moins $25$ » : la borne $25$ est incluse (crochet fermé). « Strictement moins de $50$ » : la borne $50$ est exclue (crochet ouvert). L'intervalle est donc $[25\\,;50[$. Le $]-\\infty\\,;50[$ ignore la masse minimale.",
+                  "answers": [
+                    {
+                      "content": "$[25\\,;50[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]25\\,;50[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[25\\,;50]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty\\,;50[$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La valeur absolue et la distance à un réel",
+          "subtitle": "Mesurer un écart à une valeur cible. À compléter : démonstration que racine de 2 n'est pas rationnel.",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer la valeur absolue d'un nombre, et la lire comme une distance.</li>\n<li>Traduire $|x-a|\\le r$ par un intervalle.</li>\n<li>Éviter l'erreur $|a+b|=|a|+|b|$.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le thermostat du four (un écart à une cible).</strong> La recette demande $180$ °C. Le four peut afficher $175$ °C ou $185$ °C : il n'est pas exact, mais l'écart est de $5$ degrés dans les deux cas.</p>\n<p><em>Le pont.</em> L'écart entre la température affichée $T$ et la cible $180$ est $|T-180|$. C'est la distance entre $T$ et $180$ sur la droite graduée.</p>\n<p><em>Où l'image s'arrête.</em> La valeur absolue ne dit pas si le four est trop chaud ou trop froid : elle mesure seulement l'écart.</p>\n<p><strong>2. Le sel de la sauce (une tolérance).</strong> La recette demande $10$ g de sel, et l'on accepte un écart d'au plus $2$ g.</p>\n<p><em>Le pont.</em> La condition $|m-10|\\le 2$ dit que la masse $m$ est à distance au plus $2$ de $10$. Cela donne l'intervalle $[8\\,;12]$.</p>\n<p><em>Où l'image s'arrête.</em> Ici, les masses sont positives. En mathématiques, $x$ peut être négatif, mais la distance se calcule de la même façon.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Valeur absolue.</strong> $|x|=x$ si $x\\ge 0$, et $|x|=-x$ si $x<0$. La valeur absolue est toujours positive ou nulle.</p>\n<p><strong>Distance.</strong> $|x|$ est la distance de $x$ à $0$. Plus généralement, $|x-a|$ est la distance entre $x$ et $a$.</p>\n<p><strong>Encadrement.</strong> Si $r\\ge 0$, alors $|x-a|\\le r$ si et seulement si $a-r\\le x\\le a+r$, soit $x\\in[a-r\\,;a+r]$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Résoudre $|x-180|\\le 5$ et donner l'intervalle des températures acceptables.</strong></p>\n<ol>\n<li>$|x-180|$ est la distance entre $x$ et $180$.</li>\n<li>Cette distance doit être au plus $5$ : $-5\\le x-180\\le 5$.</li>\n<li>On ajoute $180$ à chaque membre : $175\\le x\\le 185$.</li>\n<li>L'intervalle est $[175\\,;185]$. Vérification : $|175-180|=5$ convient, alors que $|186-180|=6$ ne convient pas.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Écrire $|a+b|=|a|+|b|$. C'est faux : $|-2+5|=|3|=3$, alors que $|-2|+|5|=7$. Pour le repérer, calcule d'abord ce qui est entre les barres, puis seulement ensuite la valeur absolue.</p>\n<h2>En une phrase</h2>\n<p>La valeur absolue de $x-a$ est l'écart entre $x$ et $a$ ; s'il est au plus $r$, alors $x$ est dans l'intervalle $[a-r\\,;a+r]$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Lire la valeur absolue comme un écart",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle est la valeur de $|-7|$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La valeur absolue est la distance à $0$ : $-7$ est à $7$ unités de $0$. Elle n'est jamais négative. L'erreur tentante est de garder le signe.",
+                  "answers": [
+                    {
+                      "content": "$7$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{7}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tout réel $x$, $|x|\\ge 0$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : une distance ne peut pas être négative. $|x|=0$ seulement pour $x=0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tout réel $x$, $|x|=x$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux : pour $x=-4$, $|x|=4$, alors que $x=-4$. L'égalité $|x|=x$ n'est vraie que si $x\\ge 0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle expression donne la distance entre $x$ et $3$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La distance entre $x$ et $a$ est $|x-a|$, ici avec $a=3$. $|x+3|$ mesure la distance entre $x$ et $-3$. L'erreur tentante est de changer le signe.",
+                  "answers": [
+                    {
+                      "content": "$|x-3|$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$|x+3|$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x-3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$|x|+3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour le réel $x=-5$, lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$|-5|=5$ et $|-5-2|=|-7|=7$. Ne confonds pas $|x|$ et $x$ : $|x|=x$ n'est vrai que si $x\\ge 0$. Pour $|x+5|$, on obtient $|0|=0$.",
+                  "answers": [
+                    {
+                      "content": "$|x|=5$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$|x|=x$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$|x-2|=7$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$|x+5|=10$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer des écarts",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Calcule $|4-9|$.",
+                  "question_type": "single_choice",
+                  "explanation": "$4-9=-5$, puis $|-5|=5$. L'erreur tentante est de calculer $4+9=13$, ou de garder $-5$ sans la valeur absolue.",
+                  "answers": [
+                    {
+                      "content": "$5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$13$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tous réels $a$ et $b$, $|a+b|=|a|+|b|$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Avec $a=-2$ et $b=5$ : $|-2+5|=3$, mais $|-2|+|5|=7$. L'égalité n'est vraie que dans certains cas, par exemple lorsque $a$ et $b$ ont le même signe, ce qui n'est pas général.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles valeurs de $x$ vérifient $|x-3|=2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$|x-3|=2$ signifie que $x$ est à distance $2$ de $3$ : $x-3=2$ ou $x-3=-2$, donc $x=5$ ou $x=1$. L'erreur tentante est de ne garder que $x=5$.",
+                  "answers": [
+                    {
+                      "content": "$x=1$ ou $x=5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x=5$ seulement",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=-1$ ou $x=3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=2$ seulement",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquels de ces intervalles correspondent à $|x-4|\\le 1$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$|x-4|\\le 1$ équivaut à $-1\\le x-4\\le 1$, soit $3\\le x\\le 5$, bornes incluses. L'erreur tentante est d'exclure $3$ et $5$, alors que leur distance à $4$ vaut $1$, ce qui convient.",
+                  "answers": [
+                    {
+                      "content": "$[3\\,;5]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-1\\le x-4\\le 1$, soit $3\\le x\\le 5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]3\\,;5[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[4\\,;5]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$|x|\\le 3$ signifie $-3\\le x\\le 3$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : un nombre dont la distance à $0$ est au plus $3$ se trouve entre $-3$ et $3$, bornes comprises.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Le four, le sel et les écarts",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "La température $T$ du four doit vérifier $|T-180|\\le 5$. Quel intervalle décrit les températures acceptables ?",
+                  "question_type": "single_choice",
+                  "explanation": "$-5\\le T-180\\le 5$, donc $175\\le T\\le 185$ : les deux bornes conviennent, car leur écart à $180$ vaut $5$. L'erreur tentante est d'exclure les bornes, ou de n'ajouter $5$ que d'un côté.",
+                  "answers": [
+                    {
+                      "content": "$[175\\,;185]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[180\\,;185]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[175\\,;180]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]175\\,;185[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une recette demande $10$ g de sel. On accepte une masse $m$, en grammes, telle que $|m-10|\\le 2$. Quelle est la plage acceptable ?",
+                  "question_type": "single_choice",
+                  "explanation": "$|m-10|\\le 2$ : la masse est à distance au plus $2$ de $10$, donc $8\\le m\\le 12$. L'erreur tentante est de n'ajouter ou de n'enlever $2$ que d'un côté.",
+                  "answers": [
+                    {
+                      "content": "$[8\\,;12]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[10\\,;12]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[8\\,;10]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]8\\,;12[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour $|x-1|=3$, lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$x$ est à distance $3$ de $1$ : $x=1+3=4$ ou $x=1-3=-2$. $x=1$ est à distance $0$. L'erreur tentante est de penser qu'il n'y a qu'une solution, ou de prendre $-4$, qui est à distance $5$.",
+                  "answers": [
+                    {
+                      "content": "$x=4$ est solution.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x=-2$ est solution.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x=1$ est solution.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=-4$ est solution.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tous réels $a$ et $b$, $|a-b|=|b-a|$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : la distance entre $a$ et $b$ ne dépend pas de l'ordre. Par exemple $|2-7|=5=|7-2|$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le réel $x$ vérifie $|x-5|<2$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$|x-5|<2$ signifie $-2\\lt x-5<2$, soit $3\\lt x<7$ : les bornes sont exclues, car l'inégalité est stricte. $x=3$ et $x=7$ donnent un écart égal à $2$, qui n'est pas inférieur à $2$.",
+                  "answers": [
+                    {
+                      "content": "$x=6$ convient.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x=3$ convient.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x=4{,}5$ convient.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x=7$ convient.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'ensemble des solutions est $]3\\,;7[$.",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur de $|-2+5|$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On calcule d'abord ce qui est entre les barres : $-2+5=3$, puis $|3|=3$. Si l'on sépare les barres, on trouve $|-2|+|5|=7$, ce qui est faux en général.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -23,7 +23,7 @@ La V1 est en production sur lnclass.com depuis le **2026-09-27** (PR #33 et #36 
 | **V2** Direction et comptes | Partie « profil, PIN, photo » de `mon-compte` : [`profil-utilisateur`](../profil-utilisateur/memo.md) (ADR-0055, UDR-0041, #37), [`photo-de-profil`](../photo-de-profil/memo.md) (ADR-0060, UDR-0047, #50 ; durcie par #65 et #75, en production par #78) | [`espace-direction-simple`](../espace-direction-simple/memo.md) : planifié (ADR-0065, UDR-0052, proposés) | Au backlog : `espace-direction` complet, `annuaire-equipe` |
 | **V3** Suivi enseignant | Partage du lien de classe sur WhatsApp (CL-05), par `croissance-parrainage` (#71) | — | `rapports-de-classe`, `vie-de-la-classe` (dont CL-02, venue de V1), `multi-etablissements-enseignant`, `multi-classes-eleve` (si confirmé) : 11 features |
 | **V4** Contenu et back-office | [`pilotage-equipe`](../pilotage-equipe/memo.md) (ADR-0062, UDR-0049, #51) : TR-10, TR-11, TR-12 | — | `catalogue-complet` (dont CA-23, venue de V2), `installation-pwa`, `sous-roles-equipe` : 9 features |
-| **V5** Remédiation | Détection et résolution des lacunes (AS-14, AS-15), livrées en avance avec la V1 (ADR-0043 amendé) | — | `remediation` : session de remédiation (AS-16), suivi par l'enseignant (AS-17) |
+| **V5** Remédiation | Détection et résolution des lacunes (AS-14, AS-15), livrées en avance avec la V1 (ADR-0043 amendé). AS-16 et AS-17 par [`remediation-ciblee`](../remediation-ciblee/memo.md) (ADR-0101, UDR-0119 à 0121, acceptés le 2026-10-16) : **V5 close** à la fusion de sa PR | — | — |
 | **V6** Communication | — | `canal-whatsapp`, cadré par une autre session (PR #70, non fusionnée), **rattaché à la V6** le 2026-09-28 | `annonces` (10 features), puis `canal-whatsapp` |
 | **V8** À décider | — | — | Une décision produit |
 | **Hors plan** | [`code-etablissement`](../code-etablissement/memo.md) (ADR-0057, UDR-0044, #49), [`classes-par-niveau`](../classes-par-niveau/memo.md) (ADR-0059, UDR-0046, #48), [`bareme-classes`](../bareme-classes/memo.md) (ADR-0058, UDR-0045, #52), [`croissance-parrainage`](../croissance-parrainage/memo.md) (ADR-0063, UDR-0050, #71), CI parallèle [`ci-rapide`](../ci-rapide/journal.md) (ADR-0064, #53). Rattachement : §5, « Chantiers hors plan » | — | Backlog : [`verification-whatsapp`](../verification-whatsapp/memo.md), rattaché à la V4 s'il reprend |
@@ -51,7 +51,7 @@ V3  Suivi pédagogique enseignant    │
     rapports, multi-établissements  │
  │                                  │
  └──────────────┬───────────────────┘
-V5  Remédiation et lacunes            à concevoir — n'a jamais tourné
+V5  Remédiation et lacunes            livrée par remediation-ciblee (2026-10-16)
  │
 V6  Communication                     annonces
 
@@ -275,7 +275,7 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 | **Déjà livré (hors ordre)** | CL-05 (partager le lien de classe sur WhatsApp), par `croissance-parrainage` (#71) |
 | **Reste : `rapports-de-classe`** (8 features) | CL-13, CL-14, CL-15, AS-21, AS-22, AS-23, AS-24, AS-25 ; plus la partie V3 de TR-05 (activité des élèves sur l'accueil enseignant) et de TR-32 (cache des rapports) |
 | **Reste : `vie-de-la-classe`** (2 features) | CL-02 (modifier une classe, **déplacée de la V1 le 2026-09-28**), CL-03 (archiver au lieu de supprimer). Sans ID d'inventaire : année scolaire et archivage (ADR-0041), code révocable et régénérable, retrait d'un élève, changement de classe par l'enseignant ou l'équipe (ADR-0040), libération des codes d'adhésion à l'archivage (dette de la V1), reconduction des classes à la rentrée (ADR-0041) |
-| **Reste : `multi-etablissements-enseignant`** (1 feature) | ID-27 |
+| **`multi-etablissements-enseignant`** (1 feature) | ID-27 — PR prête le 2026-10-16 (ADR-0094) |
 | **`multi-classes-eleve`** | Aucune feature d'inventaire : sélecteur de classe et adhésions non principales (ADR-0040, contradictions C-12 et C-28 fermées) |
 | **Pourquoi CL-02 est ici** | Modifier une classe touche aux contrats de l'ADR-0041 (plafond d'effectif, année, code) que ce chantier ouvre, et à la numérotation des classes générées (ADR-0030, ADR-0059) : renommer « Tle D 3 » casse la règle « plus haut numéro + 1 ». Aucun lot de la V1 ne la portait. La direction pourra modifier ses classes si la V2 lui en donne le droit (Q3) |
 | **Tables** | Aucune table nouvelle : `classrooms.school_year`, `status` et `archived_at` existent depuis la V1 (ADR-0041) |
@@ -291,7 +291,7 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 | **Objectif** | L'équipe pilote la plateforme : catalogue complet (filtres, pagination, pages niveau, matière et série), tableau de bord équipe, installation PWA, sous-rôles appliqués. Les imports en masse sont livrés en V1 |
 | **Chantiers, dans l'ordre** | 1. `catalogue-complet`, qui peut démarrer **avec** la V2 (contexte `catalog`, disjoint de la V2 ; voir le tableau de collision). 2. `installation-pwa`, en parallèle de la V2 si le gabarit du shell a un seul propriétaire. 3. `sous-roles-equipe`, **après** `annuaire-equipe` : il réécrit toutes les policies de l'équipe, y compris celles de l'annuaire |
 | **Déjà livré (hors ordre)** | [`pilotage-equipe`](../pilotage-equipe/memo.md) (ADR-0062, UDR-0049, #51) : TR-10, TR-11, TR-12, et la partie V4 de TR-09. [`croissance-parrainage`](../croissance-parrainage/memo.md) (ADR-0063, UDR-0050, #71), hors plan, rattaché ici. La fiche d'un compte (ID-21, ID-22) reste en V2 |
-| **Reste : `catalogue-complet`** (6 features) | CA-02, CA-03, CA-17, CA-21, CA-23 (venue de la V2 le 2026-09-28), AS-01 ; plus la partie V4 de CA-01 |
+| **`catalogue-complet`** (6 features) | **Livré** le 2026-10-16 (PR de `feature/catalogue-complet`) : CA-17, CA-21, CA-23 en pages publiques (ADR-0099, UDR-0113 à 0115) ; CA-01, CA-02, CA-03 constatées livrées hors ordre ; AS-01 fermée |
 | **Reste : `installation-pwa`** (3 features) | ID-26, TR-24, TR-25 |
 | **Reste : `sous-roles-equipe`** | Aucune feature d'inventaire : la matrice de l'ADR-0038 (`admin`, `content`, `field`), un test de refus par case vide |
 | **Tables** | ~~Colonnes `users.install_banner_status` et `users.install_banner_last_changed_at` (§7.1)~~ : abandonnées le 2026-10-07 (ADR-0082 §4.5, le bandeau ne garde rien sur le serveur) ; `installation-pwa` ajoute `users.app_opened_at` (ADR-0082 §4.3). `team_role` existe depuis la V1 |
@@ -305,13 +305,13 @@ Voir §2. **Décisions préalables** : F-27, F-29, F-30 ; F-25 si la V1 téléve
 | Champ | Contenu |
 |---|---|
 | **Objectif** | Un élève en échec sur une notion voit une remédiation ciblée ; l'enseignant voit qui est en difficulté, qui s'est corrigé seul, qui a réussi sa remédiation |
-| **Chantier** | `remediation` |
+| **Chantier** | [`remediation-ciblee`](../remediation-ciblee/memo.md) (nommé `remediation` jusqu'au 2026-10-16) |
 | **Déjà livré (avec la V1)** | La clôture de session ouvre et résout les lacunes (AS-14, AS-15 ; seuil de résolution 75 %, amendement de l'ADR-0043 du 2026-09-27). `knowledge_gaps` existe, et `exercise_sessions.kind` accepte déjà `remediation` |
-| **Reste** (2 features) | AS-16 (l'élève lance une session de remédiation, `Assessment::StartRemediationSession`), AS-17 (l'enseignant suit les remédiations de sa classe) |
+| **Reste** | Rien. AS-16 et AS-17 livrées par `remediation-ciblee` (2026-10-16) : la remédiation se lance par `StartExerciseSession`, sans `StartRemediationSession` (ADR-0101, amende l'ADR-0043 §4) ; l'enseignant la suit sur la page de sa classe et sur la fiche vue depuis la classe (UDR-0121) |
 | **Tables** | Aucune : le schéma de l'ADR-0043 est posé depuis la V1 |
 | **Décisions préalables** | F-21 (ADR-0043, amendé le 2026-09-27) : `Accepté`. Aucune question ouverte : l'ADR fixe le choix de l'exercice de remédiation |
-| **Dépend de** | V1 pour AS-16, côté élève ; V3 (`rapports-de-classe`) pour AS-17, qui s'affiche dans les rapports de l'enseignant |
-| **Porte** | Inchangée : le parcours **réel** de l'élève crée et résout les lacunes, et lance la remédiation |
+| **Dépend de** | V1. La dépendance d'AS-17 à `rapports-de-classe` est tombée le 2026-10-16 (memo Q7) |
+| **Porte** | Inchangée : le parcours **réel** de l'élève crée et résout les lacunes, et lance la remédiation. **Franchie** le 2026-10-16 : `test/system/assessment/remediation_test.rb` |
 
 ### V6 — Communication
 
@@ -357,7 +357,7 @@ Chantiers hors plan **non livrés**, rattachés le 2026-09-28 :
 | **1. V2** | `espace-direction-simple` (2026-09-28) ; `espace-direction` complet et `annuaire-equipe` au backlog | **V4 `catalogue-complet`** dès le départ ; **V4 `installation-pwa`** si le gabarit du shell a un seul propriétaire | Q1 à Q4 répondues ; C-31 tranchée dans l'UDR du chantier |
 | **2. V3** | `rapports-de-classe` et `vie-de-la-classe` (page classe attribuée au Lot 0) ; puis `multi-etablissements-enseignant` ; `multi-classes-eleve` si Q5 = oui | **V4 `sous-roles-equipe`** (policies de l'équipe, disjointes de celles de l'enseignant) ; **V5, lot AS-16** (côté élève) | V2 livrée et recettée ; Q5 à Q8 répondues |
 | **3. V4** | `sous-roles-equipe`, après `annuaire-equipe` | V3 | Q9 répondue ; amendement de l'ADR-0038 accepté |
-| **4. V5** | `remediation` : AS-16 peut partir dès l'étape 2, AS-17 attend `rapports-de-classe` | V3, V6 | `rapports-de-classe` livré pour AS-17 |
+| **4. V5** | ~~`remediation` : AS-16 peut partir dès l'étape 2, AS-17 attend `rapports-de-classe`~~ livrée par `remediation-ciblee` le 2026-10-16, sans attendre `rapports-de-classe` | V3, V6 | `rapports-de-classe` livré pour AS-17 |
 | **5. V6** | `annonces`, puis `canal-whatsapp` | V5 (contextes `assessment` et `communication` disjoints ; seuls les accueils sont partagés, à attribuer au Lot 0) | V2 livrée (audience `school_admin`) ; ADR du canal accepté (Q11 à Q14) |
 
 La règle du [planning roulant](../../workflows/programme.md#3-planifier--feuille-de-routemd) tient : à l'étape 1, seuls les chantiers de la V2 et `catalogue-complet` ouvrent leur dossier ; les autres attendent leur étape.
@@ -397,8 +397,8 @@ Deux vagues ne se chevauchent que si elles ne partagent ni fichier ni contrat ([
 | Q3 | V2 | La direction crée-t-elle des classes (SC-19), ou ajoute-t-elle seulement la suivante d'un niveau comme l'équipe (ADR-0059) ? Modifie-t-elle ses classes (CL-02, V3) ? **Répondue le 2026-09-28 : ni l'un ni l'autre pour l'instant ; les classes restent à l'équipe.** |
 | Q4 | V2, V3, V4 | ADR-0057, 0059, 0063 et 0064, UDR-0044, 0046 et 0050 sont en production avec leurs défauts du 2026-09-28 : les acceptes-tu tels quels ? **Répondue le 2026-09-28 : acceptées telles quelles.** |
 | Q5 | V3 | Le multi-classes de l'élève (cours du soir, ADR-0040) est-il demandé ? Sinon, `multi-classes-eleve` sort du plan |
-| Q6 | V3 | CL-02 : quels champs d'une classe se modifient (nom, plafond d'effectif, statut) ? Renommer une classe générée casse la numérotation de l'ADR-0059 |
-| Q7 | V3 | Un enseignant rejoint un second établissement comment : avec le code de cet établissement (ADR-0057), ou rattaché par sa direction (ID-09) ? |
+| Q6 | V3 | CL-02 : quels champs d'une classe se modifient (nom, plafond d'effectif, statut) ? Renommer une classe générée casse la numérotation de l'ADR-0059. **Répondue le 2026-10-16 : le nom (après le préfixe fixe du barème) et le plafond, par l'équipe et la direction (ADR-0098).** |
+| Q7 | V3 | ~~Un enseignant rejoint un second établissement comment : avec le code de cet établissement (ADR-0057), ou rattaché par sa direction (ID-09) ?~~ Tranchée le 2026-10-16 (ADR-0094) : par lui-même, par le lien d'invitation de l'établissement ou par sa DRENA ; pas de rattachement par la direction |
 | Q8 | V3 | Archivage de fin d'année (ADR-0041) : à quelle date, et faut-il un outil de reconduction des classes à la rentrée ? |
 | Q9 | V4 | Matrice des sous-rôles (ADR-0038) pour les pages livrées après elle : Pilotage, Croissance, validation des comptes en attente, barème et génération des classes. Qui voit quoi ? |
 | Q10 | V4 | PWA : installation seule, ou aussi un usage hors ligne ? Le hors-ligne demande un ADR (service worker, cache, budget de l'ADR-0051) |
@@ -469,7 +469,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | ID-24 | Changer de rôle | ❌ absent | **écartée** : aucun besoin exprimé | — |
 | ID-25 | Espace parent | ❌ absent | **écartée** — retirée du plan le 2026-09-22 (hors périmètre depuis le 2026-09-18) | Un rôle déclaré sans espace, qui retombe sur `/` |
 | ID-26 | Bannière d'installation PWA | ⚠️ | V4 (`installation-pwa`) | « Installée » enregistré sur iOS sans installation ; n'importe quelle valeur d'enum acceptée |
-| ID-27 | Enseigner dans plusieurs établissements | ⚠️ | V3 (`multi-etablissements-enseignant`, F-06) | `schools.first` sans ordre |
+| ID-27 | Enseigner dans plusieurs établissements | ⚠️ | V3 (`multi-etablissements-enseignant`, F-06) — PR prête le 2026-10-16 (ADR-0094) | `schools.first` sans ordre |
 | ID-28 | Normaliser et valider le contact | ⚠️ | V1 (0b, F-28) — livrée 2026-09-27 (#33) | — (règle juste, à reprendre) |
 | ID-29 | Générer l'identifiant public et le slug | ⚠️ | V1 (Lot 0a, F-05) — livrée 2026-09-27 (#33) | Un préfixe qui révèle le rôle ; le repli sur l'identifiant entier |
 | ID-30 | Comptes démo qui occupent des numéros | ⚠️ | **écartée** — retirée du plan le 2026-09-22 | Des démos stockées dans `users` |
@@ -533,7 +533,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | ID | Feature | État | Vague | Ne pas reproduire |
 |---|---|---|---|---|
 | CL-01 | Créer une classe (équipe) | ❌ | V1 (Lot D : « les classes sont créées par l'équipe », [`plan.md`](plan.md) §1) — livrée 2026-09-27 (#33) | Un slug passé à `find_by_id` ; un code de 6 caractères pour une colonne de 5 |
-| CL-02 | Modifier une classe | ❌ | V3 (`vie-de-la-classe`) — **déplacée de V1 le 2026-09-28** : aucun lot de la V1 ne la portait (ajout et retrait seulement, `classes-par-niveau`) ; elle touche au plafond et au code de l'ADR-0041 et à la numérotation de l'ADR-0059 | Un échec muet |
+| CL-02 | Modifier une classe | ✅ | V3 (`vie-de-la-classe`) — **livrée le 2026-10-16** (ADR-0098 : nom après le préfixe du barème et plafond, équipe et direction). **déplacée de V1 le 2026-09-28** : aucun lot de la V1 ne la portait (ajout et retrait seulement, `classes-par-niveau`) ; elle touche au plafond et au code de l'ADR-0041 et à la numérotation de l'ADR-0059 | Un échec muet |
 | CL-03 | Supprimer une classe | ⚠️ | V3 (`vie-de-la-classe` : archivage, F-19) | Une suppression définitive qui détruit l'historique des assignations |
 | CL-04 | Générer et afficher le code d'adhésion | ⚠️ | V1 (Lot D) — livrée 2026-09-27 (#33) | Un affichage tantôt en minuscules, tantôt en majuscules |
 | CL-05 | Partager le lien de classe sur WhatsApp | 💀 | V3 (`vie-de-la-classe`) — livrée 2026-09-28 (#71), hors ordre des vagues : chantier `croissance-parrainage` | — |
@@ -544,9 +544,9 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | CL-10 | Fiche d'une de ses classes | ❌ | V1 (Lot D) — livrée 2026-09-27 (#33) | La fiche qui casse dès le premier exercice assigné |
 | CL-11 | Consulter un cours dans sa classe | ❌ | V1 (Lot D) — livrée 2026-09-27 (#33) | — |
 | CL-12 | Consulter une fiche dans sa classe | ❌ | V1 (Lot D) — livrée 2026-09-27 (#33) | — |
-| CL-13 | Fiche d'un élève de sa classe | ❌ | V3 (`rapports-de-classe`) | — |
-| CL-14 | Tableau de bord générique d'une classe | ❌ | V3, fusionné avec CL-10 | Une classe ouverte à tout connecté ; 3 compteurs sur 4 toujours vides |
-| CL-15 | Liste paginée des élèves d'une classe | ⚠️ | V3 | Un cache de ligne jamais invalidé ; une liste ouverte à tout connecté |
+| CL-13 | Fiche d'un élève de sa classe | ❌ | V3 (`rapports-de-classe`) — PR `rapports-de-classe` prête le 2026-10-16, à fusionner | — |
+| CL-14 | Tableau de bord générique d'une classe | ❌ | V3, fusionné avec CL-10 — fermée par `rapports-de-classe` (memo Q7) : livrée par CL-10 (#33) et `rapports-exercices` (#164), sans chiffre de classe | Une classe ouverte à tout connecté ; 3 compteurs sur 4 toujours vides |
+| CL-15 | Liste paginée des élèves d'une classe | ⚠️ | V3 (`rapports-de-classe`) — PR `rapports-de-classe` prête le 2026-10-16, à fusionner : liste par note sur 20, puis par trente | Un cache de ligne jamais invalidé ; une liste ouverte à tout connecté |
 | CL-16 | Assigner ou retirer un cours | 💀 | V1 (Lot D) — livrée 2026-09-27 (#33) | Réassigner une ressource retirée lève `RecordNotUnique` au lieu de la réactiver |
 | CL-17 | Assigner ou retirer une fiche | 💀 | V1 (Lot D) — livrée 2026-09-27 (#33) | Idem |
 | CL-18 | Cours dans le contexte d'une classe (chemin générique) | ❌ | **écartée** : doublon de CL-11 | — |
@@ -565,9 +565,9 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 
 | ID | Feature | État | Vague | Ne pas reproduire |
 |---|---|---|---|---|
-| CA-01 | Parcourir le catalogue publié | ⚠️ | V1 (Lot B, liste simple) — livrée 2026-09-27 (#33) · V4 (`catalogue-complet`) | Un niveau et une matière qui ne filtrent pas les brouillons |
-| CA-02 | Filtrer par niveau ou matière | ⚠️ | V4 | — |
-| CA-03 | Pagination infinie | 💀 | V4 | Un lien de page jamais rendu |
+| CA-01 | Parcourir le catalogue publié | ⚠️ | V1 (Lot B, liste simple) — livrée 2026-09-27 (#33) · V4 (`catalogue-complet`) — **livrée hors ordre**, constatée le 2026-10-16 (brouillons filtrés en SQL hors équipe) | Un niveau et une matière qui ne filtrent pas les brouillons |
+| CA-02 | Filtrer par niveau ou matière | ⚠️ | V4 — **livrée hors ordre**, constatée le 2026-10-16 (`interface-enseignant-organisation`, `catalogue-niveau-eleve`, `cours-eleve`) | — |
+| CA-03 | Pagination infinie | 💀 | V4 — **livrée hors ordre**, constatée le 2026-10-16 (`politique-cache`, lot E4) | Un lien de page jamais rendu |
 | CA-04 | Consulter un cours | ✅ | V1 (Lot B) — livrée 2026-09-27 (#33) | Un brouillon lisible par URL directe |
 | CA-05 | Créer un cours | ⚠️ | V1 (Lot B) — livrée 2026-09-27 (#33) | Aucun point d'entrée dans l'interface |
 | CA-06 | Modifier un cours | ❌ | V1 (Lot B) — livrée 2026-09-27 (#33) | Deux familles d'entités incompatibles (C-19) |
@@ -581,13 +581,13 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | CA-14 | Supprimer une fiche | ✅ | V1 (Lot B, archivage) — livrée 2026-09-27 (#33) | Idem ; cascade |
 | CA-15 | Importer des fiches dans un cours | 💀 | V1 (`import-contenu`, ADR-0039) — livrée 2026-09-27 (#33) | Un import synchrone ouvert à tout connecté |
 | CA-16 | Lister les niveaux | ✅ | V1 (écran de l'équipe, ADR-0034) — livrée 2026-09-27 (#33) | — |
-| CA-17 | Espace Niveau | ⚠️ | V4 (`catalogue-complet`) | — |
+| CA-17 | Espace Niveau | ⚠️ | V4 (`catalogue-complet`) — **livrée 2026-10-16** (`catalogue-complet`) : `/niveaux` et `/niveaux/:slug`, publics (ADR-0099, UDR-0113) | — |
 | CA-18 | Gérer les niveaux | ⚠️ | V1 (écran de l'équipe, ADR-0034) — livrée 2026-09-27 (#33) | Supprimer un niveau détruit ses classes |
 | CA-19 | Associer des séries à un niveau | ✅ | V1 (ADR-0034) — livrée 2026-09-27 (#33) | — |
 | CA-20 | Lister les matières | ⚠️ | V1 (écran de l'équipe, ADR-0034) — livrée 2026-09-27 (#33) | — |
-| CA-21 | Page matière | ⚠️ | V4 | — |
+| CA-21 | Page matière | ⚠️ | V4 — **livrée 2026-10-16** (`catalogue-complet`) : `/matieres/:slug`, publique (UDR-0114) | — |
 | CA-22 | Gérer les matières | ⚠️ | V1 (ADR-0034, `category` obligatoire) — livrée 2026-09-27 (#33) | `category` laissée à `NULL` ; une clé de cache jamais invalidée |
-| CA-23 | Pages des séries | ❌ | V4 (`catalogue-complet`) — **déplacée de V2 le 2026-09-28** : page publique du catalogue, avec CA-17 et CA-21 | — |
+| CA-23 | Pages des séries | ❌ | V4 (`catalogue-complet`) — **déplacée de V2 le 2026-09-28** : page publique du catalogue, avec CA-17 et CA-21 — **livrée 2026-10-16** (`catalogue-complet`) : `/niveaux/:niveau/:serie` (UDR-0115) | — |
 | CA-24 | Gérer les séries | ⚠️ | V1 (ADR-0034) — livrée 2026-09-27 (#33) | — |
 | CA-25 | Taxonomie depuis l'onglet « Setup » | ⚠️ | V1 (= TR-13, ADR-0034) — livrée 2026-09-27 (#33) | — |
 | CA-26 | Icône et couleur de la matière | ✅ | V1 (Lot B, UDR) — livrée 2026-09-27 (#33) | Une couleur déduite du nom au lieu de `category` |
@@ -599,7 +599,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 
 | ID | Feature | État | Vague | Ne pas reproduire |
 |---|---|---|---|---|
-| AS-01 | Parcourir tous les exercices de la plateforme | ⚠️ | V4 (`catalogue-complet`) | Une page liée nulle part ; une carte mise en cache sans l'utilisateur ni le rôle dans la clé |
+| AS-01 | Parcourir tous les exercices de la plateforme | ⚠️ | V4 (`catalogue-complet`) — **fermée** le 2026-10-16 : couverte par la page d'une fiche (exercices publiés) ; une liste transverse serait un nouveau chantier | Une page liée nulle part ; une carte mise en cache sans l'utilisateur ni le rôle dans la clé |
 | AS-02 | Consulter le détail d'un exercice | ⚠️ | V1 (Lot C) — livrée 2026-09-27 (#33) | — |
 | AS-03 | Créer un exercice par le formulaire | ❌ | V1 (Lot B), **construite** de zéro — livrée 2026-09-27 (#33) | « + Ajouter une question » inerte (contrôleur Stimulus absent) ; des questions jamais persistées ; un titre passé en `titleize` |
 | AS-04 | Modifier un exercice | ❌ | V1 (Lot B) — livrée 2026-09-27 (#33) | Idem |
@@ -614,16 +614,16 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | AS-13 | Recommencer un exercice | ✅ | V1 (Lot C) — livrée 2026-09-27 (#33) | — |
 | AS-14 | Détecter une lacune après un échec | 💀 | V5 (F-21) — livrée en avance avec la V1, 2026-09-27 (#33) : à la clôture de session, seuil de résolution 75 % (ADR-0043 amendé) | Une détection branchée sur un use case que le parcours réel n'appelle pas |
 | AS-15 | Résoudre une lacune après une réussite | 💀 | V5 (F-21) — livrée en avance avec la V1, 2026-09-27 (#33) : à la clôture de session, seuil de résolution 75 % (ADR-0043 amendé) | Idem |
-| AS-16 | Lancer une session de remédiation | ❌ | V5 | Un bouton qui appelle un helper de route inexistant |
-| AS-17 | Suivre les remédiations de sa classe | ❌ | V5 | `NoMethodError` sur panneau fermé |
+| AS-16 | Lancer une session de remédiation | ✅ | V5 — livrée par `remediation-ciblee` (2026-10-16) : par `StartExerciseSession`, sans use case dédié ; la fiche propose et démarre un autre exercice (ADR-0101, UDR-0119, UDR-0120) | Un bouton qui appelle un helper de route inexistant |
+| AS-17 | Suivre les remédiations de sa classe | ✅ | V5 — livrée par `remediation-ciblee` (2026-10-16) : page de la classe et fiche vue depuis la classe, sans attendre `rapports-de-classe` (UDR-0121) | `NoMethodError` sur panneau fermé |
 | AS-18 | Assigner un exercice à une classe | ❌ | V1 (Lot D) (= CL-20) — livrée 2026-09-27 (#33) | Une réponse `204` qui laisse le bouton inchangé ; `assigned_by_id` qui reçoit un id de profil pour une clé vers `users` |
 | AS-19 | Retirer un exercice d'une classe | ⚠️ | V1 (Lot D) (= CL-20) — livrée 2026-09-27 (#33) | — |
 | AS-20 | Exercices d'un chapitre dans une classe | ❌ | V1 (Lot D) (= CL-12) — livrée 2026-09-27 (#33) | — |
-| AS-21 | Rapport de synthèse d'un exercice | ❌ | V3 (`rapports-de-classe`) | « Tentatives » qui compte des sessions ; des niveaux de badge affichés en anglais |
-| AS-22 | Rapport détaillé par question et par élève | ❌ | V3 | Un taux de réussite qui dépasse 100 % dès qu'un élève recommence ; des questions numérotées par `id` |
-| AS-23 | Message d'encouragement à l'enseignant | ❌ | V3 | 36 phrases en dur dans la vue |
-| AS-24 | Détail d'un élève | ⚠️ | V3 (= CL-13) | Un mur de badges qui mélange toutes les classes |
-| AS-25 | Compteurs de badges de la classe sur la carte | ⚠️ | V3 | Une requête par carte (N+1) |
+| AS-21 | Rapport de synthèse d'un exercice | ❌ | V3 (`rapports-de-classe`) — livrée 2026-10-07 (#164) par `rapports-exercices` | « Tentatives » qui compte des sessions ; des niveaux de badge affichés en anglais |
+| AS-22 | Rapport détaillé par question et par élève | ❌ | V3 — livrée en grande partie 2026-10-07 (#164) par `rapports-exercices` ; noms vers la fiche : PR `rapports-de-classe` prête le 2026-10-16, à fusionner | Un taux de réussite qui dépasse 100 % dès qu'un élève recommence ; des questions numérotées par `id` |
+| AS-23 | Message d'encouragement à l'enseignant | ❌ | V3 — « prochain geste » en six cas : PR `rapports-de-classe` prête le 2026-10-16, à fusionner | 36 phrases en dur dans la vue |
+| AS-24 | Détail d'un élève | ⚠️ | V3 (= CL-13) — PR `rapports-de-classe` prête le 2026-10-16, à fusionner | Un mur de badges qui mélange toutes les classes |
+| AS-25 | Compteurs de badges de la classe sur la carte | ⚠️ | V3 — livrée 2026-10-07 (#164) par `rapports-exercices` | Une requête par carte (N+1) |
 | AS-26 | Simuler les sessions des démos | 💀 | **écartée** — retirée du plan le 2026-09-22 | — |
 | AS-27 | Catalogue de sujets d'examen (élève) | ❌ | **écartée** — retirée du plan le 2026-09-22 | — |
 | AS-28 | Consulter un sujet (paywall) | ❌ | **écartée** — retirée du plan le 2026-09-22 | — |
@@ -648,7 +648,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | TR-02 | Redirection selon le rôle | ⚠️ | V1 (0b) (= ID-13) — livrée 2026-09-27 (#33) | La boucle infinie de l'enseignant sans école |
 | TR-03 | « Espace Etabl. » à 2 000 FCFA | ❌ | **écartée** — retirée du plan le 2026-09-22 | Un lien vers une route inexistante |
 | TR-04 | Fil d'accueil élève | ❌ | V1 (Lot A / D, F-31) — livrée 2026-09-27 (#33) · annonces en V6 | Un écran d'accueil sans test système (il levait une exception sans alerte) |
-| TR-05 | Fil d'accueil enseignant | ❌ | V1 (Lot D) — livrée 2026-09-27 (#33) · activité des élèves en V3 | Idem |
+| TR-05 | Fil d'accueil enseignant | ❌ | V1 (Lot D) — livrée 2026-09-27 (#33) · activité des élèves en V3 : livrée 2026-10-07 (#183) par `interface-enseignant-organisation` | Idem |
 | TR-06 | Gains « Prepa » en FCFA | 💀 | **écartée** — retirée du plan le 2026-09-22 | — |
 | TR-07 | `/teachers/dashboard` | 💀 | **écartée** : page d'échafaudage vide ; le tableau de bord de classe est livré en V3 | — |
 | TR-08 | `/teachers/setup` | 💀 | **écartée** : remplacée par un onboarding à état persisté (V1, Lot D) | — |
@@ -675,7 +675,7 @@ Une feature ❌ ou 💀 ne se porte pas : elle se construit, grill compris (§8)
 | TR-29 | Import des DRENA en arrière-plan | 💀 | **écartée** (= SC-02) | — |
 | TR-30 | Démos : générer et simuler | 💀 | **écartée** — retirée du plan le 2026-09-22 | — |
 | TR-31 | Purge horaire des jobs terminés | ⚠️ | V0 (F-30) — livrée 2026-09-25 (#6) | Un job récurrent qui dépend d'un worker jamais lancé |
-| TR-32 | Cache des agrégats et référentiels | ✅ | V0 (installation) — livrée 2026-09-25 (#6) · V3 (rapports) | Un cache actif en production seulement |
+| TR-32 | Cache des agrégats et référentiels | ✅ | V0 (installation) — livrée 2026-09-25 (#6) · V3 (rapports) : fermée sans cache, lecture en direct (ADR-0079 §4.6) | Un cache actif en production seulement |
 | TR-33 | Temps réel (Solid Cable) | 💀 | **écartée** — retirée du plan le 2026-09-22 | — |
 | TR-34 | Sonde de santé `/up` | ❌ | V0 (garde-fou n° 6) — livrée 2026-09-25 (#6) | — |
 | TR-35 | Refus des navigateurs anciens | ✅ | V0 (F-29) — livrée 2026-09-25 (#6) | Un 406 sur les Android d'entrée de gamme du public cible |

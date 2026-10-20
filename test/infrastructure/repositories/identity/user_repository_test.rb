@@ -61,6 +61,15 @@ module Repositories
         assert_nil @repository.authenticate(contact: record.contact, pin: "1357")
       end
 
+      test "actor_for gives no actor to an anonymized account, whatever its role" do
+        admin = create_team_member(team_role: "admin", second_factor: false)
+        assert_equal :team, @repository.actor_for(user_id: admin.id).role
+
+        admin.update_columns(anonymized_at: Time.current)
+
+        assert_nil @repository.actor_for(user_id: admin.id)
+      end
+
       test "actor_for gives the teacher their primary school" do
         school = create_school
         teacher = create_teacher(school:)
@@ -70,14 +79,49 @@ module Repositories
         assert_equal Entities::Identity::Actor.new(user_id: teacher.id, role: :teacher, school_id: school.id), actor
       end
 
-      # ADR-0065 : une direction se connecte par PIN, et son acteur porte l'établissement de son rattachement.
-      test "a school admin signs in by PIN and their actor carries their school" do
+      # ADR-0094 §4.2 : l'établissement courant de la session s'il y est rattaché, sinon le principal, sinon aucun.
+      test "actor_for gives the teacher the current school of their session while they are attached to it" do
+        primary, other = create_school, create_school
+        teacher = create_teacher(school: primary)
+        Orm::TeacherSchool.create!(teacher:, school: other, primary: false)
+
+        assert_equal other.id, @repository.actor_for(user_id: teacher.id, current_school_id: other.id).school_id
+        assert_equal primary.id, @repository.actor_for(user_id: teacher.id, current_school_id: primary.id).school_id
+      end
+
+      test "actor_for falls back on the primary school when the session names a school the teacher left" do
+        primary, left, stranger = create_school, create_school, create_school
+        teacher = create_teacher(school: primary)
+
+        assert_equal primary.id, @repository.actor_for(user_id: teacher.id, current_school_id: left.id).school_id
+        assert_equal primary.id, @repository.actor_for(user_id: teacher.id, current_school_id: stranger.id).school_id
+      end
+
+      test "actor_for gives a teacher without any school no school, whatever the session says" do
+        teacher = create_teacher(school: nil)
+
+        assert_nil @repository.actor_for(user_id: teacher.id, current_school_id: create_school.id).school_id
+      end
+
+      test "actor_for ignores the session's school for a school admin" do
         school = create_school
-        admin = create_school_admin(school:, pin: "1357")
+        admin = create_school_admin(school:)
+
+        assert_equal school.id, @repository.actor_for(user_id: admin.id, current_school_id: create_school.id).school_id
+      end
+
+      # ADR-0065 : une direction se connecte par PIN, et son acteur porte l'établissement de son rattachement. ED-05 (ADR-0092) :
+      # et sa fonction ; tout autre rôle n'en a pas.
+      test "ED-05: a school admin signs in by PIN and their actor carries their school and their position" do
+        school = create_school
+        admin = create_school_admin(school:, pin: "1357", position: "educator")
 
         assert_equal admin.id, @repository.authenticate(contact: admin.contact, pin: "1357").id
-        assert_equal Entities::Identity::Actor.new(user_id: admin.id, role: :school_admin, school_id: school.id),
+        assert_equal Entities::Identity::Actor.new(user_id: admin.id, role: :school_admin, school_id: school.id, staff_position: "educator"),
                      @repository.actor_for(user_id: admin.id)
+        [ create_teacher(school:), create_student, create_team_member(second_factor: false) ].each do |user|
+          assert_nil @repository.actor_for(user_id: user.id).staff_position, user.role
+        end
       end
 
       # ADR-0077 §4.2 : un compte direction archivé reçoit le refus d'un mauvais PIN ; une session survivante mène à l'attente.

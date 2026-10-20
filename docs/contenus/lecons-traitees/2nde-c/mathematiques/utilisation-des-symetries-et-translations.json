@@ -1,0 +1,1094 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Utilisation des symétries et translations",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "Mathématiques",
+      "series_name": "C",
+      "essentials": [
+        {
+          "name": "La symétrie centrale",
+          "subtitle": "Retourner un motif autour d'un point, comme autour d'un bouton",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Construire le symétrique d'un point par rapport à un point $O$.</li>\n<li>Dire quelles propriétés une symétrie centrale conserve.</li>\n<li>Utiliser deux symétries de même centre pour démontrer qu'un quadrilatère est un parallélogramme.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le bouton au centre du pagne (le symétrique d'un point).</strong> Un pagne en wax porte un motif. Si on le fait pivoter d'un demi-tour autour du bouton central, chaque motif se retrouve de l'autre côté du bouton, à la même distance.</p>\n<p><em>Le pont.</em> Le bouton est le centre $O$. Le symétrique du motif $M$ est le point $M'$ tel que $O$ soit le milieu de $[MM']$. Le bouton est au milieu du trajet de $M$ à $M'$.</p>\n<p><em>Où l'image s'arrête.</em> Un pagne tourné d'un demi-tour ressemble à un pagne vu dans un miroir, mais ce n'est pas la même chose. La symétrie centrale fait pivoter la figure de $180$° autour de $O$.</p>\n<p><strong>2. La figure entière (la conservation).</strong> Le motif tout entier est transformé point par point. Un segment devient un segment de même longueur, et une droite devient une droite parallèle.</p>\n<p><em>Le pont.</em> Les longueurs, les milieux et les alignements sont conservés. Seule la position change.</p>\n<p><em>Où l'image s'arrête.</em> Le centre $O$ est le seul point qui reste à sa place. Tous les autres points changent de place, mais la figure n'est ni agrandie ni déformée.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Symétrique d'un point.</strong> Le symétrique de $M$ par rapport à $O$ est le point $M'$ tel que $O$ soit le milieu de $[MM']$. De manière équivalente, $\\overrightarrow{OM'}=-\\overrightarrow{OM}$. Le symétrique de $O$ est $O$ lui-même.</p>\n<p><strong>Conservation.</strong> Une symétrie centrale conserve les longueurs, les milieux et l'alignement. Elle transforme un segment en segment de même longueur, et une droite en droite parallèle.</p>\n<p><strong>Parallélogramme.</strong> Si $A$ et $C$ sont symétriques par rapport à $I$, et si $B$ et $D$ le sont aussi, alors $ABCD$ est un parallélogramme lorsque ses points ne sont pas alignés : ses diagonales $[AC]$ et $[BD]$ ont le même milieu $I$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Dans un repère, $O(1\\,;3)$ et $A(2\\,;-1)$. Trouver le symétrique $A'$ de $A$ par rapport à $O$.</strong></p>\n<ol>\n<li>$O$ doit être le milieu de $[AA']$. On pose $A'(x\\,;y)$.</li>\n<li>Sur l'abscisse : $\\frac{2+x}{2}=1$, donc $x=0$.</li>\n<li>Sur l'ordonnée : $\\frac{-1+y}{2}=3$, donc $y=7$.</li>\n<li>Donc $A'(0\\,;7)$.</li>\n<li>Vérification : le milieu de $[AA']$ est $(\\frac{2+0}{2}\\,;\\frac{-1+7}{2})=(1\\,;3)=O$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Placer le symétrique « à vue d'œil », de l'autre côté du centre, sans vérifier la distance. Pour le repérer, teste toujours la condition : $O$ doit être exactement le milieu de $[MM']$.</p>\n<p>Autre confusion : une symétrie centrale n'a pas d'axe. L'axe appartient à la symétrie axiale, étudiée dans la fiche suivante.</p>\n<h2>En une phrase</h2>\n<p>Le symétrique d'un point par rapport à $O$ est le point situé de l'autre côté de $O$, à la même distance : $O$ est le milieu du segment qui les relie.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître un symétrique par rapport à un point",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Le point $M'$ est le symétrique de $M$ par rapport à $O$. Que peut-on dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "$M'$ est de l'autre côté de $O$, à la même distance : $O$ est donc le milieu de $[MM']$. Si $M$ était le milieu de $[OM']$, $M'$ serait deux fois plus loin de $O$ que $M$. L'erreur tentante est de confondre le centre et le milieu de $[OM]$.",
+                  "answers": [
+                    {
+                      "content": "$O$ est le milieu de $[MM']$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$M$ est le milieu de $[OM']$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M'$ est le milieu de $[OM]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M$ et $M'$ sont toujours confondus avec $O$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symétrique du point $O$ par rapport à $O$ est $O$ lui-même.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : $O$ est le milieu du segment réduit au point $[OO]$. Ce point est son propre symétrique.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $M'$ est le symétrique de $M$ par rapport à $O$, alors $\\overrightarrow{OM'}=-\\overrightarrow{OM}$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Les vecteurs $\\overrightarrow{OM}$ et $\\overrightarrow{OM'}$ ont la même direction et la même longueur, et des sens contraires, puisque $O$ est entre $M$ et $M'$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère d'origine $O(0\\,;0)$, quel est le symétrique de $A(3\\,;1)$ par rapport à $O$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par rapport à l'origine, on change le signe des deux coordonnées : $O$ est le milieu de $[AA']$, donc $A'=(-3\\,;-1)$. $(-3\\,;1)$ ne change que l'abscisse : c'est le symétrique par rapport à l'axe des ordonnées.",
+                  "answers": [
+                    {
+                      "content": "$(-3\\,;-1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(3\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-3\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(0\\,;0)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquelles des propriétés suivantes sont conservées par une symétrie centrale ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Une symétrie centrale conserve les longueurs, les milieux et l'alignement. Un segment devient un segment de même longueur. L'erreur tentante est de penser que la figure est agrandie ou déformée.",
+                  "answers": [
+                    {
+                      "content": "La longueur des segments.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le milieu d'un segment.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La longueur des segments est multipliée par $2$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un segment devient une demi-droite.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Construire et calculer des symétriques par rapport à un point",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans un repère, $O(2\\,;-1)$ est le centre. Quel est le symétrique de $M(5\\,;3)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$O$ est le milieu de $[MM']$ : $x_{M'}=2x_O-x_M=4-5=-1$ et $y_{M'}=2y_O-y_M=-2-3=-5$. $(3\\,;4)$ est le vecteur $\\overrightarrow{OM}$. $(7\\,;2)$ additionne au lieu de soustraire.",
+                  "answers": [
+                    {
+                      "content": "$(-1\\,;-5)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(7\\,;2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-5\\,;-3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3\\,;4)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $M'$ est le symétrique de $M$ par rapport à $O$, alors $OM=OM'$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : $O$ est au milieu de $[MM']$, donc $M$ et $M'$ sont à la même distance de $O$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère d'origine $O(0\\,;0)$, le symétrique de $B$ par rapport à $O$ est $B'(-4\\,;2)$. Quelles sont les coordonnées de $B$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par rapport à l'origine, les coordonnées du symétrique sont opposées : $B=(4\\,;-2)$. $(-4\\,;-2)$ oublie de changer le signe de l'ordonnée.",
+                  "answers": [
+                    {
+                      "content": "$(4\\,;-2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-4\\,;2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-4\\,;-2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(4\\,;2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$ et $B$ sont distincts, $I$ est le milieu de $[AB]$, et $A'$ est le symétrique de $A$ par rapport à $I$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$I$ est le milieu de $[AB]$ : le symétrique de $A$ par rapport à $I$ est donc $B$. L'erreur tentante est de croire que $A'$ est le milieu de $[AB]$, c'est-à-dire de confondre le centre et le symétrique.",
+                  "answers": [
+                    {
+                      "content": "$A'=B$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{IA'}=-\\overrightarrow{IA}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A'$ est le milieu de $[AB]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A'=A$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symétrique d'un segment $[AB]$ par rapport à $O$ est un segment de même longueur.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : la symétrie centrale conserve les distances. Le segment image a la même longueur que $[AB]$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Parallélogrammes par symétrie",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Soit $ABCD$ un quadrilatère dont les points ne sont pas alignés : $A$ et $C$ sont symétriques par rapport à $I$, et $B$ et $D$ le sont aussi. Que peut-on dire de $ABCD$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$I$ est le milieu de $[AC]$ et de $[BD]$ : les diagonales se coupent en leur milieu, donc $ABCD$ est un parallélogramme. Rien n'impose des côtés de même longueur ni des angles droits : ce n'est pas forcément un carré ou un losange.",
+                  "answers": [
+                    {
+                      "content": "$ABCD$ est un parallélogramme de centre $I$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$ABCD$ est un carré.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$ABCD$ est un losange.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A$, $B$, $C$ sont alignés.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le parallélogramme $ABCD$ de centre $I$, on note $A'$ le symétrique de $B$ par rapport à $I$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Dans un parallélogramme, les diagonales se coupent en leur milieu : $I$ est le milieu de $[BD]$, donc le symétrique de $B$ est $D$. Le symétrique de $A$ par rapport à $I$ est $C$, pas $D$.",
+                  "answers": [
+                    {
+                      "content": "$A'=D$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$I$ est le milieu de $[BD]$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A'=A$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A'$ est le symétrique de $A$ par rapport à $I$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(1\\,;2)$ et $C(5\\,;6)$ sont symétriques par rapport à $I$. Quelles sont les coordonnées de $I$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$I$ est le milieu de $[AC]$ : $(\\frac{1+5}{2}\\,;\\frac{2+6}{2})=(3\\,;4)$. $(6\\,;8)$ est la somme, sans division. $(2\\,;2)$ est le vecteur $\\overrightarrow{AI}$, pas le point $I$.",
+                  "answers": [
+                    {
+                      "content": "$(3\\,;4)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(6\\,;8)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2\\,;2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(4\\,;3)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un quadrilatère $MNPQ$, les diagonales $[MP]$ et $[NQ]$ se coupent en leur milieu $J$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$M$ et $P$ sont symétriques par rapport à $J$, de même que $N$ et $Q$ : le quadrilatère est un parallélogramme. Il n'est pas forcément un carré, car la figure n'impose ni la longueur des côtés ni les angles droits.",
+                  "answers": [
+                    {
+                      "content": "$P$ est le symétrique de $M$ par rapport à $J$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$Q$ est le symétrique de $N$ par rapport à $J$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$MNPQ$ est un parallélogramme.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$N$ est le symétrique de $P$ par rapport à $J$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$MNPQ$ est un carré.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si deux points $A$ et $B$ sont symétriques par rapport à $O$, alors la droite $(AB)$ passe par $O$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : $O$ est le milieu de $[AB]$, donc il se trouve sur la droite $(AB)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est l'image d'une droite $d$ par une symétrie centrale de centre $O$, si $O$ n'est pas sur $d$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La symétrie centrale transforme une droite en droite parallèle. La droite $d$ serait gardée seulement si elle passait par $O$. Une droite n'est jamais transformée en un point.",
+                  "answers": [
+                    {
+                      "content": "Une droite parallèle à $d$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une droite perpendiculaire à $d$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La droite $d$ elle-même.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un point.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La symétrie axiale",
+          "subtitle": "Plier le tissu le long d'une droite",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Construire le symétrique d'un point par rapport à une droite $d$.</li>\n<li>Reconnaître les points fixes d'une symétrie axiale.</li>\n<li>Calculer le symétrique d'un point par rapport à l'axe des abscisses ou à l'axe des ordonnées.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. La ligne de pliage (le symétrique par rapport à une droite).</strong> La couturière plie un pagne en deux, le long d'une ligne de pliage. Les motifs d'un côté se retrouvent exactement de l'autre côté du pli.</p>\n<p><em>Le pont.</em> La ligne de pliage est l'axe $d$. Le symétrique de $M$ est le point $M'$ tel que $d$ coupe $[MM']$ en son milieu, à angle droit. On dit que $d$ est la médiatrice de $[MM']$.</p>\n<p><em>Où l'image s'arrête.</em> Un tissu réel s'étire un peu au pliage. En mathématiques, la figure reste exactement identique de l'autre côté de l'axe.</p>\n<p><strong>2. Une couture posée sur le pli (les points fixes).</strong> Un point cousu exactement sur la ligne de pliage ne change pas de place quand on plie le tissu.</p>\n<p><em>Le pont.</em> Si $M$ appartient à l'axe $d$, alors son symétrique est $M$ lui-même.</p>\n<p><em>Où l'image s'arrête.</em> Seuls les points de l'axe sont fixes. Tous les autres changent de côté.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Symétrique par rapport à une droite.</strong> Si $M$ n'est pas sur $d$, son symétrique $M'$ est tel que $d$ est la médiatrice de $[MM']$. Si $M$ est sur $d$, alors $M'=M$.</p>\n<p><strong>Conservation.</strong> Une symétrie axiale conserve les longueurs, les milieux, l'alignement et les angles. Elle transforme une droite en droite.</p>\n<p><strong>Axes de coordonnées.</strong> Par rapport à l'axe des ordonnées, $(x\\,;y)$ devient $(-x\\,;y)$. Par rapport à l'axe des abscisses, $(x\\,;y)$ devient $(x\\,;-y)$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Dans un repère, trouver le symétrique de $A(3\\,;1)$ par rapport à l'axe des ordonnées.</strong></p>\n<ol>\n<li>L'axe des ordonnées est la droite des points d'abscisse $0$.</li>\n<li>Le segment $[AA']$ est perpendiculaire à cet axe : $A$ et $A'$ ont la même ordonnée, $y=1$.</li>\n<li>Le milieu de $[AA']$ est sur l'axe, donc son abscisse est $0$ : l'abscisse de $A'$ est $-3$.</li>\n<li>Donc $A'(-3\\,;1)$.</li>\n<li>Vérification : le milieu de $[AA']$ est $(0\\,;1)$, sur l'axe des ordonnées.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Confondre la symétrie axiale avec la symétrie centrale. Une symétrie centrale se fait autour d'un point, une symétrie axiale autour d'une droite. Pour l'axe des ordonnées, on change le signe de l'abscisse, et non celui de l'ordonnée.</p>\n<h2>En une phrase</h2>\n<p>Le symétrique d'un point par rapport à une droite est son reflet dans un miroir placé sur cette droite : le segment qui les relie est perpendiculaire à l'axe, et l'axe passe par son milieu.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître la symétrie axiale",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Le point $M'$ est le symétrique de $M$ par rapport à la droite $d$. Que peut-on dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "$d$ coupe le segment $[MM']$ en son milieu, à angle droit : c'est sa médiatrice. L'erreur tentante est de dire que $d$ est parallèle à $(MM')$ : la ligne de pliage est perpendiculaire au segment qui relie un point à son image.",
+                  "answers": [
+                    {
+                      "content": "$d$ est la médiatrice du segment $[MM']$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$d$ est parallèle à $(MM')$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M$ et $M'$ sont sur la droite $d$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M$ est le milieu de $[MM']$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si un point $M$ appartient à l'axe $d$, son symétrique par rapport à $d$ est $M$ lui-même.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Le point est déjà sur le pli : son reflet reste à la même place. Seuls les points de l'axe sont fixes.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "La symétrie axiale conserve les longueurs.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : un segment et son image ont la même longueur. C'est ce qui fait que le motif plié se superpose exactement au motif de départ.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, quel est le symétrique de $A(3\\,;1)$ par rapport à l'axe des abscisses ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'axe des abscisses garde l'abscisse et change le signe de l'ordonnée : $(3\\,;-1)$. $(-3\\,;1)$ serait la symétrie par rapport à l'axe des ordonnées, et $(-3\\,;-1)$ celle par rapport à l'origine.",
+                  "answers": [
+                    {
+                      "content": "$(3\\,;-1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-3\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-3\\,;-1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3\\,;1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par rapport à l'axe des ordonnées, lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "L'axe des ordonnées change le signe de l'abscisse et garde l'ordonnée. Un point de l'axe, comme $(0\\,;4)$, est son propre symétrique. L'erreur tentante est de changer le signe de l'ordonnée.",
+                  "answers": [
+                    {
+                      "content": "$(2\\,;5)$ a pour symétrique $(-2\\,;5)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-3\\,;1)$ a pour symétrique $(3\\,;1)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(0\\,;4)$ a pour symétrique $(0\\,;-4)$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2\\,;5)$ est son propre symétrique.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer des symétriques par rapport à un axe",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans un repère, quel est le symétrique de $M(-2\\,;3)$ par rapport à l'axe des ordonnées ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par rapport à l'axe des ordonnées, l'abscisse change de signe et l'ordonnée reste : $(2\\,;3)$. $(-2\\,;-3)$ serait le symétrique par rapport à l'origine. $(-2\\,;3)$ est $M$ lui-même.",
+                  "answers": [
+                    {
+                      "content": "$(2\\,;3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-2\\,;-3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-2\\,;3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2\\,;-3)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par rapport à l'axe des abscisses, quel est le symétrique de $N(4\\,;-6)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'axe des abscisses garde l'abscisse et change le signe de l'ordonnée : $(4\\,;6)$. $(-4\\,;-6)$ serait le symétrique par rapport à l'origine.",
+                  "answers": [
+                    {
+                      "content": "$(4\\,;6)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-4\\,;-6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-4\\,;6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(4\\,;-6)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le point $A(1\\,;0)$ est sur l'axe des abscisses, donc son symétrique par rapport à cet axe est $A$ lui-même.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : $A$ est sur le pli, il est donc fixe.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un segment $[AB]$ mesure $5$ cm. Son symétrique par rapport à une droite $d$ est $[A'B']$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "La symétrie axiale conserve les longueurs et transforme un segment en segment : $A'B'=5$ cm. Les deux fausses affirmations imposent une taille ou une direction qui n'est pas garantie.",
+                  "answers": [
+                    {
+                      "content": "$A'B'=5$ cm.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[A'B']$ est un segment.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A'B'=10$ cm.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(A'B')$ est parallèle à $d$ dans tous les cas.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point $P$ est à $3$ cm d'une droite $d$. Quelle est la distance de son symétrique $P'$ à $d$, et de quel côté se trouve-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "La symétrie d'axe $d$ place $P'$ à la même distance de $d$, mais de l'autre côté : $d$ est au milieu de $[PP']$. $6$ cm serait la distance entre $P$ et $P'$. $P'$ ne serait sur $d$ que si $P$ l'était déjà.",
+                  "answers": [
+                    {
+                      "content": "$3$ cm, de l'autre côté de $d$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6$ cm, de l'autre côté de $d$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$ cm, car $P'$ est sur $d$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$ cm, du même côté que $P$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Pliages et coordonnées",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Le point $A'$ est le symétrique de $A(2\\,;3)$ par rapport à l'axe des ordonnées. Quelles sont les coordonnées de $A'$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par rapport à l'axe des ordonnées, l'abscisse change de signe et l'ordonnée reste : $A'(-2\\,;3)$. $(2\\,;-3)$ est le symétrique par rapport à l'axe des abscisses, et $(-2\\,;-3)$ celui par rapport à l'origine. $(3\\,;2)$ échange les coordonnées, ce qui n'est pas une symétrie.",
+                  "answers": [
+                    {
+                      "content": "$(-2\\,;3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2\\,;-3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-2\\,;-3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3\\,;2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On plie une feuille le long de l'axe des abscisses. Le point $M(1\\,;4)$ devient $M'$, et le point $N(-2\\,;-1)$ devient $N'$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Pour l'axe des abscisses, l'abscisse est conservée et l'ordonnée change de signe : $M'(1\\,;-4)$ et $N'(-2\\,;1)$. $(2\\,;1)$ est le symétrique de $N$ par rapport à l'origine. $M'=M$ seulement si $M$ est sur l'axe.",
+                  "answers": [
+                    {
+                      "content": "$M'(1\\,;-4)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$N'(-2\\,;1)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$M'=M$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$N'(2\\,;1)$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point $P$ et son symétrique $P'$ par rapport à une droite $d$ vérifient $PP'=8$ cm. Quelle est la distance de $P$ à la droite $d$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$d$ coupe $[PP']$ en son milieu : $P$ est à mi-chemin de $d$ et de $P'$. Donc $P$ est à $\\frac{8}{2}=4$ cm de $d$. L'erreur tentante est de répondre $8$ cm, qui est la distance entre $P$ et son image.",
+                  "answers": [
+                    {
+                      "content": "$4$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$8$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$16$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$ cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le symétrique d'un triangle par rapport à une droite est un triangle de même aire.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : la symétrie axiale conserve les longueurs, donc la forme et l'aire du triangle.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(-3\\,;2)$ est donné. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "L'axe des ordonnées change l'abscisse : $(3\\,;2)$. L'axe des abscisses change l'ordonnée : $(-3\\,;-2)$. L'origine change les deux signes : $(3\\,;-2)$. Les deux affirmations fausses inversent les rôles des deux axes.",
+                  "answers": [
+                    {
+                      "content": "$(3\\,;2)$ est le symétrique de $A$ par rapport à l'axe des ordonnées.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-3\\,;-2)$ est le symétrique de $A$ par rapport à l'axe des abscisses.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(3\\,;-2)$ est le symétrique de $A$ par rapport à l'origine.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(3\\,;2)$ est le symétrique de $A$ par rapport à l'axe des abscisses.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-3\\,;-2)$ est le symétrique de $A$ par rapport à l'axe des ordonnées.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un point $M$ n'est pas sur l'axe $d$. Quelle démarche permet de trouver son symétrique $M'$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$d$ coupe $[MM']$ en son milieu, à angle droit : $M'$ est sur la perpendiculaire à $d$ passant par $M$, à la même distance de $d$, de l'autre côté. L'erreur tentante est de placer $M'$ du même côté : ce ne serait pas un pliage.",
+                  "answers": [
+                    {
+                      "content": "Tracer la perpendiculaire à $d$ passant par $M$, puis placer $M'$ de l'autre côté de $d$, à la même distance de $d$ que $M$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Placer $M'$ à la même distance de $M$ que de $d$, n'importe où.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Placer $M'$ sur la parallèle à $d$ passant par $M$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Placer $M'$ à la même distance de $d$ que $M$, mais du même côté que $M$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La translation et ses usages",
+          "subtitle": "Décaler un motif à l'identique. À compléter : composition de symétries et de translations.",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Construire l'image d'un point par une translation de vecteur $\\overrightarrow{u}$.</li>\n<li>Calculer les coordonnées de l'image d'un point par une translation.</li>\n<li>Utiliser une translation pour démontrer qu'un quadrilatère est un parallélogramme.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le motif répété sur le wax (la translation).</strong> Sur une pièce de wax, une même fleur est répétée. Chaque fleur est la précédente, décalée de la même longueur, dans la même direction et dans le même sens.</p>\n<p><em>Le pont.</em> Ce décalage est une translation de vecteur $\\overrightarrow{u}$. L'image $M'$ d'un point $M$ vérifie $\\overrightarrow{MM'}=\\overrightarrow{u}$.</p>\n<p><em>Où l'image s'arrête.</em> Sur une pièce réelle, la répétition s'arrête au bord du tissu. En mathématiques, la translation s'applique à tout le plan, sans bord.</p>\n<p><strong>2. Les rangées de carreaux (la conservation).</strong> Quand on décale tout un carrelage du même vecteur, les rangées restent parallèles entre elles, et les carreaux gardent leur taille.</p>\n<p><em>Le pont.</em> Une translation transforme une droite en droite parallèle, et un segment en segment de même longueur.</p>\n<p><em>Où l'image s'arrête.</em> La figure ne tourne pas. Aucun point ne reste à sa place, sauf si le vecteur est nul.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Translation.</strong> L'image de $M$ par la translation de vecteur $\\overrightarrow{u}$ est le point $M'$ tel que $\\overrightarrow{MM'}=\\overrightarrow{u}$.</p>\n<p><strong>Coordonnées.</strong> Si $\\overrightarrow{u}(a\\,;b)$, la translation envoie $M(x\\,;y)$ sur $M'(x+a\\,;y+b)$.</p>\n<p><strong>Conservation.</strong> Une translation conserve les longueurs, les milieux, l'alignement et la direction : une droite a pour image une droite parallèle.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Dans un repère, $\\overrightarrow{u}(2\\,;-1)$ et $A(0\\,;3)$. Trouver l'image $A'$ de $A$ par la translation de vecteur $\\overrightarrow{u}$, puis vérifier.</strong></p>\n<ol>\n<li>Par définition, $\\overrightarrow{AA'}=\\overrightarrow{u}$.</li>\n<li>Avec $A'(x\\,;y)$, on a $\\overrightarrow{AA'}(x-0\\,;y-3)$.</li>\n<li>On égale aux coordonnées de $\\overrightarrow{u}$ : $x-0=2$ et $y-3=-1$.</li>\n<li>Donc $x=2$ et $y=2$ : $A'(2\\,;2)$.</li>\n<li>Vérification : $\\overrightarrow{AA'}(2-0\\,;2-3)=(2\\,;-1)=\\overrightarrow{u}$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Inverser le sens du décalage. L'image $M'$ vérifie $\\overrightarrow{MM'}=\\overrightarrow{u}$ : on part de $M$ et on avance de $\\overrightarrow{u}$. Écrire $\\overrightarrow{M'M}=\\overrightarrow{u}$ donne le mauvais point.</p>\n<h2>En une phrase</h2>\n<p>Une translation décale toute la figure du même vecteur : chaque point $M$ va en $M'$ avec $\\overrightarrow{MM'}=\\overrightarrow{u}$, et la figure ne tourne pas.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître une translation",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Le point $M'$ est l'image de $M$ par la translation de vecteur $\\overrightarrow{u}$. Que peut-on dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le vecteur va de $M$ à $M'$ : $\\overrightarrow{MM'}=\\overrightarrow{u}$. Écrire $\\overrightarrow{M'M}$ revient à inverser le trajet. Un point ne reste fixe que si le vecteur est nul.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{MM'}=\\overrightarrow{u}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{M'M}=\\overrightarrow{u}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{OM'}=\\overrightarrow{u}$, quel que soit le point $O$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$M'=M$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une translation de vecteur non nul n'a aucun point fixe.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : tous les points se déplacent de $\\overrightarrow{u}$, qui n'est pas nul. Seule la translation de vecteur nul laisse tout en place.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une translation transforme un segment en un segment de même longueur.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : les points $A$ et $B$ sont décalés du même vecteur, donc le segment image a la même longueur et la même direction.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, le point $A(1\\,;2)$ est translaté par le vecteur $\\overrightarrow{u}(3\\,;-4)$. Quelles sont les coordonnées de son image $A'$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$A'(1+3\\,;2-4)=(4\\,;-2)$. $(-2\\,;6)$ soustrait le vecteur au lieu de l'ajouter. $(3\\,;-4)$ est le vecteur lui-même, et $(1\\,;2)$ est le point de départ.",
+                  "answers": [
+                    {
+                      "content": "$(4\\,;-2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-2\\,;6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3\\,;-4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour une translation de vecteur $\\overrightarrow{u}(2\\,;3)$, lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$O$ est décalé de $(2\\,;3)$, donc son image est $(2\\,;3)$. Une translation conserve la direction : une droite a pour image une droite parallèle. L'erreur tentante est de croire que l'origine reste fixe.",
+                  "answers": [
+                    {
+                      "content": "Le point $O(0\\,;0)$ a pour image $(2\\,;3)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une droite a pour image une droite parallèle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le point $O(0\\,;0)$ reste fixe.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une droite a pour image une droite perpendiculaire.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer des images par translation",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans un repère, $\\overrightarrow{u}(2\\,;-1)$. Quelle est l'image de $A(0\\,;3)$ par la translation de vecteur $\\overrightarrow{u}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Chaque coordonnée s'ajoute : $x'=0+2=2$ et $y'=3+(-1)=2$. $(-2\\,;4)$ soustrait au lieu d'ajouter. $(0\\,;3)$ est le point de départ : une translation de vecteur non nul le déplace.",
+                  "answers": [
+                    {
+                      "content": "$(2\\,;2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-2\\,;4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2\\,;-4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(0\\,;3)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $\\overrightarrow{MM'}=\\overrightarrow{u}$, alors $M'$ est l'image de $M$ par la translation de vecteur $\\overrightarrow{u}$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : c'est la définition. On part de $M$ et on avance de $\\overrightarrow{u}$ pour arriver en $M'$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Par la translation de vecteur $\\overrightarrow{u}(-3\\,;5)$, l'image de $B(4\\,;-2)$ est :",
+                  "question_type": "single_choice",
+                  "explanation": "$x'=4+(-3)=1$ et $y'=-2+5=3$. $(7\\,;-7)$ soustrait le vecteur au lieu de l'ajouter. $(-3\\,;5)$ est le vecteur lui-même, et $(4\\,;-2)$ le point de départ.",
+                  "answers": [
+                    {
+                      "content": "$(1\\,;3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(7\\,;-7)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-3\\,;5)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(4\\,;-2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un segment $[AB]$ est translaté par $\\overrightarrow{u}$ et donne $[A'B']$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Une translation conserve les longueurs et la direction : $[A'B']$ a la même longueur que $[AB]$, et les droites sont parallèles. L'erreur tentante est de croire que la figure est doublée ou tournée.",
+                  "answers": [
+                    {
+                      "content": "$A'B'=AB$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(A'B')$ est parallèle à $(AB)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A'B'=2AB$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[A'B']$ est perpendiculaire à $[AB]$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $A'$ est l'image de $A$ par la translation de vecteur $\\overrightarrow{u}$, alors $\\overrightarrow{A'A}=-\\overrightarrow{u}$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : le retour de $A'$ vers $A$ est l'opposé de $\\overrightarrow{u}$. C'est ce qui ramène la figure à sa place de départ.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Utiliser symétries et translations",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Dans le parallélogramme $ABCD$, la translation de vecteur $\\overrightarrow{AB}$ envoie $D$ sur un point $D'$. Que peut-on dire de $D'$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\overrightarrow{DD'}=\\overrightarrow{AB}$, et $\\overrightarrow{AB}=\\overrightarrow{DC}$ dans le parallélogramme, donc $D'=C$. L'erreur tentante est de confondre les points de départ et d'arrivée.",
+                  "answers": [
+                    {
+                      "content": "$D'=C$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$D'=A$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$D'=B$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$D'=D$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un quadrilatère $ABCD$ vérifie $\\overrightarrow{AB}=\\overrightarrow{DC}$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\overrightarrow{AB}=\\overrightarrow{DC}$ : les côtés opposés sont égaux, donc $ABCD$ est un parallélogramme. La translation de vecteur $\\overrightarrow{DC}$ envoie $A$ sur $B$. En revanche, la translation de vecteur $\\overrightarrow{AB}$ n'envoie pas $C$ sur $D$ : c'est l'erreur à éviter.",
+                  "answers": [
+                    {
+                      "content": "$ABCD$ est un parallélogramme.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$B$ est l'image de $A$ par la translation de vecteur $\\overrightarrow{DC}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$D$ est l'image de $C$ par la translation de vecteur $\\overrightarrow{AB}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AC}=\\overrightarrow{BD}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A'$ et $B'$ sont les symétriques de $A$ et $B$ par rapport à $I$. Que peut-on dire de $\\overrightarrow{A'B'}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "[A'B'] a la même longueur que [AB], et la même direction, mais le sens contraire : la symétrie centrale inverse les sens. L'erreur tentante est de croire que la symétrie conserve le sens du vecteur.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{A'B'}=-\\overrightarrow{AB}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{A'B'}=\\overrightarrow{AB}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{A'B'}=\\overrightarrow{0}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{A'B'}=2\\overrightarrow{AB}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On considère un parallélogramme $ABCD$ de centre $O$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$O$ est le milieu de chaque diagonale : les symétriques de $A$ et $B$ sont $C$ et $D$. Comme $\\overrightarrow{AB}=\\overrightarrow{DC}$, la translation de vecteur $\\overrightarrow{AB}$ envoie $D$ sur $C$. Le symétrique de $A$ par rapport à $B$ n'est pas $C$.",
+                  "answers": [
+                    {
+                      "content": "$C$ est le symétrique de $A$ par rapport à $O$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$D$ est le symétrique de $B$ par rapport à $O$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$C$ est l'image de $D$ par la translation de vecteur $\\overrightarrow{AB}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$C$ est le symétrique de $A$ par rapport à $B$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$D$ est l'image de $A$ par la translation de vecteur $\\overrightarrow{AB}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une translation et une symétrie centrale transforment toutes deux une droite en une droite parallèle.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : une translation conserve la direction. Une symétrie centrale transforme une droite en droite parallèle, ou la garde si elle passe par le centre.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(1\\,;2)$. On prend son symétrique $A'$ par rapport à $O(0\\,;0)$, puis on translate $A'$ par $\\overrightarrow{u}(3\\,;1)$ pour obtenir $P$. Quelles sont les coordonnées de $P$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$A'=(-1\\,;-2)$ par rapport à l'origine. Puis la translation ajoute $(3\\,;1)$ : $P=(-1+3\\,;-2+1)=(2\\,;-1)$. $(4\\,;3)$ oublie la symétrie et ajoute $\\overrightarrow{u}$ à $A$.",
+                  "answers": [
+                    {
+                      "content": "$(2\\,;-1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(4\\,;3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-4\\,;-3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-2\\,;1)$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

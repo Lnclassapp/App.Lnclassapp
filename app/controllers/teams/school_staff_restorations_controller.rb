@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::SchoolStaffRestorationsController
-# Rôle : l'équipe admin ou field restaure une direction retirée depuis la fiche (RestoreSchoolStaff) ; 409 au plafond, 403, 404
-# ADR  : 0028, 0071, 0077 (§4.2, §4.3) · UDR : 0006, 0070 (§3.0, §3.5) · :staff_member_public_id est celui du compte restauré
+# Rôle : l'équipe admin ou field restaure une direction retirée depuis la fiche (RestoreSchoolStaff) ; 409 (plafond, chef), 403, 404
+# ADR  : 0028, 0071, 0077 (§4.2, §4.3), 0092 · UDR : 0006, 0070 (§3.0, §3.5), 0092 (§3.4) · :staff_member_public_id du compte restauré
 module Teams
   class SchoolStaffRestorationsController < BaseController
     include SchoolStaffBlock
@@ -9,7 +9,7 @@ module Teams
 
     def create
       result = restore_school_staff.call(actor: current_actor, target_public_id: @target.user_public_id)
-      return refuse(result.code) if result.failure?
+      return refuse(result.code, reason: Array(result.errors[:base]).first) if result.failure?
 
       @restored = result.value
       @notice = t(".done", name: @restored.user.display_name)
@@ -28,9 +28,10 @@ module Teams
       refuse(:not_found) unless @target && @target.school_id == @school.id
     end
 
-    # 409 : le plafond des arrivées par le code (UDR-0070 §3.5) ; 403 et 404 : les motifs du bloc « Direction ».
-    def refuse(code)
-      message = code == :conflict ? t(".cap_reached") : t("shared.school_staff.#{code}")
+    # 409 : le plafond des arrivées par le code (UDR-0070 §3.5) ou un autre chef actif (UDR-0092 §3.4) ; 403 et 404 : les
+    # motifs du bloc « Direction ».
+    def refuse(code, reason: nil)
+      message = code == :conflict ? t(".#{reason == :head_taken ? "head_taken" : "cap_reached"}") : t("shared.school_staff.#{code}")
       respond_to do |format|
         format.turbo_stream { render turbo_stream: helpers.turbo_stream_toast(message, type: :error), status: code }
         format.html { code == :conflict ? redirect_to(school_path(@school.public_id), alert: message, status: :see_other) : render_error_page(code) }

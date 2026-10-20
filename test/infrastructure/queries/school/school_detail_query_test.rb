@@ -145,11 +145,11 @@ module Queries
         french = create_material(name: "Français", category: "literature")
         create_teacher(school: @school, first_name: "Awa", last_name: "Koné", material: svt)
         other = create_teacher(school: create_school(drena: @drena), first_name: "Yao", last_name: "Brou", material: french)
-        Orm::TeacherSchool.create!(teacher: other, school: @school, primary: false)
+        add_teacher_school(other, @school)
         create_teacher(school: create_school(drena: @drena))
 
-        assert_equal [ [ "Awa Koné", "SVT", "science", true ], [ "Yao Brou", "Français", "literature", false ] ],
-                     detail.teachers.map { it.to_h.values_at(:name, :material_name, :material_category, :primary) }
+        assert_equal [ [ "Awa Koné", [ "SVT" ], true ], [ "Yao Brou", [ "Français" ], false ] ],
+                     detail.teachers.map { [ it.name, it.materials.map(&:name), it.primary ] }
       end
 
       test "IE-15 : chaque enseignant porte sa voie d'arrivée, et le nom de son parrain (« NOM Prénoms ») s'il en a un" do

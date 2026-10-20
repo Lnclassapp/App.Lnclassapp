@@ -226,4 +226,168 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     assert_redirected_to new_session_path
     assert_still_member
   end
+
+  # rapports-de-classe, Lot A (CL-13, AS-24 ; ADR-0097 §4.1, §4.2 ; UDR-0107) : la fiche d'un élève dans sa classe.
+
+  def ft(key, **) = I18n.t("classroom.classroom_students.#{key}", **)
+  def show_file(student = @koffi, classroom: @classroom) = get(classroom_student_path(classroom.public_id, student.public_id))
+
+  test "CL-13 : l'enseignant ouvre la fiche de Koffi : en-tête, chiffres, badges, exercices, fait seul, gérer" do
+    @koffi.update!(contact: "0712345604")
+    svt = create_material(name: "SVT", category: "science")
+    exercise = create_exercise(essential: create_essential(course: create_course(material: svt)), title: "La méiose")
+    assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
+    best = create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: 90, classroom_assignment: assignment)
+    create_assignment(classroom: @classroom, assignable: create_exercise(title: "Les volcans"), by: @teacher)
+    alone = create_exercise_session(student: @koffi, exercise: create_exercise(title: "Les fractions"), status: "completed",
+                                    score_percent: 75)
+    sign_in_as @teacher
+
+    show_file
+
+    assert_response :success
+    assert_select "title", text: /#{ft('show.title', name: 'Koffi Yao', classroom: '3e 2')}/
+    assert_select "a[href='#{classroom_path(@classroom.public_id)}']", text: /3e 2/
+    assert_select "h1", count: 1, text: "Koffi Yao"
+    assert_select "#student_file_identity", text: /07 •• •• •• 04/
+    assert_no_match(/0712345604/, response.body)
+    assert_select "dl#student_file_counts[aria-label=?]", ft("summary.counts_label") do
+      assert_select "div", text: /#{ft('summary.done')}\s+1\s+#{ft('summary.done_of', count: 2)}/
+      assert_select "div", text: /#{ft('summary.pending')}\s+1/
+      assert_select "dt", text: ft("summary.late"), count: 0
+    end
+    assert_select "#student_file_summary ul[aria-label]"
+    assert_select "section#student_file_assignments[aria-labelledby=student_file_assignments_title]" do
+      assert_select "li#assignment_#{assignment.public_id}", text: /90\u00A0%/
+      assert_select "li#assignment_#{assignment.public_id} a[href='#{classroom_assignment_path(@classroom.public_id, assignment.public_id)}']",
+                    text: "La méiose"
+      assert_select "li#assignment_#{assignment.public_id} a[href='#{exercise_session_result_path(best.public_id)}']",
+                    text: ft("assignments.best_session")
+      assert_select "li", text: /#{ft('assignments.not_done')}/, count: 1
+    end
+    assert_select "section#student_file_self_practice h2", text: ft("self_practice.title", days: 30)
+    assert_select "section#student_file_self_practice a[href='#{exercise_session_result_path(alone.public_id)}']"
+    assert_select "section#student_file_manage" do
+      assert_select "form[action='#{account_pin_recovery_codes_path(@koffi.public_id)}'][method=post][data-turbo-frame=_top] button",
+                    text: ft("manage.issue_code")
+      assert_select "dialog form[action='#{classroom_student_path(@classroom.public_id, @koffi.public_id)}'] input[name=_method][value=delete]"
+      assert_select "dialog form input[type=hidden][name=origin][value=file]"
+      assert_select "a[href='#{classroom_student_path(@classroom.public_id, @koffi.public_id, remove: 1)}']", text: ft("manage.remove")
+    end
+  end
+
+  # ADR-0097 §4.3, PRD Lot A scénario 2 : une échéance passée se lit, rendu en retard ou pas encore fait, jamais en couleur seule.
+  test "CL-13 : rendu en retard et échéance passée : la date du rendu, « Pas encore fait », la colonne « En retard »" do
+    due_on = Time.zone.today - 3
+    assign = ->(title) { create_assignment(classroom: @classroom, assignable: create_exercise(title:), by: @teacher, due_on:,
+                                           assigned_at: (due_on - 1).in_time_zone.change(hour: 8)) }
+    late = assign.("La méiose")
+    overdue = assign.("Les volcans")
+    create_exercise_session(student: @koffi, exercise: Orm::Exercise.find(late.assignable_id), status: "completed", score_percent: 60,
+                            classroom_assignment: late, completed_at: 1.day.ago)
+    sign_in_as @teacher
+
+    show_file
+
+    assert_select "dl#student_file_counts" do
+      assert_select "div", text: /#{ft('summary.late')}\s+1/
+    end
+    assert_select "li#assignment_#{late.public_id}", text: /#{ft('assignments.late_on', date: I18n.l(1.day.ago.to_date, format: :due_short))}/
+    assert_select "li#assignment_#{late.public_id}", text: /#{ft('assignments.sessions', count: 1)}/
+    assert_select "li#assignment_#{overdue.public_id}", text: /#{ft('assignments.overdue')}/
+    assert_select "li#assignment_#{overdue.public_id} span.font-medium.text-warning", 1
+    assert_select "li#assignment_#{late.public_id} span.font-medium.text-warning", 0
+  end
+
+  test "CL-13 : sans exercice assigné ni fait seul, deux états vides et les badges à zéro" do
+    sign_in_as @teacher
+
+    show_file
+
+    assert_response :success
+    assert_select "#student_file_assignments", text: /#{Regexp.escape(ft('assignments.empty.title'))}/
+    assert_select "#student_file_self_practice", text: /#{Regexp.escape(ft('self_practice.empty', days: 30))}/
+    assert_select "#student_file_summary li span.text-line", text: "0", count: 4
+  end
+
+  test "UDR-0107 §3.6 : sans JavaScript, ?remove=1 sert la fiche avec la confirmation ouverte" do
+    sign_in_as @teacher
+
+    get classroom_student_path(@classroom.public_id, @koffi.public_id, remove: 1)
+
+    assert_select "dialog[open] h2", text: ft("manage.remove_title", name: "Koffi Yao")
+  end
+
+  test "AS-24 : l'équipe lit la fiche, et peut retirer" do
+    sign_in_as create_team_member
+
+    show_file
+
+    assert_response :success
+    assert_select "h1", text: "Koffi Yao"
+    assert_select "#student_file_manage a", text: ft("manage.remove")
+  end
+
+  test "refus : un élève de la classe, un enseignant d'une autre classe, la direction reçoivent 403 ; le nom ne sort pas" do
+    other_teacher = create_teacher(school: @school, classrooms: [ create_classroom(school: @school) ])
+    [ @awa, other_teacher, create_school_admin(school: @school) ].each do |user|
+      sign_in_as user
+      show_file
+
+      assert_response :forbidden, user.role
+      assert_no_match(/Koffi/, response.body)
+      sign_out
+    end
+  end
+
+  # ADR-0097 §4.2 : la policy passe avant toute lecture de l'élève ; un élève parti ou inconnu donne le même 403.
+  test "refus : un enseignant d'une autre classe reçoit 403 aussi pour un élève parti ou inconnu, jamais une indication de présence" do
+    membership(@awa).update!(left_at: Time.current)
+    sign_in_as create_teacher(school: @school, classrooms: [ create_classroom(school: @school) ])
+
+    show_file @awa
+    assert_response :forbidden
+    get classroom_student_path(@classroom.public_id, "inconnu")
+    assert_response :forbidden
+  end
+
+  test "sans connexion, la fiche renvoie à la connexion" do
+    show_file
+
+    assert_redirected_to new_session_path
+  end
+
+  test "introuvable : élève parti, anonymisé, d'une autre classe, inconnu ; classe inconnue ou archivée : 404" do
+    Orm::ClassroomStudent.where(student: @awa).update_all(left_at: Time.current)
+    @ali.update_columns(anonymized_at: Time.current)
+    outsider = create_student(classroom: create_classroom(school: @school))
+    sign_in_as @teacher
+
+    [ @awa, @ali, outsider ].each do |student|
+      show_file(student)
+      assert_response :not_found
+    end
+    get classroom_student_path(@classroom.public_id, "inconnu")
+    assert_response :not_found
+    get classroom_student_path("inconnue", @koffi.public_id)
+    assert_response :not_found
+
+    @classroom.update!(status: "archived", archived_at: Time.current)
+    show_file
+    assert_response :not_found
+  end
+
+  test "Q4 : retiré depuis la fiche (origin=file), retour 303 à la page de la classe avec le toast, même en Turbo Stream" do
+    sign_in_as @teacher
+
+    remove params: { origin: "file" }, as: :turbo_stream
+
+    assert_redirected_to classroom_path(@classroom.public_id)
+    assert_equal 303, response.status
+    assert_equal tr("removed", name: "Koffi Yao"), flash[:notice]
+    assert_not_nil membership(@koffi).left_at
+
+    show_file
+    assert_response :not_found
+  end
 end

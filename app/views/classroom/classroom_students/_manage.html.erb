@@ -1,0 +1,32 @@
+<%# 🌐 UI · classroom/classroom_students/_manage — « Gérer » sur la fiche d'un élève (memo Q4) %>
+<%# Rôle : « Code de récupération » (même requête que l'ancien menu ⋮ de la ligne) et « Retirer de la classe » (ManageClassroomMembersPolicy) %>
+<%# ADR  : 0032, 0085 (§4.5), 0097 · UDR : 0061 (déclencheur-lien), 0077 (§3.4), 0081 (§3.7), 0107 (§3.6) · le retrait part avec origin=file : 303 vers la classe %>
+<%# locals: (classroom:, student:, can_remove:) -%>
+<% dialog = "remove-student-#{student.public_id}" %>
+<section id="student_file_manage" aria-labelledby="student_file_manage_title">
+  <h2 id="student_file_manage_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title") %></h2>
+  <%= ui_card padding: :md do %>
+    <p class="mb-4 text-sm text-mute"><%= t(".issue_code_hint") %></p>
+    <div class="flex flex-col gap-3 sm:flex-row">
+      <%= form_with url: account_pin_recovery_codes_path(student.public_id), method: :post, data: { turbo_frame: "_top" } do %>
+        <%= ui_button t(".issue_code"), type: :submit, variant: :secondary, icon: "key", class: "w-full sm:w-auto" %>
+      <% end %>
+      <% if can_remove %>
+        <%= ui_modal title: t(".remove_title", name: student.display_name), id: dialog, size: :sm, trigger: t(".remove"),
+                     trigger_variant: :danger, trigger_icon: "user-minus", trigger_class: "w-full sm:w-auto",
+                     trigger_href: classroom_student_path(classroom.public_id, student.public_id, remove: 1),
+                     open: params[:remove].present? do |modal| %>
+          <% modal.footer do %>
+            <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
+            <%= ui_button t(".remove_confirm"), type: :submit, form: "#{dialog}-form", variant: :danger, icon: "user-minus" %>
+          <% end %>
+          <p class="text-left text-sm text-mute"><%= t(".remove_warning", name: student.display_name) %></p>
+          <%= form_with url: classroom_student_path(classroom.public_id, student.public_id), method: :delete, id: "#{dialog}-form",
+                        data: { turbo_frame: "_top" } do %>
+            <%= hidden_field_tag :origin, "file", id: nil %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</section>

@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/_join_requests — « Enseignants en attente » de la fiche (Queries::School::JoinRequestsQuery::TeamRow) %>
 <%# Rôle : inscrits sans code ; « Valider » rattache, « Refuser » après confirmation ; PATCH puis retour à la fiche (303) %>
-<%# ADR  : 0063 · UDR : 0036, 0050 %>
+<%# ADR  : 0063 · UDR : 0036, 0050 · UDR-0127 §3.5 (matières) %>
 <%# locals: (school:, requests:) -%>
 <section id="school_join_requests" aria-labelledby="school_join_requests_title" class="mb-8">
   <h2 id="school_join_requests_title" class="font-display text-xl font-extrabold"><%= t(".title", count: requests.size) %></h2>
@@ -16,8 +16,8 @@
           </div>
         </div>
         <div class="flex flex-wrap items-center gap-2 text-xs text-mute">
-          <% if request.material_name %>
-            <%= ui_subject_badge request.material_name, category: request.material_category, size: :sm %>
+          <% request.materials.each do |material| %>
+            <%= ui_subject_badge material.name, category: material.category, size: :sm %>
           <% end %>
           <span><%= t(".requested_on", date: l(request.created_at.to_date, format: :long)) %></span>
         </div>

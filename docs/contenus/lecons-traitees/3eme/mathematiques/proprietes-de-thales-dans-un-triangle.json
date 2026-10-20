@@ -1,0 +1,804 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Propriétés de Thalès dans un triangle",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "Mathématiques",
+      "essentials": [
+        {
+          "name": "La propriété de Thalès",
+          "subtitle": "Les rapports de longueurs quand deux droites sont parallèles",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Reconnaître la configuration de Thalès dans un triangle.</li><li>Écrire les trois rapports égaux de la propriété de Thalès.</li><li>Savoir quelle longueur se place en haut et quelle longueur se place en bas de chaque rapport.</li></ul><h2>L'image pour comprendre</h2><p><strong>L'ombre du mât du drapeau.</strong> Dans la cour de l'école, le mât du drapeau est planté bien droit. Le soleil l'éclaire et son ombre au sol mesure 12 m. Tu plantes ton bâton de 1,5 m, bien droit lui aussi, sur cette ombre, à l'endroit où l'ombre du bâton se termine exactement au bout de l'ombre du mât. L'ombre du bâton mesure 2 m. Comme 2 m est le sixième de 12 m, la hauteur du bâton est aussi le sixième de celle du mât : le mât mesure donc 9 m.</p><p><em>Le pont.</em> Le bout des deux ombres, c'est le point $A$. Le pied du mât est $B$ et son sommet est $C$. Le pied du bâton est $M$ et son sommet est $N$. Le mât et le bâton sont tous les deux droits, donc les droites $(MN)$ et $(BC)$ sont <strong>parallèles</strong> (elles ne se coupent jamais). Le rayon de soleil qui passe par le sommet du mât et par le sommet du bâton, c'est la droite $(AC)$ : le point $N$ est bien sur $(AC)$. Le petit triangle $AMN$ est le bâton avec son ombre ; le grand triangle $ABC$ est le mât avec son ombre.</p><p><em>Où l'image s'arrête.</em> Cela marche seulement parce que le bâton est parallèle au mât. Si tu penches ton bâton, le petit triangle n'est plus une copie réduite du grand. Et la propriété compare des longueurs entre elles (des rapports) : elle ne dit pas que les longueurs sont égales.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Propriété de Thalès.</strong> Soit $ABC$ un triangle. Soit $M$ un point de la droite $(AB)$ et $N$ un point de la droite $(AC)$, tous les deux différents de $A$. Si les droites $(MN)$ et $(BC)$ sont parallèles, alors $$\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}.$$</p><p><strong>Comment lire cette égalité.</strong></p><ul><li>Un <strong>rapport</strong> est une fraction de deux longueurs. Le numérateur est le nombre du haut, le dénominateur celui du bas.</li><li>En haut, on met une longueur du petit triangle $AMN$ ; en bas, la longueur correspondante du grand triangle $ABC$.</li><li>Les sommets se correspondent : $A$ avec $A$, $M$ avec $B$, $N$ avec $C$.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Dans le triangle $ABC$, $M$ est sur le segment $[AB]$ et $N$ sur le segment $[AC]$. On sait que $(MN) \\parallel (BC)$, $AM = 4$ cm, $AB = 10$ cm et $AN = 6$ cm. Calcule $AC$.</p><ol><li>$M$ est sur $(AB)$, $N$ est sur $(AC)$ et $(MN) \\parallel (BC)$ : on peut appliquer la propriété de Thalès.</li><li>On écrit l'égalité : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$.</li><li>On garde les deux rapports dont on connaît des longueurs : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$, soit $\\dfrac{4}{10} = \\dfrac{6}{AC}$.</li><li>Le rapport $\\dfrac{4}{10}$ vaut $\\dfrac{2}{5}$ : $AN$ est les deux cinquièmes de $AC$. Donc $AC = 6 \\times \\dfrac{5}{2} = 15$ cm.</li></ol><h2>Le piège à éviter</h2><p>Écrire $\\dfrac{AM}{MB} = \\dfrac{AN}{AC}$ ou $\\dfrac{AB}{AM} = \\dfrac{AN}{AC}$. Dans le premier cas, tu compares un morceau ($AM$) au reste ($MB$) au lieu de le comparer à l'ensemble ($AB$). Dans le second, tu as retourné une seule des deux fractions.</p><p>Comment le repérer : dans chaque fraction, le petit triangle $AMN$ est en haut et le grand triangle $ABC$ est en bas. Les deux fractions doivent se ressembler : même rôle en haut, même rôle en bas.</p><h2>En une phrase</h2><p>Quand $(MN) \\parallel (BC)$ dans le triangle $ABC$, les rapports $\\dfrac{AM}{AB}$, $\\dfrac{AN}{AC}$ et $\\dfrac{MN}{BC}$ sont égaux : petit triangle en haut, grand triangle en bas.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître la configuration et les rapports",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans le triangle $ABC$, $M$ est un point de $(AB)$ et $N$ un point de $(AC)$, avec $(MN) \\parallel (BC)$. Quelle égalité donne la propriété de Thalès ?",
+                  "question_type": "single_choice",
+                  "explanation": "Dans chaque rapport, on met en haut une longueur du petit triangle $AMN$ et en bas la longueur correspondante du grand triangle $ABC$. Les autres écritures retournent une fraction ou comparent un morceau ($MB$) à un tout.",
+                  "answers": [
+                    { "content": "$\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$", "correct": true },
+                    { "content": "$\\dfrac{AM}{MB} = \\dfrac{AN}{NC} = \\dfrac{MN}{BC}$", "correct": false },
+                    { "content": "$\\dfrac{AB}{AM} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$", "correct": false },
+                    { "content": "$\\dfrac{AM}{AB} = \\dfrac{AC}{AN} = \\dfrac{BC}{MN}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un mât de drapeau a son pied en $B$ et son sommet en $C$. Un bâton planté sur l'ombre du mât a son pied en $M$ et son sommet en $N$. Les deux ombres, celle du mât et celle du bâton, se terminent au même point $A$. Alors $A$ est un sommet commun au petit triangle $AMN$ et au grand triangle $ABC$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Les deux ombres finissent au même point $A$. Le bâton avec son ombre forme le petit triangle $AMN$, le mât avec son ombre forme le grand triangle $ABC$ : les deux triangles partagent le sommet $A$.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un mât de drapeau, planté droit, a son pied en $B$ et son sommet en $C$. On plante un bâton, lui aussi droit, avec son pied en $M$ sur l'ombre du mât et son sommet en $N$, de sorte que les deux ombres se terminent au même point $A$. Pourquoi plante-t-on le bâton bien droit, comme le mât ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un mât droit et un bâton droit sont parallèles : c'est l'hypothèse $(MN) \\parallel (BC)$. Si le bâton était penché, le petit triangle ne serait plus une copie réduite du grand et la propriété de Thalès ne s'appliquerait plus.",
+                  "answers": [
+                    { "content": "Pour que les droites $(MN)$ et $(BC)$ soient parallèles, condition de la propriété de Thalès.", "correct": true },
+                    { "content": "Pour que le bâton ait la même hauteur que le mât.", "correct": false },
+                    { "content": "Pour que l'ombre du bâton soit plus longue que celle du mât.", "correct": false },
+                    { "content": "Pour que le bâton soit plus facile à mesurer.", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $ABC$, $M$ est un point de $(AB)$ et $N$ un point de $(AC)$, avec $(MN) \\parallel (BC)$. Quelles sont les deux égalités vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les bonnes égalités gardent le petit triangle en haut et le grand en bas. La troisième compare $AM$ à $MB$, un morceau au reste. La quatrième retourne un seul des deux rapports : $\\dfrac{AB}{AM}$ est l'inverse de $\\dfrac{AM}{AB}$.",
+                  "answers": [
+                    { "content": "$\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$", "correct": true },
+                    { "content": "$\\dfrac{AN}{AC} = \\dfrac{MN}{BC}$", "correct": true },
+                    { "content": "$\\dfrac{AM}{MB} = \\dfrac{MN}{BC}$", "correct": false },
+                    { "content": "$\\dfrac{AB}{AM} = \\dfrac{MN}{BC}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans la propriété de Thalès (triangle $ABC$, $M$ sur $(AB)$, $N$ sur $(AC)$, $(MN) \\parallel (BC)$), que représente le numérateur de chaque rapport ($AM$, $AN$ ou $MN$) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le numérateur est toujours une longueur du petit triangle $AMN$ : le bâton avec son ombre. Le dénominateur est la longueur correspondante du grand triangle $ABC$ : le mât avec son ombre.",
+                  "answers": [
+                    { "content": "Une longueur du petit triangle $AMN$.", "correct": true },
+                    { "content": "Une longueur du grand triangle $ABC$.", "correct": false },
+                    { "content": "Un morceau d'un côté, par exemple $MB$.", "correct": false },
+                    { "content": "Toujours la plus grande des longueurs.", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Utiliser les rapports de Thalès",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) \\parallel (BC)$. On a $AM = 3$, $AB = 9$ et $AN = 2$. Que vaut le rapport $\\dfrac{AM}{AB}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{AM}{AB} = \\dfrac{3}{9} = \\dfrac{1}{3}$. Le rapport $\\dfrac{1}{2}$ serait $\\dfrac{AM}{MB} = \\dfrac{3}{6}$ (un morceau sur le reste). Le rapport $\\dfrac{2}{3}$ serait $\\dfrac{MB}{AB}$, et $3$ serait $\\dfrac{AB}{AM}$, la fraction retournée.",
+                  "answers": [
+                    { "content": "$\\dfrac{1}{3}$", "correct": true },
+                    { "content": "$\\dfrac{1}{2}$", "correct": false },
+                    { "content": "$\\dfrac{2}{3}$", "correct": false },
+                    { "content": "$3$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) \\parallel (BC)$. On a $AM = 3$, $AB = 9$ et $AN = 2$. Combien vaut $AC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{AN}{AC} = \\dfrac{AM}{AB} = \\dfrac{1}{3}$ : $AN$ est le tiers de $AC$, donc $AC = 3 \\times 2 = 6$. Le raisonnement additif ($9 - 3 = 6$, puis $2 + 6 = 8$) est faux : Thalès compare des rapports, pas des écarts.",
+                  "answers": [
+                    { "content": "$6$", "correct": true },
+                    { "content": "$8$", "correct": false },
+                    { "content": "$18$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) \\parallel (BC)$. On a $AM = 3$, $AB = 9$ et $BC = 12$. Combien vaut $MN$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{MN}{BC} = \\dfrac{AM}{AB} = \\dfrac{1}{3}$, donc $MN = 12 \\div 3 = 4$. Soustraire ($12 - 3 = 9$) ne respecte pas la proportion. Et $36 = 3 \\times 12$ oublie de diviser par $9$.",
+                  "answers": [
+                    { "content": "$4$", "correct": true },
+                    { "content": "$9$", "correct": false },
+                    { "content": "$36$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) \\parallel (BC)$. On a $AM = 2$, $AB = 5$ et $AN = 3$. Alors $AC = 7{,}5$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $\\dfrac{AN}{AC} = \\dfrac{AM}{AB}$ donne $\\dfrac{3}{AC} = \\dfrac{2}{5}$, donc $AC = \\dfrac{3 \\times 5}{2} = 7{,}5$. Contrôle : $AC$ est bien plus grand que $AN = 3$, comme le grand triangle contient le petit.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans une configuration de Thalès avec $M \\in [AB]$, $N \\in [AC]$ et $(MN) \\parallel (BC)$, on sait que $\\dfrac{AM}{AB} = \\dfrac{1}{4}$. Quelles sont les trois affirmations vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Le rapport $\\dfrac{1}{4}$ est le même pour les trois couples : $AB = 4AM$, $AC = 4AN$ et $BC = 4MN$. Comme $AB = AM + MB$, on a $MB = 3AM$, et non $AM$. Enfin $AC = 4 \\times AN$, pas $AN \\div 4$.",
+                  "answers": [
+                    { "content": "$\\dfrac{AN}{AC} = \\dfrac{1}{4}$", "correct": true },
+                    { "content": "$BC = 4 \\times MN$", "correct": true },
+                    { "content": "$AB = 4 \\times AM$", "correct": true },
+                    { "content": "$MB = AM$", "correct": false },
+                    { "content": "$AC = AN \\div 4$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$, $(MN) \\parallel (BC)$, $AM = 2$, $AB = 5$ et $MN = 3$. Quelle égalité permet de calculer $BC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut $\\dfrac{AM}{AB} = \\dfrac{MN}{BC}$, soit $\\dfrac{2}{5} = \\dfrac{3}{BC}$, d'où $BC = 7{,}5$. Les autres écritures retournent une fraction ou mélangent les rôles : petit triangle en haut, grand triangle en bas.",
+                  "answers": [
+                    { "content": "$\\dfrac{2}{5} = \\dfrac{3}{BC}$", "correct": true },
+                    { "content": "$\\dfrac{2}{5} = \\dfrac{BC}{3}$", "correct": false },
+                    { "content": "$\\dfrac{2}{BC} = \\dfrac{3}{5}$", "correct": false },
+                    { "content": "$\\dfrac{5}{2} = \\dfrac{3}{BC}$", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Le mât, le bâton et les ombres",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Dans la cour, un bâton de $1{,}5$ m, planté droit, a une ombre de $2$ m. Au même moment, l'ombre du mât du drapeau, planté droit, mesure $12$ m et se termine au même point que celle du bâton. Quelle est la hauteur du mât ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{2}{12} = \\dfrac{1{,}5}{H}$, donc $H = \\dfrac{1{,}5 \\times 12}{2} = 9$ m. Le bâton est le sixième du mât. Additionner ou soustraire $1{,}5$ ne respecte pas la proportion.",
+                  "answers": [
+                    { "content": "$9$ m", "correct": true },
+                    { "content": "$18$ m", "correct": false },
+                    { "content": "$10{,}5$ m", "correct": false },
+                    { "content": "$13{,}5$ m", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un élève de $1{,}6$ m, debout sur l'ombre du mât, a une ombre de $3$ m qui se termine au bout de l'ombre du mât. Le mât, planté droit, mesure $8$ m. Quelle est la longueur de l'ombre du mât ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{3}{L} = \\dfrac{1{,}6}{8}$, donc $L = \\dfrac{3 \\times 8}{1{,}6} = 15$ m. L'élève mesure le cinquième du mât, donc son ombre est le cinquième de l'ombre du mât.",
+                  "answers": [
+                    { "content": "$15$ m", "correct": true },
+                    { "content": "$12{,}8$ m", "correct": false },
+                    { "content": "$9{,}4$ m", "correct": false },
+                    { "content": "$24$ m", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$, $(MN) \\parallel (BC)$, $AM = 2$, $AB = 8$, $AN = 3$ et $BC = 10$. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Rapport commun : $\\dfrac{2}{8} = \\dfrac{1}{4}$. Donc $AC = 4 \\times 3 = 12$ et $MN = 10 \\div 4 = 2{,}5$. Mais $MB = 8 - 2 = 6$, et $\\dfrac{AN}{AC} = \\dfrac{3}{12} = \\dfrac{1}{4}$, pas $\\dfrac{1}{3}$.",
+                  "answers": [
+                    { "content": "$AC = 12$", "correct": true },
+                    { "content": "$MN = 2{,}5$", "correct": true },
+                    { "content": "$MB = 2$", "correct": false },
+                    { "content": "$\\dfrac{AN}{AC} = \\dfrac{1}{3}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $ABC$, $M \\in [AB]$ avec $M$ différent de $A$ et de $B$, $N \\in [AC]$ et $(MN) \\parallel (BC)$. Alors $MN$ est plus petit que $BC$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $M$ est entre $A$ et $B$, donc $AM < AB$ et le rapport $\\dfrac{AM}{AB}$ est plus petit que $1$. Comme $\\dfrac{MN}{BC}$ est égal à ce rapport, $MN < BC$ : le petit triangle est une réduction du grand.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Léa sait que $M \\in [AB]$, $N \\in [AC]$, $(MN) \\parallel (BC)$, $AM = 3$, $AB = 9$ et $AN = 2$. Elle écrit $\\dfrac{3}{9} = \\dfrac{AC}{2}$ et trouve $AC = \\dfrac{2}{3}$. Où est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le rapport doit être $\\dfrac{AN}{AC}$ : avec $\\dfrac{3}{9} = \\dfrac{2}{AC}$, on trouve $AC = 6$. Le résultat $\\dfrac{2}{3}$ aurait dû l'alerter : $AC$ ne peut pas être plus petit que $AN$, car $N$ est sur $[AC]$.",
+                  "answers": [
+                    { "content": "Elle a retourné le second rapport : $AN$ doit être en haut et $AC$ en bas.", "correct": true },
+                    { "content": "Elle n'avait pas le droit d'utiliser la propriété de Thalès.", "correct": false },
+                    { "content": "Elle aurait dû mettre $MB$ à la place de $AB$.", "correct": false },
+                    { "content": "Il n'y a pas d'erreur : $AC$ peut être plus petit que $AN$.", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les trois conditions nécessaires pour écrire l'égalité de Thalès dans le triangle $ABC$ ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "La propriété demande : $M$ sur $(AB)$, $N$ sur $(AC)$ et $(MN) \\parallel (BC)$. Le triangle n'a pas besoin d'être isocèle, ni d'avoir $AM = AN$. Dans l'image du mât, c'est le parallélisme du bâton et du mât qui compte.",
+                  "answers": [
+                    { "content": "$M$ est sur la droite $(AB)$.", "correct": true },
+                    { "content": "$N$ est sur la droite $(AC)$.", "correct": true },
+                    { "content": "$(MN)$ est parallèle à $(BC)$.", "correct": true },
+                    { "content": "Le triangle $ABC$ est isocèle en $A$.", "correct": false },
+                    { "content": "$AM = AN$.", "correct": false }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Calculer une longueur avec Thalès",
+          "subtitle": "Produit en croix, configuration classique et configuration en papillon",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Calculer une longueur inconnue avec le produit en croix.</li><li>Reconnaître la configuration en papillon.</li><li>Calculer $MB$ sans confondre la configuration classique et le papillon.</li></ul><h2>L'image pour comprendre</h2><p><strong>1. Le zoom de la photo.</strong> Tu photographies avec ton téléphone un coin triangulaire du terrain de jeu. Tu écartes deux doigts pour zoomer : toute l'image grossit, et chaque longueur est multipliée par le même nombre, par exemple 2,5. L'image ne se déforme pas, elle est seulement agrandie.</p><p><em>Le pont.</em> La photo avant le zoom, c'est le petit triangle $AMN$ ; après le zoom, c'est le grand triangle $ABC$. Le nombre du zoom, c'est le rapport commun : $AB = 2{,}5 \\times AM$, $AC = 2{,}5 \\times AN$ et $BC = 2{,}5 \\times MN$. Pour trouver une longueur manquante, on utilise l'égalité de ces rapports avec le produit en croix.</p><p><em>Où l'image s'arrête.</em> Un vrai zoom garde toujours la forme. Ici, le petit triangle est une copie réduite du grand seulement si $(MN) \\parallel (BC)$. Sans cette condition, la méthode ne marche pas.</p><p><strong>2. Le portail extensible.</strong> Au portail de la cour, deux barres métalliques se croisent en un point $A$ et forment un X. Une barre horizontale ferme le haut du X, une autre le bas. Elles restent parallèles quand on ouvre ou ferme le portail. En haut, les barres obliques et la barre du haut forment un petit triangle ; en bas, elles forment un grand triangle, retourné tête-bêche.</p><p><em>Le pont.</em> Le croisement des barres, c'est $A$. Une barre oblique porte les points $M$, $A$, $B$ (dans cet ordre), l'autre porte les points $N$, $A$, $C$. La barre du haut est $[MN]$, celle du bas est $[BC]$. C'est la configuration <strong>en papillon</strong> : $A$ est entre $M$ et $B$, et entre $N$ et $C$.</p><p><em>Où l'image s'arrête.</em> Sur un portail symétrique, les deux triangles ont la même taille. En mathématiques, l'un peut être beaucoup plus petit que l'autre : seules les égalités de rapports comptent.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Produit en croix.</strong> Si $\\dfrac{a}{b} = \\dfrac{c}{d}$, avec $b$ et $d$ différents de $0$, alors $a \\times d = b \\times c$. Pour trouver l'inconnue $x$ dans $\\dfrac{a}{b} = \\dfrac{c}{x}$, on obtient $x = \\dfrac{b \\times c}{a}$.</p><p><strong>Deux configurations, la même propriété.</strong> Si $(MN) \\parallel (BC)$, alors $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$.</p><ul><li>Configuration classique : $M$ est sur $[AB]$ et $N$ sur $[AC]$. Alors $MB = AB - AM$.</li><li>Configuration en papillon : $A$ est entre $M$ et $B$, et entre $N$ et $C$. Alors $MB = AM + AB$.</li></ul><p><strong>Méthode.</strong></p><ol><li>Vérifier que $(MN) \\parallel (BC)$ est donné.</li><li>Écrire l'égalité de Thalès.</li><li>Garder deux rapports : celui dont on connaît les deux longueurs, et celui qui contient l'inconnue.</li><li>Faire le produit en croix.</li><li>Conclure avec l'unité.</li></ol></blockquote><h2>Exemple résolu</h2><p><strong>Cas classique.</strong> $M \\in [AB]$, $N \\in [AC]$, $(MN) \\parallel (BC)$, $AM = 3$ cm, $AB = 7{,}5$ cm, $AN = 4$ cm et $MN = 5$ cm. Calcule $AC$ et $BC$.</p><ol><li>Le parallélisme est donné : d'après la propriété de Thalès, $\\dfrac{3}{7{,}5} = \\dfrac{4}{AC} = \\dfrac{5}{BC}$.</li><li>Pour $AC$ : $\\dfrac{3}{7{,}5} = \\dfrac{4}{AC}$. Produit en croix : $AC = \\dfrac{4 \\times 7{,}5}{3} = \\dfrac{30}{3} = 10$ cm.</li><li>Pour $BC$ : $\\dfrac{3}{7{,}5} = \\dfrac{5}{BC}$, donc $BC = \\dfrac{5 \\times 7{,}5}{3} = \\dfrac{37{,}5}{3} = 12{,}5$ cm.</li></ol><p><strong>Cas du papillon.</strong> $A$ est entre $M$ et $B$, et entre $N$ et $C$. On a $(MN) \\parallel (BC)$, $AM = 2$ cm, $AB = 5$ cm, $AN = 3$ cm et $MN = 4$ cm. Calcule $AC$, $BC$ et $MB$.</p><ol><li>D'après la propriété de Thalès : $\\dfrac{2}{5} = \\dfrac{3}{AC} = \\dfrac{4}{BC}$.</li><li>$AC = \\dfrac{3 \\times 5}{2} = 7{,}5$ cm.</li><li>$BC = \\dfrac{4 \\times 5}{2} = 10$ cm.</li><li>$A$ est entre $M$ et $B$, donc on additionne : $MB = AM + AB = 2 + 5 = 7$ cm.</li></ol><h2>Le piège à éviter</h2><p>Dans le papillon, écrire $MB = AB - AM = 3$ cm. C'est faux : $A$ est entre $M$ et $B$, donc il faut additionner. Autre erreur fréquente : au produit en croix, croiser les mauvais nombres et trouver une longueur absurde.</p><p>Comment le repérer : fais un petit croquis. Si $A$ est entre $M$ et $B$, les longueurs $AM$ et $AB$ s'ajoutent. Si $M$ est sur $[AB]$, ce sont $AM$ et $MB$ qui s'ajoutent pour faire $AB$. Contrôle aussi ton résultat : quand $M$ est sur $[AB]$, la longueur $AC$ doit être plus grande que $AN$.</p><h2>En une phrase</h2><p>Quand $(MN) \\parallel (BC)$, on garde deux rapports de l'égalité de Thalès et on fait le produit en croix ; en papillon, on additionne $AM$ et $AB$ pour obtenir $MB$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Produit en croix et papillon",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Pour $\\dfrac{3}{5} = \\dfrac{x}{20}$, que vaut $x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Produit en croix : $5x = 3 \\times 20 = 60$, donc $x = 12$. Trouver $\\dfrac{100}{3}$ revient à croiser les mauvais nombres ($5 \\times 20 \\div 3$). Et $20 - 3 = 17$ est un raisonnement additif.",
+                  "answers": [
+                    { "content": "$12$", "correct": true },
+                    { "content": "$\\dfrac{100}{3}$", "correct": false },
+                    { "content": "$17$", "correct": false },
+                    { "content": "$8$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Si $\\dfrac{a}{b} = \\dfrac{c}{d}$ (avec $b$ et $d$ différents de $0$), alors $a \\times d = b \\times c$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : c'est le produit en croix. Les produits se font en diagonale : $a$ avec $d$, et $b$ avec $c$. L'erreur classique est de multiplier en ligne ($a \\times b$ et $c \\times d$).",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Un zoom agrandit le petit triangle $AMN$ en triangle $ABC$ en multipliant chaque longueur par $2{,}5$. Si $AM = 4$ cm, que vaut $AB$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le zoom multiplie par $2{,}5$ : $AB = 2{,}5 \\times 4 = 10$ cm. En divisant ($4 \\div 2{,}5 = 1{,}6$), tu as réduit au lieu d'agrandir. En additionnant ($4 + 2{,}5 = 6{,}5$), tu as oublié que le zoom multiplie.",
+                  "answers": [
+                    { "content": "$10$ cm", "correct": true },
+                    { "content": "$1{,}6$ cm", "correct": false },
+                    { "content": "$6{,}5$ cm", "correct": false },
+                    { "content": "$8$ cm", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans la configuration en papillon, où est placé le point $A$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Dans le portail extensible, les deux barres se croisent en $A$ : $A$ est entre $M$ et $B$, et entre $N$ et $C$. Le cas où $M$ est sur $[AB]$ et $N$ sur $[AC]$ est la configuration classique, pas le papillon.",
+                  "answers": [
+                    { "content": "$A$ est entre $M$ et $B$, et entre $N$ et $C$.", "correct": true },
+                    { "content": "$A$ est sur le segment $[MN]$.", "correct": false },
+                    { "content": "$M$ est sur $[AB]$ et $N$ est sur $[AC]$.", "correct": false },
+                    { "content": "$A$ est le milieu de $[BC]$.", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Configuration en papillon : $A$ est entre $M$ et $B$, et entre $N$ et $C$, avec $(MN) \\parallel (BC)$. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "La propriété de Thalès s'applique aussi au papillon, avec les mêmes rapports. Mais pour aller de $M$ à $B$, on passe par $A$ : on additionne $AM$ et $AB$. La soustraction est réservée à la configuration classique.",
+                  "answers": [
+                    { "content": "$\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$", "correct": true },
+                    { "content": "$MB = AM + AB$", "correct": true },
+                    { "content": "$MB = AB - AM$", "correct": false },
+                    { "content": "La propriété de Thalès ne s'applique pas dans cette configuration.", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer des longueurs",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$, $(MN) \\parallel (BC)$, $AM = 2$, $AB = 5$ et $BC = 7{,}5$. Que vaut $MN$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{MN}{BC} = \\dfrac{AM}{AB}$, donc $\\dfrac{MN}{7{,}5} = \\dfrac{2}{5}$ et $MN = \\dfrac{2 \\times 7{,}5}{5} = 3$. Trouver $18{,}75$ revient à retourner la fraction : $MN$ est plus petit que $BC$, pas plus grand.",
+                  "answers": [
+                    { "content": "$3$", "correct": true },
+                    { "content": "$18{,}75$", "correct": false },
+                    { "content": "$5{,}5$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$, $(MN) \\parallel (BC)$, $AM = 3$, $AB = 7{,}5$ et $AN = 4$. Que vaut $AC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{3}{7{,}5} = \\dfrac{4}{AC}$ donne $AC = \\dfrac{4 \\times 7{,}5}{3} = 10$. La valeur $1{,}6$ vient de $\\dfrac{3 \\times 4}{7{,}5}$, un mauvais croisement. Et $8{,}5 = 4 + 4{,}5$ est un raisonnement additif.",
+                  "answers": [
+                    { "content": "$10$", "correct": true },
+                    { "content": "$1{,}6$", "correct": false },
+                    { "content": "$8{,}5$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Configuration en papillon : $A$ est entre $M$ et $B$. On a $AM = 3$ et $AB = 7{,}5$. Que vaut $MB$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$A$ est entre $M$ et $B$ : $MB = AM + AB = 3 + 7{,}5 = 10{,}5$. La valeur $4{,}5$ vient de la soustraction, valable seulement si $M$ est sur $[AB]$.",
+                  "answers": [
+                    { "content": "$10{,}5$", "correct": true },
+                    { "content": "$4{,}5$", "correct": false },
+                    { "content": "$2{,}5$", "correct": false },
+                    { "content": "$22{,}5$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Configuration en papillon : $A$ est entre $M$ et $B$, et entre $N$ et $C$, avec $(MN) \\parallel (BC)$, $AM = 2$, $AB = 5$ et $MN = 4$. Que vaut $BC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{AM}{AB} = \\dfrac{MN}{BC}$ donne $\\dfrac{2}{5} = \\dfrac{4}{BC}$, donc $BC = 10$. Le papillon change la position des points, pas les rapports. La valeur $1{,}6$ vient d'un produit en croix mal fait.",
+                  "answers": [
+                    { "content": "$10$", "correct": true },
+                    { "content": "$7$", "correct": false },
+                    { "content": "$1{,}6$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Configuration en papillon : $A$ est entre $M$ et $B$, et entre $N$ et $C$, avec $(MN) \\parallel (BC)$, $AM = 4$, $AB = 6$ et $AN = 3$. Alors $AC = 2$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. $\\dfrac{AN}{AC} = \\dfrac{AM}{AB}$ donne $\\dfrac{3}{AC} = \\dfrac{4}{6}$, donc $AC = \\dfrac{3 \\times 6}{4} = 4{,}5$. Trouver $2$ revient à calculer $\\dfrac{4 \\times 3}{6}$ : on a retourné le rapport.",
+                  "answers": [
+                    { "content": "Vrai", "correct": false },
+                    { "content": "Faux", "correct": true }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$, $(MN) \\parallel (BC)$, $AM = 4$, $AB = 10$, $AN = 6$ et $MN = 5$. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Rapport commun : $\\dfrac{4}{10} = \\dfrac{2}{5}$. Donc $AC = 6 \\times \\dfrac{5}{2} = 15$ et $BC = 5 \\times \\dfrac{5}{2} = 12{,}5$. Mais $MB = 10 - 4 = 6$ (on soustrait car $M \\in [AB]$), et $2{,}4$ vient de $\\dfrac{4 \\times 6}{10}$.",
+                  "answers": [
+                    { "content": "$AC = 15$", "correct": true },
+                    { "content": "$BC = 12{,}5$", "correct": true },
+                    { "content": "$MB = 14$", "correct": false },
+                    { "content": "$AC = 2{,}4$", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Cordes et coins de la cour",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Dans un coin triangulaire $ABC$ de la cour, $M \\in [AB]$, $N \\in [AC]$ et $(MN) \\parallel (BC)$. On a $AM = 4$ m, $MB = 2$ m et $AN = 5$ m. Que vaut $AC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut d'abord $AB = AM + MB = 6$ m. Puis $\\dfrac{4}{6} = \\dfrac{5}{AC}$ donne $AC = \\dfrac{5 \\times 6}{4} = 7{,}5$ m. Utiliser $MB$ à la place de $AB$ donne $2{,}5$ ; additionner $5 + 2$ donne $7$ : deux erreurs classiques.",
+                  "answers": [
+                    { "content": "$7{,}5$ m", "correct": true },
+                    { "content": "$7$ m", "correct": false },
+                    { "content": "$2{,}5$ m", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Deux cordes se croisent en $A$ : $A$ est entre $M$ et $B$, et entre $N$ et $C$, avec $(MN) \\parallel (BC)$, $AM = 3$ m, $AB = 9$ m et $MN = 4$ m. Que vaut $BC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{AM}{AB} = \\dfrac{MN}{BC}$ donne $\\dfrac{3}{9} = \\dfrac{4}{BC}$, donc $BC = \\dfrac{4 \\times 9}{3} = 12$ m. La valeur $13 = 9 + 4$ est additive, et $\\dfrac{4}{3}$ oublie de multiplier par $9$.",
+                  "answers": [
+                    { "content": "$12$ m", "correct": true },
+                    { "content": "$13$ m", "correct": false },
+                    { "content": "$\\dfrac{4}{3}$ m", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$, $(MN) \\parallel (BC)$, $AM = 3$, $MB = 5$ et $MN = 4{,}5$. Que vaut $BC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut $AB = 3 + 5 = 8$. Puis $\\dfrac{MN}{BC} = \\dfrac{AM}{AB}$ donne $\\dfrac{4{,}5}{BC} = \\dfrac{3}{8}$, donc $BC = \\dfrac{4{,}5 \\times 8}{3} = 12$. Avec $MB$ au lieu de $AB$, on trouverait $7{,}5$ ; en additionnant $4{,}5 + 5$, on trouverait $9{,}5$.",
+                  "answers": [
+                    { "content": "$12$", "correct": true },
+                    { "content": "$7{,}5$", "correct": false },
+                    { "content": "$9{,}5$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$, $(MN) \\parallel (BC)$, $AM = 6$, $AB = 15$ et $AN = 4$. Quelles sont les trois affirmations vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Rapport commun : $\\dfrac{6}{15} = \\dfrac{2}{5}$. Donc $AC = 4 \\times \\dfrac{5}{2} = 10$, $NC = 10 - 4 = 6$ et $MB = 15 - 6 = 9$. La valeur $1{,}6$ vient d'un produit en croix mal fait, et $\\dfrac{3}{2}$ n'est pas égal à $\\dfrac{6}{15}$.",
+                  "answers": [
+                    { "content": "$AC = 10$", "correct": true },
+                    { "content": "$NC = 6$", "correct": true },
+                    { "content": "$MB = 9$", "correct": true },
+                    { "content": "$AC = 1{,}6$", "correct": false },
+                    { "content": "$\\dfrac{AM}{AB} = \\dfrac{3}{2}$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans la configuration en papillon, avec $(MN) \\parallel (BC)$, on a $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$, comme dans la configuration classique.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Seule la position des points change : $A$ est entre $M$ et $B$. Les rapports sont les mêmes. Il faut seulement faire attention aux longueurs comme $MB$ ou $NC$ : en papillon, on additionne.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$, $(MN) \\parallel (BC)$, $AM = 3$, $AB = 8$ et $AN = 2$. Un élève écrit $\\dfrac{3}{8} = \\dfrac{2}{AC}$, puis $AC = \\dfrac{3 \\times 2}{8} = 0{,}75$. Quelle est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Dans $\\dfrac{3}{8} = \\dfrac{2}{AC}$, on a $3 \\times AC = 8 \\times 2$, donc $AC = \\dfrac{16}{3}$. Son résultat $0{,}75$ est plus petit que $AN = 2$, ce qui est impossible puisque $N$ est sur $[AC]$.",
+                  "answers": [
+                    { "content": "Il a mal fait le produit en croix : il fallait $AC = \\dfrac{8 \\times 2}{3}$.", "correct": true },
+                    { "content": "Il aurait dû additionner $3$ et $2$.", "correct": false },
+                    { "content": "Il n'aurait pas dû utiliser la propriété de Thalès.", "correct": false },
+                    { "content": "Il n'y a pas d'erreur : $AC$ peut être plus petit que $AN$.", "correct": false }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La réciproque de Thalès",
+          "subtitle": "Démontrer que deux droites sont parallèles",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Reconnaître quand utiliser la réciproque de la propriété de Thalès.</li><li>Comparer deux rapports pour démontrer que deux droites sont parallèles.</li><li>Conclure aussi quand les droites ne sont pas parallèles.</li></ul><h2>L'image pour comprendre</h2><p><strong>Les files d'élèves du cours de sport.</strong> Dans la cour, le professeur de sport se tient au point $A$. Deux files d'élèves partent de lui : l'une vers le poteau $B$, l'autre vers le poteau $C$. Un élève $M$ de la première file s'arrête aux trois cinquièmes du chemin vers $B$. Un élève $N$ de la seconde file s'arrête lui aussi aux trois cinquièmes du chemin vers $C$. Les deux élèves ont avancé au même rythme : la ligne qui joint $M$ et $N$ est alors parallèle à la ligne qui joint $B$ et $C$.</p><p><em>Le pont.</em> Le professeur, c'est le point $A$. Les deux files, ce sont les droites $(AB)$ et $(AC)$. La fraction du chemin parcourue, ce sont les rapports $\\dfrac{AM}{AB}$ et $\\dfrac{AN}{AC}$. Avancer au même rythme, c'est avoir des rapports égaux. Et la conclusion, c'est $(MN) \\parallel (BC)$.</p><p><em>Où l'image s'arrête.</em> Les deux élèves doivent avancer chacun vers son poteau. Si $M$ avance vers $B$ mais que $N$ part dans le sens opposé à $C$, ils ont peut-être parcouru la même fraction du chemin, mais la ligne $(MN)$ n'est pas parallèle à $(BC)$. C'est pourquoi la réciproque exige que les points soient dans le même ordre.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Réciproque de la propriété de Thalès.</strong> Soit $ABC$ un triangle, $M$ un point de la droite $(AB)$ et $N$ un point de la droite $(AC)$. Si $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$ et si les points $A$, $M$, $B$ d'une part, et $A$, $N$, $C$ d'autre part, sont alignés dans le même ordre, alors $(MN) \\parallel (BC)$.</p><p><strong>Dans le même ordre.</strong> Soit $M$ est du même côté de $A$ que $B$ et $N$ du même côté de $A$ que $C$ (par exemple $M \\in [AB]$ et $N \\in [AC]$). Soit $A$ est entre $M$ et $B$ et entre $N$ et $C$ (papillon).</p><p><strong>Cas où les droites ne sont pas parallèles.</strong> Si $\\dfrac{AM}{AB} \\neq \\dfrac{AN}{AC}$, alors $(MN)$ et $(BC)$ ne sont pas parallèles : si elles l'étaient, la propriété de Thalès donnerait l'égalité.</p><p><strong>Comparer deux fractions.</strong> On peut les écrire en nombres décimaux, ou comparer les produits en croix : $\\dfrac{a}{b} = \\dfrac{c}{d}$ exactement quand $a \\times d = b \\times c$.</p></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé 1.</strong> $M \\in [AB]$, $N \\in [AC]$, $AM = 3$ cm, $AB = 5$ cm, $AN = 4{,}2$ cm et $AC = 7$ cm. Les droites $(MN)$ et $(BC)$ sont-elles parallèles ?</p><ol><li>On calcule $\\dfrac{AM}{AB} = \\dfrac{3}{5} = 0{,}6$.</li><li>On calcule $\\dfrac{AN}{AC} = \\dfrac{4{,}2}{7} = 0{,}6$.</li><li>Les deux rapports sont égaux, et $M \\in [AB]$, $N \\in [AC]$ : les points sont dans le même ordre.</li><li>D'après la réciproque de la propriété de Thalès, $(MN) \\parallel (BC)$.</li></ol><p><strong>Énoncé 2.</strong> Même situation avec $AM = 2$ cm, $AB = 6$ cm, $AN = 3$ cm et $AC = 10$ cm.</p><ol><li>$\\dfrac{AM}{AB} = \\dfrac{2}{6} = \\dfrac{1}{3}$ et $\\dfrac{AN}{AC} = \\dfrac{3}{10}$.</li><li>Produits en croix : $2 \\times 10 = 20$ et $3 \\times 6 = 18$. Ils sont différents, donc les rapports sont différents.</li><li>Si $(MN)$ était parallèle à $(BC)$, la propriété de Thalès donnerait deux rapports égaux. Ce n'est pas le cas : $(MN)$ n'est pas parallèle à $(BC)$.</li></ol><h2>Le piège à éviter</h2><p>Écrire « $(MN) \\parallel (BC)$, donc $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$ » pour démontrer le parallélisme. Tu pars de ce que tu dois démontrer ! Avec la propriété directe, on suppose le parallélisme ; avec la réciproque, on le démontre. Autre oubli fréquent : ne pas vérifier l'ordre des points.</p><p>Comment le repérer : si l'énoncé te demande de « montrer que » ou « démontrer que » deux droites sont parallèles, calcule deux rapports et compare-les. N'écris jamais le parallélisme au début.</p><h2>En une phrase</h2><p>Si les rapports $\\dfrac{AM}{AB}$ et $\\dfrac{AN}{AC}$ sont égaux, avec les points dans le même ordre, alors $(MN) \\parallel (BC)$ ; s'ils sont différents, les droites ne sont pas parallèles.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Ce que dit la réciproque",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Que permet de démontrer la réciproque de la propriété de Thalès ?",
+                  "question_type": "single_choice",
+                  "explanation": "La propriété directe part du parallélisme pour calculer des longueurs. La réciproque fait le chemin inverse : à partir de longueurs, elle démontre que $(MN)$ et $(BC)$ sont parallèles. Dans l'image des files, la ligne $MN$ est parallèle à la ligne $BC$.",
+                  "answers": [
+                    { "content": "Que deux droites sont parallèles.", "correct": true },
+                    { "content": "Qu'un triangle est isocèle.", "correct": false },
+                    { "content": "La valeur d'une longueur inconnue.", "correct": false },
+                    { "content": "Que deux droites sont perpendiculaires.", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Que doit-on établir pour appliquer la réciproque de Thalès dans le triangle $ABC$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La réciproque a pour hypothèse l'égalité des deux rapports (avec le bon ordre des points) et pour conclusion le parallélisme. Écrire $(MN) \\parallel (BC)$ au départ reviendrait à supposer ce qu'on veut démontrer.",
+                  "answers": [
+                    { "content": "Que $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$, avec les points alignés dans le même ordre.", "correct": true },
+                    { "content": "Que $(MN) \\parallel (BC)$.", "correct": false },
+                    { "content": "Que $AM = AN$.", "correct": false },
+                    { "content": "Que $MN = BC$.", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Pour utiliser la réciproque de Thalès, il suffit que $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$ ; l'ordre des points sur les droites n'a pas d'importance.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Si $M$ est du côté de $B$ mais que $N$ est de l'autre côté de $A$ par rapport à $C$, les rapports peuvent être égaux sans que $(MN)$ soit parallèle à $(BC)$. Dans l'image des files, il ne faut pas qu'un élève recule.",
+                  "answers": [
+                    { "content": "Vrai", "correct": false },
+                    { "content": "Faux", "correct": true }
+                  ]
+                },
+                {
+                  "content": "Dans l'image des files d'élèves, $M$ est aux $\\dfrac{3}{5}$ du chemin de $A$ vers $B$, et $N$ aux $\\dfrac{3}{5}$ du chemin de $A$ vers $C$, dans le même sens. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux élèves ont parcouru la même fraction du chemin : la réciproque donne $(MN) \\parallel (BC)$. Ce ne sont pas des milieux (ce serait $\\dfrac{1}{2}$), et $AM$ n'a aucune raison d'être égal à $AN$ : les deux chemins n'ont pas la même longueur.",
+                  "answers": [
+                    { "content": "$(MN) \\parallel (BC)$", "correct": true },
+                    { "content": "$M$ et $N$ sont les milieux de $[AB]$ et de $[AC]$.", "correct": false },
+                    { "content": "$AM = AN$", "correct": false },
+                    { "content": "$MN = BC$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux conditions à vérifier pour appliquer la réciproque de Thalès ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Il faut l'égalité des deux rapports et le même ordre des points. Le parallélisme $(MN) \\parallel (BC)$ est la conclusion, pas une condition. Les longueurs $AM$ et $AN$, ou $MN$ et $BC$, n'ont pas à être égales.",
+                  "answers": [
+                    { "content": "$\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$", "correct": true },
+                    { "content": "Les points $A$, $M$, $B$ et $A$, $N$, $C$ sont alignés dans le même ordre.", "correct": true },
+                    { "content": "$(MN) \\parallel (BC)$", "correct": false },
+                    { "content": "$AM = AN$", "correct": false },
+                    { "content": "$MN = BC$", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Comparer deux rapports",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "$M \\in [AB]$, $N \\in [AC]$, $AM = 2$, $AB = 5$, $AN = 3$ et $AC = 7{,}5$. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Seuls comptent les deux rapports : $\\dfrac{AM}{AB} = 0{,}4$ et $\\dfrac{AN}{AC} = 0{,}4$, égaux, avec les points dans le même ordre. $AB$ et $AC$ n'ont pas à être égaux, ni $AM$ et $AN$. On n'a pas besoin de $BC$ ni de $MN$.",
+                  "answers": [
+                    { "content": "$(MN) \\parallel (BC)$, car $\\dfrac{2}{5} = 0{,}4$ et $\\dfrac{3}{7{,}5} = 0{,}4$.", "correct": true },
+                    { "content": "$(MN)$ n'est pas parallèle à $(BC)$, car $2 \\neq 3$.", "correct": false },
+                    { "content": "$(MN)$ n'est pas parallèle à $(BC)$, car $5 \\neq 7{,}5$.", "correct": false },
+                    { "content": "On ne peut rien conclure sans connaître $BC$ et $MN$.", "correct": false }
+                  ]
+                },
+                {
+                  "content": "$M \\in [AB]$, $N \\in [AC]$, $AM = 3$, $AB = 8$, $AN = 4$ et $AC = 10$. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les rapports $0{,}375$ et $0{,}4$ sont différents, même s'ils sont proches. Si $(MN)$ était parallèle à $(BC)$, Thalès donnerait deux rapports égaux. Une égalité presque vraie ne suffit pas.",
+                  "answers": [
+                    { "content": "$(MN)$ n'est pas parallèle à $(BC)$, car $\\dfrac{3}{8} = 0{,}375$ et $\\dfrac{4}{10} = 0{,}4$.", "correct": true },
+                    { "content": "$(MN) \\parallel (BC)$, car $3 < 4$ et $8 < 10$.", "correct": false },
+                    { "content": "$(MN) \\parallel (BC)$, car les deux rapports sont proches.", "correct": false },
+                    { "content": "On ne peut rien conclure.", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Configuration en papillon : $A$ est entre $M$ et $B$, et entre $N$ et $C$, avec $AM = 2$, $AB = 3$, $AN = 4$ et $AC = 6$. Alors $(MN) \\parallel (BC)$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $\\dfrac{2}{3}$ et $\\dfrac{4}{6} = \\dfrac{2}{3}$ sont égaux, et les points sont dans le même ordre ($A$ entre $M$ et $B$, et entre $N$ et $C$). La réciproque s'applique aussi au papillon.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "$A$ est entre $M$ et $B$, mais $N$ est sur le segment $[AC]$. On a $AM = 2$, $AB = 4$, $AN = 1$ et $AC = 2$. Peut-on conclure que $(MN) \\parallel (BC)$ avec la réciproque de Thalès ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux rapports valent $\\dfrac{1}{2}$, mais $M$ est de l'autre côté de $A$ par rapport à $B$, alors que $N$ est du même côté que $C$. L'ordre des points n'est pas le même : la réciproque ne s'applique pas. C'est l'élève qui recule dans l'image.",
+                  "answers": [
+                    { "content": "Non : les rapports sont égaux, mais les points ne sont pas dans le même ordre.", "correct": true },
+                    { "content": "Oui, car les deux rapports valent $\\dfrac{1}{2}$.", "correct": false },
+                    { "content": "Non, car $AB \\neq AC$.", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans chaque cas, $M \\in [AB]$ et $N \\in [AC]$. Dans quels deux cas peut-on conclure que $(MN) \\parallel (BC)$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "On a $\\dfrac{2}{6} = \\dfrac{3}{9} = \\dfrac{1}{3}$ et $\\dfrac{3}{5} = \\dfrac{6}{10} = 0{,}6$ : rapports égaux. Pour les autres, $\\dfrac{2}{5} = 0{,}4$ contre $\\dfrac{3}{8} = 0{,}375$, et $\\dfrac{1}{4} = 0{,}25$ contre $\\dfrac{2}{7} \\approx 0{,}29$ : rapports différents.",
+                  "answers": [
+                    { "content": "$AM = 2$, $AB = 6$, $AN = 3$, $AC = 9$", "correct": true },
+                    { "content": "$AM = 3$, $AB = 5$, $AN = 6$, $AC = 10$", "correct": true },
+                    { "content": "$AM = 2$, $AB = 5$, $AN = 3$, $AC = 8$", "correct": false },
+                    { "content": "$AM = 1$, $AB = 4$, $AN = 2$, $AC = 7$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "$M \\in [AB]$, $N \\in [AC]$, $AM = 3$, $AB = 5$, $AN = 4{,}2$ et $AC = 7$. Quelle est la bonne conclusion rédigée ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour démontrer un parallélisme, on cite la réciproque de Thalès et on vérifie l'ordre des points. La propriété directe suppose déjà le parallélisme. Et l'égalité des rapports ne dit rien sur l'égalité de $MN$ et de $BC$.",
+                  "answers": [
+                    { "content": "Les points sont dans le même ordre et $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = 0{,}6$, donc d'après la réciproque de la propriété de Thalès, $(MN) \\parallel (BC)$.", "correct": true },
+                    { "content": "$\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = 0{,}6$, donc d'après la propriété de Thalès, $(MN) \\parallel (BC)$.", "correct": false },
+                    { "content": "$\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = 0{,}6$, donc $MN = BC$.", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Parallèles ou non ?",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "$M \\in [AB]$, $N \\in [AC]$. On sait que $AM = 3$, $MB = 2$, $AN = 4{,}5$ et $NC = 3$. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "On calcule d'abord $AB = 3 + 2 = 5$ et $AC = 4{,}5 + 3 = 7{,}5$. Puis $\\dfrac{3}{5} = 0{,}6$ et $\\dfrac{4{,}5}{7{,}5} = 0{,}6$ : égaux. Que $MB \\neq NC$ ne gêne pas, et $BC$ est inutile pour la réciproque.",
+                  "answers": [
+                    { "content": "$(MN) \\parallel (BC)$, car $AB = 5$, $AC = 7{,}5$ et $\\dfrac{3}{5} = \\dfrac{4{,}5}{7{,}5} = 0{,}6$.", "correct": true },
+                    { "content": "$(MN)$ n'est pas parallèle à $(BC)$, car $3 \\neq 4{,}5$.", "correct": false },
+                    { "content": "$(MN)$ n'est pas parallèle à $(BC)$, car $MB \\neq NC$.", "correct": false },
+                    { "content": "On ne peut rien conclure, car $BC$ est inconnue.", "correct": false }
+                  ]
+                },
+                {
+                  "content": "$M \\in [AB]$, $N \\in [AC]$, $AM = 1{,}2$ m, $AB = 4$ m et $AC = 5$ m. Quelle valeur de $AN$ rend $(MN)$ parallèle à $(BC)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut $\\dfrac{AN}{5} = \\dfrac{1{,}2}{4} = 0{,}3$, donc $AN = 0{,}3 \\times 5 = 1{,}5$ m. La valeur $0{,}96$ vient de $\\dfrac{1{,}2 \\times 4}{5}$, un mauvais croisement. Prendre $AN = AM$ ne marche pas, car $AB \\neq AC$.",
+                  "answers": [
+                    { "content": "$1{,}5$ m", "correct": true },
+                    { "content": "$0{,}96$ m", "correct": false },
+                    { "content": "$1{,}2$ m", "correct": false }
+                  ]
+                },
+                {
+                  "content": "$M \\in [AB]$, $N \\in [AC]$, $AM = 2$, $AB = 3$, $AN = 3$ et $AC = 5$. Alors $(MN)$ n'est pas parallèle à $(BC)$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $\\dfrac{2}{3} \\approx 0{,}67$ et $\\dfrac{3}{5} = 0{,}6$ sont différents (produits en croix : $2 \\times 5 = 10$ et $3 \\times 3 = 9$). Si $(MN)$ était parallèle à $(BC)$, Thalès donnerait deux rapports égaux.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Pour démontrer que $(MN) \\parallel (BC)$ avec la réciproque de Thalès, quelles sont les trois étapes à faire ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "On vérifie l'ordre des points, on calcule les deux rapports, on constate leur égalité et on cite la réciproque. Calculer $BC$ n'est pas nécessaire, et écrire le parallélisme au départ serait supposer ce qu'on veut démontrer.",
+                  "answers": [
+                    { "content": "Vérifier que $M$ et $B$, d'une part, $N$ et $C$, d'autre part, sont placés dans le même ordre par rapport à $A$.", "correct": true },
+                    { "content": "Calculer séparément $\\dfrac{AM}{AB}$ et $\\dfrac{AN}{AC}$.", "correct": true },
+                    { "content": "Constater que les deux résultats sont égaux et citer la réciproque de la propriété de Thalès.", "correct": true },
+                    { "content": "Calculer la longueur $BC$.", "correct": false },
+                    { "content": "Écrire d'abord $(MN) \\parallel (BC)$.", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Configuration en papillon : $A$ est entre $M$ et $B$, et entre $N$ et $C$, avec $AM = 2$, $AB = 5$, $AN = 3$ et $AC = 7{,}5$. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les rapports valent $0{,}4$ et $A$ est entre $M$ et $B$ comme entre $N$ et $C$ : même ordre, donc la réciproque s'applique aussi au papillon. Que $AB \\neq AC$ n'empêche rien, et $MB$ et $NC$ n'ont pas à être égaux.",
+                  "answers": [
+                    { "content": "$(MN) \\parallel (BC)$, car $\\dfrac{2}{5} = \\dfrac{3}{7{,}5} = 0{,}4$ et les points sont dans le même ordre.", "correct": true },
+                    { "content": "On ne peut pas conclure : la réciproque ne s'applique pas au papillon.", "correct": false },
+                    { "content": "$(MN)$ n'est pas parallèle à $(BC)$, car $AB \\neq AC$.", "correct": false },
+                    { "content": "$(MN) \\parallel (BC)$, car $MB = NC$.", "correct": false }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Directe ou réciproque : bien rédiger",
+          "subtitle": "Choisir la propriété et rédiger. À compléter : triangles semblables (à confirmer)",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Choisir entre la propriété de Thalès et sa réciproque.</li><li>Rédiger une démonstration en quatre temps.</li><li>Enchaîner la réciproque puis la propriété directe dans un même exercice.</li></ul><h2>L'image pour comprendre</h2><p><strong>Tracer une ligne sur le terrain de jeu.</strong> Le maître veut une ligne parallèle à la ligne de fond du terrain de jeu. Deux situations se présentent. <strong>Première situation :</strong> la ligne est déjà tracée et on te garantit qu'elle est parallèle. Tu peux alors prévoir à l'avance les distances le long des cordes. <strong>Seconde situation :</strong> on a seulement posé deux piquets et on veut savoir si la ligne qui les relie est bien parallèle. On mesure les distances, on compare les fractions et on décide.</p><p><em>Le pont.</em> Le terrain, c'est le triangle $ABC$ ; les deux piquets, ce sont $M$ et $N$. Dans la première situation, on part du parallélisme et on en déduit des longueurs : c'est la propriété directe. Dans la seconde, on part des longueurs et on en déduit le parallélisme : c'est la réciproque.</p><p><em>Où l'image s'arrête.</em> Sur le terrain, « prévoir » et « vérifier » semblent proches. En mathématiques, ce sont deux propriétés différentes, avec deux rôles différents : on ne peut jamais utiliser l'une à la place de l'autre.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Propriété directe.</strong> On sait que $(MN) \\parallel (BC)$. On en déduit l'égalité des rapports $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$. Elle sert à <strong>calculer une longueur</strong>.</p><p><strong>Réciproque.</strong> On connaît des longueurs et l'ordre des points, et on montre que $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$. On en déduit que $(MN) \\parallel (BC)$. Elle sert à <strong>démontrer un parallélisme</strong>.</p><p><strong>Rédaction en quatre temps.</strong></p><ol><li>La situation : « Dans le triangle $ABC$, $M$ est sur $(AB)$ et $N$ est sur $(AC)$. »</li><li>Ce que l'on sait : « $(MN) \\parallel (BC)$ », ou bien « les points sont dans le même ordre et les rapports sont égaux ».</li><li>Le nom de la propriété : « d'après la propriété de Thalès » ou « d'après la réciproque de la propriété de Thalès ».</li><li>Le calcul et la conclusion, avec l'unité.</li></ol></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Dans le triangle $ABC$, $AB = 6$ cm, $AC = 9$ cm et $BC = 7{,}5$ cm. Le point $M$ est sur $[AB]$ avec $AM = 4$ cm, et le point $N$ est sur $[AC]$ avec $AN = 6$ cm. 1) Démontre que $(MN) \\parallel (BC)$. 2) Calcule $MN$.</p><p><strong>1) Le parallélisme.</strong></p><ol><li>Dans le triangle $ABC$, $M \\in [AB]$ et $N \\in [AC]$ : les points sont dans le même ordre.</li><li>$\\dfrac{AM}{AB} = \\dfrac{4}{6} = \\dfrac{2}{3}$ et $\\dfrac{AN}{AC} = \\dfrac{6}{9} = \\dfrac{2}{3}$.</li><li>Les rapports sont égaux : d'après la réciproque de la propriété de Thalès, $(MN) \\parallel (BC)$.</li></ol><p><strong>2) La longueur.</strong></p><ol><li>Le parallélisme est maintenant démontré : d'après la propriété de Thalès, $\\dfrac{AM}{AB} = \\dfrac{MN}{BC}$, soit $\\dfrac{2}{3} = \\dfrac{MN}{7{,}5}$.</li><li>$MN = \\dfrac{2 \\times 7{,}5}{3} = \\dfrac{15}{3} = 5$ cm.</li></ol><h2>Le piège à éviter</h2><p>Utiliser la propriété de Thalès alors que l'énoncé ne dit pas que les droites sont parallèles, parce que « ça se voit sur la figure ». Un dessin peut tromper : deux droites qui semblent parallèles ne le sont pas forcément.</p><p>Comment le repérer : cherche le mot « parallèle » dans l'énoncé. S'il est donné, tu peux calculer avec la propriété directe. S'il est demandé (« montre que »), utilise la réciproque. Et s'il faut les deux, commence toujours par la réciproque.</p><h2>En une phrase</h2><p>Si le parallélisme est donné, on utilise la propriété de Thalès pour calculer une longueur ; s'il est demandé, on utilise la réciproque en comparant deux rapports.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Directe ou réciproque ?",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "On te donne $(MN) \\parallel (BC)$ et on te demande de calculer $AN$. Quelle propriété utilises-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le parallélisme est donné et on cherche une longueur : c'est la propriété directe. Dans l'image du terrain, la ligne est déjà tracée parallèle : on peut prévoir les distances.",
+                  "answers": [
+                    { "content": "La propriété de Thalès", "correct": true },
+                    { "content": "La réciproque de la propriété de Thalès", "correct": false },
+                    { "content": "Aucune : il manque des données.", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On a calculé $\\dfrac{AM}{AB}$ et $\\dfrac{AN}{AC}$ et trouvé le même nombre, avec les points dans le même ordre. On demande si $(MN)$ est parallèle à $(BC)$. Quelle propriété utilises-tu ?",
+                  "question_type": "single_choice",
+                  "explanation": "On part des longueurs pour conclure à un parallélisme : c'est la réciproque, avec le bon ordre des points. C'est la situation des deux piquets dont on vérifie l'alignement.",
+                  "answers": [
+                    { "content": "La réciproque de la propriété de Thalès", "correct": true },
+                    { "content": "La propriété de Thalès", "correct": false },
+                    { "content": "Aucune : il faut mesurer un angle.", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Dans une démonstration, on peut utiliser la propriété de Thalès dès que la figure semble montrer que $(MN)$ est parallèle à $(BC)$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Sur un dessin, deux droites peuvent sembler parallèles sans l'être. Le parallélisme doit être donné par l'énoncé ou démontré, par exemple avec la réciproque de Thalès.",
+                  "answers": [
+                    { "content": "Vrai", "correct": false },
+                    { "content": "Faux", "correct": true }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les deux propriétés vont en sens inverse. Directe : parallélisme, puis rapports, puis longueurs. Réciproque : rapports, puis parallélisme. Les confondre est l'erreur la plus fréquente.",
+                  "answers": [
+                    { "content": "La propriété de Thalès part du parallélisme pour obtenir des égalités de rapports.", "correct": true },
+                    { "content": "La réciproque part de l'égalité de deux rapports (points dans le même ordre) pour obtenir un parallélisme.", "correct": true },
+                    { "content": "La réciproque sert à calculer une longueur.", "correct": false },
+                    { "content": "La propriété de Thalès sert à démontrer que deux droites sont parallèles.", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Une rédaction de démonstration comporte quatre temps : la situation, ce que l'on sait, le nom de la propriété, puis le calcul et la conclusion. Parmi ces propositions, laquelle correspond au troisième temps ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les quatre temps sont : la situation, ce que l'on sait, le nom de la propriété, puis le calcul et la conclusion. Nommer la propriété justifie le calcul qui suit. Mesurer sur la figure ne prouve rien.",
+                  "answers": [
+                    { "content": "On nomme la propriété utilisée (Thalès ou sa réciproque).", "correct": true },
+                    { "content": "On donne le résultat final.", "correct": false },
+                    { "content": "On mesure la figure avec la règle.", "correct": false },
+                    { "content": "On calcule la longueur $BC$.", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Choisir et rédiger",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Complète : « Dans le triangle $ABC$, $M$ est sur $(AB)$, $N$ est sur $(AC)$ et $(MN) \\parallel (BC)$. Donc, d'après ......, on a $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$. »",
+                  "question_type": "single_choice",
+                  "explanation": "Le parallélisme est donné et la phrase se termine par des égalités de rapports : c'est la propriété directe. La réciproque, elle, conclurait au parallélisme.",
+                  "answers": [
+                    { "content": "la propriété de Thalès", "correct": true },
+                    { "content": "la réciproque de la propriété de Thalès", "correct": false },
+                    { "content": "la définition d'un triangle", "correct": false }
+                  ]
+                },
+                {
+                  "content": "$M \\in [AB]$, $N \\in [AC]$, $(MN) \\parallel (BC)$, $AM = 3$, $AB = 5$ et $BC = 10$. Que vaut $MN$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{MN}{BC} = \\dfrac{AM}{AB}$ donne $MN = \\dfrac{3 \\times 10}{5} = 6$. La valeur $\\dfrac{50}{3}$ vient d'un rapport retourné ($\\dfrac{5 \\times 10}{3}$), et $7 = 10 - 3$ est un raisonnement additif.",
+                  "answers": [
+                    { "content": "$6$", "correct": true },
+                    { "content": "$\\dfrac{50}{3}$", "correct": false },
+                    { "content": "$7$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "$M \\in [AB]$, $N \\in [AC]$, $AM = 4{,}5$, $AB = 6$, $AN = 6{,}5$ et $AC = 8$. Que peut-on conclure ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les rapports sont $0{,}75$ et $0{,}8125$ : différents, donc pas de parallélisme. Que $AB - AM = AC - AN = 1{,}5$ ne prouve rien : Thalès compare des rapports, pas des écarts.",
+                  "answers": [
+                    { "content": "$(MN)$ n'est pas parallèle à $(BC)$ : $\\dfrac{4{,}5}{6} = 0{,}75$ et $\\dfrac{6{,}5}{8} = 0{,}8125$.", "correct": true },
+                    { "content": "$(MN) \\parallel (BC)$, car les deux rapports sont proches de $0{,}8$.", "correct": false },
+                    { "content": "$(MN) \\parallel (BC)$, car $4{,}5 + 1{,}5 = 6$ et $6{,}5 + 1{,}5 = 8$.", "correct": false }
+                  ]
+                },
+                {
+                  "content": "On donne $M \\in [AB]$, $N \\in [AC]$, $AM = 4$, $AB = 6$, $AN = 6$, $AC = 9$ et $BC = 7{,}5$, sans que l'énoncé dise que $(MN) \\parallel (BC)$. On peut directement écrire $\\dfrac{MN}{BC} = \\dfrac{AM}{AB}$ en citant la propriété de Thalès.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Le parallélisme n'est pas donné : il faut d'abord le démontrer avec la réciproque ($\\dfrac{4}{6} = \\dfrac{6}{9} = \\dfrac{2}{3}$). Ensuite seulement, on peut appliquer Thalès pour calculer $MN$.",
+                  "answers": [
+                    { "content": "Vrai", "correct": false },
+                    { "content": "Faux", "correct": true }
+                  ]
+                },
+                {
+                  "content": "$M \\in [AB]$, $N \\in [AC]$, $AM = 2$, $AB = 5$, $AN = 3$, $AC = 7{,}5$ et $BC = 10$. L'énoncé ne dit pas que $(MN) \\parallel (BC)$. Que vaut $MN$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{2}{5} = \\dfrac{3}{7{,}5} = 0{,}4$ : par la réciproque, $(MN) \\parallel (BC)$. Puis, par Thalès, $MN = 0{,}4 \\times 10 = 4$. Même non donné, le parallélisme peut se démontrer.",
+                  "answers": [
+                    { "content": "$4$ : on démontre d'abord le parallélisme avec la réciproque, puis on applique Thalès.", "correct": true },
+                    { "content": "On ne peut pas calculer $MN$, car le parallélisme n'est pas donné.", "correct": false },
+                    { "content": "$25$, en calculant $\\dfrac{5 \\times 10}{2}$.", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Une rédaction en quatre temps comporte : la situation, ce que l'on sait, le nom de la propriété, puis le calcul et la conclusion. Quelles sont les trois affirmations qui correspondent à une bonne rédaction ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Une bonne rédaction donne la situation, nomme la propriété, puis calcule et conclut. Donner le résultat seul ne prouve rien, et partir de ce qu'on veut démontrer est un raisonnement qui tourne en rond.",
+                  "answers": [
+                    { "content": "Donner la situation : positions des points et longueurs de l'énoncé.", "correct": true },
+                    { "content": "Nommer la propriété utilisée.", "correct": true },
+                    { "content": "Écrire l'égalité des rapports avec les valeurs de l'énoncé, puis conclure.", "correct": true },
+                    { "content": "Donner directement le résultat numérique.", "correct": false },
+                    { "content": "Utiliser dès le début le résultat qu'il faut démontrer.", "correct": false }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Parallèle d'abord, longueur ensuite",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Dans le triangle $ABC$, $AB = 8$ cm, $AC = 12$ cm et $BC = 10$ cm. Le point $M$ est sur $[AB]$ avec $AM = 6$ cm, et le point $N$ est sur $[AC]$ avec $AN = 9$ cm. Que vaut $MN$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{6}{8} = \\dfrac{9}{12} = \\dfrac{3}{4}$ : par la réciproque, $(MN) \\parallel (BC)$. Puis, par Thalès, $MN = \\dfrac{3}{4} \\times 10 = 7{,}5$ cm. La valeur $\\dfrac{40}{3}$ vient d'un rapport retourné, et $4 = 10 - 6$ est additif.",
+                  "answers": [
+                    { "content": "$7{,}5$ cm", "correct": true },
+                    { "content": "$\\dfrac{40}{3}$ cm", "correct": false },
+                    { "content": "$4$ cm", "correct": false }
+                  ]
+                },
+                {
+                  "content": "$M \\in [AB]$, $N \\in [AC]$ et $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$. On peut alors écrire $\\dfrac{MN}{BC} = \\dfrac{AM}{AB}$, en citant d'abord la réciproque de Thalès, puis la propriété de Thalès.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $M$ et $N$ sont dans le même ordre que $B$ et $C$ et les rapports sont égaux : la réciproque donne $(MN) \\parallel (BC)$. Le parallélisme étant démontré, la propriété de Thalès donne ensuite $\\dfrac{MN}{BC} = \\dfrac{AM}{AB}$.",
+                  "answers": [
+                    { "content": "Vrai", "correct": true },
+                    { "content": "Faux", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Camille veut montrer que $(MN) \\parallel (BC)$. Elle écrit : « $(MN) \\parallel (BC)$, donc d'après la propriété de Thalès, $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$. » Quelle est son erreur ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour démontrer un parallélisme, on calcule les deux rapports et on les compare, puis on cite la réciproque. Camille raisonne à l'envers : elle suppose le résultat à démontrer. Son raisonnement tourne en rond.",
+                  "answers": [
+                    { "content": "Elle utilise ce qu'elle doit démontrer : elle écrit le parallélisme au départ.", "correct": true },
+                    { "content": "Elle devrait écrire $\\dfrac{AM}{MB} = \\dfrac{AN}{AC}$.", "correct": false },
+                    { "content": "Elle a oublié de calculer $BC$.", "correct": false },
+                    { "content": "Il n'y a pas d'erreur.", "correct": false }
+                  ]
+                },
+                {
+                  "content": "$M \\in [AB]$, $N \\in [AC]$, $AM = 2$, $MB = 3$, $AN = 3$, $NC = 4{,}5$ et $BC = 10$. Quelles sont les deux affirmations vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "On a $AB = 5$ et $AC = 7{,}5$. Puis $\\dfrac{2}{5} = \\dfrac{3}{7{,}5} = 0{,}4$ : par la réciproque, $(MN) \\parallel (BC)$. Par Thalès, $MN = 0{,}4 \\times 10 = 4$. Les rapports sont égaux, pas différents, et $7 = 10 - 3$ est additif.",
+                  "answers": [
+                    { "content": "$(MN) \\parallel (BC)$", "correct": true },
+                    { "content": "$MN = 4$", "correct": true },
+                    { "content": "$\\dfrac{AM}{AB} \\neq \\dfrac{AN}{AC}$", "correct": false },
+                    { "content": "$MN = 7$", "correct": false }
+                  ]
+                },
+                {
+                  "content": "Configuration en papillon : $A$ est entre $M$ et $B$, et entre $N$ et $C$, avec $AM = 3$, $AB = 4{,}5$, $AN = 4$, $AC = 6$ et $BC = 9$. Que peut-on dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\dfrac{3}{4{,}5} = \\dfrac{4}{6} = \\dfrac{2}{3}$ et l'ordre est le même : $(MN) \\parallel (BC)$ par la réciproque. Puis $MN = \\dfrac{2}{3} \\times 9 = 6$. La valeur $13{,}5$ vient de $\\dfrac{9 \\times 4{,}5}{3}$, un rapport retourné.",
+                  "answers": [
+                    { "content": "$(MN) \\parallel (BC)$ et $MN = 6$", "correct": true },
+                    { "content": "$(MN) \\parallel (BC)$ et $MN = 13{,}5$", "correct": false },
+                    { "content": "On ne peut pas conclure : la réciproque ne marche pas au papillon.", "correct": false },
+                    { "content": "$(MN)$ n'est pas parallèle à $(BC)$.", "correct": false }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

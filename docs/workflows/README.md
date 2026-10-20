@@ -83,8 +83,9 @@ C'est la phase que la v1 n'avait pas, et c'est celle qui manquait le plus.
 
 1. **Contradiction empirique** — un rôle distinct de celui qui a écrit le code **exécute** : il lance les tests, ouvre l'application, refait le parcours, mesure. Il ne relit pas le code, il le met à l'épreuve.
 2. **Les portes** — pureté du domaine, rubocop, tests, parcours système, brakeman. Voir [ce qui bloque](../guide/conventions.md#7-ce-qui-bloque).
-3. **PR unique** vers `Develop`, référençant le chantier, l'ADR et l'UDR.
-4. **Clôture** — `journal.md` du chantier mis à jour : ce qui a été appris, ce qui a dérapé, ce qui reste ouvert.
+3. **Une CI complète par PR.** Entre deux lots, la preuve est légère : les tests des fichiers touchés, et `bin/system-changed` quand le lot touche une vue, un contrôleur, un composant, du CSS ou du Stimulus ([onboarding §4](../guide/onboarding.md)). `bin/ci-quiet` se joue **une seule fois par PR**, sur son head final, après les revues et leurs corrections. Une CI rouge corrigée se rejoue : le head a changé.
+4. **PR unique** vers `Develop`, référençant le chantier, l'ADR et l'UDR.
+5. **Clôture** — `journal.md` du chantier mis à jour : ce qui a été appris, ce qui a dérapé, ce qui reste ouvert.
 
 > Un reviewer qui lit du code ne prouve rien. Un challenger qui l'exécute prouve.
 
@@ -119,6 +120,22 @@ Quel que soit le cycle :
 - **Optimiser sans mesure avant et après.** Sans chiffres, ce n'est pas une optimisation, c'est une intuition.
 - **Écrire une vue sans UDR.** C'est ce qui produit des interfaces incohérentes d'une session à l'autre.
 - **Livrer sans qu'un rôle distinct ait exécuté le résultat.**
+- **Pousser sur une PR dont on n'est pas l'assigné.** Une PR, un pilote ([conventions §3](../guide/conventions.md#une-pr-un-pilote)).
+
+---
+
+## Quel modèle pour quel rôle
+
+Règle : **le plus petit modèle qui fait le travail** ; on monte d'un cran quand la tâche exige du jugement (sécurité, concurrence, architecture, décision métier). Décision : [ADR-0104](../decisions/adr/0104-routage-des-modeles-par-role.md).
+
+| Rôle | Modèle |
+|---|---|
+| Orchestrateur (session principale) : cadrage, décisions, arbitrage des revues, fusions | **Opus** |
+| Sous-agents de revue : `security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer` | **Opus** |
+| Agents d'exécution (`executant-lot`) : lots, tests et corrections à partir d'un plan cadré | **Sonnet** |
+| Vérifications pures (`verificateur-ci`) : `bin/ci-quiet`, tests système relancés, verdict | **Haiku** |
+
+Où l'appliquer : le champ `model:` du frontmatter de chaque agent de `.claude/agents/` ; le paramètre `model` à l'appel d'un agent pour une tâche précise ; `/model` pour la session principale.
 
 ---
 

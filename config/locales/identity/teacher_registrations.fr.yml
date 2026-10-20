@@ -12,6 +12,7 @@ fr:
         drena_public_id: "DRENA"
         school_public_id: "Établissement"
         material_slug: "Matière enseignée"
+        second_material_slug: "Autre matière (facultatif)"
     errors:
       models:
         dtos/identity/teacher_registration_input:
@@ -44,6 +45,8 @@ fr:
             material_slug:
               blank: "Choisissez la matière que vous enseignez."
               inclusion: "Cette matière n'existe pas. Choisissez-en une autre."
+            second_material_slug:
+              inclusion: "Cette matière n'existe pas. Choisissez-en une autre."
   identity:
     teacher_registrations:
       new:
@@ -66,7 +69,12 @@ fr:
       form:
         school: "Établissement"
         other_school: "Ce n'est pas votre établissement ?"
+        # ADR-0094 §11 : le lien de parrainage d'un collègue, sans établissement
+        sponsor: "%{name} vous invite sur Lnclass. Choisissez votre DRENA, puis votre établissement."
         material_prompt: "Choisissez votre matière"
+        # UDR-0125 §3.1 (ADR-0103) : la seconde matière, facultative
+        second_material_prompt: "Aucune autre matière"
+        second_material_hint: "Si vous enseignez aussi une autre matière. Vous pourrez en ajouter une troisième dans votre profil."
         you: "Vous"
         last_name_placeholder: "Ex. : KOUASSI"
         first_name_placeholder: "Ex. : Aya Marie"

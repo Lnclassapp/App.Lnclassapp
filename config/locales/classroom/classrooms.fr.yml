@@ -38,19 +38,36 @@ fr:
         count:
           one: "%{count} élève"
           other: "%{count} élèves"
+        # UDR-0108 §3.3 (ADR-0097 §4.7) : trente élèves, puis « Voir les 30 suivants ».
+        count_partial: "%{shown} sur %{total}"
+        # Décision du porteur du 2026-10-16 (UDR-0108 amendée) : la liste par note sur 20.
+        groups_label: "Élèves par note sur 20"
+        groups:
+          0-10: "0 à 10"
+          11-15: "11 à 15"
+          16-20: "16 à 20"
+          none: "Pas encore de note"
+        empty_group: "Aucun élève dans ce groupe"
+        grade_label: "Note"
+        grade: "%{grade}/20"
+        more:
+          one: "Voir le dernier"
+          other: "Voir les %{count} suivants"
         no_match: "Aucun élève ne correspond"
         clear_search: "Effacer la recherche"
         last_score: "Dernier score"
         last_score_tip: "Score de la dernière session d'exercice terminée par l'élève, en pourcentage de bonnes réponses."
         no_score: "Aucune session terminée"
         see_result: "Voir le résultat"
+        # UDR-0084 §3.7 (accueil-eleve, ADR-0089 §4.2) : les exercices terminés par l'élève sans qu'ils aient été donnés.
+        self_practice: "Fait seul (7 j)"
+        self_practice_tip: "Exercices terminés par l'élève sans qu'ils aient été donnés, sur les 7 derniers jours, aujourd'hui compris."
+        self_practice_line: "Fait seul : %{count} cette semaine"
         # UDR-0079 §3.8 ter (memo Q23) : le numéro d'un élève est masqué pour tout lecteur de la classe.
         contact_masked: "Numéro masqué pour protéger les élèves"
-        issue_code: "Générer un code de récupération"
-        # UDR-0077 §3.4 : le menu ⋮ de la ligne d'un élève.
-        actions_label: "Actions pour %{name}"
-        issue_code_hint: "Un élève qui a perdu son code secret le réinitialise avec un code de récupération, valable 15 minutes."
-        # ADR-0085 §4.4, §4.5, UDR-0081 §3.7 : nouveaux arrivés (7 jours), voie d'arrivée, retrait d'un élève.
+        # ADR-0085 §4.4, §4.5, UDR-0081 §3.7 : nouveaux arrivés (7 jours), voie d'arrivée, retrait d'un élève. La liste de
+        # l'enseignant n'a plus de menu ⋮ (UDR-0108) ; le menu et la confirmation restent lus par la page de la classe de la
+        # direction (school_admin/classrooms/show).
         new: "Nouveau"
         new_count:
           one: "%{count} nouveau"
@@ -58,6 +75,7 @@ fr:
         via:
           standard: "Inscrit seul"
           link: "Par le lien"
+        actions_label: "Actions pour %{name}"
         remove: "Retirer de la classe"
         remove_title: "Retirer %{name} de la classe ?"
         remove_warning: "%{name} quittera cette classe. Son compte et son travail sont gardés. Il pourra revenir avec le lien de la classe."
@@ -77,7 +95,7 @@ fr:
       assigned_exercises:
         title: "Exercices assignés"
         empty_title: "Aucun exercice assigné"
-        empty_description: "Ouvrez un cours ci-dessous pour assigner un exercice à cette classe."
+        empty_description: "Ouvrez une fiche de cours ci-dessous pour assigner un exercice à cette classe."
         done:
           one: "%{count} fait"
           other: "%{count} faits"
@@ -89,9 +107,21 @@ fr:
           other: "%{count} pas encore faits"
         summary: "%{done} · %{pending}"
       courses:
-        title: "Cours"
-        empty_title: "Aucun cours publié pour cette classe"
-        empty_description: "Les cours de votre matière pour ce niveau apparaîtront ici dès leur publication."
+        title: "Fiches de cours"
+        empty_title: "Aucune fiche de cours publiée pour cette classe"
+        empty_description: "Les fiches de cours de vos matières pour ce niveau apparaîtront ici dès leur publication."
+        # UDR-0127 §3.1 (ADR-0103) : une bande par matière, pour l'enseignant de plusieurs matières
+        band_label: "Fiches de cours de %{material}"
+        count:
+          one: "%{count} fiche de cours"
+          other: "%{count} fiches de cours"
         essentials:
-          one: "%{count} fiche essentielle"
-          other: "%{count} fiches essentielles"
+          one: "%{count} fiche de révision"
+          other: "%{count} fiches de révision"
+      # UDR-0121 §3.1, ADR-0101 §4.4 : les fiches à revoir de la classe (AS-17) ; « 10/20 » = Grading.grade_on_20(PASS_THRESHOLD).
+      gaps:
+        title: "Fiches à revoir"
+        subtitle: "Des élèves ont eu moins de %{grade}/20 sur ces fiches de révision et ne les ont pas encore levées."
+        students:
+          one: "1 élève"
+          other: "%{count} élèves"

@@ -59,7 +59,7 @@ class Identity::TeamInvitationTest < ApplicationSystemTestCase
       assert_selector "#session-form", wait: SIGN_IN_WAIT
       assert_toast "Votre compte est créé."
       # FU-31: the number is already there, the focus waits on the PIN.
-      assert_field "session[contact]", with: "01 00 00 00 09"
+      assert_field "session[contact]", with: "0100000009"
       assert_selector "#session_pin:focus"
       fill_in "session[pin]", with: "4821"
       click_on I18n.t("identity.sessions.new.submit")

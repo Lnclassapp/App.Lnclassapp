@@ -4,6 +4,8 @@ module UseCases
   module School
     # GD-19, GD-20 (ADR-0071 §4.3): the direction reinstates a teacher it detached: attached again to its school, no
     # classroom and no assignment given back, the open departure closed. Never a teacher of another school.
+    # ME-21, ME-22 (ADR-0094 §4.4): a teacher who has joined another school since is reinstated as a secondary school,
+    # within the cap of 3; at the cap, nothing is written and the refusal says why.
     class ReinstateTeacherTest < ActiveSupport::TestCase
       NOW = Time.utc(2026, 10, 1, 9)
       Clock = Data.define(:now)
@@ -13,21 +15,23 @@ module UseCases
 
         attr_reader :attached
 
-        def initialize(*schools, primary: {}, refuse_attach: false)
+        def initialize(*schools, elsewhere: {}, refuse_attach: nil)
           @schools = schools.index_by(&:id)
-          @primary = primary
+          @elsewhere = elsewhere
           @refuse_attach = refuse_attach
           @attached = []
         end
 
         def find_by_id(id:) = @schools[id]
-        def primary_school_id_for(teacher_id:) = @primary[teacher_id]
+        def school_ids_for(teacher_id:) = @elsewhere.fetch(teacher_id, [])
 
-        def attach_teacher(teacher_id:, school_id:, primary:, at:)
-          return Shared::Result.failure(:conflict) if @refuse_attach
+        # Le principal se décide ici, sous le verrou (ADR-0094 §4.5) : aucun autre établissement.
+        def attach_teacher_within_cap(teacher_id:, school_id:, cap:, at:)
+          return Shared::Result.failure(:conflict, errors: { base: [ @refuse_attach ] }) if @refuse_attach
 
-          @attached << { teacher_id:, school_id:, primary:, at: }
-          Shared::Result.success
+          primary = school_ids_for(teacher_id:).empty?
+          @attached << { teacher_id:, school_id:, primary:, cap:, at: }
+          Shared::Result.success(primary)
         end
       end
 
@@ -68,7 +72,7 @@ module UseCases
         @school = school(31, "active")
         @other = school(32, "active")
         @teacher = user(id: 50, public_id: "usr-awa")
-        @admin = Entities::Identity::Actor.new(user_id: 7, role: :school_admin, school_id: 31)
+        @admin = Entities::Identity::Actor.new(user_id: 7, role: :school_admin, school_id: 31, staff_position: "head")
         @audit = FakeAudit.new
         @transaction = FakeTransaction.new
       end
@@ -88,12 +92,13 @@ module UseCases
       end
 
       def reinstate(actor: @admin, school_id: 31, teacher_public_id: "usr-awa", departures: [ departure ], users: [ @teacher ],
-                    primary: {}, refuse_attach: false, schools: [ @school, @other ])
-        @schools = FakeSchools.new(*schools, primary:, refuse_attach:)
+                    elsewhere: {}, refuse_attach: nil, schools: [ @school, @other ])
+        @schools = FakeSchools.new(*schools, elsewhere:, refuse_attach:)
         @departures = FakeDepartures.new(*departures)
+        @materials = FakeTeacherMaterials.new
         ReinstateTeacher.new(users: FakeUsers.new(*users), schools: @schools, departures: @departures, audit_log: @audit,
                              policy: Policies::School::ManageSchoolTeachersPolicy.new, transaction: @transaction,
-                             clock: Clock.new(NOW)).call(actor:, school_id:, teacher_public_id:)
+                             clock: Clock.new(NOW), teacher_materials: @materials).call(actor:, school_id:, teacher_public_id:)
       end
 
       test "GD-19 : réattaché à l'établissement en école principale, départ clos, journal teacher.reinstated" do
@@ -101,8 +106,9 @@ module UseCases
 
         assert result.success?
         assert_equal @teacher, result.value
-        assert_equal [ { teacher_id: 50, school_id: 31, primary: true, at: NOW } ], @schools.attached
+        assert_equal [ { teacher_id: 50, school_id: 31, primary: true, cap: 3, at: NOW } ], @schools.attached
         assert_equal [ { id: 9, reinstated_by_id: 7, at: NOW } ], @departures.closed
+        assert_equal [ [ :inherit, 50, 31, nil, NOW ] ], @materials.calls, "ADR-0103 §4.4 : il retrouve ses matières de cet établissement"
         assert_equal [ { action: "teacher.reinstated", actor_id: 7, at: NOW, subject_type: "User", subject_id: 50,
                          metadata: { school_id: 31 } } ], @audit.events
         assert_equal 1, @transaction.calls
@@ -139,17 +145,29 @@ module UseCases
         assert_nothing_written
       end
 
-      test "not_found : il a rejoint un autre établissement entre-temps" do
-        assert_equal :not_found, reinstate(primary: { 50 => 32 }).code
-        assert_nothing_written
+      test "ME-21 : il a rejoint un autre établissement entre-temps : réintégré en secondaire, départ clos" do
+        assert reinstate(elsewhere: { 50 => [ 32 ] }).success?
+
+        assert_equal [ [ 31, false ] ], @schools.attached.map { it.values_at(:school_id, :primary) }
+        assert_equal 1, @departures.closed.size
+      end
+
+      test "ME-22 : au plafond, sous verrou : conflict schools_limit, départ ouvert, aucun journal" do
+        result = reinstate(elsewhere: { 50 => [ 32, 33, 34 ] }, refuse_attach: :schools_limit)
+
+        assert_equal [ :conflict, { base: [ :schools_limit ] } ], [ result.code, result.errors ]
+        assert_empty @departures.closed
+        assert_empty @audit.events
+        assert_empty @materials.calls
       end
 
       test "un rattachement refusé par la base : conflict, départ ouvert, aucun journal" do
-        result = reinstate(refuse_attach: true)
+        result = reinstate(refuse_attach: :already_attached)
 
         assert_equal :conflict, result.code
         assert_empty @departures.closed
         assert_empty @audit.events
+        assert_empty @materials.calls
       end
 
       private

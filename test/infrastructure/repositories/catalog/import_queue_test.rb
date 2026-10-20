@@ -28,6 +28,20 @@ module Repositories
         Rails.configuration.x.import_jobs = configured
       end
 
+      class RefusedImportJob < ApplicationJob
+        before_enqueue { throw :abort }
+        def perform(_report_id) = nil
+      end
+
+      test "une mise en file refusée (perform_later rend false) est rendue false, jamais true" do
+        configured = Rails.configuration.x.import_jobs
+        Rails.configuration.x.import_jobs = configured.merge("schools" => RefusedImportJob.name)
+
+        assert_no_enqueued_jobs { assert_equal false, ImportQueue.new.enqueue(kind: "schools", report_id: 42) }
+      ensure
+        Rails.configuration.x.import_jobs = configured
+      end
+
       test "un job pas encore livré ne lève qu'à la mise en file" do
         Rails.configuration.x.import_jobs.each_value do |name|
           next if name.safe_constantize

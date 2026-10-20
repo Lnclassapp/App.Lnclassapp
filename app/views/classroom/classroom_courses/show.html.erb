@@ -1,8 +1,8 @@
 <%# 🌐 UI · classroom/classroom_courses/show — un cours vu depuis une classe (CL-11) %>
 <%# Rôle : en-tête du cours, puis ses fiches essentielles publiées, chacune menant à la fiche dans la classe ; rien ne s'assigne ici %>
 <%# ADR  : 0048, 0072 · UDR : 0006, 0007, 0028 (amendée le 2026-10-02), 0054, 0062 · retour : la classe %>
+<%# Une classe archivée n'a plus cette page (404, Lot C de vie-de-la-classe) : plus d'avis « archivée » ici. %>
 <% course = @course.course %>
-<% active = @classroom.status == "active" %>
 <% page_title course.name %>
 <% content_for :nav_key, "classrooms" %>
 <%= ui_back_link @classroom.name, href: classroom_path(@classroom.public_id) %>
@@ -19,9 +19,6 @@
       <%= ui_subject_badge course.material_name, category: course.material_category %>
     </div>
   </div>
-  <% unless active %>
-    <p class="mt-5 rounded-ln bg-warning-soft px-4 py-3 text-sm text-warning"><%= t(".archived_notice") %></p>
-  <% end %>
 <% end %>
 
 <section id="classroom_course_essentials" aria-labelledby="classroom_course_essentials_title">

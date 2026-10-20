@@ -173,6 +173,21 @@ module UseCases
         assert_equal "<p>Cours 1</p>", Orm::Course.find_by!(name: "Écologie").content.body.to_html
       end
 
+      # CA-14, ADR-0091 §4.5 : tolerance et match s'importent aussi par les cours complets.
+      test "tolerance and match are imported with the course tree" do
+        node = course("Nouveaux types")
+        node["essentials"][0]["exercises"][0]["questions"] = [
+          { "content" => "Combien ?", "question_type" => "numeric", "tolerance" => 0.5, "answers" => [ { "content" => "3" } ] },
+          { "content" => "Relie.", "question_type" => "matching", "answers" => %w[a b c].map { { "content" => it, "match" => it.upcase } } }
+        ]
+
+        report = run_import(document(node))
+
+        assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count)
+        assert_equal BigDecimal("0.5"), Orm::Question.find_by!(question_type: "numeric").numeric_tolerance
+        assert_equal %w[A B C], Orm::Question.find_by!(question_type: "matching").answers.order(:position).pluck(:match_content)
+      end
+
       test "an error deep in the tree is reported at its exact path, and its course leaves no row" do
         courses = course_tree_document(courses: 4, essentials: 2, exercises: 1, questions: 3, answers: 4)["courses"]
         courses[3]["essentials"][1]["exercises"][0]["questions"][2]["answers"].each { it["correct"] = true }
@@ -237,6 +252,72 @@ module UseCases
         assert_equal [ 2, 1, 1 ], report.values_at(:total_count, :imported_count, :error_count)
         assert_equal [ [ "courses[0].essentials[0].exercises[0].questions[1].answers[2].content", "schema" ] ],
                      report.import_errors.map { it.values_at("path", "code") }
+      end
+
+      # ADR-0105 §4.3, §4.6 : l'import annonce les images, il n'en crée aucune.
+      test "an image slot in a sheet and an image description on a question are written as they are" do
+        illustrated = course("Le circuit électrique")
+        essential = illustrated["essentials"][0]
+        essential["content"] = "<h2>Le circuit</h2><p>[[image: une pile reliée à une lampe]]</p><p>Texte.</p>"
+        essential["exercises"][0]["questions"][1]["image"] = { "description" => "  un interrupteur ouvert  " }
+
+        report = run_import(document(illustrated))
+
+        assert_equal [ "completed", 1, 0 ], report.values_at(:status, :imported_count, :error_count)
+        written = Orm::Essential.joins(:course).find_by!(courses: { name: "Le circuit électrique" })
+        assert_includes written.content.body.to_html, "<p>[[image: une pile reliée à une lampe]]</p>"
+        assert_equal [ "une pile reliée à une lampe" ], Entities::Catalog::ImageSlot.scan(written.content.body.to_html).map(&:description)
+        assert_equal [ nil, "un interrupteur ouvert" ], written.exercises.first.questions.order(:position).pluck(:image_description)
+        assert_equal 0, Orm::QuestionImage.count
+      end
+
+      # Menace n° 13 : le plafond de 200 Ko du texte d'une fiche est celui du schéma, au caractère près.
+      test "a sheet text of exactly 204,800 characters is imported, 204,801 is refused by the schema at its path" do
+        limit = Entities::Catalog::Essential::CONTENT_MAX
+        exact = course("Exact")
+        exact["essentials"][0]["content"] = "a" * limit
+        over = course("Dépassé")
+        over["essentials"][0]["content"] = "a" * (limit + 1)
+
+        report = run_import(document(exact, over))
+
+        assert_equal 204_800, limit
+        assert_equal [ 2, 1, 1 ], report.values_at(:total_count, :imported_count, :error_count)
+        assert_equal [ [ "courses[1].essentials[0].content", "schema" ] ], report.import_errors.map { it.values_at("path", "code") }
+        assert_equal limit, Orm::Essential.joins(:course).find_by!(courses: { name: "Exact" }).content.body.to_plain_text.length
+      end
+
+      # Menace n° 13 : un texte trop complexe à relire est refusé à son chemin avec son propre code, et journalisé sans son contenu.
+      test "a sheet text too complex to read is refused with its own code, and the report is logged without the content" do
+        hostile = course("Hostile")
+        hostile["essentials"][0]["content"] = %(<span title="<p>">x</span>) * 7_000
+
+        logs = capture_log { @report = run_import(document(hostile, course("Simple"))) }
+
+        assert_equal [ 2, 1, 1 ], @report.values_at(:total_count, :imported_count, :error_count)
+        assert_equal [ [ "courses[0].essentials[0].content", "image_slots_unreadable" ] ], @report.import_errors.map { it.values_at("path", "code") }
+        assert_includes logs, "[ImportReportRepository] image_slots_unreadable report=#{@report.id} paths=[\"courses[0].essentials[0].content\"]"
+        assert_not_includes logs, "span title"
+      end
+
+      test "an image description empty, blank, too long, missing, with an unknown key, or an image not an object is refused at its path" do
+        cases = { "" => "schema", "   " => "blank", "a" * 151 => "schema" }.map do |description, code|
+          [ { "description" => description }, code, "courses[0].essentials[0].exercises[0].questions[0].image.description" ]
+        end
+        cases << [ { "description" => "une pile", "url" => "https://x" }, "schema", "courses[0].essentials[0].exercises[0].questions[0].image.url" ]
+        cases << [ "une pile", "schema", "courses[0].essentials[0].exercises[0].questions[0].image" ]
+        cases << [ {}, "schema", "courses[0].essentials[0].exercises[0].questions[0].image.description" ]
+
+        cases.each do |image, code, path|
+          broken = course("Cassé")
+          broken["essentials"][0]["exercises"][0]["questions"][0]["image"] = image
+
+          report = run_import(document(broken))
+
+          assert_equal [ 0, 1 ], report.values_at(:imported_count, :error_count), image.inspect
+          assert_equal [ [ path, code ] ], report.import_errors.map { it.values_at("path", "code") }, image.inspect
+        end
+        assert_equal 0, Orm::Course.count
       end
 
       test "a version 2 envelope is rejected in bloc, with zero writes" do

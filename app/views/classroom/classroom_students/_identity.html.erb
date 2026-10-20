@@ -1,0 +1,31 @@
+<%# 🌐 UI · classroom/classroom_students/_identity — en-tête de la fiche d'un élève %>
+<%# Rôle : photo, nom (le seul h1), classe et établissement, « Nouveau » ; numéro masqué et arrivée en dl %>
+<%# ADR  : 0083 (§4.4 bis), 0085 (§4.4) · UDR : 0079 (§3.8 ter), 0081 (§3.7), 0107 (§3.2) · la valeur masquée de la requête, telle quelle : ni tel:, ni copie %>
+<%# locals: (classroom:, student:) -%>
+<%= ui_card padding: :md, id: "student_file_identity" do %>
+  <div class="flex items-center gap-4">
+    <%= ui_avatar student.display_name, src: account_photo_src(student.public_id, student.photo_version), size: :lg,
+                                        tone_seed: student.public_id %>
+    <div class="min-w-0 space-y-1">
+      <h1 class="font-display text-2xl font-extrabold tracking-tight break-words sm:text-3xl"><%= student.display_name %></h1>
+      <p class="text-sm text-mute"><%= t(".context", classroom: classroom.name, school: classroom.school_name) %></p>
+      <% if student.newcomer %><%= ui_badge t(".new"), tone: :brand, size: :sm %><% end %>
+    </div>
+  </div>
+  <dl class="mt-4 grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
+    <% if student.contact %>
+      <div class="flex flex-wrap gap-x-2">
+        <dt class="text-mute"><%= t(".contact") %></dt>
+        <dd class="font-mono whitespace-nowrap" title="<%= t(".contact_masked") %>">
+          <span aria-hidden="true"><%= student.contact %></span><span class="sr-only"><%= t(".contact_masked") %></span>
+        </dd>
+      </div>
+    <% end %>
+    <div class="flex flex-wrap gap-x-2">
+      <dt class="text-mute"><%= t(".joined") %></dt>
+      <% date = l(student.joined_at.to_date, format: :long) %>
+      <%# UDR-0081 §3.7 : la voie dite pour le lien seulement ; rien pour la voie standard. %>
+      <dd><%= student.joined_via == "link" ? t(".joined_via", date:, via: t(".via.link")) : date %></dd>
+    </div>
+  </dl>
+<% end %>

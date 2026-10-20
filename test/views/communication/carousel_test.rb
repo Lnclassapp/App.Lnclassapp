@@ -11,7 +11,9 @@ module Communication
 
     def card(public_id, title, author_role: :teacher)
       Card.new(public_id:, title:, body: "Texte court.", illustration: "info", author_role:, gender: "female", last_name: "Kamaté",
-               material_name: "SVT", anonymized: false, official: author_role == :school_admin, image: false, audio: false,
+               materials: [ Queries::Identity::TeacherMaterialsQuery::MaterialTag.new(id: 1, name: "SVT", shortname: "SVT",
+                                                                                      category: "science", slug: "svt") ],
+               anonymized: false, official: author_role == :school_admin, image: false, audio: false,
                edited: false, dismissed: false)
     end
 

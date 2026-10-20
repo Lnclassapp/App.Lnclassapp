@@ -1,11 +1,22 @@
 <%# 🌐 UI · classroom/teacher_homes/show — accueil enseignant (TR-05) %>
 <%# Rôle : sections de HOME_SECTIONS[:teacher] (classes en bande, cours par niveau, annonces, exercices à suivre), collègues en attente, invitation sur téléphone %>
-<%# ADR  : 0026, 0048, 0063, 0076, 0078 · UDR : 0006, 0078, 0007, 0026, 0050, 0054, 0069, 0071 §3.5, 0077 §3.1 · titre « Accueil · Enseignant · Lnclass » %>
+<%# ADR  : 0026, 0048, 0063, 0076, 0078 · UDR : 0006, 0078, 0007, 0026, 0050, 0054, 0069, 0071 §3.5, 0077 §3.1, 0098 §3.3, 0126 (§3.2 : un badge par matière) · titre « Accueil · Enseignant · Lnclass » %>
 <% page_title t(".page_title") %>
 <%# Grand écran : la carte « Parrainage » de la barre latérale vient avec la page, sans frame à demander (ADR-0076 §4.2). %>
 <% content_for :sidebar_referral, render("identity/referrals/sidebar_card", invite: @invite, frame: NavigationHelper::SIDEBAR_FRAME_OPTIONS) %>
-<%= ui_page_header title: t(".greeting", name: shell_user.first_name), subtitle: t(".subtitle", school: @home.school_name) do %>
-  <%= ui_subject_badge @home.material_name, category: @home.material_category %>
+<%# UDR-0098 §3.3 : à partir de deux établissements, « Changer » mène au panneau du compte. %>
+<% subtitle = if teacher_schools.size > 1
+                tag.span(class: "flex flex-wrap items-center gap-x-2", id: "current_school") do
+                  safe_join([ tag.span(@home.school_name), tag.span("·", "aria-hidden": "true"),
+                              link_to(t(".change_school"), teacher_menu_path, id: "change_school",
+                                      class: "inline-flex min-h-tap items-center text-sm font-medium text-brand-strong",
+                                      "aria-label": t(".change_school_label")) ])
+                end
+              else
+                t(".subtitle", school: @home.school_name)
+              end %>
+<%= ui_page_header title: t(".greeting", name: shell_user.first_name), subtitle: do %>
+  <%= ui_subject_badges @home.materials %>
 <% end %>
 
 <div class="grid gap-5">
@@ -39,9 +50,21 @@
         <% end %>
       <% end %>
     <% elsif key == :courses %>
-      <%= ui_card title: t(".courses_title"), subtitle: t(".courses_subtitle", material: @home.material_name), icon:,
+      <%# ADR-0103 §4.6 : sans matière dans cet établissement, une invitation à les choisir, jamais un sous-titre cassé. %>
+      <% courses_subtitle = if @home.materials.empty?
+                              t(".courses_subtitle_none")
+                            elsif @home.several_materials?
+                              t(".courses_subtitle_many")
+                            else
+                              t(".courses_subtitle", material: @home.materials.first.name)
+                            end %>
+      <%= ui_card title: t(".courses_title"), subtitle: courses_subtitle, icon:,
                   id: "teacher_home_courses" do |card| %>
-        <%= render "course_levels", home: @home, invite: @invite %>
+        <% if @home.materials.empty? %>
+          <%= render "choose_materials", id: "teacher_home_courses_no_materials" %>
+        <% else %>
+          <%= render "course_levels", home: @home, invite: @invite %>
+        <% end %>
         <% card.footer do %>
           <%= ui_button t(".all_courses"), href: courses_path, variant: :ghost, size: :sm, icon_end: "arrow-right" %>
         <% end %>
@@ -52,7 +75,7 @@
         <%= render "communication/messages/carousel", carousel: @announcements, dismissible: false %>
       <% end %>
     <% elsif key == :activity %>
-      <%= render "follow_ups", follow_ups: @follow_ups, icon: %>
+      <%= render "follow_ups", follow_ups: @follow_ups, icon:, badges: @home.several_materials?, no_materials: @home.materials.empty? %>
     <% end %>
   <% end %>
   <% if @pending_colleagues %>

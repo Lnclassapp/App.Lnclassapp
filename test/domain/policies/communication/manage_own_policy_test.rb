@@ -33,6 +33,15 @@ module Policies
         %w[archived withdrawn].each { assert_equal :conflict, call(actor(:teacher), announcement(status: it)).code, it }
       end
 
+      # ADR-0094 (MET-4): a teacher's announcement exists only in the school where he wrote it.
+      test "its teacher author in another of his schools receives not_found; back in its school, he manages it" do
+        elsewhere = Entities::Identity::Actor.new(user_id: AUTHOR, role: :teacher, school_id: 11)
+
+        assert_equal :not_found, call(elsewhere).code
+        assert_equal :not_found, call(elsewhere, announcement(status: "archived")).code
+        assert call(actor(:teacher)).success?
+      end
+
       test "a frozen announcement of someone else stays not_found" do
         assert_equal :not_found, call(actor(:team, user_id: 99), announcement(status: "archived")).code
       end

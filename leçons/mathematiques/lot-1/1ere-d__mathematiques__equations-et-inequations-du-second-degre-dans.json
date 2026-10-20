@@ -1,0 +1,1583 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Équations et inéquations du second degré dans ℝ",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Mathématiques",
+      "series_name": "D",
+      "essentials": [
+        {
+          "name": "Résoudre une équation du second degré",
+          "subtitle": "Le discriminant annonce le nombre de solutions, la formule les calcule",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer le discriminant $\\Delta = b^2 - 4ac$ d'une équation du second degré.</li>\n<li>Dire combien de solutions réelles l'équation admet, puis les calculer.</li>\n<li>Mettre un trinôme sous forme canonique et comprendre d'où vient la formule des solutions.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. La brique et l'étage (le discriminant).</strong> Sur un chantier à Cocody, un maçon lance une brique à son collègue qui travaille à l'étage. Vue de côté, la brique dessine une courbe en arche. L'étage est à une hauteur précise. Si le maçon lance fort, la brique passe deux fois à la hauteur de l'étage : une fois en montant, une fois en redescendant. S'il lance juste assez, elle effleure l'étage une seule fois, tout en haut de sa course. S'il lance trop faiblement, elle n'atteint jamais l'étage.</p>\n<p><em>Le pont.</em> « La brique est à la hauteur de l'étage » se traduit par une équation $ax^2 + bx + c = 0$. Les instants où cela arrive sont les <strong>solutions</strong> (on dit aussi les <strong>racines</strong>). Le nombre qui annonce le cas, c'est le <strong>discriminant</strong> $\\Delta = b^2 - 4ac$ : deux passages si $\\Delta > 0$, un seul passage (au sommet) si $\\Delta = 0$, aucun passage si $\\Delta < 0$.</p>\n<p><em>Où l'image s'arrête.</em> Un temps ne peut pas être négatif, alors qu'une racine peut l'être. Dans $\\mathbb{R}$, on garde toutes les racines trouvées. C'est seulement dans un problème concret qu'on écarte celles qui n'ont pas de sens.</p>\n<p><strong>2. Le carré de parpaings (la forme canonique).</strong> Le maçon a posé un carré de parpaings de côté $x$. Il ajoute le long de deux côtés une bande large de 3 parpaings et longue de $x$ : cela fait $x^2 + 3x + 3x = x^2 + 6x$ parpaings. Pour obtenir un grand carré de côté $x + 3$, il manque encore le petit coin de $3 \\times 3 = 9$ parpaings.</p>\n<p><em>Le pont.</em> Le grand carré a pour aire $(x+3)^2$. On a donc $x^2 + 6x = (x+3)^2 - 9$ : on a « complété le carré » en ajoutant le coin manquant, puis en le retirant pour que l'égalité reste vraie. Avec $x^2 + bx$, les deux bandes mesurent $\\frac{b}{2}$ de large et le coin vaut $\\left(\\frac{b}{2}\\right)^2$.</p>\n<p><em>Où l'image s'arrête.</em> Les parpaings supposent $x > 0$. L'égalité $x^2 + 6x = (x+3)^2 - 9$ reste pourtant vraie pour tout réel $x$ : ce n'est plus l'image qui la justifie, c'est le calcul.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Équation du second degré.</strong> Une équation $ax^2 + bx + c = 0$, avec $a \\neq 0$, est une équation du second degré dans $\\mathbb{R}$. Son <strong>discriminant</strong> est $\\Delta = b^2 - 4ac$.</p>\n<ul>\n<li>Si $\\Delta > 0$ : deux solutions distinctes $$x_1 = \\frac{-b - \\sqrt{\\Delta}}{2a} \\quad \\text{et} \\quad x_2 = \\frac{-b + \\sqrt{\\Delta}}{2a}.$$</li>\n<li>Si $\\Delta = 0$ : une seule solution, dite double : $x_0 = \\frac{-b}{2a}$.</li>\n<li>Si $\\Delta < 0$ : aucune solution réelle. L'ensemble des solutions est vide : $S = \\emptyset$.</li>\n</ul>\n<p><strong>Forme canonique.</strong> Pour $a \\neq 0$ : $$ax^2 + bx + c = a\\left[\\left(x + \\frac{b}{2a}\\right)^2 - \\frac{\\Delta}{4a^2}\\right].$$ L'équation $ax^2 + bx + c = 0$ équivaut alors à $\\left(x + \\frac{b}{2a}\\right)^2 = \\frac{\\Delta}{4a^2}$. Un carré n'est jamais négatif : pas de solution si $\\Delta < 0$, une si $\\Delta = 0$, deux si $\\Delta > 0$. C'est de là que vient la formule.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Résoudre $2x^2 - 5x - 3 = 0$ dans $\\mathbb{R}$.</strong></p>\n<ol>\n<li>On repère $a = 2$, $b = -5$, $c = -3$.</li>\n<li>$\\Delta = (-5)^2 - 4 \\times 2 \\times (-3) = 25 + 24 = 49$. Comme $\\Delta > 0$, il y a deux solutions.</li>\n<li>$\\sqrt{\\Delta} = 7$, donc $x_1 = \\frac{5 - 7}{4} = -\\frac{1}{2}$ et $x_2 = \\frac{5 + 7}{4} = 3$.</li>\n<li>Contrôle : $2 \\times 3^2 - 5 \\times 3 - 3 = 18 - 15 - 3 = 0$. L'ensemble des solutions est $S = \\left\\{-\\frac{1}{2} ; 3\\right\\}$.</li>\n</ol>\n<p><strong>Résoudre $4x^2 - 12x + 9 = 0$, puis $x^2 - 2x + 5 = 0$.</strong></p>\n<ol>\n<li>Première équation : $\\Delta = 144 - 144 = 0$. Une solution double : $x_0 = \\frac{12}{8} = \\frac{3}{2}$.</li>\n<li>Seconde équation : $\\Delta = 4 - 20 = -16 < 0$. Aucune solution réelle : $S = \\emptyset$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Se tromper de signe dans le calcul de $\\Delta$ ou dans $-b$. Quand $c$ ou $b$ est négatif, mets-le entre parenthèses : $\\Delta = (-5)^2 - 4 \\times 2 \\times (-3)$, et non $25 - 24$.</p>\n<p>Autre erreur très fréquente : appliquer la formule sans avoir mis l'équation sous la forme $ax^2 + bx + c = 0$. Pour $x^2 = 4x + 5$, il faut d'abord écrire $x^2 - 4x - 5 = 0$, donc $c = -5$. Enfin, si $\\Delta < 0$, n'écris pas $\\sqrt{\\Delta}$ : réponds directement qu'il n'y a pas de solution réelle.</p>\n<h2>En une phrase</h2>\n<p>On met l'équation sous la forme $ax^2 + bx + c = 0$, on calcule $\\Delta = b^2 - 4ac$ : deux solutions si $\\Delta > 0$, une seule si $\\Delta = 0$, aucune si $\\Delta < 0$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Discriminant et nombre de solutions",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Pour une équation $ax^2 + bx + c = 0$ avec $a \\neq 0$, quelle est l'expression du discriminant $\\Delta$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le discriminant vaut $b^2 - 4ac$. Les erreurs classiques portent sur le signe : $b^2 + 4ac$ change le résultat dès que $ac$ est non nul, et $4ac - b^2$ est l'opposé du discriminant. Le facteur $4$ est indispensable : $b^2 - 2ac$ est faux.",
+                  "answers": [
+                    {
+                      "content": "$b^2 - 4ac$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$b^2 + 4ac$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$4ac - b^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$b^2 - 2ac$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maçon lance une brique vers un étage. La brique atteint la hauteur de l'étage une seule fois, exactement au sommet de sa course. Cette situation correspond à $\\Delta = 0$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Deux passages correspondent à $\\Delta > 0$, aucun passage à $\\Delta < 0$. Quand la brique effleure l'étage une seule fois, au sommet, l'équation a une seule solution, dite double : c'est le cas $\\Delta = 0$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le discriminant d'une équation du second degré vaut $-7$. Combien cette équation a-t-elle de solutions réelles ?",
+                  "question_type": "single_choice",
+                  "explanation": "Si $\\Delta < 0$, l'équation n'a aucune solution réelle : la brique n'atteint jamais l'étage. Le signe négatif ne dit pas que les solutions sont négatives : il dit qu'il n'y en a pas. Et $\\sqrt{-7}$ n'existe pas dans $\\mathbb{R}$.",
+                  "answers": [
+                    {
+                      "content": "Aucune",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une seule",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux, toutes les deux négatives",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux, dont une négative",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquelles de ces équations ont un discriminant strictement positif, donc deux solutions réelles distinctes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$x^2 - 3x + 2 = 0$ donne $\\Delta = 9 - 8 = 1$ et $2x^2 - x - 1 = 0$ donne $\\Delta = 1 + 8 = 9$. Mais $x^2 + 2x + 1$ et $x^2 - 4x + 4$ donnent $\\Delta = 0$ (une solution double), et $x^2 + x + 3$ donne $\\Delta = 1 - 12 = -11 < 0$.",
+                  "answers": [
+                    {
+                      "content": "$x^2 - 3x + 2 = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x^2 - x - 1 = 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 + 2x + 1 = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 + x + 3 = 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 - 4x + 4 = 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le maçon complète le carré de parpaings pour l'expression $x^2 + 6x$. Quelle écriture est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le grand carré de côté $x + 3$ a pour aire $(x+3)^2 = x^2 + 6x + 9$. Il contient le coin de $9$ parpaings qui n'était pas dans $x^2 + 6x$ : il faut donc le retrancher. Ainsi $x^2 + 6x = (x+3)^2 - 9$. Écrire $+ 9$ ou $(x+6)^2 - 36$ est faux.",
+                  "answers": [
+                    {
+                      "content": "$(x+3)^2 - 9$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x+3)^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+3)^2 + 9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+6)^2 - 36$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer le discriminant et les solutions",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quel est l'ensemble des solutions de $x^2 - 5x + 6 = 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\Delta = 25 - 24 = 1$, donc $x = \\frac{5 \\pm 1}{2}$, soit $2$ et $3$. Contrôle : $4 - 10 + 6 = 0$. Les solutions $1$ et $6$ ont pour produit $6$ mais pour somme $7$, et elles ne vérifient pas l'équation : $1 - 5 + 6 = 2$.",
+                  "answers": [
+                    {
+                      "content": "$\\{2 ; 3\\}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\{-2 ; -3\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{1 ; 6\\}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\{-1 ; -6\\}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la valeur du discriminant de $3x^2 - 2x - 5 = 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Ici $a = 3$, $b = -2$, $c = -5$. $\\Delta = (-2)^2 - 4 \\times 3 \\times (-5) = 4 + 60 = 64$. Le résultat $-56$ vient d'un oubli du signe de $c$, et $56$ d'un $b^2$ pris négatif. Un carré est toujours positif : $(-2)^2 = 4$.",
+                  "answers": [
+                    {
+                      "content": "$64$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-56$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$56$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$19$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de $4x^2 - 4x + 1 = 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\Delta = 16 - 16 = 0$ : une seule solution, $x_0 = \\frac{4}{8} = \\frac{1}{2}$. On le vérifie : $4 \\times \\frac{1}{4} - 2 + 1 = 0$. Le piège est de croire qu'un discriminant nul veut dire « pas de solution » : il y en a une, et une seule.",
+                  "answers": [
+                    {
+                      "content": "Une seule : $\\frac{1}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une seule : $-\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Deux : $\\frac{1}{2}$ et $-\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune solution réelle",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'équation $x^2 - 2x + 5 = 0$ n'a aucune solution réelle.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $\\Delta = 4 - 20 = -16 < 0$. On peut aussi écrire $x^2 - 2x + 5 = (x-1)^2 + 4$, qui vaut au moins $4$, donc ne s'annule jamais. Ne cherche pas à écrire $\\sqrt{-16}$ : cette racine n'existe pas dans $\\mathbb{R}$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces nombres, lesquels sont solutions de $2x^2 + x - 6 = 0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\Delta = 1 + 48 = 49$, donc $x = \\frac{-1 \\pm 7}{4}$, soit $-2$ et $\\frac{3}{2}$. Contrôle pour $\\frac{3}{2}$ : $2 \\times \\frac{9}{4} + \\frac{3}{2} - 6 = 0$. Les valeurs $2$ et $3$ ne conviennent pas : $8 + 2 - 6 = 4$. Attention à la division par $2a = 4$, pas par $2$.",
+                  "answers": [
+                    {
+                      "content": "$-2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{3}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\frac{3}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Paramètres, problèmes et choix de la méthode",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Pour quelle valeur de $m$ l'équation $x^2 - 4x + m = 0$ admet-elle une solution double ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une solution double correspond à $\\Delta = 0$. Ici $\\Delta = 16 - 4m$, qui s'annule pour $m = 4$. La solution est alors $x_0 = 2$ et l'équation s'écrit $(x-2)^2 = 0$. La valeur $m = 16$ vient d'un oubli du facteur $4$ devant $m$ ; $m = 2$ ne donne pas $\\Delta = 0$.",
+                  "answers": [
+                    {
+                      "content": "$m = 4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$m = 16$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m = 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m = -4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelles valeurs de $m$ l'équation $x^2 + 2x + m = 0$ n'a-t-elle aucune solution réelle ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\Delta = 4 - 4m$. Pas de solution réelle signifie $\\Delta < 0$, soit $4 < 4m$, donc $m > 1$. Pour $m = 1$, $\\Delta = 0$ : il y a une solution double, $x = -1$. L'erreur la plus fréquente est de se tromper de sens : $m < 1$ donne au contraire deux solutions.",
+                  "answers": [
+                    {
+                      "content": "$m > 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$m < 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m > -1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m \\geq 1$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maçon délimite un terrain rectangulaire dont la longueur dépasse la largeur de $3$ m. Son aire doit être de $40$ m². Quelle est la largeur du terrain, en mètres ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec la largeur $x$, on écrit $x(x+3) = 40$, soit $x^2 + 3x - 40 = 0$. $\\Delta = 9 + 160 = 169$, donc $x = \\frac{-3 \\pm 13}{2}$ : $5$ ou $-8$. Une largeur est positive : on garde $5$ m (la longueur est $8$ m, et $5 \\times 8 = 40$). On écarte $-8$.",
+                  "answers": [
+                    {
+                      "content": "$5$ m",
+                      "correct": true
+                    },
+                    {
+                      "content": "$8$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-8$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$13$ m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies pour l'équation $x^2 - 6x + 9 = 0$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\Delta = 36 - 36 = 0$ : une seule solution, $x = \\frac{6}{2} = 3$, car $x^2 - 6x + 9 = (x-3)^2$. Le nombre $72$ vient d'un calcul $36 + 36$ avec un mauvais signe. Et $-3$ n'est pas solution : $9 + 18 + 9 = 36 \\neq 0$.",
+                  "answers": [
+                    {
+                      "content": "Son discriminant est nul.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle admet une seule solution réelle, $x = 3$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle n'a aucune solution réelle.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle admet deux solutions, $3$ et $-3$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son discriminant vaut $72$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de $x^2 = 4x + 5$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut d'abord tout passer d'un côté : $x^2 - 4x - 5 = 0$, donc $c = -5$. $\\Delta = 16 + 20 = 36$ et $x = \\frac{4 \\pm 6}{2}$, soit $5$ et $-1$. Contrôle : $25 = 20 + 5$. Lire $c = 5$ donnerait $\\Delta = -4$ et conclure à tort qu'il n'y a pas de solution.",
+                  "answers": [
+                    {
+                      "content": "$-1$ et $5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$ et $-5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune solution réelle",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$ et $4$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelles valeurs de $m$ l'équation $mx^2 - 2x + 1 = 0$ admet-elle deux solutions réelles distinctes ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut d'abord $m \\neq 0$, sinon l'équation est du premier degré. Ensuite $\\Delta = 4 - 4m > 0$, soit $m < 1$. La réponse est donc $m < 1$ et $m \\neq 0$. Oublier la condition $m \\neq 0$ est l'erreur classique. Et $m = 1$ donne $\\Delta = 0$ : une seule solution.",
+                  "answers": [
+                    {
+                      "content": "$m < 1$ et $m \\neq 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$m < 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m > 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m \\leq 1$ et $m \\neq 0$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Somme et produit des racines",
+          "subtitle": "Deviner les racines sans calculer le discriminant, ou les relier à un problème",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer la somme et le produit des racines sans les connaître.</li>\n<li>Trouver deux nombres dont on connaît la somme et le produit.</li>\n<li>Utiliser une racine évidente pour trouver l'autre racine.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le terrain du maçon (somme et produit).</strong> Le chef de chantier donne au maçon deux renseignements seulement sur un terrain rectangulaire. Le premier : la moitié du tour du terrain (le <strong>demi-périmètre</strong>, longueur plus largeur) vaut 14 m. Le second : l'aire (longueur fois largeur) vaut 40 m². Le maçon cherche deux nombres dont la somme est 14 et le produit 40. Il essaie : 4 et 10 conviennent, car $4 + 10 = 14$ et $4 \\times 10 = 40$.</p>\n<p><em>Le pont.</em> La longueur et la largeur, ce sont les deux racines $x_1$ et $x_2$. Le demi-périmètre, c'est la somme $S = x_1 + x_2$. L'aire, c'est le produit $P = x_1 x_2$. Ces deux nombres sont exactement les solutions de l'équation $x^2 - 14x + 40 = 0$ : on trouve $\\Delta = 36$ et les solutions $4$ et $10$.</p>\n<p><em>Où l'image s'arrête.</em> Le chef peut donner des renseignements impossibles : avec un demi-périmètre de 14 m, une aire de 60 m² n'existe pas. L'équation $x^2 - 14x + 60 = 0$ a $\\Delta = 196 - 240 < 0$. Il faut toujours $S^2 - 4P \\geq 0$.</p>\n<p><strong>2. L'ouvrier connu (la racine évidente).</strong> Dans une équipe de deux ouvriers, on sait que Koffi en fait partie. Si l'on connaît le total de leurs parts (la somme), on retrouve la part de l'autre ouvrier par une soustraction. Si l'on connaît le produit, on la retrouve par une division. Pas besoin de refaire tous les calculs.</p>\n<p><em>Le pont.</em> Koffi, c'est une racine connue $x_1$, souvent $1$ ou $-1$ car on la voit tout de suite. L'autre ouvrier, c'est $x_2 = S - x_1$ ou $x_2 = \\frac{P}{x_1}$.</p>\n<p><em>Où l'image s'arrête.</em> Koffi doit vraiment faire partie de l'équipe : une racine « évidente » se vérifie en remplaçant $x$ dans l'équation. Un nombre qui a l'air évident mais qui ne l'annule pas ne sert à rien.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Somme et produit.</strong> Si $ax^2 + bx + c = 0$ ($a \\neq 0$) a pour solutions $x_1$ et $x_2$ (avec $\\Delta \\geq 0$, et $x_1 = x_2$ si $\\Delta = 0$), alors $$S = x_1 + x_2 = -\\frac{b}{a} \\qquad \\text{et} \\qquad P = x_1 x_2 = \\frac{c}{a}.$$</p>\n<p><strong>Preuve.</strong> $x_1 + x_2 = \\frac{-b - \\sqrt{\\Delta}}{2a} + \\frac{-b + \\sqrt{\\Delta}}{2a} = \\frac{-2b}{2a} = -\\frac{b}{a}$ et $x_1 x_2 = \\frac{b^2 - \\Delta}{4a^2} = \\frac{4ac}{4a^2} = \\frac{c}{a}$.</p>\n<p><strong>Réciproque.</strong> Deux nombres de somme $S$ et de produit $P$ sont les solutions de $x^2 - Sx + P = 0$. Ils existent dans $\\mathbb{R}$ si et seulement si $S^2 - 4P \\geq 0$.</p>\n<p><strong>Racines évidentes.</strong></p>\n<ul>\n<li>Si $a + b + c = 0$, alors $1$ est solution et l'autre solution est $\\frac{c}{a}$.</li>\n<li>Si $a - b + c = 0$, alors $-1$ est solution et l'autre solution est $-\\frac{c}{a}$.</li>\n</ul>\n<p><strong>Signe des racines</strong> (quand $\\Delta \\geq 0$). Si $P < 0$, les racines sont de signes contraires. Si $P > 0$ et $S > 0$, elles sont toutes deux positives. Si $P > 0$ et $S < 0$, elles sont toutes deux négatives.</p>\n<p><strong>Expressions symétriques.</strong> $x_1^2 + x_2^2 = S^2 - 2P$ et, si $P \\neq 0$, $\\frac{1}{x_1} + \\frac{1}{x_2} = \\frac{S}{P}$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Résoudre $3x^2 - 5x + 2 = 0$ sans calculer $\\Delta$.</strong></p>\n<ol>\n<li>On calcule $a + b + c = 3 - 5 + 2 = 0$ : $1$ est solution évidente.</li>\n<li>Le produit des racines vaut $\\frac{c}{a} = \\frac{2}{3}$, donc l'autre racine vaut $\\frac{2}{3} \\div 1 = \\frac{2}{3}$.</li>\n<li>Contrôle par la somme : $1 + \\frac{2}{3} = \\frac{5}{3} = -\\frac{b}{a}$. C'est cohérent.</li>\n</ol>\n<p><strong>Trouver deux nombres de somme $7$ et de produit $12$, puis calculer $x_1^2 + x_2^2$ pour $x^2 - 5x + 3 = 0$.</strong></p>\n<ol>\n<li>Les deux nombres sont les solutions de $x^2 - 7x + 12 = 0$ : $\\Delta = 49 - 48 = 1$, donc $x = \\frac{7 \\pm 1}{2}$, soit $3$ et $4$.</li>\n<li>Pour $x^2 - 5x + 3 = 0$ : $\\Delta = 25 - 12 = 13 > 0$, les racines existent. $S = 5$ et $P = 3$.</li>\n<li>$x_1^2 + x_2^2 = S^2 - 2P = 25 - 6 = 19$, sans calculer les racines.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Oublier le signe : la somme vaut $-\\frac{b}{a}$, pas $\\frac{b}{a}$. Et dans l'équation $x^2 - Sx + P = 0$, c'est bien $-S$ qui apparaît. Pour deux nombres de somme $7$ et de produit $12$, l'équation est $x^2 - 7x + 12 = 0$, et non $x^2 + 7x + 12 = 0$.</p>\n<p>Deuxième piège : utiliser $S$ et $P$ sans vérifier que $\\Delta \\geq 0$. L'équation $x^2 + x + 1 = 0$ a bien $S = -1$ et $P = 1$ sur le papier, mais aucune racine réelle. Les formules ne parlent que de racines qui existent.</p>\n<h2>En une phrase</h2>\n<p>Quand les racines existent, leur somme vaut $-\\frac{b}{a}$ et leur produit $\\frac{c}{a}$ ; deux nombres de somme $S$ et de produit $P$ sont les solutions de $x^2 - Sx + P = 0$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Somme et produit en mots et en formules",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $ax^2 + bx + c = 0$ avec $a \\neq 0$ et $\\Delta \\geq 0$. Quelle est la somme $x_1 + x_2$ de ses racines ?",
+                  "question_type": "single_choice",
+                  "explanation": "La somme des racines vaut $-\\frac{b}{a}$. En additionnant les deux solutions de la formule, les racines carrées se compensent et il reste $\\frac{-2b}{2a}$. Ne confonds pas avec $\\frac{c}{a}$, qui est le produit, ni avec $\\frac{b}{a}$, dont le signe est faux.",
+                  "answers": [
+                    {
+                      "content": "$-\\frac{b}{a}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{b}{a}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{c}{a}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\frac{c}{a}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $ax^2 + bx + c = 0$ avec $a \\neq 0$ et $\\Delta \\geq 0$. Quel est le produit $x_1 x_2$ de ses racines ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le produit vaut $\\frac{c}{a}$ : $x_1 x_2 = \\frac{b^2 - \\Delta}{4a^2} = \\frac{4ac}{4a^2}$. Ce n'est pas $-\\frac{c}{a}$ : le signe moins est pour la somme, avec $b$. Et il faut diviser par $a$ : le produit n'est pas simplement $c$ (sauf si $a = 1$).",
+                  "answers": [
+                    {
+                      "content": "$\\frac{c}{a}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\frac{c}{a}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$c$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\frac{b}{a}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maçon cherche la longueur et la largeur d'un terrain rectangulaire de demi-périmètre $S$ et d'aire $P$. Ces deux dimensions sont les solutions de l'équation $x^2 - Sx + P = 0$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. La longueur et la largeur ont pour somme $S$ (le demi-périmètre) et pour produit $P$ (l'aire). Ce sont donc les solutions de $x^2 - Sx + P = 0$. Attention au signe : c'est $-S$ devant $x$, et $+P$ pour le terme constant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'équation $2x^2 - 7x + 3 = 0$ a deux racines réelles ($\\Delta = 25$). Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Ici $a = 2$, $b = -7$, $c = 3$. La somme vaut $-\\frac{b}{a} = \\frac{7}{2}$ et le produit $\\frac{c}{a} = \\frac{3}{2}$. On le vérifie avec les racines $3$ et $\\frac{1}{2}$ : $3 + \\frac{1}{2} = \\frac{7}{2}$ et $3 \\times \\frac{1}{2} = \\frac{3}{2}$. Le produit n'est pas $3$ : il faut diviser par $a$.",
+                  "answers": [
+                    {
+                      "content": "La somme des racines est $\\frac{7}{2}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le produit des racines est $\\frac{3}{2}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La somme des racines est $-\\frac{7}{2}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le produit des racines est $3$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le produit des racines est $-\\frac{3}{2}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pourquoi faut-il vérifier que $\\Delta \\geq 0$ avant d'utiliser la somme et le produit des racines ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les formules $-\\frac{b}{a}$ et $\\frac{c}{a}$ ne décrivent que des racines qui existent. Pour $x^2 + x + 1 = 0$, on trouverait $S = -1$ et $P = 1$, alors que l'équation n'a aucune racine réelle ($\\Delta = -3$). Le discriminant ne sert pas à calculer $S$ et $P$, il garantit qu'il y a des racines.",
+                  "answers": [
+                    {
+                      "content": "Sans racines réelles, $S$ et $P$ ne décrivent rien : $x^2 + x + 1 = 0$ donne $S = -1$ et $P = 1$ sans avoir de racine réelle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parce que la formule $S = -\\frac{b}{a}$ n'est valable que si $b > 0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Parce que $S$ et $P$ se calculent à partir de $\\Delta$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Ce n'est pas nécessaire : $S$ et $P$ donnent toujours des racines réelles.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Somme, produit et racine évidente",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Sans résoudre l'équation $x^2 - 9x + 14 = 0$ (qui a deux racines réelles), quels sont la somme $S$ et le produit $P$ de ses racines ?",
+                  "question_type": "single_choice",
+                  "explanation": "Ici $a = 1$, $b = -9$, $c = 14$. $S = -\\frac{b}{a} = 9$ et $P = \\frac{c}{a} = 14$. Les racines sont d'ailleurs $2$ et $7$ ($2 + 7 = 9$, $2 \\times 7 = 14$). Écrire $S = -9$ oublie que $b$ est déjà négatif : $-b = 9$.",
+                  "answers": [
+                    {
+                      "content": "$S = 9$ et $P = 14$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$S = -9$ et $P = 14$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$S = 9$ et $P = -14$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$S = 14$ et $P = 9$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles sont les solutions de $5x^2 - 8x + 3 = 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$a + b + c = 5 - 8 + 3 = 0$ : $1$ est solution évidente. L'autre vaut $\\frac{c}{a} = \\frac{3}{5}$ (produit divisé par $1$). Contrôle par la somme : $1 + \\frac{3}{5} = \\frac{8}{5} = -\\frac{b}{a}$. Attention à ne pas inverser : $\\frac{5}{3}$ serait $\\frac{a}{c}$.",
+                  "answers": [
+                    {
+                      "content": "$1$ et $\\frac{3}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1$ et $-\\frac{3}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-1$ et $\\frac{3}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$ et $\\frac{5}{3}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels sont les deux nombres dont la somme est $8$ et le produit est $15$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Ils sont solutions de $x^2 - 8x + 15 = 0$ : $\\Delta = 64 - 60 = 4$, donc $x = \\frac{8 \\pm 2}{2}$, soit $3$ et $5$. Les couples $2$ et $6$ (produit $12$) ou $1$ et $15$ (somme $16$) vérifient une seule des deux conditions, il faut les deux.",
+                  "answers": [
+                    {
+                      "content": "$3$ et $5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-3$ et $-5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2$ et $6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1$ et $15$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $x_1$ et $x_2$ les racines de $x^2 - 4x + 1 = 0$ (on a $\\Delta = 12 > 0$). Combien vaut $x_1^2 + x_2^2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$S = 4$ et $P = 1$. Alors $x_1^2 + x_2^2 = S^2 - 2P = 16 - 2 = 14$. Contrôle avec $x = 2 \\pm \\sqrt{3}$ : $(2+\\sqrt{3})^2 + (2-\\sqrt{3})^2 = 2(4 + 3) = 14$. Le résultat $16$ oublie le terme $-2P$ : $x_1^2 + x_2^2$ n'est pas $(x_1+x_2)^2$.",
+                  "answers": [
+                    {
+                      "content": "$14$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$16$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$18$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'équation $x^2 + 5x + 4 = 0$ a pour discriminant $\\Delta = 9$. Que peut-on dire de ses racines à partir de $S$ et $P$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$S = -5$ et $P = 4$. Comme $P > 0$, les deux racines ont le même signe, et comme $S < 0$, elles sont négatives. On le vérifie : les racines sont $-1$ et $-4$. Un produit positif exclut les signes contraires, et une somme négative exclut deux racines positives.",
+                  "answers": [
+                    {
+                      "content": "Les deux racines ont le même signe.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux racines sont négatives.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux racines sont de signes contraires.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les deux racines sont positives.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Paramètres, symétrie et problèmes",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Le nombre $2$ est solution de $x^2 - 5x + m = 0$. Quelle est l'autre solution ?",
+                  "question_type": "single_choice",
+                  "explanation": "En remplaçant $x = 2$ : $4 - 10 + m = 0$, donc $m = 6$. La somme des racines vaut $5$, donc l'autre racine est $5 - 2 = 3$. Contrôle : $9 - 15 + 6 = 0$. Les valeurs $6$ et $7$ sont des pièges : $6$ est la valeur de $m$, et $7$ vient de l'addition $5 + 2$.",
+                  "answers": [
+                    {
+                      "content": "$3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-3$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelle valeur de $m$ l'équation $x^2 - 2x + m = 0$ a-t-elle deux racines réelles dont la somme des carrés vaut $10$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$S = 2$ et $P = m$, donc $x_1^2 + x_2^2 = S^2 - 2P = 4 - 2m$. On veut $4 - 2m = 10$, soit $m = -3$. Il reste à vérifier que les racines existent : $\\Delta = 4 + 12 = 16 > 0$. Avec $m = 3$ (erreur de signe), $\\Delta = 4 - 12 < 0$ : pas de racine réelle.",
+                  "answers": [
+                    {
+                      "content": "$m = -3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$m = 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m = -6$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m = 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maçon trace un terrain rectangulaire dont le demi-périmètre est $17$ m et l'aire $60$ m². Quelles sont ses dimensions ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les dimensions sont solutions de $x^2 - 17x + 60 = 0$. $\\Delta = 289 - 240 = 49$, donc $x = \\frac{17 \\pm 7}{2}$ : $12$ et $5$. Contrôle : $12 + 5 = 17$ et $12 \\times 5 = 60$. Les autres couples ont bien pour somme $17$, mais leurs produits (66, 70, 30) ne sont pas $60$.",
+                  "answers": [
+                    {
+                      "content": "$12$ m et $5$ m",
+                      "correct": true
+                    },
+                    {
+                      "content": "$11$ m et $6$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10$ m et $7$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15$ m et $2$ m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On considère l'équation $3x^2 - 10x + 3 = 0$ (on a $\\Delta = 64$). Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$S = \\frac{10}{3}$ et $P = \\frac{c}{a} = 1$. Les racines sont $3$ et $\\frac{1}{3}$ : leur produit vaut $1$, elles sont inverses l'une de l'autre. Comme $P > 0$, elles ont le même signe (ici positif, car $S > 0$). La somme $-\\frac{10}{3}$ et les racines $3$ et $-3$ sont fausses.",
+                  "answers": [
+                    {
+                      "content": "Le produit des racines vaut $1$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La somme des racines vaut $\\frac{10}{3}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les deux racines sont inverses l'une de l'autre.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les racines sont $3$ et $-3$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La somme des racines vaut $-\\frac{10}{3}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les racines sont de signes contraires.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soient $x_1$ et $x_2$ les racines de $2x^2 - 3x - 5 = 0$ (on a $\\Delta = 49$). Quelle est la valeur de $\\frac{1}{x_1} + \\frac{1}{x_2}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$S = \\frac{3}{2}$ et $P = -\\frac{5}{2}$. Alors $\\frac{1}{x_1} + \\frac{1}{x_2} = \\frac{x_1 + x_2}{x_1 x_2} = \\frac{S}{P} = \\frac{3}{2} \\times \\left(-\\frac{2}{5}\\right) = -\\frac{3}{5}$. Contrôle avec les racines $\\frac{5}{2}$ et $-1$ : $\\frac{2}{5} - 1 = -\\frac{3}{5}$. Le signe de $P$ est négatif.",
+                  "answers": [
+                    {
+                      "content": "$-\\frac{3}{5}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{3}{5}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\frac{5}{3}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{3}{2}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-on affirmer de l'équation $x^2 + 4x + 7 = 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On peut écrire $S = -4$ et $P = 7$, mais $\\Delta = 16 - 28 = -12 < 0$ : aucune racine réelle. Les signes de $S$ et de $P$ ne parlent que de racines qui existent. Une racine double serait $-2$ avec $\\Delta = 0$ : or $4 - 8 + 7 = 3 \\neq 0$.",
+                  "answers": [
+                    {
+                      "content": "Elle n'a aucune racine réelle, car $\\Delta < 0$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle a deux racines négatives, car $S < 0$ et $P > 0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a deux racines de signes contraires.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle a une racine double, $-2$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Signe et factorisation d'un trinôme",
+          "subtitle": "Lire le signe d'un trinôme selon son discriminant et son premier coefficient, et le factoriser",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Factoriser un trinôme du second degré lorsque c'est possible.</li>\n<li>Déterminer le signe d'un trinôme selon les valeurs de $x$.</li>\n<li>Reconnaître un trinôme toujours positif ou toujours négatif.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>La bassine à ciment dans le sable.</strong> Sur le chantier, le maçon pose sa grande bassine à ciment, bord vers le haut, sur un sable bien plat. Le niveau du sable est le sol. Vue de côté, le bord de la bassine dessine une courbe en cuvette. Si la bassine est enfoncée dans le sable, son bord coupe le sol en deux points : entre ces deux points, il est sous le sol, et partout ailleurs il est au-dessus. Si elle est posée juste sur le sol, elle le touche en un seul point. Si elle est posée sur des briques, elle ne touche pas le sol : elle est toujours au-dessus. Et si on la retourne, bord vers le bas, tout s'inverse.</p>\n<p><em>Le pont.</em> Le sol, c'est l'axe des abscisses, la hauteur $0$. La hauteur du bord au-dessus du sol au point $x$, c'est la valeur du <strong>trinôme</strong> $f(x) = ax^2 + bx + c$. Les deux points de contact avec le sol sont les racines $x_1$ et $x_2$ ($\\Delta > 0$) ; un seul point de contact, c'est $\\Delta = 0$ ; aucun contact, c'est $\\Delta < 0$. Une bassine bord vers le haut, c'est $a > 0$ ; retournée, c'est $a < 0$. Le maçon plante un piquet à chaque point de contact : le trinôme s'annule au pied de chaque piquet, ce qui donne la factorisation $a(x - x_1)(x - x_2)$.</p>\n<p><em>Où l'image s'arrête.</em> « Au-dessus du sol » veut dire « positif » seulement si $a > 0$. Une bassine retournée ($a < 0$) est au-dessus du sol entre les piquets, et sous le sol à l'extérieur. On retient donc « le signe de $a$ à l'extérieur des racines », et non « positif à l'extérieur ».</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Trinôme du second degré.</strong> C'est une expression $f(x) = ax^2 + bx + c$ avec $a \\neq 0$. On note $\\Delta = b^2 - 4ac$.</p>\n<ul>\n<li><strong>Si $\\Delta > 0$</strong>, avec les racines $x_1 < x_2$ : $f(x) = a(x - x_1)(x - x_2)$. Le trinôme a le signe de $a$ pour $x < x_1$ et pour $x > x_2$, le signe contraire de $a$ pour $x_1 < x < x_2$, et il s'annule en $x_1$ et $x_2$.</li>\n<li><strong>Si $\\Delta = 0$</strong>, avec la racine double $x_0$ : $f(x) = a(x - x_0)^2$. Le trinôme a le signe de $a$ pour tout $x \\neq x_0$, et il s'annule en $x_0$.</li>\n<li><strong>Si $\\Delta < 0$</strong> : pas de factorisation dans $\\mathbb{R}$. Le trinôme a le signe de $a$ pour tout réel $x$, et ne s'annule jamais.</li>\n</ul>\n<p><strong>Pourquoi.</strong> La forme canonique $f(x) = a\\left[\\left(x + \\frac{b}{2a}\\right)^2 - \\frac{\\Delta}{4a^2}\\right]$ le montre : si $\\Delta < 0$, le crochet est un carré plus un nombre strictement positif, donc strictement positif, et $f(x)$ a le signe de $a$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Factoriser puis étudier le signe de $f(x) = -2x^2 + 3x + 2$.</strong></p>\n<ol>\n<li>$\\Delta = 9 + 16 = 25 > 0$ : deux racines. $x = \\frac{-3 \\pm 5}{-4}$, soit $x_1 = -\\frac{1}{2}$ et $x_2 = 2$.</li>\n<li>Factorisation : $f(x) = -2\\left(x + \\frac{1}{2}\\right)(x - 2) = -(2x + 1)(x - 2)$. Contrôle : $-(2x^2 - 4x + x - 2) = -2x^2 + 3x + 2$.</li>\n<li>Ici $a = -2 < 0$. Le trinôme est donc négatif pour $x < -\\frac{1}{2}$ et pour $x > 2$, et positif pour $-\\frac{1}{2} < x < 2$.</li>\n<li>Contrôle : $f(0) = 2 > 0$ et $0$ est entre les racines ; $f(3) = -18 + 9 + 2 = -7 < 0$ et $3 > 2$.</li>\n</ol>\n<p><strong>Signe de $g(x) = x^2 + x + 1$ et de $h(x) = x^2 - 6x + 9$.</strong></p>\n<ol>\n<li>$g$ : $\\Delta = 1 - 4 = -3 < 0$ et $a = 1 > 0$. Donc $g(x) > 0$ pour tout réel $x$.</li>\n<li>$h$ : $\\Delta = 0$, $h(x) = (x - 3)^2$. Donc $h(x) \\geq 0$ pour tout $x$, et $h(x) = 0$ seulement pour $x = 3$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Réciter « positif à l'extérieur des racines, négatif entre les racines » sans regarder $a$. C'est vrai seulement si $a > 0$. Pour $f(x) = -2x^2 + 3x + 2$, c'est l'inverse : positif entre les racines.</p>\n<p>Comment le repérer : écris toujours d'abord le signe de $a$, puis la règle « signe de $a$ à l'extérieur ». Autre erreur : croire que si $\\Delta < 0$ le trinôme est négatif. Il a le signe de $a$, qui peut être positif. Enfin, quand $\\Delta = 0$, le trinôme ne change pas de signe en $x_0$ : il touche le sol et repart du même côté.</p>\n<h2>En une phrase</h2>\n<p>Un trinôme a le signe de $a$ partout, sauf entre ses deux racines quand elles existent, où il a le signe contraire ; s'il a des racines, il se factorise en $a(x - x_1)(x - x_2)$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Racines, signe de a et signe du trinôme",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un trinôme $ax^2 + bx + c$ a deux racines $x_1 < x_2$. Pour $x < x_1$ ou $x > x_2$, quel est son signe ?",
+                  "question_type": "single_choice",
+                  "explanation": "À l'extérieur des racines, le trinôme a le signe de $a$. À l'intérieur, entre $x_1$ et $x_2$, il a le signe contraire. Dire « toujours positif à l'extérieur » n'est vrai que si $a > 0$ : une bassine retournée est sous le sol à l'extérieur des piquets.",
+                  "answers": [
+                    {
+                      "content": "Le signe de $a$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le signe contraire de $a$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Toujours positif",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le signe de $b$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un trinôme $f(x) = ax^2 + bx + c$ a un discriminant $\\Delta < 0$ et un coefficient $a = -3$. Alors $f(x) < 0$ pour tout réel $x$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Quand $\\Delta < 0$, il n'y a pas de racine : le trinôme ne change jamais de signe et garde celui de $a$. Ici $a = -3 < 0$, donc $f(x) < 0$ pour tout $x$. Ne conclus pas « $\\Delta$ négatif donc trinôme négatif » : c'est le signe de $a$ qui compte.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le bord d'une bassine retournée, bord vers le bas, forme une voûte qui coupe le sol en deux points. À quelle situation du trinôme $f(x) = ax^2 + bx + c$ cela correspond-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une bassine retournée correspond à $a < 0$ (courbe ouverte vers le bas). Couper le sol en deux points correspond à deux racines, donc $\\Delta > 0$. Avec $a > 0$, la courbe est ouverte vers le haut. Avec $\\Delta < 0$, il n'y aurait aucun point de contact avec le sol.",
+                  "answers": [
+                    {
+                      "content": "$a < 0$ et $\\Delta > 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$a > 0$ et $\\Delta > 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a < 0$ et $\\Delta < 0$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$a > 0$ et $\\Delta = 0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un trinôme $f(x) = ax^2 + bx + c$ a un discriminant nul, avec pour racine double $x_0$. Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Si $\\Delta = 0$, $f(x) = a(x - x_0)^2$. Le carré est positif ou nul, donc $f(x)$ a le signe de $a$ pour tout $x \\neq x_0$ et s'annule en $x_0$. Le trinôme ne change pas de signe : la bassine touche le sol sans le traverser.",
+                  "answers": [
+                    {
+                      "content": "Le trinôme s'écrit $a(x - x_0)^2$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il a le signe de $a$ pour tout $x \\neq x_0$ et s'annule en $x_0$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il change de signe en $x_0$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est strictement négatif pour tout réel $x$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il ne peut jamais s'annuler.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le trinôme $x^2 + 2x + 5$ a pour discriminant $4 - 20 = -16$. Peut-on le factoriser en un produit de deux facteurs du premier degré à coefficients réels ?",
+                  "question_type": "single_choice",
+                  "explanation": "Non : un discriminant négatif signifie qu'il n'a pas de racine réelle, donc pas de facteur $(x - x_1)$. Les écritures proposées sont fausses : $(x+1)(x+5) = x^2 + 6x + 5$ et $(x+1)^2 = x^2 + 2x + 1$. On peut seulement écrire $(x+1)^2 + 4$.",
+                  "answers": [
+                    {
+                      "content": "Non, car il n'a aucune racine réelle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Oui : $(x+1)(x+5)$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui : $(x+1)^2$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Oui, tout trinôme se factorise.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Factoriser et lire le signe",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quelle est la factorisation de $x^2 - 5x + 6$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les racines sont $2$ et $3$ ($\\Delta = 1$), et $a = 1$, donc $x^2 - 5x + 6 = (x-2)(x-3)$. Contrôle : $(x-2)(x-3) = x^2 - 5x + 6$. Écrire $(x+2)(x+3)$ donne $x^2 + 5x + 6$ : on a oublié que la racine est $2$, pas $-2$.",
+                  "answers": [
+                    {
+                      "content": "$(x-2)(x-3)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x+2)(x+3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x-1)(x-6)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x-2)(x+3)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le trinôme $x^2 - x - 6$ a pour racines $-2$ et $3$. Quel est son signe pour $x = 1$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le nombre $1$ est entre les racines $-2$ et $3$, et $a = 1 > 0$ : le trinôme est strictement négatif. On le vérifie : $1 - 1 - 6 = -6 < 0$. L'erreur est de croire qu'avec $a > 0$ le trinôme est positif partout : il l'est seulement à l'extérieur des racines.",
+                  "answers": [
+                    {
+                      "content": "Strictement négatif",
+                      "correct": true
+                    },
+                    {
+                      "content": "Strictement positif",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nul",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut pas savoir sans calculer $\\Delta$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le trinôme $-x^2 + 4x - 5$ est strictement négatif pour tout réel $x$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $\\Delta = 16 - 20 = -4 < 0$ et $a = -1 < 0$ : le trinôme a le signe de $a$ pour tout $x$. On peut aussi écrire $-x^2 + 4x - 5 = -(x-2)^2 - 1$, qui est toujours inférieur ou égal à $-1$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelle est la factorisation de $2x^2 - 3x - 2$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\Delta = 9 + 16 = 25$, donc les racines sont $\\frac{3 \\pm 5}{4}$ : $2$ et $-\\frac{1}{2}$. Donc $2x^2 - 3x - 2 = 2(x-2)\\left(x+\\frac{1}{2}\\right) = (x-2)(2x+1)$. Oublier le facteur $a = 2$ donnerait $(x-2)\\left(x+\\frac{1}{2}\\right) = x^2 - \\frac{3}{2}x - 1$, ce qui est faux.",
+                  "answers": [
+                    {
+                      "content": "$(x-2)(2x+1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(x-2)\\left(x+\\frac{1}{2}\\right)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x+2)(2x-1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(x-2)(2x-1)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquels de ces trinômes sont strictement positifs pour tout réel $x$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$x^2 + 3$ et $2x^2 + x + 1$ ($\\Delta = 1 - 8 = -7$) ont $a > 0$ et $\\Delta < 0$. Le trinôme $x^2 - 2x + 1 = (x-1)^2$ s'annule en $1$. Le trinôme $-x^2 - x - 1$ a $\\Delta < 0$ mais $a < 0$ : il est négatif. Enfin $x^2 - 4x + 3$ a deux racines, $1$ et $3$.",
+                  "answers": [
+                    {
+                      "content": "$x^2 + 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2x^2 + x + 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 - 2x + 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-x^2 - x - 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x^2 - 4x + 3$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Signe, factorisation et raisonnement",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "On considère $f(x) = -x^2 + x + 6$. Quelle affirmation est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\Delta = 1 + 24 = 25$ et les racines sont $\\frac{-1 \\pm 5}{-2}$, soit $-2$ et $3$. Comme $a = -1 < 0$, $f$ est positive entre les racines et négative à l'extérieur. Contrôle : $f(0) = 6 > 0$ et $f(4) = -6 < 0$. L'inverse serait vrai si $a$ était positif.",
+                  "answers": [
+                    {
+                      "content": "$f(x) > 0$ pour $-2 < x < 3$ et $f(x) < 0$ pour $x < -2$ ou $x > 3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(x) < 0$ pour $-2 < x < 3$ et $f(x) > 0$ pour $x < -2$ ou $x > 3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(x) > 0$ pour tout $x$ différent de $-2$ et de $3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f(x) < 0$ pour tout réel $x$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelles valeurs de $m$ le trinôme $x^2 + mx + 1$ est-il strictement positif pour tout réel $x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme $a = 1 > 0$, il faut $\\Delta < 0$ : $\\Delta = m^2 - 4 < 0$, soit $-2 < m < 2$. Pour $m = 2$ ou $m = -2$, $\\Delta = 0$ et le trinôme vaut $(x \\pm 1)^2$, qui s'annule : il n'est pas strictement positif. D'où les crochets ouverts.",
+                  "answers": [
+                    {
+                      "content": "$-2 < m < 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-2 \\leq m \\leq 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m < -2$ ou $m > 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m > 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un trinôme a deux racines, $1$ et $4$, et vaut $-6$ pour $x = 0$. Lequel est-ce ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il s'écrit $a(x-1)(x-4)$. En $x = 0$ : $a \\times (-1) \\times (-4) = 4a = -6$, donc $a = -\\frac{3}{2}$. Développé : $-\\frac{3}{2}(x^2 - 5x + 4) = -\\frac{3}{2}x^2 + \\frac{15}{2}x - 6$. Le trinôme $x^2 - 5x + 4$ a les bonnes racines mais vaut $4$ en $0$ : on a oublié $a$.",
+                  "answers": [
+                    {
+                      "content": "$-\\frac{3}{2}x^2 + \\frac{15}{2}x - 6$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$x^2 - 5x + 4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-6x^2 + 30x - 24$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\frac{3}{2}x^2 - \\frac{15}{2}x - 6$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Soit $f(x) = 3x^2 - 6x + 3$. Lesquelles de ces affirmations sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$\\Delta = 36 - 36 = 0$ et $f(x) = 3(x^2 - 2x + 1) = 3(x-1)^2$. Un carré est positif ou nul, donc $f(x) \\geq 0$, avec $f(x) = 0$ seulement pour $x = 1$. L'affirmation « $f(x) > 0$ pour tout $x$ » est fausse en $x = 1$, et $f$ ne change pas de signe.",
+                  "answers": [
+                    {
+                      "content": "$f(x) = 3(x-1)^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(x) \\geq 0$ pour tout réel $x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(x) = 0$ seulement pour $x = 1$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(x) > 0$ pour tout réel $x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ change de signe en $x = 1$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Son discriminant est strictement positif.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maçon lance une brique d'une plate-forme. Sa hauteur (en mètres) à l'instant $t$ (en secondes, $t \\geq 0$) est $h(t) = -5t^2 + 10t + 15$. À quel instant la brique touche-t-elle le sol ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le sol correspond à $h(t) = 0$, soit $t^2 - 2t - 3 = 0$ : $\\Delta = 16$, $t = \\frac{2 \\pm 4}{2}$, donc $3$ ou $-1$. Un temps est positif : on garde $t = 3$ s. Contrôle : $-45 + 30 + 15 = 0$. L'instant $t = 1$ est celui du sommet, pas celui du sol.",
+                  "answers": [
+                    {
+                      "content": "$t = 3$ s",
+                      "correct": true
+                    },
+                    {
+                      "content": "$t = -1$ s",
+                      "correct": false
+                    },
+                    {
+                      "content": "$t = 3$ s et $t = -1$ s",
+                      "correct": false
+                    },
+                    {
+                      "content": "$t = 1$ s",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un trinôme $f$ a un discriminant strictement négatif et vérifie $f(1) = -4$. Que peut-on dire de $f(x)$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Si $\\Delta < 0$, le trinôme ne s'annule jamais, donc garde un signe constant : celui de $a$. Comme $f(1) = -4 < 0$, ce signe est négatif, donc $f(x) < 0$ pour tout réel $x$. On n'a pas besoin des coefficients : un seul point suffit pour fixer le signe.",
+                  "answers": [
+                    {
+                      "content": "$f(x) < 0$ pour tout réel $x$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$f(x) > 0$ pour tout réel $x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$f$ change de signe",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien dire sans connaître $a$, $b$ et $c$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Résoudre une inéquation du second degré",
+          "subtitle": "Du signe du trinôme à l'ensemble des solutions. À compléter : équations bicarrées, discriminant réduit, inéquations quotient",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Ramener une inéquation à la forme « trinôme comparé à $0$ ».</li>\n<li>Résoudre une inéquation du second degré et écrire l'ensemble des solutions en intervalles.</li>\n<li>Traiter un problème concret ou un paramètre qui conduit à une inéquation du second degré.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>La brique qui dépasse l'étage.</strong> Reprenons le maçon qui lance une brique vers l'étage. Le collègue de l'étage ne peut attraper la brique que lorsqu'elle est <em>plus haute</em> que son plancher. Pour savoir pendant combien de temps cela dure, le maçon ne cherche pas un seul instant : il cherche d'abord les deux instants où la brique est exactement à la hauteur du plancher (en montant, puis en redescendant). Entre ces deux instants, la brique est au-dessus du plancher.</p>\n<p><em>Le pont.</em> « La brique est plus haute que l'étage » est une <strong>inéquation</strong>. On la ramène à « hauteur de la brique moins hauteur de l'étage, supérieur à $0$ », c'est-à-dire à un trinôme comparé à $0$. Les deux instants d'égalité sont les racines. L'ensemble des instants cherchés est un <strong>intervalle</strong>, c'est-à-dire l'ensemble de tous les nombres compris entre deux bornes. Le signe du trinôme dit si c'est l'intérieur ou l'extérieur des racines qui convient.</p>\n<p><em>Où l'image s'arrête.</em> Une brique n'existe que pour un temps positif et pendant son vol. Dans un problème concret, l'ensemble des solutions mathématiques doit être confronté à la situation : on garde seulement ce qui a un sens.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Méthode en quatre étapes.</strong></p>\n<ol>\n<li>Tout passer d'un seul côté pour obtenir « trinôme $\\geq 0$ » (ou $>$, $\\leq$, $<$).</li>\n<li>Calculer $\\Delta$ et les racines éventuelles.</li>\n<li>Repérer le signe de $a$ et appliquer la règle du signe du trinôme.</li>\n<li>Écrire l'ensemble des solutions en intervalles, avec les crochets adaptés.</li>\n</ol>\n<p><strong>Cas $\\Delta > 0$, racines $x_1 < x_2$.</strong></p>\n<ul>\n<li>Si $a > 0$ : $ax^2 + bx + c > 0$ pour $x \\in\\ ]-\\infty ; x_1[\\ \\cup\\ ]x_2 ; +\\infty[$, et $ax^2 + bx + c < 0$ pour $x \\in\\ ]x_1 ; x_2[$.</li>\n<li>Si $a < 0$, c'est l'inverse : $> 0$ entre les racines, $< 0$ à l'extérieur.</li>\n<li>Avec $\\geq$ ou $\\leq$, les racines sont incluses (crochets fermés). Avec $>$ ou $<$, elles sont exclues (crochets ouverts).</li>\n</ul>\n<p><strong>Cas $\\Delta = 0$ et $\\Delta < 0$.</strong> Le trinôme a le signe de $a$ partout (sauf en la racine double, où il s'annule). Si $a > 0$ et $\\Delta < 0$, on a $ax^2 + bx + c > 0$ pour tout $x$, donc $ax^2 + bx + c < 0$ n'a aucune solution. Si $a > 0$ et $\\Delta = 0$, $ax^2 + bx + c \\leq 0$ a pour seule solution $x_0$.</p>\n<p><strong>Racine carrée.</strong> L'expression $\\sqrt{ax^2 + bx + c}$ est définie exactement lorsque $ax^2 + bx + c \\geq 0$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Résoudre $2x^2 - 3x - 2 > 0$.</strong></p>\n<ol>\n<li>L'inéquation est déjà sous la forme « trinôme $> 0$ ».</li>\n<li>$\\Delta = 9 + 16 = 25$, donc $x = \\frac{3 \\pm 5}{4}$ : $x_1 = -\\frac{1}{2}$ et $x_2 = 2$.</li>\n<li>$a = 2 > 0$ : le trinôme est positif à l'extérieur des racines.</li>\n<li>Inégalité stricte, crochets ouverts : $S = \\left]-\\infty ; -\\frac{1}{2}\\right[\\ \\cup\\ ]2 ; +\\infty[$. Contrôle : en $x = 3$, $18 - 9 - 2 = 7 > 0$ ; en $x = 0$, $-2 < 0$.</li>\n</ol>\n<p><strong>Résoudre $x^2 \\leq 3x + 10$.</strong></p>\n<ol>\n<li>On passe tout d'un côté : $x^2 - 3x - 10 \\leq 0$.</li>\n<li>$\\Delta = 9 + 40 = 49$, donc $x = \\frac{3 \\pm 7}{2}$ : $-2$ et $5$.</li>\n<li>$a = 1 > 0$ : le trinôme est négatif ou nul entre les racines. Inégalité large : $S = [-2 ; 5]$.</li>\n<li>Contrôle : en $x = 0$, $0 \\leq 10$ est vrai ; en $x = 6$, $36 \\leq 28$ est faux.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Résoudre l'inéquation sans la ramener d'abord à $0$, ou « simplifier » en divisant par $x$. Dans $x^2 \\leq 3x + 10$, diviser par $x$ fait perdre des solutions et change le sens de l'inégalité quand $x < 0$ : on ne sait même pas quel est son signe.</p>\n<p>Deuxième piège : les crochets. Avec $\\leq$ ou $\\geq$, les racines sont dans l'ensemble solution. Avec $<$ ou $>$, elles n'y sont pas. Troisième piège : recopier le résultat sans regarder le signe de $a$. Si $a < 0$, l'ensemble solution de « $> 0$ » est entre les racines, pas à l'extérieur.</p>\n<h2>En une phrase</h2>\n<p>On ramène l'inéquation à « trinôme comparé à $0$ », on cherche les racines, puis on lit le signe grâce à $a$ : les solutions sont l'intérieur ou l'extérieur des racines, avec des crochets fermés si l'inégalité est large.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Méthode et lecture des intervalles",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Pour résoudre l'inéquation $x^2 > 2x + 8$, quelle est la première étape ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut d'abord obtenir un trinôme comparé à $0$ : $x^2 - 2x - 8 > 0$. Ensuite seulement on cherche les racines et on applique la règle du signe. Diviser par $x$ est une erreur : le signe de $x$ est inconnu, et on perd des solutions. On ne prend pas non plus la racine carrée d'une inégalité sans précaution.",
+                  "answers": [
+                    {
+                      "content": "Tout passer d'un côté pour obtenir $x^2 - 2x - 8 > 0$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Diviser les deux membres par $x$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Prendre la racine carrée des deux membres",
+                      "correct": false
+                    },
+                    {
+                      "content": "Lire directement les racines de $x^2 = 2x + 8$ sans rien changer",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un trinôme $ax^2 + bx + c$ avec $a > 0$ a deux racines $x_1 < x_2$. Quel est l'ensemble des solutions de $ax^2 + bx + c < 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Avec $a > 0$, le trinôme a le signe de $a$ (positif) à l'extérieur des racines, et le signe contraire (négatif) entre elles. Les solutions de « $< 0$ » sont donc entre les racines, crochets ouverts car l'inégalité est stricte. L'extérieur donne les solutions de « $> 0$ ».",
+                  "answers": [
+                    {
+                      "content": "$]x_1 ; x_2[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty ; x_1[\\ \\cup\\ ]x_2 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[x_1 ; x_2]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]x_1 ; +\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un maçon lance une brique et veut savoir quand elle est plus haute que le plancher de l'étage. Pour le trouver, il cherche les deux instants où la brique est exactement à la hauteur du plancher, puis il regarde ce qui se passe entre ces deux instants.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Les deux instants d'égalité sont les racines du trinôme « hauteur de la brique moins hauteur du plancher ». Comme la courbe de la brique est en arche ($a < 0$), le trinôme est positif entre ces racines. Il ne suffit donc pas de trouver un seul instant.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quelles affirmations sont vraies à propos des crochets de l'ensemble des solutions d'une inéquation du second degré ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Une inégalité large ($\\leq$ ou $\\geq$) accepte l'égalité, donc les racines sont solutions et les crochets sont fermés. Une inégalité stricte ($<$ ou $>$) l'exclut, donc les crochets sont ouverts. Les crochets ne dépendent pas du signe de $a$, qui décide de l'intérieur ou de l'extérieur.",
+                  "answers": [
+                    {
+                      "content": "Avec une inégalité large, les racines font partie des solutions.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Avec une inégalité stricte, les racines sont exclues.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Avec une inégalité stricte, les racines sont toujours incluses.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les racines ne sont jamais solutions, quelle que soit l'inégalité.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les crochets dépendent uniquement du signe de $a$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de $x^2 + x + 1 < 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\Delta = 1 - 4 = -3 < 0$ et $a = 1 > 0$ : le trinôme est strictement positif pour tout réel $x$. Il n'est jamais négatif : l'ensemble des solutions est vide. La valeur $-\\frac{1}{2}$ est le point où le trinôme est le plus petit, mais il y vaut $\\frac{3}{4}$, qui est positif.",
+                  "answers": [
+                    {
+                      "content": "L'ensemble vide",
+                      "correct": true
+                    },
+                    {
+                      "content": "Tous les réels",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le seul nombre $-\\frac{1}{2}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty ; -1[$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Résoudre une inéquation",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quel est l'ensemble des solutions de $x^2 - 5x + 6 > 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les racines sont $2$ et $3$, et $a = 1 > 0$ : le trinôme est positif à l'extérieur des racines. Comme l'inégalité est stricte, $S = ]-\\infty ; 2[\\ \\cup\\ ]3 ; +\\infty[$. L'intervalle $]2 ; 3[$ est la réponse de « $< 0$ », et les crochets fermés correspondent à « $\\geq 0$ ».",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty ; 2[\\ \\cup\\ ]3 ; +\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]2 ; 3[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[2 ; 3]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty ; 2]\\ \\cup\\ [3 ; +\\infty[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de $-x^2 + 4x - 3 \\geq 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\Delta = 16 - 12 = 4$, les racines sont $\\frac{-4 \\pm 2}{-2}$, soit $3$ et $1$. Ici $a = -1 < 0$ : le trinôme est positif entre les racines. Inégalité large : $S = [1 ; 3]$. Contrôle : en $x = 2$, $-4 + 8 - 3 = 1 \\geq 0$. Ne lis pas la règle des trinômes avec $a > 0$.",
+                  "answers": [
+                    {
+                      "content": "$[1 ; 3]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]1 ; 3[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty ; 1]\\ \\cup\\ [3 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-3 ; -1]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de $4x^2 - 12x + 9 \\leq 0$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$4x^2 - 12x + 9 = (2x - 3)^2$. Un carré est positif ou nul : il est $\\leq 0$ seulement quand il est nul, donc pour $x = \\frac{3}{2}$. Dire « un carré n'est jamais négatif, donc pas de solution » oublie que l'inégalité est large : la valeur $0$ est acceptée.",
+                  "answers": [
+                    {
+                      "content": "Le seul nombre $\\frac{3}{2}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'ensemble vide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tous les réels",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\left]-\\infty ; \\frac{3}{2}\\right[$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelles valeurs de $x$ l'expression $\\sqrt{x^2 - 3x - 4}$ est-elle définie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut $x^2 - 3x - 4 \\geq 0$. $\\Delta = 9 + 16 = 25$, les racines sont $-1$ et $4$. Avec $a = 1 > 0$, le trinôme est positif à l'extérieur, et les racines sont incluses (inégalité large). L'intervalle $[-1 ; 4]$ correspond à « $\\leq 0$ ».",
+                  "answers": [
+                    {
+                      "content": "$]-\\infty ; -1]\\ \\cup\\ [4 ; +\\infty[$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-1 ; 4]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty ; -1[\\ \\cup\\ ]4 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tous les réels",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "L'ensemble des solutions de $x^2 + 2x \\geq 3$ est $]-\\infty ; -3]\\ \\cup\\ [1 ; +\\infty[$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. On écrit $x^2 + 2x - 3 \\geq 0$. $\\Delta = 16$, les racines sont $-3$ et $1$, et $a > 0$ : le trinôme est positif à l'extérieur, racines incluses. Contrôle : en $x = 0$, $0 \\geq 3$ est faux, et $0$ est bien entre les racines. Ne résous pas en comparant $x$ et $x+2$ à $3$ séparément.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Problèmes, paramètres et domaines",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un maçon lance une brique : sa hauteur (en mètres) à l'instant $t$ (en secondes, $0 \\leq t \\leq 4$) est $h(t) = -5t^2 + 20t$. Pendant quels instants la brique est-elle à une hauteur d'au moins $15$ m ?",
+                  "question_type": "single_choice",
+                  "explanation": "On résout $-5t^2 + 20t \\geq 15$, soit $-5t^2 + 20t - 15 \\geq 0$, ou encore $t^2 - 4t + 3 \\leq 0$. Les racines sont $1$ et $3$ : la brique est à au moins $15$ m pour $t \\in [1 ; 3]$. Contrôle : $h(1) = h(3) = 15$ et $h(2) = 20$. Les crochets sont fermés car on demande « au moins ».",
+                  "answers": [
+                    {
+                      "content": "$t \\in [1 ; 3]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$t \\in\\ ]1 ; 3[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$t \\in [0 ; 1]\\ \\cup\\ [3 ; 4]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$t \\in [3 ; 4]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelles valeurs de $m$ l'inéquation $x^2 - 2mx + 4 \\geq 0$ est-elle vraie pour tout réel $x$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Comme $a = 1 > 0$, il faut $\\Delta \\leq 0$. Ici $\\Delta = 4m^2 - 16 \\leq 0$, soit $m^2 \\leq 4$, donc $-2 \\leq m \\leq 2$. Pour $m = \\pm 2$, $\\Delta = 0$ : le trinôme vaut un carré, positif ou nul, et l'inégalité large reste vraie. D'où les crochets fermés.",
+                  "answers": [
+                    {
+                      "content": "$-2 \\leq m \\leq 2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-2 < m < 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m \\leq -2$ ou $m \\geq 2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m \\geq 2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quel est l'ensemble des solutions de $(x-1)(x+2) \\leq 4$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On développe : $x^2 + x - 2 \\leq 4$, soit $x^2 + x - 6 \\leq 0$. $\\Delta = 25$, les racines sont $-3$ et $2$, donc $S = [-3 ; 2]$. Contrôle : en $x = 2$, $1 \\times 4 = 4$ ; en $x = 0$, $-2 \\leq 4$. Résoudre « chaque facteur $\\leq 4$ » est faux, et $[-2 ; 1]$ n'utilise que les racines des facteurs.",
+                  "answers": [
+                    {
+                      "content": "$[-3 ; 2]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$[-2 ; 1]$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty ; -3]\\ \\cup\\ [2 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-\\infty ; 2]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quels nombres sont solutions de $x^2 - x - 6 > 0$ ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Les racines sont $-2$ et $3$, et $a > 0$ : les solutions sont $x < -2$ ou $x > 3$. Donc $-3$, $4$ et $5$ conviennent (valeurs $6$, $6$ et $14$). Les racines $-2$ et $3$ donnent $0$, qui n'est pas strictement positif. Et $0$ donne $-6 < 0$ : il est entre les racines.",
+                  "answers": [
+                    {
+                      "content": "$-3$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour quelles valeurs de $x$ l'expression $\\sqrt{-x^2 + 2x + 3}$ est-elle définie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Il faut $-x^2 + 2x + 3 \\geq 0$. $\\Delta = 4 + 12 = 16$, les racines sont $-1$ et $3$. Comme $a = -1 < 0$, le trinôme est positif entre les racines, inclus : $[-1 ; 3]$. Contrôle : en $x = 0$, la valeur est $3 > 0$. L'extérieur serait la réponse pour $a > 0$.",
+                  "answers": [
+                    {
+                      "content": "$[-1 ; 3]$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$]-\\infty ; -1]\\ \\cup\\ [3 ; +\\infty[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$]-1 ; 3[$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$[-3 ; 1]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un terrain rectangulaire a pour largeur $x$ m et pour longueur $(x + 4)$ m. Son aire doit être d'au moins $96$ m². Quelles valeurs de la largeur $x$ conviennent ?",
+                  "question_type": "single_choice",
+                  "explanation": "On résout $x(x+4) \\geq 96$, soit $x^2 + 4x - 96 \\geq 0$. $\\Delta = 400$ et les racines sont $8$ et $-12$. Le trinôme est positif à l'extérieur : $x \\leq -12$ ou $x \\geq 8$. Une largeur est positive : on garde $x \\geq 8$. Contrôle : $8 \\times 12 = 96$.",
+                  "answers": [
+                    {
+                      "content": "$x \\geq 8$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0 < x \\leq 8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x \\geq 12$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$x \\leq -12$ ou $x \\geq 8$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 <%# 🌐 UI · school_admin/levels/show — page d'un niveau pour la direction (AD-09 à AD-12, AD-22) %>
 <%# Rôle : une carte par classe de l'année du niveau, actives par nom puis archivées récentes, avec sa pastille ; menu ⋮ du niveau et des classes si l'établissement est actif ; la légende si une pastille au moins %>
-<%# ADR  : 0065, 0088 · UDR : 0052, 0074 (§3.8, §3.12), 0083 · le taux et la moyenne sont ceux de la page d'une classe, inchangés ; les totaux ne comptent pas les archivées %>
+<%# ADR  : 0065, 0088, 0092 · UDR : 0052, 0074 (§3.8, §3.12), 0083, 0092 (§3.5) · menus par policy ; les totaux ne comptent pas les archivées %>
 <% page_title @level.level_name %>
 <% content_for :nav_key, "home" %>
 <% illustration = level_illustration(@level.level_slug) %>
@@ -11,7 +11,7 @@
                                             students: t(".students", count: @level.students_count)),
                    back: { label: t(".back"), href: school_admin_classrooms_path } do %>
   <%# UDR-0083 : « Archiver le niveau » n'existe que s'il reste une classe active et que l'établissement l'est. %>
-  <% if @school.active? && active.any? %>
+  <% if @manageable && active.any? %>
     <%# ml-auto : à droite du titre aussi sous sm, où l'en-tête passe en colonne (UDR-0083). %>
     <div class="ml-auto">
     <%= render "shared/level_archive_menu", name: @level.level_name, slug: @level.level_slug, classrooms_count: active.size,
@@ -21,10 +21,11 @@
   <% end %>
 <% end %>
 
+<%= render "school_admin/shared/rank_note", note: @rank_note %>
 <% if @level.classrooms.any? %>
   <ul id="level_classrooms" class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
     <% @level.classrooms.zip(signals) do |classroom, signal| %>
-      <%= render "classroom_card", classroom:, illustration:, signal:, manageable: @school.active? %>
+      <%= render "classroom_card", classroom:, illustration:, signal:, manageable: @manageable %>
     <% end %>
   </ul>
 <% else %>

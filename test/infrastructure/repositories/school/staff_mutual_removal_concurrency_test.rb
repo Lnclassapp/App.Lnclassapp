@@ -28,7 +28,7 @@ class StaffMutualRemovalConcurrencyTest < ActiveSupport::TestCase
   end
 
   def archive(actor_user, target_user)
-    actor = Entities::Identity::Actor.new(user_id: actor_user.id, role: :school_admin, school_id: @school.id)
+    actor = Entities::Identity::Actor.new(user_id: actor_user.id, role: :school_admin, school_id: @school.id, staff_position: "deputy")
     UseCases::School::ArchiveSchoolStaff.new(
       staff: Repositories::School::StaffRepository.new, schools: Repositories::School::SchoolRepository.new,
       users: Repositories::Identity::UserRepository.new, sessions: Repositories::Identity::SessionRepository.new,

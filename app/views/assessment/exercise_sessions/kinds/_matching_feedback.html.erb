@@ -1,0 +1,10 @@
+<%# 🌐 UI · assessment/exercise_sessions/kinds/_matching_feedback — « Ton choix » d'un relier : les paires de l'élève %>
+<%# Rôle : chaque élément de gauche avec celui qu'il a choisi ; faux, aucune paire n'est marquée juste ou fausse %>
+<%# ADR  : 0091 §4.4 · UDR : 0087 §3.5 · bordure verte pour une bonne réponse, neutre sinon %>
+<%# locals: (feedback:) -%>
+<ul aria-labelledby="feedback-selected"
+    class="space-y-1.5 rounded-ln border-2 px-4 py-3 font-medium text-ink <%= feedback.correct ? "border-success bg-success-soft" : "border-line bg-white" %>">
+  <% feedback.pairs.each do |pair| %>
+    <li><span><%= pair.left %></span> <span aria-hidden="true">→</span><span class="sr-only"><%= t("assessment.exercise_sessions.kinds.matching.with") %></span> <span><%= pair.right %></span></li>
+  <% end %>
+</ul>

@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/schools/show — fiche d'un établissement (SC-05) %>
 <%# Rôle : en-tête, classes par niveau (« − n + »), classes de l'année, « Direction » et « Directions retirées », enseignants et leur voie %>
-<%# ADR  : 0030, 0041, 0059, 0063, 0077, 0083, 0088 · UDR : 0006, 0036, 0046, 0050, 0054, 0056, 0070, 0079 (§3.8), 0083 · retour vers la liste filtrée %>
+<%# ADR  : 0030, 0041, 0059, 0063, 0077, 0083, 0088 · UDR : 0006, 0036, 0046, 0050, 0054, 0056, 0070, 0079 (§3.8), 0083 · retour vers la liste filtrée · UDR-0127 §3.5 (matières) %>
 <% page_title @school.name %>
 <% content_for :nav_key, "schools" %>
 <%# Hors de #school_header : les streams qui remplacent l'en-tête (modification, désactivation, code) gardent ce retour. %>
@@ -30,7 +30,8 @@
     <section id="school_teachers" aria-labelledby="school_teachers_title" class="min-w-0">
       <div class="mb-8">
         <%= render "shared/school_staff", staff: @staff, by_code_count: @by_code_count, viewer_id: nil, removable: @removable,
-                                          remove_url: ->(public_id) { school_staff_member_path(@school.public_id, public_id) }, newcomer: false %>
+                                          remove_url: ->(public_id) { school_staff_member_path(@school.public_id, public_id) }, newcomer: false,
+                                          school_type: @school.school_type, position_url: @position_url %>
         <% if @archived_staff.any? %>
           <%= render "teams/schools/archived_staff", school_public_id: @school.public_id, rows: @archived_staff, can_restore: @can_restore %>
         <% else %>
@@ -57,8 +58,8 @@
                   <p class="text-xs text-mute"><%= t(".joined_via_line", via: t(".joined_via.#{via}", name: teacher.referrer_name)) %></p>
                 <% end %>
                 <div class="mt-1 flex flex-wrap gap-1.5">
-                  <% if teacher.material_name %>
-                    <%= ui_subject_badge teacher.material_name, category: teacher.material_category, size: :sm %>
+                  <% teacher.materials.each do |material| %>
+                    <%= ui_subject_badge material.name, category: material.category, size: :sm %>
                   <% end %>
                   <% unless teacher.primary %>
                     <%= ui_badge t(".secondary_school"), size: :sm %>

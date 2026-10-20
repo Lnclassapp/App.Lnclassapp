@@ -42,5 +42,13 @@ module Teams
       assert_equal "Le fichier contient 501 éléments ; 500 au plus.",
                    import_error_message(error("too_many_roots", "max" => 500, "count" => 501))
     end
+
+    # ADR-0091 : une phrase par règle de structure ; une règle sans phrase garde la phrase générique.
+    test "a question structure error names its rule" do
+      assert_equal I18n.t("teams.imports.question_rules.blank_marker"),
+                   import_error_message(error("question_structure", "rule" => "blank_marker"))
+      assert_equal I18n.t("teams.imports.error_codes.question_structure"),
+                   import_error_message(error("question_structure", "rule" => "inconnue"))
+    end
   end
 end

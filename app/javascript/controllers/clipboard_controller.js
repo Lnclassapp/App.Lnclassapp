@@ -11,6 +11,12 @@ export default class extends Controller {
     this.buttonTargets.forEach((button) => { button.hidden = false })
   }
 
+  // Une page re-demandée par morphing (turbo_stream.refresh) reporterait le `hidden` du serveur sur un bouton déjà montré,
+  // sans rappeler connect() : le bouton disparaîtrait (constaté sur la fiche après « Modifier la classe », ADR-0098).
+  keepShown(event) {
+    if (this.buttonTargets.includes(event.target) && event.detail.attributeName === "hidden") event.preventDefault()
+  }
+
   async copy() {
     try {
       await navigator.clipboard.writeText(this.textValue)

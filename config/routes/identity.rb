@@ -35,5 +35,7 @@ scope module: :identity do
     resource :contact, only: %i[edit update], controller: :profile_contacts
     resource :pin, only: %i[edit update], controller: :profile_pins
     resource :photo, only: %i[edit update destroy], controller: :profile_photos
+    # ADR-0103 §4.4 : les matières de l'enseignant dans son établissement courant.
+    resource :materials, only: %i[edit update], controller: :profile_materials
   end
 end

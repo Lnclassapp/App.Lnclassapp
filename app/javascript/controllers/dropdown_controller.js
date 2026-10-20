@@ -1,6 +1,6 @@
 // ⚡ FRONT · dropdown_controller — menu déroulant au motif WAI-ARIA « menu button »
 // Rôle : bascule, flèches / Début / Fin, Échap rend le focus au bouton, clic extérieur et Tab ferment ; ouvre une <dialog>
-// UDR  : 0005, 0042, 0054 · émet modal:opened sur la <dialog> ouverte par `openDialog`
+// UDR  : 0005, 0042, 0054, 0084 (§3.10, entrées cachées sautées) · émet modal:opened sur la <dialog> ouverte par `openDialog`
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -32,6 +32,7 @@ export default class extends Controller {
 
   close() {
     this.menuTarget.hidden = true
+    this.menuTarget.style.translate = ""
     this.buttonTarget.setAttribute("aria-expanded", "false")
     this.unlisten()
   }
@@ -78,7 +79,8 @@ export default class extends Controller {
   // Menu `fixed` (UDR-0042) : placé sous le bouton, ou au-dessus s'il manque de place en bas, jamais hors de l'écran.
   // Un menu en position fixe échappe au défilement horizontal d'un tableau, qui rognerait un menu absolu.
   place() {
-    if (!this.fixedValue || this.menuTarget.hidden) return
+    if (this.menuTarget.hidden) return
+    if (!this.fixedValue) return this.nudge()
 
     const gap = 8
     const menu = this.menuTarget
@@ -98,6 +100,18 @@ export default class extends Controller {
       top: `${top}px`,
       left: `${Math.min(Math.max(gap, left), clientWidth - width - gap)}px`
     })
+  }
+
+  // Menu absolu (UDR-0042, amendement du 2026-10-12) : à 390 px, le ⋮ d'un en-tête passe à gauche sous le titre et son
+  // menu, aligné à droite du bouton, sortait de l'écran. Il est décalé de ce qui dépasse, jamais hors de l'écran.
+  nudge() {
+    const gap = 8
+    const menu = this.menuTarget
+    menu.style.translate = ""
+    const { left, right } = menu.getBoundingClientRect()
+    const { clientWidth } = document.documentElement
+    const shift = left < gap ? gap - left : right > clientWidth - gap ? clientWidth - gap - right : 0
+    if (shift) menu.style.translate = `${shift}px 0`
   }
 
   outside(event) {
@@ -123,7 +137,10 @@ export default class extends Controller {
     }
   }
 
+  // UDR-0084 §3.10 : une entrée cachée à cette largeur (menu de l'avatar : destinations sous lg, aide sous 700 px) ne
+  // reçoit pas le focus ; les flèches passent dessus. getClientRects plutôt que checkVisibility, absent avant Safari 17.4.
   get items() {
     return [...this.menuTarget.querySelectorAll('[role="menuitem"]:not([aria-disabled="true"])')]
+      .filter((item) => item.getClientRects().length > 0)
   }
 }

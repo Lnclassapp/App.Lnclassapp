@@ -1,0 +1,19 @@
+<%# 🌐 UI · school_admin/student_searches/_form — « Chercher un élève », sur la carte « Établissement » et sur la page de résultats %>
+<%# Rôle : GET vers la page de résultats (adresse partageable, sans JavaScript) ; le bouton sous le champ au téléphone, à droite dès sm %>
+<%# ADR  : 0092 · UDR : 0094 (§3.1, §3.4) · sans autofocus (UDR-0054 §3.3) · locals: (value: "", id: "student_search") %>
+<%# locals: (value: "", id: "student_search") -%>
+<%= form_with url: school_admin_student_search_path, method: :get, id: "#{id}_form",
+              html: { role: "search", "aria-label": t("school_admin.student_searches.form.label") },
+              data: { turbo_frame: "_top" } do %>
+  <%= label_tag "#{id}_q", t("school_admin.student_searches.form.label"), class: "mb-1.5 block text-sm font-medium text-ink" %>
+  <div class="flex flex-col gap-2 sm:flex-row sm:items-start">
+    <div class="min-w-0 flex-1">
+      <%= search_field_tag :q, value, id: "#{id}_q", autocomplete: "off", minlength: 3, maxlength: 80,
+                           "aria-describedby": "#{id}_hint",
+                           class: class_names(ComponentsHelper::FIELD_INPUT, "min-h-tap", ComponentsHelper::FIELD_STATES[:valid]) %>
+      <p id="<%= id %>_hint" class="mt-1.5 text-sm text-mute"><%= t("school_admin.student_searches.form.hint") %></p>
+    </div>
+    <%= ui_button t("school_admin.student_searches.form.submit"), type: :submit, variant: :secondary, icon: "magnifying-glass",
+                  data: { turbo_submits_with: t("school_admin.student_searches.form.submitting") } %>
+  </div>
+<% end %>

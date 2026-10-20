@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::ExerciseSessionRepository
 # Rôle : sessions d'exercice et tentatives immuables ; compteurs tenus en SQL, une seule session ouverte par exercice
-# ADR  : 0033, 0043, 0054
+# ADR  : 0033, 0043, 0054, 0091
 module Repositories
   module Assessment
     class ExerciseSessionRepository
@@ -41,10 +41,10 @@ module Repositories
         true
       end
 
-      def record_attempt(session_id:, question_id:, selected_answer_ids:, correct:, at:)
+      def record_attempt(session_id:, question_id:, selected_answer_ids:, correct:, at:, response_text: nil)
         # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::QuestionAttempt.transaction(requires_new: true) do
-          Orm::QuestionAttempt.create!(exercise_session_id: session_id, question_id:, selected_answer_ids:, correct:,
+          Orm::QuestionAttempt.create!(exercise_session_id: session_id, question_id:, selected_answer_ids:, response_text:, correct:,
                                        answered_at: at)
         end
         Orm::ExerciseSession.where(id: session_id).update_all([ COUNTERS_SQL, correct ? 1 : 0, at ])
@@ -57,7 +57,7 @@ module Repositories
         Orm::QuestionAttempt.where(exercise_session_id: session_id).order(:answered_at, :id).map do |record|
           Entities::Assessment::QuestionAttempt.new(session_id: record.exercise_session_id, question_id: record.question_id,
                                                     selected_answer_ids: record.selected_answer_ids, correct: record.correct,
-                                                    answered_at: record.answered_at)
+                                                    answered_at: record.answered_at, response_text: record.response_text)
         end
       end
 

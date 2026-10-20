@@ -1,0 +1,1532 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Vecteurs et points du plan",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "2nde",
+      "material_name": "Mathématiques",
+      "series_name": "C",
+      "essentials": [
+        {
+          "name": "Le vecteur et l'égalité de deux vecteurs",
+          "subtitle": "Direction, sens et longueur d'un trajet",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Reconnaître la direction, le sens et la longueur d'un vecteur $\\overrightarrow{AB}$.</li>\n<li>Dire si deux vecteurs sont égaux.</li>\n<li>Écrire l'égalité de vecteurs donnée par un parallélogramme.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le trajet du bateau (le vecteur).</strong> Au port d'Abidjan, un bateau-taxi quitte le quai $A$ pour aller au quai $B$. Son trajet a trois caractéristiques : la route suivie, le sens du parcours et la distance parcourue.</p>\n<p><em>Le pont.</em> Ce trajet est le vecteur $\\overrightarrow{AB}$. La route est la <strong>direction</strong>, c'est-à-dire la droite $(AB)$. Le parcours va de $A$ vers $B$ : c'est le <strong>sens</strong>. La distance est la <strong>longueur</strong> $AB$.</p>\n<p><em>Où l'image s'arrête.</em> Le bateau part d'un quai précis. Le vecteur, lui, ne garde pas le quai de départ : seules comptent la route, le sens et la distance.</p>\n<p><strong>2. Deux bateaux sur la même route (l'égalité).</strong> Deux bateaux partent de quais différents, mais suivent la même route, dans le même sens, sur la même distance.</p>\n<p><em>Le pont.</em> Leurs trajets sont deux vecteurs égaux : $\\overrightarrow{AB}=\\overrightarrow{CD}$.</p>\n<p><em>Où l'image s'arrête.</em> Une distance égale ne suffit pas. Un bateau qui parcourt la même distance sur une autre route ne fait pas le même trajet.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Vecteur.</strong> Le vecteur $\\overrightarrow{AB}$ a une <strong>direction</strong> (celle de la droite $(AB)$), un <strong>sens</strong> (de $A$ vers $B$) et une <strong>longueur</strong>, notée $AB$. Le vecteur $\\overrightarrow{BA}$ a la même direction et la même longueur, mais le sens contraire.</p>\n<p><strong>Égalité.</strong> $\\overrightarrow{AB}=\\overrightarrow{CD}$ quand les deux vecteurs ont la même direction, le même sens et la même longueur. Si les points ne sont pas alignés, cela revient à dire que $ABDC$ est un parallélogramme : les segments $[AD]$ et $[BC]$ ont alors le même milieu.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Le parallélogramme $ABCD$ a pour centre $O$, point où se coupent ses diagonales. Montrer que $\\overrightarrow{AO}=\\overrightarrow{OC}$.</strong></p>\n<ol>\n<li>Les diagonales d'un parallélogramme se coupent en leur milieu : $O$ est le milieu de $[AC]$.</li>\n<li>Même direction : $A$, $O$ et $C$ sont alignés sur la diagonale $(AC)$.</li>\n<li>Même longueur : $AO=OC$, puisque $O$ est au milieu de $[AC]$.</li>\n<li>Même sens : on avance de $A$ vers $O$, puis de $O$ vers $C$, dans le même sens sur la diagonale.</li>\n<li>Les trois caractéristiques coïncident, donc $\\overrightarrow{AO}=\\overrightarrow{OC}$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Dire que deux vecteurs sont égaux parce qu'ils ont la même longueur. $\\overrightarrow{AB}$ et $\\overrightarrow{BA}$ ont la même longueur, mais ils vont en sens contraires : ils ne sont pas égaux.</p>\n<p>Pour le repérer, vérifie les trois caractéristiques une à une, et l'ordre des lettres dans chaque vecteur.</p>\n<h2>En une phrase</h2>\n<p>Un vecteur est un trajet défini par sa route, son sens et sa distance : deux trajets identiques sont le même vecteur, même s'ils partent de quais différents.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître direction, sens et longueur",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans le vecteur $\\overrightarrow{AB}$, quelle caractéristique indique qu'on va de $A$ vers $B$ et non de $B$ vers $A$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "C'est le sens : il indique dans quel ordre on parcourt la route. La direction donne seulement la droite $(AB)$, sans dire dans quel sens on la parcourt. L'erreur tentante est de confondre direction et sens.",
+                  "answers": [
+                    {
+                      "content": "La direction",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sens",
+                      "correct": true
+                    },
+                    {
+                      "content": "La longueur $AB$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le milieu de $[AB]$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les vecteurs $\\overrightarrow{AB}$ et $\\overrightarrow{BA}$ ont la même direction et la même longueur, mais des sens contraires.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Le trajet de $B$ vers $A$ suit la même droite et a la même distance que celui de $A$ vers $B$, mais il part dans l'autre sens. L'erreur tentante est de dire qu'ils sont égaux : ils sont opposés, pas égaux.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un bateau fait le trajet du quai $A$ au quai $B$, soit le vecteur $\\overrightarrow{AB}$. Lesquelles de ces affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les deux bonnes affirmations décrivent la route et le départ-arrivée. Le vecteur $\\overrightarrow{BA}$ va dans l'autre sens : il n'est donc pas égal à $\\overrightarrow{AB}$. Un trajet a toujours une longueur, même s'il part d'un quai.",
+                  "answers": [
+                    {
+                      "content": "Sa direction est celle de la droite $(AB)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il part du quai $A$ et arrive au quai $B$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est égal au vecteur $\\overrightarrow{BA}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'a pas de longueur, car il part d'un quai.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABCD$ est un parallélogramme. Quelle égalité de vecteurs est vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les côtés opposés $[AB]$ et $[DC]$ sont parallèles, de même longueur et parcourus dans le même sens : $\\overrightarrow{AB}=\\overrightarrow{DC}$. L'erreur tentante est $\\overrightarrow{AB}=\\overrightarrow{CD}$ : même direction et même longueur, mais sens contraires.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{AB}=\\overrightarrow{DC}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}=\\overrightarrow{CD}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AC}=\\overrightarrow{BD}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AD}=\\overrightarrow{CB}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si deux vecteurs ont la même longueur, alors ils sont égaux.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Il faut aussi la même direction et le même sens. Par exemple, $\\overrightarrow{AB}$ et $\\overrightarrow{AC}$ peuvent avoir la même longueur sans être égaux, si $B$ et $C$ sont placés dans deux directions différentes depuis $A$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Écrire l'égalité de vecteurs d'un parallélogramme",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "$EFGH$ est un parallélogramme. Quel vecteur est égal à $\\overrightarrow{EF}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Dans $EFGH$, les côtés opposés $[EF]$ et $[GH]$ ont même direction, même longueur et même sens, de $E$ vers $F$ et de $H$ vers $G$. $\\overrightarrow{GH}$ a le sens contraire de $\\overrightarrow{HG}$. $\\overrightarrow{FG}$ est un autre côté, qui n'est pas parallèle à $[EF]$.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{HG}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{GH}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{FG}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{GF}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $\\overrightarrow{AB}=\\overrightarrow{CD}$, alors $\\overrightarrow{BA}=\\overrightarrow{DC}$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Les vecteurs $\\overrightarrow{BA}$ et $\\overrightarrow{DC}$ ont la même direction, la même longueur et le même sens, qui est le sens contraire de $\\overrightarrow{AB}$ et de $\\overrightarrow{CD}$. L'erreur tentante est de croire que l'égalité ne se retourne pas.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$MNPQ$ est un parallélogramme. Parmi les égalités suivantes, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les côtés opposés sont $[MN]$ et $[QP]$, puis $[NP]$ et $[MQ]$. L'erreur tentante est d'écrire $\\overrightarrow{MN}=\\overrightarrow{PQ}$ : $\\overrightarrow{PQ}$ a le sens contraire de $\\overrightarrow{MN}$. Les égalités avec les diagonales $[MP]$ et $[NQ]$ sont fausses.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{MN}=\\overrightarrow{QP}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{MQ}=\\overrightarrow{NP}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{MN}=\\overrightarrow{PQ}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{MP}=\\overrightarrow{NQ}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $B$, $C$, $D$ vérifient $\\overrightarrow{AB}=\\overrightarrow{CD}$, et ces points ne sont pas alignés. Quelle affirmation est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\overrightarrow{AB}=\\overrightarrow{CD}$ fait de $[AB]$ et $[DC]$ des côtés opposés de $ABDC$. L'erreur tentante est $ABCD$ : pour ce quadrilatère, c'est $\\overrightarrow{AB}=\\overrightarrow{DC}$ qu'il faut écrire.",
+                  "answers": [
+                    {
+                      "content": "$ABDC$ est un parallélogramme.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$ABCD$ est un parallélogramme.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$ACBD$ est un parallélogramme.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les droites $(AB)$ et $(CD)$ sont perpendiculaires.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un parallélogramme $ABCD$, les vecteurs $\\overrightarrow{AB}$ et $\\overrightarrow{DC}$ ont la même direction, la même longueur et le même sens.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Ce sont deux côtés opposés, parcourus dans le même sens. Retiens-le : dans un parallélogramme, un côté et le côté opposé donnent des vecteurs égaux, si on les écrit dans le même ordre de lettres.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABCD$ est un parallélogramme. Parmi les égalités suivantes, lesquelles sont vraies ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Les trois bonnes égalités viennent des côtés opposés. $\\overrightarrow{BA}=\\overrightarrow{CD}$ découle de la première : retourner deux vecteurs égaux les garde égaux. L'erreur la plus fréquente est $\\overrightarrow{AB}=\\overrightarrow{CD}$, qui a le sens contraire. Les diagonales ne sont pas égales en général.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{AB}=\\overrightarrow{DC}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AD}=\\overrightarrow{BC}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{BA}=\\overrightarrow{CD}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AC}=\\overrightarrow{BD}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}=\\overrightarrow{CD}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Combiner égalités de vecteurs et parallélogrammes",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "$ABCD$ est un parallélogramme. Quels vecteurs ont la même direction et la même longueur que $\\overrightarrow{AB}$, mais le sens contraire ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\overrightarrow{CD}$ est l'opposé de $\\overrightarrow{DC}$, qui est égal à $\\overrightarrow{AB}$. $\\overrightarrow{DC}$ a donc le même sens que $\\overrightarrow{AB}$ : c'est l'erreur à éviter. $\\overrightarrow{BC}$ n'a pas la direction de $\\overrightarrow{AB}$.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{BA}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{CD}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{DC}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{BC}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un parallélogramme $ABCD$ de centre $O$, point d'intersection de ses diagonales, on a $\\overrightarrow{AO}=\\overrightarrow{OC}$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Le centre $O$ est le milieu de la diagonale $[AC]$. Les vecteurs $\\overrightarrow{AO}$ et $\\overrightarrow{OC}$ ont la même direction, le même sens (on avance de $A$ vers $C$) et la même longueur.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le parallélogramme $ABCD$, on sait aussi que $\\overrightarrow{AB}=\\overrightarrow{DE}$, où $E$ est un point du plan. Que peut-on dire de $E$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\overrightarrow{DC}=\\overrightarrow{AB}=\\overrightarrow{DE}$. Deux vecteurs égaux qui partent du même point $D$ ont la même extrémité : $E=C$. L'erreur tentante est de croire que $D$ est au milieu de $[CE]$ : rien ne l'indique.",
+                  "answers": [
+                    {
+                      "content": "$E$ est confondu avec $C$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$E$ est le milieu de $[DC]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$D$ est le milieu de $[CE]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien dire de $E$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$EFGH$ est un parallélogramme. $I$ est le milieu de $[EG]$ et $J$ le milieu de $[FH]$. Lesquelles de ces affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les diagonales d'un parallélogramme se coupent en leur milieu : $I$ et $J$ sont donc le même point. Comme $I$ est le milieu de $[EG]$, on a $\\overrightarrow{EI}=\\overrightarrow{IG}$. L'erreur tentante est $\\overrightarrow{EF}=\\overrightarrow{GH}$ : ces vecteurs ont la même direction, la même longueur, mais des sens contraires.",
+                  "answers": [
+                    {
+                      "content": "$I$ et $J$ sont confondus.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{EI}=\\overrightarrow{IG}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{EF}=\\overrightarrow{GH}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{EI}=\\overrightarrow{GI}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un quadrilatère $ABCD$ vérifie $\\overrightarrow{AB}=\\overrightarrow{DC}$. Lesquelles des affirmations suivantes sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Si $\\overrightarrow{AB}=\\overrightarrow{DC}$, les côtés $[AB]$ et $[DC]$ sont parallèles et de même longueur : $ABCD$ est un parallélogramme. Ses côtés opposés ont alors le même vecteur, et ses diagonales ont le même milieu. $\\overrightarrow{AB}=\\overrightarrow{CD}$ est faux : sens contraires.",
+                  "answers": [
+                    {
+                      "content": "$ABCD$ est un parallélogramme.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AD}=\\overrightarrow{BC}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les diagonales $[AC]$ et $[BD]$ ont le même milieu.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AC}=\\overrightarrow{BD}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}=\\overrightarrow{CD}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un élève affirme : « si $\\overrightarrow{AB}=\\overrightarrow{CD}$, alors les segments $[AD]$ et $[BC]$ ont le même milieu ». Que penses-tu de cette affirmation ?",
+                  "question_type": "single_choice",
+                  "explanation": "Vrai. Si $\\overrightarrow{AB}=\\overrightarrow{CD}$, alors $ABDC$ est un parallélogramme, et ses diagonales $[AD]$ et $[BC]$ ont le même milieu. Retiens que les diagonales relient deux sommets qui ne sont pas voisins.",
+                  "answers": [
+                    {
+                      "content": "Elle est exacte : $ABDC$ est un parallélogramme, et ses diagonales $[AD]$ et $[BC]$ ont le même milieu.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Elle est fausse : ce sont les segments $[AB]$ et $[CD]$ qui ont le même milieu.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est fausse : les milieux ne dépendent jamais des vecteurs.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elle est fausse : il faudrait $\\overrightarrow{AB}=\\overrightarrow{BC}$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "La somme de deux vecteurs et la relation de Chasles",
+          "subtitle": "Enchaîner des trajets pour trouver le trajet direct",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Appliquer la relation de Chasles pour écrire un trajet comme somme de trajets.</li>\n<li>Construire la somme de deux vecteurs.</li>\n<li>Utiliser le vecteur nul $\\overrightarrow{0}$.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Du port au marché (l'enchaînement).</strong> Un pêcheur prend sa pirogue du quai $A$ jusqu'au quai $B$ du port. Là, un porteur emmène son poisson du quai $B$ jusqu'au marché $C$. Pour aller du quai $A$ au marché $C$, il enchaîne deux trajets.</p>\n<p><em>Le pont.</em> $\\overrightarrow{AB}$ est le premier trajet, $\\overrightarrow{BC}$ le second, et le trajet direct de $A$ à $C$ est $\\overrightarrow{AC}$. La somme $\\overrightarrow{AB}+\\overrightarrow{BC}$ est ce trajet direct.</p>\n<p><em>Où l'image s'arrête.</em> Le pêcheur peut faire un détour : il parcourt alors plus de distance que $AC$. Le vecteur $\\overrightarrow{AC}$, lui, ne dépend que du départ $A$ et de l'arrivée $C$.</p>\n<p><strong>2. Le retour au quai (le vecteur nul).</strong> Une pirogue va du quai $A$ au quai $B$, puis revient au quai $A$. Au total, elle ne s'est pas déplacée.</p>\n<p><em>Le pont.</em> L'aller $\\overrightarrow{AB}$ et le retour $\\overrightarrow{BA}$ se compensent : $\\overrightarrow{AB}+\\overrightarrow{BA}=\\overrightarrow{0}$.</p>\n<p><em>Où l'image s'arrête.</em> Le vecteur nul n'a pas de direction ni de sens précis : c'est un trajet qui ne bouge pas.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Relation de Chasles.</strong> Pour tous points $A$, $B$, $C$ : $\\overrightarrow{AB}+\\overrightarrow{BC}=\\overrightarrow{AC}$. La fin du premier vecteur ($B$) est le début du second.</p>\n<p><strong>Somme de deux vecteurs.</strong> Pour additionner $\\overrightarrow{u}$ et $\\overrightarrow{v}$, on place $\\overrightarrow{v}$ à l'extrémité de $\\overrightarrow{u}$. La somme $\\overrightarrow{u}+\\overrightarrow{v}$ va du début de $\\overrightarrow{u}$ à la fin de $\\overrightarrow{v}$.</p>\n<p><strong>Règle du parallélogramme.</strong> Si $ABCD$ est un parallélogramme, $\\overrightarrow{AB}+\\overrightarrow{AD}=\\overrightarrow{AC}$.</p>\n<p><strong>Vecteur nul.</strong> Pour tout point $A$, $\\overrightarrow{AA}=\\overrightarrow{0}$, et $\\overrightarrow{AB}+\\overrightarrow{BA}=\\overrightarrow{0}$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Simplifier $\\overrightarrow{AB}+\\overrightarrow{CA}+\\overrightarrow{BC}$.</strong></p>\n<ol>\n<li>On regroupe les vecteurs qui s'enchaînent : $\\overrightarrow{AB}+\\overrightarrow{BC}$. La fin de $\\overrightarrow{AB}$ est en $B$, et c'est le début de $\\overrightarrow{BC}$.</li>\n<li>Par Chasles, $\\overrightarrow{AB}+\\overrightarrow{BC}=\\overrightarrow{AC}$.</li>\n<li>Il reste $\\overrightarrow{AC}+\\overrightarrow{CA}$, un aller-retour de $A$ à $C$.</li>\n<li>Donc $\\overrightarrow{AC}+\\overrightarrow{CA}=\\overrightarrow{0}$. Le résultat est $\\overrightarrow{0}$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Additionner les longueurs : croire que $\\overrightarrow{AB}+\\overrightarrow{BC}$ a pour longueur $AB+BC$. C'est vrai seulement si $B$ est entre $A$ et $C$. Un détour rallonge le trajet, mais la longueur de $\\overrightarrow{AC}$ ne change pas.</p>\n<p>Pour le repérer, vérifie que la fin de chaque vecteur est le début du suivant.</p>\n<h2>En une phrase</h2>\n<p>Pour aller de $A$ à $C$ en passant par $B$, on enchaîne les trajets : $\\overrightarrow{AB}+\\overrightarrow{BC}=\\overrightarrow{AC}$, et un aller-retour donne le vecteur nul.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Reconnaître la relation de Chasles",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Pour tous points $A$, $B$, $C$, quelle égalité traduit la relation de Chasles ?",
+                  "question_type": "single_choice",
+                  "explanation": "La fin de $\\overrightarrow{AB}$, le point $B$, est le début de $\\overrightarrow{BC}$ : on enchaîne les deux trajets, et on obtient le trajet direct $\\overrightarrow{AC}$. L'erreur la plus fréquente est d'écrire $\\overrightarrow{CA}$ : le sens est inversé.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{AB}+\\overrightarrow{BC}=\\overrightarrow{AC}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}+\\overrightarrow{AC}=\\overrightarrow{BC}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}+\\overrightarrow{CB}=\\overrightarrow{AC}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}+\\overrightarrow{BC}=\\overrightarrow{CA}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tous points $A$ et $B$, $\\overrightarrow{AB}+\\overrightarrow{BA}=\\overrightarrow{0}$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $\\overrightarrow{BA}$ est le trajet retour : même direction, même longueur que $\\overrightarrow{AB}$, mais sens contraire. L'aller et le retour se compensent, et le total est le vecteur nul. L'erreur tentante est d'additionner les longueurs.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pêcheur va du quai $A$ au quai $B$, puis du quai $B$ au marché $C$. Quel vecteur représente son trajet direct du quai $A$ au marché $C$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le trajet direct part de $A$ et arrive en $C$ : c'est $\\overrightarrow{AC}$, égal à la somme des deux étapes. $\\overrightarrow{CA}$ inverse le sens, et $\\overrightarrow{BC}$ ou $\\overrightarrow{AB}$ ne représentent qu'une seule étape.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{AC}$, qui vaut $\\overrightarrow{AB}+\\overrightarrow{BC}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{CA}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{BC}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tous points $A$, $B$, $C$, $D$, lesquelles de ces égalités sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Les trois premiers vecteurs s'enchaînent de $A$ à $D$, donc leur somme donne $\\overrightarrow{AD}$. Un point rejoint sa propre place : $\\overrightarrow{AA}=\\overrightarrow{0}$. L'erreur tentante est $\\overrightarrow{AB}+\\overrightarrow{CD}=\\overrightarrow{AD}$ : il faudrait $B=C$.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{AB}+\\overrightarrow{BC}+\\overrightarrow{CD}=\\overrightarrow{AD}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}+\\overrightarrow{CD}=\\overrightarrow{AD}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AA}=\\overrightarrow{0}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}+\\overrightarrow{BA}=\\overrightarrow{AB}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Quand on additionne deux vecteurs, la longueur du vecteur somme est toujours égale à la somme des deux longueurs.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Si un bateau fait l'aller de $A$ vers $B$ puis le retour vers $A$, chaque trajet mesure $AB$, mais la somme est le vecteur nul, de longueur $0$. Les longueurs ne se somment pas toujours.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Construire et simplifier des sommes de vecteurs",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "$ABCD$ est un parallélogramme. Quel vecteur est égal à $\\overrightarrow{AB}+\\overrightarrow{AD}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Règle du parallélogramme : $\\overrightarrow{AB}+\\overrightarrow{AD}$ est la diagonale issue de $A$, donc $\\overrightarrow{AC}$. $\\overrightarrow{BD}$ est l'autre diagonale : elle n'est pas égale à cette somme.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{AC}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{BD}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{CA}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{DB}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour tous points $M$, $N$, $P$, $\\overrightarrow{MN}+\\overrightarrow{NP}=\\overrightarrow{MP}$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. C'est la relation de Chasles. La fin de $\\overrightarrow{MN}$ est $N$, qui est le début de $\\overrightarrow{NP}$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquelles des expressions suivantes sont égales à $\\overrightarrow{EF}+\\overrightarrow{FG}+\\overrightarrow{GE}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Par Chasles, $\\overrightarrow{EF}+\\overrightarrow{FG}=\\overrightarrow{EG}$, puis $\\overrightarrow{EG}+\\overrightarrow{GE}=\\overrightarrow{EE}=\\overrightarrow{0}$. Le trajet revient à son point de départ. L'erreur tentante est d'écrire $\\overrightarrow{EG}$ en oubliant le retour.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{0}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{EE}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{EG}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{GE}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $B$, $C$ sont alignés dans cet ordre, avec $AB=3$ cm et $BC=5$ cm. Quelle est la longueur du vecteur $\\overrightarrow{AC}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les points sont alignés dans l'ordre $A$, $B$, $C$ : $\\overrightarrow{AC}$ est la somme de $\\overrightarrow{AB}$ et $\\overrightarrow{BC}$, de même sens. Donc $AC=3+5=8$ cm. L'erreur tentante est de soustraire ou de multiplier. Additionner les longueurs n'est correct que si les vecteurs vont dans le même sens.",
+                  "answers": [
+                    {
+                      "content": "$8$ cm",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15$ cm",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\sqrt{34}$ cm",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $ABCD$ est un parallélogramme, alors $\\overrightarrow{AB}+\\overrightarrow{BC}=\\overrightarrow{AD}$.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Par Chasles, $\\overrightarrow{AB}+\\overrightarrow{BC}$ vaut $\\overrightarrow{AC}$, la diagonale. Le côté $\\overrightarrow{AD}$ n'est pas égal à cette somme. Vérifie toujours la fin du premier vecteur et le début du second.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Enchaîner trajets et vecteurs",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Simplifie $\\overrightarrow{AB}+\\overrightarrow{CD}+\\overrightarrow{BC}+\\overrightarrow{DA}$. Quel est le résultat ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par Chasles, $\\overrightarrow{AB}+\\overrightarrow{BC}=\\overrightarrow{AC}$ et $\\overrightarrow{CD}+\\overrightarrow{DA}=\\overrightarrow{CA}$. Il reste $\\overrightarrow{AC}+\\overrightarrow{CA}=\\overrightarrow{0}$ : le trajet fait un tour complet. L'erreur tentante est d'oublier le trajet retour.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{0}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AC}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AD}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{BD}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "$ABCD$ est un parallélogramme. Lesquelles des égalités suivantes sont vraies ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\overrightarrow{AB}+\\overrightarrow{AD}=\\overrightarrow{AC}$ est la règle du parallélogramme ; $\\overrightarrow{AB}+\\overrightarrow{BD}=\\overrightarrow{AD}$ vient de Chasles. $\\overrightarrow{AC}+\\overrightarrow{CB}$ vaut $\\overrightarrow{AB}$, et $\\overrightarrow{AB}+\\overrightarrow{CA}$ vaut $\\overrightarrow{CB}$. Repère les lettres qui s'enchaînent.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{AB}+\\overrightarrow{AD}=\\overrightarrow{AC}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}+\\overrightarrow{BD}=\\overrightarrow{AD}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AC}+\\overrightarrow{CB}=\\overrightarrow{AD}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}+\\overrightarrow{CA}=\\overrightarrow{CD}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le parallélogramme $ABCD$, on définit $I$ par $\\overrightarrow{AI}=\\overrightarrow{AB}+\\overrightarrow{AD}$. Que peut-on dire de $I$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La règle du parallélogramme donne $\\overrightarrow{AB}+\\overrightarrow{AD}=\\overrightarrow{AC}$. Deux vecteurs égaux qui partent de $A$ ont la même extrémité : $I=C$. L'erreur tentante est de placer $I$ au centre $O$ de $[BD]$, qui n'a pas cette propriété.",
+                  "answers": [
+                    {
+                      "content": "$I$ est le sommet $C$, opposé à $A$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$I$ est le milieu de $[BD]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$I$ est le sommet $B$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$I$ est le milieu de $[AB]$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Lesquelles de ces affirmations sur le vecteur nul $\\overrightarrow{0}$ sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Le vecteur nul a une longueur nulle et n'a pas de direction ni de sens précis. Il ne change pas une somme, et $\\overrightarrow{AA}$ est toujours nul. L'erreur la plus fréquente est de croire que $\\overrightarrow{AB}$ est nul : deux points distincts donnent un vecteur non nul.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{AB}+\\overrightarrow{0}=\\overrightarrow{AB}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{0}$ a une longueur nulle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{0}$ a une direction et un sens bien définis.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AA}=\\overrightarrow{0}$ pour tout point $A$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}=\\overrightarrow{0}$ lorsque $A$ et $B$ sont deux points distincts.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $\\overrightarrow{AB}+\\overrightarrow{BC}=\\overrightarrow{0}$, alors $C$ est confondu avec $A$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Par Chasles, $\\overrightarrow{AB}+\\overrightarrow{BC}=\\overrightarrow{AC}$. Si cette somme est nulle, $\\overrightarrow{AC}=\\overrightarrow{0}$, donc $C=A$. Le trajet de $A$ vers $B$, puis de $B$ vers $C$, revient au point de départ.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pirogue fait le trajet $\\overrightarrow{AB}$, puis $\\overrightarrow{BC}$, puis $\\overrightarrow{CA}$, où $A$, $B$, $C$ sont trois quais. Où se trouve la pirogue à la fin ?",
+                  "question_type": "single_choice",
+                  "explanation": "Par Chasles, $\\overrightarrow{AB}+\\overrightarrow{BC}=\\overrightarrow{AC}$, puis $\\overrightarrow{AC}+\\overrightarrow{CA}=\\overrightarrow{0}$. La pirogue revient au quai de départ, même après un grand tour. L'erreur tentante est de croire que la distance parcourue décide de la position finale.",
+                  "answers": [
+                    {
+                      "content": "Au quai $A$, son point de départ.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Au quai $B$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au quai $C$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Cela dépend de la distance parcourue.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Multiplier un vecteur par un réel et la colinéarité",
+          "subtitle": "Parcourir une route plusieurs fois, ou dans le sens inverse",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Construire le vecteur $k\\overrightarrow{u}$ pour un réel $k$ donné.</li>\n<li>Reconnaître que deux vecteurs sont colinéaires.</li>\n<li>Utiliser une égalité $\\overrightarrow{AC}=k\\overrightarrow{AB}$ pour montrer que des points sont alignés.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le convoi de pirogues (multiplier par un réel).</strong> Une pirogue-guide trace une route : son trajet est $\\overrightarrow{u}$. Une pirogue qui suit la même route, deux fois plus loin, fait le trajet $2\\overrightarrow{u}$. Une pirogue qui revient sur la même route, dans l'autre sens, fait le trajet $-\\overrightarrow{u}$.</p>\n<p><em>Le pont.</em> Le réel $k$ dit combien de fois on parcourt la route, et son signe dit dans quel sens on la parcourt.</p>\n<p><em>Où l'image s'arrête.</em> Multiplier par $k$ ne change pas la route. Deux trajets sur des routes non parallèles ne sont jamais multiples l'un de l'autre.</p>\n<p><strong>2. Les pirogues amarrées en ligne (la colinéarité).</strong> Trois pirogues amarrées le long d'un même quai forment une ligne droite.</p>\n<p><em>Le pont.</em> Si $\\overrightarrow{AC}$ est un multiple de $\\overrightarrow{AB}$, les vecteurs sont colinéaires : les points $A$, $B$, $C$ sont alignés.</p>\n<p><em>Où l'image s'arrête.</em> Des vecteurs colinéaires ont la même direction, mais pas forcément la même longueur. C'est l'alignement qui compte.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Produit par un réel.</strong> Pour $\\overrightarrow{u}$ non nul et $k$ réel non nul, $k\\overrightarrow{u}$ a la direction de $\\overrightarrow{u}$. Son sens est celui de $\\overrightarrow{u}$ si $k>0$, et le sens contraire si $k<0$. Sa longueur vaut $|k|$ fois celle de $\\overrightarrow{u}$. Si $k=0$, alors $0\\overrightarrow{u}=\\overrightarrow{0}$.</p>\n<p><strong>Colinéarité.</strong> Pour $\\overrightarrow{u}$ non nul, deux vecteurs $\\overrightarrow{u}$ et $\\overrightarrow{v}$ sont colinéaires s'il existe un réel $k$ tel que $\\overrightarrow{v}=k\\overrightarrow{u}$. Ils ont alors la même direction.</p>\n<p><strong>Alignement.</strong> Les points $A$, $B$, $C$ sont alignés si et seulement si $\\overrightarrow{AB}$ et $\\overrightarrow{AC}$ sont colinéaires.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Le point $C$ vérifie $\\overrightarrow{AC}=-2\\overrightarrow{AB}$. Montrer que $A$, $B$, $C$ sont alignés, puis placer $A$ par rapport à $B$ et $C$.</strong></p>\n<ol>\n<li>$\\overrightarrow{AC}=-2\\overrightarrow{AB}$ est de la forme $k\\overrightarrow{u}$, avec $\\overrightarrow{u}=\\overrightarrow{AB}$ et $k=-2$.</li>\n<li>Donc $\\overrightarrow{AC}$ et $\\overrightarrow{AB}$ sont colinéaires.</li>\n<li>Donc $A$, $B$, $C$ sont alignés.</li>\n<li>Le coefficient $-2$ est négatif : $\\overrightarrow{AC}$ est de sens contraire à $\\overrightarrow{AB}$. Le point $A$ est donc entre $B$ et $C$.</li>\n<li>Longueur : $AC=|-2|\\times AB=2\\,AB$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Oublier le signe. $\\overrightarrow{AC}=2\\overrightarrow{AB}$ et $\\overrightarrow{AC}=-2\\overrightarrow{AB}$ ne placent pas $C$ au même endroit : le signe change le sens, donc la position de $C$.</p>\n<p>Autre piège : confondre colinéaire et égal. Deux vecteurs colinéaires n'ont pas forcément la même longueur ni le même sens.</p>\n<h2>En une phrase</h2>\n<p>Multiplier un vecteur par $k$, c'est parcourir la même route $k$ fois, dans le sens que donne le signe de $k$ ; des vecteurs sur une même route sont colinéaires, et leurs points sont alignés.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Lire le sens et la longueur d'un produit",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Soit $\\overrightarrow{u}$ un vecteur non nul. Quelle est la direction de $3\\overrightarrow{u}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Multiplier par un réel non nul ne change pas la direction : on reste sur la même route. Le nombre $k$ change la longueur et, s'il est négatif, le sens. Seul le produit par $0$ donne le vecteur nul, qui n'a pas de direction précise.",
+                  "answers": [
+                    {
+                      "content": "La même direction que $\\overrightarrow{u}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La direction perpendiculaire à $\\overrightarrow{u}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une direction qui dépend du nombre $3$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Aucune direction, car $3$ n'est pas un vecteur.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $k=-1$, alors $k\\overrightarrow{u}=-\\overrightarrow{u}$ a la même longueur que $\\overrightarrow{u}$, mais le sens contraire.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Le coefficient $-1$ garde la longueur, car $|-1|=1$, et inverse le sens. Si $\\overrightarrow{u}=\\overrightarrow{AB}$, alors $-\\overrightarrow{u}=\\overrightarrow{BA}$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un port, le trajet $\\overrightarrow{AB}$ mesure $6$ m. Quelle est la longueur du vecteur $-\\frac{1}{2}\\overrightarrow{AB}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La longueur de $k\\overrightarrow{u}$ vaut $|k|$ fois celle de $\\overrightarrow{u}$ : ici $|-\\frac{1}{2}|\\times 6=3$ m. Le signe $-$ change seulement le sens. Une longueur est toujours positive.",
+                  "answers": [
+                    {
+                      "content": "$3$ m",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-3$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$-\\frac{1}{2}$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6$ m",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On donne $\\overrightarrow{u}$ non nul. Lesquelles des expressions suivantes sont colinéaires à $\\overrightarrow{u}$ ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Un multiple de $\\overrightarrow{u}$ reste sur la route de $\\overrightarrow{u}$. Un vecteur de même longueur mais d'une autre direction n'est pas sur cette route. La somme avec un vecteur perpendiculaire en sort aussi.",
+                  "answers": [
+                    {
+                      "content": "$5\\overrightarrow{u}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$-\\frac{2}{3}\\overrightarrow{u}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{v}$, de même longueur que $\\overrightarrow{u}$ mais de direction différente",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{u}+\\overrightarrow{v}$, où $\\overrightarrow{v}$ est non nul et perpendiculaire à $\\overrightarrow{u}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les points $A$, $B$, $C$ vérifient $\\overrightarrow{AC}=2\\overrightarrow{AB}$. Que peut-on dire ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\overrightarrow{AC}=2\\overrightarrow{AB}$ : les deux vecteurs ont la même direction, donc les points sont alignés. Le coefficient $2$ est positif, donc $C$ est du même côté que $B$. Comme $AC=2AB$, $B$ est à mi-chemin de $A$ et $C$. L'erreur la plus fréquente est de croire que $B$ n'est pas le milieu.",
+                  "answers": [
+                    {
+                      "content": "$A$, $B$, $C$ sont alignés, et $B$ est le milieu de $[AC]$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A$, $B$, $C$ sont alignés, mais $B$ n'est pas le milieu de $[AC]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$A$, $B$, $C$ ne sont pas alignés.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$B$ est confondu avec $C$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Montrer que des vecteurs sont colinéaires",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Le vecteur $\\overrightarrow{v}$ vérifie $\\overrightarrow{v}=-3\\overrightarrow{u}$. Lequel de ces énoncés est exact ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le coefficient $-3$ est négatif : sens contraire. Sa valeur absolue, $3$, dit que $\\overrightarrow{v}$ est trois fois plus long que $\\overrightarrow{u}$. Un coefficient négatif ne rend pas les vecteurs non colinéaires.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{u}$ et $\\overrightarrow{v}$ sont colinéaires, de sens contraires, et la longueur de $\\overrightarrow{v}$ est trois fois celle de $\\overrightarrow{u}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{u}$ et $\\overrightarrow{v}$ sont colinéaires et de même sens.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{u}$ et $\\overrightarrow{v}$ ont la même longueur.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{u}$ et $\\overrightarrow{v}$ ne sont pas colinéaires, car $-3$ est négatif.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $\\overrightarrow{AB}=\\frac{1}{4}\\overrightarrow{CD}$, alors $\\overrightarrow{AB}$ et $\\overrightarrow{CD}$ sont colinéaires.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $\\overrightarrow{AB}$ est un multiple de $\\overrightarrow{CD}$, par $\\frac{1}{4}$ : il est sur la même route, plus court, dans le même sens.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les vecteurs $\\overrightarrow{AB}$ et $\\overrightarrow{CD}$ sont colinéaires. Lesquelles de ces conclusions sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Des vecteurs colinéaires ont la même direction : les droites qui les portent sont parallèles ou confondues, et l'un est un multiple de l'autre. Rien n'impose des longueurs égales : $\\overrightarrow{CD}$ peut être deux fois plus long.",
+                  "answers": [
+                    {
+                      "content": "Les droites $(AB)$ et $(CD)$ sont parallèles ou confondues.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il existe un réel $k$ tel que $\\overrightarrow{CD}=k\\overrightarrow{AB}$, si $\\overrightarrow{AB}$ est non nul.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les longueurs $AB$ et $CD$ sont égales.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les droites $(AB)$ et $(CD)$ sont perpendiculaires.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour montrer que $A$, $B$, $C$ sont alignés, quelle méthode est correcte ?",
+                  "question_type": "single_choice",
+                  "explanation": "Si $\\overrightarrow{AC}=k\\overrightarrow{AB}$, les deux vecteurs ont la même direction : $C$ est sur la droite $(AB)$. L'erreur tentante est de comparer les longueurs. $AB=AC$ dit seulement que $B$ et $C$ sont à la même distance de $A$.",
+                  "answers": [
+                    {
+                      "content": "Montrer qu'il existe un réel $k$ tel que $\\overrightarrow{AC}=k\\overrightarrow{AB}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Montrer que $AB=AC$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Montrer que $\\overrightarrow{AB}=\\overrightarrow{AC}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Montrer que $\\overrightarrow{AB}$ et $\\overrightarrow{BC}$ sont perpendiculaires.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $\\overrightarrow{AB}=-2\\overrightarrow{CD}$ avec $\\overrightarrow{CD}$ non nul, alors les droites $(AB)$ et $(CD)$ sont parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $\\overrightarrow{AB}$ est un multiple de $\\overrightarrow{CD}$, donc les deux trajets ont la même direction. Le sens est contraire, car $-2$ est négatif.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le trajet $\\overrightarrow{AB}$ mesure $5$ m et $\\overrightarrow{CD}=\\frac{2}{3}\\overrightarrow{AB}$. Quelle est la longueur du trajet $\\overrightarrow{CD}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "La longueur de $\\frac{2}{3}\\overrightarrow{AB}$ vaut $\\frac{2}{3}$ fois celle de $\\overrightarrow{AB}$ : $\\frac{2}{3}\\times 5=\\frac{10}{3}$ m. L'erreur tentante est de prendre directement $\\frac{2}{3}$ m, en oubliant de multiplier la longueur.",
+                  "answers": [
+                    {
+                      "content": "$\\frac{10}{3}$ m, soit environ $3{,}33$ m",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\frac{2}{3}$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{1}{3}$ m",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\frac{4}{3}$ m",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Alignement et multiplication par un réel",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Dans un port, $\\overrightarrow{AB}$ est le trajet de la pirogue-guide. Le point $C$ vérifie $\\overrightarrow{BC}=-\\frac{1}{2}\\overrightarrow{AB}$. Où se trouve $C$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\overrightarrow{BC}=-\\frac{1}{2}\\overrightarrow{AB}=\\frac{1}{2}\\overrightarrow{BA}$ : $C$ est sur le trajet de $B$ vers $A$, à mi-chemin. L'erreur tentante est d'oublier le signe : $\\overrightarrow{BC}=\\frac{1}{2}\\overrightarrow{AB}$ placerait $C$ au-delà de $B$.",
+                  "answers": [
+                    {
+                      "content": "$C$ est le milieu de $[AB]$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$C$ est au-delà de $B$, à une distance de $B$ égale à la moitié de $AB$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$C$ est confondu avec $A$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$C$ n'est pas aligné avec $A$ et $B$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le plan, $\\overrightarrow{u}$ est non nul. On sait que $\\overrightarrow{v}=2\\overrightarrow{u}-\\overrightarrow{u}$ et $\\overrightarrow{w}=\\overrightarrow{u}+\\overrightarrow{u}$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$2\\overrightarrow{u}-\\overrightarrow{u}=\\overrightarrow{u}$ et $\\overrightarrow{u}+\\overrightarrow{u}=2\\overrightarrow{u}$ : on regroupe comme des nombres. $\\overrightarrow{v}$ et $\\overrightarrow{w}$ restent sur la route de $\\overrightarrow{u}$, dans le même sens.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{v}=\\overrightarrow{u}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{w}=2\\overrightarrow{u}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{v}$ et $\\overrightarrow{w}$ sont de sens contraires.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{w}$ est perpendiculaire à $\\overrightarrow{u}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans le parallélogramme $ABCD$, le point $F$ vérifie $\\overrightarrow{BF}=2\\overrightarrow{BC}$. Que peut-on dire de $B$, $C$, $F$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\overrightarrow{BF}=2\\overrightarrow{BC}$ : les vecteurs ont la même direction, donc les points sont alignés. Le trajet de $B$ à $F$ fait le double de celui de $B$ à $C$ : $C$ est donc à mi-chemin, milieu de $[BF]$. L'erreur tentante est de mettre $B$ au milieu : c'est le point de départ.",
+                  "answers": [
+                    {
+                      "content": "$B$, $C$, $F$ sont alignés, et $C$ est le milieu de $[BF]$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$B$, $C$, $F$ sont alignés, et $B$ est le milieu de $[CF]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$B$, $C$, $F$ ne sont pas alignés.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$F$ est confondu avec $D$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le trajet $\\overrightarrow{AB}$ mesure $12$ m, et $\\overrightarrow{CD}=-\\frac{3}{4}\\overrightarrow{AB}$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "La longueur de $\\overrightarrow{CD}$ vaut $\\frac{3}{4}\\times 12=9$ m. Le facteur négatif donne le sens contraire, et la colinéarité est acquise. L'erreur la plus fréquente est de croire que deux vecteurs colinéaires ont la même longueur.",
+                  "answers": [
+                    {
+                      "content": "$CD=9$ m.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{CD}$ et $\\overrightarrow{AB}$ sont colinéaires.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{CD}$ et $\\overrightarrow{AB}$ sont de sens contraires.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{CD}$ et $\\overrightarrow{AB}$ ont la même longueur.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{CD}=\\overrightarrow{AB}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $\\overrightarrow{AB}=-2\\overrightarrow{CD}$ avec $\\overrightarrow{CD}$ non nul, alors les droites $(AB)$ et $(CD)$ sont parallèles ou confondues.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. $\\overrightarrow{AB}$ est un multiple de $\\overrightarrow{CD}$ : les deux trajets ont la même direction. Le sens est contraire, car le coefficient est négatif.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une pirogue part du point $A$ et fait successivement le trajet $\\overrightarrow{u}$, puis le trajet $-2\\overrightarrow{u}$, à partir de son arrivée. Son arrivée finale est $B$. Quelle égalité est vraie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les deux trajets s'enchaînent : $\\overrightarrow{AB}=\\overrightarrow{u}+(-2\\overrightarrow{u})=-\\overrightarrow{u}$. La pirogue revient sur la route, dans le sens contraire. L'erreur tentante est d'additionner les coefficients sans tenir compte du signe, ou de croire que le total est nul.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{AB}=-\\overrightarrow{u}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}=3\\overrightarrow{u}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}=\\overrightarrow{0}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}=2\\overrightarrow{u}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Coordonnées dans un repère : vecteurs, milieu, colinéarité",
+          "subtitle": "Calculer un trajet et un milieu sur un plan quadrillé. À compléter : distance de deux points dans un repère orthonormé.",
+          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Lire les coordonnées d'un vecteur $\\overrightarrow{AB}$ à partir de celles de $A$ et de $B$.</li>\n<li>Calculer les coordonnées du milieu d'un segment.</li>\n<li>Dire si deux vecteurs sont colinéaires à partir de leurs coordonnées.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le plan quadrillé du port (les coordonnées).</strong> Sur le plan quadrillé du port, le capitaine repère chaque quai par deux nombres : combien de cases vers l'est, puis combien de cases vers le nord.</p>\n<p><em>Le pont.</em> Les deux nombres d'un quai sont ses coordonnées. Pour aller d'un quai à un autre, on compare l'arrivée au départ : « 5 cases de plus vers l'est, 1 case vers le sud ». Ces deux nombres sont les coordonnées du vecteur.</p>\n<p><em>Où l'image s'arrête.</em> Une case est une unité, mais les coordonnées peuvent être négatives ou décimales : le quadrillage ne montre qu'une petite partie du repère.</p>\n<p><strong>2. Le poste de secours à mi-chemin (le milieu).</strong> La mairie installe un poste de secours exactement à mi-chemin entre deux quais.</p>\n<p><em>Le pont.</em> Les coordonnées du milieu sont la moyenne des coordonnées des deux quais.</p>\n<p><em>Où l'image s'arrête.</em> La moyenne donne le milieu parce que ce point est au centre exact du trajet. Elle ne donnerait pas le point situé au tiers du trajet.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Vecteur.</strong> Si $A(x_A\\,;y_A)$ et $B(x_B\\,;y_B)$ dans un repère, alors $\\overrightarrow{AB}$ a pour coordonnées $(x_B-x_A\\,;\\,y_B-y_A)$ : l'arrivée moins le départ.</p>\n<p><strong>Milieu.</strong> Le milieu $I$ de $[AB]$ a pour coordonnées $\\left(\\frac{x_A+x_B}{2}\\,;\\,\\frac{y_A+y_B}{2}\\right)$.</p>\n<p><strong>Somme et produit.</strong> Si $\\overrightarrow{u}(x\\,;y)$ et $\\overrightarrow{v}(x'\\,;y')$, alors $\\overrightarrow{u}+\\overrightarrow{v}$ a pour coordonnées $(x+x'\\,;\\,y+y')$, et $k\\overrightarrow{u}$ a pour coordonnées $(kx\\,;\\,ky)$.</p>\n<p><strong>Colinéarité.</strong> $\\overrightarrow{u}(x\\,;y)$ et $\\overrightarrow{v}(x'\\,;y')$ sont colinéaires si et seulement si $xy'-yx'=0$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Dans un repère, $A(1\\,;2)$, $B(4\\,;6)$ et $C(7\\,;10)$. Montrer que $A$, $B$, $C$ sont alignés, puis que $B$ est le milieu de $[AC]$.</strong></p>\n<ol>\n<li>$\\overrightarrow{AB}$ a pour coordonnées $(4-1\\,;6-2)=(3\\,;4)$.</li>\n<li>$\\overrightarrow{AC}$ a pour coordonnées $(7-1\\,;10-2)=(6\\,;8)$.</li>\n<li>Critère de colinéarité : $3\\times 8-4\\times 6=24-24=0$. Les vecteurs sont colinéaires, donc $A$, $B$, $C$ sont alignés.</li>\n<li>On remarque $(6\\,;8)=2\\times(3\\,;4)$ : $\\overrightarrow{AC}=2\\overrightarrow{AB}$.</li>\n<li>Milieu de $[AC]$ : $\\left(\\frac{1+7}{2}\\,;\\frac{2+10}{2}\\right)=(4\\,;6)$, qui sont les coordonnées de $B$. Donc $B$ est le milieu de $[AC]$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Confondre les deux formules. Le vecteur utilise une différence : arrivée moins départ. Le milieu utilise une somme, puis une division par $2$. Pour le repérer, demande-toi si tu cherches un trajet ou un point.</p>\n<h2>En une phrase</h2>\n<p>Dans un repère, un trajet a pour coordonnées l'arrivée moins le départ ; le milieu a pour coordonnées la moyenne ; deux vecteurs sont colinéaires quand $xy'-yx'=0$.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Lire les coordonnées d'un vecteur",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans un repère, $A(2\\,;3)$ et $B(5\\,;1)$. Quelles sont les coordonnées de $\\overrightarrow{AB}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On prend l'arrivée moins le départ : $x_B-x_A=5-2=3$ et $y_B-y_A=1-3=-2$. $(7\\,;4)$ additionne les coordonnées. $(-3\\,;2)$ inverse le sens. $(3\\,;2)$ oublie le signe de la seconde différence.",
+                  "answers": [
+                    {
+                      "content": "$(3\\,;-2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(7\\,;4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-3\\,;2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(3\\,;2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, le vecteur $\\overrightarrow{AB}$ a pour coordonnées $(x_B-x_A\\,;\\,y_B-y_A)$.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Pour savoir où l'on va, on regarde de combien l'abscisse et l'ordonnée changent entre le départ et l'arrivée.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les vecteurs $\\overrightarrow{AB}$ et $\\overrightarrow{BA}$ ont des coordonnées opposées.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Si $\\overrightarrow{AB}$ a pour coordonnées $(3\\,;-2)$, alors $\\overrightarrow{BA}$ a pour coordonnées $(-3\\,;2)$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $\\overrightarrow{u}(-4\\,;\\,0)$. Que peut-on dire de $\\overrightarrow{u}$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Une ordonnée nulle signifie aucun déplacement vertical : le vecteur est horizontal. L'abscisse $-4$ indique un déplacement de $4$ unités vers la gauche. L'erreur tentante est de confondre abscisse et ordonnée.",
+                  "answers": [
+                    {
+                      "content": "Il est horizontal, et va vers la gauche sur $4$ unités.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est vertical.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est nul.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est égal à $\\overrightarrow{v}(0\\,;4)$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, le vecteur $\\overrightarrow{AB}$ a pour coordonnées $(0\\,;5)$. Quel est son trajet ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'abscisse est nulle : pas de déplacement horizontal. L'ordonnée $5$ est positive : on monte de $5$ unités. Une coordonnée nulle ne rend pas le vecteur nul, qui exige les deux coordonnées nulles.",
+                  "answers": [
+                    {
+                      "content": "Vertical, vers le haut, sur $5$ unités.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Horizontal, vers la droite, sur $5$ unités.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Vertical, vers le bas, sur $5$ unités.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il est nul, car une coordonnée est nulle.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer un milieu et tester la colinéarité",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans un repère, $A(-1\\,;4)$ et $B(3\\,;-2)$. Quelles sont les coordonnées du milieu $I$ de $[AB]$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "On fait la moyenne : $x_I=\\frac{-1+3}{2}=1$ et $y_I=\\frac{4+(-2)}{2}=1$. $(2\\,;2)$ oublie la division par $2$. $(-2\\,;1)$ soustrait au lieu d'ajouter. $(1\\,;2)$ oublie le signe de $-2$.",
+                  "answers": [
+                    {
+                      "content": "$(1\\,;1)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2\\,;2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-2\\,;1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(2\\,;-1)$ et $\\overrightarrow{AB}(4\\,;3)$. Quelles sont les coordonnées de $B$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pour aller de $A$ à $B$, on ajoute le vecteur : $x_B=2+4=6$ et $y_B=-1+3=2$. $(4\\,;3)$ confond le trajet et l'arrivée. $(-2\\,;-4)$ soustrait au lieu d'ajouter.",
+                  "answers": [
+                    {
+                      "content": "$(6\\,;2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(-2\\,;-4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(6\\,;-4)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(4\\,;3)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(0\\,;0)$, $B(4\\,;2)$ et $C(2\\,;-1)$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Le milieu de $[AB]$ est $(\\frac{0+4}{2}\\,;\\frac{0+2}{2})=(2\\,;1)$. $\\overrightarrow{AC}$ vaut $(2-0\\,;-1-0)=(2\\,;-1)$. Pour $\\overrightarrow{BC}$, on obtient $(2-4\\,;-1-2)=(-2\\,;-3)$. Le milieu de $[BC]$ a une ordonnée $\\frac{2+(-1)}{2}=\\frac{1}{2}$.",
+                  "answers": [
+                    {
+                      "content": "Le milieu de $[AB]$ a pour coordonnées $(2\\,;1)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AC}$ a pour coordonnées $(2\\,;-1)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{BC}$ a pour coordonnées $(2\\,;3)$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le milieu de $[BC]$ a pour coordonnées $(3\\,;1)$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Les vecteurs $\\overrightarrow{u}(2\\,;3)$ et $\\overrightarrow{v}(4\\,;6)$ sont colinéaires.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : $2\\times 6-3\\times 4=0$. Et $(4\\,;6)=2\\times(2\\,;3)$, donc $\\overrightarrow{v}=2\\overrightarrow{u}$.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(1\\,;1)$, $B(3\\,;5)$ et $C(4\\,;7)$. Quelle affirmation est exacte ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\overrightarrow{AB}(2\\,;4)$ et $\\overrightarrow{AC}(3\\,;6)$ : $2\\times 6-4\\times 3=0$. Les points sont alignés. L'erreur tentante est de croire que $B$ est le milieu, alors que celui de $[AC]$ a pour coordonnées $(\\frac{5}{2}\\,;4)$.",
+                  "answers": [
+                    {
+                      "content": "$A$, $B$, $C$ sont alignés.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$A$, $B$, $C$ ne sont pas alignés.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$B$ est le milieu de $[AC]$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AB}=\\overrightarrow{BC}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $\\overrightarrow{u}(3\\,;k)$ et $\\overrightarrow{v}(6\\,;-4)$. Pour quelle valeur de $k$ ces vecteurs sont-ils colinéaires ?",
+                  "question_type": "single_choice",
+                  "explanation": "Colinéaires si $3\\times(-4)-k\\times 6=0$, soit $-12-6k=0$, donc $k=-2$. Vérification : $(6\\,;-4)=2\\times(3\\,;-2)$. L'erreur tentante est d'écrire $k=2$ en oubliant le signe lors de la résolution.",
+                  "answers": [
+                    {
+                      "content": "$k=-2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$k=2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$k=-8$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$k=4$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Problème de repérage du port",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Dans un repère, $A(1\\,;2)$ est un quai et $B(5\\,;6)$ un autre quai. $M$ est le milieu de $[AB]$. Quelles sont les coordonnées de $M$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$x_M=\\frac{1+5}{2}=3$ et $y_M=\\frac{2+6}{2}=4$. $(6\\,;8)$ est la somme, sans division. $(2\\,;2)$ sont les coordonnées de $\\overrightarrow{AM}$, qui donnent le trajet, pas le point. $(4\\,;4)$ est le vecteur $\\overrightarrow{AB}$.",
+                  "answers": [
+                    {
+                      "content": "$(3\\,;4)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(6\\,;8)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(2\\,;2)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(4\\,;4)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(1\\,;2)$ et $B(5\\,;6)$. Le point $C$ a pour coordonnées $(9\\,;10)$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "$\\overrightarrow{AC}$ a pour coordonnées $(9-1\\,;10-2)=(8\\,;8)$, et $\\overrightarrow{AB}=(4\\,;4)$ : $\\overrightarrow{AC}=2\\overrightarrow{AB}$. Les points sont donc alignés. $\\overrightarrow{BC}=(4\\,;4)$ aussi, donc $B$ est le milieu de $[AC]$. L'erreur tentante est de confondre les coordonnées de $C$ avec celles de $\\overrightarrow{AC}$.",
+                  "answers": [
+                    {
+                      "content": "$A$, $B$, $C$ sont alignés.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$B$ est le milieu de $[AC]$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{AC}=\\overrightarrow{AB}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{AC}$ a pour coordonnées $(9\\,;10)$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, un bateau part de $A(0\\,;0)$ et suit deux fois le vecteur $\\overrightarrow{u}(3\\,;-1)$. Où arrive-t-il ?",
+                  "question_type": "single_choice",
+                  "explanation": "Deux trajets identiques s'ajoutent : l'arrivée est $A+2\\overrightarrow{u}=(0+6\\,;0-2)=(6\\,;-2)$. Un seul trajet amènerait en $(3\\,;-1)$. Un signe négatif donnerait $(-6\\,;2)$.",
+                  "answers": [
+                    {
+                      "content": "$(6\\,;-2)$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(3\\,;-1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(6\\,;-1)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(-6\\,;2)$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $\\overrightarrow{u}(2\\,;-3)$ et $\\overrightarrow{v}(-4\\,;6)$. Lesquelles des affirmations sont exactes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Chaque coordonnée de $\\overrightarrow{v}$ est $-2$ fois celle de $\\overrightarrow{u}$ : les vecteurs sont colinéaires et de sens contraires. Leur somme vaut $(2-4\\,;-3+6)=(-2\\,;3)$. Ici $\\overrightarrow{v}$ est deux fois plus long, et non de même longueur.",
+                  "answers": [
+                    {
+                      "content": "$\\overrightarrow{u}$ et $\\overrightarrow{v}$ sont colinéaires.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{v}=-2\\overrightarrow{u}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{u}+\\overrightarrow{v}$ a pour coordonnées $(-2\\,;3)$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "$\\overrightarrow{u}$ et $\\overrightarrow{v}$ sont de même sens.",
+                      "correct": false
+                    },
+                    {
+                      "content": "$\\overrightarrow{v}$ a la même longueur que $\\overrightarrow{u}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Si $\\overrightarrow{AB}(0\\,;4)$ et $\\overrightarrow{CD}(0\\,;-7)$, alors les droites $(AB)$ et $(CD)$ sont parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai : $0\\times(-7)-4\\times 0=0$. Les deux vecteurs sont verticaux, donc les droites $(AB)$ et $(CD)$ sont parallèles ou confondues.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un repère, $A(1\\,;1)$ et $B(3\\,;2)$. Le point $C$ vérifie $\\overrightarrow{BC}=\\frac{1}{2}\\overrightarrow{AB}$. Quelles sont les coordonnées de $C$ ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\overrightarrow{AB}(2\\,;1)$, donc $\\overrightarrow{BC}$ a pour coordonnées $(1\\,;\\frac{1}{2})$. Comme $C=B+\\overrightarrow{BC}$, on obtient $C(4\\,;\\frac{5}{2})$. Partir de $A$ donne $(2\\,;\\frac{3}{2})$. $(5\\,;3)$ utilise le vecteur entier. $(1\\,;\\frac{1}{2})$ est le vecteur $\\overrightarrow{BC}$, pas le point.",
+                  "answers": [
+                    {
+                      "content": "$(4\\,;\\frac{5}{2})$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$(2\\,;\\frac{3}{2})$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(5\\,;3)$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$(1\\,;\\frac{1}{2})$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

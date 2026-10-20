@@ -1,6 +1,6 @@
 // ⚡ FRONT · assessment/next_question_controller — « Question suivante » sans requête : la question arrivée avec le verdict
 // Rôle : remplace le frame « question » par celui du <template> joint au verdict, puis met le focus sur l'énoncé
-// UDR  : 0076 §3.3 · ADR : 0076 · sans question jointe, ou sans JavaScript, le lien charge la session comme avant
+// UDR  : 0076 §3.3, 0087 §3.2 (« n/T » de l'en-tête suit) · ADR : 0076 · sans question jointe, ou sans JavaScript, le lien charge la session
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -13,6 +13,9 @@ export default class extends Controller {
     event.preventDefault()
     const question = document.importNode(frame, true)
     this.element.closest("turbo-frame#question").replaceWith(question)
+    const counter = question.querySelector("[data-counter]")?.dataset.counter
+    const shown = document.querySelector("#progress_counter [data-counter]")
+    if (counter && shown) shown.textContent = counter
     // Le bouton cliqué a disparu : le focus va à l'énoncé de la nouvelle question, jamais dans le vide.
     const legend = question.querySelector("legend")
     legend?.setAttribute("tabindex", "-1")

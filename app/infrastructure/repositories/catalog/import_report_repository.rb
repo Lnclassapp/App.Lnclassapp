@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::ImportReportRepository
 # Rôle : rapports d'import ; un seul en cours par type (index partiel), progression et bilan persistés
-# ADR  : 0039, 0068
+# ADR  : 0039, 0068, 0096
 module Repositories
   module Catalog
     class ImportReportRepository
@@ -8,9 +8,9 @@ module Repositories
 
       Kind = Entities::Catalog::ImportKind
 
-      def create(kind:, checksum_sha256:, imported_by_id:, at:, files: [])
+      def create(kind:, checksum_sha256:, imported_by_id:, at:, files: [], details: {})
         record = Orm::ImportReport.new(kind:, checksum_sha256:, imported_by_id:, status: "queued", files: files.map { dump_file(it) },
-                                       created_at: at, updated_at: at)
+                                       details:, created_at: at, updated_at: at)
         # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::ImportReport.transaction(requires_new: true) { record.save! }
         ::Shared::Result.success(map_to_entity(record))
@@ -28,8 +28,9 @@ module Repositories
         record && map_to_entity(record)
       end
 
+      # Le dernier signe de vie d'un rapport en cours est son updated_at (rafraîchi par claim, resume et advance), pas son début.
       def fail_stale(kind:, before:, at:)
-        running = Orm::ImportReport.where(status: %w[validating importing], started_at: ...before)
+        running = Orm::ImportReport.where(status: %w[validating importing], updated_at: ...before)
         never_claimed = Orm::ImportReport.where(status: "queued", created_at: ...before)
         Orm::ImportReport.where(kind:).merge(running.or(never_claimed))
                          .update_all(status: "failed", finished_at: at, updated_at: at)
@@ -40,23 +41,32 @@ module Repositories
                          .update_all(status: "validating", started_at: at, updated_at: at) == 1
       end
 
+      def resume(id:, at:)
+        Orm::ImportReport.where(id:, status: %w[validating importing]).update_all(started_at: at, updated_at: at) == 1
+      end
+
       def advance(id:, status:, processed_count:, format_version: nil)
         changes = { status:, processed_count:, updated_at: Time.current }
         changes[:format_version] = format_version if format_version
-        Orm::ImportReport.where(id:).update_all(changes)
-        true
+        Orm::ImportReport.where(id:, status: Entities::Catalog::ImportReport::RUNNING).update_all(changes) == 1
       end
 
       def finish(id:, status:, counts:, details:, errors:, at:, files: nil)
+        log_unreadable(id, errors)
         changes = { status:, **counts.slice(:total_count, :imported_count, :skipped_count, :error_count), details:,
                     import_errors: errors.first(Kind::MAX_ERRORS).map { |error| error.to_h.transform_keys(&:to_s) },
                     finished_at: at, updated_at: at }
         changes[:files] = files.map { dump_file(it) } unless files.nil?
-        Orm::ImportReport.where(id:).update_all(changes)
-        true
+        Orm::ImportReport.where(id:, status: Entities::Catalog::ImportReport::RUNNING).update_all(changes) == 1
       end
 
       private
+
+      # Un texte trop complexe à relire (menace.md, n° 13) : le rapport et le chemin sont nommés au journal, jamais le contenu.
+      def log_unreadable(id, errors)
+        paths = errors.select { it.code == "image_slots_unreadable" }.map(&:path)
+        Rails.logger.warn("[ImportReportRepository] image_slots_unreadable report=#{id} paths=#{paths.first(20)}") if paths.any?
+      end
 
       def map_to_entity(record)
         Entities::Catalog::ImportReport.new(
@@ -65,7 +75,7 @@ module Repositories
           skipped_count: record.skipped_count, error_count: record.error_count, processed_count: record.processed_count,
           details: record.details, import_errors: record.import_errors.map { |error| map_error(error) },
           imported_by_id: record.imported_by_id, started_at: record.started_at, finished_at: record.finished_at,
-          files: record.files.map { |file| map_file(file) }
+          files: record.files.map { |file| map_file(file) }, created_at: record.created_at
         )
       end
 
