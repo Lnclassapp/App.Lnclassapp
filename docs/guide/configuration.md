@@ -68,6 +68,28 @@ Chaque environnement Railway déploie seul la branche qu'il suit : Develop ← `
 
 **Les réglages d'un service de Staging ou de production (région, source, répertoire racine) se changent au tableau de bord, jamais par l'API ni par un agent** : une modification validée par l'API réécrit les déclencheurs GitHub du service sans autorisation GitHub, et les merges ne déploient plus (journal de `politique-cache`, 2026-10-07).
 
+### Environnements de PR (Railway)
+
+Variables posées **sur Develop**, non scellées, que Railway copie dans l'environnement de chaque PR. Staging et production ne les portent pas : rien n'y change (ADR-0108).
+
+| Variable | Rôle | Si absente |
+|---|---|---|
+| `PR_BASE_ENVIRONMENT` | Nom de l'environnement dont les PR héritent : `Develop`. Un environnement dont `RAILWAY_ENVIRONMENT_NAME` diffère de cette valeur est un environnement de PR (`PrEnvironment.active?`, `config/pr_environment.rb`) | Aucun environnement de PR : ni mot de passe, ni adaptateur `async`, le worker Solid Queue tourne dans Puma comme avant (ADR-0052) |
+| `PR_ACCESS_PASSWORD` | Mot de passe commun (Basic HTTP, identifiant libre) qui ferme toute page d'un environnement de PR, avant le routeur. Seul `/up` reste libre, pour le contrôle de santé de Railway | **Tout est refusé (401) dans l'environnement de PR**, sauf `/up` : un oubli ferme l'accès. Sans effet hors environnement de PR. Le changer sur Develop ne vaut que pour les PR (re)déployées ensuite |
+
+Dans un environnement de PR, les tâches de fond s'exécutent dans le processus web (Active Job `async`) et les tâches planifiées ne tournent pas.
+
+Au démarrage, un environnement de PR l'écrit dans le journal (`[config] PR environment (base …, name …)`), avec un avertissement si `PR_ACCESS_PASSWORD` manque.
+
+**Renommer ou dupliquer Develop** : la comparaison tient compte de la casse. Develop renommé garde la variable à son nouveau nom ; une copie durable de Develop (recette, démo) perd la variable, sinon elle devient « environnement de PR » : mot de passe, et comptes de test au PIN connu semés dans sa base (ADR-0108 §5).
+
+**Réglages Railway, au tableau de bord (hors dépôt, tenus par le porteur) :**
+
+1. *Project Settings › Environments* : PR Environments activés, base `Develop` ; Bot PR Environments et Focused PR Environments **désactivés**.
+2. Variables de Develop : `PR_BASE_ENVIRONMENT=Develop` et `PR_ACCESS_PASSWORD=<mot de passe choisi>`, non scellées. Vérifier qu'aucune variable indispensable n'est scellée (`RAILS_MASTER_KEY`, `DATABASE_URL`, `BUCKET_*`) : elle manquerait dans les PR.
+3. *Service web de Develop › Settings › Deploy › Serverless* : activé. Les PR en héritent ; Develop reste éveillé grâce à son worker.
+4. Après la fusion du chantier : ouvrir une PR d'essai, constater les données, le mot de passe et la veille, et vérifier dans le journal que le stockage de fichiers de la PR n'est pas celui de Develop.
+
 ### Facultatives — réglage de charge
 
 Toutes ont une valeur par défaut raisonnable. À ne toucher qu'avec une mesure à l'appui.

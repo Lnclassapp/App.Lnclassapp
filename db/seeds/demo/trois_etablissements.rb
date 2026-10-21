@@ -1,4 +1,5 @@
-# Trois établissements de test, développement seulement (chantier tester-pr-en-local) : bin/tester-pr <PR> --demo, ou
+# Trois établissements de test, développement et environnements de PR seulement (chantiers tester-pr-en-local et
+# environnements-de-pr, ADR-0108) : bin/tester-pr <PR> --demo, ou
 # bin/rails runner db/seeds/demo/trois_etablissements.rb. Chacun a 3 classes par niveau de la 6ème à la Tle, de 35 à 45
 # élèves par classe, un chef d'établissement, et les 6 enseignants de chaque classe, un par matière : l'EDHC au collège,
 # la philosophie au lycée (décision du porteur du 2026-10-21) ; l'EDHC est ajoutée aux matières de la base si elle manque.
@@ -7,7 +8,7 @@
 # Insertions groupées, en une transaction : quelques secondes. Rejoué, il ne crée rien de plus. PIN 2468 partout (ADR-0034).
 # Contacts : direction 073S000001, enseignants 053S0000TT, élèves 013S00CCEE (S établissement, T enseignant, C classe,
 # E élève dans la classe).
-raise "db/seeds/demo/trois_etablissements.rb est réservé au développement" unless Rails.env.development?
+raise "db/seeds/demo/trois_etablissements.rb est réservé au développement et aux environnements de PR" unless Rails.env.development? || PrEnvironment.active?
 
 SCHOOLS = [ [ "Test — Lycée Moderne Les Cocotiers", "LMC" ], [ "Test — Collège Le Baobab", "CLB" ],
             [ "Test — Lycée Mixte La Lagune", "LML" ] ].freeze
