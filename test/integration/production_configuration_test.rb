@@ -17,13 +17,36 @@ class ProductionConfigurationTest < ActiveSupport::TestCase
       "custom_host" => call.("https://lnclass.app/up").status,
       "hosts" => app.config.hosts.map(&:to_s),
       "queue_adapter" => app.config.active_job.queue_adapter.to_s,
+      "gate_installed" => app.config.middleware.map(&:name).include?("PrEnvironment::Gate"),
       "csp" => call.("https://lnclass.up.railway.app/up").headers["content-security-policy"].to_s,
       "default_locale" => I18n.default_locale.to_s,
       "raise_on_missing_translations" => app.config.i18n.raise_on_missing_translations
     }
   RUBY
 
+  # ADR-XXXX : the same boot as a PR environment of Develop. The mission page is served without a password
+  # in production, so a 401 can only come from the gate.
+  PR_PROBE = <<~RUBY
+    app = Rails.application
+    call = ->(url, auth = nil) { Rack::MockRequest.new(app).get(url, { "HTTP_HOST" => URI(url).host }.merge(auth ? { "HTTP_AUTHORIZATION" => ActionController::HttpAuthentication::Basic.encode_credentials("anyone", auth) } : {})) }
+    page = "https://lnclass.up.railway.app/mission"
+    {
+      "queue_adapter" => app.config.active_job.queue_adapter.to_s,
+      "gate_first" => app.config.middleware.first.name,
+      "without_password" => call.(page).then { |r| [ r.status, r.headers["www-authenticate"].to_s ] },
+      "wrong_password" => call.(page, "wrong").status,
+      "right_password" => call.(page, "secret").status,
+      "up" => call.("http://healthcheck.railway.app/up").status
+    }
+  RUBY
+
   RAILWAY = { "RAILWAY_PUBLIC_DOMAIN" => "lnclass.up.railway.app", "APP_HOSTS" => "lnclass.app, www.lnclass.app" }.freeze
+
+  PR = RAILWAY.merge("PR_BASE_ENVIRONMENT" => "Develop", "RAILWAY_ENVIRONMENT_NAME" => "lnclass-pr-276").freeze
+
+  def pr_environment
+    @@pr_environment ||= EnvironmentProbe.run("production", PR_PROBE, env: PR.merge("PR_ACCESS_PASSWORD" => "secret"))
+  end
 
   def production
     @@production ||= EnvironmentProbe.run("production", PROBE, env: RAILWAY)
@@ -70,6 +93,30 @@ class ProductionConfigurationTest < ActiveSupport::TestCase
 
   test "jobs go to Solid Queue" do
     assert_equal "solid_queue", production["queue_adapter"]
+  end
+
+  test "without PR_BASE_ENVIRONMENT, production asks for no password and keeps Solid Queue" do
+    assert_not production["gate_installed"]
+    assert_equal 200, production["http_page"].first
+  end
+
+  test "a PR environment is closed by its password, except /up, and runs jobs in the web process" do
+    pr = pr_environment
+
+    assert_equal "async", pr["queue_adapter"]
+    assert_equal "PrEnvironment::Gate", pr["gate_first"]
+    assert_equal [ 401, 'Basic realm="Lnclass PR"' ], pr["without_password"]
+    assert_equal 401, pr["wrong_password"]
+    assert_equal 200, pr["right_password"]
+    assert_equal 200, pr["up"]
+  end
+
+  test "a PR environment without PR_ACCESS_PASSWORD refuses every page but /up" do
+    pr = EnvironmentProbe.run("production", PR_PROBE, env: PR)
+
+    assert_equal 401, pr["right_password"], "no password is the right one when none is set"
+    assert_equal 401, pr["without_password"].first
+    assert_equal 200, pr["up"]
   end
 
   test "the CSP is enforced in production too" do

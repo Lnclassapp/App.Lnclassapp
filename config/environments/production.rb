@@ -51,7 +51,11 @@ Rails.application.configure do
 
   # Replace the default in-process and non-durable queuing backend for Active Job.
   # ADR-0052 : the worker runs inside Puma (config/puma.rb); tables in the primary database.
-  config.active_job.queue_adapter = :solid_queue
+  # ADR-XXXX : in a Railway PR environment (so that it can sleep) jobs run in the web process instead.
+  config.active_job.queue_adapter = PrEnvironment.active? ? :async : :solid_queue
+
+  # ADR-XXXX : a PR environment is closed by a shared password (PR_ACCESS_PASSWORD), before the router. /up stays open.
+  config.middleware.insert_before 0, PrEnvironment::Gate if PrEnvironment.active?
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
