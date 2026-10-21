@@ -1,7 +1,8 @@
 # ADR-0034: fictitious accounts and content for local development, PIN 2468 everywhere — a team member with a
 # second factor, an onboarded SVT teacher of « Tle D 1 », a student of that classroom, and a published course
-# with one essential and one exercise of 2 questions. Idempotent by contact and by name.
-raise "db/seeds/development.rb est réservé au développement" unless Rails.env.development?
+# with one essential and one exercise of 2 questions. Idempotent by contact and by name. Also played in a PR
+# environment, which runs in production (ADR-XXXX).
+raise "db/seeds/development.rb est réservé au développement et aux environnements de PR" unless Rails.env.development? || PrEnvironment.active?
 
 pin = "2468"
 account = lambda do |contact, **attributes|

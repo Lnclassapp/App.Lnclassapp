@@ -1,7 +1,7 @@
 # ADR-0034 : Aucune reprise de l'ancienne base ; la taxonomie, les DRENA et les établissements sont créés par l'équipe dès la V1, les seeds ne servent qu'en développement et en test
 <!-- index
 titre: Aucune reprise de l'ancienne base ; la taxonomie, les DRENA et les établissements sont créés par l'équipe dès la V1, les seeds ne servent qu'en développement et en test
-statut: Accepté — *amendé par [0066](./0066-import-des-drena-et-slug-prefixe.md) (DRENA aussi par import)*
+statut: Accepté — *amendé par [0066](./0066-import-des-drena-et-slug-prefixe.md) (DRENA aussi par import) et par [XXXX](./XXXX-environnements-de-pr-reconnus-par-l-application.md) (seeds d'un environnement de PR)*
 problematique: Niveaux, séries, `level_series`, matières, DRENA et établissements créés par l'équipe en V1 (établissements aussi par import) ; aucun seed métier en production ; préalable : aucune donnée réelle. F-12.
 -->
 
@@ -12,7 +12,7 @@ problematique: Niveaux, séries, `level_series`, matières, DRENA et établissem
 | **Chantier** | `docs/chantiers/refonte-application` — décision de fondation **F-12**, bloque la V1 |
 | **Remplace** | — |
 | **Remplacé par** | — |
-| **Amendé par** | [ADR-0066](./0066-import-des-drena-et-slug-prefixe.md) |
+| **Amendé par** | [ADR-0066](./0066-import-des-drena-et-slug-prefixe.md) · [ADR-XXXX](./XXXX-environnements-de-pr-reconnus-par-l-application.md) |
 
 ---
 
@@ -140,3 +140,10 @@ raise "db/seeds/catalog.rb est réservé au développement et au test" unless Ra
 
 - Lnclass ne propose pas l'Anglais. Le référentiel de développement et de test compte **six matières** : Mathématiques, Physique-Chimie, SVT, Français, Histoire-Géographie, Philosophie. `db/seeds/catalog.rb` et `test/support/factories/catalog.rb` le suivent ; `test/support/factories_test.rb` le vérifie.
 - La production n'a pas de seed (§4) : l'équipe ne crée pas d'Anglais à l'écran. Les tests qui écrivent « Anglais » comme nom de matière quelconque (création par l'équipe, tri par nom) restent, ce sont des données d'exemple.
+
+## Amendement du 2026-10-21 — les seeds d'un environnement de PR
+
+*Chantier [`environnements-de-pr`](../../chantiers/environnements-de-pr/memo.md), [ADR-XXXX](./XXXX-environnements-de-pr-reconnus-par-l-application.md). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+
+- **Un environnement de PR sème comme le développement.** Railway le fait tourner en `production` ; `PrEnvironment.active?` (`PR_BASE_ENVIRONMENT` posée et différente de `RAILWAY_ENVIRONMENT_NAME`) le distingue. `db/seeds.rb` joue alors `identity`, `catalog`, `school` et `development`, puis `db/seeds/demo/trois_etablissements.rb` : référentiel, DRENA, comptes fictifs (PIN 2468) et trois établissements de test.
+- **Gardes.** `catalog.rb` et `school.rb` lèvent une erreur hors développement, test et environnement de PR ; `development.rb` et `trois_etablissements.rb` hors développement et environnement de PR. Sans les variables de PR, la production, Staging et Develop ne sèment toujours que l'identité.
