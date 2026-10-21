@@ -27,11 +27,11 @@ class TesterPrTest < ActiveSupport::TestCase
       assert_raises(RuntimeError, "détaché : HEAD ne nomme aucune branche") { git(clone, "symbolic-ref", "-q", "HEAD") }
       assert_equal "Develop", git(clone, "branch", "--format=%(refname:short)").lines(chomp: true).grep_v(/HEAD/).join(","),
                    "aucune branche locale créée"
-      assert_equal [ "bin/setup --skip-server", "bin/rails db:seed", "bin/dev BINDING=" ], calls(clone)
+      assert_equal [ "bin/setup --skip-server", "bin/rails db:migrate:status", "bin/rails db:seed", "bin/dev BINDING=" ], calls(clone)
       assert_includes output, "PR n° 7"
       assert_includes output, "http://localhost:3000"
       assert_includes output, "PIN 2468"
-      assert_includes output, "git switch -"
+      assert_includes output, "Pour revenir à ta branche ensuite : git switch Develop"
     end
   end
 
@@ -49,7 +49,8 @@ class TesterPrTest < ActiveSupport::TestCase
       output, status = tester_pr(clone, "--telephone", "7", "--reset")
 
       assert status.success?, output
-      assert_equal [ "bin/setup --skip-server --reset", "bin/rails db:seed", "bin/dev BINDING=0.0.0.0" ], calls(clone)
+      assert_equal [ "bin/setup --skip-server --skip-db", "bin/rails db:reset", "bin/rails db:seed", "bin/dev BINDING=0.0.0.0" ],
+                   calls(clone), "la base recréée sans jouer d'abord les migrations de la PR"
       assert_match(%r{Téléphone \(même Wi-Fi\) : http://\S+:3000}, output)
     end
   end
@@ -59,10 +60,41 @@ class TesterPrTest < ActiveSupport::TestCase
       output, status = tester_pr(clone, "7", "--demo", "--activite")
 
       assert status.success?, output
-      assert_equal [ "bin/setup --skip-server", "bin/rails db:seed", "bin/rails runner db/seeds/demo/trois_etablissements.rb",
+      assert_equal [ "bin/setup --skip-server", "bin/rails db:migrate:status", "bin/rails db:seed",
+                     "bin/rails runner db/seeds/demo/trois_etablissements.rb",
                      "bin/rails runner db/seeds/demo/saint_michel.rb", "bin/dev BINDING=" ], calls(clone)
       assert_includes output, "ex. 0131000101"
       assert_includes output, "élèves de la Tle D 1 0110000001 à 0110000020"
+    end
+  end
+
+  test "a second run still names the branch to come back to; a failure after the checkout says where the owner stands" do
+    in_clone do |clone, commits|
+      tester_pr(clone, "7")
+      output, status = tester_pr(clone, "feature/x")
+
+      assert status.success?, output
+      assert_equal commits[:branch], head(clone)
+      assert_includes output, "Pour revenir à ta branche ensuite : git switch Develop"
+
+      File.write(File.join(clone, "calls.log"), "")
+      output, status = tester_pr(clone, "7", "FAIL_SETUP" => "1")
+      assert_not status.success?
+      assert_includes output, "Arrêt : tu restes sur le code de la PR n° 7. Pour revenir à ta branche : git switch Develop"
+      assert_equal [ "bin/setup --skip-server" ], calls(clone), "ni seed ni serveur après l'échec"
+    end
+  end
+
+  test "an untracked file the code would load or play, a migration not added yet, stops it too" do
+    in_clone do |clone, commits|
+      FileUtils.mkdir_p(File.join(clone, "db/migrate"))
+      File.write(File.join(clone, "db/migrate/20991231000000_draft.rb"), "")
+      output, status = tester_pr(clone, "7")
+
+      assert_not status.success?
+      assert_includes output, "db/migrate/20991231000000_draft.rb"
+      assert_equal commits[:base], head(clone)
+      assert_empty calls(clone)
     end
   end
 
@@ -94,7 +126,8 @@ class TesterPrTest < ActiveSupport::TestCase
   end
 
   def tester_pr(clone, *args)
-    env = ENV.keys.grep(/\AGIT_/).to_h { [ it, nil ] }.merge("PORT" => nil, "BINDING" => nil)
+    stubs = args.last.is_a?(Hash) ? args.pop : {}
+    env = ENV.keys.grep(/\AGIT_/).to_h { [ it, nil ] }.merge("PORT" => nil, "BINDING" => nil, "FAIL_SETUP" => nil).merge(stubs)
     Open3.capture2e(env, File.join(clone, "bin/tester-pr"), *args, chdir: clone)
   end
 
@@ -134,7 +167,8 @@ class TesterPrTest < ActiveSupport::TestCase
       FileUtils.cp(SCRIPT, File.join(clone, "bin/tester-pr"))
       { "setup" => "bin/setup $*", "rails" => "bin/rails $*", "dev" => "bin/dev BINDING=$BINDING" }.each do |name, call|
         stub = File.join(clone, "bin", name)
-        File.write(stub, "#!/usr/bin/env bash\necho \"#{call}\" >> \"$(dirname \"$0\")/../calls.log\"\n")
+        File.write(stub, "#!/usr/bin/env bash\necho \"#{call}\" >> \"$(dirname \"$0\")/../calls.log\"\n" \
+                         "#{'[ -z "$FAIL_SETUP" ] || exit 1' if name == 'setup'}\n")
         FileUtils.chmod(0o755, stub)
       end
       yield clone, commits

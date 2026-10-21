@@ -39,7 +39,7 @@ PIN = "2468"
 log = ->(message) { puts "[trois-etablissements] #{message}" }
 existing = Orm::School.where(name: SCHOOLS.map(&:first)).count
 if existing == SCHOOLS.size
-  log.call("déjà en place, rien à faire")
+  log.call("déjà en place, rien à faire (contenu non vérifié : bin/tester-pr <PR> --reset --demo pour repartir de zéro)")
   return
 end
 raise "trois établissements de test partiellement présents : recréez la base (bin/tester-pr <PR> --reset --demo)" if existing.positive?
@@ -71,7 +71,8 @@ Orm::School.transaction do
   classrooms = schools.map do |school|
     insert.(Orm::Classroom, CLASSROOMS.map do |level_slug, series_slug, rank|
       { public_id: SecureRandom.base58(14), school_id: school.id, level_id: levels.fetch(level_slug).id,
-        series_id: series[series_slug]&.id, name: [ levels.fetch(level_slug).name, series[series_slug]&.name, rank ].compact.join(" "),
+        series_id: series_slug && series.fetch(series_slug).id,
+        name: [ levels.fetch(level_slug).name, series_slug && series.fetch(series_slug).name, rank ].compact.join(" "),
         school_year: }
     end)
   end

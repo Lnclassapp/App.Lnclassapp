@@ -30,11 +30,20 @@ main() {
   done
   [ -n "$target" ] || usage
 
-  if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
-    echo "Des modifications ne sont pas commitées : commite-les ou mets-les de côté (git stash), puis relance." >&2
-    git status --short --untracked-files=no >&2
+  # A tracked change, or an untracked file the PR code would load or play (a migration not added yet), stops it.
+  local pending
+  pending="$(git status --porcelain --untracked-files=no; git status --porcelain --untracked-files=all -- app db config lib | grep '^??' || true)"
+  if [ -n "$pending" ]; then
+    echo "Des modifications ne sont pas commitées : commite-les ou mets-les de côté (git stash -u), puis relance." >&2
+    echo "$pending" >&2
     exit 1
   fi
+
+  # The branch to come back to, kept across runs: a second run starts detached, on the code of the previous PR.
+  local memo origin back
+  memo="$(git rev-parse --git-dir)/tester-pr-origin"
+  if origin="$(git symbolic-ref --short -q HEAD)"; then echo "$origin" >"$memo"; else origin="$(cat "$memo" 2>/dev/null || true)"; fi
+  back="git switch ${origin:--}"
 
   local ref label
   if [[ "$target" =~ ^[0-9]+$ ]]; then
@@ -44,9 +53,20 @@ main() {
   fi
   git fetch --quiet origin "$ref" || { echo "Introuvable sur origin : $label." >&2; exit 1; }
   git switch --quiet --detach FETCH_HEAD
+  # Whatever fails from here, the owner learns he stays on the code of the PR, and how to come back.
+  trap "echo 'Arrêt : tu restes sur le code de la $label. Pour revenir à ta branche : $back' >&2" EXIT
   echo "== $label : $(git log -1 --format='%h %s')"
 
-  if [ "$reset" = 1 ]; then bin/setup --skip-server --reset; else bin/setup --skip-server; fi
+  if [ "$reset" = 1 ]; then
+    # The database recreated from the schema of the PR, without playing its migrations on the current one first.
+    bin/setup --skip-server --skip-db
+    bin/rails db:reset
+  else
+    bin/setup --skip-server
+    if bin/rails db:migrate:status 2>/dev/null | grep -q "NO FILE"; then
+      echo "Attention : la base garde des migrations d'une autre branche. Si la PR se comporte mal, relance avec --reset."
+    fi
+  fi
   # Idempotent: the fictitious accounts exist whatever the database held, and the TOTP code of the team prints.
   bin/rails db:seed
   [ "$demo" = 0 ] || bin/rails runner db/seeds/demo/trois_etablissements.rb
@@ -57,7 +77,9 @@ main() {
   echo "Ordinateur : http://localhost:$port"
   if [ "$telephone" = 1 ]; then
     local ip
-    ip="$(ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1 2>/dev/null || hostname -I 2>/dev/null | awk '{print $1}' || true)"
+    # macOS, then the source address of the route out on Linux (hostname -I may list a Docker or WSL address first).
+    ip="$(ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1 2>/dev/null ||
+          ip route get 1.1.1.1 2>/dev/null | awk '{ for (i = 1; i < NF; i++) if ($i == "src") print $(i + 1) }' || true)"
     echo "Téléphone (même Wi-Fi) : http://${ip:-<IP-de-l-ordinateur>}:$port"
     export BINDING=0.0.0.0
   fi
@@ -70,8 +92,9 @@ main() {
     echo "Collège Saint Michel, PIN 2468 : direction 0710000001 et 0710000002, enseignants de la Tle D 1 0510000001 à 0510000006,"
     echo "  élèves de la Tle D 1 0110000001 à 0110000020."
   fi
-  echo "Pour revenir à ta branche ensuite : git switch -"
+  echo "Pour revenir à ta branche ensuite : $back"
   echo
+  trap - EXIT
   exec bin/dev
 }
 
