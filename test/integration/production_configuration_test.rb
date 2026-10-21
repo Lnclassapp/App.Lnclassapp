@@ -91,6 +91,14 @@ class ProductionConfigurationTest < ActiveSupport::TestCase
     assert_no_match(/is not in config\.hosts/, served)
   end
 
+  test "a PR environment without PR_ACCESS_PASSWORD warns at boot, once; production says nothing" do
+    _, closed = EnvironmentProbe.run_with_output("production", "true", env: PR)
+    _, plain = EnvironmentProbe.run_with_output("production", "true", env: RAILWAY)
+
+    assert_equal 1, closed.scan("WARNING: PR_ACCESS_PASSWORD is missing").size, closed
+    assert_no_match(/PR environment/, plain)
+  end
+
   test "jobs go to Solid Queue" do
     assert_equal "solid_queue", production["queue_adapter"]
   end

@@ -47,7 +47,7 @@ Railway n'offre aucun moyen durable de régler une PR à part. Le bloc `environm
 
 > **Nous reconnaissons un environnement de PR à `PR_BASE_ENVIRONMENT` posée et différente de `RAILWAY_ENVIRONMENT_NAME` (présente).** Dans un tel environnement, et là seulement :
 >
-> 1. **Un mot de passe commun ferme toute l'application** (Basic HTTP, avant le routeur), lu dans `PR_ACCESS_PASSWORD`. Sans cette variable, tout est refusé. Seul `/up` passe, pour le contrôle de santé de Railway.
+> 1. **Un mot de passe commun ferme toute l'application** (Basic HTTP, avant le routeur), lu dans `PR_ACCESS_PASSWORD`. Sans cette variable, tout est refusé, et le démarrage l'écrit dans le journal. Seul `/up` passe, pour le contrôle de santé de Railway. Une réponse servie avec le mot de passe ne part jamais `public`, pour qu'aucun cache partagé ne la resserve.
 > 2. **Les tâches de fond s'exécutent dans le processus web** (adaptateur Active Job `:async`). Puma ne charge pas le worker Solid Queue, et les tâches planifiées (`config/recurring.yml`) ne tournent pas. **Les mises à jour en direct passent par le processus web** (adaptateur Action Cable `async`). Puma n'a qu'un processus (`WEB_CONCURRENCY` non lu par `config/puma.rb`), donc rien ne se perd.
 > 3. **Le pré-déploiement sème les données de test** : référentiel, DRENA, comptes fictifs et trois établissements de test, en plus de l'identité. Ces seeds restent refusés en production, en Staging et à Develop.
 >
@@ -69,6 +69,10 @@ Railway n'offre aucun moyen durable de régler une PR à part. Le bloc `environm
 - **La première visite d'une PR endormie peut répondre 502** le temps du réveil (documentation « Serverless »).
 - **Le mot de passe est partagé** : il se change sur Develop et ne vaut que pour les PR (re)déployées ensuite.
 - **Deux variables à tenir sur Develop**, à ne pas sceller : Railway ne copie pas les variables scellées dans les PR.
+- **Les limites de concurrence des jobs ne s'appliquent pas en `:async`** (`limits_concurrency` des imports et des régénérations) : deux imports du même type peuvent tourner ensemble dans une PR, ce qui n'arrive pas ailleurs. Un conflit d'imports simultanés constaté sur une PR se revérifie sur Develop.
+- **Un job en échec n'apparaît que dans le journal** : Mission Control ne liste pas les jobs `:async`. Les imports, eux, passent toujours leur rapport en échec (ADR-0039).
+- **Le nom de l'environnement de base doit être exactement celui de la variable** (`Develop`, casse comprise). Develop renommé sans la variable, ou dupliqué en un environnement durable qui la garde, deviendrait « environnement de PR » : mot de passe, et comptes de test au PIN connu semés dans sa base. Renommer ou dupliquer Develop impose de mettre la variable à jour, ou de la retirer de la copie (`docs/guide/configuration.md`).
+- **Thruster met en cache les réponses `public`** et les ressert sans passer par Rails : derrière le mot de passe, le contrôle d'accès les rend `private`, pour qu'elles ne restent que dans le navigateur de qui l'a saisi.
 
 ## 6. Notes d'implémentation
 

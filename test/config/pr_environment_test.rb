@@ -94,4 +94,31 @@ class PrEnvironmentTest < ActiveSupport::TestCase
 
     assert_equal 401, response.status
   end
+
+  # Thruster caches `public` responses and serves them again without calling Rails: a page fetched with the password
+  # must stay in the browser's cache, never in a shared one.
+  test "a public response served with the password leaves as private, so no shared cache serves it without" do
+    assets = ->(_env) { [ 200, { "cache-control" => "public, max-age=31536000" }, [ "asset" ] ] }
+    response = get("/assets/application.js", gate: PrEnvironment::Gate.new(assets, password: "secret"), password: "secret")
+
+    assert_equal "private, max-age=31536000", response.headers["cache-control"]
+  end
+
+  test "a response without a public cache-control is left as it is" do
+    pages = ->(_env) { [ 200, { "cache-control" => "max-age=0, private, must-revalidate" }, [ "page" ] ] }
+    response = get("/", gate: PrEnvironment::Gate.new(pages, password: "secret"), password: "secret")
+
+    assert_equal "max-age=0, private, must-revalidate", response.headers["cache-control"]
+  end
+
+  # --- what the boot says ---
+
+  test "a PR environment says so at boot, and warns when PR_ACCESS_PASSWORD is missing" do
+    pr = { "PR_BASE_ENVIRONMENT" => "Develop", "RAILWAY_ENVIRONMENT_NAME" => "lnclass-pr-276" }
+
+    assert_match "PR environment (base Develop, name lnclass-pr-276)", PrEnvironment.notice(pr.merge("PR_ACCESS_PASSWORD" => "secret"))
+    assert_match "WARNING: PR_ACCESS_PASSWORD is missing", PrEnvironment.notice(pr)
+    assert_match "WARNING: PR_ACCESS_PASSWORD is missing", PrEnvironment.notice(pr.merge("PR_ACCESS_PASSWORD" => " "))
+    assert_nil PrEnvironment.notice({ "PR_BASE_ENVIRONMENT" => "Develop", "RAILWAY_ENVIRONMENT_NAME" => "Develop" })
+  end
 end

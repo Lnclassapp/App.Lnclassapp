@@ -10,6 +10,17 @@ module PrEnvironment
     !base.empty? && !name.empty? && name != base
   end
 
+  # What production logs at boot: a PR environment says so, and says why it refuses every password when
+  # PR_ACCESS_PASSWORD is missing (a sealed variable is not copied into PR environments). Elsewhere, nothing.
+  def self.notice(env = ENV)
+    return unless active?(env)
+
+    said = "[config] PR environment (base #{env['PR_BASE_ENVIRONMENT'].strip}, name #{env['RAILWAY_ENVIRONMENT_NAME'].strip})"
+    return "#{said}: password required, test data seeded, jobs in the web process." unless env["PR_ACCESS_PASSWORD"].to_s.strip.empty?
+
+    "#{said} WARNING: PR_ACCESS_PASSWORD is missing: every page but /up answers 401. Set it, unsealed, on the base environment."
+  end
+
   # Rack middleware, first of the stack. Basic HTTP: the user name is free, the password is PR_ACCESS_PASSWORD.
   # Without that variable everything is refused (a forgotten variable closes the access), except /up, which Railway
   # probes for the health check.
@@ -24,12 +35,20 @@ module PrEnvironment
 
     def call(env)
       return @app.call(env) if env["PATH_INFO"] == HEALTH_CHECK_PATH
-      return @app.call(env) if authorized?(env["HTTP_AUTHORIZATION"])
+      return privately(*@app.call(env)) if authorized?(env["HTTP_AUTHORIZATION"])
 
       [ 401, { "content-type" => "text/plain; charset=utf-8", "www-authenticate" => CHALLENGE }, [ "Mot de passe requis.\n" ] ]
     end
 
     private
+
+    # Thruster, in front of Puma, caches `public` responses and serves them again without calling Rails, so without
+    # this gate: what one visitor fetched with the password, the browser keeps, a shared cache does not.
+    def privately(status, headers, body)
+      cache = headers["cache-control"]
+      headers["cache-control"] = cache.sub(/\bpublic\b/, "private") if cache&.match?(/\bpublic\b/)
+      [ status, headers, body ]
+    end
 
     def authorized?(header)
       return false if @password.strip.empty?

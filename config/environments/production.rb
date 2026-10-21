@@ -95,6 +95,9 @@ Rails.application.configure do
   # ADR-0074 §4.6: the blog's shared links, sitemap and robots.txt point to config.x.canonical_host. If production does
   # not serve that host, they all lead to a 403 (Blocked host): say so at boot rather than boot silently.
   config.after_initialize do
+    # ADR-XXXX : a PR environment says so at boot, and warns when its password is missing.
+    PrEnvironment.notice&.then { |notice| Rails.logger.warn(notice) }
+
     canonical_host = config.x.canonical_host
     unless ActionDispatch::HostAuthorization::Permissions.new(config.hosts).allows?(canonical_host)
       Rails.logger.warn("[config] WARNING: CANONICAL_HOST #{canonical_host} is not in config.hosts " \

@@ -79,6 +79,10 @@ Variables posées **sur Develop**, non scellées, que Railway copie dans l'envir
 
 Dans un environnement de PR, les tâches de fond s'exécutent dans le processus web (Active Job `async`) et les tâches planifiées ne tournent pas.
 
+Au démarrage, un environnement de PR l'écrit dans le journal (`[config] PR environment (base …, name …)`), avec un avertissement si `PR_ACCESS_PASSWORD` manque.
+
+**Renommer ou dupliquer Develop** : la comparaison tient compte de la casse. Develop renommé garde la variable à son nouveau nom ; une copie durable de Develop (recette, démo) perd la variable, sinon elle devient « environnement de PR » : mot de passe, et comptes de test au PIN connu semés dans sa base (ADR-XXXX §5).
+
 **Réglages Railway, au tableau de bord (hors dépôt, tenus par le porteur) :**
 
 1. *Project Settings › Environments* : PR Environments activés, base `Develop` ; Bot PR Environments et Focused PR Environments **désactivés**.
