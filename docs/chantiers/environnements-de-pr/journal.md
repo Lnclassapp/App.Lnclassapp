@@ -23,7 +23,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
 - Railway (documentation du 2026-10-21) : `railway.json` n'est plus lu après le 2026-12-01 ; les bases d'une PR partent vides ; les variables scellées ne sont pas copiées dans les PR ; aucun filtre des PR par branche cible ; aucune variable ne signale un environnement de PR.
-- `db:prepare` sème déjà une base neuve avant le `db:seed` du pré-déploiement : les seeds se jouent deux fois au premier déploiement d'une PR, d'où l'idempotence exigée.
+- En production, `seeds: false` (`config/database.yml`) empêche `db:prepare` de semer : seul le `db:seed` du pré-déploiement sème, une fois par déploiement d'une PR. L'idempotence sert aux redéploiements (chaque commit poussé).
 - Les `limits_concurrency` des jobs reposent sur Solid Queue : en `:async`, ils ne s'appliquent pas (ADR-XXXX §5).
 
 ## Dette laissée derrière
