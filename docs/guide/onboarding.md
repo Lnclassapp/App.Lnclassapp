@@ -99,6 +99,27 @@ Autre port : `PORT=3001 bin/dev`.
 
 **Le réflexe quand « le CSS ne se met pas à jour » :** ce n'est presque jamais Propshaft, c'est le process `css` ou `js` qui est mort dans la sortie de foreman. Regarde les logs, relance `bin/dev`. Détails dans [`stack.md` §3](stack.md#3-frontend).
 
+### Tester une PR avant de la fusionner
+
+```bash
+bin/tester-pr 275                # la PR n° 275 (ou un nom de branche)
+bin/tester-pr 275 --telephone    # aussi depuis un téléphone sur le même Wi-Fi
+bin/tester-pr 275 --demo         # avec 3 établissements de test complets (quelques secondes)
+bin/tester-pr 275 --activite     # avec un collège dont les élèves ont déjà travaillé (≈ 20 min la 1re fois)
+bin/tester-pr 275 --reset        # base de développement recréée
+git switch -                     # après le test : retour à ta branche
+```
+
+Le script récupère le code de la PR tel qu'il est sur GitHub, joue ses migrations, crée les comptes fictifs, puis lance `bin/dev`. Il refuse de démarrer si tu as des modifications non commitées. Chantier [`tester-pr-en-local`](../chantiers/tester-pr-en-local/memo.md).
+
+| Option | Comptes (PIN 2468 partout) |
+|---|---|
+| toujours | enseignant `0500000001`, élève `0100000001`, équipe `0700000000` (code TOTP affiché par les seeds) |
+| `--demo` | 3 établissements « Test — … » : 3 classes par niveau de la 6ème à la Tle, 35 à 45 élèves par classe, les 6 enseignants de chaque classe (un par matière : EDHC au collège, philosophie au lycée), 2 bivalents par établissement, un enseignant dans les 3 établissements et un dans 2. Direction `0731000001`, `0732000001`, `0733000001` ; enseignants `0531000001`…, `0532000001`…, `0533000001`… ; élèves `013S00CCEE` (S établissement, CC classe, EE élève : `0131000101` est le 1er élève de la 1re classe de l'établissement 1) |
+| `--activite` | Collège Saint Michel de Tiassalé, avec exercices joués, notes, badges et lacunes : direction `0710000001` et `0710000002`, enseignants de la Tle D 1 `0510000001` à `0510000006`, autres enseignants `05111…` à `05116…`, élèves de la Tle D 1 `0110000001` à `0110000020` |
+
+Sans `--telephone`, le serveur n'écoute que l'ordinateur : un téléphone n'y accède pas. Avec, il est ouvert à tout le réseau local. Sur Mac, accepte l'alerte du pare-feu pour `ruby`.
+
 ---
 
 ## 4. Lancer les tests

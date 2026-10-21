@@ -74,6 +74,7 @@ Le travail vit dans [`docs/chantiers/<slug>/`](docs/chantiers/). Un chantier san
 |---|---|
 | `bin/setup` | Setup complet de l'environnement (idempotent) |
 | `bin/dev` | Serveur de développement (Rails + watch assets) |
+| `bin/tester-pr <PR>` | Une PR sur la machine du porteur : code, migrations, comptes fictifs, `bin/dev` (`--telephone`, `--demo`) |
 | `bin/rails test` | Lance les tests |
 | `bin/ci` | Pipeline complet en local, comme la CI |
 | `bin/rubocop` | Vérifie le style Ruby (`-A` pour corriger) |
