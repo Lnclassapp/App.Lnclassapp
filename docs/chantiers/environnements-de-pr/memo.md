@@ -47,6 +47,11 @@ De plus, l'hébergeur ne lira plus la configuration de déploiement actuelle à 
 | Quelles données dans un environnement de PR ? | Les données de test : établissements, enseignants, classes, élèves (porteur, 2026-10-21) | En production, seule l'identité est semée : référentiel, DRENA, comptes fictifs et trois établissements de test doivent être semés dans les environnements de PR, et nulle part ailleurs hors développement |
 | Les tâches de fond doivent-elles tourner dans un environnement de PR ? | Proposition retenue : non, pour permettre la mise en veille (porteur, 2026-10-21) | Amendement de la décision « worker toujours actif ». Piège connu : ce worker n'a jamais tourné par le passé à cause d'une condition oubliée ; l'exception doit être étroite et testée |
 | Par quoi commencer ? | La migration de la configuration de déploiement (porteur, 2026-10-21) | Premier lot, livrable seul, à comportement identique pour Develop, Staging et production |
+| La nouvelle configuration remplace-t-elle l'ancienne à l'identique ? | Non (documentation de l'hébergeur, 2026-10-21) : elle n'est pas relue à chaque livraison, elle s'applique en ligne de commande, environnement par environnement, et décrit tout le projet ; elle ne documente ni la politique de redémarrage, ni la construction par image, ni la mise en veille | La migration se fait avec l'outil de l'hébergeur, connecté au projet, par le porteur : un fichier écrit à la main risquerait de supprimer un service oublié. Bloquée tant que la connexion du porteur à l'hébergeur ne marche pas |
+| L'hébergeur permet-il des réglages propres aux environnements de PR ? | Seulement dans l'ancienne configuration, qui disparaît le 2026-12-01 ; aucune variable ne signale un environnement de PR (documentation, 2026-10-21) | L'application reconnaît elle-même un environnement de PR : une variable posée sur Develop est copiée dans ses PR ; si le nom de l'environnement courant n'est pas celui qu'elle porte, c'est une PR. Staging et production n'ont pas la variable : rien ne s'y déclenche par erreur |
+| La base d'un environnement de PR part-elle vide ? | Oui : bases neuves, la copie des volumes a été retirée (hébergeur, 2025) | Le semis complet se joue à chaque création, en quelques secondes ; rejoué, il ne crée rien |
+| Peut-on filtrer les PR de promotion ? | Aucun filtre par branche cible n'est documenté | À observer à la prochaine promotion. S'il y a un environnement, une action GitHub le supprimera, ce qui demande un jeton de l'hébergeur dans les secrets GitHub |
+| Les variables de Develop arrivent-elles dans la PR ? | Oui, sauf les variables scellées (documentation) | Le porteur vérifie qu'aucune variable indispensable de Develop (clé maître, base, stockage) n'est scellée, sinon l'environnement de PR ne démarre pas |
 
 ## Cas limites identifiés
 
@@ -59,5 +64,6 @@ De plus, l'hébergeur ne lira plus la configuration de déploiement actuelle à 
 ## Questions encore ouvertes
 
 - Une adresse publique avec des comptes au PIN connu : faut-il protéger l'accès ?
-- La base d'un environnement de PR part-elle vide ou copiée de Develop ? Le stockage de fichiers est-il dupliqué ?
-- Comment l'application sait-elle qu'elle tourne dans un environnement de PR ?
+- Le stockage de fichiers est-il dupliqué dans l'environnement de PR, ou partagé avec Develop ? À vérifier par le porteur à la première PR.
+- Une PR de promotion crée-t-elle un environnement ? À observer à la prochaine promotion.
+- Les tâches de fond : sans worker, sont-elles exécutées dans le processus web (proposition), ou pas du tout ?
