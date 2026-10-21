@@ -114,7 +114,7 @@ Vague 4 : Lot D                 → seulement si une promotion crée un environn
 | `db/seeds.rb` · `db/seeds/**` | Lot C |
 | ADR-0034 · `docs/guide/onboarding.md` | Lot C |
 | `railway.json` · `.railway/railway.ts` · `test/config/railway_deployment_test.rb` · `docs/guide/retour-arriere.md` | Lot A |
-| ADR-XXXX, `docs/chantiers/environnements-de-pr/*`, index | clôture |
+| ADR-0108, `docs/chantiers/environnements-de-pr/*`, index | clôture |
 
 ## Portes de sortie
 
@@ -124,12 +124,12 @@ Vague 4 : Lot D                 → seulement si une promotion crée un environn
 - [x] ADR écrit si un port / une table / un contrat apparaît, nommé `XXXX-<slug>.md` (numéro et index posés à la clôture)
 - [x] UDR écrite pour **chaque** vue créée ou modifiée, nommée `XXXX-<slug>.md` (numéro et index posés à la clôture) — sans objet : aucune vue
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
-- [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
-- [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
+- [x] Lot 0 mergé et ports gelés avant tout lot parallèle
+- [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
 - [ ] En-tête HITL sur chaque fichier créé dans `app/` — sans objet : aucun fichier dans `app/`
-- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
-- [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
+- [x] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
+- [x] Pureté domaine · rubocop · tests · brakeman : au vert
+- [x] PR unique vers `Develop`, référençant chantier + ADR + UDR
 - [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
 
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, démarre l'application en production avec les variables d'une PR, refait le parcours nominal (mot de passe, connexion 0531000001 / 2468, un import) *et* un chemin d'erreur (mauvais mot de passe, variable `PR_ACCESS_PASSWORD` absente). **Il ne relit pas le code, il le met à l'épreuve.** La veille effective, elle, se constate sur Railway, à la première PR d'essai.

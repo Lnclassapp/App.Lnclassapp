@@ -70,7 +70,7 @@ Chaque environnement Railway déploie seul la branche qu'il suit : Develop ← `
 
 ### Environnements de PR (Railway)
 
-Variables posées **sur Develop**, non scellées, que Railway copie dans l'environnement de chaque PR. Staging et production ne les portent pas : rien n'y change (ADR-XXXX).
+Variables posées **sur Develop**, non scellées, que Railway copie dans l'environnement de chaque PR. Staging et production ne les portent pas : rien n'y change (ADR-0108).
 
 | Variable | Rôle | Si absente |
 |---|---|---|
@@ -81,7 +81,7 @@ Dans un environnement de PR, les tâches de fond s'exécutent dans le processus 
 
 Au démarrage, un environnement de PR l'écrit dans le journal (`[config] PR environment (base …, name …)`), avec un avertissement si `PR_ACCESS_PASSWORD` manque.
 
-**Renommer ou dupliquer Develop** : la comparaison tient compte de la casse. Develop renommé garde la variable à son nouveau nom ; une copie durable de Develop (recette, démo) perd la variable, sinon elle devient « environnement de PR » : mot de passe, et comptes de test au PIN connu semés dans sa base (ADR-XXXX §5).
+**Renommer ou dupliquer Develop** : la comparaison tient compte de la casse. Develop renommé garde la variable à son nouveau nom ; une copie durable de Develop (recette, démo) perd la variable, sinon elle devient « environnement de PR » : mot de passe, et comptes de test au PIN connu semés dans sa base (ADR-0108 §5).
 
 **Réglages Railway, au tableau de bord (hors dépôt, tenus par le porteur) :**
 

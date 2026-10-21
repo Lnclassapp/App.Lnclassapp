@@ -1,7 +1,7 @@
 require "test_helper"
 require Rails.root.join("config/pr_environment").to_s
 
-# ADR-XXXX : a PR environment is recognised by PR_BASE_ENVIRONMENT, set and different from RAILWAY_ENVIRONMENT_NAME,
+# ADR-0108 : a PR environment is recognised by PR_BASE_ENVIRONMENT, set and different from RAILWAY_ENVIRONMENT_NAME,
 # and is closed by a shared password, except /up.
 class PrEnvironmentTest < ActiveSupport::TestCase
   def active?(base, name) = PrEnvironment.active?({ "PR_BASE_ENVIRONMENT" => base, "RAILWAY_ENVIRONMENT_NAME" => name }.compact)

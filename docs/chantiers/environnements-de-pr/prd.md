@@ -105,7 +105,7 @@ Scénario: la production ne reçoit jamais les données de test
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-environnements-de-pr-reconnus-par-l-application — reconnaissance, mot de passe, tâches et mises à jour en direct dans le processus web, seeds ; amende ADR-0052 (worker toujours dans Puma) et ADR-0034 (seeds par environnement).
+- ADR-0108 — reconnaissance, mot de passe, tâches et mises à jour en direct dans le processus web, seeds ; amende ADR-0052 (worker toujours dans Puma) et ADR-0034 (seeds par environnement).
 - Pas d'UDR : aucune vue créée ni modifiée (la demande de mot de passe est celle du navigateur).
 
 ## 7. Mesures

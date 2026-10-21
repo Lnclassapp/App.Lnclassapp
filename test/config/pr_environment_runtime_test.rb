@@ -4,7 +4,7 @@ require "puma/configuration"
 require "erb"
 require "yaml"
 
-# ADR-XXXX §4 (amends ADR-0052 §4): in a PR environment, the Solid Queue worker is not loaded by Puma and Action Cable
+# ADR-0108 §4 (amends ADR-0052 §4): in a PR environment, the Solid Queue worker is not loaded by Puma and Action Cable
 # runs in the web process (async). Everywhere else, the worker runs inside Puma and Action Cable uses Solid Cable.
 class PrEnvironmentRuntimeTest < ActiveSupport::TestCase
   PR_ENV = { "PR_BASE_ENVIRONMENT" => "Develop", "RAILWAY_ENVIRONMENT_NAME" => "lnclass-pr-276" }.freeze

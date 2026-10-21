@@ -24,7 +24,7 @@ class ProductionConfigurationTest < ActiveSupport::TestCase
     }
   RUBY
 
-  # ADR-XXXX : the same boot as a PR environment of Develop. The mission page is served without a password
+  # ADR-0108 : the same boot as a PR environment of Develop. The mission page is served without a password
   # in production, so a 401 can only come from the gate.
   PR_PROBE = <<~RUBY
     app = Rails.application

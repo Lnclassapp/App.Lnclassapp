@@ -1,7 +1,7 @@
 # ADR-0052 : Chaîne de livraison versionnée, worker toujours actif dans Puma, échecs de job visibles
 <!-- index
 titre: Chaîne de livraison versionnée, worker toujours actif dans Puma, échecs de job visibles
-statut: Accepté — *amende [0010](./0010-stack-ops-solid-suite-postgresql-railway.md) §3.1 et §5* — *amendé par [XXXX](./XXXX-environnements-de-pr-reconnus-par-l-application.md) §4 (worker absent d'un environnement de PR)*
+statut: Accepté — *amende [0010](./0010-stack-ops-solid-suite-postgresql-railway.md) §3.1 et §5* — *amendé par [0108](./0108-environnements-de-pr-reconnus-par-l-application.md) §4 (worker absent d'un environnement de PR)*
 problematique: `railway.json` versionné ; recette (`Staging`) et production (`main`) sur deux environnements Railway ; plugin Solid Queue inconditionnel, adaptateur `:solid_queue` en développement ; échecs visibles dans Mission Control Jobs ; `/up` testé et exclu de `force_ssl` ; Thruster gardé pour la compression. Tranche F-30 du programme de refonte.
 -->
 
@@ -13,7 +13,7 @@ problematique: `railway.json` versionné ; recette (`Staging`) et production (`m
 | **Amende** | [ADR-0010](./0010-stack-ops-solid-suite-postgresql-railway.md) §3.1 (lancement du worker) et §5 (Thruster) |
 | **Remplace** | — |
 | **Remplacé par** | — |
-| **Amendé par** | [ADR-XXXX](./XXXX-environnements-de-pr-reconnus-par-l-application.md) §4 (le worker tourne toujours dans Puma, sauf dans un environnement de PR) |
+| **Amendé par** | [ADR-0108](./0108-environnements-de-pr-reconnus-par-l-application.md) §4 (le worker tourne toujours dans Puma, sauf dans un environnement de PR) |
 
 ---
 
@@ -223,7 +223,7 @@ end
 
 ## Amendement du 2026-10-21 — pas de worker dans un environnement de PR
 
-*Décidé avec les environnements de PR Railway (ADR-XXXX §4). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+*Décidé avec les environnements de PR Railway (ADR-0108 §4). Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
 - **Le worker tourne toujours dans Puma, sauf dans un environnement de PR.** `config/puma.rb` charge le plugin par la seule ligne `plugin :solid_queue unless PrEnvironment.active?`. Dans un environnement de PR (`PR_BASE_ENVIRONMENT` posée et différente de `RAILWAY_ENVIRONMENT_NAME`), les tâches de fond s'exécutent dans le processus web (adaptateur Active Job `:async`) et Action Cable passe par ce même processus (`async`) : plus rien n'interroge la base en continu, le service peut s'endormir.
 - **C'est la seule condition admise sur le worker.** La garde `test/guards/repository_rules_test.rb` n'accepte que cette ligne exacte ; toute autre condition la fait échouer. Staging, production, développement et test ne portent pas la variable : le worker y reste inconditionnel.

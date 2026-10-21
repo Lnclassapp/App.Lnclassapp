@@ -1,5 +1,5 @@
 # Trois établissements de test, développement et environnements de PR seulement (chantiers tester-pr-en-local et
-# environnements-de-pr, ADR-XXXX) : bin/tester-pr <PR> --demo, ou
+# environnements-de-pr, ADR-0108) : bin/tester-pr <PR> --demo, ou
 # bin/rails runner db/seeds/demo/trois_etablissements.rb. Chacun a 3 classes par niveau de la 6ème à la Tle, de 35 à 45
 # élèves par classe, un chef d'établissement, et les 6 enseignants de chaque classe, un par matière : l'EDHC au collège,
 # la philosophie au lycée (décision du porteur du 2026-10-21) ; l'EDHC est ajoutée aux matières de la base si elle manque.

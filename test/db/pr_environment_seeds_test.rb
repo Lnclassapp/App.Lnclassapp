@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX, ADR-0034: a PR environment (Railway, run in production) is seeded like development plus the three test
+# ADR-0108, ADR-0034: a PR environment (Railway, run in production) is seeded like development plus the three test
 # schools; production without the PR variables keeps the identity seed alone. Played in the transaction of the test.
 class PrEnvironmentSeedsTest < ActiveSupport::TestCase
   PR_VARIABLES = { "PR_BASE_ENVIRONMENT" => "Develop", "RAILWAY_ENVIRONMENT_NAME" => "lnclass-pr-276" }.freeze

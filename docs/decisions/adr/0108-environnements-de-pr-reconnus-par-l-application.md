@@ -1,4 +1,4 @@
-# ADR-XXXX : L'application reconnaît un environnement de PR Railway, le ferme par un mot de passe, y sème les données de test et s'y passe du worker
+# ADR-0108 : L'application reconnaît un environnement de PR Railway, le ferme par un mot de passe, y sème les données de test et s'y passe du worker
 <!-- index
 titre: Environnements de PR Railway reconnus par l'application : mot de passe, données de test, sans worker
 statut: Accepté — *amende [0052](./0052-chaine-de-livraison-versionnee-et-worker-dans-puma.md) §4 et [0034](./0034-reprise-des-donnees-et-referentiel-seede.md) (seeds par environnement)*
@@ -88,7 +88,7 @@ end
 ```
 
 ```ruby
-# config/puma.rb — ADR-0052, amendé par ADR-XXXX : le worker tourne toujours, sauf dans un environnement de PR.
+# config/puma.rb — ADR-0052, amendé par ADR-0108 : le worker tourne toujours, sauf dans un environnement de PR.
 require_relative "pr_environment"
 plugin :solid_queue unless PrEnvironment.active?
 ```
@@ -106,7 +106,7 @@ production:
 ```
 
 ```ruby
-# db/seeds.rb — ADR-0034, amendé par ADR-XXXX : un environnement de PR sème comme le développement, plus la démo.
+# db/seeds.rb — ADR-0034, amendé par ADR-0108 : un environnement de PR sème comme le développement, plus la démo.
 stage = PrEnvironment.active? ? "pr" : Rails.env
 SEEDS = { "identity" => :all, "catalog" => %w[development test pr], "school" => %w[development test pr],
           "development" => %w[development pr], "demo/trois_etablissements" => %w[pr] }.freeze

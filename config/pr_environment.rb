@@ -1,4 +1,4 @@
-# ADR-XXXX : the application knows when it runs as a Railway PR environment, and closes it with a shared password.
+# ADR-0108 : the application knows when it runs as a Railway PR environment, and closes it with a shared password.
 # Plain Ruby, nothing else required: config/puma.rb loads this file before Rack and Rails, then config/application.rb.
 module PrEnvironment
   # A PR environment is one whose PR_BASE_ENVIRONMENT is set and differs from the name of the environment it runs in

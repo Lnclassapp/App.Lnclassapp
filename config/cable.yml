@@ -8,7 +8,7 @@ development:
 test:
   adapter: test
 
-# ADR-XXXX: a PR environment has one web process and no worker, so updates go through that process (async).
+# ADR-0108: a PR environment has one web process and no worker, so updates go through that process (async).
 production:
   adapter: <%= PrEnvironment.active? ? "async" : "solid_cable" %>
   polling_interval: 0.1.seconds

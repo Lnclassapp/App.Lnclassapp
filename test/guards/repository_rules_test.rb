@@ -26,13 +26,13 @@ class RepositoryRulesTest < Minitest::Test
     assert_empty offenders, "« # :nocov: » est interdit (ADR-0024) : #{offenders.join(', ')}"
   end
 
-  # ADR-0052 §4, amended by ADR-XXXX §4: the only condition allowed on the worker is a PR environment.
+  # ADR-0052 §4, amended by ADR-0108 §4: the only condition allowed on the worker is a PR environment.
   def test_the_solid_queue_worker_always_runs_inside_puma
     puma = File.read(File.join(ROOT, "config/puma.rb"))
     declarations = puma.lines.map(&:strip).grep(/solid_queue/).reject { |line| line.start_with?("#") }
 
     assert_equal [ "plugin :solid_queue unless PrEnvironment.active?" ], declarations,
-                 "ADR-0052 amendé par ADR-XXXX : `plugin :solid_queue unless PrEnvironment.active?`, sans autre condition, dans config/puma.rb"
+                 "ADR-0052 amendé par ADR-0108 : `plugin :solid_queue unless PrEnvironment.active?`, sans autre condition, dans config/puma.rb"
   end
 
   # Railway's builder shares its address: Docker Hub answers its anonymous pulls with « 429 Too Many Requests » and the

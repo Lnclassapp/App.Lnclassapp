@@ -51,10 +51,10 @@ Rails.application.configure do
 
   # Replace the default in-process and non-durable queuing backend for Active Job.
   # ADR-0052 : the worker runs inside Puma (config/puma.rb); tables in the primary database.
-  # ADR-XXXX : in a Railway PR environment (so that it can sleep) jobs run in the web process instead.
+  # ADR-0108 : in a Railway PR environment (so that it can sleep) jobs run in the web process instead.
   config.active_job.queue_adapter = PrEnvironment.active? ? :async : :solid_queue
 
-  # ADR-XXXX : a PR environment is closed by a shared password (PR_ACCESS_PASSWORD), before the router. /up stays open.
+  # ADR-0108 : a PR environment is closed by a shared password (PR_ACCESS_PASSWORD), before the router. /up stays open.
   config.middleware.insert_before 0, PrEnvironment::Gate if PrEnvironment.active?
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -95,7 +95,7 @@ Rails.application.configure do
   # ADR-0074 §4.6: the blog's shared links, sitemap and robots.txt point to config.x.canonical_host. If production does
   # not serve that host, they all lead to a 403 (Blocked host): say so at boot rather than boot silently.
   config.after_initialize do
-    # ADR-XXXX : a PR environment says so at boot, and warns when its password is missing.
+    # ADR-0108 : a PR environment says so at boot, and warns when its password is missing.
     PrEnvironment.notice&.then { |notice| Rails.logger.warn(notice) }
 
     canonical_host = config.x.canonical_host

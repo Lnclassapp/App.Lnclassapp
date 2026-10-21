@@ -1,5 +1,5 @@
 require_relative "boot"
-# ADR-XXXX : recognises a Railway PR environment (also read by config/puma.rb, before Rails).
+# ADR-0108 : recognises a Railway PR environment (also read by config/puma.rb, before Rails).
 require_relative "pr_environment"
 
 # rails/all, listed out. Action Text is back for course and essential content (owner's
