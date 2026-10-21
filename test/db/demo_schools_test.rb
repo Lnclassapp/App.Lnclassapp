@@ -65,6 +65,30 @@ class DemoSchoolsTest < ActiveSupport::TestCase
     assert_equal by_schools.size, teachers.where(primary: true).count, "un établissement principal chacun"
   end
 
+  test "the accounts it prints sign in with PIN 2468, with their role, school and classroom" do
+    play
+    first_school = schools.find_by!(name: "Test — Lycée Moderne Les Cocotiers")
+    first_classroom = Orm::Classroom.where(school: first_school).order(:id).first
+    signs_in = ->(contact, role) { Orm::User.find_by!(contact:).tap { assert_equal role, it.role, contact; assert it.authenticate_pin("2468"), contact } }
+
+    head = signs_in.("0731000001", "school_admin")
+    assert_equal first_school.id, Orm::SchoolStaff.find_by!(user: head).school_id
+    teacher = signs_in.("0531000001", "teacher")
+    assert Orm::TeacherSchool.exists?(teacher_id: teacher.id, school_id: first_school.id, primary: true)
+    assert Orm::TeacherProfile.find_by!(user: teacher).onboarding_completed_at, "parcours d'arrivée terminé"
+    student = signs_in.("0131000101", "student")
+    assert_equal [ first_classroom.id, "6ème 1" ], [ Orm::ClassroomStudent.find_by!(student_id: student.id).classroom_id, first_classroom.name ]
+    assert_equal [ Entities::Classroom::SchoolYear.current(Date.current) ], Orm::Classroom.where(school: schools).distinct.pluck(:school_year)
+  end
+
+  test "a school already there without the two others is refused, rather than completed" do
+    play
+    schools.where.not(name: "Test — Collège Le Baobab").each { |school| Orm::School.where(id: school.id).update_all(name: "Ailleurs #{school.id}") }
+
+    error = assert_raises(RuntimeError) { play }
+    assert_match "partiellement présents", error.message
+  end
+
   test "played twice, it creates nothing more" do
     play
     counts = [ Orm::User.count, Orm::Classroom.count, Orm::TeacherClassroom.count, Orm::ClassroomStudent.count ]

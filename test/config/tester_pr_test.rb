@@ -24,6 +24,9 @@ class TesterPrTest < ActiveSupport::TestCase
 
       assert status.success?, output
       assert_equal commits[:pull], head(clone)
+      assert_raises(RuntimeError, "détaché : HEAD ne nomme aucune branche") { git(clone, "symbolic-ref", "-q", "HEAD") }
+      assert_equal "Develop", git(clone, "branch", "--format=%(refname:short)").lines(chomp: true).grep_v(/HEAD/).join(","),
+                   "aucune branche locale créée"
       assert_equal [ "bin/setup --skip-server", "bin/rails db:seed", "bin/dev BINDING=" ], calls(clone)
       assert_includes output, "PR n° 7"
       assert_includes output, "http://localhost:3000"
@@ -72,9 +75,9 @@ class TesterPrTest < ActiveSupport::TestCase
       assert_includes output, "ne sont pas commitées"
       git(clone, "checkout", "-q", "--", "README.md")
 
-      assert_not tester_pr(clone, "999").last.success?, "PR inconnue"
-      assert_not tester_pr(clone, "7", "feature/x").last.success?, "deux cibles"
-      assert_not tester_pr(clone, "--inconnu").last.success?, "option inconnue"
+      assert_includes tester_pr(clone, "999").first, "Introuvable sur origin : PR n° 999."
+      assert_includes tester_pr(clone, "7", "feature/x").first, "Usage :", "deux cibles"
+      assert_includes tester_pr(clone, "7", "--inconnu").first, "Usage :", "option inconnue"
       assert_equal commits[:base], head(clone)
       assert_empty calls(clone)
     end
