@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage |
+| **Statut** | planifié |
 | **Ouvert le** | 2026-10-21 |
 | **Branche** | `feature/environnements-de-pr` |
 | **Programme** | — |
@@ -53,6 +53,7 @@ De plus, l'hébergeur ne lira plus la configuration de déploiement actuelle à 
 | Peut-on filtrer les PR de promotion ? | Aucun filtre par branche cible n'est documenté | À observer à la prochaine promotion. S'il y a un environnement, une action GitHub le supprimera, ce qui demande un jeton de l'hébergeur dans les secrets GitHub |
 | Les variables de Develop arrivent-elles dans la PR ? | Oui, sauf les variables scellées (documentation) | Le porteur vérifie qu'aucune variable indispensable de Develop (clé maître, base, stockage) n'est scellée, sinon l'environnement de PR ne démarre pas |
 | Une adresse publique, des comptes au PIN connu : faut-il protéger l'accès ? | Oui : un mot de passe commun devant tout l'environnement de PR, que le porteur donne aux personnes à qui il montre la PR (porteur, 2026-10-21) | Le mot de passe vient d'une variable de Develop, copiée dans les PR. Dans un environnement de PR sans ce mot de passe, tout est refusé : un oubli ferme l'accès au lieu de l'ouvrir. Seul le contrôle de santé de l'hébergeur passe sans mot de passe. Develop, Staging et production ne demandent rien de plus |
+| Sans traitement continu, que deviennent les tâches de fond d'un environnement de PR ? | Elles s'exécutent dans le processus web, au moment où on les lance ; les tâches planifiées ne tournent pas (porteur, 2026-10-21) | Imports et création des classes s'essaient comme ailleurs ; la publication à heure dite des messages programmés et les nettoyages nocturnes ne se font pas dans une PR. Les mises à jour en direct des pages passent aussi par le processus web : leur interrogation continue de la base empêcherait la veille |
 
 ## Cas limites identifiés
 
@@ -60,10 +61,12 @@ De plus, l'hébergeur ne lira plus la configuration de déploiement actuelle à 
 - Une PR rouverte après fermeture : l'environnement est recréé, la base repart vide et se resème.
 - Un nouveau commit sur la PR : redéploiement, les seeds rejoués ne créent rien de plus.
 - Une PR dont la migration échoue : le déploiement échoue, rien n'est servi.
+- Un message programmé dans une PR : il n'est jamais publié à son heure (tâches planifiées absentes).
+- L'environnement endormi : la première visite le réveille, et peut répondre une erreur le temps du réveil.
+- Le mot de passe changé sur Develop : il vaut pour les PR créées ou redéployées ensuite.
 - Les fichiers téléversés : un environnement de PR ne doit jamais écrire dans le stockage de Develop.
 
 ## Questions encore ouvertes
 
 - Le stockage de fichiers est-il dupliqué dans l'environnement de PR, ou partagé avec Develop ? À vérifier par le porteur à la première PR.
 - Une PR de promotion crée-t-elle un environnement ? À observer à la prochaine promotion.
-- Les tâches de fond : sans worker, sont-elles exécutées dans le processus web (proposition), ou pas du tout ?
