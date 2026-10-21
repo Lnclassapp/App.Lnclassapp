@@ -52,6 +52,7 @@ De plus, l'hébergeur ne lira plus la configuration de déploiement actuelle à 
 | La base d'un environnement de PR part-elle vide ? | Oui : bases neuves, la copie des volumes a été retirée (hébergeur, 2025) | Le semis complet se joue à chaque création, en quelques secondes ; rejoué, il ne crée rien |
 | Peut-on filtrer les PR de promotion ? | Aucun filtre par branche cible n'est documenté | À observer à la prochaine promotion. S'il y a un environnement, une action GitHub le supprimera, ce qui demande un jeton de l'hébergeur dans les secrets GitHub |
 | Les variables de Develop arrivent-elles dans la PR ? | Oui, sauf les variables scellées (documentation) | Le porteur vérifie qu'aucune variable indispensable de Develop (clé maître, base, stockage) n'est scellée, sinon l'environnement de PR ne démarre pas |
+| Une adresse publique, des comptes au PIN connu : faut-il protéger l'accès ? | Oui : un mot de passe commun devant tout l'environnement de PR, que le porteur donne aux personnes à qui il montre la PR (porteur, 2026-10-21) | Le mot de passe vient d'une variable de Develop, copiée dans les PR. Dans un environnement de PR sans ce mot de passe, tout est refusé : un oubli ferme l'accès au lieu de l'ouvrir. Seul le contrôle de santé de l'hébergeur passe sans mot de passe. Develop, Staging et production ne demandent rien de plus |
 
 ## Cas limites identifiés
 
@@ -63,7 +64,6 @@ De plus, l'hébergeur ne lira plus la configuration de déploiement actuelle à 
 
 ## Questions encore ouvertes
 
-- Une adresse publique avec des comptes au PIN connu : faut-il protéger l'accès ?
 - Le stockage de fichiers est-il dupliqué dans l'environnement de PR, ou partagé avec Develop ? À vérifier par le porteur à la première PR.
 - Une PR de promotion crée-t-elle un environnement ? À observer à la prochaine promotion.
 - Les tâches de fond : sans worker, sont-elles exécutées dans le processus web (proposition), ou pas du tout ?
