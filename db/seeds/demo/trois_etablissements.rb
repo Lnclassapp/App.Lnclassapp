@@ -1,6 +1,7 @@
 # Trois établissements de test, développement seulement (chantier tester-pr-en-local) : bin/tester-pr <PR> --demo, ou
 # bin/rails runner db/seeds/demo/trois_etablissements.rb. Chacun a 3 classes par niveau de la 6ème à la Tle, de 35 à 45
-# élèves par classe, un chef d'établissement, et les 6 enseignants de chaque classe, un par matière du référentiel.
+# élèves par classe, un chef d'établissement, et les 6 enseignants de chaque classe, un par matière : l'EDHC au collège,
+# la philosophie au lycée (décision du porteur du 2026-10-21) ; l'EDHC est ajoutée aux matières de la base si elle manque.
 # Deux enseignants par établissement sont bivalents ; trois enseignants servent dans plusieurs établissements, l'un dans
 # les trois. Aucune activité : les classes sont prêtes, rien n'y est encore joué (pour cela, db/seeds/demo/saint_michel.rb).
 # Insertions groupées, en une transaction : quelques secondes. Rejoué, il ne crée rien de plus. PIN 2468 partout (ADR-0034).
@@ -14,8 +15,10 @@ SCHOOLS = [ [ "Test — Lycée Moderne Les Cocotiers", "LMC" ], [ "Test — Coll
 CLASSROOMS = [ *%w[6eme 5eme 4eme 3eme].product([ nil ], [ 1, 2, 3 ]),
                [ "2nde", "a", 1 ], [ "2nde", "a", 2 ], [ "2nde", "c", 1 ],
                *%w[1ere tle].product(%w[a1 c d], [ 1 ]) ].freeze
-# Chaque matière est tenue par 4 enseignants, qui se partagent les 21 classes dans l'ordre (6, 5, 5, 5).
-SHARES = [ 0...6, 6...11, 11...16, 16...21 ].freeze
+# Les parts d'une matière : les classes (rangs dans CLASSROOMS) de chacun de ses enseignants. Une matière commune à tous
+# les niveaux a 4 enseignants pour les 21 classes ; l'EDHC (12 classes du collège) et la philosophie (9 du lycée), 2.
+SHARES = Hash.new([ 0...6, 6...11, 11...16, 16...21 ].freeze).merge("edhc" => [ 0...6, 6...12 ], "philosophie" => [ 12...17, 17...21 ]).freeze
+EDHC = { slug: "edhc", name: "EDHC", shortname: "EDHC", category: "other", position: 7 }.freeze
 # Une même personne tient deux postes : [établissement, matière, part] => le poste qu'elle tient déjà. Les parts réunies
 # sont disjointes dans un établissement : chaque classe garde 6 enseignants distincts.
 SAME_PERSON = (1..3).each_with_object({}) do |school_rank, same|
@@ -26,7 +29,7 @@ end.merge(
   # Dans plusieurs établissements : un professeur de maths dans les trois, un de philosophie dans deux.
   [ 2, "mathematiques", 3 ] => [ 1, "mathematiques", 3 ],
   [ 3, "mathematiques", 0 ] => [ 1, "mathematiques", 3 ],
-  [ 3, "philosophie", 3 ] => [ 2, "philosophie", 3 ]
+  [ 3, "philosophie", 1 ] => [ 2, "philosophie", 1 ]
 ).freeze
 LAST_NAMES = %w[Koné Traoré Kouassi Yao Bamba Coulibaly Ouattara Diabaté Touré Koffi N'Guessan Kouamé Konan Diallo Cissé
                 Gnamien Kacou Aka Assi Brou Dosso Fofana Sanogo Soro Tanoh Zadi Méité Amani Ehui Kra].freeze
@@ -53,13 +56,15 @@ person = lambda do |contact, role|
     first_name: FIRST_NAMES.fetch(gender).sample(random:) }
 end
 insert = ->(model, rows) { model.insert_all!(rows, returning: %w[id]).map { it["id"] } }
-materials = Orm::Material.order(:id).to_a
 levels = Orm::Level.all.index_by(&:slug)
 series = Orm::Series.all.index_by(&:slug)
 drenas = Orm::Drena.order(:name).limit(SCHOOLS.size).to_a
 school_year = Entities::Classroom::SchoolYear.current(now.to_date)
 
 Orm::School.transaction do
+  Orm::Material.find_or_create_by!(slug: EDHC[:slug]) { it.assign_attributes(EDHC.except(:slug)) }
+  materials = Orm::Material.order(:id).to_a
+
   # 1. Les établissements, leurs classes et leur chef d'établissement.
   school_repository = Repositories::School::SchoolRepository.new
   codes = Entities::School::SchoolCode.generate_unique(count: SCHOOLS.size, taken: school_repository.taken_school_codes)
@@ -83,7 +88,9 @@ Orm::School.transaction do
   end)
 
   # 2. Les enseignants : un poste par établissement, matière et part ; SAME_PERSON réunit deux postes sur une personne.
-  posts = (1..SCHOOLS.size).to_a.product(materials.map(&:slug), SHARES.each_index.to_a)
+  posts = (1..SCHOOLS.size).to_a.product(materials.map(&:slug)).flat_map do |school_rank, slug|
+    SHARES[slug].each_index.map { [ school_rank, slug, it ] }
+  end
   owner = ->(post) { SAME_PERSON.key?(post) ? owner.(SAME_PERSON.fetch(post)) : post }
   owners = posts.map(&owner).uniq
   contacts = owners.group_by(&:first).flat_map do |school_rank, owned|
@@ -102,8 +109,8 @@ Orm::School.transaction do
   Orm::TeacherSchoolMaterial.insert_all!(links.map { it.first(3) }.uniq.map do |teacher_id, school_rank, slug|
     { teacher_id:, school_id: schools.fetch(school_rank - 1).id, material_id: by_slug.fetch(slug).id, created_at: now }
   end)
-  Orm::TeacherClassroom.insert_all!(links.flat_map do |teacher_id, school_rank, _slug, share|
-    classrooms.fetch(school_rank - 1).values_at(*SHARES.fetch(share)).map { { teacher_id:, classroom_id: it, created_at: now } }
+  Orm::TeacherClassroom.insert_all!(links.flat_map do |teacher_id, school_rank, slug, share|
+    classrooms.fetch(school_rank - 1).values_at(*SHARES[slug].fetch(share)).map { { teacher_id:, classroom_id: it, created_at: now } }
   end.uniq)
 
   # 3. Les élèves : de 35 à 45 par classe, dans leur classe principale.

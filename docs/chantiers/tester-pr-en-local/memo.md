@@ -24,7 +24,7 @@ Le porteur veut essayer une PR avant de la fusionner, sur son ordinateur et sur 
 
 - `--telephone` ouvre le serveur au réseau local (`BINDING=0.0.0.0`) et affiche l'adresse à taper sur le téléphone.
 - `--reset` recrée la base de développement.
-- `--demo` ajoute trois établissements de test (`db/seeds/demo/trois_etablissements.rb`, demande du porteur du 2026-10-21) : 3 classes par niveau de la 6ème à la Tle, de 35 à 45 élèves par classe, les 6 enseignants de chaque classe, 2 enseignants bivalents par établissement, un enseignant dans les trois établissements et un dans deux. Insertions groupées : 4 secondes pour 2 555 élèves et 63 enseignants.
+- `--demo` ajoute trois établissements de test (`db/seeds/demo/trois_etablissements.rb`, demande du porteur du 2026-10-21) : 3 classes par niveau de la 6ème à la Tle, de 35 à 45 élèves par classe, les 6 enseignants de chaque classe (EDHC au collège, philosophie au lycée), 2 enseignants bivalents par établissement, un enseignant dans les trois établissements et un dans deux. Insertions groupées : 4 secondes pour 2 555 élèves et 63 enseignants.
 - `--activite` ajoute le Collège Saint Michel de `db/seeds/demo/saint_michel.rb`, dont les élèves ont déjà travaillé. Il passe par les vrais use cases et prend environ 20 minutes la première fois. Il était cassé sur `Develop` (argument `illustrations:` manquant, champ `visible_until` disparu) : réparé dans ce chantier.
 
 ## Hors périmètre

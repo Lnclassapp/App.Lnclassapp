@@ -115,7 +115,7 @@ Le script récupère le code de la PR tel qu'il est sur GitHub, joue ses migrati
 | Option | Comptes (PIN 2468 partout) |
 |---|---|
 | toujours | enseignant `0500000001`, élève `0100000001`, équipe `0700000000` (code TOTP affiché par les seeds) |
-| `--demo` | 3 établissements « Test — … » : 3 classes par niveau de la 6ème à la Tle, 35 à 45 élèves par classe, les 6 enseignants de chaque classe (un par matière), 2 bivalents par établissement, un enseignant dans les 3 établissements et un dans 2. Direction `0731000001`, `0732000001`, `0733000001` ; enseignants `0531000001`…, `0532000001`…, `0533000001`… ; élèves `013S00CCEE` (S établissement, CC classe, EE élève : `0131000101` est le 1er élève de la 1re classe de l'établissement 1) |
+| `--demo` | 3 établissements « Test — … » : 3 classes par niveau de la 6ème à la Tle, 35 à 45 élèves par classe, les 6 enseignants de chaque classe (un par matière : EDHC au collège, philosophie au lycée), 2 bivalents par établissement, un enseignant dans les 3 établissements et un dans 2. Direction `0731000001`, `0732000001`, `0733000001` ; enseignants `0531000001`…, `0532000001`…, `0533000001`… ; élèves `013S00CCEE` (S établissement, CC classe, EE élève : `0131000101` est le 1er élève de la 1re classe de l'établissement 1) |
 | `--activite` | Collège Saint Michel de Tiassalé, avec exercices joués, notes, badges et lacunes : direction `0710000001` et `0710000002`, enseignants de la Tle D 1 `0510000001` à `0510000006`, autres enseignants `05111…` à `05116…`, élèves de la Tle D 1 `0110000001` à `0110000020` |
 
 Sans `--telephone`, le serveur n'écoute que l'ordinateur : un téléphone n'y accède pas. Avec, il est ouvert à tout le réseau local. Sur Mac, accepte l'alerte du pare-feu pour `ruby`.

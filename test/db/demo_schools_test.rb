@@ -39,17 +39,27 @@ class DemoSchoolsTest < ActiveSupport::TestCase
     assert_includes output, "PIN 2468"
   end
 
-  test "every classroom has six distinct teachers, one per subject, each declared in its school with that subject" do
+  test "every classroom has six distinct teachers, one per subject: EDHC in the first cycle, philosophy in the second" do
     play
+    common = %w[mathematiques physique-chimie svt francais histoire-geographie]
+    first_cycle = %w[6eme 5eme 4eme 3eme]
 
-    Orm::Classroom.where(school: schools).find_each do |classroom|
+    Orm::Classroom.where(school: schools).includes(:level).find_each do |classroom|
       teacher_ids = Orm::TeacherClassroom.where(classroom:).pluck(:teacher_id)
-      materials = Orm::TeacherSchoolMaterial.where(teacher_id: teacher_ids, school_id: classroom.school_id).pluck(:material_id)
+      # Each teacher's subject in this classroom: the one of their subjects in the school that the level takes.
+      expected = common + [ first_cycle.include?(classroom.level.slug) ? "edhc" : "philosophie" ]
+      slugs = Orm::TeacherSchoolMaterial.joins(:material).where(teacher_id: teacher_ids, school_id: classroom.school_id)
+                                       .pluck("materials.slug").uniq & expected
 
       assert_equal 6, teacher_ids.uniq.size, classroom.name
-      assert_equal Orm::Material.count, materials.uniq.size, "#{classroom.name} : les 6 matières"
+      assert_equal expected.sort, slugs.sort, classroom.name
       teacher_ids.each { assert Orm::TeacherSchool.exists?(teacher_id: it, school_id: classroom.school_id) }
     end
+    taught = Orm::TeacherClassroom.joins(classroom: :level).where(classrooms: { school_id: schools.select(:id) })
+    levels_of = ->(slug) { taught.where(teacher_id: Orm::TeacherSchoolMaterial.joins(:material).where(materials: { slug: }).select(:teacher_id)).distinct.pluck("levels.slug").sort }
+    assert_equal first_cycle.sort, levels_of.("edhc"), "l'EDHC au collège seulement"
+    assert_equal %w[1ere 2nde tle], levels_of.("philosophie"), "la philosophie au lycée seulement"
+    assert_equal "EDHC", Orm::Material.find_by!(slug: "edhc").name
   end
 
   test "some teachers have several subjects, others several schools, one of them three" do
