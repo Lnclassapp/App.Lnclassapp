@@ -40,8 +40,11 @@ http_content_length_limit 55 * 1024 * 1024
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
 
-# ADR-0052 : the Solid Queue worker always runs inside Puma, in development as in production.
-plugin :solid_queue
+# ADR-0052, amended by ADR-XXXX: the Solid Queue worker always runs inside Puma, in development as in production,
+# except in a PR environment (jobs run in the web process there, so the service can sleep). Keep this exact line:
+# test/guards/repository_rules_test.rb refuses any other condition.
+require_relative "pr_environment"
+plugin :solid_queue unless PrEnvironment.active?
 
 # Specify the PID file. Defaults to tmp/pids/server.pid in development.
 # In other environments, only set the PID file if requested.
