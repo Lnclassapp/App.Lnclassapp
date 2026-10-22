@@ -12,11 +12,28 @@
 | 2026-10-21 | Le démarrage d'un environnement de PR l'écrit au journal, avec un avertissement sans mot de passe | Revue des échecs silencieux : une variable scellée sur Develop fermait la PR sans aucune trace | oui, ADR-0108 §4 |
 | 2026-10-21 | Non retenu : limiter `PrEnvironment.active?` à `RAILS_ENV=production` pour Puma | Le seul chemin trouvé est `railway run bin/dev` lié à un environnement de PR (worker absent, adaptateur `solid_queue` du développement). Personne ne lance le développement contre une PR ; le correctif changeait le contrat gelé du Lot 0 et trois tests | non |
 
+## Essai sur Railway
+
+Essai du 2026-10-22, PR #279 (la PR #278 avait reçu un environnement vide, voir « Ce qui a dérapé »). Réglages : PR Environments et Bot PR Environments activés, base Develop ; `PR_BASE_ENVIRONMENT=Develop` et `PR_ACCESS_PASSWORD` sur le service web de Develop ; Serverless. Constaté depuis l'API Railway, le journal de déploiement et `curl` :
+
+| Vérification | Attendu | Constaté |
+|---|---|---|
+| Environnement créé à l'ouverture de la PR | oui, à partir de Develop | oui : `App.Lnclassapp-pr-279`, services web et Postgres, déploiement SUCCESS en 3 min |
+| Pré-déploiement | `db:prepare db:seed` vert, « 3 établissements, 63 classes… » au journal | oui : « 3 établissements, 63 classes, 63 enseignants, 2555 élèves » |
+| Journal de démarrage | `[config] PR environment (base Develop, name …): password required…` | oui ; aucun processus Solid Queue au démarrage |
+| Adresse sans mot de passe | demande de mot de passe (401) ; `/up` répond | oui : 401 sans mot de passe ou avec un mauvais, 200 avec le bon, `/up` 200 ; asset `cache-control: private`, 401 sans mot de passe après un appel authentifié |
+| Connexion `0531000001` / 2468 | accueil enseignant | oui : 303 vers `/teachers`, « Accueil · Enseignant », « Bonjour, Junior » |
+| Veille | service endormi 10 minutes après la dernière visite | oui : « Sleeping » environ 15 minutes après la dernière visite ; au réveil, 502 puis 200 |
+| Stockage de fichiers | bucket propre à la PR, pas celui de Develop | oui : `BUCKET_NAME` différent de celui de Develop |
+| Fermeture de la PR | environnement supprimé | oui : l'environnement vide de la PR #278 a disparu à sa fermeture |
+
 ## Ce qui a dérapé
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
-- …
+- **« Pas d'environnement pour les robots » excluait toutes les PR de Claude.** Railway compte comme PR de robot une PR ouverte par l'application GitHub de Claude, même au nom du porteur : la PR #278 a reçu un environnement vide, sans service. Bot PR Environments est donc activé ; contrepartie : les PR de Dependabot ou d'autres robots ont aussi le leur.
+- **Les variables n'étaient pas posées** sur le service web de Develop, alors que le réglage semblait fait : sans elles, l'environnement de PR aurait tourné comme une production ouverte, sans données de test. À vérifier par lecture (`railway variable list`), pas par souvenir.
+- **Develop ne s'était pas redéployé** après les fusions des PR #275 et #276 : il tournait encore le 2026-10-22 sur le commit de la PR #274. Déployé à la main sur `738af3bf` (SUCCESS). Cause non trouvée : à surveiller à la prochaine fusion.
 
 ## Ce qu'on a appris sur la codebase
 

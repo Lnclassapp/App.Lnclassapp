@@ -85,7 +85,7 @@ Au démarrage, un environnement de PR l'écrit dans le journal (`[config] PR env
 
 **Réglages Railway, au tableau de bord (hors dépôt, tenus par le porteur) :**
 
-1. *Project Settings › Environments* : PR Environments activés, base `Develop` ; Bot PR Environments et Focused PR Environments **désactivés**.
+1. *Project Settings › Environments* : PR Environments activés, base `Develop` ; **Bot PR Environments activés** (Railway compte comme PR de robot une PR ouverte par Claude, même au nom du porteur : sans ce réglage, son environnement est créé vide, sans service) ; Focused PR Environments désactivés.
 2. Variables de Develop : `PR_BASE_ENVIRONMENT=Develop` et `PR_ACCESS_PASSWORD=<mot de passe choisi>`, non scellées. Vérifier qu'aucune variable indispensable n'est scellée (`RAILS_MASTER_KEY`, `DATABASE_URL`, `BUCKET_*`) : elle manquerait dans les PR.
 3. *Service web de Develop › Settings › Deploy › Serverless* : activé. Les PR en héritent ; Develop reste éveillé grâce à son worker.
 4. Après la fusion du chantier : ouvrir une PR d'essai, constater les données, le mot de passe et la veille, et vérifier dans le journal que le stockage de fichiers de la PR n'est pas celui de Develop.
