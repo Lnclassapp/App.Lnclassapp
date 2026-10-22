@@ -20,16 +20,9 @@ course_for = lambda do |course|
              .find_by(name: course["name"], levels: { name: course["level_name"] }, materials: { name: course["material_name"] },
                       series: { name: course["series_name"] })
 end
-# Les leçons de 1ère A visent la série « A », que le référentiel n'ouvre pas en 1ère (seulement A1, A2, C, D) : pour
-# les données de test, elles sont importées en 1ère A1 et en 1ère A2 (choix du 2026-10-23, le contenu reste à corriger).
-SERIES_FOR_TEST = { [ "1ère", "A" ] => %w[A1 A2] }.freeze
-lessons = LESSON_PATHS.flat_map do |path|
+lessons = LESSON_PATHS.map do |path|
   document = JSON.parse(path.read)
-  course = document["courses"].first
-  SERIES_FOR_TEST.fetch([ course["level_name"], course["series_name"] ], [ course["series_name"] ]).map do |series_name|
-    variant = document.deep_dup.tap { it["courses"].first["series_name"] = series_name }
-    [ path, variant, variant["courses"].first ]
-  end
+  [ path, document, document["courses"].first ]
 end
 missing = lessons.reject { |_path, _document, course| course_for.(course) }
 
@@ -39,7 +32,7 @@ if missing.any?
   missing.each_slice(BATCH) do |batch|
     uploads = batch.map do |path, document, course|
       Dtos::Catalog::ImportUploadInput::Upload.new(io: StringIO.new(JSON.generate(document)),
-                                                   filename: "#{path.parent.basename}-#{course['series_name']}-#{path.basename}")
+                                                   filename: "#{path.parent.parent.basename}-#{path.parent.basename}-#{path.basename}")
     end
     started = UseCases::Catalog::StartImport.new(
       reports: Repositories::Catalog::ImportReportRepository.new, files: Repositories::Catalog::ImportFileStore.new,
