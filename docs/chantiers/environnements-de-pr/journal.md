@@ -43,6 +43,7 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - En production, `seeds: false` (`config/database.yml`) empêche `db:prepare` de semer : seul le `db:seed` du pré-déploiement sème, une fois par déploiement d'une PR. L'idempotence sert aux redéploiements (chaque commit poussé).
 - Les leçons complètes (`db/seeds/demo/lecons_completes.rb`, demandé par le porteur le 2026-10-22) : 228 cours (213 leçons, celles de 1ère A en A1 et en A2) importés par la vraie chaîne et publiés en environ 80 s sur une base neuve, 4 s rejouées. L'import accepte 50 fichiers par envoi (ADR-0068).
 - Lot A (2026-10-23) : `railway config migrate status` montre qu'aucun service ne lit plus `railway.json` ; avec `.railway/railway.ts` qui reprend l'état réel (Develop sans délai de contrôle de santé propre, commande de démarrage vide), `railway config plan` est « already up to date » sur production, Staging et Develop. Rien à appliquer : `railway.json` est retiré. Piège : lancé derrière `timeout`, le CLI se croit trop ancien (le SDK lit sa version par `$_`).
+- Lot D abandonné (2026-10-23) : une PR dont la source est `Develop` (PR #281, vers une copie de `Staging`) n'a reçu aucun environnement en 3 minutes, quand les PR #279 et #280 l'avaient en quelques secondes. Railway ne crée pas d'environnement pour une branche déjà déployée par un environnement : les promotions n'en ont pas, sans rien de notre côté. La branche d'essai `essai/base-promotion` reste à supprimer sur GitHub (le proxy de la session refuse la suppression).
 - Les `limits_concurrency` des jobs reposent sur Solid Queue : en `:async`, ils ne s'appliquent pas (ADR-0108 §5).
 
 ## Dette laissée derrière
@@ -52,14 +53,13 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | Les 15 leçons de `docs/contenus/lecons-traitees/1ere-a` visent la série « A », absente du référentiel en 1ère (A1, A2, C, D) : l'import les refuse (`series_not_allowed`). Les données de test les importent en 1ère A1 et en 1ère A2 (2026-10-23) | Correction du contenu, hors de ce chantier : choisir A1, A2 ou les deux dans les fichiers | contenus |
-| Lot D : supprimer l'environnement d'une PR de promotion | Conditionnel : à observer à la prochaine promotion Develop → Staging | ce chantier, si besoin |
 | Mise en veille effective, stockage de fichiers propre à chaque PR | Non vérifiables hors Railway | première PR d'essai, par le porteur |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-23 |
+| **PR** | #276 (lots 0, B, C), #279 (essai sur Railway), #280 (lot A, leçons complètes) |
+| **ADR produits** | [ADR-0108](../../decisions/adr/0108-environnements-de-pr-reconnus-par-l-application.md) ; amende ADR-0052 et ADR-0034 |
+| **UDR produits** | aucun (aucune vue) |

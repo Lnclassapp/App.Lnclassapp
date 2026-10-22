@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours — lots 0, B, C livrés (PR #276) ; lot A attend le porteur |
+| **Statut** | livré |
 | **Ouvert le** | 2026-10-21 |
 | **Branche** | `feature/environnements-de-pr` |
 | **Programme** | — |
