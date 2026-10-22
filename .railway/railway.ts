@@ -20,7 +20,7 @@ export default defineRailway((ctx) => {
 
   const app = service("App.Lnclassapp", {
     source: github("Lnclassapp/App.Lnclassapp", { branch: environment.branch, checkSuites: false }),
-    build: { buildEnvironment: "V3", builder: "DOCKERFILE", dockerfilePath: "Dockerfile" },
+    build: { buildEnvironment: "V3", builder: "DOCKERFILE", dockerfilePath: "/Dockerfile" },
     healthcheck: "/up",
     healthcheckTimeout: 120,
     // ADR-0052, ADR-0034: migrations, then the seeds of the environment, before each deploy.

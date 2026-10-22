@@ -45,7 +45,8 @@ class RailwayDeploymentTest < ActiveSupport::TestCase
     config = JSON.parse(Rails.root.join("railway.json").read)
     iac = Rails.root.join(".railway/railway.ts").read
 
-    assert_includes iac, %(builder: "#{config.dig('build', 'builder')}", dockerfilePath: "#{config.dig('build', 'dockerfilePath')}")
+    # Railway stores the Dockerfile path from the repository root: "/Dockerfile" (`railway config plan`, 2026-10-22).
+    assert_includes iac, %(builder: "#{config.dig('build', 'builder')}", dockerfilePath: "/#{config.dig('build', 'dockerfilePath')}")
     assert_includes iac, %(preDeploy: "#{config.dig('deploy', 'preDeployCommand').sole}")
     assert_includes iac, %(healthcheck: "#{config.dig('deploy', 'healthcheckPath')}")
     assert_includes iac, "healthcheckTimeout: #{config.dig('deploy', 'healthcheckTimeout')}"
