@@ -39,6 +39,21 @@ class RailwayDeploymentTest < ActiveSupport::TestCase
     assert_equal "/up", config.dig("deploy", "healthcheckPath")
   end
 
+  # Chantier environnements-de-pr, lot A: railway.json is no longer read after 2026-12-01. .railway/railway.ts says the
+  # same thing, per environment, until railway.json is removed after the cutover.
+  test ".railway/railway.ts builds, prepares and checks like railway.json, one branch per environment" do
+    config = JSON.parse(Rails.root.join("railway.json").read)
+    iac = Rails.root.join(".railway/railway.ts").read
+
+    assert_includes iac, %(builder: "#{config.dig('build', 'builder')}", dockerfilePath: "#{config.dig('build', 'dockerfilePath')}")
+    assert_includes iac, %(preDeploy: "#{config.dig('deploy', 'preDeployCommand').sole}")
+    assert_includes iac, %(healthcheck: "#{config.dig('deploy', 'healthcheckPath')}")
+    assert_includes iac, "healthcheckTimeout: #{config.dig('deploy', 'healthcheckTimeout')}"
+    { "production" => "main", "Staging" => "Staging", "Develop" => "Develop" }.each do |environment, branch|
+      assert_match(/^\s*#{environment}: \{ branch: "#{branch}"/, iac, environment)
+    end
+  end
+
   # Production, 2026-09-29: on a new database, db:prepare loaded the schema and seeded, then db:seed seeded again in the
   # same process; two links were printed per deploy, the first one already revoked by the second.
   test "on a new database, each deploy seeds once and prints a single bootstrap link, which a later deploy replaces" do

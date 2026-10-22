@@ -49,7 +49,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Lot A : migration de `railway.json` vers `.railway/railway.ts` | Demande `railway config migrate`, connecté au projet ; la connexion du porteur à Railway ne marche pas. **Échéance : 2026-12-01** | ce chantier, seconde PR |
+| Lot A, fin : bascule (`railway config migrate cutover`) puis retrait de `railway.json` | `.railway/railway.ts` est écrit (2026-10-22, sortie de `railway config migrate` pour production, Staging et Develop, réunie). `railway config plan` n'a pas pu tourner : le paquet `railway/iac` refuse le CLI 5.71 (« requires Railway CLI 5.42.1 or newer »), à revoir. La bascule écrit dans Railway : au porteur. **Échéance : 2026-12-01** | ce chantier |
 | Lot D : supprimer l'environnement d'une PR de promotion | Conditionnel : à observer à la prochaine promotion Develop → Staging | ce chantier, si besoin |
 | Mise en veille effective, stockage de fichiers propre à chaque PR | Non vérifiables hors Railway | première PR d'essai, par le porteur |
 
