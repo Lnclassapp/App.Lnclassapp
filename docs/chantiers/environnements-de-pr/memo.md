@@ -32,7 +32,7 @@ De plus, l'hébergeur ne lira plus la configuration de déploiement actuelle à 
 
 ## Hors périmètre
 
-- Les environnements de PR des robots : désactivés (décision du porteur, 2026-10-21).
+- Les environnements de PR des robots : désactivés (décision du porteur, 2026-10-21), puis activés le 2026-10-22 : Railway compte comme robot les PR ouvertes par Claude, qui n'avaient sinon aucun environnement (journal).
 - Les environnements pour les PR de promotion Develop → Staging et Staging → main (décision du porteur, 2026-10-21).
 - Les données d'activité déjà jouée (séances, badges) : leur création dure environ 20 minutes, trop long pour un déploiement.
 - Toute donnée réelle : un environnement de PR ne contient que des données fictives.
