@@ -41,6 +41,8 @@ FIRST_NAMES = { "male" => %w[Ibrahim Serge Paul Jean Moussa Yves Arsène Hervé 
 PIN = "2468"
 
 log = ->(message) { puts "[trois-etablissements] #{message}" }
+# Avant tout retour : les leçons d'EDHC (db/seeds/demo/lecons_completes.rb) en ont besoin, même établissements déjà là.
+Orm::Material.find_or_create_by!(slug: EDHC[:slug]) { it.assign_attributes(EDHC.except(:slug)) }
 existing = Orm::School.where(name: SCHOOLS.map(&:first)).count
 if existing == SCHOOLS.size
   log.call("déjà en place, rien à faire (contenu non vérifié : bin/tester-pr <PR> --reset --demo pour repartir de zéro)")
@@ -63,7 +65,6 @@ drenas = Orm::Drena.order(:name).limit(SCHOOLS.size).to_a
 school_year = Entities::Classroom::SchoolYear.current(now.to_date)
 
 Orm::School.transaction do
-  Orm::Material.find_or_create_by!(slug: EDHC[:slug]) { it.assign_attributes(EDHC.except(:slug)) }
   materials = Orm::Material.order(:id).to_a
 
   # 1. Les établissements, leurs classes et leur chef d'établissement.

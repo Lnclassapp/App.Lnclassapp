@@ -1,18 +1,26 @@
 require "test_helper"
 
 # ADR-0108, ADR-0034: a PR environment (Railway, run in production) is seeded like development plus the three test
-# schools; production without the PR variables keeps the identity seed alone. Played in the transaction of the test.
+# schools and the complete lessons; production without the PR variables keeps the identity seed alone. Played in the
+# transaction of the test, with two lessons instead of the 213 of docs/contenus/lecons-traitees (about a minute).
 class PrEnvironmentSeedsTest < ActiveSupport::TestCase
   PR_VARIABLES = { "PR_BASE_ENVIRONMENT" => "Develop", "RAILWAY_ENVIRONMENT_NAME" => "lnclass-pr-276" }.freeze
   TABLES = [ Orm::Drena, Orm::School, Orm::Classroom, Orm::Level, Orm::Series, Orm::LevelSeries, Orm::ClassroomPlanEntry,
              Orm::Material, Orm::User, Orm::Course, Orm::ClassroomStudent, Orm::TeacherClassroom ].freeze
-  TEST_FILES = %w[catalog school development demo/trois_etablissements].freeze
+  TEST_FILES = %w[catalog school development demo/trois_etablissements demo/lecons_completes].freeze
+  LESSONS = %w[6eme/svt 6eme/edhc].map { Rails.root.glob("docs/contenus/lecons-traitees/#{it}/*.json").min }.freeze
 
   def counts = TABLES.to_h { [ it.name, it.count ] }
 
   # Wrapped load: the top-level constants of the seed files stay in an anonymous module.
+  # Rails.root answers the lessons' glob with LESSONS, any other glob as usual.
   def run_seeds
-    capture_io { load Rails.root.join("db/seeds.rb").to_s, true }.first
+    root = Rails.root
+    glob = root.method(:glob)
+    root.define_singleton_method(:glob) { |pattern, *rest| pattern.include?("lecons-traitees") ? LESSONS : glob.call(pattern, *rest) }
+    capture_io { load root.join("db/seeds.rb").to_s, true }.first
+  ensure
+    root.singleton_class.remove_method(:glob)
   end
 
   # Routes are drawn before the switch (config/routes.rb reads Rails.env), as in SeedsTest.
@@ -43,6 +51,14 @@ class PrEnvironmentSeedsTest < ActiveSupport::TestCase
     assert Orm::School.exists?(name: "Lycée Moderne de Treichville")
     assert Orm::User.find_by!(contact: "0531000001").authenticate_pin("2468")
     assert Orm::User.find_by!(contact: "0731000001").authenticate_pin("2468")
+    LESSONS.each do |path|
+      course = Orm::Course.find_by!(name: JSON.parse(path.read)["courses"].first["name"])
+      exercises = Orm::Exercise.joins(:essential).where(essentials: { course_id: course.id })
+      assert_equal "published", course.status, path.to_s
+      assert_operator course.essentials.where(status: "published").count, :>=, 1, path.to_s
+      assert_predicate exercises, :any?, path.to_s
+      assert_equal [ "published" ], exercises.distinct.pluck(:status), path.to_s
+    end
   end
 
   test "a second run creates nothing" do

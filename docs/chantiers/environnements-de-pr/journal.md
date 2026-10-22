@@ -41,6 +41,7 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 
 - Railway (documentation du 2026-10-21) : `railway.json` n'est plus lu après le 2026-12-01 ; les bases d'une PR partent vides ; les variables scellées ne sont pas copiées dans les PR ; aucun filtre des PR par branche cible ; aucune variable ne signale un environnement de PR.
 - En production, `seeds: false` (`config/database.yml`) empêche `db:prepare` de semer : seul le `db:seed` du pré-déploiement sème, une fois par déploiement d'une PR. L'idempotence sert aux redéploiements (chaque commit poussé).
+- Les leçons complètes (`db/seeds/demo/lecons_completes.rb`, demandé par le porteur le 2026-10-22) : 198 sur 213 importées par la vraie chaîne et publiées en environ 70 s sur une base neuve, 4 s rejouées. L'import accepte 50 fichiers par envoi (ADR-0068).
 - Les `limits_concurrency` des jobs reposent sur Solid Queue : en `:async`, ils ne s'appliquent pas (ADR-0108 §5).
 
 ## Dette laissée derrière
@@ -50,6 +51,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | Lot A, fin : `railway config apply` sur Develop, puis retrait de `railway.json` | `.railway/railway.ts` est écrit (2026-10-22, sortie de `railway config migrate` pour production, Staging et Develop, réunie). `railway config plan` : production et Staging « already up to date » ; Develop, 1 changement (`healthcheckTimeout` null → 120, celui de `railway.json` ; `startCommand` "" → null). L'application écrit dans Railway : au porteur (`railway config apply` sur Develop). Piège : lancé derrière `timeout`, le CLI se croit trop ancien (le SDK lit sa version par `$_`). **Échéance : 2026-12-01** | ce chantier |
+| 15 leçons de `docs/contenus/lecons-traitees/1ere-a` refusées par l'import (`series_not_allowed` : série « A » en 1ère, où le référentiel n'a que A1, A2, C, D) | Correction du contenu, hors de ce chantier : choisir A1 ou A2, ou ouvrir la série A en 1ère | contenus |
 | Lot D : supprimer l'environnement d'une PR de promotion | Conditionnel : à observer à la prochaine promotion Develop → Staging | ce chantier, si besoin |
 | Mise en veille effective, stockage de fichiers propre à chaque PR | Non vérifiables hors Railway | première PR d'essai, par le porteur |
 
