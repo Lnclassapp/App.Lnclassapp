@@ -8,7 +8,7 @@ class PrEnvironmentSeedsTest < ActiveSupport::TestCase
   TABLES = [ Orm::Drena, Orm::School, Orm::Classroom, Orm::Level, Orm::Series, Orm::LevelSeries, Orm::ClassroomPlanEntry,
              Orm::Material, Orm::User, Orm::Course, Orm::ClassroomStudent, Orm::TeacherClassroom ].freeze
   TEST_FILES = %w[catalog school development demo/trois_etablissements demo/lecons_completes].freeze
-  LESSONS = %w[6eme/svt 6eme/edhc].map { Rails.root.glob("docs/contenus/lecons-traitees/#{it}/*.json").min }.freeze
+  LESSONS = %w[6eme/svt 6eme/edhc 1ere-a/francais].map { Rails.root.glob("docs/contenus/lecons-traitees/#{it}/*.json").min }.freeze
 
   def counts = TABLES.to_h { [ it.name, it.count ] }
 
@@ -59,6 +59,9 @@ class PrEnvironmentSeedsTest < ActiveSupport::TestCase
       assert_predicate exercises, :any?, path.to_s
       assert_equal [ "published" ], exercises.distinct.pluck(:status), path.to_s
     end
+    first_a = JSON.parse(LESSONS.last.read)["courses"].first["name"]
+    assert_equal %w[A1 A2], Orm::Course.joins(:series).where(name: first_a).order("series.name").pluck("series.name"),
+                 "une leçon de 1ère A, importée en A1 et en A2"
   end
 
   test "a second run creates nothing" do

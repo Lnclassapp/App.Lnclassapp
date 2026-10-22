@@ -20,15 +20,26 @@ course_for = lambda do |course|
              .find_by(name: course["name"], levels: { name: course["level_name"] }, materials: { name: course["material_name"] },
                       series: { name: course["series_name"] })
 end
-lessons = LESSON_PATHS.map { |path| [ path, JSON.parse(path.read)["courses"].first ] }
-missing = lessons.reject { |_path, course| course_for.(course) }
+# Les leçons de 1ère A visent la série « A », que le référentiel n'ouvre pas en 1ère (seulement A1, A2, C, D) : pour
+# les données de test, elles sont importées en 1ère A1 et en 1ère A2 (choix du 2026-10-23, le contenu reste à corriger).
+SERIES_FOR_TEST = { [ "1ère", "A" ] => %w[A1 A2] }.freeze
+lessons = LESSON_PATHS.flat_map do |path|
+  document = JSON.parse(path.read)
+  course = document["courses"].first
+  SERIES_FOR_TEST.fetch([ course["level_name"], course["series_name"] ], [ course["series_name"] ]).map do |series_name|
+    variant = document.deep_dup.tap { it["courses"].first["series_name"] = series_name }
+    [ path, variant, variant["courses"].first ]
+  end
+end
+missing = lessons.reject { |_path, _document, course| course_for.(course) }
 
 if missing.any?
   noop_queue = Object.new.tap { |queue| queue.define_singleton_method(:enqueue) { |**| nil } }
   transaction = Repositories::Shared::Transaction.new
   missing.each_slice(BATCH) do |batch|
-    uploads = batch.map do |path, _course|
-      Dtos::Catalog::ImportUploadInput::Upload.new(io: StringIO.new(path.read), filename: "#{path.parent.basename}-#{path.basename}")
+    uploads = batch.map do |path, document, course|
+      Dtos::Catalog::ImportUploadInput::Upload.new(io: StringIO.new(JSON.generate(document)),
+                                                   filename: "#{path.parent.basename}-#{course['series_name']}-#{path.basename}")
     end
     started = UseCases::Catalog::StartImport.new(
       reports: Repositories::Catalog::ImportReportRepository.new, files: Repositories::Catalog::ImportFileStore.new,
@@ -49,8 +60,9 @@ end
 
 # Une leçon que la chaîne d'import refuse (série absente du référentiel pour ce niveau, matière inconnue) reste dans le
 # rapport d'import de l'équipe et n'arrête pas le semis : elle est seulement comptée.
-refused = lessons.reject { |_path, course| course_for.(course) }.map { |path, _course| path.relative_path_from(Rails.root.join("docs/contenus/lecons-traitees")).to_s }
-courses = lessons.filter_map { |_path, course| course_for.(course) }
+refused = lessons.reject { |_path, _document, course| course_for.(course) }
+                .map { |path, _document, _course| path.relative_path_from(Rails.root.join("docs/contenus/lecons-traitees")).to_s }
+courses = lessons.filter_map { |_path, _document, course| course_for.(course) }
 dependencies = { audit_log: Repositories::Identity::AuditLogRepository.new, transaction: Repositories::Shared::Transaction.new,
                  policy: Policies::Catalog::ManageContentPolicy.new, clock: Time.zone }
 cascade = UseCases::Catalog::PublishCascade.new(
