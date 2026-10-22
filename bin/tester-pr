@@ -8,7 +8,8 @@
 #   bin/tester-pr 275 --telephone      # open to the local network: a phone on the same Wi-Fi reaches it
 #   bin/tester-pr 275 --reset          # the development database recreated (fictitious data only)
 #   bin/tester-pr 275 --demo           # plus three test schools: db/seeds/demo/trois_etablissements.rb (63 classrooms,
-#                                      # 35 to 45 students each, bivalent and multi-school teachers; seconds, idempotent)
+#                                      # 35 to 45 students each, bivalent and multi-school teachers; seconds, idempotent),
+#                                      # and the complete lessons, published: db/seeds/demo/lecons_completes.rb (~1 min)
 #   bin/tester-pr 275 --activite       # plus a school whose students already worked: db/seeds/demo/saint_michel.rb
 #                                      # (about 20 minutes the first time, then idempotent)
 set -euo pipefail
@@ -69,7 +70,7 @@ main() {
   fi
   # Idempotent: the fictitious accounts exist whatever the database held, and the TOTP code of the team prints.
   bin/rails db:seed
-  [ "$demo" = 0 ] || bin/rails runner db/seeds/demo/trois_etablissements.rb
+  [ "$demo" = 0 ] || { bin/rails runner db/seeds/demo/trois_etablissements.rb && bin/rails runner db/seeds/demo/lecons_completes.rb; }
   [ "$activity" = 0 ] || bin/rails runner db/seeds/demo/saint_michel.rb
 
   local port="${PORT:-3000}"
@@ -87,6 +88,7 @@ main() {
   if [ "$demo" = 1 ]; then
     echo "3 établissements de test, PIN 2468 : direction 0731000001 à 0733000001, enseignants 0531000001…, 0532000001…,"
     echo "  0533000001…, élèves 013S00CCEE (ex. 0131000101 : établissement 1, 1re classe, 1er élève)."
+    echo "  Leçons complètes publiées (cours, fiches, exercices) de la 6ème à la Tle : docs/contenus/lecons-traitees."
   fi
   if [ "$activity" = 1 ]; then
     echo "Collège Saint Michel, PIN 2468 : direction 0710000001 et 0710000002, enseignants de la Tle D 1 0510000001 à 0510000006,"

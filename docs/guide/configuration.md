@@ -60,7 +60,7 @@ Deux variables apparaissent dans l'aide de l'outil mais **ne sont pas câblées*
 |---|---|
 | `TEAM_BOOTSTRAP_CONTACT` | Numéro du premier membre de l'équipe (ADR-0034, ADR-0038). Tant qu'aucun compte équipe n'existe, chaque déploiement révoque l'invitation ouverte et imprime **un** nouveau lien dans les logs du pré-déploiement. Absente : aucune invitation |
 
-La commande de pré-déploiement est `bin/rails db:prepare db:seed` (`railway.json` et réglage « Pre-deploy Command » du service, ADR-0052). En production, `db:prepare` ne sème jamais (`seeds: false` dans `config/database.yml`) : sans cela, sur une base neuve, il semait avant que `db:seed` ne sème à nouveau, et deux liens s'imprimaient par déploiement (amendement du 2026-09-29).
+La commande de pré-déploiement est `bin/rails db:prepare db:seed` (`.railway/railway.ts` et réglage « Pre-deploy Command » du service, ADR-0052). En production, `db:prepare` ne sème jamais (`seeds: false` dans `config/database.yml`) : sans cela, sur une base neuve, il semait avant que `db:seed` ne sème à nouveau, et deux liens s'imprimaient par déploiement (amendement du 2026-09-29).
 
 ### Déploiement automatique
 

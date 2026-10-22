@@ -1,7 +1,7 @@
 # Retour arrière
 
 > Comment revenir à la version précédente de l'application, quand c'est sans risque, quand c'est impossible, et que faire quand Railway ne déploie plus.
-> Chantier [`acceleration-du-flux`](../chantiers/acceleration-du-flux/memo.md). Les règles de déploiement viennent de l'[ADR-0052](../decisions/adr/0052-chaine-de-livraison-versionnee-et-worker-dans-puma.md) et de [`railway.json`](../../railway.json).
+> Chantier [`acceleration-du-flux`](../chantiers/acceleration-du-flux/memo.md). Les règles de déploiement viennent de l'[ADR-0052](../decisions/adr/0052-chaine-de-livraison-versionnee-et-worker-dans-puma.md) et de [`.railway/railway.ts`](../../.railway/railway.ts) (`railway.json` jusqu'au 2026-10-23).
 >
 > ⚠️ **Les gestes Railway marqués « à vérifier par le porteur » viennent de la documentation de Railway, pas d'un essai sur nos projets.** Le premier retour arrière en recette (`Staging`) les confirme ou les corrige, et cette page est mise à jour à ce moment-là.
 
@@ -9,7 +9,7 @@
 
 ## 1. Ce qui se passe à un déploiement
 
-Chaque environnement Railway déploie seul la branche qu'il suit ([`configuration.md`](configuration.md) §2) : `Staging` → recette, `main` → production. Pour chaque déploiement, `railway.json` fixe l'ordre suivant :
+Chaque environnement Railway déploie seul la branche qu'il suit ([`configuration.md`](configuration.md) §2) : `Staging` → recette, `main` → production. Pour chaque déploiement, la configuration du service (`.railway/railway.ts`) fixe l'ordre suivant :
 
 1. **Construction** de l'image depuis le `Dockerfile`.
 2. **Pré-déploiement** : `bin/rails db:prepare db:seed`. Les migrations sont jouées sur la base de l'environnement **avant** que la nouvelle image reçoive du trafic. Pendant ce temps, l'ancienne image sert toujours, donc sur la base déjà migrée.

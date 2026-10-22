@@ -41,6 +41,8 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 
 - Railway (documentation du 2026-10-21) : `railway.json` n'est plus lu après le 2026-12-01 ; les bases d'une PR partent vides ; les variables scellées ne sont pas copiées dans les PR ; aucun filtre des PR par branche cible ; aucune variable ne signale un environnement de PR.
 - En production, `seeds: false` (`config/database.yml`) empêche `db:prepare` de semer : seul le `db:seed` du pré-déploiement sème, une fois par déploiement d'une PR. L'idempotence sert aux redéploiements (chaque commit poussé).
+- Les leçons complètes (`db/seeds/demo/lecons_completes.rb`, demandé par le porteur le 2026-10-22) : 228 cours (213 leçons, celles de 1ère A en A1 et en A2) importés par la vraie chaîne et publiés en environ 80 s sur une base neuve, 4 s rejouées. L'import accepte 50 fichiers par envoi (ADR-0068).
+- Lot A (2026-10-23) : `railway config migrate status` montre qu'aucun service ne lit plus `railway.json` ; avec `.railway/railway.ts` qui reprend l'état réel (Develop sans délai de contrôle de santé propre, commande de démarrage vide), `railway config plan` est « already up to date » sur production, Staging et Develop. Rien à appliquer : `railway.json` est retiré. Piège : lancé derrière `timeout`, le CLI se croit trop ancien (le SDK lit sa version par `$_`).
 - Les `limits_concurrency` des jobs reposent sur Solid Queue : en `:async`, ils ne s'appliquent pas (ADR-0108 §5).
 
 ## Dette laissée derrière
@@ -49,7 +51,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Lot A : migration de `railway.json` vers `.railway/railway.ts` | Demande `railway config migrate`, connecté au projet ; la connexion du porteur à Railway ne marche pas. **Échéance : 2026-12-01** | ce chantier, seconde PR |
+| Les 15 leçons de `docs/contenus/lecons-traitees/1ere-a` visent la série « A », absente du référentiel en 1ère (A1, A2, C, D) : l'import les refuse (`series_not_allowed`). Les données de test les importent en 1ère A1 et en 1ère A2 (2026-10-23) | Correction du contenu, hors de ce chantier : choisir A1, A2 ou les deux dans les fichiers | contenus |
 | Lot D : supprimer l'environnement d'une PR de promotion | Conditionnel : à observer à la prochaine promotion Develop → Staging | ce chantier, si besoin |
 | Mise en veille effective, stockage de fichiers propre à chaque PR | Non vérifiables hors Railway | première PR d'essai, par le porteur |
 
