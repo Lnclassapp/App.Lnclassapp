@@ -8,10 +8,12 @@ import { defineRailway, github, project, service } from "railway/iac";
 
 export const partial = "App.Lnclassapp";
 
-const ENVIRONMENTS: Record<string, { branch: string; domains: string[] }> = {
-  production: { branch: "main", domains: ["lnclass.com", "www.lnclass.com"] },
-  Staging: { branch: "Staging", domains: ["app-staging.lnclass.com", "staging.lnclass.com"] },
-  Develop: { branch: "Develop", domains: ["app-develop.lnclass.com", "develop.lnclass.com"] },
+// Develop has no health check timeout of its own (Railway's default applies) and an empty start command: kept as
+// they are in Railway, so that `railway config plan` has nothing to change anywhere (2026-10-23).
+const ENVIRONMENTS: Record<string, { branch: string; domains: string[]; healthcheckTimeout?: number; start?: string }> = {
+  production: { branch: "main", domains: ["lnclass.com", "www.lnclass.com"], healthcheckTimeout: 120 },
+  Staging: { branch: "Staging", domains: ["app-staging.lnclass.com", "staging.lnclass.com"], healthcheckTimeout: 120 },
+  Develop: { branch: "Develop", domains: ["app-develop.lnclass.com", "develop.lnclass.com"], start: "" },
 };
 
 export default defineRailway((ctx) => {
@@ -22,7 +24,8 @@ export default defineRailway((ctx) => {
     source: github("Lnclassapp/App.Lnclassapp", { branch: environment.branch, checkSuites: false }),
     build: { buildEnvironment: "V3", builder: "DOCKERFILE", dockerfilePath: "/Dockerfile" },
     healthcheck: "/up",
-    healthcheckTimeout: 120,
+    ...(environment.healthcheckTimeout === undefined ? {} : { healthcheckTimeout: environment.healthcheckTimeout }),
+    ...(environment.start === undefined ? {} : { start: environment.start }),
     // ADR-0052, ADR-0034: migrations, then the seeds of the environment, before each deploy.
     preDeploy: "bin/rails db:prepare db:seed",
     replicas: { "europe-west4-drams3a": 1 },
