@@ -12,6 +12,21 @@
 | 2026-10-21 | Le démarrage d'un environnement de PR l'écrit au journal, avec un avertissement sans mot de passe | Revue des échecs silencieux : une variable scellée sur Develop fermait la PR sans aucune trace | oui, ADR-0108 §4 |
 | 2026-10-21 | Non retenu : limiter `PrEnvironment.active?` à `RAILS_ENV=production` pour Puma | Le seul chemin trouvé est `railway run bin/dev` lié à un environnement de PR (worker absent, adaptateur `solid_queue` du développement). Personne ne lance le développement contre une PR ; le correctif changeait le contrat gelé du Lot 0 et trois tests | non |
 
+## Essai sur Railway
+
+Première PR d'essai ouverte le 2026-10-22, après les réglages du porteur (Bot PR Environments désactivés ; `PR_BASE_ENVIRONMENT`, `PR_ACCESS_PASSWORD` sur Develop ; Serverless). À constater sur son environnement :
+
+| Vérification | Attendu | Constaté |
+|---|---|---|
+| Environnement créé à l'ouverture de la PR | oui, à partir de Develop | |
+| Pré-déploiement | `db:prepare db:seed` vert, « 3 établissements, 63 classes… » au journal | |
+| Journal de démarrage | `[config] PR environment (base Develop, name …): password required…` | |
+| Adresse sans mot de passe | demande de mot de passe (401) ; `/up` répond | |
+| Connexion `0531000001` / 2468 | accueil enseignant | |
+| Veille | service endormi 10 minutes après la dernière visite | |
+| Stockage de fichiers | bucket propre à la PR, pas celui de Develop | |
+| Fermeture de la PR | environnement supprimé | |
+
 ## Ce qui a dérapé
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
