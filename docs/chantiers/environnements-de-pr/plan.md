@@ -84,7 +84,7 @@ Pas de port ni d'entité : le chantier est de la configuration. Le Lot 0 gèle l
 
 ## Actions du porteur dans Railway (hors dépôt)
 
-1. **Project Settings › Environments** : PR Environments activés, base `Develop` (fait), **Bot PR Environments désactivés**, Focused PR Environments désactivés.
+1. **Project Settings › Environments** : PR Environments activés, base `Develop` (fait), **Bot PR Environments activés** (les PR ouvertes par Claude comptent comme PR de robot, constaté le 2026-10-22), Focused PR Environments désactivés.
 2. **Variables de Develop**, non scellées : `PR_BASE_ENVIRONMENT=Develop`, `PR_ACCESS_PASSWORD=<mot de passe choisi>`. Vérifier qu'aucune variable indispensable n'est scellée (`RAILS_MASTER_KEY`, `DATABASE_URL`, `BUCKET_*`), sinon elle manquera dans les PR.
 3. **Service web de Develop › Settings › Deploy › Serverless** : activé. Les PR en héritent ; Develop reste éveillé grâce à son worker.
 4. Après la fusion des Lots 0, B et C : ouvrir une PR d'essai, constater données, mot de passe, veille, et vérifier que le stockage de fichiers de la PR n'est pas celui de Develop (journal).
