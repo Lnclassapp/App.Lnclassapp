@@ -1,14 +1,14 @@
 # UDR-XXXX : Accueil élève « Wave » — bandeau court, carte du prochain exercice, grille, annonce, historique
 <!-- index
 titre: Accueil élève « Wave » : carte du prochain exercice et six états
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-23)*
 adr-lie: —
 problematique: L'accueil élève s'ouvre sur « Entrer en classe » et empile cinq blocs (classe, matières, annonces, À faire, activités) ; l'élève ne voit pas d'un coup d'œil ce qu'il doit faire maintenant. L'accueil devient un bandeau court, une carte blanche qui dit le prochain geste, la grille des matières, une annonce et l'historique.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé (agencement validé par le porteur le 2026-10-23, couleurs v3 validées le même jour) |
+| **Statut** | Accepté (porteur, 2026-10-23 : « 1. oui 2. oui 3. oui » ; agencement validé par le porteur le 2026-10-23, couleurs v3 validées le même jour) |
 | **Date** | 2026-10-23 |
 | **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
 | **ADR lié** | — |
@@ -117,4 +117,4 @@ Couleurs, tailles et graisses : uniquement les jetons de l'UDR-XXXX-palette-froi
 - **Ma classe** porte désormais la liste complète du travail et accueille la section « Fiches à revoir » après « Exercices assignés » (UDR des écrans élève épurés).
 - La pastille « 3e B › » sous l'avatar et la lune de l'en-tête disparaissent ; le mode sombre est dans le menu de l'avatar.
 - Interdit sur l'accueil élève : un deuxième bouton principal, une liste d'exercices, une barre basse, du texte blanc sur le bandeau, du rouge sur une note.
-- Retour arrière : la carte et l'ancien accueil ne cohabitent pas. Un retour se fait en revenant au commit précédent, pas par un interrupteur (question encore ouverte au memo).
+- Retour arrière : la carte et l'ancien accueil ne cohabitent pas. Un retour se fait en revenant au commit précédent, pas par un interrupteur (porteur, 2026-10-23).

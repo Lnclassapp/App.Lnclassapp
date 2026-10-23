@@ -1,14 +1,14 @@
 # UDR-XXXX : Écrans élève sans répétition — menu de l'avatar, profil, Ma classe, fiche de révision, résultat, Cours
 <!-- index
 titre: Écrans élève sans répétition : menu, profil, Ma classe, fiche, résultat, Cours
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-23)*
 adr-lie: —
 problematique: Le relevé des écrans élève a trouvé la même information à deux ou trois endroits (menu qui répète l'accueil, mode sombre trois fois, carte du profil qui répète ses lignes, « Refaire un exercice » en double sur la fiche, note répétée sur le résultat, « Commencer la fiche de cours » écrit 19 fois). Chaque information garde une seule place.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé (choix du porteur le 2026-10-23, écran par écran) |
+| **Statut** | Accepté (porteur, 2026-10-23 : « 1. oui 2. oui 3. oui » ; choix du porteur le 2026-10-23, écran par écran) |
 | **Date** | 2026-10-23 |
 | **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
 | **ADR lié** | — |

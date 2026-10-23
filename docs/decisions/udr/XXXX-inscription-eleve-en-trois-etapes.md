@@ -1,14 +1,14 @@
 # UDR-XXXX : Inscription élève en trois étapes — code de classe d'abord, passage automatique, lien qui saute l'étape 1
 <!-- index
 titre: Inscription élève en trois étapes avec code de classe
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-23)*
 adr-lie: XXXX-code-de-classe-a-six-caracteres
 problematique: L'inscription élève tient sur une page longue en trois rubriques et ne connaît que la cascade DRENA → classe et le lien ; l'élève dont le prof écrit un code au tableau n'a pas de voie directe. Elle devient trois écrans courts, ouverts par le code de classe, qui avancent seuls.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé (choix du porteur le 2026-10-23, écran par écran) |
+| **Statut** | Accepté (porteur, 2026-10-23 : « 1. oui 2. oui 3. oui » ; choix du porteur le 2026-10-23, écran par écran) |
 | **Date** | 2026-10-23 |
 | **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
 | **ADR lié** | ADR-XXXX-code-de-classe-a-six-caracteres (le code revient en base) |

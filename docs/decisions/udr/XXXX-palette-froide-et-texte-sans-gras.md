@@ -1,14 +1,14 @@
 # UDR-XXXX : Palette froide et texte sans gras — les jetons `@theme` du pilote
 <!-- index
 titre: Palette froide, une seule police, texte sans gras
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-23)*
 adr-lie: —
 problematique: Les premières maquettes « Wave » ont été refusées (trop de bleu foncé, trop de couleurs, pas assez de contraste, police trop grosse et trop grasse). Les neutres passent du crème au blanc froid, une seule police reste, la graisse plafonne à 500 et l'échelle de texte descend à 18/16/14/13/12 px.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé (couleurs v3 validées par le porteur le 2026-10-23 sur 4 écrans, appliquées aux 18 écrans élève) |
+| **Statut** | Accepté (porteur, 2026-10-23 : « 1. oui 2. oui 3. oui » ; couleurs v3 validées par le porteur le 2026-10-23 sur 4 écrans, appliquées aux 18 écrans élève) |
 | **Date** | 2026-10-23 |
 | **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
 | **ADR lié** | — |
