@@ -32,7 +32,7 @@ Une information, une place. L'accueil porte les destinations (UDR de l'accueil) 
 
 - Entrées, dans cet ordre : en-tête (avatar, nom, « 3e B · Collège Moderne 1 de Tiassalé ») · **Mon profil** · **Modifier mon code secret** · **Mode sombre** (interrupteur, `theme_controller`) · séparateur · **Se déconnecter** (`text-ink`, pas de rouge).
 - Retirés pour l'élève : Accueil, Cours, Ma classe, Mon historique, Ajouter ma photo, Besoin d'aide (et les destinations du rôle affichées sous lg).
-- Le menu s'ouvre sous l'avatar, **à gauche** (l'avatar est à gauche du bandeau). `dropdown_controller` inchangé.
+- Le menu est un **panneau plein écran « Mon compte »** (titre et croix en haut), le même que celui de l'enseignant (porteur, 2026-10-23). Il remplace la liste déroulante sous l'avatar.
 - La page `student_menu_path` (coque Android) suit la même liste.
 
 ### 3.2 Profil (`identity/profiles/_student*.html.erb`)
