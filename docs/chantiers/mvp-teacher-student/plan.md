@@ -5,6 +5,22 @@
 
 **Branche de chantier** : `feature/mvp-teacher-student`, depuis `Develop`. Lots : `feature/mvp-teacher-student-lot-<x>`, depuis la branche de chantier **après** la fusion du Lot 0 et du Lot P. **Une seule PR** vers `Develop`, prête lundi 26.
 
+**Attribution** (porteur, 2026-10-23 : « assigner aux membres de l'équipe ») — une issue GitHub par lot, assignée à son pilote :
+
+| Lot | Pilote | Issue |
+|---|---|---|
+| 0, A, B, C, Z | orchestrateur (`Kamkara007`, agents `executant-lot`) | — |
+| P | Touré (`toure-bangaly`) | #285 |
+| D | Touré | #286 |
+| G | Touré | #287 |
+| K | Touré | #288 |
+| J | Touré | #289 |
+| E | Konan (`konanmeschac777-cmyk`) | #290 |
+| F | Konan | #291 |
+| H | Konan | #292 |
+| I | Konan | #293 |
+| L | Konan | #294 |
+
 **Pilotes** (porteur, 2026-10-22 : l'orchestrateur code le code de classe, l'inscription élève et l'accueil élève ; Touré et Konan le reste). Un lot d'orchestrateur est exécuté par l'agent `executant-lot` ; un lot de Touré ou Konan, par eux. Le porteur peut réattribuer un lot sans changer le plan.
 
 ## Graphe
