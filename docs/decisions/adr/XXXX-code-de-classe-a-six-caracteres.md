@@ -1,13 +1,13 @@
 # ADR-XXXX : Le code de classe à six caractères revient, à côté du lien, vérifié à débit limité
 <!-- index
 titre: Code de classe à six caractères, vérifié à débit limité
-statut: Proposé
+statut: Accepté *(porteur, 2026-10-23)*
 problematique: L'ADR-0085 a retiré le code de classe au profit de la cascade et du lien ; pour le pilote, le porteur veut qu'un élève puisse taper le code que son enseignant écrit au tableau. Le code revient en base, à côté du lien, avec une vérification qui ne révèle que le nom de la classe et qui ne se laisse pas énumérer.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté (porteur, 2026-10-23 : « oui, accepte l'ADR ») |
 | **Date** | 2026-10-23 |
 | **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
 | **Amende** | [ADR-0085](0085-inscription-eleve-sans-code-de-classe.md) (le code retiré revient ; la cascade et le lien restent) |
