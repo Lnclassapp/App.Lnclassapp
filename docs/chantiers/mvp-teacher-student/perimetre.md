@@ -9,7 +9,7 @@ Légende : **Gardé** · **Modifié** (gardé, retouché avant le 27) · **Const
 
 | Fonctionnalité | Décision | Pourquoi |
 |---|---|---|
-| Accueil « Wave » : carte « prochain exercice », grille de 7 cases, annonces, À faire ensuite, Historique | **Construit** | L'accueil doit répondre à « qu'est-ce que je fais maintenant ? » dès l'ouverture, pas renvoyer vers « Entrer en classe » |
+| Accueil « Wave » : carte « prochain exercice », grille de 7 cases, annonces, Historique (« À faire ensuite » retiré le 2026-10-23 : Ma classe porte la liste) | **Construit** | L'accueil doit répondre à « qu'est-ce que je fais maintenant ? » dès l'ouverture, pas renvoyer vers « Entrer en classe » |
 | Inscription par code de classe, case « Je n'ai pas de code » | **Construit** | Décision du porteur : un code tapé est la voie la plus directe quand le prof l'écrit au tableau |
 | Inscription par la cascade DRENA → établissement → niveau → classe | **Modifié** | Gardée, mais seulement derrière « Je n'ai pas de code » : elle reste la voie de secours |
 | Inscription par le lien de classe (classe préremplie) | **Gardé** | C'est la voie WhatsApp, la plus naturelle pour le pilote |
