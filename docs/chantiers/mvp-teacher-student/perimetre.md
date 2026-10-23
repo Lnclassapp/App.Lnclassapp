@@ -5,6 +5,12 @@
 
 Légende : **Gardé** · **Modifié** (gardé, retouché avant le 27) · **Construit** (nouveau avant le 27) · **Masqué** · **Reporté**
 
+## Page d'accueil publique
+
+| Fonctionnalité | Décision | Pourquoi |
+|---|---|---|
+| Page d'accueil en photo plein écran (chantier `page-d-accueil-photo`) | **Construit** | Premier écran que voient les testeurs ; déjà cadrée, petite, confiée à un développeur junior |
+
 ## Élève — Lnclass Student
 
 | Fonctionnalité | Décision | Pourquoi |

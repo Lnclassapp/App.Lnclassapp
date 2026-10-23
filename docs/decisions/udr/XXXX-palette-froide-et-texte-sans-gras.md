@@ -88,3 +88,4 @@ Contrastes vérifiés (WCAG AA, texte normal ≥ 4,5:1) : `ink`/blanc 16,1 ; `mu
 - **Toute l'app** passe au blanc froid, enseignant, direction et équipe compris : leurs écrans changent de fond sans autre retouche. À montrer au porteur en captures avant la fusion.
 - Les titres perdent Bricolage Grotesque partout ; les éléments en `font-bold` ou `font-semibold` existants doivent descendre à `font-medium` au plus (balayage à faire dans le lot des jetons).
 - Interdit : du texte blanc sur `brand`, de l'ambre hors retard, du rouge sur une note, une deuxième police, une graisse au-dessus de 500, un texte sous 12 px.
+- **Exception unique : la page d'accueil publique** (chantier `page-d-accueil-photo`) garde son titre gras et sa vague jaune (porteur, 2026-10-23). Elle prend les neutres et les bleus de cette UDR pour tout le reste.

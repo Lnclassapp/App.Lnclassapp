@@ -36,7 +36,7 @@ Le lancement du mardi 27 octobre n'a pas besoin de nouveautés. Il a besoin d'un
 - **Changer de classe** (élève) : masqué.
 - **Hors ligne, notifications poussées** : non construits, reportés.
 - **Parent** : aucun espace (retiré du plan le 2026-09-22).
-- **Nouvelle fonctionnalité** autre que l'accueil élève et l'inscription par code : refusée avant le 27.
+- **Nouvelle fonctionnalité** autre que l'accueil élève, l'inscription par code et la page d'accueil publique en photo (déjà cadrée) : refusée avant le 27.
 
 ## Ce que le grill a révélé
 
@@ -77,6 +77,7 @@ Le lancement du mardi 27 octobre n'a pas besoin de nouveautés. Il a besoin d'un
 | Couleurs v2 : retours du porteur | Pas de texte en gras ; « Ma classe » retiré du menu ; tailles de police encore réduites, à une taille normale | Graisse 400 partout, 500 au plus pour les titres ; une seule police (DM Sans), Bricolage Grotesque abandonnée. Échelle : titre de carte 18 px, titres 16 px, corps 14 px, détails 13 px, minimum 12 px. **Ma classe** s'ouvre en touchant « 3E B · CM1T › » en tête de la carte |
 | Couleurs v3 | **Validées le 2026-10-23** et appliquées aux 18 écrans élève | Palette : bandeau #00a0ff ; page et cartes blanches, bordure #e3eef7 ; texte #1f2128, secondaire #5f6470 ; bouton et liens #0070b3 ; ronds d'icône #e5f5ff ; ambre (#8a4a00 sur #fff1dc, point #f08c00) réservé au retard ; notes jamais en rouge, vert #18723f pour les bonnes ; « Besoin d'aide ? » en #0b2a40 sur le bandeau. Ces valeurs deviennent les jetons du livrable 3. Tranché du même coup : **neutres froids (blanc)**, pas crème |
 | Quatre UDR élève (accueil, inscription, palette, écrans sans répétition) : trois points à trancher | 1. La palette froide vaut pour toute l'app : oui. 2. L'exercice du jour est aussi proposé quand tout l'assigné est terminé : oui. 3. Pas d'interrupteur de retour à l'ancien accueil, on revient au commit précédent : oui | Les quatre UDR sont **acceptées le 2026-10-23**. Les écrans enseignant, direction et équipe changent de fond : captures à montrer avant la fusion |
+| La page d'accueil publique dessinée le 2026-10-14 (photo plein écran, chantier `page-d-accueil-photo`, jamais construite) entre-t-elle dans le pilote ? | **Oui**, construite par Touré ou Konan à partir du chantier déjà cadré. Titre « Tu comprends chap chap » ; **gras et vague jaune gardés sur cette page seule** ; pastille « même sans internet » gardée | Exception écrite à l'UDR de la palette : la page d'accueil publique garde son titre gras et sa vague jaune. La pastille promet le hors ligne, qui est reporté : l'écart est assumé par le porteur (2026-10-14, confirmé le 2026-10-23), à revoir avant la publication publique sur le Play Store |
 
 ## Cas limites identifiés
 
