@@ -19,7 +19,7 @@ Légende : **Gardé** · **Modifié** (gardé, retouché avant le 27) · **Const
 | Session d'exercice (mode concentré, correction immédiate) | **Gardé** | Le cœur du produit |
 | Résultat de session : note sur 20, badge, progrès, effet sur la fiche | **Gardé** | La récompense qui fait revenir |
 | Cours par matière et lecture d'une fiche (formules, images) | **Gardé** | Ouvert depuis les cases de la grille ; c'est la révision |
-| Fiches à revoir | **Modifié** | Gardées, mais intégrées comme lignes de « À faire ensuite » : une information dite une seule fois |
+| Fiches à revoir (remédiation) | **Modifié** | Section de Ma classe ; la carte du haut de l'accueil en propose une quand tout le travail assigné est fait. L'accueil reste simple et la fiche arrive au moment où l'élève est libre |
 | Ma classe (classe, enseignants, inviter son enseignant) | **Gardé** | Accessible par le menu ; ce n'est plus la carte du haut |
 | Historique (notes sur 20, par mois, période de chaque classe) | **Gardé** | La preuve de progression, celle qu'on montre aux parents |
 | Annonces de l'équipe et de la direction, lecture audio, masquer | **Gardé** | Le canal de l'équipe pour accompagner les testeurs |
