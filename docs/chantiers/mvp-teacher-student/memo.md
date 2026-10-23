@@ -69,6 +69,7 @@ Le lancement du mardi 27 octobre n'a pas besoin de nouveautés. Il a besoin d'un
 | Page Cours : « Commencer la fiche de cours » répété 19 fois, « progression DPFC 2026-2027 » sur chaque carte | Option B | « Progression DPFC » est écrit une seule fois, sous la recherche. Chaque fiche devient une ligne compacte (titre, leçon, chevron), entièrement tappable et d'au moins 44 px ; la pastille « En cours » est gardée. Les en-têtes de matière ne changent pas |
 | Inscription élève (reprise le 2026-10-23, pas validée la veille) : une page en 3 blocs ou un écran par bloc ? | **Trois écrans à la suite** | Pour tenir avant le 27, l'inscription reste un seul formulaire découpé en trois étapes dans le navigateur, sans nouvelle route : on avance et on revient sans rien perdre, et l'envoi se fait à la dernière étape. Une erreur renvoyée par le serveur doit rouvrir l'étape du champ fautif. Il faut un indicateur d'étape (1/3) et un retour arrière |
 | Ordre des trois écrans | 1. Ta classe → 2. Toi → 3. Code secret. **Avec le lien WhatsApp, l'élève arrive directement à l'étape 2/3**, sa classe déjà chargée | Un code faux est signalé avant que l'élève ait tapé ses informations. Le lien saute l'étape 1 ; un lien invalide ou régénéré ouvre l'étape 1 (cascade), jamais une erreur |
+| Arrivée par le lien à l'étape 2/3 : rappel de la classe ? | Oui | En haut de l'étape 2/3, la ligne « Ta classe : 3e B · <établissement> » et le lien « Ce n'est pas ta classe ? › » qui ramène à l'étape 1/3 |
 
 ## Cas limites identifiés
 
