@@ -1,11 +1,11 @@
 <%# 🌐 UI · layouts/shell — shell applicatif unique des espaces connectés, paramétré par le rôle %>
-<%# Rôle : en-tête, barre latérale (lg+), barre basse (mobile, sauf l'élève) ; coque Android ou mode concentré : le contenu seul %>
-<%# UDR  : 0006, 0080 (§3.3), 0084 (§3.3), 0087 (§3.2, content_for :focus) · ADR : 0084 (§4.2), 0086 (§4.2) ; exige helper_method :shell_user %>
+<%# Rôle : en-tête, barre latérale (lg+), barre basse (mobile, direction et équipe seulement) ; coque Android ou mode concentré : le contenu seul %>
+<%# UDR  : 0006, 0080 (§3.3), 0084 (§3.3), 0087 (§3.2, content_for :focus), XXXX écrans enseignant §3.3 · ADR : 0084 (§4.2), 0086 (§4.2) ; exige helper_method :shell_user %>
 <% in_app = lnclass_app? %>
 <%# UDR-0087 §3.2 : une page qui pose content_for :focus (la séance d'exercice) n'a ni en-tête, ni menus, ni barre du bas,
     pour tous les rôles ; elle rend elle-même tout son cadre, sans le conteneur de page. %>
 <% focus = content_for?(:focus) %>
-<%# UDR-0084 §3.3 : opt-out de la barre basse par rôle ; sans elle, la marge réservée tombe à pb-12. %>
+<%# UDR-0084 §3.3, UDR enseignant §3.3 : l'élève et l'enseignant n'ont pas de barre basse (bottom_bar?) ; sans elle, la marge réservée tombe à pb-12. %>
 <% bottom_bar = !in_app && !focus && bottom_bar?(shell_user.role) %>
 <% content_for :body do %>
   <% if in_app %>

@@ -2,6 +2,8 @@
 # never by a code any more. The classroom code goes, with its rotation date, its partial unique index and its format.
 # Rerunnable both ways. Down brings the columns back empty: the codes themselves are not restored, and no screen reads
 # them any more.
+# migration-en-deux-temps: le code de 5 caractères quitte ici, et la migration 20261024090000 (ADR-XXXX, code de classe à six caractères)
+# remet une colonne `join_code` de 6 caractères, remplie à neuf ; aucune donnée ni lecture de l'ancienne colonne n'est reprise.
 class RemoveClassroomJoinCodes < ActiveRecord::Migration[8.1]
   FORMAT = "join_code ~ '^[a-hj-np-z]{3}[2-9]{2}$'".freeze
   CHECK = "classrooms_join_code_format".freeze

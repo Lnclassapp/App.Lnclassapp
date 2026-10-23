@@ -1,9 +1,10 @@
 require "application_system_test_case"
 
 # CA-T6 (Lnclass Teacher) — UDR-0082 §3.1, §3.2, UDR-0080 §3.6. At 390 px, the teacher's header holds on one line
-# without horizontal scroll: the avatar alone on the left, « Besoin d'aide ? » and the switch on the right. Touching the
-# avatar opens the account panel from the left edge, which lists « Mon profil » then « Inviter un collègue »; Escape
-# closes it and gives the focus back to the avatar.
+# without horizontal scroll: the avatar alone on the left, « Besoin d'aide ? » on the right (the switch moved into the
+# panel, mvp-teacher-student). Touching the avatar opens the account panel from the left edge, which lists « Mon profil »,
+# « Modifier mon code secret », « Ajouter une matière » and « Ajouter un établissement »; Escape closes it and gives the
+# focus back to the avatar.
 # CA-19 (accueil-eleve) — UDR-0084 §3.2: on the web, the student has the avatar menu instead
 # (test/system/identity/student_avatar_menu_test.rb); the panel stays as the page /students/menu, for the Android app.
 class Identity::AccountPanelTest < ApplicationSystemTestCase
@@ -11,7 +12,7 @@ class Identity::AccountPanelTest < ApplicationSystemTestCase
 
   def tn(key) = I18n.t("shared.navigation.#{key}")
 
-  test "CA-T6: at 390 px, the teacher's avatar opens the panel from the left with Invite, Escape closes it" do
+  test "CA-T6: at 390 px, the teacher's avatar opens the panel from the left with its four entries, Escape closes it" do
     sign_in_as create_teacher(first_name: "Awa", last_name: "Traoré")
 
     with_mobile_viewport do
@@ -23,7 +24,7 @@ class Identity::AccountPanelTest < ApplicationSystemTestCase
         assert_no_selector "img[src*='logo']"
         assert_no_text "Awa Traoré"
         assert_link I18n.t("shared.help_sheet.trigger"), visible: true
-        assert_selector "button[role=switch]", visible: true
+        assert_no_selector "button[role=switch]", visible: true
       end
 
       find(TRIGGER).click
@@ -39,7 +40,8 @@ class Identity::AccountPanelTest < ApplicationSystemTestCase
       end
       within(panel) do
         assert_text "Awa Traoré"
-        assert_equal [ tn(:profile), tn("account_panel.schools.link"), tn("account_panel.invite") ], all("nav a", minimum: 3).map(&:text)
+        assert_equal [ tn(:profile), tn("account_panel.entries.secret"), tn("account_panel.entries.add_material"),
+                       tn("account_panel.entries.add_school") ], all("nav a", minimum: 4).map(&:text)
         assert_selector "button[role=switch]", visible: true
         assert_button tn(:sign_out)
       end

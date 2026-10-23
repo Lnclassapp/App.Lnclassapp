@@ -1,8 +1,9 @@
 require "test_helper"
 
 # CA-1, CA-3, CA-4 (accueil-eleve) — UDR-0084 §3.1, §3.2, §3.4, §3.10, which replace UDR-0080 §3.1–3.2 for the web
-# student. The header carries the Lnclass logo on the left; on the right « Besoin d'aide ? » (from 700 px), the
-# light / dark switch, then the avatar alone, a button that opens the avatar menu. No account panel on the web any more:
+# student. The header carries the Lnclass logo on the left; on the right « Besoin d'aide ? » (from 700 px), then the
+# avatar alone, a button that opens the avatar menu. No light / dark switch in the header any more (UDR écrans élève §3.1,
+# mvp-teacher-student): the dark mode is in the account menu. No account panel on the web any more:
 # /students/menu stays for the Android app (test/controllers/classroom/student_menus_controller_test.rb). The teacher
 # keeps the header of UDR-0082 (test/integration/identity/teacher_header_test.rb).
 class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
@@ -17,7 +18,7 @@ class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
   # Text of each menu item, in the order of the page.
   def menu_items = css_select("#avatar-menu [role=menuitem]").map { it.text.squish }
 
-  test "CA-1: the student's header — logo on the left; help from 700 px, switch and the avatar alone on the right" do
+  test "CA-1: the student's header — logo on the left; help from 700 px and the avatar alone on the right, no switch" do
     student = create_student(classroom: @classroom, first_name: "Awa", last_name: "Koné")
     sign_in_as student
 
@@ -30,7 +31,7 @@ class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
       assert_select right, "a[href='#{help_path}'][aria-controls=help-sheet].hidden\\!.min-\\[700px\\]\\:inline-flex\\!.text-brand-strong\\!.font-bold\\!",
                     text: I18n.t("shared.help_sheet.trigger")
       assert_select right, "a[aria-controls=help-sheet] svg path[d^='M3.75 14.25V12a8.25']" # the headset (UDR-0084 §3.1)
-      assert_select right, "div[data-controller=theme]:not([class]) button[role=switch]"
+      assert_select right, "[data-controller=theme], button[role=switch]", 0
       assert_select right, "#{AVATAR}[aria-label='#{tn('avatar_menu.open', name: 'Awa Koné')}']" do
         # CA-4: the initials and the decorative « + » badge; the colour is drawn from the public id, not the name.
         assert_select "[role=img][aria-label='Awa Koné']", text: "AK"

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::ClassroomRepository
-# Rôle : traduit Orm::Classroom ↔ Entities::Classroom::Classroom ; jeton du lien (un par un, en masse), verrou, génération en masse, retrait d'une classe vide, nom et plafond
-# ADR  : 0030, 0039, 0041, 0059, 0085, 0088, 0096, 0098
+# Rôle : traduit Orm::Classroom ↔ Entities::Classroom::Classroom ; jeton du lien (un par un, en masse), code de classe, verrou, génération en masse, retrait d'une classe vide, nom et plafond
+# ADR  : 0030, 0039, 0041, 0059, 0085, 0088, 0096, 0098, XXXX-code-de-classe-a-six-caracteres
 module Repositories
   module Classroom
     class ClassroomRepository
@@ -24,6 +24,24 @@ module Repositories
       def lock_by_link_token(token:)
         record = token.presence && Orm::Classroom.lock.find_by(link_token: token)
         record && map_to_entity(record)
+      end
+
+      # ADR-XXXX §4 : le code est cherché tel quel, en minuscules ; un code mal formé ne touche pas la base.
+      def find_by_join_code(code:)
+        return nil unless Entities::Classroom::JoinCode.valid?(code)
+
+        record = Orm::Classroom.find_by(join_code: code)
+        record && map_to_entity(record)
+      end
+
+      # ADR-XXXX §4.3 : un seul UPDATE pose le jeton (tiré par la base) et le code (tiré par le domaine, libre au moment du tirage ;
+      # l'index unique tranche une course). Sous le verrou de la classe que l'appelant a pris.
+      def regenerate_link_and_code(id:)
+        now = Time.current
+        code = Entities::Classroom::JoinCode.generate_free { Orm::Classroom.exists?(join_code: it) }
+        Orm::Classroom.where(id:).update_all([ "link_token = #{LINK_TOKEN_SQL}, link_token_rotated_at = ?, join_code = ?, updated_at = ?",
+                                               now, code, now ])
+        Ports::Classroom::ClassroomRepositoryPort::LinkAndCode.new(link_token: Orm::Classroom.where(id:).pick(:link_token), join_code: code)
       end
 
       # Le jeton est tiré par la base, comme à la création : une seule source de sa forme (ADR-0085 §4.1).
@@ -155,7 +173,8 @@ module Repositories
       def map_to_entity(record)
         Entities::Classroom::Classroom.new(
           id: record.id, public_id: record.public_id, school_id: record.school_id, level_id: record.level_id,
-          series_id: record.series_id, school_year: record.school_year, link_token: record.link_token, name: record.name,
+          series_id: record.series_id, school_year: record.school_year, link_token: record.link_token, join_code: record.join_code,
+          name: record.name,
           status: record.status, archived_at: record.archived_at, max_students: record.max_students,
           teacher_ids: Orm::TeacherClassroom.where(classroom_id: record.id).pluck(:teacher_id),
           active_students_count: Orm::ClassroomStudent.where(classroom_id: record.id, left_at: nil).count

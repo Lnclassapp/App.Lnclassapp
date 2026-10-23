@@ -32,9 +32,10 @@ class Identity::ProfileTest < ApplicationSystemTestCase
   end
 
 # UDR-0065, amendement du 2026-10-03 : sur grand écran, l'interrupteur à côté de l'avatar passe la page en sombre sans
-# la recharger, et le choix tient au chargement suivant (cookie) ; un second clic revient au clair.
+# la recharger, et le choix tient au chargement suivant (cookie) ; un second clic revient au clair. Depuis mvp-teacher-student
+# l'élève et l'enseignant n'ont plus de lune dans l'en-tête (leur mode sombre est dans « Mon compte ») : la direction la garde.
 test "the switch next to the avatar turns the page dark at once, and the choice survives a reload" do
-  sign_in_as @student
+  sign_in_as create_school_admin
   background = -> { page.evaluate_script("getComputedStyle(document.body).backgroundColor") }
   switch = -> { find("header button[role=switch]") }
 

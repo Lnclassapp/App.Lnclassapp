@@ -46,12 +46,13 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_signs_out_from_avatar_menu
   end
 
-  test "AN-22 — the teacher reaches their home, then every destination of their navigation, « Annonces » last" do
+  # CA-K1 (mvp-teacher-student): the teacher has no « Annonces » entry any more; the sidebar lists their three destinations.
+  test "AN-22 — the teacher reaches their home, then every destination of their navigation, with no « Annonces »" do
     sign_in_as @teacher
 
     assert_home teacher_home_path, greeting: I18n.t("classroom.teacher_homes.show.greeting", name: "Yao")
-    assert_navigation active: { home: teacher_home_path, classrooms: teacher_classrooms_path, courses: courses_path,
-                                announcements: announcements_path }
+    within(MAIN_SIDEBAR_NAV) { assert_no_link tn(:announcements) }
+    assert_navigation active: { home: teacher_home_path, classrooms: teacher_classrooms_path, courses: courses_path }
     assert_signs_out_from_panel
   end
 
@@ -100,8 +101,8 @@ class RoleHomesTest < ApplicationSystemTestCase
   end
 
   # CA-5 (accueil-eleve, UDR-0084 §3.3): on a phone, the student has no bottom bar any more and reaches every
-  # destination from the avatar menu; the teacher keeps theirs.
-  test "CA-5 — on a phone, the student opens every destination from the avatar menu, without bottom bar; the teacher keeps it" do
+  # destination from the avatar menu; since mvp-teacher-student (UDR enseignant §3.3) the teacher has none either.
+  test "CA-5 — on a phone, the student opens every destination from the avatar menu, without bottom bar; the teacher has none either" do
     sign_in_as @student
 
     with_mobile_viewport do
@@ -123,9 +124,7 @@ class RoleHomesTest < ApplicationSystemTestCase
 
     with_mobile_viewport do
       assert_current_path teacher_home_path
-      within("nav.bottom-0", visible: true) do
-        assert_equal %i[home classrooms courses announcements].map { tn(it) }, all("a[href]").map { it.text.squish }
-      end
+      assert_no_selector "nav.bottom-0"
     end
   end
 

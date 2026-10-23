@@ -1,21 +1,24 @@
 require "test_helper"
 
-# CA-T6 (app-android, Lnclass Teacher) — UDR-0082 §3.1, §3.2. The teacher gets the student's header: no logo, no role
-# badge, the avatar on the left opens the account panel (a link to /teachers/menu without JavaScript), « Besoin
-# d'aide ? » and the light / dark switch on the right. The panel lists « Mon profil » then « Inviter un collègue ».
+# CA-T6 (app-android, Lnclass Teacher) — UDR-0082 §3.1, §3.2, amended by UDR enseignant §3.1 and §3.4 (mvp-teacher-student).
+# The teacher gets the student's header: no logo, no role badge, no colour strip, the avatar on the left opens the account
+# panel (a link to /teachers/menu without JavaScript), « Besoin d'aide ? » alone on the right (the light / dark switch is in
+# the panel). The panel lists « Mon profil », « Modifier mon code secret », « Ajouter une matière », « Ajouter un
+# établissement », never « Inviter un collègue ».
 # The direction keeps the header it had: logo, role badge, account menu; UDR-0128 §3.4 adds « Besoin d'aide ? ».
 class Identity::TeacherHeaderTest < ActionDispatch::IntegrationTest
   TRIGGER = "a[href='/teachers/menu'][data-action='modal#open'][aria-haspopup=dialog][aria-controls=account_panel]".freeze
 
   def tn(key) = I18n.t("shared.navigation.#{key}")
 
-  test "CA-T6: the teacher's header — avatar on the left, help and switch on the right, a panel with My profile and Invite" do
+  test "CA-T6: the teacher's header — avatar on the left, help alone on the right, no strip, a panel with its four entries" do
     sign_in_as create_teacher(school: create_school(name: "Lycée moderne 2"), first_name: "Awa", last_name: "Traoré")
 
     get teacher_home_path
 
     assert_response :success
-    assert_select "header > div[aria-hidden=true].bg-teacher", 1
+    assert_select "header > div[aria-hidden=true]", 0
+    assert_select "header .bg-teacher", 0
     assert_select "header img[src*='logo/lnclass']", 0
     assert_select "header .ui-badge", 0
     assert_select "header [aria-controls=account-menu]", 0
@@ -25,25 +28,28 @@ class Identity::TeacherHeaderTest < ActionDispatch::IntegrationTest
         assert_select "span.sr-only", tn("account_panel.open")
       end
       assert_select right, "a[href='#{help_path}'][aria-controls=help-sheet]", text: I18n.t("shared.help_sheet.trigger")
-      assert_select right, "div[data-controller=theme]:not([class]) button[role=switch]"
+      assert_select right, "[data-controller=theme]", 0
     end
+    # The dark mode lives in the panel, not beside the avatar.
+    assert_select "header dialog#account_panel [data-controller=theme] button[role=switch]", 1
     assert_select "header dialog#account_panel.dialog-drawer" do
       assert_select "p", /Lycée moderne 2/
       links = css_select("header dialog#account_panel nav[aria-label='#{tn('account_panel.label')}'] li a")
-      assert_equal [ [ profile_path, tn(:profile) ], [ teacher_schools_path, tn("account_panel.schools.link") ],
-                     [ teacher_invite_path, tn("account_panel.invite") ] ],
+      assert_equal [ [ profile_path, tn(:profile) ], [ edit_profile_pin_path, tn("account_panel.entries.secret") ],
+                     [ edit_profile_materials_path, tn("account_panel.entries.add_material") ],
+                     [ teacher_schools_path, tn("account_panel.entries.add_school") ] ],
                    links.map { [ it["href"], it.text.strip ] }
       assert_select "form[action='#{session_path}'] button", tn(:sign_out)
     end
   end
 
-  test "CA-T6: on « Inviter un collègue », its line in the panel is marked current" do
+  test "CA-T6: on « Mon profil », its line in the panel is marked current, « Inviter un collègue » is not in the panel" do
     sign_in_as create_teacher
 
-    get teacher_invite_path
+    get profile_path
 
-    assert_select "dialog#account_panel nav a[href='#{teacher_invite_path}'][aria-current=page]"
-    assert_select "dialog#account_panel nav a[href='#{profile_path}']:not([aria-current])"
+    assert_select "dialog#account_panel nav a[href='#{profile_path}'][aria-current=page]"
+    assert_select "dialog#account_panel nav a[href='#{teacher_invite_path}']", 0
   end
 
   test "CA-T6: the direction keeps the logo, the role badge, the account menu and the switch from lg, and gets the help" do

@@ -1,6 +1,6 @@
 # 🌐 UI · NavigationHelper — shell applicatif unique, paramétré par le rôle
 # Rôle : destinations de chaque rôle (bureau = mobile), état actif, compte, sections de l'accueil
-# UDR  : 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074, 0076, 0077, 0080 (§3.2), 0082 (§3.2), 0084 (§3.3), 0098 (§3.1)
+# UDR  : 0006, 0052, 0054, 0056, 0068, 0069, 0071, 0074, 0076, 0077, 0080 (§3.2), 0082 (§3.2), 0084 (§3.3), 0098 (§3.1), XXXX (écrans enseignant et élève sans répétition, §3.1 à §3.4)
 module NavigationHelper
   Destination = Data.define(:key, :route, :icon)
   # Ce que le shell affiche de la personne connectée. Le contrôleur qui rend `layout "shell"` l'expose par `helper_method :shell_user`.
@@ -15,13 +15,16 @@ module NavigationHelper
 
   # Une seule liste par rôle, servie à la barre latérale ET à la barre basse : le mobile voit tout ce que voit le bureau.
   # Les noms de route sont le contrat du Lot 0 de la V1 ; une route pas encore dessinée rend l'entrée inactive.
-  # UDR-0071 §3.1 : « Annonces » en dernier pour l'enseignant et la direction ; l'élève n'en a pas (son carrousel mène à
-  # « Toutes les annonces ») ; celle de l'équipe est dans sa liste secondaire.
+  # UDR-0071 §3.1 : « Annonces » en dernier pour la direction ; l'élève n'en a pas (son carrousel mène à « Toutes les
+  # annonces ») ; celle de l'équipe est dans sa liste secondaire. CA-K1 (mvp-teacher-student) : l'enseignant n'en a plus non
+  # plus, aucun écran ne lui propose d'écrire une annonce (la route et le code restent). Élève et enseignant n'ont plus de
+  # barre basse (`bottom_bar?`) : leurs destinations sont sur l'accueil et dans « Mon compte » ; la barre latérale (lg+) garde
+  # cette liste jusqu'aux versions ordinateur.
   DESTINATIONS = {
     student: [ [ :home, :student_home_path, "home" ], [ :courses, :courses_path, "book-open" ],
                [ :classroom, :student_classroom_path, "academic-cap" ] ],
     teacher: [ [ :home, :teacher_home_path, "home" ], [ :classrooms, :teacher_classrooms_path, "user-group" ],
-               [ :courses, :courses_path, "book-open" ], [ :announcements, :announcements_path, "megaphone" ] ],
+               [ :courses, :courses_path, "book-open" ] ],
     # UDR-0068 §3.1 : Imports passe dans la liste secondaire (2e carte, menu « Plus »).
     team: [ [ :home, :team_home_path, "home" ], [ :courses, :courses_path, "book-open" ],
             [ :schools, :schools_path, "building-library" ], [ :dashboard, :team_dashboard_path, "chart-bar" ] ],
@@ -44,15 +47,22 @@ module NavigationHelper
   ACCOUNT_LINKS = [ [ :profile, :profile_path, "user-circle", nil ],
                     [ :sign_out, :session_path, "arrow-right-start-on-rectangle", :delete ] ].freeze
   # UDR-0080 §3.2, UDR-0082 §3.2 : panneau du compte des rôles qui l'ont (les autres gardent le menu déroulant) — la
-  # page qui le rend sans JavaScript, puis ses liens [clé i18n, route, icône], dans l'ordre.
+  # page qui le rend sans JavaScript, puis ses entrées [clé i18n, route, icône, plafond], dans l'ordre. Le plafond (4e élément,
+  # facultatif) est { cap: :materials | :schools, full: route de l'écran de retrait } : l'entrée affiche « 2 sur 3 » et, à
+  # 3 sur 3, passe en gris et mène à `full`. « Mode sombre » (interrupteur) et « Se déconnecter » ferment toujours la liste,
+  # rendus par le panneau lui-même. UDR élève §3.1 : profil, code secret. UDR enseignant §3.4 : profil, code secret,
+  # matière, établissement ; « Inviter un collègue » n'y est plus (il est dans la grille de l'accueil).
   ACCOUNT_PANELS = {
     student: { page: :student_menu_path, links: [ [ "shared.navigation.profile", :profile_path, "user-circle" ],
-                                                  [ "shared.navigation.courses", :courses_path, "book-open" ] ] },
-    # UDR-0098 §3.1 : « Mes établissements » après « Mon profil », quel que soit le nombre d'établissements.
-    teacher: { page: :teacher_menu_path, links: [ [ "shared.navigation.profile", :profile_path, "user-circle" ],
-                                                  [ "shared.navigation.account_panel.schools.link", :teacher_schools_path,
-                                                    "building-office-2" ],
-                                                  [ "shared.navigation.account_panel.invite", :teacher_invite_path, "user-plus" ] ] }
+                                                  [ "shared.navigation.account_panel.entries.secret", :edit_profile_pin_path, "key" ] ] },
+    # UDR-0098 §3.1 : l'établissement en cours se change dans une rubrique du panneau (dès deux établissements).
+    teacher: { page: :teacher_menu_path,
+               links: [ [ "shared.navigation.profile", :profile_path, "user-circle" ],
+                        [ "shared.navigation.account_panel.entries.secret", :edit_profile_pin_path, "key" ],
+                        [ "shared.navigation.account_panel.entries.add_material", :edit_profile_materials_path, "book-open",
+                          { cap: :materials, full: :profile_materials_path } ],
+                        [ "shared.navigation.account_panel.entries.add_school", :teacher_schools_path, "building-office-2",
+                          { cap: :schools, full: :teacher_schools_path } ] ] }
   }.freeze
   # Sections de l'accueil de chaque rôle (squelette) — reprises des fils d'accueil de l'ancienne application.
   # Celles de la direction ne servent plus qu'à la page de démonstration du shell (UDR-0052).
@@ -63,11 +73,17 @@ module NavigationHelper
                [ :todo, "clipboard-document-check" ] ],
     # UDR-0069 §3.1 : « Cours » passe en 2e ; UDR-0068 §3.4 : le Référentiel quitte l'accueil équipe.
     # UDR-0077 §3.1 : classes, cours, annonces, activités (les exercices à suivre).
-    teacher: [ [ :classrooms, "user-group" ], [ :courses, "book-open" ], [ :announcements, "megaphone" ], [ :activity, "bolt" ] ],
+    # UDR enseignant §3.3 : classes, niveaux, annonces, cette semaine (activity), historique.
+    teacher: [ [ :classrooms, "user-group" ], [ :courses, "book-open" ], [ :announcements, "megaphone" ], [ :activity, "bolt" ],
+               [ :history, "clock" ] ],
     team: [ [ :regions, "building-library" ], [ :activity, "bolt" ] ],
     school_admin: [ [ :overview, "chart-bar" ], [ :classrooms, "squares-2x2" ], [ :activity, "bolt" ] ]
   }.freeze
-  ROLE_ACCENTS = { student: "bg-brand", teacher: "bg-teacher", team: "bg-team", school_admin: "bg-school" }.freeze
+  # Filet de couleur en haut de l'en-tête. UDR enseignant §3.1 : l'enseignant n'en a plus (doublon du bandeau de l'accueil).
+  ROLE_ACCENTS = { student: "bg-brand", team: "bg-team", school_admin: "bg-school" }.freeze
+  # UDR enseignant §3.1 : la couleur du bandeau, des barres de progression et des segments d'étape, choisie par le rôle à cet
+  # unique endroit ; aucune vue n'écrit `bg-teacher` en dur.
+  ROLE_FILLS = { student: "bg-brand", teacher: "bg-teacher" }.freeze
 
   NAV_STYLES = {
     sidebar: { base: "flex min-h-tap items-center gap-3 rounded-ln px-4 text-sm font-medium transition",
@@ -100,9 +116,10 @@ module NavigationHelper
     secondary_navigation_for(role).any? { nav_active?(it) }
   end
 
-  # UDR-0084 §3.3 : l'élève n'a plus de barre du bas, son menu de l'avatar porte ses destinations ; les autres la gardent.
+  # UDR-0084 §3.3, UDR enseignant §3.3 : ni l'élève ni l'enseignant n'ont de barre du bas (accueil et « Mon compte » portent
+  # leurs destinations) ; la direction et l'équipe la gardent.
   def bottom_bar?(role)
-    role.to_sym != :student
+    !%i[student teacher].include?(role.to_sym)
   end
 
   # Frames différés de la barre latérale du rôle, sauf celui dont la source est la page ouverte (elle porte déjà le bloc).
@@ -157,16 +174,25 @@ module NavigationHelper
     public_send(ACCOUNT_PANELS.fetch(role.to_sym)[:page])
   end
 
+  # → [{ label:, href:, icon:, cap:, full_href: }] ; cap et full_href sont nil pour une entrée sans plafond.
   def account_panel_links(role)
-    ACCOUNT_PANELS.fetch(role.to_sym)[:links].map { |key, route, icon| { label: t(key), href: public_send(route), icon: } }
+    ACCOUNT_PANELS.fetch(role.to_sym)[:links].map do |key, route, icon, limit|
+      { label: t(key), href: public_send(route), icon:, cap: limit&.fetch(:cap), full_href: (public_send(limit[:full]) if limit) }
+    end
   end
 
   def home_sections_for(role)
     HOME_SECTIONS.fetch(role.to_sym)
   end
 
+  # nil pour un rôle sans filet (l'enseignant).
   def role_accent(role)
-    ROLE_ACCENTS.fetch(role.to_sym)
+    ROLE_ACCENTS[role.to_sym]
+  end
+
+  # UDR enseignant §3.1 : bg-brand (élève) ou bg-teacher (enseignant) ; KeyError pour les autres rôles, qui n'ont pas cet accueil.
+  def role_fill_class(role)
+    ROLE_FILLS.fetch(role.to_sym)
   end
 
   # Retour vers une liste filtrée (UDR-0054 §3.2) : l'URL de provenance si elle est de ce même hôte et que son chemin
