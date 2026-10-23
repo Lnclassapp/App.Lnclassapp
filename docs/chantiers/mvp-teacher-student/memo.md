@@ -70,6 +70,7 @@ Le lancement du mardi 27 octobre n'a pas besoin de nouveautés. Il a besoin d'un
 | Inscription élève (reprise le 2026-10-23, pas validée la veille) : une page en 3 blocs ou un écran par bloc ? | **Trois écrans à la suite** | Pour tenir avant le 27, l'inscription reste un seul formulaire découpé en trois étapes dans le navigateur, sans nouvelle route : on avance et on revient sans rien perdre, et l'envoi se fait à la dernière étape. Une erreur renvoyée par le serveur doit rouvrir l'étape du champ fautif. Il faut un indicateur d'étape (1/3) et un retour arrière |
 | Ordre des trois écrans | 1. Ta classe → 2. Toi → 3. Code secret. **Avec le lien WhatsApp, l'élève arrive directement à l'étape 2/3**, sa classe déjà chargée | Un code faux est signalé avant que l'élève ait tapé ses informations. Le lien saute l'étape 1 ; un lien invalide ou régénéré ouvre l'étape 1 (cascade), jamais une erreur |
 | Arrivée par le lien à l'étape 2/3 : rappel de la classe ? | Oui | En haut de l'étape 2/3, la ligne « Ta classe : 3e B · <établissement> » et le lien « Ce n'est pas ta classe ? › » qui ramène à l'étape 1/3 |
+| Carte « Bienvenue sur Lnclass » avec trois écrans | Sur le premier écran seulement | Elle s'affiche sur le premier écran que voit l'élève : l'étape 1/3, ou l'étape 2/3 quand il arrive par le lien. Les autres étapes commencent par leurs champs |
 
 ## Cas limites identifiés
 
