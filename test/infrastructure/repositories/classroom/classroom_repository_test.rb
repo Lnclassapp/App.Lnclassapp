@@ -14,7 +14,7 @@ module Repositories
         Entities::Classroom::Classroom.new(school_id: @school.id, level_id: @level.id, school_year: @year, name:)
       end
 
-      test "crée une classe avec le jeton de son lien, sans code, et la relit avec ses enseignants et son effectif" do
+      test "crée une classe avec le jeton de son lien et son code, et la relit avec ses enseignants et son effectif" do
         created = ClassroomRepository.new.create(classroom: classroom).value
         record = Orm::Classroom.find(created.id)
         teacher = create_teacher(classrooms: [ record ])
@@ -24,7 +24,8 @@ module Repositories
         found = ClassroomRepository.new.find_by_public_id(public_id: created.public_id)
 
         assert_match(/\A[0-9a-f]{12}\z/, found.link_token)
-        assert_not_respond_to found, :join_code
+        assert Entities::Classroom::JoinCode.valid?(found.join_code)
+        assert_equal Orm::Classroom.find(created.id).join_code, found.join_code
         assert_equal [ "Tle D 1", @year, "active", 80 ], [ found.name, found.school_year, found.status, found.max_students ]
         assert_equal [ teacher.id ], found.teacher_ids
         assert_equal 1, found.active_students_count
@@ -132,6 +133,61 @@ module Repositories
         assert_not_equal old, fresh
         assert_equal fresh, record.reload.link_token
         assert_nil repository.lock_by_link_token(token: old)
+      end
+
+      test "CA-B1: find_by_join_code rend la classe du code, archivée comprise, et nil pour un code absent, mal formé ou inconnu" do
+        record = create_classroom(school: @school).reload
+        archived = create_classroom(school: @school, status: "archived").reload
+        repository = ClassroomRepository.new
+
+        assert_equal [ record.public_id, record.join_code ], repository.find_by_join_code(code: record.join_code).values_at(:public_id, :join_code)
+        assert_equal archived.public_id, repository.find_by_join_code(code: archived.join_code).public_id
+        [ nil, "", "ABCDEF", "k7m4q", "k7m4qz2", "k7m 4qz", "000000" ].each do |code|
+          assert_nil repository.find_by_join_code(code:), code.inspect
+        end
+        assert_nil repository.find_by_join_code(code: Orm::Classroom.exists?(join_code: "zzzzzz") ? "yyyyyy" : "zzzzzz")
+      end
+
+      test "CA-B1: changer le lien et le code tire un nouveau jeton et un nouveau code, et invalide les anciens" do
+        record = create_classroom(school: @school).reload
+        old_token = record.link_token
+        old_code = record.join_code
+        repository = ClassroomRepository.new
+
+        fresh = repository.regenerate_link_and_code(id: record.id)
+
+        assert_instance_of Ports::Classroom::ClassroomRepositoryPort::LinkAndCode, fresh
+        assert_match(/\A[0-9a-f]{12}\z/, fresh.link_token)
+        assert Entities::Classroom::JoinCode.valid?(fresh.join_code)
+        assert_not_equal old_token, fresh.link_token
+        assert_not_equal old_code, fresh.join_code
+        record.reload
+        assert_equal [ fresh.link_token, fresh.join_code ], [ record.link_token, record.join_code ]
+        assert_not_nil record.link_token_rotated_at
+        assert_nil repository.lock_by_link_token(token: old_token)
+        assert_nil repository.find_by_join_code(code: old_code)
+        assert_equal record.public_id, repository.find_by_join_code(code: fresh.join_code).public_id
+      end
+
+      test "CA-B1: le nouveau code évite les codes pris, cinq essais au plus" do
+        record = create_classroom(school: @school).reload
+        other = create_classroom(school: @school).reload
+        draws = [ other.join_code, other.join_code, "k7m4q2" ]
+        with_draws(draws) { assert_equal "k7m4q2", ClassroomRepository.new.regenerate_link_and_code(id: record.id).join_code }
+        before = record.reload.join_code
+
+        with_draws([ other.join_code ] * 5) do
+          assert_raises(Entities::Classroom::JoinCode::Exhausted) { ClassroomRepository.new.regenerate_link_and_code(id: record.id) }
+        end
+        assert_equal before, record.reload.join_code
+      end
+
+      def with_draws(draws)
+        original = Entities::Classroom::JoinCode.method(:generate)
+        Entities::Classroom::JoinCode.define_singleton_method(:generate) { |**| draws.shift }
+        yield
+      ensure
+        Entities::Classroom::JoinCode.define_singleton_method(:generate, original)
       end
 
       test "archive une classe peuplée sans toucher adhésions ni assignations, la restaure à l'identique (ADR-0088)" do
