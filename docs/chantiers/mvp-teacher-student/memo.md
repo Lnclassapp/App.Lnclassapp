@@ -57,6 +57,7 @@ Le lancement du mardi 27 octobre n'a pas besoin de nouveautés. Il a besoin d'un
 | Accueil sur ordinateur (le brouillon n'existe qu'en téléphone) | Colonne centrée et barre latérale actuelle | Un seul gabarit : l'accueil du téléphone, centré, à côté de la barre latérale Accueil · Cours · Ma classe |
 | L'orange de Lnclass Teacher contre « une seule couleur de marque » | Orange en accent fin | Le bleu reste la marque ; l'orange ne sert qu'à la barre fine du haut et à l'icône de l'app Teacher |
 | Deux ambres d'urgence (app et charte) | Valeurs de la charte | Un seul jeu de jetons d'urgence : texte #8a4a00 sur #fff1dc, point #f08c00 ; il remplace l'avertissement actuel |
+| Premières maquettes « Wave » (2026-10-23) : qu'est-ce qui ne va pas ? | Trop de bleu foncé, trop de couleurs, manque de contraste | On garde le bandeau bleu façon Wave, mais plus clair et avec moins d'aplats. Les cases de matière passent sur un fond neutre, seule l'icône est colorée. Références visuelles : Wave et Djamo, captures à fournir par le porteur. Ordre de travail : décisions, puis agencement des écrans en gris, puis couleurs |
 
 ## Cas limites identifiés
 
