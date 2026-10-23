@@ -66,6 +66,7 @@ Le lancement du mardi 27 octobre n'a pas besoin de nouveautés. Il a besoin d'un
 | Profil élève : la grande carte du haut (photo, nom, classe) répète les lignes du dessous. On la garde ? | Non (option A) : la page commence par « Mes informations » | Six lignes : Photo (Ajouter), Nom (Modifier), Numéro (Changer), Classe, Établissement, Inscrit·e le. La classe n'a pas d'action, car le changement de classe est masqué |
 | Fiche de révision : la carte « Fiche à revoir · Refaire un exercice » répète la liste d'exercices juste en dessous | Option B : la carte disparaît | Une étiquette « À revoir depuis le <date> » se place sous le titre, à côté des puces matière et classe. Le bas de la fiche ne garde que la liste « Exercices », où l'exercice conseillé porte la pastille « Proposé » |
 | Résultat de session : l'encadré « Tu restes autour de 12/20, relis la correction » répète la note et la correction ; « Revoir l'exercice » double « Recommencer » | Option B : l'encadré et le bouton « Revoir l'exercice » disparaissent | Il reste un seul bouton, « Recommencer ». Le badge, la note, la maîtrise et la correction question par question ne changent pas |
+| Page Cours : « Commencer la fiche de cours » répété 19 fois, « progression DPFC 2026-2027 » sur chaque carte | Option B | « Progression DPFC » est écrit une seule fois, sous la recherche. Chaque fiche devient une ligne compacte (titre, leçon, chevron), entièrement tappable et d'au moins 44 px ; la pastille « En cours » est gardée. Les en-têtes de matière ne changent pas |
 
 ## Cas limites identifiés
 
