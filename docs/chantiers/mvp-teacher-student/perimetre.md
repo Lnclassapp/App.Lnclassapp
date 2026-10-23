@@ -1,6 +1,6 @@
 # Périmètre du MVP — Lnclass Teacher & Student
 
-> Livrable 1 du chantier [`mvp-teacher-student`](memo.md). **Statut : proposé, à figer par le porteur vendredi 23 octobre au soir.**
+> Livrable 1 du chantier [`mvp-teacher-student`](memo.md). **Statut : validé le 2026-10-23** (élève : écran par écran ; enseignant : « Ok » du porteur sur le tableau des changements).
 > Règle de tri : en cas de doute, **masquer** vaut mieux que construire. « Masqué » = le code reste, l'entrée disparaît de l'interface du rôle ; « Reporté » = n'existe pas encore, viendra après le pilote.
 
 Légende : **Gardé** · **Modifié** (gardé, retouché avant le 27) · **Construit** (nouveau avant le 27) · **Masqué** · **Reporté**

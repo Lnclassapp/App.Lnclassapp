@@ -93,4 +93,4 @@ Le lancement du mardi 27 octobre n'a pas besoin de nouveautés. Il a besoin d'un
 
 - Carte des écrans enseignant : accueil réordonné autour de « ce que mes élèves ont fait » (à montrer en images).
 - Design system : neutres froids tranchés le 2026-10-23 (couleurs v3). Reste à écrire les jetons et à décider si l'enseignant suit la même palette.
-- Périmètre ([`perimetre.md`](perimetre.md)) : proposé, à valider ligne à ligne par le porteur.
+
