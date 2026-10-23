@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage — grill en cours (2026-10-22) |
+| **Statut** | planifié — prêt pour le Lot 0 et le Lot P (2026-10-23) |
 | **Ouvert le** | 2026-10-22 |
 | **Branche** | `Develop` pour la documentation (commit direct, CLAUDE.md « Sobriété de tokens ») ; une branche de code pour la PR du lundi 26 |
 | **Programme** | — *(hors vagues de `refonte-application` : il choisit dans ce que les vagues ont livré)* |
@@ -117,7 +117,7 @@ La session du 2026-10-22/23 a atteint ses 40 commits. La suivante reprend ici, d
 
 1. ~~**Couleurs enseignant**~~ : fait le 2026-10-23 (ligne « Couleurs enseignant » du tableau) ; 11 écrans dessinés en jaune et envoyés au porteur, non commités.
 2. ~~**UDR enseignant**~~ : écrite et acceptée le 2026-10-23, [`UDR-XXXX-ecrans-enseignant-sans-repetition`](../../decisions/udr/XXXX-ecrans-enseignant-sans-repetition.md). L'amendement d'ADR-0103 ne porte que sur l'inscription (une seule matière) : le plafond de 3 existait déjà. Tranché en l'écrivant : une assignation est dans « Cette semaine » (échéance dans 7 jours, ou échue depuis 14 jours au plus avec des élèves en retard) **ou** dans « Historique », jamais les deux ; le badge « Diamant » d'un élève = tous ses exercices de la classe sans faute.
-3. ~~**`prd.md`**~~ (60 critères Gherkin, CA-A1 à CA-K3) : écrit le 2026-10-23 ; [`carte-des-ecrans.md`](carte-des-ecrans.md) (livrable 2) écrite le 2026-10-23 et ADR du code de classe accepté ; reste **`plan.md`** par la skill plan-lots (livrable 4) : orchestrateur = code de classe, inscription élève, accueil élève ; Touré et Konan = page d'accueil publique, jetons de palette, écrans élève élagués, écrans enseignant.
+3. ~~**`prd.md`**~~ (60 critères Gherkin, CA-A1 à CA-K3) : écrit le 2026-10-23 ; [`carte-des-ecrans.md`](carte-des-ecrans.md) (livrable 2) écrite le 2026-10-23 et ADR du code de classe accepté ; [`plan.md`](plan.md) (livrable 4) écrit le 2026-10-23, 14 lots en 5 vagues : orchestrateur = code de classe, inscription élève, accueil élève ; Touré et Konan = page d'accueil publique, jetons de palette, écrans élève élagués, écrans enseignant.
 4. Versions ordinateur (1280 px) des écrans validés.
 5. Retour de l'Espace établissement le 2 novembre, à planifier.
 
