@@ -26,7 +26,7 @@ Légende : **Gardé** · **Modifié** (gardé, retouché avant le 27) · **Const
 | Résultat de session : note sur 20, badge, progrès, effet sur la fiche | **Gardé** | La récompense qui fait revenir |
 | Cours par matière et lecture d'une fiche (formules, images) | **Gardé** | Ouvert depuis les cases de la grille ; c'est la révision |
 | Fiches à revoir (remédiation) | **Modifié** | Section de Ma classe ; la carte du haut de l'accueil en propose une quand tout le travail assigné est fait. L'accueil reste simple et la fiche arrive au moment où l'élève est libre |
-| Ma classe (classe, enseignants, inviter son enseignant) | **Gardé** | Accessible par le menu ; ce n'est plus la carte du haut |
+| Ma classe (classe, enseignants, inviter son enseignant) | **Gardé** | S'ouvre par « 3E B · CM1T › » en tête de la carte de l'accueil (2026-10-23) ; plus par le menu |
 | Historique (notes sur 20, par mois, période de chaque classe) | **Gardé** | La preuve de progression, celle qu'on montre aux parents |
 | Annonces de l'équipe et de la direction, lecture audio, masquer | **Gardé** | Le canal de l'équipe pour accompagner les testeurs |
 | Inviter (case de la grille : partager Lnclass) | **Gardé** | La croissance du pilote passe par le bouche-à-oreille WhatsApp |
@@ -49,7 +49,7 @@ Légende : **Gardé** · **Modifié** (gardé, retouché avant le 27) · **Const
 | Connexion, code oublié | **Gardé** | Socle |
 | Accueil | **Modifié** | Réordonné autour de « ce que mes élèves ont fait » ; voir la carte des écrans |
 | Mes classes : déclarer, modifier, archiver | **Gardé** | Sans classe, pas de boucle |
-| Code de classe à 6 caractères affiché sur la page de classe, à dicter ou partager | **Construit** | Contrepartie enseignant du code tapé par l'élève |
+| Code de classe à 6 caractères affiché sur la carte de la classe de l'accueil (UDR enseignant, 2026-10-23), à dicter ou partager | **Construit** | Contrepartie enseignant du code tapé par l'élève |
 | Partager le lien de classe sur WhatsApp | **Gardé** | La voie d'inscription élève la plus sûre |
 | Catalogue et assignation d'un exercice avec date limite | **Gardé** | Premier geste du prof |
 | Rapport d'un exercice et prochain geste | **Gardé** | Ce que le prof vient voir après avoir assigné |
