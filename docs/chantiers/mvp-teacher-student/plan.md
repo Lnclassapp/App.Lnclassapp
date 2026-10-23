@@ -18,7 +18,7 @@ Vague 2   A Code de classe (Orch.)        C Accueil élève (Orch.)
           D Page d'accueil publique (T.)  E Écrans élève et Cours (K.)
           F « Mon compte » plein écran (K.)  G Accueil enseignant (T.)
           H Plafonds et retraits (K.)     I Classe et fiche d'un élève (K.)
-          K Rapport d'un exercice (T.)
+          K Rapport d'un exercice (T.)    L Déclarer, assigner, jours de séance (K.)
                              │
 Vague 3   B Inscription élève (Orch., dépend de A)
                              │
@@ -30,7 +30,7 @@ Vague 5   Z Balayage des graisses, test des jetons, captures (Orch., dépend de 
 | Vague | Lots | Agents ou personnes en parallèle | Quand |
 |---|---|---|---|
 | 1 | 0 ‖ P | 2 | samedi 24, matin |
-| 2 | A ‖ C ‖ D ‖ E ‖ F ‖ G ‖ H ‖ I ‖ K | 9 (Orch. : 2 agents ; Touré : 3 lots ; Konan : 4 lots, à la suite) | samedi 24 → dimanche 25 |
+| 2 | A ‖ C ‖ D ‖ E ‖ F ‖ G ‖ H ‖ I ‖ K ‖ L | 10 (Orch. : 2 agents ; Touré : 3 lots ; Konan : 5 lots, à la suite) | samedi 24 → dimanche 25 |
 | 3 | B | 1 | dimanche 25 |
 | 4 | J | 1 | dimanche 25 soir |
 | 5 | Z | 1 | lundi 26 |
@@ -161,7 +161,7 @@ Touré et Konan enchaînent leurs lots de vague 2 dans l'ordre de la liste ci-de
                      config/locales/classroom/teacher_homes.fr.yml
 - **Dépend de**    : Lot 0, Lot P
 - **Test associé** : test/infrastructure/queries/classroom/teacher_home_query_test.rb · test/infrastructure/queries/classroom/teacher_follow_ups_query_test.rb · test/system/classroom/teacher_home_test.rb
-- **Done quand**   : l'accueil montre bandeau jaune, classes, niveaux et « Inviter », annonces, Cette semaine, Historique, sans barre basse ni « Bonjour » (CA-G1) ; la carte de classe montre effectif, exercices, badges sans zéro, code et « Copier » (CA-G2, CA-B5) ; « + Ajouter une classe » termine le carrousel (CA-G4) ; une assignation est dans une seule liste, avec « pas encore » ou « en retard » (CA-G6, CA-G7) ; 3 lignes puis « Voir plus » (CA-G8) ; les barres viennent du helper de rôle (CA-G9)
+- **Done quand**   : sans classe, la carte « Ajoutez vos classes » et son bouton (CA-L1, partie accueil) ; l'accueil montre bandeau jaune, classes, niveaux et « Inviter », annonces, Cette semaine, Historique, sans barre basse ni « Bonjour » (CA-G1) ; la carte de classe montre effectif, exercices, badges sans zéro, code et « Copier » (CA-G2, CA-B5) ; « + Ajouter une classe » termine le carrousel (CA-G4) ; une assignation est dans une seule liste, avec « pas encore » ou « en retard » (CA-G6, CA-G7) ; 3 lignes puis « Voir plus » (CA-G8) ; les barres viennent du helper de rôle (CA-G9)
 
 ## Lot H — Plafonds et retraits (matières, établissements)
 
@@ -197,6 +197,20 @@ Touré et Konan enchaînent leurs lots de vague 2 dans l'ordre de la liste ci-de
 - **Dépend de**    : Lot 0, Lot P
 - **Test associé** : test/infrastructure/queries/classroom/assignment_follow_up_query_test.rb · test/system/classroom/comprehension_test.rb · test/controllers/classroom/assignment_follow_ups_controller_test.rb
 - **Done quand**   : le rapport montre « 20 / 27 faits », la pastille de retard et cinq cases par badge qui filtrent la liste (CA-I4) ; le prochain geste parle en badges (CA-I5) ; la direction et l'équipe voient le même rapport
+
+## Lot L — Premier parcours enseignant : déclarer ses classes, assigner, jours de séance
+
+- **Couche**       : domaine + delivery + ui
+- **Fichiers**     : app/domain/dtos/classroom/assignment_input.rb *(`later` retiré : un jour au moins)*
+                     app/controllers/classroom/assignments_controller.rb · app/controllers/classroom/session_days_controller.rb
+                     app/views/classroom/assignments/new.html.erb · app/views/classroom/assignments/_toggle.html.erb · app/views/classroom/session_days/edit.html.erb
+                     app/views/catalog/essentials/_exercise_progress.html.erb *(lignes par classe ; « Modifier les jours de la … »)*
+                     app/views/classroom/teaching_selections/index.html.erb · app/views/classroom/teaching_selections/_level_group.html.erb
+                     app/javascript/controllers/classroom/next_session_controller.js *(nouveau : « Prochaine séance : … »)*
+                     config/locales/classroom/assignments.fr.yml · config/locales/classroom/session_days.fr.yml · config/locales/classroom/teaching_selections.fr.yml
+- **Dépend de**    : Lot 0, Lot P
+- **Test associé** : test/domain/dtos/classroom/assignment_input_test.rb · test/controllers/classroom/assignments_controller_test.rb · test/system/classroom/catalog_assignment_test.rb · test/system/classroom/teaching_selection_test.rb
+- **Done quand**   : « Quelles classes enseignez-vous ? » coche des classes et met le compteur à jour (CA-L1, partie déclaration) ; la fiche montre une ligne par classe, un seul bouton plein (CA-L2) ; la fenêtre des jours n'a plus « Plus tard » et refuse l'envoi sans jour (CA-L3) ; « Modifier les jours » rouvre la fenêtre et enregistre (CA-L4)
 
 ## Lot J — Inscription enseignant en trois étapes, une matière
 
@@ -246,6 +260,8 @@ Touré et Konan enchaînent leurs lots de vague 2 dans l'ordre de la liste ci-de
 | CA-K1 | 0 |
 | CA-K2 | E |
 | CA-K3 | C |
+| CA-L1 | G (accueil) et L (déclaration) |
+| CA-L2, CA-L3, CA-L4 | L |
 
 Aucun critère orphelin.
 
@@ -271,6 +287,7 @@ Doublons cherchés mécaniquement (`awk … | sort | uniq -d`, vide). Fichiers p
 | `app/views/catalog/courses/index.html.erb` et partiels | E | Cours élève et enseignant dans le même lot |
 | `app/views/identity/profiles/_information.html.erb` | E | ligne Matières de l'enseignant |
 | `app/views/classroom/classrooms/_link.html.erb` | I | A change le use case, I le libellé |
+| `app/views/catalog/essentials/_exercise_progress.html.erb` | L | E garde `essentials/show.html.erb` sans toucher au partiel |
 | `app/infrastructure/repositories/classroom/classroom_repository.rb` | A | |
 | `test/design/design_tokens_test.rb` | P (valeurs), puis Z (graisses) | vagues différentes, pas en parallèle |
 

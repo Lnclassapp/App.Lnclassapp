@@ -33,7 +33,7 @@ Règles d'autorisation applicables, toutes existantes : `ReadClassroomPolicy` (p
 1. Il ouvre le lien d'invitation : l'inscription s'ouvre à l'étape 2/3, établissement prérempli ; il donne nom, genre, numéro, une matière, puis son code secret.
 2. Sur l'accueil, il touche « + Ajouter une classe » et déclare ses classes.
 3. La carte de la classe montre son code : il le copie ou le dicte ; ou il partage le lien sur WhatsApp depuis la page de classe.
-4. Il touche le rond de son niveau, ouvre une fiche, assigne un exercice avec une date.
+4. Il touche le rond de son niveau, ouvre une fiche, touche « Assigner » ; la première fois, il coche les jours où il voit la classe, et l'exercice est à rendre à la prochaine séance.
 5. Dans « Cette semaine », il suit « 20 / 27 faits » ; il ouvre le rapport, voit les élèves rangés par badge et le prochain geste.
 
 ### Chemins alternatifs et erreurs
@@ -384,6 +384,32 @@ Alors aucun écran ne lui propose de changer de classe
 # CA-K3
 Étant donné un élève ou un enseignant
 Alors aucun écran ne mentionne un paiement ou un abonnement
+```
+
+### L. Premier parcours enseignant : déclarer, assigner, jours de séance
+
+```gherkin
+# CA-L1
+Étant donné un enseignant sans classe
+Alors la carte du haut de l'accueil dit « Ajoutez vos classes » avec le bouton « + Ajouter une classe »
+Et le bouton mène à « Quelles classes enseignez-vous ? », où cocher une classe l'ajoute et met le compteur à jour
+
+# CA-L2
+Étant donné une fiche avec trois exercices et deux classes enseignées du niveau
+Alors chaque exercice montre une ligne par classe, « Assigner » ou « ✓ Assigné » avec la date de rendu
+Et seul le premier « Assigner » de la page est un bouton plein
+
+# CA-L3
+Étant donné une classe sans jours de séance
+Quand l'enseignant touche « Assigner »
+Alors la fenêtre « Quels jours voyez-vous la <classe> ? » s'ouvre, sans « Plus tard »
+Et sans jour coché, « Assigner » est refusé avec l'erreur sous les jours
+Et avec lundi coché, l'exercice est assigné, à rendre à la prochaine séance
+
+# CA-L4
+Étant donné une classe qui a déjà des jours de séance et un exercice assigné
+Quand l'enseignant touche « Modifier les jours de la <classe> » sur la fiche
+Alors la fenêtre des jours s'ouvre avec ses jours cochés, et « Enregistrer » les remplace
 ```
 
 ## 5. Modélisation préliminaire

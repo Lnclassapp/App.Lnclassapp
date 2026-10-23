@@ -8,11 +8,11 @@ problematique: Les écrans enseignant répètent leurs informations (liste des c
 
 | | |
 |---|---|
-| **Statut** | Accepté (porteur, 2026-10-23 : écrans en gris validés « option A », couleurs « C », UDR demandée « oui, écris l'UDR enseignant ») |
+| **Statut** | Accepté (porteur, 2026-10-23 : écrans en gris validés « option A », couleurs « C », UDR demandée « oui, écris l'UDR enseignant » ; premier parcours et jours de séance « A », §3.13) |
 | **Date** | 2026-10-23 |
 | **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
 | **ADR lié** | [ADR-0103](../adr/0103-matieres-de-l-enseignant-par-une-table-de-jointure.md), amendé ici (§4) · ADR-XXXX-code-de-classe-a-six-caracteres (code affiché sur la carte de classe) |
-| **Amende** | [UDR-0077](0077-organisation-des-ecrans-enseignant.md) (accueil, barre basse) · [UDR-0080](0080-en-tete-eleve-panneau-du-compte-et-barres-de-l-app-android.md) (panneau du compte enseignant) · [UDR-0072](0072-comprehension-d-un-exercice-assigne.md) §3.5 (catégories du rapport) · [UDR-0108](0108-liste-des-eleves-en-liens-et-par-trente.md) (groupes de notes de la liste) · [UDR-0125](0125-matieres-de-l-enseignant-a-l-inscription-et-au-profil.md) (« Autre matière » à l'inscription, action de la ligne Matières du profil) |
+| **Amende** | [UDR-0077](0077-organisation-des-ecrans-enseignant.md) (accueil, barre basse) · [UDR-0080](0080-en-tete-eleve-panneau-du-compte-et-barres-de-l-app-android.md) (panneau du compte enseignant) · [UDR-0072](0072-comprehension-d-un-exercice-assigne.md) §3.5 (catégories du rapport) · [UDR-0108](0108-liste-des-eleves-en-liens-et-par-trente.md) (groupes de notes de la liste) · [UDR-0125](0125-matieres-de-l-enseignant-a-l-inscription-et-au-profil.md) (« Autre matière » à l'inscription, action de la ligne Matières du profil) · [UDR-0062](0062-echeances.md) §3.4 (« Plus tard » retiré de la fenêtre des jours) · [UDR-0025](0025-declaration-des-classes.md) (déclaration des classes) |
 | **S'appuie sur** | UDR-XXXX-palette-froide-et-texte-sans-gras · UDR-XXXX-accueil-eleve-carte-du-prochain-exercice · UDR-XXXX-ecrans-eleve-sans-repetition · UDR-XXXX-inscription-eleve-en-trois-etapes · [UDR-0098](0098-etablissement-courant-de-l-enseignant.md) |
 | **Remplacé par** | — |
 
@@ -94,8 +94,8 @@ Une seule règle, méthode pure du domaine (`Entities::Assessment::Grading.class
 | 5 | Encadré du code : « Code de la classe », code en police mono espacée, bouton `secondary` `sm` « Copier » (`clipboard_controller`, annonce « Code copié ») | bordure pointillée `border-line-strong`, `rounded-ln` |
 | — | Logo enseignant 18 px, coin haut droit | |
 
-- Classe vide : à la place des lignes 3 et 4, « Aucun élève · donnez-leur le code » (13 px `text-mute`) ; le code reste.
-- **Dernière carte** : « + Ajouter une classe », bordure `border-dashed border-line-strong`, texte `text-brand-strong`, vers `teacher_classrooms_path` (déclaration des classes, inchangée). Aucune classe : cette carte seule, avec « Déclarez vos classes pour inviter vos élèves. ».
+- **Classe vide** : la ligne 2 devient « Aucun élève », la ligne 3 « Donnez-leur le code, ou partagez le lien sur WhatsApp. », la ligne 4 disparaît ; le code reste (§3.13).
+- **Dernière carte** : « + Ajouter une classe », bordure `border-dashed border-line-strong`, texte `text-brand-strong`, vers `teacher_classrooms_path`. **Aucune classe** : la carte du haut devient l'état vide du §3.13.
 - Points du carrousel : ceux de `communication--carousel`, inchangés.
 
 **Niveaux** (`_course_levels.html.erb`) : 4 colonnes, rond 56 px `bg-brand-soft`, icône `images/levels/<niveau>.svg`, libellé 13 px « Tle D », « 1re D », « 2nde C ». Chaque rond mène à `courses_path(level:, series:)`. Dernier rond : « Inviter » (comportement actuel, partage WhatsApp `/i/<jeton>`). Sans matière dans l'établissement : `_choose_materials` à la place (inchangé).
@@ -196,10 +196,29 @@ Uniquement les jetons de l'UDR palette, plus `teacher` pour les trois usages de 
 - Menu : `role="dialog"` plein écran, focus sur son titre à l'ouverture, retour du focus sur l'avatar à la fermeture ; interrupteur `role="switch" aria-checked`.
 - Contrastes : `band-ink` sur `teacher` 6,2:1 ; blanc sur `teacher` sombre 6,0:1 ; les autres, ceux de l'UDR palette.
 
+### 3.13 Premier parcours : accueil vide, déclarer ses classes, assigner, jours de séance
+
+Validé par le porteur le 2026-10-23 sur maquettes ; option A pour les jours de séance.
+
+**Accueil sans classe** (`classroom/teacher_homes/_classroom_card` ou partiel `_no_classroom`, Lot G) : la carte du haut, à cheval sur le bandeau, porte l'en-tête « CSMT » (sigle seul), le titre « Ajoutez vos classes », la phrase « Cochez les classes où vous enseignez : chacune reçoit un code à donner à vos élèves. » et un bouton **`primary` pleine largeur** « + Ajouter une classe » vers `teacher_classrooms_path`. Grille : le rond « Inviter » seul (les ronds de niveau viennent des classes). « Cette semaine » : « Aucun exercice à suivre cette semaine. ». Historique absent.
+
+**Déclarer ses classes** (`classroom/teaching_selections/index`, `_level_group`) : « ‹ Accueil » ; titre « Quelles classes enseignez-vous ? » (18 px) ; « Cochez vos classes au CSMT. Vous pourrez en ajouter plus tard. » ; pastille compteur « 3 classes cochées » (`bg-brand-soft text-brand-strong`) ; une carte par niveau (rond 40 px avec l'icône du niveau, nom 16 px, « 4 classes » 12 px), une ligne de 52 px par classe avec une **case à cocher** à droite (cochée : `bg-brand-strong`, coche blanche) ; bouton `primary` pleine largeur « Terminer » (fin de l'onboarding, comportement actuel), qui mène à l'accueil. La bascule par Turbo Stream et le compteur actuels sont gardés.
+
+**Fiche de cours et « Assigner »** (`catalog/essentials/_exercise_progress`, `classroom/assignments/_toggle` compact) : sous chaque exercice (titre 14 px, « QCM · 10 questions » 13 px), une ligne par classe enseignée du niveau, 52 px, séparée par `border-line` :
+- non assignée : nom de la classe à gauche, bouton « Assigner » à droite ; **le premier bouton « Assigner » de la page est `primary`, les suivants `secondary`** ;
+- assignée : nom de la classe, dessous « À rendre jeu. 29 oct. » (12 px `text-mute`, `due_for_teacher`), à droite la pastille « ✓ Assigné » (`bg-brand-soft text-brand-strong`) et ✕ (retirer, 44 px, comportement actuel) ;
+- sous la dernière ligne assignée d'une classe qui a des jours de séance, le lien discret « Modifier les jours de la Tle D 1 » (13 px `text-brand-strong`), qui ouvre la fenêtre des jours (`edit_classroom_session_days_path`, frame `modal`).
+
+**Fenêtre des jours de séance** (`classroom/assignments/new`, `classroom/session_days/edit`) : feuille du bas (`rounded-t-sheet`, poignée), titre « Quels jours voyez-vous la Tle D 2 ? » (18 px), « L'exercice sera à rendre à votre prochaine séance. Vous ne le dites qu'une fois par classe. » ; six jours en 3 colonnes, pilules de 44 px, cochée `bg-brand-soft border-brand-strong text-brand-strong` ; ligne « Prochaine séance : lundi 26 oct. », recalculée à chaque case cochée (Stimulus ; sans JavaScript, absente) ; boutons « Annuler » (`secondary`, ferme sans rien écrire) et « Assigner » (`primary`) — « Enregistrer » dans `session_days/edit`.
+- **Option A, choix du porteur** : **« Plus tard » est retiré.** Assigner dans une classe sans jours de séance exige au moins un jour ; sans jour coché, la fenêtre revient en 422 avec l'erreur sous les jours (comportement actuel). Toute assignation a donc une échéance.
+- « Vos jours de séance » reste masqué sur la page de classe (§3.5) : **la fenêtre est le seul endroit** où l'on règle et corrige les jours, depuis « Modifier les jours de la … » de la fiche.
+- Les assignations déjà créées sans échéance (« Plus tard » avant le pilote) gardent `due_on` nul : elles sont dans « Cette semaine » tant qu'un élève ne les a pas faites, sans pastille de retard.
+
 ## 4. Conséquences
 
 - **Amende l'ADR-0103 §4.4, puce « Inscription »** : l'inscription ne demande plus que `material_slug` ; `second_material_slug` quitte le formulaire, le DTO et `RegisterTeacher`. Le plafond de 3 matières (`TeacherMaterials::MAX`, déjà en place) et `UpdateTeacherMaterials` ne changent pas : les matières 2 et 3 passent par « Ajouter une matière ».
 - Le badge d'un élève dans une classe (§3.2) est une règle nouvelle : elle vit dans le domaine, avec son test.
 - `TeacherFollowUpsQuery` se partage en deux lectures (cette semaine, historique avec moyenne de classe) ; la query de l'accueil ajoute le sigle, le code et les compteurs de badges par classe ; la liste de la classe ajoute le badge par élève et le filtre `badge=`.
 - Interdit sur les écrans enseignant : une barre basse ; « Inviter un collègue » ailleurs que dans la grille ; la liste des classes ailleurs que sur l'accueil ; un rangement des élèves autre que le badge ; `bg-brand` sur une barre ou un bandeau ; du rouge sur une note.
+- L'assignation sans jours de séance n'est plus possible : l'attribut `later` disparaît de `Dtos::Classroom::AssignmentInput` et du contrôleur (Lot L, avec son test).
 - Hors de cette UDR : versions ordinateur (étape 4 du chantier) ; direction et équipe inchangées, sauf leur fond (UDR palette).
