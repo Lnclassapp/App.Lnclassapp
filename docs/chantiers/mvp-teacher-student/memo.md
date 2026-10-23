@@ -75,6 +75,7 @@ Le lancement du mardi 27 octobre n'a pas besoin de nouveautés. Il a besoin d'un
 | Agencement des écrans élève sur téléphone (18 maquettes grises : inscription 6, accueil 6, menu et pages 6) | **Validé le 2026-10-23** | L'étape 2 (écrans) est figée pour l'élève sur téléphone. Connexion, question d'exercice et Mon historique restent tels qu'en production. On passe à l'étape 3 (couleurs). Les maquettes ne sont pas commitées ; le porteur en a l'archive |
 | Couleurs v1 (2026-10-23) : retours du porteur | Police trop grosse ; pas de fond blanc derrière « Besoin d'aide ? » ; la classe et le sigle de l'établissement vont dans la carte, en petit, en tête (ex. « 3E2 · LMT ») | Échelle de texte réduite : titre de carte 22 px, titres de section 17–18 px, corps 14 px, minimum 12 px. « Besoin d'aide ? » passe en bleu nuit #0b2a40 directement sur le bandeau, car le blanc ne se lit pas sur #00a0ff. Le sigle est déjà enregistré pour chaque établissement (à défaut, on prend le nom abrégé), donc rien à construire. La pastille « 3e B › » sous l'avatar disparaît : **« Ma classe » revient dans le menu de l'avatar** pour ne pas perdre l'accès à la page |
 | Couleurs v2 : retours du porteur | Pas de texte en gras ; « Ma classe » retiré du menu ; tailles de police encore réduites, à une taille normale | Graisse 400 partout, 500 au plus pour les titres ; une seule police (DM Sans), Bricolage Grotesque abandonnée. Échelle : titre de carte 18 px, titres 16 px, corps 14 px, détails 13 px, minimum 12 px. **Ma classe** s'ouvre en touchant « 3E B · CM1T › » en tête de la carte |
+| Couleurs v3 | **Validées le 2026-10-23** et appliquées aux 18 écrans élève | Palette : bandeau #00a0ff ; page et cartes blanches, bordure #e3eef7 ; texte #1f2128, secondaire #5f6470 ; bouton et liens #0070b3 ; ronds d'icône #e5f5ff ; ambre (#8a4a00 sur #fff1dc, point #f08c00) réservé au retard ; notes jamais en rouge, vert #18723f pour les bonnes ; « Besoin d'aide ? » en #0b2a40 sur le bandeau. Ces valeurs deviennent les jetons du livrable 3. Tranché du même coup : **neutres froids (blanc)**, pas crème |
 
 ## Cas limites identifiés
 
@@ -89,5 +90,5 @@ Le lancement du mardi 27 octobre n'a pas besoin de nouveautés. Il a besoin d'un
 
 - Accueil « Wave » : retour à l'accueil actuel si la recette de lundi échoue (interrupteur proposé, pas encore tranché) ?
 - Carte des écrans enseignant : accueil réordonné autour de « ce que mes élèves ont fait » (à montrer en images).
-- Design system : fond et gris chauds (crème, actuels) ou froids (blanc, charte « Wave ») pour toute l'app ; encre, carte du haut et teinte menthe à consolider dans le bloc `@theme`.
+- Design system : neutres froids tranchés le 2026-10-23 (couleurs v3). Reste à écrire les jetons et à décider si l'enseignant suit la même palette.
 - Périmètre ([`perimetre.md`](perimetre.md)) : proposé, à valider ligne à ligne par le porteur.
