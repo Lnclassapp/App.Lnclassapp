@@ -51,7 +51,7 @@ Abréviations des UDR : **Pal** palette froide · **AccÉ** accueil élève · *
 │   ├── bouton (selon l'état) ─► session d'exercice ─► résultat ─► « Recommencer »
 │   │                         ou fiche de révision (état « À revoir »)
 │   └── « Et N autres en retard › » ─► Ma classe
-├── grille : 6 matières ─► /courses?subject  COURS ─► /courses/<cours>/essentials/<fiche>
+├── grille : 6 matières ─► /courses?material  COURS ─► /courses/<cours>/essentials/<fiche>
 │            « Inviter » ─► partage WhatsApp
 ├── annonces (carrousel ; lecture audio, masquer)
 └── Historique ─ « Voir plus » ─► /students/archive  MON HISTORIQUE
