@@ -94,6 +94,7 @@ Le lancement du mardi 27 octobre n'a pas besoin de nouveautés. Il a besoin d'un
 | Cours, côté enseignant (porteur, 2026-10-23 : « comme tu proposes ») | S'ouvre depuis un rond de niveau de l'accueil. **Ajouté** : « ‹ Accueil ». Titre **« Cours de Tle D »**. Gardés : recherche, « 3 fiches de cours · Mathématiques · Progression DPFC 2026-2027 », liste des fiches. **Retirés** : menus Niveau et Série (le niveau vient de l'accueil) ; « Tle D » sur chaque ligne. Bivalent : pastilles de matière (« Math · PC ») | Le filtre de niveau passe par l'URL du rond (`level`, `series`) |
 | Rapport d'un exercice (porteur, 2026-10-23 : « comme tu proposes ») | Gardés : « ‹ Tle D 1 », titre et méta, « Voir l'exercice », Prochain geste, Questions, liste des élèves. **Améliorés** : « 20 / 27 faits » en barre + pastille « 7 en retard » (comme l'accueil) ; cases **par badge** (Pas encore · Bronze · Argent · Or · Diamant) à la place de En difficulté · Fragile · Acquis | Correspondance : En difficulté = pas de badge, Fragile = Bronze, Acquis = Argent, Or ou Diamant. Le texte du Prochain geste parle en badges |
 | Inscription enseignant (porteur, 2026-10-23 : « comme tu proposes », « retire Autre matière ») | **3 étapes comme l'élève** (Établissement · Vous · Code secret), même contrôleur Stimulus. Logo jaune des enseignants. **« Autre matière (facultatif) » retiré** : une seule matière à l'inscription ; aide « Vous pourrez ajouter d'autres matières dans Mon compte. ». Gardés : DRENA, Établissement (préremplis par le lien d'invitation), Nom, Prénom(s), Genre (« M. » / « Mme » chez l'élève), Numéro, Code secret et confirmation, « Déjà un compte ? Se connecter » | La 2ᵉ et la 3ᵉ matière passent par « Ajouter une matière » du menu. Fin du passage écran par écran côté enseignant |
+| Écrans enseignant en gris (porteur, 2026-10-23 : « option A ») | **Validés** : accueil, menu plein écran et ses 3 écrans (limite, retrait d'établissement, retrait de matière), page de classe, fiche d'un élève (« Fragile / Acquis » remplacés par le badge), Cours, rapport, inscription en 3 étapes | Maquettes envoyées au porteur (zip), non commitées ; elles se redessinent à partir des lignes de ce tableau |
 
 ## Cas limites identifiés
 
@@ -108,4 +109,14 @@ Le lancement du mardi 27 octobre n'a pas besoin de nouveautés. Il a besoin d'un
 
 - Carte des écrans enseignant : accueil réordonné autour de « ce que mes élèves ont fait » (à montrer en images).
 - Design system : neutres froids tranchés le 2026-10-23 (couleurs v3). Reste à écrire les jetons et à décider si l'enseignant suit la même palette.
+
+## Reprise dans une nouvelle session
+
+La session du 2026-10-22/23 a atteint ses 40 commits. La suivante reprend ici, dans cet ordre :
+
+1. **Couleurs enseignant** : palette froide de l'UDR palette (accepté), logo jaune, accent orange fin ; montrer 3 ou 4 écrans au porteur avant d'appliquer aux 12.
+2. **UDR enseignant** (une seule, `XXXX-ecrans-enseignant-sans-repetition`) : reprendre les lignes « Accueil enseignant… » à « Écrans enseignant en gris » de ce tableau, §3 écrite pour qu'un agent écrive les vues sans question. Y joindre l'amendement d'ADR-0103 (plafond de 3 matières).
+3. **`prd.md`** (critères Gherkin), **`carte-des-ecrans.md`** (livrable 2), puis **`plan.md`** par la skill plan-lots (livrable 4) : orchestrateur = code de classe, inscription élève, accueil élève ; Touré et Konan = page d'accueil publique, jetons de palette, écrans élève élagués, écrans enseignant.
+4. Versions ordinateur (1280 px) des écrans validés.
+5. Retour de l'Espace établissement le 2 novembre, à planifier.
 
