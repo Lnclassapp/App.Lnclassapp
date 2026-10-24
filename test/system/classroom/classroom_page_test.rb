@@ -66,6 +66,24 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     assert_current_path classroom_student_path(@classroom.public_id, @koffi.public_id)
   end
 
+  # CA-B7 (provisoire) : le code de la classe, groupé 3 + 3, se copie comme le lien, sans rechargement.
+  test "le bouton « Copier » du code de la classe copie le code affiché" do
+    code = Entities::Classroom::JoinCode.display(@classroom.reload.join_code)
+    visit classroom_path(@classroom.public_id)
+
+    within "#classroom_link #classroom_code" do
+      assert_selector "#classroom_code_value", text: code
+    end
+    assert_no_page_reload do
+      copy = within("#classroom_code") { find_button(I18n.t("#{scope}.link.code_copy")) }
+      scroll_to(copy, align: :center)
+      copy.click
+
+      assert_toast I18n.t("#{scope}.link.code_copied")
+    end
+    assert_equal code, page.evaluate_async_script("navigator.clipboard.readText().then(arguments[0])")
+  end
+
   test "une copie refusée par le navigateur le dit" do
     visit classroom_path(@classroom.public_id)
     page.execute_script("navigator.clipboard.writeText = () => Promise.reject(new Error('refusé'))")
@@ -85,6 +103,7 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
              "la page déborde en largeur"
       click_on I18n.t("#{scope}.link.copy")
       assert_toast I18n.t("#{scope}.link.copied")
+      assert_selector "#classroom_code_value"
       assert find("#classroom_whatsapp_share")[:href].start_with?("https://wa.me/?text=")
       growth_shot("390-classe-partager-whatsapp", desktop: false, scroll_to: "#classroom_whatsapp_share")
     end
