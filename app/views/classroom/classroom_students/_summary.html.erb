@@ -3,7 +3,7 @@
 <%# ADR  : 0072 (§4.4), 0079 (§4.2), 0097 (§4.3, §4.5) · UDR : 0062 (§3.5), 0072, 0107 (§3.3) · jamais un badge d'une autre classe %>
 <%# locals: (file:) -%>
 <% counts = file.counts %>
-<% figure = "font-display text-3xl font-extrabold tabular-nums" %>
+<% figure = "font-display text-3xl font-medium tabular-nums" %>
 <%= ui_card padding: :md, id: "student_file_summary" do %>
   <dl id="student_file_counts" aria-label="<%= t(".counts_label") %>" class="flex flex-wrap gap-x-10 gap-y-4">
     <div>

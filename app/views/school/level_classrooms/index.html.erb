@@ -34,7 +34,7 @@
                                                        { "cursor-pointer" => !closed }),
                                     "aria-invalid": ("true" if error), "aria-describedby": (error_id if error),
                                     data: { action: "change->classroom--class-picker#sync" } %>
-            <span class="pr-6 font-display text-lg leading-tight font-extrabold"><%= classroom.name %></span>
+            <span class="pr-6 font-display text-lg leading-tight font-medium"><%= classroom.name %></span>
             <%# UDR-0102 §3.1 : la classe actuelle dit « Ta classe » à la place de « Complète » ; le badge entre dans le nom du radio. %>
             <% if mine %>
               <span><%= ui_badge t("classroom.student_registrations.class_picker.current"), tone: :neutral, size: :sm %></span>

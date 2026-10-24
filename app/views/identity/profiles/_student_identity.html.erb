@@ -12,7 +12,7 @@
                                           tone_seed: profile.public_id, add_photo: true %>
     </span>
     <div class="min-w-0">
-      <h2 id="profile_identity_name" class="font-display text-2xl leading-tight font-extrabold break-words"><%= profile.display_name %></h2>
+      <h2 id="profile_identity_name" class="font-display text-2xl leading-tight font-medium break-words"><%= profile.display_name %></h2>
       <% if profile.classroom_name %>
         <p class="mt-1 text-sm"><%= t(".student_of", classroom: profile.classroom_name) %></p>
       <% end %>

@@ -9,7 +9,7 @@
     <%= tile.call(:signups, dashboard.signups_count) %>
     <%= tile.call(:active_students, dashboard.active_students_count, t(".active_students_hint")) %>
     <li id="figure_completed_sessions" class="rounded-ln bg-mist px-3 py-4">
-      <span class="block font-display text-3xl font-extrabold tabular-nums text-ink"><%= dashboard.completed_sessions_count %></span>
+      <span class="block font-display text-3xl font-medium tabular-nums text-ink"><%= dashboard.completed_sessions_count %></span>
       <span class="text-sm text-mute"><%= t(".completed_sessions", count: dashboard.completed_sessions_count) %></span>
       <div class="mt-1 text-xs text-mute">
         <%= rate %>
@@ -42,7 +42,7 @@
     <% end %>
     <%= tile.call(:classrooms, dashboard.classrooms_count, t(".classrooms_hint", year: dashboard.school_year)) %>
     <li id="figure_schools" class="col-span-2 rounded-ln bg-mist px-3 py-4 lg:col-span-4">
-      <span class="block font-display text-3xl font-extrabold tabular-nums text-ink"><%= dashboard.schools.active %></span>
+      <span class="block font-display text-3xl font-medium tabular-nums text-ink"><%= dashboard.schools.active %></span>
       <span class="text-sm text-mute"><%= t(".schools", count: dashboard.schools.active) %></span>
       <ul id="team_dashboard_coverage" aria-label="<%= t(".coverage_label") %>" class="mt-2 grid gap-1 text-sm text-ink sm:grid-cols-3">
         <% %i[with_classroom with_teacher with_student].each do |kind| %>

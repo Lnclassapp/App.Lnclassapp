@@ -6,7 +6,7 @@
   <%= link_to classroom_path(classroom.public_id),
               class: "group flex h-full flex-col gap-4 rounded-ln border border-line bg-brand-soft/40 p-4 transition hover:border-brand focus-visible:outline-2 focus-visible:outline-brand" do %>
     <div class="min-w-0 space-y-1">
-      <p class="truncate font-display text-lg font-extrabold text-ink"><%= classroom.name %></p>
+      <p class="truncate font-display text-lg font-medium text-ink"><%= classroom.name %></p>
       <p class="text-sm text-mute"><%= classroom.level_name %></p>
     </div>
     <ul class="space-y-1.5 text-sm text-mute">

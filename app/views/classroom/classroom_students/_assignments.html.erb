@@ -4,7 +4,7 @@
 <%# locals: (classroom:, assignments:) -%>
 <% link = "underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
 <section id="student_file_assignments" aria-labelledby="student_file_assignments_title">
-  <h2 id="student_file_assignments_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title") %></h2>
+  <h2 id="student_file_assignments_title" class="mb-4 font-display text-xl font-medium"><%= t(".title") %></h2>
   <% if assignments.empty? %>
     <%= ui_empty_state title: t(".empty.title"), description: t(".empty.description"), icon: "clipboard-document-list" %>
   <% else %>
@@ -23,7 +23,7 @@
             <div class="shrink-0 text-right">
               <% case assignment.status %>
               <% when :done, :late %>
-                <p class="font-display text-lg font-extrabold tabular-nums"><%= number_to_percentage(assignment.best, precision: 0, format: "%n %") %></p>
+                <p class="font-display text-lg font-medium tabular-nums"><%= number_to_percentage(assignment.best, precision: 0, format: "%n %") %></p>
                 <p class="text-xs text-mute"><%= t(assignment.status == :late ? ".late_on" : ".done_on", date: l(assignment.done_on, format: :due_short)) %></p>
               <% when :overdue %>
                 <%= ui_badge t(".overdue"), tone: :warning, size: :sm %>

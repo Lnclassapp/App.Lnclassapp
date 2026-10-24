@@ -6,7 +6,7 @@
 <%= turbo_frame_tag Teams::HomesController::RECENT_CONTENT_FRAME, target: "_top" do %>
   <div class="grid gap-6 lg:grid-cols-3">
     <section id="team_home_recent_courses" aria-labelledby="team_home_recent_courses_title">
-      <h3 id="team_home_recent_courses_title" class="mb-2 font-display text-base font-extrabold"><%= t(".courses_title") %></h3>
+      <h3 id="team_home_recent_courses_title" class="mb-2 font-display text-base font-medium"><%= t(".courses_title") %></h3>
       <% if courses.empty? %>
         <p class="text-sm text-mute"><%= t(".courses_empty") %></p>
       <% else %>
@@ -34,7 +34,7 @@
     </section>
 
     <section id="team_home_recent_exercises" aria-labelledby="team_home_recent_exercises_title">
-      <h3 id="team_home_recent_exercises_title" class="mb-2 font-display text-base font-extrabold"><%= t(".exercises_title") %></h3>
+      <h3 id="team_home_recent_exercises_title" class="mb-2 font-display text-base font-medium"><%= t(".exercises_title") %></h3>
       <% if exercises.empty? %>
         <p class="text-sm text-mute"><%= t(".exercises_empty") %></p>
       <% else %>
@@ -59,7 +59,7 @@
     </section>
 
     <section id="team_home_recent_imports" aria-labelledby="team_home_recent_imports_title">
-      <h3 id="team_home_recent_imports_title" class="mb-2 font-display text-base font-extrabold"><%= t(".imports_title") %></h3>
+      <h3 id="team_home_recent_imports_title" class="mb-2 font-display text-base font-medium"><%= t(".imports_title") %></h3>
       <% if imports.empty? %>
         <p class="text-sm text-mute"><%= t(".imports_empty") %></p>
       <% else %>

@@ -20,7 +20,7 @@
           </span>
           <p id="exercise_context" class="min-w-0 text-sm text-mute"><%= course.name %></p>
         </div>
-        <h1 id="exercise_title" class="mt-4 font-display text-3xl font-extrabold tracking-tight text-balance"><%= exercise.title %></h1>
+        <h1 id="exercise_title" class="mt-4 font-display text-3xl font-medium tracking-tight text-balance"><%= exercise.title %></h1>
         <div class="mt-3 flex flex-wrap items-center gap-2">
           <%= ui_badge course.material_name %>
           <%= ui_badge [ course.level_name, course.series_name ].compact.join(" ") %>
@@ -42,7 +42,7 @@
     <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
       <div class="min-w-0 space-y-3">
         <p id="exercise_context" class="text-sm text-mute"><%= student ? course.name : t(".context", course: course.name, essential: essential.name) %></p>
-        <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= exercise.title %></h1>
+        <h1 class="font-display text-2xl font-medium tracking-tight text-balance sm:text-3xl"><%= exercise.title %></h1>
         <div class="flex flex-wrap items-center gap-2">
           <%= ui_subject_badge course.material_name, category: course.material_category %>
           <%= ui_badge [ course.level_name, course.series_name ].compact.join(" ") %>

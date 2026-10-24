@@ -22,7 +22,7 @@
       <div class="flex flex-wrap gap-2">
         <% levels.each do |level| %>
           <%# Le radio, sans apparence, couvre toute la pastille : le doigt, la souris et les flèches du clavier le trouvent. %>
-          <label class="relative inline-flex h-10 min-w-16 items-center justify-center rounded-full border border-line bg-white px-5 font-display text-sm font-bold text-ink transition has-checked:border-brand-strong has-checked:bg-brand-strong has-checked:text-white">
+          <label class="relative inline-flex h-10 min-w-16 items-center justify-center rounded-full border border-line bg-white px-5 font-display text-sm font-medium text-ink transition has-checked:border-brand-strong has-checked:bg-brand-strong has-checked:text-white">
             <%= fields.radio_button :level_slug, level.slug, required: true,
                                     class: "absolute inset-0 cursor-pointer appearance-none rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
                                     data: { action: "change->classroom--class-picker#loadClassrooms" } %>

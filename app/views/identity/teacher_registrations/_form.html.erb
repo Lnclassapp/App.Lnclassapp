@@ -26,7 +26,7 @@
   <% end %>
 
   <fieldset class="space-y-4">
-    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".school") %></legend>
+    <legend class="mb-3 text-xs font-medium tracking-wider text-mute uppercase"><%= t(".school") %></legend>
     <% if @preview %>
       <div class="space-y-2">
         <%= render "identity/teacher_registrations/school_preview", preview: @preview %>
@@ -50,7 +50,7 @@
   </fieldset>
 
   <fieldset class="space-y-4">
-    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".you") %></legend>
+    <legend class="mb-3 text-xs font-medium tracking-wider text-mute uppercase"><%= t(".you") %></legend>
     <%= ui_field form, :last_name, required: true, maxlength: 50, autocomplete: "family-name", placeholder: t(".last_name_placeholder") %>
     <%= ui_field form, :first_name, required: true, maxlength: 80, autocomplete: "given-name", placeholder: t(".first_name_placeholder") %>
     <% gender_error = @form.errors[:gender].first %>
@@ -80,7 +80,7 @@
   </fieldset>
 
   <fieldset class="space-y-4">
-    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".security") %></legend>
+    <legend class="mb-3 text-xs font-medium tracking-wider text-mute uppercase"><%= t(".security") %></legend>
     <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
                  hint: t(".pin_hint"), data: { identity__pin_match_target: "pin", action: "input->identity--pin-match#check" } %>
     <div class="space-y-1.5">

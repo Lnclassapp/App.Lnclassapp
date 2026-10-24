@@ -10,7 +10,7 @@
     <div class="rounded-card bg-mist px-4 py-6 text-center">
       <p id="pin-recovery-code-label" class="text-sm text-mute"><%= t(".code_label") %></p>
       <p id="pin-recovery-code" aria-labelledby="pin-recovery-code-label"
-         class="mt-2 font-mono text-4xl font-extrabold tracking-widest text-ink tabular-nums select-all"><%= issued.code.scan(/\d{4}/).join(" ") %></p>
+         class="mt-2 font-mono text-4xl font-medium tracking-widest text-ink tabular-nums select-all"><%= issued.code.scan(/\d{4}/).join(" ") %></p>
       <p id="pin-recovery-code-expiry" class="mt-2 text-sm font-medium text-ink">
         <%= t(".valid_until", time: l(issued.expires_at, format: :hour_minute)) %>
       </p>

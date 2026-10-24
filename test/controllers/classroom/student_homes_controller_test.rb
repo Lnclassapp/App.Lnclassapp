@@ -119,9 +119,9 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path
 
-    assert_select "a#subject_svt span.bg-warning[aria-hidden=true]", 1
+    assert_select "a#subject_svt span.bg-warning-dot[aria-hidden=true]", 1
     assert_select "a#subject_svt .sr-only", text: tl("subjects.late")
-    assert_select "a#subject_mathematiques span.bg-warning", 0
+    assert_select "a#subject_mathematiques span.bg-warning-dot", 0
   end
 
   test "a late exercise already done brings no dot" do
@@ -132,7 +132,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     get student_home_path
 
-    assert_select "a#subject_svt span.bg-warning", 0
+    assert_select "a#subject_svt span.bg-warning-dot", 0
   end
 
   test "no published course at the student's level: the empty subjects, and the link to every course" do

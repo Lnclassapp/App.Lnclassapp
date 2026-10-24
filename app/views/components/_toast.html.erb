@@ -9,7 +9,7 @@
   <span class="absolute inset-y-0 left-0 w-1 <%= config[:bar] %>" aria-hidden="true"></span>
   <%= ui_icon config[:icon], size: :lg, class: config[:tone] %>
   <div class="min-w-0 flex-1 pt-0.5">
-    <p class="font-semibold text-ink"><%= title || t(".titles.#{type}") %></p>
+    <p class="font-medium text-ink"><%= title || t(".titles.#{type}") %></p>
     <p class="mt-0.5 text-sm text-mute"><%= message %></p>
   </div>
   <% if action %>
@@ -17,7 +17,7 @@
         d'être envoyé. Turbo rend la réponse même quand le formulaire n'est plus dans la page. %>
     <%= button_to action.fetch(:label), action.fetch(:href), method: action.fetch(:method, :post),
                   form: { data: { action: "turbo:submit-start->toast#dismiss" } }, data: { turbo_stream: true },
-                  class: "min-h-tap shrink-0 rounded-ln px-3 text-sm font-bold text-brand-strong hover:bg-brand-soft" %>
+                  class: "min-h-tap shrink-0 rounded-ln px-3 text-sm font-medium text-brand-strong hover:bg-brand-soft" %>
   <% end %>
   <button type="button" data-action="toast#dismiss" aria-label="<%= t(".dismiss") %>"
           class="ui-icon-button -my-2 shrink-0">

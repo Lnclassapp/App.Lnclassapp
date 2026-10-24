@@ -6,7 +6,7 @@
 <%# scroll-mt : l'ancre #level_<slug> du bouton des archives ne passe pas sous la barre fixe. %>
 <section id="level_<%= level.slug %>" aria-labelledby="<%= heading_id %>" class="scroll-mt-24">
   <div class="mb-4 flex items-center justify-between gap-3 border-b border-line pb-3">
-    <h3 id="<%= heading_id %>" class="font-display text-lg font-extrabold"><%= level.name %></h3>
+    <h3 id="<%= heading_id %>" class="font-display text-lg font-medium"><%= level.name %></h3>
     <div class="flex items-center gap-2">
       <%= ui_badge t(".count", count: level.classrooms.size), size: :sm %>
       <% archived_count = level.archived.size + level.hidden_count %>
@@ -31,11 +31,11 @@
           <div class="min-w-0">
             <%# ADR-0088 : une classe archivée n'a plus de page ; son nom n'est pas un lien, son badge passe dessous. %>
             <% if archived %>
-              <p class="truncate font-display font-extrabold text-mute"><%= classroom.name %></p>
+              <p class="truncate font-display font-medium text-mute"><%= classroom.name %></p>
               <%= ui_badge t(".archived"), size: :sm %>
             <% else %>
               <%= link_to classroom.name, classroom_path(classroom.public_id), data: { turbo_frame: "_top" },
-                          class: "font-display font-extrabold after:absolute after:inset-0 after:rounded-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
+                          class: "font-display font-medium after:absolute after:inset-0 after:rounded-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
             <% end %>
           </div>
           <div class="flex items-center gap-2">

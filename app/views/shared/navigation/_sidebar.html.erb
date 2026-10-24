@@ -7,7 +7,7 @@
     <%# UDR-0084 §3.4 : l'élève sans photo a la même couleur qu'à l'avatar de l'en-tête (graine public_id) ; les autres rôles inchangés. %>
     <%= ui_avatar user.name, src: user.avatar_url, tone_seed: (user.public_id if user.role.to_sym == :student) %>
     <div class="min-w-0">
-      <p class="truncate font-semibold"><%= user.name %></p>
+      <p class="truncate font-medium"><%= user.name %></p>
       <% if user.detail %><p class="line-clamp-2 text-xs text-mute"><%= user.detail %></p><% end %>
     </div>
   </div>
@@ -20,7 +20,7 @@
   </nav>
   <% if secondary.any? %>
     <nav id="sidebar_secondary" aria-labelledby="sidebar_secondary_title" class="mt-4 rounded-card border border-line bg-white p-2 shadow-card">
-      <p id="sidebar_secondary_title" class="px-4 pt-2 pb-1 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".secondary_label.#{user.role}") %></p>
+      <p id="sidebar_secondary_title" class="px-4 pt-2 pb-1 text-xs font-medium tracking-wider text-mute uppercase"><%= t(".secondary_label.#{user.role}") %></p>
       <ul class="space-y-1">
         <% secondary.each do |destination| %>
           <li><%= nav_link destination, style: :sidebar %></li>

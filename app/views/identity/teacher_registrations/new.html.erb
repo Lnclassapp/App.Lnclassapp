@@ -9,7 +9,7 @@
                              class: "mx-auto mb-6 flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
         <%= image_tag brand_logo(teacher: true), alt: "", class: "size-16 rounded-card object-cover shadow-card" %>
       <% end %>
-      <h1 class="mb-3 font-display text-2xl font-extrabold text-ink"><%= t(".welcome") %></h1>
+      <h1 class="mb-3 font-display text-2xl font-medium text-ink"><%= t(".welcome") %></h1>
       <p class="text-sm leading-relaxed text-mute"><%= t(".welcome_hint") %></p>
     </div>
   </section>
@@ -21,7 +21,7 @@
         <%= image_tag brand_logo(teacher: true), alt: "", class: "size-14 rounded-card object-cover shadow-card" %>
       <% end %>
       <%# Le h1 de la colonne gauche est masqué sur téléphone (hidden md:flex) : celui-ci le remplace, UDR-0054. %>
-      <h1 class="mb-2 font-display text-xl font-extrabold text-ink"><%= t(".welcome") %></h1>
+      <h1 class="mb-2 font-display text-xl font-medium text-ink"><%= t(".welcome") %></h1>
       <p class="text-sm text-mute"><%= t(".welcome_hint") %></p>
     </div>
 
@@ -31,7 +31,7 @@
       <% else %>
         <%= ui_card padding: :lg do %>
           <div class="mb-8 text-center">
-            <h2 class="font-display text-xl font-extrabold text-ink"><%= t(".title") %></h2>
+            <h2 class="font-display text-xl font-medium text-ink"><%= t(".title") %></h2>
             <p class="mt-1 text-sm text-mute"><%= t(".subtitle") %></p>
           </div>
 

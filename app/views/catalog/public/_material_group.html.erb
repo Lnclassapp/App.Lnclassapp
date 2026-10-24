@@ -11,7 +11,7 @@
       <span class="<%= class_names("grid size-10 shrink-0 place-items-center rounded-full", illustration.tint) %>">
         <%= image_tag illustration.path, alt: "", class: "size-7", "aria-hidden": true, loading: "lazy" %>
       </span>
-      <span class="min-w-0 truncate font-display text-xl leading-tight font-extrabold"><%= material.name %></span>
+      <span class="min-w-0 truncate font-display text-xl leading-tight font-medium"><%= material.name %></span>
       <%= ui_badge t("catalog.public.courses_count", count: group.count), tone: :brand, size: :sm %>
       <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "ml-auto text-mute transition group-hover:translate-x-0.5" %>
     <% end %>
@@ -21,6 +21,6 @@
   </ul>
   <% if group.count > Queries::Catalog::PublicCourses::PER_GROUP %>
     <%= link_to t("catalog.public.see_all", count: group.count), href, id: "group_#{material.slug}_more",
-          class: "mt-2 inline-flex min-h-tap items-center gap-1 text-sm font-bold text-brand-strong hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+          class: "mt-2 inline-flex min-h-tap items-center gap-1 text-sm font-medium text-brand-strong hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
   <% end %>
 </section>

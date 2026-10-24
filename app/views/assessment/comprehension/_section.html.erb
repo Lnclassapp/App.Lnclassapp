@@ -4,7 +4,7 @@
 <%# locals: (comprehension:, classroom:, assignment_public_id:) -%>
 <% percent = ->(rate) { number_to_percentage(rate, precision: 0, format: "%n\u00A0%") } %>
 <section id="comprehension" aria-labelledby="comprehension_title" class="mb-8">
-  <h2 id="comprehension_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title") %></h2>
+  <h2 id="comprehension_title" class="mb-4 font-display text-xl font-medium"><%= t(".title") %></h2>
   <%= turbo_frame_tag "comprehension_frame", data: { turbo_action: "advance" }, class: "block transition-opacity aria-busy:opacity-50" do %>
     <% if comprehension.done.zero? %>
       <%= ui_empty_state title: t("assessment.comprehension.empty.title"), description: t("assessment.comprehension.empty.description"),
@@ -35,7 +35,7 @@
         <% if step %>
           <p id="comprehension_next_step" class="mt-4 flex items-start gap-2 border-t border-line pt-4 text-sm text-ink">
             <%= ui_icon "light-bulb", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-brand-strong" %>
-            <span><span class="font-semibold"><%= t("assessment.comprehension.next_step.label") %></span>
+            <span><span class="font-medium"><%= t("assessment.comprehension.next_step.label") %></span>
               <%= t("assessment.comprehension.next_step.#{step}", **options) %></span>
           </p>
         <% end %>
@@ -52,7 +52,7 @@
                                         current ? [ comprehension_soft_class(category), "border-transparent" ] : "bg-white border-line hover:bg-mist") %>">
               <span class="<%= class_names("size-3 rounded-full", comprehension_dot_class(category)) %>" aria-hidden="true"></span>
               <span class="text-xs font-medium text-ink @xs:text-sm"><%= comprehension_label(category) %></span>
-              <span class="font-display text-2xl font-extrabold text-ink tabular-nums"><%= comprehension.category_counts.fetch(category) %></span>
+              <span class="font-display text-2xl font-medium text-ink tabular-nums"><%= comprehension.category_counts.fetch(category) %></span>
             </div>
           <% end %>
         <% end %>
@@ -63,7 +63,7 @@
           <%= ui_empty_state title: t("assessment.comprehension.empty_category"), icon: "user-group" %>
         <% else %>
           <section aria-labelledby="comprehension_questions_title">
-            <h3 id="comprehension_questions_title" class="mb-3 font-display text-lg font-extrabold"><%= t(".questions_title") %></h3>
+            <h3 id="comprehension_questions_title" class="mb-3 font-display text-lg font-medium"><%= t(".questions_title") %></h3>
             <ol class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
               <% comprehension.questions.each do |question| %>
                 <% rate = question.rate.nil? ? t(".no_attempt") : percent.(question.rate) %>
@@ -72,7 +72,7 @@
                                        (t(".first_rate_label", rate: first_rate) if first_rate),
                                        (t(".to_revisit_label") if question.to_revisit) ].compact) %>
                 <li class="flex items-center gap-3 px-4 py-3 sm:px-5" aria-label="<%= label %>">
-                  <span class="w-8 shrink-0 font-display font-extrabold text-mute tabular-nums"><%= t(".question_number", number: question.number) %></span>
+                  <span class="w-8 shrink-0 font-display font-medium text-mute tabular-nums"><%= t(".question_number", number: question.number) %></span>
                   <div class="min-w-0 flex-1 space-y-1">
                     <p class="line-clamp-2 text-sm text-ink"><%= strip_tags(question.content) %></p>
                     <% if question.to_revisit %>
@@ -98,7 +98,7 @@
           </section>
 
           <section aria-labelledby="comprehension_students_title">
-            <h3 id="comprehension_students_title" class="mb-3 font-display text-lg font-extrabold"><%= t(".students_title") %></h3>
+            <h3 id="comprehension_students_title" class="mb-3 font-display text-lg font-medium"><%= t(".students_title") %></h3>
             <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
               <% comprehension.students.each do |student| %>
                 <li class="flex items-center justify-between gap-3 px-4 py-3 sm:px-5">

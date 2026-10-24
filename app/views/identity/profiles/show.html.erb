@@ -20,7 +20,7 @@
   <% end %>
 
   <%= ui_card id: "profile_security", "aria-labelledby": "profile_security_title" do %>
-    <h2 id="profile_security_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".security_title") %></h2>
+    <h2 id="profile_security_title" class="font-display text-lg leading-tight font-medium"><%= t(".security_title") %></h2>
     <p class="mt-2 text-sm text-mute"><%= t(".security_body") %></p>
     <div class="mt-4">
       <%= ui_button t(".change_pin"), href: edit_profile_pin_path, icon: "key", data: { turbo_frame: "modal" } %>

@@ -351,7 +351,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     show
 
     assert_select "#session_gap_outcome.bg-warning-soft" do
-      assert_select "p.font-bold", text: "Cette fiche de révision passe à revoir."
+      assert_select "p.font-medium", text: "Cette fiche de révision passe à revoir."
       assert_select "p", text: "Relis « Division cellulaire », puis obtiens au moins 15/20 à l'un de ses exercices."
       assert_select "a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']", text: "Revoir la fiche de révision"
     end
@@ -366,7 +366,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "h1", text: I18n.t("#{scope}.show.headline.success")
     assert_select "[data-controller='assessment--confetti']", 1
-    assert_select "#session_gap_outcome p.font-bold", text: gap_outcome("still_pending.message")
+    assert_select "#session_gap_outcome p.font-medium", text: gap_outcome("still_pending.message")
     assert_select "#session_gap_outcome p", text: "Pour lever « Division cellulaire », vise au moins 15/20."
     assert_select "#session_gap_outcome a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']",
                   text: "Revoir la fiche de révision"
@@ -383,7 +383,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     show remediation
 
     assert_select "*", text: /15\s*\/\s*20/
-    assert_select "#session_gap_outcome.bg-success-soft p.font-bold", text: "Fiche de révision levée !"
+    assert_select "#session_gap_outcome.bg-success-soft p.font-medium", text: "Fiche de révision levée !"
     assert_select "#session_gap_outcome a", 0
   end
 
@@ -395,7 +395,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     show remediation
 
     assert_select "#session_gap_outcome.bg-success-soft" do
-      assert_select "p.font-bold", text: "Fiche de révision levée !"
+      assert_select "p.font-medium", text: "Fiche de révision levée !"
       assert_select "p", text: "« Division cellulaire » n'est plus à revoir."
       assert_select "a", 0
     end

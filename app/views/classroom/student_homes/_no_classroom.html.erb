@@ -7,14 +7,14 @@
     <%= ui_icon "academic-cap", size: :lg %>
   </span>
   <div class="space-y-1">
-    <h2 id="student_home_no_classroom_title" class="font-display text-2xl leading-tight font-extrabold text-ink"><%= t(".title") %></h2>
+    <h2 id="student_home_no_classroom_title" class="font-display text-2xl leading-tight font-medium text-ink"><%= t(".title") %></h2>
     <p class="text-sm text-mute"><%= t(".no_classroom") %></p>
   </div>
   <div class="flex flex-col items-start gap-2">
     <%= ui_button t(".choose"), href: new_student_classroom_choice_path, variant: :brand, icon_end: "arrow-right" %>
     <% if @archived %>
       <%= link_to t(".archive"), student_archive_path,
-                  class: "inline-flex min-h-tap items-center rounded-sm text-sm font-bold text-brand-strong hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+                  class: "inline-flex min-h-tap items-center rounded-sm text-sm font-medium text-brand-strong hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
     <% end %>
   </div>
 <% end %>

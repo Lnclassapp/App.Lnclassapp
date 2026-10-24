@@ -11,7 +11,7 @@
 
   <div class="grid grid-cols-1 gap-4">
     <%= ui_card id: "profile_security", "aria-labelledby": "profile_security_title" do %>
-      <h2 id="profile_security_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".security_title") %></h2>
+      <h2 id="profile_security_title" class="font-display text-lg leading-tight font-medium"><%= t(".security_title") %></h2>
       <p class="mt-1 text-sm text-mute"><%= t(".security_reminder") %></p>
       <%= render "student_row", icon: "lock-closed", label: t(".pin_label"), value: t(".pin_value"), action: t(".change"),
                                 href: edit_profile_pin_path, aria_label: t(".change_pin"), wrapper: :div %>

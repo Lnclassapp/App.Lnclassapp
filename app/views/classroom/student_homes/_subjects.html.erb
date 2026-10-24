@@ -3,7 +3,7 @@
 <%# UDR  : 0062 §3.3, 0069 §3.3, 0076 §3.1, 0084 §3.5 (4 colonnes, 6 dès 700 px), §3.10 · charte §9 : jamais de compteur ; la pastille est dite par sr_suffix %>
 <%# locals: (subjects:, late_slugs:, icon:) -%>
 <section id="student_home_subjects" aria-labelledby="student_home_subjects_title" class="space-y-4">
-  <h2 id="student_home_subjects_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".title") %></h2>
+  <h2 id="student_home_subjects_title" class="font-display text-lg leading-tight font-medium"><%= t(".title") %></h2>
   <% if subjects.empty? %>
     <%= ui_empty_state title: t(".empty"), icon: %>
   <% else %>
