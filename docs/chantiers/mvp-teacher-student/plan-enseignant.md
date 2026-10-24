@@ -7,16 +7,22 @@
 
 **Même organisation que l'élève** : la session « MVP teacher-student » est la seule à fusionner dans la branche de chantier ; chaque lot fusionne après ses captures (390 px et ordinateur) validées par le porteur.
 
-| Lot | Pilote | Dépend de | Issue |
-|---|---|---|---|
-| G — Accueil enseignant | Touré (`toure-bangaly`) | A, D | #287 |
-| K — Rapport d'un exercice en badges | Touré | A | #288 |
-| H — Plafonds et retraits (matières, établissements) | Konan (`konanmeschac777-cmyk`) | A | #292 |
-| I — Page de classe et fiche d'un élève | Konan | A ; fusionne après G | #293 |
-| L — Premier parcours : déclarer, assigner, jours de séance | Konan | A | #294 |
-| J — Inscription enseignant en 3 étapes | orchestrateur | C | #289 *(réattribué : il réutilise le contrôleur d'étapes de C)* |
-| M — « Mon compte » enseignant | orchestrateur | E1 | à créer |
-| N — Cours de l'enseignant | orchestrateur | E2 | à créer |
+**Calendrier : tout avant le pilote** (porteur, 2026-10-24 : « B, rien ne doit être en retard »). Pour tenir, l'orchestrateur reprend J et L et lance ses lots en agents parallèles ; Touré et Konan enchaînent un lot élève puis deux lots enseignant chacun.
+
+| Lot | Pilote | Dépend de | Issue | Quand |
+|---|---|---|---|---|
+| J — Inscription enseignant en 3 étapes | orchestrateur | A, C | #289 | dimanche 25 |
+| L — Premier parcours : déclarer, assigner, jours de séance | orchestrateur | A | #294 | dimanche 25 |
+| K — Rapport d'un exercice en badges | Touré (`toure-bangaly`) | A | #288 | dimanche 25, après E1 |
+| H — Plafonds et retraits (matières, établissements) | Konan (`konanmeschac777-cmyk`) | A | #292 | dimanche 25, après E2 |
+| G — Accueil enseignant | Touré | A, D | #287 | lundi 26, matin |
+| I — Page de classe et fiche d'un élève | Konan | A ; fusionne après G | #293 | lundi 26, matin |
+| M — « Mon compte » enseignant | orchestrateur | E1 | — | lundi 26, matin |
+| N — Cours de l'enseignant | orchestrateur | E2 | — | lundi 26, matin |
+
+**Lundi 26, 14 h** : tous les lots fusionnés, `bin/ci-quiet` sur le head final, preuve dans #295. **Lundi 26, après-midi** : recette du porteur sur un vrai Android (élève et enseignant). **Mardi 27** : pilote.
+
+**Si un lot glisse** : on ne repousse pas la date, on réduit le lot. Le lot qui glisse garde son critère principal (G : la carte et son code ; I : la classe sans code ni jours de séance ; K : les cases par badge) et reporte le reste dans `journal.md`, avec l'accord du porteur.
 
 **Déjà livré, à ne pas refaire** : navigation sans barre basse, panneau « Mon compte » enseignant (structure et clés de `navigation.fr.yml`), menu sans « Annonces », annonces de l'enseignant fermées (CA-K1), `Grading.class_badge_for` (CA-G3, règle), « Changer le lien et le code » (CA-B6), `ui_progress` et `badge_pill` (Lot A, branche `-lot-p`), `role_fill_class`.
 
@@ -34,12 +40,12 @@ Lots ens. :    G Accueil ens.      M Mon compte    N Cours ens.  H ‖ K ‖ L  
                I Classe et fiche (fusionne après G)
 ```
 
-| Vague | Lots | En parallèle | Quand (au plus tôt) |
+| Vague | Lots | En parallèle | Quand |
 |---|---|---|---|
-| T1 | H ‖ K ‖ L ‖ J | 4 (Konan ×2 à la suite, Touré, orchestrateur) | dès la fusion de A (et de C pour J) |
-| T2 | G ‖ I ‖ M ‖ N | 4 (Touré, Konan, orchestrateur ×2) | après D, E1 et E2 |
+| T1 | J ‖ L ‖ K ‖ H | 4 (orchestrateur ×2, Touré, Konan) | dimanche 25, dès la fusion de A |
+| T2 | G ‖ I ‖ M ‖ N | 4 (Touré, Konan, orchestrateur ×2) | lundi 26, matin, après D, E1 et E2 |
 
-Touré et Konan prennent leurs lots enseignant **après leurs lots élève** (E1, E2) : l'élève passe d'abord (porteur, 2026-10-24).
+J attend A, et pas seulement C : ses vues sont dans le balayage des graisses de A.
 
 ---
 
@@ -112,7 +118,7 @@ Touré et Konan prennent leurs lots enseignant **après leurs lots élève** (E1
                      app/controllers/identity/teacher_registrations_controller.rb
                      app/views/identity/teacher_registrations/new.html.erb · _form.html.erb · _school_fields.html.erb · _school_preview.html.erb
                      config/locales/identity/teacher_registrations.fr.yml
-- **Dépend de**    : C *(réutilise `signup_steps_controller.js` sans le modifier)*
+- **Dépend de**    : A, C *(réutilise `signup_steps_controller.js` sans le modifier ; ses vues sont dans le balayage de A)*
 - **Test associé** : test/domain/use_cases/identity/register_teacher_test.rb · test/controllers/identity/teacher_registrations_controller_test.rb · test/system/identity/teacher_signup_test.rb
 - **Done quand**   : sans lien, l'inscription commence à l'étape 1 et passe seule à l'étape 2 (CA-J1) ; le lien d'invitation ouvre l'étape 2 avec le rappel d'établissement (CA-J2) ; une seule matière, sans « Autre matière » ni dans le formulaire ni dans le DTO (CA-J3) ; le compte est créé et mène à l'accueil (CA-J4) ; la ligne des conditions est sous le bouton
 
