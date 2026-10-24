@@ -204,46 +204,48 @@ Celles du [plan élève](plan.md#portes-de-sortie), plus :
 
 > Ajoutée le 2026-10-24, après les lots téléphone (« téléphone d'abord, ordinateur ensuite »). Écrans : sous-sections « Sur ordinateur (≥ lg) » de l'[UDR enseignant](../../decisions/udr/XXXX-ecrans-enseignant-sans-repetition.md) ; critères : [`prd-enseignant.md`](prd-enseignant.md) §4 bis. Chaque lot ne touche que des classes `lg:` (le rendu sous 1024 px ne bouge pas) et se montre au porteur en captures à 1440 et 1024 px, plus 390 px pour prouver que le téléphone n'a pas bougé.
 >
-> **Exception : CA-N1 vaut aussi sur téléphone** (porteur, 2026-10-24). Si le lot N est déjà fusionné sans elle, c'est le lot P5 qui la porte, téléphone compris.
+> **CA-N1 vaut aussi sur téléphone** (porteur, 2026-10-24) et appartient au **lot N**, pas à cette phase : N n'a aucun commit sur la branche de chantier (vérifié le 2026-10-24), l'orchestrateur a été prévenu le jour même. Ce qu'il faut ajouter à N est écrit au lot P5 ci-dessous ; P5 ne garde que la colonne de 40 rem.
+
+**Fichiers partagés avec la phase ordinateur de l'élève** (autre session) : le panneau « Mon compte » à droite de 400 px est décidé pour les deux rôles (UDR enseignant §3.4, UDR écrans élève). Aujourd'hui, `_account_panel` s'ouvre en `placement: :drawer`, qui est un tiroir **à gauche** de 20 rem (`dialog.dialog-drawer`, `application.tailwind.css`). Le placement à droite de 25 rem, `_account_panel.html.erb`, `_sidebar.html.erb`, `navigation_helper.rb` et `application.tailwind.css` ne doivent avoir **qu'un lot propriétaire pour les deux rôles**. P0 est ce lot si la phase élève ne l'a pas déjà pris ; sinon P0 attend le sien et ne garde que les écrans de retrait.
 
 | Lot | Écran | Dépend de |
 |---|---|---|
-| P0 | Barre latérale, panneau « Mon compte » et écrans de retrait | M, H |
-| P1 | Accueil en page large | G, P0 |
-| P2 | Page de classe et fiche d'un élève | I, P0 |
-| P3 | Rapport d'un exercice | K, P0 |
+| P0 | Panneau « Mon compte » à droite, barre latérale, écrans de retrait dans le panneau | M, H ; lot équivalent de l'élève s'il existe |
+| P1 | Accueil en page large | G |
+| P2 | Page de classe et fiche d'un élève | I ; fusionne après P1 |
+| P3 | Rapport d'un exercice | K |
 | P4 | Inscription | J |
-| P5 | Cours | N, P0 |
-| P6 | Déclarer, assigner, jours de séance | L, P0 |
+| P5 | Cours, colonne de 40 rem | N |
+| P6 | Déclarer, assigner, jours de séance | L |
+
+Aucun lot de P1 à P6 ne touche un fichier de P0 (vérifié sur la branche de chantier : la barre latérale prend son entrée active de `content_for :nav_key`, posé par chaque vue) : ils ne dépendent donc pas de P0.
 
 ```
-P4 (J) ──────────────────────────────
-P0 (M, H) ─┬─ P1 (G) ── P2 (I)
-           ├─ P3 (K)
-           ├─ P5 (N)
-           └─ P6 (L)
+P0 (M, H, lot élève équivalent)
+P1 (G) ── P2 (I)
+P3 (K)   P4 (J)   P5 (N)   P6 (L)
 ```
 
-Vagues : **O1** = P0 ‖ P4 ; **O2** = P1 ‖ P3 ‖ P5 ‖ P6 ; **O3** = P2 (après P1, comme I après G).
+Vagues : **O1** = P0 ‖ P1 ‖ P3 ‖ P4 ‖ P5 ‖ P6 ; **O2** = P2 (après P1, comme I après G).
 
-### Lot P0 — Barre latérale, panneau « Mon compte » et écrans de retrait
+### Lot P0 — Panneau « Mon compte » à droite, barre latérale, écrans de retrait dans le panneau
 
 - **Couche**       : ui
-- **Fichiers**     : app/views/shared/navigation/_sidebar.html.erb *(Accueil · Mes classes · Cours, entrée active `bg-brand-soft`)*
-                     app/views/shared/navigation/_account_panel.html.erb *(panneau droit de 400 px à ≥ lg, voile, Échap)*
-                     app/helpers/navigation_helper.rb
-                     app/views/identity/profile_materials/ *(écran de retrait du lot H, dans le panneau)*
-                     app/views/school/teacher_schools/ *(écran de retrait du lot H, dans le panneau)*
-                     config/locales/*navigation*.yml
-- **Dépend de**    : M, H
+- **Fichiers**     : app/assets/stylesheets/application.tailwind.css *(placement à droite de 25 rem à ≥ lg, plein écran dessous ; nouveau placement dans `MODAL_PLACEMENTS`, sans toucher à `dialog-drawer`)*
+                     app/helpers/components_helper.rb *(`MODAL_PLACEMENTS` seulement)*
+                     app/views/shared/navigation/_account_panel.html.erb *(nouveau placement)*
+                     app/views/shared/navigation/_sidebar.html.erb *(enseignant : sans carte de profil)*
+                     app/helpers/navigation_helper.rb *(`SIDEBAR_FRAMES[:teacher]` vidé : « Inviter » n'est que dans la grille, UDR §2)*
+                     app/views/identity/profile_materials/show.html.erb · app/views/school/teacher_schools/index.html.erb *(écrans de retrait du lot H, rendus dans le panneau : frame du panneau, « ‹ Mon compte » qui y revient)*
+- **Dépend de**    : M, H ; le lot de la phase ordinateur élève qui pose le panneau à droite, s'il existe
 - **Test associé** : test/system/shared/teacher_account_panel_desktop_test.rb
-- **Done quand**   : à 1280 px, l'avatar ouvre « Mon compte » en panneau de 400 px, « Ajouter une matière » à 3 sur 3 ouvre « Mes matières » dans le même panneau, un retrait garde le panneau ouvert avec « 2 sur 3 » (CA-H7, CA-G11)
+- **Done quand**   : à 1280 px, l'avatar ouvre « Mon compte » à droite sur 400 px ; « Ajouter une matière » à 3 sur 3 ouvre « Mes matières » dans le même panneau ; un retrait garde le panneau ouvert avec « 2 sur 3 » ; la barre latérale enseignant n'a ni carte de profil ni « Inviter » ; à 390 px, rien ne change (CA-H7, CA-G11)
 
 ### Lot P1 — Accueil en page large
 
 - **Couche**       : ui
 - **Fichiers**     : app/views/classroom/teacher_homes/show.html.erb · _classroom_card.html.erb · _add_classroom_card.html.erb · _course_levels.html.erb · _follow_ups.html.erb · _history.html.erb
-- **Dépend de**    : G, P0
+- **Dépend de**    : G
 - **Test associé** : test/system/classroom/teacher_home_desktop_test.rb
 - **Done quand**   : à 1280 px, contenu de 57 rem, bandeau sans avatar ni aide, cartes de classe en grille de 3 avec « + Ajouter une classe » en dernier, « Cette semaine » et « Historique » côte à côte avec titres visibles (UDR §3.3)
 
@@ -252,7 +254,7 @@ Vagues : **O1** = P0 ‖ P4 ; **O2** = P1 ‖ P3 ‖ P5 ‖ P6 ; **O3** = P2 (ap
 - **Couche**       : ui
 - **Fichiers**     : app/views/classroom/classrooms/show.html.erb · _link.html.erb · _assigned_exercises.html.erb · _gaps.html.erb · _roster_title.html.erb · _roster.html.erb
                      app/views/classroom/classroom_students/show.html.erb · _summary.html.erb · _manage.html.erb · _assignments.html.erb · _self_practice.html.erb
-- **Dépend de**    : I, P0 ; fusionne après P1
+- **Dépend de**    : I ; fusionne après P1
 - **Test associé** : test/system/classroom/classroom_desktop_test.rb
 - **Done quand**   : à 1280 px, la page de classe a deux colonnes égales (UDR §3.5) et la fiche d'un élève a le résumé et la gestion à gauche, les exercices et « Fait seul » à droite, « Mes classes » actif (CA-I6)
 
@@ -261,7 +263,7 @@ Vagues : **O1** = P0 ‖ P4 ; **O2** = P1 ‖ P3 ‖ P5 ‖ P6 ; **O3** = P2 (ap
 - **Couche**       : ui
 - **Fichiers**     : app/views/classroom/assignment_follow_ups/show.html.erb
                      app/views/assessment/comprehension/_section.html.erb
-- **Dépend de**    : K, P0
+- **Dépend de**    : K
 - **Test associé** : test/system/classroom/assignment_follow_up_desktop_test.rb
 - **Done quand**   : à 1280 px, « Voir l'exercice » est à droite du titre ; progression, cases par badge, prochain geste et questions à gauche, élèves à droite (UDR §3.8)
 
@@ -271,17 +273,22 @@ Vagues : **O1** = P0 ‖ P4 ; **O2** = P1 ‖ P3 ‖ P5 ‖ P6 ; **O3** = P2 (ap
 - **Fichiers**     : app/views/identity/teacher_registrations/new.html.erb · _form.html.erb
 - **Dépend de**    : J
 - **Test associé** : test/system/identity/teacher_registration_desktop_test.rb
-- **Done quand**   : à 1280 px, deux colonnes, panneau gauche jaune enseignant avec « Bienvenue sur Lnclass » une seule fois, trois étapes à droite sur 28 rem ; avec un lien d'invitation, ouverture à l'étape 2 (CA-J5, CA-J6)
+- **Done quand**   : à 1280 px, deux colonnes, panneau gauche `bg-teacher` avec « Bienvenue sur Lnclass » une seule fois, trois étapes à droite sur 28 rem ; avec un lien d'invitation, ouverture à l'étape 2 (CA-J5, CA-J6)
 
-### Lot P5 — Cours
+### Lot P5 — Cours, colonne de 40 rem
 
-- **Couche**       : infrastructure + ui
-- **Fichiers**     : app/views/catalog/courses/index.html.erb et ses partiels enseignant
-                     app/helpers/catalog/*courses* *(puces limitées à `teacher_scope.materials`, si N ne l'a pas fait)*
-                     la query du catalogue enseignant *(fiches de révision par fiche de cours, une requête)*
-- **Dépend de**    : N, P0
-- **Test associé** : test/system/catalog/teacher_courses_test.rb *(390 et 1280 px)*
-- **Done quand**   : sur téléphone comme à 1280 px, les puces ne montrent que les matières de l'établissement courant, une seule matière s'affiche, chaque fiche de cours est une carte qui liste ses fiches de révision ; à 1280 px, une colonne de 40 rem (CA-N1, CA-N2)
+**À ajouter au lot N** (CA-N1, téléphone et ordinateur), d'après le code de la branche de chantier au 2026-10-24 :
+- *Puces de l'établissement courant* : déjà vrai. `TeacherAudienceQuery` lit les matières avec `school_id: current_actor.school_id` (`courses_controller#teacher_scope`). N rend les puces depuis `teacher_scope.materials` et ajoute un cas de test avec une matière d'un autre établissement.
+- *Une matière à la fois* : à changer. Aujourd'hui un bivalent reçoit `group_by_material: true` (`teacher_grouped?`), donc toutes ses matières groupées. N passe `material:` (la puce active, par défaut la première de `teacher_scope.materials`) et `group_by_material: false` pour l'enseignant. Fichier : `app/controllers/catalog/courses_controller.rb`, déjà dans N.
+- *Fiches de révision dans la carte* : à ajouter. `Queries::Catalog::CourseCatalogQuery::Row` n'a pas les fiches de révision. N ajoute un champ `essentials` (slug, nom, fiches publiées, dans l'ordre de `position`), lu **en une requête pour la page** de 24 cartes, sur le modèle de `progress_by_course` déjà présent dans la même query. Il est rempli pour l'enseignant seulement. La carte enseignant de `_course_card.html.erb` liste ces fiches sous `catalog.courses.*.essentials_title` (« Révisions de la leçon », clé existante dans `config/locales/catalog/courses.fr.yml`). Fichiers à ajouter à N : `app/infrastructure/queries/catalog/course_catalog_query.rb` et `test/infrastructure/queries/catalog/course_catalog_query_test.rb`.
+
+Le lot P5 ne fait que la mise en page ordinateur :
+
+- **Couche**       : ui
+- **Fichiers**     : app/views/catalog/courses/index.html.erb · _course_card.html.erb *(branche enseignant)*
+- **Dépend de**    : N *(avec CA-N1)*
+- **Test associé** : test/system/catalog/teacher_courses_test.rb *(cas à 1280 px ajouté)*
+- **Done quand**   : à 1280 px, Cours est une colonne de 40 rem, cartes dans l'ordre de la progression, « Cours » actif (CA-N2) ; à 390 px, rien ne change par rapport à N
 
 ### Lot P6 — Déclarer, assigner, jours de séance
 
@@ -290,6 +297,6 @@ Vagues : **O1** = P0 ‖ P4 ; **O2** = P1 ‖ P3 ‖ P5 ‖ P6 ; **O3** = P2 (ap
                      app/views/catalog/essentials/show.html.erb · _exercise_progress.html.erb
                      app/views/classroom/assignments/new.html.erb · _toggle.html.erb
                      app/views/classroom/session_days/edit.html.erb
-- **Dépend de**    : L, P0
+- **Dépend de**    : L
 - **Test associé** : test/system/classroom/teacher_first_path_desktop_test.rb
-- **Done quand**   : à 1280 px, les niveaux sont sur deux colonnes avec « Terminer » à droite (CA-L5), la colonne « Exercices » reste visible au défilement (CA-L6), et « Assigner » sans jours de séance ouvre une modale centrée qu'Échap ferme (CA-L7)
+- **Done quand**   : à 1280 px, les niveaux sont sur deux colonnes avec « Terminer » à droite et « Mes classes » actif (CA-L5), la colonne « Exercices » reste visible au défilement (CA-L6), et « Assigner » sans jours de séance ouvre une modale centrée qu'Échap ferme (CA-L7)
