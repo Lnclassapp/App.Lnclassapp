@@ -189,12 +189,12 @@ Alors Ma classe s'ouvre
 ### E. Écrans élève sans répétition
 
 ```gherkin
-# CA-E1
+# CA-E1 — remplacé par CA-E8 (§4 bis), décision du porteur du 2026-10-24
 Étant donné un élève qui touche son avatar
 Alors un panneau plein écran « Mon compte » s'ouvre avec, dans l'ordre : Mon profil, Modifier mon code secret, Mode sombre, Se déconnecter
 Et ni Accueil, ni Cours, ni Ma classe, ni Mon historique, ni Besoin d'aide n'y figurent
 
-# CA-E2
+# CA-E2 — remplacé par CA-E9 (§4 bis), décision du porteur du 2026-10-24
 Étant donné la page Mon profil d'un élève
 Alors elle montre six lignes (Photo, Nom, Numéro, Classe, Établissement, Inscrit·e le), sans grande carte en tête
 Et la ligne Classe n'a pas d'action ; ni code secret, ni mode sombre, ni « Se déconnecter » sur la page
@@ -212,7 +212,7 @@ Et la carte « Fiche à revoir · Refaire un exercice » n'existe plus
 Étant donné le résultat d'une session
 Alors il y a un seul bouton, « Recommencer », et ni l'encadré « Tu restes autour de… » ni « Revoir l'exercice »
 
-# CA-E6
+# CA-E6 — remplacé par CA-E14 (§4 bis), décision du porteur du 2026-10-24
 Étant donné la page Cours d'un élève
 Alors « Progression DPFC 2026-2027 » n'est écrit qu'une fois
 Et chaque fiche est une ligne entière cliquable d'au moins 44 px, sans « Commencer la fiche de cours »
