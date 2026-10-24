@@ -295,6 +295,7 @@ Alors le contenu tient dans 912 px à côté de la barre latérale Accueil · Co
 Et il n'y a pas de bandeau bleu ; la ligne bleue de 4 px est en haut de la barre du haut
 Et les sections s'empilent sur une colonne : la carte du prochain exercice, « Mes matières » sur une ligne de 7 cases, les annonces avec deux cartes visibles, l'Historique
 Et il n'y a ni « À faire » ni « Fiches à revoir » sur l'accueil
+Et le fond de page est mist, chaque section dans une carte blanche
 ```
 
 ### E′. Écrans élève sur ordinateur

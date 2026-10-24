@@ -262,10 +262,11 @@ Portes propres au pilote :
 
 - **Couche**       : ui
 - **Fichiers**     : app/views/classroom/student_homes/show.html.erb · _band.html.erb *(masqué dès lg)* · _next_step.html.erb · _subjects.html.erb · _history.html.erb · app/views/communication/messages/_carousel.html.erb *(deux cartes visibles dès lg, branche élève)*
-                     app/views/shared/navigation/_sidebar.html.erb *(branche élève : sans carte de profil ; seul lot de la phase qui touche la barre latérale)*
+                     app/views/shared/navigation/_sidebar.html.erb *(branche élève : sans carte de profil, navigation dans une carte blanche ; seul lot de la phase élève qui touche la barre latérale — le lot enseignant P0 la touche aussi, à fusionner l'un après l'autre)*
+                     app/views/layouts/shell.html.erb *(élève dès lg : fond `bg-mist` ; vaut pour tous les écrans élève)*
 - **Dépend de**    : D
 - **Test associé** : test/system/classroom/student_home_test.rb *(cas « ordinateur », fenêtre de 1440 px)*
-- **Done quand**   : sur ordinateur, contenu de 912 px au plus à côté de la barre latérale sans carte de profil, sans bandeau (ligne bleue de la barre du haut seulement), sections empilées : carte, matières sur une ligne de 7, annonces à deux cartes visibles, Historique (CA-D10) ; à 390 px, l'accueil ne change pas
+- **Done quand**   : sur ordinateur, contenu de 912 px au plus à côté de la barre latérale sans carte de profil, sans bandeau (ligne bleue de la barre du haut seulement), sections empilées : carte, matières sur une ligne de 7, annonces à deux cartes visibles, Historique, fond `bg-mist` et sections en cartes blanches (CA-D10) ; à 390 px, l'accueil ne change pas
 
 ### Lot O2 — « Mon compte », profil et Mon établissement sur ordinateur
 
