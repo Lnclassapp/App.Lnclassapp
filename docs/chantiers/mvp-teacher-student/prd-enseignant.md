@@ -217,7 +217,7 @@ Alors la fenêtre des jours s'ouvre avec ses jours cochés, et « Enregistrer »
 
 ## 4 bis. Phase ordinateur (après les lots téléphone)
 
-Déjà décidé dans l'UDR enseignant, à construire dans cette phase : accueil en page large (§3.3, ancien CA-G10), « Mon compte » en panneau latéral de 400 px (§3.4), page de classe et rapport en deux colonnes (§3.5, §3.8). Dessinés le 2026-10-24 (UDR, sous-sections « Sur ordinateur (≥ lg) ») : inscription (§3.9), fiche d'un élève (§3.6), Cours (§3.7). Restent à dessiner : écrans de retrait, « Quelles classes enseignez-vous ? », assignation et jours de séance.
+Déjà décidé dans l'UDR enseignant, à construire dans cette phase : accueil en page large (§3.3, ancien CA-G10), « Mon compte » en panneau latéral de 400 px (§3.4), page de classe et rapport en deux colonnes (§3.5, §3.8). Dessinés le 2026-10-24 (UDR, sous-sections « Sur ordinateur (≥ lg) ») : inscription (§3.9), fiche d'un élève (§3.6), Cours (§3.7), écrans de retrait (§3.4), « Quelles classes enseignez-vous ? », fiche de révision avec « Assigner » et fenêtre des jours de séance (§3.13).
 
 > **Écrans à ≥ lg** (1024 px et plus). Captures à 1440 et 1024 px pour chaque lot, en plus du téléphone.
 
@@ -245,6 +245,30 @@ Et chaque fiche de cours est une carte « LEÇON N · <titre> » qui liste ses f
 # CA-N2
 Étant donné un écran d'au moins 1024 px de large
 Alors Cours est une seule colonne de 40 rem au plus, dans l'ordre de la progression, « Cours » actif dans la barre latérale
+
+# CA-H7
+Étant donné un écran d'au moins 1024 px de large et un enseignant à 3 matières
+Quand il touche « Ajouter une matière » dans le panneau « Mon compte »
+Alors « Mes matières » s'ouvre dans le même panneau de 400 px, sans quitter la page en dessous
+Et « ‹ Mon compte » ramène au menu dans le panneau
+Et après un retrait, le panneau reste ouvert, la ligne a disparu et le compteur dit « 2 sur 3 »
+
+# CA-L5
+Étant donné un écran d'au moins 1024 px de large
+Quand l'enseignant ouvre « Quelles classes enseignez-vous ? »
+Alors les cartes de niveau sont sur deux colonnes, aucune carte coupée entre deux colonnes
+Et « Terminer » est aligné à droite sous les cartes
+
+# CA-L6
+Étant donné un écran d'au moins 1024 px de large et une fiche de révision à trois exercices
+Alors la fiche est à gauche et la colonne « Exercices » à droite, avec les lignes par classe
+Et la colonne « Exercices » reste visible quand l'enseignant fait défiler la fiche
+
+# CA-L7
+Étant donné un écran d'au moins 1024 px de large et une classe sans jours de séance
+Quand l'enseignant touche « Assigner »
+Alors « Quels jours voyez-vous la <classe> ? » s'ouvre en fenêtre centrée au-dessus de la fiche
+Et Échap la ferme sans rien écrire, le focus revenant sur « Assigner »
 ```
 
 ## 5. Modélisation préliminaire
