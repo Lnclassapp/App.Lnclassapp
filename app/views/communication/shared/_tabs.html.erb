@@ -3,7 +3,9 @@
 <%# ADR  : 0078 · UDR : 0005, 0071 %>
 <% role = role.to_sym %>
 <% current = current.to_sym %>
-<% keys = { teacher: %i[received mine], school_admin: %i[received mine moderation], team: %i[mine moderation] }.fetch(role, []) %>
+<%# Pilote : sans annonces écrites par l'enseignant, son seul onglet « Reçues » ne s'affiche pas. %>
+<% teacher_keys = Rails.configuration.x.pilot_flags[:teacher_announcements_enabled] ? %i[received mine] : [] %>
+<% keys = { teacher: teacher_keys, school_admin: %i[received mine moderation], team: %i[mine moderation] }.fetch(role, []) %>
 <% paths = { received: announcements_path, mine: my_announcements_path, moderation: moderated_announcements_path } %>
 <%# La modération s'appelle « Enseignants » pour la direction, « Toutes » pour l'équipe. %>
 <% labels = { received: "received", mine: "mine", moderation: role == :team ? "all" : "school" } %>

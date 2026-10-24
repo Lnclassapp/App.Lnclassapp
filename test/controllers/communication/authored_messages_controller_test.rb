@@ -8,7 +8,9 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
   NOW = Time.zone.local(2026, 10, 4, 12)
   MP3 = ("ID3".b + ("\x00".b * 64)).freeze
 
+  # The teacher's announcements are off for the pilot (pilot flag); these tests prove them as they come back.
   setup do
+    pilot_flags!(teacher_announcements_enabled: true)
     travel_to NOW
     @lauriers = create_school(name: "Collège Les Lauriers")
     @bouake = create_school(name: "Lycée de Bouaké")
@@ -20,6 +22,25 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
     @diallo = create_school_admin(school: @lauriers, last_name: "Diallo", gender: "male")
     @fatou = create_team_member(first_name: "Fatou")
     @awa = create_student(classroom: @b3, first_name: "Awa")
+  end
+
+  test "pilot: with the flag off, a teacher writes nothing; « Mes annonces » and the form send him back to « Reçues »" do
+    pilot_flags!(teacher_announcements_enabled: false)
+    sign_in_as @kouassi
+
+    [ my_announcements_path, new_announcement_path ].each do |path|
+      get path
+      assert_redirected_to announcements_path
+    end
+    assert_no_difference -> { Orm::Message.count } do
+      publish(classroom_public_ids: [ @b3.public_id ])
+    end
+    assert_redirected_to announcements_path
+    sign_out
+
+    sign_in_as @kamate
+    get my_announcements_path
+    assert_response :success
   end
 
   def upload(bytes, name, type) = Rack::Test::UploadedFile.new(StringIO.new(bytes), type, true, original_filename: name)
