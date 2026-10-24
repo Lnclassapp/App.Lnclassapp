@@ -16,7 +16,22 @@ class SystemBudget
   # Dérogations du porteur (ADR-0069 §9, amendement du 2026-10-03) : un chantier, ses fichiers système, son budget.
   # Une PR dont tous les fichiers qui grandissent sont ceux d'une dérogation a ce budget-là ; toute autre, BUDGET.
   GRANTS = {
-    "blog" => { budget: 20.0, files: %w[test/system/communication/blog_reading_test.rb test/system/teams/blog_management_test.rb] }
+    "blog" => { budget: 20.0, files: %w[test/system/communication/blog_reading_test.rb test/system/teams/blog_management_test.rb] },
+    # Amendement du 2026-10-24 : 50 s pour mvp-teacher-student (pilote du 27 octobre), ses 23 fichiers système.
+    "mvp-teacher-student" => { budget: 50.0, files: %w[
+      test/system/assessment/session_result_test.rb test/system/catalog/teacher_courses_test.rb
+      test/system/classroom/catalog_assignment_test.rb test/system/classroom/classroom_essential_test.rb
+      test/system/classroom/classroom_page_test.rb test/system/classroom/classroom_roster_test.rb
+      test/system/classroom/comprehension_test.rb test/system/classroom/join_test.rb
+      test/system/classroom/student_classroom_test.rb test/system/classroom/student_file_test.rb
+      test/system/classroom/student_home_test.rb test/system/classroom/teacher_home_test.rb
+      test/system/classroom/teaching_selection_test.rb test/system/homepage_test.rb
+      test/system/identity/account_panel_test.rb test/system/identity/profile_pin_test.rb
+      test/system/identity/profile_test.rb test/system/identity/student_avatar_menu_test.rb
+      test/system/identity/student_signup_steps_test.rb test/system/identity/teacher_materials_test.rb
+      test/system/identity/teacher_signup_test.rb test/system/role_homes_test.rb
+      test/system/school/teacher_schools_test.rb
+    ] }
   }.freeze
   GLOB = "test/system/**/*_test.rb"
   BASE = "origin/Develop"
