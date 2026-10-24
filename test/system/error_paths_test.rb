@@ -38,7 +38,8 @@ class ErrorPathsTest < ApplicationSystemTestCase
     create_student(classroom:)
     click_on t("classroom.student_registrations.form.submit")
 
-    assert_selector "#student-registration-form [role=alert]", text: join_refusal(:classroom_full)
+    # A link has no step 1: the refusal opens at the top of step 2.
+    assert_selector "#student-registration-form #student-registration-refusal[role=alert]", text: join_refusal(:classroom_full)
     assert_equal users + 1, Orm::User.count
     assert_equal 1, Orm::ClassroomStudent.where(classroom:).count
     visit student_home_path

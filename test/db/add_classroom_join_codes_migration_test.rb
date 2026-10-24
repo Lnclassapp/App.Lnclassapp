@@ -49,7 +49,7 @@ class AddClassroomJoinCodesMigrationTest < ActiveSupport::TestCase
     codes = Orm::Classroom.where(school_id: school.id).pluck(:join_code)
     assert_equal 20, codes.uniq.size
     assert(codes.all? { Entities::Classroom::JoinCode.valid?(it) }, codes.inspect)
-    assert_equal 32, Entities::Classroom::JoinCode::SYMBOLS.size
+    assert_equal 31, Entities::Classroom::JoinCode::SYMBOLS.size
     assert_equal AddJoinCodeToClassrooms::ALPHABET.chars.sort, Entities::Classroom::JoinCode::SYMBOLS.sort
   end
 

@@ -1,8 +1,9 @@
 require "test_helper"
 
 # IL-01, IL-02 (the page), IL-05, IL-06, IL-07, IL-08, IL-09, IL-10, IL-19, IL-20, IL-23 server side (ADR-0085,
-# UDR-0081 §3.1 to §3.3): one public sign-up page in three sections (your classroom, you, secret code), no classroom
-# code. The classroom is chosen in four chained lists (DRENA, school, level, classroom), or given by a classroom link;
+# UDR-0081 §3.1 to §3.3): one public sign-up page in three sections (your classroom, you, secret code). The class code
+# is back (ADR code-de-classe-a-six-caracteres): its field is the sign-up screen's business (Lot B), the code itself is
+# resolved by RegisterStudent. The classroom is chosen in four chained lists (DRENA, school, level, classroom), or given by a classroom link;
 # the student enters it at once, signed in. UDR-0091 (CA-6): the same cascade as « Choisis ta classe », in three steps.
 class Classroom::StudentRegistrationsControllerTest < ActionDispatch::IntegrationTest
   ERRORS = "activemodel.errors.models.dtos/classroom/student_registration_input.attributes".freeze
@@ -33,85 +34,188 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_not Orm::User.exists?(contact: "0701020304")
   end
 
-  test "IL-02: three sections in order, the DRENA first, the lists empty, the name in two fields — never a classroom code" do
+  STEPS = "classroom.student_registrations.form".freeze
+  SIGNUP = "#student-signup".freeze
+
+  def start_step = css_select(SIGNUP).first["data-classroom--signup-steps-start-value"].to_i
+
+  # CA-C1, UDR « inscription élève en trois étapes » §3.1, §3.2: three fieldsets in order, the code field first, the cascade
+  # behind « Je n'ai pas de code », « Étape 1 sur 3 », the welcome card, and no « Continuer » button outside the no-JS fallback.
+  test "CA-C1: step 1 of 3 opens on the class code, with the welcome card and no « Continuer » button" do
     get new_student_registration_path
 
     assert_response :success
+    assert_equal 1, start_step
+    assert_select "#{SIGNUP}[data-controller~='classroom--signup-steps']"
+    assert_select "#signup-step-counter", text: I18n.t("#{STEPS}.step_counter", n: 1)
+    assert_select "#signup-progress li", 3
+    assert_select "#signup-live[aria-live=polite]"
+    assert_select "#signup-welcome", text: /Bienvenue sur Lnclass/
     assert_select "h1", text: I18n.t("#{PAGE}.title"), count: 1
-    assert_select "p", text: I18n.t("#{PAGE}.subtitle")
-    assert_select "form#student-registration-form[action='#{student_registrations_path}'][method=post]" \
-                  "[data-controller='classroom--class-picker identity--phone-digits identity--pin-match']" \
-                  "[data-classroom--class-picker-schools-url-value='#{drena_schools_path('__drena__', scope: :student_registration)}']" \
-                  "[data-classroom--class-picker-levels-url-value='#{school_picker_levels_path('__school__', scope: :student_registration)}']" \
-                  "[data-classroom--class-picker-classrooms-url-value='" \
-                  "#{school_picker_classrooms_path('__school__', '__level__', scope: :student_registration)}']" do
-      assert_equal [ "1 Ta classe", "2 Toi", "3 Code secret" ],
-                   css_select("[id^=student-registration-section] > fieldset > legend").map { it.text.squish }
-      # UDR-0091 §3.4 : la rubrique 1 montre les trois étapes, les listes ouvertes tant que l'établissement est inconnu.
-      assert_equal [ "1 #{I18n.t("#{PICKER}.step_school")}", "2 #{I18n.t("#{PICKER}.step_level")}",
-                     "3 #{I18n.t("#{PICKER}.step_classroom")}" ], css_select("fieldset[id^=class-picker-step] > legend").map { it.text.squish }
-      assert_select "#class-picker-school-summary", 0
-      assert_select "#class-picker-school-fields:not([hidden])"
-      assert_select "select[name='student_registration[drena_public_id]'][data-action='change->classroom--class-picker#loadSchools'] " \
-                    "option[value='#{@drena.public_id}']", text: "Abidjan 1"
-      %w[picker_schools picker_levels picker_classrooms].each do |frame|
-        assert_select "turbo-frame##{frame}.block.transition-opacity[aria-live=polite]", 1, frame
-        assert_select "turbo-frame##{frame} *", 0, frame
-      end
-      assert_select "noscript button[formmethod=get][formaction='#{new_student_registration_path}'][formnovalidate]",
-                    text: I18n.t("#{PICKER}.continue")
-      assert_select "input[name='student_registration[last_name]'][required][maxlength='50'][autocomplete=family-name]" \
-                    "[placeholder='#{I18n.t("#{FORM}.last_name_placeholder")}']"
-      assert_select "input[name='student_registration[first_name]'][required][maxlength='80'][autocomplete=given-name]" \
-                    "[placeholder='#{I18n.t("#{FORM}.first_name_placeholder")}']"
-      assert_select "input[name='student_registration[full_name]'], #name-correction", 0
-      assert_select "input[type=radio][name='student_registration[gender]']:not([checked])", count: 2
-      assert_select "input[type=tel][name='student_registration[contact]'][maxlength='20'][inputmode=numeric]"
-      assert_select "input[type=password][name='student_registration[pin]'][inputmode=numeric][maxlength='4']"
-      assert_select "input[type=password][name='student_registration[pin_confirmation]'][data-identity--pin-match-target=confirmation]"
-      assert_select "p#pin_match_status[hidden][aria-live=polite]"
-      assert_select "template[data-classroom--class-picker-target=loadError]"
-      assert_select "button#student-registration-submit[type=submit][data-classroom--class-picker-target=submit]:not([disabled])",
-                    text: I18n.t("#{FORM}.submit")
-      assert_select "input[name='student_registration[link_token]']", 0
-    end
-    assert_select "[name*=code], [name*=role]", 0
-    assert_select "#classroom-preview, #classroom-link-invalid, #other-classroom", 0
-    assert_no_match(/Code de classe/, response.body)
-    assert_select "a[href='#{new_session_path}']", text: I18n.t("#{PAGE}.sign_in")
+    assert_select "#signup-back[hidden]"
+    assert_equal [ I18n.t("#{STEPS}.classroom"), I18n.t("#{STEPS}.you"), I18n.t("#{STEPS}.security") ],
+                 css_select("fieldset[data-classroom--signup-steps-target=step] > legend").map { it.text.squish }
+    assert_select "fieldset[data-classroom--signup-steps-target=step]", 3
+    assert_select "input#student_registration_join_code[maxlength='6'][autocomplete=off][inputmode=text]" \
+                  "[autocapitalize=characters].font-mono[data-classroom--signup-steps-target=code]"
+    assert_select "#student_registration_join_code_hint", text: I18n.t("#{STEPS}.code_hint")
+    assert_select "#signup-code-checking[hidden]", text: I18n.t("#{STEPS}.checking")
+    assert_select "turbo-frame#classroom_code_preview[aria-live=polite]"
+    assert_select "input#signup-no-code[type=checkbox]:not([checked])"
+    assert_select "label[for=signup-no-code]", text: I18n.t("#{STEPS}.no_code")
+    # The cascade is the fallback: it stays in the page, shown by the checkbox.
+    assert_select "#signup-cascade select[name='student_registration[drena_public_id]']"
+    visible_buttons = css_select("form button").reject { it.ancestors("noscript").any? }
+    assert_empty visible_buttons.select { it.text.squish == I18n.t("#{PICKER}.continue") }
+    assert_equal 1, visible_buttons.count { it["type"] == "submit" }
   end
 
-  # UDR-0088 §3.1, §3.2, §3.4, §3.7 (CA-4): the blue welcome, help at the top right, three numbered sections each in a white
-  # card (a fieldset and its legend, the number decorative), the gender in two big pills that are real radios.
-  test "CA-4: three numbered sections in white cards, the gender in two big pills, the blue welcome and the help" do
+  test "UDR §3.1: the help, the logo, the dividers and the terms line under the button" do
     get new_student_registration_path
 
-    assert_select "body > div.grid[class~='lg:grid-cols-2']" do
-      assert_select "> aside#auth-welcome-panel", text: /Bienvenue sur Lnclass.*Ton espace d'apprentissage/m
-      assert_select "> div > #auth-help [aria-controls=help-sheet]", text: "Besoin d'aide ?"
-      assert_select "> div > main > div.max-w-140 > section#auth-welcome-card", text: /Bienvenue sur Lnclass/
-    end
-    %w[classroom you security].each_with_index do |section, index|
-      assert_select "#student-registration-section-#{section}.rounded-card.bg-white > fieldset > legend" do
-        assert_select "span[aria-hidden=true].bg-brand-soft.text-brand-strong", text: (index + 1).to_s
-      end
-    end
-    assert_select "#student-registration-section-you fieldset#student-registration-gender > legend", text: /Genre/
+    assert_select "#signup-header a[href='/'][aria-label]"
+    assert_select "#signup-header #auth-help [aria-controls=help-sheet]", text: "Besoin d'aide ?"
+    assert_select "dialog#help-sheet", 1
+    assert_select "#student-registration-submit + p.text-xs a[href=?]", terms_path
+    assert_select "#student-registration-submit + p a[href=?]", privacy_path
+    assert_select "#signup-signin a[href=?]", new_session_path, text: I18n.t("#{PAGE}.sign_in")
+    assert_select "aside#auth-welcome-panel", 0
+  end
+
+  test "UDR §3.8: the submit says « Création… » while sent, and the steps have a legend, the title focusable" do
+    get new_student_registration_path
+
+    assert_select "button#student-registration-submit[data-turbo-submits-with='#{I18n.t("#{STEPS}.submitting")}']"
+    assert_select "button#student-registration-submit[data-classroom--class-picker-target=submit]", 0
+    assert_select "fieldset > legend[tabindex='-1']", 3
+  end
+
+  test "CA-C1: the gender stays two pills that are real radios, 44 px, the phone and the secret code fields are kept" do
+    get new_student_registration_path
+
     assert_select "#student-registration-gender label.h-11[class~='has-checked:bg-brand-strong']", count: 2 do |pills|
       assert_equal [ I18n.t("genders.male"), I18n.t("genders.female") ].sort, pills.map { it.text.squish }.sort
     end
     assert_select "#student-registration-gender label > input[type=radio][name='student_registration[gender]'][required]", count: 2
-    assert_select "#student-registration-form + p a[href=?]", new_session_path, text: I18n.t("#{PAGE}.sign_in")
-    assert_select "dialog#help-sheet", 1
+    assert_select "input[type=tel][name='student_registration[contact]'][data-identity--phone-digits-target=input]"
+    assert_select "form#student-registration-form[data-controller~='identity--pin-match']"
   end
 
-  # UDR-0088 §3.1: at 1 024 px (lg) the panel shows and the blue card hides; below, the reverse.
-  test "the blue panel is hidden under lg and the blue card from lg" do
+  # CA-C7: without JavaScript every step is in the page, one under the other, and the form posts as before.
+  test "CA-C7: no step is hidden by the server, so without JavaScript the three steps are visible" do
     get new_student_registration_path
 
-    assert_select "aside#auth-welcome-panel.hidden[class~='lg:flex']", 1
-    assert_select "section#auth-welcome-card[class~='lg:hidden']", 1
-    assert_select "aside#auth-welcome-panel[class~='lg:hidden'], section#auth-welcome-card.hidden", 0
+    assert_select "fieldset[data-classroom--signup-steps-target=step][hidden]", 0
+    assert_select "form#student-registration-form fieldset[data-step='1'] ~ fieldset[data-step='2'] ~ fieldset[data-step='3']"
+  end
+
+  test "CA-C3: a valid classroom link opens at step 2 with the recap and the welcome card, no step 1, no « Retour »" do
+    get join_classroom_path(@classroom.reload.link_token)
+
+    assert_response :success
+    assert_equal 2, start_step
+    assert_select "#signup-step-counter", text: I18n.t("#{STEPS}.step_counter", n: 2)
+    assert_select "fieldset[data-step='1']", 0
+    assert_select "fieldset[data-step]", 2
+    assert_select "#signup-classroom-recap", text: /3e 2.*Lycée Moderne de Cocody/m
+    assert_select "#signup-classroom-recap a#other-classroom[href=?]", new_student_registration_path
+    assert_select "#signup-back[hidden]"
+    assert_select "#signup-welcome", text: /Bienvenue sur Lnclass/
+    assert_select "input[name='student_registration[join_code]']", 0
+  end
+
+  # CA-C5: the code is posted over HTTP too (the field is permitted), and joined_via says « code ».
+  test "CA-C5: signing up with the class code enters the classroom, way « code », whatever classroom is sent" do
+    other = create_classroom(school: @school, level: @level, name: "3e 3")
+
+    register(join_code: @classroom.reload.join_code.upcase, classroom_public_id: other.public_id)
+
+    assert_redirected_to student_home_path
+    assert_equal [ [ @classroom.id, "code" ] ], memberships.pluck(:classroom_id, :joined_via)
+  end
+
+  test "CA-C5: the code alone is enough, without any cascade choice" do
+    register(join_code: @classroom.reload.join_code, classroom_public_id: nil, drena_public_id: nil, school_public_id: nil,
+             level_slug: nil)
+
+    assert_redirected_to student_home_path
+    assert_equal [ "code" ], memberships.pluck(:joined_via)
+  end
+
+  test "CA-B3, CA-C6: an unknown code is refused under the code field and reopens step 1, the other entries kept" do
+    register(join_code: "zzzzzz", classroom_public_id: nil)
+
+    assert_refused :join_code, I18n.t("#{ERRORS}.join_code.unknown")
+    assert_equal 1, start_step
+    assert_select "input[name='student_registration[last_name]'][value='KOUASSI']"
+    assert_select "input#student_registration_join_code[aria-invalid=true][value='zzzzzz']"
+  end
+
+  test "CA-B3: the code of an archived classroom is refused like an unknown code, no account" do
+    archived = create_classroom(school: @school, level: @level, name: "3e 3", status: "archived")
+
+    register(join_code: archived.reload.join_code, classroom_public_id: nil)
+
+    assert_refused :join_code, I18n.t("#{ERRORS}.join_code.unknown")
+    assert_equal 1, start_step
+  end
+
+  test "CA-C6: an error on the number reopens step 2, on the secret code step 3, on the classroom step 1" do
+    register(contact: "070102030")
+    assert_equal 2, start_step
+
+    register(pin_confirmation: "1357")
+    assert_equal 3, start_step
+
+    register(classroom_public_id: "")
+    assert_equal 1, start_step
+
+    register(last_name: "", pin_confirmation: "1357")
+    assert_equal 2, start_step, "the first step that holds an error opens"
+  end
+
+  test "CA-C6: after a code accepted and an error on the number, step 2 opens with the class recap" do
+    code = @classroom.reload.join_code
+    register(join_code: code, contact: "070102030")
+
+    assert_response :unprocessable_entity
+    assert_equal 2, start_step
+    assert_select "#signup-classroom-recap", text: /3e 2.*Lycée Moderne de Cocody/m
+    assert_select "#signup-classroom-recap a#other-classroom[data-action='click->classroom--signup-steps#restart']"
+    assert_select "input#student_registration_join_code[value='#{code}']"
+    assert_select "#student_registration_contact_error", text: I18n.t("#{ERRORS}.contact.invalid")
+  end
+
+  test "UDR §3.2: after a cascade choice and an error, the checkbox is ticked so the cascade stays open" do
+    register(pin_confirmation: "1357")
+
+    assert_select "input#signup-no-code[checked]"
+    assert_select "turbo-frame#picker_classrooms input[type=radio][checked][value='#{@classroom.public_id}']"
+  end
+
+  test "UDR §3.5: the general refusal (full classroom) shows at the top of the open step" do
+    @classroom.update!(max_students: 1)
+    create_student(classroom: @classroom)
+
+    register
+
+    assert_response :forbidden
+    assert_equal 1, start_step
+    assert_select "fieldset[data-step='1'] #student-registration-refusal[role=alert]", text: I18n.t("#{ERRORS}.base.classroom_full")
+  end
+
+  # CA-B4: the sign-up shares the counter « classroom/joins » (10 a minute and per address) with /c/<token> and the check of a code.
+  test "CA-B4: five checks of a code and five openings of a link make the sign-up receive 429, with the code message at step 1" do
+    token = @classroom.reload.link_token
+    5.times { get classroom_code_path("abcdef") }
+    5.times { get join_classroom_path(token) }
+
+    register
+
+    assert_response :too_many_requests
+    assert_equal 1, start_step
+    assert_select "fieldset[data-step='1'] #signup-rate-limited[role=alert]", text: I18n.t("#{STEPS}.rate_limited")
+    assert_not Orm::User.exists?(contact: "0701020304")
   end
 
   test "a missing gender is refused under the gender, the fieldset described by it and both radios invalid" do
@@ -311,7 +415,7 @@ end
     register
 
     assert_response :forbidden
-    assert_select "form#student-registration-form > [role=alert]", text: I18n.t("#{ERRORS}.base.classroom_full")
+    assert_select "fieldset[data-step='1'] #student-registration-refusal[role=alert]", text: I18n.t("#{ERRORS}.base.classroom_full")
     assert_equal "Cette classe est complète.", I18n.t("#{ERRORS}.base.classroom_full")
     assert_not Orm::User.exists?(contact: "0701020304")
   end
@@ -342,6 +446,7 @@ end
     register
 
     assert_response :unprocessable_entity
+    assert_equal 2, start_step
     assert_select "#student_registration_contact_error", text: I18n.t("#{ERRORS}.contact.taken")
     assert_equal "Ce numéro est déjà utilisé.", I18n.t("#{ERRORS}.contact.taken")
     assert_equal 0, Orm::ClassroomStudent.count
@@ -362,9 +467,10 @@ end
     register(link_token: token, pin_confirmation: "1357", drena_public_id: nil)
 
     assert_refused :pin_confirmation, I18n.t("#{ERRORS}.pin_confirmation.confirmation")
-    # CA-7 : le bandeau de la classe et « Ce n'est pas ta classe ? » dans la rubrique 1.
-    assert_select "#student-registration-section-classroom #classroom-preview", text: /3e 2 — Lycée Moderne de Cocody/
-    assert_select "#student-registration-section-classroom a#other-classroom", text: I18n.t("#{FORM}.other_classroom")
+    # CA-C3 : le rappel de la classe et « Ce n'est pas ta classe ? » en tête de l'étape 2.
+    assert_equal 3, start_step
+    assert_select "#student-registration-section-you #signup-classroom-recap", text: /3e 2.*Lycée Moderne de Cocody/m
+    assert_select "#student-registration-section-you a#other-classroom", text: I18n.t("#{FORM}.other_classroom")
     assert_select "input[type=hidden][name='student_registration[link_token]'][value='#{token}']"
     assert_select "a#other-classroom[href='#{new_student_registration_path}']"
     assert_select "select[name='student_registration[drena_public_id]'], turbo-frame#picker_schools", 0
@@ -386,9 +492,9 @@ end
     register(link_token: "cccccccccccc", classroom_public_id: "")
 
     assert_refused :classroom_public_id, I18n.t("#{ERRORS}.classroom_public_id.blank")
-    assert_select "form#student-registration-form > #classroom-link-invalid[role=alert]", text: I18n.t("#{FORM}.link_invalid")
+    assert_select "fieldset[data-step='1'] #classroom-link-invalid[role=alert]", text: I18n.t("#{FORM}.link_invalid")
     assert_select "select[name='student_registration[drena_public_id]']"
-    assert_select "input[name='student_registration[link_token]'], #classroom-preview", 0
+    assert_select "input[name='student_registration[link_token]'], #signup-classroom-recap:not([hidden])", 0
   end
 
   test "IL-09: the standard page, opened from an invalid link, carries the alert once" do
@@ -438,15 +544,15 @@ end
     assert_not Orm::User.exists?(contact: "0701020304")
   end
 
-  test "IL-23: a sixth sign-up in a minute from the same address receives 429 in the form, no account" do
-    5.times { register(pin_confirmation: "1357") }
+  test "IL-23, CA-B4: an eleventh sign-up in a minute from the same address receives 429 in the form, no account" do
+    10.times { register(pin_confirmation: "1357") }
 
     register
 
     assert_response :too_many_requests
-    assert_select "form#student-registration-form [role=alert]", text: I18n.t("errors.codes.rate_limited")
-    # UDR-0088 §3.1 : en 429 aussi, la carte du formulaire suit l'accueil bleu.
-    assert_select "main section#auth-welcome-card ~ form#student-registration-form", 1
+    assert_select "form#student-registration-form #signup-rate-limited[role=alert]", text: I18n.t("#{FORM}.rate_limited")
+    # UDR §3.1 : en 429 aussi, la page garde sa carte de bienvenue au-dessus du formulaire.
+    assert_select "#signup-welcome ~ form#student-registration-form", 1
     assert_select "turbo-frame#picker_classrooms input[checked][value='#{@classroom.public_id}']"
     assert_not Orm::User.exists?(contact: "0701020304")
 
@@ -454,13 +560,47 @@ end
     assert_response :success
   end
 
+  # ADR-0085 §4.6, kept next to the shared counter: the sign-up alone is limited to 5 a minute and per address.
+  test "ADR-0085 §4.6: a sixth valid sign-up by code from the same address receives 429, no account created" do
+    code = @classroom.reload.join_code
+    5.times do |i|
+      post student_registrations_path, params: { student_registration: registration_params(join_code: code, classroom_public_id: nil,
+                                                                                             contact: "070102030#{i}") }
+      assert_redirected_to student_home_path
+      sign_out
+    end
+    accounts = Orm::User.count
+
+    post student_registrations_path, params: { student_registration: registration_params(join_code: code, classroom_public_id: nil,
+                                                                                           contact: "0701020309") }
+
+    assert_response :too_many_requests
+    assert_select "#signup-rate-limited[role=alert]", text: I18n.t("#{FORM}.rate_limited")
+    assert_equal accounts, Orm::User.count
+    assert_not Orm::User.exists?(contact: "0701020309")
+  end
+
+  test "IL-23: past the limit, a valid code does not show the class recap" do
+    code = @classroom.reload.join_code
+    10.times { register(join_code: code, pin_confirmation: "1357") }
+
+    register(join_code: code)
+
+    assert_response :too_many_requests
+    assert_select "#signup-classroom-recap:not([hidden])", 0
+    assert_select "#signup-rate-limited[role=alert]"
+    assert_not Orm::User.exists?(contact: "0701020304")
+  end
+
   test "IL-23: past the limit, a valid link keeps its banner" do
     token = @classroom.reload.link_token
-    5.times { register(link_token: token, pin_confirmation: "1357") }
+    10.times { register(link_token: token, pin_confirmation: "1357") }
 
     register(link_token: token)
 
     assert_response :too_many_requests
-    assert_select "#classroom-preview", text: /3e 2/
+    assert_equal 2, start_step
+    assert_select "#signup-classroom-recap", text: /3e 2/
+    assert_select "fieldset[data-step='2'] #signup-rate-limited", text: I18n.t("#{FORM}.rate_limited_link")
   end
 end

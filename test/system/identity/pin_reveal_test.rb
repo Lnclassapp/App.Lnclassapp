@@ -31,6 +31,7 @@ class Identity::PinRevealTest < ApplicationSystemTestCase
   # IL-08 (ADR-0085): the student sign-up, opened by a classroom link, the classroom already chosen.
   test "student sign-up by link: the PIN is masked again before a failed submit and comes back masked in 422" do
     visit join_classroom_path(@classroom.reload.link_token)
+    reach_the_secret_code_step
     failed_sign_up_masks_again
     assert_no_js_errors
   end
@@ -38,6 +39,7 @@ class Identity::PinRevealTest < ApplicationSystemTestCase
   test "student sign-up by link at 390 px" do
     with_mobile_viewport do
       visit join_classroom_path(@classroom.reload.link_token)
+      reach_the_secret_code_step
       assert_button_inside_field "student_registration[pin_confirmation]"
       show_then_hide "student_registration[pin]"
       failed_sign_up_masks_again
@@ -122,11 +124,16 @@ class Identity::PinRevealTest < ApplicationSystemTestCase
     assert_equal [ 4, 4 ], caret
   end
 
-  def failed_sign_up_masks_again
+  # The sign-up is cut in three steps: the name, the gender and the number (step 2) move on to the secret code (step 3) by themselves.
+  def reach_the_secret_code_step
     fill_in "student_registration[last_name]", with: "KOUASSI"
     fill_in "student_registration[first_name]", with: "Aya"
     choose I18n.t("genders.female")
     fill_in "student_registration[contact]", with: "07 01 02 03 04"
+    assert_selector "fieldset[data-step='3']", visible: :visible
+  end
+
+  def failed_sign_up_masks_again
     fill_in "student_registration[pin]", with: "4821"
     fill_in "student_registration[pin_confirmation]", with: "1357"
     toggle_for("student_registration[pin]").click

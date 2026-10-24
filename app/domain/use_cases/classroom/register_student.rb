@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::RegisterStudent
-# Rôle : un visiteur crée son compte élève (rôle imposé) et entre tout de suite dans la classe choisie ou celle de son lien, en une transaction
-# ADR  : 0026, 0028, 0040, 0041, 0050, 0085 · UDR : 0081
+# Rôle : un visiteur crée son compte élève (rôle imposé) et entre tout de suite dans la classe de son lien, de son code ou choisie, en une transaction
+# ADR  : 0026, 0028, 0040, 0041, 0050, 0085, XXXX-code-de-classe-a-six-caracteres · UDR : 0081
 module UseCases
   module Classroom
     class RegisterStudent
@@ -31,7 +31,7 @@ module UseCases
       end
 
       # dto : Dtos::Classroom::StudentRegistrationInput.
-      # → success(Registered) | :invalid (formulaire, classe hors liste) | :forbidden (déjà connecté, ou raison en
+      # → success(Registered) | :invalid (formulaire, code inconnu, classe hors liste) | :forbidden (déjà connecté, ou raison en
       #   errors[:base]) | :conflict (numéro pris, écriture refusée)
       def call(actor:, dto:, ip:, user_agent:)
         # Inscription publique : un élève connecté change de classe ailleurs (JoinAsStudent), les autres rôles n'ont rien ici.
@@ -46,10 +46,11 @@ module UseCases
       private
 
       # Le verrou de la classe sérialise les adhésions : l'effectif lu reste juste jusqu'au commit (ADR-0041). Résolu de
-      # nouveau à l'envoi (ADR-0085 §4.1), un lien valide l'emporte sur la classe envoyée ; inconnu, changé, d'une classe
-      # archivée ou d'un établissement qui n'est pas actif, il retombe sans rien dire sur la voie standard.
+      # nouveau à l'envoi (ADR-0085 §4.1), un lien valide l'emporte sur le code et sur la classe envoyés ; inconnu, changé,
+      # d'une classe archivée ou d'un établissement qui n'est pas actif, il retombe sans rien dire sur le code, puis sur la voie
+      # standard. Un code l'emporte sur la classe envoyée et ne retombe pas sur elle : inconnu, il est refusé (ADR code §4.6).
       def register(dto, ip, user_agent)
-        destination = @designation.linked(dto.link_token) || @designation.chosen(dto)
+        destination = @designation.linked(dto.link_token) || @designation.coded_or_chosen(dto)
         return destination if destination.is_a?(Shared::Result)
 
         # Un compte qui vient de naître n'a jamais été retiré d'une classe.

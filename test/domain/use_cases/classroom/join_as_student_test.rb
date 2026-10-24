@@ -5,11 +5,12 @@ module UseCases
     # CL-06, IL-15, IL-16, IL-17, IL-18 (ADR-0040, ADR-0085 §4.3): a signed-in student without an active classroom (archived,
     # or removed) enters the classroom chosen in the cascade (way « standard ») or given by a link (way « link »), without a
     # new account; an archived primary classroom is left in the same transaction. The classroom they were removed from is
-    # refused by the standard way and reopened by the link. There is no classroom code any more (Lot F).
+    # refused by the standard way and by the code, and reopened by the link. The class code is back (ADR code-de-classe §4.7).
     class JoinAsStudentTest < ActiveSupport::TestCase
       NOW = Time.utc(2026, 10, 8, 12)
       YEAR = "2026-2027".freeze
       TOKEN = "0a1b2c3d4e5f".freeze
+      CODE = "k7m4q2".freeze
       Clock = Data.define(:now)
       Membership = Entities::Classroom::Membership
 
@@ -49,6 +50,11 @@ module UseCases
         def lock_by_link_token(token:)
           @journal << [ :lock_link, token ]
           @classrooms.find { it.link_token == token }
+        end
+
+        def find_by_join_code(code:)
+          @journal << [ :find_code, code ]
+          @classrooms.find { it.join_code == code }
         end
       end
 
@@ -109,7 +115,7 @@ module UseCases
 
       def classroom(**overrides)
         Entities::Classroom::Classroom.new(id: 7, public_id: "cls-7", name: "3e 2", school_id: 3, level_id: 2,
-                                           school_year: YEAR, link_token: TOKEN, active_students_count: 12, **overrides)
+                                           school_year: YEAR, link_token: TOKEN, join_code: CODE, active_students_count: 12, **overrides)
       end
 
       def membership(status, classroom_id: 5)
@@ -263,11 +269,45 @@ module UseCases
         assert_empty @journal
       end
 
-      test "IL-02: no classroom code is accepted any more" do
+      # ADR code-de-classe §4.6 (remplace « no classroom code is accepted any more ») : le code passe par le DTO, pas par un mot-clé.
+      test "IL-02: the code is carried by the form, never by a keyword of call" do
         subject = JoinAsStudent.new(classrooms: nil, schools: nil, taxonomy: nil, memberships: nil, policy: nil, transaction: nil,
                                     clock: nil)
 
         assert_raises(ArgumentError) { subject.call(actor: @student, code: "kfm37") }
+      end
+      # CA-D7 (partie serveur), ADR code-de-classe-a-six-caracteres §4.7 : l'élève sans classe tape le code de sa classe.
+      test "CA-D7: a student without a classroom enters the classroom of the code he types, way « code »" do
+        result = join(dto: Dtos::Classroom::StudentRegistrationInput.new(join_code: "K7M 4Q2"), primary: membership("archived"))
+
+        assert result.success?
+        assert_equal "cls-7", result.value.public_id
+        assert_equal [ [ :primary_for, 41 ], [ :find_code, CODE ], [ :lock, "cls-7" ], [ :removed_from?, 7, 41 ], [ :leave, 41, NOW ],
+                       [ :add, 7, 41, "code", NOW ] ], @journal
+      end
+
+      test "the classroom the student was removed from is refused by the code, as by the standard way" do
+        result = join(dto: Dtos::Classroom::StudentRegistrationInput.new(join_code: CODE), removed_from: [ 7 ])
+
+        assert_equal [ :forbidden, { base: [ :removed_from_classroom ] } ], [ result.code, result.errors ]
+        assert_nil added
+      end
+
+      test "CA-B3: an unknown, malformed or archived-classroom code is refused alike under the code, nothing written" do
+        [ "zzzzzz", "kfm37" ].each do |code|
+          result = join(dto: Dtos::Classroom::StudentRegistrationInput.new(join_code: code))
+          assert_equal [ :invalid, { join_code: [ :unknown ] } ], [ result.code, result.errors ], code
+        end
+        result = join(dto: Dtos::Classroom::StudentRegistrationInput.new(join_code: CODE), classrooms: [ classroom(status: "archived") ])
+
+        assert_equal [ :invalid, { join_code: [ :unknown ] } ], [ result.code, result.errors ]
+        assert_nil added
+      end
+
+      test "a student whose primary classroom is active is told so before the code is read" do
+        join(dto: Dtos::Classroom::StudentRegistrationInput.new(join_code: CODE), primary: membership("active"))
+
+        assert_equal [ [ :primary_for, 41 ] ], @journal
       end
     end
   end

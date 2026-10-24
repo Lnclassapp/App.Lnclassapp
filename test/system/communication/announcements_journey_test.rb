@@ -14,7 +14,6 @@ require "application_system_test_case"
 # « Retirée » without actions for M. Kouassi (AN-16, message_withdrawals_controller_test).
 class Communication::AnnouncementsJourneyTest < ApplicationSystemTestCase
   AUDIO = "announcements/nouvelles-fiches.mp3".freeze
-  BOTTOM_BAR = "nav.fixed.bottom-0".freeze
 
   setup do
     @lauriers = create_school(name: "Collège Les Lauriers")
@@ -63,13 +62,12 @@ class Communication::AnnouncementsJourneyTest < ApplicationSystemTestCase
 
   private
 
-  # PRD §3, steps 1 to 3: from the bottom bar, « Mes annonces », « Nouvelle annonce »; the form, then « Publiée ».
+  # PRD §3, steps 1 to 3: « Annonces », « Mes annonces », « Nouvelle annonce »; the form, then « Publiée ».
+  # mvp-teacher-student: no bottom bar any more, and the teacher writes only with the pilot flag on.
   def publish_as_kouassi
+    pilot_flags!(teacher_announcements_enabled: true)
     sign_in_as @kouassi
-    within(BOTTOM_BAR) { click_link tn(:announcements) }
-
-    assert_current_path announcements_path
-    within(BOTTOM_BAR) { assert_selector "a[aria-current=page]", text: tn(:announcements) }
+    visit announcements_path
     within("#announcement-tabs") { click_link tc("tabs.mine") }
     click_on tc("authored_messages.index.new"), match: :first
     fill_in field(:title), with: "Nouvelles fiches"
