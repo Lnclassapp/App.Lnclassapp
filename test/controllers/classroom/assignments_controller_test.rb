@@ -32,11 +32,19 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
 
   def session_days(teacher = @teacher) = Orm::ClassroomSessionDay.where(teacher_id: teacher.id).order(:weekday).pluck(:weekday)
 
+  # Les jours de séance de l'enseignant pour la classe : sans eux, un envoi sans jour est refusé (voir plus bas).
+  def know_days(classroom = @classroom, teacher = @teacher, weekdays: [ 1, 4 ])
+    Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: teacher.id, classroom_id: classroom.id, weekdays:,
+                                                                at: Time.current)
+  end
+
   def withdraw(assignment, classroom: @classroom, **)
     patch archive_assignment_path(assignment.public_id), params: { classroom_public_id: classroom.public_id }, **
   end
 
   test "an exercise is assigned then withdrawn, in Turbo Streams that replace the toggle" do
+    travel_to Time.zone.local(2026, 10, 5, 10)
+    know_days
     sign_in_as @teacher
     type = "Exercise"
     key = @exercise.public_id
@@ -47,12 +55,13 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "text/vnd.turbo-stream.html", response.media_type
     assignment = Orm::ClassroomAssignment.find_by!(assignable_type: type, assignable_id: @exercise.id)
     assert_equal [ @classroom.id, "active", @teacher.id ], [ assignment.classroom_id, assignment.status, assignment.assigned_by_id ]
-    assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("create.done", name: "Méiose", classroom: "6ème 1"))
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("create.done_due", name: "Méiose", classroom: "6ème 1", date: "jeudi 8 oct."))
     assert_select "turbo-stream[action=replace][target='#{toggle_id(type, key)}']" do
       assert_select "template ##{toggle_id(type, key)}", text: including(tl("toggle.assigned"))
       assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] input[name=classroom_public_id][value='#{@classroom.public_id}']"
     end
 
+    Orm::ClassroomSessionDay.delete_all # le test suivant prouve le cas où les jours sont connus
     withdraw(assignment, as: :turbo_stream)
 
     assert_response :success
@@ -99,6 +108,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "posting the same assignment again says it is already assigned (422) and writes nothing" do
+    know_days
     sign_in_as @teacher
     assign("Exercise", @exercise.public_id, as: :turbo_stream)
 
@@ -113,6 +123,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
 
   test "reassigning after a withdrawal creates a new active row, without a uniqueness error" do
     first = create_assignment(classroom: @classroom, assignable: @exercise, by: @teacher, status: "archived")
+    know_days
     sign_in_as @teacher
 
     assign("Exercise", @exercise.public_id, as: :turbo_stream)
@@ -211,12 +222,14 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "without Turbo, every answer leads back to where the button was, with a flash" do
+    travel_to Time.zone.local(2026, 10, 5, 10)
+    know_days
     origin = classroom_essential_url(@classroom.public_id, @course.slug, @essential.slug)
     sign_in_as @teacher
 
     assign("Exercise", @exercise.public_id, headers: { "HTTP_REFERER" => origin })
     assert_redirected_to origin
-    assert_equal tl("create.done", name: "Méiose", classroom: "6ème 1"), flash[:notice]
+    assert_equal tl("create.done_due", name: "Méiose", classroom: "6ème 1", date: "jeudi 8 oct."), flash[:notice]
 
     assign("Exercise", @exercise.public_id, headers: { "HTTP_REFERER" => origin })
     assert_redirected_to origin
@@ -234,6 +247,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   # UDR-0013, amendement du 2026-10-01 : un contenu d'un autre niveau ne s'assigne pas ; le refus dit pourquoi.
   test "an exercise of another level is refused in 422 with its reason, and nothing is written" do
     other = create_exercise(essential: create_essential(course: create_course(name: "Mécanique")))
+    know_days
     sign_in_as @teacher
 
     assign("Exercise", other.public_id, as: :turbo_stream)
@@ -251,7 +265,9 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     school = create_school
     third = create_classroom(school:, name: "3ème 1", level: create_level(name: "3ème"))
     tle_c = create_classroom(school:, name: "Tle C 1", level: tle, series: create_series(name: "C"))
-    sign_in_as create_teacher(classrooms: [ third, tle_c ])
+    teacher = create_teacher(classrooms: [ third, tle_c ])
+    [ third, tle_c ].each { know_days(it, teacher) }
+    sign_in_as teacher
 
     [ third, tle_c ].each do |classroom|
       assign("Exercise", tle_d.public_id, classroom:, as: :turbo_stream)
@@ -455,6 +471,31 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#modal dialog[open] #assignment_weekdays_error"
     assert_equal 0, Orm::ClassroomAssignment.count
     assert_empty session_days
+  end
+
+  # Le contournement fermé : sans le champ `weekdays`, sur une classe sans jours, l'enseignant est traité comme un envoi vide.
+  test "a teacher's forged POST without the weekdays field, on a classroom without days: 422 like the empty field, nothing written" do
+    sign_in_as @teacher
+
+    assign("Exercise", @exercise.public_id, as: :turbo_stream)
+
+    assert_response :unprocessable_entity
+    assert_select "turbo-frame#modal dialog[open] #assignment_weekdays_error"
+    assert_equal 0, Orm::ClassroomAssignment.count
+    assert_empty session_days
+  end
+
+  test "the same POST once the days are known assigns, and the team, which has no days, is not held back" do
+    know_days
+    sign_in_as @teacher
+    assign("Exercise", @exercise.public_id, as: :turbo_stream)
+    assert_response :success
+    sign_out
+
+    sign_in_as create_team_member
+    assign("Exercise", create_exercise(essential: @essential, title: "Autre").public_id, as: :turbo_stream)
+    assert_response :success
+    assert_equal 2, Orm::ClassroomAssignment.count
   end
 
   test "an assignment sent with a day while later=1 is forged on: the day counts, the due date is given" do

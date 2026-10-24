@@ -30,6 +30,7 @@ module Classroom
         params.expect(assignment: [ :assignable_type, :assignable_key, { weekdays: [] } ])
               .merge(classroom_public_id: params[:classroom_public_id])
       )
+      require_days_when_missing
       result = assign_resource.call(actor: current_actor, dto: @form)
       return render_days_step(result) if result.failure? && result.errors.key?(:weekdays)
 
@@ -45,6 +46,15 @@ module Classroom
     end
 
     private
+
+    # Un enseignant sans jours pour la classe n'assigne qu'avec au moins un jour : un envoi forgé sans le champ vaut un envoi
+    # vide (422, rien d'écrit). L'équipe n'a pas de jours (la policy refuse) et n'est pas concernée.
+    def require_days_when_missing
+      return unless @form.weekdays.nil? && @form.valid?
+
+      @classroom = classrooms.find_by_public_id(public_id: params[:classroom_public_id])
+      @form.weekdays = [] if @classroom && needs_session_days?
+    end
 
     # La modale est l'étape des jours : réservée à l'enseignant de la classe active (l'équipe n'a pas de jours).
     def days_step_allowed
