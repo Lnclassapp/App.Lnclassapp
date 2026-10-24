@@ -3,7 +3,7 @@
 > Les specs sont figées ici. Toute évolution après la phase 3 se fait par modification explicite de ce fichier, pas par improvisation dans le code.
 > Le détail des écrans est dans les UDR (§6) : ce PRD dit **ce qui doit être vrai**, les UDR disent **comment c'est dessiné**. En cas d'écart sur un écran, l'UDR gagne ; sur un comportement, ce PRD gagne.
 >
-> **Élève seulement** (porteur, 2026-10-24, « option A » : l'élève d'abord, l'enseignant après). Les critères enseignant (CA-G à CA-J, CA-L, ancien CA-B5 et CA-B6, CA-K1) restent dans la version `c766532` de ce fichier ; ils reviendront dans un PRD enseignant. Les numéros gardés ne changent pas ; CA-B5 est réattribué (adhésion par code d'un élève connecté), CA-D10 et CA-F4 sont nouveaux.
+> **Élève seulement** (porteur, 2026-10-24, « option A » : l'élève d'abord, l'enseignant après). Les critères enseignant (CA-G à CA-J, CA-L, ancien CA-B5 et CA-B6, CA-K1) restent dans la version `c766532` de ce fichier ; ils reviendront dans un PRD enseignant. Les numéros gardés ne changent pas ; CA-B5 est réattribué (adhésion par code d'un élève connecté), CA-D10, CA-F4 et CA-B7 (ligne provisoire du code côté enseignant, porteur, 2026-10-24) sont nouveaux.
 
 ## 1. Contexte
 
@@ -94,6 +94,12 @@ Alors elle reçoit 429
 Quand il tape le code d'une classe active et confirme
 Alors il rejoint cette classe, avec `joined_via` à « code »
 Et un code inconnu le laisse sur la carte avec le même message qu'à l'inscription
+
+# CA-B7 (provisoire, jusqu'aux lots enseignant)
+Étant donné l'enseignant d'une classe sur la page de cette classe
+Alors il voit « Code de la classe » avec le code et un bouton « Copier »
+Et un enseignant d'une autre classe ne voit pas ce code
+Et après « Changer le lien », le code affiché est le nouveau
 ```
 
 ### C. Inscription élève en trois étapes

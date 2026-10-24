@@ -14,6 +14,7 @@
 | B — Code de classe à 6 caractères | orchestrateur | — | samedi 24 | ✅ **fait** (ancien Lot 0 + ancien Lot A, `021804cc`) ; `security-reviewer` passé, aucun constat au-dessus de « bas » |
 | A — Jetons de couleurs | Touré (`toure-bangaly`), #285 | — | samedi 24 | 🟡 **à moitié** : jetons et police sur `feature/mvp-teacher-student-lot-p` (`c7a2d2b9`), non fusionnés ; reste le balayage des graisses, le test qui les refuse et les captures |
 | F — Page d'accueil publique en photo | Konan (`konanmeschac777-cmyk`), #286 | — | samedi 24 | à faire |
+| B2 — Code visible sur la page de classe (provisoire) | orchestrateur | B | samedi 24 | à faire (porteur, 2026-10-24 : « A ») |
 | C — Inscription élève en 3 étapes | orchestrateur | B | samedi 24 → dimanche 25 | 🟡 **en cours** depuis 10 h 30 (session « MVP teacher-student », branche `feature/mvp-teacher-student-lot-b`, ancien nom du lot) |
 | D — Accueil élève, carte du prochain exercice | orchestrateur | A | dimanche 25 → lundi 26 | à faire |
 | E1 — « Mon compte » plein écran, profil sans doublons | Touré, #291 | A | dimanche 25 | à faire |
@@ -81,6 +82,16 @@ Vague 2   D Accueil   E1 Mon      E2 Ma classe C Inscription               │
 - **Test associé** : test/domain/entities/classroom/join_code_test.rb · test/db/add_classroom_join_codes_migration_test.rb *(remplace `remove_classroom_join_codes_migration_test.rb`, ADR §6)* · test/integration/classroom/classroom_codes_test.rb · test/infrastructure/queries/classroom/join_code_preview_query_test.rb · test/domain/use_cases/classroom/register_student_test.rb · test/controllers/classroom/student_registrations_controller_test.rb · test/controllers/classroom/student_classroom_choices_controller_test.rb
 - **Done quand**   : toute classe a un code au bon format, la migration se rejoue à l'envers (CA-B1) ; `/classroom-codes/k7m4q2` montre la classe, le niveau et l'établissement, rien d'autre (CA-B2) ; un code inconnu et une classe archivée répondent pareil (CA-B3) ; la 11ᵉ requête de la minute, lien, code et envoi confondus, reçoit 429 (CA-B4) ; un envoi d'inscription avec un code valide crée l'élève dans la classe, `joined_via` « code » ; un élève connecté sans classe la rejoint par le code (CA-B5)
 - **Revue** : `security-reviewer` **obligatoire** avant fusion (ADR du code §6, ID-07 : énumération, fuite dans la réponse, compteur partagé, journalisation).
+
+## Lot B2 — Code de classe visible sur la page de classe (provisoire)
+
+- **Couche**       : ui
+- **Fichiers**     : app/views/classroom/classrooms/_link.html.erb *(ligne « Code de la classe · k7m 4q2 » et bouton « Copier », dans le bloc du lien)*
+                     config/locales/classroom/classrooms.fr.yml
+- **Dépend de**    : B
+- **Test associé** : test/system/classroom/classroom_page_test.rb · test/controllers/classroom/classrooms_controller_test.rb
+- **Done quand**   : l'enseignant de la classe voit son code et le copie ; un enseignant d'une autre classe ne le voit pas ; « Changer le lien » change aussi le code affiché (CA-B7)
+- **Provisoire** (porteur, 2026-10-24 : « A ») : sans cette ligne, aucun enseignant ne peut lire le code avant les lots enseignant, et l'inscription par code ne se teste pas lundi. La ligne part quand l'accueil enseignant porte le code (UDR enseignant §3.3) ; le lot enseignant qui la retire le dit.
 
 ## Lot F — Page d'accueil publique en photo
 
@@ -155,13 +166,14 @@ Les lettres des critères ne sont pas celles des lots.
 |---|---|
 | CA-A1, CA-A2 | F |
 | CA-B1 à CA-B5 | B |
+| CA-B7 | B2 |
 | CA-C1 à CA-C7 | C |
 | CA-D1 à CA-D10, CA-K3 | D |
 | CA-E1, CA-E2, CA-K2 | E1 |
 | CA-E3 à CA-E6 | E2 |
 | CA-F1 à CA-F4 | A |
 
-Aucun critère orphelin (34 critères).
+Aucun critère orphelin (35 critères).
 
 ## Vérification de collision
 
@@ -182,12 +194,13 @@ Doublons cherchés mécaniquement (`awk … | sort | uniq -d`, vide). Fichiers p
 | `app/controllers/classroom/student_registrations_controller.rb` | B | C n'en a pas besoin : l'étape à rouvrir se déduit des erreurs dans la vue |
 | `config/initializers/pilot_flags.rb` | — | déjà sur la branche de chantier ; F le lit sans le modifier |
 | `app/views/catalog/courses/*` | E2 | |
+| `app/views/classroom/classrooms/_link.html.erb` | B2 | dans le balayage de A : B2 fusionne avant A |
 
 ## Ordre de fusion dans la branche de chantier
 
 Seule la session « MVP teacher-student » fusionne dans `feature/mvp-teacher-student`, lot par lot, après les captures (390 px et ordinateur) validées par le porteur.
 
-1. **C** (inscription), dès sa revue faite : il est parti de `021804cc`, après B.
+1. **C** (inscription), dès sa revue faite : il est parti de `021804cc`, après B. **B2** (code sur la page de classe) juste après, en tout cas **avant A**, car son fichier est dans le balayage.
 2. **A** (jetons) : Touré fusionne d'abord la branche de chantier dans `-lot-p`, puis finit le balayage. Comme C est fusionné avant A, le balayage couvre aussi les vues de l'inscription. A ne fusionne qu'après les captures enseignant, direction et équipe.
 3. **F** (page publique), dès qu'il est prêt, avant ou après A : il ne touche que `app/views/homepage/`, que le balayage exclut.
 4. **D, E1** partent de la branche de chantier **après A** ; **E2** après A et F. Aucun ordre entre eux : si D retire l'interrupteur de l'en-tête avant que E1 ne le mette dans « Mon compte », la page Profil le porte encore (E1 l'en retire en même temps qu'il l'ajoute au menu).
