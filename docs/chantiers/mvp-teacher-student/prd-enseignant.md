@@ -244,6 +244,13 @@ Alors « Mes classes » est actif dans la barre latérale
 Et la colonne de gauche montre le résumé puis le code de récupération et « Retirer de la classe »
 Et la colonne de droite montre les exercices de la classe puis « Fait seul »
 
+# CA-N1 (téléphone et ordinateur)
+Étant donné un enseignant de Math et PC dans l'établissement courant, et de SVT dans un autre
+Quand il ouvre « Cours de Tle D »
+Alors les puces sont « Math » et « PC », sans « SVT », et « Math » est active
+Et seules les fiches de cours de Mathématiques s'affichent, sans en-tête de matière
+Et chaque fiche de cours est une carte « LEÇON N · <titre> » qui liste ses fiches de révision sous « Révisions de la leçon », chacune un lien vers sa fiche
+
 # CA-N2
 Étant donné un écran d'au moins 1024 px de large
 Alors Cours est une seule colonne de 40 rem au plus, dans l'ordre de la progression, « Cours » actif dans la barre latérale

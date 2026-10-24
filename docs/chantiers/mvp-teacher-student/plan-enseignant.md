@@ -143,7 +143,7 @@ J attend A, et pas seulement C : ses vues sont dans le balayage des graisses de 
                      config/locales/catalog/courses.fr.yml
 - **Dépend de**    : E2 *(mêmes vues que le Cours de l'élève)*
 - **Test associé** : test/controllers/catalog/courses_controller_test.rb · test/system/catalog/teacher_courses_test.rb *(nouveau)*
-- **Done quand**   : un rond de niveau ouvre « Cours de Tle D », « ‹ Accueil », sans menus Niveau ni Série, sans « Tle D » sur chaque ligne ; un bivalent voit les puces de matière (CA-G5) ; le Cours de l'élève ne change pas
+- **Done quand**   : un rond de niveau ouvre « Cours de Tle D », « ‹ Accueil », sans menus Niveau ni Série, sans « Tle D » sur chaque ligne ; un bivalent voit les puces de matière (CA-G5) ; les puces sont les matières de l’établissement courant, une à la fois, et chaque fiche de cours est une carte qui porte ses fiches de révision (CA-N1) ; le Cours de l’élève ne change pas
 
 ---
 
@@ -154,7 +154,7 @@ J attend A, et pas seulement C : ses vues sont dans le balayage des graisses de 
 | CA-B6, CA-G3 (règle), CA-K1 | déjà livrés (PRD enseignant §4) |
 | CA-B8 | G (carte) et I (ligne provisoire retirée) |
 | CA-G1, CA-G2, CA-G3 (affichage), CA-G4, CA-G6 à CA-G9 | G |
-| CA-G5 | N |
+| CA-G5, CA-N1 | N |
 | CA-H1, CA-H2, CA-H6 | M |
 | CA-H3, CA-H4, CA-H5 | H |
 | CA-I1, CA-I2, CA-I3 | I |
@@ -204,7 +204,7 @@ Celles du [plan élève](plan.md#portes-de-sortie), plus :
 
 > Ajoutée le 2026-10-24, après les lots téléphone (« téléphone d'abord, ordinateur ensuite »). Écrans : sous-sections « Sur ordinateur (≥ lg) » de l'[UDR enseignant](../../decisions/udr/XXXX-ecrans-enseignant-sans-repetition.md) ; critères : [`prd-enseignant.md`](prd-enseignant.md) §4 bis. Chaque lot ne touche que des classes `lg:` (le rendu sous 1024 px ne bouge pas) et se montre au porteur en captures à 1440 et 1024 px, plus 390 px pour prouver que le téléphone n'a pas bougé.
 >
-> **Ne change rien au téléphone** (porteur, 2026-10-24) : les lots P ne touchent qu'à la mise en page ≥ lg ; les écrans téléphone validés le 2026-10-23 (lots G à N) font foi.
+> **CA-N1 vaut aussi sur téléphone** (porteur, 2026-10-24) et appartient au **lot N**, pas à cette phase : N n'a aucun commit sur la branche de chantier (vérifié le 2026-10-24), l'orchestrateur a été prévenu le jour même. Ce qu'il faut ajouter à N est écrit au lot P5 ci-dessous ; P5 ne garde que la colonne de 40 rem.
 
 **Fichiers partagés avec la phase ordinateur de l'élève** (autre session) : le panneau « Mon compte » à droite de 400 px est décidé pour les deux rôles (UDR enseignant §3.4, UDR écrans élève). Aujourd'hui, `_account_panel` s'ouvre en `placement: :drawer`, qui est un tiroir **à gauche** de 20 rem (`dialog.dialog-drawer`, `application.tailwind.css`). Le placement à droite de 25 rem, `_account_panel.html.erb`, `_sidebar.html.erb`, `navigation_helper.rb` et `application.tailwind.css` ne doivent avoir **qu'un lot propriétaire pour les deux rôles**. P0 est ce lot si la phase élève ne l'a pas déjà pris ; sinon P0 attend le sien et ne garde que les écrans de retrait.
 
@@ -277,11 +277,16 @@ Vagues : **O1** = P0 ‖ P1 ‖ P3 ‖ P4 ‖ P5 ‖ P6 ; **O2** = P2 (après P1
 
 ### Lot P5 — Cours, colonne de 40 rem
 
+**À ajouter au lot N** (CA-N1, téléphone et ordinateur), d'après le code de la branche de chantier au 2026-10-24 :
+- *Puces de l'établissement courant* : déjà vrai. `TeacherAudienceQuery` lit les matières avec `school_id: current_actor.school_id` (`courses_controller#teacher_scope`). N rend les puces depuis `teacher_scope.materials` et ajoute un cas de test avec une matière d'un autre établissement.
+- *Une matière à la fois* : à changer. Aujourd'hui un bivalent reçoit `group_by_material: true` (`teacher_grouped?`), donc toutes ses matières groupées. N passe `material:` (la puce active, par défaut la première de `teacher_scope.materials`) et `group_by_material: false` pour l'enseignant. Fichier : `app/controllers/catalog/courses_controller.rb`, déjà dans N.
+- *Fiches de révision dans la carte* : à ajouter. `Queries::Catalog::CourseCatalogQuery::Row` n'a pas les fiches de révision. N ajoute un champ `essentials` (slug, nom, fiches publiées, dans l'ordre de `position`), lu **en une requête pour la page** de 24 cartes, sur le modèle de `progress_by_course` déjà présent dans la même query. Il est rempli pour l'enseignant seulement. La carte enseignant de `_course_card.html.erb` liste ces fiches sous `catalog.courses.*.essentials_title` (« Révisions de la leçon », clé existante dans `config/locales/catalog/courses.fr.yml`). Fichiers à ajouter à N : `app/infrastructure/queries/catalog/course_catalog_query.rb` et `test/infrastructure/queries/catalog/course_catalog_query_test.rb`.
+
 Le lot P5 ne fait que la mise en page ordinateur :
 
 - **Couche**       : ui
 - **Fichiers**     : app/views/catalog/courses/index.html.erb · _course_card.html.erb *(branche enseignant)*
-- **Dépend de**    : N
+- **Dépend de**    : N *(avec CA-N1)*
 - **Test associé** : test/system/catalog/teacher_courses_test.rb *(cas à 1280 px ajouté)*
 - **Done quand**   : à 1280 px, Cours est une colonne de 40 rem, cartes dans l'ordre de la progression, « Cours » actif (CA-N2) ; à 390 px, rien ne change par rapport à N
 
