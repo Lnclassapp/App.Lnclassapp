@@ -24,6 +24,8 @@
 
 **Déjà livré par l'ancien Lot 0, hors plan élève, à ne pas refaire** : navigation sans barre basse (élève et enseignant), `_home_band`, `Grading.class_badge_for`, panneau « Mon compte » enseignant, menu enseignant sans « Annonces », drapeaux `school_space_enabled` et `TEACHER_ANNOUNCEMENTS_ENABLED` (`config/initializers/pilot_flags.rb`), clés de « Mon compte » dans `navigation.fr.yml`. Alphabet du code : 31 symboles, sans `l` (porteur, 2026-10-24).
 
+**Suite** : les lots enseignant sont dans [`plan-enseignant.md`](plan-enseignant.md) (critères : [`prd-enseignant.md`](prd-enseignant.md)).
+
 **Rôle du porteur** : valider les captures de chaque lot (390 px et ordinateur) avant sa fusion ; recette sur un vrai téléphone Android lundi 26 ; inviter les élèves testeurs au test fermé Play Store. **Pilote : mardi 27 octobre 2026.**
 
 ## Graphe
