@@ -292,8 +292,9 @@ Et le rappel de classe n'est pas répété au-dessus du formulaire
 # CA-D10
 Étant donné un élève connecté avec une classe, sur ordinateur
 Alors le contenu tient dans 912 px à côté de la barre latérale Accueil · Cours · Ma classe, sans carte de profil
-Et la carte du prochain exercice (2/3) et l'annonce (1/3) sont côte à côte, à cheval sur le bandeau
-Et la grille des matières tient sur une ligne de 7 cases, l'Historique sur deux colonnes de jours
+Et il n'y a pas de bandeau bleu ; la ligne bleue de 4 px est en haut de la barre du haut
+Et les sections s'empilent sur une colonne : la carte du prochain exercice, « Mes matières » sur une ligne de 7 cases, les annonces avec deux cartes visibles, l'Historique
+Et il n'y a ni « À faire » ni « Fiches à revoir » sur l'accueil
 ```
 
 ### E′. Écrans élève sur ordinateur
