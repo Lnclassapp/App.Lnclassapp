@@ -48,6 +48,9 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
         find("label", text: "Jeu.").click
         assert_text "Prochaine séance : jeudi 8 oct."
         assert_no_selector "#assignment_weekdays_error" # un jour coché efface l'erreur
+        %w[Lun. Jeu.].each { find("label", text: it).click }
+        assert_selector "#assignment_weekdays_error" # tout décocher la rétablit
+        %w[Lun. Jeu.].each { find("label", text: it).click }
         click_on "Assigner"
       end
       assert_toast "Les phases ajouté à Tle D 1, à rendre jeudi 8 oct."
@@ -76,7 +79,8 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
       # CA-L4 : « Modifier les jours de la Tle D 1 » rouvre la fenêtre avec ses jours cochés ; « Enregistrer » les remplace.
       click_on "Modifier les jours de la Tle D 1"
       within DAYS_MODAL do
-        assert_selector "input[type=checkbox]:checked", count: 2, visible: :all
+        assert_equal %w[session_days_weekdays_1 session_days_weekdays_4],
+                     all("input[type=checkbox]:checked", visible: :all).map { it[:id] }
         find("label", text: "Ven.").click
         click_on "Enregistrer"
       end

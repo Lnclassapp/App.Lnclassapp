@@ -1,5 +1,5 @@
 // ⚡ FRONT · classroom/next_session_controller — « Prochaine séance : lundi 26 oct. » sous les jours de séance
-// Rôle : à chaque case cochée, la première date strictement après aujourd'hui (celui du serveur) qui tombe un jour coché ; aucun jour, ligne cachée ; un jour coché efface l'erreur « Cochez au moins un jour »
+// Rôle : à chaque case cochée, la première date strictement après aujourd'hui (celui du serveur) qui tombe un jour coché ; aucun jour, ligne cachée ; un jour coché efface l'erreur « Cochez au moins un jour », tout décocher la rétablit
 // ADR  : 0072 · UDR : XXXX-ecrans-enseignant-sans-repetition (§3.13) · sans JavaScript, la ligne reste cachée (hidden)
 import { Controller } from "@hotwired/stimulus"
 
@@ -16,7 +16,7 @@ export default class extends Controller {
     const days = this.dayTargets.filter((box) => box.checked).map((box) => Number(box.value))
     const next = this.nextAfter(days)
 
-    if (days.length > 0 && this.hasErrorTarget) this.errorTarget.hidden = true
+    if (this.hasErrorTarget) this.errorTarget.hidden = days.length > 0
     this.lineTarget.hidden = next === null
     if (next) this.dateTarget.textContent = new Intl.DateTimeFormat(this.localeValue, FORMAT).format(next)
   }

@@ -496,6 +496,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assign("Exercise", create_exercise(essential: @essential, title: "Autre").public_id, as: :turbo_stream)
     assert_response :success
     assert_equal 2, Orm::ClassroomAssignment.count
+    assert_nil Orm::ClassroomAssignment.order(:id).last.due_on
   end
 
   test "an assignment sent with a day while later=1 is forged on: the day counts, the due date is given" do
@@ -530,6 +531,29 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
 
     get new_classroom_assignment_path("inconnue", assignable_key: @exercise.public_id)
+    assert_response :not_found
+    assert_equal 0, Orm::ClassroomAssignment.count
+  end
+
+  # Revue : les jours d'un autre enseignant ne s'écrivent pas, et une classe inconnue ne fait pas de 500, avec ou sans jours.
+  test "a forged POST with days to another teacher's classroom: 403, nothing assigned, no session day written" do
+    stranger = create_teacher
+    sign_in_as stranger
+
+    assert_no_difference -> { Orm::ClassroomSessionDay.count } do
+      assign_with_days(%w[1], as: :turbo_stream)
+    end
+
+    assert_response :forbidden
+    assert_equal 0, Orm::ClassroomAssignment.count
+  end
+
+  test "a POST without weekdays to an unknown classroom: 404, not a 500, nothing written" do
+    sign_in_as @teacher
+
+    post classroom_assignments_path("inconnue"), as: :turbo_stream,
+         params: { assignment: { assignable_type: "Exercise", assignable_key: @exercise.public_id } }
+
     assert_response :not_found
     assert_equal 0, Orm::ClassroomAssignment.count
   end
