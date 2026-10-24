@@ -99,9 +99,25 @@ module Dtos
         assert input.tap(&:validate).errors.of_kind?(:classroom_public_id, :blank)
       end
 
-      test "IL-02: no classroom code nor role attribute" do
-        assert_empty StudentRegistrationInput.attribute_names & %w[code join_code role team_role]
-        assert_raises(ActiveModel::UnknownAttributeError) { build(join_code: "KFM37") }
+      # ADR code-de-classe-a-six-caracteres §4.6 (remplace « no classroom code »): the code comes back, the role never does.
+      test "CA-B2: a classroom code is a designation by itself; typed any way, it is normalized (no case, no space, no dash)" do
+        input = build(classroom_public_id: nil, school_public_id: nil, level_slug: nil, join_code: " K7M 4Q2 ")
+
+        assert input.valid?
+        assert_equal "k7m4q2", input.join_code
+        assert_equal "k7m4q2", build(join_code: "K7M-4q2").join_code
+        assert_nil build(join_code: "  ").join_code
+        assert_nil build(join_code: nil).join_code
+      end
+
+      test "a code of any other form is kept as typed (and refused later as unknown), but cut short, never echoed in full" do
+        assert_equal "i0o1l!", build(join_code: "I0O1L!").join_code
+        assert_equal 12, build(join_code: "a" * 300).join_code.length
+        assert build(classroom_public_id: nil, join_code: "zz").valid?
+      end
+
+      test "IL-02: no role attribute" do
+        assert_empty StudentRegistrationInput.attribute_names & %w[role team_role]
         assert_raises(ActiveModel::UnknownAttributeError) { build(role: "team") }
       end
     end

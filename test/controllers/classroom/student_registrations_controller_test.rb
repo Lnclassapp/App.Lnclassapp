@@ -1,8 +1,9 @@
 require "test_helper"
 
 # IL-01, IL-02 (the page), IL-05, IL-06, IL-07, IL-08, IL-09, IL-10, IL-19, IL-20, IL-23 server side (ADR-0085,
-# UDR-0081 §3.1 to §3.3): one public sign-up page in three sections (your classroom, you, secret code), no classroom
-# code. The classroom is chosen in four chained lists (DRENA, school, level, classroom), or given by a classroom link;
+# UDR-0081 §3.1 to §3.3): one public sign-up page in three sections (your classroom, you, secret code). The class code
+# is back (ADR code-de-classe-a-six-caracteres): its field is the sign-up screen's business (Lot B), the code itself is
+# resolved by RegisterStudent. The classroom is chosen in four chained lists (DRENA, school, level, classroom), or given by a classroom link;
 # the student enters it at once, signed in. UDR-0091 (CA-6): the same cascade as « Choisis ta classe », in three steps.
 class Classroom::StudentRegistrationsControllerTest < ActionDispatch::IntegrationTest
   ERRORS = "activemodel.errors.models.dtos/classroom/student_registration_input.attributes".freeze
@@ -33,7 +34,7 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_not Orm::User.exists?(contact: "0701020304")
   end
 
-  test "IL-02: three sections in order, the DRENA first, the lists empty, the name in two fields — never a classroom code" do
+  test "IL-02: three sections in order, the DRENA first, the lists empty, the name in two fields — and no role field" do
     get new_student_registration_path
 
     assert_response :success
@@ -75,9 +76,9 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
                     text: I18n.t("#{FORM}.submit")
       assert_select "input[name='student_registration[link_token]']", 0
     end
-    assert_select "[name*=code], [name*=role]", 0
+    # ADR code-de-classe §6 : plus d'assertion d'absence du code de classe (le champ du code est celui du Lot B) ; le rôle reste imposé.
+    assert_select "[name*=role]", 0
     assert_select "#classroom-preview, #classroom-link-invalid, #other-classroom", 0
-    assert_no_match(/Code de classe/, response.body)
     assert_select "a[href='#{new_session_path}']", text: I18n.t("#{PAGE}.sign_in")
   end
 

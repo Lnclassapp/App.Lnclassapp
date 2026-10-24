@@ -108,7 +108,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
 
     assert_equal [ Entities::Classroom::JoinCode::LENGTH, false ], [ column.limit, column.null ]
     assert_includes unique_indexes("classrooms"), [ [ "join_code" ], nil ]
-    assert_match(/join_code.*\[a-hj-np-z2-9\]\{6\}/, check_expressions("classrooms"))
+    assert_match(/join_code.*\[a-hjkmnp-z2-9\]\{6\}/, check_expressions("classrooms"))
     assert_includes connection.columns("classrooms").map(&:name), "link_token"
   end
 
