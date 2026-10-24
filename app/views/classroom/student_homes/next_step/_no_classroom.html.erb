@@ -5,7 +5,7 @@
 <h2 id="student_next_step_title" class="font-display text-lg leading-snug font-medium text-ink"><%= t("classroom.student_homes.no_classroom.title") %></h2>
 <%= form_with model: form, scope: :student_classroom_choice, url: student_classroom_choices_path, id: "student-home-code-form", class: "space-y-3" do |f| %>
   <%= ui_field f, :join_code, label: t("classroom.student_homes.no_classroom.code"), hint: t("classroom.student_homes.no_classroom.hint"),
-               maxlength: 6, autocomplete: "off", inputmode: "text", autocapitalize: "characters", spellcheck: false,
+               required: true, maxlength: 6, autocomplete: "off", inputmode: "text", autocapitalize: "characters", spellcheck: false,
                class: "font-mono uppercase tracking-widest" %>
   <%= ui_button t("classroom.student_homes.no_classroom.submit"), type: :submit, variant: :primary, full: true, icon_end: "arrow-right" %>
 <% end %>

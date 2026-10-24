@@ -369,6 +369,13 @@ module Queries
         assert_equal [ "Récente", "Ancienne" ], StudentHomeQuery.new.call(student_id: @student.id).pending_gaps.map(&:essential_name)
       end
 
+      test "CA-D4: the sheet to review of another student never shows: all done stays « all_done »" do
+        create_exercise_session(student: @student, exercise: assign_exercise("Fait", due_on: Date.current + 1), status: "completed", score_percent: 80)
+        create_gap(student: create_student(classroom: @classroom), essential: @essential)
+
+        assert_equal [ :all_done, nil ], step.then { |s| [ s.state, s.review ] }
+      end
+
       test "a pending sheet never comes before the work of the teacher" do
         assign_exercise("Pas fait", due_on: Date.current + 1)
         create_gap(student: @student, essential: @essential)

@@ -6,6 +6,19 @@
 <div class="grid w-full max-w-160 grid-cols-1">
   <%= ui_page_header title: t(".title") %>
 
+  <%# Un code refusé (accueil « Choisis ta classe », UDR accueil élève §3.3 état 6) : le champ revient avec son erreur dessous, dans son
+      propre formulaire et avec son bouton, au-dessus de la liste (qui a le sien : choisir une classe ne renvoie jamais le code).
+      Sans code envoyé, la page n'a pas de champ de code. %>
+  <% if @form.join_code.present? || @form.errors[:join_code].any? %>
+    <%= form_with model: @form, scope: :student_classroom_choice, url: student_classroom_choices_path, id: "student-classroom-code-form",
+                  class: "mb-6 space-y-3" do |code_form| %>
+      <%= ui_field code_form, :join_code, label: t("classroom.student_homes.no_classroom.code"), hint: t("classroom.student_homes.no_classroom.hint"),
+                   required: true, maxlength: 6, autocomplete: "off", inputmode: "text", autocapitalize: "characters", spellcheck: false,
+                   class: "font-mono uppercase tracking-widest" %>
+      <%= ui_button t("classroom.student_homes.no_classroom.submit"), type: :submit, variant: :primary, full: true, icon_end: "arrow-right" %>
+    <% end %>
+  <% end %>
+
   <%= form_with model: @form, scope: :student_classroom_choice, url: student_classroom_choices_path,
                 id: "student-classroom-choice-form", class: "space-y-4",
                 data: { controller: "classroom--class-picker",
@@ -18,13 +31,6 @@
         <%= ui_icon "exclamation-triangle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-warning" %>
         <p><%= t(".link_invalid") %></p>
       </div>
-    <% end %>
-    <%# Un code refusé (accueil « Choisis ta classe », UDR accueil élève §3.3 état 6) : le champ revient avec son erreur dessous, et la
-        cascade reste possible. Sans code envoyé, la page n'a pas de champ de code. %>
-    <% if @form.join_code.present? || @form.errors[:join_code].any? %>
-      <%= ui_field form, :join_code, label: t("classroom.student_homes.no_classroom.code"), hint: t("classroom.student_homes.no_classroom.hint"),
-                   maxlength: 6, autocomplete: "off", inputmode: "text", autocapitalize: "characters", spellcheck: false,
-                   class: "font-mono uppercase tracking-widest" %>
     <% end %>
     <%# Retiré de cette classe, classe complète, déjà inscrit : la raison en tête (UDR-0081 §3.5). %>
     <%# Challenger phase 5 (E1) : après un refus (403), le focus et le défilement vont à l'alerte, sous l'en-tête fixe. %>

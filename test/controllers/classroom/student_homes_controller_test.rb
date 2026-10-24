@@ -77,7 +77,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#{CARD}[data-state=late]" do
       assert_select "#student_next_step_title", text: "Retard ancien"
-      assert_select "span.bg-warning-soft.text-warning", text: /En retard/
+      assert_select "span.bg-warning-soft.text-warning",
+                    text: including(I18n.t("due_dates.badge.late", date: I18n.l(Date.current - 3, format: :due_long)))
       assert_select "a[href=?]", student_classroom_path, text: including(tl("next_step.late.others", count: 1))
       assert_select "form[action=?] button.ui-button-primary", exercise_sessions_path(Orm::Exercise.find_by!(title: "Retard ancien").public_id),
                     text: tl("next_step.late.start")
@@ -195,6 +196,65 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_next_step_invite"
   end
 
+  # ADR-0089 §4.1, UDR accueil élève §3.3: the exercise of the day is only read when the card offers it (states 4 and 5).
+  # The signature of DailyExerciseQuery: the start of the first completed session of each exercise.
+  def daily_queried?
+    statements = []
+    collect = ->(*, payload) { statements << payload[:sql] }
+    ActiveSupport::Notifications.subscribed(collect, "sql.active_record") { get student_home_path }
+    statements.grep(/MIN\(exercise_sessions\.started_at\)/).any?
+  end
+
+  test "ADR-0089 §4.1 — late, due or review: the exercise of the day is neither read nor shown; all done or nothing assigned: it is" do
+    create_exercise(essential: @essential, title: "Libre")
+    sign_in_as @student
+    assert daily_queried?, "rien d'assigné : l'exercice du jour est lu"
+
+    late = assign_exercise("En retard", due_on: Date.current - 2, assigned_at: 5.days.ago)
+    assert_not daily_queried?, "en retard : l'exercice du jour est lu"
+    assert_select "#{CARD}[data-state=late] #student_next_step_daily, #student_next_step_invite", 0
+
+    Orm::ClassroomAssignment.where(assignable_id: late.id).update_all(due_on: Date.current + 1, assigned_at: 1.day.ago)
+    assert_not daily_queried?, "à faire : l'exercice du jour est lu"
+    assert_select "#{CARD}[data-state=due] #student_next_step_daily", 0
+
+    complete(late)
+    create_gap(student: @student, essential: create_essential(course: @course, name: "À revoir"))
+    assert_not daily_queried?, "à revoir : l'exercice du jour est lu"
+    assert_select "#{CARD}[data-state=review] #student_next_step_daily", 0
+
+    Orm::KnowledgeGap.delete_all
+    assert daily_queried?, "tout fait : l'exercice du jour est lu"
+    assert_select "#{CARD}[data-state=all_done] #student_next_step_daily"
+  end
+
+  test "CA-D4: the sheet to review of another student is not mine: all done stays « Tout est fait ! »" do
+    complete(assign_exercise("Fait", due_on: Date.current + 1))
+    create_exercise(essential: @essential, title: "Du jour")
+    other = create_student(classroom: @classroom)
+    create_gap(student: other, essential: @essential)
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "#{CARD}[data-state=all_done]"
+    assert_select "#{CARD} a[href*='/essentials/']", 0
+  end
+
+  test "CA-D1, CA-K3: six subjects at most then « Inviter » (a seventh is left out); no « Paiement », no « abonnement »" do
+    %w[Mathématiques Physique-Chimie Français Histoire-Géographie Philosophie EDHC].each do |name|
+      create_course(material: create_material(name:, category: "literature"), level: @classroom.level)
+    end
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "nav#student_subjects li", 7
+    assert_equal "subject_invite", css_select("#student_subjects li a").last["id"]
+    assert_equal 6, css_select("#student_subjects li a[id^=subject_]:not(#subject_invite)").size
+    assert_no_match(/paiement|abonnement/i, css_select("#main").text)
+  end
+
   test "CA-D9: the header of the card, « 3E B · CM1T ›», opens Ma classe; the sigle of the school, else its name" do
     @classroom.school.update!(sigle: "CM1T")
     sign_in_as @student
@@ -222,7 +282,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#{CARD}[data-state=no_classroom]" do
       assert_select "#student_next_step_title", text: tl("no_classroom.title")
       assert_select "form#student-home-code-form[action=?][method=post]", student_classroom_choices_path do
-        assert_select "input[name='student_classroom_choice[join_code]'][maxlength='6']"
+        assert_select "input[name='student_classroom_choice[join_code]'][maxlength='6'][required]"
         assert_select "button[type=submit]", text: tl("no_classroom.submit")
       end
       assert_select "a#student_next_step_no_code[href=?]", new_student_classroom_choice_path, text: tl("no_classroom.no_code")

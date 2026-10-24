@@ -9,6 +9,8 @@ module Classroom
 
     allow_roles :student
 
+    # PRD CA-D1 : la grille a 7 cases, 6 matières au plus puis « Inviter ».
+    MAX_SUBJECTS = 6
     # Les états de la carte qui proposent l'exercice du jour (UDR accueil élève §3.3, états 4 et 5).
     DAILY_STATES = %i[all_done unassigned].freeze
 
