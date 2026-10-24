@@ -217,7 +217,35 @@ Alors la fenêtre des jours s'ouvre avec ses jours cochés, et « Enregistrer »
 
 ## 4 bis. Phase ordinateur (après les lots téléphone)
 
-Déjà décidé dans l'UDR enseignant, à construire dans cette phase : accueil en page large (§3.3, ancien CA-G10), « Mon compte » en panneau latéral de 400 px (§3.4), page de classe et rapport en deux colonnes (§3.5, §3.8). Restent à dessiner : inscription, fiche d'un élève, Cours, écrans de retrait, assignation et jours de séance.
+Déjà décidé dans l'UDR enseignant, à construire dans cette phase : accueil en page large (§3.3, ancien CA-G10), « Mon compte » en panneau latéral de 400 px (§3.4), page de classe et rapport en deux colonnes (§3.5, §3.8). Dessinés le 2026-10-24 (UDR, sous-sections « Sur ordinateur (≥ lg) ») : inscription (§3.9), fiche d'un élève (§3.6), Cours (§3.7). Restent à dessiner : écrans de retrait, « Quelles classes enseignez-vous ? », assignation et jours de séance.
+
+> **Écrans à ≥ lg** (1024 px et plus). Captures à 1440 et 1024 px pour chaque lot, en plus du téléphone.
+
+```gherkin
+# CA-J5
+Étant donné un écran d'au moins 1024 px de large
+Quand l'enseignant ouvre l'inscription
+Alors la page a deux colonnes : à gauche le logo et « Bienvenue sur Lnclass », à droite les trois étapes, larges de 28 rem au plus
+Et la carte de bienvenue n'apparaît qu'une fois, dans la colonne de gauche
+
+# CA-I6
+Étant donné un écran d'au moins 1024 px de large
+Quand l'enseignant ouvre la fiche d'un élève
+Alors « Mes classes » est actif dans la barre latérale
+Et la colonne de gauche montre le résumé puis le code de récupération et « Retirer de la classe »
+Et la colonne de droite montre les exercices de la classe puis « Fait seul »
+
+# CA-N1 (téléphone et ordinateur)
+Étant donné un enseignant de Math et PC dans l'établissement courant, et de SVT dans un autre
+Quand il ouvre « Cours de Tle D »
+Alors les puces sont « Math » et « PC », sans « SVT », et « Math » est active
+Et seules les fiches de cours de Mathématiques s'affichent, sans en-tête de matière
+Et chaque fiche de cours est une carte « LEÇON N · <titre> » qui liste ses fiches de révision sous « Révisions de la leçon », chacune un lien vers sa fiche
+
+# CA-N2
+Étant donné un écran d'au moins 1024 px de large
+Alors Cours est une seule colonne de 40 rem au plus, dans l'ordre de la progression, « Cours » actif dans la barre latérale
+```
 
 ## 5. Modélisation préliminaire
 

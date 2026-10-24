@@ -152,12 +152,28 @@ Une seule règle, méthode pure du domaine (`Entities::Assessment::Grading.class
 - `_summary` : « 9 faits sur 18 » + pastille « 1 en retard » ; puis la pastille **« Moyenne 14/20 · Or »** (`bg-brand-soft text-brand-strong`, le badge qui range l'élève, §3.2), puis les badges obtenus par exercice, nommés et comptés (« Or 4 »), zéro caché. « Fragile » et « Acquis » disparaissent de la fiche.
 - `_assignments` (Exercices de la classe), `_self_practice` (Fait seul · 30 derniers jours), code de récupération et « Retirer de la classe » (`_manage`) : gardés. Note d'un exercice en pastille neutre avec trophée ; non fait et échu : pastille « En retard ».
 
+#### Sur ordinateur (≥ lg)
+
+Option A du porteur (2026-10-24, maquettes en gris à 1440 et 1024 px) : « Mes classes » actif dans la barre latérale ; « ‹ Tle D 1 », avatar, nom et ligne du numéro en pleine largeur, puis **deux colonnes égales** (contenu de 57 rem au plus, comme la page de classe) :
+- à gauche : `_summary` (faits, retard, « Moyenne 14/20 · Or », badges obtenus), puis `_manage` (code de récupération, « Retirer de la classe ») ;
+- à droite : `_assignments`, puis `_self_practice`.
+Même contenu qu'au téléphone, rien de répété ; seul l'ordre change (le bloc de gestion monte dans la colonne de gauche).
+
 ### 3.7 Cours (`catalog/courses/index.html.erb`, enseignant)
 
 - S'ouvre depuis un rond de niveau (`level`, `series` dans l'URL). « ‹ Accueil » en haut ; titre **« Cours de Tle D »** (18 px) ; sans niveau dans l'URL, « Cours ».
 - **Retirés** pour l'enseignant : les menus Niveau et Série, « Tle D » sur chaque ligne.
-- Gardés : recherche ; « 3 fiches de cours · Mathématiques · Progression DPFC 2026-2027 » (13 px, une seule fois) ; lignes compactes comme chez l'élève (UDR écrans élève §3.6), pastille « En cours » comprise.
+- Gardés : recherche ; « 3 fiches de cours · Mathématiques · Progression DPFC 2026-2027 » (13 px, une seule fois) ; pastille « En cours ». Les fiches de cours sont des cartes qui portent leurs fiches de révision (amendement du 2026-10-24, ci-dessous).
 - Bivalent : puces de matière (« Math · PC », noms courts) sous la recherche, la première active. Monovalent : pas de puces.
+- **Amendé le 2026-10-24** (porteur, en dessinant l'ordinateur, réponse « A » : valable aussi sur téléphone) : les trois règles ci-dessous (puces limitées à l'établissement courant, une matière à la fois, fiches de révision dans la carte) s'appliquent **au téléphone comme à l'ordinateur** ; elles remplacent les « lignes compactes » de l'élève pour l'enseignant. Seule la largeur change d'un appareil à l'autre.
+
+#### Sur ordinateur (≥ lg)
+
+Option A du porteur (2026-10-24, maquettes en gris à 1440 et 1024 px), avec trois précisions (valables aussi sur téléphone, voir ci-dessus) :
+- **Une colonne** de 40 rem au plus, centrée ; « Cours » actif dans la barre latérale ; les fiches de cours dans l'ordre de la progression, de haut en bas (pas de grille).
+- **Puces de matière : seulement les matières que l'enseignant enseigne dans l'établissement courant** (`teacher_scope.materials`), jamais toutes celles du catalogue ; une seule matière, pas de puces.
+- **Une seule matière à la fois** : la page ne montre que les fiches de cours de la matière de la puce active, sans en-tête de matière ni regroupement.
+- **Une carte par fiche de cours, qui porte ses fiches de révision** : en tête « LEÇON 2 » (12 px majuscules `text-mute`), titre 14 px `font-medium`, pastille « En cours » s'il y a lieu et chevron, le tout lien vers la fiche de cours ; dessous « Révisions de la leçon » (13 px `text-mute`, UDR-0130 exception 2), puis une ligne de 44 px par fiche de révision (titre 14 px, chevron), lien vers la fiche de révision, où se trouve « Assigner » (§3.13). Fiche de cours sans fiche de révision : la carte n'a que son en-tête.
 
 ### 3.8 Rapport d'un exercice (`classroom/assignment_follow_ups/show.html.erb`, `assessment/comprehension/_section`)
 
@@ -178,6 +194,12 @@ Une seule règle, méthode pure du domaine (`Entities::Assessment::Grading.class
 - Étape 2 : « Vous », « Vous passez à la suite dès que tout est rempli. » ; Nom, Prénom(s), Genre (boutons « M. » / « Mme »), Numéro, **Matière** (une seule) avec l'aide « Vous pourrez ajouter d'autres matières dans Mon compte. ». **« Autre matière (facultatif) » est retiré.** Passage automatique ≈ 1 s après la dernière frappe, comme l'élève.
 - Étape 3 : « Votre code secret », « 4 chiffres, pour vous connecter. », Code secret et confirmation, « Créer mon compte » (`primary`, pleine largeur).
 - Vouvoiement partout (l'élève est tutoyé).
+
+#### Sur ordinateur (≥ lg)
+
+Option A du porteur (2026-10-24, maquettes en gris à 1440 et 1024 px) : **deux colonnes égales**, la mise en page actuelle de l'inscription enseignant.
+- À gauche, panneau `bg-mist` pleine hauteur : logo enseignant 64 px, « Bienvenue sur Lnclass », « Assignez un exercice, voyez ce que vos élèves ont compris. », centrés. **La carte de bienvenue du téléphone n'est pas rendue à droite** : elle ne vit qu'à un endroit.
+- À droite, les trois étapes, largeur 28 rem au plus, centrées : « Besoin d'aide ? » en haut à droite, « ‹ Retour », « Étape N sur 3 », segments, puis le contenu de l'étape, inchangé. Le logo de l'en-tête du téléphone n'est pas répété (il est à gauche).
 
 ### 3.10 Jetons
 
