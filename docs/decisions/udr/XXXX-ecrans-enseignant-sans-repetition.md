@@ -42,6 +42,7 @@ Pourquoi le badge plutôt que la moyenne : l'élève voit des badges, pas des mo
 | Bandeau de l'accueil | `bg-brand` | **`bg-teacher`** (#ff8a00 ; sombre #9a5000) |
 | Remplissage des barres de progression | `bg-brand` | **`bg-teacher`** (piste `bg-line` inchangée) |
 | Segments d'étape de l'inscription | `bg-brand` | **`bg-teacher`** |
+| Panneau gauche de l'inscription, sur ordinateur (§3.9) | — | **`bg-teacher`** (porteur, 2026-10-24) |
 | Texte et icônes sur le bandeau | `text-band-ink` | `text-band-ink` (6,2:1 sur #ff8a00 ; blanc sur #9a5000 en sombre, 6,0:1) |
 | Boutons, liens, ronds d'icône, pastilles d'état, carte de bienvenue | bleus | **bleus, inchangés** |
 | Filet `ROLE_ACCENTS` en haut de l'écran | — | **retiré** (doublon du bandeau) |
@@ -202,7 +203,7 @@ Option A du porteur (2026-10-24, maquettes en gris à 1440 et 1024 px), avec tro
 #### Sur ordinateur (≥ lg)
 
 Option A du porteur (2026-10-24, maquettes en gris à 1440 et 1024 px) : **deux colonnes égales**, la mise en page actuelle de l'inscription enseignant.
-- À gauche, panneau `bg-mist` pleine hauteur : logo enseignant 64 px, « Bienvenue sur Lnclass », « Assignez un exercice, voyez ce que vos élèves ont compris. », centrés. **La carte de bienvenue du téléphone n'est pas rendue à droite** : elle ne vit qu'à un endroit.
+- À gauche, panneau **`bg-teacher`** pleine hauteur (choix B du porteur en couleurs, 2026-10-24, contre la recommandation d'un panneau `bg-mist`) : textes en `text-band-ink` (blanc en sombre, §3.1), logo enseignant 64 px cerné d'un anneau blanc de 3 px pour se détacher du jaune, « Bienvenue sur Lnclass », « Assignez un exercice, voyez ce que vos élèves ont compris. », centrés. **La carte de bienvenue du téléphone n'est pas rendue à droite** : elle ne vit qu'à un endroit.
 - À droite, les trois étapes, largeur 28 rem au plus, centrées : « Besoin d'aide ? » en haut à droite, « ‹ Retour », « Étape N sur 3 », segments, puis le contenu de l'étape, inchangé. Le logo de l'en-tête du téléphone n'est pas répété (il est à gauche).
 
 ### 3.10 Jetons
@@ -252,4 +253,5 @@ Validé par le porteur le 2026-10-23 sur maquettes ; option A pour les jours de 
 - `TeacherFollowUpsQuery` se partage en deux lectures (cette semaine, historique avec moyenne de classe) ; la query de l'accueil ajoute le sigle, le code et les compteurs de badges par classe ; la liste de la classe ajoute le badge par élève et le filtre `badge=`.
 - Interdit sur les écrans enseignant : une barre basse ; « Inviter un collègue » ailleurs que dans la grille ; la liste des classes ailleurs que sur l'accueil ; un rangement des élèves autre que le badge ; `bg-brand` sur une barre ou un bandeau ; du rouge sur une note.
 - L'assignation sans jours de séance n'est plus possible : l'attribut `later` disparaît de `Dtos::Classroom::AssignmentInput` et du contrôleur (Lot L, avec son test).
-- Hors de cette UDR : versions ordinateur (étape 4 du chantier) ; direction et équipe inchangées, sauf leur fond (UDR palette).
+- Versions ordinateur : dessinées le 2026-10-24 dans les sous-sections « Sur ordinateur (≥ lg) » de chaque écran. **Couleurs validées par le porteur (option A)** : les écrans ordinateur appliquent §3.1 et l'UDR palette sans ajout ; seule nouveauté, le panneau gauche jaune de l'inscription (§3.9). L'entrée active de la barre latérale reste `bg-brand-soft text-brand-strong`.
+- Hors de cette UDR : direction et équipe inchangées, sauf leur fond (UDR palette).

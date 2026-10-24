@@ -228,6 +228,15 @@ Quand l'enseignant ouvre l'inscription
 Alors la page a deux colonnes : à gauche le logo et « Bienvenue sur Lnclass », à droite les trois étapes, larges de 28 rem au plus
 Et la carte de bienvenue n'apparaît qu'une fois, dans la colonne de gauche
 
+# CA-J6
+Étant donné l'inscription sur un écran d'au moins 1024 px de large
+Alors le panneau de gauche est jaune enseignant, son texte en bleu nuit (band-ink), le logo cerné de blanc
+Et en mode sombre le panneau est jaune enseignant sombre et son texte blanc
+
+# CA-G11
+Étant donné un écran enseignant d'au moins 1024 px de large
+Alors l'entrée active de la barre latérale est bleu clair à texte bleu, jamais jaune
+
 # CA-I6
 Étant donné un écran d'au moins 1024 px de large
 Quand l'enseignant ouvre la fiche d'un élève
