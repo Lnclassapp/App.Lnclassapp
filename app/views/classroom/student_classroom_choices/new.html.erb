@@ -19,6 +19,13 @@
         <p><%= t(".link_invalid") %></p>
       </div>
     <% end %>
+    <%# Un code refusé (accueil « Choisis ta classe », UDR accueil élève §3.3 état 6) : le champ revient avec son erreur dessous, et la
+        cascade reste possible. Sans code envoyé, la page n'a pas de champ de code. %>
+    <% if @form.join_code.present? || @form.errors[:join_code].any? %>
+      <%= ui_field form, :join_code, label: t("classroom.student_homes.no_classroom.code"), hint: t("classroom.student_homes.no_classroom.hint"),
+                   maxlength: 6, autocomplete: "off", inputmode: "text", autocapitalize: "characters", spellcheck: false,
+                   class: "font-mono uppercase tracking-widest" %>
+    <% end %>
     <%# Retiré de cette classe, classe complète, déjà inscrit : la raison en tête (UDR-0081 §3.5). %>
     <%# Challenger phase 5 (E1) : après un refus (403), le focus et le défilement vont à l'alerte, sous l'en-tête fixe. %>
     <% if @form.errors[:base].any? %>

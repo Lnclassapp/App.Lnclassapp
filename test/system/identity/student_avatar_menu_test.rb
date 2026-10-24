@@ -30,7 +30,7 @@ class Identity::StudentAvatarMenuTest < ApplicationSystemTestCase
 
   test "CA-1, CA-3: at 390 px, the logo and the avatar alone, no switch, no bottom bar; the menu in order" do
     with_mobile_viewport do
-      visit student_home_path
+      visit courses_path
 
       assert_equal 0, horizontal_scroll
       within("header") do
@@ -47,7 +47,7 @@ class Identity::StudentAvatarMenuTest < ApplicationSystemTestCase
       within("#avatar-menu") do
         assert_text "Awa Koné"
         assert_text "Tle D 1 · Lycée moderne 2"
-        assert_selector "a[role=menuitem][aria-current=page].bg-brand-soft[href='#{student_home_path}']", text: tn(:home)
+        assert_selector "a[role=menuitem][aria-current=page].bg-brand-soft[href='#{courses_path}']", text: tn(:courses)
       end
       assert_equal [ tn(:home), tn(:courses), tn(:classroom), tn(:profile), tn("avatar_menu.history"),
                      tn("avatar_menu.add_photo"), help, tn(:sign_out) ], visible_items
@@ -63,6 +63,8 @@ class Identity::StudentAvatarMenuTest < ApplicationSystemTestCase
 
       # UDR-0084 §3.10: the keyboard — arrows move and loop, Escape closes and gives the focus back to the avatar.
       assert focused?("#avatar-menu a[href='#{student_home_path}']"), "le focus n'est pas sur la première entrée"
+      page.send_keys(:down)
+      assert focused?("#avatar-menu a[href='#{courses_path}']"), "la flèche bas ne passe pas à « Cours »"
       # Focused, the current page keeps its bg-brand-soft highlight, not the grey focus background of the other entries.
       brand_soft, focused_bg = page.evaluate_script(<<~JS)
         (() => { const probe = document.createElement("span"); probe.className = "bg-brand-soft"; document.body.append(probe);
@@ -70,8 +72,6 @@ class Identity::StudentAvatarMenuTest < ApplicationSystemTestCase
                  return [want, getComputedStyle(document.activeElement).backgroundColor] })()
       JS
       assert_equal brand_soft, focused_bg, "la page en cours perd sa surbrillance au focus"
-      page.send_keys(:down)
-      assert focused?("#avatar-menu a[href='#{courses_path}']"), "la flèche bas ne passe pas à « Cours »"
       page.send_keys(:up, :up)
       assert focused?("#avatar-menu form button"), "la flèche haut ne boucle pas sur « Se déconnecter »"
       page.send_keys(:escape)

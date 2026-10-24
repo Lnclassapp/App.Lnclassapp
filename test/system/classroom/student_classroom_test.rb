@@ -27,7 +27,7 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
   def tn(key) = I18n.t("shared.navigation.#{key}")
   def rect(id) = page.evaluate_script("document.getElementById(#{id.to_json}).getBoundingClientRect().toJSON()")
 
-  # CA-1, CA-5 : à 390 px, depuis le menu de l'avatar ; « Ma classe » en surbrillance, ni retour « Accueil » ni barre du bas.
+  # CA-1, CA-5 : à 390 px, depuis la carte de l'accueil (Lot D : le bandeau remplace l'en-tête) ; « Ma classe » en surbrillance, ni retour « Accueil » ni barre du bas.
   test "at 390 px, from the avatar menu: no « Accueil » link, the classroom, 3 assigned exercises then « Voir plus », the score" do
     # Challenger : avec trois cours, la bande élargissait toute la page (485 px pour 390) ; seule la bande doit défiler.
     # Audit ux-pages-eleve (2026-10-06) : un titre d'exercice réel, tronqué sur une ligne, l'élargissait aussi (611 px).
@@ -43,8 +43,7 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
     with_mobile_viewport do
       visit student_home_path
       assert_no_page_reload do
-        find("header button#avatar-menu-button").click
-        within("#avatar-menu") { click_link tn(:classroom) }
+        find("#student_next_step a[href='#{student_classroom_path}']").click
         assert_current_path student_classroom_path
       end
 
