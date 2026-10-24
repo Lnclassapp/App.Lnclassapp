@@ -300,6 +300,106 @@ module Queries
         assert_equal %w[svt], row.subjects.map(&:slug)
       end
 
+      # CA-D2 à CA-D6 (UDR accueil élève §3.3): the state of the next-step card, the first true rule of the table wins.
+      def step(student = @student, today: Time.zone.today) = StudentHomeQuery.new.call(student_id: student.id, today:).next_step
+
+      def assign_exercise(title, due_on: nil, assigned_at: 3.days.ago, **)
+        exercise = create_exercise(essential: @essential, title:)
+        create_assignment(classroom: @classroom, assignable: exercise, assigned_at:, due_on:, **)
+        exercise
+      end
+
+      test "CA-D2: two late exercises and one due Saturday: the oldest late one, 1 other late, the late state" do
+        assign_exercise("Retard récent", due_on: Date.yesterday)
+        assign_exercise("Retard ancien", due_on: Date.current - 2, assigned_at: 5.days.ago)
+        assign_exercise("Pour samedi", due_on: Date.current + 3)
+
+        step.then do |next_step|
+          assert_equal :late, next_step.state
+          assert_equal "Retard ancien", next_step.exercise.title
+          assert_equal 1, next_step.other_late_count
+          assert_equal [ 0, 3 ], next_step.to_h.values_at(:done_count, :total_count)
+        end
+      end
+
+      test "CA-D3: no late exercise: the nearest due date, and the session to resume when there is one" do
+        assign_exercise("Dans quatre jours", due_on: Date.current + 4)
+        near = assign_exercise("Demain", due_on: Date.current + 1)
+        assign_exercise("Sans échéance")
+
+        assert_equal [ :due, "Demain", nil, 0 ], step.then { |s| [ s.state, s.exercise.title, s.review, s.other_late_count ] }
+
+        session = create_exercise_session(student: @student, exercise: near)
+        assert_equal session.public_id, step.exercise.started_session_public_id
+      end
+
+      test "CA-D3: a late exercise already done is neither late nor the next step" do
+        done = assign_exercise("Fait en retard", due_on: Date.yesterday)
+        create_exercise_session(student: @student, exercise: done, status: "completed", score_percent: 80)
+        assign_exercise("À rendre", due_on: Date.current + 2)
+
+        assert_equal [ :due, "À rendre", 1, 2 ], step.then { |s| [ s.state, s.exercise.title, s.done_count, s.total_count ] }
+      end
+
+      test "the teacher who gave the exercise signs it, anonymised teachers sign nothing" do
+        teacher = create_teacher(last_name: "Kouassi", gender: "male")
+        assign_exercise("Signé", due_on: Date.current + 1, by: teacher)
+
+        assert_equal [ "male", "Kouassi" ], step.assigner.to_h.values_at(:gender, :last_name)
+
+        Orm::User.where(id: teacher.id).update_all(anonymized_at: Time.current)
+        assert_nil step.assigner
+      end
+
+      test "CA-D4: everything assigned is done and sheets wait: the oldest sheet to review, its mark, its subject" do
+        done = assign_exercise("Fait", due_on: Date.current + 1)
+        create_exercise_session(student: @student, exercise: done, status: "completed", score_percent: 100)
+        recent = create_essential(course: @course, name: "Récente")
+        older = create_essential(course: @course, name: "Ancienne")
+        create_gap(student: @student, essential: recent, created_at: 1.day.ago,
+                   source_session: create_exercise_session(student: @student, exercise: create_exercise(essential: recent), status: "completed", score_percent: 40))
+        create_gap(student: @student, essential: older, created_at: 3.days.ago,
+                   source_session: create_exercise_session(student: @student, exercise: create_exercise(essential: older), status: "completed", score_percent: 40))
+
+        step.then do |next_step|
+          assert_equal :review, next_step.state
+          assert_equal [ "Ancienne", older.slug, @course.slug, "SVT", 40 ],
+                       next_step.review.to_h.values_at(:essential_name, :essential_slug, :course_slug, :material_name, :score_percent)
+        end
+        assert_equal [ "Récente", "Ancienne" ], StudentHomeQuery.new.call(student_id: @student.id).pending_gaps.map(&:essential_name)
+      end
+
+      test "a pending sheet never comes before the work of the teacher" do
+        assign_exercise("Pas fait", due_on: Date.current + 1)
+        create_gap(student: @student, essential: @essential)
+
+        assert_equal :due, step.state
+      end
+
+      test "CA-D5: all assigned done, nothing to review: « all_done » with the count" do
+        2.times do |index|
+          create_exercise_session(student: @student, exercise: assign_exercise("Fait #{index}", due_on: Date.current + 1),
+                                  status: "completed", score_percent: 80)
+        end
+
+        assert_equal [ :all_done, 2, 2 ], step.then { |s| [ s.state, s.done_count, s.total_count ] }
+      end
+
+      test "CA-D6: nothing assigned: « unassigned »; a withdrawn assignment is not an assignment" do
+        assert_equal [ :unassigned, nil, 0 ], step.then { |s| [ s.state, s.exercise, s.total_count ] }
+
+        assign_exercise("Retiré", due_on: Date.current + 1, status: "archived")
+        assert_equal :unassigned, step.state
+      end
+
+      test "the school sigle, or nothing when the school has none" do
+        @school.update!(sigle: "CM1T")
+        assert_equal "CM1T", home.school_sigle
+
+        @school.update!(sigle: nil)
+        assert_nil home.school_sigle
+      end
+
       # IL-14, IL-17 (UDR-0081 §3.5): a student without an active classroom chooses one, the DRENA and the school of their
       # last primary classroom already chosen; a removal of less than 7 days ago says why they have no classroom.
       def last(student, now: Time.current) = StudentHomeQuery.new.last_classroom(student_id: student.id, now:)

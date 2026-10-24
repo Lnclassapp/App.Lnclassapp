@@ -46,9 +46,29 @@ class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
     assert_select "header > div.flex > div > span", text: "Awa Koné", count: 0
     assert_select "header .ui-badge", 0
     assert_select "header dialog#account_panel", 0
-    assert_select "header a[href='#{student_menu_path}']", 0
+    assert_select "header.sticky a[href='#{student_menu_path}']", 0
     assert_select "header [aria-controls=account-menu]", 0
     assert_select "dialog#help-sheet", count: 1
+  end
+
+  # UDR accueil élève §3.1 (mvp-teacher-student, Lot D): under lg the home carries its blue band — the avatar to « Mon compte »
+  # on the left, « Besoin d'aide ? » on the right — and the header only appears from lg; the other pages keep their header.
+  test "the home's band replaces the header under lg: avatar and help in the band, the header hidden, only on the home" do
+    sign_in_as create_student(classroom: @classroom, first_name: "Awa", last_name: "Koné")
+
+    get student_home_path
+
+    assert_select "main > div.lg\\:hidden > header.student-band.bg-brand" do
+      assert_select "a[href='#{student_menu_path}'][aria-label=?]", tn("home_band.account", name: "Awa Koné")
+      assert_select "a[href='#{help_path}']", text: tn("home_band.help")
+    end
+    assert_select "header.sticky.max-lg\\:hidden #avatar-menu-button"
+
+    get profile_path
+
+    assert_select "header.sticky"
+    assert_select "header.sticky.max-lg\\:hidden", 0
+    assert_select "header.student-band", 0
   end
 
   test "CA-3: the avatar menu — identity, the destinations under lg, then profile, history, photo, help and sign-out" do
@@ -112,13 +132,13 @@ class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
     classroom = create_classroom(name: "6ème 3", school: create_school(name: "Lycée moderne 2"))
     sign_in_as create_student(classroom:)
     get student_home_path
-    assert_select "p", text: "6ème 3"
+    assert_select "#student_next_step a span.truncate", text: /\A6ème 3 · /
 
     classroom.update!(name: "6ème A")
     get student_home_path
 
     assert_response :success
-    assert_select "p", text: "6ème A"
-    assert_select "p", text: "6ème 3", count: 0
+    assert_select "#student_next_step a span.truncate", text: /\A6ème A · /
+    assert_select "#student_next_step a span.truncate", text: /6ème 3/, count: 0
   end
 end

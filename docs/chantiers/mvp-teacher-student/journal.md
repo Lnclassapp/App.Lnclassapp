@@ -19,6 +19,8 @@
 | 2026-10-24 | Lot B, revue sécurité : l'envoi garde aussi son plafond propre de 5 par minute et par IP (`signup`, ADR-0085 §4.6), en plus du compteur partagé `classroom/joins` | Sans lui, le plafond de l'envoi doublait (5 → 10) : deux fois plus de numéros sondés (« déjà inscrit ») et de comptes fictifs par minute | Non |
 | 2026-10-24 | Lot B : captures validées ; sans JavaScript, un code tapé l'emporte sur « Je n'ai pas de code » cochée (porteur, 2026-10-24 : « oui pour 1, 2 et 3 ») | Le serveur suit la priorité lien > code > cascade ; avec JavaScript, cocher la case vide et désactive le champ du code | Non |
 | 2026-10-24 | Lot B : l'étape ouverte après une erreur est calculée dans la vue (première étape qui porte une erreur, au moins l'étape 2 par un lien) | Le contrôleur Stimulus reçoit `start`, et le re-rendu 422 (morphing) le relit | Non |
+| 2026-10-24 | Lot D : l'ordre des états de la carte suit la table de l'UDR (6, 2, 1, 3, 4, 5) : une fiche à revoir passe donc avant « Aucun exercice assigné » (« tout l'assigné est terminé » est vrai sans assignation) | Un élève sans travail de l'enseignant mais avec une fiche à revoir voit « À revoir » plutôt que l'exercice du jour ; l'inverse cacherait sa fiche, plus listée sur l'accueil | Non |
+| 2026-10-24 | Lot D : sous lg, le bandeau (`content_for :home_band`) est rendu par le shell au-dessus de la colonne et l'en-tête est masqué (`max-lg:hidden`) ; l'avatar du bandeau mène à `student_menu_path` (page « Mon compte » de E1), le menu déroulant de l'en-tête reste celui de lg | `_avatar_menu` est à E1 : ancré à droite, il déborderait de l'écran depuis le bandeau à gauche ; la page du panneau existe déjà et E1 la met à la liste de l'UDR | Non |
 
 ## Ce qui a dérapé
 
@@ -31,6 +33,9 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - Lot B : le texte « code inconnu » de la vérification (Lot A : « …Vérifie-le, ou demande-le à ton enseignant. ») différait de l'UDR §3.2 (« …Vérifie-le avec ton enseignant. ») ; aligné sur l'UDR dans `classroom_codes.fr.yml` et `student_classroom_choices.fr.yml`. Le 429 de l'aperçu dit aussi « …ou coche « Je n'ai pas de code » » (UDR §3.2).
 - Lot B : cinq tests système hors fiche remplissaient l'ancien formulaire d'une page (`pin_reveal_test`, `boucle_pedagogique_test`, `error_paths_test`, `public_pages_test` x2) ; ils passent par l'étape 2 puis l'étape 3, ou cherchent le rappel de classe (`#signup-classroom-recap`) à la place de `#classroom-preview`. La suite complète du train les rejoue.
 - Lot B : `form_with novalidate: true` n'écrit pas l'attribut (Rails l'écarte) : il faut `html: { novalidate: true }`. Sans lui, le navigateur refusait l'envoi à l'étape 3 pour un `required` caché de la cascade.
+- Lot D : la fiche demande de supprimer `_invite_teacher`, mais « Ma classe » (`student_classrooms/_no_teacher`) le rend encore en `standalone` : gardé, ainsi que `_pending_gaps` (E2). La « durée » du méta (« Maths · M. Kouassi · 15 min ») n'a aucune donnée (pas de colonne sur `exercises`) : le méta s'arrête à l'enseignant. « cette semaine » (état 4) est omis : rien ne borne l'assigné à la semaine. La pastille d'échéance non en retard est celle de `due_badge` (neutre sous deux jours), non le `brand-soft` de l'UDR : `DueDateHelper` n'est pas au lot.
+- Lot D : l'erreur « code inconnu » de l'état 6 n'a pas de champ où s'afficher : le formulaire de l'accueil poste vers `student_classroom_choices#create`, qui re-rend `new` (la cascade), laquelle ne montre que `errors[:base]`. À corriger dans `student_classroom_choices/new` (hors fiche).
+- Lot D : l'historique ne dit pas « Lue » (les fiches lues, `essential_reads`, ne sont pas dans `recent_sessions`) et n'a pas l'état d'erreur « Réessayer » du frame (il demande un contrôleur Stimulus).
 
 ## Ce qu'on a appris sur la codebase
 
@@ -40,6 +45,8 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - `ActiveRecord insert_all!` ne lit ni les `attribute … default:` ni les callbacks : tout défaut d'une colonne `NOT NULL` ajoutée doit être en base.
 - `test/design/design_tokens_test.rb` interdit toute valeur arbitraire Tailwind (`text-[13px]`, `group-has-[…]`) : la sous-ligne « 13 px » de l'UDR devient `text-sm` (aucun jeton de 13 px), et l'ouverture de la cascade se fait dans le contrôleur Stimulus, pas par une variante `:has` du CSS.
 - `test/guards/system_budget_test.rb` : un test système nouveau doit être enregistré dans `script/ci/test_timings.yml` (`script/ci/record_timings`) ; `student_signup_steps_test.rb` y ajoute 10,5 s ; le test ajouté par la revue (un code, puis « Je n'ai pas de code ») a été fondu dans celui de la cascade, sinon le fichier pesait 20 s, au-delà du budget.
+- La base de test d'un worktree créée par `db:prepare` est **seedée** (niveaux « Tle »…) : les factories échouent sur `index_levels_on_name`. `db:drop db:create db:schema:load RAILS_ENV=test` donne une base vide.
+- Une carte `rounded-card shadow-card` va bord à bord sous 640 px (`data-bleed`) : `data-bleed-keep` sur la colonne de l'accueil la garde arrondie dans la marge, à cheval sur le bandeau.
 
 ## Dette laissée derrière
 

@@ -1,0 +1,19 @@
+<%# 🌐 UI · classroom/student_homes/next_step/_no_classroom — état 6 : l'élève sans classe active (archivée, ou retiré) : « Choisis ta classe » %>
+<%# Rôle : le champ du code de classe et « Rejoindre » ; « Je n'ai pas de code » ouvre la cascade ; son historique s'il en a un %>
+<%# UDR  : XXXX accueil élève §3.3 (état 6), 0081 (§3.5) · ADR : XXXX code de classe (§4.7) %>
+<%# locals: (home:, step:, daily:, form:, archived:, invite_href:) -%>
+<h2 id="student_next_step_title" class="font-display text-lg leading-snug font-medium text-ink"><%= t("classroom.student_homes.no_classroom.title") %></h2>
+<%= form_with model: form, scope: :student_classroom_choice, url: student_classroom_choices_path, id: "student-home-code-form", class: "space-y-3" do |f| %>
+  <%= ui_field f, :join_code, label: t("classroom.student_homes.no_classroom.code"), hint: t("classroom.student_homes.no_classroom.hint"),
+               maxlength: 6, autocomplete: "off", inputmode: "text", autocapitalize: "characters", spellcheck: false,
+               class: "font-mono uppercase tracking-widest" %>
+  <%= ui_button t("classroom.student_homes.no_classroom.submit"), type: :submit, variant: :primary, full: true, icon_end: "arrow-right" %>
+<% end %>
+<div class="flex flex-col items-start">
+  <%= link_to t("classroom.student_homes.no_classroom.no_code"), new_student_classroom_choice_path, id: "student_next_step_no_code",
+              class: "inline-flex min-h-tap items-center rounded-sm text-sm font-medium text-brand-strong hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+  <% if archived %>
+    <%= link_to t("classroom.student_homes.no_classroom.archive"), student_archive_path,
+                class: "inline-flex min-h-tap items-center rounded-sm text-sm font-medium text-brand-strong hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+  <% end %>
+</div>

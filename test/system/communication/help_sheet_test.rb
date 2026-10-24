@@ -9,7 +9,8 @@ require "application_system_test_case"
 # détour aussi (BL-20, test/integration/communication/articles_test.rb). Amendement du 2026-10-06 : sous lg, le bouton
 # quitte l'accueil. UDR-0080 §3.1 (app-android) : « Besoin d'aide ? » est dans l'en-tête de l'élève, à toute largeur ;
 # il ne passe plus par le menu du compte. UDR-0084 §3.1, §3.2 (accueil-eleve) : dès 700 px seulement ; en dessous, il
-# est dans le menu de l'avatar, et le focus revient à l'avatar.
+# est dans le menu de l'avatar, et le focus revient à l'avatar. Mvp-teacher-student, Lot D : sur l'accueil, sous lg, le bandeau
+# remplace l'en-tête (son « Besoin d'aide ? » mène à /aide) ; le menu de l'avatar de l'en-tête se joue donc sur « Cours ».
 class Communication::HelpSheetTest < ApplicationSystemTestCase
   DESKTOP_VIEWPORT = [ 1280, 900 ].freeze
   TRIGGER = "a[aria-controls=help-sheet]".freeze
@@ -53,7 +54,7 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
 
   test "on a phone, the sheet rises from the bottom, at least a quarter high, with a handle and a close button" do
     with_mobile_viewport do
-      visit student_home_path
+      visit courses_path
       open_sheet
 
       box = geometry
@@ -76,7 +77,7 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
   test "on a phone, the focus lands on « Questions fréquentes », even with « Blog » in the footer; Escape gives it to the avatar" do
     create_article
     with_mobile_viewport do
-      visit student_home_path
+      visit courses_path
       open_sheet
 
       within(sheet) { assert_link "Blog" }
@@ -128,7 +129,7 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
   # couleur d'accent pour les ronds (R5) ; l'accueil derrière garde sa propre règle.
   test "the sheet passes the sobriety rule" do
     with_mobile_viewport do
-      visit student_home_path
+      visit courses_path
       assert_single_primary_action scope: "#main"
       open_sheet
 

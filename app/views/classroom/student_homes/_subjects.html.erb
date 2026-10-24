@@ -1,25 +1,35 @@
-<%# 🌐 UI · classroom/student_homes/_subjects — « Mes matières » de l'accueil élève, grille de bulles illustrées %>
-<%# Rôle : une bulle par matière de son niveau, vers le catalogue filtré ; « PC », « HG » dans la grille, nom entier lu ; pastille ambre si un exercice y est en retard %>
-<%# UDR  : 0062 §3.3, 0069 §3.3, 0076 §3.1, 0084 §3.5 (4 colonnes, 6 dès 700 px), §3.10 · charte §9 : jamais de compteur ; la pastille est dite par sr_suffix %>
-<%# locals: (subjects:, late_slugs:, icon:) -%>
-<section id="student_home_subjects" aria-labelledby="student_home_subjects_title" class="space-y-4">
-  <h2 id="student_home_subjects_title" class="font-display text-lg leading-tight font-medium"><%= t(".title") %></h2>
-  <% if subjects.empty? %>
-    <%= ui_empty_state title: t(".empty"), icon: %>
-  <% else %>
-    <nav id="student_home_subject_bubbles" aria-label="<%= t(".label") %>">
-      <%# UDR-0086 §3.5 : le palier de 700 px s'écrit min-[700px]:, sans token de point de rupture. %>
-      <ul class="grid grid-cols-4 gap-y-4 min-[700px]:grid-cols-6">
-        <% subjects.each do |subject| %>
-          <% late = late_slugs.include?(subject.slug) %>
-          <li>
-            <%= ui_subject_bubble label: subject.name, short_label: t(".short.#{subject.slug}", default: nil),
-                                  href: courses_path(material: subject.slug),
-                                  illustration: subject_illustration(subject.slug), id: "subject_#{subject.slug}",
-                                  signal: (:warning if late), sr_suffix: (t(".late") if late) %>
-          </li>
+<%# 🌐 UI · classroom/student_homes/_subjects — la grille de l'accueil élève : 6 matières et « Inviter », 4 colonnes %>
+<%# Rôle : un rond bg-brand-soft par matière de son niveau, vers le catalogue filtré, nom entier ; un point ambre sur la matière d'un exercice en retard (dit en mots) ; « Inviter » partage Lnclass %>
+<%# UDR  : XXXX accueil élève §3.4, §3.8 (nav nommée) · 0062 §3.3 · charte §9 : jamais de compteur ; le point est dit par un suffixe lu aux lecteurs d'écran %>
+<%# locals: (subjects:, late_slugs:, invite_href:) -%>
+<% tile = "group flex min-h-tap flex-col items-center gap-1.5 rounded-ln px-0.5 text-center text-meta leading-tight text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
+<% disc = "relative grid size-14 place-items-center rounded-full bg-brand-soft transition group-active:scale-95" %>
+<nav id="student_subjects" aria-label="<%= t("classroom.student_homes.subjects.label") %>">
+  <ul class="grid grid-cols-4 gap-y-4">
+    <% subjects.each do |subject| %>
+      <% late = late_slugs.include?(subject.slug) %>
+      <li>
+        <%= link_to courses_path(material: subject.slug), id: "subject_#{subject.slug}", class: tile do %>
+          <span class="<%= disc %>">
+            <%= image_tag subject_illustration(subject.slug).path, alt: "", class: "size-9", "aria-hidden": true, loading: "lazy" %>
+            <%# UDR §3.4 : le point ambre, décoratif ; sa phrase est lue après le nom (suffixe sr-only). %>
+            <% if late %><span class="absolute top-0 right-0 size-2.5 rounded-full bg-warning-dot ring-2 ring-white" aria-hidden="true"></span><% end %>
+          </span>
+          <span class="break-words"><%= subject.name %></span>
+          <% if late %><span class="sr-only"><%= t("classroom.student_homes.subjects.late") %></span><% end %>
         <% end %>
-      </ul>
-    </nav>
-  <% end %>
-</section>
+      </li>
+    <% end %>
+    <li>
+      <%# La 7e case : le même partage WhatsApp que « Ton enseignant n'est pas sur Lnclass ? » (ADR-0089 §4.3), dans un nouvel onglet. %>
+      <%= link_to invite_href, id: "subject_invite", target: "_blank", rel: "noopener", class: tile,
+                  "aria-label": t("classroom.student_homes.invite_teacher.action_label") do %>
+        <span class="<%= disc %>">
+          <%= image_tag subject_illustration(:invite).path, alt: "", class: "size-9", "aria-hidden": true, loading: "lazy" %>
+        </span>
+        <span aria-hidden="true"><%= t("classroom.student_homes.subjects.invite") %></span>
+      <% end %>
+    </li>
+  </ul>
+  <% if subjects.empty? %><p class="mt-3 text-center text-meta text-mute"><%= t("classroom.student_homes.subjects.empty") %></p><% end %>
+</nav>

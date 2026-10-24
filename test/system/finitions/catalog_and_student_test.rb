@@ -114,7 +114,7 @@ module Finitions
 
       assert_current_path student_home_path
       assert_title "Accueil · Élève · Lnclass"
-      within("#student_home_exercises") { assert_no_selector "#student_home_help" }
+      assert_no_selector "#student_home_help"
     end
 
     # FU-27, UDR-0081 §3.8 : plus de code de classe sur « Ma classe », et toujours rien à copier.
