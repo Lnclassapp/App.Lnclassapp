@@ -168,17 +168,15 @@ Même contenu qu'au téléphone, rien de répété ; seul l'ordre change (le blo
 
 - S'ouvre depuis un rond de niveau (`level`, `series` dans l'URL). « ‹ Accueil » en haut ; titre **« Cours de Tle D »** (18 px) ; sans niveau dans l'URL, « Cours ».
 - **Retirés** pour l'enseignant : les menus Niveau et Série, « Tle D » sur chaque ligne.
-- Gardés : recherche ; « 3 fiches de cours · Mathématiques · Progression DPFC 2026-2027 » (13 px, une seule fois) ; pastille « En cours ». Les fiches de cours sont des cartes qui portent leurs fiches de révision (amendement du 2026-10-24, ci-dessous).
+- Gardés : recherche ; « 3 fiches de cours · Mathématiques · Progression DPFC 2026-2027 » (13 px, une seule fois) ; pastille « En cours ».
 - Bivalent : puces de matière (« Math · PC », noms courts) sous la recherche, la première active. Monovalent : pas de puces.
-- **Amendé le 2026-10-24** (porteur, en dessinant l'ordinateur, réponse « A » : valable aussi sur téléphone) : les trois règles ci-dessous (puces limitées à l'établissement courant, une matière à la fois, fiches de révision dans la carte) s'appliquent **au téléphone comme à l'ordinateur** ; elles remplacent les « lignes compactes » de l'élève pour l'enseignant. Seule la largeur change d'un appareil à l'autre.
 
 #### Sur ordinateur (≥ lg)
 
-Option A du porteur (2026-10-24, maquettes en gris à 1440 et 1024 px), avec trois précisions (valables aussi sur téléphone, voir ci-dessus) :
+Option A du porteur (2026-10-24, maquettes en gris à 1440 et 1024 px). **Ne change rien au téléphone** (porteur, 2026-10-24) : même contenu qu'au téléphone, seule la largeur change.
 - **Une colonne** de 40 rem au plus, centrée ; « Cours » actif dans la barre latérale ; les fiches de cours dans l'ordre de la progression, de haut en bas (pas de grille).
-- **Puces de matière : seulement les matières que l'enseignant enseigne dans l'établissement courant** (`teacher_scope.materials`), jamais toutes celles du catalogue ; une seule matière, pas de puces.
-- **Une seule matière à la fois** : la page ne montre que les fiches de cours de la matière de la puce active, sans en-tête de matière ni regroupement.
-- **Une carte par fiche de cours, qui porte ses fiches de révision** : en tête « LEÇON 2 » (12 px majuscules `text-mute`), titre 14 px `font-medium`, pastille « En cours » s'il y a lieu et chevron, le tout lien vers la fiche de cours ; dessous « Révisions de la leçon » (13 px `text-mute`, UDR-0130 exception 2), puis une ligne de 44 px par fiche de révision (titre 14 px, chevron), lien vers la fiche de révision, où se trouve « Assigner » (§3.13). Fiche de cours sans fiche de révision : la carte n'a que son en-tête.
+
+**Pour plus tard, téléphone** (idées du 2026-10-24, **non décidées** : elles changeraient l'écran téléphone validé le 2026-10-23, à rouvrir seulement si le porteur le demande) : puces limitées aux matières de l'établissement courant ; une seule matière à la fois ; une carte par fiche de cours qui porte ses fiches de révision.
 
 ### 3.8 Rapport d'un exercice (`classroom/assignment_follow_ups/show.html.erb`, `assessment/comprehension/_section`)
 

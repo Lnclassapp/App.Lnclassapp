@@ -189,12 +189,12 @@ Alors Ma classe s'ouvre
 ### E. Écrans élève sans répétition
 
 ```gherkin
-# CA-E1 — remplacé par CA-E8 (§4 bis), décision du porteur du 2026-10-24
+# CA-E1
 Étant donné un élève qui touche son avatar
 Alors un panneau plein écran « Mon compte » s'ouvre avec, dans l'ordre : Mon profil, Modifier mon code secret, Mode sombre, Se déconnecter
 Et ni Accueil, ni Cours, ni Ma classe, ni Mon historique, ni Besoin d'aide n'y figurent
 
-# CA-E2 — remplacé par CA-E9 (§4 bis), décision du porteur du 2026-10-24
+# CA-E2
 Étant donné la page Mon profil d'un élève
 Alors elle montre six lignes (Photo, Nom, Numéro, Classe, Établissement, Inscrit·e le), sans grande carte en tête
 Et la ligne Classe n'a pas d'action ; ni code secret, ni mode sombre, ni « Se déconnecter » sur la page
@@ -212,7 +212,7 @@ Et la carte « Fiche à revoir · Refaire un exercice » n'existe plus
 Étant donné le résultat d'une session
 Alors il y a un seul bouton, « Recommencer », et ni l'encadré « Tu restes autour de… » ni « Revoir l'exercice »
 
-# CA-E6 — remplacé par CA-E14 (§4 bis), décision du porteur du 2026-10-24
+# CA-E6
 Étant donné la page Cours d'un élève
 Alors « Progression DPFC 2026-2027 » n'est écrit qu'une fois
 Et chaque fiche est une ligne entière cliquable d'au moins 44 px, sans « Commencer la fiche de cours »
@@ -255,9 +255,9 @@ Alors aucun écran ne mentionne un paiement ou un abonnement
 
 ## 4 bis. Phase ordinateur (après les lots téléphone)
 
-Tous les écrans élève sont décidés (porteur, 2026-10-24, maquettes à 1440 et 1024 px, en gris puis en palette froide). Détail : UDR accueil §3.1, UDR inscription §3.5 bis, UDR écrans élève §3.1, §3.2, §3.2 bis, §3.6 et §3.6 bis ; page publique : chantier `page-d-accueil-photo` (texte à gauche, photo à droite), sans nouveau dessin. Lots : [`plan.md`](plan.md), « Phase ordinateur — élève ».
+Les écrans élève sont décidés, sauf Cours (à redessiner) (porteur, 2026-10-24, maquettes à 1440 et 1024 px, en gris puis en palette froide). Détail : UDR accueil §3.1, UDR inscription §3.5 bis, UDR écrans élève §3.1 et §3.6 bis ; page publique : chantier `page-d-accueil-photo` (texte à gauche, photo à droite), sans nouveau dessin. Lots : [`plan.md`](plan.md), « Phase ordinateur — élève ».
 
-> **Ces décisions changent aussi le téléphone** (menu, profil, Mon établissement, Cours par leçons). Pour ces points, **CA-E8 remplace CA-E1, CA-E9 remplace CA-E2, CA-E14 remplace CA-E6** ; la §4 n'est pas réécrite ici, les lots E1 et E2 sont prévenus par le plan.
+> **Rien ne change sur téléphone** (porteur, 2026-10-24) : les critères du §4, issus des écrans téléphone validés le 2026-10-23, font foi. Les idées du 24 qui touchaient le téléphone (« Mon établissement », profil à carte bleue, Cours par leçons) sont retirées ; elles sont notées « pour plus tard » dans l'UDR écrans élève §3.6 bis.
 
 Sauf mention, « sur ordinateur » veut dire une fenêtre de 1024 px de large ou plus (≥ lg), vérifiée à 1024 et à 1440 px.
 
@@ -296,30 +296,13 @@ Et la carte du prochain exercice (2/3) et l'annonce (1/3) sont côte à côte, �
 Et la grille des matières tient sur une ligne de 7 cases, l'Historique sur deux colonnes de jours
 ```
 
-### E′. Écrans élève (ordinateur, et téléphone quand c'est dit)
+### E′. Écrans élève sur ordinateur
 
 ```gherkin
 # CA-E7
 Étant donné un élève sur ordinateur qui clique sur son avatar
 Alors « Mon compte » s'ouvre en panneau latéral droit de 400 px sur un voile
 Et Échap, la croix ou un clic sur le voile le ferment, le focus revenant sur l'avatar
-
-# CA-E8 (téléphone et ordinateur ; remplace CA-E1)
-Étant donné un élève qui ouvre « Mon compte »
-Alors il voit, dans l'ordre : l'en-tête (avatar, nom, classe · établissement), Mon profil, Mon établissement, Modifier mon code secret, Mode sombre, Se déconnecter
-Et ni Accueil, ni Cours, ni Ma classe, ni Mon historique, ni Besoin d'aide n'y figurent
-
-# CA-E9 (téléphone et ordinateur ; remplace CA-E2)
-Étant donné la page Mon profil d'un élève
-Alors elle commence par une carte bleue avec l'avatar et le nom seul, sans la classe
-Et « Mes informations » a quatre lignes : Photo, Nom, Numéro, Inscrit·e le
-Et ni Classe, ni Établissement, ni code secret, ni mode sombre, ni « Se déconnecter » ne sont sur la page
-
-# CA-E10 (téléphone et ordinateur)
-Étant donné un élève avec une classe qui choisit « Mon établissement » dans « Mon compte »
-Alors un écran « Mon établissement » montre, en lecture seule : Nom, Sigle, DRENA, Type
-Et la ligne Sigle est absente si l'établissement n'a pas de sigle
-Et un élève ne voit que l'établissement de sa classe
 
 # CA-E11
 Étant donné Ma classe sur ordinateur
@@ -334,19 +317,6 @@ Et l'enseignant voit la même fiche avec la mise en page actuelle
 Étant donné le résultat d'une session sur ordinateur
 Alors le badge, la note, la maîtrise et « Recommencer » sont dans une colonne de gauche de 340 px qui reste visible quand on fait défiler la correction
 
-# CA-E14 (téléphone et ordinateur ; remplace CA-E6)
-Étant donné un élève qui ouvre Cours pour une matière
-Alors il ne voit que les leçons de cette matière, une carte par leçon, dans l'ordre du programme
-Et chaque carte montre « LEÇON N », le titre, « En cours » s'il y a lieu, puis les fiches de la leçon en lignes entières cliquables d'au moins 44 px
-Et une leçon de plus de 3 fiches montre les 3 premières et « Voir les N fiches »
-Et une fiche à revoir porte l'étiquette « À revoir »
-Et « Progression DPFC 2026-2027 » n'est écrit qu'une fois
-
-# CA-E15
-Étant donné un élève sur ordinateur sur la page Cours
-Alors les 6 matières sont en pastilles en haut, celle affichée pleine et marquée aria-current="page"
-Et les cartes de leçon sont sur deux colonnes
-Et « Cours » de la barre latérale ouvre la matière de la dernière case touchée, sinon la première de la grille
 ```
 
 ## 5. Modélisation préliminaire

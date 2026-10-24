@@ -142,16 +142,13 @@ Vague 2   D Accueil   E1 Mon      E2 Ma classe C Inscription               │
 
 - **Couche**       : ui + delivery
 - **Fichiers**     : app/views/shared/navigation/_avatar_menu.html.erb *(devient le panneau « Mon compte » plein écran ; seul lot qui modifie le menu de l'avatar)*
-                     app/helpers/navigation_helper.rb *(`ACCOUNT_PANELS[:student]` : Mon profil, Mon établissement, Modifier mon code secret)*
+                     app/helpers/navigation_helper.rb *(`ACCOUNT_PANELS[:student]` : Mon profil, Modifier mon code secret)*
                      app/views/classroom/student_menus/show.html.erb · app/controllers/classroom/student_menus_controller.rb *(page de la coque Android, même liste)*
-                     app/views/identity/profiles/show.html.erb · _student.html.erb · _student_identity.html.erb · _student_information.html.erb · _student_row.html.erb *(carte bleue au nom seul, 4 lignes)*
-                     app/infrastructure/queries/school/student_school_query.rb *(nouveau : nom, sigle, DRENA, type de l'établissement de la classe de l'élève connecté, sans identifiant reçu)*
-                     app/controllers/school/student_schools_controller.rb · app/views/school/student_schools/show.html.erb *(nouveaux, « Mon établissement »)*
-                     config/routes/school.rb *(`GET /students/school`)*
-                     config/locales/shared/navigation.fr.yml · config/locales/identity/profiles.fr.yml · config/locales/school/student_schools.fr.yml *(nouveau)*
+                     app/views/identity/profiles/show.html.erb · _student.html.erb · _student_identity.html.erb · _student_information.html.erb · _student_row.html.erb
+                     config/locales/shared/navigation.fr.yml · config/locales/identity/profiles.fr.yml
 - **Dépend de**    : A
-- **Test associé** : test/system/identity/student_avatar_menu_test.rb · test/controllers/classroom/student_menus_controller_test.rb · test/system/identity/profile_test.rb · test/system/identity/profile_pin_test.rb · test/infrastructure/queries/school/student_school_query_test.rb · test/controllers/school/student_schools_controller_test.rb
-- **Done quand**   : l'avatar ouvre « Mon compte » plein écran avec l'en-tête (avatar, nom, classe · établissement), Mon profil, Mon établissement, Modifier mon code secret, Mode sombre, Se déconnecter, et rien d'autre (CA-E8) ; le profil commence par une carte bleue au nom seul, puis 4 lignes (Photo, Nom, Numéro, Inscrit·e le), sans classe, établissement, code secret, mode sombre ni déconnexion (CA-E9, CA-K2) ; « Mon établissement » montre Nom, Sigle, DRENA, Type de l'établissement de l'élève et de lui seul, sans accès pour un élève sans classe (CA-E10) ; le panneau enseignant (`_account_panel`) ne change pas
+- **Test associé** : test/system/identity/student_avatar_menu_test.rb · test/controllers/classroom/student_menus_controller_test.rb · test/system/identity/profile_test.rb · test/system/identity/profile_pin_test.rb
+- **Done quand**   : l'avatar ouvre « Mon compte » avec Mon profil, Modifier mon code secret, Mode sombre, Se déconnecter, et rien d'autre (CA-E1) ; le profil a six lignes, Classe sans action, sans code secret, mode sombre ni déconnexion (CA-E2, CA-K2) ; le panneau enseignant (`_account_panel`) ne change pas
 
 ## Lot E2 — Ma classe, fiche de révision, résultat, Cours
 
@@ -159,12 +156,11 @@ Vague 2   D Accueil   E1 Mon      E2 Ma classe C Inscription               │
 - **Fichiers**     : app/views/classroom/student_classrooms/show.html.erb · app/views/classroom/student_classrooms/_pending_gaps.html.erb *(déplacé depuis `student_homes/`, ancien fichier supprimé : seul lot qui déplace « Fiches à revoir »)*
                      app/views/catalog/essentials/show.html.erb *(« À revoir depuis le <date> », carte du bas retirée)*
                      app/views/assessment/session_results/show.html.erb *(seul « Recommencer »)*
-                     app/views/catalog/courses/index.html.erb · _course_card.html.erb · _essential_row.html.erb · _course_group_title.html.erb *(élève : leçons d'une matière, une carte par leçon avec ses fiches, progression écrite une fois)*
-                     app/infrastructure/queries/catalog/course_catalog_query.rb *(branche élève : fiches de chaque leçon et marque « à revoir », sans N+1)*
+                     app/views/catalog/courses/index.html.erb · _course_card.html.erb · _essential_row.html.erb · _course_group_title.html.erb *(lignes compactes de 44 px, progression écrite une fois ; côté élève seulement)*
                      config/locales/classroom/student_classrooms.fr.yml · config/locales/catalog/courses.fr.yml · config/locales/catalog/essentials.fr.yml · config/locales/assessment/session_results.fr.yml
 - **Dépend de**    : A, F
-- **Test associé** : test/system/classroom/student_classroom_test.rb · test/system/classroom/classroom_essential_test.rb · test/system/assessment/session_result_test.rb · test/controllers/assessment/session_results_controller_test.rb · test/controllers/catalog/courses_controller_test.rb · test/infrastructure/queries/catalog/course_catalog_query_test.rb
-- **Done quand**   : Ma classe a « Fiches à revoir » juste après « Exercices assignés » (CA-E3) ; la fiche porte « À revoir depuis… » sans la carte du bas (CA-E4) ; le résultat n'a qu'un bouton, « Recommencer » (CA-E5) ; Cours ne montre que les leçons de la matière, une carte par leçon avec ses fiches en lignes de 44 px, 3 puis « Voir les N fiches », « À revoir » sur la bonne fiche, la progression écrite une fois (CA-E14) ; le Cours de l'enseignant ne change pas
+- **Test associé** : test/system/classroom/student_classroom_test.rb · test/system/classroom/classroom_essential_test.rb · test/system/assessment/session_result_test.rb · test/controllers/assessment/session_results_controller_test.rb · test/controllers/catalog/courses_controller_test.rb
+- **Done quand**   : Ma classe a « Fiches à revoir » juste après « Exercices assignés » (CA-E3) ; la fiche porte « À revoir depuis… » sans la carte du bas (CA-E4) ; le résultat n'a qu'un bouton, « Recommencer » (CA-E5) ; Cours écrit la progression une fois, en lignes entières cliquables de 44 px (CA-E6) ; le Cours de l'enseignant ne change pas
 
 ---
 
@@ -179,8 +175,8 @@ Les lettres des critères ne sont pas celles des lots.
 | CA-B7 | B2 |
 | CA-C1 à CA-C7 | C |
 | CA-D1 à CA-D9, CA-K3 | D |
-| CA-E8, CA-E9, CA-E10, CA-K2 | E1 *(remplacent CA-E1 et CA-E2)* |
-| CA-E3 à CA-E5, CA-E14 | E2 *(CA-E14 remplace CA-E6)* |
+| CA-E1, CA-E2, CA-K2 | E1 |
+| CA-E3 à CA-E6 | E2 |
 | CA-F1 à CA-F4 | A |
 
 Aucun critère orphelin (34 critères ; CA-D10 passe à la phase ordinateur).
@@ -249,17 +245,17 @@ Portes propres au pilote :
 
 ## Phase ordinateur — élève
 
-> Après les lots téléphone (porteur, 2026-10-24 : « téléphone d'abord, ordinateur ensuite »). Critères : [`prd.md`](prd.md) §4 bis ; écrans : UDR accueil §3.1, UDR inscription §3.5 bis, UDR écrans élève §3.1, §3.2, §3.2 bis, §3.6 et §3.6 bis. Captures à 1024 et 1440 px , validées par le porteur avant chaque fusion.
+> Après les lots téléphone (porteur, 2026-10-24 : « téléphone d'abord, ordinateur ensuite »). Critères : [`prd.md`](prd.md) §4 bis ; écrans : UDR accueil §3.1, UDR inscription §3.5 bis, UDR écrans élève §3.1 et §3.6 bis. Captures à 1024 et 1440 px (et à 390 px pour O2 et O5, qui changent aussi le téléphone), validées par le porteur avant chaque fusion.
 >
-> **Reporté dans les lots téléphone le 2026-10-24** (E1 et E2 n'étaient pas commencés) : E1 fait CA-E8, CA-E9 et CA-E10, E2 fait CA-E14 ; O2 ne garde que le panneau latéral (CA-E7), O5 que l'ordinateur (CA-E15). Règle d'origine : le menu (« Mon établissement », sans Ma classe), le profil (carte bleue au nom seul, 4 lignes) et Cours (leçons d'une matière, fiches dans la carte) changent aussi à 390 px. Si E1 ou E2 n'est pas encore fusionné, il prend directement la nouvelle règle (CA-E8, CA-E9, CA-E14) et O2 ou O5 ne garde que la part ordinateur ; sinon O2 et O5 font les deux.
+> **Ne change rien au téléphone** (porteur, 2026-10-24) : les lots O ne touchent qu'à la mise en page ≥ lg. Les écrans téléphone validés le 2026-10-23 (lots E1, E2) font foi.
 
 | Lot | Dépend de | En parallèle avec |
 |---|---|---|
 | O1 — Accueil élève en page large | D | O2, O3, O4, O5, O6 |
-| O2 — « Mon compte » en panneau latéral, profil et établissement sur ordinateur | E1 | O1, O3, O4, O5, O6 |
+| O2 — « Mon compte » en panneau latéral, profil en colonne de 720 px | E1 | O1, O3, O4, O6 |
 | O3 — Inscription en deux colonnes | C | tous |
 | O4 — Ma classe, fiche de révision, résultat sur ordinateur | E2 | tous |
-| O5 — Cours sur ordinateur | E2 | tous |
+| O5 — Cours sur ordinateur | — | **à redessiner** (UDR écrans élève §3.6 bis), pas de lot tant que le porteur n'a pas validé un dessin |
 | O6 — Page d'accueil publique sur ordinateur | F | tous |
 
 ### Lot O1 — Accueil élève en page large
@@ -271,15 +267,14 @@ Portes propres au pilote :
 - **Test associé** : test/system/classroom/student_home_test.rb *(cas « ordinateur », fenêtre de 1440 px)*
 - **Done quand**   : sur ordinateur, contenu de 912 px au plus à côté de la barre latérale sans carte de profil, carte (2/3) et annonce (1/3) à cheval sur le bandeau, grille de 7 cases sur une ligne, Historique sur deux colonnes de jours (CA-D10)
 
-### Lot O2 — « Mon compte » en panneau latéral, profil et établissement sur ordinateur
+### Lot O2 — « Mon compte » en panneau latéral, profil en colonne de 720 px
 
 - **Couche**       : ui
-- **Fichiers**     : app/views/shared/navigation/_avatar_menu.html.erb *(panneau latéral droit de 400 px dès lg ; la liste reste celle d'E1)*
-                     app/views/identity/profiles/_student.html.erb *(colonne de 720 px centrée dès lg)*
-                     app/views/school/student_schools/show.html.erb *(créée par E1 ; colonne de 720 px centrée dès lg)*
+- **Fichiers**     : app/views/shared/navigation/_avatar_menu.html.erb *(panneau latéral droit de 400 px dès lg ; même liste que le téléphone)*
+                     app/views/identity/profiles/show.html.erb *(colonne de 720 px dès lg ; contenu du téléphone inchangé)*
 - **Dépend de**    : E1
-- **Test associé** : test/system/identity/student_avatar_menu_test.rb *(cas « ordinateur »)*
-- **Done quand**   : sur ordinateur, « Mon compte » s'ouvre en panneau latéral droit de 400 px sur un voile et se ferme par Échap, la croix ou le voile, le focus revenant sur l'avatar (CA-E7) ; profil et « Mon établissement » tiennent dans une colonne de 720 px centrée ; la liste, le profil et l'écran d'établissement (CA-E8, CA-E9, CA-E10, livrés par E1) ne changent pas
+- **Test associé** : test/system/identity/student_avatar_menu_test.rb · test/system/identity/profile_test.rb
+- **Done quand**   : sur ordinateur, « Mon compte » s'ouvre en panneau de 400 px et se ferme par Échap, la croix ou le voile, le focus revenant sur l'avatar (CA-E7) ; le profil est centré sur 720 px ; à 390 px, rien ne change
 
 ### Lot O3 — Inscription en deux colonnes
 
@@ -303,13 +298,7 @@ Portes propres au pilote :
 
 ### Lot O5 — Cours sur ordinateur
 
-- **Couche**       : delivery + ui
-- **Fichiers**     : app/views/catalog/courses/index.html.erb *(branche élève, dès lg : pastilles des 6 matières, cartes de leçon sur deux colonnes)*
-                     app/controllers/catalog/courses_controller.rb *(élève sans `?material=` : la dernière matière touchée, gardée en session, sinon la première de la grille)*
-                     config/locales/catalog/courses.fr.yml
-- **Dépend de**    : E2
-- **Test associé** : test/controllers/catalog/courses_controller_test.rb · test/system/catalog/student_courses_test.rb *(cas « ordinateur », 1440 px)*
-- **Done quand**   : sur ordinateur, les 6 matières sont en pastilles, celle affichée pleine et en `aria-current="page"`, les cartes de leçon sur deux colonnes, et « Cours » de la barre latérale ouvre la dernière matière touchée sinon la première (CA-E15) ; les cartes de leçon (CA-E14, livrées par E2) et le Cours de l'enseignant ne changent pas
+À redessiner : le dessin du 2026-10-24 reposait sur un Cours par leçons, qui changeait le téléphone et a été écarté. Pas de lot avant un dessin validé par le porteur.
 
 ### Lot O6 — Page d'accueil publique sur ordinateur
 
@@ -319,4 +308,4 @@ Portes propres au pilote :
 - **Test associé** : test/system/homepage_test.rb *(cas « ordinateur »)*
 - **Done quand**   : sur ordinateur, texte à gauche et photo à droite sur un seul écran, sans en-tête ni pied de page, la feuille mordant sur la photo (CA-A3)
 
-**Collision** : aucun fichier n'est listé par deux lots O. `_sidebar` n'est qu'à O1, `_avatar_menu` et `identity/profiles/_student` qu'à O2, `catalog/essentials/show` qu'à O4, `catalog/courses/index` et `courses_controller` qu'à O5. Les lots O touchent des fichiers des lots C, D, E1, E2 et F : ils partent donc de la branche de chantier **après** la fusion du lot dont ils dépendent.
+**Collision** : aucun fichier n'est listé par deux lots O. `_sidebar` n'est qu'à O1, `_avatar_menu` et `profiles/show` qu'à O2, `catalog/essentials/show` qu'à O4. Les lots O touchent des fichiers des lots C, D, E1, E2 et F : ils partent donc de la branche de chantier **après** la fusion du lot dont ils dépendent.
