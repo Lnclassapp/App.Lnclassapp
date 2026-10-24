@@ -69,7 +69,8 @@ class Classroom::TeacherHomeTest < ApplicationSystemTestCase
     assert_current_path teacher_classrooms_path
   end
 
-  test "on a phone, the home, the invitation block (RE-20) and the bottom bar are visible, without horizontal scrolling" do
+  # UDR enseignant §3.3 (mvp-teacher-student): the teacher has no bottom bar any more.
+  test "on a phone, the home and the invitation block (RE-20) are visible, without bottom bar and without horizontal scrolling" do
     sign_in_as @teacher
 
     with_mobile_viewport do
@@ -77,7 +78,7 @@ class Classroom::TeacherHomeTest < ApplicationSystemTestCase
 
       assert_selector "#teacher_home_classrooms ul[data-communication--carousel-target=track] > li", count: 2
       assert_selector "#invite_colleagues", visible: :visible
-      assert_selector "nav.bottom-0", visible: :visible
+      assert_no_selector "nav.bottom-0"
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
 

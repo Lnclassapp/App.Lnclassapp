@@ -7,6 +7,7 @@ class NavigationHelperTest < ActionView::TestCase
   def courses_path = "/courses"
   def student_home_path = "/student"
   def profile_path = "/profile"
+  def edit_profile_pin_path = "/profile/pin/edit"
 
   # A route not drawn yet, simulated: every destination of the shell is drawn since espace-direction-simple.
   def without_route(name)
@@ -25,21 +26,28 @@ class NavigationHelperTest < ActionView::TestCase
     assert_raises(KeyError) { navigation_for(:parent) }
   end
 
-  # AN-22 (UDR-0071 §3.1) : « Annonces », en dernier, pour l'enseignant et la direction ; pour l'équipe, en dernier de sa liste
-  # secondaire (décision du porteur), sur « Mes annonces » ; jamais pour l'élève.
-  test "AN-22 — « Annonces » closes the navigation of the teacher and the direction, the team's secondary list, never the student's" do
-    { teacher: "/announcements", school_admin: "/announcements" }.each do |role, path|
-      announcements = navigation_for(role).last
+  # AN-22 (UDR-0071 §3.1), CA-K1 (mvp-teacher-student) : « Annonces », en dernier, pour la direction ; pour l'équipe, en dernier de
+  # sa liste secondaire (décision du porteur), sur « Mes annonces » ; jamais pour l'élève ni, depuis CA-K1, pour l'enseignant.
+  test "AN-22 — « Annonces » closes the navigation of the direction and the team's secondary list, never the student's or the teacher's" do
+    announcements = navigation_for(:school_admin).last
 
-      assert_equal [ :announcements, path, "megaphone" ], [ announcements.key, nav_path(announcements), announcements.icon ], role
-    end
+    assert_equal [ :announcements, "/announcements", "megaphone" ], [ announcements.key, nav_path(announcements), announcements.icon ]
     team = secondary_navigation_for(:team).last
 
     assert_equal [ :announcements, "/announcements/mine", "megaphone" ], [ team.key, nav_path(team), team.icon ]
     assert_not_includes navigation_for(:team).map(&:key), :announcements
     assert_equal "Annonces", I18n.t("shared.navigation.announcements")
     assert_not_includes navigation_for(:student).map(&:key), :announcements
-    assert_equal [ 4, 4, 5, 3 ], %i[teacher school_admin team student].map { bottom_bar_size(it) }
+    assert_equal [ 3, 4, 5, 3 ], %i[teacher school_admin team student].map { bottom_bar_size(it) }
+  end
+
+  # CA-K1 : aucune entrée de navigation de l'enseignant ne mène aux annonces ni n'en propose l'écriture (barre latérale,
+  # liste secondaire) ; les routes et le code restent.
+  test "CA-K1 — nothing in the teacher's navigation reaches the announcements, written or read" do
+    assert_equal %i[home classrooms courses], navigation_for(:teacher).map(&:key)
+    assert_empty secondary_navigation_for(:teacher)
+    assert_empty(navigation_for(:teacher).select { %i[announcements my_announcements].include?(it.key) })
+    assert_not(NavigationHelper::DESTINATIONS[:teacher].any? { |_, route, _| route.to_s.include?("announcement") })
   end
 
   # Toute page d'annonces déclare `content_for :nav_key, "announcements"` : l'entrée est active sur chaque onglet, et le
@@ -53,7 +61,7 @@ class NavigationHelperTest < ActionView::TestCase
     referential, *, announcements = secondary_navigation_for(:team)
 
     assert nav_active?(announcements)
-    assert nav_active?(navigation_for(:teacher).last)
+    assert nav_active?(navigation_for(:school_admin).last)
     assert_not nav_active?(referential)
     assert more_active?(:team)
   end
@@ -69,11 +77,14 @@ class NavigationHelperTest < ActionView::TestCase
     assert_equal "Configuration", I18n.t("shared.navigation.sidebar.secondary_label.team")
   end
 
-  # UDR-0084 §3.3 : l'élève n'a plus de barre du bas ; son menu de l'avatar porte ses destinations, inchangées.
-  test "the student has no bottom bar, every other role keeps it" do
+  # UDR-0084 §3.3, UDR enseignant §3.3 (mvp-teacher-student) : ni l'élève ni l'enseignant n'ont de barre du bas ; leurs
+  # destinations sont sur l'accueil et dans « Mon compte ». La direction et l'équipe la gardent.
+  test "the student and the teacher have no bottom bar, the direction and the team keep it" do
     assert_not bottom_bar?(:student)
     assert_not bottom_bar?("student")
-    assert(%i[teacher team school_admin].all? { bottom_bar?(it) })
+    assert_not bottom_bar?(:teacher)
+    assert_not bottom_bar?("teacher")
+    assert(%i[team school_admin].all? { bottom_bar?(it) })
     assert_equal %i[home courses classroom], navigation_for(:student).map(&:key)
   end
 
@@ -196,24 +207,33 @@ class NavigationHelperTest < ActionView::TestCase
     assert_nil account_links.first[:href]
   end
 
-  # CA-8, CA-T6 (UDR-0080 §3.2, UDR-0082 §3.2): the student and the teacher have the account panel, each with its page
-  # and its links in order; the direction and the team keep the account menu.
+  # CA-8, CA-T6 (UDR-0080 §3.2, UDR-0082 §3.2), puis UDR élève §3.1 et UDR enseignant §3.4 (mvp-teacher-student) : l'élève et
+  # l'enseignant ont le panneau du compte, chacun avec sa page et ses entrées dans l'ordre ; le mode sombre et « Se déconnecter »
+  # sont fixes, rendus par le panneau lui-même. La direction et l'équipe gardent le menu du compte.
   test "the account panel of the student and of the teacher: its page, then its links in order" do
     assert_equal [ true, true, false, false ], %w[student teacher school_admin team].map { account_panel?(it) }
     assert_equal [ "/students/menu", "/teachers/menu" ], %i[student teacher].map { account_panel_page_path(it) }
-    assert_equal [ [ "/profile", "user-circle" ], [ "/courses", "book-open" ] ],
-                 account_panel_links(:student).map { it.values_at(:href, :icon) }
-    # UDR-0098 §3.1 : « Mes établissements » après « Mon profil », quel que soit le nombre d'établissements.
     assert_equal [ { label: I18n.t("shared.navigation.profile"), href: "/profile", icon: "user-circle" },
-                   { label: I18n.t("shared.navigation.account_panel.schools.link"), href: "/teachers/schools",
-                     icon: "building-office-2" },
-                   { label: I18n.t("shared.navigation.account_panel.invite"), href: "/teachers/invite", icon: "user-plus" } ],
-                 account_panel_links(:teacher)
+                   { label: I18n.t("shared.navigation.account_panel.entries.secret"), href: "/profile/pin/edit", icon: "key" } ],
+                 account_panel_links(:student).map { it.slice(:label, :href, :icon) }
+    assert_equal [ [ "Mon profil", "/profile", "user-circle", nil, nil ],
+                   [ "Modifier mon code secret", "/profile/pin/edit", "key", nil, nil ],
+                   [ "Ajouter une matière", "/profile/materials/edit", "book-open", "/profile/materials", :materials ],
+                   [ "Ajouter un établissement", "/teachers/schools", "building-office-2", "/teachers/schools", :schools ] ],
+                 account_panel_links(:teacher).map { it.values_at(:label, :href, :icon, :full_href, :cap) }
+  end
+
+  # UDR enseignant §3.4 : « Inviter un collègue » n'est plus dans le menu (il est dans la grille de l'accueil).
+  test "the teacher's account panel no longer invites a colleague, and the student's no longer lists courses" do
+    assert_not(account_panel_links(:teacher).any? { it[:href] == "/teachers/invite" })
+    assert_not I18n.exists?("shared.navigation.account_panel.invite")
+    assert_not(account_panel_links(:student).any? { it[:href] == "/courses" })
   end
 
   # RE-05, RE-11 (UDR-0068 §3.4, UDR-0069 §3.1).
-  test "the teacher's home reads classrooms, courses, announcements then activities; the team's has no referential" do
-    assert_equal %i[classrooms courses announcements activity], home_sections_for(:teacher).map(&:first)
+  # UDR enseignant §3.3 : classes, niveaux, annonces, cette semaine (activity), puis l'historique.
+  test "the teacher's home reads classrooms, courses, announcements, activities then history; the team's has no referential" do
+    assert_equal %i[classrooms courses announcements activity history], home_sections_for(:teacher).map(&:first)
     assert_equal %i[regions activity], home_sections_for(:team).map(&:first)
   end
 
@@ -238,11 +258,23 @@ class NavigationHelperTest < ActionView::TestCase
     assert_empty sidebar_frames_for(:teacher)
   end
 
-  test "home sections and accents exist for every role" do
+  # UDR enseignant §3.1 : le filet de couleur du rôle disparaît pour l'enseignant (le bandeau de l'accueil le remplace).
+  test "home sections exist for every role; the accent exists for every role but the teacher" do
     NavigationHelper::DESTINATIONS.each_key do |role|
       assert_not_empty home_sections_for(role.to_s)
-      assert_match(/\Abg-/, role_accent(role.to_s))
     end
+    %i[student team school_admin].each { assert_match(/\Abg-/, role_accent(it.to_s)) }
+    assert_nil role_accent(:teacher)
+    assert_nil role_accent("teacher")
+  end
+
+  # UDR enseignant §3.1 : la couleur du bandeau, des barres et des segments se choisit par le rôle, à un seul endroit.
+  test "role_fill_class gives the student's blue and the teacher's yellow, and nothing for the other roles" do
+    assert_equal "bg-brand", role_fill_class(:student)
+    assert_equal "bg-brand", role_fill_class("student")
+    assert_equal "bg-teacher", role_fill_class(:teacher)
+    assert_equal "bg-teacher", role_fill_class("teacher")
+    assert_raises(KeyError) { role_fill_class(:team) }
   end
 
   test "the shell user greets by first name and has optional details" do

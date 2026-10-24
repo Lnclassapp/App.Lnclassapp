@@ -28,14 +28,14 @@ class Identity::StudentAvatarMenuTest < ApplicationSystemTestCase
     assert_selector "#{AVATAR}[aria-expanded=true]"
   end
 
-  test "CA-1, CA-3: at 390 px, the logo, the switch and the avatar alone, no bottom bar; the menu in order" do
+  test "CA-1, CA-3: at 390 px, the logo and the avatar alone, no switch, no bottom bar; the menu in order" do
     with_mobile_viewport do
       visit student_home_path
 
       assert_equal 0, horizontal_scroll
       within("header") do
         assert_selector "a[href='#{student_home_path}'] img[src*='logo']", visible: true
-        assert_selector "button[role=switch]", visible: true
+        assert_no_selector "button[role=switch]"
         assert_selector "button#avatar-menu-button[aria-label='#{tn('avatar_menu.open', name: 'Awa Koné')}']", visible: true
         assert_no_text "Awa Koné"
         assert_no_link help
