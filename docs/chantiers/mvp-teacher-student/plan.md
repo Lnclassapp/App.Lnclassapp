@@ -12,7 +12,7 @@
 | Lot | Pilote | Dépend de | Jour | État au 24/10, 11 h |
 |---|---|---|---|---|
 | B — Code de classe à 6 caractères | orchestrateur | — | samedi 24 | ✅ **fait** (ancien Lot 0 + ancien Lot A, `021804cc`) ; `security-reviewer` passé, aucun constat au-dessus de « bas » |
-| A — Jetons de couleurs | orchestrateur (porteur, 2026-10-24 : « option A », repris de Touré), #285 | — | samedi 24 | 🟡 **à moitié** : jetons et police sur `feature/mvp-teacher-student-lot-p` (`c7a2d2b9`), non fusionnés ; reste le balayage des graisses, le test qui les refuse et les captures |
+| A — Jetons de couleurs | orchestrateur (porteur, 2026-10-24 : « option A », repris de Touré), #285 | — | samedi 24 | ✅ **fusionné** (`8d009596`), captures validées par le porteur |
 | F — Page d'accueil publique en photo | Konan (`konanmeschac777-cmyk`), #286 | — | samedi 24 | à faire |
 | B2 — Code visible sur la page de classe (provisoire) | orchestrateur | B | samedi 24 | à faire (porteur, 2026-10-24 : « A ») |
 | C — Inscription élève en 3 étapes | orchestrateur | B | samedi 24 | ✅ **fusionné** (`dc2c78c5`), captures validées |
