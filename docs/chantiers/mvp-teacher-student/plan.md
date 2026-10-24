@@ -20,7 +20,7 @@
 | E1 — « Mon compte » plein écran, profil sans doublons | Touré, #291 | A | dimanche 25 | à faire |
 | E2 — Ma classe, fiche, résultat, Cours | Konan, #290 | A, F | dimanche 25 → lundi 26 | à faire |
 
-**Budget des tests système** (ADR-0069 §9, 15 s par chantier) : C en prend 10,5 s ; il reste environ 4,5 s pour B2, D, E1, E2. Un lot teste au niveau contrôleur ou intégration tout ce qui n'exige pas un navigateur ; s'il faut plus de temps système, le porteur relève le budget avant la fusion.
+**Budget des tests système** (ADR-0069 §9 : 15 s par chantier) : C en prend 10,5 s ; **relevé à 50 s pour ce chantier** (porteur, 2026-10-24, amendement de l’ADR-0069). Chaque lot garde un test système court de son parcours principal et teste le reste au niveau contrôleur ou intégration.
 
 **Un seul plan, deux sessions** (coordination du 2026-10-24) : ce fichier, sur `Develop`, est le seul plan ; le `plan.md` de 15 lots resté sur la branche de chantier est écrasé par celui-ci à la fusion de #295. La session « MVP teacher-student » tient la branche de chantier : elle exécute et fusionne les lots d'orchestrateur (C, puis D) et elle seule fusionne dans `feature/mvp-teacher-student`. Cette session tient le plan et les issues de Touré et Konan. Issues des lots enseignant (#287, #288, #289, #292, #293, #294) : en attente, reprises après les lots élève.
 
