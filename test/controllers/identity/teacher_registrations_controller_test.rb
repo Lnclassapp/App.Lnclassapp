@@ -122,7 +122,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   end
 
   # CA-J1 (UDR §3.5 de l'inscription élève): a server error reopens the step that holds the field.
-  test "CA-J1: a 422 reopens the step of the faulty field; the rate limit reopens the first step" do
+  test "CA-J1: a 422 reopens the step of the faulty field" do
     { { first_name: "  " } => 2, { pin_confirmation: "1357" } => 3, { school_public_id: "" } => 1, { material_slug: "" } => 2 }
       .each do |overrides, step|
         post teacher_registrations_path, params: { teacher_registration: registration_params(**overrides) }
@@ -322,6 +322,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
       get teacher_invite_link_path(token)
 
       assert_response :success, token
+      assert_select "main#teacher-signup[data-classroom--signup-steps-start-value='1']", 1, token
       assert_select "#invite-link-invalid[role=alert]", text: I18n.t("#{PAGE}.invite_invalid")
       assert_select "select[name='teacher_registration[drena_public_id]']"
       assert_select "input[name='teacher_registration[invite_token]'], #school-preview", 0
@@ -451,6 +452,8 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
 
     assert_response :too_many_requests
     assert_select "[role=alert]", text: I18n.t("errors.codes.rate_limited")
+    assert_select "main#teacher-signup[data-classroom--signup-steps-start-value='1']"
+    assert_select "#signup-step-counter", text: I18n.t("#{PAGE}.step_counter", n: 1)
   end
 
   test "UDR-0079 §3.6: the eleventh link opened in a minute receives 429, without the school; the form keeps its own count" do
