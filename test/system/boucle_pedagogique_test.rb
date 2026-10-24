@@ -369,12 +369,13 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
   # → the finished session, whose result the teacher opens.
   def student_joins_and_wins_the_diamond(link)
     visit URI(link).path
-    assert_selector "#classroom-preview", text: "Tle D 1 — #{SCHOOL}"
+    assert_selector "#signup-classroom-recap", text: /Tle D 1.*#{SCHOOL}/m
     assert_no_page_reload do
       fill_in "student_registration[last_name]", with: "Kouassi"
       fill_in "student_registration[first_name]", with: "Aya"
       choose t("genders.female")
       fill_in "student_registration[contact]", with: STUDENT_CONTACT
+      # Step 2 moves on to the secret code (step 3) a second after the last key.
       fill_in "student_registration[pin]", with: "2468"
       fill_in "student_registration[pin_confirmation]", with: "2468"
     end

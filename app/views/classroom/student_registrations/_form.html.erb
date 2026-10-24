@@ -1,59 +1,83 @@
-<%# 🌐 UI · classroom/student_registrations/_form — formulaire d'inscription élève, en trois rubriques numérotées, chacune dans sa carte %>
-<%# Rôle : 1 Ta classe (cascade, ou bandeau d'un lien), 2 Toi (nom, prénoms, genre en pastilles, numéro), 3 Code secret ; 422/403 re-rendus %>
-<%# ADR  : 0037, 0050, 0083, 0085 · UDR : 0009, 0054, 0079, 0081 (§3.2), 0088 (§3.4, §3.7) %>
+<%# 🌐 UI · classroom/student_registrations/_form — le formulaire d'inscription élève, un seul, découpé en trois fieldset par signup_steps_controller %>
+<%# Rôle : 1 Ta classe (code, ou cascade derrière « Je n'ai pas de code »), 2 Toi (rappel de classe, nom, prénoms, genre, numéro), 3 Ton code secret ; sans JavaScript les trois restent visibles ; 422/403/429 re-rendus %>
+<%# ADR  : 0037, 0050, 0083, 0085, XXXX-code-de-classe-a-six-caracteres · UDR : 0009, 0054, 0079, 0081 (§3.2), XXXX-inscription-eleve-en-trois-etapes (§3.1 à §3.8) %>
+<%# start : l'étape ouverte ; floor : la première étape qui existe (2 par un lien) ; recap : [classe, établissement] ou nil %>
+<%# locals: (start:, floor:, recap:) -%>
+<% steps = "classroom--signup-steps" %>
 <%= form_with model: @form, scope: :student_registration, url: student_registrations_path, id: "student-registration-form",
-              class: "space-y-4",
-              data: { controller: "classroom--class-picker identity--phone-digits identity--pin-match",
+              class: "flex-1 space-y-6", html: { novalidate: true },
+              data: { action: "keydown.enter->classroom--signup-steps#enter", controller: "classroom--class-picker identity--phone-digits identity--pin-match",
                       "classroom--class-picker-schools-url-value": drena_schools_path("__drena__", scope: :student_registration),
                       "classroom--class-picker-levels-url-value": school_picker_levels_path("__school__", scope: :student_registration),
                       "classroom--class-picker-classrooms-url-value": school_picker_classrooms_path("__school__", "__level__",
                                                                                                    scope: :student_registration),
                       "identity--pin-match-ok-value": t(".pin_match.ok"), "identity--pin-match-ko-value": t(".pin_match.ko") } do |form| %>
-  <% if @link_invalid %>
-    <div id="classroom-link-invalid" role="alert" class="flex items-start gap-2 rounded-ln bg-warning-soft px-4 py-3 text-sm font-medium text-ink">
-      <%= ui_icon "exclamation-triangle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-warning" %>
-      <p><%= t(".link_invalid") %></p>
-    </div>
-  <% end %>
-  <%# Challenger phase 5 (E1) : après un refus (403), le focus et le défilement vont à l'alerte, sous l'en-tête fixe. %>
-  <% if @form.errors[:base].any? %>
-    <div id="student-registration-refusal" role="alert" tabindex="-1" data-autofocus-target="field"
-       class="flex scroll-mt-24 items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error outline-none">
-      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
-      <p><%= @form.errors[:base].to_sentence %></p>
-    </div>
-  <% end %>
   <% if @preview %>
     <%= form.hidden_field :link_token %>
   <% end %>
-  <%# UDR-0088 §3.7 : la carte entoure le fieldset (une légende posée sur une bordure chevaucherait le haut de la carte) ;
-      le numéro est décoratif, la légende se lit « Ta classe ». %>
-  <% section = lambda do |number, key, &content|
-       tag.div(id: "student-registration-section-#{key}", class: class_names(ComponentsHelper::CARD_BASE, "p-4 sm:p-6")) do
-         tag.fieldset(class: "min-w-0 space-y-4") do
-           legend = tag.legend(class: "mb-4 flex items-center gap-2.5 font-display text-lg font-extrabold text-ink") do
-             safe_join([ tag.span(number, "aria-hidden": true,
-                                  class: "grid size-7 shrink-0 place-items-center rounded-full bg-brand-soft text-sm font-extrabold text-brand-strong"),
-                         t(".#{key}") ], " ")
-           end
-           legend + capture(&content)
-         end
-       end
+  <%# Une légende est le titre de l'étape : focalisable (tabindex -1), le contrôleur y remet le focus à chaque changement d'étape. %>
+  <% legend = lambda do |key, hint|
+       safe_join([ tag.legend(t(".#{key}"), tabindex: -1, class: "mb-1 block text-base font-medium text-ink outline-none"),
+                   tag.p(hint, class: "mb-4 text-sm text-mute") ])
      end %>
 
-  <%= section.call(1, :classroom) do %>
-    <% if @preview %>
-      <div class="space-y-2">
-        <%= render "classroom/joins/classroom_preview", preview: @preview %>
-        <%= link_to t(".other_classroom"), new_student_registration_path, id: "other-classroom",
-                    class: "inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
+  <% if floor == 1 %>
+    <fieldset id="student-registration-section-classroom" data-step="1" data-classroom--signup-steps-target="step" class="min-w-0 space-y-4">
+      <%= legend.call(:classroom, t(".classroom_hint")) %>
+      <% if @link_invalid %>
+        <div id="classroom-link-invalid" role="alert" class="flex items-start gap-2 rounded-ln bg-warning-soft px-4 py-3 text-sm font-medium text-ink">
+          <%= ui_icon "exclamation-triangle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-warning" %>
+          <p><%= t(".link_invalid") %></p>
+        </div>
+      <% end %>
+      <%= render "classroom/student_registrations/step_alerts", step: 1, start:, floor: %>
+
+      <%# La case « Je n'ai pas de code » ouvre la cascade et masque le code (le contrôleur) ; sans JavaScript, le code et la cascade
+          restent tous deux dans la page, le code l'emportant à l'envoi. %>
+      <% cascade = @form.join_code.blank? && (@form.drena_public_id || @form.classroom_public_id).present? %>
+      <div class="space-y-4"
+           data-action="change-><%= steps %>#cascadeChanged">
+        <div id="signup-code-field" class="space-y-2" data-<%= steps %>-target="codeField">
+          <%= ui_field form, :join_code, hint: t(".code_hint"), maxlength: 6, autocomplete: "off", inputmode: "text", autocapitalize: "characters",
+                       spellcheck: false, class: "font-mono uppercase tracking-widest",
+                       data: { classroom__signup_steps_target: "code", action: "input->#{steps}#checkCode" } %>
+          <p id="signup-code-checking" hidden class="text-sm text-mute" data-<%= steps %>-target="checking"><%= t(".checking") %></p>
+          <%= turbo_frame_tag Classroom::ClassroomCodesController::FRAME, class: "block", "aria-live": "polite",
+                              data: { "#{steps}-target": "codeFrame", action: "turbo:frame-load->#{steps}#codeChecked" } %>
+        </div>
+
+        <label id="signup-no-code-label" for="signup-no-code"
+               class="flex min-h-tap cursor-pointer items-center gap-3 text-sm font-medium text-ink">
+          <%= tag.input type: "checkbox", id: "signup-no-code", checked: cascade,
+                            class: "size-5 shrink-0 cursor-pointer accent-brand-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
+                            data: { "#{steps}-target": "noCode", action: "change->#{steps}#toggleCascade" } %>
+          <%= t(".no_code") %>
+        </label>
+
+        <div id="signup-cascade" data-<%= steps %>-target="cascade">
+          <%= render "classroom/student_registrations/class_picker", form:, scope: :student_registration, **class_picker_lists %>
+        </div>
       </div>
-    <% else %>
-      <%= render "classroom/student_registrations/class_picker", form:, scope: :student_registration, **class_picker_lists %>
-    <% end %>
+    </fieldset>
   <% end %>
 
-  <%= section.call(2, :you) do %>
+  <fieldset id="student-registration-section-you" data-step="2" data-classroom--signup-steps-target="step" class="min-w-0 space-y-4"
+            data-action="input-><%= steps %>#personChanged change-><%= steps %>#personChanged">
+    <%= legend.call(:you, t(".you_hint")) %>
+    <%= render "classroom/student_registrations/step_alerts", step: 2, start:, floor: %>
+    <%# Le rappel de la classe du code ou du lien ; « Ce n'est pas ta classe ? » : le lien mène à la voie standard, le code revient à l'étape 1. %>
+    <div id="signup-classroom-recap" <%= "hidden" unless recap %> data-<%= steps %>-target="recap"
+         class="rounded-ln border border-brand/30 bg-brand-soft px-4 py-3">
+      <p class="text-xs tracking-wider text-mute uppercase"><%= t(".recap_label") %></p>
+      <p class="text-base font-medium text-ink">
+        <span data-<%= steps %>-target="recapName"><%= recap&.first %></span> ·
+        <span data-<%= steps %>-target="recapSchool"><%= recap&.last %></span>
+      </p>
+      <%= link_to t(".other_classroom"), new_student_registration_path, id: "other-classroom",
+                  data: ({ action: "click->#{steps}#restart" } unless @preview),
+                  class: "mt-1 inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
+    </div>
+
     <%= ui_field form, :last_name, required: true, maxlength: 50, autocomplete: "family-name", placeholder: t(".last_name_placeholder") %>
     <%= ui_field form, :first_name, required: true, maxlength: 80, autocomplete: "given-name", placeholder: t(".first_name_placeholder") %>
     <% gender_error = @form.errors[:gender].first %>
@@ -64,7 +88,7 @@
       </legend>
       <div class="grid grid-cols-2 gap-3">
         <% Entities::Identity::User::GENDERS.each do |gender| %>
-          <label class="relative flex h-11 items-center justify-center rounded-full border border-line bg-white px-4 font-display font-bold text-ink transition has-checked:border-brand-strong has-checked:bg-brand-strong has-checked:text-white">
+          <label class="relative flex h-11 items-center justify-center rounded-full border border-line bg-white px-4 font-medium text-ink transition has-checked:border-brand-strong has-checked:bg-brand-strong has-checked:text-white">
             <%= form.radio_button :gender, gender, required: true,
                                   class: "absolute inset-0 cursor-pointer appearance-none rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
                                   "aria-invalid": ("true" if gender_error) %>
@@ -82,9 +106,11 @@
     <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 20, inputmode: "numeric",
                  autocomplete: "tel-national", placeholder: t(".contact_placeholder"), hint: t(".contact_hint"),
                  data: { identity__phone_digits_target: "input", action: "input->identity--phone-digits#clean" } %>
-  <% end %>
+  </fieldset>
 
-  <%= section.call(3, :security) do %>
+  <fieldset id="student-registration-section-security" data-step="3" data-classroom--signup-steps-target="step" class="min-w-0 space-y-4">
+    <%= legend.call(:security, t(".security_hint")) %>
+    <%= render "classroom/student_registrations/step_alerts", step: 3, start:, floor: %>
     <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
                  hint: t(".pin_hint"), data: { identity__pin_match_target: "pin", action: "input->identity--pin-match#check" } %>
     <div class="space-y-1.5">
@@ -96,9 +122,13 @@
       <template data-identity--pin-match-target="okIcon"><%= ui_icon "check-circle", variant: :mini, size: :sm %></template>
       <template data-identity--pin-match-target="koIcon"><%= ui_icon "x-circle", variant: :mini, size: :sm %></template>
     </div>
-  <% end %>
 
-  <%# Sans JavaScript, jamais désactivé ; le contrôleur classroom--class-picker le désactive tant qu'aucune classe n'est cochée. %>
-  <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, full: true, id: "student-registration-submit",
-                              data: { "classroom--class-picker-target": "submit" } %>
+    <%# « Création… » pendant l'envoi : Turbo désactive le bouton et change son texte. Le bouton n'attend plus de classe cochée : le code suffit. %>
+    <%= ui_button t(".submit"), type: :submit, variant: :primary, size: :lg, full: true, id: "student-registration-submit",
+                  data: { turbo_submits_with: t(".submitting") } %>
+    <p class="text-center text-xs text-mute">
+      <%= t(".terms_html", terms: link_to(t(".terms_link"), terms_path, class: "text-brand-strong underline underline-offset-2"),
+                           privacy: link_to(t(".privacy_link"), privacy_path, class: "text-brand-strong underline underline-offset-2")) %>
+    </p>
+  </fieldset>
 <% end %>

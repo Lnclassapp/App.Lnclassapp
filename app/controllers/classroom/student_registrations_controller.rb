@@ -1,19 +1,21 @@
 # 🌐 DELIVERY · Classroom::StudentRegistrationsController
-# Rôle : inscription élève publique : classe choisie dans la cascade, ou donnée par le jeton d'un lien ; succès : session, accueil élève
-# ADR  : 0026, 0028, 0050, 0062, 0085 · UDR : 0079, 0081
+# Rôle : inscription élève publique en trois étapes : classe donnée par son code, par le jeton d'un lien ou choisie dans la cascade ; succès : session, accueil élève
+# ADR  : 0026, 0028, 0050, 0062, 0085, XXXX-code-de-classe-a-six-caracteres (§4.5, §4.6) · UDR : 0079, 0081, XXXX-inscription-eleve-en-trois-etapes
 module Classroom
   class StudentRegistrationsController < ApplicationController
     include ClassPicker
 
     FIELDS = %i[last_name first_name gender contact pin pin_confirmation drena_public_id school_public_id level_slug
-                classroom_public_id link_token].freeze
+                classroom_public_id link_token join_code].freeze
     # Repli sans JavaScript (UDR-0081 §3.3) : les choix reviennent en GET ; jamais les PIN, qui n'y sont pas relus.
     PICKER_FIELDS = %i[last_name first_name gender contact drena_public_id school_public_id level_slug
                        classroom_public_id].freeze
 
     allow_unauthenticated_access
-    # ADR-0085 §4.6 : la règle de l'inscription, 5 envois par minute et par adresse.
-    rate_limit to: 5, within: 1.minute, only: :create, by: -> { request.remote_ip }, with: -> { refuse_too_many_posts }
+    # ADR code-de-classe §4.5 : l'envoi de l'inscription compte dans le même débit que /c/<jeton> et la vérification d'un code
+    # (10 par minute et par adresse) : taper des codes dans l'inscription est la même devinette.
+    rate_limit **Classroom::JoinsController::LINK_RATE_LIMIT, only: :create, by: -> { request.remote_ip },
+                                                              with: -> { refuse_too_many_posts }
 
     def new
       return redirect_to_home if authenticated?
@@ -47,15 +49,21 @@ module Classroom
     end
 
     # Un lien encore valable garde son bandeau ; devenu invalide depuis l'ouverture, il laisse la voie standard et l'alerte.
+    # Un code reconnu garde le rappel de classe à l'étape 2 (UDR inscription en trois étapes §3.3).
     def show_link
       @preview = @form.link_token && Queries::Classroom::JoinPreviewQuery.new.link(token: @form.link_token)
       @link_invalid = @form.link_token.present? && @preview.nil?
+      @code_preview = Queries::Classroom::JoinCodePreviewQuery.new.code(code: @form.join_code) if @form.join_code && @preview.nil?
     end
 
+    # Au-delà du débit, rien n'est révélé : le lien garde son bandeau, le code n'est pas cherché (il serait une devinette de plus).
+    # Le message est dit à l'étape 1 (UDR inscription en trois étapes §3.5).
     def refuse_too_many_posts
       @form = form_input
-      show_link
-      render_rate_limited(:new)
+      @rate_limited = true
+      @preview = @form.link_token && Queries::Classroom::JoinPreviewQuery.new.link(token: @form.link_token)
+      @link_invalid = @form.link_token.present? && @preview.nil?
+      render :new, status: :too_many_requests
     end
 
     def form_input
