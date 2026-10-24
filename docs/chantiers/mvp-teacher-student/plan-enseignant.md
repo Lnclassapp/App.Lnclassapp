@@ -9,7 +9,7 @@
 
 **Même organisation que l'élève** : la session « MVP teacher-student » est la seule à fusionner dans la branche de chantier ; chaque lot fusionne après ses captures (390 px et ordinateur) validées par le porteur.
 
-**Calendrier : tout avant le pilote** (porteur, 2026-10-24 : « B, rien ne doit être en retard »). Pour tenir, l'orchestrateur reprend J et L et lance ses lots en agents parallèles ; Touré et Konan enchaînent un lot élève puis deux lots enseignant chacun.
+**Calendrier : tout avant le pilote** (porteur, 2026-10-24 : « B, rien ne doit être en retard »). Pour tenir, l'orchestrateur reprend J et L et lance ses lots en agents parallèles ; Touré et Konan enchaînent un lot élève puis deux lots enseignant chacun ; le lot A est repris par l'orchestrateur (porteur, 2026-10-24 : abonnement Max du porteur, Pro pour Touré et Konan).
 
 | Lot | Pilote | Dépend de | Issue | Quand |
 |---|---|---|---|---|

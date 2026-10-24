@@ -12,7 +12,7 @@
 | Lot | Pilote | Dépend de | Jour | État au 24/10, 11 h |
 |---|---|---|---|---|
 | B — Code de classe à 6 caractères | orchestrateur | — | samedi 24 | ✅ **fait** (ancien Lot 0 + ancien Lot A, `021804cc`) ; `security-reviewer` passé, aucun constat au-dessus de « bas » |
-| A — Jetons de couleurs | Touré (`toure-bangaly`), #285 | — | samedi 24 | 🟡 **à moitié** : jetons et police sur `feature/mvp-teacher-student-lot-p` (`c7a2d2b9`), non fusionnés ; reste le balayage des graisses, le test qui les refuse et les captures |
+| A — Jetons de couleurs | orchestrateur (porteur, 2026-10-24 : « option A », repris de Touré), #285 | — | samedi 24 | 🟡 **à moitié** : jetons et police sur `feature/mvp-teacher-student-lot-p` (`c7a2d2b9`), non fusionnés ; reste le balayage des graisses, le test qui les refuse et les captures |
 | F — Page d'accueil publique en photo | Konan (`konanmeschac777-cmyk`), #286 | — | samedi 24 | à faire |
 | B2 — Code visible sur la page de classe (provisoire) | orchestrateur | B | samedi 24 | à faire (porteur, 2026-10-24 : « A ») |
 | C — Inscription élève en 3 étapes | orchestrateur | B | samedi 24 | ✅ **fusionné** (`dc2c78c5`), captures validées |
@@ -207,7 +207,7 @@ Doublons cherchés mécaniquement (`awk … | sort | uniq -d`, vide). Fichiers p
 Seule la session « MVP teacher-student » fusionne dans `feature/mvp-teacher-student`, lot par lot, après les captures (390 px et ordinateur) validées par le porteur.
 
 1. **C** (inscription), dès sa revue faite : il est parti de `021804cc`, après B. **B2** (code sur la page de classe) juste après, en tout cas **avant A**, car son fichier est dans le balayage.
-2. **A** (jetons) : Touré fusionne d'abord la branche de chantier dans `-lot-p`, puis finit le balayage. Comme C est fusionné avant A, le balayage couvre aussi les vues de l'inscription. A ne fusionne qu'après les captures enseignant, direction et équipe.
+2. **A** (jetons) : l'orchestrateur fusionne d'abord la branche de chantier dans `-lot-p` (après B2), puis finit le balayage. Comme C est fusionné avant A, le balayage couvre aussi les vues de l'inscription. A ne fusionne qu'après les captures enseignant, direction et équipe.
 3. **F** (page publique), dès qu'il est prêt, avant ou après A : il ne touche que `app/views/homepage/`, que le balayage exclut.
 4. **D, E1** partent de la branche de chantier **après A** ; **E2** après A et F. Aucun ordre entre eux : si D retire l'interrupteur de l'en-tête avant que E1 ne le mette dans « Mon compte », la page Profil le porte encore (E1 l'en retire en même temps qu'il l'ajoute au menu).
 
