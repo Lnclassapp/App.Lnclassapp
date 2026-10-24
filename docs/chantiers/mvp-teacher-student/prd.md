@@ -34,7 +34,7 @@ Règles d'autorisation applicables, toutes existantes : `ReadClassroomPolicy`, c
 |---|---|
 | Élève sans lien, avec le code au tableau | Étape 1/3, il tape le code : au 6ᵉ caractère, vérification, puis étape 2 avec le rappel de classe |
 | Code inconnu, ou classe archivée | Même message sous le champ, sans dire laquelle des deux ; l'élève reste à l'étape 1 |
-| Plus de 10 essais par minute (lien, code, envoi) | 429, « Trop d'essais. Attends une minute, ou coche « Je n'ai pas de code ». » |
+| Plus de 10 essais par minute (lien, code, envoi) | 429, « Trop de tentatives. Attends une minute, ou coche « Je n'ai pas de code ». » |
 | Élève sans code ni lien | « Je n'ai pas de code » déplie la cascade DRENA → établissement → niveau → classe ; toucher une classe passe à l'étape 2 |
 | Classe complète | Tuile désactivée dans la cascade ; par code ou lien, refus comme aujourd'hui |
 | Lien de classe invalide, archivé ou régénéré | L'inscription s'ouvre à l'étape 1/3, jamais sur une erreur |

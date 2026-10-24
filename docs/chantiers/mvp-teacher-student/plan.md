@@ -9,15 +9,19 @@
 
 **Pilotes** — un lot d'orchestrateur est exécuté par l'agent `executant-lot` ; un lot de Touré ou Konan, par eux :
 
-| Lot | Pilote | Dépend de | Jour |
-|---|---|---|---|
-| A — Jetons de couleurs | Touré (`toure-bangaly`) | — | samedi 24 |
-| B — Code de classe à 6 caractères | orchestrateur | — | samedi 24 |
-| F — Page d'accueil publique en photo | Konan (`konanmeschac777-cmyk`) | — | samedi 24 |
-| C — Inscription élève en 3 étapes | orchestrateur | B | dimanche 25 |
-| D — Accueil élève, carte du prochain exercice | orchestrateur | A | dimanche 25 → lundi 26 |
-| E1 — « Mon compte » plein écran, profil sans doublons | Touré | A | dimanche 25 |
-| E2 — Ma classe, fiche, résultat, Cours | Konan | A, F | dimanche 25 → lundi 26 |
+| Lot | Pilote | Dépend de | Jour | État au 24/10, 11 h |
+|---|---|---|---|---|
+| B — Code de classe à 6 caractères | orchestrateur | — | samedi 24 | ✅ **fait** (ancien Lot 0 + ancien Lot A, `021804cc`) ; `security-reviewer` passé, aucun constat au-dessus de « bas » |
+| A — Jetons de couleurs | Touré (`toure-bangaly`) | — | samedi 24 | 🟡 **à moitié** : jetons et police sur `feature/mvp-teacher-student-lot-p` (`c7a2d2b9`), non fusionnés ; reste le balayage des graisses, le test qui les refuse et les captures |
+| F — Page d'accueil publique en photo | Konan (`konanmeschac777-cmyk`) | — | samedi 24 | à faire |
+| C — Inscription élève en 3 étapes | orchestrateur | B | samedi 24 → dimanche 25 | 🟡 **en cours** depuis 10 h 30 (session « MVP teacher-student », branche `feature/mvp-teacher-student-lot-b`, ancien nom du lot) |
+| D — Accueil élève, carte du prochain exercice | orchestrateur | A | dimanche 25 → lundi 26 | à faire |
+| E1 — « Mon compte » plein écran, profil sans doublons | Touré | A | dimanche 25 | à faire |
+| E2 — Ma classe, fiche, résultat, Cours | Konan | A, F | dimanche 25 → lundi 26 | à faire |
+
+**Un seul plan, deux sessions** (coordination du 2026-10-24) : ce fichier, sur `Develop`, est le seul plan ; le `plan.md` de 15 lots resté sur la branche de chantier est écrasé par celui-ci à la fusion de #295. La session « MVP teacher-student » tient la branche de chantier : elle exécute et fusionne les lots d'orchestrateur (C, puis D) et elle seule fusionne dans `feature/mvp-teacher-student`. Cette session tient le plan et les issues de Touré et Konan.
+
+**Déjà livré par l'ancien Lot 0, hors plan élève, à ne pas refaire** : navigation sans barre basse (élève et enseignant), `_home_band`, `Grading.class_badge_for`, panneau « Mon compte » enseignant, menu enseignant sans « Annonces », drapeaux `school_space_enabled` et `TEACHER_ANNOUNCEMENTS_ENABLED` (`config/initializers/pilot_flags.rb`), clés de « Mon compte » dans `navigation.fr.yml`. Alphabet du code : 31 symboles, sans `l` (porteur, 2026-10-24).
 
 **Rôle du porteur** : valider les captures de chaque lot (390 px et ordinateur) avant sa fusion ; recette sur un vrai téléphone Android lundi 26 ; inviter les élèves testeurs au test fermé Play Store. **Pilote : mardi 27 octobre 2026.**
 
@@ -45,6 +49,7 @@ Vague 2   D Accueil   E1 Mon      E2 Ma classe C Inscription               │
 ## Lot A — Jetons de couleurs : palette froide, DM Sans seule, graisse ≤ 500
 
 - **Couche**       : ui (jetons, composants partagés, balayage)
+- **Départ**       : la branche `feature/mvp-teacher-student-lot-p` (jetons et police déjà faits), après y avoir fusionné `feature/mvp-teacher-student`
 - **Fichiers**     : app/assets/stylesheets/application.tailwind.css *(jetons de l'UDR palette §3.1 ; `@font-face` Bricolage Grotesque retiré, `--font-display` = DM Sans)*
                      app/assets/fonts/ *(fichier Bricolage Grotesque supprimé)*
                      app/helpers/components_helper.rb *(`ui_button`, `ui_card`, `ui_badge`, `ui_field` sur les jetons)*
@@ -68,7 +73,7 @@ Vague 2   D Accueil   E1 Mon      E2 Ma classe C Inscription               │
                      app/domain/use_cases/classroom/join_as_student.rb *(élève connecté sans classe, par code)*
                      app/controllers/classroom/classroom_codes_controller.rb *(nouveau, débit `classroom/joins` partagé, 10/min/IP)*
                      app/controllers/classroom/student_registrations_controller.rb *(accepte `code`)* · app/controllers/classroom/student_classroom_choices_controller.rb *(accepte `code`)*
-                     app/views/classroom/classroom_codes/show.html.erb *(nouveau : Turbo Frame d'aperçu — trouvée, inconnue, trop d'essais)*
+                     app/views/classroom/classroom_codes/show.html.erb *(nouveau : Turbo Frame d'aperçu — trouvée, inconnue, trop de tentatives)*
                      config/routes/classroom.rb *(`GET /classroom-codes/:code`)*
                      config/locales/classroom/classroom_codes.fr.yml *(nouveau)*
                      test/fixtures/classrooms.yml *(un `join_code` par classe)*
@@ -82,7 +87,7 @@ Vague 2   D Accueil   E1 Mon      E2 Ma classe C Inscription               │
 - **Couche**       : delivery + ui
 - **Fichiers**     : app/controllers/homepage_controller.rb · app/views/homepage/index.html.erb · app/views/homepage/_role_modal.html.erb
                      app/assets/images/homepage/ *(photo WebP portrait et paysage)*
-                     config/initializers/pilot_flags.rb *(nouveau : `school_space_enabled`, éteint jusqu'au 2 novembre)*
+                     *(lit le drapeau `school_space_enabled` de `config/initializers/pilot_flags.rb`, déjà posé : il ne le modifie pas)*
                      config/locales/homepage/index.fr.yml
 - **Dépend de**    : —
 - **Test associé** : test/system/homepage_test.rb · test/controllers/homepage_controller_test.rb
@@ -109,7 +114,7 @@ Vague 2   D Accueil   E1 Mon      E2 Ma classe C Inscription               │
                      app/controllers/classroom/student_homes_controller.rb
                      app/views/classroom/student_homes/show.html.erb · _band.html.erb *(nouveau)* · _next_step.html.erb *(nouveau)* · next_step/*.html.erb *(nouveaux, un par état)* · _subjects.html.erb · _history.html.erb *(remplace `_recent_activity`)*
                      *(supprimés : `_classroom_card`, `_todo`, `_assigned_exercise`, `_daily_exercise`, `_invite_teacher`, `_no_classroom`, `_recent_activity` ; `_pending_gaps` n'est plus rendu ici, E2 le déplace)*
-                     app/views/shared/navigation/_header.html.erb *(branche élève : seul lot qui modifie l'en-tête)*
+                     app/views/shared/navigation/_header.html.erb · app/views/shared/navigation/_home_band.html.erb *(branche élève : seul lot qui modifie l'en-tête et le bandeau)*
                      app/views/layouts/shell.html.erb
                      config/locales/classroom/student_homes.fr.yml *(toutes les clés nouvelles du bandeau et de l'en-tête élève)*
 - **Dépend de**    : A
@@ -170,21 +175,24 @@ Doublons cherchés mécaniquement (`awk … | sort | uniq -d`, vide). Fichiers p
 | `app/assets/stylesheets/application.tailwind.css`, `components_helper.rb`, `badges_helper.rb` | A | D, E1, E2 partent de la version de A |
 | `test/design/design_tokens_test.rb` | A | |
 | fichiers du balayage des graisses (147) | A | A part en parallèle de B et F : il ne touche ni `app/views/homepage/` (F) ni les fichiers nouveaux de B ; C, D, E1, E2 partent **après** la fusion de A |
-| `app/views/shared/navigation/_header.html.erb`, `app/views/layouts/shell.html.erb` | D | règle anti-conflit validée : l'en-tête bleu n'est modifié que dans D |
+| `app/views/shared/navigation/_header.html.erb`, `_home_band.html.erb`, `app/views/layouts/shell.html.erb` | D | règle anti-conflit validée : l'en-tête bleu n'est modifié que dans D |
 | `app/views/shared/navigation/_avatar_menu.html.erb`, `app/helpers/navigation_helper.rb`, `config/locales/shared/navigation.fr.yml` | E1 | le menu de l'avatar appartient à E1 ; D le rend sans le modifier et met ses clés d'en-tête dans `student_homes.fr.yml` |
 | `app/views/classroom/student_homes/_pending_gaps.html.erb` | E2 | règle validée : D cesse de le rendre, seul E2 le déplace et le supprime |
 | `app/views/classroom/student_registrations/*`, `app/views/classroom/joins/new.html.erb`, `joins_controller.rb` | C | B ne touche que le contrôleur d'inscription (paramètre `code`), pas ses vues |
 | `app/controllers/classroom/student_registrations_controller.rb` | B | C n'en a pas besoin : l'étape à rouvrir se déduit des erreurs dans la vue |
-| `config/initializers/pilot_flags.rb` | F | |
+| `config/initializers/pilot_flags.rb` | — | déjà sur la branche de chantier ; F le lit sans le modifier |
 | `app/views/catalog/courses/*` | E2 | |
 
 ## Ordre de fusion dans la branche de chantier
 
-- **A, B, F** fusionnent dans l'ordre où ils sont prêts, chacun après ses captures validées par le porteur (A : enseignant, direction et équipe comprises).
-- **C part après B et après A** : C ne dépend que de B, mais ses vues (`student_registrations`, `joins`) sont dans le balayage de A. A étant prévu samedi et C dimanche, cela ne retarde rien ; si A glisse, C part de B et reprend le balayage de ses seuls fichiers.
-- **D, E1, E2** partent après A ; **E2** attend aussi F.
-- Aucun ordre imposé entre D et E1 : si D retire l'interrupteur de l'en-tête avant que E1 ne le mette dans « Mon compte », la page Profil le porte encore (E1 l'en retire en même temps qu'il l'ajoute au menu).
-- Chaque fusion : `git merge --no-ff` de la branche de lot, tests des fichiers du lot et `bin/system-changed` relancés sur la branche de chantier, puis push. Un lot ne fusionne pas sans ses captures (390 px et ordinateur) validées par le porteur.
+Seule la session « MVP teacher-student » fusionne dans `feature/mvp-teacher-student`, lot par lot, après les captures (390 px et ordinateur) validées par le porteur.
+
+1. **C** (inscription), dès sa revue faite : il est parti de `021804cc`, après B.
+2. **A** (jetons) : Touré fusionne d'abord la branche de chantier dans `-lot-p`, puis finit le balayage. Comme C est fusionné avant A, le balayage couvre aussi les vues de l'inscription. A ne fusionne qu'après les captures enseignant, direction et équipe.
+3. **F** (page publique), dès qu'il est prêt, avant ou après A : il ne touche que `app/views/homepage/`, que le balayage exclut.
+4. **D, E1** partent de la branche de chantier **après A** ; **E2** après A et F. Aucun ordre entre eux : si D retire l'interrupteur de l'en-tête avant que E1 ne le mette dans « Mon compte », la page Profil le porte encore (E1 l'en retire en même temps qu'il l'ajoute au menu).
+
+Chaque fusion : `git merge --no-ff` de la branche de lot, tests des fichiers du lot et `bin/system-changed` relancés sur la branche de chantier, puis push.
 
 ## Portes de sortie
 
