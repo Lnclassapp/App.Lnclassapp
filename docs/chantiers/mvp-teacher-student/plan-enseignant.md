@@ -5,6 +5,8 @@
 >
 > Suite du [plan élève](plan.md), même branche de chantier (`feature/mvp-teacher-student`) et même PR (#295). Les lots enseignant partent **après** les lots élève dont ils dépendent : ils lisent leurs fichiers sans les modifier. Repris des lots G à L de l'ancien plan (`c766532`), recalés sur ce que le Lot 0 et l'ancien Lot A ont déjà livré.
 
+**Téléphone d'abord**, comme pour l'élève : les versions ordinateur (UDR enseignant §3.3, §3.4, §3.5, §3.8, et les écrans encore à dessiner) viennent après ([`prd-enseignant.md`](prd-enseignant.md) §4 bis).
+
 **Même organisation que l'élève** : la session « MVP teacher-student » est la seule à fusionner dans la branche de chantier ; chaque lot fusionne après ses captures (390 px et ordinateur) validées par le porteur.
 
 **Calendrier : tout avant le pilote** (porteur, 2026-10-24 : « B, rien ne doit être en retard »). Pour tenir, l'orchestrateur reprend J et L et lance ses lots en agents parallèles ; Touré et Konan enchaînent un lot élève puis deux lots enseignant chacun.
@@ -60,7 +62,7 @@ J attend A, et pas seulement C : ses vues sont dans le balayage des graisses de 
                      *(rend `shared/navigation/_home_band` en rôle enseignant sans le modifier : il appartient à D)*
 - **Dépend de**    : A, D
 - **Test associé** : test/infrastructure/queries/classroom/teacher_home_query_test.rb · test/infrastructure/queries/classroom/teacher_follow_ups_query_test.rb · test/system/classroom/teacher_home_test.rb
-- **Done quand**   : sans classe, la carte « Ajoutez vos classes » et son bouton (CA-L1, partie accueil) ; l'accueil montre bandeau jaune, classes, niveaux et « Inviter », annonces, Cette semaine, Historique, sans barre basse ni « Bonjour » (CA-G1) ; la carte de classe montre effectif, exercices, badges sans zéro, code et « Copier » (CA-G2, CA-B8 partie accueil) ; badges de classe affichés (CA-G3) ; « + Ajouter une classe » termine le carrousel (CA-G4) ; une assignation dans une seule liste, « pas encore » ou « en retard » (CA-G6, CA-G7) ; 3 lignes puis « Voir plus » (CA-G8) ; couleurs du helper de rôle (CA-G9) ; page large sur ordinateur (CA-G10)
+- **Done quand**   : sans classe, la carte « Ajoutez vos classes » et son bouton (CA-L1, partie accueil) ; l'accueil montre bandeau jaune, classes, niveaux et « Inviter », annonces, Cette semaine, Historique, sans barre basse ni « Bonjour » (CA-G1) ; la carte de classe montre effectif, exercices, badges sans zéro, code et « Copier » (CA-G2, CA-B8 partie accueil) ; badges de classe affichés (CA-G3) ; « + Ajouter une classe » termine le carrousel (CA-G4) ; une assignation dans une seule liste, « pas encore » ou « en retard » (CA-G6, CA-G7) ; 3 lignes puis « Voir plus » (CA-G8) ; couleurs du helper de rôle (CA-G9)
 
 ## Lot K — Rapport d'un exercice en badges
 
@@ -72,7 +74,7 @@ J attend A, et pas seulement C : ses vues sont dans le balayage des graisses de 
                      config/locales/classroom/assignment_follow_ups.fr.yml · config/locales/assessment/comprehension.fr.yml *(prochain geste en badges)*
 - **Dépend de**    : A
 - **Test associé** : test/infrastructure/queries/classroom/assignment_follow_up_query_test.rb · test/system/classroom/comprehension_test.rb · test/controllers/classroom/assignment_follow_ups_controller_test.rb
-- **Done quand**   : le rapport montre « 20 / 27 faits », la pastille de retard et cinq cases par badge qui filtrent la liste, deux colonnes sur ordinateur (CA-I4) ; le prochain geste parle en badges (CA-I5) ; la direction et l'équipe voient le même rapport
+- **Done quand**   : le rapport montre « 20 / 27 faits », la pastille de retard et cinq cases par badge qui filtrent la liste (CA-I4) ; le prochain geste parle en badges (CA-I5) ; la direction et l'équipe voient le même rapport
 
 ## Lot H — Plafonds et retraits (matières, établissements)
 
@@ -95,7 +97,7 @@ J attend A, et pas seulement C : ses vues sont dans le balayage des graisses de 
                      config/locales/classroom/classrooms.fr.yml · config/locales/classroom/classroom_students.fr.yml
 - **Dépend de**    : A *(fusionne après G : la ligne provisoire du code ne part qu'une fois le code sur la carte de l'accueil)*
 - **Test associé** : test/infrastructure/queries/classroom/classroom_overview_query_test.rb · test/infrastructure/queries/classroom/student_file_query_test.rb · test/system/classroom/classroom_page_test.rb · test/system/classroom/classroom_roster_test.rb · test/system/classroom/student_file_test.rb
-- **Done quand**   : la page de classe n'a ni code ni « jours de séance », « 20 élèves » sans plafond, deux colonnes sur ordinateur (CA-I1, CA-B8 partie classe) ; le filtre « Or » ne montre que les élèves Or, « Pas encore » ceux sans badge (CA-I2) ; la fiche montre le numéro masqué, « Moyenne 14/20 · Or » et les badges nommés, sans Fragile ni Acquis (CA-I3)
+- **Done quand**   : la page de classe n'a ni code ni « jours de séance », « 20 élèves » sans plafond (CA-I1, CA-B8 partie classe) ; le filtre « Or » ne montre que les élèves Or, « Pas encore » ceux sans badge (CA-I2) ; la fiche montre le numéro masqué, « Moyenne 14/20 · Or » et les badges nommés, sans Fragile ni Acquis (CA-I3)
 
 ## Lot L — Premier parcours : déclarer ses classes, assigner, jours de séance
 
@@ -125,13 +127,13 @@ J attend A, et pas seulement C : ses vues sont dans le balayage des graisses de 
 ## Lot M — « Mon compte » enseignant
 
 - **Couche**       : ui + delivery
-- **Fichiers**     : app/views/shared/navigation/_account_panel.html.erb *(plein écran sous lg, panneau latéral de 400 px au-delà)*
+- **Fichiers**     : app/views/shared/navigation/_account_panel.html.erb *(plein écran)*
                      app/views/classroom/teacher_menus/show.html.erb · app/controllers/classroom/teacher_menus_controller.rb *(compteurs « N sur 3 »)*
                      app/helpers/navigation_helper.rb *(`ACCOUNT_PANELS[:teacher]` seulement)*
                      app/views/identity/profiles/_information.html.erb *(ligne Matières sans « Modifier »)*
 - **Dépend de**    : E1 *(`navigation_helper.rb` est à E1 pendant la vague élève)*
 - **Test associé** : test/system/identity/account_panel_test.rb · test/controllers/classroom/teacher_menus_controller_test.rb · test/system/identity/profile_test.rb
-- **Done quand**   : l'avatar ouvre un panneau plein écran avec nom, « Math · PC · sigle », les six entrées avec « N sur 3 », grisées à 3, sans « Inviter un collègue », panneau de 400 px sur ordinateur (CA-H1) ; établissement en cours dès deux (CA-H2) ; la ligne Matières du profil n'a plus « Modifier » (CA-H6)
+- **Done quand**   : l'avatar ouvre un panneau plein écran avec nom, « Math · PC · sigle », les six entrées avec « N sur 3 », grisées à 3, sans « Inviter un collègue » (CA-H1) ; établissement en cours dès deux (CA-H2) ; la ligne Matières du profil n'a plus « Modifier » (CA-H6)
 
 ## Lot N — Cours de l'enseignant
 
@@ -151,7 +153,7 @@ J attend A, et pas seulement C : ses vues sont dans le balayage des graisses de 
 |---|---|
 | CA-B6, CA-G3 (règle), CA-K1 | déjà livrés (PRD enseignant §4) |
 | CA-B8 | G (carte) et I (ligne provisoire retirée) |
-| CA-G1, CA-G2, CA-G3 (affichage), CA-G4, CA-G6 à CA-G10 | G |
+| CA-G1, CA-G2, CA-G3 (affichage), CA-G4, CA-G6 à CA-G9 | G |
 | CA-G5 | N |
 | CA-H1, CA-H2, CA-H6 | M |
 | CA-H3, CA-H4, CA-H5 | H |

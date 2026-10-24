@@ -28,6 +28,8 @@
 
 **Suite** : les lots enseignant sont dans [`plan-enseignant.md`](plan-enseignant.md) (critères : [`prd-enseignant.md`](prd-enseignant.md)).
 
+**Téléphone d'abord** (porteur, 2026-10-24) : chaque lot livre l'écran du téléphone (390 px) ; sur ordinateur, il vérifie seulement que rien n'est cassé. Les versions ordinateur (accueil en page large, « Mon compte » en panneau de 400 px, et les écrans encore à dessiner) font une phase à part, après les lots téléphone ([`prd.md`](prd.md) §4 bis).
+
 **Rôle du porteur** : valider les captures de chaque lot (390 px et ordinateur) avant sa fusion ; recette sur un vrai téléphone Android lundi 26 ; inviter les élèves testeurs au test fermé Play Store. **Pilote : mardi 27 octobre 2026.**
 
 ## Graphe
@@ -134,19 +136,19 @@ Vague 2   D Accueil   E1 Mon      E2 Ma classe C Inscription               │
                      config/locales/classroom/student_homes.fr.yml *(toutes les clés nouvelles du bandeau et de l'en-tête élève)*
 - **Dépend de**    : A
 - **Test associé** : test/infrastructure/queries/classroom/student_home_query_test.rb · test/controllers/classroom/student_homes_controller_test.rb · test/system/classroom/student_home_test.rb · test/integration/identity/student_header_test.rb · test/system/role_homes_test.rb
-- **Done quand**   : l'accueil montre bandeau, carte, grille de 7 cases, annonces, Historique, sans barre basse ni « À faire ensuite » ni « Paiement » (CA-D1, CA-K3) ; les six états de la carte s'affichent chacun dans son cas, dont l'exercice du jour quand tout est fait (CA-D2 à CA-D7) ; le point de retard est sur la bonne matière (CA-D8) ; l'en-tête de la carte ouvre Ma classe (CA-D9) ; sur ordinateur, page large (CA-D10) ; l'avatar du bandeau rend le menu de E1 sans le modifier
+- **Done quand**   : l'accueil montre bandeau, carte, grille de 7 cases, annonces, Historique, sans barre basse ni « À faire ensuite » ni « Paiement » (CA-D1, CA-K3) ; les six états de la carte s'affichent chacun dans son cas, dont l'exercice du jour quand tout est fait (CA-D2 à CA-D7) ; le point de retard est sur la bonne matière (CA-D8) ; l'en-tête de la carte ouvre Ma classe (CA-D9) ; l'avatar du bandeau rend le menu de E1 sans le modifier
 
 ## Lot E1 — « Mon compte » en panneau plein écran, profil sans doublons
 
 - **Couche**       : ui + delivery
-- **Fichiers**     : app/views/shared/navigation/_avatar_menu.html.erb *(devient le panneau « Mon compte » : plein écran sous lg, panneau latéral de 400 px au-delà ; seul lot qui modifie le menu de l'avatar)*
+- **Fichiers**     : app/views/shared/navigation/_avatar_menu.html.erb *(devient le panneau « Mon compte » plein écran ; seul lot qui modifie le menu de l'avatar)*
                      app/helpers/navigation_helper.rb *(`ACCOUNT_PANELS[:student]` : Mon profil, Modifier mon code secret)*
                      app/views/classroom/student_menus/show.html.erb · app/controllers/classroom/student_menus_controller.rb *(page de la coque Android, même liste)*
                      app/views/identity/profiles/show.html.erb · _student.html.erb · _student_identity.html.erb · _student_information.html.erb · _student_row.html.erb
                      config/locales/shared/navigation.fr.yml · config/locales/identity/profiles.fr.yml
 - **Dépend de**    : A
 - **Test associé** : test/system/identity/student_avatar_menu_test.rb · test/controllers/classroom/student_menus_controller_test.rb · test/system/identity/profile_test.rb · test/system/identity/profile_pin_test.rb
-- **Done quand**   : l'avatar ouvre « Mon compte » avec Mon profil, Modifier mon code secret, Mode sombre, Se déconnecter, et rien d'autre ; panneau de 400 px sur ordinateur (CA-E1) ; le profil a six lignes, Classe sans action, sans code secret, mode sombre ni déconnexion (CA-E2, CA-K2) ; le panneau enseignant (`_account_panel`) ne change pas
+- **Done quand**   : l'avatar ouvre « Mon compte » avec Mon profil, Modifier mon code secret, Mode sombre, Se déconnecter, et rien d'autre (CA-E1) ; le profil a six lignes, Classe sans action, sans code secret, mode sombre ni déconnexion (CA-E2, CA-K2) ; le panneau enseignant (`_account_panel`) ne change pas
 
 ## Lot E2 — Ma classe, fiche de révision, résultat, Cours
 
@@ -172,12 +174,12 @@ Les lettres des critères ne sont pas celles des lots.
 | CA-B1 à CA-B5 | B |
 | CA-B7 | B2 |
 | CA-C1 à CA-C7 | C |
-| CA-D1 à CA-D10, CA-K3 | D |
+| CA-D1 à CA-D9, CA-K3 | D |
 | CA-E1, CA-E2, CA-K2 | E1 |
 | CA-E3 à CA-E6 | E2 |
 | CA-F1 à CA-F4 | A |
 
-Aucun critère orphelin (35 critères).
+Aucun critère orphelin (34 critères ; CA-D10 passe à la phase ordinateur).
 
 ## Vérification de collision
 

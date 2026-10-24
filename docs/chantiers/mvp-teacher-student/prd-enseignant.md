@@ -2,7 +2,7 @@
 
 > Suite du [PRD élève](prd.md), même chantier. Mêmes règles : specs figées ici, le détail des écrans est dans l'[UDR enseignant](../../decisions/udr/XXXX-ecrans-enseignant-sans-repetition.md) (accepté le 2026-10-23, versions ordinateur ajoutées le 2026-10-24). Sur un écran, l'UDR gagne ; sur un comportement, ce PRD gagne.
 >
-> Repris des critères enseignant de la version `c766532` du PRD, recalés sur ce qui est déjà livré sur la branche de chantier. Numéros conservés ; l'ancien CA-B5 (code sur la carte de l'accueil) devient **CA-B8**, le numéro CA-B5 étant pris par le PRD élève.
+> Repris des critères enseignant de la version `c766532` du PRD, recalés sur ce qui est déjà livré sur la branche de chantier. Numéros conservés ; l'ancien CA-B5 (code sur la carte de l'accueil) devient **CA-B8**, le numéro CA-B5 étant pris par le PRD élève. CA-G10 (ordinateur) passe à la phase ordinateur.
 
 ## 1. Contexte
 
@@ -38,6 +38,8 @@ Règles d'autorisation applicables, toutes existantes : `ReadClassroomPolicy` (p
 | Enseignant de plusieurs établissements | L'accueil et les classes ne montrent que l'établissement courant (UDR-0098) |
 
 ## 4. Critères d'acceptation
+
+> **Téléphone d'abord** (porteur, 2026-10-24) : mêmes règles que le [PRD élève](prd.md) §4 ; les versions ordinateur viennent après (§4 bis).
 
 ### Déjà livrés (branche de chantier, PR #295)
 
@@ -104,10 +106,6 @@ Alors 3 lignes s'affichent, puis le lien discret « Voir plus » qui révèle le
 Alors le bandeau, les barres de progression et les segments d'étape sont jaune enseignant, les boutons et les liens bleus
 Et aucune vue n'écrit bg-teacher en dur : la couleur vient du helper de rôle
 
-# CA-G10
-Étant donné un enseignant sur ordinateur (≥ lg)
-Alors l'accueil est en page large, à côté de la barre latérale Accueil · Mes classes · Cours, selon la version ordinateur de l'UDR enseignant §3.3
-Et rien n'est ajouté ni retiré par rapport au téléphone
 ```
 
 ### H. Menu « Mon compte » enseignant
@@ -117,7 +115,6 @@ Et rien n'est ajouté ni retiré par rapport au téléphone
 Étant donné un enseignant qui touche son avatar
 Alors un panneau plein écran montre son nom, « Math · PC · <sigle> », puis Mon profil, Modifier mon code secret, Ajouter une matière (« 2 sur 3 »), Ajouter un établissement (« N sur 3 »), Mode sombre, Se déconnecter
 Et « Inviter un collègue » n'y figure pas
-Et sur ordinateur (≥ lg), le même contenu s'ouvre en panneau latéral droit de 400 px
 
 # CA-H2
 Étant donné un enseignant de deux établissements
@@ -149,7 +146,6 @@ Alors la ligne Matières n'a plus d'action « Modifier »
 Étant donné la page d'une classe vue par son enseignant
 Alors elle montre « Inscrire vos élèves » avec « Partager sur WhatsApp » et « Copier le lien », les exercices assignés au format « Cette semaine », les fiches à revoir, « 20 élèves » sans « sur 80 »
 Et ni la ligne provisoire du code (CA-B7, retirée quand l'accueil porte le code), ni « Vos jours de séance »
-Et sur ordinateur (≥ lg), la page est en deux colonnes égales (UDR enseignant §3.5)
 
 # CA-I2
 Étant donné le filtre « Or » de la liste des élèves
@@ -165,7 +161,6 @@ Et ni « Fragile » ni « Acquis »
 Étant donné le rapport d'un exercice fait par 20 élèves sur 27
 Alors il montre « 20 / 27 faits », « 7 en retard » si échu, et cinq cases Pas encore · Bronze · Argent · Or · Diamant
 Et toucher une case filtre la liste des élèves sur ce badge
-Et sur ordinateur (≥ lg), le rapport est en deux colonnes égales (UDR enseignant §3.8)
 
 # CA-I5
 Étant donné le prochain geste du rapport
@@ -219,6 +214,10 @@ Et avec lundi coché, l'exercice est assigné, à rendre à la prochaine séance
 Quand l'enseignant touche « Modifier les jours de la <classe> » sur la fiche
 Alors la fenêtre des jours s'ouvre avec ses jours cochés, et « Enregistrer » les remplace
 ```
+
+## 4 bis. Phase ordinateur (après les lots téléphone)
+
+Déjà décidé dans l'UDR enseignant, à construire dans cette phase : accueil en page large (§3.3, ancien CA-G10), « Mon compte » en panneau latéral de 400 px (§3.4), page de classe et rapport en deux colonnes (§3.5, §3.8). Restent à dessiner : inscription, fiche d'un élève, Cours, écrans de retrait, assignation et jours de séance.
 
 ## 5. Modélisation préliminaire
 

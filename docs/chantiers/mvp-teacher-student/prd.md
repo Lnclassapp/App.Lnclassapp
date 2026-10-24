@@ -3,7 +3,7 @@
 > Les specs sont figées ici. Toute évolution après la phase 3 se fait par modification explicite de ce fichier, pas par improvisation dans le code.
 > Le détail des écrans est dans les UDR (§6) : ce PRD dit **ce qui doit être vrai**, les UDR disent **comment c'est dessiné**. En cas d'écart sur un écran, l'UDR gagne ; sur un comportement, ce PRD gagne.
 >
-> **Élève seulement** (porteur, 2026-10-24, « option A » : l'élève d'abord, l'enseignant après). Les critères enseignant (CA-G à CA-J, CA-L, ancien CA-B5 et CA-B6, CA-K1) restent dans la version `c766532` de ce fichier ; ils reviendront dans un PRD enseignant. Les numéros gardés ne changent pas ; CA-B5 est réattribué (adhésion par code d'un élève connecté), CA-D10, CA-F4 et CA-B7 (ligne provisoire du code côté enseignant, porteur, 2026-10-24) sont nouveaux.
+> **Élève seulement** (porteur, 2026-10-24, « option A » : l'élève d'abord, l'enseignant après). Les critères enseignant (CA-G à CA-J, CA-L, ancien CA-B5 et CA-B6, CA-K1) restent dans la version `c766532` de ce fichier ; ils reviendront dans un PRD enseignant. Les numéros gardés ne changent pas ; CA-B5 est réattribué (adhésion par code d'un élève connecté), CA-F4 et CA-B7 (ligne provisoire du code côté enseignant, porteur, 2026-10-24) sont nouveaux.
 
 ## 1. Contexte
 
@@ -45,6 +45,8 @@ Règles d'autorisation applicables, toutes existantes : `ReadClassroomPolicy`, c
 | Collégien de moins de 13 ans sans compte Google | Il passe par la version web (PWA) ; rien à construire |
 
 ## 4. Critères d'acceptation
+
+> **Téléphone d'abord** (porteur, 2026-10-24) : les lots livrent les écrans du téléphone (390 px). Les versions ordinateur viennent ensuite, dans une phase à part (§4 bis). D'ici là, chaque lot vérifie seulement que son écran **reste utilisable** sur ordinateur, sans rien de cassé : la capture ordinateur sert à le prouver, pas à juger une mise en page.
 
 Chaque critère devient au moins un test ; le plan ([`plan.md`](plan.md)) dit lequel. Les numéros servent de référence dans les tests et les lots. **Les lettres des critères ne sont pas celles des lots** : le plan donne la correspondance.
 
@@ -182,10 +184,6 @@ Alors sa case porte un point de retard et son nom accessible se termine par « ,
 Quand l'élève le touche
 Alors Ma classe s'ouvre
 
-# CA-D10
-Étant donné un élève sur ordinateur (≥ lg)
-Alors l'accueil est en page large, à côté de la barre latérale Accueil · Cours · Ma classe : carte du prochain exercice et annonce sur la même rangée, grille en une ligne de 7 colonnes, Historique en deux colonnes
-Et rien n'est ajouté ni retiré par rapport au téléphone
 ```
 
 ### E. Écrans élève sans répétition
@@ -195,7 +193,6 @@ Et rien n'est ajouté ni retiré par rapport au téléphone
 Étant donné un élève qui touche son avatar
 Alors un panneau plein écran « Mon compte » s'ouvre avec, dans l'ordre : Mon profil, Modifier mon code secret, Mode sombre, Se déconnecter
 Et ni Accueil, ni Cours, ni Ma classe, ni Mon historique, ni Besoin d'aide n'y figurent
-Et sur ordinateur (≥ lg), le même contenu s'ouvre en panneau latéral droit de 400 px ; Échap, la croix ou le voile le ferment et le focus revient sur l'avatar
 
 # CA-E2
 Étant donné la page Mon profil d'un élève
@@ -255,6 +252,10 @@ Alors aucun écran ne lui propose de changer de classe
 Étant donné un élève
 Alors aucun écran ne mentionne un paiement ou un abonnement
 ```
+
+## 4 bis. Phase ordinateur (après les lots téléphone)
+
+Déjà décidé, à construire dans cette phase : accueil élève en page large (UDR accueil §3.1, ancien CA-D10) ; « Mon compte » en panneau latéral de 400 px (UDR écrans élève §3.1). Restent à dessiner : inscription, Ma classe, fiche de révision, résultat, Cours, profil, page d'accueil publique (texte à gauche, photo à droite, déjà cadrée).
 
 ## 5. Modélisation préliminaire
 
