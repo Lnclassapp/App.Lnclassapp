@@ -257,7 +257,7 @@ Alors aucun écran ne mentionne un paiement ou un abonnement
 
 Les écrans élève sont décidés, sauf Cours (à redessiner) (porteur, 2026-10-24, maquettes à 1440 et 1024 px, en gris puis en palette froide). Détail : UDR accueil §3.1, UDR inscription §3.5 bis, UDR écrans élève §3.1 et §3.6 bis ; page publique : chantier `page-d-accueil-photo` (texte à gauche, photo à droite), sans nouveau dessin. Lots : [`plan.md`](plan.md), « Phase ordinateur — élève ».
 
-> **Rien ne change sur téléphone** (porteur, 2026-10-24) : les critères du §4, issus des écrans téléphone validés le 2026-10-23, font foi. Les idées du 24 qui touchaient le téléphone (« Mon établissement », profil à carte bleue, Cours par leçons) sont retirées ; elles sont notées « pour plus tard » dans l'UDR écrans élève §3.6 bis.
+> **Rien ne change sur téléphone** (porteur, 2026-10-24) : les critères du §4, issus des écrans téléphone validés le 2026-10-23, font foi. « Mon établissement », le profil à carte bleue et Cours par leçons sont décidés **pour l'ordinateur seulement** (porteur, 2026-10-24 : « uniquement sur ordinateur, mes choix d'hier pour le téléphone ») : CA-E8, CA-E9, CA-E10, CA-E14 et CA-E15 ci-dessous. Chacun vérifie aussi qu'à 390 px l'écran reste celui du §4.
 
 Sauf mention, « sur ordinateur » veut dire une fenêtre de 1024 px de large ou plus (≥ lg), vérifiée à 1024 et à 1440 px.
 
@@ -304,6 +304,24 @@ Et la grille des matières tient sur une ligne de 7 cases, l'Historique sur deux
 Alors « Mon compte » s'ouvre en panneau latéral droit de 400 px sur un voile
 Et Échap, la croix ou un clic sur le voile le ferment, le focus revenant sur l'avatar
 
+# CA-E8 (ordinateur seulement)
+Étant donné un élève sur ordinateur qui ouvre « Mon compte »
+Alors il voit, dans l'ordre : l'en-tête (avatar, nom, classe · établissement), Mon profil, Mon établissement, Modifier mon code secret, Mode sombre, Se déconnecter
+Et Ma classe n'y figure pas
+Et à 390 px, la liste reste celle de CA-E1
+
+# CA-E9 (ordinateur seulement)
+Étant donné la page Mon profil d'un élève sur ordinateur
+Alors elle commence par une carte bleue avec l'avatar et le nom seul
+Et « Mes informations » a quatre lignes : Photo, Nom, Numéro, Inscrit·e le
+Et à 390 px, la page reste celle de CA-E2
+
+# CA-E10 (ordinateur seulement)
+Étant donné un élève avec une classe, sur ordinateur, qui choisit « Mon établissement »
+Alors un écran montre, en lecture seule : Nom, Sigle, DRENA, Type
+Et la ligne Sigle est absente si l'établissement n'en a pas
+Et un élève ne voit que l'établissement de sa classe
+
 # CA-E11
 Étant donné Ma classe sur ordinateur
 Alors « Exercices assignés » puis « Fiches à revoir » sont dans la colonne de gauche (2/3), « Exercices traités » dans celle de droite (1/3)
@@ -317,6 +335,18 @@ Et l'enseignant voit la même fiche avec la mise en page actuelle
 Étant donné le résultat d'une session sur ordinateur
 Alors le badge, la note, la maîtrise et « Recommencer » sont dans une colonne de gauche de 340 px qui reste visible quand on fait défiler la correction
 
+# CA-E14 (ordinateur seulement)
+Étant donné un élève sur ordinateur qui ouvre Cours pour une matière
+Alors il ne voit que les leçons de cette matière, une carte par leçon sur deux colonnes, dans l'ordre du programme
+Et chaque carte montre « LEÇON N », le titre, « En cours » s'il y a lieu, puis ses fiches en lignes cliquables d'au moins 44 px
+Et une leçon de plus de 3 fiches montre les 3 premières et « Voir les N fiches »
+Et une fiche à revoir porte l'étiquette « À revoir »
+Et à 390 px, la page reste celle de CA-E6
+
+# CA-E15 (ordinateur seulement)
+Étant donné un élève sur ordinateur sur la page Cours
+Alors les 6 matières sont en pastilles en haut, celle affichée pleine et marquée aria-current="page"
+Et « Cours » de la barre latérale ouvre la matière de la dernière case touchée, sinon la première de la grille
 ```
 
 ## 5. Modélisation préliminaire
