@@ -1,0 +1,18 @@
+<%# 🌐 UI · classroom/student_registrations/_step_alerts — le refus général et l'alerte « trop de tentatives », en haut de l'étape ouverte %>
+<%# Rôle : 403/422 : #student-registration-refusal ; 429 : #signup-rate-limited, à l'étape 1 (ou à l'étape 2 quand un lien a sauté l'étape 1) %>
+<%# ADR  : 0085, XXXX-code-de-classe-a-six-caracteres (§4.5) · UDR : XXXX-inscription-eleve-en-trois-etapes (§3.5) %>
+<%# locals: (step:, start:, floor:) -%>
+<% if step == start && @form.errors[:base].any? %>
+  <%# Challenger phase 5 (E1) : après un refus (403), le focus et le défilement vont à l'alerte, sous l'en-tête fixe. %>
+  <div id="student-registration-refusal" role="alert" tabindex="-1" data-autofocus-target="field"
+       class="flex scroll-mt-24 items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error outline-none">
+    <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+    <p><%= @form.errors[:base].to_sentence %></p>
+  </div>
+<% end %>
+<% if @rate_limited && step == floor %>
+  <div id="signup-rate-limited" role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
+    <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
+    <p><%= t("classroom.student_registrations.form.#{floor == 1 ? "rate_limited" : "rate_limited_link"}") %></p>
+  </div>
+<% end %>

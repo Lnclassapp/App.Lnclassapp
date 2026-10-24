@@ -9,7 +9,7 @@
                              class: "mx-auto mb-6 flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
         <%= image_tag brand_logo, alt: "", class: "size-16 rounded-card object-cover shadow-card" %>
       <% end %>
-      <p class="mb-3 font-display text-2xl font-extrabold text-ink"><%= t(".welcome") %></p>
+      <p class="mb-3 text-2xl font-medium text-ink"><%= t(".welcome") %></p>
       <p class="text-sm leading-relaxed text-mute"><%= t(".welcome_hint") %></p>
     </div>
   </section>
@@ -29,7 +29,7 @@
       <% else %>
         <%= ui_card padding: :lg do %>
           <div class="mb-6 flex flex-wrap items-center justify-center gap-x-1">
-            <h1 class="font-display text-xl font-extrabold text-ink"><%= t(current_actor ? ".student_title" : ".title") %></h1>
+            <h1 class="text-xl font-medium text-ink"><%= t(current_actor ? ".student_title" : ".title") %></h1>
             <%= ui_info_tip t(".student_info_tip"), label: t(".student_title") if current_actor %>
           </div>
 
