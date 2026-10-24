@@ -41,7 +41,7 @@ module Identity
       show_invite if result.failure?
       render_result result, form: :new, success: lambda { |registered|
         start_session(registered.token)
-        redirect_to teacher_classrooms_path, notice: t(".welcome"), status: :see_other
+        redirect_to teacher_home_path, notice: t(".welcome"), status: :see_other
       }
     end
 

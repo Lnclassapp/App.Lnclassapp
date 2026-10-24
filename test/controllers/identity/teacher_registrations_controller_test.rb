@@ -93,7 +93,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   test "IE-01: a standard sign-up attaches the teacher at once, way « standard », no join request, signed in" do
     post teacher_registrations_path, params: { teacher_registration: registration_params }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_response :see_other
     assert_equal I18n.t("identity.teacher_registrations.create.welcome"), flash[:notice]
     assert_equal [ "teacher", nil, "KOUASSI", "Aya Marie", "female" ],
@@ -117,7 +117,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
 
     post teacher_registrations_path, params: { teacher_registration: registration_params(material_slug: pc.slug, second_material_slug: @material.slug) }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal [ [ @school.id, pc.id ] ], Orm::TeacherSchoolMaterial.where(teacher: new_teacher).in_order.pluck(:school_id, :material_id)
   end
 
@@ -137,7 +137,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     post teacher_registrations_path,
          params: { teacher_registration: registration_params(last_name: " N'GUESSAN ", first_name: "Konan  Jean-Baptiste") }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal [ "N'GUESSAN", "Konan Jean-Baptiste" ], [ new_teacher.last_name, new_teacher.first_name ]
   end
 
@@ -171,7 +171,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
 
     post teacher_registrations_path, params: { teacher_registration: registration_params(contact: "+225 07 01 02 03 04") }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert Orm::User.exists?(contact: "0701020304", role: "teacher")
   end
 
@@ -249,7 +249,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
          params: { teacher_registration: registration_params(invite_token: school_token_of(referrer), drena_public_id: nil,
                                                              school_public_id: nil) }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal [ [ @school.id, true ] ], Orm::TeacherSchool.where(teacher: new_teacher).pluck(:school_id, :primary)
     assert_equal "colleague", joined_via
     assert_equal [ [ referrer.id, @school.id, "link" ] ],
@@ -280,7 +280,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
 
     post teacher_registrations_path, params: { teacher_registration: registration_params(invite_token: referral_token_of(referrer)) }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal [ [ @school.id, true ] ], Orm::TeacherSchool.where(teacher: new_teacher).pluck(:school_id, :primary)
     assert_equal "colleague", joined_via
     assert_equal [ [ referrer.id, @school.id, "sponsor" ] ], Orm::Referral.where(referee: new_teacher).pluck(:referrer_id, :school_id, :source)
@@ -305,7 +305,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
            params: { teacher_registration: registration_params(invite_token: @school.public_send(column), contact:,
                                                                drena_public_id: nil, school_public_id: nil) }
 
-      assert_redirected_to teacher_classrooms_path
+      assert_redirected_to teacher_home_path
       teacher = Orm::User.find_by!(contact:)
       assert_equal channel, Orm::TeacherProfile.find_by!(user: teacher).joined_via
       assert_equal [ @school.id ], Orm::TeacherSchool.where(teacher:).pluck(:school_id)
@@ -335,7 +335,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     post teacher_registrations_path,
          params: { teacher_registration: registration_params(invite_token: school_token_of(referrer)) }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal "standard", joined_via
     assert_equal 0, Orm::Referral.count
   end
@@ -373,7 +373,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   test "IE-23: each sign-up leaves one audit line school.changed / teacher_joined with the school and the way" do
     post teacher_registrations_path, params: { teacher_registration: registration_params }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     event = Orm::AuditEvent.sole
     assert_equal [ "school.changed", new_teacher.id, "School", @school.id, { "change" => "teacher_joined", "via" => "standard" } ],
                  [ event.action, event.actor_id, event.subject_type, event.subject_id, event.metadata ]
@@ -389,7 +389,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_select "input[name='teacher_registration[invite_token]']", 0
     post teacher_registrations_path, params: { teacher_registration: registration_params }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal "standard", joined_via
     assert_equal 0, Orm::Referral.count
     assert_equal "standard", Orm::AuditEvent.sole.metadata["via"]
@@ -398,7 +398,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   test "a way forged in the POST is ignored: standard without a token, colleague with a valid colleague's token" do
     post teacher_registrations_path, params: { teacher_registration: registration_params(joined_via: "team") }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal "standard", joined_via
     sign_out
     referrer = create_teacher(school: @school)
@@ -407,7 +407,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
          params: { teacher_registration: registration_params(contact: "05 01 02 03 99", joined_via: "direction",
                                                              invite_token: referral_token_of(referrer)) }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal "colleague", Orm::TeacherProfile.find_by!(user: Orm::User.find_by!(contact: "0501020399")).joined_via
   end
 
@@ -436,7 +436,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   test "a role added by hand is ignored, the account is a teacher" do
     post teacher_registrations_path, params: { teacher_registration: registration_params(role: "team", team_role: "admin") }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal [ "teacher", nil ], Orm::User.where(contact: "0501020304").pick(:role, :team_role)
   end
 
