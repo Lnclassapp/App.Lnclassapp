@@ -65,7 +65,7 @@ Vague 2   D Accueil   E1 Mon      E2 Ma classe C Inscription               │
                      **balayage** : chaque fichier de `app/views/` et `app/helpers/` que liste `grep -rlE 'font-(semibold|bold|extrabold|black)' app/views app/helpers` (147 fichiers au 2026-10-24), **sauf** `app/views/homepage/` (exception de l'UDR palette, lot F) — graisse ramenée à `font-medium` ou `font-normal` selon l'échelle §3.2, rien d'autre ne change
 - **Dépend de**    : —
 - **Test associé** : test/design/design_tokens_test.rb · test/helpers/components_helper_test.rb · test/helpers/assessment/badges_helper_test.rb
-- **Done quand**   : l'app entière a un fond blanc, des gris froids et une seule police (CA-F1) ; aucun texte au-dessus de 500 hors page d'accueil publique, et le test le refuse (CA-F2) ; une note de 13/20 s'affiche en encre, 14/20 en vert, jamais en rouge (CA-F3) ; **captures enseignant, direction et équipe** (390 px et ordinateur) envoyées au porteur et validées avant la fusion (CA-F4)
+- **Done quand**   : l'app entière a un fond blanc, des gris froids et une seule police (CA-F1) ; aucun texte au-dessus de 500 hors page d'accueil publique, et le test le refuse (CA-F2) ; une note de 13/20 s'affiche en encre, 14/20 en vert, jamais en rouge (CA-F3) ; **captures élève et enseignant** (390 px et ordinateur) envoyées au porteur et validées avant la fusion)
 
 ## Lot B — Code de classe à 6 caractères
 
@@ -207,7 +207,7 @@ Doublons cherchés mécaniquement (`awk … | sort | uniq -d`, vide). Fichiers p
 Seule la session « MVP teacher-student » fusionne dans `feature/mvp-teacher-student`, lot par lot, après les captures (390 px et ordinateur) validées par le porteur.
 
 1. **C** (inscription), dès sa revue faite : il est parti de `021804cc`, après B. **B2** (code sur la page de classe) juste après, en tout cas **avant A**, car son fichier est dans le balayage.
-2. **A** (jetons) : l'orchestrateur fusionne d'abord la branche de chantier dans `-lot-p` (après B2), puis finit le balayage. Comme C est fusionné avant A, le balayage couvre aussi les vues de l'inscription. A ne fusionne qu'après les captures enseignant, direction et équipe.
+2. **A** (jetons) : l'orchestrateur fusionne d'abord la branche de chantier dans `-lot-p` (après B2), puis finit le balayage. Comme C est fusionné avant A, le balayage couvre aussi les vues de l'inscription. A ne fusionne qu'après les captures élève et enseignant validées.
 3. **F** (page publique), dès qu'il est prêt, avant ou après A : il ne touche que `app/views/homepage/`, que le balayage exclut.
 4. **D, E1** partent de la branche de chantier **après A** ; **E2** après A et F. Aucun ordre entre eux : si D retire l'interrupteur de l'en-tête avant que E1 ne le mette dans « Mon compte », la page Profil le porte encore (E1 l'en retire en même temps qu'il l'ajoute au menu).
 
@@ -232,7 +232,7 @@ Chaque fusion : `git merge --no-ff` de la branche de lot, tests des fichiers du 
 Portes propres au pilote :
 
 - [ ] `security-reviewer` sur le Lot B avant sa fusion (code de classe, ID-07)
-- [ ] Captures à 390 px et sur ordinateur de chaque écran modifié, validées par le porteur, jamais commitées ; pour A, écrans enseignant, direction et équipe compris
+- [ ] Captures à 390 px et sur ordinateur de chaque écran modifié, validées par le porteur, jamais commitées ; écrans élève et enseignant seulement (porteur, 2026-10-24 : les écrans de la direction et de l'équipe ne sont pas montrés)
 - [ ] Recette sur un vrai téléphone Android, lundi 26 (porteur)
 - [ ] Élèves testeurs invités au test fermé Play Store (porteur)
 - [ ] Retour de l'« Espace établissement » le 2 novembre : drapeau `school_space_enabled` allumé, commit daté prévu

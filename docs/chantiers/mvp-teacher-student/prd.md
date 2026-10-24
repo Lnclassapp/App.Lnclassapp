@@ -238,7 +238,7 @@ Alors elle est verte à 14/20 et plus, en couleur d'encre sinon, jamais rouge
 # CA-F4
 Étant donné un écran enseignant, direction ou équipe
 Alors il prend le fond blanc et les gris froids, sans autre retouche
-Et ses captures à 390 px et sur ordinateur sont montrées au porteur avant la fusion du lot des jetons
+Et seules les captures élève et enseignant (390 px et ordinateur) sont montrées au porteur avant la fusion du lot des jetons
 ```
 
 ### K. Masquages du pilote (élève)
