@@ -109,32 +109,8 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
     assert_link I18n.t("#{FORM}.other_classroom")
   end
 
-  test "UDR §3.2: « Je n'ai pas de code » opens the cascade, hides the code, and a classroom touched moves to step 2" do
-    visit new_student_registration_path
-    check I18n.t("#{FORM}.no_code"), allow_label_click: true
-
-    assert_no_field "student_registration[join_code]"
-    select "Abidjan 1", from: "student_registration[drena_public_id]"
-    select "Collège Moderne 1 de Tiassalé", from: "student_registration[school_public_id]"
-    within("turbo-frame#picker_levels") { choose "3ème" }
-    within("turbo-frame#picker_classrooms") { choose "3e B" }
-
-    assert_step 2
-    assert_no_selector "#signup-classroom-recap", visible: :visible
-    fill_in "student_registration[last_name]", with: "KOUASSI"
-    fill_in "student_registration[first_name]", with: "Aya Marie"
-    choose I18n.t("genders.male")
-    fill_in "student_registration[contact]", with: "0701020304"
-    assert_step 3
-    fill_in "student_registration[pin]", with: "4821"
-    fill_in "student_registration[pin_confirmation]", with: "4821"
-    click_on I18n.t("#{FORM}.submit")
-
-    assert_current_path student_home_path
-    assert_equal [ "standard" ], Orm::ClassroomStudent.where(student: Orm::User.find_by!(contact: "0701020304")).pluck(:joined_via)
-  end
-
-  test "UDR §3.2: a valid code typed for class X, then « Je n'ai pas de code » and class Y in the cascade: the student enters Y, way « standard »" do
+  # One journey for both: the cascade itself, and the code typed before it, which must not win once the box is checked.
+  test "UDR §3.2: a valid code for class X, then « Je n'ai pas de code »: the code is gone, class Y touched moves to step 2, the student enters Y, way « standard »" do
     other = create_classroom(school: @school, level: @classroom.level, name: "3e C")
     visit new_student_registration_path
     fill_in "student_registration[join_code]", with: @code
@@ -143,11 +119,14 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
     assert_step 1
 
     check I18n.t("#{FORM}.no_code"), allow_label_click: true
+    assert_no_field "student_registration[join_code]"
     select "Abidjan 1", from: "student_registration[drena_public_id]"
     select "Collège Moderne 1 de Tiassalé", from: "student_registration[school_public_id]"
     within("turbo-frame#picker_levels") { choose "3ème" }
     within("turbo-frame#picker_classrooms") { choose "3e C" }
+
     assert_step 2
+    assert_no_selector "#signup-classroom-recap", visible: :visible
     fill_in "student_registration[last_name]", with: "KOUASSI"
     fill_in "student_registration[first_name]", with: "Aya Marie"
     choose I18n.t("genders.female")
