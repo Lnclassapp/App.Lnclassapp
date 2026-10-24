@@ -12,14 +12,14 @@
 | Lot | Pilote | Dépend de | Jour | État au 24/10, 11 h |
 |---|---|---|---|---|
 | B — Code de classe à 6 caractères | orchestrateur | — | samedi 24 | ✅ **fait** (ancien Lot 0 + ancien Lot A, `021804cc`) ; `security-reviewer` passé, aucun constat au-dessus de « bas » |
-| A — Jetons de couleurs | Touré (`toure-bangaly`) | — | samedi 24 | 🟡 **à moitié** : jetons et police sur `feature/mvp-teacher-student-lot-p` (`c7a2d2b9`), non fusionnés ; reste le balayage des graisses, le test qui les refuse et les captures |
-| F — Page d'accueil publique en photo | Konan (`konanmeschac777-cmyk`) | — | samedi 24 | à faire |
+| A — Jetons de couleurs | Touré (`toure-bangaly`), #285 | — | samedi 24 | 🟡 **à moitié** : jetons et police sur `feature/mvp-teacher-student-lot-p` (`c7a2d2b9`), non fusionnés ; reste le balayage des graisses, le test qui les refuse et les captures |
+| F — Page d'accueil publique en photo | Konan (`konanmeschac777-cmyk`), #286 | — | samedi 24 | à faire |
 | C — Inscription élève en 3 étapes | orchestrateur | B | samedi 24 → dimanche 25 | 🟡 **en cours** depuis 10 h 30 (session « MVP teacher-student », branche `feature/mvp-teacher-student-lot-b`, ancien nom du lot) |
 | D — Accueil élève, carte du prochain exercice | orchestrateur | A | dimanche 25 → lundi 26 | à faire |
-| E1 — « Mon compte » plein écran, profil sans doublons | Touré | A | dimanche 25 | à faire |
-| E2 — Ma classe, fiche, résultat, Cours | Konan | A, F | dimanche 25 → lundi 26 | à faire |
+| E1 — « Mon compte » plein écran, profil sans doublons | Touré, #291 | A | dimanche 25 | à faire |
+| E2 — Ma classe, fiche, résultat, Cours | Konan, #290 | A, F | dimanche 25 → lundi 26 | à faire |
 
-**Un seul plan, deux sessions** (coordination du 2026-10-24) : ce fichier, sur `Develop`, est le seul plan ; le `plan.md` de 15 lots resté sur la branche de chantier est écrasé par celui-ci à la fusion de #295. La session « MVP teacher-student » tient la branche de chantier : elle exécute et fusionne les lots d'orchestrateur (C, puis D) et elle seule fusionne dans `feature/mvp-teacher-student`. Cette session tient le plan et les issues de Touré et Konan.
+**Un seul plan, deux sessions** (coordination du 2026-10-24) : ce fichier, sur `Develop`, est le seul plan ; le `plan.md` de 15 lots resté sur la branche de chantier est écrasé par celui-ci à la fusion de #295. La session « MVP teacher-student » tient la branche de chantier : elle exécute et fusionne les lots d'orchestrateur (C, puis D) et elle seule fusionne dans `feature/mvp-teacher-student`. Cette session tient le plan et les issues de Touré et Konan. Issues des lots enseignant (#287, #288, #289, #292, #293, #294) : en attente, reprises après les lots élève.
 
 **Déjà livré par l'ancien Lot 0, hors plan élève, à ne pas refaire** : navigation sans barre basse (élève et enseignant), `_home_band`, `Grading.class_badge_for`, panneau « Mon compte » enseignant, menu enseignant sans « Annonces », drapeaux `school_space_enabled` et `TEACHER_ANNOUNCEMENTS_ENABLED` (`config/initializers/pilot_flags.rb`), clés de « Mon compte » dans `navigation.fr.yml`. Alphabet du code : 31 symboles, sans `l` (porteur, 2026-10-24).
 
