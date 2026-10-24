@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Classroom::StudentRegistrationInput
-# Rôle : forme de l'inscription élève : nom et prénoms (ADR-0037), classe choisie dans la cascade ou donnée par le jeton d'un lien
-# ADR  : 0026, 0037, 0050, 0083, 0085 · UDR : 0081
+# Rôle : forme de l'inscription élève : nom et prénoms (ADR-0037), classe donnée par le code de classe, par le jeton d'un lien ou choisie dans la cascade
+# ADR  : 0026, 0037, 0050, 0083, 0085, XXXX-code-de-classe-a-six-caracteres · UDR : 0081
 module Dtos
   module Classroom
     class StudentRegistrationInput < Identity::PersonNameInput
@@ -19,6 +19,8 @@ module Dtos
       attribute :classroom_public_id, :string
       # Porté par un champ caché, seulement quand la classe vient d'un lien ; mal formé, il est oublié.
       attribute :link_token, :string
+      # Le code de classe tapé (ADR code-de-classe §4.6) : normalisé, jamais jugé ici ; le use case dit s'il est inconnu.
+      attribute :join_code, :string
 
       attr_reader :raw_contact
 
@@ -43,6 +45,12 @@ module Dtos
         super(self.class.normalize_link_token(raw))
       end
 
+      # « K7M 4Q2 » tapé → « k7m4q2 ». Une autre forme reste telle quelle (le repository ne cherche que les codes bien formés),
+      # coupée à deux fois la longueur d'un code : une saisie démesurée n'est jamais gardée.
+      def join_code=(raw)
+        super(Entities::Classroom::JoinCode.normalize(raw).first(Entities::Classroom::JoinCode::LENGTH * 2).presence)
+      end
+
       def drena_public_id = public_id_or_nil(super)
       def school_public_id = public_id_or_nil(super)
       def level_slug = public_id_or_nil(super)
@@ -59,10 +67,10 @@ module Dtos
         errors.add(:contact, raw_contact.blank? ? :blank : :invalid)
       end
 
-      # Avec un jeton, la classe vient du lien et le use case le juge ; sans lui, la classe choisie est exigée. La DRENA,
-      # l'établissement et le niveau sont jugés par le use case, avec la classe (ADR-0085 §4.2).
+      # Avec un jeton ou un code, la classe vient du lien ou du code et le use case la juge ; sans eux, la classe choisie est
+      # exigée. La DRENA, l'établissement et le niveau sont jugés par le use case, avec la classe (ADR-0085 §4.2).
       def classroom_designated
-        return if link_token
+        return if link_token || join_code
 
         errors.add(:classroom_public_id, :blank) if classroom_public_id.blank?
       end

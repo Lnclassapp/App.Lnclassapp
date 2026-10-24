@@ -1,0 +1,19 @@
+<%# 🌐 UI · classroom/classroom_codes/show — aperçu d'un code de classe, dans le Turbo Frame #classroom_code_preview %>
+<%# Rôle : trois états, trouvée (classe, niveau, établissement, complète ?), inconnue (archivée comprise, identique), trop d'essais ; jamais un élève, un enseignant ni un identifiant %>
+<%# ADR  : XXXX-code-de-classe-a-six-caracteres (§4.4, §4.5) · UDR : 0081 %>
+<%= turbo_frame_tag Classroom::ClassroomCodesController::FRAME, class: "block", "aria-live": "polite" do %>
+  <% if @rate_limited %>
+    <p id="classroom-code-rate-limited" role="alert" class="rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error"><%= t(".rate_limited") %></p>
+  <% elsif @preview %>
+    <div id="classroom-code-found" role="status" class="rounded-ln border border-brand/30 bg-brand-soft px-4 py-3">
+      <p class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".label") %></p>
+      <p class="font-display font-extrabold text-ink"><%= @preview.classroom_name %> · <%= @preview.school_label %></p>
+      <p class="text-sm text-mute"><%= t(".level", level: @preview.level_name) %></p>
+    </div>
+    <% if @preview.full %>
+      <p id="classroom-code-full" role="alert" class="mt-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error"><%= t(".full") %></p>
+    <% end %>
+  <% else %>
+    <p id="classroom-code-unknown" role="alert" class="rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error"><%= t(".unknown") %></p>
+  <% end %>
+<% end %>

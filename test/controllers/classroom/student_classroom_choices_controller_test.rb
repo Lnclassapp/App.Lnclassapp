@@ -233,6 +233,91 @@ class Classroom::StudentClassroomChoicesControllerTest < ActionDispatch::Integra
     assert_empty open_memberships
   end
 
+  # CA-D7 (partie serveur), ADR code-de-classe-a-six-caracteres §4.7 : « Choisis ta classe » accepte le code, sans la cascade.
+  def join_by_code(code, **) = post(student_classroom_choices_path, params: { student_classroom_choice: { join_code: code, ** } })
+
+  test "CA-D7: a student without a classroom enters the classroom of the code he types, way « code », and lands home, welcomed" do
+    sign_in_as @student
+
+    join_by_code "#{@other.reload.join_code[0, 3].upcase} #{@other.join_code[3, 3]}"
+
+    assert_redirected_to student_home_path
+    assert_response :see_other
+    assert_equal I18n.t("classroom.student_classroom_choices.create.welcome"), flash[:notice]
+    assert_equal [ [ @other.id, "code" ] ], open_memberships
+  end
+
+  test "CA-D7: the code needs neither the DRENA, the school, the level nor the classroom; the cascade sent with it is ignored" do
+    sign_in_as @student
+
+    join_by_code @other.reload.join_code, classroom_public_id: @removed_from.public_id, school_public_id: "autre"
+
+    assert_redirected_to student_home_path
+    assert_equal [ [ @other.id, "code" ] ], open_memberships
+  end
+
+  test "CA-B3: an unknown code, a malformed one and the code of an archived classroom are refused alike, in 422, nothing written" do
+    archived = create_classroom(school: @school, level: @level, name: "3e 9", status: "archived")
+    sign_in_as @student
+    get new_student_classroom_choice_path # the sign-in toast is shown once, here
+    refusals = [ "zzzzzz", "kfm37", archived.reload.join_code ].map do |code|
+      join_by_code code
+      assert_response :unprocessable_entity, code
+      response.body.gsub(/value="[^"]*"/, "")
+    end
+
+    assert_equal 1, refusals.uniq.size
+    assert_empty open_memberships
+    assert I18n.exists?("#{ERRORS}.join_code.unknown")
+  end
+
+  test "the classroom the student was removed from is refused by its code, in 403: only the link brings him back" do
+    sign_in_as @student
+
+    join_by_code @removed_from.reload.join_code
+
+    assert_response :forbidden
+    assert_select "[role=alert]", text: I18n.t("#{ERRORS}.base.removed_from_classroom")
+    assert_empty open_memberships
+  end
+
+  test "a full classroom refuses the code in 403 with its reason" do
+    @other.update!(max_students: 1)
+    create_student(classroom: @other)
+    sign_in_as @student
+
+    join_by_code @other.reload.join_code
+
+    assert_response :forbidden
+    assert_select "[role=alert]", text: I18n.t("#{ERRORS}.base.classroom_full")
+    assert_empty open_memberships
+  end
+
+  test "IL-18: a student in an active classroom is refused in 403 when he types a code, nothing changes" do
+    student = create_student(classroom: @other)
+    sign_in_as student
+
+    join_by_code @removed_from.reload.join_code
+
+    assert_response :forbidden
+    assert_equal [ [ @other.id, "standard" ] ], open_memberships(student)
+  end
+
+  test "CA-B4: guessing codes while signed in is limited too: the 11th request of the minute is 429, shared with the check" do
+    sign_in_as @student
+    5.times { get classroom_code_path("zzzzzz") }
+    5.times { join_by_code "zzzzzz" }
+
+    join_by_code @other.reload.join_code
+
+    assert_response :too_many_requests
+    assert_select "[role=alert]", text: I18n.t("errors.codes.rate_limited")
+    assert_empty open_memberships
+
+    get classroom_code_path(@other.join_code)
+    assert_response :too_many_requests
+  end
+
   test "IL-18: a student in an active classroom is sent home from the page; a POST is refused in 403 with the reason" do
     student = create_student(classroom: @other)
     sign_in_as student

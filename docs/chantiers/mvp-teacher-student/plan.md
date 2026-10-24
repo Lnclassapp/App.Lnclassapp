@@ -84,7 +84,7 @@ Touré et Konan enchaînent leurs lots de vague 2 dans l'ordre de la liste ci-de
                      app/infrastructure/queries/classroom/join_code_preview_query.rb *(nouveau)*
                      app/controllers/classroom/classroom_codes_controller.rb *(nouveau, débit `classroom/joins`)*
                      app/controllers/classroom/student_classroom_choices_controller.rb *(accepte `code`)*
-                     app/views/classroom/classroom_codes/show.html.erb *(nouveau : Turbo Frame d'aperçu, trouvée / inconnue / trop d'essais)*
+                     app/views/classroom/classroom_codes/show.html.erb *(nouveau : Turbo Frame d'aperçu, trouvée / inconnue / trop de tentatives)*
                      config/locales/classroom/classroom_codes.fr.yml *(nouveau)* · config/locales/classroom/student_classroom_choices.fr.yml
                      test/controllers/classroom/student_registrations_controller_test.rb *(lignes 39 et suivantes de l'ADR-0085 : remplacées)*
 - **Dépend de**    : Lot 0
