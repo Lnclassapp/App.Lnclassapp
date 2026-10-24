@@ -47,7 +47,7 @@ Pourquoi pas un accueil en liste (comme aujourd'hui) : l'élève qui ouvre l'app
 ```
 
 - La feuille blanche (`bg-paper`, coins supérieurs `rounded-t-sheet`) commence à mi-hauteur de la carte : le bandeau ne descend pas plus bas.
-- Sur ordinateur (≥ lg) : colonne centrée de `max-w-form` à côté de la barre latérale actuelle. Le bandeau de la colonne n'affiche ni avatar ni aide, déjà présents dans la barre du haut. La barre latérale perd sa carte profil (l'avatar de la barre du haut suffit).
+- **Sur ordinateur (≥ lg) : page large** (porteur, 2026-10-24, contre la colonne étroite du 2026-10-22). Contenu centré de 57 rem (912 px) au plus, à côté de la barre latérale (Accueil · Cours · Ma classe, sans carte de profil). Le bandeau prend la largeur du contenu (96 px, coins supérieurs `rounded-card`), sans avatar ni aide (déjà dans la barre du haut). Rangée 1, à cheval sur le bandeau : la carte du prochain exercice (2/3, bouton de largeur naturelle, « Et N autres en retard › » à sa droite) et l'annonce (1/3, carte `bg-brand-soft`, points du carrousel). Rangée 2 : la grille des matières en **une ligne de 7 colonnes**. Rangée 3 : l'Historique en **deux colonnes de jours**, puis « Voir plus » centré. Rien n'est ajouté ni retiré par rapport au téléphone.
 - Partiels à créer sous `app/views/classroom/student_homes/` : `_band`, `_next_step` (un partiel par état sous `next_step/`), `_subjects` (réécrit), `_history` (remplace `_recent_activity`). Supprimer `_classroom_card` et `_todo` de l'accueil ; `_pending_gaps` part dans Ma classe (§4).
 
 ### 3.2 La carte `#student_next_step`

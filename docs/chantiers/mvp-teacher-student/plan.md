@@ -306,6 +306,16 @@ Doublons cherchés mécaniquement (`awk … | sort | uniq -d`, vide). Fichiers p
 | `app/views/catalog/essentials/_exercise_progress.html.erb` | L | E garde `essentials/show.html.erb` sans toucher au partiel |
 | `app/infrastructure/repositories/classroom/classroom_repository.rb` | A | |
 | `test/design/design_tokens_test.rb` | P (valeurs), puis Z (graisses) | vagues différentes, pas en parallèle |
+| `test/system/role_homes_test.rb`, `test/integration/identity/student_header_test.rb`, `test/integration/identity/teacher_header_test.rb`, `test/integration/app_android_shell_test.rb`, `test/guards/repository_rules_test.rb` | 0 | tests de navigation et de gardes mis à jour par le Lot 0 ; un lot de vague 2 qui les rend rouges s'arrête et commente son issue, il ne les modifie pas |
+| `test/system/classroom/teacher_home_test.rb` · `account_panel_test.rb` + `student_avatar_menu_test.rb` · `profile_test.rb` · `catalog_assignment_test.rb` | G · F · E · L | déjà retouchés par le Lot 0 : chaque lot repart de cette version (sa branche part de la branche de chantier), un seul lot par fichier |
+
+## Ordre de fusion dans la branche de chantier
+
+Les lots d'une même vague fusionnent dans l'ordre où ils sont prêts, **sauf** :
+
+- **F avant E.** Le Lot E retire l'interrupteur « Mode sombre » de la page Profil élève ; le Lot F le met dans « Mon compte ». Fusionner E d'abord laisserait l'élève sans mode sombre sur le web. Si E est prêt avant F, il attend.
+- **A avant B, B avant J** (dépendances du graphe).
+- Chaque fusion : `git merge --no-ff` de la branche de lot, tests des fichiers du lot relancés sur la branche de chantier, puis push. Un lot ne fusionne pas sans ses captures envoyées au porteur.
 
 ## Portes de sortie
 

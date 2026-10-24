@@ -81,7 +81,7 @@ Une seule règle, méthode pure du domaine (`Entities::Assessment::Grading.class
 
 - **Retirés** : `ui_page_header` (« Bonjour, Ibrahim », ligne établissement et matières, « Changer »), les `ui_card` qui enveloppent les sections, le menu ⋮ « Modifier mes classes », le bouton « Tous les cours », la carte `identity/referrals/invite` sous lg, la barre basse `shared/navigation/_bottom_bar` pour l'enseignant (`BOTTOM_TABS[:teacher]` vidé ; les routes restent).
 - Ordre figé : classes → niveaux → annonces → cette semaine → historique. `HOME_SECTIONS[:teacher]` suit cet ordre (avec `:history`).
-- Sur ordinateur (≥ lg) : colonne centrée `max-w-form` à côté de la barre latérale actuelle ; le bandeau n'y porte ni avatar ni aide (déjà dans la barre du haut). Le détail des versions ordinateur est l'étape 4 du chantier ; d'ici là la barre latérale ne change pas.
+- **Sur ordinateur (≥ lg), page large** (maquettes envoyées le 2026-10-23, page large confirmée le 2026-10-24) : contenu centré de 57 rem au plus, à côté de la barre latérale **Accueil · Mes classes · Cours** (sans carte de profil, sans Annonces) ; le bandeau prend la largeur du contenu, sans avatar ni aide. Les cartes de classe passent du carrousel à une **grille de 3 colonnes** (la carte « + Ajouter une classe » en dernier), à cheval sur le bandeau ; les ronds de niveau en une ligne ; l'annonce en pleine largeur ; puis **« Cette semaine » et « Historique » côte à côte**, titres visibles sur ordinateur.
 
 **Carte de classe** (`_classroom_card.html.erb`, réécrit). `bg-white border-line rounded-card shadow-card`, padding 18 px, largeur ≈ 82 % de l'écran pour laisser voir la suivante :
 
@@ -115,7 +115,7 @@ Une seule règle, méthode pure du domaine (`Entities::Assessment::Grading.class
 
 ### 3.4 Menu « Mon compte » (`shared/navigation/_account_panel.html.erb`, `classroom/teacher_menus/show`, `NavigationHelper::ACCOUNT_PANELS[:teacher]`)
 
-- **Plein écran, 100 % de la largeur**, sur le site comme dans la coque Android : en haut « Mon compte » (16 px, 500) et la croix de fermeture (44 px). Remplace la `<dialog>` latérale.
+- **Plein écran, 100 % de la largeur** sur téléphone et dans la coque Android : en haut « Mon compte » (16 px, 500) et la croix de fermeture (44 px). **Sur ordinateur (≥ lg) : panneau latéral droit de 400 px** (porteur, 2026-10-24), pleine hauteur, voile `bg-ink/40`, même contenu.
 - En-tête : avatar 56 px, nom (18 px, 500), dessous « Math · PC · CSMT » : noms courts des matières puis sigle de l'établissement courant (13 px `text-mute`). Noms courts : clé partagée `shared.subjects.short` (déplacée depuis `classroom.student_homes.subjects.short`), sinon le nom entier ; sans sigle, le nom de l'établissement.
 - **Établissement en cours** (dès deux établissements) : libellé 12 px majuscules, puis une ligne par établissement (sigle 14 px, nom 13 px `text-mute`, bouton radio) ; l'établissement courant est `border-brand-strong bg-brand-soft`. Toucher une ligne change l'établissement courant (action actuelle, UDR-0098).
 - Entrées, dans cet ordre, ligne ≥ 56 px, rond 40 px `bg-brand-soft` avec icône au trait `text-brand-strong`, chevron :
@@ -143,6 +143,7 @@ Une seule règle, méthode pure du domaine (`Entities::Assessment::Grading.class
 - `_assigned_exercises` : lignes au format de « Cette semaine » (§3.3 : barre, « N / M faits », pastille retard ou pas encore).
 - `_gaps` (Fiches à revoir) : inchangé, après les exercices.
 - `_roster_title` : « 20 élèves », **sans « sur 80 »** ni plafond expliqué.
+- **Sur ordinateur (≥ lg)** : deux colonnes égales — à gauche « Inscrire vos élèves », exercices assignés, Fiches à revoir ; à droite « 20 élèves », recherche, filtres et liste. « Mes classes » est actif dans la barre latérale.
 - `_roster` : recherche inchangée ; **filtres par badge** à la place des groupes de notes : puces « Tous · Bronze · Argent · Or · Diamant · Pas encore » (34 px de haut, zone tactile 44 px, défilement horizontal, puce active `bg-brand-strong text-white`), paramètre `badge=` dans le frame `classroom_roster_list`. Ligne : initiales 36 px, nom 14 px, « 9 faits sur 18 » 13 px (+ « · 1 en retard » `text-warning`), pastille du badge à droite « Or · 15/20 » (§3.1) ou « Pas encore » `text-mute`.
 
 ### 3.6 Fiche d'un élève (`classroom/classroom_students/show.html.erb`)
@@ -165,6 +166,7 @@ Une seule règle, méthode pure du domaine (`Entities::Assessment::Grading.class
 - **Cinq cases par badge**, pour les élèves qui ont fait l'exercice : Pas encore · Bronze · Argent · Or · Diamant. Case : trophée 18 px (espace vide pour « Pas encore »), nombre 18 px, libellé 12 px, bordure `border-line`. Chaque case est un lien du Turbo Frame (`?badge=`), comme les catégories d'aujourd'hui.
 - Correspondance avec UDR-0072 : En difficulté → Pas encore ; Fragile → Bronze ; Acquis → Argent, Or ou Diamant. Le grand cercle disparaît.
 - **Prochain geste** : carte `bg-brand-soft`, libellé « PROCHAIN GESTE » 12 px `text-brand-strong`, texte 14 px qui parle en badges (« 4 élèves n'ont pas encore de badge. Reprenez la question 3 en classe, puis relancez-les. »). Les clés i18n du prochain geste sont réécrites dans ce vocabulaire.
+- **Sur ordinateur (≥ lg)** : « Voir l'exercice » à droite du titre ; deux colonnes égales — à gauche progression, cases par badge, prochain geste et questions ; à droite la liste des élèves.
 - Questions (barre de réussite, « 18 / 20 justes ») et élèves (lien vers la fiche, pastille de note avec trophée, « En retard » si non fait et échu) : gardés.
 
 ### 3.9 Inscription (`identity/teacher_registrations/new.html.erb`, `_form`)
