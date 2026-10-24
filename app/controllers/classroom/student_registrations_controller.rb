@@ -12,10 +12,13 @@ module Classroom
                        classroom_public_id].freeze
 
     allow_unauthenticated_access
-    # ADR code-de-classe §4.5 : l'envoi de l'inscription compte dans le même débit que /c/<jeton> et la vérification d'un code
-    # (10 par minute et par adresse) : taper des codes dans l'inscription est la même devinette.
+    # Deux plafonds, les deux gardés : ADR code-de-classe §4.5, l'envoi compte dans le même débit que /c/<jeton> et la
+    # vérification d'un code (10 par minute et par adresse), taper des codes dans l'inscription étant la même devinette ;
+    # ADR-0085 §4.6, l'envoi seul est limité à 5 par minute et par adresse. Même réponse « Trop de tentatives » pour les deux.
     rate_limit **Classroom::JoinsController::LINK_RATE_LIMIT, only: :create, by: -> { request.remote_ip },
                                                               with: -> { refuse_too_many_posts }
+    rate_limit to: 5, within: 1.minute, only: :create, name: "signup", by: -> { request.remote_ip },
+                                                         with: -> { refuse_too_many_posts }
 
     def new
       return redirect_to_home if authenticated?

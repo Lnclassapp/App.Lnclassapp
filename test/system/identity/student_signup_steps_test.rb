@@ -134,6 +134,34 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
     assert_equal [ "standard" ], Orm::ClassroomStudent.where(student: Orm::User.find_by!(contact: "0701020304")).pluck(:joined_via)
   end
 
+  test "UDR §3.2: a valid code typed for class X, then « Je n'ai pas de code » and class Y in the cascade: the student enters Y, way « standard »" do
+    other = create_classroom(school: @school, level: @classroom.level, name: "3e C")
+    visit new_student_registration_path
+    fill_in "student_registration[join_code]", with: @code
+    assert_step 2
+    click_on I18n.t("#{FORM}.back")
+    assert_step 1
+
+    check I18n.t("#{FORM}.no_code"), allow_label_click: true
+    select "Abidjan 1", from: "student_registration[drena_public_id]"
+    select "Collège Moderne 1 de Tiassalé", from: "student_registration[school_public_id]"
+    within("turbo-frame#picker_levels") { choose "3ème" }
+    within("turbo-frame#picker_classrooms") { choose "3e C" }
+    assert_step 2
+    fill_in "student_registration[last_name]", with: "KOUASSI"
+    fill_in "student_registration[first_name]", with: "Aya Marie"
+    choose I18n.t("genders.female")
+    fill_in "student_registration[contact]", with: "0701020304"
+    assert_step 3
+    fill_in "student_registration[pin]", with: "4821"
+    fill_in "student_registration[pin_confirmation]", with: "4821"
+    click_on I18n.t("#{FORM}.submit")
+
+    assert_current_path student_home_path
+    student = Orm::User.find_by!(contact: "0701020304")
+    assert_equal [ [ other.id, "standard" ] ], Orm::ClassroomStudent.where(student:).pluck(:classroom_id, :joined_via)
+  end
+
   test "CA-C6: a number already used reopens step 2 with the error under the field" do
     create_student(contact: "0701020304", classroom: @classroom)
     visit new_student_registration_path

@@ -151,6 +151,15 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_select "input#student_registration_join_code[aria-invalid=true][value='zzzzzz']"
   end
 
+  test "CA-B3: the code of an archived classroom is refused like an unknown code, no account" do
+    archived = create_classroom(school: @school, level: @level, name: "3e 3", status: "archived")
+
+    register(join_code: archived.reload.join_code, classroom_public_id: nil)
+
+    assert_refused :join_code, I18n.t("#{ERRORS}.join_code.unknown")
+    assert_equal 1, start_step
+  end
+
   test "CA-C6: an error on the number reopens step 2, on the secret code step 3, on the classroom step 1" do
     register(contact: "070102030")
     assert_equal 2, start_step
@@ -437,6 +446,7 @@ end
     register
 
     assert_response :unprocessable_entity
+    assert_equal 2, start_step
     assert_select "#student_registration_contact_error", text: I18n.t("#{ERRORS}.contact.taken")
     assert_equal "Ce numéro est déjà utilisé.", I18n.t("#{ERRORS}.contact.taken")
     assert_equal 0, Orm::ClassroomStudent.count
@@ -548,6 +558,38 @@ end
 
     get new_student_registration_path
     assert_response :success
+  end
+
+  # ADR-0085 §4.6, kept next to the shared counter: the sign-up alone is limited to 5 a minute and per address.
+  test "ADR-0085 §4.6: a sixth valid sign-up by code from the same address receives 429, no account created" do
+    code = @classroom.reload.join_code
+    5.times do |i|
+      post student_registrations_path, params: { student_registration: registration_params(join_code: code, classroom_public_id: nil,
+                                                                                             contact: "070102030#{i}") }
+      assert_redirected_to student_home_path
+      sign_out
+    end
+    accounts = Orm::User.count
+
+    post student_registrations_path, params: { student_registration: registration_params(join_code: code, classroom_public_id: nil,
+                                                                                           contact: "0701020309") }
+
+    assert_response :too_many_requests
+    assert_select "#signup-rate-limited[role=alert]", text: I18n.t("#{FORM}.rate_limited")
+    assert_equal accounts, Orm::User.count
+    assert_not Orm::User.exists?(contact: "0701020309")
+  end
+
+  test "IL-23: past the limit, a valid code does not show the class recap" do
+    code = @classroom.reload.join_code
+    10.times { register(join_code: code, pin_confirmation: "1357") }
+
+    register(join_code: code)
+
+    assert_response :too_many_requests
+    assert_select "#signup-classroom-recap:not([hidden])", 0
+    assert_select "#signup-rate-limited[role=alert]"
+    assert_not Orm::User.exists?(contact: "0701020304")
   end
 
   test "IL-23: past the limit, a valid link keeps its banner" do
