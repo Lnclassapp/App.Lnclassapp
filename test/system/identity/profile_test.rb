@@ -39,7 +39,7 @@ test "the switch next to the avatar turns the page dark at once, and the choice 
   background = -> { page.evaluate_script("getComputedStyle(document.body).backgroundColor") }
   switch = -> { find("header button[role=switch]") }
 
-  assert_equal "rgb(250, 248, 244)", background.call
+  assert_equal "rgb(255, 255, 255)", background.call
   switch.call.click
 
   assert_selector "html[data-theme=dark]"
@@ -52,7 +52,7 @@ test "the switch next to the avatar turns the page dark at once, and the choice 
   switch.call.click
 
   assert_selector "html[data-theme=light]"
-  assert_equal "rgb(250, 248, 244)", background.call
+  assert_equal "rgb(255, 255, 255)", background.call
 end
 
   # The student opens « Mon profil » from the avatar menu (UDR-0084 §3.2), the teacher from the account panel of the
