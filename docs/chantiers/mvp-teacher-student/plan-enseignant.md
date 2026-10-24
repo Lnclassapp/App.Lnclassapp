@@ -17,7 +17,7 @@
 | L — Premier parcours : déclarer, assigner, jours de séance | orchestrateur | A | #294 | dimanche 25 |
 | K — Rapport d'un exercice en badges | Touré (`toure-bangaly`) | A | #288 | dimanche 25, après E1 |
 | H — Plafonds et retraits (matières, établissements) | Konan (`konanmeschac777-cmyk`) | A | #292 | dimanche 25, après E2 |
-| G — Accueil enseignant | Touré | A, D | #287 | lundi 26, matin |
+| G — Accueil enseignant | Touré | A, D, J | #287 | lundi 26, matin |
 | I — Page de classe et fiche d'un élève | Konan | A ; fusionne après G | #293 | lundi 26, matin |
 | M — « Mon compte » enseignant | orchestrateur | E1 | — | lundi 26, matin |
 | N — Cours de l'enseignant | orchestrateur | E2 | — | lundi 26, matin |
@@ -59,9 +59,10 @@ J attend A, et pas seulement C : ses vues sont dans le balayage des graisses de 
                      app/controllers/classroom/teacher_homes_controller.rb
                      app/views/classroom/teacher_homes/show.html.erb · _classroom_card.html.erb · _add_classroom_card.html.erb *(nouveau)* · _course_levels.html.erb · _follow_ups.html.erb · _history.html.erb *(nouveau)*
                      config/locales/classroom/teacher_homes.fr.yml
+                     app/infrastructure/queries/identity/home_destination_query.rb *(branche enseignant : un enseignant sans classe va sur l'accueil, qui porte « Ajoutez vos classes » (UDR §3.13) ; plus de renvoi vers « Quelles classes enseignez-vous ? » à la fin de l'onboarding ; l'écran de sortie de TR-02 reste)*
                      *(rend `shared/navigation/_home_band` en rôle enseignant sans le modifier : il appartient à D)*
-- **Dépend de**    : A, D
-- **Test associé** : test/infrastructure/queries/classroom/teacher_home_query_test.rb · test/infrastructure/queries/classroom/teacher_follow_ups_query_test.rb · test/system/classroom/teacher_home_test.rb
+- **Dépend de**    : A, D, J *(J touche aussi `teacher_signup_test.rb` : G part après sa fusion)*
+- **Test associé** : test/infrastructure/queries/classroom/teacher_home_query_test.rb · test/infrastructure/queries/classroom/teacher_follow_ups_query_test.rb · test/system/classroom/teacher_home_test.rb · test/infrastructure/queries/identity/home_destination_query_test.rb *(TR-02 réécrit)* · test/system/identity/teacher_signup_test.rb l.42, test/system/identity/teacher_materials_test.rb l.30, test/system/identity/cold_start_test.rb l.32 *(attendent aujourd'hui `teacher_classrooms_path` après l'inscription : passent à l'accueil)*
 - **Done quand**   : sans classe, la carte « Ajoutez vos classes » et son bouton (CA-L1, partie accueil) ; l'accueil montre bandeau jaune, classes, niveaux et « Inviter », annonces, Cette semaine, Historique, sans barre basse ni « Bonjour » (CA-G1) ; la carte de classe montre effectif, exercices, badges sans zéro, code et « Copier » (CA-G2, CA-B8 partie accueil) ; badges de classe affichés (CA-G3) ; « + Ajouter une classe » termine le carrousel (CA-G4) ; une assignation dans une seule liste, « pas encore » ou « en retard » (CA-G6, CA-G7) ; 3 lignes puis « Voir plus » (CA-G8) ; couleurs du helper de rôle (CA-G9)
 
 ## Lot K — Rapport d'un exercice en badges
