@@ -2,7 +2,8 @@ require "application_system_test_case"
 
 # RE-21, RE-23 (UDR-0069 §3.8) : depuis une fiche du catalogue, l'enseignant assigne un exercice à l'une de ses classes du
 # niveau et de la série du cours. La bascule, la modale des jours (la première fois) et les streams sont ceux de la classe
-# (UDR-0062 §3.4) : tout change en place, sans rechargement. La page d'un exercice (RE-22) porte les mêmes bascules : elle
+# (UDR-0062 §3.4) : tout change en place, sans rechargement. Lot L (UDR enseignant §3.13) : un seul « Assigner » plein, plus de
+# « Plus tard » (sans jour, 422 avec l'erreur), « Prochaine séance : … », puis « Modifier les jours de la … » qui les remplace. La page d'un exercice (RE-22) porte les mêmes bascules : elle
 # est prouvée au niveau contrôleur (budget de la suite système, ADR-0069 §9). Horloge : lundi 5 octobre 2026.
 class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
   DAYS_MODAL = "turbo-frame#modal dialog[open]".freeze
@@ -32,13 +33,21 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
     assert_selector "#essential_exercises [id^='assignment_']", count: 4
     assert_no_selector "[id^='assignment_#{@tle_c1.public_id}_']"
     assert_no_text "Tle C 1"
+    assert_selector "#essential_exercises .ui-button-primary", count: 1
+    assert_selector "#{toggle(@tle_d1, @phases)} .ui-button-primary"
 
     assert_no_page_reload do
       within(toggle(@tle_d1, @phases)) { click_on "Assigner" }
       within DAYS_MODAL do
         assert_selector "h2", text: "Quels jours voyez-vous la Tle D 1 ?"
+        assert_no_text "Plus tard"
+        assert_no_text "Prochaine séance"
+        click_on "Assigner" # sans jour : refusé, l'erreur sous les jours, rien d'écrit
+        assert_selector "#assignment_weekdays_error", text: "Cochez au moins un jour."
         find("label", text: "Lun.").click
         find("label", text: "Jeu.").click
+        assert_text "Prochaine séance : jeudi 8 oct."
+        assert_no_selector "#assignment_weekdays_error" # un jour coché efface l'erreur
         click_on "Assigner"
       end
       assert_toast "Les phases ajouté à Tle D 1, à rendre jeudi 8 oct."
@@ -59,6 +68,16 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
       # l'avatar de l'en-tête (le mode sombre est dans « Mon compte », plus de lune) doit rester visible.
       assert_selector "header a[aria-controls=account_panel]", visible: true, wait: 1
       assert_no_selector DAYS_MODAL
+      # CA-L4 : « Modifier les jours de la Tle D 1 » rouvre la fenêtre avec ses jours cochés ; « Enregistrer » les remplace.
+      click_on "Modifier les jours de la Tle D 1"
+      within DAYS_MODAL do
+        assert_selector "input[type=checkbox]:checked", count: 2, visible: :all
+        find("label", text: "Ven.").click
+        click_on "Enregistrer"
+      end
+      assert_toast "Jours de séance enregistrés."
+      assert_no_selector DAYS_MODAL
+      dismiss_toasts
       # Tle D 2 n'a pas encore ses jours : sa bascule ouvre toujours la modale.
       within(toggle(@tle_d2, @bilan)) { click_on "Assigner" }
       assert_selector DAYS_MODAL, text: "Quels jours voyez-vous la Tle D 2 ?"
@@ -66,6 +85,7 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
 
     assert_equal [ [ @tle_d1.id, Date.new(2026, 10, 8) ] ] * 2,
                  Orm::ClassroomAssignment.where(status: "active").order(:id).pluck(:classroom_id, :due_on)
+    assert_equal [ 1, 4, 5 ], Orm::ClassroomSessionDay.where(teacher_id: @teacher.id, classroom_id: @tle_d1.id).pluck(:weekday).sort
   end
 
   # CA-7 (UDR-0077 §3.3) : à 375 px, la ligne d'une classe tient sur une ligne — la classe à gauche, « Assigné » et ✕ à
