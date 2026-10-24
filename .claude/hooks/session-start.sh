@@ -42,7 +42,9 @@ export PATH="$NODE_DIR/bin:$PATH"
 corepack enable
 
 # --- Chrome for the system tests: the preinstalled Chromium and the chromedriver of the same version ------
-CHROME_BIN="$(ls -d /opt/pw-browsers/chromium-*/chrome-linux/chrome 2>/dev/null | sort -V | tail -1)"
+# chrome-linux (old Playwright builds) or chrome-linux64 (since chromium-1243). `|| true`: no match must not stop
+# the hook under `set -o pipefail`; the `else` below reports it.
+CHROME_BIN="$(ls -d /opt/pw-browsers/chromium-*/chrome-linux*/chrome 2>/dev/null | sort -V | tail -1 || true)"
 if [ -n "$CHROME_BIN" ]; then
   CHROME_VERSION="$("$CHROME_BIN" --version | grep -oE '[0-9]+(\.[0-9]+){3}')"
   CHROMEDRIVER_PATH="/opt/chromedriver-$CHROME_VERSION/chromedriver"
