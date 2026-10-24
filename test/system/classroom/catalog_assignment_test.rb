@@ -68,6 +68,11 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
       # l'avatar de l'en-tête (le mode sombre est dans « Mon compte », plus de lune) doit rester visible.
       assert_selector "header a[aria-controls=account_panel]", visible: true, wait: 1
       assert_no_selector DAYS_MODAL
+      # Tle D 2 n'a pas encore ses jours : sa bascule ouvre toujours la modale.
+      within(toggle(@tle_d2, @bilan)) { click_on "Assigner" }
+      assert_selector DAYS_MODAL, text: "Quels jours voyez-vous la Tle D 2 ?"
+      within(DAYS_MODAL) { click_on "Annuler" } # ferme sans rien écrire
+      assert_no_selector DAYS_MODAL
       # CA-L4 : « Modifier les jours de la Tle D 1 » rouvre la fenêtre avec ses jours cochés ; « Enregistrer » les remplace.
       click_on "Modifier les jours de la Tle D 1"
       within DAYS_MODAL do
@@ -77,10 +82,6 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
       end
       assert_toast "Jours de séance enregistrés."
       assert_no_selector DAYS_MODAL
-      dismiss_toasts
-      # Tle D 2 n'a pas encore ses jours : sa bascule ouvre toujours la modale.
-      within(toggle(@tle_d2, @bilan)) { click_on "Assigner" }
-      assert_selector DAYS_MODAL, text: "Quels jours voyez-vous la Tle D 2 ?"
     end
 
     assert_equal [ [ @tle_d1.id, Date.new(2026, 10, 8) ] ] * 2,
