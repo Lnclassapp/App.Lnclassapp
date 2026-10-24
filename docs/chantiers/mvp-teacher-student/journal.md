@@ -19,6 +19,10 @@
 | 2026-10-24 | Lot B, revue sécurité : l'envoi garde aussi son plafond propre de 5 par minute et par IP (`signup`, ADR-0085 §4.6), en plus du compteur partagé `classroom/joins` | Sans lui, le plafond de l'envoi doublait (5 → 10) : deux fois plus de numéros sondés (« déjà inscrit ») et de comptes fictifs par minute | Non |
 | 2026-10-24 | Lot B : captures validées ; sans JavaScript, un code tapé l'emporte sur « Je n'ai pas de code » cochée (porteur, 2026-10-24 : « oui pour 1, 2 et 3 ») | Le serveur suit la priorité lien > code > cascade ; avec JavaScript, cocher la case vide et désactive le champ du code | Non |
 | 2026-10-24 | Lot B : l'étape ouverte après une erreur est calculée dans la vue (première étape qui porte une erreur, au moins l'étape 2 par un lien) | Le contrôleur Stimulus reçoit `start`, et le re-rendu 422 (morphing) le relit | Non |
+| 2026-10-24 | Lot J : à l'étape 2, la matière est posée **avant** le nom, et non en dernier comme dans l'UDR §3.9 | `signup_steps_controller.js` (réutilisé sans changement) passe à l'étape 3 dès que les champs de texte, le genre et le numéro sont valides et ne regarde pas les listes : avec la matière après le numéro, tout enseignant serait emmené à l'étape 3 avant de la choisir | À confirmer par le porteur (UDR §3.9) |
+| 2026-10-24 | Lot J : l'établissement choisi à l'étape 1 fait passer à l'étape 2 par `change->classroom--signup-steps#go` (paramètre `step=2`) posé sur un conteneur de `_school_fields`, pas dans `school/drena_schools/index` | Le conteneur survit au remplacement du cadre « schools » ; l'action `go` existe déjà dans le contrôleur de l'élève | Non |
+| 2026-10-24 | Lot J : les segments d'étape restent `bg-brand-strong`, pas `bg-teacher` (UDR enseignant §3.1) | Le contrôleur bascule en dur `bg-brand-strong` / `bg-line` ; le jaune demande une valeur de classe dans le contrôleur (hors lot) | À trancher avec le Lot P |
+| 2026-10-24 | Lot J : sur ordinateur, la page reste en une colonne de 28 rem centrée (comme l'inscription élève) ; les deux colonnes et le panneau jaune viennent au lot P4 | Téléphone d'abord (porteur, 2026-10-24) | Non |
 
 ## Ce qui a dérapé
 
@@ -40,6 +44,7 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - `ActiveRecord insert_all!` ne lit ni les `attribute … default:` ni les callbacks : tout défaut d'une colonne `NOT NULL` ajoutée doit être en base.
 - `test/design/design_tokens_test.rb` interdit toute valeur arbitraire Tailwind (`text-[13px]`, `group-has-[…]`) : la sous-ligne « 13 px » de l'UDR devient `text-sm` (aucun jeton de 13 px), et l'ouverture de la cascade se fait dans le contrôleur Stimulus, pas par une variante `:has` du CSS.
 - `test/guards/system_budget_test.rb` : un test système nouveau doit être enregistré dans `script/ci/test_timings.yml` (`script/ci/record_timings`) ; `student_signup_steps_test.rb` y ajoute 10,5 s ; le test ajouté par la revue (un code, puis « Je n'ai pas de code ») a été fondu dans celui de la cascade, sinon le fichier pesait 20 s, au-delà du budget.
+- Lot J : `second_material_slug` n'avait pas d'autre appelant que `RegisterTeacher`, le DTO, le contrôleur, la vue et leurs tests (grep sur `app test config lib script`). Quatre tests système hors fiche remplissaient l'ancien formulaire d'une page : `cold_start_test` (le champ du numéro n'existe qu'à l'étape 2) et `teacher_materials_test` (une seule matière à l'inscription, deux ajoutées au profil) ont été recalés ; `invite_colleague_test` et `boucle_pedagogique_test` passent sans changement (le remplissage suit l'ordre des étapes).
 
 ## Dette laissée derrière
 
