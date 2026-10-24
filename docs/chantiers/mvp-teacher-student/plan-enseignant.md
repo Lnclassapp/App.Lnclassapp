@@ -143,7 +143,7 @@ J attend A, et pas seulement C : ses vues sont dans le balayage des graisses de 
                      config/locales/catalog/courses.fr.yml
 - **Dépend de**    : E2 *(mêmes vues que le Cours de l'élève)*
 - **Test associé** : test/controllers/catalog/courses_controller_test.rb · test/system/catalog/teacher_courses_test.rb *(nouveau)*
-- **Done quand**   : un rond de niveau ouvre « Cours de Tle D », « ‹ Accueil », sans menus Niveau ni Série, sans « Tle D » sur chaque ligne ; un bivalent voit les puces de matière (CA-G5) ; le Cours de l'élève ne change pas
+- **Done quand**   : un rond de niveau ouvre « Cours de Tle D », « ‹ Accueil », sans menus Niveau ni Série, sans « Tle D » sur chaque ligne ; un bivalent voit les puces de matière (CA-G5) ; les puces sont les matières de l’établissement courant, une à la fois, et chaque fiche de cours est une carte qui porte ses fiches de révision (CA-N1) ; le Cours de l’élève ne change pas
 
 ---
 
@@ -154,7 +154,7 @@ J attend A, et pas seulement C : ses vues sont dans le balayage des graisses de 
 | CA-B6, CA-G3 (règle), CA-K1 | déjà livrés (PRD enseignant §4) |
 | CA-B8 | G (carte) et I (ligne provisoire retirée) |
 | CA-G1, CA-G2, CA-G3 (affichage), CA-G4, CA-G6 à CA-G9 | G |
-| CA-G5 | N |
+| CA-G5, CA-N1 | N |
 | CA-H1, CA-H2, CA-H6 | M |
 | CA-H3, CA-H4, CA-H5 | H |
 | CA-I1, CA-I2, CA-I3 | I |
