@@ -7,7 +7,7 @@
 <% grading = Entities::Assessment::Grading %>
 <% tone = grading.reaches?(result.score_percent, grading::MASTERY_THRESHOLD) ? :success : :error %>
 <% tile = "rounded-ln bg-mist px-3 py-3 text-center" %>
-<% label = "text-2xs font-bold tracking-wide text-mute uppercase" %>
+<% label = "text-2xs font-medium tracking-wide text-mute uppercase" %>
 <% page_title t(".page_title", title: result.exercise.title) %>
 <%= ui_back_link result.essential.name, href: course_essential_path(result.essential.course_slug, result.essential.slug) %>
 <%# UDR-0087 §3.6 : une colonne de 720 px dès 700 px ; dès 1 024 px, la note et les boutons à gauche, la correction à droite. %>
@@ -19,7 +19,7 @@
       <div class="flex flex-col items-center gap-3">
         <%= render "assessment/session_results/badge", level: result.badge_level, earned_now: result.earned_now %>
         <div class="space-y-2">
-          <h1 id="session_result_title" class="font-display text-3xl font-extrabold tracking-tight"><%= t(".headline.#{tone}") %></h1>
+          <h1 id="session_result_title" class="font-display text-3xl font-medium tracking-tight"><%= t(".headline.#{tone}") %></h1>
           <% if @owner %>
             <% cheers = t(".cheers.#{tone}") %>
             <p class="text-ink text-balance"><%= cheers[result.session_public_id.sum % cheers.size] %></p>
@@ -34,12 +34,12 @@
       <dl class="mt-6 grid grid-cols-2 gap-3 <%= "sm:grid-cols-4" unless @owner %>">
         <div class="<%= tile %>">
           <dt class="<%= label %>"><%= t(".grade") %></dt>
-          <dd id="session_grade" class="mt-1 font-display text-3xl font-extrabold tabular-nums <%= "text-success" if tone == :success %>"><%= grade_label(result.score_percent) %></dd>
+          <dd id="session_grade" class="mt-1 font-display text-3xl font-medium tabular-nums <%= "text-success" if tone == :success %>"><%= grade_label(result.score_percent) %></dd>
         </div>
         <% unless @owner %>
           <div class="<%= tile %>">
             <dt class="<%= label %>"><%= t(".score") %></dt>
-            <dd class="mt-1 font-display text-2xl font-extrabold tabular-nums"><%= t(".score_value", score: result.score_percent) %></dd>
+            <dd class="mt-1 font-display text-2xl font-medium tabular-nums"><%= t(".score_value", score: result.score_percent) %></dd>
           </div>
         <% end %>
         <div class="<%= tile %>">
@@ -82,7 +82,7 @@
                   class: "rounded-card border border-line bg-white p-5 shadow-card sm:p-6",
                   data: (ui_reveal_data(step: 3) if @owner) do %>
     <div class="mb-2">
-      <h2 id="session_review_title" class="font-display text-xl font-extrabold"><%= t(".review_title") %></h2>
+      <h2 id="session_review_title" class="font-display text-xl font-medium"><%= t(".review_title") %></h2>
       <% unless @owner %>
         <p class="mt-1 text-sm text-mute"><%= @reveal ? t(".review_hint_reveal") : t(".review_hint_student") %></p>
       <% end %>

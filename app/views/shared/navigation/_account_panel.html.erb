@@ -17,14 +17,14 @@
   <div class="flex items-center gap-3 border-b border-line pb-4">
     <%= ui_avatar user.name, src: user.avatar_url, size: :lg, tone_seed: (user.public_id if student) %>
     <div class="min-w-0">
-      <p class="truncate font-display font-extrabold text-ink"><%= user.name %></p>
+      <p class="truncate font-display font-medium text-ink"><%= user.name %></p>
       <% if user.detail %><p class="truncate text-sm text-mute"><%= user.detail %></p><% end %>
     </div>
   </div>
   <%# UDR-0098 §3.1 : à partir de deux établissements, un bouton par établissement ; le courant est coché et désactivé. %>
   <% if !student && teacher_schools.size > 1 %>
     <section id="account_schools" aria-labelledby="account_schools_title" class="border-b border-line py-3">
-      <h2 id="account_schools_title" class="px-3 text-xs font-bold tracking-wide text-mute uppercase">
+      <h2 id="account_schools_title" class="px-3 text-xs font-medium tracking-wide text-mute uppercase">
         <%= t("shared.navigation.account_panel.schools.title") %>
       </h2>
       <ul class="mt-1">
@@ -35,7 +35,7 @@
                           title: school.name, "aria-current": ("true" if school.current),
                           "aria-label": t("shared.navigation.account_panel.schools.#{school.current ? 'current' : 'switch'}", school: school.name),
                           class: class_names(link_class, "cursor-pointer text-ink hover:bg-mist disabled:cursor-default disabled:hover:bg-transparent",
-                                             "font-semibold": school.current) do %>
+                                             "font-medium": school.current) do %>
               <% if school.current %>
                 <%= ui_icon "check", class: "text-brand-strong" %>
               <% else %>

@@ -3,7 +3,7 @@
 <%# ADR  : 0062 · UDR : 0049 %>
 <%# locals: (key:, count:, label:, hint: nil) -%>
 <li id="figure_<%= key %>" class="rounded-ln bg-mist px-3 py-4">
-  <span class="block font-display text-3xl font-extrabold tabular-nums text-ink"><%= count || "—" %></span>
+  <span class="block font-display text-3xl font-medium tabular-nums text-ink"><%= count || "—" %></span>
   <span class="text-sm text-mute"><%= label %></span>
   <% if hint %>
     <span class="mt-1 block text-xs text-mute"><%= hint %></span>

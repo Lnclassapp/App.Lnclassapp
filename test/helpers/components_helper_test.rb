@@ -813,7 +813,7 @@ class ComponentsHelperTest < ActionView::TestCase
 
     assert_select "div[role=alert][data-toast-type=error]", text: /#{I18n.t("components.toast.titles.error")}\s*Échec/
     assert_select "div[data-toast-type=info]:not([role=alert])" do
-      assert_select "p.font-semibold", text: "Déjà en cours"
+      assert_select "p.font-medium", text: "Déjà en cours"
       assert_select "p.text-mute", text: "Une seule à la fois."
     end
     assert_nil flash_toast(:reload_document, true)
@@ -829,7 +829,7 @@ class ComponentsHelperTest < ActionView::TestCase
       assert_select "div.flex-1 + form[action='/announcements/abcdefghijkmno/dismissal'][method=post] + button[data-action='toast#dismiss']"
       assert_select "form[data-action='turbo:submit-start->toast#dismiss'] input[type=hidden][name=_method][value=delete]"
       assert_select "form button[type=submit][data-turbo-stream=true]", text: "Annuler" do |buttons|
-        assert_equal "min-h-tap shrink-0 rounded-ln px-3 text-sm font-bold text-brand-strong hover:bg-brand-soft", buttons.first["class"]
+        assert_equal "min-h-tap shrink-0 rounded-ln px-3 text-sm font-medium text-brand-strong hover:bg-brand-soft", buttons.first["class"]
       end
     end
     assert_select "p", text: "Annonce masquée"

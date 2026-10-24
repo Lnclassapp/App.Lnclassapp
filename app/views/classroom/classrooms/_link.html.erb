@@ -5,7 +5,7 @@
 <% url = join_classroom_url(classroom.link_token) %>
 <div id="classroom_link" class="rounded-card bg-brand-soft p-4">
   <div class="flex items-center justify-between gap-2">
-    <p id="classroom_link_label" class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".label") %></p>
+    <p id="classroom_link_label" class="text-xs font-medium tracking-wider text-mute uppercase"><%= t(".label") %></p>
     <div class="-my-2 -mr-2">
       <%= ui_dropdown label: t(".more_label"), id: "classroom-link-menu" do %>
         <%= ui_dropdown_item t(".change"), dialog: "change-classroom-link", icon: "arrow-path" %>

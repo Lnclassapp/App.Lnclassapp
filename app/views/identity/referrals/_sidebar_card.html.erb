@@ -10,14 +10,14 @@
     <% message = t("identity.referrals.invite.message", school: invite.school_name, link:) %>
     <section id="sidebar_referral_card" aria-labelledby="sidebar_referral_title" class="rounded-card border border-line bg-white p-4 shadow-card">
       <div class="flex items-center justify-between gap-2">
-        <h2 id="sidebar_referral_title" class="font-display text-base font-extrabold"><%= t(".title") %></h2>
+        <h2 id="sidebar_referral_title" class="font-display text-base font-medium"><%= t(".title") %></h2>
         <% if Entities::Identity::Ambassador.ambassador?(referred_count: invite.referred_count) %>
           <%= ui_badge t("identity.referrals.ambassador.badge"), tone: :gold, size: :sm, icon: "trophy" %>
         <% end %>
       </div>
       <p id="sidebar_referral_count" class="mt-1 text-sm text-mute"><%= t("identity.referrals.invite.count", count: invite.referred_count) %></p>
 
-      <p class="mt-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".link_label") %></p>
+      <p class="mt-3 text-xs font-medium tracking-wider text-mute uppercase"><%= t(".link_label") %></p>
       <a id="sidebar_referral_link" href="<%= link %>" title="<%= link %>" class="block truncate text-sm font-medium text-brand-strong"><%= link %></a>
 
       <div id="sidebar_referral_actions" class="mt-3 grid gap-2" data-controller="identity--share"

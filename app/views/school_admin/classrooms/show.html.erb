@@ -23,7 +23,7 @@
   <% [ [ :assignments, classroom.assignments_count, nil ], [ :submission_rate, percent.call(classroom.submission_rate), :submission_rate ],
        [ :average, percent.call(classroom.average_percent), :average ] ].each do |key, value, tip| %>
     <li class="rounded-ln bg-mist px-3 py-4">
-      <span class="block font-display text-2xl font-extrabold tabular-nums"><%= value %></span>
+      <span class="block font-display text-2xl font-medium tabular-nums"><%= value %></span>
       <span class="block text-sm text-mute">
         <%= t(".figures.#{key}") %>
         <% if tip %>

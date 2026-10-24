@@ -6,7 +6,7 @@
 <% message = t("identity.referrals.sponsor.message", link:) %>
 <%= ui_card title: t("identity.referrals.sponsor.title"), subtitle: t("identity.referrals.sponsor.subtitle"),
             icon: "share", id: "invite_others" do %>
-  <p class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t("identity.referrals.sponsor.link_label") %></p>
+  <p class="text-xs font-medium tracking-wider text-mute uppercase"><%= t("identity.referrals.sponsor.link_label") %></p>
   <a id="sponsor_link" href="<%= link %>" class="mt-1 block text-sm font-medium break-all text-brand-strong underline-offset-4 hover:underline"><%= link %></a>
 
   <div id="sponsor_share_actions" class="mt-5 flex flex-wrap gap-3" data-controller="identity--share"

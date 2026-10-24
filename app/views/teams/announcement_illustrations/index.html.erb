@@ -21,7 +21,7 @@
   <% end %>
 
   <section id="team_illustrations" aria-labelledby="team_illustrations_title">
-    <h2 id="team_illustrations_title" class="mb-3 font-display text-lg font-extrabold"><%= t(".team_title") %></h2>
+    <h2 id="team_illustrations_title" class="mb-3 font-display text-lg font-medium"><%= t(".team_title") %></h2>
     <% if library.empty? %>
       <%= ui_empty_state title: t(".empty"), icon: "photo" %>
     <% else %>
@@ -33,7 +33,7 @@
   </section>
 
   <section id="base_illustrations" aria-labelledby="base_illustrations_title">
-    <h2 id="base_illustrations_title" class="mb-3 font-display text-lg font-extrabold"><%= t(".base_title") %></h2>
+    <h2 id="base_illustrations_title" class="mb-3 font-display text-lg font-medium"><%= t(".base_title") %></h2>
     <ul class="grid grid-cols-4 gap-2">
       <% Entities::Communication::Message::ILLUSTRATIONS.each do |key| %>
         <li class="flex flex-col items-center gap-1 text-center text-xs font-medium">

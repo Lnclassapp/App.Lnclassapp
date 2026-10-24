@@ -39,9 +39,9 @@
                           data: { turbo_action: "advance" },
                           class: class_names("flex min-h-12 items-center justify-between gap-2 rounded-ln border px-3 py-2 text-sm",
                                              "focus-visible:outline-2 focus-visible:outline-brand",
-                                             current ? "border-brand bg-brand-soft font-semibold text-ink" : "border-line bg-white text-ink hover:bg-mist") do %>
+                                             current ? "border-brand bg-brand-soft font-medium text-ink" : "border-line bg-white text-ink hover:bg-mist") do %>
                 <span><%= t(".groups.#{key}") %></span>
-                <span class="font-display text-lg font-extrabold tabular-nums"><%= grade_counts.fetch(key) %></span>
+                <span class="font-display text-lg font-medium tabular-nums"><%= grade_counts.fetch(key) %></span>
               <% end %>
             <% end %>
           </nav>

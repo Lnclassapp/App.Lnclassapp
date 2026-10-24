@@ -28,7 +28,7 @@ class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
     assert_select "header > div.flex > *", count: 2 do |(left, right)|
       assert_equal [ "a", student_home_path, "Lnclass" ], [ left.name, left["href"], left.text.squish ]
       assert_select left, "img[src*='logo/lnclass'][alt='']"
-      assert_select right, "a[href='#{help_path}'][aria-controls=help-sheet].hidden\\!.min-\\[700px\\]\\:inline-flex\\!.text-brand-strong\\!.font-bold\\!",
+      assert_select right, "a[href='#{help_path}'][aria-controls=help-sheet].hidden\\!.min-\\[700px\\]\\:inline-flex\\!.text-brand-strong\\!.font-medium\\!",
                     text: I18n.t("shared.help_sheet.trigger")
       assert_select right, "a[aria-controls=help-sheet] svg path[d^='M3.75 14.25V12a8.25']" # the headset (UDR-0084 §3.1)
       assert_select right, "[data-controller=theme], button[role=switch]", 0

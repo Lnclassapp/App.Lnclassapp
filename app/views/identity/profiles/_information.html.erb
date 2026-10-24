@@ -2,11 +2,11 @@
 <%# Rôle : photo, nom, numéro, rôle, inscription ; remplacée par profile_names/update ; l'élève a la sienne (_student_information) %>
 <%# ADR  : 0055, 0060, 0065, 0103 · UDR : 0006, 0041, 0047, 0052, 0057, 0089 (branche élève sortie), 0125 (§3.2 : matières) %>
 <%= ui_card id: "profile_information", "aria-labelledby": "profile_information_title" do %>
-  <h2 id="profile_information_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".title") %></h2>
+  <h2 id="profile_information_title" class="font-display text-lg leading-tight font-medium"><%= t(".title") %></h2>
   <div class="mt-4 flex items-center gap-4">
     <%= ui_avatar profile.display_name, src: account_photo_src(profile.public_id, profile.photo_version), size: :lg %>
     <div class="min-w-0 flex-1">
-      <p class="truncate font-display text-lg leading-tight font-extrabold text-ink"><%= profile.display_name %></p>
+      <p class="truncate font-display text-lg leading-tight font-medium text-ink"><%= profile.display_name %></p>
       <div class="mt-1.5 flex flex-wrap items-center gap-2">
         <%= ui_role_badge profile.role %>
         <% if profile.role == :team %>

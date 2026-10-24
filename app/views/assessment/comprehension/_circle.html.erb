@@ -8,7 +8,7 @@
   <span class="<%= class_names("shrink-0 rounded-full", comprehension_dot_class(category), { sm: "size-4", lg: "size-14" }.fetch(size)) %>" aria-hidden="true"></span>
   <% if size == :lg %>
     <span class="flex flex-col">
-      <span class="font-display text-xl font-extrabold text-ink"><%= comprehension_label(category) %></span>
+      <span class="font-display text-xl font-medium text-ink"><%= comprehension_label(category) %></span>
       <span class="text-sm text-mute tabular-nums"><%= ratio %></span>
     </span>
   <% else %>

@@ -12,8 +12,8 @@
         <%= ui_icon "academic-cap", size: :xl %>
       </span>
       <div class="min-w-0">
-        <h2 id="student_home_classroom_title" class="text-xs font-bold tracking-widest uppercase"><%= t(".title") %></h2>
-        <p class="truncate font-display text-2xl leading-tight font-extrabold"><%= home.classroom_name %></p>
+        <h2 id="student_home_classroom_title" class="text-xs font-medium tracking-widest uppercase"><%= t(".title") %></h2>
+        <p class="truncate font-display text-2xl leading-tight font-medium"><%= home.classroom_name %></p>
         <p class="text-sm"><%= t(".context", level: home.level_name, school: home.school_name) %></p>
         <p class="mt-0.5 inline-flex items-center gap-1.5 text-sm">
           <%= ui_icon "users", variant: :mini, size: :sm %><%= t(".students", count: home.classmates_count) %>
@@ -21,7 +21,7 @@
       </div>
     </div>
     <%= link_to student_classroom_path,
-                class: "group inline-flex min-h-tap shrink-0 items-center justify-center gap-2 rounded-full bg-white px-6 font-display font-bold text-brand-strong transition active:scale-95 hover:bg-brand-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" do %>
+                class: "group inline-flex min-h-tap shrink-0 items-center justify-center gap-2 rounded-full bg-white px-6 font-display font-medium text-brand-strong transition active:scale-95 hover:bg-brand-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" do %>
       <%= ui_icon "door-open", size: :md %><span><%= t(".enter") %></span><%= ui_icon "arrow-right", variant: :mini, size: :md, class: "transition group-hover:translate-x-0.5" %>
     <% end %>
   </div>

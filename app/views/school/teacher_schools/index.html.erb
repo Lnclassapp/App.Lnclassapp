@@ -14,7 +14,7 @@
           <%= ui_card padding: :md do %>
             <div class="flex items-start justify-between gap-3">
               <div class="min-w-0">
-                <p class="truncate font-display font-extrabold text-ink" title="<%= school.name %>">
+                <p class="truncate font-display font-medium text-ink" title="<%= school.name %>">
                   <%= school.name %><% if school.sigle.present? %> (<%= school.sigle %>)<% end %>
                 </p>
                 <p class="text-sm text-mute"><%= school.drena_name %></p>
@@ -35,7 +35,7 @@
               <%= button_to teacher_current_school_path, method: :patch, params: { school_public_id: school.public_id },
                             form: { id: "go-school-#{school.public_id}", class: "mt-3" },
                             "aria-label": t(".go_label", school: school.name),
-                            class: "inline-flex min-h-tap cursor-pointer items-center gap-2 rounded-ln border border-line bg-white px-4 text-sm font-semibold text-ink hover:bg-mist focus-visible:outline-2 focus-visible:outline-brand" do %>
+                            class: "inline-flex min-h-tap cursor-pointer items-center gap-2 rounded-ln border border-line bg-white px-4 text-sm font-medium text-ink hover:bg-mist focus-visible:outline-2 focus-visible:outline-brand" do %>
                 <span><%= t(".go") %></span><%= ui_icon "arrow-right", size: :sm %>
               <% end %>
             <% end %>
@@ -57,7 +57,7 @@
 
   <% if teacher_schools.size < max %>
     <%= ui_card id: "add_school", padding: :md do %>
-      <h2 class="font-display text-lg font-extrabold text-ink"><%= t(".add_title") %></h2>
+      <h2 class="font-display text-lg font-medium text-ink"><%= t(".add_title") %></h2>
       <p class="mt-1 mb-4 text-sm text-mute"><%= t(".add_description") %></p>
       <% if @rate_limited %>
         <%= ui_error_state title: t("identity.pending_accounts.show.rate_limited.title"),

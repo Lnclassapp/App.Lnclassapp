@@ -15,8 +15,8 @@
 <% card_class = class_names(ComponentsHelper::CARD_BASE, ComponentsHelper::CARD_PADDINGS[:md]) if framed %>
 <% step_class = "flex min-w-0 flex-col" %>
 <% legend = lambda do |number, key|
-     tag.legend(class: "mb-3 flex items-center gap-2 font-display text-base font-bold text-ink") do
-       safe_join([ tag.span(number, class: "grid size-6 shrink-0 place-items-center rounded-full bg-brand-soft text-xs font-bold text-brand-strong"),
+     tag.legend(class: "mb-3 flex items-center gap-2 font-display text-base font-medium text-ink") do
+       safe_join([ tag.span(number, class: "grid size-6 shrink-0 place-items-center rounded-full bg-brand-soft text-xs font-medium text-brand-strong"),
                    t(".#{key}") ], " ")
      end
    end %>
@@ -38,7 +38,7 @@
           <%= ui_icon "building-library" %>
         </span>
         <div class="min-w-0 flex-1">
-          <p class="font-display text-base leading-tight font-bold text-ink"><%= school.name %></p>
+          <p class="font-display text-base leading-tight font-medium text-ink"><%= school.name %></p>
           <p class="mt-0.5 text-sm text-mute"><%= t(".drena_name", name: drena.name) %></p>
         </div>
         <%# Sans JavaScript, un lien vers la page avec la DRENA seule : les deux listes s'ouvrent, l'établissement à choisir. %>

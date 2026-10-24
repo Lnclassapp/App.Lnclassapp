@@ -4,7 +4,7 @@
 <%# locals: (classroom:, student:, can_remove:) -%>
 <% dialog = "remove-student-#{student.public_id}" %>
 <section id="student_file_manage" aria-labelledby="student_file_manage_title">
-  <h2 id="student_file_manage_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title") %></h2>
+  <h2 id="student_file_manage_title" class="mb-4 font-display text-xl font-medium"><%= t(".title") %></h2>
   <%= ui_card padding: :md do %>
     <p class="mb-4 text-sm text-mute"><%= t(".issue_code_hint") %></p>
     <div class="flex flex-col gap-3 sm:flex-row">

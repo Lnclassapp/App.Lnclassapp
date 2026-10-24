@@ -4,7 +4,7 @@
 <%# locals: (profile:) -%>
 <% photo_value = t(".photo_value.#{profile.photo_version ? :present : :absent}") %>
 <%= ui_card id: "profile_information", "aria-labelledby": "profile_information_title" do %>
-  <h2 id="profile_information_title" class="font-display text-lg leading-tight font-extrabold"><%= t(".title") %></h2>
+  <h2 id="profile_information_title" class="font-display text-lg leading-tight font-medium"><%= t(".title") %></h2>
   <ul class="mt-2 divide-y divide-line">
     <%= render "identity/profiles/student_row", icon: "camera", label: t(".photo"), value: photo_value,
                                                 action: t(profile.photo_version ? ".change" : ".add"), href: edit_profile_photo_path %>

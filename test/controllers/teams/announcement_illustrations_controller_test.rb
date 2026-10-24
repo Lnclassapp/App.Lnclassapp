@@ -117,7 +117,7 @@ class Teams::AnnouncementIllustrationsControllerTest < ActionDispatch::Integrati
       # Sur téléphone, un seul aperçu (Ciel) : le nom garde la place de se lire.
       assert_select "[data-announcement-theme=ciel]:not(.hidden)"
       assert_select "[data-announcement-theme=mangue].hidden.sm\\:block, [data-announcement-theme=nuit].hidden.sm\\:block", 2
-      assert_select "p.font-bold.truncate", "Bus scolaire"
+      assert_select "p.font-medium.truncate", "Bus scolaire"
       assert_select "p.text-xs.text-mute", text: /Ajoutée le 5 oct\./
       assert_select "*", text: "Retirée", count: 0
       assert_select "a[role=menuitem][href='#{edit_teams_announcement_illustration_path(@bus.public_id)}']", text: "Renommer"

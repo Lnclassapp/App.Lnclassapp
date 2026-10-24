@@ -13,11 +13,11 @@
     <div class="flex h-full items-center justify-between gap-3 px-gutter lg:px-8">
       <%= link_to student_home_path, class: "flex items-center gap-2.5 rounded-full focus-visible:outline-2 focus-visible:outline-brand" do %>
         <%= image_tag brand_logo, alt: "", class: "size-9 rounded-sm" %>
-        <span class="font-display text-xl font-extrabold tracking-tight">Lnclass</span>
+        <span class="font-display text-xl font-medium tracking-tight">Lnclass</span>
       <% end %>
       <div class="flex items-center gap-1">
         <%= render "shared/help_sheet", trigger_icon: "headset", user:,
-                                        trigger_class: "hidden! min-[700px]:inline-flex! font-bold! text-brand-strong!" %>
+                                        trigger_class: "hidden! min-[700px]:inline-flex! font-medium! text-brand-strong!" %>
         <%= render "shared/navigation/avatar_menu", user: %>
       </div>
     </div>
@@ -35,7 +35,7 @@
     <div class="flex h-full items-center justify-between gap-3 px-gutter max-lg:pr-2 lg:px-8">
       <%= link_to home_path_for(user.role), class: "flex items-center gap-2.5 rounded-full focus-visible:outline-2 focus-visible:outline-brand" do %>
         <%= image_tag brand_logo, alt: "", class: "size-9 rounded-sm" %>
-        <span class="font-display text-xl font-extrabold tracking-tight">Lnclass</span>
+        <span class="font-display text-xl font-medium tracking-tight">Lnclass</span>
       <% end %>
       <div class="flex items-center gap-3">
         <span class="hidden sm:inline-flex"><%= ui_role_badge user.role %></span>
@@ -45,7 +45,7 @@
         <%= ui_dropdown label: t(".account"), id: "account-menu",
               trigger: safe_join([ ui_avatar(user.name, src: user.avatar_url, size: :sm), tag.span(user.name, class: "hidden text-sm font-medium md:inline") ]) do %>
           <div class="border-b border-line px-3 pt-2 pb-3">
-            <p class="truncate font-semibold"><%= user.name %></p>
+            <p class="truncate font-medium"><%= user.name %></p>
             <% if user.detail %><p class="truncate text-xs text-mute"><%= user.detail %></p><% end %>
           </div>
           <div class="pt-1.5">

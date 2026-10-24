@@ -4,14 +4,14 @@
 <%# locals: (question:, reveal:) -%>
 <% if question.pairs.any? %>
   <p class="text-sm text-mute"><%= t("assessment.session_results.question_review.selected") %> :</p>
-  <ul class="mt-1 space-y-0.5 text-sm font-bold text-ink">
+  <ul class="mt-1 space-y-0.5 text-sm font-medium text-ink">
     <% question.pairs.each do |pair| %><li><span><%= pair.left %></span> → <span><%= pair.right %></span></li><% end %>
   </ul>
 <% end %>
 <% if reveal && question.solution.any? %>
   <div class="mt-2 text-sm text-success" data-correct>
     <p><%= t("assessment.session_results.question_review.right_pairs") %> :</p>
-    <ul class="mt-1 space-y-0.5 font-bold">
+    <ul class="mt-1 space-y-0.5 font-medium">
       <% question.solution.each do |pair| %><li><%= pair %></li><% end %>
     </ul>
   </div>

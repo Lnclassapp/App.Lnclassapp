@@ -4,8 +4,8 @@
 <%# locals: (f:, question:) -%>
 <% scope = "assessment.exercise_sessions.kinds.matching" %>
 <% button = "flex min-h-tap w-full cursor-pointer items-center gap-2 rounded-ln border-2 border-line bg-white px-3 py-3 text-left font-medium text-ink transition hover:bg-mist aria-pressed:border-brand-strong aria-pressed:bg-brand-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
-<% badge = "grid size-6 shrink-0 place-items-center rounded-full bg-brand-strong text-xs font-bold text-white" %>
-<legend class="font-display text-xl font-extrabold text-balance whitespace-pre-line text-ink"><%= question.content %></legend>
+<% badge = "grid size-6 shrink-0 place-items-center rounded-full bg-brand-strong text-xs font-medium text-white" %>
+<legend class="font-display text-xl font-medium text-balance whitespace-pre-line text-ink"><%= question.content %></legend>
 <p class="text-sm text-mute"><%= t("#{scope}.hint") %></p>
 <div data-controller="assessment--matching" data-assessment--matching-linked-value="<%= t("#{scope}.linked", x: "%{x}") %>">
   <div hidden data-assessment--matching-target="board" class="grid grid-cols-2 gap-3">

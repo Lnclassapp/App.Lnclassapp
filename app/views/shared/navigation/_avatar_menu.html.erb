@@ -15,7 +15,7 @@
     <div class="flex items-center gap-3 border-b border-line px-3 pt-2 pb-3">
       <%= ui_avatar user.name, src: user.avatar_url, size: :md, tone_seed: user.public_id %>
       <div class="min-w-0">
-        <p class="truncate font-semibold text-ink"><%= user.name %></p>
+        <p class="truncate font-medium text-ink"><%= user.name %></p>
         <% if user.detail %><p class="truncate text-xs text-mute"><%= user.detail %></p><% end %>
       </div>
     </div>

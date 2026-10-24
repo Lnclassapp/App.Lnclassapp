@@ -4,7 +4,7 @@
 <%# locals: (classroom:, assignments:) -%>
 <%= tag.section id: "assigned_exercises", "aria-labelledby": "assigned_exercises_title", class: "min-w-0",
                 data: (ui_reveal_data if assignments.any?) do %>
-  <h2 id="assigned_exercises_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title") %></h2>
+  <h2 id="assigned_exercises_title" class="mb-4 font-display text-xl font-medium"><%= t(".title") %></h2>
   <% if assignments.empty? %>
     <div id="assigned_exercises_empty">
       <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "clipboard-document-list" %>

@@ -7,7 +7,7 @@
     <%= ui_avatar student.display_name, src: account_photo_src(student.public_id, student.photo_version), size: :lg,
                                         tone_seed: student.public_id %>
     <div class="min-w-0 space-y-1">
-      <h1 class="font-display text-2xl font-extrabold tracking-tight break-words sm:text-3xl"><%= student.display_name %></h1>
+      <h1 class="font-display text-2xl font-medium tracking-tight break-words sm:text-3xl"><%= student.display_name %></h1>
       <p class="text-sm text-mute"><%= t(".context", classroom: classroom.name, school: classroom.school_name) %></p>
       <% if student.newcomer %><%= ui_badge t(".new"), tone: :brand, size: :sm %><% end %>
     </div>

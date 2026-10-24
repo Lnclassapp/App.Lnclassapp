@@ -6,7 +6,7 @@
     <%= link_to root_path, "aria-label": t(".home"),
           class: "flex min-h-tap items-center gap-2.5 rounded-full focus-visible:outline-2 focus-visible:outline-brand" do %>
       <%= image_tag brand_logo, alt: "", width: 36, height: 36, class: "size-9 rounded-sm" %>
-      <span class="font-display text-xl font-extrabold tracking-tight">Lnclass</span>
+      <span class="font-display text-xl font-medium tracking-tight">Lnclass</span>
     <% end %>
     <% if current_actor %>
       <%= ui_button t(".my_space"), href: root_path, variant: :secondary, size: :sm, icon: "home" %>

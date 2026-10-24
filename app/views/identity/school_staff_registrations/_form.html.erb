@@ -11,7 +11,7 @@
   <% end %>
 
   <fieldset class="space-y-4">
-    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".personal") %></legend>
+    <legend class="mb-3 text-xs font-medium tracking-wider text-mute uppercase"><%= t(".personal") %></legend>
     <%= ui_field form, :last_name, required: true, maxlength: 50, autocomplete: "family-name", placeholder: t(".last_name_placeholder") %>
     <%= ui_field form, :first_name, required: true, maxlength: 80, autocomplete: "given-name", placeholder: t(".first_name_placeholder") %>
     <% gender_error = @form.errors[:gender].first %>
@@ -37,13 +37,13 @@
   </fieldset>
 
   <fieldset class="space-y-4">
-    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".contact") %></legend>
+    <legend class="mb-3 text-xs font-medium tracking-wider text-mute uppercase"><%= t(".contact") %></legend>
     <%= ui_field form, :contact, as: :tel, required: true, value: @form.raw_contact, maxlength: 15, inputmode: "tel",
                  autocomplete: "tel", placeholder: t(".contact_placeholder"), hint: t(".contact_hint") %>
   </fieldset>
 
   <fieldset class="space-y-4">
-    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".school") %></legend>
+    <legend class="mb-3 text-xs font-medium tracking-wider text-mute uppercase"><%= t(".school") %></legend>
     <%= ui_field form, :school_code, required: true, value: @form.raw_school_code, maxlength: 12, autocomplete: "off",
                  autocapitalize: "characters", spellcheck: false, placeholder: t(".school_code_placeholder"),
                  hint: t(".school_code_hint"), class: "font-display tracking-widest uppercase" %>
@@ -52,7 +52,7 @@
   <%= render "shared/staff_position_fieldset", form:, legend: t(".position"), section: true %>
 
   <fieldset class="space-y-4">
-    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".security") %></legend>
+    <legend class="mb-3 text-xs font-medium tracking-wider text-mute uppercase"><%= t(".security") %></legend>
     <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
                  hint: t(".pin_hint") %>
     <%= ui_field form, :pin_confirmation, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric",

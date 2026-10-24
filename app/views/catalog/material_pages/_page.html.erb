@@ -15,7 +15,7 @@
     <section id="level_group_<%= group.level.slug %>" aria-labelledby="level_group_<%= group.level.slug %>_title"
              class="<%= class_names("pt-8" => nested) %>">
       <h2 id="level_group_<%= group.level.slug %>_title" class="mb-3 flex items-center gap-3">
-        <span class="font-display text-xl leading-tight font-extrabold"><%= group.level.name %></span>
+        <span class="font-display text-xl leading-tight font-medium"><%= group.level.name %></span>
         <%= ui_badge t("catalog.public.courses_count", count: group.count), tone: :brand, size: :sm %>
       </h2>
       <%= grid %>

@@ -60,7 +60,7 @@ module Assessment
       render partial: "assessment/comprehension/circle", locals: { category: nil, done: 4, present: 25, size: :lg }
 
       assert_dom "span.rounded-full.size-14.bg-line[aria-hidden=true]", count: 1
-      assert_dom "span.font-display.text-xl.font-extrabold.text-ink", text: "Pas encore lisible"
+      assert_dom "span.font-display.text-xl.font-medium.text-ink", text: "Pas encore lisible"
       assert_dom "span.text-sm.text-mute.tabular-nums", text: "4/25"
       assert_dom "span.size-4", count: 0
     end

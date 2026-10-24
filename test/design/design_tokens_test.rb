@@ -87,6 +87,22 @@ class DesignTokensTest < ActiveSupport::TestCase
     assert_empty offences, "espacement hors échelle (#{SPACING_SCALE.join(', ')}) :\n#{offences.join("\n")}"
   end
 
+  # UDR palette froide §3.2 : le texte ne dépasse pas `font-medium`. Exception écrite : le titre gras de la page d'accueil.
+  FORBIDDEN_WEIGHT = /(?<![\w-])font-(?:semibold|bold|extrabold|black)(?![\w-])/
+  WEIGHT_SOURCES = Rails.root.glob("app/{views,helpers}/**/*.{erb,rb}").reject { |path| path.to_s.include?("app/views/homepage/") }.freeze
+
+  test "no text heavier than font-medium outside the homepage" do
+    offences = WEIGHT_SOURCES.flat_map do |path|
+      path.each_line.with_index(1).filter_map do |line, number|
+        "#{path.relative_path_from(Rails.root)}:#{number}" if line.match?(FORBIDDEN_WEIGHT)
+      end
+    end
+
+    assert_empty offences, "graisse > 500 interdite (UDR palette froide §3.2), utilisez font-medium :\n#{offences.join("\n")}"
+    %w[font-bold md:font-semibold font-bold! font-black].each { |s| assert_match FORBIDDEN_WEIGHT, s }
+    %w[font-medium font-normal font-boldly].each { |s| assert_no_match FORBIDDEN_WEIGHT, s }
+  end
+
   test "the patterns catch what they must" do
     {
       "valeur arbitraire `-[…]`" => %w[w-[26rem] md:grid-cols-[1fr_1.4fr] data-[open]:block],

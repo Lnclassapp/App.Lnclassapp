@@ -661,7 +661,7 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
     assert_select "fieldset[data-controller='communication--theme-preview'][data-communication--theme-preview-illustrations-value='announcement-illustrations']" do
       assert_select "legend", "Thème"
       assert_select "div.grid.grid-cols-5.gap-2 > label", count: 10
-      assert_select "label.min-h-tap.has-checked\\:bg-mist.has-checked\\:font-bold.has-focus-visible\\:outline-2", count: 10
+      assert_select "label.min-h-tap.has-checked\\:bg-mist.has-checked\\:font-medium.has-focus-visible\\:outline-2", count: 10
       Entities::Communication::Message::THEMES.zip(%w[Ciel Lagune Menthe Citron Mangue Corail Hibiscus Lavande Indigo Nuit])
                                               .each_with_index do |(key, label), index|
         assert_select "label:nth-child(#{index + 1})" do

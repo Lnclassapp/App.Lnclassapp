@@ -13,7 +13,7 @@
       <div class="min-w-0 space-y-3">
         <%# Élève (UDR-0015, amendement du 2026-10-02, R6) : le retour nomme déjà le cours. %>
         <p class="text-sm text-mute"><%= @student ? t(".student_eyebrow") : t(".eyebrow", course: course.name) %></p>
-        <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= essential.name %></h1>
+        <h1 class="font-display text-2xl font-medium tracking-tight text-balance sm:text-3xl"><%= essential.name %></h1>
         <% if essential.subtitle.present? %>
           <p id="essential_subtitle" class="text-mute"><%= essential.subtitle %></p>
         <% end %>
@@ -57,7 +57,7 @@
       <div class="min-w-0 space-y-1">
         <%# UDR-0057 R4 : la règle pour lever la lacune passe dans l'infobulle du titre. %>
         <div class="flex items-center gap-1">
-          <h2 id="essential_gap_title" class="font-display text-lg font-extrabold"><%= t(".gap_title") %></h2>
+          <h2 id="essential_gap_title" class="font-display text-lg font-medium"><%= t(".gap_title") %></h2>
           <%# UDR-0119 : la règle se lit sur 20, calculée depuis le seuil du domaine. %>
           <%= ui_info_tip t(".gap_body", grade: grading.grade_on_20(grading::REMEDIATION_THRESHOLD)), label: t(".gap_title") %>
         </div>

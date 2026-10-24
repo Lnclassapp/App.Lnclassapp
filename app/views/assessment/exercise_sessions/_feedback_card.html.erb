@@ -13,22 +13,22 @@
         <%= ui_icon feedback.correct ? "check" : "x-mark", size: :lg %>
       </span>
       <div class="min-w-0">
-        <h2 tabindex="-1" data-assessment--verdict-target="title" class="font-display text-xl font-extrabold text-ink focus:outline-none"><%= t(".verdict.#{tone}") %></h2>
+        <h2 tabindex="-1" data-assessment--verdict-target="title" class="font-display text-xl font-medium text-ink focus:outline-none"><%= t(".verdict.#{tone}") %></h2>
         <p class="text-sm text-ink"><%= t(".encouragement.#{tone}") %></p>
       </div>
     </div>
     <div class="mt-5 space-y-5" data-controller="math">
       <div class="space-y-1">
-        <p class="text-xs font-bold tracking-wide text-mute uppercase"><%= t(".number", number: feedback.number, total: play.question_count) %></p>
-        <p class="font-display text-lg font-extrabold whitespace-pre-line text-ink"><%= feedback.content %></p>
+        <p class="text-xs font-medium tracking-wide text-mute uppercase"><%= t(".number", number: feedback.number, total: play.question_count) %></p>
+        <p class="font-display text-lg font-medium whitespace-pre-line text-ink"><%= feedback.content %></p>
       </div>
       <div class="space-y-2">
-        <p id="feedback-selected" class="text-xs font-bold tracking-wide text-mute uppercase"><%= t(".selected") %></p>
+        <p id="feedback-selected" class="text-xs font-medium tracking-wide text-mute uppercase"><%= t(".selected") %></p>
         <%= render "assessment/exercise_sessions/kinds/#{feedback.kind_name}_feedback", feedback: %>
       </div>
       <% if feedback.explanation %>
         <div class="rounded-card bg-info-soft px-4 py-3">
-          <p class="flex items-center gap-1.5 text-sm font-bold text-info">
+          <p class="flex items-center gap-1.5 text-sm font-medium text-info">
             <%= ui_icon "light-bulb", size: :sm %><%= t(".explanation") %>
           </p>
           <p class="mt-1 text-sm whitespace-pre-line text-ink"><%= feedback.explanation %></p>

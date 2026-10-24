@@ -3,7 +3,7 @@
 <%# ADR  : 0072, 0103 · UDR : 0028, 0062 (§3.4), 0077 (§3.4), 0127 (§3.1) · seul chemin de l'enseignant vers les exercices depuis la classe ; l'équipe voit toutes les matières %>
 <%# locals: (classroom:, courses:) -%>
 <section id="classroom_courses" aria-labelledby="classroom_courses_title" class="min-w-0">
-  <h2 id="classroom_courses_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".title") %></h2>
+  <h2 id="classroom_courses_title" class="mb-4 font-display text-xl font-medium"><%= t(".title") %></h2>
   <% if courses.empty? %>
     <div id="classroom_courses_empty">
       <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "book-open" %>
@@ -18,7 +18,7 @@
         <% first = group.first %>
         <div id="<%= banded ? "classroom_courses_#{first.material_slug}" : "classroom_courses_band" %>" class="min-w-0">
           <% if banded %>
-            <h3 class="mb-2 flex items-center gap-2 text-sm font-semibold text-mute">
+            <h3 class="mb-2 flex items-center gap-2 text-sm font-medium text-mute">
               <%= ui_subject_badge first.material_name, category: first.material_category, size: :sm %>
               <span><%= t(".count", count: group.size) %></span>
             </h3>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="min-w-0">
                       <%= link_to course.name, classroom_course_path(classroom.public_id, course.slug),
-                                  class: "font-display font-extrabold text-balance after:absolute after:inset-0 after:rounded-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
+                                  class: "font-display font-medium text-balance after:absolute after:inset-0 after:rounded-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
                       <% if course.subtitle.present? %>
                         <p class="mt-1 line-clamp-2 text-sm text-mute"><%= course.subtitle %></p>
                       <% end %>
