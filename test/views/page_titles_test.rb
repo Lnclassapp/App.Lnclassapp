@@ -8,7 +8,7 @@ class PageTitlesTest < ActiveSupport::TestCase
   VIEWS = Rails.root.join("app/views")
 
   # Views that are not pages: served only inside a frame, or the demonstrations of /design served in one.
-  NOT_PAGES = %w[design/frame.html.erb school/drena_schools/index.html.erb].freeze
+  NOT_PAGES = %w[design/frame.html.erb school/drena_schools/index.html.erb classroom/classroom_codes/show.html.erb].freeze
 
   ERB_CODE = /<%(?!#)=?(.*?)-?%>/m
   RENDERED_TEMPLATE = /\A\s*render\s*\(?\s*template:\s*["']([^"']+)["']/
