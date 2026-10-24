@@ -255,7 +255,99 @@ Alors aucun écran ne mentionne un paiement ou un abonnement
 
 ## 4 bis. Phase ordinateur (après les lots téléphone)
 
-Déjà décidé, à construire dans cette phase : accueil élève en page large (UDR accueil §3.1, ancien CA-D10) ; « Mon compte » en panneau latéral de 400 px (UDR écrans élève §3.1). Restent à dessiner : inscription, Ma classe, fiche de révision, résultat, Cours, profil, page d'accueil publique (texte à gauche, photo à droite, déjà cadrée).
+Tous les écrans élève sont décidés (porteur, 2026-10-24, maquettes à 1440 et 1024 px, en gris puis en palette froide). Détail : UDR accueil §3.1, UDR inscription §3.5 bis, UDR écrans élève §3.1, §3.2, §3.2 bis, §3.6 et §3.6 bis ; page publique : chantier `page-d-accueil-photo` (texte à gauche, photo à droite), sans nouveau dessin. Lots : [`plan.md`](plan.md), « Phase ordinateur — élève ».
+
+> **Ces décisions changent aussi le téléphone** (menu, profil, Mon établissement, Cours par leçons). Pour ces points, **CA-E8 remplace CA-E1, CA-E9 remplace CA-E2, CA-E14 remplace CA-E6** ; la §4 n'est pas réécrite ici, les lots E1 et E2 sont prévenus par le plan.
+
+Sauf mention, « sur ordinateur » veut dire une fenêtre de 1024 px de large ou plus (≥ lg), vérifiée à 1024 et à 1440 px.
+
+### A′. Page d'accueil publique (ordinateur)
+
+```gherkin
+# CA-A3
+Étant donné un visiteur sur ordinateur
+Quand il ouvre /
+Alors le texte est à gauche et la photo à droite, sur un seul écran, sans en-tête ni pied de page
+Et la feuille de gauche mord sur la photo par son bord arrondi
+```
+
+### C′. Inscription (ordinateur)
+
+```gherkin
+# CA-C8
+Étant donné un élève sur ordinateur à l'étape 1, 2 ou 3 de l'inscription
+Alors il voit à gauche un panneau bleu foncé (brand-strong, texte blanc) avec « Bienvenue sur Lnclass », la liste des trois étapes et « Déjà un compte ? Se connecter »
+Et à droite le formulaire de l'étape, avec « Étape N sur 3 », sans la barre en trois segments
+Et le panneau est le même aux trois étapes, l'étape en cours portant aria-current="step"
+
+# CA-C9
+Étant donné un élève sur ordinateur dont la classe est trouvée (code ou lien)
+Alors « 3e B · <établissement> » et « Ce n'est pas ta classe ? › » sont dans le panneau, sous l'étape 1 cochée
+Et le rappel de classe n'est pas répété au-dessus du formulaire
+```
+
+### D′. Accueil élève (ordinateur)
+
+```gherkin
+# CA-D10
+Étant donné un élève connecté avec une classe, sur ordinateur
+Alors le contenu tient dans 912 px à côté de la barre latérale Accueil · Cours · Ma classe, sans carte de profil
+Et la carte du prochain exercice (2/3) et l'annonce (1/3) sont côte à côte, à cheval sur le bandeau
+Et la grille des matières tient sur une ligne de 7 cases, l'Historique sur deux colonnes de jours
+```
+
+### E′. Écrans élève (ordinateur, et téléphone quand c'est dit)
+
+```gherkin
+# CA-E7
+Étant donné un élève sur ordinateur qui clique sur son avatar
+Alors « Mon compte » s'ouvre en panneau latéral droit de 400 px sur un voile
+Et Échap, la croix ou un clic sur le voile le ferment, le focus revenant sur l'avatar
+
+# CA-E8 (téléphone et ordinateur ; remplace CA-E1)
+Étant donné un élève qui ouvre « Mon compte »
+Alors il voit, dans l'ordre : l'en-tête (avatar, nom, classe · établissement), Mon profil, Mon établissement, Modifier mon code secret, Mode sombre, Se déconnecter
+Et ni Accueil, ni Cours, ni Ma classe, ni Mon historique, ni Besoin d'aide n'y figurent
+
+# CA-E9 (téléphone et ordinateur ; remplace CA-E2)
+Étant donné la page Mon profil d'un élève
+Alors elle commence par une carte bleue avec l'avatar et le nom seul, sans la classe
+Et « Mes informations » a quatre lignes : Photo, Nom, Numéro, Inscrit·e le
+Et ni Classe, ni Établissement, ni code secret, ni mode sombre, ni « Se déconnecter » ne sont sur la page
+
+# CA-E10 (téléphone et ordinateur)
+Étant donné un élève avec une classe qui choisit « Mon établissement » dans « Mon compte »
+Alors un écran « Mon établissement » montre, en lecture seule : Nom, Sigle, DRENA, Type
+Et la ligne Sigle est absente si l'établissement n'a pas de sigle
+Et un élève ne voit que l'établissement de sa classe
+
+# CA-E11
+Étant donné Ma classe sur ordinateur
+Alors « Exercices assignés » puis « Fiches à revoir » sont dans la colonne de gauche (2/3), « Exercices traités » dans celle de droite (1/3)
+
+# CA-E12
+Étant donné un élève sur ordinateur qui lit une fiche de révision
+Alors la carte « Exercices » est dans une colonne de droite de 300 px qui reste visible quand il fait défiler la fiche
+Et l'enseignant voit la même fiche avec la mise en page actuelle
+
+# CA-E13
+Étant donné le résultat d'une session sur ordinateur
+Alors le badge, la note, la maîtrise et « Recommencer » sont dans une colonne de gauche de 340 px qui reste visible quand on fait défiler la correction
+
+# CA-E14 (téléphone et ordinateur ; remplace CA-E6)
+Étant donné un élève qui ouvre Cours pour une matière
+Alors il ne voit que les leçons de cette matière, une carte par leçon, dans l'ordre du programme
+Et chaque carte montre « LEÇON N », le titre, « En cours » s'il y a lieu, puis les fiches de la leçon en lignes entières cliquables d'au moins 44 px
+Et une leçon de plus de 3 fiches montre les 3 premières et « Voir les N fiches »
+Et une fiche à revoir porte l'étiquette « À revoir »
+Et « Progression DPFC 2026-2027 » n'est écrit qu'une fois
+
+# CA-E15
+Étant donné un élève sur ordinateur sur la page Cours
+Alors les 6 matières sont en pastilles en haut, celle affichée pleine et marquée aria-current="page"
+Et les cartes de leçon sont sur deux colonnes
+Et « Cours » de la barre latérale ouvre la matière de la dernière case touchée, sinon la première de la grille
+```
 
 ## 5. Modélisation préliminaire
 

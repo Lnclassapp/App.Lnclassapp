@@ -240,3 +240,84 @@ Portes propres au pilote :
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, ouvre l'application, refait le parcours nominal *et* un chemin d'erreur, mesure. **Il ne relit pas le code, il le met à l'épreuve.** Un reviewer qui lit du code ne prouve rien.
 >
 > Pour ce chantier : parcours élève (lien WhatsApp → inscription → accueil → exercice → résultat → Ma classe), sur un téléphone de 390 px et sur ordinateur ; chemins d'erreur : code inconnu, 11ᵉ essai dans la minute, lien régénéré, erreur serveur sur le numéro, élève sans classe.
+
+---
+
+## Phase ordinateur — élève
+
+> Après les lots téléphone (porteur, 2026-10-24 : « téléphone d'abord, ordinateur ensuite »). Critères : [`prd.md`](prd.md) §4 bis ; écrans : UDR accueil §3.1, UDR inscription §3.5 bis, UDR écrans élève §3.1, §3.2, §3.2 bis, §3.6 et §3.6 bis. Captures à 1024 et 1440 px (et à 390 px pour O2 et O5, qui changent aussi le téléphone), validées par le porteur avant chaque fusion.
+>
+> **À reporter dans les lots téléphone en cours** : le menu (« Mon établissement », sans Ma classe), le profil (carte bleue au nom seul, 4 lignes) et Cours (leçons d'une matière, fiches dans la carte) changent aussi à 390 px. Si E1 ou E2 n'est pas encore fusionné, il prend directement la nouvelle règle (CA-E8, CA-E9, CA-E14) et O2 ou O5 ne garde que la part ordinateur ; sinon O2 et O5 font les deux.
+
+| Lot | Dépend de | En parallèle avec |
+|---|---|---|
+| O1 — Accueil élève en page large | D | O2, O3, O4, O5, O6 |
+| O2 — « Mon compte » en panneau latéral, profil à carte bleue, Mon établissement | E1 | O1, O3, O4, O5, O6 |
+| O3 — Inscription en deux colonnes | C | tous |
+| O4 — Ma classe, fiche de révision, résultat sur ordinateur | E2 | tous |
+| O5 — Cours par leçons | E2 | tous |
+| O6 — Page d'accueil publique sur ordinateur | F | tous |
+
+### Lot O1 — Accueil élève en page large
+
+- **Couche**       : ui
+- **Fichiers**     : app/views/classroom/student_homes/show.html.erb · _band.html.erb · _next_step.html.erb · _subjects.html.erb · _history.html.erb *(variantes `lg:`)*
+                     app/views/shared/navigation/_sidebar.html.erb *(branche élève : sans carte de profil ; seul lot de la phase qui touche la barre latérale)*
+- **Dépend de**    : D
+- **Test associé** : test/system/classroom/student_home_test.rb *(cas « ordinateur », fenêtre de 1440 px)*
+- **Done quand**   : sur ordinateur, contenu de 912 px au plus à côté de la barre latérale sans carte de profil, carte (2/3) et annonce (1/3) à cheval sur le bandeau, grille de 7 cases sur une ligne, Historique sur deux colonnes de jours (CA-D10)
+
+### Lot O2 — « Mon compte » en panneau latéral, profil à carte bleue, Mon établissement
+
+- **Couche**       : infrastructure + delivery + ui
+- **Fichiers**     : app/views/shared/navigation/_avatar_menu.html.erb *(panneau latéral droit de 400 px dès lg ; entrée « Mon établissement »)*
+                     app/helpers/navigation_helper.rb *(`ACCOUNT_PANELS[:student]` : Mon profil, Mon établissement, Modifier mon code secret)*
+                     app/views/classroom/student_menus/show.html.erb *(même liste)*
+                     app/views/identity/profiles/_student.html.erb · _student_identity.html.erb · _student_information.html.erb *(carte bleue au nom seul, 4 lignes, colonne de 720 px)*
+                     app/infrastructure/queries/school/student_school_query.rb *(nouveau : nom, sigle, DRENA, type de l'établissement de la classe de l'élève connecté, sans identifiant reçu)*
+                     app/controllers/school/student_schools_controller.rb · app/views/school/student_schools/show.html.erb *(nouveaux, « Mon établissement »)*
+                     config/routes/school.rb *(`GET /students/school`)*
+                     config/locales/shared/navigation.fr.yml · config/locales/identity/profiles.fr.yml · config/locales/school/student_schools.fr.yml *(nouveau)*
+- **Dépend de**    : E1
+- **Test associé** : test/system/identity/student_avatar_menu_test.rb · test/system/identity/profile_test.rb · test/infrastructure/queries/school/student_school_query_test.rb · test/controllers/school/student_schools_controller_test.rb
+- **Done quand**   : sur ordinateur, « Mon compte » s'ouvre en panneau de 400 px et se ferme par Échap, la croix ou le voile (CA-E7) ; sa liste est Mon profil, Mon établissement, Modifier mon code secret, Mode sombre, Se déconnecter (CA-E8) ; le profil a la carte bleue au nom seul et 4 lignes (CA-E9) ; « Mon établissement » montre Nom, Sigle, DRENA, Type de l'établissement de l'élève et de lui seul, un élève sans classe n'y a pas accès (CA-E10)
+
+### Lot O3 — Inscription en deux colonnes
+
+- **Couche**       : ui
+- **Fichiers**     : app/views/classroom/student_registrations/new.html.erb · _form.html.erb · app/views/classroom/joins/new.html.erb *(panneau de 360 px et colonne du formulaire dès lg)*
+                     app/javascript/controllers/classroom/signup_steps_controller.js *(met à jour la liste des étapes du panneau et le rappel de classe sous l'étape 1)*
+                     config/locales/classroom/student_registrations.fr.yml
+- **Dépend de**    : C
+- **Test associé** : test/system/identity/student_signup_steps_test.rb · test/system/classroom/join_test.rb *(cas « ordinateur »)*
+- **Done quand**   : sur ordinateur, le panneau `brand-strong` (bienvenue, trois étapes, « Déjà un compte ? ») est le même aux trois étapes et remplace la barre ; la classe trouvée s'affiche sous l'étape 1 avec « Ce n'est pas ta classe ? › », pas au-dessus du formulaire (CA-C8, CA-C9) ; sans JavaScript, l'inscription aboutit toujours (CA-C7)
+
+### Lot O4 — Ma classe, fiche de révision, résultat sur ordinateur
+
+- **Couche**       : ui
+- **Fichiers**     : app/views/classroom/student_classrooms/show.html.erb *(colonnes 2/3 – 1/3)*
+                     app/views/catalog/essentials/show.html.erb *(élève : colonne « Exercices » de 300 px collante ; enseignant et équipe inchangés)*
+                     app/views/assessment/session_results/show.html.erb *(colonne de 340 px collante)*
+- **Dépend de**    : E2
+- **Test associé** : test/system/classroom/student_classroom_test.rb · test/system/classroom/classroom_essential_test.rb · test/system/assessment/session_result_test.rb *(cas « ordinateur »)*
+- **Done quand**   : Ma classe met assignés et fiches à revoir à gauche (2/3), traités à droite (1/3) (CA-E11) ; la carte « Exercices » de la fiche reste visible au défilement pour l'élève, l'enseignant garde l'ancienne mise en page (CA-E12) ; le résultat garde note et « Recommencer » visibles pendant la correction (CA-E13)
+
+### Lot O5 — Cours par leçons
+
+- **Couche**       : infrastructure + ui
+- **Fichiers**     : app/views/catalog/courses/index.html.erb · _course_card.html.erb · _essential_row.html.erb *(élève : une carte par leçon avec ses fiches, « Voir les N fiches » au-delà de 3 ; pastilles des matières dès lg)*
+                     app/infrastructure/queries/catalog/course_catalog_query.rb *(branche élève : fiches de chaque leçon et marque « à revoir », sans N+1)*
+                     config/locales/catalog/courses.fr.yml
+- **Dépend de**    : E2
+- **Test associé** : test/infrastructure/queries/catalog/course_catalog_query_test.rb · test/controllers/catalog/courses_controller_test.rb · test/system/catalog/student_courses_test.rb *(nouveau, 390 et 1440 px)*
+- **Done quand**   : l'élève ne voit que les leçons de la matière, une carte par leçon avec ses fiches, 3 puis « Voir les N fiches », « À revoir » sur la bonne fiche, la progression écrite une fois (CA-E14) ; sur ordinateur, pastilles des 6 matières, celle affichée en `aria-current="page"`, cartes sur deux colonnes, « Cours » de la barre latérale ouvre la dernière matière touchée sinon la première (CA-E15) ; le Cours de l'enseignant ne change pas
+
+### Lot O6 — Page d'accueil publique sur ordinateur
+
+- **Couche**       : ui
+- **Fichiers**     : app/views/homepage/index.html.erb *(variantes `lg:` ; seulement si F ne les a pas livrées)*
+- **Dépend de**    : F
+- **Test associé** : test/system/homepage_test.rb *(cas « ordinateur »)*
+- **Done quand**   : sur ordinateur, texte à gauche et photo à droite sur un seul écran, sans en-tête ni pied de page, la feuille mordant sur la photo (CA-A3)
+
+**Collision** : aucun fichier n'est listé par deux lots O. `_sidebar` n'est qu'à O1, `_avatar_menu` et `navigation_helper.rb` qu'à O2, `config/routes/school.rb` qu'à O2, `catalog/essentials/show` qu'à O4, `catalog/courses/*` qu'à O5. Les lots O touchent des fichiers des lots C, D, E1, E2 et F : ils partent donc de la branche de chantier **après** la fusion du lot dont ils dépendent.
