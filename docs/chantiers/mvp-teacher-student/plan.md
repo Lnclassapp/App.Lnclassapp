@@ -15,10 +15,12 @@
 | A — Jetons de couleurs | Touré (`toure-bangaly`), #285 | — | samedi 24 | 🟡 **à moitié** : jetons et police sur `feature/mvp-teacher-student-lot-p` (`c7a2d2b9`), non fusionnés ; reste le balayage des graisses, le test qui les refuse et les captures |
 | F — Page d'accueil publique en photo | Konan (`konanmeschac777-cmyk`), #286 | — | samedi 24 | à faire |
 | B2 — Code visible sur la page de classe (provisoire) | orchestrateur | B | samedi 24 | à faire (porteur, 2026-10-24 : « A ») |
-| C — Inscription élève en 3 étapes | orchestrateur | B | samedi 24 → dimanche 25 | 🟡 **en cours** depuis 10 h 30 (session « MVP teacher-student », branche `feature/mvp-teacher-student-lot-b`, ancien nom du lot) |
+| C — Inscription élève en 3 étapes | orchestrateur | B | samedi 24 | ✅ **fusionné** (`dc2c78c5`), captures validées |
 | D — Accueil élève, carte du prochain exercice | orchestrateur | A | dimanche 25 → lundi 26 | à faire |
 | E1 — « Mon compte » plein écran, profil sans doublons | Touré, #291 | A | dimanche 25 | à faire |
 | E2 — Ma classe, fiche, résultat, Cours | Konan, #290 | A, F | dimanche 25 → lundi 26 | à faire |
+
+**Budget des tests système** (ADR-0069 §9, 15 s par chantier) : C en prend 10,5 s ; il reste environ 4,5 s pour B2, D, E1, E2. Un lot teste au niveau contrôleur ou intégration tout ce qui n'exige pas un navigateur ; s'il faut plus de temps système, le porteur relève le budget avant la fusion.
 
 **Un seul plan, deux sessions** (coordination du 2026-10-24) : ce fichier, sur `Develop`, est le seul plan ; le `plan.md` de 15 lots resté sur la branche de chantier est écrasé par celui-ci à la fusion de #295. La session « MVP teacher-student » tient la branche de chantier : elle exécute et fusionne les lots d'orchestrateur (C, puis D) et elle seule fusionne dans `feature/mvp-teacher-student`. Cette session tient le plan et les issues de Touré et Konan. Issues des lots enseignant (#287, #288, #289, #292, #293, #294) : en attente, reprises après les lots élève.
 
