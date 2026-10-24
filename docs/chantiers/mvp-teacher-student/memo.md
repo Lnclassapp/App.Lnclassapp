@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié — prêt pour le Lot 0 et le Lot P (2026-10-23) |
+| **Statut** | replanifié élève d'abord — 7 lots (A, B, F, puis C, D, E1, E2), en attente du « lance les lots » (2026-10-24) |
 | **Ouvert le** | 2026-10-22 |
 | **Branche** | `Develop` pour la documentation (commit direct, CLAUDE.md « Sobriété de tokens ») ; une branche de code pour la PR du lundi 26 |
 | **Programme** | — *(hors vagues de `refonte-application` : il choisit dans ce que les vagues ont livré)* |
@@ -128,3 +128,5 @@ Le lancement du mardi 27 octobre n'a pas besoin de nouveautés. Il a besoin d'un
 3. Puis dessiner les autres écrans ordinateur (inscription, Ma classe, Cours, profil, fiche élève, retraits, assignation) et les ajouter en commentaire des issues concernées.
 
 Ensuite : lots A et C (orchestrateur) dès le Lot 0 fusionné, puis B, J, Z. Retour de l'Espace établissement le 2 novembre (drapeau `school_space_enabled`).
+
+**Troisième session (2026-10-24)** : le porteur a validé (« option A ») de traiter l'élève d'abord. `plan.md` et `prd.md` sont réécrits pour l'élève seul (7 lots, 34 critères) ; l'ancien plan de 15 lots et les critères enseignant restent dans la version `c766532`, base des lots enseignant à venir. Les issues #285 à #294 suivent encore l'ancien plan : à réaligner au départ des lots. Rien n'est codé avant le « lance les lots » du porteur.
