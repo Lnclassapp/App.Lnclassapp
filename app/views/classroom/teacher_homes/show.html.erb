@@ -6,9 +6,6 @@
 <h1 class="sr-only"><%= t(".page_title") %></h1>
 <%# Le bandeau va bord à bord : le shell le rend au-dessus de la colonne (content_for :home_band) et retire l'en-tête sous lg. %>
 <% content_for :home_band, render("shared/navigation/home_band", role: :teacher, user: shell_user) %>
-<%# Grand écran : la carte « Parrainage » de la barre latérale vient avec la page, sans frame à demander (ADR-0076 §4.2). %>
-<% content_for :sidebar_referral, render("identity/referrals/sidebar_card", invite: @invite, frame: NavigationHelper::SIDEBAR_FRAME_OPTIONS) %>
-
 <%# -mt-20 : la carte des classes déborde de 40 % sur le bandeau de 132 px (le shell garde 24 px de marge haute) ; data-bleed-keep : les cartes restent dans la marge, arrondies, sous 640 px. %>
 <%# Dès lg : deux colonnes égales, réservées à « Cette semaine » et « Historique » ; toute autre section prend les deux (lg:col-span-2). %>
 <div id="teacher_home" data-bleed-keep class="<%= class_names("mx-auto grid w-full max-w-180 grid-cols-1 gap-6 lg:max-w-228 lg:grid-cols-2", "-mt-20 lg:mt-0" => !lnclass_app?) %>">

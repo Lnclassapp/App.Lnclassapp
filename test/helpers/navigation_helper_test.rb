@@ -242,22 +242,6 @@ class NavigationHelperTest < ActionView::TestCase
     assert_equal %i[classroom subjects announcements todo], home_sections_for(:student).map(&:first)
   end
 
-  # UDR-0069 §3.6 : la carte « Parrainage » de l'enseignant, frame différé, sauf sur la page qui porte déjà le bloc.
-  test "the teacher's sidebar defers the referral card, except on the invite page itself" do
-    request.path = "/teachers"
-
-    assert_equal [ [ "sidebar_referral", teacher_invite_path ] ], sidebar_frames_for(:teacher)
-    assert_empty sidebar_frames_for(:team)
-
-    request.path = teacher_invite_path
-
-    assert_empty sidebar_frames_for(:teacher)
-    without_route(:teacher_invite_path)
-    request.path = "/teachers"
-
-    assert_empty sidebar_frames_for(:teacher)
-  end
-
   # UDR enseignant §3.1 : le filet de couleur du rôle disparaît pour l'enseignant (le bandeau de l'accueil le remplace).
   test "home sections exist for every role; the accent exists for every role but the teacher" do
     NavigationHelper::DESTINATIONS.each_key do |role|

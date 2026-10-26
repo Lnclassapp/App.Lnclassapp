@@ -330,8 +330,8 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
         assert_select ".sr-only", text: "sur WhatsApp"
       end
     end
-    # The « Inviter un collègue » page stays reachable by its own address and by the sidebar card.
-    assert_select "#sidebar_referral a[href='#{teacher_invite_path}']"
+    # The « Inviter un collègue » page stays reachable by its own address; the sidebar no longer has a card for it (lot P0).
+    assert_select "aside #sidebar_referral", 0
     get teacher_invite_path
     assert_response :success
   end

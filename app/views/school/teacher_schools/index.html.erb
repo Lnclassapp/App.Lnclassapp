@@ -1,11 +1,24 @@
 <%# 🌐 UI · school/teacher_schools/index — « Mes établissements » de l'enseignant, écran de retrait %>
-<%# Rôle : « N sur 3 », une ligne par établissement (« En cours », « Retirer » confirmé, jamais sur le dernier), puis « Ajouter un établissement » sous le plafond %>
-<%# ADR  : 0094 · UDR : 0006, 0042, 0054, 0098 (§3.1), 0099 (§3.1 à §3.3), écrans enseignant sans répétition (§3.4) · CA-H4, CA-H5 · Stimulus : modal, school--drena-schools %>
+<%# Rôle : « N sur 3 », une ligne par établissement (« En cours », « Retirer » confirmé, jamais sur le dernier), puis « Ajouter un établissement » sous le plafond ; dès lg, rendu dans le frame du panneau « Mon compte » %>
+<%# ADR  : 0094 · UDR : 0006, 0042, 0054, 0098 (§3.1), 0099 (§3.1 à §3.3), écrans enseignant sans répétition (§3.4) · CA-H4, CA-H5, CA-H7 · Stimulus : modal, school--drena-schools %>
 <% page_title t(".page_title") %>
 <% max = Entities::School::TeacherSchools::MAX %>
 <% full = teacher_schools.size >= max %>
 <% removable = teacher_schools.size > 1 %>
+<%# UDR §3.4 (≥ lg) : le lien « Mes établissements » du panneau charge cet écran dans son frame ; « ‹ Mon compte » et « Retirer » y restent.
+    Le formulaire d'ajout, lui, quitte le frame (le rattachement mène à « Mes classes ») : la page entière n'est servie qu'à plein écran. %>
+<% panel = turbo_frame_request_id == NavigationHelper::ACCOUNT_PANEL_FRAME %>
+<% screen = capture do %>
 <div class="flex max-w-md flex-col gap-4">
+<% if panel %>
+  <%# Rendu dans le frame, la réponse n'a pas le layout (ni sa région de toasts) : le message de l'envoi précédent se lit ici, et part avec la requête. %>
+  <% flash.each do |key, message| %>
+    <% next unless message.is_a?(String) %>
+    <% alert = key.to_s == "alert" %>
+    <%= tag.p message, role: (alert ? "alert" : "status"),
+                       class: class_names("rounded-ln px-4 py-3 text-sm font-medium", "bg-error-soft text-error": alert, "bg-success-soft text-success": !alert) %>
+  <% end %>
+<% end %>
   <div>
     <%= ui_back_link t(".back"), href: teacher_menu_path %>
     <h1 class="font-display text-lg leading-tight font-medium text-ink"><%= t(".title") %></h1>
@@ -54,6 +67,7 @@
   <p class="rounded-ln bg-mist p-4 text-sm text-mute"><%= t(".archived_note") %></p>
 
   <% unless full %>
+    <% join = capture do %>
     <%= ui_card id: "add_school", padding: :md do %>
       <h2 class="font-display text-lg font-medium text-ink"><%= t(".add_title") %></h2>
       <p class="mt-1 mb-4 text-sm text-mute"><%= t(".add_description") %></p>
@@ -66,5 +80,9 @@
                                                          post_url: teacher_schools_path, submit_label: t(".join") %>
       <% end %>
     <% end %>
+    <% end %>
+    <%= panel ? turbo_frame_tag("teacher_school_join", target: "_top") { join } : join %>
   <% end %>
 </div>
+<% end %>
+<%= panel ? turbo_frame_tag(NavigationHelper::ACCOUNT_PANEL_FRAME) { screen } : screen %>
