@@ -27,31 +27,34 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
   # le titre de leur matière.
   test "a student searches the catalogue without a page reload, then opens a course whose formula KaTeX renders" do
     # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe de Tle, le niveau des deux cours.
-    sign_in_as create_student_for(@course)
-    visit courses_path
-    assert_selector "#courses_groups li", count: 2
+    # Lot O5 : sur ordinateur, Cours est celui des leçons ; la recherche des groupes par matière est celle du téléphone.
+    with_mobile_viewport do
+      sign_in_as create_student_for(@course)
+      visit courses_path
+      assert_selector "#courses_groups li", count: 2
 
-    assert_no_page_reload do
-      # Pendant la frappe, sans « Filtrer », caché avec JavaScript (UDR-0054 §3.9).
-      assert_no_button t("catalog.courses.index.filters.submit")
-      assert_no_select t("catalog.courses.index.filters.material")
-      fill_in t("catalog.courses.index.filters.search"), with: "généti"
-      assert_selector "#courses_groups li", count: 1
-      assert_selector "#courses_group_svt #course_#{@course.slug}"
-      assert_current_path(/\A#{courses_path}\?.*q=/)
+      assert_no_page_reload do
+        # Pendant la frappe, sans « Filtrer », caché avec JavaScript (UDR-0054 §3.9).
+        assert_no_button t("catalog.courses.index.filters.submit")
+        assert_no_select t("catalog.courses.index.filters.material")
+        fill_in t("catalog.courses.index.filters.search"), with: "généti"
+        assert_selector "#courses_groups li", count: 1
+        assert_selector "#courses_group_svt #course_#{@course.slug}"
+        assert_current_path(/\A#{courses_path}\?.*q=/)
+      end
+
+      assert_no_page_reload do
+        find("#course_#{@course.slug} a").click
+        assert_selector "#course_header h1", text: "Génétique et évolution"
+      end
+      assert_current_path course_path(@course.slug)
+      assert_selector "#course_content .katex", count: 1
+      assert_selector "#course_essentials li", text: "La méiose"
+
+      assert_not resource_loaded?("trix"), "une page sans formulaire ne charge pas Trix"
+      assert page.evaluate_script("performance.getEntriesByType('resource').every((entry) => entry.name.startsWith(location.origin))"),
+             "une ressource vient d'un hôte tiers"
     end
-
-    assert_no_page_reload do
-      find("#course_#{@course.slug} a").click
-      assert_selector "#course_header h1", text: "Génétique et évolution"
-    end
-    assert_current_path course_path(@course.slug)
-    assert_selector "#course_content .katex", count: 1
-    assert_selector "#course_essentials li", text: "La méiose"
-
-    assert_not resource_loaded?("trix"), "une page sans formulaire ne charge pas Trix"
-    assert page.evaluate_script("performance.getEntriesByType('resource').every((entry) => entry.name.startsWith(location.origin))"),
-           "une ressource vient d'un hôte tiers"
   end
 
   # Lot E4 (chantier politique-cache), UDR-0013 amendement du 2026-10-05 : 24 cartes ; la suite arrive quand on descend,

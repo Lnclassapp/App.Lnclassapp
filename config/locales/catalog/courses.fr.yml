@@ -9,6 +9,10 @@ fr:
         # UDR écrans élève §3.6 : la progression du programme s'écrit une fois, à la suite du compte.
         student_total: "%{total} · Progression DPFC 2026-2027"
         student_progression: "Progression DPFC 2026-2027"
+        # Lot O5 (UDR écrans élève §3.6 bis) : Cours par leçons sur ordinateur, les pastilles des matières. Le compte reprend
+        # « N fiches de cours · Progression DPFC » (UDR-0130 : le mot « leçon » n'est pas du vocabulaire de l'écran).
+        lessons:
+          materials_label: "Matières"
         # UDR-0013, amendement du 2026-10-02 : la portée du catalogue de l'élève, en infobulle (UDR-0057 R4).
         student_scope: "Tu vois seulement les fiches de cours de ton niveau."
         student_scope_label: "Quelles fiches de cours ?"
@@ -69,10 +73,15 @@ fr:
           other: "%{material}, %{count} fiches de cours, voir la matière"
       course_card:
         open: "Ouvrir la fiche de cours"
+        # Lot O5 : sur la carte d'une leçon (ordinateur), les fiches au-delà de 3 se révèlent sur place.
+        more_essentials: "Voir les %{count} fiches"
         # UDR écrans élève §3.6 : la ligne entière est le lien ; la pastille dit « En cours », la coche verte « Terminée ».
         progress:
           started: "En cours"
           done: "Terminée"
+      # Lot O5 : la ligne d'une fiche sur la carte d'une leçon (ordinateur) ; l'étiquette d'une lacune en attente.
+      essential_row:
+        review: "À revoir"
       show:
         page_title: "%{name}"
         back: "Cours"

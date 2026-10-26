@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/index — catalogue des cours (CA-01), pour tous les rôles connectés %>
-<%# Rôle : recherche et filtres (téléphone compris) qui visent le frame « courses » ; élève : son niveau, recherche seule, groupes par matière, vue d'une matière ; enseignant : « Cours de Tle D », une de ses matières à la fois (puces), sans menus, une carte par fiche de cours avec ses fiches de révision ; équipe : création et import %>
-<%# ADR  : 0028, 0035, 0076, 0090 · UDR : 0006, 0013 (amendements du 2026-10-02 et du 2026-10-05), 0057, 0069, 0077 §3.2 (amendement du 2026-10-06), 0085 (élève), 0126 §3.1 (amendé par XXXX écrans enseignant sans répétition §3.7), XXXX écrans élève sans répétition §3.6 (« Progression DPFC » une fois) · par pages de 24 %>
+<%# Rôle : recherche et filtres (téléphone compris) qui visent le frame « courses » ; élève : son niveau, recherche seule, groupes par matière, vue d'une matière, et sur ordinateur pastilles des matières et leçons en cartes avec leurs fiches ; enseignant : « Cours de Tle D », une de ses matières à la fois (puces), sans menus, une carte par fiche de cours avec ses fiches de révision ; équipe : création et import %>
+<%# ADR  : 0028, 0035, 0076, 0090 · UDR : 0006, 0013 (amendements du 2026-10-02 et du 2026-10-05), 0057, 0069, 0077 §3.2 (amendement du 2026-10-06), 0085 (élève), 0126 §3.1 (amendé par XXXX écrans enseignant sans répétition §3.7), XXXX écrans élève sans répétition §3.6 (« Progression DPFC » une fois) et §3.6 bis (Cours par leçons, dès lg) · par pages de 24 %>
 <% team = current_actor.team? %>
 <%# UDR-0013, amendement du 2026-10-01 : l'élève ne voit que son niveau ; le filtre par niveau ne lui sert plus. %>
 <% student = current_actor.student? %>
@@ -169,4 +169,87 @@
 <% end %>
 <% end %>
 <%# UDR-0085 §3.4 : la colonne de l'élève, comme son accueil — pleine, 720 px dès 700 px, 960 px au plus dès 1 024 px. %>
-<%= student ? tag.div(body, id: "student_courses", class: "mx-auto w-full max-w-180 lg:max-w-240") : body %>
+<% if student %>
+  <%# UDR écrans élève §3.6 bis : dès lg, Cours par leçons (une matière, ses leçons en cartes) ; sous lg, le Cours de §3.6, inchangé.
+      Deux blocs, un seul visible : les ids du bloc ordinateur commencent par « lesson ». %>
+  <% lessons = capture do %>
+    <% next if list_frame_request? %>
+    <% materials = lesson_materials %>
+    <% current = lesson_material %>
+    <% page = lessons_page %>
+    <h1 class="mb-4 font-display text-2xl font-medium tracking-tight text-balance"><%= t(".title") %></h1>
+    <% if materials.any? %>
+      <%# CA-E15 : les matières de l'élève en pastilles (rond d'icône 32 px, 48 px de haut), la matière affichée pleine. %>
+      <nav id="lesson_materials" aria-label="<%= t(".lessons.materials_label") %>" class="mb-4">
+        <ul class="flex flex-wrap gap-2">
+          <% materials.each do |one| %>
+            <% active = one.slug == current.slug %>
+            <% illustration = subject_illustration(one.slug) %>
+            <li>
+              <%= link_to courses_path(material: one.slug), id: "lesson_material_#{one.slug}", "aria-current": ("page" if active),
+                          class: class_names("inline-flex min-h-tap items-center gap-2 rounded-full border py-1 pr-4 pl-2 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
+                                             "border-brand-strong bg-brand-strong text-white" => active,
+                                             "border-line-strong bg-white text-ink transition hover:bg-mist" => !active) do %>
+                <span class="<%= class_names("grid size-8 shrink-0 place-items-center rounded-full", active ? "bg-white" : illustration.tint) %>">
+                  <%= image_tag illustration.path, alt: "", class: "size-5", "aria-hidden": true %>
+                </span>
+                <%= one.name %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </nav>
+      <%= form_with url: courses_path, method: :get, id: "lessons-filters", html: { role: "search", "aria-label": t(".filters.label") },
+                    data: { turbo_frame: "lessons", turbo_action: "advance", controller: "search" }, class: "mb-4 flex items-center gap-3" do %>
+        <%= hidden_field_tag :material, current.slug, id: nil %>
+        <div class="relative min-w-0 flex-1">
+          <%= label_tag :lesson_q, t(".filters.search"), class: "sr-only" %>
+          <%= ui_icon "magnifying-glass", class: "pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-mute" %>
+          <%= search_field_tag :q, @filters[:q], id: "lesson_q", placeholder: t(".filters.search"), autocomplete: "off",
+                                                 data: { action: "search#queue" },
+                                                 class: "block min-h-tap w-full rounded-card border border-line bg-white py-3 pr-4 pl-12 text-base text-ink placeholder:text-mute focus:border-brand focus:outline-2 focus:outline-brand" %>
+        </div>
+        <div data-search-target="button">
+          <%= ui_button t(".filters.submit"), type: :submit, icon: "funnel" %>
+        </div>
+        <template data-search-target="error"><%= ui_error_state retry_href: "#" %></template>
+      <% end %>
+    <% end %>
+    <%= turbo_frame_tag "lessons", target: "_top", data: { turbo_action: "advance" }, class: "block transition-opacity aria-busy:opacity-50" do %>
+      <% if page&.rows&.any? %>
+        <div class="mb-3 flex items-center justify-between gap-3">
+          <p id="lessons_total" class="text-sm text-mute" aria-live="polite"><%= t(".student_total", total: t(".total", count: page.total_count)) %></p>
+          <% if @filters[:q].present? %>
+            <%= link_to t(".reset"), courses_path(material: current.slug), id: "lessons_reset",
+                        class: "inline-flex min-h-tap items-center px-2 text-sm font-medium text-brand-strong" %>
+          <% end %>
+        </div>
+        <%# Une carte par leçon, deux colonnes, chacune à sa hauteur (items-start) ; les icônes dessinées une fois. %>
+        <%= ui_icon_sprite(prefix: "lessons-") do %>
+          <ul id="lessons_list" class="grid items-start gap-5 lg:grid-cols-2">
+            <%= render partial: "catalog/courses/course_card", collection: page.rows, as: :course,
+                       locals: { show_status: false, student: true, lesson_card: true } %>
+          </ul>
+        <% end %>
+      <% else %>
+        <div id="lessons_empty">
+          <% if @filters[:q].present? %>
+            <%= ui_empty_state title: t(".no_match_title"), description: t(".student_no_match_description"), icon: "magnifying-glass" do %>
+              <%= ui_button t(".clear_search"), href: courses_path(material: current.slug), variant: :secondary, icon: "x-mark" %>
+            <% end %>
+          <% elsif materials.empty? %>
+            <%= ui_empty_state title: t(".no_class_title"), description: t(".no_class_description"), icon: "user-group" %>
+          <% else %>
+            <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "book-open" %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+  <div id="student_courses" class="mx-auto w-full max-w-180 lg:max-w-240">
+    <div class="lg:hidden"><%= body %></div>
+    <% if lessons.present? %><div id="student_lessons" class="hidden lg:block"><%= lessons %></div><% end %>
+  </div>
+<% else %>
+  <%= body %>
+<% end %>
