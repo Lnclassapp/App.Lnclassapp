@@ -1,0 +1,25 @@
+<%# 🌐 UI · assessment/comprehension/_badge_boxes — les cinq cases du rapport d'un exercice : Pas encore · Bronze · Argent · Or · Diamant %>
+<%# Rôle : chaque case est un lien du Turbo Frame (?badge=) qui filtre la liste des élèves ; la case active se touche à nouveau pour tout revoir %>
+<%# ADR  : 0079 · UDR : enseignant (§3.8, §3.12) · cible de 44 px au moins ; lue « 3 élèves Or » (clé badge_box) ; sans JavaScript, le lien recharge la page %>
+<%# locals: (counts:, selected:, classroom:, assignment_public_id:) -%>
+<nav aria-label="<%= t("assessment.comprehension.section.badges_label") %>" class="@container grid grid-cols-5 gap-2">
+  <% Queries::Assessment::ComprehensionDetailQuery::BADGES.each do |badge| %>
+    <% count = counts.fetch(badge) %>
+    <% current = badge == selected %>
+    <%= link_to classroom_assignment_path(classroom.public_id, assignment_public_id, badge: (badge unless current)),
+                "aria-current": ("true" if current),
+                class: "block rounded-ln focus-visible:outline-2 focus-visible:outline-brand" do %>
+      <div class="<%= class_names("flex min-h-16 flex-col items-center justify-end gap-1 rounded-ln border px-1 py-3 text-center",
+                                  current ? "border-brand bg-brand-soft" : "border-line bg-white hover:bg-mist") %>">
+        <% if badge == :none %>
+          <span class="size-5" aria-hidden="true"></span>
+        <% else %>
+          <%= comprehension_trophy(comprehension_badge_class(badge, count), size: "size-5") %>
+        <% end %>
+        <span class="font-display text-lg font-medium text-ink tabular-nums" aria-hidden="true"><%= count %></span>
+        <span class="text-xs text-ink" aria-hidden="true"><%= comprehension_box_label(badge) %></span>
+        <span class="sr-only"><%= t("assessment.comprehension.badge_box", count:, level: comprehension_box_label(badge)) %></span>
+      </div>
+    <% end %>
+  <% end %>
+</nav>

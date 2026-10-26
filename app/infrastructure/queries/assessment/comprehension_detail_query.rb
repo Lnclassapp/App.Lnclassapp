@@ -1,13 +1,18 @@
 # 🔌 INFRA · Queries::Assessment::ComprehensionDetailQuery
-# Rôle : section « Compréhension » du suivi : catégories, signes, taux par question et élèves d'une catégorie (UDR-0072 §3.5)
-# ADR  : 0026, 0072, 0079, 0097 (§4.9) · après FollowAssignmentPolicy seulement : elle nomme des élèves ; requêtes en nombre constant
+# Rôle : section « Compréhension » du suivi : cases par badge, signes, taux par question et élèves d'un badge (UDR enseignant §3.8)
+# ADR  : 0026, 0072, 0079, 0097 (§4.9) · UDR : 0072, enseignant §3.8 · après FollowAssignmentPolicy seulement : elle nomme des élèves ; requêtes en nombre constant
 module Queries
   module Assessment
     class ComprehensionDetailQuery
       Comprehension = Entities::Assessment::Comprehension
 
-      # category : la dominante si lisible, sinon nil ; selected : la catégorie dont on lit les questions et les élèves.
-      Detail = Data.define(:done, :present, :category, :readable, :category_counts, :trend_counts, :selected, :questions, :students)
+      # Les cinq cases du rapport : « Pas encore » (sous le Bronze) puis les paliers de Grading, du plus bas au plus haut.
+      BADGES = [ :none, *Entities::Assessment::Grading::BADGE_ORDER ].freeze
+
+      # category : la dominante (struggling, fragile, acquired) si lisible, sinon nil : elle choisit le prochain geste ;
+      # badge_counts : { none:, bronze:, silver:, gold:, diamond: }, le palier du meilleur score de chaque élève qui l'a fait ;
+      # selected : la case filtrée (un symbole de BADGES), nil pour tous les élèves qui l'ont fait.
+      Detail = Data.define(:done, :present, :category, :readable, :badge_counts, :trend_counts, :selected, :questions, :students)
       # rate, first_rate : pourcentages arrondis, nil sans tentative ; first_rate nil aussi sans élève à deux sessions.
       QuestionRate = Data.define(:number, :content, :rate, :first_rate, :to_revisit)
       # public_id : celui de l'élève, le lien vers sa fiche dans la classe (ADR-0097 §4.9).
@@ -16,9 +21,9 @@ module Queries
       # « Sans évolution » regroupe stable et stagne ; les élèves sans signe n'entrent pas dans la synthèse (ADR-0079 §4.3).
       TREND_GROUPS = { progress: :progress, stable: :flat, stagnant: :flat, decline: :decline }.freeze
 
-      # category : un symbole de Comprehension::CATEGORIES, ou n'importe quoi d'autre (ignoré).
+      # badge : un symbole de BADGES, ou n'importe quoi d'autre (ignoré : tous les élèves).
       # → Detail | nil (assignation inconnue, archivée ou d'une autre classe)
-      def call(classroom_public_id:, assignment_public_id:, category:)
+      def call(classroom_public_id:, assignment_public_id:, badge:)
         classroom_id, id, exercise_id =
           Orm::ClassroomAssignment.joins(:classroom)
                                   .where(public_id: assignment_public_id, status: "active", assignable_type: "Exercise",
@@ -27,22 +32,25 @@ module Queries
         return if id.nil?
 
         scores = AssignmentScores.for(classroom_id:, assignment_ids: [ id ]).fetch(id, [])
-        detail(scores, Queries::Classroom::AssignmentFollowUpQuery.present_students(classroom_id).count, exercise_id, category)
+        detail(scores, Queries::Classroom::AssignmentFollowUpQuery.present_students(classroom_id).count, exercise_id, badge)
       end
 
       private
 
-      def detail(scores, present, exercise_id, category)
-        category_counts = Comprehension::CATEGORIES.index_with { 0 }.merge(scores.map { category_of(it) }.tally)
-        dominant = Comprehension.dominant(category_counts)
+      def detail(scores, present, exercise_id, badge)
+        dominant = Comprehension.dominant(Comprehension::CATEGORIES.index_with { 0 }.merge(scores.map { category_of(it) }.tally))
         readable = Comprehension.readable?(scores.size)
-        selected = Comprehension::CATEGORIES.include?(category) ? category : dominant || :struggling
-        members = scores.select { category_of(it) == selected }
-        Detail.new(done: scores.size, present:, category: (dominant if readable), readable:, category_counts:,
+        selected = badge if BADGES.include?(badge)
+        members = selected ? scores.select { badge_of(it) == selected } : scores
+        Detail.new(done: scores.size, present:, category: (dominant if readable), readable:,
+                   badge_counts: BADGES.index_with { 0 }.merge(scores.map { badge_of(it) }.tally),
                    trend_counts: trend_counts(scores), selected:, questions: questions(exercise_id, members), students: students(members))
       end
 
       def category_of(student_scores) = Comprehension.category_for(student_scores.scores.max)
+
+      # Le palier du meilleur score ; :none sous la note de Bronze (« Pas encore »).
+      def badge_of(student_scores) = Entities::Assessment::Grading.badge_for(student_scores.scores.max) || :none
 
       def trend_counts(scores)
         { progress: 0, flat: 0, decline: 0 }.merge(scores.filter_map { TREND_GROUPS[Comprehension.trend_for(it.scores)] }.tally)
