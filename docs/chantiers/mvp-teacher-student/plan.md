@@ -9,16 +9,16 @@
 
 **Pilotes** — un lot d'orchestrateur est exécuté par l'agent `executant-lot` ; un lot de Touré ou Konan, par eux :
 
-| Lot | Pilote | Dépend de | Jour | État au 24/10, 11 h |
+| Lot | Pilote | Dépend de | Jour | État au 26/10, 20 h |
 |---|---|---|---|---|
 | B — Code de classe à 6 caractères | orchestrateur | — | samedi 24 | ✅ **fait** (ancien Lot 0 + ancien Lot A, `021804cc`) ; `security-reviewer` passé, aucun constat au-dessus de « bas » |
 | A — Jetons de couleurs | orchestrateur (porteur, 2026-10-24 : « option A », repris de Touré), #285 | — | samedi 24 | ✅ **fusionné** (`8d009596`), captures validées par le porteur |
-| F — Page d'accueil publique en photo | **porteur** (`Kamkara007`), #286 (2026-10-26) | — | samedi 24 | à faire |
-| B2 — Code visible sur la page de classe (provisoire) | orchestrateur | B | samedi 24 | à faire (porteur, 2026-10-24 : « A ») |
+| F — Page d'accueil publique en photo | **porteur** (`Kamkara007`), #286 (2026-10-26) | — | samedi 24 | ✅ **fusionné** (`052c723`) |
+| B2 — Code visible sur la page de classe (provisoire) | orchestrateur | B | samedi 24 | ✅ **fusionné** (`9d92b7e`) |
 | C — Inscription élève en 3 étapes | orchestrateur | B | samedi 24 | ✅ **fusionné** (`dc2c78c5`), captures validées |
-| D — Accueil élève, carte du prochain exercice | **Touré**, #298 (2026-10-26 ; code déjà sur `-lot-d`) | A | dimanche 25 → lundi 26 | à faire |
-| E1 — « Mon compte » plein écran, profil sans doublons | **porteur** (`Kamkara007`), #291 (2026-10-26) | A | dimanche 25 | à faire |
-| E2 — Ma classe, fiche, résultat, Cours | **Touré**, #290 (2026-10-26) | A, F | dimanche 25 → lundi 26 | à faire |
+| D — Accueil élève, carte du prochain exercice | **Touré**, #298 (2026-10-26 ; code déjà sur `-lot-d`) | A | dimanche 25 → lundi 26 | ✅ **fusionné** (`3119230`) |
+| E1 — « Mon compte » plein écran, profil sans doublons | **porteur** (`Kamkara007`), #291 (2026-10-26) | A | dimanche 25 | ✅ **fusionné** (`c63f0ac`) |
+| E2 — Ma classe, fiche, résultat, Cours | **Touré**, #290 (2026-10-26) | A, F | dimanche 25 → lundi 26 | ✅ **fusionné** (`e1cb390`) |
 
 **Répartition du 2026-10-26** (porteur : « Konan pour les écrans des enseignants et Touré pour les élèves, mobile comme ordinateur ») : **Touré pilote tous les lots élève**, téléphone et ordinateur, dans cet ordre : D (#298), E1 (#291), F (#286), E2 (#290), O1 (#300), O3 (#299), O2 (#302), O6 (#301), O4 (#303), O5 (#304). **Repris par le porteur le même jour** : E1 (#291) et F (#286), en parallèle de D, pour débloquer Konan plus vite ; Touré enchaîne D, E2, O1. **Priorité aux dépendances** (porteur, 2026-10-26) : D, E1, F, E2 et O1 passent d'abord parce que Konan les attend (D pour G et P0, E1 pour M, F puis E2 pour N, O1 pour P1). Les lots enseignant sont à Konan ([`plan-enseignant.md`](plan-enseignant.md)). Chaque issue porte la fiche du lot, les changements du 26, les maquettes de référence (archive v12) et la marche à suivre. La session « MVP teacher-student » reste la seule à fusionner dans la branche de chantier.
 
@@ -251,14 +251,14 @@ Portes propres au pilote :
 >
 > **Ne change rien au téléphone** (porteur, 2026-10-24) : les lots O ne touchent qu'à ce qui s'affiche ≥ lg. Les écrans téléphone validés le 2026-10-23 (lots E1, E2) font foi. Le menu à « Mon établissement », le profil à carte bleue, l'écran « Mon établissement » et Cours par leçons sont **pour l'ordinateur seulement** (O2, O5) : chaque lot vérifie qu'à 390 px rien ne change.
 
-| Lot | Dépend de | En parallèle avec |
-|---|---|---|
-| O1 — Accueil élève en page large | D | O2, O3, O4, O5, O6 |
-| O2 — « Mon compte », profil et Mon établissement sur ordinateur | E1 | O1, O3, O4, O5, O6 |
-| O3 — Inscription en deux colonnes | C | tous |
-| O4 — Ma classe, fiche de révision, résultat sur ordinateur | E2 | tous |
-| O5 — Cours par leçons sur ordinateur | E2 | tous |
-| O6 — Page d'accueil publique sur ordinateur | F | tous |
+| Lot | Dépend de | En parallèle avec | État au 26/10, 20 h |
+|---|---|---|---|
+| O1 — Accueil élève en page large | D | O2, O3, O4, O5, O6 | ✅ **fusionné** (`85f390d`) |
+| O2 — « Mon compte », profil et Mon établissement sur ordinateur | E1 | O1, O3, O4, O5, O6 | ✅ **fusionné** (`312d309`) |
+| O3 — Inscription en deux colonnes | C | tous | ✅ **fusionné** (`797fc39`) |
+| O4 — Ma classe, fiche de révision, résultat sur ordinateur | E2 | tous | codé sur `-lot-o4` (Touré, #303), à fusionner |
+| O5 — Cours par leçons sur ordinateur | E2 | tous | à faire (Touré, #304) |
+| O6 — Page d'accueil publique sur ordinateur | F | tous | à faire |
 
 ### Lot O1 — Accueil élève en page large
 
