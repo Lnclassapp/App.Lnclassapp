@@ -110,7 +110,9 @@
 <% end %>
 <%# Le contenu du panneau est un Turbo Frame : l'écran de retrait y remplace le menu (CA-H7), « ‹ Mon compte » le ramène. %>
 <%# Après chaque chargement du frame, le contrôleur panel-focus met le focus sur le titre du nouvel écran (clavier, lecteur d'écran). %>
-<% screen = in_panel ? turbo_frame_tag(frame, data: { controller: "panel-focus", action: "turbo:frame-load->panel-focus#focus" }) { content } : content %>
+<%# Une réponse sans ce frame (erreur, connexion expirée) s'affiche en pleine page ; une requête coupée se dit dans le panneau (panel-focus). %>
+<% panel_actions = "turbo:frame-load->panel-focus#focus turbo:frame-missing->panel-focus#missing turbo:fetch-request-error->panel-focus#requestFailed" %>
+<% screen = in_panel ? turbo_frame_tag(frame, data: { controller: "panel-focus", action: panel_actions }) { safe_join([ content, render("shared/navigation/panel_request_failed") ]) } : content %>
 <% if local_assigns[:page] %>
   <%= screen %>
 <% else %>

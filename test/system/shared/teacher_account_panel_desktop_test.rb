@@ -42,7 +42,7 @@ class Shared::TeacherAccountPanelDesktopTest < ApplicationSystemTestCase
         assert_equal [ "AT", "Awa Traoré", "Maths · PC · SVT · LM2" ], find("div.rounded-card", match: :first).text.split("\n")
         assert_equal [ tn(:home), tn(:classrooms), tn(:courses) ], all("nav a").map { it.text.squish }
         assert_no_text "Inviter"
-        assert_no_selector "#sidebar_referral", visible: :all
+        assert_no_text "Parrainage"
       end
       find(TRIGGER).click
       panel = find("#{PANEL}[open]", visible: true)
@@ -107,6 +107,76 @@ class Shared::TeacherAccountPanelDesktopTest < ApplicationSystemTestCase
       within("aside") do
         assert_no_text "LM2"
         assert_text(/CSM|CND/)
+      end
+    end
+  end
+
+  # Review of P0: a response without the frame of the panel (here the 404 of a school already left on another device) must not
+  # write « Content missing » in the panel: the error page shows whole, in French.
+  test "at 1280 px, leaving a school already left elsewhere shows the error page, not « Content missing » in the panel" do
+    teacher = Orm::User.find_by!(first_name: "Awa")
+    gone = create_school(name: "Collège Saint-Michel", sigle: "CSM")
+    [ gone, create_school(name: "Collège Notre-Dame", sigle: "CND") ].each { add_teacher_school(teacher, it) }
+    with_mobile_viewport(DESKTOP_VIEWPORT) do
+      visit profile_path
+      find(TRIGGER).click
+      within(find("#{PANEL}[open]", visible: true)) do
+        click_link "#{tn('account_panel.entries.add_school')} #{tn('account_panel.counter.full.schools', used: 3, max: 3)}"
+        assert_selector "#teacher_schools li", count: 3
+        Orm::TeacherSchool.where(teacher:, school: gone).delete_all
+        within("#teacher_school_#{gone.public_id}") { click_button I18n.t("school.teacher_schools.index.leave") }
+        click_button I18n.t("school.teacher_schools.index.leave_confirm")
+      end
+
+      assert_text I18n.t("errors.not_found.title"), wait: 5
+      assert_no_text "Content missing"
+      assert_no_selector "#{PANEL}[open]", visible: true
+    end
+  end
+
+  # Review of P0: a cut network on « Retirer » says so in the panel (role=alert, French), changes nothing, and the next try works.
+  test "at 1280 px, a cut network on « Retirer » says so in the panel, for a subject then for a school, and a new try works" do
+    teacher = Orm::User.find_by!(first_name: "Awa")
+    [ create_school(name: "Collège Saint-Michel", sigle: "CSM"), create_school(name: "Collège Notre-Dame", sigle: "CND") ].each { add_teacher_school(teacher, it) }
+    with_mobile_viewport(DESKTOP_VIEWPORT) do
+      visit profile_path
+      find(TRIGGER).click
+      panel = find("#{PANEL}[open]", visible: true)
+      execute_script(<<~JS)
+        const original = window.fetch
+        window.networkCut = true
+        window.fetch = (input, init) => (window.networkCut && init?.method?.toUpperCase() !== "GET" ? Promise.reject(new TypeError("Failed to fetch")) : original(input, init))
+      JS
+      failed = tn("account_panel.request_failed")
+
+      within(panel) { click_link "#{tn('account_panel.entries.add_material')} #{tn('account_panel.counter.full.materials', used: 3, max: 3)}" }
+      within(panel) { find("#teacher_material_svt").click_button I18n.t("identity.profile_materials.show.remove") }
+      within(panel) do
+        assert_selector "[role=alert]", text: failed, count: 1
+        assert_selector "#teacher_materials li", count: 3
+      end
+      within(panel) { find("#teacher_material_svt").click_button I18n.t("identity.profile_materials.show.remove") }
+      within(panel) { assert_selector "[role=alert]", text: failed, count: 1 }
+
+      within(panel) { click_link I18n.t("identity.profile_materials.show.back") }
+      within(panel) { click_link "#{tn('account_panel.entries.add_school')} #{tn('account_panel.counter.full.schools', used: 3, max: 3)}" }
+      within(panel) do
+        assert_selector "#teacher_schools li", count: 3
+        assert_no_selector "[role=alert]"
+        within("#teacher_school_#{Orm::School.find_by!(sigle: 'CSM').public_id}") { click_button I18n.t("school.teacher_schools.index.leave") }
+        click_button I18n.t("school.teacher_schools.index.leave_confirm")
+        assert_selector "[role=alert]", text: failed, count: 1
+        assert_selector "#teacher_schools li", count: 3
+        assert_no_selector "dialog[open] dialog[open]"
+      end
+      assert_selector "#{PANEL}[open]", visible: true
+
+      execute_script("window.networkCut = false")
+      within(panel) do
+        within("#teacher_school_#{Orm::School.find_by!(sigle: 'CSM').public_id}") { click_button I18n.t("school.teacher_schools.index.leave") }
+        click_button I18n.t("school.teacher_schools.index.leave_confirm")
+        assert_selector "#teacher_schools li", count: 2
+        assert_no_selector "[role=alert]", text: failed
       end
     end
   end

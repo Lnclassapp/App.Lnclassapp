@@ -85,4 +85,4 @@
   <% end %>
 </div>
 <% end %>
-<%= panel ? turbo_frame_tag(NavigationHelper::ACCOUNT_PANEL_FRAME) { screen } : screen %>
+<%= panel ? turbo_frame_tag(NavigationHelper::ACCOUNT_PANEL_FRAME) { safe_join([ screen, render("shared/navigation/panel_request_failed") ]) } : screen %>

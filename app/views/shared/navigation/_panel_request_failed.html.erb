@@ -1,0 +1,6 @@
+<%# 🌐 UI · shared/navigation/_panel_request_failed — le message d'une requête coupée dans le panneau « Mon compte » %>
+<%# Rôle : <template> lu par panel-focus (cible `failed`) ; rendu dans le frame du panneau par _account_panel et par chaque écran de retrait %>
+<%# UDR  : 0054 (§3.9) : un échec se dit en français, `role="alert"`, sans quitter l'écran · le texte vient du serveur, jamais du JavaScript %>
+<template data-panel-focus-target="failed">
+  <p data-panel-failed role="alert" class="rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error"><%= t("shared.navigation.account_panel.request_failed") %></p>
+</template>

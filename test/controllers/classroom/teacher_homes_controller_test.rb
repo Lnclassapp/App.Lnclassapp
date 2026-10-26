@@ -336,7 +336,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
       end
     end
     # The « Inviter un collègue » page stays reachable by its own address; the sidebar no longer has a card for it (lot P0).
-    assert_select "aside #sidebar_referral", 0
+    assert_select "aside", text: /Parrainage/, count: 0
     get teacher_invite_path
     assert_response :success
   end

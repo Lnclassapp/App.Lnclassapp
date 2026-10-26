@@ -161,6 +161,27 @@ class School::TeacherSchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ [ @a.id, true ] ], attached
   end
 
+  # Revue de P0 : une réponse sans le frame du panneau y écrirait « Content missing ». L'erreur d'un retrait dans le frame (établissement
+  # déjà quitté ailleurs) porte la balise de rechargement : Turbo quitte le frame et affiche la page d'erreur en français, entière.
+  test "in the frame of the account panel, leaving a school already left: the error page asks Turbo to leave the frame" do
+    add_teacher_school(@teacher, @b)
+    sign_in_as @teacher
+    delete teacher_school_path(@b.public_id)
+
+    # What a form of the frame sends: Turbo Stream first. A toast would sit under the panel (a modal <dialog>), so the page is served.
+    delete teacher_school_path(@b.public_id), headers: { "Turbo-Frame" => NavigationHelper::ACCOUNT_PANEL_FRAME,
+                                                          "Accept" => "text/vnd.turbo-stream.html, text/html, application/xhtml+xml" }
+
+    assert_response :not_found
+    assert_equal "text/html", response.media_type
+    assert_select "meta[name=turbo-visit-control][content=reload]"
+    assert_select "h2, h1, p", text: /Page introuvable/
+
+    delete teacher_school_path(@b.public_id)
+    assert_response :not_found
+    assert_select "meta[name=turbo-visit-control]", 0
+  end
+
   test "the DRENA chosen without JavaScript comes back in GET and lists its schools" do
     sign_in_as @teacher
     get teacher_schools_path, params: { school_join: { drena_public_id: @drena.public_id } }
