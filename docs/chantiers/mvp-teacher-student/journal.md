@@ -157,3 +157,9 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 - Cours de l'élève sans classe : `GET /courses?q=x` donnait une erreur 500 (`current.slug` sur une matière nulle dans `#lessons_empty`). L'état « sans classe » est testé avant la recherche ; les autres `current.slug` sont déjà sous `materials.any?` ou `page&.rows&.any?`. Test ajouté dans `courses_controller_test`, rouge avant.
 - « Cette semaine » (`TeacherFollowUpsQuery`) : une échéance à venir (demain à +7 jours) y reste même faite par tous ; avant, elle disparaissait jusqu'à l'échéance. Les bornes du code sont gardées : le jour même et le passé faits par tous vont à l'Historique (CA-G7), le passé de 14 jours au plus avec un élève en retard reste dans la semaine. Trois tests existants encodaient l'ancien comportement (échéance à venir faite par tous absente) et sont adaptés ; deux tests ajoutés, rouges avant.
 - À trancher par le porteur : une assignation sans échéance (`due_on` nul, d'avant le pilote) faite par tous n'est ni dans « Cette semaine » ni dans l'Historique (non modifié).
+
+## 2026-10-26 — Dernières corrections de la revue de #295
+
+- Jetons de P2 : `lg:grid-rows-[auto_1fr_auto]` (fichier de l'élève) devient l'utilitaire `grid-rows-head-fill-foot`, et `lg:grid-cols-[minmax(0,1fr)_auto]` (liste de la classe) réutilise `grid-cols-content-action` (même valeur) ; rendu identique, `design_tokens_test` vert.
+- CA-E14 : les leçons de l'élève sur ordinateur (`with_essentials`) suivent l'ordre du programme (Leçon 1, 2, 10) par le numéro de leçon du sous-titre, partagé avec `TEACHER_ORDER` (`LESSON_NUMBER`) ; le Cours du téléphone garde `PROGRAM_ORDER` (par nom). Deux tests (requête et contrôleur), rouges avant.
+- Test ajouté : un élève qui ouvre l'adresse du Cours de l'enseignant (`level` + `series`) reçoit 200, sans « Cours de Tle D » ni `#courses_material_chips` (déjà vert : la garde `teacher?` de `teacher_scope` suffit).

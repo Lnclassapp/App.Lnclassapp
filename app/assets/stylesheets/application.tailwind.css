@@ -300,6 +300,11 @@
   grid-template-columns: minmax(0, 1fr) auto;
 }
 
+/* Fichier de l'élève dès lg (UDR enseignant §3.7) : trois rangées, la deuxième prend le reste pour que la gestion suive le résumé. */
+@utility grid-rows-head-fill-foot {
+  grid-template-rows: auto 1fr auto;
+}
+
 /* Cellule empilée : son libellé de colonne (data-label) précède la valeur, sans changer le texte de la cellule. */
 @utility cell-label {
   &::before {

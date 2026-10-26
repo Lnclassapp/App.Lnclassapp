@@ -1070,6 +1070,30 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#lessons_empty", text: including(tl("index.no_class_title"))
   end
 
+  # CA-E14 : « dans l'ordre du programme » : Leçon 1, 2, 10 (non 10 avant 2, ordre des noms) ; le téléphone garde l'ordre des noms.
+  test "CA-E14: the lessons of a subject follow the programme order, the phone view keeps the name order" do
+    suites = create_course(name: "Suites", subtitle: "Leçon 10 · Progression DPFC 2026-2027", level: @tle, series: @course.series, material: @svt)
+    derivees = create_course(name: "Dérivées", subtitle: "Leçon 2 · Progression DPFC 2026-2027", level: @tle, series: @course.series, material: @svt)
+    limites = create_course(name: "Limites", subtitle: "Leçon 1 · Progression DPFC 2026-2027", level: @tle, series: @course.series, material: @svt)
+    sign_in_as lessons_student
+
+    get courses_path(material: @svt.slug)
+
+    assert_equal [ limites, derivees, suites, @course ].map { "lesson_#{it.slug}" }, lesson_ids
+    assert_equal [ derivees, @course, limites, suites ].map { "course_#{it.slug}" }, css_select("#courses_groups li[id^=course_]").map { it["id"] }
+  end
+
+  # La garde current_actor.teacher? de teacher_scope : l'adresse du Cours de l'enseignant ne lui donne pas son en-tête.
+  test "CA-E14: a student who opens the teacher's Cours address gets his own Cours, with no teacher header nor subject chips" do
+    sign_in_as lessons_student
+
+    get courses_path(level: @tle.slug, series: @course.series.slug)
+
+    assert_response :success
+    assert_no_match including(tl("index.teacher_title", level: "Tle D")), response.body
+    assert_select "#courses_material_chips", 0
+  end
+
   test "CA-E14: the teacher and the team keep their Cours, with no pills nor lessons block" do
     [ create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle, series: @course.series) ]), create_team_member ].each do |user|
       sign_in_as user

@@ -11,7 +11,7 @@
     <%= render "identity", student: file.student %>
     <%# ≥ lg : le résumé et la gestion à gauche, les exercices et « fait seul » à droite ; chaque bloc se place par sa racine (grille de
         trois rangées, la deuxième prend le reste, pour que la gestion suive le résumé). Au téléphone, l'ordre du fichier. %>
-    <div class="space-y-8 lg:grid lg:grid-cols-2 lg:grid-rows-[auto_1fr_auto] lg:items-start lg:gap-x-8 lg:space-y-0">
+    <div class="space-y-8 lg:grid lg:grid-cols-2 lg:grid-rows-head-fill-foot lg:items-start lg:gap-x-8 lg:space-y-0">
       <%= render "summary", file: %>
       <%= render "assignments", classroom: @header, assignments: file.assignments %>
       <%= render "self_practice", rows: file.self_practice, total: file.self_practice_total %>

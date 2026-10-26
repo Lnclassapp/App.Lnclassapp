@@ -78,7 +78,7 @@
           <% first_added = per_page * (page - 1) if page > 1 %>
           <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
             <% students.each_with_index do |student, index| %>
-              <li id="student_<%= student.public_id %>" class="flex items-center gap-3 px-4 py-3 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-y-2">
+              <li id="student_<%= student.public_id %>" class="flex items-center gap-3 px-4 py-3 lg:grid lg:grid-cols-content-action lg:gap-y-2">
                 <%# UDR-0108 §3.2 : la photo et le nom forment un seul lien vers la fiche ; après « Voir les suivants », le focus
                     va au lien de la première ligne ajoutée, par le contrôleur autofocus (UDR-0054 §3.3 : jamais l'attribut). %>
                 <% focus = { controller: "autofocus", autofocus_target: "field" } if index == first_added %>

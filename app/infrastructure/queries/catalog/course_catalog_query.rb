@@ -29,9 +29,12 @@ module Queries
       CATALOG_ORDER = [ "materials.name", "levels.position", "courses.name", "courses.id" ].freeze
       # UDR enseignant §3.7 : la progression, dans l'ordre des leçons (« Leçon 2 · Progression… » dans le sous-titre) ; un cours
       # sans numéro de leçon vient après, par nom.
-      TEACHER_ORDER = [ "materials.name", "levels.position",
-                        Arel.sql("(substring(courses.subtitle from '(?i)leçon\\s+(\\d+)'))::integer ASC NULLS LAST"),
-                        "courses.name", "courses.id" ].freeze
+      LESSON_NUMBER = Arel.sql("(substring(courses.subtitle from '(?i)leçon\\s+(\\d+)'))::integer ASC NULLS LAST")
+      TEACHER_ORDER = [ "materials.name", "levels.position", LESSON_NUMBER, "courses.name", "courses.id" ].freeze
+      # CA-E14 : sur ordinateur, les leçons de l'élève suivent le même ordre du programme (Leçon 2 avant Leçon 10) ; le
+      # Cours du téléphone, sans fiches, garde PROGRAM_ORDER.
+      STUDENT_LESSON_ORDER = [ Arel.sql("materials.position ASC NULLS LAST"), "materials.name", LESSON_NUMBER,
+                               "courses.name", "courses.id" ].freeze
 
       # level, material : slugs. Un filtre vide est ignoré, un slug inconnu ne donne aucun cours.
       # series : slug, appliqué seulement avec un niveau (UDR-0069 §3.4) : cours sans série et cours de cette série.
@@ -51,8 +54,8 @@ module Queries
         total_count = grouped ? material_counts.values.sum : scope.count
         pages = [ total_count.fdiv(PER_PAGE).ceil, 1 ].max
         page = page.to_s.to_i.clamp(1, pages)
-        rows = scope.order(*(grouped ? PROGRAM_ORDER : (actor.teacher? ? TEACHER_ORDER : CATALOG_ORDER))).offset((page - 1) * PER_PAGE).limit(PER_PAGE)
-                    .pluck("courses.id", *COLUMNS)
+        order = order_for(actor, student_id:, group_by_material:, with_essentials:)
+        rows = scope.order(*order).offset((page - 1) * PER_PAGE).limit(PER_PAGE).pluck("courses.id", *COLUMNS)
         progress = student_id ? progress_by_course(student_id, rows.map(&:first)) : {}
         with_essentials ||= actor.teacher?
         essentials = with_essentials ? essentials_by_course(rows.map(&:first), student_id:) : {}
@@ -69,6 +72,15 @@ module Queries
       end
 
       private
+
+      # L'élève : l'ordre du programme, avec le numéro de leçon quand il lit les leçons (CA-E14) ; l'enseignant de plusieurs
+      # matières, comme l'élève ; l'enseignant d'une matière, la progression ; les autres, le catalogue.
+      def order_for(actor, student_id:, group_by_material:, with_essentials:)
+        return with_essentials ? STUDENT_LESSON_ORDER : PROGRAM_ORDER if student_id
+        return PROGRAM_ORDER if group_by_material
+
+        actor.teacher? ? TEACHER_ORDER : CATALOG_ORDER
+      end
 
       def filtered(actor:, level: nil, series: nil, material: nil, search: nil, audience: nil, material_ids: nil)
         scope = Orm::Course.joins(:level, :material).left_joins(:series)
