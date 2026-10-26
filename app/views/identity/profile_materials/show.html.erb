@@ -37,7 +37,7 @@
         </span>
         <span class="min-w-0 flex-1 truncate text-ink" title="<%= material.name %>"><%= material.shortname.presence || material.name %></span>
         <% if removable %>
-          <%= form_with scope: :profile_materials, url: profile_materials_path, method: :patch do |form| %>
+          <%= form_with scope: :profile_materials, url: profile_materials_path, method: :patch, data: { modal_refresh: true } do |form| %>
             <%= hidden_field_tag "profile_materials[screen]", "removal", id: nil %>
             <% materials.reject { it.slug == material.slug }.each do |kept| %>
               <%= hidden_field_tag "profile_materials[material_slugs][]", kept.slug, id: nil %>

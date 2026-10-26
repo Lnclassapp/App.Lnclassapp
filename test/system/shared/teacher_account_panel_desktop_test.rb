@@ -69,6 +69,45 @@ class Shared::TeacherAccountPanelDesktopTest < ApplicationSystemTestCase
         assert_no_selector "h1"
       end
       assert_current_path profile_path
+
+      # The page below only follows when the panel closes: the sidebar block loses the removed subject.
+      within("aside") { assert_text "Maths · PC · SVT · LM2" }
+      within(panel) { find("button[aria-label='#{I18n.t('components.modal.close')}']").click }
+      assert_no_selector "#{PANEL}[open]", visible: true
+      within("aside") do
+        assert_text "Maths · PC · LM2"
+        assert_no_text "SVT"
+      end
+    end
+  end
+
+  test "a school left in the panel, the current one included, shows on the page below when the panel closes" do
+    current = Orm::School.find_by!(sigle: "LM2")
+    teacher = Orm::User.find_by!(first_name: "Awa")
+    others = [ create_school(name: "Collège Saint-Michel", sigle: "CSM"), create_school(name: "Collège Notre-Dame", sigle: "CND") ]
+    others.each { add_teacher_school(teacher, it) }
+    with_mobile_viewport(DESKTOP_VIEWPORT) do
+      visit profile_path
+      within("aside") { assert_text "LM2" }
+      find(TRIGGER).click
+      panel = find("#{PANEL}[open]", visible: true)
+      within(panel) { click_link "#{tn('account_panel.entries.add_school')} #{tn('account_panel.counter.full.schools', used: 3, max: 3)}" }
+      within(panel) do
+        assert_selector "#teacher_schools li", count: 3
+        within("#teacher_school_#{current.public_id}") { click_button I18n.t("school.teacher_schools.index.leave") }
+        click_button I18n.t("school.teacher_schools.index.leave_confirm")
+        assert_no_selector "#teacher_school_#{current.public_id}"
+        assert_text I18n.t("school.teacher_schools.index.count", count: 2, max: 3)
+      end
+      assert_selector "#{PANEL}[open]", visible: true
+      within("aside") { assert_text "LM2" }
+
+      within(panel) { find("button[aria-label='#{I18n.t('components.modal.close')}']").click }
+      assert_no_selector "#{PANEL}[open]", visible: true
+      within("aside") do
+        assert_no_text "LM2"
+        assert_text(/CSM|CND/)
+      end
     end
   end
 
