@@ -1,6 +1,7 @@
 // ⚡ FRONT · modal_controller — ouvre et ferme une <dialog> native, y compris chargée dans le frame « modal »
 // Rôle : showModal() fournit le piège du focus et Échap ; fond cliquable ; fermeture après un envoi réussi ; frame vidé à la fermeture
 // UDR  : 0005, 0006, 0046, 0054, 0061 · émet modal:opened (auto-focus) ; `documentTitle` nomme l'onglet ; rend le focus au déclencheur
+//        un envoi réussi d'un formulaire `data-modal-refresh` rafraîchit la page en dessous à la fermeture (panneau « Mon compte »)
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -12,10 +13,22 @@ export default class extends Controller {
     this.openObserver = new MutationObserver(() => this.syncOpen())
     this.openObserver.observe(this.dialogTarget, { attributes: true, attributeFilter: ["open"] })
     if (this.openValue) this.open()
+    this.element.addEventListener("turbo:submit-end", this.markStale)
+  }
+
+  // Un envoi réussi dans le panneau (retrait d'une matière ou d'un établissement) laisse le panneau ouvert (CA-H7) : la page en
+  // dessous (barre latérale, avatar, contenu) garde l'ancien état jusqu'à la fermeture, où elle est rafraîchie. Seule la boîte
+  // extérieure s'en charge : la confirmation imbriquée (« Retirer » d'un établissement) se ferme sans rafraîchir, ce qui
+  // refermerait le panneau (le morphing retire `open`).
+  markStale = (event) => {
+    if (this.dialogTarget.parentElement.closest("dialog")) return
+
+    if (event.detail.success && event.target.hasAttribute?.("data-modal-refresh")) this.stale = true
   }
 
   // Retirée ouverte (re-rendu 422 dans le frame) : l'onglet reprend son titre, sauf si une navigation l'a déjà changé.
   disconnect() {
+    this.element.removeEventListener("turbo:submit-end", this.markStale)
     this.openObserver.disconnect()
     this.restoreTitle()
   }
@@ -63,12 +76,22 @@ export default class extends Controller {
   closed() {
     this.restoreTitle()
     this.restoreFocus()
+    this.refreshPage()
     const frame = this.element.closest("turbo-frame#modal")
     // Une boîte déjà rouverte (open() juste après son arrivée) n'est pas fermée : le frame garde son contenu.
     if (!frame || this.dialogTarget.open) return
 
     frame.removeAttribute("src")
     frame.replaceChildren()
+  }
+
+  // Turbo.session.refresh rejoue la page courante avec la méthode du layout (morph, défilement conservé) ; elle ferme la boîte
+  // déjà fermée (syncOpen) sans rien perdre.
+  refreshPage() {
+    if (!this.stale || this.dialogTarget.open) return
+
+    this.stale = false
+    window.Turbo?.session.refresh(document.baseURI)
   }
 
   // UDR-0061 §3.7 : le navigateur rend le focus au déclencheur d'une boîte ouverte par showModal() ; à défaut (focus

@@ -8,7 +8,7 @@ problematique: Les écrans enseignant répètent leurs informations (liste des c
 
 | | |
 |---|---|
-| **Statut** | Accepté (porteur, 2026-10-23 : écrans en gris validés « option A », couleurs « C », UDR demandée « oui, écris l'UDR enseignant » ; premier parcours et jours de séance « A », §3.13) |
+| **Statut** | Accepté (porteur, 2026-10-23 : écrans en gris validés « option A », couleurs « C », UDR demandée « oui, écris l'UDR enseignant » ; premier parcours et jours de séance « A », §3.13 ; écrans d'ordinateur en gris puis en jaune validés le 2026-10-26, §3.3, §3.14) |
 | **Date** | 2026-10-23 |
 | **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
 | **ADR lié** | [ADR-0103](../adr/0103-matieres-de-l-enseignant-par-une-table-de-jointure.md), amendé ici (§4) · ADR-XXXX-code-de-classe-a-six-caracteres (code affiché sur la carte de classe) |
@@ -45,11 +45,13 @@ Pourquoi le badge plutôt que la moyenne : l'élève voit des badges, pas des mo
 | Panneau gauche de l'inscription, sur ordinateur (§3.9) | — | **`bg-teacher`** (porteur, 2026-10-24) |
 | Texte et icônes sur le bandeau | `text-band-ink` | `text-band-ink` (6,2:1 sur #ff8a00 ; blanc sur #9a5000 en sombre, 6,0:1) |
 | Boutons, liens, ronds d'icône, pastilles d'état, carte de bienvenue | bleus | **bleus, inchangés** |
-| Filet `ROLE_ACCENTS` en haut de l'écran | — | **retiré** (doublon du bandeau) |
+| Filet `ROLE_ACCENTS` en haut de l'écran | — | **retiré sur téléphone** (doublon du bandeau) ; **gardé sur ordinateur**, 4 px en haut de la barre du haut, comme l'élève et l'équipe (porteur, 2026-10-26, §3.14) |
 
 - La couleur se choisit par le rôle, à un seul endroit : un helper `role_fill_class(role)` dans `NavigationHelper`, à côté de `ROLE_ACCENTS`, rend `bg-brand` ou `bg-teacher`. Les partiels de bandeau, de barre de progression et de segments le reçoivent ; aucune vue n'écrit `bg-teacher` en dur.
 - Risque assumé par le porteur : une barre jaune peut voisiner la pastille ambre « en retard ». La pastille garde son point `bg-warning-dot` et son libellé, qui la distinguent d'une barre.
 - **Logo** : baobab sur orange (`BrandHelper::LOGOS[:teacher]`) sur tous les écrans enseignant, expéditeur des annonces de l'équipe compris (`brand_logo(teacher: true)`).
+- **Noms courts des matières** (porteur, 2026-10-26) : **« Maths »** (jamais « Math » ni « Mathématiques » dans une ligne courte) et **« PC »** pour Physique-Chimie, partout où une matière tient sur une ligne : en-tête de « Mon compte », barre latérale, puces de Cours, méta du rapport et de Cours. La valeur `mathematiques` de la clé `shared.subjects.short` (§3.4) devient « Maths ». Le nom entier ne reste que là où la matière est le titre (fiche de cours, catalogue).
+- **Vouvoiement sur tous les écrans enseignant** (porteur, 2026-10-26), libellés courts compris (« retirez-en un », « Assignez », « Écrivez »). L'élève reste tutoyé.
 - Trophées des badges : couleurs actuelles de `Assessment::ComprehensionHelper::BADGE_ICON_CLASSES`, sur l'icône seulement, jamais sur un texte. La pastille qui les porte est neutre : `bg-mist border border-line text-ink`.
 
 ### 3.2 Badge d'un élève dans une classe
@@ -82,7 +84,11 @@ Une seule règle, méthode pure du domaine (`Entities::Assessment::Grading.class
 
 - **Retirés** : `ui_page_header` (« Bonjour, Ibrahim », ligne établissement et matières, « Changer »), les `ui_card` qui enveloppent les sections, le menu ⋮ « Modifier mes classes », le bouton « Tous les cours », la carte `identity/referrals/invite` sous lg, la barre basse `shared/navigation/_bottom_bar` pour l'enseignant (`BOTTOM_TABS[:teacher]` vidé ; les routes restent).
 - Ordre figé : classes → niveaux → annonces → cette semaine → historique. `HOME_SECTIONS[:teacher]` suit cet ordre (avec `:history`).
-- **Sur ordinateur (≥ lg), page large** (maquettes envoyées le 2026-10-23, page large confirmée le 2026-10-24) : contenu centré de 57 rem au plus, à côté de la barre latérale **Accueil · Mes classes · Cours** (sans carte de profil, sans Annonces) ; le bandeau prend la largeur du contenu, sans avatar ni aide. Les cartes de classe passent du carrousel à une **grille de 3 colonnes** (la carte « + Ajouter une classe » en dernier), à cheval sur le bandeau ; les ronds de niveau en une ligne ; l'annonce en pleine largeur ; puis **« Cette semaine » et « Historique » côte à côte**, titres visibles sur ordinateur.
+- **Sur ordinateur (≥ lg), page large** (page large confirmée le 2026-10-24 ; **refaite le 2026-10-26** sur les retours du porteur, maquettes en gris puis en jaune validées) : barre du haut et barre latérale du §3.14 ; contenu centré de 57 rem au plus, **fond blanc, sans bandeau jaune** (le jaune ne reste que dans le filet de la barre du haut, les barres de progression et les logos), dans cet ordre :
+  1. **Classes en carrousel horizontal** (`communication--carousel`, défilement à la souris, au doigt et au clavier, points dessous) : cartes de 16,5 rem, trois visibles et la quatrième coupée au bord pour montrer qu'il y en a d'autres ; « + Ajouter une classe » en dernier. Plus de grille de 3 colonnes.
+  2. Ronds de niveau puis « Inviter », sur une ligne, alignés à gauche.
+  3. **Annonces en carrousel, deux visibles** (`sm:basis-1/2` du `_carousel` existant), sur la bande `bg-mist rounded-card` ; chaque carte garde **son illustration** (le rond blanc à droite : `announcement_illustration card.illustration`, choisie à la rédaction) et **son bouton de lecture audio** (`communication--audio`, UDR-0071) sous l'illustration. Rien à construire : la carte `communication/messages/_card` porte déjà les deux.
+  4. **« Cette semaine » et « Historique » côte à côte**, titres visibles (16 px, 500).
 
 **Carte de classe** (`_classroom_card.html.erb`, réécrit). `bg-white border-line rounded-card shadow-card`, padding 18 px, largeur ≈ 82 % de l'écran pour laisser voir la suivante :
 
@@ -117,7 +123,7 @@ Une seule règle, méthode pure du domaine (`Entities::Assessment::Grading.class
 ### 3.4 Menu « Mon compte » (`shared/navigation/_account_panel.html.erb`, `classroom/teacher_menus/show`, `NavigationHelper::ACCOUNT_PANELS[:teacher]`)
 
 - **Plein écran, 100 % de la largeur** sur téléphone et dans la coque Android : en haut « Mon compte » (16 px, 500) et la croix de fermeture (44 px). **Sur ordinateur (≥ lg) : panneau latéral droit de 400 px** (porteur, 2026-10-24), pleine hauteur, voile `bg-ink/40`, même contenu.
-- En-tête : avatar 56 px, nom (18 px, 500), dessous « Math · PC · CSMT » : noms courts des matières puis sigle de l'établissement courant (13 px `text-mute`). Noms courts : clé partagée `shared.subjects.short` (déplacée depuis `classroom.student_homes.subjects.short`), sinon le nom entier ; sans sigle, le nom de l'établissement.
+- En-tête : avatar 56 px, nom (18 px, 500), dessous « Maths · PC · CSMT » : noms courts des matières puis sigle de l'établissement courant (13 px `text-mute`). Noms courts : clé partagée `shared.subjects.short` (déplacée depuis `classroom.student_homes.subjects.short`), sinon le nom entier ; sans sigle, le nom de l'établissement.
 - **Établissement en cours** (dès deux établissements) : libellé 12 px majuscules, puis une ligne par établissement (sigle 14 px, nom 13 px `text-mute`, bouton radio) ; l'établissement courant est `border-brand-strong bg-brand-soft`. Toucher une ligne change l'établissement courant (action actuelle, UDR-0098).
 - Entrées, dans cet ordre, ligne ≥ 56 px, rond 40 px `bg-brand-soft` avec icône au trait `text-brand-strong`, chevron :
   1. **Mon profil**
@@ -127,7 +133,7 @@ Une seule règle, méthode pure du domaine (`Entities::Assessment::Grading.class
   5. **Mode sombre** — interrupteur `role="switch"`
   6. **Se déconnecter** — `text-brand-strong`, sans chevron
 - **Retiré** : « Inviter un collègue » (il est dans la grille de l'accueil).
-- **À 3 sur 3**, l'entrée passe en gris : rond `bg-mist`, icône et libellé `text-mute`, dessous « 3 sur 3 · retire-en un pour en ajouter ». Elle reste active et ouvre l'**écran de retrait** correspondant.
+- **À 3 sur 3**, l'entrée passe en gris : rond `bg-mist`, icône et libellé `text-mute`, dessous « 3 sur 3 · retirez-en un pour en ajouter » (vouvoiement, porteur 2026-10-26). Elle reste active et ouvre l'**écran de retrait** correspondant.
 - Sous 3 : « Ajouter une matière » ouvre la modale « Mes matières » existante (`identity/profile_materials/edit`) ; « Ajouter un établissement » ouvre l'ajout par code existant (`school/teacher_schools`).
 
 **Écrans de retrait** (une vue nouvelle sous `identity/profile_materials` et sous `school/teacher_schools`) : « ‹ Mon compte », titre « Mes matières » / « Mes établissements » (18 px), dessous « 3 sur 3. Retirez-en une pour en ajouter une autre. » ; une ligne par élément avec un bouton `secondary` `sm` « Retirer » ; l'établissement courant porte la pastille « En cours ». Note en bas, `bg-mist rounded-ln`, 13 px `text-mute` :
@@ -168,8 +174,8 @@ Même contenu qu'au téléphone, rien de répété ; seul l'ordre change (le blo
 
 - S'ouvre depuis un rond de niveau (`level`, `series` dans l'URL). « ‹ Accueil » en haut ; titre **« Cours de Tle D »** (18 px) ; sans niveau dans l'URL, « Cours ».
 - **Retirés** pour l'enseignant : les menus Niveau et Série, « Tle D » sur chaque ligne.
-- Gardés : recherche ; « 3 fiches de cours · Mathématiques · Progression DPFC 2026-2027 » (13 px, une seule fois) ; pastille « En cours ». Les fiches de cours sont des cartes qui portent leurs fiches de révision (amendement du 2026-10-24, ci-dessous).
-- Bivalent : puces de matière (« Math · PC », noms courts) sous la recherche, la première active. Monovalent : pas de puces.
+- Gardés : recherche ; « 3 fiches de cours · Maths · Progression DPFC 2026-2027 » (13 px, une seule fois) ; pastille « En cours ». Les fiches de cours sont des cartes qui portent leurs fiches de révision (amendement du 2026-10-24, ci-dessous).
+- Bivalent : puces de matière (« Maths · PC », noms courts) sous la recherche, la première active. Monovalent : pas de puces.
 - **Amendé le 2026-10-24** (porteur, en dessinant l'ordinateur, réponse « A » : valable aussi sur téléphone) : les trois règles ci-dessous (puces limitées à l'établissement courant, une matière à la fois, fiches de révision dans la carte) s'appliquent **au téléphone comme à l'ordinateur** ; elles remplacent les « lignes compactes » de l'élève pour l'enseignant. Seule la largeur change d'un appareil à l'autre.
 
 #### Sur ordinateur (≥ lg)
@@ -182,7 +188,7 @@ Option A du porteur (2026-10-24, maquettes en gris à 1440 et 1024 px), avec tro
 
 ### 3.8 Rapport d'un exercice (`classroom/assignment_follow_ups/show.html.erb`, `assessment/comprehension/_section`)
 
-- « ‹ Tle D 1 » ; rond 56 px + titre 18 px + « Math · 10 questions · à rendre ven. 30 oct. » ; « Voir l'exercice » `secondary` pleine largeur.
+- « ‹ Tle D 1 » ; rond 56 px + titre 18 px + « Maths · 10 questions · à rendre ven. 30 oct. » ; « Voir l'exercice » `secondary` pleine largeur.
 - Barre « 20 / 27 faits » (§3.1) + pastille « 7 en retard » (ou « pas encore »), cachée à zéro. Les trois chiffres en `dl` actuels sont remplacés par cette ligne.
 - **Cinq cases par badge**, pour les élèves qui ont fait l'exercice : Pas encore · Bronze · Argent · Or · Diamant. Case : trophée 18 px (espace vide pour « Pas encore »), nombre 18 px, libellé 12 px, bordure `border-line`. Chaque case est un lien du Turbo Frame (`?badge=`), comme les catégories d'aujourd'hui.
 - Correspondance avec UDR-0072 : En difficulté → Pas encore ; Fragile → Bronze ; Acquis → Argent, Or ou Diamant. Le grand cercle disparaît.
@@ -204,7 +210,8 @@ Option A du porteur (2026-10-24, maquettes en gris à 1440 et 1024 px), avec tro
 
 Option A du porteur (2026-10-24, maquettes en gris à 1440 et 1024 px) : **deux colonnes égales**, la mise en page actuelle de l'inscription enseignant.
 - À gauche, panneau **`bg-teacher`** pleine hauteur (choix B du porteur en couleurs, 2026-10-24, contre la recommandation d'un panneau `bg-mist`) : textes en `text-band-ink` (blanc en sombre, §3.1), logo enseignant 64 px cerné d'un anneau blanc de 3 px pour se détacher du jaune, « Bienvenue sur Lnclass », « Assignez un exercice, voyez ce que vos élèves ont compris. », centrés. **La carte de bienvenue du téléphone n'est pas rendue à droite** : elle ne vit qu'à un endroit.
-- À droite, les trois étapes, largeur 28 rem au plus, centrées : « Besoin d'aide ? » en haut à droite, « ‹ Retour », « Étape N sur 3 », segments, puis le contenu de l'étape, inchangé. Le logo de l'en-tête du téléphone n'est pas répété (il est à gauche).
+- Au-dessus des deux colonnes, la barre du haut du §3.14 **sans avatar** (logo, « Lnclass », « Besoin d'aide ? »), filet jaune compris (porteur, 2026-10-26).
+- À droite, les trois étapes, largeur 28 rem au plus, centrées : « ‹ Retour », « Étape N sur 3 », segments, puis le contenu de l'étape, inchangé. « Besoin d'aide ? » est dans la barre du haut, pas dans la colonne.
 
 ### 3.10 Jetons
 
@@ -245,6 +252,23 @@ Validé par le porteur le 2026-10-23 sur maquettes ; option A pour les jours de 
 - **Sur ordinateur (≥ lg)** — option A du porteur (2026-10-24, maquettes en gris à 1440 et 1024 px) : la fenêtre est une **modale centrée** de 30 rem (`ui_modal placement: :sheet, size: :form`, qui est déjà une feuille du bas sous lg et une modale centrée au-dessus), voile sur la fiche ; même contenu, mêmes boutons côte à côte. Échap et « Annuler » ferment sans rien écrire ; le focus revient sur le bouton « Assigner » ou le lien « Modifier les jours » qui l'a ouverte.
 - « Vos jours de séance » reste masqué sur la page de classe (§3.5) : **la fenêtre est le seul endroit** où l'on règle et corrige les jours, depuis « Modifier les jours de la … » de la fiche.
 - Les assignations déjà créées sans échéance (« Plus tard » avant le pilote) gardent `due_on` nul : elles sont dans « Cette semaine » tant qu'un élève ne les a pas faites, sans pastille de retard.
+
+### 3.14 Barre du haut et barre latérale sur ordinateur (≥ lg)
+
+Porteur, 2026-10-26 (« ajouter une navbar avec un trait jaune tout haut comme pour /student, /team », « oui, ajoute-la sur tous les écrans enseignant », « sur la sidebar, il manque l'avatar »). **Ne change rien au téléphone** (porteur : « ne touche pas aux écrans sur téléphone »).
+
+**Barre du haut** (`shared/navigation/_header.html.erb`, branche enseignant, `lg:` seulement), sur **tous les écrans enseignant** :
+- filet de 4 px `role_accent(:teacher)` (`bg-teacher`) tout en haut, celui de l'élève et de l'équipe ;
+- barre blanche de 64 px, bordure basse `border-line` ; à gauche le logo enseignant 36 px (`brand_logo(teacher: true)`) et « Lnclass » (16 px, 500) ; à droite « Besoin d'aide ? » (14 px `text-brand-strong`, `shared/help_sheet`) puis l'avatar 40 px (`bg-brand-soft text-brand-strong`), qui ouvre « Mon compte » (§3.4, panneau de 400 px) ;
+- **inscription** (§3.9) : même barre, **sans avatar**.
+- Sous lg, l'en-tête enseignant actuel ne change pas (UDR-0082 §3.1).
+
+**Barre latérale** (`shared/navigation/_sidebar.html.erb`, enseignant), largeur actuelle, bordure droite `border-line` :
+- **en tête, le bloc de profil** : avatar 40 px, nom (14 px, 500), dessous « Maths · PC · CSMT » (12 px `text-mute`, même texte que l'en-tête de « Mon compte », §3.4) ; ce bloc n'est pas un lien (l'avatar de la barre du haut ouvre « Mon compte ») ;
+- puis **Accueil · Mes classes · Cours**, entrée active `bg-brand-soft text-brand-strong` (CA-G11), jamais jaune ;
+- ni « Inviter » (il est dans la grille de l'accueil) ni Annonces.
+
+Exception assumée à « une information, une place » : l'avatar figure dans la barre du haut (geste : ouvrir « Mon compte ») et dans la barre latérale (repère : qui est connecté et où). Le porteur l'a demandé le 2026-10-26.
 
 ## 4. Conséquences
 

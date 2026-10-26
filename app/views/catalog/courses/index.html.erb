@@ -1,5 +1,5 @@
 <%# 🌐 UI · catalog/courses/index — catalogue des cours (CA-01), pour tous les rôles connectés %>
-<%# Rôle : recherche et filtres (téléphone compris) qui visent le frame « courses » ; élève : son niveau, recherche seule, groupes par matière, vue d'une matière, et sur ordinateur pastilles des matières et leçons en cartes avec leurs fiches ; enseignant : « Cours de Tle D », une de ses matières à la fois (puces), sans menus, une carte par fiche de cours avec ses fiches de révision ; équipe : création et import %>
+<%# Rôle : recherche et filtres (téléphone compris) qui visent le frame « courses » ; élève : son niveau, recherche seule, groupes par matière, vue d'une matière, et sur ordinateur pastilles des matières et leçons en cartes avec leurs fiches ; enseignant : « Cours de Tle D », une de ses matières à la fois (puces), sans menus, une carte par fiche de cours avec ses fiches de révision, sur ordinateur en colonne de 40 rem ; équipe : création et import %>
 <%# ADR  : 0028, 0035, 0076, 0090 · UDR : 0006, 0013 (amendements du 2026-10-02 et du 2026-10-05), 0057, 0069, 0077 §3.2 (amendement du 2026-10-06), 0085 (élève), 0126 §3.1 (amendé par XXXX écrans enseignant sans répétition §3.7), XXXX écrans élève sans répétition §3.6 (« Progression DPFC » une fois) et §3.6 bis (Cours par leçons, dès lg) · par pages de 24 %>
 <% team = current_actor.team? %>
 <%# UDR-0013, amendement du 2026-10-01 : l'élève ne voit que son niveau ; le filtre par niveau ne lui sert plus. %>
@@ -251,6 +251,9 @@
     <div class="lg:hidden"><%= body %></div>
     <% if lessons.present? %><div id="student_lessons" class="hidden lg:block"><%= lessons %></div><% end %>
   </div>
+<% elsif teacher %>
+  <%# UDR enseignant §3.7 (ordinateur) : une colonne de 40 rem, centrée ; sous lg, la page est inchangée. %>
+  <div id="teacher_courses" class="lg:mx-auto lg:w-full lg:max-w-160"><%= body %></div>
 <% else %>
   <%= body %>
 <% end %>

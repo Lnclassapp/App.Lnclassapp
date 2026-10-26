@@ -335,8 +335,8 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
         assert_select ".sr-only", text: "sur WhatsApp"
       end
     end
-    # The « Inviter un collègue » page stays reachable by its own address and by the sidebar card.
-    assert_select "#sidebar_referral a[href='#{teacher_invite_path}']"
+    # The « Inviter un collègue » page stays reachable by its own address; the sidebar no longer has a card for it (lot P0).
+    assert_select "aside #sidebar_referral", 0
     get teacher_invite_path
     assert_response :success
   end
@@ -429,6 +429,19 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to pending_account_path
     follow_redirect!
     assert_response :success
+  end
+
+  test "a teacher whose current school is not primary and who has no primary school is sent to the exit screen" do
+    other = create_school(name: "Collège Saint-Michel")
+    teacher = create_teacher(school: @school)
+    Orm::TeacherSchool.create!(teacher:, school: other, primary: false)
+    sign_in_as teacher
+    patch teacher_current_school_path, params: { school_public_id: other.public_id }
+    Orm::TeacherSchool.where(teacher:, school: @school).delete_all
+
+    get teacher_home_path
+
+    assert_redirected_to pending_account_path
   end
 
   test "a student and the team receive 403" do

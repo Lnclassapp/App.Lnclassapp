@@ -1,13 +1,16 @@
-<%# 🌐 UI · shared/navigation/_header — en-tête du shell : élève (logo, aide, menu de l'avatar) ; enseignant (avatar, aide) ; sinon logo, rôle, (aide de la direction), menu du compte %>
-<%# Rôle : filet de couleur du rôle en haut (pas pour l'enseignant) ; ni l'élève ni l'enseignant n'ont la lune : le mode sombre est dans « Mon compte » ; la direction et l'équipe gardent l'en-tête d'origine, la direction y gagne « Besoin d'aide ? » %>
-<%# UDR  : 0006, 0065 (interrupteur à côté de l'avatar : direction et équipe, lg+), 0061 (entrées de page :account_menu), 0080 §3.1, 0082 §3.1, 0084 §3.1, 0128, XXXX écrans enseignant §3.1 et élève §3.1, XXXX accueil élève §3.1 (sous lg, le bandeau remplace l'en-tête) %>
+<%# 🌐 UI · shared/navigation/_header — en-tête du shell : élève (logo, aide, menu de l'avatar) ; enseignant (avatar, aide ; dès lg filet jaune, logo, « Lnclass », aide, avatar) ; sinon logo, rôle, (aide de la direction), menu du compte %>
+<%# Rôle : filet de couleur du rôle en haut (pour l'enseignant : dès lg seulement) ; ni l'élève ni l'enseignant n'ont la lune : le mode sombre est dans « Mon compte » ; la direction et l'équipe gardent l'en-tête d'origine, la direction y gagne « Besoin d'aide ? » %>
+<%# UDR  : 0006, 0065 (interrupteur à côté de l'avatar : direction et équipe, lg+), 0061 (entrées de page :account_menu), 0080 §3.1, 0082 §3.1, 0084 §3.1, 0128, XXXX écrans enseignant §3.1, §3.14 et élève §3.1, XXXX accueil élève §3.1 (sous lg, le bandeau remplace l'en-tête) %>
+<%# user nil : la barre de l'enseignant à l'inscription (UDR enseignant §3.14), dès lg seulement, sans avatar. %>
 <%# UDR accueil élève §3.1 : une page qui porte le bandeau bleu (content_for :home_band) a déjà l'avatar et l'aide sous lg : l'en-tête n'y paraît qu'à partir de lg. %>
-<header class="<%= class_names("sticky top-0 z-40 h-bar border-b border-line bg-paper/90 backdrop-blur", "max-lg:hidden" => content_for?(:home_band)) %>">
-  <%# UDR enseignant §3.1 : le filet de l'enseignant est retiré (doublon du bandeau de l'accueil). %>
-  <% if (accent = role_accent(user.role)) %>
+<header class="<%= class_names("sticky top-0 z-40 h-bar border-b border-line bg-paper/90 backdrop-blur", "max-lg:hidden" => content_for?(:home_band) || user.nil?) %>">
+  <%# UDR enseignant §3.1 : sous lg, le filet de l'enseignant est retiré (doublon du bandeau de l'accueil) ; dès lg, §3.14 le rend. %>
+  <% if user.nil? || user.role.to_sym == :teacher %>
+    <div class="absolute inset-x-0 top-0 h-1 <%= role_fill_class(:teacher) %> max-lg:hidden" aria-hidden="true"></div>
+  <% elsif (accent = role_accent(user.role)) %>
     <div class="absolute inset-x-0 top-0 h-1 <%= accent %>" aria-hidden="true"></div>
   <% end %>
-  <% if user.role.to_sym == :student %>
+  <% if user && user.role.to_sym == :student %>
     <%# UDR-0084 §3.1 : le logo à gauche ; à droite « Besoin d'aide ? » puis l'avatar seul. Porteur, 2026-10-26 (mvp-teacher-student,
         lot D) : l'aide reste dans l'en-tête à toute largeur, « Mon compte » ne la porte plus. UDR élève §3.1 : plus de lune, le
         mode sombre est dans le menu. %>
@@ -22,13 +25,19 @@
         <%= render "shared/navigation/avatar_menu", user: %>
       </div>
     </div>
-  <% elsif account_panel?(user.role) %>
-    <%# UDR-0082 §3.1 : sans logo ; l'avatar ouvre le panneau du compte, l'aide à droite, à toute largeur. UDR enseignant §3.1 :
-        plus de lune ni de filet ; le mode sombre est dans « Mon compte ». %>
+  <% elsif user.nil? || account_panel?(user.role) %>
+    <%# UDR-0082 §3.1 : sous lg, sans logo ; l'avatar ouvre le panneau du compte, l'aide à droite. UDR enseignant §3.1 : plus de lune ni de
+        filet ; le mode sombre est dans « Mon compte ». UDR enseignant §3.14 (dès lg) : filet jaune, logo enseignant et « Lnclass » à
+        gauche, « Besoin d'aide ? » puis l'avatar à droite ; à l'inscription (user nil), sans avatar. %>
     <div class="flex h-full items-center justify-between gap-3 px-gutter lg:px-8">
-      <%= render "shared/navigation/account_panel", user: %>
-      <div class="flex items-center gap-1">
-        <%= render "shared/help_sheet", trigger_class: nil, user: %>
+      <%= link_to (user ? home_path_for(user.role) : root_path), class: "hidden items-center gap-2.5 rounded-full focus-visible:outline-2 focus-visible:outline-brand lg:order-1 lg:flex" do %>
+        <%= image_tag brand_logo(teacher: true), alt: "", class: "size-9 rounded-sm" %>
+        <span class="font-display text-base font-medium tracking-tight">Lnclass</span>
+      <% end %>
+      <% if user %><div class="lg:order-3"><%= render "shared/navigation/account_panel", user: %></div><% end %>
+      <div class="flex items-center gap-1 lg:order-2 lg:ml-auto">
+        <%# À l'inscription, la colonne de la page a sa propre feuille d'aide : l'id de celle de la barre est distinct. %>
+        <%= render "shared/help_sheet", trigger_class: "lg:text-brand-strong!", user:, id: ("help-sheet-bar" if user.nil?) %>
       </div>
     </div>
   <% else %>

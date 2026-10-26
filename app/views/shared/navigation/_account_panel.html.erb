@@ -1,23 +1,26 @@
-<%# 🌐 UI · shared/navigation/_account_panel — « Mon compte » de l'enseignant : l'avatar de l'en-tête ouvre un panneau plein écran (<dialog>) %>
-<%# Rôle : nom, « Maths · PC · sigle », établissement en cours (dès deux), six entrées avec « N sur 3 » (grisées à 3, elles mènent à l'écran de retrait), thème, déconnexion ; `page: true` rend le seul contenu (/teachers/menu) %>
-<%# UDR  : écrans enseignant sans répétition §3.4 · 0098 §3.1 (changer d'établissement) · 0061 (déclencheur-lien : sans JavaScript, l'avatar mène à la page) · Stimulus : modal, autofocus, theme · locals : user, page %>
+<%# 🌐 UI · shared/navigation/_account_panel — « Mon compte » de l'enseignant : l'avatar de l'en-tête ouvre un panneau (<dialog>) : plein écran, panneau latéral droit de 400 px dès lg %>
+<%# Rôle : nom, « Maths · PC · sigle », établissement en cours (dès deux), six entrées avec « N sur 3 » (grisées à 3, elles mènent à l'écran de retrait, ouvert dès lg dans le Turbo Frame du panneau), thème, déconnexion ; `page: true` rend le seul contenu (/teachers/menu, ou le menu rendu dans le frame du panneau) %>
+<%# UDR  : écrans enseignant sans répétition §3.4 · 0098 §3.1 (changer d'établissement) · 0061 (déclencheur-lien : sans JavaScript, l'avatar mène à la page) · Stimulus : modal (Échap, croix, voile, focus rendu à l'avatar), autofocus, panel-focus (focus sur le titre de chaque écran du frame), theme · locals : user, page %>
 <%# locals: (user:, page: false) -%>
 <% max = { materials: Entities::Identity::TeacherMaterials::MAX, schools: Entities::School::TeacherSchools::MAX } %>
 <% links = account_panel_links(user.role) %>
 <% schools = teacher_schools %>
-<% current_school = schools.find(&:current) %>
-<%# Les matières arrivent du shell en une phrase (« Maths, PC ») : noms courts de `shared.subjects.short`, sinon le nom entier. %>
-<% subjects = user.about&.material.to_s.split(", ").map { I18n.t("shared.subjects.short.#{it.parameterize}", default: it) } %>
-<% school_label = current_school ? (current_school.sigle.presence || current_school.name) : user.about&.school %>
-<% detail = [ *subjects, school_label ].compact_blank.join(" · ") %>
+<% subjects = teacher_subjects(user) %>
+<% detail = teacher_detail(user) %>
 <% used = { materials: subjects.size, schools: schools.size } %>
+<%# Dans le panneau (la boîte, ou le menu que « ‹ Mon compte » y ramène) tout lien et tout envoi quitte le frame, sauf l'écran de retrait,
+    dès lg ; sur la page /teachers/menu, rien ne change. %>
+<% frame = NavigationHelper::ACCOUNT_PANEL_FRAME %>
+<% in_panel = !local_assigns[:page] || turbo_frame_request_id == frame %>
+<% leave_frame = ("_top" if in_panel) %>
 <% link_class = "flex min-h-14 w-full items-center gap-4 rounded-ln py-2 text-ink hover:bg-mist focus-visible:outline-2 focus-visible:outline-brand" %>
 <% pill = "grid size-10 shrink-0 place-items-center rounded-full bg-brand-soft text-brand-strong" %>
 <% content = capture do %>
   <div class="flex items-center gap-4 pb-4">
     <%= ui_avatar user.name, src: user.avatar_url, size: :lg, tone_seed: user.public_id %>
     <div class="min-w-0">
-      <p class="truncate font-display text-lg font-medium text-ink"><%= user.name %></p>
+      <%# Titre du menu : le nom. Le panneau y remet le focus quand « ‹ Mon compte » ramène le menu dans le frame. %>
+      <p class="truncate font-display text-lg font-medium text-ink" data-panel-focus-title><%= user.name %></p>
       <% if detail.present? %><p class="truncate text-sm text-mute"><%= detail %></p><% end %>
     </div>
   </div>
@@ -31,7 +34,7 @@
         <% schools.each do |school| %>
           <li>
             <%= button_to teacher_current_school_path, method: :patch, params: { school_public_id: school.public_id },
-                          form: { id: "switch-school-#{school.public_id}" }, disabled: school.current, title: school.name,
+                          form: { id: "switch-school-#{school.public_id}", data: { turbo_frame: leave_frame } }, disabled: school.current, title: school.name,
                           "aria-current": ("true" if school.current),
                           "aria-label": t("shared.navigation.account_panel.schools.#{school.current ? 'current' : 'switch'}", school: school.name),
                           class: class_names("flex min-h-tap w-full items-center gap-3 rounded-ln border px-4 py-3 text-left text-ink",
@@ -56,23 +59,31 @@
       <% links.each_with_index do |link, index| %>
         <% cap = link[:cap] %>
         <% full = cap && used.fetch(cap) >= max.fetch(cap) %>
-        <li>
-          <%# À 3 sur 3, l'entrée reste active : elle mène à l'écran de retrait (« Mes matières », « Mes établissements »). %>
-          <%= link_to (full ? link[:full_href] : link[:href]), class: link_class, "aria-current": ("page" if current_page?(link[:href])),
-                                                              data: ({ autofocus_target: "fallback" } if index.zero? && !local_assigns[:page]) do %>
-            <span class="<%= class_names("grid size-10 shrink-0 place-items-center rounded-full", "bg-brand-soft text-brand-strong": !full,
-                                         "bg-mist text-mute": full) %>" aria-hidden="true"><%= ui_icon link[:icon] %></span>
-            <span class="min-w-0 flex-1">
-              <span class="<%= class_names("block", "text-mute": full) %>"><%= link[:label] %></span>
-              <% if cap %>
-                <span class="block text-sm text-mute">
-                  <%= t("shared.navigation.account_panel.counter.#{full ? "full.#{cap}" : 'under'}", used: used.fetch(cap), max: max.fetch(cap)) %>
-                </span>
-              <% end %>
-            </span>
-            <%= ui_icon "chevron-right", variant: :mini, class: "shrink-0 text-mute" %>
+        <%# À 3 sur 3, l'entrée reste active : elle mène à l'écran de retrait (« Mes matières », « Mes établissements »). Dans le panneau :
+            sous lg, la page entière (comme avant) ; dès lg, le frame du panneau, sans quitter la page en dessous (CA-H7). %>
+        <% variants = if full && in_panel
+                        [ [ link[:full_href], "lg:hidden", leave_frame ], [ link[:full_href], "max-lg:hidden", frame ] ]
+        else
+                        [ [ (full ? link[:full_href] : link[:href]), nil, leave_frame ] ]
+        end %>
+        <% variants.each do |href, li_class, turbo_frame| %>
+          <%= tag.li class: li_class do %>
+            <%= link_to href, class: link_class, "aria-current": ("page" if current_page?(link[:href])),
+                              data: { turbo_frame:, autofocus_target: ("fallback" if index.zero? && !local_assigns[:page]) }.compact do %>
+              <span class="<%= class_names("grid size-10 shrink-0 place-items-center rounded-full", "bg-brand-soft text-brand-strong": !full,
+                                           "bg-mist text-mute": full) %>" aria-hidden="true"><%= ui_icon link[:icon] %></span>
+              <span class="min-w-0 flex-1">
+                <span class="<%= class_names("block", "text-mute": full) %>"><%= link[:label] %></span>
+                <% if cap %>
+                  <span class="block text-sm text-mute">
+                    <%= t("shared.navigation.account_panel.counter.#{full ? "full.#{cap}" : 'under'}", used: used.fetch(cap), max: max.fetch(cap)) %>
+                  </span>
+                <% end %>
+              </span>
+              <%= ui_icon "chevron-right", variant: :mini, class: "shrink-0 text-mute" %>
+            <% end %>
           <% end %>
-        </li>
+        <% end %>
       <% end %>
       <li>
         <%# Un seul interrupteur : celui du panneau (le theme_controller le garde d'accord avec le cookie). Caché sans JavaScript. %>
@@ -89,7 +100,7 @@
         <% end %>
       </li>
       <li>
-        <%= button_to session_path, method: :delete, class: class_names(link_class, "cursor-pointer text-brand-strong") do %>
+        <%= button_to session_path, method: :delete, form: { data: { turbo_frame: leave_frame } }, class: class_names(link_class, "cursor-pointer text-brand-strong") do %>
           <span class="<%= pill %>" aria-hidden="true"><%= ui_icon "arrow-right-start-on-rectangle" %></span>
           <span><%= t("shared.navigation.sign_out") %></span>
         <% end %>
@@ -97,24 +108,30 @@
     </ul>
   </nav>
 <% end %>
+<%# Le contenu du panneau est un Turbo Frame : l'écran de retrait y remplace le menu (CA-H7), « ‹ Mon compte » le ramène. %>
+<%# Après chaque chargement du frame, le contrôleur panel-focus met le focus sur le titre du nouvel écran (clavier, lecteur d'écran). %>
+<% screen = in_panel ? turbo_frame_tag(frame, data: { controller: "panel-focus", action: "turbo:frame-load->panel-focus#focus" }) { content } : content %>
 <% if local_assigns[:page] %>
-  <%= content %>
+  <%= screen %>
 <% else %>
   <%# Le déclencheur et la boîte partagent le contrôleur modal : showModal() piège le focus, Échap ferme et rend le focus à
-      l'avatar. Un lien (UDR-0061) : sans JavaScript, il mène à la page du panneau. Plein écran à toute largeur ; le
-      panneau latéral de 400 px dès lg est le lot O2. Seule la phrase cachée nomme l'avatar ; sous md, il paraît seul. %>
+      l'avatar. Un lien (UDR-0061) : sans JavaScript, il mène à la page du panneau. Plein écran sous lg ; dès lg, panneau de
+      400 px collé à droite, pleine hauteur, sur le voile (backdrop), qui le ferme au clic (même placement que l'élève).
+      Seule la phrase cachée nomme l'avatar ; sous md, il paraît seul. %>
   <div data-controller="modal" data-action="turbo:before-cache@document->modal#close">
-    <%= ui_button safe_join([ tag.span(safe_join([ ui_avatar(user.name, src: user.avatar_url, size: :sm),
-                                                   tag.span(user.name, class: "hidden text-sm font-medium md:inline") ]),
+    <%# UDR enseignant §3.14 : dès lg, l'avatar seul de 40 px, à droite de « Besoin d'aide ? » ; au-dessous, avatar de 32 px et nom (md). %>
+    <%= ui_button safe_join([ tag.span(safe_join([ tag.span(ui_avatar(user.name, src: user.avatar_url, size: :sm), class: "lg:hidden"),
+                                                   tag.span(ui_avatar(user.name, src: user.avatar_url, size: :md), class: "hidden lg:inline"),
+                                                   tag.span(user.name, class: "hidden text-sm font-medium md:inline lg:hidden") ]),
                                        class: "flex items-center gap-2.5", "aria-hidden": "true"),
                               tag.span(t(".open"), class: "sr-only") ]),
                   variant: :ghost, href: account_panel_page_path(user.role), class: "gap-2.5 pr-2 pl-0",
                   data: { action: "modal#open" }, "aria-haspopup": "dialog", "aria-controls": "account_panel" %>
     <dialog id="account_panel" aria-labelledby="account_panel_title" data-modal-target="dialog"
-            data-action="close->modal#closed modal:opened->autofocus#focus"
+            data-action="close->modal#closed modal:opened->autofocus#focus click->modal#backdrop"
             data-controller="autofocus" data-autofocus-mode-value="dialog"
             class="m-0 h-dvh max-h-none w-full max-w-none overflow-y-auto bg-white p-0 text-ink backdrop:bg-ink/40
-                   motion-safe:open:animate-fade-in">
+                   motion-safe:open:animate-fade-in lg:ml-auto lg:w-100">
       <div class="mx-auto flex min-h-full w-full max-w-md flex-col px-gutter pb-6">
         <div class="flex items-center justify-between gap-4 py-3">
           <h2 id="account_panel_title" class="font-display text-base font-medium"><%= t("shared.navigation.account_panel.title") %></h2>
@@ -122,7 +139,7 @@
             <%= ui_icon "x-mark" %>
           </button>
         </div>
-        <%= content %>
+        <%= screen %>
       </div>
     </dialog>
   </div>

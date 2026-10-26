@@ -39,11 +39,9 @@ module NavigationHelper
     team: [ [ :referential, :teams_referential_path, "squares-2x2" ], [ :imports, :teams_imports_path, "arrow-up-tray" ],
             [ :announcements, :my_announcements_path, "megaphone" ] ]
   }.freeze
-  # UDR-0069 §3.6 : frames différés posés sous les cartes de la barre latérale, par rôle : [id du frame, route de la source].
-  SIDEBAR_FRAMES = { teacher: [ [ "sidebar_referral", :teacher_invite_path ] ] }.freeze
-  # ADR-0076 §4.2 : un frame de la barre latérale est permanent. Une visite Turbo garde la carte déjà chargée au lieu de
-  # la redemander à chaque page ; une page qui a déjà ses données la rend avec elle, sous les mêmes options.
-  SIDEBAR_FRAME_OPTIONS = { target: "_top", class: "mt-4 block", data: { turbo_permanent: true } }.freeze
+  # UDR enseignant §3.4 (lot P0) : le Turbo Frame du panneau « Mon compte » ; dès lg, les écrans de retrait (« Mes matières »,
+  # « Mes établissements ») s'y ouvrent à la place du menu, sans quitter la page en dessous.
+  ACCOUNT_PANEL_FRAME = "account_panel_screen".freeze
   ACCOUNT_LINKS = [ [ :profile, :profile_path, "user-circle", nil ],
                     [ :sign_out, :session_path, "arrow-right-start-on-rectangle", :delete ] ].freeze
   # UDR-0080 §3.2, UDR-0082 §3.2 : panneau du compte des rôles qui l'ont (les autres gardent le menu déroulant) — la
@@ -88,11 +86,15 @@ module NavigationHelper
   NAV_STYLES = {
     sidebar: { base: "flex min-h-tap items-center gap-3 rounded-ln px-4 text-sm font-medium transition",
                active: "bg-brand-soft text-ink", idle: "text-mute hover:bg-mist hover:text-ink" },
+    # UDR enseignant §3.14, CA-G11 : l'entrée active de l'enseignant est bleu clair à texte bleu, jamais jaune.
+    sidebar_teacher: { base: "flex min-h-tap items-center gap-3 rounded-ln px-4 text-sm font-medium transition",
+                       active: "bg-brand-soft text-brand-strong", idle: "text-mute hover:bg-mist hover:text-ink" },
     bottom: { base: "flex min-h-tap flex-col items-center justify-center gap-1 rounded-ln px-1 py-1.5 text-2xs font-medium transition",
               active: "text-ink", idle: "text-mute hover:text-ink" }
   }.freeze
   NAV_ICON_STYLES = {
     sidebar: { active: "text-brand-strong", idle: "" },
+    sidebar_teacher: { active: "text-brand-strong", idle: "" },
     bottom: { active: "rounded-full bg-brand-soft px-4 py-0.5 text-brand-strong", idle: "px-4 py-0.5" }
   }.freeze
   NAV_GRIDS = { 1 => "grid-cols-1", 2 => "grid-cols-2", 3 => "grid-cols-3", 4 => "grid-cols-4", 5 => "grid-cols-5" }.freeze
@@ -122,14 +124,18 @@ module NavigationHelper
     !%i[student teacher].include?(role.to_sym)
   end
 
-  # Frames différés de la barre latérale du rôle, sauf celui dont la source est la page ouverte (elle porte déjà le bloc).
-  def sidebar_frames_for(role)
-    SIDEBAR_FRAMES.fetch(role.to_sym, []).filter_map do |id, route|
-      next unless respond_to?(route)
+  # Noms courts des matières de l'enseignant (« Maths », « PC ») : le shell les donne en une phrase (« Maths, PC »), les noms
+  # courts viennent de `shared.subjects.short`, sinon le nom entier.
+  def teacher_subjects(user)
+    user.about&.material.to_s.split(", ").map { I18n.t("shared.subjects.short.#{it.parameterize}", default: it) }
+  end
 
-      src = public_send(route)
-      [ id, src ] unless current_page?(src)
-    end
+  # UDR enseignant §3.4, §3.14 : « Maths · PC · sigle » (sans sigle, le nom de l'établissement), sous le nom, dans « Mon compte »
+  # et dans la barre latérale.
+  def teacher_detail(user)
+    current = teacher_schools.find(&:current)
+    school = current ? (current.sigle.presence || current.name) : user.about&.school
+    [ *teacher_subjects(user), school ].compact_blank.join(" · ")
   end
 
   def nav_path(destination)
