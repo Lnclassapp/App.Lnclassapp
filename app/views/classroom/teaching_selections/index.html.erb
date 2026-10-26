@@ -1,32 +1,32 @@
 <%# 🌐 UI · classroom/teaching_selections/index — « Quelles classes enseignez-vous ? » %>
-<%# Rôle : une carte par niveau, une bascule par classe (stream), compteur #teaching_counter ; « Terminer » tant que l'onboarding n'est pas fini %>
-<%# ADR  : 0030, 0063 · UDR : 0006, 0025, 0050, 0054 · rendu aussi en 422 par Classroom::TeacherOnboardingsController %>
+<%# Rôle : « ‹ Accueil » (onboarding fini), titre, phrase, compteur #teaching_counter, une carte par niveau, une bascule par classe (stream), « Terminer » pleine largeur tant que l'onboarding n'est pas fini %>
+<%# ADR  : 0030, 0063 · UDR : 0006, 0025, 0050, 0054, XXXX-ecrans-enseignant-sans-repetition (§3.13) · rendu aussi en 422 par Classroom::TeacherOnboardingsController %>
 <% page_title t(".page_title") %>
-<%= ui_page_header title: t(".title"), subtitle: t(".subtitle", school: @selection.school_name) do %>
-  <%= ui_button t(".invite"), href: teacher_invite_path, variant: :secondary, size: :sm, icon: "user-plus" %>
-<% end %>
+<%= ui_back_link t(".back_home"), href: teacher_home_path if @selection.onboarded %>
+<header class="mb-6 space-y-2">
+  <h1 class="font-display text-lg font-medium tracking-tight text-balance"><%= t(".title") %></h1>
+  <p class="text-sm text-mute"><%= t(".subtitle", school: @selection.school_name) %></p>
+  <% unless @selection.levels.empty? %>
+    <%# Le compteur est remplacé par les streams de déclaration et de retrait : la pastille l'enveloppe et reste en place. %>
+    <div class="inline-flex rounded-full bg-brand-soft px-3 py-1"><%= render "classroom/teachings/counter", count: @selection.declared_count %></div>
+  <% end %>
+</header>
 
 <% if @selection.levels.empty? %>
   <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "user-group" %>
 <% else %>
-  <div class="space-y-6">
+  <div class="space-y-4">
     <%= render partial: "classroom/teaching_selections/level_group", collection: @selection.levels, as: :level %>
   </div>
 
-  <div class="mt-8 flex flex-col gap-4 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-    <%= render "classroom/teachings/counter", count: @selection.declared_count %>
-    <% if @selection.onboarded %>
-      <%= ui_button t(".back_home"), href: teacher_home_path, variant: :secondary, icon_end: "arrow-right" %>
-    <% else %>
-      <%= form_with url: teacher_onboarding_path, id: "teacher-onboarding-form", class: "flex flex-col gap-2 sm:items-end" do %>
-        <% if @onboarding_error %>
-          <p id="teacher-onboarding-error" role="alert" class="rounded-ln bg-error-soft px-4 py-2 text-sm font-medium text-error">
-            <%= @onboarding_error %>
-          </p>
-        <% end %>
-        <%= ui_button t(".finish"), type: :submit, variant: :brand, size: :lg, icon_end: "arrow-right",
-                                    "aria-describedby": ("teacher-onboarding-error" if @onboarding_error) %>
+  <% unless @selection.onboarded %>
+    <%= form_with url: teacher_onboarding_path, id: "teacher-onboarding-form", class: "mt-6 flex flex-col gap-2" do %>
+      <% if @onboarding_error %>
+        <p id="teacher-onboarding-error" role="alert" class="rounded-ln bg-error-soft px-4 py-2 text-sm font-medium text-error">
+          <%= @onboarding_error %>
+        </p>
       <% end %>
+      <%= ui_button t(".finish"), type: :submit, size: :lg, full: true, "aria-describedby": ("teacher-onboarding-error" if @onboarding_error) %>
     <% end %>
-  </div>
+  <% end %>
 <% end %>

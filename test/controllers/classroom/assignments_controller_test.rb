@@ -21,10 +21,9 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     post classroom_assignments_path(classroom.public_id), params: { assignment: { assignable_type: type, assignable_key: key } }, **
   end
 
-  # La modale des jours envoie toujours le champ caché vide, puis les cases cochées ; « Plus tard » ajoute later.
-  def assign_with_days(weekdays, key: @exercise.public_id, later: false, **)
-    params = { assignment: { assignable_type: "Exercise", assignable_key: key, weekdays: [ "", *weekdays ] } }
-    params[:later] = "1" if later
+  # La modale des jours envoie toujours le champ caché vide, puis les cases cochées ; `extra` : paramètres hors de assignment.
+  def assign_with_days(weekdays, key: @exercise.public_id, extra: {}, **)
+    params = { assignment: { assignable_type: "Exercise", assignable_key: key, weekdays: [ "", *weekdays ] } }.merge(extra)
     post classroom_assignments_path(@classroom.public_id), params:, **
   end
 
@@ -33,11 +32,19 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
 
   def session_days(teacher = @teacher) = Orm::ClassroomSessionDay.where(teacher_id: teacher.id).order(:weekday).pluck(:weekday)
 
+  # Les jours de séance de l'enseignant pour la classe : sans eux, un envoi sans jour est refusé (voir plus bas).
+  def know_days(classroom = @classroom, teacher = @teacher, weekdays: [ 1, 4 ])
+    Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: teacher.id, classroom_id: classroom.id, weekdays:,
+                                                                at: Time.current)
+  end
+
   def withdraw(assignment, classroom: @classroom, **)
     patch archive_assignment_path(assignment.public_id), params: { classroom_public_id: classroom.public_id }, **
   end
 
   test "an exercise is assigned then withdrawn, in Turbo Streams that replace the toggle" do
+    travel_to Time.zone.local(2026, 10, 5, 10)
+    know_days
     sign_in_as @teacher
     type = "Exercise"
     key = @exercise.public_id
@@ -48,12 +55,13 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "text/vnd.turbo-stream.html", response.media_type
     assignment = Orm::ClassroomAssignment.find_by!(assignable_type: type, assignable_id: @exercise.id)
     assert_equal [ @classroom.id, "active", @teacher.id ], [ assignment.classroom_id, assignment.status, assignment.assigned_by_id ]
-    assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("create.done", name: "Méiose", classroom: "6ème 1"))
+    assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("create.done_due", name: "Méiose", classroom: "6ème 1", date: "jeudi 8 oct."))
     assert_select "turbo-stream[action=replace][target='#{toggle_id(type, key)}']" do
       assert_select "template ##{toggle_id(type, key)}", text: including(tl("toggle.assigned"))
       assert_select "form[action='#{archive_assignment_path(assignment.public_id)}'] input[name=classroom_public_id][value='#{@classroom.public_id}']"
     end
 
+    Orm::ClassroomSessionDay.delete_all # le test suivant prouve le cas où les jours sont connus
     withdraw(assignment, as: :turbo_stream)
 
     assert_response :success
@@ -100,6 +108,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "posting the same assignment again says it is already assigned (422) and writes nothing" do
+    know_days
     sign_in_as @teacher
     assign("Exercise", @exercise.public_id, as: :turbo_stream)
 
@@ -114,6 +123,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
 
   test "reassigning after a withdrawal creates a new active row, without a uniqueness error" do
     first = create_assignment(classroom: @classroom, assignable: @exercise, by: @teacher, status: "archived")
+    know_days
     sign_in_as @teacher
 
     assign("Exercise", @exercise.public_id, as: :turbo_stream)
@@ -212,12 +222,14 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "without Turbo, every answer leads back to where the button was, with a flash" do
+    travel_to Time.zone.local(2026, 10, 5, 10)
+    know_days
     origin = classroom_essential_url(@classroom.public_id, @course.slug, @essential.slug)
     sign_in_as @teacher
 
     assign("Exercise", @exercise.public_id, headers: { "HTTP_REFERER" => origin })
     assert_redirected_to origin
-    assert_equal tl("create.done", name: "Méiose", classroom: "6ème 1"), flash[:notice]
+    assert_equal tl("create.done_due", name: "Méiose", classroom: "6ème 1", date: "jeudi 8 oct."), flash[:notice]
 
     assign("Exercise", @exercise.public_id, headers: { "HTTP_REFERER" => origin })
     assert_redirected_to origin
@@ -235,6 +247,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
   # UDR-0013, amendement du 2026-10-01 : un contenu d'un autre niveau ne s'assigne pas ; le refus dit pourquoi.
   test "an exercise of another level is refused in 422 with its reason, and nothing is written" do
     other = create_exercise(essential: create_essential(course: create_course(name: "Mécanique")))
+    know_days
     sign_in_as @teacher
 
     assign("Exercise", other.public_id, as: :turbo_stream)
@@ -252,7 +265,9 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     school = create_school
     third = create_classroom(school:, name: "3ème 1", level: create_level(name: "3ème"))
     tle_c = create_classroom(school:, name: "Tle C 1", level: tle, series: create_series(name: "C"))
-    sign_in_as create_teacher(classrooms: [ third, tle_c ])
+    teacher = create_teacher(classrooms: [ third, tle_c ])
+    [ third, tle_c ].each { know_days(it, teacher) }
+    sign_in_as teacher
 
     [ third, tle_c ].each do |classroom|
       assign("Exercise", tle_d.public_id, classroom:, as: :turbo_stream)
@@ -315,7 +330,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "compact: the days modal carries compact on to its form, and « Plus tard » answers a compact row" do
+  test "compact: the days modal carries compact on to its form, and its answer is a compact row" do
     sign_in_as @teacher
 
     get new_classroom_assignment_path(@classroom.public_id, assignable_key: @exercise.public_id, compact: 1)
@@ -323,14 +338,16 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_select "form#assignment-days-form input[type=hidden][name=compact][value='1']"
 
     post classroom_assignments_path(@classroom.public_id), as: :turbo_stream, params: {
-      assignment: { assignable_type: "Exercise", assignable_key: @exercise.public_id, weekdays: [ "" ] }, later: "1", compact: "1"
+      assignment: { assignable_type: "Exercise", assignable_key: @exercise.public_id, weekdays: [ "", "1" ] }, compact: "1"
     }
 
     assert_select "turbo-stream[action=replace] template ##{toggle_id('Exercise', @exercise.public_id)} div > p:first-child", text: "6ème 1"
   end
 
   # UDR-0062 §3.4 : la modale « Quels jours voyez-vous la <classe> ? », servie dans le frame « modal », lisible sans JavaScript.
-  test "the days modal names the classroom and the exercise, with six weekdays, « Plus tard » and « Assigner »" do
+  # UDR enseignant §3.13 (option A) : « Plus tard » est retiré ; « Annuler » ferme sans rien écrire, « Assigner » est le bouton plein.
+  test "the days modal names the classroom, with six weekdays, « Annuler » and « Assigner » and no « Plus tard »" do
+    travel_to Time.zone.local(2026, 10, 5, 10)
     sign_in_as @teacher
 
     get new_classroom_assignment_path(@classroom.public_id, assignable_key: @exercise.public_id)
@@ -338,7 +355,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "turbo-frame#modal dialog[open]" do
       assert_select "h2", text: tl("new.title", classroom: "6ème 1")
-      assert_select "p", text: including(tl("new.context", name: "Méiose"))
+      assert_select "p", text: including(tl("new.context"))
       assert_select "form[action='#{classroom_assignments_path(@classroom.public_id)}'][method=post]" do
         assert_select "input[type=hidden][name='assignment[assignable_type]'][value=Exercise]"
         assert_select "input[type=hidden][name='assignment[assignable_key]'][value='#{@exercise.public_id}']"
@@ -348,8 +365,40 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
         assert_equal [ "Lun.", "Mar.", "Mer.", "Jeu.", "Ven.", "Sam." ], css_select("fieldset label span[aria-hidden]").map(&:text)
       end
     end
-    assert_select "button[type=submit][name=later]", text: tl("new.later")
-    assert_select "button[type=submit]:not([name])", text: including(tl("new.submit"))
+    assert_select "button[name=later]", 0
+    assert_no_match(/Plus tard/, response.body)
+    assert_select "button[type=button][data-action='modal#close']", text: including(tl("new.cancel"))
+    assert_select "button[type=submit][form=assignment-days-form]:not([name]).ui-button-primary", text: including(tl("new.submit"))
+    # « Prochaine séance : … » : absente sans JavaScript (hidden), les jours et « aujourd'hui » viennent du serveur.
+    assert_select "[data-controller='classroom--next-session'][data-classroom--next-session-today-value='2026-10-05']" do
+      assert_select "p[hidden][data-classroom--next-session-target=line]", text: including(tl("new.next_session"))
+    end
+  end
+
+  # CA-L2, CA-L4 — UDR enseignant §3.13 : une ligne par classe sous chaque exercice, un seul « Assigner » plein sur la page,
+  # « Modifier les jours de la … » une fois par classe qui a des jours et un exercice assigné, jamais pour une classe sans jours.
+  test "the sheet: one row per classroom, a single solid « Assigner », « Modifier les jours » once per classroom with days" do
+    travel_to Time.zone.local(2026, 10, 5, 10)
+    bilan = create_exercise(essential: @essential, title: "Bilan", position: 2)
+    school = create_school
+    with_days = create_classroom(school:, name: "6ème 2", level: @course.level, series: @course.series)
+    without_days = create_classroom(school:, name: "6ème 3", level: @course.level, series: @course.series)
+    teacher = create_teacher(school:, classrooms: [ with_days, without_days ])
+    Repositories::Classroom::SessionDaysRepository.new.replace(teacher_id: teacher.id, classroom_id: with_days.id, weekdays: [ 1, 4 ],
+                                                                at: Time.current)
+    [ @exercise, bilan ].each { create_assignment(classroom: with_days, assignable: it, by: teacher, due_on: Date.new(2026, 10, 8)) }
+    sign_in_as teacher
+
+    get course_essential_path(@course.slug, @essential.slug)
+
+    assert_response :success
+    assert_select "#essential_exercises li [id^='assignment_']", 4 # 2 exercices x 2 classes
+    assert_select "#essential_exercises .ui-button-primary", 1
+    assert_select "##{toggle_id('Exercise', @exercise.public_id, classroom: without_days)} .ui-button-primary", text: /#{tl('toggle.assign')}/
+    assert_select "##{toggle_id('Exercise', bilan.public_id, classroom: without_days)} .ui-button-secondary", text: /#{tl('toggle.assign')}/
+    edit_days = edit_classroom_session_days_path(with_days.public_id)
+    assert_select "a[data-turbo-frame=modal][href='#{edit_days}']", { count: 1, text: I18n.t("classroom.session_days.edit_link", classroom: "6ème 2") }
+    assert_select "a[href='#{edit_classroom_session_days_path(without_days.public_id)}']", 0
   end
 
   test "the days modal: 404 for an unknown or unpublished exercise or an archived classroom, 403 for the team or another teacher" do
@@ -412,16 +461,53 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[action=refresh]", 0
   end
 
-  test "« Plus tard »: assigned without due date, no day written, the toast has no date" do
+  # UDR enseignant §3.13 : plus de « Plus tard ». Un envoi sans jour est refusé par le serveur, quoi que le client ajoute.
+  test "« Plus tard » is gone: a forged later=1 without a day is refused (422), nothing written" do
     sign_in_as @teacher
 
-    assign_with_days(%w[1 4], later: true, as: :turbo_stream)
+    assign_with_days([], extra: { later: "1" }, as: :turbo_stream)
+
+    assert_response :unprocessable_entity
+    assert_select "turbo-frame#modal dialog[open] #assignment_weekdays_error"
+    assert_equal 0, Orm::ClassroomAssignment.count
+    assert_empty session_days
+  end
+
+  # Le contournement fermé : sans le champ `weekdays`, sur une classe sans jours, l'enseignant est traité comme un envoi vide.
+  test "a teacher's forged POST without the weekdays field, on a classroom without days: 422 like the empty field, nothing written" do
+    sign_in_as @teacher
+
+    assign("Exercise", @exercise.public_id, as: :turbo_stream)
+
+    assert_response :unprocessable_entity
+    assert_select "turbo-frame#modal dialog[open] #assignment_weekdays_error"
+    assert_equal 0, Orm::ClassroomAssignment.count
+    assert_empty session_days
+  end
+
+  test "the same POST once the days are known assigns, and the team, which has no days, is not held back" do
+    know_days
+    sign_in_as @teacher
+    assign("Exercise", @exercise.public_id, as: :turbo_stream)
+    assert_response :success
+    sign_out
+
+    sign_in_as create_team_member
+    assign("Exercise", create_exercise(essential: @essential, title: "Autre").public_id, as: :turbo_stream)
+    assert_response :success
+    assert_equal 2, Orm::ClassroomAssignment.count
+    assert_nil Orm::ClassroomAssignment.order(:id).last.due_on
+  end
+
+  test "an assignment sent with a day while later=1 is forged on: the day counts, the due date is given" do
+    travel_to Time.zone.local(2026, 10, 5, 10)
+    sign_in_as @teacher
+
+    assign_with_days(%w[1 4], extra: { later: "1" }, as: :turbo_stream)
 
     assert_response :success
-    assert_nil Orm::ClassroomAssignment.sole.due_on
-    assert_empty session_days
-    assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("create.done", name: "Méiose", classroom: "6ème 1"))
-    assert_select "turbo-stream[action=refresh]", 0
+    assert_equal Date.new(2026, 10, 8), Orm::ClassroomAssignment.sole.due_on
+    assert_equal [ 1, 4 ], session_days
   end
 
   test "« Assigner » without any day: 422, the modal again with its error on the fieldset, nothing written" do
@@ -433,6 +519,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#modal dialog[open]"
     assert_select "fieldset[aria-invalid=true][aria-describedby=assignment_weekdays_error]"
     assert_select "#assignment_weekdays_error", text: including(tl("new.weekdays_blank"))
+    assert_no_match(/Plus tard/, response.body)
     assert_equal 0, Orm::ClassroomAssignment.count
     assert_empty session_days
   end
@@ -444,6 +531,29 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
 
     get new_classroom_assignment_path("inconnue", assignable_key: @exercise.public_id)
+    assert_response :not_found
+    assert_equal 0, Orm::ClassroomAssignment.count
+  end
+
+  # Revue : les jours d'un autre enseignant ne s'écrivent pas, et une classe inconnue ne fait pas de 500, avec ou sans jours.
+  test "a forged POST with days to another teacher's classroom: 403, nothing assigned, no session day written" do
+    stranger = create_teacher
+    sign_in_as stranger
+
+    assert_no_difference -> { Orm::ClassroomSessionDay.count } do
+      assign_with_days(%w[1], as: :turbo_stream)
+    end
+
+    assert_response :forbidden
+    assert_equal 0, Orm::ClassroomAssignment.count
+  end
+
+  test "a POST without weekdays to an unknown classroom: 404, not a 500, nothing written" do
+    sign_in_as @teacher
+
+    post classroom_assignments_path("inconnue"), as: :turbo_stream,
+         params: { assignment: { assignable_type: "Exercise", assignable_key: @exercise.public_id } }
+
     assert_response :not_found
     assert_equal 0, Orm::ClassroomAssignment.count
   end
