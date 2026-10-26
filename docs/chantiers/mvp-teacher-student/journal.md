@@ -40,6 +40,8 @@
 | 2026-10-26 | Lot K : la direction répond toujours 403 sur ce rapport (`FollowAssignmentPolicy`, ADR-0072 §4.5 : elle ne voit ni retards ni noms) ; seuls l'enseignant et l'équipe le voient, avec la même vue | Le plan dit « la direction et l'équipe voient le même rapport » ; la politique et son test (403) disent le contraire pour la direction : à trancher par le porteur | Non |
 | 2026-10-26 | Lot B2 : le code de la classe (« Code de la classe · K7M 4Q2 », bouton « Copier ») est affiché dans le bloc du lien, provisoirement (CA-B7), pour l'enseignant, la direction et l'équipe | Porteur, 2026-10-26 : « la direction et l'équipe voient le code » ; captures validées | Non |
 | 2026-10-26 | Lot D : écarts à l'UDR élève validés (pas de durée, pas de « cette semaine », badge d'échéance neutre sous 2 jours, pas de « Lue », pas de « Réessayer », « à revoir » avant « aucun exercice assigné », l'avatar mène à « Mon compte » au téléphone) ; la grille garde 6 matières au plus, puis « Inviter » | Porteur, 2026-10-26 : « D oui avec 6 matières » | Non |
+| 2026-10-26 | Lot D : « Besoin d'aide ? » reste dans l'en-tête de l'élève à toute largeur (le déclencheur ne se cache plus sous 700 px), comme celui de l'enseignant ; sur l'accueil, sous lg, le bandeau le remplace | Porteur, 2026-10-26 : « besoin d'aide reste sur la navbar ». Sans ça, sous 700 px et hors de l'accueil, l'élève n'avait plus d'accès à la feuille (« Mon compte » ne la porte plus depuis E1) | Non |
+| 2026-10-26 | Lot L : un POST d'enseignant sans le champ `weekdays`, sur une classe sans jours, est refusé (422, rien d'écrit) | Porteur, 2026-10-26 : « oui ». Déjà tenu par `AssignResource#require_days!` (commit `93cdf7d0`, fusionné avec L) et ses tests ; la ligne de dette était périmée | Non |
 
 ## Ce qui a dérapé
 
@@ -87,10 +89,8 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Sous-ligne des étapes en `text-sm` (14 px) au lieu de 13 px | Aucun jeton de 13 px, les valeurs arbitraires sont interdites | À trancher avec la palette (Lot P) |
 | Lot L2 : case à cocher et pastille du compteur de « Quelles classes enseignez-vous ? » (`classroom/teachings/_toggle`, `_counter`) | Reporté par le porteur (2026-10-26) | Lot L2 |
 | Lot L : la case à cocher à droite (cochée `bg-brand-strong`) et la pastille du compteur dans `classroom/teachings/_toggle` et `_counter` ; le sigle de l'établissement dans « Cochez vos classes au CSMT » | Ces deux partiels et `TeachingSelectionQuery` ne sont dans la fiche d'aucun lot ; la pastille enveloppe le compteur dans `index`, la phrase nomme l'établissement | À confier à un lot (L2, ou G pour le sigle) |
-| Lot L : un POST forgé sans le champ `weekdays` sur une classe sans jours crée encore une assignation sans échéance | La règle « un enseignant n'assigne qu'avec des jours » vit dans `AssignResource`, hors de la fiche du Lot L ; l'équipe assigne sans jours | À trancher avec le porteur |
 
 - Lot D (2026-10-26) : E1 avait laissé rouges trois tests système qui cherchaient « Cours », « Ma classe » et « Besoin d'aide ? » dans le menu de l'avatar (`help_test`, `help_sheet_test`, `student_classroom_test`) ; remis au comportement d'E1 et de D à la reprise du lot.
-- Lot D (2026-10-26) : sous 700 px, hors de l'accueil, l'élève n'a plus d'accès à la feuille « Besoin d'aide ? » : l'en-tête la cache, « Mon compte » (E1) ne la porte plus et le bandeau de l'accueil mène à la page /aide. Les tests « téléphone » de `help_sheet_test` se jouent donc à 700 px. À trancher par le porteur : le bandeau ouvre la feuille, ou l'aide revient dans l'en-tête au téléphone.
 
 ## Clôture
 
