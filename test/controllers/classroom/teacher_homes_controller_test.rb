@@ -124,6 +124,11 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1.sr-only"
     assert_no_match(/Bonjour, /, response.body)
     assert_select "nav.bottom-0", 0
+    # Ce que l'enseignant voit : la seule « Navigation principale » est celle de la barre latérale ; aucune barre basse ni « Plus ».
+    navigation = I18n.t("shared.navigation.bottom_bar.label")
+    assert_select "nav[aria-label=?]", navigation, 1
+    assert_select "aside nav[aria-label=?]", navigation, 1
+    assert_select "button", text: I18n.t("shared.navigation.bottom_bar.more"), count: 0
   end
 
   test "CA-G4: the carousel ends with « + Ajouter une classe »" do

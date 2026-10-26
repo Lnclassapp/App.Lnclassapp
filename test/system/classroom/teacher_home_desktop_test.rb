@@ -1,8 +1,9 @@
 require "application_system_test_case"
 
-# CA-G10 → Lot P1 (UDR enseignant §3.3, « Sur ordinateur »): at 1280 px the home is a 57 rem page: the band is as wide as the
-# content, without avatar or help; the class cards are a grid of three, « + Ajouter une classe » last, astride the band; the
-# level bubbles are on one line; « Cette semaine » and « Historique » are side by side, their titles visible.
+# CA-G10 → Lot P1 (UDR enseignant §3.3, « Sur ordinateur »): at 1280 px the home is a page of 57 rem at most, with no yellow band
+# (only the top bar is a banner). The class cards are a one-line carousel of 16.5 rem cards, the fourth cut at the edge, « + Ajouter
+# une classe » last and the pager shown; the two announcements and the level bubbles are each on one line; « Cette semaine » and
+# « Historique » are side by side, their titles visible; the page never scrolls sideways.
 class Classroom::TeacherHomeDesktopTest < ApplicationSystemTestCase
   setup { page.current_window.resize_to(1280, 900) }
   teardown { page.current_window.resize_to(1400, 1400) }
@@ -34,6 +35,7 @@ class Classroom::TeacherHomeDesktopTest < ApplicationSystemTestCase
     page_box = rect("#teacher_home")
     assert_operator page_box["width"], :<=, 912.5, "la page dépasse 57 rem"
     assert_no_selector "#teacher_home_band, header.teacher-band", visible: :visible
+    assert_selector "header", count: 1, visible: :visible # la seule bannière visible est la barre du haut, pas le bandeau jaune
 
     track = "#teacher_home_classrooms ul[data-communication--carousel-target='track']"
     cards = all("#{track} > li").map { it.rect }
