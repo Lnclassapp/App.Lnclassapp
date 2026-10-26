@@ -16,7 +16,9 @@ module Queries
         @students = Array.new(3) { create_student(classroom: @classroom) }
       end
 
-      def follow_ups(teacher = @teacher, school: @school) = TeacherFollowUpsQuery.new.call(teacher_id: teacher.id, school_id: school.id, today: @today)
+      def result(teacher = @teacher, school: @school) = TeacherFollowUpsQuery.new.call(teacher_id: teacher.id, school_id: school.id, today: @today)
+      def follow_ups(...) = result(...).week
+      def history(...) = result(...).history
 
       def svt_exercise(title) = create_exercise(title:, essential: create_essential(course: create_course(material: @svt, level: @tle)))
 
@@ -26,10 +28,11 @@ module Queries
         create_assignment(classroom:, assignable: exercise, by: @teacher, due_on:, assigned_at:, **)
       end
 
-      def hand_in(assignment, *students)
+      def hand_in(assignment, *students, score_percent: 100)
         exercise = Orm::Exercise.find(assignment.assignable_id)
         students.each do |student|
-          create_exercise_session(student:, exercise:, status: "completed", classroom_assignment: assignment, completed_at: @today.to_time)
+          create_exercise_session(student:, exercise:, status: "completed", classroom_assignment: assignment, score_percent:,
+                                  completed_at: @today.to_time)
         end
       end
 
@@ -42,16 +45,15 @@ module Queries
 
         assert_equal [ "Respiration", "Photosynthèse" ], rows.map(&:exercise_title)
         assert_equal({ public_id: late.public_id, exercise_title: "Respiration", classroom_public_id: @classroom.public_id,
-                       classroom_name: "Tle D 2", due_on: @today - 1, pending: 3, present: 3, material_name: "SVT",
-                       material_category: "science" }, rows.first.to_h)
+                       classroom_name: "Tle D 2", due_on: @today - 1, pending: 3, present: 3, done: 0, average_percent: nil,
+                       material_name: "SVT", material_slug: @svt.slug, material_category: "science" }, rows.first.to_h)
         assert_equal [ 2, 3 ], rows.last.to_h.values_at(:pending, :present)
       end
 
-      test "CA-3: out of the list — due in 10 days, late by 15 days, done by everyone, without a due date, archived, another subject" do
+      test "CA-3: out of the week — due in 10 days, late by 15 days, done by everyone, archived, another subject" do
         assign("Dans dix jours", due_on: @today + 10)
         assign("Il y a quinze jours", due_on: @today - 15)
         hand_in(assign("Fait par tous", due_on: @today + 1), *@students)
-        assign("Sans échéance", due_on: nil)
         assign("Retiré", due_on: @today + 1, status: "archived")
         maths = create_exercise(title: "Maths", essential: create_essential(course: create_course(material: create_material, level: @tle)))
         assign("Maths", due_on: @today + 1, exercise: maths)
@@ -59,11 +61,59 @@ module Queries
         assert_empty follow_ups
       end
 
+      # UDR enseignant §3.13 : « Plus tard » d'avant le pilote : sans échéance, dans « Cette semaine » tant qu'un élève ne l'a pas faite.
+      test "an assignment without a due date stays in the week while a student has not done it, then leaves, without entering the history" do
+        assignment = assign("Sans échéance", due_on: nil)
+
+        assert_equal [ [ "Sans échéance", nil ] ], follow_ups.map { [ it.exercise_title, it.due_on ] }
+        hand_in(assignment, *@students)
+        assert_empty follow_ups
+        assert_empty history
+      end
+
       test "CA-3: the edges are included — due in exactly 7 days, late by exactly 14 days" do
         assign("Dans sept jours", due_on: @today + 7)
         assign("Il y a quatorze jours", due_on: @today - 14)
 
         assert_equal [ "Il y a quatorze jours", "Dans sept jours" ], follow_ups.map(&:exercise_title)
+      end
+
+      # CA-G6 : « 20 / 27 faits » ; CA-G7 : l'Historique, groupé par échéance, avec la moyenne de la classe.
+      test "CA-G6: the week row counts who did it, out of who is present" do
+        hand_in(assign("Photosynthèse", due_on: @today + 3), *@students.first(2), score_percent: 80)
+
+        assert_equal [ 2, 3, 1 ], follow_ups.sole.to_h.values_at(:done, :present, :pending)
+      end
+
+      test "CA-G7: done by all and due, or late by more than 14 days: the history, never also in the week; the class average" do
+        both = assign("Fait par tous", due_on: @today - 1)
+        hand_in(both, @students[0], score_percent: 90)
+        hand_in(both, @students[1], score_percent: 60)
+        hand_in(both, @students[1], score_percent: 40)
+        hand_in(both, @students[2], score_percent: 60)
+        today_done = assign("Aujourd'hui", due_on: @today)
+        hand_in(today_done, *@students)
+        old = assign("Il y a vingt jours", due_on: @today - 20)
+        hand_in(old, @students.first, score_percent: 50)
+        assign("Il y a quatorze jours", due_on: @today - 14)
+        hand_in(assign("Il y a trente et un jours", due_on: @today - 31), *@students)
+        hand_in(assign("Pas encore échu", due_on: @today + 2), *@students)
+
+        rows = history
+
+        assert_equal [ "Aujourd'hui", "Fait par tous", "Il y a vingt jours" ], rows.map(&:exercise_title), "the latest due date first"
+        assert_equal [ [ 100, 3, 3 ], [ 70, 3, 3 ], [ 50, 1, 3 ] ], rows.map { [ it.average_percent, it.done, it.present ] }
+        assert_equal [ "Il y a quatorze jours" ], follow_ups.map(&:exercise_title)
+        assert_empty(history.map(&:public_id) & follow_ups.map(&:public_id))
+      end
+
+      test "the history leaves out a classroom without present student and an archived assignment" do
+        empty = create_classroom(school: @school, level: @tle, name: "Tle D 3", school_year: "2026-2027")
+        Orm::TeacherClassroom.create!(teacher: @teacher, classroom: empty)
+        assign("Sans élève", due_on: @today - 1, classroom: empty)
+        hand_in(assign("Retiré", due_on: @today - 1, status: "archived"), *@students)
+
+        assert_empty history
       end
 
       test "only present students count: a student who left, or an anonymized one, has nothing left to do" do
@@ -112,7 +162,7 @@ module Queries
 
       test "CA-4: a fixed number of queries, whatever the number of classrooms" do
         assign("Une", due_on: @today + 1)
-        one = count_queries { follow_ups }
+        one = count_queries { result }
         3.times do |index|
           classroom = create_classroom(school: @school, level: @tle, school_year: "2026-2027")
           Orm::TeacherClassroom.create!(teacher: @teacher, classroom:)
@@ -121,7 +171,7 @@ module Queries
         end
 
         assert_equal 4, follow_ups.size
-        assert_equal one, count_queries { follow_ups }
+        assert_equal one, count_queries { result }
       end
 
       # ME-07 (ADR-0094 §4.6) : les exercices à suivre de l'établissement courant seulement.

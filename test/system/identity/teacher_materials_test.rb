@@ -27,7 +27,7 @@ class Identity::TeacherMaterialsTest < ApplicationSystemTestCase
     fill_in "teacher_registration[pin_confirmation]", with: "4821"
     click_on t("identity.teacher_registrations.form.submit")
 
-    assert_current_path teacher_classrooms_path, wait: 20
+    assert_current_path teacher_home_path, wait: 20
     visit profile_path
 
     within("#profile_materials") { assert_text "Physique-Chimie" and assert_no_text "SVT" }

@@ -40,7 +40,7 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
 
   def assert_signed_up(channel)
     assert_toast t("identity.teacher_registrations.create.welcome")
-    assert_current_path teacher_classrooms_path
+    assert_current_path teacher_home_path
     teacher = Orm::User.find_by!(contact: "0701020304", role: "teacher")
     assert_equal [ "KOUASSI", "Aya Marie" ], [ teacher.last_name, teacher.first_name ]
     assert_equal [ [ @school.id, true ] ], Orm::TeacherSchool.where(teacher:).pluck(:school_id, :primary)
@@ -156,7 +156,7 @@ class Identity::TeacherSignupWithoutJavascriptTest < ApplicationSystemTestCase
     fill_in "teacher_registration[pin_confirmation]", with: "4821"
     click_on I18n.t("identity.teacher_registrations.form.submit")
 
-    assert_current_path teacher_classrooms_path
+    assert_current_path teacher_home_path
     teacher = Orm::User.find_by!(contact: "0701020304")
     assert_equal [ "KOUASSI", "Aya Marie" ], [ teacher.last_name, teacher.first_name ]
     assert_equal [ @school.id ], Orm::TeacherSchool.where(teacher:).pluck(:school_id)

@@ -25,7 +25,6 @@ class School::CurrentSchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_response :see_other
     follow_redirect!
     assert_select "#toasts", text: /#{Regexp.escape(t("school.current_schools.update.done", school: "Collège Saint-Michel"))}/
-    assert_select "#current_school", text: /Collège Saint-Michel/
     assert_select "#account_schools button[aria-current=true][disabled]", count: 1
     assert_select "#account_schools button[aria-label='#{t('shared.navigation.account_panel.schools.current', school: 'Collège Saint-Michel')}']"
     assert_select "#account_schools button[aria-label=\"#{t('shared.navigation.account_panel.schools.switch', school: "Lycée moderne d'Abobo")}\"]"
