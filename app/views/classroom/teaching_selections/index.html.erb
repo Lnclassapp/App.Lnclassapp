@@ -1,5 +1,5 @@
 <%# 🌐 UI · classroom/teaching_selections/index — « Quelles classes enseignez-vous ? » %>
-<%# Rôle : « ‹ Accueil » (onboarding fini), titre, phrase, compteur #teaching_counter, une carte par niveau, une bascule par classe (stream), « Terminer » pleine largeur tant que l'onboarding n'est pas fini %>
+<%# Rôle : « ‹ Accueil » (onboarding fini), titre, phrase (sigle de l'établissement, sinon son nom), compteur #teaching_counter, une carte par niveau, une bascule par classe (stream), « Terminer » pleine largeur tant que l'onboarding n'est pas fini %>
 <%# ADR  : 0030, 0063 · UDR : 0006, 0025, 0050, 0054, XXXX-ecrans-enseignant-sans-repetition (§3.13 : ≥ lg, 57 rem, deux colonnes, « Terminer » de 15 rem à droite, « Mes classes » actif) · rendu aussi en 422 par Classroom::TeacherOnboardingsController %>
 <% page_title t(".page_title") %>
 <% content_for :nav_key, "classrooms" %>
@@ -7,7 +7,7 @@
 <%= ui_back_link t(".back_home"), href: teacher_home_path if @selection.onboarded %>
 <header class="mb-6 space-y-2">
   <h1 class="font-display text-lg font-medium tracking-tight text-balance"><%= t(".title") %></h1>
-  <p class="text-sm text-mute"><%= t(".subtitle", school: @selection.school_name) %></p>
+  <p class="text-sm text-mute"><%= @selection.school_sigle ? t(".subtitle_sigle", school: @selection.school_sigle) : t(".subtitle", school: @selection.school_name) %></p>
   <% unless @selection.levels.empty? %>
     <%# Le compteur est remplacé par les streams de déclaration et de retrait : la pastille l'enveloppe et reste en place. %>
     <div class="inline-flex rounded-full bg-brand-soft px-3 py-1"><%= render "classroom/teachings/counter", count: @selection.declared_count %></div>

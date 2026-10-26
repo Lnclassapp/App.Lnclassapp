@@ -1,16 +1,14 @@
 <%# 🌐 UI · classroom/teachings/_toggle — bascule d'une classe : déclarée ou non %>
-<%# Rôle : bouton aria-pressed dans un formulaire POST (déclarer) ou DELETE (retirer), remplacé par le stream de la réponse %>
-<%# ADR  : 0030 · UDR : 0025 %>
+<%# Rôle : ligne de 52 px, nom à gauche et case à cocher à droite ; bouton aria-pressed dans un formulaire POST (déclarer) ou DELETE (retirer), remplacé par le stream de la réponse %>
+<%# ADR  : 0030 · UDR : 0025, XXXX-ecrans-enseignant-sans-repetition (§3.13) %>
 <%= button_to classroom_teaching_path(classroom.public_id), method: (classroom.declared ? :delete : :post),
               form: { id: "teaching_#{classroom.public_id}", class: "h-full" }, "aria-pressed": classroom.declared.to_s,
-              class: class_names("flex h-full min-h-tap w-full cursor-pointer items-center justify-between gap-3 rounded-ln border " \
-                                 "px-4 py-3 text-left font-medium text-ink transition focus-visible:outline-2 " \
-                                 "focus-visible:outline-offset-2 focus-visible:outline-brand",
-                                 classroom.declared ? "border-brand bg-brand-soft" : "border-line bg-white hover:border-brand/40 hover:bg-mist") do %>
+              class: "flex h-full min-h-13 w-full cursor-pointer items-center justify-between gap-3 px-4 text-left font-medium " \
+                     "text-ink transition hover:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 " \
+                     "focus-visible:outline-brand" do %>
   <span><%= classroom.name %></span>
-  <% if classroom.declared %>
-    <%= ui_icon "check-circle", variant: :solid, class: "text-brand-strong" %>
-  <% else %>
-    <%= ui_icon "plus-circle", class: "text-mute" %>
+  <%= tag.span class: class_names("flex size-6 shrink-0 items-center justify-center rounded-sm border text-white transition",
+                                  classroom.declared ? "border-brand-strong bg-brand-strong" : "border-line bg-white") do %>
+    <%= ui_icon "check", variant: :mini, size: :sm if classroom.declared %>
   <% end %>
 <% end %>
