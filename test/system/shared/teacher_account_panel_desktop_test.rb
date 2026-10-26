@@ -72,6 +72,29 @@ class Shared::TeacherAccountPanelDesktopTest < ApplicationSystemTestCase
     end
   end
 
+  test "at 1280 px, each screen of the panel takes the keyboard focus on its title, and the panel still closes back to the avatar" do
+    with_mobile_viewport(DESKTOP_VIEWPORT) do
+      visit profile_path
+      find(TRIGGER).click
+      panel = find("#{PANEL}[open]", visible: true)
+
+      within(panel) { click_link "#{tn('account_panel.entries.add_material')} #{tn('account_panel.counter.full.materials', used: 3, max: 3)}" }
+      assert_selector "#{PANEL} h1:focus", text: I18n.t("identity.profile_materials.show.title")
+
+      # A removal reloads the screen in the frame: the focus goes back to its title, inside the dialog.
+      within(panel) { find("#teacher_material_svt").click_button I18n.t("identity.profile_materials.show.remove") }
+      assert_no_selector "#teacher_material_svt"
+      assert_selector "#{PANEL} h1:focus", text: I18n.t("identity.profile_materials.show.title")
+
+      within(panel) { click_link I18n.t("identity.profile_materials.show.back") }
+      assert_selector "#{PANEL} [data-panel-focus-title]:focus", text: "Awa Traoré"
+
+      page.send_keys :escape
+      assert_no_selector "#{PANEL}[open]", visible: true
+      assert_selector "#{TRIGGER}:focus"
+    end
+  end
+
   test "at 390 px, the entry at 3 sur 3 still leaves for the page « Mes matières »" do
     with_mobile_viewport do
       visit profile_path
