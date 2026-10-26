@@ -304,13 +304,10 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_no_button "Assigner"
     assert_no_link "Assigner"
 
-    # The « Cours » block of the classroom page leads to the course in the classroom (UDR-0062 §3.4, memo Q18).
-    navigate_to teacher_home_path
-    find("li[id='classroom_#{classroom.public_id}'] a").click
-    within("#classroom_courses") { click_on COURSE }
-    assert_current_path classroom_course_path(classroom.public_id, Orm::Course.find_by!(name: COURSE).slug)
-    assert_no_button "Assigner"
-    find("#classroom_course_essentials a", text: ESSENTIAL).click
+    # La page de la classe n'a plus de bande « Fiches de cours » (UDR enseignant sans répétition) : le chemin vers l'exercice passe
+    # par Cours, dont la carte de la fiche de cours liste ses fiches de révision ; chaque classe y a son « Assigner ».
+    navigate_to courses_path
+    find("#courses_list a", text: ESSENTIAL).click
     assert_selector "h1", text: ESSENTIAL
     exercise = Orm::Exercise.find_by!(title: EXERCISE)
     assert_no_page_reload do
@@ -334,7 +331,9 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
     within("[id='student_#{student.public_id}']") do
       assert_text "Aya Kouassi"
-      assert_text "100 %"
+      # Maquette 10 : la ligne dit ses exercices faits et le badge de classe de l'élève (un 100 % sans faute : Diamant, 20/20).
+      assert_text "1 fait sur 1"
+      assert_text "Diamant · 20/20"
     end
     assert_no_page_reload do
       issue_recovery_code_from_roster("[id='student_#{student.public_id}']")
@@ -347,12 +346,15 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_no_selector "turbo-frame#modal dialog[open]"
     end
 
-    # The last score in the roster leads to the detailed result (decision of the porteur, 2026-09-27). The blocks of
-    # Lot E push the roster to the foot of the page, under the toast of the code just issued: it leaves after 5 s.
+    # The toast of the code just issued leaves after 5 s.
     assert_no_selector "[data-controller=toast]", wait: 10
-    # The code was issued from the student's file (rapports-de-classe, memo Q4): back to the classroom page.
-    find("nav[aria-label='Retour'] a").click
-    within("[id='student_#{student.public_id}']") { click_on t("classroom.classrooms.roster.see_result") }
+    # The code was issued from the student's file (rapports-de-classe, memo Q4): the file leads to the detailed result of the
+    # best session (the roster row no longer carries a score at 390 px, maquette 10).
+    assert_selector "#student_file_summary", text: "Diamant"
+    within("#student_file_assignments li", text: EXERCISE) do
+      assert_text "20/20"
+      click_on t("classroom.classroom_students.assignments.best_session")
+    end
     assert_current_path exercise_session_result_path(session.public_id)
     assert_text t("assessment.session_results.show.student", name: "Aya Kouassi")
     assert_text "20/20"
