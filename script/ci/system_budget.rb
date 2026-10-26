@@ -18,7 +18,7 @@ class SystemBudget
   GRANTS = {
     "blog" => { budget: 20.0, files: %w[test/system/communication/blog_reading_test.rb test/system/teams/blog_management_test.rb] },
     # Amendement du 2026-10-24 : 50 s pour mvp-teacher-student (pilote du 27 octobre). Élargi le 2026-10-26 (porteur) à tous
-    # les fichiers système que le chantier touche (50), le budget restant de 50 s.
+    # les fichiers système que le chantier touche (52), le budget restant de 50 s.
     "mvp-teacher-student" => { budget: 50.0, files: %w[
       test/system/assessment/remediation_test.rb test/system/assessment/session_result_test.rb
       test/system/assessment/student_progress_test.rb test/system/boucle_pedagogique_test.rb
@@ -26,13 +26,15 @@ class SystemBudget
       test/system/catalog/teacher_courses_test.rb
       test/system/classroom/assignment_follow_up_desktop_test.rb
       test/system/classroom/assignment_toggle_test.rb test/system/classroom/catalog_assignment_test.rb
-      test/system/classroom/classroom_change_test.rb test/system/classroom/classroom_essential_test.rb
+      test/system/classroom/classroom_change_test.rb test/system/classroom/classroom_desktop_test.rb
+      test/system/classroom/classroom_essential_test.rb
       test/system/classroom/classroom_page_test.rb test/system/classroom/classroom_roster_test.rb
       test/system/classroom/comprehension_test.rb test/system/classroom/daily_exercise_test.rb
       test/system/classroom/join_test.rb test/system/classroom/student_archive_test.rb
       test/system/classroom/student_classroom_test.rb test/system/classroom/student_file_test.rb
       test/system/classroom/student_home_test.rb test/system/classroom/student_removal_test.rb
-      test/system/classroom/teacher_first_path_desktop_test.rb test/system/classroom/teacher_home_test.rb
+      test/system/classroom/teacher_first_path_desktop_test.rb test/system/classroom/teacher_home_desktop_test.rb
+      test/system/classroom/teacher_home_test.rb
       test/system/classroom/teaching_selection_test.rb test/system/communication/announcements_journey_test.rb
       test/system/communication/announcements_v2_journey_test.rb test/system/communication/help_sheet_test.rb
       test/system/communication/help_test.rb test/system/design_system_test.rb
