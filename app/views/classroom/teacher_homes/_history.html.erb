@@ -6,7 +6,7 @@
   <% today = Time.zone.today %>
   <% previous_day = nil %>
   <%= tag.section id: "teacher_home_history", "aria-labelledby": "teacher_home_history_title", class: "space-y-3", data: ui_reveal_data do %>
-    <h2 id="teacher_home_history_title" class="sr-only"><%= t(".title") %></h2>
+    <h2 id="teacher_home_history_title" class="sr-only lg:not-sr-only lg:font-display lg:text-base lg:font-medium lg:text-ink"><%= t(".title") %></h2>
     <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
       <% history.each_with_index do |row, index| %>
         <%# Le sous-titre du jour est dans la ligne qui ouvre le jour : « Voir plus » ne laisse jamais un titre sans ligne. %>
