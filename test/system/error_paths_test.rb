@@ -87,8 +87,9 @@ class ErrorPathsTest < ApplicationSystemTestCase
     session = create_exercise_session(student: stranger, status: "completed")
 
     sign_in_as teacher
-    assert_text "Tle D 1"
-    assert_no_text "Tle D 2"
+    # L'accueil enseignant (lot G) écrit la carte de classe en capitales CSS : le nom se compare sans la casse.
+    assert_text(/Tle D 1/i)
+    assert_no_text(/Tle D 2/i)
 
     [ classroom_path(other.public_id), classroom_course_path(other.public_id, course.slug),
       exercise_session_result_path(session.public_id) ].each do |path|
