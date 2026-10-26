@@ -3,7 +3,7 @@
 <%# ADR  : 0089 (§4.2), 0097 (§4.4) · UDR : 0107 (§3.5) · un seul lien par ligne %>
 <%# locals: (rows:, total:) -%>
 <% days = Queries::Classroom::StudentFileQuery::SELF_PRACTICE_DAYS %>
-<section id="student_file_self_practice" aria-labelledby="student_file_self_practice_title">
+<section id="student_file_self_practice" aria-labelledby="student_file_self_practice_title" class="lg:col-start-2 lg:row-start-3">
   <h2 id="student_file_self_practice_title" class="mb-2 font-display text-xl font-medium"><%= t(".title", days:) %></h2>
   <% if rows.empty? %>
     <%= ui_empty_state title: t(".empty", days:), icon: "sparkles" %>

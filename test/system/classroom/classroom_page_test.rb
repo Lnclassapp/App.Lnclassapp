@@ -33,11 +33,12 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
 
     within "#classroom_header" do
       assert_selector "h1", text: "Tle D 1"
-      assert_selector "#classroom_link"
       assert_no_selector "[id*=join_code]"
       assert_no_selector "#classroom_headcount"
       assert_no_selector "#classroom_code"
     end
+    # Lot P2 : le bloc du lien n'est plus dans l'en-tête, il ouvre la colonne de gauche (UDR enseignant §3.5).
+    assert_selector "#classroom_link"
     assert_no_selector "#assigned_courses"
     assert_no_text "Cours assignés"
     assert_no_text "Génétique et évolution"

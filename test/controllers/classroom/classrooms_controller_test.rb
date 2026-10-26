@@ -47,8 +47,9 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#{within_header} h1 + p", text: "LCA · #{@classroom.school_year}"
     assert_select within_header, text: /Lycée Classique d'Abidjan/, count: 0
     assert_select "#{within_header} img[src*='lnclass-teacher']", 1
-    # IL-02, UDR-0081 §3.6 : le bloc du lien a remplacé le code.
-    assert_select "#{within_header} #classroom_link", 1
+    # IL-02, UDR-0081 §3.6 : le bloc du lien a remplacé le code ; depuis le lot P2 il ouvre la colonne de gauche, hors de l'en-tête.
+    assert_select "#classroom_link", 1
+    assert_select "#{within_header} #classroom_link", 0
     assert_select "#{within_header} [id*=join_code], [data-controller~='classroom--join-code-copy']", 0
     # CA-I1 : « 20 élèves » sans plafond, ni ligne provisoire du code (CA-B7).
     assert_select "#{within_header} #classroom_code, #classroom_headcount, #{within_header} details", 0
@@ -389,7 +390,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", text: "6ème 1 · Équipe · Lnclass"
     assert_select "nav[aria-label='Retour'] a[href='#{school_path(@school.public_id)}']", text: "Lycée Classique d'Abidjan"
     assert_select "nav[aria-label='Retour'] a[href='#{teacher_home_path}']", 0
-    assert_select "#classroom_header #classroom_link", 1
+    assert_select "#classroom_link", 1
     assert_select "#student_#{student.public_id}", text: /Awa Bamba/
   end
 

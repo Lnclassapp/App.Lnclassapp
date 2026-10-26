@@ -1,15 +1,21 @@
 <%# 🌐 UI · classroom/classroom_students/show — fiche d'un élève dans sa classe (CL-13, AS-24), enseignant de la classe et équipe %>
-<%# Rôle : une colonne : en-tête (numéro masqué, arrivée), chiffres, moyenne et badges de la classe, exercices de la classe, « fait seul » sur 30 jours, « Gérer » %>
+<%# Rôle : une colonne (≥ lg : deux colonnes égales de 57 rem au plus, résumé et gestion à gauche, exercices et « fait seul » à droite) : en-tête (numéro masqué, arrivée), chiffres, moyenne et badges de la classe, exercices de la classe, « fait seul » sur 30 jours, « Gérer » %>
 <%# ADR  : 0097 · UDR : enseignant §3.6, 0107 · lisible sans JavaScript ; aucun numéro complet, aucun badge ni session d'une autre classe %>
 <% file = @file %>
 <% page_title t(".title", name: file.student.display_name, classroom: @header.name) %>
 <% content_for :nav_key, "classrooms" %>
-<%= ui_back_link @header.name, href: classroom_path(@header.public_id) %>
+<div class="lg:mx-auto lg:max-w-228">
+  <%= ui_back_link @header.name, href: classroom_path(@header.public_id) %>
 
-<div class="space-y-8">
-  <%= render "identity", student: file.student %>
-  <%= render "summary", file: %>
-  <%= render "assignments", classroom: @header, assignments: file.assignments %>
-  <%= render "self_practice", rows: file.self_practice, total: file.self_practice_total %>
-  <%= render "manage", classroom: @header, student: file.student, can_remove: @can_remove %>
+  <div class="space-y-8">
+    <%= render "identity", student: file.student %>
+    <%# ≥ lg : le résumé et la gestion à gauche, les exercices et « fait seul » à droite ; chaque bloc se place par sa racine (grille de
+        trois rangées, la deuxième prend le reste, pour que la gestion suive le résumé). Au téléphone, l'ordre du fichier. %>
+    <div class="space-y-8 lg:grid lg:grid-cols-2 lg:grid-rows-[auto_1fr_auto] lg:items-start lg:gap-x-8 lg:space-y-0">
+      <%= render "summary", file: %>
+      <%= render "assignments", classroom: @header, assignments: file.assignments %>
+      <%= render "self_practice", rows: file.self_practice, total: file.self_practice_total %>
+      <%= render "manage", classroom: @header, student: file.student, can_remove: @can_remove %>
+    </div>
+  </div>
 </div>

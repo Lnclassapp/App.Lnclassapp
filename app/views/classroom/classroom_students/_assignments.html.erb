@@ -4,6 +4,7 @@
 <%# locals: (classroom:, assignments:) -%>
 <% link = "underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
 <%= tag.section id: "student_file_assignments", "aria-labelledby": "student_file_assignments_title",
+                class: "lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mb-8",
                 data: (ui_reveal_data if assignments.any?) do %>
   <h2 id="student_file_assignments_title" class="mb-4 font-display text-xl font-medium"><%= t(".title") %></h2>
   <% if assignments.empty? %>

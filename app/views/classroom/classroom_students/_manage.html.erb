@@ -3,11 +3,11 @@
 <%# ADR  : 0032, 0085 (§4.5), 0097 · UDR : 0061 (déclencheur-lien), 0077 (§3.4), 0081 (§3.7), 0107 (§3.6) · le retrait part avec origin=file : 303 vers la classe %>
 <%# locals: (classroom:, student:, can_remove:) -%>
 <% dialog = "remove-student-#{student.public_id}" %>
-<section id="student_file_manage" aria-labelledby="student_file_manage_title">
+<section id="student_file_manage" aria-labelledby="student_file_manage_title" class="lg:col-start-1 lg:row-start-2">
   <h2 id="student_file_manage_title" class="mb-4 font-display text-xl font-medium"><%= t(".title") %></h2>
   <%= ui_card padding: :md do %>
     <p class="mb-4 text-sm text-mute"><%= t(".issue_code_hint") %></p>
-    <div class="flex flex-col gap-3 sm:flex-row">
+    <div class="flex flex-col gap-3 sm:flex-row lg:flex-wrap">
       <%= form_with url: account_pin_recovery_codes_path(student.public_id), method: :post, data: { turbo_frame: "_top" } do %>
         <%= ui_button t(".issue_code"), type: :submit, variant: :secondary, icon: "key", class: "w-full sm:w-auto" %>
       <% end %>
