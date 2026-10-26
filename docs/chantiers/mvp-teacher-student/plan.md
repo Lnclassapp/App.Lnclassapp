@@ -13,12 +13,14 @@
 |---|---|---|---|---|
 | B — Code de classe à 6 caractères | orchestrateur | — | samedi 24 | ✅ **fait** (ancien Lot 0 + ancien Lot A, `021804cc`) ; `security-reviewer` passé, aucun constat au-dessus de « bas » |
 | A — Jetons de couleurs | orchestrateur (porteur, 2026-10-24 : « option A », repris de Touré), #285 | — | samedi 24 | ✅ **fusionné** (`8d009596`), captures validées par le porteur |
-| F — Page d'accueil publique en photo | Konan (`konanmeschac777-cmyk`), #286 | — | samedi 24 | à faire |
+| F — Page d'accueil publique en photo | **porteur** (`Kamkara007`), #286 (2026-10-26) | — | samedi 24 | à faire |
 | B2 — Code visible sur la page de classe (provisoire) | orchestrateur | B | samedi 24 | à faire (porteur, 2026-10-24 : « A ») |
 | C — Inscription élève en 3 étapes | orchestrateur | B | samedi 24 | ✅ **fusionné** (`dc2c78c5`), captures validées |
-| D — Accueil élève, carte du prochain exercice | orchestrateur | A | dimanche 25 → lundi 26 | à faire |
-| E1 — « Mon compte » plein écran, profil sans doublons | Touré, #291 | A | dimanche 25 | à faire |
-| E2 — Ma classe, fiche, résultat, Cours | Konan, #290 | A, F | dimanche 25 → lundi 26 | à faire |
+| D — Accueil élève, carte du prochain exercice | **Touré**, #298 (2026-10-26 ; code déjà sur `-lot-d`) | A | dimanche 25 → lundi 26 | à faire |
+| E1 — « Mon compte » plein écran, profil sans doublons | **porteur** (`Kamkara007`), #291 (2026-10-26) | A | dimanche 25 | à faire |
+| E2 — Ma classe, fiche, résultat, Cours | **Touré**, #290 (2026-10-26) | A, F | dimanche 25 → lundi 26 | à faire |
+
+**Répartition du 2026-10-26** (porteur : « Konan pour les écrans des enseignants et Touré pour les élèves, mobile comme ordinateur ») : **Touré pilote tous les lots élève**, téléphone et ordinateur, dans cet ordre : D (#298), E1 (#291), F (#286), E2 (#290), O1 (#300), O3 (#299), O2 (#302), O6 (#301), O4 (#303), O5 (#304). **Repris par le porteur le même jour** : E1 (#291) et F (#286), en parallèle de D, pour débloquer Konan plus vite ; Touré enchaîne D, E2, O1. **Priorité aux dépendances** (porteur, 2026-10-26) : D, E1, F, E2 et O1 passent d'abord parce que Konan les attend (D pour G et P0, E1 pour M, F puis E2 pour N, O1 pour P1). Les lots enseignant sont à Konan ([`plan-enseignant.md`](plan-enseignant.md)). Chaque issue porte la fiche du lot, les changements du 26, les maquettes de référence (archive v12) et la marche à suivre. La session « MVP teacher-student » reste la seule à fusionner dans la branche de chantier.
 
 **Budget des tests système** (ADR-0069 §9 : 15 s par chantier) : C en prend 10,5 s ; **relevé à 50 s pour ce chantier** (porteur, 2026-10-24, amendement de l’ADR-0069). Chaque lot garde un test système court de son parcours principal et teste le reste au niveau contrôleur ou intégration.
 
@@ -279,7 +281,7 @@ Portes propres au pilote :
                      config/locales/shared/navigation.fr.yml · config/locales/identity/profiles.fr.yml · config/locales/school/student_schools.fr.yml *(nouveau)*
 - **Dépend de**    : E1
 - **Test associé** : test/system/identity/student_avatar_menu_test.rb · test/system/identity/profile_test.rb · test/infrastructure/queries/school/student_school_query_test.rb · test/controllers/school/student_schools_controller_test.rb
-- **Done quand**   : sur ordinateur, « Mon compte » s'ouvre en panneau de 400 px et se ferme par Échap, la croix ou le voile, le focus revenant sur l'avatar (CA-E7) ; sa liste contient « Mon établissement », pas Ma classe (CA-E8) ; le profil a la carte bleue au nom seul et 4 lignes (CA-E9) ; « Mon établissement » montre Nom, Sigle, DRENA, Type de l'établissement de l'élève et de lui seul (CA-E10) ; à 390 px, menu et profil restent ceux de CA-E1 et CA-E2
+- **Done quand**   : sur ordinateur, « Mon compte » s'ouvre en panneau de 400 px et se ferme par Échap, la croix ou le voile, le focus revenant sur l'avatar (CA-E7) ; son en-tête n'a que l'avatar et le nom, et sa liste contient « Mon établissement », pas Ma classe (CA-E8) ; le profil a la carte bleue au nom seul et 4 lignes (CA-E9) ; « Mon établissement » montre Nom, Sigle, DRENA, Type de l'établissement de l'élève et de lui seul (CA-E10) ; à 390 px, menu et profil restent ceux de CA-E1 et CA-E2
 
 ### Lot O3 — Inscription en deux colonnes
 

@@ -11,16 +11,18 @@
 
 **Calendrier : tout avant le pilote** (porteur, 2026-10-24 : « B, rien ne doit être en retard »). Pour tenir, l'orchestrateur reprend J et L et lance ses lots en agents parallèles ; Touré et Konan enchaînent un lot élève puis deux lots enseignant chacun ; le lot A est repris par l'orchestrateur (porteur, 2026-10-24 : abonnement Max du porteur, Pro pour Touré et Konan).
 
-| Lot | Pilote | Dépend de | Issue | Quand |
+| Lot | Pilote | Dépend de | Issue | Ordre (2026-10-26) |
 |---|---|---|---|---|
-| J — Inscription enseignant en 3 étapes | orchestrateur | A, C | #289 | dimanche 25 |
-| L — Premier parcours : déclarer, assigner, jours de séance | orchestrateur | A | #294 | dimanche 25 |
-| K — Rapport d'un exercice en badges | Touré (`toure-bangaly`) | A | #288 | dimanche 25, après E1 |
-| H — Plafonds et retraits (matières, établissements) | Konan (`konanmeschac777-cmyk`) | A | #292 | dimanche 25, après E2 |
-| G — Accueil enseignant | Touré | A, D, J | #287 | lundi 26, matin |
-| I — Page de classe et fiche d'un élève | Konan | A ; fusionne après G | #293 | lundi 26, matin |
-| M — « Mon compte » enseignant | orchestrateur | E1 | — | lundi 26, matin |
-| N — Cours de l'enseignant | orchestrateur | E2 | — | lundi 26, matin |
+| J — Inscription enseignant en 3 étapes | **Konan** (code déjà sur `-lot-j`) | A, C | #289 | 1 |
+| L — Premier parcours : déclarer, assigner, jours de séance | **Konan** (code déjà sur `-lot-l`) | A | #294 | 2 |
+| K — Rapport d'un exercice en badges | **Konan** | A | #288 | 3 |
+| H — Plafonds et retraits (matières, établissements) | **Konan** (`konanmeschac777-cmyk`) | A | #292 | 4 |
+| G — Accueil enseignant | **Konan** | A, D, J | #287 | 5 |
+| I — Page de classe et fiche d'un élève | **Konan** | A ; fusionne après G | #293 | 6 |
+| M — « Mon compte » enseignant | **Konan** | E1 | #305 | 7 |
+| N — Cours de l'enseignant | **Konan** | E2 | #306 | 8 |
+
+**Répartition du 2026-10-26** (porteur : « Konan pour les écrans des enseignants et Touré pour les élèves, mobile comme ordinateur ») : **Konan pilote tous les lots enseignant**, téléphone et ordinateur. Ordre : J, L, K, H, G, I, M, N, puis P4 (#307), P6 (#308), P3 (#309), P0 (#310), P1 (#311), P2 (#312), P5 (#313). Il attend Touré pour G (après D), M (après E1), N (après E2), P0 (après D) et P1 (après O1). Chaque issue porte la fiche du lot, les changements du 26, les maquettes de référence (archive v12) et la marche à suivre. Le calendrier ci-dessous (« Lundi 26, 14 h ») est dépassé.
 
 **Lundi 26, 14 h** : tous les lots fusionnés, `bin/ci-quiet` sur le head final, preuve dans #295. **Lundi 26, après-midi** : recette du porteur sur un vrai Android (élève et enseignant). **Mardi 27** : pilote.
 
@@ -134,7 +136,7 @@ J attend A, et pas seulement C : ses vues sont dans le balayage des graisses de 
                      app/views/identity/profiles/_information.html.erb *(ligne Matières sans « Modifier »)*
 - **Dépend de**    : E1 *(`navigation_helper.rb` est à E1 pendant la vague élève)*
 - **Test associé** : test/system/identity/account_panel_test.rb · test/controllers/classroom/teacher_menus_controller_test.rb · test/system/identity/profile_test.rb
-- **Done quand**   : l'avatar ouvre un panneau plein écran avec nom, « Math · PC · sigle », les six entrées avec « N sur 3 », grisées à 3, sans « Inviter un collègue » (CA-H1) ; établissement en cours dès deux (CA-H2) ; la ligne Matières du profil n'a plus « Modifier » (CA-H6)
+- **Done quand**   : l'avatar ouvre un panneau plein écran avec nom, « Maths · PC · sigle » (clé `shared.subjects.short`, « Maths » et non « Math »), les six entrées avec « N sur 3 », grisées à 3, sans « Inviter un collègue » (CA-H1) ; établissement en cours dès deux (CA-H2) ; la ligne Matières du profil n'a plus « Modifier » (CA-H6)
 
 ## Lot N — Cours de l'enseignant
 
@@ -211,44 +213,46 @@ Celles du [plan élève](plan.md#portes-de-sortie), plus :
 
 | Lot | Écran | Dépend de |
 |---|---|---|
-| P0 | Panneau « Mon compte » à droite, barre latérale, écrans de retrait dans le panneau | M, H ; lot équivalent de l'élève s'il existe |
-| P1 | Accueil en page large | G |
-| P2 | Page de classe et fiche d'un élève | I ; fusionne après P1 |
-| P3 | Rapport d'un exercice | K |
-| P4 | Inscription | J |
-| P5 | Cours, colonne de 40 rem | N |
-| P6 | Déclarer, assigner, jours de séance | L |
+| P0 | Panneau « Mon compte » à droite, barre du haut et barre latérale, écrans de retrait dans le panneau (#310) | M, H, D ; lot équivalent de l'élève s'il existe |
+| P1 | Accueil en page large (#311) | G, O1 (`_carousel`) |
+| P2 | Page de classe et fiche d'un élève (#312) | I ; fusionne après P1 |
+| P3 | Rapport d'un exercice (#309) | K |
+| P4 | Inscription (#307) | J |
+| P5 | Cours, colonne de 40 rem (#313) | N |
+| P6 | Déclarer, assigner, jours de séance (#308) | L |
 
 Aucun lot de P1 à P6 ne touche un fichier de P0 (vérifié sur la branche de chantier : la barre latérale prend son entrée active de `content_for :nav_key`, posé par chaque vue) : ils ne dépendent donc pas de P0.
 
 ```
-P0 (M, H, lot élève équivalent)
-P1 (G) ── P2 (I)
+P0 (M, H, D, lot élève équivalent)
+P1 (G, O1) ── P2 (I)
 P3 (K)   P4 (J)   P5 (N)   P6 (L)
 ```
 
-Vagues : **O1** = P0 ‖ P1 ‖ P3 ‖ P4 ‖ P5 ‖ P6 ; **O2** = P2 (après P1, comme I après G).
+Vagues : **O1** = P0 ‖ P1 ‖ P3 ‖ P4 ‖ P5 ‖ P6 ; **O2** = P2 (après P1, comme I après G). P1 attend aussi la fusion du lot élève O1 (`_carousel`), et P0 celle du lot D (`_header`) : ce ne sont pas des collisions, chaque fichier garde un seul lot à la fois.
 
-### Lot P0 — Panneau « Mon compte » à droite, barre latérale, écrans de retrait dans le panneau
+### Lot P0 — Panneau « Mon compte » à droite, barre du haut et barre latérale, écrans de retrait dans le panneau
 
 - **Couche**       : ui
 - **Fichiers**     : app/assets/stylesheets/application.tailwind.css *(placement à droite de 25 rem à ≥ lg, plein écran dessous ; nouveau placement dans `MODAL_PLACEMENTS`, sans toucher à `dialog-drawer`)*
                      app/helpers/components_helper.rb *(`MODAL_PLACEMENTS` seulement)*
                      app/views/shared/navigation/_account_panel.html.erb *(nouveau placement)*
-                     app/views/shared/navigation/_sidebar.html.erb *(enseignant : sans carte de profil)*
+                     app/views/shared/navigation/_header.html.erb *(branche enseignant, dès lg : filet jaune, logo, « Lnclass », « Besoin d'aide ? », avatar ; sans avatar à l'inscription ; sous lg inchangé — fichier du lot D, P0 fusionne après D)*
+                     app/views/shared/navigation/_sidebar.html.erb *(enseignant : bloc de profil en tête, avatar, nom, « Maths · PC · sigle » ; porteur, 2026-10-26)*
                      app/helpers/navigation_helper.rb *(`SIDEBAR_FRAMES[:teacher]` vidé : « Inviter » n'est que dans la grille, UDR §2)*
                      app/views/identity/profile_materials/show.html.erb · app/views/school/teacher_schools/index.html.erb *(écrans de retrait du lot H, rendus dans le panneau : frame du panneau, « ‹ Mon compte » qui y revient)*
-- **Dépend de**    : M, H ; le lot de la phase ordinateur élève qui pose le panneau à droite, s'il existe
+- **Dépend de**    : M, H, D ; le lot de la phase ordinateur élève qui pose le panneau à droite, s'il existe
 - **Test associé** : test/system/shared/teacher_account_panel_desktop_test.rb
-- **Done quand**   : à 1280 px, l'avatar ouvre « Mon compte » à droite sur 400 px ; « Ajouter une matière » à 3 sur 3 ouvre « Mes matières » dans le même panneau ; un retrait garde le panneau ouvert avec « 2 sur 3 » ; la barre latérale enseignant n'a ni carte de profil ni « Inviter » ; à 390 px, rien ne change (CA-H7, CA-G11)
+- **Done quand**   : à 1280 px, l'avatar ouvre « Mon compte » à droite sur 400 px ; « Ajouter une matière » à 3 sur 3 ouvre « Mes matières » dans le même panneau ; un retrait garde le panneau ouvert avec « 2 sur 3 » ; la barre du haut a le filet jaune, le logo, « Besoin d'aide ? » et l'avatar, sans avatar à l'inscription ; la barre latérale enseignant commence par l'avatar, le nom et « Maths · PC · sigle », sans « Inviter » ; à 390 px, rien ne change (CA-H7, CA-G11, CA-G12)
 
 ### Lot P1 — Accueil en page large
 
 - **Couche**       : ui
 - **Fichiers**     : app/views/classroom/teacher_homes/show.html.erb · _classroom_card.html.erb · _add_classroom_card.html.erb · _course_levels.html.erb · _follow_ups.html.erb · _history.html.erb
-- **Dépend de**    : G
+                     *(lit `communication/messages/_carousel` sans le modifier : les deux cartes visibles dès lg viennent du lot O1 ; si O1 les a réservées à l'élève, P1 étend la règle à l'enseignant après la fusion d'O1)*
+- **Dépend de**    : G, O1
 - **Test associé** : test/system/classroom/teacher_home_desktop_test.rb
-- **Done quand**   : à 1280 px, contenu de 57 rem, bandeau sans avatar ni aide, cartes de classe en grille de 3 avec « + Ajouter une classe » en dernier, « Cette semaine » et « Historique » côte à côte avec titres visibles (UDR §3.3)
+- **Done quand**   : à 1280 px, contenu de 57 rem sur fond blanc, **sans bandeau jaune** ; cartes de classe en carrousel horizontal, trois visibles et la quatrième coupée, « + Ajouter une classe » en dernier ; annonces en carrousel, deux visibles, chacune avec son illustration et sa lecture audio ; « Cette semaine » et « Historique » côte à côte avec titres visibles (UDR §3.3, CA-G13 ; refait le 2026-10-26)
 
 ### Lot P2 — Page de classe et fiche d'un élève
 
