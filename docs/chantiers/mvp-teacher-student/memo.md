@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié — prêt pour le Lot 0 et le Lot P (2026-10-23) |
+| **Statut** | replanifié élève d'abord — 7 lots (A, B, F, puis C, D, E1, E2), en attente du « lance les lots » (2026-10-24) |
 | **Ouvert le** | 2026-10-22 |
 | **Branche** | `Develop` pour la documentation (commit direct, CLAUDE.md « Sobriété de tokens ») ; une branche de code pour la PR du lundi 26 |
 | **Programme** | — *(hors vagues de `refonte-application` : il choisit dans ce que les vagues ont livré)* |
@@ -115,11 +115,19 @@ Le lancement du mardi 27 octobre n'a pas besoin de nouveautés. Il a besoin d'un
 
 ## Reprise dans une nouvelle session
 
-La session du 2026-10-22/23 a atteint ses 40 commits. La suivante reprend ici, dans cet ordre :
+**État au soir du 2026-10-23** (deuxième session) :
 
-1. ~~**Couleurs enseignant**~~ : fait le 2026-10-23 (ligne « Couleurs enseignant » du tableau) ; 11 écrans dessinés en jaune et envoyés au porteur, non commités.
-2. ~~**UDR enseignant**~~ : écrite et acceptée le 2026-10-23, [`UDR-XXXX-ecrans-enseignant-sans-repetition`](../../decisions/udr/XXXX-ecrans-enseignant-sans-repetition.md). L'amendement d'ADR-0103 ne porte que sur l'inscription (une seule matière) : le plafond de 3 existait déjà. Tranché en l'écrivant : une assignation est dans « Cette semaine » (échéance dans 7 jours, ou échue depuis 14 jours au plus avec des élèves en retard) **ou** dans « Historique », jamais les deux ; le badge « Diamant » d'un élève = tous ses exercices de la classe sans faute.
-3. ~~**`prd.md`**~~ (60 critères Gherkin, CA-A1 à CA-K3) : écrit le 2026-10-23 ; [`carte-des-ecrans.md`](carte-des-ecrans.md) (livrable 2) écrite le 2026-10-23 et ADR du code de classe accepté ; [`plan.md`](plan.md) (livrable 4) écrit le 2026-10-23, 15 lots en 5 vagues : orchestrateur = code de classe, inscription élève, accueil élève ; Touré et Konan = page d'accueil publique, jetons de palette, écrans élève élagués, écrans enseignant.
-4. Versions ordinateur (1280 px) des écrans validés.
-5. Retour de l'Espace établissement le 2 novembre, à planifier.
+- Fait : couleurs enseignant (jaune, choix C), UDR enseignant (§3.13 premier parcours, option A sur les jours de séance), PRD (64 critères), carte des écrans, ADR du code de classe accepté, plan (15 lots, 5 vagues), lots attribués par issues GitHub (Touré #285 à #289, Konan #290 à #294).
+- **Lot 0** lancé sur `feature/mvp-teacher-student` (agent `executant-lot`) : vérifier son commit, lancer les tests des fichiers touchés, pousser la branche. Tant qu'elle n'est pas poussée, les lots de vague 2 ne peuvent pas partir.
+- **Lot P** (Touré, #285) : peut démarrer en même temps que le Lot 0.
+- PR #284 (script de démarrage des sessions cloud, Chromium sous `chrome-linux64`) : il manque la ligne de preuve de `bin/ci-quiet` avant fusion.
 
+**À trancher par le porteur** (écrans ordinateur v1 envoyés : accueil élève, accueil enseignant, page de classe, rapport) :
+
+1. Accueil élève sur ordinateur : colonne étroite (décision du 2026-10-22) ou page large comme l'enseignant (recommandé) ?
+2. « Mon compte » sur ordinateur : panneau latéral de 400 px (recommandé) ou plein écran ?
+3. Puis dessiner les autres écrans ordinateur (inscription, Ma classe, Cours, profil, fiche élève, retraits, assignation) et les ajouter en commentaire des issues concernées.
+
+Ensuite : lots A et C (orchestrateur) dès le Lot 0 fusionné, puis B, J, Z. Retour de l'Espace établissement le 2 novembre (drapeau `school_space_enabled`).
+
+**Troisième session (2026-10-24)** : le porteur a validé (« option A ») de traiter l'élève d'abord. `plan.md` et `prd.md` sont réécrits pour l'élève seul (7 lots, 34 critères) ; l'ancien plan de 15 lots et les critères enseignant restent dans la version `c766532`, base des lots enseignant à venir. Les issues #285 à #294 suivent encore l'ancien plan : à réaligner au départ des lots. Rien n'est codé avant le « lance les lots » du porteur.
