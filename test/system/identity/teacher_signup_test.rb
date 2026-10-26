@@ -23,14 +23,15 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
                    find_field(field), text)
   end
 
-  def assert_step(number)
+  def assert_step(number, settle: nil)
+    sleep settle if settle
     assert_selector "#signup-step-counter", text: t("#{PAGE}.step_counter", n: number)
     assert_equal [ number ], page.all("fieldset[data-classroom--signup-steps-target=step]", visible: :visible).map { it["data-step"].to_i }
   end
 
   # Step 2, in the order of the page; the move to step 3 comes a second after the number is complete.
-  def fill_person(contact: "0701020304")
-    select "SVT", from: "teacher_registration[material_slug]"
+  def fill_person(contact: "0701020304", material: true)
+    select "SVT", from: "teacher_registration[material_slug]" if material
     fill_in "teacher_registration[last_name]", with: "KOUASSI"
     fill_in "teacher_registration[first_name]", with: "Aya  Marie"
     choose t("identity.teacher_registrations.form.genders.female")
@@ -67,7 +68,10 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
       assert_no_field "teacher_registration[second_material_slug]"
       assert_text t("#{FORM}.material_hint")
       assert_no_text "Autre matière"
-      fill_person
+      # Review of #295: the subject is required; every other field being valid, step 2 holds until it is chosen.
+      fill_person(material: false)
+      assert_step 2, settle: 1.6
+      select "SVT", from: "teacher_registration[material_slug]"
       assert_field "teacher_registration[contact]", with: "0701020304"
 
       assert_step 3

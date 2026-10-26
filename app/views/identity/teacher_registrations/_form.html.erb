@@ -62,8 +62,8 @@
     <% if @preview %>
       <%= render "identity/teacher_registrations/school_preview", preview: @preview %>
     <% end %>
-    <%# La matière d'abord : le contrôleur passe à l'étape 3 dès que les champs de texte, le genre et le numéro sont valides,
-        et ne regarde pas les listes ; posée après le numéro, elle serait sautée. %>
+    <%# La matière d'abord, avant le nom : le contrôleur ne passe à l'étape 3 que si les champs de texte, le genre, le numéro et
+        la liste obligatoire (select[required]) sont remplis ; sans matière, l'enseignant reste ici. %>
     <%= ui_field form, :material_slug, as: :select, required: true, choices: material_options, prompt: t(".material_prompt"),
                  hint: t(".material_hint") %>
     <%= ui_field form, :last_name, required: true, maxlength: 50, autocomplete: "family-name", placeholder: t(".last_name_placeholder") %>
