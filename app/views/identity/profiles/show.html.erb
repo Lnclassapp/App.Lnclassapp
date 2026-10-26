@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/profiles/show — « Mon profil », dans le shell du rôle ; l'élève a sa page (UDR-0089), les autres rôles UDR-0041 %>
 <%# Rôle : retour « Accueil », « Mes informations », badge Ambassadeur (enseignant), carte du code secret, « Apparence » %>
-<%# ADR  : 0055, 0063 · UDR : 0006, 0041, 0050, 0054, 0057, 0065 (carte « Apparence »), 0089 (élève : _student) %>
+<%# ADR  : 0055, 0063 · UDR : 0006, 0041, 0050, 0054, 0057, 0065 (carte « Apparence »), 0089 + écrans élève sans répétition §3.2 (élève : _student, six lignes) %>
 <% page_title t(".page_title") %>
 <% if current_actor.student? %>
   <%= render "student", profile: @profile %>

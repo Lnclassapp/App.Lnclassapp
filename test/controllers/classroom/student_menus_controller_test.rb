@@ -1,18 +1,36 @@
 require "test_helper"
 
-# CA-8 (app-android) — UDR-0080 §3.2. « /students/menu » renders the student's account panel as a page, which the
-# Android shell opens as a modal. Student only. CA-19 (accueil-eleve) — UDR-0084 §3.2: the web student has the avatar
-# menu instead; the page keeps the panel, with the links 3 to 7 of that menu: « Mon profil », « Mon historique »,
-# « Ajouter ma photo » (without a photo), « Besoin d'aide ? », then the switch and « Se déconnecter ».
+# CA-E1 (mvp-teacher-student, lot E1) — UDR « écrans élève sans répétition » §3.1. « /students/menu » (coque Android, bandeau de
+# l'accueil) rend le panneau « Mon compte » de l'élève en page ; l'avatar de l'en-tête (autres pages) ouvre le même panneau
+# en <dialog> plein écran. Même liste dans les deux cas : en-tête (avatar, nom, classe · établissement), « Mon profil »,
+# « Modifier mon code secret », « Mode sombre » (interrupteur), « Se déconnecter » ; rien d'autre.
 class Classroom::StudentMenusControllerTest < ActionDispatch::IntegrationTest
   setup do
     @classroom = create_classroom(name: "Tle D 1", school: create_school(name: "Lycée moderne 2"))
     @student = create_student(classroom: @classroom, first_name: "Aya", last_name: "Kouassi")
   end
 
-  def tn(key) = I18n.t("shared.navigation.#{key}")
+  def tn(key, **) = I18n.t("shared.navigation.#{key}", **)
 
-  test "CA-8, CA-19: the student reads the account panel as a page — name, classroom, the links of the menu, theme, sign out" do
+  # Ce que le panneau montre, dans l'ordre : liens, interrupteur, déconnexion.
+  def assert_account_list(scope)
+    assert_select scope do
+      assert_select "[role=img][aria-label='Aya Kouassi']", text: "AK"
+      assert_select "p", "Aya Kouassi"
+      assert_select "p", "Tle D 1 · Lycée moderne 2"
+      links = css_select("#{scope} nav[aria-label='#{tn('account_panel.label')}'] a.min-h-tap")
+      assert_equal [ [ profile_path, tn(:profile) ], [ edit_profile_pin_path, tn("account_panel.entries.secret") ] ],
+                   links.map { [ it["href"], it.text.squish ] }
+      assert_select "nav a", 2
+      %i[student_home_path courses_path student_classroom_path student_archive_path help_path
+         edit_profile_photo_path].each { assert_select "a[href='#{public_send(it)}']", 0, it.to_s }
+      assert_select "[data-controller=theme] button[role=switch][aria-checked=false]", text: tn("account_panel.entries.dark_mode")
+      assert_select "form[action='#{session_path}'] input[name=_method][value=delete]"
+      assert_select "form[action='#{session_path}'] button[type=submit]:not(.text-error)", tn(:sign_out)
+    end
+  end
+
+  test "CA-E1: the student reads « Mon compte » as a page, with the four entries and nothing else" do
     sign_in_as @student
 
     get student_menu_path
@@ -20,34 +38,36 @@ class Classroom::StudentMenusControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "title", text: /\A#{tn('account_panel.title')}/
     assert_select "h1", tn("account_panel.title")
-    assert_select "main #student_menu" do
-      assert_select "[role=img][aria-label='Aya Kouassi']", text: "AK"
-      assert_select "p", "Aya Kouassi"
-      assert_select "p", "Tle D 1 · Lycée moderne 2"
-      links = css_select("nav[aria-label='#{tn('account_panel.label')}'] li a.min-h-tap")
-      assert_equal [ [ profile_path, tn(:profile) ], [ student_archive_path, tn("avatar_menu.history") ],
-                     [ edit_profile_photo_path, tn("avatar_menu.add_photo") ], [ help_path, I18n.t("shared.help_sheet.trigger") ] ],
-                   links.map { [ it["href"], it.text.squish ] }
-      assert_select "nav a[href='#{courses_path}']", 0
-      assert_select "[data-controller=theme] button[role=switch][aria-label='#{I18n.t('shared.theme_switch.label')}']"
-      assert_select "form[action='#{session_path}'] input[name=_method][value=delete]"
-      assert_select "form[action='#{session_path}'] button[type=submit]", tn(:sign_out)
-    end
-    # The page is the panel's content alone: no second <dialog> in the main column.
-    assert_select "main dialog#account_panel", 0
+    assert_account_list "main #student_menu"
+    # The page is the panel's content alone: no <dialog> in the main column.
+    assert_select "main dialog", 0
   end
 
-  test "CA-19: with a photo, the page does not offer to add one" do
+  test "CA-E1: from another page, the header avatar opens the same panel in a full-screen <dialog>, same list" do
+    sign_in_as @student
+
+    get courses_path
+
+    assert_response :success
+    assert_select "header button#avatar-menu-button[aria-haspopup=dialog][aria-controls=avatar-menu]" \
+                  "[aria-label='#{tn('avatar_menu.open', name: 'Aya Kouassi')}']"
+    assert_select "header dialog#avatar-menu[aria-labelledby=avatar-menu-title]" do
+      assert_select "h2#avatar-menu-title", tn("account_panel.title")
+      assert_select "button[aria-label='#{I18n.t('components.modal.close')}']", 1
+    end
+    assert_account_list "header dialog#avatar-menu"
+  end
+
+  test "CA-E1: with a photo, the panel shows it and still offers nothing more" do
     sign_in_as attach_photo(@student)
 
     get student_menu_path
 
     assert_select "main #student_menu img.ui-avatar[alt='Aya Kouassi']"
-    assert_select "main #student_menu nav a[href='#{edit_profile_photo_path}']", 0
-    assert_select "main #student_menu nav li a", count: 3
+    assert_select "main #student_menu nav li a", count: 2
   end
 
-  test "CA-8: a teacher and the team are refused" do
+  test "CA-E1: a teacher and the team are refused" do
     [ create_teacher, create_team_member ].each do |user|
       sign_in_as user
 

@@ -123,6 +123,11 @@ class RoleHomesTest < ApplicationSystemTestCase
       visit student_home_path
       find("header.student-band a[href='#{student_menu_path}']").click
       assert_current_path student_menu_path
+      # Lot E1: « Mon compte » lists no destination, those are on the home.
+      within("main") do
+        assert_link tn(:profile)
+        [ tn(:home), tn(:courses), tn(:classroom) ].each { assert_no_link it }
+      end
     end
 
     visit student_home_path
@@ -241,16 +246,16 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_current_path new_session_path
   end
 
-  # UDR-0084 §3.2: the student's « Mon profil » and « Se déconnecter » live in the menu opened by the avatar.
+  # The student's « Mon profil » and « Se déconnecter » live in « Mon compte », opened by the avatar (lot E1).
   def assert_signs_out_from_avatar_menu
-    with_avatar_menu { assert_selector "a[role=menuitem]:not([aria-current])", text: tn(:profile) }
-    find("#avatar-menu a[role=menuitem][href='#{profile_path}']", text: tn(:profile)).click
+    with_avatar_menu { assert_selector "nav a:not([aria-current])", text: tn(:profile) }
+    find("#avatar-menu nav a[href='#{profile_path}']", text: tn(:profile)).click
 
     assert_current_path profile_path
     assert_selector "aside nav"
     assert_selector "h1", text: I18n.t("identity.profiles.show.title")
-    with_avatar_menu { assert_selector "a[role=menuitem][aria-current='page'][href='#{profile_path}']", text: tn(:profile) }
-    find("#avatar-menu button[role=menuitem]", text: tn(:sign_out)).click
+    with_avatar_menu { assert_selector "nav a[aria-current='page'][href='#{profile_path}']", text: tn(:profile) }
+    find("#avatar-menu form button", text: tn(:sign_out)).click
 
     assert_current_path root_path
     visit student_home_path

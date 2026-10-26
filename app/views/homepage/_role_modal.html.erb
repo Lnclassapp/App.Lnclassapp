@@ -1,9 +1,13 @@
-<%# 🌐 UI · homepage/_role_modal — entrée « Je suis élève » ou « Je suis enseignant » et sa modale de rôle %>
-<%# Rôle : un déclencheur de 56 px pleine largeur ouvre une <dialog> native (Stimulus modal) : se connecter, ou la porte du rôle %>
-<%# UDR  : 0064, 0012 (§2), 0054 (§3.1), 0081 (§3.8) · TR-01 %>
-<% sign_up_path = { student: new_student_registration_path, teacher: new_teacher_registration_path }.fetch(role) %>
+<%# 🌐 UI · homepage/_role_modal — entrée « Je suis élève », « Enseignant(e) » ou « Espace établissement » et sa modale de rôle %>
+<%# Rôle : un déclencheur ouvre une <dialog> native (Stimulus modal) : se connecter, ou la porte du rôle ; celui de l'établissement a l'allure d'un lien %>
+<%# UDR  : 0059, 0012 (§2), 0054 (§3.1), 0081 (§3.8) · TR-01 · Drapeau : school_space_enabled (la vue appelante) %>
+<% sign_up_path = { student: new_student_registration_path, teacher: new_teacher_registration_path,
+                    school: new_school_staff_registration_path }.fetch(role) %>
+<% link = role == :school %>
+<%# Au téléphone, les deux entrées sont des pilules pleine largeur ; sur ordinateur, des boutons à coins de 12 px de la largeur de leur libellé. %>
+<% trigger_class = link ? "text-brand-strong! underline underline-offset-4" : class_names("lg:w-auto lg:rounded-ln", { "border-brand-strong!" => variant == :secondary }) %>
 <%= ui_modal title: t(".#{role}.title"), id: "role-modal-#{role}-#{placement}", size: :sm,
-      trigger: t(".#{role}.trigger"), trigger_variant: variant, trigger_size: :lg, trigger_full: true,
+      trigger: t(".#{role}.trigger"), trigger_variant: variant, trigger_size: (link ? :md : :lg), trigger_full: !link, trigger_class:,
       document_title: page_title(t(".#{role}.title")) do %>
   <p class="text-mute"><%= t(".#{role}.lead") %></p>
   <div class="mt-5 flex flex-col gap-3">

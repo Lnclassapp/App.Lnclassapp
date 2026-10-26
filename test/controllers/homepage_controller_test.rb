@@ -1,11 +1,9 @@
 require "test_helper"
 
-# UDR-0064 (RH-01 à RH-10) and UDR-0012 (TR-01, TR-03): the public home, one screen and one decision; the two role
-# entries and their modals; every link leads somewhere real and no button is left without an action.
-# UDR-0059 §2.2 : the two entries are offered once, in the hero (no join section, no « Commencer »).
-# UDR-0063 §3.4 : the footer's second list carries the public pages that are online.
-# UDR-0062 §4 : the teacher is promised exercises to assign, never courses.
-# UDR-0066 §3.5 : « Blog » leads that list, « Plus sur Lnclass », once an article is published (BL-06).
+# Chantier mvp-teacher-student, lot F (chantier page-d-accueil-photo, UDR-0059) : la page d'accueil publique est une photo,
+# une feuille qui porte « Tu comprends chap chap », la pastille « Même sans internet » et deux entrées de rôle (modales,
+# UDR-0012 §2) ; ni en-tête, ni pied de page, ni section qui oblige à défiler (CA-A1, CA-A3).
+# CA-A2 : « Espace établissement » (lien et fenêtre) n'existe que drapeau `school_space_enabled` allumé.
 class HomepageControllerTest < ActionDispatch::IntegrationTest
   # UDR-0058 §3 : the subjects of the student grid, EDHC (1st cycle) and Philosophie (2nd cycle) both listed.
   # ADR-0084 §4.1 : le User-Agent de la coque Android élèves ; un navigateur ; une autre coque Hotwire Native, sans jeton.
@@ -24,98 +22,109 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # Choix du porteur du 2026-10-03 : le chapeau du héros dit les trois gestes de l'élève.
-  test "the hero lead says what the student does: revise, practise with the correction, prepare the tests" do
-    get root_url
-
-    assert_select "#hero h1 + p", "Révise l'essentiel du cours, fais tes exercices avec la correction et prépare tes interros avec tes enseignants."
-  end
-
-  test "RH-01: one h1, a header reduced to the logo link and « Se connecter », the two entries in the hero" do
+  # CA-A1 : la photo, « Tu comprends chap chap » en gras, la vague jaune, la pastille et les deux entrées.
+  test "CA-A1: the photo, the bold slogan underlined by the yellow wave, the pill and the two entries" do
     get root_url
 
     assert_select "h1", 1
-    assert_select "h1", text: "Lnclass, tu comprends chap chap !"
-    assert_select "header a", 2
-    assert_select "header a[aria-label='Lnclass, accueil'][href='#{root_path}']"
-    assert_select "header a[href='#{new_session_path}']", text: "Se connecter"
-    assert_select "#hero button[aria-haspopup='dialog']", text: "Je suis élève"
-    assert_select "#hero button[aria-haspopup='dialog']", text: "Je suis enseignant"
-    assert_select "#hero button[aria-haspopup='dialog'].ui-button-lg.w-full", 2
+    assert_select "h1.font-extrabold", text: /Tu comprends/
+    assert_select "h1", text: /chap chap/
+    assert_select "h1 svg[aria-hidden='true'].text-gold path"
+    assert_select "main img[src*='student-portrait']", 1
+    assert_select "main [role='note']", text: "Même sans internet"
+    assert_select "main button[aria-haspopup='dialog']", text: "Je suis élève"
+    assert_select "main button[aria-haspopup='dialog']", text: "Enseignant(e)"
+    assert_select "main button[aria-haspopup='dialog'].ui-button-lg.w-full", 2
   end
 
-  test "the visitor sees the student and teacher entries" do
+  test "CA-A3: no header, no footer, no section to scroll to: the page is a single screen" do
     get root_url
 
-    assert_select "button[aria-haspopup='dialog']", text: "Je suis élève"
-    assert_select "button[aria-haspopup='dialog']", text: "Je suis enseignant"
+    assert_select "header, footer, nav", 0
+    assert_select "section", 0
+    assert_select "a[href^='#']", 0
+    # « Se connecter » n'existe que dans les deux fenêtres de rôle : la page n'a pas de lien propre.
+    assert_select "a[href='#{new_session_path}']", 2
+    assert_select "dialog a[href='#{new_session_path}']", 2
   end
 
-  test "RH-09: the two entries are offered once, in the hero, without the join section nor « Commencer »" do
+  test "the visitor sees the student and teacher entries, once each" do
     get root_url
 
-    assert_select "section#rejoindre", 0
+    assert_select "button[aria-haspopup='dialog']", text: "Je suis élève", count: 1
+    assert_select "button[aria-haspopup='dialog']", text: "Enseignant(e)", count: 1
     assert_select "a, button", text: "Commencer", count: 0
     assert_select "dialog[id^='role-modal-']", 2
-    assert_select "#hero dialog#role-modal-student-hero", 1
-    assert_select "#hero dialog#role-modal-teacher-hero", 1
+    assert_select "dialog#role-modal-student-entry", 1
+    assert_select "dialog#role-modal-teacher-entry", 1
   end
 
-  test "the student modal offers to sign in or to join a class" do
+  test "the student modal offers to sign in or to create an account" do
     get root_url
 
-    assert_select "dialog#role-modal-student-hero" do
+    assert_select "dialog#role-modal-student-entry" do
       assert_select "a[href='#{new_session_path}']", text: "Se connecter"
-      assert_select "a[href='#{new_student_registration_path}']", text: "Rejoindre ma classe"
+      assert_select "a[href='#{new_student_registration_path}']", text: "Créer mon compte"
     end
+    assert_no_match(/Rejoindre ma classe/, response.body)
   end
 
-  test "the teacher modal offers to sign in or to create an account" do
+  test "the teacher modal offers to sign in or to create an account, and is formal" do
     get root_url
 
-    assert_select "dialog#role-modal-teacher-hero" do
+    assert_select "dialog#role-modal-teacher-entry" do
       assert_select "a[href='#{new_session_path}']", text: "Se connecter"
       assert_select "a[href='#{new_teacher_registration_path}']", text: "Créer un compte"
     end
+    assert_no_match INFORMAL, css_select("dialog#role-modal-teacher-entry").first.text
   end
 
   test "RH-02: each role modal names the tab by its own title while it is open" do
     get root_url
 
-    assert_select "[data-controller=modal][data-modal-document-title-value='Tu es élève ? · Lnclass'] dialog#role-modal-student-hero"
-    assert_select "[data-controller=modal][data-modal-document-title-value='Vous êtes enseignant ? · Lnclass'] dialog#role-modal-teacher-hero"
+    assert_select "[data-controller=modal][data-modal-document-title-value='Tu es élève ? · Lnclass'] dialog#role-modal-student-entry"
+    assert_select "[data-controller=modal][data-modal-document-title-value='Vous êtes enseignant ? · Lnclass'] dialog#role-modal-teacher-entry"
     assert_select "title", text: "Accueil · Lnclass"
   end
 
-  test "RH-04: the hero photo is a WebP under 100 Ko that declares its dimensions and its alternative text" do
+  # Choix du porteur du 2026-10-03 : le chapeau (ordinateur) dit les trois gestes de l'élève.
+  test "the lead says what the student does: revise, practise with the correction, prepare the tests" do
     get root_url
 
-    assert_select "#hero img[src$='.webp'][width='960'][height='640'][alt=?]", I18n.t("homepage.index.hero.image_alt"), 1
+    assert_select "main h1 + p", "Révise l'essentiel du cours, fais tes exercices avec la correction et prépare tes interros avec tes enseignants."
+    assert_no_match(/essentielle/i, response.body)
+  end
+
+  test "RH-04: the photo is the current one, cropped in portrait: a WebP under 100 Ko with its dimensions and its alternative text" do
+    get root_url
+
+    assert_select "main img[src$='.webp'][width='505'][height='640'][alt=?]", I18n.t("homepage.index.photo_alt"), 1
     assert_select "img:not([width]), img:not([height])", 0
 
-    photo = Rails.root.join("app/assets/images/homepage/student.webp")
-    assert_operator photo.size, :<=, 100.kilobytes, "la photo du héros pèse #{photo.size / 1024} Ko"
+    %w[student student-portrait].each do |name|
+      photo = Rails.root.join("app/assets/images/homepage/#{name}.webp")
+      assert_operator photo.size, :<=, 100.kilobytes, "la photo #{name} pèse #{photo.size / 1024} Ko"
+    end
     assert_not Rails.root.join("app/assets/images/homepage/student.png").exist?, "le PNG de 1,3 Mo doit disparaître"
   end
 
-  test "RH-05: the subjects of the student grid, in the tone of their category, and nothing more" do
+  test "RH-05: on a computer, the subjects of the student grid in the tone of their category, and nothing more" do
     get root_url
 
-    badges = css_select("#matieres > div > span")
+    badges = css_select("#matieres > span")
 
     assert_equal SUBJECTS, badges.map { it.text.squish }
     assert_equal [ "bg-brand-soft" ] * 3 + [ "bg-gold/20" ] * 4, badges.map { it["class"][%r{bg-[\w/-]+}] }
+    assert_select "#matieres.hidden.lg\\:flex"
     assert_no_match(/et plus encore/i, response.body)
   end
 
-  # CC-22 (UDR-0113 §3.9) : dès un cours publié, la bande lit les matières publiées, dans l'ordre du programme, chacune
-  # vers sa page ; « Les fiches de cours par niveau » mène le pied de page.
-  test "CC-22: the subjects with a published course lead to their page, in the program order, and the footer to /niveaux" do
+  # CC-22 (UDR-0113 §3.9) : dès un cours publié, la bande lit les matières publiées, dans l'ordre du programme, chacune vers sa page.
+  test "CC-22: the subjects with a published course lead to their page, in the program order" do
     level = create_level
     create_course(level:, material: create_material(name: "SVT"))
     create_course(level:, material: create_material(name: "Mathématiques"))
     create_course(level:, material: create_material(name: "Philosophie", category: "literature"), status: "draft")
-    create_article
 
     get root_url
 
@@ -123,83 +132,34 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ [ "Mathématiques", "/matieres/mathematiques" ], [ "SVT", "/matieres/svt" ] ], links.map { [ it.text.squish, it["href"] ] }
     assert_select "#matieres a span", minimum: 2
     assert_no_match(/Philosophie/, css_select("#matieres").first.text)
-    assert_equal [ "/niveaux", blog_path ], css_select("footer #public_pages li a").first(2).map { it["href"] }
-    assert_select "footer #public_pages a[href='/niveaux']", "Les fiches de cours par niveau"
   end
 
-  test "CC-22: without a published course, the seven subjects stay, without link, and the footer has no « Les fiches de cours par niveau »" do
+  test "CC-22: without a published course, the seven subjects stay, without link" do
     create_course(status: "draft")
 
     get root_url
 
     assert_select "#matieres a", 0
-    assert_select "#matieres > div > span", SUBJECTS.size
+    assert_select "#matieres > span", SUBJECTS.size
     assert_select "a[href='/niveaux']", 0
   end
 
-  test "RH-06: three ordered steps, from the class code to the badges" do
-    get root_url
+  test "every link is recognized by the router" do
+    pilot_flags!(school_space_enabled: true)
 
-    assert_select "#comment ol > li", 3
-    assert_select "#comment ol > li:first-child h3", text: "Trouve ta classe"
-    assert_select "#comment ol > li:last-child h3", text: "Apprends et progresse"
-  end
-
-  test "RH-07: four promises, and the four badges in order" do
-    get root_url
-
-    assert_select "#fonctionnalites h3", 4
-    assert_select "#fonctionnalites h3", text: "Léger, sur tous les téléphones"
-    assert_equal %w[Bronze Argent Or Diamant], css_select("#fonctionnalites [data-badges] > span").map { it.text.squish }
-  end
-
-  test "RH-08: teachers are addressed formally and sent to the registration" do
-    get root_url
-
-    assert_select "#enseignants ul > li", 3
-    assert_select "#enseignants a[href='#{new_teacher_registration_path}']", text: "Créer mon compte enseignant"
-    assert_no_match INFORMAL, css_select("#enseignants").first.text
-    assert_no_match INFORMAL, css_select("dialog#role-modal-teacher-hero").first.text
-  end
-
-  # UDR-0070 §3.2 (ID-09): three entries lead the direction to its registration, the hero gaining only a text link.
-  test "ID-09: the direction finds its registration under the hero buttons, in « Établissements » and in the footer" do
-    get root_url
-
-    assert_select "#hero div.grid + p.mt-4.text-sm", text: /#{I18n.t("homepage.index.school_staff_link.prompt")}/ do
-      assert_select "a#school-staff-signup-link.min-h-tap[href='#{new_school_staff_registration_path}']",
-                    text: I18n.t("homepage.index.school_staff_link.link")
-    end
-    assert_select "section#enseignants + section#etablissements[aria-labelledby='etablissements-title'].scroll-mt-20" do
-      assert_select "h2#etablissements-title", text: I18n.t("homepage.index.schools.title")
-      assert_select "p", text: I18n.t("homepage.index.schools.eyebrow")
-      assert_select "p", text: I18n.t("homepage.index.schools.lead")
-      assert_select "ul > li", 3
-      assert_select "ul > li", text: I18n.t("homepage.index.schools.items.student_work")
-      assert_select "a[href='#{new_school_staff_registration_path}']", text: I18n.t("homepage.index.schools.cta")
-    end
-    assert_no_match INFORMAL, css_select("#etablissements").first.text
-    assert_equal [ "#comment", "#enseignants", "#etablissements", new_session_path ],
-                 css_select("footer ul:not(#public_pages) li a").map { it["href"] }
-    assert_select "footer a[href='#etablissements']", text: I18n.t("homepage.index.footer.schools")
-  end
-
-  test "every link is recognized by the router or targets a section of the page" do
     get root_url
 
     links = css_select("a[href]").map { it["href"] }
 
     assert_not_empty links
     links.each do |href|
-      if href.start_with?("#")
-        assert_select "[id='#{href.delete_prefix('#')}']", 1, "l'ancre #{href} ne vise aucune section"
-      else
-        assert Rails.application.routes.recognize_path(href)[:controller], "#{href} n'est reconnu par aucune route"
-      end
+      assert Rails.application.routes.recognize_path(href)[:controller], "#{href} n'est reconnu par aucune route"
     end
   end
 
   test "no button is left without an action" do
+    pilot_flags!(school_space_enabled: true)
+
     get root_url
 
     css_select("button").each do |button|
@@ -207,101 +167,46 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # UDR-0063 §3.4 : la seconde liste du pied de page ne montre que les pages en ligne ; absente si aucune ne l'est.
-  test "the footer offers no public page while none is online" do
-    online = Communication::PagesController.method(:online?)
-    Communication::PagesController.define_singleton_method(:online?) { |*| false }
+  # CA-A2 : tant que le drapeau est éteint (jusqu'au 2 novembre), ni lien ni fenêtre « Espace établissement ».
+  test "CA-A2: with the flag off, there is no « Espace établissement », no link, no window, no registration of the direction" do
+    pilot_flags!(school_space_enabled: false)
 
     get root_url
 
-    assert_select "footer #public_pages", 0
-    %w[/mission /confidentialite /conditions-utilisation /conditions-vente].each do |path|
-      assert_select "a[href='#{path}']", 0
+    assert_no_match(/Espace établissement/i, response.body)
+    assert_select "dialog[id^='role-modal-']", 2
+    assert_select "dialog#role-modal-school-entry", 0
+    assert_select "a[href='#{new_school_staff_registration_path}']", 0
+    assert_select "button[aria-controls='role-modal-school-entry']", 0
+  end
+
+  test "CA-A2: with the flag on, the link and its window come back, formal, with the two ways in" do
+    pilot_flags!(school_space_enabled: true)
+
+    get root_url
+
+    assert_select "button[aria-haspopup='dialog'][aria-controls='role-modal-school-entry']", text: "Espace établissement"
+    assert_select "dialog[id^='role-modal-']", 3
+    assert_select "[data-controller=modal][data-modal-document-title-value='Espace établissement · Lnclass'] dialog#role-modal-school-entry"
+    assert_select "dialog#role-modal-school-entry" do
+      assert_select "a[href='#{new_session_path}']", text: "Se connecter"
+      assert_select "a[href='#{new_school_staff_registration_path}']", text: "Créer un compte d'établissement"
     end
-  ensure
-    Communication::PagesController.define_singleton_method(:online?, online)
-  end
-
-  # Lot Z, décision du porteur du 2026-10-02 : les quatre pages sont en ligne.
-  test "the footer links the four public pages, in the order of PAGES" do
-    get root_url
-
-    assert_select "footer #public_pages li a", 4 do |links|
-      assert_equal [ mission_path, privacy_path, terms_path, sales_terms_path ], links.map { it["href"] }
-    end
-  end
-
-  test "the footer lists the online public pages, and those only, in a second list" do
-    online = Communication::PagesController.method(:online?)
-    Communication::PagesController.define_singleton_method(:online?) { |page| %i[mission terms].include?(page.to_sym) }
-
-    get root_url
-
-    assert_select "footer ul#public_pages.text-sm li a", 2
-    assert_select "footer #public_pages a[href='#{mission_path}']", "Notre mission"
-    assert_select "footer #public_pages a[href='#{terms_path}']", "Conditions d'utilisation"
-    assert_select "a[href='#{privacy_path}'], a[href='#{sales_terms_path}']", 0
-  ensure
-    Communication::PagesController.define_singleton_method(:online?, online)
-  end
-
-  test "BL-06: no « Blog » link in the footer while no article is published" do
-    author = create_team_member(team_role: "content", second_factor: false)
-    create_article(author:, status: "draft")
-    create_article(author:, status: "archived")
-
-    get root_url
-
-    assert_select "footer ul#public_pages[aria-label='Plus sur Lnclass'] li a", 4
-    assert_select "a[href='#{blog_path}']", 0
-  end
-
-  test "BL-06: once an article is published, « Blog » leads the « Plus sur Lnclass » list" do
-    create_article
-
-    get root_url
-
-    assert_select "footer ul#public_pages[aria-label='Plus sur Lnclass'] li a", 5 do |links|
-      assert_equal [ blog_path, mission_path, privacy_path, terms_path, sales_terms_path ], links.map { it["href"] }
-      assert_equal "Blog", links.first.text
-    end
-    assert_select "a[href='#{blog_path}']", 1
-  end
-
-  test "with no public page online, a published article alone makes the second list" do
-    online = Communication::PagesController.method(:online?)
-    Communication::PagesController.define_singleton_method(:online?) { |*| false }
-    create_article
-
-    get root_url
-
-    assert_select "footer #public_pages li a", 1
-    assert_select "footer #public_pages a[href='#{blog_path}']", "Blog"
-  ensure
-    Communication::PagesController.define_singleton_method(:online?, online)
-  end
-
-  # UDR-0130 §2 : les objets publiés sont des fiches de cours et des fiches de révision ; « cours » au sens courant reste.
-  test "the visitor reads « fiches de cours, fiches de révision et exercices », never « essentielle »" do
-    get root_url
-
-    assert_select "#fonctionnalites p", text: /Des fiches de cours, fiches de révision et exercices de la 6e à la Terminale/
-    assert_select "#hero img[alt=?]", "Deux élèves révisent leurs cours avec Lnclass sur leur téléphone"
-    assert_no_match(/essentielle/i, response.body)
+    assert_no_match INFORMAL, css_select("dialog#role-modal-school-entry").first.text
   end
 
   # UDR-0062 §4 : l'enseignant n'assigne plus que des exercices ; la landing ne promet plus de cours assignés.
   test "the teacher is promised to assign exercises, not courses" do
     get root_url
 
-    assert_match(/assignez-leur des exercices/i, response.body)
+    assert_match(/assigner des exercices/i, response.body)
     assert_no_match(/des cours et des exercices|assigner du contenu|Assigne du contenu/, response.body)
   end
 
-  test "the school space of the former landing is not offered (TR-03, V2), and no price either" do
+  test "no price is offered (TR-03)" do
     get root_url
 
-    assert_no_match(/Espace Etabl|Inscrire mon établissement|FCFA/, response.body)
+    assert_no_match(/Inscrire mon établissement|FCFA/, response.body)
   end
 
   # CA-10 (ADR-0082 §4.3) : l'icône de l'app installée ouvre « /?source=app ».
@@ -320,7 +225,7 @@ class HomepageControllerTest < ActionDispatch::IntegrationTest
     assert_no_queries_match(/\A\s*(UPDATE|INSERT|DELETE)/i) { get root_path(source: "app") }
 
     assert_response :success
-    assert_select "h1", text: "Lnclass, tu comprends chap chap !"
+    assert_select "h1", text: /chap chap/
   end
 
   test "CA-10: any other source is ignored: the signed-in person is redirected, their account is not dated" do
