@@ -100,21 +100,18 @@ class RoleHomesTest < ApplicationSystemTestCase
     within(MAIN_SIDEBAR_NAV) { assert_selector "a[aria-current='page'][href='#{announcements_path}']", text: tn(:announcements) }
   end
 
-  # CA-5 (accueil-eleve, UDR-0084 §3.3): on a phone, the student has no bottom bar any more and reaches every
-  # destination from the avatar menu; since mvp-teacher-student (UDR enseignant §3.3) the teacher has none either.
-  test "CA-5 — on a phone, the student opens every destination from the avatar menu, without bottom bar; the teacher has none either" do
+  # CA-5 (accueil-eleve, UDR-0084 §3.3): on a phone, the student has no bottom bar; since mvp-teacher-student his avatar
+  # opens « Mon compte » (profile, PIN, dark mode, sign-out), the destinations being on the home (lot D); the teacher has no bar either.
+  test "CA-5 — on a phone, the student has no bottom bar and « Mon compte » lists no destination; the teacher has none either" do
     sign_in_as @student
 
     with_mobile_viewport do
       # A fresh visit: the sign-in toast, at the top of a phone, would cover the avatar.
       visit student_home_path
       assert_no_selector "nav.bottom-0"
-      { home: student_home_path, courses: courses_path, classroom: student_classroom_path }.each do |key, path|
-        with_avatar_menu { click_link tn(key) }
-
-        assert_current_path path
-        assert_no_selector "nav.bottom-0"
-        with_avatar_menu { assert_selector "a[role=menuitem][aria-current='page'][href='#{path}']", text: tn(key) }
+      with_avatar_menu do
+        assert_selector "nav a", text: tn(:profile)
+        [ tn(:home), tn(:courses), tn(:classroom) ].each { assert_no_link it }
       end
     end
 
@@ -233,16 +230,16 @@ class RoleHomesTest < ApplicationSystemTestCase
     assert_current_path new_session_path
   end
 
-  # UDR-0084 §3.2: the student's « Mon profil » and « Se déconnecter » live in the menu opened by the avatar.
+  # The student's « Mon profil » and « Se déconnecter » live in « Mon compte », opened by the avatar (lot E1).
   def assert_signs_out_from_avatar_menu
-    with_avatar_menu { assert_selector "a[role=menuitem]:not([aria-current])", text: tn(:profile) }
-    find("#avatar-menu a[role=menuitem][href='#{profile_path}']", text: tn(:profile)).click
+    with_avatar_menu { assert_selector "nav a:not([aria-current])", text: tn(:profile) }
+    find("#avatar-menu nav a[href='#{profile_path}']", text: tn(:profile)).click
 
     assert_current_path profile_path
     assert_selector "aside nav"
     assert_selector "h1", text: I18n.t("identity.profiles.show.title")
-    with_avatar_menu { assert_selector "a[role=menuitem][aria-current='page'][href='#{profile_path}']", text: tn(:profile) }
-    find("#avatar-menu button[role=menuitem]", text: tn(:sign_out)).click
+    with_avatar_menu { assert_selector "nav a[aria-current='page'][href='#{profile_path}']", text: tn(:profile) }
+    find("#avatar-menu form button", text: tn(:sign_out)).click
 
     assert_current_path root_path
     visit student_home_path

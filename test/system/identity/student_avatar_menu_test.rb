@@ -1,14 +1,14 @@
 require "application_system_test_case"
 
-# CA-1, CA-2, CA-3 (accueil-eleve) — UDR-0084 §3.1, §3.2, §3.3, §3.10. On a 390 px phone, the student's header shows the
-# logo, the switch and the avatar alone; no bottom bar. The avatar opens a menu anchored under it, on the right: identity,
-# Accueil / Cours / Ma classe (the page on screen highlighted), then « Mon profil », « Mon historique », « Ajouter ma
-# photo », « Besoin d'aide ? » and « Se déconnecter », in that order. Arrow keys move, Escape and a click outside close,
-# the focus goes back to the avatar. On a 1 280 px computer, « Besoin d'aide ? » is in the header, the left menu is
-# visible, and the menu keeps only what the screen does not already show.
+# CA-E1 (mvp-teacher-student, lot E1) — UDR « écrans élève sans répétition » §3.1, §3.8. At 390 px, on a page other than the
+# home (« Cours »), the avatar of the header opens « Mon compte » full screen: « Mon profil », « Modifier mon code secret »,
+# « Mode sombre », « Se déconnecter », and nothing else. Escape closes it and gives the focus back to the avatar. On a computer
+# the panel only has to open and close (the 400 px side panel is lot O2). The page /students/menu and the markup are covered
+# by test/controllers/classroom/student_menus_controller_test.rb.
 class Identity::StudentAvatarMenuTest < ApplicationSystemTestCase
   DESKTOP_VIEWPORT = [ 1280, 900 ].freeze
   AVATAR = "header button#avatar-menu-button".freeze
+  PANEL = "dialog#avatar-menu".freeze
 
   setup do
     @student = create_student(classroom: create_classroom(name: "Tle D 1", school: create_school(name: "Lycée moderne 2")),
@@ -17,117 +17,63 @@ class Identity::StudentAvatarMenuTest < ApplicationSystemTestCase
   end
 
   def tn(key, **) = I18n.t("shared.navigation.#{key}", **)
-  def help = I18n.t("shared.help_sheet.trigger")
-  def horizontal_scroll = page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
   def focused?(selector) = page.evaluate_script("document.activeElement.matches(#{selector.to_json})")
-  def visible_items = all("#avatar-menu [role=menuitem]", visible: true).map { it.text.squish }
+  def horizontal_scroll = page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
 
-  def open_menu
+  def open_panel
     find(AVATAR).click
-    assert_selector "#avatar-menu[role=menu]", visible: true
-    assert_selector "#{AVATAR}[aria-expanded=true]"
+    assert_selector "#{PANEL}[open]", visible: true
   end
 
-  test "CA-1, CA-3: at 390 px, the logo and the avatar alone, no switch, no bottom bar; the menu in order" do
+  test "CA-E1: at 390 px, the avatar opens « Mon compte » full screen with its four entries; Escape gives the focus back" do
+    # On a computer, the panel only has to open and close without breaking the page.
+    with_mobile_viewport(DESKTOP_VIEWPORT) do
+      visit courses_path
+      open_panel
+      within(PANEL) { assert_text "Awa Koné" }
+      page.send_keys(:escape)
+      assert_no_selector PANEL, visible: true
+      assert focused?("#avatar-menu-button")
+      assert_selector "aside nav a", text: tn(:home), visible: true
+    end
+
     with_mobile_viewport do
-      visit student_home_path
+      visit courses_path
+      assert_no_selector PANEL, visible: true
 
-      assert_equal 0, horizontal_scroll
-      within("header") do
-        assert_selector "a[href='#{student_home_path}'] img[src*='logo']", visible: true
-        assert_no_selector "button[role=switch]"
-        assert_selector "button#avatar-menu-button[aria-label='#{tn('avatar_menu.open', name: 'Awa Koné')}']", visible: true
-        assert_no_text "Awa Koné"
-        assert_no_link help
-      end
-      assert_no_selector "nav.bottom-0"
-      assert_no_selector "aside", visible: true
-
-      open_menu
-      within("#avatar-menu") do
+      open_panel
+      within(PANEL) do
+        assert_selector "h2", text: tn("account_panel.title")
         assert_text "Awa Koné"
         assert_text "Tle D 1 · Lycée moderne 2"
-        assert_selector "a[role=menuitem][aria-current=page].bg-brand-soft[href='#{student_home_path}']", text: tn(:home)
+        assert_equal [ tn(:profile), tn("account_panel.entries.secret") ], all("nav a", minimum: 2).map { it.text.squish }
+        assert_selector "button[role=switch]", text: tn("account_panel.entries.dark_mode"), visible: true
+        assert_button tn(:sign_out), visible: true
+        [ tn(:home), tn(:courses), tn(:classroom), tn("avatar_menu.history"), I18n.t("shared.help_sheet.trigger") ].each do |gone|
+          assert_no_link gone
+        end
       end
-      assert_equal [ tn(:home), tn(:courses), tn(:classroom), tn(:profile), tn("avatar_menu.history"),
-                     tn("avatar_menu.add_photo"), help, tn(:sign_out) ], visible_items
-      menu = page.evaluate_script(<<~JS)
-        (() => { const m = document.getElementById("avatar-menu").getBoundingClientRect(),
-                       a = document.getElementById("avatar-menu-button").getBoundingClientRect();
-                 return { width: m.width, right: m.right, top: m.top, avatarRight: a.right, avatarBottom: a.bottom } })()
-      JS
-      assert_in_delta 288, menu["width"], 1, "le menu ne fait pas 288 px"
-      assert_in_delta menu["avatarRight"], menu["right"], 1, "le menu n'est pas ancré à droite, sous l'avatar"
-      assert_operator menu["top"], :>=, menu["avatarBottom"]
+      # Full screen: the panel takes the whole window, and the page does not scroll sideways.
+      size = page.evaluate_script("(() => { const r = document.querySelector('#{PANEL}').getBoundingClientRect(); " \
+                                  "return [r.width, r.height, innerWidth, innerHeight] })()")
+      assert_in_delta size[2], size[0], 1
+      assert_in_delta size[3], size[1], 1
       assert_equal 0, horizontal_scroll
+      assert focused?("#{PANEL} a[href='#{profile_path}']"), "le focus ne va pas sur « Mon profil »"
 
-      # UDR-0084 §3.10: the keyboard — arrows move and loop, Escape closes and gives the focus back to the avatar.
-      assert focused?("#avatar-menu a[href='#{student_home_path}']"), "le focus n'est pas sur la première entrée"
-      # Focused, the current page keeps its bg-brand-soft highlight, not the grey focus background of the other entries.
-      brand_soft, focused_bg = page.evaluate_script(<<~JS)
-        (() => { const probe = document.createElement("span"); probe.className = "bg-brand-soft"; document.body.append(probe);
-                 const want = getComputedStyle(probe).backgroundColor; probe.remove();
-                 return [want, getComputedStyle(document.activeElement).backgroundColor] })()
-      JS
-      assert_equal brand_soft, focused_bg, "la page en cours perd sa surbrillance au focus"
-      page.send_keys(:down)
-      assert focused?("#avatar-menu a[href='#{courses_path}']"), "la flèche bas ne passe pas à « Cours »"
-      page.send_keys(:up, :up)
-      assert focused?("#avatar-menu form button"), "la flèche haut ne boucle pas sur « Se déconnecter »"
       page.send_keys(:escape)
-      assert_no_selector "#avatar-menu", visible: true
-      assert_selector "#{AVATAR}[aria-expanded=false]"
+      assert_no_selector PANEL, visible: true
       assert focused?("#avatar-menu-button"), "le focus n'est pas revenu sur l'avatar"
 
-      # A real click in the left gutter of the page, outside the menu and on no link, closes it.
-      open_menu
-      page.driver.browser.action.move_to_location(4, 400).click.perform
-      assert_no_selector "#avatar-menu", visible: true
-
-      # Under 700 px, « Besoin d'aide ? » of the menu opens the help sheet.
-      open_menu
-      within("#avatar-menu") { click_on help }
-      assert_selector "dialog#help-sheet[open]", visible: true
-      assert_no_selector "#avatar-menu", visible: true
-      find("dialog#help-sheet[open]").send_keys(:escape)
-      assert_no_selector "dialog#help-sheet", visible: true
-
-      # A destination opens its page, then highlighted in the menu.
-      open_menu
-      within("#avatar-menu") { click_link tn(:courses) }
-      assert_current_path courses_path
-      open_menu
-      assert_selector "#avatar-menu a[aria-current=page].bg-brand-soft[href='#{courses_path}']", text: tn(:courses)
-    end
-  end
-
-  test "CA-2: at 1 280 px, « Besoin d'aide ? » is in the header, the left menu is visible, the menu has neither; sign-out" do
-    with_mobile_viewport(DESKTOP_VIEWPORT) do
-      visit student_home_path
-
-      within("header") do
-        assert_link help, visible: true
-        assert_no_text "Awa Koné"
-      end
-      assert_selector "aside nav a", text: tn(:home), visible: true
-      assert_no_selector "nav.bottom-0"
-
-      open_menu
-      assert_equal [ tn(:profile), tn("avatar_menu.history"), tn("avatar_menu.add_photo"), tn(:sign_out) ], visible_items
-      assert focused?("#avatar-menu a[href='#{profile_path}']"), "le focus ne va pas sur la première entrée visible"
-      within("#avatar-menu") { assert_text "Awa Koné" }
-      page.send_keys(:escape)
-
-      within("header") { click_link help }
-      assert_selector "dialog#help-sheet[open]", visible: true
-      find("dialog#help-sheet[open]").send_keys(:escape)
-      assert_no_selector "dialog#help-sheet", visible: true
-
-      open_menu
-      within("#avatar-menu") { click_on tn(:sign_out) }
+      # The close cross closes it too; the dark mode switch turns the page dark; « Se déconnecter » signs out.
+      open_panel
+      within(PANEL) { find("button[role=switch]").click }
+      assert_selector "html[data-theme=dark]"
+      within(PANEL) { find("button[aria-label='#{I18n.t('components.modal.close')}']").click }
+      assert_no_selector PANEL, visible: true
+      open_panel
+      within(PANEL) { click_on tn(:sign_out) }
       assert_current_path root_path
-      visit student_home_path
-      assert_current_path new_session_path
     end
   end
 end

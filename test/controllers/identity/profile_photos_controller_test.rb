@@ -100,7 +100,7 @@ class Identity::ProfilePhotosControllerTest < ActionDispatch::IntegrationTest
     assert_response :see_other
     follow_redirect!
     assert_select "#toasts", text: /Ta photo est enregistrée\./
-    assert_select "#profile_identity img[alt='Aya Koné'][src^='#{account_photo_path(@student.public_id)}?v=']"
+    assert_select "header button#avatar-menu-button img[alt='Aya Koné'][src^='#{account_photo_path(@student.public_id)}?v=']"
     assert_select "#profile_information li", text: /Ta photo/
   end
 
