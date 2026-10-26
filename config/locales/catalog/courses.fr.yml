@@ -12,12 +12,12 @@ fr:
         # UDR-0013, amendement du 2026-10-02 : la portée du catalogue de l'élève, en infobulle (UDR-0057 R4).
         student_scope: "Tu vois seulement les fiches de cours de ton niveau."
         student_scope_label: "Quelles fiches de cours ?"
-        # UDR-0077 §3.2 : l'enseignant, sa matière aux niveaux de ses classes.
-        teacher_subtitle: "Les fiches de cours de %{material}, aux niveaux de vos classes."
-        # UDR-0126 §3.1 (ADR-0103) : l'enseignant de plusieurs matières
-        teacher_subtitle_many: "Les fiches de cours de %{materials}, aux niveaux de vos classes."
+        # UDR enseignant §3.7 : « Cours de Tle D » depuis un rond de niveau de l'accueil ; la ligne de total dit la matière
+        # (nom court) et la progression, une seule fois.
+        teacher_title: "Cours de %{level}"
+        teacher_total: "%{total} · %{material} · Progression DPFC 2026-2027"
+        teacher_no_match_description: "Essayez un autre mot."
         # ADR-0103 §4.6 : aucune matière dans l'établissement courant
-        teacher_subtitle_none: "Choisissez vos matières pour voir les fiches de cours qui vous concernent."
         teacher_no_material_title: "Choisissez vos matières"
         teacher_no_material_description: "Les fiches de cours de vos matières, aux niveaux de vos classes, apparaîtront ici."
         teacher_no_material_action: "Choisir mes matières"
@@ -53,6 +53,9 @@ fr:
         # UDR-0085 §3.5 : l'élève n'a plus que la recherche.
         student_no_match_description: "Essaye un autre mot."
         clear_search: "Effacer la recherche"
+      teacher_header:
+        back: "Accueil"
+        chips_label: "Matière"
       # Lot E4 (politique-cache, UDR-0013 amendement du 2026-10-05) : les cartes par pages de 24, chargées au défilement.
       page:
         more: "Afficher plus de fiches de cours"

@@ -35,8 +35,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     get courses_path
 
     assert_response :success
-    assert_select "#main", text: including(tl("index.teacher_subtitle_none"))
     assert_select "#main", text: /Les cours de ,/, count: 0
+    assert_select "#courses_material_chips", 0
     assert_select "#courses_empty", text: including(tl("index.teacher_no_material_title"))
     assert_select "#courses_empty #{modal_link(edit_profile_materials_path)}"
   end
@@ -158,20 +158,18 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     other_subject = create_course(name: "Mécanique", level: @tle, series: d, material: create_material(name: "Physique-Chimie"))
     link_level_series(level: @tle, series: d)
 
-    [ create_teacher(material: maths, classrooms: [ create_classroom(level: @tle, series: d) ]), create_team_member ].each do |user|
-      sign_in_as user
+    # L'enseignant a ses propres tests plus bas (CA-G5, CA-N1) : sans menus, avec des cartes qui portent leurs fiches.
+    sign_in_as create_team_member
 
-      get courses_path(level: "tle", series: "d", material: "mathematiques")
+    get courses_path(level: "tle", series: "d", material: "mathematiques")
 
-      assert_response :success
-      assert_select "#courses_list > li", 2
-      assert_select "#course_#{common.slug}"
-      assert_select "#course_#{own.slug}"
-      assert_select "#course_#{other_series.slug}", 0
-      assert_select "#course_#{other_subject.slug}", 0
-      assert_select "select[name=series] option[selected][value=d]", text: "D"
-      sign_out
-    end
+    assert_response :success
+    assert_select "#courses_list > li", 2
+    assert_select "#course_#{common.slug}"
+    assert_select "#course_#{own.slug}"
+    assert_select "#course_#{other_series.slug}", 0
+    assert_select "#course_#{other_subject.slug}", 0
+    assert_select "select[name=series] option[selected][value=d]", text: "D"
   end
 
   test "the team chooses a « Série » between « Niveau » and « Matière »; the student has no such list" do
@@ -336,7 +334,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       sign_in_as user
       get courses_path
 
-      assert_select "#course_#{@course.slug}", text: including(tl("course_card.open"))
+      # La carte de l'enseignant n'a plus de pied « Ouvrir la fiche de cours » (UDR enseignant §3.7) ; l'équipe le garde.
+      assert_select "#course_#{@course.slug}", text: including(tl("course_card.open")) unless user == teacher
       %w[started done].each { assert_no_match(including(tl("course_card.progress.#{it}")), response.body) }
       assert_select "#courses_groups", 0
       assert_select "#courses_list svg.text-success", 0
@@ -481,7 +480,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   # ── Catalogue de l'enseignant et téléphone (UDR-0077 §3.2) ───────────────
 
   test "CA-5: the teacher sees their subject at the levels and series of their classrooms, nothing else" do
-    maths = create_material(name: "Mathématiques")
+    maths = create_material(name: "Mathématiques", shortname: "Maths")
     d = @course.series
     own = create_course(name: "Probabilités", level: @tle, series: d, material: maths)
     common = create_course(name: "Analyse", level: @tle, material: maths)
@@ -495,43 +494,141 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     assert_equal [ "course_#{common.slug}", "course_#{own.slug}" ], css_select("#courses_list > li").map { it["id"] }
     [ other_series, other_level, other_subject ].each { assert_select "#course_#{it.slug}", 0 }
-    assert_select "#main", text: including(tl("index.teacher_subtitle", material: "Mathématiques"))
+    # UDR enseignant §3.7 : « 2 fiches de cours · Maths · Progression DPFC 2026-2027 », une seule fois ; plus de menus.
+    assert_select "#courses_total", text: tl("index.teacher_total", total: tl("index.total", count: 2), material: "Maths")
     assert_select "form#courses-filters" do
-      assert_equal %w[level series], css_select("select").map { it["name"] }
-      assert_equal [ "", "tle" ], css_select("select[name=level] option").map { it["value"] }
-      assert_equal [ "", "d" ], css_select("select[name=series] option").map { it["value"] }
+      assert_select "select", 0
+      assert_select "input[type=search][name=q]"
     end
-    # UDR-0013, amendement du 2026-10-05 (ter) : le badge de matière reste sur chaque carte, pour tous les rôles.
-    assert_select "#course_#{own.slug} div.mb-4", text: including("Mathématiques")
-    assert_select "#course_#{own.slug} div.mb-4", text: including("Tle D")
+    assert_select "#courses_material_chips", 0
+    assert_select "#course_#{own.slug}", text: /Tle/, count: 0
     assert_select "#courses_groups, h2[id^=courses_group_]", 0
   end
 
-  # EPM-12 (UDR-0126 §3.1) : deux matières, rangées par matière ; « Matière » limitée aux siennes, sur ordinateur.
-  test "EPM-12: a teacher of two subjects sees both, grouped, with a « Matière » list of his subjects only" do
-    pc = create_material(name: "Physique-Chimie", category: "science")
-    other = create_material(name: "Mathématiques")
+  # CA-G5 (UDR enseignant §3.7) : l'adresse d'un rond de niveau de l'accueil.
+  test "CA-G5: a level bubble opens « Cours de Tle D » under « Accueil », without Niveau nor Série menus, nor « Tle D » on the lines" do
+    maths = create_material(name: "Mathématiques", shortname: "Maths")
     d = @course.series
-    mechanics = create_course(name: "Mécanique", level: @tle, series: d, material: pc)
-    foreign = create_course(name: "Probabilités", level: @tle, series: d, material: other)
+    own = create_course(name: "Probabilités", level: @tle, series: d, material: maths, subtitle: "Leçon 1 · Progression DPFC 2026-2027")
+    other_level = create_course(name: "Calcul littéral", level: @seconde, material: maths)
     link_level_series(level: @tle, series: d)
-    sign_in_as create_teacher(materials: [ pc, @svt ], classrooms: [ create_classroom(level: @tle, series: d) ])
+    sign_in_as create_teacher(material: maths, classrooms: [ create_classroom(level: @tle, series: d), create_classroom(level: @seconde) ])
+
+    get courses_path(level: "tle", series: "d", material: "mathematiques")
+
+    assert_response :success
+    assert_select "h1", text: "Cours de Tle D"
+    assert_select "title", text: including("Cours de Tle D")
+    assert_select "nav a[href='#{teacher_home_path}']", text: "Accueil"
+    assert_select "form#courses-filters select", 0
+    assert_select "form#courses-filters" do
+      assert_select "input[type=hidden][name=level][value=tle]"
+      assert_select "input[type=hidden][name=series][value=d]"
+      assert_select "input[type=hidden][name=material][value=mathematiques]"
+    end
+    assert_select "#course_#{own.slug}"
+    assert_select "#course_#{other_level.slug}", 0
+    assert_no_match(/Tle D/, css_select("#courses_list, #main ul").map(&:text).join(" "))
+
+    get courses_path(level: "tle")
+    assert_select "h1", text: "Cours de Tle"
+
+    get courses_path(level: "inconnu")
+    assert_select "h1", text: "Cours"
 
     get courses_path
+    assert_select "h1", text: "Cours"
+    assert_select "nav a[href='#{teacher_home_path}']", text: "Accueil"
+  end
 
-    assert_select "#main", text: including(tl("index.teacher_subtitle_many", materials: "Physique-Chimie et SVT"))
-    assert_select "#courses_groups section#courses_group_#{pc.slug} #course_#{mechanics.slug}"
-    assert_select "#courses_groups section#courses_group_#{@svt.slug} #course_#{@course.slug}"
-    assert_select "#course_#{foreign.slug}", 0
-    assert_select "form#courses-filters div.hidden select[name=material]" do
-      assert_equal [ [ "", "Toutes vos matières" ], [ pc.slug, "Physique-Chimie" ], [ @svt.slug, "SVT" ] ],
-                   css_select("select[name=material] option").map { [ it["value"], it.text ] }
+  # CA-G5, CA-N1 : les puces d'un bivalent sont ses matières de l'établissement courant, une seule à la fois.
+  test "CA-N1: a teacher of two subjects gets chips of those of the current school only, one subject at a time, first active" do
+    maths = create_material(name: "Mathématiques", shortname: "Maths")
+    pc = create_material(name: "Physique-Chimie", shortname: "PC", category: "science")
+    d = @course.series
+    limits = create_course(name: "Limites", level: @tle, series: d, material: maths, subtitle: "Leçon 1 · Progression DPFC 2026-2027")
+    mechanics = create_course(name: "Mécanique", level: @tle, series: d, material: pc)
+    link_level_series(level: @tle, series: d)
+    teacher = create_teacher(materials: [ maths, pc ], classrooms: [ create_classroom(level: @tle, series: d) ])
+    add_teacher_school(teacher, create_school, materials: [ @svt ])
+    sign_in_as teacher
+
+    get courses_path(level: "tle", series: "d")
+
+    assert_equal [ "Maths", "PC" ], css_select("#courses_material_chips a").map(&:text).map(&:strip)
+    assert_select "#courses_material_chips a[aria-current=true]", text: "Maths"
+    assert_select "#courses_material_chips a[aria-current]", 1
+    assert_select "#courses_material_chips a[href='#{courses_path(level: "tle", series: "d", material: pc.slug)}']", text: "PC"
+    assert_select "#course_#{limits.slug}"
+    [ mechanics, @course ].each { assert_select "#course_#{it.slug}", 0 }
+    assert_select "#courses_total", text: including("Maths")
+    assert_select "#courses_groups, h2[id^=courses_group_], form#courses-filters select", 0
+
+    get courses_path(level: "tle", series: "d", material: pc.slug)
+
+    assert_select "#courses_material_chips a[aria-current=true]", text: "PC"
+    assert_select "#course_#{mechanics.slug}"
+    assert_select "#course_#{limits.slug}", 0
+    assert_select "#courses_total", text: including("PC")
+
+    # Une matière qui n'est pas la sienne dans cet établissement (celle d'un autre) : sa première, jamais celle-là.
+    get courses_path(level: "tle", series: "d", material: @svt.slug)
+
+    assert_select "#courses_material_chips a[aria-current=true]", text: "Maths"
+    assert_select "#course_#{@course.slug}", 0
+  end
+
+  # CA-N1 : une carte par fiche de cours, qui porte ses fiches de révision publiées.
+  test "CA-N1: each course is a card « LEÇON N · title » that lists its published review sheets as links" do
+    maths = create_material(name: "Mathématiques", shortname: "Maths")
+    d = @course.series
+    limits = create_course(name: "Limites et continuité", level: @tle, series: d, material: maths,
+                           subtitle: "Leçon 1 · Progression DPFC 2026-2027")
+    alone = create_course(name: "Fonctions logarithmes", level: @tle, series: d, material: maths, subtitle: "Leçon 3 · Progression DPFC 2026-2027")
+    first = create_essential(course: limits, name: "Limites en l'infini", position: 1)
+    second = create_essential(course: limits, name: "Continuité", position: 2)
+    create_essential(course: limits, name: "Brouillon", position: 3, status: "draft")
+    link_level_series(level: @tle, series: d)
+    sign_in_as create_teacher(material: maths, classrooms: [ create_classroom(level: @tle, series: d) ])
+
+    get courses_path(level: "tle", series: "d")
+
+    assert_select "#course_#{limits.slug}" do
+      assert_select "a[href='#{course_path(limits.slug)}']", text: including("Leçon 1")
+      assert_select "a[href='#{course_path(limits.slug)}']", text: including("Limites et continuité")
+      assert_select "a[href='#{course_path(limits.slug)}']", text: /Progression DPFC/, count: 0
+      assert_select "*", text: including(tl("show.essentials_title"))
+      assert_equal [ course_essential_path(limits.slug, first.slug), course_essential_path(limits.slug, second.slug) ],
+                   css_select("#course_#{limits.slug} ul a").map { it["href"] }
+      assert_select "ul a", text: "Limites en l'infini"
+      assert_select "*", text: including("Brouillon"), count: 0
     end
+    # Sans fiche de révision : la carte n'a que son en-tête.
+    assert_select "#course_#{alone.slug}" do
+      assert_select "a[href='#{course_path(alone.slug)}']", text: including("Fonctions logarithmes")
+      assert_select "ul", 0
+      assert_select "*", text: including(tl("show.essentials_title")), count: 0
+    end
+  end
 
-    get courses_path(material: other.slug)
+  test "CA-N1: searching keeps the active subject and the level, and « Tout voir » leaves the search only" do
+    maths = create_material(name: "Mathématiques", shortname: "Maths")
+    pc = create_material(name: "Physique-Chimie", shortname: "PC")
+    d = @course.series
+    create_course(name: "Limites", level: @tle, series: d, material: maths)
+    create_course(name: "Dérivées", level: @tle, series: d, material: maths)
+    link_level_series(level: @tle, series: d)
+    sign_in_as create_teacher(materials: [ maths, pc ], classrooms: [ create_classroom(level: @tle, series: d) ])
 
-    assert_select "#courses_empty"
-    assert_select "#courses_reset"
+    get courses_path(level: "tle", series: "d", material: pc.slug)
+    assert_select "#courses_reset", 0
+
+    get courses_path(level: "tle", series: "d", material: maths.slug, q: "limi"), headers: { "Turbo-Frame" => "courses" }
+    assert_select "#courses_list > li", 1
+    assert_select "#courses_reset[href='#{courses_path(level: "tle", series: "d", material: maths.slug)}']", text: tl("index.reset")
+
+    get courses_path(level: "tle", series: "d", q: "zzz")
+    assert_select "#courses_empty", text: including(tl("index.no_match_title"))
   end
 
   test "CA-5: a draft or archived course of the teacher's subject and levels stays out of their catalogue" do
@@ -558,23 +655,19 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
   # UDR-0077, amendement du 2026-10-06 (décision du porteur) : les filtres s'affichent aussi sur téléphone ; « Tout voir »,
   # dans le frame, quitte les filtres à toutes les largeurs.
-  test "CA-6: the search and filters show on a phone too, for every role; a filtered list offers « Tout voir » at every width" do
-    teacher = create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle, series: @course.series) ])
-    [ teacher, create_team_member ].each do |user|
-      sign_in_as user
+  test "CA-6: the search and filters show on a phone too; a filtered list offers « Tout voir » at every width" do
+    sign_in_as create_team_member
 
-      get courses_path
+    get courses_path
 
-      assert_select "form#courses-filters.grid"
-      assert_select "form#courses-filters.hidden", 0
-      assert_select "#courses_reset", 0
+    assert_select "form#courses-filters.grid"
+    assert_select "form#courses-filters.hidden", 0
+    assert_select "#courses_reset", 0
 
-      get courses_path(material: @svt.slug)
+    get courses_path(material: @svt.slug)
 
-      assert_select "turbo-frame#courses #courses_reset.min-h-tap[href='#{courses_path}']", text: tl("index.reset")
-      assert_select "#courses_reset.sm\\:hidden", 0
-      sign_out
-    end
+    assert_select "turbo-frame#courses #courses_reset.min-h-tap[href='#{courses_path}']", text: tl("index.reset")
+    assert_select "#courses_reset.sm\\:hidden", 0
   end
 
   # CA-2, CA-4 (UDR-0085 §3.1) : chez l'élève, « Tout voir » n'apparaît que pendant une recherche, et l'efface.

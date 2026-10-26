@@ -1,7 +1,9 @@
 <%# 🌐 UI · catalog/courses/_course_card — carte-vitrine d'un cours du catalogue (UDR-0001, CA-26) %>
-<%# Rôle : toute la carte mène au cours ; matière, niveau et série (sauf élève), titre, sous-titre, pied « Ouvrir le cours → » ; statut pour l'équipe, sauf « Publié » ; élève : ligne compacte entière cliquable, leçon et pastille « En cours » %>
+<%# Rôle : toute la carte mène au cours ; matière, niveau et série (sauf élève), titre, sous-titre, pied « Ouvrir le cours → » ; statut pour l'équipe, sauf « Publié » ; élève : ligne compacte entière cliquable, leçon et pastille « En cours » ; enseignant : _teacher_course %>
 <%# ADR  : 0035, 0090 · UDR : 0001, 0005, 0013 (amendement du 2026-10-05 ter), 0057, 0085 (§3.3 : « Reprendre » rouvre la dernière fiche lue), XXXX écrans élève sans répétition §3.6 · aucune liste de fiches essentielles sur la carte %>
 <%# locals: (course:, show_status:, student: false) -%>
+<%# UDR enseignant §3.7 : la carte de l'enseignant (lien vers la fiche de cours et ses fiches de révision) vit à part. %>
+<% teacher = !student && current_actor.teacher? %>
 <%# UDR-0013, amendement du 2026-10-05 : « Publié » est l'état normal, l'équipe ne voit que Brouillon ou Archivé. %>
 <% status = (course.status if show_status && course.status != "published") %>
 <%# UDR-0085 §3.3 : « Reprendre » rouvre la dernière fiche lue ; sinon la page du cours. Ouvrir une
@@ -36,6 +38,8 @@
       </div>
       <%= ui_icon "chevron-right", variant: :mini, class: "shrink-0 text-mute transition group-hover:translate-x-0.5" %>
     <% end %>
+  <% elsif teacher %>
+    <%= render "catalog/courses/teacher_course", course: %>
   <% else %>
     <%= ui_card href:, class: "group h-full" do %>
       <div class="flex h-full flex-col">
