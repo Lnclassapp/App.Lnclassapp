@@ -18,11 +18,12 @@ class SystemBudget
   GRANTS = {
     "blog" => { budget: 20.0, files: %w[test/system/communication/blog_reading_test.rb test/system/teams/blog_management_test.rb] },
     # Amendement du 2026-10-24 : 50 s pour mvp-teacher-student (pilote du 27 octobre). Élargi le 2026-10-26 (porteur) à tous
-    # les fichiers système que le chantier touche (49), le budget restant de 50 s.
+    # les fichiers système que le chantier touche (50), le budget restant de 50 s.
     "mvp-teacher-student" => { budget: 50.0, files: %w[
       test/system/assessment/remediation_test.rb test/system/assessment/session_result_test.rb
       test/system/assessment/student_progress_test.rb test/system/boucle_pedagogique_test.rb
-      test/system/catalog/course_catalog_test.rb test/system/catalog/teacher_courses_test.rb
+      test/system/catalog/course_catalog_test.rb test/system/catalog/student_courses_test.rb
+      test/system/catalog/teacher_courses_test.rb
       test/system/classroom/assignment_follow_up_desktop_test.rb
       test/system/classroom/assignment_toggle_test.rb test/system/classroom/catalog_assignment_test.rb
       test/system/classroom/classroom_change_test.rb test/system/classroom/classroom_essential_test.rb
