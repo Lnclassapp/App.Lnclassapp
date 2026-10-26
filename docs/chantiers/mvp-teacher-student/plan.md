@@ -256,8 +256,8 @@ Portes propres au pilote :
 | O1 — Accueil élève en page large | D | O2, O3, O4, O5, O6 | ✅ **fusionné** (`85f390d`) |
 | O2 — « Mon compte », profil et Mon établissement sur ordinateur | E1 | O1, O3, O4, O5, O6 | ✅ **fusionné** (`312d309`) |
 | O3 — Inscription en deux colonnes | C | tous | ✅ **fusionné** (`797fc39`) |
-| O4 — Ma classe, fiche de révision, résultat sur ordinateur | E2 | tous | codé sur `-lot-o4` (Touré, #303), à fusionner |
-| O5 — Cours par leçons sur ordinateur | E2 | tous | codé sur `-lot-o5` (Touré, #304), à fusionner |
+| O4 — Ma classe, fiche de révision, résultat sur ordinateur | E2 | tous | ✅ **fusionné** (`dd3ae2d`) |
+| O5 — Cours par leçons sur ordinateur | E2 | tous | ✅ **fusionné** (`ed72cc0`) |
 | O6 — Page d'accueil publique sur ordinateur | F | tous | à faire |
 
 ### Lot O1 — Accueil élève en page large
