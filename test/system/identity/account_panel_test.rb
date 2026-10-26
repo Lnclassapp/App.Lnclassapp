@@ -5,8 +5,8 @@ require "application_system_test_case"
 # panel, mvp-teacher-student). Touching the avatar opens the account panel from the left edge, which lists « Mon profil »,
 # « Modifier mon code secret », « Ajouter une matière » and « Ajouter un établissement »; Escape closes it and gives the
 # focus back to the avatar.
-# CA-19 (accueil-eleve) — UDR-0084 §3.2: on the web, the student has the avatar menu instead
-# (test/system/identity/student_avatar_menu_test.rb); the panel stays as the page /students/menu, for the Android app.
+# The student's « Mon compte » (avatar panel and page /students/menu) is covered by
+# test/system/identity/student_avatar_menu_test.rb and test/controllers/classroom/student_menus_controller_test.rb (lot E1).
 class Identity::AccountPanelTest < ApplicationSystemTestCase
   TRIGGER = "header a[aria-controls=account_panel]".freeze
 
@@ -67,27 +67,6 @@ class Identity::AccountPanelTest < ApplicationSystemTestCase
       end
 
       assert_equal "none", page.evaluate_script("getComputedStyle(document.getElementById('account_panel')).transform")
-    end
-  end
-
-  test "CA-19: at 390 px, the student's /students/menu lists the links of the avatar menu, the switch and sign-out" do
-    sign_in_as create_student(classroom: create_classroom(name: "Tle D 1"), first_name: "Aya", last_name: "Kouassi")
-
-    with_mobile_viewport do
-      visit student_menu_path
-
-      assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
-      assert_no_selector "dialog#account_panel", visible: :all
-      within("#student_menu") do
-        assert_text "Aya Kouassi"
-        assert_text "Tle D 1"
-        assert_equal [ tn(:profile), tn("avatar_menu.history"), tn("avatar_menu.add_photo"), I18n.t("shared.help_sheet.trigger") ],
-                     all("nav a", minimum: 4).map { it.text.squish }
-        assert_selector "button[role=switch]", visible: true
-        click_link tn("avatar_menu.history")
-      end
-
-      assert_current_path student_archive_path
     end
   end
 end
