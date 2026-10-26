@@ -5,7 +5,7 @@
 <% counts = file.counts %>
 <% overdue = file.assignments.count { it.status == :overdue } %>
 <% if counts.assigned.positive? %>
-  <div id="student_file_summary" class="space-y-3">
+  <div id="student_file_summary" class="space-y-3 lg:col-start-1 lg:row-start-1 lg:mb-8">
     <p id="student_file_counts" class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-ink">
       <%= t(".done_of", count: counts.done, assigned: counts.assigned) %>
       <% if overdue.positive? %><%= ui_badge t(".late", count: overdue), tone: :warning, dot: true %><% end %>

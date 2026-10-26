@@ -1,8 +1,8 @@
 <%# 🌐 UI · classroom/classrooms/_header — en-tête de la page d'une classe (CL-10, CL-04) %>
-<%# Rôle : retour selon le rôle ; titre, « CSMT · 2026-2027 » dessous, logo enseignant à droite ; bloc du lien (_link) ; l'effectif est dans le titre de la liste %>
+<%# Rôle : retour selon le rôle ; titre, « CSMT · 2026-2027 » dessous, logo enseignant à droite ; le bloc du lien (_link) est rendu par show, dans la colonne de gauche ; l'effectif est dans le titre de la liste %>
 <%# ADR  : 0028, 0041, 0063, 0085 · UDR : enseignant §3.5, 0027, 0050, 0054, 0081 · Stimulus : clipboard · WhatsApp : lien sortant, sans nom d'élève %>
 <%# locals: (classroom:, school_sigle:) -%>
-<div id="classroom_header" class="mb-8">
+<div id="classroom_header">
   <% if shell_user.role.to_s == "team" %>
     <%= ui_back_link classroom.school_name, href: school_path(classroom.school_public_id) %>
   <% else %>
@@ -19,9 +19,4 @@
     </div>
     <%= image_tag brand_logo(teacher: true), alt: "", class: "size-6 shrink-0 rounded-sm" %>
   </div>
-
-  <%# UDR-0081 §3.6 : le bloc du lien, pour qui gère la classe ; le code n'y est plus (CA-I1, il est sur la carte de l'accueil). %>
-  <% if classroom.link_shown_to?(current_actor) %>
-    <%= render "classroom/classrooms/link", classroom: %>
-  <% end %>
 </div>

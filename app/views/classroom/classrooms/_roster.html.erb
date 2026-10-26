@@ -78,7 +78,7 @@
           <% first_added = per_page * (page - 1) if page > 1 %>
           <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
             <% students.each_with_index do |student, index| %>
-              <li id="student_<%= student.public_id %>" class="flex items-center gap-3 px-4 py-3">
+              <li id="student_<%= student.public_id %>" class="flex items-center gap-3 px-4 py-3 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-y-2">
                 <%# UDR-0108 §3.2 : la photo et le nom forment un seul lien vers la fiche ; après « Voir les suivants », le focus
                     va au lien de la première ligne ajoutée, par le contrôleur autofocus (UDR-0054 §3.3 : jamais l'attribut). %>
                 <% focus = { controller: "autofocus", autofocus_target: "field" } if index == first_added %>
@@ -95,7 +95,7 @@
                     <% end %>
                   </div>
                 <% end %>
-                <div class="flex shrink-0 items-center gap-1 sm:gap-3">
+                <div class="flex shrink-0 items-center gap-1 sm:gap-3 lg:justify-self-end">
                   <%# UDR enseignant §3.2, §3.5 : « Or · 15/20 » (trophée du palier sur une pastille neutre) ou « Pas encore » en text-mute. %>
                   <% if student.badge %>
                     <p id="badge_<%= student.public_id %>" class="<%= Assessment::BadgesHelper::BADGE_PILL %> shrink-0">
@@ -105,7 +105,11 @@
                   <% else %>
                     <p id="badge_<%= student.public_id %>" class="ui-badge ui-badge-md shrink-0 bg-mist text-mute"><%= comprehension_box_label(:none) %></p>
                   <% end %>
-                  <p id="self_practice_<%= student.public_id %>" class="hidden w-24 text-right text-sm sm:block">
+                </div>
+                <%# ≥ lg : la colonne est étroite (UDR enseignant §3.5), « Fait seul » et le dernier score passent sur une seconde ligne, sous le nom ;
+                    en dessous, `contents` laisse ces deux cellules en ligne avec le badge, comme avant. %>
+                <div class="contents lg:col-span-2 lg:flex lg:flex-wrap lg:justify-between lg:gap-x-4 lg:gap-y-1">
+                  <p id="self_practice_<%= student.public_id %>" class="hidden w-24 text-right text-sm sm:block lg:flex lg:w-auto lg:items-baseline lg:gap-x-2 lg:text-left">
                     <span class="block text-xs text-mute"><%= t(".self_practice") %></span>
                     <% if student.self_practice_count.zero? %>
                       <span class="text-mute">—</span>
@@ -113,7 +117,7 @@
                       <span class="font-medium tabular-nums"><%= student.self_practice_count %></span>
                     <% end %>
                   </p>
-                  <p class="hidden text-right text-sm sm:block">
+                  <p class="hidden text-right text-sm sm:block lg:flex lg:flex-wrap lg:items-baseline lg:justify-end lg:gap-x-2">
                     <span class="block text-xs text-mute"><%= t(".last_score") %></span>
                     <% if student.last_score_percent %>
                       <span class="font-medium tabular-nums"><%= student.last_score_percent %> %</span>
