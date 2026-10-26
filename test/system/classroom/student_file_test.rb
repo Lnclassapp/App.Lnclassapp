@@ -30,8 +30,8 @@ class Classroom::StudentFileTest < ApplicationSystemTestCase
     visit classroom_student_path(@classroom.public_id, @awa.public_id)
 
     assert_selector "h1", text: "Awa Bamba", wait: SIGN_IN_WAIT
-    assert_selector "#student_file_counts", text: /1\s+sur 2/
-    assert_selector "#student_file_assignments li", text: /85.%.*Acquis.*En progrès.*2 sessions/m
+    assert_selector "#student_file_counts", text: /1 fait sur 2/
+    assert_selector "#student_file_assignments li", text: %r{17/20.*En progrès.*2 sessions}m
     assert_selector "#student_file_self_practice li", text: "Les fractions"
     growth_shot("rapports-de-classe-fiche-1280")
 

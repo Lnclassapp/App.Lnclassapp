@@ -1,26 +1,26 @@
 # La fiche d'un élève dans sa classe (CL-13, AS-24 ; ADR-0097, UDR-0107 §3.10) — écran enseignant et équipe.
 # Une clé par partial de classroom/classroom_students (lecture paresseuse t(".clé")). « session », jamais « essai » (UDR-0007).
 fr:
+  date:
+    formats:
+      arrived: "%-d %b"
   classroom:
     classroom_students:
       show:
         title: "%{name} · %{classroom}"
+      # UDR enseignant §3.6 : « Numéro 07 •• •• •• 56 · Arrivé·e le 12 oct. » ; la classe est dans le lien de retour.
       identity:
-        context: "%{classroom} · %{school}"
-        new: "Nouveau"
         contact: "Numéro"
         contact_masked: "Numéro masqué pour protéger les élèves"
-        joined: "Arrivé le"
-        joined_via: "%{date}, %{via}"
-        via:
-          link: "par le lien"
+        arrived: "Arrivé·e le %{date}"
+      # UDR enseignant §3.2, §3.6 : « 9 faits sur 18 » + « 1 en retard », « Moyenne 14/20 · Or », puis les badges obtenus.
       summary:
-        counts_label: "Exercices de la classe"
-        done: "Faits"
-        done_of: "sur %{count}"
-        late: "En retard"
-        pending: "Pas encore faits"
-        badges_title: "Badges dans cette classe"
+        done_of:
+          one: "%{count} fait sur %{assigned}"
+          other: "%{count} faits sur %{assigned}"
+        late: "%{count} en retard"
+        average: "Moyenne %{grade}/20 · %{badge}"
+        badges_label: "Badges obtenus dans cette classe"
       assignments:
         title: "Exercices de la classe"
         empty:
@@ -29,7 +29,7 @@ fr:
         done_on: "Fait le %{date}"
         late_on: "Rendu en retard le %{date}"
         not_done: "Pas encore fait"
-        overdue: "Pas encore fait"
+        overdue: "En retard"
         sessions:
           one: "%{count} session"
           other: "%{count} sessions"

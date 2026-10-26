@@ -1,28 +1,25 @@
-<%# 🌐 UI · classroom/classroom_students/_summary — trois chiffres et badges de l'élève sur les exercices de la classe %>
-<%# Rôle : « Faits 7 sur 10 », « En retard » (si une échéance existe), « Pas encore faits » ; badges de la classe par palier %>
-<%# ADR  : 0072 (§4.4), 0079 (§4.2), 0097 (§4.3, §4.5) · UDR : 0062 (§3.5), 0072, 0107 (§3.3) · jamais un badge d'une autre classe %>
+<%# 🌐 UI · classroom/classroom_students/_summary — chiffres et badges de l'élève sur les exercices de la classe %>
+<%# Rôle : « 9 faits sur 18 » + pastille « 1 en retard » (pas fait et échu) ; « Moyenne 14/20 · Or » (le badge qui range l'élève) ; les badges obtenus par exercice, nommés et comptés, zéro caché ; rien sans exercice assigné %>
+<%# ADR  : 0072 (§4.4), 0079 (§4.2), 0097 (§4.3, §4.5) · UDR : enseignant §3.2 et §3.6, 0062 (§3.5), 0107 (§3.3) · jamais un badge d'une autre classe ; ni « Fragile » ni « Acquis » %>
 <%# locals: (file:) -%>
 <% counts = file.counts %>
-<% figure = "font-display text-3xl font-medium tabular-nums" %>
-<%= ui_card padding: :md, id: "student_file_summary" do %>
-  <dl id="student_file_counts" aria-label="<%= t(".counts_label") %>" class="flex flex-wrap gap-x-10 gap-y-4">
-    <div>
-      <dt class="text-sm text-mute"><%= t(".done") %></dt>
-      <dd class="<%= figure %>"><%= counts.done %> <span class="font-sans text-base font-normal text-mute"><%= t(".done_of", count: counts.assigned) %></span></dd>
-    </div>
-    <% if file.assignments.any?(&:due_on) %>
-      <div>
-        <dt class="text-sm text-mute"><%= t(".late") %></dt>
-        <dd class="<%= figure %>"><%= counts.late %></dd>
-      </div>
-    <% end %>
-    <div>
-      <dt class="text-sm text-mute"><%= t(".pending") %></dt>
-      <dd class="<%= figure %>"><%= counts.pending %></dd>
-    </div>
-  </dl>
-  <div class="mt-6 border-t border-line pt-5">
-    <p class="mb-2 text-sm text-mute"><%= t(".badges_title") %></p>
-    <%= render "assessment/comprehension/badge_counts", counts: file.badge_counts %>
+<% overdue = file.assignments.count { it.status == :overdue } %>
+<% if counts.assigned.positive? %>
+  <div id="student_file_summary" class="space-y-3">
+    <p id="student_file_counts" class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-ink">
+      <%= t(".done_of", count: counts.done, assigned: counts.assigned) %>
+      <% if overdue.positive? %><%= ui_badge t(".late", count: overdue), tone: :warning, dot: true %><% end %>
+    </p>
+    <ul aria-label="<%= t(".badges_label") %>" class="flex flex-wrap items-center gap-2">
+      <% if file.class_grade %>
+        <li id="student_file_average"><span class="ui-badge ui-badge-md bg-brand-soft text-brand-strong">
+          <%= t(".average", grade: file.class_grade, badge: comprehension_box_label(file.class_badge || :none)) %>
+        </span></li>
+      <% end %>
+      <% Entities::Assessment::Grading::BADGE_ORDER.each do |level| %>
+        <% pill = badge_pill(level, count: file.badge_counts.fetch(level)) %>
+        <% if pill %><li><%= pill %></li><% end %>
+      <% end %>
+    </ul>
   </div>
 <% end %>

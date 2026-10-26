@@ -3,8 +3,8 @@ require "application_system_test_case"
 # CL-10, CL-04 — UDR-0027, UDR-0081 §3.6. L'enseignant ouvre sa classe : il voit le bloc « Lien de la classe », copie le lien
 # (toast « Lien copié », contrôleur clipboard depuis UDR-0054) sans rechargement de page, et voit la liste de ses élèves. Le bouton du code de
 # récupération vise la route de B8 ; son parcours complet est rejoué au Lot E. ADR-0072, UDR-0027 (amendée le
-# 2026-10-02) : « Cours assignés » a disparu de la page. Lot E de fonctions-espace-eleve (UDR-0062 §3.4, §3.5) : ses jours
-# de séance, ses exercices assignés et leurs comptes, le suivi qui nomme les seuls rendus en retard, le bloc « Cours ».
+# 2026-10-02) : « Cours assignés » a disparu de la page. Lot E de fonctions-espace-eleve (UDR-0062 §3.4, §3.5) : ses
+# exercices assignés et leurs comptes, le suivi qui nomme les élèves ; plus de jours de séance ni de bloc « Cours » (UDR enseignant §3.5).
 class Classroom::ClassroomPageTest < ApplicationSystemTestCase
   # L'accueil enseignant appartient au Lot D3 : tant qu'il n'est pas fusionné, un remplaçant répond là où la connexion
   # arrive, comme dans test/system/teams/schools_test.rb. Un contrôleur fusionné se charge seul, le remplaçant s'efface.
@@ -35,7 +35,8 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
       assert_selector "h1", text: "Tle D 1"
       assert_selector "#classroom_link"
       assert_no_selector "[id*=join_code]"
-      assert_selector "#classroom_headcount", text: I18n.t("#{scope}.header.headcount", count: 2, max: 60)
+      assert_no_selector "#classroom_headcount"
+      assert_no_selector "#classroom_code"
     end
     assert_no_selector "#assigned_courses"
     assert_no_text "Cours assignés"
@@ -66,24 +67,6 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     assert_current_path classroom_student_path(@classroom.public_id, @koffi.public_id)
   end
 
-  # CA-B7 (provisoire) : le code de la classe, groupé 3 + 3, se copie comme le lien, sans rechargement.
-  test "le bouton « Copier » du code de la classe copie le code affiché" do
-    code = Entities::Classroom::JoinCode.display(@classroom.reload.join_code)
-    visit classroom_path(@classroom.public_id)
-
-    within "#classroom_link #classroom_code" do
-      assert_selector "#classroom_code_value", text: code
-    end
-    assert_no_page_reload do
-      copy = within("#classroom_code") { find_button(I18n.t("#{scope}.link.code_copy")) }
-      scroll_to(copy, align: :center)
-      copy.click
-
-      assert_toast I18n.t("#{scope}.link.code_copied")
-    end
-    assert_equal code, page.evaluate_async_script("navigator.clipboard.readText().then(arguments[0])")
-  end
-
   test "une copie refusée par le navigateur le dit" do
     visit classroom_path(@classroom.public_id)
     page.execute_script("navigator.clipboard.writeText = () => Promise.reject(new Error('refusé'))")
@@ -103,7 +86,6 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
              "la page déborde en largeur"
       click_on I18n.t("#{scope}.link.copy")
       assert_toast I18n.t("#{scope}.link.copied")
-      assert_selector "#classroom_code_value"
       assert find("#classroom_whatsapp_share")[:href].start_with?("https://wa.me/?text=")
       growth_shot("390-classe-partager-whatsapp", desktop: false, scroll_to: "#classroom_whatsapp_share")
     end
@@ -120,12 +102,11 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     growth_shot("1280-classe-partager-whatsapp", scroll_to: "#classroom_header")
   end
 
-  test "l'enseignant lit ses jours, le suivi d'un exercice qui nomme chaque élève, et ouvre un cours de sa classe" do
+  test "l'enseignant lit ses exercices, le suivi d'un exercice qui nomme chaque élève, et revient à sa classe" do
     [ 1, 4 ].each { Orm::ClassroomSessionDay.create!(teacher: @teacher, classroom: @classroom, weekday: it) }
     svt = Orm::TeacherSchoolMaterial.find_by!(teacher: @teacher).material
     tle_course = create_course(level: @classroom.level, series: @classroom.series, material: svt, name: "La cellule")
-    essential = create_essential(course: tle_course, name: "La mitose")
-    exercise = create_exercise(essential:, title: "Phases de la mitose")
+    exercise = create_exercise(essential: create_essential(course: tle_course, name: "La mitose"), title: "Phases de la mitose")
     assignment = travel_to(Time.zone.local(2026, 10, 5, 9)) do
       create_assignment(classroom: @classroom, assignable: exercise, by: @teacher, due_on: Date.new(2026, 10, 8))
     end
@@ -134,10 +115,12 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
 
     visit classroom_path(@classroom.public_id)
 
-    assert_selector "#classroom_session_days", text: "Vos jours de séance : lundi, jeudi"
+    # UDR enseignant §3.5 : « Vos jours de séance » n'est plus sur la page, même renseigné.
+    assert_no_selector "#classroom_session_days"
     within "#assignment_#{assignment.public_id}" do
       assert_text "Pour jeu. 8 oct."
-      assert_text "1 fait, dont 1 en retard · 1 pas encore fait"
+      assert_text "1 / 2 fait"
+      assert_text "1 en retard"
     end
     within("#assignment_#{assignment.public_id}") { click_on "Phases de la mitose" }
 
@@ -153,32 +136,26 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
       assert_selector "li", text: /Awa Bamba\s+Pas encore fait\s+En retard/
     end
 
+    # Le retour mène à la classe, qui n'a plus de bande « Fiches de cours » (les cours s'ouvrent depuis l'accueil et l'onglet Cours).
     click_on "Tle D 1"
-    # UDR-0130 : la section de la classe nomme l'objet, la page de la fiche de cours liste ses révisions.
-    within("#classroom_courses") { assert_selector "h2", text: "Fiches de cours" }
-    within("#classroom_courses") { click_on "La cellule" }
-    assert_current_path classroom_course_path(@classroom.public_id, tle_course.slug)
-    assert_selector "#classroom_course_essentials_title", text: "Révisions de la leçon"
-    assert_selector "#classroom_course_essentials a", text: "La mitose"
+    assert_current_path classroom_path(@classroom.public_id)
+    assert_no_selector "#classroom_courses"
   end
 
   test "sur un téléphone, les blocs de la classe et le suivi tiennent dans la largeur" do
     assignment = create_assignment(classroom: @classroom, assignable: create_exercise(title: "Un titre d'exercice assez long pour un écran étroit"),
                                    by: @teacher)
-    svt = Orm::TeacherSchoolMaterial.find_by!(teacher: @teacher).material
-    3.times { create_course(level: @classroom.level, series: @classroom.series, material: svt, name: "Cours de la bande #{it}") }
     with_mobile_viewport do
       visit classroom_path(@classroom.public_id)
 
-      assert_selector "#classroom_session_days", text: I18n.t("#{scope}.session_days.unset")
-      assert_selector "#assignment_#{assignment.public_id}", text: "0 fait · 2 pas encore faits"
-      # UDR-0077 §3.4 : les cours en bande, avant les exercices. UDR-0108 : la note de l'élève sur la ligne de son nom.
-      assert_operator find("#classroom_courses").rect.y, :<, find("#assigned_exercises").rect.y
-      assert_selector "#classroom_courses ul[data-communication--carousel-target=track] > li", count: 3
+      assert_no_selector "#classroom_session_days"
+      assert_selector "#assignment_#{assignment.public_id}", text: "0 / 2 fait"
+      # UDR enseignant §3.5 : le badge de l'élève sur la ligne de son nom.
+      assert_no_selector "#classroom_courses"
       within("#student_#{@koffi.public_id}") do
         avatar = find(".ui-avatar", match: :first).rect
-        grade = find("#grade_#{@koffi.public_id}").rect
-        assert_in_delta avatar.y + (avatar.height / 2), grade.y + (grade.height / 2), 8, "la note n'est pas sur la ligne de l'élève"
+        badge = find("#badge_#{@koffi.public_id}").rect
+        assert_in_delta avatar.y + (avatar.height / 2), badge.y + (badge.height / 2), 8, "le badge n'est pas sur la ligne de l'élève"
         # « Aucune session terminée » ne doit pas écraser le nom.
         assert_selector "p", exact_text: "Koffi Yao"
         name = find("p", exact_text: "Koffi Yao")

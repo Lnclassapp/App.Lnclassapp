@@ -454,7 +454,7 @@ class Classroom::StudentClassroomChangesControllerTest < ActionDispatch::Integra
     assert_equal [ "0 / 1 fait" ], css_select("#follow_up_progress span.tabular-nums").map { it.text.strip }
   end
 
-  test "chained: the old classroom no longer lists the student, the new one marks them « Nouveau », the old direction lists them" do
+  test "chained: the old classroom no longer lists the student, the new one counts them as new in its title, the old direction lists them" do
     teacher_a = create_teacher(school: @cocody, classrooms: [ @a ], first_name: "Ibrahim", last_name: "Traoré")
     teacher_c = create_teacher(school: @viateur, classrooms: [ @c ], first_name: "Moussa", last_name: "Diallo")
     create_student(classroom: @a, first_name: "Koffi", last_name: "Yao")
@@ -474,7 +474,9 @@ class Classroom::StudentClassroomChangesControllerTest < ActionDispatch::Integra
     sign_in_as teacher_c
     get classroom_path(@c.public_id)
 
-    assert_select "#student_#{@student.public_id} span", text: I18n.t("#{roster}.new")
+    # Maquette 10 : la ligne n'a plus de pastille « Nouveau » ; l'arrivée se lit dans le titre de la liste.
+    assert_select "#student_#{@student.public_id}", 1
+    assert_select "h2#classroom_roster_title span", text: I18n.t("#{roster}.new_count", count: 1)
     sign_out
 
     sign_in_as create_school_admin(school: @cocody, first_name: "Aya", last_name: "Brou")

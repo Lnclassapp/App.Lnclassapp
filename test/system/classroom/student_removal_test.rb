@@ -63,7 +63,9 @@ class Classroom::StudentRemovalTest < ApplicationSystemTestCase
 
     sign_in_as @teacher
     visit classroom_path(@classroom.public_id)
-    within("#student_#{@koffi.public_id}") { assert_text I18n.t("#{ROSTER}.new") }
+    # Maquette 10 : « Nouveau » n'est plus sur la ligne, il est compté dans le titre de la liste.
+    assert_selector "#student_#{@koffi.public_id}"
+    assert_selector "#classroom_roster_title", text: I18n.t("#{ROSTER}.new_count", count: 1)
     remove_koffi
     sign_out
 
