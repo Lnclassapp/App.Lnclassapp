@@ -9,16 +9,38 @@
 
 **Pilotes** — un lot d'orchestrateur est exécuté par l'agent `executant-lot` ; un lot de Touré ou Konan, par eux :
 
-| Lot | Pilote | Dépend de | Jour | État au 24/10, 11 h |
+| Lot | Pilote | Dépend de | Jour | État au 26/10, 21 h |
 |---|---|---|---|---|
-| B — Code de classe à 6 caractères | orchestrateur | — | samedi 24 | ✅ **fait** (ancien Lot 0 + ancien Lot A, `021804cc`) ; `security-reviewer` passé, aucun constat au-dessus de « bas » |
-| A — Jetons de couleurs | orchestrateur (porteur, 2026-10-24 : « option A », repris de Touré), #285 | — | samedi 24 | ✅ **fusionné** (`8d009596`), captures validées par le porteur |
-| F — Page d'accueil publique en photo | Konan (`konanmeschac777-cmyk`), #286 | — | samedi 24 | à faire |
-| B2 — Code visible sur la page de classe (provisoire) | orchestrateur | B | samedi 24 | à faire (porteur, 2026-10-24 : « A ») |
-| C — Inscription élève en 3 étapes | orchestrateur | B | samedi 24 | ✅ **fusionné** (`dc2c78c5`), captures validées |
-| D — Accueil élève, carte du prochain exercice | orchestrateur | A | dimanche 25 → lundi 26 | à faire |
-| E1 — « Mon compte » plein écran, profil sans doublons | Touré, #291 | A | dimanche 25 | à faire |
-| E2 — Ma classe, fiche, résultat, Cours | Konan, #290 | A, F | dimanche 25 → lundi 26 | à faire |
+| B — Code de classe à 6 caractères | orchestrateur | — | samedi 24 | ✅ **fusionné** (ancien Lot 0 + ancien Lot A, `021804cc`) ; `security-reviewer` passé |
+| A — Jetons de couleurs | orchestrateur, #285 | — | samedi 24 | ✅ **fusionné** (`8d009596`) |
+| F — Page d'accueil publique en photo | Konan, #286 | — | samedi 24 | ✅ **fusionné** (`052c723c`) ; couvre aussi O6 |
+| B2 — Code visible sur la page de classe (provisoire) | orchestrateur | B | samedi 24 | ✅ **fusionné** (`9d92b7e`, test `10302dc1`) ; visible par l'enseignant, la direction et l'équipe (porteur, 2026-10-26) |
+| C — Inscription élève en 3 étapes | orchestrateur | B | samedi 24 | ✅ **fusionné** (`dc2c78c5`) ; vérification du code sans blocage réseau (`7358e20a`, revue de #295) |
+| D — Accueil élève, carte du prochain exercice | Touré, #298 | A | dimanche 25 → lundi 26 | ✅ **fusionné** (`31192306`) ; 6 matières puis « Inviter » ; « Besoin d'aide ? » dans l'en-tête à toute largeur (`7f05dc39`) |
+| E1 — « Mon compte » plein écran, profil sans doublons | Touré, #291 | A | dimanche 25 | ✅ **fusionné** (`c63f0ac7`) |
+| E2 — Ma classe, fiche, résultat, Cours | Touré, #290 | A, F | dimanche 25 → lundi 26 | ✅ **fusionné** (`e1cb390c`) ; CA-E3 « Fiches à revoir » dans Ma classe, option A (`08146924`) |
+
+**Lots enseignant** ([`plan-enseignant.md`](plan-enseignant.md)), état au 26/10, 21 h :
+
+| Lot | Issue | État |
+|---|---|---|
+| J — Inscription enseignant en 3 étapes | #289 | ✅ **fusionné** (`45ed8e8`, « M. / Mme » en `f2ecaebb`) |
+| H — Plafonds et retraits | #292 | ✅ **fusionné** (`04f0369`) ; part avec M |
+| L — Premier parcours : déclarer, assigner, jours de séance | #294 | ✅ **fusionné** (`31bf4c3`) ; POST sans jour refusé ; **L2** (case à cocher et pastille de « Quelles classes enseignez-vous ? ») reporté par le porteur |
+| K — Rapport d'un exercice en badges | #288 | ✅ **fusionné** (`1b33237`), puis le rapport de la maquette 11 (`36ec5091`) |
+| M — « Mon compte » enseignant | #305 | ✅ **fusionné** (`e4075817`) |
+| G — Accueil enseignant | #287 | ✅ **fusionné** (`c486573c`) |
+| N — Cours de l'enseignant | #306 | ✅ **fusionné** (`34bc76c8`) |
+| I — Page de classe et fiche d'un élève | #293 | ✅ **fusionné** (`88aeb30e`, test de la boucle en `d9da5931`) |
+| P3 — Rapport d'un exercice sur ordinateur | #309 | ✅ **fusionné** (`76f0af37`) |
+| P4 — Inscription sur ordinateur | #307 | ✅ **fusionné** (`7da2330e`) |
+| P6 — Déclarer, assigner, jours de séance sur ordinateur | #308 | ✅ **fusionné** (`81b1beac`) |
+| P0 — Panneau « Mon compte » à droite, barres | #310 | ⏳ **pas commencé** (porteur) |
+| P1 — Accueil enseignant en page large | #311 | ⏳ **pas commencé** (porteur) |
+| P2 — Page de classe et fiche d'un élève sur ordinateur | #312 | ⏳ **pas commencé** (porteur) ; après P1 |
+| P5 — Cours de l'enseignant, colonne de 40 rem | #313 | ⏳ **pas commencé** (porteur) ; après O5 (mêmes fichiers du Cours) |
+
+**Revue finale de #295** (2026-10-26, sur `e4075817`) : sécurité sans constat ; trois corrections (`7358e20a`) et le test de P6 (`e0a9792d`). Les lots fusionnés depuis (G, N, I, P3, O4, O5) n'ont eu que leurs propres tests : à relire avant `bin/ci-quiet`. Suite système complète verte sur `c9b19b21` (426 runs, 0 échec).
 
 **Budget des tests système** (ADR-0069 §9 : 15 s par chantier) : C en prend 10,5 s ; **relevé à 50 s pour ce chantier** (porteur, 2026-10-24, amendement de l’ADR-0069). Chaque lot garde un test système court de son parcours principal et teste le reste au niveau contrôleur ou intégration.
 
@@ -249,14 +271,14 @@ Portes propres au pilote :
 >
 > **Ne change rien au téléphone** (porteur, 2026-10-24) : les lots O ne touchent qu'à ce qui s'affiche ≥ lg. Les écrans téléphone validés le 2026-10-23 (lots E1, E2) font foi. Le menu à « Mon établissement », le profil à carte bleue, l'écran « Mon établissement » et Cours par leçons sont **pour l'ordinateur seulement** (O2, O5) : chaque lot vérifie qu'à 390 px rien ne change.
 
-| Lot | Dépend de | En parallèle avec |
-|---|---|---|
-| O1 — Accueil élève en page large | D | O2, O3, O4, O5, O6 |
-| O2 — « Mon compte », profil et Mon établissement sur ordinateur | E1 | O1, O3, O4, O5, O6 |
-| O3 — Inscription en deux colonnes | C | tous |
-| O4 — Ma classe, fiche de révision, résultat sur ordinateur | E2 | tous |
-| O5 — Cours par leçons sur ordinateur | E2 | tous |
-| O6 — Page d'accueil publique sur ordinateur | F | tous |
+| Lot | Dépend de | En parallèle avec | État au 26/10, 21 h |
+|---|---|---|---|
+| O1 — Accueil élève en page large | D | O2, O3, O4, O5, O6 | ✅ **fusionné** (`85f390d9`), #300 |
+| O2 — « Mon compte », profil et Mon établissement sur ordinateur | E1 | O1, O3, O4, O5, O6 | ✅ **fusionné** (`312d3098`), #302 |
+| O3 — Inscription en deux colonnes | C | tous | ✅ **fusionné** (`797fc393`, `p-8` en `a0b55f5a`), #299 |
+| O4 — Ma classe, fiche de révision, résultat sur ordinateur | E2 | tous | ✅ **fusionné** (`dd3ae2df`, jetons en `c9b19b21`), #303 |
+| O5 — Cours par leçons sur ordinateur | E2 | tous | ✅ **fusionné** (`ed72cc04`), #304 |
+| O6 — Page d'accueil publique sur ordinateur | F | tous | ✅ **livré par F**, rien à fusionner ; #301 fermé |
 
 ### Lot O1 — Accueil élève en page large
 
