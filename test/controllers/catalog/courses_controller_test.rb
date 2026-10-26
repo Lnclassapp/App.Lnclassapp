@@ -566,6 +566,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     [ mechanics, @course ].each { assert_select "#course_#{it.slug}", 0 }
     assert_select "#courses_total", text: including("Maths")
     assert_select "#courses_groups, h2[id^=courses_group_], form#courses-filters select", 0
+    # CA-N2 : dès lg, une colonne de 40 rem, une carte par ligne ; sous lg, la page garde ses classes d'avant.
+    assert_select "#teacher_courses.lg\\:max-w-160 #courses_list.lg\\:grid-cols-1.sm\\:grid-cols-2"
+    assert_select "#courses_list.xl\\:grid-cols-3", 0
 
     get courses_path(level: "tle", series: "d", material: pc.slug)
 
