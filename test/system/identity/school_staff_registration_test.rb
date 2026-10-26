@@ -7,26 +7,22 @@ require "application_system_test_case"
 class Identity::SchoolStaffRegistrationTest < ApplicationSystemTestCase
   FORM = "identity.school_staff_registrations.form".freeze
   ERRORS = "activemodel.errors.models.dtos/identity/school_staff_registration_input.attributes".freeze
-  HOME = "homepage.index".freeze
 
   setup do
     @school = create_school(name: "Lycée Classique d'Abidjan", school_code: "k7m4qz")
   end
 
-  test "ID-09, ID-01: at 390 px, the three entries lead to the registration; the direction lands on its home" do
+  # Lot F (CA-A2) : l'entrée de la direction est « Espace établissement », une fenêtre qui n'existe que drapeau allumé.
+  test "ID-09, ID-01: at 390 px, « Espace établissement » leads to the registration; the direction lands on its home" do
+    pilot_flags!(school_space_enabled: true)
     with_mobile_viewport do
       visit root_path
       assert no_horizontal_scroll?, "la page d'accueil défile en largeur à 390 px"
 
-      within("#hero") { click_on I18n.t("#{HOME}.school_staff_link.link") }
+      click_on I18n.t("homepage.role_modal.school.trigger")
+      within("dialog#role-modal-school-entry[open]") { click_on I18n.t("homepage.role_modal.school.sign_up") }
       assert_current_path new_school_staff_registration_path
       assert no_horizontal_scroll?, "la page d'inscription défile en largeur à 390 px"
-
-      visit root_path
-      within("footer") { click_on I18n.t("#{HOME}.footer.schools") }
-      assert_selector "#etablissements h2", text: I18n.t("#{HOME}.schools.title")
-      within("#etablissements") { click_on I18n.t("#{HOME}.schools.cta") }
-      assert_current_path new_school_staff_registration_path
 
       fill_registration(school_code: "k7m 4qz")
       click_on I18n.t("#{FORM}.submit")
