@@ -1,6 +1,6 @@
 <%# 🌐 UI · shared/navigation/_account_panel — « Mon compte » de l'enseignant : l'avatar de l'en-tête ouvre un panneau (<dialog>) : plein écran, panneau latéral droit de 400 px dès lg %>
 <%# Rôle : nom, « Maths · PC · sigle », établissement en cours (dès deux), six entrées avec « N sur 3 » (grisées à 3, elles mènent à l'écran de retrait, ouvert dès lg dans le Turbo Frame du panneau), thème, déconnexion ; `page: true` rend le seul contenu (/teachers/menu, ou le menu rendu dans le frame du panneau) %>
-<%# UDR  : écrans enseignant sans répétition §3.4 · 0098 §3.1 (changer d'établissement) · 0061 (déclencheur-lien : sans JavaScript, l'avatar mène à la page) · Stimulus : modal (Échap, croix, voile, focus rendu à l'avatar), autofocus, theme · locals : user, page %>
+<%# UDR  : écrans enseignant sans répétition §3.4 · 0098 §3.1 (changer d'établissement) · 0061 (déclencheur-lien : sans JavaScript, l'avatar mène à la page) · Stimulus : modal (Échap, croix, voile, focus rendu à l'avatar), autofocus, panel-focus (focus sur le titre de chaque écran du frame), theme · locals : user, page %>
 <%# locals: (user:, page: false) -%>
 <% max = { materials: Entities::Identity::TeacherMaterials::MAX, schools: Entities::School::TeacherSchools::MAX } %>
 <% links = account_panel_links(user.role) %>
@@ -19,7 +19,8 @@
   <div class="flex items-center gap-4 pb-4">
     <%= ui_avatar user.name, src: user.avatar_url, size: :lg, tone_seed: user.public_id %>
     <div class="min-w-0">
-      <p class="truncate font-display text-lg font-medium text-ink"><%= user.name %></p>
+      <%# Titre du menu : le nom. Le panneau y remet le focus quand « ‹ Mon compte » ramène le menu dans le frame. %>
+      <p class="truncate font-display text-lg font-medium text-ink" data-panel-focus-title><%= user.name %></p>
       <% if detail.present? %><p class="truncate text-sm text-mute"><%= detail %></p><% end %>
     </div>
   </div>
@@ -108,7 +109,8 @@
   </nav>
 <% end %>
 <%# Le contenu du panneau est un Turbo Frame : l'écran de retrait y remplace le menu (CA-H7), « ‹ Mon compte » le ramène. %>
-<% screen = in_panel ? turbo_frame_tag(frame) { content } : content %>
+<%# Après chaque chargement du frame, le contrôleur panel-focus met le focus sur le titre du nouvel écran (clavier, lecteur d'écran). %>
+<% screen = in_panel ? turbo_frame_tag(frame, data: { controller: "panel-focus", action: "turbo:frame-load->panel-focus#focus" }) { content } : content %>
 <% if local_assigns[:page] %>
   <%= screen %>
 <% else %>
