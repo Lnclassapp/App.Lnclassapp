@@ -31,7 +31,10 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     assert_selector "#session_gap_outcome", text: "Cette fiche de révision passe à revoir."
 
     visit student_home_path
-    within("#student_home_gaps") { click_on "Théorème de Thalès" }
+    within("#student_next_step[data-state=review]") do
+      assert_selector "#student_next_step_title", text: "Théorème de Thalès"
+      click_on I18n.t("classroom.student_homes.next_step.review.open")
+    end
     assert_selector "#essential_gap_exercise", text: "Thalès 3"
     click_on I18n.t("catalog.essentials.show.gap_action")
     remediation = play(correct: QUESTIONS)
@@ -39,7 +42,7 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     assert_selector "#session_gap_outcome", text: "Fiche de révision levée !"
 
     visit student_home_path
-    assert_no_selector "#student_home_gaps"
+    assert_no_selector "#student_next_step[data-state=review]"
 
     sign_out
     sign_in_as teacher

@@ -40,7 +40,7 @@ class RoleHomesTest < ApplicationSystemTestCase
     # UDR-0084 §3.5: no greeting any more; the page is named by a hidden « Accueil » title.
     assert_home student_home_path
     assert_selector "h1.sr-only", text: I18n.t("classroom.student_homes.show.page_title"), visible: :all
-    assert_selector "#student_home_classroom", text: "Tle D 1"
+    assert_selector "#student_next_step", text: /Tle D 1/i
     within(MAIN_SIDEBAR_NAV) { assert_no_link tn(:announcements) }
     assert_navigation active: { home: student_home_path, courses: courses_path, classroom: student_classroom_path }
     assert_signs_out_from_avatar_menu
@@ -100,21 +100,37 @@ class RoleHomesTest < ApplicationSystemTestCase
     within(MAIN_SIDEBAR_NAV) { assert_selector "a[aria-current='page'][href='#{announcements_path}']", text: tn(:announcements) }
   end
 
-  # CA-5 (accueil-eleve, UDR-0084 §3.3): on a phone, the student has no bottom bar; since mvp-teacher-student his avatar
-  # opens « Mon compte » (profile, PIN, dark mode, sign-out), the destinations being on the home (lot D); the teacher has no bar either.
-  test "CA-5 — on a phone, the student has no bottom bar and « Mon compte » lists no destination; the teacher has none either" do
+  # CA-5 (accueil-eleve, UDR-0084 §3.3), CA-D1 (mvp-teacher-student, Lot D): on a phone, the student has no bottom bar and reaches
+  # every destination from the home itself — Ma classe by the header of the card, Cours by the grid, « Mon compte » by the avatar
+  # of the band; the teacher has none either (UDR enseignant §3.3).
+  test "CA-5 — on a phone, the student reaches Ma classe, Cours and « Mon compte » from the home, without bottom bar; the teacher has none either" do
     sign_in_as @student
 
     with_mobile_viewport do
-      # A fresh visit: the sign-in toast, at the top of a phone, would cover the avatar.
+      # A fresh visit: the sign-in toast, at the top of a phone, would cover the band.
       visit student_home_path
       assert_no_selector "nav.bottom-0"
-      with_avatar_menu do
-        assert_selector "nav a", text: tn(:profile)
+      assert_no_selector "header.sticky", visible: :visible
+      find("#student_next_step a[href='#{student_classroom_path}']").click
+      assert_current_path student_classroom_path
+      assert_no_selector "nav.bottom-0"
+
+      visit student_home_path
+      within("nav#student_subjects") { click_link "SVT" }
+      assert_current_path courses_path, ignore_query: true
+      assert_no_selector "nav.bottom-0"
+
+      visit student_home_path
+      find("header.student-band a[href='#{student_menu_path}']").click
+      assert_current_path student_menu_path
+      # Lot E1: « Mon compte » lists no destination, those are on the home.
+      within("main") do
+        assert_link tn(:profile)
         [ tn(:home), tn(:courses), tn(:classroom) ].each { assert_no_link it }
       end
     end
 
+    visit student_home_path
     with_avatar_menu { click_on tn(:sign_out) }
     assert_current_path root_path
     sign_in_as @teacher

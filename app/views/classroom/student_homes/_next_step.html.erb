@@ -1,0 +1,37 @@
+<%# 🌐 UI · classroom/student_homes/_next_step — la carte du prochain exercice, un état à la fois %>
+<%# Rôle : lien de classe, puis l'état (next_step/<état>) à gauche, l'icône de la matière à droite ; sans classe, « Choisis ta classe » %>
+<%# UDR  : XXXX accueil élève §3.2 (carte), §3.3 (six états), §3.7, §3.8 (section nommée par son titre) %>
+<%# locals: (home:, daily:, form:, archived:, invite_href:) -%>
+<% step = home&.next_step %>
+<% state = step ? step.state : :no_classroom %>
+<%# L'icône : la matière de l'exercice ou de la fiche ; sans matière (tout fait, sans classe), une icône. %>
+<% slug = { late: step&.exercise&.material_slug, due: step&.exercise&.material_slug, review: step&.review&.material_slug,
+            unassigned: (daily.material_name.to_s.parameterize if daily&.state == :proposed) }[state] %>
+<% logo = %i[late due review].include?(state) %>
+<%= tag.section id: "student_next_step", "aria-labelledby": "student_next_step_title", data: { state: },
+                class: "relative rounded-card border border-line bg-white p-5 shadow-card" do %>
+  <div class="flex items-start gap-4">
+    <div class="min-w-0 flex-1 space-y-2">
+      <% if home %>
+        <%# CA-D9 : l'en-tête de la carte ouvre Ma classe. Le sigle de l'établissement, ou son nom s'il n'en a pas. %>
+        <%= link_to student_classroom_path, "aria-label": t("classroom.student_homes.next_step.class_link_label", classroom: home.classroom_name),
+                    class: "-mt-3 inline-flex min-h-tap max-w-full items-center gap-1 rounded-sm text-xs font-medium tracking-wide text-brand-strong uppercase focus-visible:outline-2 focus-visible:outline-brand" do %>
+          <span class="truncate"><%= t("classroom.student_homes.next_step.class_link", classroom: home.classroom_name,
+                                                                                         school: home.school_sigle || home.school_name) %></span>
+          <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "shrink-0" %>
+        <% end %>
+      <% end %>
+      <%= render "classroom/student_homes/next_step/#{state}", home:, step:, daily:, form:, archived:, invite_href: %>
+    </div>
+    <span class="grid size-22 shrink-0 place-items-center rounded-full bg-brand-soft text-brand-strong" aria-hidden="true">
+      <% if slug %>
+        <%= image_tag subject_illustration(slug).path, alt: "", class: "size-14", loading: "lazy" %>
+      <% else %>
+        <%= ui_icon(state == :no_classroom ? "academic-cap" : "sparkles", size: :xl) %>
+      <% end %>
+    </span>
+  </div>
+  <% if logo %>
+    <%= image_tag brand_logo, alt: "", class: "absolute right-5 bottom-5 size-4.5 rounded-sm" %>
+  <% end %>
+<% end %>

@@ -1,7 +1,8 @@
 <%# 🌐 UI · shared/navigation/_header — en-tête du shell : élève (logo, aide, menu de l'avatar) ; enseignant (avatar, aide) ; sinon logo, rôle, (aide de la direction), menu du compte %>
 <%# Rôle : filet de couleur du rôle en haut (pas pour l'enseignant) ; ni l'élève ni l'enseignant n'ont la lune : le mode sombre est dans « Mon compte » ; la direction et l'équipe gardent l'en-tête d'origine, la direction y gagne « Besoin d'aide ? » %>
-<%# UDR  : 0006, 0065 (interrupteur à côté de l'avatar : direction et équipe, lg+), 0061 (entrées de page :account_menu), 0080 §3.1, 0082 §3.1, 0084 §3.1, 0128, XXXX écrans enseignant §3.1 et élève §3.1 %>
-<header class="sticky top-0 z-40 h-bar border-b border-line bg-paper/90 backdrop-blur">
+<%# UDR  : 0006, 0065 (interrupteur à côté de l'avatar : direction et équipe, lg+), 0061 (entrées de page :account_menu), 0080 §3.1, 0082 §3.1, 0084 §3.1, 0128, XXXX écrans enseignant §3.1 et élève §3.1, XXXX accueil élève §3.1 (sous lg, le bandeau remplace l'en-tête) %>
+<%# UDR accueil élève §3.1 : une page qui porte le bandeau bleu (content_for :home_band) a déjà l'avatar et l'aide sous lg : l'en-tête n'y paraît qu'à partir de lg. %>
+<header class="<%= class_names("sticky top-0 z-40 h-bar border-b border-line bg-paper/90 backdrop-blur", "max-lg:hidden" => content_for?(:home_band)) %>">
   <%# UDR enseignant §3.1 : le filet de l'enseignant est retiré (doublon du bandeau de l'accueil). %>
   <% if (accent = role_accent(user.role)) %>
     <div class="absolute inset-x-0 top-0 h-1 <%= accent %>" aria-hidden="true"></div>

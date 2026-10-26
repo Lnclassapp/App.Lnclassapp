@@ -1,0 +1,15 @@
+<%# 🌐 UI · classroom/student_homes/next_step/_all_done — état 4 : tout l'assigné est fait, aucune fiche à revoir : « Tout est fait ! » %>
+<%# Rôle : « 6 exercices faits sur 6 », puis l'exercice du jour dans un bloc secondaire (titre, matière) et son bouton secondaire %>
+<%# UDR  : XXXX accueil élève §3.3 (état 4) %>
+<%# locals: (home:, step:, daily:, form:, archived:, invite_href:) -%>
+<p class="text-xs font-medium tracking-wide text-mute uppercase"><%= t("classroom.student_homes.next_step.all_done.overline") %></p>
+<h2 id="student_next_step_title" class="font-display text-lg leading-snug font-medium text-ink"><%= t("classroom.student_homes.next_step.all_done.title") %></h2>
+<%= render "classroom/student_homes/next_step/progress", step: %>
+<div id="student_next_step_daily_block" class="space-y-1 rounded-ln bg-mist p-3">
+  <p class="text-xs font-medium tracking-wide text-mute uppercase"><%= t("classroom.student_homes.next_step.all_done.daily") %></p>
+  <% if daily.state == :proposed %>
+    <p class="text-sm font-medium break-words text-ink"><%= daily.exercise_title %></p>
+    <p class="text-meta text-mute"><%= daily.material_name %></p>
+  <% end %>
+</div>
+<%= render "classroom/student_homes/next_step/daily", daily:, scope: "all_done", variant: :secondary %>
