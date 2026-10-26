@@ -2,11 +2,11 @@ require "application_system_test_case"
 
 # CA-E1 (mvp-teacher-student, lot E1) — UDR « écrans élève sans répétition » §3.1, §3.8. At 390 px, on a page other than the
 # home (« Cours »), the avatar of the header opens « Mon compte » full screen: « Mon profil », « Modifier mon code secret »,
-# « Mode sombre », « Se déconnecter », and nothing else. Escape closes it and gives the focus back to the avatar. On a computer
-# the panel only has to open and close (the 400 px side panel is lot O2). The page /students/menu and the markup are covered
-# by test/controllers/classroom/student_menus_controller_test.rb.
+# « Mode sombre », « Se déconnecter », and nothing else. Escape closes it and gives the focus back to the avatar. CA-E7 (lot O2): at
+# 1440 px, the same panel is a 400 px side panel on the right, closed by Escape, the cross or the backdrop, the focus back on the
+# avatar. The page /students/menu and the markup are covered by test/controllers/classroom/student_menus_controller_test.rb.
 class Identity::StudentAvatarMenuTest < ApplicationSystemTestCase
-  DESKTOP_VIEWPORT = [ 1280, 900 ].freeze
+  DESKTOP_VIEWPORT = [ 1440, 900 ].freeze
   AVATAR = "header button#avatar-menu-button".freeze
   PANEL = "dialog#avatar-menu".freeze
 
@@ -25,18 +25,42 @@ class Identity::StudentAvatarMenuTest < ApplicationSystemTestCase
     assert_selector "#{PANEL}[open]", visible: true
   end
 
-  test "CA-E1: at 390 px, the avatar opens « Mon compte » full screen with its four entries; Escape gives the focus back" do
-    # On a computer, the panel only has to open and close without breaking the page.
+  test "CA-E7: at 1440 px, « Mon compte » is a 400 px panel on the right; Escape, the cross and the backdrop close it, the focus goes back" do
     with_mobile_viewport(DESKTOP_VIEWPORT) do
       visit courses_path
       open_panel
-      within(PANEL) { assert_text "Awa Koné" }
+
+      box = page.evaluate_script("(() => { const r = document.querySelector('#{PANEL}').getBoundingClientRect(); " \
+                                 "return [r.width, r.height, r.right, innerWidth, innerHeight] })()")
+      assert_in_delta 400, box[0], 1
+      assert_in_delta box[3], box[2], 1
+      assert_in_delta box[4], box[1], 1
+      # CA-E8: the header is the avatar and the name; « Mon établissement » is in the list, « Ma classe » is not.
+      within(PANEL) do
+        assert_text "Awa Koné"
+        assert_no_text "Tle D 1 · Lycée moderne 2"
+        assert_link tn("account_panel.entries.school"), href: student_school_path
+        assert_no_link tn(:classroom)
+      end
+
       page.send_keys(:escape)
+      assert_no_selector PANEL, visible: true
+      assert focused?("#avatar-menu-button")
+
+      open_panel
+      find(PANEL).click(x: -700, y: 0)
+      assert_no_selector PANEL, visible: true
+      assert focused?("#avatar-menu-button")
+
+      open_panel
+      within(PANEL) { find("button[aria-label='#{I18n.t('components.modal.close')}']").click }
       assert_no_selector PANEL, visible: true
       assert focused?("#avatar-menu-button")
       assert_selector "aside nav a", text: tn(:home), visible: true
     end
+  end
 
+  test "CA-E1: at 390 px, the avatar opens « Mon compte » full screen with its four entries; Escape gives the focus back" do
     with_mobile_viewport do
       visit courses_path
       assert_no_selector PANEL, visible: true

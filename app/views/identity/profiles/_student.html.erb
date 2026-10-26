@@ -1,8 +1,12 @@
-<%# 🌐 UI · identity/profiles/_student — « Mon profil » de l'élève : « Mes informations » seule, six lignes, sans carte en tête %>
+<%# 🌐 UI · identity/profiles/_student — « Mon profil » de l'élève : téléphone, « Mes informations » seule en six lignes ; dès lg, carte bleue au nom seul puis quatre lignes %>
 <%# Rôle : une colonne (pleine, 720 px dès 700 px) ; le code secret, le mode sombre et « Se déconnecter » sont dans « Mon compte » · locals : profile %>
-<%# ADR  : 0055 · UDR : 0041 (amendée), 0065, 0084 (cadre de l'accueil), 0089 §3.1 à §3.5 (carte bleue retirée), écrans élève sans répétition §3.2 %>
+<%# ADR  : 0055 · UDR : 0041 (amendée), 0065, 0084 (cadre de l'accueil), 0089 §3.1 à §3.5, écrans élève sans répétition §3.2 (six lignes) et §3.6 bis (carte bleue dès lg) %>
 <%# grid-cols-1 = minmax(0, 1fr) : un nom long ne peut pas élargir la colonne. Le même cadre que l'accueil (UDR-0084 §3.5). %>
 <div id="student_profile" class="mx-auto grid w-full max-w-180 grid-cols-1 gap-4">
   <%= ui_page_header title: t(".title"), back: { label: t(".back"), href: home_path_for(current_actor.role) } %>
+  <%# Ordinateur seulement (UDR §3.6 bis) : à 390 px, la page reste celle du lot E1. Le cadre reste en place quand profile_names/update remplace la carte. %>
+  <div class="hidden lg:block">
+    <%= render "student_identity", profile: %>
+  </div>
   <%= render "student_information", profile: %>
 </div>
