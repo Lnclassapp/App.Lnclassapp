@@ -8,7 +8,7 @@ problematique: L'inscription élève tient sur une page longue en trois rubrique
 
 | | |
 |---|---|
-| **Statut** | Accepté (porteur, 2026-10-23 : « 1. oui 2. oui 3. oui » ; choix du porteur le 2026-10-23, écran par écran) |
+| **Statut** | Accepté (porteur, 2026-10-23 : « 1. oui 2. oui 3. oui » ; choix du porteur le 2026-10-23, écran par écran) · ordinateur (§3.5 bis) ajouté le 2026-10-24 |
 | **Date** | 2026-10-23 |
 | **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
 | **ADR lié** | ADR-XXXX-code-de-classe-a-six-caracteres (le code revient en base) |
@@ -68,6 +68,19 @@ Le pilote du 27 octobre passe par les contacts du porteur : un enseignant écrit
 ### 3.5 Erreurs renvoyées par le serveur
 
 Le serveur renvoie la page en 422 comme aujourd'hui (`render_form`). Le contrôleur Stimulus ouvre **la première étape qui contient un champ en erreur** (classe → 1, nom/genre/numéro → 2, code secret → 3). Le refus général (`#student-registration-refusal`) s'affiche en haut de l'étape ouverte. 429 : message « Trop de tentatives » à l'étape 1. Lien de classe invalide, archivé ou régénéré : la page s'ouvre à l'étape 1, jamais sur une erreur.
+
+### 3.5 bis Sur ordinateur (≥ lg)
+
+Décidé par le porteur le 2026-10-24 (phase ordinateur, maquettes à 1440 et 1024 px), option B contre la colonne centrée recommandée.
+
+- **Deux colonnes** dans un cadre de 960 px centré, sous la rangée logo Lnclass · « Besoin d'aide ? » : à gauche un **panneau de 360 px**, à droite le formulaire de l'étape (440 px au plus), espacés de 40 px.
+- **Le panneau ne change pas d'une étape à l'autre** (porteur, contre la variante « bienvenue au premier écran seulement ») : titre « Bienvenue sur Lnclass » (18 px, 500) et phrase d'accueil, puis la **liste des trois étapes** (rond de 28 px numéroté ; coche quand l'étape est faite ; étape en cours en 16 px, 500), puis « Déjà un compte ? Se connecter » en bas. Hauteur minimale 540 px.
+- **Couleurs : `bg-brand-strong`, texte blanc** (porteur, contre `brand-soft` recommandé) ; ronds des étapes faites et en cours en blanc à chiffre `brand-strong`, étape à venir en contour blanc ; liens blancs soulignés. Contraste blanc sur `brand-strong` 5,29:1.
+- **La liste remplace la barre en trois segments** sur ordinateur ; « Étape N sur 3 » reste en haut à droite du formulaire, « ‹ Retour » à gauche (mêmes règles qu'au §3.1).
+- **Le rappel de classe passe dans le panneau**, sous l'étape 1 cochée : « 3e B · Collège Moderne 1 de Tiassalé » (13 px) et « Ce n'est pas ta classe ? › » ; il n'est pas répété au-dessus du formulaire.
+- La carte de bienvenue et le titre « Créer ton compte élève » du téléphone ne sont pas répétés dans la colonne du formulaire : le panneau les porte.
+- Cascade « Je n'ai pas de code » : dans la colonne du formulaire, tuiles inchangées.
+- Accessibilité : la liste des étapes est une `ol` avec `aria-current="step"` sur l'étape en cours ; la région `aria-live` du §3.8 reste la seule annonce.
 
 ### 3.6 Jetons
 

@@ -8,7 +8,7 @@ problematique: Le relevé des écrans élève a trouvé la même information à 
 
 | | |
 |---|---|
-| **Statut** | Accepté (porteur, 2026-10-23 : « 1. oui 2. oui 3. oui » ; choix du porteur le 2026-10-23, écran par écran) |
+| **Statut** | Accepté (porteur, 2026-10-23 : « 1. oui 2. oui 3. oui » ; choix du porteur le 2026-10-23, écran par écran) · ordinateur (§3.6 bis) ajouté le 2026-10-24, sans rien changer au téléphone |
 | **Date** | 2026-10-23 |
 | **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
 | **ADR lié** | — |
@@ -33,6 +33,7 @@ Une information, une place. L'accueil porte les destinations (UDR de l'accueil) 
 - Entrées, dans cet ordre : en-tête (avatar, nom, « 3e B · Collège Moderne 1 de Tiassalé ») · **Mon profil** · **Modifier mon code secret** · **Mode sombre** (interrupteur, `theme_controller`) · séparateur · **Se déconnecter** (`text-ink`, pas de rouge).
 - Retirés pour l'élève : Accueil, Cours, Ma classe, Mon historique, Ajouter ma photo, Besoin d'aide (et les destinations du rôle affichées sous lg).
 - Le menu est un **panneau plein écran « Mon compte »** (titre et croix en haut), le même que celui de l'enseignant (porteur, 2026-10-23). Il remplace la liste déroulante sous l'avatar.
+- **Sur ordinateur (≥ lg) : panneau latéral droit de 400 px** (porteur, 2026-10-24), pleine hauteur, au-dessus d'un voile `bg-ink/40` ; même contenu, même ordre. Échap, la croix ou un clic sur le voile le ferment ; le focus revient sur l'avatar.
 - La page `student_menu_path` (coque Android) suit la même liste.
 
 ### 3.2 Profil (`identity/profiles/_student*.html.erb`)
@@ -63,6 +64,22 @@ Une information, une place. L'accueil porte les destinations (UDR de l'accueil) 
 - Sous la recherche, une seule ligne : « 19 fiches de cours · Progression DPFC 2026-2027 ».
 - Chaque fiche devient une **ligne compacte** dans une carte par matière : titre 14 px, « Leçon 3 » 13 px `text-mute`, chevron ; ligne entière cliquable, ≥ 44 px ; pastille « En cours » gardée.
 - Retirés : le lien « Commencer / Reprendre la fiche de cours » de chaque carte et la mention de progression sur chaque fiche. En-têtes de matière inchangés.
+
+### 3.6 bis Sur ordinateur (≥ lg)
+
+Décidé par le porteur le 2026-10-24 sur maquettes à 1440 et 1024 px. **Ne change rien au téléphone** (porteur, 2026-10-24 : les écrans téléphone validés le 2026-10-23 font foi). Gabarit commun : barre du haut, barre latérale Accueil · Cours · Ma classe (entrée active `bg-brand-soft text-brand-strong`), contenu centré de **912 px** au plus.
+
+- **« Mon compte »** : panneau latéral droit de 400 px (§3.1). **Sur ordinateur seulement**, la liste est : en-tête (avatar, nom, « 3e B · établissement ») · Mon profil · **Mon établissement** · Modifier mon code secret · Mode sombre · Se déconnecter. « Ma classe » n'y entre pas (porteur, 2026-10-24 : « uniquement sur ordinateur, mes choix d'hier pour le téléphone »).
+- **Ma classe** : carte de classe, puis « Fiches de cours assignées » (bande horizontale), pleine largeur ; dessous **deux colonnes 2/3 – 1/3** : à gauche « Exercices assignés » puis « Fiches à revoir », à droite « Exercices traités ».
+- **Fiche de révision (élève)** : **deux colonnes** ; à gauche la fiche (contenu en `max-w-prose`), à droite une colonne de **300 px** avec la carte « Exercices », **collante** (`sticky top-6`). Enseignant et équipe gardent la page actuelle.
+- **Résultat de session** : **deux colonnes** ; à gauche une colonne de **340 px collante** (badge, titre, note, maîtrise, progrès, « Recommencer ») ; à droite la carte « Correction ».
+- **Mon profil** : une colonne de **720 px** centrée. **Sur ordinateur seulement** : en tête, la **carte bleue** au style du profil de Develop (dégradé `brand-strong`, avatar de 112 px à anneau blanc et bouton « + » de la photo, **nom seul** en blanc 20 px, graisse 500), puis « Mes informations » en **quatre lignes** au style de `_student_row` (pastille d'icône carrée `bg-brand-soft`, libellé au-dessus de la valeur, action `text-brand-strong` et chevron) : Photo · Nom · Numéro · Inscrit·e le. Ni Classe ni Établissement : l'établissement a son écran, la classe est dans l'en-tête du menu.
+- **Mon établissement** (nouvel écran, **ordinateur seulement**, ouvert depuis « Mon compte ») : colonne de 720 px, « ‹ Accueil », titre « Mon établissement », carte « Informations » de quatre lignes en lecture seule, même style : Nom · Sigle (absente s'il n'y en a pas) · DRENA · Type. Rien d'autre.
+- **Cours** (**ordinateur seulement**, le téléphone garde le §3.6) : les **leçons d'une seule matière** ; en haut, **les 6 matières en pastilles** (rond d'icône 32 px + nom, 44 px de haut), celle affichée pleine `bg-brand-strong` texte blanc (`aria-current="page"`), les autres blanches à bordure `border-line-strong` ; « Cours » de la barre latérale ouvre la matière de la dernière case touchée, sinon la première de la grille. Sous la recherche, « 6 leçons · Progression DPFC 2026-2027 ». **Une carte par leçon**, sur **deux colonnes** (`items-start`) dans l'ordre du programme : « LEÇON N » (12 px majuscules `text-mute`), titre (16 px, 500), « En cours » s'il y a lieu, puis **ses fiches** en lignes entières cliquables ≥ 44 px, avec « À revoir » (`bg-brand-soft text-brand-strong`) si besoin ; au-delà de 3 fiches, « Voir les N fiches ». Exception à l'UDR-0013 (fiches listées sur la carte) pour l'élève sur ordinateur seulement.
+- **Fond de page `bg-mist`** sur tous les écrans élève dès lg, contenus en cartes blanches (porteur, 2026-10-24, option A ; voir UDR accueil §3.1).
+- Couleurs : uniquement les jetons de l'UDR palette.
+
+**Téléphone inchangé** (porteur, 2026-10-24) : à 390 px, le menu, le profil et Cours restent ceux des §3.1, §3.2 et §3.6, validés le 2026-10-23. Le menu à « Mon établissement », le profil à carte bleue et 4 lignes, l'écran « Mon établissement » et Cours par leçons sont **décidés pour l'ordinateur seulement**. Les porter au téléphone reste une idée pour plus tard, à rouvrir seulement si le porteur le demande.
 
 ### 3.7 États obligatoires
 
