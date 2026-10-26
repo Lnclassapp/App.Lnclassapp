@@ -67,6 +67,8 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | `_class_picker.html.erb` garde `font-display font-bold` (légendes, nom de l'établissement) | Partagé avec « Choisis ta classe » et « Changer de classe », hors de la fiche du Lot B ; le balayage des graisses est le Lot Z | Lot Z |
 | Les trois étapes s'affichent un instant avant la connexion de Stimulus | Report accepté par le porteur (2026-10-24, point 3) | Lot de finition |
 | Sous-ligne des étapes en `text-sm` (14 px) au lieu de 13 px | Aucun jeton de 13 px, les valeurs arbitraires sont interdites | À trancher avec la palette (Lot P) |
+- Lot D (2026-10-26) : E1 avait laissé rouges trois tests système qui cherchaient « Cours », « Ma classe » et « Besoin d'aide ? » dans le menu de l'avatar (`help_test`, `help_sheet_test`, `student_classroom_test`) ; remis au comportement d'E1 et de D à la reprise du lot.
+- Lot D (2026-10-26) : sous 700 px, hors de l'accueil, l'élève n'a plus d'accès à la feuille « Besoin d'aide ? » : l'en-tête la cache, « Mon compte » (E1) ne la porte plus et le bandeau de l'accueil mène à la page /aide. Les tests « téléphone » de `help_sheet_test` se jouent donc à 700 px. À trancher par le porteur : le bandeau ouvre la feuille, ou l'aide revient dans l'en-tête au téléphone.
 
 ## Clôture
 

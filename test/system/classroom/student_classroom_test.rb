@@ -28,7 +28,7 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
   def rect(id) = page.evaluate_script("document.getElementById(#{id.to_json}).getBoundingClientRect().toJSON()")
 
   # CA-1, CA-5 : à 390 px, depuis la carte de l'accueil (Lot D : le bandeau remplace l'en-tête) ; « Ma classe » en surbrillance, ni retour « Accueil » ni barre du bas.
-  test "at 390 px, from the avatar menu: no « Accueil » link, the classroom, 3 assigned exercises then « Voir plus », the score" do
+  test "at 390 px, from the home's card: no « Accueil » link, the classroom, 3 assigned exercises then « Voir plus », the score" do
     # Challenger : avec trois cours, la bande élargissait toute la page (485 px pour 390) ; seule la bande doit défiler.
     # Audit ux-pages-eleve (2026-10-06) : un titre d'exercice réel, tronqué sur une ligne, l'élargissait aussi (611 px).
     create_assignment(classroom: @classroom, assigned_at: 1.minute.ago, assignable: create_exercise(
@@ -49,9 +49,6 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
 
       assert_no_selector "#main nav[aria-label='#{I18n.t('components.back_link.label')}']"
       assert_no_selector "nav.bottom-0"
-      find("header button#avatar-menu-button").click
-      assert_selector "#avatar-menu a[aria-current=page].bg-brand-soft[href='#{student_classroom_path}']", text: tn(:classroom)
-      page.send_keys(:escape)
 
       within "#student_classroom_header" do
         assert_selector "h2", text: "Tle D 1"
