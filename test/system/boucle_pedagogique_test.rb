@@ -293,7 +293,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
     find("li[id='classroom_#{classroom.public_id}'] a").click
     assert_selector "#classroom_header h1", text: "Tle D 1"
-    link = find("#classroom_link [data-clipboard-text-value]")["data-clipboard-text-value"]
+    link = find("#classroom_link [data-clipboard-text-value^='http']")["data-clipboard-text-value"]
     assert_equal join_classroom_url(classroom.reload.link_token, host: URI(link).host, port: URI(link).port), link
 
     # ADR-0072 : un cours ne s'assigne plus ; sa page du catalogue n'offre aucune action à l'enseignant.
@@ -386,8 +386,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_toast t("classroom.student_registrations.create.welcome")
     assert_current_path student_home_path
 
-    assert_selector "#student_home_classroom", text: "Tle D 1"
-    within("#student_home_exercises li", text: EXERCISE) { click_on t("classroom.student_homes.assigned_exercise.start") }
+    assert_selector "#student_next_step", text: /Tle D 1/i
+    within("#student_next_step", text: EXERCISE) { click_on t("classroom.student_homes.next_step.due.start") }
     assert_current_path %r{\A/sessions/[^/]+\z}
     assert_selector "h1", text: EXERCISE
 

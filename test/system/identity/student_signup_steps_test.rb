@@ -1,6 +1,7 @@
 require "application_system_test_case"
 
-# CA-C1 to CA-C6 (UDR « inscription élève en trois étapes »), in a real browser: one form cut in three steps in the page.
+# CA-C1 to CA-C6, CA-C8, CA-C9 (UDR « inscription élève en trois étapes »), in a real browser (1400 px wide: the computer layout,
+# the blue panel of §3.5 bis; the phone has its own case at 390 px): one form cut in three steps in the page.
 # The class code opens step 1 and moves on by itself once it is recognised; the link lands on step 2; the cascade (« Je n'ai
 # pas de code ») moves on when a classroom is touched; step 2 moves on about a second after the last key, announced in an
 # aria-live region; « ‹ Retour » loses nothing; a server error reopens the step that holds it. There is no « Continuer ».
@@ -19,7 +20,11 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
     visit new_student_registration_path
 
     assert_step 1
-    assert_selector "#signup-welcome", text: "Bienvenue sur Lnclass"
+    # CA-C8: the panel (360 px, the same at every step) replaces the welcome card and the bar.
+    assert_panel_step 1
+    assert_equal 360, evaluate_script("document.querySelector('#signup-panel').getBoundingClientRect().width").round
+    assert_no_selector "#signup-welcome", visible: :visible
+    assert_no_selector "#signup-progress", visible: :visible
     assert_selector "#signup-back", visible: :hidden
     assert_no_button "Continuer"
     assert_selector "fieldset[data-step='2']", visible: :hidden
@@ -28,7 +33,10 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
     fill_in "student_registration[join_code]", with: @code.downcase
 
     assert_step 2
-    assert_selector "#signup-classroom-recap", text: /3e B.*Collège Moderne 1 de Tiassalé/m
+    # CA-C9: the class found is in the panel under step 1, and not repeated above the form.
+    assert_panel_step 2
+    assert_selector "#signup-panel li[data-step='1'] #signup-panel-recap", text: /3e B.*Collège Moderne 1 de Tiassalé/m
+    assert_no_selector "#signup-classroom-recap", visible: :visible
     assert_selector "#signup-live", text: I18n.t("#{FORM}.step_announce", n: 2, title: I18n.t("#{FORM}.you")), visible: :all
     assert_selector "legend", text: I18n.t("#{FORM}.you"), obscured: false
     assert_equal "legend", page.evaluate_script("document.activeElement.tagName").downcase
@@ -63,11 +71,13 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
     choose I18n.t("genders.female")
     fill_in "student_registration[contact]", with: "0701020304"
     assert_step 3
+    assert_panel_step 3
     assert_selector "#signup-live", text: I18n.t("#{FORM}.step_announce", n: 3, title: I18n.t("#{FORM}.security")), visible: :all
 
     click_on I18n.t("#{FORM}.back")
 
     assert_step 2
+    assert_panel_step 2
     assert_field "student_registration[last_name]", with: "KOUASSI"
     assert_field "student_registration[contact]", with: "0701020304"
     assert_checked_field I18n.t("genders.female")
@@ -102,8 +112,9 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
     visit join_classroom_path(@classroom.reload.link_token)
 
     assert_step 2
-    assert_selector "#signup-classroom-recap", text: /3e B/
-    assert_selector "#signup-welcome", text: "Bienvenue sur Lnclass"
+    assert_panel_step 2
+    assert_selector "#signup-panel #signup-panel-recap", text: /3e B/
+    assert_no_selector "#signup-classroom-recap", visible: :visible
     assert_selector "#signup-back", visible: :hidden
     assert_no_selector "fieldset[data-step='1']", visible: :all
     assert_link I18n.t("#{FORM}.other_classroom")
@@ -157,7 +168,7 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
 
     assert_step 2
     assert_selector "#student_registration_contact_error", text: I18n.t("#{ERRORS}.contact.taken")
-    assert_selector "#signup-classroom-recap", text: /3e B/
+    assert_selector "#signup-panel #signup-panel-recap", text: /3e B/
     assert_field "student_registration[last_name]", with: "KOUASSI"
   end
 
@@ -174,6 +185,14 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
   end
 
   private
+
+  # CA-C8: the panel says the same at every step; only the step in progress (aria-current) moves.
+  def assert_panel_step(number)
+    assert_selector "#signup-panel", text: "Bienvenue sur Lnclass"
+    assert_selector "#signup-panel", text: I18n.t("classroom.student_registrations.new.have_account")
+    assert_selector "#signup-panel a", text: I18n.t("classroom.student_registrations.new.sign_in")
+    assert_equal [ number ], page.all("#signup-panel [aria-current=step]").map { it["data-step"].to_i }
+  end
 
   def assert_step(number, settle: nil)
     sleep settle if settle

@@ -1,10 +1,10 @@
 <%# 🌐 UI · catalog/courses/_course_card — carte-vitrine d'un cours du catalogue (UDR-0001, CA-26) %>
-<%# Rôle : toute la carte mène au cours ; matière, niveau et série (sauf élève), titre, sous-titre, pied « Ouvrir le cours → » ; statut pour l'équipe, sauf « Publié » ; élève : sans badge, bouton d'avancement %>
-<%# ADR  : 0035, 0090 · UDR : 0001, 0005, 0013 (amendement du 2026-10-05 ter), 0057, 0085 (§3.3 : Commencer, Reprendre, Revoir) · aucune liste de fiches essentielles sur la carte %>
+<%# Rôle : toute la carte mène au cours ; matière, niveau et série (sauf élève), titre, sous-titre, pied « Ouvrir le cours → » ; statut pour l'équipe, sauf « Publié » ; élève : ligne compacte entière cliquable, leçon et pastille « En cours » %>
+<%# ADR  : 0035, 0090 · UDR : 0001, 0005, 0013 (amendement du 2026-10-05 ter), 0057, 0085 (§3.3 : « Reprendre » rouvre la dernière fiche lue), XXXX écrans élève sans répétition §3.6 · aucune liste de fiches essentielles sur la carte %>
 <%# locals: (course:, show_status:, student: false) -%>
 <%# UDR-0013, amendement du 2026-10-05 : « Publié » est l'état normal, l'équipe ne voit que Brouillon ou Archivé. %>
 <% status = (course.status if show_status && course.status != "published") %>
-<%# UDR-0085 §3.3 : « Reprendre » rouvre la dernière fiche lue ; « Commencer » et « Revoir », la page du cours. Ouvrir une
+<%# UDR-0085 §3.3 : « Reprendre » rouvre la dernière fiche lue ; sinon la page du cours. Ouvrir une
     fiche la retient (ADR-0090) : pas de préchargement au survol, qui la servirait sans l'ouvrir. %>
 <% resume = student && course.progress == :started %>
 <% href = resume ? course_essential_path(course.slug, course.resume_essential_slug) : course_path(course.slug) %>
@@ -12,26 +12,29 @@
                 # Une année scolaire (« 2026-2027 ») ne se coupe pas à son tiret.
                 safe_join(course.subtitle.split(/(\d{4}-\d{4})/).map { it.match?(/\A\d{4}-\d{4}\z/) ? tag.span(it, class: "whitespace-nowrap") : it })
               end %>
+<%# UDR écrans élève §3.6 : « Progression DPFC 2026-2027 » est écrit une fois, sous la recherche ; la ligne ne garde que la leçon. %>
+<% lesson = (course.subtitle.to_s.split(/\s+[·–—-]\s+/).grep_v(/\AProgression DPFC/i).join(" · ").presence if student) %>
 <li id="course_<%= course.slug %>">
   <% if student %>
-    <%= ui_card href:, padding: :sm, class: "group h-full", data: ({ turbo_prefetch: false } if resume) do %>
-      <div class="flex h-full flex-col">
-        <h3 class="font-display text-base leading-tight font-medium text-balance text-ink sm:text-lg"><%= course.name %></h3>
-        <% if subtitle %>
-          <p class="mt-1.5 line-clamp-2 text-sm text-pretty text-mute"><%= subtitle %></p>
-        <% end %>
-        <div class="flex-1"></div>
-        <div class="mt-4 flex items-center justify-between gap-2 border-t border-line pt-3">
-          <span class="inline-flex items-center gap-2 text-sm font-medium text-brand-strong">
-            <%# La coche est décorative : le libellé « Revoir le cours » suffit (UDR-0085 §3.7). %>
-            <% if course.progress == :done %>
-              <%= ui_icon "check-circle", variant: :solid, class: "text-success" %>
+    <%# UDR écrans élève §3.6 : la ligne entière est le lien (≥ 44 px) ; titre, leçon et pastille « En cours », chevron. %>
+    <%= link_to href, data: ({ turbo_prefetch: false } if resume),
+                class: "group flex min-h-tap items-center gap-3 px-4 py-3 transition hover:bg-mist active:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand" do %>
+      <div class="min-w-0 flex-1">
+        <span class="block text-sm font-medium text-ink"><%= course.name %></span>
+        <% if lesson || course.progress != :new %>
+          <p class="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-mute">
+            <% if lesson %><span class="min-w-0 text-pretty"><%= lesson %></span><% end %>
+            <% if course.progress == :started %>
+              <%= ui_badge t(".progress.started"), tone: :brand, size: :sm %>
+            <% elsif course.progress == :done %>
+              <%# La coche est décorative : « Terminée » est lu par les lecteurs d'écran. %>
+              <%= ui_icon "check-circle", variant: :solid, size: :sm, class: "text-success" %>
+              <span class="sr-only"><%= t(".progress.done") %></span>
             <% end %>
-            <%= t(".progress.#{course.progress}") %>
-          </span>
-          <%= ui_icon "arrow-right", variant: :mini, size: :sm, class: "text-brand-strong transition group-hover:translate-x-1" %>
-        </div>
+          </p>
+        <% end %>
       </div>
+      <%= ui_icon "chevron-right", variant: :mini, class: "shrink-0 text-mute transition group-hover:translate-x-0.5" %>
     <% end %>
   <% else %>
     <%= ui_card href:, class: "group h-full" do %>

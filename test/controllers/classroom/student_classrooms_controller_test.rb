@@ -75,7 +75,36 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     assert_equal %w[student_classroom_header student_classroom_courses student_classroom_assigned student_classroom_treated],
                  sections
-    assert_select "#student_classroom .lg\\:grid-cols-2 > #student_classroom_assigned + #student_classroom_treated"
+    assert_select "#student_classroom .lg\\:grid-cols-2 > div > #student_classroom_assigned"
+    assert_select "#student_classroom .lg\\:grid-cols-2 > #student_classroom_treated"
+  end
+
+  # CA-E3 (mvp-teacher-student, option A) : avec une fiche à revoir, la section vient juste après « Exercices assignés »,
+  # dans la même colonne, une ligne par fiche vers la fiche de cours ; sans fiche à revoir, rien.
+  test "CA-E3: « Fiches à revoir » sits right after the assigned exercises, one link per sheet to review" do
+    create_teacher(school: @classroom.school, classrooms: [ @classroom ])
+    course = course_named("Génétique")
+    gap = create_gap(student: @student, essential: create_essential(course:, name: "La méiose"))
+    sign_in_as @student
+
+    get student_classroom_path
+
+    assert_equal %w[student_classroom_header student_classroom_courses student_classroom_assigned student_classroom_gaps
+                    student_classroom_treated], sections
+    assert_select "#student_classroom_assigned + #student_classroom_gaps" do
+      assert_select "h2, h3", text: tl("pending_gaps.title")
+      assert_select "a[href=?]", course_essential_path(course.slug, gap.essential.slug), text: including("La méiose")
+    end
+  end
+
+  test "CA-E3: without a sheet to review, no « Fiches à revoir » section" do
+    create_gap(student: @student, essential: create_essential(course: course_named("Génétique")), status: "remediated")
+    sign_in_as @student
+
+    get student_classroom_path
+
+    assert_select "#student_classroom_gaps", 0
+    assert_no_match(/#{Regexp.escape(tl("pending_gaps.title"))}/, response.body)
   end
 
   # CA-3 (UDR-0086 §3.3) : sans enseignant sur Lnclass, la carte titrée sous celle de la classe, et le partage WhatsApp de

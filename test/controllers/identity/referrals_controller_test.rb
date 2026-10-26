@@ -239,11 +239,14 @@ class Identity::ReferralsControllerTest < ActionDispatch::IntegrationTest
     assert_empty card & block
   end
 
-  test "the class selection page leads to the invitation" do
+  # Mvp-teacher-student, lot L (maquette enseignant 05) : « Quelles classes enseignez-vous ? » ne porte plus « Inviter un
+  # collègue » ; l'invitation part de l'accueil (case « Inviter », lot G) et de la carte de la barre latérale.
+  test "the class selection page no longer carries the invitation" do
     sign_in_as @teacher
 
     get teacher_classrooms_path
 
-    assert_select "a[href='#{teacher_invite_path}']", text: /#{I18n.t("classroom.teaching_selections.index.invite")}/
+    assert_response :success
+    assert_select "main a[href='#{teacher_invite_path}']", 0
   end
 end

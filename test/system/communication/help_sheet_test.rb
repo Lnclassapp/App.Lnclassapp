@@ -9,11 +9,13 @@ require "application_system_test_case"
 # détour aussi (BL-20, test/integration/communication/articles_test.rb). Amendement du 2026-10-06 : sous lg, le bouton
 # quitte l'accueil. UDR-0080 §3.1 (app-android) : « Besoin d'aide ? » est dans l'en-tête de l'élève, à toute largeur ;
 # il ne passe plus par le menu du compte. UDR-0084 §3.1, §3.2 (accueil-eleve) : dès 700 px seulement ; en dessous, il
-# est dans le menu de l'avatar, et le focus revient à l'avatar.
+# était dans le menu de l'avatar. Mvp-teacher-student : « Mon compte » (lot E1) ne le porte plus, et sur l'accueil, sous lg,
+# le bandeau (lot D) remplace l'en-tête et son « Besoin d'aide ? » mène à /aide. Porteur, 2026-10-26 : hors de l'accueil, l'aide
+# reste dans l'en-tête à toute largeur ; la feuille « téléphone » se joue à 390 px, sur « Cours ».
 class Communication::HelpSheetTest < ApplicationSystemTestCase
   DESKTOP_VIEWPORT = [ 1280, 900 ].freeze
   TRIGGER = "a[aria-controls=help-sheet]".freeze
-  AVATAR = "header button#avatar-menu-button".freeze
+  PHONE_VIEWPORT = [ 390, 844 ].freeze
 
   setup { sign_in_as create_student(classroom: create_classroom) }
 
@@ -22,12 +24,7 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
 
   # L'entrée glisse de 0,75 rem (open:animate-slide-up) : la boîte se mesure une fois l'animation finie.
   def open_sheet
-    if page.has_selector?("header #{TRIGGER}", visible: true, wait: 0)
-      click_on tr("trigger")
-    else
-      find(AVATAR).click
-      within("#avatar-menu") { click_on tr("trigger") }
-    end
+    click_on tr("trigger")
     assert_selector "dialog#help-sheet[open]", visible: true
     page.document.synchronize do
       settled = page.evaluate_script(<<~JS)
@@ -52,8 +49,8 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
   def trigger_focused? = page.evaluate_script("document.activeElement.matches('#{TRIGGER}')")
 
   test "on a phone, the sheet rises from the bottom, at least a quarter high, with a handle and a close button" do
-    with_mobile_viewport do
-      visit student_home_path
+    with_mobile_viewport(PHONE_VIEWPORT) do
+      visit courses_path
       open_sheet
 
       box = geometry
@@ -73,10 +70,10 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
     end
   end
 
-  test "on a phone, the focus lands on « Questions fréquentes », even with « Blog » in the footer; Escape gives it to the avatar" do
+  test "on a phone, the focus lands on « Questions fréquentes », even with « Blog » in the footer; Escape gives it back" do
     create_article
-    with_mobile_viewport do
-      visit student_home_path
+    with_mobile_viewport(PHONE_VIEWPORT) do
+      visit courses_path
       open_sheet
 
       within(sheet) { assert_link "Blog" }
@@ -84,7 +81,7 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
 
       sheet.send_keys(:escape)
       assert_no_selector "dialog#help-sheet", visible: true
-      assert page.evaluate_script("document.activeElement.matches('#{AVATAR}')"), "le focus n'est pas revenu sur l'avatar"
+      assert trigger_focused?, "le focus n'est pas revenu sur « Besoin d'aide ? »"
     end
   end
 
@@ -127,8 +124,8 @@ class Communication::HelpSheetTest < ApplicationSystemTestCase
   # UDR-0057 dans la carte (UDR-0061 §3.8) : aucune action principale (R1), trois lignes au plus (R3), une seule
   # couleur d'accent pour les ronds (R5) ; l'accueil derrière garde sa propre règle.
   test "the sheet passes the sobriety rule" do
-    with_mobile_viewport do
-      visit student_home_path
+    with_mobile_viewport(PHONE_VIEWPORT) do
+      visit courses_path
       assert_single_primary_action scope: "#main"
       open_sheet
 

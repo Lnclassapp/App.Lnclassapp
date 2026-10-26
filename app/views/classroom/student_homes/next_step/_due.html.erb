@@ -1,0 +1,5 @@
+<%# 🌐 UI · classroom/student_homes/next_step/_due — état 1 : l'exercice dont l'échéance est la plus proche, « Commencer l'exercice » ou « Reprendre » %>
+<%# Rôle : sans retard, l'exercice à rendre en premier ; une session en cours se reprend %>
+<%# UDR  : XXXX accueil élève §3.3 (état 1) %>
+<%# locals: (home:, step:, daily:, form:, archived:, invite_href:) -%>
+<%= render "classroom/student_homes/next_step/exercise", step:, scope: "due" %>

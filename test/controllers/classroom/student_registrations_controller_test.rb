@@ -109,6 +109,49 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_select "form#student-registration-form fieldset[data-step='1'] ~ fieldset[data-step='2'] ~ fieldset[data-step='3']"
   end
 
+  # CA-C8, UDR « inscription élève en trois étapes » §3.5 bis: on a computer, one blue panel on the left, the same whatever the step
+  # (the page is the same; only the step marked `aria-current` changes), shown from lg up and replacing the three-segment bar.
+  test "CA-C8: the panel carries the welcome, the three steps in a list with the current one marked, and « Déjà un compte ? »" do
+    get new_student_registration_path
+
+    assert_select "#signup-panel.hidden.lg\\:flex.bg-brand-strong.text-white" do
+      assert_select "h1", text: I18n.t("#{PAGE}.welcome")
+      assert_select "ol#signup-panel-steps li[data-step]", 3
+      assert_select "ol#signup-panel-steps li[aria-current=step]", 1
+      assert_select "ol#signup-panel-steps li[data-step='1'][aria-current=step]", text: /#{I18n.t("#{FORM}.classroom")}/
+      assert_select "a[href=?]", new_session_path, text: I18n.t("#{PAGE}.sign_in")
+      assert_select "p", text: /#{I18n.t("#{PAGE}.have_account")}/
+    end
+    assert_select "#signup-progress.lg\\:hidden"
+    assert_select "#signup-welcome.lg\\:hidden"
+    assert_select "#signup-signin.lg\\:hidden"
+  end
+
+  test "CA-C8: a link arrives at step 2, the panel marks step 2 and step 1 done" do
+    get join_classroom_path(@classroom.reload.link_token)
+
+    assert_select "#signup-panel ol li[aria-current=step]", 1
+    assert_select "#signup-panel ol li[data-step='2'][aria-current=step]"
+    assert_select "#signup-panel ol li[data-step='1'] [data-done]:not([hidden])", 1
+  end
+
+  # CA-C9: the class found is shown in the panel, under step 1, with « Ce n'est pas ta classe ? ›»; the recap above the form is kept
+  # for the phone and hidden from lg up.
+  test "CA-C9: the link's class is in the panel under step 1, and the recap above the form is hidden from lg up" do
+    get join_classroom_path(@classroom.reload.link_token)
+
+    assert_select "#signup-panel ol li[data-step='1'] #signup-panel-recap:not([hidden])", text: /3e 2.*Lycée Moderne de Cocody/m
+    assert_select "#signup-panel #panel-other-classroom[href=?]", new_student_registration_path
+    assert_select "#signup-classroom-recap.lg\\:hidden"
+  end
+
+  test "CA-C9: without a class found, the panel recap is empty and hidden" do
+    get new_student_registration_path
+
+    assert_select "#signup-panel-recap[hidden]", 1
+    assert_select "#signup-panel-recap:not([hidden])", 0
+  end
+
   test "CA-C3: a valid classroom link opens at step 2 with the recap and the welcome card, no step 1, no « Retour »" do
     get join_classroom_path(@classroom.reload.link_token)
 

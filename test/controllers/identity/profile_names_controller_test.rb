@@ -54,15 +54,16 @@ class Identity::ProfileNamesControllerTest < ActionDispatch::IntegrationTest
                    "current" => { "first_name" => "Aya Marie", "last_name" => "Koné" } }, event.metadata)
   end
 
-  # UDR-0089 §3.1, §3.2: the student's card sent back still says « Élève en … » and shows the school row.
-  test "a student with a classroom gets back the blue card with their classroom and the rows with their school" do
+  # UDR-0089 §3.2; CA-E9 (lot O2): the card sent back has the name alone, the rows keep the school row (under lg).
+  test "a student with a classroom gets back the blue card with the name alone and the rows with their school" do
     student = create_student(first_name: "Aya", last_name: "Koné",
                              classroom: create_classroom(school: create_school(name: "Lycée Classique d'Abidjan"), name: "3e B"))
     sign_in_as student
 
     rename(as: :turbo_stream)
 
-    assert_select "turbo-stream[target=profile_identity] template", text: /Élève en 3e B/
+    assert_select "turbo-stream[target=profile_identity] template #profile_identity h2", "Aya Marie Koné"
+    assert_no_match(/Élève en/, response.body)
     assert_select "turbo-stream[target=profile_information] template li", text: /Établissement\s+Lycée Classique d'Abidjan/
   end
 

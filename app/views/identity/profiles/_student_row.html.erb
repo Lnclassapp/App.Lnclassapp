@@ -1,7 +1,7 @@
 <%# 🌐 UI · identity/profiles/_student_row — une ligne du profil de l'élève : pastille d'icône, libellé, valeur, action et chevron %>
 <%# Rôle : avec href, la ligne entière est un lien vers sa fenêtre (frame « modal ») ou, avec frame: "_top", vers une page ; 48 px au moins ; sans href, lecture seule %>
-<%# UDR  : 0089 §3.2, §3.7 (nom accessible « action libellé, valeur »), 0101 §3.1 (frame) · locals : icon, label, value, action, href, aria_label, wrapper, frame %>
-<%# locals: (icon:, label:, value:, action: nil, href: nil, aria_label: nil, wrapper: :li, frame: "modal") -%>
+<%# UDR  : 0089 §3.2, §3.7 (nom accessible « action libellé, valeur »), 0101 §3.1 (frame) · locals : icon, label, value, action, href, aria_label, wrapper, frame, css_class (lot O2 : `lg:hidden`) %>
+<%# locals: (icon:, label:, value:, action: nil, href: nil, aria_label: nil, wrapper: :li, frame: "modal", css_class: nil) -%>
 <% body = capture do %>
   <span class="grid size-10 shrink-0 place-items-center rounded-ln bg-brand-soft text-brand-strong" aria-hidden="true">
     <%= ui_icon icon %>
@@ -15,7 +15,7 @@
     <%= ui_icon "chevron-right", variant: :mini, class: "text-mute transition group-hover:translate-x-0.5" %>
   <% end %>
 <% end %>
-<%= content_tag wrapper do %>
+<%= content_tag wrapper, class: css_class do %>
   <% if href %>
     <%= link_to href, data: { turbo_frame: frame },
                 "aria-label": aria_label || t("identity.profiles.student_information.row_label", action:, label: label.downcase, value:),

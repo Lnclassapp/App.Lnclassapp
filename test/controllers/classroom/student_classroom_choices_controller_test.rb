@@ -271,6 +271,36 @@ class Classroom::StudentClassroomChoicesControllerTest < ActionDispatch::Integra
     assert I18n.exists?("#{ERRORS}.join_code.unknown")
   end
 
+  # Lot D (accueil élève, état 6): the code typed on the home is refused on this page, with its field and its error under it.
+  test "an unknown code comes back in 422 with the field filled and the error under it, linked to the field" do
+    sign_in_as @student
+    get new_student_classroom_choice_path
+
+    join_by_code "zzzzzz"
+
+    assert_response :unprocessable_entity
+    # The code has its own small form and button, above the list, which has its own: choosing a class never resends the code.
+    assert_select "form#student-classroom-code-form[action=?]", student_classroom_choices_path do
+      assert_select "input[name='student_classroom_choice[join_code]'][value=zzzzzz][aria-invalid=true][required]"
+      assert_select "button[type=submit]", text: I18n.t("classroom.student_homes.no_classroom.submit")
+    end
+    assert_select "form#student-classroom-choice-form input[name*=join_code]", 0
+    assert_select "form#student-classroom-choice-form #student-classroom-choice-submit"
+    assert_select "#student_classroom_choice_join_code_error", text: I18n.t("#{ERRORS}.join_code.unknown")
+    assert_select "input[name='student_classroom_choice[join_code]'][aria-describedby~=student_classroom_choice_join_code_error]"
+  end
+
+  test "the list alone, with a valid classroom and no code, enters the classroom and lands home (after a refused code)" do
+    sign_in_as @student
+    join_by_code "zzzzzz"
+    assert_response :unprocessable_entity
+
+    choose
+
+    assert_redirected_to student_home_path
+    assert_equal [ [ @other.id, "standard" ] ], open_memberships
+  end
+
   test "the classroom the student was removed from is refused by its code, in 403: only the link brings him back" do
     sign_in_as @student
 

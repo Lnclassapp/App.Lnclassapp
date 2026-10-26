@@ -52,6 +52,8 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     # IL-02, UDR-0081 §3.6 : le bloc du lien a remplacé le code.
     assert_select "#{within_header} #classroom_link", 1
     assert_select "#{within_header} [id*=join_code], [data-controller~='classroom--join-code-copy']", 0
+    # CA-B7 : la ligne provisoire du code est dans le bloc du lien.
+    assert_select "#{within_header} #classroom_link #classroom_code", 1
     assert_select "#{within_header} details summary", text: /#{I18n.t("#{scope}.header.headcount_label")}/
     assert_select "#{within_header} details", text: /#{I18n.t("#{scope}.header.headcount_tip", max: 60)}/
     assert_select "#classroom_headcount", text: I18n.t("#{scope}.header.headcount", count: 2, max: 60)
@@ -537,6 +539,54 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
       assert_select "a[href='#{classroom_path(@classroom.public_id)}'][data-turbo-frame=_top]",
                     text: I18n.t("#{scope}.roster.clear_search")
     end
+  end
+
+  # CA-B7 (provisoire, MVP teacher-student) : le code de la classe, affiché K7M 4Q2 et copiable, dans le bloc du lien.
+  test "CA-B7 : l'enseignant de la classe voit « Code de la classe » avec son code et un bouton « Copier »" do
+    code = Entities::Classroom::JoinCode.display(@classroom.reload.join_code)
+    sign_in_as @teacher
+
+    get classroom_path(@classroom.public_id)
+
+    assert_response :success
+    assert_match(/\A[A-HJKMNP-Z2-9]{3} [A-HJKMNP-Z2-9]{3}\z/, code)
+    assert_select "#classroom_link #classroom_code" do
+      assert_select "#classroom_code_label", text: I18n.t("#{scope}.link.code_label")
+      assert_select "#classroom_code_value", text: code
+      assert_select "[data-clipboard-text-value='#{code}'] button[aria-label='#{I18n.t("#{scope}.link.code_copy_label")}']",
+                    text: I18n.t("#{scope}.link.code_copy")
+    end
+  end
+
+  test "CA-B7 : un enseignant d'une autre classe n'a ni la page ni le code" do
+    code = Entities::Classroom::JoinCode.display(@classroom.reload.join_code)
+    sign_in_as create_teacher(school: @school)
+
+    get classroom_path(@classroom.public_id)
+
+    assert_response :forbidden
+    assert_select "#classroom_code", 0
+    assert_no_match code, response.body
+  end
+
+  test "CA-B7 : après « Changer le lien et le code », le code affiché est le nouveau" do
+    old_code = Entities::Classroom::JoinCode.display(@classroom.reload.join_code)
+    sign_in_as @teacher
+
+    patch classroom_link_path(@classroom.public_id), as: :turbo_stream
+    new_code = Entities::Classroom::JoinCode.display(@classroom.reload.join_code)
+
+    assert_not_equal old_code, new_code
+    assert_select "turbo-stream[action=replace][target=classroom_link] template" do
+      assert_select "#classroom_code_value", text: new_code
+      assert_select "[data-clipboard-text-value='#{new_code}']"
+    end
+    assert_no_match old_code, response.body
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "#classroom_code_value", text: new_code
+    assert_no_match old_code, response.body
   end
 
   test "une classe vide, sans cours ni élève, le dit" do

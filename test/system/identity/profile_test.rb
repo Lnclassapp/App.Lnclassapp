@@ -4,7 +4,8 @@ require "application_system_test_case"
 # corrects their first name in the modal without a page reload, meets the 422 of an empty name, and their teacher
 # then sees the new name in the class list. A teacher and a team member read the information of their role.
 # UDR-0089 (CA-3, CA-4): on a phone the windows rise from the bottom. CA-E2 (lot E1): six rows, no blue card, and neither
-# the PIN, nor dark mode, nor « Se déconnecter » on the page (they are in « Mon compte »).
+# the PIN, nor dark mode, nor « Se déconnecter » on the page (they are in « Mon compte »). CA-E9 (lot O2): on a computer, the blue
+# card with the name alone and four rows (no Classe, no Établissement); the card follows the name edited in the modal.
 class Identity::ProfileTest < ApplicationSystemTestCase
   # Box of an element and size of the window, measured in the browser once the dialog has stopped sliding.
   def box(selector)
@@ -73,13 +74,16 @@ end
     sign_in_as @student
     open_profile
 
+    # CA-E9: on a computer, the card has the name alone and the information has four rows.
+    within("#profile_identity") { assert_selector "h2", text: "Aya Koné", exact_text: true }
+    assert_no_text "Élève en"
     within "#profile_information" do
       assert_text "Aya Koné"
       assert_text "07 01 02 03 04"
-      assert_text "Tle D 1"
       assert_text "1 septembre 2026"
+      assert_selector "li", count: 4
+      assert_no_text "Tle D 1"
     end
-    assert_no_selector "#profile_identity"
     assert_no_selector "#profile_security"
     assert_no_selector "#profile_sign_out"
 
@@ -103,8 +107,8 @@ end
         assert_text "Aya Marie Koné"
         # UDR-0089 §3.2: the card the Turbo Stream sends back is the student's one, as rows.
         assert_no_selector "p.truncate"
-        assert_selector "li", text: "Tle D 1"
       end
+      within("#profile_identity") { assert_selector "h2", text: "Aya Marie Koné", exact_text: true }
     end
     assert Orm::AuditEvent.exists?(action: "profile.name_changed", actor_id: @student.id)
 

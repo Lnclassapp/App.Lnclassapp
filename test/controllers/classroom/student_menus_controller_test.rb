@@ -3,7 +3,8 @@ require "test_helper"
 # CA-E1 (mvp-teacher-student, lot E1) — UDR « écrans élève sans répétition » §3.1. « /students/menu » (coque Android, bandeau de
 # l'accueil) rend le panneau « Mon compte » de l'élève en page ; l'avatar de l'en-tête (autres pages) ouvre le même panneau
 # en <dialog> plein écran. Même liste dans les deux cas : en-tête (avatar, nom, classe · établissement), « Mon profil »,
-# « Modifier mon code secret », « Mode sombre » (interrupteur), « Se déconnecter » ; rien d'autre.
+# « Modifier mon code secret », « Mode sombre » (interrupteur), « Se déconnecter » ; rien d'autre. Lot O2 (CA-E8) : dès lg seulement,
+# « Mon établissement » après « Mon profil », et l'en-tête sans « classe · établissement ».
 class Classroom::StudentMenusControllerTest < ActionDispatch::IntegrationTest
   setup do
     @classroom = create_classroom(name: "Tle D 1", school: create_school(name: "Lycée moderne 2"))
@@ -19,9 +20,15 @@ class Classroom::StudentMenusControllerTest < ActionDispatch::IntegrationTest
       assert_select "p", "Aya Kouassi"
       assert_select "p", "Tle D 1 · Lycée moderne 2"
       links = css_select("#{scope} nav[aria-label='#{tn('account_panel.label')}'] a.min-h-tap")
-      assert_equal [ [ profile_path, tn(:profile) ], [ edit_profile_pin_path, tn("account_panel.entries.secret") ] ],
+      # CA-E8 (lot O2): « Mon établissement » is in the list too, hidden under lg (the phone list is CA-E1's), no « Ma classe ».
+      assert_equal [ [ profile_path, tn(:profile) ], [ student_school_path, tn("account_panel.entries.school") ],
+                     [ edit_profile_pin_path, tn("account_panel.entries.secret") ] ],
                    links.map { [ it["href"], it.text.squish ] }
-      assert_select "nav a", 2
+      assert_select "nav li.hidden.lg\\:block a[href='#{student_school_path}']", 1
+      assert_select "nav li.hidden", 1
+      assert_select "nav a", 3
+      # The « class · school » line shows under lg only: on a computer the header is the avatar and the name.
+      assert_select "p.lg\\:hidden", "Tle D 1 · Lycée moderne 2"
       %i[student_home_path courses_path student_classroom_path student_archive_path help_path
          edit_profile_photo_path].each { assert_select "a[href='#{public_send(it)}']", 0, it.to_s }
       assert_select "[data-controller=theme] button[role=switch][aria-checked=false]", text: tn("account_panel.entries.dark_mode")
@@ -64,7 +71,7 @@ class Classroom::StudentMenusControllerTest < ActionDispatch::IntegrationTest
     get student_menu_path
 
     assert_select "main #student_menu img.ui-avatar[alt='Aya Kouassi']"
-    assert_select "main #student_menu nav li a", count: 2
+    assert_select "main #student_menu nav li a", count: 3
   end
 
   test "CA-E1: a teacher and the team are refused" do

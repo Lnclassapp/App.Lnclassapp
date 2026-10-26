@@ -13,7 +13,7 @@ class Assessment::StudentProgressTest < ApplicationSystemTestCase
   SESSIONS = "assessment.exercise_sessions".freeze
   QUESTIONS = 3
   FORBIDDEN = /stagne|baisse|essai/i
-  SENTENCES = %w[progress stable stagnant decline].freeze
+  SENTENCES = %w[progress stable decline].freeze
   # WCAG AA pour un texte de 14 px (text-sm).
   AA_CONTRAST = 4.5
   # « Recommencer » : le POST puis la page de la session, sous une suite chargée (session_result_test.rb).

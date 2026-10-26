@@ -139,7 +139,7 @@ module Queries
         hand_in(assignment, 65, at: Time.zone.local(2026, 10, 10, 10))
         follow_up = AssignmentFollowUpQuery.new.call(classroom_public_id: @classroom.public_id, public_id: assignment.public_id)
         detail = Assessment::ComprehensionDetailQuery.new.call(classroom_public_id: @classroom.public_id,
-                                                               assignment_public_id: assignment.public_id, badge: :bronze)
+                                                               assignment_public_id: assignment.public_id, badge: nil)
 
         row = file.assignments.sole
 
