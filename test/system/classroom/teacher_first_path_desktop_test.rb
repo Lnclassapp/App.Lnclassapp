@@ -14,6 +14,8 @@ class Classroom::TeacherFirstPathDesktopTest < ApplicationSystemTestCase
     levels = [ create_level(name: "6ème", position: 1, cycle: "first"), create_level(name: "5ème", position: 2, cycle: "first") ]
     levels.each { |level| create_classroom(school:, level:, name: "#{level.name} 1") }
     sign_in_as create_teacher(school:, onboarded: false)
+    # Depuis le lot G, l'enseignant arrive toujours sur l'accueil : « Quelles classes enseignez-vous ? » s'ouvre par son lien.
+    visit teacher_classrooms_path
 
     assert_selector "h1", text: I18n.t("classroom.teaching_selections.index.title")
     assert_selector "nav [aria-current='page']", text: "Classes"
