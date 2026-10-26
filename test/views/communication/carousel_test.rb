@@ -34,6 +34,24 @@ module Communication
       assert_select "section[data-communication--carousel-refocus-value]", 0
     end
 
+    # CA-D10 (Lot O1): from lg two cards are in view, side by side, for every role; only the student's band (link: false)
+    # becomes a white card on the mist page.
+    test "from lg, two cards are in view without a gap that would push the second out of the band, for every role" do
+      carousel([ card("a", "Une"), card("b", "Deux"), card("c", "Trois") ])
+
+      assert_select "ul.lg\\:-mx-1\\.5.lg\\:gap-0" do
+        assert_select "> li.sm\\:basis-1\\/2.lg\\:px-1\\.5", 3
+      end
+      assert_select "section#student_home_announcements.bg-mist.p-2\\.5"
+      assert_select "section#student_home_announcements[class*='lg:bg-paper']", 0
+    end
+
+    test "link: false — from lg the band is a white card with a line, on the mist page" do
+      carousel([ card("a", "Une") ], link: false)
+
+      assert_select "section#student_home_announcements.bg-mist.lg\\:border.lg\\:border-line.lg\\:bg-paper.lg\\:p-4.lg\\:shadow-card"
+    end
+
     test "AN-13 — the cross on every card but the official one" do
       carousel([ card("d", "Devoirs communs", author_role: :school_admin), card("f", "Nouvelles fiches"), card("r", "Rentrée", author_role: :team) ])
 

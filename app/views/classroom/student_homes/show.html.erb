@@ -1,5 +1,5 @@
 <%# 🌐 UI · classroom/student_homes/show — accueil élève : bandeau, carte du prochain exercice, grille des matières, annonces, historique %>
-<%# Rôle : le bandeau (hors de la colonne, sous lg), puis une colonne : la carte à cheval sur le bandeau, 7 cases, le carrousel, l'historique différé ; sans classe, la seule carte « Choisis ta classe » %>
+<%# Rôle : le bandeau (hors de la colonne, sous lg), puis une colonne (912 px au plus dès lg) : la carte, 7 cases, le carrousel, l'historique différé ; sans classe, la seule carte « Choisis ta classe » %>
 <%# ADR  : 0033, 0043, 0078, 0085, 0089 · UDR : 0071 §3.5, 0081 §3.5, XXXX accueil élève (§3.1 structure, §3.3 états) · titre « Accueil · Élève · Lnclass » %>
 <% page_title t(".page_title") %>
 <%# UDR-0084 §3.5 : ni « Bonjour » ni prénom ; la page garde son titre pour les lecteurs d'écran. %>
@@ -12,7 +12,7 @@
                                                                                          link: new_teacher_registration_url)) %>
 <%# grid-cols-1 = minmax(0, 1fr) : une ligne longue ne peut plus élargir la colonne, ni la page. -mt-12 : la carte déborde sur le
     bandeau (le shell garde 24 px de marge haute ; sans bandeau, dans la coque Android, elle reste à sa place) ; data-bleed-keep : les cartes restent dans la marge, arrondies, sous 640 px. %>
-<div id="student_home" data-bleed-keep class="<%= class_names("mx-auto grid w-full max-w-180 grid-cols-1 gap-6 lg:max-w-240", "-mt-12 lg:mt-0" => !lnclass_app?) %>">
+<div id="student_home" data-bleed-keep class="<%= class_names("mx-auto grid w-full max-w-180 grid-cols-1 gap-6 lg:max-w-228", "-mt-12 lg:mt-0" => !lnclass_app?) %>">
   <%= render "next_step", home: @home, daily: @daily, form: @form, archived: @archived, invite_href: %>
   <% if @home %>
     <%# UDR accueil élève §3.3 : sans classe, la grille, les annonces et l'historique sont masqués. %>
@@ -22,7 +22,9 @@
     <% if @announcements.any_readable? %>
       <%= render "communication/messages/carousel", carousel: @announcements, link: false %>
     <% end %>
-    <section id="student_history" aria-labelledby="student_history_title" class="space-y-3">
+    <%# CA-D10 : dès lg, une carte blanche sur le fond mist. %>
+    <section id="student_history" aria-labelledby="student_history_title"
+             class="space-y-3 lg:rounded-card lg:border lg:border-line lg:bg-paper lg:p-6 lg:shadow-card">
       <h2 id="student_history_title" class="font-display text-base font-medium text-ink"><%= t("classroom.student_homes.history.title") %></h2>
       <%= turbo_frame_tag Classroom::StudentHomesController::RECENT_ACTIVITY_FRAME, src: student_home_path, loading: :lazy,
                           target: "_top" do %>

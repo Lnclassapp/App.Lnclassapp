@@ -67,6 +67,36 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "header.sticky.max-lg\\:hidden", 0
   end
 
+  # CA-D10 (Lot O1): the wide page is the same markup with lg rules; nothing changes under lg.
+  test "CA-D10: on a computer the column is 912 px at most, « Mes matières » is titled and has seven columns, the announcements show two cards" do
+    create_message(author: create_team_member(second_factor: false), title: "Rentrée", published_at: 1.hour.ago, audience: "all")
+    sign_in_as @student
+
+    get student_home_path
+
+    assert_select "#student_home.lg\\:max-w-228.mx-auto.w-full"
+    assert_select "nav#student_subjects" do
+      assert_select "h2.hidden.lg\\:block", text: tl("subjects.label")
+      assert_select "ul.grid-cols-4.lg\\:grid-cols-7"
+    end
+    assert_select "section#student_home_announcements.lg\\:bg-paper.lg\\:border.lg\\:border-line"
+    assert_select "section#student_history.lg\\:bg-paper.lg\\:border.lg\\:border-line.lg\\:p-6"
+    # The mist background and the sidebar without profile card are the shell's, for every student page.
+    assert_select "body > div.fixed.hidden.lg\\:block.bg-mist[aria-hidden=true]"
+    assert_select "aside .ui-avatar, aside [role=img], aside p.font-medium", 0
+    assert_select "aside > nav[aria-label] a", 3
+  end
+
+  test "CA-D10: the other roles keep their page and their sidebar: no mist backdrop, the profile card stays" do
+    teacher = create_teacher(school: @classroom.school, material: @course.material, classrooms: [ @classroom ])
+    sign_in_as teacher
+
+    get teacher_home_path
+
+    assert_select "div.bg-mist.fixed", 0
+    assert_select "aside > div.rounded-card p.font-medium"
+  end
+
   test "CA-D2: two late exercises and one due Saturday: the oldest late one, « En retard · date », 1 other, « Le faire maintenant »" do
     assign_exercise("Retard récent", due_on: Date.yesterday)
     assign_exercise("Retard ancien", due_on: Date.current - 3, assigned_at: 5.days.ago)

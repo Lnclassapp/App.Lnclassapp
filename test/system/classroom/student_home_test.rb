@@ -4,9 +4,10 @@ require "application_system_test_case"
 # header, the card straddles it and says the next gesture, the grid has seven rounds, the history arrives in its frame. The states of
 # the card, the order of the exercises and the rest are proved in the query, controller and integration tests
 # (test/infrastructure/queries/classroom/student_home_query_test.rb, test/controllers/classroom/student_homes_controller_test.rb,
-# test/integration/identity/student_header_test.rb). The computer is only looked at: nothing is broken, no wide layout yet (CA-D10).
+# test/integration/identity/student_header_test.rb). The computer (CA-D10, Lot O1) has its own short test at 1440 px.
 class Classroom::StudentHomeTest < ApplicationSystemTestCase
   DESKTOP_VIEWPORT = [ 1280, 900 ].freeze
+  WIDE_VIEWPORT = [ 1440, 1000 ].freeze
 
   setup do
     @classroom = create_classroom(name: "Tle D 1", school: create_school(name: "Lycée Classique", sigle: "LCA"))
@@ -68,6 +69,37 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
       assert_selector "header.sticky", visible: :visible
       assert_no_selector "header.student-band", visible: :visible
       assert_selector "#student_next_step_title", text: "La méiose"
+      assert_equal page.evaluate_script("document.documentElement.clientWidth"),
+                   page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
+    end
+  end
+
+  # CA-D10 (Lot O1): the page is only measured; the markup rules are in test/controllers/classroom/student_homes_controller_test.rb.
+  test "on a computer (1440 px): 912 px beside a sidebar without profile card, no band, seven subjects on a line, two announcements, mist page" do
+    create_message(author: create_team_member(second_factor: false), title: "Rentrée", audience: "all", published_at: 1.hour.ago)
+    create_message(author: create_school_admin(school: @classroom.school, gender: "female", last_name: "Kamaté"), title: "Parents",
+                   school: @classroom.school, published_at: 2.hours.ago)
+
+    with_mobile_viewport(WIDE_VIEWPORT) do
+      visit student_home_path
+
+      assert_selector "header.sticky", visible: :visible
+      assert_no_selector "header.student-band", visible: :visible
+      assert_no_selector "aside .ui-avatar", visible: :all
+      assert_selector "aside nav a", count: 3
+
+      assert_operator find("#student_home").rect.width, :<=, 912
+      assert_operator find("#student_home").rect.x, :>=, find("aside").rect.width
+      tops = %w[#student_next_step #student_subjects #student_home_announcements #student_history].map { find(it).rect.y }
+      assert_equal tops.sort, tops, "les sections s'empilent dans l'ordre"
+      assert_equal 7, page.evaluate_script("getComputedStyle(document.querySelector('#student_subjects ul')).gridTemplateColumns.split(' ').length")
+      assert_selector "#student_subjects h2", text: I18n.t("classroom.student_homes.subjects.label"), visible: :visible
+
+      track = find("#student_home_announcements ul")
+      cards = all("#student_home_announcements li").map { it.rect }
+      assert_equal 2, cards.count { it.x + it.width <= track.rect.x + track.rect.width + 1 }, "deux annonces visibles"
+      assert_equal "rgb(244, 248, 251)", page.evaluate_script("getComputedStyle(document.querySelector('body > div.fixed.bg-mist')).backgroundColor")
+      assert_equal "rgb(255, 255, 255)", page.evaluate_script("getComputedStyle(document.querySelector('#student_next_step')).backgroundColor")
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
     end
