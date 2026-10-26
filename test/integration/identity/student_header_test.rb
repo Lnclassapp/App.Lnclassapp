@@ -92,7 +92,12 @@ class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
       assert_select "form[action='#{session_path}'] input[name=_method][value=delete]"
       assert_select "form[action='#{session_path}'] button", text: tn(:sign_out)
     end
-    assert_equal [ tn(:profile), tn("account_panel.entries.secret"), tn("account_panel.entries.dark_mode"), tn(:sign_out) ], menu_items
+    # CA-E8 (lot O2): « Mon établissement » joins the list from lg only, after « Mon profil »; the class line leaves the header on a computer.
+    assert_equal [ tn(:profile), tn("account_panel.entries.school"), tn("account_panel.entries.secret"), tn("account_panel.entries.dark_mode"),
+                   tn(:sign_out) ], menu_items
+    assert_select "#avatar-menu li.hidden.lg\\:block a[href='#{student_school_path}']", text: tn("account_panel.entries.school")
+    assert_select "#avatar-menu li.hidden", 1
+    assert_select "#avatar-menu p.lg\\:hidden", "Tle D 1 · Lycée moderne 2"
   end
 
   test "CA-3: with a photo, the avatar shows it, without badge, and « Mon compte » shows it too" do

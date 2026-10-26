@@ -1,6 +1,6 @@
 <%# 🌐 UI · identity/profiles/_student_information — « Mes informations » de l'élève (Queries::Identity::ProfileQuery::Row) %>
-<%# Rôle : Photo, Nom, Numéro (lignes à toucher), Classe, Établissement, Inscrit·e le (lecture seule) ; remplacée par profile_names/update %>
-<%# ADR  : 0055, 0060, 0095 · UDR : 0041 (amendée), 0047, 0089 §3.2 (sans classe : ni Classe ni Établissement), écrans élève sans répétition §3.2 (Classe sans action : le changement de classe n'est plus proposé) · locals : profile %>
+<%# Rôle : Photo, Nom, Numéro (lignes à toucher), Classe, Établissement (sous lg seulement : dès lg, la classe est dans « Mon compte » et l'établissement a son écran), Inscrit·e le ; remplacée par profile_names/update %>
+<%# ADR  : 0055, 0060, 0095 · UDR : 0041 (amendée), 0047, 0089 §3.2 (sans classe : ni Classe ni Établissement), écrans élève sans répétition §3.2 (Classe sans action : le changement de classe n'est plus proposé) et §3.6 bis (quatre lignes dès lg) · locals : profile %>
 <%# locals: (profile:) -%>
 <% photo_value = t(".photo_value.#{profile.photo_version ? :present : :absent}") %>
 <%= ui_card id: "profile_information", "aria-labelledby": "profile_information_title" do %>
@@ -14,8 +14,10 @@
                                                 action: t(".change"), href: edit_profile_contact_path %>
     <% if profile.classroom_name %>
       <%# CA-E2, CA-K2 : la classe se lit, elle ne se change pas ici. %>
-      <%= render "identity/profiles/student_row", icon: "academic-cap", label: t(".classroom"), value: profile.classroom_name %>
-      <%= render "identity/profiles/student_row", icon: "building-office-2", label: t(".school"), value: profile.school_name %>
+      <%= render "identity/profiles/student_row", icon: "academic-cap", label: t(".classroom"), value: profile.classroom_name,
+                                                  css_class: "lg:hidden" %>
+      <%= render "identity/profiles/student_row", icon: "building-office-2", label: t(".school"), value: profile.school_name,
+                                                  css_class: "lg:hidden" %>
     <% end %>
     <%= render "identity/profiles/student_row", icon: "calendar", label: t(".registered_on"),
                                                 value: l(profile.registered_on, format: :long) %>

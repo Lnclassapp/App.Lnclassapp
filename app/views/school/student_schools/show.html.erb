@@ -1,0 +1,18 @@
+<%# 🌐 UI · school/student_schools/show — « Mon établissement » de l'élève (Queries::School::StudentSchoolQuery::Row) %>
+<%# Rôle : « ‹ Accueil », titre, carte « Informations » de quatre lignes en lecture seule : Nom, Sigle (absente sans sigle), DRENA, Type %>
+<%# UDR  : écrans élève sans répétition §3.6 bis (colonne de 720 px, style de profiles/_student_row) · atteint depuis « Mon compte » dès lg %>
+<% page_title t(".page_title") %>
+<div id="student_school_page" class="mx-auto grid w-full max-w-180 grid-cols-1 gap-4">
+  <%= ui_page_header title: t(".title"), back: { label: t(".back"), href: home_path_for(current_actor.role) } %>
+  <%= ui_card id: "student_school", "aria-labelledby": "student_school_title" do %>
+    <h2 id="student_school_title" class="font-display text-lg leading-tight font-medium"><%= t(".information") %></h2>
+    <ul class="mt-2 divide-y divide-line">
+      <%= render "identity/profiles/student_row", icon: "building-office-2", label: t(".name"), value: @school.name %>
+      <% if @school.sigle %>
+        <%= render "identity/profiles/student_row", icon: "bars-3-bottom-left", label: t(".sigle"), value: @school.sigle %>
+      <% end %>
+      <%= render "identity/profiles/student_row", icon: "map-pin", label: t(".drena"), value: @school.drena_name %>
+      <%= render "identity/profiles/student_row", icon: "tag", label: t(".type"), value: t("school_types.#{@school.school_type}") %>
+    </ul>
+  <% end %>
+</div>

@@ -17,8 +17,8 @@ class Identity::ProfilePhotoDisplayTest < ActionDispatch::IntegrationTest
     assert_select "header button#avatar-menu-button img.ui-avatar[alt='Aya Koné'][src='#{@src}']"
     assert_select "aside img[alt='Aya Koné'][src='#{@src}']"
     assert_select "header dialog#avatar-menu img.ui-avatar[alt='Aya Koné'][src='#{@src}']", count: 1
-    # CA-E2 (lot E1): no blue card; the row says « Ta photo » and opens the modal.
-    assert_select "#profile_identity", 0
+    # CA-E2 (lot E1), CA-E9 (lot O2): the row says « Ta photo » and opens the modal; the blue card (from lg) shows the photo too.
+    assert_select "#profile_identity img.ui-avatar[alt='Aya Koné'][src='#{@src}']"
     assert_select "#profile_information a[href='#{edit_profile_photo_path}'][data-turbo-frame=modal]", text: /Photo\s+Ta photo\s+Changer/
   end
 
@@ -30,7 +30,7 @@ class Identity::ProfilePhotoDisplayTest < ActionDispatch::IntegrationTest
     assert_select "header button#avatar-menu-button [role=img][aria-label='Awa Traoré']", text: "AT"
     assert_select "header img[src*='/photo']", 0
     assert_select "header dialog#avatar-menu [role=img][aria-label='Awa Traoré']", text: "AT"
-    assert_select "#profile_identity", 0
+    assert_select "#profile_identity [role=img][aria-label='Awa Traoré']", text: "AT"
     assert_select "#profile_information a[href='#{edit_profile_photo_path}']", text: /Photo\s+Aucune photo\s+Ajouter/
   end
 
