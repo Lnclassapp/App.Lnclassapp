@@ -1060,6 +1060,16 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#lessons_empty", text: including(tl("index.no_class_title"))
   end
 
+  test "CA-E14: a student without a class who searches still gets the empty state, not an error" do
+    sign_in_as create_student
+
+    get courses_path(q: "x")
+
+    assert_response :success
+    assert_select "nav#lesson_materials", 0
+    assert_select "#lessons_empty", text: including(tl("index.no_class_title"))
+  end
+
   test "CA-E14: the teacher and the team keep their Cours, with no pills nor lessons block" do
     [ create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle, series: @course.series) ]), create_team_member ].each do |user|
       sign_in_as user

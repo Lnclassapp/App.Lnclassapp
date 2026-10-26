@@ -233,12 +233,13 @@
         <% end %>
       <% else %>
         <div id="lessons_empty">
-          <% if @filters[:q].present? %>
+          <%# Sans classe, pas de matière courante : l'état « sans classe » passe avant la recherche (current est nil). %>
+          <% if materials.empty? %>
+            <%= ui_empty_state title: t(".no_class_title"), description: t(".no_class_description"), icon: "user-group" %>
+          <% elsif @filters[:q].present? %>
             <%= ui_empty_state title: t(".no_match_title"), description: t(".student_no_match_description"), icon: "magnifying-glass" do %>
               <%= ui_button t(".clear_search"), href: courses_path(material: current.slug), variant: :secondary, icon: "x-mark" %>
             <% end %>
-          <% elsif materials.empty? %>
-            <%= ui_empty_state title: t(".no_class_title"), description: t(".no_class_description"), icon: "user-group" %>
           <% else %>
             <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "book-open" %>
           <% end %>
