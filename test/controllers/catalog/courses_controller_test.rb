@@ -71,13 +71,12 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
         assert_select "span", text: tl("course_group_title.count", count: 1)
       end
     end
-    # CA-1, CA-6 (UDR-0085 §3.3) : la carte ne répète pas la matière ; rien lu, « Commencer le cours » ouvre le cours.
-    assert_select "#course_#{@course.slug} a[href='#{course_path(@course.slug)}']" do
+    # CA-E6 (UDR écrans élève §3.6) : une ligne entière cliquable, d'au moins 44 px, sans « Commencer la fiche de cours ».
+    assert_select "#course_#{@course.slug} a.min-h-tap[href='#{course_path(@course.slug)}']" do
       assert_select "*", text: including("SVT"), count: 0
       assert_select "*", text: including("Tle D"), count: 0
-      assert_select "h3", text: "Génétique et évolution"
-      assert_select "p.line-clamp-2", text: including("Du gène à l'espèce")
-      assert_select "*", text: including(tl("course_card.progress.new"))
+      assert_select "span", text: "Génétique et évolution"
+      assert_select "p", text: including("Du gène à l'espèce")
       assert_select "*", text: including(tl("course_card.open")), count: 0
     end
     assert_no_match(/Brouillon de cours|Cours archivé/, response.body)
@@ -96,7 +95,26 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "a[href='#{courses_path}'][aria-current=page]", text: "Cours"
     assert_select "h1", text: "Cours"
-    assert_select "#courses_total", text: "3 fiches de cours"
+    assert_select "#courses_total", text: "3 fiches de cours · #{tl("index.student_progression")}"
+  end
+
+  # CA-E6 : « Progression DPFC » est écrit une fois, sous la recherche ; la ligne d'une fiche ne garde que la leçon.
+  test "CA-E6: a student reads « Progression DPFC » once, each row keeps its lesson only, in one card per subject" do
+    create_course(name: "Limites et continuité", subtitle: "Leçon 1 · Progression DPFC 2026-2027", level: @tle,
+                  material: create_material(name: "Mathématiques"))
+    @course.update!(subtitle: "Progression DPFC 2026-2027 · Leçon 3")
+    sign_in_as create_student_for(@course)
+
+    get courses_path
+
+    assert_equal 1, response.body.scan("Progression DPFC").size
+    assert_select "#courses_total", text: including(tl("index.student_progression"))
+    assert_select "li#course_#{@course.slug} a p", text: "Leçon 3"
+    assert_select "li a p", text: "Leçon 1"
+    assert_select "#courses_groups > section", 3
+    assert_select "#courses_groups > section > ul.divide-y", 3
+    assert_select "#courses_groups li", 3
+    assert_no_match(/Commencer la fiche de cours|Reprendre la fiche de cours|Revoir la fiche de cours/, response.body)
   end
 
   test "the team sees every course with its status, and opens « Nouveau cours » and « Importer des cours » in the modal" do
@@ -216,7 +234,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#courses.transition-opacity.aria-busy\\:opacity-50"
     assert_select "#courses_list > li", 1
     assert_select "#course_#{@course.slug}"
-    assert_select "#courses_total[aria-live=polite]", text: tl("index.total", count: 1)
+    assert_select "#courses_total[aria-live=polite]", text: including(tl("index.total", count: 1))
   end
 
   test "the search ignores case and accents, and combines with the filters (FU-47)" do
@@ -237,7 +255,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     get courses_path(q: "zzz"), headers: { "Turbo-Frame" => "courses" }
 
-    assert_select "#courses_total", text: tl("index.total", count: 0)
+    assert_select "#courses_total", text: including(tl("index.total", count: 0))
     assert_select "#courses_empty", text: including(tl("index.no_match_title"))
     # CA-5 (UDR-0085 §3.5)
     assert_select "#courses_empty", text: including(tl("index.student_no_match_description"))
@@ -254,7 +272,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_#{@published.slug}"
     assert_select "h1", 0
     assert_select "form#courses-filters", 0
-    assert_select "#courses_total", text: tl("index.total", count: 1)
+    assert_select "#courses_total", text: including(tl("index.total", count: 1))
   end
 
   test "no course matching the filters shows a way to clear them; an empty catalogue says so" do
@@ -319,7 +337,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       get courses_path
 
       assert_select "#course_#{@course.slug}", text: including(tl("course_card.open"))
-      %w[new started done].each { assert_no_match(including(tl("course_card.progress.#{it}")), response.body) }
+      %w[started done].each { assert_no_match(including(tl("course_card.progress.#{it}")), response.body) }
       assert_select "#courses_groups", 0
       assert_select "#courses_list svg.text-success", 0
       sign_out
@@ -375,9 +393,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # CA-7, CA-8 (UDR-0085 §3.3) : le bouton dit où en est l'élève ; « Reprendre » rouvre la dernière fiche lue (sans
-  # préchargement, qui la servirait sans l'ouvrir), « Revoir » porte la coche verte et ouvre le cours.
-  test "CA-6, CA-7, CA-8: the card says Commencer, Reprendre (last sheet read) or Revoir (green check)" do
+  # CA-E6 : la ligne dit où en est l'élève par la pastille « En cours » ; « Reprendre » rouvre toujours la dernière fiche lue
+  # (sans préchargement, qui la servirait sans l'ouvrir) ; une fiche de cours finie porte la coche verte.
+  test "CA-E6: the row carries « En cours » (last sheet read, no prefetch), or the green check once done" do
     student = create_student_for(@course)
     first = create_essential(course: @course, name: "La méiose")
     second = create_essential(course: @course, name: "La mitose")
@@ -388,12 +406,14 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_#{@course.slug} a[href='#{course_essential_path(@course.slug, second.slug)}'][data-turbo-prefetch=false]",
                   text: including(tl("course_card.progress.started"))
     assert_select "#course_#{@course.slug} svg.text-success", 0
-    assert_select "#course_#{@published.slug} a[href='#{course_path(@published.slug)}']", text: including(tl("course_card.progress.new"))
+    assert_select "#course_#{@published.slug} a[href='#{course_path(@published.slug)}']" do
+      assert_select "*", text: including(tl("course_card.progress.started")), count: 0
+    end
 
     create_essential_read(student:, essential: first, at: 1.day.ago)
     get courses_path
     assert_select "#course_#{@course.slug} a[href='#{course_path(@course.slug)}']" do
-      assert_select "*", text: including(tl("course_card.progress.done"))
+      assert_select ".sr-only", text: tl("course_card.progress.done")
       assert_select "svg.text-success", 1
     end
   end
@@ -407,7 +427,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     get courses_path
 
-    assert_select "#courses_total", text: tl("index.total", count: 32)
+    assert_select "#courses_total", text: including(tl("index.total", count: 32))
     assert_select "#courses_groups > section", 1
     assert_select "#courses_group_mathematiques h2", text: including(tl("course_group_title.count", count: 30))
     assert_select "#courses_groups li", 24

@@ -173,7 +173,7 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
   end
 
   # UDR-0013, amendement du 2026-10-02 (UDR-0057) : la vue d'une matière et la page cours, vues par l'élève à 390 × 844,
-  # passent la règle de sobriété. UDR-0085 §3.3 : la carte ne porte ni matière ni niveau, et son bouton dit « Commencer ».
+  # passent la règle de sobriété. UDR écrans élève §3.6 : la ligne ne porte ni matière ni niveau, et n'a plus de bouton « Commencer ».
   test "on a phone, the student's view of a subject and the course page pass the sobriety rule" do
     %w[Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
     sign_in_as create_student_for(@course)
@@ -185,7 +185,8 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
       assert_single_primary_action
       assert_blocks_above_fold "#student_courses > *", max: 5
       within("#course_#{@course.slug}") do
-        assert_text t("catalog.courses.course_card.progress.new")
+        assert_selector "a.min-h-tap", text: "Génétique et évolution"
+        assert_no_text "Commencer la fiche de cours"
         assert_no_text "SVT"
         assert_no_text "Tle"
       end

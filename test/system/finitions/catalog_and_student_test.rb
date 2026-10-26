@@ -104,7 +104,7 @@ module Finitions
       within("main nav") { click_on "Cours" }
       assert_current_path courses_path
       assert_title "Cours · Élève · Lnclass"
-      assert_selector "#courses_total", text: /\A\d+ fiches? de cours\z/
+      assert_selector "#courses_total", text: /\A\d+ fiches? de cours · Progression DPFC 2026-2027\z/
     end
 
     # UDR-0058 §3.3 (R4) : l'aide « Badges » / « Maîtrise » quitte l'accueil ; la page de l'exercice les explique.
