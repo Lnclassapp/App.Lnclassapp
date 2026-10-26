@@ -36,6 +36,7 @@
 | 2026-10-26 | Lot K : la ligne méta lit `materials.shortname` (« Maths ») et le nombre de questions ; clés `assessment.comprehension.badge_box` (« 3 élèves Or », au pluriel) en plus de `badge_count` ; trophée des cases en 20 px (`size-5`), l'échelle des espacements n'a pas 4,5 | `badge_count` sert aussi à la fiche d'élève, où l'on compte des exercices, pas des élèves ; l'UDR dit 18 px, aucun jeton ne l'offre | Non |
 | 2026-10-26 | Lot K : `_circle` reste (petit format seulement) : la page de la classe (`_assigned_exercises`, Lot I) le rend encore ; sa suppression complète est à faire dans le Lot I. `_badge_counts` existait déjà et reste intact (page classe et fiche d'élève) ; les cases du rapport sont le nouveau partiel `_badge_boxes` | Hors fiche : ne pas casser un écran qu'un autre lot réécrit | Non |
 | 2026-10-26 | Lot K : la direction répond toujours 403 sur ce rapport (`FollowAssignmentPolicy`, ADR-0072 §4.5 : elle ne voit ni retards ni noms) ; seuls l'enseignant et l'équipe le voient, avec la même vue | Le plan dit « la direction et l'équipe voient le même rapport » ; la politique et son test (403) disent le contraire pour la direction : à trancher par le porteur | Non |
+| 2026-10-26 | Lot B2 : le code de la classe (« Code de la classe · K7M 4Q2 », bouton « Copier ») est affiché dans le bloc du lien, provisoirement (CA-B7), pour l'enseignant, la direction et l'équipe | Porteur, 2026-10-26 : « la direction et l'équipe voient le code » ; captures validées | Non |
 
 ## Ce qui a dérapé
 
