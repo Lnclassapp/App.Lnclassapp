@@ -15,6 +15,7 @@
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
 - 2026-10-23 — La session cloud n'avait ni gems ni base : `.claude/hooks/session-start.sh` s'arrêtait sans message sur `ls -d …/chrome-linux/chrome` (Playwright range désormais Chromium sous `chrome-linux64/`), tué par `set -o pipefail` avant `bin/setup`. Corrigé par la PR `fix/session-start-chromium` (motif `chrome-linux*`, `|| true`). Leçon : un hook `set -euo pipefail` ne doit jamais laisser un `ls` sans correspondance tuer la suite.
+- 2026-10-26 — Même hook, deuxième arrêt : Corepack télécharge Yarn sur `repo.yarnpkg.com`, que le proxy cloud refuse (403), et `bin/setup` échoue sur `yarn`. Corrigé dans la même PR : `COREPACK_NPM_REGISTRY=https://registry.npmjs.org`, exporté aussi dans l'environnement de la session.
 - **Maquettes jamais commitées ni rassemblées** (2026-10-23 au 25) : chaque session gardait ses maquettes dans un conteneur éphémère et n'en envoyait qu'une archive. Le 26, il a fallu les reconstituer en rejouant les transcriptions de quatre sessions. Désormais, chaque envoi est une archive versionnée « vNN-date-contenu », avec un HISTORIQUE.txt, et une mémoire de passation est commitée dans `.ecc/memory/team/`.
 
 ## Ce qu'on a appris sur la codebase

@@ -39,6 +39,9 @@ if [ ! -x "$NODE_DIR/bin/node" ]; then
     tar -xJ -C "$NODE_DIR" --strip-components=1
 fi
 export PATH="$NODE_DIR/bin:$PATH"
+# Corepack downloads Yarn from repo.yarnpkg.com, which the cloud proxy refuses (403): the npm registry serves the
+# same release (@yarnpkg/cli-dist), so `yarn` works in bin/setup and in the session's shell.
+export COREPACK_NPM_REGISTRY=https://registry.npmjs.org
 corepack enable
 
 # --- Chrome for the system tests: the preinstalled Chromium and the chromedriver of the same version ------
@@ -80,6 +83,7 @@ fi
   echo "export PATH=\"$NODE_DIR/bin:$RBENV_ROOT/shims:$RBENV_ROOT/bin:\$PATH\""
   echo "export no_proxy=localhost,127.0.0.1,::1 NO_PROXY=localhost,127.0.0.1,::1"
   echo "export LANG=C.UTF-8 LC_ALL=C.UTF-8"
+  echo "export COREPACK_NPM_REGISTRY=$COREPACK_NPM_REGISTRY"
   if [ -n "${CHROME_BIN:-}" ]; then echo "export CHROME_BIN=$CHROME_BIN CHROMEDRIVER_PATH=$CHROMEDRIVER_PATH"; fi
 } > "$HOME/.lnclass-ci-env"
 cat "$HOME/.lnclass-ci-env" >> "$ENV_FILE"
