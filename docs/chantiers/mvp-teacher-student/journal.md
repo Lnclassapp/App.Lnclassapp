@@ -23,6 +23,7 @@
 | 2026-10-24 | Lot J : l'établissement choisi à l'étape 1 fait passer à l'étape 2 par `change->classroom--signup-steps#go` (paramètre `step=2`) posé sur un conteneur de `_school_fields`, pas dans `school/drena_schools/index` | Le conteneur survit au remplacement du cadre « schools » ; l'action `go` existe déjà dans le contrôleur de l'élève | Non |
 | 2026-10-24 | Lot J : les segments d'étape restent `bg-brand-strong`, pas `bg-teacher` (UDR enseignant §3.1) | Le contrôleur bascule en dur `bg-brand-strong` / `bg-line` ; le jaune demande une valeur de classe dans le contrôleur (hors lot) | À trancher avec le Lot P |
 | 2026-10-24 | Lot J : sur ordinateur, la page reste en une colonne de 28 rem centrée (comme l'inscription élève) ; les deux colonnes et le panneau jaune viennent au lot P4 | Téléphone d'abord (porteur, 2026-10-24) | Non |
+| 2026-10-26 | Lot J : le genre reste « Masculin » / « Féminin », pas « M. » / « Mme » (UDR §3.9, maquette v12 `enseignant/couleur/telephone/02`) | Le libellé vient de la clé partagée `genders.*` ; cinq tests système hors fiche (`invite_colleague`, `boucle_pedagogique`…) cochent le genre par ce libellé | À confirmer par le porteur |
 | 2026-10-24 | Lot J : la création du compte redirige vers `teacher_home_path` (CA-J4), plus vers `teacher_classrooms_path` | Tranché par l'orchestrateur : « il arrive sur l'accueil » ; un enseignant sans classe y est renvoyé une fois vers « Quelles classes enseignez-vous ? » (`HomeDestinationQuery`) | Non |
 
 ## Ce qui a dérapé
