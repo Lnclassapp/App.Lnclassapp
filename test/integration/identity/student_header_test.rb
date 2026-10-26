@@ -42,8 +42,9 @@ class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
     end
     tone = ComponentsHelper::AVATAR_TONES.values[student.public_id.sum % ComponentsHelper::AVATAR_TONES.size]
     assert_select "#{AVATAR} [role=img][class*='#{tone}']"
-    # Lot E: the left menu (lg and wider) shows the same colour as the header, not one drawn from the name.
-    assert_select "aside [role=img][aria-label='Awa Koné'][class*='#{tone}']"
+    # Lot O1: the left menu (lg and wider) has no profile card any more: the avatar is in the header, the menu is the navigation.
+    assert_select "aside [role=img]", 0
+    assert_select "aside > nav.bg-white a", 3
     # The name is never written in the header, outside the menu; no role badge, no account panel, no old account menu.
     assert_select "header > div.flex > div > span", text: "Awa Koné", count: 0
     assert_select "header .ui-badge", 0
