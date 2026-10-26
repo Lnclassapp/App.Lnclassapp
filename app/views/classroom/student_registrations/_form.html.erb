@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_registrations/_form — le formulaire d'inscription élève, un seul, découpé en trois fieldset par signup_steps_controller %>
 <%# Rôle : 1 Ta classe (code, ou cascade derrière « Je n'ai pas de code »), 2 Toi (rappel de classe, nom, prénoms, genre, numéro), 3 Ton code secret ; sans JavaScript les trois restent visibles ; 422/403/429 re-rendus %>
-<%# ADR  : 0037, 0050, 0083, 0085, XXXX-code-de-classe-a-six-caracteres · UDR : 0009, 0054, 0079, 0081 (§3.2), XXXX-inscription-eleve-en-trois-etapes (§3.1 à §3.8) %>
+<%# ADR  : 0037, 0050, 0083, 0085, XXXX-code-de-classe-a-six-caracteres · UDR : 0009, 0054, 0079, 0081 (§3.2), XXXX-inscription-eleve-en-trois-etapes (§3.1 à §3.8, §3.5 bis) %>
 <%# start : l'étape ouverte ; floor : la première étape qui existe (2 par un lien) ; recap : [classe, établissement] ou nil %>
 <%# locals: (start:, floor:, recap:) -%>
 <% steps = "classroom--signup-steps" %>
@@ -65,9 +65,9 @@
             data-action="input-><%= steps %>#personChanged change-><%= steps %>#personChanged">
     <%= legend.call(:you, t(".you_hint")) %>
     <%= render "classroom/student_registrations/step_alerts", step: 2, start:, floor: %>
-    <%# Le rappel de la classe du code ou du lien ; « Ce n'est pas ta classe ? » : le lien mène à la voie standard, le code revient à l'étape 1. %>
+    <%# Le rappel de la classe du code ou du lien ; « Ce n'est pas ta classe ? » : le lien mène à la voie standard, le code revient à l'étape 1. Dès lg, le rappel est dans le panneau (new.html.erb, CA-C9) : ici il est caché. %>
     <div id="signup-classroom-recap" <%= "hidden" unless recap %> data-<%= steps %>-target="recap"
-         class="rounded-ln border border-brand/30 bg-brand-soft px-4 py-3">
+         class="rounded-ln border border-brand/30 bg-brand-soft px-4 py-3 lg:hidden">
       <p class="text-xs tracking-wider text-mute uppercase"><%= t(".recap_label") %></p>
       <p class="text-base font-medium text-ink">
         <span data-<%= steps %>-target="recapName"><%= recap&.first %></span> ·
