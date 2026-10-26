@@ -211,14 +211,14 @@ Celles du [plan élève](plan.md#portes-de-sortie), plus :
 
 **Fichiers partagés avec la phase ordinateur de l'élève** (autre session) : le panneau « Mon compte » à droite de 400 px est décidé pour les deux rôles (UDR enseignant §3.4, UDR écrans élève). Aujourd'hui, `_account_panel` s'ouvre en `placement: :drawer`, qui est un tiroir **à gauche** de 20 rem (`dialog.dialog-drawer`, `application.tailwind.css`). Le placement à droite de 25 rem, `_account_panel.html.erb`, `_sidebar.html.erb`, `navigation_helper.rb` et `application.tailwind.css` ne doivent avoir **qu'un lot propriétaire pour les deux rôles**. P0 est ce lot si la phase élève ne l'a pas déjà pris ; sinon P0 attend le sien et ne garde que les écrans de retrait.
 
-| Lot | Écran | Dépend de | État au 26/10, 20 h |
+| Lot | Écran | Dépend de | État au 26/10, 21 h |
 |---|---|---|---|
-| P0 | Panneau « Mon compte » à droite, barre du haut et barre latérale, écrans de retrait dans le panneau (#310) | M, H, D ; lot équivalent de l'élève s'il existe | à faire (dépendances fusionnées) |
-| P1 | Accueil en page large (#311) | G, O1 (`_carousel`) | à faire (dépendances fusionnées) |
-| P2 | Page de classe et fiche d'un élève (#312) | I ; fusionne après P1 | à faire, attend P1 |
+| P0 | Panneau « Mon compte » à droite, barre du haut et barre latérale, écrans de retrait dans le panneau (#310) | M, H, D ; lot équivalent de l'élève s'il existe | à faire, **porteur** (réassigné le 26/10) |
+| P1 | Accueil en page large (#311) | G, O1 (`_carousel`) | à faire, **porteur** (réassigné le 26/10) |
+| P2 | Page de classe et fiche d'un élève (#312) | I ; fusionne après P1 | à faire, **porteur** (réassigné le 26/10), attend P1 |
 | P3 | Rapport d'un exercice (#309) | K | ✅ **fusionné** (`76f0af3`) |
 | P4 | Inscription (#307) | J | ✅ **fusionné** (`7da2330`) |
-| P5 | Cours, colonne de 40 rem (#313) | N | à faire (dépendances fusionnées) |
+| P5 | Cours, colonne de 40 rem (#313) | N | 🟡 **prêt à fusionner**, **Touré** avec l'accord du porteur (`-lot-p5`, `e7e5eee`) |
 | P6 | Déclarer, assigner, jours de séance (#308) | L | ✅ **fusionné** (`81b1bea`) |
 
 Aucun lot de P1 à P6 ne touche un fichier de P0 (vérifié sur la branche de chantier : la barre latérale prend son entrée active de `content_for :nav_key`, posé par chaque vue) : ils ne dépendent donc pas de P0.

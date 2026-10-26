@@ -251,14 +251,14 @@ Portes propres au pilote :
 >
 > **Ne change rien au téléphone** (porteur, 2026-10-24) : les lots O ne touchent qu'à ce qui s'affiche ≥ lg. Les écrans téléphone validés le 2026-10-23 (lots E1, E2) font foi. Le menu à « Mon établissement », le profil à carte bleue, l'écran « Mon établissement » et Cours par leçons sont **pour l'ordinateur seulement** (O2, O5) : chaque lot vérifie qu'à 390 px rien ne change.
 
-| Lot | Dépend de | En parallèle avec | État au 26/10, 20 h |
+| Lot | Dépend de | En parallèle avec | État au 26/10, 21 h |
 |---|---|---|---|
 | O1 — Accueil élève en page large | D | O2, O3, O4, O5, O6 | ✅ **fusionné** (`85f390d`) |
 | O2 — « Mon compte », profil et Mon établissement sur ordinateur | E1 | O1, O3, O4, O5, O6 | ✅ **fusionné** (`312d309`) |
 | O3 — Inscription en deux colonnes | C | tous | ✅ **fusionné** (`797fc39`) |
 | O4 — Ma classe, fiche de révision, résultat sur ordinateur | E2 | tous | ✅ **fusionné** (`dd3ae2d`) |
 | O5 — Cours par leçons sur ordinateur | E2 | tous | ✅ **fusionné** (`ed72cc0`) |
-| O6 — Page d'accueil publique sur ordinateur | F | tous | à faire |
+| O6 — Page d'accueil publique sur ordinateur | F | tous | ✅ **rien à coder** : F l'a livré, ordinateur compris (vérifié par Touré, #301) |
 
 ### Lot O1 — Accueil élève en page large
 
