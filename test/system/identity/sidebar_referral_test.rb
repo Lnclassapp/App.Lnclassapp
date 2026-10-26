@@ -50,7 +50,7 @@ class Identity::SidebarReferralTest < ApplicationSystemTestCase
     assert_equal 1, invite_page_requests
 
     within("aside nav") { click_on "Accueil" }
-    assert_selector "h1", text: "Bonjour, Aya"
+    assert_selector "h1", text: I18n.t("classroom.teacher_homes.show.page_title")
     assert_selector "aside turbo-frame#sidebar_referral #sidebar_referral_card", text: "Ambassadeur"
     within("aside nav") { click_on "Cours" }
     assert_current_path courses_path
@@ -65,7 +65,7 @@ class Identity::SidebarReferralTest < ApplicationSystemTestCase
   test "RE-19: on a 390 px phone the sidebar frame is never requested" do
     with_mobile_viewport do
       sign_in_as @teacher
-      visit teacher_home_path
+      visit teacher_invite_path # UDR enseignant §3.3 : le bloc a quitté l'accueil sous lg
 
       assert_selector "#invite_colleagues a#referral_link"
       assert_no_selector "#sidebar_referral_card"

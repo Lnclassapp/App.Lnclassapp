@@ -15,8 +15,10 @@ class Identity::AccountPanelTest < ApplicationSystemTestCase
   test "CA-T6: at 390 px, the teacher's avatar opens the panel from the left with its four entries, Escape closes it" do
     sign_in_as create_teacher(first_name: "Awa", last_name: "Traoré")
 
+    # La barre de l'accueil enseignant porte son propre avatar (bandeau jaune, lien vers /teachers/menu) : ces deux tests lisent
+    # la <dialog> de l'en-tête du shell, sur une page sans bandeau.
     with_mobile_viewport do
-      visit teacher_home_path
+      visit profile_path
 
       assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
       within("header") do
@@ -57,8 +59,10 @@ class Identity::AccountPanelTest < ApplicationSystemTestCase
   test "once open, the account panel keeps no transform" do
     sign_in_as create_teacher(first_name: "Awa", last_name: "Traoré")
 
+    # La barre de l'accueil enseignant porte son propre avatar (bandeau jaune, lien vers /teachers/menu) : ces deux tests lisent
+    # la <dialog> de l'en-tête du shell, sur une page sans bandeau.
     with_mobile_viewport do
-      visit teacher_home_path
+      visit profile_path
       find(TRIGGER).click
       find("dialog#account_panel[open]", visible: true)
       page.document.synchronize do

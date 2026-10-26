@@ -22,7 +22,7 @@ class Identity::InviteColleagueTest < ApplicationSystemTestCase
   test "CP-04, CP-05: the home offers the link on a phone; WhatsApp and copy are counted by the server" do
     with_mobile_viewport do
       sign_in_as @teacher
-      visit teacher_home_path
+      visit teacher_invite_path # UDR enseignant §3.3 : le bloc a quitté l'accueil sous lg
 
       within "#invite_colleagues" do
         assert_text I18n.t("#{INVITE}.count", count: 0)
@@ -73,7 +73,7 @@ class Identity::InviteColleagueTest < ApplicationSystemTestCase
     fill_in "teacher_registration[pin_confirmation]", with: "4821"
     click_on I18n.t("identity.teacher_registrations.form.submit")
 
-    assert_current_path teacher_classrooms_path
+    assert_current_path teacher_home_path
     referee = Orm::User.find_by!(contact: "0501020304")
     assert_equal [ "KOUASSI", "Koffi" ], [ referee.last_name, referee.first_name ]
     assert_equal [ [ @school.id, true ] ], Orm::TeacherSchool.where(teacher: referee).pluck(:school_id, :primary)
