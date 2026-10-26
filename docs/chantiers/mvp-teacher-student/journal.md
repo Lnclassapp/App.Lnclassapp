@@ -52,6 +52,9 @@
 | 2026-10-26 | Lot I : le filtre `badge=` se combine à la recherche (plus de « la recherche porte sur toute la classe ») ; sans filtre, « Tous » (plus de « premier groupe non vide ») ; un filtre inconnu vaut « Tous » | Les puces sont des filtres, pas des groupes exclusifs ; `RosterGrade::GROUPS` et `KEYS` ne sont plus lus par la page | Non |
 | 2026-10-26 | Lot I : la ligne d'élève est celle de la maquette 10 (initiales, nom, « 9 faits sur 18 · 1 en retard », badge) : plus de « Nouveau », de voie d'arrivée, de numéro masqué ni de « Fait seul : N » ; le numéro reste sur la fiche ; les colonnes « Fait seul (7 j) » et « Dernier score » restent à partir de `sm` ; la bande « Fiches de cours » quitte la page (`_courses` supprimé, les cours s'ouvrent depuis l'accueil et l'onglet Cours) ; l'effectif et son plafond quittent l'en-tête | Porteur, 2026-10-26 : « ligne = maquette 10 », « retire le bloc Fiches de cours » ; `ClassroomOverviewQuery` lit encore `courses` et `session_days`, que la page n'utilise plus | Non |
 | 2026-10-26 | Lot I : la fiche d'un élève dit « Arrivé·e le 12 oct. » (PRD CA-I3) et n'a plus « Nouveau » ni la voie d'arrivée ; le trophée d'un exercice vient de `Grading.badge_for` (aucun sous Bronze) ; `_circle` et `_badge_counts` (assessment/comprehension) ne sont plus rendus par la page de la classe ni la fiche : à supprimer hors lot | UDR §3.6 : « Arrivé » ou « Arrivée » selon le genre, que rien ne donne ; les deux partiels ne sont pas à la fiche du lot | Non |
+| 2026-10-26 | « Maths » et « PC » comme noms courts, vouvoiement de l'enseignant partout | Le nom long ne tient pas sur une ligne ; un seul ton par rôle | Non (UDR enseignant §3.1) |
+| 2026-10-26 | Enseignant sur ordinateur : barre du haut à filet jaune, profil en tête de la barre latérale, accueil sans bandeau avec classes et annonces en carrousel | Retours du porteur sur les maquettes du 2026-10-24 | Non (UDR enseignant §3.3, §3.14) |
+| 2026-10-26 | Mon compte de l'élève sur ordinateur sans classe ni établissement sous le nom | Répétition déjà refusée ailleurs | Non (UDR écrans élève) |
 
 ## Ce qui a dérapé
 
@@ -78,6 +81,9 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - Lot E2 : la carte « Fiche à revoir » retirée de la fiche emportait trois choses que ni la fiche ni CA-E4 ne remplacent : l'infobulle de la règle (« au moins N/20 »), le bouton « Refaire un exercice » et la pastille « Proposé » de l'exercice proposé (UDR §3.4, qui demande de modifier `_exercise_progress`, hors fiche). La première ligne de la liste reste le bouton `primary`. À trancher.
 - Lot E2 : résultat de session : seul l'encadré `stagnant` de la phrase de progrès est retiré (c'est lui que l'UDR nomme) ; « Tu progresses », « Tu confirmes » et « Ton meilleur résultat reste » restent. Le bouton « Recommencer » passe de `brand` à `primary` (UDR §3.5).
 - Lot E2 : tests système existants recalés (les gardes restent) : `remediation_test` (la fiche n'a plus le bouton « Refaire un exercice » : l'exercice se démarre depuis la liste), `course_catalog_test` (plus de « Commencer »), `student_progress_test` (plus de phrase `stagnant`).
+- 2026-10-23 — La session cloud n'avait ni gems ni base : `.claude/hooks/session-start.sh` s'arrêtait sans message sur `ls -d …/chrome-linux/chrome` (Playwright range désormais Chromium sous `chrome-linux64/`), tué par `set -o pipefail` avant `bin/setup`. Corrigé par la PR `fix/session-start-chromium` (motif `chrome-linux*`, `|| true`). Leçon : un hook `set -euo pipefail` ne doit jamais laisser un `ls` sans correspondance tuer la suite.
+- 2026-10-26 — Même hook, deuxième arrêt : Corepack télécharge Yarn sur `repo.yarnpkg.com`, que le proxy cloud refuse (403), et `bin/setup` échoue sur `yarn`. Corrigé dans la même PR : `COREPACK_NPM_REGISTRY=https://registry.npmjs.org`, exporté aussi dans l'environnement de la session.
+- **Maquettes jamais commitées ni rassemblées** (2026-10-23 au 25) : chaque session gardait ses maquettes dans un conteneur éphémère et n'en envoyait qu'une archive. Le 26, il a fallu les reconstituer en rejouant les transcriptions de quatre sessions. Désormais, chaque envoi est une archive versionnée « vNN-date-contenu », avec un HISTORIQUE.txt, et une mémoire de passation est commitée dans `.ecc/memory/team/`.
 
 ## Ce qu'on a appris sur la codebase
 
@@ -93,6 +99,7 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - Lot L : le premier « Assigner » plein et « Modifier les jours de la … » (une fois par classe) sont décidés à l'affichage de `_exercise_progress`, dans l'ordre des lignes (`@primary_assign_taken`, `@days_links_shown`) : `show.html.erb` n'envoie pas l'ordre des exercices. Après une assignation par Turbo Stream sans rafraîchissement, le bouton plein ne passe pas au suivant avant le prochain rafraîchissement.
 - La base de test d'un worktree créée par `db:prepare` est **seedée** (niveaux « Tle »…) : les factories échouent sur `index_levels_on_name`. `db:drop db:create db:schema:load RAILS_ENV=test` donne une base vide.
 - Une carte `rounded-card shadow-card` va bord à bord sous 640 px (`data-bleed`) : `data-bleed-keep` sur la colonne de l'accueil la garde arrondie dans la marge, à cheval sur le bandeau.
+- Les annonces portent déjà une illustration choisie à la rédaction (`illustration`, `communication/messages/illustrations/`) et une lecture audio (`communication--audio`) : l'accueil enseignant sur ordinateur n'a rien à construire pour elles.
 
 ## Dette laissée derrière
 

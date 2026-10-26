@@ -39,10 +39,15 @@ if [ ! -x "$NODE_DIR/bin/node" ]; then
     tar -xJ -C "$NODE_DIR" --strip-components=1
 fi
 export PATH="$NODE_DIR/bin:$PATH"
+# Corepack downloads Yarn from repo.yarnpkg.com, which the cloud proxy refuses (403): the npm registry serves the
+# same release (@yarnpkg/cli-dist), so `yarn` works in bin/setup and in the session's shell.
+export COREPACK_NPM_REGISTRY=https://registry.npmjs.org
 corepack enable
 
 # --- Chrome for the system tests: the preinstalled Chromium and the chromedriver of the same version ------
-CHROME_BIN="$(ls -d /opt/pw-browsers/chromium-*/chrome-linux/chrome 2>/dev/null | sort -V | tail -1)"
+# chrome-linux (old Playwright builds) or chrome-linux64 (since chromium-1243). `|| true`: no match must not stop
+# the hook under `set -o pipefail`; the `else` below reports it.
+CHROME_BIN="$(ls -d /opt/pw-browsers/chromium-*/chrome-linux*/chrome 2>/dev/null | sort -V | tail -1 || true)"
 if [ -n "$CHROME_BIN" ]; then
   CHROME_VERSION="$("$CHROME_BIN" --version | grep -oE '[0-9]+(\.[0-9]+){3}')"
   CHROMEDRIVER_PATH="/opt/chromedriver-$CHROME_VERSION/chromedriver"
@@ -78,6 +83,7 @@ fi
   echo "export PATH=\"$NODE_DIR/bin:$RBENV_ROOT/shims:$RBENV_ROOT/bin:\$PATH\""
   echo "export no_proxy=localhost,127.0.0.1,::1 NO_PROXY=localhost,127.0.0.1,::1"
   echo "export LANG=C.UTF-8 LC_ALL=C.UTF-8"
+  echo "export COREPACK_NPM_REGISTRY=$COREPACK_NPM_REGISTRY"
   if [ -n "${CHROME_BIN:-}" ]; then echo "export CHROME_BIN=$CHROME_BIN CHROMEDRIVER_PATH=$CHROMEDRIVER_PATH"; fi
 } > "$HOME/.lnclass-ci-env"
 cat "$HOME/.lnclass-ci-env" >> "$ENV_FILE"

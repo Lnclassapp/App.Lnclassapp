@@ -35,12 +35,14 @@
 | P3 — Rapport d'un exercice sur ordinateur | #309 | ✅ **fusionné** (`76f0af37`) |
 | P4 — Inscription sur ordinateur | #307 | ✅ **fusionné** (`7da2330e`) |
 | P6 — Déclarer, assigner, jours de séance sur ordinateur | #308 | ✅ **fusionné** (`81b1beac`) |
-| P0 — Panneau « Mon compte » à droite, barres | #310 | ⏳ **pas commencé** (porteur) |
+| P0 — Panneau « Mon compte » à droite, barres | #310 | ✅ **fusionné** (`8dc8102d`, focus et rafraîchissement du panneau corrigés) |
 | P1 — Accueil enseignant en page large | #311 | ✅ **fusionné** (`13038a89`, durée et dérogation en `9cc59a9b`) |
 | P2 — Page de classe et fiche d'un élève sur ordinateur | #312 | ✅ **fusionné** (`20d4c124`) |
-| P5 — Cours de l'enseignant, colonne de 40 rem | #313 | ⏳ **pas commencé** (porteur) ; après O5 (mêmes fichiers du Cours) |
+| P5 — Cours de l'enseignant, colonne de 40 rem | #313 | ✅ **fusionné** (`f60e5169`) |
 
 **Revue finale de #295** (2026-10-26, sur `e4075817`) : sécurité sans constat ; trois corrections (`7358e20a`) et le test de P6 (`e0a9792d`). Les lots fusionnés depuis (G, N, I, P1, P2, P3, O4, O5) n'ont eu que leurs propres tests : à relire avant `bin/ci-quiet`. Suite système complète verte sur `c9b19b21` (426 runs, 0 échec).
+
+**Répartition du 2026-10-26** (porteur : « Konan pour les écrans des enseignants et Touré pour les élèves, mobile comme ordinateur ») : **Touré pilote tous les lots élève**, téléphone et ordinateur, dans cet ordre : D (#298), E1 (#291), F (#286), E2 (#290), O1 (#300), O3 (#299), O2 (#302), O6 (#301), O4 (#303), O5 (#304). **Repris par le porteur le même jour** : E1 (#291) et F (#286), en parallèle de D, pour débloquer Konan plus vite ; Touré enchaîne D, E2, O1. **Priorité aux dépendances** (porteur, 2026-10-26) : D, E1, F, E2 et O1 passent d'abord parce que Konan les attend (D pour G et P0, E1 pour M, F puis E2 pour N, O1 pour P1). Les lots enseignant sont à Konan ([`plan-enseignant.md`](plan-enseignant.md)). Chaque issue porte la fiche du lot, les changements du 26, les maquettes de référence (archive v12) et la marche à suivre. La session « MVP teacher-student » reste la seule à fusionner dans la branche de chantier.
 
 **Budget des tests système** (ADR-0069 §9 : 15 s par chantier) : C en prend 10,5 s ; **relevé à 50 s pour ce chantier** (porteur, 2026-10-24, amendement de l’ADR-0069). Chaque lot garde un test système court de son parcours principal et teste le reste au niveau contrôleur ou intégration.
 
@@ -301,7 +303,7 @@ Portes propres au pilote :
                      config/locales/shared/navigation.fr.yml · config/locales/identity/profiles.fr.yml · config/locales/school/student_schools.fr.yml *(nouveau)*
 - **Dépend de**    : E1
 - **Test associé** : test/system/identity/student_avatar_menu_test.rb · test/system/identity/profile_test.rb · test/infrastructure/queries/school/student_school_query_test.rb · test/controllers/school/student_schools_controller_test.rb
-- **Done quand**   : sur ordinateur, « Mon compte » s'ouvre en panneau de 400 px et se ferme par Échap, la croix ou le voile, le focus revenant sur l'avatar (CA-E7) ; sa liste contient « Mon établissement », pas Ma classe (CA-E8) ; le profil a la carte bleue au nom seul et 4 lignes (CA-E9) ; « Mon établissement » montre Nom, Sigle, DRENA, Type de l'établissement de l'élève et de lui seul (CA-E10) ; à 390 px, menu et profil restent ceux de CA-E1 et CA-E2
+- **Done quand**   : sur ordinateur, « Mon compte » s'ouvre en panneau de 400 px et se ferme par Échap, la croix ou le voile, le focus revenant sur l'avatar (CA-E7) ; son en-tête n'a que l'avatar et le nom, et sa liste contient « Mon établissement », pas Ma classe (CA-E8) ; le profil a la carte bleue au nom seul et 4 lignes (CA-E9) ; « Mon établissement » montre Nom, Sigle, DRENA, Type de l'établissement de l'élève et de lui seul (CA-E10) ; à 390 px, menu et profil restent ceux de CA-E1 et CA-E2
 
 ### Lot O3 — Inscription en deux colonnes
 

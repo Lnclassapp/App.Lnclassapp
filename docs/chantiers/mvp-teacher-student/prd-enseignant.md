@@ -113,7 +113,7 @@ Et aucune vue n'écrit bg-teacher en dur : la couleur vient du helper de rôle
 ```gherkin
 # CA-H1
 Étant donné un enseignant qui touche son avatar
-Alors un panneau plein écran montre son nom, « Math · PC · <sigle> », puis Mon profil, Modifier mon code secret, Ajouter une matière (« 2 sur 3 »), Ajouter un établissement (« N sur 3 »), Mode sombre, Se déconnecter
+Alors un panneau plein écran montre son nom, « Maths · PC · <sigle> », puis Mon profil, Modifier mon code secret, Ajouter une matière (« 2 sur 3 »), Ajouter un établissement (« N sur 3 »), Mode sombre, Se déconnecter
 Et « Inviter un collègue » n'y figure pas
 
 # CA-H2
@@ -122,7 +122,7 @@ Alors le panneau montre « Établissement en cours » avec les deux, et en touch
 
 # CA-H3
 Étant donné un enseignant qui a 3 matières
-Alors « Ajouter une matière » est grisé avec « 3 sur 3 · retire-en un pour en ajouter »
+Alors « Ajouter une matière » est grisé avec « 3 sur 3 · retirez-en un pour en ajouter »
 Et il ouvre l'écran « Mes matières », où « Retirer » retire la matière sans toucher aux exercices déjà assignés
 
 # CA-H4
@@ -217,7 +217,7 @@ Alors la fenêtre des jours s'ouvre avec ses jours cochés, et « Enregistrer »
 
 ## 4 bis. Phase ordinateur (après les lots téléphone)
 
-Déjà décidé dans l'UDR enseignant, à construire dans cette phase : accueil en page large (§3.3, ancien CA-G10), « Mon compte » en panneau latéral de 400 px (§3.4), page de classe et rapport en deux colonnes (§3.5, §3.8). Dessinés le 2026-10-24 (UDR, sous-sections « Sur ordinateur (≥ lg) ») : inscription (§3.9), fiche d'un élève (§3.6), Cours (§3.7), écrans de retrait (§3.4), « Quelles classes enseignez-vous ? », fiche de révision avec « Assigner » et fenêtre des jours de séance (§3.13).
+Déjà décidé dans l'UDR enseignant, à construire dans cette phase : accueil en page large (§3.3, ancien CA-G10), « Mon compte » en panneau latéral de 400 px (§3.4), page de classe et rapport en deux colonnes (§3.5, §3.8). Dessinés le 2026-10-24 (UDR, sous-sections « Sur ordinateur (≥ lg) ») : inscription (§3.9), fiche d'un élève (§3.6), Cours (§3.7), écrans de retrait (§3.4), « Quelles classes enseignez-vous ? », fiche de révision avec « Assigner » et fenêtre des jours de séance (§3.13). Revus et validés le 2026-10-26, en gris puis en jaune : accueil refait (§3.3 : sans bandeau, classes et annonces en carrousel), barre du haut et barre latérale de tous les écrans (§3.14).
 
 > **Écrans à ≥ lg** (1024 px et plus). Captures à 1440 et 1024 px pour chaque lot, en plus du téléphone.
 
@@ -237,6 +237,21 @@ Et en mode sombre le panneau est jaune enseignant sombre et son texte blanc
 Étant donné un écran enseignant d'au moins 1024 px de large
 Alors l'entrée active de la barre latérale est bleu clair à texte bleu, jamais jaune
 
+# CA-G12
+Étant donné un écran enseignant d'au moins 1024 px de large, inscription comprise
+Alors un filet jaune de 4 px est en haut de la barre du haut, qui montre le logo enseignant, « Lnclass » et « Besoin d'aide ? »
+Et l'avatar est à droite de « Besoin d'aide ? » et ouvre « Mon compte », sauf à l'inscription où il n'y a pas d'avatar
+Et la barre latérale commence par l'avatar, le nom et « Maths · PC · <sigle> », puis Accueil, Mes classes, Cours
+Et à 390 px, l'en-tête enseignant ne change pas
+
+# CA-G13
+Étant donné un enseignant de quatre classes sur un écran d'au moins 1024 px de large
+Quand il ouvre l'accueil
+Alors il n'y a pas de bandeau jaune derrière les cartes de classe
+Et les cartes de classe défilent de gauche à droite, trois visibles et la quatrième coupée au bord, « + Ajouter une classe » en dernier
+Et les annonces défilent de gauche à droite, deux visibles, chacune avec son illustration et son bouton de lecture audio
+Et « Cette semaine » et « Historique » sont côte à côte
+
 # CA-I6
 Étant donné un écran d'au moins 1024 px de large
 Quand l'enseignant ouvre la fiche d'un élève
@@ -245,9 +260,9 @@ Et la colonne de gauche montre le résumé puis le code de récupération et « 
 Et la colonne de droite montre les exercices de la classe puis « Fait seul »
 
 # CA-N1 (téléphone et ordinateur)
-Étant donné un enseignant de Math et PC dans l'établissement courant, et de SVT dans un autre
+Étant donné un enseignant de Mathématiques et Physique-Chimie dans l'établissement courant, et de SVT dans un autre
 Quand il ouvre « Cours de Tle D »
-Alors les puces sont « Math » et « PC », sans « SVT », et « Math » est active
+Alors les puces sont « Maths » et « PC », sans « SVT », et « Maths » est active
 Et seules les fiches de cours de Mathématiques s'affichent, sans en-tête de matière
 Et chaque fiche de cours est une carte « LEÇON N · <titre> » qui liste ses fiches de révision sous « Révisions de la leçon », chacune un lien vers sa fiche
 

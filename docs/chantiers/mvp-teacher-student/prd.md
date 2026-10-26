@@ -308,7 +308,7 @@ Et Échap, la croix ou un clic sur le voile le ferment, le focus revenant sur l'
 
 # CA-E8 (ordinateur seulement)
 Étant donné un élève sur ordinateur qui ouvre « Mon compte »
-Alors il voit, dans l'ordre : l'en-tête (avatar, nom, classe · établissement), Mon profil, Mon établissement, Modifier mon code secret, Mode sombre, Se déconnecter
+Alors il voit, dans l'ordre : l'en-tête (avatar et nom, sans classe ni établissement), Mon profil, Mon établissement, Modifier mon code secret, Mode sombre, Se déconnecter
 Et Ma classe n'y figure pas
 Et à 390 px, la liste reste celle de CA-E1
 
