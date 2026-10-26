@@ -43,6 +43,29 @@ class Classroom::TeacherMenusControllerTest < ActionDispatch::IntegrationTest
     assert_select "main dialog#account_panel", 0
   end
 
+  # CA-H7 (lot P0) : le menu est le contenu d'un frame. Sur la page, rien ne change ; ramené dans le frame du panneau par
+  # « ‹ Mon compte », il en sort par ses liens et ses envois, sauf l'écran de retrait, qui reste dans le frame dès lg (à 3 sur 3).
+  test "CA-H7: the page has no frame; returned in the frame of the panel, the menu leaves it, except the removal screens from lg" do
+    school = create_school(name: "Lycée moderne 2", sigle: "LM2")
+    sign_in_as create_teacher(school:, materials: [ maths, pc, svt ])
+
+    get teacher_menu_path
+    assert_select "main turbo-frame", 0
+    assert_select "main [data-turbo-frame]", 0
+    assert_select "main nav a[href='#{profile_materials_path}']", 1
+
+    get teacher_menu_path, headers: { "Turbo-Frame" => NavigationHelper::ACCOUNT_PANEL_FRAME }
+
+    assert_response :success
+    assert_no_match(/<aside|<header|<main/, response.body)
+    assert_select "turbo-frame##{NavigationHelper::ACCOUNT_PANEL_FRAME}", 1 do
+      assert_select "a[href='#{profile_path}'][data-turbo-frame=_top]"
+      assert_select "form[action='#{session_path}'][data-turbo-frame=_top]"
+      assert_select "li.lg\\:hidden a[href='#{profile_materials_path}'][data-turbo-frame=_top]", 1
+      assert_select "li.max-lg\\:hidden a[href='#{profile_materials_path}'][data-turbo-frame='#{NavigationHelper::ACCOUNT_PANEL_FRAME}']", 1
+    end
+  end
+
   test "CA-H1: one subject reads its short name, and a school without a sigle reads its name" do
     sign_in_as create_teacher(school: create_school(name: "Lycée moderne 2", sigle: nil), materials: [ maths ])
 

@@ -174,6 +174,29 @@ class Identity::ProfileMaterialsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#teacher_materials li", 2
   end
 
+  # CA-H7 (lot P0) : dès lg, le panneau « Mon compte » charge l'écran dans son frame ; la réponse est le frame seul, et le message
+  # de l'envoi précédent s'y lit (sans layout, aucune région de toasts ne le porte).
+  test "CA-H7: in the frame of the account panel, the screen is the frame alone and it reads the notice of the removal" do
+    three_subjects!
+    sign_in_as @teacher
+    frame = { "Turbo-Frame" => NavigationHelper::ACCOUNT_PANEL_FRAME }
+
+    remove(@svt.slug, @maths.slug)
+    get profile_materials_path, headers: frame
+
+    assert_response :success
+    assert_no_match(/<aside|<header|<main/, response.body)
+    assert_select "turbo-frame##{NavigationHelper::ACCOUNT_PANEL_FRAME}", 1 do
+      assert_select "p[role=status]", "Matière retirée."
+      assert_select "a[href='#{teacher_menu_path}']", text: /Mon compte/
+      assert_select "h1", "Mes matières"
+      assert_select "#teacher_materials li", 2
+    end
+    get profile_materials_path
+    assert_select "main turbo-frame##{NavigationHelper::ACCOUNT_PANEL_FRAME}", 0
+    assert_select "p[role=status]", 0
+  end
+
   test "CA-H5: with one subject, no « Retirer » button; a forged removal of it is refused by the server, under the list" do
     set_teacher_materials(@teacher, @school, [ @pc ])
     sign_in_as @teacher

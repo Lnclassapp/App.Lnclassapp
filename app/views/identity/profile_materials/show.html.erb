@@ -1,12 +1,25 @@
 <%# 🌐 UI · identity/profile_materials/show — « Mes matières », l'écran de retrait de l'enseignant (/profile/materials) %>
-<%# Rôle : « N sur 3 », une ligne par matière avec « Retirer » (UpdateTeacherMaterials sans elle), la dernière sans bouton ; refus du serveur sous la liste %>
-<%# ADR  : 0103 (§4.4) · UDR : écrans enseignant sans répétition (§3.4) · CA-H3, CA-H5 %>
+<%# Rôle : « N sur 3 », une ligne par matière avec « Retirer » (UpdateTeacherMaterials sans elle), la dernière sans bouton ; refus du serveur sous la liste ; dès lg, rendu dans le frame du panneau « Mon compte » %>
+<%# ADR  : 0103 (§4.4) · UDR : écrans enseignant sans répétition (§3.4) · CA-H3, CA-H5, CA-H7 %>
 <% page_title t(".title") %>
 <% max = Entities::Identity::TeacherMaterials::MAX %>
 <% materials = profile.materials %>
 <% removable = materials.size > Entities::Identity::TeacherMaterials::MIN %>
 <% errors = @form ? @form.errors[:material_slugs] + @form.errors[:base] : [] %>
+<%# UDR §3.4 (≥ lg) : le lien « Mes matières » du panneau charge cet écran dans son frame, sans quitter la page en dessous ; « ‹ Mon compte »
+    et « Retirer » y restent, la page entière n'est servie qu'à plein écran (téléphone, sans JavaScript). %>
+<% panel = turbo_frame_request_id == NavigationHelper::ACCOUNT_PANEL_FRAME %>
+<% screen = capture do %>
 <div class="flex max-w-md flex-col gap-4">
+<% if panel %>
+  <%# Rendu dans le frame, la réponse n'a pas le layout (ni sa région de toasts) : le message de l'envoi précédent se lit ici, et part avec la requête. %>
+  <% flash.each do |key, message| %>
+    <% next unless message.is_a?(String) %>
+    <% alert = key.to_s == "alert" %>
+    <%= tag.p message, role: (alert ? "alert" : "status"),
+                       class: class_names("rounded-ln px-4 py-3 text-sm font-medium", "bg-error-soft text-error": alert, "bg-success-soft text-success": !alert) %>
+  <% end %>
+<% end %>
   <div>
     <%= ui_back_link t(".back"), href: teacher_menu_path %>
     <h1 class="font-display text-lg leading-tight font-medium text-ink"><%= t(".title") %></h1>
@@ -44,3 +57,5 @@
 
   <p class="rounded-ln bg-mist p-4 text-sm text-mute"><%= t(".kept_assignments") %></p>
 </div>
+<% end %>
+<%= panel ? turbo_frame_tag(NavigationHelper::ACCOUNT_PANEL_FRAME) { screen } : screen %>

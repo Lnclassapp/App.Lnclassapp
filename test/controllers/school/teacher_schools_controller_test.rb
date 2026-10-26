@@ -63,6 +63,28 @@ class School::TeacherSchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#add_school"
   end
 
+  # CA-H7 (lot P0) : dans le frame du panneau « Mon compte » (dès lg), le formulaire d'ajout quitte le frame : le rattachement mène
+  # à « Mes classes », une page entière ; l'alerte d'un retrait refusé se lit dans le frame.
+  test "CA-H7: in the frame of the account panel, the screen is the frame alone, its add form leaves it, and the alert is read there" do
+    add_teacher_school(@teacher, @b)
+    sign_in_as @teacher
+    frame = { "Turbo-Frame" => NavigationHelper::ACCOUNT_PANEL_FRAME }
+
+    delete teacher_school_path(@b.public_id)
+    delete teacher_school_path(@a.public_id)
+    get teacher_schools_path, headers: frame
+
+    assert_response :success
+    assert_no_match(/<aside|<header|<main/, response.body)
+    assert_select "turbo-frame##{NavigationHelper::ACCOUNT_PANEL_FRAME}", 1 do
+      assert_select "p[role=alert]", "Vous ne pouvez pas quitter votre seul établissement."
+      assert_select "a[href='#{teacher_menu_path}']", text: /Mon compte/
+      assert_select "turbo-frame#teacher_school_join[target=_top] #add_school form#school-join-form"
+    end
+    get teacher_schools_path
+    assert_select "main turbo-frame#teacher_school_join, main turbo-frame##{NavigationHelper::ACCOUNT_PANEL_FRAME}", 0
+  end
+
   test "ME-04: three schools: « 3 sur 3. Retirez-en un pour en ajouter un autre. », no add card; a forged join is refused" do
     add_teacher_school(@teacher, @b)
     add_teacher_school(@teacher, @c)
