@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Catalog::CoursesController
-# Rôle : catalogue filtré, cherché par nom (frame « courses »), par pages chargées au défilement, et page d'un cours ; élève : son niveau, groupé par matière, vue d'une matière ; enseignant : ses matières à ses niveaux
-# ADR  : 0026, 0028, 0035, 0076, 0090, 0094, 0103 · UDR : 0006, 0013 (amendement du 2026-10-05), 0054, 0069, 0077, 0085, 0126
+# Rôle : catalogue filtré, cherché par nom (frame « courses »), par pages chargées au défilement, et page d'un cours ; élève : son niveau, groupé par matière, vue d'une matière ; enseignant : une de ses matières à la fois, au niveau du rond de l'accueil
+# ADR  : 0026, 0028, 0035, 0076, 0090, 0094, 0103 · UDR : 0006, 0013 (amendement du 2026-10-05), 0054, 0069, 0077, 0085, 0126, XXXX écrans enseignant sans répétition §3.7
 module Catalog
   class CoursesController < AuthenticatedController
     include ReadsOwnLevel
@@ -12,16 +12,17 @@ module Catalog
     FILTERS = %i[level series material q].freeze
 
     helper_method :list_frame_request?, :filter_options, :student_audience, :teacher_scope, :teacher_grouped?, :student_material,
-                  :after_material
+                  :after_material, :teacher_material, :teacher_level_label
 
     def index
       @filters = params.permit(*FILTERS).to_h.symbolize_keys
+      # UDR enseignant §3.7 : une matière à la fois, la puce active (par défaut la première) ; la page suivante la reprend.
+      @filters[:material] = teacher_material&.slug if teacher_scope
       # La série ne fait que restreindre : l'élève garde la règle de son niveau (audience).
       @page = Queries::Catalog::CourseCatalogQuery.new.call(actor: current_actor, page: params[:page], level: @filters[:level],
                                                             series: @filters[:series], material: @filters[:material],
                                                             search: @filters[:q], audience: own_audience,
-                                                            material_ids: teacher_scope&.material_ids,
-                                                            group_by_material: teacher_grouped?)
+                                                            material_ids: teacher_scope&.material_ids)
       render partial: "page_frame", locals: { page: @page } if page_frame_request?
     end
 
@@ -57,8 +58,26 @@ module Catalog
                                                                          school_id: current_actor.school_id)
     end
 
-    # UDR-0126 §3.1 : l'enseignant de plusieurs matières voit ses cours rangés par matière, comme l'élève.
-    def teacher_grouped? = teacher_scope&.several_materials? || false
+    # UDR enseignant §3.7 (amende UDR-0126 §3.1) : l'enseignant ne voit qu'une matière à la fois, sans groupes. La page
+    # partagée (_page) garde sa branche « groupes » pour l'élève seulement.
+    def teacher_grouped? = false
+
+    # La matière de la puce active : celle de l'adresse si c'en est une des siennes dans l'établissement courant, sinon la
+    # première ; nil sans matière (l'état vide l'explique).
+    def teacher_material
+      return unless teacher_scope
+
+      @teacher_material ||= teacher_scope.materials.find { it.slug == @filters[:material] } || teacher_scope.materials.first
+    end
+
+    # « Tle D » : le niveau de l'adresse (un rond de l'accueil) et sa série quand ce niveau la permet ; nil sans niveau connu.
+    def teacher_level_label
+      level = filter_options.levels.find { it.slug == @filters[:level] }
+      return unless level
+
+      series = filter_options.series_by_level.fetch(level.id, []).find { it.slug == @filters[:series] }
+      [ level.name, series&.name ].compact.join(" ")
+    end
 
     # UDR-0085 §3.1 : la vue d'une matière de l'élève (?material=<slug>, l'adresse des bulles « Mes matières ») ; nil sur
     # la liste complète, pour un autre rôle ou pour un slug inconnu.

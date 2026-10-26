@@ -125,6 +125,46 @@ module Queries
         assert_equal [ :new, nil ], progress_of(@genetique, student)
       end
 
+      # CA-N1 (UDR enseignant §3.7) : la carte de l'enseignant porte ses fiches de révision publiées, dans l'ordre de leur
+      # position ; les autres rôles n'en reçoivent pas (ni requête de plus).
+      test "CA-N1: pour l'enseignant, chaque ligne porte les fiches de révision publiées de son cours, par position" do
+        second = create_essential(course: @genetique, name: "Seconde fiche", position: 2)
+        first = create_essential(course: @genetique, name: "Première fiche", position: 1)
+        create_essential(course: @genetique, name: "Fiche en brouillon", position: 3, status: "draft")
+        create_essential(course: @genetique, name: "Fiche archivée", position: 4, status: "archived")
+
+        rows = catalog(:teacher).index_by(&:slug)
+
+        assert_equal [ [ first.slug, "Première fiche" ], [ second.slug, "Seconde fiche" ] ],
+                     rows.fetch(@genetique.slug).essentials.map { [ it.slug, it.name ] }
+        assert_empty rows.fetch(@cellule.slug).essentials
+        assert_equal 3, count_queries { catalog(:teacher) }
+        assert_equal 2, count_queries { catalog(:team) }
+      end
+
+      # UDR enseignant §3.7 : les cartes suivent la progression (Leçon 1, 2, 3, 10), non l'ordre alphabétique des noms ; sans
+      # numéro de leçon, par nom, après les autres. L'élève et l'équipe gardent leur ordre.
+      test "CA-N1: l'enseignant lit les cours d'une matière dans l'ordre des leçons du sous-titre, puis par nom" do
+        logarithmes = create_course(name: "Fonctions logarithmes", level: @seconde, material: @philo, subtitle: "Leçon 3 · Progression DPFC 2026-2027")
+        limites = create_course(name: "Limites et continuité", level: @seconde, material: @philo, subtitle: "Leçon 1 · Progression DPFC 2026-2027")
+        derivees = create_course(name: "Fonctions dérivées", level: @seconde, material: @philo, subtitle: "Leçon 2 · Progression DPFC 2026-2027")
+        suites = create_course(name: "Suites", level: @seconde, material: @philo, subtitle: "Leçon 10 · Progression DPFC 2026-2027")
+        sans = create_course(name: "Annexe", level: @seconde, material: @philo)
+
+        teacher = catalog(:teacher, material: @philo.slug, level: @seconde.slug).map(&:slug)
+
+        assert_equal [ limites, derivees, logarithmes, suites, sans ].map(&:slug), teacher
+        assert_equal [ sans, derivees, logarithmes, limites, suites ].map(&:slug), catalog(:team, material: @philo.slug, level: @seconde.slug).map(&:slug)
+      end
+
+      test "CA-N1: l'équipe, l'élève et les autres rôles ne reçoivent aucune fiche de révision" do
+        create_essential(course: @genetique)
+
+        %i[team school_admin student].each do |role|
+          assert catalog(role).all? { it.essentials.empty? }, role
+        end
+      end
+
       # PRD §7 : comptes par matière (qui donnent le total), cartes, avancement ; trois requêtes, sans requête par carte.
       test "l'élève : trois requêtes, quel que soit le nombre de cours et de lectures" do
         student = create_student

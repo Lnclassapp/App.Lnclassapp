@@ -60,20 +60,24 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     25.times { |index| create_course(name: format("Cours %02d", index), level: @tle, material: @svt) }
     # UDR-0077 §3.2 : l'enseignant lit sa matière aux niveaux de ses classes — les 26 cours de SVT de Tle, sans la philosophie.
     sign_in_as create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle) ])
-    visit courses_path
-    assert_selector "#courses_total", text: t("catalog.courses.index.total", count: 26)
-    assert_selector "#courses_list > li", count: 24
-    assert_no_selector "#courses_list_page_2"
+    # Cartes compactes de l'enseignant (UDR enseignant §3.7) : sur ordinateur, les 24 tiennent à l'écran et la suite se
+    # charge d'elle-même ; le téléphone garde le défilement.
+    with_mobile_viewport do
+      visit courses_path
+      assert_selector "#courses_total", text: t("catalog.courses.index.total", count: 26)
+      assert_selector "#courses_list > li", count: 24
+      assert_no_selector "#courses_list_page_2"
 
-    assert_no_page_reload do
-      scroll_to find("turbo-frame#courses_page_2")
-      assert_selector "#courses_list_page_2 > li", count: 2
-      assert_no_selector "turbo-frame#courses_page_3"
+      assert_no_page_reload do
+        scroll_to find("turbo-frame#courses_page_2")
+        assert_selector "#courses_list_page_2 > li", count: 2
+        assert_no_selector "turbo-frame#courses_page_3"
+      end
+      last = all("#courses_list_page_2 > li").last
+      name = last.find("h2").text
+      last.first("a").click
+      assert_selector "h1", text: name
     end
-    last = all("#courses_list_page_2 > li").last
-    name = last.find("h2").text
-    last.find("a").click
-    assert_selector "h1", text: name
   end
 
   test "the team edits the content in the rich text editor from the course page, then publishes and archives it, without a page reload" do
@@ -207,23 +211,22 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
 
   # Décision du porteur du 2026-10-02 : les retraits ne valent que pour l'élève. ADR-0072, UDR-0013 (amendée le
   # 2026-10-02) : seul « Assigner à mes classes » quitte la page du cours, un cours ne s'assignant plus.
-  # UDR-0077 §3.2, amendée le 2026-10-06 : sur téléphone, la recherche et les filtres restent (tous les rôles) ; « Tout
-  # voir » quitte le filtre. UDR-0013, amendement du 2026-10-05 (ter) : le badge de matière reste sur chaque carte.
-  test "on a phone, the teacher's filtered catalogue shows the filters and « Tout voir »; the course page is unchanged" do
+  # UDR-0077 §3.2, amendée le 2026-10-06 : sur téléphone, la recherche reste ; l'enseignant n'a plus de menus ni de « Tout
+  # voir » hors recherche, et sa carte ne répète ni matière ni niveau (UDR enseignant §3.7).
+  test "on a phone, the teacher's catalogue shows the search without repeating subject and level; the course page is unchanged" do
     %w[Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
     sign_in_as create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle) ])
 
     with_mobile_viewport do
       visit courses_path(material: @svt.slug)
       assert_selector "#courses-filters"
+      assert_no_selector "#courses-filters select"
       within("#course_#{@course.slug}") do
-        assert_text "SVT"
-        assert_text "Tle"
+        assert_no_text "SVT"
+        assert_no_text "Tle"
       end
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
-      click_link t("catalog.courses.index.reset")
-      assert_current_path courses_path
       assert_no_link t("catalog.courses.index.reset")
 
       visit course_path(@course.slug)

@@ -1,14 +1,16 @@
 # 🔌 INFRA · Queries::Catalog::CourseCatalogQuery
-# Rôle : cartes du catalogue (CA-01), filtrées par niveau, série, matière et nom (FU-47), par page ; publiés hors équipe ; élève : son niveau, groupé par matière dans l'ordre du programme, avec son avancement ; enseignant : ses matières à ses niveaux, groupé par matière au-delà d'une
-# ADR  : 0026, 0028, 0035, 0076, 0090, 0103 · UDR : 0013 (amendement du 2026-10-05), 0054, 0069, 0077 §3.2, 0085, 0126 §3.1
+# Rôle : cartes du catalogue (CA-01), filtrées par niveau, série, matière et nom (FU-47), par page ; publiés hors équipe ; élève : son niveau, groupé par matière dans l'ordre du programme, avec son avancement ; enseignant : ses matières à ses niveaux, chaque carte avec ses fiches de révision
+# ADR  : 0026, 0028, 0035, 0076, 0090, 0103 · UDR : 0013 (amendement du 2026-10-05), 0054, 0069, 0077 §3.2, 0085, 0126 §3.1, XXXX écrans enseignant sans répétition §3.7
 module Queries
   module Catalog
     class CourseCatalogQuery
       # Chantier cours-eleve (ADR-0090, UDR-0085) : material_slug et material_position groupent les cartes de l'élève ;
       # progress (:new, :started, :done) et resume_essential_slug (la fiche de « Reprendre », nil sinon) disent où il en est.
-      # Hors élève : :new et nil.
+      # Hors élève : :new et nil. essentials : les fiches de révision publiées du cours ([EssentialLink], par position), pour
+      # l'enseignant seulement (UDR enseignant §3.7) ; [] pour les autres rôles.
       Row = Data.define(:slug, :name, :subtitle, :level_name, :series_name, :material_name, :material_category, :status,
-                        :material_slug, :material_position, :progress, :resume_essential_slug)
+                        :material_slug, :material_position, :progress, :resume_essential_slug, :essentials)
+      EssentialLink = Data.define(:slug, :name)
       # Chantier politique-cache, lot E4 (UDR-0013, amendement du 2026-10-05) : le catalogue se lit par pages de PER_PAGE
       # cartes, les suivantes chargées au défilement. 24 tient en lignes pleines sur 1, 2 ou 3 colonnes.
       PER_PAGE = 24
@@ -22,6 +24,11 @@ module Queries
       # ADR-0090 §4.2 : l'élève lit les matières dans l'ordre du programme ; une matière sans rang vient après, par nom.
       PROGRAM_ORDER = [ Arel.sql("materials.position ASC NULLS LAST"), "materials.name", "courses.name", "courses.id" ].freeze
       CATALOG_ORDER = [ "materials.name", "levels.position", "courses.name", "courses.id" ].freeze
+      # UDR enseignant §3.7 : la progression, dans l'ordre des leçons (« Leçon 2 · Progression… » dans le sous-titre) ; un cours
+      # sans numéro de leçon vient après, par nom.
+      TEACHER_ORDER = [ "materials.name", "levels.position",
+                        Arel.sql("(substring(courses.subtitle from '(?i)leçon\\s+(\\d+)'))::integer ASC NULLS LAST"),
+                        "courses.name", "courses.id" ].freeze
 
       # level, material : slugs. Un filtre vide est ignoré, un slug inconnu ne donne aucun cours.
       # series : slug, appliqué seulement avec un niveau (UDR-0069 §3.4) : cours sans série et cours de cette série.
@@ -40,10 +47,11 @@ module Queries
         total_count = grouped ? material_counts.values.sum : scope.count
         pages = [ total_count.fdiv(PER_PAGE).ceil, 1 ].max
         page = page.to_s.to_i.clamp(1, pages)
-        rows = scope.order(*(grouped ? PROGRAM_ORDER : CATALOG_ORDER)).offset((page - 1) * PER_PAGE).limit(PER_PAGE)
+        rows = scope.order(*(grouped ? PROGRAM_ORDER : (actor.teacher? ? TEACHER_ORDER : CATALOG_ORDER))).offset((page - 1) * PER_PAGE).limit(PER_PAGE)
                     .pluck("courses.id", *COLUMNS)
         progress = student_id ? progress_by_course(student_id, rows.map(&:first)) : {}
-        rows = rows.map { |id, *values| Row.new(*values, *progress.fetch(id, NEUTRAL)) }
+        essentials = actor.teacher? ? essentials_by_course(rows.map(&:first)) : {}
+        rows = rows.map { |id, *values| Row.new(*values, *progress.fetch(id, NEUTRAL), essentials.fetch(id, [])) }
         Page.new(rows:, total_count:, page:, pages:, material_counts:)
       end
 
@@ -68,6 +76,15 @@ module Queries
       def of_series(scope, series)
         known = Orm::Series.where(slug: series).arel.exists
         scope.where(series: { slug: series }).or(scope.where(series_id: nil).where(known))
+      end
+
+      # UDR enseignant §3.7 : une requête pour les cours de la page — leurs fiches de révision publiées, par position.
+      # → { course_id => [EssentialLink] }
+      def essentials_by_course(course_ids)
+        return {} if course_ids.empty?
+
+        Orm::Essential.where(course_id: course_ids, status: "published").order(:position, :id).pluck(:course_id, :slug, :name)
+                      .group_by(&:first).transform_values { |rows| rows.map { EssentialLink.new(*it.drop(1)) } }
       end
 
       # ADR-0090 §4.1 : une requête pour les cours de la page — leurs fiches publiées, lues ou non, et les fiches lues qui
