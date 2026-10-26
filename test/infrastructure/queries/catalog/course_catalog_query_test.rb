@@ -134,6 +134,64 @@ module Queries
         assert_equal 2, count_queries { CourseCatalogQuery.new.call(actor: actor(:student), search: "zzz") }
       end
 
+      # Lot O5 (CA-E14) : sur ordinateur, la carte d'une leçon porte ses fiches publiées, dans l'ordre, et « À revoir » pour
+      # cet élève seulement (une lacune en attente) ; sans l'option, la requête de l'élève reste celle du téléphone.
+      def lessons_for(student, **) = CourseCatalogQuery.new.call(actor: Entities::Identity::Actor.new(user_id: student.id, role: :student),
+                                                                 with_essentials: true, **).rows
+
+      test "CA-E14: avec with_essentials, chaque leçon porte ses fiches publiées dans l'ordre, « à revoir » pour cet élève seulement" do
+        student = create_student
+        first = create_essential(course: @cellule, name: "La membrane")
+        second = create_essential(course: @cellule, name: "Le noyau")
+        create_essential(course: @cellule, name: "Brouillon", status: "draft")
+        create_gap(student:, essential: second)
+        create_gap(student: create_student, essential: first)
+        create_gap(student:, essential: create_essential(course: @conscience), status: "remediated")
+
+        rows = lessons_for(student)
+        cellule = rows.find { it.slug == @cellule.slug }
+
+        assert_equal [ [ "La membrane", false ], [ "Le noyau", true ] ], cellule.essentials.map { [ it.name, it.review ] }
+        assert_equal [ first.slug, second.slug ], cellule.essentials.map(&:slug)
+        assert_empty rows.find { it.slug == @genetique.slug }.essentials, "sans fiche publiée, aucune ligne"
+        assert_equal [ false ], rows.find { it.slug == @conscience.slug }.essentials.map(&:review), "une lacune résolue n'est plus à revoir"
+      end
+
+      test "sans with_essentials, les lignes de l'élève n'ont pas de fiches et la requête reste à trois" do
+        student = create_student
+        create_essential(course: @cellule)
+
+        assert(student_catalog(student).all? { it.essentials.empty? })
+        assert_equal 3, count_queries { student_catalog(student) }
+      end
+
+      # PRD §7 (sans N+1) : les fiches et la marque « à revoir » se lisent en une seule requête de plus.
+      test "CA-E14: avec les fiches, quatre requêtes, quel que soit le nombre de leçons, de fiches et de lacunes" do
+        student = create_student
+        2.times { |index| create_essential(course: create_course(level: @tle, material: @svt, name: "A#{index}")) }
+        few = count_queries { lessons_for(student) }
+
+        8.times do |index|
+          course = create_course(level: @tle, material: @svt, name: "B#{index}")
+          4.times { create_gap(student:, essential: create_essential(course:)) }
+        end
+
+        assert_equal 4, few
+        assert_equal few, count_queries { lessons_for(student) }
+      end
+
+      # CA-E15 : les matières de l'élève (celles qui ont une leçon publiée de son niveau), dans l'ordre du programme.
+      test "CA-E15: student_materials rend les matières publiées de l'audience, dans l'ordre du programme" do
+        create_course(name: "Seconde", level: create_level, material: create_material(name: "Anglais"))
+        create_course(name: "Brouillon", level: @tle, material: create_material(name: "Allemand"), status: "draft")
+        audience = Entities::Catalog::LevelAudience.new(pairs: [ [ @tle.id, @genetique.series_id ] ])
+
+        materials = CourseCatalogQuery.new.student_materials(audience:)
+
+        assert_equal [ [ "svt", "SVT" ], [ "philosophie", "Philosophie" ] ], materials.map { [ it.slug, it.name ] }
+        assert_empty CourseCatalogQuery.new.student_materials(audience: Entities::Catalog::LevelAudience.none)
+      end
+
       test "chaque ligne porte ce que montre la carte : matière et sa catégorie, niveau, série, sous-titre, statut" do
         row = catalog(:student).find { it.slug == @genetique.slug }
 

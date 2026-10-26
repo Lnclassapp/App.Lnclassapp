@@ -1,8 +1,18 @@
 <%# 🌐 UI · catalog/courses/_essential_row — une fiche essentielle dans la page de son cours (CA-10) %>
-<%# Rôle : lien vers la fiche, sous-titre ; statut pour l'équipe ; élève : la ligne entière est le lien, repliée au-delà de 3 (UDR-0057) %>
-<%# ADR  : 0035 · UDR : 0007, 0013, 0057 %>
-<%# locals: (essential:, course_slug:, show_status:, student: false, folded: false) -%>
-<% if student %>
+<%# Rôle : lien vers la fiche, sous-titre ; statut pour l'équipe ; élève : la ligne entière est le lien, repliée au-delà de 3 (UDR-0057) ; élève sur ordinateur (lesson) : la ligne d'une carte de leçon, « À revoir » si une lacune est en attente %>
+<%# ADR  : 0035 · UDR : 0007, 0013, 0057, XXXX écrans élève sans répétition §3.6 bis %>
+<%# locals: (essential:, course_slug:, show_status:, student: false, folded: false, lesson: false) -%>
+<% if lesson %>
+  <%# La ligne entière est le lien (≥ 44 px) ; l'étiquette dit « À revoir » (essential.review, propre à l'élève connecté). %>
+  <%= tag.li id: "lesson_essential_#{essential.slug}", hidden: folded, data: { reveal_target: "item" } do %>
+    <%= link_to course_essential_path(course_slug, essential.slug),
+                class: "group flex min-h-tap items-center gap-3 px-5 py-2 transition hover:bg-mist active:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand" do %>
+      <span class="min-w-0 flex-1 text-sm text-pretty text-ink"><%= essential.name %></span>
+      <% if essential.review %><%= ui_badge t(".review"), tone: :brand, size: :sm %><% end %>
+      <%= ui_icon "chevron-right", variant: :mini, class: "text-mute transition group-hover:translate-x-0.5" %>
+    <% end %>
+  <% end %>
+<% elsif student %>
   <%# Lien étiré (motif de classroom/classrooms/_assigned_courses) ; sans pastille de matière : c'est celle du cours (R6). %>
   <%= tag.li id: "essential_#{essential.slug}", class: "relative flex items-center gap-3 px-4 py-4 active:bg-mist sm:px-5",
              hidden: folded, data: { reveal_target: "item" } do %>

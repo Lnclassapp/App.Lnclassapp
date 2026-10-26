@@ -1,7 +1,7 @@
 <%# 🌐 UI · catalog/courses/_course_card — carte-vitrine d'un cours du catalogue (UDR-0001, CA-26) %>
-<%# Rôle : toute la carte mène au cours ; matière, niveau et série (sauf élève), titre, sous-titre, pied « Ouvrir le cours → » ; statut pour l'équipe, sauf « Publié » ; élève : ligne compacte entière cliquable, leçon et pastille « En cours » %>
-<%# ADR  : 0035, 0090 · UDR : 0001, 0005, 0013 (amendement du 2026-10-05 ter), 0057, 0085 (§3.3 : « Reprendre » rouvre la dernière fiche lue), XXXX écrans élève sans répétition §3.6 · aucune liste de fiches essentielles sur la carte %>
-<%# locals: (course:, show_status:, student: false) -%>
+<%# Rôle : toute la carte mène au cours ; matière, niveau et série (sauf élève), titre, sous-titre, pied « Ouvrir le cours → » ; statut pour l'équipe, sauf « Publié » ; élève : ligne compacte entière cliquable, leçon et pastille « En cours » ; élève sur ordinateur (lesson_card) : la carte de la leçon, ses fiches en lignes (3 puis « Voir les N fiches ») %>
+<%# ADR  : 0035, 0090 · UDR : 0001, 0005, 0013 (amendement du 2026-10-05 ter), 0057, 0085 (§3.3 : « Reprendre » rouvre la dernière fiche lue), XXXX écrans élève sans répétition §3.6 et §3.6 bis (exception à UDR-0013 : fiches listées sur la carte de la leçon, élève sur ordinateur seulement) · aucune liste de fiches essentielles sur les autres cartes %>
+<%# locals: (course:, show_status:, student: false, lesson_card: false) -%>
 <%# UDR-0013, amendement du 2026-10-05 : « Publié » est l'état normal, l'équipe ne voit que Brouillon ou Archivé. %>
 <% status = (course.status if show_status && course.status != "published") %>
 <%# UDR-0085 §3.3 : « Reprendre » rouvre la dernière fiche lue ; sinon la page du cours. Ouvrir une
@@ -14,6 +14,42 @@
               end %>
 <%# UDR écrans élève §3.6 : « Progression DPFC 2026-2027 » est écrit une fois, sous la recherche ; la ligne ne garde que la leçon. %>
 <% lesson = (course.subtitle.to_s.split(/\s+[·–—-]\s+/).grep_v(/\AProgression DPFC/i).join(" · ").presence if student) %>
+<% if lesson_card %>
+  <%# UDR écrans élève §3.6 bis : « LEÇON N », le titre, « En cours », puis les fiches de la leçon en lignes entières cliquables
+      (≥ 44 px), 3 puis « Voir les N fiches » (contrôleur reveal, sans requête). Le titre mène à la leçon. %>
+  <% essentials = course.essentials %>
+  <%= tag.li id: "lesson_#{course.slug}", class: "rounded-card border border-line bg-white shadow-card", data: ui_reveal_data do %>
+    <div class="flex items-start justify-between gap-3 px-5 pt-4 pb-3">
+      <div class="min-w-0">
+        <% if lesson %><p class="text-xs tracking-wide text-mute uppercase"><%= lesson %></p><% end %>
+        <h2 class="font-display text-base font-medium text-balance text-ink">
+          <%= link_to course.name, course_path(course.slug), class: "hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+        </h2>
+      </div>
+      <% if course.progress == :started %>
+        <%= ui_badge t(".progress.started"), tone: :brand, size: :sm %>
+      <% elsif course.progress == :done %>
+        <%= ui_icon "check-circle", variant: :solid, size: :sm, class: "text-success" %>
+        <span class="sr-only"><%= t(".progress.done") %></span>
+      <% end %>
+    </div>
+    <% if essentials.any? %>
+      <ul class="divide-y divide-line border-t border-line">
+        <% essentials.each_with_index do |essential, index| %>
+          <%= render "catalog/courses/essential_row", essential:, course_slug: course.slug, show_status: false, student: true,
+                                                      lesson: true, folded: index >= ComponentsHelper::REVEAL_LIMIT %>
+        <% end %>
+      </ul>
+      <% if essentials.size > ComponentsHelper::REVEAL_LIMIT %>
+        <button type="button" data-reveal-target="button" data-action="reveal#more"
+                class="flex min-h-tap w-full items-center border-t border-line px-5 text-left text-sm text-brand-strong hover:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand">
+          <%= t(".more_essentials", count: essentials.size) %>
+        </button>
+        <p class="sr-only" role="status" aria-live="polite" data-reveal-target="status"></p>
+      <% end %>
+    <% end %>
+  <% end %>
+<% else %>
 <li id="course_<%= course.slug %>">
   <% if student %>
     <%# UDR écrans élève §3.6 : la ligne entière est le lien (≥ 44 px) ; titre, leçon et pastille « En cours », chevron. %>
@@ -60,3 +96,4 @@
     <% end %>
   <% end %>
 </li>
+<% end %>

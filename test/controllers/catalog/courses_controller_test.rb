@@ -107,7 +107,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     get courses_path
 
-    assert_equal 1, response.body.scan("Progression DPFC").size
+    # Une fois sur téléphone ; le bloc ordinateur (masqué sous lg) l'écrit une fois aussi, sous « N leçons ».
+    assert_equal 1, css_select("#student_courses > :first-child").to_s.scan("Progression DPFC").size
+    assert_equal 1, css_select("#student_lessons").to_s.scan("Progression DPFC").size
     assert_select "#courses_total", text: including(tl("index.student_progression"))
     assert_select "li#course_#{@course.slug} a p", text: "Leçon 3"
     assert_select "li a p", text: "Leçon 1"
@@ -352,8 +354,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     count
   end
 
-  # PRD §7 : le nombre de requêtes de la page ne dépend ni du nombre de cours ni des lectures (au plus 14).
-  test "GET /courses as a student: the same number of queries for 2 courses and for 25 courses with reads, at most 14" do
+  # PRD §7 : le nombre de requêtes de la page ne dépend ni du nombre de cours ni des lectures. Au plus 18 : Lot O5 y ajoute
+  # les matières de l'élève (1) et les leçons de la matière avec leurs fiches (4), lues pour l'ordinateur.
+  test "GET /courses as a student: the same number of queries for 2 courses and for 25 courses with reads, at most 18" do
     student = create_student_for(@course)
     sign_in_as student
     paths = [ courses_path, courses_path(q: "e"), courses_path(material: @svt.slug) ]
@@ -366,7 +369,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     many = paths.map { queries_of(it) }
 
     assert_equal few, many
-    assert(many.all? { it <= 14 }, many.inspect)
+    assert(many.all? { it <= 18 }, many.inspect)
   end
 
   test "an unknown subject in the student's address gives the « Cours » title and no course, never an error" do
@@ -841,5 +844,139 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "main#main #courses_list > li", 4
     assert_select "#courses_total", text: tl("index.total", count: 28)
+  end
+
+  # ── Cours par leçons, sur ordinateur (Lot O5, CA-E14, CA-E15) ──────────────
+
+  def lessons_student = @lessons_student ||= create_student_for(@course)
+  def current_pill = css_select("#lesson_materials a[aria-current=page]").map { it["id"] }
+  def lesson_ids = css_select("#student_lessons li[id^=lesson_]").map { it["id"] }.grep_v(/\Alesson_essential_/)
+
+  test "CA-E15: without ?material=, a student gets the first subject of the grid, the 6 pills, and the phone view is kept" do
+    sign_in_as lessons_student
+
+    get courses_path
+
+    assert_response :success
+    assert_select "nav#lesson_materials[aria-label=?] a", tl("index.lessons.materials_label"), 2
+    assert_equal [ "lesson_material_#{@svt.slug}" ], current_pill
+    assert_equal [ "lesson_#{@course.slug}" ], lesson_ids
+    assert_select "#lessons_total", text: tl("index.student_total", total: tl("index.total", count: 1))
+    # Le téléphone garde le Cours de CA-E6 : un groupe par matière, les cartes de l'élève en lignes.
+    assert_select "#courses_groups > section", 2
+    assert_select "#courses_groups li#course_#{@course.slug}"
+  end
+
+  test "CA-E15: ?material= opens that subject, which Cours then remembers in the session" do
+    sign_in_as lessons_student
+
+    get courses_path(material: @philo.slug)
+
+    assert_equal [ "lesson_material_#{@philo.slug}" ], current_pill
+    assert_equal [ "lesson_#{@published.slug}" ], lesson_ids
+
+    get courses_path
+
+    assert_equal [ "lesson_material_#{@philo.slug}" ], current_pill
+    assert_equal [ "lesson_#{@published.slug}" ], lesson_ids
+  end
+
+  test "CA-E15: an unknown subject, or one of another class, falls back to the first subject, and is never remembered" do
+    create_course(name: "English", level: @seconde, material: create_material(name: "Anglais"))
+    sign_in_as lessons_student
+    get courses_path(material: @philo.slug)
+
+    [ "nope", "anglais", "" ].each do |slug|
+      get courses_path(material: slug)
+
+      assert_response :success
+      assert_equal [ "lesson_material_#{@philo.slug}" ], current_pill, "« #{slug} » : la dernière matière valide reste"
+    end
+  end
+
+  test "CA-E15: an unknown subject with nothing remembered opens the first subject of the grid" do
+    create_course(name: "English", level: @seconde, material: create_material(name: "Anglais"))
+    sign_in_as lessons_student
+
+    get courses_path(material: "anglais")
+
+    assert_equal [ "lesson_material_#{@svt.slug}" ], current_pill
+    assert_select "#lesson_materials a[href*=anglais]", 0
+  end
+
+  test "CA-E15: a remembered subject the student's class no longer has falls back to the first subject" do
+    anglais = create_material(name: "Anglais")
+    english = create_course(name: "English", level: @tle, material: anglais, series: @course.series)
+    student = create_student_for(@course)
+    sign_in_as student
+    get courses_path(material: anglais.slug)
+    assert_equal [ "lesson_material_#{anglais.slug}" ], current_pill
+
+    english.update!(status: "draft", published_at: nil, archived_at: nil)
+    get courses_path
+
+    assert_equal [ "lesson_material_#{@svt.slug}" ], current_pill
+  end
+
+  test "CA-E14: a lesson card shows its sheets, 3 then « Voir les N fiches », and « À revoir » for this student only" do
+    sheets = Array.new(5) { |index| create_essential(course: @course, name: "Fiche #{index + 1}") }
+    create_gap(student: lessons_student, essential: sheets.second)
+    create_gap(student: create_student_for(@course), essential: sheets.first)
+    sign_in_as lessons_student
+
+    get courses_path(material: @svt.slug)
+
+    assert_select "li#lesson_#{@course.slug}" do
+      assert_select "li[id^=lesson_essential_]", 5
+      assert_select "li[id^=lesson_essential_][hidden]", 2
+      assert_select "li#lesson_essential_#{sheets.first.slug} a[href=?]", course_essential_path(@course.slug, sheets.first.slug)
+      assert_select "li#lesson_essential_#{sheets.second.slug}", text: including(tl("essential_row.review"))
+      assert_select "li#lesson_essential_#{sheets.first.slug}", text: including(tl("essential_row.review")), count: 0
+      assert_select "button", text: tl("course_card.more_essentials", count: 5)
+    end
+  end
+
+  test "CA-E14: a lesson with 3 sheets or fewer has no « Voir les N fiches »" do
+    3.times { create_essential(course: @course) }
+    sign_in_as lessons_student
+
+    get courses_path(material: @svt.slug)
+
+    assert_select "li#lesson_#{@course.slug} li[id^=lesson_essential_]:not([hidden])", 3
+    assert_select "li#lesson_#{@course.slug} button", 0
+  end
+
+  test "CA-E14: the lessons read a search on their name, and the subject's pills stay" do
+    cell = create_course(name: "La cellule", level: @tle, material: @svt, series: @course.series)
+    sign_in_as lessons_student
+
+    get courses_path(material: @svt.slug, q: "cellule")
+
+    assert_equal [ "lesson_#{cell.slug}" ], lesson_ids
+    assert_select "#lessons_total", text: including(tl("index.total", count: 1))
+    assert_select "nav#lesson_materials a", 2
+  end
+
+  test "CA-E14: a student without a class has no pills nor lessons, only the empty state" do
+    sign_in_as create_student
+
+    get courses_path
+
+    assert_response :success
+    assert_select "nav#lesson_materials", 0
+    assert_select "#lessons_empty", text: including(tl("index.no_class_title"))
+  end
+
+  test "CA-E14: the teacher and the team keep their Cours, with no pills nor lessons block" do
+    [ create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle, series: @course.series) ]), create_team_member ].each do |user|
+      sign_in_as user
+
+      get courses_path(material: @svt.slug)
+
+      assert_response :success
+      assert_select "nav#lesson_materials", 0
+      assert_select "#student_lessons", 0
+      assert_select "#student_courses", 0
+    end
   end
 end
