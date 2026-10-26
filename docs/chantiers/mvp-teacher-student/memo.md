@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié — prêt pour le Lot 0 et le Lot P (2026-10-23) |
+| **Statut** | replanifié élève d'abord — 7 lots (A, B, F, puis C, D, E1, E2), en attente du « lance les lots » (2026-10-24) |
 | **Ouvert le** | 2026-10-22 |
 | **Branche** | `Develop` pour la documentation (commit direct, CLAUDE.md « Sobriété de tokens ») ; une branche de code pour la PR du lundi 26 |
 | **Programme** | — *(hors vagues de `refonte-application` : il choisit dans ce que les vagues ont livré)* |
@@ -97,6 +97,14 @@ Le lancement du mardi 27 octobre n'a pas besoin de nouveautés. Il a besoin d'un
 | Premier parcours enseignant (porteur, 2026-10-23 : « A ») | Accueil vide, déclarer ses classes, classe sans élève, fiche et « Assigner », fenêtre des jours : validés. L'échéance vient des jours de séance (ADR-0072), masqués sur la page de classe : **« Plus tard » est retiré** et « Modifier les jours de la … » sur la fiche rouvre la fenêtre | UDR enseignant §3.13, CA-L1 à CA-L4, Lot L |
 | Écrans enseignant en gris (porteur, 2026-10-23 : « option A ») | **Validés** : accueil, menu plein écran et ses 3 écrans (limite, retrait d'établissement, retrait de matière), page de classe, fiche d'un élève (« Fragile / Acquis » remplacés par le badge), Cours, rapport, inscription en 3 étapes | Maquettes envoyées au porteur (zip), non commitées ; elles se redessinent à partir des lignes de ce tableau |
 | Couleurs enseignant (porteur, 2026-10-23) | Palette froide de l'élève, puis variante demandée par le porteur : **le jaune du logo enseignant (`teacher` #ff8a00) remplace le bleu vif partout côté enseignant** (bandeau de l'accueil, barres de progression, segments de l'inscription), choix C contre ma recommandation B (jaune au bandeau seul). Badges en pastilles grises nommées, seul le trophée en couleur : oui | Le filet orange du haut disparaît (doublon du bandeau). Texte du bandeau en `band-ink` (6,2:1 sur #ff8a00). Boutons, liens, ronds d'icône et carte de bienvenue restent bleus. Risque assumé : une barre jaune voisine la pastille ambre « en retard », que l'UDR palette réservait au retard ; l'UDR enseignant l'écrit comme exception de rôle. Amende la décision du 2026-10-22 « orange en accent fin » |
+| Écrans retenus rassemblés (porteur, 2026-10-26) | **140 maquettes**, chacune en gris et en couleur, mêmes numéros et mêmes noms par paire : élève 18 au téléphone et 18 sur ordinateur, enseignant 17 et 17. Archive `lnclass-ecrans-v10-2026-10-26-renumerote.zip`, détenue par le porteur | Les maquettes n'étaient dans aucun commit : reconstituées depuis les sessions du 23 au 25, puis complétées (gris d'abord, validation, puis couleur). Non commitées (règle des captures) |
+| Noms des matières et ton (porteur, 2026-10-26 : « utilise son abréviation », « vouvoie partout et mets Maths ») | **« PC »** pour Physique-Chimie, **« Maths »** partout (jamais « Math ») ; **l'enseignant est vouvoyé partout**, « retirez-en un pour en ajouter » compris | UDR enseignant §3.1 et §3.4 ; la valeur `mathematiques` de `shared.subjects.short` passe de « Math » à « Maths » au lot M |
+| Fenêtre des jours (porteur, 2026-10-26) | « Plus tard » retiré de la maquette téléphone aussi | Confirme l'option A du 2026-10-23 (UDR enseignant §3.13) |
+| Mon compte de l'élève sur ordinateur (porteur, 2026-10-26 : « A : panneau de 400 px ») | Panneau de 400 px ; **en-tête sans « 3e B · établissement »** | UDR écrans élève, CA-E8, lot O2. Au téléphone, l'en-tête garde la classe (maquettes du 2026-10-23) |
+| Page d'accueil publique (porteur, 2026-10-26) | **Photo actuelle** (on la remplacera par une photo de 3 ou 4 élèves à la maison) ; pastille **« Même sans internet »** ; bouton **« Enseignant(e) »** | Confirme les choix du 2026-10-23 ; l'écart sur le hors ligne reste assumé jusqu'au Play Store |
+| Accueil enseignant sur ordinateur (porteur, 2026-10-26) | **Barre du haut à filet jaune**, comme /student et /team ; **pas de fond jaune derrière les classes** ; **classes en carrousel** de gauche à droite ; **annonces en carrousel, deux visibles**, chacune avec son illustration et sa lecture audio | Remplace la grille de 3 colonnes et le bandeau du 2026-10-24 (UDR enseignant §3.3, CA-G13, lot P1). Illustration et audio existent déjà dans `communication/messages/_card` |
+| Gabarit enseignant sur ordinateur (porteur, 2026-10-26 : « ajoute-la sur tous les écrans enseignant », « sur la sidebar, il manque l'avatar ») | Barre du haut sur **tous** les écrans enseignant (logo, « Lnclass », « Besoin d'aide ? », avatar ; sans avatar à l'inscription) ; **bloc de profil en tête de la barre latérale** (avatar, nom, « Maths · PC · CSMT ») | UDR enseignant §3.14, CA-G12, lot P0. Remplace « barre latérale sans carte de profil » du 2026-10-24 pour l'enseignant ; l'élève garde sa barre sans profil. Le téléphone ne change pas |
+| Mon compte, page de classe et rapport de l'enseignant sur ordinateur (porteur, 2026-10-26) | **Validés** tels que décrits le 2026-10-24 | UDR enseignant §3.4, §3.5, §3.8 |
 
 ## Cas limites identifiés
 
@@ -114,11 +122,22 @@ Le lancement du mardi 27 octobre n'a pas besoin de nouveautés. Il a besoin d'un
 
 ## Reprise dans une nouvelle session
 
-La session du 2026-10-22/23 a atteint ses 40 commits. La suivante reprend ici, dans cet ordre :
+**État au soir du 2026-10-23** (deuxième session) :
 
-1. ~~**Couleurs enseignant**~~ : fait le 2026-10-23 (ligne « Couleurs enseignant » du tableau) ; 11 écrans dessinés en jaune et envoyés au porteur, non commités.
-2. ~~**UDR enseignant**~~ : écrite et acceptée le 2026-10-23, [`UDR-XXXX-ecrans-enseignant-sans-repetition`](../../decisions/udr/XXXX-ecrans-enseignant-sans-repetition.md). L'amendement d'ADR-0103 ne porte que sur l'inscription (une seule matière) : le plafond de 3 existait déjà. Tranché en l'écrivant : une assignation est dans « Cette semaine » (échéance dans 7 jours, ou échue depuis 14 jours au plus avec des élèves en retard) **ou** dans « Historique », jamais les deux ; le badge « Diamant » d'un élève = tous ses exercices de la classe sans faute.
-3. ~~**`prd.md`**~~ (60 critères Gherkin, CA-A1 à CA-K3) : écrit le 2026-10-23 ; [`carte-des-ecrans.md`](carte-des-ecrans.md) (livrable 2) écrite le 2026-10-23 et ADR du code de classe accepté ; [`plan.md`](plan.md) (livrable 4) écrit le 2026-10-23, 15 lots en 5 vagues : orchestrateur = code de classe, inscription élève, accueil élève ; Touré et Konan = page d'accueil publique, jetons de palette, écrans élève élagués, écrans enseignant.
-4. Versions ordinateur (1280 px) des écrans validés.
-5. Retour de l'Espace établissement le 2 novembre, à planifier.
+- Fait : couleurs enseignant (jaune, choix C), UDR enseignant (§3.13 premier parcours, option A sur les jours de séance), PRD (64 critères), carte des écrans, ADR du code de classe accepté, plan (15 lots, 5 vagues), lots attribués par issues GitHub (Touré #285 à #289, Konan #290 à #294).
+- **Lot 0** lancé sur `feature/mvp-teacher-student` (agent `executant-lot`) : vérifier son commit, lancer les tests des fichiers touchés, pousser la branche. Tant qu'elle n'est pas poussée, les lots de vague 2 ne peuvent pas partir.
+- **Lot P** (Touré, #285) : peut démarrer en même temps que le Lot 0.
+- PR #284 (script de démarrage des sessions cloud, Chromium sous `chrome-linux64`) : il manque la ligne de preuve de `bin/ci-quiet` avant fusion.
 
+**À trancher par le porteur** (écrans ordinateur v1 envoyés : accueil élève, accueil enseignant, page de classe, rapport) :
+
+1. Accueil élève sur ordinateur : colonne étroite (décision du 2026-10-22) ou page large comme l'enseignant (recommandé) ?
+2. « Mon compte » sur ordinateur : panneau latéral de 400 px (recommandé) ou plein écran ?
+3. Puis dessiner les autres écrans ordinateur (inscription, Ma classe, Cours, profil, fiche élève, retraits, assignation) et les ajouter en commentaire des issues concernées.
+
+Ensuite : lots A et C (orchestrateur) dès le Lot 0 fusionné, puis B, J, Z. Retour de l'Espace établissement le 2 novembre (drapeau `school_space_enabled`).
+
+**Troisième session (2026-10-24)** : le porteur a validé (« option A ») de traiter l'élève d'abord. `plan.md` et `prd.md` sont réécrits pour l'élève seul (7 lots, 34 critères) ; l'ancien plan de 15 lots et les critères enseignant restent dans la version `c766532`, base des lots enseignant à venir. Les issues #285 à #294 suivent encore l'ancien plan : à réaligner au départ des lots. Rien n'est codé avant le « lance les lots » du porteur.
+
+**Cinquième session (2026-10-26, « Lnclass réforme organisation »)** : les écrans retenus sont rassemblés et complétés, 140 maquettes en gris et en couleur (archive v10, chez le porteur). Les décisions du jour sont reportées dans l'UDR enseignant (§3.1, §3.3, §3.4, §3.9, §3.14 nouveau), l'UDR écrans élève, `prd.md` (CA-E8), `prd-enseignant.md` (CA-H1, CA-H3, CA-N1, CA-G12, CA-G13 nouveaux) et les deux plans (M, O2, P0, P1). Aucun ADR : rien de technique n'a été décidé. Mémoire de passation : `.ecc/memory/team/`.
+- **Fermés le même jour** : les maquettes grises de « Mon compte » enseignant au téléphone sont alignées sur les jaunes (établissements de Treichville et Koumassi, archive v11) ; l'annonce « Mme Kamaté · Direction — Conseil de classe jeudi » est **un texte inventé pour la maquette** (porteur, 2026-10-26), ni à publier ni à reprendre en données de démonstration.
