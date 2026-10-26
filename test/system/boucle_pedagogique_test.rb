@@ -271,7 +271,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       select "SVT", from: "teacher_registration[material_slug]"
       fill_in "teacher_registration[last_name]", with: "YAO"
       fill_in "teacher_registration[first_name]", with: "Koffi"
-      choose t("genders.male")
+      choose t("identity.teacher_registrations.form.genders.male")
       fill_in "teacher_registration[contact]", with: TEACHER_CONTACT
       fill_in "teacher_registration[pin]", with: "1357"
       fill_in "teacher_registration[pin_confirmation]", with: "1357"

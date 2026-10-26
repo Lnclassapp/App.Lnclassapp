@@ -33,7 +33,7 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
     select "SVT", from: "teacher_registration[material_slug]"
     fill_in "teacher_registration[last_name]", with: "KOUASSI"
     fill_in "teacher_registration[first_name]", with: "Aya  Marie"
-    choose t("genders.female")
+    choose t("identity.teacher_registrations.form.genders.female")
     paste "teacher_registration[contact]", contact
   end
 
@@ -141,7 +141,7 @@ class Identity::TeacherSignupWithoutJavascriptTest < ApplicationSystemTestCase
     select "SVT", from: "teacher_registration[material_slug]"
     fill_in "teacher_registration[last_name]", with: "KOUASSI"
     fill_in "teacher_registration[first_name]", with: "Aya Marie"
-    choose I18n.t("genders.female")
+    choose I18n.t("identity.teacher_registrations.form.genders.female")
     fill_in "teacher_registration[contact]", with: "+225 07 01 02 03 04"
     fill_in "teacher_registration[pin]", with: "4821"
     fill_in "teacher_registration[pin_confirmation]", with: "1357"

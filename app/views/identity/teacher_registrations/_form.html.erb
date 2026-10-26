@@ -80,7 +80,7 @@
             <%= form.radio_button :gender, gender, required: true,
                                   class: "absolute inset-0 cursor-pointer appearance-none rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
                                   "aria-invalid": ("true" if gender_error) %>
-            <%= t("genders.#{gender}") %>
+            <%= t(".genders.#{gender}") %>
           </label>
         <% end %>
       </div>

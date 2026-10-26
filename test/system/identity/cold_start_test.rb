@@ -22,7 +22,7 @@ class Identity::ColdStartTest < ApplicationSystemTestCase
     select "SVT", from: "teacher_registration[material_slug]"
     fill_in "teacher_registration[last_name]", with: "KONÉ"
     fill_in "teacher_registration[first_name]", with: "Awa"
-    choose I18n.t("genders.female")
+    choose I18n.t("identity.teacher_registrations.form.genders.female")
     fill_in "teacher_registration[contact]", with: "0501020304"
     fill_in "teacher_registration[pin]", with: "4821"
     fill_in "teacher_registration[pin_confirmation]", with: "4821"

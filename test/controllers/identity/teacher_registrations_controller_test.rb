@@ -78,6 +78,14 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     end
   end
 
+  test "the gender pills read « M. » and « Mme » (UDR enseignant §3.9)" do
+    get new_teacher_registration_path
+
+    assert_select "#teacher-registration-gender label", count: 2 do |pills|
+      assert_equal [ "M.", "Mme" ], pills.map { it.text.squish }
+    end
+  end
+
   test "without JavaScript, the DRENA chosen comes back in GET and lists its active schools" do
     create_school(drena: @drena, name: "Lycée fermé", status: "inactive")
 
