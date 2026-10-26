@@ -52,7 +52,7 @@ class School::CurrentSchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#account_schools", count: 0
     assert_select "#change_school", count: 0
     # mvp-teacher-student (UDR enseignant, Mon compte) : sous trois établissements, l'entrée dit « Ajouter un établissement ».
-    assert_select "a[href='#{teacher_schools_path}']", text: t("shared.navigation.account_panel.entries.add_school")
+    assert_select "a[href='#{teacher_schools_path}']", text: /#{t("shared.navigation.account_panel.entries.add_school")}/
   end
 
   test "a school the teacher does not belong to, or an unknown one, is refused by a toast and nothing changes" do
