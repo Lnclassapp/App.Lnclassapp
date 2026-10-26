@@ -113,3 +113,10 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | **PR** | |
 | **ADR produits** | |
 | **UDR produits** | |
+
+## 2026-10-26 — Lot P4 (inscription enseignant sur ordinateur)
+
+- Fait dans `new.html.erb` seul (`_form` inchangé) : à partir de lg, deux colonnes égales ; panneau `role_fill_class(:teacher)` + `text-band-ink` à gauche (logo 64 px, anneau blanc `ring-3`, bienvenue), hors des cibles `welcome` du contrôleur, donc visible à toutes les étapes ; carte de bienvenue et logo d'en-tête en `lg:hidden` ; colonne de droite `max-w-md` (28 rem).
+- Le logo du panneau est le lien vers l'accueil public (UDR-0054 §3.2, test FU-13), le logo d'en-tête étant caché sur ordinateur.
+- Écart : la barre du haut du §3.14 (filet, logo, « Lnclass », « Besoin d'aide ? » au-dessus des deux colonnes) revient au lot P0 ; « Besoin d'aide ? » reste ici en haut de la colonne de droite en attendant.
+- Hors lot, déjà en échec avant ce lot : `help_test`, `help_sheet_test` (3), `student_classroom_test` (menu avatar), `boucle_pedagogique_test` (`#classroom_link` ambigu).
