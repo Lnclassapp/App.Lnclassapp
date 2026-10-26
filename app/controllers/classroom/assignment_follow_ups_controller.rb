@@ -1,5 +1,5 @@
 # 🌐 DELIVERY · Classroom::AssignmentFollowUpsController
-# Rôle : suivi d'un exercice assigné (UDR enseignant §3.8) : comptes, cases par badge (?badge=), rendus en retard et pas encore faits
+# Rôle : rapport d'un exercice assigné (UDR enseignant §3.8) : comptes, cases par badge (?badge=), questions, élèves (ceux qui ne l'ont pas fait compris)
 # ADR  : 0026, 0072, 0079, 0088 · UDR : 0062, 0072, enseignant §3.8 · FollowAssignmentPolicy avant toute lecture : élève, autre enseignant, direction → 403
 module Classroom
   class AssignmentFollowUpsController < AuthenticatedController

@@ -20,7 +20,8 @@ class Identity::ProfileMaterialsControllerTest < ActionDispatch::IntegrationTest
     Orm::TeacherSchoolMaterial.where(teacher:, school:).in_order.map { it.material.slug }
   end
 
-  test "the profile shows the subjects of the current school, with « Modifier »" do
+  # CA-H6 (lot M, mvp-teacher-student): the line has no « Modifier » any more; « Mon compte » is the one place.
+  test "the profile shows the subjects of the current school, without « Modifier »" do
     sign_in_as @teacher
 
     get profile_path
@@ -28,7 +29,8 @@ class Identity::ProfileMaterialsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#profile_materials dt", "Matières"
     assert_select "#profile_materials dd span", text: "Physique-Chimie"
     assert_select "#profile_materials dd span", text: "SVT"
-    assert_select "#profile_materials a[href='#{edit_profile_materials_path}'][data-turbo-frame=modal][aria-label='Modifier mes matières']"
+    assert_select "#profile_materials a, #profile_materials button", 0
+    assert_select "#profile_information a[href='#{edit_profile_materials_path}']", 0
   end
 
   test "the modal opens in the frame, checked with his subjects" do

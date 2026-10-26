@@ -118,7 +118,8 @@ class Classroom::TeachingSelectionsControllerTest < ActionDispatch::IntegrationT
   test "non-regression: declared classrooms do not make an onboarding, and withdrawing them all does not undo one" do
     declare(@sixth1)
     post session_path, params: { session: { contact: @teacher.contact, pin: "2468" } }
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path # UDR enseignant §3.13 : l'accueil porte « Ajoutez vos classes », plus de renvoi ici
+    assert_not onboarded?(@teacher)
     sign_out
 
     onboarded = create_teacher(school: @school)

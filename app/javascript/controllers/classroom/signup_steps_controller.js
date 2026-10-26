@@ -11,7 +11,7 @@ const PHONE = /^\d{10}$/
 export default class extends Controller {
   static targets = [
     "step", "segment", "counter", "live", "back", "welcome",
-    "code", "codeField", "codeFrame", "checking", "noCode", "cascade", "recap", "recapName", "recapSchool",
+    "code", "codeField", "codeFrame", "checking", "checkFailed", "noCode", "cascade", "recap", "recapName", "recapSchool",
     "panelStep", "panelRecap", "panelRecapName", "panelRecapSchool"
   ]
   static values = {
@@ -81,6 +81,19 @@ export default class extends Controller {
     if (this.codeFrameTarget.querySelector("#classroom-code-unknown")) this.markCodeInvalid()
   }
 
+  // Requête en échec (`turbo:fetch-request-error`, réseau coupé) ou réponse sans le frame (`turbo:frame-missing`, 5xx), toutes deux
+  // sur le frame : plus de « Vérification… », un message court relié au champ, et le `src` retiré pour qu'une nouvelle saisie relance.
+  codeCheckFailed(event) {
+    if (event.type === "turbo:frame-missing") event.preventDefault()
+    // Une erreur en retard, pour un code déjà modifié ou vidé, ne dit rien.
+    if (!this.codeFrameTarget.getAttribute("src")) return
+
+    this.codeFrameTarget.removeAttribute("src")
+    this.checkingTarget.hidden = true
+    this.codeFrameTarget.replaceChildren(this.checkFailedTarget.content.cloneNode(true))
+    this.describeCode(true)
+  }
+
   // « Je n'ai pas de code » : la cascade s'ouvre (CSS), le champ code se vide et ne part plus avec le formulaire.
   toggleCascade() {
     if (this.noCodeTarget.checked) {
@@ -137,7 +150,10 @@ export default class extends Controller {
     const texts = [...step.querySelectorAll("input:not([type=radio])")]
     const gender = step.querySelector("input[type=radio]:checked")
     const phone = step.querySelector("input[type=tel]")
-    return texts.every((input) => input.value.trim() !== "" && input.checkValidity()) && !!gender && PHONE.test(phone?.value || "")
+    // La matière de l'enseignant est une liste obligatoire : sans valeur, on reste à l'étape 2.
+    const lists = [...step.querySelectorAll("select[required]")]
+    return texts.every((input) => input.value.trim() !== "" && input.checkValidity()) && lists.every((list) => list.value !== "") &&
+           !!gender && PHONE.test(phone?.value || "")
   }
 
   render() {

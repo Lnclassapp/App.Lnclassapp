@@ -158,6 +158,8 @@ end
       assert_text "Aucune photo : vos initiales s'affichent."
       assert_text "Lycée Classique d'Abidjan"
       assert_text "SVT"
+      # CA-H6 (lot M): the subjects line has no « Modifier » any more; « Mon compte » is the one place to change them.
+      within("#profile_materials") { assert_no_link I18n.t("identity.profiles.information.edit_materials") }
     end
     within("#profile_security") { assert_text "Votre code secret protège votre compte." }
     sign_out

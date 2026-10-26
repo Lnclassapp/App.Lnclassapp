@@ -26,7 +26,8 @@ class Classroom::TeachingSelectionTest < ApplicationSystemTestCase
 
   test "declare three classrooms, withdraw one, then finish — the toggles and the counter follow without a reload" do
     sign_in_as @teacher
-    assert_current_path teacher_classrooms_path
+    assert_current_path teacher_home_path # UDR enseignant §3.13 : l'accueil demande les classes
+    visit teacher_classrooms_path
     assert_selector "h1", text: tl("index.title")
     assert_selector "#teaching_counter", text: counter(0)
 
@@ -58,6 +59,7 @@ class Classroom::TeachingSelectionTest < ApplicationSystemTestCase
   test "the same declaration on a 390 px screen" do
     with_mobile_viewport do
       sign_in_as @teacher
+      visit teacher_classrooms_path
 
       assert_no_page_reload do
         toggle("3ème B").click

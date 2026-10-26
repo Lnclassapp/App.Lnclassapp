@@ -61,6 +61,39 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
     assert_no_selector "#classroom-code-unknown"
   end
 
+  # Review of #295: a cut network (fetch rejected) or a 5xx without the frame must not leave « Vérification… » on screen for ever,
+  # nor replace the signup page by the error page; typing again checks again.
+  test "a failed code check (network, then 500) stays on step 1 with a short message, and a new typing checks again" do
+    visit new_student_registration_path
+    execute_script(<<~JS)
+      const original = window.fetch
+      window.codeCheckMode = "network"
+      window.fetch = (input, init) => {
+        if (!String(input?.url || input).includes("/classroom-codes/")) return original(input, init)
+        return window.codeCheckMode === "network" ? Promise.reject(new TypeError("Failed to fetch"))
+          : window.codeCheckMode === "error" ? Promise.resolve(new Response("<html><body>Erreur</body></html>", { status: 500, headers: { "Content-Type": "text/html" } }))
+          : original(input, init)
+      }
+    JS
+
+    { "network" => "zzzzzz", "error" => "zzzzzy" }.each do |mode, code|
+      execute_script("window.codeCheckMode = '#{mode}'")
+      fill_in "student_registration[join_code]", with: code
+
+      assert_selector "#classroom-code-check-failed", text: I18n.t("#{FORM}.check_failed")
+      assert_no_selector "#signup-code-checking", visible: :visible
+      assert_no_selector "turbo-frame#classroom_code_preview[src]"
+      assert_selector "#student_registration_join_code[aria-describedby~=classroom_code_preview]"
+      assert_current_path new_student_registration_path
+      assert_step 1
+    end
+
+    execute_script("window.codeCheckMode = 'ok'")
+    fill_in "student_registration[join_code]", with: @code
+
+    assert_step 2
+  end
+
   test "CA-C4, CA-C5: step 2 moves on a second after the last key, « Retour » keeps the fields, and the account is created with way « code »" do
     visit new_student_registration_path
     fill_in "student_registration[join_code]", with: @code

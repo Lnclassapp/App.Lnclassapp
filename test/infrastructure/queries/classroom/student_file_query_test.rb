@@ -146,7 +146,7 @@ module Queries
         assert_equal [ @awa.public_id ], follow_up.late_students.map(&:public_id)
         assert_equal follow_up.late_students.sole.done_on, row.done_on
         assert_equal :late, row.status
-        assert_equal [ [ @awa.public_id, 65, :progress ] ], detail.students.map { [ it.public_id, it.best, it.trend ] }
+        assert_equal [ [ @awa.public_id, 65 ] ], detail.students.map { [ it.public_id, it.best ] }
         assert_equal [ 65, :fragile, :progress ], row.to_h.values_at(:best, :category, :trend)
       end
 

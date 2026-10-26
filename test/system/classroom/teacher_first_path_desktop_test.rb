@@ -31,20 +31,25 @@ class Classroom::TeacherFirstPathDesktopTest < ApplicationSystemTestCase
     course = create_course(name: "Génétique", level: tle, series: create_series(name: "D"), material: create_material(name: "SVT", category: "science"))
     essential = create_essential(course:, name: "Méiose")
     exercise = create_exercise(essential:, title: "Les phases")
-    teacher = create_teacher(school:, classrooms: [ create_classroom(school:, level: tle, series: course.series, name: "Tle D 1") ])
+    classroom = create_classroom(school:, level: tle, series: course.series, name: "Tle D 1")
+    teacher = create_teacher(school:, classrooms: [ classroom ])
     sign_in_as teacher
 
     visit course_essential_path(course.slug, essential.slug)
     assert_selector "#essential_exercises"
     page.execute_script("document.getElementById('essential_header').style.height = '3000px'")
     page.execute_script("window.scrollTo(0, 1500)")
-    sleep 0.3
-    box = rect("#essential_exercises")
+    # La colonne collante se pose une fois le défilement fini : la mesure se refait jusque-là.
+    box = nil
+    page.document.synchronize do
+      box = rect("#essential_exercises")
+      raise Capybara::ExpectationNotMet, "la colonne défile encore" unless (box["top"] - 32).abs <= 2
+    end
     assert_in_delta 32, box["top"], 2, "la colonne « Exercices » ne reste pas visible"
     assert_in_delta 380, box["width"], 2
 
     page.execute_script("window.scrollTo(0, 0)")
-    trigger = find("#assignment_#{teacher.classrooms.first.public_id}_Exercise_#{exercise.public_id} a", text: "Assigner") rescue find("a", text: "Assigner")
+    trigger = find("#assignment_#{classroom.public_id}_Exercise_#{exercise.public_id} a", text: "Assigner")
     trigger.click
     assert_selector "turbo-frame#modal dialog[open]"
     dialog = rect("turbo-frame#modal dialog[open]")

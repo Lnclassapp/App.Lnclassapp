@@ -9,7 +9,7 @@ require "test_helper"
 class Identity::TeacherHeaderTest < ActionDispatch::IntegrationTest
   TRIGGER = "a[href='/teachers/menu'][data-action='modal#open'][aria-haspopup=dialog][aria-controls=account_panel]".freeze
 
-  def tn(key) = I18n.t("shared.navigation.#{key}")
+  def tn(key, **) = I18n.t("shared.navigation.#{key}", **)
 
   test "CA-T6: the teacher's header — avatar on the left, help alone on the right, no strip, a panel with its four entries" do
     sign_in_as create_teacher(school: create_school(name: "Lycée moderne 2"), first_name: "Awa", last_name: "Traoré")
@@ -32,13 +32,15 @@ class Identity::TeacherHeaderTest < ActionDispatch::IntegrationTest
     end
     # The dark mode lives in the panel, not beside the avatar.
     assert_select "header dialog#account_panel [data-controller=theme] button[role=switch]", 1
-    assert_select "header dialog#account_panel.dialog-drawer" do
+    # Lot M: « Mon compte » is a full-screen <dialog>; each counted entry reads « N sur 3 » under its label.
+    assert_select "header dialog#account_panel.h-dvh.w-full" do
       assert_select "p", /Lycée moderne 2/
       links = css_select("header dialog#account_panel nav[aria-label='#{tn('account_panel.label')}'] li a")
+      counter = tn("account_panel.counter.under", used: 1, max: 3)
       assert_equal [ [ profile_path, tn(:profile) ], [ edit_profile_pin_path, tn("account_panel.entries.secret") ],
-                     [ edit_profile_materials_path, tn("account_panel.entries.add_material") ],
-                     [ teacher_schools_path, tn("account_panel.entries.add_school") ] ],
-                   links.map { [ it["href"], it.text.strip ] }
+                     [ edit_profile_materials_path, "#{tn('account_panel.entries.add_material')} #{counter}" ],
+                     [ teacher_schools_path, "#{tn('account_panel.entries.add_school')} #{counter}" ] ],
+                   links.map { [ it["href"], it.text.squish ] }
       assert_select "form[action='#{session_path}'] button", tn(:sign_out)
     end
   end

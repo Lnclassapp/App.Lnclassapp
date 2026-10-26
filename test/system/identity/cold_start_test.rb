@@ -29,7 +29,7 @@ class Identity::ColdStartTest < ApplicationSystemTestCase
     growth_shot(shot, desktop:)
     click_on I18n.t("#{SIGNUP}.form.submit")
     assert_toast I18n.t("#{SIGNUP}.create.welcome")
-    assert_current_path teacher_classrooms_path
+    assert_current_path teacher_home_path
   end
 
   test "ADR-0083 §4.3: by the DRENA then the school, the teacher is attached at once, without a request, and reaches the catalogue" do

@@ -7,6 +7,8 @@ module Repositories
       include Ports::Classroom::ClassroomRepositoryPort
 
       LINK_TOKEN_SQL = "substr(replace(gen_random_uuid()::text, '-', ''), 1, 12)".freeze
+      # L'index unique du nom (école, année, nom) ; celui du code et celui du jeton du lien ne sont pas un nom pris.
+      NAME_INDEX = "index_classrooms_on_school_id_and_school_year_and_name".freeze
       # ADR-0059 : ce qui fait qu'une classe a servi, dans l'ordre où la raison est donnée.
       USAGES = { has_students: Orm::ClassroomStudent, has_teachers: Orm::TeacherClassroom,
                  has_assignments: Orm::ClassroomAssignment }.freeze
@@ -78,13 +80,16 @@ module Repositories
         SQL
       end
 
-      # Un nom pris dans l'école et l'année donne :conflict. Savepoint : traduit seulement une violation d'index unique,
-      # sans casser la transaction du use case.
+      # Un nom pris dans l'école et l'année donne :conflict. Savepoint : traduit seulement la violation de l'index unique du nom,
+      # sans casser la transaction du use case ; toute autre violation (code, jeton du lien) est relancée.
       def create(classroom:)
         record = Orm::Classroom.new(attributes_of(classroom))
         Orm::Classroom.transaction(requires_new: true) { record.save! }
         ::Shared::Result.success(map_to_entity(record))
-      rescue ActiveRecord::RecordNotUnique
+      rescue ActiveRecord::RecordNotUnique => e
+        # Une collision du code ou du jeton du lien (index uniques) n'est pas un nom pris : elle monte, bruyante, au lieu d'un faux message.
+        raise unless e.message.include?(NAME_INDEX)
+
         ::Shared::Result.failure(:conflict, errors: { name: [ :taken ] })
       end
 

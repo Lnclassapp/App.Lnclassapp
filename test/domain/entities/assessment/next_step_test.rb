@@ -43,6 +43,19 @@ module Entities
         assert_equal :revisit_notion, step(done: Comprehension::MIN_DONE_FOR_READING, pending: 1, dominant: :struggling)
       end
 
+      # Décision du porteur (2026-10-26, maquette) : « Reprenez la question 3 en classe » nomme la moins réussie de la classe.
+      test "the question to name is the least successful one, the first on a tie, numbered from 1" do
+        assert_equal 3, NextStep.weakest_question([ 90, 65, 30 ])
+        assert_equal 2, NextStep.weakest_question([ 90, 30, 30 ])
+        assert_equal 1, NextStep.weakest_question([ 0, 50, 0 ])
+      end
+
+      test "a question nobody answered is not the least successful; without any attempt there is none to name" do
+        assert_equal 2, NextStep.weakest_question([ nil, 40, 80 ])
+        assert_nil NextStep.weakest_question([ nil, nil ])
+        assert_nil NextStep.weakest_question([])
+      end
+
       test "the same reading gives the same step" do
         assert_equal Array.new(3) { step(done: 8, dominant: :fragile) }.uniq, [ :revisit_questions ]
       end
