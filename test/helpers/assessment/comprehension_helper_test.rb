@@ -32,17 +32,28 @@ module Assessment
       assert_equal "text-line", comprehension_badge_class(:bronze, 0)
     end
 
-    test "the labels of the section, of the summary and of the pending students, consumed by the lots A and B" do
+    test "the labels of the section: « 1. », « 18 / 20 justes », the lines of the students, and the empty states" do
       scope = "assessment.comprehension"
 
       assert_equal "Compréhension", t("#{scope}.section.title")
-      assert_equal "Question 1 : 50 % de réussite", t("#{scope}.section.question_label", number: 1, rate: "50 %")
-      assert_equal "8 en progrès · 7 sans évolution · 1 en baisse",
-                   t("#{scope}.trends_summary.sentence_html", **%i[progress flat decline].zip([ 8, 7, 1 ]).to_h { |key, count| [ key, t("#{scope}.trends_summary.#{key}", count:) ] })
-      assert_equal [ "Pas encore fait · 1", "Pas encore faits · 7" ], [ 1, 7 ].map { t("#{scope}.pending.title", count: it) }
-      %w[badges_label questions_title students_title question_number no_attempt first_rate first_rate_label to_revisit
-         to_revisit_label].each { assert I18n.exists?("#{scope}.section.#{it}", :fr), it }
-      %w[no_trend empty.title empty.description empty_category].each { assert I18n.exists?("#{scope}.#{it}", :fr), it }
+      assert_equal [ "1 / 2 juste", "0 / 5 juste", "18 / 20 justes" ],
+                   [ [ 1, 2 ], [ 0, 5 ], [ 18, 20 ] ].map { |correct, answered| t("#{scope}.section.correct_of", count: correct, answered:) }
+      assert_equal "3.", t("#{scope}.section.question_number", number: 3)
+      assert_equal [ "Fait le 22 oct.", "Pas encore fait", "En retard" ],
+                   [ t("#{scope}.student.done_on", date: "22 oct."), t("#{scope}.student.pending"), t("#{scope}.student.late") ]
+      %w[badges_label questions_title students_title no_attempt].each { assert I18n.exists?("#{scope}.section.#{it}", :fr), it }
+      %w[empty.title empty.description empty_category].each { assert I18n.exists?("#{scope}.#{it}", :fr), it }
+    end
+
+    test "the pill of a student who did it: the trophy of his badge (none below Bronze) and his grade on 20; the late pill only once overdue" do
+      gold = Struct.new(:badge, :grade).new(:gold, 16)
+      none = Struct.new(:badge, :grade).new(:none, 8)
+
+      assert_match(%r{<svg[^>]*text-gold.*16/20}m, comprehension_grade_badge(gold))
+      assert_no_match(/<svg/, comprehension_grade_badge(none))
+      assert_match(%r{8/20}, comprehension_grade_badge(none))
+      assert_match(/En retard/, comprehension_late_badge(true))
+      assert_nil comprehension_late_badge(false)
     end
 
     test "the small circle: a dot of the category, then « label · done/present »" do
@@ -89,10 +100,11 @@ module Assessment
     end
 
     # rapports-de-classe, Lot C (AS-23 ; ADR-0097 §4.6, UDR-0109 §3.2) : la vue ne choisit pas, elle traduit.
-    def detail(done:, present:, dominant: nil, decline: 0)
+    def detail(done:, present:, dominant: nil, decline: 0, weakest: nil)
       Queries::Assessment::ComprehensionDetailQuery::Detail.new(
         done:, present:, category: dominant, readable: Entities::Assessment::Comprehension.readable?(done),
-        badge_counts: { none: 4, bronze: 0, silver: 0, gold: 0, diamond: 0 }, trend_counts: { progress: 0, flat: 0, decline: }, selected: nil, questions: [], students: []
+        badge_counts: { none: 4, bronze: 0, silver: 0, gold: 0, diamond: 0 }, trend_counts: { progress: 0, flat: 0, decline: }, selected: nil, questions: [], students: [],
+        weakest_question: weakest
       )
     end
 
@@ -103,7 +115,7 @@ module Assessment
 
     test "the next step speaks in badges, never in the old categories" do
       %w[remind look_at_each revisit_notion revisit_questions watch_decline move_on].each do |step|
-        texts = I18n.t("assessment.comprehension.next_step.#{step}", locale: :fr, count: 2, min: 5)
+        texts = I18n.t("assessment.comprehension.next_step.#{step}", locale: :fr, count: 2, min: 5, target: "la question 1")
         Array(texts.is_a?(Hash) ? texts.values : texts).each { assert_no_match(/difficulté|Fragile|Acquis/i, it, step) }
       end
     end
@@ -120,17 +132,27 @@ module Assessment
       assert_equal "Relancez l'élève qui ne l'a pas encore fait : les badges de la classe se liront à partir de 5 élèves.",
                    next_step_sentence(detail(done: 4, present: 5))
       assert_equal [ :look_at_each, {} ], comprehension_next_step(detail(done: 4, present: 4))
-      assert_equal [ :revisit_notion, { count: 4 } ], comprehension_next_step(detail(done: 6, present: 6, dominant: :struggling))
-      assert_equal [ :revisit_questions, {} ], comprehension_next_step(detail(done: 6, present: 9, dominant: :fragile))
+      assert_equal [ :revisit_notion, { count: 4, target: "la question 3" } ],
+                   comprehension_next_step(detail(done: 6, present: 6, dominant: :struggling, weakest: 3))
+      assert_equal [ :revisit_notion, { count: 4, target: "la notion" } ],
+                   comprehension_next_step(detail(done: 6, present: 6, dominant: :struggling))
+      assert_equal [ :revisit_questions, { target: "la question 2" } ],
+                   comprehension_next_step(detail(done: 6, present: 9, dominant: :fragile, weakest: 2))
+      assert_equal [ :revisit_questions, { target: "les questions les moins réussies" } ],
+                   comprehension_next_step(detail(done: 6, present: 9, dominant: :fragile))
       assert_equal "Tous les élèves l'ont fait. La classe est trop petite pour comparer les badges : regardez chaque élève.",
                    next_step_sentence(detail(done: 4, present: 4))
-      assert_equal "4 élèves n'ont pas encore de badge. Reprenez la notion en classe avant d'avancer, puis relancez-les.",
+      assert_equal "4 élèves n'ont pas encore de badge. Reprenez la question 3 en classe, puis relancez-les.",
+                   next_step_sentence(detail(done: 6, present: 6, dominant: :struggling, weakest: 3))
+      assert_equal "4 élèves n'ont pas encore de badge. Reprenez la notion en classe, puis relancez-les.",
                    next_step_sentence(detail(done: 6, present: 6, dominant: :struggling))
-      assert_equal "La plupart des élèves en sont au Bronze : reprenez en classe les questions marquées, puis avancez.",
+      assert_equal "La plupart des élèves en sont au Bronze : reprenez en classe la question 2, puis avancez.",
+                   next_step_sentence(detail(done: 6, present: 9, dominant: :fragile, weakest: 2))
+      assert_equal "La plupart des élèves en sont au Bronze : reprenez en classe les questions les moins réussies, puis avancez.",
                    next_step_sentence(detail(done: 6, present: 9, dominant: :fragile))
-      assert_equal "La classe a atteint l'Argent ou mieux. 2 élèves sont en baisse : voyez-les dans la liste.",
+      assert_equal "La classe a atteint l'Argent ou mieux. 2 élèves sont en baisse : consultez leurs fiches.",
                    next_step_sentence(detail(done: 9, present: 9, dominant: :acquired, decline: 2))
-      assert_equal "La classe a atteint l'Argent ou mieux. Un élève est en baisse : voyez-le dans la liste.",
+      assert_equal "La classe a atteint l'Argent ou mieux. Un élève est en baisse : consultez sa fiche.",
                    next_step_sentence(detail(done: 9, present: 9, dominant: :acquired, decline: 1))
       assert_equal "La classe a atteint l'Argent ou mieux : vous pouvez avancer.", next_step_sentence(detail(done: 9, present: 9, dominant: :acquired))
     end
