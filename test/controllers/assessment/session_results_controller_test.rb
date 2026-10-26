@@ -87,6 +87,22 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/Revoir l'exercice/, response.body)
   end
 
+  # CA-E13 (UDR écrans élève §3.6 bis) : dès 1 024 px, une colonne de gauche de 340 px collante (badge, note, « Recommencer »),
+  # la correction à droite.
+  test "CA-E13: the result in a sticky 340 px left column, the review on the right" do
+    sign_in_as @student
+
+    show
+
+    assert_select "#session_result_layout[class~='lg:grid-cols-[340px_minmax(0,1fr)]']" do
+      assert_select "> #session_result_side.lg\\:sticky" do
+        assert_select "#session_result"
+        assert_select "form#restart-exercise-form"
+      end
+      assert_select "> #session_review"
+    end
+  end
+
   # CA-11 : 16/20, « Félicitations ! », la note verte et les confettis.
   test "à 16/20, « Félicitations ! », la note verte et les confettis" do
     @session.update!(score_percent: 80)

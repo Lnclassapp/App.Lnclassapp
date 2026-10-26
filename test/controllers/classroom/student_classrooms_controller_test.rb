@@ -75,8 +75,10 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
 
     assert_equal %w[student_classroom_header student_classroom_courses student_classroom_assigned student_classroom_treated],
                  sections
-    assert_select "#student_classroom .lg\\:grid-cols-2 > div > #student_classroom_assigned"
-    assert_select "#student_classroom .lg\\:grid-cols-2 > #student_classroom_treated"
+    # CA-E11 (UDR écrans élève §3.6 bis) : dès 1 024 px, les assignés dans la colonne de gauche (2/3), les traités à droite (1/3).
+    assert_select "#student_classroom .lg\\:grid-cols-3 > .lg\\:col-span-2 > #student_classroom_assigned"
+    assert_select "#student_classroom .lg\\:grid-cols-3 > #student_classroom_treated"
+    assert_select "#student_classroom .lg\\:grid-cols-2", 0
   end
 
   # CA-E3 (mvp-teacher-student, option A) : avec une fiche à revoir, la section vient juste après « Exercices assignés »,

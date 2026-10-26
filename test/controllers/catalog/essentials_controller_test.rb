@@ -134,6 +134,30 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#{row_of(@exercise)} .ui-button-primary", 1
   end
 
+  # CA-E12 (UDR écrans élève §3.6 bis) : dès 1 024 px, l'élève lit la fiche à gauche et une colonne de 300 px collante à droite.
+  test "CA-E12: for the student, the sheet on the left and the « Exercices » card in a sticky 300 px column on the right" do
+    sign_in_as @student
+
+    get page_path
+
+    assert_select "#essential_layout[class~='lg:grid-cols-[minmax(0,1fr)_300px]']" do
+      assert_select "> #essential_header"
+      assert_select "> #essential_side.lg\\:sticky > #essential_exercises"
+    end
+  end
+
+  test "CA-E12: the teacher and the team keep the old layout, the card under the sheet" do
+    [ create_teacher, create_team_member ].each do |user|
+      sign_in_as user
+
+      get page_path
+
+      assert_select "#essential_layout", 0
+      assert_select "#essential_side", 0
+      assert_select "#essential_exercises"
+    end
+  end
+
   test "the teacher reads the published exercises, without progress, session button nor team menu" do
     create_exercise(essential: @essential, title: "Brouillon caché", status: "draft")
     sign_in_as create_teacher
