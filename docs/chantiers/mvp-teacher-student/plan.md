@@ -279,7 +279,7 @@ Portes propres au pilote :
                      config/locales/shared/navigation.fr.yml · config/locales/identity/profiles.fr.yml · config/locales/school/student_schools.fr.yml *(nouveau)*
 - **Dépend de**    : E1
 - **Test associé** : test/system/identity/student_avatar_menu_test.rb · test/system/identity/profile_test.rb · test/infrastructure/queries/school/student_school_query_test.rb · test/controllers/school/student_schools_controller_test.rb
-- **Done quand**   : sur ordinateur, « Mon compte » s'ouvre en panneau de 400 px et se ferme par Échap, la croix ou le voile, le focus revenant sur l'avatar (CA-E7) ; sa liste contient « Mon établissement », pas Ma classe (CA-E8) ; le profil a la carte bleue au nom seul et 4 lignes (CA-E9) ; « Mon établissement » montre Nom, Sigle, DRENA, Type de l'établissement de l'élève et de lui seul (CA-E10) ; à 390 px, menu et profil restent ceux de CA-E1 et CA-E2
+- **Done quand**   : sur ordinateur, « Mon compte » s'ouvre en panneau de 400 px et se ferme par Échap, la croix ou le voile, le focus revenant sur l'avatar (CA-E7) ; son en-tête n'a que l'avatar et le nom, et sa liste contient « Mon établissement », pas Ma classe (CA-E8) ; le profil a la carte bleue au nom seul et 4 lignes (CA-E9) ; « Mon établissement » montre Nom, Sigle, DRENA, Type de l'établissement de l'élève et de lui seul (CA-E10) ; à 390 px, menu et profil restent ceux de CA-E1 et CA-E2
 
 ### Lot O3 — Inscription en deux colonnes
 
