@@ -14,7 +14,7 @@ module Catalog
     # Lot O5 (CA-E15) : le slug de la dernière matière que l'élève a ouverte, gardé en session pour « Cours » sans ?material=.
     LESSON_MATERIAL_KEY = :courses_lesson_material
 
-    helper_method :list_frame_request?, :filter_options, :student_audience, :teacher_scope, :teacher_grouped?, :student_material,
+    helper_method :list_frame_request?, :filter_options, :student_audience, :teacher_scope, :student_material,
                   :after_material, :teacher_material, :teacher_level_label, :lesson_materials, :lesson_material, :lessons_page
 
     def index
@@ -60,10 +60,6 @@ module Catalog
       @teacher_scope ||= Queries::Catalog::TeacherAudienceQuery.new.call(teacher_id: current_actor.user_id,
                                                                          school_id: current_actor.school_id)
     end
-
-    # UDR enseignant §3.7 (amende UDR-0126 §3.1) : l'enseignant ne voit qu'une matière à la fois, sans groupes. La page
-    # partagée (_page) garde sa branche « groupes » pour l'élève seulement.
-    def teacher_grouped? = false
 
     # La matière de la puce active : celle de l'adresse si c'en est une des siennes dans l'établissement courant, sinon la
     # première ; nil sans matière (l'état vide l'explique).
