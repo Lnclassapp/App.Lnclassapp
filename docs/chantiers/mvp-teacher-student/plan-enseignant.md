@@ -11,16 +11,18 @@
 
 **Calendrier : tout avant le pilote** (porteur, 2026-10-24 : « B, rien ne doit être en retard »). Pour tenir, l'orchestrateur reprend J et L et lance ses lots en agents parallèles ; Touré et Konan enchaînent un lot élève puis deux lots enseignant chacun ; le lot A est repris par l'orchestrateur (porteur, 2026-10-24 : abonnement Max du porteur, Pro pour Touré et Konan).
 
-| Lot | Pilote | Dépend de | Issue | Quand |
+| Lot | Pilote | Dépend de | Issue | Ordre (2026-10-26) |
 |---|---|---|---|---|
-| J — Inscription enseignant en 3 étapes | orchestrateur | A, C | #289 | dimanche 25 |
-| L — Premier parcours : déclarer, assigner, jours de séance | orchestrateur | A | #294 | dimanche 25 |
-| K — Rapport d'un exercice en badges | Touré (`toure-bangaly`) | A | #288 | dimanche 25, après E1 |
-| H — Plafonds et retraits (matières, établissements) | Konan (`konanmeschac777-cmyk`) | A | #292 | dimanche 25, après E2 |
-| G — Accueil enseignant | Touré | A, D, J | #287 | lundi 26, matin |
-| I — Page de classe et fiche d'un élève | Konan | A ; fusionne après G | #293 | lundi 26, matin |
-| M — « Mon compte » enseignant | orchestrateur | E1 | — | lundi 26, matin |
-| N — Cours de l'enseignant | orchestrateur | E2 | — | lundi 26, matin |
+| J — Inscription enseignant en 3 étapes | **Konan** (code déjà sur `-lot-j`) | A, C | #289 | 1 |
+| L — Premier parcours : déclarer, assigner, jours de séance | **Konan** (code déjà sur `-lot-l`) | A | #294 | 2 |
+| K — Rapport d'un exercice en badges | **Konan** | A | #288 | 3 |
+| H — Plafonds et retraits (matières, établissements) | **Konan** (`konanmeschac777-cmyk`) | A | #292 | 4 |
+| G — Accueil enseignant | **Konan** | A, D, J | #287 | 5 |
+| I — Page de classe et fiche d'un élève | **Konan** | A ; fusionne après G | #293 | 6 |
+| M — « Mon compte » enseignant | **Konan** | E1 | #305 | 7 |
+| N — Cours de l'enseignant | **Konan** | E2 | #306 | 8 |
+
+**Répartition du 2026-10-26** (porteur : « Konan pour les écrans des enseignants et Touré pour les élèves, mobile comme ordinateur ») : **Konan pilote tous les lots enseignant**, téléphone et ordinateur. Ordre : J, L, K, H, G, I, M, N, puis P4 (#307), P6 (#308), P3 (#309), P0 (#310), P1 (#311), P2 (#312), P5 (#313). Il attend Touré pour G (après D), M (après E1), N (après E2), P0 (après D) et P1 (après O1). Chaque issue porte la fiche du lot, les changements du 26, les maquettes de référence (archive v12) et la marche à suivre. Le calendrier ci-dessous (« Lundi 26, 14 h ») est dépassé.
 
 **Lundi 26, 14 h** : tous les lots fusionnés, `bin/ci-quiet` sur le head final, preuve dans #295. **Lundi 26, après-midi** : recette du porteur sur un vrai Android (élève et enseignant). **Mardi 27** : pilote.
 
@@ -211,13 +213,13 @@ Celles du [plan élève](plan.md#portes-de-sortie), plus :
 
 | Lot | Écran | Dépend de |
 |---|---|---|
-| P0 | Panneau « Mon compte » à droite, barre du haut et barre latérale, écrans de retrait dans le panneau | M, H, D ; lot équivalent de l'élève s'il existe |
-| P1 | Accueil en page large | G, O1 (`_carousel`) |
-| P2 | Page de classe et fiche d'un élève | I ; fusionne après P1 |
-| P3 | Rapport d'un exercice | K |
-| P4 | Inscription | J |
-| P5 | Cours, colonne de 40 rem | N |
-| P6 | Déclarer, assigner, jours de séance | L |
+| P0 | Panneau « Mon compte » à droite, barre du haut et barre latérale, écrans de retrait dans le panneau (#310) | M, H, D ; lot équivalent de l'élève s'il existe |
+| P1 | Accueil en page large (#311) | G, O1 (`_carousel`) |
+| P2 | Page de classe et fiche d'un élève (#312) | I ; fusionne après P1 |
+| P3 | Rapport d'un exercice (#309) | K |
+| P4 | Inscription (#307) | J |
+| P5 | Cours, colonne de 40 rem (#313) | N |
+| P6 | Déclarer, assigner, jours de séance (#308) | L |
 
 Aucun lot de P1 à P6 ne touche un fichier de P0 (vérifié sur la branche de chantier : la barre latérale prend son entrée active de `content_for :nav_key`, posé par chaque vue) : ils ne dépendent donc pas de P0.
 
