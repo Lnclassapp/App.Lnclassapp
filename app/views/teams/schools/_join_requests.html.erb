@@ -3,7 +3,7 @@
 <%# ADR  : 0063 · UDR : 0036, 0050 · UDR-0127 §3.5 (matières) %>
 <%# locals: (school:, requests:) -%>
 <section id="school_join_requests" aria-labelledby="school_join_requests_title" class="mb-8">
-  <h2 id="school_join_requests_title" class="font-display text-xl font-extrabold"><%= t(".title", count: requests.size) %></h2>
+  <h2 id="school_join_requests_title" class="font-display text-xl font-medium"><%= t(".title", count: requests.size) %></h2>
   <p class="mt-1 mb-4 text-sm text-mute"><%= t(".hint") %></p>
   <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
     <% requests.each do |request| %>

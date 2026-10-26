@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Catalog::CoursesController
-# Rôle : catalogue filtré, cherché par nom (frame « courses »), par pages chargées au défilement, et page d'un cours ; élève : son niveau, groupé par matière, vue d'une matière ; enseignant : ses matières à ses niveaux
-# ADR  : 0026, 0028, 0035, 0076, 0090, 0094, 0103 · UDR : 0006, 0013 (amendement du 2026-10-05), 0054, 0069, 0077, 0085, 0126
+# Rôle : catalogue filtré, cherché par nom (frame « courses »), par pages chargées au défilement, et page d'un cours ; élève : son niveau, groupé par matière, vue d'une matière, et sur ordinateur ses leçons par matière (la dernière touchée, gardée en session) ; enseignant : une de ses matières à la fois, au niveau du rond de l'accueil
+# ADR  : 0026, 0028, 0035, 0076, 0090, 0094, 0103 · UDR : 0006, 0013 (amendement du 2026-10-05), 0054, 0069, 0077, 0085, 0126, XXXX écrans enseignant sans répétition §3.7, XXXX écrans élève sans répétition §3.6 bis
 module Catalog
   class CoursesController < AuthenticatedController
     include ReadsOwnLevel
@@ -11,17 +11,21 @@ module Catalog
     PAGE_FRAME = /\Acourses_page_\d+\z/
     FILTERS = %i[level series material q].freeze
 
-    helper_method :list_frame_request?, :filter_options, :student_audience, :teacher_scope, :teacher_grouped?, :student_material,
-                  :after_material
+    # Lot O5 (CA-E15) : le slug de la dernière matière que l'élève a ouverte, gardé en session pour « Cours » sans ?material=.
+    LESSON_MATERIAL_KEY = :courses_lesson_material
+
+    helper_method :list_frame_request?, :filter_options, :student_audience, :teacher_scope, :student_material,
+                  :after_material, :teacher_material, :teacher_level_label, :lesson_materials, :lesson_material, :lessons_page
 
     def index
       @filters = params.permit(*FILTERS).to_h.symbolize_keys
+      # UDR enseignant §3.7 : une matière à la fois, la puce active (par défaut la première) ; la page suivante la reprend.
+      @filters[:material] = teacher_material&.slug if teacher_scope
       # La série ne fait que restreindre : l'élève garde la règle de son niveau (audience).
       @page = Queries::Catalog::CourseCatalogQuery.new.call(actor: current_actor, page: params[:page], level: @filters[:level],
                                                             series: @filters[:series], material: @filters[:material],
                                                             search: @filters[:q], audience: own_audience,
-                                                            material_ids: teacher_scope&.material_ids,
-                                                            group_by_material: teacher_grouped?)
+                                                            material_ids: teacher_scope&.material_ids)
       render partial: "page_frame", locals: { page: @page } if page_frame_request?
     end
 
@@ -57,8 +61,22 @@ module Catalog
                                                                          school_id: current_actor.school_id)
     end
 
-    # UDR-0126 §3.1 : l'enseignant de plusieurs matières voit ses cours rangés par matière, comme l'élève.
-    def teacher_grouped? = teacher_scope&.several_materials? || false
+    # La matière de la puce active : celle de l'adresse si c'en est une des siennes dans l'établissement courant, sinon la
+    # première ; nil sans matière (l'état vide l'explique).
+    def teacher_material
+      return unless teacher_scope
+
+      @teacher_material ||= teacher_scope.materials.find { it.slug == @filters[:material] } || teacher_scope.materials.first
+    end
+
+    # « Tle D » : le niveau de l'adresse (un rond de l'accueil) et sa série quand ce niveau la permet ; nil sans niveau connu.
+    def teacher_level_label
+      level = filter_options.levels.find { it.slug == @filters[:level] }
+      return unless level
+
+      series = filter_options.series_by_level.fetch(level.id, []).find { it.slug == @filters[:series] }
+      [ level.name, series&.name ].compact.join(" ")
+    end
 
     # UDR-0085 §3.1 : la vue d'une matière de l'élève (?material=<slug>, l'adresse des bulles « Mes matières ») ; nil sur
     # la liste complète, pour un autre rôle ou pour un slug inconnu.
@@ -71,6 +89,34 @@ module Catalog
     # UDR-0085 §3.2 : la matière de la dernière carte de la page précédente, dont le titre de groupe est déjà rendu.
     # Toujours une chaîne : une valeur forgée (tableau, vide) ne vaut aucun slug, et le titre reste rendu.
     def after_material = params[:after_material].to_s
+
+    # Lot O5 (CA-E15) : les matières de l'élève (celles de sa classe), dans l'ordre de la grille de l'accueil. Lu par la vue de
+    # l'élève seulement (index : « if student »).
+    def lesson_materials
+      @lesson_materials ||= Queries::Catalog::CourseCatalogQuery.new.student_materials(audience: student_audience)
+    end
+
+    # CA-E15 : la matière des leçons affichées sur ordinateur. ?material= vaut seulement s'il est l'une des matières de
+    # l'élève, et il est alors gardé ; sinon la dernière gardée si elle l'est encore, sinon la première de la grille. Un slug
+    # inconnu ou d'une autre classe n'est ni lu ni gardé.
+    def lesson_material
+      return if lesson_materials.empty?
+
+      @lesson_material ||= begin
+        requested = lesson_materials.find { it.slug == @filters[:material] }
+        session[LESSON_MATERIAL_KEY] = requested.slug if requested
+        requested || lesson_materials.find { it.slug == session[LESSON_MATERIAL_KEY] } || lesson_materials.first
+      end
+    end
+
+    # CA-E14 : les leçons de cette matière avec leurs fiches, sur la recherche ; nil sans matière (élève sans classe).
+    def lessons_page
+      return unless lesson_material
+
+      @lessons_page ||= Queries::Catalog::CourseCatalogQuery.new.call(actor: current_actor, material: lesson_material.slug,
+                                                                      search: @filters[:q], audience: student_audience,
+                                                                      with_essentials: true)
+    end
 
     def list_frame_request? = turbo_frame_request_id == LIST_FRAME
     def page_frame_request? = PAGE_FRAME.match?(turbo_frame_request_id.to_s)

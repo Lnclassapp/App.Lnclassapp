@@ -49,7 +49,7 @@ Le pilote du 27 octobre passe par les contacts du porteur : un enseignant écrit
 - Au 6ᵉ caractère : vérification serveur (route de vérification à débit limité, ADR du code). Pendant l'appel, l'indication « Vérification… » sous le champ.
   - **Code reconnu** : on passe à l'étape 2 (voir §3.3, rappel de classe).
   - **Code inconnu** : on reste, message sous le champ « Ce code ne correspond à aucune classe. Vérifie-le avec ton enseignant. » (`aria-describedby`, `aria-invalid="true"`).
-  - **Trop d'essais** : « Trop d'essais. Attends une minute, ou coche « Je n'ai pas de code ». »
+  - **Trop de tentatives** : « Trop de tentatives. Attends une minute, ou coche « Je n'ai pas de code ». »
 - Case « Je n'ai pas de code » : déplie la cascade actuelle (`class_picker_controller`, frames `picker_classrooms`), le champ code se masque. Toucher une classe disponible passe à l'étape 2. Une classe complète reste désactivée.
 
 ### 3.3 Étape 2 — Toi
@@ -67,7 +67,7 @@ Le pilote du 27 octobre passe par les contacts du porteur : un enseignant écrit
 
 ### 3.5 Erreurs renvoyées par le serveur
 
-Le serveur renvoie la page en 422 comme aujourd'hui (`render_form`). Le contrôleur Stimulus ouvre **la première étape qui contient un champ en erreur** (classe → 1, nom/genre/numéro → 2, code secret → 3). Le refus général (`#student-registration-refusal`) s'affiche en haut de l'étape ouverte. 429 : message « Trop d'essais » à l'étape 1. Lien de classe invalide, archivé ou régénéré : la page s'ouvre à l'étape 1, jamais sur une erreur.
+Le serveur renvoie la page en 422 comme aujourd'hui (`render_form`). Le contrôleur Stimulus ouvre **la première étape qui contient un champ en erreur** (classe → 1, nom/genre/numéro → 2, code secret → 3). Le refus général (`#student-registration-refusal`) s'affiche en haut de l'étape ouverte. 429 : message « Trop de tentatives » à l'étape 1. Lien de classe invalide, archivé ou régénéré : la page s'ouvre à l'étape 1, jamais sur une erreur.
 
 ### 3.5 bis Sur ordinateur (≥ lg)
 
@@ -90,7 +90,7 @@ Uniquement les jetons de l'UDR-XXXX-palette-froide-et-texte-sans-gras ; bordures
 
 - **Vide** : étape 1, champ code vide.
 - **Chargement** : « Vérification… » sous le champ code ; bouton « Créer mon compte » désactivé avec « Création… » après l'envoi.
-- **Erreur** : code inconnu, trop d'essais, erreurs de champ rouvrant leur étape (§3.5).
+- **Erreur** : code inconnu, trop de tentatives, erreurs de champ rouvrant leur étape (§3.5).
 - **Succès** : compte créé, redirection vers l'accueil (comportement actuel).
 
 ### 3.8 Accessibilité

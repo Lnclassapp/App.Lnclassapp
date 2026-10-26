@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::StudentFileQuery
 # Rôle : fiche d'un élève présent dans sa classe (CL-13, AS-24) : en-tête, chiffres et badges de la classe, exercices assignés, « fait seul »
-# ADR  : 0026, 0072, 0079, 0083 (§4.4 bis), 0089 (§4.2), 0097 · UDR : 0107 · après ReadClassroomPolicy (show_roster) seulement
+# ADR  : 0026, 0072, 0079, 0083 (§4.4 bis), 0089 (§4.2), 0097 · UDR : enseignant §3.2, 0107 · après ReadClassroomPolicy (show_roster) seulement
 module Queries
   module Classroom
     class StudentFileQuery
@@ -11,7 +11,9 @@ module Queries
       SELF_PRACTICE_DAYS = 30
       SELF_PRACTICE_LIMIT = 20
       # contact : masqué (ADR-0083 §4.4 bis) ; joined_via : Entities::Classroom::StudentArrivalChannel.
-      File = Data.define(:student, :counts, :badge_counts, :assignments, :self_practice, :self_practice_total)
+      # class_grade, class_badge : « Moyenne 14/20 · Or », la règle de la liste de la classe (Grading.class_badge_for) ; nil sans exercice fait.
+      File = Data.define(:student, :counts, :badge_counts, :assignments, :self_practice, :self_practice_total, :class_grade,
+                         :class_badge)
       Student = Data.define(:public_id, :display_name, :contact, :photo_version, :joined_at, :joined_via, :newcomer)
       Counts = Data.define(:done, :late, :pending, :assigned)
       # status : :done, :late (rendu en retard), :pending, :overdue (pas fait, échéance passée).
@@ -53,7 +55,16 @@ module Queries
                  counts: counts(assignments), badge_counts: badge_counts(assignments), assignments:,
                  self_practice: practice.order(completed_at: :desc, id: :desc).limit(SELF_PRACTICE_LIMIT)
                                         .pluck(*SELF_PRACTICE_COLUMNS).map { SelfPracticeRow.new(*it) },
-                 self_practice_total: practice.count)
+                 self_practice_total: practice.count, **standing(assignments))
+      end
+
+      # UDR enseignant §3.2 : la moyenne des meilleurs scores sur 20 et le badge de classe qu'elle donne.
+      def standing(assignments)
+        bests = assignments.filter_map(&:best)
+        return { class_grade: nil, class_badge: nil } if bests.empty?
+
+        { class_grade: Entities::Classroom::RosterGrade.grade_for(bests.sum.fdiv(bests.size)),
+          class_badge: Grading.class_badge_for(scores: bests, all_perfect: bests.all? { Grading.perfect?(it) }) }
       end
 
       # ADR-0097 §4.3 : les assignations actives, dans l'ordre de la page de la classe (UDR-0062 §3.4) ; les scores et la

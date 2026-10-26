@@ -1,37 +1,32 @@
 # Accueil enseignant (plan boucle-pedagogique, Lot D3, TR-05 ; reorganisation-equipe-enseignant, Lot D ;
-# interface-enseignant-organisation, Lot A ; inscription-enseignant, Lot B) — UDR-0007, UDR-0026, UDR-0069, UDR-0077, UDR-0079
+# interface-enseignant-organisation, Lot A ; inscription-enseignant, Lot B ; mvp-teacher-student, Lot G) — UDR-0007, UDR-0026,
+# UDR-0069, UDR-0077, UDR-0079, UDR enseignant (§3.3 accueil, §3.13 accueil sans classe)
 fr:
   classroom:
     teacher_homes:
       show:
         page_title: "Accueil"
-        greeting: "Bonjour, %{name}"
-        subtitle: "%{school}"
-        # UDR-0098 §3.3 : à partir de deux établissements
-        change_school: "Changer"
-        change_school_label: "Changer d'établissement"
         classrooms_title: "Mes classes"
-        classrooms_subtitle: "Vos classes actives de cette année scolaire"
-        classrooms_menu: "Actions sur mes classes"
-        edit_classrooms: "Modifier mes classes"
-        classrooms_empty: "Aucune classe déclarée"
-        classrooms_empty_description: "Déclarez les classes où vous enseignez : vous les retrouverez ici."
         courses_title: "Fiches de cours"
-        courses_subtitle: "Les fiches de cours de vos niveaux en %{material}"
-        # UDR-0126 §3.3 (ADR-0103) : l'enseignant de plusieurs matières
-        courses_subtitle_many: "Les fiches de cours de vos niveaux, dans vos matières"
-        # ADR-0103 §4.6 : aucune matière dans l'établissement courant
-        courses_subtitle_none: "Choisissez vos matières pour voir vos fiches de cours"
-        all_courses: "Voir tout le catalogue"
-      # UDR-0077 §3.1 : les exercices assignés à suivre cette semaine.
+      # UDR enseignant §3.3 : « Cette semaine » ; le titre ne se lit que par les lecteurs d'écran.
       follow_ups:
-        title: "Activités"
-        subtitle: "Les exercices à suivre cette semaine"
-        empty: "Rien à suivre pour l'instant"
-        empty_description: "Les exercices assignés dont l'échéance approche apparaîtront ici."
-        pending:
-          one: "1 élève sur %{present} ne l'a pas fait"
-          other: "%{count} élèves sur %{present} ne l'ont pas fait"
+        title: "Cette semaine"
+        empty: "Aucun exercice à suivre cette semaine."
+        due: "%{classroom} · à rendre %{date}"
+        no_due: "%{classroom} · sans date limite"
+        done:
+          one: "%{done} / %{count} fait"
+          other: "%{done} / %{count} faits"
+        pending: "%{count} pas encore"
+        late: "%{count} en retard"
+      # UDR enseignant §3.3 : « Historique », absent sans ligne ; moyenne de la classe à droite.
+      history:
+        title: "Historique"
+        today: "Aujourd'hui"
+        yesterday: "Hier"
+        line: "%{classroom} · %{done}"
+        average: "%{grade}/20"
+        average_label: "Moyenne de la classe : %{grade} sur 20"
       choose_materials:
         title: "Choisissez vos matières"
         description: "Vos cours et vos exercices à suivre dépendent des matières que vous enseignez dans cet établissement."
@@ -44,18 +39,29 @@ fr:
         invite: "Inviter"
         # UDR-0079 §3.7 : la bulle ouvre WhatsApp ; l'espace en tête sépare le suffixe du libellé lu « Inviter ».
         invite_sr: " sur WhatsApp"
+      # UDR enseignant §3.3 : la carte d'une classe ; l'en-tête se lit « Tle D 1 · CSMT ».
       classroom_card:
+        header: "%{classroom} · %{school}"
+        header_label: "Ouvrir la classe %{classroom}"
         students:
           zero: "Aucun élève"
           one: "1 élève"
           other: "%{count} élèves"
         assignments:
-          zero: "Aucune assignation active"
-          one: "1 assignation active"
-          other: "%{count} assignations actives"
-        score: "Score moyen : %{score} %"
-        no_score: "Aucune session terminée"
-        open: "Ouvrir la classe"
+          zero: "Aucun exercice en cours"
+          one: "1 exercice en cours"
+          other: "%{count} exercices en cours"
+        empty_hint: "Donnez-leur le code, ou partagez le lien sur WhatsApp."
+        badges_label: "Élèves par badge"
+        code_label: "Code de la classe"
+        copy: "Copier"
+        copy_label: "Copier le code de la classe %{classroom}"
+        copied: "Code copié."
+      # UDR enseignant §3.3, §3.13 : la dernière carte du carrousel, et la carte du haut d'un accueil sans classe.
+      add_classroom_card:
+        action: "+ Ajouter une classe"
+        empty_title: "Ajoutez vos classes"
+        empty_description: "Cochez les classes où vous enseignez : chacune reçoit un code à donner à vos élèves."
       pending_colleagues:
         title: "Collègues en attente"
         subtitle: "Ils se sont inscrits à %{school} sans code. Confirmez seulement ceux que vous connaissez."

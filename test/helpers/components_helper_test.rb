@@ -1,6 +1,7 @@
 require "test_helper"
 
 class ComponentsHelperTest < ActionView::TestCase
+  include NavigationHelper # role_fill_class, lu par ui_progress
   class Record
     include ActiveModel::Model
     include ActiveModel::Attributes
@@ -171,7 +172,7 @@ class ComponentsHelperTest < ActionView::TestCase
 
     assert_select "label[for=user_name]", text: /Name/
     assert_select "input#user_name[type=text][required][placeholder=Awa][aria-describedby=user_name_hint]"
-    assert_select "input:not([aria-invalid]).border-line.min-h-tap"
+    assert_select "input:not([aria-invalid]).border-line-strong.min-h-tap"
     assert_select "p#user_name_hint", text: "Aide"
   end
 
@@ -194,7 +195,7 @@ class ComponentsHelperTest < ActionView::TestCase
       ui_field(form, :terms, as: :checkbox, label: "J'accepte") + ui_field(form, :name, as: :textarea)
     }
 
-    assert_select "input[type=checkbox].size-5"
+    assert_select "input[type=checkbox].size-5.accent-brand-strong"
     assert_select "textarea.min-h-32"
   end
 
@@ -276,7 +277,7 @@ class ComponentsHelperTest < ActionView::TestCase
     }
 
     assert_select "fieldset#user_level > legend", text: /Niveau\s*\*/
-    assert_select "fieldset .sm\\:grid-cols-2 > label.min-h-tap.border-line", 2
+    assert_select "fieldset .sm\\:grid-cols-2 > label.min-h-tap.border-line-strong", 2
     assert_select "label", text: "Sixième" do
       assert_select "input#user_level_6e[type=radio][name='user[level]'][value='6e'][required]:not([checked])"
     end
@@ -316,12 +317,12 @@ class ComponentsHelperTest < ActionView::TestCase
 
     assert_select "fieldset#announcement_classrooms > legend", text: /Classes\s*\*/
     assert_select "fieldset > input[type=hidden][name='announcement[classrooms][]'][value='']:not([id])", 1
-    assert_select "fieldset .sm\\:grid-cols-2 > label.min-h-tap.border-line", 3
+    assert_select "fieldset .sm\\:grid-cols-2 > label.min-h-tap.border-line-strong", 3
     assert_select "label", text: "3ème A" do
       assert_select "input#announcement_classrooms_a1[type=checkbox][name='announcement[classrooms][]'][value=a1]:not([checked])"
     end
     assert_select "input[type=checkbox][checked]", 2
-    assert_select "input#announcement_classrooms_c3.size-5.accent-brand[checked]"
+    assert_select "input#announcement_classrooms_c3.size-5.accent-brand-strong[checked]"
     assert_select "input[type=checkbox][name='announcement[classrooms][]']", 3
     assert_select "input[type=hidden][name='announcement[classrooms][]']", 1
     assert_select "input[required], input[aria-invalid], input[aria-describedby], p", 0
@@ -562,8 +563,56 @@ class ComponentsHelperTest < ActionView::TestCase
     assert_select "span svg"
   end
 
+  # UDR palette froide §3.3 : pastille neutre en gris (« Fragile », « Mauvaise réponse »), point de retard ambre vif.
+  test "ui_badge takes the cold palette: a muted neutral chip and the late dot" do
+    show ui_badge("Fragile") + ui_badge("En retard", tone: :warning, dot: true)
+
+    assert_select "span.ui-badge.bg-mist.text-mute", text: "Fragile"
+    assert_select "span.ui-badge.bg-warning-soft.text-warning span.bg-warning-dot[aria-hidden=true]"
+  end
+
   test "ui_badge refuses an unknown tone" do
     assert_raises(ArgumentError) { ui_badge("x", tone: :lilac) }
+  end
+
+  # --- Barre de progression (UDR palette froide §2, UDR enseignant §3.1) -----
+
+  test "ui_progress is a labelled progressbar, filled in blue for the student" do
+    show ui_progress(done: 3, total: 7, role: :student, label: "3 jours sur 7")
+
+    assert_select "div[role=progressbar][aria-valuenow='3'][aria-valuemin='0'][aria-valuemax='7'][aria-label='3 jours sur 7']" \
+                  ".bg-line.rounded-full.overflow-hidden" do
+      assert_select "span", 7
+      assert_select "span.bg-brand", 3
+      assert_select "span.bg-teacher", 0
+    end
+  end
+
+  test "ui_progress fills in yellow for the teacher, from the role's single colour" do
+    show ui_progress(done: 20, total: 27, role: :teacher)
+
+    assert_select "div[role=progressbar][aria-valuenow='20'][aria-valuemax='27']" do
+      assert_select "span.bg-teacher", 20
+      assert_select "span.bg-brand", 0
+    end
+  end
+
+  test "ui_progress clamps what is done, stays empty without anything to do, and draws at most 30 segments" do
+    show ui_progress(done: 9, total: 4, role: :student)
+    assert_select "div[role=progressbar][aria-valuenow='4'] span.bg-brand", 4
+
+    show ui_progress(done: 0, total: 0, role: :student)
+    assert_select "div[role=progressbar][aria-valuenow='0'][aria-valuemax='0'] span", 0
+
+    show ui_progress(done: 50, total: 100, role: :teacher)
+    assert_select "div[role=progressbar][aria-valuenow='50'][aria-valuemax='100']" do
+      assert_select "span", 30
+      assert_select "span.bg-teacher", 15
+    end
+  end
+
+  test "ui_progress refuses a role without its own colour" do
+    assert_raises(KeyError) { ui_progress(done: 1, total: 2, role: :school_admin) }
   end
 
   test "ui_role_badge names the role in its colour" do
@@ -681,7 +730,7 @@ class ComponentsHelperTest < ActionView::TestCase
   test "ui_subject_bubble puts the amber dot of a late subject" do
     show ui_subject_bubble(label: "SVT", href: "/courses?material=svt", illustration: subject_illustration("svt"), signal: :warning)
 
-    assert_select "a span.relative.size-15.rounded-full span.absolute.rounded-full.ring-2.ring-white.bg-warning[aria-hidden=true]",
+    assert_select "a span.relative.size-15.rounded-full span.absolute.rounded-full.ring-2.ring-white.bg-warning-dot[aria-hidden=true]",
                   count: 1
   end
 
@@ -764,7 +813,7 @@ class ComponentsHelperTest < ActionView::TestCase
 
     assert_select "div[role=alert][data-toast-type=error]", text: /#{I18n.t("components.toast.titles.error")}\s*Échec/
     assert_select "div[data-toast-type=info]:not([role=alert])" do
-      assert_select "p.font-semibold", text: "Déjà en cours"
+      assert_select "p.font-medium", text: "Déjà en cours"
       assert_select "p.text-mute", text: "Une seule à la fois."
     end
     assert_nil flash_toast(:reload_document, true)
@@ -780,7 +829,7 @@ class ComponentsHelperTest < ActionView::TestCase
       assert_select "div.flex-1 + form[action='/announcements/abcdefghijkmno/dismissal'][method=post] + button[data-action='toast#dismiss']"
       assert_select "form[data-action='turbo:submit-start->toast#dismiss'] input[type=hidden][name=_method][value=delete]"
       assert_select "form button[type=submit][data-turbo-stream=true]", text: "Annuler" do |buttons|
-        assert_equal "min-h-tap shrink-0 rounded-ln px-3 text-sm font-bold text-brand-strong hover:bg-brand-soft", buttons.first["class"]
+        assert_equal "min-h-tap shrink-0 rounded-ln px-3 text-sm font-medium text-brand-strong hover:bg-brand-soft", buttons.first["class"]
       end
     end
     assert_select "p", text: "Annonce masquée"

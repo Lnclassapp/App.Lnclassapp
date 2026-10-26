@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · HomepageController
 # Rôle : sert la page d'accueil publique et ses matières publiées ; une personne connectée est envoyée vers son accueil, l'ouverture de l'app datée
-# ADR  : 0001, 0050, 0082, 0084, 0086, 0099 · UDR : 0113 (§3.9)
+# ADR  : 0001, 0050, 0082, 0084, 0086, 0099 · UDR : 0059, 0113 (§3.9)
 class HomepageController < ApplicationController
   allow_unauthenticated_access
 

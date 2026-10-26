@@ -6,7 +6,7 @@
 <%= tag.article id: dom_id, "aria-labelledby": "#{dom_id}_title", data: { announcement_theme: card.theme },
                 class: "relative flex min-h-40 gap-2 rounded-ln bg-brand-soft py-3 pr-2 pl-4 text-school" do %>
   <div class="flex min-w-0 flex-1 flex-col justify-center gap-1">
-    <p class="flex min-w-0 items-center gap-1.5 text-xs font-bold text-school/80">
+    <p class="flex min-w-0 items-center gap-1.5 text-xs font-medium text-school/80">
       <% if card.author_role == :team %>
         <%= image_tag "lnclass/icon.svg", alt: "", class: "size-5 shrink-0 rounded-sm" %>
         <span><%= announcement_signature(card) %></span>
@@ -20,7 +20,7 @@
         <% end %>
       <% end %>
     </p>
-    <h3 id="<%= dom_id %>_title" class="text-base leading-snug font-bold"><%= card.title %></h3>
+    <h3 id="<%= dom_id %>_title" class="text-base leading-snug font-medium"><%= card.title %></h3>
     <%# Texte simple de l'auteur, toujours échappé (AN-20) : jamais raw ni html_safe. %>
     <p class="text-sm"><%= card.body %></p>
     <% restorable = context == :list && card.dismissed? %>
@@ -68,7 +68,7 @@
                data-communication--audio-target="player"></audio>
         <noscript>
           <%= link_to t("communication.audio.fallback"), announcement_file_path(card.public_id, kind: "audio"),
-                      class: "text-xs font-bold underline" %>
+                      class: "text-xs font-medium underline" %>
         </noscript>
       <% end %>
     <% end %>

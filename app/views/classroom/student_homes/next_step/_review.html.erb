@@ -1,0 +1,12 @@
+<%# 🌐 UI · classroom/student_homes/next_step/_review — état 3 : tout l'assigné est fait, la plus ancienne fiche à revoir %>
+<%# Rôle : sa note, puis « Revoir la fiche » vers la fiche de révision (ouvrir la fiche la retient : pas de préchargement) %>
+<%# UDR  : XXXX accueil élève §3.3 (état 3), 0119 · ADR : 0090 (§4.1) %>
+<%# locals: (home:, step:, daily:, form:, archived:, invite_href:) -%>
+<% review = step.review %>
+<h2 id="student_next_step_title" class="font-display text-lg leading-snug font-medium break-words text-ink"><%= review.essential_name %></h2>
+<p class="text-meta text-mute"><%= t("classroom.student_homes.next_step.review.meta", material: review.material_name) %></p>
+<%= ui_badge t("classroom.student_homes.next_step.review.badge"), tone: :brand, size: :sm, icon: "arrow-path" %>
+<p class="text-sm text-ink"><%= t("classroom.student_homes.next_step.review.note", grade: grade_label(review.score_percent)) %></p>
+<%= ui_button t("classroom.student_homes.next_step.review.open"), href: course_essential_path(review.course_slug, review.essential_slug),
+              variant: :primary, full: true, icon: "light-bulb", class: "mt-1", data: { turbo_prefetch: false },
+              "aria-label": t("classroom.student_homes.next_step.review.open_label", title: review.essential_name) %>

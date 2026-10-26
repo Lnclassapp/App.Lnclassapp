@@ -241,7 +241,8 @@ module Communication
       assert_response :success
       assert_select "title", "#{tl('page_title.adult')} · Enseignant · Lnclass"
       assert_select "*", text: tl("subtitle.adult")
-      assert_select "nav#announcement-tabs a[aria-current=page][href=?]", announcements_path, I18n.t("communication.tabs.received")
+      # Pilot: the teacher writes no announcement, so « Reçues » alone has no tabs.
+      assert_select "nav#announcement-tabs", 0
       assert_equal [ "Conseil de classe", "Formation" ], css_select("ul#announcements article h3").map(&:text).sort
       assert_select "article form", 0
       # « Annonces » is in the teacher's navigation: a destination of the navigation has no back link (UDR-0054).

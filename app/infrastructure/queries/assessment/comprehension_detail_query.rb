@@ -1,24 +1,37 @@
 # 🔌 INFRA · Queries::Assessment::ComprehensionDetailQuery
-# Rôle : section « Compréhension » du suivi : catégories, signes, taux par question et élèves d'une catégorie (UDR-0072 §3.5)
-# ADR  : 0026, 0072, 0079, 0097 (§4.9) · après FollowAssignmentPolicy seulement : elle nomme des élèves ; requêtes en nombre constant
+# Rôle : section « Compréhension » du suivi : cases par badge, justes par question et élèves d'un badge, du meilleur score au plus faible (UDR enseignant §3.8)
+# ADR  : 0026, 0072, 0079, 0097 (§4.9) · UDR : 0072, enseignant §3.8 · après FollowAssignmentPolicy seulement : elle nomme des élèves ; requêtes en nombre constant
 module Queries
   module Assessment
     class ComprehensionDetailQuery
       Comprehension = Entities::Assessment::Comprehension
+      Grading = Entities::Assessment::Grading
 
-      # category : la dominante si lisible, sinon nil ; selected : la catégorie dont on lit les questions et les élèves.
-      Detail = Data.define(:done, :present, :category, :readable, :category_counts, :trend_counts, :selected, :questions, :students)
-      # rate, first_rate : pourcentages arrondis, nil sans tentative ; first_rate nil aussi sans élève à deux sessions.
-      QuestionRate = Data.define(:number, :content, :rate, :first_rate, :to_revisit)
-      # public_id : celui de l'élève, le lien vers sa fiche dans la classe (ADR-0097 §4.9).
-      StudentRow = Data.define(:public_id, :display_name, :best, :trend)
+      # Les cinq cases du rapport : « Pas encore » (sous le Bronze) puis les paliers de Grading, du plus bas au plus haut.
+      BADGES = [ :none, *Entities::Assessment::Grading::BADGE_ORDER ].freeze
+
+      # category : la dominante (struggling, fragile, acquired) si lisible, sinon nil : elle choisit le prochain geste ;
+      # badge_counts : { none:, bronze:, silver:, gold:, diamond: }, le palier du meilleur score de chaque élève qui l'a fait ;
+      # selected : la case filtrée (un symbole de BADGES), nil pour tous les élèves qui l'ont fait.
+      # weakest_question : le numéro de la question la moins réussie de toute la classe (NextStep.weakest_question), que la case
+      # filtrée ne change pas ; nil sans tentative.
+      Detail = Data.define(:done, :present, :category, :readable, :badge_counts, :trend_counts, :selected, :questions, :students,
+                           :weakest_question)
+      # « 18 / 20 justes » : correct, les élèves listés qui ont juste à cette question sur leur meilleure session ; answered,
+      # ceux qui l'ont faite (une tentative au plus par session et par question) ; rate, correct en pourcentage arrondi (la
+      # barre), nil sans tentative.
+      QuestionRate = Data.define(:number, :content, :rate, :correct, :answered)
+      # public_id : celui de l'élève, le lien vers sa fiche dans la classe (ADR-0097 §4.9) ; best : son meilleur score (sur 100) ;
+      # grade : ce score ramené sur 20 (Grading.grade_on_20, ADR-0106) ; badge : son palier, :none sous le Bronze ;
+      # done_on : la date locale de sa première session faite (« Fait le 22 oct. »).
+      StudentRow = Data.define(:public_id, :display_name, :best, :grade, :badge, :done_on)
 
       # « Sans évolution » regroupe stable et stagne ; les élèves sans signe n'entrent pas dans la synthèse (ADR-0079 §4.3).
       TREND_GROUPS = { progress: :progress, stable: :flat, stagnant: :flat, decline: :decline }.freeze
 
-      # category : un symbole de Comprehension::CATEGORIES, ou n'importe quoi d'autre (ignoré).
+      # badge : un symbole de BADGES, ou n'importe quoi d'autre (ignoré : tous les élèves).
       # → Detail | nil (assignation inconnue, archivée ou d'une autre classe)
-      def call(classroom_public_id:, assignment_public_id:, category:)
+      def call(classroom_public_id:, assignment_public_id:, badge:)
         classroom_id, id, exercise_id =
           Orm::ClassroomAssignment.joins(:classroom)
                                   .where(public_id: assignment_public_id, status: "active", assignable_type: "Exercise",
@@ -27,57 +40,57 @@ module Queries
         return if id.nil?
 
         scores = AssignmentScores.for(classroom_id:, assignment_ids: [ id ]).fetch(id, [])
-        detail(scores, Queries::Classroom::AssignmentFollowUpQuery.present_students(classroom_id).count, exercise_id, category)
+        detail(scores, Queries::Classroom::AssignmentFollowUpQuery.present_students(classroom_id).count, exercise_id, badge,
+               classroom_id:, id:)
       end
 
       private
 
-      def detail(scores, present, exercise_id, category)
-        category_counts = Comprehension::CATEGORIES.index_with { 0 }.merge(scores.map { category_of(it) }.tally)
-        dominant = Comprehension.dominant(category_counts)
+      def detail(scores, present, exercise_id, badge, classroom_id:, id:)
+        dominant = Comprehension.dominant(Comprehension::CATEGORIES.index_with { 0 }.merge(scores.map { category_of(it) }.tally))
         readable = Comprehension.readable?(scores.size)
-        selected = Comprehension::CATEGORIES.include?(category) ? category : dominant || :struggling
-        members = scores.select { category_of(it) == selected }
-        Detail.new(done: scores.size, present:, category: (dominant if readable), readable:, category_counts:,
-                   trend_counts: trend_counts(scores), selected:, questions: questions(exercise_id, members), students: students(members))
+        selected = badge if BADGES.include?(badge)
+        members = selected ? scores.select { badge_of(it) == selected } : scores
+        questions = questions(exercise_id, members)
+        everybody = selected ? questions(exercise_id, scores) : questions
+        Detail.new(done: scores.size, present:, category: (dominant if readable), readable:,
+                   badge_counts: BADGES.index_with { 0 }.merge(scores.map { badge_of(it) }.tally),
+                   trend_counts: trend_counts(scores), selected:, questions:, students: students(members, classroom_id, id),
+                   weakest_question: Entities::Assessment::NextStep.weakest_question(everybody.map(&:rate)))
       end
 
       def category_of(student_scores) = Comprehension.category_for(student_scores.scores.max)
+
+      # Le palier du meilleur score ; :none sous la note de Bronze (« Pas encore »).
+      def badge_of(student_scores) = Entities::Assessment::Grading.badge_for(student_scores.scores.max) || :none
 
       def trend_counts(scores)
         { progress: 0, flat: 0, decline: 0 }.merge(scores.filter_map { TREND_GROUPS[Comprehension.trend_for(it.scores)] }.tally)
       end
 
-      # Une requête pour les questions, une pour les tentatives des meilleures et des premières sessions de la catégorie.
+      # Une requête pour les questions, une pour les tentatives des meilleures sessions des élèves listés.
       def questions(exercise_id, members)
-        best_ids = members.map(&:best_session_id)
-        first_ids = members.any? { it.scores.size > 1 } ? members.map(&:first_session_id) : []
-        attempts = Orm::QuestionAttempt.where(exercise_session_id: best_ids | first_ids)
-                                       .pluck(:exercise_session_id, :question_id, :correct).group_by(&:second)
+        attempts = Orm::QuestionAttempt.where(exercise_session_id: members.map(&:best_session_id))
+                                       .pluck(:question_id, :correct).group_by(&:first)
         Orm::Question.where(exercise_id:).order(:position).pluck(:id, :content).each_with_index.map do |(question_id, content), index|
-          question_attempts = attempts.fetch(question_id, [])
-          rate = rate(question_attempts, best_ids)
-          QuestionRate.new(number: index + 1, content:, rate:, first_rate: rate(question_attempts, first_ids),
-                           to_revisit: Comprehension.to_revisit?(rate))
+          answers = attempts.fetch(question_id, []).map(&:last)
+          correct = answers.count(true)
+          rate = (correct * 100.0 / answers.size).round unless answers.empty?
+          QuestionRate.new(number: index + 1, content:, rate:, correct:, answered: answers.size)
         end
       end
 
-      # Une tentative au plus par session et par question (index unique) : le taux ne dépasse jamais 100 % (ADR-0079 §4.5).
-      def rate(attempts, session_ids)
-        corrects = attempts.select { |session_id, _, _| session_ids.include?(session_id) }.map(&:last)
-        (corrects.count(true) * 100.0 / corrects.size).round unless corrects.empty?
-      end
-
-      # Ceux qui ont le plus besoin de l'enseignant d'abord (ADR-0079 §4.7), puis par nom.
-      def students(members)
+      # Du meilleur score au plus faible, puis par nom (« Fait le … » : la première session faite, quel que soit son kind).
+      def students(members, classroom_id, id)
         by_student = members.index_by(&:student_id)
+        done_on = Queries::Classroom::AssignmentFollowUpQuery.first_done(classroom_id, [ id ]).to_h { [ it.student_id, it.done_on ] }
         Orm::User.where(id: by_student.keys).order(:last_name, :first_name, :id).pluck(:id, :public_id, :first_name, :last_name)
-                 .map do |id, public_id, first_name, last_name|
-                   scores = by_student.fetch(id).scores
-                   StudentRow.new(public_id:, display_name: "#{first_name} #{last_name}", best: scores.max,
-                                  trend: Comprehension.trend_for(scores))
+                 .map do |student_id, public_id, first_name, last_name|
+                   best = by_student.fetch(student_id).scores.max
+                   StudentRow.new(public_id:, display_name: "#{first_name} #{last_name}", best:, grade: Grading.grade_on_20(best),
+                                  badge: Grading.badge_for(best) || :none, done_on: done_on.fetch(student_id))
                  end
-                 .each_with_index.sort_by { |row, rank| [ Comprehension::TREND_ORDER.index(row.trend), rank ] }.map(&:first)
+                 .each_with_index.sort_by { |row, rank| [ -row.best, rank ] }.map(&:first)
       end
     end
   end

@@ -225,7 +225,7 @@ class Teams::CodeRegenerationsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to teams_import_path(running.public_id)
     follow_redirect!
     assert_select "#toasts [data-toast-type=info]" do
-      assert_select "p.font-semibold", text: "Régénération déjà en cours"
+      assert_select "p.font-medium", text: "Régénération déjà en cours"
       assert_select "p.text-mute", text: "Une régénération des codes est déjà en cours : voici son avancement."
     end
   end

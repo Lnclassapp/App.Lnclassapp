@@ -14,7 +14,7 @@
     <% end %>
   <% else %>
     <%= ui_card id: "profile_theme", "aria-labelledby": "profile_theme_title" do %>
-      <h2 id="profile_theme_title" class="font-display text-lg leading-tight font-extrabold"><%= t("shared.theme_switch.title") %></h2>
+      <h2 id="profile_theme_title" class="font-display text-lg leading-tight font-medium"><%= t("shared.theme_switch.title") %></h2>
       <%= tag.button type: "button", role: "switch", "aria-checked": dark.to_s, data: { theme_target: "switch", action: "theme#toggle" },
             class: "group mt-3 flex min-h-tap w-full cursor-pointer items-center justify-between gap-4 rounded-ln text-left " \
                    "focus-visible:outline-2 focus-visible:outline-brand" do %>

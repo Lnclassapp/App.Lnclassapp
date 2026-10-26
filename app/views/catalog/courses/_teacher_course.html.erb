@@ -1,0 +1,25 @@
+<%# 🌐 UI · catalog/courses/_teacher_course — la carte d'une fiche de cours dans le Cours de l'enseignant %>
+<%# Rôle : « LEÇON 2 », titre et chevron, le tout lien vers la fiche de cours ; dessous, « Révisions de la leçon » et une ligne par fiche de révision publiée %>
+<%# ADR  : 0035 · UDR : XXXX écrans enseignant sans répétition §3.7 (amendement du 2026-10-24), 0130 (exception 2) %>
+<%# locals: (course:) -%>
+<%# « Progression DPFC 2026-2027 » est écrit une fois, sous la recherche ; la carte ne garde que la leçon. %>
+<% lesson = course.subtitle.to_s.split(/\s+[·–—-]\s+/).grep_v(/\AProgression DPFC/i).join(" · ").presence %>
+<div class="overflow-hidden rounded-card border border-line bg-white shadow-card">
+  <%= link_to course_path(course.slug),
+              class: "group flex min-h-tap items-center gap-3 px-4 py-3 transition hover:bg-mist active:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand" do %>
+    <div class="min-w-0 flex-1">
+      <% if lesson %><span class="block text-xs font-medium tracking-wide text-mute uppercase"><%= lesson %></span><% end %>
+      <h2 class="text-sm font-medium text-ink"><%= course.name %></h2>
+    </div>
+    <%= ui_icon "chevron-right", variant: :mini, class: "shrink-0 text-mute transition group-hover:translate-x-0.5" %>
+  <% end %>
+  <% if course.essentials.any? %>
+    <div class="border-t border-line px-2 pb-2">
+      <p class="px-2 pt-3 pb-1 text-sm text-mute"><%= t("catalog.courses.show.essentials_title") %></p>
+      <ul>
+        <%= render partial: "catalog/courses/essential_row", collection: course.essentials, as: :essential,
+                   locals: { course_slug: course.slug, show_status: false, teacher: true } %>
+      </ul>
+    </div>
+  <% end %>
+</div>

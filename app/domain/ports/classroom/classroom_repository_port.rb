@@ -1,11 +1,13 @@
 # 🧠 DOMAINE · Ports::Classroom::ClassroomRepositoryPort
 # Rôle : contrat de persistance des classes, du jeton de leur lien et de la génération par défaut
-# ADR  : 0030, 0039, 0041, 0059, 0085, 0088, 0098
+# ADR  : 0030, 0039, 0041, 0059, 0085, 0088, 0098, XXXX-code-de-classe-a-six-caracteres
 module Ports
   module Classroom
     module ClassroomRepositoryPort
       # ADR-0098 : la classe telle que lue sous le verrou avant l'écriture, puis telle qu'écrite.
       SettingsChange = Data.define(:before, :after)
+      # ADR-XXXX §4.3 : le lien et le code d'une classe, tirés ensemble.
+      LinkAndCode = Data.define(:link_token, :join_code)
 
       # Avec teacher_ids et active_students_count. → Entities::Classroom::Classroom | nil
       def find_by_public_id(public_id:)
@@ -22,6 +24,21 @@ module Ports
       # → Entities::Classroom::Classroom | nil
       def lock_by_link_token(token:)
         raise NotImplementedError, "#{self.class} doit implémenter #lock_by_link_token"
+      end
+
+      # ADR-XXXX §4 : la classe du code ; `code` est déjà normalisé (Entities::Classroom::JoinCode.normalize). Sans verrou : qui écrit
+      # relit ensuite par lock_by_public_id. Une classe archivée est rendue comme les autres, c'est l'appelant qui la refuse.
+      # → Entities::Classroom::Classroom | nil (code absent, mal formé ou inconnu)
+      def find_by_join_code(code:)
+        raise NotImplementedError, "#{self.class} doit implémenter #find_by_join_code"
+      end
+
+      # ADR-XXXX §4.3 : « Changer le lien et le code » ; dans la transaction de l'appelant, sous le verrou qu'il a pris, tire un
+      # nouveau jeton ET un nouveau code libre (JoinCode.generate_free, 5 essais) et date le changement (link_token_rotated_at) ;
+      # l'ancien lien et l'ancien code sont invalides aussitôt. Remplace #rotate_link_token pour ce geste (celui-ci reste pour
+      # la régénération de masse, qui ne touche pas au code). → Ports::Classroom::ClassroomRepositoryPort::LinkAndCode
+      def regenerate_link_and_code(id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #regenerate_link_and_code"
       end
 
       # ADR-0085 §4.1 : tire un nouveau jeton, l'ancien est invalide aussitôt ; date le changement (link_token_rotated_at,

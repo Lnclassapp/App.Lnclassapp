@@ -12,7 +12,7 @@
     <%= ui_empty_state title: t(".empty"), icon: "bolt" %>
   <% else %>
     <% events.group_by { it.at.to_date }.each do |day, day_events| %>
-      <h3 class="mt-4 first:mt-0 mb-1 text-xs font-semibold tracking-wider text-mute uppercase"><%= day_titles.fetch(day) { l(day, format: t(".day_format")).upcase_first } %></h3>
+      <h3 class="mt-4 first:mt-0 mb-1 text-xs font-medium tracking-wider text-mute uppercase"><%= day_titles.fetch(day) { l(day, format: t(".day_format")).upcase_first } %></h3>
       <ul class="divide-y divide-line">
         <% day_events.each do |event| %>
           <%# « M. Kouassi », « Mme Kouassi », ou sa seule fonction une fois anonymisé ; un élève : « Awa K. » (memo Q10). %>

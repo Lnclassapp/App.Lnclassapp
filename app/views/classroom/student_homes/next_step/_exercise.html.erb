@@ -1,0 +1,29 @@
+<%# 🌐 UI · classroom/student_homes/next_step/_exercise — le corps des états « en retard » et « à faire » : titre, matière et enseignant, échéance, progression, bouton %>
+<%# Rôle : l'exercice de la carte ; l'état ne change que la pastille, la ligne « Et N autres » et le texte du bouton %>
+<%# UDR  : XXXX accueil élève §3.2, §3.3 (états 1 et 2) %>
+<%# locals: (step:, scope:) -%>
+<% exercise = step.exercise %>
+<% teacher = step.assigner && "#{t("communication.signature.#{step.assigner.gender}")} #{step.assigner.last_name}" %>
+<h2 id="student_next_step_title" class="font-display text-lg leading-snug font-medium break-words text-ink"><%= exercise.title %></h2>
+<p class="text-meta text-mute">
+  <%= teacher ? t("classroom.student_homes.next_step.meta", material: exercise.material_name, teacher:) : exercise.material_name %>
+</p>
+<%= due_badge exercise.due_on, size: :sm %>
+<% if step.other_late_count.positive? %>
+  <%# CA-D2 : les autres retards sont dans Ma classe. %>
+  <p>
+    <%= link_to student_classroom_path, class: "inline-flex min-h-tap items-center gap-1 rounded-sm text-sm font-medium text-brand-strong focus-visible:outline-2 focus-visible:outline-brand" do %>
+      <%= t("classroom.student_homes.next_step.late.others", count: step.other_late_count) %>
+      <%= ui_icon "chevron-right", variant: :mini, size: :sm %>
+    <% end %>
+  </p>
+<% end %>
+<%= render "classroom/student_homes/next_step/progress", step: %>
+<% if exercise.started_session_public_id %>
+  <%= render "classroom/student_homes/next_step/start", public_id: exercise.public_id, session_id: exercise.started_session_public_id,
+                                                         label: t("classroom.student_homes.next_step.due.resume"),
+                                                         aria: t("classroom.student_homes.next_step.due.resume_label", title: exercise.title) %>
+<% else %>
+  <%= render "classroom/student_homes/next_step/start", public_id: exercise.public_id, label: t("classroom.student_homes.next_step.#{scope}.start"),
+                                                         aria: t("classroom.student_homes.next_step.#{scope}.start_label", title: exercise.title) %>
+<% end %>

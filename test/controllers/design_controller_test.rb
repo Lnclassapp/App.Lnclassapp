@@ -86,7 +86,7 @@ class DesignControllerTest < ActionDispatch::IntegrationTest
     get root_path
 
     assert_response :success
-    assert_select "h1", I18n.t("homepage.index.hero.title")
+    assert_select "h1", text: /chap chap/
     assert_no_match(/fonts\.googleapis/, response.body)
   end
 

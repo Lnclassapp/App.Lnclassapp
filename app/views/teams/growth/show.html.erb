@@ -23,11 +23,11 @@
   <section id="growth_k" aria-labelledby="growth_k_title">
     <%= ui_card do %>
       <div class="flex flex-wrap items-center gap-x-1">
-        <h2 id="growth_k_title" class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".k_title") %></h2>
+        <h2 id="growth_k_title" class="text-xs font-medium tracking-wider text-mute uppercase"><%= t(".k_title") %></h2>
         <%= ui_info_tip t(".tips.k"), label: t(".k_title") %>
       </div>
       <div class="mt-2 flex flex-wrap items-end gap-x-6 gap-y-3">
-        <p id="growth_k_value" class="font-display text-5xl font-extrabold text-ink tabular-nums"><%= number.call(viral.k) %></p>
+        <p id="growth_k_value" class="font-display text-5xl font-medium text-ink tabular-nums"><%= number.call(viral.k) %></p>
         <p class="pb-2 text-sm text-mute">
           <%= t(".k_formula", invitations: number.call(viral.invitations_per_user), unit: t(".k_unit"),
                               conversion: percent.call(viral.conversion_rate)) %>
@@ -48,7 +48,7 @@
          [ :viral_cycle, @metrics.viral_cycle_days.nil? ? dash : t(".days", count: @metrics.viral_cycle_days.round) ],
          [ :students_per_teacher, number.call(@metrics.students_per_teacher) ] ].each do |key, value| %>
       <li class="rounded-ln bg-mist p-4">
-        <p class="font-display text-3xl font-extrabold text-ink tabular-nums"><%= value %></p>
+        <p class="font-display text-3xl font-medium text-ink tabular-nums"><%= value %></p>
         <div class="mt-1 text-sm text-mute">
           <%= t(".metrics.#{key}") %>
           <% if key.in?(tipped) %>
@@ -69,7 +69,7 @@
             <li class="flex items-center justify-between gap-3 py-2 text-sm">
               <span class="min-w-0"><span class="font-medium text-ink"><%= referrer.name %></span>
                 <span class="block truncate text-xs text-mute"><%= referrer.school_name %></span></span>
-              <span class="shrink-0 font-display font-extrabold tabular-nums"><%= t(".referrals", count: referrer.referrals_count) %></span>
+              <span class="shrink-0 font-display font-medium tabular-nums"><%= t(".referrals", count: referrer.referrals_count) %></span>
             </li>
           <% end %>
         </ol>

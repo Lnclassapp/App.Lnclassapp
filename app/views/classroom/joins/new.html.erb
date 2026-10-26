@@ -1,20 +1,20 @@
 <%# 🌐 UI · classroom/joins/new — /c/<jeton> : aperçu, bouton « Rejoindre cette classe » (élève sans classe) ou classe complète %>
-<%# Rôle : le visiteur reçoit l'inscription élève (student_registrations/new) ; débit dépassé en 429 sans aperçu ; refus en 403 avec sa raison %>
+<%# Rôle : dès lg, le panneau de gauche prend les 360 px et la couleur brand-strong de l'inscription (UDR §3.5 bis) ; le visiteur reçoit l'inscription élève (student_registrations/new) ; débit dépassé en 429 sans aperçu ; refus en 403 avec sa raison %>
 <%# ADR  : 0040, 0041, 0050, 0085 · UDR : 0005, 0054 (§3.2 logo ; aucun focus d'arrivée), 0057, 0081 (§3.4) %>
 <% page_title t(".page_title") %>
-<main class="grid min-h-dvh bg-paper md:grid-cols-2">
-  <section class="hidden items-center justify-center bg-brand-soft p-10 md:flex">
+<main class="grid min-h-dvh bg-paper md:grid-cols-2 lg:flex">
+  <section class="hidden items-center justify-center bg-brand-soft p-10 md:flex lg:w-90 lg:shrink-0 lg:bg-brand-strong">
     <div class="max-w-sm text-center">
       <%= link_to root_path, "aria-label": t(".logo_home"),
                              class: "mx-auto mb-6 flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
         <%= image_tag brand_logo, alt: "", class: "size-16 rounded-card object-cover shadow-card" %>
       <% end %>
-      <p class="mb-3 font-display text-2xl font-extrabold text-ink"><%= t(".welcome") %></p>
-      <p class="text-sm leading-relaxed text-mute"><%= t(".welcome_hint") %></p>
+      <p class="mb-3 text-2xl font-medium text-ink lg:text-white"><%= t(".welcome") %></p>
+      <p class="text-sm leading-relaxed text-mute lg:text-brand-soft"><%= t(".welcome_hint") %></p>
     </div>
   </section>
 
-  <section class="flex flex-col items-center justify-center px-gutter py-10">
+  <section class="flex flex-col items-center justify-center px-gutter py-10 lg:flex-1">
     <div class="mb-8 text-center md:hidden">
       <%= link_to root_path, "aria-label": t(".logo_home"),
                              class: "mx-auto mb-3 flex w-fit min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-brand" do %>
@@ -29,7 +29,7 @@
       <% else %>
         <%= ui_card padding: :lg do %>
           <div class="mb-6 flex flex-wrap items-center justify-center gap-x-1">
-            <h1 class="font-display text-xl font-extrabold text-ink"><%= t(current_actor ? ".student_title" : ".title") %></h1>
+            <h1 class="text-xl font-medium text-ink"><%= t(current_actor ? ".student_title" : ".title") %></h1>
             <%= ui_info_tip t(".student_info_tip"), label: t(".student_title") if current_actor %>
           </div>
 

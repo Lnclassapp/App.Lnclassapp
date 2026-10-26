@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::ClassroomsController
-# Rôle : page d'une classe (CL-10), enseignant qui y enseigne et équipe : jours de séance, exercices assignés, cours, fiches à revoir, élèves (`q`, `note`, `page`)
-# ADR  : 0026, 0028, 0072, 0085, 0088, 0097 (§4.7), 0101 · UDR : 0006, 0027, 0054, 0062, 0081 (§3.7), 0108, 0121 · un élève reçoit 403 : il voit le code de sa classe sur ses propres pages
+# Rôle : page d'une classe (CL-10), enseignant qui y enseigne et équipe : exercices assignés, cours, fiches à revoir, élèves (`q`, `badge`, `page`) ; la ligne d'élève porte le badge de classe
+# ADR  : 0026, 0028, 0072, 0085, 0088, 0097 (§4.7), 0101 · UDR : enseignant §3.5, 0006, 0027, 0054, 0062, 0081 (§3.7), 0108, 0121 · un élève reçoit 403 : il voit le code de sa classe sur ses propres pages
 module Classroom
   class ClassroomsController < AuthenticatedController
     allow_roles :teacher, :team
@@ -17,14 +17,14 @@ module Classroom
     private
 
     # « Chercher un élève » (UDR-0054 §3.9) : la recherche filtre la liste déjà accordée par la policy, jamais plus.
-    # Les comptes des exercices assignés suivent FollowAssignmentPolicy (ADR-0072 §4.5) ; jours et matière : l'enseignant.
+    # Les comptes des exercices assignés suivent FollowAssignmentPolicy (ADR-0072 §4.5) ; la matière : l'enseignant.
     def overview(access)
       @search = params[:q].to_s
       @page = Integer(params[:page].to_s, 10, exception: false).then { it&.positive? ? it : 1 }
       follow = Policies::Classroom::FollowAssignmentPolicy.new.call(actor: current_actor, classroom: @header)
       @can_remove_students = can_remove_students?
       Queries::Classroom::ClassroomOverviewQuery.new.call(public_id: @header.public_id, show_roster: access.show_roster,
-                                                          search: @search, page: @page, note: params[:note].to_s,
+                                                          search: @search, page: @page, badge: params[:badge].to_s,
                                                           show_follow_up: follow.success?,
                                                           teacher_id: (current_actor.user_id if current_actor.teacher?))
     end

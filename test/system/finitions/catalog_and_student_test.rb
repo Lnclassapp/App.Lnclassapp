@@ -45,47 +45,50 @@ module Finitions
     end
 
     test "FU-47 : le catalogue se cherche pendant la frappe, sans accents, et l'état vide propose d'effacer la recherche" do
-      sign_in_as @student
-      visit courses_path
-      assert_selector "#courses_groups li", count: 3
-      assert_no_button tc("filters.submit")
-      before = history_length
-
-      assert_no_page_reload do
-        # Un seul caractère ne part pas : « m » ne garderait que « Mathématiques 3e ».
-        search_field.fill_in with: "m"
-        sleep 0.6
+      # Lot O5 : sur ordinateur, Cours est celui des leçons ; la recherche des groupes par matière est celle du téléphone.
+      with_mobile_viewport do
+        sign_in_as @student
+        visit courses_path
         assert_selector "#courses_groups li", count: 3
+        assert_no_button tc("filters.submit")
+        before = history_length
 
-        search_field.fill_in with: "mathematiques"
-        assert_selector "#courses_groups li", count: 1
-        assert_selector "#courses_groups", text: "Mathématiques 3e"
-        assert_selector "#courses_total", text: tc("total", count: 1)
-        assert_current_path(/q=mathematiques/)
-        assert_equal before, history_length, "la frappe empile l'historique"
-        assert_equal "mathematiques", search_field.value
+        assert_no_page_reload do
+          # Un seul caractère ne part pas : « m » ne garderait que « Mathématiques 3e ».
+          search_field.fill_in with: "m"
+          sleep 0.6
+          assert_selector "#courses_groups li", count: 3
 
-        search_field.fill_in with: "zzz"
-        within "#courses_empty" do
-          assert_text tc("no_match_title")
-          assert_link tc("clear_search"), href: courses_path
+          search_field.fill_in with: "mathematiques"
+          assert_selector "#courses_groups li", count: 1
+          assert_selector "#courses_groups", text: "Mathématiques 3e"
+          assert_selector "#courses_total", text: tc("total", count: 1)
+          assert_current_path(/q=mathematiques/)
+          assert_equal before, history_length, "la frappe empile l'historique"
+          assert_equal "mathematiques", search_field.value
+
+          search_field.fill_in with: "zzz"
+          within "#courses_empty" do
+            assert_text tc("no_match_title")
+            assert_link tc("clear_search"), href: courses_path
+          end
+
+          search_field.fill_in with: ""
+          assert_selector "#courses_groups li", count: 3
+
+          # UDR-0085 §3.1 (CA-2) : plus de liste « Matière » chez l'élève ; « Tout voir » efface la recherche.
+          assert_no_select tc("filters.material")
+          search_field.fill_in with: "mathematiques"
+          assert_selector "#courses_groups li", count: 1
         end
 
-        search_field.fill_in with: ""
+        click_on tc("reset")
+        # Turbo affiche d'abord l'aperçu en cache de /courses (3 cours, le champ tel qu'il était à la mise en cache), puis la
+        # page reçue : les assertions attendent la page reçue, jamais l'aperçu.
+        assert_no_selector "html[data-turbo-preview]"
         assert_selector "#courses_groups li", count: 3
-
-        # UDR-0085 §3.1 (CA-2) : plus de liste « Matière » chez l'élève ; « Tout voir » efface la recherche.
-        assert_no_select tc("filters.material")
-        search_field.fill_in with: "mathematiques"
-        assert_selector "#courses_groups li", count: 1
+        assert_field tc("filters.search"), with: ""
       end
-
-      click_on tc("reset")
-      # Turbo affiche d'abord l'aperçu en cache de /courses (3 cours, le champ tel qu'il était à la mise en cache), puis la
-      # page reçue : les assertions attendent la page reçue, jamais l'aperçu.
-      assert_no_selector "html[data-turbo-preview]"
-      assert_selector "#courses_groups li", count: 3
-      assert_field tc("filters.search"), with: ""
     end
 
     test "FU-14 : sur la page d'un cours, le seul retour est « Cours », vers le catalogue" do
@@ -104,7 +107,7 @@ module Finitions
       within("main nav") { click_on "Cours" }
       assert_current_path courses_path
       assert_title "Cours · Élève · Lnclass"
-      assert_selector "#courses_total", text: /\A\d+ fiches? de cours\z/
+      assert_selector "#lessons_total", text: /\A\d+ fiches? de cours · Progression DPFC 2026-2027\z/
     end
 
     # UDR-0058 §3.3 (R4) : l'aide « Badges » / « Maîtrise » quitte l'accueil ; la page de l'exercice les explique.
@@ -114,7 +117,7 @@ module Finitions
 
       assert_current_path student_home_path
       assert_title "Accueil · Élève · Lnclass"
-      within("#student_home_exercises") { assert_no_selector "#student_home_help" }
+      assert_no_selector "#student_home_help"
     end
 
     # FU-27, UDR-0081 §3.8 : plus de code de classe sur « Ma classe », et toujours rien à copier.

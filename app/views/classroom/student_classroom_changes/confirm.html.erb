@@ -18,7 +18,7 @@
           <dt class="px-4 text-sm font-medium text-mute"><%= t(".#{key}") %></dt>
           <dd class="<%= class_names("mt-1 rounded-ln px-4 py-3", background) %>">
             <span class="flex flex-wrap items-center gap-2">
-              <span class="<%= class_names("font-display text-lg leading-tight font-bold", color) %>"><%= side.name %></span>
+              <span class="<%= class_names("font-display text-lg leading-tight font-medium", color) %>"><%= side.name %></span>
               <% if key == :joining && other_school %>
                 <%= ui_badge t(".other_school"), tone: :brand, size: :sm %>
               <% end %>
@@ -34,7 +34,7 @@
   <% end %>
 
   <section class="mt-6" aria-labelledby="classroom-change-follows">
-    <h2 id="classroom-change-follows" class="font-display text-base font-bold text-ink"><%= t(".follows_title") %></h2>
+    <h2 id="classroom-change-follows" class="font-display text-base font-medium text-ink"><%= t(".follows_title") %></h2>
     <ul class="mt-2 space-y-2">
       <% %i[results gaps account].each do |key| %>
         <li class="flex items-start gap-2 text-sm text-ink">
@@ -45,7 +45,7 @@
   </section>
 
   <section class="mt-6" aria-labelledby="classroom-change-leaves">
-    <h2 id="classroom-change-leaves" class="font-display text-base font-bold text-ink"><%= t(".leaves_title") %></h2>
+    <h2 id="classroom-change-leaves" class="font-display text-base font-medium text-ink"><%= t(".leaves_title") %></h2>
     <ul class="mt-2 space-y-2">
       <% %i[work teacher].each do |key| %>
         <li class="flex items-start gap-2 text-sm text-ink">

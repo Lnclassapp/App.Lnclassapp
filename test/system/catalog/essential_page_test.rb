@@ -73,6 +73,29 @@ class Catalog::EssentialPageTest < ApplicationSystemTestCase
     assert_text(/question 1/i)
   end
 
+  # CA-E12 (UDR écrans élève §3.6 bis) : à 1 440 px, la fiche à gauche, la carte « Exercices » dans une colonne de 300 px qui
+  # suit le défilement.
+  test "at 1 440 px, the student's « Exercices » card is a 300 px column that stays in view when the sheet scrolls" do
+    @essential.update!(content: Array.new(60) { |i| "<p>Paragraphe #{i} de la fiche.</p>" }.join)
+    student = create_student_for(@course)
+    sign_in_as student
+
+    with_mobile_viewport([ 1440, 900 ]) do
+      visit page_path
+
+      assert_selector "#essential_side #essential_exercises"
+      assert_in_delta 300, evaluate_script("document.getElementById('essential_side').getBoundingClientRect().width"), 1
+      page.execute_script("window.scrollTo(0, document.documentElement.scrollHeight)")
+      page.document.synchronize do
+        raise Capybara::ExpectationNotMet, "la page n'a pas défilé" unless page.evaluate_script("window.scrollY") > 300
+      end
+      card = evaluate_script("document.getElementById('essential_exercises').getBoundingClientRect().toJSON()")
+      bar = evaluate_script("document.querySelector('header.sticky').getBoundingClientRect().bottom")
+      assert_operator card["top"], :>=, bar, "le haut de la carte « Exercices » passe sous la barre du haut"
+      assert_operator card["bottom"], :<=, 900, "la carte « Exercices » est sortie de l'écran"
+    end
+  end
+
   # UDR-0015, amendement du 2026-10-02 (UDR-0057) : à 390 × 844, une action principale, 5 blocs au plus avant le pli,
   # 3 exercices puis « Voir plus ».
   test "on a phone, the student's sheet fits the width and passes the sobriety rule" do

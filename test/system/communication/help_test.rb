@@ -18,9 +18,9 @@ class Communication::HelpTest < ApplicationSystemTestCase
     end
   end
 
-  # UDR-0061, amendment of 2026-10-06: signed in, the student keeps the shell on the FAQ. UDR-0084 §3.2, §3.3: without
-  # bottom bar, the destinations are in the avatar menu.
-  test "on a phone, a signed-in student reads the FAQ in the shell, the destinations in the avatar menu" do
+  # UDR-0061, amendment of 2026-10-06: signed in, the student keeps the shell on the FAQ. Mvp-teacher-student: no bottom bar,
+  # and « Mon compte » (lot E1) lists no destination, those are on the home (lot D).
+  test "on a phone, a signed-in student reads the FAQ in the shell; « Mon compte » opens from the avatar" do
     sign_in_as create_student(classroom: create_classroom)
 
     with_mobile_viewport do
@@ -30,8 +30,8 @@ class Communication::HelpTest < ApplicationSystemTestCase
       assert_no_selector "nav.bottom-0"
       find("header button#avatar-menu-button").click
       within("#avatar-menu") do
-        assert_link "Cours"
-        assert_link "Accueil", href: student_home_path
+        assert_link I18n.t("shared.navigation.profile")
+        assert_no_link "Cours"
       end
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"

@@ -31,9 +31,11 @@ module Queries
         assert_equal false, enrolled?(create_teacher)
       end
 
-      test "a teacher goes home once onboarded, to their classrooms before" do
+      # UDR enseignant §3.13 (lot G) : sans classe, l'accueil porte « Ajoutez vos classes » ; plus de renvoi vers la déclaration.
+      test "a teacher goes home, with or without a finished onboarding, with or without a classroom" do
         assert_equal :teacher_home, destination_of(create_teacher)
-        assert_equal :teacher_classrooms, destination_of(create_teacher(onboarded: false))
+        assert_equal :teacher_home, destination_of(create_teacher(onboarded: false))
+        assert_equal :teacher_home, destination_of(create_teacher(classrooms: [ create_classroom ]))
       end
 
       test "a teacher without a primary school waits on the pending page" do

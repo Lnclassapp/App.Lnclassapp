@@ -13,7 +13,7 @@
     <% end %>
   </div>
   <div class="min-w-0 flex-1">
-    <p class="truncate font-bold"><%= illustration.name %></p>
+    <p class="truncate font-medium"><%= illustration.name %></p>
     <p class="flex flex-wrap items-center gap-2 text-xs text-mute">
       <span><%= t(".added_on", date: l(row.added_at.to_date, format: day_format)) %></span>
       <% if illustration.retired? %>

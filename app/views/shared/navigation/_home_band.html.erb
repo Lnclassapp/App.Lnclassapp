@@ -1,0 +1,23 @@
+<%# 🌐 UI · shared/navigation/_home_band — bandeau des accueils élève et enseignant %>
+<%# Rôle : fond du rôle (role_fill_class), avatar à gauche qui ouvre « Mon compte », « Besoin d'aide ? » à droite, texte band-ink ; la carte à cheval est celle de la page %>
+<%# UDR  : accueil élève §3.1, §3.8 · écrans enseignant §3.1, §3.3 · locals : role (:student ou :teacher), user (ShellUser) ; avatar et aide quittent le bandeau dès lg (la barre du haut les porte) %>
+<% role = role.to_sym %>
+<% fill = role_fill_class(role) %>
+<%# Élève ≈ 96 px, enseignant ≈ 132 px : la carte déborde de 40 % sur le bandeau. %>
+<header class="<%= class_names("#{role}-band", fill, "text-band-ink", "flex items-start justify-between gap-3 px-gutter pt-4",
+                               role == :teacher ? "min-h-33" : "min-h-24") %>">
+  <%= link_to account_panel_page_path(role), "aria-label": t(".account", name: user.name),
+              class: "grid size-12 shrink-0 place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-white lg:hidden" do %>
+    <% if user.avatar_url %>
+      <%= image_tag user.avatar_url, alt: "", loading: "lazy", decoding: "async", class: "size-12 rounded-full object-cover" %>
+    <% else %>
+      <span aria-hidden="true" class="grid size-12 place-items-center rounded-full bg-white text-sm font-medium text-brand-strong">
+        <%= avatar_initials(user.name) %>
+      </span>
+    <% end %>
+  <% end %>
+  <%= link_to help_path, class: "inline-flex min-h-tap items-center gap-2 rounded-full px-3 text-sm font-medium text-band-ink
+                                 focus-visible:outline-2 focus-visible:outline-white lg:hidden" do %>
+    <%= ui_icon "headset" %><span><%= t(".help") %></span>
+  <% end %>
+</header>

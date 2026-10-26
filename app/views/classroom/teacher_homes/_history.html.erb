@@ -1,0 +1,46 @@
+<%# 🌐 UI · classroom/teacher_homes/_history — « Historique » de l'accueil enseignant : les assignations échues, sans recouvrir « Cette semaine » %>
+<%# Rôle : groupées par jour d'échéance, une ligne par assignation (rond de matière, titre vers son suivi, « Tle D 1 · 27 / 27 faits », moyenne de la classe) ; 3 lignes puis « Voir plus » ; absente sans ligne %>
+<%# ADR  : 0072 · UDR : 0057 (R3), 0090 §4 (verte dès 14/20, jamais rouge), écrans enseignant §3.3 · locals: (history: [TeacherFollowUpsQuery::Row], badges: false) -%>
+<% if history.any? %>
+  <% grading = Entities::Assessment::Grading %>
+  <% today = Time.zone.today %>
+  <% previous_day = nil %>
+  <%= tag.section id: "teacher_home_history", "aria-labelledby": "teacher_home_history_title", class: "space-y-3", data: ui_reveal_data do %>
+    <h2 id="teacher_home_history_title" class="sr-only lg:not-sr-only lg:font-display lg:text-base lg:font-medium lg:text-ink"><%= t(".title") %></h2>
+    <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
+      <% history.each_with_index do |row, index| %>
+        <%# Le sous-titre du jour est dans la ligne qui ouvre le jour : « Voir plus » ne laisse jamais un titre sans ligne. %>
+        <% new_day = row.due_on != previous_day %>
+        <% previous_day = row.due_on %>
+        <%= tag.li id: "history_#{row.public_id}", class: "relative px-4 py-3", **ui_reveal_item(index) do %>
+          <% if new_day %>
+            <h3 class="pb-2 text-xs font-medium tracking-wide text-mute uppercase">
+              <%= case row.due_on when today then t(".today") when today - 1 then t(".yesterday") else l(row.due_on, format: :due_long) end %>
+            </h3>
+          <% end %>
+          <div class="flex items-center gap-3">
+            <span class="grid size-10 shrink-0 place-items-center rounded-full bg-brand-soft" aria-hidden="true">
+              <%= image_tag subject_illustration(row.material_slug).path, alt: "", class: "size-6", loading: "lazy" %>
+            </span>
+            <div class="min-w-0 flex-1 space-y-1">
+              <%= link_to row.exercise_title, classroom_assignment_path(row.classroom_public_id, row.public_id),
+                          class: "block truncate text-sm text-ink after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-brand" %>
+              <p class="flex flex-wrap items-center gap-x-2 gap-y-1 text-meta text-mute">
+                <% if badges %><%= ui_subject_badge row.material_name, category: row.material_category, size: :sm %><% end %>
+                <span><%= t(".line", classroom: row.classroom_name, done: t("classroom.teacher_homes.follow_ups.done", done: row.done, count: row.present)) %></span>
+              </p>
+            </div>
+            <%# Verte dès « 14/20 » affiché (MASTERY_THRESHOLD), à l'encre dessous ; jamais en rouge. %>
+            <% if row.average_percent %>
+              <% grade = number_with_precision(row.average_percent / 5.0, precision: 1, strip_insignificant_zeros: true) %>
+              <span aria-label="<%= t(".average_label", grade:) %>"
+                    class="<%= class_names("shrink-0 font-display text-base font-medium tabular-nums",
+                                           grading.reaches?(row.average_percent, grading::MASTERY_THRESHOLD) ? "text-success" : "text-ink") %>"><%= t(".average", grade:) %></span>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </ul>
+    <%= ui_reveal_more history.size %>
+  <% end %>
+<% end %>

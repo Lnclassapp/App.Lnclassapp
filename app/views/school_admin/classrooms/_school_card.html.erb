@@ -14,13 +14,13 @@
   <ul id="direction_home_figures" class="grid grid-cols-3 gap-2 sm:gap-3">
     <% home.figures.to_h.each do |key, count| %>
       <li class="min-w-0 rounded-ln bg-mist px-2 py-3 sm:px-3">
-        <span class="block font-display text-xl font-extrabold tabular-nums sm:text-2xl"><%= count %></span>
+        <span class="block font-display text-xl font-medium tabular-nums sm:text-2xl"><%= count %></span>
         <span class="block text-xs text-mute sm:text-sm"><%= t(".figures.#{key}", count:) %></span>
       </li>
     <% end %>
   </ul>
 
-  <h3 class="mt-5 mb-2 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".alerts_title") %></h3>
+  <h3 class="mt-5 mb-2 text-xs font-medium tracking-wider text-mute uppercase"><%= t(".alerts_title") %></h3>
   <% if home.alerts.empty? %>
     <p id="direction_home_all_clear" class="flex items-center gap-2 text-sm text-success">
       <%= ui_icon "check-circle", variant: :mini, size: :sm %><%= t(".all_clear") %>

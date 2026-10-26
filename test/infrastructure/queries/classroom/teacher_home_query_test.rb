@@ -25,23 +25,6 @@ module Queries
         assert_not row.several_materials?
       end
 
-      # EPM-15 (UDR-0126 §3.4) : la moyenne sur ses deux matières ; l'enseignant d'une seule lit la sienne.
-      test "the average score of a teacher of two subjects spans both, in the current school" do
-        pc = create_material(name: "Physique-Chimie")
-        both = create_teacher(school: @school, materials: [ pc, @svt ], classrooms: [ @classroom ])
-        alone = create_teacher(school: @school, material: pc, classrooms: [ @classroom ])
-        student = create_student(classroom: @classroom)
-        [ [ pc, 80 ], [ @svt, 60 ] ].each do |material, score_percent|
-          exercise = create_exercise(essential: create_essential(course: create_course(material:)))
-          create_exercise_session(student:, exercise:, status: "completed", score_percent:)
-        end
-
-        assert_equal [ "Physique-Chimie", "SVT" ], home(both).materials.map(&:name)
-        assert home(both).several_materials?
-        assert_equal 70, card(home(both)).average_score_percent
-        assert_equal 80, card(home(alone)).average_score_percent
-      end
-
       test "a declared classroom: public id, name, level, present students and active assignments" do
         2.times { create_student(classroom: @classroom) }
         gone = create_student(classroom: @classroom)
@@ -51,26 +34,59 @@ module Queries
         create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher, status: "archived")
 
         assert_equal({ public_id: @classroom.public_id, name: "Tle D 1", level_name: "Tle", active_students_count: 2,
-                       active_assignments_count: 2, average_score_percent: nil }, card.to_h)
+                       active_assignments_count: 2, join_code: Orm::Classroom.find(@classroom.id).join_code,
+                       badge_counts: { bronze: 0, silver: 0, gold: 0, diamond: 0 } }, card.to_h)
       end
 
-      test "the average score: completed sessions of present students, in the teacher's subject only" do
-        svt_exercise = create_exercise(essential: create_essential(course: create_course(material: @svt)))
-        maths_exercise = create_exercise(essential: create_essential(course: create_course(material: create_material)))
-        awa = create_student(classroom: @classroom)
-        koffi = create_student(classroom: @classroom)
+      # CA-G2, CA-G3 (UDR enseignant §3.2) : un badge par élève présent, chaque élève une fois ; « Pas encore » ne se compte pas.
+      test "badge counts: one badge per present student, from the best score of each active assignment of the classroom" do
+        exercises = Array.new(2) { create_exercise(essential: create_essential(course: create_course(material: @svt))) }
+        assignments = exercises.map { create_assignment(classroom: @classroom, assignable: it, by: @teacher) }
+        archived = create_assignment(classroom: @classroom, assignable: create_exercise, by: @teacher, status: "archived")
+        elsewhere = create_assignment(classroom: create_classroom(school: @school), assignable: exercises.first, by: @teacher)
+        students = Array.new(7) { create_student(classroom: @classroom) }
         gone = create_student(classroom: @classroom)
         Orm::ClassroomStudent.where(student: gone).update_all(left_at: Time.current)
-        outsider = create_student(classroom: create_classroom(school: @school))
-        create_exercise_session(student: awa, exercise: svt_exercise, status: "completed", score_percent: 80)
-        create_exercise_session(student: awa, exercise: svt_exercise, status: "completed", score_percent: 50)
-        create_exercise_session(student: koffi, exercise: svt_exercise, status: "completed", score_percent: 75)
-        create_exercise_session(student: koffi, exercise: svt_exercise)
-        create_exercise_session(student: koffi, exercise: maths_exercise, status: "completed", score_percent: 0)
-        create_exercise_session(student: gone, exercise: svt_exercise, status: "completed", score_percent: 0)
-        create_exercise_session(student: outsider, exercise: svt_exercise, status: "completed", score_percent: 0)
+        score = lambda do |student, assignment, percent|
+          create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed",
+                                  classroom_assignment: assignment, score_percent: percent)
+        end
+        # diamant : sans faute partout ; or : 90 et 80 ; argent : 70 (la meilleure session de l'exercice compte) ; bronze : 55 ;
+        # pas encore : 30, et un élève sans rien ; un élève parti, une assignation archivée et une session non terminée ne comptent pas.
+        [ 100, 100 ].each_with_index { |percent, index| score.call(students[0], assignments[index], percent) }
+        [ 90, 80 ].each_with_index { |percent, index| score.call(students[1], assignments[index], percent) }
+        score.call(students[2], assignments[0], 40)
+        score.call(students[2], assignments[0], 70)
+        score.call(students[3], assignments[0], 55)
+        score.call(students[4], assignments[0], 30)
+        score.call(students[5], archived, 100)
+        create_exercise_session(student: students[5], exercise: exercises.first, classroom_assignment: assignments[1], score_percent: 100)
+        score.call(gone, assignments[0], 100)
+        score.call(students[6], elsewhere, 100)
 
-        assert_equal 68, card.average_score_percent
+        assert_equal({ bronze: 1, silver: 1, gold: 1, diamond: 1 }, card.badge_counts)
+      end
+
+      test "badge counts: a student of two classrooms counts once in each, with the assignments of that classroom only" do
+        other = create_classroom(school: @school, level: @tle, name: "Tle D 2")
+        Orm::TeacherClassroom.create!(teacher: @teacher, classroom: other)
+        student = create_student(classroom: @classroom)
+        Orm::ClassroomStudent.create!(classroom: other, student:, primary: false, joined_at: Time.current, joined_via: "standard")
+        exercise = create_exercise(essential: create_essential(course: create_course(material: @svt)))
+        mine = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
+        create_assignment(classroom: other, assignable: exercise, by: @teacher)
+        create_exercise_session(student:, exercise:, status: "completed", classroom_assignment: mine, score_percent: 85)
+
+        counts = home.classrooms.to_h { [ it.name, it.badge_counts.values.sum ] }
+
+        assert_equal({ "Tle D 1" => 1, "Tle D 2" => 0 }, counts)
+      end
+
+      test "the school: its sigle, or nil without one" do
+        assert_nil home.school_sigle
+        @school.update!(sigle: "LCA")
+
+        assert_equal "LCA", home.school_sigle
       end
 
       test "only the declared, active classrooms of the current school year" do
@@ -156,7 +172,7 @@ module Queries
         assert_empty home(create_teacher(school: @school)).course_levels
       end
 
-      # Six reads before the bubbles (profile, school, classrooms, members, assignments, scores): one more at most.
+      # Six reads before the bubbles (profile, school, classrooms, members, assignments, badges): one more at most.
       test "course levels cost at most one more query, whatever the number of levels" do
         4.times do |index|
           level = create_level(name: "Niveau #{index}", position: index + 1)

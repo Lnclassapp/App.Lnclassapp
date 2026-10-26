@@ -41,6 +41,38 @@ class DesignTokensTest < ActiveSupport::TestCase
     assert_operator SOURCES.size, :>, 20
   end
 
+  # UDR palette froide §3.1 (CA-F1) : page blanche, gris bleutés, une seule police.
+  STYLESHEET = Rails.root.join("app/assets/stylesheets/application.tailwind.css").read
+  COLD_PALETTE = {
+    "ink" => "#1f2128", "mute" => "#5f6470", "line" => "#e3eef7", "line-strong" => "#c3d8e8", "mist" => "#f4f8fb",
+    "paper" => "#ffffff", "warning" => "#8a4a00", "warning-dot" => "#f08c00", "band-ink" => "#0b2a40",
+    "brand" => "#00a0ff", "brand-soft" => "#e5f5ff", "brand-strong" => "#0070b3", "teacher" => "#ff8a00",
+    "success" => "#18723f", "warning-soft" => "#fff1dc"
+  }.freeze
+  COLD_PALETTE_DARK = { "line-strong" => "#3a4655", "warning-dot" => "#ffa94d", "band-ink" => "#ffffff" }.freeze
+
+  test "the theme carries the cold palette of the pilot" do
+    theme = STYLESHEET[/@theme \{(.*?)\n\}/m, 1]
+
+    COLD_PALETTE.each { |token, value| assert_includes theme, "--color-#{token}: #{value};", token }
+    assert_includes theme, "--text-meta: 0.8125rem;"
+  end
+
+  test "the new tokens have their dark value in both dark blocks" do
+    dark_blocks = STYLESHEET.split("@media screen").drop(1)
+
+    assert_operator dark_blocks.size, :>=, 2
+    COLD_PALETTE_DARK.each do |token, value|
+      assert_equal 2, STYLESHEET.scan("--color-#{token}: #{value};").size, "#{token} : les deux blocs sombres"
+    end
+  end
+
+  test "a single font: titles in DM Sans, Bricolage Grotesque is no longer served" do
+    assert_includes STYLESHEET, '--font-display: "DM Sans", ui-sans-serif, system-ui, sans-serif;'
+    assert_no_match(/Bricolage/i, STYLESHEET)
+    assert_empty Rails.root.glob("app/assets/fonts/*bricolage*")
+  end
+
   RULES.each do |name, pattern|
     test "no #{name} in views, helpers or JavaScript" do
       offences = scan(pattern)
@@ -53,6 +85,22 @@ class DesignTokensTest < ActiveSupport::TestCase
     offences = scan(SPACING) { |match| !SPACING_SCALE.include?(match[1]) }
 
     assert_empty offences, "espacement hors échelle (#{SPACING_SCALE.join(', ')}) :\n#{offences.join("\n")}"
+  end
+
+  # UDR palette froide §3.2 : le texte ne dépasse pas `font-medium`. Exception écrite : le titre gras de la page d'accueil.
+  FORBIDDEN_WEIGHT = /(?<![\w-])font-(?:semibold|bold|extrabold|black)(?![\w-])/
+  WEIGHT_SOURCES = Rails.root.glob("app/{views,helpers}/**/*.{erb,rb}").reject { |path| path.to_s.include?("app/views/homepage/") }.freeze
+
+  test "no text heavier than font-medium outside the homepage" do
+    offences = WEIGHT_SOURCES.flat_map do |path|
+      path.each_line.with_index(1).filter_map do |line, number|
+        "#{path.relative_path_from(Rails.root)}:#{number}" if line.match?(FORBIDDEN_WEIGHT)
+      end
+    end
+
+    assert_empty offences, "graisse > 500 interdite (UDR palette froide §3.2), utilisez font-medium :\n#{offences.join("\n")}"
+    %w[font-bold md:font-semibold font-bold! font-black].each { |s| assert_match FORBIDDEN_WEIGHT, s }
+    %w[font-medium font-normal font-boldly].each { |s| assert_no_match FORBIDDEN_WEIGHT, s }
   end
 
   test "the patterns catch what they must" do

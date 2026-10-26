@@ -1,53 +1,22 @@
 <%# 🌐 UI · classroom/classrooms/_header — en-tête de la page d'une classe (CL-10, CL-04) %>
-<%# Rôle : retour selon le rôle  ; nom, niveau, établissement, année ; bloc du lien (_link) ; effectif / plafond expliqué %>
-<%# ADR  : 0028, 0041, 0063, 0085 · UDR : 0027, 0050, 0054, 0081 · Stimulus : clipboard · WhatsApp : lien sortant, sans nom d'élève %>
-<div id="classroom_header" class="mb-8">
+<%# Rôle : retour selon le rôle ; titre, « CSMT · 2026-2027 » dessous, logo enseignant à droite ; le bloc du lien (_link) est rendu par show, dans la colonne de gauche ; l'effectif est dans le titre de la liste %>
+<%# ADR  : 0028, 0041, 0063, 0085 · UDR : enseignant §3.5, 0027, 0050, 0054, 0081 · Stimulus : clipboard · WhatsApp : lien sortant, sans nom d'élève %>
+<%# locals: (classroom:, school_sigle:) -%>
+<div id="classroom_header">
   <% if shell_user.role.to_s == "team" %>
     <%= ui_back_link classroom.school_name, href: school_path(classroom.school_public_id) %>
   <% else %>
     <%= ui_back_link t(".back"), href: teacher_home_path %>
   <% end %>
-  <%= ui_card padding: :md do %>
-    <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-      <div class="flex min-w-0 items-start gap-4">
-        <span class="grid size-14 shrink-0 place-items-center rounded-card bg-brand-soft text-brand-strong" aria-hidden="true">
-          <%= ui_icon "academic-cap", size: :xl %>
-        </span>
-        <div class="min-w-0">
-          <div class="flex flex-wrap items-center gap-3">
-            <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= classroom.name %></h1>
-            <% if classroom.status == "archived" %>
-              <%= ui_badge t(".archived"), tone: :warning, size: :sm, dot: true %>
-            <% end %>
-          </div>
-          <dl class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-mute">
-            <div class="flex gap-1">
-              <dt class="sr-only"><%= t(".level") %></dt>
-              <dd><%= ui_badge [ classroom.level_name, classroom.series_name ].compact.join(" · "), size: :sm %></dd>
-            </div>
-            <div class="flex items-center gap-1">
-              <dt><%= ui_icon "building-library", size: :sm, label: t(".school") %></dt><dd><%= classroom.school_name %></dd>
-            </div>
-            <div class="flex items-center gap-1">
-              <dt><%= ui_icon "calendar", size: :sm, label: t(".school_year") %></dt><dd><%= classroom.school_year %></dd>
-            </div>
-            <div class="flex flex-wrap items-center gap-1">
-              <dt><%= ui_icon "users", size: :sm, label: t(".headcount_label") %></dt>
-              <dd id="classroom_headcount" class="font-medium tabular-nums text-ink">
-                <%= t(".headcount", count: classroom.active_students_count, max: classroom.max_students) %>
-              </dd>
-              <dd><%= ui_info_tip t(".headcount_tip", max: classroom.max_students), label: t(".headcount_label") %></dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-
-      <%# UDR-0081 §3.6 : le bloc du lien, pour qui gère la classe ; il a remplacé le code (Lot F). %>
-      <% if classroom.link_shown_to?(current_actor) %>
-        <div class="flex flex-col gap-3 lg:shrink-0">
-          <%= render "classroom/classrooms/link", classroom: %>
-        </div>
+  <div class="mt-4 mb-4 flex items-start justify-between gap-3">
+    <div class="min-w-0">
+      <h1 class="font-display text-lg font-medium text-balance break-words"><%= classroom.name %></h1>
+      <%# Un établissement sans sigle se nomme en entier. %>
+      <p class="text-sm text-mute"><%= t(".subtitle", school: school_sigle.presence || classroom.school_name, year: classroom.school_year) %></p>
+      <% if classroom.status == "archived" %>
+        <div class="mt-2"><%= ui_badge t(".archived"), tone: :warning, size: :sm, dot: true %></div>
       <% end %>
     </div>
-  <% end %>
+    <%= image_tag brand_logo(teacher: true), alt: "", class: "size-6 shrink-0 rounded-sm" %>
+  </div>
 </div>

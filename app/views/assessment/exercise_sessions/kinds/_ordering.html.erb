@@ -3,7 +3,7 @@
 <%# ADR  : 0091 §4.4 (indices d'affichage) · UDR : 0087 §3.4, §3.10 · Stimulus : assessment--ordering ; sans JavaScript, une liste de choix par rang %>
 <%# locals: (f:, question:) -%>
 <% scope = "assessment.exercise_sessions.kinds.ordering" %>
-<legend class="font-display text-xl font-extrabold text-balance whitespace-pre-line text-ink"><%= question.content %></legend>
+<legend class="font-display text-xl font-medium text-balance whitespace-pre-line text-ink"><%= question.content %></legend>
 <p class="text-sm text-mute"><%= t("#{scope}.hint") %></p>
 <div data-controller="assessment--ordering" data-assessment--ordering-up-value="<%= t("#{scope}.up", n: "%{n}") %>"
      data-assessment--ordering-down-value="<%= t("#{scope}.down", n: "%{n}") %>" data-assessment--ordering-moved-value="<%= t("#{scope}.moved", n: "%{n}") %>">
@@ -11,7 +11,7 @@
     <% question.items.each_with_index do |item, rank| %>
       <li data-assessment--ordering-target="item" data-index="<%= item.index %>"
           class="flex min-h-tap items-center gap-3 rounded-ln border-2 border-line bg-white py-2 pr-2 pl-3">
-        <span data-rank class="grid size-8 shrink-0 place-items-center rounded-full bg-brand-strong text-sm font-bold text-white tabular-nums"><%= rank + 1 %></span>
+        <span data-rank class="grid size-8 shrink-0 place-items-center rounded-full bg-brand-strong text-sm font-medium text-white tabular-nums"><%= rank + 1 %></span>
         <span class="min-w-0 flex-1 font-medium text-ink"><%= item.content %></span>
         <% %w[up down].each do |direction| %>
           <button type="button" data-direction="<%= direction %>" data-action="assessment--ordering#<%= direction %>"

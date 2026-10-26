@@ -15,15 +15,18 @@ class School::TeacherSchoolsControllerTest < ActionDispatch::IntegrationTest
   def join(school) = post teacher_schools_path, params: { school_join: { drena_public_id: @drena.public_id, school_public_id: school.public_id } }
   def attached = Orm::TeacherSchool.where(teacher: @teacher).order(:created_at, :id).pluck(:school_id, :primary)
 
-  test "one school: its card, « Principal » and « Vous êtes ici », no menu, and the card to add one" do
+  test "one school: its line with « En cours », no « Retirer » button, and the card to add one" do
     sign_in_as @teacher
     get teacher_schools_path
 
     assert_response :success
     assert_select "h1", t("school.teacher_schools.index.title")
-    assert_select "#teacher_school_#{@a.public_id}", text: /Lycée moderne d'Abobo.*DRENA Abidjan 1.*Principal.*Vous êtes ici/m
-    assert_select "#teacher-school-menu-#{@a.public_id}", count: 0
-    assert_select "form#go-school-#{@a.public_id}", count: 0
+    assert_select "main a[href='#{teacher_menu_path}']", text: /Mon compte/
+    assert_select "p", text: "1 sur 3."
+    assert_select "#teacher_school_#{@a.public_id}", text: /Lycée moderne d'Abobo.*En cours/m
+    assert_select "#teacher_school_#{@a.public_id}", text: /DRENA/, count: 0
+    assert_select "#teacher_school_#{@a.public_id} dialog", 0, "CA-H5 : le seul établissement n'a pas de bouton"
+    assert_select "#teacher_school_#{@a.public_id} button", 0
     assert_select "#add_school form#school-join-form[action='#{teacher_schools_path}']"
     assert_select "#add_school select[name='school_join[drena_public_id]'] option", text: "DRENA Abidjan 1"
   end
@@ -42,32 +45,81 @@ class School::TeacherSchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "direction", @teacher.teacher_profile.reload.joined_via, "ME-06 : la voie d'arrivée ne change pas"
   end
 
-  test "two schools: a menu to leave each, « Aller dans » the other one" do
+  test "two schools: « 2 sur 3 », a « Retirer » with its confirmation on each line, only the current one « En cours »" do
     add_teacher_school(@teacher, @b)
     sign_in_as @teacher
     get teacher_schools_path
 
-    assert_select "#teacher-school-menu-#{@a.public_id}"
-    assert_select "#teacher_school_#{@b.public_id}", text: /Collège Saint-Michel \(CSM\)/
-    assert_select "form#go-school-#{@b.public_id}[action='#{teacher_current_school_path}'] button[aria-label=?]",
-                  t("school.teacher_schools.index.go_label", school: "Collège Saint-Michel")
+    assert_select "p", text: "2 sur 3."
+    assert_select "#teacher_school_#{@a.public_id} .ui-badge", text: "En cours"
+    assert_select "#teacher_school_#{@b.public_id} .ui-badge", 0
+    assert_select "#teacher_school_#{@b.public_id}", text: /CSM.*Collège Saint-Michel/m
+    assert_select "#teacher_school_#{@b.public_id}", text: /DRENA/, count: 0
+    assert_select "#teacher_school_#{@b.public_id} button[aria-controls='leave-school-#{@b.public_id}']", text: /Retirer\s+Collège Saint-Michel/
+    assert_select "#teacher_school_#{@a.public_id} button[aria-controls='leave-school-#{@a.public_id}']", text: /Retirer/
     assert_select "dialog#leave-school-#{@b.public_id} form[action='#{teacher_school_path(@b.public_id)}']"
+    assert_select "dialog#leave-school-#{@b.public_id} h2", "Retirer Collège Saint-Michel ?"
+    assert_select "main p", text: "Vos classes et devoirs en cours dans l'établissement retiré sont archivés."
+    assert_select "#add_school"
   end
 
-  test "ME-04: three schools: the add card gives way to a sentence; a forged join is refused in the form" do
+  # CA-H7 (lot P0) : dans le frame du panneau « Mon compte » (dès lg), le formulaire d'ajout quitte le frame : le rattachement mène
+  # à « Mes classes », une page entière ; l'alerte d'un retrait refusé se lit dans le frame.
+  test "CA-H7: in the frame of the account panel, the screen is the frame alone, its add form leaves it, and the alert is read there" do
+    add_teacher_school(@teacher, @b)
+    sign_in_as @teacher
+    frame = { "Turbo-Frame" => NavigationHelper::ACCOUNT_PANEL_FRAME }
+
+    delete teacher_school_path(@b.public_id)
+    delete teacher_school_path(@a.public_id)
+    get teacher_schools_path, headers: frame
+
+    assert_response :success
+    assert_no_match(/<aside|<header|<main/, response.body)
+    assert_select "turbo-frame##{NavigationHelper::ACCOUNT_PANEL_FRAME}", 1 do
+      assert_select "p[role=alert]", "Vous ne pouvez pas quitter votre seul établissement."
+      assert_select "a[href='#{teacher_menu_path}']", text: /Mon compte/
+      assert_select "turbo-frame#teacher_school_join[target=_top] #add_school form#school-join-form"
+    end
+    get teacher_schools_path
+    assert_select "main turbo-frame#teacher_school_join, main turbo-frame##{NavigationHelper::ACCOUNT_PANEL_FRAME}", 0
+  end
+
+  test "ME-04: three schools: « 3 sur 3. Retirez-en un pour en ajouter un autre. », no add card; a forged join is refused" do
     add_teacher_school(@teacher, @b)
     add_teacher_school(@teacher, @c)
     sign_in_as @teacher
     get teacher_schools_path
     assert_select "#add_school", count: 0
-    assert_select "#schools_limit", t("school.teacher_schools.index.limit", max: 3)
+    assert_select "#schools_limit", "3 sur 3. Retirez-en un pour en ajouter un autre."
 
     join create_school(drena: @drena)
 
     assert_response :unprocessable_entity
     assert_select "#schools_limit"
-    assert_match "Vous avez atteint 3 établissements.", response.body
+    assert_select "#schools_limit_error", "Vous avez atteint 3 établissements."
     assert_equal 3, attached.size
+  end
+
+  test "CA-H4: at three schools, leaving one archives its classes and active assignments, and the count falls to 2 sur 3" do
+    add_teacher_school(@teacher, @b)
+    add_teacher_school(@teacher, @c)
+    classroom = create_classroom(school: @c)
+    Orm::TeacherClassroom.create!(teacher: @teacher, classroom:)
+    assignment = create_assignment(classroom:, by: @teacher)
+    kept = create_assignment(classroom: create_classroom(school: @a), by: @teacher)
+    sign_in_as @teacher
+
+    delete teacher_school_path(@c.public_id)
+
+    assert_redirected_to teacher_schools_path
+    assert_equal "archived", assignment.reload.status
+    assert_equal "active", kept.reload.status
+    assert_not Orm::TeacherClassroom.exists?(teacher: @teacher, classroom:)
+    follow_redirect!
+    assert_select "p", text: "2 sur 3."
+    assert_select "#teacher_school_#{@c.public_id}", 0
+    assert_select "#add_school"
   end
 
   test "already in the school, or a school that withdrew him: the reason, or the neutral error; nothing is written" do

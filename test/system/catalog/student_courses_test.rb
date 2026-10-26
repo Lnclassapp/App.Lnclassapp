@@ -51,27 +51,64 @@ class Catalog::StudentCoursesTest < ApplicationSystemTestCase
     end
   end
 
-  # CA-7, CA-15 sur ordinateur : une fiche ouverte fait « Reprendre » ; la page suivante ne répète pas le titre du groupe.
-  test "on a computer, an opened sheet turns the card into « Reprendre », and the next page does not repeat a title" do
+  # CA-7, CA-15 : une fiche ouverte fait « Reprendre » ; la page suivante ne répète pas le titre du groupe. Lot O5 : ce Cours
+  # est celui du téléphone ; sur ordinateur, les leçons en cartes le remplacent (test ci-dessous).
+  test "on a phone, an opened sheet turns the card into « Reprendre », and the next page does not repeat a title" do
     sheet = create_essential(course: @fractions, name: "Simplifier une fraction")
     create_essential(course: @fractions, name: "Comparer des fractions")
     25.times { |index| create_course(name: format("Thalès %02d", index), level: @level, material: @maths) }
     sign_in_as @student
 
-    visit course_essential_path(@fractions.slug, sheet.slug)
-    assert_selector "#essential_header h1", text: "Simplifier une fraction"
+    with_mobile_viewport do
+      visit course_essential_path(@fractions.slug, sheet.slug)
+      assert_selector "#essential_header h1", text: "Simplifier une fraction"
 
-    visit courses_path
-    assert_selector "#courses_groups li", count: 24
-    within("#course_#{@fractions.slug}") { click_on t("catalog.courses.course_card.progress.started") }
-    assert_selector "#essential_header h1", text: "Simplifier une fraction"
+      visit courses_path
+      assert_selector "#courses_groups li", count: 24
+      within("#course_#{@fractions.slug}") { click_on t("catalog.courses.course_card.progress.started") }
+      assert_selector "#essential_header h1", text: "Simplifier une fraction"
 
-    visit courses_path
-    assert_no_page_reload do
-      scroll_to find("turbo-frame#courses_page_2")
-      assert_selector "#courses_groups_page_2 li", count: 4
+      visit courses_path
+      assert_no_page_reload do
+        scroll_to find("turbo-frame#courses_page_2")
+        assert_selector "#courses_groups_page_2 li", count: 4
+      end
+      assert_selector "h2#courses_group_mathematiques_title", count: 1
+      assert_selector "#courses_groups_page_2 section", count: 2
     end
-    assert_selector "h2#courses_group_mathematiques_title", count: 1
-    assert_selector "#courses_groups_page_2 section", count: 2
+  end
+
+  # Lot O5, CA-E14 et CA-E15 : Cours par leçons sur ordinateur (1400 px) ; à 390 px, le Cours de CA-E6 reste.
+  test "on a computer, the lessons of one subject are cards on two columns with their sheets; on a phone Cours stays the same" do
+    create_course(name: "Les angles", level: @level, material: @maths)
+    sheets = Array.new(5) { |index| create_essential(course: @fractions, name: "Fiche #{index + 1}") }
+    create_gap(student: @student, essential: sheets.second)
+    sign_in_as @student
+
+    visit courses_path
+    assert_selector "#lesson_materials a[aria-current=page]", text: "Mathématiques"
+    assert_selector "#lesson_materials a", count: 3
+    assert_selector "#lessons_list > li", count: 2
+    columns = all("#lessons_list > li").map { it.evaluate_script("this.getBoundingClientRect().x").round }
+    assert_equal 2, columns.uniq.size, "deux colonnes"
+    within("#lesson_#{@fractions.slug}") do
+      assert_selector "li[id^=lesson_essential_]", count: 3, visible: :visible
+      assert_selector "li[id^=lesson_essential_]", text: t("catalog.courses.essential_row.review"), count: 1
+      click_on t("catalog.courses.course_card.more_essentials", count: 5)
+      assert_selector "li[id^=lesson_essential_]", count: 5
+    end
+
+    click_on "SVT"
+    assert_current_path courses_path(material: "svt")
+    assert_selector "#lesson_materials a[aria-current=page]", text: "SVT"
+    visit courses_path
+    assert_selector "#lesson_materials a[aria-current=page]", text: "SVT"
+
+    with_mobile_viewport do
+      visit courses_path
+      assert_selector "#courses_groups > section", count: 3
+      assert_no_selector "#lesson_materials"
+      assert_selector "#courses_total", text: "Progression DPFC", count: 1
+    end
   end
 end

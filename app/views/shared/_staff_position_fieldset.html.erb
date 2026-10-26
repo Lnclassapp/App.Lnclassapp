@@ -5,7 +5,7 @@
 <% error = form.object.errors[:position].first %>
 <% error_id = "#{form.object_name}_position_error" %>
 <fieldset id="<%= form.object_name %>_position" class="space-y-1.5" <%= tag.attributes("aria-describedby": (error_id if error)) %>>
-  <legend class="<%= section ? "mb-3 text-xs font-semibold tracking-wider text-mute uppercase" : "mb-1.5 block text-sm font-medium text-ink" %>">
+  <legend class="<%= section ? "mb-3 text-xs font-medium tracking-wider text-mute uppercase" : "mb-1.5 block text-sm font-medium text-ink" %>">
     <%= legend %><% if required %><span class="text-error" aria-hidden="true"> *</span><% end %>
   </legend>
   <div class="grid gap-2 sm:grid-cols-2">

@@ -1,14 +1,19 @@
 # 🔌 INFRA · Queries::Catalog::CourseCatalogQuery
-# Rôle : cartes du catalogue (CA-01), filtrées par niveau, série, matière et nom (FU-47), par page ; publiés hors équipe ; élève : son niveau, groupé par matière dans l'ordre du programme, avec son avancement ; enseignant : ses matières à ses niveaux, groupé par matière au-delà d'une
-# ADR  : 0026, 0028, 0035, 0076, 0090, 0103 · UDR : 0013 (amendement du 2026-10-05), 0054, 0069, 0077 §3.2, 0085, 0126 §3.1
+# Rôle : cartes du catalogue (CA-01), filtrées par niveau, série, matière et nom (FU-47), par page ; publiés hors équipe ; élève : son niveau, groupé par matière dans l'ordre du programme, avec son avancement, et sur demande les fiches de chaque leçon (« à revoir » pour lui) et ses matières ; enseignant : ses matières à ses niveaux, chaque carte avec ses fiches de révision
+# ADR  : 0026, 0028, 0035, 0076, 0090, 0103 · UDR : 0013 (amendement du 2026-10-05), 0054, 0069, 0077 §3.2, 0085, 0126 §3.1, XXXX écrans enseignant sans répétition §3.7, XXXX écrans élève sans répétition §3.6 bis (Cours par leçons)
 module Queries
   module Catalog
     class CourseCatalogQuery
       # Chantier cours-eleve (ADR-0090, UDR-0085) : material_slug et material_position groupent les cartes de l'élève ;
       # progress (:new, :started, :done) et resume_essential_slug (la fiche de « Reprendre », nil sinon) disent où il en est.
-      # Hors élève : :new et nil.
+      # Hors élève : :new et nil. essentials : les fiches de révision publiées du cours ([EssentialRow], par position), pour
+      # l'enseignant (UDR enseignant §3.7) et pour l'élève avec with_essentials (Lot O5, CA-E14) ; [] sinon. review : une
+      # lacune en attente de cet élève sur la fiche (« À revoir ») ; toujours faux pour l'enseignant.
       Row = Data.define(:slug, :name, :subtitle, :level_name, :series_name, :material_name, :material_category, :status,
-                        :material_slug, :material_position, :progress, :resume_essential_slug)
+                        :material_slug, :material_position, :progress, :resume_essential_slug, :essentials)
+      EssentialRow = Data.define(:slug, :name, :review)
+      # Lot O5 (CA-E15) : une matière de l'élève, pour les pastilles de la page Cours.
+      MaterialRow = Data.define(:slug, :name)
       # Chantier politique-cache, lot E4 (UDR-0013, amendement du 2026-10-05) : le catalogue se lit par pages de PER_PAGE
       # cartes, les suivantes chargées au défilement. 24 tient en lignes pleines sur 1, 2 ou 3 colonnes.
       PER_PAGE = 24
@@ -22,6 +27,11 @@ module Queries
       # ADR-0090 §4.2 : l'élève lit les matières dans l'ordre du programme ; une matière sans rang vient après, par nom.
       PROGRAM_ORDER = [ Arel.sql("materials.position ASC NULLS LAST"), "materials.name", "courses.name", "courses.id" ].freeze
       CATALOG_ORDER = [ "materials.name", "levels.position", "courses.name", "courses.id" ].freeze
+      # UDR enseignant §3.7 : la progression, dans l'ordre des leçons (« Leçon 2 · Progression… » dans le sous-titre) ; un cours
+      # sans numéro de leçon vient après, par nom.
+      TEACHER_ORDER = [ "materials.name", "levels.position",
+                        Arel.sql("(substring(courses.subtitle from '(?i)leçon\\s+(\\d+)'))::integer ASC NULLS LAST"),
+                        "courses.name", "courses.id" ].freeze
 
       # level, material : slugs. Un filtre vide est ignoré, un slug inconnu ne donne aucun cours.
       # series : slug, appliqué seulement avec un niveau (UDR-0069 §3.4) : cours sans série et cours de cette série.
@@ -31,8 +41,9 @@ module Queries
       # aucune restriction. group_by_material : l'enseignant de plusieurs matières, rangé comme l'élève (UDR-0126 §3.1).
       # page : entier, hors bornes ramené à la plus proche (une adresse forgée « page[]=2 » vaut 1).
       # Deux requêtes : le compte, puis les cartes de la page. L'élève : les comptes par matière (qui donnent le total), les
-      # cartes, puis l'avancement des cours de la page (une requête, sans requête par carte). → Page
-      def call(actor:, page: 1, group_by_material: false, **filters)
+      # cartes, puis l'avancement des cours de la page (une requête, sans requête par carte). with_essentials (élève, Lot O5) :
+      # une requête de plus pour les fiches de toutes les leçons de la page et leur marque « à revoir ». → Page
+      def call(actor:, page: 1, group_by_material: false, with_essentials: false, **filters)
         scope = filtered(actor:, **filters)
         student_id = actor.user_id if actor.student?
         grouped = student_id || group_by_material
@@ -40,11 +51,21 @@ module Queries
         total_count = grouped ? material_counts.values.sum : scope.count
         pages = [ total_count.fdiv(PER_PAGE).ceil, 1 ].max
         page = page.to_s.to_i.clamp(1, pages)
-        rows = scope.order(*(grouped ? PROGRAM_ORDER : CATALOG_ORDER)).offset((page - 1) * PER_PAGE).limit(PER_PAGE)
+        rows = scope.order(*(grouped ? PROGRAM_ORDER : (actor.teacher? ? TEACHER_ORDER : CATALOG_ORDER))).offset((page - 1) * PER_PAGE).limit(PER_PAGE)
                     .pluck("courses.id", *COLUMNS)
         progress = student_id ? progress_by_course(student_id, rows.map(&:first)) : {}
-        rows = rows.map { |id, *values| Row.new(*values, *progress.fetch(id, NEUTRAL)) }
+        with_essentials ||= actor.teacher?
+        essentials = with_essentials ? essentials_by_course(rows.map(&:first), student_id:) : {}
+        rows = rows.map { |id, *values| Row.new(*values, *progress.fetch(id, NEUTRAL), essentials.fetch(id, [])) }
         Page.new(rows:, total_count:, page:, pages:, material_counts:)
+      end
+
+      # Lot O5 (CA-E15) : les matières d'une audience d'élève (une leçon publiée de son niveau), dans l'ordre du programme ;
+      # c'est l'ordre de la grille de l'accueil. Une requête. → [MaterialRow]
+      def student_materials(audience:)
+        Orm::Course.joins(:material).merge(AudienceFilter.courses(audience)).where(status: "published").distinct
+                   .order(*PROGRAM_ORDER.first(2)).pluck("materials.slug", "materials.name", "materials.position")
+                   .map { |slug, name, _position| MaterialRow.new(slug:, name:) }
       end
 
       private
@@ -82,6 +103,21 @@ module Queries
                       .where("essentials.status = 'published' OR essential_reads.id IS NOT NULL")
                       .order(:position, :id).pluck(:course_id, :slug, :status, "essential_reads.last_read_at")
                       .group_by(&:first).transform_values { progress_of(it) }
+      end
+
+      # UDR enseignant §3.7 et Lot O5 : une requête pour les fiches publiées des leçons de la page, « à revoir » lu dans la
+      # même (EXISTS sur les lacunes en attente de cet élève, jamais celles d'un autre ; faux sans élève).
+      # → { course_id => [EssentialRow] }
+      def essentials_by_course(course_ids, student_id: nil)
+        return {} if course_ids.empty?
+
+        review = Arel.sql(student_id ? Orm::Essential.sanitize_sql_array(
+          [ "EXISTS (SELECT 1 FROM knowledge_gaps WHERE knowledge_gaps.essential_id = essentials.id " \
+            "AND knowledge_gaps.student_id = ? AND knowledge_gaps.status = 'pending')", student_id ]
+        ) : "FALSE")
+        Orm::Essential.where(course_id: course_ids, status: "published").order(:position, :id)
+                      .pluck(:course_id, :slug, :name, review)
+                      .group_by(&:first).transform_values { |rows| rows.map { |_, slug, name, flag| EssentialRow.new(slug:, name:, review: flag) } }
       end
 
       # essentials : [course_id, slug, status, last_read_at], par position. :new sans fiche publiée lue ; :done quand toutes

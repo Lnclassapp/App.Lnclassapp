@@ -3,11 +3,10 @@ require "application_system_test_case"
 # PR-01, PR-03, ADR-0055, UDR-0041: from the account menu, a student opens « Mon profil », reads their information,
 # corrects their first name in the modal without a page reload, meets the 422 of an empty name, and their teacher
 # then sees the new name in the class list. A teacher and a team member read the information of their role.
-# UDR-0089 (CA-3 to CA-6): on a phone the windows rise from the bottom and « Se déconnecter » closes the page; on a
-# computer they open in the middle, 480 px at most, and the page has two columns.
+# UDR-0089 (CA-3, CA-4): on a phone the windows rise from the bottom. CA-E2 (lot E1): six rows, no blue card, and neither
+# the PIN, nor dark mode, nor « Se déconnecter » on the page (they are in « Mon compte »). CA-E9 (lot O2): on a computer, the blue
+# card with the name alone and four rows (no Classe, no Établissement); the card follows the name edited in the modal.
 class Identity::ProfileTest < ApplicationSystemTestCase
-  DESKTOP_VIEWPORT = [ 1280, 900 ].freeze
-
   # Box of an element and size of the window, measured in the browser once the dialog has stopped sliding.
   def box(selector)
     page.document.synchronize do
@@ -32,13 +31,14 @@ class Identity::ProfileTest < ApplicationSystemTestCase
   end
 
 # UDR-0065, amendement du 2026-10-03 : sur grand écran, l'interrupteur à côté de l'avatar passe la page en sombre sans
-# la recharger, et le choix tient au chargement suivant (cookie) ; un second clic revient au clair.
+# la recharger, et le choix tient au chargement suivant (cookie) ; un second clic revient au clair. Depuis mvp-teacher-student
+# l'élève et l'enseignant n'ont plus de lune dans l'en-tête (leur mode sombre est dans « Mon compte ») : la direction la garde.
 test "the switch next to the avatar turns the page dark at once, and the choice survives a reload" do
-  sign_in_as @student
+  sign_in_as create_school_admin
   background = -> { page.evaluate_script("getComputedStyle(document.body).backgroundColor") }
   switch = -> { find("header button[role=switch]") }
 
-  assert_equal "rgb(250, 248, 244)", background.call
+  assert_equal "rgb(255, 255, 255)", background.call
   switch.call.click
 
   assert_selector "html[data-theme=dark]"
@@ -51,15 +51,15 @@ test "the switch next to the avatar turns the page dark at once, and the choice 
   switch.call.click
 
   assert_selector "html[data-theme=light]"
-  assert_equal "rgb(250, 248, 244)", background.call
+  assert_equal "rgb(255, 255, 255)", background.call
 end
 
-  # The student opens « Mon profil » from the avatar menu (UDR-0084 §3.2), the teacher from the account panel of the
+  # The student opens « Mon profil » from « Mon compte » (avatar panel, lot E1), the teacher from the account panel of the
   # avatar (UDR-0082 §3.2), the others from the account menu.
   def open_profile
     if page.has_selector?("header button#avatar-menu-button", wait: 0)
       find("header button#avatar-menu-button").click
-      within("#avatar-menu") { click_link I18n.t("shared.navigation.profile") }
+      within("dialog#avatar-menu[open]") { click_link I18n.t("shared.navigation.profile") }
     elsif page.has_selector?("header a[aria-controls=account_panel]", wait: 0)
       find("header a[aria-controls=account_panel]").click
       within("dialog#account_panel[open]") { click_link I18n.t("shared.navigation.profile") }
@@ -74,13 +74,18 @@ end
     sign_in_as @student
     open_profile
 
+    # CA-E9: on a computer, the card has the name alone and the information has four rows.
+    within("#profile_identity") { assert_selector "h2", text: "Aya Koné", exact_text: true }
+    assert_no_text "Élève en"
     within "#profile_information" do
       assert_text "Aya Koné"
       assert_text "07 01 02 03 04"
-      assert_text "Tle D 1"
       assert_text "1 septembre 2026"
+      assert_selector "li", count: 4
+      assert_no_text "Tle D 1"
     end
-    assert_selector "#profile_security a[aria-label='Changer mon code secret']"
+    assert_no_selector "#profile_security"
+    assert_no_selector "#profile_sign_out"
 
     assert_no_page_reload do
       within("#profile_information") { click_on "Modifier" }
@@ -102,9 +107,8 @@ end
         assert_text "Aya Marie Koné"
         # UDR-0089 §3.2: the card the Turbo Stream sends back is the student's one, as rows.
         assert_no_selector "p.truncate"
-        assert_selector "li", text: "Tle D 1"
       end
-      within("#profile_identity") { assert_selector "h2", text: "Aya Marie Koné" }
+      within("#profile_identity") { assert_selector "h2", text: "Aya Marie Koné", exact_text: true }
     end
     assert Orm::AuditEvent.exists?(action: "profile.name_changed", actor_id: @student.id)
 
@@ -114,19 +118,19 @@ end
     within("#student_#{@student.public_id}") { assert_text "Aya Marie Koné" }
   end
 
-  # UDR-0089 (CA-1, CA-3, CA-4, CA-5): on a phone, the blue card, rows touched anywhere, windows as sheets, sign-out.
-  test "at 390 px, a touch anywhere on a row opens its window as a sheet from the bottom; « Se déconnecter » signs out" do
+  # UDR-0089 (CA-3, CA-4): on a phone, rows touched anywhere, windows as sheets. CA-E2 (lot E1): no blue card, no sign-out here.
+  test "at 390 px, a touch anywhere on a row opens its window as a sheet from the bottom" do
     sign_in_as @student
 
     with_mobile_viewport do
       visit profile_path
 
       assert_selector "h1", text: "Mon profil", count: 1
-      within("#profile_identity") { assert_text "Élève en Tle D 1" }
+      assert_no_selector "#profile_identity"
       assert_single_primary_action scope: "#main"
       within("#profile_information") { assert_selector "li", text: "Lycée Classique d'Abidjan" }
       heights = all("#main a[data-turbo-frame=modal]").map { page.evaluate_script("arguments[0].getBoundingClientRect().height", it) }
-      assert_equal 4, heights.size
+      assert_equal 3, heights.size
       assert heights.all? { it >= 48 }, "hauteurs : #{heights.inspect}"
 
       # CA-3: the label of the row, not its « Changer », opens the window.
@@ -140,36 +144,6 @@ end
         find("button[aria-label='#{I18n.t('components.modal.close')}']").click
       end
       assert_no_selector "dialog#contact-change-modal", visible: true
-
-      find("form#profile_sign_out button").click
-      assert_current_path root_path
-    end
-    visit profile_path
-    assert_current_path new_session_path
-  end
-
-  # UDR-0089 §3.4, §3.5 (CA-4, CA-6): on a computer, information on the left, PIN and sign-out on the right; the PIN
-  # window opens in the middle, 480 px at most, without a handle.
-  test "at 1 280 px, two columns, and the PIN window in the middle, 480 px at most" do
-    sign_in_as @student
-
-    with_mobile_viewport(DESKTOP_VIEWPORT) do
-      visit profile_path
-
-      information, security, sign_out = %w[#profile_information #profile_security #profile_sign_out].map { box(it) }
-      assert_operator information["right"], :<, security["left"], "« Mes informations » n'est pas à gauche du code secret"
-      assert_in_delta security["top"], information["top"], 1, "les deux colonnes ne commencent pas ensemble"
-      assert_operator sign_out["top"], :>, security["bottom"], "« Se déconnecter » n'est pas sous le code secret"
-      assert_no_selector "#profile_theme", visible: true
-
-      find("#profile_security a[aria-label='Changer mon code secret']").click
-      assert_selector "dialog#profile-pin-modal[open]", visible: true
-      window = box("dialog#profile-pin-modal")
-      assert_in_delta window["viewportWidth"] / 2.0, (window["left"] + window["right"]) / 2.0, 1, "la fenêtre n'est pas centrée"
-      assert_operator window["bottom"], :<, window["viewportHeight"] - 1, "la fenêtre est ancrée en bas"
-      assert_operator window["width"], :<=, 480
-      assert_operator window["width"], :>, 384, "la fenêtre a gardé la largeur sm"
-      within("dialog#profile-pin-modal") { assert_no_selector ".sheet-handle", visible: true }
     end
   end
 
@@ -184,6 +158,8 @@ end
       assert_text "Aucune photo : vos initiales s'affichent."
       assert_text "Lycée Classique d'Abidjan"
       assert_text "SVT"
+      # CA-H6 (lot M): the subjects line has no « Modifier » any more; « Mon compte » is the one place to change them.
+      within("#profile_materials") { assert_no_link I18n.t("identity.profiles.information.edit_materials") }
     end
     within("#profile_security") { assert_text "Votre code secret protège votre compte." }
     sign_out

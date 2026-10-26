@@ -1,89 +1,63 @@
-<%# 🌐 UI · classroom/teacher_homes/show — accueil enseignant (TR-05) %>
-<%# Rôle : sections de HOME_SECTIONS[:teacher] (classes en bande, cours par niveau, annonces, exercices à suivre), collègues en attente, invitation sur téléphone %>
-<%# ADR  : 0026, 0048, 0063, 0076, 0078 · UDR : 0006, 0078, 0007, 0026, 0050, 0054, 0069, 0071 §3.5, 0077 §3.1, 0098 §3.3, 0126 (§3.2 : un badge par matière) · titre « Accueil · Enseignant · Lnclass » %>
+<%# 🌐 UI · classroom/teacher_homes/show — accueil enseignant (TR-05) : bandeau jaune, classes, niveaux et « Inviter », annonces, « Cette semaine », Historique %>
+<%# Rôle : le bandeau (hors de la colonne, sous lg), puis une colonne (57 rem dès lg sur fond blanc, sans bandeau, classes en carrousel de cartes de 16,5 rem, « Cette semaine » et « Historique » côte à côte) : sections de HOME_SECTIONS[:teacher] sans carte enveloppante ni « Bonjour », collègues en attente ; sans classe, la seule carte « Ajoutez vos classes » %>
+<%# ADR  : 0026, 0048, 0063, 0076, 0078 · UDR : 0006, 0026, 0050, 0069, 0071 §3.5, 0077 §3.1, 0098 §3.3, 0126, écrans enseignant §3.1, §3.3 (« Sur ordinateur »), §3.13 · titre « Accueil · Enseignant · Lnclass » %>
 <% page_title t(".page_title") %>
-<%# Grand écran : la carte « Parrainage » de la barre latérale vient avec la page, sans frame à demander (ADR-0076 §4.2). %>
-<% content_for :sidebar_referral, render("identity/referrals/sidebar_card", invite: @invite, frame: NavigationHelper::SIDEBAR_FRAME_OPTIONS) %>
-<%# UDR-0098 §3.3 : à partir de deux établissements, « Changer » mène au panneau du compte. %>
-<% subtitle = if teacher_schools.size > 1
-                tag.span(class: "flex flex-wrap items-center gap-x-2", id: "current_school") do
-                  safe_join([ tag.span(@home.school_name), tag.span("·", "aria-hidden": "true"),
-                              link_to(t(".change_school"), teacher_menu_path, id: "change_school",
-                                      class: "inline-flex min-h-tap items-center text-sm font-medium text-brand-strong",
-                                      "aria-label": t(".change_school_label")) ])
-                end
-              else
-                t(".subtitle", school: @home.school_name)
-              end %>
-<%= ui_page_header title: t(".greeting", name: shell_user.first_name), subtitle: do %>
-  <%= ui_subject_badges @home.materials %>
-<% end %>
-
-<div class="grid gap-5">
-  <% home_sections_for(:teacher).each do |key, icon| %>
+<%# UDR enseignant §3.3 : ni « Bonjour » ni prénom ; la page garde son titre pour les lecteurs d'écran. %>
+<h1 class="sr-only"><%= t(".page_title") %></h1>
+<%# Le bandeau va bord à bord : le shell le rend au-dessus de la colonne (content_for :home_band) et retire l'en-tête sous lg. %>
+<% content_for :home_band, render("shared/navigation/home_band", role: :teacher, user: shell_user) %>
+<%# -mt-20 : la carte des classes déborde de 40 % sur le bandeau de 132 px (le shell garde 24 px de marge haute) ; data-bleed-keep : les cartes restent dans la marge, arrondies, sous 640 px. %>
+<%# Dès lg : deux colonnes égales, réservées à « Cette semaine » et « Historique » ; toute autre section prend les deux (lg:col-span-2). %>
+<div id="teacher_home" data-bleed-keep class="<%= class_names("mx-auto grid w-full max-w-180 grid-cols-1 gap-6 lg:max-w-228 lg:grid-cols-2", "-mt-20 lg:mt-0" => !lnclass_app?) %>">
+  <% home_sections_for(:teacher).each do |key, _icon| %>
     <% if key == :classrooms %>
       <%# min-w-0 : case de la grille, la carte prendrait sinon la largeur de sa bande et la page défilerait en largeur. %>
-      <%= ui_card title: t(".classrooms_title"), subtitle: t(".classrooms_subtitle"), icon:, id: "teacher_home_classrooms",
-                  class: "min-w-0" do |card| %>
-        <% card.actions do %>
-          <%= ui_dropdown label: t(".classrooms_menu"), id: "teacher-classrooms-menu" do %>
-            <%= ui_dropdown_item t(".edit_classrooms"), href: teacher_classrooms_path, icon: "pencil-square" %>
-          <% end %>
-        <% end %>
-        <% if @home.classrooms.empty? %>
-          <%= ui_empty_state title: t(".classrooms_empty"), description: t(".classrooms_empty_description"), icon: %>
-        <% else %>
-          <%# UDR-0077 §3.1 : la bande et ses points du carrousel d'annonces (UDR-0071 §3.5) ; sans JavaScript, elle défile, sans points. %>
-          <div data-controller="communication--carousel">
-            <%# L'espace entre cartes est leur remplissage (px-1.5), repris par -mx-1.5 : trois tiers entiers à partir de 640 px. %>
-            <ul class="scrollbar-none -mx-1.5 flex snap-x snap-mandatory overflow-x-auto motion-safe:scroll-smooth"
-                aria-label="<%= t(".classrooms_title") %>" data-communication--carousel-target="track">
-              <%= render partial: "classroom_card", collection: @home.classrooms, as: :classroom %>
-            </ul>
-            <div class="hidden justify-center gap-1.5 pt-3" aria-hidden="true" data-communication--carousel-target="pager">
-              <% @home.classrooms.each_index do |index| %>
-                <span class="<%= index.zero? ? "h-1.5 w-4 rounded-full bg-brand-strong" : "h-1.5 w-1.5 rounded-full bg-line" %>"
-                      data-communication--carousel-target="dot"></span>
-              <% end %>
-            </div>
+      <section id="teacher_home_classrooms" aria-labelledby="teacher_home_classrooms_title" class="min-w-0 lg:col-span-2">
+        <h2 id="teacher_home_classrooms_title" class="sr-only"><%= t(".classrooms_title") %></h2>
+        <%# UDR-0077 §3.1 : la bande et ses points du carrousel d'annonces (UDR-0071 §3.5) ; sans JavaScript, elle défile, sans points. %>
+        <div data-controller="communication--carousel">
+          <%# L'espace entre cartes est leur remplissage (px-1.5), repris par -mx-1.5 : trois tiers entiers à partir de 640 px. %>
+          <%# Dès lg : des cartes de 16,5 rem (lg:basis-69 : 16,5 rem et leur remplissage), la quatrième coupée au bord ; points dessous dès qu'elles débordent. %>
+          <ul class="scrollbar-none -mx-1.5 flex snap-x snap-mandatory overflow-x-auto motion-safe:scroll-smooth"
+              aria-label="<%= t(".classrooms_title") %>" data-communication--carousel-target="track">
+            <% school_label = @home.school_sigle || @home.school_name %>
+            <%= render partial: "classroom_card", collection: @home.classrooms, as: :classroom, locals: { school_label: } %>
+            <%= render "add_classroom_card", empty: @home.classrooms.empty?, school_label: %>
+          </ul>
+          <div class="hidden justify-center gap-1.5 pt-3" aria-hidden="true" data-communication--carousel-target="pager">
+            <% (@home.classrooms.size + 1).times do |index| %>
+              <span class="<%= index.zero? ? "h-1.5 w-4 rounded-full bg-brand-strong" : "h-1.5 w-1.5 rounded-full bg-line" %>"
+                    data-communication--carousel-target="dot"></span>
+            <% end %>
           </div>
-        <% end %>
-      <% end %>
+        </div>
+      </section>
     <% elsif key == :courses %>
-      <%# ADR-0103 §4.6 : sans matière dans cet établissement, une invitation à les choisir, jamais un sous-titre cassé. %>
-      <% courses_subtitle = if @home.materials.empty?
-                              t(".courses_subtitle_none")
-                            elsif @home.several_materials?
-                              t(".courses_subtitle_many")
-                            else
-                              t(".courses_subtitle", material: @home.materials.first.name)
-                            end %>
-      <%= ui_card title: t(".courses_title"), subtitle: courses_subtitle, icon:,
-                  id: "teacher_home_courses" do |card| %>
+      <%# ADR-0103 §4.6 : sans matière dans cet établissement, une invitation à les choisir, jamais une grille vide. %>
+      <section id="teacher_home_courses" aria-labelledby="teacher_home_courses_title" class="lg:col-span-2">
+        <h2 id="teacher_home_courses_title" class="sr-only"><%= t(".courses_title") %></h2>
         <% if @home.materials.empty? %>
           <%= render "choose_materials", id: "teacher_home_courses_no_materials" %>
         <% else %>
           <%= render "course_levels", home: @home, invite: @invite %>
         <% end %>
-        <% card.footer do %>
-          <%= ui_button t(".all_courses"), href: courses_path, variant: :ghost, size: :sm, icon_end: "arrow-right" %>
-        <% end %>
-      <% end %>
+      </section>
     <% elsif key == :announcements %>
-      <%# UDR-0077 §3.1 : en lecture seule, sans croix (le masquage est à l'élève) ; absent sans annonce lisible. %>
+      <%# UDR-0077 §3.1 : en lecture seule, sans croix (le masquage est à l'élève) ; absente sans annonce lisible. %>
       <% if @announcements.any_readable? %>
-        <%= render "communication/messages/carousel", carousel: @announcements, dismissible: false %>
+        <div class="min-w-0 lg:col-span-2"><%= render "communication/messages/carousel", carousel: @announcements, dismissible: false %></div>
       <% end %>
     <% elsif key == :activity %>
-      <%= render "follow_ups", follow_ups: @follow_ups, icon:, badges: @home.several_materials?, no_materials: @home.materials.empty? %>
+      <%# Sans historique, « Cette semaine » prend les deux colonnes (dès lg). %>
+      <div class="<%= class_names("min-w-0", "lg:col-span-2" => @history.empty?) %>">
+        <%= render "follow_ups", follow_ups: @follow_ups, badges: @home.several_materials?, no_materials: @home.materials.empty? %>
+      </div>
+    <% elsif key == :history %>
+      <div class="min-w-0"><%= render "history", history: @history, badges: @home.several_materials? %></div>
     <% end %>
   <% end %>
   <% if @pending_colleagues %>
-    <%= render "classroom/teacher_homes/pending_colleagues", pending: @pending_colleagues %>
-  <% end %>
-  <% if @invite %>
-    <%# Sur grand écran, la carte « Parrainage » de la barre latérale le remplace (UDR-0069 §3.6, §3.7). %>
-    <div class="lg:hidden"><%= render "identity/referrals/invite", invite: @invite %></div>
+    <div class="min-w-0 lg:col-span-2"><%= render "classroom/teacher_homes/pending_colleagues", pending: @pending_colleagues %></div>
   <% end %>
 </div>
 <%# UDR-0078, amendement du 2026-10-07 : l'invitation à installer l'app, en pop-up, sur l'accueil seulement %>

@@ -15,7 +15,7 @@
         <ul class="grid grid-cols-3 gap-3">
           <% { drenas: @home.drenas_count, schools: @home.schools_count, classrooms: @home.classrooms_count }.each do |figure, count| %>
             <li class="rounded-ln bg-mist px-2 py-4 text-center">
-              <span class="block font-display text-3xl font-extrabold tabular-nums text-ink"><%= count %></span> <span class="text-sm text-mute"><%= t(".#{figure}", count:) %></span>
+              <span class="block font-display text-3xl font-medium tabular-nums text-ink"><%= count %></span> <span class="text-sm text-mute"><%= t(".#{figure}", count:) %></span>
             </li>
           <% end %>
         </ul>

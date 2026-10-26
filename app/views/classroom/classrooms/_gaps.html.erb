@@ -3,7 +3,7 @@
 <%# ADR  : 0043, 0101 (§4.4) · UDR : 0121 (§3.1), 0077 (§3.4 : l'ordre de la page) · enseignant de la classe et équipe seulement %>
 <%# locals: (classroom:, gaps:) -%>
 <%= tag.section id: "classroom_gaps", "aria-labelledby": "classroom_gaps_title", class: "min-w-0", data: ui_reveal_data do %>
-  <h2 id="classroom_gaps_title" class="font-display text-xl font-extrabold"><%= t(".title") %></h2>
+  <h2 id="classroom_gaps_title" class="font-display text-xl font-medium"><%= t(".title") %></h2>
   <p class="mt-1 mb-4 text-sm text-mute"><%= t(".subtitle", grade: Entities::Assessment::Grading.grade_on_20(Entities::Assessment::Grading::PASS_THRESHOLD)) %></p>
   <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card" data-turbo-prefetch="false">
     <% gaps.each_with_index do |gap, index| %>

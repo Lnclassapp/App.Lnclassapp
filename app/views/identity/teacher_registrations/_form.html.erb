@@ -1,39 +1,48 @@
-<%# 🌐 UI · identity/teacher_registrations/_form — formulaire d'inscription enseignant, en trois rubriques %>
-<%# Rôle : Établissement (DRENA → liste, ou bandeau d'un lien), Vous (nom, prénoms, genre, numéro), Code secret ; 422 re-rendu %>
-<%# ADR  : 0030, 0037, 0050, 0083, 0094 (§11 : lien de parrainage) · UDR : 0024, 0054, 0079, 0125 (§3.1 : autre matière) %>
+<%# 🌐 UI · identity/teacher_registrations/_form — le formulaire d'inscription enseignant, un seul, découpé en trois fieldset par signup_steps_controller %>
+<%# Rôle : 1 Votre établissement (DRENA → liste, ou parrain d'un lien), 2 Vous (rappel d'établissement, matière, nom, prénoms, genre, numéro), 3 Votre code secret ; sans JavaScript les trois restent visibles ; 422/429 re-rendus %>
+<%# ADR  : 0030, 0037, 0050, 0083, 0094 (§11 : lien de parrainage), 0103 (§4.4 : une matière) · UDR : 0024, 0054, 0079, XXXX-ecrans-enseignant-sans-repetition (§3.9), XXXX-inscription-eleve-en-trois-etapes (§3.1 à §3.8) %>
+<%# start : l'étape ouverte ; floor : la première étape qui existe (2 par un lien d'établissement) %>
+<%# locals: (start:, floor:) -%>
+<% steps = "classroom--signup-steps" %>
+<%# Une légende est le titre de l'étape : focalisable (tabindex -1), le contrôleur y remet le focus à chaque changement d'étape. %>
+<% legend = lambda do |key, hint|
+     safe_join([ tag.legend(t(".#{key}"), tabindex: -1, class: "mb-1 block text-base font-medium text-ink outline-none"),
+                 tag.p(hint, class: "mb-4 text-sm text-mute") ])
+   end %>
+<%# Le refus général (403/422, ou 429 du formulaire) en haut de l'étape ouverte ; le lien devenu invalide, à l'étape 1. %>
+<% alerts = lambda do |step|
+     parts = []
+     if step == start && @form.errors[:base].any?
+       parts << tag.div(id: "teacher-registration-refusal", role: "alert", tabindex: -1, data: { autofocus_target: "field" },
+                        class: "flex scroll-mt-24 items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error outline-none") do
+         safe_join([ ui_icon("exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0"), tag.p(@form.errors[:base].to_sentence) ])
+       end
+     end
+     if step == 1 && @invite_invalid
+       parts << tag.div(id: "invite-link-invalid", role: "alert",
+                        class: "flex items-start gap-2 rounded-ln bg-warning-soft px-4 py-3 text-sm font-medium text-ink") do
+         safe_join([ ui_icon("exclamation-triangle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-warning"),
+                     tag.p(t("identity.teacher_registrations.new.invite_invalid")) ])
+       end
+     end
+     safe_join(parts)
+   end %>
 <%# Formulaire GET de la seule DRENA (repli sans JavaScript, UDR-0024 §2.4) : son sélecteur s'y rattache par l'attribut form.
     Avec un lien de parrainage, il revient sur le lien, qui garde le parrain. %>
 <form id="teacher-signup-drena" action="<%= @sponsor ? teacher_invite_link_path(@form.invite_token) : new_teacher_registration_path %>" method="get"></form>
 <%= form_with model: @form, scope: :teacher_registration, url: teacher_registrations_path, id: "teacher-registration-form",
-              class: "space-y-6",
-              data: { controller: "school--drena-schools identity--phone-digits identity--pin-match",
+              class: "flex-1 space-y-6", html: { novalidate: true },
+              data: { action: "keydown.enter->#{steps}#enter", controller: "school--drena-schools identity--phone-digits identity--pin-match",
                       "school--drena-schools-url-value": drena_schools_path("__drena__"),
                       "identity--pin-match-ok-value": t(".pin_match.ok"), "identity--pin-match-ko-value": t(".pin_match.ko") } do |form| %>
-  <% if @invite_invalid %>
-    <div id="invite-link-invalid" role="alert" class="flex items-start gap-2 rounded-ln bg-warning-soft px-4 py-3 text-sm font-medium text-ink">
-      <%= ui_icon "exclamation-triangle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-warning" %>
-      <p><%= t("identity.teacher_registrations.new.invite_invalid") %></p>
-    </div>
-  <% end %>
-  <% if @form.errors[:base].any? %>
-    <div role="alert" class="flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error">
-      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
-      <p><%= @form.errors[:base].to_sentence %></p>
-    </div>
-  <% end %>
   <% if @preview || @sponsor %>
     <%= form.hidden_field :invite_token %>
   <% end %>
 
-  <fieldset class="space-y-4">
-    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".school") %></legend>
-    <% if @preview %>
-      <div class="space-y-2">
-        <%= render "identity/teacher_registrations/school_preview", preview: @preview %>
-        <%= link_to t(".other_school"), new_teacher_registration_path, id: "other-school",
-                    class: "inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline" %>
-      </div>
-    <% else %>
+  <% if floor == 1 %>
+    <fieldset id="teacher-registration-section-school" data-step="1" data-classroom--signup-steps-target="step" class="min-w-0 space-y-4">
+      <%= legend.call(:school, t(".school_hint")) %>
+      <%= alerts.call(1) %>
       <% if @sponsor %>
         <%# ADR-0094 §11 : le lien de parrainage d'un collègue ; l'établissement se choisit. %>
         <p id="sponsor-preview" class="flex items-center gap-3 rounded-ln border border-brand/30 bg-brand-soft px-4 py-3 text-sm text-ink">
@@ -42,28 +51,36 @@
         </p>
       <% end %>
       <%= render "identity/teacher_registrations/school_fields", form: %>
-    <% end %>
-    <%= ui_field form, :material_slug, as: :select, required: true, choices: material_options, prompt: t(".material_prompt") %>
-    <%# UDR-0125 §3.1 : la seconde matière, facultative ; la troisième s'ajoute au profil. %>
-    <%= ui_field form, :second_material_slug, as: :select, choices: material_options, prompt: t(".second_material_prompt"),
-                                              hint: t(".second_material_hint") %>
-  </fieldset>
+    </fieldset>
+  <% end %>
 
-  <fieldset class="space-y-4">
-    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".you") %></legend>
+  <fieldset id="teacher-registration-section-you" data-step="2" data-classroom--signup-steps-target="step" class="min-w-0 space-y-4"
+            data-action="input-><%= steps %>#personChanged change-><%= steps %>#personChanged">
+    <%= legend.call(:you, t(".you_hint")) %>
+    <%= alerts.call(2) %>
+    <%# Le rappel de l'établissement du lien ; « Ce n'est pas votre établissement ? » mène à la voie standard (étape 1). %>
+    <% if @preview %>
+      <%= render "identity/teacher_registrations/school_preview", preview: @preview %>
+    <% end %>
+    <%# La matière d'abord, avant le nom : le contrôleur ne passe à l'étape 3 que si les champs de texte, le genre, le numéro et
+        la liste obligatoire (select[required]) sont remplis ; sans matière, l'enseignant reste ici. %>
+    <%= ui_field form, :material_slug, as: :select, required: true, choices: material_options, prompt: t(".material_prompt"),
+                 hint: t(".material_hint") %>
     <%= ui_field form, :last_name, required: true, maxlength: 50, autocomplete: "family-name", placeholder: t(".last_name_placeholder") %>
     <%= ui_field form, :first_name, required: true, maxlength: 80, autocomplete: "given-name", placeholder: t(".first_name_placeholder") %>
     <% gender_error = @form.errors[:gender].first %>
-    <fieldset class="space-y-1.5" <%= tag.attributes("aria-describedby": ("teacher_registration_gender_error" if gender_error)) %>>
+    <%# UDR-0088 §3.4 : deux grandes pastilles de 44 px ; le radio, sans apparence, couvre toute la pastille (doigt, souris, flèches). %>
+    <fieldset id="teacher-registration-gender" class="space-y-1.5" <%= tag.attributes("aria-describedby": ("teacher_registration_gender_error" if gender_error)) %>>
       <legend class="mb-1.5 block text-sm font-medium text-ink">
         <%= Dtos::Identity::TeacherRegistrationInput.human_attribute_name(:gender) %><span class="text-error" aria-hidden="true"> *</span>
       </legend>
       <div class="grid grid-cols-2 gap-3">
         <% Entities::Identity::User::GENDERS.each do |gender| %>
-          <label class="flex min-h-tap cursor-pointer items-center gap-3 rounded-ln border border-line bg-white px-4 transition has-checked:border-brand has-checked:bg-brand-soft">
-            <%= form.radio_button :gender, gender, required: true, class: "size-5 shrink-0 accent-brand",
+          <label class="relative flex h-11 items-center justify-center rounded-full border border-line bg-white px-4 font-medium text-ink transition has-checked:border-brand-strong has-checked:bg-brand-strong has-checked:text-white">
+            <%= form.radio_button :gender, gender, required: true,
+                                  class: "absolute inset-0 cursor-pointer appearance-none rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand",
                                   "aria-invalid": ("true" if gender_error) %>
-            <span class="text-sm font-medium text-ink"><%= t("genders.#{gender}") %></span>
+            <%= t(".genders.#{gender}") %>
           </label>
         <% end %>
       </div>
@@ -79,8 +96,9 @@
                  data: { identity__phone_digits_target: "input", action: "input->identity--phone-digits#clean" } %>
   </fieldset>
 
-  <fieldset class="space-y-4">
-    <legend class="mb-3 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".security") %></legend>
+  <fieldset id="teacher-registration-section-security" data-step="3" data-classroom--signup-steps-target="step" class="min-w-0 space-y-4">
+    <%= legend.call(:security, t(".security_hint")) %>
+    <%= alerts.call(3) %>
     <%= ui_field form, :pin, as: :password, reveal: true, required: true, maxlength: 4, inputmode: "numeric", autocomplete: "new-password",
                  hint: t(".pin_hint"), data: { identity__pin_match_target: "pin", action: "input->identity--pin-match#check" } %>
     <div class="space-y-1.5">
@@ -92,7 +110,13 @@
       <template data-identity--pin-match-target="okIcon"><%= ui_icon "check-circle", variant: :mini, size: :sm %></template>
       <template data-identity--pin-match-target="koIcon"><%= ui_icon "x-circle", variant: :mini, size: :sm %></template>
     </div>
-  </fieldset>
 
-  <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, full: true %>
+    <%# « Création… » pendant l'envoi : Turbo désactive le bouton et change son texte. La ligne des conditions est sous le bouton. %>
+    <%= ui_button t(".submit"), type: :submit, variant: :primary, size: :lg, full: true, id: "teacher-registration-submit",
+                  data: { turbo_submits_with: t(".submitting") } %>
+    <p class="text-center text-xs text-mute">
+      <%= t(".terms_html", terms: link_to(t(".terms_link"), terms_path, class: "text-brand-strong underline underline-offset-2"),
+                           privacy: link_to(t(".privacy_link"), privacy_path, class: "text-brand-strong underline underline-offset-2")) %>
+    </p>
+  </fieldset>
 <% end %>

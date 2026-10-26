@@ -7,7 +7,7 @@
   <span class="grid size-12 place-items-center rounded-full bg-brand-soft text-brand-strong" aria-hidden="true">
     <%= ui_icon "user-plus" %>
   </span>
-  <h2 id="student_classroom_no_teacher_title" class="font-display text-lg leading-tight font-extrabold text-balance"><%= t(".title") %></h2>
+  <h2 id="student_classroom_no_teacher_title" class="font-display text-lg leading-tight font-medium text-balance"><%= t(".title") %></h2>
   <p class="max-w-prose text-sm text-mute text-balance"><%= t(".description") %></p>
   <%# Le même message que sur l'accueil (ADR-0089 §4.3) : une seule clé, un seul partial. %>
   <%= render "classroom/student_homes/invite_teacher", classroom: classroom.classroom_name, school: classroom.school_name,

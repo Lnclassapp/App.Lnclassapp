@@ -11,6 +11,7 @@ module UseCases
       YEAR = "2026-2027".freeze
       KEY = "k" * 32
       TOKEN = "0a1b2c3d4e5f".freeze
+      CODE = "k7m4q2".freeze
       Clock = Data.define(:now)
 
       # Toutes les écritures des faux repositories vont dans un même journal : la transaction le restaure si
@@ -51,6 +52,11 @@ module UseCases
         def lock_by_link_token(token:)
           @journal << [ :lock_link, token ]
           @classrooms.find { it.link_token == token }
+        end
+
+        def find_by_join_code(code:)
+          @journal << [ :find_code, code ]
+          @classrooms.find { it.join_code == code }
         end
       end
 
@@ -125,7 +131,7 @@ module UseCases
 
       def classroom(**overrides)
         Entities::Classroom::Classroom.new(id: 7, public_id: "cls-7", name: "3e 2", school_id: 3, level_id: 2, school_year: YEAR,
-                                           link_token: TOKEN, teacher_ids: [ 5 ], active_students_count: 12, **overrides)
+                                           link_token: TOKEN, join_code: CODE, teacher_ids: [ 5 ], active_students_count: 12, **overrides)
       end
 
       def register(actor: nil, classrooms: [ classroom ], schools: [ @school ], taken: [], refuse_membership: false, **attributes)
@@ -196,6 +202,45 @@ module UseCases
 
         assert result.success?
         assert_equal "link", membership[3]
+      end
+
+      # ADR code-de-classe-a-six-caracteres §4.6 : le code, le jeton ou la cascade ; le code marque l'inscription « code ».
+      test "CA-B2: a classroom code gives its classroom, way « code », under the lock; neither school, level nor classroom are sent" do
+        result = register(join_code: "K7M 4Q2", drena_public_id: nil, school_public_id: nil, level_slug: nil, classroom_public_id: nil)
+
+        assert result.success?
+        assert_equal "cls-7", result.value.classroom.public_id
+        assert_equal [ [ :find_code, CODE ], [ :lock, "cls-7" ] ], @journal.first(2)
+        assert_equal [ :membership, 7, 41, "code", NOW ], membership
+      end
+
+      test "a code prevails over the classroom sent, and a valid link prevails over the code" do
+        other = classroom(id: 8, public_id: "cls-8", name: "3e 3", link_token: "ffffffffffff", join_code: "abcdef")
+
+        assert_equal "cls-7", register(classrooms: [ classroom, other ], join_code: CODE, classroom_public_id: "cls-8").value.classroom.public_id
+        @journal.clear
+        assert_equal "link", (register(classrooms: [ classroom, other ], join_code: "abcdef", link_token: TOKEN); membership[3])
+      end
+
+      test "CA-B3: an unknown code, an archived classroom and a school that is not active are refused alike, no account kept" do
+        closed = Entities::School::School.new(id: 3, public_id: "sch-3", name: "Lycée fermé", status: "inactive")
+        {
+          "unknown" => register(join_code: "zzzzzz"),
+          "malformed" => register(join_code: "kfm37"),
+          "archived" => register(classrooms: [ classroom(status: "archived") ], join_code: CODE),
+          "inactive school" => register(schools: [ closed ], join_code: CODE)
+        }.each do |label, result|
+          assert_equal [ :invalid, { join_code: [ :unknown ] } ], [ result.code, result.errors ], label
+        end
+        assert_nil @journal.find { it.first == :user }
+        assert_nil membership
+      end
+
+      test "a full classroom refuses a student who types its code, as the link does; no account kept" do
+        result = register(classrooms: [ classroom(active_students_count: 80) ], join_code: CODE)
+
+        assert_equal [ :forbidden, { base: [ :classroom_full ] } ], [ result.code, result.errors ]
+        assert_nil @journal.find { it.first == :user }
       end
 
       test "IL-09: an unknown, archived or inactive-school link falls back to the classroom chosen, way « standard »" do

@@ -119,12 +119,12 @@ module UseCases
       def due_on(result) = result.value.assignment.due_on
 
       test "assigne un exercice publié : une ligne active, dont l'auteur est l'utilisateur connecté" do
-        result = assign("ex-meiose")
+        result = assign("ex-meiose", at: MONDAY, weekdays: %w[1 4])
 
         assert result.success?
         assignment = result.value.assignment
 
-        assert_equal [ 3, "Exercise", 30, "active", 7, NOW, nil, nil ],
+        assert_equal [ 3, "Exercise", 30, "active", 7, MONDAY, nil, Date.new(2026, 10, 8) ],
                      [ assignment.classroom_id, assignment.assignable.type, assignment.assignable.id, assignment.status,
                        assignment.assigned_by_id, assignment.assigned_at, assignment.archived_at, assignment.due_on ]
         assert_equal [ "asg1", "Méiose" ], [ assignment.public_id, assignment.assignable.name ]
@@ -176,11 +176,21 @@ module UseCases
         assert_equal Date.new(2026, 10, 12), due_on(assign("ex-meiose", at: ABIDJAN.local(2026, 10, 11, 23, 30)))
       end
 
-      test "« Plus tard » : assigné sans échéance, aucun jour écrit ; la question reviendra" do
-        result = assign("ex-meiose", at: MONDAY, later: true, weekdays: %w[1 4])
+      # UDR enseignant §3.13 : « Plus tard » n'existe plus ; un envoi qui contourne la fenêtre (champ absent) est refusé de même.
+      test "un enseignant sans jours connus, weekdays absent : :invalid sur weekdays, aucune assignation ni jour écrit" do
+        result = assign("ex-meiose", at: MONDAY)
 
-        assert result.success?
-        assert_nil due_on(result)
+        assert_equal [ :invalid, { weekdays: [ :blank ] } ], [ result.code, result.errors ]
+        assert_empty @session_days.writes
+        assert_empty @assignments.rows
+        assert_equal 1, @transaction.calls
+      end
+
+      test "weekdays absent mais jours déjà connus : assigné, échéance lue ; l'équipe, sans jours, assigne sans échéance" do
+        @session_days = FakeSessionDays.new([ 7, 3 ] => [ 1, 4 ])
+
+        assert_equal Date.new(2026, 10, 8), due_on(assign("ex-meiose", at: MONDAY))
+        assert_nil due_on(assign("ex-mitose", actor: @team, at: MONDAY))
         assert_empty @session_days.writes
       end
 
@@ -201,7 +211,8 @@ module UseCases
       end
 
       test "déjà assigné, avec des jours cochés : :conflict, et les jours ne sont pas écrits" do
-        assign("ex-meiose", at: MONDAY)
+        assign("ex-meiose", at: MONDAY, weekdays: %w[1 4])
+        @session_days.writes.clear
 
         result = assign("ex-meiose", at: MONDAY, weekdays: %w[1 4])
 
@@ -221,6 +232,7 @@ module UseCases
       end
 
       test "déjà actif : :conflict (« Déjà assigné à cette classe ») et rien n'est écrit" do
+        @session_days = FakeSessionDays.new([ 7, 3 ] => [ 1, 4 ])
         assign("ex-meiose")
 
         result = assign("ex-meiose")
@@ -230,6 +242,7 @@ module UseCases
       end
 
       test "une concurrence perdue à l'écriture donne aussi :conflict" do
+        @session_days = FakeSessionDays.new([ 7, 3 ] => [ 1, 4 ])
         result = assign("ex-meiose", assignments: RacingAssignments.new(@resources))
 
         assert_equal [ :conflict, { base: [ :already_assigned ] } ], [ result.code, result.errors ]
@@ -244,6 +257,7 @@ module UseCases
       end
 
       test "réassigner après un retrait crée une nouvelle ligne ; l'ancienne reste archivée" do
+        @session_days = FakeSessionDays.new([ 7, 3 ] => [ 1, 4 ])
         first = assign("ex-meiose").value.assignment
         @assignments.archive(id: first.id, archived_by_id: 7, at: NOW)
 

@@ -51,6 +51,16 @@ module Queries
         assert_equal [ classroom.reload.link_token, school.id ], [ row.link_token, row.school_id ]
       end
 
+      # CA-B7 : le code de la classe, que le bloc du lien affiche (provisoire).
+      test "l'en-tête porte le code de la classe" do
+        classroom = create_classroom
+
+        row = ClassroomHeaderQuery.new.call(public_id: classroom.public_id)
+
+        assert Entities::Classroom::JoinCode.valid?(row.join_code)
+        assert_equal classroom.reload.join_code, row.join_code
+      end
+
       # IL-12 : le bloc du lien est rendu pour qui gère la classe (policy), et seulement sur une classe active.
       test "IL-12 : le lien est montré à l'enseignant de la classe, à la direction de son établissement et à l'équipe" do
         school = create_school

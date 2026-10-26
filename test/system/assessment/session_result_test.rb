@@ -139,6 +139,32 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     end
   end
 
+  # CA-E13 (UDR écrans élève §3.6 bis) : à 1 440 px, la note et « Recommencer » restent dans la colonne de 340 px pendant que la
+  # correction défile.
+  test "à 1 440 px, la colonne de la note (340 px) et « Recommencer » restent visibles quand on défile la correction" do
+    # Une correction assez longue pour défiler : l'élève n'en lit d'abord que 3 questions, chacune a une longue explication.
+    @exercise.questions.each { it.update!(explanation: "Explication. " * 250) }
+    session = completed_session(correct: 6)
+
+    with_mobile_viewport([ 1440, 900 ]) do
+      visit exercise_session_result_path(session.public_id)
+
+      assert_selector "#session_result_side #session_result"
+      assert_in_delta 340, evaluate_script("document.getElementById('session_result_side').getBoundingClientRect().width"), 1
+      page.execute_script("window.scrollTo(0, document.documentElement.scrollHeight)")
+      page.document.synchronize do
+        raise Capybara::ExpectationNotMet, "la page n'a pas défilé" unless page.evaluate_script("window.scrollY") > 300
+      end
+      button = evaluate_script("document.querySelector('#restart-exercise-form button').getBoundingClientRect().toJSON()")
+      bar = evaluate_script("document.querySelector('header.sticky').getBoundingClientRect().bottom")
+      side = evaluate_script("document.getElementById('session_result_side').getBoundingClientRect().top")
+      assert_operator side, :>=, bar, "le haut de la colonne de la note passe sous la barre du haut"
+      assert_operator button["top"], :>=, bar, "« Recommencer » est sorti par le haut"
+      assert_operator button["bottom"], :<=, 900, "« Recommencer » est sorti de l'écran"
+      assert_selector "#session_grade", text: "12/20"
+    end
+  end
+
   private
 
   # Attend la fin des animations d'entrée de l'élément (0,3 s, motion-safe) avant toute mesure.

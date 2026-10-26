@@ -10,17 +10,21 @@
 <% link = local_assigns.fetch(:link, true) %>
 <% empty = !link && carousel.cards.none? %>
 <%# min-w-0 : dans la grille de l'accueil, la section prendrait sinon la largeur de sa bande et la page défilerait en largeur. %>
+<%# CA-D10 (Lot O1) : dès lg, deux cartes sont en vue pour tous les rôles ; l'accueil élève (link: false) devient en plus une carte
+    blanche à filet sur le fond mist de la page. Les cartes restent sur le fond bg-brand-soft ; rien ne change sous lg. %>
 <%= tag.section id: "student_home_announcements", "aria-labelledby": "student_home_announcements_title",
-                class: (empty ? "sr-only" : "min-w-0 rounded-card bg-mist p-2.5 max-sm:-mx-gutter max-sm:rounded-none max-sm:px-gutter"),
+                class: (empty ? "sr-only" : class_names("min-w-0 rounded-card bg-mist p-2.5 max-sm:-mx-gutter max-sm:rounded-none max-sm:px-gutter",
+                                                  "lg:border lg:border-line lg:bg-paper lg:p-4 lg:shadow-card" => !link)),
                 data: { controller: "communication--carousel", communication__carousel_refocus_value: (true if refocus) } do %>
   <h2 id="student_home_announcements_title" class="sr-only" tabindex="-1"><%= t("shared.home.sections.announcements.title") %></h2>
   <% if empty %><p><%= t("communication.inboxes.carousel.all_dismissed") %></p><% end %>
   <%# Toutes masquées : ni bande ni points ; le lien reste, s'il y en a un. %>
   <% if carousel.cards.any? %>
-    <ul class="scrollbar-none flex snap-x snap-mandatory gap-2 overflow-x-auto motion-safe:scroll-smooth"
+    <%# Dès lg : pas d'écart entre les cartes, chacune porte sa demi-gouttière, pour que deux cartes tiennent exactement dans la bande. %>
+    <ul class="scrollbar-none flex snap-x snap-mandatory gap-2 overflow-x-auto motion-safe:scroll-smooth lg:-mx-1.5 lg:gap-0"
         data-communication--carousel-target="track">
       <% carousel.cards.each do |card| %>
-        <li class="shrink-0 basis-11/12 snap-start sm:basis-1/2">
+        <li class="shrink-0 basis-11/12 snap-start sm:basis-1/2 lg:px-1.5">
           <%= render "communication/messages/card", card:, context: :carousel, dismissible: dismissible && !card.official? %>
         </li>
       <% end %>

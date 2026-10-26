@@ -1,53 +1,79 @@
-<%# 🌐 UI · shared/navigation/_avatar_menu — menu de l'avatar de l'élève sur le web : identité, destinations (sous lg), compte, aide (sous 700 px), déconnexion %>
-<%# Rôle : bouton avatar seul (badge « + » sans photo) qui ouvre un menu de 288 px ancré à droite ; remplace le panneau du compte de l'élève sur le web %>
-<%# UDR  : 0084 §3.1, §3.2, §3.4, §3.10 · Stimulus : dropdown (flèches, Échap, clic dehors, focus rendu à l'avatar) · locals : user %>
-<div class="relative" data-controller="dropdown" data-action="keydown->dropdown#keydown">
-  <button type="button" id="avatar-menu-button" aria-haspopup="menu" aria-expanded="false" aria-controls="avatar-menu"
-          aria-label="<%= t("shared.navigation.avatar_menu.open", name: user.name) %>"
-          data-dropdown-target="button" data-action="dropdown#toggle"
-          class="grid size-tap cursor-pointer place-items-center rounded-full transition hover:bg-ink/5
-                 focus-visible:outline-2 focus-visible:outline-brand">
-    <%= ui_avatar user.name, src: user.avatar_url, size: :sm, add_photo: true, tone_seed: user.public_id %>
-  </button>
-  <div id="avatar-menu" role="menu" aria-label="<%= t("shared.navigation.account_panel.label") %>" data-dropdown-target="menu" hidden
-       class="absolute right-0 z-30 mt-2 w-72 rounded-card border border-line bg-white p-1.5
-              shadow-pop animate-fade-in">
-    <div class="flex items-center gap-3 border-b border-line px-3 pt-2 pb-3">
-      <%= ui_avatar user.name, src: user.avatar_url, size: :md, tone_seed: user.public_id %>
-      <div class="min-w-0">
-        <p class="truncate font-semibold text-ink"><%= user.name %></p>
-        <% if user.detail %><p class="truncate text-xs text-mute"><%= user.detail %></p><% end %>
-      </div>
+<%# 🌐 UI · shared/navigation/_avatar_menu — « Mon compte » de l'élève : l'avatar de l'en-tête ouvre un panneau (<dialog>) : plein écran, panneau latéral droit de 400 px dès lg %>
+<%# Rôle : Mon profil, [Mon établissement dès lg], Modifier mon code secret, Mode sombre, Se déconnecter, rien d'autre ; `page: true` rend le seul contenu (/students/menu : coque Android, bandeau de l'accueil) %>
+<%# UDR  : écrans élève sans répétition §3.1, §3.6 bis, §3.8 · Stimulus : modal (Échap, croix, voile, focus rendu à l'avatar), autofocus (1re entrée), theme · locals : user, page %>
+<%# locals: (user:, page: false) -%>
+<%# Dès lg seulement (§3.6 bis) : « Mon établissement » entre « Mon profil » et le code secret ; au téléphone, la liste reste celle de §3.1. %>
+<% school_link = { label: t("shared.navigation.account_panel.entries.school"), href: student_school_path, icon: "building-office-2" } %>
+<% links = account_panel_links(user.role).insert(1, school_link.merge(desktop_only: true)) %>
+<% link_class = "flex min-h-tap w-full items-center gap-4 rounded-ln py-1 text-ink hover:bg-mist focus-visible:outline-2 focus-visible:outline-brand" %>
+<% pill = "grid size-9 shrink-0 place-items-center rounded-full bg-brand-soft text-brand-strong" %>
+<% content = capture do %>
+  <div class="flex items-center gap-4 border-b border-line pb-4">
+    <%= ui_avatar user.name, src: user.avatar_url, size: :lg, tone_seed: user.public_id %>
+    <div class="min-w-0">
+      <p class="truncate font-display text-lg font-medium text-ink"><%= user.name %></p>
+      <%# « classe · établissement » : au téléphone seulement ; dès lg, l'en-tête n'a que l'avatar et le nom (porteur, 2026-10-26). %>
+      <% if user.detail %><p class="truncate text-sm text-mute lg:hidden"><%= user.detail %></p><% end %>
     </div>
-    <%# Au-delà de lg, le menu de gauche montre déjà ces destinations : le menu ne les répète pas. %>
-    <%# Page en cours : le fond bg-brand-soft reste au focus (pas le gris de ui-menu-item-default) ; un anneau inset marque le focus clavier. %>
-    <div class="border-b border-line py-1.5 lg:hidden">
-      <% navigation_for(user.role).each do |destination| %>
-        <% path = nav_path(destination) %>
-        <% active = nav_active?(destination, path) %>
-        <%= link_to path, role: "menuitem", tabindex: -1, "aria-current": ("page" if active),
-                    class: class_names("ui-menu-item",
-                                       active ? "bg-brand-soft text-ink focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand" : "ui-menu-item-default") do %>
-          <%= ui_icon destination.icon, class: active ? "text-brand-strong" : "opacity-70" %>
-          <span><%= t("shared.navigation.#{destination.key}") %></span>
+  </div>
+  <nav aria-label="<%= t("shared.navigation.account_panel.label") %>" class="py-2">
+    <ul>
+      <% links.each_with_index do |link, index| %>
+        <%= tag.li class: ("hidden lg:block" if link[:desktop_only]) do %>
+          <%= link_to link[:href], class: link_class, "aria-current": ("page" if current_page?(link[:href])),
+                                   data: ({ autofocus_target: "fallback" } if index.zero? && !local_assigns[:page]) do %>
+            <span class="<%= pill %>" aria-hidden="true"><%= ui_icon link[:icon] %></span>
+            <span><%= link[:label] %></span>
+          <% end %>
         <% end %>
       <% end %>
-    </div>
-    <div class="pt-1.5">
-      <%= ui_dropdown_item t("shared.navigation.profile"), href: profile_path, icon: "user-circle" %>
-      <%= ui_dropdown_item t("shared.navigation.avatar_menu.history"), href: student_archive_path, icon: "archive-box" %>
-      <% unless user.avatar_url %>
-        <%= ui_dropdown_item t("shared.navigation.avatar_menu.add_photo"), href: edit_profile_photo_path, icon: "camera" %>
-      <% end %>
-      <%# Dès 700 px, « Besoin d'aide ? » est dans l'en-tête ; en dessous, il ouvre ici la même carte d'aide. %>
-      <div class="min-[700px]:hidden">
-        <%= ui_dropdown_item t("shared.help_sheet.trigger"), icon: "headset", dialog: "help-sheet" %>
-      </div>
-    </div>
-    <div role="separator" class="my-1.5 border-t border-line"></div>
-    <%= button_to session_path, method: :delete, role: "menuitem", tabindex: -1,
-                  class: "ui-menu-item ui-menu-item-danger cursor-pointer" do %>
-      <%= ui_icon "arrow-right-start-on-rectangle", class: "opacity-70" %><span><%= t("shared.navigation.sign_out") %></span>
+    </ul>
+  </nav>
+  <%# Un seul interrupteur : celui du panneau (le theme_controller le garde d'accord avec le cookie). Caché sans JavaScript. %>
+  <%= tag.div hidden: true, class: "border-t border-line py-2", data: { controller: "theme", action: "theme:changed@window->theme#sync" } do %>
+    <%= tag.button type: "button", role: "switch", "aria-checked": (theme_preference == "dark").to_s,
+                   data: { theme_target: "switch", action: "theme#toggle" },
+                   class: class_names(link_class, "group cursor-pointer text-left") do %>
+      <span class="<%= pill %>" aria-hidden="true"><%= ui_icon "moon" %></span>
+      <span class="flex-1"><%= t("shared.navigation.account_panel.entries.dark_mode") %></span>
+      <span class="relative mr-3 h-7 w-12 shrink-0 rounded-full bg-mute transition group-aria-checked:bg-brand" aria-hidden="true">
+        <span class="absolute top-1 left-1 size-5 rounded-full bg-white shadow-card transition group-aria-checked:translate-x-5"></span>
+      </span>
+    <% end %>
+  <% end %>
+  <div class="border-t border-line pt-2">
+    <%= button_to session_path, method: :delete, class: class_names(link_class, "cursor-pointer") do %>
+      <span class="<%= pill %>" aria-hidden="true"><%= ui_icon "arrow-right-start-on-rectangle" %></span>
+      <span><%= t("shared.navigation.sign_out") %></span>
     <% end %>
   </div>
-</div>
+<% end %>
+<% if local_assigns[:page] %>
+  <%= content %>
+<% else %>
+  <%# Le déclencheur et la boîte partagent le contrôleur modal : showModal() piège le focus, Échap ferme et rend le focus à
+      l'avatar. Plein écran sous lg ; dès lg, panneau de 400 px collé à droite, pleine hauteur, sur le voile (backdrop), qui le ferme au clic. %>
+  <div data-controller="modal" data-action="turbo:before-cache@document->modal#close">
+    <button type="button" id="avatar-menu-button" aria-haspopup="dialog" aria-controls="avatar-menu"
+            aria-label="<%= t("shared.navigation.avatar_menu.open", name: user.name) %>" data-action="modal#open"
+            class="grid size-tap cursor-pointer place-items-center rounded-full transition hover:bg-ink/5
+                   focus-visible:outline-2 focus-visible:outline-brand">
+      <%= ui_avatar user.name, src: user.avatar_url, size: :sm, add_photo: true, tone_seed: user.public_id %>
+    </button>
+    <dialog id="avatar-menu" aria-labelledby="avatar-menu-title" data-modal-target="dialog"
+            data-action="close->modal#closed modal:opened->autofocus#focus click->modal#backdrop"
+            data-controller="autofocus" data-autofocus-mode-value="dialog"
+            class="m-0 h-dvh max-h-none w-full max-w-none overflow-y-auto bg-white p-0 text-ink backdrop:bg-ink/40
+                   motion-safe:open:animate-fade-in lg:ml-auto lg:w-100">
+      <div class="mx-auto flex min-h-full w-full max-w-md flex-col px-gutter pb-6">
+        <div class="flex items-center justify-between gap-4 py-3">
+          <h2 id="avatar-menu-title" class="font-display text-xl font-medium"><%= t("shared.navigation.account_panel.title") %></h2>
+          <button type="button" data-action="modal#close" aria-label="<%= t("components.modal.close") %>" class="ui-icon-button -mr-2 shrink-0">
+            <%= ui_icon "x-mark" %>
+          </button>
+        </div>
+        <%= content %>
+      </div>
+    </dialog>
+  </div>
+<% end %>

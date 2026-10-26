@@ -48,9 +48,35 @@ module Queries
       end
 
       test "the file carries the student, the counts, the badges, the assignments and what he did alone" do
-        assert_equal %i[student counts badge_counts assignments self_practice self_practice_total], StudentFileQuery::File.members
+        assert_equal %i[student counts badge_counts assignments self_practice self_practice_total class_grade class_badge],
+                     StudentFileQuery::File.members
         assert_equal 30, StudentFileQuery::SELF_PRACTICE_DAYS
         assert_equal 20, StudentFileQuery::SELF_PRACTICE_LIMIT
+      end
+
+      # UDR enseignant §3.2, §3.6 (Lot I) : « Moyenne 14/20 · Or », la même règle que la liste de la classe (Grading.class_badge_for).
+      test "the class grade and badge: the average of the best scores on 20, ranked by the one rule of the classroom" do
+        assert_equal [ nil, nil ], file.to_h.values_at(:class_grade, :class_badge)
+
+        hand_in(assign("Un", due_on: Date.new(2026, 10, 8)), 75, at: Time.zone.local(2026, 10, 7, 9))
+        hand_in(assign("Deux", due_on: Date.new(2026, 10, 9)), 85, at: Time.zone.local(2026, 10, 8, 9))
+        assign("Trois")
+
+        assert_equal [ 16, :gold ], file.to_h.values_at(:class_grade, :class_badge)
+      end
+
+      test "the class badge is Diamond when every exercise done is a perfect score, Bronze at 55 %, none under Bronze" do
+        one = assign("Un")
+        hand_in(one, 100, at: Time.zone.local(2026, 10, 7, 9))
+        assert_equal [ 20, :diamond ], file.to_h.values_at(:class_grade, :class_badge)
+
+        bronze = create_student(classroom: @classroom, first_name: "Koffi")
+        hand_in(one, 55, at: Time.zone.local(2026, 10, 7, 9), student: bronze)
+        assert_equal [ 11, :bronze ], file(bronze).to_h.values_at(:class_grade, :class_badge)
+
+        weak = create_student(classroom: @classroom, first_name: "Yao")
+        hand_in(one, 30, at: Time.zone.local(2026, 10, 7, 9), student: weak)
+        assert_equal [ 6, nil ], file(weak).to_h.values_at(:class_grade, :class_badge)
       end
 
       test "the header: name, masked number, arrival and its channel; the full number never leaves the query" do
@@ -139,14 +165,14 @@ module Queries
         hand_in(assignment, 65, at: Time.zone.local(2026, 10, 10, 10))
         follow_up = AssignmentFollowUpQuery.new.call(classroom_public_id: @classroom.public_id, public_id: assignment.public_id)
         detail = Assessment::ComprehensionDetailQuery.new.call(classroom_public_id: @classroom.public_id,
-                                                               assignment_public_id: assignment.public_id, category: :fragile)
+                                                               assignment_public_id: assignment.public_id, badge: nil)
 
         row = file.assignments.sole
 
         assert_equal [ @awa.public_id ], follow_up.late_students.map(&:public_id)
         assert_equal follow_up.late_students.sole.done_on, row.done_on
         assert_equal :late, row.status
-        assert_equal [ [ @awa.public_id, 65, :progress ] ], detail.students.map { [ it.public_id, it.best, it.trend ] }
+        assert_equal [ [ @awa.public_id, 65 ] ], detail.students.map { [ it.public_id, it.best ] }
         assert_equal [ 65, :fragile, :progress ], row.to_h.values_at(:best, :category, :trend)
       end
 

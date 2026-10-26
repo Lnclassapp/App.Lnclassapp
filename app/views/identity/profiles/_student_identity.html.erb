@@ -1,5 +1,5 @@
-<%# 🌐 UI · identity/profiles/_student_identity — carte bleue du profil de l'élève : photo (ou initiales et « + »), nom, classe %>
-<%# Rôle : identité seule, sans bouton (la photo se change depuis sa ligne) ; remplacée par profile_names/update · locals : profile %>
+<%# 🌐 UI · identity/profiles/_student_identity — carte bleue du profil de l'élève (dès lg) : photo (ou initiales et « + »), nom seul %>
+<%# Rôle : identité seule, sans bouton (la photo se change depuis sa ligne) ; « Mon profil » la pose dans un cadre `hidden lg:block` (lot O2 : ordinateur seulement, le téléphone n'a pas de carte) ; profile_names/update la renvoie pour y remplacer le nom · locals : profile %>
 <%# UDR  : 0084 §3.4 (avatar aux initiales), 0089 §3.1 (dégradé brand-strong → brand, texte blanc) %>
 <%# locals: (profile:) -%>
 <%# Comme la carte « Ma classe » de l'accueil : le texte reste sur brand-strong, AA avec text-white dans les deux thèmes. %>
@@ -12,10 +12,7 @@
                                           tone_seed: profile.public_id, add_photo: true %>
     </span>
     <div class="min-w-0">
-      <h2 id="profile_identity_name" class="font-display text-2xl leading-tight font-extrabold break-words"><%= profile.display_name %></h2>
-      <% if profile.classroom_name %>
-        <p class="mt-1 text-sm"><%= t(".student_of", classroom: profile.classroom_name) %></p>
-      <% end %>
+      <h2 id="profile_identity_name" class="font-display text-2xl leading-tight font-medium break-words"><%= profile.display_name %></h2>
     </div>
   </div>
 </section>

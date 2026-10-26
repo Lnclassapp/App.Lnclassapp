@@ -1,0 +1,14 @@
+<%# 🌐 UI · assessment/comprehension/_student_row — une ligne de la liste « Élèves » du rapport d'un exercice assigné %>
+<%# Rôle : initiales dans un rond, nom (lien vers la fiche), légende dessous (« Fait le 22 oct. », « Pas encore fait ») et pastille à droite %>
+<%# ADR  : 0079, 0097 (§4.9) · UDR : 0109 (§3.1), enseignant (§3.8) · le nom mène à la fiche, hors du cadre (_top) %>
+<%# locals: (student:, classroom:, caption:, pill: nil) -%>
+<li class="flex items-center gap-3 py-3">
+  <span class="grid size-9 shrink-0 place-items-center rounded-full bg-mist text-xs text-mute" aria-hidden="true"><%= avatar_initials(student.display_name) %></span>
+  <div class="min-w-0 flex-1">
+    <%= comprehension_student_name(student, classroom) %>
+    <p class="text-sm text-mute"><%= caption %></p>
+  </div>
+  <% if pill %>
+    <div class="shrink-0"><%= pill %></div>
+  <% end %>
+</li>

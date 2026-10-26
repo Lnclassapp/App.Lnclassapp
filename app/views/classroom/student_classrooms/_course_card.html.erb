@@ -11,8 +11,8 @@
     <span class="<%= class_names("mb-1 grid size-12 place-items-center rounded-full", illustration.tint) %>" aria-hidden="true">
       <%= image_tag illustration.path, alt: "", class: "size-8", loading: "lazy" %>
     </span>
-    <span class="text-xs font-bold tracking-wide text-mute uppercase"><%= course.material_name %></span>
-    <span class="line-clamp-2 font-display font-extrabold text-ink"><%= course.name %></span>
+    <span class="text-xs font-medium tracking-wide text-mute uppercase"><%= course.material_name %></span>
+    <span class="line-clamp-2 font-display font-medium text-ink"><%= course.name %></span>
     <span class="mt-auto pt-1 text-xs text-mute"><%= t(".assigned", count: course.assigned_count) %></span>
   <% end %>
 </li>
