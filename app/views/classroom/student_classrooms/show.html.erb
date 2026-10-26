@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_classrooms/show — « Ma classe » de l'élève (CL-22, CL-10 volet élève), redessinée (chantier ma-classe-eleve) %>
-<%# Rôle : une colonne (pleine, 720 px dès 700 px, 960 px au plus dès 1 024 px) : classe en dégradé, invitation sans enseignant, cours, exercices à faire et traités %>
-<%# ADR  : 0028, 0048, 0072, 0076, 0089 §4.3 · UDR : 0011, 0057, 0062, 0071 §3.5, 0076 §3.2, 0081 §3.8, 0084, 0086 · sans lien « Accueil », sans nom d'élève %>
+<%# Rôle : une colonne (pleine, 720 px dès 700 px, 960 px au plus dès 1 024 px) : classe en dégradé, invitation sans enseignant, cours, puis exercices à faire (2/3) et traités (1/3) dès 1 024 px %>
+<%# ADR  : 0028, 0048, 0072, 0076, 0089 §4.3 · UDR : 0011, 0057, 0062, 0071 §3.5, 0076 §3.2, 0081 §3.8, 0084, 0086, XXXX écrans élève sans répétition §3.6 bis · sans lien « Accueil », sans nom d'élève %>
 <% page_title t(".page_title") %>
 
 <%# max-w-180 (720 px) ne borne rien sous 700 px, où la colonne prend toute la largeur moins les marges (UDR-0086 §3.5). %>
@@ -18,22 +18,25 @@
 
     <%= render "courses", courses: @classroom.courses %>
 
-    <%# UDR-0086 §3.4 : côte à côte dès 1 024 px ; items-start garde à chaque carte sa hauteur. %>
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-start">
-      <% assigned = @classroom.assigned_exercises %>
-      <%= ui_card title: t(".assigned_title"), id: "student_classroom_assigned", data: (ui_reveal_data if assigned.any?) do %>
-        <% if assigned.empty? %>
-          <%= ui_empty_state title: t(".assigned_empty"), description: t(".assigned_empty_description"),
-                             icon: "clipboard-document-check" %>
-        <% else %>
-          <ul class="divide-y divide-line">
-            <% assigned.each_with_index do |exercise, index| %>
-              <%= render "assigned_exercise", exercise:, index: %>
-            <% end %>
-          </ul>
-          <%= ui_reveal_more assigned.size %>
+    <%# UDR écrans élève §3.6 bis (CA-E11) : dès 1 024 px, 2/3 – 1/3 ; items-start garde à chaque carte sa hauteur. %>
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:items-start">
+      <%# Colonne de gauche : les exercices assignés, puis (à venir, CA-E3) « Fiches à revoir » sous eux, sans refaire la grille. %>
+      <div class="grid grid-cols-1 gap-6 lg:col-span-2">
+        <% assigned = @classroom.assigned_exercises %>
+        <%= ui_card title: t(".assigned_title"), id: "student_classroom_assigned", data: (ui_reveal_data if assigned.any?) do %>
+          <% if assigned.empty? %>
+            <%= ui_empty_state title: t(".assigned_empty"), description: t(".assigned_empty_description"),
+                               icon: "clipboard-document-check" %>
+          <% else %>
+            <ul class="divide-y divide-line">
+              <% assigned.each_with_index do |exercise, index| %>
+                <%= render "assigned_exercise", exercise:, index: %>
+              <% end %>
+            </ul>
+            <%= ui_reveal_more assigned.size %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
 
       <% treated = @classroom.treated_exercises %>
       <%= ui_card title: t(".treated_title"), id: "student_classroom_treated", data: (ui_reveal_data if treated.any?) do %>

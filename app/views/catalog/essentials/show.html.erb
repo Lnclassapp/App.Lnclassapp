@@ -1,11 +1,16 @@
 <%# 🌐 UI · catalog/essentials/show — page d'une fiche essentielle (CA-11, AS-37), pour l'élève, l'enseignant et l'équipe %>
-<%# Rôle : en-tête et contenu (Action Text, KaTeX) ; équipe : statut, menu ⋮ ; élève : étiquette « À revoir depuis le… » ; exercices (élève : 3 puis « Voir plus » ; enseignant : bascules) %>
-<%# ADR  : 0028, 0033, 0035, 0043, 0072, 0101 · UDR : 0006, 0007, 0015, 0119, 0042, 0054, 0057, 0062, 0069, XXXX écrans élève sans répétition §3.4 · rafraîchie par les streams et le morphing %>
+<%# Rôle : en-tête et contenu (Action Text, KaTeX) ; équipe : statut, menu ⋮ ; élève : étiquette « À revoir depuis le… » ; exercices (élève : 3 puis « Voir plus », colonne collante de 300 px dès lg ; enseignant : bascules) %>
+<%# ADR  : 0028, 0033, 0035, 0043, 0072, 0101 · UDR : 0006, 0007, 0015, 0119, 0042, 0054, 0057, 0062, 0069, XXXX écrans élève sans répétition §3.4 et §3.6 bis · rafraîchie par les streams et le morphing %>
 <% essential = @detail.essential %>
 <% course = @detail.course %>
 <% exercises = @detail.exercises %>
 <% page_title t(".page_title", name: essential.name) %>
 <% content_for :nav_key, "courses" %>
+<%# UDR écrans élève §3.6 bis (CA-E12) : l'élève lit, dès 1 024 px, la fiche à gauche et « Exercices » dans une colonne de 300 px
+    collante à droite ; l'enseignant et l'équipe gardent la page en une colonne (un div sans classe, sans effet). Le mb-8 de
+    l'en-tête sert d'espace sous 1 024 px. %>
+<%= tag.div id: ("essential_layout" if @student),
+            class: ("grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start lg:gap-x-8" if @student) do %>
 <div id="essential_header" class="mb-8">
   <%= ui_back_link course.name, href: course_path(course.slug) %>
   <%= ui_card padding: :md do %>
@@ -54,7 +59,7 @@
   <% end %>
 </div>
 
-<div class="space-y-8">
+<%= tag.div id: ("essential_side" if @student), class: (@student ? "lg:sticky lg:top-[calc(var(--spacing-bar)+--spacing(6))]" : "space-y-8") do %>
   <%= ui_card title: t(".exercises_title"), icon: "academic-cap", id: "essential_exercises" do |card| %>
     <% card.actions do %>
       <%= ui_badge t(".exercises_count", count: exercises.size), tone: :brand, size: :sm %>
@@ -82,4 +87,5 @@
       <% end %>
     <% end %>
   <% end %>
-</div>
+<% end %>
+<% end %>
