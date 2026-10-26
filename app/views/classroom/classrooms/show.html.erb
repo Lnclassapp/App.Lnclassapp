@@ -1,14 +1,11 @@
 <%# 🌐 UI · classroom/classrooms/show — page d'une classe (CL-10), enseignant qui y enseigne et équipe %>
-<%# Rôle : en-tête (retour selon le rôle, code et lien copiables), jours de séance (enseignant), cours en bande, exercices assignés, fiches à revoir, élèves %>
-<%# ADR  : 0026, 0028, 0072, 0101 · UDR : 0006, 0027 (amendée le 2026-10-02), 0054, 0062 (§3.4), 0077 (§3.4 : l'ordre), 0121 %>
+<%# Rôle : en-tête (retour selon le rôle, titre, « sigle · année », lien d'inscription), cours en bande, exercices assignés, fiches à revoir, élèves filtrés par badge %>
+<%# ADR  : 0026, 0028, 0072, 0101 · UDR : enseignant §3.5, 0006, 0027, 0054, 0062 (§3.4), 0077 (§3.4 : l'ordre), 0121 · « Vos jours de séance » n'est plus rendu (§3.5, §3.13) : routes et données gardées %>
 <% page_title @header.name %>
 <% content_for :nav_key, "classrooms" %>
-<%= render "header", classroom: @header %>
+<%= render "header", classroom: @header, school_sigle: @overview.school_sigle %>
 
 <div class="space-y-10">
-  <% if @overview.session_days %>
-    <%= render "session_days", classroom: @header, weekdays: @overview.session_days %>
-  <% end %>
   <%= render "courses", classroom: @header, courses: @overview.courses %>
   <%= render "assigned_exercises", classroom: @header, assignments: @overview.assignments %>
   <%# UDR-0121 §3.1 : les fiches à revoir, entre les exercices assignés et les élèves ; absent s'il est vide. %>

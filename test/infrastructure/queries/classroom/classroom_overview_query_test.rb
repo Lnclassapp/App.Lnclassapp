@@ -16,8 +16,16 @@ module Queries
       def overview(show_roster: true, **) = ClassroomOverviewQuery.new.call(public_id: @classroom.public_id, show_roster:, **)
 
       test "l'aperçu porte les élèves et leurs nouveaux, les jours de séance, les exercices assignés et les cours" do
-        assert_equal %i[students students_total grade_group grade_counts new_students_count session_days assignments courses],
+        assert_equal %i[students students_total badge_filter new_students_count session_days assignments courses school_sigle],
                      ClassroomOverviewQuery::Overview.members
+      end
+
+      test "le sigle de l'établissement, nil s'il n'en a pas" do
+        assert_nil overview.school_sigle
+
+        Orm::School.find(@classroom.school_id).update!(sigle: "CSMT")
+
+        assert_equal "CSMT", overview.school_sigle
       end
 
       test "jours de séance : ceux de l'enseignant pour cette classe, triés ; vides s'il n'en a pas ; nil pour l'équipe" do
@@ -368,7 +376,7 @@ module Queries
       end
 
       # rapports-de-classe, Lot B (CL-15 ; ADR-0097 §4.7, UDR-0108) : dans un groupe, trente élèves, puis trente de plus,
-      # cumulativement. Sans exercice fait, tous sont dans « Pas encore de note ».
+      # cumulativement. Sans exercice fait, personne n'a de badge.
       def roster_of(count, last_name: "Élève", joined_at: 1.month.ago)
         Array.new(count) { |index| create_student(classroom: @classroom, first_name: format("N%02d", index), last_name:, joined_at:) }
       end
@@ -377,7 +385,7 @@ module Queries
         roster_of(65)
 
         assert_equal 30, ClassroomOverviewQuery::PER_PAGE
-        assert_equal "none", overview.grade_group
+        assert_nil overview.badge_filter
         assert_equal [ 30, 65 ], overview.then { [ it.students.size, it.students_total ] }
         assert_equal [ 60, 65 ], overview(page: 2).then { [ it.students.size, it.students_total ] }
         assert_equal [ 65, 65 ], overview(page: 3).then { [ it.students.size, it.students_total ] }
@@ -406,7 +414,7 @@ module Queries
 
         assert_equal [ 30, 40 ], overview(search: "kon").then { [ it.students.size, it.students_total ] }
         assert_equal [ 40, 40 ], overview(search: "kon", page: 2).then { [ it.students.size, it.students_total ] }
-        assert_equal [ nil, nil, nil ], overview(show_roster: false).to_h.values_at(:students_total, :grade_group, :grade_counts)
+        assert_equal [ nil, nil ], overview(show_roster: false).to_h.values_at(:students_total, :badge_filter)
       end
 
       # Décision du porteur du 2026-10-16 (UDR-0108 amendée) : la liste se découpe par note sur 20, la moyenne des meilleurs
@@ -439,57 +447,102 @@ module Queries
                                 score_percent: 80, classroom_assignment: @assignments[1], gap:)
 
         # (40 + 80) / 2 = 60 % : 12 sur 20 — la remédiation sur l'exercice assigné compte, rien d'autre.
-        assert_equal [ [ awa.public_id, 12 ] ], overview(note: "11-15").students.map { [ it.public_id, it.grade ] }
+        assert_equal [ [ awa.public_id, 12 ] ], overview.students.map { [ it.public_id, it.grade ] }
       end
 
-      test "CL-15 : la moyenne non entière s'arrondit comme la note affichée (52,5 % : 11 sur 20, groupe 11–15)" do
+      test "CL-15 : la moyenne non entière s'arrondit comme la note affichée (52,5 % : 11 sur 20)" do
         @assignments = []
         awa = graded([ 50, 55 ], first_name: "Awa")
 
-        assert_equal [ [ awa.public_id, 11 ] ], overview(note: "11-15").students.map { [ it.public_id, it.grade ] }
+        assert_equal [ [ awa.public_id, 11 ] ], overview.students.map { [ it.public_id, it.grade ] }
       end
 
-      test "CL-15 : un groupe par note, le premier non vide depuis 0–10 par défaut ; le compte de chaque groupe" do
+      # UDR enseignant §3.2 (Lot I) : le badge de classe de chaque élève (Grading.class_badge_for) et le filtre `badge=`.
+      test "CA-I2 : chaque élève porte son badge de classe, ses faits, ses retards et le nombre d'exercices assignés" do
         @assignments = []
-        good = Array.new(2) { graded([ 60 ]) }
-        best = graded([ 95 ])
-        3.times { create_student(classroom: @classroom) }
+        diamond = graded([ 100, 100 ], first_name: "Diam")
+        gold = graded([ 85, 75 ], first_name: "Or")
+        silver = graded([ 75, 70 ], first_name: "Argent")
+        bronze = graded([ 55 ], first_name: "Bronze")
+        low = graded([ 30 ], first_name: "Bas")
+        nothing = create_student(classroom: @classroom, first_name: "Rien")
 
-        result = overview
+        rows = overview.students.index_by(&:public_id)
 
-        assert_equal({ "0-10" => 0, "11-15" => 2, "16-20" => 1, "none" => 3 }, result.grade_counts)
-        assert_equal "11-15", result.grade_group
-        assert_equal good.map(&:public_id).sort, result.students.map(&:public_id).sort
-        assert_equal [ 2, [ 12, 12 ] ], [ result.students_total, result.students.map(&:grade) ]
-        assert_equal [ best.public_id ], overview(note: "16-20").students.map(&:public_id)
-        assert_equal [ 3, [ nil ] ], overview(note: "none").then { [ it.students_total, it.students.map(&:grade).uniq ] }
-        assert_equal [ "0-10", [] ], overview(note: "0-10").then { [ it.grade_group, it.students ] }
-        assert_equal "11-15", overview(note: "12-14").grade_group
+        assert_equal [ :diamond, :gold, :silver, :bronze, nil, nil ],
+                     [ diamond, gold, silver, bronze, low, nothing ].map { rows.fetch(it.public_id).badge }
+        assert_equal [ [ 2, 2 ], [ 2, 2 ], [ 2, 2 ], [ 1, 2 ], [ 1, 2 ], [ 0, 2 ] ],
+                     [ diamond, gold, silver, bronze, low, nothing ].map { rows.fetch(it.public_id).then { |row| [ row.done_count, row.assigned_count ] } }
       end
 
-      test "CL-15 : la recherche porte sur toute la classe, quel que soit le groupe" do
+      test "CA-I2 : un sans-faute partout est Diamant ; un seul exercice sans faute sur deux, jamais" do
         @assignments = []
-        graded([ 30 ], first_name: "Koné")
-        graded([ 95 ], first_name: "Koné")
-        create_student(classroom: @classroom, first_name: "Koné")
-        graded([ 60 ], first_name: "Awa")
+        perfect = graded([ 100 ], first_name: "Parfait")
+        mixed = graded([ 100, 98 ], first_name: "Mixte")
 
-        result = overview(search: "kon", note: "11-15")
+        rows = overview.students.index_by(&:public_id)
 
-        assert_nil result.grade_group
-        assert_equal [ 3, 3 ], [ result.students.size, result.students_total ]
-        assert_equal({ "0-10" => 1, "11-15" => 1, "16-20" => 1, "none" => 1 }, result.grade_counts)
+        assert_equal [ :diamond, :gold ], [ rows.fetch(perfect.public_id).badge, rows.fetch(mixed.public_id).badge ]
       end
 
-      test "CL-15 : le nombre de requêtes ne dépend ni de la page, ni du groupe, ni de l'effectif" do
+      # PRD CA-G6, CA-I4 : « en retard » = pas fait et échu, comme « 7 en retard » du rapport ; sans échéance, jamais.
+      test "CA-I3 : « en retard » compte les exercices échus que l'élève n'a pas faits, sans échéance jamais" do
+        past = Date.new(2026, 10, 10)
+        done_late = create_assignment(classroom: @classroom, assignable: create_exercise, due_on: past,
+                                      assigned_at: (past - 1).in_time_zone.change(hour: 8))
+        create_assignment(classroom: @classroom, assignable: create_exercise, due_on: past,
+                          assigned_at: (past - 1).in_time_zone.change(hour: 8))
+        create_assignment(classroom: @classroom, assignable: create_exercise)
+        future = create_assignment(classroom: @classroom, assignable: create_exercise, due_on: TODAY + 1,
+                                   assigned_at: TODAY.in_time_zone.change(hour: 8))
+        busy = create_student(classroom: @classroom, joined_at: 1.month.ago)
+        idle = create_student(classroom: @classroom, joined_at: 1.month.ago)
+        [ done_late, future ].each do |assignment|
+          create_exercise_session(student: busy, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed",
+                                  score_percent: 60, classroom_assignment: assignment,
+                                  completed_at: (past + 3).in_time_zone.change(hour: 10))
+        end
+
+        rows = overview(today: TODAY).students.index_by(&:public_id)
+
+        assert_equal [ [ 2, 1, 4 ], [ 0, 2, 4 ] ],
+                     [ busy, idle ].map { rows.fetch(it.public_id).then { |row| [ row.done_count, row.late_count, row.assigned_count ] } }
+      end
+
+      test "CA-I2 : le filtre garde les élèves du badge ; « none » ceux sans badge, sans exercice fait ou sous Bronze" do
         @assignments = []
+        gold = graded([ 90 ], first_name: "Or")
+        graded([ 60 ], first_name: "Bronze")
+        low = graded([ 30 ], first_name: "Bas")
+        nothing = create_student(classroom: @classroom, first_name: "Rien")
+
+        assert_equal [ gold.public_id ], overview(badge: "gold").students.map(&:public_id)
+        assert_equal [ 1, "gold" ], overview(badge: "gold").then { [ it.students_total, it.badge_filter ] }
+        assert_equal [ low.public_id, nothing.public_id ].sort, overview(badge: "none").students.map(&:public_id).sort
+        assert_equal [], overview(badge: "diamond").students
+        assert_equal 4, overview.students_total
+      end
+
+      test "CA-I2 : un filtre inconnu vaut « Tous » ; la recherche se combine au filtre" do
+        @assignments = []
+        graded([ 90 ], first_name: "Koné")
+        graded([ 90 ], first_name: "Awa")
+        graded([ 60 ], first_name: "Koné")
+
+        assert_equal [ 3, nil ], overview(badge: "platine").then { [ it.students.size, it.badge_filter ] }
+        assert_equal [ 1, "gold" ], overview(badge: "gold", search: "kon").then { [ it.students.size, it.badge_filter ] }
+        assert_equal 2, overview(search: "kon").students.size
+      end
+
+      test "CL-15 : le nombre de requêtes ne dépend ni de la page, ni du filtre, ni de l'effectif" do
+        @assignments = [ create_assignment(classroom: @classroom, assignable: create_exercise) ]
         roster_of(31)
         first = count_queries { overview(today: TODAY) }
         graded([ 50, 70 ])
         graded([ 90 ])
 
         assert_equal first, count_queries { overview(today: TODAY, page: 2) }
-        assert_equal first, count_queries { overview(today: TODAY, note: "11-15") }
+        assert_equal first, count_queries { overview(today: TODAY, badge: "gold") }
       end
 
       def count_queries(&)

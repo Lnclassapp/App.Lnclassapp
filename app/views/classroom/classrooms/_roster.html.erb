@@ -1,10 +1,10 @@
 <%# 🌐 UI · classroom/classrooms/_roster — liste nominative de la classe, rendue seulement si ReadClassroomPolicy l'accorde %>
-<%# Rôle : « Chercher un élève » (toute la classe) ; frame classroom_roster_list : groupes de note sur 20, compteur, une ligne par élève (lien vers sa fiche), « Voir les suivants » %>
-<%# ADR  : 0028, 0060, 0067, 0083 (§4.4 bis), 0085, 0089 (§4.2), 0097 (§4.7) · UDR : 0007, 0027, 0047, 0054, 0079 (§3.8 ter), 0081 (§3.7), 0084 (§3.7), 0108 · sans menu ⋮ : les actions sont sur la fiche %>
-<%# total, page, group, grade_counts, new_count : par défaut ceux que la page de la classe a lus (@overview, @page) ; le stream
+<%# Rôle : « Chercher un élève » ; frame classroom_roster_list : puces de badge (`badge=`), compteur, une ligne par élève (« 9 faits sur 18 », badge de classe, lien vers sa fiche), « Voir les suivants » %>
+<%# ADR  : 0028, 0060, 0067, 0083 (§4.4 bis), 0085, 0089 (§4.2), 0097 (§4.7) · UDR : enseignant §3.2 et §3.5, 0007, 0027, 0047, 0054, 0079 (§3.8 ter), 0081 (§3.7), 0084 (§3.7), 0108 · sans menu ⋮ : les actions sont sur la fiche %>
+<%# total, page, badge_filter, new_count : par défaut ceux que la page de la classe a lus (@overview, @page) ; le stream
     du retrait (classroom_students/destroy) rend la liste avec focus_title pour rendre le focus au titre (UDR-0081 §3.7).
     can_remove reste dans la signature pour ce stream, qui ne change pas d'appel ; la liste ne l'utilise plus. -%>
-<%# locals: (classroom:, students:, search: "", total: @overview&.students_total.to_i, page: @page || 1, group: @overview&.grade_group, grade_counts: @overview&.grade_counts, new_count: @overview&.new_students_count.to_i, can_remove: @can_remove_students == true, focus_title: false) -%>
+<%# locals: (classroom:, students:, search: "", total: @overview&.students_total.to_i, page: @page || 1, badge_filter: @overview&.badge_filter, new_count: @overview&.new_students_count.to_i, can_remove: @can_remove_students == true, focus_title: false) -%>
 <% per_page = Queries::Classroom::ClassroomOverviewQuery::PER_PAGE %>
 <section id="classroom_roster" aria-labelledby="classroom_roster_title" class="min-w-0">
   <%# UDR-0081 §3.7 : le compte des nouveaux est dans le titre, lu avec lui ; la même balise est rendue par le stream du retrait. %>
@@ -17,6 +17,8 @@
     <%= form_with scope: :classroom_roster_search, url: classroom_path(classroom.public_id), method: :get, id: "classroom-roster-search",
                   html: { role: "search", "aria-label": t(".search_label") }, class: "mb-4 flex flex-col gap-3 sm:flex-row sm:items-end",
                   data: { turbo_frame: "classroom_roster_list", controller: "search" } do |form| %>
+      <%# Le filtre de badge se combine à la recherche : il voyage avec elle (UDR enseignant §3.5). %>
+      <%= hidden_field_tag :badge, badge_filter, id: nil if badge_filter %>
       <div class="min-w-0 sm:flex-1">
         <%= ui_field form, :q, as: :search, label: t(".search_label"), name: "q", value: search, autocomplete: "off",
                                data: { action: "search#queue" } %>
@@ -28,28 +30,27 @@
     <% end %>
     <%= turbo_frame_tag "classroom_roster_list", class: "block transition-opacity aria-busy:opacity-50" do %>
       <%= ui_icon_sprite do %>
-        <%# Décision du porteur du 2026-10-16 (UDR-0108 amendée) : un groupe de note à la fois ; sans JavaScript, chaque groupe est
-            un lien qui recharge la page. Une recherche porte sur toute la classe : aucun groupe n'est alors courant. %>
-        <% if grade_counts %>
-          <nav id="classroom_roster_groups" aria-label="<%= t(".groups_label") %>" class="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-            <% Entities::Classroom::RosterGrade::KEYS.each do |key| %>
-              <% current = key == group %>
-              <%= link_to classroom_path(classroom.public_id, note: key, anchor: "classroom_roster"),
-                          id: "classroom_roster_group_#{key.tr('-', '_')}", "aria-current": ("true" if current),
-                          data: { turbo_action: "advance" },
-                          class: class_names("flex min-h-12 items-center justify-between gap-2 rounded-ln border px-3 py-2 text-sm",
-                                             "focus-visible:outline-2 focus-visible:outline-brand",
-                                             current ? "border-brand bg-brand-soft font-medium text-ink" : "border-line bg-white text-ink hover:bg-mist") do %>
-                <span><%= t(".groups.#{key}") %></span>
-                <span class="font-display text-lg font-medium tabular-nums"><%= grade_counts.fetch(key) %></span>
+        <%# UDR enseignant §3.5 : « Tous · Bronze · Argent · Or · Diamant · Pas encore », un badge à la fois ; sans JavaScript, chaque
+            puce est un lien qui recharge la page. La recherche se combine au filtre : les puces la gardent. %>
+        <nav id="classroom_roster_badges" aria-label="<%= t(".badges_label") %>" class="mb-4 flex gap-2 overflow-x-auto pb-1">
+          <% [ nil, *Queries::Classroom::ClassroomOverviewQuery::BADGE_FILTERS ].each do |key| %>
+            <% current = key == badge_filter %>
+            <%= link_to classroom_path(classroom.public_id, q: search.presence, badge: key, anchor: "classroom_roster"),
+                        id: "classroom_roster_badge_#{key || 'all'}", "aria-current": ("true" if current), data: { turbo_action: "advance" },
+                        class: class_names("inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-full border px-4 text-sm",
+                                           "focus-visible:outline-2 focus-visible:outline-brand",
+                                           current ? "border-brand-strong bg-brand-strong text-white" : "border-line bg-white text-ink hover:bg-mist") do %>
+              <% if key && key != Queries::Classroom::ClassroomOverviewQuery::NO_BADGE %>
+                <%= comprehension_trophy(current ? "text-white" : comprehension_badge_class(key.to_sym, 1)) %>
               <% end %>
+              <%= key ? comprehension_box_label(key.to_sym) : t(".all") %>
             <% end %>
-          </nav>
-        <% end %>
+          <% end %>
+        </nav>
         <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
           <p id="classroom_roster_count" aria-live="polite" class="text-sm text-mute">
             <% if students.empty? %>
-              <%= group ? t(".empty_group") : t(".no_match") %>
+              <%= badge_filter && search.blank? ? t(".empty_badge") : t(".no_match") %>
             <% elsif students.size < total %>
               <%= t(".count_partial", shown: students.size, total:) %>
             <% else %>
@@ -61,13 +62,13 @@
             <div id="self_practice_heading" class="hidden items-center gap-1 text-sm text-mute sm:flex">
               <%= t(".self_practice") %><%= ui_info_tip t(".self_practice_tip"), label: t(".self_practice") %>
             </div>
-            <p class="flex items-center gap-1 text-sm text-mute">
+            <p class="hidden items-center gap-1 text-sm text-mute sm:flex">
               <%= t(".last_score") %><%= ui_info_tip t(".last_score_tip"), label: t(".last_score") %>
             </p>
           </div>
         </div>
-        <% if students.empty? && group %>
-          <%= ui_empty_state title: t(".empty_group"), icon: "user-group" %>
+        <% if students.empty? && badge_filter && search.blank? %>
+          <%= ui_empty_state title: t(".empty_badge"), icon: "user-group" %>
         <% elsif students.empty? %>
           <%= ui_empty_state title: t(".no_match"), icon: "magnifying-glass" do %>
             <%= ui_button t(".clear_search"), href: classroom_path(classroom.public_id), variant: :secondary, icon: "x-mark",
@@ -95,6 +96,10 @@
                       <% via = { "standard" => t(".via.standard"), "link" => t(".via.link") }[student.joined_via] %>
                       <% if via %><p class="text-xs text-mute sm:w-full"><%= via %></p><% end %>
                     </div>
+                    <%# UDR enseignant §3.5 : « 9 faits sur 18 », puis « · 1 en retard » en text-warning. %>
+                    <% if student.assigned_count.positive? %>
+                      <p id="progress_<%= student.public_id %>" class="text-sm text-mute"><%= t(".done_of", count: student.done_count, assigned: student.assigned_count) %><% if student.late_count.positive? %> <span class="text-warning">· <%= t(".late", count: student.late_count) %></span><% end %></p>
+                    <% end %>
                     <p id="self_practice_line_<%= student.public_id %>" class="text-xs text-mute sm:hidden">
                       <%= t(".self_practice_line", count: student.self_practice_count) %>
                     </p>
@@ -107,14 +112,15 @@
                   </div>
                 <% end %>
                 <div class="flex shrink-0 items-center gap-1 sm:gap-3">
-                  <p id="grade_<%= student.public_id %>" class="w-14 text-right text-sm">
-                    <span class="block text-xs text-mute"><%= t(".grade_label") %></span>
-                    <% if student.grade %>
-                      <span class="font-medium tabular-nums"><%= t(".grade", grade: student.grade) %></span>
-                    <% else %>
-                      <span class="text-mute">—</span>
-                    <% end %>
-                  </p>
+                  <%# UDR enseignant §3.2, §3.5 : « Or · 15/20 » (trophée du palier sur une pastille neutre) ou « Pas encore » en text-mute. %>
+                  <% if student.badge %>
+                    <p id="badge_<%= student.public_id %>" class="<%= Assessment::BadgesHelper::BADGE_PILL %> shrink-0">
+                      <%= comprehension_trophy(Assessment::ComprehensionHelper::BADGE_ICON_CLASSES.fetch(student.badge)) %>
+                      <%= t(".badge_grade", badge: badge_label(student.badge), grade: student.grade) %>
+                    </p>
+                  <% else %>
+                    <p id="badge_<%= student.public_id %>" class="ui-badge ui-badge-md shrink-0 bg-mist text-mute"><%= comprehension_box_label(:none) %></p>
+                  <% end %>
                   <p id="self_practice_<%= student.public_id %>" class="hidden w-24 text-right text-sm sm:block">
                     <span class="block text-xs text-mute"><%= t(".self_practice") %></span>
                     <% if student.self_practice_count.zero? %>
@@ -123,7 +129,7 @@
                       <span class="font-medium tabular-nums"><%= student.self_practice_count %></span>
                     <% end %>
                   </p>
-                  <p class="w-24 text-right text-sm sm:w-auto">
+                  <p class="hidden text-right text-sm sm:block">
                     <span class="block text-xs text-mute"><%= t(".last_score") %></span>
                     <% if student.last_score_percent %>
                       <span class="font-medium tabular-nums"><%= student.last_score_percent %> %</span>
@@ -142,7 +148,7 @@
             <%# UDR-0108 §3.3, §3.4 : le cadre est remplacé par sa version plus longue ; sans JavaScript, le lien rend la page. %>
             <div id="classroom_roster_more" class="mt-4 flex justify-center">
               <%= ui_button t(".more", count: [ total - students.size, per_page ].min),
-                            href: classroom_path(classroom.public_id, q: search.presence, note: (group unless search.present?),
+                            href: classroom_path(classroom.public_id, q: search.presence, badge: badge_filter,
                                                  page: page + 1, anchor: "classroom_roster"),
                             variant: :secondary, icon: "chevron-down",
                             data: { turbo_frame: "classroom_roster_list", turbo_action: "replace" } %>
