@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/session_results/show — résultat d'une session terminée (AS-11 à AS-13) %>
-<%# Rôle : badge, « Félicitations ! » (dès 14/20) ou « Courage ! », note (verte dès 14/20) et maîtrise, progrès, effet sur la fiche, « Recommencer » (caché au sans-faute, Grading.perfect?), correction %>
-<%# ADR  : 0033, 0054, 0079, 0091, 0101 · UDR : 0007, 0023, 0054, 0057, 0073, 0087 §3.6, 0120 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
+<%# Rôle : badge, « Félicitations ! » (dès 14/20) ou « Courage ! », note (verte dès 14/20) et maîtrise, progrès, effet sur la fiche, « Recommencer » seul (caché au sans-faute, Grading.perfect?), correction %>
+<%# ADR  : 0033, 0054, 0079, 0091, 0101 · UDR : 0007, 0023, 0054, 0057, 0073, 0087 §3.6, 0120, XXXX écrans élève sans répétition §3.5 · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
 <% result = @result %>
 <%# UDR-0087 §3.6 : le titre, la couleur de la note et les confettis dès « 14/20 » affiché, la règle de l'historique, de
     « Ma classe » et de l'accueil (68 % s'affiche 14/20). %>
@@ -60,7 +60,8 @@
     </section>
 
     <%# UDR-0073 : la phrase de progrès parle à l'élève seul, à partir de sa deuxième session. %>
-    <% if @owner && result.progress %>
+    <%# UDR écrans élève §3.5 : « Tu restes autour de… » n'est plus dit, la correction le dit déjà. %>
+    <% if @owner && result.progress && result.progress.trend != :stagnant %>
       <%= render "assessment/session_results/progress", progress: result.progress %>
     <% end %>
     <%# UDR-0120 : l'effet de la session sur sa fiche, à l'élève seul, sous son progrès. %>
@@ -68,14 +69,12 @@
       <%= render "assessment/session_results/gap_outcome", outcome: result.gap_outcome, essential: result.essential %>
     <% end %>
 
-    <div class="grid grid-cols-1 gap-3">
-      <% if @can_restart && !grading.perfect?(result.score_percent) %>
-        <%= form_with url: exercise_sessions_path(result.exercise.public_id), method: :post, id: "restart-exercise-form" do %>
-          <%= ui_button t(".restart"), type: :submit, variant: :brand, size: :lg, full: true, icon: "arrow-path" %>
-        <% end %>
+    <%# UDR écrans élève §3.5 : un seul bouton, « Recommencer » (caché au sans-faute). %>
+    <% if @can_restart && !grading.perfect?(result.score_percent) %>
+      <%= form_with url: exercise_sessions_path(result.exercise.public_id), method: :post, id: "restart-exercise-form" do %>
+        <%= ui_button t(".restart"), type: :submit, variant: :primary, size: :lg, full: true, icon: "arrow-path" %>
       <% end %>
-      <%= ui_button t(".exercise_link"), href: exercise_path(result.exercise.public_id), variant: :secondary, size: :lg, full: true %>
-    </div>
+    <% end %>
   </div>
 
   <%= tag.section id: "session_review", "aria-labelledby": "session_review_title",

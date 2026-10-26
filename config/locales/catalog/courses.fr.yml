@@ -6,6 +6,9 @@ fr:
         page_title: "Cours"
         title: "Cours"
         subtitle: "Les fiches de cours du programme, par matière et par niveau."
+        # UDR écrans élève §3.6 : la progression du programme s'écrit une fois, à la suite du compte.
+        student_total: "%{total} · Progression DPFC 2026-2027"
+        student_progression: "Progression DPFC 2026-2027"
         # UDR-0013, amendement du 2026-10-02 : la portée du catalogue de l'élève, en infobulle (UDR-0057 R4).
         student_scope: "Tu vois seulement les fiches de cours de ton niveau."
         student_scope_label: "Quelles fiches de cours ?"
@@ -63,11 +66,10 @@ fr:
           other: "%{material}, %{count} fiches de cours, voir la matière"
       course_card:
         open: "Ouvrir la fiche de cours"
-        # UDR-0085 §3.3 : le bouton de l'élève dit où il en est ; la carte entière est le lien, son nom porte celui de la fiche de cours.
+        # UDR écrans élève §3.6 : la ligne entière est le lien ; la pastille dit « En cours », la coche verte « Terminée ».
         progress:
-          new: "Commencer la fiche de cours"
-          started: "Reprendre la fiche de cours"
-          done: "Revoir la fiche de cours"
+          started: "En cours"
+          done: "Terminée"
       show:
         page_title: "%{name}"
         back: "Cours"
