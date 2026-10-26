@@ -140,7 +140,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
 
     get page_path
 
-    assert_select "#essential_layout[class~='lg:grid-cols-[minmax(0,1fr)_300px]']" do
+    assert_select "#essential_layout[class~='lg:grid-cols-main-side']" do
       assert_select "> #essential_header"
       assert_select "> #essential_side.lg\\:sticky > #essential_exercises"
     end

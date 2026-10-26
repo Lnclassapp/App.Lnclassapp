@@ -109,6 +109,8 @@
   --spacing-gutter: 1rem;
   --spacing-bar: 4rem;
   --spacing-rail: 18rem;
+  /* Décalage collant sous la barre : la barre (4rem) + 1,5 rem (`top-sticky-below-bar`) */
+  --spacing-sticky-below-bar: calc(var(--spacing-bar) + 1.5rem);
 
   /* Largeurs de contenu */
   --container-page: 72rem;
@@ -281,6 +283,16 @@
 /* Page à deux colonnes : le contenu, puis un panneau latéral de 20 rem (fiche d'un établissement). */
 @utility grid-cols-main-aside {
   grid-template-columns: minmax(0, 1fr) 20rem;
+}
+
+/* Écrans élève dès lg (UDR écrans élève §3.6 bis) : résultat de session, une colonne de 340 px à gauche puis la correction. */
+@utility grid-cols-side-main {
+  grid-template-columns: 340px minmax(0, 1fr);
+}
+
+/* Écrans élève dès lg (UDR écrans élève §3.6 bis) : la fiche, puis la colonne « Exercices » de 300 px à droite. */
+@utility grid-cols-main-side {
+  grid-template-columns: minmax(0, 1fr) 300px;
 }
 
 /* Ligne de tableau empilée sur téléphone (UDR-0081 §3.7) : le contenu, puis une colonne à sa largeur pour le menu ⋮. */

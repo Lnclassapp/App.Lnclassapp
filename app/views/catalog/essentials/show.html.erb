@@ -12,7 +12,7 @@
 <% split = !@student && @targets.present? %>
 <%= tag.div id: ("essential_layout" if @student),
             class: (if @student
-                      "grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start lg:gap-x-8"
+                      "grid grid-cols-1 lg:grid-cols-main-side lg:items-start lg:gap-x-8"
                     else
                       class_names("space-y-8", "lg:flex lg:items-start lg:gap-8 lg:space-y-0" => split)
                     end) do %>
@@ -65,7 +65,7 @@
 </div>
 
 <%= tag.div id: ("essential_side" if @student),
-            class: class_names("lg:sticky lg:top-[calc(var(--spacing-bar)+--spacing(6))]" => @student,
+            class: class_names("lg:sticky lg:top-sticky-below-bar" => @student,
                                "lg:sticky lg:top-8 lg:max-h-dvh lg:w-95 lg:shrink-0 lg:overflow-y-auto" => split) do %>
   <%= ui_card title: t(".exercises_title"), icon: "academic-cap", id: "essential_exercises" do |card| %>
     <% card.actions do %>

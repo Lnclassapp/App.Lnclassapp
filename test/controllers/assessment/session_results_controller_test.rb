@@ -94,7 +94,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     show
 
-    assert_select "#session_result_layout[class~='lg:grid-cols-[340px_minmax(0,1fr)]']" do
+    assert_select "#session_result_layout[class~='lg:grid-cols-side-main']" do
       assert_select "> #session_result_side.lg\\:sticky" do
         assert_select "#session_result"
         assert_select "form#restart-exercise-form"
