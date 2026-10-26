@@ -53,7 +53,7 @@ module Queries
         exercises = assigned_with_slugs(classroom_id, student_id)
         Row.new(school_name:, school_sigle: school_sigle.presence, level_name:, classroom_name:,
                 classmates_count: Orm::ClassroomStudent.where(classroom_id:, left_at: nil).count,
-                assigned_exercises: exercises.map(&:last), pending_gaps: pending_gaps(student_id),
+                assigned_exercises: exercises.map(&:last), pending_gaps: pending_gaps(student_id:),
                 late_material_slugs: late_material_slugs(exercises, today), subjects: subjects(student_id),
                 next_step: next_step(exercises.map(&:last), classroom_id, student_id, today))
       end
@@ -61,6 +61,15 @@ module Queries
       # Les exercices assignés à la classe, dans l'ordre de « À faire » ; lue aussi par « Ma classe » (UDR-0076 §3.2).
       # → [ExerciseRow]
       def assigned_exercises(classroom_id:, student_id:) = assigned_with_slugs(classroom_id, student_id).map(&:last)
+
+      # Une lacune dont la fiche n'est plus publiée n'a plus de page à ouvrir : elle n'est pas proposée.
+      def pending_gaps(student_id:)
+        Orm::KnowledgeGap.joins(essential: :course)
+                         .where(student_id:, status: "pending", essentials: { status: "published" }, courses: { status: "published" })
+                         .merge(own_level(student_id))
+                         .order(created_at: :desc, id: :desc).pluck("essentials.name", "essentials.slug", "courses.slug")
+                         .map { |essential_name, essential_slug, course_slug| GapRow.new(essential_name:, essential_slug:, course_slug:) }
+      end
 
       # → LastClassroom ; tout à nil pour un élève qui n'a jamais eu de classe.
       def last_classroom(student_id:, now: Time.current)
@@ -178,15 +187,6 @@ module Queries
         Orm::Material.joins(:courses).merge(own_level(student_id)).where(courses: { status: "published" }).distinct
                      .order(*PROGRAM_ORDER).pluck(:slug, :name, :position)
                      .map { |slug, name, _position| SubjectRow.new(slug:, name:) }
-      end
-
-      # Une lacune dont la fiche n'est plus publiée n'a plus de page à ouvrir : elle n'est pas proposée.
-      def pending_gaps(student_id)
-        Orm::KnowledgeGap.joins(essential: :course)
-                         .where(student_id:, status: "pending", essentials: { status: "published" }, courses: { status: "published" })
-                         .merge(own_level(student_id))
-                         .order(created_at: :desc, id: :desc).pluck("essentials.name", "essentials.slug", "courses.slug")
-                         .map { |essential_name, essential_slug, course_slug| GapRow.new(essential_name:, essential_slug:, course_slug:) }
       end
     end
   end
