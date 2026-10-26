@@ -13,14 +13,14 @@
 |---|---|---|---|---|
 | B — Code de classe à 6 caractères | orchestrateur | — | samedi 24 | ✅ **fait** (ancien Lot 0 + ancien Lot A, `021804cc`) ; `security-reviewer` passé, aucun constat au-dessus de « bas » |
 | A — Jetons de couleurs | orchestrateur (porteur, 2026-10-24 : « option A », repris de Touré), #285 | — | samedi 24 | ✅ **fusionné** (`8d009596`), captures validées par le porteur |
-| F — Page d'accueil publique en photo | **Touré** (`toure-bangaly`), #286 (2026-10-26) | — | samedi 24 | à faire |
+| F — Page d'accueil publique en photo | **porteur** (`Kamkara007`), #286 (2026-10-26) | — | samedi 24 | à faire |
 | B2 — Code visible sur la page de classe (provisoire) | orchestrateur | B | samedi 24 | à faire (porteur, 2026-10-24 : « A ») |
 | C — Inscription élève en 3 étapes | orchestrateur | B | samedi 24 | ✅ **fusionné** (`dc2c78c5`), captures validées |
 | D — Accueil élève, carte du prochain exercice | **Touré**, #298 (2026-10-26 ; code déjà sur `-lot-d`) | A | dimanche 25 → lundi 26 | à faire |
-| E1 — « Mon compte » plein écran, profil sans doublons | Touré, #291 | A | dimanche 25 | à faire |
+| E1 — « Mon compte » plein écran, profil sans doublons | **porteur** (`Kamkara007`), #291 (2026-10-26) | A | dimanche 25 | à faire |
 | E2 — Ma classe, fiche, résultat, Cours | **Touré**, #290 (2026-10-26) | A, F | dimanche 25 → lundi 26 | à faire |
 
-**Répartition du 2026-10-26** (porteur : « Konan pour les écrans des enseignants et Touré pour les élèves, mobile comme ordinateur ») : **Touré pilote tous les lots élève**, téléphone et ordinateur, dans cet ordre : D (#298), E1 (#291), F (#286), E2 (#290), O1 (#300), O3 (#299), O2 (#302), O6 (#301), O4 (#303), O5 (#304). **Priorité aux dépendances** (porteur, 2026-10-26) : D, E1, F, E2 et O1 passent d'abord parce que Konan les attend (D pour G et P0, E1 pour M, F puis E2 pour N, O1 pour P1). Les lots enseignant sont à Konan ([`plan-enseignant.md`](plan-enseignant.md)). Chaque issue porte la fiche du lot, les changements du 26, les maquettes de référence (archive v12) et la marche à suivre. La session « MVP teacher-student » reste la seule à fusionner dans la branche de chantier.
+**Répartition du 2026-10-26** (porteur : « Konan pour les écrans des enseignants et Touré pour les élèves, mobile comme ordinateur ») : **Touré pilote tous les lots élève**, téléphone et ordinateur, dans cet ordre : D (#298), E1 (#291), F (#286), E2 (#290), O1 (#300), O3 (#299), O2 (#302), O6 (#301), O4 (#303), O5 (#304). **Repris par le porteur le même jour** : E1 (#291) et F (#286), en parallèle de D, pour débloquer Konan plus vite ; Touré enchaîne D, E2, O1. **Priorité aux dépendances** (porteur, 2026-10-26) : D, E1, F, E2 et O1 passent d'abord parce que Konan les attend (D pour G et P0, E1 pour M, F puis E2 pour N, O1 pour P1). Les lots enseignant sont à Konan ([`plan-enseignant.md`](plan-enseignant.md)). Chaque issue porte la fiche du lot, les changements du 26, les maquettes de référence (archive v12) et la marche à suivre. La session « MVP teacher-student » reste la seule à fusionner dans la branche de chantier.
 
 **Budget des tests système** (ADR-0069 §9 : 15 s par chantier) : C en prend 10,5 s ; **relevé à 50 s pour ce chantier** (porteur, 2026-10-24, amendement de l’ADR-0069). Chaque lot garde un test système court de son parcours principal et teste le reste au niveau contrôleur ou intégration.
 
