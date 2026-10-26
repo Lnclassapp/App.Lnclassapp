@@ -1,30 +1,47 @@
-<%# 🌐 UI · classroom/teacher_homes/_follow_ups — « Activités » de l'accueil enseignant : les exercices à suivre %>
-<%# Rôle : un exercice assigné par ligne (titre vers son suivi, classe, échéance, élèves qui ne l'ont pas fait) ; 3 lignes puis « Voir plus » %>
-<%# ADR  : 0072, 0103 · UDR : 0057 (R3), 0062 (§3.1), 0077 §3.1, 0126 §3.4 · locals: (follow_ups: [TeacherFollowUpsQuery::Row], icon:, badges: false) %>
-<%# locals: (follow_ups:, icon:, badges: false, no_materials: false) -%>
-<%= ui_card title: t(".title"), subtitle: t(".subtitle"), icon:, id: "teacher_home_activity",
-            data: (ui_reveal_data if follow_ups.any?) do %>
+<%# 🌐 UI · classroom/teacher_homes/_follow_ups — « Cette semaine » de l'accueil enseignant : les exercices à suivre %>
+<%# Rôle : une assignation par ligne (rond de matière, titre vers son suivi, classe et échéance, barre « 20 / 27 faits », pastille « pas encore » ou « en retard ») ; 3 lignes puis « Voir plus » %>
+<%# ADR  : 0072, 0103 · UDR : 0057 (R3), 0062 (§3.1), 0077 §3.1, 0126 §3.4, écrans enseignant §3.1 (barre du rôle), §3.3 · locals: (follow_ups: [TeacherFollowUpsQuery::Row], badges: false, no_materials: false) -%>
+<% today = Time.zone.today %>
+<%= tag.section id: "teacher_home_week", "aria-labelledby": "teacher_home_week_title", class: "space-y-3",
+                data: (ui_reveal_data if follow_ups.any?) do %>
+  <h2 id="teacher_home_week_title" class="sr-only"><%= t(".title") %></h2>
   <% if follow_ups.empty? && no_materials %>
     <%# ADR-0103 §4.6 : sans matière dans cet établissement, aucun exercice ne peut être suivi : on invite à les choisir. %>
-    <%= render "choose_materials", id: "teacher_home_activity_no_materials" %>
+    <%= render "choose_materials", id: "teacher_home_week_no_materials" %>
   <% elsif follow_ups.empty? %>
-    <%= ui_empty_state title: t(".empty"), description: t(".empty_description"), icon: %>
+    <p class="text-meta text-mute"><%= t(".empty") %></p>
   <% else %>
-    <ul class="-mx-4 divide-y divide-line border-t border-line sm:-mx-6">
+    <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
       <% follow_ups.each_with_index do |follow_up, index| %>
-        <%= tag.li id: "follow_up_#{follow_up.public_id}", class: "relative flex items-center gap-3 px-5 py-4 active:bg-mist sm:px-6",
+        <% progress = t(".done", done: follow_up.done, count: follow_up.present) %>
+        <%= tag.li id: "follow_up_#{follow_up.public_id}", class: "relative flex items-center gap-3 px-4 py-3 active:bg-mist",
                    **ui_reveal_item(index) do %>
+          <span class="grid size-10 shrink-0 place-items-center rounded-full bg-brand-soft" aria-hidden="true">
+            <%= image_tag subject_illustration(follow_up.material_slug).path, alt: "", class: "size-6", loading: "lazy" %>
+          </span>
           <div class="min-w-0 flex-1 space-y-1">
             <%= link_to follow_up.exercise_title, classroom_assignment_path(follow_up.classroom_public_id, follow_up.public_id),
-                        class: "block truncate font-medium text-ink after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-brand" %>
-            <p class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-mute">
+                        class: "block truncate text-sm text-ink after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-brand" %>
+            <p class="flex flex-wrap items-center gap-x-2 gap-y-1 text-meta text-mute">
               <%# UDR-0126 §3.4 : la matière de l'exercice, pour l'enseignant de plusieurs matières seulement. %>
               <% if badges %><%= ui_subject_badge follow_up.material_name, category: follow_up.material_category, size: :sm %><% end %>
-              <span><%= follow_up.classroom_name %></span><%= due_badge(follow_up.due_on) %>
+              <% if follow_up.due_on %>
+                <span><%= t(".due", classroom: follow_up.classroom_name, date: l(follow_up.due_on, format: :due_short)) %></span>
+              <% else %>
+                <span><%= t(".no_due", classroom: follow_up.classroom_name) %></span>
+              <% end %>
             </p>
-            <p class="text-sm tabular-nums"><%= t(".pending", count: follow_up.pending, present: follow_up.present) %></p>
+            <div class="flex items-center gap-2">
+              <div class="w-20 shrink-0"><%= ui_progress(done: follow_up.done, total: follow_up.present, role: :teacher, label: progress) %></div>
+              <span class="text-xs text-ink tabular-nums"><%= progress %></span>
+            </div>
           </div>
-          <%= ui_icon "chevron-right", variant: :mini, class: "shrink-0 text-mute" %>
+          <%# Retard : ambre, avec son point ; sinon bleu. La pastille ne dit jamais « 0 » : le suivi n'affiche que ce qui reste. %>
+          <% if follow_up.due_on && follow_up.due_on < today %>
+            <%= ui_badge t(".late", count: follow_up.pending), tone: :warning, size: :sm, dot: true %>
+          <% else %>
+            <%= ui_badge t(".pending", count: follow_up.pending), tone: :brand, size: :sm %>
+          <% end %>
         <% end %>
       <% end %>
     </ul>

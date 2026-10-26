@@ -41,6 +41,18 @@ module Repositories
         assert_equal({ name: [ :taken ] }, result.errors)
       end
 
+      # Revue de #295 : le code vient de la base à la création ; on force ici un code déjà pris pour simuler la collision.
+      test "une collision du code de classe n'est pas annoncée comme un nom pris : l'erreur monte" do
+        taken = create_classroom(school: @school, level: @level, name: "6ème 1", school_year: @year)
+        repository = ClassroomRepository.new
+        repository.define_singleton_method(:attributes_of) { |entity| super(entity).merge(join_code: taken.join_code) }
+
+        error = assert_raises(ActiveRecord::RecordNotUnique) { repository.create(classroom: classroom(name: "Tle D 2")) }
+
+        assert_includes error.message, "index_classrooms_on_join_code"
+        assert_equal 1, Orm::Classroom.where(school_id: @school.id).count
+      end
+
       test "liste les noms d'une école pour une année" do
         create_classroom(school: @school, name: "6ème 1", school_year: @year)
         create_classroom(school: @school, name: "6ème 2", school_year: "2020-2021")

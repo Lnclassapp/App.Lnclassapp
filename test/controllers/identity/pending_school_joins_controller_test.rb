@@ -35,13 +35,13 @@ class Identity::PendingSchoolJoinsControllerTest < ActionDispatch::IntegrationTe
     assert_response :success
   end
 
-  test "IE-18 : un enseignant jamais configuré rejoint, puis choisit ses classes" do
+  test "IE-18 : un enseignant jamais configuré rejoint, puis arrive sur l'accueil qui lui demande ses classes" do
     teacher = create_teacher(school: nil, onboarded: false)
     sign_in_as teacher
 
     join(@b)
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
   end
 
   test "IE-18 : l'établissement qui l'a retiré, un inactif, un d'une autre DRENA : 422, la même erreur neutre, rien de rejoint" do

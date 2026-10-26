@@ -43,7 +43,13 @@
                        data: { classroom__signup_steps_target: "code", action: "input->#{steps}#checkCode" } %>
           <p id="signup-code-checking" hidden class="text-sm text-mute" data-<%= steps %>-target="checking"><%= t(".checking") %></p>
           <%= turbo_frame_tag Classroom::ClassroomCodesController::FRAME, class: "block", "aria-live": "polite",
-                              data: { "#{steps}-target": "codeFrame", action: "turbo:frame-load->#{steps}#codeChecked" } %>
+                              data: { "#{steps}-target": "codeFrame",
+                                      action: "turbo:frame-load->#{steps}#codeChecked turbo:frame-missing->#{steps}#codeCheckFailed " \
+                                              "turbo:fetch-request-error->#{steps}#codeCheckFailed" } %>
+          <%# Réseau coupé ou erreur serveur : le contrôleur met ce message dans le frame, relié au champ. %>
+          <template data-<%= steps %>-target="checkFailed">
+            <p id="classroom-code-check-failed" role="alert" class="rounded-ln bg-error-soft px-4 py-3 text-sm font-medium text-error"><%= t(".check_failed") %></p>
+          </template>
         </div>
 
         <label id="signup-no-code-label" for="signup-no-code"

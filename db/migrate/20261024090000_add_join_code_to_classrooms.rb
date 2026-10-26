@@ -3,8 +3,10 @@
 # generator, then NOT NULL, unique index and format constraint (lower case, no i, l, o, 0 or 1). Down removes the column with
 # its index and its constraint: the codes are not kept, nothing reads them once the code is gone.
 # The column also has a database default (6 symbols drawn from gen_random_uuid, which is cryptographic, like the link token's
-# default), so a classroom written without a code (bulk insert, raw SQL) still gets a valid one; the app draws its own with
-# the domain generator and its five attempts (Entities::Classroom::JoinCode).
+# default), so a classroom written without a code (creation, bulk insert, raw SQL) still gets a valid one. The app draws its own
+# with the domain generator and its five attempts (Entities::Classroom::JoinCode) only when the code is changed (« Changer le
+# lien et le code ») and in this migration's backfill; on creation the database draws it, and a collision on the unique index
+# raises (the repository does not report it as a taken name).
 class AddJoinCodeToClassrooms < ActiveRecord::Migration[8.1]
   FORMAT = "join_code ~ '^[a-hjkmnp-z2-9]{6}$'".freeze
   CHECK = "classrooms_join_code_format".freeze

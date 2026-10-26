@@ -50,7 +50,7 @@ class RoleHomesTest < ApplicationSystemTestCase
   test "AN-22 — the teacher reaches their home, then every destination of their navigation, with no « Annonces »" do
     sign_in_as @teacher
 
-    assert_home teacher_home_path, greeting: I18n.t("classroom.teacher_homes.show.greeting", name: "Yao")
+    assert_home teacher_home_path, greeting: I18n.t("classroom.teacher_homes.show.page_title")
     within(MAIN_SIDEBAR_NAV) { assert_no_link tn(:announcements) }
     assert_navigation active: { home: teacher_home_path, classrooms: teacher_classrooms_path, courses: courses_path }
     assert_signs_out_from_panel

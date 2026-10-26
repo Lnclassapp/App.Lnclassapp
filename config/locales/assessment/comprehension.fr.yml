@@ -1,5 +1,5 @@
 # Compréhension d'un exercice assigné (ADR-0079, UDR-0072 §3.7) — écrans enseignant seulement.
-# « session » et non « essai » (trends.single, section.first_rate*, no_trend) : vocabulaire de l'UDR-0007, vérifié par locale_files_test.
+# « session » et non « essai » (trends.single) : vocabulaire de l'UDR-0007, vérifié par locale_files_test.
 fr:
   assessment:
     comprehension:
@@ -33,26 +33,18 @@ fr:
         badges_label: "Élèves par badge"
         questions_title: "Questions"
         students_title: "Élèves"
-        question_label: "Question %{number} : %{rate} de réussite"
-        question_number: "Q%{number}"
+        question_number: "%{number}."
         no_attempt: "—"
-        first_rate: "1re session : %{rate}"
-        first_rate_label: ", %{rate} à la première session"
-        to_revisit: "À reprendre en classe"
-        to_revisit_label: ", à reprendre en classe"
-      # La phrase assemble les trois groupes, chacun au pluriel : « 8 en progrès · 7 sans évolution · 3 en baisse ».
-      trends_summary:
-        sentence_html: "%{progress} · %{flat} · %{decline}"
-        progress:
-          one: "%{count} en progrès"
-          other: "%{count} en progrès"
-        flat:
-          one: "%{count} sans évolution"
-          other: "%{count} sans évolution"
-        decline:
-          one: "%{count} en baisse"
-          other: "%{count} en baisse"
-      no_trend: "Pas encore de progrès à lire : chaque élève n'a fait qu'une session."
+        # « 18 / 20 justes » : les élèves listés qui ont juste, sur ceux qui ont fait la question (UDR enseignant §3.8).
+        correct_of:
+          one: "%{count} / %{answered} juste"
+          other: "%{count} / %{answered} justes"
+      # Une ligne de la liste « Élèves » : « Fait le 22 oct. » ou « Pas encore fait », et « En retard » après la date limite.
+      student:
+        done_on: "Fait le %{date}"
+        done_format: "%-d %b"
+        pending: "Pas encore fait"
+        late: "En retard"
       # AS-23 (ADR-0097 §4.6, UDR-0109 §3.3, UDR enseignant §3.8) : une phrase par cas, choisie par Entities::Assessment::NextStep,
       # dite en badges.
       next_step:
@@ -62,18 +54,19 @@ fr:
           other: "Relancez les %{count} élèves qui ne l'ont pas encore fait : les badges de la classe se liront à partir de %{min} élèves."
         look_at_each: "Tous les élèves l'ont fait. La classe est trop petite pour comparer les badges : regardez chaque élève."
         revisit_notion:
-          one: "%{count} élève n'a pas encore de badge. Reprenez la notion en classe avant d'avancer, puis relancez-le."
-          other: "%{count} élèves n'ont pas encore de badge. Reprenez la notion en classe avant d'avancer, puis relancez-les."
-        revisit_questions: "La plupart des élèves en sont au Bronze : reprenez en classe les questions marquées, puis avancez."
+          one: "%{count} élève n'a pas encore de badge. Reprenez %{target} en classe, puis relancez-le."
+          other: "%{count} élèves n'ont pas encore de badge. Reprenez %{target} en classe, puis relancez-les."
+        revisit_questions: "La plupart des élèves en sont au Bronze : reprenez en classe %{target}, puis avancez."
+        # Ce que la phrase invite à reprendre : la question la moins réussie de la classe, à défaut la notion ou les questions.
+        target:
+          question: "la question %{number}"
+          notion: "la notion"
+          questions: "les questions les moins réussies"
         watch_decline:
-          one: "La classe a atteint l'Argent ou mieux. Un élève est en baisse : voyez-le dans la liste."
-          other: "La classe a atteint l'Argent ou mieux. %{count} élèves sont en baisse : voyez-les dans la liste."
+          one: "La classe a atteint l'Argent ou mieux. Un élève est en baisse : consultez sa fiche."
+          other: "La classe a atteint l'Argent ou mieux. %{count} élèves sont en baisse : consultez leurs fiches."
         move_on: "La classe a atteint l'Argent ou mieux : vous pouvez avancer."
       empty:
         title: "Personne n'a encore fait cet exercice."
         description: "La compréhension s'affiche dès le premier exercice rendu."
       empty_category: "Aucun élève n'a ce badge."
-      pending:
-        title:
-          one: "Pas encore fait · 1"
-          other: "Pas encore faits · %{count}"

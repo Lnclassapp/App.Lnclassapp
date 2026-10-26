@@ -278,7 +278,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     end
     click_on t("identity.teacher_registrations.form.submit")
     assert_toast t("identity.teacher_registrations.create.welcome")
-    assert_current_path teacher_classrooms_path
+    assert_current_path teacher_home_path # UDR enseignant §3.13 : l'accueil demande les classes
+    visit teacher_classrooms_path
     assert_equal [ "YAO", "Koffi" ], Orm::User.where(contact: TEACHER_CONTACT).pick(:last_name, :first_name)
 
     classroom = Orm::Classroom.find_by!(name: "Tle D 1")

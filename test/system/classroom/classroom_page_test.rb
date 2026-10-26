@@ -102,7 +102,7 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     growth_shot("1280-classe-partager-whatsapp", scroll_to: "#classroom_header")
   end
 
-  test "l'enseignant lit ses exercices, le suivi d'un exercice qui nomme les seuls rendus en retard, et ouvre un cours de sa classe" do
+  test "l'enseignant lit ses exercices, le suivi d'un exercice qui nomme chaque élève, et ouvre un cours de sa classe" do
     [ 1, 4 ].each { Orm::ClassroomSessionDay.create!(teacher: @teacher, classroom: @classroom, weekday: it) }
     svt = Orm::TeacherSchoolMaterial.find_by!(teacher: @teacher).material
     tle_course = create_course(level: @classroom.level, series: @classroom.series, material: svt, name: "La cellule")
@@ -128,14 +128,14 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
     assert_current_path classroom_assignment_path(@classroom.public_id, assignment.public_id)
     assert_selector "h1", text: "Phases de la mitose"
     # rapports-de-classe, Lot C (UDR-0109 §3.1) : chaque nom mène à la fiche de l'élève dans la classe.
-    within "#late_students" do
-      assert_selector "li", count: 1
+    within "#comprehension_panel" do
+      assert_selector "li", count: 2
       assert_link "Koffi Yao", href: classroom_student_path(@classroom.public_id, @koffi.public_id)
-      assert_text "Fait le ven. 9 oct."
-      assert_no_text "Awa Bamba"
+      assert_selector "li", text: /Koffi Yao\s+Fait le 9 oct\./
+      # ADR-0079 §4.8 : Awa n'a pas encore fait l'exercice ; elle est nommée pour être relancée, « En retard » la date passée.
+      assert_link "Awa Bamba", href: classroom_student_path(@classroom.public_id, @awa.public_id)
+      assert_selector "li", text: /Awa Bamba\s+Pas encore fait\s+En retard/
     end
-    # ADR-0079 §4.8 : Awa n'a pas encore fait l'exercice ; elle est nommée pour être relancée, jamais parmi les retards.
-    within("#pending_students") { assert_link "Awa Bamba", href: classroom_student_path(@classroom.public_id, @awa.public_id) }
 
     click_on "Tle D 1"
     # UDR-0130 : la section de la classe nomme l'objet, la page de la fiche de cours liste ses révisions.
@@ -172,7 +172,7 @@ class Classroom::ClassroomPageTest < ApplicationSystemTestCase
              "la page de la classe déborde en largeur"
 
       visit classroom_assignment_path(@classroom.public_id, assignment.public_id)
-      assert_text I18n.t("classroom.assignment_follow_ups.show.no_due_date")
+      assert_text "sans date limite"
       assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
              "le suivi déborde en largeur"
     end

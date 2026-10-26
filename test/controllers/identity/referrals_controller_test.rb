@@ -118,9 +118,13 @@ class Identity::ReferralsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "CP-05: the teacher home ends with the block; a teacher of a draft school has none" do
+  # UDR enseignant §3.3 (mvp-teacher-student, Lot G) : la carte « Inviter un collègue » quitte l'accueil sous lg ; elle reste sur sa page.
+  test "CP-05: the invitation block is on its own page, not on the teacher home; a teacher of a draft school has none" do
     sign_in_as @teacher
     get teacher_home_path
+
+    assert_select "#invite_colleagues", 0
+    get teacher_invite_path
 
     assert_select "#invite_colleagues a#referral_link[href='#{link}']"
     sign_out

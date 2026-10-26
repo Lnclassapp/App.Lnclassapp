@@ -1,86 +1,129 @@
-<%# 🌐 UI · shared/navigation/_account_panel — panneau du compte : identité, liens du rôle (NavigationHelper::ACCOUNT_PANELS ; élève : ceux du menu de l'avatar), thème, déconnexion %>
-<%# Rôle : sur le site, <dialog> latérale ouverte par l'avatar de l'en-tête (enseignant) ; `page: true` rend le seul contenu (/students/menu, /teachers/menu) %>
-<%# UDR  : 0080 §3.1, §3.2, §3.6 · 0082 §3.2 · 0084 §3.2 (liens 3 à 7 pour l'élève) · 0098 §3.1 (rubrique « Établissement ») · 0061 (déclencheur-lien : sans JavaScript, l'avatar mène à la page du panneau) · locals : user, page %>
-<% link_class = "flex min-h-tap w-full items-center gap-3 rounded-ln px-3 text-sm font-medium
-                 focus-visible:outline-2 focus-visible:outline-brand" %>
-<%# UDR-0084 §3.2 : la page /students/menu de l'app Android reprend les liens 3 à 7 du menu de l'avatar du web. %>
-<% student = user.role.to_sym == :student %>
-<% links = if student
-             [ { label: t("shared.navigation.profile"), href: profile_path, icon: "user-circle" },
-               { label: t("shared.navigation.avatar_menu.history"), href: student_archive_path, icon: "archive-box" },
-               ({ label: t("shared.navigation.avatar_menu.add_photo"), href: edit_profile_photo_path, icon: "camera" } unless user.avatar_url),
-               { label: t("shared.help_sheet.trigger"), href: help_path, icon: "headset" } ].compact
-           else
-             account_panel_links(user.role)
-           end %>
+<%# 🌐 UI · shared/navigation/_account_panel — « Mon compte » de l'enseignant : l'avatar de l'en-tête ouvre un panneau plein écran (<dialog>) %>
+<%# Rôle : nom, « Maths · PC · sigle », établissement en cours (dès deux), six entrées avec « N sur 3 » (grisées à 3, elles mènent à l'écran de retrait), thème, déconnexion ; `page: true` rend le seul contenu (/teachers/menu) %>
+<%# UDR  : écrans enseignant sans répétition §3.4 · 0098 §3.1 (changer d'établissement) · 0061 (déclencheur-lien : sans JavaScript, l'avatar mène à la page) · Stimulus : modal, autofocus, theme · locals : user, page %>
+<%# locals: (user:, page: false) -%>
+<% max = { materials: Entities::Identity::TeacherMaterials::MAX, schools: Entities::School::TeacherSchools::MAX } %>
+<% links = account_panel_links(user.role) %>
+<% schools = teacher_schools %>
+<% current_school = schools.find(&:current) %>
+<%# Les matières arrivent du shell en une phrase (« Maths, PC ») : noms courts de `shared.subjects.short`, sinon le nom entier. %>
+<% subjects = user.about&.material.to_s.split(", ").map { I18n.t("shared.subjects.short.#{it.parameterize}", default: it) } %>
+<% school_label = current_school ? (current_school.sigle.presence || current_school.name) : user.about&.school %>
+<% detail = [ *subjects, school_label ].compact_blank.join(" · ") %>
+<% used = { materials: subjects.size, schools: schools.size } %>
+<% link_class = "flex min-h-14 w-full items-center gap-4 rounded-ln py-2 text-ink hover:bg-mist focus-visible:outline-2 focus-visible:outline-brand" %>
+<% pill = "grid size-10 shrink-0 place-items-center rounded-full bg-brand-soft text-brand-strong" %>
 <% content = capture do %>
-  <div class="flex items-center gap-3 border-b border-line pb-4">
-    <%= ui_avatar user.name, src: user.avatar_url, size: :lg, tone_seed: (user.public_id if student) %>
+  <div class="flex items-center gap-4 pb-4">
+    <%= ui_avatar user.name, src: user.avatar_url, size: :lg, tone_seed: user.public_id %>
     <div class="min-w-0">
-      <p class="truncate font-display font-medium text-ink"><%= user.name %></p>
-      <% if user.detail %><p class="truncate text-sm text-mute"><%= user.detail %></p><% end %>
+      <p class="truncate font-display text-lg font-medium text-ink"><%= user.name %></p>
+      <% if detail.present? %><p class="truncate text-sm text-mute"><%= detail %></p><% end %>
     </div>
   </div>
-  <%# UDR-0098 §3.1 : à partir de deux établissements, un bouton par établissement ; le courant est coché et désactivé. %>
-  <% if !student && teacher_schools.size > 1 %>
-    <section id="account_schools" aria-labelledby="account_schools_title" class="border-b border-line py-3">
-      <h2 id="account_schools_title" class="px-3 text-xs font-medium tracking-wide text-mute uppercase">
-        <%= t("shared.navigation.account_panel.schools.title") %>
+  <%# UDR-0098 §3.1, UDR enseignant §3.4 : dès deux établissements, une ligne par établissement ; le courant est coché et désactivé, toucher une autre le rend courant. %>
+  <% if schools.size > 1 %>
+    <section id="account_schools" aria-labelledby="account_schools_title" class="pb-4">
+      <h2 id="account_schools_title" class="text-xs font-medium tracking-wide text-mute uppercase">
+        <%= t("shared.navigation.account_panel.schools.current_heading") %>
       </h2>
-      <ul class="mt-1">
-        <% teacher_schools.each do |school| %>
+      <ul class="mt-2 flex flex-col gap-2">
+        <% schools.each do |school| %>
           <li>
             <%= button_to teacher_current_school_path, method: :patch, params: { school_public_id: school.public_id },
-                          form: { id: "switch-school-#{school.public_id}" }, disabled: school.current,
-                          title: school.name, "aria-current": ("true" if school.current),
+                          form: { id: "switch-school-#{school.public_id}" }, disabled: school.current, title: school.name,
+                          "aria-current": ("true" if school.current),
                           "aria-label": t("shared.navigation.account_panel.schools.#{school.current ? 'current' : 'switch'}", school: school.name),
-                          class: class_names(link_class, "cursor-pointer text-ink hover:bg-mist disabled:cursor-default disabled:hover:bg-transparent",
-                                             "font-medium": school.current) do %>
-              <% if school.current %>
-                <%= ui_icon "check", class: "text-brand-strong" %>
-              <% else %>
-                <span class="size-5 shrink-0" aria-hidden="true"></span>
-              <% end %>
-              <span class="min-w-0 flex-1 truncate text-left"><%= school.name %></span>
-              <% if school.primary %><%= ui_badge t("shared.navigation.account_panel.schools.primary"), size: :sm %><% end %>
+                          class: class_names("flex min-h-tap w-full items-center gap-3 rounded-ln border px-4 py-3 text-left text-ink",
+                                             "border-brand-strong bg-brand-soft": school.current,
+                                             "cursor-pointer border-line hover:bg-mist": !school.current) do %>
+              <span class="<%= class_names("grid size-5 shrink-0 place-items-center rounded-full border-2",
+                                           "border-brand-strong": school.current, "border-line": !school.current) %>" aria-hidden="true">
+                <% if school.current %><span class="size-2.5 rounded-full bg-brand-strong"></span><% end %>
+              </span>
+              <span class="min-w-0 flex-1">
+                <span class="block truncate text-sm font-medium"><%= school.sigle.presence || school.name %></span>
+                <% if school.sigle.present? %><span class="block truncate text-sm text-mute"><%= school.name %></span><% end %>
+              </span>
             <% end %>
           </li>
         <% end %>
       </ul>
     </section>
   <% end %>
-  <nav aria-label="<%= t("shared.navigation.account_panel.label") %>" class="py-2">
-    <ul>
-      <% links.each do |link| %>
+  <nav aria-label="<%= t("shared.navigation.account_panel.label") %>" class="border-t border-line py-2">
+    <ul class="divide-y divide-line">
+      <% links.each_with_index do |link, index| %>
+        <% cap = link[:cap] %>
+        <% full = cap && used.fetch(cap) >= max.fetch(cap) %>
         <li>
-          <%= link_to link[:href], class: class_names(link_class, "text-ink hover:bg-mist"), "aria-current": ("page" if current_page?(link[:href])) do %>
-            <%= ui_icon link[:icon], class: "text-mute" %><span><%= link[:label] %></span>
+          <%# À 3 sur 3, l'entrée reste active : elle mène à l'écran de retrait (« Mes matières », « Mes établissements »). %>
+          <%= link_to (full ? link[:full_href] : link[:href]), class: link_class, "aria-current": ("page" if current_page?(link[:href])),
+                                                              data: ({ autofocus_target: "fallback" } if index.zero? && !local_assigns[:page]) do %>
+            <span class="<%= class_names("grid size-10 shrink-0 place-items-center rounded-full", "bg-brand-soft text-brand-strong": !full,
+                                         "bg-mist text-mute": full) %>" aria-hidden="true"><%= ui_icon link[:icon] %></span>
+            <span class="min-w-0 flex-1">
+              <span class="<%= class_names("block", "text-mute": full) %>"><%= link[:label] %></span>
+              <% if cap %>
+                <span class="block text-sm text-mute">
+                  <%= t("shared.navigation.account_panel.counter.#{full ? "full.#{cap}" : 'under'}", used: used.fetch(cap), max: max.fetch(cap)) %>
+                </span>
+              <% end %>
+            </span>
+            <%= ui_icon "chevron-right", variant: :mini, class: "shrink-0 text-mute" %>
           <% end %>
         </li>
       <% end %>
+      <li>
+        <%# Un seul interrupteur : celui du panneau (le theme_controller le garde d'accord avec le cookie). Caché sans JavaScript. %>
+        <%= tag.div hidden: true, data: { controller: "theme", action: "theme:changed@window->theme#sync" } do %>
+          <%= tag.button type: "button", role: "switch", "aria-checked": (theme_preference == "dark").to_s,
+                         data: { theme_target: "switch", action: "theme#toggle" },
+                         class: class_names(link_class, "group cursor-pointer text-left") do %>
+            <span class="<%= pill %>" aria-hidden="true"><%= ui_icon "moon" %></span>
+            <span class="flex-1"><%= t("shared.navigation.account_panel.entries.dark_mode") %></span>
+            <span class="relative h-7 w-12 shrink-0 rounded-full bg-mute transition group-aria-checked:bg-brand" aria-hidden="true">
+              <span class="absolute top-1 left-1 size-5 rounded-full bg-white shadow-card transition group-aria-checked:translate-x-5"></span>
+            </span>
+          <% end %>
+        <% end %>
+      </li>
+      <li>
+        <%= button_to session_path, method: :delete, class: class_names(link_class, "cursor-pointer text-brand-strong") do %>
+          <span class="<%= pill %>" aria-hidden="true"><%= ui_icon "arrow-right-start-on-rectangle" %></span>
+          <span><%= t("shared.navigation.sign_out") %></span>
+        <% end %>
+      </li>
     </ul>
   </nav>
-  <div class="flex items-center justify-between border-t border-line py-3 pl-3">
-    <span class="text-sm text-ink"><%= t("shared.theme_switch.label") %></span>
-    <%= render "shared/theme_switch", variant: :icon %>
-  </div>
-  <div class="border-t border-line pt-3">
-    <%= button_to session_path, method: :delete, class: class_names(link_class, "cursor-pointer text-error hover:bg-error-soft") do %>
-      <%= ui_icon "arrow-right-start-on-rectangle" %><span><%= t("shared.navigation.sign_out") %></span>
-    <% end %>
-  </div>
 <% end %>
 <% if local_assigns[:page] %>
   <%= content %>
 <% else %>
-  <%# Le déclencheur est celui de la modale (même contrôleur) : un lien que le contrôleur modal intercepte. Seule la
-      phrase cachée le nomme ; sous md, l'avatar paraît seul. %>
-  <%= ui_modal id: "account_panel", title: t(".title"), size: :sm, placement: :drawer,
-               trigger: safe_join([ tag.span(safe_join([ ui_avatar(user.name, src: user.avatar_url, size: :sm),
-                                                         tag.span(user.name, class: "hidden text-sm font-medium md:inline") ]),
-                                             class: "flex items-center gap-2.5", "aria-hidden": "true"),
-                                    tag.span(t(".open"), class: "sr-only") ]),
-               trigger_href: account_panel_page_path(user.role), trigger_variant: :ghost, trigger_class: "gap-2.5 pr-2 pl-0" do %>
-    <%= content %>
-  <% end %>
+  <%# Le déclencheur et la boîte partagent le contrôleur modal : showModal() piège le focus, Échap ferme et rend le focus à
+      l'avatar. Un lien (UDR-0061) : sans JavaScript, il mène à la page du panneau. Plein écran à toute largeur ; le
+      panneau latéral de 400 px dès lg est le lot O2. Seule la phrase cachée nomme l'avatar ; sous md, il paraît seul. %>
+  <div data-controller="modal" data-action="turbo:before-cache@document->modal#close">
+    <%= ui_button safe_join([ tag.span(safe_join([ ui_avatar(user.name, src: user.avatar_url, size: :sm),
+                                                   tag.span(user.name, class: "hidden text-sm font-medium md:inline") ]),
+                                       class: "flex items-center gap-2.5", "aria-hidden": "true"),
+                              tag.span(t(".open"), class: "sr-only") ]),
+                  variant: :ghost, href: account_panel_page_path(user.role), class: "gap-2.5 pr-2 pl-0",
+                  data: { action: "modal#open" }, "aria-haspopup": "dialog", "aria-controls": "account_panel" %>
+    <dialog id="account_panel" aria-labelledby="account_panel_title" data-modal-target="dialog"
+            data-action="close->modal#closed modal:opened->autofocus#focus"
+            data-controller="autofocus" data-autofocus-mode-value="dialog"
+            class="m-0 h-dvh max-h-none w-full max-w-none overflow-y-auto bg-white p-0 text-ink backdrop:bg-ink/40
+                   motion-safe:open:animate-fade-in">
+      <div class="mx-auto flex min-h-full w-full max-w-md flex-col px-gutter pb-6">
+        <div class="flex items-center justify-between gap-4 py-3">
+          <h2 id="account_panel_title" class="font-display text-base font-medium"><%= t("shared.navigation.account_panel.title") %></h2>
+          <button type="button" data-action="modal#close" aria-label="<%= t("components.modal.close") %>" class="ui-icon-button -mr-2 shrink-0">
+            <%= ui_icon "x-mark" %>
+          </button>
+        </div>
+        <%= content %>
+      </div>
+    </dialog>
+  </div>
 <% end %>

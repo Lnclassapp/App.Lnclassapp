@@ -2,8 +2,8 @@ require "application_system_test_case"
 
 # Lot K de mvp-teacher-student — CA-I4, CA-I5, UDR enseignant §3.8, ADR-0079. Dans un navigateur réel, l'enseignant ouvre le
 # rapport d'un exercice, lit « 10 / 13 faits » et les cinq cases par badge, touche « Bronze » : la liste des élèves se filtre
-# dans le Turbo Frame (taux par question, « À reprendre en classe », « 1re session : … », élèves en baisse d'abord). Le badge
-# vit dans l'adresse et survit au rechargement ; les élèves pas encore faits sont nommés. Un élève qui force l'adresse : 403.
+# dans le Turbo Frame (« 1. énoncé · 3 / 4 justes », élèves du meilleur score au plus faible, note sur 20). Le badge vit dans
+# l'adresse et survit au rechargement ; les élèves pas encore faits ferment la liste, sans filtre. Un élève qui force l'adresse : 403.
 class Classroom::ComprehensionTest < ApplicationSystemTestCase
   NBSP = " ".freeze
 
@@ -17,9 +17,8 @@ class Classroom::ComprehensionTest < ApplicationSystemTestCase
     @clock = 3.days.ago
 
     # Bronze (meilleur score de 50 à 69) : un élève par signe, nommés pour que l'ordre alphabétique contredise celui des signes.
-    # Questions au meilleur essai : Q1 juste, Q2 juste, Q3 fausse pour les quatre → 100 %, 100 %, 0 % (« À reprendre »).
-    # Au premier essai, Q2 est fausse pour Sylla et Adou → « 1re session : 50 % ». Les trois 60 de Sylla : le plus récent
-    # compte (ADR-0079 §4.5) ; si c'était le premier, Q3 ne serait pas à 0 %.
+    # Questions au meilleur essai : Q1 juste, Q2 juste, Q3 fausse pour les quatre → 4 / 4, 4 / 4, 0 / 4 justes. Les trois 60 de
+    # Sylla : le plus récent compte (ADR-0079 §4.5) ; si c'était le premier, Q3 serait juste pour elle.
     done "Paul", "Zadi", [ 65, [ true, true, false ] ], [ 50, [ true, false, false ] ]                  # en baisse
     done "Fanta", "Sylla", [ 60, [ true, false, true ] ], [ 60, [ true, false, true ] ], [ 60, [ true, true, false ] ] # stagne
     done "Aya", "Konan", [ 67, [ true, true, false ] ]                                                 # 1 session
@@ -44,11 +43,10 @@ class Classroom::ComprehensionTest < ApplicationSystemTestCase
     visit classroom_assignment_path(@classroom.public_id, @assignment.public_id)
 
     within "#comprehension" do
-      assert_selector "h2", text: "Compréhension"
+      assert_no_selector "h2"
       assert_text "10 / 13 faits"
       assert_no_selector "span.size-14"
-      # Signes : progrès = Adou, Bamba, Kouadio ; sans évolution = Sylla, Yao ; baisse = Zadi ; sans signe : les 4 autres.
-      assert_selector "#comprehension_trends", text: "3 en progrès · 2 sans évolution · 1 en baisse"
+      assert_no_selector "#comprehension_trends"
       { "Pas encore" => 1, "Bronze" => 4, "Argent" => 1, "Or" => 3, "Diamant" => 1 }.each { |label, count| assert_box label, count }
       assert_selector "nav a[aria-current=true]", count: 0
 
@@ -65,9 +63,13 @@ class Classroom::ComprehensionTest < ApplicationSystemTestCase
     assert_selector "#comprehension nav a[aria-current=true]", count: 1, text: "Bronze"
     assert_bronze_panel
 
-    within "#pending_students" do
-      assert_selector "h2", text: "Pas encore faits · 3"
-      assert_equal [ "Zoé Abo", "Ibrahim Diallo", "Marc Touré" ], all("li").map(&:text)
+    # Sans filtre, les trois élèves qui ne l'ont pas fait ferment la liste : « Pas encore fait », sans date limite, sans « En retard ».
+    find("nav a[aria-current=true]").click
+    assert_no_selector "nav a[aria-current=true]"
+    within "#comprehension_panel" do
+      assert_equal [ "Zoé Abo", "Ibrahim Diallo", "Marc Touré" ], all("li").last(3).map { it.find("a").text }
+      assert_selector "li", text: "Pas encore fait", count: 3
+      assert_no_text "En retard"
     end
     assert_no_text(/\bessais?\b/i)
 
@@ -115,20 +117,19 @@ class Classroom::ComprehensionTest < ApplicationSystemTestCase
 
   def assert_bronze_panel
     within "#comprehension_questions" do
-      assert_selector "li[aria-label='Question 1 : 100#{NBSP}% de réussite']"
-      assert_selector "li[aria-label='Question 2 : 100#{NBSP}% de réussite, 50#{NBSP}% à la première session']",
-                      text: "1re session : 50 %"
-      # Q3 : juste à la 1re session de Sylla seule (25 %), fausse au meilleur essai de tous (0 %) : la classe a régressé.
-      assert_selector "li[aria-label='Question 3 : 0#{NBSP}% de réussite, 25#{NBSP}% à la première session, à reprendre en classe']",
-                      text: "À reprendre en classe"
-      assert_selector "ol li", text: "À reprendre en classe", count: 1
+      # Meilleur essai de chaque élève du Bronze : Q1 et Q2 justes pour les quatre, Q3 fausse pour les quatre.
+      assert_selector "ol li", count: 3
+      assert_selector "ol li:nth-child(1)", text: /1\.\s*Question 1\s*4 \/ 4 justes/
+      assert_selector "ol li:nth-child(2)", text: /2\.\s*Question 2\s*4 \/ 4 justes/
+      assert_selector "ol li:nth-child(3)", text: /3\.\s*Question 3\s*0 \/ 4 juste/
+      assert_no_text(/%|1re session|reprendre/)
     end
     within "#comprehension_panel" do
-      # rapports-de-classe, Lot C (UDR-0109 §3.1) : chaque nom est le lien vers la fiche de l'élève.
-      students = all("ul li").map { it.find("a").text }
-      assert_equal [ "Paul Zadi", "Fanta Sylla", "Aya Konan", "Bakary Adou" ], students
-      assert_selector "ul li", text: /Paul Zadi\s+65 %\s+En baisse/
-      assert_selector "ul li", text: /Aya Konan\s+67 %\s+1 session/
+      # rapports-de-classe, Lot C (UDR-0109 §3.1) : chaque nom est le lien vers la fiche de l'élève ; du meilleur score au plus faible.
+      assert_equal [ "Aya Konan", "Paul Zadi", "Bakary Adou", "Fanta Sylla" ], all("ul li").map { it.find("a").text }
+      assert_selector "ul li", text: /Aya Konan\s+Fait le \d+ \w+\.\s+.*13\/20/m
+      assert_selector "ul li", text: /Paul Zadi.*13\/20/m
+      assert_no_text(/En baisse|1 session|%|Pas encore fait/)
     end
   end
 end

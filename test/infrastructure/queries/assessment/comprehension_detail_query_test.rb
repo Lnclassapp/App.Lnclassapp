@@ -2,8 +2,8 @@ require "test_helper"
 
 # Lot B of rapports-exercices (ADR-0079 §4.3 to §4.7, UDR-0072 §3.5): the « Compréhension » section of the follow-up of
 # an assigned exercise. Every student counts by his best score; the class reads its categories and the summary of the
-# progress signs; a category reads the rate of each question on the best session (and on the first one when somebody
-# started over), then its students, the ones who need the teacher first. Read, never written.
+# progress signs; a category reads, for each question, how many of its students got it right on their best session, then
+# its students, best score first, with the day of their first hand-in, their grade on 20 and their badge. Read, never written.
 module Queries
   module Assessment
     class ComprehensionDetailQueryTest < ActiveSupport::TestCase
@@ -38,6 +38,7 @@ module Queries
       end
 
       def rates(detail) = detail.questions.map(&:rate)
+      def counts(detail) = detail.questions.map { [ it.correct, it.answered ] }
 
       test "the five badge counts and the summary of the signs, without the students of a single session" do
         student(scores: [ 30, 90 ])
@@ -72,10 +73,10 @@ module Queries
 
         assert_equal [ counts.done, counts.done + counts.pending ], [ result.done, result.present ]
         assert_equal [ 1, 1 ], [ result.done, result.present ]
-        assert_equal [ [ 100, :progress ] ], result.students.map { [ it.best, it.trend ] }
+        assert_equal [ [ 100, 20, :diamond ] ], result.students.map { [ it.best, it.grade, it.badge ] }
       end
 
-      test "25 % in a standard session, then 75 % in remediation: « Acquis », a progress, the rates read on the remediation" do
+      test "25 % in a standard session, then 75 % in remediation: « Argent », a progress, the questions read on the remediation" do
         learner = student("Awa", "Remediee", scores: [ 25 ], answers: [ { 1 => false, 2 => false, 3 => true } ])
         hand_in(learner, 75, answers: { 1 => true, 2 => true, 3 => false }, gap: create_gap(student: learner, essential: @exercise.essential))
 
@@ -83,8 +84,8 @@ module Queries
 
         assert_equal [ 1, nil, { none: 0, bronze: 0, silver: 1, gold: 0, diamond: 0 } ], result.to_h.values_at(:done, :selected, :badge_counts)
         assert_equal({ progress: 1, flat: 0, decline: 0 }, result.trend_counts)
-        assert_equal [ [ "Awa Remediee", 75, :progress ] ], result.students.map { [ it.display_name, it.best, it.trend ] }
-        assert_equal [ [ 100, 0 ], [ 100, 0 ], [ 0, 100 ] ], result.questions.map { [ it.rate, it.first_rate ] }
+        assert_equal [ [ "Awa Remediee", 75, 15, :silver ] ], result.students.map { [ it.display_name, it.best, it.grade, it.badge ] }
+        assert_equal [ [ 100, 1, 1 ], [ 100, 1, 1 ], [ 0, 0, 1 ] ], result.questions.map { [ it.rate, it.correct, it.answered ] }
       end
 
       test "nobody did it: nothing to read, every box at zero, no student" do
@@ -97,6 +98,7 @@ module Queries
         assert_equal({ progress: 0, flat: 0, decline: 0 }, result.trend_counts)
         assert_empty result.students
         assert_equal [ nil, nil, nil ], rates(result)
+        assert_equal [ [ 0, 0 ], [ 0, 0 ], [ 0, 0 ] ], counts(result)
       end
 
       test "under 5 done, no reading, but every student who did it is listed" do
@@ -148,79 +150,65 @@ module Queries
         assert_equal [ 1, 2, 3 ], questions.map(&:number)
         assert_equal [ "<p>Question 2</p>", "<p>Question 3</p>", "<p>Question 1</p>" ], questions.map(&:content)
         assert_equal [ 33, nil, 100 ], questions.map(&:rate)
+        assert_equal [ [ 1, 3 ], [ 0, 0 ], [ 1, 1 ] ], counts(detail)
       end
 
-      test "progress per question: the first session reads 0 % where the best reads 100 %; under 10/20 it is to revisit" do
+      test "per question: the students who got it right on their best session, over the ones who answered it, in a badge" do
         student(scores: [ 40, 60 ], answers: [ { 1 => true, 2 => false, 3 => false }, { 1 => true, 2 => true, 3 => false } ])
         student(scores: [ 30, 65 ], answers: [ { 1 => false, 2 => false, 3 => false }, { 1 => false, 2 => true, 3 => false } ])
-
-        questions = detail(badge: :bronze).questions
-
-        assert_equal [ 50, 100, 0 ], questions.map(&:rate)
-        assert_equal [ 50, 0, 0 ], questions.map(&:first_rate)
-        assert_equal [ false, false, true ], questions.map(&:to_revisit)
-      end
-
-      # ADR-0106: the rate reads like a score. 49 % displays 10/20, the grade of the pass threshold: not to revisit.
-      test "a question at 49 % reads 10/20 and is not to revisit, one at 46 % reads 9/20 and is" do
-        35.times { |index| student(scores: [ 90 ], answers: [ { 1 => index < 17, 2 => index < 16 } ]) }
-
-        first, second = detail.questions.first(2)
-
-        assert_equal [ [ 49, false ], [ 46, true ] ], [ [ first.rate, first.to_revisit ], [ second.rate, second.to_revisit ] ]
-      end
-
-      test "without a student of two sessions in the category, no rate at the first session" do
         student(scores: [ 90 ], answers: [ { 1 => true } ])
-        student(scores: [ 40, 50 ], answers: [ { 1 => false }, { 1 => true } ])
 
-        assert_equal [ nil, nil, nil ], detail(badge: :gold).questions.map(&:first_rate)
-        assert_equal [ 0, nil, nil ], detail(badge: :bronze).questions.map(&:first_rate)
+        assert_equal [ [ 1, 2 ], [ 2, 2 ], [ 0, 2 ] ], counts(detail(badge: :bronze))
+        assert_equal [ [ 1, 1 ], [ 0, 0 ], [ 0, 0 ] ], counts(detail(badge: :gold))
+        assert_equal [ [ 2, 3 ], [ 2, 2 ], [ 0, 2 ] ], counts(detail)
       end
 
-      # ADR-0079 §4.5: in a category mixing students of one session and of several, « 1re session » reads the first session
-      # of every student of the category, the single-session ones included: theirs is their first.
-      test "a mixed badge: the rate at the first session reads the first session of every student, one session or several" do
-        student(scores: [ 30, 60 ], answers: [ { 1 => false, 2 => false }, { 1 => true, 2 => true } ])
-        student(scores: [ 55 ], answers: [ { 1 => true, 2 => false } ])
-        student(scores: [ 65 ], answers: [ { 1 => true, 2 => true } ])
-        student(scores: [ 50 ], answers: [ { 1 => false, 2 => false } ])
+      test "the question to revisit is the least successful one of the whole class, whatever the badge asked; none without attempt" do
+        assert_nil detail.weakest_question
 
-        questions = detail(badge: :bronze).questions
+        student(scores: [ 90 ], answers: [ { 1 => true, 2 => true, 3 => true } ])
+        student(scores: [ 55 ], answers: [ { 1 => true, 2 => false, 3 => false } ])
+        student(scores: [ 60 ], answers: [ { 1 => true, 2 => false, 3 => true } ])
 
-        # Best sessions — Q1: true, true, true, false → 3/4; Q2: true, false, true, false → 2/4.
-        assert_equal [ 75, 50, nil ], questions.map(&:rate)
-        # First sessions — Q1: false, true, true, false → 2/4; Q2: false, false, true, false → 1/4. Read on the student of
-        # two sessions alone, both would be 0 %.
-        assert_equal [ 50, 25, nil ], questions.map(&:first_rate)
+        assert_equal 2, detail.weakest_question
+        assert_equal 2, detail(badge: :gold).weakest_question
+        assert_equal [ 100, 100, 100 ], detail(badge: :gold).questions.map(&:rate)
       end
 
       test "on a tie of the best score, the most recent session counts for the rates" do
         student(scores: [ 80, 80 ], answers: [ { 1 => false, 2 => true }, { 1 => true, 2 => false } ])
 
-        questions = detail.questions
-
-        assert_equal [ 100, 0, nil ], questions.map(&:rate)
-        assert_equal [ 0, 100, nil ], questions.map(&:first_rate)
+        assert_equal [ [ 1, 1 ], [ 0, 1 ], [ 0, 0 ] ], counts(detail)
       end
 
-      test "the students of a badge: declining, stagnant, single session, stable, progressing, then by name" do
+      test "the students, best score first, then by last name and first name, each with his grade on 20 and his badge" do
         student("Koffi", "Progres", scores: [ 50, 67 ])
         student("Awa", "Seule", scores: [ 55 ])
         student("Jean", "Baisse", scores: [ 65, 50 ])
         student("Zoé", "Achi", scores: [ 58 ])
-        student("Ali", "Stagne", scores: [ 60, 62 ])
-        student("Yao", "Achi", scores: [ 52 ])
+        student("Yao", "Achi", scores: [ 58 ])
+        student("Marc", "Haut", scores: [ 90, 100 ])
+        student("Ali", "Pas-Encore", scores: [ 42 ])
 
-        assert_equal [ [ "Jean Baisse", 65, :decline ], [ "Ali Stagne", 62, :stagnant ], [ "Yao Achi", 52, nil ],
-                       [ "Zoé Achi", 58, nil ], [ "Awa Seule", 55, nil ], [ "Koffi Progres", 67, :progress ] ],
-                     detail(badge: :bronze).students.map { [ it.display_name, it.best, it.trend ] }
+        assert_equal [ [ "Marc Haut", 100, 20, :diamond ], [ "Koffi Progres", 67, 13, :bronze ], [ "Jean Baisse", 65, 13, :bronze ],
+                       [ "Yao Achi", 58, 12, :bronze ], [ "Zoé Achi", 58, 12, :bronze ], [ "Awa Seule", 55, 11, :bronze ],
+                       [ "Ali Pas-Encore", 42, 8, :none ] ],
+                     detail.students.map { [ it.display_name, it.best, it.grade, it.badge ] }
+        assert_equal [ "Koffi Progres", "Jean Baisse", "Yao Achi", "Zoé Achi", "Awa Seule" ],
+                     detail(badge: :bronze).students.map(&:display_name)
+      end
 
-        student("Marc", "Progres", scores: [ 60, 90 ])
-        student("Léa", "Stable", scores: [ 85, 80 ])
+      test "the day of the first hand-in, local, is the one of the first done session, whatever the best one" do
+        early = student("Awa", "Tôt")
+        hand_in(early, 40)
+        @clock = Time.zone.local(2026, 10, 9, 23, 30)
+        hand_in(early, 90)
+        late = student("Koffi", "Tard")
+        @clock = Time.zone.local(2026, 10, 12, 8)
+        hand_in(late, 60)
 
-        assert_equal [ [ "Léa Stable", :stable ], [ "Marc Progres", :progress ] ],
-                     detail(badge: :gold).students.map { [ it.display_name, it.trend ] }
+        assert_equal [ [ "Awa Tôt", Date.new(2026, 10, 5) ], [ "Koffi Tard", Date.new(2026, 10, 12) ] ],
+                     detail.students.map { [ it.display_name, it.done_on ] }
       end
 
       # ADR-0097 §4.9 : le nom d'un élève d'une catégorie mène à sa fiche, par son public_id.
@@ -228,18 +216,6 @@ module Queries
         awa = student("Awa", "Bamba", scores: [ 55 ])
 
         assert_equal [ awa.public_id ], detail(badge: :bronze).students.map(&:public_id)
-      end
-
-      # Stagnant means a best score under MASTERY_THRESHOLD, stable one from it: they never share a category. The single
-      # session sits between declining and stable in the same list, whatever the names say.
-      test "in one list, the single session comes after declining and before stable and progressing, against the name order" do
-        student("Aya", "Aba", scores: [ 70, 90 ])
-        student("Ali", "Abe", scores: [ 80, 85 ])
-        student("Yao", "Yeo", scores: [ 85 ])
-        student("Zoé", "Zoro", scores: [ 95, 80 ])
-
-        assert_equal [ [ "Zoé Zoro", :decline ], [ "Yao Yeo", nil ], [ "Ali Abe", :stable ], [ "Aya Aba", :progress ] ],
-                     detail(badge: :gold).students.map { [ it.display_name, it.trend ] }
       end
 
       test "a student of two classrooms: his session on the assignment of the other classroom does not count in this one" do
@@ -253,10 +229,9 @@ module Queries
 
         assert_equal [ 1, 1, { none: 0, bronze: 1, silver: 0, gold: 0, diamond: 0 } ], [ result.done, result.present, result.badge_counts ]
         assert_equal({ progress: 0, flat: 0, decline: 0 }, result.trend_counts)
-        assert_equal [ [ 60, nil ] ], result.students.map { [ it.best, it.trend ] }
-        assert_equal [ [ 0, nil ], [ 0, nil ], [ nil, nil ] ], result.questions.map { [ it.rate, it.first_rate ] }
-        assert_equal [ [ 100, nil ] ], detail(badge: :diamond, assignment: other, classroom_public_id: other_classroom.public_id)
-                                         .students.map { [ it.best, it.trend ] }
+        assert_equal [ 60 ], result.students.map(&:best)
+        assert_equal [ [ 0, 1 ], [ 0, 1 ], [ 0, 0 ] ], counts(result)
+        assert_equal [ 100 ], detail(badge: :diamond, assignment: other, classroom_public_id: other_classroom.public_id).students.map(&:best)
       end
 
       test "an archived assignment, one of another classroom or an unknown one has no detail" do
@@ -274,7 +249,7 @@ module Queries
         6.times { |index| student(scores: [ 50 + index, 95 ], answers: [ { 1 => true, 2 => false }, { 1 => true, 3 => true } ]) }
         2.times { student }
 
-        assert_equal 6, few
+        assert_equal 7, few
         assert_equal few, count_queries { detail }
         assert_equal 7, detail.students.size
       end
