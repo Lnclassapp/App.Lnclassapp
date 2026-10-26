@@ -1,6 +1,6 @@
 # Assignation d'un exercice à une classe : bascule, modale des jours de séance et streams (plan boucle-pedagogique, Lot D5 ;
 # fonctions-espace-eleve, Lot C ; reorganisation-equipe-enseignant, Lot F) — ADR-0048, ADR-0072, UDR-0007, UDR-0028, UDR-0062 §3.4,
-# UDR-0069 §3.8
+# UDR-0069 §3.8, UDR enseignant §3.13 (« Plus tard » retiré)
 fr:
   classroom:
     assignments:
@@ -15,10 +15,11 @@ fr:
         archive_from_label: "Retirer « %{name} » de %{classroom}"
       new:
         title: "Quels jours voyez-vous la %{classroom} ?"
-        context: "%{name} sera à rendre pour la séance suivante."
+        context: "L'exercice sera à rendre à votre prochaine séance. Vous ne le dites qu'une fois par classe."
         legend: "Jours de séance"
-        weekdays_blank: "Cochez au moins un jour, ou choisissez « Plus tard »."
-        later: "Plus tard"
+        weekdays_blank: "Cochez au moins un jour."
+        next_session: "Prochaine séance :"
+        cancel: "Annuler"
         submit: "Assigner"
         short:
           "1": "Lun."

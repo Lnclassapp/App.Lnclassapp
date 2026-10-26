@@ -1,6 +1,6 @@
 # 🌐 UI · Assessment::ComprehensionHelper — couleur, icône et libellé de la compréhension d'un exercice assigné
 # Rôle : seul endroit où une catégorie ou un signe de progrès devient une classe, une icône ou un texte (écrans enseignant)
-# ADR  : 0033, 0079, 0097 (§4.6) · UDR : 0072 (§3.2, §3.3), 0109 (§3.2)
+# ADR  : 0033, 0079, 0097 (§4.6) · UDR : 0072 (§3.2, §3.3), 0109 (§3.2), enseignant (§3.8)
 module Assessment
   module ComprehensionHelper
     DOT_CLASSES = { struggling: "bg-struggling", fragile: "bg-fragile", acquired: "bg-success" }.freeze
@@ -47,6 +47,7 @@ module Assessment
       when nil then nil
       when :remind then [ step, { count: pending, min: Entities::Assessment::Comprehension::MIN_DONE_FOR_READING } ]
       when :watch_decline then [ step, { count: decline } ]
+      when :revisit_notion then [ step, { count: comprehension.badge_counts.fetch(:none) } ]
       else [ step, {} ]
       end
     end
@@ -64,10 +65,15 @@ module Assessment
       count.zero? ? "text-line" : BADGE_ICON_CLASSES.fetch(level)
     end
 
+    # UDR enseignant §3.8 : une des cinq cases du rapport. badge : :none (« Pas encore ») ou un palier.
+    def comprehension_box_label(badge)
+      badge == :none ? t("assessment.comprehension.badge_none") : badge_label(badge)
+    end
+
     # Le premier appel d'une page émet aussi le <symbol> ; les suivants ne font que le reprendre.
-    def comprehension_trophy(css_class)
+    def comprehension_trophy(css_class, size: "size-4")
       icon = tag.svg(tag.use(href: "##{TROPHY_SYMBOL_ID}"), viewBox: "0 0 20 20", fill: "currentColor",
-                     class: class_names("size-4 shrink-0", css_class), "aria-hidden": "true", focusable: "false")
+                     class: class_names(size, "shrink-0", css_class), "aria-hidden": "true", focusable: "false")
       return icon if @comprehension_trophy_defined
 
       @comprehension_trophy_defined = true

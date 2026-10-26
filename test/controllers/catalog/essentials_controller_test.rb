@@ -201,7 +201,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
       # Sur téléphone, le titre suffit : « Ouvrir » ne se montre qu'à partir de 640 px.
       assert_select "a.hidden.sm\\:inline-flex[href='#{exercise_path(@exercise.public_id)}']",
                     text: I18n.t("#{scope}.exercise_progress.open")
-      assert_select "p.text-sm.text-mute", text: "#{I18n.t("#{scope}.exercise_progress.exercise_types.#{@exercise.exercise_type}")} · " \
+      assert_select "p.text-meta.text-mute", text: "#{I18n.t("#{scope}.exercise_progress.exercise_types.#{@exercise.exercise_type}")} · " \
                                                   "#{I18n.t("#{scope}.exercise_progress.questions", count: @exercise.questions.count)}"
     end
     # Tle D 1 : jours connus, « Assigner » assigne en un clic.

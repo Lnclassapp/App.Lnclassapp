@@ -40,7 +40,7 @@ module Assessment
       assert_equal "8 en progrès · 7 sans évolution · 1 en baisse",
                    t("#{scope}.trends_summary.sentence_html", **%i[progress flat decline].zip([ 8, 7, 1 ]).to_h { |key, count| [ key, t("#{scope}.trends_summary.#{key}", count:) ] })
       assert_equal [ "Pas encore fait · 1", "Pas encore faits · 7" ], [ 1, 7 ].map { t("#{scope}.pending.title", count: it) }
-      %w[categories_label questions_title students_title question_number no_attempt first_rate first_rate_label to_revisit
+      %w[badges_label questions_title students_title question_number no_attempt first_rate first_rate_label to_revisit
          to_revisit_label].each { assert I18n.exists?("#{scope}.section.#{it}", :fr), it }
       %w[no_trend empty.title empty.description empty_category].each { assert I18n.exists?("#{scope}.#{it}", :fr), it }
     end
@@ -56,38 +56,27 @@ module Assessment
       end
     end
 
-    test "the large circle of an unreadable class: grey dot, label in display font, the ratio under it" do
-      render partial: "assessment/comprehension/circle", locals: { category: nil, done: 4, present: 25, size: :lg }
-
-      assert_dom "span.rounded-full.size-14.bg-line[aria-hidden=true]", count: 1
-      assert_dom "span.font-display.text-xl.font-medium.text-ink", text: "Pas encore lisible"
-      assert_dom "span.text-sm.text-mute.tabular-nums", text: "4/25"
-      assert_dom "span.size-4", count: 0
-    end
-
-    test "the badge counts: always the four tiers in order, a zero faded, each tier told to screen readers" do
-      render partial: "assessment/comprehension/badge_counts", locals: { counts: { bronze: 0, silver: 1, gold: 2, diamond: 3 } }
-
-      assert_dom "ul.flex.items-center.gap-2[aria-label=?]", "Badges de la classe" do
-        assert_dom "li", count: 4
-        assert_equal [ "0 Bronze", "1 Argent", "2 Or", "3 Diamant" ], css_select("li span.sr-only").map(&:text)
-        assert_dom "li:nth-child(1) svg.text-line[aria-hidden=true]"
-        assert_dom "li:nth-child(1) span.text-sm.tabular-nums.text-line[aria-hidden=true]", text: "0"
-        assert_dom "li:nth-child(2) svg.text-mute"
-        assert_dom "li:nth-child(3) svg.text-gold"
-        assert_dom "li:nth-child(4) svg.text-info"
-        assert_dom "li:nth-child(4) span.text-sm.tabular-nums.text-ink", text: "3"
+    # UDR enseignant §3.8 : le grand cercle du rapport disparaît, ne reste que le petit format de la page classe.
+    test "the large circle is gone: the circle partial no longer accepts a size" do
+      assert_raises(ActionView::Template::Error) do
+        render partial: "assessment/comprehension/circle", locals: { category: nil, done: 4, present: 25, size: :lg }
       end
     end
 
-    test "the trophy is defined once per page, then reused: a <symbol>, and one <use> per tier" do
-      counts = { bronze: 1, silver: 0, gold: 0, diamond: 2 }
-      # Les deux partiels dans un seul rendu : depuis Rails 8.1.4, chaque render du test repart d'une page vide.
-      render inline: "<%= render 'assessment/comprehension/badge_counts', counts: %>" * 2, locals: { counts: }
+    test "the badge boxes: five links in the order, a count and a label each, read « 3 élèves Or », the active one links back to all" do
+      counts = { none: 4, bronze: 6, silver: 1, gold: 3, diamond: 0 }
+      classroom = Struct.new(:public_id).new("cls-1")
+      render partial: "assessment/comprehension/badge_boxes",
+             locals: { counts:, selected: :gold, classroom:, assignment_public_id: "asg-1" }
 
-      assert_dom "symbol#comprehension-trophy[viewBox='0 0 20 20'] path", count: 1
-      assert_dom "svg use[href='#comprehension-trophy']", count: 8
-      assert_dom "svg.absolute.size-0[aria-hidden=true] symbol", count: 1
+      assert_dom "nav[aria-label='Élèves par badge'] a", count: 5
+      assert_equal [ "Pas encore", "Bronze", "Argent", "Or", "Diamant" ], css_select("nav a span.text-xs").map { it.text.strip }
+      assert_equal %w[4 6 1 3 0], css_select("nav a span.font-display").map { it.text.strip }
+      assert_dom "nav a[href='/classrooms/cls-1/assignments/asg-1?badge=bronze']"
+      assert_dom "nav a[aria-current=true][href='/classrooms/cls-1/assignments/asg-1']", count: 1
+      assert_dom "nav a .sr-only", text: "3 élèves Or"
+      assert_dom "nav a .sr-only", text: "1 élève Argent"
+      assert_dom "nav a .sr-only", text: "0 élève Diamant"
     end
 
     test "the small circle never breaks nor truncates: the label makes the colour readable" do
@@ -103,13 +92,20 @@ module Assessment
     def detail(done:, present:, dominant: nil, decline: 0)
       Queries::Assessment::ComprehensionDetailQuery::Detail.new(
         done:, present:, category: dominant, readable: Entities::Assessment::Comprehension.readable?(done),
-        category_counts: {}, trend_counts: { progress: 0, flat: 0, decline: }, selected: :struggling, questions: [], students: []
+        badge_counts: { none: 4, bronze: 0, silver: 0, gold: 0, diamond: 0 }, trend_counts: { progress: 0, flat: 0, decline: }, selected: nil, questions: [], students: []
       )
     end
 
     def next_step_sentence(comprehension)
       step, options = comprehension_next_step(comprehension)
       t("assessment.comprehension.next_step.#{step}", **options)
+    end
+
+    test "the next step speaks in badges, never in the old categories" do
+      %w[remind look_at_each revisit_notion revisit_questions watch_decline move_on].each do |step|
+        texts = I18n.t("assessment.comprehension.next_step.#{step}", locale: :fr, count: 2, min: 5)
+        Array(texts.is_a?(Hash) ? texts.values : texts).each { assert_no_match(/difficulté|Fragile|Acquis/i, it, step) }
+      end
     end
 
     test "the warning « pas encore fiable » is gone: the next step says the bound (UDR-0109 §3.3)" do
@@ -119,24 +115,24 @@ module Assessment
     test "the next step: nothing when nobody did it; the counts and the bound interpolated" do
       assert_nil comprehension_next_step(detail(done: 0, present: 25))
       assert_equal [ :remind, { count: 22, min: 5 } ], comprehension_next_step(detail(done: 3, present: 25))
-      assert_equal "Relancez les 22 élèves qui ne l'ont pas encore fait : la lecture de la classe sera fiable à partir de 5.",
+      assert_equal "Relancez les 22 élèves qui ne l'ont pas encore fait : les badges de la classe se liront à partir de 5 élèves.",
                    next_step_sentence(detail(done: 3, present: 25))
-      assert_equal "Relancez l'élève qui ne l'a pas encore fait : la lecture de la classe sera fiable à partir de 5.",
+      assert_equal "Relancez l'élève qui ne l'a pas encore fait : les badges de la classe se liront à partir de 5 élèves.",
                    next_step_sentence(detail(done: 4, present: 5))
       assert_equal [ :look_at_each, {} ], comprehension_next_step(detail(done: 4, present: 4))
-      assert_equal [ :revisit_notion, {} ], comprehension_next_step(detail(done: 6, present: 6, dominant: :struggling))
+      assert_equal [ :revisit_notion, { count: 4 } ], comprehension_next_step(detail(done: 6, present: 6, dominant: :struggling))
       assert_equal [ :revisit_questions, {} ], comprehension_next_step(detail(done: 6, present: 9, dominant: :fragile))
-      assert_equal "Tous les élèves l'ont fait. La classe est trop petite pour une tendance : regardez chaque élève.",
+      assert_equal "Tous les élèves l'ont fait. La classe est trop petite pour comparer les badges : regardez chaque élève.",
                    next_step_sentence(detail(done: 4, present: 4))
-      assert_equal "La plupart des élèves sont en difficulté : reprenez la notion avant d'avancer.",
+      assert_equal "4 élèves n'ont pas encore de badge. Reprenez la notion en classe avant d'avancer, puis relancez-les.",
                    next_step_sentence(detail(done: 6, present: 6, dominant: :struggling))
-      assert_equal "La notion se met en place : reprenez en classe les questions marquées, puis avancez.",
+      assert_equal "La plupart des élèves en sont au Bronze : reprenez en classe les questions marquées, puis avancez.",
                    next_step_sentence(detail(done: 6, present: 9, dominant: :fragile))
-      assert_equal "La classe a compris. 2 élèves sont en baisse : voyez-les dans leur catégorie.",
+      assert_equal "La classe a atteint l'Argent ou mieux. 2 élèves sont en baisse : voyez-les dans la liste.",
                    next_step_sentence(detail(done: 9, present: 9, dominant: :acquired, decline: 2))
-      assert_equal "La classe a compris. Un élève est en baisse : voyez-le dans sa catégorie.",
+      assert_equal "La classe a atteint l'Argent ou mieux. Un élève est en baisse : voyez-le dans la liste.",
                    next_step_sentence(detail(done: 9, present: 9, dominant: :acquired, decline: 1))
-      assert_equal "La classe a compris : vous pouvez avancer.", next_step_sentence(detail(done: 9, present: 9, dominant: :acquired))
+      assert_equal "La classe a atteint l'Argent ou mieux : vous pouvez avancer.", next_step_sentence(detail(done: 9, present: 9, dominant: :acquired))
     end
   end
 end

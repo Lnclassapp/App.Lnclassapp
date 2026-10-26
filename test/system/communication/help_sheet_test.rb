@@ -10,13 +10,12 @@ require "application_system_test_case"
 # quitte l'accueil. UDR-0080 §3.1 (app-android) : « Besoin d'aide ? » est dans l'en-tête de l'élève, à toute largeur ;
 # il ne passe plus par le menu du compte. UDR-0084 §3.1, §3.2 (accueil-eleve) : dès 700 px seulement ; en dessous, il
 # était dans le menu de l'avatar. Mvp-teacher-student : « Mon compte » (lot E1) ne le porte plus, et sur l'accueil, sous lg,
-# le bandeau (lot D) remplace l'en-tête et son « Besoin d'aide ? » mène à /aide. La feuille « téléphone » se joue donc à 700 px,
-# la largeur la plus étroite où l'en-tête la montre, sur « Cours ».
+# le bandeau (lot D) remplace l'en-tête et son « Besoin d'aide ? » mène à /aide. Porteur, 2026-10-26 : hors de l'accueil, l'aide
+# reste dans l'en-tête à toute largeur ; la feuille « téléphone » se joue à 390 px, sur « Cours ».
 class Communication::HelpSheetTest < ApplicationSystemTestCase
   DESKTOP_VIEWPORT = [ 1280, 900 ].freeze
   TRIGGER = "a[aria-controls=help-sheet]".freeze
-  # The narrowest width where the header shows « Besoin d'aide ? »: the sheet still rises from the bottom there.
-  PHONE_VIEWPORT = [ 700, 844 ].freeze
+  PHONE_VIEWPORT = [ 390, 844 ].freeze
 
   setup { sign_in_as create_student(classroom: create_classroom) }
 

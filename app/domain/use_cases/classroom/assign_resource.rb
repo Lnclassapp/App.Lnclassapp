@@ -30,7 +30,7 @@ module UseCases
 
       # dto : Dtos::Classroom::AssignmentInput ; dto.weekdays (non nil) = étape « Quels jours ? » remplie (ADR-0072 §4.3).
       # → Result(Assigned) | :not_found (classe, ou ressource absente ou non lisible) | :forbidden (y compris des jours
-      #   envoyés par qui n'en a pas : l'équipe) | :invalid (type, ou aucun jour coché) | :conflict (already_assigned | other_level)
+      #   envoyés par qui n'en a pas : l'équipe) | :invalid (type, aucun jour coché, ou aucun jour connu d'un enseignant) | :conflict (already_assigned | other_level)
       def call(actor:, dto:)
         classroom = @classrooms.find_by_public_id(public_id: dto.classroom_public_id)
         return Shared::Result.failure(:not_found) if classroom.nil?
@@ -68,12 +68,22 @@ module UseCases
 
         now = @clock.now
         created = @transaction.call do
+          require_days!(actor, classroom, weekdays)
           @session_days.replace(teacher_id: actor.user_id, classroom_id: classroom.id, weekdays:, at: now) if weekdays
           write(actor, classroom, assignable, now).tap { raise Refused, it if it.failure? }
         end
         Shared::Result.success(Assigned.new(assignment: created.value, classroom:))
       rescue Refused => e
         e.result
+      end
+
+      # UDR enseignant §3.13 : un enseignant sans jours pour la classe n'assigne qu'avec au moins un jour, même par un envoi qui
+      # contourne la fenêtre (champ absent). L'équipe, que la policy des jours refuse, assigne sans échéance (ADR-0072 §4.3).
+      def require_days!(actor, classroom, weekdays)
+        return if weekdays || @session_days_policy.call(actor:, classroom:).failure?
+        return unless @session_days.for(teacher_id: actor.user_id, classroom_id: classroom.id).none?
+
+        raise Refused, Shared::Result.failure(:invalid, errors: { weekdays: [ :blank ] })
       end
 
       # Figée ici, jamais recalculée : la date locale d'Abidjan (clock = Time.zone), nil sans jours (ADR-0072 §4.3).

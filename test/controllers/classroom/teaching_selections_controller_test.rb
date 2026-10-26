@@ -32,7 +32,11 @@ class Classroom::TeachingSelectionsControllerTest < ActionDispatch::IntegrationT
     assert_select "form#teaching_#{@third_b.public_id} input[name=_method][value=delete]", 1
     assert_select "form#teaching_#{@third_b.public_id} button[aria-pressed=true]", text: /3ème B/
     assert_select "#teaching_counter[aria-live=polite]", text: I18n.t("classroom.teachings.counter.count", count: 1)
-    assert_select "form#teacher-onboarding-form[action='#{teacher_onboarding_path}'] button[type=submit]", text: tl("index.finish")
+    assert_select "form#teacher-onboarding-form[action='#{teacher_onboarding_path}'] button[type=submit].ui-button-primary.w-full", text: tl("index.finish")
+    # UDR enseignant §3.13 : « 1 classe cochée » dans une pastille ; ni « ‹ Accueil » avant la fin de l'onboarding, ni « Inviter un collègue ».
+    assert_select ".bg-brand-soft.rounded-full > #teaching_counter", text: "1 classe cochée"
+    assert_select "main a[href='#{teacher_home_path}']", 0
+    assert_select "main a[href='#{teacher_invite_path}']", 0
   end
 
   test "an onboarded teacher keeps the page to change the classrooms, without « Terminer », and signs in to /teachers" do
@@ -44,7 +48,7 @@ class Classroom::TeachingSelectionsControllerTest < ActionDispatch::IntegrationT
 
     assert_response :success
     assert_select "#teacher-onboarding-form", 0
-    assert_select "a[href='#{teacher_home_path}']", text: tl("index.back_home")
+    assert_select "main nav a[href='#{teacher_home_path}']", text: tl("index.back_home")
     assert_select "#teaching_counter", text: I18n.t("classroom.teachings.counter.count", count: 0)
   end
 

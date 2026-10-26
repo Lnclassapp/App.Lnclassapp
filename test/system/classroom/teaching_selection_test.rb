@@ -63,6 +63,8 @@ class Classroom::TeachingSelectionTest < ApplicationSystemTestCase
         toggle("3ème B").click
         assert_selector "#teaching_counter", text: counter(1)
       end
+      assert_equal page.evaluate_script("document.documentElement.clientWidth"),
+                   page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
       click_on tl("index.finish")
 
       assert_current_path teacher_home_path

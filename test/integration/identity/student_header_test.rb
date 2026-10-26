@@ -1,7 +1,7 @@
 require "test_helper"
 
 # CA-1, CA-3, CA-4 (accueil-eleve) — UDR-0084 §3.1, §3.2, §3.4, §3.10, which replace UDR-0080 §3.1–3.2 for the web
-# student. The header carries the Lnclass logo on the left; on the right « Besoin d'aide ? » (from 700 px), then the
+# student. The header carries the Lnclass logo on the left; on the right « Besoin d'aide ? » (at every width), then the
 # avatar alone, a button that opens « Mon compte » (lot E1 of mvp-teacher-student: a full-screen <dialog>, no longer a
 # dropdown). No light / dark switch in the header bar any more (UDR écrans élève §3.1): the dark mode is in « Mon compte ».
 # /students/menu renders the same list as a page (test/controllers/classroom/student_menus_controller_test.rb). The teacher
@@ -18,7 +18,7 @@ class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
   # Text of each entry of « Mon compte », in the order of the page: the links, the dark mode switch, sign-out.
   def menu_items = css_select("#avatar-menu nav a, #avatar-menu button[role=switch], #avatar-menu form button").map { it.text.squish }
 
-  test "CA-1: the student's header — logo on the left; help from 700 px and the avatar alone on the right, no switch" do
+  test "CA-1: the student's header — logo on the left; help at every width and the avatar alone on the right, no switch" do
     student = create_student(classroom: @classroom, first_name: "Awa", last_name: "Koné")
     sign_in_as student
 
@@ -28,7 +28,7 @@ class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
     assert_select "header > div.flex > *", count: 2 do |(left, right)|
       assert_equal [ "a", student_home_path, "Lnclass" ], [ left.name, left["href"], left.text.squish ]
       assert_select left, "img[src*='logo/lnclass'][alt='']"
-      assert_select right, "a[href='#{help_path}'][aria-controls=help-sheet].hidden\\!.min-\\[700px\\]\\:inline-flex\\!.text-brand-strong\\!.font-medium\\!",
+      assert_select right, "a[href='#{help_path}'][aria-controls=help-sheet].text-brand-strong\\!.font-medium\\!:not(.hidden\\!)",
                     text: I18n.t("shared.help_sheet.trigger")
       assert_select right, "a[aria-controls=help-sheet] svg path[d^='M3.75 14.25V12a8.25']" # the headset (UDR-0084 §3.1)
       # No switch in the bar itself: the only one is inside « Mon compte ».

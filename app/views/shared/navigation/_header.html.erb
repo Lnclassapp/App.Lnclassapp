@@ -8,9 +8,9 @@
     <div class="absolute inset-x-0 top-0 h-1 <%= accent %>" aria-hidden="true"></div>
   <% end %>
   <% if user.role.to_sym == :student %>
-    <%# UDR-0084 §3.1 : le logo à gauche ; à droite « Besoin d'aide ? » dès 700 px (en dessous, il passe dans le menu de
-        l'avatar : seul son déclencheur se cache, la <dialog> reste rendue pour ce menu), l'avatar seul. UDR élève §3.1 : plus de
-        lune, le mode sombre est dans le menu. %>
+    <%# UDR-0084 §3.1 : le logo à gauche ; à droite « Besoin d'aide ? » puis l'avatar seul. Porteur, 2026-10-26 (mvp-teacher-student,
+        lot D) : l'aide reste dans l'en-tête à toute largeur, « Mon compte » ne la porte plus. UDR élève §3.1 : plus de lune, le
+        mode sombre est dans le menu. %>
     <div class="flex h-full items-center justify-between gap-3 px-gutter lg:px-8">
       <%= link_to student_home_path, class: "flex items-center gap-2.5 rounded-full focus-visible:outline-2 focus-visible:outline-brand" do %>
         <%= image_tag brand_logo, alt: "", class: "size-9 rounded-sm" %>
@@ -18,7 +18,7 @@
       <% end %>
       <div class="flex items-center gap-1">
         <%= render "shared/help_sheet", trigger_icon: "headset", user:,
-                                        trigger_class: "hidden! min-[700px]:inline-flex! font-medium! text-brand-strong!" %>
+                                        trigger_class: "font-medium! text-brand-strong!" %>
         <%= render "shared/navigation/avatar_menu", user: %>
       </div>
     </div>

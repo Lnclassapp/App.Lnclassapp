@@ -12,7 +12,7 @@ module Queries
         @school = create_school(name: "Lycée Classique d'Abidjan")
         @classroom = create_classroom(school: @school, name: "3ème B")
         svt = create_material(name: "SVT", category: "science")
-        @exercise = create_exercise(essential: create_essential(course: create_course(material: svt)), title: "La méiose")
+        @exercise = create_exercise(essential: create_essential(course: create_course(material: svt)), title: "La méiose", questions: 4)
         @assignment = travel_to(Time.zone.local(2026, 10, 5, 9)) do
           create_assignment(classroom: @classroom, assignable: @exercise, due_on: DUE_ON)
         end
@@ -25,6 +25,18 @@ module Queries
       def hand_in(student, at:, assignment: @assignment, **attributes)
         create_exercise_session(student:, exercise: Orm::Exercise.find(assignment.assignable_id), status: "completed",
                                 classroom_assignment: assignment, completed_at: at, **attributes)
+      end
+
+      # UDR enseignant §3.8 : « Maths · 10 questions · à rendre … » : le nom court de la matière, le nombre de questions.
+      test "the header carries what the meta line says: the short name of the material, its slug and the number of questions" do
+        maths = create_material(name: "Mathématiques", category: "science", shortname: "Maths")
+        exercise = create_exercise(essential: create_essential(course: create_course(material: maths)), questions: 10)
+        assignment = create_assignment(classroom: @classroom, assignable: exercise)
+
+        row = follow_up(assignment)
+
+        assert_equal [ "Maths", "mathematiques", 10 ], row.to_h.values_at(:material_shortname, :material_slug, :question_count)
+        assert_equal 4, follow_up.question_count
       end
 
       test "the header of the follow-up: exercise, material, due date and assignment date" do

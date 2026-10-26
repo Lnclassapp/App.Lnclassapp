@@ -20,6 +20,13 @@ module Dtos
         end
       end
 
+      # UDR enseignant §3.13 (option A) : « Plus tard » n'existe plus, une assignation a toujours une échéance.
+      test "« Plus tard » n'existe plus : later n'est plus un attribut (les jours cochés sont prouvés dans session_days_input_test)" do
+        assert_raises(ActiveModel::UnknownAttributeError) do
+          AssignmentInput.new(classroom_public_id: "cls123", assignable_type: "Exercise", assignable_key: "Xy12ab", later: true)
+        end
+      end
+
       test "exige la classe et la clé de la ressource" do
         input = AssignmentInput.new(assignable_type: "Exercise", assignable_key: "   ")
 
