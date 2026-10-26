@@ -1,5 +1,5 @@
-# Jours de séance de l'enseignant dans une classe, modifiés depuis la page de la classe (fonctions-espace-eleve, Lot C)
-# — ADR-0072 §4.2, UDR-0062 §3.4
+# Jours de séance de l'enseignant dans une classe, modifiés depuis « Modifier les jours de la … » de la fiche de cours
+# (fonctions-espace-eleve, Lot C ; mvp-teacher-student, Lot L) — ADR-0072 §4.2, UDR-0062 §3.4, UDR enseignant §3.13
 fr:
   classroom:
     session_days:
@@ -8,6 +8,7 @@ fr:
         legend: "Jours de séance"
         unchanged: "Les dates déjà données ne changent pas."
         invalid: "Choisissez des jours du lundi au samedi."
+        next_session: "Prochaine séance :"
         cancel: "Annuler"
         submit: "Enregistrer"
         short:
@@ -24,5 +25,7 @@ fr:
           "4": "Jeudi"
           "5": "Vendredi"
           "6": "Samedi"
+      # Lien de la fiche de cours (catalog/essentials/_exercise_progress), sous la première ligne assignée de la classe.
+      edit_link: "Modifier les jours de la %{classroom}"
       update:
         saved: "Jours de séance enregistrés."

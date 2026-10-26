@@ -126,6 +126,84 @@ class Identity::ProfileMaterialsControllerTest < ActionDispatch::IntegrationTest
     assert_not Orm::AuditEvent.exists?(action: "profile.materials_changed")
   end
 
+  # CA-H3, CA-H5 (UDR « écrans enseignant sans répétition » §3.4): « Mes matières », l'écran de retrait. « Retirer » rejoue
+  # UpdateTeacherMaterials avec la liste sans la matière ; la dernière matière n'a pas de bouton, et le serveur la garde.
+  def three_subjects!
+    set_teacher_materials(@teacher, @school, [ @pc, @svt, @maths ])
+  end
+
+  def remove(*slugs, **options)
+    patch profile_materials_path, params: { profile_materials: { material_slugs: [ "", *slugs ], screen: "removal" } }, **options
+  end
+
+  test "CA-H3: at three subjects, the screen counts « 3 sur 3 », lists each with « Retirer », and notes the assignments" do
+    three_subjects!
+    sign_in_as @teacher
+
+    get profile_materials_path
+
+    assert_response :success
+    assert_select "h1", "Mes matières"
+    assert_select "p", text: "3 sur 3. Retirez-en une pour en ajouter une autre."
+    assert_select "a[href='#{teacher_menu_path}']", text: /Mon compte/
+    assert_select "#teacher_materials li", 3
+    [ @pc, @svt, @maths ].each do |material|
+      assert_select "#teacher_material_#{material.slug} form[action='#{profile_materials_path}'][method=post] input[name=_method][value=patch]"
+      assert_select "#teacher_material_#{material.slug} button", text: "Retirer"
+    end
+    assert_select "#teacher_material_#{@pc.slug} input[name='profile_materials[material_slugs][]']", 2
+    assert_select "#teacher_material_#{@pc.slug} input[name='profile_materials[material_slugs][]'][value='#{@pc.slug}']", 0
+    assert_select "p", text: "Les exercices déjà assignés restent visibles par vos élèves."
+  end
+
+  test "CA-H3: removing one subject keeps the others, touches no assignment, and comes back to the screen" do
+    three_subjects!
+    assignment = create_assignment(classroom: create_classroom(school: @school), by: @teacher)
+    sign_in_as @teacher
+
+    remove(@svt.slug, @maths.slug)
+
+    assert_redirected_to profile_materials_path
+    assert_equal "Matière retirée.", flash[:notice]
+    assert_equal [ @svt.slug, @maths.slug ], list
+    assert_equal "active", assignment.reload.status
+    follow_redirect!
+    assert_select "p", text: "2 sur 3."
+    assert_select "#teacher_materials li", 2
+  end
+
+  test "CA-H5: with one subject, no « Retirer » button; a forged removal of it is refused by the server, under the list" do
+    set_teacher_materials(@teacher, @school, [ @pc ])
+    sign_in_as @teacher
+
+    get profile_materials_path
+    assert_select "p", text: "1 sur 3."
+    assert_select "#teacher_materials li", 1
+    assert_select "#teacher_materials button", 0
+
+    remove
+    assert_response :unprocessable_content
+    assert_select "#teacher_materials_error", text: "Gardez au moins une matière."
+    assert_select "#teacher_materials li", 1
+    assert_equal [ @pc.slug ], list
+    assert_not Orm::AuditEvent.exists?(action: "profile.materials_changed")
+  end
+
+  test "the removal screen is for teachers of a school only" do
+    [ create_student, create_school_admin(school: @school), create_team_member ].each do |user|
+      sign_in_as user
+      get profile_materials_path
+      assert_response :forbidden
+      remove(@svt.slug)
+      assert_response :forbidden
+      sign_out
+    end
+    assert_equal [ @pc.slug, @svt.slug ], list
+    sign_in_as create_teacher(school: nil)
+    get profile_materials_path
+    assert_redirected_to pending_account_path
+  end
+
   test "a visitor is sent to the sign-in" do
     get edit_profile_materials_path
 

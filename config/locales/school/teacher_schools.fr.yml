@@ -1,4 +1,4 @@
-# « Mes établissements » de l'enseignant : liste, ajout, départ — ADR-0094, UDR-0099 (chantier multi-etablissements-enseignant)
+# « Mes établissements » de l'enseignant : liste, ajout, retrait — ADR-0094, UDR-0099 (chantier multi-etablissements-enseignant) ; écran de retrait (mvp-teacher-student, Lot H)
 fr:
   activemodel:
     errors:
@@ -13,23 +13,19 @@ fr:
       index:
         page_title: "Mes établissements"
         title: "Mes établissements"
-        subtitle:
-          one: "%{count} établissement sur %{max}"
-          other: "%{count} établissements sur %{max}"
-        primary: "Principal"
-        current: "Vous êtes ici"
-        actions: "Actions pour %{school}"
-        go: "Aller dans cet établissement"
-        go_label: "Aller dans %{school}"
-        leave: "Quitter l'établissement"
-        leave_title: "Quitter %{school} ?"
+        back: "Mon compte"
+        count: "%{count} sur %{max}."
+        full: "Retirez-en un pour en ajouter un autre."
+        current: "En cours"
+        archived_note: "Vos classes et devoirs en cours dans l'établissement retiré sont archivés."
+        leave: "Retirer"
+        leave_title: "Retirer %{school} ?"
         leave_warning: "Vous ne verrez plus cet établissement ni ses classes. Vos devoirs encore actifs dans ses classes seront archivés : les élèves ne les verront plus à faire. Les classes, les élèves et leurs résultats restent. Vous pourrez le rejoindre de nouveau."
-        leave_confirm: "Quitter"
+        leave_confirm: "Retirer"
         cancel: "Annuler"
         add_title: "Ajouter un établissement"
         add_description: "Choisissez votre DRENA, puis l'établissement. Vous y serez rattaché tout de suite."
         join: "Rejoindre l'établissement"
-        limit: "Vous avez atteint %{max} établissements. Quittez-en un pour en ajouter un autre."
       create:
         joined: "Vous avez rejoint %{school}. Sélectionnez vos classes."
       destroy:

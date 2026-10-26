@@ -444,14 +444,14 @@ class Classroom::StudentClassroomChangesControllerTest < ActionDispatch::Integra
     sign_in_as teacher_a
     get classroom_assignment_path(@a.public_id, assignment_a.public_id)
 
-    assert_equal %w[0 0], css_select("#follow_up_counts dd").map { it.text.strip }
+    assert_equal [ "0 / 0 fait" ], css_select("#follow_up_progress span.tabular-nums").map { it.text.strip }
     assert_no_match(/Awa/, response.body)
     sign_out
 
     sign_in_as teacher_c
     get classroom_assignment_path(@c.public_id, assignment_c.public_id)
 
-    assert_equal %w[0 1], css_select("#follow_up_counts dd").map { it.text.strip }
+    assert_equal [ "0 / 1 fait" ], css_select("#follow_up_progress span.tabular-nums").map { it.text.strip }
   end
 
   test "chained: the old classroom no longer lists the student, the new one marks them « Nouveau », the old direction lists them" do
