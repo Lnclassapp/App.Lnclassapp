@@ -1,7 +1,9 @@
 <%# 🌐 UI · classroom/teaching_selections/index — « Quelles classes enseignez-vous ? » %>
 <%# Rôle : « ‹ Accueil » (onboarding fini), titre, phrase, compteur #teaching_counter, une carte par niveau, une bascule par classe (stream), « Terminer » pleine largeur tant que l'onboarding n'est pas fini %>
-<%# ADR  : 0030, 0063 · UDR : 0006, 0025, 0050, 0054, XXXX-ecrans-enseignant-sans-repetition (§3.13) · rendu aussi en 422 par Classroom::TeacherOnboardingsController %>
+<%# ADR  : 0030, 0063 · UDR : 0006, 0025, 0050, 0054, XXXX-ecrans-enseignant-sans-repetition (§3.13 : ≥ lg, 57 rem, deux colonnes, « Terminer » de 15 rem à droite, « Mes classes » actif) · rendu aussi en 422 par Classroom::TeacherOnboardingsController %>
 <% page_title t(".page_title") %>
+<% content_for :nav_key, "classrooms" %>
+<div class="mx-auto w-full max-w-228">
 <%= ui_back_link t(".back_home"), href: teacher_home_path if @selection.onboarded %>
 <header class="mb-6 space-y-2">
   <h1 class="font-display text-lg font-medium tracking-tight text-balance"><%= t(".title") %></h1>
@@ -15,18 +17,19 @@
 <% if @selection.levels.empty? %>
   <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "user-group" %>
 <% else %>
-  <div class="space-y-4">
+  <div class="space-y-4 lg:columns-2 lg:gap-4 lg:space-y-0">
     <%= render partial: "classroom/teaching_selections/level_group", collection: @selection.levels, as: :level %>
   </div>
 
   <% unless @selection.onboarded %>
-    <%= form_with url: teacher_onboarding_path, id: "teacher-onboarding-form", class: "mt-6 flex flex-col gap-2" do %>
+    <%= form_with url: teacher_onboarding_path, id: "teacher-onboarding-form", class: "mt-6 flex flex-col gap-2 lg:items-end" do %>
       <% if @onboarding_error %>
         <p id="teacher-onboarding-error" role="alert" class="rounded-ln bg-error-soft px-4 py-2 text-sm font-medium text-error">
           <%= @onboarding_error %>
         </p>
       <% end %>
-      <%= ui_button t(".finish"), type: :submit, size: :lg, full: true, "aria-describedby": ("teacher-onboarding-error" if @onboarding_error) %>
+      <%= ui_button t(".finish"), type: :submit, size: :lg, class: "w-full lg:w-60", "aria-describedby": ("teacher-onboarding-error" if @onboarding_error) %>
     <% end %>
   <% end %>
 <% end %>
+</div>

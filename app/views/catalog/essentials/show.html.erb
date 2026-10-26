@@ -1,12 +1,16 @@
 <%# 🌐 UI · catalog/essentials/show — page d'une fiche essentielle (CA-11, AS-37), pour l'élève, l'enseignant et l'équipe %>
 <%# Rôle : en-tête et contenu (Action Text, KaTeX) ; équipe : statut, menu ⋮ ; élève : étiquette « À revoir depuis le… » ; exercices (élève : 3 puis « Voir plus » ; enseignant : bascules) %>
-<%# ADR  : 0028, 0033, 0035, 0043, 0072, 0101 · UDR : 0006, 0007, 0015, 0119, 0042, 0054, 0057, 0062, 0069, XXXX écrans élève sans répétition §3.4 · rafraîchie par les streams et le morphing %>
+<%# ADR  : 0028, 0033, 0035, 0043, 0072, 0101 · UDR : 0006, 0007, 0015, 0119, 0042, 0054, 0057, 0062, 0069, XXXX écrans élève sans répétition §3.4, XXXX-ecrans-enseignant-sans-repetition (§3.13 : enseignant ≥ lg, deux colonnes) · rafraîchie par les streams et le morphing %>
 <% essential = @detail.essential %>
 <% course = @detail.course %>
 <% exercises = @detail.exercises %>
 <% page_title t(".page_title", name: essential.name) %>
 <% content_for :nav_key, "courses" %>
-<div id="essential_header" class="mb-8">
+<%# Enseignant ≥ lg : fiche à gauche, colonne « Exercices » de 380 px qui reste visible au défilement et défile seule. %>
+<% split = !@student && @targets.present? %>
+<div class="<%= class_names("space-y-8", "lg:flex lg:items-start lg:gap-8 lg:space-y-0" => split) %>">
+<div class="<%= class_names("space-y-8", "min-w-0 lg:flex-1" => split) %>">
+<div id="essential_header">
   <%= ui_back_link course.name, href: course_path(course.slug) %>
   <%= ui_card padding: :md do %>
     <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
@@ -54,7 +58,9 @@
   <% end %>
 </div>
 
-<div class="space-y-8">
+</div>
+
+<%= tag.div(class: class_names({ "lg:sticky lg:top-8 lg:max-h-dvh lg:w-95 lg:shrink-0 lg:overflow-y-auto" => split })) do %>
   <%= ui_card title: t(".exercises_title"), icon: "academic-cap", id: "essential_exercises" do |card| %>
     <% card.actions do %>
       <%= ui_badge t(".exercises_count", count: exercises.size), tone: :brand, size: :sm %>
@@ -73,7 +79,7 @@
         <% end %>
         <ul class="-mx-4 divide-y divide-line border-t border-line sm:-mx-6" data-controller="math">
           <% exercises.each_with_index do |exercise, index| %>
-            <%= render "exercise_progress", exercise:, student: @student, team: @status_record.present?, targets: @targets,
+            <%= render "exercise_progress", exercise:, stacked: split, student: @student, team: @status_record.present?, targets: @targets,
                                             primary: @student && index.zero?,
                                             folded: @student && index >= ComponentsHelper::REVEAL_LIMIT %>
           <% end %>
@@ -82,4 +88,5 @@
       <% end %>
     <% end %>
   <% end %>
+<% end %>
 </div>
