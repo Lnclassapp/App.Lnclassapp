@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::ClassroomRepository
 # Rôle : traduit Orm::Classroom ↔ Entities::Classroom::Classroom ; jeton du lien (un par un, en masse), code de classe, verrou, génération en masse, retrait d'une classe vide, nom et plafond
-# ADR  : 0030, 0039, 0041, 0059, 0085, 0088, 0096, 0098, XXXX-code-de-classe-a-six-caracteres
+# ADR  : 0030, 0039, 0041, 0059, 0085, 0088, 0096, 0098, 0109
 module Repositories
   module Classroom
     class ClassroomRepository

@@ -1,7 +1,7 @@
 # 🌐 DELIVERY · Classroom::AssignmentsController
 # Rôle : assigner et retirer un exercice d'une classe (Turbo Stream qui remplace la bascule) ; la modale des jours de séance
 #        (`new`) et son envoi, avec les jours cochés (au moins un : plus de « Plus tard »)
-# ADR  : 0026, 0028, 0048, 0072, 0088 · UDR : 0006, 0028, 0062, XXXX-ecrans-enseignant-sans-repetition (§3.13)
+# ADR  : 0026, 0028, 0048, 0072, 0088 · UDR : 0006, 0028, 0062, 0134 (§3.13)
 module Classroom
   class AssignmentsController < AuthenticatedController
     allow_roles :teacher, :team

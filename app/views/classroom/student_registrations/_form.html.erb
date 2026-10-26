@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_registrations/_form — le formulaire d'inscription élève, un seul, découpé en trois fieldset par signup_steps_controller %>
 <%# Rôle : 1 Ta classe (code, ou cascade derrière « Je n'ai pas de code »), 2 Toi (rappel de classe, nom, prénoms, genre, numéro), 3 Ton code secret ; sans JavaScript les trois restent visibles ; 422/403/429 re-rendus %>
-<%# ADR  : 0037, 0050, 0083, 0085, XXXX-code-de-classe-a-six-caracteres · UDR : 0009, 0054, 0079, 0081 (§3.2), XXXX-inscription-eleve-en-trois-etapes (§3.1 à §3.8, §3.5 bis) %>
+<%# ADR  : 0037, 0050, 0083, 0085, 0109 · UDR : 0009, 0054, 0079, 0081 (§3.2), 0135 (§3.1 à §3.8, §3.5 bis) %>
 <%# start : l'étape ouverte ; floor : la première étape qui existe (2 par un lien) ; recap : [classe, établissement] ou nil %>
 <%# locals: (start:, floor:, recap:) -%>
 <% steps = "classroom--signup-steps" %>

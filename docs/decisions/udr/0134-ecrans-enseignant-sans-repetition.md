@@ -1,4 +1,4 @@
-# UDR-XXXX : Écrans enseignant sans répétition — accueil, menu « Mon compte », classe, fiche d'un élève, Cours, rapport, inscription
+# UDR-0134 : Écrans enseignant sans répétition — accueil, menu « Mon compte », classe, fiche d'un élève, Cours, rapport, inscription
 <!-- index
 titre: Écrans enseignant sans répétition, en jaune enseignant
 statut: Accepté *(porteur, 2026-10-23)*
@@ -11,9 +11,9 @@ problematique: Les écrans enseignant répètent leurs informations (liste des c
 | **Statut** | Accepté (porteur, 2026-10-23 : écrans en gris validés « option A », couleurs « C », UDR demandée « oui, écris l'UDR enseignant » ; premier parcours et jours de séance « A », §3.13 ; écrans d'ordinateur en gris puis en jaune validés le 2026-10-26, §3.3, §3.14) |
 | **Date** | 2026-10-23 |
 | **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
-| **ADR lié** | [ADR-0103](../adr/0103-matieres-de-l-enseignant-par-une-table-de-jointure.md), amendé ici (§4) · ADR-XXXX-code-de-classe-a-six-caracteres (code affiché sur la carte de classe) |
+| **ADR lié** | [ADR-0103](../adr/0103-matieres-de-l-enseignant-par-une-table-de-jointure.md), amendé ici (§4) · ADR-0109 (code affiché sur la carte de classe) |
 | **Amende** | [UDR-0077](0077-organisation-des-ecrans-enseignant.md) (accueil, barre basse) · [UDR-0080](0080-en-tete-eleve-panneau-du-compte-et-barres-de-l-app-android.md) (panneau du compte enseignant) · [UDR-0072](0072-comprehension-d-un-exercice-assigne.md) §3.5 (catégories du rapport) · [UDR-0108](0108-liste-des-eleves-en-liens-et-par-trente.md) (groupes de notes de la liste) · [UDR-0125](0125-matieres-de-l-enseignant-a-l-inscription-et-au-profil.md) (« Autre matière » à l'inscription, action de la ligne Matières du profil) · [UDR-0062](0062-echeances.md) §3.4 (« Plus tard » retiré de la fenêtre des jours) · [UDR-0025](0025-declaration-des-classes.md) (déclaration des classes) |
-| **S'appuie sur** | UDR-XXXX-palette-froide-et-texte-sans-gras · UDR-XXXX-accueil-eleve-carte-du-prochain-exercice · UDR-XXXX-ecrans-eleve-sans-repetition · UDR-XXXX-inscription-eleve-en-trois-etapes · [UDR-0098](0098-etablissement-courant-de-l-enseignant.md) |
+| **S'appuie sur** | UDR-0136 · UDR-0132 · UDR-0133 · UDR-0135 · [UDR-0098](0098-etablissement-courant-de-l-enseignant.md) |
 | **Remplacé par** | — |
 
 ---

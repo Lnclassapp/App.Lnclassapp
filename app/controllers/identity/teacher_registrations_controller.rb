@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Identity::TeacherRegistrationsController
 # Rôle : inscription enseignant publique, DRENA → établissement ou lien /i/<jeton> (limités en débit) ; succès : session, voie notée et auditée
-# ADR  : 0026, 0028, 0030, 0037, 0050, 0063, 0083, 0094, 0103 · UDR : 0024, 0050, 0079, 0099 (§3.4), XXXX-ecrans-enseignant-sans-repetition (§3.9)
+# ADR  : 0026, 0028, 0030, 0037, 0050, 0063, 0083, 0094, 0103 · UDR : 0024, 0050, 0079, 0099 (§3.4), 0134 (§3.9)
 module Identity
   class TeacherRegistrationsController < ApplicationController
     FIELDS = %i[last_name first_name gender contact pin pin_confirmation drena_public_id school_public_id

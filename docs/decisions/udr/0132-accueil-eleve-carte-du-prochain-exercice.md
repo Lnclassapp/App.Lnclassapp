@@ -1,4 +1,4 @@
-# UDR-XXXX : Accueil élève « Wave » — bandeau court, carte du prochain exercice, grille, annonce, historique
+# UDR-0132 : Accueil élève « Wave » — bandeau court, carte du prochain exercice, grille, annonce, historique
 <!-- index
 titre: Accueil élève « Wave » : carte du prochain exercice et six états
 statut: Accepté *(porteur, 2026-10-23)*
@@ -13,7 +13,7 @@ problematique: L'accueil élève s'ouvre sur « Entrer en classe » et empile ci
 | **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
 | **ADR lié** | — |
 | **Remplace** | [UDR-0084](0084-accueil-eleve-en-tete-au-logo-menu-de-l-avatar-et-exercice-du-jour.md) (en-tête au logo, menu de l'avatar) · [UDR-0076](0076-organisation-des-ecrans-eleve.md) §ordre de l'accueil |
-| **S'appuie sur** | UDR-XXXX-palette-froide-et-texte-sans-gras (jetons) · [UDR-0119](0119-fiche-a-revoir-exercice-propose-et-regle-sur-20.md) (fiche à revoir) |
+| **S'appuie sur** | UDR-0136 (jetons) · [UDR-0119](0119-fiche-a-revoir-exercice-propose-et-regle-sur-20.md) (fiche à revoir) |
 | **Remplacé par** | — |
 
 ---
@@ -95,7 +95,7 @@ L'état se calcule dans la query de l'accueil, dans cet ordre ; le premier vrai 
 
 ### 3.6 Jetons
 
-Couleurs, tailles et graisses : uniquement les jetons de l'UDR-XXXX-palette-froide-et-texte-sans-gras. Rien en dur (le test `test/design/design_tokens_test.rb` refuse les codes hexadécimaux et les valeurs arbitraires). Pas de `font-bold` ni de `font-semibold` : graisse 500 au plus, sur les titres.
+Couleurs, tailles et graisses : uniquement les jetons de l'UDR-0136. Rien en dur (le test `test/design/design_tokens_test.rb` refuse les codes hexadécimaux et les valeurs arbitraires). Pas de `font-bold` ni de `font-semibold` : graisse 500 au plus, sur les titres.
 
 ### 3.7 États obligatoires
 

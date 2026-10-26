@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::RegisterStudent
 # Rôle : un visiteur crée son compte élève (rôle imposé) et entre tout de suite dans la classe de son lien, de son code ou choisie, en une transaction
-# ADR  : 0026, 0028, 0040, 0041, 0050, 0085, XXXX-code-de-classe-a-six-caracteres · UDR : 0081
+# ADR  : 0026, 0028, 0040, 0041, 0050, 0085, 0109 · UDR : 0081
 module UseCases
   module Classroom
     class RegisterStudent

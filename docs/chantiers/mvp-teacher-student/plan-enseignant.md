@@ -1,7 +1,7 @@
 # Plan d'exécution — MVP Lnclass Teacher & Student — **enseignant**
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
-> Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot). Critères : [`prd-enseignant.md`](prd-enseignant.md) §4. Écrans : [UDR enseignant](../../decisions/udr/XXXX-ecrans-enseignant-sans-repetition.md) et [`carte-des-ecrans.md`](carte-des-ecrans.md).
+> Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot). Critères : [`prd-enseignant.md`](prd-enseignant.md) §4. Écrans : [UDR enseignant](../../decisions/udr/0134-ecrans-enseignant-sans-repetition.md) et [`carte-des-ecrans.md`](carte-des-ecrans.md).
 >
 > Suite du [plan élève](plan.md), même branche de chantier (`feature/mvp-teacher-student`) et même PR (#295). Les lots enseignant partent **après** les lots élève dont ils dépendent : ils lisent leurs fichiers sans les modifier. Repris des lots G à L de l'ancien plan (`c766532`), recalés sur ce que le Lot 0 et l'ancien Lot A ont déjà livré.
 
@@ -205,7 +205,7 @@ Celles du [plan élève](plan.md#portes-de-sortie), plus :
 
 ## Phase ordinateur — enseignant
 
-> Ajoutée le 2026-10-24, après les lots téléphone (« téléphone d'abord, ordinateur ensuite »). Écrans : sous-sections « Sur ordinateur (≥ lg) » de l'[UDR enseignant](../../decisions/udr/XXXX-ecrans-enseignant-sans-repetition.md) ; critères : [`prd-enseignant.md`](prd-enseignant.md) §4 bis. Chaque lot ne touche que des classes `lg:` (le rendu sous 1024 px ne bouge pas) et se montre au porteur en captures à 1440 et 1024 px, plus 390 px pour prouver que le téléphone n'a pas bougé.
+> Ajoutée le 2026-10-24, après les lots téléphone (« téléphone d'abord, ordinateur ensuite »). Écrans : sous-sections « Sur ordinateur (≥ lg) » de l'[UDR enseignant](../../decisions/udr/0134-ecrans-enseignant-sans-repetition.md) ; critères : [`prd-enseignant.md`](prd-enseignant.md) §4 bis. Chaque lot ne touche que des classes `lg:` (le rendu sous 1024 px ne bouge pas) et se montre au porteur en captures à 1440 et 1024 px, plus 390 px pour prouver que le téléphone n'a pas bougé.
 >
 > **CA-N1 vaut aussi sur téléphone** (porteur, 2026-10-24) et appartient au **lot N**, pas à cette phase : N n'a aucun commit sur la branche de chantier (vérifié le 2026-10-24), l'orchestrateur a été prévenu le jour même. Ce qu'il faut ajouter à N est écrit au lot P5 ci-dessous ; P5 ne garde que la colonne de 40 rem.
 

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::JoinAsStudent
 # Rôle : un élève connecté sans classe active (classe archivée, ou retiré) entre dans la classe choisie, dans celle de son code ou dans celle d'un lien
-# ADR  : 0026, 0028, 0040, 0041, 0085, 0088, XXXX-code-de-classe-a-six-caracteres · UDR : 0009, 0081
+# ADR  : 0026, 0028, 0040, 0041, 0085, 0088, 0109 · UDR : 0009, 0081
 module UseCases
   module Classroom
     class JoinAsStudent

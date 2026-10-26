@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::ClassroomCodesController
 # Rôle : GET /classroom-codes/:code vérifie un code de classe et répond par un Turbo Frame : trouvée, inconnue (archivée comprise) ou trop d'essais
-# ADR  : XXXX-code-de-classe-a-six-caracteres (§4.4, §4.5) · UDR : 0081
+# ADR  : 0109 (§4.4, §4.5) · UDR : 0081
 module Classroom
   class ClassroomCodesController < ApplicationController
     FRAME = "classroom_code_preview".freeze

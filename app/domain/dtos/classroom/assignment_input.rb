@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Classroom::AssignmentInput
 # Rôle : ressource à assigner à une classe (type, clé) ; et, à la première assignation, les jours de séance (un au moins)
-# ADR  : 0026, 0029, 0048, 0072 · UDR : 0062, XXXX-ecrans-enseignant-sans-repetition (§3.13 : « Plus tard » est retiré)
+# ADR  : 0026, 0029, 0048, 0072 · UDR : 0062, 0134 (§3.13 : « Plus tard » est retiré)
 module Dtos
   module Classroom
     class AssignmentInput

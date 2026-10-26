@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_registrations/_step_alerts — le refus général et l'alerte « trop de tentatives », en haut de l'étape ouverte %>
 <%# Rôle : 403/422 : #student-registration-refusal ; 429 : #signup-rate-limited, à l'étape 1 (ou à l'étape 2 quand un lien a sauté l'étape 1) %>
-<%# ADR  : 0085, XXXX-code-de-classe-a-six-caracteres (§4.5) · UDR : XXXX-inscription-eleve-en-trois-etapes (§3.5) %>
+<%# ADR  : 0085, 0109 (§4.5) · UDR : 0135 (§3.5) %>
 <%# locals: (step:, start:, floor:) -%>
 <% if step == start && @form.errors[:base].any? %>
   <%# Challenger phase 5 (E1) : après un refus (403), le focus et le défilement vont à l'alerte, sous l'en-tête fixe. %>

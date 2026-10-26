@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::ClassroomDesignation
 # Rôle : la classe que désigne un élève, celle d'un lien valide, de son code ou choisie dans la cascade, et sa voie ; règle commune à RegisterStudent, JoinAsStudent et ChangeClassroom
-# ADR  : 0040, 0041, 0085, 0088, 0095, XXXX-code-de-classe-a-six-caracteres · UDR : 0081
+# ADR  : 0040, 0041, 0085, 0088, 0095, 0109 · UDR : 0081
 module UseCases
   module Classroom
     class ClassroomDesignation

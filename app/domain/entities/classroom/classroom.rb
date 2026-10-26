@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Classroom::Classroom
 # Rôle : une classe d'une école pour une année scolaire, avec ses enseignants et son effectif actif
-# ADR  : 0030, 0041, 0085, 0088, XXXX-code-de-classe-a-six-caracteres
+# ADR  : 0030, 0041, 0085, 0088, 0109
 module Entities
   module Classroom
     class Classroom

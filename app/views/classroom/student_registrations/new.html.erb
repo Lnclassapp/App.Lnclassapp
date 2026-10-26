@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_registrations/new — inscription élève en trois étapes : 1 Ta classe, 2 Toi, 3 Ton code secret %>
 <%# Rôle : une colonne (dès lg, le panneau brand-strong à gauche, le même aux trois étapes, et le formulaire à droite) ; logo et « Besoin d'aide ? », « ‹ Retour » et « Étape N sur 3 », barre en trois segments, carte de bienvenue sur le premier écran seulement ; le formulaire est découpé par signup_steps_controller %>
-<%# ADR  : 0050, 0085, XXXX-code-de-classe-a-six-caracteres · UDR : 0005, 0054 (§3.2 : logo vers l'accueil public), 0079, 0081, XXXX-inscription-eleve-en-trois-etapes (§3.1, §3.5, §3.5 bis, §3.8) %>
+<%# ADR  : 0050, 0085, 0109 · UDR : 0005, 0054 (§3.2 : logo vers l'accueil public), 0079, 0081, 0135 (§3.1, §3.5, §3.5 bis, §3.8) %>
 <% page_title t(".page_title") %>
 <%# Lien valable : l'étape 1 n'existe pas, on ouvre l'étape 2. Sinon, la première étape qui porte une erreur (UDR §3.5), l'étape 1 par défaut. %>
 <% floor = @preview ? 2 : 1 %>

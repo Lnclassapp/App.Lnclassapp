@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Classroom::StudentArrivalChannel
 # Rôle : liste fermée des voies d'arrivée d'un élève dans une classe (classroom_students.joined_via) ; « code » est celui du code de classe
-# ADR  : 0085, XXXX-code-de-classe-a-six-caracteres (§4.6)
+# ADR  : 0085, 0109 (§4.6)
 module Entities
   module Classroom
     module StudentArrivalChannel

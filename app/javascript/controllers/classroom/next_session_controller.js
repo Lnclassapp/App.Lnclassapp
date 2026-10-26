@@ -1,6 +1,6 @@
 // ⚡ FRONT · classroom/next_session_controller — « Prochaine séance : lundi 26 oct. » sous les jours de séance
 // Rôle : à chaque case cochée, la première date strictement après aujourd'hui (celui du serveur) qui tombe un jour coché ; aucun jour, ligne cachée ; un jour coché efface l'erreur « Cochez au moins un jour », tout décocher la rétablit
-// ADR  : 0072 · UDR : XXXX-ecrans-enseignant-sans-repetition (§3.13) · sans JavaScript, la ligne reste cachée (hidden)
+// ADR  : 0072 · UDR : 0134 (§3.13) · sans JavaScript, la ligne reste cachée (hidden)
 import { Controller } from "@hotwired/stimulus"
 
 const DAY = 24 * 60 * 60 * 1000

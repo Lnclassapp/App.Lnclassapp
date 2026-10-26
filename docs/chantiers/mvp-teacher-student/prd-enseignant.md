@@ -1,6 +1,6 @@
 # PRD — MVP Lnclass Teacher & Student — pilote du 27 octobre — **enseignant**
 
-> Suite du [PRD élève](prd.md), même chantier. Mêmes règles : specs figées ici, le détail des écrans est dans l'[UDR enseignant](../../decisions/udr/XXXX-ecrans-enseignant-sans-repetition.md) (accepté le 2026-10-23, versions ordinateur ajoutées le 2026-10-24). Sur un écran, l'UDR gagne ; sur un comportement, ce PRD gagne.
+> Suite du [PRD élève](prd.md), même chantier. Mêmes règles : specs figées ici, le détail des écrans est dans l'[UDR enseignant](../../decisions/udr/0134-ecrans-enseignant-sans-repetition.md) (accepté le 2026-10-23, versions ordinateur ajoutées le 2026-10-24). Sur un écran, l'UDR gagne ; sur un comportement, ce PRD gagne.
 >
 > Repris des critères enseignant de la version `c766532` du PRD, recalés sur ce qui est déjà livré sur la branche de chantier. Numéros conservés ; l'ancien CA-B5 (code sur la carte de l'accueil) devient **CA-B8**, le numéro CA-B5 étant pris par le PRD élève. CA-G10 (ordinateur) passe à la phase ordinateur.
 
@@ -306,9 +306,9 @@ Et Échap la ferme sans rien écrire, le focus revenant sur « Assigner »
 
 ## 6. Décisions rattachées
 
-- UDR-XXXX — [Écrans enseignant sans répétition](../../decisions/udr/XXXX-ecrans-enseignant-sans-repetition.md)
-- UDR-XXXX — [Palette froide et texte sans gras](../../decisions/udr/XXXX-palette-froide-et-texte-sans-gras.md) (exception de rôle : jaune enseignant)
-- ADR-XXXX — [Code de classe à six caractères](../../decisions/adr/XXXX-code-de-classe-a-six-caracteres.md)
+- UDR-XXXX — [Écrans enseignant sans répétition](../../decisions/udr/0134-ecrans-enseignant-sans-repetition.md)
+- UDR-XXXX — [Palette froide et texte sans gras](../../decisions/udr/0136-palette-froide-et-texte-sans-gras.md) (exception de rôle : jaune enseignant)
+- ADR-XXXX — [Code de classe à six caractères](../../decisions/adr/0109-code-de-classe-a-six-caracteres.md)
 - ADR-0103 — amendé par l'UDR enseignant (une seule matière à l'inscription)
 - ADR-0072 — échéance par les jours de séance
 

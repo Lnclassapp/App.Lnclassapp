@@ -1,4 +1,4 @@
-# ADR-XXXX : Le code de classe à six caractères revient, à côté du lien, vérifié à débit limité
+# ADR-0109 : Le code de classe à six caractères revient, à côté du lien, vérifié à débit limité
 <!-- index
 titre: Code de classe à six caractères, vérifié à débit limité
 statut: Accepté *(porteur, 2026-10-23)*
@@ -65,7 +65,7 @@ Pour le pilote du 27 octobre, le porteur veut aussi la voie la plus directe en c
 - Migration réversible : ajout nullable, remplissage par lots avec le générateur, puis `NOT NULL`, index unique et contrainte de format. Test de migration comme `test/db/remove_classroom_join_codes_migration_test.rb`.
 - Les tests d'absence du code de l'ADR-0085 (`student_classrooms_controller_test.rb:39`, test de migration) sont à remplacer, pas à supprimer sans équivalent.
 - `config/initializers/filter_parameter_logging.rb` filtre déjà `:code`, qui couvre `join_code` (correspondance partielle) : rien à ajouter.
-- Affichage enseignant : sur la **carte de la classe de l'accueil enseignant** seulement, « Code de la classe » et « Copier » (UDR-XXXX-ecrans-enseignant-sans-repetition §3.3). La page de classe n'a pas de ligne de code ; son action « Changer le lien » (menu ⋮ du bloc « Inscrire vos élèves ») devient « Changer le lien et le code ».
+- Affichage enseignant : sur la **carte de la classe de l'accueil enseignant** seulement, « Code de la classe » et « Copier » (UDR-0134 §3.3). La page de classe n'a pas de ligne de code ; son action « Changer le lien » (menu ⋮ du bloc « Inscrire vos élèves ») devient « Changer le lien et le code ».
 - **Revue de sécurité obligatoire** avant fusion (`security-reviewer`) : énumération, fuite dans la réponse, compteur partagé, journalisation.
 
 ## 7. Comment vérifier que la décision est respectée
