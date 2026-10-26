@@ -36,11 +36,11 @@
 | P4 — Inscription sur ordinateur | #307 | ✅ **fusionné** (`7da2330e`) |
 | P6 — Déclarer, assigner, jours de séance sur ordinateur | #308 | ✅ **fusionné** (`81b1beac`) |
 | P0 — Panneau « Mon compte » à droite, barres | #310 | ⏳ **pas commencé** (porteur) |
-| P1 — Accueil enseignant en page large | #311 | ⏳ **pas commencé** (porteur) |
-| P2 — Page de classe et fiche d'un élève sur ordinateur | #312 | ⏳ **pas commencé** (porteur) ; après P1 |
+| P1 — Accueil enseignant en page large | #311 | ✅ **fusionné** (`13038a89`, durée et dérogation en `9cc59a9b`) |
+| P2 — Page de classe et fiche d'un élève sur ordinateur | #312 | ✅ **fusionné** (`20d4c124`) |
 | P5 — Cours de l'enseignant, colonne de 40 rem | #313 | ⏳ **pas commencé** (porteur) ; après O5 (mêmes fichiers du Cours) |
 
-**Revue finale de #295** (2026-10-26, sur `e4075817`) : sécurité sans constat ; trois corrections (`7358e20a`) et le test de P6 (`e0a9792d`). Les lots fusionnés depuis (G, N, I, P3, O4, O5) n'ont eu que leurs propres tests : à relire avant `bin/ci-quiet`. Suite système complète verte sur `c9b19b21` (426 runs, 0 échec).
+**Revue finale de #295** (2026-10-26, sur `e4075817`) : sécurité sans constat ; trois corrections (`7358e20a`) et le test de P6 (`e0a9792d`). Les lots fusionnés depuis (G, N, I, P1, P2, P3, O4, O5) n'ont eu que leurs propres tests : à relire avant `bin/ci-quiet`. Suite système complète verte sur `c9b19b21` (426 runs, 0 échec).
 
 **Budget des tests système** (ADR-0069 §9 : 15 s par chantier) : C en prend 10,5 s ; **relevé à 50 s pour ce chantier** (porteur, 2026-10-24, amendement de l’ADR-0069). Chaque lot garde un test système court de son parcours principal et teste le reste au niveau contrôleur ou intégration.
 
