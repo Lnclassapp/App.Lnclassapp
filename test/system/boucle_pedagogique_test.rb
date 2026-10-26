@@ -293,7 +293,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
     find("li[id='classroom_#{classroom.public_id}'] a").click
     assert_selector "#classroom_header h1", text: "Tle D 1"
-    link = find("#classroom_link [data-clipboard-text-value]")["data-clipboard-text-value"]
+    link = find("#classroom_link [data-clipboard-text-value^='http']")["data-clipboard-text-value"]
     assert_equal join_classroom_url(classroom.reload.link_token, host: URI(link).host, port: URI(link).port), link
 
     # ADR-0072 : un cours ne s'assigne plus ; sa page du catalogue n'offre aucune action à l'enseignant.
