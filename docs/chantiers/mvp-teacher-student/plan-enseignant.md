@@ -11,16 +11,16 @@
 
 **Calendrier : tout avant le pilote** (porteur, 2026-10-24 : « B, rien ne doit être en retard »). Pour tenir, l'orchestrateur reprend J et L et lance ses lots en agents parallèles ; Touré et Konan enchaînent un lot élève puis deux lots enseignant chacun ; le lot A est repris par l'orchestrateur (porteur, 2026-10-24 : abonnement Max du porteur, Pro pour Touré et Konan).
 
-| Lot | Pilote | Dépend de | Issue | Ordre (2026-10-26) |
-|---|---|---|---|---|
-| J — Inscription enseignant en 3 étapes | **Konan** (code déjà sur `-lot-j`) | A, C | #289 | 1 |
-| L — Premier parcours : déclarer, assigner, jours de séance | **Konan** (code déjà sur `-lot-l`) | A | #294 | 2 |
-| K — Rapport d'un exercice en badges | **Konan** | A | #288 | 3 |
-| H — Plafonds et retraits (matières, établissements) | **Konan** (`konanmeschac777-cmyk`) | A | #292 | 4 |
-| G — Accueil enseignant | **Konan** | A, D, J | #287 | 5 |
-| I — Page de classe et fiche d'un élève | **Konan** | A ; fusionne après G | #293 | 6 |
-| M — « Mon compte » enseignant | **Konan** | E1 | #305 | 7 |
-| N — Cours de l'enseignant | **Konan** | E2 | #306 | 8 |
+| Lot | Pilote | Dépend de | Issue | Ordre (2026-10-26) | État au 26/10, 20 h |
+|---|---|---|---|---|---|
+| J — Inscription enseignant en 3 étapes | **Konan** (code déjà sur `-lot-j`) | A, C | #289 | 1 | ✅ **fusionné** (`45ed8e8`) |
+| L — Premier parcours : déclarer, assigner, jours de séance | **Konan** (code déjà sur `-lot-l`) | A | #294 | 2 | ✅ **fusionné** (`31bf4c3`) |
+| K — Rapport d'un exercice en badges | **Konan** | A | #288 | 3 | ✅ **fusionné** (`1b33237`) |
+| H — Plafonds et retraits (matières, établissements) | **Konan** (`konanmeschac777-cmyk`) | A | #292 | 4 | ✅ **fusionné** (`04f0369`) |
+| G — Accueil enseignant | **Konan** | A, D, J | #287 | 5 | ✅ **fusionné** (`c486573`) |
+| I — Page de classe et fiche d'un élève | **Konan** | A ; fusionne après G | #293 | 6 | ✅ **fusionné** (`88aeb30`) |
+| M — « Mon compte » enseignant | **Konan** | E1 | #305 | 7 | ✅ **fusionné** (`e407581`) |
+| N — Cours de l'enseignant | **Konan** | E2 | #306 | 8 | ✅ **fusionné** (`34bc76c`) |
 
 **Répartition du 2026-10-26** (porteur : « Konan pour les écrans des enseignants et Touré pour les élèves, mobile comme ordinateur ») : **Konan pilote tous les lots enseignant**, téléphone et ordinateur. Ordre : J, L, K, H, G, I, M, N, puis P4 (#307), P6 (#308), P3 (#309), P0 (#310), P1 (#311), P2 (#312), P5 (#313). Il attend Touré pour G (après D), M (après E1), N (après E2), P0 (après D) et P1 (après O1). Chaque issue porte la fiche du lot, les changements du 26, les maquettes de référence (archive v12) et la marche à suivre. Le calendrier ci-dessous (« Lundi 26, 14 h ») est dépassé.
 
@@ -211,15 +211,15 @@ Celles du [plan élève](plan.md#portes-de-sortie), plus :
 
 **Fichiers partagés avec la phase ordinateur de l'élève** (autre session) : le panneau « Mon compte » à droite de 400 px est décidé pour les deux rôles (UDR enseignant §3.4, UDR écrans élève). Aujourd'hui, `_account_panel` s'ouvre en `placement: :drawer`, qui est un tiroir **à gauche** de 20 rem (`dialog.dialog-drawer`, `application.tailwind.css`). Le placement à droite de 25 rem, `_account_panel.html.erb`, `_sidebar.html.erb`, `navigation_helper.rb` et `application.tailwind.css` ne doivent avoir **qu'un lot propriétaire pour les deux rôles**. P0 est ce lot si la phase élève ne l'a pas déjà pris ; sinon P0 attend le sien et ne garde que les écrans de retrait.
 
-| Lot | Écran | Dépend de |
-|---|---|---|
-| P0 | Panneau « Mon compte » à droite, barre du haut et barre latérale, écrans de retrait dans le panneau (#310) | M, H, D ; lot équivalent de l'élève s'il existe |
-| P1 | Accueil en page large (#311) | G, O1 (`_carousel`) |
-| P2 | Page de classe et fiche d'un élève (#312) | I ; fusionne après P1 |
-| P3 | Rapport d'un exercice (#309) | K |
-| P4 | Inscription (#307) | J |
-| P5 | Cours, colonne de 40 rem (#313) | N |
-| P6 | Déclarer, assigner, jours de séance (#308) | L |
+| Lot | Écran | Dépend de | État au 26/10, 20 h |
+|---|---|---|---|
+| P0 | Panneau « Mon compte » à droite, barre du haut et barre latérale, écrans de retrait dans le panneau (#310) | M, H, D ; lot équivalent de l'élève s'il existe | à faire (dépendances fusionnées) |
+| P1 | Accueil en page large (#311) | G, O1 (`_carousel`) | à faire (dépendances fusionnées) |
+| P2 | Page de classe et fiche d'un élève (#312) | I ; fusionne après P1 | à faire, attend P1 |
+| P3 | Rapport d'un exercice (#309) | K | ✅ **fusionné** (`76f0af3`) |
+| P4 | Inscription (#307) | J | ✅ **fusionné** (`7da2330`) |
+| P5 | Cours, colonne de 40 rem (#313) | N | à faire (dépendances fusionnées) |
+| P6 | Déclarer, assigner, jours de séance (#308) | L | ✅ **fusionné** (`81b1bea`) |
 
 Aucun lot de P1 à P6 ne touche un fichier de P0 (vérifié sur la branche de chantier : la barre latérale prend son entrée active de `content_for :nav_key`, posé par chaque vue) : ils ne dépendent donc pas de P0.
 
