@@ -4,8 +4,8 @@ require "application_system_test_case"
 # assigns an exercise, then another, withdraws one and assigns it again — toggles and toasts change in place, without a
 # page reload, and the reassignment adds a new row instead of raising the old uniqueness error. ADR-0072: the course and
 # its sheets are no longer assigned; the course page of the classroom has no toggle. UDR-0062 §3.4: the first « Assigner »
-# of a teacher without session days asks « Quels jours voyez-vous la <classe> ? », with « Plus tard »; the due date is the
-# next session day (clock on Monday 5 October 2026).
+# of a teacher without session days asks « Quels jours voyez-vous la <classe> ? », without « Plus tard » (UDR enseignant §3.13,
+# Lot L); the due date is the next session day (clock on Monday 5 October 2026).
 class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
   # The teacher home belongs to Lot D3: until it is merged, a stand-in answers where the sign-in lands, as in
   # test/system/teams/drenas_test.rb. A merged controller is autoloadable, so the stand-in steps aside by itself.
@@ -59,7 +59,7 @@ class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
       within(toggle("Exercise", @phases.public_id)) { click_on "Assigner" }
       within DAYS_MODAL do
         assert_selector "h2", text: "Quels jours voyez-vous la 6ème 1 ?"
-        assert_text "Les phases sera à rendre pour la séance suivante."
+        assert_text I18n.t("classroom.assignments.new.context")
         assert_equal [ "Lun.", "Mar.", "Mer.", "Jeu.", "Ven.", "Sam." ], all("fieldset label span[aria-hidden]").map(&:text)
         find("label", text: "Lun.").click
         find("label", text: "Jeu.").click
@@ -94,27 +94,6 @@ class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
     assert_equal [ @teacher.id ], Orm::ClassroomAssignment.distinct.pluck(:assigned_by_id)
   end
 
-  test "« Plus tard » assigns without due date, and the next « Assigner » asks again" do
-    sign_in_teacher
-    visit sheet_path
-
-    assert_no_page_reload do
-      within(toggle("Exercise", @phases.public_id)) { click_on "Assigner" }
-      within(DAYS_MODAL) { click_on "Plus tard" }
-      assert_toast "Les phases ajouté à 6ème 1."
-      assert_no_selector DAYS_MODAL
-      within(toggle("Exercise", @phases.public_id)) do
-        assert_text "Assigné"
-        assert_no_text "Pour "
-      end
-
-      within(toggle("Exercise", @bilan.public_id)) { click_on "Assigner" }
-      assert_selector DAYS_MODAL, text: "Le bilan sera à rendre pour la séance suivante."
-    end
-    assert_nil Orm::ClassroomAssignment.sole.due_on
-    assert_equal 0, Orm::ClassroomSessionDay.count
-  end
-
   test "« Assigner » without any day keeps the modal open with its error, and writes nothing" do
     sign_in_teacher
     visit sheet_path
@@ -124,7 +103,8 @@ class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
 
     within DAYS_MODAL do
       assert_selector "fieldset[aria-invalid=true]"
-      assert_text "Cochez au moins un jour, ou choisissez « Plus tard »."
+      assert_text "Cochez au moins un jour."
+      assert_no_text "Plus tard"
     end
     assert_equal 0, Orm::ClassroomAssignment.count
   end

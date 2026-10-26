@@ -1,47 +1,43 @@
-<%# 🌐 UI · school/teacher_schools/index — « Mes établissements » de l'enseignant %>
-<%# Rôle : une carte par établissement (principal, « Vous êtes ici », « Aller dans… », ⋮ « Quitter » confirmé), puis « Ajouter un établissement » sous le plafond %>
-<%# ADR  : 0094 · UDR : 0006, 0042, 0054, 0098 (§3.1), 0099 (§3.1 à §3.3) · Stimulus : dropdown, modal, school--drena-schools %>
+<%# 🌐 UI · school/teacher_schools/index — « Mes établissements » de l'enseignant, écran de retrait %>
+<%# Rôle : « N sur 3 », une ligne par établissement (« En cours », « Retirer » confirmé, jamais sur le dernier), puis « Ajouter un établissement » sous le plafond %>
+<%# ADR  : 0094 · UDR : 0006, 0042, 0054, 0098 (§3.1), 0099 (§3.1 à §3.3), écrans enseignant sans répétition (§3.4) · CA-H4, CA-H5 · Stimulus : modal, school--drena-schools %>
 <% page_title t(".page_title") %>
 <% max = Entities::School::TeacherSchools::MAX %>
-<%= ui_page_header title: t(".title"), subtitle: t(".subtitle", count: teacher_schools.size, max:) %>
+<% full = teacher_schools.size >= max %>
+<% removable = teacher_schools.size > 1 %>
+<div class="flex max-w-md flex-col gap-4">
+  <div>
+    <%= ui_back_link t(".back"), href: teacher_menu_path %>
+    <h1 class="font-display text-lg leading-tight font-medium text-ink"><%= t(".title") %></h1>
+    <% if full %>
+      <p id="schools_limit" class="mt-1 text-sm text-mute"><%= t(".count", count: teacher_schools.size, max:) %> <%= t(".full") %></p>
+      <% errors = @school_join ? @school_join.errors[:base] : [] %>
+      <% if errors.any? %>
+        <p id="schools_limit_error" role="alert" class="mt-2 flex items-center gap-1.5 text-sm font-medium text-error">
+          <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= errors.to_sentence %>
+        </p>
+      <% end %>
+    <% else %>
+      <p class="mt-1 text-sm text-mute"><%= t(".count", count: teacher_schools.size, max:) %></p>
+    <% end %>
+  </div>
 
-<div class="flex max-w-3xl flex-col gap-6">
   <section id="teacher_schools" aria-label="<%= t(".title") %>">
-    <ul class="flex flex-col gap-3">
+    <ul class="divide-y divide-line">
       <% teacher_schools.each do |school| %>
         <% dialog_id = "leave-school-#{school.public_id}" %>
-        <li id="teacher_school_<%= school.public_id %>">
-          <%= ui_card padding: :md do %>
-            <div class="flex items-start justify-between gap-3">
-              <div class="min-w-0">
-                <p class="truncate font-display font-medium text-ink" title="<%= school.name %>">
-                  <%= school.name %><% if school.sigle.present? %> (<%= school.sigle %>)<% end %>
-                </p>
-                <p class="text-sm text-mute"><%= school.drena_name %></p>
-                <% if school.primary || school.current %>
-                  <div class="mt-2 flex flex-wrap gap-1.5">
-                    <% if school.primary %><%= ui_badge t(".primary"), size: :sm %><% end %>
-                    <% if school.current %><%= ui_badge t(".current"), size: :sm, tone: :brand %><% end %>
-                  </div>
-                <% end %>
-              </div>
-              <% if teacher_schools.size > 1 %>
-                <%= ui_dropdown label: t(".actions", school: school.name), id: "teacher-school-menu-#{school.public_id}" do %>
-                  <%= ui_dropdown_item t(".leave"), dialog: dialog_id, icon: "arrow-right-start-on-rectangle", tone: :danger %>
-                <% end %>
-              <% end %>
-            </div>
-            <% unless school.current %>
-              <%= button_to teacher_current_school_path, method: :patch, params: { school_public_id: school.public_id },
-                            form: { id: "go-school-#{school.public_id}", class: "mt-3" },
-                            "aria-label": t(".go_label", school: school.name),
-                            class: "inline-flex min-h-tap cursor-pointer items-center gap-2 rounded-ln border border-line bg-white px-4 text-sm font-medium text-ink hover:bg-mist focus-visible:outline-2 focus-visible:outline-brand" do %>
-                <span><%= t(".go") %></span><%= ui_icon "arrow-right", size: :sm %>
-              <% end %>
-            <% end %>
-          <% end %>
-          <% if teacher_schools.size > 1 %>
-            <%= ui_modal title: t(".leave_title", school: school.name), id: dialog_id, size: :sm, described_by: "#{dialog_id}-description" do |modal| %>
+        <li id="teacher_school_<%= school.public_id %>" class="flex items-center justify-between gap-3 py-3">
+          <div class="min-w-0">
+            <p class="flex flex-wrap items-center gap-2 text-ink">
+              <span class="truncate" title="<%= school.name %>"><%= school.sigle.presence || school.name %></span>
+              <% if school.current %><%= ui_badge t(".current"), size: :sm, tone: :brand %><% end %>
+            </p>
+            <% if school.sigle.present? %><p class="truncate text-sm text-mute"><%= school.name %></p><% end %>
+          </div>
+          <% if removable %>
+            <%= ui_modal title: t(".leave_title", school: school.name), id: dialog_id, size: :sm, described_by: "#{dialog_id}-description",
+                         trigger: safe_join([ t(".leave"), tag.span(" #{school.name}", class: "sr-only") ]), trigger_variant: :secondary,
+                         trigger_size: :sm do |modal| %>
               <% modal.footer do %>
                 <%= ui_button t(".cancel"), variant: :secondary, data: { action: "modal#close" } %>
                 <%= ui_button t(".leave_confirm"), type: :submit, form: "#{dialog_id}-form", variant: :danger %>
@@ -55,7 +51,9 @@
     </ul>
   </section>
 
-  <% if teacher_schools.size < max %>
+  <p class="rounded-ln bg-mist p-4 text-sm text-mute"><%= t(".archived_note") %></p>
+
+  <% unless full %>
     <%= ui_card id: "add_school", padding: :md do %>
       <h2 class="font-display text-lg font-medium text-ink"><%= t(".add_title") %></h2>
       <p class="mt-1 mb-4 text-sm text-mute"><%= t(".add_description") %></p>
@@ -68,7 +66,5 @@
                                                          post_url: teacher_schools_path, submit_label: t(".join") %>
       <% end %>
     <% end %>
-  <% else %>
-    <p id="schools_limit" class="text-sm text-mute"><%= t(".limit", max:) %></p>
   <% end %>
 </div>

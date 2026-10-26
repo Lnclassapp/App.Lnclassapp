@@ -293,7 +293,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
     find("li[id='classroom_#{classroom.public_id}'] a").click
     assert_selector "#classroom_header h1", text: "Tle D 1"
-    link = find("#classroom_link [data-clipboard-text-value]")["data-clipboard-text-value"]
+    link = find("#classroom_link [data-clipboard-text-value^='http']")["data-clipboard-text-value"]
     assert_equal join_classroom_url(classroom.reload.link_token, host: URI(link).host, port: URI(link).port), link
 
     # ADR-0072 : un cours ne s'assigne plus ; sa page du catalogue n'offre aucune action à l'enseignant.
@@ -314,9 +314,12 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     exercise = Orm::Exercise.find_by!(title: EXERCISE)
     assert_no_page_reload do
       within("[id='assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}']") { click_on "Assigner" }
-      # No session days yet: « Assigner » opens the days modal (UDR-0062 §3.4); « Plus tard » assigns without a due date.
-      within("turbo-frame#modal dialog[open]") { click_on "Plus tard" }
-      assert_toast "#{EXERCISE} ajouté à Tle D 1."
+      # No session days yet: « Assigner » opens the days modal (UDR-0062 §3.4), which asks for a day (no « Plus tard »).
+      within("turbo-frame#modal dialog[open]") do
+        find("label", text: "Lun.").click
+        click_on "Assigner"
+      end
+      assert_toast "#{EXERCISE} ajouté à Tle D 1, à rendre"
       within("[id='assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}']") { assert_text "Assigné" }
     end
     link
