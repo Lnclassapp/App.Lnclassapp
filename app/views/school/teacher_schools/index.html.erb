@@ -56,7 +56,7 @@
                 <%= ui_button t(".leave_confirm"), type: :submit, form: "#{dialog_id}-form", variant: :danger %>
               <% end %>
               <p id="<%= dialog_id %>-description" class="text-sm text-mute"><%= t(".leave_warning") %></p>
-              <%= form_with url: teacher_school_path(school.public_id), method: :delete, id: "#{dialog_id}-form" do %><% end %>
+              <%= form_with url: teacher_school_path(school.public_id), method: :delete, id: "#{dialog_id}-form", data: { modal_refresh: true } do %><% end %>
             <% end %>
           <% end %>
         </li>
