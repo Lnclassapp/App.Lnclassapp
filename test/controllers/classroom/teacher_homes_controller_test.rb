@@ -426,6 +426,19 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "a teacher whose current school is not primary and who has no primary school is sent to the exit screen" do
+    other = create_school(name: "Collège Saint-Michel")
+    teacher = create_teacher(school: @school)
+    Orm::TeacherSchool.create!(teacher:, school: other, primary: false)
+    sign_in_as teacher
+    patch teacher_current_school_path, params: { school_public_id: other.public_id }
+    Orm::TeacherSchool.where(teacher:, school: @school).delete_all
+
+    get teacher_home_path
+
+    assert_redirected_to pending_account_path
+  end
+
   test "a student and the team receive 403" do
     [ create_student(classroom: @classroom), create_team_member ].each do |user|
       sign_in_as user

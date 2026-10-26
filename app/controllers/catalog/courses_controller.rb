@@ -90,10 +90,9 @@ module Catalog
     # Toujours une chaîne : une valeur forgée (tableau, vide) ne vaut aucun slug, et le titre reste rendu.
     def after_material = params[:after_material].to_s
 
-    # Lot O5 (CA-E15) : les matières de l'élève (celles de sa classe), dans l'ordre de la grille de l'accueil ; [] sinon.
+    # Lot O5 (CA-E15) : les matières de l'élève (celles de sa classe), dans l'ordre de la grille de l'accueil. Lu par la vue de
+    # l'élève seulement (index : « if student »).
     def lesson_materials
-      return [] unless current_actor.student?
-
       @lesson_materials ||= Queries::Catalog::CourseCatalogQuery.new.student_materials(audience: student_audience)
     end
 

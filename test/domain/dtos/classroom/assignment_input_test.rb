@@ -34,6 +34,30 @@ module Dtos
         assert input.errors.of_kind?(:classroom_public_id, :blank)
         assert input.errors.of_kind?(:assignable_key, :blank)
       end
+
+      test "sans case des jours (modale non montrée ou valeur absente), l'assignation reste valide et weekdays est nil" do
+        input = AssignmentInput.new(classroom_public_id: "cls123", assignable_type: "Exercise", assignable_key: "Xy12ab")
+        input.weekdays = nil
+
+        assert input.valid?
+        assert_nil input.weekdays
+      end
+
+      test "la modale des jours exige au moins un jour, et garde les jours cochés" do
+        base = { classroom_public_id: "cls123", assignable_type: "Exercise", assignable_key: "Xy12ab" }
+
+        checked = AssignmentInput.new(**base).tap { it.weekdays = %w[1 3] }
+        assert checked.valid?
+        assert_equal [ 1, 3 ], checked.weekdays
+
+        none = AssignmentInput.new(**base).tap { it.weekdays = [] }
+        assert_not none.valid?
+        assert none.errors.of_kind?(:weekdays, :blank)
+
+        forged = AssignmentInput.new(**base).tap { it.weekdays = "pas-une-liste" }
+        assert_not forged.valid?
+        assert forged.errors.of_kind?(:weekdays, :inclusion)
+      end
     end
   end
 end
