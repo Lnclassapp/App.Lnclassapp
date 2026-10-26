@@ -55,11 +55,11 @@ class SystemBudgetTest < Minitest::Test
     refute mixed.within_budget?
   end
 
-  # Amendement du 2026-10-24 : 50 s pour les seuls fichiers système de mvp-teacher-student.
+  # Amendement du 2026-10-24 : 50 s pour les seuls fichiers système de mvp-teacher-student ; élargi le 2026-10-26 à ses 48 fichiers.
   def test_mvp_teacher_student_has_fifty_seconds_for_its_own_files_only
     signup, page = %w[test/system/identity/student_signup_steps_test.rb test/system/classroom/classroom_page_test.rb]
 
-    assert_equal 23, SystemBudget::GRANTS.fetch("mvp-teacher-student")[:files].size
+    assert_equal 48, SystemBudget::GRANTS.fetch("mvp-teacher-student")[:files].size
     assert_includes SystemBudget::GRANTS.fetch("mvp-teacher-student")[:files], signup
     assert budget(timings: { signup => 30.0, page => 20.0 }, touched: [ signup, page ]).within_budget?, "50 s : accepté"
     refute budget(timings: { signup => 30.0, page => 20.1 }, touched: [ signup, page ]).within_budget?, "50,1 s : au-delà"
