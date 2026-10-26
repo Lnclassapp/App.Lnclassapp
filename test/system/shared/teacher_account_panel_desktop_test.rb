@@ -181,6 +181,49 @@ class Shared::TeacherAccountPanelDesktopTest < ApplicationSystemTestCase
     end
   end
 
+  # Review of P0: at 390 px « Mes matières » and « Mes établissements » are whole pages, with no panel: a cut network says so
+  # at the top of the screen (role=alert, French, once), the confirmation of a school closes, the page does not change.
+  test "at 390 px, a cut network on « Retirer » says so at the top of the page, for a subject then for a school, and a new try works" do
+    teacher = Orm::User.find_by!(first_name: "Awa")
+    [ create_school(name: "Collège Saint-Michel", sigle: "CSM"), create_school(name: "Collège Notre-Dame", sigle: "CND") ].each { add_teacher_school(teacher, it) }
+    failed = tn("account_panel.request_failed")
+    cut_network = <<~JS
+      const original = window.fetch
+      window.networkCut = true
+      window.fetch = (input, init) => (window.networkCut && init?.method?.toUpperCase() !== "GET" ? Promise.reject(new TypeError("Failed to fetch")) : original(input, init))
+    JS
+    with_mobile_viewport do
+      visit profile_materials_path
+      assert_selector "#teacher_materials li", count: 3
+      execute_script(cut_network)
+
+      find("#teacher_material_svt").click_button I18n.t("identity.profile_materials.show.remove")
+      assert_selector "main [role=alert]", text: failed, count: 1
+      assert_selector "#teacher_materials li", count: 3
+      before_title = "document.querySelector('main [role=alert]').compareDocumentPosition(document.querySelector('main h1')) & Node.DOCUMENT_POSITION_FOLLOWING"
+      assert_predicate evaluate_script(before_title), :positive?
+      find("#teacher_material_svt").click_button I18n.t("identity.profile_materials.show.remove")
+      assert_selector "main [role=alert]", text: failed, count: 1
+
+      visit teacher_schools_path
+      assert_selector "#teacher_schools li", count: 3
+      assert_no_selector "main [role=alert]"
+      execute_script(cut_network)
+      csm = Orm::School.find_by!(sigle: "CSM").public_id
+      within("#teacher_school_#{csm}") { click_button I18n.t("school.teacher_schools.index.leave") }
+      find("dialog#leave-school-#{csm}[open]").click_button I18n.t("school.teacher_schools.index.leave_confirm")
+      assert_selector "main [role=alert]", text: failed, count: 1
+      assert_no_selector "dialog[open]"
+      assert_selector "#teacher_schools li", count: 3
+
+      execute_script("window.networkCut = false")
+      within("#teacher_school_#{csm}") { click_button I18n.t("school.teacher_schools.index.leave") }
+      find("dialog#leave-school-#{csm}[open]").click_button I18n.t("school.teacher_schools.index.leave_confirm")
+      assert_selector "#teacher_schools li", count: 2
+      assert_no_selector "main [role=alert]", text: failed
+    end
+  end
+
   test "at 1280 px, each screen of the panel takes the keyboard focus on its title, and the panel still closes back to the avatar" do
     with_mobile_viewport(DESKTOP_VIEWPORT) do
       visit profile_path
