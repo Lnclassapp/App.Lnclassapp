@@ -1,5 +1,5 @@
 <%# 🌐 UI · classroom/assignment_follow_ups/show — rapport d'un exercice assigné, enseignant de la classe et équipe %>
-<%# Rôle : en-tête (rond de la matière, titre, « Maths · 10 questions · à rendre … »), « 20 / 27 faits » et cases par badge (section), rendus en retard puis pas encore faits, nommés %>
+<%# Rôle : en-tête (rond de la matière, titre, « Maths · 10 questions · à rendre … »), puis le rapport (section) : « 20 / 27 faits », cases par badge, questions, élèves dont ceux qui n'ont pas fait l'exercice %>
 <%# ADR  : 0072, 0079, 0097 (§4.9) · UDR : 0062 (§3.9), 0072 (§3.5 bis), 0109 (§3.1), enseignant (§3.8) · chaque nom mène à la fiche de l'élève ; classe archivée : 404 (ADR-0088) %>
 <% follow_up = @follow_up %>
 <% illustration = subject_illustration(follow_up.material_slug) %>
@@ -26,34 +26,8 @@
                                     class: "w-full lg:w-auto lg:shrink-0" %>
 </div>
 
+<%# Une date limite passée (jour d'Abidjan) : « En retard » sous chaque élève qui n'a pas fait l'exercice, et la pastille « N en retard » les compte. %>
+<% overdue = follow_up.due_on.present? && follow_up.due_on < Time.zone.today %>
 <%= render "assessment/comprehension/section", comprehension: @comprehension, classroom: @classroom, assignment_public_id: follow_up.public_id,
-                                                    late: (follow_up.counts.late if follow_up.due_on) %>
-
-<% if follow_up.due_on.nil? %>
-  <p class="text-sm text-mute"><%= t(".no_due_date") %></p>
-<% elsif follow_up.late_students.any? %>
-  <section id="late_students" aria-labelledby="late_students_title">
-    <h2 id="late_students_title" class="mb-4 font-display text-xl font-medium"><%= t(".late_title") %></h2>
-    <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
-      <% follow_up.late_students.each do |student| %>
-        <li class="flex items-center justify-between gap-3 px-4 py-3 sm:px-5">
-          <%= comprehension_student_name(student, @classroom) %>
-          <span class="shrink-0 text-sm text-mute tabular-nums"><%= t(".done_on", date: l(student.done_on, format: :due_short)) %></span>
-        </li>
-      <% end %>
-    </ul>
-  </section>
-<% end %>
-
-<% if follow_up.pending_students.any? %>
-  <section id="pending_students" aria-labelledby="pending_students_title" class="mt-8">
-    <h2 id="pending_students_title" class="mb-4 font-display text-xl font-medium">
-      <%= t("assessment.comprehension.pending.title", count: follow_up.pending_students.size) %>
-    </h2>
-    <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
-      <% follow_up.pending_students.each do |student| %>
-        <li class="flex px-4 py-3 sm:px-5"><%= comprehension_student_name(student, @classroom) %></li>
-      <% end %>
-    </ul>
-  </section>
-<% end %>
+                                                    late: (follow_up.pending_students.size if overdue), pending: follow_up.pending_students,
+                                                    overdue: overdue %>

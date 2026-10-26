@@ -139,14 +139,14 @@ module Queries
         hand_in(assignment, 65, at: Time.zone.local(2026, 10, 10, 10))
         follow_up = AssignmentFollowUpQuery.new.call(classroom_public_id: @classroom.public_id, public_id: assignment.public_id)
         detail = Assessment::ComprehensionDetailQuery.new.call(classroom_public_id: @classroom.public_id,
-                                                               assignment_public_id: assignment.public_id, category: :fragile)
+                                                               assignment_public_id: assignment.public_id, badge: :bronze)
 
         row = file.assignments.sole
 
         assert_equal [ @awa.public_id ], follow_up.late_students.map(&:public_id)
         assert_equal follow_up.late_students.sole.done_on, row.done_on
         assert_equal :late, row.status
-        assert_equal [ [ @awa.public_id, 65, :progress ] ], detail.students.map { [ it.public_id, it.best, it.trend ] }
+        assert_equal [ [ @awa.public_id, 65 ] ], detail.students.map { [ it.public_id, it.best ] }
         assert_equal [ 65, :fragile, :progress ], row.to_h.values_at(:best, :category, :trend)
       end
 
