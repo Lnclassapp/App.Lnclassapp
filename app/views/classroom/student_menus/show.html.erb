@@ -1,9 +1,9 @@
-<%# 🌐 UI · classroom/student_menus/show — panneau du compte de l'élève, en page (/students/menu) %>
-<%# Rôle : le panneau du compte (_account_panel, liens 3 à 7) en page ; seule l'app Android y mène, en modale ; sur le web, l'avatar ouvre le menu déroulant %>
-<%# UDR  : 0080 §3.3, 0084 §3.2 · titre « Mon compte · Lnclass » %>
+<%# 🌐 UI · classroom/student_menus/show — « Mon compte » de l'élève, en page (/students/menu) %>
+<%# Rôle : le panneau « Mon compte » (_avatar_menu, page: true) : la coque Android et le bandeau de l'accueil y mènent ; ailleurs, l'avatar de l'en-tête l'ouvre en plein écran, même liste %>
+<%# UDR  : écrans élève sans répétition §3.1 · titre « Mon compte · Lnclass » %>
 <% page_title t("shared.navigation.account_panel.title") %>
 <%= ui_page_header title: t("shared.navigation.account_panel.title") %>
 
 <%= ui_card id: "student_menu", class: "max-w-md" do %>
-  <%= render "shared/navigation/account_panel", user: shell_user, page: true %>
+  <%= render "shared/navigation/avatar_menu", user: shell_user, page: true %>
 <% end %>

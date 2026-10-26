@@ -1,41 +1,34 @@
-<%# 🌐 UI · classroom/student_homes/show — accueil élève (CL-23, TR-04, AS-36), redessiné (chantier accueil-eleve) %>
-<%# Rôle : une colonne (pleine, puis 720 px dès 700 px, 960 px au plus dès 1 024 px) : classe, matières, annonces, à faire, activité différée ; sans classe, « Choisis ta classe » %>
-<%# ADR  : 0033, 0043, 0078, 0085, 0089 · UDR : 0057, 0071 §3.5, 0078, 0081 §3.5, 0084 §3.5 · titre « Accueil · Élève · Lnclass » ; listes à 3 lignes puis « Voir plus » %>
+<%# 🌐 UI · classroom/student_homes/show — accueil élève : bandeau, carte du prochain exercice, grille des matières, annonces, historique %>
+<%# Rôle : le bandeau (hors de la colonne, sous lg), puis une colonne : la carte à cheval sur le bandeau, 7 cases, le carrousel, l'historique différé ; sans classe, la seule carte « Choisis ta classe » %>
+<%# ADR  : 0033, 0043, 0078, 0085, 0089 · UDR : 0071 §3.5, 0081 §3.5, XXXX accueil élève (§3.1 structure, §3.3 états) · titre « Accueil · Élève · Lnclass » %>
 <% page_title t(".page_title") %>
 <%# UDR-0084 §3.5 : ni « Bonjour » ni prénom ; la page garde son titre pour les lecteurs d'écran. %>
 <h1 class="sr-only"><%= t(".page_title") %></h1>
+<%# Le bandeau va bord à bord : le shell le rend au-dessus de la colonne (content_for :home_band) et retire l'en-tête sous lg. %>
+<% content_for :home_band, render("band", user: shell_user) %>
 
-<%# grid-cols-1 = minmax(0, 1fr) : une ligne longue (titre, bande de cartes) ne peut plus élargir la colonne, ni la page.
-    max-w-180 (720 px) ne borne rien sous 700 px, où la colonne prend toute la largeur moins les marges. %>
-<div id="student_home" class="mx-auto grid w-full max-w-180 grid-cols-1 gap-6 lg:max-w-240">
-  <% if @home.nil? %>
-    <%# UDR-0081 §3.5 : sans classe active, ni exercices ni matières ni activité à lire (tous suivent la classe) : la seule carte. %>
-    <%= render "no_classroom" %>
-  <% else %>
-    <%# UDR-0084 §3.5 : le même ordre à toutes les tailles, celui de HOME_SECTIONS[:student]. %>
-    <% home_sections_for(:student).each do |key, icon| %>
-      <% if key == :classroom %>
-        <%= render "classroom_card", home: @home %>
-      <% elsif key == :subjects %>
-        <%= render "subjects", subjects: @home.subjects, late_slugs: @home.late_material_slugs, icon: %>
-      <% elsif key == :announcements %>
-        <%# UDR-0071 §3.5 : seulement si l'élève a au moins une annonce lisible, masquées comprises ; toutes masquées, la
-            section est rendue cachée (cible d'« Annuler »). %>
-        <% if @announcements.any_readable? %>
-          <%= render "communication/messages/carousel", carousel: @announcements, link: false %>
-        <% end %>
-      <% elsif key == :todo %>
-        <%= render "todo", exercises: @home.assigned_exercises, gaps: @home.pending_gaps, icon:, daily: @daily,
-                           classroom: @home.classroom_name, school: @home.school_name %>
-      <% end %>
+<%# Le message du partage WhatsApp « Inviter » : la grille et la carte du jour partagent le même lien (ADR-0089 §4.3). %>
+<% invite_href = whatsapp_share_url(t("classroom.student_homes.invite_teacher.message", classroom: @home&.classroom_name, school: @home&.school_name,
+                                                                                         link: new_teacher_registration_url)) %>
+<%# grid-cols-1 = minmax(0, 1fr) : une ligne longue ne peut plus élargir la colonne, ni la page. -mt-12 : la carte déborde sur le
+    bandeau (le shell garde 24 px de marge haute ; sans bandeau, dans la coque Android, elle reste à sa place) ; data-bleed-keep : les cartes restent dans la marge, arrondies, sous 640 px. %>
+<div id="student_home" data-bleed-keep class="<%= class_names("mx-auto grid w-full max-w-180 grid-cols-1 gap-6 lg:max-w-240", "-mt-12 lg:mt-0" => !lnclass_app?) %>">
+  <%= render "next_step", home: @home, daily: @daily, form: @form, archived: @archived, invite_href: %>
+  <% if @home %>
+    <%# UDR accueil élève §3.3 : sans classe, la grille, les annonces et l'historique sont masqués. %>
+    <%= render "subjects", subjects: @home.subjects, late_slugs: @home.late_material_slugs, invite_href: %>
+    <%# UDR-0071 §3.5 : seulement si l'élève a au moins une annonce lisible, masquées comprises ; toutes masquées, la
+        section est rendue cachée (cible d'« Annuler »). %>
+    <% if @announcements.any_readable? %>
+      <%= render "communication/messages/carousel", carousel: @announcements, link: false %>
     <% end %>
-
-    <%= ui_card title: t(".activity_title"), subtitle: t(".activity_subtitle"), id: "student_home_activity" do %>
+    <section id="student_history" aria-labelledby="student_history_title" class="space-y-3">
+      <h2 id="student_history_title" class="font-display text-base font-medium text-ink"><%= t("classroom.student_homes.history.title") %></h2>
       <%= turbo_frame_tag Classroom::StudentHomesController::RECENT_ACTIVITY_FRAME, src: student_home_path, loading: :lazy,
                           target: "_top" do %>
         <%= ui_loading_state variant: :skeleton %>
       <% end %>
-    <% end %>
+    </section>
   <% end %>
 </div>
 <%# UDR-0078, amendement du 2026-10-07 : l'invitation à installer l'app, en pop-up, sur l'accueil seulement ; en dernier. %>

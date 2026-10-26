@@ -34,7 +34,10 @@ class Classroom::SessionDaysControllerTest < ActionDispatch::IntegrationTest
         assert_select "input[type=checkbox]", 6
       end
       assert_select "p", text: tl("edit.unchanged")
+      assert_select "p[hidden][data-classroom--next-session-target=line]", text: including(tl("edit.next_session"))
     end
+    assert_select "[data-controller='classroom--next-session'][data-classroom--next-session-today-value='#{Date.current.iso8601}']"
+    assert_select "dialog.dialog-sheet button[type=button][data-action='modal#close']", text: including(tl("edit.cancel"))
     assert_select "button[type=submit]", text: including(tl("edit.submit"))
   end
 

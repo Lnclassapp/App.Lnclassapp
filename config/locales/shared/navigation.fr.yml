@@ -57,8 +57,8 @@ fr:
       home_band:
         account: "Mon compte, %{name}"
         help: "Besoin d'aide ?"
-      # UDR-0084 §3.2 : menu de l'avatar de l'élève sur le web. Accueil, Cours, Ma classe, Mon profil et Se déconnecter
-      # reprennent les clés de shared.navigation ; « Besoin d'aide ? », shared.help_sheet.trigger ; le menu, account_panel.label.
+      # Lot E1 (mvp-teacher-student) : l'avatar de l'élève ouvre « Mon compte » (account_panel.title, entries.*, sign_out) ; `open`
+      # nomme le déclencheur. `history` et `add_photo` ne servent plus qu'à la branche élève de _account_panel, qu'aucune page ne rend.
       avatar_menu:
         open: "Mon compte, %{name}"
         history: "Mon historique"

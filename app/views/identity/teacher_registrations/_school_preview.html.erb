@@ -1,11 +1,12 @@
-<%# 🌐 UI · identity/teacher_registrations/_school_preview — bandeau « Votre établissement » d'un lien d'invitation valide %>
-<%# Rôle : ne montre que le nom de l'établissement et celui de sa DRENA : ni identifiant, ni effectif, ni enseignant %>
-<%# ADR  : 0057, 0083 · UDR : 0044, 0079 %>
-<div id="school-preview" class="flex items-center gap-3 rounded-ln border border-brand/30 bg-brand-soft px-4 py-3">
-  <span class="grid size-10 shrink-0 place-items-center rounded-full bg-white text-brand-strong"><%= ui_icon "building-library" %></span>
-  <div class="min-w-0">
-    <p class="text-xs font-medium tracking-wider text-mute uppercase"><%= t(".label") %></p>
-    <p class="font-display font-medium text-ink"><%= preview.school_name %></p>
-    <p class="text-sm text-mute"><%= t(".drena", drena: preview.drena_name) %></p>
-  </div>
+<%# 🌐 UI · identity/teacher_registrations/_school_preview — le rappel « Votre établissement » d'un lien d'invitation valide, à l'étape 2 %>
+<%# Rôle : ne montre que le nom de l'établissement et celui de sa DRENA : ni identifiant, ni effectif, ni enseignant ; « Ce n'est pas votre établissement ? » mène à la voie standard %>
+<%# ADR  : 0057, 0083 · UDR : 0044, 0079, XXXX-ecrans-enseignant-sans-repetition (§3.9) %>
+<div id="school-preview" class="rounded-ln border border-brand/30 bg-brand-soft px-4 py-3">
+  <p class="text-xs tracking-wider text-mute uppercase"><%= t(".label") %></p>
+  <p class="text-base font-medium text-ink"><%= preview.school_name %></p>
+  <p class="text-sm text-mute"><%= t(".drena", drena: preview.drena_name) %></p>
+  <%= link_to new_teacher_registration_path, id: "other-school",
+              class: "mt-1 inline-flex min-h-tap items-center text-sm font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" do %>
+    <%= t(".other_school") %>&#32;<span aria-hidden="true">›</span>
+  <% end %>
 </div>

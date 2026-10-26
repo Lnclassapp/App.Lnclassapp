@@ -1,0 +1,9 @@
+<%# 🌐 UI · classroom/student_homes/next_step/_progress — « 4 exercices faits sur 6 » et sa barre %>
+<%# Rôle : la progression de l'assigné, écrite une fois ; la barre est annoncée comme une mesure %>
+<%# UDR  : XXXX accueil élève §3.2 (5. progression) %>
+<%# locals: (step:) -%>
+<div class="space-y-1.5">
+  <p class="text-meta text-mute"><%= t("classroom.student_homes.next_step.progress", count: step.done_count, total: step.total_count) %></p>
+  <%= ui_progress done: step.done_count, total: step.total_count, role: :student,
+                  label: t("classroom.student_homes.next_step.progress_label", done: step.done_count, total: step.total_count) %>
+</div>

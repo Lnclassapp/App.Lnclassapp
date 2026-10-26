@@ -1,4 +1,4 @@
-# Suivi d'un exercice assigné, enseignant de la classe et équipe — UDR-0062 §3.5, ADR-0072 §4.4, §4.5 ; vouvoiement
+# Suivi d'un exercice assigné, enseignant de la classe et équipe — UDR-0062 §3.5, UDR enseignant §3.8, ADR-0072 §4.4, §4.5 ; vouvoiement
 fr:
   classroom:
     assignment_follow_ups:
@@ -7,10 +7,12 @@ fr:
         assigned_on: "Assigné le %{date}"
         assigned_format: "%-d %b"
         see_exercise: "Voir l'exercice"
-        counts_label: "Suivi de l'exercice"
-        done: "Faits"
-        late: "dont en retard"
-        pending: "Pas encore faits"
+        # « Maths · 10 questions · à rendre ven. 30 oct. » (UDR enseignant §3.8).
+        meta:
+          one: "%{subject} · %{count} question · %{due}"
+          other: "%{subject} · %{count} questions · %{due}"
+        due: "à rendre %{date}"
+        no_due: "sans date limite"
         late_title: "Rendus en retard"
         done_on: "Fait le %{date}"
         no_due_date: "Cet exercice n'a pas de date limite."

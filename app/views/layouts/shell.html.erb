@@ -1,6 +1,6 @@
 <%# 🌐 UI · layouts/shell — shell applicatif unique des espaces connectés, paramétré par le rôle %>
 <%# Rôle : en-tête, barre latérale (lg+), barre basse (mobile, direction et équipe seulement) ; coque Android ou mode concentré : le contenu seul %>
-<%# UDR  : 0006, 0080 (§3.3), 0084 (§3.3), 0087 (§3.2, content_for :focus), XXXX écrans enseignant §3.3 · ADR : 0084 (§4.2), 0086 (§4.2) ; exige helper_method :shell_user %>
+<%# UDR  : 0006, 0080 (§3.3), 0084 (§3.3), 0087 (§3.2, content_for :focus), XXXX écrans enseignant §3.3, XXXX accueil élève §3.1 (content_for :home_band) · ADR : 0084 (§4.2), 0086 (§4.2) ; exige helper_method :shell_user %>
 <% in_app = lnclass_app? %>
 <%# UDR-0087 §3.2 : une page qui pose content_for :focus (la séance d'exercice) n'a ni en-tête, ni menus, ni barre du bas,
     pour tous les rôles ; elle rend elle-même tout son cadre, sans le conteneur de page. %>
@@ -28,6 +28,9 @@
     <% if focus %>
       <%= yield %>
     <% else %>
+      <%# UDR accueil élève §3.1 : le bandeau de l'accueil va bord à bord, au-dessus de la colonne, sous lg seulement ; la coque
+          Android a ses propres barres (ADR-0084 §4.2) et n'en montre pas. %>
+      <% if content_for?(:home_band) && !in_app %><div class="lg:hidden"><%= yield :home_band %></div><% end %>
       <div class="mx-auto max-w-page px-gutter py-6 lg:px-8 lg:py-8" data-bleed>
         <%= yield %>
       </div>

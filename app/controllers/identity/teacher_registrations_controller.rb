@@ -1,10 +1,10 @@
 # 🌐 DELIVERY · Identity::TeacherRegistrationsController
 # Rôle : inscription enseignant publique, DRENA → établissement ou lien /i/<jeton> (limités en débit) ; succès : session, voie notée et auditée
-# ADR  : 0026, 0028, 0030, 0037, 0050, 0063, 0083, 0094, 0103 · UDR : 0024, 0050, 0079, 0099 (§3.4), 0125
+# ADR  : 0026, 0028, 0030, 0037, 0050, 0063, 0083, 0094, 0103 · UDR : 0024, 0050, 0079, 0099 (§3.4), XXXX-ecrans-enseignant-sans-repetition (§3.9)
 module Identity
   class TeacherRegistrationsController < ApplicationController
     FIELDS = %i[last_name first_name gender contact pin pin_confirmation drena_public_id school_public_id
-                material_slug second_material_slug invite_token].freeze
+                material_slug invite_token].freeze
 
     allow_unauthenticated_access
     rate_limit to: 5, within: 1.minute, only: :create, by: -> { request.remote_ip }, with: -> { refuse_too_many_posts }
@@ -41,7 +41,7 @@ module Identity
       show_invite if result.failure?
       render_result result, form: :new, success: lambda { |registered|
         start_session(registered.token)
-        redirect_to teacher_classrooms_path, notice: t(".welcome"), status: :see_other
+        redirect_to teacher_home_path, notice: t(".welcome"), status: :see_other
       }
     end
 
