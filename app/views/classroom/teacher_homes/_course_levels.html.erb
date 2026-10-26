@@ -9,7 +9,7 @@
 <% end %>
 <% if home.course_levels.any? || invite %>
   <nav id="teacher_home_course_levels" aria-label="<%= t(".label") %>">
-    <ul class="grid grid-cols-4 gap-y-4 sm:grid-cols-6">
+    <ul class="grid grid-cols-4 gap-y-4 sm:grid-cols-6 lg:grid-cols-8">
       <% home.course_levels.each do |level| %>
         <li>
           <%= ui_subject_bubble label: level.label,

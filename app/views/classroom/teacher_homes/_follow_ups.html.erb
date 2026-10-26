@@ -4,7 +4,7 @@
 <% today = Time.zone.today %>
 <%= tag.section id: "teacher_home_week", "aria-labelledby": "teacher_home_week_title", class: "space-y-3",
                 data: (ui_reveal_data if follow_ups.any?) do %>
-  <h2 id="teacher_home_week_title" class="sr-only"><%= t(".title") %></h2>
+  <h2 id="teacher_home_week_title" class="sr-only lg:not-sr-only lg:font-display lg:text-base lg:font-medium lg:text-ink"><%= t(".title") %></h2>
   <% if follow_ups.empty? && no_materials %>
     <%# ADR-0103 §4.6 : sans matière dans cet établissement, aucun exercice ne peut être suivi : on invite à les choisir. %>
     <%= render "choose_materials", id: "teacher_home_week_no_materials" %>
@@ -33,7 +33,7 @@
             </p>
             <div class="flex items-center gap-2">
               <div class="w-20 shrink-0"><%= ui_progress(done: follow_up.done, total: follow_up.present, role: :teacher, label: progress) %></div>
-              <span class="text-xs text-ink tabular-nums"><%= progress %></span>
+              <span class="text-xs text-ink tabular-nums lg:whitespace-nowrap"><%= progress %></span>
             </div>
           </div>
           <%# Retard : ambre, avec son point ; sinon bleu. La pastille ne dit jamais « 0 » : le suivi n'affiche que ce qui reste. %>
