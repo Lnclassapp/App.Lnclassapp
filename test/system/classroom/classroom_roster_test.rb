@@ -1,8 +1,8 @@
 require "application_system_test_case"
 
 # CA-16 (accueil-eleve, ADR-0089 §4.2, UDR-0084 §3.7) : sur la page de sa classe, l'enseignant lit « Fait seul (7 j) ». À
-# l'ordinateur, une colonne à côté du dernier score, « — » pour 0 ; au téléphone (390 px), une ligne « Fait seul : N cette
-# semaine » sous le nom, sans colonne ni défilement horizontal. Les comptes de l'exercice donné ne bougent pas.
+# l'ordinateur, une colonne à côté du dernier score, « — » pour 0 ; au téléphone (390 px), rien de tel (maquette 10 : la ligne
+# n'a que le nom, « N faits sur M » et le badge), sans défilement horizontal. Les comptes de l'exercice donné ne bougent pas.
 class Classroom::ClassroomRosterTest < ApplicationSystemTestCase
   SIGN_IN_WAIT = SystemAuthenticationHelper::SIGN_IN_WAIT
 
@@ -22,20 +22,18 @@ class Classroom::ClassroomRosterTest < ApplicationSystemTestCase
     create_exercise_session(student: @awa, status: "completed", started_at: 8.days.ago, completed_at: 8.days.ago)
   end
 
-  test "CA-16 : la colonne « Fait seul (7 j) » à l'ordinateur, la ligne sous le nom à 390 px" do
+  test "CA-16 : la colonne « Fait seul (7 j) » à l'ordinateur, rien de tel à 390 px" do
     sign_in_as @teacher
     visit classroom_path(@classroom.public_id, q: "a")
 
     assert_selector "#self_practice_heading", text: "Fait seul (7 j)", wait: SIGN_IN_WAIT
     assert_selector "#self_practice_#{@awa.public_id}", text: /Fait seul \(7 j\)\s+2/
     assert_selector "#self_practice_#{@koffi.public_id} span.text-mute", text: "—"
-    assert_no_selector "#self_practice_line_#{@awa.public_id}"
     assert_selector "#assignment_#{@assignment.public_id}", text: "1 / 2 fait"
     growth_shot("lot-d-classroom-roster-1280", scroll_to: "#classroom_roster")
 
     with_mobile_viewport do
-      assert_selector "#self_practice_line_#{@awa.public_id}", text: "Fait seul : 2 cette semaine"
-      assert_selector "#self_practice_line_#{@koffi.public_id}", text: "Fait seul : 0 cette semaine"
+      assert_no_text "Fait seul :"
       assert_no_selector "#self_practice_#{@awa.public_id}"
       assert_no_selector "#self_practice_heading"
       assert_operator page.evaluate_script("document.documentElement.scrollWidth"), :<=,
@@ -63,8 +61,10 @@ class Classroom::ClassroomRosterTest < ApplicationSystemTestCase
       click_on I18n.t("classroom.classrooms.roster.more", count: 30)
       assert_selector "#classroom_roster_count", text: "60 sur 65"
       click_on I18n.t("classroom.classrooms.roster.more", count: 5)
-      assert_selector "#classroom_roster_list li[id^=student_]", count: 65
+      # Le cadre est remplacé : on attend son compteur complet, qui n'existe qu'après le remplacement, avant de compter les lignes.
+      assert_selector "#classroom_roster_count", text: "65 élèves", wait: SIGN_IN_WAIT
       assert_no_selector "#classroom_roster_more"
+      assert_selector "#classroom_roster_list li[id^=student_]", count: 65
     end
     with_mobile_viewport do
       assert_operator page.evaluate_script("document.documentElement.scrollWidth"), :<=,

@@ -4,7 +4,7 @@ require "test_helper"
 # enseigne et pour l'équipe : en-tête et code en majuscules, liste des élèves avec le bouton du code de récupération.
 # ADR-0072, UDR-0027 (amendée le 2026-10-02) : « Cours assignés » est retiré, un cours ne s'assignant plus. Un élève reçoit 403 : il voit le code de sa classe sur ses propres pages, jamais la liste nominative.
 # Lot E de fonctions-espace-eleve (UDR-0062 §3.4) : jours de séance de l'enseignant, exercices assignés et leurs trois
-# comptes, bloc « Cours » qui rouvre le chemin vers les exercices (memo Q18).
+# comptes (le bloc « Cours » en est parti : UDR enseignant sans répétition).
 # Finitions (UDR-0054, FU-02, FU-07, FU-08, FU-26, FU-48) : titre, retour selon le rôle, copie par le contrôleur unique,
 # « Chercher un élève » dans le frame de la liste.
 class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
@@ -71,12 +71,9 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_roster details", text: /#{I18n.t("#{scope}.roster.last_score_tip")}/
     assert_select "#classroom_roster li", 2
     assert_select "#student_#{awa.public_id}", text: /Awa Bamba/
-    # IE-22 (UDR-0079 §3.8 ter) : le numéro masqué, tel que la requête le rend ; le numéro complet nulle part.
-    assert_select "#student_#{awa.public_id} p[title=?]", I18n.t("#{scope}.roster.contact_masked") do
-      assert_select "span[aria-hidden=true]", text: "01 •• •• •• 05"
-      assert_select "span.sr-only", text: I18n.t("#{scope}.roster.contact_masked")
-    end
-    assert_select "#student_#{awa.public_id} p[aria-label]", 0
+    # IE-22, maquette 10 : la ligne n'a plus de numéro (il est sur la fiche) ; le numéro complet n'est nulle part.
+    assert_select "#student_#{awa.public_id}", text: /01 ••|••/, count: 0
+    assert_select "#student_#{awa.public_id} p[aria-label], #student_#{awa.public_id} [title]", 0
     assert_no_match(/0102030405|01 02 03 04 05/, response.body)
     assert_select "#classroom_roster a[href^='tel:'], #classroom_roster [data-controller~=clipboard]", 0
     assert_select "#student_#{awa.public_id}", text: /85 %/
@@ -94,7 +91,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_roster a", text: I18n.t("#{scope}.roster.see_result"), count: 1
   end
 
-  test "IE-22 : quelle que soit la voie de l'enseignant, et pour l'équipe, le numéro d'un élève reste masqué" do
+  test "IE-22 : quelle que soit la voie de l'enseignant, et pour l'équipe, la liste n'a aucun numéro d'élève" do
     student = create_student(classroom: @classroom, contact: "0701020304")
     # La connexion est limitée à 5 essais par minute : les voies qui voyaient tout sous Q22 (collègue, ancien code), une
     # voie sans preuve, et l'équipe. La requête ne lit pas la voie : elle masque pour tout lecteur (ClassroomOverviewQueryTest).
@@ -109,7 +106,8 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
       get classroom_path(@classroom.public_id)
 
       assert_response :success
-      assert_select "#student_#{student.public_id}", text: /07 •• •• •• 04/
+      assert_select "#student_#{student.public_id}", 1
+      assert_select "#student_#{student.public_id}", text: /••/, count: 0
       assert_no_match(/0701020304|07 01 02 03 04/, response.body)
       assert_select "#classroom_roster a[href^='tel:']", 0
       sign_out
@@ -299,51 +297,37 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#assigned_exercises_empty", text: /#{I18n.t("#{scope}.assigned_exercises.empty_description")}/
   end
 
-  test "bloc « Cours » : les cours publiés du niveau de la classe, de la matière de l'enseignant, vers le cours dans la classe" do
+  # UDR enseignant sans répétition : les cours s'ouvrent depuis les niveaux de l'accueil et l'onglet Cours, plus depuis la classe.
+  test "la page n'a plus de bloc « Fiches de cours », même avec des cours publiés du niveau" do
     svt = create_material(name: "SVT", category: "science")
     level = create_level(name: "Tle")
     classroom = create_classroom(school: @school, level:, series: create_series(name: "D"))
     teacher = create_teacher(school: @school, material: svt, classrooms: [ classroom ])
     genetics = create_course(level:, material: svt, name: "Génétique et évolution")
     create_essential(course: genetics)
-    create_course(level:, material: create_material(name: "Mathématiques"), name: "Fonctions")
-    create_course(level: create_level(name: "1ère"), material: svt, name: "Autre niveau")
     sign_in_as teacher
 
     get classroom_path(classroom.public_id)
 
-    assert_select "section#classroom_courses h2", text: I18n.t("#{scope}.courses.title")
-    # UDR-0130 : une section de la page nomme l'objet, « Fiches de cours », et compte ses fiches de révision.
-    assert_select "section#classroom_courses h2", text: "Fiches de cours"
-    assert_select "section#classroom_courses li", 1
-    assert_select "#classroom_course_#{genetics.slug}" do
-      assert_select "a[href='#{classroom_course_path(classroom.public_id, genetics.slug)}']", text: "Génétique et évolution"
-      assert_select "p", text: /#{I18n.t("#{scope}.courses.essentials", count: 1)}/
-      assert_select "p", text: /1 fiche de révision/
-    end
-    assert_no_match(/Fonctions|Autre niveau/, response.body)
+    assert_response :success
+    assert_select "#classroom_courses, #classroom_courses_empty, [id^=classroom_course_]", 0
+    assert_no_match(/Fiches de cours|Génétique et évolution/, response.body)
   end
 
-  # CA-8 (UDR-0077 §3.4) : cours en bande, exercices assignés (3 puis « Voir plus »), élèves — dans cet ordre.
-  test "CA-8 : l'ordre de la page — cours en bande, quatre exercices dont trois visibles, puis les élèves" do
+  # CA-8 (UDR-0077 §3.4) : exercices assignés (3 puis « Voir plus »), fiches à revoir, élèves — dans cet ordre.
+  test "CA-8 : l'ordre de la page — quatre exercices dont trois visibles, puis les élèves" do
     svt = create_material(name: "SVT", category: "science")
     level = create_level(name: "Tle")
     classroom = create_classroom(school: @school, level:)
     teacher = create_teacher(school: @school, material: svt, classrooms: [ classroom ])
-    courses = [ "Génétique", "Écologie" ].map { create_course(level:, material: svt, name: it) }
-    4.times { create_assignment(classroom:, assignable: create_exercise(essential: create_essential(course: courses.first)), by: teacher) }
+    course = create_course(level:, material: svt, name: "Génétique")
+    4.times { create_assignment(classroom:, assignable: create_exercise(essential: create_essential(course:)), by: teacher) }
     create_student(classroom:)
     sign_in_as teacher
 
     get classroom_path(classroom.public_id)
 
-    assert_equal %w[classroom_courses assigned_exercises classroom_roster],
-                 css_select("#classroom_courses, #assigned_exercises, #classroom_roster").map { it["id"] }
-    assert_select "section#classroom_courses.min-w-0 [data-controller='communication--carousel']" do
-      assert_select "ul.overflow-x-auto.snap-x[data-communication--carousel-target=track][aria-label=?] > li.basis-3\\/4",
-                    I18n.t("#{scope}.courses.title"), count: 2
-      assert_select "[data-communication--carousel-target=pager][aria-hidden=true] [data-communication--carousel-target=dot]", 2
-    end
+    assert_equal %w[assigned_exercises classroom_roster], css_select("#assigned_exercises, #classroom_roster").map { it["id"] }
     assert_select "section#assigned_exercises[data-controller=reveal]" do
       assert_select "li[id^='assignment_'][data-reveal-target=item]", 4
       assert_select "li[id^='assignment_'][hidden]", 1
@@ -351,46 +335,22 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # EPM-18, EPM-19 (UDR-0127 §3.1, §3.3) : une bande par matière, titrée ; le collègue d'une autre matière ne voit que la
-  # sienne, mais tous deux voient les exercices assignés de l'autre, avec leur badge.
-  test "EPM-18 : l'enseignant de deux matières lit une bande par matière ; son collègue, la sienne et les exercices de l'autre" do
-    pc = create_material(name: "Physique-Chimie", category: "science")
+  # EPM-18 : tous deux voient les exercices assignés de l'autre, avec leur matière.
+  test "EPM-18 : l'enseignant d'une autre matière voit les exercices assignés de son collègue, avec leur matière" do
     svt = create_material(name: "SVT", category: "science")
     maths = create_material(name: "Mathématiques", category: "science")
     level = create_level(name: "3ème")
     classroom = create_classroom(school: @school, level:, name: "3ème 2")
-    both = create_teacher(school: @school, materials: [ pc, svt ], classrooms: [ classroom ])
+    owner = create_teacher(school: @school, material: svt, classrooms: [ classroom ])
     colleague = create_teacher(school: @school, material: maths, classrooms: [ classroom ])
-    optics = create_course(level:, material: pc, name: "Optique")
     cells = create_course(level:, material: svt, name: "La cellule")
-    create_course(level:, material: maths, name: "Fonctions")
-    create_assignment(classroom:, assignable: create_exercise(title: "Les tissus", essential: create_essential(course: cells)), by: both)
-    sign_in_as both
-
-    get classroom_path(classroom.public_id)
-
-    assert_equal [ "classroom_courses_#{pc.slug}", "classroom_courses_#{svt.slug}" ],
-                 css_select("#classroom_courses div[id^=classroom_courses_]").map { it["id"] }
-    assert_select "#classroom_courses_#{pc.slug} h3", text: /Physique-Chimie/
-    assert_select "#classroom_courses_#{pc.slug} ul[aria-label='Fiches de cours de Physique-Chimie'] #classroom_course_#{optics.slug}"
-    assert_no_match(/Fonctions/, response.body)
-    sign_out
+    create_assignment(classroom:, assignable: create_exercise(title: "Les tissus", essential: create_essential(course: cells)), by: owner)
     sign_in_as colleague
 
     get classroom_path(classroom.public_id)
 
-    assert_select "#classroom_courses h3", 0
-    assert_select "#classroom_courses li", 1
     assert_select "#assigned_exercises", text: /Les tissus/
     assert_select "#assigned_exercises", text: /SVT/
-  end
-
-  test "bloc « Cours » sans cours publié : l'état vide" do
-    sign_in_as @teacher
-
-    get classroom_path(@classroom.public_id)
-
-    assert_select "#classroom_courses_empty", text: /#{I18n.t("#{scope}.courses.empty_title")}/
   end
 
   test "la direction de l'établissement reçoit 403, sans nom ni identifiant d'élève, ni badges ni cercle (UDR-0052)" do
@@ -536,9 +496,9 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_roster_list", 0
   end
 
-  # IL-13 (ADR-0085 §4.4, UDR-0081 §3.7) : « Nouveau » pendant 7 jours, la voie sous chaque nom, les nouveaux en tête,
-  # le compte des nouveaux dans le titre de la liste.
-  test "IL-13 : « Nouveau » et « Inscrit seul » sur l'arrivé d'il y a 2 jours, « Par le lien » seul sur celui d'il y a 10 jours" do
+  # IL-13 (ADR-0085 §4.4) et maquette 10 : les nouveaux restent en tête et comptés dans le titre de la liste ; la ligne n'a plus
+  # de pastille « Nouveau » ni de voie d'arrivée.
+  test "IL-13 : les nouveaux en tête et comptés dans le titre, sans « Nouveau » ni voie d'arrivée sur la ligne" do
     awa = create_student(classroom: @classroom, first_name: "Awa", last_name: "Bamba", joined_via: "link", joined_at: 10.days.ago)
     koffi = create_student(classroom: @classroom, first_name: "Koffi", last_name: "Yao", joined_via: "standard", joined_at: 2.days.ago)
     ali = create_student(classroom: @classroom, first_name: "Ali", last_name: "Cissé", joined_via: "code", joined_at: 1.year.ago)
@@ -551,17 +511,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_select "h2#classroom_roster_title[data-controller]", 0
     assert_equal [ koffi, awa, ali ].map { "student_#{it.public_id}" }, css_select("#classroom_roster_list li[id]").map { it["id"] }
-    assert_select "#student_#{koffi.public_id}" do
-      assert_select "span", text: I18n.t("#{scope}.roster.new")
-      assert_select "p.text-xs.text-mute", text: I18n.t("#{scope}.roster.via.standard")
-    end
-    assert_select "#student_#{awa.public_id}" do
-      assert_select "span", text: I18n.t("#{scope}.roster.new"), count: 0
-      assert_select "p.text-xs.text-mute", text: I18n.t("#{scope}.roster.via.link")
-    end
-    assert_select "#student_#{ali.public_id}", text: /#{I18n.t("#{scope}.roster.via.standard")}|#{I18n.t("#{scope}.roster.via.link")}/,
-                                                count: 0
-    assert_select "#student_#{ali.public_id}", text: /#{I18n.t("#{scope}.roster.new")}/, count: 0
+    assert_select "#classroom_roster_list", text: /Nouveau|Inscrit seul|Par le lien/, count: 0
   end
 
   test "IL-13 : sans nouvel arrivé, le titre n'a pas de pastille" do
@@ -789,8 +739,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_roster div#self_practice_heading.hidden.sm\\:flex", text: /#{Regexp.escape(I18n.t("#{scope}.roster.self_practice"))}/
     assert_select "#self_practice_#{awa.public_id}.hidden.sm\\:block", text: /#{Regexp.escape(I18n.t("#{scope}.roster.self_practice"))}\s+1/
     assert_select "#self_practice_#{koffi.public_id} span.text-mute", text: "—"
-    assert_select "#self_practice_line_#{awa.public_id}.sm\\:hidden", text: "Fait seul : 1 cette semaine"
-    assert_select "#self_practice_line_#{koffi.public_id}", text: "Fait seul : 0 cette semaine"
+    assert_select "#classroom_roster_list", text: /Fait seul :/, count: 0
     assert_progress assignment, 1, 2
   end
 
