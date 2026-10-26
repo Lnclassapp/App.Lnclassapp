@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::AssignmentFollowUpsController
-# Rôle : suivi d'un exercice assigné (UDR-0062 §3.5, UDR-0072 §3.5) : comptes, compréhension, rendus en retard et pas encore faits
-# ADR  : 0026, 0072, 0079, 0088 · UDR : 0062, 0072 · FollowAssignmentPolicy avant toute lecture : élève, autre enseignant, direction → 403
+# Rôle : suivi d'un exercice assigné (UDR enseignant §3.8) : comptes, cases par badge (?badge=), rendus en retard et pas encore faits
+# ADR  : 0026, 0072, 0079, 0088 · UDR : 0062, 0072, enseignant §3.8 · FollowAssignmentPolicy avant toute lecture : élève, autre enseignant, direction → 403
 module Classroom
   class AssignmentFollowUpsController < AuthenticatedController
     allow_roles :teacher, :team
@@ -24,12 +24,12 @@ module Classroom
 
       @comprehension = Queries::Assessment::ComprehensionDetailQuery.new.call(classroom_public_id: @classroom.public_id,
                                                                               assignment_public_id: @follow_up.public_id,
-                                                                              category: requested_category)
+                                                                              badge: requested_badge)
     end
 
-    # Liste blanche : une catégorie inconnue est ignorée (UDR-0072 §3.6), jamais de to_sym sur une entrée libre.
-    def requested_category
-      Entities::Assessment::Comprehension::CATEGORIES.find { |category| category.name == params[:category] }
+    # Liste blanche : un badge inconnu est ignoré (tous les élèves), jamais de to_sym sur une entrée libre.
+    def requested_badge
+      Queries::Assessment::ComprehensionDetailQuery::BADGES.find { |badge| badge.name == params[:badge] }
     end
   end
 end

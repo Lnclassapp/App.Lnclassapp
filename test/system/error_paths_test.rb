@@ -58,7 +58,7 @@ class ErrorPathsTest < ApplicationSystemTestCase
     create_assignment(classroom:, assignable: exercise)
 
     sign_in_as student
-    click_on t("classroom.student_homes.assigned_exercise.start")
+    click_on t("classroom.student_homes.next_step.due.start")
     assert_selector "#question-card", text: /#{t("assessment.exercise_sessions.question_card.number", number: 1, total: 2)}/i
 
     assert_button t("assessment.exercise_sessions.question_card.submit"), disabled: true

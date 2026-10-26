@@ -21,7 +21,7 @@ module Queries
         def display_name = work.display_name
       end
       # Ce que le bloc « Lien de la classe » lit (classroom/classrooms/_link, UDR-0081 §3.6).
-      Link = Data.define(:public_id, :name, :link_token)
+      Link = Data.define(:public_id, :name, :link_token, :join_code)
       # members : les nouveaux d'abord, puis par nom ; students : leur travail, dans le même ordre.
       Detail = Data.define(:classroom, :link, :members) do
         def students = members.map(&:work)
@@ -91,7 +91,7 @@ module Queries
       # → Detail | nil : nil pour une classe inconnue, archivée, d'une autre année ou d'un autre établissement.
       def classroom(school_id:, public_id:, school_year: Entities::Classroom::SchoolYear.current(Date.current))
         row = active_classrooms(school_id, school_year).where(public_id: public_id.to_s)
-                                                       .pick(*CLASSROOM_COLUMNS, "classrooms.link_token")
+                                                       .pick(*CLASSROOM_COLUMNS, "classrooms.link_token", "classrooms.join_code")
         return if row.nil?
 
         # UDR-0081 §3.7 : les nouveaux d'abord, du plus récent au plus ancien, puis les autres par nom (la page de l'enseignant).
@@ -104,7 +104,7 @@ module Queries
 
         teachers = teacher_counts([ row.first ])
         Detail.new(classroom: classroom_row(row, students.size, assignments_count, { row.first => sum(totals.values) }, teachers),
-                   link: Link.new(public_id: row[1], name: row[2], link_token: row.last), members: members(students, totals))
+                   link: Link.new(public_id: row[1], name: row[2], link_token: row[-2], join_code: row[-1]), members: members(students, totals))
       end
 
       private

@@ -75,6 +75,18 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # CA-E5 : un seul bouton, « Recommencer » ; ni « Revoir l'exercice » ni l'encadré « Tu restes autour de… ».
+  test "CA-E5: the student's result has one button only, « Recommencer »" do
+    sign_in_as @student
+
+    show
+
+    assert_select ".ui-button-lg", 1
+    assert_select "form#restart-exercise-form button[type=submit].ui-button-lg", text: I18n.t("#{scope}.show.restart")
+    assert_select "a[href='#{exercise_path(@exercise.public_id)}']", 0
+    assert_no_match(/Revoir l'exercice/, response.body)
+  end
+
   # CA-11 : 16/20, « Félicitations ! », la note verte et les confettis.
   test "à 16/20, « Félicitations ! », la note verte et les confettis" do
     @session.update!(score_percent: 80)
@@ -231,7 +243,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#session_progress", 0
   end
 
-  test "progrès : 30 puis 90, l'élève lit qu'il progresse, icône verte, entre la note et les boutons" do
+  test "progrès : 30 puis 90, l'élève lit qu'il progresse, icône verte, entre la note et le bouton" do
     current = sessions(30, 90).last
     sign_in_as @student
 
@@ -239,7 +251,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     expected = "Tu progresses : 6/20 à ta première session, 18/20 aujourd'hui."
     assert_equal expected, progress(:progress, first: 6, current: 18)
-    assert_select "#session_result + p#session_progress + div form#restart-exercise-form"
+    assert_select "#session_result + p#session_progress + form#restart-exercise-form"
     assert_select "p#session_progress.text-sm.text-ink", text: expected
     assert_select "#session_progress svg.text-success[aria-hidden=true]", 1
   end
@@ -250,10 +262,9 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     show current
 
-    expected = "Tu restes autour de 12/20. Relis la correction ci-dessous avant de recommencer."
-    assert_equal expected, progress(:stagnant, current: 12)
-    assert_select "#session_progress", text: expected
-    assert_select "#session_progress svg.text-mute", 1
+    # CA-E5 (UDR écrans élève §3.5) : l'encadré « Tu restes autour de… » n'existe plus.
+    assert_select "#session_progress", 0
+    assert_no_match(/Tu restes autour de/, response.body)
     assert_no_match(/stagne|baisse/i, response.body)
   end
 

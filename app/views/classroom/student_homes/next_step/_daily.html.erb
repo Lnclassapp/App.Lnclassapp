@@ -1,0 +1,19 @@
+<%# 🌐 UI · classroom/student_homes/next_step/_daily — l'exercice du jour dans la carte : à faire, fait aujourd'hui, ou rien à proposer %>
+<%# Rôle : états 4 et 5 ; fait aujourd'hui, la phrase « Reviens demain ! » remplace le bouton ; aria-live pour les lecteurs d'écran %>
+<%# UDR  : XXXX accueil élève §3.3 (états 4 et 5), 0084 §3.6 %>
+<%# locals: (daily:, scope:, variant:) -%>
+<div id="student_next_step_daily" data-state="<%= daily.state %>" aria-live="polite" class="space-y-2">
+  <% case daily.state %>
+  <% when :proposed %>
+    <%= render "classroom/student_homes/next_step/start", public_id: daily.exercise_public_id, variant:,
+                                                           label: t("classroom.student_homes.next_step.#{scope}.start"),
+                                                           aria: t("classroom.student_homes.next_step.#{scope}.start_label", title: daily.exercise_title) %>
+  <% when :done_today %>
+    <p class="text-sm font-medium text-ink"><%= t("classroom.student_homes.next_step.#{scope}.done_today") %></p>
+    <% if daily.tomorrow_material_name %>
+      <p class="text-meta text-mute"><%= t("classroom.student_homes.next_step.#{scope}.tomorrow", subject: daily.tomorrow_material_name) %></p>
+    <% end %>
+  <% else %>
+    <p class="text-sm text-mute"><%= t("classroom.student_homes.next_step.#{scope}.none") %></p>
+  <% end %>
+</div>

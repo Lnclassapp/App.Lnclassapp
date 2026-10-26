@@ -72,7 +72,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#essential_team_actions", 0
     assert_select "#content_status_essential_#{@essential.slug}", 0
     assert_select "a[data-turbo-frame=modal]", 0
-    assert_select "#essential_gap", 0
+    assert_select "#essential_gap_since", 0
   end
 
   test "the old page's leaks and fake promises are gone: no correct answer, no conformity label, no forbidden word" do
@@ -85,40 +85,22 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/conforme au programme|validation collaborative|habilet/i, response.body)
   end
 
-  test "the student's pending gap on the sheet is announced" do
+  # CA-E4 (UDR écrans élève §3.4) : l'étiquette « À revoir depuis le <date> » sous le titre ; la carte du bas n'existe plus.
+  test "CA-E4: the student's pending gap is a label under the title, and the « Fiche à revoir » card is gone" do
     create_gap(student: @student, essential: @essential, created_at: Time.zone.local(2026, 9, 12, 10))
+    create_exercise(essential: @essential, title: "Thalès 3", exercise_type: "fixation", position: 3)
     sign_in_as @student
 
     get page_path
 
-    assert_select "#essential_gap", text: /#{I18n.t("#{scope}.show.gap_title")}/
-    # UDR-0130 §2 : « Fiche à revoir », sans « de révision » redondant.
-    assert_select "#essential_gap_title", text: "Fiche à revoir"
-    assert_select "#essential_gap", text: /12 septembre 2026/
-    # UDR-0015, amendement du 2026-10-02 : la règle pour lever la lacune passe dans l'infobulle du titre.
-    # UDR-0119 : la règle se lit sur 20, jamais en pourcentage.
-    assert_select "#essential_gap details", text: /au moins 15\/20/
+    assert_select "#essential_header h1 ~ div #essential_gap_since", text: "À revoir depuis le 12 sept."
+    assert_select "#essential_gap", 0
+    assert_select "form#essential_gap_form, #essential_gap_action, #essential_gap_exercise", 0
+    assert_no_match(/Fiche à revoir|Refaire un exercice|Exercice proposé/, response.body)
     assert_no_match(/75 %/, response.body)
   end
 
-  # UDR-0119, ADR-0101 §4.2 : le bouton démarre l'exercice proposé (une fixation autre que l'exercice raté), d'un tap.
-  test "the gap's button posts to a session of the offered exercise and names it" do
-    fixation = create_exercise(essential: @essential, title: "Thalès 3", exercise_type: "fixation", position: 3)
-    create_gap(student: @student, essential: @essential,
-               source_session: create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 30))
-    sign_in_as @student
-
-    get page_path
-
-    assert_select "#essential_gap form#essential_gap_form[method=post][action='#{exercise_sessions_path(fixation.public_id)}']" do
-      assert_select "button#essential_gap_action[type=submit][aria-describedby=essential_gap_exercise]",
-                    text: I18n.t("#{scope}.show.gap_action")
-    end
-    assert_select "#essential_gap p#essential_gap_exercise", text: "Exercice proposé : Thalès 3"
-    assert_select "#essential_gap a[href='#{exercise_path(@exercise.public_id)}']", 0
-  end
-
-  test "the gap's button starts a remediation session of the offered exercise" do
+  test "starting an exercise of a sheet with a pending gap is a remediation session" do
     gap = create_gap(student: @student, essential: @essential,
                      source_session: create_exercise_session(student: @student, exercise: @exercise, status: "completed",
                                                              score_percent: 30))
@@ -132,35 +114,6 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     session = Orm::ExerciseSession.order(:id).last
     assert_equal [ other.id, "remediation", gap.id ], [ session.exercise_id, session.kind, session.knowledge_gap_id ]
     assert_redirected_to exercise_session_path(session.public_id)
-  end
-
-  # PRD §3 : une session commencée de l'exercice proposé se reprend ; le bouton n'en recommence pas une (pas de restart).
-  test "the gap's button resumes a started session of the offered exercise instead of starting another" do
-    create_gap(student: @student, essential: @essential,
-               source_session: create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 30))
-    offered = create_exercise(essential: @essential, title: "Thalès 2", exercise_type: "fixation", position: 2)
-    started = create_exercise_session(student: @student, exercise: offered, status: "started")
-    sign_in_as @student
-
-    get page_path
-
-    assert_select "#essential_gap_form input[name=restart]", 0
-    assert_no_difference -> { Orm::ExerciseSession.count } do
-      post exercise_sessions_path(offered.public_id)
-    end
-    assert_redirected_to exercise_session_path(started.public_id)
-  end
-
-  test "a gap on a sheet without published exercise: the box stays, without button" do
-    create_gap(student: @student, essential: @essential,
-               source_session: create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 30))
-    @exercise.update!(status: "archived", archived_at: Time.current)
-    sign_in_as @student
-
-    get page_path
-
-    assert_select "#essential_gap"
-    assert_select "#essential_gap form, #essential_gap_exercise", 0
   end
 
   test "beyond 3 exercises, the student sees 3 rows then « Voir plus », the others rendered hidden" do
@@ -248,7 +201,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
       # Sur téléphone, le titre suffit : « Ouvrir » ne se montre qu'à partir de 640 px.
       assert_select "a.hidden.sm\\:inline-flex[href='#{exercise_path(@exercise.public_id)}']",
                     text: I18n.t("#{scope}.exercise_progress.open")
-      assert_select "p.text-sm.text-mute", text: "#{I18n.t("#{scope}.exercise_progress.exercise_types.#{@exercise.exercise_type}")} · " \
+      assert_select "p.text-meta.text-mute", text: "#{I18n.t("#{scope}.exercise_progress.exercise_types.#{@exercise.exercise_type}")} · " \
                                                   "#{I18n.t("#{scope}.exercise_progress.questions", count: @exercise.questions.count)}"
     end
     # Tle D 1 : jours connus, « Assigner » assigne en un clic.

@@ -1,0 +1,46 @@
+<%# 🌐 UI · identity/profile_materials/show — « Mes matières », l'écran de retrait de l'enseignant (/profile/materials) %>
+<%# Rôle : « N sur 3 », une ligne par matière avec « Retirer » (UpdateTeacherMaterials sans elle), la dernière sans bouton ; refus du serveur sous la liste %>
+<%# ADR  : 0103 (§4.4) · UDR : écrans enseignant sans répétition (§3.4) · CA-H3, CA-H5 %>
+<% page_title t(".title") %>
+<% max = Entities::Identity::TeacherMaterials::MAX %>
+<% materials = profile.materials %>
+<% removable = materials.size > Entities::Identity::TeacherMaterials::MIN %>
+<% errors = @form ? @form.errors[:material_slugs] + @form.errors[:base] : [] %>
+<div class="flex max-w-md flex-col gap-4">
+  <div>
+    <%= ui_back_link t(".back"), href: teacher_menu_path %>
+    <h1 class="font-display text-lg leading-tight font-medium text-ink"><%= t(".title") %></h1>
+    <p class="mt-1 text-sm text-mute">
+      <%= t(".count", count: materials.size, max:) %><% if materials.size >= max %> <%= t(".full") %><% end %>
+    </p>
+  </div>
+
+  <ul id="teacher_materials" class="divide-y divide-line">
+    <% materials.each do |material| %>
+      <% illustration = subject_illustration(material.slug) %>
+      <li id="teacher_material_<%= material.slug %>" class="flex items-center gap-3 py-3">
+        <span class="<%= class_names("grid size-12 shrink-0 place-items-center rounded-full", illustration.tint) %>">
+          <%= image_tag illustration.path, alt: "", class: "size-8", "aria-hidden": true, loading: "lazy" %>
+        </span>
+        <span class="min-w-0 flex-1 truncate text-ink" title="<%= material.name %>"><%= material.shortname.presence || material.name %></span>
+        <% if removable %>
+          <%= form_with scope: :profile_materials, url: profile_materials_path, method: :patch do |form| %>
+            <%= hidden_field_tag "profile_materials[screen]", "removal", id: nil %>
+            <% materials.reject { it.slug == material.slug }.each do |kept| %>
+              <%= hidden_field_tag "profile_materials[material_slugs][]", kept.slug, id: nil %>
+            <% end %>
+            <%= ui_button t(".remove"), type: :submit, variant: :secondary, size: :sm, "aria-label": t(".remove_label", material: material.name) %>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+  <% if errors.any? %>
+    <p id="teacher_materials_error" role="alert" class="flex items-center gap-1.5 text-sm font-medium text-error">
+      <%= ui_icon "exclamation-circle", variant: :mini, size: :sm %><%= errors.to_sentence %>
+    </p>
+  <% end %>
+
+  <p class="rounded-ln bg-mist p-4 text-sm text-mute"><%= t(".kept_assignments") %></p>
+</div>

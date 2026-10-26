@@ -1,6 +1,6 @@
 // ⚡ FRONT · classroom/signup_steps_controller — l'inscription élève découpée en trois étapes dans un seul formulaire
-// Rôle : un seul fieldset visible ; le code de classe reconnu, une classe de la cascade touchée ou les quatre champs valides font avancer seuls ; retour sans perte ; annonce aria-live
-// ADR  : XXXX-code-de-classe-a-six-caracteres (§4.4, §4.5) · UDR : XXXX-inscription-eleve-en-trois-etapes (§3.1 à §3.8)
+// Rôle : un seul fieldset visible ; la liste des étapes du panneau d'ordinateur suit l'étape ; le code de classe reconnu, une classe de la cascade touchée ou les quatre champs valides font avancer seuls ; retour sans perte ; annonce aria-live
+// ADR  : XXXX-code-de-classe-a-six-caracteres (§4.4, §4.5) · UDR : XXXX-inscription-eleve-en-trois-etapes (§3.1 à §3.8, §3.5 bis)
 import { Controller } from "@hotwired/stimulus"
 
 const CODE_LENGTH = 6
@@ -11,7 +11,8 @@ const PHONE = /^\d{10}$/
 export default class extends Controller {
   static targets = [
     "step", "segment", "counter", "live", "back", "welcome",
-    "code", "codeField", "codeFrame", "checking", "noCode", "cascade", "recap", "recapName", "recapSchool"
+    "code", "codeField", "codeFrame", "checking", "noCode", "cascade", "recap", "recapName", "recapSchool",
+    "panelStep", "panelRecap", "panelRecapName", "panelRecapSchool"
   ]
   static values = {
     start: Number, counter: String, announce: String, codeUrl: String,
@@ -149,6 +150,31 @@ export default class extends Controller {
     })
     this.backTarget.hidden = this.current <= this.firstStep
     this.welcomeTargets.forEach((element) => { element.hidden = this.current !== this.firstStep })
+    this.panelStepTargets.forEach((item) => this.renderPanelStep(item))
+  }
+
+  // Panneau d'ordinateur (UDR §3.5 bis) : étape faite = rond blanc à coche, en cours = rond blanc numéroté en 16 px, 500 et
+  // aria-current="step", à venir = rond en contour.
+  renderPanelStep(item) {
+    const number = Number(item.dataset.step)
+    const done = number < this.current
+    const active = number === this.current
+    if (active) item.setAttribute("aria-current", "step")
+    else item.removeAttribute("aria-current")
+
+    const mark = item.querySelector("[data-mark]")
+    mark.textContent = done ? "\u2713" : String(number)
+    mark.classList.toggle("bg-white", done || active)
+    mark.classList.toggle("text-brand-strong", done || active)
+    mark.classList.toggle("border", !done && !active)
+    mark.classList.toggle("border-white", !done && !active)
+
+    const label = item.querySelector("[data-label]")
+    label.classList.toggle("text-base", active)
+    label.classList.toggle("font-medium", active)
+    label.classList.toggle("text-sm", !active)
+    const doneNote = item.querySelector("[data-done]")
+    if (doneNote) doneNote.hidden = !done
   }
 
   focusTitle() {
@@ -164,16 +190,23 @@ export default class extends Controller {
     requestAnimationFrame(() => { this.liveTarget.textContent = text })
   }
 
+  // Le rappel de classe : au-dessus du champ de l'étape 2 sur téléphone, dans le panneau sous l'étape 1 sur ordinateur (CA-C9).
   showRecap(name, school) {
-    if (!this.hasRecapTarget) return
-
-    this.recapNameTarget.textContent = name || ""
-    this.recapSchoolTarget.textContent = school || ""
-    this.recapTarget.hidden = false
+    if (this.hasRecapTarget) {
+      this.recapNameTarget.textContent = name || ""
+      this.recapSchoolTarget.textContent = school || ""
+      this.recapTarget.hidden = false
+    }
+    if (this.hasPanelRecapTarget) {
+      this.panelRecapNameTarget.textContent = name || ""
+      this.panelRecapSchoolTarget.textContent = school || ""
+      this.panelRecapTarget.hidden = false
+    }
   }
 
   hideRecap() {
     if (this.hasRecapTarget) this.recapTarget.hidden = true
+    if (this.hasPanelRecapTarget) this.panelRecapTarget.hidden = true
   }
 
   // Sans JavaScript le code et la cascade sont tous deux dans la page ; ici, la case en choisit un : l'autre est caché, et le

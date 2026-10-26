@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/index — catalogue des cours (CA-01), pour tous les rôles connectés %>
 <%# Rôle : recherche et filtres (téléphone compris) qui visent le frame « courses » ; élève : son niveau, recherche seule, groupes par matière, vue d'une matière ; enseignant : ses matières à ses niveaux, groupées au-delà d'une ; équipe : création et import %>
-<%# ADR  : 0028, 0035, 0076, 0090 · UDR : 0006, 0013 (amendements du 2026-10-02 et du 2026-10-05), 0057, 0069, 0077 §3.2 (amendement du 2026-10-06), 0085 (élève), 0126 §3.1 (plusieurs matières) · par pages de 24 %>
+<%# ADR  : 0028, 0035, 0076, 0090 · UDR : 0006, 0013 (amendements du 2026-10-02 et du 2026-10-05), 0057, 0069, 0077 §3.2 (amendement du 2026-10-06), 0085 (élève), 0126 §3.1 (plusieurs matières), XXXX écrans élève sans répétition §3.6 (« Progression DPFC » une fois) · par pages de 24 %>
 <% team = current_actor.team? %>
 <%# UDR-0013, amendement du 2026-10-01 : l'élève ne voit que son niveau ; le filtre par niveau ne lui sert plus. %>
 <% student = current_actor.student? %>
@@ -126,7 +126,7 @@
 <%# target _top : une carte ouvre la page du cours, pas le frame. %>
 <%= turbo_frame_tag "courses", target: "_top", data: { turbo_action: "advance" }, class: "block transition-opacity aria-busy:opacity-50" do %>
   <div class="mb-3 flex items-center justify-between gap-3">
-    <p id="courses_total" class="<%= class_names("text-sm text-mute", "font-medium text-ink" => student) %>" aria-live="polite"><%= t(".total", count: @page.total_count) %></p>
+    <p id="courses_total" class="<%= class_names("text-sm text-mute", "font-medium text-ink" => student) %>" aria-live="polite"><%= student ? t(".student_total", total: t(".total", count: @page.total_count)) : t(".total", count: @page.total_count) %></p>
     <%# Le seul moyen de quitter les filtres, à toutes les largeurs (UDR-0077, amendement du 2026-10-06) : rendu dans le frame,
         il suit chaque filtrage ; target _top, il recharge aussi la recherche. L'élève : pendant une recherche seulement,
         dans sa matière s'il en regarde une (UDR-0085 §3.1). %>

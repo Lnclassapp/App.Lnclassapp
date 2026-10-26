@@ -1,0 +1,50 @@
+<%# 🌐 UI · classroom/student_homes/_history — contenu du frame différé de l'Historique de l'accueil %>
+<%# Rôle : les 3 dernières sessions terminées, groupées par jour (rond de la matière, titre, matière, note) ; sous 10/20, « Refaire » ; « Voir plus » mène à Mon historique %>
+<%# UDR  : XXXX accueil élève §3.5, §3.7 · 0058 §3.3 (une seule forme de la note), 0084 §3.8 (verte dès 14/20, à l'encre dessous, jamais rouge) %>
+<%# locals: (sessions:) -%>
+<% shown = 3 %>
+<%= turbo_frame_tag Classroom::StudentHomesController::RECENT_ACTIVITY_FRAME, target: "_top" do %>
+  <% if sessions.empty? %>
+    <p class="text-meta text-mute"><%= t("classroom.student_homes.history.empty") %></p>
+  <% else %>
+    <% grading = Entities::Assessment::Grading %>
+    <% today = Time.zone.today %>
+    <% sessions.first(shown).group_by { it.completed_at.to_date }.each do |day, day_sessions| %>
+      <section aria-labelledby="history_day_<%= day.iso8601 %>" class="space-y-1">
+        <%# Le jour : « AUJOURD'HUI », « HIER », puis la date (majuscules par la mise en page). %>
+        <h3 id="history_day_<%= day.iso8601 %>" class="pt-2 text-xs font-medium tracking-wide text-mute uppercase">
+          <%= case day when today then t("classroom.student_homes.history.today") when today - 1 then t("classroom.student_homes.history.yesterday") else l(day, format: :due_long) end %>
+        </h3>
+        <ul>
+          <% day_sessions.each do |session| %>
+            <li class="flex items-center gap-2">
+              <%= link_to exercise_session_result_path(session.public_id),
+                          class: "group -mx-2 flex min-h-tap min-w-0 flex-1 items-center gap-3 rounded-ln px-2 py-2 transition hover:bg-mist focus-visible:outline-2 focus-visible:outline-brand" do %>
+                <span class="grid size-10 shrink-0 place-items-center rounded-full bg-brand-soft" aria-hidden="true">
+                  <%= image_tag subject_illustration(session.material_slug).path, alt: "", class: "size-6", loading: "lazy" %>
+                </span>
+                <span class="min-w-0 flex-1">
+                  <span class="line-clamp-2 block text-sm break-words text-ink"><%= session.exercise_title %></span>
+                  <span class="block text-meta text-mute"><%= session.material_name %></span>
+                </span>
+                <%# Vert dès « 14/20 » affiché (MASTERY_THRESHOLD, UDR-0090 §4), à l'encre dessous ; jamais en rouge ni en ambre. %>
+                <span data-grade class="<%= class_names("shrink-0 font-display text-base font-medium",
+                                                        grading.reaches?(session.score_percent, grading::MASTERY_THRESHOLD) ? "text-success" : "text-ink") %>"><%= grade_label(session.score_percent) %></span>
+              <% end %>
+              <% if grading.grade_on_20(session.score_percent) < 10 %>
+                <%= button_to exercise_sessions_path(session.exercise_public_id), form_class: "shrink-0",
+                              class: class_names(ComponentsHelper::BUTTON_BASE, ComponentsHelper::BUTTON_SIZES[:sm], ComponentsHelper::BUTTON_VARIANTS[:secondary]),
+                              "aria-label": t("classroom.student_homes.history.redo_label", title: session.exercise_title) do %>
+                  <%= t("classroom.student_homes.history.redo") %>
+                <% end %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </section>
+    <% end %>
+    <% if sessions.size > shown %>
+      <%= ui_button t("classroom.student_homes.history.more"), href: student_archive_path, variant: :secondary, full: true, class: "mt-2" %>
+    <% end %>
+  <% end %>
+<% end %>

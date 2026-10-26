@@ -1,10 +1,12 @@
 <%# 🌐 UI · classroom/teaching_selections/_level_group — les classes d'un niveau %>
-<%# Rôle : carte titrée par le niveau et son nombre de classes, grille de bascules %>
-<%# ADR  : 0030 · UDR : 0025 %>
-<%= ui_card title: level.name, subtitle: t(".classrooms", count: level.classrooms.size), heading: :h2 do %>
-  <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-    <% level.classrooms.each do |classroom| %>
-      <li><%= render "classroom/teachings/toggle", classroom: %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%# Rôle : carte jamais coupée entre deux colonnes (≥ lg), titrée par le niveau (rond d'icône) et son nombre de classes, une ligne par classe (bascule) %>
+<%# ADR  : 0030 · UDR : 0025, XXXX-ecrans-enseignant-sans-repetition (§3.13) %>
+<div class="break-inside-avoid lg:mb-4">
+  <%= ui_card title: level.name, subtitle: t(".classrooms", count: level.classrooms.size), icon: "academic-cap", heading: :h2 do %>
+    <ul class="grid gap-2 sm:grid-cols-2">
+      <% level.classrooms.each do |classroom| %>
+        <li><%= render "classroom/teachings/toggle", classroom: %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

@@ -107,8 +107,11 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     assert_equal 0, Orm::User.where(role: "student").count
   end
 
+  # CA-C9 on a computer (1400 px): the class of the link is in the blue panel under step 1, not above the form.
   test "IL-10: « Ce n'est pas ta classe ? » goes back to the cascade, and the student lands in the other classroom" do
     visit join_classroom_path(@classroom.reload.link_token)
+    assert_selector "#signup-panel li[data-step='1'] #signup-panel-recap", text: /6ème 1.*Lycée Classique d'Abidjan/m
+    assert_no_selector "#signup-classroom-recap", visible: :visible
     click_on I18n.t("#{FORM}.other_classroom")
 
     assert_current_path new_student_registration_path

@@ -38,12 +38,11 @@ module Dtos
         AssignmentInput.new(classroom_public_id: "cls123", assignable_type: "Exercise", assignable_key: "ex123", **attributes)
       end
 
-      test "AssignmentInput : sans l'étape des jours, weekdays est nil et later faux, comme aujourd'hui" do
+      test "AssignmentInput : sans l'étape des jours, weekdays est nil, comme aujourd'hui" do
         input = assignment
 
         assert input.valid?
         assert_nil input.weekdays
-        assert_equal false, input.later
       end
 
       test "AssignmentInput : « Assigner » avec des jours cochés les donne en entiers" do
@@ -67,16 +66,6 @@ module Dtos
 
         assert_not input.valid?
         assert input.errors.of_kind?(:weekdays, :inclusion)
-      end
-
-      test "AssignmentInput : « Plus tard » assigne sans jours, quoi qu'il y ait de coché" do
-        [ nil, [], [ "1", "4" ], [ "9" ] ].each do |weekdays|
-          input = assignment(weekdays:, later: "1")
-
-          assert input.valid?, weekdays.inspect
-          assert_equal true, input.later
-          assert_nil input.weekdays, weekdays.inspect
-        end
       end
     end
   end

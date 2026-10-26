@@ -104,7 +104,7 @@ module Finitions
       within("main nav") { click_on "Cours" }
       assert_current_path courses_path
       assert_title "Cours · Élève · Lnclass"
-      assert_selector "#courses_total", text: /\A\d+ fiches? de cours\z/
+      assert_selector "#courses_total", text: /\A\d+ fiches? de cours · Progression DPFC 2026-2027\z/
     end
 
     # UDR-0058 §3.3 (R4) : l'aide « Badges » / « Maîtrise » quitte l'accueil ; la page de l'exercice les explique.
@@ -114,7 +114,7 @@ module Finitions
 
       assert_current_path student_home_path
       assert_title "Accueil · Élève · Lnclass"
-      within("#student_home_exercises") { assert_no_selector "#student_home_help" }
+      assert_no_selector "#student_home_help"
     end
 
     # FU-27, UDR-0081 §3.8 : plus de code de classe sur « Ma classe », et toujours rien à copier.

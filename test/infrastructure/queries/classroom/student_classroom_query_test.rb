@@ -34,14 +34,14 @@ module Queries
         assert_equal [ @classroom.public_id, "Tle D 1", "Tle", "D", "Lycée Classique", "2026-2027" ],
                      row.to_h.values_at(:public_id, :classroom_name, :level_name, :series_name, :school_name, :school_year)
         assert_equal %i[public_id classroom_name level_name series_name school_name school_year has_teacher courses
-                        assigned_exercises treated_exercises], row.to_h.keys
+                        assigned_exercises pending_gaps treated_exercises], row.to_h.keys
         assert_no_match "Yapo", row.inspect
       end
 
       # UDR-0086 §3.3 (ma-classe-eleve): « Aucun enseignant sur Lnclass » reads teacher_classrooms, in the same query
       # as the header; a teacher of another classroom of the same school does not count.
       # ADR-0067: the count is pinned, with or without a teacher (relevé le 2026-10-15).
-      QUERIES = 6
+      QUERIES = 7
 
       test "has_teacher: false without a teacher in the classroom, true with one, in the same number of queries" do
         create_teacher(school: @classroom.school, classrooms: [ create_classroom(school: @classroom.school) ])
@@ -121,6 +121,27 @@ module Queries
         create_assignment(classroom: create_classroom, assignable: exercise("Autre classe"))
 
         assert_equal %w[Récent Ancien], classroom.assigned_exercises.map(&:title)
+      end
+
+      # CA-E3 (mvp-teacher-student, option A): « Fiches à revoir » reads the pending gaps of the student, the newest first, with
+      # the published sheet; a remediated gap, an archived sheet, another student's gap or another level is left out.
+      test "the pending gaps: the sheets to review of the student, the newest first, of their level only" do
+        recent = create_essential(course: @course, name: "Récente")
+        create_gap(student: @student, essential: @essential, created_at: 2.days.ago)
+        create_gap(student: @student, essential: recent, created_at: 1.day.ago)
+        create_gap(student: @student, essential: create_essential(course: @course), status: "remediated")
+        create_gap(student: @student, essential: create_essential(course: @course, status: "archived"))
+        create_gap(essential: @essential)
+        create_gap(student: @student, essential: create_essential(course: create_course(level: create_level)))
+
+        gaps = classroom.pending_gaps
+
+        assert_equal [ [ "Récente", recent.slug, @course.slug ], [ @essential.name, @essential.slug, @course.slug ] ],
+                     gaps.map { it.to_h.values_at(:essential_name, :essential_slug, :course_slug) }
+      end
+
+      test "the pending gaps: empty without a gap to review" do
+        assert_equal [], classroom.pending_gaps
       end
 
       # CA-6: one line per completed exercise, with its best score and its last session, the most recently completed first;

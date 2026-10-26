@@ -65,7 +65,7 @@ Le mot « cours » au **sens scolaire courant** reste libre (« comprendre leurs
 | `catalog.essentials.show.eyebrow` | « Fiche de révision · %{course} » |
 | `catalog.essentials.show.student_eyebrow` | « Fiche de révision » |
 | `catalog.essentials.show.gap_title` | « Fiche à revoir » |
-| `classroom.student_homes.pending_gaps.title` | « Fiches à revoir » |
+| `classroom.student_classrooms.pending_gaps.title` | « Fiches à revoir » |
 | `shared.home.sections.courses.title`, `classroom.teacher_homes.show.courses_title`, `classroom.classrooms.courses.title` | « Fiches de cours » (sections d'une page, pas la rubrique) |
 | `teams.levels.index.columns.courses`, `teams.series.index.columns.courses`, `teams.materials.index.columns.courses` | « Fiches de cours » |
 | `classroom.student_classrooms.show.courses_title` | « Fiches de cours assignées » |
