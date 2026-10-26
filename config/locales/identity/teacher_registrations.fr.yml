@@ -1,4 +1,4 @@
-# Inscription enseignant en deux voies (DRENA → établissement, ou lien d'invitation), et liste des établissements d'une DRENA (API) — ADR-0030, ADR-0050, ADR-0083, UDR-0007, UDR-0024, UDR-0054, UDR-0079
+# Inscription enseignant en trois étapes, deux voies (DRENA → établissement, ou lien d'invitation), et liste des établissements d'une DRENA (API) — ADR-0030, ADR-0050, ADR-0083, UDR-0007, UDR-0024, UDR-0054, UDR-0079, UDR enseignant §3.9
 fr:
   activemodel:
     attributes:
@@ -12,7 +12,6 @@ fr:
         drena_public_id: "DRENA"
         school_public_id: "Établissement"
         material_slug: "Matière enseignée"
-        second_material_slug: "Autre matière (facultatif)"
     errors:
       models:
         dtos/identity/teacher_registration_input:
@@ -45,47 +44,60 @@ fr:
             material_slug:
               blank: "Choisissez la matière que vous enseignez."
               inclusion: "Cette matière n'existe pas. Choisissez-en une autre."
-            second_material_slug:
-              inclusion: "Cette matière n'existe pas. Choisissez-en une autre."
   identity:
     teacher_registrations:
       new:
         page_title: "Inscription enseignant"
-        logo_home: "Lnclass, accueil"
         welcome: "Bienvenue sur Lnclass"
-        welcome_hint: "Créez votre compte enseignant en une minute, avec votre numéro de téléphone et un code secret à 4 chiffres."
-        title: "Créer un compte enseignant"
-        subtitle: "Trois rubriques, une minute."
+        welcome_hint: "Assignez un exercice, voyez ce que vos élèves ont compris."
+        title: "Créer votre compte enseignant"
         have_account: "Déjà un compte ?"
         sign_in: "Se connecter"
+        step_counter: "Étape %{n} sur 3"
+        step_announce: "Étape %{n} sur 3 : %{title}"
+        back: "Retour"
         rate_limited_title: "Trop de tentatives"
         invite_invalid: "Ce lien n'est plus valable. Choisissez votre établissement."
       school_preview:
         label: "Votre établissement"
         drena: "DRENA : %{drena}"
+        other_school: "Ce n'est pas votre établissement ?"
       school_fields:
         drena_prompt: "Choisissez votre DRENA"
         show_schools: "Afficher les établissements"
       form:
-        school: "Établissement"
-        other_school: "Ce n'est pas votre établissement ?"
+        # Étape 1.
+        school: "Votre établissement"
+        school_hint: "Vous passez à la suite dès que l'établissement est choisi."
         # ADR-0094 §11 : le lien de parrainage d'un collègue, sans établissement
         sponsor: "%{name} vous invite sur Lnclass. Choisissez votre DRENA, puis votre établissement."
-        material_prompt: "Choisissez votre matière"
-        # UDR-0125 §3.1 (ADR-0103) : la seconde matière, facultative
-        second_material_prompt: "Aucune autre matière"
-        second_material_hint: "Si vous enseignez aussi une autre matière. Vous pourrez en ajouter une troisième dans votre profil."
+        # Étape 2.
         you: "Vous"
+        you_hint: "Vous passez à la suite dès que tout est rempli."
+        # UDR enseignant §3.9 : une seule matière ; les suivantes s'ajoutent dans Mon compte.
+        material_prompt: "Choisissez votre matière"
+        material_hint: "Vous pourrez ajouter d'autres matières dans Mon compte."
         last_name_placeholder: "Ex. : KOUASSI"
         first_name_placeholder: "Ex. : Aya Marie"
+        # UDR enseignant §3.9, maquette v12 : civilité courte, propre à l'enseignant ; l'élève garde genders.* (porteur, 2026-10-26).
+        genders:
+          male: "M."
+          female: "Mme"
         contact_placeholder: "0701020304"
         contact_hint: "10 chiffres, par ex. 0701020304."
-        security: "Code secret"
+        # Étape 3.
+        security: "Votre code secret"
+        security_hint: "4 chiffres, pour vous connecter."
         pin_hint: "4 chiffres, que vous seul connaissez."
         pin_match:
           ok: "Les codes concordent."
           ko: "Les codes ne concordent pas."
         submit: "Créer mon compte"
+        submitting: "Création…"
+        # La ligne sous le bouton, avec les deux pages publiques. Pas de case à cocher.
+        terms_html: "En créant votre compte, vous acceptez les %{terms} et la %{privacy}."
+        terms_link: "conditions d'utilisation"
+        privacy_link: "protection des données"
       create:
         welcome: "Bienvenue ! Sélectionnez vos classes pour commencer."
   school:

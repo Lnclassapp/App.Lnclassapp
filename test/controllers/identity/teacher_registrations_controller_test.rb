@@ -1,7 +1,7 @@
 require "test_helper"
 
-# IE-01 to IE-13, IE-17, IE-19 server side (ADR-0083, UDR-0079): one sign-up page in three sections (school, you, secret
-# code), no school code. The standard way chooses the DRENA then the school; an invite link /i/<token> arrives with the
+# IE-01 to IE-13, IE-17, IE-19 and CA-J1 to CA-J4 server side (ADR-0083, UDR-0079, UDR « écrans enseignant sans répétition » §3.9):
+# one sign-up form cut in three steps (school, you, secret code) by signup_steps_controller, no school code. The standard way chooses the DRENA then the school; an invite link /i/<token> arrives with the
 # school already chosen. The teacher is attached at once and the way in is recorded.
 class Identity::TeacherRegistrationsControllerTest < ActionDispatch::IntegrationTest
   ERRORS = "activemodel.errors.models.dtos/identity/teacher_registration_input.attributes".freeze
@@ -31,34 +31,59 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_not Orm::User.exists?(contact: "0501020304")
   end
 
-  test "IE-02, IE-03: three sections in order, the DRENA then the list, Nom then Prénom(s) — never a school code" do
+  test "CA-J1, IE-02, IE-03: without a link the form opens on step 1; three steps in order, the DRENA then the list, Nom then Prénom(s)" do
     get new_teacher_registration_path
 
     assert_response :success
-    assert_select "h2", text: I18n.t("#{PAGE}.title")
+    assert_select "h1", text: I18n.t("#{PAGE}.title")
+    assert_select "main#teacher-signup[data-controller='classroom--signup-steps'][data-classroom--signup-steps-start-value='1']"
     assert_select "form#teacher-signup-drena[action='#{new_teacher_registration_path}'][method=get]"
     assert_select "form#teacher-registration-form[action='#{teacher_registrations_path}']" \
                   "[data-controller='school--drena-schools identity--phone-digits identity--pin-match']" do
-      assert_equal [ "Établissement", "Vous", "Code secret" ], css_select("fieldset > legend.uppercase").map { it.text.strip }
-      assert_select "select[name='teacher_registration[drena_public_id]'][form=teacher-signup-drena] option[value='#{@drena.public_id}']"
-      assert_select "turbo-frame#schools select[name='teacher_registration[school_public_id]'][disabled]"
-      assert_select "select[name='teacher_registration[material_slug]'] option[value='#{@material.slug}']", text: "SVT"
+      assert_equal [ "Votre établissement", "Vous", "Votre code secret" ],
+                   css_select("fieldset[data-classroom--signup-steps-target=step] > legend").map { it.text.strip }
+      assert_equal %w[1 2 3], css_select("fieldset[data-classroom--signup-steps-target=step]").map { it["data-step"] }
+      assert_select "fieldset[data-step='1'] select[name='teacher_registration[drena_public_id]'][form=teacher-signup-drena] " \
+                    "option[value='#{@drena.public_id}']"
+      assert_select "fieldset[data-step='1'] turbo-frame#schools select[name='teacher_registration[school_public_id]'][disabled]"
+      assert_select "fieldset[data-step='2'] select[name='teacher_registration[material_slug]'] option[value='#{@material.slug}']", text: "SVT"
       assert_select "input[name='teacher_registration[last_name]'][required][maxlength='50'][autocomplete=family-name]" \
                     "[placeholder='Ex. : KOUASSI']"
       assert_select "input[name='teacher_registration[first_name]'][required][maxlength='80'][autocomplete=given-name]" \
                     "[placeholder='Ex. : Aya Marie']"
       assert_select "input[name='teacher_registration[full_name]'], details, #full_name_preview", 0
-      assert_select "input[type=radio][name='teacher_registration[gender]']", count: 2
+      assert_select "fieldset[data-step='2'] input[type=radio][name='teacher_registration[gender]']", count: 2
       assert_select "input[type=tel][name='teacher_registration[contact]'][maxlength='20'][inputmode=numeric]:not([pattern])"
-      assert_select "input[type=password][name='teacher_registration[pin]'][inputmode=numeric][maxlength='4']"
+      assert_select "fieldset[data-step='3'] input[type=password][name='teacher_registration[pin]'][inputmode=numeric][maxlength='4']"
       assert_select "input[type=password][name='teacher_registration[pin_confirmation]'][data-identity--pin-match-target=confirmation]"
       assert_select "p#pin_match_status[hidden][aria-live=polite]"
       assert_select "input[name='teacher_registration[invite_token]']", 0
     end
     assert_select "[name*=school_code], [name*=national_code], [name*=role]", 0
     assert_select "#school-preview, #invite-link-invalid", 0
+    assert_select "#signup-step-counter", text: I18n.t("#{PAGE}.step_counter", n: 1)
+    assert_select "#signup-welcome", text: /Bienvenue sur Lnclass/
     assert_no_match(/Code d'établissement/, response.body)
     assert_select "a[href='#{new_session_path}']"
+  end
+
+  # CA-J4 (UDR §3.9): « Créer mon compte » on step 3, then the terms line under the button.
+  test "CA-J4: step 3 holds the button « Créer mon compte » with the terms line under it" do
+    get new_teacher_registration_path
+
+    assert_select "fieldset[data-step='3']" do
+      assert_select "button[type=submit]#teacher-registration-submit", text: I18n.t("#{FORM}.submit")
+      assert_select "button#teacher-registration-submit ~ p a[href='#{terms_path}']"
+      assert_select "button#teacher-registration-submit ~ p a[href='#{privacy_path}']"
+    end
+  end
+
+  test "the gender pills read « M. » and « Mme » (UDR enseignant §3.9)" do
+    get new_teacher_registration_path
+
+    assert_select "#teacher-registration-gender label", count: 2 do |pills|
+      assert_equal [ "M.", "Mme" ], pills.map { it.text.squish }
+    end
   end
 
   test "without JavaScript, the DRENA chosen comes back in GET and lists its active schools" do
@@ -76,7 +101,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   test "IE-01: a standard sign-up attaches the teacher at once, way « standard », no join request, signed in" do
     post teacher_registrations_path, params: { teacher_registration: registration_params }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_response :see_other
     assert_equal I18n.t("identity.teacher_registrations.create.welcome"), flash[:notice]
     assert_equal [ "teacher", nil, "KOUASSI", "Aya Marie", "female" ],
@@ -88,33 +113,39 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert cookies[:session_token].present?
   end
 
-  # EPM-02, EPM-03 (UDR-0125 §3.1): « Autre matière (facultatif) », right after the subject, not required.
-  test "EPM-02: a second subject is offered, optional, and saved after the first in the school of the sign-up" do
+  # CA-J3 (UDR §3.9, ADR-0103 §4.4 amendé): one subject, with the help line; « Autre matière (facultatif) » is gone.
+  test "CA-J3: step 2 asks for a single subject with its help line; a forged second subject is ignored" do
     pc = create_material(name: "Physique-Chimie", shortname: "PC")
     get new_teacher_registration_path
 
-    assert_select "select[name='teacher_registration[second_material_slug]']:not([required]) option[value='']", text: "Aucune autre matière"
-    assert_select "label[for=teacher_registration_second_material_slug]", text: /Autre matière \(facultatif\)/
+    assert_select "fieldset[data-step='2'] select[name='teacher_registration[material_slug]'][required]", 1
+    assert_select "select[name='teacher_registration[second_material_slug]']", 0
+    assert_select "fieldset[data-step='2']", text: /#{Regexp.escape(I18n.t("#{FORM}.material_hint"))}/
+    assert_no_match(/Autre matière/, response.body)
 
     post teacher_registrations_path, params: { teacher_registration: registration_params(material_slug: pc.slug, second_material_slug: @material.slug) }
 
-    assert_redirected_to teacher_classrooms_path
-    assert_equal [ [ @school.id, pc.id ], [ @school.id, @material.id ] ],
-                 Orm::TeacherSchoolMaterial.where(teacher: new_teacher).in_order.pluck(:school_id, :material_id)
+    assert_redirected_to teacher_home_path
+    assert_equal [ [ @school.id, pc.id ] ], Orm::TeacherSchoolMaterial.where(teacher: new_teacher).in_order.pluck(:school_id, :material_id)
   end
 
-  test "EPM-03: an unknown second subject is refused in 422 under its field, both lists kept" do
-    post teacher_registrations_path, params: { teacher_registration: registration_params(second_material_slug: "latin") }
+  # CA-J1 (UDR §3.5 de l'inscription élève): a server error reopens the step that holds the field.
+  test "CA-J1: a 422 reopens the step of the faulty field" do
+    { { first_name: "  " } => 2, { pin_confirmation: "1357" } => 3, { school_public_id: "" } => 1, { material_slug: "" } => 2 }
+      .each do |overrides, step|
+        post teacher_registrations_path, params: { teacher_registration: registration_params(**overrides) }
 
-    assert_refused :second_material_slug, "Cette matière n'existe pas. Choisissez-en une autre."
-    assert_select "select[name='teacher_registration[material_slug]'] option[selected][value='#{@material.slug}']"
+        assert_response :unprocessable_entity
+        assert_select "main#teacher-signup[data-classroom--signup-steps-start-value='#{step}']", 1, overrides.to_s
+        assert_select "#signup-step-counter", text: I18n.t("#{PAGE}.step_counter", n: step)
+      end
   end
 
   test "IE-03: the name and the first names are saved as typed, spaces reduced, case kept" do
     post teacher_registrations_path,
          params: { teacher_registration: registration_params(last_name: " N'GUESSAN ", first_name: "Konan  Jean-Baptiste") }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal [ "N'GUESSAN", "Konan Jean-Baptiste" ], [ new_teacher.last_name, new_teacher.first_name ]
   end
 
@@ -148,7 +179,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
 
     post teacher_registrations_path, params: { teacher_registration: registration_params(contact: "+225 07 01 02 03 04") }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert Orm::User.exists?(contact: "0701020304", role: "teacher")
   end
 
@@ -202,10 +233,15 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     get teacher_invite_link_path(token)
 
     assert_response :success
-    assert_select "#school-preview", text: /Lycée Moderne de Cocody/
+    # CA-J2: the link opens step 2 with the recap; step 1 does not exist.
+    assert_select "main#teacher-signup[data-classroom--signup-steps-start-value='2']"
+    assert_select "fieldset[data-step='1']", 0
+    assert_select "#signup-step-counter", text: I18n.t("#{PAGE}.step_counter", n: 2)
+    assert_select "#signup-welcome:not([hidden])"
+    assert_select "fieldset[data-step='2'] #school-preview", text: /#{Regexp.escape(I18n.t("identity.teacher_registrations.school_preview.label"))}.*Lycée Moderne de Cocody/m
     assert_select "#school-preview", text: /Abidjan 1/
     assert_select "form#teacher-registration-form input[type=hidden][name='teacher_registration[invite_token]'][value='#{token}']"
-    assert_select "a#other-school[href='#{new_teacher_registration_path}']", text: I18n.t("#{FORM}.other_school")
+    assert_select "a#other-school[href='#{new_teacher_registration_path}']", text: /#{Regexp.escape(I18n.t('identity.teacher_registrations.school_preview.other_school'))} ›/
     assert_select "select[name='teacher_registration[drena_public_id]'], turbo-frame#schools", 0
     assert_select "select[name='teacher_registration[material_slug]']"
     assert_select "#invite-link-invalid", 0
@@ -221,7 +257,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
          params: { teacher_registration: registration_params(invite_token: school_token_of(referrer), drena_public_id: nil,
                                                              school_public_id: nil) }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal [ [ @school.id, true ] ], Orm::TeacherSchool.where(teacher: new_teacher).pluck(:school_id, :primary)
     assert_equal "colleague", joined_via
     assert_equal [ [ referrer.id, @school.id, "link" ] ],
@@ -238,6 +274,8 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_response :success
     assert_select "#sponsor-preview", text: /Awa Traoré vous invite sur Lnclass/
     assert_select "form#teacher-registration-form input[type=hidden][name='teacher_registration[invite_token]'][value='#{token}']"
+    assert_select "main#teacher-signup[data-classroom--signup-steps-start-value='1']"
+    assert_select "fieldset[data-step='1'] #sponsor-preview"
     assert_select "select[name='teacher_registration[drena_public_id]']"
     assert_select "form#teacher-signup-drena[action='#{teacher_invite_link_path(token)}']"
     assert_select "#school-preview, #invite-link-invalid", 0
@@ -250,7 +288,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
 
     post teacher_registrations_path, params: { teacher_registration: registration_params(invite_token: referral_token_of(referrer)) }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal [ [ @school.id, true ] ], Orm::TeacherSchool.where(teacher: new_teacher).pluck(:school_id, :primary)
     assert_equal "colleague", joined_via
     assert_equal [ [ referrer.id, @school.id, "sponsor" ] ], Orm::Referral.where(referee: new_teacher).pluck(:referrer_id, :school_id, :source)
@@ -275,7 +313,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
            params: { teacher_registration: registration_params(invite_token: @school.public_send(column), contact:,
                                                                drena_public_id: nil, school_public_id: nil) }
 
-      assert_redirected_to teacher_classrooms_path
+      assert_redirected_to teacher_home_path
       teacher = Orm::User.find_by!(contact:)
       assert_equal channel, Orm::TeacherProfile.find_by!(user: teacher).joined_via
       assert_equal [ @school.id ], Orm::TeacherSchool.where(teacher:).pluck(:school_id)
@@ -292,6 +330,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
       get teacher_invite_link_path(token)
 
       assert_response :success, token
+      assert_select "main#teacher-signup[data-classroom--signup-steps-start-value='1']", 1, token
       assert_select "#invite-link-invalid[role=alert]", text: I18n.t("#{PAGE}.invite_invalid")
       assert_select "select[name='teacher_registration[drena_public_id]']"
       assert_select "input[name='teacher_registration[invite_token]'], #school-preview", 0
@@ -305,7 +344,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     post teacher_registrations_path,
          params: { teacher_registration: registration_params(invite_token: school_token_of(referrer)) }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal "standard", joined_via
     assert_equal 0, Orm::Referral.count
   end
@@ -343,7 +382,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   test "IE-23: each sign-up leaves one audit line school.changed / teacher_joined with the school and the way" do
     post teacher_registrations_path, params: { teacher_registration: registration_params }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     event = Orm::AuditEvent.sole
     assert_equal [ "school.changed", new_teacher.id, "School", @school.id, { "change" => "teacher_joined", "via" => "standard" } ],
                  [ event.action, event.actor_id, event.subject_type, event.subject_id, event.metadata ]
@@ -359,7 +398,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
     assert_select "input[name='teacher_registration[invite_token]']", 0
     post teacher_registrations_path, params: { teacher_registration: registration_params }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal "standard", joined_via
     assert_equal 0, Orm::Referral.count
     assert_equal "standard", Orm::AuditEvent.sole.metadata["via"]
@@ -368,7 +407,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   test "a way forged in the POST is ignored: standard without a token, colleague with a valid colleague's token" do
     post teacher_registrations_path, params: { teacher_registration: registration_params(joined_via: "team") }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal "standard", joined_via
     sign_out
     referrer = create_teacher(school: @school)
@@ -377,7 +416,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
          params: { teacher_registration: registration_params(contact: "05 01 02 03 99", joined_via: "direction",
                                                              invite_token: referral_token_of(referrer)) }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal "colleague", Orm::TeacherProfile.find_by!(user: Orm::User.find_by!(contact: "0501020399")).joined_via
   end
 
@@ -406,7 +445,7 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
   test "a role added by hand is ignored, the account is a teacher" do
     post teacher_registrations_path, params: { teacher_registration: registration_params(role: "team", team_role: "admin") }
 
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path
     assert_equal [ "teacher", nil ], Orm::User.where(contact: "0501020304").pick(:role, :team_role)
   end
 
@@ -421,6 +460,8 @@ class Identity::TeacherRegistrationsControllerTest < ActionDispatch::Integration
 
     assert_response :too_many_requests
     assert_select "[role=alert]", text: I18n.t("errors.codes.rate_limited")
+    assert_select "main#teacher-signup[data-classroom--signup-steps-start-value='1']"
+    assert_select "#signup-step-counter", text: I18n.t("#{PAGE}.step_counter", n: 1)
   end
 
   test "UDR-0079 §3.6: the eleventh link opened in a minute receives 429, without the school; the form keeps its own count" do
