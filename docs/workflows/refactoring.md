@@ -103,7 +103,7 @@ Ce qu'il fait :
 - [ ] `memo.md` : motif chiffré ou nommé, **liste exhaustive des fichiers** du périmètre
 - [ ] Explorer périmètre rendu : tous les appelants recensés (code, vues, fixtures, routes)
 - [ ] ADR écrit **avant** le code, avec §3 options, §5 coûts consentis, §7 garde-fou vérifiable
-- [ ] ADR indexé dans `decisions/adr/README.md`
+- [ ] ADR écrit (`XXXX-<slug>.md`, numéro et index posés à la clôture)
 - [ ] Characterization tests écrits et **verts** avant la première modification
 - [ ] Aucune UDR nécessaire — si une vue change, le chantier est requalifié en feature
 - [ ] Chaque lot laisse l'application fonctionnelle seul

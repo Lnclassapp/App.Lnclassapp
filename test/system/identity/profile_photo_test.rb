@@ -58,15 +58,15 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
 
       assert_toast "Ta photo est enregistrée."
       assert_no_selector "turbo-frame#modal dialog[open]"
-      assert_photo_loaded "#profile_identity img[alt='Aya Koné']"
+      within("#profile_information") { assert_text "Ta photo" }
       assert_photo_loaded "header button#avatar-menu-button img[alt='Aya Koné']"
     end
     assert_equal Entities::Shared::ImageHeader::Facts.new(format: :webp, width: 480, height: 480, metadata: false), stored_facts
     assert Orm::AuditEvent.exists?(action: "profile.photo_changed", actor_id: @student.id)
     screenshot("2-profil-avec-photo")
-    # UDR-0084 §3.2 : sur le web, l'avatar de l'élève ouvre son menu, qui reprend la photo ; avec elle, plus d'« Ajouter ma photo ».
+    # UDR-0084 §3.2 : sur le web, l'avatar de l'élève ouvre « Mon compte », qui reprend la photo ; avec elle, plus d'« Ajouter ma photo ».
     find("header button#avatar-menu-button").click
-    assert_photo_loaded "#avatar-menu img.size-10[alt='Aya Koné']"
+    assert_photo_loaded "#avatar-menu img.ui-avatar[alt='Aya Koné']"
     assert_no_selector "#avatar-menu a[href='#{edit_profile_photo_path}']"
     screenshot("3-menu-de-l-avatar")
     page.send_keys(:escape)
@@ -77,7 +77,7 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
       within("turbo-frame#modal dialog[open]") { click_on "Retirer ma photo" }
 
       assert_toast "Ta photo est retirée."
-      within("#profile_identity") { assert_selector "[role=img][aria-label='Aya Koné']", text: "AK" }
+      within("#profile_information") { assert_text "Aucune photo" }
       assert_selector "header button#avatar-menu-button [role=img]", text: "AK"
     end
     assert_not stored.attached?
@@ -151,7 +151,7 @@ class Identity::ProfilePhotoTest < ApplicationSystemTestCase
       within("turbo-frame#modal dialog[open]") { click_on "Enregistrer" }
 
       assert_toast "Ta photo est enregistrée."
-      assert_photo_loaded "#profile_identity img[alt='Aya Koné']"
+      within("#profile_information") { assert_text "Ta photo" }
       assert_photo_loaded "header button#avatar-menu-button img[alt='Aya Koné']"
       assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
       find("#toasts button[data-action='toast#dismiss']").click

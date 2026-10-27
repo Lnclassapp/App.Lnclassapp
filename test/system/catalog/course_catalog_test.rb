@@ -27,31 +27,34 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
   # le titre de leur matière.
   test "a student searches the catalogue without a page reload, then opens a course whose formula KaTeX renders" do
     # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe de Tle, le niveau des deux cours.
-    sign_in_as create_student_for(@course)
-    visit courses_path
-    assert_selector "#courses_groups li", count: 2
+    # Lot O5 : sur ordinateur, Cours est celui des leçons ; la recherche des groupes par matière est celle du téléphone.
+    with_mobile_viewport do
+      sign_in_as create_student_for(@course)
+      visit courses_path
+      assert_selector "#courses_groups li", count: 2
 
-    assert_no_page_reload do
-      # Pendant la frappe, sans « Filtrer », caché avec JavaScript (UDR-0054 §3.9).
-      assert_no_button t("catalog.courses.index.filters.submit")
-      assert_no_select t("catalog.courses.index.filters.material")
-      fill_in t("catalog.courses.index.filters.search"), with: "généti"
-      assert_selector "#courses_groups li", count: 1
-      assert_selector "#courses_group_svt #course_#{@course.slug}"
-      assert_current_path(/\A#{courses_path}\?.*q=/)
+      assert_no_page_reload do
+        # Pendant la frappe, sans « Filtrer », caché avec JavaScript (UDR-0054 §3.9).
+        assert_no_button t("catalog.courses.index.filters.submit")
+        assert_no_select t("catalog.courses.index.filters.material")
+        fill_in t("catalog.courses.index.filters.search"), with: "généti"
+        assert_selector "#courses_groups li", count: 1
+        assert_selector "#courses_group_svt #course_#{@course.slug}"
+        assert_current_path(/\A#{courses_path}\?.*q=/)
+      end
+
+      assert_no_page_reload do
+        find("#course_#{@course.slug} a").click
+        assert_selector "#course_header h1", text: "Génétique et évolution"
+      end
+      assert_current_path course_path(@course.slug)
+      assert_selector "#course_content .katex", count: 1
+      assert_selector "#course_essentials li", text: "La méiose"
+
+      assert_not resource_loaded?("trix"), "une page sans formulaire ne charge pas Trix"
+      assert page.evaluate_script("performance.getEntriesByType('resource').every((entry) => entry.name.startsWith(location.origin))"),
+             "une ressource vient d'un hôte tiers"
     end
-
-    assert_no_page_reload do
-      find("#course_#{@course.slug} a").click
-      assert_selector "#course_header h1", text: "Génétique et évolution"
-    end
-    assert_current_path course_path(@course.slug)
-    assert_selector "#course_content .katex", count: 1
-    assert_selector "#course_essentials li", text: "La méiose"
-
-    assert_not resource_loaded?("trix"), "une page sans formulaire ne charge pas Trix"
-    assert page.evaluate_script("performance.getEntriesByType('resource').every((entry) => entry.name.startsWith(location.origin))"),
-           "une ressource vient d'un hôte tiers"
   end
 
   # Lot E4 (chantier politique-cache), UDR-0013 amendement du 2026-10-05 : 24 cartes ; la suite arrive quand on descend,
@@ -60,20 +63,24 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     25.times { |index| create_course(name: format("Cours %02d", index), level: @tle, material: @svt) }
     # UDR-0077 §3.2 : l'enseignant lit sa matière aux niveaux de ses classes — les 26 cours de SVT de Tle, sans la philosophie.
     sign_in_as create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle) ])
-    visit courses_path
-    assert_selector "#courses_total", text: t("catalog.courses.index.total", count: 26)
-    assert_selector "#courses_list > li", count: 24
-    assert_no_selector "#courses_list_page_2"
+    # Cartes compactes de l'enseignant (UDR enseignant §3.7) : sur ordinateur, les 24 tiennent à l'écran et la suite se
+    # charge d'elle-même ; le téléphone garde le défilement.
+    with_mobile_viewport do
+      visit courses_path
+      assert_selector "#courses_total", text: t("catalog.courses.index.total", count: 26)
+      assert_selector "#courses_list > li", count: 24
+      assert_no_selector "#courses_list_page_2"
 
-    assert_no_page_reload do
-      scroll_to find("turbo-frame#courses_page_2")
-      assert_selector "#courses_list_page_2 > li", count: 2
-      assert_no_selector "turbo-frame#courses_page_3"
+      assert_no_page_reload do
+        scroll_to find("turbo-frame#courses_page_2")
+        assert_selector "#courses_list_page_2 > li", count: 2
+        assert_no_selector "turbo-frame#courses_page_3"
+      end
+      last = all("#courses_list_page_2 > li").last
+      name = last.find("h2").text
+      last.first("a").click
+      assert_selector "h1", text: name
     end
-    last = all("#courses_list_page_2 > li").last
-    name = last.find("h2").text
-    last.find("a").click
-    assert_selector "h1", text: name
   end
 
   test "the team edits the content in the rich text editor from the course page, then publishes and archives it, without a page reload" do
@@ -173,7 +180,7 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
   end
 
   # UDR-0013, amendement du 2026-10-02 (UDR-0057) : la vue d'une matière et la page cours, vues par l'élève à 390 × 844,
-  # passent la règle de sobriété. UDR-0085 §3.3 : la carte ne porte ni matière ni niveau, et son bouton dit « Commencer ».
+  # passent la règle de sobriété. UDR écrans élève §3.6 : la ligne ne porte ni matière ni niveau, et n'a plus de bouton « Commencer ».
   test "on a phone, the student's view of a subject and the course page pass the sobriety rule" do
     %w[Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
     sign_in_as create_student_for(@course)
@@ -185,7 +192,8 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
       assert_single_primary_action
       assert_blocks_above_fold "#student_courses > *", max: 5
       within("#course_#{@course.slug}") do
-        assert_text t("catalog.courses.course_card.progress.new")
+        assert_selector "a.min-h-tap", text: "Génétique et évolution"
+        assert_no_text "Commencer la fiche de cours"
         assert_no_text "SVT"
         assert_no_text "Tle"
       end
@@ -206,23 +214,22 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
 
   # Décision du porteur du 2026-10-02 : les retraits ne valent que pour l'élève. ADR-0072, UDR-0013 (amendée le
   # 2026-10-02) : seul « Assigner à mes classes » quitte la page du cours, un cours ne s'assignant plus.
-  # UDR-0077 §3.2, amendée le 2026-10-06 : sur téléphone, la recherche et les filtres restent (tous les rôles) ; « Tout
-  # voir » quitte le filtre. UDR-0013, amendement du 2026-10-05 (ter) : le badge de matière reste sur chaque carte.
-  test "on a phone, the teacher's filtered catalogue shows the filters and « Tout voir »; the course page is unchanged" do
+  # UDR-0077 §3.2, amendée le 2026-10-06 : sur téléphone, la recherche reste ; l'enseignant n'a plus de menus ni de « Tout
+  # voir » hors recherche, et sa carte ne répète ni matière ni niveau (UDR enseignant §3.7).
+  test "on a phone, the teacher's catalogue shows the search without repeating subject and level; the course page is unchanged" do
     %w[Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
     sign_in_as create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle) ])
 
     with_mobile_viewport do
       visit courses_path(material: @svt.slug)
       assert_selector "#courses-filters"
+      assert_no_selector "#courses-filters select"
       within("#course_#{@course.slug}") do
-        assert_text "SVT"
-        assert_text "Tle"
+        assert_no_text "SVT"
+        assert_no_text "Tle"
       end
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
-      click_link t("catalog.courses.index.reset")
-      assert_current_path courses_path
       assert_no_link t("catalog.courses.index.reset")
 
       visit course_path(@course.slug)

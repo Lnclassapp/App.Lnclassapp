@@ -55,6 +55,7 @@ class Communication::AnnouncementsV2JourneyTest < ApplicationSystemTestCase
 
   # PRD §3, steps 1 to 6: the notice, the counter, the theme, the drawing of the team, the recording, the toast.
   def publish_as_kouassi
+    pilot_flags!(teacher_announcements_enabled: true)
     sign_in_as @kouassi
     visit my_announcements_path
     click_on tc("authored_messages.index.new"), match: :first

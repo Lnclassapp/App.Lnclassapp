@@ -3,10 +3,11 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision |
+| **Statut** | planification |
 | **Ouvert le** | 2026-10-12 |
-| **Revu le** | 2026-10-13 (grill repris avec l'algorithme en 5 étapes : questionner, supprimer, simplifier, accélérer, automatiser) |
-| **Branche** | `feature/contenu-en-blocs` |
+| **Revu le** | 2026-10-13 (grill repris avec l'algorithme en 5 étapes : questionner, supprimer, simplifier, accélérer, automatiser) ; 2026-10-27 (périmètre élargi aux maquettes à l'identique, voir ci-dessous) |
+| **Pilote** | Touré (`toure-bangaly`), avec l'accord du porteur |
+| **Branche** | `feature/fiches-de-cours` (l'ancienne `feature/contenu-en-blocs` du 12/10 est laissée telle quelle) |
 | **Programme** | — |
 
 ---
@@ -61,20 +62,43 @@ S'y ajoutent **le lexique** (mots soulignés, définition en bulle, liste compl�
 
 Chaque type d'exercice s'affiche comme sur les maquettes : retour « juste / à revoir » en couleur, bouton « Indice », case de saisie avec son unité, explication après la réponse. Associer, classer et compléter un texte à trous s'écrivent avec des questions à choix unique qui partagent les mêmes propositions ; aucun type de plus n'est nécessaire pour eux.
 
+## Révision du 2026-10-27 : les maquettes à l'identique
+
+> Décision de Touré, pilote du chantier avec l'accord du porteur. Elle **remplace** les lignes du grill et du hors-périmètre qui la contredisent ; le reste du memo tient.
+
+Les maquettes deviennent le cahier des charges. La référence est le handoff de design rangé dans [`docs/design/fiches-cours/`](../../design/fiches-cours/README.md) : 3 fiches (Thalès, Lentilles, Texte argumentatif), en haute fidélité. Couleurs, typographie, espacements et interactions s'y reproduisent au pixel près.
+
+**Entre dans le périmètre** (retiré du hors-périmètre) :
+- la mise en page des maquettes : papier Seyès, pages, thème de couleurs propre à chaque fiche, Kalam et Source Serif 4 hébergées par Lnclass ;
+- les médias interactifs des 3 fiches : figure de Thalès à points déplaçables, simulateur de lentille, surligneurs du texte argumentatif, exercice de construction ;
+- les exercices dans la fiche, comme sur les maquettes : « Vérifier », retour « juste / à revoir » par champ, « Indice », « Correction », tolérance de ±0,011 sur les réponses numériques ;
+- « Je m'entraîne » : générateur d'énoncés au hasard et score ;
+- la rédaction libre et ses vérifications automatiques (fiche Texte argumentatif), la zone « Ma rédaction » ;
+- « Explications simples : oui/non » et le lexique en bulle avec le bouton « Lexique ».
+
+**Reste hors périmètre** :
+- le mode relecture enseignant « Signaler une erreur » : chantier à part (table, API, file de traitement pour l'équipe) ;
+- un éditeur dans l'interface de l'équipe, le serveur MCP, la conversion des 213 leçons.
+
+**Réponses aux questions ouvertes, induites par cette décision** :
+- Exercices : ceux de la fiche se corrigent dans la page, sans note. Les exercices actuels (session, note, badge, remédiation) ne changent pas.
+- Tolérance : une règle unique, ±0,011, celle des maquettes.
+- Remplacement d'une leçon en ligne et conversion des 213 leçons : hors de ce chantier.
+
+**À trancher au plan** : où vit le contenu d'une fiche (données importées et composants communs, ou une vue par fiche) ; comment une figure propre à une fiche reste maintenable ; le rendu sous 1 000 px (les maquettes ont une largeur fixe de 880 à 1 000 px, le téléphone à 390 px reste obligatoire) ; le nom à l'écran (« Fiche de cours » sur les maquettes, « Fiche de révision » dans ce memo).
+
 ## Hors périmètre
 
-Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du memo : c'est elle qui empêche le chantier de gonfler.
+Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du memo : c'est elle qui empêche le chantier de gonfler. Nettoyée le 2026-10-27 (#318) : la mise en page, les médias interactifs, la rédaction libre et les énoncés générés sont entrés dans le périmètre (voir la révision ci-dessus).
 
-- Les exercices d'application à correction affichable (questions ouvertes non corrigées par l'application). Retirés pour le moment ; le porteur retravaillera le concept plus tard.
-- Le verrou de correction par l'enseignant, qui n'existait que pour eux : le chantier ne touche plus à la classe.
-- La rédaction dans l'application (texte libre, liste de vérification, atelier guidé) : l'élève lit la méthode et l'exemple rédigé ; l'enseignant corrige sur le cahier.
-- Les médias interactifs : simulations, labo virtuel, figure à faire glisser, animation, frise, carte interactive, texte à surligner. Chantier `medias-interactifs`.
-- La remise en ordre comme type de question, le tirage au hasard dans une banque de questions (entraînement illimité), les énoncés générés. On ne les ajoute que si le terrain le demande.
-- La version mobile à onglets : une seule fiche, pensée pour le téléphone d'abord.
-- La mise en page A4 et la pagination.
-- Un éditeur par blocs dans l'interface de l'équipe : l'import vient d'abord.
+- Le mode relecture enseignant « Signaler une erreur » : chantier à part (table, API, file de traitement pour l'équipe).
+- Un éditeur de fiches dans l'interface de l'équipe : l'import vient d'abord.
 - Le serveur MCP pour créer, lire et importer les fiches depuis un assistant : chantier à part.
-- La conversion des 213 leçons elle-même : chantier de contenu à part. Elle avance leçon par leçon, au rythme où ce chantier permet de les mettre en ligne.
+- La conversion des 213 leçons : chantier de contenu à part, qui reste à ouvrir par le porteur.
+- Le remplacement d'une fiche déjà en ligne par sa nouvelle version : un import qui retrouve une fiche existante l'ignore, comme aujourd'hui.
+- Les exercices actuels (session, note, badge, lacune, remédiation) : inchangés. Les exercices de la fiche ne donnent ni note ni lacune.
+- Des médias interactifs ou des générateurs au-delà des 3 fiches : la liste des figures et des générateurs est fermée, chaque nouveau demande du code et un lot.
+- Une figure fournie comme fichier image ou SVG dans l'import : les figures des 3 fiches sont dessinées par Lnclass.
 - Parent (n'existe pas) et direction d'établissement : rien ne change pour eux.
 
 ## Ce que le grill a révélé

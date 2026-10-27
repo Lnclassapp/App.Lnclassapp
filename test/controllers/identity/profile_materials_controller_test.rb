@@ -20,7 +20,8 @@ class Identity::ProfileMaterialsControllerTest < ActionDispatch::IntegrationTest
     Orm::TeacherSchoolMaterial.where(teacher:, school:).in_order.map { it.material.slug }
   end
 
-  test "the profile shows the subjects of the current school, with « Modifier »" do
+  # CA-H6 (lot M, mvp-teacher-student): the line has no « Modifier » any more; « Mon compte » is the one place.
+  test "the profile shows the subjects of the current school, without « Modifier »" do
     sign_in_as @teacher
 
     get profile_path
@@ -28,7 +29,8 @@ class Identity::ProfileMaterialsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#profile_materials dt", "Matières"
     assert_select "#profile_materials dd span", text: "Physique-Chimie"
     assert_select "#profile_materials dd span", text: "SVT"
-    assert_select "#profile_materials a[href='#{edit_profile_materials_path}'][data-turbo-frame=modal][aria-label='Modifier mes matières']"
+    assert_select "#profile_materials a, #profile_materials button", 0
+    assert_select "#profile_information a[href='#{edit_profile_materials_path}']", 0
   end
 
   test "the modal opens in the frame, checked with his subjects" do
@@ -124,6 +126,133 @@ class Identity::ProfileMaterialsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to pending_account_path
     assert_not Orm::TeacherSchoolMaterial.exists?(teacher: pending)
     assert_not Orm::AuditEvent.exists?(action: "profile.materials_changed")
+  end
+
+  # CA-H3, CA-H5 (UDR « écrans enseignant sans répétition » §3.4): « Mes matières », l'écran de retrait. « Retirer » rejoue
+  # UpdateTeacherMaterials avec la liste sans la matière ; la dernière matière n'a pas de bouton, et le serveur la garde.
+  def three_subjects!
+    set_teacher_materials(@teacher, @school, [ @pc, @svt, @maths ])
+  end
+
+  def remove(*slugs, **options)
+    patch profile_materials_path, params: { profile_materials: { material_slugs: [ "", *slugs ], screen: "removal" } }, **options
+  end
+
+  test "CA-H3: at three subjects, the screen counts « 3 sur 3 », lists each with « Retirer », and notes the assignments" do
+    three_subjects!
+    sign_in_as @teacher
+
+    get profile_materials_path
+
+    assert_response :success
+    assert_select "h1", "Mes matières"
+    assert_select "p", text: "3 sur 3. Retirez-en une pour en ajouter une autre."
+    assert_select "a[href='#{teacher_menu_path}']", text: /Mon compte/
+    assert_select "#teacher_materials li", 3
+    [ @pc, @svt, @maths ].each do |material|
+      assert_select "#teacher_material_#{material.slug} form[action='#{profile_materials_path}'][method=post] input[name=_method][value=patch]"
+      assert_select "#teacher_material_#{material.slug} button", text: "Retirer"
+    end
+    assert_select "#teacher_material_#{@pc.slug} input[name='profile_materials[material_slugs][]']", 2
+    assert_select "#teacher_material_#{@pc.slug} input[name='profile_materials[material_slugs][]'][value='#{@pc.slug}']", 0
+    assert_select "p", text: "Les exercices déjà assignés restent visibles par vos élèves."
+  end
+
+  test "CA-H3: removing one subject keeps the others, touches no assignment, and comes back to the screen" do
+    three_subjects!
+    assignment = create_assignment(classroom: create_classroom(school: @school), by: @teacher)
+    sign_in_as @teacher
+
+    remove(@svt.slug, @maths.slug)
+
+    assert_redirected_to profile_materials_path
+    assert_equal "Matière retirée.", flash[:notice]
+    assert_equal [ @svt.slug, @maths.slug ], list
+    assert_equal "active", assignment.reload.status
+    follow_redirect!
+    assert_select "p", text: "2 sur 3."
+    assert_select "#teacher_materials li", 2
+  end
+
+  # CA-H7 (lot P0) : dès lg, le panneau « Mon compte » charge l'écran dans son frame ; la réponse est le frame seul, et le message
+  # de l'envoi précédent s'y lit (sans layout, aucune région de toasts ne le porte).
+  test "CA-H7: in the frame of the account panel, the screen is the frame alone and it reads the notice of the removal" do
+    three_subjects!
+    sign_in_as @teacher
+    frame = { "Turbo-Frame" => NavigationHelper::ACCOUNT_PANEL_FRAME }
+
+    remove(@svt.slug, @maths.slug)
+    get profile_materials_path, headers: frame
+
+    assert_response :success
+    assert_no_match(/<aside|<header|<main/, response.body)
+    assert_select "turbo-frame##{NavigationHelper::ACCOUNT_PANEL_FRAME}", 1 do
+      assert_select "p[role=status]", "Matière retirée."
+      assert_select "a[href='#{teacher_menu_path}']", text: /Mon compte/
+      assert_select "h1", "Mes matières"
+      assert_select "#teacher_materials li", 2
+    end
+    get profile_materials_path
+    assert_select "main turbo-frame##{NavigationHelper::ACCOUNT_PANEL_FRAME}", 0
+    assert_select "p[role=status]", 0
+  end
+
+  test "CA-H5: with one subject, no « Retirer » button; a forged removal of it is refused by the server, under the list" do
+    set_teacher_materials(@teacher, @school, [ @pc ])
+    sign_in_as @teacher
+
+    get profile_materials_path
+    assert_select "p", text: "1 sur 3."
+    assert_select "#teacher_materials li", 1
+    assert_select "#teacher_materials button", 0
+
+    remove
+    assert_response :unprocessable_content
+    assert_select "#teacher_materials_error", text: "Gardez au moins une matière."
+    assert_select "#teacher_materials li", 1
+    assert_equal [ @pc.slug ], list
+    assert_not Orm::AuditEvent.exists?(action: "profile.materials_changed")
+  end
+
+  # Revue de P0 : dans le frame du panneau, le refus se lit sous la liste, dans le frame (sans lui, Turbo y écrirait « Content missing »).
+  test "CA-H5, CA-H7: in the frame of the account panel, the refusal of the last subject stays in the frame, under the list" do
+    set_teacher_materials(@teacher, @school, [ @pc ])
+    sign_in_as @teacher
+
+    remove(headers: { "Turbo-Frame" => NavigationHelper::ACCOUNT_PANEL_FRAME })
+
+    assert_response :unprocessable_content
+    assert_no_match(/<aside|<header|<main/, response.body)
+    assert_select "turbo-frame##{NavigationHelper::ACCOUNT_PANEL_FRAME}", 1 do
+      assert_select "h1", "Mes matières"
+      assert_select "#teacher_materials li", 1
+      assert_select "#teacher_materials_error[role=alert]", text: "Gardez au moins une matière."
+    end
+    assert_equal [ @pc.slug ], list
+  end
+
+  # Revue de P0 : un refus (rôle, matière inconnue) dans le frame du panneau quitte le frame, comme dans la modale.
+  test "in the frame of the account panel, a forbidden removal asks Turbo to leave the frame" do
+    sign_in_as create_student
+    remove(@svt.slug, headers: { "Turbo-Frame" => NavigationHelper::ACCOUNT_PANEL_FRAME })
+
+    assert_response :forbidden
+    assert_select "meta[name=turbo-visit-control][content=reload]"
+  end
+
+  test "the removal screen is for teachers of a school only" do
+    [ create_student, create_school_admin(school: @school), create_team_member ].each do |user|
+      sign_in_as user
+      get profile_materials_path
+      assert_response :forbidden
+      remove(@svt.slug)
+      assert_response :forbidden
+      sign_out
+    end
+    assert_equal [ @pc.slug, @svt.slug ], list
+    sign_in_as create_teacher(school: nil)
+    get profile_materials_path
+    assert_redirected_to pending_account_path
   end
 
   test "a visitor is sent to the sign-in" do

@@ -1,9 +1,10 @@
 # 🌐 DELIVERY · Communication::AuthoredMessagesController
-# Rôle : « Mes annonces » et le formulaire d'annonce (nouvelle, modifiée) de l'équipe, d'une direction ou d'un enseignant ; encadré et toast du plafond
+# Rôle : « Mes annonces » et le formulaire d'annonce (nouvelle, modifiée) de l'équipe, d'une direction ou d'un enseignant ; encadré et toast du plafond ; fermés à l'enseignant tant que le drapeau du pilote teacher_announcements_enabled est éteint
 # ADR  : 0026, 0028, 0045, 0078, 0081, 0094 · UDR : 0071 (§3.7, §3.8), 0075 (§3.3)
 module Communication
   class AuthoredMessagesController < AuthenticatedController
     allow_roles :teacher, :school_admin, :team
+    before_action :teacher_writing_closed, if: -> { current_actor.teacher? }
 
     helper_method :form_school, :classroom_choices, :edited, :announcement_date, :library_illustrations, :departing
 
@@ -43,6 +44,11 @@ module Communication
     end
 
     private
+
+    # Pilote du 27 octobre : l'enseignant ne rédige pas d'annonce tant que le drapeau est éteint ; « Reçues » reste ouverte.
+    def teacher_writing_closed
+      redirect_to announcements_path, status: :see_other unless Rails.configuration.x.pilot_flags[:teacher_announcements_enabled]
+    end
 
     # Une annonce archivée ou retirée est figée : retour à « Mes annonces », avec la raison.
     def managed(result, **)

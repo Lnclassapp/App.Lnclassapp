@@ -27,7 +27,9 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
       assert_redirected_to new_student_registration_path
       follow_redirect!
       assert_select "#classroom-link-invalid[role=alert]", text: I18n.t("classroom.student_registrations.form.link_invalid")
-      assert_select "#classroom-preview", 0
+      # CA-C: un lien invalide ouvre l'étape 1, jamais sur une erreur de champ.
+      assert_select "#student-signup[data-classroom--signup-steps-start-value='1']"
+      assert_select "#signup-classroom-recap:not([hidden])", 0
     end
 
     post join_classroom_path("kfm37"), params: { join: join_params }
@@ -62,9 +64,10 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "h1", text: I18n.t("classroom.student_registrations.new.title")
+    assert_select "#student-signup[data-classroom--signup-steps-start-value='2']"
     assert_select "form#student-registration-form[action='#{student_registrations_path}'][method=post]" do
-      assert_select "#classroom-preview", text: /6ème 1 — Lycée Classique d'Abidjan/
-      assert_select "#classroom-preview", text: /Niveau : 6ème/
+      assert_select "fieldset[data-step='1']", 0
+      assert_select "#signup-classroom-recap", text: /6ème 1.*Lycée Classique d'Abidjan/m
       assert_select "input[type=hidden][name='student_registration[link_token]'][value='#{token}']"
       assert_select "a#other-classroom[href='#{new_student_registration_path}']",
                     text: I18n.t("classroom.student_registrations.form.other_classroom")
@@ -84,7 +87,8 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "select[name='student_registration[drena_public_id]']"
-    assert_select "#classroom-link-invalid, #classroom-preview", 0
+    assert_select "#student-signup[data-classroom--signup-steps-start-value='1']"
+    assert_select "#classroom-link-invalid, #signup-classroom-recap:not([hidden])", 0
   end
 
   test "IL-09: an unknown or changed token or a closed school opens the standard page with the alert" do
@@ -97,7 +101,9 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
       assert_redirected_to new_student_registration_path
       follow_redirect!
       assert_select "#classroom-link-invalid[role=alert]", text: I18n.t("classroom.student_registrations.form.link_invalid")
-      assert_select "#classroom-preview", 0
+      # CA-C: un lien invalide ouvre l'étape 1, jamais sur une erreur de champ.
+      assert_select "#student-signup[data-classroom--signup-steps-start-value='1']"
+      assert_select "#signup-classroom-recap:not([hidden])", 0
     end
 
     @classroom.update!(link_token: "ffffffffffff")

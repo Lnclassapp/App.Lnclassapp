@@ -16,7 +16,7 @@
       <span class="mt-0.5 block text-xs text-mute"><%= t(".best") %> · <%= mastery_label(exercise.best_score_percent) %></span>
     </span>
     <%# La note garde son texte : la couleur n'en est jamais le seul porteur (UDR-0086 §3.7). %>
-    <span class="<%= class_names("shrink-0 font-display font-extrabold tabular-nums", acquired ? "text-success" : "text-ink") %>">
+    <span class="<%= class_names("shrink-0 font-display font-medium tabular-nums", acquired ? "text-success" : "text-ink") %>">
       <%= grade_label(exercise.best_score_percent) %>
     </span>
   <% end %>

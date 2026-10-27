@@ -12,7 +12,7 @@
     <div id="article_publish_refused" role="alert" class="mb-5 flex items-start gap-2 rounded-ln bg-error-soft px-4 py-3 text-sm text-error">
       <%= ui_icon "exclamation-triangle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0" %>
       <div class="space-y-1">
-        <p class="font-semibold"><%= t(".refused_title") %></p>
+        <p class="font-medium"><%= t(".refused_title") %></p>
         <p><%= t(".refused_body") %></p>
         <ul class="list-disc pl-5">
           <% form.errors.each do |error| %>

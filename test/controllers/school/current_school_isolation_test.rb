@@ -6,6 +6,7 @@ require "test_helper"
 # outside `main`: naming B there is the switcher itself.
 class School::CurrentSchoolIsolationTest < ActionDispatch::IntegrationTest
   setup do
+    pilot_flags!(teacher_announcements_enabled: true)
     @a = create_school(name: "Lycée moderne d'Abobo")
     @b = create_school(name: "Collège Saint-Michel")
     material = create_material(name: "Mathématiques")

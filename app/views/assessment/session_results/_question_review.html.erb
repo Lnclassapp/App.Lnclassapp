@@ -5,7 +5,7 @@
 <% tone = { true => :success, false => :error }.fetch(question.correct, :none) %>
 <li id="question_review_<%= question.id %>" class="py-4 first:pt-2" <%= tag.attributes(ui_reveal_item(index)) if owner %>>
   <div class="flex items-center justify-between gap-3">
-    <p class="font-bold text-ink"><%= t(".number", number: question.number) %></p>
+    <p class="font-medium text-ink"><%= t(".number", number: question.number) %></p>
     <%# UDR-0087 §3.5 : une mauvaise réponse n'est jamais en rouge. %>
     <%= ui_badge t(".verdict.#{tone}"), tone: { success: :success, error: :neutral, none: :neutral }.fetch(tone), size: :sm %>
   </div>

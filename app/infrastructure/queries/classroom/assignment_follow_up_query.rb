@@ -1,13 +1,16 @@
 # 🔌 INFRA · Queries::Classroom::AssignmentFollowUpQuery
 # Rôle : suivi d'un exercice assigné : faits (remédiation comprise), dont en retard, pas encore faits ; retards et restants nommés
-# ADR  : 0026, 0048, 0072, 0079, 0097 (§4.9) · UDR : 0062, 0072, 0109 · après FollowAssignmentPolicy seulement : elle nomme des élèves
+# ADR  : 0026, 0048, 0072, 0079, 0097 (§4.9) · UDR : 0062, 0072, 0109, enseignant §3.8 · après FollowAssignmentPolicy seulement : elle nomme des élèves
 module Queries
   module Classroom
     class AssignmentFollowUpQuery
       Counts = Data.define(:done, :late, :pending)
       # assigned_on, done_on : dates locales d'Abidjan.
+      # material_shortname : « Maths », la ligne méta du rapport ; material_slug : l'illustration de la matière ;
+      # question_count : « 10 questions » (UDR enseignant §3.8).
       Row = Data.define(:public_id, :exercise_public_id, :exercise_title, :material_name, :material_category, :due_on,
-                        :assigned_on, :counts, :late_students, :pending_students)
+                        :assigned_on, :counts, :late_students, :pending_students, :material_shortname, :material_slug,
+                        :question_count)
       # public_id : celui de l'élève, le lien vers sa fiche dans la classe (ADR-0097 §4.9).
       LateStudent = Data.define(:public_id, :display_name, :done_on)
       PendingStudent = Data.define(:public_id, :display_name)
@@ -19,19 +22,23 @@ module Queries
                  "JOIN materials ON materials.id = courses.material_id".freeze
       COLUMNS = %w[classroom_assignments.id classroom_assignments.classroom_id classroom_assignments.public_id exercises.public_id
                    exercises.title materials.name materials.category classroom_assignments.due_on
-                   classroom_assignments.assigned_at].freeze
+                   classroom_assignments.assigned_at materials.shortname materials.slug].freeze
+      QUESTION_COUNT = "(SELECT COUNT(*) FROM questions WHERE questions.exercise_id = exercises.id)".freeze
 
       # → Row | nil (assignation inconnue, archivée ou d'une autre classe)
       def call(classroom_public_id:, public_id:)
-        id, classroom_id, public_id, exercise_public_id, exercise_title, material_name, material_category, due_on, assigned_at =
+        id, classroom_id, public_id, exercise_public_id, exercise_title, material_name, material_category, due_on, assigned_at,
+          material_shortname, material_slug, question_count =
           Orm::ClassroomAssignment.joins(:classroom).joins(EXERCISE)
-                                  .where(public_id:, status: "active", classrooms: { public_id: classroom_public_id }).pick(*COLUMNS)
+                                  .where(public_id:, status: "active", classrooms: { public_id: classroom_public_id })
+                                  .pick(*COLUMNS, Arel.sql(QUESTION_COUNT))
         return if id.nil?
 
         Row.new(public_id:, exercise_public_id:, exercise_title:, material_name:, material_category:, due_on:,
                 assigned_on: assigned_at.in_time_zone.to_date,
                 counts: self.class.counts(classroom_id:, assignment_ids: [ id ]).fetch(id),
-                late_students: late_students(classroom_id, id, due_on), pending_students: pending_students(classroom_id, id))
+                late_students: late_students(classroom_id, id, due_on), pending_students: pending_students(classroom_id, id),
+                material_shortname:, material_slug:, question_count:)
       end
 
       # { assignment_id => Counts } pour des assignations d'une même classe : deux requêtes, quel que soit leur nombre.

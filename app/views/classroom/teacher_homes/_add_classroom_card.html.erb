@@ -1,0 +1,19 @@
+<%# 🌐 UI · classroom/teacher_homes/_add_classroom_card — « + Ajouter une classe », dernière carte du carrousel ; sans classe, la carte « Ajoutez vos classes » %>
+<%# Rôle : mène à la déclaration des classes (teacher_classrooms_path) ; sans classe, l'en-tête (sigle), le titre, la phrase et un bouton plein %>
+<%# ADR  : 0026 · UDR : écrans enseignant §3.3 (dernière carte), §3.13 (accueil sans classe), §3.12 · locals: (empty:, school_label:) -%>
+<% if empty %>
+  <li id="add_classroom" class="shrink-0 basis-full snap-start px-1.5 lg:basis-69">
+    <div class="relative flex flex-col gap-3 rounded-card border border-line bg-white p-5 shadow-card">
+      <p class="mr-10 truncate text-xs font-medium tracking-wide text-brand-strong uppercase"><%= school_label %></p>
+      <%= image_tag brand_logo(teacher: true), alt: "", class: "absolute top-5 right-5 size-4.5 rounded-sm" %>
+      <h3 class="text-lg font-medium text-ink"><%= t(".empty_title") %></h3>
+      <p class="text-meta text-mute"><%= t(".empty_description") %></p>
+      <%= ui_button t(".action"), href: teacher_classrooms_path, full: true %>
+    </div>
+  </li>
+<% else %>
+  <li id="add_classroom" class="shrink-0 basis-5/6 snap-start px-1.5 sm:basis-1/3 lg:basis-69">
+    <%= link_to t(".action"), teacher_classrooms_path,
+                class: "grid h-full min-h-tap place-items-center rounded-card border border-dashed border-line-strong p-5 text-center text-base font-medium text-brand-strong hover:bg-mist focus-visible:outline-2 focus-visible:outline-brand" %>
+  </li>
+<% end %>

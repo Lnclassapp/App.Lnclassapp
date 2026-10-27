@@ -1,28 +1,26 @@
 # Page d'une classe, enseignant et équipe (CL-10, CL-04, ID-15) — UDR-0027, vocabulaire UDR-0007, finitions UDR-0054 ; « Cours assignés » retiré (ADR-0072, UDR-0062 §3.6)
-# Jours de séance, exercices assignés et cours : UDR-0062 §3.4 (fonctions-espace-eleve, Lot E)
+# Exercices assignés : UDR-0062 §3.4 ; page de classe, téléphone : UDR enseignant §3.5 (Lot I de mvp-teacher-student)
 fr:
   classroom:
     classrooms:
       header:
         back: "Accueil"
-        school: "Établissement"
-        level: "Niveau"
-        school_year: "Année scolaire"
+        # UDR enseignant §3.5 : « CSMT · 2026-2027 » sous le titre (le sigle, sinon le nom de l'établissement).
+        subtitle: "%{school} · %{year}"
         archived: "Classe archivée"
+        # Le stream du retrait (classroom_students/destroy) relit encore cette clé ; la page n'affiche plus l'effectif ni le plafond.
         headcount:
           one: "%{count} / %{max} élève"
           other: "%{count} / %{max} élèves"
-        headcount_label: "Effectif et plafond"
-        headcount_tip: "%{max} est le nombre maximum d'élèves de la classe."
       # ADR-0085, UDR-0081 §3.6 : le lien de la classe remplace son code. Vu par l'enseignant, la direction et l'équipe.
       link:
-        label: "Lien de la classe"
+        label: "Inscrire vos élèves"
         copy: "Copier le lien"
         copied: "Lien copié"
         copy_label: "Copier le lien de la classe"
         whatsapp: "Partager sur WhatsApp"
         whatsapp_message: "Rejoins la classe %{classroom} sur Lnclass : %{url}"
-        hint: "Vos élèves s'inscrivent avec ce lien, ou choisissent la classe eux-mêmes."
+        hint: "Ils s'inscrivent avec le lien, classe déjà choisie."
         more_label: "Autres actions sur le lien"
         change: "Changer le lien"
         change_title: "Changer le lien de la classe ?"
@@ -40,16 +38,15 @@ fr:
           other: "%{count} élèves"
         # UDR-0108 §3.3 (ADR-0097 §4.7) : trente élèves, puis « Voir les 30 suivants ».
         count_partial: "%{shown} sur %{total}"
-        # Décision du porteur du 2026-10-16 (UDR-0108 amendée) : la liste par note sur 20.
-        groups_label: "Élèves par note sur 20"
-        groups:
-          0-10: "0 à 10"
-          11-15: "11 à 15"
-          16-20: "16 à 20"
-          none: "Pas encore de note"
-        empty_group: "Aucun élève dans ce groupe"
-        grade_label: "Note"
-        grade: "%{grade}/20"
+        # UDR enseignant §3.2, §3.5 : les puces « Tous · Bronze · Argent · Or · Diamant · Pas encore » (`badge=`) et la ligne d'élève.
+        badges_label: "Élèves par badge"
+        all: "Tous"
+        empty_badge: "Aucun élève avec ce badge"
+        done_of:
+          one: "%{count} fait sur %{assigned}"
+          other: "%{count} faits sur %{assigned}"
+        late: "%{count} en retard"
+        badge_grade: "%{badge} · %{grade}/20"
         more:
           one: "Voir le dernier"
           other: "Voir les %{count} suivants"
@@ -62,9 +59,6 @@ fr:
         # UDR-0084 §3.7 (accueil-eleve, ADR-0089 §4.2) : les exercices terminés par l'élève sans qu'ils aient été donnés.
         self_practice: "Fait seul (7 j)"
         self_practice_tip: "Exercices terminés par l'élève sans qu'ils aient été donnés, sur les 7 derniers jours, aujourd'hui compris."
-        self_practice_line: "Fait seul : %{count} cette semaine"
-        # UDR-0079 §3.8 ter (memo Q23) : le numéro d'un élève est masqué pour tout lecteur de la classe.
-        contact_masked: "Numéro masqué pour protéger les élèves"
         # ADR-0085 §4.4, §4.5, UDR-0081 §3.7 : nouveaux arrivés (7 jours), voie d'arrivée, retrait d'un élève. La liste de
         # l'enseignant n'a plus de menu ⋮ (UDR-0108) ; le menu et la confirmation restent lus par la page de la classe de la
         # direction (school_admin/classrooms/show).
@@ -84,6 +78,7 @@ fr:
         removed: "%{name} a été retiré de la classe."
         empty_title: "Aucun élève inscrit"
         empty_description: "Partagez le lien de la classe : les premiers inscrits apparaîtront ici."
+      # UDR enseignant §3.5 : le partiel n'est plus rendu sur la page ; ses textes restent avec lui.
       session_days:
         title: "Jours de séance"
         set_html: "Vos jours de séance : <strong class=\"font-medium\">%{days}</strong>"
@@ -96,28 +91,7 @@ fr:
         title: "Exercices assignés"
         empty_title: "Aucun exercice assigné"
         empty_description: "Ouvrez une fiche de cours ci-dessous pour assigner un exercice à cette classe."
-        done:
-          one: "%{count} fait"
-          other: "%{count} faits"
-        done_with_late:
-          one: "%{done}, dont %{count} en retard"
-          other: "%{done}, dont %{count} en retard"
-        pending:
-          one: "%{count} pas encore fait"
-          other: "%{count} pas encore faits"
-        summary: "%{done} · %{pending}"
-      courses:
-        title: "Fiches de cours"
-        empty_title: "Aucune fiche de cours publiée pour cette classe"
-        empty_description: "Les fiches de cours de vos matières pour ce niveau apparaîtront ici dès leur publication."
-        # UDR-0127 §3.1 (ADR-0103) : une bande par matière, pour l'enseignant de plusieurs matières
-        band_label: "Fiches de cours de %{material}"
-        count:
-          one: "%{count} fiche de cours"
-          other: "%{count} fiches de cours"
-        essentials:
-          one: "%{count} fiche de révision"
-          other: "%{count} fiches de révision"
+        pending: "%{count} pas encore"
       # UDR-0121 §3.1, ADR-0101 §4.4 : les fiches à revoir de la classe (AS-17) ; « 10/20 » = Grading.grade_on_20(PASS_THRESHOLD).
       gaps:
         title: "Fiches à revoir"

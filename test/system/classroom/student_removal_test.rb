@@ -30,8 +30,8 @@ class Classroom::StudentRemovalTest < ApplicationSystemTestCase
 
     assert_current_path student_home_path
     assert_text I18n.t("classroom.student_homes.show.removed")
-    assert_selector "#student_home_no_classroom"
-    click_on I18n.t("classroom.student_homes.no_classroom.choose")
+    assert_selector "#student_next_step[data-state=no_classroom]"
+    click_on I18n.t("classroom.student_homes.no_classroom.no_code")
 
     assert_current_path new_student_classroom_choice_path
     choose_classroom "3e 2"
@@ -44,7 +44,7 @@ class Classroom::StudentRemovalTest < ApplicationSystemTestCase
     click_on I18n.t("#{CHOICE}.submit")
 
     assert_current_path student_home_path
-    assert_selector "#student_home_classroom", text: "3e 3"
+    assert_selector "#student_next_step", text: /3e 3/i
     assert_equal [ @next_door.id ], Orm::ClassroomStudent.where(student: @koffi, left_at: nil).pluck(:classroom_id)
   end
 
@@ -58,12 +58,14 @@ class Classroom::StudentRemovalTest < ApplicationSystemTestCase
     click_on I18n.t("classroom.joins.new.join_as_student")
 
     assert_current_path student_home_path
-    assert_selector "#student_home_classroom", text: "3e 2"
+    assert_selector "#student_next_step", text: /3e 2/i
     sign_out
 
     sign_in_as @teacher
     visit classroom_path(@classroom.public_id)
-    within("#student_#{@koffi.public_id}") { assert_text I18n.t("#{ROSTER}.new") }
+    # Maquette 10 : « Nouveau » n'est plus sur la ligne, il est compté dans le titre de la liste.
+    assert_selector "#student_#{@koffi.public_id}"
+    assert_selector "#classroom_roster_title", text: I18n.t("#{ROSTER}.new_count", count: 1)
     remove_koffi
     sign_out
 

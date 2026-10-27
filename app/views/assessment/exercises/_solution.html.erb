@@ -4,7 +4,7 @@
 <%# locals: (question:) -%>
 <% answers = question.answers %>
 <div class="rounded-ln bg-success-soft px-3 py-2 text-sm text-ink">
-  <p class="flex items-center gap-1.5 font-semibold text-success">
+  <p class="flex items-center gap-1.5 font-medium text-success">
     <%= ui_icon "check-circle", variant: :mini, size: :sm %><%= t("assessment.exercises.solution.title") %>
   </p>
   <% case question.kind_name %>

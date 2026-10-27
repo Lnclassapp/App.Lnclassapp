@@ -10,11 +10,11 @@
   <%= ui_card padding: :md do %>
     <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
       <div class="flex min-w-0 items-start gap-4">
-        <span class="grid size-14 shrink-0 place-items-center rounded-card bg-ink font-display text-lg font-extrabold text-white" aria-hidden="true">
+        <span class="grid size-14 shrink-0 place-items-center rounded-card bg-ink font-display text-lg font-medium text-white" aria-hidden="true">
           <%= (school.sigle || school.name).first(3).upcase %>
         </span>
         <div class="min-w-0">
-          <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= school.name %></h1>
+          <h1 class="font-display text-2xl font-medium tracking-tight text-balance sm:text-3xl"><%= school.name %></h1>
           <dl class="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-mute">
             <% if school.sigle %>
               <div class="flex gap-1"><dt><%= t(".sigle") %></dt><dd class="font-medium text-ink"><%= school.sigle %></dd></div>
@@ -89,11 +89,11 @@
       <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div class="min-w-0">
           <div class="flex flex-wrap items-center gap-x-1">
-            <p id="school_code_label" class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".school_code") %></p>
+            <p id="school_code_label" class="text-xs font-medium tracking-wider text-mute uppercase"><%= t(".school_code") %></p>
             <%= ui_info_tip t(".school_code_tip"), label: t(".school_code") %>
           </div>
           <span id="school_code_value" aria-labelledby="school_code_label"
-                class="font-mono text-2xl font-bold tracking-widest text-ink"><%= code %></span>
+                class="font-mono text-2xl font-medium tracking-widest text-ink"><%= code %></span>
           <%# UDR-0106 : la date du dernier changement, unitaire ou de masse, explique un code périmé ; rien s'il n'a jamais changé. %>
           <% if school.school_code_rotated_at %>
             <p id="school_code_rotated_at" class="mt-1 text-xs text-mute">
@@ -110,7 +110,7 @@
         </div>
       </div>
       <p class="mt-4 flex flex-col gap-1">
-        <span id="school_invite_link_label" class="text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".invite_link") %></span>
+        <span id="school_invite_link_label" class="text-xs font-medium tracking-wider text-mute uppercase"><%= t(".invite_link") %></span>
         <%= link_to link, link, id: "school_code_link", "aria-labelledby": "school_invite_link_label",
                                 class: "text-sm font-medium break-all text-brand-strong underline-offset-4 hover:underline" %>
       </p>

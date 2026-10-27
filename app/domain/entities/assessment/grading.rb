@@ -32,6 +32,18 @@ module Entities
         GRADED_LEVELS.find { |level| reaches?(score_percent, BADGE_THRESHOLDS[level]) }
       end
 
+      # UDR enseignant §3.2 : le badge qui range un élève dans une classe, une seule règle. `scores` : les notes retenues (sur 100)
+      # de ses exercices assignés faits ; `all_perfect` : chacun est un sans-faute. Diamant : au moins un exercice fait et tous
+      # sans faute ; sinon Or, Argent, Bronze selon la moyenne, lue sur la note sur 20 ; nil (« Pas encore ») sans exercice
+      # fait ou sous la moyenne de Bronze. Jamais un exercice par élève en requête : l'appelant lit tout en une fois.
+      def self.class_badge_for(scores:, all_perfect:)
+        return nil if scores.empty?
+        return :diamond if all_perfect
+
+        average = scores.sum.fdiv(scores.size)
+        GRADED_LEVELS.find { |level| reaches?(average, BADGE_THRESHOLDS[level]) }
+      end
+
       # Un badge ne monte que vers un palier strictement supérieur.
       def self.upgrade?(current, candidate)
         return false if candidate.nil?

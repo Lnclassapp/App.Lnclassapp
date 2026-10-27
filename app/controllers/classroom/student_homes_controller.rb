@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::StudentHomesController
-# Rôle : accueil élève (CL-23, TR-04, AS-36) et son carrousel d'annonces ; sans classe principale active, « Choisis ta classe » et, une fois, le retrait
-# ADR  : 0026, 0030, 0040, 0078, 0085, 0089 (§4.1) · UDR : 0006, 0010, 0071, 0081 (§3.5), 0084 (§3.6)
+# Rôle : accueil élève (CL-23, TR-04, AS-36) : la carte du prochain exercice, la grille, le carrousel d'annonces, l'historique différé ; sans classe principale active, « Choisis ta classe » et, une fois, le retrait
+# ADR  : 0026, 0030, 0040, 0078, 0085, 0089 (§4.1) · UDR : 0006, 0010, 0071, 0081 (§3.5), 0084 (§3.6), XXXX accueil élève (§3.3)
 module Classroom
   class StudentHomesController < AuthenticatedController
     RECENT_ACTIVITY_FRAME = "student_home_recent_activity".freeze
@@ -9,29 +9,36 @@ module Classroom
 
     allow_roles :student
 
-    # Le frame différé de l'activité récente redemande cette page : il ne reçoit que son partial.
+    # PRD CA-D1 : la grille a 7 cases, 6 matières au plus puis « Inviter ».
+    MAX_SUBJECTS = 6
+    # Les états de la carte qui proposent l'exercice du jour (UDR accueil élève §3.3, états 4 et 5).
+    DAILY_STATES = %i[all_done unassigned].freeze
+
+    # Le frame différé de l'historique redemande cette page : il ne reçoit que son partial.
     def show
-      return render_recent_activity if turbo_frame_request_id == RECENT_ACTIVITY_FRAME
+      return render_history if turbo_frame_request_id == RECENT_ACTIVITY_FRAME
 
       @home = query.call(student_id: current_actor.user_id)
       return no_classroom if @home.nil?
 
       @announcements = announcements
-      # ADR-0089 §4.1 : l'exercice du jour n'est calculé que sans travail de l'enseignant (priorité stricte).
-      @daily = daily_exercise if @home.assigned_exercises.empty?
+      # ADR-0089 §4.1, UDR accueil élève §3.3 : l'exercice du jour n'est calculé que quand la carte le propose, sans travail
+      # ouvert de l'enseignant (priorité stricte) : rien d'assigné, ou tout fait et aucune fiche à revoir.
+      @daily = daily_exercise if DAILY_STATES.include?(@home.next_step.state)
     end
 
     private
 
-    def render_recent_activity
-      render partial: "recent_activity", locals: { sessions: query.recent_sessions(student_id: current_actor.user_id) }
+    def render_history
+      render partial: "history", locals: { sessions: query.recent_sessions(student_id: current_actor.user_id) }
     end
 
     def query = Queries::Classroom::StudentHomeQuery.new
 
-    # IL-14 : sans classe, l'accueil propose d'en choisir une (_no_classroom), et l'historique s'il y en a un (lot R,
+    # IL-14 : sans classe, la carte propose d'en choisir une (next_step/_no_classroom), et l'historique s'il y en a un (lot R,
     # ADR-0036) ; un retrait récent (StudentHomeQuery) se dit dans le bandeau, une fois par retrait et par session.
     def no_classroom
+      @form = Dtos::Classroom::StudentRegistrationInput.new
       @archived = Queries::Classroom::StudentArchiveQuery.new.any?(student_id: current_actor.user_id)
       removed_at = query.last_classroom(student_id: current_actor.user_id).recent_removal_at&.to_i
       return if removed_at.nil? || session[REMOVAL_NOTICE] == removed_at

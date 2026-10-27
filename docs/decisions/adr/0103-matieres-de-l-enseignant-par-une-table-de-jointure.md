@@ -13,6 +13,7 @@ problematique: `teacher_profiles.material_id` n'admet qu'une matière ; un ensei
 | **Remplace** | — |
 | **Complète** | [ADR-0094](0094-enseignant-multi-etablissements-et-etablissement-courant.md) §10 (point d'extension `teacher_schools`) |
 | **Amende** | [ADR-0083](0083-inscription-enseignant-en-deux-voies.md) (champ « Matière » de l'inscription) · [ADR-0101](0101-remediation-implicite-exercice-propose-et-lecture-enseignant.md) §4.4 (« matière » → « matières ») |
+| **Amendé par** | UDR-0134 (2026-10-23) : §4.4, puce « Inscription » — une seule matière à l'inscription, `second_material_slug` retiré ; les matières 2 et 3 passent par « Ajouter une matière » du menu « Mon compte » |
 | **Remplacé par** | — |
 
 ---

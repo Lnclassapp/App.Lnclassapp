@@ -9,7 +9,8 @@
 @source "../../helpers";
 @source "../../javascript";
 
-/* Polices servies par l'application (ADR-0049 : aucune police tierce). Sous-ensemble latin, variable. */
+/* Police servie par l'application (ADR-0049 : aucune police tierce). Sous-ensemble latin, variable.
+   UDR palette froide §2 : une seule police, DM Sans, titres compris. */
 @font-face {
   font-family: "DM Sans";
   font-style: normal;
@@ -19,40 +20,38 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-@font-face {
-  font-family: "Bricolage Grotesque";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 200 800;
-  src: url("/bricolage-grotesque-latin-wght-normal.woff2") format("woff2-variations");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
 /* UDR-0005 — Les familles remises à zéro (couleurs, rayons, ombres, polices) n'existent QUE par leurs tokens :
    `bg-slate-50`, `rounded-xl` ou `shadow-md` ne produisent plus rien. Le test du design system le vérifie. */
 @theme {
-  /* Typographie — identité de la landing */
+  /* Typographie — une seule police (UDR palette froide §2) ; `font-display` reste un alias, pour les vues existantes */
   --font-*: initial;
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --text-2xs: 0.6875rem;
   --text-2xs--line-height: 1rem;
+  /* UDR palette froide §3.2 : méta, aide, libellé de grille (13 px) */
+  --text-meta: 0.8125rem;
+  --text-meta--line-height: 1.125rem;
   --leading-display: 1.05;
 
-  /* Couleurs — palette de la landing, seule autorisée */
+  /* Couleurs — palette froide du pilote (UDR palette froide §3.1), seule autorisée */
   --color-*: initial;
   --color-white: #ffffff;
-  --color-ink: #262626;
-  --color-mute: #5e5a54;
-  --color-line: #e6e1d8;
-  --color-mist: #f2eee7;
-  --color-paper: #faf8f4;
+  --color-ink: #1f2128;
+  --color-mute: #5f6470;
+  --color-line: #e3eef7;
+  /* Bordures de champ, case à cocher, interrupteur éteint */
+  --color-line-strong: #c3d8e8;
+  --color-mist: #f4f8fb;
+  --color-paper: #ffffff;
 
   --color-brand: #00a0ff;
   --color-brand-soft: #e5f5ff;
   --color-brand-strong: #0070b3;
+  /* Texte et icônes posés sur le bandeau `brand` (aucun texte blanc sur `brand`) */
+  --color-band-ink: #0b2a40;
 
   /* Couleurs de rôle */
   --color-teacher: #ff8a00;
@@ -63,8 +62,10 @@
   /* Couleurs d'état — texte AA sur blanc et sur leur fond doux */
   --color-success: #18723f;
   --color-success-soft: #e7f5ed;
-  --color-warning: #9a5200;
+  /* L'ambre veut dire « retard », rien d'autre ; `warning-dot` est le point de la pastille et de la grille */
+  --color-warning: #8a4a00;
   --color-warning-soft: #fff1dc;
+  --color-warning-dot: #f08c00;
   --color-error: #c8322b;
   --color-error-soft: #fdecea;
   --color-info: var(--color-brand-strong);
@@ -108,6 +109,8 @@
   --spacing-gutter: 1rem;
   --spacing-bar: 4rem;
   --spacing-rail: 18rem;
+  /* Décalage collant sous la barre : la barre (4rem) + 1,5 rem (`top-sticky-below-bar`) */
+  --spacing-sticky-below-bar: calc(var(--spacing-bar) + 1.5rem);
 
   /* Largeurs de contenu */
   --container-page: 72rem;
@@ -254,10 +257,10 @@
     @apply text-base leading-relaxed text-ink;
 
     & > :not(:first-child) { @apply mt-3; }
-    & h1 { @apply font-display text-2xl font-bold; }
-    & h2 { @apply font-display text-xl font-bold; }
+    & h1 { @apply text-lg font-medium; }
+    & h2 { @apply text-base font-medium; }
     & a { @apply text-brand-strong underline; }
-    & strong { @apply font-semibold; }
+    & strong { @apply font-medium; }
     & ul { @apply list-disc pl-6; }
     & ol { @apply list-decimal pl-6; }
     & li { @apply ml-0; }
@@ -282,9 +285,24 @@
   grid-template-columns: minmax(0, 1fr) 20rem;
 }
 
+/* Écrans élève dès lg (UDR écrans élève §3.6 bis) : résultat de session, une colonne de 340 px à gauche puis la correction. */
+@utility grid-cols-side-main {
+  grid-template-columns: 340px minmax(0, 1fr);
+}
+
+/* Écrans élève dès lg (UDR écrans élève §3.6 bis) : la fiche, puis la colonne « Exercices » de 300 px à droite. */
+@utility grid-cols-main-side {
+  grid-template-columns: minmax(0, 1fr) 300px;
+}
+
 /* Ligne de tableau empilée sur téléphone (UDR-0081 §3.7) : le contenu, puis une colonne à sa largeur pour le menu ⋮. */
 @utility grid-cols-content-action {
   grid-template-columns: minmax(0, 1fr) auto;
+}
+
+/* Fiche d'un élève dès lg (UDR enseignant §3.6) : trois rangées, la deuxième prend le reste pour que la gestion suive le résumé. */
+@utility grid-rows-fit-fill-fit {
+  grid-template-rows: auto 1fr auto;
 }
 
 /* Cellule empilée : son libellé de colonne (data-label) précède la valeur, sans changer le texte de la cellule. */
@@ -372,8 +390,9 @@
   @apply relative inline-flex cursor-pointer items-center justify-center rounded-full font-medium whitespace-nowrap select-none transition active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50;
 }
 
+/* UDR palette froide §3.3 : bouton principal en `brand-strong`, texte blanc (5,29:1) ; secondaire blanc, texte bleu. */
 @utility ui-button-primary {
-  @apply bg-ink text-white hover:bg-ink/85;
+  @apply bg-brand-strong text-white hover:bg-brand-strong/90;
 }
 
 @utility ui-button-brand {
@@ -381,7 +400,7 @@
 }
 
 @utility ui-button-secondary {
-  @apply border border-line bg-white text-ink hover:bg-mist;
+  @apply border border-line-strong bg-white text-brand-strong hover:bg-mist;
 }
 
 @utility ui-button-ghost {
@@ -429,7 +448,7 @@
 }
 
 @utility ui-avatar {
-  @apply inline-grid shrink-0 place-items-center overflow-hidden rounded-full font-display font-extrabold;
+  @apply inline-grid shrink-0 place-items-center overflow-hidden rounded-full font-medium;
 }
 
 /* UDR-0054 §3.4, amendement « survol » — largeur de la bulle : celle d'un formulaire, jamais plus que la fenêtre moins
@@ -574,7 +593,7 @@ dialog.dialog-drawer {
    les fonctions récentes de Tailwind v4 (couches, oklch, :where) ne sont pas comprises. */
 .outdated-browser {
   background: #fff1dc;
-  color: #262626;
+  color: #1f2128;
   padding: 0.5rem 1rem;
   text-align: center;
 }
@@ -596,12 +615,14 @@ dialog.dialog-drawer {
     --color-ink: #eef1f5;
     --color-mute: #a3acb9;
     --color-line: #2c3542;
+    --color-line-strong: #3a4655;
     --color-mist: #222a35;
     --color-paper: #0f1218;
 
     --color-brand: #0070b3;
     --color-brand-soft: #132c42;
     --color-brand-strong: #7fd0ff;
+    --color-band-ink: #ffffff;
 
     --color-teacher: #9a5000;
     --color-school: #a9c4ee;
@@ -612,6 +633,7 @@ dialog.dialog-drawer {
     --color-success-soft: #133a26;
     --color-warning: #ffbf73;
     --color-warning-soft: #3a2a10;
+    --color-warning-dot: #ffa94d;
     --color-error: #ff9a90;
     --color-error-soft: #3d1c1c;
 
@@ -722,12 +744,14 @@ dialog.dialog-drawer {
     --color-ink: #eef1f5;
     --color-mute: #a3acb9;
     --color-line: #2c3542;
+    --color-line-strong: #3a4655;
     --color-mist: #222a35;
     --color-paper: #0f1218;
 
     --color-brand: #0070b3;
     --color-brand-soft: #132c42;
     --color-brand-strong: #7fd0ff;
+    --color-band-ink: #ffffff;
 
     --color-teacher: #9a5000;
     --color-school: #a9c4ee;
@@ -738,6 +762,7 @@ dialog.dialog-drawer {
     --color-success-soft: #133a26;
     --color-warning: #ffbf73;
     --color-warning-soft: #3a2a10;
+    --color-warning-dot: #ffa94d;
     --color-error: #ff9a90;
     --color-error-soft: #3d1c1c;
 

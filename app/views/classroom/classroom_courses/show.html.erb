@@ -10,7 +10,7 @@
 <%= ui_card padding: :md, class: "mb-8" do %>
   <div class="min-w-0 space-y-3">
     <p class="text-sm text-mute"><%= t(".context", classroom: @classroom.name, school: @classroom.school_name) %></p>
-    <h1 class="font-display text-2xl font-extrabold tracking-tight text-balance sm:text-3xl"><%= course.name %></h1>
+    <h1 class="font-display text-2xl font-medium tracking-tight text-balance sm:text-3xl"><%= course.name %></h1>
     <% if course.subtitle.present? %>
       <p class="text-mute"><%= course.subtitle %></p>
     <% end %>
@@ -22,7 +22,7 @@
 <% end %>
 
 <section id="classroom_course_essentials" aria-labelledby="classroom_course_essentials_title">
-  <h2 id="classroom_course_essentials_title" class="mb-4 font-display text-xl font-extrabold"><%= t(".essentials_title") %></h2>
+  <h2 id="classroom_course_essentials_title" class="mb-4 font-display text-xl font-medium"><%= t(".essentials_title") %></h2>
   <% if @course.essentials.empty? %>
     <%= ui_empty_state title: t(".empty"), description: t(".empty_description"), icon: "document-text" %>
   <% else %>

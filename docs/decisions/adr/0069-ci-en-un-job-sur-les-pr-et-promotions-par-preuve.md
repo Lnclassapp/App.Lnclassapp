@@ -155,3 +155,13 @@ Précisions qui font partie de la décision :
 - **Réactiver** : créer la variable `CI_ENABLED=true` ; aucun changement de code.
 - **Réactivée le 2026-10-20** pour les seules PR vers `Staging` et `main`, en tâches de 5 minutes au plus ([ADR-0107](0107-la-preuve-d-une-pr-suit-ce-qu-elle-touche.md)). Retirer l'interrupteur du workflow (et de `test/guards/ci_plan_test.rb`) quand la cause est réglée.
 
+
+## Amendement du 2026-10-24 — 50 s pour le pilote enseignant et élève
+
+*Décision du porteur, 2026-10-24 (« A à 50 s »), chantier [`mvp-teacher-student`](../../chantiers/mvp-teacher-student/plan.md) (PR #295).*
+
+- **Pourquoi** : l'inscription élève en trois étapes a pris 10,5 s des 15 s du chantier, et il reste 17 lots, élève et enseignant, avant le pilote du 27 octobre. À 15 s, ces lots n'auraient presque plus de test dans un vrai navigateur.
+- **Décision** : le chantier a une dérogation de **50 s**, écrite dans `SystemBudget::GRANTS` (`script/ci/system_budget.rb`) sous la clé `mvp-teacher-student`, avec ses fichiers système : `test/system/assessment/session_result_test.rb`, `test/system/catalog/teacher_courses_test.rb`, `test/system/classroom/{catalog_assignment,classroom_essential,classroom_page,classroom_roster,comprehension,join,student_classroom,student_file,student_home,teacher_home,teaching_selection}_test.rb`, `test/system/homepage_test.rb`, `test/system/identity/{account_panel,profile_pin,profile,student_avatar_menu,student_signup_steps,teacher_materials,teacher_signup}_test.rb`, `test/system/role_homes_test.rb`, `test/system/school/teacher_schools_test.rb`. Le budget général reste de 15 s.
+- **Règle** : chaque lot garde un test système court de son parcours principal et teste le reste au niveau contrôleur ou intégration. Un fichier système qui n'est pas dans la liste remonte au porteur avant d'entrer.
+- **Vérification** : `test/guards/system_budget_test.rb` : 50 s pour les seuls fichiers du chantier, 15 s dès qu'un autre fichier grandit avec eux, 50,1 s refusées.
+- **Élargi le 2026-10-26** (porteur : « fais ce qui est correct ») : les lots ont fait grandir, ou ajouté, des fichiers système hors de la liste (E2, O1 à O3, P4, P6 et les tests recalés par E1 et D). La liste couvre désormais les 53 fichiers système que le chantier touche (48, puis P3, puis O5 : `test/system/catalog/student_courses_test.rb`, décision du porteur, puis P1 et P2 : `teacher_home_desktop_test.rb`, `classroom_desktop_test.rb`, puis P0 : `teacher_account_panel_desktop_test.rb`) ; le budget reste de 50 s (+17,8 s à la fusion de P6). La règle « un fichier hors de la liste remonte au porteur » demeure pour les lots suivants.

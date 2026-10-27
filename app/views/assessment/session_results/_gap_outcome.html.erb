@@ -7,7 +7,7 @@
 <div id="session_gap_outcome" class="flex items-start gap-3 rounded-card px-4 py-4 text-sm text-ink <%= lifted ? "bg-success-soft" : "bg-warning-soft" %>">
   <%= ui_icon lifted ? "check-badge" : "light-bulb", variant: :mini, size: :sm, class: "mt-0.5 #{lifted ? "text-success" : "text-warning"}" %>
   <div class="min-w-0 space-y-1">
-    <p class="font-bold"><%= t(".#{outcome}.message") %></p>
+    <p class="font-medium"><%= t(".#{outcome}.message") %></p>
     <p><%= t(".#{outcome}.hint", essential: essential.name, grade:) %></p>
     <% unless lifted %>
       <%= link_to t(".open_essential"), course_essential_path(essential.course_slug, essential.slug),

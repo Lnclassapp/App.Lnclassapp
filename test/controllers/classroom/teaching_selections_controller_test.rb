@@ -32,7 +32,55 @@ class Classroom::TeachingSelectionsControllerTest < ActionDispatch::IntegrationT
     assert_select "form#teaching_#{@third_b.public_id} input[name=_method][value=delete]", 1
     assert_select "form#teaching_#{@third_b.public_id} button[aria-pressed=true]", text: /3ème B/
     assert_select "#teaching_counter[aria-live=polite]", text: I18n.t("classroom.teachings.counter.count", count: 1)
-    assert_select "form#teacher-onboarding-form[action='#{teacher_onboarding_path}'] button[type=submit]", text: tl("index.finish")
+    assert_select "form#teacher-onboarding-form[action='#{teacher_onboarding_path}'] button[type=submit].ui-button-primary.w-full", text: tl("index.finish")
+    # UDR enseignant §3.13 : « 1 classe cochée » dans une pastille ; ni « ‹ Accueil » avant la fin de l'onboarding, ni « Inviter un collègue ».
+    assert_select ".bg-brand-soft.rounded-full > #teaching_counter", text: "1 classe cochée"
+    assert_select "main a[href='#{teacher_home_path}']", 0
+    assert_select "main a[href='#{teacher_invite_path}']", 0
+  end
+
+  test "UDR enseignant §3.13: each row is 52 px with the name on the left and the checkbox on the right, its state read by aria-pressed" do
+    declare(@third_b)
+    sign_in_as @teacher
+
+    get teacher_classrooms_path
+
+    assert_select "form#teaching_#{@sixth1.public_id} button[aria-pressed=false].min-h-13" do
+      assert_select "> span:first-child", text: "6ème 1"
+      assert_select "> span:last-child.border-line.bg-white:not(.bg-brand-strong)", 1
+      assert_select "svg", 0
+    end
+    assert_select "form#teaching_#{@third_b.public_id} button[aria-pressed=true]" do
+      assert_select "> span:first-child", text: "3ème B"
+      assert_select "> span:last-child.bg-brand-strong svg", 1
+    end
+  end
+
+  test "UDR enseignant §3.13: the counter text is medium and brand-strong inside the soft pill" do
+    declare(@sixth1)
+    sign_in_as @teacher
+
+    get teacher_classrooms_path
+
+    assert_select ".bg-brand-soft > #teaching_counter.font-medium.text-brand-strong:not(.text-mute)", text: "1 classe cochée"
+  end
+
+  test "UDR enseignant §3.13: the sentence names the school by its sigle, else by its name; also on the 422 page" do
+    @school.update!(sigle: "LCA")
+    sign_in_as @teacher
+
+    get teacher_classrooms_path
+
+    assert_select "header p", text: tl("index.subtitle_sigle", school: "LCA")
+    assert_select "header p", text: /Lycée Classique/, count: 0
+
+    post teacher_onboarding_path
+    assert_response :unprocessable_entity
+    assert_select "header p", text: tl("index.subtitle_sigle", school: "LCA")
+
+    @school.update!(sigle: nil)
+    get teacher_classrooms_path
+    assert_select "header p", text: tl("index.subtitle", school: "Lycée Classique d'Abidjan")
   end
 
   test "an onboarded teacher keeps the page to change the classrooms, without « Terminer », and signs in to /teachers" do
@@ -44,7 +92,7 @@ class Classroom::TeachingSelectionsControllerTest < ActionDispatch::IntegrationT
 
     assert_response :success
     assert_select "#teacher-onboarding-form", 0
-    assert_select "a[href='#{teacher_home_path}']", text: tl("index.back_home")
+    assert_select "main nav a[href='#{teacher_home_path}']", text: tl("index.back_home")
     assert_select "#teaching_counter", text: I18n.t("classroom.teachings.counter.count", count: 0)
   end
 
@@ -114,7 +162,8 @@ class Classroom::TeachingSelectionsControllerTest < ActionDispatch::IntegrationT
   test "non-regression: declared classrooms do not make an onboarding, and withdrawing them all does not undo one" do
     declare(@sixth1)
     post session_path, params: { session: { contact: @teacher.contact, pin: "2468" } }
-    assert_redirected_to teacher_classrooms_path
+    assert_redirected_to teacher_home_path # UDR enseignant §3.13 : l'accueil porte « Ajoutez vos classes », plus de renvoi ici
+    assert_not onboarded?(@teacher)
     sign_out
 
     onboarded = create_teacher(school: @school)

@@ -4,10 +4,14 @@ require "test_helper"
 # mélangées et poste des indices d'affichage, jamais un id (CA-9). Le bon ordre est juste, une étape mal placée est fausse
 # (CA-7). « Ton choix » rend l'ordre de l'élève, jamais le bon (CA-10). L'équipe saisit les étapes (CA-13).
 class Assessment::QuestionOrderingTest < ActionDispatch::IntegrationTest
+  DISTINCT_ANSWER_ID = 914_273_001
   TURBO = { "Accept" => "text/vnd.turbo-stream.html, text/html, application/xhtml+xml" }.freeze
   STEPS = %w[Prophase Métaphase Anaphase Télophase].freeze
 
   setup do
+    # Des ids de réponse qu'aucun nombre de la page ne peut valoir (position, « 1 sur 2 », tracé d'icône) : sans cela, un
+    # id petit passe pour une fuite, et une vraie fuite d'un id petit passerait pour une position.
+    Orm::Answer.connection.execute("ALTER SEQUENCE #{Orm::Answer.sequence_name} RESTART WITH #{DISTINCT_ANSWER_ID}")
     @exercise = create_exercise(title: "Mitose", questions: 0)
     @question = create_kind_question(exercise: @exercise, question_type: "ordering", answers: STEPS, content: "Range les étapes.")
     create_kind_question(exercise: @exercise, question_type: "ordering", answers: %w[Un Deux Trois], content: "Compte.")

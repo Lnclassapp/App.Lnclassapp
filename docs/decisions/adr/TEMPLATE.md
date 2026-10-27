@@ -1,13 +1,12 @@
-# ADR-NNNN : [Titre de la décision, à l'affirmative]
+# ADR-XXXX : [Titre de la décision, à l'affirmative]
 <!-- index
 titre: [titre court de l'index]
 statut: Accepté
 problematique: [une phrase : le problème que la décision tranche]
 -->
 <!--
-  Nom du fichier : NNNN-titre-en-kebab-case.md — 4 chiffres, séquentiel, jamais réutilisé.
-  Vérifier le dernier numéro : ls docs/decisions/adr/ | tail -3
-  Après création : ajouter la ligne correspondante dans docs/decisions/adr/README.md
+  Nom du fichier : XXXX-titre-en-kebab-case.md, cité ADR-XXXX-<slug> tant que le chantier est ouvert.
+  Le numéro (4 chiffres, jamais réutilisé) et la ligne d'index : script/docs/build_index --number, au commit de clôture.
 -->
 
 | | |

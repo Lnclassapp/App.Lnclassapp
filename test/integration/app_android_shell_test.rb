@@ -114,7 +114,8 @@ class AppAndroidShellTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "CA-T1 — the teacher's same page in a browser keeps header, sidebar and bottom bar, without bridge element" do
+  # UDR enseignant §3.3 (mvp-teacher-student): the teacher has no bottom bar any more; the header and the sidebar stay.
+  test "CA-T1 — the teacher's same page in a browser keeps header and sidebar, no bottom bar, without bridge element" do
     sign_in_as create_teacher
 
     get teacher_home_path
@@ -122,8 +123,8 @@ class AppAndroidShellTest < ActionDispatch::IntegrationTest
     assert_response :ok
     assert_select "header"
     assert_select "aside"
-    assert_select "nav[aria-label='#{I18n.t('shared.navigation.bottom_bar.label')}']"
-    assert_select "main#main.pb-28.lg\\:pl-rail"
+    assert_select "nav.fixed.bottom-0", 0
+    assert_select "main#main.pb-12.lg\\:pl-rail:not(.pb-28)"
     assert_select BRIDGE, 0
   end
 

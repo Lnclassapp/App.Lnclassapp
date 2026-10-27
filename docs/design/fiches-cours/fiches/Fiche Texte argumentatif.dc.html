@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#e5ddd6;-webkit-font-smoothing:antialiased}
+a{color:oklch(0.42 0.13 15)}a:hover{color:oklch(0.5 0.1 70)}
+</style>
+</helmet>
+<sc-if value="{{ popOpen }}" hint-placeholder-val="{{ false }}"><div style="position:fixed;left:{{ popLeft }}px;top:{{ popTop }}px;width:310px;max-height:70vh;overflow:auto;z-index:50;background:#fffdf8;border:2px solid oklch(0.5 0.1 70);border-radius:8px;box-shadow:0 10px 30px rgba(60,30,20,.25);padding:12px 14px;display:flex;flex-direction:column;gap:6px;font-family:'Source Serif 4',Georgia,serif;font-size:15px;line-height:1.45;color:#2a2224"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><b style="font-family:Kalam,cursive;font-size:20px;color:oklch(0.45 0.1 70)">{{ popWord }}</b><button onClick="{{ closePop }}" style="border:none;background:transparent;font-size:18px;cursor:pointer;color:#6a6266;padding:0 4px">×</button></div><sc-for list="{{ popItems }}" as="it" hint-placeholder-count="1"><div style="display:flex;flex-direction:column;gap:2px"><sc-if value="{{ it.title }}" hint-placeholder-val="{{ false }}"><b style="color:oklch(0.45 0.1 70);cursor:pointer" onClick="{{ it.open }}">{{ it.title }}</b></sc-if><span style="text-wrap:pretty">{{ it.def }}</span><sc-if value="{{ it.ex }}" hint-placeholder-val="{{ false }}"><span style="font-family:Kalam,cursive;font-size:16px;color:oklch(0.42 0.13 15)">{{ it.ex }}</span></sc-if></div></sc-for></div></sc-if>
+<div style="display:flex;flex-direction:column;align-items:safe center;gap:40px;padding:40px 20px;overflow-x:auto;font-family:'Source Serif 4',Georgia,serif;color:#2a2224;font-size:16px;line-height:1.5">
+
+<div data-screen-label="Page 1" style="width:880px;min-height:1245px;flex:none;background:#fbf6e9;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.05),0 14px 40px rgba(60,30,20,.18);box-sizing:border-box">
+<sc-if value="{{ seyes }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right,transparent 74px,oklch(0.6 0.17 20 / .55) 74px,oklch(0.6 0.17 20 / .55) 76px,transparent 76px),repeating-linear-gradient(to bottom,rgba(110,110,190,.24) 0 1px,transparent 1px 32px),repeating-linear-gradient(to bottom,rgba(110,110,190,.08) 0 1px,transparent 1px 8px)"></div></sc-if>
+<div style="position:relative;padding:52px 52px 44px 100px;display:flex;flex-direction:column;gap:26px">
+<header style="display:flex;flex-direction:column;gap:4px">
+<div style="display:flex;justify-content:space-between;font-family:Kalam,cursive;font-size:17px;color:oklch(0.42 0.13 15)"><span>Français — Classe de 3e</span><span>Agir dans la cité · Fiche de cours</span></div>
+<h1 style="margin:0;font-family:Kalam,cursive;font-weight:700;font-size:58px;line-height:1.1;color:oklch(0.42 0.13 15)">Le texte argumentatif</h1>
+<div style="height:3px;background:oklch(0.55 0.12 75)"></div>
+<div style="height:1.5px;background:oklch(0.55 0.12 75);margin-top:1px"></div>
+<p style="margin:10px 0 0;font-size:17px;text-wrap:pretty"><span onClick="{{ g.argumenter }}" style="border-bottom:2px dotted oklch(0.5 0.1 70);cursor:help" style-hover="background:oklch(0.5 0.1 70 / 0.12)">Argumenter</span>, c'est défendre une opinion pour amener quelqu'un à la partager. Un texte argumentatif cherche à <span onClick="{{ g.convaincre }}" style="border-bottom:2px dotted oklch(0.5 0.1 70);cursor:help" style-hover="background:oklch(0.5 0.1 70 / 0.12)">convaincre</span> ou à <span onClick="{{ g.persuader }}" style="border-bottom:2px dotted oklch(0.5 0.1 70);cursor:help" style-hover="background:oklch(0.5 0.1 70 / 0.12)">persuader</span> son lecteur. On en lit dans les articles de presse, les discours, les lettres ouvertes, les fables…</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-top:12px;padding:8px 12px;background:#fffdf8;border:1.5px solid oklch(0.5 0.1 70 / 0.4);border-radius:6px;font-size:14.5px"><span style="text-wrap:pretty">Les mots <span onClick="{{ g.aide }}" style="border-bottom:2px dotted oklch(0.5 0.1 70);cursor:help" style-hover="background:oklch(0.5 0.1 70 / 0.12)">soulignés en pointillés</span> sont expliqués : clique dessus.</span><div style="display:flex;gap:8px"><button onClick="{{ toggleSimple }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.5 0.1 70);background:{{ simpleBg }};color:{{ simpleFg }};cursor:pointer">{{ simpleLabel }}</button><button onClick="{{ g.lexique }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.5 0.1 70);background:transparent;color:oklch(0.45 0.1 70);cursor:pointer">Lexique</button></div></div>
+</header>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:28px;font-weight:700;color:oklch(0.42 0.13 15)"><span style="color:oklch(0.55 0.12 75)">1.</span> Les éléments de l'argumentation</h2>
+<div style="position:relative;border:2px solid;border-radius:6px;background:#fffdf8;padding:22px 24px 16px;display:flex;flex-direction:column;gap:10px;border-color:oklch(0.42 0.13 15)">
+<span style="position:absolute;top:-14px;left:18px;color:#fff;font-family:Kalam,cursive;font-weight:700;font-size:16px;padding:1px 12px;border-radius:4px;background:oklch(0.42 0.13 15)">À retenir</span>
+<div style="display:grid;grid-template-columns:170px minmax(0,1fr);gap:8px 16px;align-items:baseline;text-wrap:pretty">
+<b style="font-family:Kalam,cursive;font-size:18px">Le <span onClick="{{ g.theme }}" style="border-bottom:2px dotted oklch(0.5 0.1 70);cursor:help" style-hover="background:oklch(0.5 0.1 70 / 0.12)">thème</span></b><span>Le sujet dont on parle. <i>La lecture.</i></span>
+<b style="font-family:Kalam,cursive;font-size:18px;background:oklch(0.89 0.07 15);color:oklch(0.42 0.13 15);padding:0 8px;border-radius:3px;justify-self:start">La <span onClick="{{ g.these }}" style="border-bottom:2px dotted oklch(0.5 0.1 70);cursor:help" style-hover="background:oklch(0.5 0.1 70 / 0.12)">thèse</span></b><span>L'opinion que l'auteur défend. <i>Il faut lire des livres.</i></span>
+<b style="font-family:Kalam,cursive;font-size:18px;background:oklch(0.9 0.04 300);color:oklch(0.45 0.12 300);padding:0 8px;border-radius:3px;justify-self:start">La <span onClick="{{ g.adverse }}" style="border-bottom:2px dotted oklch(0.5 0.1 70);cursor:help" style-hover="background:oklch(0.5 0.1 70 / 0.12)">thèse adverse</span></b><span>L'opinion contraire, que l'auteur <span onClick="{{ g.refuter }}" style="border-bottom:2px dotted oklch(0.5 0.1 70);cursor:help" style-hover="background:oklch(0.5 0.1 70 / 0.12)">réfute</span>. <i>La lecture est dépassée.</i></span>
+<b style="font-family:Kalam,cursive;font-size:18px;background:oklch(0.9 0.06 250);color:oklch(0.42 0.12 250);padding:0 8px;border-radius:3px;justify-self:start">Les <span onClick="{{ g.argument }}" style="border-bottom:2px dotted oklch(0.5 0.1 70);cursor:help" style-hover="background:oklch(0.5 0.1 70 / 0.12)">arguments</span></b><span>Les raisons qui justifient la thèse. <i>Lire enrichit le vocabulaire.</i></span>
+<b style="font-family:Kalam,cursive;font-size:18px;background:oklch(0.91 0.07 150);color:oklch(0.42 0.11 150);padding:0 8px;border-radius:3px;justify-self:start">Les <span onClick="{{ g.exemple }}" style="border-bottom:2px dotted oklch(0.5 0.1 70);cursor:help" style-hover="background:oklch(0.5 0.1 70 / 0.12)">exemples</span></b><span>Des faits précis qui illustrent les arguments. <i>Un grand lecteur fait moins de fautes.</i></span>
+<b style="font-family:Kalam,cursive;font-size:18px;background:oklch(0.92 0.1 85);color:oklch(0.45 0.1 70);padding:0 8px;border-radius:3px;justify-self:start">Les <span onClick="{{ g.connecteur }}" style="border-bottom:2px dotted oklch(0.5 0.1 70);cursor:help" style-hover="background:oklch(0.5 0.1 70 / 0.12)">connecteurs</span></b><span>Les mots qui relient les idées. <i>D'abord, de plus, donc, pourtant…</i></span>
+</div>
+</div>
+<sc-if value="{{ simple }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:12px;align-items:flex-start;background:oklch(0.95 0.03 80);border-radius:6px;padding:10px 14px;font-size:15.5px;line-height:1.5;text-wrap:pretty"><span style="flex:none;font-family:Kalam,cursive;font-weight:700;font-size:17px;color:oklch(0.45 0.1 70)">En clair</span><span>Un texte argumentatif, c'est comme un avocat au tribunal. Il a un avis (la thèse), il donne des raisons (les arguments) et il apporte des preuves (les exemples). Les connecteurs sont les petits mots qui montrent comment les idées s'enchaînent.</span></div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:28px;font-weight:700;color:oklch(0.42 0.13 15)"><span style="color:oklch(0.55 0.12 75)">2.</span> Convaincre ou persuader ?</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div style="background:#fffdf8;border:2px solid oklch(0.42 0.12 250);border-radius:6px;padding:12px 16px;display:flex;flex-direction:column;gap:6px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:21px;color:oklch(0.42 0.12 250)">Convaincre : la raison</div>
+<p style="margin:0;font-size:15px;text-wrap:pretty">On s'adresse à l'intelligence du lecteur.</p>
+<ul style="margin:0;padding-left:20px;font-size:15px;display:flex;flex-direction:column;gap:3px;text-wrap:pretty">
+<li>Des arguments logiques et des exemples précis</li>
+<li>Des faits, des chiffres, des témoignages d'experts</li>
+<li>Un raisonnement organisé par des connecteurs</li>
+</ul>
+<span style="font-family:Kalam,cursive;font-size:17px;color:oklch(0.42 0.12 250)">« Le vélo ne rejette aucun gaz, donc il protège l'air des villes. »</span>
+</div>
+<div style="background:#fffdf8;border:2px solid oklch(0.42 0.13 15);border-radius:6px;padding:12px 16px;display:flex;flex-direction:column;gap:6px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:21px;color:oklch(0.42 0.13 15)">Persuader : les émotions</div>
+<p style="margin:0;font-size:15px;text-wrap:pretty">On cherche à toucher les sentiments du lecteur.</p>
+<ul style="margin:0;padding-left:20px;font-size:15px;display:flex;flex-direction:column;gap:3px;text-wrap:pretty">
+<li>Des <span onClick="{{ g.rhetorique }}" style="border-bottom:2px dotted oklch(0.5 0.1 70);cursor:help" style-hover="background:oklch(0.5 0.1 70 / 0.12)">questions rhétoriques</span> et des exclamations</li>
+<li>L'<span onClick="{{ g.interpeller }}" style="border-bottom:2px dotted oklch(0.5 0.1 70);cursor:help" style-hover="background:oklch(0.5 0.1 70 / 0.12)">interpellation</span> du lecteur (vous, nous)</li>
+<li>Un vocabulaire fort, <span onClick="{{ g.melioratif }}" style="border-bottom:2px dotted oklch(0.5 0.1 70);cursor:help" style-hover="background:oklch(0.5 0.1 70 / 0.12)">mélioratif</span> ou <span onClick="{{ g.pejoratif }}" style="border-bottom:2px dotted oklch(0.5 0.1 70);cursor:help" style-hover="background:oklch(0.5 0.1 70 / 0.12)">péjoratif</span>, l'<span onClick="{{ g.ironie }}" style="border-bottom:2px dotted oklch(0.5 0.1 70);cursor:help" style-hover="background:oklch(0.5 0.1 70 / 0.12)">ironie</span></li>
+</ul>
+<span style="font-family:Kalam,cursive;font-size:17px;color:oklch(0.42 0.13 15)">« Voulez-vous vraiment que vos enfants respirent cet air empoisonné ? »</span>
+</div>
+</div>
+<sc-if value="{{ simple }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:12px;align-items:flex-start;background:oklch(0.95 0.03 80);border-radius:6px;padding:10px 14px;font-size:15.5px;line-height:1.5;text-wrap:pretty"><span style="flex:none;font-family:Kalam,cursive;font-weight:700;font-size:17px;color:oklch(0.45 0.1 70)">En clair</span><span>Convaincre, c'est faire réfléchir : « c'est logique, il a raison ». Persuader, c'est faire ressentir : « ça me touche, je suis d'accord ». Un bon texte argumentatif utilise souvent les deux.</span></div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:28px;font-weight:700;color:oklch(0.42 0.13 15)"><span style="color:oklch(0.55 0.12 75)">3.</span> Analyser un texte argumentatif</h2>
+<p style="margin:0;font-size:15px;color:#5a5054;text-wrap:pretty">Texte interactif : allume les surligneurs un par un pour repérer chaque élément. Clique ensuite sur un passage surligné pour savoir pourquoi il a ce rôle.</p>
+<div style="display:flex;flex-direction:column;gap:12px;background:#fffdf8;border:1.5px solid #d8cfc8;border-radius:6px;padding:14px 16px">
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ hlBtns }}" as="b" hint-placeholder-count="5"><button onClick="{{ b.click }}" style="font-family:Kalam,cursive;font-size:16px;padding:2px 12px;border-radius:14px;border:1.5px solid {{ b.c }};background:{{ b.bg }};color:{{ b.fg }};cursor:pointer">{{ b.n }}</button></sc-for>
+<button onClick="{{ hlAll }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.42 0.13 15);background:transparent;color:oklch(0.42 0.13 15);cursor:pointer;border-radius:14px">{{ hlAllLabel }}</button>
+</div>
+<p style="margin:0;font-size:18px;line-height:1.9;text-wrap:pretty;background:#fff;border-radius:4px;padding:12px 16px"><sc-for list="{{ segs }}" as="s" hint-placeholder-count="0"><span onClick="{{ s.click }}" style="background:{{ s.bg }};color:{{ s.c }};font-weight:{{ s.fw }};border-radius:3px;padding:2px 0;cursor:{{ s.cur }};box-decoration-break:clone;-webkit-box-decoration-break:clone">{{ s.t }}</span></sc-for></p>
+<div style="padding:8px 12px;border-radius:4px;background:#fff;border:1.5px solid {{ infoC }};font-size:15px;line-height:1.4;text-wrap:pretty"><b style="color:{{ infoC }}">{{ infoTitle }}</b> {{ infoText }}</div>
+<p style="margin:0;font-size:13px;font-style:italic;color:#6a6266;text-wrap:pretty">Texte rédigé pour cette fiche. Œuvres citées : J. K. Rowling, <i>Harry Potter à l'école des sorciers</i>, 1997 (trad. française Gallimard Jeunesse, 1998) ; Anne Frank, <i>Le Journal d'Anne Frank</i>, 1947.</p>
+</div>
+</section>
+<footer style="display:flex;justify-content:flex-end;font-family:Kalam,cursive;color:#6a6266;font-size:15px">1 / 3</footer>
+</div>
+</div>
+
+<div data-screen-label="Page 2" style="width:880px;min-height:1245px;flex:none;background:#fbf6e9;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.05),0 14px 40px rgba(60,30,20,.18);box-sizing:border-box">
+<sc-if value="{{ seyes }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right,transparent 74px,oklch(0.6 0.17 20 / .55) 74px,oklch(0.6 0.17 20 / .55) 76px,transparent 76px),repeating-linear-gradient(to bottom,rgba(110,110,190,.24) 0 1px,transparent 1px 32px),repeating-linear-gradient(to bottom,rgba(110,110,190,.08) 0 1px,transparent 1px 8px)"></div></sc-if>
+<div style="position:relative;padding:52px 52px 44px 100px;display:flex;flex-direction:column;gap:24px">
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:28px;font-weight:700;color:oklch(0.42 0.13 15)"><span style="color:oklch(0.55 0.12 75)">4.</span> Les connecteurs logiques</h2>
+<div style="display:grid;grid-template-columns:150px minmax(0,1fr) minmax(0,1.1fr);gap:1px;background:#d8cfc8;border:1px solid #d8cfc8;border-radius:6px;overflow:hidden;font-size:15px">
+<b style="background:oklch(0.92 0.1 85);padding:6px 10px">Pour…</b><b style="background:oklch(0.92 0.1 85);padding:6px 10px">Connecteurs</b><b style="background:oklch(0.92 0.1 85);padding:6px 10px">Exemple</b>
+<sc-for list="{{ connRows }}" as="r" hint-placeholder-count="7">
+<b style="background:#fffdf8;padding:6px 10px;color:oklch(0.42 0.13 15)">{{ r.rel }}</b><span style="background:#fffdf8;padding:6px 10px">{{ r.list }}</span><i style="background:#fffdf8;padding:6px 10px;color:#5a5054">{{ r.ex }}</i>
+</sc-for>
+</div>
+<sc-if value="{{ simple }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:12px;align-items:flex-start;background:oklch(0.95 0.03 80);border-radius:6px;padding:10px 14px;font-size:15.5px;line-height:1.5;text-wrap:pretty"><span style="flex:none;font-family:Kalam,cursive;font-weight:700;font-size:17px;color:oklch(0.45 0.1 70)">En clair</span><span>Les connecteurs sont les panneaux de signalisation du texte. « Mais » annonce un virage (une idée contraire), « de plus » dit « on continue tout droit », « donc » annonce l'arrivée (la conséquence). Sans eux, le lecteur se perd.</span></div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:28px;font-weight:700;color:oklch(0.42 0.13 15)"><span style="color:oklch(0.55 0.12 75)">5.</span> Méthode : rédiger un paragraphe argumentatif</h2>
+<div style="position:relative;border:2px solid;border-radius:6px;background:#fffdf8;padding:22px 24px 16px;display:flex;flex-direction:column;gap:10px;border-color:oklch(0.55 0.12 75)">
+<span style="position:absolute;top:-14px;left:18px;color:#fff;font-family:Kalam,cursive;font-weight:700;font-size:16px;padding:1px 12px;border-radius:4px;background:oklch(0.55 0.12 75);color:#2a1a00">Rédaction type</span>
+<ol style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:5px;text-wrap:pretty">
+<li><b>J'annonce l'argument</b> avec un connecteur : « D'abord, … »</li>
+<li><b>Je l'explique</b> : « En effet, … »</li>
+<li><b>Je l'illustre</b> par un exemple précis : « Par exemple, … »</li>
+<li><b>Je conclus</b> en reliant à la thèse : « Ainsi, … »</li>
+</ol>
+<p style="margin:0;font-size:15px;color:#5a5054">Un texte complet contient une introduction (thème + thèse), un paragraphe par argument, puis une conclusion qui reformule la thèse.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:22px;color:oklch(0.42 0.13 15)">Exemple rédigé</div>
+<p style="margin:0;font-size:15px">Thèse : <i>« Le sport au collège est indispensable. »</i></p>
+<p style="margin:0;font-family:Kalam,cursive;font-size:19px;line-height:1.7;background:#fffdf8;border:1.5px dashed #d8cfc8;border-radius:6px;padding:10px 16px;text-wrap:pretty"><span style="background:oklch(0.9 0.06 250);border-radius:3px">D'abord, le sport améliore la santé des élèves.</span> <span style="background:oklch(0.95 0.03 80);border-radius:3px">En effet, une activité régulière renforce le cœur et aide à mieux dormir.</span> <span style="background:oklch(0.91 0.07 150);border-radius:3px">Par exemple, l'Organisation mondiale de la santé conseille aux adolescents une heure d'activité physique par jour.</span> <span style="background:oklch(0.89 0.07 15);border-radius:3px">Ainsi, les heures de sport sont une chance pour la santé de chacun.</span></p>
+<div style="display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:#5a5054"><span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:10px;border-radius:2px;background:oklch(0.9 0.06 250)"></span>argument</span><span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:10px;border-radius:2px;background:oklch(0.95 0.03 80);border:1px solid #d8cfc8"></span>explication</span><span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:10px;border-radius:2px;background:oklch(0.91 0.07 150)"></span>exemple</span><span style="display:flex;align-items:center;gap:5px"><span style="width:14px;height:10px;border-radius:2px;background:oklch(0.89 0.07 15)"></span>retour à la thèse</span></div>
+<p style="margin:0;font-size:13px;font-style:italic;color:#6a6266;text-wrap:pretty">Source : Organisation mondiale de la santé, <i>Lignes directrices sur l'activité physique et la sédentarité</i>, 25 novembre 2020. Elle recommande aux 5-17 ans au moins 60 minutes d'activité physique par jour en moyenne.</p>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:28px;font-weight:700;color:oklch(0.42 0.13 15)"><span style="color:oklch(0.55 0.12 75)">6.</span> Exercices d'application</h2>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start;font-size:15px">
+<div style="background:#fffdf8;border:1.5px solid #d8cfc8;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;"><div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.42 0.13 15);">Exercice 1 · Repérer</div>
+<p style="margin:0;text-wrap:pretty">« On entend souvent que les jeux vidéo rendent violent. Je pense au contraire qu'ils peuvent développer de nombreuses qualités, comme la réflexion et l'esprit d'équipe. »<br>Relève le thème, la thèse adverse et la thèse défendue.</p>
+<button onClick="{{ t1 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.42 0.13 15);background:transparent;color:oklch(0.42 0.13 15);cursor:pointer;align-self:flex-start">{{ l1 }}</button>
+<sc-if value="{{ s1 }}" hint-placeholder-val="{{ false }}"><div style="font-family:Kalam,cursive;font-size:17px;line-height:1.45;color:oklch(0.42 0.13 15);border-top:1px dashed #d8cfc8;padding-top:6px">Thème : les jeux vidéo.<br>Thèse adverse : ils rendent violent.<br>Thèse défendue : ils développent des qualités.</div></sc-if></div>
+<div style="background:#fffdf8;border:1.5px solid #d8cfc8;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;"><div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.42 0.13 15);">Exercice 2 · Argumenter</div>
+<p style="margin:0;text-wrap:pretty">Thèse : « Il faut apprendre une langue étrangère. » Trouve un argument et un exemple pour la soutenir.</p>
+<button onClick="{{ t2 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.42 0.13 15);background:transparent;color:oklch(0.42 0.13 15);cursor:pointer;align-self:flex-start">{{ l2 }}</button>
+<sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}"><div style="font-family:Kalam,cursive;font-size:17px;line-height:1.45;color:oklch(0.42 0.13 15);border-top:1px dashed #d8cfc8;padding-top:6px">Argument : cela permet de communiquer avec plus de personnes.<br>Exemple : en voyage en Espagne, parler espagnol aide à demander son chemin ou à se faire des amis.</div></sc-if></div>
+<div style="background:#fffdf8;border:1.5px solid #d8cfc8;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;"><div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.42 0.13 15);">Exercice 3 · Persuader</div>
+<p style="margin:0;text-wrap:pretty">Réécris cette phrase pour persuader le lecteur : « Le gaspillage alimentaire représente des millions de tonnes par an. »</p>
+<button onClick="{{ t3 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.42 0.13 15);background:transparent;color:oklch(0.42 0.13 15);cursor:pointer;align-self:flex-start">{{ l3 }}</button>
+<sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}"><div style="font-family:Kalam,cursive;font-size:17px;line-height:1.45;color:oklch(0.42 0.13 15);border-top:1px dashed #d8cfc8;padding-top:6px">Proposition : « Comment pouvons-nous accepter de jeter des millions de tonnes de nourriture, alors que tant de personnes ont faim ? »<br>Procédés : question rhétorique, « nous » qui implique le lecteur.</div></sc-if></div>
+</div>
+</section>
+<footer style="display:flex;justify-content:flex-end;font-family:Kalam,cursive;color:#6a6266;font-size:15px">2 / 3</footer>
+</div>
+</div>
+
+<div data-screen-label="Page 3" style="width:880px;min-height:1245px;flex:none;background:#fbf6e9;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.05),0 14px 40px rgba(60,30,20,.18);box-sizing:border-box">
+<sc-if value="{{ seyes }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right,transparent 74px,oklch(0.6 0.17 20 / .55) 74px,oklch(0.6 0.17 20 / .55) 76px,transparent 76px),repeating-linear-gradient(to bottom,rgba(110,110,190,.24) 0 1px,transparent 1px 32px),repeating-linear-gradient(to bottom,rgba(110,110,190,.08) 0 1px,transparent 1px 8px)"></div></sc-if>
+<div style="position:relative;padding:44px 52px 36px 100px;display:flex;flex-direction:column;gap:16px">
+<header style="display:flex;flex-direction:column;gap:4px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:28px;font-weight:700;color:oklch(0.42 0.13 15)"><span style="color:oklch(0.55 0.12 75)">7.</span> Je m'entraîne</h2>
+<p style="margin:0;font-size:15px;color:#5a5054;text-wrap:pretty">Clique sur ta réponse ou choisis-la dans la liste, puis clique sur « Vérifier ». Utilise l'indice si tu bloques.</p>
+</header>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;font-size:15px">
+
+<div style="background:#fffdf8;border:1.5px solid #d8cfc8;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;"><div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.42 0.13 15);">Exercice 4 · Thèse, argument ou exemple ?</div>
+<p style="margin:0;font-size:14px;color:#5a5054">Thème : l'uniforme au collège.</p>
+<sc-for list="{{ e4items }}" as="it" hint-placeholder-count="5">
+<div style="display:flex;flex-direction:column;gap:4px;padding-bottom:6px;border-bottom:1px dashed #e2d9d2"><span style="text-wrap:pretty">{{ it.q }}</span><div style="display:flex;gap:4px;flex-wrap:wrap;align-items:center"><sc-for list="{{ it.opts }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.pick }}" style="font-family:Kalam,cursive;font-size:14px;padding:0 10px;border-radius:4px;border:1.5px solid oklch(0.42 0.13 15);background:{{ o.bg }};color:{{ o.fg }};cursor:pointer">{{ o.label }}</button></sc-for><small style="font-size:13px;color:{{ it.fc }}">{{ it.fb }}</small></div></div>
+</sc-for>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button onClick="{{ chk.x4 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.42 0.13 15);background:oklch(0.42 0.13 15);color:#fff;cursor:pointer">Vérifier</button><button onClick="{{ tg.h4 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.42 0.13 15);background:transparent;color:oklch(0.42 0.13 15);cursor:pointer;">Indice</button><span style="font-size:14px;font-weight:600;color:{{ mc.x4 }}">{{ msg.x4 }}</span></div>
+<sc-if value="{{ op.h4 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:oklch(0.45 0.1 70)">Indice : la thèse est un avis général. Un argument donne une raison. Un exemple cite un fait précis (un lieu, une personne, un chiffre).</div></sc-if>
+</div>
+
+<div style="background:#fffdf8;border:1.5px solid #d8cfc8;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;"><div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.42 0.13 15);">Exercice 5 · Le bon connecteur</div>
+<p style="margin:0;font-size:14px;color:#5a5054">Choisis le connecteur qui convient. Chacun ne sert qu'une fois.</p>
+<p style="margin:0;font-size:16px;line-height:2.1;text-wrap:pretty">Les écrans sont très utiles. <select value="{{ v.e5a }}" onChange="{{ on.e5a }}" style="font-family:'Source Serif 4',Georgia,serif;font-size:15px;padding:2px 4px;border:1.5px solid #d8cfc8;border-radius:4px;background:#fff;color:#2a2224"><option value="">— choisir —</option><option value="par exemple">par exemple</option><option value="cependant">cependant</option><option value="c'est pourquoi">c'est pourquoi</option><option value="car">car</option></select> <small style="color:{{ fc.e5a }}">{{ fb.e5a }}</small>, ils peuvent nuire au sommeil <select value="{{ v.e5b }}" onChange="{{ on.e5b }}" style="font-family:'Source Serif 4',Georgia,serif;font-size:15px;padding:2px 4px;border:1.5px solid #d8cfc8;border-radius:4px;background:#fff;color:#2a2224"><option value="">— choisir —</option><option value="par exemple">par exemple</option><option value="cependant">cependant</option><option value="c'est pourquoi">c'est pourquoi</option><option value="car">car</option></select> <small style="color:{{ fc.e5b }}">{{ fb.e5b }}</small> leur lumière retarde l'endormissement. <select value="{{ v.e5c }}" onChange="{{ on.e5c }}" style="font-family:'Source Serif 4',Georgia,serif;font-size:15px;padding:2px 4px;border:1.5px solid #d8cfc8;border-radius:4px;background:#fff;color:#2a2224"><option value="">— choisir —</option><option value="par exemple">par exemple</option><option value="cependant">cependant</option><option value="c'est pourquoi">c'est pourquoi</option><option value="car">car</option></select> <small style="color:{{ fc.e5c }}">{{ fb.e5c }}</small>, un adolescent qui joue tard dort souvent moins de huit heures. <select value="{{ v.e5d }}" onChange="{{ on.e5d }}" style="font-family:'Source Serif 4',Georgia,serif;font-size:15px;padding:2px 4px;border:1.5px solid #d8cfc8;border-radius:4px;background:#fff;color:#2a2224"><option value="">— choisir —</option><option value="par exemple">par exemple</option><option value="cependant">cependant</option><option value="c'est pourquoi">c'est pourquoi</option><option value="car">car</option></select> <small style="color:{{ fc.e5d }}">{{ fb.e5d }}</small>, il vaut mieux éteindre son téléphone une heure avant de dormir.</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button onClick="{{ chk.x5 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.42 0.13 15);background:oklch(0.42 0.13 15);color:#fff;cursor:pointer">Vérifier</button><button onClick="{{ tg.h5 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.42 0.13 15);background:transparent;color:oklch(0.42 0.13 15);cursor:pointer;">Indice</button><span style="font-size:14px;font-weight:600;color:{{ mc.x5 }}">{{ msg.x5 }}</span></div>
+<sc-if value="{{ op.h5 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:oklch(0.45 0.1 70)">Indice : cherche d'abord l'opposition (utile ↔ nuire), puis la cause, l'exemple et enfin la conséquence.</div></sc-if>
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.42 0.13 15);margin-top:8px">Exercice 6 · Convaincre ou persuader ?</div>
+<sc-for list="{{ e6items }}" as="it" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;gap:4px;padding-bottom:6px;border-bottom:1px dashed #e2d9d2"><span style="text-wrap:pretty">{{ it.q }}</span><div style="display:flex;gap:4px;flex-wrap:wrap;align-items:center"><sc-for list="{{ it.opts }}" as="o" hint-placeholder-count="2"><button onClick="{{ o.pick }}" style="font-family:Kalam,cursive;font-size:14px;padding:0 10px;border-radius:4px;border:1.5px solid oklch(0.42 0.13 15);background:{{ o.bg }};color:{{ o.fg }};cursor:pointer">{{ o.label }}</button></sc-for><small style="font-size:13px;color:{{ it.fc }}">{{ it.fb }}</small></div></div>
+</sc-for>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button onClick="{{ chk.x6 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.42 0.13 15);background:oklch(0.42 0.13 15);color:#fff;cursor:pointer">Vérifier</button><span style="font-size:14px;font-weight:600;color:{{ mc.x6 }}">{{ msg.x6 }}</span></div>
+<p style="margin:0;font-size:13px;font-style:italic;color:#6a6266;text-wrap:pretty">Phrase 1 : Centre national du livre / Ipsos, <i>Les jeunes Français et la lecture</i>, 9 avril 2024.</p>
+</div>
+
+<div style="background:#fffdf8;border:1.5px solid #d8cfc8;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;grid-column:1 / -1"><div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.42 0.13 15);">Exercice 7 · Remets le paragraphe dans l'ordre</div>
+<p style="margin:0;font-size:14px;color:#5a5054">Numérote les phrases de 1 à 4 pour reconstituer un paragraphe argumentatif.</p>
+<sc-for list="{{ e7items }}" as="it" hint-placeholder-count="4">
+<label style="display:grid;grid-template-columns:70px minmax(0,1fr) 90px;gap:10px;align-items:center"><select value="{{ it.val }}" onChange="{{ it.on }}" style="font-family:'Source Serif 4',Georgia,serif;font-size:15px;padding:2px 4px;border:1.5px solid #d8cfc8;border-radius:4px;background:#fff;color:#2a2224"><option value="">—</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select><span style="text-wrap:pretty">{{ it.q }}</span><small style="font-size:13px;color:{{ it.fc }}">{{ it.fb }}</small></label>
+</sc-for>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button onClick="{{ chk.x7 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.42 0.13 15);background:oklch(0.42 0.13 15);color:#fff;cursor:pointer">Vérifier</button><button onClick="{{ tg.h7 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.42 0.13 15);background:transparent;color:oklch(0.42 0.13 15);cursor:pointer;">Indice</button><span style="font-size:14px;font-weight:600;color:{{ mc.x7 }}">{{ msg.x7 }}</span></div>
+<sc-if value="{{ op.h7 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:oklch(0.45 0.1 70)">Indice : suis la méthode de la page 2 : argument → explication (« en effet ») → exemple → conclusion (« c'est pourquoi »).</div></sc-if>
+</div>
+</div>
+
+<section style="position:relative;border:2px solid;border-radius:6px;background:#fffdf8;padding:22px 24px 16px;display:flex;flex-direction:column;gap:10px;border-color:oklch(0.55 0.12 75);margin-top:8px;font-size:15px">
+<span style="position:absolute;top:-14px;left:18px;color:#fff;font-family:Kalam,cursive;font-weight:700;font-size:16px;padding:1px 12px;border-radius:4px;background:oklch(0.55 0.12 75);color:#2a1a00">Entraînement illimité · Connecteurs</span>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><span style="color:#5a5054">Complète la phrase avec le connecteur qui convient.</span><b style="flex:none;font-family:Kalam,cursive;font-size:18px;color:oklch(0.45 0.1 70)">Score : {{ score }}</b></div>
+<p style="margin:0;font-size:19px;line-height:1.6;text-wrap:pretty">{{ genBefore }}<b style="display:inline-block;min-width:110px;text-align:center;border-bottom:2px dashed oklch(0.42 0.13 15);color:{{ genBlankC }}">{{ genBlank }}</b>{{ genAfter }}</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+<sc-for list="{{ genOpts }}" as="o" hint-placeholder-count="3"><button onClick="{{ o.pick }}" style="font-family:Kalam,cursive;font-size:17px;padding:2px 14px;border-radius:4px;border:1.5px solid {{ o.bc }};background:{{ o.bg }};color:{{ o.fg }};cursor:pointer">{{ o.label }}</button></sc-for>
+<button onClick="{{ genNext }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.42 0.13 15);background:transparent;color:oklch(0.42 0.13 15);cursor:pointer;margin-left:auto">Phrase suivante</button>
+</div>
+<sc-if value="{{ genShow }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;font-weight:600;color:{{ genColor }}">{{ genMsg }}</div></sc-if>
+</section>
+
+<section style="position:relative;border:2px solid;border-radius:6px;background:#fffdf8;padding:22px 24px 16px;display:flex;flex-direction:column;gap:10px;border-color:oklch(0.42 0.13 15);margin-top:8px">
+<span style="position:absolute;top:-14px;left:18px;color:#fff;font-family:Kalam,cursive;font-weight:700;font-size:16px;padding:1px 12px;border-radius:4px;background:oklch(0.42 0.13 15)">Sujet de rédaction</span>
+<p style="margin:0;text-wrap:pretty"><b>« Les réseaux sociaux sont-ils un danger pour les adolescents ? »</b> Donne ton avis dans un texte argumentatif organisé d'au moins trois paragraphes, avec des arguments, des exemples et des connecteurs logiques.</p>
+<textarea value="{{ txt }}" onChange="{{ onTxt }}" placeholder="Aujourd'hui, de nombreux adolescents utilisent les réseaux sociaux. Selon moi, … D'abord, …" style="width:100%;box-sizing:border-box;min-height:260px;resize:vertical;font-family:Kalam,cursive;font-size:19px;line-height:32px;color:oklch(0.42 0.13 15);background:#fff;border:1.5px dashed #d8cfc8;border-radius:6px;padding:0 14px;outline:none"></textarea>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;font-size:14.5px">
+<div style="display:flex;flex-direction:column;gap:4px">
+<b style="font-family:Kalam,cursive;font-size:17px;color:oklch(0.42 0.13 15)">Ma liste de vérification</b>
+<sc-for list="{{ checks }}" as="c" hint-placeholder-count="5"><span style="display:flex;gap:8px;align-items:baseline;color:{{ c.c }}"><b style="width:14px;flex:none">{{ c.mark }}</b>{{ c.t }}</span></sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<b style="font-family:Kalam,cursive;font-size:17px;color:oklch(0.42 0.13 15)">Connecteurs repérés : {{ foundN }}</b>
+<div style="display:flex;flex-wrap:wrap;gap:4px"><sc-for list="{{ found }}" as="f" hint-placeholder-count="0"><span style="background:oklch(0.92 0.1 85);color:oklch(0.4 0.1 70);border-radius:10px;padding:0 9px;font-size:13.5px">{{ f }}</span></sc-for></div>
+<span style="color:#5a5054">{{ wordsN }} mots · {{ parasN }} paragraphe(s)</span>
+<span style="color:#5a5054;font-size:13px">Saute une ligne entre deux paragraphes.</span>
+</div>
+</div>
+</section>
+<section style="display:flex;flex-direction:column;gap:6px;border-top:1.5px solid #d8cfc8;padding-top:12px;font-size:13.5px;color:#4a4246">
+<b style="font-family:Kalam,cursive;font-size:18px;color:oklch(0.42 0.13 15)">Sources</b>
+<ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px;text-wrap:pretty">
+<li>Organisation mondiale de la santé, <i>Lignes directrices sur l'activité physique et la sédentarité</i>, 2020 : <a href="https://www.who.int/fr/news/item/25-11-2020-every-move-counts-towards-better-health-says-who" target="_blank">communiqué du 25 novembre 2020</a>.</li>
+<li>Centre national du livre / Ipsos, <i>Les jeunes Français et la lecture</i>, 9 avril 2024 : <a href="https://centrenationaldulivre.fr/donnees-cles/les-jeunes-francais-et-la-lecture-en-2024" target="_blank">centrenationaldulivre.fr</a>.</li>
+<li>J. K. Rowling, <i>Harry Potter à l'école des sorciers</i>, Gallimard Jeunesse, 1998 (éd. originale 1997).</li>
+<li>Anne Frank, <i>Le Journal d'Anne Frank</i>, 1947 (éd. française Calmann-Lévy, 1950).</li>
+<li>Le texte à analyser, l'exemple rédigé et les phrases des exercices ont été rédigés pour cette fiche.</li>
+</ul>
+</section>
+<footer style="display:flex;justify-content:flex-end;font-family:Kalam,cursive;color:#6a6266;font-size:15px">3 / 3</footer>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;seyes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Affichage&quot;},&quot;corrections&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Affichage&quot;},&quot;simple&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Affichage&quot;}}">
+const BORD='oklch(0.42 0.13 15)', GREEN='oklch(0.5 0.13 150)', RED='oklch(0.55 0.19 27)';
+const CAT={
+T:{n:'Thèse',bg:'oklch(0.89 0.07 15)',c:'oklch(0.42 0.13 15)',why:'C\'est l\'opinion que l\'auteur défend. Elle est annoncée au début et reformulée à la fin.'},
+R:{n:'Thèse adverse',bg:'oklch(0.9 0.04 300)',c:'oklch(0.45 0.12 300)',why:'C\'est l\'opinion contraire. L\'auteur la cite pour mieux la réfuter ensuite.'},
+A:{n:'Arguments',bg:'oklch(0.9 0.06 250)',c:'oklch(0.42 0.12 250)',why:'C\'est une raison qui justifie la thèse. Pose-toi la question : pourquoi l\'auteur pense-t-il cela ?'},
+E:{n:'Exemples',bg:'oklch(0.91 0.07 150)',c:'oklch(0.42 0.11 150)',why:'C\'est un fait précis et concret qui illustre l\'argument et le rend plus solide.'},
+C:{n:'Connecteurs',bg:'oklch(0.92 0.1 85)',c:'oklch(0.45 0.1 70)',why:'Ce mot relie les idées et montre la logique du texte : opposition, ajout, conséquence…'}};
+const SEG=[['R','Certains pensent que la lecture est dépassée à l\'heure des écrans.'],['N',' '],['C','Pourtant,'],['N',' '],['T','lire des livres reste indispensable pour les adolescents.'],['N',' '],['C','D\'abord,'],['N',' '],['A','la lecture enrichit le vocabulaire et améliore l\'écriture.'],['N',' '],['C','Par exemple,'],['N',' '],['E','un élève qui lit régulièrement fait souvent moins de fautes, car il a déjà vu les mots écrits de nombreuses fois.'],['N',' '],['C','De plus,'],['N',' '],['A','un livre développe l\'imagination :'],['N',' contrairement à un film, il oblige le lecteur à se représenter lui-même les personnages. '],['C','Ainsi,'],['N',' '],['E','chacun imagine différemment le château de Poudlard en lisant Harry Potter.'],['N',' '],['C','Enfin,'],['N',' '],['A','lire permet de se mettre à la place des autres et de mieux comprendre le monde.'],['N',' '],['E','Comment comprendre la guerre sans avoir lu le Journal d\'Anne Frank ?'],['N',' '],['C','Ainsi,'],['N',' '],['T','loin d\'être démodée, la lecture est une richesse qu\'il faut préserver.']];
+const CONNROWS=[['Ajouter','d\'abord, ensuite, de plus, en outre, enfin','D\'abord… De plus…'],['Expliquer','car, parce que, puisque, en effet','Il faut lire, car cela enrichit.'],['Conclure une idée','donc, ainsi, c\'est pourquoi, par conséquent','Il a révisé, donc il a réussi.'],['S\'opposer','mais, cependant, pourtant, néanmoins, toutefois','C\'est cher, pourtant c\'est utile.'],['Concéder','certes… mais, même si, bien que','Certes c\'est cher, mais c\'est utile.'],['Illustrer','par exemple, notamment, comme','Certains sports, comme le judo…'],['Conclure le texte','en conclusion, pour conclure, en somme','En conclusion, je pense que…']];
+const GLOSS={
+argumenter:['Argumenter','Donner des raisons pour défendre une opinion et faire changer d\'avis quelqu\'un.',''],
+convaincre:['Convaincre','Faire changer d\'avis quelqu\'un en s\'adressant à sa raison, avec des arguments logiques.','« C\'est logique, il a raison. »'],
+persuader:['Persuader','Faire changer d\'avis quelqu\'un en touchant ses émotions et ses sentiments.','« Ça me touche, je suis d\'accord. »'],
+theme:['Thème','Le sujet dont parle le texte.','Les réseaux sociaux, l\'uniforme, la lecture…'],
+these:['Thèse','L\'opinion, l\'avis que l\'auteur défend dans son texte.','« Il faut lire des livres. »'],
+adverse:['Thèse adverse','L\'opinion contraire à celle de l\'auteur. On l\'appelle aussi thèse réfutée.',''],
+refuter:['Réfuter','Montrer qu\'une opinion est fausse en donnant des arguments contre elle.',''],
+argument:['Argument','Une raison qui justifie la thèse. Elle répond à la question « pourquoi ? ».','« Lire enrichit le vocabulaire. »'],
+exemple:['Exemple','Un fait précis et concret (personne, lieu, chiffre, événement) qui illustre un argument.','« L\'OMS conseille une heure de sport par jour. »'],
+connecteur:['Connecteur logique','Un mot ou groupe de mots qui relie deux idées et montre leur lien : ajout, cause, conséquence, opposition…','donc, mais, de plus, car'],
+rhetorique:['Question rhétorique','Une question qui n\'attend pas de réponse, car la réponse est évidente. Elle sert à faire réagir le lecteur.','« Qui voudrait vivre dans une ville polluée ? »'],
+interpeller:['Interpellation','S\'adresser directement au lecteur pour l\'impliquer, avec « vous », « nous » ou l\'impératif.','« Imaginez un instant… »'],
+melioratif:['Mélioratif','Un mot qui présente quelque chose de façon positive.','magnifique, courageux, génial'],
+pejoratif:['Péjoratif','Un mot qui présente quelque chose de façon négative, avec mépris.','une bicoque, un chauffard'],
+ironie:['Ironie','Dire le contraire de ce que l\'on pense pour se moquer ou dénoncer.','« Bravo, quelle bonne idée de jeter ses déchets dans la rivière ! »']};
+GLOSS.aide=['Comment ça marche ?','Clique sur un mot souligné en pointillés pour lire son explication. Le bouton « Lexique » affiche tous les mots expliqués.',''];
+const CH={e4a:'T',e4b:'A',e4c:'E',e4d:'A',e4e:'E',e5a:'cependant',e5b:'car',e5c:'par exemple',e5d:'c\'est pourquoi',e6a:'C',e6b:'P',e6c:'C',e6d:'P',e7a:'3',e7b:'1',e7c:'4',e7d:'2'};
+const EXF={4:['e4a','e4b','e4c','e4d','e4e'],5:['e5a','e5b','e5c','e5d'],6:['e6a','e6b','e6c','e6d'],7:['e7a','e7b','e7c','e7d']};
+const Q4={e4a:'Le port de l\'uniforme devrait être obligatoire au collège.',e4b:'L\'uniforme réduit les moqueries liées aux vêtements de marque.',e4c:'Au Royaume-Uni, la plupart des élèves portent un uniforme depuis des générations.',e4d:'Il renforce aussi le sentiment d\'appartenir à un même établissement.',e4e:'Dans le collège de Léa, les élèves ont choisi ensemble la couleur de leur sweat.'};
+const Q6={e6a:'Selon une enquête du Centre national du livre (2024), un jeune de 16 à 19 ans sur trois ne lit jamais pour ses loisirs.',e6b:'Imaginez la détresse de ces animaux enfermés toute leur vie !',e6c:'Le recyclage réduit la quantité de déchets enfouis, donc il protège les sols.',e6d:'N\'aurez-vous pas honte de laisser une planète abîmée à vos enfants ?'};
+const Q7={e7a:'Par exemple, les clubs sportifs du collège permettent chaque année à de nouveaux élèves de se faire des amis.',e7b:'Le sport favorise d\'abord les liens entre les élèves.',e7c:'C\'est pourquoi le sport scolaire mérite d\'être encouragé.',e7d:'En effet, jouer en équipe oblige à coopérer et à se faire confiance.'};
+const BANK=[
+['Il pleuvait à verse. ___ le match a été maintenu.',['Pourtant,','Car','Par exemple,'],'l\'opposition'],
+['Le vélo est bon pour la santé ; ___ il ne pollue pas.',['de plus,','donc','pourtant'],'l\'ajout'],
+['Il faut protéger les abeilles ___ elles pollinisent nos cultures.',['car','mais','ensuite'],'la cause'],
+['Les déchets plastiques mettent des siècles à disparaître. ___ il faut réduire les emballages.',['C\'est pourquoi','Cependant,','Par exemple,'],'la conséquence'],
+['Certains animaux sont menacés, ___ l\'ours polaire.',['comme','donc','pourtant'],'l\'illustration'],
+['___ les écrans sont pratiques, mais ils fatiguent les yeux.',['Certes,','Car','Ainsi,'],'la concession'],
+['Lire développe l\'imagination. ___ un roman nous oblige à imaginer les lieux.',['En effet,','Pourtant,','Enfin,'],'l\'explication'],
+['Il a beaucoup révisé ; il a ___ obtenu une bonne note.',['donc','pourtant','car'],'la conséquence'],
+['Le sport est bénéfique. ___ une pratique excessive peut provoquer des blessures.',['Néanmoins,','En effet,','Ainsi,'],'l\'opposition'],
+['___ je pense que l\'uniforme présente plus d\'avantages que d\'inconvénients.',['En conclusion,','Par exemple,','Car'],'la conclusion'],
+['Le train pollue moins que l\'avion ; ___ il est souvent plus confortable.',['en outre,','pourtant','car'],'l\'ajout'],
+['Nous devons économiser l\'eau ___ elle devient rare dans certaines régions.',['parce qu\'','cependant','ainsi'],'la cause'],
+['Les jeux vidéo peuvent être éducatifs : ___ certains font découvrir l\'histoire.',['par exemple,','toutefois,','donc'],'l\'illustration'],
+['___ il faut bien choisir ses sources ; ensuite, il faut les vérifier.',['Tout d\'abord,','Pourtant,','Car'],'l\'énumération']];
+const CONNLIST=['tout d\'abord','d\'abord','ensuite','de plus','en outre','par ailleurs','enfin','car','parce que','parce qu\'','en effet','puisque','donc','ainsi','c\'est pourquoi','par conséquent','mais','cependant','pourtant','néanmoins','toutefois','certes','même si','bien que','par exemple','notamment','en conclusion','pour conclure','en somme','finalement'];
+const L='a-zàâäçéèêëîïôöûùüÿœ';
+function shuf(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function genNew(prev){let i=prev;while(i===prev)i=Math.floor(Math.random()*BANK.length);return {i,opts:shuf([0,1,2]),pick:null,counted:false};}
+class Component extends DCLogic {
+  state={sol:{},word:null,px:0,py:0,simple:null,inp:{},chk:{},open:{},hl:{},info:null,gen:genNew(-1),score:{ok:0,tot:0},txt:''};
+  closeW=()=>{if(this.state.word)this.setState({word:null});};
+  componentDidMount(){window.addEventListener('scroll',this.closeW,true);}
+  componentWillUnmount(){window.removeEventListener('scroll',this.closeW,true);}
+  tog=i=>()=>this.setState(s=>({sol:{...s.sol,[i]:!this.shown(i,s)}}));
+  shown(i,s=this.state){return s.sol[i]??(this.props.corrections??false);}
+  exVals(){
+    const s=this.state,on={},fb={},fc={},msg={},mc={},chk={},tg={},op={},pk={},v={};
+    const good=k=>s.inp[k]===CH[k];
+    for(const ex in EXF){
+      const c=!!s.chk[ex];
+      EXF[ex].forEach(k=>{
+        v[k]=s.inp[k]||'';
+        on[k]=e=>{const val=e.target.value;this.setState(st=>({inp:{...st.inp,[k]:val},chk:{...st.chk,[ex]:false}}));};
+        pk[k]=val=>()=>this.setState(st=>({inp:{...st.inp,[k]:val},chk:{...st.chk,[ex]:false}}));
+        const empty=!s.inp[k];
+        fb[k]=!c?'':empty?'à compléter':good(k)?'juste':'à revoir';
+        fc[k]=empty?'#6a6266':good(k)?GREEN:RED;
+      });
+      const all=EXF[ex].every(good);
+      msg['x'+ex]=c?(all?'Tout est juste, bravo !':'Certaines réponses sont à revoir.'):'';
+      mc['x'+ex]=all?GREEN:RED;
+      chk['x'+ex]=()=>this.setState(st=>({chk:{...st.chk,[ex]:true}}));
+      tg['h'+ex]=()=>this.setState(st=>({open:{...st.open,['h'+ex]:!st.open['h'+ex]}}));op['h'+ex]=!!s.open['h'+ex];
+    }
+    const chItem=(k,q,opts)=>({q,fb:fb[k],fc:fc[k],opts:opts.map(([val,label])=>({label,pick:pk[k](val),bg:s.inp[k]===val?BORD:'transparent',fg:s.inp[k]===val?'#fff':BORD}))});
+    return {on,fb,fc,msg,mc,chk,tg,op,v,
+      e4items:EXF[4].map(k=>chItem(k,Q4[k],[['T','thèse'],['A','argument'],['E','exemple']])),
+      e6items:EXF[6].map(k=>chItem(k,Q6[k],[['C','convaincre'],['P','persuader']])),
+      e7items:EXF[7].map(k=>({q:Q7[k],val:v[k],on:on[k],fb:fb[k],fc:fc[k]}))};
+  }
+  renderVals(){
+    const s=this.state;
+    const g={};Object.keys(GLOSS).concat('lexique').forEach(k=>{g[k]=e=>{e.stopPropagation();this.setState({word:k,px:e.clientX,py:e.clientY});};});
+    const w=s.word,iw=typeof window!=='undefined'?window.innerWidth:1000,ih=typeof window!=='undefined'?window.innerHeight:800;
+    const popItems=w==='lexique'?Object.keys(GLOSS).filter(k=>k!=='aide').map(k=>({title:GLOSS[k][0],def:GLOSS[k][1],ex:false,open:()=>this.setState({word:k})})):w?[{title:false,def:GLOSS[w][1],ex:GLOSS[w][2]||false}]:[];
+    const simple=s.simple??(this.props.simple??true);
+    const hl=s.hl,allOn=Object.keys(CAT).every(k=>hl[k]);
+    const hlBtns=Object.keys(CAT).map(k=>({n:CAT[k].n,c:CAT[k].c,bg:hl[k]?CAT[k].bg:'transparent',fg:CAT[k].c,click:()=>this.setState(st=>({hl:{...st.hl,[k]:!st.hl[k]}}))}));
+    const segs=SEG.map(([k,t])=>{const on=k!=='N'&&hl[k];return {t,bg:on?CAT[k].bg:'transparent',c:on?CAT[k].c:'inherit',fw:on&&k==='C'?700:400,cur:on?'pointer':'auto',click:on?()=>this.setState({info:k}):undefined};});
+    const info=s.info&&hl[s.info]?s.info:null;
+    const G=BANK[s.gen.i],parts=G[0].split('___'),gp=s.gen.pick,gOk=gp===0;
+    const genOpts=s.gen.opts.map(i=>{const sel=gp===i,right=gp!==null&&i===0;return {label:G[1][i],bc:right?GREEN:sel?RED:BORD,bg:right?GREEN:sel?RED:'transparent',fg:right||sel?'#fff':BORD,pick:()=>this.setState(st=>{if(st.gen.pick!==null)return null;return {gen:{...st.gen,pick:i},score:{ok:st.score.ok+(i===0?1:0),tot:st.score.tot+1}};})};});
+    const t=s.txt.toLowerCase().replace(/[’`]/g,'\'');
+    const found=CONNLIST.filter(c=>new RegExp('(^|[^'+L+'])'+c.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?=$|[^'+L+'])').test(t)).filter((c,_,a)=>!(c==='d\'abord'&&a.includes('tout d\'abord'))&&!(c==='parce que'&&a.includes('parce qu\'')&&false));
+    const wordsN=s.txt.trim()?s.txt.trim().split(/\s+/).length:0, parasN=s.txt.split(/\n\s*\n/).filter(p=>p.trim()).length;
+    const has=arr=>arr.some(x=>t.includes(x));
+    const checks=[
+      [has(['je pense','selon moi','à mon avis','je suis convaincu','je suis convaincue','il me semble','je crois','je trouve']),'Mon avis est clair (selon moi, je pense…)'],
+      [parasN>=3,'Au moins 3 paragraphes'],
+      [found.length>=3,'Au moins 3 connecteurs différents'],
+      [has(['par exemple','notamment','comme ']),'Au moins un exemple annoncé'],
+      [t.includes('?'),'Une question pour faire réagir le lecteur'],
+      [has(['en conclusion','pour conclure','en somme','finalement']),'Une conclusion annoncée']
+    ].map(([ok,txt])=>({t:txt,mark:ok?'✓':'○',c:ok?GREEN:'#6a6266'}));
+    return {
+      ...this.exVals(),
+      g,popOpen:!!w,popWord:w==='lexique'?'Lexique':w?GLOSS[w][0]:'',popItems,
+      popLeft:Math.max(8,Math.min(s.px-20,iw-326)),popTop:w==='lexique'?Math.max(8,Math.min(s.py+18,ih*0.3)):(s.py>ih-240?Math.max(8,s.py-230):s.py+18),
+      closePop:()=>this.setState({word:null}),
+      simple,toggleSimple:()=>this.setState({simple:!simple}),
+      simpleLabel:simple?'Explications simples : oui':'Explications simples : non',
+      simpleBg:simple?'oklch(0.5 0.1 70)':'transparent',simpleFg:simple?'#fff':'oklch(0.45 0.1 70)',
+      seyes:this.props.seyes??true,
+      hlBtns,segs,hlAll:()=>this.setState({hl:allOn?{}:{T:1,R:1,A:1,E:1,C:1}}),hlAllLabel:allOn?'Tout effacer':'Tout surligner',
+      infoC:info?CAT[info].c:'#b8aca4',infoTitle:info?CAT[info].n+' :':'',infoText:info?CAT[info].why:'Allume un surligneur, puis clique sur un passage coloré.',
+      connRows:CONNROWS.map(([rel,list,ex])=>({rel,list,ex})),
+      t1:this.tog(1),t2:this.tog(2),t3:this.tog(3),s1:this.shown(1),s2:this.shown(2),s3:this.shown(3),
+      l1:this.shown(1)?'Masquer la correction':'Voir la correction',l2:this.shown(2)?'Masquer la correction':'Voir la correction',l3:this.shown(3)?'Masquer la correction':'Voir la correction',
+      genBefore:parts[0],genAfter:parts[1],genBlank:gp===null?'':G[1][0],genBlankC:GREEN,genOpts,
+      genShow:gp!==null,genColor:gOk?GREEN:RED,
+      genMsg:gOk?`Bravo ! « ${G[1][0].replace(/,$/,'')} » exprime ${G[2]}.`:`Non : ici il faut exprimer ${G[2]}, donc « ${G[1][0].replace(/,$/,'')} ».`,
+      genNext:()=>this.setState(st=>({gen:genNew(st.gen.i)})),
+      score:`${s.score.ok} / ${s.score.tot}`,
+      txt:s.txt,onTxt:e=>this.setState({txt:e.target.value}),
+      found,foundN:found.length,wordsN,parasN,checks
+    };
+  }
+}
+</script>
+</body>
+</html>

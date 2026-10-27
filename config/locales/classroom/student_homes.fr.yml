@@ -1,66 +1,85 @@
-# Accueil élève (plan boucle-pedagogique, Lot A2, CL-23, TR-04, AS-36) — UDR-0007, UDR-0058 §3.3 (interface-epuree, Lot A), UDR-0076 §3.1 ; sans classe active, UDR-0081 §3.5 ; accueil-eleve, UDR-0084, ADR-0089
+# Accueil élève (plan boucle-pedagogique, Lot A2, CL-23, TR-04, AS-36) — UDR-0007 ; sans classe active, UDR-0081 §3.5 ; accueil refait, UDR accueil élève « carte du prochain exercice » (mvp-teacher-student, Lot D)
 fr:
   classroom:
     student_homes:
       show:
         page_title: "Accueil"
-        greeting: "Bonjour, %{name}"
-        todo_title: "À faire"
-        todo_subtitle: "Les exercices assignés à ta classe"
-        todo_subtitle_daily: "Ce qui t'attend aujourd'hui"
-        todo_progress: "%{done} sur %{total} faits"
-        todo_empty: "Aucun exercice assigné pour l'instant"
-        todo_empty_description: "Les exercices que tes enseignants assignent à ta classe apparaîtront ici."
-        activity_title: "Mes activités récentes"
-        activity_subtitle: "Tes 10 dernières sessions terminées"
         # IL-14 : le bandeau d'accueil, une fois après un retrait (UDR-0081 §3.5).
         removed: "Tu ne fais plus partie de cette classe. Choisis ta classe."
+      # Le bandeau bleu de l'accueil (shared/navigation/_home_band) porte ses propres clés : shared.navigation.home_band.
+      # UDR accueil élève §3.2, §3.3 : la carte du prochain exercice, un état par fichier de next_step/.
+      next_step:
+        # « 3E B · CM1T › » : le sigle de l'établissement, ou son nom ; mis en majuscules par la mise en page.
+        class_link: "%{classroom} · %{school}"
+        class_link_label: "Ma classe, %{classroom}"
+        # Sous le titre : la matière et, s'il est connu, l'enseignant qui a donné l'exercice.
+        meta: "%{material} · %{teacher}"
+        progress:
+          one: "%{count} exercice fait sur %{total}"
+          other: "%{count} exercices faits sur %{total}"
+        progress_label: "%{done} exercices faits sur %{total}"
+        late:
+          badge: "En retard"
+          start: "Le faire maintenant"
+          start_label: "Faire maintenant l'exercice « %{title} »"
+          others:
+            one: "Et 1 autre en retard"
+            other: "Et %{count} autres en retard"
+        due:
+          start: "Commencer l'exercice"
+          start_label: "Commencer l'exercice « %{title} »"
+          resume: "Reprendre"
+          resume_label: "Reprendre l'exercice « %{title} »"
+        review:
+          badge: "À revoir"
+          note: "Tu as eu %{grade}. Relis la fiche, puis refais un exercice."
+          open: "Revoir la fiche"
+          open_label: "Revoir la fiche « %{title} »"
+          meta: "%{material} · Fiche de révision"
+        all_done:
+          overline: "Bravo"
+          title: "Tout est fait !"
+          daily: "Exercice du jour"
+          start: "Faire l'exercice du jour"
+          start_label: "Faire l'exercice du jour « %{title} »"
+          done_today: "Exercice du jour fait. Reviens demain !"
+          tomorrow: "Demain : %{subject}"
+          none: "Rien à te proposer aujourd'hui."
+        unassigned:
+          # Écrit « Exercice du jour · Lnclass » par la vue : le suffixe « · Lnclass » est celui du titre de page (UDR-0054 §3.1).
+          badge: "Exercice du jour"
+          title: "Exercice du jour"
+          start: "Commencer"
+          start_label: "Commencer l'exercice du jour « %{title} »"
+          done_today: "Exercice du jour fait. Reviens demain !"
+          tomorrow: "Demain : %{subject}"
+          none: "Rien à te proposer aujourd'hui."
+          invite: "Ton enseignant n'est pas sur Lnclass ? Invite-le"
+      # UDR accueil élève §3.3 état 6 : l'élève sans classe active (archivée, ou retiré) ; le code, ou la cascade.
       no_classroom:
         title: "Choisis ta classe"
-        no_classroom: "Tu n'as pas de classe cette année."
-        choose: "Choisir ma classe"
+        hint: "Entre le code donné par ton enseignant."
+        code: "Code de la classe"
+        submit: "Rejoindre"
+        no_code: "Je n'ai pas de code"
         archive: "Voir mon historique"
-      classroom_card:
-        title: "Ma classe"
-        context: "%{level} · %{school}"
-        students:
-          one: "1 élève"
-          other: "%{count} élèves"
-        open: "Entrer"
-        # UDR-0084 §3.5 : le bouton redessiné, porte ouverte devant et flèche après.
-        enter: "Entrer en classe"
-      assigned_exercise:
-        start: "Commencer"
-        start_label: "Commencer l'exercice « %{title} »"
-        resume: "Reprendre"
-        resume_label: "Reprendre l'exercice « %{title} »"
-      recent_activity:
-        completed: "Il y a %{time}"
-        empty: "Aucune session terminée pour l'instant"
-        empty_description: "Termine ton premier exercice pour voir ton activité ici."
+      # UDR accueil élève §3.4 : la grille de 7 cases, 6 matières puis « Inviter ».
       subjects:
-        title: "Mes matières"
         label: "Mes matières"
         empty: "Aucune matière pour l'instant"
         late: ", exercice en retard"
-        # Libellé court d'une bulle sous 640 px, par slug figé de la matière ; sans entrée, le nom entier.
-        short:
-          mathematiques: "Math"
-          physique-chimie: "PC"
-          histoire-geographie: "HG"
-          philosophie: "Philo"
-      pending_gaps:
-        title: "Fiches à revoir"
-        subtitle: "Relis-les, puis refais un de leurs exercices."
-      # UDR-0084 §3.6, ADR-0089 §4.1 : carte de l'exercice du jour, dans « À faire », sans travail de l'enseignant.
-      daily_exercise:
-        badge: "Exercice du jour"
-        start: "Commencer"
-        start_label: "Commencer l'exercice du jour « %{title} »"
-        done: "Bravo, à demain !"
-        tomorrow: "Demain : %{subject}"
-        none: "Rien à te proposer aujourd'hui."
-      # UDR-0084 §3.6, ADR-0089 §4.3 : sous la carte du jour, dans les trois états ; partage WhatsApp.
+        invite: "Inviter"
+      # UDR accueil élève §3.5 : l'Historique, dans le cadre différé.
+      history:
+        title: "Historique"
+        today: "Aujourd'hui"
+        yesterday: "Hier"
+        empty: "Tes exercices terminés s'afficheront ici."
+        more: "Voir plus"
+        redo: "Refaire"
+        redo_label: "Refaire l'exercice « %{title} »"
+      # UDR-0084 §3.6, ADR-0089 §4.3 : « Ma classe » (état « sans enseignant »), la grille de l'accueil et la carte du jour ;
+      # partage WhatsApp.
       invite_teacher:
         prompt: "Ton enseignant n'est pas encore sur Lnclass ?"
         action: "Inviter mon enseignant"

@@ -1,0 +1,681 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Import d'une fiche de cours, version 1 (ADR-0110 contenu-en-blocs, UDR-0137)",
+  "description": "Enveloppe { format, version, course, theme, pages[], glossary }. course est le slug de la leçon cible. Le document stocké est { pages, glossary } : Entities::Catalog::SheetDocument en porte les mêmes règles (un test les confronte) et les contrôles croisés que le schéma ne sait pas dire (mot du lexique cité mais absent, identifiants de champ uniques, index de réponse dans les options, taille totale de 1 Mo). Aucun HTML, aucune URL ; kind en liste fermée ; paramètres bornés.",
+  "type": "object",
+  "required": [
+    "format",
+    "version",
+    "course",
+    "theme",
+    "pages",
+    "glossary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "lnclass.course-sheet"
+    },
+    "version": {
+      "const": 1
+    },
+    "course": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "theme": {
+      "enum": [
+        "blue",
+        "teal",
+        "burgundy"
+      ]
+    },
+    "pages": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "$ref": "#/$defs/page"
+      }
+    },
+    "glossary": {
+      "type": "object",
+      "maxProperties": 100,
+      "propertyNames": {
+        "pattern": "^[a-z0-9_]{1,40}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/glossary_entry"
+      }
+    }
+  },
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "allOf": [
+        {
+          "pattern": "^[^<]*$"
+        },
+        {
+          "pattern": "^(?![\\s\\S]*(?:://|[Ww][Ww][Ww]\\.|[Mm][Aa][Ii][Ll][Tt][Oo]:|[Jj][Aa][Vv][Aa][Ss][Cc][Rr][Ii][Pp][Tt]:|[Dd][Aa][Tt][Aa]:))[\\s\\S]*$"
+        }
+      ]
+    },
+    "short_text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "allOf": [
+        {
+          "pattern": "^[^<]*$"
+        },
+        {
+          "pattern": "^(?![\\s\\S]*(?:://|[Ww][Ww][Ww]\\.|[Mm][Aa][Ii][Ll][Tt][Oo]:|[Jj][Aa][Vv][Aa][Ss][Cc][Rr][Ii][Pp][Tt]:|[Dd][Aa][Tt][Aa]:))[\\s\\S]*$"
+        }
+      ]
+    },
+    "cell": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 2000,
+      "allOf": [
+        {
+          "pattern": "^[^<]*$"
+        },
+        {
+          "pattern": "^(?![\\s\\S]*(?:://|[Ww][Ww][Ww]\\.|[Mm][Aa][Ii][Ll][Tt][Oo]:|[Jj][Aa][Vv][Aa][Ss][Cc][Rr][Ii][Pp][Tt]:|[Dd][Aa][Tt][Aa]:))[\\s\\S]*$"
+        }
+      ]
+    },
+    "number": {
+      "type": "number",
+      "minimum": -1000000,
+      "maximum": 1000000
+    },
+    "params": {
+      "type": "object",
+      "maxProperties": 12,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_]{0,29}$"
+      },
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "number",
+            "minimum": -1000000,
+            "maximum": 1000000
+          },
+          {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 200,
+            "allOf": [
+              {
+                "pattern": "^[^<]*$"
+              },
+              {
+                "pattern": "^(?![\\s\\S]*(?:://|[Ww][Ww][Ww]\\.|[Mm][Aa][Ii][Ll][Tt][Oo]:|[Jj][Aa][Vv][Aa][Ss][Cc][Rr][Ii][Pp][Tt]:|[Dd][Aa][Tt][Aa]:))[\\s\\S]*$"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "glossary_entry": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "allOf": [
+            {
+              "pattern": "^[^<]*$"
+            },
+            {
+              "pattern": "^(?![\\s\\S]*(?:://|[Ww][Ww][Ww]\\.|[Mm][Aa][Ii][Ll][Tt][Oo]:|[Jj][Aa][Vv][Aa][Ss][Cc][Rr][Ii][Pp][Tt]:|[Dd][Aa][Tt][Aa]:))[\\s\\S]*$"
+            }
+          ]
+        },
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600,
+          "allOf": [
+            {
+              "pattern": "^[^<]*$"
+            },
+            {
+              "pattern": "^(?![\\s\\S]*(?:://|[Ww][Ww][Ww]\\.|[Mm][Aa][Ii][Ll][Tt][Oo]:|[Jj][Aa][Vv][Aa][Ss][Cc][Rr][Ii][Pp][Tt]:|[Dd][Aa][Tt][Aa]:))[\\s\\S]*$"
+            }
+          ]
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 400,
+          "allOf": [
+            {
+              "pattern": "^[^<]*$"
+            },
+            {
+              "pattern": "^(?![\\s\\S]*(?:://|[Ww][Ww][Ww]\\.|[Mm][Aa][Ii][Ll][Tt][Oo]:|[Jj][Aa][Vv][Aa][Ss][Cc][Rr][Ii][Pp][Tt]:|[Dd][Aa][Tt][Aa]:))[\\s\\S]*$"
+            }
+          ]
+        }
+      ],
+      "items": false
+    },
+    "header": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [],
+      "properties": {
+        "eyebrow_left": {
+          "$ref": "#/$defs/short_text"
+        },
+        "eyebrow_right": {
+          "$ref": "#/$defs/short_text"
+        },
+        "title": {
+          "$ref": "#/$defs/short_text"
+        },
+        "intro": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sections"
+      ],
+      "properties": {
+        "header": {
+          "$ref": "#/$defs/header"
+        },
+        "sections": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "items": {
+            "$ref": "#/$defs/section"
+          }
+        }
+      }
+    },
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "blocks"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/short_text"
+        },
+        "blocks": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 30,
+          "items": {
+            "$ref": "#/$defs/block"
+          }
+        }
+      }
+    },
+    "block": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/block_paragraph"
+        },
+        {
+          "$ref": "#/$defs/block_box"
+        },
+        {
+          "$ref": "#/$defs/block_simple"
+        },
+        {
+          "$ref": "#/$defs/block_steps"
+        },
+        {
+          "$ref": "#/$defs/block_table"
+        },
+        {
+          "$ref": "#/$defs/block_figure"
+        },
+        {
+          "$ref": "#/$defs/block_media"
+        },
+        {
+          "$ref": "#/$defs/block_exercise"
+        },
+        {
+          "$ref": "#/$defs/block_practice"
+        },
+        {
+          "$ref": "#/$defs/block_writing"
+        }
+      ]
+    },
+    "block_paragraph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "text"
+      ],
+      "properties": {
+        "type": {
+          "const": "paragraph"
+        },
+        "text": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "block_simple": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "text"
+      ],
+      "properties": {
+        "type": {
+          "const": "simple"
+        },
+        "text": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "block_box": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "label",
+        "paragraphs"
+      ],
+      "properties": {
+        "type": {
+          "const": "box"
+        },
+        "tone": {
+          "enum": [
+            "property",
+            "remember",
+            "method"
+          ]
+        },
+        "label": {
+          "$ref": "#/$defs/short_text"
+        },
+        "paragraphs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      }
+    },
+    "block_steps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "items"
+      ],
+      "properties": {
+        "type": {
+          "const": "steps"
+        },
+        "label": {
+          "$ref": "#/$defs/short_text"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 30,
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      }
+    },
+    "block_table": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "headers",
+        "rows"
+      ],
+      "properties": {
+        "type": {
+          "const": "table"
+        },
+        "caption": {
+          "$ref": "#/$defs/short_text"
+        },
+        "headers": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/short_text"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 30,
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 8,
+            "items": {
+              "$ref": "#/$defs/cell"
+            }
+          }
+        }
+      }
+    },
+    "block_figure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "kind"
+      ],
+      "properties": {
+        "type": {
+          "const": "figure"
+        },
+        "kind": {
+          "enum": [
+            "lens_diagrams"
+          ]
+        },
+        "caption": {
+          "$ref": "#/$defs/short_text"
+        },
+        "params": {
+          "$ref": "#/$defs/params"
+        }
+      }
+    },
+    "block_media": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "kind"
+      ],
+      "properties": {
+        "type": {
+          "const": "media"
+        },
+        "kind": {
+          "enum": [
+            "thales_figure",
+            "lens_simulator",
+            "lens_construction",
+            "argument_highlighter"
+          ]
+        },
+        "caption": {
+          "$ref": "#/$defs/short_text"
+        },
+        "params": {
+          "$ref": "#/$defs/params"
+        }
+      }
+    },
+    "block_exercise": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "prompt",
+        "fields"
+      ],
+      "properties": {
+        "type": {
+          "const": "exercise"
+        },
+        "title": {
+          "$ref": "#/$defs/short_text"
+        },
+        "prompt": {
+          "$ref": "#/$defs/text"
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "items": {
+            "$ref": "#/$defs/field"
+          }
+        },
+        "hint": {
+          "$ref": "#/$defs/text"
+        },
+        "correction": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "field_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]{1,20}$"
+    },
+    "field": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/field_numeric"
+        },
+        {
+          "$ref": "#/$defs/field_choice"
+        }
+      ]
+    },
+    "field_numeric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "input",
+        "label",
+        "answer"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/field_id"
+        },
+        "input": {
+          "const": "numeric"
+        },
+        "label": {
+          "$ref": "#/$defs/short_text"
+        },
+        "answer": {
+          "type": "number",
+          "minimum": -1000000,
+          "maximum": 1000000
+        }
+      }
+    },
+    "field_choice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "input",
+        "label",
+        "options",
+        "answer"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/field_id"
+        },
+        "input": {
+          "const": "choice"
+        },
+        "label": {
+          "$ref": "#/$defs/short_text"
+        },
+        "options": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/short_text"
+          }
+        },
+        "answer": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "frozen": {
+          "type": "boolean"
+        }
+      }
+    },
+    "block_practice": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/practice_thales_ratio"
+        },
+        {
+          "$ref": "#/$defs/practice_bank"
+        }
+      ]
+    },
+    "practice_thales_ratio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "kind",
+        "title"
+      ],
+      "properties": {
+        "type": {
+          "const": "practice"
+        },
+        "kind": {
+          "const": "thales_ratio"
+        },
+        "title": {
+          "$ref": "#/$defs/short_text"
+        }
+      }
+    },
+    "practice_bank": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "kind",
+        "title",
+        "bank"
+      ],
+      "properties": {
+        "type": {
+          "const": "practice"
+        },
+        "kind": {
+          "const": "bank"
+        },
+        "title": {
+          "$ref": "#/$defs/short_text"
+        },
+        "bank": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/$defs/bank_item"
+          }
+        }
+      }
+    },
+    "bank_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prompt",
+        "answer",
+        "solution"
+      ],
+      "properties": {
+        "prompt": {
+          "$ref": "#/$defs/text"
+        },
+        "answer": {
+          "type": "number",
+          "minimum": -1000000,
+          "maximum": 1000000
+        },
+        "solution": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "block_writing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "title",
+        "prompt"
+      ],
+      "properties": {
+        "type": {
+          "const": "writing"
+        },
+        "title": {
+          "$ref": "#/$defs/short_text"
+        },
+        "prompt": {
+          "$ref": "#/$defs/text"
+        },
+        "connectors": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 40,
+          "items": {
+            "$ref": "#/$defs/short_text"
+          }
+        },
+        "min_words": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
+        },
+        "min_paragraphs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        }
+      }
+    }
+  }
+}

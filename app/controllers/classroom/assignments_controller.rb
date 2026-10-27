@@ -1,7 +1,7 @@
 # 🌐 DELIVERY · Classroom::AssignmentsController
 # Rôle : assigner et retirer un exercice d'une classe (Turbo Stream qui remplace la bascule) ; la modale des jours de séance
-#        (`new`) et son envoi, avec les jours cochés ou « Plus tard »
-# ADR  : 0026, 0028, 0048, 0072, 0088 · UDR : 0006, 0028, 0062
+#        (`new`) et son envoi, avec les jours cochés (au moins un : plus de « Plus tard »)
+# ADR  : 0026, 0028, 0048, 0072, 0088 · UDR : 0006, 0028, 0062, 0134 (§3.13)
 module Classroom
   class AssignmentsController < AuthenticatedController
     allow_roles :teacher, :team
@@ -28,7 +28,7 @@ module Classroom
     def create
       @form = Dtos::Classroom::AssignmentInput.new(
         params.expect(assignment: [ :assignable_type, :assignable_key, { weekdays: [] } ])
-              .merge(classroom_public_id: params[:classroom_public_id], later: params[:later].present?)
+              .merge(classroom_public_id: params[:classroom_public_id])
       )
       result = assign_resource.call(actor: current_actor, dto: @form)
       return render_days_step(result) if result.failure? && result.errors.key?(:weekdays)

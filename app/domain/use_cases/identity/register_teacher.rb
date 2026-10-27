@@ -1,7 +1,7 @@
 # 🧠 DOMAINE · UseCases::Identity::RegisterTeacher
 # Rôle : inscrit un enseignant (rôle imposé) dans l'établissement de sa DRENA ou de son lien, note et audite sa voie, ouvre sa session ;
 #        le lien de parrainage d'un collègue (sans établissement) note le parrain, l'établissement est choisi
-# ADR  : 0026, 0028, 0030, 0050, 0063, 0083, 0094 (§11), 0103 · UDR : 0024, 0050, 0079, 0125
+# ADR  : 0026, 0028, 0030, 0050, 0063, 0083, 0094 (§11), 0103 · UDR : 0024, 0050, 0079, 0134 (§3.9 : une seule matière)
 module UseCases
   module Identity
     class RegisterTeacher
@@ -54,12 +54,8 @@ module UseCases
         material = @taxonomy.find_material(slug: dto.material_slug)
         return Shared::Result.failure(:invalid, errors: { material_slug: [ :inclusion ] }) if material.nil?
 
-        # ADR-0103 §4.4 : la seconde, facultative ; la même que la première est oubliée par TeacherMaterials.
-        second_slug = dto.second_material_slug.presence
-        second = second_slug && @taxonomy.find_material(slug: second_slug)
-        return Shared::Result.failure(:invalid, errors: { second_material_slug: [ :inclusion ] }) if second_slug && second.nil?
-
-        material_ids = Entities::Identity::TeacherMaterials.build([ material.id, second&.id ]).value
+        # ADR-0103 §4.4, amendé : une seule matière à l'inscription ; les suivantes viennent du profil.
+        material_ids = Entities::Identity::TeacherMaterials.build([ material.id ]).value
 
         link = invite_link(dto.invite_token)
         destination = link && !link.sponsor ? invited(link) : chosen(dto, sponsor: link)

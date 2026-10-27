@@ -8,7 +8,7 @@
 <% removable = manageable && (accepts_classrooms || local_assigns.fetch(:remove_when_inactive, true)) %>
 <section id="school_level_classrooms" aria-labelledby="school_level_classrooms_title" class="rounded-card border border-line bg-white shadow-card">
   <div class="px-4 pt-4 sm:px-5">
-    <h3 id="school_level_classrooms_title" class="font-display text-lg font-extrabold"><%= t("#{scope}.title") %></h3>
+    <h3 id="school_level_classrooms_title" class="font-display text-lg font-medium"><%= t("#{scope}.title") %></h3>
     <p class="mt-1 text-sm text-mute"><%= t("#{scope}.hint") %></p>
     <% unless accepts_classrooms %>
       <p id="school_level_classrooms_inactive" class="mt-2 text-sm text-warning"><%= t("#{scope}.inactive") %></p>
@@ -42,7 +42,7 @@
             <% else %>
               <span class="w-tap" aria-hidden="true"></span>
             <% end %>
-            <span class="w-8 text-center font-display text-lg font-extrabold tabular-nums" aria-hidden="true"><%= row.count %></span>
+            <span class="w-8 text-center font-display text-lg font-medium tabular-nums" aria-hidden="true"><%= row.count %></span>
             <% if manageable && accepts_classrooms && row.open %>
               <%= form_with url: add_url, method: :post do %>
                 <%= hidden_field_tag :level, row.level_slug, id: nil %>

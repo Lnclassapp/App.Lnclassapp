@@ -128,10 +128,9 @@ class Finitions::ClassroomTest < ApplicationSystemTestCase
       visit classroom_path(@classroom.public_id)
 
       assert no_horizontal_scroll?, "la page déborde en largeur"
+      # UDR enseignant §3.5 : à 390 px, la ligne d'élève n'a plus d'aide (dernier score et effectif quittent le téléphone).
       all("#classroom_header summary, #classroom_roster summary").each(&:click)
 
-      assert_text t("#{SCOPE}.header.headcount_tip", max: 40)
-      assert_text t("#{SCOPE}.roster.last_score_tip")
       assert no_horizontal_scroll?, "une aide ouverte fait déborder la page"
     end
   end

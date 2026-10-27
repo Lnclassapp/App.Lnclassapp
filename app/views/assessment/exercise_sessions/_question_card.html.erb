@@ -10,7 +10,7 @@
                   class: "flex flex-1 flex-col", data: { controller: "math assessment--answer",
                                                          action: "input->assessment--answer#check change->assessment--answer#check" } do |f| %>
       <%= f.hidden_field :question_id, value: question.id %>
-      <p class="mb-2 text-xs font-bold tracking-wide text-mute uppercase"><%= t(".number", number: question.number, total: play.question_count) %></p>
+      <p class="mb-2 text-xs font-medium tracking-wide text-mute uppercase"><%= t(".number", number: question.number, total: play.question_count) %></p>
       <%# Avant le fieldset : la legend, rendue par le partial du type, en reste le premier enfant (UDR-0129 §3.4). %>
       <% if (image = question.image) %>
         <%= tag.img src: question_image_path(image.public_id), alt: image.alt.to_s, width: image.width, height: image.height,

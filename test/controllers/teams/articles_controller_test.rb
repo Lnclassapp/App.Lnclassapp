@@ -450,7 +450,7 @@ class Teams::ArticlesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-stream[target=toasts]", 0
     assert_select "turbo-stream[action=update][target=modal]" do
       assert_select "dialog#article-modal #article_publish_refused[role=alert]" do
-        assert_select "p.font-semibold", text: ta("edit_modal.refused_title")
+        assert_select "p.font-medium", text: ta("edit_modal.refused_title")
         assert_select "li", text: error(:excerpt, :blank)
       end
       assert_select "form#article-form[action='#{teams_article_path(article.public_id)}']"

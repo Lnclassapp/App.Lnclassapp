@@ -1,0 +1,18 @@
+<%# 🌐 UI · classroom/student_homes/next_step/_unassigned — état 5 : aucun exercice assigné, la carte propose l'exercice du jour %>
+<%# Rôle : « Exercice du jour · Lnclass », son titre et sa matière, « Commencer », puis « Ton enseignant n'est pas sur Lnclass ? Invite-le › » %>
+<%# UDR  : XXXX accueil élève §3.3 (état 5), 0084 §3.6, ADR : 0089 (§4.3) %>
+<%# locals: (home:, step:, daily:, form:, archived:, invite_href:) -%>
+<h2 id="student_next_step_title" class="font-display text-lg leading-snug font-medium break-words text-ink">
+  <%= daily.state == :proposed ? daily.exercise_title : t("classroom.student_homes.next_step.unassigned.title") %>
+</h2>
+<% if daily.state == :proposed %><p class="text-meta text-mute"><%= daily.material_name %></p><% end %>
+<%= ui_badge "#{t("classroom.student_homes.next_step.unassigned.badge")} · Lnclass", tone: :brand, size: :sm, icon: "sparkles" %>
+<%= render "classroom/student_homes/next_step/daily", daily:, scope: "unassigned", variant: :primary %>
+<p>
+  <%# ADR-0089 §4.3 : un partage WhatsApp qui nomme la classe, avec le lien d'inscription enseignant, dans un nouvel onglet. %>
+  <%= link_to invite_href, target: "_blank", rel: "noopener", id: "student_next_step_invite",
+              class: "inline-flex min-h-tap items-center gap-1 rounded-sm text-sm font-medium text-brand-strong focus-visible:outline-2 focus-visible:outline-brand" do %>
+    <%= t("classroom.student_homes.next_step.unassigned.invite") %>
+    <%= ui_icon "chevron-right", variant: :mini, size: :sm %>
+  <% end %>
+</p>

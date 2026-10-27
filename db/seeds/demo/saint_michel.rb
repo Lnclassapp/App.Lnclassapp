@@ -244,6 +244,7 @@ create_message = UseCases::Communication::CreateMessage.new(
   messages: Repositories::Communication::MessageRepository.new, attachments: Repositories::Communication::AttachmentStore.new,
   schools: Repositories::School::SchoolRepository.new, classrooms: Repositories::Classroom::ClassroomRepository.new,
   teachings: Repositories::Classroom::TeachingRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
+  illustrations: Repositories::Communication::IllustrationRepository.new,
   transaction: Repositories::Shared::Transaction.new, policy: Policies::Communication::PublishPolicy.new, clock:
 )
 math_teacher = teachers.first.first
@@ -256,8 +257,8 @@ math_teacher = teachers.first.first
   author = Orm::User.find_by!(contact:)
   clock.now = FINISH - (rank * 5).hours
   rooms = audience == "classrooms" ? Orm::TeacherClassroom.where(teacher_id: author.id).includes(:classroom).map { it.classroom.public_id } : []
-  dto = Dtos::Communication::MessageInput.new(title:, body:, audience:, illustration:, classroom_public_ids: rooms, commit: "publish",
-                                              visible_until: (FINISH + 30.days).to_date.iso8601)
+  # La date de fin n'est plus saisie : elle est calculée (ADR-0081 §4.1).
+  dto = Dtos::Communication::MessageInput.new(title:, body:, audience:, illustration:, classroom_public_ids: rooms, commit: "publish")
   result = create_message.call(actor: users.actor_for(user_id: author.id), dto:)
   raise "annonce refusée (#{title}) : #{result.code} #{result.errors}" if result.failure?
 end

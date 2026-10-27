@@ -14,7 +14,15 @@ module Repositories
         Entities::Classroom::Classroom.new(school_id: @school.id, level_id: @level.id, school_year: @year, name:)
       end
 
-      test "crée une classe avec le jeton de son lien, sans code, et la relit avec ses enseignants et son effectif" do
+      # Remplace Orm::Classroom.insert_all! le temps du bloc (le test voit chaque appel et peut y forcer un code pris).
+      def around_insert_all(replacement)
+        Orm::Classroom.define_singleton_method(:insert_all!) { |batch| replacement.call(batch) }
+        yield
+      ensure
+        Orm::Classroom.singleton_class.remove_method(:insert_all!)
+      end
+
+      test "crée une classe avec le jeton de son lien et son code, et la relit avec ses enseignants et son effectif" do
         created = ClassroomRepository.new.create(classroom: classroom).value
         record = Orm::Classroom.find(created.id)
         teacher = create_teacher(classrooms: [ record ])
@@ -24,7 +32,8 @@ module Repositories
         found = ClassroomRepository.new.find_by_public_id(public_id: created.public_id)
 
         assert_match(/\A[0-9a-f]{12}\z/, found.link_token)
-        assert_not_respond_to found, :join_code
+        assert Entities::Classroom::JoinCode.valid?(found.join_code)
+        assert_equal Orm::Classroom.find(created.id).join_code, found.join_code
         assert_equal [ "Tle D 1", @year, "active", 80 ], [ found.name, found.school_year, found.status, found.max_students ]
         assert_equal [ teacher.id ], found.teacher_ids
         assert_equal 1, found.active_students_count
@@ -38,6 +47,36 @@ module Repositories
 
         assert_equal :conflict, result.code
         assert_equal({ name: [ :taken ] }, result.errors)
+      end
+
+      # Revue de #295 : le code vient de la base à la création ; on force ici un code déjà pris pour simuler la collision.
+      test "une collision du code de classe est retentée avec un nouveau tirage de la base, dans un savepoint" do
+        taken = create_classroom(school: @school, level: @level, name: "6ème 1", school_year: @year)
+        repository = ClassroomRepository.new
+        draws = 0
+        repository.define_singleton_method(:attributes_of) do |entity|
+          (draws += 1) == 1 ? super(entity).merge(join_code: taken.join_code) : super(entity)
+        end
+
+        created = Orm::Classroom.transaction { repository.create(classroom: classroom(name: "Tle D 2")) }
+
+        assert created.success?
+        assert_equal 2, draws
+        assert_not_equal taken.join_code, created.value.join_code
+        assert_equal 2, Orm::Classroom.where(school_id: @school.id).count
+      end
+
+      test "une collision du code de classe qui dure au-delà des essais monte, bruyante, au lieu d'un faux nom pris" do
+        taken = create_classroom(school: @school, level: @level, name: "6ème 1", school_year: @year)
+        repository = ClassroomRepository.new
+        draws = 0
+        repository.define_singleton_method(:attributes_of) { |entity| (draws += 1) && super(entity).merge(join_code: taken.join_code) }
+
+        error = assert_raises(ActiveRecord::RecordNotUnique) { repository.create(classroom: classroom(name: "Tle D 2")) }
+
+        assert_includes error.message, "index_classrooms_on_join_code"
+        assert_equal ClassroomRepository::JOIN_CODE_ATTEMPTS, draws
+        assert_equal 1, Orm::Classroom.where(school_id: @school.id).count
       end
 
       test "liste les noms d'une école pour une année" do
@@ -106,6 +145,37 @@ module Repositories
         assert_raises(ActiveRecord::RecordNotUnique) { ClassroomRepository.new.insert_generated(rows:, at: @at) }
       end
 
+      test "une collision du code de classe sur une génération en masse est retentée : le lot entier est écrit" do
+        taken = create_classroom(school: @school, level: @level, name: "Prise", school_year: @year)
+        rows = Array.new(3) do |index|
+          { public_id: SecureRandom.base58(14), school_id: @school.id, school_year: @year, name: "Classe #{index}",
+            level_id: @level.id, series_id: nil }
+        end
+        insert = Orm::Classroom.method(:insert_all!)
+        calls = 0
+
+        around_insert_all(->(batch) { insert.call((calls += 1) == 1 ? batch.map { it.merge(join_code: taken.join_code) } : batch) }) do
+          assert_equal 3, Orm::Classroom.transaction { ClassroomRepository.new.insert_generated(rows:, at: @at) }
+        end
+
+        assert_equal 2, calls
+        assert_equal 4, Orm::Classroom.where(school: @school).distinct.count(:join_code)
+      end
+
+      test "une collision du code de classe qui dure au-delà des essais lève sur la génération en masse" do
+        taken = create_classroom(school: @school, level: @level, name: "Prise", school_year: @year)
+        rows = [ { public_id: SecureRandom.base58(14), school_id: @school.id, school_year: @year, name: "Classe 0",
+                   level_id: @level.id, series_id: nil } ]
+        insert = Orm::Classroom.method(:insert_all!)
+        calls = 0
+
+        around_insert_all(->(batch) { calls += 1; insert.call(batch.map { it.merge(join_code: taken.join_code) }) }) do
+          assert_raises(ActiveRecord::RecordNotUnique) { ClassroomRepository.new.insert_generated(rows:, at: @at) }
+        end
+
+        assert_equal ClassroomRepository::JOIN_CODE_ATTEMPTS, calls
+      end
+
       test "IL-08: verrouille une classe par son identifiant public ou par le jeton de son lien, avec son effectif" do
         record = create_classroom(school: @school)
         create_student(classroom: record)
@@ -132,6 +202,61 @@ module Repositories
         assert_not_equal old, fresh
         assert_equal fresh, record.reload.link_token
         assert_nil repository.lock_by_link_token(token: old)
+      end
+
+      test "CA-B1: find_by_join_code rend la classe du code, archivée comprise, et nil pour un code absent, mal formé ou inconnu" do
+        record = create_classroom(school: @school).reload
+        archived = create_classroom(school: @school, status: "archived").reload
+        repository = ClassroomRepository.new
+
+        assert_equal [ record.public_id, record.join_code ], repository.find_by_join_code(code: record.join_code).values_at(:public_id, :join_code)
+        assert_equal archived.public_id, repository.find_by_join_code(code: archived.join_code).public_id
+        [ nil, "", "ABCDEF", "k7m4q", "k7m4qz2", "k7m 4qz", "000000" ].each do |code|
+          assert_nil repository.find_by_join_code(code:), code.inspect
+        end
+        assert_nil repository.find_by_join_code(code: Orm::Classroom.exists?(join_code: "zzzzzz") ? "yyyyyy" : "zzzzzz")
+      end
+
+      test "CA-B1: changer le lien et le code tire un nouveau jeton et un nouveau code, et invalide les anciens" do
+        record = create_classroom(school: @school).reload
+        old_token = record.link_token
+        old_code = record.join_code
+        repository = ClassroomRepository.new
+
+        fresh = repository.regenerate_link_and_code(id: record.id)
+
+        assert_instance_of Ports::Classroom::ClassroomRepositoryPort::LinkAndCode, fresh
+        assert_match(/\A[0-9a-f]{12}\z/, fresh.link_token)
+        assert Entities::Classroom::JoinCode.valid?(fresh.join_code)
+        assert_not_equal old_token, fresh.link_token
+        assert_not_equal old_code, fresh.join_code
+        record.reload
+        assert_equal [ fresh.link_token, fresh.join_code ], [ record.link_token, record.join_code ]
+        assert_not_nil record.link_token_rotated_at
+        assert_nil repository.lock_by_link_token(token: old_token)
+        assert_nil repository.find_by_join_code(code: old_code)
+        assert_equal record.public_id, repository.find_by_join_code(code: fresh.join_code).public_id
+      end
+
+      test "CA-B1: le nouveau code évite les codes pris, cinq essais au plus" do
+        record = create_classroom(school: @school).reload
+        other = create_classroom(school: @school).reload
+        draws = [ other.join_code, other.join_code, "k7m4q2" ]
+        with_draws(draws) { assert_equal "k7m4q2", ClassroomRepository.new.regenerate_link_and_code(id: record.id).join_code }
+        before = record.reload.join_code
+
+        with_draws([ other.join_code ] * 5) do
+          assert_raises(Entities::Classroom::JoinCode::Exhausted) { ClassroomRepository.new.regenerate_link_and_code(id: record.id) }
+        end
+        assert_equal before, record.reload.join_code
+      end
+
+      def with_draws(draws)
+        original = Entities::Classroom::JoinCode.method(:generate)
+        Entities::Classroom::JoinCode.define_singleton_method(:generate) { |**| draws.shift }
+        yield
+      ensure
+        Entities::Classroom::JoinCode.define_singleton_method(:generate, original)
       end
 
       test "archive une classe peuplée sans toucher adhésions ni assignations, la restaure à l'identique (ADR-0088)" do

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::JoinAsStudent
-# Rôle : un élève connecté sans classe active (classe archivée, ou retiré) entre dans la classe choisie ou dans celle d'un lien
-# ADR  : 0026, 0028, 0040, 0041, 0085, 0088 · UDR : 0009, 0081
+# Rôle : un élève connecté sans classe active (classe archivée, ou retiré) entre dans la classe choisie, dans celle de son code ou dans celle d'un lien
+# ADR  : 0026, 0028, 0040, 0041, 0085, 0088, 0109 · UDR : 0009, 0081
 module UseCases
   module Classroom
     class JoinAsStudent
@@ -25,7 +25,7 @@ module UseCases
       end
 
       # dto : Dtos::Classroom::StudentRegistrationInput, dont seuls les champs de la classe comptent : link_token (voie
-      # « link »), sinon school_public_id, level_slug et classroom_public_id (voie « standard »).
+      # « link »), sinon join_code (voie « code »), sinon school_public_id, level_slug et classroom_public_id (voie « standard »).
       # → success(Entities::Classroom::Classroom) | :forbidden (visiteur, rôle, ou raison en errors[:base], déjà inscrit
       #   compris) | :not_found (lien qui ne mène plus à une classe ouverte) | :invalid (classe hors de la cascade)
       #   | :conflict (écriture refusée)
@@ -54,7 +54,7 @@ module UseCases
         move(actor.user_id, current, destination)
       end
 
-      # ADR-0085 §4.3 : le retrait ne ferme que la voie standard ; le lien le lève.
+      # ADR-0085 §4.3 : le retrait ferme la voie standard et celle du code ; seul le lien le lève : retaper le code ne contourne pas un retrait.
       def allowed(actor, destination)
         classroom = destination.classroom
         via_link = destination.via == ClassroomDesignation::LINK

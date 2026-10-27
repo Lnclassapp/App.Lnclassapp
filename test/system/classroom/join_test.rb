@@ -1,12 +1,13 @@
 require "application_system_test_case"
 
-# IL-01, IL-02, IL-08, IL-09, IL-10 (ADR-0085, UDR-0081 §3.2 to §3.4), in a real browser: there is no classroom code any
-# more (Lot F). A visitor signs up by the cascade DRENA → school → level → classroom, meets the 422 of an unconfirmed
-# secret code without reloading the page, then lands home in the classroom (way « standard »); or opens a classroom link,
-# sees the classroom already chosen and lands home in it (way « link »); « Ce n'est pas ta classe ? » goes back to the
-# cascade (way « standard »). An old link /c/<code> and /join lead to the standard page, the first with the alert.
-# IL-06 and IL-20 live in the browser: the submit button waits for a classroom, the number is cleaned while pasted and the
-# secret code concordance shows before sending. UDR-0057: at 390 px, the link page keeps a single primary action.
+# IL-01, IL-02, IL-08, IL-09, IL-10 (ADR-0085, UDR-0081 §3.2 to §3.4), in a real browser, on the three-step sign-up (UDR
+# « inscription élève en trois étapes »; the code route has its own test, identity/student_signup_steps_test). A visitor
+# who has no code ticks « Je n'ai pas de code » and signs up by the cascade DRENA → school → level → classroom, meets the
+# 422 of an unconfirmed secret code without reloading the page, then lands home in the classroom (way « standard »); or opens
+# a classroom link, lands on step 2 with the classroom already chosen and lands home in it (way « link »); « Ce n'est pas
+# ta classe ? » of a link goes back to the standard page. An old link /c/<code> and /join lead to the standard page, the first
+# with the alert. IL-20 lives in the browser: the number is cleaned while pasted and the secret code concordance shows
+# before sending. UDR-0057: at 390 px, the link page keeps a single primary action.
 class Classroom::JoinTest < ApplicationSystemTestCase
   FORM = "classroom.student_registrations.form".freeze
   JOINS = "classroom.joins.new".freeze
@@ -25,14 +26,15 @@ class Classroom::JoinTest < ApplicationSystemTestCase
 
   test "IL-01, IL-06: the cascade, an unconfirmed secret code shown without reloading, then the arrival in the classroom" do
     visit new_student_registration_path
+    check I18n.t("#{FORM}.no_code"), allow_label_click: true
 
-    # IL-06 : un établissement sans classe le dit, et « Créer mon compte » reste désactivé tant qu'aucune classe n'est cochée.
+    # IL-06 : un établissement sans classe le dit, et on reste à l'étape 1 tant qu'aucune classe n'est touchée.
     select "Abidjan 1", from: "student_registration[drena_public_id]"
     select "Collège sans classe", from: "student_registration[school_public_id]"
     within("turbo-frame#picker_levels") { assert_text I18n.t("classroom.student_registrations.class_picker.not_found_title") }
-    assert_button I18n.t("#{FORM}.submit"), disabled: true
+    assert_step 1
     choose_classroom "6ème 1"
-    assert_button I18n.t("#{FORM}.submit"), disabled: false
+    assert_step 2
     sign_up_after_a_wrong_confirmation
 
     assert_equal [ [ @classroom.id, "standard" ] ], memberships_of_the_new_student
@@ -42,8 +44,9 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     with_mobile_viewport do
       visit join_classroom_path(@classroom.reload.link_token)
 
-      assert_selector "#classroom-preview", text: "6ème 1 — Lycée Classique d'Abidjan"
-      assert_no_selector "select[name='student_registration[drena_public_id]']"
+      assert_step 2
+      assert_selector "#signup-classroom-recap", text: /6ème 1.*Lycée Classique d'Abidjan/m
+      assert_no_selector "select[name='student_registration[drena_public_id]']", visible: :all
       assert_no_text "6ème 2"
       sign_up_after_a_wrong_confirmation
     end
@@ -57,11 +60,13 @@ class Classroom::JoinTest < ApplicationSystemTestCase
 
     with_mobile_viewport do
       visit new_student_registration_path
+      check I18n.t("#{FORM}.no_code"), allow_label_click: true
       choose_classroom "6ème 1"
       fill_in_the_student
       create_student(classroom: @classroom)
       click_on I18n.t("#{FORM}.submit")
 
+      assert_step 1
       assert_selector "#student-registration-refusal[role=alert]", text: I18n.t("#{ERRORS}.base.classroom_full")
       assert_equal "student-registration-refusal", page.evaluate_script("document.activeElement.id")
       assert_operator page.evaluate_script("document.getElementById('student-registration-refusal').getBoundingClientRect().top"), :>=, 0
@@ -69,38 +74,50 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     assert_equal 0, Orm::User.where(role: "student", contact: "0701020304").count
   end
 
-  # UDR-0088 §3.4 (CA-4, CA-6, CA-7) at 390 px: the link's classroom in section 1, the gender as a pill, a 9-digit number
-  # refused under the number with the focus on it.
-  test "CA-6, CA-7 at 390 px: the link's banner in section 1, a 9-digit number refused under it, the focus on it" do
+  # UDR-0088 §3.4, UDR inscription en trois étapes §3.3, §3.5 at 390 px: the link's recap on step 2, the gender as a pill, a
+  # number refused by the server under the number with the focus on it, on step 2 reopened.
+  test "CA-C3, CA-C6 at 390 px: the link's recap on step 2, a number the server refuses reopens step 2 with the error and the focus on it" do
     with_mobile_viewport do
       visit join_classroom_path(@classroom.reload.link_token)
 
-      assert_selector "#auth-welcome-card", text: "Bienvenue sur Lnclass"
-      within("#student-registration-section-classroom") do
-        assert_selector "#classroom-preview", text: "6ème 1 — Lycée Classique d'Abidjan"
+      assert_selector "#signup-welcome", text: "Bienvenue sur Lnclass"
+      within("#student-registration-section-you") do
+        assert_selector "#signup-classroom-recap", text: /6ème 1.*Lycée Classique d'Abidjan/m
         assert_link I18n.t("#{FORM}.other_classroom")
       end
-      fill_in_the_student
+      fill_in "student_registration[last_name]", with: "KOUASSI"
+      fill_in "student_registration[first_name]", with: "Aya Marie"
+      choose I18n.t("genders.female")
       assert_selector "#student-registration-gender label:has(input:checked)", text: I18n.t("genders.female")
       # UDR-0088 §3.4, §3.7 : de vraies radios, 44 px de haut ; la flèche du clavier passe à l'autre pastille.
       assert_equal [ 44 ], all("#student-registration-gender label").map { evaluate_script("arguments[0].getBoundingClientRect().height", it).round }.uniq
       find_field(I18n.t("genders.female")).send_keys(:right)
       assert_checked_field I18n.t("genders.male")
-      fill_in "student_registration[contact]", with: "070102030"
+      # Les quatre champs valides : le passage à l'étape 3 se fait seul. Dix chiffres passent le navigateur, pas le serveur (un numéro ivoirien commence par 01, 05 ou 07) : étape 3, puis 422.
+      fill_in "student_registration[contact]", with: "0201020304"
+      assert_step 3
+      fill_in "student_registration[pin]", with: "4821"
+      fill_in "student_registration[pin_confirmation]", with: "4821"
       click_on I18n.t("#{FORM}.submit")
 
+      assert_step 2
       assert_selector "#student_registration_contact_error", text: I18n.t("#{ERRORS}.contact.invalid")
       assert_selector "#student_registration_contact[aria-invalid=true]:focus"
     end
     assert_equal 0, Orm::User.where(role: "student").count
   end
 
+  # CA-C9 on a computer (1400 px): the class of the link is in the blue panel under step 1, not above the form.
   test "IL-10: « Ce n'est pas ta classe ? » goes back to the cascade, and the student lands in the other classroom" do
     visit join_classroom_path(@classroom.reload.link_token)
+    assert_selector "#signup-panel li[data-step='1'] #signup-panel-recap", text: /6ème 1.*Lycée Classique d'Abidjan/m
+    assert_no_selector "#signup-classroom-recap", visible: :visible
     click_on I18n.t("#{FORM}.other_classroom")
 
     assert_current_path new_student_registration_path
     assert_no_selector "#classroom-link-invalid"
+    assert_step 1
+    check I18n.t("#{FORM}.no_code"), allow_label_click: true
     choose_classroom "6ème 2"
     sign_up
 
@@ -117,8 +134,11 @@ class Classroom::JoinTest < ApplicationSystemTestCase
 
     assert_current_path new_student_registration_path
     assert_selector "#classroom-link-invalid[role=alert]", text: I18n.t("#{FORM}.link_invalid")
+    assert_step 1
+    check I18n.t("#{FORM}.no_code"), allow_label_click: true
     assert_selector "select[name='student_registration[drena_public_id]']"
-    assert_no_selector "input[name*=code]"
+    assert_selector "input[name='student_registration[join_code]']", visible: :all
+    assert_no_selector "input[name='student_registration[link_token]']", visible: :all
   end
 
   test "at 390 px, a student without a classroom sees the preview and one button, the reassurance in an info tip" do
@@ -151,15 +171,27 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     within("turbo-frame#picker_classrooms") { choose name }
   end
 
+  # Step 2, then (a delay after the last key: 1 s in production, 100 ms here) step 3 by itself.
   def fill_in_the_student(pin_confirmation: "4821")
+    fill_in_step_two
+    assert_step 3
+    fill_in "student_registration[pin]", with: "4821"
+    fill_in "student_registration[pin_confirmation]", with: pin_confirmation
+  end
+
+  def fill_in_step_two
     fill_in "student_registration[last_name]", with: "KOUASSI"
     fill_in "student_registration[first_name]", with: "Aya Marie"
     choose I18n.t("genders.female")
     # IL-20 (IE-19) : le numéro collé est nettoyé en direct.
     paste "student_registration[contact]", "(+225) 07 01 02 03 04"
     assert_field "student_registration[contact]", with: "0701020304"
-    fill_in "student_registration[pin]", with: "4821"
-    fill_in "student_registration[pin_confirmation]", with: pin_confirmation
+  end
+
+  def assert_step(number, settle: nil)
+    sleep settle if settle
+    assert_selector "#signup-step-counter", text: I18n.t("#{FORM}.step_counter", n: number)
+    assert_equal [ number ], page.all("fieldset[data-classroom--signup-steps-target=step]", visible: :visible).map { it["data-step"].to_i }
   end
 
   def sign_up
@@ -179,9 +211,10 @@ class Classroom::JoinTest < ApplicationSystemTestCase
 
       assert_selector "#student_registration_pin_confirmation_error", text: I18n.t("#{ERRORS}.pin_confirmation.confirmation")
     end
-    assert_field "student_registration[last_name]", with: "KOUASSI"
+    assert_field "student_registration[last_name]", with: "KOUASSI", visible: :all
     assert_equal 0, Orm::User.where(role: "student").count
 
+    assert_step 3
     fill_in "student_registration[pin]", with: "4821"
     fill_in "student_registration[pin_confirmation]", with: "4821"
     assert_selector "#pin_match_status.text-success", text: I18n.t("#{FORM}.pin_match.ok")

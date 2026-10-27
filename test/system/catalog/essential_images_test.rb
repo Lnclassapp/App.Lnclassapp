@@ -61,7 +61,13 @@ class Catalog::EssentialImagesTest < ApplicationSystemTestCase
         assert_selector "figure img[src='#{essential_image_path(image.public_id)}'][alt='#{DESCRIPTION}'][loading=lazy]" \
                         "[width='#{image.width}'][height='#{image.height}']"
       end
-      assert page.evaluate_script("document.querySelector('#essential_content img').naturalWidth > 0"), "l'image est servie"
+      # The image loads after the page (lazily): wait until the browser has decoded it, or failed to.
+      served = using_wait_time(UPLOAD_WAIT) { page.evaluate_async_script(<<~JS) }
+        const [done] = arguments
+        const image = document.querySelector("#essential_content img")
+        image.decode().then(() => done(image.naturalWidth > 0), () => done(false))
+      JS
+      assert served, "l'image est servie"
     end
   end
 end

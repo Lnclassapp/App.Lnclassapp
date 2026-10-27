@@ -3,21 +3,21 @@ require "application_system_test_case"
 # UDR-0005 et UDR-0006 — chaque composant de /design dans ses variantes et ses états, rendu par un vrai navigateur.
 class DesignSystemTest < ApplicationSystemTestCase
   TOKENS = {
-    "ink" => "rgb(38, 38, 38)", "paper" => "rgb(250, 248, 244)", "brand" => "rgb(0, 160, 255)",
+    "ink" => "rgb(31, 33, 40)", "paper" => "rgb(255, 255, 255)", "brand" => "rgb(0, 160, 255)",
     "brand-strong" => "rgb(0, 112, 179)", "teacher" => "rgb(255, 138, 0)", "school" => "rgb(27, 54, 93)",
     "team" => "rgb(123, 58, 237)", "success" => "rgb(24, 114, 63)", "error" => "rgb(200, 50, 43)"
   }.freeze
 
   setup { visit design_path }
 
-  test "colour tokens compile to the landing palette, fonts are served by the app" do
+  test "colour tokens compile to the cold palette, the single font is served by the app" do
     TOKENS.each do |token, rgb|
       swatch = find("[data-token='#{token}'] div")
 
       assert_equal rgb, css(swatch, "background-color"), token
     end
     assert_match(/DM Sans/, find("body").style("font-family")["font-family"])
-    assert_match(/Bricolage Grotesque/, find("#colors-title").style("font-family")["font-family"])
+    assert_match(/DM Sans/, find("#colors-title").style("font-family")["font-family"])
     assert page.evaluate_script("document.fonts.check('16px \"DM Sans\"')")
   end
 
@@ -47,7 +47,7 @@ end
 
   test "buttons in every variant, size and state" do
     within("[data-example=button-variants]") do
-      assert_equal "rgb(38, 38, 38)", css(find("[data-variant=primary]"), "background-color")
+      assert_equal "rgb(0, 112, 179)", css(find("[data-variant=primary]"), "background-color")
       assert_equal "rgb(0, 160, 255)", css(find("[data-variant=brand]"), "background-color")
       assert_equal "rgb(200, 50, 43)", css(find("[data-variant=danger]"), "background-color")
       assert_selector "button[data-variant]", count: 5
@@ -71,7 +71,7 @@ end
     assert_selector "[data-example=badge-roles] [data-role]", count: 4
     within("[data-example=badge-subjects]") do
       assert_equal "rgb(229, 245, 255)", css(find("[data-category=science] > span"), "background-color")
-      assert_equal "rgb(242, 238, 231)", css(find("[data-category=unknown] > span"), "background-color")
+      assert_equal "rgb(244, 248, 251)", css(find("[data-category=unknown] > span"), "background-color")
     end
   end
 
@@ -397,10 +397,10 @@ end
   test "the landing stays on tokens and speaks French" do
     visit root_path
 
-    assert_selector "h1", text: t("homepage.index.hero.title")
+    assert_selector "h1", text: /chap chap/
     assert_equal "fr", find("html")["lang"]
     assert_no_selector "link[href*='fonts.googleapis']", visible: :all
-    assert_equal "rgb(0, 160, 255)", css(find("#hero"), "background-color")
+    assert_equal "rgb(255, 255, 255)", css(find("#home-sheet"), "background-color")
   end
 
   # --- Finitions (UDR-0054) ---------------------------------------------------

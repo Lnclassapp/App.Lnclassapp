@@ -50,12 +50,15 @@ module RendersResult
   def render_forbidden = render_error_page(:forbidden)
   def render_not_found = render_error_page(:not_found)
 
-  # Dans le cadre « modal », la page d'erreur porte la balise de rechargement : Turbo quitte le cadre et l'affiche entière,
-  # au lieu de n'y mettre que le cadre « modal » vide du layout (document_reload_tag). Les autres cadres (une recherche)
-  # gardent leur état d'erreur avec « Réessayer » (UDR-0054 §3.9) : seul le cadre manquant le déclenche.
+  # Dans le cadre « modal » et dans celui du panneau « Mon compte », la page d'erreur porte la balise de rechargement : Turbo quitte
+  # le cadre et l'affiche entière, au lieu d'y mettre le cadre vide ou le menu du layout (document_reload_tag). Les autres cadres
+  # (une recherche) gardent leur état d'erreur avec « Réessayer » (UDR-0054 §3.9) : seul le cadre manquant le déclenche.
   def render_error_page(code)
     status = code
-    @reload_document = turbo_frame_request_id == MODAL_FRAME
+    @reload_document = turbo_frame_request_id.in?([ MODAL_FRAME, NavigationHelper::ACCOUNT_PANEL_FRAME ])
+    # Un formulaire du panneau demande le Turbo Stream d'abord : son toast resterait sous le panneau (une <dialog> modale) et sa
+    # confirmation resterait ouverte. La page d'erreur, elle, quitte le frame et s'affiche entière.
+    request.format = :html if turbo_frame_request_id == NavigationHelper::ACCOUNT_PANEL_FRAME && request.format.turbo_stream?
     respond_to do |format|
       format.html { render ERROR_PAGES.fetch(code), status:, layout: "application" }
       format.json { render json: { error: code }, status: }

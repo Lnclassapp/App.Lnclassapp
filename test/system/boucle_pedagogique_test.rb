@@ -271,14 +271,15 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       select "SVT", from: "teacher_registration[material_slug]"
       fill_in "teacher_registration[last_name]", with: "YAO"
       fill_in "teacher_registration[first_name]", with: "Koffi"
-      choose t("genders.male")
+      choose t("identity.teacher_registrations.form.genders.male")
       fill_in "teacher_registration[contact]", with: TEACHER_CONTACT
       fill_in "teacher_registration[pin]", with: "1357"
       fill_in "teacher_registration[pin_confirmation]", with: "1357"
     end
     click_on t("identity.teacher_registrations.form.submit")
     assert_toast t("identity.teacher_registrations.create.welcome")
-    assert_current_path teacher_classrooms_path
+    assert_current_path teacher_home_path # UDR enseignant §3.13 : l'accueil demande les classes
+    visit teacher_classrooms_path
     assert_equal [ "YAO", "Koffi" ], Orm::User.where(contact: TEACHER_CONTACT).pick(:last_name, :first_name)
 
     classroom = Orm::Classroom.find_by!(name: "Tle D 1")
@@ -293,7 +294,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
     find("li[id='classroom_#{classroom.public_id}'] a").click
     assert_selector "#classroom_header h1", text: "Tle D 1"
-    link = find("#classroom_link [data-clipboard-text-value]")["data-clipboard-text-value"]
+    link = find("#classroom_link [data-clipboard-text-value^='http']")["data-clipboard-text-value"]
     assert_equal join_classroom_url(classroom.reload.link_token, host: URI(link).host, port: URI(link).port), link
 
     # ADR-0072 : un cours ne s'assigne plus ; sa page du catalogue n'offre aucune action à l'enseignant.
@@ -303,20 +304,20 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_no_button "Assigner"
     assert_no_link "Assigner"
 
-    # The « Cours » block of the classroom page leads to the course in the classroom (UDR-0062 §3.4, memo Q18).
-    navigate_to teacher_home_path
-    find("li[id='classroom_#{classroom.public_id}'] a").click
-    within("#classroom_courses") { click_on COURSE }
-    assert_current_path classroom_course_path(classroom.public_id, Orm::Course.find_by!(name: COURSE).slug)
-    assert_no_button "Assigner"
-    find("#classroom_course_essentials a", text: ESSENTIAL).click
+    # La page de la classe n'a plus de bande « Fiches de cours » (UDR enseignant sans répétition) : le chemin vers l'exercice passe
+    # par Cours, dont la carte de la fiche de cours liste ses fiches de révision ; chaque classe y a son « Assigner ».
+    navigate_to courses_path
+    find("#courses_list a", text: ESSENTIAL).click
     assert_selector "h1", text: ESSENTIAL
     exercise = Orm::Exercise.find_by!(title: EXERCISE)
     assert_no_page_reload do
       within("[id='assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}']") { click_on "Assigner" }
-      # No session days yet: « Assigner » opens the days modal (UDR-0062 §3.4); « Plus tard » assigns without a due date.
-      within("turbo-frame#modal dialog[open]") { click_on "Plus tard" }
-      assert_toast "#{EXERCISE} ajouté à Tle D 1."
+      # No session days yet: « Assigner » opens the days modal (UDR-0062 §3.4), which asks for a day (no « Plus tard »).
+      within("turbo-frame#modal dialog[open]") do
+        find("label", text: "Lun.").click
+        click_on "Assigner"
+      end
+      assert_toast "#{EXERCISE} ajouté à Tle D 1, à rendre"
       within("[id='assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}']") { assert_text "Assigné" }
     end
     link
@@ -330,7 +331,9 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
 
     within("[id='student_#{student.public_id}']") do
       assert_text "Aya Kouassi"
-      assert_text "100 %"
+      # Maquette 10 : la ligne dit ses exercices faits et le badge de classe de l'élève (un 100 % sans faute : Diamant, 20/20).
+      assert_text "1 fait sur 1"
+      assert_text "Diamant · 20/20"
     end
     assert_no_page_reload do
       issue_recovery_code_from_roster("[id='student_#{student.public_id}']")
@@ -343,12 +346,15 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_no_selector "turbo-frame#modal dialog[open]"
     end
 
-    # The last score in the roster leads to the detailed result (decision of the porteur, 2026-09-27). The blocks of
-    # Lot E push the roster to the foot of the page, under the toast of the code just issued: it leaves after 5 s.
+    # The toast of the code just issued leaves after 5 s.
     assert_no_selector "[data-controller=toast]", wait: 10
-    # The code was issued from the student's file (rapports-de-classe, memo Q4): back to the classroom page.
-    find("nav[aria-label='Retour'] a").click
-    within("[id='student_#{student.public_id}']") { click_on t("classroom.classrooms.roster.see_result") }
+    # The code was issued from the student's file (rapports-de-classe, memo Q4): the file leads to the detailed result of the
+    # best session (the roster row no longer carries a score at 390 px, maquette 10).
+    assert_selector "#student_file_summary", text: "Diamant"
+    within("#student_file_assignments li", text: EXERCISE) do
+      assert_text "20/20"
+      click_on t("classroom.classroom_students.assignments.best_session")
+    end
     assert_current_path exercise_session_result_path(session.public_id)
     assert_text t("assessment.session_results.show.student", name: "Aya Kouassi")
     assert_text "20/20"
@@ -369,12 +375,13 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
   # → the finished session, whose result the teacher opens.
   def student_joins_and_wins_the_diamond(link)
     visit URI(link).path
-    assert_selector "#classroom-preview", text: "Tle D 1 — #{SCHOOL}"
+    assert_selector "#signup-classroom-recap", text: /Tle D 1.*#{SCHOOL}/m
     assert_no_page_reload do
       fill_in "student_registration[last_name]", with: "Kouassi"
       fill_in "student_registration[first_name]", with: "Aya"
       choose t("genders.female")
       fill_in "student_registration[contact]", with: STUDENT_CONTACT
+      # Step 2 moves on to the secret code (step 3) a second after the last key.
       fill_in "student_registration[pin]", with: "2468"
       fill_in "student_registration[pin_confirmation]", with: "2468"
     end
@@ -382,8 +389,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_toast t("classroom.student_registrations.create.welcome")
     assert_current_path student_home_path
 
-    assert_selector "#student_home_classroom", text: "Tle D 1"
-    within("#student_home_exercises li", text: EXERCISE) { click_on t("classroom.student_homes.assigned_exercise.start") }
+    assert_selector "#student_next_step", text: /Tle D 1/i
+    within("#student_next_step", text: EXERCISE) { click_on t("classroom.student_homes.next_step.due.start") }
     assert_current_path %r{\A/sessions/[^/]+\z}
     assert_selector "h1", text: EXERCISE
 
@@ -412,10 +419,13 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
   # ---------------------------------------------------------------------------------------------------------------------
   # Helpers
 
-  # A destination of the shell navigation, or a card of the team home: the first visible link to that path.
+  # A destination of the shell navigation, or a card of the team home: the first visible link to that path. Turbo
+  # pushes the address when the visit starts, and shows its cached copy of a page seen before until the answer comes:
+  # a click on the copy, swapped for the page mid-click, is lost. The next step waits for the page itself.
   def navigate_to(path)
     first("a[href='#{path}']", visible: true).click
     assert_current_path path
+    assert_no_selector "html[data-turbo-preview]"
   end
 
   # UDR-0068 §3.4 : le Référentiel a sa page, atteinte par la carte « Configuration » de la barre latérale.

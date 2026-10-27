@@ -8,6 +8,7 @@ module UseCases
       NOW = Time.utc(2026, 10, 8, 12)
       YEAR = "2026-2027".freeze
       TOKEN = "0a1b2c3d4e5f".freeze
+      CODE = "k7m4q2".freeze
 
       Clock = Data.define(:now)
       School = Data.define(:id, :public_id, :status) { def active? = status == "active" }
@@ -30,6 +31,19 @@ module UseCases
           @locks << token
           @classrooms.find { it.link_token == token }
         end
+
+        def find_by_join_code(code:)
+          @locks << [ :find, code ]
+          @classrooms.find { it.join_code == code }
+        end
+      end
+
+      # The teacher changes the code between the read and the lock: the lock reads the classroom with its new code.
+      class ChangedUnderLock < FakeClassrooms
+        def lock_by_public_id(public_id:)
+          super && Entities::Classroom::Classroom.new(id: 7, public_id:, name: "3e 2", school_id: 3, level_id: 2,
+                                                      school_year: YEAR, link_token: TOKEN, join_code: "p3r8wx")
+        end
       end
 
       class FakeSchools
@@ -43,7 +57,7 @@ module UseCases
 
       def classroom(**overrides)
         Entities::Classroom::Classroom.new(id: 7, public_id: "cls-7", name: "3e 2", school_id: 3, level_id: 2, school_year: YEAR,
-                                           link_token: TOKEN, **overrides)
+                                           link_token: TOKEN, join_code: CODE, **overrides)
       end
 
       def designation(classrooms: [ classroom ], school: School.new(id: 3, public_id: "sch-3", status: "active"))
@@ -103,6 +117,52 @@ module UseCases
           assert_equal [ :invalid, { classroom_public_id: [ :unavailable ] } ], subject.chosen(dto).then { [ it.code, it.errors ] },
                        label
         end
+      end
+
+      test "CA-B2: a classroom code designates its classroom, way « code », found then read under the lock" do
+        destination = designation.coded(CODE)
+
+        assert_equal [ 7, "code" ], [ destination.classroom.id, destination.via ]
+        assert_equal [ [ :find, CODE ], "cls-7" ], @classrooms.locks
+      end
+
+      test "a code changed between the read and the lock designates nothing: the old code never enters after the change" do
+        @classrooms = ChangedUnderLock.new([ classroom ])
+        designation = ClassroomDesignation.new(classrooms: @classrooms, schools: FakeSchools.new(School.new(id: 3, public_id: "sch-3", status: "active")),
+                                               taxonomy: FakeTaxonomy.new, clock: Clock.new(NOW))
+
+        assert_nil designation.coded(CODE)
+        assert_equal [ [ :find, CODE ], "cls-7" ], @classrooms.locks
+      end
+
+      test "CA-B3: no code, an unknown code, an archived classroom and a school that is not active designate nothing, alike" do
+        assert_nil designation.coded(nil)
+        assert_empty @classrooms.locks
+        assert_nil designation.coded("zzzzzz")
+        assert_nil designation(classrooms: [ classroom(status: "archived") ]).coded(CODE)
+        assert_nil designation(school: School.new(id: 3, public_id: "sch-3", status: "inactive")).coded(CODE)
+      end
+
+      test "a code in the form (the cascade fields are then ignored) designates its classroom; an unknown code is refused under the code" do
+        found = designation.coded_or_chosen(choice(join_code: "K7M 4Q2", classroom_public_id: "cls-9"))
+        assert_equal [ 7, "code" ], [ found.classroom.id, found.via ]
+
+        refused = designation.coded_or_chosen(choice(join_code: "zzz zzz"))
+        assert_equal [ :invalid, { join_code: [ :unknown ] } ], [ refused.code, refused.errors ]
+
+        refused = designation(classrooms: [ classroom(status: "archived") ]).coded_or_chosen(choice(join_code: CODE))
+        assert_equal [ :invalid, { join_code: [ :unknown ] } ], [ refused.code, refused.errors ]
+      end
+
+      test "without a code, coded_or_chosen is the cascade" do
+        assert_equal "standard", designation.coded_or_chosen(choice).via
+      end
+
+      test "designate: a link prevails, then the code, then the cascade; a dead link does not fall back on the code" do
+        assert_equal "link", designation.designate(choice(link_token: TOKEN, join_code: CODE)).via
+        assert_equal "code", designation.designate(choice(join_code: CODE)).via
+        assert_equal "standard", designation.designate(choice).via
+        assert_equal :not_found, designation.designate(choice(link_token: "ffffffffffff", join_code: CODE)).code
       end
     end
   end

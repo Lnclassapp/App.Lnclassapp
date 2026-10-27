@@ -26,10 +26,13 @@ class RepositoryRulesTest < Minitest::Test
     assert_empty offenders, "« # :nocov: » est interdit (ADR-0024) : #{offenders.join(', ')}"
   end
 
+  # ADR-0052 §4, amended by ADR-0108 §4: the only condition allowed on the worker is a PR environment.
   def test_the_solid_queue_worker_always_runs_inside_puma
     puma = File.read(File.join(ROOT, "config/puma.rb"))
+    declarations = puma.lines.map(&:strip).grep(/solid_queue/).reject { |line| line.start_with?("#") }
 
-    assert_match(/^plugin :solid_queue$/, puma, "ADR-0052 : `plugin :solid_queue` sans condition dans config/puma.rb")
+    assert_equal [ "plugin :solid_queue unless PrEnvironment.active?" ], declarations,
+                 "ADR-0052 amendé par ADR-0108 : `plugin :solid_queue unless PrEnvironment.active?`, sans autre condition, dans config/puma.rb"
   end
 
   # Railway's builder shares its address: Docker Hub answers its anonymous pulls with « 429 Too Many Requests » and the
@@ -45,13 +48,15 @@ class RepositoryRulesTest < Minitest::Test
     assert_empty ruby_files("config/deploy*.yml", ".kamal/*", "bin/kamal"), "ADR-0052 : Kamal n'est pas repris"
   end
 
-  # IL-02 (ADR-0085, Lot F of inscription-eleve-sans-code): the classroom code is gone, from the code and from the texts.
-  def test_the_classroom_join_code_is_gone
+  # IL-02 (ADR-0085, Lot F of inscription-eleve-sans-code), amended by ADR-0109: the classroom
+  # code is back, at 6 symbols, read by `Entities::Classroom::JoinCode`. What stays gone is the old code's rotation date and the
+  # old way in (`JoinWithCode`): a code is never rotated on its own, it changes with the link.
+  def test_the_old_classroom_join_code_stays_gone
     offenders = ruby_files("app/**/*.{rb,erb,js}", "config/**/*.{rb,yml}", "db/seeds/**/*.rb", "script/**/*.rb").select do |file|
-      File.read(File.join(ROOT, file)).match?(/join_code|JoinCode|JoinWithCode|join_with_code/)
+      File.read(File.join(ROOT, file)).match?(/join_code_rotated_at|JoinWithCode|join_with_code/)
     end
 
-    assert_empty offenders, "ADR-0085 : plus de code de classe : #{offenders.join(', ')}"
+    assert_empty offenders, "ADR-0085 amendé par ADR-0109 : le code de classe ne tourne pas seul, il change avec le lien : #{offenders.join(', ')}"
   end
 
   # A Yarn advisory is ignored only through this register, each with its date of re-examination (chantier

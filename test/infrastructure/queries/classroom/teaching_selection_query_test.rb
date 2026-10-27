@@ -29,6 +29,15 @@ module Queries
         assert_equal 1, row.declared_count
       end
 
+      test "school_sigle : le sigle de l'école, nil s'il est vide ou absent" do
+        teacher = create_teacher(school: @school)
+        @school.update!(sigle: "LCA")
+        assert_equal "LCA", TeachingSelectionQuery.new.call(teacher_id: teacher.id, school_id: @school.id).school_sigle
+
+        @school.update!(sigle: "")
+        assert_nil TeachingSelectionQuery.new.call(teacher_id: teacher.id, school_id: @school.id).school_sigle
+      end
+
       test "écarte les classes archivées, celles d'une autre année et celles d'une autre école" do
         create_classroom(school: @school, level: @sixth, name: "6ème 1")
         create_classroom(school: @school, level: @sixth, name: "6ème 9", status: "archived")

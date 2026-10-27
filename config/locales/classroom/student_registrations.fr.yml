@@ -1,4 +1,4 @@
-# Inscription élève sans code de classe (rubriques numérotées, genre en pastilles : UDR-0088 §3.4) : voie standard (DRENA → établissement → niveau → classe) et lien de classe, et les deux listes publiques de la cascade — ADR-0050, ADR-0083, ADR-0085, UDR-0007, UDR-0054, UDR-0079, UDR-0081
+# Inscription élève en trois étapes (Ta classe, Toi, Ton code secret) : code de classe, lien de classe ou cascade (DRENA → établissement → niveau → classe), et les deux listes publiques de la cascade — ADR-0050, ADR-0083, ADR-0085, ADR code-de-classe-a-six-caracteres, UDR-0007, UDR-0054, UDR-0079, UDR-0081, UDR inscription-eleve-en-trois-etapes
 fr:
   activemodel:
     attributes:
@@ -9,6 +9,7 @@ fr:
         contact: "Numéro de téléphone"
         pin: "Code secret"
         pin_confirmation: "Confirmation du code secret"
+        join_code: "Code de ta classe"
         drena_public_id: "DRENA"
         school_public_id: "Établissement"
         level_slug: "Niveau"
@@ -51,25 +52,49 @@ fr:
         welcome: "Bienvenue sur Lnclass"
         welcome_hint: "Ton espace d'apprentissage pour mieux comprendre tes cours, t'exercer et réussir tes examens."
         title: "Créer ton compte élève"
-        subtitle: "Trois rubriques, une minute."
         have_account: "Déjà un compte ?"
         sign_in: "Se connecter"
-        rate_limited_title: "Trop de tentatives"
+        # Sur ordinateur (UDR §3.5 bis) : le panneau, le même aux trois étapes.
+        panel_hint: "Créer ton compte élève prend une minute."
+        panel_steps: "Les trois étapes"
+        panel_step_done: "faite"
       form:
+        step_counter: "Étape %{n} sur 3"
+        step_announce: "Étape %{n} sur 3 : %{title}"
+        back: "Retour"
         link_invalid: "Ce lien n'est plus valable. Choisis ta classe."
+        # Étape 1.
         classroom: "Ta classe"
-        other_classroom: "Ce n'est pas ta classe ?"
+        classroom_hint: "Tu passes à la suite dès que ta classe est trouvée."
+        code_hint: "6 caractères, donnés par ton enseignant."
+        checking: "Vérification…"
+        check_failed: "Vérification impossible. Réessaie."
+        no_code: "Je n'ai pas de code"
+        rate_limited: "Trop de tentatives. Attends une minute, ou coche « Je n'ai pas de code »."
+        # Un lien de classe a sauté l'étape 1 : pas de case à cocher à proposer.
+        rate_limited_link: "Trop de tentatives. Attends une minute, puis réessaie."
+        # Étape 2.
         you: "Toi"
+        you_hint: "Tu passes à la suite dès que tout est rempli."
+        recap_label: "Ta classe"
+        other_classroom: "Ce n'est pas ta classe ?"
         last_name_placeholder: "Ex. : KOUASSI"
         first_name_placeholder: "Ex. : Aya Marie"
         contact_placeholder: "0701020304"
         contact_hint: "10 chiffres, par ex. 0701020304. Il te servira à te connecter."
-        security: "Code secret"
+        # Étape 3.
+        security: "Ton code secret"
+        security_hint: "Tu le choisis, toi seul le connais."
         pin_hint: "4 chiffres, que toi seul connais."
         pin_match:
           ok: "Les codes concordent."
           ko: "Les codes ne concordent pas."
         submit: "Créer mon compte"
+        submitting: "Création…"
+        # Chantier page-d-accueil-photo : la ligne sous le bouton, avec les deux pages publiques (UDR-0063). Pas de case à cocher.
+        terms_html: "En créant ton compte, tu acceptes les %{terms} et la %{privacy}."
+        terms_link: "conditions d'utilisation"
+        privacy_link: "protection des données"
       # UDR-0081 §3.3 : la cascade, partagée par l'inscription et par « Choisis ta classe » ; ses trois listes y puisent leurs textes.
       # UDR-0091 : trois étapes numérotées, l'établissement replié avec « Changer », les niveaux en pastilles, les classes en cases.
       class_picker:

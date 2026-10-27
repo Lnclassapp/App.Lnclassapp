@@ -57,6 +57,7 @@ module Communication
       assert_response :not_found
       sign_out
 
+      pilot_flags!(teacher_announcements_enabled: true)
       sign_in_as @kouassi
       get my_announcements_path
       assert_select "li#my_announcement_#{@fiches.public_id}" do

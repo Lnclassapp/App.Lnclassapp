@@ -38,7 +38,8 @@ class ErrorPathsTest < ApplicationSystemTestCase
     create_student(classroom:)
     click_on t("classroom.student_registrations.form.submit")
 
-    assert_selector "#student-registration-form [role=alert]", text: join_refusal(:classroom_full)
+    # A link has no step 1: the refusal opens at the top of step 2.
+    assert_selector "#student-registration-form #student-registration-refusal[role=alert]", text: join_refusal(:classroom_full)
     assert_equal users + 1, Orm::User.count
     assert_equal 1, Orm::ClassroomStudent.where(classroom:).count
     visit student_home_path
@@ -57,7 +58,7 @@ class ErrorPathsTest < ApplicationSystemTestCase
     create_assignment(classroom:, assignable: exercise)
 
     sign_in_as student
-    click_on t("classroom.student_homes.assigned_exercise.start")
+    click_on t("classroom.student_homes.next_step.due.start")
     assert_selector "#question-card", text: /#{t("assessment.exercise_sessions.question_card.number", number: 1, total: 2)}/i
 
     assert_button t("assessment.exercise_sessions.question_card.submit"), disabled: true
@@ -86,8 +87,9 @@ class ErrorPathsTest < ApplicationSystemTestCase
     session = create_exercise_session(student: stranger, status: "completed")
 
     sign_in_as teacher
-    assert_text "Tle D 1"
-    assert_no_text "Tle D 2"
+    # L'accueil enseignant (lot G) écrit la carte de classe en capitales CSS : le nom se compare sans la casse.
+    assert_text(/Tle D 1/i)
+    assert_no_text(/Tle D 2/i)
 
     [ classroom_path(other.public_id), classroom_course_path(other.public_id, course.slug),
       exercise_session_result_path(session.public_id) ].each do |path|

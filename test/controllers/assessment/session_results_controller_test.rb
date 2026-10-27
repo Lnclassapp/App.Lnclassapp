@@ -75,6 +75,34 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # CA-E5 : un seul bouton, « Recommencer » ; ni « Revoir l'exercice » ni l'encadré « Tu restes autour de… ».
+  test "CA-E5: the student's result has one button only, « Recommencer »" do
+    sign_in_as @student
+
+    show
+
+    assert_select ".ui-button-lg", 1
+    assert_select "form#restart-exercise-form button[type=submit].ui-button-lg", text: I18n.t("#{scope}.show.restart")
+    assert_select "a[href='#{exercise_path(@exercise.public_id)}']", 0
+    assert_no_match(/Revoir l'exercice/, response.body)
+  end
+
+  # CA-E13 (UDR écrans élève §3.6 bis) : dès 1 024 px, une colonne de gauche de 340 px collante (badge, note, « Recommencer »),
+  # la correction à droite.
+  test "CA-E13: the result in a sticky 340 px left column, the review on the right" do
+    sign_in_as @student
+
+    show
+
+    assert_select "#session_result_layout[class~='lg:grid-cols-side-main']" do
+      assert_select "> #session_result_side.lg\\:sticky" do
+        assert_select "#session_result"
+        assert_select "form#restart-exercise-form"
+      end
+      assert_select "> #session_review"
+    end
+  end
+
   # CA-11 : 16/20, « Félicitations ! », la note verte et les confettis.
   test "à 16/20, « Félicitations ! », la note verte et les confettis" do
     @session.update!(score_percent: 80)
@@ -231,7 +259,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#session_progress", 0
   end
 
-  test "progrès : 30 puis 90, l'élève lit qu'il progresse, icône verte, entre la note et les boutons" do
+  test "progrès : 30 puis 90, l'élève lit qu'il progresse, icône verte, entre la note et le bouton" do
     current = sessions(30, 90).last
     sign_in_as @student
 
@@ -239,7 +267,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     expected = "Tu progresses : 6/20 à ta première session, 18/20 aujourd'hui."
     assert_equal expected, progress(:progress, first: 6, current: 18)
-    assert_select "#session_result + p#session_progress + div form#restart-exercise-form"
+    assert_select "#session_result + p#session_progress + form#restart-exercise-form"
     assert_select "p#session_progress.text-sm.text-ink", text: expected
     assert_select "#session_progress svg.text-success[aria-hidden=true]", 1
   end
@@ -250,10 +278,9 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     show current
 
-    expected = "Tu restes autour de 12/20. Relis la correction ci-dessous avant de recommencer."
-    assert_equal expected, progress(:stagnant, current: 12)
-    assert_select "#session_progress", text: expected
-    assert_select "#session_progress svg.text-mute", 1
+    # CA-E5 (UDR écrans élève §3.5) : l'encadré « Tu restes autour de… » n'existe plus.
+    assert_select "#session_progress", 0
+    assert_no_match(/Tu restes autour de/, response.body)
     assert_no_match(/stagne|baisse/i, response.body)
   end
 
@@ -351,7 +378,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     show
 
     assert_select "#session_gap_outcome.bg-warning-soft" do
-      assert_select "p.font-bold", text: "Cette fiche de révision passe à revoir."
+      assert_select "p.font-medium", text: "Cette fiche de révision passe à revoir."
       assert_select "p", text: "Relis « Division cellulaire », puis obtiens au moins 15/20 à l'un de ses exercices."
       assert_select "a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']", text: "Revoir la fiche de révision"
     end
@@ -366,7 +393,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "h1", text: I18n.t("#{scope}.show.headline.success")
     assert_select "[data-controller='assessment--confetti']", 1
-    assert_select "#session_gap_outcome p.font-bold", text: gap_outcome("still_pending.message")
+    assert_select "#session_gap_outcome p.font-medium", text: gap_outcome("still_pending.message")
     assert_select "#session_gap_outcome p", text: "Pour lever « Division cellulaire », vise au moins 15/20."
     assert_select "#session_gap_outcome a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']",
                   text: "Revoir la fiche de révision"
@@ -383,7 +410,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     show remediation
 
     assert_select "*", text: /15\s*\/\s*20/
-    assert_select "#session_gap_outcome.bg-success-soft p.font-bold", text: "Fiche de révision levée !"
+    assert_select "#session_gap_outcome.bg-success-soft p.font-medium", text: "Fiche de révision levée !"
     assert_select "#session_gap_outcome a", 0
   end
 
@@ -395,7 +422,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     show remediation
 
     assert_select "#session_gap_outcome.bg-success-soft" do
-      assert_select "p.font-bold", text: "Fiche de révision levée !"
+      assert_select "p.font-medium", text: "Fiche de révision levée !"
       assert_select "p", text: "« Division cellulaire » n'est plus à revoir."
       assert_select "a", 0
     end

@@ -3,9 +3,9 @@ require "application_system_test_case"
 # CL-22, CL-10 (volet élève) — UDR-0011, UDR-0076 §3.2, UDR-0086 (ma-classe-eleve). L'élève ouvre « Ma classe » depuis le
 # menu de l'avatar, sans rechargement de page : plus de retour « Accueil », la carte de la classe sans code, les cours de
 # ses exercices assignés en bande défilante, 3 exercices assignés puis « Voir plus », ses exercices traités au meilleur
-# score ; sur ordinateur, les deux listes côte à côte et « Ma classe » actif dans le menu de gauche.
+# score ; sur ordinateur, les assignés à gauche (2/3), les traités à droite (1/3) et « Ma classe » actif dans le menu de gauche.
 class Classroom::StudentClassroomTest < ApplicationSystemTestCase
-  DESKTOP_VIEWPORT = [ 1280, 900 ].freeze
+  DESKTOP_VIEWPORT = [ 1440, 900 ].freeze
 
   setup do
     @classroom = create_classroom(name: "Tle D 1", school: create_school(name: "Lycée Classique"),
@@ -27,8 +27,8 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
   def tn(key) = I18n.t("shared.navigation.#{key}")
   def rect(id) = page.evaluate_script("document.getElementById(#{id.to_json}).getBoundingClientRect().toJSON()")
 
-  # CA-1, CA-5 : à 390 px, depuis le menu de l'avatar ; « Ma classe » en surbrillance, ni retour « Accueil » ni barre du bas.
-  test "at 390 px, from the avatar menu: no « Accueil » link, the classroom, 3 assigned exercises then « Voir plus », the score" do
+  # CA-1, CA-5 : à 390 px, depuis la carte de l'accueil (Lot D : le bandeau remplace l'en-tête) ; « Ma classe » en surbrillance, ni retour « Accueil » ni barre du bas.
+  test "at 390 px, from the home's card: no « Accueil » link, the classroom, 3 assigned exercises then « Voir plus », the score" do
     # Challenger : avec trois cours, la bande élargissait toute la page (485 px pour 390) ; seule la bande doit défiler.
     # Audit ux-pages-eleve (2026-10-06) : un titre d'exercice réel, tronqué sur une ligne, l'élargissait aussi (611 px).
     create_assignment(classroom: @classroom, assigned_at: 1.minute.ago, assignable: create_exercise(
@@ -43,16 +43,12 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
     with_mobile_viewport do
       visit student_home_path
       assert_no_page_reload do
-        find("header button#avatar-menu-button").click
-        within("#avatar-menu") { click_link tn(:classroom) }
+        find("#student_next_step a[href='#{student_classroom_path}']").click
         assert_current_path student_classroom_path
       end
 
       assert_no_selector "#main nav[aria-label='#{I18n.t('components.back_link.label')}']"
       assert_no_selector "nav.bottom-0"
-      find("header button#avatar-menu-button").click
-      assert_selector "#avatar-menu a[aria-current=page].bg-brand-soft[href='#{student_classroom_path}']", text: tn(:classroom)
-      page.send_keys(:escape)
 
       within "#student_classroom_header" do
         assert_selector "h2", text: "Tle D 1"
@@ -76,8 +72,8 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
     end
   end
 
-  # CA-7 : à 1 280 px, « Exercices assignés » et « Exercices traités » côte à côte, « Ma classe » actif à gauche.
-  test "at 1 280 px, the assigned and the treated exercises side by side, « Ma classe » active in the left menu" do
+  # CA-7, CA-E11 : à 1 440 px, « Exercices assignés » (2/3) et « Exercices traités » (1/3) côte à côte, « Ma classe » actif à gauche.
+  test "at 1 440 px, the assigned exercises at 2/3 and the treated ones at 1/3, « Ma classe » active in the left menu" do
     sign_in_as @student
 
     with_mobile_viewport(DESKTOP_VIEWPORT) do
@@ -88,6 +84,7 @@ class Classroom::StudentClassroomTest < ApplicationSystemTestCase
       treated = rect("student_classroom_treated")
       assert_in_delta assigned["top"], treated["top"], 1, "les deux listes ne sont pas sur la même ligne"
       assert_operator treated["left"], :>=, assigned["right"], "« Exercices traités » n'est pas à droite"
+      assert_in_delta assigned["width"], 2 * treated["width"] + 24, 2, "les colonnes ne sont pas 2/3 – 1/3"
       assert_operator rect("student_classroom")["width"], :<=, 960
     end
   end

@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+# Puts a pull request, or a branch, on the owner's machine to try it (chantier tester-pr-en-local): the code as it is on
+# origin, the dependencies and the migrations of that code, the fictitious accounts of db/seeds/development.rb, then
+# bin/dev. The code is checked out detached, so no local branch is left behind; `git switch -` comes back.
+#
+#   bin/tester-pr 275                  # the pull request no. 275
+#   bin/tester-pr feature/messagerie   # a branch
+#   bin/tester-pr 275 --telephone      # open to the local network: a phone on the same Wi-Fi reaches it
+#   bin/tester-pr 275 --reset          # the development database recreated (fictitious data only)
+#   bin/tester-pr 275 --demo           # plus three test schools: db/seeds/demo/trois_etablissements.rb (63 classrooms,
+#                                      # 35 to 45 students each, bivalent and multi-school teachers; seconds, idempotent),
+#                                      # and the complete lessons, published: db/seeds/demo/lecons_completes.rb (~1 min)
+#   bin/tester-pr 275 --activite       # plus a school whose students already worked: db/seeds/demo/saint_michel.rb
+#                                      # (about 20 minutes the first time, then idempotent)
+set -euo pipefail
+
+# The whole script is read before it runs: checking out another commit may change this very file.
+main() {
+  cd "$(dirname "$0")/.."
+
+  local target="" telephone=0 reset=0 demo=0 activity=0
+  for arg in "$@"; do
+    case "$arg" in
+      --telephone) telephone=1 ;;
+      --reset) reset=1 ;;
+      --demo) demo=1 ;;
+      --activite) activity=1 ;;
+      -*) usage ;;
+      *) [ -z "$target" ] || usage; target="$arg" ;;
+    esac
+  done
+  [ -n "$target" ] || usage
+
+  # A tracked change, or an untracked file the PR code would load or play (a migration not added yet), stops it.
+  local pending
+  pending="$(git status --porcelain --untracked-files=no; git status --porcelain --untracked-files=all -- app db config lib | grep '^??' || true)"
+  if [ -n "$pending" ]; then
+    echo "Des modifications ne sont pas commitées : commite-les ou mets-les de côté (git stash -u), puis relance." >&2
+    echo "$pending" >&2
+    exit 1
+  fi
+
+  # The branch to come back to, kept across runs: a second run starts detached, on the code of the previous PR.
+  local memo origin back
+  memo="$(git rev-parse --git-dir)/tester-pr-origin"
+  if origin="$(git symbolic-ref --short -q HEAD)"; then echo "$origin" >"$memo"; else origin="$(cat "$memo" 2>/dev/null || true)"; fi
+  back="git switch ${origin:--}"
+
+  local ref label
+  if [[ "$target" =~ ^[0-9]+$ ]]; then
+    ref="pull/$target/head" label="PR n° $target"
+  else
+    ref="$target" label="branche $target"
+  fi
+  git fetch --quiet origin "$ref" || { echo "Introuvable sur origin : $label." >&2; exit 1; }
+  git switch --quiet --detach FETCH_HEAD
+  # Whatever fails from here, the owner learns he stays on the code of the PR, and how to come back.
+  trap "echo 'Arrêt : tu restes sur le code de la $label. Pour revenir à ta branche : $back' >&2" EXIT
+  echo "== $label : $(git log -1 --format='%h %s')"
+
+  if [ "$reset" = 1 ]; then
+    # The database recreated from the schema of the PR, without playing its migrations on the current one first.
+    bin/setup --skip-server --skip-db
+    bin/rails db:reset
+  else
+    bin/setup --skip-server
+    if bin/rails db:migrate:status 2>/dev/null | grep -q "NO FILE"; then
+      echo "Attention : la base garde des migrations d'une autre branche. Si la PR se comporte mal, relance avec --reset."
+    fi
+  fi
+  # Idempotent: the fictitious accounts exist whatever the database held, and the TOTP code of the team prints.
+  bin/rails db:seed
+  [ "$demo" = 0 ] || { bin/rails runner db/seeds/demo/trois_etablissements.rb && bin/rails runner db/seeds/demo/lecons_completes.rb; }
+  [ "$activity" = 0 ] || bin/rails runner db/seeds/demo/saint_michel.rb
+
+  local port="${PORT:-3000}"
+  echo
+  echo "Ordinateur : http://localhost:$port"
+  if [ "$telephone" = 1 ]; then
+    local ip
+    # macOS, then the source address of the route out on Linux (hostname -I may list a Docker or WSL address first).
+    ip="$(ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1 2>/dev/null ||
+          ip route get 1.1.1.1 2>/dev/null | awk '{ for (i = 1; i < NF; i++) if ($i == "src") print $(i + 1) }' || true)"
+    echo "Téléphone (même Wi-Fi) : http://${ip:-<IP-de-l-ordinateur>}:$port"
+    export BINDING=0.0.0.0
+  fi
+  echo "Comptes fictifs, PIN 2468 : enseignant 0500000001, élève 0100000001, équipe 0700000000 (code TOTP ci-dessus)."
+  if [ "$demo" = 1 ]; then
+    echo "3 établissements de test, PIN 2468 : direction 0731000001 à 0733000001, enseignants 0531000001…, 0532000001…,"
+    echo "  0533000001…, élèves 013S00CCEE (ex. 0131000101 : établissement 1, 1re classe, 1er élève)."
+    echo "  Leçons complètes publiées (cours, fiches, exercices) de la 6ème à la Tle : docs/contenus/lecons-traitees."
+  fi
+  if [ "$activity" = 1 ]; then
+    echo "Collège Saint Michel, PIN 2468 : direction 0710000001 et 0710000002, enseignants de la Tle D 1 0510000001 à 0510000006,"
+    echo "  élèves de la Tle D 1 0110000001 à 0110000020."
+  fi
+  echo "Pour revenir à ta branche ensuite : $back"
+  echo
+  trap - EXIT
+  exec bin/dev
+}
+
+usage() {
+  echo "Usage : bin/tester-pr <numéro-de-PR | branche> [--telephone] [--reset] [--demo] [--activite]" >&2
+  exit 1
+}
+
+main "$@"

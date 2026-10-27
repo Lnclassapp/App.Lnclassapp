@@ -101,11 +101,15 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
 
   def check_expressions(table) = connection.check_constraints(table).map(&:expression).join("\n")
 
-  # IL-02 (ADR-0085 §4.1, Lot F): the classroom code is gone, its column, its index and its constraint with it.
-  test "IL-02: a classroom has no join code any more" do
-    assert_not_includes connection.columns("classrooms").map(&:name), "join_code"
-    assert_empty connection.indexes("classrooms").select { it.columns.include?("join_code") }
-    assert_no_match(/join_code/, check_expressions("classrooms"))
+  # CA-B1 (ADR-0109 §4, which amends the IL-02 of ADR-0085): the classroom code is back,
+  # 6 symbols, not null, unique, in the documented alphabet; the link token stays.
+  test "CA-B1: every classroom has a join code of exactly 6 symbols, unique, in the documented alphabet" do
+    column = connection.columns("classrooms").find { it.name == "join_code" }
+
+    assert_equal [ Entities::Classroom::JoinCode::LENGTH, false ], [ column.limit, column.null ]
+    assert_includes unique_indexes("classrooms"), [ [ "join_code" ], nil ]
+    assert_match(/join_code.*\[a-hjkmnp-z2-9\]\{6\}/, check_expressions("classrooms"))
+    assert_includes connection.columns("classrooms").map(&:name), "link_token"
   end
 
   test "CE-09: every school has a school code of exactly 6 symbols, unique, in the documented alphabet (ADR-0057)" do

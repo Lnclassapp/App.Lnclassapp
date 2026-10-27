@@ -1,10 +1,10 @@
 # 🔌 INFRA · Queries::Classroom::TeachingSelectionQuery
-# Rôle : classes actives de l'école principale et de l'année en cours, par niveau, chacune déclarée ou non ; onboarding fini ou non
+# Rôle : classes actives de l'école principale et de l'année en cours, par niveau, chacune déclarée ou non ; nom et sigle de l'école ; onboarding fini ou non
 # ADR  : 0026, 0030, 0041 · UDR : 0025
 module Queries
   module Classroom
     class TeachingSelectionQuery
-      Row = Data.define(:school_name, :onboarded, :levels) do
+      Row = Data.define(:school_name, :school_sigle, :onboarded, :levels) do
         def declared_count = levels.sum { |level| level.classrooms.count(&:declared) }
       end
       LevelRow = Data.define(:name, :classrooms)
@@ -19,7 +19,8 @@ module Queries
                                    .pluck(*COLUMNS)
         declared = Orm::TeacherClassroom.where(teacher_id:, classroom_id: classrooms.map { it[2] }).pluck(:classroom_id).to_set
 
-        Row.new(school_name: Orm::School.where(id: school_id).pick(:name), onboarded: onboarded?(teacher_id),
+        school_name, school_sigle = Orm::School.where(id: school_id).pick(:name, :sigle)
+        Row.new(school_name:, school_sigle: school_sigle.presence, onboarded: onboarded?(teacher_id),
                 levels: levels(classrooms, declared))
       end
 

@@ -28,9 +28,9 @@ Chiffres et preuves : [`docs/chantiers/sobriete-tokens/memo.md`](docs/chantiers/
 - **Index** ADR / UDR : générés par `script/docs/build_index` au commit de clôture, jamais édités à la main. Index des chantiers : modifié une seule fois, à la clôture.
 - **PR ou commit direct** : PR pour le code applicatif, `config/`, `db/`, hooks, `bin/`, `.github/`, `.claude/settings.json` ; commit direct sur `Develop` seulement pour de la documentation seule. Une PR par chantier.
 - **Pas de fusion sans preuve** : vers `Develop`, la ligne de preuve de `bin/ci-quiet` local est écrite dans la PR avant la fusion ; vers `Staging` et `main`, c'est le statut `ci` de GitHub (ADR-0069, ADR-0107).
-- **La CI suit ce que la PR touche** (ADR-0107) : entre deux lots, tests des fichiers touchés et `bin/system-changed` ; `bin/ci-quiet` une fois, sur le head final, après les revues. Il choisit le niveau (doc, pr, train), ne rejoue pas un code déjà vert et affiche la ligne de preuve à coller dans la PR. **La suite complète ne tourne qu'une fois par train** : sur GitHub, à la PR vers `Staging`, en tâches parallèles de 5 minutes au plus. Aucune tâche de CI ne dépasse 5 minutes.
+- **La CI suit ce que la PR touche** (ADR-0107) : entre deux lots, tests des fichiers touchés et `bin/system-changed` ; `bin/ci-quiet` une fois, sur le head final, après les revues. Il choisit le niveau (doc, pr, train), ne rejoue ni un code déjà vert ni une étape déjà verte pour ses entrées, et affiche la ligne de preuve à coller dans la PR. **Jamais `--full` vers `Develop`.** **La suite complète ne tourne qu'une fois par train** : sur GitHub, à la PR vers `Staging`, en tâches parallèles de 5 minutes au plus. Aucune tâche de CI ne dépasse 5 minutes.
 - **`bin/ci-quiet`** à la place de `bin/ci` pour les sessions d’agent : verdict, étapes en échec et 30 dernières lignes ; le journal complet est dans `tmp/ci.log`.
-- **Sous-agents de revue** (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) : une fois par PR, sur le diff final, et seulement au-delà de 150 lignes ou si un use case, une policy, une route ou un téléversement est touché.
+- **Sous-agents de revue** (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) : une fois par PR, sur le diff final, et seulement au-delà de 150 lignes ou si un use case, une policy, une route ou un téléversement est touché. Une revue tient en 5 minutes : 600 lignes de code au plus par agent, au-delà une part par contexte borné en parallèle ; on lui donne le verdict de la CI, qu'elle ne rejoue pas.
 - **Menace écrite d'abord** pour tout code qui lit un fichier envoyé par un utilisateur (image, import) : 6 corrections JPEG successives en ont montré le coût.
 - **Charger à la demande** : `docs/guide/architecture.md` et `glossaire.md` seulement si la tâche l'exige.
 
@@ -74,6 +74,7 @@ Le travail vit dans [`docs/chantiers/<slug>/`](docs/chantiers/). Un chantier san
 |---|---|
 | `bin/setup` | Setup complet de l'environnement (idempotent) |
 | `bin/dev` | Serveur de développement (Rails + watch assets) |
+| `bin/tester-pr <PR>` | Une PR sur la machine du porteur : code, migrations, comptes fictifs, `bin/dev` (`--telephone`, `--demo`) |
 | `bin/rails test` | Lance les tests |
 | `bin/ci` | Pipeline complet en local, comme la CI |
 | `bin/rubocop` | Vérifie le style Ruby (`-A` pour corriger) |

@@ -1,0 +1,106 @@
+# UDR-0135 : Inscription élève en trois étapes — code de classe d'abord, passage automatique, lien qui saute l'étape 1
+<!-- index
+titre: Inscription élève en trois étapes avec code de classe
+statut: Accepté *(porteur, 2026-10-23)*
+adr-lie: 0109
+problematique: L'inscription élève tient sur une page longue en trois rubriques et ne connaît que la cascade DRENA → classe et le lien ; l'élève dont le prof écrit un code au tableau n'a pas de voie directe. Elle devient trois écrans courts, ouverts par le code de classe, qui avancent seuls.
+-->
+
+| | |
+|---|---|
+| **Statut** | Accepté (porteur, 2026-10-23 : « 1. oui 2. oui 3. oui » ; choix du porteur le 2026-10-23, écran par écran) · ordinateur (§3.5 bis) ajouté le 2026-10-24 |
+| **Date** | 2026-10-23 |
+| **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
+| **ADR lié** | ADR-0109 (le code revient en base) |
+| **Amende** | [UDR-0088](0088-connexion-et-inscription-eleve-carte-bleue-et-rubriques-numerotees.md) (une page, rubriques numérotées) · [UDR-0081](0081-inscription-eleve-sans-code-de-classe.md) (cascade, lien de classe) · [UDR-0091](0091-choix-de-classe-eleve-trois-etapes-pastilles-et-cases.md) (choix de classe) |
+| **S'appuie sur** | UDR-0136 (jetons) |
+| **Remplacé par** | — |
+
+---
+
+## 1. Contexte
+
+Le pilote du 27 octobre passe par les contacts du porteur : un enseignant écrit un code au tableau ou partage un lien sur WhatsApp. Aujourd'hui l'élève sans lien doit traverser quatre listes (DRENA, établissement, niveau, classe) sur une page longue qui demande aussi ses informations et son code secret. Sur un petit téléphone, il fait défiler sans savoir où il en est.
+
+## 2. Décision
+
+1. **Trois écrans à la suite : 1. Ta classe → 2. Toi → 3. Ton code secret**, avec « Étape N sur 3 » et une barre en trois segments.
+2. **Le code de classe ouvre l'étape 1.** La case « Je n'ai pas de code » déplie la cascade actuelle, qui reste la voie de secours.
+3. **Le lien de classe saute l'étape 1** : l'élève arrive à l'étape 2 avec sa classe chargée.
+4. **Passage automatique aux étapes 1 et 2, sans bouton « Continuer »** (choix du porteur, contre la recommandation de garder « Continuer » à l'étape 2). La création du compte reste un geste volontaire : bouton « Créer mon compte » à l'étape 3.
+5. **Un seul formulaire découpé dans le navigateur**, sans nouvelle route : on avance et on recule sans rien perdre, l'envoi se fait à l'étape 3. C'est ce qui rend ce découpage tenable avant le 27.
+
+## 3. Règles d'implémentation
+
+### 3.1 Structure
+
+- Vue : `classroom/student_registrations/new.html.erb` et `_form.html.erb` (formulaire unique), `classroom/joins/new.html.erb` (même formulaire, classe chargée). Le formulaire contient trois `fieldset` `data-signup-steps-target="step"`, un seul visible à la fois.
+- Contrôleur Stimulus nouveau : `classroom/signup_steps_controller.js`.
+  - `data-signup-steps-start-value` : `1` (inscription), `2` (lien de classe valide).
+  - Actions : `next`, `back`, `goTo(step)`. Il met à jour « Étape N sur 3 », la barre et le titre, remet le focus sur le titre de l'étape, et annonce le changement dans une région `aria-live="polite"`.
+  - Sans JavaScript, les trois `fieldset` restent visibles l'un sous l'autre (page actuelle) : le formulaire marche toujours.
+- Haut de chaque écran : logo Lnclass à gauche, lien « Besoin d'aide ? » (`text-brand-strong`) à droite, puis la rangée « ‹ Retour » (étapes 2 et 3, sauf arrivée par lien) et « Étape N sur 3 » à droite, puis la barre.
+- **Carte « Bienvenue sur Lnclass »** (`bg-brand-strong`, texte blanc, 5,29:1) et titre « Créer ton compte élève » : seulement sur le premier écran que voit l'élève, l'étape 1, ou l'étape 2 quand il arrive par le lien. « Déjà un compte ? Se connecter » : même règle.
+
+### 3.2 Étape 1 — Ta classe
+
+- Titre « Ta classe » (16 px, graisse 500) ; sous le titre, 13 px `text-mute` : « Tu passes à la suite dès que ta classe est trouvée. »
+- Champ « Code de ta classe » : 6 caractères, majuscules automatiques, police mono, aide « 6 caractères, donnés par ton enseignant. », `autocomplete="off"`, `inputmode="text"`, `autocapitalize="characters"`.
+- Au 6ᵉ caractère : vérification serveur (route de vérification à débit limité, ADR du code). Pendant l'appel, l'indication « Vérification… » sous le champ.
+  - **Code reconnu** : on passe à l'étape 2 (voir §3.3, rappel de classe).
+  - **Code inconnu** : on reste, message sous le champ « Ce code ne correspond à aucune classe. Vérifie-le avec ton enseignant. » (`aria-describedby`, `aria-invalid="true"`).
+  - **Trop de tentatives** : « Trop de tentatives. Attends une minute, ou coche « Je n'ai pas de code ». »
+- Case « Je n'ai pas de code » : déplie la cascade actuelle (`class_picker_controller`, frames `picker_classrooms`), le champ code se masque. Toucher une classe disponible passe à l'étape 2. Une classe complète reste désactivée.
+
+### 3.3 Étape 2 — Toi
+
+- Titre « Toi » ; sous le titre : « Tu passes à la suite dès que tout est rempli. »
+- Si la classe vient du code ou du lien : carte de rappel en tête, « TA CLASSE » (12 px) · « 3e B » · « Collège Moderne 1 de Tiassalé », et le lien « Ce n'est pas ta classe ? › » qui ramène à l'étape 1 (code vidé, case décochée).
+- Champs inchangés : Nom, Prénom(s), Genre (deux boutons), Numéro de téléphone (10 chiffres, `phone_digits_controller`).
+- **Passage automatique** quand les quatre champs sont valides côté navigateur, **environ 1 s après la dernière frappe** (anti-rebond), jamais au milieu d'une saisie. Le clavier se ferme ; le focus va sur le titre de l'étape 3.
+- Arrivée par le lien : pas de « ‹ Retour » (aucune étape 1 derrière) ; carte de bienvenue et « Déjà un compte ? ».
+
+### 3.4 Étape 3 — Ton code secret
+
+- Titre « Ton code secret » ; champs Code secret (4 chiffres, œil) et Confirmation (`pin_match_controller`), puis `ui_button variant: :primary` « Créer mon compte », pleine largeur, 44 px.
+- « ‹ Retour » rend l'étape 2 avec ses champs intacts.
+
+### 3.5 Erreurs renvoyées par le serveur
+
+Le serveur renvoie la page en 422 comme aujourd'hui (`render_form`). Le contrôleur Stimulus ouvre **la première étape qui contient un champ en erreur** (classe → 1, nom/genre/numéro → 2, code secret → 3). Le refus général (`#student-registration-refusal`) s'affiche en haut de l'étape ouverte. 429 : message « Trop de tentatives » à l'étape 1. Lien de classe invalide, archivé ou régénéré : la page s'ouvre à l'étape 1, jamais sur une erreur.
+
+### 3.5 bis Sur ordinateur (≥ lg)
+
+Décidé par le porteur le 2026-10-24 (phase ordinateur, maquettes à 1440 et 1024 px), option B contre la colonne centrée recommandée.
+
+- **Deux colonnes** dans un cadre de 960 px centré, sous la rangée logo Lnclass · « Besoin d'aide ? » : à gauche un **panneau de 360 px**, à droite le formulaire de l'étape (440 px au plus), espacés de 40 px.
+- **Le panneau ne change pas d'une étape à l'autre** (porteur, contre la variante « bienvenue au premier écran seulement ») : titre « Bienvenue sur Lnclass » (18 px, 500) et phrase d'accueil, puis la **liste des trois étapes** (rond de 28 px numéroté ; coche quand l'étape est faite ; étape en cours en 16 px, 500), puis « Déjà un compte ? Se connecter » en bas. Hauteur minimale 540 px.
+- **Couleurs : `bg-brand-strong`, texte blanc** (porteur, contre `brand-soft` recommandé) ; ronds des étapes faites et en cours en blanc à chiffre `brand-strong`, étape à venir en contour blanc ; liens blancs soulignés. Contraste blanc sur `brand-strong` 5,29:1.
+- **La liste remplace la barre en trois segments** sur ordinateur ; « Étape N sur 3 » reste en haut à droite du formulaire, « ‹ Retour » à gauche (mêmes règles qu'au §3.1).
+- **Le rappel de classe passe dans le panneau**, sous l'étape 1 cochée : « 3e B · Collège Moderne 1 de Tiassalé » (13 px) et « Ce n'est pas ta classe ? › » ; il n'est pas répété au-dessus du formulaire.
+- La carte de bienvenue et le titre « Créer ton compte élève » du téléphone ne sont pas répétés dans la colonne du formulaire : le panneau les porte.
+- Cascade « Je n'ai pas de code » : dans la colonne du formulaire, tuiles inchangées.
+- Accessibilité : la liste des étapes est une `ol` avec `aria-current="step"` sur l'étape en cours ; la région `aria-live` du §3.8 reste la seule annonce.
+
+### 3.6 Jetons
+
+Uniquement les jetons de l'UDR-0136 ; bordures de champ `line-strong`, focus `brand-strong`. Graisse 500 au plus. Minimum 12 px.
+
+### 3.7 États obligatoires
+
+- **Vide** : étape 1, champ code vide.
+- **Chargement** : « Vérification… » sous le champ code ; bouton « Créer mon compte » désactivé avec « Création… » après l'envoi.
+- **Erreur** : code inconnu, trop de tentatives, erreurs de champ rouvrant leur étape (§3.5).
+- **Succès** : compte créé, redirection vers l'accueil (comportement actuel).
+
+### 3.8 Accessibilité
+
+- Chaque étape est un `fieldset` avec `legend` (le titre). L'étape cachée porte `hidden`, pas seulement une classe.
+- Le passage automatique est **annoncé avant** (phrase sous le titre) et **après** (région `aria-live`) ; il ne déplace jamais le focus pendant une frappe. Le retour arrière ne perd aucune saisie.
+- Cibles ≥ 44 px (« ‹ Retour », case à cocher, tuiles de classe). Contrastes de l'UDR palette.
+
+## 4. Conséquences
+
+- Le code de classe à 6 caractères revient : colonne, génération, affichage côté enseignant et vérification à débit limité font l'objet de l'ADR-0109 et d'une revue de sécurité (vérification énumérable, ID-07).
+- La même vérification de code sert à l'état « Choisis ta classe » de l'accueil élève (élève connecté sans classe).
+- Interdit : un bouton « Continuer » aux étapes 1 et 2, une création de compte sans geste de l'élève, une route par étape.

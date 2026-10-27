@@ -1,0 +1,13 @@
+<%# 🌐 UI · classroom/student_homes/next_step/_start — l'unique bouton d'une carte qui mène à un exercice : « Commencer » (POST) ou « Reprendre » %>
+<%# Rôle : pleine largeur de la colonne ; une session en cours se reprend par son lien, sinon la session démarre comme depuis Ma classe %>
+<%# UDR  : XXXX accueil élève §3.2 (6. bouton principal, 44 px), §3.8 %>
+<%# locals: (public_id:, label:, aria:, variant: :primary, session_id: nil) -%>
+<% if session_id %>
+  <%= ui_button label, href: exercise_session_path(session_id), variant:, full: true, icon: "arrow-path", "aria-label": aria, class: "mt-1" %>
+<% else %>
+  <%= button_to exercise_sessions_path(public_id), form_class: "block w-full",
+                class: class_names(ComponentsHelper::BUTTON_BASE, ComponentsHelper::BUTTON_SIZES[:md], ComponentsHelper::BUTTON_VARIANTS[variant], "mt-1 w-full"),
+                "aria-label": aria do %>
+    <%= ui_icon "play", size: :sm %><%= label %>
+  <% end %>
+<% end %>

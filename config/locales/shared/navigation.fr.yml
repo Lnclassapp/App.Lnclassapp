@@ -1,4 +1,4 @@
-# Shell applicatif par rôle : en-tête, navigation, accueil — UDR-0006, UDR-0052, UDR-0056, UDR-0068, UDR-0071, UDR-0074, UDR-0078, UDR-0080, UDR-0082, UDR-0084
+# Shell applicatif par rôle : en-tête, navigation, accueil — UDR-0006, UDR-0052, UDR-0056, UDR-0068, UDR-0071, UDR-0074, UDR-0078, UDR-0080, UDR-0082, UDR-0084, UDR-0132, UDR-0133, UDR-0134
 fr:
   layouts:
     shell:
@@ -25,21 +25,45 @@ fr:
       sign_out: "Se déconnecter"
       header:
         account: "Mon compte"
-      # UDR-0080 §3.1, §3.2 : panneau du compte de l'élève (site : <dialog> latérale ; app : page /students/menu)
+      # UDR-0080 §3.1, §3.2 : panneau du compte (site : <dialog> ; app : page /students/menu, /teachers/menu). Plein écran
+      # « Mon compte » pour les deux rôles (UDR élève §3.1, UDR enseignant §3.4). « Mon profil » et « Se déconnecter » reprennent
+      # shared.navigation.profile et .sign_out.
       account_panel:
         title: "Mon compte"
         open: "Ouvrir le menu du compte"
         label: "Menu du compte"
-        invite: "Inviter un collègue"   # UDR-0082 §3.2, enseignant
+        close: "Fermer"
+        # Entrées de l'élève (secret, mode sombre) et de l'enseignant (les quatre) ; UDR-0133 et UDR-0134, §3.1 et §3.4.
+        entries:
+          secret: "Modifier mon code secret"
+          school: "Mon établissement"
+          add_material: "Ajouter une matière"
+          add_school: "Ajouter un établissement"
+          dark_mode: "Mode sombre"
+        # Compteur sous « Ajouter une matière / un établissement » : sous le plafond, puis au plafond (l'entrée passe en gris
+        # et mène à l'écran de retrait).
+        counter:
+          under: "%{used} sur %{max}"
+          full:
+            materials: "%{used} sur %{max} · retirez-en une pour en ajouter"
+            schools: "%{used} sur %{max} · retirez-en un pour en ajouter"
+        # Requête coupée dans le panneau (réseau perdu pendant un retrait ou un changement d'écran) : message en tête du panneau.
+        request_failed: "La connexion a échoué. Vérifiez votre réseau, puis réessayez."
         # UDR-0098 §3.1 : entrée « Mes établissements » et rubrique « Établissement » (à partir de deux établissements)
         schools:
           link: "Mes établissements"
           title: "Établissement"
+          current_heading: "Établissement en cours"
           primary: "Principal"
           switch: "Passer à %{school}"
           current: "%{school}, établissement actuel"
-      # UDR-0084 §3.2 : menu de l'avatar de l'élève sur le web. Accueil, Cours, Ma classe, Mon profil et Se déconnecter
-      # reprennent les clés de shared.navigation ; « Besoin d'aide ? », shared.help_sheet.trigger ; le menu, account_panel.label.
+      # UDR-0132 §3.1, UDR enseignant §3.3 : bandeau des deux accueils (shared/navigation/_home_band) ; l'avatar
+      # ouvre « Mon compte », « Besoin d'aide ? » ouvre l'aide.
+      home_band:
+        account: "Mon compte, %{name}"
+        help: "Besoin d'aide ?"
+      # Lot E1 (mvp-teacher-student) : l'avatar de l'élève ouvre « Mon compte » (account_panel.title, entries.*, sign_out) ; `open`
+      # nomme le déclencheur. `history` et `add_photo` ne servent plus qu'à la branche élève de _account_panel, qu'aucune page ne rend.
       avatar_menu:
         open: "Mon compte, %{name}"
         history: "Mon historique"
@@ -106,6 +130,11 @@ fr:
           title: "Activités"
           subtitle: "Ce qui s'est passé récemment"
           empty: "Aucune activité récente"
+        # UDR enseignant §3.3 : l'historique des exercices échus (titre lu par les lecteurs d'écran seulement sur l'accueil)
+        history:
+          title: "Historique"
+          subtitle: "Les exercices échus de vos classes"
+          empty: "Aucun exercice échu pour l'instant"
         regions:
           title: "Régions éducatives"
           subtitle: "Les DRENA de Côte d'Ivoire"
