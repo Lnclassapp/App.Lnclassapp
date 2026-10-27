@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | exécution |
+| **Statut** | preuve |
 | **Ouvert le** | 2026-10-27 |
 | **Branche** | `fix/essential-images-instable` |
 | **Programme** | — |
@@ -57,7 +57,7 @@ Résultat : **rouge, « l'image est servie »**, le message du symptôme. Sans l
 - [x] Test au vert · suite du contexte borné au vert
 - [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
 - [x] Données déjà corrompues : réparées, ou dette explicitement notée au journal (aucune)
-- [ ] Challenger a rejoué les étapes de reproduction dans l'application
+- [x] Challenger a rejoué les étapes de reproduction dans l'application
 - [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
 - [x] `journal.md` : cause, trou de test comblé, effets de bord écartés
 
@@ -76,3 +76,4 @@ Résultat : **rouge, « l'image est servie »**, le message du symptôme. Sans l
 | Même ralentissement, test corrigé | vert |
 | Fichier entier, sans ralentissement | vert, trois fois |
 | Cas symétrique : image refusée (404) | rouge : « l'image est servie » |
+| Challenger (indépendant) | Test d'avant rouge avec 0,2, 0,5 et 2 s de retard ; corrigé vert avec 0,2 à 3 s, et deux fois sans retard ; 404 et corps non-image rouges aussitôt. **Validé** |

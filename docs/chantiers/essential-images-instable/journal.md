@@ -28,4 +28,4 @@ En une phrase sans les mots du symptôme : le test lit une seule fois une valeur
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| | | |
+| Une image `loading=lazy` hors de l'écran ne se charge pas : `decode()` n'y répondrait jamais (délai dépassé à 20 s, `ScriptTimeoutError`, jamais un faux vert). Ici l'image est à 388 px dans une fenêtre de 1400 px (vu par le challenger) | Sans effet aujourd'hui ; à revoir si le texte avant l'image s'allonge ou si le test passe à la taille téléphone (faire défiler jusqu'à l'image avant `decode()`) | — |
