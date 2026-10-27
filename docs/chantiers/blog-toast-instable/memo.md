@@ -60,7 +60,7 @@ Résultat : **le même échec, au même endroit, mot pour mot**. Sans l'étape 2
 - [x] Test au vert · suite du contexte borné au vert
 - [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
 - [x] Données déjà corrompues : réparées, ou dette explicitement notée au journal (aucune)
-- [ ] Challenger a rejoué les étapes de reproduction dans l'application
+- [x] Challenger a rejoué les étapes de reproduction dans l'application
 - [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
 - [x] `journal.md` : cause, trou de test comblé, effets de bord écartés
 
@@ -80,3 +80,4 @@ Résultat : **le même échec, au même endroit, mot pour mot**. Sans l'étape 2
 | **Seconde instabilité trouvée en route** : processeur du navigateur ralenti ×8 (CDP `Emulation.setCPUThrottlingRate`) pendant le dépôt d'une image 2000×1500 | rouge : `Selenium::WebDriver::Error::ScriptTimeoutError` dans `drop_generated_image` | vert |
 | Les deux fichiers entiers, sans ralentissement | — | 3 runs verts, deux fois |
 | Cas symétrique : toast retiré de `teams/articles/create.turbo_stream.erb` | — | rouge (vue remise en état) |
+| Challenger (indépendant) | Reproduction sur le code d'avant : envoi ralenti → 2 toasts introuvables ; processeur ×8 → `ScriptTimeoutError` 2/2. Branche : verte sous les mêmes ralentissements, et 2 fois sans ; toast retiré → rouge ; aucune autre attente de 2 s après un envoi. **Validé** |
