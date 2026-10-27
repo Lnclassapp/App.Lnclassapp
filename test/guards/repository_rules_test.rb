@@ -48,7 +48,7 @@ class RepositoryRulesTest < Minitest::Test
     assert_empty ruby_files("config/deploy*.yml", ".kamal/*", "bin/kamal"), "ADR-0052 : Kamal n'est pas repris"
   end
 
-  # IL-02 (ADR-0085, Lot F of inscription-eleve-sans-code), amended by ADR-XXXX (code-de-classe-a-six-caracteres): the classroom
+  # IL-02 (ADR-0085, Lot F of inscription-eleve-sans-code), amended by ADR-0109: the classroom
   # code is back, at 6 symbols, read by `Entities::Classroom::JoinCode`. What stays gone is the old code's rotation date and the
   # old way in (`JoinWithCode`): a code is never rotated on its own, it changes with the link.
   def test_the_old_classroom_join_code_stays_gone
@@ -56,7 +56,7 @@ class RepositoryRulesTest < Minitest::Test
       File.read(File.join(ROOT, file)).match?(/join_code_rotated_at|JoinWithCode|join_with_code/)
     end
 
-    assert_empty offenders, "ADR-0085 amendé par ADR-XXXX : le code de classe ne tourne pas seul, il change avec le lien : #{offenders.join(', ')}"
+    assert_empty offenders, "ADR-0085 amendé par ADR-0109 : le code de classe ne tourne pas seul, il change avec le lien : #{offenders.join(', ')}"
   end
 
   # A Yarn advisory is ignored only through this register, each with its date of re-examination (chantier

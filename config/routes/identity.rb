@@ -35,7 +35,7 @@ scope module: :identity do
     resource :contact, only: %i[edit update], controller: :profile_contacts
     resource :pin, only: %i[edit update], controller: :profile_pins
     resource :photo, only: %i[edit update destroy], controller: :profile_photos
-    # ADR-0103 §4.4 : les matières de l'enseignant dans son établissement courant. `show` (UDR-XXXX enseignant §3.4) : l'écran de
+    # ADR-0103 §4.4 : les matières de l'enseignant dans son établissement courant. `show` (UDR-0134 §3.4) : l'écran de
     # retrait, ouvert par « Ajouter une matière » à 3 sur 3 ; nom et chemin gelés par le Lot 0, vue et action du Lot H.
     resource :materials, only: %i[show edit update], controller: :profile_materials
   end

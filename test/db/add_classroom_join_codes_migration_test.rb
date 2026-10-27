@@ -1,7 +1,7 @@
 require "test_helper"
 require Rails.root.join("db/migrate/20261024090000_add_join_code_to_classrooms").to_s
 
-# CA-B1 (ADR-XXXX code-de-classe-a-six-caracteres §4, §6): on a live database, every classroom gets a code of 6 symbols,
+# CA-B1 (ADR-0109 §4, §6): on a live database, every classroom gets a code of 6 symbols,
 # unique, lower case, and the database refuses anything else. Each test runs in the rolled back transaction of the test:
 # PostgreSQL rolls the columns back with it.
 class AddClassroomJoinCodesMigrationTest < ActiveSupport::TestCase

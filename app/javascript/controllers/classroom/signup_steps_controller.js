@@ -31,8 +31,10 @@ export default class extends Controller {
     document.removeEventListener("turbo:morph", this.refresh)
   }
 
-  // Un re-rendu 422 est un morphing : le contrôleur reste branché, le serveur a dit quelle étape ouvrir.
+  // Un re-rendu 422 est un morphing : le contrôleur reste branché, le serveur a dit quelle étape ouvrir. Un passage à
+  // l'étape 3 encore en attente (le « change » du numéro au départ du focus) ne repasse pas par-dessus son erreur.
   refresh = () => {
+    clearTimeout(this.timer)
     this.current = this.startValue
     this.render()
     this.syncCode()

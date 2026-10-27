@@ -1,9 +1,9 @@
 <%# 🌐 UI · classroom/teaching_selections/_level_group — les classes d'un niveau %>
-<%# Rôle : carte jamais coupée entre deux colonnes (≥ lg), titrée par le niveau (rond d'icône) et son nombre de classes, une ligne par classe (bascule) %>
+<%# Rôle : carte jamais coupée entre deux colonnes (≥ lg), titrée par le niveau (rond d'icône) et son nombre de classes, lignes jointes de 52 px par classe (bascule, case à droite) %>
 <%# ADR  : 0030 · UDR : 0025, 0134 (§3.13) %>
 <div class="break-inside-avoid lg:mb-4">
   <%= ui_card title: level.name, subtitle: t(".classrooms", count: level.classrooms.size), icon: "academic-cap", heading: :h2 do %>
-    <ul class="grid gap-2 sm:grid-cols-2">
+    <ul class="divide-y divide-line overflow-hidden rounded-ln border border-line">
       <% level.classrooms.each do |classroom| %>
         <li><%= render "classroom/teachings/toggle", classroom: %></li>
       <% end %>
