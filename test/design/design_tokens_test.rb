@@ -186,11 +186,11 @@ class DesignTokensTest < ActiveSupport::TestCase
     assert_includes css, "transparent 1px 8px"
     %w[.sheet-page .sheet-h1 .sheet-h2 .sheet-box .sheet-btn .sheet-feedback .sheet-bubble].each { assert_includes css, "#{it} {", it }
 
-    fonts = css.scan(%r{url\("(/fonts/[^"]+\.woff2)"\)}).flatten
+    fonts = css.scan(%r{url\("/([^"/]+\.woff2)"\)}).flatten.grep(/kalam|source-serif/)
     assert_equal %w[kalam-latin-400-normal kalam-latin-700-normal source-serif-4-latin-wght-italic source-serif-4-latin-wght-normal],
                  fonts.map { File.basename(it, ".woff2") }.sort
-    fonts.each { assert Rails.public_path.join(it.delete_prefix("/")).file?, "#{it} manque dans public/" }
-    assert Rails.public_path.join("fonts/LICENSE-OFL.txt").file?
+    fonts.each { assert Rails.application.assets.load_path.find(it), "#{it} manque dans app/assets/fonts/" }
+    assert Rails.root.join("app/assets/fonts/LICENSE-OFL.txt").file?
     assert_no_match %r{https?://|googleapis|gstatic}, css, "ADR-0049 : aucune ressource tierce"
   end
 
@@ -203,7 +203,10 @@ class DesignTokensTest < ActiveSupport::TestCase
   test "the sheet imports one file per kind family, written by its own lot" do
     css = Rails.root.join("app/assets/stylesheets/course_sheet.css").read
 
-    assert_equal %w[./course_sheet/argument.css ./course_sheet/exercises.css ./course_sheet/lens.css ./course_sheet/reading.css ./course_sheet/thales_figure.css], css.scan(/@import url\("([^"]+)"\);/).flatten.sort
+    imports = css.scan(/@import url\("([^"]+)"\);/).flatten
+    assert_equal %w[./course_sheet/exercises.css ./course_sheet/reading.css ./course_sheet/thales_figure.css], imports.sort
+    # Une feuille importée mais absente part en 404 sur chaque fiche : le lot qui livre une famille ajoute son import.
+    imports.each { assert Rails.root.join("app/assets/stylesheets", it).file?, "#{it} est importée mais n'existe pas" }
     assert_operator css.index("@import"), :<, css.index("@font-face")
   end
 
