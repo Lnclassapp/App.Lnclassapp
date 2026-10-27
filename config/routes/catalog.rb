@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes du contexte catalog (lecture)
 # Rôle : catalogue, cours et fiches essentielles, adressés par slug ; pages publiques Niveau, Série et Matière, sans compte
-# ADR  : 0029, 0035, 0099 (§4.3), 0105, XXXX (fiche de cours)
+# ADR  : 0029, 0035, 0099 (§4.3), 0105, 0110 (fiche de cours)
 get "courses", to: "catalog/courses#index", as: :courses # gelé
 get "courses/:slug", to: "catalog/courses#show", as: :course
 get "courses/:course_slug/essentials/:slug", to: "catalog/essentials#show", as: :course_essential

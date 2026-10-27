@@ -1,6 +1,6 @@
 # 🌐 UI · Catalog::CourseSheetTextHelper — le balisage en ligne d'un texte de fiche de cours
 # Rôle : `sheet_text` échappe tout, puis ne rend que `[[clé|mot]]` (mot du lexique cliquable), `**gras**` et `*italique*` ; `$…$` reste à KaTeX
-# ADR  : XXXX-fiche-de-cours-en-donnees-importees (contenu-en-blocs, chantier 318) · UDR : XXXX-fiche-de-cours-a-l-identique-des-maquettes
+# ADR  : 0110-fiche-de-cours-en-donnees-importees (contenu-en-blocs, chantier 318) · UDR : 0137-fiche-de-cours-a-l-identique-des-maquettes
 module Catalog
   module CourseSheetTextHelper
     MATH = /(\$[^$]+\$)/

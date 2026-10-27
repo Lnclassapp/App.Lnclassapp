@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::SheetDocument
 # Rôle : valide le document d'une fiche de cours (pages, sections, blocs, lexique) lu comme un fichier hostile
-# ADR  : XXXX-fiche-de-cours-en-donnees-importees (contenu-en-blocs, #318), 0039
+# ADR  : 0110-fiche-de-cours-en-donnees-importees (contenu-en-blocs, #318), 0039
 module Entities
   module Catalog
     class SheetDocument

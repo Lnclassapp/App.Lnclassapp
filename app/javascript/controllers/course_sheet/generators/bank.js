@@ -1,6 +1,6 @@
 // ⚡ FRONT · generators/bank — générateur « banque d'énoncés » de « Je m'entraîne » et règle numérique commune des fiches
 // Rôle : tire un énoncé de la banque du document ; exporte parseNumber/isNumericCorrect/formatFr (même règle que Entities::Catalog::NumericAnswer)
-// ADR  : XXXX-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs) · interface de générateur : create(block) → { next() → {text, answer, solution, unit, ask?} }
+// ADR  : 0110-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs) · interface de générateur : create(block) → { next() → {text, answer, solution, unit, ask?} }
 
 // Interface d'un générateur (Lot D : generators/thales_ratio.js l'implémente) : le fichier exporte `kind` (le `kind` du bloc `practice`)
 // et `create(block)` qui rend un objet à méthode `next()`. `next()` rend { text, answer (nombre), solution, unit ("cm"), ask? ("AN") } ;

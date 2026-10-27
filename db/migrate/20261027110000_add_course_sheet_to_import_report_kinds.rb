@@ -1,4 +1,4 @@
-# ADR-XXXX-fiche-de-cours-en-donnees-importees: the course sheet becomes an import kind, next to the essentials (ADR-0039).
+# ADR-0110: the course sheet becomes an import kind, next to the essentials (ADR-0039).
 class AddCourseSheetToImportReportKinds < ActiveRecord::Migration[8.1]
   KINDS = %w[schools course_tree essentials exercises classrooms drenas school_codes classroom_links].freeze
 

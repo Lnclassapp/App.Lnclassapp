@@ -1,6 +1,6 @@
 # 🔌 INFRASTRUCTURE · Repositories::Catalog::CourseSheetRepository
 # Rôle : traduit Orm::CourseSheet (document jsonb) ↔ Entities::Catalog::CourseSheet ; une fiche par leçon
-# ADR  : XXXX-fiche-de-cours-en-donnees-importees (contenu-en-blocs, #318)
+# ADR  : 0110-fiche-de-cours-en-donnees-importees (contenu-en-blocs, #318)
 module Repositories
   module Catalog
     class CourseSheetRepository

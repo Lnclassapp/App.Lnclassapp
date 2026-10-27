@@ -7,9 +7,9 @@
 
 | Point | Décision | Statut |
 |---|---|---|
-| Où vit le contenu d'une fiche | Un document de blocs `jsonb` par leçon (`course_sheets`), importé au format `lnclass.course-sheet` v1, rendu par un partial par type de bloc | Retenu par le pilote — [ADR-XXXX](../../decisions/adr/XXXX-fiche-de-cours-en-donnees-importees.md) |
+| Où vit le contenu d'une fiche | Un document de blocs `jsonb` par leçon (`course_sheets`), importé au format `lnclass.course-sheet` v1, rendu par un partial par type de bloc | Retenu par le pilote — [ADR-0110](../../decisions/adr/0110-fiche-de-cours-en-donnees-importees.md) |
 | Figure propre à une fiche | `kind` en liste fermée : un partial et un contrôleur Stimulus par `kind`, réglages dans les données, bornés par le schéma | Retenu par le pilote — même ADR |
-| Rendu sous 1 000 px | Proposition : même design, pages fluides (détail dans l'[UDR-XXXX](../../decisions/udr/XXXX-fiche-de-cours-a-l-identique-des-maquettes.md) § 4) | Retenu par Touré pour le test (2026-10-27), à confirmer par le porteur — Lot G, phase 1 |
+| Rendu sous 1 000 px | Proposition : même design, pages fluides (détail dans l'[UDR-0137](../../decisions/udr/0137-fiche-de-cours-a-l-identique-des-maquettes.md) § 4) | Retenu par Touré pour le test (2026-10-27), à confirmer par le porteur — Lot G, phase 1 |
 | Nom à l'écran | « Fiche de cours » par défaut | **En attente du porteur** — Lot H |
 
 Le libellé « Fiche de cours » est une valeur de locale : si le porteur choisit un autre nom, seule cette valeur change (Lot H).

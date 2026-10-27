@@ -1,6 +1,6 @@
 // ⚡ FRONT · generators/thales_ratio — générateur « Entraînement illimité » de la fiche Thalès : un énoncé de proportionnalité tiré au hasard
 // Rôle : tire une configuration (triangle ou papillon), un rapport k et la longueur à calculer (AN, MN ou AC) ; mêmes listes et mêmes textes que la maquette (genNew)
-// ADR  : XXXX-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs) · interface : voir generators/bank.js (create(block) → { next() → {text, answer, solution, unit, ask} })
+// ADR  : 0110-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs) · interface : voir generators/bank.js (create(block) → { next() → {text, answer, solution, unit, ask} })
 import { formatFr } from "./bank"
 
 export const kind = "thales_ratio"

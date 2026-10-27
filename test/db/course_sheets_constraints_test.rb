@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX (contenu-en-blocs, #318) : ce que la table garantit seule, sans passer par l'entité.
+# ADR-0110 (contenu-en-blocs, #318) : ce que la table garantit seule, sans passer par l'entité.
 class CourseSheetsConstraintsTest < ActiveSupport::TestCase
   test "la fiche de référence s'écrit et se relit, document compris" do
     sheet = create_course_sheet.reload

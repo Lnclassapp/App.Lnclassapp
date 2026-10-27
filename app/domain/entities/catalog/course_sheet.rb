@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::CourseSheet
 # Rôle : la fiche de cours d'une leçon, un document de blocs sous un des trois thèmes ; une seule par leçon
-# ADR  : XXXX-fiche-de-cours-en-donnees-importees (contenu-en-blocs, #318)
+# ADR  : 0110-fiche-de-cours-en-donnees-importees (contenu-en-blocs, #318)
 module Entities
   module Catalog
     class CourseSheet

@@ -41,7 +41,7 @@ module Entities
         Definition.new(kind: "drenas", format: "lnclass.drenas", version: VERSION, roots_key: "drenas",
                        target_key: nil, target_required: false, max_roots: 500,
                        policy: Policies::School::ManageSchoolPolicy),
-        # Une fiche de cours en blocs : un seul document par fichier, 1 Mo au plus (ADR-XXXX, #318). max_roots compte le contenu de l'enveloppe.
+        # Une fiche de cours en blocs : un seul document par fichier, 1 Mo au plus (ADR-0110, #318). max_roots compte le contenu de l'enveloppe.
         Definition.new(kind: "course_sheet", format: "lnclass.course-sheet", version: VERSION, roots_key: "sheet",
                        target_key: "course", target_required: true, max_roots: 1,
                        policy: Policies::Catalog::ManageContentPolicy, max_total_bytes: 1024 * 1024)

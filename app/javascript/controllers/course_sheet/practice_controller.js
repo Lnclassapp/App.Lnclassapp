@@ -1,6 +1,6 @@
 // ⚡ FRONT · course_sheet/practice_controller — « Je m'entraîne » : un énoncé tiré d'un générateur, Vérifier, solution, nouvel exercice, score
 // Rôle : juge la saisie (±0,011, Entrée vérifie), compte chaque énoncé une seule fois dans « ok / total » ; les générateurs sont dans generators/
-// ADR  : XXXX-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs) · interface : generators/bank.js (un fichier par `kind`, trouvé par glob, rien à enregistrer)
+// ADR  : 0110-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs) · interface : generators/bank.js (un fichier par `kind`, trouvé par glob, rien à enregistrer)
 import { Controller } from "@hotwired/stimulus"
 import generators from "./generators/*.js"
 import { isNumericCorrect, TOLERANCE } from "./generators/bank"

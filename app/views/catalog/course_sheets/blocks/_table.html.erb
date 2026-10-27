@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/course_sheets/blocks/_table — un tableau de la fiche : légende facultative, en-têtes, lignes %>
 <%# Rôle : `block` {caption?, headers[], rows[][]} ; le Lot G le passe en cartes sous 640 px (`data-label` : l'en-tête de la colonne) %>
-<%# ADR  : XXXX-fiche-de-cours-en-donnees-importees · UDR : XXXX-fiche-de-cours-a-l-identique-des-maquettes %>
+<%# ADR  : 0110-fiche-de-cours-en-donnees-importees · UDR : 0137-fiche-de-cours-a-l-identique-des-maquettes %>
 <table class="sheet-table">
   <% if block["caption"].present? %><caption class="sheet-caption"><%= block["caption"] %></caption><% end %>
   <thead>

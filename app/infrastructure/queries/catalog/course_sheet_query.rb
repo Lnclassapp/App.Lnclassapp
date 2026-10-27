@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Catalog::CourseSheetQuery
 # Rôle : la fiche de cours d'une leçon (thème, pages, lexique) avec le nom et le statut de la leçon ; lecture seule
-# ADR  : XXXX-fiche-de-cours-en-donnees-importees (contenu-en-blocs, #318) · UDR : XXXX-fiche-de-cours-a-l-identique-des-maquettes
+# ADR  : 0110-fiche-de-cours-en-donnees-importees (contenu-en-blocs, #318) · UDR : 0137-fiche-de-cours-a-l-identique-des-maquettes
 module Queries
   module Catalog
     class CourseSheetQuery

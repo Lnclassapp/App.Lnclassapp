@@ -1,4 +1,4 @@
-# ADR-XXXX : Une fiche de cours est un document de blocs importé, rendu par des composants communs et une liste fermée de figures
+# ADR-0110 : Une fiche de cours est un document de blocs importé, rendu par des composants communs et une liste fermée de figures
 <!-- index
 titre: Fiche de cours en données importées, figures en liste fermée
 statut: Proposé

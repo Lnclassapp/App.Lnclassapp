@@ -1,6 +1,6 @@
 // ⚡ FRONT · course_sheet/thales_figure_controller — la figure interactive de Thalès : A, B, C, M et N se déplacent à la souris, au doigt ou au clavier
 // Rôle : M et N glissent sur [AB) et [AC) (ou suivent l'un l'autre si (MN) // (BC) est imposé), les mesures, les rapports et la conclusion se recalculent
-// ADR  : XXXX-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs) · formules de la maquette Fiche Thales.dc.html (renderVals) ; sans JavaScript, le serveur dessine la position de départ
+// ADR  : 0110-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs) · formules de la maquette Fiche Thales.dc.html (renderVals) ; sans JavaScript, le serveur dessine la position de départ
 
 import { Controller } from "@hotwired/stimulus"
 

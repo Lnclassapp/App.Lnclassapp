@@ -1,6 +1,6 @@
 require "test_helper"
 
-# CA-1 to CA-3, ADR-XXXX (contenu-en-blocs, #318): the course sheet adapter on the real engine and repositories. A sheet
+# CA-1 to CA-3, ADR-0110 (contenu-en-blocs, #318): the course sheet adapter on the real engine and repositories. A sheet
 # arrives whole on its lesson, or not at all; an existing sheet is skipped and never touched.
 module UseCases
   module Catalog

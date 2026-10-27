@@ -2,7 +2,7 @@ require "test_helper"
 
 module Entities
   module Catalog
-    # ADR-XXXX (contenu-en-blocs) : le document d'une fiche de cours se lit comme un fichier hostile.
+    # ADR-0110 (contenu-en-blocs) : le document d'une fiche de cours se lit comme un fichier hostile.
     class SheetDocumentTest < ActiveSupport::TestCase
       REFERENCE = Rails.root.join("test/fixtures/files/course_sheets/reference.json")
 

@@ -1,6 +1,6 @@
 // ⚡ FRONT · course_sheet/glossary_controller — lexique de la fiche de cours : bulle près du mot touché, liste « Lexique », aide
 // Rôle : la bulle se place près du clic (même règle que la maquette), se ferme au défilement, au clic ailleurs et à Échap ; texte brut seulement
-// ADR  : XXXX-fiche-de-cours-en-donnees-importees · UDR : XXXX-fiche-de-cours-a-l-identique-des-maquettes
+// ADR  : 0110-fiche-de-cours-en-donnees-importees · UDR : 0137-fiche-de-cours-a-l-identique-des-maquettes
 import { Controller } from "@hotwired/stimulus"
 
 const LIST = "-list"

@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/course_sheets/kinds/_thales_figure — la figure interactive de Thalès : cinq points déplaçables, mesures, rapports, réciproque %>
 <%# Rôle : `block` {kind: thales_figure, params: a_x a_y b_x b_y c_x c_y k_m k_n} ; rendue dans sa position de départ sans JavaScript, thales_figure_controller la déplace %>
-<%# ADR  : XXXX-fiche-de-cours-en-donnees-importees (chantier 318) · UDR : XXXX-fiche-de-cours-a-l-identique-des-maquettes · pas d'attribut style, positions par attributs SVG %>
+<%# ADR  : 0110-fiche-de-cours-en-donnees-importees (chantier 318) · UDR : 0137-fiche-de-cours-a-l-identique-des-maquettes · pas d'attribut style, positions par attributs SVG %>
 <%
   ctrl = "course-sheet--thales-figure"
   params = block["params"].is_a?(Hash) ? block["params"] : {}

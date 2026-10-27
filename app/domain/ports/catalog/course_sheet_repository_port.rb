@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::CourseSheetRepositoryPort
 # Rôle : contrat de persistance de la fiche de cours d'une leçon (gelé par le Lot 0, contenu-en-blocs)
-# ADR  : XXXX-fiche-de-cours-en-donnees-importees
+# ADR  : 0110-fiche-de-cours-en-donnees-importees
 module Ports
   module Catalog
     module CourseSheetRepositoryPort

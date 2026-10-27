@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::NumericAnswer
 # Rôle : réponse numérique attendue d'un exercice de fiche de cours ; lit la saisie de l'élève (virgule, point, espaces, fraction a/b) et la juge à ±0,011
-# ADR  : XXXX-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs) · même règle que parseNumber/isNumericCorrect de generators/bank.js
+# ADR  : 0110-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs) · même règle que parseNumber/isNumericCorrect de generators/bank.js
 module Entities
   module Catalog
     class NumericAnswer

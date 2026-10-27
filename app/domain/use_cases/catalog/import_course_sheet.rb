@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::ImportCourseSheet
 # Rôle : adaptateur d'import d'une fiche de cours (document de blocs) sur sa leçon ; entière ou refusée, jamais écrasée
-# ADR  : XXXX-fiche-de-cours-en-donnees-importees (contenu-en-blocs, #318), 0028, 0039
+# ADR  : 0110-fiche-de-cours-en-donnees-importees (contenu-en-blocs, #318), 0028, 0039
 module UseCases
   module Catalog
     class ImportCourseSheet

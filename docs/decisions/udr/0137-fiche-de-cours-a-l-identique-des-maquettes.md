@@ -1,8 +1,8 @@
-# UDR-XXXX : La fiche de cours reprend les maquettes à l'identique, dans un habillage à part
+# UDR-0137 : La fiche de cours reprend les maquettes à l'identique, dans un habillage à part
 <!-- index
 titre: Fiche de cours à l'identique des maquettes
 statut: Proposé
-adr-lie: ADR-XXXX-fiche-de-cours-en-donnees-importees
+adr-lie: ADR-0110
 problematique: Les maquettes des fiches de cours (Seyès, Kalam, Source Serif 4, couleurs chaudes par fiche, graisse 700) contredisent l'UDR-0136 et les règles de `test/design/design_tokens_test.rb` ; il faut une exception bornée à l'écran de la fiche
 -->
 
@@ -11,7 +11,7 @@ problematique: Les maquettes des fiches de cours (Seyès, Kalam, Source Serif 4,
 | **Statut** | Proposé — exception à l'UDR-0136 accordée par Touré le 2026-10-27 pour le test, à confirmer par le porteur ; nom à l'écran en attente du porteur (§ 4) |
 | **Date** | 2026-10-27 |
 | **Chantier** | `docs/chantiers/contenu-en-blocs` (#318) |
-| **ADR lié** | ADR-XXXX-fiche-de-cours-en-donnees-importees |
+| **ADR lié** | ADR-0110 |
 | **Remplacé par** | — |
 
 ---

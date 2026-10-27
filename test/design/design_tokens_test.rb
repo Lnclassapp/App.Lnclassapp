@@ -37,7 +37,7 @@ class DesignTokensTest < ActiveSupport::TestCase
   # token de point de rupture. Seule cette variante est admise ; toute autre valeur entre crochets reste refusée.
   SANCTIONED_VARIANT = /(?<![\w-])min-\[700px\]:/
 
-  # UDR-XXXX (contenu-en-blocs, #318) : l'écran de la fiche de cours reprend les maquettes (Seyès, Kalam, Source Serif 4,
+  # UDR-0137 (contenu-en-blocs, #318) : l'écran de la fiche de cours reprend les maquettes (Seyès, Kalam, Source Serif 4,
   # graisse 700) dans un habillage à part. L'exception ne vaut que pour ces trois endroits et seulement pour les règles
   # « une seule police », « palette froide » et « graisse 500 » : couleurs hexadécimales, attribut `style`, valeurs
   # arbitraires, palette par défaut, rayons, ombres et échelle d'espacement restent refusés partout, ces dossiers compris.
@@ -168,7 +168,7 @@ class DesignTokensTest < ActiveSupport::TestCase
     offences = sources.reject { self.class.sheet_exception?(relative(it)) }
                       .select { it.read.match?(SHEET_FONTS) }.map { relative(it) }
 
-    assert_empty offences, "Kalam et Source Serif 4 sont réservées à la fiche de cours (UDR-XXXX) :\n#{offences.join("\n")}"
+    assert_empty offences, "Kalam et Source Serif 4 sont réservées à la fiche de cours (UDR-0137) :\n#{offences.join("\n")}"
     assert_match SHEET_FONTS, "font-family: Kalam"
   end
 

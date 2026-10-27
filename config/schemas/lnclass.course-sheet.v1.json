@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Import d'une fiche de cours, version 1 (ADR-XXXX contenu-en-blocs, UDR-XXXX)",
+  "title": "Import d'une fiche de cours, version 1 (ADR-0110 contenu-en-blocs, UDR-0137)",
   "description": "Enveloppe { format, version, course, theme, pages[], glossary }. course est le slug de la leçon cible. Le document stocké est { pages, glossary } : Entities::Catalog::SheetDocument en porte les mêmes règles (un test les confronte) et les contrôles croisés que le schéma ne sait pas dire (mot du lexique cité mais absent, identifiants de champ uniques, index de réponse dans les options, taille totale de 1 Mo). Aucun HTML, aucune URL ; kind en liste fermée ; paramètres bornés.",
   "type": "object",
   "required": [

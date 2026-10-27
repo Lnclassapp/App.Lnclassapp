@@ -5,7 +5,7 @@
 
 ## 1. Contexte
 
-Le contenu d'une leçon n'est qu'un texte mis en forme ; le porteur a décidé le 2026-10-27 que les 3 fiches maquettées (Thalès, Lentilles, Texte argumentatif) deviennent le cahier des charges, au pixel près. Le chantier livre la fiche de cours d'une leçon : un document de blocs importé ([ADR-XXXX](../../decisions/adr/XXXX-fiche-de-cours-en-donnees-importees.md)), rendu dans l'habillage des maquettes ([UDR-XXXX](../../decisions/udr/XXXX-fiche-de-cours-a-l-identique-des-maquettes.md)), avec ses figures, ses exercices corrigés dans la page, « Je m'entraîne » et la rédaction libre. Les 3 fiches sont livrées en données et importées.
+Le contenu d'une leçon n'est qu'un texte mis en forme ; le porteur a décidé le 2026-10-27 que les 3 fiches maquettées (Thalès, Lentilles, Texte argumentatif) deviennent le cahier des charges, au pixel près. Le chantier livre la fiche de cours d'une leçon : un document de blocs importé ([ADR-0110](../../decisions/adr/0110-fiche-de-cours-en-donnees-importees.md)), rendu dans l'habillage des maquettes ([UDR-0137](../../decisions/udr/0137-fiche-de-cours-a-l-identique-des-maquettes.md)), avec ses figures, ses exercices corrigés dans la page, « Je m'entraîne » et la rédaction libre. Les 3 fiches sont livrées en données et importées.
 
 ## 2. Acteurs et permissions
 
@@ -126,8 +126,8 @@ Alors design_tokens_test refuse toujours une couleur hexadécimale, Kalam ou Sou
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX — Fiche de cours en données importées, figures en liste fermée.
-- UDR-XXXX — Fiche de cours à l'identique des maquettes (nom à l'écran et téléphone en attente du porteur).
+- ADR-0110 — Fiche de cours en données importées, figures en liste fermée.
+- UDR-0137 — Fiche de cours à l'identique des maquettes (nom à l'écran et téléphone en attente du porteur).
 
 ## 7. Mesures
 

@@ -1,8 +1,8 @@
 /*
-  🌐 UI · course_sheet.css — habillage de la fiche de cours, isolé du reste de l'application (UDR-XXXX).
+  🌐 UI · course_sheet.css — habillage de la fiche de cours, isolé du reste de l'application (UDR-0137).
   Rôle : jetons des maquettes en variables CSS, 3 thèmes, papier Seyès, composants communs `.sheet-*`. Chargé seulement sur
          l'écran de la fiche (stylesheet_link_tag "course_sheet"), servi tel quel par Propshaft, sans Tailwind.
-  ADR  : XXXX-fiche-de-cours-en-donnees-importees · source des valeurs : docs/design/fiches-cours/ (gabarit <x-dc>).
+  ADR  : 0110-fiche-de-cours-en-donnees-importees · source des valeurs : docs/design/fiches-cours/ (gabarit <x-dc>).
   Règle d'un lot : une règle propre à un kind s'écrit dans course_sheet/<kind>.css, importé ici, jamais dans ce fichier.
 */
 
@@ -627,7 +627,7 @@
   background: var(--sheet-white);
 }
 
-/* ---- Sous 1 000 px : pages fluides (UDR-XXXX § 4) ------------------------------------------------------------------------
+/* ---- Sous 1 000 px : pages fluides (UDR-0137 § 4) ------------------------------------------------------------------------
    Mêmes couleurs, mêmes polices, même rythme Seyès (8 et 32 px). Plus de largeur ni de hauteur A4, marges intérieures de 16 px.
    Marge rouge : conservée, mais rapprochée du bord (8 px au lieu de 74 px), sinon elle mangerait un cinquième de l'écran. */
 

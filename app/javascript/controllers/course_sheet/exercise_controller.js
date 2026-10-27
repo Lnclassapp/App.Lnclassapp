@@ -1,6 +1,6 @@
 // ⚡ FRONT · course_sheet/exercise_controller — exercice corrigé d'une fiche de cours : Vérifier, retours par champ, Indice, Correction
 // Rôle : juge les champs numériques (±0,011, virgule) et à choix (choix figé au premier clic), affiche « juste / à revoir / à compléter » et le message global
-// ADR  : XXXX-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs) · UDR : XXXX-fiche-de-cours-a-l-identique-des-maquettes
+// ADR  : 0110-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs) · UDR : 0137-fiche-de-cours-a-l-identique-des-maquettes
 import { Controller } from "@hotwired/stimulus"
 import { isNumericCorrect, TOLERANCE } from "./generators/bank"
 
