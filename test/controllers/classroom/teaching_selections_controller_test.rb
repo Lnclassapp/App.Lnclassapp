@@ -39,6 +39,50 @@ class Classroom::TeachingSelectionsControllerTest < ActionDispatch::IntegrationT
     assert_select "main a[href='#{teacher_invite_path}']", 0
   end
 
+  test "UDR enseignant §3.13: each row is 52 px with the name on the left and the checkbox on the right, its state read by aria-pressed" do
+    declare(@third_b)
+    sign_in_as @teacher
+
+    get teacher_classrooms_path
+
+    assert_select "form#teaching_#{@sixth1.public_id} button[aria-pressed=false].min-h-13" do
+      assert_select "> span:first-child", text: "6ème 1"
+      assert_select "> span:last-child.border-line.bg-white:not(.bg-brand-strong)", 1
+      assert_select "svg", 0
+    end
+    assert_select "form#teaching_#{@third_b.public_id} button[aria-pressed=true]" do
+      assert_select "> span:first-child", text: "3ème B"
+      assert_select "> span:last-child.bg-brand-strong svg", 1
+    end
+  end
+
+  test "UDR enseignant §3.13: the counter text is medium and brand-strong inside the soft pill" do
+    declare(@sixth1)
+    sign_in_as @teacher
+
+    get teacher_classrooms_path
+
+    assert_select ".bg-brand-soft > #teaching_counter.font-medium.text-brand-strong:not(.text-mute)", text: "1 classe cochée"
+  end
+
+  test "UDR enseignant §3.13: the sentence names the school by its sigle, else by its name; also on the 422 page" do
+    @school.update!(sigle: "LCA")
+    sign_in_as @teacher
+
+    get teacher_classrooms_path
+
+    assert_select "header p", text: tl("index.subtitle_sigle", school: "LCA")
+    assert_select "header p", text: /Lycée Classique/, count: 0
+
+    post teacher_onboarding_path
+    assert_response :unprocessable_entity
+    assert_select "header p", text: tl("index.subtitle_sigle", school: "LCA")
+
+    @school.update!(sigle: nil)
+    get teacher_classrooms_path
+    assert_select "header p", text: tl("index.subtitle", school: "Lycée Classique d'Abidjan")
+  end
+
   test "an onboarded teacher keeps the page to change the classrooms, without « Terminer », and signs in to /teachers" do
     onboarded = create_teacher(school: @school)
     post session_path, params: { session: { contact: onboarded.contact, pin: "2468" } }
