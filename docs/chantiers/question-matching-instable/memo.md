@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | cadrage |
+| **Statut** | exécution |
 | **Ouvert le** | 2026-10-27 |
 | **Branche** | `fix/question-matching-instable` |
 | **Programme** | — |
@@ -53,19 +53,28 @@ Résultat le 2026-10-27, sur `550c09f` : 14 runs, **4 échecs** à chaque passag
 - [x] Symptôme et étapes de reproduction écrits dans `memo.md`
 - [x] Bug reproduit **à la main** dans l'application avant toute ligne de code (ici : la suite, avec des ids forcés bas ; le bug est dans le test)
 - [x] Rapport root cause rendu : fichier, ligne, chaîne d'appels, raison du trou de test
-- [ ] Test de reproduction écrit **avant** le correctif
-- [ ] Test lancé et **rouge**, pour la bonne raison (message vérifié)
-- [ ] Correctif appliqué dans la couche de la **cause**, pas du symptôme
-- [ ] Test au vert · suite du contexte borné au vert
-- [ ] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
+- [x] Test de reproduction écrit **avant** le correctif
+- [x] Test lancé et **rouge**, pour la bonne raison (message vérifié)
+- [x] Correctif appliqué dans la couche de la **cause**, pas du symptôme
+- [x] Test au vert · suite du contexte borné au vert
+- [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
 - [x] Données déjà corrompues : réparées, ou dette explicitement notée au journal (aucune)
 - [ ] Challenger a rejoué les étapes de reproduction dans l'application
-- [ ] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
-- [ ] `journal.md` : cause, trou de test comblé, effets de bord écartés
+- [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
+- [x] `journal.md` : cause, trou de test comblé, effets de bord écartés
 
 ## Contrat d'exécution (lot unique)
 
 1. **Test de reproduction** : les deux fichiers forcent dans leur `setup` des ids de réponse bas (séquence relancée à 1), pour toujours jouer le pire cas. Lancés, ils sont **rouges** avec les messages ci-dessus.
-2. **Correctif dans le test**, qui est la couche de la cause : comparer les ids aux **valeurs d'attribut** de la page (égalité exacte, ou segment d'URL), en écartant les seuls indices d'affichage, dont la liste exacte (`""`, `"0"`, `"1"`, `"2"`…) est déjà vérifiée à part. Jamais le texte entier de la page.
+2. **Correctif dans le test**, qui est la couche de la cause. *Amendé à l'exécution* : avec un id valant 1, aucune assertion ne peut distinguer une fuite d'une position d'affichage. Les deux fichiers relancent donc la séquence à `914_273_001`, un nombre qu'aucune page ne contient ; les assertions restent celles du lot G (voir le journal).
 3. Vert, puis la suite `test/integration/assessment` et `test/controllers/assessment` au vert.
 4. **Cas symétrique** : une fuite réelle (un `data-answer-id` ajouté à la vue, le temps d'un essai) fait toujours échouer les deux tests.
+
+## Résultat (2026-10-27)
+
+| Vérification | Résultat |
+|---|---|
+| Reproduction (séquence à 1) | 14 runs, **4 échecs** : `Expected ["1", "2", "3"] to be empty`, `Expected /\b1\b/ to not match` |
+| Correctif (séquence à 914 273 001) | 14 runs, 0 échec ; 5 graines aléatoires, 0 échec |
+| Cas symétrique : la vue poste les ids de réponse | 14 runs, **4 échecs** (`Expected ["914273001", …] to be empty`, `/\b914273001\b/` trouvé) ; vue remise en état |
+| Suite `assessment` (hors système) | 504 runs, 0 échec |

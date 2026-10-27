@@ -4,11 +4,11 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-10-27 | Les tests forcent des ids bas plutôt que de les éviter | Le pire cas joué à chaque passage : un test d'absence de fuite doit tenir quand l'id ressemble à tout | non |
+| 2026-10-27 | Les tests forcent des ids **distinctifs** (`914_273_001`), pas des ids bas | Prévu au cadrage : ids bas et assertions plus fines. Au test rouge, impasse : si l'id vaut 1 et la page poste 1, rien ne dit si c'est une position ou une fuite. Un test d'absence de fuite n'a de sens que si l'id ne ressemble à rien d'autre ; on le rend tel par construction, et les assertions du lot G redeviennent exactes | non |
 
 ## Ce qui a dérapé
 
-- …
+- Le plan du cadrage (réécrire les assertions) ne tenait pas, voir la décision ci-dessus. Le test de reproduction (ids à 1) l'a montré avant toute ligne de correctif.
 
 ## Ce qu'on a appris sur la codebase
 
@@ -19,6 +19,12 @@
 3. **Pourquoi rien ne l'a vu** : en local, les ids du fichier joué seul sont grands, ou du moins différents des nombres de la page. Ils ne sont petits que selon l'ordre des tests du processus (graine aléatoire, partage entre workers), d'où un rouge rare, jamais reproduit en rejouant le fichier.
 
 En une phrase sans les mots du symptôme : les deux tests prennent pour un identifiant tout entier de la page, alors que la page contient légitimement des petits entiers.
+
+**Trou de test comblé** : les deux fichiers ne dépendent plus de l'état de la séquence ; le cas qui échouait au hasard ne peut plus se produire, et une vraie fuite échoue toujours (vérifié en faisant poster les ids par les vues).
+
+**Effets de bord écartés** : `ALTER SEQUENCE` n'est pas annulé par la transaction du test, mais chaque worker a sa base et aucun autre test ne suppose un id de réponse précis (pas de fixtures `answers`) ; la suite `assessment` reste verte.
+
+**À retenir** : un test qui affirme « tel id n'apparaît pas » doit d'abord rendre l'id impossible à confondre ; sinon il teste la chance.
 
 ## Dette laissée derrière
 

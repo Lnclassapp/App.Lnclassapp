@@ -4,10 +4,14 @@ require "test_helper"
 # mélangée ; la page poste, pour chaque élément de gauche, l'indice d'affichage choisi, jamais un id (CA-9). Trois paires
 # justes : juste (CA-8). « Ton choix » rend les paires de l'élève. L'équipe saisit trois paires (CA-13).
 class Assessment::QuestionMatchingTest < ActionDispatch::IntegrationTest
+  DISTINCT_ANSWER_ID = 914_273_001
   TURBO = { "Accept" => "text/vnd.turbo-stream.html, text/html, application/xhtml+xml" }.freeze
   PAIRS = [ %w[3(x+1) 3x+3], %w[2(x-4) 2x-8], %w[5(2+x) 10+5x] ].freeze
 
   setup do
+    # Des ids de réponse qu'aucun nombre de la page ne peut valoir (position, « 1 sur 2 », tracé d'icône) : sans cela, un
+    # id petit passe pour une fuite, et une vraie fuite d'un id petit passerait pour une position.
+    Orm::Answer.connection.execute("ALTER SEQUENCE #{Orm::Answer.sequence_name} RESTART WITH #{DISTINCT_ANSWER_ID}")
     @exercise = create_exercise(title: "Développer", questions: 0)
     @question = create_kind_question(exercise: @exercise, question_type: "matching", answers: PAIRS, content: "Relie.")
     create_kind_question(exercise: @exercise, question_type: "matching", answers: [ %w[a 1], %w[b 2], %w[c 3] ], content: "Encore.")
