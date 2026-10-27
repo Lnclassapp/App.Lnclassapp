@@ -1,0 +1,47 @@
+<%# 🌐 UI · catalog/course_sheets/_page — une page de la fiche : en-tête facultatif, sections numérotées de bout en bout, pied « n / total » %>
+<%# Rôle : `page` (Hash du document), `number`, `total`, `section_offset` (sections des pages d'avant) ; la 1re page porte « Lexique » et « Explications simples » %>
+<%# ADR  : XXXX-fiche-de-cours-en-donnees-importees · UDR : XXXX-fiche-de-cours-a-l-identique-des-maquettes %>
+<% header = page["header"] %>
+<%= tag.div class: "sheet-page", data: { screen_label: t("catalog.course_sheets.page_label", number:) } do %>
+  <div class="sheet-page-body">
+    <% if header || number == 1 %>
+      <header class="sheet-header">
+        <% if header %>
+          <div class="sheet-eyebrow">
+            <span><%= header["eyebrow_left"] %></span><span><%= header["eyebrow_right"] %></span>
+          </div>
+          <h1 class="sheet-h1"><%= header["title"] %></h1>
+          <div class="sheet-rule"></div>
+          <div class="sheet-rule-thin"></div>
+          <p class="sheet-intro"><%= sheet_text(header["intro"], glossary: @sheet.glossary) %></p>
+        <% end %>
+        <% if number == 1 %>
+          <div class="sheet-toolbar">
+            <%# La phrase entière ouvre l'aide : le libellé est une valeur de locale d'un seul tenant. %>
+            <span class="sheet-text">
+              <button type="button" class="sheet-word" data-action="course-sheet--glossary#open"
+                      data-course-sheet--glossary-key-param="-help"><%= t("catalog.course_sheets.glossary.hint") %></button>
+            </span>
+            <div class="sheet-toolbar-actions">
+              <button type="button" class="sheet-toggle" aria-pressed="true" data-action="course-sheet--simple-toggle#toggle"
+                      data-course-sheet--simple-toggle-target="button"><%= t("catalog.course_sheets.simple.label_on") %></button>
+              <button type="button" class="sheet-toggle" data-action="course-sheet--glossary#open"
+                      data-course-sheet--glossary-key-param="-list"><%= t("catalog.course_sheets.glossary.button") %></button>
+            </div>
+          </div>
+        <% end %>
+      </header>
+    <% end %>
+
+    <% page.fetch("sections", []).each_with_index do |section, index| %>
+      <section class="sheet-section">
+        <h2 class="sheet-h2"><span class="sheet-h2-number"><%= section_offset + index + 1 %>.</span> <%= sheet_text(section["title"], glossary: @sheet.glossary) %></h2>
+        <% section.fetch("blocks", []).each do |block| %>
+          <%= render "catalog/course_sheets/block", block: %>
+        <% end %>
+      </section>
+    <% end %>
+
+    <footer class="sheet-page-footer"><%= t("catalog.course_sheets.page_counter", number:, total:) %></footer>
+  </div>
+<% end %>

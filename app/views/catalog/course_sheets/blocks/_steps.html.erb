@@ -1,0 +1,11 @@
+<%# 🌐 UI · catalog/course_sheets/blocks/_steps — une méthode en étapes numérotées, dans l'encadré violet « méthode » %>
+<%# Rôle : `block` {label?, items[]} %>
+<%# ADR  : XXXX-fiche-de-cours-en-donnees-importees · UDR : XXXX-fiche-de-cours-a-l-identique-des-maquettes %>
+<div class="sheet-box" data-tone="method">
+  <% if block["label"].present? %><span class="sheet-box-label"><%= block["label"] %></span><% end %>
+  <ol class="sheet-steps">
+    <% block.fetch("items", []).each do |item| %>
+      <li><%= sheet_text(item, glossary: @sheet.glossary) %></li>
+    <% end %>
+  </ol>
+</div>

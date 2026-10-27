@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/show — page d'un cours (CA-04, CA-10), pour tous les rôles connectés %>
 <%# Rôle : retour « Cours » (UDR-0054 §3.2), badges, actions du rôle, contenu riche sous KaTeX, fiches essentielles (élève : 3 puis « Voir plus ») ; morphing (B2, B4) %>
-<%# ADR  : 0028, 0035, 0051, 0090 · UDR : 0006, 0007, 0013, 0054, 0057 %>
+<%# ADR  : 0028, 0035, 0051, 0090, XXXX-fiche-de-cours-en-donnees-importees · UDR : 0006, 0007, 0013, 0054, 0057, XXXX-fiche-de-cours-a-l-identique-des-maquettes %>
 <% course = @detail.course %>
 <% team = !@status_record.nil? %>
 <% student = current_actor.student? %>
@@ -21,6 +21,13 @@
           <%= ui_subject_badge course.material_name, category: course.material_category %>
           <%= ui_badge [ course.level_name, course.series_name ].compact.join(" ") %>
         </div>
+        <%# Contenu-en-blocs (chantier 318) : le lien n'existe que si la leçon a une fiche de cours importée. %>
+        <% if Queries::Catalog::CourseSheetQuery.new.exists?(course_slug: course.slug) %>
+          <div>
+            <%= ui_button t("catalog.course_sheets.name"), variant: :secondary, href: course_sheet_path(course.slug),
+                                                         icon: "document-text", id: "course_sheet_link" %>
+          </div>
+        <% end %>
       </div>
       <%= render "role_actions", course:, status_record: @status_record %>
     </div>
