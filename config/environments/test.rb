@@ -68,4 +68,9 @@ Rails.application.configure do
     Bullet.bullet_logger = true
     Bullet.raise         = true
   end
+
+  # Chantier ci-rejeu-cible : l'inscription avance seule 1 s après le dernier champ valide (signup_steps_controller,
+  # valeur `delay`). Les tests système l'attendent à chaque inscription ; 100 ms ici, la production garde 1 s
+  # (l'attribut n'est rendu que s'il est réglé).
+  config.x.signup_steps_delay_ms = 100
 end

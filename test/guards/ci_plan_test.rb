@@ -67,7 +67,7 @@ class CiPlanTest < Minitest::Test
     assert_includes unit_parts("&&"), "unit", "la suite unitaire, seule dans sa part"
     assert_includes unit_parts("||"), "unit"
     (1..PERF_PARTS).each { assert_includes unit_parts("&&"), "perf:#{it}/#{PERF_PARTS}" }
-    assert_equal CI_PLAN.steps_for("perf").last.command.scan(%r{test/performance/\S+}).sort, CI_PLAN.split("perf", PERF_PARTS).flatten.sort
+    assert_equal CI_PLAN.steps_for("perf").last.command.scan(%r{test/performance/\S+_test\.rb}).uniq.sort, CI_PLAN.split("perf", PERF_PARTS).flatten.sort
     full = unit_parts("&&").join(",")
     partial = unit_parts("||").join(",")
     groups = ->(selection) { selection.split(",").map { it.sub(/:.*/, "") }.uniq }
@@ -147,7 +147,7 @@ class CiPlanTest < Minitest::Test
   end
 
   # The import performance (≈ 1 min 30) plays locally only when the tree moved on the paths that can change it, always
-  # under CI (GitHub), and whenever git cannot compare. The condition is the shell one of the step, played here in a
+  # on GitHub, and whenever git cannot compare. The condition is the shell one of the step, played here in a
   # throwaway repository whose `bin/rails` is replaced by `echo` : the step prints « test » when it plays.
   def test_the_import_performance_plays_under_ci_on_a_difference_or_when_git_cannot_compare
     perf = CI_PLAN.steps_for("perf").last.command
@@ -163,7 +163,10 @@ class CiPlanTest < Minitest::Test
       File.write(File.join(repo, "app/views/page.erb"), "x")
       git(repo, "add", "-A")
       assert_skipped run_perf(perf, repo), "un chemin hors de la liste la saute encore"
-      assert_played run_perf(perf, repo, "CI" => "true"), "sous CI (GitHub), elle joue"
+      github = run_perf(perf, repo, "GITHUB_ACTIONS" => "true")
+      assert_played github, "sur GitHub, elle joue"
+      CiPlan.files("test/performance/**/*_test.rb").grep_v(/_budget_test/).each { assert_includes github, it, "sur GitHub, toute la perf" }
+      assert_skipped run_perf(perf, repo, "CI" => "true"), "bin/ci pose CI=true partout : CI ne distingue pas GitHub"
 
       FileUtils.mkdir_p(File.join(repo, "script/ci"))
       File.write(File.join(repo, "script/ci/test_timings.yml"), "x")
@@ -184,6 +187,27 @@ class CiPlanTest < Minitest::Test
         FileUtils.rm_f(File.join(repo, path, "touched.rb"))
       end
 
+      # Chantier ci-rejeu-cible: a change to performance tests alone plays those tests alone.
+      target, other = CiPlan.files("test/performance/**/*_test.rb").grep_v(/_budget_test/).sort.first(2)
+      FileUtils.mkdir_p(File.join(repo, File.dirname(target)))
+      File.write(File.join(repo, target), "x")
+      git(repo, "add", "-A")
+      output = run_perf(perf, repo)
+      assert_match(/^test #{Regexp.escape(target)} -v$/, output, "seul le test de perf changé joue")
+      refute_includes output, other
+      FileUtils.mkdir_p(File.join(repo, "app/domain"))
+      File.write(File.join(repo, "app/domain/touched.rb"), "x")
+      git(repo, "add", "-A")
+      assert_includes run_perf(perf, repo), other, "un test de perf et le code qu'il mesure : tout joue"
+      git(repo, "rm", "-q", "-f", "--cached", "app/domain/touched.rb", target)
+      FileUtils.rm_f([ File.join(repo, "app/domain/touched.rb"), File.join(repo, target) ])
+      budget = CiPlan.files("test/performance/**/*_budget_test.rb").first
+      FileUtils.mkdir_p(File.join(repo, File.dirname(budget)))
+      File.write(File.join(repo, budget), "x")
+      git(repo, "add", "-A")
+      assert_skipped run_perf(perf, repo), "un budget d'écran seul ne joue rien : il ne tourne jamais dans bin/ci"
+      git(repo, "rm", "-q", "-f", "--cached", budget)
+
       git(repo, "update-ref", "-d", "refs/remotes/origin/Develop")
       assert_played run_perf(perf, repo), "sans origin/Develop, elle joue (fail-safe)"
     end
@@ -191,6 +215,11 @@ class CiPlanTest < Minitest::Test
 
   # ADR-0069 : Dependabot follows the road of any change, Develop then the promotions, one grouped pull request
   # per ecosystem (17 of the 43 runs of 2026-10-01 were its eight pull requests and their merges on main).
+  # bin/ci-quiet keys each step on its inputs: a name it does not know would fail there alone, not in bin/ci.
+  def test_each_step_names_inputs_bin_ci_quiet_knows
+    CI_PLAN.steps_for(nil).map(&:inputs).grep(Symbol).each { assert CiScope::INPUTS.key?(it), it.to_s }
+  end
+
   def test_dependabot_targets_develop_with_one_grouped_pull_request
     updates = YAML.safe_load_file(File.join(GITHUB, "dependabot.yml")).fetch("updates")
 
@@ -271,7 +300,7 @@ class CiPlanTest < Minitest::Test
   end
 
   def run_perf(command, repo, env = {})
-    Open3.capture2e(clean_git_env.merge("CI" => nil).merge(env), "sh", "-c", command.gsub("bin/rails", "echo"), chdir: repo).first
+    Open3.capture2e(clean_git_env.merge("CI" => nil, "GITHUB_ACTIONS" => nil).merge(env), "sh", "-c", command.gsub("bin/rails", "echo"), chdir: repo).first
   end
 
   def assert_played(output, message) = assert_match(/^test test\//, output, message)

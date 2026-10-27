@@ -13,7 +13,8 @@
       data-controller="classroom--signup-steps" data-classroom--signup-steps-start-value="<%= start %>"
       data-classroom--signup-steps-counter-value="<%= t("classroom.student_registrations.form.step_counter", n: "%{n}") %>"
       data-classroom--signup-steps-announce-value="<%= t("classroom.student_registrations.form.step_announce", n: "%{n}", title: "%{title}") %>"
-      data-classroom--signup-steps-code-url-value="<%= classroom_code_path("__code__") %>">
+      data-classroom--signup-steps-code-url-value="<%= classroom_code_path("__code__") %>"
+      <%= tag.attributes("data-classroom--signup-steps-delay-value": Rails.configuration.x.signup_steps_delay_ms) %>>
   <div id="signup-header" class="flex min-h-bar items-center justify-between">
     <%= link_to root_path, "aria-label": t("shared.auth_welcome.logo_home"),
                            class: "flex min-h-tap items-center rounded-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" do %>

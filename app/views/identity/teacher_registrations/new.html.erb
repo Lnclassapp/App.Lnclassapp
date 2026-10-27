@@ -13,7 +13,8 @@
      {}
    else
      { controller: steps, "#{steps}-start-value": start, "#{steps}-counter-value": t(".step_counter", n: "%{n}"),
-       "#{steps}-announce-value": t(".step_announce", n: "%{n}", title: "%{title}") }
+       "#{steps}-announce-value": t(".step_announce", n: "%{n}", title: "%{title}"),
+       "#{steps}-delay-value": Rails.configuration.x.signup_steps_delay_ms }.compact
    end %>
 <%# UDR enseignant §3.14 (option A du porteur, 2026-10-26) : dès lg, la barre du haut de l'enseignant (filet, logo, « Lnclass », « Besoin d'aide ? »,
     sans avatar) au-dessus des deux colonnes, qui se partagent le reste de la hauteur ; sous lg, rien ne change. %>
