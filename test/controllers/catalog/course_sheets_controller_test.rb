@@ -132,4 +132,66 @@ class Catalog::CourseSheetsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "a[href='#{sheet_path(other)}']", count: 0
   end
+
+  test "the table is readable as cards on a phone: each cell carries the label of its column" do
+    sign_in_as @student
+
+    get sheet_path
+
+    assert_select "table.sheet-table td[data-label]"
+    assert_select "table.sheet-table td[data-label='Triangle']"
+  end
+
+  test "the exercises of a sheet are given their fields, buttons and interface texts" do
+    exercise = { "type" => "exercise", "title" => "Exercice 4", "prompt" => "Calculer AN.",
+                 "fields" => [
+                   { "id" => "an", "input" => "numeric", "label" => "AN =", "answer" => 3.6 },
+                   { "id" => "mot", "input" => "choice", "label" => "Connecteur", "options" => [ "car", "donc" ], "answer" => 0, "frozen" => true }
+                 ],
+                 "hint" => "Écris d'abord les rapports.", "correction" => "AN = 3,6 cm." }
+    practice = { "type" => "practice", "kind" => "bank", "title" => "Je m'entraîne",
+                 "bank" => [ { "prompt" => "Calculer 2 + 2.", "answer" => 4, "solution" => "2 + 2 = 4." } ] }
+    Orm::CourseSheet.where(id: @sheet.id).update_all(document: { "pages" => [ { "sections" => [ { "title" => "Exercices", "blocks" => [ exercise, practice ] } ] } ], "glossary" => {} })
+    sign_in_as @student
+
+    get sheet_path
+
+    assert_select ".sheet-card .sheet-card-title", text: "Exercice 4"
+    assert_select "input.sheet-input[data-field-id=an][data-input=numeric][data-answer='3.6']"
+    assert_select "[data-input=choice][data-field-id=mot][data-frozen=true] button", 2
+    assert_select "button", text: I18n.t("catalog.course_sheets.exercise.check")
+    assert_select "button[aria-expanded=false]", text: I18n.t("catalog.course_sheets.exercise.hint")
+    assert_select "button[aria-expanded=false]", text: I18n.t("catalog.course_sheets.exercise.correction")
+    assert_select "[hidden]", text: /Écris d'abord les rapports\./
+    assert_select ".sheet-practice button", text: I18n.t("catalog.course_sheets.practice.check")
+    assert_select ".sheet-practice", text: /#{Regexp.escape(I18n.t("catalog.course_sheets.practice.score", ok: 0, total: 0))}/
+  end
+
+  test "the Thalès sheet of the seeds renders its figure in the initial position, with exercises and generator" do
+    course = create_course(name: "Propriétés de Thalès dans un triangle", level: create_level(name: "3ème"))
+    create_course_sheet(course:, document: JSON.parse(Rails.root.join("db/seeds/data/course_sheets/thales.json").read))
+    sign_in_as create_student_for(course)
+
+    get sheet_path(course)
+
+    figure = "[data-controller~='course-sheet--thales-figure']"
+    assert_response :success
+    assert_select figure, 1
+    assert_select "#{figure}[data-course-sheet--thales-figure-a-x-value='70'][data-course-sheet--thales-figure-a-y-value='165']"
+    assert_select "#{figure}[data-course-sheet--thales-figure-b-x-value='360'][data-course-sheet--thales-figure-b-y-value='55']"
+    assert_select "#{figure}[data-course-sheet--thales-figure-c-x-value='345'][data-course-sheet--thales-figure-c-y-value='285']"
+    assert_select "#{figure}[data-course-sheet--thales-figure-k-m-value='0.45'][data-course-sheet--thales-figure-k-n-value='0.45']"
+    assert_select "#{figure} [data-role=config]", text: I18n.t("catalog.course_sheets.kinds.thales_figure.config_triangle")
+    assert_select "#{figure} [data-role=status]", text: I18n.t("catalog.course_sheets.kinds.thales_figure.status_locked")
+    assert_select "#{figure} [data-ratio]", count: 3
+    assert_select "#{figure} [data-ratio]", text: "0,45", count: 3
+    assert_equal [ "7,8", "7,5", "5,8" ], css_select("#{figure} [data-cell]").select { %w[AB AC BC].include?(it["data-cell"]) }.map { it.text.strip }
+    assert_equal %w[A B C M N], css_select("#{figure} svg text").map { it.text.strip }
+    assert_select "#{figure} circle[data-hit]", 5
+    assert_select "#{figure} button", text: I18n.t("catalog.course_sheets.kinds.thales_figure.lock_free")
+    assert_select "#{figure} button", text: I18n.t("catalog.course_sheets.figure.reset")
+    assert_select "input[data-field-id=e4an]"
+    assert_select "input[data-field-id=e4mn]"
+    assert_select "section[data-controller~='course-sheet--practice']"
+  end
 end
