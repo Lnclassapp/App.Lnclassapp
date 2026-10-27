@@ -5,6 +5,7 @@ import { Controller } from "@hotwired/stimulus"
 
 const LIST = "-list"
 const HELP = "-help"
+const DRAWER = "(max-width: 639px)" // sous 640 px, le lexique s'ouvre en tiroir en bas de l'écran (CSS : course_sheet/reading.css)
 
 export default class extends Controller {
   static targets = [ "bubble", "title", "list" ]
@@ -49,6 +50,11 @@ export default class extends Controller {
     }
     this.bubbleTarget.hidden = false
     this.place(key === LIST, x, y)
+    if (this.isDrawer()) this.bubbleTarget.querySelector(".sheet-bubble-close")?.focus({ preventScroll: true })
+  }
+
+  isDrawer() {
+    return window.matchMedia(DRAWER).matches
   }
 
   allWords() {
@@ -92,6 +98,7 @@ export default class extends Controller {
   place(isList, x, y) {
     this.lastX = x
     this.lastY = y
+    if (this.isDrawer()) return // le tiroir est collé en bas de l'écran : pas de position à calculer
     const width = window.innerWidth
     const height = window.innerHeight
     const left = Math.max(8, Math.min(x - 20, width - 326))
@@ -109,7 +116,9 @@ export default class extends Controller {
     return { x: rect.left, y: rect.top }
   }
 
+  // Le tiroir reste ouvert quand la page défile (la barre d'adresse d'un téléphone fait défiler) ; la bulle, elle, se ferme.
   onScroll(event) {
+    if (this.isDrawer()) return
     if (this.hasBubbleTarget && this.bubbleTarget.contains(event.target)) return
     this.close()
   }

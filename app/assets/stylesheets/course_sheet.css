@@ -6,11 +6,11 @@
   Règle d'un lot : une règle propre à un kind s'écrit dans course_sheet/<kind>.css, importé ici, jamais dans ce fichier.
 */
 
-@import "./course_sheet/reading.css";
-@import "./course_sheet/exercises.css";
-@import "./course_sheet/thales_figure.css";
-@import "./course_sheet/lens.css";
-@import "./course_sheet/argument.css";
+@import url("./course_sheet/reading.css");
+@import url("./course_sheet/exercises.css");
+@import url("./course_sheet/thales_figure.css");
+@import url("./course_sheet/lens.css");
+@import url("./course_sheet/argument.css");
 
 /* ---- Polices hébergées par Lnclass (OFL, sous-ensemble latin) : ADR-0049 interdit toute police tierce ---------------- */
 
@@ -137,6 +137,16 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* Le fond du thème couvre tout l'écran, pas seulement la colonne du shell où vit la fiche */
+.sheet-screen::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--sheet-bg);
+  pointer-events: none;
+}
+
 .sheet-screen a {
   color: var(--sheet-primary);
 }
@@ -150,6 +160,7 @@
   box-sizing: border-box;
   flex: none;
   width: var(--sheet-page-width);
+  max-width: 100%; /* entre 1 000 et 1 280 px, la colonne du shell est plus étroite que la page : elle suit la colonne */
   min-height: var(--sheet-page-min-height);
   background: var(--sheet-paper);
   box-shadow: 0 1px 0 rgb(0 0 0 / 0.05), 0 14px 40px rgb(var(--sheet-shadow-tint) / 0.18);
@@ -614,4 +625,204 @@
   height: auto;
   border-radius: var(--sheet-radius-field);
   background: var(--sheet-white);
+}
+
+/* ---- Sous 1 000 px : pages fluides (UDR-XXXX § 4) ------------------------------------------------------------------------
+   Mêmes couleurs, mêmes polices, même rythme Seyès (8 et 32 px). Plus de largeur ni de hauteur A4, marges intérieures de 16 px.
+   Marge rouge : conservée, mais rapprochée du bord (8 px au lieu de 74 px), sinon elle mangerait un cinquième de l'écran. */
+
+@media (max-width: 999px) {
+  .sheet-screen {
+    gap: 16px;
+    align-items: stretch;
+    padding: 16px 0;
+    margin-inline: -16px; /* la fiche va bord à bord : on reprend la marge (px-gutter) du shell */
+    overflow-x: clip;
+  }
+
+  .sheet-page {
+    width: 100%;
+    min-height: 0;
+  }
+
+  /* Marge rouge rapprochée du bord : 8 px au lieu de 74 px */
+  .sheet-page::before {
+    background-image:
+      linear-gradient(to right, transparent 8px, var(--sheet-margin-line) 8px, var(--sheet-margin-line) 10px, transparent 10px),
+      repeating-linear-gradient(to bottom, var(--sheet-seyes-major) 0 1px, transparent 1px 32px),
+      repeating-linear-gradient(to bottom, var(--sheet-seyes-minor) 0 1px, transparent 1px 8px);
+  }
+
+  .sheet-page-body {
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .sheet-page,
+  .sheet-page-body > * {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .sheet-h1 {
+    font-size: clamp(28px, 4.5vw + 12px, 46px);
+  }
+
+  .sheet-h2 {
+    font-size: clamp(21px, 1.8vw + 15px, 25px);
+  }
+
+  .sheet-intro {
+    font-size: 16px;
+  }
+
+  .sheet-eyebrow {
+    flex-wrap: wrap;
+    gap: 0 16px;
+    font-size: 16px;
+  }
+
+  .sheet-page img,
+  .sheet-page video,
+  .sheet-page svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .sheet-box,
+  .sheet-box[data-tone="method"],
+  .sheet-box[data-tone="remember"],
+  .sheet-practice {
+    padding: 20px 16px 14px;
+  }
+
+  .sheet-card {
+    padding: 12px;
+  }
+
+  .katex-display {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  /* Cibles tactiles : 44 px au moins */
+  .sheet-btn,
+  .sheet-toggle,
+  .sheet-bubble-term {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--sheet-touch);
+    min-height: var(--sheet-touch);
+    padding-block: 4px;
+  }
+
+  .sheet-input {
+    box-sizing: border-box;
+    min-width: var(--sheet-touch);
+    min-height: var(--sheet-touch);
+    font-size: 18px;
+  }
+
+  .sheet-toolbar {
+    justify-content: flex-start;
+  }
+
+  .sheet-toolbar-actions,
+  .sheet-actions,
+  .sheet-choices {
+    flex-wrap: wrap;
+  }
+}
+
+/* ---- Sous 640 px : le lexique devient un tiroir (écrit après la bulle de base, qu'il remplace) ------------------------- */
+
+@media (max-width: 639px) {
+  /* Pleine largeur en bas de l'écran, coins supérieurs de 20 px, poignée de 44 x 5 px */
+  .sheet-bubble {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    width: auto;
+    max-height: 60vh;
+    padding: 24px 16px max(16px, env(safe-area-inset-bottom));
+    border-width: 2px 0 0;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .sheet-bubble::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 44px;
+    height: 5px;
+    margin-left: -22px;
+    border-radius: 3px;
+    background: var(--sheet-field-border);
+  }
+
+  .sheet-bubble-head {
+    align-items: center;
+  }
+
+  .sheet-bubble-close {
+    flex: none;
+    min-width: var(--sheet-touch);
+    min-height: var(--sheet-touch);
+    font-size: 24px;
+  }
+}
+
+/* ---- Sous 640 px : tableau en cartes (une carte par ligne ; l'en-tête devient le libellé) ----------------- */
+
+@media (max-width: 639px) {
+  .sheet-table,
+  .sheet-table tbody,
+  .sheet-table tr,
+  .sheet-table td,
+  .sheet-table caption {
+    display: block;
+  }
+
+  .sheet-table {
+    background: transparent;
+  }
+
+  .sheet-table thead {
+    display: none;
+  }
+
+  .sheet-table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sheet-table tr {
+    overflow: hidden;
+    border: 1.5px solid var(--sheet-field-border);
+    border-radius: var(--sheet-radius-box);
+    background: var(--sheet-card);
+  }
+
+  .sheet-table td {
+    padding: 8px 12px;
+    border: 0;
+  }
+
+  .sheet-table td + td {
+    border-top: 1px dashed var(--sheet-dashed);
+  }
+
+  .sheet-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-family: var(--sheet-font-title);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--sheet-primary);
+  }
 }

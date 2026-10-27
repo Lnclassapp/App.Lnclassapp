@@ -203,7 +203,7 @@ class DesignTokensTest < ActiveSupport::TestCase
   test "the sheet imports one file per kind family, written by its own lot" do
     css = Rails.root.join("app/assets/stylesheets/course_sheet.css").read
 
-    assert_equal %w[./course_sheet/argument.css ./course_sheet/exercises.css ./course_sheet/lens.css ./course_sheet/reading.css ./course_sheet/thales_figure.css], css.scan(/@import "([^"]+)";/).flatten.sort
+    assert_equal %w[./course_sheet/argument.css ./course_sheet/exercises.css ./course_sheet/lens.css ./course_sheet/reading.css ./course_sheet/thales_figure.css], css.scan(/@import url\("([^"]+)"\);/).flatten.sort
     assert_operator css.index("@import"), :<, css.index("@font-face")
   end
 
