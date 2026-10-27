@@ -5,7 +5,8 @@
 | **Type de cycle** | feature |
 | **Statut** | décision |
 | **Ouvert le** | 2026-10-12 |
-| **Revu le** | 2026-10-13 (grill repris avec l'algorithme en 5 étapes : questionner, supprimer, simplifier, accélérer, automatiser) |
+| **Revu le** | 2026-10-13 (grill repris avec l'algorithme en 5 étapes : questionner, supprimer, simplifier, accélérer, automatiser) ; 2026-10-27 (périmètre élargi aux maquettes à l'identique, voir ci-dessous) |
+| **Pilote** | Touré (`toure-bangaly`), avec l'accord du porteur |
 | **Branche** | `feature/contenu-en-blocs` |
 | **Programme** | — |
 
@@ -60,6 +61,31 @@ S'y ajoutent **le lexique** (mots soulignés, définition en bulle, liste compl�
 - **l'indice** : facultatif par question, affiché à la demande avant de répondre, sans effet sur la note.
 
 Chaque type d'exercice s'affiche comme sur les maquettes : retour « juste / à revoir » en couleur, bouton « Indice », case de saisie avec son unité, explication après la réponse. Associer, classer et compléter un texte à trous s'écrivent avec des questions à choix unique qui partagent les mêmes propositions ; aucun type de plus n'est nécessaire pour eux.
+
+## Révision du 2026-10-27 : les maquettes à l'identique
+
+> Décision de Touré, pilote du chantier avec l'accord du porteur. Elle **remplace** les lignes du grill et du hors-périmètre qui la contredisent ; le reste du memo tient.
+
+Les maquettes deviennent le cahier des charges. La référence est le handoff de design rangé dans [`docs/design/fiches-cours/`](../../design/fiches-cours/README.md) : 3 fiches (Thalès, Lentilles, Texte argumentatif), en haute fidélité. Couleurs, typographie, espacements et interactions s'y reproduisent au pixel près.
+
+**Entre dans le périmètre** (retiré du hors-périmètre) :
+- la mise en page des maquettes : papier Seyès, pages, thème de couleurs propre à chaque fiche, Kalam et Source Serif 4 hébergées par Lnclass ;
+- les médias interactifs des 3 fiches : figure de Thalès à points déplaçables, simulateur de lentille, surligneurs du texte argumentatif, exercice de construction ;
+- les exercices dans la fiche, comme sur les maquettes : « Vérifier », retour « juste / à revoir » par champ, « Indice », « Correction », tolérance de ±0,011 sur les réponses numériques ;
+- « Je m'entraîne » : générateur d'énoncés au hasard et score ;
+- la rédaction libre et ses vérifications automatiques (fiche Texte argumentatif), la zone « Ma rédaction » ;
+- « Explications simples : oui/non » et le lexique en bulle avec le bouton « Lexique ».
+
+**Reste hors périmètre** :
+- le mode relecture enseignant « Signaler une erreur » : chantier à part (table, API, file de traitement pour l'équipe) ;
+- un éditeur dans l'interface de l'équipe, le serveur MCP, la conversion des 213 leçons.
+
+**Réponses aux questions ouvertes, induites par cette décision** :
+- Exercices : ceux de la fiche se corrigent dans la page, sans note. Les exercices actuels (session, note, badge, remédiation) ne changent pas.
+- Tolérance : une règle unique, ±0,011, celle des maquettes.
+- Remplacement d'une leçon en ligne et conversion des 213 leçons : hors de ce chantier.
+
+**À trancher au plan** : où vit le contenu d'une fiche (données importées et composants communs, ou une vue par fiche) ; comment une figure propre à une fiche reste maintenable ; le rendu sous 1 000 px (les maquettes ont une largeur fixe de 880 à 1 000 px, le téléphone à 390 px reste obligatoire) ; le nom à l'écran (« Fiche de cours » sur les maquettes, « Fiche de révision » dans ce memo).
 
 ## Hors périmètre
 

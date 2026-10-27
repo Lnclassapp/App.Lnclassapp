@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#dfe3e2;-webkit-font-smoothing:antialiased}
+a{color:oklch(0.45 0.1 215)}a:hover{color:oklch(0.58 0.17 45)}
+</style>
+</helmet>
+<sc-if value="{{ popOpen }}" hint-placeholder-val="{{ false }}"><div style="position:fixed;left:{{ popLeft }}px;top:{{ popTop }}px;width:310px;max-height:70vh;overflow:auto;z-index:50;background:#fffdf8;border:2px solid oklch(0.5 0.12 175);border-radius:8px;box-shadow:0 10px 30px rgba(20,50,50,.25);padding:12px 14px;display:flex;flex-direction:column;gap:6px;font-family:'Source Serif 4',Georgia,serif;font-size:15px;line-height:1.45;color:#1f2a33"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><b style="font-family:Kalam,cursive;font-size:20px;color:oklch(0.45 0.11 175)">{{ popWord }}</b><button onClick="{{ closePop }}" style="border:none;background:transparent;font-size:18px;cursor:pointer;color:#6a6d80;padding:0 4px">×</button></div><sc-for list="{{ popItems }}" as="it" hint-placeholder-count="1"><div style="display:flex;flex-direction:column;gap:2px"><sc-if value="{{ it.title }}" hint-placeholder-val="{{ false }}"><b style="color:oklch(0.45 0.11 175);cursor:pointer" onClick="{{ it.open }}">{{ it.title }}</b></sc-if><span style="text-wrap:pretty">{{ it.def }}</span><sc-if value="{{ it.ex }}" hint-placeholder-val="{{ false }}"><span style="font-family:Kalam,cursive;font-size:16px;color:oklch(0.4 0.1 215)">{{ it.ex }}</span></sc-if></div></sc-for></div></sc-if>
+<div style="display:flex;flex-direction:column;align-items:safe center;gap:40px;padding:40px 20px;overflow-x:auto;font-family:'Source Serif 4',Georgia,serif;color:#1f2a33;font-size:16px;line-height:1.5">
+
+<div data-screen-label="Page 1" style="width:880px;min-height:1245px;flex:none;background:#fbf6e9;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.05),0 14px 40px rgba(20,50,50,.18);box-sizing:border-box">
+<sc-if value="{{ seyes }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right,transparent 74px,oklch(0.6 0.17 20 / .55) 74px,oklch(0.6 0.17 20 / .55) 76px,transparent 76px),repeating-linear-gradient(to bottom,rgba(60,140,170,.24) 0 1px,transparent 1px 32px),repeating-linear-gradient(to bottom,rgba(60,140,170,.08) 0 1px,transparent 1px 8px)"></div></sc-if>
+<div style="position:relative;padding:52px 52px 44px 100px;display:flex;flex-direction:column;gap:26px">
+<header style="display:flex;flex-direction:column;gap:4px">
+<div style="display:flex;justify-content:space-between;font-family:Kalam,cursive;font-size:17px;color:oklch(0.45 0.1 215)"><span>Physique-Chimie — Classe de 3e</span><span>Lumière · Fiche de cours</span></div>
+<h1 style="margin:0;font-family:Kalam,cursive;font-weight:700;font-size:58px;line-height:1.1;color:oklch(0.45 0.1 215)">Les lentilles</h1>
+<div style="height:3px;background:oklch(0.58 0.17 45)"></div>
+<div style="height:1.5px;background:oklch(0.58 0.17 45);margin-top:1px"></div>
+<p style="margin:10px 0 0;font-size:17px;text-wrap:pretty">Une <span onClick="{{ g.lentille }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">lentille</span> est un objet transparent, en verre ou en plastique, qui <span onClick="{{ g.devie }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">dévie</span> la lumière. On en trouve dans les lunettes, les loupes, les appareils photo, les projecteurs… et dans notre œil.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-top:12px;padding:8px 12px;background:#fffdf8;border:1.5px solid oklch(0.5 0.12 175 / 0.4);border-radius:6px;font-size:14.5px"><span style="text-wrap:pretty">Les mots <span onClick="{{ g.aide }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">soulignés en pointillés</span> sont expliqués : clique dessus.</span><div style="display:flex;gap:8px"><button onClick="{{ toggleSimple }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.5 0.12 175);background:{{ simpleBg }};color:{{ simpleFg }};cursor:pointer">{{ simpleLabel }}</button><button onClick="{{ g.lexique }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.5 0.12 175);background:transparent;color:oklch(0.45 0.11 175);cursor:pointer">Lexique</button></div></div>
+</header>
+
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:28px;font-weight:700;color:oklch(0.58 0.17 45)"><span style="color:oklch(0.45 0.1 215)">1.</span> Deux familles de lentilles</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div style="background:#fffdf8;border:2px solid oklch(0.45 0.1 215);border-radius:6px;padding:12px 16px;display:flex;flex-direction:column;gap:8px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:21px;color:oklch(0.45 0.1 215)">Lentille <span onClick="{{ g.convergente }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">convergente</span></div>
+<svg viewBox="0 0 170 112" style="width:100%;max-height:120px;display:block">
+<path d="M45,10 Q75,50 45,90 Q15,50 45,10" fill="oklch(0.85 0.06 215 / 0.6)" stroke="oklch(0.45 0.1 215)" stroke-width="1.5"></path>
+<line x1="125" y1="10" x2="125" y2="90" stroke="#1f2a33" stroke-width="2"></line>
+<polyline points="118,20 125,10 132,20" fill="none" stroke="#1f2a33" stroke-width="2"></polyline>
+<polyline points="118,80 125,90 132,80" fill="none" stroke="#1f2a33" stroke-width="2"></polyline>
+<g font-family="Kalam, cursive" font-size="13" fill="#5a6470" text-anchor="middle"><text x="45" y="107">vue de profil</text><text x="125" y="107">symbole</text></g>
+</svg>
+<ul style="margin:0;padding-left:20px;font-size:15px;display:flex;flex-direction:column;gap:3px;text-wrap:pretty">
+<li>Bords <b>minces</b>, centre épais.</li>
+<li>Elle rapproche les rayons lumineux : elle les fait converger.</li>
+<li>Un texte vu de près à travers elle paraît <b>plus grand</b> (effet loupe).</li>
+</ul>
+</div>
+<div style="background:#fffdf8;border:2px solid oklch(0.5 0.14 300);border-radius:6px;padding:12px 16px;display:flex;flex-direction:column;gap:8px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:21px;color:oklch(0.5 0.14 300)">Lentille <span onClick="{{ g.divergente }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">divergente</span></div>
+<svg viewBox="0 0 170 112" style="width:100%;max-height:120px;display:block">
+<path d="M30,10 L60,10 Q47,50 60,90 L30,90 Q43,50 30,10" fill="oklch(0.88 0.05 300 / 0.6)" stroke="oklch(0.5 0.14 300)" stroke-width="1.5"></path>
+<line x1="125" y1="10" x2="125" y2="90" stroke="#1f2a33" stroke-width="2"></line>
+<polyline points="118,10 125,20 132,10" fill="none" stroke="#1f2a33" stroke-width="2"></polyline>
+<polyline points="118,90 125,80 132,90" fill="none" stroke="#1f2a33" stroke-width="2"></polyline>
+<g font-family="Kalam, cursive" font-size="13" fill="#5a6470" text-anchor="middle"><text x="45" y="107">vue de profil</text><text x="125" y="107">symbole</text></g>
+</svg>
+<ul style="margin:0;padding-left:20px;font-size:15px;display:flex;flex-direction:column;gap:3px;text-wrap:pretty">
+<li>Bords <b>épais</b>, centre mince.</li>
+<li>Elle écarte les rayons lumineux : elle les fait diverger.</li>
+<li>Un texte vu à travers elle paraît <b>plus petit</b>.</li>
+</ul>
+</div>
+</div>
+<sc-if value="{{ simple }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:12px;align-items:flex-start;background:oklch(0.95 0.03 175);border-radius:6px;padding:10px 14px;font-size:15.5px;line-height:1.5;text-wrap:pretty"><span style="flex:none;font-family:Kalam,cursive;font-weight:700;font-size:17px;color:oklch(0.42 0.11 175)">En clair</span><span>Pour savoir quelle lentille tu as en main, touche-la. Si elle est plus épaisse au milieu que sur les bords, elle est convergente. Si elle est plus fine au milieu, elle est divergente. Tu peux aussi regarder un texte à travers : s'il grossit, elle est convergente.</span></div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:28px;font-weight:700;color:oklch(0.58 0.17 45)"><span style="color:oklch(0.45 0.1 215)">2.</span> Le vocabulaire de la lentille convergente</h2>
+<div style="position:relative;border:2px solid;border-radius:6px;background:#fffdf8;padding:22px 24px 16px;display:flex;flex-direction:column;gap:10px;border-color:oklch(0.58 0.17 45)">
+<span style="position:absolute;top:-14px;left:18px;color:#fff;font-family:Kalam,cursive;font-weight:700;font-size:16px;padding:1px 12px;border-radius:4px;background:oklch(0.58 0.17 45)">À retenir</span>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:center">
+<ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;text-wrap:pretty">
+<li>L'<span onClick="{{ g.axe }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">axe optique</span> est la droite perpendiculaire à la lentille qui passe par son centre.</li>
+<li>Le <span onClick="{{ g.centre }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">centre optique</span> <b>O</b> est le centre de la lentille.</li>
+<li>Les rayons parallèles à l'axe optique ressortent en passant tous par un même point : le <span onClick="{{ g.foyer }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">foyer image</span> <b>F′</b>. Le foyer objet <b>F</b> est son symétrique par rapport à O.</li>
+<li>La <span onClick="{{ g.focale }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">distance focale</span> est la distance <b>f = OF′</b>. Plus f est petite, plus la lentille est convergente.</li>
+</ul>
+<svg viewBox="0 0 300 185" style="width:100%;height:auto;display:block;background:#fff;border-radius:4px;">
+<line x1="0" y1="90" x2="300" y2="90" stroke="#1f2a33" stroke-width="1" stroke-dasharray="6 3"></line>
+<g stroke="oklch(0.68 0.16 70)" stroke-width="2" fill="none"><polyline points="0,30 110,30 290,165"></polyline><polyline points="0,60 110,60 290,127.5"></polyline><polyline points="0,120 110,120 290,52.5"></polyline><polyline points="0,150 110,150 290,15"></polyline></g>
+<line x1="110" y1="8" x2="110" y2="168" stroke="#1f2a33" stroke-width="2"></line>
+<polyline points="103,18 110,8 117,18" fill="none" stroke="#1f2a33" stroke-width="2"></polyline>
+<polyline points="103,158 110,168 117,158" fill="none" stroke="#1f2a33" stroke-width="2"></polyline>
+<circle cx="190" cy="90" r="3.5" fill="oklch(0.58 0.17 45)"></circle><circle cx="30" cy="90" r="3.5" fill="oklch(0.58 0.17 45)"></circle>
+<line x1="110" y1="177" x2="190" y2="177" stroke="oklch(0.45 0.1 215)" stroke-width="1.5"></line><line x1="190" y1="171" x2="190" y2="183" stroke="oklch(0.45 0.1 215)" stroke-width="1.5"></line>
+<g font-family="Kalam, cursive" font-weight="700" font-size="16" text-anchor="middle"><text x="120" y="106" fill="#1f2a33">O</text><text x="196" y="108" fill="oklch(0.58 0.17 45)">F′</text><text x="30" y="108" fill="oklch(0.58 0.17 45)">F</text><text x="150" y="173" fill="oklch(0.45 0.1 215)">f</text><text x="262" y="84" fill="#5a6470" font-weight="400" font-size="13">axe optique</text></g>
+</svg>
+</div>
+</div>
+<sc-if value="{{ simple }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:12px;align-items:flex-start;background:oklch(0.95 0.03 175);border-radius:6px;padding:10px 14px;font-size:15.5px;line-height:1.5;text-wrap:pretty"><span style="flex:none;font-family:Kalam,cursive;font-weight:700;font-size:17px;color:oklch(0.42 0.11 175)">En clair</span><span>Une lentille convergente rassemble la lumière en un point, le foyer F′. C'est ce qui se passe quand on concentre la lumière du Soleil avec une loupe. La distance focale, c'est simplement l'écart entre le centre de la lentille et ce point.</span></div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:28px;font-weight:700;color:oklch(0.58 0.17 45)"><span style="color:oklch(0.45 0.1 215)">3.</span> L'image donnée par une lentille convergente</h2>
+<p style="margin:0;font-size:15px;color:#4a5560;text-wrap:pretty">Figure interactive : déplace le point <b>B</b> (haut de l'objet) et les foyers <b>F</b> ou <b>F′</b>. Les trois rayons se croisent toujours au même point : <b>B′</b>, l'image de B.</p>
+<div style="display:flex;flex-direction:column;gap:12px;background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px">
+<svg ref="{{ simRef }}" viewBox="0 0 560 300" style="width:100%;height:auto;display:block;background:#fff;border-radius:4px;touch-action:none;user-select:none" onPointerMove="{{ move }}" onPointerUp="{{ up }}" onPointerCancel="{{ up }}">
+<sc-if value="{{ grid }}" hint-placeholder-val="{{ true }}">
+<sc-for list="{{ gv }}" as="x" hint-placeholder-count="0"><line x1="{{ x }}" y1="0" x2="{{ x }}" y2="300" stroke="#e6ebf0" stroke-width="1"></line></sc-for>
+<sc-for list="{{ gh }}" as="y" hint-placeholder-count="0"><line x1="0" y1="{{ y }}" x2="560" y2="{{ y }}" stroke="#e6ebf0" stroke-width="1"></line></sc-for>
+</sc-if>
+<line x1="0" y1="170" x2="560" y2="170" stroke="#1f2a33" stroke-width="1" stroke-dasharray="6 3"></line>
+<sc-for list="{{ simLines }}" as="l" hint-placeholder-count="0"><line x1="{{ l.x1 }}" y1="{{ l.y1 }}" x2="{{ l.x2 }}" y2="{{ l.y2 }}" stroke="{{ l.c }}" stroke-width="{{ l.w }}" stroke-dasharray="{{ l.dash }}"></line></sc-for>
+<line x1="300" y1="25" x2="300" y2="290" stroke="#1f2a33" stroke-width="2.2"></line>
+<polyline points="293,35 300,25 307,35" fill="none" stroke="#1f2a33" stroke-width="2.2"></polyline>
+<polyline points="293,280 300,290 307,280" fill="none" stroke="#1f2a33" stroke-width="2.2"></polyline>
+<line x1="{{ objX }}" y1="170" x2="{{ objX }}" y2="{{ objY }}" stroke="oklch(0.45 0.1 215)" stroke-width="3"></line>
+<polygon points="{{ objHead }}" fill="oklch(0.45 0.1 215)"></polygon>
+<sc-if value="{{ imgShow }}" hint-placeholder-val="{{ false }}">
+<line x1="{{ imgX }}" y1="170" x2="{{ imgX }}" y2="{{ imgY }}" stroke="oklch(0.52 0.13 150)" stroke-width="3" stroke-dasharray="{{ imgDash }}"></line>
+<polygon points="{{ imgHead }}" fill="oklch(0.52 0.13 150)"></polygon>
+<g font-family="Kalam, cursive" font-weight="700" font-size="18" fill="oklch(0.52 0.13 150)" text-anchor="middle"><text x="{{ imgX }}" y="{{ imgAy }}">A′</text><text x="{{ imgBx }}" y="{{ imgBy }}">B′</text></g>
+</sc-if>
+<g font-family="Kalam, cursive" font-weight="700" font-size="18" text-anchor="middle">
+<text x="{{ objX }}" y="190" fill="oklch(0.45 0.1 215)">A</text>
+<text x="{{ objBx }}" y="{{ objBy }}" fill="oklch(0.45 0.1 215)">B</text>
+<text x="310" y="188" fill="#1f2a33">O</text>
+<text x="{{ fX }}" y="190" fill="oklch(0.58 0.17 45)">F</text>
+<text x="{{ fpX }}" y="190" fill="oklch(0.58 0.17 45)">F′</text>
+</g>
+<circle cx="{{ fX }}" cy="170" r="5" fill="oklch(0.58 0.17 45)" stroke="#fff" stroke-width="1.5"></circle>
+<circle cx="{{ fpX }}" cy="170" r="5" fill="oklch(0.58 0.17 45)" stroke="#fff" stroke-width="1.5"></circle>
+<circle cx="{{ objX }}" cy="{{ objY }}" r="6" fill="oklch(0.45 0.1 215)" stroke="#fff" stroke-width="1.5"></circle>
+<circle cx="{{ fX }}" cy="170" r="16" fill="transparent" style="cursor:ew-resize" onPointerDown="{{ dnF }}"></circle>
+<circle cx="{{ fpX }}" cy="170" r="16" fill="transparent" style="cursor:ew-resize" onPointerDown="{{ dnFp }}"></circle>
+<circle cx="{{ objX }}" cy="{{ objY }}" r="18" fill="transparent" style="cursor:grab" onPointerDown="{{ dnB }}"></circle>
+</svg>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;font-size:14px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="display:grid;grid-template-columns:auto auto;gap:1px;background:#cfd6ea;border:1px solid #cfd6ea;border-radius:4px;overflow:hidden;font-variant-numeric:tabular-nums">
+<span style="background:#fff;padding:4px 8px;color:#5a6470">Distance lentille → objet OA</span><b style="background:#fff;padding:4px 8px">{{ rOA }} cm</b>
+<span style="background:#fff;padding:4px 8px;color:#5a6470">Distance focale f</span><b style="background:#fff;padding:4px 8px">{{ rF }} cm</b>
+<span style="background:#fff;padding:4px 8px;color:#5a6470">Distance lentille → image OA′</span><b style="background:#fff;padding:4px 8px">{{ rOAp }}</b>
+<span style="background:#fff;padding:4px 8px;color:#5a6470">Taille objet AB / image A′B′</span><b style="background:#fff;padding:4px 8px">{{ rAB }} cm / {{ rApBp }}</b>
+<span style="background:#f1f4f3;padding:4px 8px;color:#5a6470">Image</span><b style="background:#f1f4f3;padding:4px 8px;color:{{ stC }}">{{ nature }}</b>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;font-size:13px"><span style="display:flex;align-items:center;gap:5px"><span style="width:16px;height:3px;background:oklch(0.68 0.16 70)"></span>rayon 1</span><span style="display:flex;align-items:center;gap:5px"><span style="width:16px;height:3px;background:oklch(0.6 0.2 30)"></span>rayon 2</span><span style="display:flex;align-items:center;gap:5px"><span style="width:16px;height:3px;background:oklch(0.55 0.17 330)"></span>rayon 3</span><span style="color:#5a6470">pointillés : prolongements</span></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="padding:8px 10px;border-radius:4px;background:#fff;border:1.5px solid {{ stC }};line-height:1.4;text-wrap:pretty">{{ status }}</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap">
+<button onClick="{{ pPhoto }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:transparent;color:oklch(0.45 0.1 215);cursor:pointer;">Appareil photo</button>
+<button onClick="{{ pProj }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:transparent;color:oklch(0.45 0.1 215);cursor:pointer;">Projecteur</button>
+<button onClick="{{ pLoupe }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:transparent;color:oklch(0.45 0.1 215);cursor:pointer;">Loupe</button>
+<button onClick="{{ toggleGrid }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:transparent;color:oklch(0.45 0.1 215);cursor:pointer;">{{ gridLabel }}</button>
+</div>
+</div>
+</div>
+</div>
+<sc-if value="{{ simple }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:12px;align-items:flex-start;background:oklch(0.95 0.03 175);border-radius:6px;padding:10px 14px;font-size:15.5px;line-height:1.5;text-wrap:pretty"><span style="flex:none;font-family:Kalam,cursive;font-weight:700;font-size:17px;color:oklch(0.42 0.11 175)">En clair</span><span>Si l'objet est loin de la lentille (plus loin que F), l'image se forme de l'autre côté, la tête en bas : on peut l'attraper sur un écran, comme au cinéma. Si l'objet est très près (entre F et la lentille), on ne peut pas l'attraper sur un écran, mais en regardant à travers la lentille on voit l'objet en plus grand : c'est la loupe.</span></div></sc-if>
+</section>
+<footer style="display:flex;justify-content:flex-end;font-family:Kalam,cursive;color:#6a6d80;font-size:15px">1 / 3</footer>
+</div>
+</div>
+
+<div data-screen-label="Page 2" style="width:880px;min-height:1245px;flex:none;background:#fbf6e9;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.05),0 14px 40px rgba(20,50,50,.18);box-sizing:border-box">
+<sc-if value="{{ seyes }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right,transparent 74px,oklch(0.6 0.17 20 / .55) 74px,oklch(0.6 0.17 20 / .55) 76px,transparent 76px),repeating-linear-gradient(to bottom,rgba(60,140,170,.24) 0 1px,transparent 1px 32px),repeating-linear-gradient(to bottom,rgba(60,140,170,.08) 0 1px,transparent 1px 8px)"></div></sc-if>
+<div style="position:relative;padding:52px 52px 44px 100px;display:flex;flex-direction:column;gap:24px">
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:28px;font-weight:700;color:oklch(0.58 0.17 45)"><span style="color:oklch(0.45 0.1 215)">4.</span> Construire l'image d'un objet</h2>
+<div style="position:relative;border:2px solid;border-radius:6px;background:#fffdf8;padding:22px 24px 16px;display:flex;flex-direction:column;gap:10px;border-color:oklch(0.62 0.15 65)">
+<span style="position:absolute;top:-14px;left:18px;color:#fff;font-family:Kalam,cursive;font-weight:700;font-size:16px;padding:1px 12px;border-radius:4px;background:oklch(0.62 0.15 65);color:#2a1a00">Les trois rayons particuliers</span>
+<ol style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px;text-wrap:pretty">
+<li><b style="color:oklch(0.55 0.14 65)">Rayon 1</b> : un rayon parallèle à l'axe optique ressort en passant par le foyer image F′.</li>
+<li><b style="color:oklch(0.55 0.2 30)">Rayon 2</b> : un rayon qui passe par le centre optique O n'est pas dévié.</li>
+<li><b style="color:oklch(0.5 0.17 330)">Rayon 3</b> : un rayon qui passe par le foyer objet F ressort parallèle à l'axe optique.</li>
+</ol>
+<p style="margin:0;font-size:15px;color:#4a5560">Deux rayons suffisent pour trouver l'image. Le troisième sert à vérifier.</p>
+</div>
+<div style="position:relative;border:2px solid;border-radius:6px;background:#fffdf8;padding:22px 24px 16px;display:flex;flex-direction:column;gap:10px;border-color:oklch(0.45 0.1 215)">
+<span style="position:absolute;top:-14px;left:18px;color:#fff;font-family:Kalam,cursive;font-weight:700;font-size:16px;padding:1px 12px;border-radius:4px;background:oklch(0.45 0.1 215)">Méthode</span>
+<ol style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:5px;text-wrap:pretty">
+<li>Je trace l'axe optique et la lentille, puis je place O, F et F′ à l'échelle.</li>
+<li>Je place l'objet AB, avec A sur l'axe.</li>
+<li>Depuis B, je trace deux des trois rayons particuliers.</li>
+<li>B′ est le point où les rayons se croisent. Je place A′ sur l'axe, à la verticale de B′.</li>
+<li>Je mesure OA′ et A′B′, puis je décris l'image : position, taille, sens (droite ou <span onClick="{{ g.renversee }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">renversée</span>).</li>
+</ol>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:10px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:22px;color:oklch(0.45 0.1 215)">Exemple rédigé</div>
+<p style="margin:0;text-wrap:pretty">Une lentille convergente a une distance focale f = 2 cm. Un objet AB de 2 cm est placé à 6 cm de la lentille. <b>Construire son image.</b> (1 carreau = 1 cm)</p>
+<div style="display:grid;grid-template-columns:320px minmax(0,1fr);gap:16px;align-items:center">
+<svg viewBox="0 0 320 160" style="width:100%;height:auto;display:block;background:#fff;border-radius:4px;">
+<sc-for list="{{ gv }}" as="x" hint-placeholder-count="0"><line x1="{{ x }}" y1="0" x2="{{ x }}" y2="160" stroke="#e6ebf0" stroke-width="1"></line></sc-for>
+<sc-for list="{{ gh }}" as="y" hint-placeholder-count="0"><line x1="0" y1="{{ y }}" x2="320" y2="{{ y }}" stroke="#e6ebf0" stroke-width="1"></line></sc-for>
+<line x1="0" y1="90" x2="320" y2="90" stroke="#1f2a33" stroke-width="1" stroke-dasharray="6 3"></line>
+<polyline points="80,50 200,50 300,140" fill="none" stroke="oklch(0.68 0.16 70)" stroke-width="2"></polyline>
+<line x1="80" y1="50" x2="320" y2="130" stroke="oklch(0.6 0.2 30)" stroke-width="2"></line>
+<line x1="200" y1="15" x2="200" y2="155" stroke="#1f2a33" stroke-width="2"></line>
+<polyline points="194,24 200,15 206,24" fill="none" stroke="#1f2a33" stroke-width="2"></polyline>
+<polyline points="194,146 200,155 206,146" fill="none" stroke="#1f2a33" stroke-width="2"></polyline>
+<line x1="80" y1="90" x2="80" y2="52" stroke="oklch(0.45 0.1 215)" stroke-width="3"></line><polygon points="80,48 75,58 85,58" fill="oklch(0.45 0.1 215)"></polygon>
+<line x1="260" y1="90" x2="260" y2="108" stroke="oklch(0.52 0.13 150)" stroke-width="3"></line><polygon points="260,112 255,102 265,102" fill="oklch(0.52 0.13 150)"></polygon>
+<circle cx="160" cy="90" r="3.5" fill="oklch(0.58 0.17 45)"></circle><circle cx="240" cy="90" r="3.5" fill="oklch(0.58 0.17 45)"></circle>
+<g font-family="Kalam, cursive" font-weight="700" font-size="15" text-anchor="middle"><text x="80" y="106" fill="oklch(0.45 0.1 215)">A</text><text x="70" y="48" fill="oklch(0.45 0.1 215)">B</text><text x="209" y="104" fill="#1f2a33">O</text><text x="160" y="106" fill="oklch(0.58 0.17 45)">F</text><text x="240" y="84" fill="oklch(0.58 0.17 45)">F′</text><text x="262" y="84" fill="oklch(0.52 0.13 150)">A′</text><text x="272" y="124" fill="oklch(0.52 0.13 150)">B′</text></g>
+</svg>
+<div style="font-family:Kalam,cursive;font-size:18px;line-height:1.5;color:oklch(0.4 0.1 215);display:flex;flex-direction:column;gap:3px;text-wrap:pretty">
+<span>Je trace le rayon parallèle à l'axe : il ressort par F′.</span>
+<span>Je trace le rayon qui passe par O : il n'est pas dévié.</span>
+<span>Ils se croisent en B′. Je place A′ sur l'axe.</span>
+<span>Je mesure : <b style="color:oklch(0.58 0.17 45)">OA′ = 3 cm</b> et <b style="color:oklch(0.58 0.17 45)">A′B′ = 1 cm</b>.</span>
+<span>L'image est <span onClick="{{ g.reelle }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">réelle</span>, renversée et deux fois plus petite que l'objet.</span>
+</div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:28px;font-weight:700;color:oklch(0.58 0.17 45)"><span style="color:oklch(0.45 0.1 215)">5.</span> L'œil, un système optique</h2>
+<div style="position:relative;border:2px solid;border-radius:6px;background:#fffdf8;padding:22px 24px 16px;display:flex;flex-direction:column;gap:10px;border-color:oklch(0.5 0.12 175)">
+<span style="position:absolute;top:-14px;left:18px;color:#fff;font-family:Kalam,cursive;font-weight:700;font-size:16px;padding:1px 12px;border-radius:4px;background:oklch(0.5 0.12 175)">Le modèle de l'œil réduit</span>
+<div style="display:grid;grid-template-columns:300px minmax(0,1fr);gap:18px;align-items:center">
+<svg viewBox="0 0 300 170" style="width:100%;height:auto;display:block;background:#fff;border-radius:4px;">
+<line x1="0" y1="85" x2="300" y2="85" stroke="#1f2a33" stroke-width="1" stroke-dasharray="6 3"></line>
+<g stroke="oklch(0.68 0.16 70)" stroke-width="2" fill="none"><polyline points="0,65 100,65 240,85"></polyline><polyline points="0,105 100,105 240,85"></polyline></g>
+<line x1="70" y1="20" x2="70" y2="55" stroke="#1f2a33" stroke-width="5"></line><line x1="70" y1="115" x2="70" y2="150" stroke="#1f2a33" stroke-width="5"></line>
+<line x1="100" y1="35" x2="100" y2="135" stroke="#1f2a33" stroke-width="2"></line>
+<polyline points="94,44 100,35 106,44" fill="none" stroke="#1f2a33" stroke-width="2"></polyline><polyline points="94,126 100,135 106,126" fill="none" stroke="#1f2a33" stroke-width="2"></polyline>
+<rect x="240" y="30" width="7" height="110" fill="oklch(0.5 0.12 175)"></rect>
+<g font-family="Kalam, cursive" font-size="13" fill="#3a4550" text-anchor="middle"><text x="62" y="14">diaphragme</text><text x="62" y="166">(iris, pupille)</text><text x="140" y="28">lentille</text><text x="140" y="150">(cristallin)</text><text x="244" y="22">écran</text><text x="244" y="158">(rétine)</text></g>
+</svg>
+<div style="display:flex;flex-direction:column;gap:8px;text-wrap:pretty">
+<div style="display:grid;grid-template-columns:auto auto;gap:1px;background:#cfd6ea;border:1px solid #cfd6ea;border-radius:4px;overflow:hidden;font-size:15px">
+<b style="background:#f1f4f3;padding:4px 10px">Dans l'œil</b><b style="background:#f1f4f3;padding:4px 10px">Dans le modèle</b>
+<span style="background:#fff;padding:4px 10px">L'iris et la pupille</span><span style="background:#fff;padding:4px 10px">un diaphragme</span>
+<span style="background:#fff;padding:4px 10px">Le <span onClick="{{ g.cristallin }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">cristallin</span></span><span style="background:#fff;padding:4px 10px">une lentille convergente</span>
+<span style="background:#fff;padding:4px 10px">La <span onClick="{{ g.retine }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">rétine</span></span><span style="background:#fff;padding:4px 10px">un écran</span>
+</div>
+<p style="margin:0;font-size:15px">Pour voir net, l'image doit se former sur la rétine. Le cristallin change de forme pour y parvenir : c'est l'<span onClick="{{ g.accommodation }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">accommodation</span>.</p>
+</div>
+</div>
+</div>
+<sc-if value="{{ simple }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:12px;align-items:flex-start;background:oklch(0.95 0.03 175);border-radius:6px;padding:10px 14px;font-size:15.5px;line-height:1.5;text-wrap:pretty"><span style="flex:none;font-family:Kalam,cursive;font-weight:700;font-size:17px;color:oklch(0.42 0.11 175)">En clair</span><span>L'œil fonctionne comme un petit appareil photo. La pupille laisse entrer la lumière, le cristallin est la lentille et la rétine est l'écran où l'image se forme. Quand tu regardes de près, ton cristallin se bombe pour que l'image reste nette.</span></div></sc-if>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;font-size:14.5px">
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;"><div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.45 0.1 215);"><span onClick="{{ g.myopie }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">Myopie</span></div>
+<svg viewBox="0 0 200 90" style="width:100%;height:auto;display:block;background:#fff;border-radius:4px;"><line x1="0" y1="45" x2="200" y2="45" stroke="#1f2a33" stroke-width="1" stroke-dasharray="5 3"></line><g stroke="oklch(0.68 0.16 70)" stroke-width="2" fill="none"><polyline points="0,20 40,20 160,57.5"></polyline><polyline points="0,70 40,70 160,32.5"></polyline></g><line x1="40" y1="10" x2="40" y2="80" stroke="#1f2a33" stroke-width="2"></line><rect x="160" y="8" width="5" height="74" fill="oklch(0.5 0.12 175)"></rect><circle cx="120" cy="45" r="3.5" fill="oklch(0.58 0.17 45)"></circle></svg>
+<span style="text-wrap:pretty">L'image se forme <b>avant</b> la rétine. On voit flou de loin. On corrige avec une lentille <b style="color:oklch(0.5 0.14 300)">divergente</b>.</span></div>
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;"><div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.45 0.1 215);"><span onClick="{{ g.hypermetropie }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">Hypermétropie</span></div>
+<svg viewBox="0 0 200 90" style="width:100%;height:auto;display:block;background:#fff;border-radius:4px;"><line x1="0" y1="45" x2="200" y2="45" stroke="#1f2a33" stroke-width="1" stroke-dasharray="5 3"></line><g stroke="oklch(0.68 0.16 70)" stroke-width="2" fill="none"><polyline points="0,20 40,20 160,38.75"></polyline><polyline points="0,70 40,70 160,51.25"></polyline></g><g stroke="oklch(0.68 0.16 70)" stroke-width="1.4" stroke-dasharray="4 3"><line x1="160" y1="38.75" x2="198" y2="45"></line><line x1="160" y1="51.25" x2="198" y2="45"></line></g><line x1="40" y1="10" x2="40" y2="80" stroke="#1f2a33" stroke-width="2"></line><rect x="160" y="8" width="5" height="74" fill="oklch(0.5 0.12 175)"></rect><circle cx="196" cy="45" r="3.5" fill="oklch(0.58 0.17 45)"></circle></svg>
+<span style="text-wrap:pretty">L'image se forme <b>après</b> la rétine. On voit flou de près. On corrige avec une lentille <b style="color:oklch(0.45 0.1 215)">convergente</b>.</span></div>
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;"><div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.45 0.1 215);"><span onClick="{{ g.presbytie }}" style="border-bottom:2px dotted oklch(0.5 0.12 175);cursor:help" style-hover="background:oklch(0.5 0.12 175 / 0.12)">Presbytie</span></div>
+<svg viewBox="0 0 200 90" style="width:100%;height:auto;display:block;background:#fff;border-radius:4px;"><line x1="0" y1="45" x2="200" y2="45" stroke="#1f2a33" stroke-width="1" stroke-dasharray="5 3"></line><g stroke="oklch(0.68 0.16 70)" stroke-width="2" fill="none"><polyline points="4,45 40,20 160,38.75"></polyline><polyline points="4,45 40,70 160,51.25"></polyline></g><g stroke="oklch(0.68 0.16 70)" stroke-width="1.4" stroke-dasharray="4 3"><line x1="160" y1="38.75" x2="198" y2="45"></line><line x1="160" y1="51.25" x2="198" y2="45"></line></g><line x1="40" y1="10" x2="40" y2="80" stroke="#1f2a33" stroke-width="2"></line><rect x="160" y="8" width="5" height="74" fill="oklch(0.5 0.12 175)"></rect><circle cx="4" cy="45" r="3.5" fill="oklch(0.45 0.1 215)"></circle></svg>
+<span style="text-wrap:pretty">Avec l'âge, le cristallin accommode moins bien. On voit flou de près. On corrige avec une lentille <b style="color:oklch(0.45 0.1 215)">convergente</b>.</span></div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:28px;font-weight:700;color:oklch(0.58 0.17 45)"><span style="color:oklch(0.45 0.1 215)">6.</span> Exercices d'application</h2>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start;font-size:15px">
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;"><div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.45 0.1 215);">Exercice 1 · Construction</div>
+<p style="margin:0;text-wrap:pretty">Une lentille convergente a une distance focale f = 3 cm. Un objet AB de 1,5 cm est placé à 6 cm de la lentille. Construis l'image et décris-la.</p>
+<button onClick="{{ t1 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:transparent;color:oklch(0.45 0.1 215);cursor:pointer;align-self:flex-start">{{ l1 }}</button>
+<sc-if value="{{ s1 }}" hint-placeholder-val="{{ false }}"><div style="font-family:Kalam,cursive;font-size:17px;line-height:1.45;color:oklch(0.4 0.1 215);border-top:1px dashed #b9c3e0;padding-top:6px">Les rayons 1 et 2 se croisent en B′.<br>OA′ = <b style="color:oklch(0.58 0.17 45)">6 cm</b>, A′B′ = <b style="color:oklch(0.58 0.17 45)">1,5 cm</b>.<br>Image réelle, renversée, de même taille que l'objet.</div></sc-if></div>
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;"><div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.45 0.1 215);">Exercice 2 · La loupe</div>
+<p style="margin:0;text-wrap:pretty">Léo observe un timbre avec une loupe de distance focale 10 cm, placée à 6 cm du timbre. a) La loupe est-elle convergente ou divergente ? b) Quelle image voit-il ?</p>
+<button onClick="{{ t2 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:transparent;color:oklch(0.45 0.1 215);cursor:pointer;align-self:flex-start">{{ l2 }}</button>
+<sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}"><div style="font-family:Kalam,cursive;font-size:17px;line-height:1.45;color:oklch(0.4 0.1 215);border-top:1px dashed #b9c3e0;padding-top:6px">a) Convergente : elle agrandit.<br>b) 6 cm &lt; 10 cm : le timbre est entre F et la lentille. L'image est <b style="color:oklch(0.5 0.14 300)">virtuelle, droite et agrandie</b>.</div></sc-if></div>
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;"><div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.45 0.1 215);">Exercice 3 · L'appareil photo</div>
+<p style="margin:0;text-wrap:pretty">Dans un appareil photo, quel élément joue le rôle de la lentille ? de l'écran ? Pourquoi faut-il faire la mise au point ?</p>
+<button onClick="{{ t3 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:transparent;color:oklch(0.45 0.1 215);cursor:pointer;align-self:flex-start">{{ l3 }}</button>
+<sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}"><div style="font-family:Kalam,cursive;font-size:17px;line-height:1.45;color:oklch(0.4 0.1 215);border-top:1px dashed #b9c3e0;padding-top:6px">Lentille : l'objectif. Écran : le capteur.<br>La position de l'image nette dépend de la distance de l'objet. On déplace l'objectif pour que l'image tombe sur le capteur, comme l'œil accommode.</div></sc-if></div>
+</div>
+</section>
+<footer style="display:flex;justify-content:flex-end;font-family:Kalam,cursive;color:#6a6d80;font-size:15px">2 / 3</footer>
+</div>
+</div>
+
+<div data-screen-label="Page 3" style="width:880px;min-height:1245px;flex:none;background:#fbf6e9;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.05),0 14px 40px rgba(20,50,50,.18);box-sizing:border-box">
+<sc-if value="{{ seyes }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right,transparent 74px,oklch(0.6 0.17 20 / .55) 74px,oklch(0.6 0.17 20 / .55) 76px,transparent 76px),repeating-linear-gradient(to bottom,rgba(60,140,170,.24) 0 1px,transparent 1px 32px),repeating-linear-gradient(to bottom,rgba(60,140,170,.08) 0 1px,transparent 1px 8px)"></div></sc-if>
+<div style="position:relative;padding:44px 52px 36px 100px;display:flex;flex-direction:column;gap:16px">
+<header style="display:flex;flex-direction:column;gap:4px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:28px;font-weight:700;color:oklch(0.58 0.17 45)"><span style="color:oklch(0.45 0.1 215)">7.</span> Je m'entraîne</h2>
+<p style="margin:0;font-size:15px;color:#4a5560;text-wrap:pretty">Réponds dans les cases ou clique sur ta réponse, puis clique sur « Vérifier ». Utilise l'indice si tu bloques.</p>
+</header>
+
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;font-size:15px">
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;grid-column:1 / -1"><div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.45 0.1 215);">Exercice 4 · Convergente ou divergente ?</div>
+<p style="margin:0">Voici quatre lentilles vues de profil. Indique pour chacune sa famille.</p>
+<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px">
+<sc-for list="{{ e4items }}" as="it" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;background:#fff;border-radius:4px;padding:8px">
+<svg viewBox="0 0 70 100" style="width:60px;height:86px;display:block"><path d="{{ it.path }}" fill="oklch(0.88 0.04 215 / 0.7)" stroke="#1f2a33" stroke-width="1.5"></path></svg>
+<b style="font-family:Kalam,cursive;font-size:17px">Lentille {{ it.n }}</b>
+<div style="display:flex;gap:4px"><button onClick="{{ it.pickC }}" style="font-family:Kalam,cursive;font-size:13px;padding:1px 8px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:{{ it.bgC }};color:{{ it.fgC }};cursor:pointer">convergente</button><button onClick="{{ it.pickD }}" style="font-family:Kalam,cursive;font-size:13px;padding:1px 8px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:{{ it.bgD }};color:{{ it.fgD }};cursor:pointer">divergente</button></div>
+<small style="font-size:13px;color:{{ it.fc }}">{{ it.fb }}</small>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button onClick="{{ chk.x4 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:oklch(0.45 0.1 215);color:#fff;cursor:pointer">Vérifier</button><button onClick="{{ tg.h4 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:transparent;color:oklch(0.45 0.1 215);cursor:pointer;">Indice</button><span style="font-size:14px;font-weight:600;color:{{ mc.x4 }}">{{ msg.x4 }}</span></div>
+<sc-if value="{{ op.h4 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:oklch(0.45 0.11 175)">Indice : compare l'épaisseur au centre et sur les bords. Centre plus épais → convergente.</div></sc-if>
+</div>
+
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;"><div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.45 0.1 215);">Exercice 5 · Lire la distance focale</div>
+<svg viewBox="0 0 240 200" style="width:100%;height:auto;display:block;background:#fff;border-radius:4px;max-height:180px">
+<sc-for list="{{ gv }}" as="x" hint-placeholder-count="0"><line x1="{{ x }}" y1="0" x2="{{ x }}" y2="200" stroke="#e6ebf0" stroke-width="1"></line></sc-for>
+<sc-for list="{{ gh0 }}" as="y" hint-placeholder-count="0"><line x1="0" y1="{{ y }}" x2="240" y2="{{ y }}" stroke="#e6ebf0" stroke-width="1"></line></sc-for>
+<line x1="0" y1="100" x2="240" y2="100" stroke="#1f2a33" stroke-width="1" stroke-dasharray="6 3"></line>
+<g stroke="oklch(0.68 0.16 70)" stroke-width="2" fill="none"><polyline points="0,40 60,40 220,160"></polyline><polyline points="0,80 60,80 220,120"></polyline><polyline points="0,120 60,120 220,80"></polyline><polyline points="0,160 60,160 220,40"></polyline></g>
+<line x1="60" y1="20" x2="60" y2="180" stroke="#1f2a33" stroke-width="2"></line>
+<polyline points="54,29 60,20 66,29" fill="none" stroke="#1f2a33" stroke-width="2"></polyline><polyline points="54,171 60,180 66,171" fill="none" stroke="#1f2a33" stroke-width="2"></polyline>
+<g font-family="Kalam, cursive" font-weight="700" font-size="15"><text x="64" y="116" fill="#1f2a33">O</text><text x="200" y="196" fill="#5a6470" font-weight="400" font-size="12">1 carreau = 1 cm</text></g>
+</svg>
+<p style="margin:0;text-wrap:pretty">Des rayons parallèles à l'axe traversent la lentille. Quelle est sa distance focale ?</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-family:Kalam,cursive;font-size:18px;color:oklch(0.4 0.1 215)"><label style="display:flex;align-items:center;gap:6px">f = <input type="text" inputmode="decimal" value="{{ v.e5f }}" onChange="{{ on.e5f }}" style="width:64px;font:inherit;text-align:center;border:none;border-bottom:2px dashed oklch(0.45 0.1 215);background:#fff;color:inherit;outline:none"> cm <small style="font-size:14px;color:{{ fc.e5f }}">{{ fb.e5f }}</small></label></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button onClick="{{ chk.x5 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:oklch(0.45 0.1 215);color:#fff;cursor:pointer">Vérifier</button><button onClick="{{ tg.h5 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:transparent;color:oklch(0.45 0.1 215);cursor:pointer;">Indice</button></div>
+<div style="font-size:14px;font-weight:600;color:{{ mc.x5 }}">{{ msg.x5 }}</div>
+<sc-if value="{{ op.h5 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:oklch(0.45 0.11 175)">Indice : repère le point F′ où les rayons se croisent sur l'axe, puis compte les carreaux entre O et F′.</div></sc-if>
+</div>
+
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;"><div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.45 0.1 215);">Exercice 6 · Le modèle de l'œil</div>
+<p style="margin:0;text-wrap:pretty">Associe chaque partie de l'œil à l'élément du modèle réduit qui la représente.</p>
+<div style="display:flex;flex-direction:column;gap:10px;font-family:Kalam,cursive;font-size:18px;color:oklch(0.4 0.1 215)">
+<sc-for list="{{ e6items }}" as="it" hint-placeholder-count="3">
+<label style="display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:8px;align-items:center">{{ it.label }}<select value="{{ it.val }}" onChange="{{ it.on }}" style="font-family:'Source Serif 4',Georgia,serif;font-size:15px;padding:3px 6px;border:1.5px solid #b9c3e0;border-radius:4px;background:#fff;color:#1f2a33"><option value="">— choisir —</option><option value="diaphragme">un diaphragme</option><option value="lentille">une lentille convergente</option><option value="ecran">un écran</option></select><small style="font-size:14px;color:{{ it.fc }}">{{ it.fb }}</small></label>
+</sc-for>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button onClick="{{ chk.x6 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:oklch(0.45 0.1 215);color:#fff;cursor:pointer">Vérifier</button><button onClick="{{ tg.h6 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:transparent;color:oklch(0.45 0.1 215);cursor:pointer;">Indice</button></div>
+<div style="font-size:14px;font-weight:600;color:{{ mc.x6 }}">{{ msg.x6 }}</div>
+<sc-if value="{{ op.h6 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:oklch(0.45 0.11 175)">Indice : l'image se forme sur la rétine. La pupille règle la quantité de lumière qui entre.</div></sc-if>
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.45 0.1 215);margin-top:8px">Exercice 7 · Quelle correction ?</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ e7items }}" as="it" hint-placeholder-count="2">
+<div style="display:flex;flex-direction:column;gap:4px"><span style="text-wrap:pretty">{{ it.q }}</span><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><button onClick="{{ it.pickC }}" style="font-family:Kalam,cursive;font-size:14px;padding:1px 10px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:{{ it.bgC }};color:{{ it.fgC }};cursor:pointer">lentille convergente</button><button onClick="{{ it.pickD }}" style="font-family:Kalam,cursive;font-size:14px;padding:1px 10px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:{{ it.bgD }};color:{{ it.fgD }};cursor:pointer">lentille divergente</button><small style="font-size:14px;color:{{ it.fc }}">{{ it.fb }}</small></div></div>
+</sc-for>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button onClick="{{ chk.x7 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.45 0.1 215);background:oklch(0.45 0.1 215);color:#fff;cursor:pointer">Vérifier</button><span style="font-size:14px;font-weight:600;color:{{ mc.x7 }}">{{ msg.x7 }}</span></div>
+</div>
+</div>
+
+<section style="position:relative;border:2px solid;border-radius:6px;background:#fffdf8;padding:22px 24px 16px;display:flex;flex-direction:column;gap:10px;border-color:oklch(0.5 0.12 175);margin-top:8px;font-size:15px">
+<span style="position:absolute;top:-14px;left:18px;color:#fff;font-family:Kalam,cursive;font-weight:700;font-size:16px;padding:1px 12px;border-radius:4px;background:oklch(0.5 0.12 175)">Entraînement illimité · Place l'image</span>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><span style="text-wrap:pretty">{{ prText }}</span><b style="flex:none;font-family:Kalam,cursive;font-size:18px;color:oklch(0.45 0.11 175)">Score : {{ score }}</b></div>
+<svg ref="{{ prRef }}" viewBox="0 0 560 260" style="width:100%;height:auto;display:block;background:#fff;border-radius:4px;touch-action:none;user-select:none" onPointerMove="{{ pmove }}" onPointerUp="{{ up }}" onPointerCancel="{{ up }}">
+<sc-for list="{{ gv }}" as="x" hint-placeholder-count="0"><line x1="{{ x }}" y1="0" x2="{{ x }}" y2="260" stroke="#e6ebf0" stroke-width="1"></line></sc-for>
+<sc-for list="{{ gh }}" as="y" hint-placeholder-count="0"><line x1="0" y1="{{ y }}" x2="560" y2="{{ y }}" stroke="#e6ebf0" stroke-width="1"></line></sc-for>
+<line x1="0" y1="130" x2="560" y2="130" stroke="#1f2a33" stroke-width="1" stroke-dasharray="6 3"></line>
+<sc-if value="{{ prSol }}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{ prLines }}" as="l" hint-placeholder-count="0"><line x1="{{ l.x1 }}" y1="{{ l.y1 }}" x2="{{ l.x2 }}" y2="{{ l.y2 }}" stroke="{{ l.c }}" stroke-width="{{ l.w }}" stroke-dasharray="{{ l.dash }}"></line></sc-for>
+<line x1="{{ prIx }}" y1="130" x2="{{ prIx }}" y2="{{ prIy }}" stroke="oklch(0.52 0.13 150)" stroke-width="3" stroke-dasharray="{{ prIdash }}"></line>
+<polygon points="{{ prIhead }}" fill="oklch(0.52 0.13 150)"></polygon>
+</sc-if>
+<line x1="260" y1="12" x2="260" y2="248" stroke="#1f2a33" stroke-width="2.2"></line>
+<polyline points="253,22 260,12 267,22" fill="none" stroke="#1f2a33" stroke-width="2.2"></polyline><polyline points="253,238 260,248 267,238" fill="none" stroke="#1f2a33" stroke-width="2.2"></polyline>
+<line x1="{{ prOx }}" y1="130" x2="{{ prOx }}" y2="{{ prOy }}" stroke="oklch(0.45 0.1 215)" stroke-width="3"></line>
+<polygon points="{{ prOhead }}" fill="oklch(0.45 0.1 215)"></polygon>
+<circle cx="{{ prF }}" cy="130" r="4" fill="oklch(0.58 0.17 45)"></circle><circle cx="{{ prFp }}" cy="130" r="4" fill="oklch(0.58 0.17 45)"></circle>
+<g font-family="Kalam, cursive" font-weight="700" font-size="17" text-anchor="middle"><text x="{{ prOx }}" y="149" fill="oklch(0.45 0.1 215)">A</text><text x="{{ prObx }}" y="{{ prOby }}" fill="oklch(0.45 0.1 215)">B</text><text x="270" y="148" fill="#1f2a33">O</text><text x="{{ prF }}" y="149" fill="oklch(0.58 0.17 45)">F</text><text x="{{ prFp }}" y="149" fill="oklch(0.58 0.17 45)">F′</text></g>
+<line x1="{{ mkX }}" y1="130" x2="{{ mkX }}" y2="{{ mkY }}" stroke="oklch(0.5 0.12 175)" stroke-width="1.5" stroke-dasharray="4 3"></line>
+<circle cx="{{ mkX }}" cy="{{ mkY }}" r="7" fill="oklch(0.5 0.12 175)" stroke="#fff" stroke-width="2"></circle>
+<text x="{{ mkLx }}" y="{{ mkLy }}" font-family="Kalam, cursive" font-weight="700" font-size="17" fill="oklch(0.45 0.11 175)" text-anchor="middle">B′ ?</text>
+<circle cx="{{ mkX }}" cy="{{ mkY }}" r="20" fill="transparent" style="cursor:grab" onPointerDown="{{ dnM }}"></circle>
+</svg>
+<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+<button onClick="{{ prCheck }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.5 0.12 175);background:oklch(0.5 0.12 175);color:#fff;cursor:pointer">Vérifier</button>
+<button onClick="{{ prSolToggle }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.5 0.12 175);background:transparent;color:oklch(0.45 0.11 175);cursor:pointer">{{ prSolLabel }}</button>
+<button onClick="{{ prNext }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.5 0.12 175);background:transparent;color:oklch(0.45 0.11 175);cursor:pointer">Nouvel exercice</button>
+<sc-if value="{{ prShow }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;font-weight:600;color:{{ prColor }}">{{ prMsg }}</span></sc-if>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:20px;color:oklch(0.45 0.1 215)">Ma rédaction</div>
+<p style="margin:0;font-size:14px;color:#4a5560">Décris l'image obtenue dans l'entraînement ci-dessus : position, taille, sens, réelle ou virtuelle.</p>
+<textarea placeholder="L'image A′B′ se trouve à … cm de la lentille. Elle mesure … cm. Elle est …" style="width:100%;box-sizing:border-box;min-height:160px;resize:vertical;font-family:Kalam,cursive;font-size:19px;line-height:32px;color:oklch(0.4 0.1 215);background:transparent;border:1.5px dashed #b9c3e0;border-radius:6px;padding:0 14px;outline:none"></textarea>
+</section>
+<footer style="display:flex;justify-content:flex-end;font-family:Kalam,cursive;color:#6a6d80;font-size:15px">3 / 3</footer>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;seyes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Affichage&quot;},&quot;corrections&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Affichage&quot;},&quot;simple&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Affichage&quot;}}">
+const TEAL='oklch(0.45 0.1 215)', GREEN='oklch(0.52 0.13 150)', RED='oklch(0.55 0.19 27)', AMBER='oklch(0.55 0.13 70)', VIOL='oklch(0.5 0.14 300)';
+const R1='oklch(0.68 0.16 70)', R2='oklch(0.6 0.2 30)', R3='oklch(0.55 0.17 330)';
+const GLOSS={
+lentille:['Lentille','Un objet transparent (verre, plastique) aux faces arrondies, qui change la direction de la lumière qui le traverse.','Les verres de lunettes sont des lentilles.'],
+devie:['Dévier','Changer de direction. Un rayon dévié ne continue pas tout droit.',''],
+convergente:['Convergente','Qui rassemble. Une lentille convergente rapproche les rayons lumineux les uns des autres.','Elle est plus épaisse au centre que sur les bords.'],
+divergente:['Divergente','Qui écarte. Une lentille divergente éloigne les rayons lumineux les uns des autres.','Elle est plus fine au centre que sur les bords.'],
+axe:['Axe optique','La droite qui traverse la lentille en son centre, perpendiculairement à elle. On la dessine en pointillés.',''],
+centre:['Centre optique','Le point au centre de la lentille, noté O. Un rayon qui passe par O continue tout droit.',''],
+foyer:['Foyer','Le point où se croisent les rayons parallèles à l\'axe après la lentille (foyer image F′). Le foyer objet F est à la même distance, de l\'autre côté.','Avec une loupe au soleil, le petit point très lumineux est le foyer.'],
+focale:['Distance focale','La distance entre le centre O et le foyer F′. On la note f.','Si F′ est à 4 cm de O, alors f = 4 cm.'],
+renversee:['Renversée','À l\'envers, la tête en bas par rapport à l\'objet.',''],
+reelle:['Image réelle','Une image que l\'on peut recueillir sur un écran. Les rayons lumineux s\'y croisent vraiment.','L\'image d\'un vidéoprojecteur sur le mur.'],
+virtuelle:['Image virtuelle','Une image que l\'on ne peut pas recueillir sur un écran. On la voit seulement en regardant à travers la lentille.','L\'image agrandie vue dans une loupe.'],
+cristallin:['Cristallin','La lentille naturelle de l\'œil, placée derrière la pupille. Elle est souple et peut changer de forme.',''],
+retine:['Rétine','La fine couche au fond de l\'œil, sensible à la lumière. C\'est là que se forme l\'image.',''],
+accommodation:['Accommodation','Le réglage automatique de l\'œil : le cristallin se bombe plus ou moins pour que l\'image reste nette sur la rétine.','Quand tu passes du tableau à ton cahier, ton œil accommode.'],
+myopie:['Myopie','Un défaut de l\'œil : on voit bien de près mais flou de loin.',''],
+hypermetropie:['Hypermétropie','Un défaut de l\'œil : on voit flou de près, et l\'œil se fatigue.',''],
+presbytie:['Presbytie','Avec l\'âge (vers 45 ans), le cristallin devient moins souple. On a du mal à voir net de près.','C\'est pour ça que beaucoup d\'adultes tiennent leur téléphone loin pour lire.']};
+GLOSS.aide=['Comment ça marche ?','Clique sur un mot souligné en pointillés pour lire son explication. Le bouton « Lexique » affiche tous les mots expliqués.',''];
+const NUM={e5f:4};
+const CH={e4a:'C',e4b:'D',e4c:'D',e4d:'C',e6p:'diaphragme',e6c:'lentille',e6r:'ecran',e7a:'D',e7b:'C'};
+const EXF={4:['e4a','e4b','e4c','e4d'],5:['e5f'],6:['e6p','e6c','e6r'],7:['e7a','e7b']};
+const PROFILES=['M35,8 Q62,50 35,92 Q8,50 35,8','M18,8 L52,8 L52,92 L18,92 Q34,50 18,8','M18,8 L52,8 Q38,50 52,92 L18,92 Q32,50 18,8','M22,8 Q58,50 22,92 Z'];
+const PROBS=[[2,3,1.5],[2,4,2],[2,6,3],[3,6,2],[3,4.5,1.5],[4,8,2],[3,12,3],[4,6,1.5],[4,2,1.5],[6,3,1],[3,2,1.5],[5,10,2],[2,3,2]];
+function num(x){x=String(x??'').replace(/\s/g,'').replace(/,/g,'.');return x===''?NaN:Number(x);}
+function fr(v){return String(Math.round(v*10)/10).replace('.',',');}
+function rays(O,AX,S,W,d,h,f){
+  const xB=O-d*S,yB=AX-h*S,L=[],den=d-f;
+  const ln=(x1,y1,x2,y2,c,dash)=>L.push({x1,y1,x2,y2,c,dash:dash?'5 4':'none',w:dash?1.4:2});
+  ln(xB,yB,O,yB,R1); ln(O,yB,W,yB+(AX-yB)/(f*S)*(W-O),R1);
+  ln(xB,yB,W,yB+(AX-yB)/(d*S)*(W-xB),R2);
+  let img=null;
+  if(Math.abs(den)>0.06){
+    const y3=AX+(yB-AX)*(f/(f-d));
+    if(d<f)ln(O-f*S,AX,xB,yB,R3,true);
+    ln(xB,yB,O,y3,R3); ln(O,y3,W,y3,R3);
+    const OAp=d*f/den,g=-OAp/d,xI=O+OAp*S,yI=AX-g*h*S;
+    img={OAp,g,xI,yI,virt:OAp<0};
+    if(OAp<0){ln(O,yB,xI,yI,R1,true);ln(xB,yB,xI,yI,R2,true);ln(O,y3,xI,yI,R3,true);}
+  }
+  return {L,img};
+}
+const head=(x,yt,AX)=>{const s=yt<AX?1:-1;return `${x},${yt} ${x-5},${yt+10*s} ${x+5},${yt+10*s}`;};
+const GV=Array.from({length:29},(_,i)=>i*20), GH=Array.from({length:15},(_,i)=>10+i*20), GH0=Array.from({length:11},(_,i)=>i*20);
+class Component extends DCLogic {
+  state={d:8,h:2,f:3,grid:true,drag:null,sol:{},word:null,px:0,py:0,simple:null,inp:{},chk:{},open:{},pi:0,mk:{x:5,y:-1},pChk:false,pSol:false,pCounted:false,score:{ok:0,tot:0}};
+  simRef=React.createRef(); prRef=React.createRef();
+  closeW=()=>{if(this.state.word)this.setState({word:null});};
+  componentDidMount(){window.addEventListener('scroll',this.closeW,true);this.setState({pi:Math.floor(Math.random()*PROBS.length)});}
+  componentWillUnmount(){window.removeEventListener('scroll',this.closeW,true);}
+  pt(ref,e,W,H){const s=ref.current,m=s&&s.getScreenCTM();if(!m)return null;const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(m.inverse());return {x:Math.max(0,Math.min(W,p.x)),y:Math.max(0,Math.min(H,p.y))};}
+  down=(ref,n)=>e=>{e.preventDefault();try{ref.current.setPointerCapture(e.pointerId);}catch(_){}this.setState({drag:n});};
+  up=()=>{if(this.state.drag)this.setState({drag:null});};
+  move=e=>{const d=this.state.drag;if(!d||d==='M')return;const P=this.pt(this.simRef,e,560,300);if(!P)return;const r=v=>Math.round(v*10)/10,cl=(v,a,b)=>Math.max(a,Math.min(b,v));
+    if(d==='B')this.setState({d:r(cl((300-P.x)/20,0.5,14.5)),h:r(cl((170-P.y)/20,0.5,6.5))});
+    else if(d==='F')this.setState({f:r(cl((300-P.x)/20,1,7))});
+    else this.setState({f:r(cl((P.x-300)/20,1,7))});};
+  pmove=e=>{if(this.state.drag!=='M')return;const P=this.pt(this.prRef,e,560,260);if(!P)return;const h2=v=>Math.round(v*2)/2;this.setState({mk:{x:h2((P.x-260)/20),y:h2((130-P.y)/20)},pChk:false});};
+  tog=i=>()=>this.setState(s=>({sol:{...s.sol,[i]:!this.shown(i,s)}}));
+  shown(i,s=this.state){return s.sol[i]??(this.props.corrections??false);}
+  exVals(){
+    const s=this.state,on={},fb={},fc={},msg={},mc={},chk={},tg={},op={},pk={},v={};
+    const good=k=>k in CH?s.inp[k]===CH[k]:Math.abs(num(s.inp[k])-NUM[k])<0.011;
+    for(const ex in EXF){
+      const c=!!s.chk[ex];
+      EXF[ex].forEach(k=>{
+        v[k]=s.inp[k]||'';
+        on[k]=e=>{const val=e.target.value;this.setState(st=>({inp:{...st.inp,[k]:val},chk:{...st.chk,[ex]:false}}));};
+        pk[k]=val=>()=>this.setState(st=>({inp:{...st.inp,[k]:val},chk:{...st.chk,[ex]:false}}));
+        const empty=!(s.inp[k]||'').trim();
+        fb[k]=!c?'':empty?'à compléter':good(k)?'juste':'à revoir';
+        fc[k]=empty?'#6a6d80':good(k)?GREEN:RED;
+      });
+      const all=EXF[ex].every(good);
+      msg['x'+ex]=c?(all?'Tout est juste, bravo !':'Certaines réponses sont à revoir.'):'';
+      mc['x'+ex]=all?GREEN:RED;
+      chk['x'+ex]=()=>this.setState(st=>({chk:{...st.chk,[ex]:true}}));
+      tg['h'+ex]=()=>this.setState(st=>({open:{...st.open,['h'+ex]:!st.open['h'+ex]}}));op['h'+ex]=!!s.open['h'+ex];
+    }
+    const chItem=(k,extra)=>({...extra,pickC:pk[k]('C'),pickD:pk[k]('D'),bgC:s.inp[k]==='C'?TEAL:'transparent',fgC:s.inp[k]==='C'?'#fff':TEAL,bgD:s.inp[k]==='D'?TEAL:'transparent',fgD:s.inp[k]==='D'?'#fff':TEAL,fb:fb[k],fc:fc[k]});
+    const e4items=['e4a','e4b','e4c','e4d'].map((k,i)=>chItem(k,{n:i+1,path:PROFILES[i]}));
+    const e7items=[chItem('e7a',{q:'Tom voit flou de loin : l\'image se forme avant sa rétine. Il est myope.'}),chItem('e7b',{q:'Inès voit flou de près : l\'image se forme après sa rétine. Elle est hypermétrope.'})];
+    const e6items=[['e6p','La pupille'],['e6c','Le cristallin'],['e6r','La rétine']].map(([k,label])=>({label,val:v[k],on:on[k],fb:fb[k],fc:fc[k]}));
+    return {on,fb,fc,msg,mc,chk,tg,op,v,e4items,e6items,e7items};
+  }
+  renderVals(){
+    const {d,h,f,grid}=this.state,O=300,AX=170,S=20;
+    const R=rays(O,AX,S,560,d,h,f),im=R.img;
+    let status,stC,nature;
+    if(!im){nature='pas d\'image nette';status='L\'objet est au foyer F : les rayons ressortent parallèles entre eux. Ils ne se croisent jamais, il n\'y a pas d\'image nette.';stC=AMBER;}
+    else if(im.virt){nature='virtuelle, droite, agrandie';status='L\'objet est entre F et la lentille. L\'image est virtuelle : on ne peut pas la recueillir sur un écran, mais on la voit en regardant à travers la lentille. C\'est l\'effet loupe.';stC=VIOL;}
+    else{const a=Math.abs(im.g);nature='réelle, renversée, '+(a>1.03?'plus grande':a<0.97?'plus petite':'même taille');status='L\'objet est plus loin que F. L\'image est réelle : elle se forme après la lentille, à l\'envers, et on peut la voir sur un écran.';stC=GREEN;}
+    const objX=O-d*S,objY=AX-h*S;
+    const g={};Object.keys(GLOSS).concat('lexique').forEach(k=>{g[k]=e=>{e.stopPropagation();this.setState({word:k,px:e.clientX,py:e.clientY});};});
+    const w=this.state.word,iw=typeof window!=='undefined'?window.innerWidth:1000,ih=typeof window!=='undefined'?window.innerHeight:800;
+    const popItems=w==='lexique'?Object.keys(GLOSS).filter(k=>k!=='aide').map(k=>({title:GLOSS[k][0],def:GLOSS[k][1],ex:false,open:()=>this.setState({word:k})})):w?[{title:false,def:GLOSS[w][1],ex:GLOSS[w][2]||false}]:[];
+    const simple=this.state.simple??(this.props.simple??true);
+    const [pf,pd,ph]=PROBS[this.state.pi],PR=rays(260,130,20,560,pd,ph,pf),pim=PR.img,mk=this.state.mk;
+    const pOk=Math.abs(mk.x-pim.OAp)<=0.5&&Math.abs(mk.y-pim.g*ph)<=0.5;
+    const mkX=260+mk.x*20,mkY=130-mk.y*20,preset=(d,h,f)=>()=>this.setState({d,h,f});
+    return {
+      ...this.exVals(),
+      g,popOpen:!!w,popWord:w==='lexique'?'Lexique':w?GLOSS[w][0]:'',popItems,
+      popLeft:Math.max(8,Math.min(this.state.px-20,iw-326)),popTop:w==='lexique'?Math.max(8,Math.min(this.state.py+18,ih*0.3)):(this.state.py>ih-240?Math.max(8,this.state.py-230):this.state.py+18),
+      closePop:()=>this.setState({word:null}),
+      simple,toggleSimple:()=>this.setState({simple:!simple}),
+      simpleLabel:simple?'Explications simples : oui':'Explications simples : non',
+      simpleBg:simple?'oklch(0.5 0.12 175)':'transparent',simpleFg:simple?'#fff':'oklch(0.45 0.11 175)',
+      seyes:this.props.seyes??true,gv:GV,gh:GH,gh0:GH0,grid,
+      simRef:this.simRef,prRef:this.prRef,move:this.move,pmove:this.pmove,up:this.up,
+      dnB:this.down(this.simRef,'B'),dnF:this.down(this.simRef,'F'),dnFp:this.down(this.simRef,'Fp'),dnM:this.down(this.prRef,'M'),
+      simLines:R.L,objX,objY,objHead:head(objX,objY,AX),objBx:objX-14,objBy:objY-6,fX:O-f*S,fpX:O+f*S,
+      imgShow:!!im&&Math.abs(im.OAp)<40,imgX:im?im.xI:0,imgY:im?im.yI:0,imgHead:im?head(im.xI,im.yI,AX):'',imgDash:im&&im.virt?'6 4':'none',
+      imgAy:im&&im.yI<AX?188:162,imgBx:im?im.xI+15:0,imgBy:im?(im.yI<AX?im.yI-4:im.yI+16):0,
+      rOA:fr(d),rF:fr(f),rAB:fr(h),rOAp:!im?'à l\'infini':im.virt?fr(-im.OAp)+' cm, du côté de l\'objet':fr(im.OAp)+' cm, après la lentille',rApBp:im?fr(Math.abs(im.g*h))+' cm':'—',
+      nature,status,stC,
+      pPhoto:preset(12,2,3),pProj:preset(4,1.5,3),pLoupe:preset(2,1.5,4),
+      toggleGrid:()=>this.setState({grid:!grid}),gridLabel:grid?'Masquer la grille':'Afficher la grille',
+      t1:this.tog(1),t2:this.tog(2),t3:this.tog(3),s1:this.shown(1),s2:this.shown(2),s3:this.shown(3),
+      l1:this.shown(1)?'Masquer la correction':'Voir la correction',l2:this.shown(2)?'Masquer la correction':'Voir la correction',l3:this.shown(3)?'Masquer la correction':'Voir la correction',
+      prText:`Lentille convergente, f = ${fr(pf)} cm. L'objet AB mesure ${fr(ph)} cm et se trouve à ${fr(pd)} cm de la lentille. Fais glisser le point B′ à l'endroit où se forme l'image de B. (1 carreau = 1 cm)`,
+      prLines:PR.L,prIx:pim.xI,prIy:pim.yI,prIhead:head(pim.xI,pim.yI,130),prIdash:pim.virt?'6 4':'none',
+      prOx:260-pd*20,prOy:130-ph*20,prOhead:head(260-pd*20,130-ph*20,130),prObx:260-pd*20-14,prOby:130-ph*20-4,prF:260-pf*20,prFp:260+pf*20,
+      mkX,mkY,mkLx:mkX+24,mkLy:mkY<130?mkY-8:mkY+20,
+      prShow:this.state.pChk,prColor:pOk?GREEN:RED,
+      prMsg:pOk?`Bravo ! L'image est ${pim.virt?'virtuelle et droite':'réelle et renversée'}, A′B′ = ${fr(Math.abs(pim.g*ph))} cm.`:'Pas tout à fait. Trace deux rayons particuliers depuis B : B′ est à leur croisement (ou à celui de leurs prolongements).',
+      prCheck:()=>this.setState(st=>({pChk:true,pCounted:true,score:st.pCounted?st.score:{ok:st.score.ok+(pOk?1:0),tot:st.score.tot+1}})),
+      prSol:this.state.pSol,prSolLabel:this.state.pSol?'Masquer la solution':'Voir la solution',prSolToggle:()=>this.setState(st=>({pSol:!st.pSol})),
+      prNext:()=>this.setState(st=>{let n=st.pi;while(n===st.pi)n=Math.floor(Math.random()*PROBS.length);return {pi:n,mk:{x:5,y:-1},pChk:false,pSol:false,pCounted:false};}),
+      score:`${this.state.score.ok} / ${this.state.score.tot}`
+    };
+  }
+}
+</script>
+</body>
+</html>
