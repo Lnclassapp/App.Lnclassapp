@@ -7,7 +7,7 @@
 | **Ouvert le** | 2026-10-12 |
 | **Revu le** | 2026-10-13 (grill repris avec l'algorithme en 5 étapes : questionner, supprimer, simplifier, accélérer, automatiser) ; 2026-10-27 (périmètre élargi aux maquettes à l'identique, voir ci-dessous) |
 | **Pilote** | Touré (`toure-bangaly`), avec l'accord du porteur |
-| **Branche** | `feature/contenu-en-blocs` |
+| **Branche** | `feature/fiches-de-cours` (l'ancienne `feature/contenu-en-blocs` du 12/10 est laissée telle quelle) |
 | **Programme** | — |
 
 ---

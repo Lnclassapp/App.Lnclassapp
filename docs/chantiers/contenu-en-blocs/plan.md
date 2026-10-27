@@ -9,10 +9,10 @@
 |---|---|---|
 | Où vit le contenu d'une fiche | Un document de blocs `jsonb` par leçon (`course_sheets`), importé au format `lnclass.course_sheet` v1, rendu par un partial par type de bloc | Retenu par le pilote — [ADR-XXXX](../../decisions/adr/XXXX-fiche-de-cours-en-donnees-importees.md) |
 | Figure propre à une fiche | `kind` en liste fermée : un partial et un contrôleur Stimulus par `kind`, réglages dans les données, bornés par le schéma | Retenu par le pilote — même ADR |
-| Rendu sous 1 000 px | Proposition : même design, pages fluides (détail dans l'[UDR-XXXX](../../decisions/udr/XXXX-fiche-de-cours-a-l-identique-des-maquettes.md) § 4) | **En attente du porteur** — Lot H |
-| Nom à l'écran | Proposition : « Fiche de cours » | **En attente du porteur** — Lot H |
+| Rendu sous 1 000 px | Proposition : même design, pages fluides (détail dans l'[UDR-XXXX](../../decisions/udr/XXXX-fiche-de-cours-a-l-identique-des-maquettes.md) § 4) | Retenu par Touré pour le test (2026-10-27), à confirmer par le porteur — Lot G, phase 1 |
+| Nom à l'écran | « Fiche de cours » par défaut | **En attente du porteur** — Lot H |
 
-Tant que le porteur n'a pas répondu, les lots A à G codent la mise en page des maquettes à partir de 1 000 px, et le libellé du lien de la leçon reste une clé de locale dont seule la valeur changera.
+Le libellé « Fiche de cours » est une valeur de locale : si le porteur choisit un autre nom, seule cette valeur change (Lot H).
 
 ## Graphe
 
@@ -26,13 +26,15 @@ PHASE 1 — test sur la fiche Thalès
     ├─► Lot B  Lire une fiche             ├─ en parallèle
     └─► Lot C  Exercices et Je m'entraîne ┘
           ↓
+    Lot G  Téléphone : pages fluides sous 1 000 px
+          ↓
     Lot D  Fiche Thalès, importée dans les seeds des environnements de PR
           → PR ouverte prête (après accord de Touré) : lien Railway pour le test
 
 PHASE 2 — après validation du test par Touré
     ├─► Lot E  Fiche Lentilles            ┐ en parallèle
     └─► Lot F  Fiche Texte argumentatif   ┘
-    Lot H  Téléphone et nom à l'écran (attend le porteur ; après D, puis E et F s'ils sont faits)
+    Lot H  Nom à l'écran (attend le porteur)
 ```
 
 ---
@@ -118,10 +120,10 @@ PHASE 2 — après validation du test par Touré
                     db/seeds/data/course_sheets/thales.json
                     db/seeds/demo/fiches_de_cours.rb
                     db/seeds.rb
-- **Dépend de**   : Lot A, Lot B, Lot C
+- **Dépend de**   : Lot A, Lot C, Lot G
 - **Test associé**: test/system/catalog/course_sheet_thales_test.rb
                     test/integration/catalog/course_sheet_seeds_test.rb
-- **Done quand**  : dans l'environnement de PR, la leçon publiée « Propriétés de Thalès dans un triangle » (3ème) a sa fiche de cours, importée par les seeds (`demo/fiches_de_cours`, étapes development et pr) ; elle se lit comme la maquette à 1 000 px et plus ; points déplaçables, réciproque, réinitialisation ; exercices et générateur (CA-9). Fin de la phase 1.
+- **Done quand**  : dans l'environnement de PR, la leçon publiée « Propriétés de Thalès dans un triangle » (3ème) a sa fiche de cours, importée par les seeds (`demo/fiches_de_cours`, étapes development et pr) ; elle se lit comme la maquette à 1 000 px et plus, et à 390 px sans défilement horizontal, figure manipulable au doigt ; points déplaçables, réciproque, réinitialisation ; exercices et générateur (CA-9). Fin de la phase 1.
 
 ### Lot E — Fiche Lentilles *(phase 2, après validation du test par Touré)*
 
@@ -148,17 +150,24 @@ PHASE 2 — après validation du test par Touré
 - **Test associé**: test/system/catalog/course_sheet_argument_test.rb
 - **Done quand**  : la fiche importée se lit comme la maquette ; surligneurs, tableau des connecteurs, exercice à choix figé, rédaction et ses vérifications (CA-11)
 
-### Lot H — Téléphone et nom à l'écran *(en attente du porteur)*
+### Lot G — Téléphone : pages fluides sous 1 000 px *(phase 1, retenu par Touré pour le test)*
 
 - **Couche**      : ui
 - **Fichiers**    : app/assets/stylesheets/course_sheet.css
-                    app/assets/stylesheets/course_sheet/*.css
                     app/javascript/controllers/course_sheet/glossary_controller.js
-                    config/locales/catalog/course_sheets.fr.yml
-                    docs/guide/glossaire.md
-- **Dépend de**   : réponse du porteur sur #318, Lot D (et Lot E, Lot F s'ils sont faits)
+                    app/views/catalog/course_sheets/blocks/_table.html.erb
+- **Dépend de**   : Lot B, Lot C
 - **Test associé**: test/system/catalog/course_sheet_phone_test.rb
-- **Done quand**  : à 390 px, les 3 fiches se lisent sans défilement horizontal, figures manipulables au doigt ; le nom retenu s'affiche partout
+- **Done quand**  : à 390 px, la fiche de fixture se lit sans défilement horizontal : même couleurs, polices et rythme Seyès ; plus de hauteur A4 ; marges intérieures de 16 px ; titres réduits ; tableau en cartes ; lexique en tiroir en bas de l'écran sous 640 px ; champs et boutons d'au moins 44 px. Les lots de fiche (D, E, F) rendent leurs figures fluides dans leur propre feuille.
+
+### Lot H — Nom à l'écran *(en attente du porteur)*
+
+- **Couche**      : ui
+- **Fichiers**    : config/locales/catalog/course_sheets.fr.yml
+                    docs/guide/glossaire.md
+- **Dépend de**   : réponse du porteur sur #318
+- **Test associé**: test/controllers/catalog/course_sheets_controller_test.rb
+- **Done quand**  : le nom retenu s'affiche sur la leçon et en titre de la fiche ; rien à faire si c'est « Fiche de cours »
 
 ## Vagues
 
@@ -166,33 +175,36 @@ PHASE 2 — après validation du test par Touré
 Phase 1
   Vague 1 : Lot 0                  → 1 agent, séquentiel
   Vague 2 : Lot A ‖ Lot B ‖ Lot C  → 3 agents, worktrees isolés
-  Vague 3 : Lot D                  → 1 agent ; puis push et PR prête, après accord de Touré
+  Vague 3 : Lot G                  → 1 agent
+  Vague 4 : Lot D                  → 1 agent ; puis push et PR prête, après accord de Touré
 Phase 2 (après validation du test)
-  Vague 4 : Lot E ‖ Lot F          → 2 agents
-  Vague 5 : Lot H                  → 1 agent, après la réponse du porteur
+  Vague 5 : Lot E ‖ Lot F          → 2 agents
+Dès la réponse du porteur
+  Lot H                            → 1 agent
 ```
 
-Tant que le Lot H n'est pas fait, la fiche garde la largeur des maquettes : sur un téléphone, le test de la phase 1 se lit avec un défilement horizontal.
+Le test de la phase 1 se lit sur téléphone dès le Lot G.
 
-Branches de lot : `feature/contenu-en-blocs-lot-<x>`, créées depuis `feature/contenu-en-blocs` une fois la vague précédente fusionnée dedans. Exécution : agent `executant-lot` (Sonnet), test rouge → domaine → infrastructure → delivery → UI, un commit par lot citant #318.
+Branches de lot : `feature/fiches-de-cours-lot-<x>`, créées depuis `feature/fiches-de-cours` une fois la vague précédente fusionnée dedans. Exécution : agent `executant-lot` (Sonnet), test rouge → domaine → infrastructure → delivery → UI, un commit par lot citant #318.
 
 ## Vérification de collision
 
 | Fichier | Lot propriétaire |
 |---|---|
 | `config/routes/catalog.rb` | Lot 0 |
-| `config/locales/catalog/course_sheets.fr.yml` | Lot 0 (valeur du nom : Lot H) |
+| `config/locales/catalog/course_sheets.fr.yml` | Lot 0 (valeur du nom : Lot H, après la réponse du porteur) |
 | `app/views/catalog/course_sheets/_block.html.erb` | Lot 0 |
-| `app/assets/stylesheets/course_sheet.css` | Lot 0 (règles sous 1 000 px : Lot H) |
+| `app/assets/stylesheets/course_sheet.css` | Lot 0 (règles sous 1 000 px : Lot G, séquentiel après B et C) |
 | `test/design/design_tokens_test.rb` | Lot 0 |
 | `test/fixtures/course_sheets.yml` | Lot 0 |
 | `db/schema.rb` | Lot 0 |
 | `app/domain/entities/catalog/import_kind.rb`, `config/initializers/imports.rb` | Lot A |
 | `app/views/catalog/courses/show.html.erb` | Lot B |
 | `db/seeds.rb` | Lot D |
-| `app/javascript/controllers/course_sheet/glossary_controller.js` | Lot B (tiroir sous 640 px : Lot H) |
+| `app/javascript/controllers/course_sheet/glossary_controller.js` | Lot B (tiroir sous 640 px : Lot G, séquentiel) |
+| `app/views/catalog/course_sheets/blocks/_table.html.erb` | Lot B (cartes : Lot G, séquentiel) |
 
-Lot H reprend des fichiers des vagues précédentes : il ne démarre qu'une fois les lots de fiche fusionnés, donc sans parallélisme possible avec eux.
+Le Lot G reprend des fichiers du Lot 0 et du Lot B : il ne démarre qu'une fois la vague 2 fusionnée, seul.
 
 ## Portes de sortie
 

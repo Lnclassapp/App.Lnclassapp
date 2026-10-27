@@ -8,7 +8,7 @@ problematique: Les maquettes des fiches de cours (Seyès, Kalam, Source Serif 4,
 
 | | |
 |---|---|
-| **Statut** | Proposé — deux points en attente du porteur (§ 4) |
+| **Statut** | Proposé — exception à l'UDR-0136 accordée par Touré le 2026-10-27 pour le test, à confirmer par le porteur ; nom à l'écran en attente du porteur (§ 4) |
 | **Date** | 2026-10-27 |
 | **Chantier** | `docs/chantiers/contenu-en-blocs` (#318) |
 | **ADR lié** | ADR-XXXX-fiche-de-cours-en-donnees-importees |
@@ -24,7 +24,7 @@ Le reste de l'application suit l'UDR-0136 : palette froide, une seule police (DM
 
 ## 2. Décision
 
-**L'écran de la fiche de cours a son propre habillage, isolé du reste de l'application.**
+**L'écran de la fiche de cours a son propre habillage, isolé du reste de l'application.** Exception à l'UDR-0136 accordée par Touré le 2026-10-27 pour le test, à confirmer par le porteur.
 
 - Une feuille de style à part, `app/assets/stylesheets/course_sheet.css`, chargée seulement sur l'écran de la fiche. Elle porte les jetons des maquettes en variables CSS (`--sheet-paper`, `--sheet-ink`, `--sheet-primary`, `--sheet-accent`…), le Seyès en dégradés, les 3 thèmes (`blue`, `teal`, `burgundy`) et les composants (`.sheet-page`, `.sheet-box`, `.sheet-btn`…).
 - Kalam (400, 700) et Source Serif 4 (variable, 400 à 600, italique) en `woff2`, servies par Lnclass depuis `public/fonts/`, déclarées seulement dans cette feuille.
@@ -48,7 +48,7 @@ Les valeurs exactes de chaque composant se lisent dans le gabarit `<x-dc>` des m
 ## 4. En attente du porteur (#318)
 
 1. **Nom à l'écran** — proposition : « Fiche de cours », cohérent avec l'UDR-0130 (la fiche se rattache à la leçon, `Course`).
-2. **Téléphone** — proposition : le même design avec des pages fluides sous 1 000 px.
+2. **Téléphone** — retenu par Touré pour le test de la phase 1 (2026-10-27), à confirmer par le porteur : le même design avec des pages fluides sous 1 000 px.
    - On garde les couleurs, les polices et le rythme Seyès de 8 et 32 px.
    - La hauteur A4 disparaît, et les marges intérieures passent à 16 px.
    - Les figures SVG se redimensionnent, et leurs points se déplacent au doigt (zone de toucher ≥ 44 px).
