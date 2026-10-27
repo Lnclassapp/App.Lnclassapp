@@ -24,6 +24,13 @@ class School::RegenerateCodesInBulkPerformanceTest < ActiveSupport::TestCase
         cycle: "both", status: "active", school_code: codes[index], created_at:, updated_at: created_at }
     end
     rows.each_slice(1_000) { Orm::School.insert_all!(it) }
+    analyze("schools")
+  end
+
+  # Les lignes du test ne sont jamais validées : sans ANALYZE, PostgreSQL croit les tables vides et croise chaque classe avec
+  # chaque établissement (boucle imbriquée), quadratique. En production, l'autovacuum a analysé les tables bien avant.
+  def analyze(table)
+    ActiveRecord::Base.connection.execute("ANALYZE #{table}")
   end
 
   def insert_classrooms
@@ -40,6 +47,7 @@ class School::RegenerateCodesInBulkPerformanceTest < ActiveSupport::TestCase
         join_code: Array.new(Entities::Classroom::JoinCode::LENGTH) { symbols[(index / (symbols.size**it)) % symbols.size] }.join }
     end
     rows.each_slice(2_000) { Orm::Classroom.insert_all!(it) }
+    analyze("classrooms")
   end
 
   # → [secondes, requêtes SQL]
