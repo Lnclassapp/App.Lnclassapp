@@ -20,6 +20,10 @@
 
 En une phrase sans les mots du symptôme : le test lit une seule fois une valeur que le navigateur ne fixe qu'après un chargement asynchrone.
 
+**Trou de test comblé** : le test attend `decode()` (délai `UPLOAD_WAIT`) ; une image servie en retard passe, une image refusée échoue toujours (vérifié avec un 404).
+
+**Effets de bord écartés** : seul ce test lisait l'état de l'image d'un coup ; `profile_photo_test` et `question_image_test` réessaient déjà.
+
 ## Dette laissée derrière
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
