@@ -29,7 +29,7 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
     assert_equal [ number ], page.all("fieldset[data-classroom--signup-steps-target=step]", visible: :visible).map { it["data-step"].to_i }
   end
 
-  # Step 2, in the order of the page; the move to step 3 comes a second after the number is complete.
+  # Step 2, in the order of the page; the move to step 3 comes a delay after the number is complete (1 s in production, 100 ms here).
   def fill_person(contact: "0701020304", material: true)
     select "SVT", from: "teacher_registration[material_slug]" if material
     fill_in "teacher_registration[last_name]", with: "KOUASSI"
@@ -70,7 +70,7 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
       assert_no_text "Autre matière"
       # Review of #295: the subject is required; every other field being valid, step 2 holds until it is chosen.
       fill_person(material: false)
-      assert_step 2, settle: 1.6
+      assert_step 2, settle: signup_settle
       select "SVT", from: "teacher_registration[material_slug]"
       assert_field "teacher_registration[contact]", with: "0701020304"
 

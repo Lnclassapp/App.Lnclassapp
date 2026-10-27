@@ -171,7 +171,7 @@ class Classroom::JoinTest < ApplicationSystemTestCase
     within("turbo-frame#picker_classrooms") { choose name }
   end
 
-  # Step 2, then (about a second after the last key) step 3 by itself.
+  # Step 2, then (a delay after the last key: 1 s in production, 100 ms here) step 3 by itself.
   def fill_in_the_student(pin_confirmation: "4821")
     fill_in_step_two
     assert_step 3

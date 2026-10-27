@@ -10,6 +10,9 @@
 #
 # A green run leaves tmp/ci-verdicts/<fingerprint>-<level>. The fingerprint is the tree of the commit without its
 # Markdown: a merge of Develop that brings only documents, or a fixed sentence after a review, proves nothing new.
+# Each green step leaves its own verdict too, tmp/ci-verdicts/steps/<key> (chantier ci-rejeu-cible): the key is its
+# command and the fingerprint of its inputs alone (Inputs below). A step whose inputs did not move is not played again:
+# a line of JavaScript replays neither the unit suite nor the import performance.
 require "digest"
 require "fileutils"
 require "time"
@@ -77,9 +80,65 @@ class CiScope
     end
   end
 
-  def self.fingerprint(ls_tree)
+  # only: the tree lines kept (nil, every one); the Markdown outside the code never counts.
+  def self.fingerprint(ls_tree, only: nil)
     kept = ls_tree.lines.map(&:chomp).reject { doc?(it.split("\t", 2).last.to_s) }
+    kept = kept.select { only.call(it.split("\t", 2).last.to_s) } if only
     Digest::SHA256.hexdigest(kept.join("\n"))
+  end
+
+  # The files a step reads, as path prefixes: `only` keeps those, `except` leaves those out, `own_tests` leaves out the
+  # test files of the other runs. No inputs, or any doubt: the whole tree (fail-safe). A wrong prefix can only skip a
+  # step that should have played: each list below names what the step cannot read, and test/config/ci_scope_test.rb holds it.
+  Inputs = Data.define(:only, :except, :own_tests) do
+    def initialize(only: nil, except: [], own_tests: nil)
+      super
+    end
+
+    def include?(path)
+      under = ->(prefixes) { prefixes.any? { |prefix| path == prefix || path.start_with?(prefix.end_with?("/") ? prefix : "#{prefix}/") } }
+      return false if only && !under.(only)
+      return false if under.(except)
+
+      own_tests.nil? || !path.match?(%r{\Atest/.+_test\.rb\z}) || path.start_with?(own_tests)
+    end
+  end
+
+  # The browser and the style sheets: no Ruby process reads them, except the unit tests of FRONT_WORDS.
+  FRONT = %w[app/javascript/ app/assets/stylesheets/].freeze
+  INPUTS = {
+    tree: nil,
+    ruby: Inputs.new(except: %w[app/javascript/ app/assets/]),
+    gems: Inputs.new(only: %w[Gemfile Gemfile.lock .bundler-audit.yml config/bundler-audit.yml bin/bundler-audit]),
+    yarn: Inputs.new(only: %w[package.json yarn.lock .yarnrc.yml]),
+    brakeman: Inputs.new(except: %w[app/javascript/ app/assets/ test/ docs/]),
+    # The unit suite: neither the browser's files nor the system and performance tests. The unit tests that do read the
+    # browser's files (FRONT_WORDS) are played again alone when those move (CiScope.front_readers).
+    unit: Inputs.new(except: [ *FRONT, "test/system/", "test/performance/" ]),
+    # The system run reads everything but the other runs' tests: a test file is loaded by its own run only.
+    system: Inputs.new(own_tests: "test/system/"),
+    seeds: Inputs.new(except: [ *FRONT, "test/" ]),
+    # Tailwind reads app/views, app/helpers and app/javascript (@source), esbuild app/javascript.
+    assets: Inputs.new(except: %w[test/ db/ docs/ app/domain/ app/infrastructure/ app/jobs/])
+  }.freeze
+
+  # The words of a unit test that reads the browser's files, or their build: over-wide on purpose (a « javascript: »
+  # URL in a sanitizer test counts), so that a test reading them is never missed.
+  FRONT_WORDS = /javascript|stylesheet|tailwind|esbuild|builds|\.css\b|\.js\b/i
+
+  # The unit tests that read the browser's files: those that say so, and those calling a test helper that does.
+  def self.front_readers(tests, read: ->(path) { File.read(path) if File.exist?(path) }, helpers: Dir["test/support/**/*.rb"])
+    names = helpers.select { read.call(it).to_s.match?(FRONT_WORDS) }.flat_map { names_of(it, read) }
+    tests.select do |test|
+      text = read.call(test).to_s
+      text.match?(FRONT_WORDS) || names.any? { text.match?(/\b#{Regexp.escape(it)}\b/) }
+    end
+  end
+
+  # The key of a step's verdict: what it runs, and the fingerprint of what it reads.
+  def self.step_key(ls_tree, command:, env: {}, inputs: nil, extra: nil)
+    only = inputs && ->(path) { inputs.include?(path) }
+    Digest::SHA256.hexdigest([ Array(command).join(" "), env.sort.inspect, fingerprint(ls_tree, only:), extra.to_s ].join("\0"))
   end
 
   # The green verdicts of this machine, one file per fingerprint and level.
@@ -98,6 +157,14 @@ class CiScope
     def record(fingerprint, level, line)
       FileUtils.mkdir_p(@dir)
       File.write(File.join(@dir, "#{fingerprint}-#{level}"), "#{line}\n")
+    end
+
+    # A green step, by its key (CiScope.step_key).
+    def step?(key) = File.exist?(File.join(@dir, "steps", key))
+
+    def record_step(key, line)
+      FileUtils.mkdir_p(File.join(@dir, "steps"))
+      File.write(File.join(@dir, "steps", key), "#{line}\n")
     end
   end
 end

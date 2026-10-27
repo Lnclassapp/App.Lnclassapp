@@ -109,6 +109,24 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_select "form#student-registration-form fieldset[data-step='1'] ~ fieldset[data-step='2'] ~ fieldset[data-step='3']"
   end
 
+  # Chantier ci-rejeu-cible: the delay before step 2 moves on is the controller's own (1 s) unless the environment sets it;
+  # only the tests do (100 ms), so the production page carries no delay attribute.
+  test "the step-2 delay is set by the test environment alone; unset, the page leaves the controller's default" do
+    get new_student_registration_path
+    assert_select "#student-signup[data-classroom--signup-steps-delay-value='100']"
+    get new_teacher_registration_path
+    assert_select "#teacher-signup[data-classroom--signup-steps-delay-value='100']"
+
+    delay = Rails.configuration.x.signup_steps_delay_ms
+    Rails.configuration.x.signup_steps_delay_ms = nil
+    get new_student_registration_path
+    assert_select "#student-signup[data-controller='classroom--signup-steps']:not([data-classroom--signup-steps-delay-value])"
+    get new_teacher_registration_path
+    assert_select "#teacher-signup[data-controller='classroom--signup-steps']:not([data-classroom--signup-steps-delay-value])"
+  ensure
+    Rails.configuration.x.signup_steps_delay_ms = delay
+  end
+
   # CA-C8, UDR « inscription élève en trois étapes » §3.5 bis: on a computer, one blue panel on the left, the same whatever the step
   # (the page is the same; only the step marked `aria-current` changes), shown from lg up and replacing the three-segment bar.
   test "CA-C8: the panel carries the welcome, the three steps in a list with the current one marked, and « Déjà un compte ? »" do

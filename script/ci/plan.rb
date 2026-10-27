@@ -11,7 +11,11 @@
 require "yaml"
 
 class CiPlan
-  Step = Data.define(:group, :title, :command)
+  # inputs: what the step reads (CiScope::Inputs, or the name of one in CiScope::INPUTS); nil, the whole tree.
+  # Only bin/ci-quiet reads it, to keep a verdict per step (chantier ci-rejeu-cible); bin/ci and GitHub play every step.
+  Step = Data.define(:group, :title, :command, :inputs) do
+    def initialize(group:, title:, command:, inputs: nil) = super
+  end
   Group = Data.define(:name, :db, :files)
 
   ROOT = File.expand_path("../..", __dir__)
@@ -38,8 +42,8 @@ class CiPlan
     add_group(Group.new(name:, db:, files: files.sort), block)
   end
 
-  def step(title, command)
-    @steps << Step.new(group: @current, title:, command:)
+  def step(title, command, inputs: nil)
+    @steps << Step.new(group: @current, title:, command:, inputs:)
   end
 
   # The steps one runner plays for CI_GROUP, Setup first.
