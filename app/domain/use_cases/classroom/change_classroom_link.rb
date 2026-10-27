@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Classroom::ChangeClassroomLink
 # Rôle : change ensemble le lien et le code d'une classe, sous son verrou ; l'ancien lien et l'ancien code sont invalides aussitôt, journalisé
-# ADR  : 0026, 0028, 0085, XXXX-code-de-classe-a-six-caracteres (§4.3) · UDR : 0081 (§3.6)
+# ADR  : 0026, 0028, 0085, 0109 (§4.3) · UDR : 0081 (§3.6)
 module UseCases
   module Classroom
     class ChangeClassroomLink

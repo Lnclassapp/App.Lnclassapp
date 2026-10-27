@@ -1,6 +1,6 @@
 // ⚡ FRONT · classroom/signup_steps_controller — l'inscription élève découpée en trois étapes dans un seul formulaire
 // Rôle : un seul fieldset visible ; la liste des étapes du panneau d'ordinateur suit l'étape ; le code de classe reconnu, une classe de la cascade touchée ou les quatre champs valides font avancer seuls ; retour sans perte ; annonce aria-live
-// ADR  : XXXX-code-de-classe-a-six-caracteres (§4.4, §4.5) · UDR : XXXX-inscription-eleve-en-trois-etapes (§3.1 à §3.8, §3.5 bis)
+// ADR  : 0109 (§4.4, §4.5) · UDR : 0135 (§3.1 à §3.8, §3.5 bis)
 import { Controller } from "@hotwired/stimulus"
 
 const CODE_LENGTH = 6

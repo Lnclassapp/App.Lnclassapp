@@ -28,6 +28,8 @@ class Classroom::TeacherHomeTest < ApplicationSystemTestCase
       assert_selector "header.teacher-band"
       assert_no_text "Bonjour"
       assert_no_selector "nav.bottom-0"
+      assert_no_selector "nav[aria-label='#{I18n.t('shared.navigation.bottom_bar.label')}']"
+      assert_no_button I18n.t("shared.navigation.bottom_bar.more")
       within(card(@classroom)) do
         assert_text tl("classroom_card.students", count: 1)
         assert_text tl("classroom_card.assignments", count: 1)

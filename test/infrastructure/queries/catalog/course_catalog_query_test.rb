@@ -64,7 +64,7 @@ module Queries
 
       # CA-6 à CA-10 (ADR-0090 §4.1) : l'avancement de l'élève se lit sur les fiches publiées du cours.
       def progress_of(course, student) = student_catalog(student).find { it.slug == course.slug }.to_h.values_at(:progress, :resume_essential_slug)
-      def student_catalog(student) = CourseCatalogQuery.new.call(actor: Entities::Identity::Actor.new(user_id: student.id, role: :student)).rows
+      def student_catalog(student, **) = CourseCatalogQuery.new.call(actor: Entities::Identity::Actor.new(user_id: student.id, role: :student), **).rows
 
       test "CA-6, CA-7, CA-8: rien lu, :new ; une fiche lue, :started et cette fiche ; toutes lues, :done" do
         student = create_student
@@ -195,6 +195,19 @@ module Queries
         assert_equal [ first.slug, second.slug ], cellule.essentials.map(&:slug)
         assert_empty rows.find { it.slug == @genetique.slug }.essentials, "sans fiche publiée, aucune ligne"
         assert_equal [ false ], rows.find { it.slug == @conscience.slug }.essentials.map(&:review), "une lacune résolue n'est plus à revoir"
+      end
+
+      # CA-E14 : les leçons de l'élève sur ordinateur suivent l'ordre du programme (Leçon 1, 2, 10) ; sans les fiches (le
+      # téléphone), l'ordre des noms reste.
+      test "CA-E14: avec with_essentials, l'élève lit les leçons d'une matière dans l'ordre du sous-titre, puis par nom" do
+        suites = create_course(name: "Suites", subtitle: "Leçon 10 · Progression DPFC 2026-2027", level: @tle, material: @philo)
+        derivees = create_course(name: "Dérivées", subtitle: "Leçon 2 · Progression DPFC 2026-2027", level: @tle, material: @philo)
+        limites = create_course(name: "Limites", subtitle: "Leçon 1 · Progression DPFC 2026-2027", level: @tle, material: @philo)
+        sans = create_course(name: "Annexe", level: @tle, material: @philo)
+        student = create_student
+
+        assert_equal [ limites, derivees, suites, sans, @conscience ].map(&:slug), lessons_for(student, material: @philo.slug).map(&:slug)
+        assert_equal [ sans, derivees, @conscience, limites, suites ].map(&:slug), student_catalog(student, material: @philo.slug).map(&:slug)
       end
 
       test "sans with_essentials, les lignes de l'élève n'ont pas de fiches et la requête reste à trois" do

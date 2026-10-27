@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Classroom::ClassroomRepository
 # Rôle : traduit Orm::Classroom ↔ Entities::Classroom::Classroom ; jeton du lien (un par un, en masse), code de classe, verrou, génération en masse, retrait d'une classe vide, nom et plafond
-# ADR  : 0030, 0039, 0041, 0059, 0085, 0088, 0096, 0098, XXXX-code-de-classe-a-six-caracteres
+# ADR  : 0030, 0039, 0041, 0059, 0085, 0088, 0096, 0098, 0109
 module Repositories
   module Classroom
     class ClassroomRepository
@@ -9,6 +9,10 @@ module Repositories
       LINK_TOKEN_SQL = "substr(replace(gen_random_uuid()::text, '-', ''), 1, 12)".freeze
       # L'index unique du nom (école, année, nom) ; celui du code et celui du jeton du lien ne sont pas un nom pris.
       NAME_INDEX = "index_classrooms_on_school_id_and_school_year_and_name".freeze
+      # Le code (six caractères, 31 symboles) est tiré par la base : deux classes peuvent tirer le même (anniversaires, ~0,8 par
+      # génération de 38 500 classes). Cette collision seule est retentée, avec un nouveau tirage, un nombre borné de fois.
+      JOIN_CODE_INDEX = "index_classrooms_on_join_code".freeze
+      JOIN_CODE_ATTEMPTS = 3
       # ADR-0059 : ce qui fait qu'une classe a servi, dans l'ordre où la raison est donnée.
       USAGES = { has_students: Orm::ClassroomStudent, has_teachers: Orm::TeacherClassroom,
                  has_assignments: Orm::ClassroomAssignment }.freeze
@@ -81,23 +85,28 @@ module Repositories
       end
 
       # Un nom pris dans l'école et l'année donne :conflict. Savepoint : traduit seulement la violation de l'index unique du nom,
-      # sans casser la transaction du use case ; toute autre violation (code, jeton du lien) est relancée.
+      # sans casser la transaction du use case ; une collision du code est retentée (nouveau tirage) ; toute autre violation
+      # (jeton du lien) est relancée.
       def create(classroom:)
-        record = Orm::Classroom.new(attributes_of(classroom))
-        Orm::Classroom.transaction(requires_new: true) { record.save! }
+        record = retrying_join_code_collision do
+          Orm::Classroom.new(attributes_of(classroom)).tap(&:save!)
+        end
         ::Shared::Result.success(map_to_entity(record))
       rescue ActiveRecord::RecordNotUnique => e
-        # Une collision du code ou du jeton du lien (index uniques) n'est pas un nom pris : elle monte, bruyante, au lieu d'un faux message.
+        # Une collision du jeton du lien, ou du code au-delà des essais, n'est pas un nom pris : elle monte, bruyante, au lieu d'un faux message.
         raise unless e.message.include?(NAME_INDEX)
 
         ::Shared::Result.failure(:conflict, errors: { name: [ :taken ] })
       end
 
-      # insert_all! : un nom déjà pris lève, et le moteur d'import rejoue élément par élément.
+      # insert_all! : un nom déjà pris lève, et le moteur d'import rejoue élément par élément. Une collision du code est retentée
+      # ici, sur tout le lot : la base retire un code pour chaque ligne, un lot ne perd pas un établissement pour un tirage.
       def insert_generated(rows:, at:)
         return 0 if rows.empty?
 
-        Orm::Classroom.insert_all!(rows.map { |row| row.merge(created_at: at, updated_at: at) }).length
+        retrying_join_code_collision do
+          Orm::Classroom.insert_all!(rows.map { |row| row.merge(created_at: at, updated_at: at) }).length
+        end
       end
 
       def names_in(school_id:, school_year:)
@@ -162,6 +171,19 @@ module Repositories
       end
 
       private
+
+      # Savepoint : l'échec d'un essai n'abîme pas la transaction de l'appelant. Le nom pris (NAME_INDEX) et le jeton du lien
+      # montent au premier essai ; le code monte après JOIN_CODE_ATTEMPTS essais.
+      def retrying_join_code_collision
+        attempts = 0
+        begin
+          attempts += 1
+          Orm::Classroom.transaction(requires_new: true) { yield }
+        rescue ActiveRecord::RecordNotUnique => e
+          retry if e.message.include?(JOIN_CODE_INDEX) && attempts < JOIN_CODE_ATTEMPTS
+          raise
+        end
+      end
 
       def usage_of(classroom_id) = USAGES.find { |_, model| model.exists?(classroom_id:) }&.first
 

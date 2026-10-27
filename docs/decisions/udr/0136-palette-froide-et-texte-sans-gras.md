@@ -1,4 +1,4 @@
-# UDR-XXXX : Palette froide et texte sans gras — les jetons `@theme` du pilote
+# UDR-0136 : Palette froide et texte sans gras — les jetons `@theme` du pilote
 <!-- index
 titre: Palette froide, une seule police, texte sans gras
 statut: Accepté *(porteur, 2026-10-23)*

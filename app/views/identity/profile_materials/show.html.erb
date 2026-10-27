@@ -9,8 +9,10 @@
 <%# UDR §3.4 (≥ lg) : le lien « Mes matières » du panneau charge cet écran dans son frame, sans quitter la page en dessous ; « ‹ Mon compte »
     et « Retirer » y restent, la page entière n'est servie qu'à plein écran (téléphone, sans JavaScript). %>
 <% panel = turbo_frame_request_id == NavigationHelper::ACCOUNT_PANEL_FRAME %>
+<%# Pleine page (téléphone, sans panneau), le contrôleur panel-focus se pose sur l'écran lui-même : une requête coupée s'y dit, en tête. Dans le frame, c'est le frame qui le porte. %>
+<% failure = panel ? {} : { controller: "panel-focus", action: "turbo:fetch-request-error->panel-focus#requestFailed" } %>
 <% screen = capture do %>
-<div class="flex max-w-md flex-col gap-4">
+<%= tag.div class: "flex max-w-md flex-col gap-4", data: failure do %>
 <% if panel %>
   <%# Rendu dans le frame, la réponse n'a pas le layout (ni sa région de toasts) : le message de l'envoi précédent se lit ici, et part avec la requête. %>
   <% flash.each do |key, message| %>
@@ -56,6 +58,7 @@
   <% end %>
 
   <p class="rounded-ln bg-mist p-4 text-sm text-mute"><%= t(".kept_assignments") %></p>
-</div>
+  <%= render "shared/navigation/panel_request_failed" %>
+<% end %>
 <% end %>
 <%= panel ? turbo_frame_tag(NavigationHelper::ACCOUNT_PANEL_FRAME) { screen } : screen %>

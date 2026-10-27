@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/essentials/_exercise_progress — un exercice de la fiche, selon le rôle %>
 <%# Rôle : élève → lien étiré, « Type · Assigné par ton enseignant », « Commencer », « Refaire » ou « Reprendre » ; autres → « Type · N questions », statut (équipe), une ligne par classe (enseignant) : le premier « Assigner » de la page est plein, « Modifier les jours de la … » une fois par classe %>
-<%# ADR  : 0028, 0033, 0054, 0072 · UDR : 0007, 0015, 0057, 0062 (§3.4), 0069 (§3.8), 0077 (§3.3), XXXX-ecrans-enseignant-sans-repetition (§3.13 ; stacked : colonne « Exercices » de 380 px ≥ lg, tout s'empile) · tout exercice publié se démarre, assigné ou non %>
+<%# ADR  : 0028, 0033, 0054, 0072 · UDR : 0007, 0015, 0057, 0062 (§3.4), 0069 (§3.8), 0077 (§3.3), 0134 (§3.13 ; stacked : colonne « Exercices » de 380 px ≥ lg, tout s'empile) · tout exercice publié se démarre, assigné ou non %>
 <%# locals: (exercise:, student:, team:, targets: nil, primary: false, folded: false, stacked: false) -%>
 <% if student %>
   <%# UDR-0015, amendement du 2026-10-02 : badge, score et maîtrise sont sur la page de l'exercice, à un tap. Amendement du

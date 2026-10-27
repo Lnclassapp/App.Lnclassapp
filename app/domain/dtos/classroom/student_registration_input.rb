@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Classroom::StudentRegistrationInput
 # Rôle : forme de l'inscription élève : nom et prénoms (ADR-0037), classe donnée par le code de classe, par le jeton d'un lien ou choisie dans la cascade
-# ADR  : 0026, 0037, 0050, 0083, 0085, XXXX-code-de-classe-a-six-caracteres · UDR : 0081
+# ADR  : 0026, 0037, 0050, 0083, 0085, 0109 · UDR : 0081
 module Dtos
   module Classroom
     class StudentRegistrationInput < Identity::PersonNameInput

@@ -362,11 +362,11 @@ Et « Cours » de la barre latérale ouvre la matière de la dernière case touc
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX — [Code de classe à six caractères, vérifié à débit limité](../../decisions/adr/XXXX-code-de-classe-a-six-caracteres.md) *(Accepté le 2026-10-23)*
-- UDR-XXXX — [Palette froide et texte sans gras](../../decisions/udr/XXXX-palette-froide-et-texte-sans-gras.md)
-- UDR-XXXX — [Accueil élève, carte du prochain exercice](../../decisions/udr/XXXX-accueil-eleve-carte-du-prochain-exercice.md)
-- UDR-XXXX — [Inscription élève en trois étapes](../../decisions/udr/XXXX-inscription-eleve-en-trois-etapes.md)
-- UDR-XXXX — [Écrans élève sans répétition](../../decisions/udr/XXXX-ecrans-eleve-sans-repetition.md)
+- ADR-XXXX — [Code de classe à six caractères, vérifié à débit limité](../../decisions/adr/0109-code-de-classe-a-six-caracteres.md) *(Accepté le 2026-10-23)*
+- UDR-XXXX — [Palette froide et texte sans gras](../../decisions/udr/0136-palette-froide-et-texte-sans-gras.md)
+- UDR-XXXX — [Accueil élève, carte du prochain exercice](../../decisions/udr/0132-accueil-eleve-carte-du-prochain-exercice.md)
+- UDR-XXXX — [Inscription élève en trois étapes](../../decisions/udr/0135-inscription-eleve-en-trois-etapes.md)
+- UDR-XXXX — [Écrans élève sans répétition](../../decisions/udr/0133-ecrans-eleve-sans-repetition.md)
 - UDR-0059 et chantier [`page-d-accueil-photo`](../page-d-accueil-photo/memo.md) — page d'accueil publique
 
 ## 7. Mesures

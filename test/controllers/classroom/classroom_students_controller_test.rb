@@ -301,6 +301,7 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     assert_select "#student_file_average", text: ft("summary.average", grade: 13, badge: "Bronze")
     assert_select "#student_file_counts", text: ft("summary.done_of", count: 3, assigned: 3)
     assert_select "#student_file_summary .ui-badge", text: /en retard/, count: 0
+    assert_select "#student_file_summary", text: /en retard/, count: 0
   end
 
   # PRD CA-I3, ADR-0097 §4.3 : une échéance passée se lit, rendu en retard ou pas encore fait, jamais en couleur seule ;
@@ -326,6 +327,7 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     assert_select "li#assignment_#{overdue.public_id} .ui-badge", text: ft("assignments.overdue")
     assert_select "li#assignment_#{overdue.public_id} span.font-medium.text-warning", 1
     assert_select "li#assignment_#{late.public_id} span.font-medium.text-warning", 0
+    assert_select "li#assignment_#{late.public_id} *", text: ft("assignments.overdue"), count: 0
   end
 
   test "CA-I3 : trois exercices visibles, puis « Voir plus » qui révèle la suite" do

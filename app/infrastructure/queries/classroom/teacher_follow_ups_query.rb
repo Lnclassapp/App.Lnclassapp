@@ -12,9 +12,10 @@ module Queries
       # week : « Cette semaine », échéance croissante ; history : « Historique », échéance décroissante.
       Result = Data.define(:week, :history)
 
-      # Cette semaine : échéance dans les 7 prochains jours, ou passée depuis 14 jours au plus, avec au moins un élève qui ne l'a
-      # pas fait ; sans échéance (d'avant le pilote), tant qu'un élève ne l'a pas fait. Historique : échue depuis 30 jours au
-      # plus et pas dans « Cette semaine » (UDR enseignant §3.3) : une assignation n'est jamais dans les deux.
+      # Cette semaine : échéance dans les 7 prochains jours (demain compris), faite par tous ou non ; ou passée depuis 14 jours au
+      # plus (aujourd'hui compris), avec au moins un élève qui ne l'a pas fait ; sans échéance (d'avant le pilote), tant qu'un
+      # élève ne l'a pas fait. Historique : échue (aujourd'hui compris) depuis 30 jours au plus et pas dans « Cette semaine »
+      # (UDR enseignant §3.3) : une assignation n'est jamais dans les deux.
       AHEAD = 7
       BEHIND = 14
       HISTORY = 30
@@ -40,7 +41,7 @@ module Queries
           row = Row.new(public_id:, exercise_title:, classroom_public_id:, classroom_name:, due_on:, pending: count - scores.size,
                         done: scores.size, present: count, average_percent: (scores.sum.fdiv(scores.size).round if scores.any?),
                         material_name: material[0], material_slug: material[1], material_category: material[2])
-          if row.pending.positive? && (due_on.nil? || due_on >= today - BEHIND)
+          if week?(row.pending, due_on, today)
             week << row
           elsif due_on && due_on <= today
             history << row
@@ -50,6 +51,15 @@ module Queries
       end
 
       private
+
+      # Sans échéance : tant qu'un élève ne l'a pas fait. À venir (après aujourd'hui) : toujours. Échue, ou échéant aujourd'hui :
+      # depuis 14 jours au plus et avec un élève qui ne l'a pas fait. L'échéance est déjà bornée à +AHEAD par la requête.
+      def week?(pending, due_on, today)
+        return pending.positive? if due_on.nil?
+        return true if due_on > today
+
+        pending.positive? && due_on >= today - BEHIND
+      end
 
       # Les assignations actives des classes actives de l'année où il enseigne dans cet établissement, d'un exercice de l'une
       # de ses matières de cet établissement (ADR-0103) : une matière retirée sort de l'accueil, l'assignation reste.

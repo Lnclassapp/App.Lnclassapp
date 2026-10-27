@@ -1,4 +1,4 @@
-# UDR-XXXX : Écrans élève sans répétition — menu de l'avatar, profil, Ma classe, fiche de révision, résultat, Cours
+# UDR-0133 : Écrans élève sans répétition — menu de l'avatar, profil, Ma classe, fiche de révision, résultat, Cours
 <!-- index
 titre: Écrans élève sans répétition : menu, profil, Ma classe, fiche, résultat, Cours
 statut: Accepté *(porteur, 2026-10-23)*
@@ -13,7 +13,7 @@ problematique: Le relevé des écrans élève a trouvé la même information à 
 | **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
 | **ADR lié** | — |
 | **Amende** | [UDR-0080](0080-en-tete-eleve-panneau-du-compte-et-barres-de-l-app-android.md) (panneau du compte) · [UDR-0101](0101-profil-eleve-ligne-classe-vers-changer-de-classe.md) (ligne Classe du profil) · [UDR-0119](0119-fiche-a-revoir-exercice-propose-et-regle-sur-20.md) (fiche à revoir) |
-| **S'appuie sur** | UDR-XXXX-accueil-eleve-carte-du-prochain-exercice · UDR-XXXX-palette-froide-et-texte-sans-gras |
+| **S'appuie sur** | UDR-0132 · UDR-0136 |
 | **Remplacé par** | — |
 
 ---

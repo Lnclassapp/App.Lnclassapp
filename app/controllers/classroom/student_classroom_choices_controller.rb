@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::StudentClassroomChoicesController
 # Rôle : « Choisis ta classe » de l'élève sans classe active (archivée, ou retiré) : le code de la classe, ou la cascade, sa dernière école déjà choisie ; succès : accueil
-# ADR  : 0026, 0040, 0062, 0085, XXXX-code-de-classe-a-six-caracteres (§4.5, §4.7) · UDR : 0081 (§3.3, §3.4, §3.5)
+# ADR  : 0026, 0040, 0062, 0085, 0109 (§4.5, §4.7) · UDR : 0081 (§3.3, §3.4, §3.5)
 module Classroom
   class StudentClassroomChoicesController < AuthenticatedController
     include ClassPicker

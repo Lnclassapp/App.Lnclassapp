@@ -155,6 +155,9 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
       assert_select "#essential_layout", 0
       assert_select "#essential_side", 0
       assert_select "#essential_exercises"
+      # Ce que voit l'enseignant : pas de deux colonnes, et la carte « Exercices » vient après le titre de la fiche.
+      assert_select "[class~='lg:grid-cols-main-side']", 0
+      assert_equal [ "h1", "essential_exercises" ], css_select("main h1, #essential_exercises").map { it["id"] || it.name }
     end
   end
 

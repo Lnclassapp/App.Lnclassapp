@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Classroom::JoinCode
 # Rôle : code de classe : 6 symboles parmi 31 (sans i, l, o, 0 ni 1), stocké en minuscules, affiché « K7M 4Q2 », saisi sans égard à la casse
-# ADR  : XXXX-code-de-classe-a-six-caracteres (§4) · calqué sur Entities::School::SchoolCode
+# ADR  : 0109 (§4) · calqué sur Entities::School::SchoolCode
 module Entities
   module Classroom
     module JoinCode

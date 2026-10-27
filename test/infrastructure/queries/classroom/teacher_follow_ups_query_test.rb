@@ -50,10 +50,10 @@ module Queries
         assert_equal [ 2, 3 ], rows.last.to_h.values_at(:pending, :present)
       end
 
-      test "CA-3: out of the week — due in 10 days, late by 15 days, done by everyone, archived, another subject" do
+      test "CA-3: out of the week — due in 10 days, late by 15 days, done by everyone and due, archived, another subject" do
         assign("Dans dix jours", due_on: @today + 10)
         assign("Il y a quinze jours", due_on: @today - 15)
-        hand_in(assign("Fait par tous", due_on: @today + 1), *@students)
+        hand_in(assign("Fait par tous et échu", due_on: @today - 1), *@students)
         assign("Retiré", due_on: @today + 1, status: "archived")
         maths = create_exercise(title: "Maths", essential: create_essential(course: create_course(material: create_material, level: @tle)))
         assign("Maths", due_on: @today + 1, exercise: maths)
@@ -79,6 +79,28 @@ module Queries
       end
 
       # CA-G6 : « 20 / 27 faits » ; CA-G7 : l'Historique, groupé par échéance, avec la moyenne de la classe.
+      # Revue de #295 : l'UDR §3.3 met dans « Cette semaine » toute échéance des 7 prochains jours, faite par tous ou non.
+      test "CA-G7: due in 3 days and done by every present student: in the week, not in the history" do
+        done = assign("Fait par tous, à rendre vendredi", due_on: @today + 3)
+        hand_in(done, *@students)
+
+        rows = follow_ups
+
+        assert_equal [ "Fait par tous, à rendre vendredi" ], rows.map(&:exercise_title)
+        assert_equal [ 0, 3, 3 ], rows.sole.to_h.values_at(:pending, :done, :present)
+        assert_empty history
+      end
+
+      test "CA-G7: done by all, the week keeps the days to come, the history takes the day itself and what is past" do
+        hand_in(assign("Dans sept jours", due_on: @today + 7), *@students)
+        hand_in(assign("Aujourd'hui", due_on: @today), *@students)
+        hand_in(assign("Hier", due_on: @today - 1), *@students)
+        hand_in(assign("Dans huit jours", due_on: @today + 8), *@students)
+
+        assert_equal [ "Dans sept jours" ], follow_ups.map(&:exercise_title)
+        assert_equal [ "Aujourd'hui", "Hier" ], history.map(&:exercise_title)
+      end
+
       test "CA-G6: the week row counts who did it, out of who is present" do
         hand_in(assign("Photosynthèse", due_on: @today + 3), *@students.first(2), score_percent: 80)
 
@@ -103,7 +125,7 @@ module Queries
 
         assert_equal [ "Aujourd'hui", "Fait par tous", "Il y a vingt jours" ], rows.map(&:exercise_title), "the latest due date first"
         assert_equal [ [ 100, 3, 3 ], [ 70, 3, 3 ], [ 50, 1, 3 ] ], rows.map { [ it.average_percent, it.done, it.present ] }
-        assert_equal [ "Il y a quatorze jours" ], follow_ups.map(&:exercise_title)
+        assert_equal [ "Il y a quatorze jours", "Pas encore échu" ], follow_ups.map(&:exercise_title), "not yet due: the week, whoever did it"
         assert_empty(history.map(&:public_id) & follow_ups.map(&:public_id))
       end
 
@@ -124,7 +146,7 @@ module Queries
 
         assert_equal [ 1, 1 ], follow_ups.sole.to_h.values_at(:pending, :present)
         hand_in(assignment, present)
-        assert_empty follow_ups
+        assert_equal [ 0, 1 ], follow_ups.sole.to_h.values_at(:pending, :present)
       end
 
       test "a classroom without a present student has nothing to follow" do

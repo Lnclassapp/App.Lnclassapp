@@ -1,7 +1,7 @@
 # 🧠 DOMAINE · UseCases::Identity::RegisterTeacher
 # Rôle : inscrit un enseignant (rôle imposé) dans l'établissement de sa DRENA ou de son lien, note et audite sa voie, ouvre sa session ;
 #        le lien de parrainage d'un collègue (sans établissement) note le parrain, l'établissement est choisi
-# ADR  : 0026, 0028, 0030, 0050, 0063, 0083, 0094 (§11), 0103 · UDR : 0024, 0050, 0079, XXXX-ecrans-enseignant-sans-repetition (§3.9 : une seule matière)
+# ADR  : 0026, 0028, 0030, 0050, 0063, 0083, 0094 (§11), 0103 · UDR : 0024, 0050, 0079, 0134 (§3.9 : une seule matière)
 module UseCases
   module Identity
     class RegisterTeacher

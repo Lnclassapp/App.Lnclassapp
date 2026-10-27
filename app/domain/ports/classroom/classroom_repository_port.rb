@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Classroom::ClassroomRepositoryPort
 # Rôle : contrat de persistance des classes, du jeton de leur lien et de la génération par défaut
-# ADR  : 0030, 0039, 0041, 0059, 0085, 0088, 0098, XXXX-code-de-classe-a-six-caracteres
+# ADR  : 0030, 0039, 0041, 0059, 0085, 0088, 0098, 0109
 module Ports
   module Classroom
     module ClassroomRepositoryPort

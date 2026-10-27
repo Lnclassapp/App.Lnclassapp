@@ -1,7 +1,7 @@
 <%# 🌐 UI · classroom/assignments/_toggle — bascule d'assignation d'un exercice dans une classe, remplacée par les streams %>
 <%# Rôle : « Assigner » (POST, ou la modale des jours), ou « Assigné », l'échéance et « Retirer » ; compact (fiche, page exercice) : toute la %>
 <%#        ligne de la classe — nom, échéance dessous, « Assigné » et ✕ — le mode voyage avec la requête (compact=1) %>
-<%# ADR  : 0048, 0072 · UDR : 0006, 0028, 0062 (§3.4), 0069 (§3.8), 0077 (§3.3), XXXX-ecrans-enseignant-sans-repetition (§3.13 : le premier « Assigner » de la page est plein) %>
+<%# ADR  : 0048, 0072 · UDR : 0006, 0028, 0062 (§3.4), 0069 (§3.8), 0077 (§3.3), 0134 (§3.13 : le premier « Assigner » de la page est plein) %>
 <%# locals: (classroom_public_id:, assignable_type:, assignable_key:, assignable_name:, assignment_public_id:, due_on: nil, needs_session_days: false, classroom_name: nil, compact: false, primary: false) -%>
 <% button = class_names(ComponentsHelper::BUTTON_BASE, ComponentsHelper::BUTTON_SIZES[:sm]) %>
 <% names = { name: assignable_name, classroom: classroom_name } %>

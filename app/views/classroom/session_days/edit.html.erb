@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/session_days/edit — jours de séance de l'enseignant pour la classe, dans le frame « modal » (page sans JavaScript) %>
 <%# Rôle : feuille du bas à 390 px ; six jours pré-cochés en pilules, « Prochaine séance : … » (Stimulus), « Annuler » et « Enregistrer » ; tout décocher vaut « non renseigné » ; les dates déjà données ne changent pas %>
-<%# ADR  : 0072 · UDR : 0006, 0054, 0062 (§3.4, §3.7, §3.9), XXXX-ecrans-enseignant-sans-repetition (§3.13) · Stimulus : modal, autofocus, classroom--next-session · ouverte par « Modifier les jours de la … » de la fiche de cours %>
+<%# ADR  : 0072 · UDR : 0006, 0054, 0062 (§3.4, §3.7, §3.9), 0134 (§3.13) · Stimulus : modal, autofocus, classroom--next-session · ouverte par « Modifier les jours de la … » de la fiche de cours %>
 <% tab_title = page_title(t(".title", classroom: @classroom.name)) %>
 <% error = @form.errors[:weekdays].any? %>
 <% checked = @form.weekdays %>

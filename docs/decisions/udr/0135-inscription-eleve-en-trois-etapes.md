@@ -1,8 +1,8 @@
-# UDR-XXXX : Inscription élève en trois étapes — code de classe d'abord, passage automatique, lien qui saute l'étape 1
+# UDR-0135 : Inscription élève en trois étapes — code de classe d'abord, passage automatique, lien qui saute l'étape 1
 <!-- index
 titre: Inscription élève en trois étapes avec code de classe
 statut: Accepté *(porteur, 2026-10-23)*
-adr-lie: XXXX-code-de-classe-a-six-caracteres
+adr-lie: 0109
 problematique: L'inscription élève tient sur une page longue en trois rubriques et ne connaît que la cascade DRENA → classe et le lien ; l'élève dont le prof écrit un code au tableau n'a pas de voie directe. Elle devient trois écrans courts, ouverts par le code de classe, qui avancent seuls.
 -->
 
@@ -11,9 +11,9 @@ problematique: L'inscription élève tient sur une page longue en trois rubrique
 | **Statut** | Accepté (porteur, 2026-10-23 : « 1. oui 2. oui 3. oui » ; choix du porteur le 2026-10-23, écran par écran) · ordinateur (§3.5 bis) ajouté le 2026-10-24 |
 | **Date** | 2026-10-23 |
 | **Chantier** | [`docs/chantiers/mvp-teacher-student`](../../chantiers/mvp-teacher-student/memo.md) |
-| **ADR lié** | ADR-XXXX-code-de-classe-a-six-caracteres (le code revient en base) |
+| **ADR lié** | ADR-0109 (le code revient en base) |
 | **Amende** | [UDR-0088](0088-connexion-et-inscription-eleve-carte-bleue-et-rubriques-numerotees.md) (une page, rubriques numérotées) · [UDR-0081](0081-inscription-eleve-sans-code-de-classe.md) (cascade, lien de classe) · [UDR-0091](0091-choix-de-classe-eleve-trois-etapes-pastilles-et-cases.md) (choix de classe) |
-| **S'appuie sur** | UDR-XXXX-palette-froide-et-texte-sans-gras (jetons) |
+| **S'appuie sur** | UDR-0136 (jetons) |
 | **Remplacé par** | — |
 
 ---
@@ -84,7 +84,7 @@ Décidé par le porteur le 2026-10-24 (phase ordinateur, maquettes à 1440 et 10
 
 ### 3.6 Jetons
 
-Uniquement les jetons de l'UDR-XXXX-palette-froide-et-texte-sans-gras ; bordures de champ `line-strong`, focus `brand-strong`. Graisse 500 au plus. Minimum 12 px.
+Uniquement les jetons de l'UDR-0136 ; bordures de champ `line-strong`, focus `brand-strong`. Graisse 500 au plus. Minimum 12 px.
 
 ### 3.7 États obligatoires
 
@@ -101,6 +101,6 @@ Uniquement les jetons de l'UDR-XXXX-palette-froide-et-texte-sans-gras ; bordures
 
 ## 4. Conséquences
 
-- Le code de classe à 6 caractères revient : colonne, génération, affichage côté enseignant et vérification à débit limité font l'objet de l'ADR-XXXX-code-de-classe-a-six-caracteres et d'une revue de sécurité (vérification énumérable, ID-07).
+- Le code de classe à 6 caractères revient : colonne, génération, affichage côté enseignant et vérification à débit limité font l'objet de l'ADR-0109 et d'une revue de sécurité (vérification énumérable, ID-07).
 - La même vérification de code sert à l'état « Choisis ta classe » de l'accueil élève (élève connecté sans classe).
 - Interdit : un bouton « Continuer » aux étapes 1 et 2, une création de compte sans geste de l'élève, une route par étape.

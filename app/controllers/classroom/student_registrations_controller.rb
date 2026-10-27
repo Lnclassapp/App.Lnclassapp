@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::StudentRegistrationsController
 # Rôle : inscription élève publique en trois étapes : classe donnée par son code, par le jeton d'un lien ou choisie dans la cascade ; succès : session, accueil élève
-# ADR  : 0026, 0028, 0050, 0062, 0085, XXXX-code-de-classe-a-six-caracteres (§4.5, §4.6) · UDR : 0079, 0081, XXXX-inscription-eleve-en-trois-etapes
+# ADR  : 0026, 0028, 0050, 0062, 0085, 0109 (§4.5, §4.6) · UDR : 0079, 0081, 0135
 module Classroom
   class StudentRegistrationsController < ApplicationController
     include ClassPicker

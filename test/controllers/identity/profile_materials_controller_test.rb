@@ -214,6 +214,32 @@ class Identity::ProfileMaterialsControllerTest < ActionDispatch::IntegrationTest
     assert_not Orm::AuditEvent.exists?(action: "profile.materials_changed")
   end
 
+  # Revue de P0 : dans le frame du panneau, le refus se lit sous la liste, dans le frame (sans lui, Turbo y écrirait « Content missing »).
+  test "CA-H5, CA-H7: in the frame of the account panel, the refusal of the last subject stays in the frame, under the list" do
+    set_teacher_materials(@teacher, @school, [ @pc ])
+    sign_in_as @teacher
+
+    remove(headers: { "Turbo-Frame" => NavigationHelper::ACCOUNT_PANEL_FRAME })
+
+    assert_response :unprocessable_content
+    assert_no_match(/<aside|<header|<main/, response.body)
+    assert_select "turbo-frame##{NavigationHelper::ACCOUNT_PANEL_FRAME}", 1 do
+      assert_select "h1", "Mes matières"
+      assert_select "#teacher_materials li", 1
+      assert_select "#teacher_materials_error[role=alert]", text: "Gardez au moins une matière."
+    end
+    assert_equal [ @pc.slug ], list
+  end
+
+  # Revue de P0 : un refus (rôle, matière inconnue) dans le frame du panneau quitte le frame, comme dans la modale.
+  test "in the frame of the account panel, a forbidden removal asks Turbo to leave the frame" do
+    sign_in_as create_student
+    remove(@svt.slug, headers: { "Turbo-Frame" => NavigationHelper::ACCOUNT_PANEL_FRAME })
+
+    assert_response :forbidden
+    assert_select "meta[name=turbo-visit-control][content=reload]"
+  end
+
   test "the removal screen is for teachers of a school only" do
     [ create_student, create_school_admin(school: @school), create_team_member ].each do |user|
       sign_in_as user

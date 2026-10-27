@@ -47,7 +47,9 @@ class Catalog::TeacherCoursesTest < ApplicationSystemTestCase
   end
 
   test "at 1280 px, the teacher reads one column of 40 rem, lessons in the order of the progression, « Cours » active in the sidebar" do
-    algebra = create_course(name: "Algèbre", level: @level, series: @series, material: @maths, subtitle: "Leçon 10 · Progression DPFC 2026-2027")
+    # Lesson 10 is the oldest and first in the alphabet: an order by creation date or by name would put it first, not last.
+    algebra = create_course(name: "Algèbre", level: @level, series: @series, material: @maths, subtitle: "Leçon 10 · Progression DPFC 2026-2027",
+                            created_at: 1.year.ago)
     sign_in_as @teacher
 
     with_window([ 1280, 900 ]) do

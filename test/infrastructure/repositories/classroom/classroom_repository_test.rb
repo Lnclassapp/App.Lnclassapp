@@ -14,6 +14,14 @@ module Repositories
         Entities::Classroom::Classroom.new(school_id: @school.id, level_id: @level.id, school_year: @year, name:)
       end
 
+      # Remplace Orm::Classroom.insert_all! le temps du bloc (le test voit chaque appel et peut y forcer un code pris).
+      def around_insert_all(replacement)
+        Orm::Classroom.define_singleton_method(:insert_all!) { |batch| replacement.call(batch) }
+        yield
+      ensure
+        Orm::Classroom.singleton_class.remove_method(:insert_all!)
+      end
+
       test "crée une classe avec le jeton de son lien et son code, et la relit avec ses enseignants et son effectif" do
         created = ClassroomRepository.new.create(classroom: classroom).value
         record = Orm::Classroom.find(created.id)
@@ -42,14 +50,32 @@ module Repositories
       end
 
       # Revue de #295 : le code vient de la base à la création ; on force ici un code déjà pris pour simuler la collision.
-      test "une collision du code de classe n'est pas annoncée comme un nom pris : l'erreur monte" do
+      test "une collision du code de classe est retentée avec un nouveau tirage de la base, dans un savepoint" do
         taken = create_classroom(school: @school, level: @level, name: "6ème 1", school_year: @year)
         repository = ClassroomRepository.new
-        repository.define_singleton_method(:attributes_of) { |entity| super(entity).merge(join_code: taken.join_code) }
+        draws = 0
+        repository.define_singleton_method(:attributes_of) do |entity|
+          (draws += 1) == 1 ? super(entity).merge(join_code: taken.join_code) : super(entity)
+        end
+
+        created = Orm::Classroom.transaction { repository.create(classroom: classroom(name: "Tle D 2")) }
+
+        assert created.success?
+        assert_equal 2, draws
+        assert_not_equal taken.join_code, created.value.join_code
+        assert_equal 2, Orm::Classroom.where(school_id: @school.id).count
+      end
+
+      test "une collision du code de classe qui dure au-delà des essais monte, bruyante, au lieu d'un faux nom pris" do
+        taken = create_classroom(school: @school, level: @level, name: "6ème 1", school_year: @year)
+        repository = ClassroomRepository.new
+        draws = 0
+        repository.define_singleton_method(:attributes_of) { |entity| (draws += 1) && super(entity).merge(join_code: taken.join_code) }
 
         error = assert_raises(ActiveRecord::RecordNotUnique) { repository.create(classroom: classroom(name: "Tle D 2")) }
 
         assert_includes error.message, "index_classrooms_on_join_code"
+        assert_equal ClassroomRepository::JOIN_CODE_ATTEMPTS, draws
         assert_equal 1, Orm::Classroom.where(school_id: @school.id).count
       end
 
@@ -117,6 +143,37 @@ module Repositories
                    level_id: @level.id, series_id: nil } ]
 
         assert_raises(ActiveRecord::RecordNotUnique) { ClassroomRepository.new.insert_generated(rows:, at: @at) }
+      end
+
+      test "une collision du code de classe sur une génération en masse est retentée : le lot entier est écrit" do
+        taken = create_classroom(school: @school, level: @level, name: "Prise", school_year: @year)
+        rows = Array.new(3) do |index|
+          { public_id: SecureRandom.base58(14), school_id: @school.id, school_year: @year, name: "Classe #{index}",
+            level_id: @level.id, series_id: nil }
+        end
+        insert = Orm::Classroom.method(:insert_all!)
+        calls = 0
+
+        around_insert_all(->(batch) { insert.call((calls += 1) == 1 ? batch.map { it.merge(join_code: taken.join_code) } : batch) }) do
+          assert_equal 3, Orm::Classroom.transaction { ClassroomRepository.new.insert_generated(rows:, at: @at) }
+        end
+
+        assert_equal 2, calls
+        assert_equal 4, Orm::Classroom.where(school: @school).distinct.count(:join_code)
+      end
+
+      test "une collision du code de classe qui dure au-delà des essais lève sur la génération en masse" do
+        taken = create_classroom(school: @school, level: @level, name: "Prise", school_year: @year)
+        rows = [ { public_id: SecureRandom.base58(14), school_id: @school.id, school_year: @year, name: "Classe 0",
+                   level_id: @level.id, series_id: nil } ]
+        insert = Orm::Classroom.method(:insert_all!)
+        calls = 0
+
+        around_insert_all(->(batch) { calls += 1; insert.call(batch.map { it.merge(join_code: taken.join_code) }) }) do
+          assert_raises(ActiveRecord::RecordNotUnique) { ClassroomRepository.new.insert_generated(rows:, at: @at) }
+        end
+
+        assert_equal ClassroomRepository::JOIN_CODE_ATTEMPTS, calls
       end
 
       test "IL-08: verrouille une classe par son identifiant public ou par le jeton de son lien, avec son effectif" do

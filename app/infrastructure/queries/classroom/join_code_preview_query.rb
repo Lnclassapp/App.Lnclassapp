@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Classroom::JoinCodePreviewQuery
 # Rôle : aperçu public d'une classe par son code : nom de la classe, niveau, établissement (sigle ou nom), « complète » ; jamais d'archivée
-# ADR  : XXXX-code-de-classe-a-six-caracteres (§4) · UDR : 0081
+# ADR  : 0109 (§4) · UDR : 0081
 module Queries
   module Classroom
     class JoinCodePreviewQuery
