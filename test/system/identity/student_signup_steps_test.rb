@@ -205,6 +205,27 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
     assert_field "student_registration[last_name]", with: "KOUASSI"
   end
 
+  # Le passage seul à l'étape 3 ôte le focus du numéro : son « change » réarme le minuteur d'une seconde. Si le 422 revient
+  # avant qu'il parte, l'étape 2 rouverte par le serveur doit tenir, sans repasser à l'étape 3 par-dessus l'erreur.
+  test "CA-C6: a step-2 timer still pending when the server refuses does not move past the reopened step 2" do
+    create_student(contact: "0701020304", classroom: @classroom)
+    visit new_student_registration_path
+    fill_in "student_registration[join_code]", with: @code
+    assert_step 2
+    fill_in "student_registration[last_name]", with: "KOUASSI"
+    fill_in "student_registration[first_name]", with: "Aya Marie"
+    choose I18n.t("genders.female")
+    fill_in "student_registration[contact]", with: "0701020304"
+    assert_step 3
+    fill_in "student_registration[pin]", with: "4821"
+    fill_in "student_registration[pin_confirmation]", with: "4821"
+    execute_script("document.getElementById('student_registration_contact').dispatchEvent(new Event('change', { bubbles: true }))")
+    click_on I18n.t("#{FORM}.submit")
+
+    assert_selector "#student_registration_contact_error", text: I18n.t("#{ERRORS}.contact.taken")
+    assert_step 2, settle: 1.5
+  end
+
   test "UDR §3.8 at 390 px: the three steps fit, every touch target is 44 px high and the progress shows the step" do
     with_mobile_viewport do
       visit new_student_registration_path
