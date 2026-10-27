@@ -3,8 +3,8 @@ require "test_helper"
 module Entities
   module Catalog
     class ImportKindTest < ActiveSupport::TestCase
-      test "cinq types fermés, dont les DRENA (ADR-0066)" do
-        assert_equal %w[schools course_tree essentials exercises drenas], ImportKind::KINDS
+      test "six types fermés, dont les DRENA (ADR-0066) et la fiche de cours en blocs" do
+        assert_equal %w[schools course_tree essentials exercises drenas course_sheet], ImportKind::KINDS
         assert ImportKind.valid?("drenas")
         assert ImportKind.valid?(:schools)
         assert_raises(ArgumentError) { ImportKind.fetch("regions") }
@@ -31,11 +31,12 @@ module Entities
       end
 
       # ADR-0068 : seuls les cours complets acceptent plusieurs fichiers.
-      test "plafonds de l'envoi : 50 fichiers et 50 Mo pour les cours complets, 1 fichier de 20 Mo ailleurs" do
+      test "plafonds de l'envoi : 50 fichiers et 50 Mo pour les cours complets, 1 fichier de 20 Mo ailleurs, 1 Mo pour une fiche en blocs" do
         course_tree = ImportKind.fetch("course_tree")
 
         assert_equal [ 50, 50 * 1024 * 1024, true ], [ course_tree.max_files, course_tree.max_total_bytes, course_tree.multiple_files? ]
-        (ImportKind::KINDS - [ "course_tree" ]).each do |kind|
+        assert_equal [ 1, 1024 * 1024, false ], ImportKind.fetch("course_sheet").then { [ it.max_files, it.max_total_bytes, it.multiple_files? ] }
+        (ImportKind::KINDS - %w[course_tree course_sheet]).each do |kind|
           assert_equal [ 1, ImportKind::MAX_BYTES, false ], ImportKind.fetch(kind).then { [ it.max_files, it.max_total_bytes, it.multiple_files? ] }
         end
       end
@@ -64,7 +65,7 @@ module Entities
 
         assert_equal "classrooms", ImportKind::CLASSROOM_GENERATION
         assert_not ImportKind.valid?("classrooms")
-        assert_equal %w[schools course_tree essentials exercises drenas classrooms school_codes classroom_links], ImportKind::REPORT_KINDS
+        assert_equal %w[schools course_tree essentials exercises drenas course_sheet classrooms school_codes classroom_links], ImportKind::REPORT_KINDS
         assert ImportKind.authorize_report(kind: "classrooms", actor: team).success?
         assert_equal :forbidden, ImportKind.authorize_report(kind: "classrooms", actor: teacher).code
         assert_equal :forbidden, ImportKind.authorize_report(kind: :exercises, actor: teacher).code
