@@ -30,4 +30,4 @@ En une phrase sans les mots du symptôme : les deux tests prennent pour un ident
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| | | |
+| Les tests « aucun id » ne voient pas une fuite encodée (hexadécimal, base64, id+1), ni la réponse turbo-stream du POST ni la page de résultat (vu par le challenger) | Hors de ce bug : aujourd'hui ces vues ne reçoivent aucun id, et `session_play_query_test` garde la requête | — |

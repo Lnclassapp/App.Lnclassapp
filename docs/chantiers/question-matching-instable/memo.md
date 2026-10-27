@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | exécution |
+| **Statut** | preuve |
 | **Ouvert le** | 2026-10-27 |
 | **Branche** | `fix/question-matching-instable` |
 | **Programme** | — |
@@ -59,7 +59,7 @@ Résultat le 2026-10-27, sur `550c09f` : 14 runs, **4 échecs** à chaque passag
 - [x] Test au vert · suite du contexte borné au vert
 - [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
 - [x] Données déjà corrompues : réparées, ou dette explicitement notée au journal (aucune)
-- [ ] Challenger a rejoué les étapes de reproduction dans l'application
+- [x] Challenger a rejoué les étapes de reproduction dans l'application
 - [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
 - [x] `journal.md` : cause, trou de test comblé, effets de bord écartés
 
@@ -78,3 +78,4 @@ Résultat le 2026-10-27, sur `550c09f` : 14 runs, **4 échecs** à chaque passag
 | Correctif (séquence à 914 273 001) | 14 runs, 0 échec ; 5 graines aléatoires, 0 échec |
 | Cas symétrique : la vue poste les ids de réponse | 14 runs, **4 échecs** (`Expected ["914273001", …] to be empty`, `/\b914273001\b/` trouvé) ; vue remise en état |
 | Suite `assessment` (hors système) | 504 runs, 0 échec |
+| Challenger (indépendant) | Reproduction confirmée (ids 1 : 4 échecs ; 12, 15, 100 : 2 échecs) ; branche verte sur 5 graines et 258 runs `assessment` ; fuites par `data-answer-id` et par `value` détectées ; aucun effet de bord trouvé. **Validé** |
