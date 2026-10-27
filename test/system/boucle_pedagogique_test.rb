@@ -419,10 +419,13 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
   # ---------------------------------------------------------------------------------------------------------------------
   # Helpers
 
-  # A destination of the shell navigation, or a card of the team home: the first visible link to that path.
+  # A destination of the shell navigation, or a card of the team home: the first visible link to that path. Turbo
+  # pushes the address when the visit starts, and shows its cached copy of a page seen before until the answer comes:
+  # a click on the copy, swapped for the page mid-click, is lost. The next step waits for the page itself.
   def navigate_to(path)
     first("a[href='#{path}']", visible: true).click
     assert_current_path path
+    assert_no_selector "html[data-turbo-preview]"
   end
 
   # UDR-0068 §3.4 : le Référentiel a sa page, atteinte par la carte « Configuration » de la barre latérale.

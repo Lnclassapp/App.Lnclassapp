@@ -4,7 +4,7 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| | | | |
+| 2026-10-27 | Le correctif attend `html[data-turbo-preview]` absent, plutôt que de désactiver le cache Turbo dans le test | Le cache est le comportement réel de l'application ; le test doit l'emprunter, en agissant sur la page et non sur sa copie | non |
 
 ## Ce qui a dérapé
 
@@ -19,6 +19,12 @@
 3. **Pourquoi rien ne l'a vu** : la fenêtre (remplacement de la copie pendant un clic) dure quelques millisecondes ; elle ne s'ouvre que sous charge, quand la réponse arrive pile pendant le clic.
 
 En une phrase sans les mots du symptôme : l'aide de navigation du test agit dès que l'adresse change, alors que Turbo change l'adresse avant d'afficher la page demandée.
+
+**Trou de test comblé** : `navigate_to` attend que la page ne soit plus une copie (`html[data-turbo-preview]` absent) ; aucune action ne part plus d'une copie. La scène qui perdait le clic est verte avec le nouveau `navigate_to`, rouge avec l'ancien.
+
+**Effets de bord écartés** : l'attente est nulle quand Turbo n'a pas de copie (première visite) ; le test entier reste à ≈ 31 s.
+
+**À retenir** : sous Turbo, `assert_current_path` après un clic ne prouve pas que la page est là ; elle peut encore être la copie en cache.
 
 ## Dette laissée derrière
 

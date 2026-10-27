@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | cadrage |
+| **Statut** | preuve |
 | **Ouvert le** | 2026-10-27 |
 | **Branche** | `fix/boucle-pedagogique-instable` |
 | **Programme** | — |
@@ -56,15 +56,15 @@ Résultat : `expected "/teams/referential" to equal "/teams/drenas"`, à chaque 
 - [x] Symptôme et étapes de reproduction écrits dans `memo.md`
 - [x] Bug reproduit **à la main** dans l'application avant toute ligne de code (navigateur piloté, réponse retenue)
 - [x] Rapport root cause rendu : fichier, ligne, chaîne d'appels, raison du trou de test
-- [ ] Test de reproduction écrit **avant** le correctif
-- [ ] Test lancé et **rouge**, pour la bonne raison (message vérifié)
-- [ ] Correctif appliqué dans la couche de la **cause**, pas du symptôme
-- [ ] Test au vert · suite du contexte borné au vert
-- [ ] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
+- [x] Test de reproduction écrit **avant** le correctif
+- [x] Test lancé et **rouge**, pour la bonne raison (message vérifié)
+- [x] Correctif appliqué dans la couche de la **cause**, pas du symptôme
+- [x] Test au vert · suite du contexte borné au vert
+- [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
 - [x] Données déjà corrompues : réparées, ou dette explicitement notée au journal (aucune)
 - [ ] Challenger a rejoué les étapes de reproduction dans l'application
-- [ ] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
-- [ ] `journal.md` : cause, trou de test comblé, effets de bord écartés
+- [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
+- [x] `journal.md` : cause, trou de test comblé, effets de bord écartés
 
 ## Contrat d'exécution (lot unique)
 
@@ -72,3 +72,12 @@ Résultat : `expected "/teams/referential" to equal "/teams/drenas"`, à chaque 
 2. **Correctif dans le test** (`navigate_to`, ligne 423) : après l'URL, attendre que la page ne soit plus une copie (`assert_no_selector "html[data-turbo-preview]"`). Aucun clic ne part plus d'une copie.
 3. Vert, puis `boucle_pedagogique_test.rb` entier, plusieurs fois, et avec le Référentiel ralenti.
 4. **Cas symétrique** : une page sans copie en cache (première visite) se parcourt toujours ; le test ne ralentit pas sensiblement.
+
+## Résultat (2026-10-27)
+
+| Vérification | Résultat |
+|---|---|
+| Scène jetable, `navigate_to` d'avant (la réponse arrive pendant que la souris est enfoncée sur la copie) | rouge : `expected "/teams/referential" to equal "/teams/drenas"` (le message du symptôme) |
+| Même scène, `navigate_to` corrigé | vert |
+| `boucle_pedagogique_test.rb` entier, trois fois | vert (≈ 31 s, 179 assertions au lieu de 167 : une attente par navigation) |
+| Cas symétrique : Référentiel ralenti de 1,5 s (la copie reste longtemps à l'écran) ; premières visites sans copie | vert (38 s) |
