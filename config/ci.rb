@@ -51,7 +51,7 @@ CI_PLAN = CiPlan.define do
     if yarn_audit
       step "Security: Yarn vulnerability audit", "yarn npm audit --all --recursive", inputs: :yarn
     else
-      step "Security: Yarn vulnerability audit (skipped locally: JS dependencies unchanged since Develop)", "true"
+      step "Security: Yarn vulnerability audit (skipped locally: JS dependencies unchanged since Develop)", "true", inputs: :yarn
     end
     step "Security: Brakeman code analysis", "bin/brakeman --quiet --no-pager --exit-on-warn --exit-on-error", inputs: :brakeman
   end

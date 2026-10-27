@@ -55,6 +55,8 @@ class CiScopeTest < ActiveSupport::TestCase
   test "a test helper plays the tests that call it; another file, those that name it, its fixture set or folder" do
     files = {
       "test/models/user_test.rb" => "users(:ada)",
+      "test/views/sprite_test.rb" => 'page.css("svg > use") # the reading rebuilds it',
+      "test/javascript_bundle_test.rb" => 'File.read("app/assets/builds/application.js")',
       "test/integration/schema_test.rb" => "config/schemas/course.v1.json",
       "test/infrastructure/lessons_test.rb" => 'glob("docs/contenus/lecons/**/*.json")',
       "test/models/other_test.rb" => "nothing",
@@ -157,11 +159,14 @@ class CiScopeTest < ActiveSupport::TestCase
       "test/design/tokens_test.rb" => 'File.read("app/assets/stylesheets/application.tailwind.css")',
       "test/helpers/icons_test.rb" => "assert_icon_sprite(page)",
       "test/models/user_test.rb" => "users(:ada)",
+      "test/views/sprite_test.rb" => 'page.css("svg > use") # the reading rebuilds it',
+      "test/javascript_bundle_test.rb" => 'File.read("app/assets/builds/application.js")',
       "test/support/icon_sprite_assertions.rb" => "def assert_icon_sprite(page)\n  File.read(\"app/assets/builds/x\")\nend"
     }
     readers = CiScope.front_readers(files.keys.grep(/_test\.rb\z/), read: files.method(:[]), helpers: [ "test/support/icon_sprite_assertions.rb" ])
 
-    assert_equal %w[test/design/tokens_test.rb test/helpers/icons_test.rb], readers
+    assert_equal %w[test/design/tokens_test.rb test/helpers/icons_test.rb test/javascript_bundle_test.rb], readers,
+                 "neither Nokogiri's css( nor « rebuilds » reads a style sheet"
   end
 
   test "a green step is kept by its key" do

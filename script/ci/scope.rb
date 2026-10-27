@@ -123,8 +123,9 @@ class CiScope
   }.freeze
 
   # The words of a unit test that reads the browser's files, or their build: over-wide on purpose (a « javascript: »
-  # URL in a sanitizer test counts), so that a test reading them is never missed.
-  FRONT_WORDS = /javascript|stylesheet|tailwind|esbuild|builds|\.css\b|\.js\b/i
+  # URL in a sanitizer test counts), so that a test reading them is never missed. Not « rebuilds », nor Nokogiri's
+  # `node.css(…)`: they drew 161 files instead of 61 (chantier ci-rejeu-cible, scenario S2).
+  FRONT_WORDS = /javascript|stylesheet|tailwind|esbuild|\bbuilds\b|\.(?:css|js)\b(?!\s*\()/i
 
   # The unit tests that read the browser's files: those that say so, and those calling a test helper that does.
   def self.front_readers(tests, read: ->(path) { File.read(path) if File.exist?(path) }, helpers: Dir["test/support/**/*.rb"])
