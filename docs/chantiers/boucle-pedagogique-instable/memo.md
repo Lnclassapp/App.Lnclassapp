@@ -62,7 +62,7 @@ Résultat : `expected "/teams/referential" to equal "/teams/drenas"`, à chaque 
 - [x] Test au vert · suite du contexte borné au vert
 - [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
 - [x] Données déjà corrompues : réparées, ou dette explicitement notée au journal (aucune)
-- [ ] Challenger a rejoué les étapes de reproduction dans l'application
+- [x] Challenger a rejoué les étapes de reproduction dans l'application
 - [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
 - [x] `journal.md` : cause, trou de test comblé, effets de bord écartés
 
@@ -81,3 +81,4 @@ Résultat : `expected "/teams/referential" to equal "/teams/drenas"`, à chaque 
 | Même scène, `navigate_to` corrigé | vert |
 | `boucle_pedagogique_test.rb` entier, trois fois | vert (≈ 31 s, 179 assertions au lieu de 167 : une attente par navigation) |
 | Cas symétrique : Référentiel ralenti de 1,5 s (la copie reste longtemps à l'écran) ; premières visites sans copie | vert (38 s) |
+| Challenger (indépendant) | Scène indépendante : ancien `navigate_to` rouge 2/2 avec le message du symptôme, nouveau vert 2/2 ; boucle verte 2 fois (≈ 30 s, comme Develop) ; première visite : attente de 0,01 s. **Validé** |
