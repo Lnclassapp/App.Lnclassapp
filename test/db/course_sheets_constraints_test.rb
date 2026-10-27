@@ -25,10 +25,10 @@ class CourseSheetsConstraintsTest < ActiveSupport::TestCase
     assert_raises(ActiveRecord::NotNullViolation) { create_course_sheet(document: nil) }
   end
 
-  test "la fiche part avec sa leçon" do
+  test "une leçon qui a sa fiche ne se supprime pas" do
     sheet = create_course_sheet
-    sheet.course.destroy!
 
-    assert_not Orm::CourseSheet.exists?(sheet.id)
+    assert_raises(ActiveRecord::InvalidForeignKey) { sheet.course.destroy! }
+    assert Orm::CourseSheet.exists?(sheet.id)
   end
 end

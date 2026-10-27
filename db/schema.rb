@@ -1067,7 +1067,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_110000) do
   add_foreign_key "classrooms", "levels", on_delete: :restrict
   add_foreign_key "classrooms", "schools", on_delete: :restrict
   add_foreign_key "classrooms", "series", on_delete: :restrict
-  add_foreign_key "course_sheets", "courses", on_delete: :cascade
+  add_foreign_key "course_sheets", "courses", on_delete: :restrict
   add_foreign_key "courses", "levels", on_delete: :restrict
   add_foreign_key "courses", "materials", on_delete: :restrict
   add_foreign_key "courses", "series", on_delete: :restrict
