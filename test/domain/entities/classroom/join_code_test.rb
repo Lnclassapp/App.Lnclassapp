@@ -2,7 +2,7 @@ require "test_helper"
 
 module Entities
   module Classroom
-    # ADR-XXXX code-de-classe-a-six-caracteres (CA-B1): the code of a classroom, 6 symbols like the school code, stored in
+    # ADR-0109 (CA-B1): the code of a classroom, 6 symbols like the school code, stored in
     # lower case, displayed in upper case by groups of three.
     class JoinCodeTest < ActiveSupport::TestCase
       test "6 symbols out of 31, letters without i, l or o, digits from 2 to 9" do

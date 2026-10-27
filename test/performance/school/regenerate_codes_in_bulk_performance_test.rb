@@ -31,9 +31,13 @@ class School::RegenerateCodesInBulkPerformanceTest < ActiveSupport::TestCase
     year = current_school_year
     school_ids = Orm::School.ids
     created_at = @launch - 1.day
+    # Un code distinct par classe (l'index écrit en base 31) : le défaut tiré par la base peut sortir deux fois le même
+    # code sur 20 000 lignes d'un seul insert_all!, et l'index unique ferait échouer la préparation du test.
+    symbols = Entities::Classroom::JoinCode::SYMBOLS
     rows = Array.new(CLASSROOMS) do |index|
       { public_id: SecureRandom.base58(14), school_id: school_ids[index % school_ids.size], level_id: level.id, school_year: year,
-        name: "6e #{(index / school_ids.size) + 1}", created_at:, updated_at: created_at }
+        name: "6e #{(index / school_ids.size) + 1}", created_at:, updated_at: created_at,
+        join_code: Array.new(Entities::Classroom::JoinCode::LENGTH) { symbols[(index / (symbols.size**it)) % symbols.size] }.join }
     end
     rows.each_slice(2_000) { Orm::Classroom.insert_all!(it) }
   end

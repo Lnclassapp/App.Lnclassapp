@@ -9,7 +9,7 @@ module Entities
       FORMAT = /\A[a-hjkmnp-z2-9]{6}\z/
       SPACE = SYMBOLS.size**LENGTH
       GROUP = 3
-      # ADR-XXXX §4.2 : essais en cas de collision avant d'abandonner.
+      # ADR-0109 §4.2 : essais en cas de collision avant d'abandonner.
       ATTEMPTS = 5
 
       # Aucun code libre trouvé en ATTEMPTS essais : l'appelant décide (réessayer l'écriture, remonter l'erreur).

@@ -1,4 +1,4 @@
-# Shell applicatif par rôle : en-tête, navigation, accueil — UDR-0006, UDR-0052, UDR-0056, UDR-0068, UDR-0071, UDR-0074, UDR-0078, UDR-0080, UDR-0082, UDR-0084, UDR-XXXX (écrans enseignant et élève sans répétition, accueil élève)
+# Shell applicatif par rôle : en-tête, navigation, accueil — UDR-0006, UDR-0052, UDR-0056, UDR-0068, UDR-0071, UDR-0074, UDR-0078, UDR-0080, UDR-0082, UDR-0084, UDR-0132, UDR-0133, UDR-0134
 fr:
   layouts:
     shell:
@@ -33,7 +33,7 @@ fr:
         open: "Ouvrir le menu du compte"
         label: "Menu du compte"
         close: "Fermer"
-        # Entrées de l'élève (secret, mode sombre) et de l'enseignant (les quatre) ; UDR-XXXX §3.1 et §3.4.
+        # Entrées de l'élève (secret, mode sombre) et de l'enseignant (les quatre) ; UDR-0133 et UDR-0134, §3.1 et §3.4.
         entries:
           secret: "Modifier mon code secret"
           school: "Mon établissement"
@@ -57,7 +57,7 @@ fr:
           primary: "Principal"
           switch: "Passer à %{school}"
           current: "%{school}, établissement actuel"
-      # UDR-XXXX accueil élève §3.1, UDR enseignant §3.3 : bandeau des deux accueils (shared/navigation/_home_band) ; l'avatar
+      # UDR-0132 §3.1, UDR enseignant §3.3 : bandeau des deux accueils (shared/navigation/_home_band) ; l'avatar
       # ouvre « Mon compte », « Besoin d'aide ? » ouvre l'aide.
       home_band:
         account: "Mon compte, %{name}"

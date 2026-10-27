@@ -5,7 +5,7 @@
 get "join", to: redirect("/student-signup")
 get "c/:code", to: "classroom/joins#new", as: :join_classroom
 post "c/:code", to: "classroom/joins#create"
-# ADR-XXXX (code-de-classe-a-six-caracteres, §4.4) : le code de six caractères revient à côté du lien ; sa vérification est une page
+# ADR-0109 (§4.4) : le code de six caractères revient à côté du lien ; sa vérification est une page
 # (Turbo Frame), jamais du JSON, au débit `classroom/joins`. Nom et chemin gelés par le Lot 0 ; le contrôleur est celui du Lot A.
 get "classroom-codes/:code", to: "classroom/classroom_codes#show", as: :classroom_code
 # ADR-0085 §4 : l'élève s'inscrit en choisissant sa classe (DRENA → établissement → niveau → classe), sans code.

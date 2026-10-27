@@ -14,7 +14,7 @@ class MvpTeacherStudentRoutesTest < ActionDispatch::IntegrationTest
     nil
   end
 
-  # ADR-XXXX code-de-classe-a-six-caracteres §4.4 (CA-B2): the code check, a page (Turbo Frame), never JSON.
+  # ADR-0109 §4.4 (CA-B2): the code check, a page (Turbo Frame), never JSON.
   test "GET /classroom-codes/:code reaches classroom/classroom_codes#show" do
     assert_equal "/classroom-codes/k7m4q2", helpers.classroom_code_path("k7m4q2")
     assert_equal({ controller: "classroom/classroom_codes", action: "show", code: "k7m4q2" }, first_match("/classroom-codes/k7m4q2"))

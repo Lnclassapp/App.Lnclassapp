@@ -32,7 +32,7 @@ module Repositories
         record && map_to_entity(record)
       end
 
-      # ADR-XXXX §4 : le code est cherché tel quel, en minuscules ; un code mal formé ne touche pas la base.
+      # ADR-0109 §4 : le code est cherché tel quel, en minuscules ; un code mal formé ne touche pas la base.
       def find_by_join_code(code:)
         return nil unless Entities::Classroom::JoinCode.valid?(code)
 
@@ -40,7 +40,7 @@ module Repositories
         record && map_to_entity(record)
       end
 
-      # ADR-XXXX §4.3 : un seul UPDATE pose le jeton (tiré par la base) et le code (tiré par le domaine, libre au moment du tirage ;
+      # ADR-0109 §4.3 : un seul UPDATE pose le jeton (tiré par la base) et le code (tiré par le domaine, libre au moment du tirage ;
       # l'index unique tranche une course). Sous le verrou de la classe que l'appelant a pris.
       def regenerate_link_and_code(id:)
         now = Time.current

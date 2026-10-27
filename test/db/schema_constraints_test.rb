@@ -101,7 +101,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
 
   def check_expressions(table) = connection.check_constraints(table).map(&:expression).join("\n")
 
-  # CA-B1 (ADR-XXXX code-de-classe-a-six-caracteres §4, which amends the IL-02 of ADR-0085): the classroom code is back,
+  # CA-B1 (ADR-0109 §4, which amends the IL-02 of ADR-0085): the classroom code is back,
   # 6 symbols, not null, unique, in the documented alphabet; the link token stays.
   test "CA-B1: every classroom has a join code of exactly 6 symbols, unique, in the documented alphabet" do
     column = connection.columns("classrooms").find { it.name == "join_code" }
