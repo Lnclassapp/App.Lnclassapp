@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | cadrage |
+| **Statut** | preuve |
 | **Ouvert le** | 2026-10-27 |
 | **Branche** | `fix/blog-toast-instable` |
 | **Programme** | — |
@@ -54,15 +54,15 @@ Résultat : **le même échec, au même endroit, mot pour mot**. Sans l'étape 2
 - [x] Symptôme et étapes de reproduction écrits dans `memo.md`
 - [x] Bug reproduit **à la main** dans l'application avant toute ligne de code (navigateur piloté, envoi ralenti)
 - [x] Rapport root cause rendu : fichier, ligne, chaîne d'appels, raison du trou de test
-- [ ] Test de reproduction écrit **avant** le correctif
-- [ ] Test lancé et **rouge**, pour la bonne raison (message vérifié)
-- [ ] Correctif appliqué dans la couche de la **cause**, pas du symptôme
-- [ ] Test au vert · suite du contexte borné au vert
-- [ ] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
+- [x] Test de reproduction écrit **avant** le correctif
+- [x] Test lancé et **rouge**, pour la bonne raison (message vérifié)
+- [x] Correctif appliqué dans la couche de la **cause**, pas du symptôme
+- [x] Test au vert · suite du contexte borné au vert
+- [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
 - [x] Données déjà corrompues : réparées, ou dette explicitement notée au journal (aucune)
 - [ ] Challenger a rejoué les étapes de reproduction dans l'application
-- [ ] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
-- [ ] `journal.md` : cause, trou de test comblé, effets de bord écartés
+- [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
+- [x] `journal.md` : cause, trou de test comblé, effets de bord écartés
 
 ## Contrat d'exécution (lot unique)
 
@@ -70,3 +70,13 @@ Résultat : **le même échec, au même endroit, mot pour mot**. Sans l'étape 2
 2. **Correctif dans le test** : le toast qui suit un envoi libéré s'attend `UPLOAD_WAIT` (20 s, la constante déjà utilisée pour tout ce qui suit un envoi), comme les autres assertions d'après envoi.
 3. Avec le ralentissement : vert. Sans : vert, plusieurs fois.
 4. **Cas symétrique** : une vraie absence de toast fait toujours échouer (toast retiré de la réponse, le temps d'un essai).
+
+## Résultat (2026-10-27)
+
+| Vérification | Avant le correctif | Après |
+|---|---|---|
+| Envoi libéré ralenti de 2,5 s (`blog_management_test.rb:47`) | rouge : toast « Article … créé » introuvable (le message du symptôme) | vert |
+| Même ralentissement (`question_image_test.rb`) | rouge : toast « Exercice « Circuits » modifié » introuvable | vert |
+| **Seconde instabilité trouvée en route** : processeur du navigateur ralenti ×8 (CDP `Emulation.setCPUThrottlingRate`) pendant le dépôt d'une image 2000×1500 | rouge : `Selenium::WebDriver::Error::ScriptTimeoutError` dans `drop_generated_image` | vert |
+| Les deux fichiers entiers, sans ralentissement | — | 3 runs verts, deux fois |
+| Cas symétrique : toast retiré de `teams/articles/create.turbo_stream.erb` | — | rouge (vue remise en état) |

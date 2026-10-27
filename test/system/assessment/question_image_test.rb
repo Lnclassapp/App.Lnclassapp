@@ -63,7 +63,8 @@ class Assessment::QuestionImageTest < ApplicationSystemTestCase
         assert_equal 0, Orm::QuestionImage.count, "« Enregistrer » attend l'envoi en cours"
         release.call
       end
-      assert_toast t("teams.exercises.update.updated", title: "Circuits")
+      # The toast follows the end of the upload, then the save of the exercise: two requests, not one.
+      using_wait_time(UPLOAD_WAIT) { assert_toast t("teams.exercises.update.updated", title: "Circuits") }
       assert_no_selector "turbo-frame#modal dialog"
     end
 
