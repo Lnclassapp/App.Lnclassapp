@@ -1,0 +1,110 @@
+<%# 🌐 UI · catalog/course_sheets/kinds/_thales_figure — la figure interactive de Thalès : cinq points déplaçables, mesures, rapports, réciproque %>
+<%# Rôle : `block` {kind: thales_figure, params: a_x a_y b_x b_y c_x c_y k_m k_n} ; rendue dans sa position de départ sans JavaScript, thales_figure_controller la déplace %>
+<%# ADR  : 0110-fiche-de-cours-en-donnees-importees (chantier 318) · UDR : 0137-fiche-de-cours-a-l-identique-des-maquettes · pas d'attribut style, positions par attributs SVG %>
+<%
+  ctrl = "course-sheet--thales-figure"
+  params = block["params"].is_a?(Hash) ? block["params"] : {}
+  # Les mêmes bornes que le contrôleur (toSvg et proj) : un réglage hors de la feuille revient dans la feuille.
+  coord = ->(key, default, range) { params[key].is_a?(Numeric) ? params[key].clamp(range.begin, range.end) : default }
+  ratio = lambda do |key, default|
+    k = params[key].is_a?(Numeric) ? params[key].clamp(-1.2, 1.5) : default
+    k.abs < 0.12 ? (k.negative? ? -0.12 : 0.12) : k
+  end
+  a = [ coord.("a_x", 70, 12..428), coord.("a_y", 165, 12..308) ]
+  b = [ coord.("b_x", 360, 12..428), coord.("b_y", 55, 12..308) ]
+  c = [ coord.("c_x", 345, 12..428), coord.("c_y", 285, 12..308) ]
+  km = ratio.("k_m", 0.45)
+  kn = ratio.("k_n", 0.45)
+  lerp = ->(p, q, k) { [ p[0] + k * (q[0] - p[0]), p[1] + k * (q[1] - p[1]) ] }
+  dist = ->(p, q) { Math.hypot(p[0] - q[0], p[1] - q[1]) }
+  m = lerp.(a, b, km)
+  n = lerp.(a, c, kn)
+  g = [ (a[0] + b[0] + c[0]) / 3.0, (a[1] + b[1] + c[1]) / 3.0 ]
+  away = lambda do |p, r|
+    l = dist.(p, r).nonzero? || 1
+    [ p[0] + 17 * (p[0] - r[0]) / l, p[1] + 17 * (p[1] - r[1]) / l ]
+  end
+  side = lambda do |p, o, q, x|
+    nx = -(q[1] - o[1])
+    ny = q[0] - o[0]
+    l = Math.hypot(nx, ny).nonzero? || 1
+    nx /= l
+    ny /= l
+    nx, ny = -nx, -ny if nx * (x[0] - o[0]) + ny * (x[1] - o[1]) > 0
+    [ p[0] + 17 * nx, p[1] + 17 * ny ]
+  end
+  ext = lambda do |p, q, from, to|
+    { x1: p[0] + from * (q[0] - p[0]), y1: p[1] + from * (q[1] - p[1]), x2: p[0] + to * (q[0] - p[0]), y2: p[1] + to * (q[1] - p[1]) }.transform_values { it.round(2) }
+  end
+  pts = ->(*list) { list.map { |p| p.map { it.round(2) }.join(",") }.join(" ") }
+  tenths = ->(v) { format("%.1f", v / 40.0).tr(".", ",") }
+  hundredths = ->(v) { format("%.2f", v).tr(".", ",") }
+  points = { "A" => [ a, away.(a, g), "ink" ], "B" => [ b, away.(b, g), "ink" ], "C" => [ c, away.(c, g), "ink" ],
+             "M" => [ m, side.(m, a, b, c), "green" ], "N" => [ n, side.(n, a, c, b), "green" ] }
+  ab = dist.(a, b)
+  ac = dist.(a, c)
+  bc = dist.(b, c)
+  mn = dist.(m, n)
+  # Position de départ et textes : le contrôleur les lit en valeurs Stimulus (`data-<ctrl>-<nom>-value`).
+  values = { "a-x" => a[0], "a-y" => a[1], "b-x" => b[0], "b-y" => b[1], "c-x" => c[0], "c-y" => c[1], "k-m" => km, "k-n" => kn }
+  %w[status-locked status-order status-converse status-contraposed config-triangle config-butterfly config-other lock-free lock-impose].each do |key|
+    values[key] = t(".#{key.tr('-', '_')}")
+  end
+  data = values.to_h { |key, value| [ "#{ctrl}-#{key}-value", value ] }.merge("controller" => ctrl)
+%>
+<%= tag.figure class: "sheet-figure sheet-thales", data: do %>
+ <div class="sheet-thales-layout">
+  <div class="sheet-thales-board">
+    <svg class="sheet-thales-svg" viewBox="0 0 440 320" role="group" aria-label="<%= t(".label") %>"
+         data-<%= ctrl %>-target="svg"
+         data-action="pointermove-><%= ctrl %>#move pointerup-><%= ctrl %>#release pointercancel-><%= ctrl %>#release">
+      <polygon class="sheet-thales-abc" points="<%= pts.(a, b, c) %>" data-<%= ctrl %>-target="abc"></polygon>
+      <polygon class="sheet-thales-amn" points="<%= pts.(a, m, n) %>" data-<%= ctrl %>-target="amn"></polygon>
+      <%= tag.line class: "sheet-thales-line", **ext.(a, b, -4, 4), "stroke-width": 1.3, data: { "#{ctrl}-target": "d1" } %>
+      <%= tag.line class: "sheet-thales-line", **ext.(a, c, -4, 4), "stroke-width": 1.3, data: { "#{ctrl}-target": "d2" } %>
+      <%= tag.line class: "sheet-thales-bc", **ext.(b, c, -0.2, 1.2), "stroke-width": 2.6, "stroke-linecap": "round", data: { "#{ctrl}-target": "bc" } %>
+      <%= tag.line class: "sheet-thales-mn", **ext.(m, n, -0.2, 1.2), "stroke-width": 2.6, "stroke-linecap": "round",
+                   data: { tone: "parallel", "#{ctrl}-target": "mn" } %>
+      <% points.each do |name, (position, _label, tone)| %>
+        <%= tag.circle class: "sheet-thales-dot", cx: position[0].round(2), cy: position[1].round(2), r: 5.5, "stroke-width": 1.5,
+                       data: { tone:, point: name, "#{ctrl}-target": "dot" } %>
+      <% end %>
+      <% points.each do |name, (_position, label, tone)| %>
+        <%= tag.text name, class: "sheet-thales-name", x: label[0].round(2), y: label[1].round(2), "text-anchor": "middle", "dominant-baseline": "central",
+                     "aria-hidden": "true", data: { tone:, point: name, "#{ctrl}-target": "name" } %>
+      <% end %>
+      <%# Les zones de toucher viennent en dernier : elles reçoivent le doigt avant le reste ; le contrôleur porte leur rayon à 22 px d'écran. %>
+      <% points.each do |name, (position, _label, _tone)| %>
+        <%= tag.circle class: "sheet-thales-hit", cx: position[0].round(2), cy: position[1].round(2), r: 17, tabindex: 0, role: "button",
+                       "aria-label": t(".point", name:),
+                       data: { point: name, hit: name, "#{ctrl}-target": "hit", action: "pointerdown->#{ctrl}#grab keydown->#{ctrl}#nudge" } %>
+      <% end %>
+    </svg>
+    <% if block["caption"].present? %><figcaption class="sheet-muted"><%= block["caption"] %></figcaption><% end %>
+  </div>
+
+  <div class="sheet-thales-panel">
+    <div class="sheet-thales-config"><span><%= t(".config_label") %></span>
+      <b data-role="config" data-<%= ctrl %>-target="config"><%= t(".config_#{km.negative? ? 'butterfly' : 'triangle'}") %></b></div>
+    <div class="sheet-thales-units"><%= t(".units") %></div>
+    <div class="sheet-thales-grid">
+      <% [ [ "AMN", "green", [ [ "AM", km.abs * ab ], [ "AN", kn.abs * ac ], [ "MN", mn ] ] ],
+           [ "ABC", "primary", [ [ "AB", ab ], [ "AC", ac ], [ "BC", bc ] ] ] ].each do |triangle, tone, cells| %>
+        <span class="sheet-thales-rowhead" data-tone="<%= tone %>"><%= triangle %></span>
+        <% cells.each do |label, length| %>
+          <span class="sheet-thales-cell"><small><%= label %></small><br><span data-cell="<%= label %>" data-<%= ctrl %>-target="cell"><%= tenths.(length) %></span></span>
+        <% end %>
+      <% end %>
+      <span class="sheet-thales-rowhead sheet-thales-ratiohead"><%= t(".ratio") %></span>
+      <% [ km.abs, kn.abs, mn / bc ].each_with_index do |value, index| %>
+        <b class="sheet-thales-ratio" data-ratio="<%= index + 1 %>" data-<%= ctrl %>-target="ratio"><%= hundredths.(value) %></b>
+      <% end %>
+    </div>
+    <div class="sheet-thales-status" role="status" data-role="status" aria-live="polite" data-tone="success" data-<%= ctrl %>-target="status"><%= t(".status_locked") %></div>
+    <div class="sheet-thales-actions">
+      <button type="button" class="sheet-btn" data-variant="primary" data-<%= ctrl %>-target="lock" data-action="click-><%= ctrl %>#toggleLock"><%= t(".lock_free") %></button>
+      <button type="button" class="sheet-btn" data-action="click-><%= ctrl %>#reset"><%= t("catalog.course_sheets.figure.reset") %></button>
+    </div>
+  </div>
+ </div>
+<% end %>

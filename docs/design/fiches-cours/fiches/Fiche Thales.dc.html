@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#e6dfcf;-webkit-font-smoothing:antialiased}
+a{color:oklch(0.48 0.15 262)}a:hover{color:oklch(0.53 0.19 27)}
+::highlight(lnc-err){background-color:oklch(0.9 0.12 90);color:oklch(0.4 0.17 27);text-decoration:underline wavy oklch(0.53 0.19 27)}
+</style>
+</helmet>
+<div style="display:flex;flex-direction:column;align-items:safe center;gap:40px;padding:40px 20px;overflow-x:auto;font-family:'Source Serif 4',Georgia,serif;color:#23263a;font-size:16px;line-height:1.5">
+
+<sc-if value="{{ popOpen }}" hint-placeholder-val="{{ false }}"><div style="position:fixed;left:{{ popLeft }}px;top:{{ popTop }}px;width:310px;max-height:70vh;overflow:auto;z-index:50;background:#fffdf8;border:2px solid oklch(0.48 0.15 305);border-radius:8px;box-shadow:0 10px 30px rgba(40,30,70,.25);padding:12px 14px;display:flex;flex-direction:column;gap:6px;font-family:'Source Serif 4',Georgia,serif;font-size:15px;line-height:1.45;color:#23263a"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><b style="font-family:Kalam,cursive;font-size:20px;color:oklch(0.45 0.15 305)">{{ popWord }}</b><button onClick="{{ closePop }}" style="border:none;background:transparent;font-size:18px;cursor:pointer;color:#6a6d80;padding:0 4px">×</button></div><sc-for list="{{ popItems }}" as="it" hint-placeholder-count="1"><div style="display:flex;flex-direction:column;gap:2px"><sc-if value="{{ it.title }}" hint-placeholder-val="{{ false }}"><b style="color:oklch(0.45 0.15 305);cursor:pointer" onClick="{{ it.open }}">{{ it.title }}</b></sc-if><span style="text-wrap:pretty">{{ it.def }}</span><sc-if value="{{ it.ex }}" hint-placeholder-val="{{ false }}"><span style="font-family:Kalam,cursive;font-size:16px;color:oklch(0.42 0.15 262)">{{ it.ex }}</span></sc-if></div></sc-for></div></sc-if>
+<sc-if value="{{ rvTools }}" hint-placeholder-val="{{ true }}"><div data-review-ui="1" style="position:fixed;right:20px;bottom:20px;z-index:60;font-family:'Source Serif 4',Georgia,serif;color:#23263a">
+<sc-if value="{{ rvOff }}" hint-placeholder-val="{{ true }}"><button onClick="{{ rvToggle }}" style="font-family:Kalam,cursive;font-size:17px;padding:8px 16px;border-radius:6px;border:2px solid oklch(0.53 0.19 27);background:#fffdf8;color:oklch(0.53 0.19 27);cursor:pointer;box-shadow:0 6px 20px rgba(40,30,70,.2)" style-hover="background:oklch(0.53 0.19 27);color:#fff">Signaler une erreur</button></sc-if>
+<sc-if value="{{ rvOn }}" hint-placeholder-val="{{ false }}"><div style="width:350px;box-sizing:border-box;max-height:78vh;overflow-y:auto;overflow-x:hidden;background:#fffdf8;border:2px solid oklch(0.53 0.19 27);border-radius:8px;box-shadow:0 10px 30px rgba(40,30,70,.25);padding:14px 16px;display:flex;flex-direction:column;gap:10px;font-size:14.5px;line-height:1.45">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><b style="font-family:Kalam,cursive;font-size:21px;color:oklch(0.53 0.19 27)">Mode relecture</b><button onClick="{{ rvToggle }}" style="border:none;background:transparent;font-size:14px;cursor:pointer;color:#4a4d63;font-family:Kalam,cursive">Quitter ×</button></div>
+<p style="margin:0;text-wrap:pretty;color:#4a4d63">Cliquez sur un mot ou sélectionnez une expression dans la fiche pour la cocher. Cliquez de nouveau dessus pour la retirer.</p>
+<div style="font-family:Kalam,cursive;font-size:17px;color:oklch(0.48 0.15 262)">{{ rvCount }}</div>
+<sc-for list="{{ rvMarks }}" as="m" hint-placeholder-count="0"><div style="display:flex;flex-direction:column;gap:4px;padding:8px 10px;border:1.5px solid #e2d9c4;border-radius:6px;background:#fff">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><b style="color:oklch(0.4 0.17 27);text-wrap:pretty">« {{ m.text }} »</b><button onClick="{{ m.remove }}" title="Retirer" style="flex:none;border:none;background:transparent;font-size:16px;cursor:pointer;color:#6a6d80;padding:0 2px">×</button></div>
+<span style="font-size:12.5px;color:#6a6d80">{{ m.where }}</span>
+<input type="text" value="{{ m.comment }}" onChange="{{ m.onComment }}" placeholder="Correction proposée (facultatif)" style="box-sizing:border-box;width:100%;min-width:0;font:inherit;font-size:13.5px;padding:4px 6px;border:1px solid #cfd6ea;border-radius:4px;background:#fffdf8;outline:none">
+</div></sc-for>
+<textarea value="{{ rvNote }}" onChange="{{ rvOnNote }}" placeholder="Commentaire général (facultatif)" style="box-sizing:border-box;width:100%;min-width:0;font:inherit;font-size:13.5px;min-height:56px;resize:vertical;padding:6px 8px;border:1px solid #cfd6ea;border-radius:4px;background:#fff;outline:none"></textarea>
+<input type="text" value="{{ rvName }}" onChange="{{ rvOnName }}" placeholder="Votre nom et établissement (facultatif)" style="box-sizing:border-box;width:100%;min-width:0;font:inherit;font-size:13.5px;padding:6px 8px;border:1px solid #cfd6ea;border-radius:4px;background:#fff;outline:none">
+<a href="{{ rvMail }}" onClick="{{ rvSend }}" style="display:block;text-align:center;text-decoration:none;font-family:Kalam,cursive;font-size:17px;padding:7px 12px;border-radius:6px;background:oklch(0.53 0.19 27);color:#fff;opacity:{{ rvSendOp }};pointer-events:{{ rvSendPe }}">Signaler à l'équipe Lnclass</a>
+<sc-if value="{{ rvSent }}" hint-placeholder-val="{{ false }}"><div style="font-size:13.5px;color:oklch(0.52 0.13 155);font-weight:600;text-wrap:pretty">Signalement prêt : votre messagerie s'ouvre avec le rapport. Il est aussi copié dans le presse-papiers. Merci !</div></sc-if>
+<button onClick="{{ rvClear }}" style="align-self:flex-start;border:none;background:transparent;padding:0;font-size:13px;color:#6a6d80;cursor:pointer;text-decoration:underline">Tout effacer</button>
+</div></sc-if>
+</div></sc-if>
+<div data-screen-label="Page 1" style="width:1000px;min-height:1414px;flex:none;background:#fbf6e9;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.05),0 14px 40px rgba(70,50,20,.18);box-sizing:border-box">
+<sc-if value="{{ seyes }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right,transparent 74px,oklch(0.6 0.17 20 / .55) 74px,oklch(0.6 0.17 20 / .55) 76px,transparent 76px),repeating-linear-gradient(to bottom,rgba(80,120,205,.26) 0 1px,transparent 1px 32px),repeating-linear-gradient(to bottom,rgba(80,120,205,.09) 0 1px,transparent 1px 8px)"></div></sc-if>
+<div style="position:relative;padding:40px 52px 32px 100px;display:flex;flex-direction:column;gap:18px">
+
+<header style="display:flex;flex-direction:column;gap:4px">
+<div style="display:flex;justify-content:space-between;font-family:Kalam,cursive;font-size:17px;color:oklch(0.48 0.15 262)"><span>Mathématiques — Classe de 3e</span><span>Géométrie · Fiche de cours</span></div>
+<h1 style="margin:0;font-family:Kalam,cursive;font-weight:700;font-size:46px;line-height:1.1;color:oklch(0.48 0.15 262)">La propriété de Thalès</h1>
+<div style="height:3px;background:oklch(0.53 0.19 27)"></div>
+<div style="height:1.5px;background:oklch(0.53 0.19 27);margin-top:1px"></div>
+<p style="margin:6px 0 0;font-size:17px;text-wrap:pretty">Elle permet de calculer des longueurs dans deux triangles formés par deux droites <span onClick="{{ g.secantes }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">sécantes</span> et deux droites <span onClick="{{ g.paralleles }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">parallèles</span>.</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-top:12px;padding:8px 12px;background:#fffdf8;border:1.5px solid oklch(0.48 0.15 305 / 0.4);border-radius:6px;font-size:14.5px"><span style="text-wrap:pretty">Les mots <span onClick="{{ g.aide }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">soulignés en pointillés</span> sont expliqués : clique dessus.</span><div style="display:flex;gap:8px"><button onClick="{{ toggleSimple }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 305);background:{{ simpleBg }};color:{{ simpleFg }};cursor:pointer">{{ simpleLabel }}</button><button onClick="{{ g.lexique }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 305);background:transparent;color:oklch(0.48 0.15 305);cursor:pointer">Lexique</button></div></div>
+</header>
+
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:25px;font-weight:700;color:oklch(0.53 0.19 27)"><span style="color:oklch(0.48 0.15 262)">1.</span> L'énoncé</h2>
+<div style="position:relative;border:2px solid oklch(0.53 0.19 27);border-radius:6px;background:#fffdf8;padding:20px 22px 14px;display:flex;flex-direction:column;gap:12px">
+<span style="position:absolute;top:-14px;left:18px;background:oklch(0.53 0.19 27);color:#fff;font-family:Kalam,cursive;font-weight:700;font-size:16px;padding:1px 12px;border-radius:4px">Propriété de Thalès</span>
+<p style="margin:0;text-wrap:pretty">Soient (d) et (d′) deux droites <span onClick="{{ g.secantes }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">sécantes</span> en <b>A</b>. <b>B</b> et <b>M</b> sont deux points de (d), <b>C</b> et <b>N</b> sont deux points de (d′), <span onClick="{{ g.distincts }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">distincts</span> de A.</p>
+<p style="margin:0">Si les droites <b>(BC)</b> et <b>(MN)</b> sont <b style="color:oklch(0.53 0.19 27)"><span onClick="{{ g.paralleles }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">parallèles</span></b>, alors :</p>
+<div style="display:flex;justify-content:center;align-items:center;gap:14px;font-size:24px;padding:0;color:oklch(0.48 0.15 262)">
+<span style="display:inline-flex;flex-direction:column;align-items:center;line-height:1.15"><span style="padding:0 4px 2px">AM</span><span style="padding:2px 4px 0;border-top:2px solid currentColor">AB</span></span><span>=</span>
+<span style="display:inline-flex;flex-direction:column;align-items:center;line-height:1.15"><span style="padding:0 4px 2px">AN</span><span style="padding:2px 4px 0;border-top:2px solid currentColor">AC</span></span><span>=</span>
+<span style="display:inline-flex;flex-direction:column;align-items:center;line-height:1.15"><span style="padding:0 4px 2px">MN</span><span style="padding:2px 4px 0;border-top:2px solid currentColor">BC</span></span>
+</div>
+<p style="margin:0;font-size:15px;font-style:italic;color:#4a4d63">Autrement dit, les longueurs des côtés du triangle AMN sont <span onClick="{{ g.proportionnelles }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">proportionnelles</span> à celles du triangle ABC.</p>
+</div>
+<sc-if value="{{ simple }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:12px;align-items:flex-start;background:oklch(0.95 0.035 305);border-radius:6px;padding:10px 14px;font-size:15.5px;line-height:1.5;text-wrap:pretty"><span style="flex:none;font-family:Kalam,cursive;font-weight:700;font-size:17px;color:oklch(0.45 0.15 305)">En clair</span><span>Le petit triangle AMN a la même forme que le grand triangle ABC : c'est une copie plus petite (ou plus grande). Pour passer d'une longueur du grand à la longueur correspondante du petit, on multiplie toujours par le même nombre. Par exemple, si AM est la moitié de AB, alors AN est la moitié de AC et MN est la moitié de BC.</span></div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:25px;font-weight:700;color:oklch(0.53 0.19 27)"><span style="color:oklch(0.48 0.15 262)">2.</span> Les deux configurations</h2>
+<p style="margin:0;font-size:15px;color:#4a4d63">Figure interactive : déplace les points A, B, C, M et N. Fais passer M de l'autre côté de A pour obtenir la configuration papillon.</p>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px">
+<div style="position:relative"><svg ref="{{ svgRef }}" viewBox="0 0 440 320" style="width:100%;height:auto;display:block;touch-action:none;user-select:none;background:#fff;border-radius:4px" onPointerMove="{{ move }}" onPointerUp="{{ up }}" onPointerCancel="{{ up }}">
+<polygon points="{{ polyABC }}" fill="oklch(0.48 0.15 262 / 0.08)"></polygon>
+<polygon points="{{ polyAMN }}" fill="oklch(0.52 0.13 155 / 0.18)"></polygon>
+<line x1="{{ d1.x1 }}" y1="{{ d1.y1 }}" x2="{{ d1.x2 }}" y2="{{ d1.y2 }}" stroke="#1d2a57" stroke-width="1.3"></line>
+<line x1="{{ d2.x1 }}" y1="{{ d2.y1 }}" x2="{{ d2.x2 }}" y2="{{ d2.y2 }}" stroke="#1d2a57" stroke-width="1.3"></line>
+<line x1="{{ bc.x1 }}" y1="{{ bc.y1 }}" x2="{{ bc.x2 }}" y2="{{ bc.y2 }}" stroke="oklch(0.53 0.19 27)" stroke-width="2.6" stroke-linecap="round"></line>
+<line x1="{{ mn.x1 }}" y1="{{ mn.y1 }}" x2="{{ mn.x2 }}" y2="{{ mn.y2 }}" stroke="{{ mnColor }}" stroke-width="2.6" stroke-linecap="round"></line>
+<sc-for list="{{ pts }}" as="p" hint-placeholder-count="5">
+<circle cx="{{ p.x }}" cy="{{ p.y }}" r="5.5" fill="{{ p.color }}" stroke="#fff" stroke-width="1.5"></circle>
+<circle cx="{{ p.x }}" cy="{{ p.y }}" r="17" fill="transparent" style="cursor:grab" onPointerDown="{{ p.down }}"></circle>
+</sc-for>
+</svg><sc-for list="{{ pts }}" as="p" hint-placeholder-count="5"><span style="position:absolute;left:{{ p.lxp }}%;top:{{ p.lyp }}%;transform:translate(-50%,-50%);pointer-events:none;font-family:Kalam,cursive;font-weight:700;font-size:21px;line-height:1;color:{{ p.color }}">{{ p.name }}</span></sc-for></div>
+<div style="display:flex;flex-direction:column;gap:8px;font-size:14px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-family:Kalam,cursive;font-size:18px"><span style="color:#4a4d63">Configuration</span><b style="color:oklch(0.48 0.15 262)">{{ config }}</b></div>
+<div style="font-size:12px;color:#6a6d80;margin-top:-6px">Longueurs en cm, arrondies au dixième</div>
+<div style="display:grid;grid-template-columns:auto repeat(3,minmax(0,1fr));gap:1px;background:#cfd6ea;border:1px solid #cfd6ea;border-radius:4px;overflow:hidden;text-align:center;font-variant-numeric:tabular-nums">
+<span style="background:#fff;padding:5px 6px;text-align:left;color:oklch(0.52 0.13 155);font-weight:600">AMN</span>
+<span style="background:#fff;padding:3px 2px"><small style="color:#6a6d80">AM</small><br>{{ AM }}</span>
+<span style="background:#fff;padding:3px 2px"><small style="color:#6a6d80">AN</small><br>{{ AN }}</span>
+<span style="background:#fff;padding:3px 2px"><small style="color:#6a6d80">MN</small><br>{{ MN }}</span>
+<span style="background:#fff;padding:5px 6px;text-align:left;color:oklch(0.48 0.15 262);font-weight:600">ABC</span>
+<span style="background:#fff;padding:3px 2px"><small style="color:#6a6d80">AB</small><br>{{ AB }}</span>
+<span style="background:#fff;padding:3px 2px"><small style="color:#6a6d80">AC</small><br>{{ AC }}</span>
+<span style="background:#fff;padding:3px 2px"><small style="color:#6a6d80">BC</small><br>{{ BC }}</span>
+<span style="background:#f3efe2;padding:5px 6px;text-align:left;font-weight:600">rapport</span>
+<b style="background:#f3efe2;padding:5px 2px">{{ r1 }}</b>
+<b style="background:#f3efe2;padding:5px 2px">{{ r2 }}</b>
+<b style="background:#f3efe2;padding:5px 2px;opacity:{{ r3Op }}">{{ r3 }}</b>
+</div>
+<div style="padding:8px 10px;border-radius:4px;background:#fff;border:1.5px solid {{ statusColor }};color:{{ statusColor }};line-height:1.35;text-wrap:pretty">{{ status }}</div>
+<div style="display:flex;flex-direction:column;gap:6px;margin-top:auto">
+<button onClick="{{ toggleLock }}" style="font-family:Kalam,cursive;font-size:16px;padding:3px 10px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:oklch(0.48 0.15 262);color:#fff;cursor:pointer" style-hover="background:oklch(0.42 0.15 262)">{{ lockLabel }}</button>
+<button onClick="{{ reset }}" style="font-family:Kalam,cursive;font-size:16px;padding:3px 10px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:transparent;color:oklch(0.48 0.15 262);cursor:pointer" style-hover="background:#eef1f9">Réinitialiser la figure</button>
+</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:8px 14px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.48 0.15 262)">Configuration triangle</div>
+<p style="margin:2px 0 0;font-size:15px;text-wrap:pretty">M est sur la <span onClick="{{ g.demidroite }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">demi-droite</span> [AB) et N sur la demi-droite [AC). Les triangles AMN et ABC sont emboîtés : l'un est une <span onClick="{{ g.reduction }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">réduction</span> ou un <span onClick="{{ g.agrandissement }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">agrandissement</span> de l'autre.</p>
+</div>
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:8px 14px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.48 0.15 262)">Configuration papillon</div>
+<p style="margin:2px 0 0;font-size:15px;text-wrap:pretty">A est entre M et B, et entre N et C. Les triangles AMN et ABC sont <span onClick="{{ g.opposes }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">opposés par le sommet</span> A. Les mêmes égalités s'appliquent.</p>
+</div>
+</div>
+<sc-if value="{{ simple }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:12px;align-items:flex-start;background:oklch(0.95 0.035 305);border-radius:6px;padding:10px 14px;font-size:15.5px;line-height:1.5;text-wrap:pretty"><span style="flex:none;font-family:Kalam,cursive;font-weight:700;font-size:17px;color:oklch(0.45 0.15 305)">En clair</span><span>Dans les deux cas, il y a deux triangles qui se touchent au point A. Triangle : le petit est rangé dans le grand. Papillon : les deux triangles sont de part et d'autre de A, comme les deux ailes d'un papillon. On écrit exactement la même égalité.</span></div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:25px;font-weight:700;color:oklch(0.53 0.19 27)"><span style="color:oklch(0.48 0.15 262)">3.</span> Méthode : calculer une longueur</h2>
+<div style="position:relative;border:2px solid oklch(0.48 0.15 305);border-radius:6px;background:#fffdf8;padding:18px 22px 12px">
+<span style="position:absolute;top:-14px;left:18px;background:oklch(0.48 0.15 305);color:#fff;font-family:Kalam,cursive;font-weight:700;font-size:16px;padding:1px 12px;border-radius:4px">Rédaction type</span>
+<ol style="margin:0;padding-left:22px;display:flex;flex-direction:column;gap:2px;text-wrap:pretty">
+<li>Je décris la figure : « Les droites (BM) et (CN) sont sécantes en A. »</li>
+<li>Je cite l'<span onClick="{{ g.hypothese }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">hypothèse</span> : « Les droites (MN) et (BC) sont parallèles. »</li>
+<li>J'écris les égalités : « D'après la propriété de Thalès, AM/AB = AN/AC = MN/BC. »</li>
+<li>Je remplace par les longueurs connues et je choisis les deux <span onClick="{{ g.rapport }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">rapports</span> utiles.</li>
+<li>Je calcule avec le <span onClick="{{ g.croix }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">produit en croix</span>, puis je conclus avec l'unité.</li>
+</ol>
+</div>
+<sc-if value="{{ simple }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:12px;align-items:flex-start;background:oklch(0.95 0.035 305);border-radius:6px;padding:10px 14px;font-size:15.5px;line-height:1.5;text-wrap:pretty"><span style="flex:none;font-family:Kalam,cursive;font-weight:700;font-size:17px;color:oklch(0.45 0.15 305)">En clair</span><span>On dit ce qu'on voit sur la figure, on rappelle que les droites sont parallèles, on écrit les trois fractions, on garde les deux fractions qui contiennent la longueur cherchée et des nombres connus, puis on calcule.</span></div></sc-if>
+</section>
+
+<footer style="display:flex;justify-content:flex-end;font-family:Kalam,cursive;color:#6a6d80;font-size:15px">1 / 3</footer>
+</div>
+</div>
+
+<div data-screen-label="Page 2" style="width:1000px;min-height:1414px;flex:none;background:#fbf6e9;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.05),0 14px 40px rgba(70,50,20,.18);box-sizing:border-box">
+<sc-if value="{{ seyes }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right,transparent 74px,oklch(0.6 0.17 20 / .55) 74px,oklch(0.6 0.17 20 / .55) 76px,transparent 76px),repeating-linear-gradient(to bottom,rgba(80,120,205,.26) 0 1px,transparent 1px 32px),repeating-linear-gradient(to bottom,rgba(80,120,205,.09) 0 1px,transparent 1px 8px)"></div></sc-if>
+<div style="position:relative;padding:40px 52px 32px 100px;display:flex;flex-direction:column;gap:16px">
+
+<section style="display:flex;flex-direction:column;gap:10px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:22px;color:oklch(0.48 0.15 305)">Exemple rédigé</div>
+<p style="margin:0;text-wrap:pretty">Les droites (BM) et (CN) sont sécantes en A et les droites (MN) et (BC) sont parallèles. On donne AM = 3 cm, AB = 5 cm, AC = 7 cm et BC = 6 cm. <b>Calculer AN et MN.</b></p>
+<div style="font-family:Kalam,cursive;font-size:19px;line-height:1.55;color:oklch(0.42 0.15 262);background:#fffdf8;border:1.5px dashed #b9c3e0;border-radius:6px;padding:12px 18px;display:flex;flex-direction:column;gap:4px">
+<span>Les droites (BM) et (CN) sont sécantes en A et (MN) // (BC).</span>
+<span style="display:flex;align-items:center;flex-wrap:wrap;gap:6px">D'après la propriété de Thalès :
+<span style="display:inline-flex;flex-direction:column;align-items:center;line-height:1.1"><span style="padding:0 3px">AM</span><span style="padding:0 3px;border-top:1.5px solid currentColor">AB</span></span>=
+<span style="display:inline-flex;flex-direction:column;align-items:center;line-height:1.1"><span style="padding:0 3px">AN</span><span style="padding:0 3px;border-top:1.5px solid currentColor">AC</span></span>=
+<span style="display:inline-flex;flex-direction:column;align-items:center;line-height:1.1"><span style="padding:0 3px">MN</span><span style="padding:0 3px;border-top:1.5px solid currentColor">BC</span></span>
+soit
+<span style="display:inline-flex;flex-direction:column;align-items:center;line-height:1.1"><span style="padding:0 3px">3</span><span style="padding:0 3px;border-top:1.5px solid currentColor">5</span></span>=
+<span style="display:inline-flex;flex-direction:column;align-items:center;line-height:1.1"><span style="padding:0 3px">AN</span><span style="padding:0 3px;border-top:1.5px solid currentColor">7</span></span>=
+<span style="display:inline-flex;flex-direction:column;align-items:center;line-height:1.1"><span style="padding:0 3px">MN</span><span style="padding:0 3px;border-top:1.5px solid currentColor">6</span></span>
+</span>
+<span>AN = 3 × 7 ÷ 5 = 21 ÷ 5 = 4,2 &nbsp;→&nbsp; <b style="color:oklch(0.53 0.19 27)">AN = 4,2 cm</b></span>
+<span>MN = 3 × 6 ÷ 5 = 18 ÷ 5 = 3,6 &nbsp;→&nbsp; <b style="color:oklch(0.53 0.19 27)">MN = 3,6 cm</b></span>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:25px;font-weight:700;color:oklch(0.53 0.19 27)"><span style="color:oklch(0.48 0.15 262)">4.</span> La <span onClick="{{ g.reciproque }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">réciproque</span> : prouver un parallélisme</h2>
+<div style="position:relative;border:2px solid oklch(0.52 0.13 155);border-radius:6px;background:#fffdf8;padding:18px 22px 12px;display:flex;flex-direction:column;gap:10px">
+<span style="position:absolute;top:-14px;left:18px;background:oklch(0.52 0.13 155);color:#fff;font-family:Kalam,cursive;font-weight:700;font-size:16px;padding:1px 12px;border-radius:4px">Réciproque de Thalès</span>
+<p style="margin:0;text-wrap:pretty">Soient (d) et (d′) deux droites sécantes en A. B et M sont deux points de (d), C et N deux points de (d′), distincts de A.</p>
+<p style="margin:0;text-wrap:pretty">Si <b>AM/AB = AN/AC</b> et si les points A, M, B et les points A, N, C sont <b><span onClick="{{ g.alignes }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">alignés dans le même ordre</span></b>, alors les droites <b style="color:oklch(0.52 0.13 155)">(MN) et (BC) sont parallèles</b>.</p>
+<p style="margin:0;font-size:15px;color:#4a4d63;text-wrap:pretty"><b>Attention :</b> on calcule les deux rapports séparément avant de les comparer. Le rapport MN/BC ne sert pas ici.</p>
+<div style="font-family:Kalam,cursive;font-size:18px;line-height:1.5;color:oklch(0.42 0.15 262)">Ex. : AM = 4, AB = 10, AN = 6, AC = 15. AM/AB = 4 ÷ 10 = 0,4 et AN/AC = 6 ÷ 15 = 0,4. Les rapports sont égaux et les points sont dans le même ordre, donc (MN) // (BC).</div>
+</div>
+<sc-if value="{{ simple }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:12px;align-items:flex-start;background:oklch(0.95 0.035 305);border-radius:6px;padding:10px 14px;font-size:15.5px;line-height:1.5;text-wrap:pretty"><span style="flex:none;font-family:Kalam,cursive;font-weight:700;font-size:17px;color:oklch(0.45 0.15 305)">En clair</span><span>La réciproque fait le chemin inverse. Cette fois, on ne sait pas si les droites sont parallèles : on veut le découvrir. On calcule les deux fractions. Si elles donnent le même nombre et que les points sont rangés dans le même ordre, les droites sont parallèles.</span></div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:25px;font-weight:700;color:oklch(0.53 0.19 27)"><span style="color:oklch(0.48 0.15 262)">5.</span> La <span onClick="{{ g.contraposee }}" style="border-bottom:2px dotted oklch(0.48 0.15 305);cursor:help" style-hover="background:oklch(0.48 0.15 305 / 0.12)">contraposée</span> : prouver un non-parallélisme</h2>
+<div style="position:relative;border:2px solid oklch(0.62 0.14 70);border-radius:6px;background:#fffdf8;padding:18px 22px 12px;display:flex;flex-direction:column;gap:10px">
+<span style="position:absolute;top:-14px;left:18px;background:oklch(0.62 0.14 70);color:#2a1c00;font-family:Kalam,cursive;font-weight:700;font-size:16px;padding:1px 12px;border-radius:4px">Contraposée de Thalès</span>
+<p style="margin:0;text-wrap:pretty">Avec les mêmes notations, si <b>AM/AB ≠ AN/AC</b>, alors les droites <b>(MN) et (BC) ne sont pas parallèles</b>.</p>
+<div style="font-family:Kalam,cursive;font-size:18px;line-height:1.5;color:oklch(0.42 0.15 262)">Ex. : AM = 3, AB = 8, AN = 4, AC = 10. AM/AB = 3 ÷ 8 = 0,375 et AN/AC = 4 ÷ 10 = 0,4. Comme 0,375 ≠ 0,4, (MN) et (BC) ne sont pas parallèles.</div>
+<p style="margin:0;font-size:15px;color:#4a4d63">Sur la figure de la page 1, clique sur « Libérer N » pour tester la réciproque et la contraposée.</p>
+</div>
+<sc-if value="{{ simple }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:12px;align-items:flex-start;background:oklch(0.95 0.035 305);border-radius:6px;padding:10px 14px;font-size:15.5px;line-height:1.5;text-wrap:pretty"><span style="flex:none;font-family:Kalam,cursive;font-weight:700;font-size:17px;color:oklch(0.45 0.15 305)">En clair</span><span>Si les deux fractions ne donnent pas le même nombre, c'est fini : les droites ne peuvent pas être parallèles.</span></div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:10px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:22px;color:oklch(0.48 0.15 262)">Quelle propriété utiliser ?</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;font-size:15px">
+<div style="background:#fffdf8;border:1.5px solid oklch(0.53 0.19 27);border-radius:6px;padding:10px 14px"><div style="color:#4a4d63">Je sais que les droites sont parallèles, je cherche une <b>longueur</b></div><div style="font-family:Kalam,cursive;font-weight:700;font-size:18px;color:oklch(0.53 0.19 27);margin-top:4px">→ Propriété de Thalès</div></div>
+<div style="background:#fffdf8;border:1.5px solid oklch(0.52 0.13 155);border-radius:6px;padding:10px 14px"><div style="color:#4a4d63">Je veux montrer que deux droites <b>sont parallèles</b></div><div style="font-family:Kalam,cursive;font-weight:700;font-size:18px;color:oklch(0.52 0.13 155);margin-top:4px">→ Réciproque</div></div>
+<div style="background:#fffdf8;border:1.5px solid oklch(0.62 0.14 70);border-radius:6px;padding:10px 14px"><div style="color:#4a4d63">Je veux montrer que deux droites <b>ne sont pas parallèles</b></div><div style="font-family:Kalam,cursive;font-weight:700;font-size:18px;color:oklch(0.5 0.13 70);margin-top:4px">→ Contraposée</div></div>
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:25px;font-weight:700;color:oklch(0.53 0.19 27)"><span style="color:oklch(0.48 0.15 262)">6.</span> Exercices d'application</h2>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start;font-size:15px">
+
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:18px;color:oklch(0.48 0.15 262)">Exercice 1 · Triangle</div>
+<p style="margin:0;text-wrap:pretty">(BM) et (CN) sont sécantes en A, M ∈ [AB], N ∈ [AC] et (MN) // (BC). AM = 4 cm, AB = 10 cm, AC = 12 cm, BC = 8 cm. Calculer AN et MN.</p>
+<button onClick="{{ t1 }}" style="align-self:flex-start;font-family:Kalam,cursive;font-size:15px;padding:2px 10px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:transparent;color:oklch(0.48 0.15 262);cursor:pointer">{{ l1 }}</button>
+<sc-if value="{{ s1 }}" hint-placeholder-val="{{ false }}"><div style="font-family:Kalam,cursive;font-size:17px;line-height:1.45;color:oklch(0.42 0.15 262);border-top:1px dashed #b9c3e0;padding-top:6px">D'après Thalès : 4/10 = AN/12 = MN/8.<br>AN = 4 × 12 ÷ 10 = <b style="color:oklch(0.53 0.19 27)">4,8 cm</b><br>MN = 4 × 8 ÷ 10 = <b style="color:oklch(0.53 0.19 27)">3,2 cm</b></div></sc-if>
+</div>
+
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:18px;color:oklch(0.48 0.15 262)">Exercice 2 · Papillon</div>
+<p style="margin:0;text-wrap:pretty">(BM) et (CN) sont sécantes en A, A est entre B et M et entre C et N, (MN) // (BC). AB = 6 cm, AC = 9 cm, AM = 4 cm, MN = 5 cm. Calculer AN et BC.</p>
+<button onClick="{{ t2 }}" style="align-self:flex-start;font-family:Kalam,cursive;font-size:15px;padding:2px 10px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:transparent;color:oklch(0.48 0.15 262);cursor:pointer">{{ l2 }}</button>
+<sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}"><div style="font-family:Kalam,cursive;font-size:17px;line-height:1.45;color:oklch(0.42 0.15 262);border-top:1px dashed #b9c3e0;padding-top:6px">D'après Thalès : 4/6 = AN/9 = 5/BC.<br>AN = 4 × 9 ÷ 6 = <b style="color:oklch(0.53 0.19 27)">6 cm</b><br>BC = 5 × 6 ÷ 4 = <b style="color:oklch(0.53 0.19 27)">7,5 cm</b></div></sc-if>
+</div>
+
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:18px;color:oklch(0.48 0.15 262)">Exercice 3 · Parallèles ?</div>
+<p style="margin:0;text-wrap:pretty">A, M, B et A, N, C sont alignés dans le même ordre. (MN) et (BC) sont-elles parallèles ?<br>a) AM = 3, AB = 7,5, AN = 4, AC = 10<br>b) AM = 3, AB = 7,5, AN = 4,2, AC = 10</p>
+<button onClick="{{ t3 }}" style="align-self:flex-start;font-family:Kalam,cursive;font-size:15px;padding:2px 10px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:transparent;color:oklch(0.48 0.15 262);cursor:pointer">{{ l3 }}</button>
+<sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}"><div style="font-family:Kalam,cursive;font-size:17px;line-height:1.45;color:oklch(0.42 0.15 262);border-top:1px dashed #b9c3e0;padding-top:6px">a) 3 ÷ 7,5 = 0,4 et 4 ÷ 10 = 0,4 : égaux, même ordre → <b style="color:oklch(0.52 0.13 155)">parallèles</b> (réciproque).<br>b) 0,4 et 4,2 ÷ 10 = 0,42 : différents → <b style="color:oklch(0.5 0.13 70)">non parallèles</b> (contraposée).</div></sc-if>
+</div>
+
+</div>
+</section>
+
+<footer style="display:flex;justify-content:flex-end;font-family:Kalam,cursive;color:#6a6d80;font-size:15px">2 / 3</footer>
+</div>
+</div>
+
+<div data-screen-label="Page 3" style="width:1000px;min-height:1414px;flex:none;background:#fbf6e9;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.05),0 14px 40px rgba(70,50,20,.18);box-sizing:border-box">
+<sc-if value="{{ seyes }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right,transparent 74px,oklch(0.6 0.17 20 / .55) 74px,oklch(0.6 0.17 20 / .55) 76px,transparent 76px),repeating-linear-gradient(to bottom,rgba(80,120,205,.26) 0 1px,transparent 1px 32px),repeating-linear-gradient(to bottom,rgba(80,120,205,.09) 0 1px,transparent 1px 8px)"></div></sc-if>
+<div style="position:relative;padding:40px 52px 32px 100px;display:flex;flex-direction:column;gap:16px">
+
+<header style="display:flex;flex-direction:column;gap:4px">
+<h2 style="margin:0;font-family:Kalam,cursive;font-size:25px;font-weight:700;color:oklch(0.53 0.19 27)"><span style="color:oklch(0.48 0.15 262)">7.</span> Je m'entraîne</h2>
+<p style="margin:0;font-size:15px;color:#4a4d63;text-wrap:pretty">Écris tes réponses dans les cases (une virgule ou un point pour les décimaux), puis clique sur « Vérifier ». Utilise l'indice si tu bloques et rédige ta solution sur ton cahier avec la méthode de la page 1.</p>
+</header>
+
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;font-size:15px">
+
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.48 0.15 262)">Exercice 4 · Calculer deux longueurs</div>
+<svg viewBox="0 0 300 175" style="width:100%;max-height:140px;background:#fff;border-radius:4px;display:block">
+<polygon points="30,140 174,74 165,152" fill="oklch(0.52 0.13 155 / 0.16)"></polygon>
+<polyline points="270,30 30,140 255,160" fill="none" stroke="#1d2a57" stroke-width="1.4"></polyline>
+<line x1="270" y1="30" x2="255" y2="160" stroke="oklch(0.53 0.19 27)" stroke-width="2.4"></line>
+<line x1="174" y1="74" x2="165" y2="152" stroke="oklch(0.53 0.19 27)" stroke-width="2.4"></line>
+<g font-family="Kalam, cursive" font-weight="700" font-size="17" fill="#1d2a57" text-anchor="middle"><text x="16" y="146">A</text><text x="282" y="30">B</text><text x="266" y="172">C</text><text x="172" y="64" fill="oklch(0.52 0.13 155)">M</text><text x="162" y="170" fill="oklch(0.52 0.13 155)">N</text></g>
+</svg>
+<p style="margin:0;text-wrap:pretty">Les droites (BM) et (CN) sont sécantes en A et (MN) // (BC). AM = 3 cm, AB = 5 cm, AC = 6 cm et BC = 7 cm.</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-family:Kalam,cursive;font-size:18px;color:oklch(0.42 0.15 262)">
+<label style="display:flex;align-items:center;gap:6px">AN = <input type="text" inputmode="decimal" value="{{ v.e4AN }}" onChange="{{ on.e4AN }}" style="width:64px;font:inherit;text-align:center;border:none;border-bottom:2px dashed oklch(0.48 0.15 262);background:#fff;color:inherit;outline:none"> cm <small style="font-size:14px;color:{{ fc.e4AN }}">{{ fb.e4AN }}</small></label>
+<label style="display:flex;align-items:center;gap:6px">MN = <input type="text" inputmode="decimal" value="{{ v.e4MN }}" onChange="{{ on.e4MN }}" style="width:64px;font:inherit;text-align:center;border:none;border-bottom:2px dashed oklch(0.48 0.15 262);background:#fff;color:inherit;outline:none"> cm <small style="font-size:14px;color:{{ fc.e4MN }}">{{ fb.e4MN }}</small></label>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<button onClick="{{ chk.x4 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:oklch(0.48 0.15 262);color:#fff;cursor:pointer">Vérifier</button>
+<button onClick="{{ tg.h4 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:transparent;color:oklch(0.48 0.15 262);cursor:pointer">Indice</button>
+<button onClick="{{ tg.c4 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:transparent;color:oklch(0.48 0.15 262);cursor:pointer">Correction</button>
+</div>
+<div style="font-size:14px;font-weight:600;color:{{ mc.x4 }}">{{ msg.x4 }}</div>
+<sc-if value="{{ op.h4 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:oklch(0.48 0.15 305)">Indice : écris AM/AB = AN/AC = MN/BC, puis remplace : 3/5 = AN/6 = MN/7.</div></sc-if>
+<sc-if value="{{ op.c4 }}" hint-placeholder-val="{{ false }}"><div style="font-family:Kalam,cursive;font-size:17px;line-height:1.45;color:oklch(0.42 0.15 262);border-top:1px dashed #b9c3e0;padding-top:6px">3/5 = AN/6 = MN/7<br>AN = 3 × 6 ÷ 5 = <b style="color:oklch(0.53 0.19 27)">3,6 cm</b> · MN = 3 × 7 ÷ 5 = <b style="color:oklch(0.53 0.19 27)">4,2 cm</b></div></sc-if>
+</div>
+
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.48 0.15 262)">Exercice 5 · Configuration papillon</div>
+<svg viewBox="0 0 300 175" style="width:100%;max-height:140px;background:#fff;border-radius:4px;display:block">
+<polygon points="150,85 40,30 60,150" fill="oklch(0.48 0.15 262 / 0.08)"></polygon>
+<polygon points="150,85 205,112.5 195,52.5" fill="oklch(0.52 0.13 155 / 0.16)"></polygon>
+<line x1="40" y1="30" x2="205" y2="112.5" stroke="#1d2a57" stroke-width="1.4"></line>
+<line x1="60" y1="150" x2="195" y2="52.5" stroke="#1d2a57" stroke-width="1.4"></line>
+<line x1="40" y1="30" x2="60" y2="150" stroke="oklch(0.53 0.19 27)" stroke-width="2.4"></line>
+<line x1="205" y1="112.5" x2="195" y2="52.5" stroke="oklch(0.53 0.19 27)" stroke-width="2.4"></line>
+<g font-family="Kalam, cursive" font-weight="700" font-size="17" fill="#1d2a57" text-anchor="middle"><text x="150" y="110">A</text><text x="30" y="26">B</text><text x="50" y="166">C</text><text x="218" y="124" fill="oklch(0.52 0.13 155)">M</text><text x="206" y="48" fill="oklch(0.52 0.13 155)">N</text></g>
+</svg>
+<p style="margin:0;text-wrap:pretty">Les droites (BM) et (CN) sont sécantes en A et (MN) // (BC). AB = 8 cm, AC = 6 cm, BC = 9 cm et AM = 4 cm.</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-family:Kalam,cursive;font-size:18px;color:oklch(0.42 0.15 262)">
+<label style="display:flex;align-items:center;gap:6px">AN = <input type="text" inputmode="decimal" value="{{ v.e5AN }}" onChange="{{ on.e5AN }}" style="width:64px;font:inherit;text-align:center;border:none;border-bottom:2px dashed oklch(0.48 0.15 262);background:#fff;color:inherit;outline:none"> cm <small style="font-size:14px;color:{{ fc.e5AN }}">{{ fb.e5AN }}</small></label>
+<label style="display:flex;align-items:center;gap:6px">MN = <input type="text" inputmode="decimal" value="{{ v.e5MN }}" onChange="{{ on.e5MN }}" style="width:64px;font:inherit;text-align:center;border:none;border-bottom:2px dashed oklch(0.48 0.15 262);background:#fff;color:inherit;outline:none"> cm <small style="font-size:14px;color:{{ fc.e5MN }}">{{ fb.e5MN }}</small></label>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<button onClick="{{ chk.x5 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:oklch(0.48 0.15 262);color:#fff;cursor:pointer">Vérifier</button>
+<button onClick="{{ tg.h5 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:transparent;color:oklch(0.48 0.15 262);cursor:pointer">Indice</button>
+<button onClick="{{ tg.c5 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:transparent;color:oklch(0.48 0.15 262);cursor:pointer">Correction</button>
+</div>
+<div style="font-size:14px;font-weight:600;color:{{ mc.x5 }}">{{ msg.x5 }}</div>
+<sc-if value="{{ op.h5 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:oklch(0.48 0.15 305)">Indice : en configuration papillon, on écrit la même égalité AM/AB = AN/AC = MN/BC.</div></sc-if>
+<sc-if value="{{ op.c5 }}" hint-placeholder-val="{{ false }}"><div style="font-family:Kalam,cursive;font-size:17px;line-height:1.45;color:oklch(0.42 0.15 262);border-top:1px dashed #b9c3e0;padding-top:6px">4/8 = AN/6 = MN/9<br>AN = 4 × 6 ÷ 8 = <b style="color:oklch(0.53 0.19 27)">3 cm</b> · MN = 4 × 9 ÷ 8 = <b style="color:oklch(0.53 0.19 27)">4,5 cm</b></div></sc-if>
+</div>
+
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.48 0.15 262)">Exercice 6 · Parallèles ou non ?</div>
+<svg viewBox="0 0 300 180" style="width:100%;max-height:140px;background:#fff;border-radius:4px;display:block">
+<polygon points="30,30 130,34 66,82" fill="oklch(0.52 0.13 155 / 0.16)"></polygon>
+<polyline points="280,40 30,30 120,160" fill="none" stroke="#1d2a57" stroke-width="1.4"></polyline>
+<line x1="280" y1="40" x2="120" y2="160" stroke="oklch(0.53 0.19 27)" stroke-width="2.4"></line>
+<line x1="130" y1="34" x2="66" y2="82" stroke="oklch(0.55 0.13 70)" stroke-width="2.4" stroke-dasharray="6 4"></line>
+<g font-family="Kalam, cursive" font-weight="700" font-size="17" fill="#1d2a57" text-anchor="middle"><text x="18" y="28">A</text><text x="290" y="40">B</text><text x="120" y="176">C</text><text x="130" y="24" fill="oklch(0.52 0.13 155)">M</text><text x="52" y="90" fill="oklch(0.52 0.13 155)">N</text></g>
+</svg>
+<p style="margin:0;text-wrap:pretty">Les points A, M, B et A, N, C sont alignés dans le même ordre. AM = 2,4 cm, AB = 6 cm, AN = 3 cm et AC = 7,5 cm. Les droites (MN) et (BC) sont-elles parallèles ?</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-family:Kalam,cursive;font-size:18px;color:oklch(0.42 0.15 262)">
+<label style="display:flex;align-items:center;gap:6px">AM/AB = <input type="text" inputmode="decimal" value="{{ v.e6r1 }}" onChange="{{ on.e6r1 }}" style="width:64px;font:inherit;text-align:center;border:none;border-bottom:2px dashed oklch(0.48 0.15 262);background:#fff;color:inherit;outline:none"> <small style="font-size:14px;color:{{ fc.e6r1 }}">{{ fb.e6r1 }}</small></label>
+<label style="display:flex;align-items:center;gap:6px">AN/AC = <input type="text" inputmode="decimal" value="{{ v.e6r2 }}" onChange="{{ on.e6r2 }}" style="width:64px;font:inherit;text-align:center;border:none;border-bottom:2px dashed oklch(0.48 0.15 262);background:#fff;color:inherit;outline:none"> <small style="font-size:14px;color:{{ fc.e6r2 }}">{{ fb.e6r2 }}</small></label>
+</div>
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:14px;color:#4a4d63">Conclusion :
+<button onClick="{{ pickPar }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:{{ parBg }};color:{{ parFg }};cursor:pointer">parallèles</button>
+<button onClick="{{ pickNon }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:{{ nonBg }};color:{{ nonFg }};cursor:pointer">pas parallèles</button>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<button onClick="{{ chk.x6 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:oklch(0.48 0.15 262);color:#fff;cursor:pointer">Vérifier</button>
+<button onClick="{{ tg.h6 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:transparent;color:oklch(0.48 0.15 262);cursor:pointer">Indice</button>
+<button onClick="{{ tg.c6 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:transparent;color:oklch(0.48 0.15 262);cursor:pointer">Correction</button>
+</div>
+<div style="font-size:14px;font-weight:600;color:{{ mc.x6 }}">{{ msg.x6 }}</div>
+<sc-if value="{{ op.h6 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:oklch(0.48 0.15 305)">Indice : calcule AM ÷ AB et AN ÷ AC séparément, puis compare les deux résultats.</div></sc-if>
+<sc-if value="{{ op.c6 }}" hint-placeholder-val="{{ false }}"><div style="font-family:Kalam,cursive;font-size:17px;line-height:1.45;color:oklch(0.42 0.15 262);border-top:1px dashed #b9c3e0;padding-top:6px">AM/AB = 2,4 ÷ 6 = 0,4 et AN/AC = 3 ÷ 7,5 = 0,4.<br>Rapports égaux et même ordre : d'après la réciproque, <b style="color:oklch(0.52 0.13 155)">(MN) // (BC)</b>.</div></sc-if>
+</div>
+
+<div style="background:#fffdf8;border:1.5px solid #cfd6ea;border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:19px;color:oklch(0.48 0.15 262)">Exercice 7 · La hauteur d'un arbre</div>
+<svg viewBox="0 0 300 175" style="width:100%;max-height:140px;background:#fff;border-radius:4px;display:block">
+<line x1="8" y1="150" x2="292" y2="150" stroke="#1d2a57" stroke-width="1.4"></line>
+<line x1="20" y1="150" x2="215" y2="0" stroke="oklch(0.55 0.13 70)" stroke-width="1.6" stroke-dasharray="6 4"></line>
+<line x1="50" y1="150" x2="50" y2="127.5" stroke="oklch(0.52 0.13 155)" stroke-width="3"></line>
+<line x1="200" y1="150" x2="200" y2="15" stroke="oklch(0.45 0.08 50)" stroke-width="4"></line>
+<g font-family="Kalam, cursive" font-weight="700" font-size="16" fill="#1d2a57" text-anchor="middle"><text x="16" y="168">A</text><text x="50" y="168">M</text><text x="40" y="124">N</text><text x="200" y="168">B</text><text x="188" y="18">C</text></g>
+<g font-family="Kalam, cursive" font-size="14" fill="#6a6d80"><text x="58" y="138">bâton</text><text x="208" y="90">arbre</text><text x="120" y="66" fill="oklch(0.5 0.13 70)">rayon du soleil</text></g>
+</svg>
+<p style="margin:0;text-wrap:pretty">Pour estimer la hauteur d'un arbre, Léa plante un bâton vertical [MN] de 1,5 m. L'ombre du bâton mesure AM = 2 m et celle de l'arbre AB = 12 m. Quelle est la hauteur BC de l'arbre ?</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-family:Kalam,cursive;font-size:18px;color:oklch(0.42 0.15 262)">
+<label style="display:flex;align-items:center;gap:6px">BC = <input type="text" inputmode="decimal" value="{{ v.e7BC }}" onChange="{{ on.e7BC }}" style="width:64px;font:inherit;text-align:center;border:none;border-bottom:2px dashed oklch(0.48 0.15 262);background:#fff;color:inherit;outline:none"> m <small style="font-size:14px;color:{{ fc.e7BC }}">{{ fb.e7BC }}</small></label>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<button onClick="{{ chk.x7 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:oklch(0.48 0.15 262);color:#fff;cursor:pointer">Vérifier</button>
+<button onClick="{{ tg.h7 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:transparent;color:oklch(0.48 0.15 262);cursor:pointer">Indice</button>
+<button onClick="{{ tg.c7 }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 262);background:transparent;color:oklch(0.48 0.15 262);cursor:pointer">Correction</button>
+</div>
+<div style="font-size:14px;font-weight:600;color:{{ mc.x7 }}">{{ msg.x7 }}</div>
+<sc-if value="{{ op.h7 }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;color:oklch(0.48 0.15 305)">Indice : le bâton et l'arbre sont verticaux, donc (MN) // (BC). Les droites (MB) et (NC) sont sécantes en A.</div></sc-if>
+<sc-if value="{{ op.c7 }}" hint-placeholder-val="{{ false }}"><div style="font-family:Kalam,cursive;font-size:17px;line-height:1.45;color:oklch(0.42 0.15 262);border-top:1px dashed #b9c3e0;padding-top:6px">AM/AB = MN/BC, soit 2/12 = 1,5/BC.<br>BC = 1,5 × 12 ÷ 2 = <b style="color:oklch(0.53 0.19 27)">9 m</b>. L'arbre mesure 9 m.</div></sc-if>
+</div>
+
+</div>
+
+<section style="position:relative;border:2px solid oklch(0.48 0.15 305);border-radius:6px;background:#fffdf8;padding:18px 22px 14px;display:flex;flex-direction:column;gap:10px;margin-top:8px">
+<span style="position:absolute;top:-14px;left:18px;background:oklch(0.48 0.15 305);color:#fff;font-family:Kalam,cursive;font-weight:700;font-size:16px;padding:1px 12px;border-radius:4px">Entraînement illimité</span>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:14px;color:#4a4d63"><span>Un nouvel énoncé est tiré au hasard à chaque fois.</span><b style="font-family:Kalam,cursive;font-size:18px;color:oklch(0.48 0.15 305)">Score : {{ score }}</b></div>
+<p style="margin:0;font-size:16px;text-wrap:pretty">{{ genText }}</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-family:Kalam,cursive;font-size:18px;color:oklch(0.42 0.15 262)">
+<label style="display:flex;align-items:center;gap:6px">{{ genAsk }} = <input type="text" inputmode="decimal" value="{{ genIn }}" onChange="{{ onGen }}" onKeyDown="{{ genKey }}" style="width:80px;font:inherit;text-align:center;border:none;border-bottom:2px dashed oklch(0.48 0.15 262);background:#fff;color:inherit;outline:none"> cm</label>
+<button onClick="{{ genCheck }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 305);background:oklch(0.48 0.15 305);color:#fff;cursor:pointer">Vérifier</button>
+<button onClick="{{ genSolToggle }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 305);background:transparent;color:oklch(0.48 0.15 305);cursor:pointer">Solution</button>
+<button onClick="{{ genNext }}" style="font-family:Kalam,cursive;font-size:15px;padding:2px 12px;border-radius:4px;border:1.5px solid oklch(0.48 0.15 305);background:transparent;color:oklch(0.48 0.15 305);cursor:pointer">Nouvel exercice</button>
+</div>
+<sc-if value="{{ genShow }}" hint-placeholder-val="{{ false }}"><div style="font-size:14px;font-weight:600;color:{{ genColor }}">{{ genMsg }}</div></sc-if>
+<sc-if value="{{ genSolShow }}" hint-placeholder-val="{{ false }}"><div style="font-family:Kalam,cursive;font-size:17px;color:oklch(0.42 0.15 262);border-top:1px dashed #b9c3e0;padding-top:6px">{{ genSolText }}</div></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+<div style="font-family:Kalam,cursive;font-weight:700;font-size:20px;color:oklch(0.48 0.15 262)">Ma rédaction</div>
+<p style="margin:0;font-size:14px;color:#4a4d63">Choisis un exercice et rédige la solution complète en suivant la méthode de la page 1.</p>
+<textarea placeholder="Les droites (…) et (…) sont sécantes en … et (…) // (…). D'après la propriété de Thalès…" style="width:100%;box-sizing:border-box;min-height:128px;resize:vertical;font-family:Kalam,cursive;font-size:19px;line-height:32px;color:oklch(0.42 0.15 262);background:transparent;border:1.5px dashed #b9c3e0;border-radius:6px;padding:0 14px;outline:none"></textarea>
+</section>
+
+<footer style="display:flex;justify-content:flex-end;font-family:Kalam,cursive;color:#6a6d80;font-size:15px">3 / 3</footer>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;seyes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Affichage&quot;},&quot;corrections&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Affichage&quot;},&quot;simple&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Affichage&quot;},&quot;reviewTools&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Relecture enseignant&quot;},&quot;reportEmail&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;contact@lnclass.com&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Relecture enseignant&quot;}}">
+const C_GREEN='oklch(0.52 0.13 155)', C_RED='oklch(0.53 0.19 27)';
+const ANS={e4AN:3.6,e4MN:4.2,e5AN:3,e5MN:4.5,e6r1:0.4,e6r2:0.4,e7BC:9};
+const EXF={4:['e4AN','e4MN'],5:['e5AN','e5MN'],6:['e6r1','e6r2'],7:['e7BC']};
+function num(x){x=String(x??'').replace(/\s/g,'').replace(/,/g,'.');if(x.includes('/')){const [a,b]=x.split('/').map(parseFloat);return a/b;}return x===''?NaN:Number(x);}
+function fr(v){return String(+v.toFixed(2)).replace('.',',');}
+function genNew(){
+  const r=a=>a[Math.floor(Math.random()*a.length)];
+  const pap=Math.random()<0.5, k=r([0.25,0.4,0.5,0.6,0.75,0.8]);
+  const AB=r([5,6,8,10,12,15,20]), AC=r([4,5,6,8,9,10,12,15]), BC=r([3,4,5,6,7,8,9,10,12]);
+  const AM=+(k*AB).toFixed(2), AN=+(k*AC).toFixed(2), MN=+(k*BC).toFixed(2);
+  const t=r(['AN','MN','AC']);
+  const pos=pap?'A est entre B et M, et entre C et N.':'M appartient à [AB] et N appartient à [AC].';
+  let given,ans,sol;
+  if(t==='AN'){given=`AM = ${fr(AM)} cm, AB = ${fr(AB)} cm, AC = ${fr(AC)} cm et BC = ${fr(BC)} cm`;ans=AN;sol=`AM/AB = AN/AC, soit ${fr(AM)}/${fr(AB)} = AN/${fr(AC)}. Donc AN = ${fr(AM)} × ${fr(AC)} ÷ ${fr(AB)} = ${fr(AN)} cm.`;}
+  else if(t==='MN'){given=`AM = ${fr(AM)} cm, AB = ${fr(AB)} cm, AC = ${fr(AC)} cm et BC = ${fr(BC)} cm`;ans=MN;sol=`AM/AB = MN/BC, soit ${fr(AM)}/${fr(AB)} = MN/${fr(BC)}. Donc MN = ${fr(AM)} × ${fr(BC)} ÷ ${fr(AB)} = ${fr(MN)} cm.`;}
+  else{given=`AM = ${fr(AM)} cm, AB = ${fr(AB)} cm et AN = ${fr(AN)} cm`;ans=AC;sol=`AM/AB = AN/AC, soit ${fr(AM)}/${fr(AB)} = ${fr(AN)}/AC. Donc AC = ${fr(AN)} × ${fr(AB)} ÷ ${fr(AM)} = ${fr(AC)} cm.`;}
+  return {ask:t,ans,sol,counted:false,text:`Configuration ${pap?'papillon':'triangle'}. Les droites (BM) et (CN) sont sécantes en A et (MN) // (BC). ${pos} On donne ${given}. Calculer ${t}.`};
+}
+const GLOSS={
+secantes:['Sécantes','Deux droites sont sécantes quand elles se croisent en un point.','Comme deux routes qui se croisent à un carrefour.'],
+paralleles:['Parallèles','Deux droites sont parallèles quand elles ne se croisent jamais, même si on les prolonge. Elles gardent toujours le même écart. On écrit (MN) // (BC).','Comme les deux rails d\'une voie ferrée.'],
+distincts:['Distincts','Différents. « Distincts de A » veut dire que les points ne sont pas au même endroit que A.',''],
+proportionnelles:['Proportionnelles','Des longueurs sont proportionnelles quand on passe des unes aux autres en multipliant toujours par le même nombre.','Si 5 devient 3, alors 10 devient 6 : on a multiplié par 0,6 à chaque fois.'],
+demidroite:['Demi-droite','Une droite qui a un point de départ mais pas de fin. [AB) part de A, passe par B et continue sans s\'arrêter.',''],
+reduction:['Réduction','Une copie plus petite d\'une figure, avec exactement la même forme.','Comme une photo imprimée en petit format.'],
+agrandissement:['Agrandissement','Une copie plus grande d\'une figure, avec exactement la même forme.','Comme une photo affichée sur un poster.'],
+opposes:['Opposés par le sommet','Deux triangles qui se touchent seulement par un point (ici A), placés de chaque côté de ce point, comme les ailes d\'un papillon.',''],
+hypothese:['Hypothèse','Une information que l\'énoncé te donne et que tu peux utiliser sans la prouver.','Ici : « les droites (MN) et (BC) sont parallèles ».'],
+rapport:['Rapport','Le résultat de la division d\'une longueur par une autre. On l\'écrit souvent sous forme de fraction.','AM/AB avec AM = 3 et AB = 5 : le rapport vaut 3 ÷ 5 = 0,6.'],
+croix:['Produit en croix','Une méthode pour trouver le nombre manquant dans une égalité de deux fractions : on multiplie les deux nombres en diagonale, puis on divise par le troisième.','3/5 = AN/7 donne AN = 3 × 7 ÷ 5 = 4,2.'],
+alignes:['Alignés dans le même ordre','Les points sont sur une même droite, et ils sont rangés de la même façon sur les deux droites.','A, M, B et A, N, C : M est entre A et B, et N est entre A et C.'],
+reciproque:['Réciproque','Une propriété « à l\'envers ». La propriété dit : si parallèles, alors rapports égaux. La réciproque dit : si rapports égaux, alors parallèles.',''],
+contraposee:['Contraposée','Une autre façon de dire la propriété. Si le résultat attendu n\'arrive pas (rapports différents), alors la condition de départ est fausse (les droites ne sont pas parallèles).','']};
+GLOSS.aide=['Comment ça marche ?','Clique sur un mot souligné en pointillés pour lire son explication. Le bouton « Lexique » affiche tous les mots expliqués.',''];
+const INIT = { A:{x:70,y:165}, B:{x:360,y:55}, C:{x:345,y:285}, kM:0.45, kN:0.45 };
+class Component extends DCLogic {
+  state = { ...INIT, lock:true, drag:null, sol:{}, word:null, px:0, py:0, simple:null, inp:{}, chk:{}, open:{}, e6c:null, gen:genNew(), genIn:'', genChk:false, genSol:false, score:{ok:0,tot:0} };
+  exVals(){
+    const s=this.state, on={}, fb={}, fc={}, msg={}, mc={}, chk={}, tg={}, op={};
+    const good=k=>{const v=num(s.inp[k]);return !isNaN(v)&&Math.abs(v-ANS[k])<0.011;};
+    for(const ex in EXF){
+      const c=!!s.chk[ex];
+      EXF[ex].forEach(k=>{
+        on[k]=e=>{const val=e.target.value;this.setState(st=>({inp:{...st.inp,[k]:val},chk:{...st.chk,[ex]:false}}));};
+        const empty=!(s.inp[k]||'').trim();
+        fb[k]=!c?'':empty?'à compléter':good(k)?'juste':'à revoir';
+        fc[k]=empty?'#6a6d80':good(k)?C_GREEN:C_RED;
+      });
+      let all=EXF[ex].every(good); if(ex==='6')all=all&&s.e6c==='par';
+      msg['x'+ex]=c?(all?'Tout est juste, bravo !':'Certaines réponses sont à revoir. Aide-toi de l\'indice.'):'';
+      mc['x'+ex]=all?C_GREEN:C_RED;
+      chk['x'+ex]=()=>this.setState(st=>({chk:{...st.chk,[ex]:true}}));
+      ['h','c'].forEach(t=>{tg[t+ex]=()=>this.setState(st=>({open:{...st.open,[t+ex]:!st.open[t+ex]}}));op[t+ex]=!!s.open[t+ex];});
+    }
+    const pick=v=>()=>this.setState(st=>({e6c:v,chk:{...st.chk,6:false}}));
+    const g=s.gen, gOk=Math.abs(num(s.genIn)-g.ans)<0.011;
+    const genCheck=()=>this.setState(st=>{if(!(st.genIn||'').trim())return null;const ok=Math.abs(num(st.genIn)-st.gen.ans)<0.011;const sc=st.gen.counted?st.score:{ok:st.score.ok+(ok?1:0),tot:st.score.tot+1};return {genChk:true,score:sc,gen:{...st.gen,counted:true}};});
+    return {
+      on,fb,fc,msg,mc,chk,tg,op,
+      pickPar:pick('par'),pickNon:pick('non'),
+      parBg:s.e6c==='par'?'oklch(0.48 0.15 262)':'transparent',parFg:s.e6c==='par'?'#fff':'oklch(0.48 0.15 262)',
+      nonBg:s.e6c==='non'?'oklch(0.48 0.15 262)':'transparent',nonFg:s.e6c==='non'?'#fff':'oklch(0.48 0.15 262)',
+      v:{e4AN:s.inp.e4AN||'',e4MN:s.inp.e4MN||'',e5AN:s.inp.e5AN||'',e5MN:s.inp.e5MN||'',e6r1:s.inp.e6r1||'',e6r2:s.inp.e6r2||'',e7BC:s.inp.e7BC||''},
+      genText:g.text,genAsk:g.ask,genIn:s.genIn,genUnit:'cm',
+      onGen:e=>{const val=e.target.value;this.setState({genIn:val,genChk:false});},
+      genKey:e=>{if(e.key==='Enter')genCheck();},
+      genCheck,
+      genNext:()=>this.setState({gen:genNew(),genIn:'',genChk:false,genSol:false}),
+      genShow:s.genChk,genMsg:gOk?`Bravo ! ${g.ask} = ${fr(g.ans)} cm.`:'Ce n\'est pas ça. Écris l\'égalité de Thalès puis fais le produit en croix.',
+      genColor:gOk?C_GREEN:C_RED,
+      genSolShow:s.genSol,genSolText:g.sol,genSolToggle:()=>this.setState(st=>({genSol:!st.genSol})),
+      score:`${s.score.ok} / ${s.score.tot}`
+    };
+  }
+  svgRef = React.createRef();
+  closeW=()=>{if(this.state.word)this.setState({word:null});};
+  ranges={};
+  componentDidMount(){window.addEventListener('scroll',this.closeW,true);window.addEventListener('click',this.rvBlock,true);window.addEventListener('pointerdown',this.rvBlockPD,true);window.addEventListener('mouseup',this.rvUp);}
+  componentWillUnmount(){window.removeEventListener('scroll',this.closeW,true);window.removeEventListener('click',this.rvBlock,true);window.removeEventListener('pointerdown',this.rvBlockPD,true);window.removeEventListener('mouseup',this.rvUp);}
+  componentDidUpdate(){this.rvPaint();}
+  inUI=e=>e.target&&e.target.closest&&e.target.closest('[data-review-ui]');
+  rvBlock=e=>{if(this.state.review&&!this.inUI(e)){e.preventDefault();e.stopPropagation();}};
+  rvBlockPD=e=>{if(this.state.review&&!this.inUI(e))e.stopPropagation();};
+  rvUp=e=>{if(!this.state.review||e.button!==0||this.inUI(e))return;setTimeout(()=>this.rvMark(),0);};
+  rvPaint(){try{if(!window.CSS||!CSS.highlights||typeof Highlight==='undefined')return;CSS.highlights.set('lnc-err',new Highlight(...Object.values(this.ranges)));}catch(_){}}
+  rvRemove=id=>()=>{delete this.ranges[id];this.setState(s=>({marks:s.marks.filter(m=>m.id!==id),sent:false}));};
+  rvMark(){
+    const sel=window.getSelection();if(!sel||!sel.rangeCount)return;
+    if(sel.isCollapsed){
+      const r0=sel.getRangeAt(0);
+      const hit=(this.state.marks||[]).find(m=>{const r=this.ranges[m.id];try{return r&&r.isPointInRange(r0.startContainer,r0.startOffset);}catch(_){return false;}});
+      if(hit){this.rvRemove(hit.id)();sel.removeAllRanges();return;}
+      try{sel.modify('move','backward','word');sel.modify('extend','forward','word');}catch(_){return;}
+    }
+    if(!sel.rangeCount)return;
+    const range=sel.getRangeAt(0).cloneRange();
+    for(let i=0;i<6&&/\s$/.test(range.toString())&&range.endContainer.nodeType===3&&range.endOffset>0;i++)range.setEnd(range.endContainer,range.endOffset-1);
+    const text=range.toString().replace(/\s+/g,' ').trim();
+    sel.removeAllRanges();
+    if(!text||text.length>400)return;
+    const n=range.commonAncestorContainer, el=n.nodeType===1?n:n.parentElement;
+    const page=el&&el.closest('[data-screen-label]');if(!page)return;
+    const sec=el.closest('section'), h=sec&&sec.querySelector('h2');
+    const block=el.closest('p,li,h1,h2,label')||el.closest('div');
+    const ctx=(block?block.textContent:'').replace(/\s+/g,' ').trim().slice(0,220);
+    const where=page.getAttribute('data-screen-label')+(h?' · '+h.textContent.replace(/\s+/g,' ').trim():'');
+    const id='m'+Date.now()+Math.floor(Math.random()*1e4);
+    this.ranges[id]=range;
+    this.setState(s=>({marks:[...(s.marks||[]),{id,text,ctx,where,comment:''}],sent:false}));
+  }
+  rvReport(){
+    const s=this.state, ms=s.marks||[];
+    const lines=['Signalement d\'erreurs — Fiche « La propriété de Thalès » (Mathématiques, 3e)','Date : '+new Date().toLocaleString('fr-FR')];
+    if(s.rvName)lines.push('Enseignant : '+s.rvName);
+    lines.push('',ms.length+' élément(s) signalé(s) :','');
+    ms.forEach((m,i)=>{lines.push(`${i+1}. « ${m.text} » — ${m.where}`);if(m.ctx&&m.ctx!==m.text)lines.push('   Contexte : '+m.ctx);if(m.comment)lines.push('   Correction proposée : '+m.comment);lines.push('');});
+    if(s.rvNote)lines.push('Commentaire général : '+s.rvNote);
+    return lines.join('\n');
+  }
+  rvVals(){
+    const s=this.state, ms=s.marks||[], on=!!s.review;
+    const body=this.rvReport(), to=this.props.reportEmail??'contact@lnclass.com';
+    return {
+      rvTools:this.props.reviewTools??true, rvOn:on, rvOff:!on,
+      rvToggle:()=>{const sel=window.getSelection();sel&&sel.removeAllRanges();this.setState(st=>({review:!st.review,word:null}));},
+      rvCount:ms.length?`${ms.length} élément${ms.length>1?'s':''} coché${ms.length>1?'s':''}`:'Aucun élément coché pour l\'instant',
+      rvMarks:ms.map(m=>({...m,remove:this.rvRemove(m.id),onComment:e=>{const v=e.target.value;this.setState(st=>({marks:st.marks.map(x=>x.id===m.id?{...x,comment:v}:x),sent:false}));}})),
+      rvNote:s.rvNote||'', rvOnNote:e=>this.setState({rvNote:e.target.value,sent:false}),
+      rvName:s.rvName||'', rvOnName:e=>this.setState({rvName:e.target.value,sent:false}),
+      rvMail:`mailto:${to}?subject=${encodeURIComponent('Signalement d\'erreurs — Fiche Thalès')}&body=${encodeURIComponent(body)}`,
+      rvSend:()=>{try{navigator.clipboard&&navigator.clipboard.writeText(body);}catch(_){}this.setState({sent:true});},
+      rvSendOp:ms.length?1:0.4, rvSendPe:ms.length?'auto':'none', rvSent:!!s.sent,
+      rvClear:()=>{this.ranges={};this.setState({marks:[],rvNote:'',sent:false});}
+    };
+  }
+  toSvg(e){const s=this.svgRef.current;const m=s&&s.getScreenCTM();if(!m)return null;const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(m.inverse());return {x:Math.max(12,Math.min(428,p.x)),y:Math.max(12,Math.min(308,p.y))};}
+  proj(P,A,B){const dx=B.x-A.x,dy=B.y-A.y,L=dx*dx+dy*dy||1;let k=((P.x-A.x)*dx+(P.y-A.y)*dy)/L;k=Math.max(-1.2,Math.min(1.5,k));if(Math.abs(k)<0.12)k=k<0?-0.12:0.12;return k;}
+  down=n=>e=>{e.preventDefault();try{this.svgRef.current.setPointerCapture(e.pointerId);}catch(_){};this.setState({drag:n});};
+  move=e=>{const d=this.state.drag;if(!d)return;const P=this.toSvg(e);if(!P)return;const s=this.state;
+    if(d==='A'||d==='B'||d==='C')return this.setState({[d]:P});
+    if(d==='M'){let k=this.proj(P,s.A,s.B);if(s.lock)return this.setState({kM:k,kN:k});if(Math.abs(k-s.kN)<0.025)k=s.kN;this.setState({kM:k});}
+    else{let k=this.proj(P,s.A,s.C);if(s.lock)return this.setState({kM:k,kN:k});if(Math.abs(k-s.kM)<0.025)k=s.kM;this.setState({kN:k});}
+  };
+  up=()=>{if(this.state.drag)this.setState({drag:null});};
+  tog=i=>()=>this.setState(s=>({sol:{...s.sol,[i]:!this.shown(i,s)}}));
+  shown(i,s=this.state){return s.sol[i]??(this.props.corrections??false);}
+  renderVals(){
+    const {A,B,C,kM,kN,lock}=this.state;
+    const lerp=(P,Q,k)=>({x:P.x+k*(Q.x-P.x),y:P.y+k*(Q.y-P.y)});
+    const M=lerp(A,B,kM),N=lerp(A,C,kN);
+    const len=(P,Q)=>Math.hypot(P.x-Q.x,P.y-Q.y);
+    const ext=(P,Q,a,b)=>({x1:P.x+a*(Q.x-P.x),y1:P.y+a*(Q.y-P.y),x2:P.x+b*(Q.x-P.x),y2:P.y+b*(Q.y-P.y)});
+    const G={x:(A.x+B.x+C.x)/3,y:(A.y+B.y+C.y)/3};
+    const away=(P,R,d=17)=>{const l=len(P,R)||1;return {x:P.x+d*(P.x-R.x)/l,y:P.y+d*(P.y-R.y)/l};};
+    const side=(P,O,Q,X)=>{let nx=-(Q.y-O.y),ny=Q.x-O.x;const l=Math.hypot(nx,ny)||1;nx/=l;ny/=l;if(nx*(X.x-O.x)+ny*(X.y-O.y)>0){nx=-nx;ny=-ny;}return {x:P.x+17*nx,y:P.y+17*ny};};
+    const f1=v=>(v/40).toFixed(1).replace('.',','), f2=v=>v.toFixed(2).replace('.',',');
+    const ink='#1d2a57', green='oklch(0.52 0.13 155)', red='oklch(0.53 0.19 27)', ochre='oklch(0.55 0.13 70)';
+    const same=kM*kN>0, par=Math.abs(kM-kN)<1e-9;
+    const mk=(name,P,L,color)=>({name,x:P.x,y:P.y,lxp:L.x/4.4,lyp:L.y/3.2,color,down:this.down(name)});
+    let status,statusColor;
+    if(lock){status='(MN) // (BC) : les trois rapports sont égaux (propriété de Thalès).';statusColor=green;}
+    else if(!same){status='Les points ne sont pas dans le même ordre : (MN) et (BC) ne sont pas parallèles.';statusColor=ochre;}
+    else if(par){status='AM/AB = AN/AC et même ordre : (MN) // (BC) (réciproque).';statusColor=green;}
+    else{status='AM/AB ≠ AN/AC : (MN) et (BC) ne sont pas parallèles (contraposée).';statusColor=red;}
+    const AB=len(A,B),AC=len(A,C),BC=len(B,C),MN=len(M,N);
+    const g={}; Object.keys(GLOSS).concat('lexique').forEach(k=>{g[k]=e=>{e.stopPropagation();this.setState({word:k,px:e.clientX,py:e.clientY});};});
+    const w=this.state.word, iw=typeof window!=='undefined'?window.innerWidth:1000, ih=typeof window!=='undefined'?window.innerHeight:800;
+    const item=k=>({title:false,def:GLOSS[k][1],ex:GLOSS[k][2]||false});
+    const popItems=w==='lexique'?Object.keys(GLOSS).filter(k=>k!=='aide').map(k=>({title:GLOSS[k][0],def:GLOSS[k][1],ex:false,open:()=>this.setState({word:k})})):w?[item(w)]:[];
+    const simple=this.state.simple??(this.props.simple??true);
+    return {
+      g, popOpen:!!w, popWord:w==='lexique'?'Lexique':w?GLOSS[w][0]:'', popItems,
+      popLeft:Math.max(8,Math.min(this.state.px-20,iw-326)), popTop:w==='lexique'?Math.max(8,Math.min(this.state.py+18,ih*0.3)):(this.state.py>ih-240?Math.max(8,this.state.py-230):this.state.py+18),
+      closePop:()=>this.setState({word:null}),
+      simple, toggleSimple:()=>this.setState({simple:!simple}),
+      simpleLabel:simple?'Explications simples : oui':'Explications simples : non',
+      simpleBg:simple?'oklch(0.48 0.15 305)':'transparent', simpleFg:simple?'#fff':'oklch(0.48 0.15 305)',
+      ...this.exVals(), ...this.rvVals(),
+      seyes:this.props.seyes??true, svgRef:this.svgRef, move:this.move, up:this.up,
+      polyABC:`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`, polyAMN:`${A.x},${A.y} ${M.x},${M.y} ${N.x},${N.y}`,
+      d1:ext(A,B,-4,4), d2:ext(A,C,-4,4), bc:ext(B,C,-0.2,1.2), mn:ext(M,N,-0.2,1.2),
+      mnColor:(lock||(par&&same))?red:ochre,
+      pts:[mk('A',A,away(A,G),ink),mk('B',B,away(B,G),ink),mk('C',C,away(C,G),ink),mk('M',M,side(M,A,B,C),green),mk('N',N,side(N,A,C,B),green)],
+      config:!same?'Ordre différent':(kM<0?'Papillon':'Triangle'),
+      AM:f1(Math.abs(kM)*AB),AN:f1(Math.abs(kN)*AC),MN:f1(MN),AB:f1(AB),AC:f1(AC),BC:f1(BC),
+      r1:f2(Math.abs(kM)),r2:f2(Math.abs(kN)),r3:f2(MN/BC),r3Op:(lock||(par&&same))?1:0.4,
+      status,statusColor,
+      lockLabel:lock?'Libérer N (tester la réciproque)':'Imposer (MN) // (BC)',
+      toggleLock:()=>this.setState(s=>s.lock?{lock:false}:{lock:true,kN:s.kM}),
+      reset:()=>this.setState({...INIT,lock:true}),
+      t1:this.tog(1),t2:this.tog(2),t3:this.tog(3),
+      s1:this.shown(1),s2:this.shown(2),s3:this.shown(3),
+      l1:this.shown(1)?'Masquer la correction':'Voir la correction',
+      l2:this.shown(2)?'Masquer la correction':'Voir la correction',
+      l3:this.shown(3)?'Masquer la correction':'Voir la correction'
+    };
+  }
+}
+</script>
+</body>
+</html>

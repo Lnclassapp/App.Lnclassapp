@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_24_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_27_110000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -244,6 +244,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_090000) do
     t.check_constraint "status::text = ANY (ARRAY['active'::character varying::text, 'archived'::character varying::text])", name: "classrooms_status_values"
   end
 
+  create_table "course_sheets", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.string "theme", null: false
+    t.jsonb "document", null: false
+    t.integer "format_version", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_sheets_on_course_id", unique: true
+    t.check_constraint "theme::text = ANY (ARRAY['blue'::character varying, 'teal'::character varying, 'burgundy'::character varying]::text[])", name: "course_sheets_theme_values"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.datetime "archived_at"
     t.bigint "author_id", null: false
@@ -422,7 +433,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_090000) do
     t.index ["kind"], name: "index_import_reports_one_running_per_kind", unique: true, where: "((status)::text = ANY (ARRAY[('queued'::character varying)::text, ('validating'::character varying)::text, ('importing'::character varying)::text]))"
     t.index ["public_id"], name: "index_import_reports_on_public_id", unique: true
     t.check_constraint "(kind::text = ANY (ARRAY['classrooms'::character varying, 'school_codes'::character varying, 'classroom_links'::character varying]::text[])) OR checksum_sha256 IS NOT NULL", name: "import_reports_checksum_unless_generation"
-    t.check_constraint "kind::text = ANY (ARRAY['schools'::character varying, 'course_tree'::character varying, 'essentials'::character varying, 'exercises'::character varying, 'classrooms'::character varying, 'drenas'::character varying, 'school_codes'::character varying, 'classroom_links'::character varying]::text[])", name: "import_reports_kind_values"
+    t.check_constraint "kind::text = ANY (ARRAY['schools'::character varying, 'course_tree'::character varying, 'essentials'::character varying, 'exercises'::character varying, 'classrooms'::character varying, 'drenas'::character varying, 'school_codes'::character varying, 'classroom_links'::character varying, 'course_sheet'::character varying]::text[])", name: "import_reports_kind_values"
     t.check_constraint "status::text <> 'completed'::text OR total_count = (imported_count + skipped_count + error_count)", name: "import_reports_completed_counts_add_up"
     t.check_constraint "status::text = ANY (ARRAY['queued'::character varying::text, 'validating'::character varying::text, 'importing'::character varying::text, 'completed'::character varying::text, 'rejected'::character varying::text, 'failed'::character varying::text])", name: "import_reports_status_values"
   end
@@ -1056,6 +1067,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_090000) do
   add_foreign_key "classrooms", "levels", on_delete: :restrict
   add_foreign_key "classrooms", "schools", on_delete: :restrict
   add_foreign_key "classrooms", "series", on_delete: :restrict
+  add_foreign_key "course_sheets", "courses", on_delete: :restrict
   add_foreign_key "courses", "levels", on_delete: :restrict
   add_foreign_key "courses", "materials", on_delete: :restrict
   add_foreign_key "courses", "series", on_delete: :restrict
