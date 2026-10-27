@@ -3,11 +3,11 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision |
+| **Statut** | planification |
 | **Ouvert le** | 2026-10-12 |
 | **Revu le** | 2026-10-13 (grill repris avec l'algorithme en 5 étapes : questionner, supprimer, simplifier, accélérer, automatiser) ; 2026-10-27 (périmètre élargi aux maquettes à l'identique, voir ci-dessous) |
 | **Pilote** | Touré (`toure-bangaly`), avec l'accord du porteur |
-| **Branche** | `feature/contenu-en-blocs` |
+| **Branche** | `feature/fiches-de-cours` (l'ancienne `feature/contenu-en-blocs` du 12/10 est laissée telle quelle) |
 | **Programme** | — |
 
 ---
@@ -89,18 +89,16 @@ Les maquettes deviennent le cahier des charges. La référence est le handoff de
 
 ## Hors périmètre
 
-Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du memo : c'est elle qui empêche le chantier de gonfler.
+Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du memo : c'est elle qui empêche le chantier de gonfler. Nettoyée le 2026-10-27 (#318) : la mise en page, les médias interactifs, la rédaction libre et les énoncés générés sont entrés dans le périmètre (voir la révision ci-dessus).
 
-- Les exercices d'application à correction affichable (questions ouvertes non corrigées par l'application). Retirés pour le moment ; le porteur retravaillera le concept plus tard.
-- Le verrou de correction par l'enseignant, qui n'existait que pour eux : le chantier ne touche plus à la classe.
-- La rédaction dans l'application (texte libre, liste de vérification, atelier guidé) : l'élève lit la méthode et l'exemple rédigé ; l'enseignant corrige sur le cahier.
-- Les médias interactifs : simulations, labo virtuel, figure à faire glisser, animation, frise, carte interactive, texte à surligner. Chantier `medias-interactifs`.
-- La remise en ordre comme type de question, le tirage au hasard dans une banque de questions (entraînement illimité), les énoncés générés. On ne les ajoute que si le terrain le demande.
-- La version mobile à onglets : une seule fiche, pensée pour le téléphone d'abord.
-- La mise en page A4 et la pagination.
-- Un éditeur par blocs dans l'interface de l'équipe : l'import vient d'abord.
+- Le mode relecture enseignant « Signaler une erreur » : chantier à part (table, API, file de traitement pour l'équipe).
+- Un éditeur de fiches dans l'interface de l'équipe : l'import vient d'abord.
 - Le serveur MCP pour créer, lire et importer les fiches depuis un assistant : chantier à part.
-- La conversion des 213 leçons elle-même : chantier de contenu à part. Elle avance leçon par leçon, au rythme où ce chantier permet de les mettre en ligne.
+- La conversion des 213 leçons : chantier de contenu à part, qui reste à ouvrir par le porteur.
+- Le remplacement d'une fiche déjà en ligne par sa nouvelle version : un import qui retrouve une fiche existante l'ignore, comme aujourd'hui.
+- Les exercices actuels (session, note, badge, lacune, remédiation) : inchangés. Les exercices de la fiche ne donnent ni note ni lacune.
+- Des médias interactifs ou des générateurs au-delà des 3 fiches : la liste des figures et des générateurs est fermée, chaque nouveau demande du code et un lot.
+- Une figure fournie comme fichier image ou SVG dans l'import : les figures des 3 fiches sont dessinées par Lnclass.
 - Parent (n'existe pas) et direction d'établissement : rien ne change pour eux.
 
 ## Ce que le grill a révélé

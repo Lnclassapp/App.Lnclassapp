@@ -1,0 +1,54 @@
+<%# 🌐 UI · catalog/course_sheets/blocks/_exercise — exercice corrigé d'une fiche de cours : champs numériques ou à choix, Vérifier, Indice, Correction %>
+<%# Rôle : `block` (exercise{title, prompt, fields[], hint?, correction?}) rendu comme la maquette ; course_sheet/exercise_controller juge et affiche les retours %>
+<%# ADR  : 0110-fiche-de-cours-en-donnees-importees · UDR : 0137-fiche-de-cours-a-l-identique-des-maquettes %>
+<% ctrl = "course-sheet--exercise" %>
+<% uid = "sheet-ex-#{block.object_id}" %>
+<% i18n = "catalog.course_sheets.exercise" %>
+<div class="sheet-card" data-controller="<%= ctrl %>" data-<%= ctrl %>-tolerance-value="<%= Entities::Catalog::NumericAnswer::TOLERANCE %>"
+     data-<%= ctrl %>-incomplete-value="<%= t("#{i18n}.incomplete") %>" data-<%= ctrl %>-correct-value="<%= t("#{i18n}.correct") %>"
+     data-<%= ctrl %>-wrong-value="<%= t("#{i18n}.wrong") %>" data-<%= ctrl %>-all-correct-value="<%= t("#{i18n}.all_correct") %>"
+     data-<%= ctrl %>-some-wrong-value="<%= t("#{i18n}.some_wrong") %>">
+  <div class="sheet-card-title"><%= block["title"] %></div>
+  <p class="sheet-card-prompt"><%= safe_join(block["prompt"].to_s.split("\n").map { sheet_text(it, glossary: @sheet&.glossary || {}) }, tag.br) %></p>
+  <div class="sheet-fields">
+    <% block["fields"].each do |field| %>
+      <% fid = "#{uid}-#{field["id"]}" %>
+      <% if field["input"] == "choice" %>
+        <div class="sheet-field sheet-field-choice">
+          <span id="<%= fid %>-label"><%= field["label"] %></span>
+          <span class="sheet-choices" role="group" aria-labelledby="<%= fid %>-label" aria-describedby="<%= fid %>-feedback"
+                data-<%= ctrl %>-target="field" data-input="choice" data-field-id="<%= field["id"] %>" data-answer="<%= field["answer"] %>"<% if field["frozen"] %> data-frozen="true"<% end %>>
+            <% field["options"].each_with_index do |option, index| %>
+              <button type="button" class="sheet-btn sheet-choice" aria-pressed="false" data-index="<%= index %>" data-action="click-><%= ctrl %>#pick"><%= option %></button>
+            <% end %>
+          </span>
+          <small class="sheet-feedback" id="<%= fid %>-feedback" aria-live="polite" data-<%= ctrl %>-target="feedback" data-field-id="<%= field["id"] %>"></small>
+        </div>
+      <% else %>
+        <label class="sheet-field">
+          <span><%= field["label"] %></span>
+          <input type="text" class="sheet-input" inputmode="decimal" autocomplete="off" id="<%= fid %>" aria-describedby="<%= fid %>-feedback"
+                 data-<%= ctrl %>-target="field" data-input="numeric" data-field-id="<%= field["id"] %>" data-answer="<%= field["answer"] %>"
+                 data-action="input-><%= ctrl %>#edit keydown.enter-><%= ctrl %>#check">
+          <small class="sheet-feedback" id="<%= fid %>-feedback" aria-live="polite" data-<%= ctrl %>-target="feedback" data-field-id="<%= field["id"] %>"></small>
+        </label>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="sheet-actions">
+    <button type="button" class="sheet-btn" data-variant="primary" data-action="click-><%= ctrl %>#check"><%= t("#{i18n}.check") %></button>
+    <% if block["hint"].present? %>
+      <button type="button" class="sheet-btn" aria-expanded="false" aria-controls="<%= uid %>-hint" data-<%= ctrl %>-target="hintButton" data-action="click-><%= ctrl %>#toggleHint"><%= t("#{i18n}.hint") %></button>
+    <% end %>
+    <% if block["correction"].present? %>
+      <button type="button" class="sheet-btn" aria-expanded="false" aria-controls="<%= uid %>-correction" data-<%= ctrl %>-target="correctionButton" data-action="click-><%= ctrl %>#toggleCorrection"><%= t("#{i18n}.correction") %></button>
+    <% end %>
+  </div>
+  <div class="sheet-message" role="status" aria-live="polite" data-<%= ctrl %>-target="message"></div>
+  <% if block["hint"].present? %>
+    <div class="sheet-hint" id="<%= uid %>-hint" hidden data-<%= ctrl %>-target="hint"><%= t("#{i18n}.hint") %> : <%= safe_join(block["hint"].split("\n").map { sheet_text(it, glossary: @sheet&.glossary || {}) }, tag.br) %></div>
+  <% end %>
+  <% if block["correction"].present? %>
+    <div class="sheet-correction" id="<%= uid %>-correction" hidden data-<%= ctrl %>-target="correction"><%= safe_join(block["correction"].split("\n").map { sheet_text(it, glossary: @sheet&.glossary || {}) }, tag.br) %></div>
+  <% end %>
+</div>
