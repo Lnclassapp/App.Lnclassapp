@@ -1,4 +1,4 @@
-# ADR-XXXX : Chaque étape de la CI locale garde son verdict, pour les seuls fichiers qu'elle lit
+# ADR-0111 : Chaque étape de la CI locale garde son verdict, pour les seuls fichiers qu'elle lit
 <!-- index
 titre: Verdict par étape de la CI locale
 statut: Accepté

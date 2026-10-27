@@ -4,7 +4,7 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| 2026-10-27 | Entrées d'une étape = l'arbre **moins** ce qu'elle ne lit pas, jamais une liste de ce qu'elle lit (sauf audits et perf) | Un dossier nouveau compte par défaut : fail-safe | ADR-XXXX-verdict-par-etape-de-la-ci |
+| 2026-10-27 | Entrées d'une étape = l'arbre **moins** ce qu'elle ne lit pas, jamais une liste de ce qu'elle lit (sauf audits et perf) | Un dossier nouveau compte par défaut : fail-safe | ADR-0111 |
 | 2026-10-27 | Les tests Rails ne dépendent pas du front, sauf 61 fichiers rejoués seuls quand le front bouge (161 au premier jet : « rebuilds » et `node.css(…)` de Nokogiri comptaient) | `grep` : jetons de design, bundle, sprites, CSS compilé lisent `app/assets` et `app/javascript` | idem |
 | 2026-10-27 | La perf teste `GITHUB_ACTIONS`, plus `CI` | `bin/ci` pose `CI=true` (`ActiveSupport::ContinuousIntegration.run`) : en local, la perf ne se sautait jamais | idem |
 | 2026-10-27 | Le train de `bin/ci-quiet` pose `CI=true` sur ses étapes | `config/environments/test.rb` : `eager_load = ENV["CI"].present?`, dont dépend la couverture de toute l'application | idem |
@@ -17,7 +17,8 @@
 
 - `/usr/bin/time` n'existe pas sur la machine cloud : la première mesure parallèle n'a rien mesuré. Chronométrer en bash (`date +%s`).
 - La mesure avant n° 1 a tourné sur `9ecaa07` ; #316 est arrivée sur `Develop` pendant le chantier. Les mesures n° 2 et n° 3, et toutes les mesures après, sont sur `16cbd82` et au-dessus.
-- Deux tests instables vus pendant la mesure, hors chantier : `test/integration/assessment/question_matching_test.rb` (un identifiant cherché comme nombre dans la page) et `test/system/teams/blog_management_test.rb` (une fois sur trois).
+- Trois tests instables vus pendant les mesures, hors chantier : `test/integration/assessment/question_matching_test.rb` (un identifiant cherché comme nombre dans la page), `test/system/teams/blog_management_test.rb` (une fois sur trois) et `test/system/catalog/essential_images_test.rb` (« l'image est servie », une fois sur huit trains).
+- Leviers abandonnés : les étapes en parallèle en local (point 3 : −3 à −6 % une fois la perf sautée, machine saturée) et le découpage des fichiers système (point 5 : les parts GitHub sont déjà équilibrées à 1,4 s près, Rails répartit test par test en local). Mesures et raisons dans `memo.md`.
 
 ## Ce qu'on a appris sur la codebase
 
@@ -37,7 +38,7 @@
 
 | | |
 |---|---|
-| **Livré le** | |
-| **PR** | |
-| **ADR produits** | ADR-XXXX-verdict-par-etape-de-la-ci |
+| **Livré le** | 2026-10-27 |
+| **PR** | `perf/ci-rejeu-cible` vers `Develop` |
+| **ADR produits** | ADR-0111 |
 | **UDR produits** | — |

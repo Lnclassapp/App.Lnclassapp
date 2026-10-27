@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | optimisation |
-| **Statut** | en cours |
+| **Statut** | livré |
 | **Ouvert le** | 2026-10-27 |
 | **Branche** | `perf/ci-rejeu-cible` |
 | **Programme** | — |
@@ -29,12 +29,14 @@ Le 2026-10-27, une même PR (#316) a joué trois trains locaux (`bin/ci-quiet --
 
 Machine : session cloud, 4 CPU, PostgreSQL local, Chromium 1243 sans affichage. Volume : la suite entière du dépôt (6 295 tests Rails, 437 tests système dans 132 fichiers, 6 fichiers de perf qui importent 2 000 fiches, 500 lycées…). Trois passages, médiane retenue. N° 1 sur `9ecaa07`, n° 2 et n° 3 sur `16cbd82` (#316 fusionnée pendant le chantier).
 
-| Métrique | Contexte / volume | Valeur avant | Cible | Comment mesurée |
-|---|---|---|---|---|
-| **S1** — train à froid | `bin/ci-quiet --full`, aucun verdict | **901,6 s** (889,7 · 926,5 · 901,6) | pas de régression ; perf sautée si `PERF_PATHS` n'a pas bougé | protocole P1 |
-| **S2** — train rejoué après **une ligne de JavaScript** | après un train vert | **901,6 s** : le verdict par arbre rejoue tout | **≤ 660 s** (11 min) | protocole P2 |
-| **S3** — train rejoué après **une ligne d'un test de perf** | après un train vert | **901,6 s** : idem | **≤ 120 s** | protocole P3 |
-| Tests de l'inscription (10 fichiers système) | durée cumulée des tests, `-v` | **289,0 s** (289,0 · 285,5 · 304,4) | en baisse | protocole P4 |
+| Métrique | Contexte / volume | Valeur avant | Cible | Valeur après | Comment mesurée |
+|---|---|---|---|---|---|
+| **S1** — train à froid | `bin/ci-quiet --full`, aucun verdict | **901,6 s** (889,7 · 926,5 · 901,6) | pas de régression ; perf sautée si `PERF_PATHS` n'a pas bougé | **807,9 s** (807,9 · 764,9 · 814,8), perf sautée : **−10 %** | protocole P1 |
+| **S2** — train rejoué après **une ligne de JavaScript** | après un train vert | **901,6 s** : le verdict par arbre rejoue tout | **≤ 660 s** (11 min) | **563,0 s** (563,0 · 544,8 · 578,7) : **−38 %** | protocole P2 |
+| **S3** — train rejoué après **une ligne d'un test de perf** | après un train vert | **901,6 s** : idem | **≤ 120 s** | **32,1 s** (32,1 · 32,4 · 31,5) : **−96 %** | protocole P3 |
+| Tests de l'inscription (10 fichiers système) | durée cumulée des tests, `-v` | **289,0 s** (289,0 · 285,5 · 304,4) | en baisse | **283,1 s** médiane ; **213,8 s contre 247,6 s** hors `boucle_pedagogique` (−14 %) | protocole P4 |
+
+Après : sur `a95eb39` (code final) pour S2 et S3 (un train à froid sur ce code : 765,2 s, vert), sur `36e41ce` pour S1 et P4 (les commits suivants ne changent que les clés des verdicts, pas les étapes jouées à froid). Ce qui joue encore : en S2, les gardes, l'audit Yarn sauté, les 61 tests Rails qui lisent le front (48 s au lieu de 217 s), toute la suite système (≈ 515 s, elle lit le JavaScript) et le budget des assets ; en S3, les gardes, le style et le seul test de perf changé. Au premier jet, 161 tests passaient pour lecteurs du front (S2 620,2 s) et une ligne de perf les rejouait (S3 117,4 s) : voir `journal.md`. Un passage S2 rouge sur `test/system/catalog/essential_images_test.rb` (« l'image est servie »), hors chantier : vert seul trois fois de suite, vert dans les sept autres trains.
 
 Détail par étape (médiane des trois passages) : tests système 528,6 s (526,7 · 561,0 · 528,6), tests Rails 231,7 s (227,1 · 231,7 · 244,2), perf 89,1 s (89,7 · 87,7 · 89,1), Brakeman 18,4 s, le reste < 30 s. La perf a joué aux trois passages alors que rien de `PERF_PATHS` ne différait d'`origin/Develop` aux n° 2 et 3 : `bin/ci` pose `CI=true` (`ActiveSupport::ContinuousIntegration.run`), et la condition `${CI:-}` de l'étape était donc toujours vraie (voir `journal.md`).
 
@@ -70,7 +72,7 @@ Trois trains pour une PR un jour de pilote : 50 minutes de machine pour deux lig
 | Point | Décision | Mesure |
 |---|---|---|
 | 1. Jamais `--full` vers `Develop` | Livré : `CLAUDE.md`, `docs/workflows/README.md` et `verificateur-ci` le disent ; `executant-lot` ne lançait déjà pas la CI | — |
-| 2. Verdict par étape | Livré (ADR-XXXX-verdict-par-etape-de-la-ci), au niveau pr comme au train | S2 |
+| 2. Verdict par étape | Livré (ADR-0111), au niveau pr comme au train | S2 |
 | 3. Étapes en parallèle en local | **Non livré** | Rails + système + perf ensemble : 779 s et 773 s, contre ≈ 870 s en séquence (−11 %), tout vert. Mais la perf est désormais sautée en local sauf changement de ce qu'elle mesure ; sans elle, Rails + système ensemble : 748 s contre 773 à 793 s en séquence (−3 à −6 %, un passage). Machine saturée (charge 9 pour 4 CPU) : chaque suite ralentit d'autant que l'autre gagne. Le gain ne paie ni les bases séparées dans une même copie ni les journaux entremêlés. |
 | 4. Attentes fixes de l'inscription | Livré : 100 ms en test (`config.x.signup_steps_delay_ms`), rien en production (l'attribut n'est pas rendu, le contrôleur garde 1 s). CA-C6 garde 1 s : il prouve un minuteur encore en attente. Les autres `sleep` (0,4 à 0,6 s, transitions CSS) restent : 6 s cumulées en tout, et chacun attend une animation réelle | P4 |
 | 5. Découper les fichiers système lents | **Non livré** | Les 6 parts GitHub font déjà 172,8 à 174,2 s (écart 1,4 s, `CI_PLAN.split`) : rien à rééquilibrer. En local, Rails répartit les tests un par un, pas par fichier : découper un fichier ne change rien. `boucle_pedagogique_test` est un seul test (38 à 63 s) : le couper, c'est changer le parcours qu'il prouve. |

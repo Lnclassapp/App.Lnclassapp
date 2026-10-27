@@ -23,7 +23,7 @@ Lot F — découper les fichiers système lents     → mesuré ; décision dans
 
 ## Lot B — Verdict par étape
 
-- **Fichiers**     : `bin/ci-quiet`, `script/ci/scope.rb`, `script/ci/plan.rb`, `config/ci.rb`, `test/config/ci_scope_test.rb`, ADR-XXXX-verdict-par-etape-de-la-ci
+- **Fichiers**     : `bin/ci-quiet`, `script/ci/scope.rb`, `script/ci/plan.rb`, `config/ci.rb`, `test/config/ci_scope_test.rb`, ADR-0111
 - **Done quand**   : après un train vert, une ligne de JavaScript ne rejoue ni la suite Rails (hors tests qui lisent le front) ni la perf — scénario S2 du memo, médiane de 3
 
 ## Lot C — Perf ciblée
@@ -54,10 +54,10 @@ Lot F — découper les fichiers système lents     → mesuré ; décision dans
 - [x] Bench versionné (protocole du memo)
 - [x] Non-régression verte avant le premier levier
 - [x] Un lot = un levier = un chiffre
-- [ ] Chaque levier sans gain mesuré a été annulé
-- [ ] Bench après : même machine, même méthode, ≥ 3 exécutions, médiane
-- [ ] Tableau `Mesures` complété (Avant / Cible / Après)
-- [ ] Challenger a relancé le bench lui-même
+- [x] Chaque levier sans gain mesuré a été annulé
+- [x] Bench après : même machine, même méthode, ≥ 3 exécutions, médiane
+- [x] Tableau `Mesures` complété (Avant / Cible / Après)
+- [ ] Challenger a relancé le bench lui-même (protocole P1 à P4 du memo, à sa charge)
 - [x] Résultat fonctionnel identique (aucun écran de production modifié : l'attribut de délai n'est rendu qu'en test)
 - [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] `journal.md` : leviers abandonnés et pourquoi
+- [x] `journal.md` : leviers abandonnés et pourquoi
