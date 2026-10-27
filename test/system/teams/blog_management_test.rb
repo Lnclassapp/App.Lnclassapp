@@ -145,7 +145,8 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
           release.call
         end
       end
-      assert_toast t("teams.articles.create.created", title: "Réviser le BEPC en quatre semaines")
+      # The toast follows the end of the upload, then the save of the article: two requests, not one.
+      using_wait_time(UPLOAD_WAIT) { assert_toast t("teams.articles.create.created", title: "Réviser le BEPC en quatre semaines") }
       assert_no_selector "turbo-frame#modal dialog[open]"
       assert_no_selector "main[data-before-refresh]"
 
@@ -420,9 +421,10 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
     JS
   end
 
-  # The address of the page answers with an image (a lazy image of the page itself may not be loaded yet).
+  # The address of the page answers with an image (a lazy image of the page itself may not be loaded yet). Capybara gives
+  # an async script the default wait as its timeout (2 s): decoding an image, like drawing one below, gets UPLOAD_WAIT.
   def image_loaded?(src)
-    page.evaluate_async_script(<<~JS, src)
+    using_wait_time(UPLOAD_WAIT) { page.evaluate_async_script(<<~JS, src) }
       const [src, done] = arguments
       const image = new Image()
       image.src = src
@@ -454,7 +456,7 @@ class Teams::BlogManagementTest < ApplicationSystemTestCase
   # drop (its own cursor goes into the text then), while the image is still being shrunk: as an author who goes on
   # writing elsewhere. → the number of images in the text at that moment.
   def drop_generated_image(name:, width:, height:, noise: false, focus: nil)
-    page.evaluate_async_script(<<~JS, name, width, height, noise, focus)
+    using_wait_time(UPLOAD_WAIT) { page.evaluate_async_script(<<~JS, name, width, height, noise, focus) }
       const [name, width, height, noise, focus, done] = arguments
       const canvas = Object.assign(document.createElement("canvas"), { width, height })
       const context = canvas.getContext("2d")
