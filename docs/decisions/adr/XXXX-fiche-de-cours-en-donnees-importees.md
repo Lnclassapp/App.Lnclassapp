@@ -40,7 +40,7 @@ Deux voies : une vue ERB écrite à la main par fiche, ou un document de donnée
 
 ## 4. Décision
 
-> **Nous stockons une fiche de cours comme un document de blocs (`jsonb`) dans une table `course_sheets`, une par leçon, importé au format `lnclass.course_sheet` v1 par le moteur `RunImport`. La vue rend chaque type de bloc par un partial commun. Une figure interactive, une figure fixe ou un générateur d'exercices est désigné par un `kind` pris dans une liste fermée ; chaque `kind` est un partial et un contrôleur Stimulus, ses réglages sont dans les données.**
+> **Nous stockons une fiche de cours comme un document de blocs (`jsonb`) dans une table `course_sheets`, une par leçon, importé au format `lnclass.course-sheet` v1 par le moteur `RunImport`. La vue rend chaque type de bloc par un partial commun. Une figure interactive, une figure fixe ou un générateur d'exercices est désigné par un `kind` pris dans une liste fermée ; chaque `kind` est un partial et un contrôleur Stimulus, ses réglages sont dans les données.**
 
 - **Table** `course_sheets` : `course_id` (unique), `theme` (liste fermée : `blue`, `teal`, `burgundy`), `document` (`jsonb`), `format_version`, horodatage. Le cycle de publication est celui de la leçon.
 - **Document** : `pages[]` → `sections[]` (titre numéroté) → `blocks[]`, plus `glossary` (`{clé: [titre, définition, exemple]}`).

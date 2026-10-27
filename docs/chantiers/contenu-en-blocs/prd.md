@@ -21,7 +21,7 @@ Règles : import par `Policies::Catalog::ManageContentPolicy` (comme `ImportEsse
 
 ### Chemin nominal
 
-1. L'équipe envoie `thales.json` (format `lnclass.course_sheet` v1, `course` = slug de la leçon) sur l'écran d'import existant.
+1. L'équipe envoie `thales.json` (format `lnclass.course-sheet` v1, `course` = slug de la leçon) sur l'écran d'import existant.
 2. Le rapport d'import compte 1 fiche importée.
 3. L'élève ouvre la leçon publiée, puis « Fiche de cours » *(nom en attente du porteur)*.
 4. Il lit les 3 pages : Seyès, thème bleu et rouge, Kalam et Source Serif 4.

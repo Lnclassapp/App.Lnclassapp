@@ -1,0 +1,13 @@
+<%# 🌐 UI · catalog/course_sheets/_block — aiguillage gelé d'un bloc de la fiche de cours vers son partial (Lot 0) %>
+<%# Rôle : `block` (Hash du document validé) → blocks/_<type>, ou kinds/_<kind> pour figure et media ; hors liste fermée, rien n'est rendu %>
+<%# ADR  : XXXX-fiche-de-cours-en-donnees-importees · UDR : XXXX-fiche-de-cours-a-l-identique-des-maquettes %>
+<% sheet = Entities::Catalog::SheetDocument %>
+<% type = block["type"] %>
+<% kind = block["kind"] %>
+<% if %w[figure media].include?(type) && (type == "figure" ? sheet::FIGURE_KINDS : sheet::MEDIA_KINDS).include?(kind) %>
+  <%= render "catalog/course_sheets/kinds/#{kind}", block: block %>
+<% elsif (sheet::BLOCK_TYPES - %w[figure media]).include?(type) %>
+  <%= render "catalog/course_sheets/blocks/#{type}", block: block %>
+<% else %>
+  <p class="sheet-muted"><%= t(".unavailable") %></p>
+<% end %>

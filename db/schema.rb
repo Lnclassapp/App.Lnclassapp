@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_24_090000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_27_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -242,6 +242,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_090000) do
     t.check_constraint "max_students >= 1 AND max_students <= 150", name: "classrooms_max_students_range"
     t.check_constraint "school_year::text ~ '^[0-9]{4}-[0-9]{4}$'::text AND \"right\"(school_year::text, 4)::integer = (\"left\"(school_year::text, 4)::integer + 1)", name: "classrooms_school_year_format"
     t.check_constraint "status::text = ANY (ARRAY['active'::character varying::text, 'archived'::character varying::text])", name: "classrooms_status_values"
+  end
+
+  create_table "course_sheets", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.string "theme", null: false
+    t.jsonb "document", null: false
+    t.integer "format_version", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_sheets_on_course_id", unique: true
+    t.check_constraint "theme::text = ANY (ARRAY['blue'::character varying, 'teal'::character varying, 'burgundy'::character varying]::text[])", name: "course_sheets_theme_values"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -1056,6 +1067,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_24_090000) do
   add_foreign_key "classrooms", "levels", on_delete: :restrict
   add_foreign_key "classrooms", "schools", on_delete: :restrict
   add_foreign_key "classrooms", "series", on_delete: :restrict
+  add_foreign_key "course_sheets", "courses", on_delete: :cascade
   add_foreign_key "courses", "levels", on_delete: :restrict
   add_foreign_key "courses", "materials", on_delete: :restrict
   add_foreign_key "courses", "series", on_delete: :restrict

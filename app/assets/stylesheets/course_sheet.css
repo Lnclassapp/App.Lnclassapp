@@ -1,0 +1,615 @@
+/*
+  🌐 UI · course_sheet.css — habillage de la fiche de cours, isolé du reste de l'application (UDR-XXXX).
+  Rôle : jetons des maquettes en variables CSS, 3 thèmes, papier Seyès, composants communs `.sheet-*`. Chargé seulement sur
+         l'écran de la fiche (stylesheet_link_tag "course_sheet"), servi tel quel par Propshaft, sans Tailwind.
+  ADR  : XXXX-fiche-de-cours-en-donnees-importees · source des valeurs : docs/design/fiches-cours/ (gabarit <x-dc>).
+  Règle d'un lot : une règle propre à un kind s'écrit dans course_sheet/<kind>.css, importé ici, jamais dans ce fichier.
+*/
+
+@import "./course_sheet/thales_figure.css";
+@import "./course_sheet/lens.css";
+@import "./course_sheet/argument.css";
+
+/* ---- Polices hébergées par Lnclass (OFL, sous-ensemble latin) : ADR-0049 interdit toute police tierce ---------------- */
+
+@font-face {
+  font-family: "Kalam";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/kalam-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Kalam";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/kalam-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url("/fonts/source-serif-4-latin-wght-normal.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: italic;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url("/fonts/source-serif-4-latin-wght-italic.woff2") format("woff2-variations");
+}
+
+/* ---- Jetons --------------------------------------------------------------------------------------------------------- */
+
+.sheet-screen {
+  /* Partagés par les 3 fiches */
+  --sheet-paper: #fbf6e9;
+  --sheet-card: #fffdf8;
+  --sheet-field-border: #cfd6ea;
+  --sheet-card-border: #e2d9c4;
+  --sheet-dashed: #b9c3e0;
+  --sheet-ink-secondary: #4a4d63;
+  --sheet-muted: #6a6d80;
+  --sheet-white: #fff;
+  --sheet-success: oklch(0.52 0.13 155);
+  --sheet-error: oklch(0.53 0.19 27);
+  --sheet-pending: #6a6d80;
+  --sheet-margin-line: oklch(0.6 0.17 20 / 0.55);
+  --sheet-seyes-major: rgb(80 120 205 / 0.26);
+  --sheet-seyes-minor: rgb(80 120 205 / 0.09);
+  --sheet-font-title: "Kalam", cursive;
+  --sheet-font-body: "Source Serif 4", Georgia, serif;
+  --sheet-radius-field: 4px;
+  --sheet-radius-box: 6px;
+  --sheet-radius-panel: 8px;
+  --sheet-shadow-panel: 0 10px 30px rgb(40 30 70 / 0.25);
+  --sheet-touch: 44px;
+
+  /* Thème bleu (Thalès) par défaut */
+  --sheet-bg: #e6dfcf;
+  --sheet-ink: #23263a;
+  --sheet-primary: oklch(0.48 0.15 262);
+  --sheet-primary-deep: oklch(0.42 0.15 262);
+  --sheet-accent: oklch(0.53 0.19 27);
+  --sheet-note: oklch(0.48 0.15 305);
+  --sheet-note-deep: oklch(0.45 0.15 305);
+  --sheet-note-bg: oklch(0.95 0.035 305);
+  --sheet-shadow-tint: 70 50 20;
+  --sheet-page-width: 1000px;
+  --sheet-page-min-height: 1414px;
+  --sheet-page-padding: 40px 52px 32px 100px;
+  --sheet-page-gap: 18px;
+}
+
+.sheet-screen[data-sheet-theme="teal"] {
+  --sheet-bg: #dfe3e2;
+  --sheet-ink: #1f2a33;
+  --sheet-primary: oklch(0.45 0.1 215);
+  --sheet-primary-deep: oklch(0.4 0.1 215);
+  --sheet-accent: oklch(0.58 0.17 45);
+  --sheet-note: oklch(0.5 0.12 175);
+  --sheet-note-deep: oklch(0.45 0.11 175);
+  --sheet-note-bg: oklch(0.95 0.03 175);
+  --sheet-shadow-tint: 20 50 50;
+  --sheet-page-width: 880px;
+  --sheet-page-min-height: 1245px;
+  --sheet-page-padding: 52px 52px 44px 100px;
+  --sheet-page-gap: 26px;
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] {
+  --sheet-bg: #e5ddd6;
+  --sheet-ink: #2a2224;
+  --sheet-primary: oklch(0.42 0.13 15);
+  --sheet-primary-deep: oklch(0.42 0.13 15);
+  --sheet-accent: oklch(0.5 0.1 70);
+  --sheet-note: oklch(0.5 0.1 70);
+  --sheet-note-deep: oklch(0.45 0.1 70);
+  --sheet-note-bg: oklch(0.95 0.03 80);
+  --sheet-shadow-tint: 60 30 20;
+  --sheet-page-width: 880px;
+  --sheet-page-min-height: 1245px;
+  --sheet-page-padding: 52px 52px 44px 100px;
+  --sheet-page-gap: 26px;
+}
+
+/* ---- Écran et page --------------------------------------------------------------------------------------------------- */
+
+.sheet-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: safe center;
+  gap: 40px;
+  padding: 40px 20px;
+  overflow-x: auto;
+  background: var(--sheet-bg);
+  color: var(--sheet-ink);
+  font-family: var(--sheet-font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sheet-screen a {
+  color: var(--sheet-primary);
+}
+
+.sheet-screen a:hover {
+  color: var(--sheet-accent);
+}
+
+.sheet-page {
+  position: relative;
+  box-sizing: border-box;
+  flex: none;
+  width: var(--sheet-page-width);
+  min-height: var(--sheet-page-min-height);
+  background: var(--sheet-paper);
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.05), 0 14px 40px rgb(var(--sheet-shadow-tint) / 0.18);
+}
+
+/* Papier Seyès : marge rouge à 74 px, lignes fines tous les 8 px, lignes marquées tous les 32 px */
+.sheet-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, transparent 74px, var(--sheet-margin-line) 74px, var(--sheet-margin-line) 76px, transparent 76px),
+    repeating-linear-gradient(to bottom, var(--sheet-seyes-major) 0 1px, transparent 1px 32px),
+    repeating-linear-gradient(to bottom, var(--sheet-seyes-minor) 0 1px, transparent 1px 8px);
+}
+
+.sheet-screen[data-seyes="false"] .sheet-page::before {
+  display: none;
+}
+
+.sheet-page-body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sheet-page-gap);
+  padding: var(--sheet-page-padding);
+}
+
+.sheet-page-footer {
+  display: flex;
+  justify-content: flex-end;
+  font-family: var(--sheet-font-title);
+  font-size: 15px;
+  color: var(--sheet-muted);
+}
+
+/* ---- Titres ---------------------------------------------------------------------------------------------------------- */
+
+.sheet-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sheet-eyebrow {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--sheet-font-title);
+  font-size: 17px;
+  color: var(--sheet-primary);
+}
+
+.sheet-h1 {
+  margin: 0;
+  font-family: var(--sheet-font-title);
+  font-weight: 700;
+  font-size: 46px;
+  line-height: 1.1;
+  color: var(--sheet-primary);
+}
+
+.sheet-rule {
+  height: 3px;
+  background: var(--sheet-accent);
+}
+
+.sheet-rule-thin {
+  height: 1.5px;
+  margin-top: 1px;
+  background: var(--sheet-accent);
+}
+
+.sheet-intro {
+  margin: 6px 0 0;
+  font-size: 17px;
+  text-wrap: pretty;
+}
+
+.sheet-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sheet-h2 {
+  margin: 0;
+  font-family: var(--sheet-font-title);
+  font-weight: 700;
+  font-size: 25px;
+  color: var(--sheet-accent);
+}
+
+.sheet-h2-number {
+  color: var(--sheet-primary);
+}
+
+.sheet-text {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.sheet-muted {
+  margin: 0;
+  font-size: 15px;
+  color: var(--sheet-ink-secondary);
+  text-wrap: pretty;
+}
+
+/* ---- Encadré « propriété », « à retenir », « méthode » ---------------------------------------------------------------- */
+
+.sheet-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 22px 14px;
+  border: 2px solid var(--sheet-accent);
+  border-radius: var(--sheet-radius-box);
+  background: var(--sheet-card);
+}
+
+.sheet-box[data-tone="method"] {
+  padding: 18px 22px 12px;
+  border-color: var(--sheet-note);
+}
+
+.sheet-box-label {
+  position: absolute;
+  top: -14px;
+  left: 18px;
+  padding: 1px 12px;
+  border-radius: var(--sheet-radius-field);
+  background: var(--sheet-accent);
+  color: var(--sheet-white);
+  font-family: var(--sheet-font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.sheet-box[data-tone="method"] .sheet-box-label {
+  background: var(--sheet-note);
+}
+
+.sheet-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding-left: 22px;
+  text-wrap: pretty;
+}
+
+/* ---- Explications simples (bascule violette) -------------------------------------------------------------------------- */
+
+.sheet-simple {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 14px;
+  border-radius: var(--sheet-radius-box);
+  background: var(--sheet-note-bg);
+  font-size: 15.5px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.sheet-simple-label {
+  flex: none;
+  font-family: var(--sheet-font-title);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--sheet-note-deep);
+}
+
+.sheet-screen[data-simple="false"] .sheet-simple {
+  display: none;
+}
+
+.sheet-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 8px 12px;
+  border: 1.5px solid color-mix(in oklch, var(--sheet-note) 40%, transparent);
+  border-radius: var(--sheet-radius-box);
+  background: var(--sheet-card);
+  font-size: 14.5px;
+}
+
+.sheet-toolbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.sheet-toggle {
+  padding: 2px 12px;
+  border: 1.5px solid var(--sheet-note);
+  border-radius: var(--sheet-radius-field);
+  background: transparent;
+  color: var(--sheet-note);
+  font-family: var(--sheet-font-title);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.sheet-toggle[aria-pressed="true"] {
+  background: var(--sheet-note);
+  color: var(--sheet-white);
+}
+
+/* ---- Lexique : mot souligné en pointillés et bulle --------------------------------------------------------------------- */
+
+.sheet-word {
+  border: 0;
+  border-bottom: 2px dotted var(--sheet-note);
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: help;
+}
+
+.sheet-word:hover {
+  background: color-mix(in oklch, var(--sheet-note) 12%, transparent);
+}
+
+.sheet-bubble {
+  position: fixed;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-sizing: border-box;
+  width: 310px;
+  max-height: 70vh;
+  overflow: auto;
+  padding: 12px 14px;
+  border: 2px solid var(--sheet-note);
+  border-radius: var(--sheet-radius-panel);
+  background: var(--sheet-card);
+  box-shadow: var(--sheet-shadow-panel);
+  color: var(--sheet-ink);
+  font-family: var(--sheet-font-body);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.sheet-bubble[hidden] {
+  display: none;
+}
+
+.sheet-bubble-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.sheet-bubble-title {
+  font-family: var(--sheet-font-title);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--sheet-note-deep);
+}
+
+.sheet-bubble-close {
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  color: var(--sheet-muted);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.sheet-bubble-example {
+  font-style: italic;
+  color: var(--sheet-ink-secondary);
+}
+
+/* ---- Boutons --------------------------------------------------------------------------------------------------------- */
+
+.sheet-btn {
+  padding: 2px 12px;
+  border: 1.5px solid var(--sheet-primary);
+  border-radius: var(--sheet-radius-field);
+  background: transparent;
+  color: var(--sheet-primary);
+  font-family: var(--sheet-font-title);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.sheet-btn:hover {
+  background: color-mix(in oklch, var(--sheet-primary) 8%, transparent);
+}
+
+.sheet-btn[data-variant="primary"] {
+  background: var(--sheet-primary);
+  color: var(--sheet-white);
+}
+
+.sheet-btn[data-variant="primary"]:hover {
+  background: var(--sheet-primary-deep);
+}
+
+.sheet-btn:focus-visible,
+.sheet-toggle:focus-visible,
+.sheet-word:focus-visible,
+.sheet-input:focus-visible {
+  outline: 2px solid var(--sheet-accent);
+  outline-offset: 2px;
+}
+
+.sheet-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ---- Carte d'exercice, champs et retours ------------------------------------------------------------------------------- */
+
+.sheet-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--sheet-field-border);
+  border-radius: var(--sheet-radius-box);
+  background: var(--sheet-card);
+  font-size: 15px;
+}
+
+.sheet-card-title {
+  font-family: var(--sheet-font-title);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--sheet-primary);
+}
+
+.sheet-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  align-items: center;
+  font-family: var(--sheet-font-title);
+  font-size: 18px;
+  color: var(--sheet-primary-deep);
+}
+
+.sheet-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sheet-input {
+  width: 64px;
+  border: 0;
+  border-bottom: 2px dashed var(--sheet-primary);
+  background: var(--sheet-white);
+  color: inherit;
+  font: inherit;
+  text-align: center;
+  outline: none;
+}
+
+.sheet-feedback {
+  font-size: 14px;
+  color: var(--sheet-pending);
+}
+
+.sheet-feedback[data-state="correct"] {
+  color: var(--sheet-success);
+}
+
+.sheet-feedback[data-state="wrong"] {
+  color: var(--sheet-error);
+}
+
+.sheet-message {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sheet-pending);
+}
+
+.sheet-message[data-state="correct"] {
+  color: var(--sheet-success);
+}
+
+.sheet-message[data-state="wrong"] {
+  color: var(--sheet-error);
+}
+
+.sheet-hint {
+  font-size: 14px;
+  color: var(--sheet-note);
+}
+
+.sheet-correction {
+  padding-top: 6px;
+  border-top: 1px dashed var(--sheet-dashed);
+  font-family: var(--sheet-font-title);
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--sheet-primary-deep);
+}
+
+.sheet-correction b {
+  color: var(--sheet-accent);
+}
+
+.sheet-hint[hidden],
+.sheet-correction[hidden] {
+  display: none;
+}
+
+.sheet-score {
+  font-family: var(--sheet-font-title);
+  font-size: 18px;
+  color: var(--sheet-primary);
+}
+
+/* ---- Tableau ------------------------------------------------------------------------------------------------------- */
+
+.sheet-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--sheet-card);
+  font-size: 15px;
+}
+
+.sheet-table th,
+.sheet-table td {
+  padding: 6px 10px;
+  border: 1.5px solid var(--sheet-field-border);
+  text-align: left;
+}
+
+.sheet-table th {
+  background: var(--sheet-card-border);
+  font-family: var(--sheet-font-title);
+  font-weight: 700;
+  color: var(--sheet-primary);
+}
+
+/* ---- Figure : cadre commun --------------------------------------------------------------------------------------------- */
+
+.sheet-figure {
+  padding: 12px;
+  border: 1.5px solid var(--sheet-field-border);
+  border-radius: var(--sheet-radius-box);
+  background: var(--sheet-card);
+}
+
+.sheet-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--sheet-radius-field);
+  background: var(--sheet-white);
+}
