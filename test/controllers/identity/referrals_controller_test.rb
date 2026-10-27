@@ -118,9 +118,13 @@ class Identity::ReferralsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "CP-05: the teacher home ends with the block; a teacher of a draft school has none" do
+  # UDR enseignant §3.3 (mvp-teacher-student, Lot G) : la carte « Inviter un collègue » quitte l'accueil sous lg ; elle reste sur sa page.
+  test "CP-05: the invitation block is on its own page, not on the teacher home; a teacher of a draft school has none" do
     sign_in_as @teacher
     get teacher_home_path
+
+    assert_select "#invite_colleagues", 0
+    get teacher_invite_path
 
     assert_select "#invite_colleagues a#referral_link[href='#{link}']"
     sign_out
@@ -131,85 +135,18 @@ class Identity::ReferralsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#invite_colleagues", 0
   end
 
-  # RE-18, RE-19 (UDR-0069 §3.6): the sidebar of the teacher asks this page in the deferred frame « sidebar_referral »;
-  # it receives the compact « Parrainage » card alone, without the shell, or the same frame empty when the invitation is
-  # closed — never a 403, which the frame would show as an error.
-  SIDEBAR_FRAME = "sidebar_referral".freeze
-
-  def get_sidebar_card = get(teacher_invite_path, headers: { "Turbo-Frame" => SIDEBAR_FRAME })
-
-  # The ids of a subtree, without those of the toasts kept in <template> by the copy button.
-  def ids_within(selector)
-    css_select("#{selector} [id]").reject { it.ancestors("template").any? }.map { it["id"] }
-  end
-
-  test "RE-19: the sidebar frame receives the « Parrainage » card alone, without the layout" do
-    3.times { create_referral(referrer: @teacher) }
+  # Mvp-teacher-student, lot P0 (UDR enseignant §2) : « Inviter un collègue » n'est plus que dans la grille de l'accueil ; la barre
+  # latérale n'a plus la carte « Parrainage », ni sur l'accueil, ni sur une autre page, ni pour un établissement fermé. Seule
+  # la page reste servie à son adresse (le frame de la barre latérale et sa carte sont retirés).
+  test "RE-19: the sidebar of the teacher has no « Parrainage » frame, on the home or on another page" do
     sign_in_as @teacher
 
-    get_sidebar_card
+    [ teacher_home_path, teacher_classrooms_path ].each do |path|
+      get path
 
-    assert_response :success
-    assert_match(/\A\s*<turbo-frame id="sidebar_referral">/, response.body)
-    assert_no_match(/<html|<head|<body|<aside|<main/, response.body)
-    assert_select "turbo-frame", 1
-    assert_select "turbo-frame#sidebar_referral section#sidebar_referral_card[aria-labelledby=sidebar_referral_title]" do
-      assert_select "h2#sidebar_referral_title", text: "Parrainage"
-      assert_select "span", text: I18n.t("#{PAGE}.ambassador.badge")
-      assert_select "#sidebar_referral_count", text: "3 collègues inscrits grâce à vous"
-      assert_select "a#sidebar_referral_link[href='#{link}'][title='#{link}']", text: link
-      assert_select "#sidebar_referral_actions[data-controller='identity--share']" \
-                    "[data-identity--share-url-value='#{teacher_referral_shares_path}'][data-identity--share-link-value='#{link}']" \
-                    "[data-action='clipboard:copied->identity--share#recordCopy']" do |actions|
-        assert_equal share_message, actions.first["data-identity--share-text-value"]
-        assert_select "a[href='https://wa.me/?text=#{ERB::Util.url_encode(share_message)}'][target=_blank][rel=noopener]" \
-                      "[data-action='identity--share#record'][data-identity--share-channel-param=whatsapp]", text: "WhatsApp"
-        assert_select "[data-controller=clipboard][data-clipboard-text-value='#{link}'] button[data-action='clipboard#copy']",
-                      text: "Copier le lien"
-        assert_select "a[href='#{teacher_invite_path}']", text: "Plus d'options"
-      end
+      assert_response :success, path
+      assert_select "aside turbo-frame#sidebar_referral, aside #sidebar_referral_card, aside #sidebar_referral_link", 0, path
     end
-    assert_select "#invite_colleagues, #referral_link, a[href^='sms:']", 0
-  end
-
-  test "RE-19: the counter of the card says none yet, then one colleague; no badge under 3 colleagues" do
-    sign_in_as @teacher
-
-    get_sidebar_card
-    assert_select "#sidebar_referral_count", text: "Aucun collègue inscrit grâce à vous pour l'instant."
-    assert_select "#sidebar_referral_card", text: /#{I18n.t("#{PAGE}.ambassador.badge")}/, count: 0
-
-    create_referral(referrer: @teacher)
-    get_sidebar_card
-    assert_select "#sidebar_referral_count", text: "1 collègue inscrit grâce à vous"
-  end
-
-  test "RE-18: a teacher of a draft or inactive school receives the frame empty, in 200, never 403" do
-    %w[draft inactive].each do |status|
-      sign_in_as create_teacher(school: create_school(status:))
-
-      get_sidebar_card
-
-      assert_response :success, status
-      assert_match(/\A\s*<turbo-frame id="sidebar_referral">\s*<\/turbo-frame>\s*\z/, response.body, status)
-      sign_out
-    end
-  end
-
-  # ADR-0076 §4.2, UDR-0069 §3.6 amended (chantier politique-cache, lot E1): the home, which reads the invitation already,
-  # renders the card with the page in the permanent frame of the sidebar; another page of the space keeps the deferred
-  # frame. A teacher of a draft or inactive school gets the same permanent frame on the home, empty.
-  test "RE-19: the home renders the card in the permanent sidebar frame; another page defers it; a closed invitation leaves it empty" do
-    sign_in_as @teacher
-
-    get teacher_home_path
-    assert_select "aside turbo-frame#sidebar_referral[data-turbo-permanent][target=_top]:not([src])", 1 do
-      assert_select "#sidebar_referral_count", text: "Aucun collègue inscrit grâce à vous pour l'instant."
-      assert_select "a#sidebar_referral_link[href='#{link}']", text: link
-    end
-    get teacher_classrooms_path
-    assert_select "aside turbo-frame#sidebar_referral[data-turbo-permanent][target=_top][loading=lazy][src='#{teacher_invite_path}']", 1
-    assert_select "#sidebar_referral_card", 0
     sign_out
 
     %w[draft inactive].each do |status|
@@ -218,32 +155,19 @@ class Identity::ReferralsControllerTest < ActionDispatch::IntegrationTest
       get teacher_home_path
 
       assert_response :success, status
-      assert_select "aside turbo-frame#sidebar_referral[data-turbo-permanent]:not([src])", 1, status
-      assert_select "#sidebar_referral_card, #sidebar_referral_link", 0, status
+      assert_select "aside turbo-frame#sidebar_referral", 0, status
       sign_out
     end
   end
 
-  test "RE-19: every id of the card is prefixed sidebar_referral_ and none is shared with the invitation block" do
-    sign_in_as @teacher
-    get teacher_invite_path
-    block = ids_within("#invite_colleagues")
-
-    get_sidebar_card
-    card = ids_within("turbo-frame#sidebar_referral")
-
-    assert_includes block, "referral_link"
-    assert_equal %w[sidebar_referral_card sidebar_referral_title sidebar_referral_count sidebar_referral_link
-                    sidebar_referral_actions].sort, card.sort
-    assert(card.all? { it.start_with?("sidebar_referral_") }, card.inspect)
-    assert_empty card & block
-  end
-
-  test "the class selection page leads to the invitation" do
+  # Mvp-teacher-student, lot L (maquette enseignant 05) : « Quelles classes enseignez-vous ? » ne porte plus « Inviter un
+  # collègue » ; l'invitation part de l'accueil (case « Inviter », lot G).
+  test "the class selection page no longer carries the invitation" do
     sign_in_as @teacher
 
     get teacher_classrooms_path
 
-    assert_select "a[href='#{teacher_invite_path}']", text: /#{I18n.t("classroom.teaching_selections.index.invite")}/
+    assert_response :success
+    assert_select "main a[href='#{teacher_invite_path}']", 0
   end
 end

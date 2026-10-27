@@ -19,9 +19,10 @@ class SharedClassesTest < ActiveSupport::TestCase
                    "select-none transition active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 " \
                    "focus-visible:outline-brand disabled:pointer-events-none disabled:opacity-50 " \
                    "aria-disabled:pointer-events-none aria-disabled:opacity-50",
-    "ui-button-primary" => "bg-ink text-white hover:bg-ink/85",
+    # UDR palette froide §3.3 (mvp-teacher-student, Lot P) : principal en `brand-strong`, secondaire au texte bleu.
+    "ui-button-primary" => "bg-brand-strong text-white hover:bg-brand-strong/90",
     "ui-button-brand" => "bg-brand text-ink hover:bg-brand/85",
-    "ui-button-secondary" => "border border-line bg-white text-ink hover:bg-mist",
+    "ui-button-secondary" => "border border-line-strong bg-white text-brand-strong hover:bg-mist",
     "ui-button-ghost" => "text-ink hover:bg-ink/5",
     "ui-button-danger" => "bg-error text-white hover:bg-error/90",
     "ui-button-sm" => "h-10 gap-1.5 px-4 text-sm after:absolute after:-inset-1",
@@ -35,7 +36,8 @@ class SharedClassesTest < ActiveSupport::TestCase
     "ui-menu-item-danger" => "text-error hover:bg-error-soft focus:bg-error-soft",
     "ui-dialog" => "m-auto w-full max-w-none rounded-sheet bg-white p-0 text-ink shadow-pop backdrop:bg-ink/50 " \
                    "motion-safe:open:animate-slide-up max-sm:mb-0 max-sm:rounded-b-none",
-    "ui-avatar" => "inline-grid shrink-0 place-items-center overflow-hidden rounded-full font-display font-extrabold"
+    # UDR palette froide §2 : une seule police, graisse 500 au plus.
+    "ui-avatar" => "inline-grid shrink-0 place-items-center overflow-hidden rounded-full font-medium"
   }.freeze
 
   def applied(utility)

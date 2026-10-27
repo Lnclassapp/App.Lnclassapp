@@ -1,288 +1,107 @@
 require "application_system_test_case"
 
-# CL-23, TR-04, AS-36 (UDR-0010, UDR-0058 §3.3): a signed-in student lands on their home, sees their assigned exercises,
-# and « Commencer » leads to the session. The old feed raised NameError for every student with a classroom.
-# Chantier interface-epuree, Lot A: the current home cleaned up by the sobriety rule (UDR-0057), at every size.
+# CA-D1, CA-D2, CA-D8, CA-D9 (mvp-teacher-student, Lot D), at 390 px: the one system test of the student home. The band replaces the
+# header, the card straddles it and says the next gesture, the grid has seven rounds, the history arrives in its frame. The states of
+# the card, the order of the exercises and the rest are proved in the query, controller and integration tests
+# (test/infrastructure/queries/classroom/student_home_query_test.rb, test/controllers/classroom/student_homes_controller_test.rb,
+# test/integration/identity/student_header_test.rb). The computer (CA-D10, Lot O1) has its own short test at 1440 px.
 class Classroom::StudentHomeTest < ApplicationSystemTestCase
-  # Playing a session belongs to Lot C2: until it is merged, a stand-in answers on its routes, as in
-  # test/system/classroom/assignment_toggle_test.rb. A merged controller is autoloadable, so the stand-in steps aside.
-  # Turbo follows the redirect asking for a stream first: the stand-in answers in HTML, with its layout, as a view would.
-  unless Object.const_defined?("Assessment::ExerciseSessionsController")
-    Assessment.const_set(:ExerciseSessionsController, Class.new(AuthenticatedController) do
-      def create = redirect_to(exercise_session_path("stand-in"))
-      def show = render(html: "session", layout: true, formats: :html)
-    end)
-  end
-
   DESKTOP_VIEWPORT = [ 1280, 900 ].freeze
-  # UDR-0057 R2: the first-level blocks of the page, its header and each section of the home.
-  PAGE_BLOCKS = "#main > div > :not(#student_home), #student_home > *".freeze
-  # The grain of the « before » measure (Lot 0): the header, the « À faire » title, its help and each exercise line.
-  TODO_BLOCKS = "#main h1, #student_home_exercises h2, #student_home_help, #student_home_exercises li".freeze
+  WIDE_VIEWPORT = [ 1440, 1000 ].freeze
 
   setup do
-    @classroom = create_classroom(name: "Tle D 1", school: create_school(name: "Lycée Classique"))
+    @classroom = create_classroom(name: "Tle D 1", school: create_school(name: "Lycée Classique", sigle: "LCA"))
     @student = create_student(classroom: @classroom, first_name: "Aya")
-    # UDR-0013, amendement du 2026-10-01 : le cours assigné est du niveau de la classe de l'élève.
-    @course = create_course(material: create_material(name: "SVT", category: "science"), level: @classroom.level)
-    @essential = create_essential(course: @course)
-    @meiose = create_exercise(essential: @essential, title: "La méiose")
-    mitose = create_exercise(essential: @essential, title: "La mitose")
-    # ADR-0072 §4.1 : chaque exercice s'assigne seul ; assignés au même instant, ils suivent l'ordre de la fiche.
-    @assigned_at = 1.hour.ago
-    [ @meiose, mitose ].each { assign(it) }
-    session = create_exercise_session(student: @student, exercise: mitose, status: "completed", score_percent: 80)
-    create_badge(student: @student, exercise: mitose, level: "gold", session:)
+    course = create_course(material: create_material(name: "SVT", category: "science"), level: @classroom.level)
+    essential = create_essential(course:)
+    @late = create_exercise(essential:, title: "La méiose")
+    create_assignment(classroom: @classroom, assignable: @late, assigned_at: 4.days.ago, due_on: Date.current - 2)
+    create_assignment(classroom: @classroom, assignable: create_exercise(essential:, title: "La mitose"),
+                      assigned_at: 1.hour.ago, due_on: Date.current + 3)
+    done = create_exercise(essential:, title: "Les gamètes")
+    create_assignment(classroom: @classroom, assignable: done, assigned_at: 1.hour.ago)
+    create_exercise_session(student: @student, exercise: done, status: "completed", score_percent: 80)
+    sign_in_as @student
   end
 
-  def row(title) = find("#student_home_exercises li", text: title)
   def tl(key, **) = I18n.t("classroom.student_homes.#{key}", **)
-  def more = I18n.t("components.reveal.more")
-  def with_desktop_viewport(&) = with_mobile_viewport(DESKTOP_VIEWPORT, &)
-  def assign(exercise) = create_assignment(classroom: @classroom, assignable: exercise, assigned_at: @assigned_at)
 
-  # Four exercises in the list: La méiose, Les chromosomes, L'ADN in the order of the sheet, then La mitose, completed
-  # (UDR-0062 §3.2: a completed exercise goes to the end of the list).
-  def assign_four_exercises
-    assign(create_exercise(essential: @essential, title: "Les chromosomes"))
-    assign(create_exercise(essential: @essential, title: "L'ADN"))
-  end
-
-  test "the student sees their assigned exercises, then « Commencer » leads to the session" do
-    sign_in_as @student
-
-    assert_current_path student_home_path
-    assert_selector "#student_home_classroom", text: "Tle D 1"
-    within(row("La mitose")) { assert_text "SVT" }
-    within("turbo-frame#student_home_recent_activity") { assert_link text: /La mitose/ }
-
-    assert_no_page_reload do
-      within(row("La méiose")) { click_on tl("assigned_exercise.start") }
-      assert_current_path %r{\A/sessions/[^/]+\z}
-    end
-  end
-
-  # PRD §4, « Accueil élève — ordinateur (UDR-0058 §3.3) ».
-  # UDR-0084 §3.5: no « Bonjour » any more, the classroom card opens the page.
-  test "on a computer, no greeting, no help, lines of a title, a subject and one button, 3 lines then « Voir plus »" do
-    assign_four_exercises
-    sign_in_as @student
-
-    with_desktop_viewport do
-      visit student_home_path
-
-      assert_no_text "Bonjour"
-      assert_no_text "Lycée Classique · Tle D 1"
-      within("#student_home_exercises") do
-        assert_no_selector "#student_home_help"
-        assert_no_text "Badges"
-        assert_no_text "Maîtrise"
-
-        assert_selector "li", count: 3
-        all("li").each do |line|
-          within(line) do
-            assert_text "SVT"
-            # UDR-0057 §2.4: the title leads to the exercise page, one tap away; the button stays beside it.
-            assert_selector "a[href^='/exercises/']", count: 1
-            assert_selector "a[href^='/sessions/'], button", count: 1
-            assert_no_selector "a a, a button"
-          end
-        end
-        assert_selector "li:first-child :is(#{SobrietyAssertions::PRIMARY_ACTION})", text: tl("assigned_exercise.start")
-        assert_selector "li:not(:first-child) button.ui-button-secondary", count: 2
-        assert_button more
-      end
-      assert_single_primary_action
-    end
-  end
-
-  # PRD « Accueil élève », UDR-0062 §3.1 and §3.2: the most urgent exercise heads the list, with the only primary button
-  # and « À rendre demain » in amber; the completed one goes last, without a date.
-  test "the exercise due tomorrow heads the list, its date in amber, with the only primary button" do
-    tomorrow = create_exercise(essential: @essential, title: "Les chromosomes")
-    create_assignment(classroom: @classroom, assignable: tomorrow, assigned_at: @assigned_at, due_on: Date.current + 1)
-    sign_in_as @student
-
-    within("#student_home_exercises") do
-      assert_selector "li", count: 3
-      within("li:first-child") do
-        assert_link "Les chromosomes"
-        assert_selector "span.bg-warning-soft.text-warning", text: "À rendre demain"
-        assert_selector ":is(#{SobrietyAssertions::PRIMARY_ACTION})", text: tl("assigned_exercise.start")
-      end
-      within("li:last-child") do
-        assert_link "La mitose"
-        assert_no_text "À rendre"
-      end
-    end
-    assert_single_primary_action
-  end
-
-  # ADR-0072 §4.4: nothing closes once the date has passed; the late exercise says so and still starts.
-  test "a late exercise says « En retard · prévu hier » and still starts" do
-    late = create_exercise(essential: @essential, title: "L'ADN")
-    create_assignment(classroom: @classroom, assignable: late, assigned_at: 3.days.ago, due_on: Date.yesterday)
-    sign_in_as @student
-
-    within(row("L'ADN")) { assert_selector "span.bg-warning-soft", text: "En retard · prévu hier" }
-
-    assert_no_page_reload do
-      within(row("L'ADN")) { click_on tl("assigned_exercise.start") }
-      assert_current_path %r{\A/sessions/[^/]+\z}
-    end
-  end
-
-  # UDR-0057 §2.4: the badge, the best score and the mastery left the line for the exercise page, one tap away.
-  test "the title of a line opens the exercise page" do
-    sign_in_as @student
-
-    within(row("La méiose")) { click_link "La méiose" }
-
-    assert_current_path exercise_path(@meiose.public_id)
-    assert_selector "h1", text: "La méiose"
-  end
-
-  # PRD §4, « Règle de sobriété (UDR-0057) » at 390 × 844, then « Voir plus » reveals the 4th line without a reload.
-  test "on a phone, one primary action, at most 5 blocks above the fold, every list capped at 3 lines" do
-    assign_four_exercises
-    gaps_course = create_course(name: "Hérédité", material: @course.material, level: @classroom.level)
-    4.times { |index| create_gap(student: @student, essential: create_essential(course: gaps_course, name: "Fiche #{index + 1}")) }
-    sign_in_as @student
-
+  test "on a phone: the band, the card on the late exercise, the grid of seven, the history; no sideways scroll; nothing broken on a computer" do
     with_mobile_viewport do
       visit student_home_path
 
-      assert_selector "#student_home_exercises li"
-      assert_single_primary_action
-      assert_blocks_above_fold PAGE_BLOCKS
-      assert_blocks_above_fold TODO_BLOCKS
-      # The activity is a lazy frame: it loads once scrolled into view.
-      scroll_to find("turbo-frame#student_home_recent_activity")
-      within("turbo-frame#student_home_recent_activity") { assert_selector "li", minimum: 1 }
-      [ "#student_home_exercises", "#student_home_gaps", "turbo-frame#student_home_recent_activity" ].each do |list|
-        assert_list_capped list
-        within(list) { assert_button more }
-      end
+      # Band and header: the blue band is there, the sticky header is not (the band carries the avatar and the help).
+      assert_selector "header.student-band a[aria-label]", visible: :visible
+      assert_selector "header.student-band a", text: I18n.t("shared.navigation.home_band.help")
+      assert_no_selector "header.sticky", visible: :visible
 
-      within("#student_home_exercises") do
-        assert_no_text "La mitose"
-        # Back up from the activity, the button would stop under the sticky header of the shell: centred, it is clickable.
-        scroll_to find_button(more), align: :center
-        assert_no_page_reload { click_on more }
-        assert_text "La mitose"
-        assert_selector "li", count: 4
-        assert_no_button more
+      # The card straddles the band, says what to do now, and has the only primary button.
+      within "#student_next_step" do
+        assert_selector "#student_next_step_title", text: "La méiose"
+        assert_text(/En retard/)
+        assert_link text: /LCA/, href: student_classroom_path
+        assert_button tl("next_step.late.start")
+        assert_selector "[role=progressbar][aria-valuenow='1'][aria-valuemax='3']"
       end
-      assert_single_primary_action
+      band = find("header.student-band")
+      assert_operator find("#student_next_step").rect.y, :<, band.rect.y + band.rect.height
+      assert_equal 1, all("#student_home .ui-button-primary").size
+
+      # The grid: four columns, six subjects at most plus « Inviter », a dot on the subject that is late (CA-D8).
+      assert_selector "nav#student_subjects a#subject_svt .bg-warning-dot", visible: :all
+      assert_selector "nav#student_subjects a#subject_invite"
+      columns = page.evaluate_script("getComputedStyle(document.querySelector('#student_subjects ul')).gridTemplateColumns.split(' ').length")
+      assert_equal 4, columns
+
+      # The history arrives in its lazy frame.
+      scroll_to find("#student_history")
+      within("#student_history") { assert_selector "li", text: "Les gamètes" }
+      assert_equal page.evaluate_script("document.documentElement.clientWidth"),
+                   page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
+
+      click_on tl("next_step.late.start")
+      assert_current_path %r{\A/sessions/[^/]+\z}
     end
-  end
 
-  # Challenger d'interface-eleve-organisation : une ligne avec son échéance et son bouton élargissait la carte « À faire »,
-  # case de la grille sans min-w-0, et toute la page avec elle (405 px pour 390). La barre du bas de l'élève est partie
-  # (UDR-0084 §3.3) : son absence se vérifie dans test/system/role_homes_test.rb.
-  test "on a phone, the home is visible without horizontal scrolling" do
-    Orm::ClassroomAssignment.find_by!(assignable_id: @meiose.id).update!(due_on: Time.zone.today + 4)
-    @meiose.update!(title: "La méiose et la formation des gamètes chez les mammifères")
-    sign_in_as @student
-
-    with_mobile_viewport do
+    with_mobile_viewport(DESKTOP_VIEWPORT) do
       visit student_home_path
 
-      assert_selector "#student_home_exercises li", count: 2
+      assert_selector "header.sticky", visible: :visible
+      assert_no_selector "header.student-band", visible: :visible
+      assert_selector "#student_next_step_title", text: "La méiose"
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
     end
   end
 
-  # Chantier accueil-eleve, UDR-0084 §3.4, §3.5 and §3.10, on a phone and on a computer.
-  VIEWPORTS = { "phone" => MOBILE_VIEWPORT, "computer" => DESKTOP_VIEWPORT }.freeze
-  HOME_BLOCKS = %w[student_home_classroom student_home_subjects student_home_announcements student_home_exercises
-                   student_home_activity].freeze
+  # CA-D10 (Lot O1): the page is only measured; the markup rules are in test/controllers/classroom/student_homes_controller_test.rb.
+  test "on a computer (1440 px): 912 px beside a sidebar without profile card, no band, seven subjects on a line, two announcements, mist page" do
+    create_message(author: create_team_member(second_factor: false), title: "Rentrée", audience: "all", published_at: 1.hour.ago)
+    create_message(author: create_school_admin(school: @classroom.school, gender: "female", last_name: "Kamaté"), title: "Parents",
+                   school: @classroom.school, published_at: 2.hours.ago)
 
-  # [id, top, left, width] of each block of the home, in the order of the page.
-  def home_blocks
-    page.evaluate_script(<<~JS)
-      Array.from(document.querySelectorAll("#student_home > [id]")).map(function (block) {
-        var box = block.getBoundingClientRect();
-        return [block.id, Math.round(box.top), Math.round(box.left), Math.round(box.width)];
-      })
-    JS
-  end
+    with_mobile_viewport(WIDE_VIEWPORT) do
+      visit student_home_path
 
-  def column_width = page.evaluate_script("Math.round(document.getElementById('student_home').getBoundingClientRect().width)")
-  def grid_columns(list) = page.evaluate_script("getComputedStyle(document.querySelector('#{list}')).gridTemplateColumns.split(' ').length")
+      assert_selector "header.sticky", visible: :visible
+      assert_no_selector "header.student-band", visible: :visible
+      assert_no_selector "aside .ui-avatar", visible: :all
+      assert_selector "aside nav a", count: 3
 
-  VIEWPORTS.each do |device, size|
-    test "CA-6 — on a #{device}, one column: Ma classe, Mes matières, Annonces, À faire, Mes activités récentes, without « Bonjour »" do
-      create_message(author: create_team_member(second_factor: false), title: "Rentrée", published_at: 1.hour.ago, audience: "all")
-      sign_in_as @student
+      assert_operator find("#student_home").rect.width, :<=, 912
+      assert_operator find("#student_home").rect.x, :>=, find("aside").rect.width
+      tops = %w[#student_next_step #student_subjects #student_home_announcements #student_history].map { find(it).rect.y }
+      assert_equal tops.sort, tops, "les sections s'empilent dans l'ordre"
+      assert_equal 7, page.evaluate_script("getComputedStyle(document.querySelector('#student_subjects ul')).gridTemplateColumns.split(' ').length")
+      assert_selector "#student_subjects h2", text: I18n.t("classroom.student_homes.subjects.label"), visible: :visible
 
-      with_mobile_viewport(size) do
-        visit student_home_path
-
-        assert_selector "#student_home_announcements article", text: "Rentrée"
-        blocks = home_blocks
-        assert_equal HOME_BLOCKS, blocks.map(&:first)
-        # Une seule colonne : chaque bloc commence sous le précédent et couvre toute la colonne (sous 640 px, une carte
-        # va bord à bord, UDR-0005) ; au téléphone, la colonne prend toute la largeur moins les marges.
-        width = column_width
-        blocks.each_cons(2) { |above, below| assert_operator below[1], :>, above[1], "#{below[0]} n'est pas sous #{above[0]}" }
-        blocks.each { |id, _, _, block_width| assert_operator block_width, :>=, width, "#{id} ne couvre pas la colonne" }
-        assert_operator width, :<=, 960
-        assert_equal page.evaluate_script("document.documentElement.clientWidth") - 32, width if device == "phone"
-        within("#main") do
-          assert_no_text "Bonjour"
-          assert_no_text "Aya"
-        end
-
-        within("#student_home_classroom") do
-          assert_text "Tle D 1"
-          assert_text "Lycée Classique"
-          link = find_link(tl("classroom_card.enter"), href: student_classroom_path)
-          # UDR-0084 §3.5 : la porte ouverte devant, la flèche après.
-          assert_equal %w[svg svg], link.evaluate_script("[this.firstElementChild.tagName, this.lastElementChild.tagName]").map(&:downcase)
-        end
-      end
-    end
-
-    test "CA-7 — on a #{device}, « PC » and « HG » in the grid, their full name for screen readers" do
-      level = @classroom.level
-      %w[Mathématiques Physique-Chimie Français Histoire-Géographie EDHC Philosophie].each do |name|
-        create_course(material: create_material(name:, category: "literature"), level:)
-      end
-      sign_in_as @student
-
-      with_mobile_viewport(size) do
-        visit student_home_path
-
-        within("nav#student_home_subject_bubbles") do
-          { "physique-chimie" => [ "PC", "Physique-Chimie" ], "histoire-geographie" => [ "HG", "Histoire-Géographie" ] }
-            .each do |slug, (short, full)|
-            within("a#subject_#{slug}[title='#{full}']") do
-              assert_selector "span[aria-hidden=true]", exact_text: short
-              assert_selector "span.sr-only", exact_text: full, visible: :all
-              assert_no_selector "span:not(.sr-only)", exact_text: full
-            end
-          end
-        end
-        assert_equal device == "phone" ? 4 : 6, grid_columns("#student_home_subject_bubbles ul")
-      end
-    end
-
-    test "CA-4 — on a #{device}, the avatar without a photo says « KA » with its « + », the same colour at every visit" do
-      student = create_student(classroom: @classroom, first_name: "Koné", last_name: "Awa")
-      sign_in_as student
-
-      with_mobile_viewport(size) do
-        visit student_home_path
-        avatar = find("header .ui-avatar", text: "KA")
-        assert avatar.find(:xpath, "..").has_selector?("[aria-hidden=true]", text: "+", visible: :all)
-        tone = avatar[:class]
-
-        visit student_home_path
-
-        assert_equal tone, find("header .ui-avatar", text: "KA")[:class]
-      end
+      track = find("#student_home_announcements ul")
+      cards = all("#student_home_announcements li").map { it.rect }
+      assert_equal 2, cards.count { it.x + it.width <= track.rect.x + track.rect.width + 1 }, "deux annonces visibles"
+      assert_equal "rgb(244, 248, 251)", page.evaluate_script("getComputedStyle(document.querySelector('body > div.fixed.bg-mist')).backgroundColor")
+      assert_equal "rgb(255, 255, 255)", page.evaluate_script("getComputedStyle(document.querySelector('#student_next_step')).backgroundColor")
+      assert_equal page.evaluate_script("document.documentElement.clientWidth"),
+                   page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
     end
   end
 end

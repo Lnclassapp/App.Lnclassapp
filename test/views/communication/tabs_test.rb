@@ -21,6 +21,7 @@ module Communication
     end
 
     test "l'enseignant : Reçues puis Mes annonces" do
+      pilot_flags!(teacher_announcements_enabled: true)
       tabs(role: :teacher, current: :received)
 
       assert_tabs [ [ :received, announcements_path ], [ :mine, my_announcements_path ] ], current: :received
@@ -39,7 +40,14 @@ module Communication
       assert_tabs [ [ :mine, my_announcements_path ], [ :all, moderated_announcements_path ] ], current: :mine
     end
 
+    test "pilote : sans annonces écrites par l'enseignant, aucun onglet pour lui" do
+      tabs(role: :teacher, current: :received)
+
+      assert_select "nav#announcement-tabs", 0
+    end
+
     test "chaque onglet est une cible de 48 px, au focus visible, qui ne passe pas à la ligne" do
+      pilot_flags!(teacher_announcements_enabled: true)
       tabs(role: :teacher, current: :mine)
 
       assert_select "nav#announcement-tabs.scrollbar-none.mb-5.flex.gap-1.overflow-x-auto.border-b.border-line"

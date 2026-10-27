@@ -1,0 +1,38 @@
+<%# 🌐 UI · catalog/courses/_teacher_header — en-tête du Cours de l'enseignant, hors du frame « courses » %>
+<%# Rôle : « ‹ Accueil », titre « Cours de Tle D », recherche (niveau, série et matière en champs cachés), puces de matière du bivalent %>
+<%# ADR  : 0103 · UDR : XXXX écrans enseignant sans répétition §3.7, 0126 §3.1 (amendé) %>
+<%# locals: (title:, teacher:) -%>
+<% active = teacher_material %>
+<%= ui_back_link t(".back"), href: teacher_home_path %>
+<h1 class="mb-4 font-display text-lg font-medium text-balance text-ink"><%= title %></h1>
+<%# Un seul champ, pleine largeur, cherché pendant la frappe ; « Filtrer » sert sans JavaScript. Le niveau, la série et la
+    matière suivent la recherche dans l'adresse. %>
+<%= form_with url: courses_path, method: :get, id: "courses-filters", html: { role: "search", "aria-label": t("catalog.courses.index.filters.label") },
+              data: { turbo_frame: "courses", turbo_action: "advance", controller: "search" }, class: "mb-4 flex items-center gap-3" do %>
+  <% @filters.slice(:level, :series, :material).compact_blank.each do |name, value| %>
+    <%= hidden_field_tag name, value, id: nil %>
+  <% end %>
+  <div class="relative min-w-0 flex-1">
+    <%= label_tag :q, t("catalog.courses.index.filters.search"), class: "sr-only" %>
+    <%= ui_icon "magnifying-glass", class: "pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-mute" %>
+    <%= search_field_tag :q, @filters[:q], id: "q", placeholder: t("catalog.courses.index.filters.search"), autocomplete: "off",
+                                           data: { action: "search#queue" },
+                                           class: "block min-h-tap w-full rounded-full border border-line bg-white py-3 pr-4 pl-12 text-base text-ink shadow-card placeholder:text-mute focus:border-brand focus:outline-2 focus:outline-brand" %>
+  </div>
+  <div data-search-target="button">
+    <%= ui_button t("catalog.courses.index.filters.submit"), type: :submit, icon: "funnel" %>
+  </div>
+  <template data-search-target="error"><%= ui_error_state retry_href: "#" %></template>
+<% end %>
+<%# Les matières de l'établissement courant seulement, une à la fois ; la première est active ; pas de puces avec une seule. %>
+<% if teacher.several_materials? %>
+  <nav id="courses_material_chips" aria-label="<%= t(".chips_label") %>" class="mb-4 flex flex-wrap gap-2">
+    <% teacher.materials.each do |one| %>
+      <% current = one.slug == active&.slug %>
+      <%= link_to (one.shortname.presence || one.name), courses_path(**@filters.slice(:level, :series).compact_blank, material: one.slug),
+                  "aria-current": (true if current),
+                  class: class_names("inline-flex min-h-tap items-center rounded-full border px-4 text-sm font-medium focus-visible:outline-2 focus-visible:outline-brand",
+                                     "border-brand-soft bg-brand-soft text-brand-strong" => current, "border-line bg-white text-ink" => !current) %>
+    <% end %>
+  </nav>
+<% end %>

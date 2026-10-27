@@ -4,8 +4,6 @@ require "application_system_test_case"
 # teacher of two schools lists them, the current one checked; touching the other moves the whole space there. On a
 # computer, the direction's link of a third school, opened signed in, asks to join it, and one click attaches it.
 class School::SeveralSchoolsTest < ApplicationSystemTestCase
-  TRIGGER = "header a[aria-controls=account_panel]".freeze
-
   setup do
     @a = create_school(name: "Lycée moderne d'Abobo")
     @b = create_school(name: "Collège Saint-Michel")
@@ -23,18 +21,18 @@ class School::SeveralSchoolsTest < ApplicationSystemTestCase
 
     with_mobile_viewport do
       visit teacher_home_path
-      assert_selector "main", text: "6ème 1"
-      assert_no_selector "main", text: "4ème 2"
+      assert_selector "main", text: /6ème 1/i # l'en-tête de la carte est en capitales
+      assert_no_selector "main", text: /4ème 2/i
 
-      find(TRIGGER).click
-      within("dialog#account_panel[open] #account_schools") do
+      find("header.teacher-band a[href='#{teacher_menu_path}']").click
+      within("#teacher_menu #account_schools") do
         assert_selector "button[aria-current=true][disabled]", text: "Lycée moderne d'Abobo"
         find("button[aria-label=\"#{tn("switch", school: "Collège Saint-Michel")}\"]").click
       end
 
       assert_toast I18n.t("school.current_schools.update.done", school: "Collège Saint-Michel")
-      assert_selector "main", text: "4ème 2"
-      assert_no_selector "main", text: "6ème 1"
+      assert_selector "main", text: /4ème 2/i
+      assert_no_selector "main", text: /6ème 1/i
       assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
     end
   end

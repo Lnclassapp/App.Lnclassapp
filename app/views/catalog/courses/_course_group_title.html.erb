@@ -9,7 +9,7 @@
     <span class="<%= class_names("grid size-10 shrink-0 place-items-center rounded-full", illustration.tint) %>">
       <%= image_tag illustration.path, alt: "", class: "size-7", "aria-hidden": true, loading: "lazy" %>
     </span>
-    <span class="min-w-0 flex-1 truncate font-display text-lg leading-tight font-extrabold"><%= course.material_name %></span>
+    <span class="min-w-0 flex-1 truncate font-display text-lg leading-tight font-medium"><%= course.material_name %></span>
     <span class="shrink-0 text-sm text-mute"><%= t(".count", count:) %></span>
     <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "text-mute transition group-hover:translate-x-0.5" %>
   <% end %>

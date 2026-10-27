@@ -232,7 +232,7 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
   def ft(key, **) = I18n.t("classroom.classroom_students.#{key}", **)
   def show_file(student = @koffi, classroom: @classroom) = get(classroom_student_path(classroom.public_id, student.public_id))
 
-  test "CL-13 : l'enseignant ouvre la fiche de Koffi : en-tête, chiffres, badges, exercices, fait seul, gérer" do
+  test "CL-13 : l'enseignant ouvre la fiche de Koffi : en-tête, chiffres, moyenne et badges, exercices, fait seul, gérer" do
     @koffi.update!(contact: "0712345604")
     svt = create_material(name: "SVT", category: "science")
     exercise = create_exercise(essential: create_essential(course: create_course(material: svt)), title: "La méiose")
@@ -249,16 +249,23 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     assert_select "title", text: /#{ft('show.title', name: 'Koffi Yao', classroom: '3e 2')}/
     assert_select "a[href='#{classroom_path(@classroom.public_id)}']", text: /3e 2/
     assert_select "h1", count: 1, text: "Koffi Yao"
-    assert_select "#student_file_identity", text: /07 •• •• •• 04/
+    # CA-I3 (UDR enseignant §3.6) : « Numéro 07 •• •• •• 04 · Arrivé·e le <date> » ; la classe n'est pas répétée.
+    joined = I18n.l(membership(@koffi).joined_at.to_date, format: :arrived)
+    assert_select "#student_file_identity p", text: /Numéro 07 •• •• •• 04.*· Arrivé·e le #{Regexp.escape(joined)}/
+    assert_select "#student_file_identity", text: /3e 2/, count: 0
     assert_no_match(/0712345604/, response.body)
-    assert_select "dl#student_file_counts[aria-label=?]", ft("summary.counts_label") do
-      assert_select "div", text: /#{ft('summary.done')}\s+1\s+#{ft('summary.done_of', count: 2)}/
-      assert_select "div", text: /#{ft('summary.pending')}\s+1/
-      assert_select "dt", text: ft("summary.late"), count: 0
+    # « 1 fait sur 2 », « Moyenne 18/20 · Or » (90 % : Or), puis les badges obtenus, nommés et comptés, zéro caché.
+    assert_select "#student_file_summary" do
+      assert_select "#student_file_counts", text: ft("summary.done_of", count: 1, assigned: 2)
+      assert_select "#student_file_average", text: ft("summary.average", grade: 18, badge: "Or")
+      assert_select "ul[aria-label=?]", ft("summary.badges_label") do
+        assert_select "li", 2
+        assert_select "li", text: /Or\s+1/
+      end
     end
-    assert_select "#student_file_summary ul[aria-label]"
+    assert_no_match(/Fragile|Acquis|En progrès|Pas encore lisible/, response.body)
     assert_select "section#student_file_assignments[aria-labelledby=student_file_assignments_title]" do
-      assert_select "li#assignment_#{assignment.public_id}", text: /90\u00A0%/
+      assert_select "li#assignment_#{assignment.public_id}", text: /18\/20/
       assert_select "li#assignment_#{assignment.public_id} a[href='#{classroom_assignment_path(@classroom.public_id, assignment.public_id)}']",
                     text: "La méiose"
       assert_select "li#assignment_#{assignment.public_id} a[href='#{exercise_session_result_path(best.public_id)}']",
@@ -276,8 +283,30 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     end
   end
 
-  # ADR-0097 §4.3, PRD Lot A scénario 2 : une échéance passée se lit, rendu en retard ou pas encore fait, jamais en couleur seule.
-  test "CL-13 : rendu en retard et échéance passée : la date du rendu, « Pas encore fait », la colonne « En retard »" do
+  test "CA-I3 : les badges obtenus par exercice, nommés et comptés (« Bronze 2 », « Argent 1 »), sans les paliers à zéro" do
+    scores = [ 55, 60, 75 ]
+    scores.each_with_index do |score, index|
+      exercise = create_exercise(title: "Exercice #{index}")
+      assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher)
+      create_exercise_session(student: @koffi, exercise:, status: "completed", score_percent: score, classroom_assignment: assignment)
+    end
+    sign_in_as @teacher
+
+    show_file
+
+    assert_select "#student_file_summary ul[aria-label] li", 3
+    assert_select "#student_file_summary ul[aria-label] li", text: /Bronze\s+2/
+    assert_select "#student_file_summary ul[aria-label] li", text: /Argent\s+1/
+    # (55 + 60 + 75) / 3 = 63 % : 13 sur 20, Bronze.
+    assert_select "#student_file_average", text: ft("summary.average", grade: 13, badge: "Bronze")
+    assert_select "#student_file_counts", text: ft("summary.done_of", count: 3, assigned: 3)
+    assert_select "#student_file_summary .ui-badge", text: /en retard/, count: 0
+    assert_select "#student_file_summary", text: /en retard/, count: 0
+  end
+
+  # PRD CA-I3, ADR-0097 §4.3 : une échéance passée se lit, rendu en retard ou pas encore fait, jamais en couleur seule ;
+  # « en retard » = pas fait et échu (comme le rapport) : la pastille « 1 en retard » de l'en-tête.
+  test "CL-13 : rendu en retard et échéance passée : la date du rendu, « En retard » sur l'exercice échu, « 1 en retard » en tête" do
     due_on = Time.zone.today - 3
     assign = ->(title) { create_assignment(classroom: @classroom, assignable: create_exercise(title:), by: @teacher, due_on:,
                                            assigned_at: (due_on - 1).in_time_zone.change(hour: 8)) }
@@ -289,17 +318,32 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
 
     show_file
 
-    assert_select "dl#student_file_counts" do
-      assert_select "div", text: /#{ft('summary.late')}\s+1/
+    assert_select "#student_file_summary" do
+      assert_select "#student_file_counts", text: /#{ft('summary.done_of', count: 1, assigned: 2)}/
+      assert_select "#student_file_counts .ui-badge", text: ft("summary.late", count: 1)
     end
     assert_select "li#assignment_#{late.public_id}", text: /#{ft('assignments.late_on', date: I18n.l(1.day.ago.to_date, format: :due_short))}/
     assert_select "li#assignment_#{late.public_id}", text: /#{ft('assignments.sessions', count: 1)}/
-    assert_select "li#assignment_#{overdue.public_id}", text: /#{ft('assignments.overdue')}/
+    assert_select "li#assignment_#{overdue.public_id} .ui-badge", text: ft("assignments.overdue")
     assert_select "li#assignment_#{overdue.public_id} span.font-medium.text-warning", 1
     assert_select "li#assignment_#{late.public_id} span.font-medium.text-warning", 0
+    assert_select "li#assignment_#{late.public_id} *", text: ft("assignments.overdue"), count: 0
   end
 
-  test "CL-13 : sans exercice assigné ni fait seul, deux états vides et les badges à zéro" do
+  test "CA-I3 : trois exercices visibles, puis « Voir plus » qui révèle la suite" do
+    4.times { |index| create_assignment(classroom: @classroom, assignable: create_exercise(title: "Exercice #{index}"), by: @teacher) }
+    sign_in_as @teacher
+
+    show_file
+
+    assert_select "section#student_file_assignments[data-controller=reveal]" do
+      assert_select "li[id^='assignment_'][data-reveal-target=item]", 4
+      assert_select "li[id^='assignment_'][hidden]", 1
+      assert_select "button[data-reveal-target=button]", text: /Voir plus/
+    end
+  end
+
+  test "CL-13 : sans exercice assigné ni fait seul, deux états vides, ni chiffres ni badges" do
     sign_in_as @teacher
 
     show_file
@@ -307,7 +351,7 @@ class Classroom::ClassroomStudentsControllerTest < ActionDispatch::IntegrationTe
     assert_response :success
     assert_select "#student_file_assignments", text: /#{Regexp.escape(ft('assignments.empty.title'))}/
     assert_select "#student_file_self_practice", text: /#{Regexp.escape(ft('self_practice.empty', days: 30))}/
-    assert_select "#student_file_summary li span.text-line", text: "0", count: 4
+    assert_select "#student_file_summary", 0
   end
 
   test "UDR-0107 §3.6 : sans JavaScript, ?remove=1 sert la fiche avec la confirmation ouverte" do

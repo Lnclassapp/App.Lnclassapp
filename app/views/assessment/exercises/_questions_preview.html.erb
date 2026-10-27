@@ -5,7 +5,7 @@
                 class: ("rounded-card border border-line bg-white p-5 shadow-card sm:p-6" if student),
                 data: (ui_reveal_data(step: 3) if student) do %>
   <div class="mb-4">
-    <h2 id="exercise_questions_title" class="font-display text-xl font-extrabold">
+    <h2 id="exercise_questions_title" class="font-display text-xl font-medium">
       <%= t(".title") %><% if student %><%= ui_info_tip t(".student_hint"), label: t(".title") %><% end %>
     </h2>
     <% unless student %>
@@ -22,7 +22,7 @@
         <li class="question <%= student ? "py-4 first:pt-0" : "rounded-card border border-line bg-white p-4 shadow-card sm:p-5" %>"
             <%= tag.attributes(ui_reveal_item(index)) if student %>>
           <div class="flex gap-3">
-            <span class="grid size-7 shrink-0 place-items-center rounded-full bg-brand-soft text-sm font-bold text-brand-strong tabular-nums"
+            <span class="grid size-7 shrink-0 place-items-center rounded-full bg-brand-soft text-sm font-medium text-brand-strong tabular-nums"
                   aria-hidden="true"><%= question.position %></span>
             <div class="min-w-0 flex-1">
               <p class="sr-only"><%= t(".question", position: question.position) %></p>
@@ -39,7 +39,7 @@
                       </li>
                     <% else %>
                       <li <%= tag.attributes(id: ("answer_#{answer.id}" if reveal)) %> class="answer flex items-start gap-2 text-sm <%= reveal ? "rounded-ln bg-mist px-3 py-2 text-mute" : "text-ink" %>">
-                        <span class="shrink-0 font-bold" aria-hidden="true"><%= ("A".ord + index).chr %>.</span>
+                        <span class="shrink-0 font-medium" aria-hidden="true"><%= ("A".ord + index).chr %>.</span>
                         <span class="min-w-0 flex-1"><%= answer.content %></span>
                       </li>
                     <% end %>
@@ -54,7 +54,7 @@
               <% if reveal && question.explanation.present? %>
                 <div class="mt-4 flex gap-2 rounded-ln bg-info-soft px-3 py-2 text-sm text-ink">
                   <%= ui_icon "light-bulb", variant: :mini, class: "mt-0.5 text-info" %>
-                  <p class="min-w-0 flex-1 whitespace-pre-line"><strong class="font-semibold"><%= t(".explanation") %></strong> <%= question.explanation %></p>
+                  <p class="min-w-0 flex-1 whitespace-pre-line"><strong class="font-medium"><%= t(".explanation") %></strong> <%= question.explanation %></p>
                 </div>
               <% end %>
             </div>

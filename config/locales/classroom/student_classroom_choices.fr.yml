@@ -1,5 +1,6 @@
 # « Choisis ta classe » : l'élève sans classe active (classe archivée, ou retiré) choisit la sienne par la cascade de l'inscription — ADR-0040, ADR-0085, UDR-0081 (§3.4, §3.5)
 # « Changer de classe » (ADR-0095, UDR-0102) partage ces refus et marque la classe actuelle dans la cascade.
+# Le code de classe (ADR code-de-classe-a-six-caracteres) : son refus « inconnu » est ici, commun à l'inscription et à « Choisis ta classe ».
 fr:
   activemodel:
     errors:
@@ -15,6 +16,9 @@ fr:
               no_active_classroom: "Tu n'as pas de classe à quitter. Choisis ta classe."
               # Course entre deux classes (deux onglets) : rien n'a changé, l'élève réessaie.
               change_conflict: "Ton changement n'a pas pu se faire. Réessaie."
+            join_code:
+              # ADR code-de-classe §4.4 : même texte pour un code inexistant, mal tapé ou d'une classe archivée (CA-B3).
+              unknown: "Ce code ne correspond à aucune classe. Vérifie-le avec ton enseignant."
   classroom:
     student_registrations:
       class_picker:

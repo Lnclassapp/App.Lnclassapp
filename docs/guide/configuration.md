@@ -47,6 +47,8 @@ Deux variables apparaissent dans l'aide de l'outil mais **ne sont pas câblées*
 |---|---|
 | `APP_HOSTS` | Domaines personnalisés autorisés, séparés par des virgules |
 | `CANONICAL_HOST` | Hôte des adresses partagées et indexées du blog : lien `canonical`, `og:url`, `og:image`, `/sitemap.xml` et ligne `Sitemap:` de `/robots.txt` (`config.x.canonical_host`, ADR-0074 §4.6). `lnclass.com` par défaut ; `www.lnclass.com` pour l'autre choix. **Doit aussi figurer dans `APP_HOSTS`**, sinon les adresses partagées répondent 403 ; le démarrage de production le signale alors dans le journal (`[config] WARNING: CANONICAL_HOST … is not in config.hosts`). En changer après indexation demande une nouvelle indexation. **Staging** : `app-staging.lnclass.com` ; **Develop** : `app-develop.lnclass.com` (ADR-0074, amendement du 2026-10-07). L'indexation ne dépend pas de cette variable : hors des hôtes `lnclass.com` et `www.lnclass.com`, `/robots.txt` interdit tout robot et chaque réponse porte `X-Robots-Tag: noindex, nofollow` |
+| `SCHOOL_SPACE_ENABLED` | Drapeau du pilote : le lien et la fenêtre « Espace établissement » de la page d'accueil publique (`Rails.configuration.x.pilot_flags[:school_space_enabled]`, `config/initializers/pilot_flags.rb`, chantier mvp-teacher-student, CA-A2). **Éteint par défaut**, jusqu'au 2 novembre ; `true`, `1`, `on` ou `yes` l'allume, toute autre valeur ou l'absence de la variable le laisse éteint |
+| `TEACHER_ANNOUNCEMENTS_ENABLED` | Drapeau du pilote : l'enseignant rédige des annonces (« Mes annonces », le formulaire ; `Rails.configuration.x.pilot_flags[:teacher_announcements_enabled]`, chantier mvp-teacher-student, décision du 2026-10-24). **Éteint par défaut** : l'enseignant lit « Reçues » sans onglets, « Mes annonces » et le formulaire le renvoient à « Reçues » ; mêmes valeurs que `SCHOOL_SPACE_ENABLED` pour l'allumer |
 | `ANDROID_PACKAGE_NAME` | Identifiant de l'app Android déclaré dans `/.well-known/assetlinks.json` (`config.x.android`, ADR-0084 §4.7). `com.lnclass.student` par défaut (production) ; **Staging** : `com.lnclass.student.recette` ; **Develop** : `com.lnclass.student.develop` |
 | `ANDROID_TEACHER_PACKAGE_NAME` | Identifiant de l'app « Lnclass Teacher » déclaré dans `/.well-known/assetlinks.json` (ADR-0086 §4.7). `com.lnclass.teacher` par défaut (production) ; **Staging** : `com.lnclass.teacher.recette` ; **Develop** : `com.lnclass.teacher.develop` |
 | `ANDROID_STUDENT_STORE_URL`, `ANDROID_TEACHER_STORE_URL` | Fiches Play Store des deux apps (ADR-0086 §4.5) : le refus de l'autre app y envoie. Vides tant que les apps ne sont pas publiées : le refus mène au site |
@@ -60,13 +62,35 @@ Deux variables apparaissent dans l'aide de l'outil mais **ne sont pas câblées*
 |---|---|
 | `TEAM_BOOTSTRAP_CONTACT` | Numéro du premier membre de l'équipe (ADR-0034, ADR-0038). Tant qu'aucun compte équipe n'existe, chaque déploiement révoque l'invitation ouverte et imprime **un** nouveau lien dans les logs du pré-déploiement. Absente : aucune invitation |
 
-La commande de pré-déploiement est `bin/rails db:prepare db:seed` (`railway.json` et réglage « Pre-deploy Command » du service, ADR-0052). En production, `db:prepare` ne sème jamais (`seeds: false` dans `config/database.yml`) : sans cela, sur une base neuve, il semait avant que `db:seed` ne sème à nouveau, et deux liens s'imprimaient par déploiement (amendement du 2026-09-29).
+La commande de pré-déploiement est `bin/rails db:prepare db:seed` (`.railway/railway.ts` et réglage « Pre-deploy Command » du service, ADR-0052). En production, `db:prepare` ne sème jamais (`seeds: false` dans `config/database.yml`) : sans cela, sur une base neuve, il semait avant que `db:seed` ne sème à nouveau, et deux liens s'imprimaient par déploiement (amendement du 2026-09-29).
 
 ### Déploiement automatique
 
 Chaque environnement Railway déploie seul la branche qu'il suit : Develop ← `Develop`, Staging ← `Staging`, production ← `main`. Après un merge, un déploiement doit apparaître dans la minute. Sinon, lancer « Deploy latest commit » au tableau de bord, puis reconnecter la source : *Settings › Source*, déconnecter puis reconnecter le dépôt sur la même branche.
 
 **Les réglages d'un service de Staging ou de production (région, source, répertoire racine) se changent au tableau de bord, jamais par l'API ni par un agent** : une modification validée par l'API réécrit les déclencheurs GitHub du service sans autorisation GitHub, et les merges ne déploient plus (journal de `politique-cache`, 2026-10-07).
+
+### Environnements de PR (Railway)
+
+Variables posées **sur Develop**, non scellées, que Railway copie dans l'environnement de chaque PR. Staging et production ne les portent pas : rien n'y change (ADR-0108).
+
+| Variable | Rôle | Si absente |
+|---|---|---|
+| `PR_BASE_ENVIRONMENT` | Nom de l'environnement dont les PR héritent : `Develop`. Un environnement dont `RAILWAY_ENVIRONMENT_NAME` diffère de cette valeur est un environnement de PR (`PrEnvironment.active?`, `config/pr_environment.rb`) | Aucun environnement de PR : ni mot de passe, ni adaptateur `async`, le worker Solid Queue tourne dans Puma comme avant (ADR-0052) |
+| `PR_ACCESS_PASSWORD` | Mot de passe commun (Basic HTTP, identifiant libre) qui ferme toute page d'un environnement de PR, avant le routeur. Seul `/up` reste libre, pour le contrôle de santé de Railway | **Tout est refusé (401) dans l'environnement de PR**, sauf `/up` : un oubli ferme l'accès. Sans effet hors environnement de PR. Le changer sur Develop ne vaut que pour les PR (re)déployées ensuite |
+
+Dans un environnement de PR, les tâches de fond s'exécutent dans le processus web (Active Job `async`) et les tâches planifiées ne tournent pas.
+
+Au démarrage, un environnement de PR l'écrit dans le journal (`[config] PR environment (base …, name …)`), avec un avertissement si `PR_ACCESS_PASSWORD` manque.
+
+**Renommer ou dupliquer Develop** : la comparaison tient compte de la casse. Develop renommé garde la variable à son nouveau nom ; une copie durable de Develop (recette, démo) perd la variable, sinon elle devient « environnement de PR » : mot de passe, et comptes de test au PIN connu semés dans sa base (ADR-0108 §5).
+
+**Réglages Railway, au tableau de bord (hors dépôt, tenus par le porteur) :**
+
+1. *Project Settings › Environments* : PR Environments activés, base `Develop` ; **Bot PR Environments activés** (Railway compte comme PR de robot une PR ouverte par Claude, même au nom du porteur : sans ce réglage, son environnement est créé vide, sans service) ; Focused PR Environments désactivés.
+2. Variables de Develop : `PR_BASE_ENVIRONMENT=Develop` et `PR_ACCESS_PASSWORD=<mot de passe choisi>`, non scellées. Vérifier qu'aucune variable indispensable n'est scellée (`RAILS_MASTER_KEY`, `DATABASE_URL`, `BUCKET_*`) : elle manquerait dans les PR.
+3. *Service web de Develop › Settings › Deploy › Serverless* : activé. Les PR en héritent ; Develop reste éveillé grâce à son worker.
+4. Après la fusion du chantier : ouvrir une PR d'essai, constater les données, le mot de passe et la veille, et vérifier dans le journal que le stockage de fichiers de la PR n'est pas celui de Develop.
 
 ### Facultatives — réglage de charge
 

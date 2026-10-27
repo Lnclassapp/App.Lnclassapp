@@ -1,42 +1,38 @@
 <%# 🌐 UI · shared/navigation/_sidebar — navigation bureau (lg et plus) %>
-<%# Rôle : carte de profil, destinations du rôle (les mêmes que la barre basse), 2e carte « Configuration » et frames différés du rôle %>
-<%# UDR  : 0006, 0068 (§3.2), 0069 (§3.6), 0084 (§3.4) · ADR : 0076 (§4.2) %>
+<%# Rôle : carte de profil (pas pour l'élève), destinations du rôle dans une carte blanche, 2e carte « Configuration » %>
+<%# UDR  : 0006, 0068 (§3.2), 0069 (§3.6), 0084 (§3.4), XXXX accueil élève §3.1 (ordinateur : sans carte de profil), XXXX écrans enseignant §3.14 (bloc de profil en tête, entrée active bleue) · ADR : 0076 (§4.2) %>
 <% secondary = secondary_navigation_for(user.role) %>
+<% student = user.role.to_sym == :student %>
+<% teacher = user.role.to_sym == :teacher %>
+<% style = teacher ? :sidebar_teacher : :sidebar %>
 <aside class="fixed top-bar bottom-0 left-0 hidden w-rail overflow-y-auto border-r border-line bg-paper p-4 lg:block">
-  <div class="flex items-center gap-3 rounded-card border border-line bg-white p-4 shadow-card">
-    <%# UDR-0084 §3.4 : l'élève sans photo a la même couleur qu'à l'avatar de l'en-tête (graine public_id) ; les autres rôles inchangés. %>
-    <%= ui_avatar user.name, src: user.avatar_url, tone_seed: (user.public_id if user.role.to_sym == :student) %>
-    <div class="min-w-0">
-      <p class="truncate font-semibold"><%= user.name %></p>
-      <% if user.detail %><p class="line-clamp-2 text-xs text-mute"><%= user.detail %></p><% end %>
+  <%# UDR élève §3.1 : l'élève n'a pas de carte de profil (son avatar est dans l'en-tête) ; la navigation est sa première carte. %>
+  <% unless student %>
+    <div class="flex items-center gap-3 rounded-card border border-line bg-white p-4 shadow-card">
+      <%= ui_avatar user.name, src: user.avatar_url %>
+      <div class="min-w-0">
+        <p class="truncate font-medium"><%= user.name %></p>
+        <%# UDR enseignant §3.14 : « Maths · PC · sigle », le texte de l'en-tête de « Mon compte » ; ce bloc n'est pas un lien. %>
+        <% detail = teacher ? teacher_detail(user) : user.detail %>
+        <% if detail.present? %><p class="line-clamp-2 text-xs text-mute"><%= detail %></p><% end %>
+      </div>
     </div>
-  </div>
-  <nav aria-label="<%= t(".label") %>" class="mt-4 rounded-card border border-line bg-white p-2 shadow-card">
+  <% end %>
+  <nav aria-label="<%= t(".label") %>" class="<%= class_names("rounded-card border border-line bg-white p-2 shadow-card", "mt-4" => !student) %>">
     <ul class="space-y-1">
       <% navigation_for(user.role).each do |destination| %>
-        <li><%= nav_link destination, style: :sidebar %></li>
+        <li><%= nav_link destination, style: %></li>
       <% end %>
     </ul>
   </nav>
   <% if secondary.any? %>
     <nav id="sidebar_secondary" aria-labelledby="sidebar_secondary_title" class="mt-4 rounded-card border border-line bg-white p-2 shadow-card">
-      <p id="sidebar_secondary_title" class="px-4 pt-2 pb-1 text-xs font-semibold tracking-wider text-mute uppercase"><%= t(".secondary_label.#{user.role}") %></p>
+      <p id="sidebar_secondary_title" class="px-4 pt-2 pb-1 text-xs font-medium tracking-wider text-mute uppercase"><%= t(".secondary_label.#{user.role}") %></p>
       <ul class="space-y-1">
         <% secondary.each do |destination| %>
           <li><%= nav_link destination, style: :sidebar %></li>
         <% end %>
       </ul>
     </nav>
-  <% end %>
-  <%# Différé : la barre latérale est masquée sous lg, le frame n'y est donc jamais demandé (UDR-0069 §3.6). Permanent : une
-      visite Turbo le garde chargé ; la page qui a déjà ses données le fournit (content_for de même id, ADR-0076 §4.2). %>
-  <% sidebar_frames_for(user.role).each do |id, src| %>
-    <% if content_for?(id.to_sym) %>
-      <%= content_for(id.to_sym) %>
-    <% else %>
-      <%= turbo_frame_tag id, src:, loading: :lazy, **NavigationHelper::SIDEBAR_FRAME_OPTIONS do %>
-        <%= ui_loading_state variant: :skeleton %>
-      <% end %>
-    <% end %>
   <% end %>
 </aside>

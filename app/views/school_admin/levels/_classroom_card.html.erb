@@ -16,7 +16,7 @@
                    "aria-hidden": true) if signal %>
     </span>
     <div class="min-w-0">
-      <p class="truncate font-display text-lg font-extrabold text-ink"><%= classroom.name %></p>
+      <p class="truncate font-display text-lg font-medium text-ink"><%= classroom.name %></p>
       <%= tag.span(t("school_admin.signals.#{signal}.label"), class: "sr-only") if signal %>
       <%= ui_badge t(".archived"), size: :sm if classroom.archived? %>
     </div>

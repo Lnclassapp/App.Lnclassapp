@@ -19,8 +19,8 @@ class Classroom::StudentArchivesControllerTest < ActionDispatch::IntegrationTest
     sign_in_as @student
     follow_redirect!
     assert_equal student_home_path, path
-    assert_select "#student_home_no_classroom" do
-      assert_select "a[href='#{new_student_classroom_choice_path}']", text: "Choisir ma classe"
+    assert_select "#student_next_step[data-state=no_classroom]" do
+      assert_select "a[href='#{new_student_classroom_choice_path}']", text: "Je n'ai pas de code"
       assert_select "a[href='#{student_archive_path}']", text: "Voir mon historique"
     end
 

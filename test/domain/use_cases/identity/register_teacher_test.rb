@@ -224,24 +224,14 @@ module UseCases
         assert_empty @invite_links.lookups, "sans jeton, aucun lien n'est cherché"
       end
 
-      test "EPM-02: a second subject is kept after the first, in the school of the attachment (ADR-0103 §4.4)" do
-        result = register(material_slug: "physique-chimie", second_material_slug: "svt")
+      # CA-J3 (UDR « écrans enseignant sans répétition » §3.9, ADR-0103 §4.4 amendé) : une seule matière à l'inscription.
+      test "CA-J3: the sign-up keeps one subject; « Autre matière » is neither in the DTO nor in the use case" do
+        result = register(material_slug: "physique-chimie")
 
         assert result.success?
-        assert_equal [ :user, "0501020304", "teacher", "standard" ], @journal[0]
-        assert_includes @journal, [ :materials, 41, 31, [ 6, 5 ], NOW ]
-      end
-
-      test "EPM-03: the same subject twice is kept once, without error" do
-        assert register(second_material_slug: "svt").success?
-        assert_includes @journal, [ :materials, 41, 31, [ 5 ], NOW ]
-      end
-
-      test "EPM-03: an unknown second subject is refused on its field, nothing is written" do
-        result = register(second_material_slug: "latin")
-
-        assert_equal [ :invalid, { second_material_slug: [ :inclusion ] } ], [ result.code, result.errors ]
-        assert_empty @journal
+        assert_includes @journal, [ :materials, 41, 31, [ 6 ], NOW ]
+        assert_not_includes Dtos::Identity::TeacherRegistrationInput.attribute_names, "second_material_slug"
+        assert_not_respond_to Dtos::Identity::TeacherRegistrationInput.new, :second_material_slug
       end
 
       test "IE-01: no join request is written: the use case has no join request port at all" do

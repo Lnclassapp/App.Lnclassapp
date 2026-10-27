@@ -34,15 +34,15 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
   test "the student whose only classroom is archived sees « Choisis ta classe », no exercise and no classroom name" do
     sign_in_as @student
     get student_home_path
-    assert_select "#student_home_classroom", text: /Tle D 1/
-    assert_select "#student_home_exercises"
+    assert_select "#student_next_step[data-state=due]", text: /Tle D 1/
+    assert_select "#student_next_step_title", text: "Méiose, les étapes"
 
     archive!
     get student_home_path
 
     assert_response :success
-    assert_select "#student_home_no_classroom", text: /#{Regexp.escape(tl("student_homes.no_classroom.title"))}/
-    assert_select "#student_home_classroom, #student_home_exercises", 0
+    assert_select "#student_next_step[data-state=no_classroom]", text: /#{Regexp.escape(tl("student_homes.no_classroom.title"))}/
+    assert_select "#student_subjects, #student_history", 0
     assert_no_match "Tle D 1", response.body
     assert_no_match "Méiose, les étapes", response.body
     assert_equal [ true, nil ], [ Orm::ClassroomStudent.exists?(student: @student, left_at: nil), Queries::Classroom::StudentClassroomQuery.new.call(student_id: @student.id) ]
@@ -58,7 +58,7 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
     get student_home_path
 
     assert_response :success
-    assert_select "#student_home_classroom", text: /Tle D 2/
+    assert_select "#student_next_step", text: /Tle D 2/
     assert_no_match "Tle D 1", response.body
     assert_equal "Tle D 2 · Lycée Classique d'Abidjan", Queries::Identity::ShellUserQuery.new.call(user_id: @student.id).detail
   end
@@ -75,7 +75,7 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_no_match "Tle D 1", response.body
     assert_no_match "Méiose, les étapes", response.body
-    assert_empty Queries::Classroom::TeacherFollowUpsQuery.new.call(teacher_id: @teacher.id, school_id: @school.id)
+    assert_equal [ [], [] ], Queries::Classroom::TeacherFollowUpsQuery.new.call(teacher_id: @teacher.id, school_id: @school.id).to_h.values
     selection = Queries::Classroom::TeachingSelectionQuery.new.call(school_id: @school.id, teacher_id: @teacher.id)
     assert_empty selection.levels.flat_map { |level| level.classrooms.map(&:name) }
     assert_no_difference -> { Orm::ClassroomAssignment.count } do

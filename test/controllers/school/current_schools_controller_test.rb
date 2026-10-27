@@ -25,7 +25,6 @@ class School::CurrentSchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_response :see_other
     follow_redirect!
     assert_select "#toasts", text: /#{Regexp.escape(t("school.current_schools.update.done", school: "Collège Saint-Michel"))}/
-    assert_select "#current_school", text: /Collège Saint-Michel/
     assert_select "#account_schools button[aria-current=true][disabled]", count: 1
     assert_select "#account_schools button[aria-label='#{t('shared.navigation.account_panel.schools.current', school: 'Collège Saint-Michel')}']"
     assert_select "#account_schools button[aria-label=\"#{t('shared.navigation.account_panel.schools.switch', school: "Lycée moderne d'Abobo")}\"]"
@@ -51,7 +50,8 @@ class School::CurrentSchoolsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#account_schools", count: 0
     assert_select "#change_school", count: 0
-    assert_select "a[href='#{teacher_schools_path}']", text: t("shared.navigation.account_panel.schools.link")
+    # mvp-teacher-student (UDR enseignant, Mon compte) : sous trois établissements, l'entrée dit « Ajouter un établissement ».
+    assert_select "a[href='#{teacher_schools_path}']", text: /#{t("shared.navigation.account_panel.entries.add_school")}/
   end
 
   test "a school the teacher does not belong to, or an unknown one, is refused by a toast and nothing changes" do

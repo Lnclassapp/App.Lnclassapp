@@ -37,7 +37,7 @@ class Classroom::StudentArchiveTest < ApplicationSystemTestCase
     with_mobile_viewport do
       sign_in_as @student
       # ADR-0085 §4.3 (Lot F) : sans classe active, l'élève arrive sur son accueil, « Choisis ta classe » et son historique.
-      assert_selector "#student_home_no_classroom", text: t("classroom.student_homes.no_classroom.title"), wait: SIGN_IN_WAIT
+      assert_selector "#student_next_step", text: t("classroom.student_homes.no_classroom.title"), wait: SIGN_IN_WAIT
       assert_single_primary_action
 
       assert_no_page_reload do
@@ -75,7 +75,7 @@ class Classroom::StudentArchiveTest < ApplicationSystemTestCase
   test "at 1 280 px, the finished exercises are on the left and the classrooms on the right, under the blue card" do
     with_mobile_viewport(DESKTOP_VIEWPORT) do
       sign_in_as @student
-      assert_selector "#student_home_no_classroom", wait: SIGN_IN_WAIT
+      assert_selector "#student_next_step", wait: SIGN_IN_WAIT
       visit student_archive_path
 
       summary, results, classrooms = %w[summary results classrooms].map do |part|

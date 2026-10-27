@@ -1,6 +1,6 @@
 # 🌐 UI · Assessment::ComprehensionHelper — couleur, icône et libellé de la compréhension d'un exercice assigné
-# Rôle : seul endroit où une catégorie ou un signe de progrès devient une classe, une icône ou un texte (écrans enseignant)
-# ADR  : 0033, 0079, 0097 (§4.6) · UDR : 0072 (§3.2, §3.3), 0109 (§3.2)
+# Rôle : seul endroit où une catégorie, un signe de progrès ou un badge d'élève devient une classe, une icône ou un texte (écrans enseignant)
+# ADR  : 0033, 0079, 0097 (§4.6) · UDR : 0072 (§3.2, §3.3), 0109 (§3.2), enseignant (§3.8)
 module Assessment
   module ComprehensionHelper
     DOT_CLASSES = { struggling: "bg-struggling", fragile: "bg-fragile", acquired: "bg-success" }.freeze
@@ -47,16 +47,25 @@ module Assessment
       when nil then nil
       when :remind then [ step, { count: pending, min: Entities::Assessment::Comprehension::MIN_DONE_FOR_READING } ]
       when :watch_decline then [ step, { count: decline } ]
+      when :revisit_notion then [ step, { count: comprehension.badge_counts.fetch(:none), target: revisit_target(comprehension, :notion) } ]
+      when :revisit_questions then [ step, { target: revisit_target(comprehension, :questions) } ]
       else [ step, {} ]
       end
     end
+
+    # « la question 3 », la moins réussie de la classe (maquette) ; sans tentative, de quoi dire quand même quoi reprendre.
+    def revisit_target(comprehension, fallback)
+      number = comprehension.weakest_question
+      number ? t("assessment.comprehension.next_step.target.question", number:) : t("assessment.comprehension.next_step.target.#{fallback}")
+    end
+    private :revisit_target
 
     # UDR-0109 §3.1 : le nom d'un élève du suivi mène à sa fiche dans la classe, hors du cadre des catégories (_top). Le suivi
     # d'une classe archivée répond 404 (ADR-0088, PR 251), comme sa fiche : le lien vise toujours une fiche lisible.
     # student : répond à display_name et public_id.
     def comprehension_student_name(student, classroom)
       link_to student.display_name, classroom_student_path(classroom.public_id, student.public_id), data: { turbo_frame: "_top" },
-              class: "min-w-0 truncate font-medium block py-1 text-ink underline-offset-4 hover:underline " \
+              class: "min-w-0 truncate font-normal block py-1 text-ink underline-offset-4 hover:underline " \
                      "focus-visible:outline-2 focus-visible:outline-brand"
     end
 
@@ -64,10 +73,30 @@ module Assessment
       count.zero? ? "text-line" : BADGE_ICON_CLASSES.fetch(level)
     end
 
+    # UDR enseignant §3.8 : une des cinq cases du rapport. badge : :none (« Pas encore ») ou un palier.
+    def comprehension_box_label(badge)
+      badge == :none ? t("assessment.comprehension.badge_none") : badge_label(badge)
+    end
+
+    # UDR enseignant §3.8 : la pastille d'un élève qui a fait l'exercice, « 🏆 16/20 » : le trophée de son badge (aucun sous le
+    # Bronze, « Pas encore ») et sa note sur 20. student : répond à badge (:none ou un palier) et grade.
+    def comprehension_grade_badge(student)
+      level = student.badge unless student.badge == :none
+      parts = [ (comprehension_trophy(comprehension_badge_class(level, 1)) if level),
+                (tag.span(badge_label(level), class: "sr-only") if level),
+                tag.span(t("assessment.badges.grade", grade: student.grade), class: "text-ink tabular-nums") ]
+      ui_badge safe_join(parts.compact, " "), tone: :neutral
+    end
+
+    # La pastille d'un élève qui n'a pas fait l'exercice : « En retard » une fois la date limite passée, sinon rien.
+    def comprehension_late_badge(overdue)
+      ui_badge t("assessment.comprehension.student.late"), tone: :warning, dot: true if overdue
+    end
+
     # Le premier appel d'une page émet aussi le <symbol> ; les suivants ne font que le reprendre.
-    def comprehension_trophy(css_class)
+    def comprehension_trophy(css_class, size: "size-4")
       icon = tag.svg(tag.use(href: "##{TROPHY_SYMBOL_ID}"), viewBox: "0 0 20 20", fill: "currentColor",
-                     class: class_names("size-4 shrink-0", css_class), "aria-hidden": "true", focusable: "false")
+                     class: class_names(size, "shrink-0", css_class), "aria-hidden": "true", focusable: "false")
       return icon if @comprehension_trophy_defined
 
       @comprehension_trophy_defined = true

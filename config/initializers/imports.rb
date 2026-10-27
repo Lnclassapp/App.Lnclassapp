@@ -7,6 +7,7 @@ Rails.application.config.x.import_jobs = {
   "schools" => "School::ImportSchoolsJob",
   "course_tree" => "Catalog::ImportCourseTreeJob",
   "essentials" => "Catalog::ImportEssentialsJob",
+  "course_sheet" => "Catalog::ImportCourseSheetJob",
   "exercises" => "Assessment::ImportExercisesJob",
   "classrooms" => "Classroom::GenerateMissingClassroomsJob",
   "drenas" => "School::ImportDrenasJob",

@@ -3,9 +3,11 @@
 # and prints only what a reader needs: the verdict, the failed steps, the last 30 lines, and the proof line for the PR.
 # Why: the whole output of bin/ci is read by the agent on every run (chantier sobriete-tokens, rule 5).
 #
-#   bin/ci-quiet              the level of the branch; nothing runs when this code already has a green verdict
-#   bin/ci-quiet --full       the whole bin/ci (train), whatever the branch
+#   bin/ci-quiet              the level of the branch; nothing runs when this code already has a green verdict, and
+#                             a step already green for its inputs is not played again (script/ci/scope.rb, Inputs)
+#   bin/ci-quiet --full       the steps of the whole bin/ci (train), whatever the branch
 #   bin/ci-quiet --plan       the level, the tests and the commands, without running anything
+#   rm -r tmp/ci-verdicts     forgets every verdict: the next run plays everything
 #   CI_GROUP=lint bin/ci-quiet   a subset of bin/ci, as before: no level, no verdict kept
 require "open3"
 require_relative "../script/ci/scope"
@@ -59,34 +61,80 @@ changed = merge_base ? git("diff", "--name-only", merge_base, "HEAD").to_s.lines
 level = merge_base ? CiScope.level(branch:, changed: changed.uniq, full: ARGV.include?("--full")) : :train
 
 tests = level == :pr ? CiScope.tests_for(changed.uniq, test_files: Dir["test/**/*_test.rb"]) : []
-# doc and pr play their steps directly, without the Setup of bin/ci (2 minutes): the machine is already set up.
-# The guards and the security steps come from config/ci.rb, so they never diverge from the full run.
-load File.expand_path("../config/ci.rb", __dir__) if level != :train
-commands =
+# Every level plays its steps one by one, each with its inputs (config/ci.rb), so that each keeps its own verdict.
+# doc and pr leave out the Setup of bin/ci (2 minutes): the machine is already set up. The guards and the security
+# steps come from config/ci.rb, so they never diverge from the full run.
+load File.expand_path("../config/ci.rb", __dir__)
+Step = Struct.new(:title, :env, :command, :inputs, :unit, :extra, :setup, keyword_init: true)
+# The train plays as bin/ci does, with CI=true (ActiveSupport::ContinuousIntegration sets it): the test environment then
+# loads every file (eager_load), which the coverage of the whole suite needs.
+plan_env = level == :train ? { "CI" => "true" } : {}
+# The audits ask a database of advisories that moves without the code: their verdict lasts one day. The decision index
+# reads the Markdown of docs/decisions, which the fingerprint leaves out.
+decisions = git("ls-tree", "-r", "HEAD", "docs/decisions").to_s
+from_plan = ->(step) {
+  extra = (Time.now.strftime("%F") if %i[gems yarn].include?(step.inputs)) || (decisions if step.command.include?("build_index"))
+  Step.new(title: step.title, env: plan_env, command: [ step.command ], inputs: step.inputs, unit: step.inputs == :unit ? :all : nil, extra:)
+}
+guards = CI_PLAN.steps_for("lint").select { it.title.start_with?("Guard:") }.map(&from_plan)
+steps =
   case level
-  when :doc
-    CI_PLAN.steps_for("lint").select { it.title.start_with?("Guard:") }.map { [ it.title, {}, it.command ] }
+  when :doc then guards
   when :pr
     rubocop = CiScope.rubocop_targets(changed.uniq)
     style = rubocop == :all ? [ "bin/rubocop" ] : ([ "bin/rubocop", "--force-exclusion", *rubocop ] if rubocop.any?)
-    guards = CI_PLAN.steps_for("lint").select { it.title.start_with?("Guard:") }
-    security = CI_PLAN.steps_for("security").drop(1)
-    [ *guards.map { [ it.title, {}, it.command ] },
-      ([ "Style: Ruby (#{rubocop == :all ? 'every file' : "#{rubocop.size} changed files"})", {}, *style ] if style),
-      *security.map { [ it.title, {}, it.command ] },
-      ([ "Tests: Rails (#{tests.size} files of the change)", { "COVERAGE" => "0" }, "bin/rails", "test", *tests ] if tests.any?),
-      [ "Tests: System (bin/system-changed)", { "BASE" => base }, "bin/system-changed" ] ].compact
-  else [ [ "bin/ci", {}, "bin/ci" ] ]
+    system_tests, = Open3.capture2({ "BASE" => base }, "bin/system-changed", "--list", err: File::NULL)
+    [ *guards,
+      (Step.new(title: "Style: Ruby (#{rubocop == :all ? 'every file' : "#{rubocop.size} changed files"})", env: {}, command: style, inputs: :ruby) if style),
+      *CI_PLAN.steps_for("security").drop(1).map(&from_plan),
+      (Step.new(title: "Tests: Rails (#{tests.size} files of the change)", env: { "COVERAGE" => "0" }, command: [ "bin/rails", "test", *tests ],
+                inputs: :unit, unit: tests) if tests.any?),
+      Step.new(title: "Tests: System (bin/system-changed)", env: { "BASE" => base }, command: [ "bin/system-changed" ],
+               inputs: :system, extra: system_tests) ].compact
+  else
+    setup, *rest = CI_PLAN.steps_for(nil)
+    [ from_plan.(setup).tap { it.setup = true }, *rest.map(&from_plan) ]
   end
+
+ls_tree = git("ls-tree", "-r", "HEAD").to_s
+fingerprint = CiScope.fingerprint(ls_tree)
+verdicts = CiScope::Verdicts.new("tmp/ci-verdicts")
+inputs_of = ->(name) { name.is_a?(Symbol) ? CiScope::INPUTS.fetch(name) : name }
+key = ->(step, inputs, extra = step.extra) { CiScope.step_key(ls_tree, command: step.command, env: step.env, inputs: inputs_of.(inputs), extra:) }
+unit_tests = Dir["test/**/*_test.rb"].reject { it.match?(%r{\Atest/(system|guards|performance|dummy|fixtures)/}) || it == "test/domain/domain_purity_test.rb" }
+
+# What each step owes: nothing when it is green for its inputs; for the unit tests green without the browser's files,
+# the tests that read those files alone. Each run carries the keys its green verdict records.
+# Files not committed: the keys are those of HEAD, so no step verdict is read and every step plays.
+runs = steps.reject(&:setup).filter_map do |step|
+  if pending.any?
+    [ step, [] ]
+  elsif step.unit
+    back = key.(step, :unit)
+    front = key.(step, :front, "front")
+    if !verdicts.step?(back)
+      [ step, [ back, front ] ]
+    elsif !verdicts.step?(front)
+      readers = CiScope.front_readers(step.unit == :all ? unit_tests : step.unit)
+      [ Step.new(title: "Tests: Rails (#{readers.size} files reading the browser's files)", env: { "COVERAGE" => "0" },
+                 command: [ "bin/rails", "test", *readers ]), [ front ] ] if readers.any?
+    end
+  else
+    own = key.(step, step.inputs)
+    [ step, [ own ] ] unless verdicts.step?(own)
+  end
+end
+reused = steps.reject(&:setup).size - runs.size
+runs.unshift([ steps.find(&:setup), [] ]) if runs.any? && steps.any?(&:setup)
 
 if ARGV.include?("--plan")
   puts "Niveau : #{level} (branche #{branch}, #{changed.uniq.size} fichier(s) changé(s) depuis #{base})"
-  commands.each { |title, *| puts "  #{title}" }
+  played = runs.map { it.first.title }
+  steps.each { |step| puts "  #{step.title}#{' (déjà vert pour ses entrées)' unless step.setup || played.include?(step.title)}" }
+  (played - steps.map(&:title)).each { puts "  #{it}" }
   exit 0
 end
 
-fingerprint = CiScope.fingerprint(git("ls-tree", "-r", "HEAD").to_s)
-verdicts = CiScope::Verdicts.new("tmp/ci-verdicts")
 if pending.empty? && (known = verdicts.find(fingerprint, level))
   puts "bin/ci: green, already proven for this code (nothing played). #{known}"
   exit 0
@@ -94,13 +142,21 @@ end
 puts "⚠️  Uncommitted changes: the run proves the work tree, no verdict is kept." if pending.any?
 
 started = Time.now
-green = commands.all? { |title, env, *command| play(title, env, *command) }
-status = $?&.exitstatus
+# Every step plays, even after a red one: each green step keeps its verdict, and the next run plays only the red ones.
+results = runs.map { |step, keys| [ play(step.title, step.env, *step.command), keys ] }
+green = results.all?(&:first)
+status = green ? 0 : 1
 minutes, seconds = (Time.now - started).round.divmod(60)
+# A tree touched during the run (a file edited, a schema rewritten) proves nothing about HEAD.
+clean = pending.empty? && git("status", "--porcelain").to_s.empty? && git("rev-parse", "HEAD").to_s.strip == head &&
+        results.zip(runs).none? { |(passed, _), (step, _)| step.setup && !passed }
+results.each { |passed, keys| keys.each { verdicts.record_step(it, head[0, 8]) } if passed && clean }
 report(green, status, "level #{level}")
 exit 1 unless green
 
+played = runs.count { |step, _| !step.setup }
 proof = "Preuve : `bin/ci-quiet` niveau #{level} vert sur `#{head[0, 8]}` (empreinte `#{fingerprint[0, 12]}`), " \
+        "#{played} étape(s) jouée(s), #{reused} déjà verte(s) pour leurs entrées, " \
         "#{minutes} min #{seconds} s, le #{Time.now.strftime('%F %H:%M')}."
 puts proof
-verdicts.record(fingerprint, level, proof) if pending.empty? && git("rev-parse", "HEAD").to_s.strip == head
+verdicts.record(fingerprint, level, proof) if clean

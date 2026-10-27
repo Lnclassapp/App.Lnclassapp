@@ -1,8 +1,8 @@
 require "application_system_test_case"
 
-# PRD accueil-eleve CA-8, CA-10, CA-18 (ADR-0089 §4.1, §4.3 · UDR-0084 §3.6) : sans travail de l'enseignant, « À faire »
-# propose l'exercice du jour et « Inviter mon enseignant » ; « Commencer » démarre la session, et au retour la carte dit
-# « Bravo, à demain ! » avec la matière de demain. CA-11 (priorité stricte) se joue au niveau contrôleur
+# PRD accueil-eleve CA-8, CA-10, CA-18 (ADR-0089 §4.1, §4.3 · UDR-0084 §3.6) : sans travail de l'enseignant, la carte de l'accueil
+# propose l'exercice du jour et « Invite-le » ; « Commencer » démarre la session, et au retour la carte dit
+# « Reviens demain ! » avec la matière de demain. CA-11 (priorité stricte) se joue au niveau contrôleur
 # (test/controllers/classroom/student_homes_controller_test.rb), hors du budget système (ADR-0069 §9).
 class Classroom::DailyExerciseTest < ApplicationSystemTestCase
   SCOPE = "classroom.student_homes".freeze
@@ -27,30 +27,29 @@ class Classroom::DailyExerciseTest < ApplicationSystemTestCase
   test "CA-8, CA-18, CA-10: the exercise of the day, the invitation, then « Commencer » to « Bravo, à demain ! »" do
     sign_in_as @student
 
-    within("#student_home_daily") do
-      assert_selector "h3", text: tl("daily_exercise.badge")
+    within("#student_next_step[data-state=unassigned]") do
+      assert_text "#{tl("next_step.unassigned.badge")} · Lnclass"
       assert_text @today
-      assert_link @exercise.title
+      assert_selector "#student_next_step_title", text: @exercise.title
     end
-    within("#student_home_invite_teacher") do
-      assert_text tl("invite_teacher.prompt")
-      invite = find_link(tl("invite_teacher.action"))
+    within("#student_next_step") do
+      invite = find_link(tl("next_step.unassigned.invite"))
       assert_equal [ "_blank", "noopener" ], [ invite[:target], invite[:rel] ]
       message = CGI.unescape(invite[:href].delete_prefix("https://wa.me/?text="))
       [ "6e A", "Lycée Classique d'Abidjan", new_teacher_registration_path ].each { assert_includes message, it }
     end
 
-    within("#student_home_daily") { click_on tl("daily_exercise.start") }
+    within("#student_next_step_daily") { click_on tl("next_step.unassigned.start") }
     choose @exercise.questions.first.answers.find_by!(correct: true).content
     click_on I18n.t("assessment.exercise_sessions.question_card.submit")
     assert_link I18n.t("assessment.exercise_sessions.feedback_card.result")
 
     visit student_home_path
-    within("#student_home_daily_state[aria-live='polite']") do
-      assert_text tl("daily_exercise.done")
-      assert_text tl("daily_exercise.tomorrow", subject: @tomorrow)
+    within("#student_next_step_daily[aria-live='polite']") do
+      assert_text tl("next_step.unassigned.done_today")
+      assert_text tl("next_step.unassigned.tomorrow", subject: @tomorrow)
     end
-    assert_no_button tl("daily_exercise.start")
-    assert_selector "#student_home_invite_teacher"
+    assert_no_button tl("next_step.unassigned.start")
+    assert_selector "#student_next_step_invite"
   end
 end

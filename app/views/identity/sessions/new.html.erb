@@ -20,7 +20,7 @@
               <div id="wrong-app" role="alert" class="flex items-start gap-2 rounded-ln bg-warning-soft px-4 py-3 text-sm text-ink">
                 <%= ui_icon "exclamation-triangle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-warning" %>
                 <div class="min-w-0">
-                  <p class="font-semibold"><%= t("#{refusal}.title") %></p>
+                  <p class="font-medium"><%= t("#{refusal}.title") %></p>
                   <p class="mt-0.5"><%= t("#{refusal}.body") %>
                     <%= link_to t("#{refusal}.link"), @wrong_app[:url], target: "_blank", rel: "noopener",
                                 class: "font-medium text-brand-strong underline underline-offset-4" %></p>
@@ -53,7 +53,7 @@
           <p id="session-sign-up" class="mt-5 flex flex-wrap items-center justify-center gap-x-1.5 border-t border-line pt-4 text-sm text-mute">
             <%= t(".no_account") %>
             <%= link_to t(".sign_up"), new_student_registration_path,
-                        class: "inline-flex min-h-tap items-center font-bold text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+                        class: "inline-flex min-h-tap items-center font-medium text-brand-strong underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
           </p>
         <% end %>
       </div>

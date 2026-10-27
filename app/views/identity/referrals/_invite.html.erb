@@ -11,7 +11,7 @@
       <% if invite.referred_count.zero? %>
         <%= t("identity.referrals.invite.count", count: 0) %>
       <% else %>
-        <span class="font-display text-2xl font-extrabold text-ink tabular-nums"><%= invite.referred_count %></span>
+        <span class="font-display text-2xl font-medium text-ink tabular-nums"><%= invite.referred_count %></span>
         <%= t("identity.referrals.invite.count_label", count: invite.referred_count) %>
       <% end %>
     </p>
@@ -20,7 +20,7 @@
     <% end %>
   </div>
 
-  <p class="mt-4 text-xs font-semibold tracking-wider text-mute uppercase"><%= t("identity.referrals.invite.link_label") %></p>
+  <p class="mt-4 text-xs font-medium tracking-wider text-mute uppercase"><%= t("identity.referrals.invite.link_label") %></p>
   <a id="referral_link" href="<%= link %>" class="mt-1 block text-sm font-medium break-all text-brand-strong underline-offset-4 hover:underline"><%= link %></a>
 
   <div id="referral_share_actions" class="mt-5 flex flex-wrap gap-3" data-controller="identity--share"

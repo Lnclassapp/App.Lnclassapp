@@ -1,7 +1,8 @@
 # ADR-0034, ADR-0030, ADR-0058: the 41 DRENA, then four schools of Abidjan 2 with their generated classrooms — a public
 # lycée (77), a private one (38), a mixed one (38) and a public collège (28). Idempotent by slug and by name.
-# Never in production: the team creates the DRENA on screen and imports the schools (ADR-0039).
-raise "db/seeds/school.rb est réservé au développement et au test" unless Rails.env.local?
+# Never in production: the team creates the DRENA on screen and imports the schools (ADR-0039). Only a PR environment,
+# which runs in production, receives them too (ADR-0108).
+raise "db/seeds/school.rb est réservé au développement, au test et aux environnements de PR" unless Rails.env.local? || PrEnvironment.active?
 
 YAML.load_file(Rails.root.join("db/seeds/data/drenas.yml")).each do |name|
   Orm::Drena.create!(name:) unless Orm::Drena.exists?(slug: Entities::School::Drena.slug_for(name))

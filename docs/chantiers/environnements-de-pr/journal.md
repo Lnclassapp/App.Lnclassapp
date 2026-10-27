@@ -1,0 +1,65 @@
+# Journal — Environnements de PR sur Railway
+
+> Rempli **pendant** le chantier, pas reconstitué à la fin. C'est ici que se capitalise ce qui ne rentre ni dans un ADR ni dans un commit.
+
+## Décisions prises en cours de route
+
+| Date | Décision | Pourquoi | Promue en ADR ? |
+|---|---|---|---|
+| 2026-10-21 | La migration de `railway.json` passe après les lots 0, B, C | `railway.ts` n'est pas lu au déploiement : il s'applique en ligne de commande, connecté au projet, et décrit tout le projet. Écrit à la main, il risque de supprimer un service ; la connexion du porteur à Railway ne marche pas | non |
+| 2026-10-21 | Reconnaître une PR par une variable de Develop, pas par la forme du nom Railway | Le nommage des environnements de PR n'est pas documenté par Railway | oui, ADR-0108 §3 |
+| 2026-10-21 | Une réponse servie derrière le mot de passe ne part jamais `public` | Revue sécurité : Thruster met en cache les réponses `public` et les ressert sans mot de passe (vérifié avec thruster 0.1.27) | oui, ADR-0108 §4 |
+| 2026-10-21 | Le démarrage d'un environnement de PR l'écrit au journal, avec un avertissement sans mot de passe | Revue des échecs silencieux : une variable scellée sur Develop fermait la PR sans aucune trace | oui, ADR-0108 §4 |
+| 2026-10-21 | Non retenu : limiter `PrEnvironment.active?` à `RAILS_ENV=production` pour Puma | Le seul chemin trouvé est `railway run bin/dev` lié à un environnement de PR (worker absent, adaptateur `solid_queue` du développement). Personne ne lance le développement contre une PR ; le correctif changeait le contrat gelé du Lot 0 et trois tests | non |
+
+## Essai sur Railway
+
+Essai du 2026-10-22, PR #279 (la PR #278 avait reçu un environnement vide, voir « Ce qui a dérapé »). Réglages : PR Environments et Bot PR Environments activés, base Develop ; `PR_BASE_ENVIRONMENT=Develop` et `PR_ACCESS_PASSWORD` sur le service web de Develop ; Serverless. Constaté depuis l'API Railway, le journal de déploiement et `curl` :
+
+| Vérification | Attendu | Constaté |
+|---|---|---|
+| Environnement créé à l'ouverture de la PR | oui, à partir de Develop | oui : `App.Lnclassapp-pr-279`, services web et Postgres, déploiement SUCCESS en 3 min |
+| Pré-déploiement | `db:prepare db:seed` vert, « 3 établissements, 63 classes… » au journal | oui : « 3 établissements, 63 classes, 63 enseignants, 2555 élèves » |
+| Journal de démarrage | `[config] PR environment (base Develop, name …): password required…` | oui ; aucun processus Solid Queue au démarrage |
+| Adresse sans mot de passe | demande de mot de passe (401) ; `/up` répond | oui : 401 sans mot de passe ou avec un mauvais, 200 avec le bon, `/up` 200 ; asset `cache-control: private`, 401 sans mot de passe après un appel authentifié |
+| Connexion `0531000001` / 2468 | accueil enseignant | oui : 303 vers `/teachers`, « Accueil · Enseignant », « Bonjour, Junior » |
+| Veille | service endormi 10 minutes après la dernière visite | oui : « Sleeping » environ 15 minutes après la dernière visite ; au réveil, 502 puis 200 |
+| Stockage de fichiers | bucket propre à la PR, pas celui de Develop | oui : `BUCKET_NAME` différent de celui de Develop |
+| Fermeture de la PR | environnement supprimé | oui : l'environnement vide de la PR #278 a disparu à sa fermeture |
+
+## Ce qui a dérapé
+
+Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
+
+- **« Pas d'environnement pour les robots » excluait toutes les PR de Claude.** Railway compte comme PR de robot une PR ouverte par l'application GitHub de Claude, même au nom du porteur : la PR #278 a reçu un environnement vide, sans service. Bot PR Environments est donc activé ; contrepartie : les PR de Dependabot ou d'autres robots ont aussi le leur.
+- **Les variables n'étaient pas posées** sur le service web de Develop, alors que le réglage semblait fait : sans elles, l'environnement de PR aurait tourné comme une production ouverte, sans données de test. À vérifier par lecture (`railway variable list`), pas par souvenir.
+- **Develop ne s'était pas redéployé** après les fusions des PR #275 et #276 : il tournait encore le 2026-10-22 sur le commit de la PR #274. Déployé à la main sur `738af3bf` (SUCCESS). Cause non trouvée : à surveiller à la prochaine fusion.
+
+## Ce qu'on a appris sur la codebase
+
+Découvertes sur du code existant, pièges, dépendances non documentées.
+
+- Railway (documentation du 2026-10-21) : `railway.json` n'est plus lu après le 2026-12-01 ; les bases d'une PR partent vides ; les variables scellées ne sont pas copiées dans les PR ; aucun filtre des PR par branche cible ; aucune variable ne signale un environnement de PR.
+- En production, `seeds: false` (`config/database.yml`) empêche `db:prepare` de semer : seul le `db:seed` du pré-déploiement sème, une fois par déploiement d'une PR. L'idempotence sert aux redéploiements (chaque commit poussé).
+- Les leçons complètes (`db/seeds/demo/lecons_completes.rb`, demandé par le porteur le 2026-10-22) : 228 cours (213 leçons, celles de 1ère A en A1 et en A2) importés par la vraie chaîne et publiés en environ 80 s sur une base neuve, 4 s rejouées. L'import accepte 50 fichiers par envoi (ADR-0068).
+- Lot A (2026-10-23) : `railway config migrate status` montre qu'aucun service ne lit plus `railway.json` ; avec `.railway/railway.ts` qui reprend l'état réel (Develop sans délai de contrôle de santé propre, commande de démarrage vide), `railway config plan` est « already up to date » sur production, Staging et Develop. Rien à appliquer : `railway.json` est retiré. Piège : lancé derrière `timeout`, le CLI se croit trop ancien (le SDK lit sa version par `$_`).
+- Lot D abandonné (2026-10-23) : une PR dont la source est `Develop` (PR #281, vers une copie de `Staging`) n'a reçu aucun environnement en 3 minutes, quand les PR #279 et #280 l'avaient en quelques secondes. Railway ne crée pas d'environnement pour une branche déjà déployée par un environnement : les promotions n'en ont pas, sans rien de notre côté. La branche d'essai `essai/base-promotion` reste à supprimer sur GitHub (le proxy de la session refuse la suppression).
+- 1ère A (2026-10-23) : les 15 leçons de `lecons-traitees/1ere-a` visaient la série « A », absente du référentiel en 1ère (A1, A2, C, D), et l'import les refusait (`series_not_allowed`). Elles sont devenues `1ere-a1/` et `1ere-a2/` (même texte, série A1 ou A2) ; le semis n'a plus de règle à part. Essai de la PR #280 validé par le porteur le même jour.
+- Les `limits_concurrency` des jobs reposent sur Solid Queue : en `:async`, ils ne s'appliquent pas (ADR-0108 §5).
+
+## Dette laissée derrière
+
+Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
+
+| Quoi | Pourquoi reporté | Chantier de suivi |
+|---|---|---|
+| Mise en veille effective, stockage de fichiers propre à chaque PR | Non vérifiables hors Railway | première PR d'essai, par le porteur |
+
+## Clôture
+
+| | |
+|---|---|
+| **Livré le** | 2026-10-23 |
+| **PR** | #276 (lots 0, B, C), #279 (essai sur Railway), #280 (lot A, leçons complètes) |
+| **ADR produits** | [ADR-0108](../../decisions/adr/0108-environnements-de-pr-reconnus-par-l-application.md) ; amende ADR-0052 et ADR-0034 |
+| **UDR produits** | aucun (aucune vue) |

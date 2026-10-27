@@ -1,13 +1,16 @@
 require "test_helper"
 require_relative "../support/environment_probe"
 
-# ADR-0052 : the deployment is versioned in railway.json. Before each deploy, the database is prepared and the seeds
+# ADR-0052 : the deployment is versioned, in .railway/railway.ts since railway.json stopped being read (chantier
+# environnements-de-pr, lot A). Before each deploy, the database is prepared and the seeds
 # run: in production, only db/seeds/identity.rb, which prints the bootstrap invitation of the first team member while
 # none exists (ADR-0034, ADR-0038), and does nothing afterwards.
 class RailwayDeploymentTest < ActiveSupport::TestCase
   BOOTSTRAP_LINK = %r{Invitation d'amorçage pour 0700000042, valable 72 h : /invitations/(\w+)}
 
-  def pre_deploy_command = JSON.parse(Rails.root.join("railway.json").read).dig("deploy", "preDeployCommand").sole.split
+  IAC = Rails.root.join(".railway/railway.ts")
+
+  def pre_deploy_command = IAC.read[/preDeploy: "([^"]+)"/, 1].split
 
   def database_config = ActiveRecord::Base.connection_db_config.configuration_hash
 
@@ -31,12 +34,17 @@ class RailwayDeploymentTest < ActiveSupport::TestCase
     connection.close
   end
 
-  test "railway.json builds with the Dockerfile, prepares and seeds the database before deploying, and checks /up" do
-    config = JSON.parse(Rails.root.join("railway.json").read)
+  # `railway config plan` says this file is what Railway applies in production, Staging and Develop (2026-10-23).
+  test ".railway/railway.ts builds with the Dockerfile, prepares and seeds before deploying, checks /up, one branch per environment" do
+    iac = IAC.read
 
-    assert_equal({ "builder" => "DOCKERFILE", "dockerfilePath" => "Dockerfile" }, config["build"])
-    assert_equal [ "bin/rails db:prepare db:seed" ], config.dig("deploy", "preDeployCommand")
-    assert_equal "/up", config.dig("deploy", "healthcheckPath")
+    assert_includes iac, 'builder: "DOCKERFILE", dockerfilePath: "/Dockerfile"'
+    assert_equal %w[bin/rails db:prepare db:seed], pre_deploy_command
+    assert_includes iac, 'healthcheck: "/up"'
+    { "production" => "main", "Staging" => "Staging", "Develop" => "Develop" }.each do |environment, branch|
+      assert_match(/^\s*#{environment}: \{ branch: "#{branch}"/, iac, environment)
+    end
+    assert_not Rails.root.join("railway.json").exist?, "railway.json is no longer read by Railway: one source only"
   end
 
   # Production, 2026-09-29: on a new database, db:prepare loaded the schema and seeded, then db:seed seeded again in the

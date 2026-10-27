@@ -22,7 +22,7 @@ class Identity::InviteColleagueTest < ApplicationSystemTestCase
   test "CP-04, CP-05: the home offers the link on a phone; WhatsApp and copy are counted by the server" do
     with_mobile_viewport do
       sign_in_as @teacher
-      visit teacher_home_path
+      visit teacher_invite_path # UDR enseignant §3.3 : le bloc a quitté l'accueil sous lg
 
       within "#invite_colleagues" do
         assert_text I18n.t("#{INVITE}.count", count: 0)
@@ -51,8 +51,8 @@ class Identity::InviteColleagueTest < ApplicationSystemTestCase
 
   test "IE-06, CP-02, CP-06: Awa's link, without the code, signs a colleague up by the « colleague » way; her counter says 1" do
     sign_in_as @teacher
-    visit teacher_home_path
-    link = find("a#sidebar_referral_link")[:href]
+    visit teacher_invite_path # lot P0 : plus de carte « Parrainage » dans la barre latérale
+    link = find("#invite_colleagues a#referral_link")[:href]
     assert_match %r{/i/#{@token}\z}, link
     assert_no_match(/k7m4qz/i, link)
     sign_out
@@ -67,13 +67,13 @@ class Identity::InviteColleagueTest < ApplicationSystemTestCase
     select "SVT", from: "teacher_registration[material_slug]"
     fill_in "teacher_registration[last_name]", with: "KOUASSI"
     fill_in "teacher_registration[first_name]", with: "Koffi"
-    choose I18n.t("genders.male")
+    choose I18n.t("identity.teacher_registrations.form.genders.male")
     fill_in "teacher_registration[contact]", with: "0501020304"
     fill_in "teacher_registration[pin]", with: "4821"
     fill_in "teacher_registration[pin_confirmation]", with: "4821"
     click_on I18n.t("identity.teacher_registrations.form.submit")
 
-    assert_current_path teacher_classrooms_path
+    assert_current_path teacher_home_path
     referee = Orm::User.find_by!(contact: "0501020304")
     assert_equal [ "KOUASSI", "Koffi" ], [ referee.last_name, referee.first_name ]
     assert_equal [ [ @school.id, true ] ], Orm::TeacherSchool.where(teacher: referee).pluck(:school_id, :primary)
@@ -81,11 +81,10 @@ class Identity::InviteColleagueTest < ApplicationSystemTestCase
     assert_equal [ @teacher.id ], Orm::Referral.where(referee:).pluck(:referrer_id)
     sign_out
 
-    # Wide screen: the counter is read on the sidebar card (UDR-0069 §3.6), the home's block being hidden from lg.
+    # The counter is read on the invitation page (the sidebar card is gone, lot P0).
     sign_in_as @teacher
-    visit teacher_home_path
-    assert_selector "#sidebar_referral_count", text: "1"
-    assert_selector "#sidebar_referral_count", text: I18n.t("#{INVITE}.count_label", count: 1)
+    visit teacher_invite_path
+    assert_selector "#invite_colleagues", text: I18n.t("#{INVITE}.count", count: 1)
   end
 
   test "CP-05: on a 390 px phone, the four ways to share fit the width and the copy is counted" do

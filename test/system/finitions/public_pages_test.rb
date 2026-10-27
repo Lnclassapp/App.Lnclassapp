@@ -54,8 +54,9 @@ class Finitions::PublicPagesTest < ApplicationSystemTestCase
   test "FU-19: /c/<token> and /teacher-signup leave the focus to the browser" do
     [ join_classroom_path(@classroom.reload.link_token), new_teacher_registration_path ].each do |path|
       visit path
-      # The eye of the PIN field is shown by its controller: Stimulus is connected, the autofocus controller too.
-      assert_selector "[data-password-reveal-target=toggle]", minimum: 1
+      # The eye of the PIN field is shown by its controller: Stimulus is connected, the autofocus controller too. (The student
+      # sign-up shows one step at a time: its PIN is on step 3, hidden, so the eye is looked for in the whole page.)
+      assert_selector "[data-password-reveal-target=toggle]:not([hidden])", minimum: 1, visible: :all
 
       assert_equal "BODY", page.evaluate_script("document.activeElement.tagName"), path
     end
@@ -67,6 +68,8 @@ class Finitions::PublicPagesTest < ApplicationSystemTestCase
     fill_in "student_registration[last_name]", with: "KOUASSI"
     choose I18n.t("genders.female")
     fill_in "student_registration[contact]", with: "07 01 02 03 04"
+    # Step 2 is not complete (no first name): it stays open, so the secret code of step 3 is reached by the way back.
+    page.execute_script("document.querySelector('fieldset[data-step=\"3\"]').hidden = false")
     fill_in "student_registration[pin]", with: "4821"
     fill_in "student_registration[pin_confirmation]", with: "4821"
     click_on I18n.t("classroom.student_registrations.form.submit")

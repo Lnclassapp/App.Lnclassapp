@@ -5,7 +5,7 @@
   <% { imported: import.imported_count, skipped: import.skipped_count, errors: import.error_count, total: import.total_count }.each do |counter, value| %>
     <div class="rounded-ln bg-mist px-4 py-3">
       <dt class="text-xs text-mute"><%= report_text(import, "counters.#{counter}") %></dt>
-      <dd id="import_counter_<%= counter %>" class="font-display text-2xl font-extrabold tabular-nums"><%= value %></dd>
+      <dd id="import_counter_<%= counter %>" class="font-display text-2xl font-medium tabular-nums"><%= value %></dd>
     </div>
   <% end %>
 </dl>

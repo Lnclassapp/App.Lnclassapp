@@ -43,7 +43,7 @@ class Identity::InstallBannerTest < ApplicationSystemTestCase
       click_button tb(:later)
 
       assert_no_selector BANNER
-      assert_in_delta 3.days.from_now.to_f * 1000, later_until, 60_000
+      assert_later_in_three_days
       assert evaluate_script("window.samePage")
       assert_equal requests, resource_requests
 
@@ -59,7 +59,7 @@ class Identity::InstallBannerTest < ApplicationSystemTestCase
       assert_selector BANNER
       find(BANNER).send_keys(:escape)
       assert_no_selector BANNER
-      assert_in_delta 3.days.from_now.to_f * 1000, later_until, 60_000
+      assert_later_in_three_days
 
       # The three days are over: the pop-up comes back; « Installer » opens the browser's window, accepted.
       store_later_until(1.minute.ago)
@@ -77,7 +77,7 @@ class Identity::InstallBannerTest < ApplicationSystemTestCase
       within(BANNER) { click_button tb(:install) }
 
       assert_no_selector BANNER
-      assert_in_delta 3.days.from_now.to_f * 1000, later_until, 60_000
+      assert_later_in_three_days
     end
   end
 
@@ -135,6 +135,15 @@ class Identity::InstallBannerTest < ApplicationSystemTestCase
       event.userChoice = Promise.resolve({ outcome: arguments[0], platform: "web" })
       window.dispatchEvent(event)
     JS
+  end
+
+  # Le « close » de la <dialog> arrive après sa disparition : on attend que « Plus tard » soit écrit au lieu de le lire au vol.
+  def assert_later_in_three_days
+    page.document.synchronize do
+      assert_in_delta 3.days.from_now.to_f * 1000, later_until, 60_000
+    rescue Minitest::Assertion => error
+      raise Capybara::ExpectationNotMet, error.message
+    end
   end
 
   def later_until = evaluate_script("Number(localStorage.getItem('#{STORAGE_KEY}'))")

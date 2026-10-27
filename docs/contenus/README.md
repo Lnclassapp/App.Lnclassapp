@@ -301,11 +301,13 @@ Les 3 premières leçons de chaque matière des séries A1, A2 et C de Terminale
 - **SVT C** : la contraception hormonale (4e fiche de « Les cycles sexuels chez la femme ») et la méiose, le rendement chiffré de la respiration (36 à 38 ATP par glucose, 30,5 kJ par mole d'ATP et 2 870 kJ par mole de glucose : valeurs écrites par le rédacteur) sont à confirmer.
 - **Physique-Chimie C** : le repère de Frenet et le mouvement rectiligne sinusoïdal (« Cinématique du point »), la fermentation alcoolique, la liaison hydrogène et la distillation (« Les alcools ») ; les noms des produits d'oxydation (aldéhydes, cétones, acides) y sont cités sans nomenclature systématique, réservée à la leçon suivante ; le frottement par une relation `f = k·R_N` donnée dans l'énoncé, sans coefficient de frottement (« Mouvement du centre d'inertie d'un solide »).
 
-### 1ère — `lecons-traitees/1ere-a/`, `1ere-c/`, `1ere-d/`, `1ere/`
+### 1ère — `lecons-traitees/1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, `1ere/`
 
 Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A, C et D ont des progressions différentes, et Histoire-Géographie est commune à toutes les séries. Dans le référentiel de Develop, la 1ère n'a que les séries A, C et D : les anciens jeux « 1ère A1 » et « 1ère A2 », au contenu identique, sont fusionnés en « 1ère A ».
 
-#### 1ère A (15)
+#### 1ère A1 et A2 (15 chacune)
+
+Même texte dans `1ere-a1/` et `1ere-a2/`, à la série près : écrites pour une série « A » que le référentiel n'ouvre pas en 1ère, elles ont été séparées le 2026-10-23.
 
 | Fichier | Cours | Rang | Fiches | Exercices | Questions |
 |---|---|---:|---:|---:|---:|

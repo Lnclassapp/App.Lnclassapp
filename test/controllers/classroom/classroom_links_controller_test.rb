@@ -39,8 +39,8 @@ class Classroom::ClassroomLinksControllerTest < ActionDispatch::IntegrationTest
     get classroom_path(@classroom.public_id)
 
     assert_response :success
-    assert_link_block link_url, scope: "#classroom_header"
-    assert_select "#classroom_header [id*=join_code]", 0
+    assert_link_block link_url
+    assert_select "[id*=join_code]", 0
     assert_select "#classroom_link button[aria-label='#{I18n.t("#{SCOPE}.more_label")}']"
     assert_select "#classroom_link [role=menuitem][aria-controls='change-classroom-link']", text: I18n.t("#{SCOPE}.change")
     assert_select "dialog#change-classroom-link" do
@@ -58,7 +58,7 @@ class Classroom::ClassroomLinksControllerTest < ActionDispatch::IntegrationTest
 
     get classroom_path(@classroom.public_id)
 
-    assert_link_block link_url, scope: "#classroom_header"
+    assert_link_block link_url
   end
 
   test "UDR-0081 §3.6, ADR-0088 : une classe archivée n'a plus de page, donc plus de bloc du lien" do
@@ -97,7 +97,7 @@ class Classroom::ClassroomLinksControllerTest < ActionDispatch::IntegrationTest
     get classroom_path(@classroom.public_id)
 
     assert_not_equal @old_token, token
-    assert_link_block link_url, scope: "#classroom_header"
+    assert_link_block link_url
   end
 
   test "IL-12 : l'équipe change le lien" do

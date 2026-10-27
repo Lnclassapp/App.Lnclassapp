@@ -53,6 +53,14 @@ class Queries::School::StudentWorkQueryTest < ActiveSupport::TestCase
                                          average_percent: nil, teachers_count: 0, archived_at: nil), row
   end
 
+  test "CA-B7: the detail link carries the link token and the join code the link block shows" do
+    klass = classroom
+
+    link = detail(klass).link
+
+    assert_equal [ klass.reload.link_token, klass.join_code ], [ link.link_token, link.join_code ]
+  end
+
   test "the overview names the school and the school year, and keeps only the active classrooms of the year" do
     kept = classroom
     classroom(name: "2nde C 2", status: "archived")

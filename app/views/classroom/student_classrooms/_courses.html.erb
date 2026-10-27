@@ -4,7 +4,7 @@
 <%# locals: (courses:) -%>
 <section id="student_classroom_courses" aria-labelledby="student_classroom_courses_title" class="space-y-4">
   <div class="flex items-center justify-between gap-3">
-    <h2 id="student_classroom_courses_title" class="font-display text-lg leading-tight font-extrabold"><%= t("classroom.student_classrooms.show.courses_title") %></h2>
+    <h2 id="student_classroom_courses_title" class="font-display text-lg leading-tight font-medium"><%= t("classroom.student_classrooms.show.courses_title") %></h2>
     <% if courses.any? %>
       <%= ui_badge t("classroom.student_classrooms.show.courses_count", count: courses.size), tone: :brand, size: :sm %>
     <% end %>

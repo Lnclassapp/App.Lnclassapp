@@ -11,7 +11,7 @@
     <%= ui_icon level ? "trophy" : "flag", variant: :solid, size: :xl %>
   </span>
   <div>
-    <span class="font-display text-sm font-extrabold tracking-wide uppercase"><%= name %></span><%= ui_info_tip badges_tip, label: t(".help") %>
+    <span class="font-display text-sm font-medium tracking-wide uppercase"><%= name %></span><%= ui_info_tip badges_tip, label: t(".help") %>
   </div>
   <% if earned_now %>
     <%= ui_badge t(".new"), tone: :brand, icon: "sparkles" %>

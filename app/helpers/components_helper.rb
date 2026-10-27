@@ -1,6 +1,6 @@
 # 🌐 UI · ComponentsHelper — API publique de la bibliothèque app/views/components
 # Rôle : calcule classes et attributs des composants ; le balisage vit dans les partials
-# UDR  : 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069, 0071, 0076, 0079, 0080, 0084, 0127 · ADR : 0009, 0049, 0067, 0083, 0103
+# UDR  : palette froide, écrans enseignant §3.1 · 0005, 0006, 0041, 0042, 0051, 0054, 0057, 0061, 0064, 0069, 0071, 0076, 0079, 0080, 0084, 0127 · ADR : 0009, 0049, 0067, 0083, 0103
 module ComponentsHelper
   # Zones nommées d'un composant, remplies dans le bloc d'appel : `card.actions { … }`, `modal.footer { … }`.
   class Slots
@@ -67,8 +67,9 @@ module ComponentsHelper
   FIELD_INPUT = "block w-full rounded-ln border bg-white px-4 text-base text-ink transition placeholder:text-mute " \
                 "focus:outline-none focus:ring-4 disabled:cursor-not-allowed disabled:bg-mist disabled:text-mute"
   FIELD_SHAPES = { textarea: "min-h-32 py-3", select: "min-h-tap appearance-none pr-10" }.freeze
+  # UDR palette froide §3.1 : bordure de champ en `line-strong`, plus marquée que celle d'une carte.
   FIELD_STATES = {
-    valid: "border-line focus:border-brand focus:ring-brand/20",
+    valid: "border-line-strong focus:border-brand focus:ring-brand/20",
     invalid: "border-error focus:border-error focus:ring-error/20"
   }.freeze
   # Bouton œil d'un champ PIN (UDR-0051) : 48 px de large sur toute la hauteur du champ, à droite, dans le champ.
@@ -76,12 +77,12 @@ module ComponentsHelper
   FIELD_REVEAL_BUTTON = "absolute inset-y-0 right-0 flex w-tap cursor-pointer items-center justify-center rounded-ln " \
                         "text-mute transition hover:text-ink focus-visible:outline-2 focus-visible:-outline-offset-2 " \
                         "focus-visible:outline-brand"
-  FIELD_CHECKBOX = "size-5 shrink-0 cursor-pointer rounded-sm accent-brand focus-visible:outline-2 " \
+  FIELD_CHECKBOX = "size-5 shrink-0 cursor-pointer rounded-sm accent-brand-strong focus-visible:outline-2 " \
                    "focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed"
   # Une option = toute l'étiquette cliquable, 48 px de haut ; l'option cochée prend la teinte de marque.
   RADIO_OPTION = "flex min-h-tap cursor-pointer items-center gap-3 rounded-ln border bg-white px-4 text-sm font-medium " \
                  "text-ink transition hover:bg-mist has-checked:border-brand has-checked:bg-brand-soft"
-  RADIO_STATES = { valid: "border-line", invalid: "border-error" }.freeze
+  RADIO_STATES = { valid: "border-line-strong", invalid: "border-error" }.freeze
   RADIO_INPUT = "size-5 shrink-0 cursor-pointer accent-brand focus-visible:outline-2 focus-visible:outline-offset-2 " \
                 "focus-visible:outline-brand"
   # Au téléphone, les options s'empilent toujours ; les colonnes ne s'ouvrent qu'à partir de `sm`.
@@ -99,12 +100,14 @@ module ComponentsHelper
   DROPDOWN_ALIGNS = { start: "left-0", end: "right-0" }.freeze
   DROPDOWN_TONES = { default: "ui-menu-item-default", danger: "ui-menu-item-danger" }.freeze
 
+  # UDR palette froide §3.3 : la pastille neutre est grise (« Fragile », « Mauvaise réponse ») ; le point de retard est
+  # `warning-dot`, l'ambre ne dit que le retard.
   BADGE_TONES = {
-    neutral: { chip: "bg-mist text-ink", dot: "bg-mute" },
+    neutral: { chip: "bg-mist text-mute", dot: "bg-mute" },
     brand: { chip: "bg-brand-soft text-brand-strong", dot: "bg-brand" },
     info: { chip: "bg-info-soft text-info", dot: "bg-info" },
     success: { chip: "bg-success-soft text-success", dot: "bg-success" },
-    warning: { chip: "bg-warning-soft text-warning", dot: "bg-warning" },
+    warning: { chip: "bg-warning-soft text-warning", dot: "bg-warning-dot" },
     error: { chip: "bg-error-soft text-error", dot: "bg-error" },
     teacher: { chip: "bg-teacher/15 text-ink", dot: "bg-teacher" },
     school: { chip: "bg-school/10 text-school", dot: "bg-school" },
@@ -139,7 +142,7 @@ module ComponentsHelper
   SUBJECT_ILLUSTRATION_FALLBACK = Illustration.new(path: "subjects/generique.svg", tint: "bg-mist")
   # UDR-0074 §3.5, §3.7 : pastille de la direction posée sur une bulle ; classes écrites en entier pour Tailwind.
   # warning : l'ambre de l'urgence, sur la matière d'un exercice en retard de l'élève (UDR-0076 §3.1, charte §9).
-  SIGNAL_DOTS = { green: "bg-signal-green", yellow: "bg-signal-yellow", red: "bg-signal-red", warning: "bg-warning" }.freeze
+  SIGNAL_DOTS = { green: "bg-signal-green", yellow: "bg-signal-yellow", red: "bg-signal-red", warning: "bg-warning-dot" }.freeze
 
   AVATAR_SIZES = { sm: "size-8 text-xs", md: "size-10 text-sm", lg: "size-14 text-lg", xl: "size-28 text-3xl" }.freeze
   # Chaque ton passe AA avec son texte, en clair comme en sombre (test/design/dark_mode_test.rb) : tous peuvent être tirés.
@@ -149,8 +152,14 @@ module ComponentsHelper
   }.freeze
   # UDR-0084 §3.4 : pastille « + » d'un avatar sans photo, 16 px à la taille sm.
   AVATAR_BADGE_SIZES = { sm: "size-4 text-2xs", md: "size-5 text-xs", lg: "size-6 text-sm", xl: "size-8 text-base" }.freeze
-  AVATAR_BADGE = "absolute -right-0.5 -bottom-0.5 grid place-items-center rounded-full bg-brand-strong font-bold leading-none " \
+  AVATAR_BADGE = "absolute -right-0.5 -bottom-0.5 grid place-items-center rounded-full bg-brand-strong font-medium leading-none " \
                  "text-white ring-2 ring-white"
+
+  # UDR palette froide §2, UDR enseignant §3.1 : barre de progression pleine de la couleur du rôle (role_fill_class) sur
+  # une piste `line`. Une case par élément fait, sans largeur calculée (ni `style`, ni valeur arbitraire) ; au-delà de
+  # PROGRESS_SEGMENTS éléments, les cases se partagent le total à proportion.
+  PROGRESS_TRACK = "flex h-2 w-full overflow-hidden rounded-full bg-line"
+  PROGRESS_SEGMENTS = 30
 
   TOAST_TYPES = {
     success: { icon: "check-circle", tone: "text-success", bar: "bg-success", delay: 5000 },
@@ -332,6 +341,20 @@ module ComponentsHelper
       safe_join([ (tag.span(class: "size-1.5 rounded-full #{colors[:dot]}", "aria-hidden": "true") if dot),
                   (ui_icon(icon, variant: :mini, size: :sm) if icon), label ].compact)
     end
+  end
+
+  # done : éléments faits ; total : éléments attendus ; role : :student (bleu) ou :teacher (jaune). label : nom lu par
+  # les lecteurs d'écran (« 3 jours sur 7 »), le texte visible restant à côté de la barre.
+  def ui_progress(done:, total:, role:, label: nil)
+    fill = role_fill_class(role)
+    total = [ total.to_i, 0 ].max
+    done = done.to_i.clamp(0, total)
+    segments = [ total, PROGRESS_SEGMENTS ].min
+    filled = total.zero? ? 0 : (done * segments).fdiv(total).round
+    cases = Array.new(segments) { |index| tag.span(class: class_names("flex-1", fill => index < filled)) }
+
+    tag.div(safe_join(cases), class: PROGRESS_TRACK, role: "progressbar", "aria-valuenow": done, "aria-valuemin": 0,
+                              "aria-valuemax": total, "aria-label": label)
   end
 
   def ui_role_badge(role, size: :md)

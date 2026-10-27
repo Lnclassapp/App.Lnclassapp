@@ -34,6 +34,27 @@ module Entities
         assert_equal :gold, Grading.badge_for(score)
       end
 
+      # UDR enseignant §3.2 (CA-G3) : le badge d'un élève dans une classe, sur ses exercices faits (notes retenues, sur 100).
+      test "class_badge_for: Diamant seulement si au moins un exercice est fait et tous sans faute" do
+        assert_equal :diamond, Grading.class_badge_for(scores: [ 100 ], all_perfect: true)
+        assert_equal :diamond, Grading.class_badge_for(scores: [ 100, 100, 100 ], all_perfect: true)
+        assert_equal :gold, Grading.class_badge_for(scores: [ 100, 98 ], all_perfect: false)
+      end
+
+      test "class_badge_for: Or, Argent, Bronze selon la moyenne, lue sur la note sur 20" do
+        { [ 78 ] => :gold, [ 90, 70 ] => :gold, [ 77 ] => :silver, [ 68 ] => :silver, [ 67 ] => :bronze, [ 48 ] => :bronze,
+          [ 60, 40 ] => :bronze }.each do |scores, badge|
+          assert_equal badge, Grading.class_badge_for(scores:, all_perfect: false), scores.inspect
+        end
+      end
+
+      test "class_badge_for: nil, « Pas encore », sans exercice fait ou sous la moyenne de Bronze" do
+        assert_nil Grading.class_badge_for(scores: [], all_perfect: false)
+        assert_nil Grading.class_badge_for(scores: [], all_perfect: true)
+        assert_nil Grading.class_badge_for(scores: [ 47 ], all_perfect: false)
+        assert_nil Grading.class_badge_for(scores: [ 60, 30 ], all_perfect: false)
+      end
+
       test "le score est une division entière, arrondie vers le bas" do
         assert_equal 66, Grading.score_percent(correct: 2, total: 3)
         assert_equal 0, Grading.score_percent(correct: 0, total: 0)

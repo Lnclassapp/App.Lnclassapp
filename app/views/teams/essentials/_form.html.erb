@@ -69,7 +69,7 @@
     <%# Textes de remplacement : une ligne par image, dans l'ordre du texte ; le gabarit sert aux images ajoutées (UDR-0067 §3.4.2). %>
     <%= tag.section id: "essential_images", class: "space-y-3 rounded-ln border border-line bg-paper p-4", hidden: images.empty?,
                     "aria-labelledby": "essential_images_title", data: { "communication--image-alts-target": "panel" } do %>
-      <h3 id="essential_images_title" class="text-sm font-semibold text-ink">
+      <h3 id="essential_images_title" class="text-sm font-medium text-ink">
         <%= t("teams.articles.form.images_title") %> <span data-communication--image-alts-target="total">(<%= images.size %>)</span>
       </h3>
       <p class="text-sm text-mute"><%= t("teams.articles.form.images_intro") %></p>

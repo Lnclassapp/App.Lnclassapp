@@ -9,15 +9,16 @@ class Identity::ProfilePhotoDisplayTest < ActionDispatch::IntegrationTest
     @src = account_photo_path(@student.public_id, v: Queries::Identity::PhotoVersions.for(user_ids: [ @student.id ])[@student.id])
   end
 
-  test "the avatar of the header (UDR-0084), the sidebar and the profile card show the photo; « Changer ma photo » opens the modal" do
+  test "the avatar of the header (UDR-0084), its « Mon compte » panel and the sidebar show the photo; « Changer ma photo » opens the modal" do
     sign_in_as @student
 
     get profile_path
 
     assert_select "header button#avatar-menu-button img.ui-avatar[alt='Aya Koné'][src='#{@src}']"
-    assert_select "aside img[alt='Aya Koné'][src='#{@src}']"
-    # UDR-0089 §3.1, §3.2: for the student, the photo is in the blue card, its row says « Ta photo » and opens the modal.
-    assert_select "#profile_identity span[aria-hidden=true] img.size-28[alt='Aya Koné'][src='#{@src}']", count: 1
+    assert_select "aside img", 0 # Lot O1: the student's sidebar has no profile card, so no photo
+    assert_select "header dialog#avatar-menu img.ui-avatar[alt='Aya Koné'][src='#{@src}']", count: 1
+    # CA-E2 (lot E1), CA-E9 (lot O2): the row says « Ta photo » and opens the modal; the blue card (from lg) shows the photo too.
+    assert_select "#profile_identity img.ui-avatar[alt='Aya Koné'][src='#{@src}']"
     assert_select "#profile_information a[href='#{edit_profile_photo_path}'][data-turbo-frame=modal]", text: /Photo\s+Ta photo\s+Changer/
   end
 
@@ -28,7 +29,8 @@ class Identity::ProfilePhotoDisplayTest < ActionDispatch::IntegrationTest
 
     assert_select "header button#avatar-menu-button [role=img][aria-label='Awa Traoré']", text: "AT"
     assert_select "header img[src*='/photo']", 0
-    assert_select "#profile_identity span[aria-hidden=true] [role=img][aria-label='Awa Traoré']", text: "AT"
+    assert_select "header dialog#avatar-menu [role=img][aria-label='Awa Traoré']", text: "AT"
+    assert_select "#profile_identity [role=img][aria-label='Awa Traoré']", text: "AT"
     assert_select "#profile_information a[href='#{edit_profile_photo_path}']", text: /Photo\s+Aucune photo\s+Ajouter/
   end
 

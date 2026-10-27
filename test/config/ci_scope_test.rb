@@ -55,6 +55,8 @@ class CiScopeTest < ActiveSupport::TestCase
   test "a test helper plays the tests that call it; another file, those that name it, its fixture set or folder" do
     files = {
       "test/models/user_test.rb" => "users(:ada)",
+      "test/views/sprite_test.rb" => 'page.css("svg > use") # the reading rebuilds it',
+      "test/javascript_bundle_test.rb" => 'File.read("app/assets/builds/application.js")',
       "test/integration/schema_test.rb" => "config/schemas/course.v1.json",
       "test/infrastructure/lessons_test.rb" => 'glob("docs/contenus/lecons/**/*.json")',
       "test/models/other_test.rb" => "nothing",
@@ -113,6 +115,79 @@ class CiScopeTest < ActiveSupport::TestCase
 
       verdicts.record("f1", :train, "Preuve train")
       assert_equal "Preuve train", verdicts.find("f1", :pr)
+    end
+  end
+
+  # Chantier ci-rejeu-cible: each step keeps a verdict for the files it reads, and only for those.
+  test "a step's inputs: only and except prefixes, the Markdown never, the other runs' tests left out of the system run" do
+    unit = CiScope::INPUTS.fetch(:unit)
+    assert unit.include?("app/domain/school/x.rb")
+    assert unit.include?("app/assets/images/logo.svg"), "an image breaks image_tag in any view test"
+    %w[app/javascript/controllers/x.js app/assets/stylesheets/a.css test/system/x_test.rb test/performance/x_test.rb].each do |path|
+      refute unit.include?(path), path
+    end
+
+    system = CiScope::INPUTS.fetch(:system)
+    assert system.include?("app/javascript/controllers/x.js")
+    assert system.include?("test/system/x_test.rb")
+    assert system.include?("test/support/factories.rb")
+    refute system.include?("test/models/user_test.rb"), "a unit test is never loaded by the system run"
+
+    front = CiScope::INPUTS.fetch(:front)
+    assert front.include?("app/javascript/controllers/x.js")
+    assert front.include?("test/helpers/icons_test.rb")
+    refute front.include?("test/performance/x_test.rb"), "a line of a performance test plays no reader of the browser's files"
+
+    # Each step reads the file that breaks it.
+    { ruby: "app/models/x.rb", gems: "Gemfile.lock", yarn: "yarn.lock", brakeman: "app/controllers/x_controller.rb",
+      seeds: "db/seeds.rb", assets: "app/views/x.html.erb" }.each { |step, path| assert CiScope::INPUTS.fetch(step).include?(path), "#{step}: #{path}" }
+    refute CiScope::INPUTS.fetch(:gems).include?("app/models/x.rb")
+    refute CiScope::INPUTS.fetch(:assets).include?("app/domain/x.rb")
+
+    perf = CiScope::Inputs.new(only: %w[app/domain db Gemfile.lock], except: %w[db/seeds.rb])
+    assert perf.include?("db/migrate/1_x.rb")
+    assert perf.include?("Gemfile.lock")
+    refute perf.include?("db/seeds.rb")
+    refute perf.include?("dbx/y.rb"), "a prefix is a folder, not the start of a name"
+    refute perf.include?("app/views/x.erb")
+  end
+
+  test "a step's key moves with its command or its inputs, never with a file it does not read" do
+    tree = "100644 blob aaa\tapp/domain/x.rb\n100644 blob bbb\tapp/javascript/y.js\n100644 blob ccc\tdocs/a.md\n"
+    unit = CiScope::INPUTS.fetch(:unit)
+    key = ->(ls_tree, command: "bin/rails test", inputs: unit) { CiScope.step_key(ls_tree, command:, inputs:) }
+
+    assert_equal key.(tree), key.(tree.sub("bbb", "ddd")), "a line of JavaScript does not replay the unit tests"
+    assert_equal key.(tree), key.(tree.sub("ccc", "ddd"))
+    assert_not_equal key.(tree), key.(tree.sub("aaa", "ddd"))
+    assert_not_equal key.(tree), key.(tree, command: "bin/rails test a_test.rb")
+    assert_not_equal key.(tree, inputs: nil), key.(tree.sub("bbb", "ddd"), inputs: nil), "no inputs: the whole tree"
+    assert_not_equal CiScope.step_key(tree, command: "x", extra: "a"), CiScope.step_key(tree, command: "x", extra: "b")
+  end
+
+  test "the unit tests that read the browser's files: those that say so, and those calling a helper that does" do
+    files = {
+      "test/design/tokens_test.rb" => 'File.read("app/assets/stylesheets/application.tailwind.css")',
+      "test/helpers/icons_test.rb" => "assert_icon_sprite(page)",
+      "test/models/user_test.rb" => "users(:ada)",
+      "test/views/sprite_test.rb" => 'page.css("svg > use") # the reading rebuilds it',
+      "test/javascript_bundle_test.rb" => 'File.read("app/assets/builds/application.js")',
+      "test/support/icon_sprite_assertions.rb" => "def assert_icon_sprite(page)\n  File.read(\"app/assets/builds/x\")\nend"
+    }
+    readers = CiScope.front_readers(files.keys.grep(/_test\.rb\z/), read: files.method(:[]), helpers: [ "test/support/icon_sprite_assertions.rb" ])
+
+    assert_equal %w[test/design/tokens_test.rb test/helpers/icons_test.rb test/javascript_bundle_test.rb], readers,
+                 "neither Nokogiri's css( nor « rebuilds » reads a style sheet"
+  end
+
+  test "a green step is kept by its key" do
+    Dir.mktmpdir do |dir|
+      verdicts = CiScope::Verdicts.new(File.join(dir, "verdicts"))
+      refute verdicts.step?("k1")
+
+      verdicts.record_step("k1", "abc")
+      assert verdicts.step?("k1")
+      refute verdicts.step?("k2")
     end
   end
 end

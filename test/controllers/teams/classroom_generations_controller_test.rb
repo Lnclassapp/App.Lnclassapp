@@ -64,7 +64,7 @@ class Teams::ClassroomGenerationsControllerTest < ActionDispatch::IntegrationTes
 
     assert_select "#toasts [data-toast-type]", 1
     assert_select "#toasts [data-toast-type=info]:not([role=alert])" do
-      assert_select "p.font-semibold", text: "Génération déjà en cours"
+      assert_select "p.font-medium", text: "Génération déjà en cours"
       assert_select "p.text-mute", text: "Une seule génération des classes à la fois : voici l'avancement de celle qui tourne."
     end
     assert_select "#toasts", text: /Une erreur est survenue/, count: 0

@@ -96,24 +96,22 @@ Remplis `docs/chantiers/<slug>/prd.md` en entier. Les critères d'acceptation (�
 Obligatoire dès qu'apparaît : un nouveau port, une nouvelle table, une nouvelle dépendance, un changement de contrat, une nouvelle stratégie de persistance. Sautable si le chantier n'ajoute qu'un use case sur des ports existants — dans ce cas, **écris-le explicitement** dans `prd.md` §6.
 
 ```bash
-ls docs/decisions/adr/ | tail -3        # dernier numéro
-cp docs/decisions/adr/TEMPLATE.md docs/decisions/adr/NNNN-titre-en-kebab-case.md
+cp docs/decisions/adr/TEMPLATE.md docs/decisions/adr/XXXX-titre-en-kebab-case.md
 ```
 
-4 chiffres, kebab-case sans accent (`docs/guide/conventions.md` §2). Puis ajoute la ligne dans `docs/decisions/adr/README.md`. §5 `Coûts consentis` et §7 `Comment vérifier` ne restent jamais vides.
+Pas de numéro à chercher : `XXXX-`, kebab-case sans accent, cité `ADR-XXXX-<slug>` ; le numéro et la ligne d'index se posent au commit de clôture (`script/docs/build_index --number`, `docs/guide/conventions.md` §2). §5 `Coûts consentis` et §7 `Comment vérifier` ne restent jamais vides.
 
 ### 4.3 UDR — **obligatoire dès qu'une vue est créée ou modifiée**
 
 Sans exception. Une vue « simple » n'existe pas : c'est ce qui produit des interfaces incohérentes d'une session à l'autre.
 
 ```bash
-ls docs/decisions/udr/ | tail -3
-cp docs/decisions/udr/TEMPLATE.md docs/decisions/udr/NNNN-titre-en-kebab-case.md
+cp docs/decisions/udr/TEMPLATE.md docs/decisions/udr/XXXX-titre-en-kebab-case.md
 ```
 
-Test de conformité de l'UDR : **un agent doit pouvoir écrire la vue à partir de la seule §3, sans poser de question.** Relis la §3 et demande-toi si tu y arriverais. Si la réponse est non, elle n'est pas finie. Les quatre états (vide · chargement · erreur · succès), la cible Turbo et les `aria-*` sont nommés, pas suggérés. Indexe dans `docs/decisions/udr/README.md`.
+Test de conformité de l'UDR : **un agent doit pouvoir écrire la vue à partir de la seule §3, sans poser de question.** Relis la §3 et demande-toi si tu y arriverais. Si la réponse est non, elle n'est pas finie. Les quatre états (vide · chargement · erreur · succès), la cible Turbo et les `aria-*` sont nommés, pas suggérés. Cite-la `UDR-XXXX-<slug>` : son numéro et son index viennent à la clôture.
 
-Reporte les numéros produits dans `prd.md` §6, et passe le `Statut` du memo à `planifié`.
+Reporte les références produites (`ADR-XXXX-<slug>`, `UDR-XXXX-<slug>`) dans `prd.md` §6, et passe le `Statut` du memo à `planifié`.
 
 ## Étape 5 — PLANIFIER
 

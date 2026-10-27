@@ -88,17 +88,16 @@ Le memo doit ressortir du grill modifié — a minima, le périmètre s'est allo
 C'est le seul cycle où l'ADR est obligatoire **même si « on ne fait que déplacer du code »**. Un refactoring sans ADR se refait à l'envers six mois plus tard par quelqu'un qui ignorait pourquoi. Tu ne passes pas à l'étape 5 sans lui.
 
 ```bash
-ls docs/decisions/adr/ | tail -3
-cp docs/decisions/adr/TEMPLATE.md docs/decisions/adr/NNNN-titre-en-kebab-case.md
+cp docs/decisions/adr/TEMPLATE.md docs/decisions/adr/XXXX-titre-en-kebab-case.md
 ```
 
-4 chiffres, kebab-case sans accent (`docs/guide/conventions.md` §2). Trois sections ne peuvent **pas** rester vides :
+`XXXX-`, kebab-case sans accent, cité `ADR-XXXX-<slug>` jusqu'à la clôture (`docs/guide/conventions.md` §2). Trois sections ne peuvent **pas** rester vides :
 
 - **§3 Options envisagées** — y compris « ne rien faire », avec son coût.
 - **§5 Coûts consentis** — un ADR sans coût consenti n'a pas été écrit honnêtement.
 - **§7 Comment vérifier** — le test, le cop rubocop ou la commande qui **échoue si quelqu'un revient en arrière**. Un refactoring qui ne laisse pas de garde-fou sera défait. Exemple de garde-fou existant sur ce projet : `test/domain/domain_purity_stress_test.rb`.
 
-Indexe l'ADR dans `docs/decisions/adr/README.md`.
+Pas d'index à la main : le numéro et la ligne d'index se posent au commit de clôture (`script/docs/build_index --number`, `docs/guide/conventions.md` §2).
 
 **Pas de PRD. Pas d'UDR** — si une UDR devient nécessaire, ce n'est plus un refactoring : retour à l'étape 0.
 
@@ -131,7 +130,7 @@ Contraintes permanentes : en-tête HITL sur tout fichier de `app/` (`docs/guide/
 
 ## Étape 7 — S'arrêter et présenter
 
-Présente : le motif, le périmètre gelé (liste de fichiers), le numéro d'ADR et son garde-fou §7, le graphe de lots par zone, le dispatch proposé.
+Présente : le motif, le périmètre gelé (liste de fichiers), l'ADR (`ADR-XXXX-<slug>`) et son garde-fou §7, le graphe de lots par zone, le dispatch proposé.
 
 Rappelle le mandat du **challenger ISO**, non négociable en phase 5 : il **rejoue les parcours de la zone dans l'application, avant/après**, compare libellés, tri, erreurs, permissions, contenu ; il lit le diff en cherchant les `if`, `rescue` et valeurs par défaut **nouveaux** ; il vérifie que le garde-fou de l'ADR §7 échoue bien si on revient en arrière. **Il lui est interdit de commenter le style** — c'est le travail de rubocop. « Le code est plus lisible » n'est pas une preuve.
 

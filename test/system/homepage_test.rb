@@ -2,10 +2,10 @@ require "application_system_test_case"
 
 # Garde-fou n° 7 : the whole chain (assets, CSP, browser) proven on an empty app.
 # TR-01 : the role modals open without a page reload and lead to the right screen.
-# UDR-0064 : the modals name the tab (RH-02) and the decision fits in the first screen of a small phone (RH-03).
-# UDR-0059 §2.2 : on a computer, the landing no longer repeats the two entries at the bottom (no « Rejoindre », no « Commencer »).
+# Chantier mvp-teacher-student, lot F (UDR-0059) : la page d'accueil publique tient sur un écran (CA-A1), texte à gauche
+# et photo à droite sur ordinateur, la feuille mordant sur la photo (CA-A3). Le contenu et le drapeau se prouvent en test de contrôleur.
 class HomepageTest < ApplicationSystemTestCase
-  SMALL_PHONE = [ 360, 640 ].freeze
+  PHONES = [ [ 390, 844 ], [ 320, 568 ] ].freeze
 
   test "a visitor opens the homepage in a real browser" do
     visit root_path
@@ -20,22 +20,22 @@ class HomepageTest < ApplicationSystemTestCase
     assert page.evaluate_script("typeof window.Turbo !== 'undefined'"), "Turbo n'a pas démarré : JavaScript bloqué ou absent"
   end
 
-  test "a visitor opens the student then the teacher modal, and follows « Rejoindre ma classe »" do
+  test "a visitor opens the student then the teacher modal, and follows « Créer mon compte »" do
     visit root_path
 
     assert_no_page_reload do
-      within("#hero") { click_on "Je suis élève" }
-      within("dialog#role-modal-student-hero[open]") do
+      click_on "Je suis élève"
+      within("dialog#role-modal-student-entry[open]") do
         assert_title "Tu es élève ? · Lnclass"
         assert_link "Se connecter", href: new_session_path
-        assert_link "Rejoindre ma classe", href: new_student_registration_path
+        assert_link "Créer mon compte", href: new_student_registration_path
         find("button[aria-label='Fermer']").click
       end
       assert_no_selector "dialog[open]"
       assert_title "Accueil · Lnclass"
 
-      within("#hero") { click_on "Je suis enseignant" }
-      within("dialog#role-modal-teacher-hero[open]") do
+      click_on "Enseignant(e)"
+      within("dialog#role-modal-teacher-entry[open]") do
         assert_title "Vous êtes enseignant ? · Lnclass"
         assert_link "Se connecter", href: new_session_path
         assert_link "Créer un compte", href: new_teacher_registration_path
@@ -43,59 +43,72 @@ class HomepageTest < ApplicationSystemTestCase
       end
       assert_no_selector "dialog[open]"
 
-      within("#hero") { click_on "Je suis élève" }
-      within("dialog#role-modal-student-hero[open]") { click_on "Rejoindre ma classe" }
+      click_on "Je suis élève"
+      within("dialog#role-modal-student-entry[open]") { click_on "Créer mon compte" }
       assert_current_path new_student_registration_path
     end
   end
 
-  test "RH-03: on a 360 × 640 phone, the two entries of the hero are visible without scrolling" do
-    with_device_viewport(*SMALL_PHONE) do
-      visit root_path
+  # CA-A1 : à 390 px et à 320 × 568, photo, slogan, vague, pastille et deux entrées tiennent sans défiler, sans déborder.
+  # Drapeau « Espace établissement » allumé : le pire cas, avec un lien de plus sous les deux entrées.
+  test "CA-A1: on a 390 px phone and on a 320 × 568 phone, the page holds on one screen, the school space link included" do
+    pilot_flags!(school_space_enabled: true)
 
-      assert_selector "#hero button[aria-haspopup=dialog]", count: 2
-      bottoms = page.evaluate_script(<<~JS)
-        Array.from(document.querySelectorAll("#hero button[aria-haspopup=dialog]"))
-          .map((button) => Math.round(button.getBoundingClientRect().bottom))
-      JS
-      height = page.evaluate_script("window.innerHeight")
+    PHONES.each do |width, height|
+      with_device_viewport(width, height) do
+        visit root_path
 
-      assert bottoms.all? { it <= height }, "les entrées du héros finissent à #{bottoms.join(' et ')} px pour #{height} px de fenêtre"
-      assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
-             "la page déborde en largeur à 360 px"
-    end
-  end
+        assert_selector "button[aria-haspopup=dialog]", count: 3
+        fit = page.evaluate_script(<<~JS)
+          (() => {
+            const bottom = (selector) => Math.round(document.querySelector(selector).getBoundingClientRect().bottom)
+            return {
+              height: window.innerHeight,
+              scrollHeight: document.documentElement.scrollHeight,
+              overflowX: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+              entries: Array.from(document.querySelectorAll("button[aria-haspopup=dialog]")).map((b) => Math.round(b.getBoundingClientRect().bottom)),
+              photoHeight: Math.round(document.querySelector("main img").getBoundingClientRect().height),
+              pill: bottom("[role=note]"), title: bottom("h1")
+            }
+          })()
+        JS
+        size = "#{width} × #{height}"
 
-  test "at 1 280 px, the landing has neither the join section nor « Commencer », and the hero opens the student modal" do
-    with_mobile_viewport([ 1280, 900 ]) do
-      visit root_path
-
-      assert_no_selector "section#rejoindre", visible: :all
-      assert_no_selector "a, button", text: "Commencer", visible: :all
-      assert_no_text "Plante la graine aujourd'hui."
-
-      within("#hero") { click_on "Je suis élève" }
-      within("dialog#role-modal-student-hero[open]") do
-        assert_link "Se connecter", href: new_session_path
-        assert_link "Rejoindre ma classe", href: new_student_registration_path
+        assert_operator fit["scrollHeight"], :<=, fit["height"], "la page défile à #{size} : #{fit['scrollHeight']} px pour #{fit['height']} px"
+        assert fit["entries"].all? { it <= fit["height"] }, "les entrées finissent à #{fit['entries'].join(' et ')} px à #{size}"
+        assert_equal 0, fit["overflowX"], "la page déborde en largeur à #{size}"
+        assert_operator fit["photoHeight"], :>=, 200, "la photo est écrasée à #{size} : #{fit['photoHeight']} px"
+        assert_operator fit["pill"], :<=, fit["title"], "la pastille passe sous le titre à #{size}"
       end
     end
   end
 
-  # CC-22 (UDR-0113 §3.9) : a subject of the band opens its public page; « Les fiches de cours par niveau » in the footer opens /niveaux.
-  test "CC-22: a visitor follows a subject of the band, then « Les fiches de cours par niveau » of the footer" do
-    level = create_level(name: "3ème", position: 4, cycle: "first")
-    create_course(name: "Électricité", level:, material: create_material(name: "Physique-Chimie"))
+  # CA-A3 : sur ordinateur, texte à gauche, photo à droite, un seul écran, la feuille mord sur la photo.
+  test "CA-A3: on a computer, the text is on the left, the photo on the right, on one screen, the sheet biting on the photo" do
+    with_mobile_viewport([ 1440, 900 ]) do
+      visit root_path
 
-    visit root_path
-    within("#matieres") { click_on "Physique-Chimie" }
-    assert_selector "h1", text: "Physique-Chimie"
-    assert_selector "#material_groups h3", text: "Électricité"
+      layout = page.evaluate_script(<<~JS)
+        (() => {
+          const box = (selector) => document.querySelector(selector).getBoundingClientRect()
+          return {
+            sheetRight: box("#home-sheet").right, photoLeft: box("main img").left, photoRight: box("main img").right,
+            titleRight: box("h1").right, scrollHeight: document.documentElement.scrollHeight, height: window.innerHeight,
+            width: window.innerWidth
+          }
+        })()
+      JS
 
-    visit root_path
-    within("footer") { click_on "Les fiches de cours par niveau" }
-    assert_selector "h1", text: "Les fiches de cours par niveau"
-    assert_selector "#cycle_first a", text: "3ème"
+      assert_operator layout["titleRight"], :<=, layout["sheetRight"], "le titre n'est pas dans la feuille de gauche"
+      assert_operator layout["sheetRight"], :<=, layout["width"] / 2 + 150, "la feuille n'est pas à gauche"
+      assert_operator layout["sheetRight"], :>, layout["photoLeft"], "la feuille ne mord pas sur la photo"
+      assert_operator layout["photoRight"], :>=, layout["width"] - 1, "la photo n'atteint pas le bord droit"
+      assert_operator layout["scrollHeight"], :<=, layout["height"], "la page défile sur ordinateur"
+      assert_selector "#matieres", visible: :visible
+      assert_no_selector "header, footer", visible: :all
+      click_on "Je suis élève"
+      assert_selector "dialog#role-modal-student-entry[open]"
+    end
   end
 
   private
