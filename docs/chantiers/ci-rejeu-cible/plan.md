@@ -57,7 +57,7 @@ Lot F — découper les fichiers système lents     → mesuré ; décision dans
 - [x] Chaque levier sans gain mesuré a été annulé
 - [x] Bench après : même machine, même méthode, ≥ 3 exécutions, médiane
 - [x] Tableau `Mesures` complété (Avant / Cible / Après)
-- [ ] Challenger a relancé le bench lui-même (protocole P1 à P4 du memo, à sa charge)
+- [x] Challenger a relancé le bench lui-même (S1 à S3 sur `231acb9` : voir `memo.md`, § Contre-mesure du challenger)
 - [x] Résultat fonctionnel identique (aucun écran de production modifié : l'attribut de délai n'est rendu qu'en test)
 - [ ] Pureté domaine · rubocop · tests · brakeman : au vert
 - [x] `journal.md` : leviers abandonnés et pourquoi

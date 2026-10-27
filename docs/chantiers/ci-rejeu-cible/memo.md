@@ -42,6 +42,18 @@ Détail par étape (médiane des trois passages) : tests système 528,6 s (526,7
 
 Deux passages sont rouges, hors chantier : n° 1, `question_matching_test` (identifiant cherché comme nombre dans la page) et CA-C6 (le bug de minuteur corrigé par #316) ; n° 2, `blog_management_test`. Le n° 3 est vert : c'est la non-régression de départ.
 
+### Contre-mesure du challenger
+
+Un agent indépendant a rejoué les protocoles P1 à P3 sur `231acb9`, le 2026-10-27, sur la même machine :
+
+| Scénario | Annoncé | Challenger | Verdict |
+|---|---|---|---|
+| S1 | 807,9 s | 747,6 s (une fois, vert) | reproduit |
+| S2 | 563,0 s | 562,3 s (534,4 · 566,5 · 562,3) | reproduit |
+| S3 | 32,1 s | 32,8 s (33,0 · 32,8 · 31,8) | reproduit |
+
+Un passage S2 est rouge sur `boucle_pedagogique_test.rb:432` (`/teams/referential` au lieu de `/teams/drenas`), un test hors chantier vert aux deux autres passages. Le premier essai, sur `48d5d1e`, était rouge à cause d'un trou de couverture de #319 (`import_course_sheet.rb`), comblé dans `231acb9`.
+
 ### Protocole (rejouable par le challenger)
 
 Préparer : `source ~/.lnclass-ci-env` ; arbre propre ; machine sans autre suite qui tourne.
