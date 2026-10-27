@@ -27,7 +27,7 @@ Le reste de l'application suit l'UDR-0136 : palette froide, une seule police (DM
 **L'écran de la fiche de cours a son propre habillage, isolé du reste de l'application.** Exception à l'UDR-0136 accordée par Touré le 2026-10-27 pour le test, à confirmer par le porteur.
 
 - Une feuille de style à part, `app/assets/stylesheets/course_sheet.css`, chargée seulement sur l'écran de la fiche. Elle porte les jetons des maquettes en variables CSS (`--sheet-paper`, `--sheet-ink`, `--sheet-primary`, `--sheet-accent`…), le Seyès en dégradés, les 3 thèmes (`blue`, `teal`, `burgundy`) et les composants (`.sheet-page`, `.sheet-box`, `.sheet-btn`…).
-- Kalam (400, 700) et Source Serif 4 (variable, 400 à 600, italique) en `woff2`, servies par Lnclass depuis `public/fonts/`, déclarées seulement dans cette feuille.
+- Kalam (400, 700) et Source Serif 4 (variable, 400 à 600, italique) en `woff2`, servies par Lnclass depuis `app/assets/fonts/` (empreinte Propshaft, comme DM Sans), déclarées seulement dans cette feuille.
 - Les vues de `app/views/catalog/course_sheets/` et les contrôleurs `app/javascript/controllers/course_sheet/` n'utilisent que les classes de cette feuille : pas d'attribut `style`, pas de valeur arbitraire Tailwind. La position calculée d'une bulle ou d'un point de figure passe par des attributs SVG ou des variables CSS posées en JavaScript.
 - `design_tokens_test.rb` garde ses règles partout, sauf les règles « une seule police », « palette froide » et « graisse 500 » pour ces deux dossiers et cette feuille. Le test vérifie que l'exception ne s'étend pas ailleurs.
 - La barre de l'application (`shell`) reste au-dessus de la fiche, avec la palette de l'UDR-0136.
