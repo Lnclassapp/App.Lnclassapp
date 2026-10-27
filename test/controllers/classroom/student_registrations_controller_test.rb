@@ -112,12 +112,12 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
   # Chantier ci-rejeu-cible: the delay before step 2 moves on is the controller's own (1 s) unless the environment sets it;
   # only the tests do (100 ms), so the production page carries no delay attribute.
   test "the step-2 delay is set by the test environment alone; unset, the page leaves the controller's default" do
+    delay = Rails.configuration.x.signup_steps_delay_ms
     get new_student_registration_path
     assert_select "#student-signup[data-classroom--signup-steps-delay-value='100']"
     get new_teacher_registration_path
     assert_select "#teacher-signup[data-classroom--signup-steps-delay-value='100']"
 
-    delay = Rails.configuration.x.signup_steps_delay_ms
     Rails.configuration.x.signup_steps_delay_ms = nil
     get new_student_registration_path
     assert_select "#student-signup[data-controller='classroom--signup-steps']:not([data-classroom--signup-steps-delay-value])"

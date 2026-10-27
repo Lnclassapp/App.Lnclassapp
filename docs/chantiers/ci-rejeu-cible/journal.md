@@ -5,9 +5,12 @@
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
 | 2026-10-27 | Entrées d'une étape = l'arbre **moins** ce qu'elle ne lit pas, jamais une liste de ce qu'elle lit (sauf audits et perf) | Un dossier nouveau compte par défaut : fail-safe | ADR-XXXX-verdict-par-etape-de-la-ci |
-| 2026-10-27 | Les tests Rails ne dépendent pas du front, sauf 67 fichiers rejoués seuls quand le front bouge | `grep` : jetons de design, bundle, sprites, CSS compilé lisent `app/assets` et `app/javascript` | idem |
+| 2026-10-27 | Les tests Rails ne dépendent pas du front, sauf 61 fichiers rejoués seuls quand le front bouge (161 au premier jet : « rebuilds » et `node.css(…)` de Nokogiri comptaient) | `grep` : jetons de design, bundle, sprites, CSS compilé lisent `app/assets` et `app/javascript` | idem |
 | 2026-10-27 | La perf teste `GITHUB_ACTIONS`, plus `CI` | `bin/ci` pose `CI=true` (`ActiveSupport::ContinuousIntegration.run`) : en local, la perf ne se sautait jamais | idem |
 | 2026-10-27 | Le train de `bin/ci-quiet` pose `CI=true` sur ses étapes | `config/environments/test.rb` : `eager_load = ENV["CI"].present?`, dont dépend la couverture de toute l'application | idem |
+| 2026-10-27 | La clé des lecteurs du front = tout sauf `test/system` et `test/performance` | Sur l'arbre entier, une ligne d'un test de perf rejouait ces 61 fichiers (84 s de S3) | idem |
+| 2026-10-27 | Fichiers non commités : aucun verdict d'étape n'est lu, tout joue ; aucun n'est écrit si l'arbre a bougé pendant le run ou si le Setup est rouge | Revue `silent-failure-hunter` et `security-reviewer` : les clés sont celles de HEAD, une modification non commitée passait au vert sans jouer | idem |
+| 2026-10-27 | Les audits de dépendances gardent leur verdict un jour ; la garde d'index des décisions porte `docs/decisions` dans sa clé | Revues : la base d'avis bouge sans le code ; l'empreinte écarte le Markdown que l'index lit | idem |
 | 2026-10-27 | CA-C6 garde le délai de production (1 s) | Il prouve qu'un minuteur **encore en attente** ne repasse pas par-dessus l'étape 2 rouverte : à 100 ms, le minuteur part avant la réponse et le test ne prouve plus rien (message de la session d'orchestration) | non |
 
 ## Ce qui a dérapé
@@ -27,6 +30,7 @@
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | `question_matching_test` instable | Hors périmètre | à ouvrir (`/bugfix`) |
+| La sélection des étapes de `bin/ci-quiet` (clés back/front, fichiers en attente, enregistrement) n'a pas de test unitaire, seulement les bancs S1 à S3 | L'extraire en fonctions pures de `CiScope` dépasse ce chantier (revue `pr-test-analyzer`) | à ouvrir (`/refactor`) |
 | Variance de `boucle_pedagogique_test` (38 à 63 s) | Hors périmètre : accélérer un test n'est pas ce chantier | — |
 
 ## Clôture

@@ -69,7 +69,13 @@ Step = Struct.new(:title, :env, :command, :inputs, :unit, :extra, :setup, keywor
 # The train plays as bin/ci does, with CI=true (ActiveSupport::ContinuousIntegration sets it): the test environment then
 # loads every file (eager_load), which the coverage of the whole suite needs.
 plan_env = level == :train ? { "CI" => "true" } : {}
-from_plan = ->(step) { Step.new(title: step.title, env: plan_env, command: [ step.command ], inputs: step.inputs, unit: step.inputs == :unit ? :all : nil) }
+# The audits ask a database of advisories that moves without the code: their verdict lasts one day. The decision index
+# reads the Markdown of docs/decisions, which the fingerprint leaves out.
+decisions = git("ls-tree", "-r", "HEAD", "docs/decisions").to_s
+from_plan = ->(step) {
+  extra = (Time.now.strftime("%F") if %i[gems yarn].include?(step.inputs)) || (decisions if step.command.include?("build_index"))
+  Step.new(title: step.title, env: plan_env, command: [ step.command ], inputs: step.inputs, unit: step.inputs == :unit ? :all : nil, extra:)
+}
 guards = CI_PLAN.steps_for("lint").select { it.title.start_with?("Guard:") }.map(&from_plan)
 steps =
   case level
@@ -99,10 +105,13 @@ unit_tests = Dir["test/**/*_test.rb"].reject { it.match?(%r{\Atest/(system|guard
 
 # What each step owes: nothing when it is green for its inputs; for the unit tests green without the browser's files,
 # the tests that read those files alone. Each run carries the keys its green verdict records.
+# Files not committed: the keys are those of HEAD, so no step verdict is read and every step plays.
 runs = steps.reject(&:setup).filter_map do |step|
-  if step.unit
+  if pending.any?
+    [ step, [] ]
+  elsif step.unit
     back = key.(step, :unit)
-    front = key.(step, nil, "front")
+    front = key.(step, :front, "front")
     if !verdicts.step?(back)
       [ step, [ back, front ] ]
     elsif !verdicts.step?(front)
@@ -138,7 +147,9 @@ results = runs.map { |step, keys| [ play(step.title, step.env, *step.command), k
 green = results.all?(&:first)
 status = green ? 0 : 1
 minutes, seconds = (Time.now - started).round.divmod(60)
-clean = pending.empty? && git("rev-parse", "HEAD").to_s.strip == head
+# A tree touched during the run (a file edited, a schema rewritten) proves nothing about HEAD.
+clean = pending.empty? && git("status", "--porcelain").to_s.empty? && git("rev-parse", "HEAD").to_s.strip == head &&
+        results.zip(runs).none? { |(passed, _), (step, _)| step.setup && !passed }
 results.each { |passed, keys| keys.each { verdicts.record_step(it, head[0, 8]) } if passed && clean }
 report(green, status, "level #{level}")
 exit 1 unless green

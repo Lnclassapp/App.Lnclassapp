@@ -42,16 +42,18 @@ Les entrées (`CiScope::INPUTS`, déclarées dans `config/ci.rb` par `inputs:`) 
 
 | Étape | Entrées |
 |---|---|
-| Gardes | tout l'arbre |
+| Gardes | tout l'arbre (l'index des décisions : plus le Markdown de `docs/decisions/`) |
 | Style Ruby, Brakeman | l'arbre sans `app/javascript/`, `app/assets/` (Brakeman : ni `test/` ni `docs/`) |
-| Audit des gems / Yarn | `Gemfile`, `Gemfile.lock`, configuration de l'audit / `package.json`, `yarn.lock` |
+| Audit des gems / Yarn | `Gemfile`, `Gemfile.lock`, configuration de l'audit / `package.json`, `yarn.lock`, et la date : la base d'avis bouge sans le code |
 | Tests Rails | l'arbre sans `app/javascript/`, `app/assets/stylesheets/`, `test/system/`, `test/performance/` |
 | Tests système | l'arbre sans les fichiers `*_test.rb` hors de `test/system/` (un processus ne charge que ses tests) |
 | Seeds | l'arbre sans `app/javascript/`, `app/assets/stylesheets/`, `test/` |
 | Perf des imports | `PERF_PATHS` sans `PERF_IGNORED` (ADR-0039) |
 | Budget des assets | l'arbre sans `test/`, `db/`, `docs/`, `app/domain/`, `app/infrastructure/`, `app/jobs/` |
 
-**Les tests Rails qui lisent le front.** 67 fichiers de tests unitaires lisent du CSS, du JavaScript ou leur build (jetons de design, bundle, sprites). Quand seul le front a bougé, ils sont rejoués seuls (`CiScope.front_readers` : un test qui nomme `javascript`, `stylesheet`, `tailwind`, `esbuild`, `builds`, `.css` ou `.js`, ou qui appelle une aide de `test/support/` qui le fait). La détection est large exprès.
+**Les tests Rails qui lisent le front.** 61 fichiers de tests unitaires lisent du CSS, du JavaScript ou leur build (jetons de design, bundle, sprites). Quand seul le front a bougé, ils sont rejoués seuls (`CiScope.front_readers` : un test qui nomme `javascript`, `stylesheet`, `tailwind`, `esbuild`, `builds`, `.css` ou `.js`, ou qui appelle une aide de `test/support/` qui le fait). La détection est large exprès. Leur clé porte tout l'arbre sauf `test/system/` et `test/performance/`.
+
+**Fichiers non commités.** Les clés sont celles de HEAD : avec des fichiers en attente, aucun verdict d'étape n'est lu et tout joue. Aucun n'est écrit si l'arbre ou HEAD a bougé pendant le run, ni si le Setup est rouge.
 
 **La perf ciblée.** Quand l'écart avec `origin/Develop` sur `PERF_PATHS` ne porte que sur des fichiers `test/performance/**/*_test.rb`, seuls les tests changés jouent ; tout autre écart les joue tous, comme avant. La condition qui distingue GitHub teste `GITHUB_ACTIONS`, plus `CI` : `bin/ci` pose `CI=true` sur toute machine (`ActiveSupport::ContinuousIntegration.run`), si bien que la perf n'était jamais sautée en local.
 
@@ -68,7 +70,6 @@ Les entrées (`CiScope::INPUTS`, déclarées dans `config/ci.rb` par `inputs:`) 
 ### 🔴 Coûts consentis
 
 - Une exclusion fausse ferait sauter une étape qui aurait dû tourner. La promotion vers `Staging` rejoue tout sur GitHub (ADR-0107) : l'erreur ne passe pas `Staging`.
-- L'audit des gems garde son verdict tant que `Gemfile.lock` ne bouge pas : une faille publiée depuis se voit au train GitHub, comme avec le verdict par arbre.
 - Le verdict reste local (`tmp/ci-verdicts/steps/`). `rm -r tmp/ci-verdicts` oublie tout.
 
 ## 6. Notes d'implémentation

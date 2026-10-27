@@ -133,6 +133,17 @@ class CiScopeTest < ActiveSupport::TestCase
     assert system.include?("test/support/factories.rb")
     refute system.include?("test/models/user_test.rb"), "a unit test is never loaded by the system run"
 
+    front = CiScope::INPUTS.fetch(:front)
+    assert front.include?("app/javascript/controllers/x.js")
+    assert front.include?("test/helpers/icons_test.rb")
+    refute front.include?("test/performance/x_test.rb"), "a line of a performance test plays no reader of the browser's files"
+
+    # Each step reads the file that breaks it.
+    { ruby: "app/models/x.rb", gems: "Gemfile.lock", yarn: "yarn.lock", brakeman: "app/controllers/x_controller.rb",
+      seeds: "db/seeds.rb", assets: "app/views/x.html.erb" }.each { |step, path| assert CiScope::INPUTS.fetch(step).include?(path), "#{step}: #{path}" }
+    refute CiScope::INPUTS.fetch(:gems).include?("app/models/x.rb")
+    refute CiScope::INPUTS.fetch(:assets).include?("app/domain/x.rb")
+
     perf = CiScope::Inputs.new(only: %w[app/domain db Gemfile.lock], except: %w[db/seeds.rb])
     assert perf.include?("db/migrate/1_x.rb")
     assert perf.include?("Gemfile.lock")

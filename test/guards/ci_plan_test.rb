@@ -163,7 +163,9 @@ class CiPlanTest < Minitest::Test
       File.write(File.join(repo, "app/views/page.erb"), "x")
       git(repo, "add", "-A")
       assert_skipped run_perf(perf, repo), "un chemin hors de la liste la saute encore"
-      assert_played run_perf(perf, repo, "GITHUB_ACTIONS" => "true"), "sur GitHub, elle joue"
+      github = run_perf(perf, repo, "GITHUB_ACTIONS" => "true")
+      assert_played github, "sur GitHub, elle joue"
+      CiPlan.files("test/performance/**/*_test.rb").grep_v(/_budget_test/).each { assert_includes github, it, "sur GitHub, toute la perf" }
       assert_skipped run_perf(perf, repo, "CI" => "true"), "bin/ci pose CI=true partout : CI ne distingue pas GitHub"
 
       FileUtils.mkdir_p(File.join(repo, "script/ci"))
@@ -213,6 +215,11 @@ class CiPlanTest < Minitest::Test
 
   # ADR-0069 : Dependabot follows the road of any change, Develop then the promotions, one grouped pull request
   # per ecosystem (17 of the 43 runs of 2026-10-01 were its eight pull requests and their merges on main).
+  # bin/ci-quiet keys each step on its inputs: a name it does not know would fail there alone, not in bin/ci.
+  def test_each_step_names_inputs_bin_ci_quiet_knows
+    CI_PLAN.steps_for(nil).map(&:inputs).grep(Symbol).each { assert CiScope::INPUTS.key?(it), it.to_s }
+  end
+
   def test_dependabot_targets_develop_with_one_grouped_pull_request
     updates = YAML.safe_load_file(File.join(GITHUB, "dependabot.yml")).fetch("updates")
 

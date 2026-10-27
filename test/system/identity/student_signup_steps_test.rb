@@ -212,6 +212,7 @@ class Identity::StudentSignupStepsTest < ApplicationSystemTestCase
     with_production_signup_delay do
       create_student(contact: "0701020304", classroom: @classroom)
       visit new_student_registration_path
+      assert_no_selector "[data-classroom--signup-steps-delay-value]", visible: :all
       fill_in "student_registration[join_code]", with: @code
       assert_step 2
       fill_in "student_registration[last_name]", with: "KOUASSI"

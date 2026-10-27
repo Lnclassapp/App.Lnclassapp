@@ -115,6 +115,8 @@ class CiScope
     # The unit suite: neither the browser's files nor the system and performance tests. The unit tests that do read the
     # browser's files (FRONT_WORDS) are played again alone when those move (CiScope.front_readers).
     unit: Inputs.new(except: [ *FRONT, "test/system/", "test/performance/" ]),
+    # Those readers: the unit inputs and the browser's files, so a line of a performance test plays none of them.
+    front: Inputs.new(except: %w[test/system/ test/performance/]),
     # The system run reads everything but the other runs' tests: a test file is loaded by its own run only.
     system: Inputs.new(own_tests: "test/system/"),
     seeds: Inputs.new(except: [ *FRONT, "test/" ]),
