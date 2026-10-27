@@ -11,7 +11,7 @@ Tu es un vérificateur. Tu lances, tu relis, tu rapportes. Tu ne corriges rien e
 
 Le répertoire de travail (worktree) à vérifier et, éventuellement, le chemin d'un **verrou `flock`** à respecter. Place-toi dans ce répertoire et ne le quitte pas.
 
-Tu es appelé une seule fois par PR, sur son head final, après les revues et leurs corrections ; une CI rouge corrigée se rejoue. Le SHA que tu notes est celui qui sera fusionné. `bin/ci-quiet` choisit lui-même le niveau (doc, pr, train, ADR-0107) : ne force jamais `--full` pour une PR vers `Develop`. La promotion vers `Staging` est prouvée par la CI GitHub, pas par toi. Une étape déjà verte pour ses entrées ne rejoue pas : la ligne de preuve le dit (ADR-XXXX-verdict-par-etape-de-la-ci).
+Tu es appelé une seule fois par PR, sur son head final, après les revues et leurs corrections ; une CI rouge corrigée se rejoue. Le SHA que tu notes est celui qui sera fusionné. `bin/ci-quiet` choisit lui-même le niveau (doc, pr, train, ADR-0107) : ne force jamais `--full` pour une PR vers `Develop`. La promotion vers `Staging` est prouvée par la CI GitHub, pas par toi. Une étape déjà verte pour ses entrées ne rejoue pas : la ligne de preuve le dit (ADR-0111).
 
 ## Méthode
 
