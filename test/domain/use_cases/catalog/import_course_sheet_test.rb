@@ -91,6 +91,15 @@ module UseCases
                      report.import_errors.map { [ it["path"], it["code"], it["params"].values_at("page", "section", "position", "reason", "detail") ] }
       end
 
+      test "an error outside the blocks is located by what it names: a page, the glossary, or the whole file" do
+        error = ->(page: nil, section: nil, position: nil, detail: nil) { Entities::Catalog::SheetDocument::Error.new(page:, section:, position:, reason: :wrong_type, detail:) }
+        located = ->(**fields) { adapter.send(:located, error.(**fields)).then { [ it.path, it.params ] } }
+
+        assert_equal [ "pages[1]", { page: 2, reason: "wrong_type", detail: "pages" } ], located.(page: 2, detail: "pages")
+        assert_equal [ "glossary", { reason: "wrong_type", detail: "glossary.thales" } ], located.(detail: "glossary.thales")
+        assert_equal [ "$", { reason: "wrong_type" } ], located.()
+      end
+
       test "CA-2: an unknown kind is refused as a whole by the schema, nothing is written" do
         doc = document
         doc["pages"][2]["sections"][0]["blocks"] << { "type" => "media", "kind" => "inconnu" }
