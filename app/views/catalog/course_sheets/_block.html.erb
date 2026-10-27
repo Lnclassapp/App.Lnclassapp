@@ -4,10 +4,14 @@
 <% sheet = Entities::Catalog::SheetDocument %>
 <% type = block["type"] %>
 <% kind = block["kind"] %>
-<% if %w[figure media].include?(type) && (type == "figure" ? sheet::FIGURE_KINDS : sheet::MEDIA_KINDS).include?(kind) %>
-  <%= render "catalog/course_sheets/kinds/#{kind}", block: block %>
-<% elsif (sheet::BLOCK_TYPES - %w[figure media]).include?(type) %>
-  <%= render "catalog/course_sheets/blocks/#{type}", block: block %>
+<% partial = if %w[figure media].include?(type) && (type == "figure" ? sheet::FIGURE_KINDS : sheet::MEDIA_KINDS).include?(kind)
+                "catalog/course_sheets/kinds/#{kind}"
+              elsif (sheet::BLOCK_TYPES - %w[figure media]).include?(type)
+                "catalog/course_sheets/blocks/#{type}"
+              end %>
+<%# Un kind de la liste fermée dont le lot n'est pas encore livré : le message, pas une erreur %>
+<% if partial && lookup_context.exists?(partial, [], true) %>
+  <%= render partial, block: block %>
 <% else %>
   <p class="sheet-muted"><%= t(".unavailable") %></p>
 <% end %>

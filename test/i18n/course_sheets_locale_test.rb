@@ -21,7 +21,7 @@ class CourseSheetsLocaleTest < ActiveSupport::TestCase
   end
 
   test "Je m'entraîne et pagination" do
-    assert_equal [ "Voir la solution", "Nouvel exercice", "1 / 2" ],
+    assert_equal [ "Voir la solution", "Nouvel exercice", "Score : 1 / 2" ],
                  [ t("practice.solution"), t("practice.next"), t("practice.score", ok: 1, total: 2) ]
     assert_equal [ "Page 2", "2 / 3" ], [ t("page_label", number: 2), t("page_counter", number: 2, total: 3) ]
   end

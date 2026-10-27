@@ -5,7 +5,7 @@
 <% pages = @sheet.pages %>
 <% page_title "#{t(".title")} · #{course.name}" %>
 <% content_for :nav_key, "courses" %>
-<% content_for :head do %><%= stylesheet_link_tag "course_sheet", "course_sheet/reading" %><% end %>
+<% content_for :head do %><%= stylesheet_link_tag "course_sheet" %><% end %>
 <%= ui_back_link course.name, href: course_path(course.slug) %>
 
 <%# Le lexique et son aide voyagent en valeurs Stimulus (Hash clé => [titre, définition, exemple]) ; la bulle se remplit en texte brut. %>

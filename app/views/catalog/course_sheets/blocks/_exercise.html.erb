@@ -9,7 +9,7 @@
      data-<%= ctrl %>-wrong-value="<%= t("#{i18n}.wrong") %>" data-<%= ctrl %>-all-correct-value="<%= t("#{i18n}.all_correct") %>"
      data-<%= ctrl %>-some-wrong-value="<%= t("#{i18n}.some_wrong") %>">
   <div class="sheet-card-title"><%= block["title"] %></div>
-  <p class="sheet-card-prompt"><%= safe_join(block["prompt"].to_s.split("\n"), tag.br) %></p>
+  <p class="sheet-card-prompt"><%= safe_join(block["prompt"].to_s.split("\n").map { sheet_text(it, glossary: @sheet&.glossary || {}) }, tag.br) %></p>
   <div class="sheet-fields">
     <% block["fields"].each do |field| %>
       <% fid = "#{uid}-#{field["id"]}" %>
@@ -46,9 +46,9 @@
   </div>
   <div class="sheet-message" role="status" aria-live="polite" data-<%= ctrl %>-target="message"></div>
   <% if block["hint"].present? %>
-    <div class="sheet-hint" id="<%= uid %>-hint" hidden data-<%= ctrl %>-target="hint"><%= t("#{i18n}.hint") %> : <%= safe_join(block["hint"].split("\n"), tag.br) %></div>
+    <div class="sheet-hint" id="<%= uid %>-hint" hidden data-<%= ctrl %>-target="hint"><%= t("#{i18n}.hint") %> : <%= safe_join(block["hint"].split("\n").map { sheet_text(it, glossary: @sheet&.glossary || {}) }, tag.br) %></div>
   <% end %>
   <% if block["correction"].present? %>
-    <div class="sheet-correction" id="<%= uid %>-correction" hidden data-<%= ctrl %>-target="correction"><%= safe_join(block["correction"].split("\n"), tag.br) %></div>
+    <div class="sheet-correction" id="<%= uid %>-correction" hidden data-<%= ctrl %>-target="correction"><%= safe_join(block["correction"].split("\n").map { sheet_text(it, glossary: @sheet&.glossary || {}) }, tag.br) %></div>
   <% end %>
 </div>
