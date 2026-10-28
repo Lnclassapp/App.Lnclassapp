@@ -37,4 +37,8 @@ class JavascriptBundleTest < ActiveSupport::TestCase
 
     assert_operator size_kb, :<=, BUDGET_KB
   end
+
+  test "bin/check-asset-budget holds the same ceiling as this test (ADR-0114)" do
+    assert_includes Rails.root.join("bin/check-asset-budget").read, %("app/assets/builds/application.js" => #{BUDGET_KB},)
+  end
 end
