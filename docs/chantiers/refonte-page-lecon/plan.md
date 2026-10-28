@@ -30,7 +30,7 @@ Lot E — Entrées, redirections, lectures et retrait de l'ancien      (Touré, 
 - Le challenger d'un lot n'en est jamais le pilote : chacun met à l'épreuve les lots de l'autre (parcours nominal et un chemin d'erreur, dans l'application).
 - Charge : porteur = Lot 0, B, C ; Touré = A, D, E et le contenu.
 
-Règle « une PR, un pilote » : tous les lots se fusionnent dans `feature/refonte-page-lecon` ; une seule PR vers `Develop`, assignée au porteur.
+Règle « une PR, un pilote » : **une PR par lot vers `Develop`** (porteur, 2026-10-28, après la fusion du Lot 0 par #332), assignée au pilote du lot, qui seul pousse sur sa branche. Chaque lot part de `Develop` à jour ; la ligne de preuve de `bin/ci-quiet` et les revues se font PR par PR.
 
 ---
 
@@ -60,7 +60,7 @@ Règle « une PR, un pilote » : tous les lots se fusionnent dans `feature/refon
 - **Done quand**   : `bin/rails db:migrate` passe sur une base semée ; tous les exercices existants sont archivés ; la page d'une leçon montre « Fiche de révision » et « Prépare interros » à l'état vide ; les ports sont gelés et la suite existante est verte (l'ancien écran de réponse marche encore)
 
 > **Le Lot 0 gèle les contrats.** Les lots verticaux implémentent les ports et complètent les squelettes ; ils ne redéfinissent ni un port, ni une signature de query, ni une clé de texte. Un lot qui en a besoin **s'arrête** : le Lot 0 rouvre.
-> **Aucun lot parallèle ne démarre avant que le Lot 0 soit fusionné** dans `feature/refonte-page-lecon`.
+> **Aucun lot parallèle ne démarre avant que le Lot 0 soit fusionné** dans `Develop` (fait : #332).
 
 ---
 
@@ -165,14 +165,14 @@ Règle « une PR, un pilote » : tous les lots se fusionnent dans `feature/refon
 ## Dispatch
 
 ```
-Vague 1 : Lot 0                                → 1 agent, séquentiel, fusionné dans feature/refonte-page-lecon
+Vague 1 : Lot 0                                → 1 agent, séquentiel, fusionné dans Develop (#332)
 Vague 2 : Lot A ‖ Lot B ‖ Lot C ‖ Lot D        → 4 agents, worktrees isolés
-Vague 3 : Lot E                                → 1 agent, après la fusion de A, B, C et D
+Vague 3 : Lot E                                → 1 agent, après la fusion de A, B, C et D dans Develop
 ```
 
 ```bash
-git switch -c feature/refonte-page-lecon Develop
-git worktree add ../lnclass-refonte-page-lecon-lot-a -b feature/refonte-page-lecon-lot-a feature/refonte-page-lecon
+git fetch origin Develop
+git worktree add ../lnclass-refonte-page-lecon-lot-a -b feature/refonte-page-lecon-lot-a origin/Develop
 ```
 
 Un worktree par lot de la vague 2, de même forme (`-lot-b`, `-lot-c`, `-lot-d`). Agents : `executant-lot` (Sonnet) par lot ; `verificateur-ci` (Haiku) pour la preuve.
@@ -246,7 +246,7 @@ Résultat au 2026-10-28 : sortie vide.
 - [ ] En-tête HITL sur chaque fichier créé dans `app/`
 - [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
 - [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
+- [ ] Une PR par lot vers `Develop`, chacune référençant chantier + ADR + UDR
 - [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
 
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, ouvre l'application, refait le parcours nominal *et* un chemin d'erreur, mesure. **Il ne relit pas le code, il le met à l'épreuve.** Un reviewer qui lit du code ne prouve rien.
