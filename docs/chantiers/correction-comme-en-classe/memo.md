@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision |
+| **Statut** | planifié |
 | **Ouvert le** | 2026-10-28 |
 | **Branche** | `feature/correction-comme-en-classe` |
 | **Programme** | — |
@@ -46,7 +46,8 @@ D1 à D4 le même jour.
   en dessous. Elle nomme les notions à revoir et les questions en cause.
 - **D4** : le bouton garde son nom, « Rendre ma copie ».
 
-**Révision demandée par Touré au grill (Q4, Q4 bis), à valider par le porteur** : D2 est abandonnée, la meilleure note
+**Révision de D2, demandée par Touré au grill (Q4, Q4 bis), validée par le porteur le 2026-10-28 (de vive voix, relayé
+par Touré)** : D2 est abandonnée, la meilleure note
 continue de compter partout, pour l'élève comme pour l'enseignant. En contrepartie, « Recommencer » se met en pause
 30 minutes après 3 copies rendues d'affilée (Q5).
 
@@ -105,9 +106,12 @@ Révélés par le grill :
 
 ## Questions encore ouvertes
 
-- **Pour le porteur** : valide-t-il l'abandon de D2 (Q4 bis) et la pause de « Recommencer » (Q5) ?
-- **Pour le porteur** : l'écart de ton à 12 et 13/20, entre « Bien » et une phrase du groupe « Courage » (Q6), lui convient-il ?
-- Les 3 copies de la pause se comptent-elles par exercice, toutes sortes confondues (libre, devoir, remédiation) ?
-  Proposition : oui, par exercice, toutes sortes confondues.
-- Où l'appréciation se coupe-t-elle quand beaucoup de questions sont en cause ? Proposition : la liste des numéros
-  (« questions 2, 3 et 7 »), sans limite, puisqu'un exercice en a rarement plus de 10.
+Tranchées par le porteur le 2026-10-28, avec la révision de D2 :
+
+- ~~L'abandon de D2 et la pause de « Recommencer »~~ : validés.
+- ~~L'écart de ton à 12 et 13/20~~ : accepté, la phrase et la couleur de la note gardent leur seuil de 14/20.
+- ~~Le comptage des 3 copies~~ : par exercice, copies libres, de devoir et de remédiation confondues.
+
+Restée ouverte, tranchée par défaut dans le PRD :
+
+- Une longue liste de questions en cause s'écrit en entier (« questions 2, 3 et 7 ») : un exercice en a rarement plus de 10.
