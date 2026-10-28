@@ -1,34 +1,10 @@
-<%# 🌐 UI · catalog/course_sheets/show — la fiche de cours d'une leçon : 3 pages de cahier, lexique en bulle, explications simples (CA-4 à CA-6) %>
-<%# Rôle : habillage à part (course_sheet.css), thème par fiche ; sans JavaScript tout se lit, explications simples visibles ; KaTeX pour $…$ %>
-<%# ADR  : 0110-fiche-de-cours-en-donnees-importees · UDR : 0137-fiche-de-cours-a-l-identique-des-maquettes %>
+<%# 🌐 UI · catalog/course_sheets/show — la fiche de cours d'une leçon sur sa propre page : 3 pages de cahier, lexique en bulle, explications simples (CA-4 à CA-6) %>
+<%# Rôle : titre de la page, feuille de style à part (course_sheet.css) puis l'écran de la fiche (_sheet) ; la page de la leçon le rend aussi, coupé (UDR-0139) %>
+<%# ADR  : 0110-fiche-de-cours-en-donnees-importees · UDR : 0137-fiche-de-cours-a-l-identique-des-maquettes, 0139 §3.2 %>
 <% course = @sheet.course %>
-<% pages = @sheet.pages %>
 <% page_title "#{t(".title")} · #{course.name}" %>
 <% content_for :nav_key, "courses" %>
 <% content_for :head do %><%= stylesheet_link_tag "course_sheet" %><% end %>
 <%= ui_back_link course.name, href: course_path(course.slug) %>
 
-<%# Le lexique et son aide voyagent en valeurs Stimulus (Hash clé => [titre, définition, exemple]) ; la bulle se remplit en texte brut. %>
-<%= tag.div class: "sheet-screen", data: { sheet_theme: @sheet.theme, seyes: "true", simple: "true",
-                                           controller: "math course-sheet--glossary course-sheet--simple-toggle",
-                                           "course-sheet--glossary-glossary-value": @sheet.glossary,
-                                           "course-sheet--glossary-help-value": [ t("catalog.course_sheets.glossary.help_title"), t("catalog.course_sheets.glossary.help"), "" ],
-                                           "course-sheet--glossary-list-title-value": t("catalog.course_sheets.glossary.button"),
-                                           "course-sheet--simple-toggle-label-on-value": t("catalog.course_sheets.simple.label_on"),
-                                           "course-sheet--simple-toggle-label-off-value": t("catalog.course_sheets.simple.label_off") } do %>
-  <div class="sheet-bubble" role="dialog" aria-label="<%= t("catalog.course_sheets.glossary.button") %>" hidden
-       data-course-sheet--glossary-target="bubble">
-    <div class="sheet-bubble-head">
-      <b class="sheet-bubble-title" data-course-sheet--glossary-target="title"></b>
-      <button type="button" class="sheet-bubble-close" aria-label="<%= t("catalog.course_sheets.glossary.close") %>"
-              data-action="course-sheet--glossary#close">×</button>
-    </div>
-    <div class="sheet-bubble-list" data-course-sheet--glossary-target="list"></div>
-  </div>
-
-  <% section_offset = 0 %>
-  <% pages.each_with_index do |page, index| %>
-    <%= render "catalog/course_sheets/page", page:, number: index + 1, total: pages.size, section_offset: %>
-    <% section_offset += page.fetch("sections", []).size %>
-  <% end %>
-<% end %>
+<%= render "catalog/course_sheets/sheet", sheet: @sheet %>
