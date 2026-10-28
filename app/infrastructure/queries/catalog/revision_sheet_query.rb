@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Catalog::RevisionSheetQuery
 # Rôle : la « Fiche de révision » d'une leçon pour sa page (fiche cahier, ou texte de la leçon puis des notions), coupée après 150 mots ; squelette du Lot 0
-# ADR  : 0110-fiche-de-cours-en-donnees-importees, XXXX-exercice-de-lecon-avec-sujet-et-notion-sans-page · UDR : XXXX-page-de-la-lecon-fiche-de-revision-et-prepare-interros §3.2
+# ADR  : 0110-fiche-de-cours-en-donnees-importees, 0113 · UDR : 0139 §3.2
 module Queries
   module Catalog
     class RevisionSheetQuery

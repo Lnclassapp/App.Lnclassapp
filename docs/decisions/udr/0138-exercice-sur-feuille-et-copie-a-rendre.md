@@ -2,7 +2,7 @@
 <!-- index
 titre: Exercice sur feuille et copie à rendre
 statut: Accepté
-adr-lie: XXXX-copie-a-rendre
+adr-lie: 0112
 problematique: L'élève répond une question à la fois sans voir de sujet ; un exercice doit se lire comme une feuille, puis se remplir et se rendre en une fois sur un téléphone.
 -->
 

@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/show — page d'une leçon (CA-04, CA-10), pour tous les rôles connectés %>
 <%# Rôle : retour « Cours » (UDR-0054 §3.2), en-tête, actions du rôle, puis deux sections : « Fiche de révision » et « Prépare interros » ; morphing (B2, B4) %>
-<%# ADR  : 0028, 0035, 0051, 0090, 0110-fiche-de-cours-en-donnees-importees, XXXX-exercice-de-lecon-avec-sujet-et-notion-sans-page · UDR : 0006, 0007, 0013, 0054, XXXX-page-de-la-lecon-fiche-de-revision-et-prepare-interros §3.1 %>
+<%# ADR  : 0028, 0035, 0051, 0090, 0110-fiche-de-cours-en-donnees-importees, 0113 · UDR : 0006, 0007, 0013, 0054, 0139 §3.1 %>
 <% course = @detail.course %>
 <% page_title t(".page_title", name: course.name) %>
 <% content_for :nav_key, "courses" %>

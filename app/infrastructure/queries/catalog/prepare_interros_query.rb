@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Catalog::PrepareInterrosQuery
 # Rôle : les exercices de la leçon pour « Prépare interros », groupés par notion puis « Toute la leçon », avec l'état de l'élève ; squelette du Lot 0
-# ADR  : XXXX-exercice-de-lecon-avec-sujet-et-notion-sans-page · UDR : XXXX-page-de-la-lecon-fiche-de-revision-et-prepare-interros §3.4
+# ADR  : 0113 · UDR : 0139 §3.4
 module Queries
   module Catalog
     class PrepareInterrosQuery

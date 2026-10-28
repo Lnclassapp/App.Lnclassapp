@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes du contexte assessment
 # Rôle : exercice, session, soumission d'une réponse, résultat
-# ADR  : 0054, 0105, XXXX-copie-a-rendre · pas de route de clôture : la dernière réponse clôt la session
+# ADR  : 0054, 0105, 0112 · pas de route de clôture : la dernière réponse clôt la session
 get "exercises/:public_id", to: "assessment/exercises#show", as: :exercise
 post "exercises/:exercise_public_id/sessions", to: "assessment/exercise_sessions#create", as: :exercise_sessions
 get "sessions/:public_id", to: "assessment/exercise_sessions#show", as: :exercise_session

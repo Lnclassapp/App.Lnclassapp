@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Assessment::ExerciseSessionRepositoryPort
 # Rôle : contrat des sessions d'exercice et de leurs tentatives immuables
-# ADR  : 0033, 0043, 0054, 0091, XXXX-copie-a-rendre
+# ADR  : 0033, 0043, 0054, 0091, 0112
 module Ports
   module Assessment
     module ExerciseSessionRepositoryPort

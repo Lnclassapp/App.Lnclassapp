@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::Exercise
 # Rôle : un exercice d'une leçon (de notion ou de toute la leçon), son sujet, ses questions et les faits de publication de ses parents
-# ADR  : 0035, 0036, 0054, 0105, XXXX-exercice-de-lecon-avec-sujet-et-notion-sans-page
+# ADR  : 0035, 0036, 0054, 0105, 0113
 module Entities
   module Assessment
     class Exercise

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::ExerciseRepository
 # Rôle : traduit Orm::Exercise, ses questions, propositions et images ↔ Entities::Assessment::Exercise, avec la publication des parents
-# ADR  : 0035, 0036, 0039, 0054, 0091, 0105, XXXX-exercice-de-lecon-avec-sujet-et-notion-sans-page
+# ADR  : 0035, 0036, 0039, 0054, 0091, 0105, 0113
 module Repositories
   module Assessment
     class ExerciseRepository

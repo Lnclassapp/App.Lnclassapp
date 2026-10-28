@@ -2,7 +2,7 @@
 <!-- index
 titre: Page de la leçon : fiche de révision et Prépare interros
 statut: Accepté
-adr-lie: XXXX-exercice-de-lecon-avec-sujet-et-notion-sans-page
+adr-lie: 0113
 problematique: La fiche est cachée derrière un bouton et les exercices dispersés sur des pages de notion ; la page d'une leçon doit tout montrer, la fiche en aperçu et les exercices assignables.
 -->
 
