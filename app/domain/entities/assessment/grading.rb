@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::Grading
 # Rôle : seuils pédagogiques nommés, score, note sur 20, maîtrise et palier de badge, tous lus sur la note affichée
-# ADR  : 0033, 0043, 0106
+# ADR  : 0033, 0043, 0106, 0115
 module Entities
   module Assessment
     module Grading
@@ -54,6 +54,16 @@ module Entities
       # Division entière, donc arrondi vers le bas : le Diamant exige toutes les réponses justes.
       def self.score_percent(correct:, total:)
         total.zero? ? 0 : (correct * 100) / total
+      end
+
+      # ADR-0115 : les points des questions justes sur ceux des questions corrigées automatiquement, arrondi vers le bas.
+      # graded : [[points (BigDecimal), correct (Boolean)]] des seules questions corrigées automatiquement. Avec toutes les
+      # questions à 1 point, c'est score_percent. Sans question corrigée automatiquement, 0.
+      def self.points_percent(graded)
+        total = graded.sum { |points, _| points }
+        return 0 if total.zero?
+
+        (graded.sum { |points, correct| correct ? points : 0 } * 100 / total).floor
       end
 
       def self.grade_on_20(score_percent) = (score_percent / 5.0).round

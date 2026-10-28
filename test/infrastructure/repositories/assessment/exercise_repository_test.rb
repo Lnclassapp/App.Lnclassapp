@@ -70,6 +70,30 @@ module Repositories
         assert_nil @repository.find(id: 0)
       end
 
+      # ADR-0115 : le socle relit les nouvelles colonnes (l'écriture arrive avec l'import, Lot D).
+      test "relit les points, l'unité, le début de phrase, la grille et le sujet en blocs" do
+        record = create_exercise(essential: @essential, questions: 0, statement_blocks: [ { "type" => "paragraph" } ])
+        create_kind_question(exercise: record, question_type: "numeric", answers: [ "4,8" ]).update!(points: "2.5", unit: "cm")
+        create_kind_question(exercise: record, question_type: "written", answers: [], explanation: "Corrigé")
+                          .update!(starter: "Non, car…", criteria: [ "Je cite" ])
+        create_kind_question(exercise: record, question_type: "notebook", answers: [], explanation: "Corrigé")
+
+        found = @repository.find(id: record.id)
+
+        assert_equal [ { "type" => "paragraph" } ], found.statement_blocks
+        assert_equal [ [ BigDecimal("2.5"), "cm", nil, [] ], [ BigDecimal("1"), nil, "Non, car…", [ "Je cite" ] ], [ BigDecimal("1"), nil, nil, [] ] ],
+                     found.questions.map { [ it.points, it.unit, it.starter, it.criteria ] }
+        assert_equal [ true, false, false ], found.questions.map(&:auto_graded?)
+        assert found.publishable?
+      end
+
+      test "un exercice existant relu garde 1 point par question et aucun sujet en blocs" do
+        found = @repository.find(id: create_exercise(essential: @essential).id)
+
+        assert_nil found.statement_blocks
+        assert_equal [ BigDecimal("1") ], found.questions.map(&:points).uniq
+      end
+
       test "met à jour l'exercice seul, ou remplace aussi ses questions" do
         created = @repository.create(exercise: exercise)
         created.title = "Quiz révisé"

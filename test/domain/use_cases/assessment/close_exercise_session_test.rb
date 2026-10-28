@@ -82,14 +82,71 @@ module UseCases
       def badge(level) = Entities::Assessment::Badge.new(student_id: 7, exercise_id: 40, session_id: 1, level:, awarded_at: NOW - 86_400)
       def gap = Entities::Assessment::KnowledgeGap.new(id: 70, student_id: 7, essential_id: 9, status: "pending", failed_sessions_count: 1)
 
-      def close(correct:, total: 100, actor: STUDENT, current_badge: nil, pending_gap: nil, kind: "standard", status: "started", essential_id: 9)
-        @sessions = FakeSessions.new(attempts(correct, total))
+      class FakeExercises
+        include Ports::Assessment::ExerciseRepositoryPort
+
+        def initialize(questions) = @questions = questions
+
+        def find(id:) = (Entities::Assessment::Exercise.new(id:, questions: @questions) if id == 40)
+      end
+
+      # ADR-0115 : une question de type donné, de points donnés ; ids 0, 1, 2… comme les tentatives de #attempts.
+      def question(id, type: "single_choice", points: 1)
+        Entities::Assessment::Question.new(id:, position: id + 1, content: "?", explanation: "Parce que.", question_type: type, answers: [],
+                                           points: BigDecimal(points.to_s))
+      end
+
+      def close(correct:, total: 100, actor: STUDENT, current_badge: nil, pending_gap: nil, kind: "standard", status: "started", essential_id: 9,
+                questions: Array.new(total) { question(it) }, attempts: attempts(correct, total))
+        @sessions = FakeSessions.new(attempts)
         @badges = FakeBadges.new(current_badge)
         @gaps = FakeGaps.new(pending_gap)
         @transaction = FakeTransaction.new
-        CloseExerciseSession.new(sessions: @sessions, badges: @badges, gaps: @gaps, policy: Policies::Assessment::SubmitAttemptPolicy.new,
-                                 transaction: @transaction, clock: Clock.new(NOW))
+        CloseExerciseSession.new(sessions: @sessions, exercises: FakeExercises.new(questions), badges: @badges, gaps: @gaps,
+                                 policy: Policies::Assessment::SubmitAttemptPolicy.new, transaction: @transaction, clock: Clock.new(NOW))
                             .call(actor:, session: session(question_count: total, kind:, status:), essential_id:)
+      end
+
+      # CA-14 : 1 + 2 + 3 points, justes aux questions de 1 et 3 points : 66 %.
+      test "le score est en points : 4 points sur 6 donnent 66 %" do
+        questions = [ question(0, points: 1), question(1, points: 2), question(2, points: 3) ]
+        given = [ Attempt.new(session_id: 5, question_id: 0, selected_answer_ids: [ 1 ], correct: true, answered_at: NOW),
+                  Attempt.new(session_id: 5, question_id: 1, selected_answer_ids: [ 1 ], correct: false, answered_at: NOW),
+                  Attempt.new(session_id: 5, question_id: 2, selected_answer_ids: [ 1 ], correct: true, answered_at: NOW) ]
+
+        row = close(correct: 0, total: 3, questions:, attempts: given).value
+
+        assert_equal [ 66, :bronze ], [ row.score_percent, row.badge_level ]
+        assert_equal [ [ 5, 66, NOW ] ], @sessions.completed
+      end
+
+      # CA-15, menace W5 : la réponse rédigée et le cahier ne comptent ni en juste ni en faux.
+      test "une réponse rédigée et un cahier ne changent pas la note : 8 points sur 11 donnent 72 %" do
+        questions = [ question(0, points: 3), question(1, points: 5), question(2, points: 3), question(3, type: "written", points: 4),
+                      question(4, type: "notebook", points: 2) ]
+        given = [ [ 0, true ], [ 1, true ], [ 2, false ], [ 3, false ], [ 4, false ] ].map do |id, correct|
+          Attempt.new(session_id: 5, question_id: id, selected_answer_ids: [], correct:, answered_at: NOW, response_text: ("Non, car…" if id == 3))
+        end
+
+        assert_equal 72, close(correct: 0, total: 5, questions:, attempts: given).value.score_percent
+        assert_equal 72, close(correct: 0, total: 5, questions:, attempts: given.first(3)).value.score_percent
+        right = given.map { it.question_id == 3 ? it.with(correct: true) : it }
+        assert_equal 72, close(correct: 0, total: 5, questions:, attempts: right).value.score_percent
+      end
+
+      # Menace I11 : la note ne dépend ni du compte des tentatives ni d'une tentative étrangère à l'exercice.
+      test "une question sans tentative est fausse, une tentative d'une question étrangère est ignorée" do
+        questions = [ question(0), question(1) ]
+        given = [ Attempt.new(session_id: 5, question_id: 0, selected_answer_ids: [ 1 ], correct: true, answered_at: NOW),
+                  Attempt.new(session_id: 5, question_id: 99, selected_answer_ids: [ 1 ], correct: true, answered_at: NOW) ]
+
+        assert_equal 50, close(correct: 0, total: 2, questions:, attempts: given).value.score_percent
+      end
+
+      test "un exercice sans question corrigée automatiquement donne 0, jamais une division par zéro" do
+        questions = [ question(0, type: "written") ]
+
+        assert_equal 0, close(correct: 0, total: 1, questions:, attempts: []).value.score_percent
       end
 
       # ADR-0106 : le palier se lit sur la note affichée (10, 14 et 16/20), le Diamant reste le sans-faute.

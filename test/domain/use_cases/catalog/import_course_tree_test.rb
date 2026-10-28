@@ -514,7 +514,8 @@ module UseCases
         sessions = Repositories::Assessment::ExerciseSessionRepository.new
         entity = sessions.find_by_public_id(public_id: session.public_id)
         UseCases::Assessment::CloseExerciseSession.new(
-          sessions:, badges: Repositories::Assessment::BadgeRepository.new, gaps: Repositories::Assessment::KnowledgeGapRepository.new,
+          sessions:, exercises: Repositories::Assessment::ExerciseRepository.new, badges: Repositories::Assessment::BadgeRepository.new,
+          gaps: Repositories::Assessment::KnowledgeGapRepository.new,
           policy: Policies::Assessment::SubmitAttemptPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
         ).call(actor: Entities::Identity::Actor.new(user_id: session.student_id, role: :student), session: entity,
                essential_id: session.exercise.essential_id).value

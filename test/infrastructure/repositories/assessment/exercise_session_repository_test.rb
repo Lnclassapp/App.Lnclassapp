@@ -158,6 +158,40 @@ module Repositories
         assert_nil @repository.started_for(student_id: @student.id, exercise_id: @exercise.id)
       end
 
+      # ADR-0115 §4 : les fins des 3 dernières copies terminées de l'élève sur l'exercice, toutes sortes confondues.
+      test "recent_completions : les 3 dernières fins, de la plus récente à la plus ancienne" do
+        [ 50, 40, 30, 20, 10 ].each { |minutes| create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: @at - minutes.minutes) }
+
+        assert_equal [ @at - 10.minutes, @at - 20.minutes, @at - 30.minutes ],
+                     @repository.recent_completions(student_id: @student.id, exercise_id: @exercise.id)
+      end
+
+      test "recent_completions : ni les copies abandonnées ou en cours, ni un autre exercice, ni un autre élève" do
+        create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: @at)
+        create_exercise_session(student: @student, exercise: @exercise, status: "abandoned", completed_at: @at - 3.minutes)
+        create_exercise_session(student: @student, exercise: @exercise, status: "started")
+        create_exercise_session(student: @student, exercise: create_exercise, status: "completed", completed_at: @at - 1.minute)
+        create_exercise_session(student: create_student, exercise: @exercise, status: "completed", completed_at: @at - 2.minutes)
+
+        assert_equal [ @at ], @repository.recent_completions(student_id: @student.id, exercise_id: @exercise.id)
+      end
+
+      test "recent_completions : toutes sortes de copies comptent (libre, devoir, remédiation)" do
+        gap = create_gap(student: @student, essential: @exercise.essential)
+        create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: @at - 20.minutes)
+        create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: @at - 10.minutes, gap:)
+
+        create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: @at - 5.minutes,
+                                classroom_assignment_id: create_assignment(assignable: @exercise).id)
+
+        assert_equal [ @at - 5.minutes, @at - 10.minutes, @at - 20.minutes ],
+                     @repository.recent_completions(student_id: @student.id, exercise_id: @exercise.id)
+      end
+
+      test "recent_completions : aucune copie terminée, une liste vide" do
+        assert_empty @repository.recent_completions(student_id: @student.id, exercise_id: @exercise.id)
+      end
+
       test "abandonne une session ouverte" do
         started = @repository.start(session: session)
 
