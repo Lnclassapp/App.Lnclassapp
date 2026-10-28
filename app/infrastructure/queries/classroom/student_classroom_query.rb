@@ -56,11 +56,15 @@ module Queries
 
       # Les cours publiés d'un exercice publié assigné à la classe ; le plus récemment assigné d'abord.
       def courses(classroom_id, student_id)
-        Orm::Course.joins(:material, essentials: :exercises)
-                   .joins("INNER JOIN classroom_assignments ON classroom_assignments.assignable_type = 'Exercise' " \
+        # La leçon d'un exercice se lit par exercises.course_id : un exercice de toute la leçon n'a pas de notion (ADR-0113).
+        Orm::Course.joins(:material)
+                   .joins("INNER JOIN exercises ON exercises.course_id = courses.id " \
+                          "LEFT OUTER JOIN essentials ON essentials.id = exercises.essential_id " \
+                          "INNER JOIN classroom_assignments ON classroom_assignments.assignable_type = 'Exercise' " \
                           "AND classroom_assignments.assignable_id = exercises.id")
                    .where(classroom_assignments: { classroom_id:, status: "active" }, status: "published",
-                          essentials: { status: "published" }, exercises: { status: "published" })
+                          exercises: { status: "published" })
+                   .where("essentials.id IS NULL OR essentials.status = 'published'")
                    .merge(own_level(student_id))
                    .group("courses.id", "materials.id")
                    .order(Arel.sql("MAX(classroom_assignments.assigned_at) DESC"), "courses.id")
@@ -74,7 +78,7 @@ module Queries
       end
 
       def treated_exercises(student_id)
-        Orm::ExerciseSession.joins(exercise: { essential: { course: :material } })
+        Orm::ExerciseSession.joins(exercise: { course: :material })
                             .where(student_id:, status: "completed").merge(own_level(student_id))
                             .order("exercise_sessions.exercise_id", completed_at: :desc, id: :desc)
                             .pluck(*TREATED_COLUMNS)

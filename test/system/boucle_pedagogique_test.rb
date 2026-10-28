@@ -297,12 +297,12 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     link = find("#classroom_link [data-clipboard-text-value^='http']")["data-clipboard-text-value"]
     assert_equal join_classroom_url(classroom.reload.link_token, host: URI(link).host, port: URI(link).port), link
 
-    # ADR-0072 : un cours ne s'assigne plus ; sa page du catalogue n'offre aucune action à l'enseignant.
+    # ADR-0072 : un cours ne s'assigne plus ; sa page n'offre « Assigner » que sous un exercice de « Prépare interros » (UDR-0139).
     navigate_to courses_path
     find("#courses_list a", text: COURSE).click
     assert_selector "#course_header h1", text: COURSE
-    assert_no_button "Assigner"
-    assert_no_link "Assigner"
+    assert_no_selector "#course_header", text: "Assigner"
+    assert_selector "#prepare-interros"
 
     # La page de la classe n'a plus de bande « Fiches de cours » (UDR enseignant sans répétition) : le chemin vers l'exercice passe
     # par Cours, dont la carte de la fiche de cours liste ses fiches de révision ; chaque classe y a son « Assigner ».

@@ -57,9 +57,10 @@ module Repositories
       private
 
       def resolve_exercise(public_id)
-        record = Orm::Exercise.includes(essential: :course).find_by(public_id:)
+        record = Orm::Exercise.includes(:essential, :course).find_by(public_id:)
+        # Un exercice de toute la leçon n'a pas de notion : la leçon se lit par exercises.course_id (ADR-0113).
         record && resolved("Exercise", record, key: record.public_id, name: record.title,
-                                                parents: [ record.essential, record.essential.course ], course: record.essential.course)
+                                                parents: [ record.essential, record.course ].compact, course: record.course)
       end
 
       def resolved(type, record, key:, name:, parents:, course:)
