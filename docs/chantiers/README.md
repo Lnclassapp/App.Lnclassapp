@@ -144,6 +144,7 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`blog-toast-instable`](blog-toast-instable/memo.md) | livré (PR vers `Develop`, 2026-10-27) | Le toast d'après un envoi d'image et les scripts qui dessinent une image attendaient 2 s (défaut de Capybara, délai des scripts compris) ; ils attendent `UPLOAD_WAIT` : plus de faux rouge sous charge (blog, image de question) |
 | [`essential-images-instable`](essential-images-instable/memo.md) | livré (PR vers `Develop`, 2026-10-27) | Le test des images d'une fiche lisait une seule fois la largeur de l'image chargée en différé ; il attend son décodage (`decode()`, `UPLOAD_WAIT`) : plus de faux rouge quand l'image arrive tard |
 | [`rapports-de-classe`](rapports-de-classe/memo.md) | livré (PR vers `Develop`, 2026-10-16) | V3 : la fiche d'un élève dans sa classe (exercices assignés, badges de la classe, « fait seul »), la liste des élèves par note sur 20 (0–10, 11–15, 16–20, « Pas encore de note »), les noms du suivi en liens vers la fiche et un « prochain geste » en six cas (ADR-0097, UDR-0107 à UDR-0109) |
+| [`refonte-page-lecon`](refonte-page-lecon/memo.md) | livré (6 PR vers `Develop`, 2026-10-28), clos | La page de la leçon devient fiche de révision (150 mots puis « Voir plus ») et « Prépare interros » ; exercices sur feuille avec copie à rendre ; import course-tree v2 ; pages de notion redirigées (ADR-0112 à 0114, UDR-0138, UDR-0139) ; suivi #340 |
 
 ## Backlog
 
