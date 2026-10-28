@@ -375,9 +375,8 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # CA-L2, CA-L4 — UDR enseignant §3.13 : une ligne par classe sous chaque exercice, un seul « Assigner » plein sur la page,
-  # « Modifier les jours de la … » une fois par classe qui a des jours et un exercice assigné, jamais pour une classe sans jours.
-  test "the sheet: one row per classroom, a single solid « Assigner », « Modifier les jours » once per classroom with days" do
+  # CA-L2 — UDR enseignant §3.13 : une ligne par classe sous chaque exercice de la leçon, un seul « Assigner » plein sur la page.
+  test "the lesson: one row per classroom under each exercise, a single solid « Assigner »" do
     travel_to Time.zone.local(2026, 10, 5, 10)
     bilan = create_exercise(essential: @essential, title: "Bilan", position: 2)
     school = create_school
@@ -389,16 +388,13 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     [ @exercise, bilan ].each { create_assignment(classroom: with_days, assignable: it, by: teacher, due_on: Date.new(2026, 10, 8)) }
     sign_in_as teacher
 
-    get course_essential_path(@course.slug, @essential.slug)
+    get course_path(@course.slug)
 
     assert_response :success
-    assert_select "#essential_exercises li [id^='assignment_']", 4 # 2 exercices x 2 classes
-    assert_select "#essential_exercises .ui-button-primary", 1
+    assert_select "#prepare-interros li [id^='assignment_']", 4 # 2 exercices x 2 classes
+    assert_select "#prepare-interros .ui-button-primary", 1
     assert_select "##{toggle_id('Exercise', @exercise.public_id, classroom: without_days)} .ui-button-primary", text: /#{tl('toggle.assign')}/
     assert_select "##{toggle_id('Exercise', bilan.public_id, classroom: without_days)} .ui-button-secondary", text: /#{tl('toggle.assign')}/
-    edit_days = edit_classroom_session_days_path(with_days.public_id)
-    assert_select "a[data-turbo-frame=modal][href='#{edit_days}']", { count: 1, text: I18n.t("classroom.session_days.edit_link", classroom: "6ème 2") }
-    assert_select "a[href='#{edit_classroom_session_days_path(without_days.public_id)}']", 0
   end
 
   test "the days modal: 404 for an unknown or unpublished exercise or an archived classroom, 403 for the team or another teacher" do

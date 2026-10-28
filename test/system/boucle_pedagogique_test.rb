@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 # Lot E, PRD §5 (V1 gate): the whole teaching loop on a blank base, through the real buttons only — no open_in_modal,
 # no stand-in controller, no factory. The team accepts the bootstrap invitation, builds the referential, a DRENA and a
-# public lycée by import (6 « Tle D » classrooms generated), then writes and publishes a course, a sheet and an exercise;
+# public lycée by import (6 « Tle D » classrooms generated), then imports a whole lesson (ADR-0113) and publishes it;
 # the teacher signs up by the DRENA, then the school (ADR-0083), with a full name, declares a classroom and assigns the
 # exercise; the student joins by the classroom link, plays the exercise on a phone and wins « Diamant »; the teacher issues a
 # recovery code and reads the result. Every write is wrapped in assert_no_page_reload.
@@ -38,7 +38,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_equal 0, Orm::User.count, "la base de départ n'est pas vierge"
 
     using_session(:team) { team_builds_the_referential_and_the_school }
-    using_session(:team) { team_publishes_a_course_a_sheet_and_an_exercise }
+    using_session(:team) { team_imports_and_publishes_a_lesson }
     link = using_session(:teacher) { teacher_signs_up_and_assigns_the_exercise }
     session = using_session(:student) { with_mobile_viewport { student_joins_and_wins_the_diamond(link) } }
     using_session(:teacher) { teacher_issues_a_recovery_code_and_reads_the_result(session) }
@@ -185,78 +185,66 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_equal (1..6).map { "Tle D #{it}" }, Orm::Classroom.order(:name).pluck(:name)
   end
 
-  def team_publishes_a_course_a_sheet_and_an_exercise
+  # ADR-0113 §4.6 : plus d'écran pour écrire une notion ni un exercice ; l'équipe importe la leçon complète (format 2 : un
+  # exercice par notion, quatre sur toute la leçon), tout arrive en brouillon, puis « Tout publier ».
+  def team_imports_and_publishes_a_lesson
+    file = json_file("lecon", lesson_document)
+
     navigate_to team_home_path
+    within("#team_home_shortcuts") { click_on t("teams.homes.shortcuts.imports") }
     assert_no_page_reload do
-      within("#team_home_shortcuts") { click_on t("teams.homes.shortcuts.new_course") }
+      click_on t("teams.imports.index.new")
+      within("#new-import-menu") { click_on t("import_kinds.course_tree") }
       within "turbo-frame#modal dialog[open]", wait: MODAL_WAIT do
-        fill_in "course[name]", with: COURSE
-        select "Tle", from: "course[level_slug]"
-        select "D", from: "course[series_slug]"
-        select "SVT", from: "course[material_slug]"
-        type_rich_text find_rich_text_editor, "L'ADN porte l'information génétique."
-        click_on t("teams.courses.new.submit")
+        attach_file "import[files][]", file.path
+        click_on t("teams.imports.new.submit")
       end
-      assert_toast t("teams.courses.create.created", name: COURSE)
+
+      using_wait_time(IMPORT_WAIT) { assert_toast t("teams.imports.create.started") }
+      within "turbo-frame#modal dialog[open] turbo-frame#import_status" do
+        assert_text t("teams.imports.statuses.completed")
+        assert_selector "#import_counter_imported", text: "1"
+        assert_selector "#import_counter_errors", text: "0"
+      end
+      within("turbo-frame#modal dialog[open]") { click_on t("teams.imports.create.close") }
       assert_no_selector "turbo-frame#modal dialog[open]"
     end
+    course = Orm::Course.find_by!(name: COURSE)
+    assert_equal [ "draft", 1, 5 ], [ course.status, course.essentials.count, Orm::Exercise.where(course_id: course.id).count ]
 
     navigate_to courses_path
     find("#courses_list a", text: COURSE).click
     assert_selector "#course_header h1", text: COURSE
-    course = Orm::Course.find_by!(name: COURSE)
 
     assert_no_page_reload do
       find("button[aria-controls=course-actions-menu]").click
-      click_on t("catalog.content_status.actions.publish")
-      assert_toast t("teams.courses.transition.published", name: COURSE)
-      assert_selector "#content_status_course_#{course.slug}", text: t("catalog.content_status.published")
-
-      find("button[aria-controls=course-actions-menu]").click
-      click_on t("catalog.courses.role_actions.new_essential")
-      within "turbo-frame#modal dialog[open]" do
-        fill_in "essential[name]", with: ESSENTIAL
-        type_rich_text find_rich_text_editor("trix-editor#essential_content"), "La méiose produit quatre cellules haploïdes."
-        click_on t("teams.essentials.new.submit")
-      end
-      assert_toast t("teams.essentials.create.created", name: ESSENTIAL)
-      assert_no_selector "turbo-frame#modal dialog[open]"
+      click_on t("catalog.content_status.actions.publish_all")
+      assert_toast t("teams.publish_cascade.done.course", name: COURSE, essentials: t("teams.publish_cascade.essentials", count: 1),
+                                                          exercises: t("teams.publish_cascade.exercises", count: 5))
     end
+    assert_equal %w[published], [ course.reload.status ]
+    assert_equal [ "published" ], Orm::Exercise.where(course_id: course.id).distinct.pluck(:status)
+  end
 
-    # La page de la leçon ne liste plus les notions (UDR page de la leçon §3.1) : on ouvre la notion par son adresse.
-    visit course_essential_path(course.slug, Orm::Essential.find_by!(name: ESSENTIAL).slug)
-    assert_selector "#essential_header h1", text: ESSENTIAL
-    essential = Orm::Essential.find_by!(name: ESSENTIAL)
-
-    assert_no_page_reload do
-      find("button[aria-controls=essential-actions-menu]").click
-      click_on t("catalog.content_status.actions.publish")
-      assert_toast t("teams.essentials.transition.published", name: ESSENTIAL)
-      assert_selector "#content_status_essential_#{essential.slug}", text: t("catalog.content_status.published")
-
-      find("button[aria-controls=essential-actions-menu]").click
-      click_on t("catalog.essentials.show.new_exercise")
-      within "turbo-frame#modal dialog[open]" do
-        fill_in "exercise[title]", with: EXERCISE
-        QUESTIONS.size.times { click_on t("teams.exercises.form.add_question") }
-        QUESTIONS.each_with_index { |question, index| fill_question(index, *question) }
-        click_on t("teams.exercises.new.submit")
-      end
-      assert_toast t("teams.exercises.create.created", title: EXERCISE)
-      assert_no_selector "turbo-frame#modal dialog"
-      assert_selector "#essential_exercises li", text: EXERCISE
+  # Format 2 de l'import `lnclass.course-tree` : la leçon, sa notion et son exercice (QUESTIONS), puis les quatre exercices de
+  # toute la leçon.
+  def lesson_document
+    questions = QUESTIONS.map do |statement, type, answers|
+      { "content" => statement, "question_type" => type,
+        "answers" => answers.map { |content, correct| { "content" => content, "correct" => correct } } }
     end
-
-    exercise = Orm::Exercise.find_by!(title: EXERCISE)
-    find("#essential_exercise_#{exercise.public_id} a", text: EXERCISE).click
-    assert_selector "#exercise_header h1", text: EXERCISE
-    assert_no_page_reload do
-      find("button[aria-controls=exercise-actions-menu]").click
-      click_on t("catalog.content_status.actions.publish")
-      assert_toast t("teams.exercises.transition.published", title: EXERCISE)
-      assert_selector "#content_status_exercise_#{exercise.public_id}", text: t("catalog.content_status.published")
-    end
-    assert_equal %w[published] * 3, [ course.reload.status, essential.reload.status, exercise.reload.status ]
+    {
+      "format" => "lnclass.course-tree", "version" => 2,
+      "courses" => [ {
+        "name" => COURSE, "subtitle" => "Leçon 1", "content" => "<p>L'ADN porte l'information génétique.</p>",
+        "level_name" => "Tle", "series_name" => "D", "material_name" => "SVT",
+        "essentials" => [ { "name" => ESSENTIAL, "subtitle" => "Quatre cellules", "content" => "<p>La méiose produit quatre cellules haploïdes.</p>",
+                            "exercises" => [ { "title" => EXERCISE, "statement" => "Lis le sujet.", "exercise_type" => "fixation", "questions" => questions } ] } ],
+        "exercises" => Array.new(4) do |index|
+          { "title" => "Bilan #{index + 1}", "statement" => "Sur toute la leçon.", "exercise_type" => "evaluation", "questions" => questions }
+        end
+      } ]
+    }
   end
 
   # ---------------------------------------------------------------------------------------------------------------------
@@ -304,11 +292,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_no_selector "#course_header", text: "Assigner"
     assert_selector "#prepare-interros"
 
-    # La page de la classe n'a plus de bande « Fiches de cours » (UDR enseignant sans répétition) : le chemin vers l'exercice passe
-    # par Cours, dont la carte de la fiche de cours liste ses fiches de révision ; chaque classe y a son « Assigner ».
-    navigate_to courses_path
-    find("#courses_list a", text: ESSENTIAL).click
-    assert_selector "h1", text: ESSENTIAL
+    # La notion n'a plus de page (ADR-0113) : « Prépare interros » de la leçon porte l'exercice, et chaque classe y a son « Assigner ».
+    assert_selector "#notion-#{Orm::Essential.find_by!(name: ESSENTIAL).slug}", text: EXERCISE
     exercise = Orm::Exercise.find_by!(title: EXERCISE)
     assert_no_page_reload do
       within("[id='assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}']") { click_on "Assigner" }
@@ -429,27 +414,6 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     navigate_to teams_referential_path
     within("#team_referential") { find("a[href='#{path}']").click }
     assert_current_path path
-  end
-
-  def type_rich_text(editor, text)
-    editor.click
-    editor.send_keys(text)
-  end
-
-  def questions = all("#exercise-questions > [data-teams--nested-form-target=list] > fieldset")
-
-  def fill_question(index, content, type, pairs)
-    within(questions[index]) do
-      find("textarea[name$='[content]']").fill_in with: content
-      find("select[name$='[question_type]']").select t("teams.exercises.question_types.#{type}")
-      (pairs.size - all("[data-nested-answer]").size).times { click_on t("teams.exercises.question_fields.add_answer") }
-      pairs.each_with_index do |(text, correct), rank|
-        within(all("[data-nested-answer]")[rank]) do
-          find("input[type=text]").fill_in with: text
-          find("input[type=checkbox]").set(correct)
-        end
-      end
-    end
   end
 
   def json_file(name, document)

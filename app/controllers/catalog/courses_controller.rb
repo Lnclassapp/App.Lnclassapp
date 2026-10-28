@@ -35,7 +35,7 @@ module Catalog
       return if refuse_out_of_level(course_slug: params[:slug])
 
       render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: @detail.course),
-                    success: ->(_) { load_status_record; load_lesson_sections }
+                    success: ->(_) { load_status_record; load_lesson_sections; record_reads }
     end
 
     private
@@ -44,6 +44,32 @@ module Catalog
     def load_lesson_sections
       @revision = Queries::Catalog::RevisionSheetQuery.new.call(course_slug: params[:slug], actor: current_actor)
       @prepare = Queries::Catalog::PrepareInterrosQuery.new.call(course_slug: params[:slug], actor: current_actor)
+    end
+
+    # ADR-0113 §4.3 (amende ADR-0090 §4.1) : ouvrir la leçon retient, pour l'élève, la lecture de chacune de ses notions publiées.
+    # Turbo précharge un lien au survol ou au toucher (X-Sec-Purpose: prefetch) : ce n'est pas une ouverture. Une panne de la
+    # base ne bloque jamais la page : le use case la signale (config/initializers/error_reporting.rb). Les Result sont ignorés
+    # exprès : la policy de lecture a déjà répondu plus haut et la panne est déjà signalée.
+    def record_reads
+      return unless current_actor.student? && !prefetch?
+
+      essentials = Repositories::Catalog::EssentialRepository.new
+      @detail.essentials.each do |row|
+        essential = essentials.find_by_slug(slug: row.slug)
+        # Une notion supprimée pendant la lecture n'est plus à lire : la page s'affiche quand même.
+        record_read(essential) unless essential.nil?
+      end
+    end
+
+    def record_read(essential)
+      UseCases::Assessment::RecordEssentialRead.new(
+        reads: Repositories::Assessment::EssentialReadRepository.new, policy: Policies::Catalog::ReadPublishedPolicy.new,
+        reporter: Rails.error, recoverable: Repositories::Assessment::EssentialReadRepository::OUTAGES, clock: Time.zone
+      ).call(actor: current_actor, essential:)
+    end
+
+    def prefetch?
+      %w[X-Sec-Purpose Sec-Purpose Purpose].any? { request.headers[it].to_s.include?("prefetch") }
     end
 
     # Le panneau de statut de l'équipe prend l'entité du cours : c'est lui que remplacent les transitions (Lot B2).

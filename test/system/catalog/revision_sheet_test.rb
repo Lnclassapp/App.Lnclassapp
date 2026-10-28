@@ -94,7 +94,7 @@ class Catalog::RevisionSheetSystemTest < ApplicationSystemTestCase
     visit course_path(@course.slug)
 
     assert_text "fin1"
-    assert_no_text "Première notion"
+    within("section#fiche-de-revision") { assert_no_text "Première notion" }
     assert_selector BUTTON, text: more
 
     find(BUTTON).click
@@ -105,7 +105,7 @@ class Catalog::RevisionSheetSystemTest < ApplicationSystemTestCase
 
     find(BUTTON).click
 
-    assert_no_text "Première notion"
+    within("section#fiche-de-revision") { assert_no_text "Première notion" }
     assert focused_button?
   end
 end

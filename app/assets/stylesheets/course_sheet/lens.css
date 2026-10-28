@@ -1,0 +1,555 @@
+/*
+  🌐 UI · course_sheet/lens.css — les figures de la fiche Lentilles : sept figures fixes, simulateur, entraînement « Place l'image ».
+  Rôle : cadre, dessins SVG (rayons, objet, image, foyers), cartes, panneau de mesures ; fluide : les colonnes se replient quand le cadre
+         mesure moins de 520 px (requête de conteneur), zones de toucher d'au moins 44 px (rayon posé par lib/course_sheet/lens_geometry.js) ;
+         importé par course_sheet.css.
+  ADR  : 0110-fiche-de-cours-en-donnees-importees · source des valeurs : docs/design/fiches-cours/fiches/Fiche Lentilles.dc.html
+*/
+
+.sheet-lens,
+.sheet-lens-diagram,
+.sheet-lens-practice {
+  --lens-ray-1: oklch(0.68 0.16 70);
+  --lens-ray-2: oklch(0.6 0.2 30);
+  --lens-ray-3: oklch(0.55 0.17 330);
+  --lens-violet: oklch(0.5 0.14 300);
+  --lens-glass: oklch(0.85 0.06 215 / 0.6);
+  --lens-glass-violet: oklch(0.88 0.05 300 / 0.6);
+  --lens-grid: #e6ebf0;
+  --lens-status-bg: #f1f4f3;
+}
+
+.sheet-lens,
+.sheet-lens-diagram,
+.sheet-lens-practice {
+  container-type: inline-size;
+}
+
+.sheet-lens,
+.sheet-lens-diagram {
+  margin: 0;
+}
+
+.sheet-lens {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sheet-lens [data-visible="false"],
+.sheet-lens-practice [data-visible="false"] {
+  display: none;
+}
+
+/* Les figures faites de cartes (familles, défauts de l'œil, profils) n'ont pas de cadre : les cartes sont leur cadre. */
+.sheet-figure.sheet-lens-diagram:has(> .sheet-lens-cards) {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+/* ---- Dessins : éléments communs ----------------------------------------------------------------------------------- */
+
+/* touch-action : le doigt qui prend un point déplace le point, il ne fait pas défiler la page. */
+.sheet-lens-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--sheet-radius-field);
+  background: var(--sheet-white);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.sheet-lens-axis {
+  stroke: var(--sheet-ink);
+  stroke-width: 1;
+  stroke-dasharray: 6 3;
+}
+
+.sheet-lens-ray {
+  fill: none;
+  stroke-width: 2;
+}
+
+.sheet-lens-ray[data-ray="1"] {
+  stroke: var(--lens-ray-1);
+}
+
+.sheet-lens-ray[data-ray="2"] {
+  stroke: var(--lens-ray-2);
+}
+
+.sheet-lens-ray[data-ray="3"] {
+  stroke: var(--lens-ray-3);
+}
+
+.sheet-lens-ray[data-virtual="true"] {
+  stroke-width: 1.4;
+  stroke-dasharray: 5 4;
+}
+
+.sheet-lens-symbol line,
+.sheet-lens-symbol polyline,
+.sheet-lens-symbol-line {
+  fill: none;
+  stroke: var(--sheet-ink);
+  stroke-width: 2.2;
+}
+
+.sheet-lens-grid-line {
+  fill: none;
+  stroke: var(--lens-grid);
+  stroke-width: 1;
+}
+
+.sheet-lens-glass {
+  fill: var(--lens-glass);
+  stroke: var(--sheet-primary);
+  stroke-width: 1.5;
+}
+
+[data-lens="divergent"] .sheet-lens-glass {
+  fill: var(--lens-glass-violet);
+  stroke: var(--lens-violet);
+}
+
+.sheet-lens-object {
+  stroke: var(--sheet-primary);
+  stroke-width: 3;
+}
+
+.sheet-lens-object-head {
+  fill: var(--sheet-primary);
+}
+
+.sheet-lens-image {
+  stroke: var(--sheet-success);
+  stroke-width: 3;
+}
+
+.sheet-lens-image[data-virtual="true"] {
+  stroke-dasharray: 6 4;
+}
+
+.sheet-lens-image-head {
+  fill: var(--sheet-success);
+}
+
+.sheet-lens-dot,
+.sheet-lens-focus {
+  fill: var(--sheet-accent);
+}
+
+.sheet-lens-dot {
+  stroke: var(--sheet-white);
+  stroke-width: 1.5;
+}
+
+.sheet-lens-dot[data-tone="primary"],
+.sheet-lens-focus[data-tone="primary"] {
+  fill: var(--sheet-primary);
+}
+
+.sheet-lens-measure {
+  stroke: var(--sheet-primary);
+  stroke-width: 1.5;
+}
+
+.sheet-lens-diaphragm {
+  stroke: var(--sheet-ink);
+  stroke-width: 5;
+}
+
+.sheet-lens-screen {
+  fill: var(--sheet-note);
+}
+
+.sheet-lens-name {
+  font-family: var(--sheet-font-title);
+  font-weight: 700;
+  font-size: 17px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.sheet-lens-name[data-tone="ink"] {
+  fill: var(--sheet-ink);
+}
+
+.sheet-lens-name[data-tone="primary"] {
+  fill: var(--sheet-primary);
+}
+
+.sheet-lens-name[data-tone="accent"] {
+  fill: var(--sheet-accent);
+}
+
+.sheet-lens-name[data-tone="success"] {
+  fill: var(--sheet-success);
+}
+
+.sheet-lens-name[data-tone="note"] {
+  fill: var(--sheet-note-deep);
+}
+
+.sheet-lens-caption {
+  fill: var(--sheet-ink-secondary);
+  font-family: var(--sheet-font-title);
+  font-size: 13px;
+}
+
+/* ---- Zones de toucher et marqueur ---------------------------------------------------------------------------------- */
+
+.sheet-lens-hit {
+  fill: transparent;
+  cursor: grab;
+  outline: none;
+}
+
+.sheet-lens-hit:active {
+  cursor: grabbing;
+}
+
+.sheet-lens-hit:focus-visible {
+  stroke: var(--sheet-accent);
+  stroke-width: 2;
+}
+
+.sheet-lens-guide {
+  stroke: var(--sheet-note);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+
+.sheet-lens-marker {
+  fill: var(--sheet-note);
+  stroke: var(--sheet-white);
+  stroke-width: 2;
+}
+
+/* ---- Figures fixes : mise en page ----------------------------------------------------------------------------------- */
+
+.sheet-lens-diagram {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sheet-lens-badge {
+  position: absolute;
+  top: -14px;
+  left: 18px;
+  padding: 1px 12px;
+  border-radius: var(--sheet-radius-field);
+  background: var(--sheet-note);
+  color: var(--sheet-white);
+  font-family: var(--sheet-font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.sheet-lens-cards {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  font-size: 14.5px;
+}
+
+.sheet-lens-cards[data-columns="2"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  font-size: 15px;
+}
+
+.sheet-lens-cards[data-columns="3"] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sheet-lens-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1.5px solid var(--sheet-field-border);
+  border-radius: var(--sheet-radius-box);
+  background: var(--sheet-card);
+}
+
+.sheet-lens-cards[data-columns="4"] .sheet-lens-card {
+  align-items: center;
+  padding: 8px;
+  background: var(--sheet-white);
+}
+
+.sheet-lens-card[data-lens] {
+  border-width: 2px;
+  border-color: var(--sheet-primary);
+}
+
+.sheet-lens-card[data-lens="divergent"] {
+  border-color: var(--lens-violet);
+}
+
+.sheet-lens-card-title {
+  font-family: var(--sheet-font-title);
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--sheet-primary);
+}
+
+.sheet-lens-card[data-lens="divergent"] .sheet-lens-card-title {
+  color: var(--lens-violet);
+}
+
+.sheet-lens-card[data-lens] .sheet-lens-card-title {
+  font-size: 21px;
+}
+
+.sheet-lens-card svg {
+  max-height: 120px;
+}
+
+.sheet-figure .sheet-lens-profile {
+  width: 60px;
+  height: 86px;
+  max-height: none;
+  background: transparent;
+}
+
+.sheet-lens-card-text b[data-lens="divergent"] {
+  color: var(--lens-violet);
+}
+
+.sheet-lens-card-text b[data-lens="convergent"] {
+  color: var(--sheet-primary);
+}
+
+.sheet-lens-points {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding-left: 20px;
+  text-wrap: pretty;
+}
+
+.sheet-lens-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 18px;
+  align-items: center;
+}
+
+.sheet-lens-split[data-side="start"] {
+  grid-template-columns: 300px minmax(0, 1fr);
+}
+
+.sheet-figure .sheet-lens-focal {
+  max-width: 260px;
+  margin-inline: auto;
+}
+
+.sheet-lens-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-family: var(--sheet-font-title);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--sheet-primary-deep);
+  text-wrap: pretty;
+}
+
+.sheet-lens-steps b {
+  color: var(--sheet-accent);
+}
+
+.sheet-lens-eye-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  text-wrap: pretty;
+}
+
+.sheet-lens-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--sheet-white);
+  font-size: 15px;
+}
+
+.sheet-lens-table th,
+.sheet-lens-table td {
+  padding: 4px 10px;
+  border: 1px solid var(--sheet-field-border);
+  text-align: left;
+}
+
+.sheet-lens-table th {
+  background: var(--lens-status-bg);
+}
+
+@container (max-width: 520px) {
+  /* Le dessin de 560 unités se réduit à l'écran du téléphone : les lettres grossissent pour rester lisibles. */
+  .sheet-lens-svg .sheet-lens-name {
+    font-size: 22px;
+  }
+
+  .sheet-lens-cards[data-columns="2"],
+  .sheet-lens-cards[data-columns="3"],
+  .sheet-lens-split,
+  .sheet-lens-split[data-side="start"] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sheet-lens-cards[data-columns="4"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---- Simulateur : panneau des mesures ------------------------------------------------------------------------------- */
+
+.sheet-lens-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "readout"
+    "application"
+    "legend"
+    "status"
+    "actions";
+  gap: 10px;
+  font-size: 14px;
+}
+
+.sheet-lens-readout {
+  grid-area: readout;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--sheet-field-border);
+  border-radius: var(--sheet-radius-field);
+  background: var(--sheet-field-border);
+  font-variant-numeric: tabular-nums;
+}
+
+.sheet-lens-readout > * {
+  padding: 4px 8px;
+  background: var(--sheet-white);
+  overflow-wrap: anywhere;
+}
+
+.sheet-lens-readout > span {
+  color: var(--sheet-muted);
+}
+
+.sheet-lens-readout > b[data-tone="success"] {
+  color: var(--sheet-success);
+}
+
+.sheet-lens-readout > b[data-tone="note"] {
+  color: var(--lens-violet);
+}
+
+.sheet-lens-readout > b[data-tone="warning"] {
+  color: var(--sheet-accent);
+}
+
+.sheet-lens-application {
+  grid-area: application;
+  margin: 0;
+  font-family: var(--sheet-font-title);
+  font-size: 17px;
+  color: var(--sheet-primary);
+}
+
+.sheet-lens-legend {
+  grid-area: legend;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+}
+
+.sheet-lens-legend li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sheet-lens-swatch {
+  width: 16px;
+  height: 3px;
+  background: var(--sheet-muted);
+}
+
+.sheet-lens-swatch[data-ray="1"] {
+  background: var(--lens-ray-1);
+}
+
+.sheet-lens-swatch[data-ray="2"] {
+  background: var(--lens-ray-2);
+}
+
+.sheet-lens-swatch[data-ray="3"] {
+  background: var(--lens-ray-3);
+}
+
+.sheet-lens-status {
+  grid-area: status;
+  align-self: start;
+  padding: 8px 10px;
+  border: 1.5px solid currentcolor;
+  border-radius: var(--sheet-radius-field);
+  background: var(--sheet-white);
+  line-height: 1.4;
+  color: var(--sheet-success);
+  text-wrap: pretty;
+}
+
+.sheet-lens-status[data-tone="note"] {
+  color: var(--lens-violet);
+}
+
+.sheet-lens-status[data-tone="warning"] {
+  color: var(--sheet-accent);
+}
+
+.sheet-lens-actions {
+  grid-area: actions;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 6px;
+}
+
+.sheet-lens-actions .sheet-btn[aria-current="true"] {
+  background: color-mix(in oklch, var(--sheet-primary) 14%, transparent);
+}
+
+@container (min-width: 560px) {
+  .sheet-lens-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "readout status"
+      "application actions"
+      "legend actions";
+    gap: 10px 14px;
+  }
+}
+
+/* ---- « Place l'image » ----------------------------------------------------------------------------------------------- */
+
+.sheet-lens-practice .sheet-fields {
+  flex-wrap: wrap;
+}

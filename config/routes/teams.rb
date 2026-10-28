@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes de l'espace équipe ; tout contrôleur hérite de Teams::BaseController
 # Rôle : référentiel, DRENA, établissements, contenu, blog, illustrations d'annonce, imports, invitations, comptes, jobs
-# ADR  : 0031, 0034, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074, 0077, 0081, 0092, 0096 · UDR : 0067, 0068, 0070, 0075, 0092, 0104
+# ADR  : 0031, 0034, 0113, 0036 (amendement 2), 0038, 0039, 0052, 0056, 0057, 0058, 0059, 0062, 0063, 0065, 0074, 0077, 0081, 0092, 0096 · UDR : 0067, 0068, 0070, 0075, 0092, 0104
 get "teams", to: "teams/homes#show", as: :team_home # gelé
 # ADR-0062, UDR-0049 : le pilotage, nom de route gelé par l'UDR-0006 (entrée « Pilotage » de la navigation équipe).
 get "teams/dashboard", to: "teams/dashboards#show", as: :team_dashboard
@@ -78,13 +78,12 @@ end
 namespace :teams do
   resources :courses, only: %i[new create edit update], param: :slug do
     member { patch :publish; patch :archive; patch :publish_all, path: "publish-all" }
-    resources :essentials, only: %i[new create], param: :slug
   end
-  resources :essentials, only: %i[edit update], param: :slug do
+  # ADR-0113 §4.6 : ni création ni édition d'une notion ou d'un exercice à l'écran ; la leçon se réimporte. Restent les transitions.
+  resources :essentials, only: [], param: :slug do
     member { patch :publish; patch :archive; patch :publish_all, path: "publish-all" }
-    resources :exercises, only: %i[new create]
   end
-  resources :exercises, only: %i[edit update], param: :public_id do
+  resources :exercises, only: [], param: :public_id do
     member { patch :publish; patch :archive }
   end
   resources :imports, only: %i[index new create show], param: :public_id

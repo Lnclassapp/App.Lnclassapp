@@ -27,7 +27,7 @@ class Classroom::TeacherFirstPathDesktopTest < ApplicationSystemTestCase
     assert_in_delta rect("#teacher-onboarding-form")["right"], finish["right"], 1
   end
 
-  test "course sheet: the « Exercices » column stays visible, the centred days modal closes on Escape" do
+  test "lesson page: the centred days modal closes on Escape" do
     school = create_school
     tle = create_level(name: "Tle")
     course = create_course(name: "Génétique", level: tle, series: create_series(name: "D"), material: create_material(name: "SVT", category: "science"))
@@ -37,20 +37,8 @@ class Classroom::TeacherFirstPathDesktopTest < ApplicationSystemTestCase
     teacher = create_teacher(school:, classrooms: [ classroom ])
     sign_in_as teacher
 
-    visit course_essential_path(course.slug, essential.slug)
-    assert_selector "#essential_exercises"
-    page.execute_script("document.getElementById('essential_header').style.height = '3000px'")
-    page.execute_script("window.scrollTo(0, 1500)")
-    # La colonne collante se pose une fois le défilement fini : la mesure se refait jusque-là.
-    box = nil
-    page.document.synchronize do
-      box = rect("#essential_exercises")
-      raise Capybara::ExpectationNotMet, "la colonne défile encore" unless (box["top"] - 32).abs <= 2
-    end
-    assert_in_delta 32, box["top"], 2, "la colonne « Exercices » ne reste pas visible"
-    assert_in_delta 380, box["width"], 2
-
-    page.execute_script("window.scrollTo(0, 0)")
+    visit course_path(course.slug)
+    assert_selector "#prepare-interros"
     trigger = find("#assignment_#{classroom.public_id}_Exercise_#{exercise.public_id} a", text: "Assigner")
     trigger.click
     assert_selector "turbo-frame#modal dialog[open]"

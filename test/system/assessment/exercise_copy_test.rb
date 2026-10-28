@@ -46,6 +46,40 @@ class Assessment::ExerciseCopyTest < ApplicationSystemTestCase
     assert_equal [ "completed", 2 ], [ session.status, session.correct_count ]
   end
 
+  test "« Continuer ma copie » referme la confirmation et ne rend rien ; Échap fait de même" do
+    session = create_exercise_session(student: @student, exercise: @exercise)
+    visit exercise_session_path(session.public_id)
+    answer(@questions.first, true)
+
+    click_on I18n.t("#{SCOPE}.show.submit")
+    within("dialog#copy-confirm[open]") do
+      assert_text I18n.t("#{SCOPE}.show.missing", count: 4)
+      click_on I18n.t("#{SCOPE}.show.keep_going")
+    end
+    assert_no_selector "dialog#copy-confirm[open]"
+
+    click_on I18n.t("#{SCOPE}.show.submit")
+    assert_selector "dialog#copy-confirm[open]"
+    page.driver.browser.action.send_keys(:escape).perform
+    assert_no_selector "dialog#copy-confirm[open]"
+
+    assert_equal "started", session.reload.status
+    assert_current_path exercise_session_path(session.public_id)
+  end
+
+  test "à 390 px : « Revoir le sujet » mène au sujet, « Rendre ma copie » colle au bas de l'écran, la page ne déborde pas" do
+    session = create_exercise_session(student: @student, exercise: @exercise)
+    with_mobile_viewport do
+      visit exercise_session_path(session.public_id)
+
+      assert_selector "details#copy-statement[open]", text: "Étudie la méiose."
+      assert_link I18n.t("#{SCOPE}.show.review_statement"), href: "#copy-statement"
+      assert page.evaluate_script("Math.abs(document.querySelector('#copy-form button[type=submit]').getBoundingClientRect().bottom - window.innerHeight) < 40")
+      assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
+             "la page déborde en largeur"
+    end
+  end
+
   private
 
   def right(question) = question.answers.find_by!(correct: true)

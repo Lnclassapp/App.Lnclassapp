@@ -7,6 +7,6 @@
 <p class="text-meta text-mute"><%= t("classroom.student_homes.next_step.review.meta", material: review.material_name) %></p>
 <%= ui_badge t("classroom.student_homes.next_step.review.badge"), tone: :brand, size: :sm, icon: "arrow-path" %>
 <p class="text-sm text-ink"><%= t("classroom.student_homes.next_step.review.note", grade: grade_label(review.score_percent)) %></p>
-<%= ui_button t("classroom.student_homes.next_step.review.open"), href: course_essential_path(review.course_slug, review.essential_slug),
+<%= ui_button t("classroom.student_homes.next_step.review.open"), href: course_path(review.course_slug, anchor: "notion-#{review.essential_slug}"),
               variant: :primary, full: true, icon: "light-bulb", class: "mt-1", data: { turbo_prefetch: false },
               "aria-label": t("classroom.student_homes.next_step.review.open_label", title: review.essential_name) %>

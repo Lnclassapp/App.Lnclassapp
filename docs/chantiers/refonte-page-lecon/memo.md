@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré dans `Develop` le 2026-10-28, clos (suivi : #340) |
 | **Ouvert le** | 2026-10-28 |
 | **Branche** | une par lot depuis `Develop` (`feature/refonte-page-lecon-lot-<lettre>`), une PR par lot vers `Develop` ; le Lot 0 a été livré par `feature/refonte-page-lecon` (#332) |
 | **Programme** | — |
