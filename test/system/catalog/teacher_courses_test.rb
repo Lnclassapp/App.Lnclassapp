@@ -42,7 +42,7 @@ class Catalog::TeacherCoursesTest < ApplicationSystemTestCase
 
       find("#courses_material_chips a", text: "Maths").click
       click_on "Limites en l'infini"
-      assert_current_path course_essential_path(@limits.slug, @infinity.slug)
+      assert_current_path course_path(@limits.slug)
     end
   end
 

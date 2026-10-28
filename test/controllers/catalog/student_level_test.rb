@@ -83,9 +83,8 @@ class Catalog::StudentLevelTest < ActionDispatch::IntegrationTest
 
     get exercise_session_path(started.public_id)
     assert_response :not_found
-    post exercise_session_attempts_path(started.public_id),
-         params: { attempt: { question_id: question.id, answer_ids: [ question.answers.first.id ] } },
-         as: :turbo_stream
+    post exercise_session_copy_path(started.public_id),
+         params: { copy: { answers: { question.id.to_s => { answer_ids: [ question.answers.first.id ] } } } }
     assert_response :not_found
     assert_not Orm::QuestionAttempt.exists?
     get exercise_session_result_path(completed.public_id)

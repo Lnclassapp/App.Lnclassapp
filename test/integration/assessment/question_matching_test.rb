@@ -65,26 +65,6 @@ class Assessment::QuestionMatchingTest < ActionDispatch::IntegrationTest
     assert_select "[data-correct]", 0
   end
 
-  test "CA-13 : l'équipe crée un relier de trois paires, enregistré et jouable ; deux côtés droits égaux sont refusés" do
-    essential = create_essential
-    sign_in_as create_team_member
-    params = ->(pairs) do
-      { exercise: { title: "Relier", exercise_type: "fixation", questions_attributes: {
-        "0" => { content: "Relie.", question_type: "matching",
-                 answers_attributes: pairs.each_with_index.to_h { |(left, right), index| [ index.to_s, { content: left, match_content: right, correct: "1" } ] } }
-      } } }
-    end
-
-    post teams_essential_exercises_path(essential.slug), params: params.([ %w[a 1], %w[b 1], %w[c 3] ]), as: :turbo_stream
-    assert_response :unprocessable_entity
-
-    post teams_essential_exercises_path(essential.slug), params: params.([ %w[a 1], %w[b 2], %w[c 3] ]), as: :turbo_stream
-    question = Orm::Exercise.find_by!(title: "Relier").questions.sole
-    assert_equal [ %w[a 1], %w[b 2], %w[c 3] ], question.answers.order(:position).pluck(:content, :match_content)
-    assert_empty Repositories::Assessment::ExerciseRepository.new.find(id: question.exercise_id).questions.sole.structure_errors
-  end
-
-  # UDR-0087 §3.7 : l'aide des imports (l'import d'exercices seuls est retiré, ADR-0113) montre un exemple de chaque nouveau type, avec tolerance et match.
   test "l'aide de l'import montre les quatre nouveaux types" do
     sign_in_as create_team_member
 

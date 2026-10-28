@@ -25,8 +25,8 @@ module Queries
       def student_actor(student) = Actor.new(user_id: student.id, role: :student)
       def states(prepare) = (prepare.groups.flat_map(&:exercises) + prepare.lesson_wide).to_h { [ it.title, it.student_state ] }
 
-      test "le contrat porte groups, lesson_wide et targets" do
-        assert_equal %i[groups lesson_wide targets], PrepareInterrosQuery::Prepare.members
+      test "le contrat porte groups, lesson_wide, targets et bare" do
+        assert_equal %i[groups lesson_wide targets bare], PrepareInterrosQuery::Prepare.members
       end
 
       test "les exercices publiés sont groupés par notion dans l'ordre des notions, puis ceux de toute la leçon par position" do
@@ -51,6 +51,7 @@ module Queries
 
         assert_equal 3, prepare.groups.size
         assert_not_includes (prepare.groups.flat_map(&:exercises) + prepare.lesson_wide).map(&:title), "Brouillon"
+        assert_equal [ "Vide" ], prepare.bare.map(&:title), "elle garde son repère, sans exercice"
       end
 
       test "l'élève ne voit ni brouillon, ni archivé, ni notion non publiée, ni exercice d'une autre leçon" do

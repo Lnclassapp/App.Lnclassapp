@@ -28,7 +28,8 @@ class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
   end
 
   def toggle(type, key) = "#assignment_#{@classroom.public_id}_#{type}_#{key}"
-  def sheet_path = classroom_essential_path(@classroom.public_id, @course.slug, @meiose.slug)
+  def lesson_path = classroom_course_path(@classroom.public_id, @course.slug)
+  def withdraw_button = "button[aria-label^='Retirer']"
 
   def sign_in_teacher
     sign_in_as @teacher
@@ -51,8 +52,8 @@ class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
   # PRD, chemin nominal A ; plan, Lot C « Done quand ».
   test "without days, « Assigner » asks the days; Monday and Thursday give « Pour jeu. 8 oct. », then one click is enough" do
     sign_in_teacher
-    visit sheet_path
-    assert_selector "#classroom_essential_exercises li", count: 2
+    visit lesson_path
+    assert_selector "#prepare-interros li[id^=exercise-]", count: 2
 
     assert_no_page_reload do
       within(toggle("Exercise", @phases.public_id)) { click_on "Assigner" }
@@ -77,13 +78,13 @@ class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
       assert_toast "Le bilan ajouté à 6ème 1, à rendre jeudi 8 oct."
       assert_no_selector DAYS_MODAL
 
-      within(toggle("Exercise", @phases.public_id)) { click_on "Retirer" }
+      within(toggle("Exercise", @phases.public_id)) { find(withdraw_button).click }
       assert_toast "Les phases retiré de 6ème 1."
       within(toggle("Exercise", @phases.public_id)) do
         assert_no_text "Assigné"
         click_on "Assigner"
       end
-      within(toggle("Exercise", @phases.public_id)) { assert_button "Retirer" }
+      within(toggle("Exercise", @phases.public_id)) { assert_selector withdraw_button }
     end
 
     assert_equal [ 1, 4 ], Orm::ClassroomSessionDay.where(teacher_id: @teacher.id).order(:weekday).pluck(:weekday)
@@ -95,7 +96,7 @@ class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
 
   test "« Assigner » without any day keeps the modal open with its error, and writes nothing" do
     sign_in_teacher
-    visit sheet_path
+    visit lesson_path
 
     within(toggle("Exercise", @phases.public_id)) { click_on "Assigner" }
     within(DAYS_MODAL) { click_on "Assigner" }
@@ -108,20 +109,10 @@ class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
     assert_equal 0, Orm::ClassroomAssignment.count
   end
 
-  test "a team member assigns in one click, without modal nor due date" do
-    sign_in_as create_team_member
-    visit sheet_path
-
-    within(toggle("Exercise", @phases.public_id)) { click_on "Assigner" }
-    assert_toast "Les phases ajouté à 6ème 1."
-    assert_no_selector DAYS_MODAL
-    assert_nil Orm::ClassroomAssignment.sole.due_on
-  end
-
   test "on a phone, the days modal fits the screen and the toggle works in place" do
     sign_in_teacher
     with_mobile_viewport do
-      visit sheet_path
+      visit lesson_path
 
       assert_no_page_reload do
         within(toggle("Exercise", @phases.public_id)) { click_on "Assigner" }

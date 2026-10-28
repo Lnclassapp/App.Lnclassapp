@@ -8,7 +8,7 @@
     <ul class="space-y-2" data-turbo-prefetch="false">
       <% gaps.each_with_index do |gap, index| %>
         <%= tag.li(**ui_reveal_item(index)) do %>
-          <%= link_to course_essential_path(gap.course_slug, gap.essential_slug),
+          <%= link_to course_path(gap.course_slug, anchor: "notion-#{gap.essential_slug}"),
                       class: "group flex min-h-tap items-center gap-3 rounded-ln border border-line bg-white px-4 py-2 font-medium text-ink transition hover:border-brand hover:bg-brand-soft focus-visible:outline-2 focus-visible:outline-brand" do %>
             <%= ui_icon "light-bulb", size: :md, class: "text-mute" %>
             <span class="line-clamp-2 min-w-0 flex-1 break-words"><%= gap.essential_name %></span>

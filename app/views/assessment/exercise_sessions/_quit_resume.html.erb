@@ -1,7 +1,0 @@
-<%# 🌐 UI · assessment/exercise_sessions/_quit_resume — « Tu pourras reprendre à la question N », dans la confirmation pour quitter %>
-<%# Rôle : remplacé par le stream de chaque réponse (id quit_resume) : N suit les réponses enregistrées, sans rechargement %>
-<%# ADR  : 0054 · UDR : 0087 §3.3 · N = answered_count + 1 ; une séance finie n'a plus de question où reprendre %>
-<%# locals: (play:) -%>
-<p id="quit_resume" class="text-ink">
-  <%= play.completed? ? t("assessment.exercise_sessions.quit_dialog.done") : t("assessment.exercise_sessions.quit_dialog.resume", number: play.resume_number) %>
-</p>

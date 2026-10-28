@@ -132,19 +132,15 @@ module Finitions
       assert_no_selector "[data-controller~=clipboard]", visible: :all
     end
 
-    test "la fiche, l'exercice, la session et le résultat ont leur titre, leur retour et les infobulles des seuils" do
+    test "la leçon, l'exercice, la session et le résultat ont leur titre, leur retour et les infobulles des seuils" do
       session = completed_session
       sign_in_as @student
 
+      # ADR-0113 : la notion n'a plus de page ; l'ancienne adresse mène à la leçon, qui montre le cours.
       visit course_essential_path(@course.slug, @essential.slug)
-      assert_title "La méiose · Élève · Lnclass"
-      assert_selector "#essential_header p", exact_text: "Fiche de révision"
-      click_on "Génétique et évolution"
       assert_current_path course_path(@course.slug)
-
-      visit course_essential_path(@course.slug, @essential.slug)
-      # UDR-0015, amendement du 2026-10-02 : l'aide « Badges » quitte la fiche ; elle reste sur la page de l'exercice.
-      assert_no_selector "#essential_badges_help"
+      assert_title "Génétique et évolution · Élève · Lnclass"
+      assert_selector "h1", text: @course.name
 
       visit exercise_path(@exercise.public_id)
       assert_title "Méiose et ADN · Élève · Lnclass"

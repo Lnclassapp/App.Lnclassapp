@@ -28,6 +28,20 @@ module Dtos
         assert_equal 3, input.questions.last.answers.size
       end
 
+      test "la marge d'une question en nombre doit se lire comme un nombre ; absente, elle est admise" do
+        numeric = lambda do |tolerance|
+          ExerciseInput.from_params(params(questions: { "0" => { content: "Calcule 171 ÷ 4.", question_type: "numeric",
+                                                                 numeric_tolerance: tolerance,
+                                                                 answers_attributes: { "0" => { content: "42,75", correct: "1" } } } })).questions.first
+        end
+
+        assert numeric.call("0,25").tap(&:valid?).errors.empty?
+        assert numeric.call(nil).tap(&:valid?).errors.empty?
+        refused = numeric.call("beaucoup")
+        assert_not refused.valid?
+        assert refused.errors.of_kind?(:numeric_tolerance, :not_a_number)
+      end
+
       test "sans question envoyée, l'exercice n'a aucune question ; un tableau est lu comme des champs indexés" do
         assert_empty ExerciseInput.from_params(params.except("questions_attributes")).questions
 

@@ -95,7 +95,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
                     student_classroom_treated], sections
     assert_select "#student_classroom_assigned + #student_classroom_gaps" do
       assert_select "h2, h3", text: tl("pending_gaps.title")
-      assert_select "a[href=?]", course_essential_path(course.slug, gap.essential.slug), text: including("La méiose")
+      assert_select "a[href=?]", course_path(course.slug, anchor: "notion-#{gap.essential.slug}"), text: including("La méiose")
     end
   end
 

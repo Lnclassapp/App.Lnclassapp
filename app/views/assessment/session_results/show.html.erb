@@ -77,7 +77,7 @@
         <%= ui_button t("assessment.exercises.show.redo"), type: :submit, variant: :brand, size: :lg, full: true, icon: "arrow-path" %>
       <% end %>
     <% end %>
-    <%= ui_button t(".back_to_lesson"), href: lesson_href, variant: :secondary, size: :lg, full: true %>
+    <%= ui_button t(".back_to_lesson"), href: lesson_href, variant: :secondary, size: :lg, full: true, data: { turbo_prefetch: false } %>
   </div>
 
   <%= tag.section id: "session_review", "aria-labelledby": "session_review_title",

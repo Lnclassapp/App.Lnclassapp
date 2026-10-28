@@ -1,7 +1,7 @@
 require "test_helper"
 
-# CA-12, CA-13, CA-14, UDR-0006, UDR-0016: the team creates, edits, publishes and archives the essential sheets of a
-# course, in a modal and Turbo Streams. The old application opened these actions to any signed-in account.
+# UDR-0006: the team publishes (alone or with its exercises) and archives the notions of a lesson, in Turbo Streams. The
+# old application opened these actions to any signed-in account. Since ADR-0113 §4.6 it no longer creates nor edits them.
 class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @member = create_team_member
@@ -17,20 +17,30 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
   def including(text) = /#{Regexp.escape(text)}/
   def error_message(field, kind) = I18n.t("activemodel.errors.models.dtos/catalog/essential_input.attributes.#{field}.#{kind}")
 
+  # CA-29, ADR-0113 §4.6: the team no longer writes a notion on screen; it imports the lesson. No address is left to create or
+  # edit one, whoever asks: 404.
+  test "CA-29: the creation and edition addresses of a notion answer 404, even for the team, and nothing is written" do
+    essential = create_essential(course: @course, name: "La méiose", status: "draft")
+    sign_in_as @member
+
+    get "/teams/courses/#{@course.slug}/essentials/new"
+    assert_response :not_found
+    post "/teams/courses/#{@course.slug}/essentials", params: essential_params, as: :turbo_stream
+    assert_response :not_found
+    get "/teams/essentials/#{essential.slug}/edit"
+    assert_response :not_found
+    patch "/teams/essentials/#{essential.slug}", params: essential_params(name: "Renommée"), as: :turbo_stream
+    assert_response :not_found
+
+    assert_equal [ [ "La méiose", "draft" ] ], Orm::Essential.pluck(:name, :status)
+  end
+
   test "a teacher or a student receives 403 on every action, and nothing is written" do
     essential = create_essential(course: @course, name: "La méiose", status: "draft")
 
     [ create_teacher, create_student ].each do |user|
       sign_in_as user
 
-      get new_teams_course_essential_path(@course.slug)
-      assert_response :forbidden
-      post teams_course_essentials_path(@course.slug), params: essential_params, as: :turbo_stream
-      assert_response :forbidden
-      get edit_teams_essential_path(essential.slug)
-      assert_response :forbidden
-      patch teams_essential_path(essential.slug), params: essential_params(name: "Renommée"), as: :turbo_stream
-      assert_response :forbidden
       patch publish_teams_essential_path(essential.slug), as: :turbo_stream
       assert_response :forbidden
       patch archive_teams_essential_path(essential.slug), as: :turbo_stream
@@ -42,273 +52,13 @@ class Teams::EssentialsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::AuditEvent.where(action: %w[content.published content.archived]).count
   end
 
-  test "the creation form opens in the modal frame, with the course and the rich text editor in image mode" do
+  test "an unknown essential cannot be published or archived" do
     sign_in_as @member
 
-    get new_teams_course_essential_path(@course.slug), headers: { "Turbo-Frame" => "modal" }
-
-    assert_response :success
-    assert_select "nav", 0
-    assert_select "turbo-frame#modal" do
-      assert_select "link[rel=stylesheet][href*='/assets/trix']", 1
-      assert_select "dialog#essential-modal #essential-course", text: tl("new.course", name: "Génétique et évolution")
-      assert_select "form#essential-form[action='#{teams_course_essentials_path(@course.slug)}']" do
-        assert_select "input[name='essential[name]'][maxlength='150'][required]"
-        assert_select "input[name='essential[subtitle]'][maxlength='150']"
-        assert_select "label[for=essential_content]", text: I18n.t("activemodel.attributes.dtos/catalog/essential_input.content")
-        assert_select "[data-controller~=rich-text-editor] trix-editor#essential_content[aria-describedby=essential_content_hint]"
-        # ADR-0060: no direct upload address, the Active Storage routes are not drawn.
-        assert_select "trix-editor#essential_content[data-direct-upload-url=''][data-blob-url-template='']"
-        assert_select "input[type=hidden][name='essential[content]']", 1
-        # ADR-0105: images go through the team endpoint, one at a time, a new sheet without its slug.
-        assert_select "#essential_editor[data-rich-text-editor-attachments-value=true]" \
-                      "[data-rich-text-editor-upload-url-value='#{teams_essential_images_path}']" \
-                      "[data-rich-text-editor-upload-field-value='essential_image[file]']" \
-                      "[data-rich-text-editor-max-count-value='#{Entities::Shared::ContentImage::MAX_PER_ESSENTIAL}']"
-        assert_select "input#essential_image_files[type=file]:not([multiple])", 1
-        assert_select "#essential_image_slots[hidden]"
-        assert_select "#essential_images[hidden] ul#essential_image_alts li", 0
-      end
-    end
-    assert_select "button[type=submit][form=essential-form]", text: tl("new.submit")
-  end
-
-  test "a created essential is a draft at the end of its course, answered by a toast and a refresh of the host page" do
-    create_essential(course: @course, name: "La méiose", position: 3)
-    sign_in_as @member
-
-    post teams_course_essentials_path(@course.slug), params: essential_params(name: "brassage GÉNÉTIQUE"), as: :turbo_stream
-
-    essential = Orm::Essential.find_by!(name: "brassage GÉNÉTIQUE")
-    assert_equal [ @course.id, "Par la méiose", "draft", 4, @member.id, nil ],
-                 [ essential.course_id, essential.subtitle, essential.status, essential.position, essential.author_id,
-                   essential.published_at ]
-    assert_equal "<div><strong>À retenir</strong></div>", essential.content.body.to_html
-    assert_response :success
-    assert_equal "text/vnd.turbo-stream.html", response.media_type
-    assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("create.created", name: "brassage GÉNÉTIQUE"))
-    assert_select "turbo-stream[action=update][target=modal]", 1
-    assert_select "turbo-stream[action=refresh]:not([request-id])", 1
-  end
-
-  # UDR-0130 §3: the toast's exact value is set by the decision, so it is written out here.
-  test "l'équipe crée une fiche de révision" do
-    sign_in_as @member
-
-    post teams_course_essentials_path(@course.slug), params: essential_params(name: "Réciproque"), as: :turbo_stream
-
-    assert_response :success
-    assert_select "turbo-stream[action=append][target=toasts]", text: including("Fiche de révision « Réciproque » créée (brouillon).")
-  end
-
-  test "an unknown course has no creation form, and receives no essential" do
-    sign_in_as @member
-
-    get new_teams_course_essential_path("inconnu")
-    assert_response :not_found
-    post teams_course_essentials_path("inconnu"), params: essential_params, as: :turbo_stream
-    assert_response :not_found
-    assert_equal 0, Orm::Essential.count
-  end
-
-  test "an invalid form reopens in the modal (422), with its errors and the values typed, content included" do
-    sign_in_as @member
-
-    post teams_course_essentials_path(@course.slug),
-         params: essential_params(name: "", subtitle: "b" * 151, content: "<div><em>Gardé</em></div>"), as: :turbo_stream
-
-    assert_response :unprocessable_entity
-    assert_select "turbo-frame#modal dialog#essential-modal[data-modal-target=dialog] form#essential-form" do
-      assert_select "input[name='essential[name]'][aria-invalid=true]"
-      assert_select "#essential_name_error", text: including(I18n.t("errors.messages.blank"))
-      assert_select "input[name='essential[subtitle]'][value='#{'b' * 151}'][aria-invalid=true]"
-      assert_select "input[type=hidden][name='essential[content]'][value='<div><em>Gardé</em></div>']"
-    end
-    assert_equal 0, Orm::Essential.count
-  end
-
-  test "two essentials of the same course cannot share a name; another course accepts it" do
-    create_essential(course: @course, name: "Brassage génétique")
-    other = create_course(name: "Biologie")
-    sign_in_as @member
-
-    post teams_course_essentials_path(@course.slug), params: essential_params, as: :turbo_stream
-    assert_response :unprocessable_entity
-    assert_select "#essential_name_error", text: including(error_message(:name, :taken))
-
-    post teams_course_essentials_path(other.slug), params: essential_params, as: :turbo_stream
-    assert_response :success
-    assert_equal 2, Orm::Essential.where(name: "Brassage génétique").count
-  end
-
-  # ADR-0105: only the sheet images sent through the team endpoint stay in the text; anything else is dropped.
-  test "an attachment that is not a sheet image, sent past the editor, leaves the text" do
-    sign_in_as @member
-
-    post teams_course_essentials_path(@course.slug),
-         params: essential_params(content: '<div>Texte</div><figure data-trix-attachment="{&quot;url&quot;:&quot;https://ailleurs.example/a.png&quot;}"></figure>'),
-         as: :turbo_stream
-
-    assert_response :success
-    body = Orm::Essential.sole.content.body.to_html
-    assert_includes body, "Texte"
-    assert_not_includes body, "ailleurs.example"
-  end
-
-  test "ADR-0105: the cited images are attached with their text alternative, and the edit form lists them in order" do
-    first = create_essential_image
-    second = create_essential_image(fixture: "photos/photo.png")
-    attachment = ->(image) { %(<action-text-attachment sgid="#{image.attachable_sgid}"></action-text-attachment>) }
-    sign_in_as @member
-
-    post teams_course_essentials_path(@course.slug), as: :turbo_stream, params: {
-      essential: { name: "Le circuit", content: "<div>[[image: une pile]]</div>#{attachment[second]}#{attachment[first]}",
-                   image_alts: { first.public_id => "Une lampe", second.public_id => "Une pile" } }
-    }
-
-    assert_response :success
-    essential = Orm::Essential.sole
-    assert_equal [ [ essential.id, "Une lampe" ], [ essential.id, "Une pile" ] ],
-                 [ first.reload, second.reload ].map { [ it.essential_id, it.alt ] }
-
-    get edit_teams_essential_path(essential.slug), headers: { "Turbo-Frame" => "modal" }
-
-    assert_select "#essential_image_slots:not([hidden]) li", text: including(tl("form.slot", description: "une pile"))
-    assert_select "ul#essential_image_alts li input[name^='essential[image_alts]']" do |inputs|
-      assert_equal [ "Une pile", "Une lampe" ], inputs.map { it["value"] }
-    end
-  end
-
-  # Menace n° 11 : le plafond de 30 images vaut à l'enregistrement, pas seulement à l'envoi (des images orphelines le contournent).
-  def cite(images) = images.map { %(<action-text-attachment sgid="#{it.attachable_sgid}"></action-text-attachment>) }.join
-
-  test "ADR-0105: updating a sheet that cites 31 orphan images is refused (422), and no image is attached" do
-    essential = create_essential(course: @course, name: "La méiose")
-    images = Array.new(Entities::Shared::ContentImage::MAX_PER_ESSENTIAL + 1) { create_essential_image }
-    sign_in_as @member
-
-    patch teams_essential_path(essential.slug), params: essential_params(content: "<div>Texte</div>#{cite(images)}"), as: :turbo_stream
-
-    assert_response :unprocessable_entity
-    assert_select "#essential_content_error", text: including(error_message(:content, :too_many_images))
-    assert_equal 0, Orm::EssentialImage.where.not(essential_id: nil).count
-    assert_equal 31, Orm::EssentialImage.count
-    assert_equal "<p>L'essentiel à retenir.</p>", essential.reload.content.body.to_html
-  end
-
-  test "ADR-0105: creating a sheet that cites 31 images is refused (422), and nothing is written" do
-    images = Array.new(Entities::Shared::ContentImage::MAX_PER_ESSENTIAL + 1) { create_essential_image }
-    sign_in_as @member
-
-    post teams_course_essentials_path(@course.slug), params: essential_params(content: "<div>Texte</div>#{cite(images)}"), as: :turbo_stream
-
-    assert_response :unprocessable_entity
-    assert_equal 0, Orm::Essential.count
-    assert_equal 0, Orm::EssentialImage.where.not(essential_id: nil).count
-  end
-
-  test "ADR-0105: a sheet that cites exactly 30 images is saved" do
-    images = Array.new(Entities::Shared::ContentImage::MAX_PER_ESSENTIAL) { create_essential_image }
-    sign_in_as @member
-
-    post teams_course_essentials_path(@course.slug), params: essential_params(content: "<div>Texte</div>#{cite(images)}"), as: :turbo_stream
-
-    assert_response :success
-    assert_equal 30, Orm::EssentialImage.where(essential_id: Orm::Essential.sole.id).count
-  end
-
-  test "menace n° 13: a text of more than 200 KB is refused (422), and nothing is written" do
-    sign_in_as @member
-
-    post teams_course_essentials_path(@course.slug),
-         params: essential_params(content: "<div>#{'a' * Entities::Catalog::Essential::CONTENT_MAX}</div>"), as: :turbo_stream
-
-    assert_response :unprocessable_entity
-    assert_select "#essential_content_error", text: including(error_message(:content, :too_long))
-    assert_equal 0, Orm::Essential.count
-  end
-
-  test "without Turbo, a creation leads back to the course with a notice" do
-    sign_in_as @member
-
-    post teams_course_essentials_path(@course.slug), params: essential_params
-
-    assert_redirected_to course_path(@course.slug)
-    assert_equal tl("create.created", name: "Brassage génétique"), flash[:notice]
-  end
-
-  test "the edit form opens in the modal, filled in with the saved content, and shows the status" do
-    essential = create_essential(course: @course, name: "La méiose", subtitle: "Deux divisions", status: "published",
-                                 content: "<div><strong>Gras</strong><ul><li>Point</li></ul></div>")
-    sign_in_as @member
-
-    get edit_teams_essential_path(essential.slug), headers: { "Turbo-Frame" => "modal" }
-
-    assert_response :success
-    assert_select "turbo-frame#modal link[rel=stylesheet][href*='/assets/trix']", 1
-    assert_select "#essential-status", text: including(I18n.t("catalog.content_status.published"))
-    assert_select "turbo-frame#modal form#essential-form[action='#{teams_essential_path(essential.slug)}']" do
-      assert_select "input[name=_method][value=patch]"
-      assert_select "input[name='essential[name]'][value='La méiose']"
-      assert_select "input[name='essential[subtitle]'][value='Deux divisions']"
-      assert_select "input[type=hidden][name='essential[content]'][value*='<strong>Gras</strong><ul><li>Point</li></ul>']"
-      assert_select "[data-controller~=rich-text-editor] trix-editor#essential_content"
-      assert_select "#essential_editor[data-rich-text-editor-upload-url-value='#{teams_essential_images_path(essential: essential.slug)}']"
-    end
-    assert_select "button[type=submit][form=essential-form]", text: tl("edit.submit")
-  end
-
-  test "an unknown essential has no edit form, and cannot be updated, published or archived" do
-    sign_in_as @member
-
-    get edit_teams_essential_path("inconnue")
-    assert_response :not_found
-    patch teams_essential_path("inconnue"), params: essential_params, as: :turbo_stream
-    assert_response :not_found
     patch publish_teams_essential_path("inconnue"), as: :turbo_stream
     assert_response :not_found
     patch archive_teams_essential_path("inconnue"), as: :turbo_stream
     assert_response :not_found
-  end
-
-  test "an update keeps the slug, the course, the position and the status, and answers by a toast and a refresh" do
-    essential = create_essential(course: @course, name: "La méiose", status: "published", position: 2)
-    slug = essential.slug
-    sign_in_as @member
-
-    patch teams_essential_path(slug), params: essential_params(name: "La Méiose", subtitle: ""), as: :turbo_stream
-
-    assert_response :success
-    essential.reload
-    assert_equal [ "La Méiose", nil, slug, @course.id, 2, "published" ],
-                 [ essential.name, essential.subtitle, essential.slug, essential.course_id, essential.position, essential.status ]
-    assert_equal "<div><strong>À retenir</strong></div>", essential.content.body.to_html
-    assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("update.updated", name: "La Méiose"))
-    assert_select "turbo-stream[action=update][target=modal]", 1
-    assert_select "turbo-stream[action=refresh]:not([request-id])", 1
-  end
-
-  test "an invalid update reopens the edit modal (422), and nothing changes" do
-    essential = create_essential(course: @course, name: "La méiose")
-    create_essential(course: @course, name: "La mitose")
-    sign_in_as @member
-
-    patch teams_essential_path(essential.slug), params: essential_params(name: "La mitose"), as: :turbo_stream
-
-    assert_response :unprocessable_entity
-    assert_select "turbo-frame#modal form#essential-form[action='#{teams_essential_path(essential.slug)}'] #essential_name_error",
-                  text: including(error_message(:name, :taken))
-    assert_equal "La méiose", essential.reload.name
-  end
-
-  test "without Turbo, an update leads back to the catalog with a notice" do
-    essential = create_essential(course: @course, name: "La méiose")
-    sign_in_as @member
-
-    patch teams_essential_path(essential.slug), params: essential_params(name: "La Méiose")
-
-    assert_redirected_to courses_path
-    assert_equal tl("update.updated", name: "La Méiose"), flash[:notice]
   end
 
   test "publishing a draft of a published course replaces its status panel, and is journaled" do

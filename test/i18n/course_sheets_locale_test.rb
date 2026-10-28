@@ -6,7 +6,6 @@ class CourseSheetsLocaleTest < ActiveSupport::TestCase
 
   test "le nom à l'écran est « Fiche de révision » (UDR page de la leçon §2)" do
     assert_equal "Fiche de révision", t("name")
-    assert_equal "Fiche de cours", t("show.title")
   end
 
   test "lexique et explications simples" do

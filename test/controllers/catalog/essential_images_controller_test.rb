@@ -73,7 +73,8 @@ class Catalog::EssentialImagesControllerTest < ActionDispatch::IntegrationTest
     get course_essential_path(@course.slug, @essential.slug)
     page_status = response.status
     get essential_image_path(@image.public_id)
-    assert_equal [ 200, 200 ], [ page_status, response.status ]
+    # Since ADR-0113 the address of the sheet answers 301 to the lesson where it is read.
+    assert_equal [ 301, 200 ], [ page_status, response.status ]
 
     @essential.update!(status: "archived", archived_at: Time.current)
     get course_essential_path(@course.slug, @essential.slug)
