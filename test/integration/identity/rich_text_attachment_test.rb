@@ -5,7 +5,6 @@ require "test_helper"
 # an address; the page answers 200 instead of « Can't resolve image into URL ».
 class Identity::RichTextAttachmentTest < ActionDispatch::IntegrationTest
   test "a course whose content holds an image blob attachment is shown, with the file name and no Active Storage address" do
-    skip "Lot A : le texte de la leçon est rendu par la fiche de révision"
     blob = ActiveStorage::Blob.create_and_upload!(io: file_fixture("photos/photo.png").open, filename: "schema-secret.png",
                                                   content_type: "image/png")
     course = create_course(content: %(<p>Voir :</p><action-text-attachment sgid="#{blob.attachable_sgid}"></action-text-attachment>))
@@ -15,7 +14,7 @@ class Identity::RichTextAttachmentTest < ActionDispatch::IntegrationTest
     get course_path(course.slug)
 
     assert_response :success
-    assert_select ".trix-content figure.attachment" do
+    assert_select "#fiche-de-revision .trix-content figure.attachment" do
       assert_select ".attachment__name", "schema-secret.png"
       assert_select "img", 0
     end

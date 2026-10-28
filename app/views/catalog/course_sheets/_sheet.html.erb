@@ -1,0 +1,36 @@
+<%# 🌐 UI · catalog/course_sheets/_sheet — l'écran de la fiche de cours (pages de cahier, lexique en bulle, explications simples), rendu seul ou dans la page de la leçon %>
+<%# Rôle : `sheet` (CourseSheetQuery::Row) ; `cut` (RevisionPreview, nil sans coupe) marque la suite ; `embedded` : dans la page de la leçon, sous un h2 ; sans JavaScript tout se lit %>
+<%# ADR  : 0110-fiche-de-cours-en-donnees-importees, 0113 · UDR : 0137-fiche-de-cours-a-l-identique-des-maquettes, 0139 §3.2 %>
+<% cut = local_assigns[:cut] %>
+<% embedded = local_assigns.fetch(:embedded, false) %>
+<%# Les partials de pages et de blocs lisent la fiche (lexique) dans @sheet. %>
+<% @sheet = sheet %>
+<%# Le lexique et son aide voyagent en valeurs Stimulus (Hash clé => [titre, définition, exemple]) ; la bulle se remplit en texte brut. %>
+<%= tag.div class: "sheet-screen", data: { sheet_theme: sheet.theme, seyes: "true", simple: "true", embedded: (true if embedded),
+                                           controller: "math course-sheet--glossary course-sheet--simple-toggle",
+                                           "course-sheet--glossary-glossary-value": sheet.glossary,
+                                           "course-sheet--glossary-help-value": [ t("catalog.course_sheets.glossary.help_title"), t("catalog.course_sheets.glossary.help"), "" ],
+                                           "course-sheet--glossary-list-title-value": t("catalog.course_sheets.glossary.button"),
+                                           "course-sheet--simple-toggle-label-on-value": t("catalog.course_sheets.simple.label_on"),
+                                           "course-sheet--simple-toggle-label-off-value": t("catalog.course_sheets.simple.label_off") } do %>
+  <div class="sheet-bubble" role="dialog" aria-label="<%= t("catalog.course_sheets.glossary.button") %>" hidden
+       data-course-sheet--glossary-target="bubble">
+    <div class="sheet-bubble-head">
+      <b class="sheet-bubble-title" data-course-sheet--glossary-target="title"></b>
+      <button type="button" class="sheet-bubble-close" aria-label="<%= t("catalog.course_sheets.glossary.close") %>"
+              data-action="course-sheet--glossary#close">×</button>
+    </div>
+    <div class="sheet-bubble-list" data-course-sheet--glossary-target="list"></div>
+  </div>
+
+  <% section_offset = 0 %>
+  <% pages = sheet.pages %>
+  <% pages.each_with_index do |page, index| %>
+    <%= render "catalog/course_sheets/page", page:, number: index + 1, total: pages.size, section_offset:, cut:, embedded: %>
+    <% section_offset += page.fetch("sections", []).size %>
+  <% end %>
+  <%# Le dégradé sous la partie visible : masqué par le serveur, montré par le contrôleur quand la fiche est repliée. %>
+  <% if cut %>
+    <div class="revision-fade" data-catalog--revision-more-target="fade" hidden></div>
+  <% end %>
+<% end %>

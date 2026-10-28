@@ -725,10 +725,12 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_header", text: including("Du gène à l'espèce")
     assert_select "#course_header", text: including("Tle D")
     assert_select "#course_header", text: including("SVT")
-    # UDR page de la leçon §3.1 : deux sections, plus de liste de notions ; « Prépare interros » liste l'exercice de la notion (Lot B).
+    # UDR page de la leçon §3.1 : deux sections, plus de liste de notions ; sans fiche cahier, la fiche de révision est le texte
+    # de la leçon puis celui de ses notions publiées (Lot A, UDR-0139 §3.2) ; « Prépare interros » liste l'exercice de la notion (Lot B).
     assert_select "#course_essentials", 0
     assert_select "section#fiche-de-revision h2", text: tl("show.revision_title")
-    assert_select "section#fiche-de-revision", text: including(tl("show.revision_empty"))
+    assert_select "section#fiche-de-revision", text: including("ADN et gènes")
+    assert_select "section#fiche-de-revision h3", text: "La méiose"
     assert_select "section#prepare-interros[data-turbo-prefetch=false] h2", text: tl("show.prepare_title")
     assert_select "section#prepare-interros", text: including(tl("show.prepare_intro"))
     assert_select "section#prepare-interros #notion-#{meiose.slug} h3", text: "La méiose"
@@ -834,9 +836,17 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_sheet_link", 0
   end
 
-  # Le texte de la leçon redevient visible dans la fiche de révision avec le Lot A ; sa sanitisation (CA-04) y sera rejouée.
-  test "the content is sanitised on render: no script tag, no event attribute, no javascript link (CA-04)" do
-    skip "Lot A : le texte de la leçon est rendu par la fiche de révision"
+  # Le texte de la leçon est rendu par la fiche de révision (Lot A) : ce qu'il contient d'exécutable n'arrive pas dans la page.
+  test "the lesson text is sanitised on render: no script tag, no event attribute, no javascript link" do
+    Orm::Course.find(@course.id).update!(
+      content: "<p onclick=\"alert(1)\">Texte <strong>gras</strong></p><script>alert(2)</script><a href=\"javascript:alert(3)\">lien</a>"
+    )
+    sign_in_as create_student_for(@course)
+
+    get course_path(@course.slug)
+
+    assert_select "#fiche-de-revision strong", text: "gras"
+    assert_no_match(/<script>alert|onclick|javascript:alert/, response.body)
   end
 
   test "no page loads a script or a stylesheet from a third-party host (TR-41)" do
