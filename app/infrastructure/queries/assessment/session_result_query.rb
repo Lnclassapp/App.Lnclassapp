@@ -1,25 +1,28 @@
 # 🔌 INFRA · Queries::Assessment::SessionResultQuery
 # Rôle : résultat d'une session terminée (score, note, maîtrise, badge, progrès, effet sur la fiche) et sa correction ; sans reveal, seuls les choix
-# ADR  : 0028, 0033, 0043, 0054, 0079, 0091, 0094, 0101 · UDR : 0007, 0023, 0073, 0087, 0120 · sécurité n° 29
+# ADR  : 0028, 0033, 0043, 0054, 0079, 0091, 0094, 0101, 0112, 0113 · UDR : 0007, 0023, 0073, 0087, 0120, 0138 §3.4 · sécurité n° 29
 module Queries
   module Assessment
     class SessionResultQuery
       # badge_level : palier du score de cette session (Grading), nil sous le seuil ; earned_now : le badge de l'élève
       # sur l'exercice vient de cette session. progress : Progress, nil à la première session, remédiation comprise (UDR-0073).
       # gap_outcome : GapOutcome de cette session sur sa fiche (:opened, :lifted, :still_pending) ou nil (UDR-0120).
-      Row = Data.define(:session_public_id, :student_id, :student_name, :exercise, :essential, :score_percent, :grade_on_20,
+      # essential : nil pour un exercice de toute la leçon ; course_slug : le cours, toujours là (le retour à la leçon).
+      Row = Data.define(:session_public_id, :student_id, :student_name, :exercise, :essential, :course_slug, :score_percent, :grade_on_20,
                         :correct_count, :question_count, :mastery, :badge_level, :earned_now, :progress, :review, :gap_outcome)
       # trend : Comprehension.trend_for ; les trois notes sur 20, du premier, du meilleur et du dernier score (cette session).
       Progress = Data.define(:trend, :first_grade, :best_grade, :current_grade)
       ExerciseRow = Data.define(:public_id, :title)
       GapFacts = Data.define(:id, :status, :source_session_id, :resolved_by_session_id)
       EssentialRow = Data.define(:slug, :name, :course_slug)
-      # correct : verdict de la tentative (nil sans tentative). « Ton choix » par type (ADR-0091 §4.4) : answers (propositions
+      # correct : verdict de la tentative (nil sans tentative) ; unanswered : la question est restée vide à la copie (UDR-0138 §3.4,
+      # « Sans réponse », jamais « Faux »). « Ton choix » par type (ADR-0091 §4.4) : answers (propositions
       # d'un choix, étapes d'un ordre dans l'ordre de l'élève), response_text (trous, nombre), pairs (relier). solution et
       # numeric_tolerance ne sont remplis qu'avec reveal, pour les quatre nouveaux types.
       ReviewQuestion = Data.define(:id, :number, :content, :explanation, :correct, :answers, :question_type, :response_text,
-                                   :pairs, :solution, :numeric_tolerance) do
-        def initialize(question_type: "single_choice", response_text: nil, pairs: [], solution: [], numeric_tolerance: nil, **) = super
+                                   :pairs, :solution, :numeric_tolerance, :unanswered) do
+        def initialize(question_type: "single_choice", response_text: nil, pairs: [], solution: [], numeric_tolerance: nil,
+                       unanswered: false, **) = super
         def kind_name = Entities::Assessment::Question.kind_name_for(question_type)
       end
       # Sans reveal, correct vaut nil : la colonne n'est pas lue, et seules les propositions cochées le sont.
@@ -38,12 +41,14 @@ module Queries
       def call(public_id:, reveal:)
         id, public_id, student_id, first_name, last_name, score_percent, correct_count, question_count, exercise_id,
           exercise_public_id, title, essential_slug, essential_name, course_slug, completed_at, kind, knowledge_gap_id =
-          Orm::ExerciseSession.joins(:student, exercise: { essential: :course }).where(public_id:).pick(*SESSION_COLUMNS)
+          Orm::ExerciseSession.joins(:student, exercise: :course)
+                              .joins("LEFT OUTER JOIN essentials ON essentials.id = exercises.essential_id")
+                              .where(public_id:).pick(*SESSION_COLUMNS)
         return if id.nil?
 
         Row.new(session_public_id: public_id, student_id:, student_name: "#{first_name} #{last_name}",
                 exercise: ExerciseRow.new(public_id: exercise_public_id, title:),
-                essential: EssentialRow.new(slug: essential_slug, name: essential_name, course_slug:),
+                essential: (EssentialRow.new(slug: essential_slug, name: essential_name, course_slug:) if essential_slug), course_slug:,
                 correct_count:, question_count:, **grading(score_percent),
                 earned_now: Orm::ExerciseBadge.exists?(exercise_session_id: id),
                 progress: progress(id, student_id, exercise_id, completed_at), review: review(id, exercise_id, reveal),
@@ -94,15 +99,16 @@ module Queries
       def review(session_id, exercise_id, reveal)
         questions = Orm::Question.where(exercise_id:).order(:position, :id)
                                  .pluck(:id, :content, :explanation, :question_type, *(reveal ? [ :numeric_tolerance ] : []))
-        attempts = Orm::QuestionAttempt.where(exercise_session_id: session_id).pluck(:question_id, :correct, :selected_answer_ids, :response_text)
-                                       .to_h { |question_id, correct, selected, text| [ question_id, [ correct, selected, text ] ] }
+        attempts = Orm::QuestionAttempt.where(exercise_session_id: session_id)
+                                       .pluck(:question_id, :correct, :selected_answer_ids, :response_text, :unanswered)
+                                       .to_h { |question_id, correct, selected, text, unanswered| [ question_id, [ correct, selected, text, unanswered ] ] }
         kinds = questions.to_h { |id, _, _, question_type| [ id, kind_name(question_type) ] }
         choice_ids = kinds.select { |_, kind| kind == "choice" }.keys
         answers = reveal ? all_answers(choice_ids, attempts) : selected_answers(attempts.slice(*choice_ids))
         elements = elements(kinds.reject { |_, kind| kind == "choice" || !(reveal || ELEMENT_KINDS.include?(kind)) }.keys)
         questions.each_with_index.map do |(id, content, explanation, question_type, tolerance), index|
-          correct, selected, response_text = attempts.fetch(id, [ nil, [], nil ])
-          ReviewQuestion.new(id:, number: index + 1, content:, explanation:, correct:, question_type:, response_text:,
+          correct, selected, response_text, unanswered = attempts.fetch(id, [ nil, [], nil, false ])
+          ReviewQuestion.new(id:, number: index + 1, content:, explanation:, correct:, question_type:, response_text:, unanswered:,
                              answers: answers.fetch(id, []),
                              **kind_review(kind_name(question_type), elements.fetch(id, []), selected, reveal, tolerance))
         end

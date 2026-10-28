@@ -82,11 +82,11 @@ class Assessment::QuestionImageTest < ApplicationSystemTestCase
     assert_current_path student_home_path
     visit exercise_session_path(session.public_id)
 
-    within("#question-card") do
+    within("#question-2") do
       image = find("img[alt='#{DESCRIPTION}'][loading=lazy][width='64'][height='48']")
       assert_text "La lampe s'allume-t-elle ?"
       page.document.synchronize { raise Capybara::ExpectationNotMet, "image non chargée" unless image.evaluate_script("this.naturalWidth") > 0 }
-      assert image.evaluate_script("this.compareDocumentPosition(document.querySelector('#question-card legend')) & Node.DOCUMENT_POSITION_FOLLOWING")
+      assert image.evaluate_script("this.compareDocumentPosition(document.querySelector('#question-2 legend')) & Node.DOCUMENT_POSITION_FOLLOWING")
     end
   end
 end
