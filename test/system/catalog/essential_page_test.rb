@@ -61,16 +61,13 @@ class Catalog::EssentialPageTest < ApplicationSystemTestCase
     find("#essential_exercise_#{@exercise.public_id}").click
     assert_current_path exercise_path(@exercise.public_id)
     # UDR-0021, amendement du 2026-10-02 : la meilleure note se lit sur 20, forme unique de la note de l'élève.
-    within "#student_progress" do
-      assert_text "16/20"
-      assert_text(/\bOr\b/)
-    end
+    assert_selector "#exercise_best", text: "16/20"
 
     visit page_path
     within("#essential_exercise_#{@exercise.public_id}") { click_on I18n.t("#{scope}.exercise_progress.redo") }
 
     assert_current_path %r{\A/sessions/[^/]+\z}
-    assert_text(/question 1/i)
+    assert_selector "#copy-form #question-1"
   end
 
   # CA-E12 (UDR écrans élève §3.6 bis) : à 1 440 px, la fiche à gauche, la carte « Exercices » dans une colonne de 300 px qui

@@ -48,9 +48,9 @@ class ErrorPathsTest < ApplicationSystemTestCase
 
   # --- Réponse vide (AS-09) -----------------------------------------------------------------------------------
 
-  # UDR-0087 §3.2 (CA-1): « Valider » stays disabled until an answer is chosen; the blank answer refused by the server
-  # (422 in the card) is covered by the controller test, the only way to send it now.
-  test "a student cannot validate without choosing, then answers normally" do
+  # UDR-0138 §3.2 : sans JavaScript la copie part telle quelle ; avec, rendre une copie vide demande confirmation, et
+  # « Continuer ma copie » la rouvre. Rien n'est écrit tant que l'élève n'a pas confirmé.
+  test "a student who hands in an empty copy is asked to confirm, then keeps working" do
     exercise = create_exercise(title: "Méiose")
     # UDR-0013, amendement du 2026-10-01 : la classe de l'élève est du niveau du cours de l'exercice.
     classroom = create_classroom(level: exercise.essential.course.level)
@@ -59,18 +59,14 @@ class ErrorPathsTest < ApplicationSystemTestCase
 
     sign_in_as student
     click_on t("classroom.student_homes.next_step.due.start")
-    assert_selector "#question-card", text: /#{t("assessment.exercise_sessions.question_card.number", number: 1, total: 2)}/i
-
-    assert_button t("assessment.exercise_sessions.question_card.submit"), disabled: true
+    assert_selector "#copy-form"
     assert_equal 0, Orm::QuestionAttempt.count
 
-    assert_no_page_reload do
-      choose "Proposition 1"
-      click_on t("assessment.exercise_sessions.question_card.submit")
-      assert_text t("assessment.exercise_sessions.feedback_card.verdict.success")
-    end
-    assert_no_selector "#attempt-errors"
-    assert_equal 1, Orm::QuestionAttempt.count
+    click_on t("assessment.exercise_sessions.show.submit")
+    assert_selector "#copy-confirm[open]"
+    click_on t("assessment.exercise_sessions.show.keep_going")
+    assert_no_selector "#copy-confirm[open]"
+    assert_equal 0, Orm::QuestionAttempt.count
   end
 
   # --- Enseignant hors de sa classe (TR-cadre-4) ---------------------------------------------------------------
