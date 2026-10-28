@@ -20,13 +20,13 @@ class Assessment::ExerciseSessionTest < ApplicationSystemTestCase
     visit exercise_session_path(@session.public_id)
     assert_selector "#copy-counter", text: "0/2"
 
-    choose "q1-answer_#{right_answer(@first).id}"
+    within("#question-1") { choose right_answer(@first).content }
     assert_selector "#copy-counter", text: "1/2"
     page.refresh
     assert_selector "#copy-counter", text: "1/2"
-    assert_checked_field "q1-answer_#{right_answer(@first).id}"
+    within("#question-1") { assert_checked_field right_answer(@first).content }
 
-    choose "q2-answer_#{wrong_answer(@second).id}"
+    within("#question-2") { choose wrong_answer(@second).content }
     assert_selector "#copy-counter", text: "2/2"
     click_on I18n.t("#{SCOPE}.show.submit")
 
@@ -38,7 +38,7 @@ class Assessment::ExerciseSessionTest < ApplicationSystemTestCase
 
   test "« Continuer ma copie » referme la confirmation et ne rend rien ; Échap fait de même" do
     visit exercise_session_path(@session.public_id)
-    choose "q1-answer_#{right_answer(@first).id}"
+    within("#question-1") { choose right_answer(@first).content }
 
     click_on I18n.t("#{SCOPE}.show.submit")
     within("dialog#copy-confirm[open]") do
