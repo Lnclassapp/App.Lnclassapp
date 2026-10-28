@@ -102,6 +102,12 @@ module Queries
         assert_equal [ "<div>a<br>b</div>", "<div>c</div>" ], blocks
       end
 
+      test "un élément qui n'a qu'un seul br reste un seul bloc" do
+        course = create_course(content: "<div>a<br>b</div>")
+
+        assert_equal [ "<div>a<br>b</div>" ], call(course).texts.first[:blocks].map(&:to_s)
+      end
+
       test "une notion archivée n'apparaît pas dans la fiche" do
         course = create_course(content: "<p>Intro.</p>")
         create_essential(course:, name: "Archivée", status: "archived", content: "<p>Texte archivé.</p>")

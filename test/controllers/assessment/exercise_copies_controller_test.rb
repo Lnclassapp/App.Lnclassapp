@@ -88,6 +88,16 @@ class Assessment::ExerciseCopiesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "started", @session.reload.status
   end
 
+  test "une saisie invalide à côté d'une réponse qui n'est pas une table : 422, cette réponse rouverte vide" do
+    sign_in_as @student
+
+    copy({ @first.id.to_s => "x" }.merge(pick(@second, [ wrong(@second), right(@second).first ])))
+
+    assert_response :unprocessable_entity
+    assert_select "#question-1 input[checked]", 0
+    assert_equal 0, Orm::QuestionAttempt.count
+  end
+
   # Entrées hostiles : chacune est refusée (422) sans écrire, la session reste ouverte.
   test "entrées hostiles : proposition d'une autre question, clé inconnue, trop de réponses, texte à octet nul" do
     other = create_exercise(questions: 1).questions.first

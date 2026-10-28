@@ -189,6 +189,35 @@ module UseCases
         assert_empty @sessions.copies
       end
 
+      test "sans acteur : :forbidden, rien n'est écrit" do
+        assert_equal :forbidden, submit({}, actor: nil).code
+        assert_empty @sessions.copies
+      end
+
+      test "un refus de la policy autre que la session close est rendu tel quel, rien n'est écrit" do
+        refusing = Object.new
+        refusing.define_singleton_method(:call) { |actor:, session:| Shared::Result.failure(:forbidden) }
+        sessions = FakeSessions.new(session)
+        use_case = SubmitExerciseCopy.new(sessions:, exercises: FakeExercises.new(exercise), policy: refusing, close: SpyClose.new,
+                                          transaction: FakeTransaction.new, clock: Clock.new(NOW))
+
+        result = use_case.call(actor: STUDENT, dto: Dtos::Assessment::CopyInput.new(session_public_id: "SeSsIoN0000005", answers: {}))
+
+        assert_equal [ :forbidden, {} ], [ result.code, result.errors.to_h ]
+        assert_empty sessions.copies
+      end
+
+      test "un exercice disparu : :not_found, rien n'est écrit" do
+        sessions = FakeSessions.new(session)
+        gone = Object.new
+        gone.define_singleton_method(:find) { |id:| nil }
+        use_case = SubmitExerciseCopy.new(sessions:, exercises: gone, policy: Policies::Assessment::SubmitAttemptPolicy.new, close: SpyClose.new,
+                                          transaction: FakeTransaction.new, clock: Clock.new(NOW))
+
+        assert_equal :not_found, use_case.call(actor: STUDENT, dto: Dtos::Assessment::CopyInput.new(session_public_id: "SeSsIoN0000005", answers: {})).code
+        assert_empty sessions.copies
+      end
+
       test "une session abandonnée, ou un exercice archivé : :conflict, rien n'est écrit" do
         abandoned = submit({}, stored: session(status: "abandoned"))
         archived = submit({}, exercise: exercise(status: "archived"))
