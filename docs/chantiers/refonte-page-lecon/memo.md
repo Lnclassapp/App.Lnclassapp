@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision |
+| **Statut** | planifié |
 | **Ouvert le** | 2026-10-28 |
 | **Branche** | `feature/refonte-page-lecon` (le cadrage, documentation seule, est commité sur `Develop`) |
 | **Programme** | — |
@@ -73,7 +73,8 @@ Prises avant le grill, à la lecture des captures de l'existant.
 | Q8. Après une mauvaise note sur un exercice de la section « Exercices » ? | Un exercice de notion raté ouvre « Notion à revoir » ; un exercice de leçon complète n'en ouvre pas. L'élève peut refaire ; l'enseignant voit la première copie rendue et la meilleure note. | Les règles actuelles de clôture et de lacune s'appliquent aux exercices de notion ; un exercice de leçon complète n'a pas de notion, donc pas de lacune (règle écrite dans l'ADR). La lecture enseignant d'un exercice assigné affiche deux chiffres (première copie, meilleure note), comme la lecture de la compréhension actuelle. |
 | Q9. Les pages de notion de l'équipe (modifier, nouvel exercice, importer, publier) disparaissent : comment l'équipe gère-t-elle notions et exercices ? | Par l'import. Dans la page de la leçon, l'équipe garde le statut et « Publier ». | Le format d'import de la leçon s'étend : sujet d'exercice, exercices de leçon complète, rattachement de chaque exercice à une notion ou à la leçon entière. Les écrans d'édition de notion et d'exercice de l'équipe sortent de l'interface (retirés ou laissés sans lien : se tranche au PRD). Publier une leçon publie sa fiche, ses notions et ses exercices (cascade existante). |
 | Q10. Ordre des sections de la page de la leçon ? *(revoit Q2 et la décision 5)* | Deux sections seulement : la fiche de révision, puis « Prépare interros », qui contient les exercices avec « Assigner ». | Il n'y a pas de section « Exercices » distincte : « Prépare interros » **est** la section des exercices assignables (1 par notion + 4 sur la leçon). La place des 9 à 15 exercices déjà écrits est à reposer → Q11. |
-| Q11. Que deviennent les 9 à 15 exercices déjà écrits par leçon ? | Ils sont tous remplacés au réimport et ne s'affichent plus. Les rôles Comprendre, Appliquer, S'évaluer aident l'élève à préparer les interrogations : chaque nouvel exercice porte le bon type (fixation ou évaluation) selon ce qu'il travaille. | « Prépare interros » ne montre que les exercices sur feuille ; il est vide pour toutes les leçons sauf Thalès jusqu'au réimport. Pas de nouveau champ : le type fixation ou évaluation existant suffit, il est obligatoire à l'import et s'affiche en étiquette. Le mode « une question à la fois » n'est plus atteint par aucun exercice affiché (voir Questions encore ouvertes). |
+| Q11. Que deviennent les 9 à 15 exercices déjà écrits par leçon ? | Ils sont tous remplacés au réimport et ne s'affichent plus. Les rôles Comprendre, Appliquer, S'évaluer aident l'élève à préparer les interrogations : chaque nouvel exercice porte le bon type (fixation ou évaluation) selon ce qu'il travaille. | « Prépare interros » ne montre que les exercices sur feuille ; il est vide pour toutes les leçons sauf Thalès jusqu'au réimport. Pas de nouveau champ : le type fixation ou évaluation existant suffit, il est obligatoire à l'import et s'affiche en étiquette. Le mode « une question à la fois » n'est plus atteint par aucun exercice affiché → Q12. |
+| Q12. « Tout rendre » ou « question par question » ? *(questions ouvertes du 2026-10-28, tranchées)* | Copie à rendre pour tous les exercices : toutes les questions sous le sujet, réponses modifiables et gardées sur le téléphone jusqu'au rendu, puis note et correction. L'écran « une question à la fois » est retiré. La notion reste une donnée invisible ; « 150 mots » se comptent sur le texte seul et la coupe tombe en fin de bloc ; l'ancienne adresse d'une notion redirige vers la leçon. | Un seul mode de réponse : l'exercice du jour et l'exercice proposé par « Notion à revoir » passent aussi en copie. La correction immédiate ne vit plus que dans les exercices d'entraînement de la fiche de révision. Brouillon gardé dans le navigateur, rien côté serveur avant le rendu. |
 
 ## Cas limites identifiés
 
@@ -96,7 +97,5 @@ Prises avant le grill, à la lecture des captures de l'existant.
 
 ## Questions encore ouvertes
 
-- **Le mode « une question à la fois »** : plus aucun exercice affiché ne l'utilise après Q11. On le retire du code dans ce chantier (proposition : oui, l'exercice du jour et l'exercice proposé par la remédiation passent eux aussi en copie à rendre), ou on le garde en dette ?
-- **La notion reste-t-elle une donnée ?** Elle porte les lacunes et le rattachement d'un exercice. Proposition : oui, sans page ni nom à l'écran ; se tranche dans l'ADR.
-- **« 150 mots »** : compte-t-on les mots du texte seulement (titres, formules et légendes exclus) ? Proposition : oui, et la coupe tombe en fin de bloc, jamais au milieu d'un encadré.
-- **L'ancienne adresse d'une notion** (`/courses/…/essentials/…`) : redirection vers la page de la leçon (proposition) ou page introuvable ?
+- Aucune question bloquante. Les quatre questions laissées ouvertes après Q11 sont tranchées en Q12.
+- Le contenu des exercices sur feuille de la leçon Thalès (1 par notion + 4 sur la leçon) : rédigé dans le lot d'import, relu par Touré.

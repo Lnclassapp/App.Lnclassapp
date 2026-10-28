@@ -1,4 +1,4 @@
-# Journal — [Titre du chantier]
+# Journal — Refonte de la page de la leçon : fiche de révision, « Prépare interros » et exercices sur feuille
 
 > Rempli **pendant** le chantier, pas reconstitué à la fin. C'est ici que se capitalise ce qui ne rentre ni dans un ADR ni dans un commit.
 
