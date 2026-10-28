@@ -65,11 +65,13 @@ class Catalog::CourseSheetSeedsTest < ActionDispatch::IntegrationTest
   test "the demo seed imports the sheet on the lesson, then a second run does nothing" do
     create_team_member(team_role: "content", second_factor: false, contact: "0700000000")
 
-    assert_includes run_seed, "2 fiche(s) de cours importée(s) sur 2"
+    total = Rails.root.glob("db/seeds/data/course_sheets/*.json").size
+
+    assert_includes run_seed, "2 fiche(s) de cours importée(s) sur #{total}"
     assert_equal [ @course.id, @lens_course.id ].sort, Orm::CourseSheet.pluck(:course_id).sort
     stamps = Orm::CourseSheet.order(:id).pluck(:updated_at)
 
-    assert_includes run_seed, "0 fiche(s) de cours importée(s) sur 2"
+    assert_includes run_seed, "0 fiche(s) de cours importée(s) sur #{total}"
     assert_equal stamps, Orm::CourseSheet.order(:id).pluck(:updated_at)
   end
 

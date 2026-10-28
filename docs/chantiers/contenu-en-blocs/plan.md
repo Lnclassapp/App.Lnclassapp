@@ -9,7 +9,7 @@
 |---|---|---|
 | Où vit le contenu d'une fiche | Un document de blocs `jsonb` par leçon (`course_sheets`), importé au format `lnclass.course-sheet` v1, rendu par un partial par type de bloc | Retenu par le pilote — [ADR-0110](../../decisions/adr/0110-fiche-de-cours-en-donnees-importees.md) |
 | Figure propre à une fiche | `kind` en liste fermée : un partial et un contrôleur Stimulus par `kind`, réglages dans les données, bornés par le schéma | Retenu par le pilote — même ADR |
-| Rendu sous 1 000 px | Proposition : même design, pages fluides (détail dans l'[UDR-0137](../../decisions/udr/0137-fiche-de-cours-a-l-identique-des-maquettes.md) § 4) | Retenu par Touré pour le test (2026-10-27) ; le porteur tranche sur captures (2026-10-28) — Lot G, phase 1 |
+| Rendu sous 1 000 px | Proposition : même design, pages fluides (détail dans l'[UDR-0137](../../decisions/udr/0137-fiche-de-cours-a-l-identique-des-maquettes.md) § 4) | Retenu par Touré pour le test (2026-10-27), confirmé par le porteur sur captures (2026-10-28) — Lot G, phase 1 |
 | Nom à l'écran | « Fiche de révision » | Tranché par le porteur le 2026-10-28 ([UDR-0139](../../decisions/udr/0139-page-de-la-lecon-fiche-de-revision-et-prepare-interros.md)) — Lot H fait |
 
 ADR-0110 et UDR-0137 acceptés par le porteur le 2026-10-28.
