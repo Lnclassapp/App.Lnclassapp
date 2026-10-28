@@ -835,9 +835,17 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_sheet_link", 0
   end
 
-  # Le texte de la leçon redevient visible dans la fiche de révision avec le Lot A ; sa sanitisation (CA-04) y sera rejouée.
-  test "the content is sanitised on render: no script tag, no event attribute, no javascript link (CA-04)" do
-    skip "Lot A : le texte de la leçon est rendu par la fiche de révision"
+  # Le texte de la leçon est rendu par la fiche de révision (Lot A) : ce qu'il contient d'exécutable n'arrive pas dans la page.
+  test "the lesson text is sanitised on render: no script tag, no event attribute, no javascript link" do
+    Orm::Course.find(@course.id).update!(
+      content: "<p onclick=\"alert(1)\">Texte <strong>gras</strong></p><script>alert(2)</script><a href=\"javascript:alert(3)\">lien</a>"
+    )
+    sign_in_as create_student_for(@course)
+
+    get course_path(@course.slug)
+
+    assert_select "#fiche-de-revision strong", text: "gras"
+    assert_no_match(/<script>alert|onclick|javascript:alert/, response.body)
   end
 
   test "no page loads a script or a stylesheet from a third-party host (TR-41)" do
