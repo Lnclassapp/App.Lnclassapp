@@ -26,6 +26,28 @@
 - Clé de lexique définie deux fois : un Hash ne peut pas la porter ; le Lot A doit la détecter à la lecture du JSON.
 - Les valeurs `--sheet-note*` (teintes du lexique et des explications simples) des thèmes `teal` et `burgundy` sont relevées sur les maquettes Lentilles et Texte argumentatif ; les lots E et F les vérifient au pixel.
 
+### Lot E — Fiche Lentilles (2026-10-28)
+
+**Livré** : leçon « Les lentilles » (`docs/contenus/lecons-traitees/3eme/physique-chimie/les-lentilles.json`, 5 essentiels, 45 questions), fiche `db/seeds/data/course_sheets/lentilles.json` (3 pages, 17 entrées de lexique, 7 figures, simulateur, entraînement de construction, 7 exercices), kinds `lens_diagrams` / `lens_simulator` / `lens_construction`, `course_sheet/lens.css`, deux contrôleurs Stimulus en coquille et trois libs chargées à la demande (`lib/course_sheet/`).
+
+**À valider** : le contenu de la leçon et de la fiche attend la relecture du porteur ou de Touré (relu seulement par l'agent, sans erreur scientifique repérée).
+
+**Choix et écarts**
+- Le bloc « Ma rédaction » n'est pas dans cette fiche : `_writing` appartient au Lot F.
+- Les légendes des figures fixes vivent dans la locale (`course_sheets_lens.fr.yml`), rendues par `sheet_text` (mots du lexique cliquables).
+- Fichiers ajoutés hors fiche de lot : `Catalog::CourseSheetLensHelper` (position de départ calculée côté serveur, testée), `kinds/_lens_rays`, `kinds/lens_diagrams/_symbol`, le fichier de locale. Les mêmes formules sont dupliquées dans `lens_geometry.js` (un seul endroit à tenir à jour avec l'helper).
+- `params.diagram` et les nombres du simulateur sont bornés dans le partial (`lens_param`), pas dans le schéma ; un nom inconnu affiche « indisponible ».
+- `touch-action: none` sur les SVG interactifs : le glisser du doigt ne fait pas défiler la page ; les zones de toucher font 22 unités de rayon au minimum (44 px) ; le clavier déplace les poignées.
+- Maquette : le point d'arrivée du rayon de la figure « exemple » était faux ; corrigé.
+- Piège : `#318` dans un en-tête HITL est lu comme une couleur hexadécimale par `design_tokens_test` ; écrire « chantier contenu-en-blocs, 318 ».
+- Le test système de la figure de Thalès vit en réalité dans `course_sheet_browser_test.rb`.
+
+**Fichiers partagés touchés (conflits probables avec le Lot F)** : `course_sheet.css` (un `@import`), `test/design/design_tokens_test.rb` (liste exacte des imports), `test/integration/catalog/course_sheet_seeds_test.rb` (« sur 2 »), `script/ci/test_timings.yml`.
+
+**Poids** : JS commun 60,33 Ko gzip avant, 60,60 Ko après (plafond du test : 61 Ko) ; chaque chunk de lentille ~1,5 Ko gzip, chargé à la demande. Budget des tests système : 8,5 s sur 15 s consommées par ce chantier, il reste ~6,5 s pour le Lot F.
+
+**Point ouvert** : `bin/check-asset-budget` plafonne encore à 60 Ko alors que l'ADR-0114 et `javascript_bundle_test` disent 61 Ko (la base de 60,33 Ko dépassait déjà 60) ; à aligner par l'orchestrateur.
+
 ## Ce qui a dérapé
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.

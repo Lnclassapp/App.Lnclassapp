@@ -1,0 +1,53 @@
+<%# 🌐 UI · catalog/course_sheets/kinds/_lens_construction — « Place l'image » : un énoncé de lentille, le point B′ à glisser sur le quadrillage, Vérifier, solution, nouvel exercice, score %>
+<%# Rôle : `block` {kind: lens_construction} sans params ; rendu sur le premier énoncé sans JavaScript (f = 2 cm, OA = 3 cm, AB = 1,5 cm), lens_construction_controller charge lib/course_sheet/lens_construction qui tire les suivants, juge et compte une fois par énoncé %>
+<%# ADR  : 0110-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs, 318) · UDR : 0137 · 0139 · pas d'attribut style ; le marqueur se place au demi-carreau, la bonne réponse est juste à ±0,5 carreau %>
+<%
+  ctrl = "course-sheet--lens-construction"
+  i18n = "catalog.course_sheets.practice"
+  f, d, h = 2, 3, 1.5
+  # La lentille en (260, 130) du dessin de 560 x 260 ; 20 unités par centimètre. Mêmes valeurs dans lib/course_sheet/lens_construction.js.
+  o = 260
+  ax = 130
+  scale = 20
+  scene = lens_scene(o:, ax:, s: scale, w: 560, d:, h:, f:)
+  image = scene.image
+  object = [ o - d * scale, ax - h * scale ]
+  marker = [ o + 5 * scale, ax + scale ]
+  texts = t(".js").merge(score: t("#{i18n}.score", ok: "{ok}", total: "{total}"), solution_show: t("#{i18n}.solution"))
+%>
+<%= tag.section class: "sheet-practice sheet-lens-practice", data: { controller: ctrl, f:, d:, h:, texts: } do %>
+  <span class="sheet-practice-badge"><%= t(".badge") %></span>
+  <div class="sheet-practice-head">
+    <b class="sheet-score" role="status" aria-live="polite" data-role="score"><%= t("#{i18n}.score", ok: 0, total: 0) %></b>
+  </div>
+  <p class="sheet-practice-prompt" data-role="prompt"><%= t(".js.prompt", f:, h: lens_number(h), d:) %></p>
+  <svg class="sheet-lens-svg" viewBox="0 0 560 260" role="group" aria-label="<%= t(".label") %>">
+    <path class="sheet-lens-grid-line" d="<%= (0..560).step(20).map { "M#{it},0V260" }.join %><%= (10..250).step(20).map { "M0,#{it}H560" }.join %>"></path>
+    <line class="sheet-lens-axis" x1="0" y1="<%= ax %>" x2="560" y2="<%= ax %>"></line>
+    <%= tag.g data: { role: "solution", visible: false } do %>
+      <g data-role="rays"><%= render "catalog/course_sheets/kinds/lens_rays", rays: scene.rays %></g>
+      <%= tag.line class: "sheet-lens-image", x1: image.x, y1: ax, x2: image.x, y2: image.y, data: { role: "image-line", virtual: image.virtual } %>
+      <polygon class="sheet-lens-image-head" data-role="image-head" points="<%= lens_head(image.x, image.y, ax) %>"></polygon>
+    <% end %>
+    <%= render "catalog/course_sheets/kinds/lens_diagrams/symbol", x: o, top: 12, bottom: 248 %>
+    <line class="sheet-lens-object" data-role="object-line" x1="<%= object[0] %>" y1="<%= ax %>" x2="<%= object[0] %>" y2="<%= object[1] %>"></line>
+    <polygon class="sheet-lens-object-head" data-role="object-head" points="<%= lens_head(object[0], object[1], ax) %>"></polygon>
+    <circle class="sheet-lens-dot" data-role="dot-f" cx="<%= o - f * scale %>" cy="<%= ax %>" r="4"></circle>
+    <circle class="sheet-lens-dot" data-role="dot-fp" cx="<%= o + f * scale %>" cy="<%= ax %>" r="4"></circle>
+    <text class="sheet-lens-name" data-tone="primary" data-role="label-a" x="<%= object[0] %>" y="149" text-anchor="middle">A</text>
+    <text class="sheet-lens-name" data-tone="primary" data-role="label-b" x="<%= object[0] - 14 %>" y="<%= object[1] - 4 %>" text-anchor="middle">B</text>
+    <text class="sheet-lens-name" data-tone="ink" x="270" y="148" text-anchor="middle">O</text>
+    <text class="sheet-lens-name" data-tone="accent" data-role="label-f" x="<%= o - f * scale %>" y="149" text-anchor="middle">F</text>
+    <text class="sheet-lens-name" data-tone="accent" data-role="label-fp" x="<%= o + f * scale %>" y="149" text-anchor="middle">F′</text>
+    <line class="sheet-lens-guide" data-role="marker-guide" x1="<%= marker[0] %>" y1="<%= ax %>" x2="<%= marker[0] %>" y2="<%= marker[1] %>"></line>
+    <circle class="sheet-lens-marker" data-role="marker" cx="<%= marker[0] %>" cy="<%= marker[1] %>" r="7"></circle>
+    <text class="sheet-lens-name" data-tone="note" data-role="marker-label" x="<%= marker[0] + 24 %>" y="<%= marker[1] + 20 %>" text-anchor="middle">B′ ?</text>
+    <%= tag.circle class: "sheet-lens-hit", cx: marker[0], cy: marker[1], r: 20, tabindex: 0, role: "button", "aria-label": t(".marker"), data: { hit: "marker" } %>
+  </svg>
+  <div class="sheet-fields">
+    <%= tag.button t("#{i18n}.check"), type: "button", class: "sheet-btn", data: { variant: "primary", role: "check" } %>
+    <%= tag.button t("#{i18n}.solution"), type: "button", class: "sheet-btn", data: { role: "solution-toggle" }, "aria-expanded": "false" %>
+    <%= tag.button t("#{i18n}.next"), type: "button", class: "sheet-btn", data: { role: "next" } %>
+  </div>
+  <div class="sheet-message" role="status" aria-live="polite" data-role="message"></div>
+<% end %>

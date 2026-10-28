@@ -1,0 +1,87 @@
+<%# 🌐 UI · catalog/course_sheets/kinds/_lens_simulator — le simulateur d'une lentille convergente : l'objet AB, les foyers F et F′ se déplacent, les trois rayons et l'image suivent %>
+<%# Rôle : `block` {kind: lens_simulator, params: {d, h, f, grid}} (OA 0,5–14,5 cm, AB 0,5–6,5 cm, f 1–7 cm, grille) rendu dans sa position de départ sans JavaScript ; lens_simulator_controller charge lib/course_sheet/lens_simulator qui le déplace %>
+<%# ADR  : 0110-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs, 318) · UDR : 0137 · 0139 · pas d'attribut style, positions par attributs SVG ; un params hors bornes revient dans les bornes %>
+<%
+  ctrl = "course-sheet--lens-simulator"
+  options = block["params"].is_a?(Hash) ? block["params"] : {}
+  d = lens_param(options["d"], 8, 0.5..14.5)
+  h = lens_param(options["h"], 2, 0.5..6.5)
+  f = lens_param(options["f"], 3, 1..7)
+  grid = options["grid"] != false
+  # La lentille en (300, 170) du dessin de 560 x 300 ; 20 unités par centimètre. Mêmes valeurs dans lib/course_sheet/lens_simulator.js.
+  o = 300
+  ax = 170
+  scale = 20
+  scene = lens_scene(o:, ax:, s: scale, w: 560, d:, h:, f:)
+  image = scene.image
+  shown = image.present? && image.distance.abs < Catalog::CourseSheetLensHelper::IMAGE_MAX
+  object = [ o - d * scale, ax - h * scale ]
+  tip = image ? [ image.x, image.y ] : [ o, ax ]
+  application = lens_application(d, f)
+  cm = ->(value) { t(".js.cm", value: lens_number(value)) }
+  size, nature, status, oap =
+    if image.nil?
+      [ t(".js.none_value"), t(".js.nature_none"), t(".js.status_none"), t(".js.oap_infinite") ]
+    elsif image.virtual
+      [ cm.(image.gain.abs * h), t(".js.nature_virtual"), t(".js.status_virtual"), t(".js.oap_virtual", value: lens_number(-image.distance)) ]
+    else
+      [ cm.(image.gain.abs * h), t(".js.nature_real", size: t(".js.size_#{lens_size(image.gain)}")), t(".js.status_real"), t(".js.oap_real", value: lens_number(image.distance)) ]
+    end
+  tone = image.nil? ? "warning" : (image.virtual ? "note" : "success")
+  data = { controller: ctrl, d:, h:, f:, grid:, texts: t(".js") }
+%>
+<%= tag.figure class: "sheet-figure sheet-lens", data: do %>
+  <svg class="sheet-lens-svg" viewBox="0 0 560 300" role="group" aria-label="<%= t(".label") %>">
+    <g data-role="grid" data-visible="<%= grid %>">
+      <path class="sheet-lens-grid-line" d="<%= (0..560).step(20).map { "M#{it},0V300" }.join %><%= (10..290).step(20).map { "M0,#{it}H560" }.join %>"></path>
+    </g>
+    <line class="sheet-lens-axis" x1="0" y1="<%= ax %>" x2="560" y2="<%= ax %>"></line>
+    <g data-role="rays"><%= render "catalog/course_sheets/kinds/lens_rays", rays: scene.rays %></g>
+    <%= render "catalog/course_sheets/kinds/lens_diagrams/symbol", x: o, top: 25, bottom: 290 %>
+    <line class="sheet-lens-object" data-role="object-line" x1="<%= object[0] %>" y1="<%= ax %>" x2="<%= object[0] %>" y2="<%= object[1] %>"></line>
+    <polygon class="sheet-lens-object-head" data-role="object-head" points="<%= lens_head(object[0], object[1], ax) %>"></polygon>
+    <%= tag.g data: { role: "image", visible: shown } do %>
+      <%= tag.line class: "sheet-lens-image", x1: tip[0], y1: ax, x2: tip[0], y2: tip[1], data: { role: "image-line", virtual: image&.virtual || false } %>
+      <polygon class="sheet-lens-image-head" data-role="image-head" points="<%= lens_head(tip[0], tip[1], ax) %>"></polygon>
+      <text class="sheet-lens-name" data-tone="success" data-role="label-ap" x="<%= tip[0] %>" y="<%= tip[1] < ax ? 188 : 162 %>" text-anchor="middle">A′</text>
+      <text class="sheet-lens-name" data-tone="success" data-role="label-bp" x="<%= tip[0] + 15 %>" y="<%= tip[1] < ax ? tip[1] - 4 : tip[1] + 16 %>" text-anchor="middle">B′</text>
+    <% end %>
+    <text class="sheet-lens-name" data-tone="primary" data-role="label-a" x="<%= object[0] %>" y="190" text-anchor="middle">A</text>
+    <text class="sheet-lens-name" data-tone="primary" data-role="label-b" x="<%= object[0] - 14 %>" y="<%= object[1] - 6 %>" text-anchor="middle">B</text>
+    <text class="sheet-lens-name" data-tone="ink" x="310" y="188" text-anchor="middle">O</text>
+    <text class="sheet-lens-name" data-tone="accent" data-role="label-f" x="<%= o - f * scale %>" y="190" text-anchor="middle">F</text>
+    <text class="sheet-lens-name" data-tone="accent" data-role="label-fp" x="<%= o + f * scale %>" y="190" text-anchor="middle">F′</text>
+    <circle class="sheet-lens-dot" data-role="dot-f" cx="<%= o - f * scale %>" cy="<%= ax %>" r="5"></circle>
+    <circle class="sheet-lens-dot" data-role="dot-fp" cx="<%= o + f * scale %>" cy="<%= ax %>" r="5"></circle>
+    <circle class="sheet-lens-dot" data-tone="primary" data-role="dot-b" cx="<%= object[0] %>" cy="<%= object[1] %>" r="6"></circle>
+    <%# Les zones de toucher viennent en dernier : elles reçoivent le doigt avant le reste ; la bibliothèque porte leur rayon à 22 px d'écran. %>
+    <%= tag.circle class: "sheet-lens-hit", cx: o - f * scale, cy: ax, r: 16, tabindex: 0, role: "button", "aria-label": t(".focus_f"), data: { hit: "F" } %>
+    <%= tag.circle class: "sheet-lens-hit", cx: o + f * scale, cy: ax, r: 16, tabindex: 0, role: "button", "aria-label": t(".focus_fp"), data: { hit: "Fp" } %>
+    <%= tag.circle class: "sheet-lens-hit", cx: object[0], cy: object[1], r: 18, tabindex: 0, role: "button", "aria-label": t(".point_b"), data: { hit: "B" } %>
+  </svg>
+
+  <div class="sheet-lens-panel">
+    <div class="sheet-lens-readout">
+      <span><%= t(".oa_label") %></span><b data-role="oa"><%= cm.(d) %></b>
+      <span><%= t(".f_label") %></span><b data-role="f"><%= cm.(f) %></b>
+      <span><%= t(".oap_label") %></span><b data-role="oap"><%= oap %></b>
+      <span><%= t(".size_label") %></span><b data-role="size"><%= cm.(h) %> / <%= size %></b>
+      <span><%= t(".nature_label") %></span><b data-role="nature" data-tone="<%= tone %>"><%= nature %></b>
+    </div>
+    <p class="sheet-lens-application" data-role="application"><%= t(".js.application_#{application || 'none'}") %></p>
+    <ul class="sheet-lens-legend">
+      <% %w[1 2 3].each do |ray| %>
+        <li><span class="sheet-lens-swatch" data-ray="<%= ray %>"></span><%= t(".ray_#{ray}") %></li>
+      <% end %>
+      <li class="sheet-muted"><%= t(".dashed") %></li>
+    </ul>
+    <div class="sheet-lens-status" role="status" aria-live="polite" data-role="status" data-tone="<%= tone %>"><%= status %></div>
+    <div class="sheet-lens-actions">
+      <% { "photo" => :photo, "projector" => :projector, "magnifier" => :magnifier }.each do |preset, name| %>
+        <%= tag.button t(".preset_#{preset}"), type: "button", class: "sheet-btn", data: { preset: }, "aria-current": (application == name ? "true" : nil) %>
+      <% end %>
+      <%= tag.button t(grid ? ".js.grid_hide" : ".js.grid_show"), type: "button", class: "sheet-btn", data: { role: "grid-toggle" } %>
+    </div>
+  </div>
+  <% if block["caption"].present? %><figcaption class="sheet-muted"><%= block["caption"] %></figcaption><% end %>
+<% end %>

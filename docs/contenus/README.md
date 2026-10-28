@@ -186,6 +186,7 @@ Les 3 premières leçons de chaque matière de la 3ème (progression DPFC 2026-2
 | `physique-chimie/masse-et-poids-d-un-corps.json` | Masse et poids d'un corps | 4 | 12 | 71 |
 | `physique-chimie/les-forces.json` | Les forces | 4 | 12 | 68 |
 | `physique-chimie/equilibre-d-un-solide-soumis-a-deux-forces.json` | Équilibre d'un solide soumis à deux forces | 4 | 12 | 71 |
+| `physique-chimie/les-lentilles.json` | Les lentilles (rédigée le 2026-10-28 pour la fiche Lentilles, chantier contenu-en-blocs : 5 fiches, un exercice par fiche puis quatre sur toute la leçon) | 5 | 9 | 45 |
 | `svt/les-aliments-et-l-homme.json` | Les aliments et l'Homme | 4 | 12 | 69 |
 | `svt/la-digestion-des-aliments.json` | La digestion des aliments | 4 | 12 | 60 |
 | `svt/le-sang.json` | Le sang | 4 | 12 | 68 |
@@ -205,6 +206,7 @@ Les 18 fichiers suivent le prompt complet : 4 fiches par cours, 3 exercices par 
 
 - **Toutes les leçons** : le champ `subtitle` de la dernière fiche porte un « À compléter : … » qui liste ce que le rédacteur a laissé de côté. L'élève le voit. À compléter ou à effacer après validation.
 - **Maths** : les fractions rationnelles, la rationalisation du dénominateur et les triangles semblables ne sont pas traités (rattachement à la 3ème incertain). Le « papillon » de Thalès et le non-parallélisme y sont.
+- **Physique-Chimie, Les lentilles** : leçon rédigée sans programme sous les yeux, au niveau graphique (trois rayons particuliers, image réelle ou virtuelle, loupe, projecteur, appareil photo, œil réduit et défauts de la vue) ; aucune formule de conjugaison. Elle attend la relecture du porteur ou de Touré avant d'être présentée à des élèves. Les nombres de ses exercices (distances en cm, constructions à l'échelle) ont été recalculés.
 - **Physique-Chimie** : la fiche « réaction du support » (équilibre) est peut-être de niveau lycée. g vaut 10 N/kg partout, et 1,6 N/kg sur la Lune. Le contact localisé et réparti, et le mot « tension du fil », sont à confirmer.
 - **SVT** : les valeurs énergétiques 17 / 17 / 38 kJ par gramme, les tests de Fehling et du biuret, les noms d'enzymes et leurs conditions d'action, la fibrine, la phagocytose et la coagulation.
 - **Français** : l'opposition et la concession (« bien que », « même si ») dans la leçon 1, convaincre et persuader et « certes… mais » dans la leçon 3. Les actes de parole et le dialogue écrit ne sont pas traités.
