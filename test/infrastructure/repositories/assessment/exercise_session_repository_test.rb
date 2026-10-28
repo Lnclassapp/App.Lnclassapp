@@ -168,7 +168,7 @@ module Repositories
 
       test "recent_completions : ni les copies abandonnées ou en cours, ni un autre exercice, ni un autre élève" do
         create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: @at)
-        create_exercise_session(student: @student, exercise: @exercise, status: "abandoned")
+        create_exercise_session(student: @student, exercise: @exercise, status: "abandoned", completed_at: @at - 3.minutes)
         create_exercise_session(student: @student, exercise: @exercise, status: "started")
         create_exercise_session(student: @student, exercise: create_exercise, status: "completed", completed_at: @at - 1.minute)
         create_exercise_session(student: create_student, exercise: @exercise, status: "completed", completed_at: @at - 2.minutes)
@@ -181,7 +181,11 @@ module Repositories
         create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: @at - 20.minutes)
         create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: @at - 10.minutes, gap:)
 
-        assert_equal 2, @repository.recent_completions(student_id: @student.id, exercise_id: @exercise.id).size
+        create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: @at - 5.minutes,
+                                classroom_assignment_id: create_assignment(assignable: @exercise).id)
+
+        assert_equal [ @at - 5.minutes, @at - 10.minutes, @at - 20.minutes ],
+                     @repository.recent_completions(student_id: @student.id, exercise_id: @exercise.id)
       end
 
       test "recent_completions : aucune copie terminée, une liste vide" do

@@ -4,14 +4,14 @@ module Policies
   module Assessment
     # CA-07 (ADR-0115 §4) : l'équipe et l'enseignant comme RevealAnswersPolicy ; l'élève auteur d'une copie vérifiée seulement.
     class RevealCorrectionPolicyTest < ActiveSupport::TestCase
-      Exercise = Struct.new(:readable_chain_published?)
-      Session = Struct.new(:student_id, :status) do
+      Exercise = Struct.new(:id, :readable_chain_published?)
+      Session = Struct.new(:exercise_id, :student_id, :status) do
         def completed? = status == "completed"
       end
 
-      def call(role, status: "completed", author: 1, readable: true, user_id: 1)
+      def call(role, status: "completed", author: 1, readable: true, user_id: 1, session_exercise: 10)
         actor = role && Entities::Identity::Actor.new(user_id:, role:)
-        RevealCorrectionPolicy.new.call(actor:, exercise: Exercise.new(readable), session: Session.new(author, status))
+        RevealCorrectionPolicy.new.call(actor:, exercise: Exercise.new(10, readable), session: Session.new(session_exercise, author, status))
       end
 
       test "l'élève auteur d'une copie vérifiée voit la correction" do
@@ -38,6 +38,12 @@ module Policies
       test "l'enseignant voit la correction d'un exercice lisible, jamais d'un brouillon" do
         assert call(:teacher).success?
         assert_equal :not_found, call(:teacher, readable: false).code
+      end
+
+      test "la copie d'un exercice A lue avec l'exercice B est refusée, élève comme enseignant" do
+        assert_equal :forbidden, call(:student, session_exercise: 11).code
+        assert_equal :forbidden, call(:teacher, session_exercise: 11).code
+        assert_equal :forbidden, call(:team, session_exercise: 11).code
       end
 
       test "la direction et le visiteur ne voient rien" do

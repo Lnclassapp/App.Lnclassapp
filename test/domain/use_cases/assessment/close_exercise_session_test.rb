@@ -130,6 +130,8 @@ module UseCases
 
         assert_equal 72, close(correct: 0, total: 5, questions:, attempts: given).value.score_percent
         assert_equal 72, close(correct: 0, total: 5, questions:, attempts: given.first(3)).value.score_percent
+        right = given.map { it.question_id == 3 ? it.with(correct: true) : it }
+        assert_equal 72, close(correct: 0, total: 5, questions:, attempts: right).value.score_percent
       end
 
       # Menace I11 : la note ne dépend ni du compte des tentatives ni d'une tentative étrangère à l'exercice.

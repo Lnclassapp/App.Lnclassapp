@@ -25,7 +25,7 @@ class Orm::QuestionTest < ActiveSupport::TestCase
 
   test "la base refuse des points hors de 0,5 à 20 ou hors d'un demi-point" do
     %w[0 0.3 1.3 20.5 25].each_with_index do |points, index|
-      assert_raises(ActiveRecord::StatementInvalid, points) { create_question(points:, position: 10 + index) }
+      assert_raises(ActiveRecord::CheckViolation, points) { create_question(points:, position: 10 + index) }
     end
     %w[0.5 1 1.5 19.5 20].each_with_index { |points, index| assert create_question(points:, position: 30 + index).persisted?, points }
   end
@@ -38,7 +38,7 @@ class Orm::QuestionTest < ActiveSupport::TestCase
 
   test "la base accepte les trois types nouveaux et refuse un type inconnu" do
     %w[select written notebook].each_with_index { |type, index| assert create_question(question_type: type, position: 40 + index).persisted?, type }
-    assert_raises(ActiveRecord::StatementInvalid) { create_question(question_type: "open", position: 50) }
+    assert_raises(ActiveRecord::CheckViolation) { create_question(question_type: "open", position: 50) }
   end
 
   test "le sujet en blocs est une colonne jsonb facultative de l'exercice" do

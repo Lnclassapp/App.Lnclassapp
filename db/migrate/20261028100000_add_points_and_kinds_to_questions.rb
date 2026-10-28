@@ -20,6 +20,10 @@ class AddPointsAndKindsToQuestions < ActiveRecord::Migration[8.1]
       select_value("SELECT 1 FROM questions WHERE question_type IN ('select', 'written', 'notebook') LIMIT 1")
     raise ActiveRecord::IrreversibleMigration, "des réponses rédigées de plus de 200 caractères existent" if
       select_value("SELECT 1 FROM question_attempts WHERE char_length(response_text) > 200 LIMIT 1")
+    raise ActiveRecord::IrreversibleMigration, "des points, unités, débuts de phrase ou grilles existent" if
+      select_value("SELECT 1 FROM questions WHERE points <> 1 OR unit IS NOT NULL OR starter IS NOT NULL OR cardinality(criteria) > 0 LIMIT 1")
+    raise ActiveRecord::IrreversibleMigration, "des sujets en blocs existent" if
+      select_value("SELECT 1 FROM exercises WHERE statement_blocks IS NOT NULL LIMIT 1")
 
     remove_column :exercises, :statement_blocks
     change_column :question_attempts, :response_text, :string, limit: 200
