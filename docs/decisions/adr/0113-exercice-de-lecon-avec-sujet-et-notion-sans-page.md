@@ -1,4 +1,4 @@
-# ADR-XXXX : L'exercice appartient à la leçon, porte un sujet, et la notion n'a plus de page
+# ADR-0113 : L'exercice appartient à la leçon, porte un sujet, et la notion n'a plus de page
 <!-- index
 titre: Exercice de leçon avec sujet, notion sans page
 statut: Accepté

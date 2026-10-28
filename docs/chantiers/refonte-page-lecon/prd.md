@@ -283,10 +283,10 @@ Scénario: CA-30 Les exercices existants sont archivés
 
 ## 6. Décisions rattachées
 
-- [ADR-XXXX-exercice-de-lecon-avec-sujet-et-notion-sans-page](../../decisions/adr/XXXX-exercice-de-lecon-avec-sujet-et-notion-sans-page.md) — un exercice appartient à la leçon et, s'il est de notion, à une notion ; il a un sujet ; la notion reste une donnée sans page ; format d'import v2 ; archivage des anciens exercices ; lecture de la leçon. Amende ADR-0035 et ADR-0090.
-- [ADR-XXXX-copie-a-rendre](../../decisions/adr/XXXX-copie-a-rendre.md) — un exercice se fait en une copie rendue d'un coup, brouillon dans le navigateur ; l'envoi question par question est retiré. Amende ADR-0054.
-- [UDR-XXXX-page-de-la-lecon-fiche-de-revision-et-prepare-interros](../../decisions/udr/XXXX-page-de-la-lecon-fiche-de-revision-et-prepare-interros.md) — la page de la leçon, ses deux sections, « Voir plus », le vocabulaire. Amende UDR-0130 et UDR-0137 §4.
-- [UDR-XXXX-exercice-sur-feuille-et-copie-a-rendre](../../decisions/udr/XXXX-exercice-sur-feuille-et-copie-a-rendre.md) — le sujet, la copie, le rendu, le résultat. Remplace l'UDR-0087 §3.2 et §3.4 (mode concentré, une question à la fois).
+- [ADR-0113](../../decisions/adr/0113-exercice-de-lecon-avec-sujet-et-notion-sans-page.md) — un exercice appartient à la leçon et, s'il est de notion, à une notion ; il a un sujet ; la notion reste une donnée sans page ; format d'import v2 ; archivage des anciens exercices ; lecture de la leçon. Amende ADR-0035 et ADR-0090.
+- [ADR-0112](../../decisions/adr/0112-copie-a-rendre.md) — un exercice se fait en une copie rendue d'un coup, brouillon dans le navigateur ; l'envoi question par question est retiré. Amende ADR-0054.
+- [UDR-0139](../../decisions/udr/0139-page-de-la-lecon-fiche-de-revision-et-prepare-interros.md) — la page de la leçon, ses deux sections, « Voir plus », le vocabulaire. Amende UDR-0130 et UDR-0137 §4.
+- [UDR-0138](../../decisions/udr/0138-exercice-sur-feuille-et-copie-a-rendre.md) — le sujet, la copie, le rendu, le résultat. Remplace l'UDR-0087 §3.2 et §3.4 (mode concentré, une question à la fois).
 
 Aucune nouvelle dépendance : « Voir plus » est un contrôleur Stimulus maison, pas `@stimulus-components/read-more` (raison dans l'UDR de la page de la leçon, §2).
 

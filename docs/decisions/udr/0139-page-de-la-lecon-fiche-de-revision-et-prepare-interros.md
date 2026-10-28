@@ -1,4 +1,4 @@
-# UDR-XXXX : La page de la leçon — « Fiche de révision », puis « Prépare interros »
+# UDR-0139 : La page de la leçon — « Fiche de révision », puis « Prépare interros »
 <!-- index
 titre: Page de la leçon : fiche de révision et Prépare interros
 statut: Accepté
@@ -11,7 +11,7 @@ problematique: La fiche est cachée derrière un bouton et les exercices dispers
 | **Statut** | Accepté |
 | **Date** | 2026-10-28 |
 | **Chantier** | `docs/chantiers/refonte-page-lecon` |
-| **ADR lié** | ADR-XXXX-exercice-de-lecon-avec-sujet-et-notion-sans-page |
+| **ADR lié** | ADR-0113 |
 | **Remplacé par** | — |
 
 Amende : UDR-0130 (vocabulaire, §2 et §3), UDR-0137 §4.1 (nom à l'écran), UDR-0013 et UDR-0057 R3 pour la page de la leçon (la liste des fiches de révision disparaît).

@@ -1,4 +1,4 @@
-# UDR-XXXX : L'exercice sur feuille — le sujet, la copie, le rendu
+# UDR-0138 : L'exercice sur feuille — le sujet, la copie, le rendu
 <!-- index
 titre: Exercice sur feuille et copie à rendre
 statut: Accepté
@@ -11,7 +11,7 @@ problematique: L'élève répond une question à la fois sans voir de sujet ; un
 | **Statut** | Accepté |
 | **Date** | 2026-10-28 |
 | **Chantier** | `docs/chantiers/refonte-page-lecon` |
-| **ADR lié** | ADR-XXXX-copie-a-rendre, ADR-XXXX-exercice-de-lecon-avec-sujet-et-notion-sans-page |
+| **ADR lié** | ADR-0112, ADR-0113 |
 | **Remplacé par** | — |
 
 Remplace l'UDR-0087 §3.1 (page de l'exercice), §3.2 (mode concentré), §3.3 (quitter la séance) et §3.5 (retour après « Valider »). Garde l'UDR-0087 §3.4 (saisie par type), §3.6 (résultat, aux changements du §3.4 ci-dessous près) et §3.8 (tokens).

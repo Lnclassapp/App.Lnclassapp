@@ -3,7 +3,7 @@
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
 
-Décisions : [ADR-XXXX-exercice-de-lecon-avec-sujet-et-notion-sans-page](../../decisions/adr/XXXX-exercice-de-lecon-avec-sujet-et-notion-sans-page.md) · [ADR-XXXX-copie-a-rendre](../../decisions/adr/XXXX-copie-a-rendre.md) · [UDR-XXXX-page-de-la-lecon-fiche-de-revision-et-prepare-interros](../../decisions/udr/XXXX-page-de-la-lecon-fiche-de-revision-et-prepare-interros.md) · [UDR-XXXX-exercice-sur-feuille-et-copie-a-rendre](../../decisions/udr/XXXX-exercice-sur-feuille-et-copie-a-rendre.md)
+Décisions : [ADR-0113](../../decisions/adr/0113-exercice-de-lecon-avec-sujet-et-notion-sans-page.md) · [ADR-0112](../../decisions/adr/0112-copie-a-rendre.md) · [UDR-0139](../../decisions/udr/0139-page-de-la-lecon-fiche-de-revision-et-prepare-interros.md) · [UDR-0138](../../decisions/udr/0138-exercice-sur-feuille-et-copie-a-rendre.md)
 
 ## Graphe
 
