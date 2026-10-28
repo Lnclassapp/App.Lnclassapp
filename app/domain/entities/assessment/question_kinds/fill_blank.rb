@@ -1,12 +1,13 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::FillBlank
 # Rôle : texte à trous : juste sans tenir compte des majuscules, des accents ni des espaces en trop ; une faute de frappe est fausse
-# ADR  : 0091 (§4.2 : une à cinq réponses acceptées, `___` une fois dans l'énoncé ; §4.3 : la normalisation)
+# ADR  : 0091 (§4.2 : une à cinq réponses acceptées, `___` une fois dans l'énoncé ; §4.3 : la normalisation), 0115
 module Entities
   module Assessment
     module QuestionKinds
       class FillBlank
         MARKER = "___"
         ACCEPTED = (1..5)
+        AUTO_GRADED = true
         INPUT = :response_text
         INVALID = { response_text: [ :blank_text ] }.freeze
         # Apostrophes typographiques du clavier d'un téléphone (’ ‘ ʼ) : la même apostrophe que celle de l'enseignant.

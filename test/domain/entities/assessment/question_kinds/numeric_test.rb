@@ -57,6 +57,46 @@ module Entities
             assert_equal [ :tolerance_out_of_range ], question("3", tolerance:).structure_errors, tolerance.to_s
           end
         end
+
+        # ADR-0115 §4, CA-20 : une réponse qui finit par l'unité, espaces compris, est lue sans elle.
+        test "l'unité est retirée de la fin de la réponse : 4,8, 4.8 et 4,8 cm sont justes" do
+          cm = question("4,8").with(unit: "cm")
+
+          [ "4,8", "4.8", "4,8 cm", "4,8cm", " 4,8 cm ", "4.8   cm" ].each do |text|
+            assert cm.well_formed?(text), text.inspect
+            assert cm.correct?(text), text.inspect
+          end
+          assert_not cm.correct?("4,9 cm")
+        end
+
+        test "une autre unité, ou l'unité ailleurs qu'à la fin, est une saisie mal formée" do
+          cm = question("4,8").with(unit: "cm")
+
+          [ "48 mm", "4,8 m", "cm 4,8", "4 cm 8", "cm", "4,8 cm cm", "4,8 CM" ].each do |text|
+            assert_not cm.well_formed?(text), text.inspect
+          end
+          assert_not question("4,8").well_formed?("4,8 cm")
+        end
+
+        # Menace I2 : l'unité est un texte, jamais un motif ; et elle ne peut pas manger un chiffre de la réponse.
+        test "une unité à métacaractères ne casse rien, une unité chiffrée est refusée à la structure" do
+          odd = question("4,8").with(unit: "^$|(")
+
+          assert odd.well_formed?("4,8 ^$|(")
+          assert_not odd.well_formed?("4,8 cm")
+          assert_equal [ :unit_invalid ], question("4,8").with(unit: "0").structure_errors
+          assert_not question("4").with(unit: "0").correct?("40")
+          assert question("40").with(unit: "0").correct?("40")
+        end
+
+        test "structure : 10 caractères au plus, sans chiffre, signe ni séparateur décimal" do
+          assert_empty question("4,8").with(unit: "km/h").structure_errors
+          assert_empty question("4,8").with(unit: "m²").structure_errors
+          assert_empty question("4,8").with(unit: "a" * 10).structure_errors
+          assert_empty question("4,8").with(unit: "  ").structure_errors
+          assert_equal [ :unit_too_long ], question("4,8").with(unit: "a" * 11).structure_errors
+          %w[0 m3 - + , . −].each { assert_equal [ :unit_invalid ], question("4,8").with(unit: it).structure_errors, it }
+        end
       end
     end
   end

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Assessment::ExerciseSessionRepositoryPort
 # Rôle : contrat des sessions d'exercice et de leurs tentatives immuables
-# ADR  : 0033, 0043, 0054, 0091, 0112
+# ADR  : 0033, 0043, 0054, 0091, 0112, 0115
 module Ports
   module Assessment
     module ExerciseSessionRepositoryPort
@@ -40,6 +40,12 @@ module Ports
       # → [Entities::Assessment::QuestionAttempt]
       def attempts(session_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #attempts"
+      end
+
+      # Les fins (Time) des 3 dernières copies terminées de l'élève sur l'exercice, toutes sortes confondues, de la plus récente
+      # à la plus ancienne ; les copies abandonnées ou en cours n'y sont pas (ADR-0115, RestartPause). → [Time]
+      def recent_completions(student_id:, exercise_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #recent_completions"
       end
 
       # UPDATE … WHERE status = 'started' : pose completed, score_percent et completed_at. → true

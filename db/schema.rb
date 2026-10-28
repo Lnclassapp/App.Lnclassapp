@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_28_090200) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_28_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -401,6 +401,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_28_090200) do
     t.string "title", limit: 200, null: false
     t.datetime "updated_at", null: false
     t.bigint "course_id", null: false
+    t.jsonb "statement_blocks"
     t.index ["author_id"], name: "index_exercises_on_author_id"
     t.index ["course_id", "position"], name: "index_exercises_on_course_id_and_position", unique: true
     t.index ["course_id"], name: "index_exercises_on_course_id"
@@ -621,7 +622,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_28_090200) do
     t.bigint "exercise_session_id", null: false
     t.bigint "question_id", null: false
     t.bigint "selected_answer_ids", null: false, array: true
-    t.string "response_text", limit: 200
+    t.string "response_text", limit: 2000
     t.boolean "unanswered", default: false, null: false
     t.index ["exercise_session_id", "question_id"], name: "index_question_attempts_on_exercise_session_id_and_question_id", unique: true
     t.index ["question_id"], name: "index_question_attempts_on_question_id"
@@ -655,10 +656,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_28_090200) do
     t.datetime "updated_at", null: false
     t.decimal "numeric_tolerance", precision: 12, scale: 4
     t.string "image_description", limit: 150
+    t.decimal "points", precision: 4, scale: 1, default: "1.0", null: false
+    t.string "unit", limit: 10
+    t.string "starter", limit: 150
+    t.string "criteria", default: [], null: false, array: true
     t.index ["exercise_id", "position"], name: "index_questions_on_exercise_id_and_position", unique: true
     t.check_constraint "image_description IS NULL OR char_length(btrim(image_description::text)) >= 1", name: "questions_image_description_present"
     t.check_constraint "numeric_tolerance >= 0::numeric", name: "questions_numeric_tolerance_positive"
-    t.check_constraint "question_type::text = ANY (ARRAY['true_false'::character varying::text, 'single_choice'::character varying::text, 'multiple_correct_2'::character varying::text, 'multiple_correct_3'::character varying::text, 'fill_blank'::character varying::text, 'numeric'::character varying::text, 'ordering'::character varying::text, 'matching'::character varying::text])", name: "questions_question_type_values"
+    t.check_constraint "points >= 0.5 AND points <= 20::numeric AND (points * 2::numeric) = round(points * 2::numeric)", name: "questions_points_range"
+    t.check_constraint "question_type::text = ANY (ARRAY['true_false'::character varying, 'single_choice'::character varying, 'multiple_correct_2'::character varying, 'multiple_correct_3'::character varying, 'fill_blank'::character varying, 'numeric'::character varying, 'ordering'::character varying, 'matching'::character varying, 'select'::character varying, 'written'::character varying, 'notebook'::character varying]::text[])", name: "questions_question_type_values"
   end
 
   create_table "referral_shares", force: :cascade do |t|

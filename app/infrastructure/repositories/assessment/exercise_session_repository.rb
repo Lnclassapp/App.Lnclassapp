@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::ExerciseSessionRepository
 # Rôle : sessions d'exercice et tentatives immuables ; compteurs tenus en SQL, une seule session ouverte par exercice
-# ADR  : 0033, 0043, 0054, 0091, 0112
+# ADR  : 0033, 0043, 0054, 0091, 0112, 0115
 module Repositories
   module Assessment
     class ExerciseSessionRepository
@@ -82,6 +82,11 @@ module Repositories
                                                     selected_answer_ids: record.selected_answer_ids, correct: record.correct,
                                                     answered_at: record.answered_at, response_text: record.response_text)
         end
+      end
+
+      def recent_completions(student_id:, exercise_id:)
+        Orm::ExerciseSession.where(student_id:, exercise_id:, status: "completed").where.not(completed_at: nil)
+                            .order(completed_at: :desc).limit(Entities::Assessment::RestartPause::STREAK).pluck(:completed_at)
       end
 
       def complete(id:, score_percent:, at:)

@@ -16,7 +16,9 @@ module Repositories
       # Identifiants, horodatages de création et auteur : ils changent d'une base à l'autre, pas le contenu.
       IGNORED = %w[id public_id created_at updated_at author_id record_id].freeze
       # ADR-0091 : colonnes venues après l'instantané ; ces leçons n'ont que des choix, elles restent vides (vérifié à part).
-      ADDED_LATER = %w[numeric_tolerance match_content].freeze
+      # ADR-0115 : points (1 par défaut), unit, starter, criteria et statement_blocks viennent aussi après l'instantané ; l'import
+      # d'aujourd'hui ne les écrit pas encore (Lot D), les lignes gardent leurs valeurs par défaut (vérifié à part).
+      ADDED_LATER = %w[numeric_tolerance match_content points unit starter criteria statement_blocks].freeze
 
       setup do
         seed_referential
@@ -109,6 +111,8 @@ module Repositories
           expected.fetch(table).zip(actual.fetch(table)).each { |want, got| assert_equal want, got, "#{table} #{want['path']}" }
         end
         assert_equal [ nil ], (created("questions").map { it["numeric_tolerance"] } + created("answers").map { it["match_content"] }).uniq
+        assert_equal [ BigDecimal("1"), nil, nil, "{}" ], %w[points unit starter criteria].map { |column| created("questions").map { it[column] }.uniq.sole }
+        assert_equal [ nil ], created("exercises").map { it["statement_blocks"] }.uniq
         assert_equal 4, written.fetch(:imported)
         assert_equal [ @author.id ], %w[courses essentials exercises].flat_map { |table| created(table).map { it["author_id"] } }.uniq
       end

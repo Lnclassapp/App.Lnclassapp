@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Assessment::ExerciseCopiesController
 # Rôle : l'élève rend sa copie d'un seul envoi : 303 vers le résultat, 422 avec ses réponses réaffichées, retrait de l'exercice vers la leçon
-# ADR  : 0026, 0054, 0091 (§4.4 : texte ou indices d'affichage), 0112 · UDR : 0138 §3.3 · sécurité : copy[answers][<id>] lu champ par champ
+# ADR  : 0026, 0054, 0091 (§4.4 : texte ou indices d'affichage), 0112, 0115 · UDR : 0138 §3.3 · sécurité : copy[answers][<id>] lu champ par champ
 module Assessment
   class ExerciseCopiesController < AuthenticatedController
     include ReadsOwnLevel
@@ -74,7 +74,8 @@ module Assessment
       UseCases::Assessment::SubmitExerciseCopy.new(
         sessions:, exercises: Repositories::Assessment::ExerciseRepository.new, policy: Policies::Assessment::SubmitAttemptPolicy.new,
         close: UseCases::Assessment::CloseExerciseSession.new(
-          sessions:, badges: Repositories::Assessment::BadgeRepository.new, gaps: Repositories::Assessment::KnowledgeGapRepository.new,
+          sessions:, exercises: Repositories::Assessment::ExerciseRepository.new,
+          badges: Repositories::Assessment::BadgeRepository.new, gaps: Repositories::Assessment::KnowledgeGapRepository.new,
           policy: Policies::Assessment::SubmitAttemptPolicy.new, transaction:, clock: Time.zone
         ),
         transaction:, clock: Time.zone

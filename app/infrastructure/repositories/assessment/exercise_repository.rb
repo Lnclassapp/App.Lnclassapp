@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::ExerciseRepository
 # Rôle : traduit Orm::Exercise, ses questions, propositions et images ↔ Entities::Assessment::Exercise, avec la publication des parents
-# ADR  : 0035, 0036, 0039, 0054, 0091, 0105, 0113
+# ADR  : 0035, 0036, 0039, 0054, 0091, 0105, 0113, 0115
 module Repositories
   module Assessment
     class ExerciseRepository
@@ -142,6 +142,7 @@ module Repositories
           title: record.title, statement: record.statement, exercise_type: record.exercise_type, position: record.position,
           author_id: record.author_id, status: record.status, published_at: record.published_at,
           archived_at: record.archived_at, questions: record.questions.map { |question| map_question(question) },
+          statement_blocks: record.statement_blocks,
           parents_published: [ record.essential, record.course ].compact.all? { |parent| parent.status == "published" }
         )
       end
@@ -151,6 +152,7 @@ module Repositories
           id: record.id, position: record.position, content: record.content, explanation: record.explanation,
           question_type: record.question_type, numeric_tolerance: record.numeric_tolerance,
           image_description: record.image_description, image: map_image(record.image),
+          points: record.points, unit: record.unit, starter: record.starter, criteria: record.criteria,
           answers: record.answers.map do |answer|
             Entities::Assessment::Answer.new(id: answer.id, position: answer.position, content: answer.content, correct: answer.correct,
                                              match_content: answer.match_content)

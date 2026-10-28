@@ -1,11 +1,12 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Matching
 # Rôle : relier : juste seulement si chaque élément de gauche est relié au sien, sans points partiels
-# ADR  : 0091 (§4.2 : trois à cinq paires, côtés droits distincts ; §4.3 ; §4.4 : indices d'affichage)
+# ADR  : 0091 (§4.2 : trois à cinq paires, côtés droits distincts ; §4.3 ; §4.4 : indices d'affichage), 0115
 module Entities
   module Assessment
     module QuestionKinds
       class Matching
         PAIRS = (3..5)
+        AUTO_GRADED = true
         INPUT = :display_order
         INVALID = { display_order: [ :incomplete_pairs ] }.freeze
 
