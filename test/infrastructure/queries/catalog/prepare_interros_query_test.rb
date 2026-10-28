@@ -53,6 +53,22 @@ module Queries
         assert_not_includes (prepare.groups.flat_map(&:exercises) + prepare.lesson_wide).map(&:title), "Brouillon"
       end
 
+      test "l'élève ne voit ni brouillon, ni archivé, ni notion non publiée, ni exercice d'une autre leçon" do
+        create_exercise(essential: @n1, status: "draft", title: "Brouillon")
+        create_exercise(essential: @n1, status: "archived", title: "Archivé", archived_at: Time.current)
+        create_lesson_wide_exercise(course: @course, status: "draft", title: "Large brouillon")
+        draft_notion = create_essential(course: @course, name: "Notion brouillon", status: "draft")
+        create_exercise(essential: draft_notion, title: "Sous notion brouillon")
+        create_exercise(title: "Autre leçon")
+        create_lesson_wide_exercise(title: "Autre leçon large")
+
+        prepare = call(student_actor(create_student))
+
+        assert_equal [ "Ex 1", "Ex 2", "Ex 3" ], prepare.groups.flat_map(&:exercises).map(&:title)
+        assert_equal [ "Large 1", "Large 2" ], prepare.lesson_wide.map(&:title)
+        assert_nil prepare.targets
+      end
+
       test "l'équipe lit aussi les brouillons, avec leur statut" do
         create_exercise(essential: @n1, status: "draft", title: "Brouillon", position: 50)
         team = Actor.new(user_id: create_team_member.id, role: :team, team_role: "admin")

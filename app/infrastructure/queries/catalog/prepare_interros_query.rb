@@ -34,7 +34,9 @@ module Queries
 
       def exercises(course_id, team)
         scope = Orm::Exercise.where(course_id:).order(:position, :id)
-        scope = scope.where(status: "published") unless team
+        # ADR-0028 : l'élève lit un exercice publié, non archivé, dont la notion est publiée (celui de toute la leçon n'en a pas).
+        scope = scope.left_joins(:essential).where(status: "published", archived_at: nil)
+                     .where("essentials.id IS NULL OR essentials.status = 'published'") unless team
         scope.pluck(*EXERCISE_COLUMNS)
       end
 
