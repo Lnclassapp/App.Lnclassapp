@@ -1,7 +1,7 @@
 # 🌐 DELIVERY · Assessment::ExercisesController
 # Rôle : le sujet d'un exercice (AS-02), feuille mélangée de la graine de l'exercice ; propositions correctes pour l'équipe et l'enseignant, jamais pour l'élève (AS-39) ;
 #        bascules d'assignation de l'enseignant vers ses classes du niveau du cours (RE-22)
-# ADR  : 0026, 0028, 0054, 0072, 0094, 0112, 0113 · UDR : 0006, 0007, 0021, 0069, 0138 §3.1 · sécurité n° 29
+# ADR  : 0026, 0028, 0054, 0072, 0094, 0112, 0113, 0115 · UDR : 0006, 0007, 0021, 0069, 0138 §3.1 · sécurité n° 29
 module Assessment
   class ExercisesController < AuthenticatedController
     include ReadsOwnLevel
@@ -24,6 +24,7 @@ module Assessment
       @detail = Queries::Assessment::ExerciseDetailQuery.new.call(public_id: exercise.public_id, reveal: @reveal)
       @status_record = exercise if Policies::Catalog::ManageContentPolicy.new.call(actor: current_actor).success?
       @progress = progress(exercise) if Policies::Assessment::StartSessionPolicy.new.call(actor: current_actor, exercise:).success?
+      @resume_at = resume_at(exercise) if @progress
       @targets = assignment_targets if current_actor.teacher? && exercise.published?
     end
 
@@ -32,6 +33,13 @@ module Assessment
       Queries::Classroom::CatalogAssignmentTargetsQuery.new.call(teacher_id: current_actor.user_id, school_id: current_actor.school_id,
                                                                  course_slug: @detail.course.slug,
                                                                  exercise_public_ids: [ @detail.exercise.public_id ])
+    end
+
+    # ADR-0115 : l'heure de reprise si l'élève est en pause de « Recommencer » sur cet exercice, sinon nil.
+    def resume_at(exercise)
+      completions = Repositories::Assessment::ExerciseSessionRepository.new.recent_completions(student_id: current_actor.user_id,
+                                                                                               exercise_id: exercise.id)
+      Entities::Assessment::RestartPause.resume_at(completions:, now: Time.zone.now)
     end
 
     def progress(exercise)
