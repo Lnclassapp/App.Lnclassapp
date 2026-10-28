@@ -31,7 +31,7 @@ class Orm::ModelsTest < ActiveSupport::TestCase
       classroom = Orm::Classroom.create!(school:, level:, series:, name: "Tle D 1", school_year: "2026-2027")
       course = Orm::Course.create!(name: "Nombres complexes", level:, series:, material:, author: team)
       essential = Orm::Essential.create!(course:, name: "Forme algébrique", position: 1, author: team)
-      exercise = Orm::Exercise.create!(essential:, title: "Calculer un module", position: 1, author: team)
+      exercise = Orm::Exercise.create!(course:, essential:, title: "Calculer un module", position: 1, author: team)
       question = Orm::Question.create!(exercise:, position: 1, content: "Vrai ou faux ?", question_type: "true_false")
       answers = [ [ 2, "Faux", false ], [ 1, "Vrai", true ] ].map { |position, content, correct| Orm::Answer.create!(question:, position:, content:, correct:) }
       assignment = Orm::ClassroomAssignment.create!(classroom:, assignable_type: "Exercise", assignable_id: exercise.id,

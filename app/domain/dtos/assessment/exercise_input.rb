@@ -8,7 +8,7 @@ module Dtos
       include ActiveModel::Attributes
 
       attribute :title, :string
-      attribute :description, :string
+      attribute :statement, :string
       attribute :exercise_type, :string
       attr_writer :questions
 
@@ -19,13 +19,13 @@ module Dtos
 
       # hash : les paramètres du formulaire. Sans questions_attributes, l'exercice n'a aucune question.
       def self.from_params(hash)
-        new(title: hash[:title], description: hash[:description], exercise_type: hash[:exercise_type],
+        new(title: hash[:title], statement: hash[:statement], exercise_type: hash[:exercise_type],
             questions_attributes: hash[:questions_attributes])
       end
 
       # Formulaire d'édition rempli depuis l'exercice enregistré.
       def self.from_exercise(exercise)
-        new(title: exercise.title, description: exercise.description, exercise_type: exercise.exercise_type,
+        new(title: exercise.title, statement: exercise.statement, exercise_type: exercise.exercise_type,
             questions: exercise.questions.map { QuestionInput.from_question(it) })
       end
 
@@ -37,7 +37,7 @@ module Dtos
       end
 
       def title = super.to_s.squish
-      def description = super.to_s.strip.presence
+      def statement = super.to_s.strip.presence
 
       # Questions et propositions numérotées dans l'ordre du formulaire.
       def question_entities = questions.each_with_index.map { |question, index| question.to_entity(position: index + 1) }

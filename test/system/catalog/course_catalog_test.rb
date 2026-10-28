@@ -48,8 +48,8 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
         assert_selector "#course_header h1", text: "Génétique et évolution"
       end
       assert_current_path course_path(@course.slug)
-      assert_selector "#course_content .katex", count: 1
-      assert_selector "#course_essentials li", text: "La méiose"
+      assert_selector "#fiche-de-revision .katex", count: 1
+      assert_selector "#prepare-interros"
 
       assert_not resource_loaded?("trix"), "une page sans formulaire ne charge pas Trix"
       assert page.evaluate_script("performance.getEntriesByType('resource').every((entry) => entry.name.startsWith(location.origin))"),
@@ -89,11 +89,13 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     sign_in_as create_team_member
     assert_current_path team_home_path
     visit course_path(course.slug)
-    assert_selector "#course_content .katex", count: 1
+    assert_selector "#fiche-de-revision .katex", count: 1
     # Any violation of the Content Security Policy is recorded, to be asserted empty.
     page.execute_script(<<~JS)
       window.cspViolations = []
       document.addEventListener("securitypolicyviolation", (event) => window.cspViolations.push(event.violatedDirective))
+      window.morphs = 0
+      document.addEventListener("turbo:morph", () => window.morphs++)
     JS
 
     assert_no_page_reload do
@@ -111,8 +113,8 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
       end
       assert_toast t("teams.courses.update.updated", name: "Mutation et diversité")
       assert_no_selector "turbo-frame#modal dialog[open]"
-      assert_selector "#course_content strong", text: "Mutation ponctuelle"
-      assert_selector "#course_content .katex", count: 1
+      assert_selector "#fiche-de-revision strong", text: "Mutation ponctuelle"
+      assert_selector "#fiche-de-revision .katex", count: 1
     end
     stored = course.reload.content.body.to_html
     assert_includes stored, "<strong>Mutation ponctuelle</strong>"
@@ -120,6 +122,7 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     assert_no_match(/<script>window\.hacked|onclick=|javascript:/, page.html)
 
     # The content is unchanged this time: after the morph, its formula is still rendered, not left as raw « $…$ ».
+    assert page.evaluate_script("window.morphs > 0"), "la page n'a pas été rafraîchie par morphing"
     assert_no_page_reload do
       find("button[aria-controls=course-actions-menu]").click
       click_on t("catalog.courses.role_actions.edit")
@@ -128,7 +131,7 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
         click_on t("teams.courses.edit.submit")
       end
       assert_selector "#course_header h1", text: "Mutations"
-      assert_selector "#course_content .katex", count: 1
+      assert_selector "#fiche-de-revision .katex", count: 1
       assert_no_text "$\\frac{1}{2}$"
     end
 
@@ -162,7 +165,6 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
                                                           essentials: t("teams.publish_cascade.essentials", count: 1),
                                                           exercises: t("teams.publish_cascade.exercises", count: 1))
       assert_selector "#content_status_course_#{course.slug}", text: t("catalog.content_status.published")
-      assert_selector "#essential_#{essential.slug}", text: t("catalog.content_status.published")
     end
     assert_equal %w[published published published], [ course, essential, essential.exercises.first ].map { it.reload.status }
   end
@@ -201,14 +203,9 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
       visit course_path(@course.slug)
       assert_single_primary_action
       assert_blocks_above_fold "#main > div > *", max: 5
-      assert_list_capped "#course_essentials ul"
-      assert_no_text "Hérédité"
-      assert_no_page_reload { click_on t("components.reveal.more") }
-      assert_selector "#course_essentials li", text: "Hérédité"
-
-      # The whole row is the link: a tap anywhere on it opens the sheet.
-      find("#course_essentials li", text: "Mitose").click
-      assert_selector "#essential_header h1", text: "Mitose"
+      assert_no_selector "#course_essentials"
+      assert_selector "#fiche-de-revision"
+      assert_selector "#prepare-interros"
     end
   end
 
@@ -233,7 +230,7 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
       assert_no_link t("catalog.courses.index.reset")
 
       visit course_path(@course.slug)
-      assert_selector "#course_essentials li", count: 4
+      assert_selector "#prepare-interros"
       assert_no_button t("components.reveal.more")
       assert_no_link "Assigner à mes classes"
       assert_no_button "Assigner à mes classes"

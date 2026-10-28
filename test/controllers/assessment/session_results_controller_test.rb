@@ -69,20 +69,20 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#session_result", text: /#{I18n.t("assessment.badges.mastery.fragile")}/
     assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Bronze")
     assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.new")}/, count: 0
-    assert_select "a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']", text: /Division cellulaire/
+    assert_select "a[href='#{course_path(@essential.course.slug, anchor: "notion-#{@essential.slug}")}']", text: I18n.t("#{scope}.show.back_to_lesson")
     assert_select "form[method=post][action='#{exercise_sessions_path(@exercise.public_id)}']" do
-      assert_select "button[type=submit]", text: I18n.t("#{scope}.show.restart")
+      assert_select "button[type=submit]", text: I18n.t("assessment.exercises.show.redo")
     end
   end
 
-  # CA-E5 : un seul bouton, « Recommencer » ; ni « Revoir l'exercice » ni l'encadré « Tu restes autour de… ».
-  test "CA-E5: the student's result has one button only, « Recommencer »" do
+  # UDR-0138 §3.4 : « Refaire l'exercice » puis « Retour à la leçon » ; ni « Revoir l'exercice » ni l'encadré « Tu restes autour de… ».
+  test "CA-E5: the student's result has two buttons, « Refaire l'exercice » then « Retour à la leçon »" do
     sign_in_as @student
 
     show
 
-    assert_select ".ui-button-lg", 1
-    assert_select "form#restart-exercise-form button[type=submit].ui-button-lg", text: I18n.t("#{scope}.show.restart")
+    assert_select ".ui-button-lg", 2
+    assert_select "form#restart-exercise-form button[type=submit].ui-button-lg", text: I18n.t("assessment.exercises.show.redo")
     assert_select "a[href='#{exercise_path(@exercise.public_id)}']", 0
     assert_no_match(/Revoir l'exercice/, response.body)
   end
@@ -134,14 +134,14 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     show
 
     assert_select "#question_review_#{@first.id}" do
-      assert_select "*", text: /#{I18n.t("#{scope}.question_review.verdict.error")}/
+      assert_select "*", text: /#{I18n.t("#{scope}.show.wrong")}/
       assert_select "*", text: /Combien de cellules donne la méiose \?/
       assert_select "*", text: /Quatre cellules filles\./
       # UDR-0087 §3.6 : « Ton choix : … », ses seules propositions cochées.
       assert_select "p", text: /#{I18n.t("#{scope}.question_review.selected")} :/
       assert_select "strong > span", text: wrong(@first).content, count: 1
     end
-    assert_select "#question_review_#{@second.id}", text: /#{I18n.t("#{scope}.question_review.verdict.success")}/
+    assert_select "#question_review_#{@second.id}", text: /#{I18n.t("#{scope}.show.correct")}/
     assert_no_match right(@first).content, response.body
     assert_no_match(/#{I18n.t("#{scope}.question_review.correct")}|data-correct/, response.body)
     assert_select "#question_review_#{@first.id} strong", 1
@@ -222,7 +222,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#session_result", text: /#{I18n.t("assessment.badges.mastery.struggling")}/
     assert_select "#session_badge", text: /#{I18n.t("#{scope}.badge.none")}/
     assert_select "#session_badge", text: /#{I18n.t("assessment.badges.levels.none")}/, count: 0
-    assert_select "button[type=submit]", text: I18n.t("#{scope}.show.restart")
+    assert_select "button[type=submit]", text: I18n.t("assessment.exercises.show.redo")
   end
 
   test "sans faute : Diamant, « Nouveau badge ! », et plus de « Recommencer »" do
@@ -248,7 +248,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#session_result", text: /20\/20/
     assert_select "#session_badge[aria-label=?]", I18n.t("#{scope}.badge.label", level: "Or")
-    assert_select "button[type=submit]", text: I18n.t("#{scope}.show.restart")
+    assert_select "button[type=submit]", text: I18n.t("assessment.exercises.show.redo")
   end
 
   test "progrès : aucune phrase à la première session" do
@@ -378,9 +378,9 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     show
 
     assert_select "#session_gap_outcome.bg-warning-soft" do
-      assert_select "p.font-medium", text: "Cette fiche de révision passe à revoir."
-      assert_select "p", text: "Relis « Division cellulaire », puis obtiens au moins 15/20 à l'un de ses exercices."
-      assert_select "a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']", text: "Revoir la fiche de révision"
+      assert_select "p.font-medium", text: "Cette notion passe à revoir."
+      assert_select "p", text: "Refais l'exercice de « Division cellulaire » et vise au moins 15/20."
+      assert_select "a[href='#{course_path(@essential.course.slug, anchor: "notion-#{@essential.slug}")}']", text: "Refaire l'exercice"
     end
     assert_no_match(/75 %/, response.body)
   end
@@ -395,12 +395,12 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-controller='assessment--confetti']", 1
     assert_select "#session_gap_outcome p.font-medium", text: gap_outcome("still_pending.message")
     assert_select "#session_gap_outcome p", text: "Pour lever « Division cellulaire », vise au moins 15/20."
-    assert_select "#session_gap_outcome a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']",
-                  text: "Revoir la fiche de révision"
+    assert_select "#session_gap_outcome a[href='#{course_path(@essential.course.slug, anchor: "notion-#{@essential.slug}")}']",
+                  text: "Refaire l'exercice"
   end
 
   # Décision du porteur (2026-10-19, ADR-0101 §4.5) : 74 % s'affiche 15/20, la note lue fait foi et lève la fiche.
-  test "fiche : une remédiation à 74 % lit 15/20 et « Fiche de révision levée ! » : la note et l'effet sur la fiche s'accordent" do
+  test "fiche : une remédiation à 74 % lit 15/20 et « Notion levée ! » : la note et l'effet sur la fiche s'accordent" do
     gap, remediation = failed_then_remediated(74)
     decision = Entities::Assessment::GapDecision.call(score_percent: 74, pending_gap: gap, session_kind: remediation.kind)
     assert_equal :remediated, decision
@@ -410,11 +410,11 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     show remediation
 
     assert_select "*", text: /15\s*\/\s*20/
-    assert_select "#session_gap_outcome.bg-success-soft p.font-medium", text: "Fiche de révision levée !"
+    assert_select "#session_gap_outcome.bg-success-soft p.font-medium", text: "Notion levée !"
     assert_select "#session_gap_outcome a", 0
   end
 
-  test "fiche : la remédiation qui lève la fiche lit « Fiche de révision levée ! », sans lien, après la phrase de progrès" do
+  test "fiche : la remédiation qui lève la fiche lit « Notion levée ! », sans lien, après la phrase de progrès" do
     gap, remediation = failed_then_remediated(80)
     gap.update!(status: "remediated", resolved_at: Time.current, resolved_by_session: remediation)
     sign_in_as @student
@@ -422,7 +422,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     show remediation
 
     assert_select "#session_gap_outcome.bg-success-soft" do
-      assert_select "p.font-medium", text: "Fiche de révision levée !"
+      assert_select "p.font-medium", text: "Notion levée !"
       assert_select "p", text: "« Division cellulaire » n'est plus à revoir."
       assert_select "a", 0
     end

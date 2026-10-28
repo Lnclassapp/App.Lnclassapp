@@ -1,7 +1,7 @@
 require "test_helper"
 
-# AS-03, AS-04, AS-05, TR-cadre-6, UDR-0006, UDR-0017: the team creates and edits an exercise with its questions in a
-# large modal, publishes and archives it; archiving destroys nothing.
+# AS-05, TR-cadre-6, UDR-0006: the team publishes and archives an exercise; archiving destroys nothing. Since ADR-0113 §4.6
+# the exercises come with the lesson import: no creation nor edition screen.
 class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @member = create_team_member
@@ -24,7 +24,24 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
   end
 
   def exercise_params(title: "méiose et ADN", exercise_type: "evaluation", questions: meiosis_questions)
-    { exercise: { title:, description: "Lis bien.", exercise_type:, questions_attributes: questions }.compact }
+    { exercise: { title:, statement: "Lis bien.", exercise_type:, questions_attributes: questions }.compact }
+  end
+
+  # CA-29, ADR-0113 §4.6: the exercises come with the lesson import; no address is left to create or edit one: 404.
+  test "CA-29: the creation and edition addresses of an exercise answer 404, even for the team, and nothing is written" do
+    exercise = create_exercise(essential: @essential, status: "draft", title: "Méiose")
+    sign_in_as @member
+
+    get "/teams/essentials/#{@essential.slug}/exercises/new"
+    assert_response :not_found
+    post "/teams/essentials/#{@essential.slug}/exercises", params: exercise_params, as: :turbo_stream
+    assert_response :not_found
+    get "/teams/exercises/#{exercise.public_id}/edit"
+    assert_response :not_found
+    patch "/teams/exercises/#{exercise.public_id}", params: exercise_params, as: :turbo_stream
+    assert_response :not_found
+
+    assert_equal [ [ "Méiose", "draft" ] ], Orm::Exercise.pluck(:title, :status)
   end
 
   test "a teacher or a student receives 403 on every action, and nothing is written" do
@@ -32,14 +49,6 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
 
     [ create_teacher, create_student ].each do |user|
       sign_in_as user
-      get new_teams_essential_exercise_path(@essential.slug)
-      assert_response :forbidden
-      post teams_essential_exercises_path(@essential.slug), params: exercise_params, as: :turbo_stream
-      assert_response :forbidden
-      get edit_teams_exercise_path(exercise.public_id)
-      assert_response :forbidden
-      patch teams_exercise_path(exercise.public_id), params: exercise_params, as: :turbo_stream
-      assert_response :forbidden
       patch publish_teams_exercise_path(exercise.public_id), as: :turbo_stream
       assert_response :forbidden
       patch archive_teams_exercise_path(exercise.public_id), as: :turbo_stream
@@ -50,169 +59,9 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ [ "Méiose", "draft" ] ], Orm::Exercise.pluck(:title, :status)
   end
 
-  test "the creation form opens in the large modal, with templates to add questions and answers" do
+  test "an unknown exercise cannot be published or archived" do
     sign_in_as @member
 
-    get new_teams_essential_exercise_path(@essential.slug), headers: { "Turbo-Frame" => "modal" }
-
-    assert_response :success
-    assert_select "nav", 0
-    assert_select "turbo-frame#modal dialog#exercise-modal.sm\\:max-w-2xl form#exercise-form[action='#{teams_essential_exercises_path(@essential.slug)}']" do
-      assert_select "input[name='exercise[title]'][maxlength='150']"
-      assert_select "select[name='exercise[exercise_type]'] option[selected][value=fixation]", text: tl("exercise_types.fixation")
-      assert_select "section[data-controller='teams--nested-form'] [data-teams--nested-form-target=list] fieldset", 0
-      assert_select "section > template[data-teams--nested-form-target=template]", 1
-    end
-    assert_select "#exercise-essential", text: including(@essential.name)
-    assert_select "button[type=submit][form=exercise-form]", text: tl("new.submit")
-    template = css_select("section > template").first.inner_html
-    assert_includes template, "exercise[questions_attributes][NEW_QUESTION][answers_attributes][NEW_ANSWER][content]"
-    assert_includes template, "exercise[questions_attributes][NEW_QUESTION][answers_attributes][0][correct]"
-  end
-
-  test "an unknown essential has no creation form" do
-    sign_in_as @member
-
-    get new_teams_essential_exercise_path("inconnue")
-    assert_response :not_found
-    post teams_essential_exercises_path("inconnue"), params: exercise_params, as: :turbo_stream
-    assert_response :not_found
-  end
-
-  test "AS-03: the exercise, its 2 questions and 5 answers are saved as a draft, the title as typed; Turbo Stream answers" do
-    sign_in_as @member
-
-    post teams_essential_exercises_path(@essential.slug), params: exercise_params, as: :turbo_stream
-
-    exercise = Orm::Exercise.sole
-    assert_equal [ "méiose et ADN", "Lis bien.", "evaluation", "draft", @essential.id, @member.id ],
-                 [ exercise.title, exercise.description, exercise.exercise_type, exercise.status, exercise.essential_id, exercise.author_id ]
-    assert_equal [ [ 1, "true_false", "Deux divisions." ], [ 2, "single_choice", nil ] ],
-                 exercise.questions.map { [ it.position, it.question_type, it.explanation ] }
-    assert_equal [ [ "Vrai", true ], [ "Faux", false ], [ "23", true ], [ "46", false ], [ "92", false ] ],
-                 exercise.questions.flat_map { |question| question.answers.map { [ it.content, it.correct ] } }
-    assert_response :success
-    assert_equal "text/vnd.turbo-stream.html", response.media_type
-    assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("create.created", title: "méiose et ADN"))
-    assert_select "turbo-stream[action=refresh]:not([request-id])", 1
-  end
-
-  test "a question built wrong reopens the modal (422) with its error in place, and nothing is saved" do
-    sign_in_as @member
-    questions = meiosis_questions
-    questions["1727000000000"][:answers_attributes] = answers([ "23", false ], [ "46", false ], [ "92", false ])
-
-    post teams_essential_exercises_path(@essential.slug), params: exercise_params(questions:), as: :turbo_stream
-
-    assert_response :unprocessable_entity
-    assert_select "turbo-frame#modal dialog#exercise-modal form#exercise-form" do
-      assert_select "[data-teams--nested-form-target=list] > fieldset[data-nested-question]", 2
-      assert_select "[data-teams--nested-form-target=list] > fieldset:nth-of-type(2) [role=alert]",
-                    text: including(error_of(:exercise_input, :questions, :wrong_correct_count))
-      assert_select "[data-teams--nested-form-target=list] > fieldset:first-of-type [role=alert]", 0
-      assert_select "input[name='exercise[questions_attributes][1][answers_attributes][2][content]'][value='92']"
-      assert_select "input[name='exercise[title]'][value='méiose et ADN']"
-    end
-    assert_equal [ 0, 0, 0 ], [ Orm::Exercise.count, Orm::Question.count, Orm::Answer.count ]
-  end
-
-  test "blank fields are refused on their own field, in the modal" do
-    sign_in_as @member
-    questions = { "0" => { content: "", question_type: "single_choice", answers_attributes: answers([ "", true ], [ "B", false ]) } }
-
-    post teams_essential_exercises_path(@essential.slug), params: exercise_params(title: "", questions:), as: :turbo_stream
-
-    assert_response :unprocessable_entity
-    assert_select "#exercise_title_error", text: including(error_of(:exercise_input, :title, :blank))
-    assert_select "#exercise_questions_error", text: including(error_of(:exercise_input, :questions, :invalid))
-    assert_select "#exercise_questions_attributes_0_content_error", text: including(error_of(:question_input, :content, :blank))
-    assert_select "#exercise_questions_attributes_0_answers_error", text: including(error_of(:question_input, :answers, :invalid))
-    assert_select "input#exercise_questions_attributes_0_answers_attributes_0_content[aria-invalid=true]"
-    assert_select "#exercise_questions_attributes_0_answers_attributes_0_content_error",
-                  text: including(error_of(:answer_input, :content, :blank))
-    assert_select "#exercise_questions_attributes_0_answers_attributes_1_content_error", 0
-    assert_equal 0, Orm::Exercise.count
-  end
-
-  test "a title too long for the entity is refused on its field" do
-    sign_in_as @member
-
-    post teams_essential_exercises_path(@essential.slug), params: exercise_params(title: "a" * 151), as: :turbo_stream
-
-    assert_response :unprocessable_entity
-    assert_select "#exercise_title_error", text: including(I18n.t("errors.messages.too_long", count: 150))
-  end
-
-  test "without Turbo, a creation or an update leads to the exercise with a notice" do
-    sign_in_as @member
-
-    post teams_essential_exercises_path(@essential.slug), params: exercise_params
-    exercise = Orm::Exercise.sole
-    assert_redirected_to exercise_path(exercise.public_id)
-    assert_equal tl("create.created", title: "méiose et ADN"), flash[:notice]
-
-    patch teams_exercise_path(exercise.public_id), params: exercise_params(title: "Méiose")
-    assert_redirected_to exercise_path(exercise.public_id)
-    assert_equal tl("update.updated", title: "Méiose"), flash[:notice]
-  end
-
-  test "the edit form is filled in, questions and correct answers included, and replaces a question (AS-04)" do
-    exercise = create_exercise(essential: @essential, status: "draft", title: "Méiose", questions: 1)
-    sign_in_as @member
-
-    get edit_teams_exercise_path(exercise.public_id), headers: { "Turbo-Frame" => "modal" }
-
-    assert_response :success
-    assert_select "turbo-frame#modal form#exercise-form[action='#{teams_exercise_path(exercise.public_id)}']" do
-      assert_select "input[name=_method][value=patch]"
-      assert_select "input[name='exercise[title]'][value='Méiose']"
-      assert_select "textarea[name='exercise[questions_attributes][0][content]']", text: "<p>Question 1</p>"
-      assert_select "input[type=checkbox][name='exercise[questions_attributes][0][answers_attributes][0][correct]'][checked]"
-      assert_select "input[type=checkbox][name='exercise[questions_attributes][0][answers_attributes][1][correct]']:not([checked])"
-    end
-    assert_select "#questions-locked", 0
-
-    patch teams_exercise_path(exercise.public_id), params: exercise_params(title: "Méiose"), as: :turbo_stream
-
-    assert_response :success
-    assert_equal [ "La méiose produit 4 cellules.", "Combien de chromosomes ?" ], exercise.reload.questions.map(&:content)
-    assert_select "turbo-stream[action=append][target=toasts]", text: including(tl("update.updated", title: "Méiose"))
-    assert_select "turbo-stream[action=refresh]", 1
-  end
-
-  test "after a session, the questions are locked: read only, only title and description change (AS-04)" do
-    exercise = create_exercise(essential: @essential, title: "Méiose", questions: 1)
-    create_exercise_session(exercise:)
-    sign_in_as @member
-
-    get edit_teams_exercise_path(exercise.public_id), headers: { "Turbo-Frame" => "modal" }
-
-    assert_select "#questions-locked", text: including(tl("form.locked_title"))
-    assert_select "#exercise-questions li", text: including("<p>Question 1</p>")
-    assert_select "#exercise-questions svg[aria-label='#{tl('form.correct')}']", 1
-    assert_select "form#exercise-form input[type=hidden][name='exercise[exercise_type]'][value=fixation]"
-    assert_select "form#exercise-form [name^='exercise[questions_attributes]']", 0
-    assert_select "template", 0
-
-    patch teams_exercise_path(exercise.public_id),
-          params: exercise_params(title: "Méiose II", exercise_type: "fixation", questions: nil), as: :turbo_stream
-    assert_response :success
-    assert_equal [ "Méiose II", [ "<p>Question 1</p>" ] ], [ exercise.reload.title, exercise.questions.map(&:content) ]
-
-    patch teams_exercise_path(exercise.public_id), params: exercise_params(exercise_type: "fixation"), as: :turbo_stream
-    assert_response :unprocessable_entity
-    assert_select "form#exercise-form [role=alert]", text: including(error_of(:exercise_input, :base, :questions_locked))
-    assert_select "#questions-locked"
-    assert_equal [ "<p>Question 1</p>" ], exercise.reload.questions.map(&:content)
-  end
-
-  test "an unknown exercise has no edit form and cannot be updated, published or archived" do
-    sign_in_as @member
-
-    get edit_teams_exercise_path("inconnu")
-    assert_response :not_found
-    patch teams_exercise_path("inconnu"), params: exercise_params, as: :turbo_stream
-    assert_response :not_found
     patch publish_teams_exercise_path("inconnu"), as: :turbo_stream
     assert_response :not_found
     patch archive_teams_exercise_path("inconnu"), as: :turbo_stream
@@ -304,101 +153,5 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "turbo-stream[action=append][target=toasts] [role=alert]", text: including(tl("transition.refusals.image_missing", number: 2))
     assert_equal "draft", exercise.reload.status
-  end
-
-  test "ADR-0105: the edit form offers the expected image, and saving attaches the uploaded image with its text" do
-    exercise = create_exercise(essential: @essential, status: "draft", questions: 1)
-    exercise.questions.first.update!(image_description: "Un circuit simple")
-    image = create_question_image
-    sign_in_as @member
-
-    get edit_teams_exercise_path(exercise.public_id), headers: { "Turbo-Frame" => "modal" }
-    assert_select "form#exercise-form", text: including(tl("question_fields.image_expected", description: "Un circuit simple"))
-    assert_select "input[type=hidden][name='exercise[questions_attributes][0][image_description]'][value='Un circuit simple']"
-
-    questions = meiosis_questions
-    questions["0"] = questions["0"].merge(image_public_id: image.public_id, image_alt: "Une pile et une lampe",
-                                          image_description: "Un circuit simple")
-    patch teams_exercise_path(exercise.public_id), params: exercise_params(questions:), as: :turbo_stream
-
-    assert_response :success
-    question = exercise.reload.questions.order(:position).first
-    assert_equal [ question.id, "Une pile et une lampe" ], [ image.reload.question_id, image.alt ]
-    patch publish_teams_exercise_path(exercise.public_id), as: :turbo_stream
-    assert_equal "published", exercise.reload.status
-  end
-
-  test "ADR-0105: an image without its alternative text shows « À compléter » in the form" do
-    exercise = create_exercise(essential: @essential, status: "draft", questions: 1)
-    image = create_question_image(question: exercise.questions.first)
-    sign_in_as @member
-
-    get edit_teams_exercise_path(exercise.public_id), headers: { "Turbo-Frame" => "modal" }
-
-    assert_select "img[src='#{question_image_path(image.public_id)}']"
-    assert_select "[data-assessment--question-image-target=missing]:not([hidden])", text: tl("question_fields.image_alt_missing")
-  end
-
-  # PRD : « Cette question n'a pas besoin d'image » efface la description ; la question ne bloque plus la publication.
-  test "ADR-0105: dropping the image description makes the exercise publishable" do
-    exercise = create_exercise(essential: @essential, status: "draft", questions: 1)
-    exercise.questions.first.update!(image_description: "Un circuit simple")
-    sign_in_as @member
-
-    questions = { "0" => meiosis_questions["0"].merge(image_description: "") }
-    patch teams_exercise_path(exercise.public_id), params: exercise_params(questions:), as: :turbo_stream
-
-    assert_response :success
-    assert_nil exercise.reload.questions.first.image_description
-    patch publish_teams_exercise_path(exercise.public_id), as: :turbo_stream
-    assert_equal "published", exercise.reload.status
-  end
-
-  # ADR-0074 §4.2 : un exercice en ligne ne perd ni l'image d'une question ni son texte de remplacement.
-  test "ADR-0105: a published exercise cannot lose the alternative text of an image or leave a question without its image" do
-    exercise = create_exercise(essential: @essential, status: "published", questions: 1)
-    image = create_question_image(question: exercise.questions.first, alt: "Une pile")
-    sign_in_as @member
-
-    questions = { "0" => meiosis_questions["0"].merge(image_public_id: image.public_id, image_alt: " ") }
-    patch teams_exercise_path(exercise.public_id), params: exercise_params(title: "Autre titre", questions:), as: :turbo_stream
-
-    assert_response :unprocessable_entity
-    assert_select "form#exercise-form [role=alert]", text: /#{Regexp.escape(error_of(:exercise_input, :questions, :image_alt_blank))}/
-    assert_equal "Une pile", image.reload.alt
-
-    questions = { "0" => meiosis_questions["0"].merge(image_description: "Un circuit simple") }
-    patch teams_exercise_path(exercise.public_id), params: exercise_params(title: "Autre titre", questions:), as: :turbo_stream
-
-    assert_response :unprocessable_entity
-    assert_select "form#exercise-form [role=alert]", text: /#{Regexp.escape(error_of(:exercise_input, :questions, :image_missing))}/
-    assert_not_equal "Autre titre", exercise.reload.title
-  end
-
-  test "ADR-0105: citing the image of another exercise is refused with its reason, and nothing is written" do
-    exercise = create_exercise(essential: @essential, status: "draft", questions: 1)
-    foreign = create_question_image(question: create_exercise(essential: @essential).questions.first)
-    sign_in_as @member
-
-    questions = { "0" => meiosis_questions["0"].merge(image_public_id: foreign.public_id, image_alt: "Une pile") }
-    patch teams_exercise_path(exercise.public_id), params: exercise_params(title: "Autre titre", questions:), as: :turbo_stream
-
-    assert_response :unprocessable_entity
-    assert_select "form#exercise-form", text: including(error_of(:exercise_input, :questions, :image_unavailable))
-    assert_not_equal "Autre titre", exercise.reload.title
-    assert_not_equal exercise.questions.first.id, foreign.reload.question_id
-  end
-
-  test "ADR-0105, UDR-0129 §3.2: once tried, a question shows its image read only, without any button" do
-    exercise = create_exercise(essential: @essential, questions: 1)
-    image = create_question_image(question: exercise.questions.first, alt: "Une pile")
-    create_exercise_session(exercise:)
-    sign_in_as @member
-
-    get edit_teams_exercise_path(exercise.public_id), headers: { "Turbo-Frame" => "modal" }
-
-    assert_select "#exercise-questions figure img[src='#{question_image_path(image.public_id)}'][alt='Une pile']"
-    assert_select "#exercise-questions figcaption", text: tl("question_fields.image_locked")
-    assert_select "#exercise-questions [data-action*='assessment--question-image']", 0
   end
 end

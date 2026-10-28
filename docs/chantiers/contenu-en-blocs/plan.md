@@ -9,10 +9,10 @@
 |---|---|---|
 | Où vit le contenu d'une fiche | Un document de blocs `jsonb` par leçon (`course_sheets`), importé au format `lnclass.course-sheet` v1, rendu par un partial par type de bloc | Retenu par le pilote — [ADR-0110](../../decisions/adr/0110-fiche-de-cours-en-donnees-importees.md) |
 | Figure propre à une fiche | `kind` en liste fermée : un partial et un contrôleur Stimulus par `kind`, réglages dans les données, bornés par le schéma | Retenu par le pilote — même ADR |
-| Rendu sous 1 000 px | Proposition : même design, pages fluides (détail dans l'[UDR-0137](../../decisions/udr/0137-fiche-de-cours-a-l-identique-des-maquettes.md) § 4) | Retenu par Touré pour le test (2026-10-27), à confirmer par le porteur — Lot G, phase 1 |
-| Nom à l'écran | « Fiche de cours » par défaut | **En attente du porteur** — Lot H |
+| Rendu sous 1 000 px | Proposition : même design, pages fluides (détail dans l'[UDR-0137](../../decisions/udr/0137-fiche-de-cours-a-l-identique-des-maquettes.md) § 4) | Retenu par Touré pour le test (2026-10-27) ; le porteur tranche sur captures (2026-10-28) — Lot G, phase 1 |
+| Nom à l'écran | « Fiche de révision » | Tranché par le porteur le 2026-10-28 ([UDR-0139](../../decisions/udr/0139-page-de-la-lecon-fiche-de-revision-et-prepare-interros.md)) — Lot H fait |
 
-Le libellé « Fiche de cours » est une valeur de locale : si le porteur choisit un autre nom, seule cette valeur change (Lot H).
+ADR-0110 et UDR-0137 acceptés par le porteur le 2026-10-28.
 
 ## Graphe
 
@@ -31,10 +31,10 @@ PHASE 1 — test sur la fiche Thalès
     Lot D  Fiche Thalès, importée dans les seeds des environnements de PR
           → PR ouverte prête (après accord de Touré) : lien Railway pour le test
 
-PHASE 2 — après validation du test par Touré
-    ├─► Lot E  Fiche Lentilles            ┐ en parallèle
+PHASE 2 — test validé, ouverte par le porteur le 2026-10-28
+    ├─► Lot E  Fiche Lentilles            ┐ en parallèle, une PR par lot vers Develop
     └─► Lot F  Fiche Texte argumentatif   ┘
-    Lot H  Nom à l'écran (attend le porteur)
+    Lot H  Nom à l'écran (fait : « Fiche de révision », UDR-0139)
 ```
 
 ---
@@ -125,30 +125,38 @@ PHASE 2 — après validation du test par Touré
                     test/integration/catalog/course_sheet_seeds_test.rb
 - **Done quand**  : dans l'environnement de PR, la leçon publiée « Propriétés de Thalès dans un triangle » (3ème) a sa fiche de cours, importée par les seeds (`demo/fiches_de_cours`, étapes development et pr) ; elle se lit comme la maquette à 1 000 px et plus, et à 390 px sans défilement horizontal, figure manipulable au doigt ; points déplaçables, réciproque, réinitialisation ; exercices et générateur (CA-9). Fin de la phase 1.
 
-### Lot E — Fiche Lentilles *(phase 2, après validation du test par Touré)*
+### Phase 2 — ouverte par le porteur le 2026-10-28
+
+Le test Thalès est validé et la fiche vit désormais dans la page de la leçon (chantier `refonte-page-lecon`, UDR-0139). Touré étant pris par ce chantier, **le porteur confie les lots E et F à l'orchestrateur** (agents `executant-lot`), **une PR par lot vers `Develop`**, comme `refonte-page-lecon`. Deux contraintes apparues depuis la phase 1 :
+
+- **Budget du JS commun** : tout contrôleur de `app/javascript/controllers/` entre dans le point d'entrée commun, plafonné à 61 Ko gzip (ADR-0114) et déjà presque plein. Chaque figure nouvelle est une **coquille Stimulus** dont la logique vit dans `app/javascript/lib/course_sheet/<kind>.js`, chargée par `import()` à la demande (modèle : `assessment/copy_controller.js`). `test/javascript_bundle_test.rb` reste vert sans relever le plafond.
+- **La leçon doit exister** : une fiche s'importe sur une leçon déjà semée. « Le texte argumentatif » (3ème, français) existe ; **« Les lentilles » n'existe pas** et le Lot E l'écrit au format `lnclass.course-tree` v2, sur le modèle de la leçon Thalès (une notion par section 1 à 5 de la maquette, un exercice par notion, des exercices de toute la leçon). Le contenu est relu par le porteur ou Touré avant la fusion (trace dans `journal.md`).
+
+### Lot E — Fiche Lentilles *(phase 2)*
 
 - **Couche**      : ui + données
 - **Fichiers**    : app/views/catalog/course_sheets/kinds/_lens_simulator.html.erb, _lens_construction.html.erb, _lens_diagrams.html.erb
-                    app/javascript/controllers/course_sheet/lens_simulator_controller.js
-                    app/javascript/controllers/course_sheet/lens_construction_controller.js
-                    app/assets/stylesheets/course_sheet/lens.css
+                    app/javascript/controllers/course_sheet/lens_simulator_controller.js, lens_construction_controller.js (coquilles)
+                    app/javascript/lib/course_sheet/lens_simulator.js, lens_construction.js
+                    app/assets/stylesheets/course_sheet/lens.css (+ sa ligne `@import` dans `course_sheet.css`)
                     db/seeds/data/course_sheets/lentilles.json
-- **Dépend de**   : Lot A, Lot B, Lot C
+                    docs/contenus/lecons-traitees/3eme/physique-chimie/les-lentilles.json (leçon v2)
+- **Dépend de**   : Lot A, Lot B, Lot C, Lot G ; `refonte-page-lecon` Lot D (import v2)
 - **Test associé**: test/system/catalog/course_sheet_lens_test.rb
-- **Done quand**  : la fiche Lentilles importée se lit comme la maquette ; simulateur (rayons, image virtuelle, grille) et construction (CA-10)
+- **Done quand**  : la fiche Lentilles importée par les seeds se lit dans la page de la leçon comme la maquette, et à 390 px sans défilement horizontal ; simulateur (rayons, image virtuelle, grille) et construction manipulables au doigt (CA-10) ; JS commun sous 61 Ko
 
-### Lot F — Fiche Texte argumentatif *(phase 2, après validation du test par Touré)*
+### Lot F — Fiche Texte argumentatif *(phase 2)*
 
 - **Couche**      : ui + données
 - **Fichiers**    : app/views/catalog/course_sheets/kinds/_argument_highlighter.html.erb
                     app/views/catalog/course_sheets/blocks/_writing.html.erb
-                    app/javascript/controllers/course_sheet/argument_highlighter_controller.js
-                    app/javascript/controllers/course_sheet/writing_controller.js
-                    app/assets/stylesheets/course_sheet/argument.css
+                    app/javascript/controllers/course_sheet/argument_highlighter_controller.js, writing_controller.js (coquilles)
+                    app/javascript/lib/course_sheet/argument_highlighter.js, writing.js
+                    app/assets/stylesheets/course_sheet/argument.css (+ sa ligne `@import` dans `course_sheet.css`)
                     db/seeds/data/course_sheets/texte-argumentatif.json
-- **Dépend de**   : Lot A, Lot B, Lot C
+- **Dépend de**   : Lot A, Lot B, Lot C, Lot G
 - **Test associé**: test/system/catalog/course_sheet_argument_test.rb
-- **Done quand**  : la fiche importée se lit comme la maquette ; surligneurs, tableau des connecteurs, exercice à choix figé, rédaction et ses vérifications (CA-11)
+- **Done quand**  : la fiche importée par les seeds se lit dans la page de la leçon comme la maquette, et à 390 px sans défilement horizontal ; surligneurs, tableau des connecteurs, exercice à choix figé, rédaction et ses vérifications (CA-11) ; JS commun sous 61 Ko
 
 ### Lot G — Téléphone : pages fluides sous 1 000 px *(phase 1, retenu par Touré pour le test)*
 
@@ -160,7 +168,7 @@ PHASE 2 — après validation du test par Touré
 - **Test associé**: test/system/catalog/course_sheet_phone_test.rb
 - **Done quand**  : à 390 px, la fiche de fixture se lit sans défilement horizontal : même couleurs, polices et rythme Seyès ; plus de hauteur A4 ; marges intérieures de 16 px ; titres réduits ; tableau en cartes ; lexique en tiroir en bas de l'écran sous 640 px ; champs et boutons d'au moins 44 px. Les lots de fiche (D, E, F) rendent leurs figures fluides dans leur propre feuille.
 
-### Lot H — Nom à l'écran *(en attente du porteur)*
+### Lot H — Nom à l'écran *(fait par `refonte-page-lecon` : « Fiche de révision », UDR-0139)*
 
 - **Couche**      : ui
 - **Fichiers**    : config/locales/catalog/course_sheets.fr.yml
@@ -177,11 +185,11 @@ Phase 1
   Vague 2 : Lot A ‖ Lot B ‖ Lot C  → 3 agents, worktrees isolés
   Vague 3 : Lot G                  → 1 agent
   Vague 4 : Lot D                  → 1 agent ; puis push et PR prête, après accord de Touré
-Phase 2 (après validation du test)
-  Vague 5 : Lot E ‖ Lot F          → 2 agents
-Dès la réponse du porteur
-  Lot H                            → 1 agent
+Phase 2 (ouverte le 2026-10-28)
+  Vague 5 : Lot E ‖ Lot F          → 2 agents, branches `feature/fiches-de-cours-lot-e|f` depuis `Develop`, une PR chacune
 ```
+
+`course_sheet.css` : E et F y ajoutent chacun une ligne `@import` ; le second fusionné garde les deux.
 
 Le test de la phase 1 se lit sur téléphone dès le Lot G.
 

@@ -42,7 +42,7 @@ module Queries
       end
 
       def results(student_id)
-        completed(student_id).joins(exercise: { essential: { course: :material } })
+        completed(student_id).joins(exercise: { course: :material })
                              .order(completed_at: :desc, id: :desc).limit(@results_limit).pluck(*RESULT_COLUMNS)
                              .map { ResultRow.new(*it) }
       end

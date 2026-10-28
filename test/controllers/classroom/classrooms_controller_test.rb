@@ -775,7 +775,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#classroom_gaps h2", text: gaps_tl("title")
     assert_select "#classroom_gaps ul[data-turbo-prefetch=false] li", 1
-    assert_select "#classroom_gaps li a[href='#{classroom_essential_path(@classroom.public_id, course.slug, thales.slug)}']",
+    assert_select "#classroom_gaps li a[href='#{classroom_course_path(@classroom.public_id, course.slug, anchor: "notion-#{thales.slug}")}']",
                   text: "Théorème de Thalès"
     assert_select "#classroom_gaps li", text: /#{gaps_tl("students", count: 2)}/
     assert_select "#classroom_gaps", text: /Lentilles/, count: 0

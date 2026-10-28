@@ -6,10 +6,9 @@ module Repositories
     class CourseRepository
       include Ports::Catalog::CourseRepositoryPort
 
-      # ADR-0075 : les assignations d'exercices d'une fiche du cours (index classroom_assignments (assignable_type, assignable_id)).
+      # ADR-0075 : les assignations d'exercices du cours, de notion ou de toute la leçon, lues par exercises.course_id (ADR-0113).
       ASSIGNED_EXERCISE = "JOIN exercises ON exercises.id = classroom_assignments.assignable_id " \
-                          "AND classroom_assignments.assignable_type = 'Exercise' " \
-                          "JOIN essentials ON essentials.id = exercises.essential_id".freeze
+                          "AND classroom_assignments.assignable_type = 'Exercise'".freeze
 
       def find_by_slug(slug:)
         # A single record: no eager loading, which Bullet reports as unused (lot B2). The rich text costs one query.
@@ -48,6 +47,12 @@ module Repositories
         end
       end
 
+      def ids_by_key
+        Orm::Course.pluck(:id, :name, :level_id, :material_id, :series_id).to_h do |id, name, *taxonomy|
+          [ [ Entities::Shared::NaturalKey.compact(name), *taxonomy ], id ]
+        end
+      end
+
       def taken_slugs
         Orm::Course.pluck(:slug).to_set
       end
@@ -55,7 +60,7 @@ module Repositories
       # Lecture d'intégrité dans le contexte classroom (ADR-0075 §5) : une ligne par classe, quel que soit le nombre de
       # ses assignations actives, en une requête (sous-requête IN).
       def assigned_classroom_levels(id:)
-        classroom_ids = Orm::ClassroomAssignment.joins(ASSIGNED_EXERCISE).where(status: "active", essentials: { course_id: id })
+        classroom_ids = Orm::ClassroomAssignment.joins(ASSIGNED_EXERCISE).where(status: "active", exercises: { course_id: id })
                                                 .select(:classroom_id)
         Orm::Classroom.where(id: classroom_ids).pluck(:level_id, :series_id)
       end

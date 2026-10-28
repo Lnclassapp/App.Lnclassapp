@@ -293,6 +293,18 @@ module Queries
         assert_equal %w[svt], home.subjects.map(&:slug)
       end
 
+      test "un exercice de notion et un de toute la leçon assignés au même instant, à la même échéance : l'ordre se tranche sans erreur" do
+        freeze_time do
+          due = Date.current + 2
+          create_assignment(classroom: @classroom, assignable: create_exercise(essential: @essential, title: "De notion"),
+                            assigned_at: Time.current, due_on: due)
+          create_assignment(classroom: @classroom, assignable: create_lesson_wide_exercise(course: @course, title: "De la leçon"),
+                            assigned_at: Time.current, due_on: due)
+
+          assert_equal [ "De notion", "De la leçon" ], titles
+        end
+      end
+
       test "an empty home" do
         row = home
 
@@ -466,6 +478,15 @@ module Queries
 
         assert_nil last(@student).recent_removal_at
         assert_equal [ nil, nil, nil ], last(create_student).to_h.values
+      end
+
+      test "un exercice de toute la leçon assigné paraît dans les exercices à faire, et sa séance dans l'activité récente" do
+        wide = create_lesson_wide_exercise(course: @course, title: "Bilan de la leçon")
+        create_assignment(classroom: @classroom, assignable: wide)
+        create_exercise_session(student: @student, exercise: wide, status: "completed", score_percent: 80)
+
+        assert_includes home.assigned_exercises.map(&:title), "Bilan de la leçon"
+        assert_includes StudentHomeQuery.new.recent_sessions(student_id: @student.id).map(&:exercise_title), "Bilan de la leçon"
       end
     end
   end

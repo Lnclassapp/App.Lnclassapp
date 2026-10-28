@@ -22,27 +22,6 @@ fr:
           image_alt_blank: "Saisissez le texte de remplacement de l'image %{number} : il est obligatoire pour publier."
   teams:
     essentials:
-      form:
-        content_hint_images: "Titres, gras, italique, listes, citations et formules entre $…$. Images JPEG, PNG ou WebP : %{max_bytes} et %{max_side} pixels de côté au plus, allégées avant l'envoi."
-        insert_image: "Insérer une image"
-        slots_left:
-          one: "1 image à insérer"
-          other: "%{count} images à insérer"
-        slot: "Image à insérer : %{description}"
-        # Les lignes de textes de remplacement reprennent celles de l'article (teams/articles/_image_alt_row, UDR-0067 §3.4.2).
-        image_messages:
-          refused: "« %{name} » n'a pas été ajoutée. %{reason}"
-          format: "Ce format n'est pas accepté : JPEG, PNG ou WebP fixe seulement."
-          too_heavy: "L'image dépasse %{max_bytes}, même allégée."
-          too_many: "%{max_count} images au plus par fiche de révision."
-          web_image: "Une image copiée d'une autre page web n'est pas acceptée : enregistrez-la, puis insérez-la."
-          forbidden: "Vous ne pouvez pas ajouter d'image à une fiche de révision."
-          failed: "L'envoi a échoué. Vérifiez votre connexion, puis réessayez."
-          expired: "Votre session a expiré. Reconnectez-vous dans un autre onglet pour garder cette fiche de révision ouverte, puis réessayez."
-          uploading: "Envoi de l'image en cours…"
-          uploaded: "Image %{number} ajoutée. Vérifiez son texte de remplacement sous l'éditeur."
-          waiting: "Envoi de l'image en cours : la fiche de révision s'enregistrera ensuite."
-          not_saved: "La fiche de révision n'est pas enregistrée : une image n'a pas pu être ajoutée. Retirez-la ou renvoyez-la, puis enregistrez de nouveau."
       transition:
         image_slots_unreadable: "Le texte de cette fiche de révision est trop complexe à relire : simplifiez la mise en forme (listes, blocs imbriqués), puis réessayez."
         image_slots_malformed:
@@ -58,14 +37,6 @@ fr:
         essential_not_ready: "La fiche de révision « %{name} » n'est pas prête : il lui manque une image ou un texte de remplacement. Rien n'a été publié."
     exercises:
       question_fields:
-        image_expected: "Image à insérer : %{description}"
-        add_image: "Ajouter l'image"
-        replace_image: "Remplacer l'image"
-        remove_image: "Retirer l'image"
-        drop_description: "Cette question n'a pas besoin d'image"
-        image_alt_label: "Texte de remplacement de l'image"
-        image_alt_missing: "À compléter"
-        image_locked: "Cette question a déjà été tentée : son image ne se modifie plus."
         image_messages:
           refused: "L'image n'a pas été ajoutée. %{reason}"
           format: "Ce format n'est pas accepté : JPEG, PNG ou WebP fixe seulement."

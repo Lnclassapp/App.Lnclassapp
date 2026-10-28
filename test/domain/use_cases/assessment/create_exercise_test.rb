@@ -57,7 +57,7 @@ module UseCases
       end
 
       def create(questions: four_types, title: "méiose et ADN", actor: TEAM, slug: "la-meiose", exercises: @exercises)
-        dto = Dtos::Assessment::ExerciseInput.from_params({ title:, description: "Consigne", exercise_type: "evaluation",
+        dto = Dtos::Assessment::ExerciseInput.from_params({ title:, statement: "Consigne", exercise_type: "evaluation",
                                                             questions_attributes: questions }.with_indifferent_access)
         CreateExercise.new(exercises:, essentials: FakeEssentials.new(@essential), transaction: @transaction,
                            policy: Policies::Catalog::ManageContentPolicy.new)
@@ -71,7 +71,7 @@ module UseCases
         exercise = result.value
         assert_same @exercises.created, exercise
         assert_equal [ "méiose et ADN", "Consigne", "evaluation", "draft", 9, 7 ],
-                     [ exercise.title, exercise.description, exercise.exercise_type, exercise.status, exercise.essential_id, exercise.author_id ]
+                     [ exercise.title, exercise.statement, exercise.exercise_type, exercise.status, exercise.essential_id, exercise.author_id ]
         assert_equal %w[true_false single_choice multiple_correct_2 multiple_correct_3], exercise.questions.map(&:question_type)
         assert_equal [ 1, 2, 3, 4 ], exercise.questions.map(&:position)
         assert_equal [ 2, 3, 3, 4 ], exercise.questions.map { it.answers.size }

@@ -60,8 +60,9 @@ module Queries
         first_done = sessions.select("MIN(exercise_sessions.started_at)")
         # Une remédiation (ADR-0043) n'est pas l'exercice du jour fait seul : elle ne déclenche pas « Bravo, à demain ! ».
         done_today = sessions.where(kind: "standard", classroom_assignment_id: nil, started_at: day_start...(day_start + 1.day))
-        Orm::Exercise.joins(essential: { course: %i[material level] })
-                     .where(status: "published", essentials: { status: "published" }, courses: { status: "published" })
+        Orm::Exercise.joins(course: %i[material level]).left_joins(:essential)
+                     .where(status: "published", courses: { status: "published" })
+                     .where("essentials.id IS NULL OR essentials.status = 'published'")
                      .where(exists(audience(student_id, today))).order(*CATALOG_ORDER)
                      .pluck("exercises.public_id", "exercises.title", "materials.slug", "materials.name", "materials.category",
                             "materials.position", Arel.sql("(#{first_done.to_sql})"), exists(assigned(student_id)), exists(done_today))

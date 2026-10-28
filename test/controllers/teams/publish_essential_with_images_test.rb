@@ -72,12 +72,9 @@ class Teams::PublishEssentialWithImagesTest < ActionDispatch::IntegrationTest
   end
 
   # PRD §3 : une image sans texte de remplacement est marquée « À compléter » et la fiche ne se publie pas.
-  test "une image sans texte de remplacement : badge « À compléter » dans le formulaire, publication refusée" do
-    essential, image = illustrated_essential(alt: nil)
+  test "une image sans texte de remplacement : publication refusée" do
+    essential, = illustrated_essential(alt: nil)
     sign_in_as @member
-
-    get edit_teams_essential_path(essential.slug), headers: { "Turbo-Frame" => "modal" }
-    assert_select "li#article_image_#{image.public_id} span:not([hidden])", text: I18n.t("teams.articles.form.image_alt_missing")
 
     patch publish_teams_essential_path(essential.slug), as: :turbo_stream
 
@@ -155,141 +152,6 @@ class Teams::PublishEssentialWithImagesTest < ActionDispatch::IntegrationTest
     assert_equal %w[published draft draft], [ essential, waiting, incomplete ].map { it.reload.status }
     assert_select "turbo-stream[action=append][target=toasts]", text: including(I18n.t("teams.publish_cascade.skipped_images", count: 1))
     assert_select "turbo-stream[action=append][target=toasts]", text: including(I18n.t("teams.publish_cascade.skipped", count: 1))
-  end
-
-  # ADR-0074 §4.2, ADR-0105 §4.4 : une fiche en ligne ne perd pas un texte de remplacement par une modification.
-  test "modifier une fiche publiée en vidant le texte de remplacement d'une image est refusé (422), rien n'est écrit" do
-    essential = create_essential(course: @course, status: "published", content: "<p>Texte.</p>")
-    image = create_essential_image(essential:, alt: "Une pile")
-    content = %(<p>Texte.</p><action-text-attachment sgid="#{image.attachable_sgid}" content-type="#{image.content_type}"></action-text-attachment>)
-    essential.update!(content:)
-    sign_in_as @member
-
-    patch teams_essential_path(essential.slug), params: { essential: { name: "Autre nom", content:, image_alts: { image.public_id => " " } } },
-                                                as: :turbo_stream
-
-    assert_response :unprocessable_entity
-    assert_select "li#article_image_#{image.public_id}", text: including(I18n.t("activemodel.errors.models.dtos/catalog/essential_input.image_alt_blank", number: 1))
-    assert_equal "Une pile", image.reload.alt
-    assert_not_equal "Autre nom", essential.reload.name
-
-    patch teams_essential_path(essential.slug), params: { essential: { name: "Autre nom", content:, image_alts: { image.public_id => "Une lampe" } } },
-                                                as: :turbo_stream
-    assert_response :success
-    assert_equal "Une lampe", image.reload.alt
-  end
-
-  # Menace n° 15 : le contrôle porte sur la fiche telle qu'elle sera enregistrée, pas sur les seuls textes envoyés par le formulaire.
-  def cite(*images)
-    images.map { %(<action-text-attachment sgid="#{it.attachable_sgid}" content-type="#{it.content_type}"></action-text-attachment>) }.join
-  end
-
-  def published_with_image
-    essential = create_essential(course: @course, status: "published", content: "<p>Texte.</p>")
-    image = create_essential_image(essential:, alt: "Une pile")
-    essential.update!(content: "<p>Texte.</p>#{cite(image)}")
-    [ essential, image ]
-  end
-
-  def patch_essential(essential, content:, image_alts: nil)
-    patch teams_essential_path(essential.slug), as: :turbo_stream,
-                                                params: { essential: { name: "Autre nom", content:, image_alts: }.compact }
-  end
-
-  def blank_alt_message(number) = I18n.t("activemodel.errors.models.dtos/catalog/essential_input.image_alt_blank", number:)
-
-  test "modifier une fiche publiée sans renvoyer la clé d'une image déjà là garde son texte de remplacement" do
-    essential, image = published_with_image
-    sign_in_as @member
-
-    patch_essential(essential, content: "<p>Autre texte.</p>#{cite(image)}")
-
-    assert_response :success
-    assert_equal [ "Autre nom", "Une pile" ], [ essential.reload.name, image.reload.alt ]
-  end
-
-  test "modifier une fiche publiée en citant une image neuve sans envoyer sa clé est refusé (422), rien n'est écrit" do
-    essential, image = published_with_image
-    fresh = create_essential_image(fixture: "photos/photo.png")
-    sign_in_as @member
-
-    patch_essential(essential, content: "<p>Texte.</p>#{cite(image, fresh)}")
-
-    assert_response :unprocessable_entity
-    assert_select "li#article_image_#{fresh.public_id}", text: including(blank_alt_message(2))
-    assert_equal [ nil, nil ], [ fresh.reload.essential_id, fresh.alt ]
-    assert_not_equal "Autre nom", essential.reload.name
-  end
-
-  test "modifier une fiche publiée en citant une image neuve avec une clé vide est refusé (422), rien n'est écrit" do
-    essential, image = published_with_image
-    fresh = create_essential_image(fixture: "photos/photo.png")
-    sign_in_as @member
-
-    patch_essential(essential, content: "<p>Texte.</p>#{cite(image, fresh)}", image_alts: { fresh.public_id => "" })
-
-    assert_response :unprocessable_entity
-    assert_nil fresh.reload.essential_id
-    assert_not_equal "Autre nom", essential.reload.name
-  end
-
-  test "modifier une fiche publiée en citant une image neuve avec son texte de remplacement l'enregistre" do
-    essential, image = published_with_image
-    fresh = create_essential_image(fixture: "photos/photo.png")
-    sign_in_as @member
-
-    patch_essential(essential, content: "<p>Texte.</p>#{cite(image, fresh)}", image_alts: { fresh.public_id => "Une lampe" })
-
-    assert_response :success
-    assert_equal [ essential.id, "Une lampe" ], [ fresh.reload.essential_id, fresh.alt ]
-  end
-
-  test "modifier une fiche publiée en citant une image indisponible (autre fiche, autre type, disparue) est refusé (422), rien n'est écrit" do
-    essential, image = published_with_image
-    elsewhere = create_essential_image(essential: create_essential(course: @course), alt: "Ailleurs")
-    vanished = create_essential_image(fixture: "photos/photo.png")
-    vanished_cite = cite(vanished)
-    vanished.destroy!
-    sign_in_as @member
-
-    [ cite(elsewhere), cite(create_article_image), vanished_cite ].each do |unavailable|
-      patch_essential(essential, content: "<p>Texte.</p>#{cite(image)}#{unavailable}")
-
-      assert_response :unprocessable_entity
-      assert_select "#essential_content_error",
-                    text: including(I18n.t("activemodel.errors.models.dtos/catalog/essential_input.attributes.content.image_unavailable"))
-    end
-    assert_not_equal "Autre nom", essential.reload.name
-    assert_not_equal essential.id, elsewhere.reload.essential_id
-  end
-
-  test "modifier une fiche publiée en remplaçant son image par une image neuve sans clé est refusé (422) : l'ancienne image garde son fichier" do
-    essential, image = published_with_image
-    fresh = create_essential_image(fixture: "photos/photo.png")
-    bytes = image.file.download
-    sign_in_as @member
-
-    perform_enqueued_jobs do
-      patch_essential(essential, content: "<p>Texte.</p>#{cite(fresh)}")
-    end
-
-    assert_response :unprocessable_entity
-    assert_equal [ essential.id, "Une pile", true, bytes ],
-                 [ image.reload.essential_id, image.alt, image.file.attached?, image.file.download ]
-    assert_nil fresh.reload.essential_id
-  end
-
-  test "modifier une fiche publiée avec un texte trop complexe à relire est refusé (422) et journalisé avec le slug" do
-    essential = create_essential(course: @course, status: "published")
-    sign_in_as @member
-
-    logs = capture_log do
-      patch teams_essential_path(essential.slug), params: { essential: { name: "Autre nom", content: HOSTILE } }, as: :turbo_stream
-    end
-
-    assert_response :unprocessable_entity
-    assert_includes logs, "[Teams::EssentialsController] image_slots_unreadable slug=#{essential.slug}"
-    assert_not_equal "Autre nom", essential.reload.name
   end
 
   test "une fiche sans emplacement se publie comme avant" do

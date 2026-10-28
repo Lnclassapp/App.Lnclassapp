@@ -20,6 +20,14 @@ module Entities
 
         indices.map { shuffled_ids.fetch(it) }
       end
+
+      # Les choix cochés : indices d'affichage distincts et dans les bornes, rendus en identifiants dans l'ordre posté ;
+      # un indice inconnu ou répété rend [], une réponse mal formée.
+      def self.select(shuffled_ids, indices)
+        return [] unless indices.uniq.size == indices.size && indices.all? { it.between?(0, shuffled_ids.size - 1) }
+
+        indices.map { shuffled_ids.fetch(it) }
+      end
     end
   end
 end

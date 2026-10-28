@@ -10,7 +10,7 @@
       <%= tag.li class: "relative flex items-center gap-3 px-4 py-4 hover:bg-mist sm:px-5", **ui_reveal_item(index) do %>
         <%= ui_icon "light-bulb", size: :md, class: "text-warning" %>
         <div class="min-w-0 flex-1">
-          <%= link_to gap.essential_name, classroom_essential_path(classroom.public_id, gap.course_slug, gap.essential_slug),
+          <%= link_to gap.essential_name, classroom_course_path(classroom.public_id, gap.course_slug, anchor: "notion-#{gap.essential_slug}"),
                       class: "block truncate font-medium text-ink after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-brand" %>
         </div>
         <%= ui_badge t(".students", count: gap.pending_count), tone: :warning, size: :sm %>

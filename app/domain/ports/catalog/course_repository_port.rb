@@ -29,6 +29,11 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #existing_keys"
       end
 
+      # Les leçons existantes par clé de doublon, pour que l'import v2 les réimporte. → { clé d'existing_keys => id }
+      def ids_by_key
+        raise NotImplementedError, "#{self.class} doit implémenter #ids_by_key"
+      end
+
       # Slugs déjà pris, pour les calculer avant une insertion en masse (Entities::Catalog::Slug). → Set[String]
       def taken_slugs
         raise NotImplementedError, "#{self.class} doit implémenter #taken_slugs"

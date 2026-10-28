@@ -1,7 +1,7 @@
 require "test_helper"
 
-# CA-4, CA-5, CA-6 — la fiche de cours d'une leçon. L'élève de son niveau lit une leçon publiée : 3 pages, titres de sections
-# numérotés, encadrés, texte échappé, lexique. Une leçon en brouillon, un autre niveau ou une leçon sans fiche : 404.
+# CA-4, CA-5, CA-6, CA-12 — la fiche de cours d'une leçon, lue dans la section « Fiche de révision » de la page de la leçon : 3 pages, titres
+# de sections numérotés, encadrés, texte échappé, lexique. Son ancienne adresse répond 301 vers cette section ; mêmes refus (404).
 class Catalog::CourseSheetsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @course = create_course(name: "Propriétés de Thalès")
@@ -10,11 +10,51 @@ class Catalog::CourseSheetsControllerTest < ActionDispatch::IntegrationTest
   end
 
   def sheet_path(course = @course) = course_sheet_path(course.slug)
+  # Since ADR-0113 the sheet is read in the lesson page, section « Fiche de révision ».
+  def lesson_path(course = @course) = course_path(course.slug)
+
+  test "CA-12: the old address of the sheet answers 301 to the lesson, on the sheet" do
+    sign_in_as @student
+
+    get sheet_path
+
+    assert_redirected_to course_path(@course.slug, anchor: "fiche-de-revision")
+    assert_response :moved_permanently
+  end
+
+  test "CA-12: the team is redirected for a draft lesson too" do
+    course = create_course(status: "draft")
+    create_course_sheet(course:, document: reading_course_sheet_document)
+    sign_in_as create_team_member
+
+    get sheet_path(course)
+
+    assert_redirected_to course_path(course.slug, anchor: "fiche-de-revision")
+    assert_response :moved_permanently
+  end
+
+  test "CA-12: a draft lesson, another level, no sheet, an unknown lesson: 404 for the student, never a redirect" do
+    draft = create_course(status: "draft")
+    create_course_sheet(course: draft, document: reading_course_sheet_document)
+    sign_in_as create_student_for(draft)
+    get sheet_path(draft)
+    assert_response :not_found
+
+    sign_in_as create_student(classroom: create_classroom(level: create_level(name: "Tle")))
+    get sheet_path
+    assert_response :not_found
+
+    sign_in_as create_student_for(bare = create_course)
+    get sheet_path(bare)
+    assert_response :not_found
+    get course_sheet_path("inconnue")
+    assert_response :not_found
+  end
 
   test "the student reads the three pages under the theme of the sheet" do
     sign_in_as @student
 
-    get sheet_path
+    get lesson_path
 
     assert_response :success
     assert_select "link[href*='course_sheet']"
@@ -22,10 +62,10 @@ class Catalog::CourseSheetsControllerTest < ActionDispatch::IntegrationTest
     assert_select "[data-screen-label]", count: 3
     assert_select "[data-screen-label='Page 1']"
     assert_select "[data-screen-label='Page 3']"
-    assert_select "h1", text: "La propriété de Thalès"
-    assert_select "h2", text: /1\.\s*L'énoncé/
-    assert_select "h2", text: /4\.\s*Exercices d'application/
-    assert_select "h2", text: /5\.\s*Je m'entraîne/
+    assert_select "h3.sheet-h1", text: "La propriété de Thalès"
+    assert_select "h3.sheet-h2", text: /1\.\s*L'énoncé/
+    assert_select "h3.sheet-h2", text: /4\.\s*Exercices d'application/
+    assert_select "h3.sheet-h2", text: /5\.\s*Je m'entraîne/
     assert_select ".sheet-box .sheet-box-label", text: "Propriété de Thalès"
     assert_select ".sheet-simple", text: /Le petit triangle AMN/
     assert_select "ol.sheet-steps li", count: 3
@@ -35,7 +75,7 @@ class Catalog::CourseSheetsControllerTest < ActionDispatch::IntegrationTest
   test "the page footer counts the pages" do
     sign_in_as @student
 
-    get sheet_path
+    get lesson_path
 
     assert_select ".sheet-page-footer", text: "1 / 3"
     assert_select ".sheet-page-footer", text: "3 / 3"
@@ -44,7 +84,7 @@ class Catalog::CourseSheetsControllerTest < ActionDispatch::IntegrationTest
   test "a glossary word is a button and the glossary is given to the bubble" do
     sign_in_as @student
 
-    get sheet_path
+    get lesson_path
 
     assert_select "[data-controller~='course-sheet--glossary'] button.sheet-word", text: "sécantes"
     assert_select "[data-course-sheet--glossary-glossary-value*='Sécantes']"
@@ -55,7 +95,7 @@ class Catalog::CourseSheetsControllerTest < ActionDispatch::IntegrationTest
   test "the simple explanations are on by default, with their toggle" do
     sign_in_as @student
 
-    get sheet_path
+    get lesson_path
 
     assert_select ".sheet-screen[data-simple='true']"
     assert_select "button[aria-pressed='true']", text: I18n.t("catalog.course_sheets.simple.label_on")
@@ -67,7 +107,7 @@ class Catalog::CourseSheetsControllerTest < ActionDispatch::IntegrationTest
     Orm::CourseSheet.where(id: @sheet.id).update_all(document:) # un document hostile, hors du contrôle de l'import
     sign_in_as @student
 
-    get sheet_path
+    get lesson_path
 
     assert_response :success
     assert_select "script", text: /alert/, count: 0
@@ -75,56 +115,13 @@ class Catalog::CourseSheetsControllerTest < ActionDispatch::IntegrationTest
     assert_select "b", text: "gras"
   end
 
-  test "CA-4: a draft lesson is refused to the student" do
-    course = create_course(status: "draft")
-    create_course_sheet(course:, document: reading_course_sheet_document)
-    sign_in_as create_student_for(course)
-
-    get sheet_path(course)
-
-    assert_response :not_found
-  end
-
-  test "a student of another level does not read it" do
-    sign_in_as create_student(classroom: create_classroom(level: create_level(name: "Tle")))
-
-    get sheet_path
-
-    assert_response :not_found
-  end
-
-  test "a lesson without a sheet answers 404" do
-    sign_in_as create_student_for(course = create_course)
-
-    get sheet_path(course)
-
-    assert_response :not_found
-  end
-
-  test "an unknown lesson answers 404" do
-    sign_in_as @student
-
-    get course_sheet_path("inconnue")
-
-    assert_response :not_found
-  end
-
-  test "the team reads the sheet of a draft lesson" do
-    course = create_course(status: "draft")
-    create_course_sheet(course:, document: reading_course_sheet_document)
-    sign_in_as create_team_member
-
-    get sheet_path(course)
-
-    assert_response :success
-  end
-
-  test "the lesson page links to its sheet, and only when it has one" do
+  test "the lesson page no longer links to its sheet: the sheet is a section of the page itself (UDR page de la leçon §3.1)" do
     sign_in_as @student
 
     get course_path(@course.slug)
 
-    assert_select "a[href='#{sheet_path}']", text: I18n.t("catalog.course_sheets.name")
+    assert_select "a[href='#{sheet_path}']", count: 0
+    assert_select "section#fiche-de-revision"
 
     other = create_course
     sign_in_as create_student_for(other)
@@ -136,7 +133,7 @@ class Catalog::CourseSheetsControllerTest < ActionDispatch::IntegrationTest
   test "the table is readable as cards on a phone: each cell carries the label of its column" do
     sign_in_as @student
 
-    get sheet_path
+    get lesson_path
 
     assert_select "table.sheet-table td[data-label]"
     assert_select "table.sheet-table td[data-label='Triangle']"
@@ -154,7 +151,7 @@ class Catalog::CourseSheetsControllerTest < ActionDispatch::IntegrationTest
     Orm::CourseSheet.where(id: @sheet.id).update_all(document: { "pages" => [ { "sections" => [ { "title" => "Exercices", "blocks" => [ exercise, practice ] } ] } ], "glossary" => {} })
     sign_in_as @student
 
-    get sheet_path
+    get lesson_path
 
     assert_select ".sheet-card .sheet-card-title", text: "Exercice 4"
     assert_select "input.sheet-input[data-field-id=an][data-input=numeric][data-answer='3.6']"
@@ -172,7 +169,7 @@ class Catalog::CourseSheetsControllerTest < ActionDispatch::IntegrationTest
     create_course_sheet(course:, document: JSON.parse(Rails.root.join("db/seeds/data/course_sheets/thales.json").read))
     sign_in_as create_student_for(course)
 
-    get sheet_path(course)
+    get lesson_path(course)
 
     figure = "[data-controller~='course-sheet--thales-figure']"
     assert_response :success

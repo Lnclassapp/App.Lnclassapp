@@ -1,0 +1,33 @@
+<%# 🌐 UI · catalog/course_sheets/kinds/lens_diagrams/_example — l'exemple rédigé : l'image d'un objet de 2 cm placé à 6 cm d'une lentille de distance focale 2 cm, sur un quadrillage %>
+<%# Rôle : le dessin (rayon parallèle à l'axe, rayon par O, objet AB, image A′B′) et les cinq lignes de la démarche, côte à côte ; sous 520 px, l'un sous l'autre %>
+<%# ADR  : 0110-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs, 318) · formes de la maquette Fiche Lentilles.dc.html (§ 4) · 1 carreau = 1 cm = 20 unités %>
+<%= tag.figure class: "sheet-figure sheet-lens-diagram", data: { diagram: "example" }, role: "group", "aria-label": t(".label") do %>
+  <div class="sheet-lens-split" data-side="start">
+    <svg viewBox="0 0 320 160" aria-hidden="true" focusable="false">
+      <path class="sheet-lens-grid-line" d="<%= (0..320).step(20).map { "M#{it},0V160" }.join %><%= (10..150).step(20).map { "M0,#{it}H320" }.join %>"></path>
+      <line class="sheet-lens-axis" x1="0" y1="90" x2="320" y2="90"></line>
+      <polyline class="sheet-lens-ray" data-ray="1" data-virtual="false" points="80,50 200,50 300,150"></polyline>
+      <line class="sheet-lens-ray" data-ray="2" data-virtual="false" x1="80" y1="50" x2="320" y2="130"></line>
+      <%= render "catalog/course_sheets/kinds/lens_diagrams/symbol", x: 200, top: 15, bottom: 155 %>
+      <line class="sheet-lens-object" x1="80" y1="90" x2="80" y2="52"></line>
+      <polygon class="sheet-lens-object-head" points="80,48 75,58 85,58"></polygon>
+      <line class="sheet-lens-image" data-virtual="false" x1="260" y1="90" x2="260" y2="108"></line>
+      <polygon class="sheet-lens-image-head" points="260,112 255,102 265,102"></polygon>
+      <circle class="sheet-lens-dot" cx="160" cy="90" r="3.5"></circle>
+      <circle class="sheet-lens-dot" cx="240" cy="90" r="3.5"></circle>
+      <text class="sheet-lens-name" data-tone="primary" x="80" y="106" text-anchor="middle">A</text>
+      <text class="sheet-lens-name" data-tone="primary" x="70" y="48" text-anchor="middle">B</text>
+      <text class="sheet-lens-name" data-tone="ink" x="209" y="104" text-anchor="middle">O</text>
+      <text class="sheet-lens-name" data-tone="accent" x="160" y="106" text-anchor="middle">F</text>
+      <text class="sheet-lens-name" data-tone="accent" x="240" y="84" text-anchor="middle">F′</text>
+      <text class="sheet-lens-name" data-tone="success" x="262" y="84" text-anchor="middle">A′</text>
+      <text class="sheet-lens-name" data-tone="success" x="272" y="124" text-anchor="middle">B′</text>
+    </svg>
+    <div class="sheet-lens-steps">
+      <% t(".steps").each do |step| %>
+        <span><%= sheet_text(step, glossary: @sheet.glossary) %></span>
+      <% end %>
+    </div>
+  </div>
+  <% if block["caption"].present? %><figcaption class="sheet-muted"><%= block["caption"] %></figcaption><% end %>
+<% end %>

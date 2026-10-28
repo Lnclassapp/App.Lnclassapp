@@ -1,0 +1,16 @@
+<%# 🌐 UI · assessment/exercises/sheet_kinds/_matching — relier sur la feuille : deux colonnes, la droite mélangée %>
+<%# Rôle : la gauche numérotée dans l'ordre des positions, la droite lettrée dans le mélange de l'exercice ; aucun identifiant %>
+<%# ADR  : 0091 §4.4, 0112 · UDR : 0138 §3.1 %>
+<%# locals: (question:, reveal:) -%>
+<div class="grid grid-cols-2 gap-4 text-ink">
+  <ul class="space-y-1.5" aria-label="<%= t("assessment.exercise_sessions.kinds.matching.left") %>">
+    <% question.prompts.each_with_index do |prompt, index| %>
+      <li class="flex items-start gap-2"><span class="shrink-0 font-medium" aria-hidden="true"><%= index + 1 %>.</span><span class="min-w-0 flex-1"><%= prompt %></span></li>
+    <% end %>
+  </ul>
+  <ul class="space-y-1.5" aria-label="<%= t("assessment.exercise_sessions.kinds.matching.right") %>">
+    <% question.items.each do |item| %>
+      <li class="flex items-start gap-2"><span class="shrink-0 font-medium" aria-hidden="true"><%= ("A".ord + item.index).chr %>.</span><span class="min-w-0 flex-1"><%= item.content %></span></li>
+    <% end %>
+  </ul>
+</div>

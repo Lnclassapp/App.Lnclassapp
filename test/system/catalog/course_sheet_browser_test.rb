@@ -23,7 +23,7 @@ class Catalog::CourseSheetBrowserTest < ApplicationSystemTestCase
     @course = create_course(name: "Propriétés de Thalès")
     create_course_sheet(course: @course, document:)
     sign_in_as create_student_for(@course)
-    visit course_sheet_path(@course.slug)
+    visit course_path(@course.slug)
   end
 
   # Drags a point of the figure to a place of the 440 × 320 drawing, with real pointer events (Selenium actions).
@@ -161,7 +161,9 @@ class Catalog::CourseSheetBrowserTest < ApplicationSystemTestCase
     @course = create_course(name: "Propriétés de Thalès dans un triangle", level: create_level(name: "3ème"))
     create_course_sheet(course: @course, document: JSON.parse(Rails.root.join("db/seeds/data/course_sheets/thales.json").read))
     sign_in_as create_student_for(@course)
-    visit course_sheet_path(@course.slug)
+    visit course_path(@course.slug)
+    # La fiche est coupée après 150 mots dans la page de la leçon (UDR-0139 §3.2) : la figure est dans la suite.
+    click_on I18n.t("catalog.courses.show.revision_more")
     assert_selector FIGURE
 
     drag("M", x: 30, y: 180)
@@ -209,7 +211,7 @@ class Catalog::CourseSheetBrowserTest < ApplicationSystemTestCase
     sign_in_as create_student_for(@course)
 
     with_mobile_viewport do
-      visit course_sheet_path(@course.slug)
+      visit course_path(@course.slug)
       assert_selector ".sheet-page", minimum: 3
 
       assert_operator metric("document.documentElement.scrollWidth"), :<=, 390

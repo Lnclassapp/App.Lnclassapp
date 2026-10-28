@@ -1,7 +1,7 @@
 # 🧠 DOMAINE · UseCases::Catalog::RunImport
 # Rôle : moteur d'import partiel d'un envoi de 1 à N fichiers : refus par fichier, validation de tout l'envoi, doublons,
 #         écriture par lots rejoués, bilan par fichier
-# ADR  : 0028, 0039, 0050, 0068
+# ADR  : 0028, 0039, 0050, 0068, 0113
 module UseCases
   module Catalog
     class RunImport
@@ -129,7 +129,7 @@ module UseCases
         return source.rejection = blocking if blocking.any?
 
         source.document = document
-        schema_errors = @schema.validate(format: kind.format, version: kind.version, document:)
+        schema_errors = @schema.validate(format: kind.format, version: document["version"], document:)
                                .map { |schema_error| schema_error.with(file: file_name(source)) }
                                .group_by { |schema_error| root_index(schema_error.path, kind) }
         return source.rejection = schema_errors[nil] if schema_errors.key?(nil)
@@ -174,7 +174,7 @@ module UseCases
 
       def envelope_errors(source, document, kind)
         return [ format_mismatch(source, document, kind) ] unless document.is_a?(Hash) && document["format"] == kind.format
-        return [ error(source, "version", "version_unsupported", expected: kind.version) ] unless document["version"] == kind.version
+        return [ error(source, "version", "version_unsupported", expected: kind.version) ] unless kind.accepts?(document["version"])
 
         []
       end
@@ -197,11 +197,14 @@ module UseCases
       def verdict(source, root, path, schema_errors, context)
         return Entities::Catalog::ImportItem.new(path:, errors: schema_errors) if schema_errors
 
-        item = @adapter.validate_root(root:, path:, context:)
+        item = @adapter.validate_root(root:, path:, context: with_version(context, source))
         return item unless @multiple
 
         item.with(errors: item.errors.map { |item_error| item_error.with(file: source.name) })
       end
+
+      # Un envoi peut mêler des fichiers de deux versions : l'adaptateur lit celle du fichier de l'élément (context.data[:version]).
+      def with_version(context, source) = context.with(data: context.data.merge(version: source.document["version"]))
 
       def keep(tracked, context, seen)
         item = tracked.item

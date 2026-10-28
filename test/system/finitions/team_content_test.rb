@@ -1,14 +1,13 @@
 require "application_system_test_case"
 
-# Finitions UX, lot C2 (UDR-0054 §3.1 to §3.3): the team's content and import screens. Each modal (course, essential,
-# exercise, import) names the tab while open, gives it back on close, and targets its first field (FU-05, FU-15);
+# Finitions UX, lot C2 (UDR-0054 §3.1 to §3.3): the team's content and import screens. Each modal (course,
+# import) names the tab while open, gives it back on close, and targets its first field (FU-05, FU-15);
 # the import report goes back to « Imports » by the common link (FU-10, FU-11); no title keeps a colon.
 module Finitions; end
 
 class Finitions::TeamContentTest < ApplicationSystemTestCase
   setup do
     @essential = create_essential(course: create_course(name: "Génétique et évolution"), name: "La méiose")
-    @exercise = create_exercise(essential: @essential)
     sign_in_as create_team_member
     assert_current_path team_home_path
   end
@@ -25,17 +24,13 @@ class Finitions::TeamContentTest < ApplicationSystemTestCase
     assert_equal "course_name", focused_id
   end
 
-  test "each content and import modal names the tab while open, targets its first field, and gives the tab back" do
+  test "each course and import modal names the tab while open, targets its first field, and gives the tab back" do
     visit teams_imports_path
     assert_equal team_title("Imports"), page.title
 
     {
       new_teams_course_path => [ "course-modal", "Nouvelle fiche de cours", "course_name" ],
       edit_teams_course_path(@essential.course.slug) => [ "course-modal", "Modifier la fiche de cours", "course_name" ],
-      new_teams_course_essential_path(@essential.course.slug) => [ "essential-modal", "Nouvelle fiche de révision", "essential_name" ],
-      edit_teams_essential_path(@essential.slug) => [ "essential-modal", "Modifier la fiche de révision", "essential_name" ],
-      new_teams_essential_exercise_path(@essential.slug) => [ "exercise-modal", "Nouvel exercice", "exercise_title" ],
-      edit_teams_exercise_path(@exercise.public_id) => [ "exercise-modal", "Modifier l'exercice", "exercise_title" ],
       new_teams_import_path(kind: "drenas") => [ "import-upload-modal", "Importer des DRENA", "import_files" ],
       new_teams_import_path(kind: "course_tree") => [ "import-upload-modal", "Importer des fiches de cours complètes", "import_files" ]
     }.each do |path, (id, title, field)|

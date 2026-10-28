@@ -1,0 +1,472 @@
+{
+  "format": "lnclass.course-sheet",
+  "version": 1,
+  "course": "les-lentilles",
+  "theme": "teal",
+  "pages": [
+    {
+      "header": {
+        "eyebrow_left": "Physique-Chimie — Classe de 3e",
+        "eyebrow_right": "Lumière · Fiche de cours",
+        "title": "Les lentilles",
+        "intro": "Une [[lentille|lentille]] est un objet transparent, en verre ou en plastique, qui [[devie|dévie]] la lumière. On en trouve dans les lunettes, les loupes, les appareils photo, les projecteurs… et dans notre œil."
+      },
+      "sections": [
+        {
+          "title": "Deux familles de lentilles",
+          "blocks": [
+            {
+              "type": "figure",
+              "kind": "lens_diagrams",
+              "params": {
+                "diagram": "families"
+              }
+            },
+            {
+              "type": "simple",
+              "text": "Pour savoir quelle lentille tu as en main, touche-la. Si elle est plus épaisse au milieu que sur les bords, elle est convergente. Si elle est plus fine au milieu, elle est divergente. Tu peux aussi regarder un texte à travers : s'il grossit, elle est convergente."
+            }
+          ]
+        },
+        {
+          "title": "Le vocabulaire de la lentille convergente",
+          "blocks": [
+            {
+              "type": "figure",
+              "kind": "lens_diagrams",
+              "params": {
+                "diagram": "vocabulary"
+              }
+            },
+            {
+              "type": "simple",
+              "text": "Une lentille convergente rassemble la lumière en un point, le foyer F′. C'est ce qui se passe quand on concentre la lumière du Soleil avec une loupe. La distance focale, c'est simplement l'écart entre le centre de la lentille et ce point."
+            }
+          ]
+        },
+        {
+          "title": "L'image donnée par une lentille convergente",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Figure interactive : déplace le point **B** (haut de l'objet) et les foyers **F** ou **F′**. Les trois rayons se croisent toujours au même point : **B′**, l'image de B."
+            },
+            {
+              "type": "media",
+              "kind": "lens_simulator",
+              "params": {
+                "d": 8,
+                "h": 2,
+                "f": 3,
+                "grid": true
+              }
+            },
+            {
+              "type": "simple",
+              "text": "Si l'objet est loin de la lentille (plus loin que F), l'image se forme de l'autre côté, la tête en bas : on peut l'attraper sur un écran, comme au cinéma. Si l'objet est très près (entre F et la lentille), on ne peut pas l'attraper sur un écran, mais en regardant à travers la lentille on voit l'objet en plus grand : c'est la loupe."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sections": [
+        {
+          "title": "Construire l'image d'un objet",
+          "blocks": [
+            {
+              "type": "box",
+              "tone": "remember",
+              "label": "Les trois rayons particuliers",
+              "paragraphs": [
+                "**Rayon 1** : un rayon parallèle à l'axe optique ressort en passant par le foyer image F′.",
+                "**Rayon 2** : un rayon qui passe par le centre optique O n'est pas dévié.",
+                "**Rayon 3** : un rayon qui passe par le foyer objet F ressort parallèle à l'axe optique.",
+                "Deux rayons suffisent pour trouver l'image. Le troisième sert à vérifier."
+              ]
+            },
+            {
+              "type": "steps",
+              "label": "Méthode",
+              "items": [
+                "Je trace l'axe optique et la lentille, puis je place O, F et F′ à l'échelle.",
+                "Je place l'objet AB, avec A sur l'axe.",
+                "Depuis B, je trace deux des trois rayons particuliers.",
+                "B′ est le point où les rayons se croisent. Je place A′ sur l'axe, à la verticale de B′.",
+                "Je mesure OA′ et A′B′, puis je décris l'image : position, taille, sens (droite ou [[renversee|renversée]])."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Exemple rédigé.** Une lentille convergente a une distance focale f = 2 cm. Un objet AB de 2 cm est placé à 6 cm de la lentille. **Construire son image.** (1 carreau = 1 cm)"
+            },
+            {
+              "type": "figure",
+              "kind": "lens_diagrams",
+              "params": {
+                "diagram": "example"
+              }
+            }
+          ]
+        },
+        {
+          "title": "L'œil, un système optique",
+          "blocks": [
+            {
+              "type": "figure",
+              "kind": "lens_diagrams",
+              "params": {
+                "diagram": "eye"
+              }
+            },
+            {
+              "type": "simple",
+              "text": "L'œil fonctionne comme un petit appareil photo. La pupille laisse entrer la lumière, le cristallin est la lentille et la rétine est l'écran où l'image se forme. Quand tu regardes de près, ton cristallin se bombe pour que l'image reste nette."
+            },
+            {
+              "type": "figure",
+              "kind": "lens_diagrams",
+              "params": {
+                "diagram": "ametropia"
+              }
+            }
+          ]
+        },
+        {
+          "title": "Exercices d'application",
+          "blocks": [
+            {
+              "type": "exercise",
+              "title": "Exercice 1 · Construction",
+              "prompt": "Une lentille convergente a une distance focale f = 3 cm. Un objet AB de 1,5 cm est placé à 6 cm de la lentille. Construis l'image et décris-la.",
+              "fields": [
+                {
+                  "id": "e1oap",
+                  "input": "numeric",
+                  "label": "OA′ (cm) =",
+                  "answer": 6
+                },
+                {
+                  "id": "e1apbp",
+                  "input": "numeric",
+                  "label": "A′B′ (cm) =",
+                  "answer": 1.5
+                }
+              ],
+              "hint": "trace le rayon parallèle à l'axe (il ressort par F′) et le rayon qui passe par O : ils se croisent en B′.",
+              "correction": "Les rayons 1 et 2 se croisent en B′.\nOA′ = **6 cm**, A′B′ = **1,5 cm**.\nImage réelle, renversée, de même taille que l'objet."
+            },
+            {
+              "type": "exercise",
+              "title": "Exercice 2 · La loupe",
+              "prompt": "Léo observe un timbre avec une loupe de distance focale 10 cm, placée à 6 cm du timbre. a) La loupe est-elle convergente ou divergente ? b) Quelle image voit-il ?",
+              "fields": [
+                {
+                  "id": "e2a",
+                  "input": "choice",
+                  "label": "a) La loupe est",
+                  "options": [
+                    "convergente",
+                    "divergente"
+                  ],
+                  "answer": 0
+                },
+                {
+                  "id": "e2b",
+                  "input": "choice",
+                  "label": "b) L'image est",
+                  "options": [
+                    "virtuelle, droite et agrandie",
+                    "réelle, renversée et agrandie",
+                    "réelle, renversée et plus petite"
+                  ],
+                  "answer": 0
+                }
+              ],
+              "hint": "compare la distance du timbre à la distance focale de la loupe.",
+              "correction": "a) Convergente : elle agrandit.\nb) 6 cm est plus petit que 10 cm : le timbre est entre F et la lentille. L'image est **virtuelle, droite et agrandie**."
+            },
+            {
+              "type": "exercise",
+              "title": "Exercice 3 · L'appareil photo",
+              "prompt": "Dans un appareil photo, quel élément joue le rôle de la lentille ? de l'écran ? Pourquoi faut-il faire la mise au point ?",
+              "fields": [
+                {
+                  "id": "e3a",
+                  "input": "choice",
+                  "label": "La lentille :",
+                  "options": [
+                    "l'objectif",
+                    "le capteur",
+                    "le diaphragme"
+                  ],
+                  "answer": 0
+                },
+                {
+                  "id": "e3b",
+                  "input": "choice",
+                  "label": "L'écran :",
+                  "options": [
+                    "l'objectif",
+                    "le capteur",
+                    "le diaphragme"
+                  ],
+                  "answer": 1
+                }
+              ],
+              "correction": "Lentille : l'objectif. Écran : le capteur.\nLa position de l'image nette dépend de la distance de l'objet. On déplace l'objectif pour que l'image tombe sur le capteur, comme l'œil accommode."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sections": [
+        {
+          "title": "Je m'entraîne",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Réponds dans les cases ou clique sur ta réponse, puis clique sur « Vérifier ». Utilise l'indice si tu bloques."
+            },
+            {
+              "type": "figure",
+              "kind": "lens_diagrams",
+              "params": {
+                "diagram": "profiles"
+              }
+            },
+            {
+              "type": "exercise",
+              "title": "Exercice 4 · Convergente ou divergente ?",
+              "prompt": "Voici quatre lentilles vues de profil. Indique pour chacune sa famille.",
+              "fields": [
+                {
+                  "id": "e4a",
+                  "input": "choice",
+                  "label": "Lentille 1",
+                  "options": [
+                    "convergente",
+                    "divergente"
+                  ],
+                  "answer": 0
+                },
+                {
+                  "id": "e4b",
+                  "input": "choice",
+                  "label": "Lentille 2",
+                  "options": [
+                    "convergente",
+                    "divergente"
+                  ],
+                  "answer": 1
+                },
+                {
+                  "id": "e4c",
+                  "input": "choice",
+                  "label": "Lentille 3",
+                  "options": [
+                    "convergente",
+                    "divergente"
+                  ],
+                  "answer": 1
+                },
+                {
+                  "id": "e4d",
+                  "input": "choice",
+                  "label": "Lentille 4",
+                  "options": [
+                    "convergente",
+                    "divergente"
+                  ],
+                  "answer": 0
+                }
+              ],
+              "hint": "compare l'épaisseur au centre et sur les bords. Centre plus épais : convergente."
+            },
+            {
+              "type": "figure",
+              "kind": "lens_diagrams",
+              "params": {
+                "diagram": "focal"
+              }
+            },
+            {
+              "type": "exercise",
+              "title": "Exercice 5 · Lire la distance focale",
+              "prompt": "Des rayons parallèles à l'axe traversent la lentille. Quelle est sa distance focale ?",
+              "fields": [
+                {
+                  "id": "e5f",
+                  "input": "numeric",
+                  "label": "f (cm) =",
+                  "answer": 4
+                }
+              ],
+              "hint": "repère le point F′ où les rayons se croisent sur l'axe, puis compte les carreaux entre O et F′."
+            },
+            {
+              "type": "exercise",
+              "title": "Exercice 6 · Le modèle de l'œil",
+              "prompt": "Associe chaque partie de l'œil à l'élément du modèle réduit qui la représente.",
+              "fields": [
+                {
+                  "id": "e6p",
+                  "input": "choice",
+                  "label": "La pupille",
+                  "options": [
+                    "un diaphragme",
+                    "une lentille convergente",
+                    "un écran"
+                  ],
+                  "answer": 0
+                },
+                {
+                  "id": "e6c",
+                  "input": "choice",
+                  "label": "Le cristallin",
+                  "options": [
+                    "un diaphragme",
+                    "une lentille convergente",
+                    "un écran"
+                  ],
+                  "answer": 1
+                },
+                {
+                  "id": "e6r",
+                  "input": "choice",
+                  "label": "La rétine",
+                  "options": [
+                    "un diaphragme",
+                    "une lentille convergente",
+                    "un écran"
+                  ],
+                  "answer": 2
+                }
+              ],
+              "hint": "l'image se forme sur la rétine. La pupille règle la quantité de lumière qui entre."
+            },
+            {
+              "type": "exercise",
+              "title": "Exercice 7 · Quelle correction ?",
+              "prompt": "Tom voit flou de loin : l'image se forme avant sa rétine. Il est myope. Inès voit flou de près : l'image se forme après sa rétine. Elle est hypermétrope. Quelle lentille faut-il à chacun ?",
+              "fields": [
+                {
+                  "id": "e7a",
+                  "input": "choice",
+                  "label": "Tom :",
+                  "options": [
+                    "lentille convergente",
+                    "lentille divergente"
+                  ],
+                  "answer": 1
+                },
+                {
+                  "id": "e7b",
+                  "input": "choice",
+                  "label": "Inès :",
+                  "options": [
+                    "lentille convergente",
+                    "lentille divergente"
+                  ],
+                  "answer": 0
+                }
+              ]
+            },
+            {
+              "type": "media",
+              "kind": "lens_construction"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "glossary": {
+    "lentille": [
+      "Lentille",
+      "Un objet transparent (verre, plastique) aux faces arrondies, qui change la direction de la lumière qui le traverse.",
+      "Les verres de lunettes sont des lentilles."
+    ],
+    "devie": [
+      "Dévier",
+      "Changer de direction. Un rayon dévié ne continue pas tout droit.",
+      ""
+    ],
+    "convergente": [
+      "Convergente",
+      "Qui rassemble. Une lentille convergente rapproche les rayons lumineux les uns des autres.",
+      "Elle est plus épaisse au centre que sur les bords."
+    ],
+    "divergente": [
+      "Divergente",
+      "Qui écarte. Une lentille divergente éloigne les rayons lumineux les uns des autres.",
+      "Elle est plus fine au centre que sur les bords."
+    ],
+    "axe": [
+      "Axe optique",
+      "La droite qui traverse la lentille en son centre, perpendiculairement à elle. On la dessine en pointillés.",
+      ""
+    ],
+    "centre": [
+      "Centre optique",
+      "Le point au centre de la lentille, noté O. Un rayon qui passe par O continue tout droit.",
+      ""
+    ],
+    "foyer": [
+      "Foyer",
+      "Le point où se croisent les rayons parallèles à l'axe après la lentille (foyer image F′). Le foyer objet F est à la même distance, de l'autre côté.",
+      "Avec une loupe au soleil, le petit point très lumineux est le foyer."
+    ],
+    "focale": [
+      "Distance focale",
+      "La distance entre le centre O et le foyer F′. On la note f.",
+      "Si F′ est à 4 cm de O, alors f = 4 cm."
+    ],
+    "renversee": [
+      "Renversée",
+      "À l'envers, la tête en bas par rapport à l'objet.",
+      ""
+    ],
+    "reelle": [
+      "Image réelle",
+      "Une image que l'on peut recueillir sur un écran. Les rayons lumineux s'y croisent vraiment.",
+      "L'image d'un vidéoprojecteur sur le mur."
+    ],
+    "virtuelle": [
+      "Image virtuelle",
+      "Une image que l'on ne peut pas recueillir sur un écran. On la voit seulement en regardant à travers la lentille.",
+      "L'image agrandie vue dans une loupe."
+    ],
+    "cristallin": [
+      "Cristallin",
+      "La lentille naturelle de l'œil, placée derrière la pupille. Elle est souple et peut changer de forme.",
+      ""
+    ],
+    "retine": [
+      "Rétine",
+      "La fine couche au fond de l'œil, sensible à la lumière. C'est là que se forme l'image.",
+      ""
+    ],
+    "accommodation": [
+      "Accommodation",
+      "Le réglage automatique de l'œil : le cristallin se bombe plus ou moins pour que l'image reste nette sur la rétine.",
+      "Quand tu passes du tableau à ton cahier, ton œil accommode."
+    ],
+    "myopie": [
+      "Myopie",
+      "Un défaut de l'œil : on voit bien de près mais flou de loin.",
+      ""
+    ],
+    "hypermetropie": [
+      "Hypermétropie",
+      "Un défaut de l'œil : on voit flou de près, et l'œil se fatigue.",
+      ""
+    ],
+    "presbytie": [
+      "Presbytie",
+      "Avec l'âge (vers 45 ans), le cristallin devient moins souple. On a du mal à voir net de près.",
+      "C'est pour ça que beaucoup d'adultes tiennent leur téléphone loin pour lire."
+    ]
+  }
+}

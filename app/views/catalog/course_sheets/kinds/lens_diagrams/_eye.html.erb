@@ -1,0 +1,35 @@
+<%# 🌐 UI · catalog/course_sheets/kinds/lens_diagrams/_eye — le modèle de l'œil réduit : diaphragme, lentille convergente, écran, et ce qu'ils représentent dans l'œil %>
+<%# Rôle : le dessin (deux rayons parallèles qui se croisent sur l'écran) à côté du tableau « dans l'œil / dans le modèle » et de la note sur l'accommodation ; sous 520 px, l'un sous l'autre %>
+<%# ADR  : 0110-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs, 318) · formes de la maquette Fiche Lentilles.dc.html (§ 5) %>
+<%= tag.figure class: "sheet-figure sheet-lens-diagram", data: { diagram: "eye" }, role: "group", "aria-label": t(".label") do %>
+  <span class="sheet-lens-badge"><%= t(".badge") %></span>
+  <div class="sheet-lens-split" data-side="start">
+    <svg viewBox="0 0 300 170" aria-hidden="true" focusable="false">
+      <line class="sheet-lens-axis" x1="0" y1="85" x2="300" y2="85"></line>
+      <polyline class="sheet-lens-ray" data-ray="1" data-virtual="false" points="0,65 100,65 240,85"></polyline>
+      <polyline class="sheet-lens-ray" data-ray="1" data-virtual="false" points="0,105 100,105 240,85"></polyline>
+      <line class="sheet-lens-diaphragm" x1="70" y1="20" x2="70" y2="55"></line>
+      <line class="sheet-lens-diaphragm" x1="70" y1="115" x2="70" y2="150"></line>
+      <%= render "catalog/course_sheets/kinds/lens_diagrams/symbol", x: 100, top: 35, bottom: 135 %>
+      <rect class="sheet-lens-screen" x="240" y="30" width="7" height="110"></rect>
+      <text class="sheet-lens-caption" x="62" y="14" text-anchor="middle"><%= t(".diaphragm") %></text>
+      <text class="sheet-lens-caption" x="62" y="166" text-anchor="middle"><%= t(".diaphragm_eye") %></text>
+      <text class="sheet-lens-caption" x="140" y="28" text-anchor="middle"><%= t(".lens") %></text>
+      <text class="sheet-lens-caption" x="140" y="150" text-anchor="middle"><%= t(".lens_eye") %></text>
+      <text class="sheet-lens-caption" x="244" y="22" text-anchor="middle"><%= t(".screen") %></text>
+      <text class="sheet-lens-caption" x="244" y="158" text-anchor="middle"><%= t(".screen_eye") %></text>
+    </svg>
+    <div class="sheet-lens-eye-text">
+      <table class="sheet-lens-table">
+        <thead><tr><th scope="col"><%= t(".head_eye") %></th><th scope="col"><%= t(".head_model") %></th></tr></thead>
+        <tbody>
+          <% t(".rows").each do |eye, model| %>
+            <tr><td><%= sheet_text(eye, glossary: @sheet.glossary) %></td><td><%= model %></td></tr>
+          <% end %>
+        </tbody>
+      </table>
+      <p class="sheet-text"><%= sheet_text(t(".note"), glossary: @sheet.glossary) %></p>
+    </div>
+  </div>
+  <% if block["caption"].present? %><figcaption class="sheet-muted"><%= block["caption"] %></figcaption><% end %>
+<% end %>

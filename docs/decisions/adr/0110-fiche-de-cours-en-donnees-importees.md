@@ -1,13 +1,13 @@
 # ADR-0110 : Une fiche de cours est un document de blocs importé, rendu par des composants communs et une liste fermée de figures
 <!-- index
 titre: Fiche de cours en données importées, figures en liste fermée
-statut: Proposé
+statut: Accepté
 problematique: Où vit le contenu d'une fiche de cours à l'identique des maquettes, et comment une figure propre à une fiche reste maintenable
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté — confirmé par le porteur le 2026-10-28, avec l'UDR-0137 |
 | **Date** | 2026-10-27 |
 | **Chantier** | `docs/chantiers/contenu-en-blocs` (#318) |
 | **Remplace** | — |

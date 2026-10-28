@@ -53,11 +53,11 @@ class PrEnvironmentSeedsTest < ActiveSupport::TestCase
     assert Orm::User.find_by!(contact: "0731000001").authenticate_pin("2468")
     LESSONS.each do |path|
       course = Orm::Course.find_by!(name: JSON.parse(path.read)["courses"].first["name"])
-      exercises = Orm::Exercise.joins(:essential).where(essentials: { course_id: course.id })
+      exercises = Orm::Exercise.where(course_id: course.id)
       assert_equal "published", course.status, path.to_s
       assert_operator course.essentials.where(status: "published").count, :>=, 1, path.to_s
-      assert_predicate exercises, :any?, path.to_s
-      assert_equal [ "published" ], exercises.distinct.pluck(:status), path.to_s
+      # Ces leçons sont au format 1 : leurs exercices sont ignorés à l'import (ADR-0113), le contenu v2 viendra du chantier contenu.
+      assert_empty exercises, path.to_s
     end
     first_a = JSON.parse(LESSONS.last.read)["courses"].first["name"]
     assert_equal %w[A1 A2], Orm::Course.joins(:series).where(name: first_a).order("series.name").pluck("series.name"),

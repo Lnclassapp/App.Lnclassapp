@@ -221,6 +221,17 @@ module Queries
         ActiveSupport::Notifications.subscribed(counter, "sql.active_record", &)
         count
       end
+
+      test "un exercice de toute la leçon, sans notion, est proposé" do
+        classroom = create_classroom(level: create_level(name: "5e"), name: "5e A")
+        student = create_student(classroom:)
+        wide = create_lesson_wide_exercise(course: create_course(material: create_material(name: "Histoire", category: "science"),
+                                                                 level: classroom.level), title: "Bilan de la leçon")
+
+        row = travel_to(at(TUESDAY, 8)) { daily(student:) }
+
+        assert_equal [ :proposed, wide.public_id ], [ row.state, row.exercise_public_id ]
+      end
     end
   end
 end

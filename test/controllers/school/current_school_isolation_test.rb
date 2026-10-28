@@ -76,11 +76,11 @@ class School::CurrentSchoolIsolationTest < ActionDispatch::IntegrationTest
     assert_select "main a[href*='#{@b4.public_id}'], main form[action*='#{@b4.public_id}']", count: 0
   end
 
-  # A level taught in both schools: its course and its essential name nothing of B.
-  test "a course and an essential of a level taught in A and in B: nothing of B" do
+  # A level taught in both schools: its course, where its notions are read, names nothing of B.
+  test "a course of a level taught in A and in B: nothing of B" do
     create_classroom(school: @a, level: @b4.level, name: "4ème 5").tap { Orm::TeacherClassroom.create!(teacher: @teacher, classroom: it) }
 
-    [ course_path(@course4.slug), course_essential_path(@course4.slug, @essential4.slug) ].each do |path|
+    [ course_path(@course4.slug) ].each do |path|
       get path
       assert_response :success, path
       assert_select "main", { count: 1 }, path

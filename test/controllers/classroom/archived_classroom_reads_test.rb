@@ -18,7 +18,6 @@ class Classroom::ArchivedClassroomReadsTest < ActionDispatch::IntegrationTest
   # vie-de-la-classe, Lot C (Q8, PRD §3) : chaque page sous /classrooms/<classe>/…, avec le rôle qui l'ouvre sur une classe active.
   PAGES = {
     "a course" => [ %i[teacher team], -> { classroom_course_path(@classroom.public_id, @course.slug) } ],
-    "an essential" => [ %i[teacher team], -> { classroom_essential_path(@classroom.public_id, @course.slug, @exercise.essential.slug) } ],
     "the follow-up of an assignment" => [ %i[teacher team], -> { classroom_assignment_path(@classroom.public_id, @assignment.public_id) } ],
     "the session days" => [ %i[teacher], -> { edit_classroom_session_days_path(@classroom.public_id) } ],
     "the days step of an assignment" => [ %i[teacher], lambda {

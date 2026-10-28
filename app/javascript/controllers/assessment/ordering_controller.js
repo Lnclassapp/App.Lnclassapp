@@ -1,7 +1,8 @@
 // ⚡ FRONT · assessment/ordering_controller — remettre dans l'ordre avec « Monter » et « Descendre », sans glisser-déposer
 // Rôle : déplace l'étape, renumérote, désactive les flèches aux extrémités, garde le focus sur l'étape et annonce sa place ;
-//        recopie l'ordre dans les listes de repli (attempt[display_order][] : un indice d'affichage par rang, jamais un id)
-// UDR  : 0087 §3.4, §3.10 · ADR : 0091 §4.4 · sans JavaScript, une liste de choix par rang
+//        recopie l'ordre dans les listes de repli (copy[answers][<id>][display_order][] : un indice d'affichage par rang, jamais un id)
+//        une instance par question (la copie en porte plusieurs) ; `load` relit les listes (brouillon restauré, copie réaffichée en 422)
+// UDR  : 0087 §3.4, §3.10, 0138 §3.2 · ADR : 0091 §4.4, 0112 · sans JavaScript, une liste de choix par rang
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -11,6 +12,16 @@ export default class extends Controller {
   connect() {
     this.fallbackTarget.hidden = true
     this.listTarget.hidden = false
+    this.load()
+  }
+
+  // L'ordre des étapes suit les listes de repli quand elles forment une permutation (valeurs restaurées), sinon l'ordre de départ.
+  load() {
+    const byIndex = new Map(this.itemTargets.map((item) => [item.dataset.index, item]))
+    const order = this.selectTargets.map((select) => select.value)
+    if (new Set(order).size === byIndex.size && order.every((value) => byIndex.has(value))) {
+      order.forEach((value) => this.listTarget.append(byIndex.get(value)))
+    }
     this.sync()
   }
 

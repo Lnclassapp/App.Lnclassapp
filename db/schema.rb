@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_27_110000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_28_090200) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -391,8 +391,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_110000) do
     t.datetime "archived_at"
     t.bigint "author_id", null: false
     t.datetime "created_at", null: false
-    t.text "description"
-    t.bigint "essential_id", null: false
+    t.text "statement"
+    t.bigint "essential_id"
     t.string "exercise_type", default: "fixation", null: false
     t.integer "position", null: false
     t.string "public_id", limit: 14, null: false
@@ -400,8 +400,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_110000) do
     t.string "status", default: "draft", null: false
     t.string "title", limit: 200, null: false
     t.datetime "updated_at", null: false
+    t.bigint "course_id", null: false
     t.index ["author_id"], name: "index_exercises_on_author_id"
-    t.index ["essential_id", "position"], name: "index_exercises_on_essential_id_and_position", unique: true
+    t.index ["course_id", "position"], name: "index_exercises_on_course_id_and_position", unique: true
+    t.index ["course_id"], name: "index_exercises_on_course_id"
     t.index ["essential_id", "status"], name: "index_exercises_on_essential_id_and_status"
     t.index ["public_id"], name: "index_exercises_on_public_id", unique: true
     t.index ["status"], name: "index_exercises_on_status"
@@ -620,9 +622,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_110000) do
     t.bigint "question_id", null: false
     t.bigint "selected_answer_ids", null: false, array: true
     t.string "response_text", limit: 200
+    t.boolean "unanswered", default: false, null: false
     t.index ["exercise_session_id", "question_id"], name: "index_question_attempts_on_exercise_session_id_and_question_id", unique: true
     t.index ["question_id"], name: "index_question_attempts_on_question_id"
-    t.check_constraint "cardinality(selected_answer_ids) > 0 OR response_text IS NOT NULL", name: "question_attempts_selected_answer_ids_present"
+    t.check_constraint "unanswered OR cardinality(selected_answer_ids) > 0 OR response_text IS NOT NULL", name: "question_attempts_selected_answer_ids_present"
   end
 
   create_table "question_images", force: :cascade do |t|
@@ -1084,6 +1087,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_110000) do
   add_foreign_key "exercise_sessions", "exercises", on_delete: :restrict
   add_foreign_key "exercise_sessions", "knowledge_gaps", on_delete: :restrict
   add_foreign_key "exercise_sessions", "users", column: "student_id", on_delete: :restrict
+  add_foreign_key "exercises", "courses", on_delete: :restrict
   add_foreign_key "exercises", "essentials", on_delete: :restrict
   add_foreign_key "exercises", "users", column: "author_id", on_delete: :restrict
   add_foreign_key "import_reports", "users", column: "imported_by_id", on_delete: :restrict

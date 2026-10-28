@@ -1,0 +1,12 @@
+<%# 🌐 UI · assessment/exercises/sheet_kinds/_ordering — remettre dans l'ordre sur la feuille : les étapes mélangées, lettrées %>
+<%# Rôle : l'ordre affiché est le mélange de la graine de l'exercice, jamais l'ordre juste ; aucun identifiant %>
+<%# ADR  : 0091 §4.4, 0112 · UDR : 0138 §3.1 %>
+<%# locals: (question:, reveal:) -%>
+<ul class="space-y-1.5" aria-label="<%= t("assessment.exercise_sessions.kinds.ordering.steps") %>">
+  <% question.items.each do |item| %>
+    <li class="flex items-start gap-2 text-ink">
+      <span class="shrink-0 font-medium" aria-hidden="true"><%= ("A".ord + item.index).chr %>.</span>
+      <span class="min-w-0 flex-1"><%= item.content %></span>
+    </li>
+  <% end %>
+</ul>

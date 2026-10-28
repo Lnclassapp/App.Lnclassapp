@@ -113,7 +113,7 @@ module UseCases
                      [ node.slug, node.course_id, node.name, node.subtitle, node.content ]
         assert_equal [ @course.id, "brassage genetique" ], item.key
         assert_equal [ [ 1, 14, "Exercice 1", "Consigne 1" ], [ 2, 14, "Exercice 2", "Consigne 2" ] ],
-                     node.exercises.map { [ it.position, it.public_id.length, it.title, it.description ] }
+                     node.exercises.map { [ it.position, it.public_id.length, it.title, it.statement ] }
         assert_not_equal(*node.exercises.map(&:public_id))
         assert_equal [ [ 1, "Question 1", nil ], [ 2, "Question 2", nil ] ],
                      node.exercises.first.questions.map { [ it.position, it.content, it.explanation ] }
