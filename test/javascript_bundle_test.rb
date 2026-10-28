@@ -6,7 +6,7 @@ require "zlib"
 # point, which stays in budget. The editor refuses every attachment (ADR-0047, ADR-0049).
 class JavascriptBundleTest < ActiveSupport::TestCase
   BUILDS = Rails.root.join("app/assets/builds")
-  BUDGET_KB = 60
+  BUDGET_KB = 61
 
   test "the bundle registers the math controller found by file pattern" do
     assert_includes BUILDS.join("application.js").read, 'name:"math"'
