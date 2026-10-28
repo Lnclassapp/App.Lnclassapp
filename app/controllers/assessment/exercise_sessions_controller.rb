@@ -13,7 +13,7 @@ module Assessment
 
       result = start_session.call(actor: current_actor, exercise_public_id: params[:exercise_public_id],
                                   restart: params[:restart] == "true")
-      return redirect_paused(result.errors.fetch(:resume_at)) if result.code == :conflict
+      return redirect_paused if paused?(result)
 
       render_result result, success: ->(session) { redirect_to exercise_session_path(session.public_id), status: :see_other }
     end
@@ -32,10 +32,12 @@ module Assessment
 
     private
 
-    # ADR-0115 : pause de « Recommencer » ; retour à l'exercice, qui dit l'heure de reprise.
-    def redirect_paused(resume_at)
-      redirect_to exercise_path(params[:exercise_public_id]), status: :see_other,
-                  alert: t("assessment.exercises.show.paused", time: l(resume_at, format: :hour_minute))
+    # ADR-0115 : pause de « Recommencer » ; retour à l'exercice, dont la page dit seule l'heure de reprise (pas de message en double).
+    # Tout autre refus passe par render_result.
+    def paused?(result) = result.failure? && result.errors.fetch(:base, []).include?(:paused)
+
+    def redirect_paused
+      redirect_to exercise_path(params[:exercise_public_id]), status: :see_other
     end
 
     def start_session

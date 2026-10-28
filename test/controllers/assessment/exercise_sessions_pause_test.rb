@@ -27,10 +27,12 @@ class Assessment::ExerciseSessionsPauseTest < ActionDispatch::IntegrationTest
       assert_no_difference -> { Orm::ExerciseSession.count } do
         post exercise_sessions_path(@exercise.public_id)
       end
+      assert_redirected_to exercise_path(@exercise.public_id)
+      follow_redirect!
     end
 
-    assert_redirected_to exercise_path(@exercise.public_id)
-    assert_equal pause_message, flash[:alert]
+    assert_nil flash[:alert]
+    assert_select "#exercise_paused", count: 1, text: pause_message
   end
 
   test "CA-29 : Recommencer pendant la pause laisse la copie ouverte en place" do
