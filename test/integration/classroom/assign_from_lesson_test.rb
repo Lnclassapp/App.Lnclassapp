@@ -45,10 +45,14 @@ class Classroom::AssignFromLessonTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # AssignmentRepository#resolve_exercise lit `record.essential.course` : un exercice de toute la leçon n'a pas de notion (NoMethodError).
-  # Le dépôt est hors du champ du Lot B : signalé à l'orchestrateur, le Lot 0 rouvre.
   test "an exercise of the whole lesson is assigned the same way" do
-    skip "AssignmentRepository#resolve_exercise suppose une notion : hors du champ du Lot B, signalé à l'orchestrateur"
+    assert_difference -> { Orm::ClassroomAssignment.count }, 1 do
+      assign(@wide, as: :turbo_stream)
+    end
+
+    assert_response :success
+    get course_path(@course.slug)
+    assert_select "##{toggle_id(@classroom, @wide)}", text: /#{I18n.t("classroom.assignments.toggle.assigned")}/
   end
 
   test "the whole-lesson rows carry a toggle for each classroom the teacher teaches" do

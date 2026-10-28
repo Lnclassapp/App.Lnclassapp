@@ -153,6 +153,23 @@ module Repositories
         assert_equal 0, @repository.archive_all_by_teacher_in_school(teacher_id: @teacher.id, school_id: school.id,
                                                                      archived_by_id: actor.id, at: @at)
       end
+
+      # ADR-0113 : un exercice de toute la leçon n'a pas de notion ; sa leçon se lit par exercises.course_id.
+      test "resolve_assignable lit la leçon d'un exercice de toute la leçon, sans notion" do
+        wide = create_lesson_wide_exercise(course: @course)
+
+        resolved = @repository.resolve_assignable(type: "Exercise", key: wide.public_id)
+
+        assert_equal wide.id, resolved.assignable.id
+        assert resolved.parents_published
+        assert_equal @course.level_id, resolved.course_level[:level_id]
+      end
+
+      test "resolve_assignable : la leçon en brouillon d'un exercice de toute la leçon n'est pas publiée" do
+        wide = create_lesson_wide_exercise(course: create_course(status: "draft"))
+
+        assert_not @repository.resolve_assignable(type: "Exercise", key: wide.public_id).parents_published
+      end
     end
   end
 end

@@ -31,8 +31,8 @@ module Queries
       end
 
       def recent_exercises
-        Orm::Exercise.joins(:essential).order(updated_at: :desc, id: :desc).limit(RECENT)
-                     .pluck(:public_id, :title, :status, "essentials.name", :updated_at)
+        Orm::Exercise.joins(:course).left_joins(:essential).order(updated_at: :desc, id: :desc).limit(RECENT)
+                     .pluck(:public_id, :title, :status, Arel.sql("COALESCE(essentials.name, courses.name)"), :updated_at)
                      .map { |values| ExerciseRow.new(*values) }
       end
 

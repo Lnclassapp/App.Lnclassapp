@@ -26,6 +26,22 @@
                                     class: "w-full lg:w-auto lg:shrink-0" %>
 </div>
 
+<%# CA-24 : la première copie et la meilleure note de chaque élève qui a rendu ; le nom mène à sa fiche. %>
+<% if follow_up.copies.any? %>
+  <section id="follow_up_copies" aria-labelledby="follow_up_copies_title" class="mb-8">
+    <h2 id="follow_up_copies_title" class="mb-3 font-display text-lg font-medium"><%= t(".copies_title") %></h2>
+    <ul class="divide-y divide-line border-b border-line">
+      <% follow_up.copies.each do |copy| %>
+        <li class="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 py-3">
+          <%= link_to copy.display_name, classroom_student_path(@classroom.public_id, copy.public_id),
+                      class: "font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+          <span class="text-sm text-mute tabular-nums"><%= t(".copy_summary", first: grade_label(copy.first_score), best: grade_label(copy.best_score)) %></span>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
 <%# Une date limite passée (jour d'Abidjan) : « En retard » sous chaque élève qui n'a pas fait l'exercice, et la pastille « N en retard » les compte. %>
 <% overdue = follow_up.due_on.present? && follow_up.due_on < Time.zone.today %>
 <%= render "assessment/comprehension/section", comprehension: @comprehension, classroom: @classroom, assignment_public_id: follow_up.public_id,

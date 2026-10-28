@@ -82,7 +82,7 @@ module Queries
 
       # Lue seule par le frame différé de l'activité récente. → [SessionRow]
       def recent_sessions(student_id:)
-        Orm::ExerciseSession.joins(exercise: { essential: { course: :material } }).where(student_id:, status: "completed")
+        Orm::ExerciseSession.joins(exercise: { course: :material }).where(student_id:, status: "completed")
                             .merge(own_level(student_id))
                             .order(completed_at: :desc, id: :desc).limit(RECENT_SESSIONS)
                             .pluck(:public_id, "exercises.public_id", "exercises.title", "materials.name", "materials.slug", :score_percent,
@@ -161,8 +161,9 @@ module Queries
 
       # Un exercice publié dont la fiche et le cours le sont aussi (ADR-0035).
       def published_exercises(ids)
-        Orm::Exercise.joins(essential: { course: :material })
-                     .where(id: ids, status: "published", essentials: { status: "published" }, courses: { status: "published" })
+        Orm::Exercise.joins(course: :material).left_joins(:essential)
+                     .where(id: ids, status: "published", courses: { status: "published" })
+                     .where("essentials.id IS NULL OR essentials.status = 'published'")
       end
 
       def exercise_rows(rows, assignments, student_id)

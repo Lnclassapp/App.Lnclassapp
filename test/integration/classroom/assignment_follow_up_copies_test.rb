@@ -16,18 +16,35 @@ class Classroom::AssignmentFollowUpCopiesTest < ActionDispatch::IntegrationTest
     sign_in_as @teacher
   end
 
-  test "the follow-up gives the student's best grade, 15/20, after two copies" do
+  # CA-24
+  test "the follow-up gives the student's first copy, 8/20, and best grade, 15/20, after two copies" do
     get classroom_assignment_path(@classroom.public_id, @assignment.public_id)
 
     assert_response :success
-    assert_select "#comprehension_panel li", text: /Awa Bamba/
-    assert_select "#comprehension_panel li", text: %r{15/20}
-    assert_select "#comprehension_panel li", text: %r{8/20}, count: 0
+    assert_select "#follow_up_copies li", count: 1
+    assert_select "#follow_up_copies li", text: /Awa Bamba/
+    assert_select "#follow_up_copies li", text: /#{Regexp.escape(I18n.t("classroom.assignment_follow_ups.show.copy_summary", first: "8/20", best: "15/20"))}/
+    assert_select "#follow_up_copies a[href='#{classroom_student_path(@classroom.public_id, @student.public_id)}']"
   end
 
-  # CA-24 demande aussi la première copie (8/20) : l'écran de suivi ne la porte pas, et le lire demande une clé de texte et un
-  # changement de la query de compréhension, hors du champ du Lot B. À rouvrir au Lot 0.
-  test "the follow-up also gives the first copy, 8/20" do
-    skip "CA-24 (première copie) : hors du champ du Lot B, signalé à l'orchestrateur"
+  test "a student who handed nothing in has no line in the copies" do
+    create_student(classroom: @classroom, first_name: "Zoé", last_name: "Pas-Encore")
+
+    get classroom_assignment_path(@classroom.public_id, @assignment.public_id)
+
+    assert_select "#follow_up_copies li", text: /Pas-Encore/, count: 0
+  end
+
+  test "an exercise of the whole lesson has its follow-up too" do
+    wide = create_lesson_wide_exercise(course: @course, title: "Bilan")
+    assignment = create_assignment(classroom: @classroom, assignable: wide, by: @teacher, due_on: Date.current + 3)
+    create_exercise_session(student: @student, exercise: wide, status: "completed", score_percent: 60, completed_at: 1.hour.ago,
+                            classroom_assignment: assignment)
+
+    get classroom_assignment_path(@classroom.public_id, assignment.public_id)
+
+    assert_response :success
+    assert_select "h1", text: "Bilan"
+    assert_select "#follow_up_copies li", text: /12\/20/
   end
 end

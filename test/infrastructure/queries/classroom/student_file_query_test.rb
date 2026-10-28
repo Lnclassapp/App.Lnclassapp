@@ -251,6 +251,14 @@ module Queries
         assert_equal few, count_queries { file }
         assert_equal 10, file.counts.assigned
       end
+
+      test "un exercice de toute la leçon assigné et rendu paraît dans le dossier, sans notion" do
+        wide = create_lesson_wide_exercise(course: @essential.course, title: "Bilan de la leçon")
+        assignment = create_assignment(classroom: @classroom, assignable: wide)
+        hand_in(assignment, 80, at: Time.zone.local(2026, 10, 20, 9))
+
+        assert_includes file.assignments.map(&:exercise_title), "Bilan de la leçon"
+      end
     end
   end
 end
