@@ -18,7 +18,7 @@ Le porteur a décidé le 2026-10-28 (D1 à D8 du memo) :
 - les réponses rédigées ne comptent pas dans la note ;
 - un seul bouton par exercice.
 
-Les propositions marquées **(à confirmer)** répondent aux questions ouvertes du memo ; le porteur les tranche à la relecture.
+Les 7 questions ouvertes du memo sont tranchées par le porteur le 2026-10-28 : toutes ses propositions sont acceptées.
 
 ## 2. Acteurs et permissions
 
@@ -105,7 +105,7 @@ note sur 20 = Grading.grade_on_20(score)                                        
 
 Un exercice dont toutes les questions valent 1 point garde exactement sa note d'aujourd'hui. La maîtrise, le badge, les
 lacunes et la note vue par l'enseignant se lisent sur ce score, sans autre changement. Le total des points de l'exercice n'a
-pas à faire 20 : la note se ramène sur 20 **(à confirmer)**.
+pas à faire 20 : la note se ramène sur 20.
 
 **La pause.** « D'affilée » : moins de 30 minutes entre la fin d'une copie vérifiée et la fin de la suivante. La pause dure
 30 minutes après la fin de la 3e copie de la série ; ensuite, une nouvelle série de 3 copies est possible. Règle exacte : on
@@ -116,9 +116,8 @@ prend les 3 dernières copies vérifiées de l'élève sur cet exercice, toutes 
 
 Les copies abandonnées ne comptent pas.
 
-**Interrogation et Devoir** sont deux exercices de toute la leçon, parmi les 4 qu'exige l'import. Proposition : Interrogation
-au type fixation, Devoir au type évaluation, sans type nouveau ; aucune règle d'import sur leur nombre ne change **(à
-confirmer)**.
+**Interrogation et Devoir** sont deux exercices de toute la leçon, parmi les 4 qu'exige l'import. Interrogation est au type
+fixation, Devoir au type évaluation, sans type nouveau ; aucune règle d'import sur leur nombre ne change.
 
 ### Les nouveaux éléments d'une question
 
@@ -128,11 +127,11 @@ confirmer)**.
 | **Unité** | réponse chiffrée | Facultative, 10 caractères au plus (« cm », « m », « km/h »). Une réponse tapée avec cette unité à la fin (« 4,8 cm ») est lue sans elle |
 | **Choix dans une liste** | type nouveau | De 2 à 10 propositions, une seule correcte. Le trou `___` est facultatif ; s'il est là, il n'y en a qu'un, et la liste prend sa place dans la phrase. Juste si la proposition choisie est la correcte |
 | **Réponse rédigée** | type nouveau | Un corrigé type obligatoire (le champ « explication » de la question). Un début de phrase facultatif, 150 caractères au plus, affiché en exemple dans la zone vide et jamais envoyé comme réponse. La réponse de l'élève : 2 000 caractères au plus. Jamais notée |
-| **Grille de vérification** | réponse rédigée | Facultative, 8 critères au plus, 150 caractères chacun. Cochée à l'écran après vérification, **sans être enregistrée (à confirmer)** |
-| **Travail sur le cahier** | type nouveau | Aucun champ. Un corrigé type obligatoire, en texte ; l'image du corrigé viendra plus tard **(à confirmer)**. Jamais noté |
+| **Grille de vérification** | réponse rédigée | Facultative, 8 critères au plus, 150 caractères chacun. Cochée à l'écran après vérification, sans être enregistrée |
+| **Travail sur le cahier** | type nouveau | Aucun champ. Un corrigé type obligatoire, en texte ; l'image du corrigé viendra plus tard. Jamais noté |
 | **Document et tableau dans le sujet** | exercice | Le sujet peut contenir un document titré (« Document · Voir de près et de loin ») et un tableau de données. Le format suit les blocs des fiches de révision (contenu-en-blocs) ; l'ADR le fixe |
 
-Un exercice doit avoir **au moins une question corrigée automatiquement** pour être publié **(à confirmer)**.
+Un exercice doit avoir **au moins une question corrigée automatiquement** pour être publié.
 
 ### Chemins alternatifs et erreurs
 
@@ -155,7 +154,7 @@ Un exercice doit avoir **au moins une question corrigée automatiquement** pour 
 | Exercice ancien (tout à 1 point, sans unité, sans nouveau type) | Feuille, note et correction identiques à aujourd'hui, à la correction complète, à l'appréciation et au nom du bouton près |
 | Leçon réimportée entre deux copies | Le réimport crée un nouvel exercice en brouillon ; l'ancienne copie garde sa correction ; la pause se compte par exercice |
 | Import d'une question mal construite (choix dans une liste sans proposition correcte, deux trous, points à 0 ou 25, unité de 11 caractères, réponse rédigée sans corrigé, grille de 9 critères) | La leçon est refusée entière, l'erreur nomme la leçon et la question (comme aujourd'hui) |
-| Import d'un exercice sans question corrigée automatiquement | Enregistré en brouillon, refusé à la publication **(à confirmer)** |
+| Import d'un exercice sans question corrigée automatiquement | Enregistré en brouillon, refusé à la publication |
 | Pendant la pause, l'élève demande une copie depuis l'accueil, l'historique ou un autre onglet | Aucune copie créée ; retour à la page de l'exercice avec « Tu as vérifié 3 copies d'affilée. Tu pourras recommencer à 21 h 14. » |
 | L'enseignant ou l'équipe lit le résultat | Même appréciation, sans la phrase d'encouragement ; les bonnes réponses, les corrigés types et le texte rédigé de l'élève |
 | Un autre élève ouvre l'adresse du résultat | 403 (inchangé) |
@@ -351,12 +350,10 @@ rédigée, grille et cahier ; sujet en blocs), chacun avec son import.
 
 ## 6. Décisions rattachées
 
-À écrire après la relecture du porteur, numérotées par `script/docs/build_index --number` :
-
-- **ADR** : la révélation après vérification (nouvelle policy) ; la note en points sur les seules questions corrigées
+- [ADR-0115 — Correction complète, note en points et types de questions d'un devoir](../../decisions/adr/0115-correction-complete-note-en-points-et-types-de-questions.md) : la révélation après vérification (nouvelle policy) ; la note en points sur les seules questions corrigées
   automatiquement ; la pause (méthode de port) ; les trois types nouveaux et leur forme d'import ; le sujet en blocs. **Menace
   écrite d'abord** pour la réponse rédigée (texte libre affiché à l'enseignant) et pour l'import des nouvelles clés.
-- **UDR** : la feuille (liste déroulante, unité, zone rédigée, cahier, points, document, tableau, bouton et sa phrase
+- [UDR-0140 — Feuille et résultat corrigé comme en classe](../../decisions/udr/0140-feuille-et-resultat-corriges-comme-en-classe.md) : la feuille (liste déroulante, unité, zone rédigée, cahier, points, document, tableau, bouton et sa phrase
   d'avertissement) et la page du résultat (titre, points, « À revoir », correction complète, corrigé type, grille, pause).
   Elle remplace UDR-0023 sur « jamais les bonnes réponses à l'élève » et UDR-0138 sur le nom du bouton.
 

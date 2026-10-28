@@ -3,10 +3,10 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision — memo et PRD à relire par le porteur |
+| **Statut** | planifié — memo, PRD, ADR, UDR et plan validés par le porteur le 2026-10-28 |
 | **Ouvert le** | 2026-10-28 |
 | **Pilote** | le porteur, qui cadre lui-même depuis le 2026-10-28 (issue #350) |
-| **Branche** | `feature/correction-comme-en-classe`, à repartir de `Develop` : le premier cadrage de Touré (`67c36f94`, `b56a0168`) est remplacé par ce memo et ne se fusionne pas |
+| **Branche** | une branche et une PR par lot, depuis `Develop` (`feature/correction-<lot>`). La branche `feature/correction-comme-en-classe` de Touré (`67c36f94`, `b56a0168`) porte un premier cadrage remplacé par celui-ci : elle ne se fusionne pas |
 | **Programme** | — |
 | **Origine** | issue #350 (proposition de Touré, décisions D1 à D4) ; maquettes de Konan « La propriété de Thalès : je m'évalue » et « Les lentilles : je m'évalue » ; décisions du porteur du 2026-10-28 |
 
@@ -111,7 +111,7 @@ Les éléments des maquettes, rapprochés de ce qui existe :
 | Q10. Une réponse rédigée peut-elle compter dans la note ? | Non (D7) | La note ne compte que les points corrigés automatiquement ; les autres s'affichent à part, « à comparer au corrigé » |
 | Q11. Un bouton « Vérifier » par question ou un seul ? | Un seul, « Vérifier ma copie » (D4, D8) | La copie reste rendue d'un seul envoi, comme aujourd'hui |
 | Q12. « Quelle propriété utiliser ? » propose 3 propriétés pour 4 situations : la propriété de Thalès sert deux fois. Est-ce une association ? | Non | Une association est un à un. Cet exercice s'écrit en 4 questions « choix dans une liste » qui ont les mêmes propositions. La liste de mots du vocabulaire aussi |
-| Q13. Un exercice peut-il n'avoir que des réponses rédigées ou du travail sur le cahier ? | Non, par défaut | Sans question corrigée automatiquement, il n'y a ni note, ni appréciation, ni maîtrise : un tel exercice ne peut pas être publié (PRD, à confirmer) |
+| Q13. Un exercice peut-il n'avoir que des réponses rédigées ou du travail sur le cahier ? | Non, par défaut | Sans question corrigée automatiquement, il n'y a ni note, ni appréciation, ni maîtrise : un tel exercice ne peut pas être publié (décision du porteur, question 6) |
 | Q14. « Vérifier ma copie » laisse-t-il croire qu'on peut corriger ses réponses après ? | Risque relevé | La copie est rendue d'un seul envoi, comme aujourd'hui. Avant l'envoi, la feuille dit qu'on ne pourra plus changer ses réponses ; l'UDR fixe la phrase |
 | Fait vérifié : un exercice publié peut-il changer de bonnes réponses après des copies ? | Non : ses questions se verrouillent dès la première copie, et un réimport crée un nouvel exercice en brouillon | La correction d'une ancienne copie montre toujours ce qui a servi à la noter |
 | Fait vérifié : une réponse tapée est bornée à 200 caractères | Trop court pour un paragraphe de 50 mots | La réponse rédigée a sa propre borne (PRD) |
@@ -138,19 +138,14 @@ Révélés par le grill :
 - l'enseignant ouvre la copie d'un élève : il lit le texte rédigé tel quel, jamais interprété comme du HTML ;
 - la 3e copie vérifiée d'affilée : plus de « Recommencer », l'heure à laquelle il revient.
 
-## Questions encore ouvertes
+## Questions tranchées
 
-Le PRD propose une réponse pour chacune ; le porteur tranche.
+Le porteur accepte les 7 propositions le 2026-10-28 :
 
-1. **Le type des deux exercices.** « Interrogation » et « Devoir » sont-ils seulement des titres, ou les deux types existants
-   (fixation et évaluation) ? Proposition : Interrogation en fixation, Devoir en évaluation, sans type nouveau.
-2. **Les deux autres exercices de toute la leçon.** L'import en exige 4. Proposition : la règle ne change pas ; l'équipe écrit
-   Interrogation, Devoir et deux autres.
-3. **La grille de vérification** : gardée dans la copie, ou cochée à l'écran sans être enregistrée ? Proposition : non
-   enregistrée, comme la maquette.
-4. **Le choix en pastilles** (« convergente / divergente ») : un affichage à part, ou les choix tels qu'ils sont aujourd'hui ?
-   Proposition : les choix d'aujourd'hui ; la mise en ligne est une question de l'UDR.
-5. **Un devoir « noté sur 20 »** : faut-il que ses points fassent 20 au total ? Proposition : non, la note se ramène sur 20.
-6. **Un exercice sans question corrigée automatiquement** : refusé à la publication (Q13) ?
-7. **L'image du corrigé** d'un travail sur le cahier (la construction des lentilles). Proposition : un corrigé en texte dans ce
-   chantier ; l'image plus tard, car un nouveau téléversement demande d'abord sa menace écrite.
+1. **Le type des deux exercices** : Interrogation au type fixation, Devoir au type évaluation, sans type nouveau.
+2. **Les 4 exercices de toute la leçon** : la règle d'import ne change pas ; Interrogation et Devoir en sont deux.
+3. **La grille de vérification** : cochée à l'écran, jamais enregistrée.
+4. **Les choix courts** : les choix d'aujourd'hui ; leur mise en ligne relève de l'UDR.
+5. **Un devoir « noté sur 20 »** : ses points n'ont pas à faire 20 ; la note se ramène sur 20.
+6. **Un exercice sans question corrigée automatiquement** : refusé à la publication.
+7. **L'image du corrigé** : un corrigé en texte dans ce chantier ; l'image plus tard, après sa menace écrite.

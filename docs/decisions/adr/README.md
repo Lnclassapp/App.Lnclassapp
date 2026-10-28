@@ -124,6 +124,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0112](./0112-copie-a-rendre.md) | Copie à rendre | Accepté | 2026-10-28 | L'élève répond une question à la fois, sans voir le sujet ni revenir sur une réponse ; un exercice sur feuille demande de tout voir, de tout remplir, puis de rendre. |
 | [0113](./0113-exercice-de-lecon-avec-sujet-et-notion-sans-page.md) | Exercice de leçon avec sujet, notion sans page | Accepté | 2026-10-28 | Les exercices vivent sous des pages de notion que la fiche de révision rend inutiles ; il faut des exercices sur toute la leçon, un sujet commun, et garder la notion pour les lacunes. |
 | [0114](./0114-budget-du-js-commun-a-61-ko.md) | Budget du JavaScript commun relevé à 61 Ko gzip | Accepté — *amende [0051](./0051-navigateurs-supportes-et-budget-de-poids.md) (plafond du JS commun)* | 2026-10-28 | La fiche de révision (Lot A de refonte-page-lecon) fait dépasser le point d'entrée commun de 22 octets, même chargée à la demande ; le plafond passe à 61 Ko. |
+| [0115](./0115-correction-complete-note-en-points-et-types-de-questions.md) | Correction complète, note en points, choix dans une liste, réponse rédigée, cahier, pause | Accepté | 2026-10-28 | L'élève ne voit jamais la bonne réponse, chaque question vaut 1 point et la feuille ne sait pas poser les questions d'un devoir de 3e |
 <!-- index:end -->
 
 ---
