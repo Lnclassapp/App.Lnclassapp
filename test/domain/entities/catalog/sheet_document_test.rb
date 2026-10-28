@@ -209,6 +209,41 @@ module Entities
         assert_empty errors_of(with_block(page: 0, section: 1, position: 0) { it["params"] = { "ok" => true, "n" => 1.5, "s" => "texte" } })
       end
 
+      # Surligneur d'arguments : `text_n` porte des passages `{T}…{/T}` (T, R, A, E, C). Tout autre accolade est refusée à l'import.
+      def highlighter_with(params) = with_block(page: 2, section: 1, position: 3) { it["params"] = params }
+
+      test "le surligneur d'arguments accepte des passages balisés et refuse toute accolade restante" do
+        assert_equal "argument_highlighter", reference.dig("pages", 2, "sections", 1, "blocks", 3, "kind")
+
+        assert_empty errors_of(highlighter_with({ "text_1" => "{T}ok{/T} puis {A}un argument{/A}, {C}donc{/C} {E}par exemple{/E} {R}non{/R}." }))
+        assert_empty errors_of(highlighter_with({ "text_1" => "sans balise" }))
+
+        [ "{T}ok{/T} {A}non fermé", "{T}ok{/T} }", "{X}inconnu{/X}", "{T}croisé {A}x{/T}{/A}", "{T}{T}double{/T}{/T}" ].each do |text|
+          refused = errors_of(highlighter_with({ "text_2" => text }))
+          assert_equal [ :invalid_value ], refused.map(&:reason), text
+          assert_equal [ "params.text_2" ], refused.map(&:detail), text
+        end
+      end
+
+      test "le surligneur d'arguments refuse un text_n qui n'est pas une chaîne" do
+        [ 42, true, 1.5 ].each do |value|
+          refused = errors_of(highlighter_with({ "text_2" => value }))
+          assert_equal [ :wrong_type ], refused.map(&:reason), value.inspect
+          assert_equal [ "params.text_2" ], refused.map(&:detail), value.inspect
+        end
+      end
+
+      test "un text_n tableau ou objet, ou des réglages qui ne sont pas un objet, ne sont refusés qu'une fois" do
+        assert_equal [ :wrong_type ], reasons(highlighter_with({ "text_1" => [ "{T}" ] }))
+        assert_equal [ :wrong_type ], reasons(highlighter_with({ "text_1" => { "a" => 1 } }))
+        assert_equal [ :wrong_type ], reasons(highlighter_with("{T}"))
+      end
+
+      test "la grammaire du surligneur reste propre à ce kind" do
+        assert_empty errors_of(with_block(page: 0, section: 1, position: 0) { it["params"] = { "text_1" => 42, "autre" => "{ accolade }" } })
+        assert_empty errors_of(highlighter_with({ "autre" => "{ accolade }", "tableau" => "x" }))
+      end
+
       test "les champs facultatifs peuvent manquer" do
         document = reference
         document["pages"][0]["header"] = { "title" => "Titre seul" }

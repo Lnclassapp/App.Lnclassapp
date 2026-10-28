@@ -8,7 +8,7 @@ problematique: Les maquettes des fiches de cours (Seyès, Kalam, Source Serif 4,
 
 | | |
 |---|---|
-| **Statut** | Accepté — exception à l'UDR-0136 accordée par Touré le 2026-10-27 pour le test, confirmée par le porteur le 2026-10-28 ; nom à l'écran tranché par l'UDR-0139 (§ 4.1) ; téléphone en attente du porteur, sur captures (§ 4.2) |
+| **Statut** | Accepté — exception à l'UDR-0136 accordée par Touré le 2026-10-27 pour le test, confirmée par le porteur le 2026-10-28 ; nom à l'écran tranché par l'UDR-0139 (§ 4.1) ; téléphone confirmé par le porteur le 2026-10-28, sur captures (§ 4.2) |
 | **Date** | 2026-10-27 |
 | **Chantier** | `docs/chantiers/contenu-en-blocs` (#318) |
 | **ADR lié** | ADR-0110 |
@@ -45,10 +45,10 @@ Le reste de l'application suit l'UDR-0136 : palette froide, une seule police (DM
 
 Les valeurs exactes de chaque composant se lisent dans le gabarit `<x-dc>` des maquettes, pas dans des captures.
 
-## 4. En attente du porteur (#318)
+## 4. Tranché par le porteur (#318)
 
 1. **Nom à l'écran** — tranché le 2026-10-28 : « Fiche de révision » ([UDR-0139](0139-page-de-la-lecon-fiche-de-revision-et-prepare-interros.md)), à la place de la proposition « Fiche de cours ».
-2. **Téléphone** — retenu par Touré pour le test de la phase 1 (2026-10-27), à confirmer par le porteur : le même design avec des pages fluides sous 1 000 px.
+2. **Téléphone** — retenu par Touré pour le test de la phase 1 (2026-10-27), confirmé par le porteur le 2026-10-28 sur captures de la fiche Thalès à 390 px : le même design avec des pages fluides sous 1 000 px.
    - On garde les couleurs, les polices et le rythme Seyès de 8 et 32 px.
    - La hauteur A4 disparaît, et les marges intérieures passent à 16 px.
    - Les figures SVG se redimensionnent, et leurs points se déplacent au doigt (zone de toucher ≥ 44 px).
