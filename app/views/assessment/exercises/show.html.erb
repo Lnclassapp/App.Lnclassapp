@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercises/show — le sujet d'un exercice : la feuille telle qu'on la distribuerait en classe (AS-02) %>
 <%# Rôle : énoncé et questions numérotées, rien à remplir ; « Faire l'exercice » pour l'élève, bascules d'assignation pour l'enseignant, statut et transitions pour l'équipe (plus de « Modifier » : l'exercice se réimporte, ADR-0113 §4.6) %>
-<%# ADR  : 0028, 0054, 0072, 0091 §4.4, 0112, 0113 · UDR : 0006, 0007, 0021, 0069, 0138 §3.1 · aucun cache : le HTML dépend du rôle (sécurité n° 29) · Stimulus : math %>
+<%# ADR  : 0028, 0054, 0072, 0091 §4.4, 0112, 0113, 0115 · UDR : 0006, 0007, 0021, 0069, 0138 §3.1 · aucun cache : le HTML dépend du rôle (sécurité n° 29) · Stimulus : math %>
 <% exercise = @detail.exercise %>
 <% essential = @detail.essential %>
 <% course = @detail.course %>
@@ -78,16 +78,20 @@
       <% if @progress.started_session_public_id %>
         <%= ui_button t(".resume"), href: exercise_session_path(@progress.started_session_public_id), variant: :brand, size: :lg,
                       full: true, icon_end: "arrow-right" %>
-        <%= form_with url: exercise_sessions_path(exercise.public_id), method: :post, id: "restart-exercise-form" do %>
-          <%= hidden_field_tag :restart, true, id: nil %>
-          <%= ui_button t(".restart"), type: :submit, variant: :secondary, size: :lg, full: true %>
+        <% unless @resume_at %>
+          <%= form_with url: exercise_sessions_path(exercise.public_id), method: :post, id: "restart-exercise-form" do %>
+            <%= hidden_field_tag :restart, true, id: nil %>
+            <%= ui_button t(".restart"), type: :submit, variant: :secondary, size: :lg, full: true %>
+          <% end %>
         <% end %>
       <% else %>
-        <%= form_with url: exercise_sessions_path(exercise.public_id), method: :post, id: "start-exercise-form" do %>
-          <% if @progress.completed_count.positive? %>
-            <%= ui_button t(".redo"), type: :submit, variant: :brand, size: :lg, full: true, icon: "arrow-path" %>
-          <% else %>
-            <%= ui_button t(".start"), type: :submit, variant: :brand, size: :lg, full: true, icon_end: "arrow-right" %>
+        <% unless @resume_at %>
+          <%= form_with url: exercise_sessions_path(exercise.public_id), method: :post, id: "start-exercise-form" do %>
+            <% if @progress.completed_count.positive? %>
+              <%= ui_button t(".redo"), type: :submit, variant: :brand, size: :lg, full: true, icon: "arrow-path" %>
+            <% else %>
+              <%= ui_button t(".start"), type: :submit, variant: :brand, size: :lg, full: true, icon_end: "arrow-right" %>
+            <% end %>
           <% end %>
         <% end %>
         <% if @progress.best_score_percent %>
@@ -95,6 +99,10 @@
             <%= t(".best", grade: grading.grade_on_20(@progress.best_score_percent)) %>
           </p>
         <% end %>
+      <% end %>
+      <%# ADR-0115 : la pause dit l'heure de reprise, sans bouton qu'on ne peut pas presser. %>
+      <% if @resume_at %>
+        <p id="exercise_paused" class="text-center text-sm text-mute"><%= t(".paused", time: l(@resume_at, format: :hour_minute)) %></p>
       <% end %>
     </footer>
   <% end %>

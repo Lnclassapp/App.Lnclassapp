@@ -43,6 +43,11 @@ module UseCases
           @rows.last
         end
 
+        def recent_completions(student_id:, exercise_id:)
+          @rows.select { it.student_id == student_id && it.exercise_id == exercise_id && it.status == "completed" }
+               .filter_map(&:completed_at).sort.reverse.first(3)
+        end
+
         def abandon(id:, at:)
           index = @rows.index { it.id == id }
           @rows[index] = @rows[index].with(status: "abandoned")
@@ -114,13 +119,13 @@ module UseCases
       end
 
       def start(actor: STUDENT, public_id: "ExErCiCe000040", restart: false, exercises: [ exercise ], sessions: [], gaps: [],
-                membership: nil, assignments: [])
+                membership: nil, assignments: [], now: NOW)
         @sessions = FakeSessions.new(*sessions)
         @transaction = FakeTransaction.new
         StartExerciseSession.new(
           exercises: FakeExercises.new(*exercises), sessions: @sessions, gaps: FakeGaps.new(*gaps),
           memberships: FakeMemberships.new(membership), assignments: FakeAssignments.new(*assignments),
-          policy: Policies::Assessment::StartSessionPolicy.new, transaction: @transaction, clock: Clock.new(NOW)
+          policy: Policies::Assessment::StartSessionPolicy.new, transaction: @transaction, clock: Clock.new(now)
         ).call(actor:, exercise_public_id: public_id, restart:)
       end
 
@@ -204,6 +209,59 @@ module UseCases
 
       test "exercice inconnu : 404" do
         assert_equal :not_found, start(public_id: "inconnu").code
+      end
+
+      def finished(id, at, status: "completed", kind: "standard")
+        stored_session(id:, status:).with(kind:, completed_at: at)
+      end
+
+      # CA-29 : 3 copies à 10 h 00, 10 h 10, 10 h 20 ; la reprise est à 10 h 50.
+      def streak = [ finished(1, NOW), finished(2, NOW + 600), finished(3, NOW + 1200) ]
+
+      test "CA-29 : en pause, aucune copie n'est créée et l'heure de reprise est rendue" do
+        result = start(sessions: streak, now: NOW + 49 * 60)
+
+        assert_equal :conflict, result.code
+        assert_equal({ base: [ :paused ], resume_at: NOW + 50 * 60 }, result.errors)
+        assert_equal 3, @sessions.rows.size
+      end
+
+      test "CA-29 : la pause refuse aussi Recommencer, sans abandonner la copie ouverte" do
+        open = stored_session(id: 9)
+        result = start(sessions: streak + [ open ], restart: true, now: NOW + 49 * 60)
+
+        assert_equal :conflict, result.code
+        assert_equal "started", @sessions.rows.last.status
+      end
+
+      test "CA-29 : reprendre la copie ouverte reste permis pendant la pause" do
+        open = stored_session(id: 9)
+
+        assert_equal open, start(sessions: streak + [ open ], now: NOW + 49 * 60).value
+      end
+
+      test "CA-30 : à l'heure de reprise une copie s'ouvre" do
+        assert start(sessions: streak, now: NOW + 50 * 60).success?
+      end
+
+      test "CA-31 : 3 copies non d'affilée, pas de pause" do
+        rows = [ finished(1, NOW), finished(2, NOW + 2400), finished(3, NOW + 3000) ]
+
+        assert start(sessions: rows, now: NOW + 3300).success?
+      end
+
+      test "CA-32 : une copie abandonnée ne compte pas" do
+        rows = [ finished(1, NOW), finished(2, NOW + 600), finished(3, NOW + 900, status: "abandoned") ]
+
+        assert start(sessions: rows, now: NOW + 960).success?
+      end
+
+      test "CA-33 : toutes les sortes comptent, mais seulement pour cet exercice" do
+        rows = [ finished(1, NOW, kind: "standard"), finished(2, NOW + 600, kind: "remediation"), finished(3, NOW + 1200, kind: "assignment") ]
+
+        assert_equal :conflict, start(sessions: rows, now: NOW + 1300).code
+        other = [ exercise, exercise(public_id: "ExErCiCe000041", id: 41) ]
+        assert start(public_id: "ExErCiCe000041", exercises: other, sessions: rows, now: NOW + 1300).success?
       end
 
       test "un enseignant ou l'équipe ne démarre pas de session : 403, rien n'est créé" do
