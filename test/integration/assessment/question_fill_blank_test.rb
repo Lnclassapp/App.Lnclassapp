@@ -65,32 +65,4 @@ class Assessment::QuestionFillBlankTest < ActionDispatch::IntegrationTest
     get exercise_session_result_path(@session.public_id)
     assert_select "#question_review_#{@question.id} [data-correct]", text: /Abidjan ; Babi/
   end
-
-  test "CA-13 : l'équipe crée un texte à trous ; sans `___`, il est refusé à sa place" do
-    essential = create_essential
-    sign_in_as create_team_member
-    question = ->(content) do
-      { exercise: { title: "Trous", exercise_type: "fixation", questions_attributes: {
-        "0" => { content:, question_type: "fill_blank", answers_attributes: { "0" => { content: "Abidjan", correct: "1" } } }
-      } } }
-    end
-
-    post teams_essential_exercises_path(essential.slug), params: question.("Sans blanc."), as: :turbo_stream
-    assert_response :unprocessable_entity
-    assert_select "[role=alert]", text: I18n.t("activemodel.errors.models.dtos/assessment/exercise_input.attributes.questions.blank_marker")
-
-    post teams_essential_exercises_path(essential.slug), params: question.("La capitale est ___ ."), as: :turbo_stream
-    assert_equal [ [ "fill_blank", [ [ "Abidjan", true ] ] ] ],
-                 Orm::Exercise.find_by!(title: "Trous").questions.map { [ it.question_type, it.answers.pluck(:content, :correct) ] }
-  end
-
-  test "le formulaire de l'équipe propose le type et son panneau, caché et désactivé tant qu'un autre type est choisi" do
-    sign_in_as create_team_member
-    get new_teams_essential_exercise_path(create_essential.slug)
-
-    assert_select "select[name*=question_type] option[value=fill_blank]"
-    assert_select "fieldset[data-kind=fill_blank][hidden][disabled]" do
-      assert_select "input[type=hidden][name*='[correct]'][value='1']"
-    end
-  end
 end

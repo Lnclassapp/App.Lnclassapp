@@ -395,8 +395,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # CA-E6 : la ligne dit où en est l'élève par la pastille « En cours » ; « Reprendre » rouvre toujours la dernière fiche lue
-  # (sans préchargement, qui la servirait sans l'ouvrir) ; une fiche de cours finie porte la coche verte.
+  # CA-E6 : la ligne dit où en est l'élève par la pastille « En cours » ; « Reprendre » rouvre la leçon, dont l'ouverture retient
+  # les lectures (sans préchargement, qui la servirait sans l'ouvrir) ; une fiche de cours finie porte la coche verte.
   test "CA-E6: the row carries « En cours » (last sheet read, no prefetch), or the green check once done" do
     student = create_student_for(@course)
     first = create_essential(course: @course, name: "La méiose")
@@ -405,7 +405,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     create_essential_read(student:, essential: second)
     get courses_path
-    assert_select "#course_#{@course.slug} a[href='#{course_essential_path(@course.slug, second.slug)}'][data-turbo-prefetch=false]",
+    assert_select "#course_#{@course.slug} a[href='#{course_path(@course.slug)}'][data-turbo-prefetch=false]",
                   text: including(tl("course_card.progress.started"))
     assert_select "#course_#{@course.slug} svg.text-success", 0
     assert_select "#course_#{@published.slug} a[href='#{course_path(@published.slug)}']" do
@@ -604,7 +604,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a[href='#{course_path(limits.slug)}']", text: including("Limites et continuité")
       assert_select "a[href='#{course_path(limits.slug)}']", text: /Progression DPFC/, count: 0
       assert_select "*", text: including(tl("show.essentials_title"))
-      assert_equal [ course_essential_path(limits.slug, first.slug), course_essential_path(limits.slug, second.slug) ],
+      assert_equal [ course_path(limits.slug, anchor: "notion-#{first.slug}"), course_path(limits.slug, anchor: "notion-#{second.slug}") ],
                    css_select("#course_#{limits.slug} ul a").map { it["href"] }
       assert_select "ul a", text: "Limites en l'infini"
       assert_select "*", text: including("Brouillon"), count: 0
@@ -774,7 +774,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a[role=menuitem][data-turbo-method=patch][href='#{publish_all_teams_course_path(@draft.slug)}']",
                     text: I18n.t("catalog.content_status.actions.publish_all")
       assert_select modal_link(edit_teams_course_path(@draft.slug)), text: tl("role_actions.edit")
-      assert_select modal_link(new_teams_course_essential_path(@draft.slug)), text: tl("role_actions.new_essential")
+      # CA-29, ADR-0113 §4.6 : plus de « Nouvelle notion » ni de « Nouvel exercice » ; la leçon se réimporte.
+      assert_select "a[href='/teams/courses/#{@draft.slug}/essentials/new']", 0
+      assert_select "[role=menu] a", text: /Nouvelle (fiche|notion)|Nouvel exercice/, count: 0
       assert_select modal_link(new_teams_import_path(kind: "essentials", course: @draft.slug)),
                     text: tl("role_actions.import_essentials")
     end
@@ -988,7 +990,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "li#lesson_#{@course.slug}" do
       assert_select "li[id^=lesson_essential_]", 5
       assert_select "li[id^=lesson_essential_][hidden]", 2
-      assert_select "li#lesson_essential_#{sheets.first.slug} a[href=?]", course_essential_path(@course.slug, sheets.first.slug)
+      assert_select "li#lesson_essential_#{sheets.first.slug} a[href=?]", course_path(@course.slug, anchor: "notion-#{sheets.first.slug}")
       assert_select "li#lesson_essential_#{sheets.second.slug}", text: including(tl("essential_row.review"))
       assert_select "li#lesson_essential_#{sheets.first.slug}", text: including(tl("essential_row.review")), count: 0
       assert_select "button", text: tl("course_card.more_essentials", count: 5)

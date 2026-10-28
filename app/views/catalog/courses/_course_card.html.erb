@@ -6,10 +6,10 @@
 <% teacher = !student && current_actor.teacher? %>
 <%# UDR-0013, amendement du 2026-10-05 : « Publié » est l'état normal, l'équipe ne voit que Brouillon ou Archivé. %>
 <% status = (course.status if show_status && course.status != "published") %>
-<%# UDR-0085 §3.3 : « Reprendre » rouvre la dernière fiche lue ; sinon la page du cours. Ouvrir une
-    fiche la retient (ADR-0090) : pas de préchargement au survol, qui la servirait sans l'ouvrir. %>
+<%# ADR-0113 §4.3 : la notion n'a plus de page ; « Reprendre » rouvre la leçon, dont l'ouverture retient les lectures (pas de
+    préchargement au survol, qui la servirait sans l'ouvrir). %>
 <% resume = student && course.progress == :started %>
-<% href = resume ? course_essential_path(course.slug, course.resume_essential_slug) : course_path(course.slug) %>
+<% href = course_path(course.slug) %>
 <% subtitle = if course.subtitle.present?
                 # Une année scolaire (« 2026-2027 ») ne se coupe pas à son tiret.
                 safe_join(course.subtitle.split(/(\d{4}-\d{4})/).map { it.match?(/\A\d{4}-\d{4}\z/) ? tag.span(it, class: "whitespace-nowrap") : it })

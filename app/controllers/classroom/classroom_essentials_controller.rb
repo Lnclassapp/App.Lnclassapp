@@ -1,7 +1,6 @@
 # 🌐 DELIVERY · Classroom::ClassroomEssentialsController
-# Rôle : une fiche essentielle vue depuis une classe (CL-12, AS-20) : élèves à revoir et fiche levée (AS-17), puis ses exercices
-#        publiés, chacun avec sa bascule d'assignation ; l'enseignant sans jours de séance y ouvre la modale des jours
-# ADR  : 0026, 0028, 0048, 0072, 0088, 0101 · UDR : 0006, 0028, 0029, 0062, 0121
+# Rôle : l'ancienne adresse d'une notion vue depuis une classe (CA-12) : 301 vers la leçon dans cette classe, ancrée sur la notion ; mêmes refus qu'avant, rien de révélé
+# ADR  : 0028, 0048, 0088, 0113 (§4) · UDR : 0139 (§3.7)
 module Classroom
   class ClassroomEssentialsController < AuthenticatedController
     # Comme la page de la classe (D4) : l'élève lit ses exercices sur ses propres pages.
@@ -13,32 +12,19 @@ module Classroom
       return render_not_found if @classroom.nil? || @classroom.status == "archived"
 
       render_result Policies::Classroom::ReadClassroomPolicy.new.call(actor: current_actor, classroom: @classroom),
-                    success: ->(access) { load_essential(access) }
+                    success: ->(_access) { redirect_to_lesson }
     end
 
     private
 
-    def load_essential(access)
-      teacher_id = current_actor.user_id if current_actor.teacher?
-      @essential = Queries::Classroom::ClassroomEssentialQuery.new.call(classroom_public_id: @classroom.public_id,
-                                                                        course_slug: params[:course_slug],
-                                                                        essential_slug: params[:essential_slug], teacher_id:)
-      return render_not_found if @essential.nil?
+    # Une notion publiée d'une leçon publiée, lue sous sa leçon : sinon elle n'existe pas à cette adresse.
+    def redirect_to_lesson
+      slug = Queries::Catalog::PublishedEssentialQuery.new.slug(course_slug: params[:course_slug],
+                                                                essential_slug: params[:essential_slug])
+      return render_not_found if slug.nil?
 
-      @gaps = gaps(access, teacher_id)
-    end
-
-    # UDR-0121 §3.2 : qui est à revoir, qui a levé la fiche pendant l'année de la classe (ADR-0101 §4.4). Le bloc ne vaut que
-    # pour les cours que la page de la classe affiche (comme ClassroomsController#gaps) : hors de ce périmètre, il n'y en a pas.
-    def gaps(access, teacher_id)
-      shown = Queries::Classroom::ClassroomOverviewQuery.new.shown_course?(public_id: @classroom.public_id,
-                                                                          course_slug: @essential.course_slug, teacher_id:)
-      return unless shown
-
-      Queries::Assessment::ClassroomGapsQuery.new.detail(classroom_public_id: @classroom.public_id,
-                                                         course_slug: @essential.course_slug,
-                                                         essential_slug: @essential.essential.slug,
-                                                         school_year: @classroom.school_year, show_roster: access.show_roster)
+      redirect_to classroom_course_path(@classroom.public_id, params[:course_slug], anchor: "notion-#{slug}"),
+                  status: :moved_permanently
     end
   end
 end

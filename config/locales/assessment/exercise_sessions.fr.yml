@@ -43,11 +43,6 @@ fr:
         keep_going: "Continuer ma copie"
         offline: "Copie non envoyée : vérifie ta connexion. Tes réponses sont gardées."
         abandoned: "Cette session a été remplacée par une nouvelle. Reprends l'exercice depuis sa page."
-      progress_bar:
-        percent: "%{percent} %"
-        label: "Progression de la session"
-        counter_label: "Question "
-        counter: "%{number}/%{total}"
       kinds:
         fill_blank:
           legend: "Complète la phrase."
@@ -71,30 +66,9 @@ fr:
           linked: ", relié à %{x}"
           choose: "Choisis…"
           with: "relié à"
-      quit_dialog:
-        trigger: "Quitter la session"
-        title: "Quitter la séance ?"
-        resume: "Ta progression est gardée. Tu pourras reprendre à la question %{number}."
-        done: "Ta séance est terminée : ton résultat t'attend."
-        continue: "Continuer l'exercice"
-        quit: "Quitter"
       question_card:
-        number: "Question %{number} sur %{total}"
         # Plusieurs réponses seulement : les boutons radio portent déjà la consigne d'une réponse unique (UDR-0022, 2026-10-02).
         hint: "Coche %{count} propositions."
-        submit: "Valider"
-      feedback_card:
-        verdict:
-          success: "Bonne réponse"
-          error: "Mauvaise réponse"
-        encouragement:
-          success: "Bravo, continue comme ça !"
-          error: "Ce n'est pas grave, continue."
-        number: "Question %{number} sur %{total}"
-        selected: "Ton choix"
-        explanation: "Explication"
-        next: "Question suivante"
-        result: "Voir mon résultat"
     exercise_copies:
       create:
         archived: "Cet exercice a été retiré."

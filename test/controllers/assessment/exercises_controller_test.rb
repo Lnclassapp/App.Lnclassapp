@@ -45,7 +45,7 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
       assert_select "input[name=restart]", 0
       assert_select "button[type=submit]", text: I18n.t("#{scope}.show.start")
     end
-    assert_select "a[href='#{edit_teams_exercise_path(@exercise.public_id)}']", 0
+    assert_select "a[href='/teams/exercises/#{@exercise.public_id}/edit']", 0
     assert_select "#content_status_exercise_#{@exercise.public_id}", 0
   end
 
@@ -90,7 +90,7 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#exercise_actions", 0
     assert_select "#exercise_context", text: "La méiose"
     assert_select "form[action='#{exercise_sessions_path(@exercise.public_id)}']", 0
-    assert_select "a[href='#{edit_teams_exercise_path(@exercise.public_id)}']", 0
+    assert_select "a[href='/teams/exercises/#{@exercise.public_id}/edit']", 0
   end
 
   test "la meilleure note est verte dès « 14/20 » affiché : 68 % oui, 67 % non" do
@@ -202,10 +202,9 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#content_status_exercise_#{exercise.public_id} form", 0
     assert_select "[role=menu] #content_transitions_exercise_#{exercise.public_id} a[role=menuitem][data-turbo-method=patch]" \
                   "[href='#{publish_teams_exercise_path(exercise.public_id)}']"
-    # UDR-0042: « Modifier » lives in the ⋮ menu of the exercise, even alone.
+    # CA-29, ADR-0113 §4.6: the ⋮ menu carries the transitions only; « Modifier » is gone, the lesson is imported again.
     assert_select "button[aria-haspopup=menu][aria-label=?]", I18n.t("#{scope}.show.actions", name: exercise.title)
-    assert_select "[role=menu] a[role=menuitem][href='#{edit_teams_exercise_path(exercise.public_id)}'][data-turbo-frame=modal]",
-                  text: I18n.t("#{scope}.show.edit")
+    assert_select "[role=menu] a[role=menuitem][href='/teams/exercises/#{exercise.public_id}/edit']", 0
     assert_select "#exercise_questions [data-correct]", text: /#{correct_mark}/
     assert_select "#exercise_actions", 0
     assert_select "#exercise_context", text: "La méiose"

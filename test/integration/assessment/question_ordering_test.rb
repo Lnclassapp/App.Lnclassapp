@@ -70,23 +70,6 @@ class Assessment::QuestionOrderingTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::QuestionAttempt.count
   end
 
-  test "CA-13 : l'équipe saisit trois étapes dans le bon ordre ; deux sont refusées" do
-    essential = create_essential
-    sign_in_as create_team_member
-    params = ->(steps) do
-      { exercise: { title: "Ordre", exercise_type: "fixation", questions_attributes: {
-        "0" => { content: "Range.", question_type: "ordering",
-                 answers_attributes: steps.each_with_index.to_h { |step, index| [ index.to_s, { content: step, correct: "1" } ] } }
-      } } }
-    end
-
-    post teams_essential_exercises_path(essential.slug), params: params.(%w[A B]), as: :turbo_stream
-    assert_response :unprocessable_entity
-
-    post teams_essential_exercises_path(essential.slug), params: params.(%w[A B C]), as: :turbo_stream
-    assert_equal %w[A B C], Orm::Exercise.find_by!(title: "Ordre").questions.sole.answers.order(:position).pluck(:content)
-  end
-
   test "aucun id de cette question n'apparaît dans la page, où que ce soit" do
     get exercise_session_path(@session.public_id)
 

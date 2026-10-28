@@ -1,5 +1,5 @@
 <%# 🌐 UI · assessment/exercises/show — le sujet d'un exercice : la feuille telle qu'on la distribuerait en classe (AS-02) %>
-<%# Rôle : énoncé et questions numérotées, rien à remplir ; « Faire l'exercice » pour l'élève, bascules d'assignation pour l'enseignant, statut pour l'équipe %>
+<%# Rôle : énoncé et questions numérotées, rien à remplir ; « Faire l'exercice » pour l'élève, bascules d'assignation pour l'enseignant, statut et transitions pour l'équipe (plus de « Modifier » : l'exercice se réimporte, ADR-0113 §4.6) %>
 <%# ADR  : 0028, 0054, 0072, 0091 §4.4, 0112, 0113 · UDR : 0006, 0007, 0021, 0069, 0138 §3.1 · aucun cache : le HTML dépend du rôle (sécurité n° 29) · Stimulus : math %>
 <% exercise = @detail.exercise %>
 <% essential = @detail.essential %>
@@ -22,7 +22,6 @@
       <div class="flex flex-wrap items-center gap-2">
         <%= content_status_panel(record: @status_record) %>
         <%= ui_dropdown label: t(".actions", name: exercise.title), id: "exercise-actions-menu", fixed: true do %>
-          <%= ui_dropdown_item t(".edit"), href: edit_teams_exercise_path(exercise.public_id), icon: "pencil-square", frame: "modal" %>
           <%= content_transition_items(record: @status_record) %>
         <% end %>
       </div>
