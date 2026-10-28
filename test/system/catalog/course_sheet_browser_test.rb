@@ -171,9 +171,17 @@ class Catalog::CourseSheetBrowserTest < ApplicationSystemTestCase
     assert_equal 1, ratios.uniq.size, ratios.inspect
     assert_equal figure("status_locked"), role("status").text
 
+    drag("A", x: 110, y: 200)
+    assert_not_in_delta 70, find("#{FIGURE} circle[data-hit='A']")[:cx].to_f, 1
+
     click_on t("figure.reset")
     assert_equal figure("config_triangle"), role("config").text
     assert_equal %w[0,45 0,45 0,45], ratios
+    { "A" => [ 70, 165 ], "B" => [ 360, 55 ], "C" => [ 345, 285 ] }.each do |name, (x, y)|
+      hit = find("#{FIGURE} circle[data-hit='#{name}']")
+      assert_in_delta x, hit[:cx].to_f, 1, "#{name} cx"
+      assert_in_delta y, hit[:cy].to_f, 1, "#{name} cy"
+    end
 
     click_on figure("lock_free")
     drag("N", x: 250, y: 200)
@@ -186,8 +194,11 @@ class Catalog::CourseSheetBrowserTest < ApplicationSystemTestCase
     assert_button figure("lock_free")
 
     within(find(".sheet-card", text: "Exercice 4")) do
-      find("input[data-field-id='e4an']").set("3,6")
+      find("input[data-field-id='e4an']").set("3,62")
       find("input[data-field-id='e4mn']").set("4.2")
+      click_on t("exercise.check")
+      assert_equal t("exercise.wrong"), find("small[data-field-id='e4an']", visible: :all).text
+      find("input[data-field-id='e4an']").set("3,6")
       click_on t("exercise.check")
       assert_text t("exercise.all_correct")
     end

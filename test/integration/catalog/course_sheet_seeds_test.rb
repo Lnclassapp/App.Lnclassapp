@@ -12,6 +12,7 @@ class Catalog::CourseSheetSeedsTest < ActionDispatch::IntegrationTest
     level = create_level(name: "3ème")
     @course = create_course(name: LESSON, level:)
     @lens_course = create_course(name: "Les lentilles", level:, material: create_material(name: "Physique-Chimie"))
+    @argument_course = create_course(name: "Le texte argumentatif", level:, material: create_material(name: "Français"))
     @document = JSON.parse(PATH.read)
   end
 
@@ -67,24 +68,46 @@ class Catalog::CourseSheetSeedsTest < ActionDispatch::IntegrationTest
 
     total = Rails.root.glob("db/seeds/data/course_sheets/*.json").size
 
-    assert_includes run_seed, "2 fiche(s) de cours importée(s) sur #{total}"
-    assert_equal [ @course.id, @lens_course.id ].sort, Orm::CourseSheet.pluck(:course_id).sort
+    assert_includes run_seed, "3 fiche(s) de cours importée(s) sur #{total}"
+    assert_equal [ @course.id, @lens_course.id, @argument_course.id ].sort, Orm::CourseSheet.pluck(:course_id).sort
     stamps = Orm::CourseSheet.order(:id).pluck(:updated_at)
 
     assert_includes run_seed, "0 fiche(s) de cours importée(s) sur #{total}"
     assert_equal stamps, Orm::CourseSheet.order(:id).pluck(:updated_at)
   end
 
-  test "the demo seed says so, and does not fail, when the lesson is missing" do
+  test "in a PR environment the demo seed raises when the lesson is missing" do
     create_team_member(team_role: "content", second_factor: false, contact: "0700000000")
     @course.destroy!
-    @lens_course.destroy!
 
-    output = run_seed
+    error = assert_raises(RuntimeError) { run_seed }
+
+    assert_match(/leçon « proprietes-de-thales-dans-un-triangle » absente/, error.message)
+    assert_not Orm::CourseSheet.joins(:course).exists?(courses: { slug: "proprietes-de-thales-dans-un-triangle" })
+  end
+
+  test "in development the demo seed says so, and does not fail, when the lesson is missing" do
+    create_team_member(team_role: "content", second_factor: false, contact: "0700000000")
+    @course.destroy!
+
+    original = Rails.method(:env)
+    Rails.define_singleton_method(:env) { ActiveSupport::EnvironmentInquirer.new("development") }
+    output = begin
+      capture_io { load Rails.root.join("db/seeds/demo/fiches_de_cours.rb").to_s, true }.first
+    ensure
+      Rails.define_singleton_method(:env, original)
+    end
 
     assert_includes output, "leçon « proprietes-de-thales-dans-un-triangle » absente"
-    assert_includes output, "leçon « les-lentilles » absente"
-    assert_equal 0, Orm::CourseSheet.count
+    assert_equal [ @argument_course.id, @lens_course.id ].sort, Orm::CourseSheet.pluck(:course_id).sort
+  end
+
+  test "every seeded sheet targets the slug of a lesson of docs/contenus/lecons-traitees" do
+    slugs = Rails.root.glob("docs/contenus/lecons-traitees/*/*/*.json").map { JSON.parse(it.read)["courses"].first["name"].parameterize }
+
+    Rails.root.glob("db/seeds/data/course_sheets/*.json").each do |path|
+      assert_includes slugs, JSON.parse(path.read)["course"], "#{path.basename} cible une leçon absente de lecons-traitees"
+    end
   end
 
   test "the seed refuses to run outside development and the PR environments" do

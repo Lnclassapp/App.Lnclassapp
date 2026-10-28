@@ -51,6 +51,19 @@ class Catalog::CourseSheetImportTest < ActionDispatch::IntegrationTest
     assert_select "#import_errors code", text: "pages[0].sections[0].blocks[0].text"
   end
 
+  test "a teacher and a student are refused the course sheet import, no report is written" do
+    [ create_teacher, create_student ].each do |user|
+      sign_in_as user
+
+      assert_no_difference "Orm::ImportReport.count" do
+        post teams_imports_path, params: { import: { kind: "course_sheet", files: [ file(document) ] } }, as: :turbo_stream
+      end
+      assert_response :forbidden
+      sign_out
+    end
+    assert_equal 0, Orm::CourseSheet.count
+  end
+
   test "a teacher cannot reach the import" do
     sign_in_as create_teacher
 

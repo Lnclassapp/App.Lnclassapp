@@ -89,6 +89,7 @@ module UseCases
         assert_equal [ [ "pages[1].sections[0].blocks[1]", "invalid_value", [ 2, 1, 2, "unknown_glossary_key", "absent" ] ],
                        [ "pages[1].sections[0].blocks[2]", "invalid_value", [ 2, 1, 3, "duplicate_id", "a" ] ] ],
                      report.import_errors.map { [ it["path"], it["code"], it["params"].values_at("page", "section", "position", "reason", "detail") ] }
+        assert_equal 0, Orm::CourseSheet.count
       end
 
       test "an error outside the blocks is located by what it names: a page, the glossary, or the whole file" do
@@ -107,12 +108,24 @@ module UseCases
         report = run_import(doc)
 
         assert_equal [ "rejected", 0 ], [ report.status, Orm::CourseSheet.count ]
-        assert(report.import_errors.any? { it["path"].start_with?("pages[2]") })
+        assert_equal [ "pages[2].sections[0].blocks[#{doc['pages'][2]['sections'][0]['blocks'].size - 1}]" ],
+                     report.import_errors.map { it["path"][/\Apages\[2\]\.sections\[0\]\.blocks\[\d+\]/] }.compact.uniq
       end
 
       test "CA-2: a bad envelope (unknown theme, extra key) is refused as a whole by the schema" do
         assert_equal "rejected", run_import(document(theme: "rose")).status
         assert_equal "rejected", run_import(document("intrus" => 1)).status
+        assert_equal 0, Orm::CourseSheet.count
+      end
+
+      test "CA-2: a glossary error the schema lets through but the sheet document refuses is named by the glossary path" do
+        doc = document
+        doc["glossary"]["secantes"][0] = "   "
+        report = run_import(doc)
+
+        assert_equal [ 1, 0, 0, 1 ], report.values_at(:total_count, :imported_count, :skipped_count, :error_count)
+        assert_equal [ [ "glossary", "invalid_value", "blank", "glossary.secantes.title" ] ],
+                     report.import_errors.map { [ it["path"], it["code"], it["params"]["reason"], it["params"]["detail"] ] }
         assert_equal 0, Orm::CourseSheet.count
       end
 

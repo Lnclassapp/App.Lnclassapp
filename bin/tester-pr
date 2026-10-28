@@ -70,7 +70,7 @@ main() {
   fi
   # Idempotent: the fictitious accounts exist whatever the database held, and the TOTP code of the team prints.
   bin/rails db:seed
-  [ "$demo" = 0 ] || { bin/rails runner db/seeds/demo/trois_etablissements.rb && bin/rails runner db/seeds/demo/lecons_completes.rb; }
+  [ "$demo" = 0 ] || { bin/rails runner db/seeds/demo/trois_etablissements.rb && bin/rails runner db/seeds/demo/lecons_completes.rb && bin/rails runner db/seeds/demo/fiches_de_cours.rb; }
   [ "$activity" = 0 ] || bin/rails runner db/seeds/demo/saint_michel.rb
 
   local port="${PORT:-3000}"

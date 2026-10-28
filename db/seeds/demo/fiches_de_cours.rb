@@ -2,7 +2,7 @@
 # la leçon « Propriétés de Thalès dans un triangle » (3ème) ait sa fiche dans un environnement de PR et en développement.
 # Importées par la vraie chaîne (StartImport → RunImport → Catalog::ImportCourseSheetJob) avec le compte équipe fictif
 # 0700000000, comme lecons_completes.rb, après lequel il est joué : la leçon n'existe que si lecons_completes l'a semée
-# (il est réservé aux environnements de PR). Une leçon absente est dite et laissée ; rejoué, il n'importe que les fiches absentes.
+# (il est réservé aux environnements de PR). Une leçon absente est dite et laissée en développement, et lève dans un environnement de PR ; rejoué, il n'importe que les fiches absentes.
 unless Rails.env.development? || PrEnvironment.active?
   raise "db/seeds/demo/fiches_de_cours.rb est réservé au développement et aux environnements de PR"
 end
@@ -23,7 +23,10 @@ else
     document = JSON.parse(path.read)
     course = Orm::Course.find_by(slug: document["course"])
     if course.nil?
-      log.call("leçon « #{document['course']} » absente : fiche #{path.basename} non importée (elle est semée par demo/lecons_completes, réservé aux environnements de PR)")
+      message = "leçon « #{document['course']} » absente : fiche #{path.basename} non importée (elle est semée par demo/lecons_completes, réservé aux environnements de PR)"
+      raise message if PrEnvironment.active?
+
+      log.call(message)
       next
     end
     next if Orm::CourseSheet.exists?(course_id: course.id)

@@ -88,8 +88,9 @@ export default class extends Controller {
     this.drag = event.currentTarget.dataset.point
     try {
       this.svgTarget.setPointerCapture(event.pointerId)
-    } catch {
-      // Pointeur déjà relâché : le glissement ne démarre pas.
+    } catch (error) {
+      // Pointeur déjà relâché (InvalidStateError, NotFoundError) : le glissement ne démarre pas. Toute autre erreur remonte.
+      if (!(error instanceof DOMException)) throw error
       this.drag = null
     }
   }
