@@ -824,3 +824,34 @@
     color: var(--sheet-primary);
   }
 }
+
+/* ---- Dans la page de la leçon (UDR-0139 §3.2) ------------------------------------------------------------------------------
+   `data-embedded` : la fiche vit sous le h2 « Fiche de révision », dans la colonne de la page, sans le fond fixe de l'écran seul,
+   sans hauteur de feuille A4 (la partie repliée ne doit pas laisser de papier vide). `.revision-fade` : le dégradé du papier vers
+   transparent, 64 px, posé sur le bas de la dernière page visible tant que la fiche est repliée. */
+
+.sheet-screen[data-embedded] {
+  gap: 16px;
+  padding: 24px 16px;
+  margin-inline: 0;
+  border-radius: var(--sheet-radius-panel);
+}
+
+.sheet-screen[data-embedded]::before {
+  display: none;
+}
+
+.sheet-screen[data-embedded] .sheet-page {
+  min-height: 0;
+}
+
+.sheet-screen .revision-fade {
+  position: relative; /* au-dessus de la page, dont le papier et le corps sont positionnés */
+  align-self: center;
+  width: var(--sheet-page-width);
+  max-width: 100%;
+  height: 64px;
+  margin-top: -80px; /* 64 px de dégradé + l'écart entre deux éléments de l'écran */
+  background: linear-gradient(to top, var(--sheet-paper), transparent);
+  pointer-events: none;
+}

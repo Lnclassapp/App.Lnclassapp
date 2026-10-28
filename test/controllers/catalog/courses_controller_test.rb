@@ -725,10 +725,12 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_header", text: including("Du gène à l'espèce")
     assert_select "#course_header", text: including("Tle D")
     assert_select "#course_header", text: including("SVT")
-    # UDR page de la leçon §3.1 : deux sections, plus de liste de notions ; le Lot 0 les montre à l'état vide.
+    # UDR page de la leçon §3.1 : deux sections, plus de liste de notions ; sans fiche cahier, la fiche de révision est le texte
+    # de la leçon puis celui de ses notions publiées (Lot A, UDR-0139 §3.2).
     assert_select "#course_essentials", 0
     assert_select "section#fiche-de-revision h2", text: tl("show.revision_title")
-    assert_select "section#fiche-de-revision", text: including(tl("show.revision_empty"))
+    assert_select "section#fiche-de-revision", text: including("ADN et gènes")
+    assert_select "section#fiche-de-revision h3", text: "La méiose"
     assert_select "section#prepare-interros[data-turbo-prefetch=false] h2", text: tl("show.prepare_title")
     assert_select "section#prepare-interros", text: including(tl("show.prepare_intro"))
     assert_select "section#prepare-interros", text: including(tl("show.exercises_empty"))
