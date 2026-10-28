@@ -1,0 +1,47 @@
+# Fiche de cours (contenu-en-blocs, chantier 318), Lot F : libellés des surligneurs (kinds/_argument_highlighter) et de la rédaction
+# (blocks/_writing). Fichier à part : course_sheets.fr.yml est partagé par les lots en parallèle ; les clés suivent les partials (lookup `.clé`).
+fr:
+  catalog:
+    course_sheets:
+      kinds:
+        argument_highlighter:
+          label: "Texte à analyser : allume un surligneur, puis clique sur un passage coloré"
+          group_label: "Surligneurs"
+          idle: "Allume un surligneur, puis clique sur un passage coloré."
+          all_on: "Tout surligner"
+          all_off: "Tout effacer"
+          empty: "Le texte à analyser n'est pas disponible."
+          categories:
+            thesis:
+              name: "Thèse"
+              why: "C'est l'opinion que l'auteur défend. Elle est annoncée au début et reformulée à la fin."
+            counter:
+              name: "Thèse adverse"
+              why: "C'est l'opinion contraire. L'auteur la cite pour mieux la réfuter ensuite."
+            argument:
+              name: "Arguments"
+              why: "C'est une raison qui justifie la thèse. Pose-toi la question : pourquoi l'auteur pense-t-il cela ?"
+            example:
+              name: "Exemples"
+              why: "C'est un fait précis et concret qui illustre l'argument et le rend plus solide."
+            connector:
+              name: "Connecteurs"
+              why: "Ce mot relie les idées et montre la logique du texte : opposition, ajout, conséquence…"
+      blocks:
+        writing:
+          label: "Ma rédaction"
+          placeholder: "Écris ici ton texte : ton avis, tes arguments, des exemples, une conclusion…"
+          checklist: "Ma liste de vérification"
+          found: "Connecteurs repérés :"
+          stats: "%{words} mots · %{paragraphs} paragraphe(s)"
+          blank_line: "Saute une ligne entre deux paragraphes."
+          done: "fait"
+          todo: "à faire"
+          checks:
+            opinion: "Mon avis est clair (selon moi, je pense…)"
+            paragraphs: "Au moins %{count} paragraphes"
+            connectors: "Au moins %{count} connecteurs différents"
+            example: "Au moins un exemple annoncé"
+            question: "Une question pour faire réagir le lecteur"
+            conclusion: "Une conclusion annoncée"
+            words: "Au moins %{count} mots"

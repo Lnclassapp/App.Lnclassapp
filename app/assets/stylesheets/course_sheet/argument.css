@@ -1,0 +1,462 @@
+/*
+  🌐 UI · course_sheet/argument.css — la fiche « Le texte argumentatif » : thème bordeaux au plus près de la maquette, surligneurs et rédaction.
+  Rôle : (1) les écarts du thème `burgundy` avec les composants communs de course_sheet.css (titres, encadrés, tableau, exercices, entraînement),
+         (2) kinds/_argument_highlighter (`.sheet-hl-*`), (3) blocks/_writing (`.sheet-writing-*`). Importé par course_sheet.css (UDR-0137) ;
+         uniquement des jetons --sheet-* et les teintes de la maquette. Sous 1 000 px, la page est fluide (UDR-0137 § 4) : les règles de
+         mise en page de bureau ne s'appliquent qu'au-dessus, les cibles tactiles font 44 px au moins dessous.
+  ADR  : 0110-fiche-de-cours-en-donnees-importees · source des valeurs : docs/design/fiches-cours/fiches/Fiche Texte argumentatif.dc.html
+*/
+
+/* ---- Thème bordeaux : jetons propres à la page (course_sheet.css pose les autres, dont --sheet-note*, vérifiés sur la maquette) -------------- */
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-page {
+  --sheet-ocre: oklch(0.55 0.12 75); /* règles, numéros de section, encadrés « méthode » et « entraînement » */
+  --sheet-ocre-ink: #2a1a00; /* texte sur l'ocre */
+  --sheet-blue: oklch(0.42 0.12 250); /* « Convaincre », les arguments */
+  --sheet-line: #d8cfc8;
+  --sheet-field-border: #d8cfc8;
+  --sheet-dashed: #d8cfc8;
+  --sheet-ink-secondary: #5a5054;
+  --sheet-muted: #6a6266;
+  --sheet-pending: #6a6266;
+  --sheet-seyes-major: rgb(110 110 190 / 0.24);
+  --sheet-seyes-minor: rgb(110 110 190 / 0.08);
+}
+
+/* ---- Titres : le titre et les règles en ocre, h2 en bordeaux avec un numéro ocre ------------------------------------------------------------ */
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-rule,
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-rule-thin {
+  background: var(--sheet-ocre);
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-h2 {
+  color: var(--sheet-primary);
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-h2-number {
+  color: var(--sheet-ocre);
+}
+
+@media (min-width: 1000px) {
+  .sheet-screen[data-sheet-theme="burgundy"] .sheet-h1 {
+    font-size: 58px;
+  }
+
+  .sheet-screen[data-sheet-theme="burgundy"] .sheet-h2 {
+    font-size: 28px;
+  }
+
+  .sheet-screen[data-sheet-theme="burgundy"] .sheet-section {
+    gap: 16px;
+  }
+
+  .sheet-screen[data-sheet-theme="burgundy"] .sheet-box[data-tone] {
+    gap: 10px;
+    padding: 22px 24px 16px;
+  }
+}
+
+/* ---- Encadrés : « à retenir » et « persuader » en bordeaux, « convaincre » en bleu, « méthode » en ocre ---------------------------------- */
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-box[data-tone="property"] {
+  border-color: var(--sheet-primary);
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-box[data-tone="property"] .sheet-box-label {
+  background: var(--sheet-primary);
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-box[data-tone="remember"] {
+  border-color: var(--sheet-blue);
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-box[data-tone="remember"] .sheet-box-label {
+  background: var(--sheet-blue);
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-box[data-tone="method"] {
+  border-color: var(--sheet-ocre);
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-box[data-tone="method"] .sheet-box-label {
+  background: var(--sheet-ocre);
+  color: var(--sheet-ocre-ink);
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-box .sheet-text b {
+  font-family: var(--sheet-font-title);
+  font-size: 18px;
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-writing .sheet-text b {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ---- Tableau des connecteurs : grille à filets de 1 px, en-tête jaune, première colonne en gras, exemples en italique --------------------------- */
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-table th {
+  background: oklch(0.92 0.1 85);
+  color: inherit;
+  font-family: var(--sheet-font-body);
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-table td:first-child {
+  color: var(--sheet-primary);
+  font-weight: 700;
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-table td:nth-child(3) {
+  color: var(--sheet-ink-secondary);
+  font-style: italic;
+}
+
+@media (min-width: 640px) {
+  .sheet-screen[data-sheet-theme="burgundy"] .sheet-table {
+    border: 1px solid var(--sheet-line);
+    border-radius: var(--sheet-radius-box);
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+  }
+
+  .sheet-screen[data-sheet-theme="burgundy"] .sheet-table th,
+  .sheet-screen[data-sheet-theme="burgundy"] .sheet-table td {
+    border-width: 0 1px 1px 0;
+    border-color: var(--sheet-line);
+  }
+
+  .sheet-screen[data-sheet-theme="burgundy"] .sheet-table th:last-child,
+  .sheet-screen[data-sheet-theme="burgundy"] .sheet-table td:last-child {
+    border-right-width: 0;
+  }
+
+  .sheet-screen[data-sheet-theme="burgundy"] .sheet-table tbody tr:last-child td {
+    border-bottom-width: 0;
+  }
+
+  .sheet-screen[data-sheet-theme="burgundy"] .sheet-table th:first-child,
+  .sheet-screen[data-sheet-theme="burgundy"] .sheet-table td:first-child {
+    width: 150px;
+  }
+}
+
+/* ---- Exercices : l'énoncé d'un choix sur sa ligne, les boutons dessous, un filet pointillé entre deux champs ---------------------------------- */
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-card-title {
+  font-size: 19px;
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-card .sheet-fields {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-field-choice {
+  gap: 4px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed #e2d9d2;
+  color: var(--sheet-ink);
+  font-size: 15px;
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-field-choice > span:first-child {
+  flex: 0 0 100%;
+  text-wrap: pretty;
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-field-choice .sheet-feedback {
+  font-size: 13px;
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-hint {
+  color: var(--sheet-note-deep);
+}
+
+/* ---- Entraînement illimité : ocre, énoncé en 19 px ---------------------------------------------------------------------------------------- */
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-practice {
+  border-color: var(--sheet-ocre);
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-practice-badge {
+  background: var(--sheet-ocre);
+  color: var(--sheet-ocre-ink);
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-practice .sheet-score {
+  color: var(--sheet-note-deep);
+}
+
+.sheet-screen[data-sheet-theme="burgundy"] .sheet-practice-prompt {
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+/* ---- Surligneurs : le texte à analyser -------------------------------------------------------------------------------------------------- */
+
+.sheet-hl [data-kind="thesis"] {
+  --hl-bg: oklch(0.89 0.07 15);
+  --hl-ink: oklch(0.42 0.13 15);
+}
+
+.sheet-hl [data-kind="counter"] {
+  --hl-bg: oklch(0.9 0.04 300);
+  --hl-ink: oklch(0.45 0.12 300);
+}
+
+.sheet-hl [data-kind="argument"] {
+  --hl-bg: oklch(0.9 0.06 250);
+  --hl-ink: oklch(0.42 0.12 250);
+}
+
+.sheet-hl [data-kind="example"] {
+  --hl-bg: oklch(0.91 0.07 150);
+  --hl-ink: oklch(0.42 0.11 150);
+}
+
+.sheet-hl [data-kind="connector"] {
+  --hl-bg: oklch(0.92 0.1 85);
+  --hl-ink: oklch(0.45 0.1 70);
+}
+
+.sheet-hl {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--sheet-line, var(--sheet-field-border));
+  border-radius: var(--sheet-radius-box);
+  background: var(--sheet-card);
+}
+
+.sheet-hl-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sheet-hl-btn,
+.sheet-hl-all {
+  padding: 2px 12px;
+  border: 1.5px solid var(--hl-ink, var(--sheet-primary));
+  border-radius: 14px;
+  background: transparent;
+  color: var(--hl-ink, var(--sheet-primary));
+  font-family: var(--sheet-font-title);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.sheet-hl-all {
+  font-size: 15px;
+}
+
+.sheet-hl-btn[aria-pressed="true"] {
+  background: var(--hl-bg);
+}
+
+.sheet-hl-btn:focus-visible,
+.sheet-hl-all:focus-visible,
+.sheet-hl-seg:focus-visible {
+  outline: 2px solid var(--sheet-accent);
+  outline-offset: 2px;
+}
+
+.sheet-hl-text {
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: var(--sheet-radius-field);
+  background: var(--sheet-white);
+  font-size: 18px;
+  line-height: 1.9;
+  text-wrap: pretty;
+}
+
+.sheet-hl-seg {
+  padding: 2px 0;
+  border-radius: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.sheet-hl-seg[data-on] {
+  background: var(--hl-bg);
+  color: var(--hl-ink);
+  cursor: pointer;
+}
+
+.sheet-hl-seg[data-on][data-kind="connector"] {
+  font-weight: 700;
+}
+
+.sheet-hl-info {
+  padding: 8px 12px;
+  border: 1.5px solid #b8aca4;
+  border-radius: var(--sheet-radius-field);
+  background: var(--sheet-white);
+  font-size: 15px;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.sheet-hl-info[data-kind] {
+  border-color: var(--hl-ink);
+}
+
+.sheet-hl-info b {
+  color: var(--hl-ink);
+}
+
+.sheet-hl-info b:empty {
+  display: none;
+}
+
+.sheet-hl-credit {
+  margin: 0;
+  color: var(--sheet-muted);
+  font-size: 13px;
+  font-style: italic;
+  text-wrap: pretty;
+}
+
+/* ---- Ma rédaction : zone libre sur lignes de 32 px, liste de vérification, connecteurs repérés --------------------------------------------- */
+
+.sheet-writing {
+  margin-top: 8px;
+  font-size: 15px;
+}
+
+.sheet-writing-input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 260px;
+  padding: 0 14px;
+  border: 1.5px dashed var(--sheet-line, var(--sheet-field-border));
+  border-radius: var(--sheet-radius-box);
+  background: var(--sheet-white);
+  color: var(--sheet-primary);
+  font-family: var(--sheet-font-title);
+  font-size: 19px;
+  line-height: 32px;
+  resize: vertical;
+}
+
+.sheet-writing-input:focus-visible {
+  outline: 2px solid var(--sheet-accent);
+  outline-offset: 2px;
+}
+
+.sheet-writing-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 14px;
+  font-size: 14.5px;
+}
+
+.sheet-writing-column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sheet-writing-title {
+  font-family: var(--sheet-font-title);
+  font-size: 17px;
+  color: var(--sheet-primary);
+}
+
+.sheet-writing-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sheet-writing-checks li {
+  position: relative;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  color: var(--sheet-muted);
+}
+
+.sheet-writing-checks li[data-state="done"] {
+  color: var(--sheet-success);
+}
+
+.sheet-writing-mark {
+  flex: none;
+  width: 14px;
+}
+
+.sheet-writing-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.sheet-writing-pill {
+  padding: 0 9px;
+  border-radius: 10px;
+  background: oklch(0.92 0.1 85);
+  color: oklch(0.4 0.1 70);
+  font-size: 13.5px;
+}
+
+.sheet-writing-stats {
+  color: var(--sheet-ink-secondary);
+}
+
+.sheet-writing-hint {
+  color: var(--sheet-ink-secondary);
+  font-size: 13px;
+}
+
+/* Texte pour les lecteurs d'écran seulement : l'état de chaque vérification ne se dit pas qu'avec ✓ et ○ */
+.sheet-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---- Sous 1 000 px : cibles de 44 px, une colonne sous 640 px --------------------------------------------------------------------------- */
+
+@media (max-width: 999px) {
+  .sheet-hl {
+    padding: 12px;
+  }
+
+  .sheet-hl-btn,
+  .sheet-hl-all {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--sheet-touch);
+    padding-inline: 14px;
+  }
+
+  .sheet-hl-text {
+    padding: 10px 12px;
+    font-size: 17px;
+  }
+
+  .sheet-writing-input {
+    min-height: 260px;
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 639px) {
+  .sheet-writing-panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

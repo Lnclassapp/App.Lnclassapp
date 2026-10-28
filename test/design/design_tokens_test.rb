@@ -204,7 +204,7 @@ class DesignTokensTest < ActiveSupport::TestCase
     css = Rails.root.join("app/assets/stylesheets/course_sheet.css").read
 
     imports = css.scan(/@import url\("([^"]+)"\);/).flatten
-    assert_equal %w[./course_sheet/exercises.css ./course_sheet/reading.css ./course_sheet/thales_figure.css], imports.sort
+    assert_equal %w[./course_sheet/argument.css ./course_sheet/exercises.css ./course_sheet/reading.css ./course_sheet/thales_figure.css], imports.sort
     # Une feuille importée mais absente part en 404 sur chaque fiche : le lot qui livre une famille ajoute son import.
     imports.each { assert Rails.root.join("app/assets/stylesheets", it).file?, "#{it} est importée mais n'existe pas" }
     assert_operator css.index("@import"), :<, css.index("@font-face")
