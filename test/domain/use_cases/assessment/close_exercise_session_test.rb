@@ -82,14 +82,14 @@ module UseCases
       def badge(level) = Entities::Assessment::Badge.new(student_id: 7, exercise_id: 40, session_id: 1, level:, awarded_at: NOW - 86_400)
       def gap = Entities::Assessment::KnowledgeGap.new(id: 70, student_id: 7, essential_id: 9, status: "pending", failed_sessions_count: 1)
 
-      def close(correct:, total: 100, actor: STUDENT, current_badge: nil, pending_gap: nil, kind: "standard", status: "started")
+      def close(correct:, total: 100, actor: STUDENT, current_badge: nil, pending_gap: nil, kind: "standard", status: "started", essential_id: 9)
         @sessions = FakeSessions.new(attempts(correct, total))
         @badges = FakeBadges.new(current_badge)
         @gaps = FakeGaps.new(pending_gap)
         @transaction = FakeTransaction.new
         CloseExerciseSession.new(sessions: @sessions, badges: @badges, gaps: @gaps, policy: Policies::Assessment::SubmitAttemptPolicy.new,
                                  transaction: @transaction, clock: Clock.new(NOW))
-                            .call(actor:, session: session(question_count: total, kind:, status:), essential_id: 9)
+                            .call(actor:, session: session(question_count: total, kind:, status:), essential_id:)
       end
 
       # ADR-0106 : le palier se lit sur la note affichée (10, 14 et 16/20), le Diamant reste le sans-faute.
@@ -182,6 +182,23 @@ module UseCases
       test "réussite sans lacune : rien sur les lacunes" do
         close(correct: 100)
 
+        assert_empty @gaps.calls
+      end
+
+      # ADR-0113 §4.2, CA-22 : un exercice de toute la leçon n'a pas de notion, donc pas de lacune à ouvrir ni à lever.
+      test "CA-22 : un exercice de toute la leçon raté ouvre aucune lacune, mais note et badge restent" do
+        row = close(correct: 40, essential_id: nil).value
+
+        assert_equal [ 40, nil ], [ row.score_percent, row.badge_level ]
+        assert_empty @gaps.calls
+        assert_equal [ [ 5, 40, NOW ] ], @sessions.completed
+      end
+
+      test "CA-22 : un exercice de toute la leçon réussi ne lève et n'incrémente aucune lacune" do
+        close(correct: 100, essential_id: nil, pending_gap: gap)
+        assert_empty @gaps.calls
+
+        close(correct: 40, essential_id: nil, pending_gap: gap)
         assert_empty @gaps.calls
       end
 

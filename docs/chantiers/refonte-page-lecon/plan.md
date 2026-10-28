@@ -24,10 +24,10 @@ Lot E — Entrées, redirections, lectures et retrait de l'ancien      (Touré, 
 |---|---|---|
 | 1 | **Lot 0** — socle | prépare le contenu Thalès v2 (8 sujets, 8 exercices) pour le Lot D : il ne dépend pas du code |
 | 2 | **Lot B** — Prépare interros · **Lot C** — copie à rendre | **Lot A** — fiche de révision · **Lot D** — import v2 et contenu Thalès |
-| 3 | challenger des lots A et D | **Lot E** — entrées, redirections, retraits · challenger des lots B et C |
+| 3 | test des lots A, D et E dans `Develop`, après leur fusion | **Lot E** — entrées, redirections, retraits |
 
 - Chaque pilote lance un agent `executant-lot` par lot et relit son résultat ; les deux lots d'une même personne tournent en parallèle, dans deux worktrees.
-- Le challenger d'un lot n'en est jamais le pilote : chacun met à l'épreuve les lots de l'autre (parcours nominal et un chemin d'erreur, dans l'application).
+- **Aucun lot n'est challengé avant sa fusion** (porteur, 2026-10-28, environnements de PR désactivés). Chaque lot fusionne dans `Develop` sur la preuve de `bin/ci-quiet` et les revues ; le porteur teste ensuite les lots dans `Develop`, et un écart ouvre un correctif.
 - Charge : porteur = Lot 0, B, C ; Touré = A, D, E et le contenu.
 
 Règle « une PR, un pilote » : **une PR par lot vers `Develop`** (porteur, 2026-10-28, après la fusion du Lot 0 par #332), assignée au pilote du lot, qui seul pousse sur sa branche. Chaque lot part de `Develop` à jour ; la ligne de preuve de `bin/ci-quiet` et les revues se font PR par PR.
@@ -244,11 +244,13 @@ Résultat au 2026-10-28 : sortie vide.
 - [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
 - [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
 - [ ] En-tête HITL sur chaque fichier créé dans `app/`
-- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
+- [ ] Le porteur a exécuté, dans `Develop` après fusion, le parcours nominal + un chemin d'erreur de chaque lot (plus de challenge avant fusion, 2026-10-28)
 - [ ] Pureté domaine · rubocop · tests · brakeman : au vert
 - [ ] Une PR par lot vers `Develop`, chacune référençant chantier + ADR + UDR
 - [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
 
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, ouvre l'application, refait le parcours nominal *et* un chemin d'erreur, mesure. **Il ne relit pas le code, il le met à l'épreuve.** Un reviewer qui lit du code ne prouve rien.
+>
+> *Dérogation du porteur (2026-10-28) : environnements de PR désactivés, le challenge a lieu dans `Develop` après la fusion de chaque lot, et non plus avant.*
 >
 > Pour ce chantier : parcours nominal = un enseignant assigne un exercice de Thalès depuis la page de la leçon, un élève le fait sur téléphone (390 px) et rend sa copie ; chemin d'erreur = rendre avec deux questions vides, puis renvoyer la même copie (une seule note), puis rendre une copie dont le nombre vaut « douze » (422). Il remplit aussi la colonne « Après » des mesures du PRD §7.

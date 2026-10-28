@@ -16,8 +16,6 @@ class Assessment::StudentProgressTest < ApplicationSystemTestCase
   SENTENCES = %w[progress stable decline].freeze
   # WCAG AA pour un texte de 14 px (text-sm).
   AA_CONTRAST = 4.5
-  # « Recommencer » : le POST puis la page de la session, sous une suite chargée (session_result_test.rb).
-  RESTART_WAIT = 10
 
   test "peu de bonnes réponses, puis toutes en remédiation : « Tu progresses » ; puis le meilleur résultat rappelé" do
     course = create_course
@@ -27,12 +25,12 @@ class Assessment::StudentProgressTest < ApplicationSystemTestCase
     sign_in_as @student
 
     visit exercise_path(@exercise.public_id)
-    click_on I18n.t("assessment.exercises.student_progress.start")
+    click_on I18n.t("assessment.exercises.show.start")
     play(correct: 1)
     assert_text "7/20"
     assert_no_progress_sentence
 
-    click_on I18n.t("#{RESULTS}.show.restart")
+    within("#restart-exercise-form") { click_on I18n.t("assessment.exercises.show.redo") }
     second = play(correct: 3)
     assert_text "20/20"
     assert_progress_sentence I18n.t("#{RESULTS}.progress.progress", first: 7, current: 20)
@@ -50,20 +48,8 @@ class Assessment::StudentProgressTest < ApplicationSystemTestCase
     create_exercise_session(student: @student, exercise:, status: "completed", score_percent:)
   end
 
-  # Répond aux questions de la session ouverte, dans l'interface : les `correct` premières justes (la proposition 1 est
-  # la bonne, fabrique create_exercise), les autres fausses ; puis « Voir mon résultat ». → public_id de la session.
-  def play(correct:)
-    assert_current_path %r{\A/sessions/[^/]+\z}, wait: RESTART_WAIT
-    public_id = current_path.split("/").last
-    QUESTIONS.times do |index|
-      within("#question-card", text: "Question #{index + 1}") { choose(index < correct ? "Proposition 1" : "Proposition 2") }
-      click_on I18n.t("#{SESSIONS}.question_card.submit")
-      assert_selector "#feedback-card"
-      click_on I18n.t("#{SESSIONS}.feedback_card.#{index == QUESTIONS - 1 ? 'result' : 'next'}")
-    end
-    assert_current_path exercise_session_result_path(public_id)
-    public_id
-  end
+  # Remplit et rend la copie de la session ouverte : les `correct` premières questions justes, les autres fausses.
+  def play(correct:) = hand_in_copy(rights: correct, questions: QUESTIONS)
 
   def assert_progress_sentence(sentence)
     assert_selector "#session_progress", exact_text: sentence

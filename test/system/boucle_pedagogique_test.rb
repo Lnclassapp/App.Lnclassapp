@@ -392,23 +392,19 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_selector "#student_next_step", text: /Tle D 1/i
     within("#student_next_step", text: EXERCISE) { click_on t("classroom.student_homes.next_step.due.start") }
     assert_current_path %r{\A/sessions/[^/]+\z}
-    assert_selector "h1", text: EXERCISE
+    assert_selector "a", text: EXERCISE
 
-    assert_no_page_reload do
-      QUESTIONS.each_with_index do |(statement, _, answers), index|
-        assert_selector "#question-card", text: statement
+    assert_selector "#copy-form"
+    QUESTIONS.each_with_index do |(statement, _, answers), index|
+      within("#question-#{index + 1}") do
+        assert_text statement
         choose answers.find { |(_, correct)| correct }.first
-        click_on t("assessment.exercise_sessions.question_card.submit")
-        assert_selector "#feedback-card", text: t("assessment.exercise_sessions.feedback_card.verdict.success")
-        click_on t("assessment.exercise_sessions.feedback_card.next") if index < QUESTIONS.size - 1
       end
-      assert_selector "#progress_bar progress[value='100']"
     end
+    click_on t("assessment.exercise_sessions.show.submit")
     session = Orm::ExerciseSession.sole
-    assert_equal [ "completed", 100 ], session.reload.values_at(:status, :score_percent)
-
-    click_on t("assessment.exercise_sessions.feedback_card.result")
     assert_current_path exercise_session_result_path(session.public_id)
+    assert_equal [ "completed", 100 ], session.reload.values_at(:status, :score_percent)
     assert_selector "h1", text: t("assessment.session_results.show.headline.success")
     assert_text "20/20"
     assert_selector "#session_badge[aria-label='#{t('assessment.session_results.badge.label', level: 'Diamant')}']"

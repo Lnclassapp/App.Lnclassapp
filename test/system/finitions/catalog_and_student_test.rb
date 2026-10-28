@@ -148,24 +148,21 @@ module Finitions
 
       visit exercise_path(@exercise.public_id)
       assert_title "Méiose et ADN · Élève · Lnclass"
-      within "#student_progress" do
-        assert_info_tip t("assessment.exercises.student_progress.mastery"), ApplicationController.helpers.mastery_tip
-        assert_info_tip t("assessment.exercises.student_progress.badge"), ApplicationController.helpers.badges_tip
-      end
-      click_on "La méiose", match: :first
-      assert_current_path course_essential_path(@course.slug, @essential.slug)
+      # UDR-0138 §3.1 : la feuille n'a plus de panneau de progression ni d'infobulles ; le retour mène à la leçon, à la notion.
+      assert_no_selector "#student_progress"
+      assert_link @course.name, href: course_path(@course.slug, anchor: "notion-#{@essential.slug}")
 
       visit exercise_session_result_path(session.public_id)
       assert_title "Résultat de Méiose et ADN · Élève · Lnclass"
-      assert_link "La méiose", href: course_essential_path(@course.slug, @essential.slug)
+      assert_link t("assessment.session_results.show.back_to_lesson"), href: course_path(@course.slug, anchor: "notion-#{@essential.slug}")
       assert_info_tip t("assessment.session_results.show.mastery"), ApplicationController.helpers.mastery_tip
       within("#session_badge") { assert_info_tip t("assessment.session_results.badge.help"), ApplicationController.helpers.badges_tip }
 
       started = create_exercise_session(student: @student, exercise: @exercise)
       visit exercise_session_path(started.public_id)
       assert_title "Méiose et ADN · Élève · Lnclass"
-      # UDR-0087 §3.2 : en mode concentré, la croix « Quitter la session » mène à la page de l'exercice.
-      assert_selector "a[href='#{exercise_path(@exercise.public_id)}'][aria-label='#{t("assessment.exercise_sessions.quit_dialog.trigger")}']"
+      # UDR-0138 §3.2 : le retour de la copie mène à la page de l'exercice.
+      assert_link @exercise.title, href: exercise_path(@exercise.public_id)
     end
 
     # UDR-0077, amendement du 2026-10-06 : à 390 px, la recherche et les filtres restent ; un catalogue filtré offre « Tout voir ».

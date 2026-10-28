@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::ExerciseSessionRepository
 # Rôle : sessions d'exercice et tentatives immuables ; compteurs tenus en SQL, une seule session ouverte par exercice
-# ADR  : 0033, 0043, 0054, 0091
+# ADR  : 0033, 0043, 0054, 0091, 0112
 module Repositories
   module Assessment
     class ExerciseSessionRepository
@@ -9,6 +9,11 @@ module Repositories
       COUNTERS_SQL = <<~SQL.squish.freeze
         answered_count = answered_count + 1, correct_count = correct_count + ?,
         progress_percent = LEAST(100, ((answered_count + 1) * 100) / question_count), updated_at = ?
+      SQL
+
+      COPY_COUNTERS_SQL = <<~SQL.squish.freeze
+        answered_count = answered_count + ?, correct_count = correct_count + ?,
+        progress_percent = LEAST(100, ((answered_count + ?) * 100) / NULLIF(question_count, 0)), updated_at = ?
       SQL
 
       def find_by_public_id(public_id:, lock: false)
@@ -41,9 +46,22 @@ module Repositories
         true
       end
 
-      # Signature seule (Lot 0 de refonte-page-lecon) : le Lot C écrit la copie.
+      # La copie entière, une tentative par question, et les compteurs de la session, dans un savepoint.
+      # Une copie commencée en répondant question par question garde ses tentatives : seules les questions sans tentative s'écrivent.
       def record_copy(session_id:, attempts:, at:)
-        raise NotImplementedError, "#{self.class}#record_copy arrive avec le Lot C"
+        Orm::QuestionAttempt.transaction(requires_new: true) do
+          answered = Orm::QuestionAttempt.where(exercise_session_id: session_id).pluck(:question_id)
+          written = attempts.reject { answered.include?(it.fetch(:question_id)) }
+          written.each do |attempt|
+            Orm::QuestionAttempt.create!(exercise_session_id: session_id, question_id: attempt.fetch(:question_id),
+                                         selected_answer_ids: attempt.fetch(:selected_answer_ids), response_text: attempt[:response_text],
+                                         correct: attempt.fetch(:correct), unanswered: attempt.fetch(:unanswered, false), answered_at: at)
+          end
+          Orm::ExerciseSession.where(id: session_id).update_all([ COPY_COUNTERS_SQL, written.size, written.count { it[:correct] }, written.size, at ])
+        end
+        :ok
+      rescue ActiveRecord::RecordNotUnique
+        :duplicate
       end
 
       def record_attempt(session_id:, question_id:, selected_answer_ids:, correct:, at:, response_text: nil)

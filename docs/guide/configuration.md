@@ -72,6 +72,8 @@ Chaque environnement Railway déploie seul la branche qu'il suit : Develop ← `
 
 ### Environnements de PR (Railway)
 
+> **Désactivés depuis le 2026-10-28** (décision du porteur) : aucune PR n'est plus déployée. Cette section décrit la configuration à remettre si on les réactive.
+
 Variables posées **sur Develop**, non scellées, que Railway copie dans l'environnement de chaque PR. Staging et production ne les portent pas : rien n'y change (ADR-0108).
 
 | Variable | Rôle | Si absente |
