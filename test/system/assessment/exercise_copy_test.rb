@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
 # UDR-0138 : à 390 px, l'élève ouvre la feuille, « Faire l'exercice », répond à 4 questions sur 5, recharge et retrouve ses
-# réponses, « Rendre ma copie », confirme les questions vides, puis lit sa note sur 20 avec la question vide « Sans réponse ».
+# réponses, « Vérifier ma copie », confirme les questions vides, puis lit sa note sur 20 avec la question vide « Sans réponse ».
 class Assessment::ExerciseCopyTest < ApplicationSystemTestCase
   SCOPE = "assessment.exercise_sessions".freeze
 
@@ -67,7 +67,7 @@ class Assessment::ExerciseCopyTest < ApplicationSystemTestCase
     assert_current_path exercise_session_path(session.public_id)
   end
 
-  test "à 390 px : « Revoir le sujet » mène au sujet, « Rendre ma copie » colle au bas de l'écran, la page ne déborde pas" do
+  test "à 390 px : « Revoir le sujet » mène au sujet, « Vérifier ma copie » colle au bas de l'écran, la page ne déborde pas" do
     session = create_exercise_session(student: @student, exercise: @exercise)
     with_mobile_viewport do
       visit exercise_session_path(session.public_id)

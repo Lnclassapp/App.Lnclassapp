@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/session_results/show — résultat d'une session terminée (AS-11 à AS-13) %>
-<%# Rôle : badge, « Félicitations ! » (dès 14/20) ou « Courage ! », note (verte dès 14/20) et maîtrise, progrès, effet sur la fiche, « Recommencer » seul (caché au sans-faute, Grading.perfect?), correction %>
-<%# ADR  : 0033, 0054, 0079, 0091, 0101, 0112, 0113 · UDR : 0007, 0023, 0054, 0057, 0073, 0087 §3.6, 0120, 0138 §3.4, XXXX écrans élève sans répétition §3.5 et §3.6 bis · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
+<%# Rôle : badge, appréciation (« Très bien » à « À retravailler »), note (verte dès 14/20), points, « À revoir », maîtrise, progrès, effet sur la fiche, « Refaire l'exercice » (caché au sans-faute, Grading.perfect?) ou l'heure de reprise, correction complète %>
+<%# ADR  : 0033, 0054, 0079, 0091, 0101, 0112, 0113, 0115 · UDR : 0140, 0007, 0023, 0054, 0057, 0073, 0087 §3.6, 0120, 0138 §3.4, XXXX écrans élève sans répétition §3.5 et §3.6 bis · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
 <% result = @result %>
 <%# UDR-0087 §3.6 : le titre, la couleur de la note et les confettis dès « 14/20 » affiché, la règle de l'historique, de
     « Ma classe » et de l'accueil (68 % s'affiche 14/20). %>
@@ -21,7 +21,7 @@
       <div class="flex flex-col items-center gap-3">
         <%= render "assessment/session_results/badge", level: result.badge_level, earned_now: result.earned_now %>
         <div class="space-y-2">
-          <h1 id="session_result_title" class="font-display text-3xl font-medium tracking-tight"><%= t(".headline.#{tone}") %></h1>
+          <h1 id="session_result_title" class="font-display text-3xl font-medium tracking-tight"><%= t(".headline.#{result.appreciation.level}") %></h1>
           <% if @owner %>
             <% cheers = t(".cheers.#{tone}") %>
             <p class="text-ink text-balance"><%= cheers[result.session_public_id.sum % cheers.size] %></p>
@@ -59,7 +59,37 @@
           </div>
         <% end %>
       </dl>
+      <%# UDR-0140 §3 : les points, seulement quand l'exercice n'est pas tout à 1 point ; les réponses rédigées et le cahier, à comparer. %>
+      <% points = result.points %>
+      <% fmt = ->(value) { number_with_precision(value, precision: 1, strip_insignificant_zeros: true) } %>
+      <% if points.weighted || points.manual.positive? %>
+        <div id="session_points" class="mt-4 space-y-1 text-sm text-mute">
+          <% if points.weighted %>
+            <p><%= t(".points_graded", count: points.earned, points: fmt.(points.earned), total: fmt.(points.graded)) %></p>
+          <% end %>
+          <% if points.manual.positive? %>
+            <p><%= t(".points_manual", count: points.manual, points: fmt.(points.manual)) %></p>
+          <% end %>
+        </div>
+      <% end %>
     </section>
+
+    <%# UDR-0140 §3 : ce qu'il faut revoir, les questions corrigées automatiquement fausses ou sans réponse. Absent sans faute. %>
+    <% appreciation = result.appreciation %>
+    <% if appreciation.review? %>
+      <% weak = result.review.select { appreciation.weak_numbers.include?(it.number) } %>
+      <% links = weak.map { link_to(it.number, "#question_review_#{it.id}", class: "font-medium text-brand underline") } %>
+      <% numbers = links.each_with_index.map { |link, rank| rank.zero? ? link : safe_join([ t(rank == links.size - 1 ? "support.array.last_word_connector" : "support.array.words_connector"), link ]) } %>
+      <% questions = t(".review_questions_html", count: weak.size, numbers: safe_join(numbers)) %>
+      <section id="session_to_review" class="rounded-card border border-line bg-white p-4 text-left">
+        <% if appreciation.scope == :essential %>
+          <p class="text-ink"><%= t(".to_review_essential_html", essential: appreciation.essential_name, questions:) %></p>
+        <% else %>
+          <p class="text-ink"><%= t(".to_review_lesson_html", questions:) %></p>
+          <p class="mt-1"><%= link_to t(".whole_lesson"), lesson_href, class: "text-sm font-medium text-brand underline", data: { turbo_prefetch: false } %></p>
+        <% end %>
+      </section>
+    <% end %>
 
     <%# UDR-0073 : la phrase de progrès parle à l'élève seul, à partir de sa deuxième session. %>
     <%# UDR écrans élève §3.5 : « Tu restes autour de… » n'est plus dit, la correction le dit déjà. %>
@@ -71,8 +101,10 @@
       <%= render "assessment/session_results/gap_outcome", outcome: result.gap_outcome, essential: result.essential %>
     <% end %>
 
-    <%# UDR-0138 §3.4 : « Refaire l'exercice » (caché au sans-faute) puis « Retour à la leçon ». %>
-    <% if @can_restart && !grading.perfect?(result.score_percent) %>
+    <%# UDR-0138 §3.4 : « Refaire l'exercice » (caché au sans-faute) puis « Retour à la leçon ». UDR-0140 : pendant la pause, l'heure de reprise à sa place. %>
+    <% if @resume_at && !grading.perfect?(result.score_percent) %>
+      <p id="restart_pause" class="text-center text-ink"><%= t(".restart_pause", time: l(@resume_at, format: :hour_minute)) %></p>
+    <% elsif @can_restart && !grading.perfect?(result.score_percent) %>
       <%= form_with url: exercise_sessions_path(result.exercise.public_id), method: :post, id: "restart-exercise-form" do %>
         <%= ui_button t("assessment.exercises.show.redo"), type: :submit, variant: :brand, size: :lg, full: true, icon: "arrow-path" %>
       <% end %>

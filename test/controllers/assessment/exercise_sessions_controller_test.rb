@@ -35,6 +35,9 @@ class Assessment::ExerciseSessionsControllerTest < ActionDispatch::IntegrationTe
     assert_select "form#copy-form input[type=radio]", 8
     assert_select "form#copy-form button[type=submit]", text: I18n.t("#{scope}.show.submit")
     assert_select "dialog#copy-confirm"
+    # CA-01 (UDR-0140) : un seul bouton « Vérifier ma copie », précédé de sa phrase d'avertissement ; ni « Rendre ma copie », ni durée.
+    assert_select "form#copy-form p", text: I18n.t("#{scope}.show.lock_warning")
+    assert_no_match(/Rendre ma copie|Vérifier les réponses courtes|minutes?\b/i, css_select("form#copy-form").to_s.sub(/<dialog.*<\/dialog>/m, ""))
   end
 
   test "une question à plusieurs réponses : « Coche N propositions. », sans badge qui le redit" do
