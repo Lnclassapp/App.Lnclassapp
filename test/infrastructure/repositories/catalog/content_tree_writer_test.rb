@@ -40,7 +40,7 @@ module Repositories
         counts = @writer.write(author_id: @author.id, at: @at,
                                courses: [ course("genetique", content: "<p>Hérédité</p>"), course("ecologie", content: nil) ])
 
-        assert_equal({ courses: 2, essentials: 4, exercises: 8, questions: 16, answers: 32 }, counts)
+        assert_equal({ courses: 2, essentials: 4, exercises: 8, questions: 16, answers: 32, archived: 0 }, counts)
         genetique = Orm::Course.find_by!(slug: "genetique")
         assert_equal [ "genetique-a", "genetique-b" ], genetique.essentials.order(:position).pluck(:slug)
         essential = Orm::Essential.find_by!(slug: "genetique-b")
@@ -62,7 +62,7 @@ module Repositories
         counts = @writer.write(author_id: @author.id, at: @at, courses: [ course("genetique", content: nil, exercises: lesson_wide),
                                                                           course("ecologie", content: nil, exercises: [ exercise("Bilan écologie") ]) ])
 
-        assert_equal({ courses: 2, essentials: 4, exercises: 11, questions: 22, answers: 44 }, counts)
+        assert_equal({ courses: 2, essentials: 4, exercises: 11, questions: 22, answers: 44, archived: 0 }, counts)
         genetique = Orm::Course.find_by!(slug: "genetique")
         assert_equal [ [ 1, "Quiz genetique-a" ], [ 2, "Défi genetique-a" ], [ 3, "Quiz genetique-b" ], [ 4, "Défi genetique-b" ], [ 5, "Bilan 1" ], [ 6, "Bilan 2" ] ],
                      Orm::Exercise.where(course_id: genetique.id).order(:position).pluck(:position, :title)
@@ -74,7 +74,7 @@ module Repositories
       test "des exercices de toute la leçon dans un cours sans notion s'écrivent aussi" do
         counts = @writer.write(author_id: @author.id, at: @at, courses: [ course("seul", content: nil, exercises: [ exercise("Bilan") ]).with(essentials: []) ])
 
-        assert_equal({ courses: 1, essentials: 0, exercises: 1, questions: 2, answers: 4 }, counts)
+        assert_equal({ courses: 1, essentials: 0, exercises: 1, questions: 2, answers: 4, archived: 0 }, counts)
         assert_equal [ [ 1, nil ] ], Orm::Exercise.pluck(:position, :essential_id)
       end
 
@@ -111,7 +111,7 @@ module Repositories
         counts = @writer.write(author_id: @author.id, at: @at, essentials: [ essential("fiche-importee", course_id: target.id, position: 2) ],
                                exercises: [ exercise("Isolé", essential_id: fiche.id, position: 5) ])
 
-        assert_equal({ courses: 0, essentials: 1, exercises: 3, questions: 6, answers: 12 }, counts)
+        assert_equal({ courses: 0, essentials: 1, exercises: 3, questions: 6, answers: 12, archived: 0 }, counts)
         assert_equal [ 1, 2 ], target.essentials.order(:position).pluck(:position)
         assert_equal [ "Isolé" ], fiche.exercises.pluck(:title)
       end
@@ -125,7 +125,7 @@ module Repositories
       end
 
       test "sans nœud, rien n'est écrit ; une ligne refusée par la base lève" do
-        assert_equal({ courses: 0, essentials: 0, exercises: 0, questions: 0, answers: 0 }, @writer.write(author_id: @author.id, at: @at))
+        assert_equal({ courses: 0, essentials: 0, exercises: 0, questions: 0, answers: 0, archived: 0 }, @writer.write(author_id: @author.id, at: @at))
 
         create_course(slug: "genetique")
 
@@ -152,7 +152,7 @@ module Repositories
 
         counts = @writer.write(author_id: @author.id, at:, exercises: [ exercise_with(questions, essential_id: fiche.id, statement: tricky) ])
 
-        assert_equal({ courses: 0, essentials: 0, exercises: 1, questions: 2, answers: 4 }, counts)
+        assert_equal({ courses: 0, essentials: 0, exercises: 1, questions: 2, answers: 4, archived: 0 }, counts)
         exercise = fiche.exercises.find_by!(position: 1)
         assert_equal [ "Échappement", tricky, "draft", @author.id ], [ exercise.title, exercise.statement, exercise.status, exercise.author_id ]
         written = exercise.questions.order(:position)

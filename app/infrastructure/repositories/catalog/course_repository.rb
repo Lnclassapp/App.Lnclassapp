@@ -48,6 +48,12 @@ module Repositories
         end
       end
 
+      def ids_by_key
+        Orm::Course.pluck(:id, :name, :level_id, :material_id, :series_id).to_h do |id, name, *taxonomy|
+          [ [ Entities::Shared::NaturalKey.compact(name), *taxonomy ], id ]
+        end
+      end
+
       def taken_slugs
         Orm::Course.pluck(:slug).to_set
       end

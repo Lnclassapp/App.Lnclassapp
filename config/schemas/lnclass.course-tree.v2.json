@@ -15,6 +15,7 @@
   },
   "$defs": {
     "text": { "type": ["string", "null"] },
+    "statement": { "description": "Sujet d'un exercice : 5 000 caractères au plus (Entities::Assessment::Exercise::STATEMENT_MAX, menace-import-v2 Q2).", "type": ["string", "null"], "maxLength": 5000 },
     "essential_content": { "description": "Texte d'une fiche : 200 Ko (204800 caractères) au plus (ADR-0105, menace.md n° 13).", "type": ["string", "null"], "maxLength": 204800 },
     "course": {
       "type": "object",
@@ -31,7 +32,9 @@
         "status": { "$ref": "#/$defs/text" },
         "statut": { "$ref": "#/$defs/text" },
         "essentials": {
+          "description": "Cinquante notions au plus par leçon (menace-import-v2 Q1).",
           "type": "array",
+          "maxItems": 50,
           "items": { "$ref": "#/$defs/essential" }
         },
         "exercises": {
@@ -60,11 +63,13 @@
       "additionalProperties": false,
       "properties": {
         "title": { "$ref": "#/$defs/text" },
-        "statement": { "$ref": "#/$defs/text" },
+        "statement": { "$ref": "#/$defs/statement" },
         "exercise_type": { "$ref": "#/$defs/text" },
         "status": { "$ref": "#/$defs/text" },
         "questions": {
+          "description": "Trente questions au plus par exercice (menace-import-v2 Q1).",
           "type": "array",
+          "maxItems": 30,
           "items": { "$ref": "#/$defs/question" }
         }
       }
@@ -78,7 +83,9 @@
         "explanation": { "$ref": "#/$defs/text" },
         "tolerance": { "type": ["number", "null"], "minimum": 0, "maximum": 99999999.9999 },
         "answers": {
+          "description": "Dix propositions au plus par question (menace-import-v2 Q1).",
           "type": "array",
+          "maxItems": 10,
           "items": { "$ref": "#/$defs/answer" }
         },
         "image": { "$ref": "#/$defs/question_image" }

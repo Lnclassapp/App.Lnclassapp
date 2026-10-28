@@ -29,8 +29,10 @@ class Catalog::ImportCourseTreeTest < ApplicationSystemTestCase
   end
 
   test "the help of the kind is shown, then a mixed file gives the exact report without a page reload" do
-    create_course(name: "Cours 6", level: Orm::Level.find_by!(slug: "tle"), material: Orm::Material.find_by!(slug: "svt"),
-                  series: Orm::Series.find_by!(slug: "d"))
+    existing = create_course(name: "Cours 6", level: Orm::Level.find_by!(slug: "tle"), material: Orm::Material.find_by!(slug: "svt"),
+                             series: Orm::Series.find_by!(slug: "d"))
+    create_essential(course: existing, name: "Fiche 1")
+    create_exercise(essential: existing.essentials.first)
     document = mixed(course_tree_v2_document(courses: 8, essentials: 1, questions: 2, answers: 3),
                      invalid_at: [ 3 ], duplicate_of: { 7 => 1 })
     document["courses"][4]["material_name"] = "Astronomie"
@@ -64,17 +66,18 @@ class Catalog::ImportCourseTreeTest < ApplicationSystemTestCase
       using_wait_time(IMPORT_WAIT) { assert_toast "Import lancé." }
       within "turbo-frame#modal dialog[open] turbo-frame#import_status" do
         assert_text "Terminé"
-        assert_selector "#import_counter_imported", text: "4"
-        assert_selector "#import_counter_skipped", text: "2"
+        assert_selector "#import_counter_imported", text: "5"
+        assert_selector "#import_counter_skipped", text: "1"
         assert_selector "#import_counter_errors", text: "2"
         assert_selector "#import_counter_total", text: "8"
         assert_selector "#import_errors li", count: 2
         assert_selector "#import_errors li", text: /\Acourses\[3\]\.name\s+Valeur obligatoire manquante\.\z/
         assert_selector "#import_errors li", text: /\Acourses\[4\]\.material_name\s+Matière inconnue\.\z/
         assert_text "Fiches de révision créées : 4"
-        assert_text "Exercices créés : 20"
-        assert_text "Questions créées : 40"
-        assert_text "Propositions créées : 120"
+        assert_text "Exercices créés : 25"
+        assert_text "Exercices archivés (fiche de cours réimportée) : 1"
+        assert_text "Questions créées : 50"
+        assert_text "Propositions créées : 150"
       end
     end
     assert_equal [ "Cours 1", "Cours 2", "Cours 3", "Cours 6", "Cours 7" ], Orm::Course.order(:name).pluck(:name)

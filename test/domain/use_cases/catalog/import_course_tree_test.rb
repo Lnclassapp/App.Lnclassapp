@@ -41,7 +41,7 @@ module UseCases
       # The real engine, on a report in base and its file.
       def run_import(*documents, adapter: self.adapter, transaction: Repositories::Shared::Transaction.new, author: @author)
         report = create_import_report(kind: "course_tree", imported_by: author)
-        files = documents.each_with_index.map { |document, index| import_upload(io: StringIO.new(document.to_json), filename: "cours-#{index}.json") }
+        files = documents.each_with_index.map { |document, index| import_upload(io: StringIO.new(document.is_a?(String) ? document : document.to_json), filename: "cours-#{index}.json") }
         Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, files:)
         @result = UseCases::Catalog::RunImport.new(
           adapter:, reports: Repositories::Catalog::ImportReportRepository.new, files: Repositories::Catalog::ImportFileStore.new,
@@ -107,9 +107,9 @@ module UseCases
         assert_equal [ [ "genetique-et-evolution-fiche-1", 1 ], [ "genetique-et-evolution-fiche-2", 2 ] ],
                      node.essentials.map { [ it.slug, it.position ] }
         exercise = node.essentials.first.exercises.first
-        assert_equal [ 14, 1, "fixation", "Consigne 1" ], [ exercise.public_id.length, exercise.position, exercise.exercise_type, exercise.statement ]
+        assert_equal [ 14, "fixation", "Consigne 1" ], [ exercise.public_id.length, exercise.exercise_type, exercise.statement ]
         assert_not_equal exercise.public_id, node.essentials.last.exercises.first.public_id
-        assert_equal [ [ "Bilan 1", 1 ], [ "Bilan 2", 2 ], [ "Bilan 3", 3 ], [ "Bilan 4", 4 ] ], node.exercises.map { [ it.title, it.position ] }
+        assert_equal [ "Bilan 1", "Bilan 2", "Bilan 3", "Bilan 4" ], node.exercises.map(&:title)
         assert_equal [ nil ], node.exercises.map(&:essential_id).uniq
         assert_equal "Consigne 2", node.exercises.second.statement
         assert_equal [ [ 1, "Question 1" ], [ 2, "Question 2" ] ], exercise.questions.map { [ it.position, it.content ] }
@@ -212,13 +212,13 @@ module UseCases
         assert_equal [ 3, 6, 18, 54, 216 ], tree_counts
       end
 
-      test "duplicates in base and in the file are skipped and counted; the existing course is not modified" do
+      test "version 1 duplicates in base and in the file are skipped and counted; the existing course is not modified" do
         existing = create_course(name: "Génétique et Évolution", level: Orm::Level.find_by!(slug: "tle"),
                                  material: Orm::Material.find_by!(slug: "svt"), series: Orm::Series.find_by!(slug: "d"))
         before = existing.reload.attributes
 
-        report = run_import(document(course("GENETIQUE et evolution"), course("Génétique  etÉvolution", series_name: "C"),
-                                     course("Écologie"), course("écologie ")))
+        report = run_import(document(v1_course("GENETIQUE et evolution"), v1_course("Génétique  etÉvolution", series_name: "C"),
+                                     v1_course("Écologie"), v1_course("écologie "), version: 1))
 
         assert_equal [ 4, 2, 2, 0 ], report.values_at(:total_count, :imported_count, :skipped_count, :error_count)
         assert_equal before, existing.reload.attributes
@@ -227,22 +227,21 @@ module UseCases
       end
 
       test "a mixed file gives an exact report, and invalid courses leave no row at all" do
-        existing = create_course(name: "Cours 8", level: Orm::Level.find_by!(slug: "tle"), material: Orm::Material.find_by!(slug: "svt"),
-                                 series: Orm::Series.find_by!(slug: "d"))
+        existing = existing_lesson(name: "Cours 8")
         mixed = course_tree_v2_document(courses: 10, essentials: 2, questions: 4, answers: 3)
         mixed["courses"][1]["essentials"][0]["exercises"][0]["questions"][3]["answers"].first(2).each { it["correct"] = true }
         mixed["courses"][4]["material_name"] = "Astronomie"
 
         report = run_import(mixed)
 
-        assert_equal [ "completed", 10, 7, 1, 2 ], report.values_at(:status, :total_count, :imported_count, :skipped_count, :error_count)
+        assert_equal [ "completed", 10, 8, 0, 2 ], report.values_at(:status, :total_count, :imported_count, :skipped_count, :error_count)
         assert_equal [ [ "courses[1].essentials[0].exercises[0].questions[3].answers", "question_structure" ],
                        [ "courses[4].material_name", "unknown_material" ] ], report.import_errors.map { it.values_at("path", "code") }
         assert_equal [ "Cours 1", "Cours 3", "Cours 4", "Cours 6", "Cours 7", "Cours 8", "Cours 9", "Cours 10" ].sort,
                      Orm::Course.pluck(:name).sort
-        assert_equal 0, existing.essentials.count
-        assert_equal [ 8, 7 * 2, 7 * 6, 7 * 24, 7 * 72 ], tree_counts
-        assert_equal({ "essentials_created" => 14, "exercises_created" => 42, "questions_created" => 168, "answers_created" => 504 },
+        assert_equal 2, existing.essentials.count
+        assert_equal [ 8, 7 * 2 + 2, 8 * 6, 8 * 24, 8 * 72 ], tree_counts
+        assert_equal({ "essentials_created" => 14, "exercises_created" => 48, "questions_created" => 192, "answers_created" => 576 },
                      report.details)
       end
 
@@ -507,6 +506,253 @@ module UseCases
         assert_equal [ "fixation" ], exercises_of(lesson).where.not(essential_id: nil).distinct.pluck(:exercise_type)
         assert_equal [ "evaluation" ], exercises_of(lesson).where(essential_id: nil).distinct.pluck(:exercise_type)
         assert_equal 0, exercises_of(lesson).where(statement: [ nil, "" ]).count
+      end
+
+      def schema_pairs(report) = report.import_errors.map { it.values_at("path", "code") }
+
+      def close_session(session)
+        sessions = Repositories::Assessment::ExerciseSessionRepository.new
+        entity = sessions.find_by_public_id(public_id: session.public_id)
+        UseCases::Assessment::CloseExerciseSession.new(
+          sessions:, badges: Repositories::Assessment::BadgeRepository.new, gaps: Repositories::Assessment::KnowledgeGapRepository.new,
+          policy: Policies::Assessment::SubmitAttemptPolicy.new, transaction: Repositories::Shared::Transaction.new, clock: Time.zone
+        ).call(actor: Entities::Identity::Actor.new(user_id: session.student_id, role: :student), session: entity,
+               essential_id: session.exercise.essential_id).value
+      end
+
+      # Menace M2 : un fichier imbriqué à 102 niveaux est illisible, rien n'est écrit.
+      test "a file nested 102 levels deep is rejected as unreadable, with zero writes" do
+        report = run_import(("[" * 102) + ("]" * 102))
+
+        assert_equal "rejected", report.status
+        assert_equal [ [ "$", "json_invalid" ] ], schema_pairs(report)
+        assert_equal [ 0, 0, 0, 0, 0 ], tree_counts
+      end
+
+      # Menace M4 : 501 leçons dans l'envoi, refus en bloc.
+      test "501 lessons in one file are rejected in bloc, with zero writes" do
+        report = run_import(document(*Array.new(501) { course("Cours") }))
+
+        assert_equal "rejected", report.status
+        assert_equal [ [ "courses", "too_many_roots" ] ], schema_pairs(report)
+        assert_equal [ 0, 0, 0, 0, 0 ], tree_counts
+      end
+
+      # Menace M6, M7 (décision de l'orchestrateur, Q1 et Q2) : plafonds du schéma, au chiffre près.
+      test "50 notions in a lesson are imported, 51 are refused by the schema before any write" do
+        essential = course["essentials"].first
+        build = ->(count) { course("Plafond", essentials: Array.new(count) { |index| essential.merge("name" => "Notion #{index + 1}") }) }
+
+        report = run_import(document(build.call(51)))
+        assert_equal [ 0, 1 ], report.values_at(:imported_count, :error_count)
+        assert_equal [ [ "courses[0].essentials", "schema" ] ], schema_pairs(report)
+        assert_equal 0, Orm::Course.count
+
+        report = run_import(document(build.call(50)))
+        assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count)
+        assert_equal 50, Orm::Essential.count
+      end
+
+      test "30 questions in an exercise are imported, 31 are refused by the schema" do
+        build = lambda do |count|
+          broken = course("Plafond")
+          broken["exercises"][0]["questions"] = Array.new(count) { |index| broken["exercises"][0]["questions"].first.merge("content" => "Q#{index}") }
+          broken
+        end
+
+        report = run_import(document(build.call(31)))
+        assert_equal [ [ "courses[0].exercises[0].questions", "schema" ] ], schema_pairs(report)
+        assert_equal 0, Orm::Course.count
+
+        assert_equal [ 1, 0 ], run_import(document(build.call(30))).values_at(:imported_count, :error_count)
+        assert_equal 30, Orm::Question.where(exercise_id: Orm::Exercise.where(title: "Bilan 1")).count
+      end
+
+      test "10 answers to a question are imported, 11 are refused by the schema" do
+        build = lambda do |count|
+          broken = course("Plafond")
+          broken["exercises"][0]["questions"] = [ { "content" => "Choisis.", "question_type" => "single_choice",
+                                                    "answers" => Array.new(count) { |index| { "content" => "R#{index}", "correct" => index.zero? } } } ]
+          broken
+        end
+
+        report = run_import(document(build.call(11)))
+        assert_equal [ [ "courses[0].exercises[0].questions[0].answers", "schema" ] ], schema_pairs(report)
+
+        assert_equal [ 1, 0 ], run_import(document(build.call(10))).values_at(:imported_count, :error_count)
+        assert_equal 10, Orm::Answer.joins(:question).where(questions: { content: "Choisis." }).count
+      end
+
+      test "a subject of 5,000 characters is imported, 5,001 is refused at its path, notion or lesson-wide" do
+        limit = Entities::Assessment::Exercise::STATEMENT_MAX
+        over_lesson = course("Dépassé 1")
+        over_lesson["exercises"][1]["statement"] = "a" * (limit + 1)
+        over_notion = course("Dépassé 2")
+        over_notion["essentials"][0]["exercises"][0]["statement"] = "a" * (limit + 1)
+        exact = course("Exact")
+        exact["exercises"][1]["statement"] = "a" * limit
+
+        report = run_import(document(over_lesson, over_notion, exact))
+
+        assert_equal 5_000, limit
+        assert_equal [ 3, 1, 2 ], report.values_at(:total_count, :imported_count, :error_count)
+        assert_equal [ [ "courses[0].exercises[1].statement", "schema" ], [ "courses[1].essentials[0].exercises[0].statement", "schema" ] ],
+                     schema_pairs(report).sort
+        assert_equal limit, Orm::Exercise.find_by!(title: "Bilan 2").statement.length
+      end
+
+      # Revue sécurité du Lot C (#334) : à deux éléments, le mélange montrerait toujours l'inverse de la solution.
+      test "an ordering question needs 3 steps at least: 2 refused at their path, 3 accepted" do
+        build = lambda do |count|
+          broken = course("Ordre")
+          broken["exercises"][0]["questions"] = [ { "content" => "Range.", "question_type" => "ordering",
+                                                    "answers" => Array.new(count) { |index| { "content" => "Étape #{index + 1}" } } } ]
+          broken
+        end
+
+        report = run_import(document(build.call(2)))
+        assert_equal [ [ "courses[0].exercises[0].questions[0].answers", "question_structure" ] ], schema_pairs(report)
+        assert_equal({ "rule" => "steps_count" }, report.import_errors.first["params"])
+
+        assert_equal [ 1, 0 ], run_import(document(build.call(3))).values_at(:imported_count, :error_count)
+      end
+
+      test "a matching question needs 3 pairs at least: 2 refused at their path, 3 accepted" do
+        build = lambda do |count|
+          broken = course("Relier")
+          broken["exercises"][0]["questions"] = [ { "content" => "Relie.", "question_type" => "matching",
+                                                    "answers" => Array.new(count) { |index| { "content" => "G#{index}", "match" => "D#{index}" } } } ]
+          broken
+        end
+
+        report = run_import(document(build.call(2)))
+        assert_equal [ [ "courses[0].exercises[0].questions[0].answers", "question_structure" ] ], schema_pairs(report)
+        assert_equal({ "rule" => "pairs_count" }, report.import_errors.first["params"])
+
+        assert_equal [ 1, 0 ], run_import(document(build.call(3))).values_at(:imported_count, :error_count)
+      end
+
+      # Réimport (décision du porteur) : la leçon et ses notions restent, les exercices sont archivés, les nouveaux arrivent en brouillon.
+      def existing_lesson(name: "Cours 1", notions: [ "Fiche 1", "Fiche 2" ])
+        lesson = create_course(name:, level: Orm::Level.find_by!(slug: "tle"), material: Orm::Material.find_by!(slug: "svt"),
+                               series: Orm::Series.find_by!(slug: "d"))
+        notions.each { |notion| create_essential(course: lesson, name: notion) }
+        lesson
+      end
+
+      test "reimporting an existing lesson archives its exercises, keeps a session in progress and writes the new drafts" do
+        lesson = existing_lesson
+        first, second = lesson.essentials.order(:position).to_a
+        old = create_exercise(essential: first, questions: 3)
+        old_wide = create_lesson_wide_exercise(course: lesson)
+        old_draft = create_exercise(essential: second, status: "draft")
+        session = create_exercise_session(student: create_student, exercise: old)
+        assignment = create_assignment(assignable: old)
+        old_questions = old.questions.order(:id).map { [ it.id, it.content, it.answers.order(:id).pluck(:id, :content, :correct) ] }
+        lesson_before = lesson.reload.attributes
+        essentials_before = lesson.essentials.order(:id).map(&:attributes)
+
+        report = run_import(course_tree_v2_document(courses: 1, essentials: 2))
+
+        assert_equal [ "completed", 1, 0, 0 ], report.values_at(:status, :imported_count, :error_count, :skipped_count)
+        assert_equal 3, report.details["exercises_archived"]
+        assert_equal 6, report.details["exercises_created"]
+        assert_equal 0, report.details["essentials_created"]
+        assert_equal [ 1, 2 ], [ Orm::Course.count, Orm::Essential.count ]
+        assert_equal lesson_before, lesson.reload.attributes
+        assert_equal essentials_before, lesson.essentials.order(:id).map(&:attributes)
+        assert_equal [ [ "archived" ] * 3 ], [ Orm::Exercise.where(id: [ old, old_wide, old_draft ].map(&:id)).pluck(:status) ]
+        assert_not_nil old.reload.archived_at
+        assert_equal "archived", assignment.reload.status
+        assert_not_nil assignment.archived_at
+        assert_equal old_questions, old.questions.order(:id).map { [ it.id, it.content, it.answers.order(:id).pluck(:id, :content, :correct) ] }
+        fresh = exercises_of(lesson).where(status: "draft")
+        assert_equal 6, fresh.count
+        assert_equal [ @author.id ], fresh.pluck(:author_id).uniq
+
+        # La séance en cours garde ses questions : sa note se calcule sur question_count, figé au démarrage.
+        assert_equal [ "started", 3 ], session.reload.values_at(:status, :question_count)
+        create_attempt(session:, question: old.questions.order(:position).first)
+        row = close_session(session)
+        assert_equal "completed", session.reload.status
+        assert_equal 33, row.score_percent
+        assert_operator session.correct_count, :<=, session.question_count
+      end
+
+      test "a lesson without exercise is reimported too: nothing archived, the exercises created" do
+        lesson = existing_lesson
+
+        report = run_import(course_tree_v2_document(courses: 1, essentials: 2))
+
+        assert_equal [ 6, nil ], [ report.details["exercises_created"], report.details["exercises_archived"] ]
+        assert_equal 6, exercises_of(lesson).count
+      end
+
+      test "a second reimport archives the exercises of the first one" do
+        lesson = existing_lesson
+
+        run_import(course_tree_v2_document(courses: 1, essentials: 2))
+        report = run_import(course_tree_v2_document(courses: 1, essentials: 2))
+
+        assert_equal [ 6, 6 ], [ report.details["exercises_archived"], report.details["exercises_created"] ]
+        assert_equal [ 6, 6 ], [ exercises_of(lesson).where(status: "archived").count, exercises_of(lesson).where(status: "draft").count ]
+      end
+
+      test "a reimport with a notion absent from the lesson refuses it, the notion named, and archives nothing" do
+        lesson = existing_lesson(notions: [ "Fiche 1" ])
+        old = create_exercise(essential: lesson.essentials.first)
+
+        report = run_import(course_tree_v2_document(courses: 1, essentials: 2))
+
+        assert_equal [ 0, 1 ], report.values_at(:imported_count, :error_count)
+        assert_equal [ { "path" => "courses[0].essentials[1].name", "code" => "essential_not_in_lesson",
+                         "params" => { "course" => "Cours 1", "name" => "Fiche 2" } } ], report.import_errors
+        assert_equal "published", old.reload.status
+        assert_equal 1, exercises_of(lesson).count
+      end
+
+      test "a version 1 file of an existing lesson is still skipped as a duplicate, exercises untouched" do
+        lesson = existing_lesson
+        old = create_exercise(essential: lesson.essentials.first)
+
+        report = run_import(document(v1_course("Cours 1"), version: 1))
+
+        assert_equal [ 0, 1, 0 ], report.values_at(:imported_count, :skipped_count, :error_count)
+        assert_equal "published", old.reload.status
+      end
+
+      # Reprise de la revue du Lot 0 : l'ordre est celui du fichier, sans trou ni doublon, après les positions déjà prises.
+      test "positions follow the file order, notions first then the 4 lesson-wide, after the ones already taken" do
+        lesson = existing_lesson
+        first, second = lesson.essentials.order(:position).to_a
+        create_exercise(essential: first, position: 1)
+        create_exercise(essential: second, position: 2)
+        document = course_tree_v2_document(courses: 1, essentials: 2)
+        document["courses"][0]["essentials"].reverse!
+
+        run_import(document)
+
+        fresh = exercises_of(lesson).where(status: "draft").order(:position)
+        assert_equal (3..8).to_a, fresh.pluck(:position)
+        assert_equal [ second.id, first.id, nil, nil, nil, nil ], fresh.pluck(:essential_id)
+        assert_equal [ "Bilan 1", "Bilan 2", "Bilan 3", "Bilan 4" ], fresh.last(4).map(&:title)
+        assert_equal (1..8).to_a, exercises_of(lesson).order(:position).pluck(:position)
+      end
+
+      # Reprise de la revue du Lot 0, M14 : l'import ne passe pas par le dépôt des exercices, donc n'atteint jamais
+      # EssentialOutsideCourse ; il ne rattache que les notions de la leçon réimportée, trouvées par leur nom.
+      test "a notion of another lesson is never reached: its name is unknown in the reimported lesson" do
+        existing_lesson
+        other = existing_lesson(name: "Autre leçon", notions: [ "Fiche 3" ])
+        old = create_exercise(essential: other.essentials.first)
+        document = course_tree_v2_document(courses: 1, essentials: 1)
+        document["courses"][0]["essentials"][0]["name"] = "Fiche 3"
+
+        report = run_import(document)
+
+        assert_equal [ 0, 1 ], report.values_at(:imported_count, :error_count)
+        assert_equal [ [ "courses[0].essentials[0].name", "essential_not_in_lesson" ] ], schema_pairs(report)
+        assert_equal [ "published", 1 ], [ old.reload.status, exercises_of(other).count ]
       end
 
       test "an author who lost the team role is refused: the import fails, nothing is written" do

@@ -116,6 +116,7 @@ module Repositories
         assert_includes @repository.existing_keys, [ "genetiqueetevolution", @level.id, @material.id, series.id ]
         assert_includes @repository.taken_slugs, record.slug
         assert_instance_of Set, @repository.taken_slugs
+        assert_equal record.id, @repository.ids_by_key.fetch([ "genetiqueetevolution", @level.id, @material.id, series.id ])
       end
     end
   end

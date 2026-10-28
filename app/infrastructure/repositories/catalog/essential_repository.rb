@@ -62,6 +62,10 @@ module Repositories
         scope.pluck(:course_id, :name).to_set { |course_id, name| [ course_id, Entities::Shared::NaturalKey.normalize(name) ] }
       end
 
+      def ids_by_name(course_id:)
+        Orm::Essential.where(course_id:).pluck(:name, :id).to_h { |name, id| [ Entities::Shared::NaturalKey.normalize(name), id ] }
+      end
+
       def next_position(course_id:)
         Orm::Essential.where(course_id:).maximum(:position).to_i + 1
       end

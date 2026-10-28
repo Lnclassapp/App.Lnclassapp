@@ -19,6 +19,8 @@ module UseCases
       # Le format 1 ne porte plus d'exercices : ils sont ignorés et comptés dans le rapport (clé du détail).
       IGNORED_DETAIL = "exercises_ignored_v1"
       # Lignes écrites par ContentTreeWriter → clé du détail du rapport.
+      # Réimport d'une leçon v2 : les exercices archivés, annoncés au rapport seulement s'il y en a.
+      ARCHIVED_DETAIL = "exercises_archived"
       DETAILS = { essentials: "essentials_created", exercises: "exercises_created", questions: "questions_created",
                   answers: "answers_created" }.freeze
       Node = Ports::Catalog::ContentTreeWriterPort
@@ -38,7 +40,7 @@ module UseCases
       # Les slugs pris sont complétés au fil de la validation : deux cours du fichier n'en partagent jamais un.
       def prepare(target:)
         Entities::Catalog::ImportContext.new(target:, existing_keys: @courses.existing_keys,
-                                             data: { lookup: @taxonomy.lookup, course_slugs: @courses.taken_slugs,
+                                             data: { lookup: @taxonomy.lookup, course_ids: @courses.ids_by_key, course_slugs: @courses.taken_slugs,
                                                      essential_slugs: @essentials.taken_slugs })
       end
 
@@ -51,22 +53,49 @@ module UseCases
         errors += exercise_errors(course, path) unless legacy
         return Entities::Catalog::ImportItem.new(path:, errors:) if errors.any?
 
+        key = course_key(course, lookup)
+        existing_id = legacy ? nil : context.data.fetch(:course_ids)[key]
+        return replacement_item(course, path, lookup, key, existing_id) if existing_id
+
         node = course_node(course, lookup, context.data)
         @ignored_exercises[node.slug] = ignored
-        Entities::Catalog::ImportItem.new(path:, plan: node,
-                                          key: [ Entities::Shared::NaturalKey.compact(node.name), node.level_id, node.material_id, node.series_id ])
+        Entities::Catalog::ImportItem.new(path:, plan: node, key:)
       end
 
       # Tout le lot dans la transaction du moteur ; le contenu HTML est assaini par l'écrivain.
       def write(items:, author_id:, at:)
         created = @writer.write(courses: items.map(&:plan), author_id:, at:)
         details = DETAILS.to_h { |rows, detail| [ detail, created.fetch(rows) ] }
-        ignored = items.sum { @ignored_exercises.fetch(it.plan.slug) }
+        ignored = items.sum { @ignored_exercises.fetch(it.plan.slug, 0) }
         details[IGNORED_DETAIL] = ignored if ignored.positive?
+        details[ARCHIVED_DETAIL] = created.fetch(:archived) if created.fetch(:archived).positive?
         { imported: items.size, details: }
       end
 
       private
+
+      # Clé de doublon de la leçon (celle de CourseRepository#existing_keys).
+      def course_key(course, lookup)
+        [ Entities::Shared::NaturalKey.compact(course["name"].squish), lookup.resolve_level(course["level_name"]).id,
+          lookup.resolve_material(course["material_name"]).id, series_id(course["series_name"], lookup) ]
+      end
+
+      # Format 2, leçon déjà en base (ADR-0113 §4.5, décision du porteur) : elle et ses notions restent telles quelles, ses exercices
+      # sont archivés puis remplacés. Chaque notion du fichier doit être une notion de cette leçon, trouvée par son nom ; sinon la
+      # leçon est refusée entière. La clé n'est pas celle d'existing_keys : le moteur ne l'ignore pas comme un doublon.
+      def replacement_item(course, path, lookup, key, existing_id)
+        known = @essentials.ids_by_name(course_id: existing_id)
+        name = course["name"].squish
+        errors = course["essentials"].each_with_index.filter_map do |essential, index|
+          next if known.key?(Entities::Shared::NaturalKey.normalize(essential["name"]))
+
+          rule_error("#{path}.essentials[#{index}].name", "essential_not_in_lesson", course: name, name: essential["name"].to_s.squish)
+        end
+        return Entities::Catalog::ImportItem.new(path:, errors:) if errors.any?
+
+        node = course_node(course, lookup, { course_slugs: Set.new, essential_slugs: Set.new }, existing_id:, known:)
+        Entities::Catalog::ImportItem.new(path:, plan: node, key: [ :replace, *key ])
+      end
 
       # Les alias de l'ancienne application ramenés aux clés que ContentNode lit ; la clé status est ignorée.
       def canonical(course)
@@ -116,31 +145,35 @@ module UseCases
         end
       end
 
-      def course_node(course, lookup, data)
+      # existing_id : la leçon réimportée, dont ni le slug ni ceux des notions ne sont tirés (rien n'en est écrit).
+      # Les exercices partent dans l'ordre du fichier (les notions, puis toute la leçon) : c'est l'ordre dont l'écrivain tire leurs positions.
+      def course_node(course, lookup, data, existing_id: nil, known: {})
         name = course["name"].squish
+        essentials = course["essentials"].each_with_index.map do |essential, index|
+          essential_node(essential, name, index, data, existing_id: known[Entities::Shared::NaturalKey.normalize(essential["name"])])
+        end
         Node::CourseNode.new(
-          slug: slug_for(name, "course", data.fetch(:course_slugs)), name:, subtitle: optional(course["subtitle"]),
+          slug: (slug_for(name, "course", data.fetch(:course_slugs)) unless existing_id), name:, subtitle: optional(course["subtitle"]),
           content: course["content"], level_id: lookup.resolve_level(course["level_name"]).id,
           series_id: series_id(course["series_name"], lookup), material_id: lookup.resolve_material(course["material_name"]).id,
-          essentials: course["essentials"].each_with_index.map { |essential, index| essential_node(essential, name, index, data) },
-          exercises: Array(course["exercises"]).each_with_index.map { |exercise, rank| exercise_node(exercise, rank) }
+          essentials:, exercises: Array(course["exercises"]).map { |exercise| exercise_node(exercise) }, existing_id:
         )
       end
 
       # Même slug que l'ORM : tiré du nom du cours puis de celui de la fiche.
-      def essential_node(essential, course_name, index, data)
+      def essential_node(essential, course_name, index, data, existing_id: nil)
         name = essential["name"].squish
         Node::EssentialNode.new(
-          slug: slug_for("#{course_name} #{name}", "essential", data.fetch(:essential_slugs)), course_id: nil, name:,
+          slug: (slug_for("#{course_name} #{name}", "essential", data.fetch(:essential_slugs)) unless existing_id), course_id: nil, name:,
           subtitle: optional(essential["subtitle"]), content: essential["content"], position: index + 1,
-          exercises: essential["exercises"].each_with_index.map { |exercise, rank| exercise_node(exercise, rank) }
+          exercises: essential["exercises"].map { |exercise| exercise_node(exercise) }, existing_id:
         )
       end
 
-      def exercise_node(exercise, index)
+      def exercise_node(exercise)
         Node::ExerciseNode.new(
           public_id: SecureRandom.base58(PUBLIC_ID_LENGTH), essential_id: nil, title: exercise["title"].squish,
-          statement: exercise["statement"].to_s.strip, exercise_type: exercise["exercise_type"], position: index + 1,
+          statement: exercise["statement"].to_s.strip, exercise_type: exercise["exercise_type"], position: nil,
           questions: exercise["questions"].each_with_index.map { |question, rank| Node::QuestionNode.from_import(question, position: rank + 1) }
         )
       end

@@ -34,6 +34,11 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #existing_keys"
       end
 
+      # Les notions d'une leçon par nom normalisé. → { Entities::Shared::NaturalKey.normalize(name) => id }
+      def ids_by_name(course_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #ids_by_name"
+      end
+
       # → Integer
       def next_position(course_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #next_position"

@@ -53,7 +53,7 @@ fr:
               match: "matching seulement : le côté droit de la paire, content étant le côté gauche. 500 caractères au plus."
           example: "Exemple minimal"
           example_hint: "Les points de suspension et la ligne commençant par // marquent ce qu'il reste à écrire : un fichier JSON ne contient ni l'un ni l'autre. Il faut quatre exercices pour l'ensemble de la fiche de cours, chacun avec ses questions."
-          drafts: "Tout arrive en brouillon, quelle que soit la clé status du fichier : relisez, puis publiez. Une fiche de cours déjà présente (même nom, niveau, matière et série, sans tenir compte des accents, de la casse ni des espaces) est ignorée et comptée ; elle n'est jamais modifiée."
+          drafts: "Tout arrive en brouillon, quelle que soit la clé status du fichier : relisez, puis publiez. Une fiche de cours déjà présente (même nom, niveau, matière et série, sans tenir compte des accents, de la casse ni des espaces) n'est jamais modifiée, ni ses notions. En version 2, ses exercices actuels sont archivés et remplacés par ceux du fichier, en brouillon : chaque notion du fichier doit être une notion de la fiche de cours. En version 1, elle est ignorée et comptée. Plafonds : 50 notions par fiche de cours, 30 questions par exercice, 10 propositions par question, 5 000 caractères par sujet."
           referential: "Noms acceptés du référentiel"
           referential_hint: "Les noms sont comparés sans accents ni casse : « Physique Chimie » désigne Physique-Chimie. Un nom inconnu met la fiche de cours en erreur ; rien n'est créé dans le référentiel."
           levels: "Niveaux et leurs séries"
@@ -65,6 +65,7 @@ fr:
         details:
           essentials_created: "Fiches de révision créées"
           exercises_created: "Exercices créés"
+          exercises_archived: "Exercices archivés (fiche de cours réimportée)"
           exercises_ignored_v1: "Exercices ignorés (format v1)"
           questions_created: "Questions créées"
           answers_created: "Propositions créées"

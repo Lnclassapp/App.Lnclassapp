@@ -98,6 +98,7 @@ module Repositories
 
         assert_equal Set[[ @course.id, "la mitose" ]], @repository.existing_keys(course_ids: [ @course.id ])
         assert @repository.existing_keys.superset?(Set[[ @course.id, "la mitose" ], [ other_course.id, "ailleurs" ]])
+        assert_equal({ "la mitose" => mine.id }, @repository.ids_by_name(course_id: @course.id))
         assert_equal 2, @repository.next_position(course_id: @course.id)
         assert_equal 1, @repository.next_position(course_id: create_course.id)
         assert_includes @repository.taken_slugs, mine.slug

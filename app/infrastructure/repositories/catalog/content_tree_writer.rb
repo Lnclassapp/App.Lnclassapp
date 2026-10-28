@@ -17,6 +17,7 @@ module Repositories
 
       # Une table après l'autre, parents d'abord : les ids des cours et des fiches sont relus par slug, ceux des exercices et
       # des questions sont réservés d'avance. Exercices, questions et propositions s'écrivent par COPY (ADR-0068 §4).
+      # Une leçon déjà en base (existing_id) n'est pas réécrite, ni ses notions : ses exercices sont archivés, puis remplacés.
       # Les contrôles de clé étrangère gardent le plan choisi quand la table parente était presque vide : un parcours
       # complet par ligne, coût quadratique (10 000 exercices au-delà de 5 min sur une base neuve). Sans parcours
       # séquentiel, jusqu'à la fin de la transaction du lot, ils passent par la clé primaire.
@@ -25,6 +26,8 @@ module Repositories
         @author_id = author_id
         @at = at
         @copy_at = copy_timestamp(at)
+        kept, courses = courses.partition(&:existing_id)
+        archived = archive_exercises(kept.map(&:existing_id))
         course_ids = ids_by(insert(Orm::Course, courses.map { |node| course_row(node) }), "slug")
         write_rich_texts("Orm::Course", courses, course_ids)
 
@@ -33,8 +36,10 @@ module Repositories
         write_rich_texts("Orm::Essential", essentials, essential_ids)
 
         exercises += essentials.flat_map { |essential| essential.exercises.map { |node| node.with(essential_id: essential_ids.fetch(essential.slug)) } }
+        exercises += kept.flat_map { |course| course.essentials.flat_map { |essential| essential.exercises.map { |node| node.with(essential_id: essential.existing_id) } } }
         # Les exercices de toute la leçon viennent après ceux des notions : sans notion, ils prennent la leçon de leur cours (ADR-0113 §4.1).
-        lesson_wide = courses.flat_map { |course| course.exercises.map { |node| [ node, course_ids.fetch(course.slug) ] } }
+        lesson_wide = courses.flat_map { |course| course.exercises.map { |node| [ node, course_ids.fetch(course.slug) ] } } +
+                      kept.flat_map { |course| course.exercises.map { |node| [ node, course.existing_id ] } }
         exercises += lesson_wide.map(&:first)
         course_of = course_ids_of(exercises)
         owners = exercises.first(exercises.size - lesson_wide.size).map { course_of.fetch(it.essential_id) } + lesson_wide.map(&:last)
@@ -48,7 +53,7 @@ module Repositories
         answers = questions.zip(question_ids).flat_map { |(_, question), id| question.answers.map { |node| answer_row(id, node) } }
         copy("answers", ANSWER_COLUMNS, answers)
 
-        { courses: courses.size, essentials: essentials.size, exercises: exercises.size, questions: questions.size, answers: answers.size }
+        { courses: courses.size, essentials: essentials.size, exercises: exercises.size, questions: questions.size, answers: answers.size, archived: }
       end
 
       private
@@ -116,10 +121,23 @@ module Repositories
       # La leçon de chaque notion qui porte un exercice (les fiches viennent d'être écrites, dans la même transaction).
       def course_ids_of(exercises) = Orm::Essential.where(id: exercises.filter_map(&:essential_id).uniq).pluck(:id, :course_id).to_h
 
-      # La position est unique par leçon : elle suit la dernière de la leçon, dans l'ordre des exercices (notions, puis toute la leçon).
+      # La position est unique par leçon : elle suit la dernière de la leçon (archivés compris), dans l'ordre d'arrivée des
+      # exercices, qui est celui du fichier (les notions, puis toute la leçon). node.position n'est pas lue : de 1 à n sans trou
+      # ni doublon, quelle que soit la façon dont l'appelant numérote ses nœuds. → [Integer]
       def course_positions(owners)
         last = Orm::Exercise.where(course_id: owners.uniq).group(:course_id).maximum(:position)
         owners.map { |course_id| last[course_id] = last.fetch(course_id, 0) + 1 }
+      end
+
+      # Réimport (ADR-0113 §4.5) : les exercices restent lisibles (séances, copies), jamais modifiés en place ; leurs assignations
+      # actives sont archivées avec eux, comme la migration du Lot 0. → le nombre d'exercices archivés
+      def archive_exercises(course_ids)
+        return 0 if course_ids.empty?
+
+        ids = Orm::Exercise.where(course_id: course_ids).where.not(status: "archived").pluck(:id)
+        Orm::ClassroomAssignment.where(assignable_type: "Exercise", assignable_id: ids).where.not(status: "archived")
+                                .update_all(status: "archived", archived_at: @at, updated_at: @at)
+        Orm::Exercise.where(id: ids).update_all(status: "archived", archived_at: @at, updated_at: @at)
       end
 
       # Dans l'ordre d'EXERCISE_COLUMNS.
