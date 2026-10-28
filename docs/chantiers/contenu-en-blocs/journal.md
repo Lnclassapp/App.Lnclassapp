@@ -44,7 +44,9 @@
 - Le texte d'invite de la zone de rédaction est générique (le bloc `writing` n'a pas de champ pour un texte d'invite) ; aucun lien dans les sources (aucune URL acceptée dans le document).
 - Les logiques sont chargées à la demande : un geste avant leur branchement est perdu ; `data-ready` sur la figure et sur la rédaction le dit au test.
 
-**Fichiers hors fiche touchés** : `app/assets/stylesheets/course_sheet.css` (la ligne `@import`, collision attendue avec le Lot E), `test/design/design_tokens_test.rb` (la liste des feuilles importées, même collision), `test/integration/catalog/course_sheet_seeds_test.rb` (« sur 1 » devient « sur N » : une seconde fiche est semée).
+**Corrections des revues** : (1) le contrat de `text_n` est tenu à l'import (`SheetDocument`, propre à ce kind) : une fois les passages `{T|R|A|E|C}…{/X}` retirés, toute accolade restante, ou un `text_n` qui n'est pas une chaîne, refuse le fichier. (2) Retour arrière Turbo : le texte d'attente vient de la vue (`data-idle`), les deux coquilles se remettent à zéro sur `turbo:before-cache` (`reset` : `destroy()` rend le DOM comme à la livraison, la saisie de la rédaction est vidée, `data-ready` retiré), `data-ready` n'est posé qu'une fois la logique importée et construite. (3) Rédaction : « au moins 3 connecteurs » n'apparaît que si la liste en compte 3 ou plus ; la liste est lue comme le texte de l'élève (minuscules, `’` et `` ` `` en `'`) ; une locution qui finit par une apostrophe (« parce qu' ») se reconnaît devant une lettre. (4) Coquilles : `try/catch` seulement autour de `import()` ; une erreur du constructeur remonte dans la console (rejet non intercepté).
+
+**Fichiers hors fiche touchés** : `app/assets/stylesheets/course_sheet.css` (la ligne `@import`, collision attendue avec le Lot E), `test/design/design_tokens_test.rb` (la liste des feuilles importées, même collision), `test/integration/catalog/course_sheet_seeds_test.rb` (« sur 1 » devient le nombre exact de fichiers de `db/seeds/data/course_sheets/` : une seconde fiche est semée).
 
 ## Ce qui a dérapé
 

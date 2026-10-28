@@ -22,33 +22,44 @@ export class Writing {
       paragraphs: Number(root.dataset.minParagraphs) || 0,
       connectors: Number(root.dataset.minConnectors) || 0
     }
-    this.connectors = this.list(root.dataset.connectors).map((word) => ({
-      word, pattern: new RegExp(`(^|[^${LETTERS}])${escape(word)}(?=$|[^${LETTERS}])`)
-    }))
+    // Un mot entier : ni lettre avant, ni lettre après ; une locution qui finit par une apostrophe (« parce qu' ») est suivie d'une lettre.
+    this.connectors = this.list(root.dataset.connectors).map((word) => {
+      const after = new RegExp(`[${LETTERS}]$`).test(word) ? `(?=$|[^${LETTERS}])` : ""
+      return { word, pattern: new RegExp(`(^|[^${LETTERS}])${escape(word)}${after}`) }
+    })
 
     this.onInput = () => this.update()
-    this.input.addEventListener("input", this.onInput)
     this.update()
+    this.input.addEventListener("input", this.onInput)
     root.dataset.ready = "true"
   }
 
+  // Détache et remet la liste comme à la livraison (le cache de Turbo ne garde pas la saisie : la liste ne doit pas la survivre).
   destroy() {
     this.input.removeEventListener("input", this.onInput)
+    this.input.value = ""
+    this.update()
     delete this.root.dataset.ready
   }
 
+  // Les connecteurs sont lus comme le texte de l'élève : minuscules, apostrophes droites.
   list(json) {
     try {
       const list = JSON.parse(json || "[]")
-      return Array.isArray(list) ? list.filter((word) => typeof word === "string" && word !== "") : []
-    } catch {
+      return Array.isArray(list) ? list.filter((word) => typeof word === "string").map((word) => this.normalize(word).trim()).filter(Boolean) : []
+    } catch (error) {
+      console.warn("rédaction : liste de connecteurs illisible", error)
       return []
     }
   }
 
+  normalize(text) {
+    return text.toLowerCase().replace(/[’`]/g, "'")
+  }
+
   update() {
     const raw = this.input.value
-    const text = raw.toLowerCase().replace(/[’`]/g, "'")
+    const text = this.normalize(raw)
     const found = this.found(text)
     const words = raw.trim() ? raw.trim().split(/\s+/).length : 0
     const paragraphs = raw.split(/\n\s*\n/).filter((part) => part.trim()).length

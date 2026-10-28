@@ -63,11 +63,13 @@ class Catalog::CourseSheetSeedsTest < ActionDispatch::IntegrationTest
   test "the demo seed imports the sheet on the lesson, then a second run does nothing" do
     create_team_member(team_role: "content", second_factor: false, contact: "0700000000")
 
-    assert_match(/1 fiche\(s\) de cours importée\(s\) sur \d+/, run_seed)
+    total = Rails.root.glob("db/seeds/data/course_sheets/*.json").size
+
+    assert_includes run_seed, "1 fiche(s) de cours importée(s) sur #{total}"
     assert_equal [ @course.id ], Orm::CourseSheet.pluck(:course_id)
     sheet = Orm::CourseSheet.last
 
-    assert_match(/0 fiche\(s\) de cours importée\(s\) sur \d+/, run_seed)
+    assert_includes run_seed, "0 fiche(s) de cours importée(s) sur #{total}"
     assert_equal [ 1, sheet.updated_at ], [ Orm::CourseSheet.count, Orm::CourseSheet.last.updated_at ]
   end
 

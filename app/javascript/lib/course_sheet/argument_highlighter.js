@@ -11,7 +11,8 @@ export class ArgumentHighlighter {
     this.info = root.querySelector(".sheet-hl-info")
     this.title = this.info.querySelector("[data-role='title']")
     this.text = this.info.querySelector("[data-role='text']")
-    this.idle = this.text.textContent
+    // Le texte d'attente vient de la vue : relu dans le DOM, il serait faux après un retour arrière (cache de Turbo).
+    this.idle = this.info.dataset.idle || ""
     this.on = new Set()
     this.current = null
 
@@ -23,9 +24,13 @@ export class ArgumentHighlighter {
     root.dataset.ready = "true"
   }
 
+  // Détache et remet la figure comme à la livraison : aucun surligneur allumé, aucun passage actif, texte d'attente.
   destroy() {
     this.root.removeEventListener("click", this.onClick)
     this.root.removeEventListener("keydown", this.onKey)
+    this.on = new Set()
+    this.current = null
+    this.render()
     delete this.root.dataset.ready
   }
 

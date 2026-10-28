@@ -7,12 +7,14 @@
   min_paragraphs = block["min_paragraphs"].is_a?(Integer) ? block["min_paragraphs"].clamp(0, 20) : 0
   min_connectors = 3
   # Les vérifications, dans l'ordre de la maquette ; celles qui dépendent d'un réglage du bloc ne viennent que s'il est posé.
-  checks = [ "opinion", (min_paragraphs.positive? ? "paragraphs" : nil), (connectors.any? ? "connectors" : nil), "example", "question", "conclusion",
+  # « Au moins 3 connecteurs » n'a de sens que si la liste en propose au moins 3.
+  checks = [ "opinion", (min_paragraphs.positive? ? "paragraphs" : nil), (connectors.size >= min_connectors ? "connectors" : nil), "example", "question", "conclusion",
              (min_words.positive? ? "words" : nil) ].compact
   counts = { "paragraphs" => min_paragraphs, "connectors" => min_connectors, "words" => min_words }
   uid = "sheet-wr-#{block.object_id}"
 %>
-<%= tag.section class: "sheet-box sheet-writing", data: { tone: "property", controller: "course-sheet--writing", connectors: connectors,
+<%= tag.section class: "sheet-box sheet-writing", data: { tone: "property", controller: "course-sheet--writing",
+                                                           action: "turbo:before-cache@document->course-sheet--writing#reset", connectors: connectors,
                                                            min_words:, min_paragraphs:, min_connectors:,
                                                            stats: t(".stats", words: "{words}", paragraphs: "{paragraphs}"),
                                                            label_done: t(".done"), label_todo: t(".todo") } do %>

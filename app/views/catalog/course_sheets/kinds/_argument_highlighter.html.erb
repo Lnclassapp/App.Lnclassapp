@@ -25,7 +25,8 @@
 <% if present.empty? %>
   <p class="sheet-muted"><%= t("#{i18n}.empty") %></p>
 <% else %>
-  <div class="sheet-hl" role="group" aria-label="<%= t("#{i18n}.label") %>" data-controller="course-sheet--argument-highlighter">
+  <div class="sheet-hl" role="group" aria-label="<%= t("#{i18n}.label") %>" data-controller="course-sheet--argument-highlighter"
+       data-action="turbo:before-cache@document->course-sheet--argument-highlighter#reset">
     <div class="sheet-hl-buttons" role="group" aria-label="<%= t("#{i18n}.group_label") %>">
       <% present.each do |name| %>
         <%= tag.button t("#{i18n}.categories.#{name}.name"), type: "button", class: "sheet-hl-btn", "aria-pressed": "false",
@@ -35,7 +36,7 @@
                                           data: { label_on: t("#{i18n}.all_on"), label_off: t("#{i18n}.all_off") } %>
     </div>
     <p class="sheet-hl-text"><%= safe_join(segments.map { |kind, text| kind ? tag.span(text, class: "sheet-hl-seg", data: { kind: }) : text }) %></p>
-    <div class="sheet-hl-info" role="status" aria-live="polite"><b data-role="title"></b> <span data-role="text"><%= t("#{i18n}.idle") %></span></div>
+    <div class="sheet-hl-info" role="status" aria-live="polite" data-idle="<%= t("#{i18n}.idle") %>"><b data-role="title"></b> <span data-role="text"><%= t("#{i18n}.idle") %></span></div>
     <% if block["caption"].present? %><p class="sheet-hl-credit"><%= sheet_text(block["caption"], glossary: @sheet&.glossary || {}) %></p><% end %>
   </div>
 <% end %>

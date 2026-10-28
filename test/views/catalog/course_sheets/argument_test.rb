@@ -56,7 +56,7 @@ module Catalog
     def writing(extra = {}) = { "type" => "writing", "title" => "Sujet", "prompt" => "**Donne** ton avis." }.merge(extra)
 
     test "la rédaction n'est ni un formulaire ni un champ nommé, et sa liste suit les réglages du bloc" do
-      block_html(writing("connectors" => %w[car donc], "min_paragraphs" => 3, "min_words" => 80))
+      block_html(writing("connectors" => %w[car donc enfin], "min_paragraphs" => 3, "min_words" => 80))
 
       assert_select "[data-controller='course-sheet--writing'][data-min-paragraphs='3'][data-min-words='80'][data-min-connectors='3']", 1
       assert_select "form", 0
@@ -66,15 +66,37 @@ module Catalog
       assert_select "li[data-check=paragraphs]", /3 paragraphes/
       assert_select "li[data-check=words]", /80 mots/
       assert_select "li[data-state=todo]", 7
-      assert_equal %w[car donc], JSON.parse(css_select("[data-controller='course-sheet--writing']").first["data-connectors"])
+      assert_equal %w[car donc enfin], JSON.parse(css_select("[data-controller='course-sheet--writing']").first["data-connectors"])
       assert_select ".sheet-box-label", "Sujet"
       assert_select ".sheet-text b", "Donne"
+    end
+
+    test "la vérification des connecteurs n'apparaît que si la liste en compte au moins trois (le minimum à trouver)" do
+      block_html(writing("connectors" => %w[car donc]))
+      assert_select "li[data-check=connectors]", 0
+
+      block_html(writing("connectors" => %w[car donc enfin]))
+      assert_select "li[data-check=connectors]", 1
+    end
+
+    test "la rédaction et le surligneur se remettent à zéro avant la mise en cache de Turbo" do
+      block_html(writing)
+      assert_select "[data-controller='course-sheet--writing'][data-action~='turbo:before-cache@document->course-sheet--writing#reset']", 1
+
+      block_html(highlighter({ "text_1" => "{T}Je pense.{/T}" }))
+      assert_select "[data-controller='course-sheet--argument-highlighter'][data-action~='turbo:before-cache@document->course-sheet--argument-highlighter#reset']", 1
+    end
+
+    test "le texte d'attente du surligneur est porté par la vue, pour être rétabli au retour arrière" do
+      block_html(highlighter({ "text_1" => "{T}Je pense.{/T}" }))
+
+      assert_select ".sheet-hl-info[data-idle=?]", I18n.t("catalog.course_sheets.kinds.argument_highlighter.idle")
     end
 
     test "sans connecteurs, sans minimum, la liste ne garde que les vérifications sans réglage ; des valeurs étrangères sont ignorées" do
       block_html(writing("connectors" => [ "car", 4, nil ], "min_words" => "beaucoup", "min_paragraphs" => -2))
 
-      assert_equal %w[opinion connectors example question conclusion], css_select("li[data-check]").map { it["data-check"] }
+      assert_equal %w[opinion example question conclusion], css_select("li[data-check]").map { it["data-check"] }
       assert_equal [ "car" ], JSON.parse(css_select("[data-controller='course-sheet--writing']").first["data-connectors"])
 
       block_html(writing)

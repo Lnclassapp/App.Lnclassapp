@@ -46,6 +46,8 @@ module Entities
       GLOSSARY_KEY = /\A[a-z0-9_]{1,40}\z/
       FIELD_ID = /\A[a-z0-9_]{1,20}\z/
       PARAM_KEY = /\A[a-z][a-z0-9_]{0,29}\z/
+      HIGHLIGHTER_TEXT_KEY = /\Atext_\d{1,2}\z/
+      HIGHLIGHTER_PASSAGE = %r{\{([TRAEC])\}.*?\{/\1\}}m
       MARK = /\A([a-z0-9_]{1,40})\|([^\[\]|]{1,60})\z/
       # Aucun lien sortant ni ressource distante (menace de l'ADR). « (MN) // (BC) » s'écrit librement : seul « :// » est un schéma.
       URL = %r{://|www\.|mailto:|javascript:|data:}i
@@ -282,7 +284,27 @@ module Entities
 
         fail!(:unknown_kind, block["kind"].to_s[0, 40]) unless kinds.include?(block["kind"])
         text(block["caption"], "caption", max: SHORT_MAX) if block.key?("caption")
-        params(block["params"]) if block.key?("params")
+        return unless block.key?("params")
+
+        params(block["params"])
+        highlighter_params(block["params"]) if block["kind"] == "argument_highlighter"
+      end
+
+      # Surligneur d'arguments : `text_n` porte du texte où des passages sont balisés `{T}…{/T}` (T, R, A, E, C). Une fois les passages
+      # valides retirés, plus aucune accolade ne doit rester : le fichier est refusé à l'import plutôt que lu de travers au rendu.
+      def highlighter_params(value)
+        return unless value.is_a?(Hash)
+
+        value.each do |key, item|
+          next unless HIGHLIGHTER_TEXT_KEY.match?(key)
+
+          path = "params.#{key}"
+          case item
+          when String then fail!(:invalid_value, path) if item.gsub(HIGHLIGHTER_PASSAGE, "").match?(/[{}]/)
+          when Hash, Array then nil # déjà refusés par `params`
+          else fail!(:wrong_type, path)
+          end
+        end
       end
 
       # Les réglages d'une figure : bornés, jamais du code ni un lien. Chaque kind en tire ses valeurs et les borne à son tour.

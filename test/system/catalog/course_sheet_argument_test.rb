@@ -6,6 +6,7 @@ require "application_system_test_case"
 # test/integration/catalog/course_sheet_argument_seeds_test.rb et test/views/catalog/course_sheets/argument_test.rb.
 class Catalog::CourseSheetArgumentTest < ApplicationSystemTestCase
   PATH = Rails.root.join("db/seeds/data/course_sheets/texte-argumentatif.json")
+  TRANSPARENT = "rgba(0, 0, 0, 0)".freeze
   HIGHLIGHTER = "[data-controller~='course-sheet--argument-highlighter']".freeze
   WRITING = "[data-controller~='course-sheet--writing']".freeze
   TEXT = <<~TEXT.strip
@@ -21,10 +22,14 @@ class Catalog::CourseSheetArgumentTest < ApplicationSystemTestCase
   def writing(key, **) = t("blocks.writing.#{key}", **)
   def metric(script) = page.evaluate_script(script)
   def requests = metric("performance.getEntriesByType('resource').filter((e) => ['fetch', 'xmlhttprequest'].includes(e.initiatorType)).length")
-  def check_state(name) = find("#{WRITING} li[data-check='#{name}']")[:"data-state"]
+  def background(selector) = metric("getComputedStyle(document.querySelector(\"#{selector}\")).backgroundColor")
+
+  # Une vérification de la rédaction attend son état : la liste se met à jour à la frappe, pas avant le retour du navigateur.
+  def assert_check(name, state) = assert_selector "#{WRITING} li[data-check='#{name}'][data-state='#{state}']"
 
   def open_sheet
     document = JSON.parse(PATH.read)
+    yield document if block_given?
     @course = create_course(name: "Le texte argumentatif", level: create_level(name: "3ème"))
     create_course_sheet(course: @course, theme: document["theme"], document: document.slice("pages", "glossary"))
     sign_in_as create_student_for(@course)
@@ -47,7 +52,8 @@ class Catalog::CourseSheetArgumentTest < ApplicationSystemTestCase
     within(HIGHLIGHTER) do
       assert_text hl("idle")
       assert_no_selector ".sheet-hl-seg[data-on]"
-      # Un passage non allumé ne répond pas.
+      # Un passage non allumé ne répond pas et n'est pas coloré.
+      assert_equal TRANSPARENT, background("#{HIGHLIGHTER} .sheet-hl-seg[data-kind='thesis']")
       first(".sheet-hl-seg[data-kind='thesis']").click
       assert_text hl("idle")
 
@@ -55,7 +61,8 @@ class Catalog::CourseSheetArgumentTest < ApplicationSystemTestCase
       assert_selector ".sheet-hl-btn[data-kind='thesis'][aria-pressed='true']"
       assert_selector ".sheet-hl-seg[data-kind='thesis'][data-on]", minimum: 2
       assert_no_selector ".sheet-hl-seg[data-kind='argument'][data-on]"
-      assert_not_equal "rgba(0, 0, 0, 0)", metric("getComputedStyle(document.querySelector(\"#{HIGHLIGHTER} .sheet-hl-seg[data-kind='thesis']\")).backgroundColor")
+      assert_not_equal TRANSPARENT, background("#{HIGHLIGHTER} .sheet-hl-seg[data-kind='thesis']")
+      assert_equal TRANSPARENT, background("#{HIGHLIGHTER} .sheet-hl-seg[data-kind='argument']")
 
       first(".sheet-hl-seg[data-kind='thesis']").click
       assert_selector ".sheet-hl-info b", text: "#{hl('categories.thesis.name')} :"
@@ -64,6 +71,15 @@ class Catalog::CourseSheetArgumentTest < ApplicationSystemTestCase
       click_on hl("categories.thesis.name")
       assert_no_selector ".sheet-hl-seg[data-on]"
       assert_text hl("idle")
+      assert_equal TRANSPARENT, background("#{HIGHLIGHTER} .sheet-hl-seg[data-kind='thesis']")
+
+      # Au clavier : Entrée sur un passage allumé affiche l'explication.
+      click_on hl("categories.argument.name")
+      assert_selector ".sheet-hl-seg[data-kind='argument'][data-on][tabindex='0']", minimum: 1
+      first(".sheet-hl-seg[data-kind='argument'][data-on]").send_keys(:enter)
+      assert_selector ".sheet-hl-info[data-kind='argument']"
+      assert_text hl("categories.argument.why")
+      click_on hl("categories.argument.name")
 
       click_on hl("all_on")
       assert_selector ".sheet-hl-btn[aria-pressed='true']", count: 5
@@ -87,29 +103,96 @@ class Catalog::CourseSheetArgumentTest < ApplicationSystemTestCase
 
     within(WRITING) do
       assert_selector "li[data-check]", minimum: 5
-      assert_equal "todo", check_state("opinion")
-      assert_selector "[data-role='stats']", text: "0 mots · 0 paragraphe(s)"
+      assert_check "opinion", "todo"
+      assert_selector "[data-role='stats']", exact_text: "0 mots · 0 paragraphe(s)"
 
       before = requests
       find(".sheet-writing-input").set(TEXT)
-      assert_equal "done", check_state("opinion")
-      assert_equal "done", check_state("paragraphs")
-      assert_equal "done", check_state("connectors")
-      assert_equal "done", check_state("example")
-      assert_equal "done", check_state("question")
-      assert_equal "done", check_state("conclusion")
-      assert_selector "[data-role='found'] .sheet-writing-pill", text: "d'abord"
-      assert_selector "[data-role='found'] .sheet-writing-pill", text: "en conclusion"
-      assert_selector "[data-role='count']", text: "5"
-      assert_selector "[data-role='stats']", text: "#{TEXT.split.size} mots · 3 paragraphe(s)"
+      %w[opinion paragraphs connectors example question conclusion].each { assert_check it, "done" }
+      assert_selector "[data-role='found'] .sheet-writing-pill", exact_text: "d'abord"
+      assert_selector "[data-role='found'] .sheet-writing-pill", exact_text: "en conclusion"
+      assert_selector "[data-role='count']", exact_text: "5"
+      assert_selector "[data-role='stats']", exact_text: "#{TEXT.split.size} mots · 3 paragraphe(s)"
 
       find(".sheet-writing-input").set("Un seul paragraphe, donc rien d'autre.")
-      assert_equal "todo", check_state("paragraphs")
-      assert_equal "todo", check_state("conclusion")
+      assert_check "paragraphs", "todo"
+      assert_check "conclusion", "todo"
       assert_equal before, requests, "la rédaction ne part pas au serveur"
     end
     assert_no_selector "#{WRITING} form"
     assert_no_selector "#{WRITING} textarea[name]"
+  end
+
+  test "the writing connector list is read like the student text: curly apostrophes, longest first, whole words, any case" do
+    open_sheet do |document|
+      block = document["pages"].flat_map { it["sections"] }.flat_map { it["blocks"] }.find { it["type"] == "writing" }
+      block["connectors"] = [ "Cependant", "tout d'abord", "d'abord", "car", "mais", "parce qu'" ]
+    end
+
+    within(WRITING) do
+      find(".sheet-writing-input").set("D’abord, une carte dans la maison.")
+      assert_selector "[data-role='found'] .sheet-writing-pill", exact_text: "d'abord"
+      assert_selector "[data-role='count']", exact_text: "1"
+
+      find(".sheet-writing-input").set("Tout d'abord, oui. Cependant, non. Parce qu’il pleut.")
+      assert_selector "[data-role='count']", exact_text: "3"
+      assert_selector "[data-role='found'] .sheet-writing-pill", exact_text: "tout d'abord"
+      assert_selector "[data-role='found'] .sheet-writing-pill", exact_text: "cependant"
+      assert_selector "[data-role='found'] .sheet-writing-pill", exact_text: "parce qu'"
+      assert_no_selector "[data-role='found'] .sheet-writing-pill", exact_text: "d'abord"
+    end
+  end
+
+  test "after Turbo back navigation the highlighter shows its idle state and still answers" do
+    open_sheet
+
+    within(HIGHLIGHTER) do
+      click_on hl("categories.thesis.name")
+      first(".sheet-hl-seg[data-kind='thesis'][data-on]").click
+      assert_selector ".sheet-hl-info[data-kind='thesis']"
+    end
+
+    within(WRITING) do
+      find(".sheet-writing-input").set("Selon moi, c'est vrai.")
+      assert_check "opinion", "done"
+    end
+
+    # Une visite Turbo (pas un chargement complet) : c'est elle qui garde la page en cache, puis la rend au retour arrière.
+    # L'écouteur ajouté ici passe après ceux des contrôleurs : il lit la page telle que Turbo va la copier dans son cache.
+    page.execute_script(<<~JS, root_path)
+      window.sheetMarker = true
+      document.addEventListener("turbo:before-cache", () => {
+        const light = document.querySelector("#{HIGHLIGHTER}")
+        const write = document.querySelector("#{WRITING}")
+        window.sheetCached = {
+          ready: [light.dataset.ready ?? null, write.dataset.ready ?? null],
+          lit: light.querySelectorAll("[data-on], [aria-pressed='true']").length,
+          kind: light.querySelector(".sheet-hl-info").dataset.kind ?? null,
+          opinion: write.querySelector("[data-check='opinion']").dataset.state,
+          typed: write.querySelector("textarea").value
+        }
+      }, { once: true })
+      Turbo.visit(arguments[0])
+    JS
+    assert_no_current_path course_path(@course.slug)
+    page.go_back
+    assert_current_path course_path(@course.slug)
+    assert metric("window.sheetMarker === true"), "le retour arrière est une restauration Turbo, pas un rechargement complet"
+    assert_equal({ "ready" => [ nil, nil ], "lit" => 0, "kind" => nil, "opinion" => "todo", "typed" => "" }, metric("window.sheetCached"))
+
+    assert_selector "#{HIGHLIGHTER}[data-ready='true']", visible: :all
+    within(HIGHLIGHTER, visible: :all) do
+      assert_selector ".sheet-hl-info [data-role='text']", text: hl("idle"), visible: :all
+      assert_no_selector ".sheet-hl-info[data-kind]", visible: :all
+      assert_no_selector ".sheet-hl-seg[data-on]", visible: :all
+      assert_no_selector ".sheet-hl-btn[aria-pressed='true']", visible: :all
+    end
+
+    find("button", text: I18n.t("catalog.courses.show.revision_more")).click if has_button?(I18n.t("catalog.courses.show.revision_more"))
+    within(HIGHLIGHTER) do
+      click_on hl("categories.argument.name")
+      assert_selector ".sheet-hl-seg[data-kind='argument'][data-on]", minimum: 1
+    end
   end
 
   test "at 390 px the sheet has no sideways scroll, the connectors become cards and the targets are 44 px" do
