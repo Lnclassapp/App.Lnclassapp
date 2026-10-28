@@ -1,26 +1,28 @@
 require "test_helper"
 
-# CL-11, UDR-0028 (amended 2026-10-02): the teacher opens a course from their classroom and sees its published essential
-# sheets, each one a link to the sheet in the classroom. Since ADR-0072 neither the course nor a sheet is assigned: the
-# page has no toggle at all. The old screen raised NameError as soon as the course had a sheet.
+# CL-11, UDR-0028, UDR-0139 : the teacher opens a lesson from their classroom and sees its two sections, « Fiche de révision » and
+# « Prépare interros », with the assignment toggles of THIS classroom only (CA-06, CA-07, CA-10).
 class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @classroom = create_classroom(name: "Tle D 1", school: create_school(name: "Lycée Classique"))
-    @teacher = create_teacher(classrooms: [ @classroom ])
     @course = create_course(name: "Génétique et évolution", material: create_material(name: "SVT", category: "science"),
                             subtitle: "Du gène à l'espèce")
-    @meiose = create_essential(course: @course, name: "La méiose")
-    @mitose = create_essential(course: @course, name: "La mitose")
+    @classroom = create_classroom(name: "Tle D 1", school: create_school(name: "Lycée Classique"), level: @course.level,
+                                  series: @course.series)
+    @teacher = create_teacher(classrooms: [ @classroom ])
+    @meiose = create_essential(course: @course, name: "La méiose", position: 1)
+    @mitose = create_essential(course: @course, name: "La mitose", position: 2)
+    @ex_meiose = create_exercise(essential: @meiose, title: "Exercice méiose")
+    @ex_mitose = create_exercise(essential: @mitose, title: "Exercice mitose")
+    @ex_wide = create_lesson_wide_exercise(course: @course, title: "Exercice de toute la leçon")
   end
 
   def tl(key, **) = I18n.t("classroom.classroom_courses.show.#{key}", **)
   def toggle(key) = I18n.t("classroom.assignments.toggle.#{key}")
   def including(text) = /#{Regexp.escape(text)}/
-  def no_toggle = assert_select("[id^=assignment_], form[action*=assignments], [role=group]", 0)
+  def toggle_id(classroom, exercise) = "assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}"
+  def no_toggle = assert_select("[id^=assignment_], form[action*=assignments]", 0)
 
-  test "the teacher sees the course and its published sheets, each a link, without any toggle" do
-    create_essential(course: @course, name: "Brouillon", status: "draft")
-    create_assignment(classroom: @classroom, assignable: create_exercise(essential: @meiose), by: @teacher)
+  test "the teacher sees the header and both sections, exercises grouped by sheet then the whole lesson" do
     sign_in_as @teacher
 
     get classroom_course_path(@classroom.public_id, @course.slug)
@@ -28,45 +30,72 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_response :success
     assert_select "h1", text: "Génétique et évolution"
     assert_select "a[href='#{classroom_path(@classroom.public_id)}']", text: including("Tle D 1")
-    assert_select "#classroom_course_essentials li", 2
-    assert_select "#classroom_course_essentials li", text: /Brouillon/, count: 0
-    assert_select "a[href='#{classroom_essential_path(@classroom.public_id, @course.slug, @meiose.slug)}']", text: "La méiose"
-    assert_select "a[href='#{classroom_essential_path(@classroom.public_id, @course.slug, @mitose.slug)}']", text: "La mitose"
-    # UDR-0130 : la même valeur exacte que la page de la fiche de cours dans le catalogue.
-    assert_select "#classroom_course_essentials_title", text: "Révisions de la leçon"
-    assert_equal I18n.t("catalog.courses.show.essentials_title"), I18n.t("classroom.classroom_courses.show.essentials_title")
-    assert_select "#classroom_course_essentials", text: /exercice/, count: 0
-    no_toggle
+    assert_select "#fiche-de-revision h2", text: "Fiche de révision"
+    assert_select "#prepare-interros h2", text: "Prépare interros"
+    assert_select "#prepare-interros #notion-#{@meiose.slug} h3", text: "La méiose"
+    assert_select "#prepare-interros #notion-#{@mitose.slug} li[id^=exercise-]", 1
+    assert_select "#prepare-interros #toute-la-lecon h3", text: tl("lesson_wide_title")
+    assert_select "#prepare-interros li#exercise-#{@ex_wide.public_id}"
+    assert_select "#prepare-interros li#exercise-#{@ex_meiose.public_id} a[href='#{exercise_path(@ex_meiose.public_id)}']"
+    # CA-05 : aucun ancien intitulé.
+    assert_no_match(/Révisions de la leçon|Fiche de cours/, response.body)
   end
 
-  # ADR-0072, UDR-0028 (amendée le 2026-10-02) : la bascule du cours, celle de chaque fiche et l'aide disparaissent.
-  test "neither the course nor a sheet offers « Assigner », and the hint about assigning a sheet is gone" do
+  # UDR-0139 §3.4 : « Assigner » pour cette classe seulement, jamais pour une autre classe de l'enseignant.
+  test "the toggles are those of this classroom only, the first « Assigner » being filled" do
+    other = create_classroom(name: "Tle D 2", level: @course.level, series: @course.series, school: @classroom.school)
+    Orm::TeacherClassroom.create!(teacher: @teacher, classroom: other)
+    assignment = create_assignment(classroom: @classroom, assignable: @ex_mitose, by: @teacher, due_on: Date.current + 2)
     sign_in_as @teacher
 
     get classroom_course_path(@classroom.public_id, @course.slug)
 
+    assert_select "##{toggle_id(@classroom, @ex_meiose)}", text: including(toggle("assign"))
+    assert_select "##{toggle_id(@classroom, @ex_wide)}"
+    assert_select "##{toggle_id(@classroom, @ex_mitose)}", text: including(toggle("assigned"))
+    assert_select "form[action='#{archive_assignment_path(assignment.public_id)}']"
+    assert_select "[id^='assignment_#{other.public_id}']", 0
+    assert_select ".ui-button-primary", 1
+    assert_select "##{toggle_id(@classroom, @ex_meiose)} .ui-button-primary"
+  end
+
+  test "a teacher whose classroom is of another level sees the « no class at this level » line, without any toggle" do
+    classroom = create_classroom(name: "6ème 1")
+    teacher = create_teacher(classrooms: [ classroom ])
+    sign_in_as teacher
+
+    get classroom_course_path(classroom.public_id, @course.slug)
+
     assert_response :success
-    assert_no_match including(toggle(:assign)), response.body
-    assert_no_match(/Assignez une fiche/, response.body)
+    assert_select "#assign_targets_none"
     no_toggle
   end
 
-  test "a course without published sheet shows the empty state" do
+  # CA-10 : une leçon sans exercice.
+  test "a lesson without exercise shows the empty state and no toggle" do
     course = create_course
     sign_in_as @teacher
 
     get classroom_course_path(@classroom.public_id, course.slug)
 
     assert_response :success
-    assert_select "#classroom_course_essentials", text: including(tl("empty"))
-    assert_select "#classroom_course_essentials", text: including("Aucune fiche de révision pour cette fiche de cours.")
+    assert_select "#prepare-interros", text: including(tl("exercises_empty"))
+    no_toggle
   end
 
-  # vie-de-la-classe, Lot C (Q8) : une classe archivée n'a plus de page, même pour son enseignant (était : avis « archivée »).
+  test "an unpublished exercise is not listed" do
+    create_exercise(essential: @meiose, title: "Brouillon", status: "draft")
+    sign_in_as @teacher
+
+    get classroom_course_path(@classroom.public_id, @course.slug)
+
+    assert_no_match "Brouillon", response.body
+  end
+
+  # vie-de-la-classe, Lot C (Q8) : une classe archivée n'a plus de page, même pour son enseignant.
   test "an archived classroom: 404 for its teacher" do
     archived = create_classroom(status: "archived")
     teacher = create_teacher(classrooms: [ archived ])
-    create_assignment(classroom: archived, assignable: create_exercise(essential: @meiose), by: teacher, status: "active")
     sign_in_as teacher
 
     get classroom_course_path(archived.public_id, @course.slug)
@@ -75,13 +104,14 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_no_match "Génétique et évolution", response.body
   end
 
-  test "the team reads the page, without any toggle either" do
+  test "the team reads the page, with the status of each exercise and without any toggle" do
     sign_in_as create_team_member
 
     get classroom_course_path(@classroom.public_id, @course.slug)
 
     assert_response :success
-    assert_select "#classroom_course_essentials li", 2
+    assert_select "#prepare-interros li[id^=exercise-]", 3
+    assert_select "#prepare-interros li#exercise-#{@ex_meiose.public_id}", text: including(I18n.t("catalog.content_status.published"))
     no_toggle
   end
 

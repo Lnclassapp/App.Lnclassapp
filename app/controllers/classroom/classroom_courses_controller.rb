@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::ClassroomCoursesController
-# Rôle : un cours vu depuis une classe (CL-11) : ses fiches essentielles publiées, chacune avec sa bascule d'assignation
-# ADR  : 0026, 0028, 0048, 0088 · UDR : 0006, 0028
+# Rôle : une leçon vue depuis une classe (CL-11) : « Fiche de révision » et « Prépare interros », avec les bascules d'assignation de cette classe
+# ADR  : 0026, 0028, 0048, 0088, 0113 · UDR : 0006, 0028, 0139 §3.4
 module Classroom
   class ClassroomCoursesController < AuthenticatedController
     # Comme la page de la classe (D4) : l'élève lit ses cours sur ses propres pages.
@@ -20,7 +20,11 @@ module Classroom
     def load_course
       @course = Queries::Classroom::ClassroomCourseQuery.new.call(classroom_public_id: @classroom.public_id,
                                                                   course_slug: params[:course_slug])
-      render_not_found if @course.nil?
+      return render_not_found if @course.nil?
+
+      # Les deux sections de la page de la leçon (UDR-0139) : l'enseignant n'y voit que les bascules de cette classe.
+      @revision = Queries::Catalog::RevisionSheetQuery.new.call(course_slug: params[:course_slug], actor: current_actor)
+      @prepare = Queries::Catalog::PrepareInterrosQuery.new.call(course_slug: params[:course_slug], actor: current_actor)
     end
   end
 end
