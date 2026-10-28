@@ -14,6 +14,8 @@ class Assessment::QuestionNumericTest < ActionDispatch::IntegrationTest
     sign_in_as @student
   end
 
+  def without_svg = response.body.gsub(%r{<svg.*?</svg>}m, "")
+
   # La copie rendue d'un seul envoi (ADR-0112) : { question => texte }, les autres questions restent vides.
   def copy(texts) = post(exercise_session_copy_path(@session.public_id),
                          params: { copy: { answers: texts.to_h { |question, text| [ question.id.to_s, { response_text: text } ] } } })
@@ -23,14 +25,16 @@ class Assessment::QuestionNumericTest < ActionDispatch::IntegrationTest
 
     assert_select "input[name='copy[answers][#{@question.id}][response_text]'][inputmode=decimal]"
     assert_select "button[aria-label=?]", I18n.t("assessment.exercise_sessions.kinds.numeric.sign"), text: "±"
-    # Le texte de la page, pas ses icônes : les tracés SVG contiennent des nombres comme 0.25.
-    assert_no_match(/42[,.]75|0[,.]25/, css_select("main").text)
-    assert_no_match(/42[,.]75|0[,.]25/, css_select("main input, main button").map(&:to_s).join)
+    # Tout le corps de la page, sauf les icônes : les tracés SVG contiennent des nombres comme 0.25.
+    assert_no_match(/42[,.]75|0[,.]25/, without_svg)
   end
 
   test "CA-5 : « 42.6 » est juste dans la marge ; « 42,,75 » est une erreur de saisie, la question n'est pas comptée" do
     copy @question => "42,,75"
     assert_response :unprocessable_entity
+    assert_select "#question-1 fieldset[aria-invalid=true][aria-describedby='question-1-error']"
+    assert_select "#question-1-error", text: /\S/
+    assert_select "#question-2-error", 0
     assert_select "#copy-errors",
                   text: /#{I18n.t("activemodel.errors.models.dtos/assessment/attempt_input.attributes.response_text.not_a_number")}/
     assert_select "input[name='copy[answers][#{@question.id}][response_text]'][value='42,,75']"
@@ -46,8 +50,7 @@ class Assessment::QuestionNumericTest < ActionDispatch::IntegrationTest
     copy @question => "40"
     assert_equal false, Orm::QuestionAttempt.find_by!(question: @question).correct
     follow_redirect!
-    # Le texte de la page, pas ses icônes : les tracés SVG contiennent des nombres comme 0.25.
-    assert_no_match(/42[,.]75|0[,.]25/, css_select("main").text)
+    assert_no_match(/42[,.]75|0[,.]25/, without_svg)
     assert_select "[data-correct]", 0
   end
 

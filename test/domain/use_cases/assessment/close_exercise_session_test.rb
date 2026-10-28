@@ -185,8 +185,8 @@ module UseCases
         assert_empty @gaps.calls
       end
 
-      # ADR-0113 §4.2, CA-21, CA-22 : un exercice de toute la leçon n'a pas de notion, donc pas de lacune à ouvrir ni à lever.
-      test "CA-21 : un exercice de toute la leçon raté ouvre aucune lacune, mais note et badge restent" do
+      # ADR-0113 §4.2, CA-22 : un exercice de toute la leçon n'a pas de notion, donc pas de lacune à ouvrir ni à lever.
+      test "CA-22 : un exercice de toute la leçon raté ouvre aucune lacune, mais note et badge restent" do
         row = close(correct: 40, essential_id: nil).value
 
         assert_equal [ 40, nil ], [ row.score_percent, row.badge_level ]
@@ -196,8 +196,9 @@ module UseCases
 
       test "CA-22 : un exercice de toute la leçon réussi ne lève et n'incrémente aucune lacune" do
         close(correct: 100, essential_id: nil, pending_gap: gap)
-        close(correct: 40, essential_id: nil, pending_gap: gap)
+        assert_empty @gaps.calls
 
+        close(correct: 40, essential_id: nil, pending_gap: gap)
         assert_empty @gaps.calls
       end
 

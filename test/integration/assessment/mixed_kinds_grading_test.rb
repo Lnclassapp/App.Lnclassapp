@@ -22,7 +22,8 @@ class Assessment::MixedKindsGradingTest < ActionDispatch::IntegrationTest
 
     # La copie entière en un seul envoi (ADR-0112).
     post exercise_session_copy_path(session.public_id), params: { copy: { answers: {
-      choice.id.to_s => { answer_ids: [ choice.answers.find_by!(correct: true).id ] },
+      choice.id.to_s => { display_order: [ Entities::Assessment::AnswerShuffle.for(session_id: session.id, question_id: choice.id,
+                                                                                  ids: choice.answers.pluck(:id)).index(choice.answers.find_by!(correct: true).id) ] },
       blank.id.to_s => { response_text: "abidjan" },
       number.id.to_s => { response_text: "−2" },
       steps.id.to_s => { display_order: indices.(steps, [ 0, 1, 2 ]) },

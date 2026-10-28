@@ -131,16 +131,24 @@ class Assessment::ExerciseSessionsControllerTest < ActionDispatch::IntegrationTe
 
   # CA-14 : la copie ne contient aucune marque de proposition correcte, aucune explication, aucun identifiant de bonne réponse.
   test "le HTML de la copie ne contient aucune marque de correction (CA-14, AS-10)" do
-    @exercise.questions.first.update!(explanation: "La méiose compte deux divisions.")
-    session = create_exercise_session(student: @student, exercise: @exercise)
-    sign_in_as @student
+    # Des ids de réponse qu'aucun indice d'affichage ne peut valoir : sans cela, un id petit passe pour un indice.
+    Orm::Answer.connection.execute("ALTER SEQUENCE #{Orm::Answer.sequence_name} RESTART WITH 914273001")
+    exercise = create_exercise(title: "Ids distincts", questions: 2)
+    exercise.questions.first.update!(explanation: "La méiose compte deux divisions.")
+    session = create_exercise_session(student: create_student_for(exercise.essential.course).tap { sign_in_as it }, exercise:)
 
     get exercise_session_path(session.public_id)
 
     assert_response :success
     assert_no_match(/correct|La méiose compte deux divisions/i, response.body[/<form id="copy-form".*<\/form>/m].to_s)
+    # Tout le corps de la page, sauf les icônes : l'explication n'est nulle part.
+    assert_no_match(/La méiose compte deux divisions/, response.body.gsub(%r{<svg.*?</svg>}m, ""))
     assert_select "#copy-form [data-correct], #copy-form .correct", 0
-    assert_select "#copy-form input[name$='[answer_ids][]']", 8
+    assert_select "#copy-form input[name$='[display_order][]']", 8
+    # ADR-0091 §4.4 : une proposition montrée porte son indice d'affichage, jamais son identifiant (qui trahit l'ordre de saisie).
+    answer_ids = exercise.questions.flat_map { it.answers.pluck(:id) }.map(&:to_s)
+    assert_empty answer_ids & css_select("#copy-form input[name$='[display_order][]']").map { it["value"] }
+    assert_equal [ "0", "1", "2", "3" ], css_select("#copy-form #question-1 input[name$='[display_order][]']").map { it["value"] }.sort
   end
 
   # CA-14 : la copie d'un exercice de toute la leçon s'ouvre pour l'élève du niveau (200), jamais pour un autre niveau (404).

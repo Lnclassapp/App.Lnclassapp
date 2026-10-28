@@ -49,12 +49,15 @@ module UseCases
       class SpyClose
         attr_reader :calls
 
-        def initialize
+        def initialize(failing: false)
           @calls = []
+          @failing = failing
         end
 
         def call(actor:, session:, essential_id:)
           @calls << [ actor, session.id, essential_id ]
+          return Shared::Result.failure(:forbidden) if @failing
+
           Shared::Result.success(CloseExerciseSession::Row.new(score_percent: 50, badge_level: :bronze, earned_now: true))
         end
       end
@@ -80,9 +83,16 @@ module UseCases
         )
       end
 
-      def submit(answers, actor: STUDENT, stored: session, exercise: exercise())
+      # Les indices d'affichage de la session 5 pour les propositions données (ADR-0091 §4.4) : jamais leurs identifiants.
+      def shown(question_id, *answer_ids)
+        ids = exercise.questions.find { it.id == question_id }.answer_ids
+        shuffled = Entities::Assessment::AnswerShuffle.for(session_id: 5, question_id:, ids:)
+        { display_order: answer_ids.map { shuffled.index(it).to_s } }
+      end
+
+      def submit(answers, actor: STUDENT, stored: session, exercise: exercise(), failing_close: false)
         @sessions = FakeSessions.new(stored)
-        @close = SpyClose.new
+        @close = SpyClose.new(failing: failing_close)
         @transaction = FakeTransaction.new
         @use_case = SubmitExerciseCopy.new(sessions: @sessions, exercises: FakeExercises.new(exercise),
                                            policy: Policies::Assessment::SubmitAttemptPolicy.new, close: @close,
@@ -91,7 +101,7 @@ module UseCases
       end
 
       test "CA-15 : une copie juste est corrigée, enregistrée en un envoi sous verrou, puis la session est close dans la même transaction" do
-        result = submit({ "1" => { answer_ids: [ "11" ] }, "2" => { response_text: " 42 " }, "3" => { answer_ids: [ "31" ] } })
+        result = submit({ "1" => shown(1, 11), "2" => { response_text: " 42 " }, "3" => shown(3, 31) })
 
         assert result.success?
         assert_equal [ false, 50 ], [ result.value.already_closed, result.value.closed.score_percent ]
@@ -105,7 +115,7 @@ module UseCases
       end
 
       test "CA-16 : une question absente, ou vide, compte fausse et sans réponse" do
-        submit({ "1" => { answer_ids: [ "11" ] }, "2" => { response_text: "   " } })
+        submit({ "1" => shown(1, 11), "2" => { response_text: "   " } })
 
         attempts = @sessions.copies.sole[:attempts]
         assert_equal [ [ 1, true, false ], [ 2, false, true ], [ 3, false, true ] ], attempts.map { [ it[:question_id], it[:correct], it[:unanswered] ] }
@@ -118,7 +128,7 @@ module UseCases
       end
 
       test "CA-17 : un second envoi de la copie rendue réussit sans rien écrire ni rien clore" do
-        result = submit({ "1" => { answer_ids: [ "11" ] } }, stored: session(status: "completed"))
+        result = submit({ "1" => shown(1, 11) }, stored: session(status: "completed"))
 
         assert result.success?
         assert_equal [ "SeSsIoN0000005", true, nil ], [ result.value.session_public_id, result.value.already_closed, result.value.closed ]
@@ -127,7 +137,7 @@ module UseCases
       end
 
       test "CA-17 : deux envois qui se suivent n'écrivent qu'une copie (doublon refusé par le repository)" do
-        submit({ "1" => { answer_ids: [ "11" ] } })
+        submit({ "1" => shown(1, 11) })
         again = @use_case.call(actor: STUDENT, dto: Dtos::Assessment::CopyInput.new(session_public_id: "SeSsIoN0000005", answers: {}))
 
         assert_equal :conflict, again.code
@@ -136,7 +146,7 @@ module UseCases
       end
 
       test "CA-18 : une réponse mal formée refuse toute la copie, erreurs rangées par numéro de question, rien n'est écrit" do
-        result = submit({ "1" => { answer_ids: [ "11" ] }, "2" => { response_text: "abc" }, "3" => { answer_ids: [ "31", "32" ] } })
+        result = submit({ "1" => shown(1, 11), "2" => { response_text: "abc" }, "3" => shown(3, 31, 32) })
 
         assert_equal :invalid, result.code
         assert_equal [ 2, 3 ], result.errors.keys
@@ -156,15 +166,15 @@ module UseCases
       end
 
       test "menace : l'identifiant d'une question étrangère à l'exercice refuse la copie" do
-        result = submit({ "1" => { answer_ids: [ "11" ] }, "999" => { answer_ids: [ "11" ] } })
+        result = submit({ "1" => shown(1, 11), "999" => shown(1, 11) })
 
         assert_equal [ :invalid, { base: [ :invalid_copy ] } ], [ result.code, result.errors ]
         assert_empty @sessions.copies
       end
 
       test "menace : plus de réponses que de questions, ou une clé qui n'est pas un nombre, refuse la copie" do
-        many = submit(Array.new(4) { |index| [ (index + 1).to_s, { answer_ids: [ "11" ] } ] }.to_h)
-        key = submit({ "1; DROP" => { answer_ids: [ "11" ] } })
+        many = submit(Array.new(4) { |index| [ (index + 1).to_s, shown(1, 11) ] }.to_h)
+        key = submit({ "1; DROP" => shown(1, 11) })
 
         assert_equal [ :invalid, :invalid ], [ many.code, key.code ]
         assert_empty @sessions.copies
@@ -186,6 +196,21 @@ module UseCases
         assert_equal [ :conflict, { base: [ :session_closed ] } ], [ abandoned.code, abandoned.errors ]
         assert_equal [ :conflict, { base: [ :exercise_archived ] } ], [ archived.code, archived.errors ]
         assert_empty @sessions.copies
+      end
+
+      # La clôture refusée annule la transaction (l'exception la fait reculer) : aucune tentative ne reste sans session close.
+      test "menace : une clôture qui échoue lève dans la transaction pour l'annuler, et rend son échec" do
+        raised = []
+        transaction = FakeTransaction.new
+        transaction.define_singleton_method(:call) { |&block| super(&block) rescue (raised << $!; raise) }
+        sessions = FakeSessions.new(session)
+        use_case = SubmitExerciseCopy.new(sessions:, exercises: FakeExercises.new(exercise), policy: Policies::Assessment::SubmitAttemptPolicy.new,
+                                          close: SpyClose.new(failing: true), transaction:, clock: Clock.new(NOW))
+
+        result = use_case.call(actor: STUDENT, dto: Dtos::Assessment::CopyInput.new(session_public_id: "SeSsIoN0000005", answers: {}))
+
+        assert_equal :forbidden, result.code
+        assert_equal [ SubmitExerciseCopy::Rollback ], raised.map(&:class)
       end
 
       test "CA-21 : un exercice de toute la leçon clôt sans notion (essential_id nil)" do

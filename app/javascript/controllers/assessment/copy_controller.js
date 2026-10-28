@@ -8,8 +8,13 @@ export default class extends Controller {
   static values = { key: String, total: Number, counter: String, missingOne: String, missingOther: String }
 
   async connect() {
-    const { CopySheet } = await import("../../lib/assessment/copy_sheet")
-    if (this.element.isConnected) this.sheet = new CopySheet(this)
+    try {
+      const { CopySheet } = await import("../../lib/assessment/copy_sheet")
+      if (this.element.isConnected) this.sheet = new CopySheet(this)
+    } catch (error) {
+      // Chargement refusé : la copie part telle quelle, sans brouillon ni confirmation.
+      console.warn("copie : brouillon indisponible", error)
+    }
   }
 
   disconnect() {

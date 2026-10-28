@@ -26,7 +26,9 @@ class Assessment::ExerciseCopyTest < ApplicationSystemTestCase
 
       page.refresh
       assert_selector "#copy-counter", text: "4"
-      assert_checked_field "q1-answer_#{right(@questions.first).id}"
+      within("#question-1") { assert_checked_field right(@questions.first).content }
+      draft_key = "lnclass:copy:#{Orm::ExerciseSession.find_by!(student: @student).public_id}"
+      assert_not_nil page.evaluate_script("localStorage.getItem(#{draft_key.to_json})")
 
       click_on I18n.t("#{SCOPE}.show.submit")
       within("dialog#copy-confirm[open]") do
@@ -35,6 +37,8 @@ class Assessment::ExerciseCopyTest < ApplicationSystemTestCase
       end
 
       assert_selector "#session_grade"
+      # CA-20 : le brouillon est effacé une fois la copie rendue.
+      assert_nil page.evaluate_script("localStorage.getItem(#{draft_key.to_json})")
       click_on I18n.t("components.reveal.more")
       assert_selector "#question_review_#{@questions.last.id}", text: I18n.t("assessment.session_results.show.unanswered")
     end

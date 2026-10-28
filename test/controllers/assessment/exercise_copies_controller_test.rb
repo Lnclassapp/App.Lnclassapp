@@ -15,11 +15,17 @@ class Assessment::ExerciseCopiesControllerTest < ActionDispatch::IntegrationTest
   def right(question) = question.answers.where(correct: true).order(:id).pluck(:id)
   def wrong(question) = question.answers.where(correct: false).order(:id).pick(:id)
 
+  # La page poste des indices d'affichage, jamais des identifiants (ADR-0091 §4.4) : ceux de la session pour ces propositions.
+  def displayed(question, ids, session: @session)
+    shuffled = Entities::Assessment::AnswerShuffle.for(session_id: session.id, question_id: question.id, ids: question.answers.pluck(:id))
+    Array(ids).map { shuffled.index(it).to_s }
+  end
+
   def copy(answers, session: @session)
     post exercise_session_copy_path(session.public_id), params: { copy: { answers: } }
   end
 
-  def pick(question, ids) = { question.id.to_s => { answer_ids: Array(ids).map(&:to_s) } }
+  def pick(question, ids, session: @session) = { question.id.to_s => { display_order: displayed(question, ids, session:) } }
 
   test "une copie complète : 303 vers le résultat, la session close, la note et les tentatives écrites" do
     sign_in_as @student
@@ -35,7 +41,7 @@ class Assessment::ExerciseCopiesControllerTest < ActionDispatch::IntegrationTest
   test "une question laissée vide compte fausse et « Sans réponse » au résultat" do
     sign_in_as @student
 
-    copy pick(@first, right(@first)).merge(@second.id.to_s => { answer_ids: [] })
+    copy pick(@first, right(@first)).merge(@second.id.to_s => { display_order: [] })
     follow_redirect!
 
     attempt = Orm::QuestionAttempt.find_by!(question: @second)
@@ -67,14 +73,17 @@ class Assessment::ExerciseCopiesControllerTest < ActionDispatch::IntegrationTest
 
   test "une saisie invalide : 422, la copie rouverte avec ses réponses et le message de la question, rien d'écrit" do
     sign_in_as @student
-    ids = [ wrong(@first), right(@first).first, @second.answers.pick(:id) ]
+    ids = [ wrong(@first), right(@first).first ]
 
     copy pick(@first, ids).merge(pick(@second, wrong(@second)))
 
     assert_response :unprocessable_entity
     assert_select "#copy-errors a[href='#question-1']"
-    assert_select "#question-1 input[type=radio][value='#{wrong(@first)}']"
-    assert_select "#question-2 input[type=radio][value='#{wrong(@second)}'][checked]"
+    # CA-18 : la question en erreur est marquée et décrite par son message ; l'autre question n'a ni marque ni message.
+    assert_select "#question-1 fieldset[aria-invalid=true][aria-describedby='question-1-error']"
+    assert_select "#question-1-error", text: /\S/
+    assert_select "#question-2-error", 0
+    assert_select "#question-2 input[type=radio][value='#{displayed(@second, wrong(@second)).first}'][checked]"
     assert_equal 0, Orm::QuestionAttempt.count
     assert_equal "started", @session.reload.status
   end
@@ -84,11 +93,13 @@ class Assessment::ExerciseCopiesControllerTest < ActionDispatch::IntegrationTest
     other = create_exercise(questions: 1).questions.first
     sign_in_as @student
     hostile = [
-      pick(@first, other.answers.pluck(:id)),
-      pick(@first, right(@first)).merge("999999" => { answer_ids: [ "1" ] }),
-      (1..101).to_h { [ it.to_s, { answer_ids: [ "1" ] } ] },
+      { @first.id.to_s => { display_order: [ "7" ] } },
+      { @first.id.to_s => { display_order: [ "0", "0" ] } },
+      { @first.id.to_s => { display_order: [ other.answers.pick(:id).to_s ] } },
+      pick(@first, right(@first)).merge("999999" => { display_order: [ "1" ] }),
+      (1..101).to_h { [ it.to_s, { display_order: [ "1" ] } ] },
       { @first.id.to_s => { response_text: "a\0b" } },
-      { "pas-un-id" => { answer_ids: [ "1" ] } }
+      { "pas-un-id" => { display_order: [ "1" ] } }
     ]
 
     hostile.each do |answers|
@@ -97,6 +108,36 @@ class Assessment::ExerciseCopiesControllerTest < ActionDispatch::IntegrationTest
       assert_response :unprocessable_entity
       assert_equal [ 0, "started" ], [ Orm::QuestionAttempt.count, @session.reload.status ]
     end
+  end
+
+  # N1 : sur un texte à trous, l'octet nul et les 201 caractères sont refusés en HTTP, avec le message de la question.
+  test "menace : un texte à trous avec un octet nul ou de 201 caractères : 422, message de la question, rien d'écrit" do
+    blank = create_kind_question(exercise: @exercise, question_type: "fill_blank", answers: [ "Paris" ], content: "La capitale est ___.")
+    number = @exercise.questions.order(:position).to_a.index(blank) + 1
+    sign_in_as @student
+
+    [ "a\0b", "x" * 201 ].each do |text|
+      copy({ blank.id.to_s => { response_text: text } })
+
+      assert_response :unprocessable_entity
+      assert_select "#question-#{number}-error", text: /\S/
+      assert_equal [ 0, "started" ], [ Orm::QuestionAttempt.count, @session.reload.status ]
+    end
+  end
+
+  # Décision du porteur : la copie garde les tentatives faites par l'ancien mode et ne note que les questions sans tentative.
+  test "une tentative déjà en base (ancien mode) : la copie la garde, note le reste, clôt, et mène au résultat" do
+    Orm::QuestionAttempt.create!(exercise_session_id: @session.id, question_id: @first.id, selected_answer_ids: right(@first),
+                                 correct: true, answered_at: Time.current)
+    sign_in_as @student
+
+    copy pick(@first, wrong(@first)).merge(pick(@second, right(@second)))
+
+    assert_redirected_to exercise_session_result_path(@session.public_id)
+    assert_equal [ "completed", 100 ], @session.reload.then { [ it.status, it.score_percent ] }
+    assert_equal [ [ @first.id, true ], [ @second.id, true ] ], Orm::QuestionAttempt.order(:question_id).pluck(:question_id, :correct)
+    follow_redirect!
+    assert_no_match(/#{I18n.t("assessment.exercise_sessions.show.abandoned")}/, response.body)
   end
 
   test "des paramètres qui ne sont pas des tables : traités comme une copie vide, jamais 500" do
@@ -162,8 +203,21 @@ class Assessment::ExerciseCopiesControllerTest < ActionDispatch::IntegrationTest
     session = create_exercise_session(student: other_level, exercise: @exercise)
     sign_in_as other_level
 
-    copy pick(@first, right(@first)), session: session
+    copy pick(@first, right(@first), session: session), session: session
 
+    assert_response :not_found
+    assert_equal 0, Orm::QuestionAttempt.count
+  end
+
+  test "un élève hors niveau : exercice de toute la leçon, la copie et le résultat sont en 404" do
+    lesson = create_lesson_wide_exercise(course: @course, questions: 1)
+    other_level = create_student_for(create_course(level: create_level(name: "6e")))
+    session = create_exercise_session(student: other_level, exercise: lesson)
+    sign_in_as other_level
+
+    copy({}, session:)
+    assert_response :not_found
+    get exercise_session_result_path(session.public_id)
     assert_response :not_found
     assert_equal 0, Orm::QuestionAttempt.count
   end
@@ -184,7 +238,7 @@ class Assessment::ExerciseCopiesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "form#copy-form"
 
-    copy pick(first, wrong(first)).merge(pick(second, wrong(second))), session: session
+    copy pick(first, wrong(first), session: session).merge(pick(second, wrong(second), session: session)), session: session
     assert_redirected_to exercise_session_result_path(session.public_id)
     follow_redirect!
 
@@ -201,7 +255,8 @@ class Assessment::ExerciseCopiesControllerTest < ActionDispatch::IntegrationTest
     copy pick(@first, wrong(@first)).merge(pick(@second, wrong(@second)))
     follow_redirect!
 
-    assert_equal 1, Orm::KnowledgeGap.count
+    assert_equal [ 1, @exercise.essential_id, @student.id ],
+                 [ Orm::KnowledgeGap.count, Orm::KnowledgeGap.sole.essential_id, Orm::KnowledgeGap.sole.student_id ]
     assert_select "#session_gap_outcome a[href='#{course_path(@course.slug, anchor: "notion-#{@exercise.essential.slug}")}']"
   end
 end

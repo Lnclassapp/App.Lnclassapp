@@ -59,15 +59,51 @@ module Repositories
         assert_raises(ActiveRecord::StatementInvalid) { @repository.record_copy(session_id: started.id, attempts: [ attempt ], at: @at) }
       end
 
-      test "record_copy : une seconde copie rend :duplicate et n'écrit rien de plus, compteurs compris" do
+      test "record_copy : une seconde copie n'écrit rien de plus, compteurs compris" do
         started = @repository.start(session: session)
         questions = @exercise.questions.to_a
         copy = questions.map { { question_id: it.id, selected_answer_ids: [], response_text: nil, correct: false, unanswered: true } }
         @repository.record_copy(session_id: started.id, attempts: copy, at: @at)
 
-        assert_equal :duplicate, @repository.record_copy(session_id: started.id, attempts: copy, at: @at + 1)
+        assert_equal :ok, @repository.record_copy(session_id: started.id, attempts: copy, at: @at + 1)
         assert_equal 3, Orm::QuestionAttempt.where(exercise_session_id: started.id).count
         assert_equal 3, @repository.find_by_public_id(public_id: started.public_id).answered_count
+      end
+
+      # Copie commencée dans l'ancien mode : la tentative existante est gardée, seules les questions sans tentative s'écrivent.
+      test "record_copy : une tentative déjà en base est gardée, les autres questions s'écrivent, les compteurs s'additionnent" do
+        started = @repository.start(session: session)
+        questions = @exercise.questions.order(:position).to_a
+        @repository.record_attempt(session_id: started.id, question_id: questions[0].id, selected_answer_ids: [ 1 ], correct: true, at: @at)
+        copy = questions.map { { question_id: it.id, selected_answer_ids: [], response_text: nil, correct: false, unanswered: true } }
+
+        assert_equal :ok, @repository.record_copy(session_id: started.id, attempts: copy, at: @at + 1)
+
+        reloaded = @repository.find_by_public_id(public_id: started.public_id)
+        assert_equal [ 3, 1, 100 ], [ reloaded.answered_count, reloaded.correct_count, reloaded.progress_percent ]
+        assert_equal [ [ questions[0].id, true, false ], [ questions[1].id, false, true ], [ questions[2].id, false, true ] ],
+                     Orm::QuestionAttempt.where(exercise_session_id: started.id).order(:question_id).pluck(:question_id, :correct, :unanswered)
+      end
+
+      # La contrainte exercise_sessions_question_count_positive interdit déjà 0 : la garde du SQL est une seconde ceinture.
+      test "record_copy : le calcul de progression est gardé contre une division par zéro" do
+        assert_includes Repositories::Assessment::ExerciseSessionRepository::COPY_COUNTERS_SQL, "NULLIF(question_count, 0)"
+      end
+
+      # Menace : deux envois de la même copie passent l'un après l'autre, grâce au verrou de la ligne de la session.
+      test "find_by_public_id avec lock lit la session FOR UPDATE, sans lock non" do
+        started = @repository.start(session: session)
+        statements = []
+        collect = ->(*, payload) { statements << payload[:sql] if payload[:sql].match?(/FROM "exercise_sessions"/) }
+
+        ActiveSupport::Notifications.subscribed(collect, "sql.active_record") do
+          Orm::ExerciseSession.transaction do
+            @repository.find_by_public_id(public_id: started.public_id, lock: true)
+            @repository.find_by_public_id(public_id: started.public_id)
+          end
+        end
+
+        assert_equal [ true, false ], statements.map { it.include?("FOR UPDATE") }
       end
 
       test "enregistre chaque tentative une fois et tient les compteurs" do

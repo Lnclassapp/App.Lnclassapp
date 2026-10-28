@@ -7,6 +7,16 @@ module UseCases
       # already_closed : la copie était déjà rendue, rien n'a été écrit ; closed : Row de CloseExerciseSession, sinon nil.
       Submitted = Data.define(:session_public_id, :already_closed, :closed)
 
+      # Lève dans la transaction pour l'annuler quand la clôture échoue : les tentatives écrites ne restent pas sans session close.
+      Rollback = Class.new(StandardError) do
+        attr_reader :failure
+
+        def initialize(failure)
+          @failure = failure
+          super("copie non rendue")
+        end
+      end
+
       def initialize(sessions:, exercises:, policy:, close:, transaction:, clock:)
         @sessions = sessions
         @exercises = exercises
@@ -22,22 +32,30 @@ module UseCases
       #     se lit pas : question étrangère, trop de réponses ; rien n'est écrit)
       #   | :conflict (base: session_closed, session abandonnée ; base: exercise_archived)
       def call(actor:, dto:)
-        @transaction.call do
-          # Verrou : deux envois de la même copie passent l'un après l'autre, le second ne trouve plus rien à écrire.
-          session = @sessions.find_by_public_id(public_id: dto.session_public_id, lock: true)
-          next Shared::Result.failure(:not_found) if session.nil?
-          next Shared::Result.failure(:forbidden) unless actor&.student? && session.student_id == actor.user_id
-          next already_closed(session) if session.completed?
-
-          allowed = @policy.call(actor:, session:)
-          next Shared::Result.failure(:conflict, errors: allowed.errors) if closed?(allowed)
-          next allowed if allowed.failure?
-
-          submit(actor, session, dto)
-        end
+        rolled_back { @transaction.call { locked(actor, dto) } }
       end
 
       private
+
+      def rolled_back
+        yield
+      rescue Rollback => e
+        e.failure
+      end
+
+      def locked(actor, dto)
+        # Verrou : deux envois de la même copie passent l'un après l'autre, le second ne trouve plus rien à écrire.
+        session = @sessions.find_by_public_id(public_id: dto.session_public_id, lock: true)
+        return Shared::Result.failure(:not_found) if session.nil?
+        return Shared::Result.failure(:forbidden) unless actor&.student? && session.student_id == actor.user_id
+        return already_closed(session) if session.completed?
+
+        allowed = @policy.call(actor:, session:)
+        return Shared::Result.failure(:conflict, errors: allowed.errors) if closed?(allowed)
+        return allowed if allowed.failure?
+
+        submit(actor, session, dto)
+      end
 
       def already_closed(session) = Shared::Result.success(Submitted.new(session_public_id: session.public_id, already_closed: true, closed: nil))
 
@@ -55,6 +73,8 @@ module UseCases
         return Shared::Result.failure(:conflict, errors: { base: [ :already_answered ] }) if recorded == :duplicate
 
         closed = @close.call(actor:, session:, essential_id: exercise.essential_id)
+        raise Rollback.new(closed) if closed.failure?
+
         Shared::Result.success(Submitted.new(session_public_id: session.public_id, already_closed: false, closed: closed.value))
       end
 
@@ -101,7 +121,9 @@ module UseCases
           shuffled = Entities::Assessment::AnswerShuffle.for(session_id: session.id, question_id: question.id, ids: question.answer_ids,
                                                              avoid: question.ids_by_position)
           Entities::Assessment::AnswerShuffle.pick(shuffled, input.display_order)
-        else input.answer_ids
+        else
+          shuffled = Entities::Assessment::AnswerShuffle.for(session_id: session.id, question_id: question.id, ids: question.answer_ids)
+          Entities::Assessment::AnswerShuffle.select(shuffled, input.display_order)
         end
       end
     end

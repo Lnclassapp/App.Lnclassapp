@@ -32,6 +32,11 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{course_path(@essential.course.slug, anchor: "notion-#{@essential.slug}")}']"
     assert_select "#exercise_questions li.question", 2
     assert_select "#exercise_questions #sheet-question-1", text: /1\./
+    assert_select "#exercise_questions #sheet-question-2", text: /2\./
+    # CA-13 : les propositions d'une question à choix sont sur la feuille, toutes, sans case à cocher.
+    @exercise.questions.order(:position).each_with_index do |question, index|
+      assert_select "#sheet-question-#{index + 1} li.answer", question.answers.count
+    end
     assert_select "#exercise_questions input, #exercise_questions textarea, #exercise_questions select, #exercise_questions form", 0
     # CA-13 : ni marque, ni explication, ni identifiant d'une bonne réponse dans la feuille de l'élève.
     assert_no_match(/#{correct_mark}|La méiose compte deux divisions|data-correct/, response.body)
