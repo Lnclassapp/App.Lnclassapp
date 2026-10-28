@@ -77,6 +77,10 @@
 
 **Point ouvert** : `bin/check-asset-budget` plafonne encore à 60 Ko alors que l'ADR-0114 et `javascript_bundle_test` disent 61 Ko (la base de 60,33 Ko dépassait déjà 60) ; à aligner par l'orchestrateur.
 
+### Budget système de la phase 2 (2026-10-28)
+
+Mesurés avec `record_timings` corrigé (#341), les tests système des Lots E et F prenaient 27 s (11,5 + 15,4), au-delà des 15 s par chantier ; chaque PR passait la garde seule. Le porteur a choisi « réduire + dérogation » : le Lot F passe de 4 tests à 2 (9,8 s, mêmes vérifications), et les deux fichiers ont 22 s (amendement de l'ADR-0069 du 2026-10-28).
+
 ## Ce qui a dérapé
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.

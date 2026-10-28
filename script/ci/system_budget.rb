@@ -17,6 +17,9 @@ class SystemBudget
   # Une PR dont tous les fichiers qui grandissent sont ceux d'une dérogation a ce budget-là ; toute autre, BUDGET.
   GRANTS = {
     "blog" => { budget: 20.0, files: %w[test/system/communication/blog_reading_test.rb test/system/teams/blog_management_test.rb] },
+    # Amendement du 2026-10-28 : 22 s pour les deux fiches de la phase 2 de contenu-en-blocs (Lentilles, Texte argumentatif).
+    "contenu-en-blocs-phase-2" => { budget: 22.0, files: %w[test/system/catalog/course_sheet_lens_test.rb
+                                                            test/system/catalog/course_sheet_argument_test.rb] },
     # Amendement du 2026-10-24 : 50 s pour mvp-teacher-student (pilote du 27 octobre). Élargi le 2026-10-26 (porteur) à tous
     # les fichiers système que le chantier touche (53), le budget restant de 50 s.
     "mvp-teacher-student" => { budget: 50.0, files: %w[
