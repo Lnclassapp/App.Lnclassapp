@@ -63,6 +63,31 @@ class Catalog::CourseReadTest < ActionDispatch::IntegrationTest
     assert_equal 0, Orm::EssentialRead.count
   end
 
+  test "a notion deleted while the page is read is skipped, the others are read, the page is shown" do
+    sign_in_as @student
+    gone = @first.slug
+    original = Repositories::Catalog::EssentialRepository.instance_method(:find_by_slug)
+    vanishing = ->(slug:) { slug == gone ? nil : original.bind_call(Repositories::Catalog::EssentialRepository.new, slug:) }
+
+    stub_any_instance(Repositories::Catalog::EssentialRepository, :find_by_slug, vanishing) do
+      get course_path(@course.slug)
+    end
+
+    assert_response :success
+    assert_equal [ @second.id ], read_ids
+  end
+
+  test "an archived notion is not read, the others are" do
+    archived = create_essential(course: @course, name: "Archivée", status: "archived")
+    sign_in_as @student
+
+    get course_path(@course.slug)
+
+    assert_response :success
+    assert_not_includes read_ids, archived.id
+    assert_equal [ @first.id, @second.id ].sort, read_ids
+  end
+
   test "a storage outage while reading is reported, and the page is shown all the same" do
     sign_in_as @student
     reports = []

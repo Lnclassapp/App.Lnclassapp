@@ -16,7 +16,7 @@ module UseCases
         @clock = clock
       end
 
-      # Appelé par SubmitExerciseCopy (et SubmitQuestionAttempt, jusqu'à son retrait), dans leur transaction.
+      # Appelé par SubmitExerciseCopy, dans sa transaction.
       # session : Entities::Assessment::ExerciseSession ouverte ; essential_id : notion de son exercice, nil pour toute la leçon.
       # → Result(Row) | :forbidden
       def call(actor:, session:, essential_id:)

@@ -26,6 +26,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
 
     sign_in_as create_teacher
     get old_path
+    assert_redirected_to course_path(@course.slug, anchor: "notion-#{@essential.slug}")
     assert_response :moved_permanently
 
     sign_in_as create_team_member

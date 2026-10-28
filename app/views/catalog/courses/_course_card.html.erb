@@ -25,7 +25,7 @@
       <div class="min-w-0">
         <% if lesson %><p class="text-xs tracking-wide text-mute uppercase"><%= lesson %></p><% end %>
         <h2 class="font-display text-base font-medium text-balance text-ink">
-          <%= link_to course.name, course_path(course.slug), class: "hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
+          <%= link_to course.name, course_path(course.slug), data: { turbo_prefetch: false }, class: "hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
         </h2>
       </div>
       <% if course.progress == :started %>
@@ -55,7 +55,7 @@
 <li id="course_<%= course.slug %>">
   <% if student %>
     <%# UDR écrans élève §3.6 : la ligne entière est le lien (≥ 44 px) ; titre, leçon et pastille « En cours », chevron. %>
-    <%= link_to href, data: ({ turbo_prefetch: false } if resume),
+    <%= link_to href, data: { turbo_prefetch: false },
                 class: "group flex min-h-tap items-center gap-3 px-4 py-3 transition hover:bg-mist active:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand" do %>
       <div class="min-w-0 flex-1">
         <span class="block text-sm font-medium text-ink"><%= course.name %></span>

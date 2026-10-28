@@ -32,6 +32,10 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Code devenu mort après le Lot E : cas d'usage `CreateEssential`, `UpdateEssential`, `CreateExercise`, `UpdateExercise` et DTO d'entrée ; contrôleurs d'envoi d'image (`Teams::EssentialImagesController`, `Teams::QuestionImagesController`) et leurs routes ; `ClassroomGapsQuery#detail` et `ClassroomOverviewQuery#shown_course?` ; variante autonome de la fiche (`embedded: false`) ; paramètre `with_essentials` | Hors du champ du Lot E ; chacun a ses tests et ses garde-fous de couverture | Nettoyage à planifier |
 | Le suivi « élèves à revoir / fiche levée » de l'enseignant (page de la notion en classe) n'a plus d'écran | La page disparaît avec ADR-0113 §4 ; le bloc n'a pas été redessiné sur la page de la leçon | À décider (UDR) |
 | « Modifier les jours » par classe et l'assignation par l'équipe n'existent plus sur la page de la leçon | Retirés avec la page de la notion ; la fenêtre des jours reste ouverte depuis la page de la classe | À décider (UDR) |
+| Revues de la PR #337 : la réussite de la classe par exercice (`success_percent`) disparaît avec la page de notion en classe | Aucun écran ne l'affiche plus | Arbitrage du porteur |
+| Revues de la PR #337 : l'exercice de remédiation proposé n'est plus proposé ; `Entities::Assessment::RemediationPick` n'a plus d'appelant | Il vivait sur la page de la notion | Arbitrage du porteur (rétablir ailleurs ou retirer l'entité) |
+| Revues de la PR #337 : les routes et contrôleurs d'envoi d'images de l'équipe (`config/routes/teams.rb:74-75`) n'ont plus de formulaire | Les formulaires de notion et d'exercice ont disparu avec l'ancienne édition | Arbitrage du porteur (retirer, ou garder pour l'import) |
+| Revues de la PR #337 : le code mort à planifier, déjà listé dans la première ligne de ce tableau | Voir ci-dessus | Nettoyage à planifier |
 
 ## Clôture
 

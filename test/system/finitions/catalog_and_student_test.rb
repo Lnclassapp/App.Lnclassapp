@@ -136,11 +136,11 @@ module Finitions
       session = completed_session
       sign_in_as @student
 
-      # ADR-0113 : la notion n'a plus de page ; l'ancienne adresse mène à la leçon, sans aide « Badges » (elle reste sur l'exercice).
+      # ADR-0113 : la notion n'a plus de page ; l'ancienne adresse mène à la leçon, qui montre le cours.
       visit course_essential_path(@course.slug, @essential.slug)
       assert_current_path course_path(@course.slug)
       assert_title "Génétique et évolution · Élève · Lnclass"
-      assert_no_selector "#essential_badges_help"
+      assert_selector "h1", text: @course.name
 
       visit exercise_path(@exercise.public_id)
       assert_title "Méiose et ADN · Élève · Lnclass"

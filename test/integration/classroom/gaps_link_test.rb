@@ -49,6 +49,8 @@ class Classroom::GapsLinkTest < ActionDispatch::IntegrationTest
 
     get course_path(@course.slug)
 
-    assert_select "div##{anchor}"
+    assert_select "div##{anchor}", 1
+    exercise = Orm::Exercise.find_by!(essential: @notion)
+    assert_select "div##{anchor} a[href=?]", exercise_path(exercise.public_id)
   end
 end

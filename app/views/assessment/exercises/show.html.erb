@@ -8,7 +8,8 @@
 <% grading = Entities::Assessment::Grading %>
 <% page_title t(".page_title", title: exercise.title) %>
 <% content_for :nav_key, "courses" %>
-<%= ui_back_link course.name, href: course_path(course.slug, anchor: (essential ? "notion-#{essential.slug}" : "toute-la-lecon")) %>
+<%# ADR-0113 §4.3 : ouvrir la leçon retient la lecture des notions ; un lien préchargé ne la retiendrait pas. %>
+<div data-turbo-prefetch="false"><%= ui_back_link course.name, href: course_path(course.slug, anchor: (essential ? "notion-#{essential.slug}" : "toute-la-lecon")) %></div>
 <%# UDR-0138 §3.1 : une colonne de 720 px dès 700 px ; au téléphone, la gouttière du shell. %>
 <div class="mx-auto w-full max-w-180 space-y-6">
   <header id="exercise_header" class="space-y-3">

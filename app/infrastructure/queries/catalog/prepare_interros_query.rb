@@ -5,15 +5,17 @@ module Queries
   module Catalog
     class PrepareInterrosQuery
       # groups : [Group] dans l'ordre des notions ; lesson_wide : [ExerciseRow] par position ;
-      # targets : Queries::Classroom::CatalogAssignmentTargetsQuery::Targets pour un enseignant, nil pour tout autre rôle.
-      Prepare = Data.define(:groups, :lesson_wide, :targets)
+      # targets : Queries::Classroom::CatalogAssignmentTargetsQuery::Targets pour un enseignant, nil pour tout autre rôle ;
+      # bare : [Bare] les notions lisibles par ce rôle qui n'ont aucun exercice visible (leur ancre « notion-<slug> » reste la cible des liens).
+      Prepare = Data.define(:groups, :lesson_wide, :targets, :bare)
+      Bare = Data.define(:essential_slug, :title)
       Group = Data.define(:essential_slug, :title, :exercises)
       # student_state : StudentState pour l'élève (nil s'il n'y a rien à dire), nil pour tout autre rôle ; status : celui de l'équipe.
       ExerciseRow = Data.define(:public_id, :title, :exercise_type, :status, :questions_count, :student_state)
       # kind : :to_review (lacune en attente) · :due (assignation active non rendue, due_on) · :score (meilleure note, score_percent).
       StudentState = Data.define(:kind, :due_on, :score_percent)
 
-      EMPTY = Prepare.new(groups: [], lesson_wide: [], targets: nil)
+      EMPTY = Prepare.new(groups: [], lesson_wide: [], targets: nil, bare: [])
       EXERCISE_COLUMNS = %i[id public_id title exercise_type status essential_id].freeze
 
       # → Prepare. Un cours inconnu rend des listes vides ; la lecture d'un brouillon est l'affaire de ReadPublishedPolicy, en amont.
@@ -27,7 +29,7 @@ module Queries
         counts = Orm::Question.where(exercise_id: exercises.map(&:first)).group(:exercise_id).count
         rows = exercises.to_h { |values| [ values.first, row(values, counts, state_of) ] }
         Prepare.new(groups: groups(course_id, exercises, rows), lesson_wide: lesson_wide(exercises, rows),
-                    targets: targets(course_slug, actor, exercises))
+                    targets: targets(course_slug, actor, exercises), bare: bare(course_id, exercises, team))
       end
 
       private
@@ -51,6 +53,13 @@ module Queries
         by_essential = exercises.group_by(&:last)
         Orm::Essential.where(course_id:, id: by_essential.keys.compact).order(:position, :id).pluck(:id, :slug, :name)
                       .map { |id, slug, name| Group.new(essential_slug: slug, title: name, exercises: by_essential[id].map { rows[it.first] }) }
+      end
+
+      # ADR-0028 : l'élève lit les notions publiées ; l'équipe, toutes.
+      def bare(course_id, exercises, team)
+        scope = Orm::Essential.where(course_id:).where.not(id: exercises.filter_map(&:last))
+        scope = scope.where(status: "published") unless team
+        scope.order(:position, :id).pluck(:slug, :name).map { |slug, name| Bare.new(essential_slug: slug, title: name) }
       end
 
       def lesson_wide(exercises, rows) = exercises.select { it.last.nil? }.map { rows[it.first] }

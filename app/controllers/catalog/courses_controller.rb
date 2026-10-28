@@ -55,7 +55,9 @@ module Catalog
 
       essentials = Repositories::Catalog::EssentialRepository.new
       @detail.essentials.each do |row|
-        record_read(essentials.find_by_slug(slug: row.slug))
+        essential = essentials.find_by_slug(slug: row.slug)
+        # Une notion supprimée pendant la lecture n'est plus à lire : la page s'affiche quand même.
+        record_read(essential) unless essential.nil?
       end
     end
 

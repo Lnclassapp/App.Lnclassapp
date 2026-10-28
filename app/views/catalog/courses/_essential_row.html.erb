@@ -6,7 +6,7 @@
 <% if teacher %>
   <%# Titre et chevron, la ligne entière est le lien (≥ 44 px) ; l'« Assigner » est sur la leçon (UDR enseignant §3.13). %>
   <li>
-    <%= link_to href,
+    <%= link_to href, data: { turbo_prefetch: false },
                 class: "group flex min-h-tap items-center gap-3 rounded-ln px-2 transition hover:bg-mist active:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand" do %>
       <span class="line-clamp-2 min-w-0 flex-1 text-sm font-medium text-ink"><%= essential.name %></span>
       <%= ui_icon "chevron-right", variant: :mini, class: "shrink-0 text-mute transition group-hover:translate-x-0.5" %>
@@ -15,7 +15,7 @@
 <% else %>
   <%# La ligne entière est le lien (≥ 44 px) ; l'étiquette dit « À revoir » (essential.review, propre à l'élève connecté). %>
   <%= tag.li id: "lesson_essential_#{essential.slug}", hidden: folded, data: { reveal_target: "item" } do %>
-    <%= link_to href,
+    <%= link_to href, data: { turbo_prefetch: false },
                 class: "group flex min-h-tap items-center gap-3 px-5 py-2 transition hover:bg-mist active:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand" do %>
       <span class="min-w-0 flex-1 text-sm text-pretty text-ink"><%= essential.name %></span>
       <% if essential.review %><%= ui_badge t(".review"), tone: :brand, size: :sm %><% end %>
