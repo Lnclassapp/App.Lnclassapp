@@ -8,6 +8,8 @@ module Entities
 
       TYPES = %w[fixation evaluation].freeze
       TITLE_MAX = 150
+      # Le sujet est envoyé à chaque élève qui ouvre l'exercice : borné comme le schéma de l'import (menace-import-v2, Q2).
+      STATEMENT_MAX = 5000
 
       attr_accessor :id, :public_id, :course_id, :essential_id, :exercise_type, :position, :author_id, :status,
                     :published_at, :archived_at, :parents_published
@@ -15,6 +17,7 @@ module Entities
       attr_reader :title, :statement
 
       validates :title, presence: true, length: { maximum: TITLE_MAX }
+      validates :statement, length: { maximum: STATEMENT_MAX }
       validates :course_id, presence: true
       validates :exercise_type, inclusion: { in: TYPES }
       validates :status, inclusion: { in: Entities::Shared::ContentStatus::VALUES }

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::ContentTreeWriterPort
 # Rôle : contrat d'écriture en masse d'arbres de contenu déjà validés et identifiés, tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113
 module Ports
   module Catalog
     module ContentTreeWriterPort
@@ -28,12 +28,22 @@ module Ports
               image_description: question.dig("image", "description")&.squish)
         end
       end
+      # position : indicative ; l'écrivain numérote les exercices par leçon, dans l'ordre où il les reçoit.
       ExerciseNode = Data.define(:public_id, :essential_id, :title, :statement, :exercise_type, :position, :questions)
-      EssentialNode = Data.define(:slug, :course_id, :name, :subtitle, :content, :position, :exercises)
-      CourseNode = Data.define(:slug, :name, :subtitle, :content, :level_id, :series_id, :material_id, :essentials)
+      # existing_id : l'id de la notion déjà en base d'une leçon réimportée (ADR-0113 §4.4) ; nil pour une notion à créer.
+      EssentialNode = Data.define(:slug, :course_id, :name, :subtitle, :content, :position, :exercises, :existing_id) do
+        def initialize(existing_id: nil, **) = super
+      end
+      # exercises : les exercices de toute la leçon, sans notion (ADR-0113) ; ceux d'une notion sont portés par sa fiche.
+      # existing_id : l'id d'une leçon déjà en base, réimportée : ni elle ni ses notions ne sont écrites, ses exercices sont archivés
+      # puis remplacés par ceux du nœud ; nil pour une leçon à créer.
+      CourseNode = Data.define(:slug, :name, :subtitle, :content, :level_id, :series_id, :material_id, :essentials, :exercises,
+                               :existing_id) do
+        def initialize(exercises: [], existing_id: nil, **) = super
+      end
 
       # Appelé dans une transaction ; une table après l'autre, parents d'abord (insert_all ou COPY, ADR-0068) ; lève si la base refuse.
-      # → { courses:, essentials:, exercises:, questions:, answers: } (lignes créées)
+      # → { courses:, essentials:, exercises:, questions:, answers: } (lignes créées), archived: les exercices archivés des leçons réimportées
       def write(author_id:, at:, courses: [], essentials: [], exercises: [])
         raise NotImplementedError, "#{self.class} doit implémenter #write"
       end

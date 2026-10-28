@@ -67,7 +67,7 @@ cascade = UseCases::Catalog::PublishCascade.new(
 )
 published = courses.count do |course|
   next false if course.status == "published" &&
-                Orm::Exercise.joins(:essential).where(essentials: { course_id: course.id }).where.not(status: "published").none?
+                Orm::Exercise.where(course_id: course.id).where.not(status: "published").none?
 
   result = cascade.call(actor:, root: :course, slug: course.slug)
   raise "publication refusée pour #{course.name} : #{result.errors}" if result.failure?

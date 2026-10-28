@@ -84,11 +84,11 @@ class Assessment::QuestionMatchingTest < ActionDispatch::IntegrationTest
     assert_empty Repositories::Assessment::ExerciseRepository.new.find(id: question.exercise_id).questions.sole.structure_errors
   end
 
-  # UDR-0087 §3.7 : l'aide des trois imports montre un exemple de chaque nouveau type, avec tolerance et match.
+  # UDR-0087 §3.7 : l'aide des imports (l'import d'exercices seuls est retiré, ADR-0113) montre un exemple de chaque nouveau type, avec tolerance et match.
   test "l'aide de l'import montre les quatre nouveaux types" do
     sign_in_as create_team_member
 
-    %w[exercises essentials course_tree].each do |kind|
+    %w[essentials course_tree].each do |kind|
       get new_teams_import_path(kind:)
       assert_select "#import-help-question-kinds pre", 4
       assert_select "#import-help-question-kinds", text: /"tolerance": 0.1/

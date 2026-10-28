@@ -17,22 +17,21 @@ class Catalog::ImportCourseTreeJobTest < ActiveJob::TestCase
     report.reload
   end
 
-  test "the real extract of the old application is written with all its descendants, in draft, and the report is completed" do
+  # ADR-0113 §4.4 : l'extrait est au format 1, dont les exercices sont ignorés et comptés ; le reste de l'arbre est écrit.
+  test "the real extract of the old application is written with its notions, in draft, its exercises ignored, and the report is completed" do
     report = import(import_sample("course_tree_tle_d_sample"))
 
     assert_equal [ "completed", 2, 2, 0, 0 ], report.values_at(:status, :total_count, :imported_count, :skipped_count, :error_count)
-    assert_equal({ "essentials_created" => 6, "exercises_created" => 24, "questions_created" => 144, "answers_created" => 288 },
-                 report.details)
-    assert_equal [ 2, 6, 24, 144, 288 ], [ Orm::Course, Orm::Essential, Orm::Exercise, Orm::Question, Orm::Answer ].map(&:count)
+    assert_equal({ "essentials_created" => 6, "exercises_created" => 0, "questions_created" => 0, "answers_created" => 0,
+                   "exercises_ignored_v1" => 24 }, report.details)
+    assert_equal [ 2, 6, 0, 0, 0 ], [ Orm::Course, Orm::Essential, Orm::Exercise, Orm::Question, Orm::Answer ].map(&:count)
     course = Orm::Course.find_by!(name: "Génétique et Évolution")
     assert_equal [ "tle", "d", "svt", "draft", @author.id ],
                  [ course.level.slug, course.series.slug, course.material.slug, course.status, course.author_id ]
     assert_equal [ "Brassage génétique par la méiose", "Mutation et diversité", "Sélection naturelle et dérive" ],
                  course.essentials.order(:position).pluck(:name)
     assert_includes course.content.to_plain_text, "Transmission des caractères héréditaires"
-    question = Orm::Question.find_by!(content: "Le crossing-over a lieu pendant la prophase de la deuxième division de méiose.")
-    assert_equal [ [ "Vrai", false ], [ "Faux", true ] ], question.answers.order(:position).pluck(:content, :correct)
-    assert_equal [ "draft" ], [ Orm::Essential, Orm::Exercise ].flat_map { it.distinct.pluck(:status) }.uniq
+    assert_equal [ "draft" ], Orm::Essential.distinct.pluck(:status)
   end
 
   test "imported HTML is sanitized: no script, no event attribute, no javascript: link; bold, lists and formulas are kept" do

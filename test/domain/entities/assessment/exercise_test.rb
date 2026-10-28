@@ -26,6 +26,8 @@ module Entities
       test "exige titre borné, leçon, type et statut connus" do
         assert build(title: nil).invalid?
         assert build(title: "a" * 151).invalid?
+        assert build(statement: "a" * 5_000).valid?
+        assert build(statement: "a" * 5_001).invalid?
         assert build(course_id: nil).invalid?
         assert build(exercise_type: "examen").invalid?
         assert build(status: "brouillon").invalid?

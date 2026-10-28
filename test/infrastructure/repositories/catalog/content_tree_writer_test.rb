@@ -30,16 +30,17 @@ module Repositories
                                 exercises: [ exercise("Quiz #{slug}", position: 1), exercise("Défi #{slug}", position: 2) ])
       end
 
-      def course(slug, content:)
+      def course(slug, content:, exercises: [])
         Port::CourseNode.new(slug:, name: "Cours #{slug}", subtitle: "Sous-titre", content:, level_id: @level.id, series_id: nil,
-                             material_id: @material.id, essentials: [ essential("#{slug}-a", position: 1), essential("#{slug}-b", position: 2) ])
+                             material_id: @material.id, essentials: [ essential("#{slug}-a", position: 1), essential("#{slug}-b", position: 2) ],
+                             exercises:)
       end
 
       test "écrit deux cours complets, parents d'abord, tout en draft, et compte les lignes créées" do
         counts = @writer.write(author_id: @author.id, at: @at,
                                courses: [ course("genetique", content: "<p>Hérédité</p>"), course("ecologie", content: nil) ])
 
-        assert_equal({ courses: 2, essentials: 4, exercises: 8, questions: 16, answers: 32 }, counts)
+        assert_equal({ courses: 2, essentials: 4, exercises: 8, questions: 16, answers: 32, archived: 0 }, counts)
         genetique = Orm::Course.find_by!(slug: "genetique")
         assert_equal [ "genetique-a", "genetique-b" ], genetique.essentials.order(:position).pluck(:slug)
         essential = Orm::Essential.find_by!(slug: "genetique-b")
@@ -52,6 +53,29 @@ module Repositories
           assert_equal [ [ "draft", @author.id, @at ] ], model.distinct.pluck(:status, :author_id, :created_at), model
         end
         assert_equal [ @at ], Orm::Answer.distinct.pluck(:updated_at)
+      end
+
+      # ADR-0113 §4.1 : un exercice de toute la leçon n'a pas de notion ; il prend la leçon du cours et suit les exercices des notions.
+      test "les exercices de toute la leçon n'ont pas de notion, portent la leçon du cours et se placent après ceux des notions" do
+        lesson_wide = [ exercise("Bilan 1"), exercise("Bilan 2") ]
+
+        counts = @writer.write(author_id: @author.id, at: @at, courses: [ course("genetique", content: nil, exercises: lesson_wide),
+                                                                          course("ecologie", content: nil, exercises: [ exercise("Bilan écologie") ]) ])
+
+        assert_equal({ courses: 2, essentials: 4, exercises: 11, questions: 22, answers: 44, archived: 0 }, counts)
+        genetique = Orm::Course.find_by!(slug: "genetique")
+        assert_equal [ [ 1, "Quiz genetique-a" ], [ 2, "Défi genetique-a" ], [ 3, "Quiz genetique-b" ], [ 4, "Défi genetique-b" ], [ 5, "Bilan 1" ], [ 6, "Bilan 2" ] ],
+                     Orm::Exercise.where(course_id: genetique.id).order(:position).pluck(:position, :title)
+        assert_equal [ [ nil, "draft" ], [ nil, "draft" ] ], Orm::Exercise.where(course_id: genetique.id, title: [ "Bilan 1", "Bilan 2" ]).pluck(:essential_id, :status)
+        assert_equal [ [ 5, "Bilan écologie" ] ], Orm::Exercise.where(course_id: Orm::Course.find_by!(slug: "ecologie").id, essential_id: nil).pluck(:position, :title)
+        assert_equal [ 2, 2 ], Orm::Exercise.find_by!(title: "Bilan 1").questions.then { [ it.count, it.first.answers.count ] }
+      end
+
+      test "des exercices de toute la leçon dans un cours sans notion s'écrivent aussi" do
+        counts = @writer.write(author_id: @author.id, at: @at, courses: [ course("seul", content: nil, exercises: [ exercise("Bilan") ]).with(essentials: []) ])
+
+        assert_equal({ courses: 1, essentials: 0, exercises: 1, questions: 2, answers: 4, archived: 0 }, counts)
+        assert_equal [ [ 1, nil ] ], Orm::Exercise.pluck(:position, :essential_id)
       end
 
       test "le contenu riche est assaini ; un contenu vide ne crée pas de ligne" do
@@ -87,7 +111,7 @@ module Repositories
         counts = @writer.write(author_id: @author.id, at: @at, essentials: [ essential("fiche-importee", course_id: target.id, position: 2) ],
                                exercises: [ exercise("Isolé", essential_id: fiche.id, position: 5) ])
 
-        assert_equal({ courses: 0, essentials: 1, exercises: 3, questions: 6, answers: 12 }, counts)
+        assert_equal({ courses: 0, essentials: 1, exercises: 3, questions: 6, answers: 12, archived: 0 }, counts)
         assert_equal [ 1, 2 ], target.essentials.order(:position).pluck(:position)
         assert_equal [ "Isolé" ], fiche.exercises.pluck(:title)
       end
@@ -101,13 +125,46 @@ module Repositories
       end
 
       test "sans nœud, rien n'est écrit ; une ligne refusée par la base lève" do
-        assert_equal({ courses: 0, essentials: 0, exercises: 0, questions: 0, answers: 0 }, @writer.write(author_id: @author.id, at: @at))
+        assert_equal({ courses: 0, essentials: 0, exercises: 0, questions: 0, answers: 0, archived: 0 }, @writer.write(author_id: @author.id, at: @at))
 
         create_course(slug: "genetique")
 
         assert_raises(ActiveRecord::RecordNotUnique) do
           @writer.write(author_id: @author.id, at: @at, courses: [ course("genetique", content: nil) ])
         end
+      end
+
+      # Réimport (ADR-0113 §4.5) : existing_id archive les exercices et leurs assignations, sans réécrire la leçon.
+      test "une leçon existante (existing_id) voit ses exercices et ses assignations actives archivés, puis remplacés" do
+        lesson = create_course
+        fiche = create_essential(course: lesson)
+        old = create_exercise(essential: fiche)
+        assignment = create_assignment(assignable: old)
+        node = course("remplace", content: nil, exercises: [ exercise("Bilan") ]).with(slug: nil, existing_id: lesson.id, essentials: [])
+
+        counts = @writer.write(author_id: @author.id, at: @at, courses: [ node ])
+
+        assert_equal 1, counts[:archived]
+        assert_equal [ "archived", @at ], old.reload.values_at(:status, :archived_at)
+        assert_equal [ "archived", @at ], assignment.reload.values_at(:status, :archived_at)
+        assert_equal [ 1, 1 ], [ Orm::Course.count, Orm::Exercise.where(status: "draft").count ]
+      end
+
+      test "une écriture qui échoue après l'archivage laisse les anciens exercices et leurs assignations intacts" do
+        lesson = create_course
+        old = create_exercise(essential: create_essential(course: lesson))
+        assignment = create_assignment(assignable: old)
+        twin = SecureRandom.base58(14)
+        collision = [ exercise("Un"), exercise("Deux") ].map { it.with(public_id: twin) }
+        node = course("remplace", content: nil, exercises: collision).with(slug: nil, existing_id: lesson.id, essentials: [])
+
+        result = Repositories::Shared::Transaction.new.attempt { @writer.write(author_id: @author.id, at: @at, courses: [ node ]) }
+
+        assert result.failure?
+        assert_equal "published", old.reload.status
+        assert_nil old.archived_at
+        assert_equal "active", assignment.reload.status
+        assert_nil assignment.archived_at
       end
 
       def question(content, position: 1, explanation: nil, question_type: "true_false", answers: self.answers)
@@ -128,7 +185,7 @@ module Repositories
 
         counts = @writer.write(author_id: @author.id, at:, exercises: [ exercise_with(questions, essential_id: fiche.id, statement: tricky) ])
 
-        assert_equal({ courses: 0, essentials: 0, exercises: 1, questions: 2, answers: 4 }, counts)
+        assert_equal({ courses: 0, essentials: 0, exercises: 1, questions: 2, answers: 4, archived: 0 }, counts)
         exercise = fiche.exercises.find_by!(position: 1)
         assert_equal [ "Échappement", tricky, "draft", @author.id ], [ exercise.title, exercise.statement, exercise.status, exercise.author_id ]
         written = exercise.questions.order(:position)

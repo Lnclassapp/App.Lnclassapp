@@ -30,7 +30,7 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
 
   test "the list shows recent reports, and filters them by kind" do
     create_import_report(kind: "schools", status: "completed", imported_count: 12, total_count: 12)
-    create_import_report(kind: "exercises", status: "rejected")
+    create_import_report(kind: "essentials", status: "rejected")
     sign_in_as @member
 
     get teams_imports_path
@@ -42,11 +42,27 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#imports", text: /Rejeté/
     assert_select "a[data-turbo-frame=modal][href='#{new_teams_import_path(kind: 'course_tree')}']"
 
-    get teams_imports_path(kind: "exercises")
+    get teams_imports_path(kind: "essentials")
 
     assert_select "#imports tr", 1
-    assert_select "#imports", text: /Exercices/
-    assert_select "nav a[aria-current=page]", text: "Exercices"
+    assert_select "#imports", text: /Fiches de révision/
+    assert_select "nav a[aria-current=page]", text: "Fiches de révision"
+  end
+
+  # ADR-0113 §4.4 : l'import d'exercices seuls est retiré ; ses rapports passés se lisent encore, il n'est plus proposé.
+  test "the retired exercises import is no longer offered, its past reports are still listed and readable" do
+    old = create_import_report(kind: "exercises", status: "completed", imported_count: 3, total_count: 3)
+    sign_in_as @member
+
+    get teams_imports_path
+
+    assert_select "#imports tr", 1
+    assert_select "nav a", text: "Exercices", count: 0
+    assert_select "a[href='#{new_teams_import_path(kind: 'exercises')}']", count: 0
+    get teams_import_path(old.public_id)
+    assert_response :success
+    get new_teams_import_path(kind: "exercises")
+    assert_response :not_found
   end
 
   # UDR-0130 §3: the import kinds of the course sheets and revision sheets are named by the decision.

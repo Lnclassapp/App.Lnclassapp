@@ -45,8 +45,6 @@
           <%= ui_dropdown label: t(".actions", name: essential.name), id: "essential-actions-menu", fixed: true do %>
             <%= ui_dropdown_item t(".edit"), href: edit_teams_essential_path(essential.slug), icon: "pencil-square", frame: "modal" %>
             <%= ui_dropdown_item t(".new_exercise"), href: new_teams_essential_exercise_path(essential.slug), icon: "plus", frame: "modal" %>
-            <%= ui_dropdown_item t(".import_exercises"), href: new_teams_import_path(kind: "exercises", essential: essential.slug),
-                                 icon: "arrow-up-tray", frame: "modal" %>
             <%= content_transition_items(record: @status_record) %>
             <%= ui_dropdown_item t("catalog.content_status.actions.publish_all"), href: publish_all_teams_essential_path(essential.slug),
                                  method: :patch, icon: "check-badge" %>

@@ -3,8 +3,10 @@ require "test_helper"
 module Entities
   module Catalog
     class ImportKindTest < ActiveSupport::TestCase
-      test "six types fermés, dont les DRENA (ADR-0066) et la fiche de cours en blocs" do
-        assert_equal %w[schools course_tree essentials exercises drenas course_sheet], ImportKind::KINDS
+      test "cinq types fermés, dont les DRENA (ADR-0066) et la fiche de cours en blocs ; les exercices seuls sont retirés (ADR-0113)" do
+        assert_equal %w[schools course_tree essentials drenas course_sheet], ImportKind::KINDS
+        assert_not ImportKind.valid?("exercises")
+        assert_raises(ArgumentError) { ImportKind.fetch("exercises") }
         assert ImportKind.valid?("drenas")
         assert ImportKind.valid?(:schools)
         assert_raises(ArgumentError) { ImportKind.fetch("regions") }
@@ -26,8 +28,17 @@ module Entities
         assert_nil ImportKind.fetch("course_tree").target_key
         assert_equal 500, ImportKind.fetch("course_tree").max_roots
         assert_equal [ "course", true, 2_000 ], ImportKind.fetch("essentials").then { [ it.target_key, it.target_required, it.max_roots ] }
-        assert_equal [ "essential", 10_000 ], ImportKind.fetch("exercises").then { [ it.target_key, it.max_roots ] }
         assert_equal [ 20 * 1024 * 1024, 1_000, 100 ], [ ImportKind::MAX_BYTES, ImportKind::MAX_ERRORS, ImportKind::BATCH_SIZE ]
+      end
+
+      # ADR-0113 §4.4 : le format 2 est lu ; le format 1 est toléré (la leçon et ses notions, sans exercices). Les autres types n'ont qu'une version.
+      test "les cours complets lisent le format 2 et tolèrent le format 1" do
+        course_tree = ImportKind.fetch("course_tree")
+
+        assert_equal [ "lnclass.course-tree", 2, [ 1 ] ], [ course_tree.format, course_tree.version, course_tree.legacy_versions ]
+        assert_equal [ true, true, false, false ], [ 2, 1, 3, 0 ].map { course_tree.accepts?(it) }
+        assert_equal [ true, false ], [ ImportKind.fetch("schools").accepts?(1), ImportKind.fetch("schools").accepts?(2) ]
+        assert_equal [ 1 ], (ImportKind::KINDS - %w[course_tree]).map { ImportKind.fetch(it).version }.uniq
       end
 
       # ADR-0068 : seuls les cours complets acceptent plusieurs fichiers.
@@ -54,7 +65,7 @@ module Entities
         teacher = Identity::Actor.new(user_id: 2, role: :teacher)
 
         assert_equal Policies::School::ManageSchoolPolicy, ImportKind.fetch("schools").policy
-        assert_equal Policies::Catalog::ManageContentPolicy, ImportKind.fetch("exercises").policy
+        assert_equal Policies::Catalog::ManageContentPolicy, ImportKind.fetch("essentials").policy
         assert ImportKind.fetch("course_tree").authorize(actor: team).success?
         assert_equal :forbidden, ImportKind.fetch("schools").authorize(actor: teacher).code
       end
@@ -65,11 +76,13 @@ module Entities
 
         assert_equal "classrooms", ImportKind::CLASSROOM_GENERATION
         assert_not ImportKind.valid?("classrooms")
-        assert_equal %w[schools course_tree essentials exercises drenas course_sheet classrooms school_codes classroom_links], ImportKind::REPORT_KINDS
+        assert_equal %w[schools course_tree essentials drenas course_sheet classrooms school_codes classroom_links], ImportKind::REPORT_KINDS
         assert ImportKind.authorize_report(kind: "classrooms", actor: team).success?
         assert_equal :forbidden, ImportKind.authorize_report(kind: "classrooms", actor: teacher).code
+        # Les rapports des imports d'exercices seuls, faits avant leur retrait, restent lisibles par l'équipe de contenu.
         assert_equal :forbidden, ImportKind.authorize_report(kind: :exercises, actor: teacher).code
         assert ImportKind.authorize_report(kind: "exercises", actor: team).success?
+        assert_not_includes ImportKind::REPORT_KINDS, "exercises"
         assert_raises(KeyError) { ImportKind.authorize_report(kind: "regions", actor: team) }
       end
 
