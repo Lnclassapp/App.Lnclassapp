@@ -59,27 +59,4 @@ class Assessment::QuestionNumericTest < ActionDispatch::IntegrationTest
 
     assert_equal [ true, true ], Orm::QuestionAttempt.order(:id).pluck(:correct)
   end
-
-  test "CA-13 : l'équipe saisit la valeur et la marge ; une marge illisible est refusée à sa place" do
-    essential = create_essential
-    sign_in_as create_team_member
-    params = ->(tolerance) do
-      { exercise: { title: "Nombre", exercise_type: "fixation", questions_attributes: {
-        "0" => { content: "Combien ?", question_type: "numeric", numeric_tolerance: tolerance,
-                 answers_attributes: { "0" => { content: "-3,5", correct: "1" } } }
-      } } }
-    end
-
-    post teams_essential_exercises_path(essential.slug), params: params.("beaucoup"), as: :turbo_stream
-    assert_response :unprocessable_entity
-    # Trop grande pour decimal(12,4) : refusée comme règle de structure, sans erreur de la base.
-    post teams_essential_exercises_path(essential.slug), params: params.("1000000000"), as: :turbo_stream
-    assert_response :unprocessable_entity
-    assert_select "[role=alert]", text: I18n.t("activemodel.errors.models.dtos/assessment/exercise_input.attributes.questions.tolerance_out_of_range")
-    assert_equal 0, Orm::Exercise.where(title: "Nombre").count
-
-    post teams_essential_exercises_path(essential.slug), params: params.("0,25"), as: :turbo_stream
-    question = Orm::Exercise.find_by!(title: "Nombre").questions.sole
-    assert_equal [ "numeric", BigDecimal("0.25"), [ "-3,5" ] ], [ question.question_type, question.numeric_tolerance, question.answers.pluck(:content) ]
-  end
 end

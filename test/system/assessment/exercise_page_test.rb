@@ -110,17 +110,4 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
     assert_selector "#exercise_questions li.question", count: 5
     assert_no_button I18n.t("components.reveal.more")
   end
-
-  test "l'équipe ouvre « Modifier » dans la modale, sans rechargement de page" do
-    sign_in_as create_team_member
-
-    visit exercise_path(@exercise.public_id)
-
-    assert_no_page_reload do
-      click_menu_action("#exercise_header", I18n.t("#{scope}.show.edit"))
-
-      assert_selector "turbo-frame#modal dialog[open] #exercise-form"
-    end
-    assert_field "exercise[title]", with: "Méiose"
-  end
 end

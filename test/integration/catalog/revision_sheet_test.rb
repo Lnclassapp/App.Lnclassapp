@@ -181,19 +181,4 @@ class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest
     assert_select "section#fiche-de-revision .sheet-practice"
     assert_select "section#fiche-de-revision button, section#fiche-de-revision a", text: /Assigner/, count: 0
   end
-
-  test "the standalone sheet page is unchanged: its header is the h1, no cut, no « Voir plus »" do
-    document = sheet_document(100, 100, 100)
-    document["pages"][0]["header"] = { "title" => "La propriété de Thalès", "intro" => "Une intro." }
-    create_course_sheet(course: @course, document:)
-    sign_in_as @student
-
-    get course_sheet_path(@course.slug)
-
-    assert_response :success
-    assert_select "h1.sheet-h1", text: "La propriété de Thalès", count: 1
-    assert_select REST, 0
-    assert_select "[data-controller~='catalog--revision-more']", 0
-    assert_select "[data-embedded]", 0
-  end
 end

@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# CL-12, AS-20 (UDR-0029): from the essential sheet of their classroom, the teacher assigns an exercise, then withdraws
+# CL-12, AS-20 (UDR-0029): from the lesson page seen from their classroom, the teacher assigns an exercise, then withdraws
 # it — the D5 toggle and toasts change in place, without a page reload. UDR-0062 §3.4: with session days, the toggle
 # shows the due date; unchecking every day brings the days modal back.
 class Classroom::ClassroomEssentialTest < ApplicationSystemTestCase
@@ -22,9 +22,9 @@ class Classroom::ClassroomEssentialTest < ApplicationSystemTestCase
   def toggle = "#assignment_#{@classroom.public_id}_Exercise_#{@phases.public_id}"
 
   test "assign an exercise, then withdraw it, without a page reload" do
-    visit classroom_essential_path(@classroom.public_id, @course.slug, @essential.slug)
-    assert_selector "h1", text: "Méiose"
-    assert_selector "#classroom_essential_exercises li", count: 2
+    visit classroom_course_path(@classroom.public_id, @course.slug)
+    assert_selector "h1", text: "Génétique"
+    assert_selector "#prepare-interros li [id^='assignment_']", count: 2
     assert_no_text "Brouillon"
 
     due = I18n.l(Time.zone.today.next_occurring(:tuesday), format: :due_short)
@@ -34,7 +34,7 @@ class Classroom::ClassroomEssentialTest < ApplicationSystemTestCase
       within(toggle) do
         assert_text "Assigné"
         assert_text "Pour #{due}"
-        click_on "Retirer"
+        find("button[aria-label^='Retirer']").click
       end
       assert_toast "Les phases retiré de 6ème 1."
       within(toggle) do
@@ -49,7 +49,7 @@ class Classroom::ClassroomEssentialTest < ApplicationSystemTestCase
 
   # Le bouton « Modifier » est sur la page de la classe (Lot E) : la modale s'ouvre ici dans le frame, comme lui.
   test "unchecking every session day brings the days modal back on « Assigner »" do
-    visit classroom_essential_path(@classroom.public_id, @course.slug, @essential.slug)
+    visit classroom_course_path(@classroom.public_id, @course.slug)
 
     assert_no_page_reload do
       open_in_modal edit_classroom_session_days_path(@classroom.public_id)

@@ -10,7 +10,7 @@
     <p class="font-medium"><%= t(".#{outcome}.message") %></p>
     <p><%= t(".#{outcome}.hint", essential: essential.name, grade:) %></p>
     <% unless lifted %>
-      <%= link_to t(".open_essential"), course_path(essential.course_slug, anchor: "notion-#{essential.slug}"),
+      <%= link_to t(".open_essential"), course_path(essential.course_slug, anchor: "notion-#{essential.slug}"), data: { turbo_prefetch: false },
                   class: "inline-flex min-h-tap items-center font-medium text-brand underline-offset-2 hover:underline
                           focus-visible:outline-2 focus-visible:outline-brand" %>
     <% end %>

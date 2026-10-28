@@ -39,11 +39,11 @@ class Catalog::CourseSheetSeedsTest < ActionDispatch::IntegrationTest
     sign_out
     sign_in_as create_student_for(@course)
 
-    get course_sheet_path(@course.slug)
+    get course_path(@course.slug)
 
     assert_response :success
     assert_select "[data-screen-label]", 3
-    assert_select "h1", text: "La propriété de Thalès"
+    assert_select "h3.sheet-h1", text: "La propriété de Thalès"
     assert_select "[data-controller~='course-sheet--thales-figure'] svg"
     assert_select ".sheet-card[data-controller~='course-sheet--exercise']", 7
     assert_select "section[data-controller~='course-sheet--practice'][data-course-sheet--practice-kind-value='thales_ratio']"

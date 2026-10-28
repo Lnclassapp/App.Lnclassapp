@@ -6,7 +6,7 @@
 <%# Largeurs : 3/4 de la bande, puis 2 cartes et demie dès 700 px, puis 4 cartes dès 1 024 px : l'espace passe alors
     dans le px-1.5 de chaque carte (la bande perd son gap-3 et déborde de -mx-1.5), pour quatre quarts égaux. %>
 <li id="course_<%= course.slug %>" class="shrink-0 basis-3/4 snap-start min-[700px]:basis-2/5 lg:basis-1/4 lg:px-1.5">
-  <%= link_to course_path(course.slug),
+  <%= link_to course_path(course.slug), data: { turbo_prefetch: false },
               class: "flex h-full flex-col gap-2 rounded-card border border-line bg-white p-4 shadow-card transition hover:border-brand active:bg-mist focus-visible:outline-2 focus-visible:outline-brand" do %>
     <span class="<%= class_names("mb-1 grid size-12 place-items-center rounded-full", illustration.tint) %>" aria-hidden="true">
       <%= image_tag illustration.path, alt: "", class: "size-8", loading: "lazy" %>

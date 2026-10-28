@@ -173,4 +173,23 @@ class Assessment::ExerciseSessionsControllerTest < ActionDispatch::IntegrationTe
 
     assert_redirected_to new_session_path
   end
+
+  # ADR-0105 §4.4, UDR-0129 §3.4: the student reads the image of a question above its statement, lazily, at its dimensions.
+  test "l'image d'une question se lit au-dessus de l'énoncé, chargée à la demande et à ses dimensions" do
+    second = @exercise.questions.order(:position).second
+    image = create_question_image(question: second, alt: "Une pile reliée à une lampe")
+    session = create_exercise_session(student: @student, exercise: @exercise)
+    sign_in_as @student
+
+    get exercise_session_path(session.public_id)
+
+    assert_response :success
+    assert_select "#question-2 img[src=?][alt=?][loading=lazy][width=?][height=?]", question_image_path(image.public_id),
+                  "Une pile reliée à une lampe", image.width.to_s, image.height.to_s
+    assert_select "#question-1 img", 0
+    html = response.body
+    assert_operator html.index(%(id="question-2")), :<, html.index(question_image_path(image.public_id))
+    assert_operator html.index(question_image_path(image.public_id)), :<, html.index(CGI.escapeHTML(second.content)),
+                    "l'image précède l'énoncé"
+  end
 end
