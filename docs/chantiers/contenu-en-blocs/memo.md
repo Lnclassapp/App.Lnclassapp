@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | exécution — phase 2 (Lentilles, Texte argumentatif) ouverte par le porteur le 2026-10-28 |
+| **Statut** | livré le 2026-10-28 (dans `Develop`), clos ; reste la relecture du contenu de Lentilles |
 | **Ouvert le** | 2026-10-12 |
 | **Revu le** | 2026-10-13 (grill repris avec l'algorithme en 5 étapes : questionner, supprimer, simplifier, accélérer, automatiser) ; 2026-10-27 (périmètre élargi aux maquettes à l'identique, voir ci-dessous) |
 | **Pilote** | Touré (`toure-bangaly`), avec l'accord du porteur |
