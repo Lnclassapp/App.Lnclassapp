@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/session_results/show — résultat d'une session terminée (AS-11 à AS-13) %>
 <%# Rôle : badge, « Félicitations ! » (dès 14/20) ou « Courage ! », note (verte dès 14/20) et maîtrise, progrès, effet sur la fiche, « Recommencer » seul (caché au sans-faute, Grading.perfect?), correction %>
-<%# ADR  : 0033, 0054, 0079, 0091, 0101 · UDR : 0007, 0023, 0054, 0057, 0073, 0087 §3.6, 0120, XXXX écrans élève sans répétition §3.5 et §3.6 bis · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
+<%# ADR  : 0033, 0054, 0079, 0091, 0101, 0112, 0113 · UDR : 0007, 0023, 0054, 0057, 0073, 0087 §3.6, 0120, 0138 §3.4, XXXX écrans élève sans répétition §3.5 et §3.6 bis · aucun cache : le HTML dépend du rôle · Stimulus : assessment--confetti, reveal %>
 <% result = @result %>
 <%# UDR-0087 §3.6 : le titre, la couleur de la note et les confettis dès « 14/20 » affiché, la règle de l'historique, de
     « Ma classe » et de l'accueil (68 % s'affiche 14/20). %>
@@ -9,7 +9,7 @@
 <% tile = "rounded-ln bg-mist px-3 py-3 text-center" %>
 <% label = "text-2xs font-medium tracking-wide text-mute uppercase" %>
 <% page_title t(".page_title", title: result.exercise.title) %>
-<%= ui_back_link result.essential.name, href: course_essential_path(result.essential.course_slug, result.essential.slug) %>
+<% lesson_href = course_path(result.course_slug, anchor: (result.essential ? "notion-#{result.essential.slug}" : "toute-la-lecon")) %>
 <%# UDR-0087 §3.6 : une colonne de 720 px dès 700 px. UDR écrans élève §3.6 bis (CA-E13) : dès 1 024 px, la note et « Recommencer »
     dans une colonne de 340 px collante à gauche, la correction à droite. %>
 <div id="session_result_layout"
@@ -67,16 +67,17 @@
       <%= render "assessment/session_results/progress", progress: result.progress %>
     <% end %>
     <%# UDR-0120 : l'effet de la session sur sa fiche, à l'élève seul, sous son progrès. %>
-    <% if @owner && result.gap_outcome %>
+    <% if @owner && result.gap_outcome && result.essential %>
       <%= render "assessment/session_results/gap_outcome", outcome: result.gap_outcome, essential: result.essential %>
     <% end %>
 
-    <%# UDR écrans élève §3.5 : un seul bouton, « Recommencer » (caché au sans-faute). %>
+    <%# UDR-0138 §3.4 : « Refaire l'exercice » (caché au sans-faute) puis « Retour à la leçon ». %>
     <% if @can_restart && !grading.perfect?(result.score_percent) %>
       <%= form_with url: exercise_sessions_path(result.exercise.public_id), method: :post, id: "restart-exercise-form" do %>
-        <%= ui_button t(".restart"), type: :submit, variant: :primary, size: :lg, full: true, icon: "arrow-path" %>
+        <%= ui_button t("assessment.exercises.show.redo"), type: :submit, variant: :brand, size: :lg, full: true, icon: "arrow-path" %>
       <% end %>
     <% end %>
+    <%= ui_button t(".back_to_lesson"), href: lesson_href, variant: :secondary, size: :lg, full: true, data: { turbo_prefetch: false } %>
   </div>
 
   <%= tag.section id: "session_review", "aria-labelledby": "session_review_title",

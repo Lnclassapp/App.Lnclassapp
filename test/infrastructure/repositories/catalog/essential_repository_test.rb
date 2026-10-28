@@ -98,6 +98,8 @@ module Repositories
 
         assert_equal Set[[ @course.id, "la mitose" ]], @repository.existing_keys(course_ids: [ @course.id ])
         assert @repository.existing_keys.superset?(Set[[ @course.id, "la mitose" ], [ other_course.id, "ailleurs" ]])
+        assert_equal({ "la mitose" => mine.id }, @repository.ids_by_name(course_id: @course.id))
+        assert_equal [ mine.name ], @repository.names(course_id: @course.id)
         assert_equal 2, @repository.next_position(course_id: @course.id)
         assert_equal 1, @repository.next_position(course_id: create_course.id)
         assert_includes @repository.taken_slugs, mine.slug
@@ -207,6 +209,24 @@ module Repositories
         assert_equal({ content: [ :invalid ] }, @repository.update(essential: created).errors)
         assert_equal created.id, image.reload.essential_id
         assert_includes @repository.find_by_slug(slug: created.slug).content, image.attachable_sgid
+      end
+
+      test "ADR-0105 : un texte qui cite plus de 30 images est refusé, rien n'est écrit ni rattaché" do
+        images = Array.new(Entities::Shared::ContentImage::MAX_PER_ESSENTIAL + 1) { create_essential_image }
+        content = images.map { attachment(it) }.join
+
+        result = @repository.create(essential: essential(content:))
+
+        assert_equal [ :invalid, { content: [ :too_many_images ] } ], [ result.code, result.errors ]
+        assert_equal 0, Orm::Essential.count
+        assert_equal [ nil ], images.map { it.reload.essential_id }.uniq
+      end
+
+      test "ADR-0105 : une pièce jointe sans signature n'est ni une image citée ni une erreur : le texte est écrit sans elle" do
+        created = @repository.create(essential: essential(content: %(<p>Texte.</p><action-text-attachment content-type="image/png"></action-text-attachment>))).value
+
+        assert_empty created.images
+        assert_not_includes created.content, "action-text-attachment"
       end
 
       test "ADR-0105 : une image citée prise entre-temps par une autre fiche fait échouer l'écriture, rien n'est écrit" do

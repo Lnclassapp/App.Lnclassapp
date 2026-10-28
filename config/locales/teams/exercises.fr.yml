@@ -4,7 +4,7 @@ fr:
     attributes:
       dtos/assessment/exercise_input:
         title: "Titre"
-        description: "Description"
+        statement: "Sujet"
         exercise_type: "Type d'exercice"
         questions: "Questions"
       dtos/assessment/question_input:
@@ -64,9 +64,6 @@ fr:
               blank: "Saisissez le texte de la proposition."
   teams:
     exercises:
-      exercise_types:
-        fixation: "Fixation"
-        evaluation: "Évaluation"
       question_types:
         true_false: "Vrai / Faux"
         single_choice: "Choix unique"
@@ -76,63 +73,6 @@ fr:
         numeric: "Réponse en nombre"
         ordering: "Remettre dans l'ordre"
         matching: "Relier"
-      new:
-        title: "Nouvel exercice"
-        essential: "Fiche de révision : %{name}"
-        submit: "Créer l'exercice"
-        cancel: "Annuler"
-      edit:
-        title: "Modifier l'exercice"
-        submit: "Enregistrer"
-        cancel: "Annuler"
-      form:
-        title_placeholder: "Ex. : Brassage génétique par la méiose"
-        description_hint: "Consigne lue par l'élève avant de commencer. Facultative."
-        exercise_type_hint: "Fixation : pour s'entraîner. Évaluation : pour faire le point."
-        questions_title: "Questions"
-        questions_hint: "Vrai / Faux : exactement 2 propositions, dont 1 correcte. Choix unique, 2 ou 3 propositions correctes : autant de cases cochées, et au moins une proposition incorrecte en plus."
-        add_question: "Ajouter une question"
-        locked_title: "Questions verrouillées"
-        locked_body: "Des élèves ont déjà fait cet exercice. Vous pouvez modifier son titre et sa description ; ses questions, leurs propositions et son type ne changent plus."
-        locked_type: "Type d'exercice : %{type}"
-        locked_question: "Question %{position} · %{type}"
-        correct: "Proposition correcte"
-      question_fields:
-        legend: "Question"
-        remove: "Retirer la question"
-        answers: "Propositions"
-        add_answer: "Ajouter une proposition"
-        content_placeholder: "Énoncé de la question"
-        explanation_hint: "Montrée à l'élève après sa réponse. Facultative."
-      kinds:
-        fill_blank:
-          hint: "Écrivez ___ (trois tirets bas) dans l'énoncé, là où l'élève répond."
-          answers: "Réponses acceptées (1 à 5)"
-          placeholder: "Réponse acceptée"
-          add: "Ajouter une réponse acceptée"
-        numeric:
-          value: "Valeur attendue"
-          value_placeholder: "-3,5"
-          tolerance: "Marge acceptée"
-          tolerance_hint: "Facultative. Sans marge, seule la valeur exacte est juste."
-        ordering:
-          hint: "Écrivez les étapes dans le bon ordre : l'élève les recevra mélangées."
-          answers: "Étapes (3 à 6)"
-          placeholder: "Étape"
-          add: "Ajouter une étape"
-        matching:
-          pairs: "Paires (3 à 5)"
-          left: "Gauche"
-          right: "Droite"
-          add: "Ajouter une paire"
-      answer_fields:
-        placeholder: "Texte de la proposition"
-        correct: "Proposition correcte"
-        remove: "Retirer la proposition"
-      create:
-        created: "Exercice « %{title} » créé (brouillon)."
-      update:
-        updated: "Exercice « %{title} » modifié."
       transition:
         published: "Exercice « %{title} » publié."
         archived: "Exercice « %{title} » archivé."

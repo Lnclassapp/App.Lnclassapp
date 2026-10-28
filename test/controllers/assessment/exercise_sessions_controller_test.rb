@@ -2,7 +2,7 @@ require "test_helper"
 
 # AS-07, AS-08 (UDR-0022) : l'élève démarre un exercice publié, assigné ou non, reprend sa session ou la recommence ;
 # un brouillon n'existe pas pour lui (404) ; un enseignant ne démarre rien (403). La page de session ne montre que la
-# prochaine question, sans aucune correction.
+# copie entière, sans aucune correction (UDR-0138).
 class Assessment::ExerciseSessionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @exercise = create_exercise(title: "Méiose", questions: 2)
@@ -28,21 +28,13 @@ class Assessment::ExerciseSessionsControllerTest < ActionDispatch::IntegrationTe
 
     follow_redirect!
     assert_response :success
-    assert_select "h1", text: "Méiose"
-    # UDR-0087 §3.2 : mode concentré ; en haut la croix (lien vers l'exercice sans JavaScript), la barre et « 1/2 ».
-    assert_select "header.z-40", 0
-    assert_select "aside, nav[aria-label], a[href='#main']", 0
-    assert_select "a[href=?][aria-label=?][aria-controls='quit-dialog']", exercise_path(@exercise.public_id),
-                  I18n.t("#{scope}.quit_dialog.trigger")
-    assert_select "#progress_counter", text: /1\/2/
-    assert_select "#progress_bar > progress[value='0'][max='100'][aria-label=?]", I18n.t("#{scope}.progress_bar.label"),
-                  text: I18n.t("#{scope}.progress_bar.percent", percent: 0)
-    assert_select "turbo-frame#question #question-card", text: /#{I18n.t("#{scope}.question_card.number", number: 1, total: 2)}/
-    # Une question à choix unique : pas de consigne, les boutons radio la portent (R4).
-    assert_select "#attempt-form fieldset > p", 0
-    assert_select "#attempt-form[action='#{exercise_session_attempts_path(session.public_id)}'] input[type=radio]", 4
-    assert_select "#attempt-form input[type=hidden][name='attempt[question_id]'][value='#{@exercise.questions.order(:position).first.id}']"
-    assert_select "dialog#quit-dialog a[href='#{exercise_path(@exercise.public_id)}']", text: I18n.t("#{scope}.quit_dialog.quit")
+    # UDR-0138 §3.2 : la copie montre le sujet repliable, le compteur et toutes les questions dans un seul formulaire.
+    assert_select "#copy-counter", text: /0.*2/
+    assert_select "details#copy-statement"
+    assert_select "form#copy-form[action='#{exercise_session_copy_path(session.public_id)}'] fieldset", 2
+    assert_select "form#copy-form input[type=radio]", 8
+    assert_select "form#copy-form button[type=submit]", text: I18n.t("#{scope}.show.submit")
+    assert_select "dialog#copy-confirm"
   end
 
   test "une question à plusieurs réponses : « Coche N propositions. », sans badge qui le redit" do
@@ -53,9 +45,9 @@ class Assessment::ExerciseSessionsControllerTest < ActionDispatch::IntegrationTe
     get exercise_session_path(session.public_id)
 
     assert_response :success
-    assert_select "#attempt-form fieldset > p", text: "Coche 2 propositions."
-    assert_select "#attempt-form input[type=checkbox]", 4
-    assert_select "#question-card", text: /Plusieurs propositions correctes/, count: 0
+    assert_select "#question-1 fieldset p", text: "Coche 2 propositions."
+    assert_select "#question-1 input[type=checkbox]", 4
+    assert_select "#question-2 input[type=radio]", 4
   end
 
   test "un exercice assigné à la classe : la session est rattachée à l'assignation" do
@@ -67,16 +59,12 @@ class Assessment::ExerciseSessionsControllerTest < ActionDispatch::IntegrationTe
     assert_equal assignment.id, Orm::ExerciseSession.sole.classroom_assignment_id
   end
 
-  test "Reprendre ouvre la session en cours à la question suivante ; Recommencer l'abandonne et en ouvre une autre" do
+  test "Reprendre ouvre la copie en cours ; Recommencer l'abandonne et en ouvre une autre" do
     open = create_exercise_session(student: @student, exercise: @exercise)
-    first, second = @exercise.questions.order(:position).to_a
-    create_attempt(session: open, question: first)
     sign_in_as @student
 
     post exercise_sessions_path(@exercise.public_id)
     assert_redirected_to exercise_session_path(open.public_id)
-    follow_redirect!
-    assert_select "#attempt-form input[name='attempt[question_id]'][value='#{second.id}']"
 
     post exercise_sessions_path(@exercise.public_id), params: { restart: "true" }
     fresh = Orm::ExerciseSession.find_by!(status: "started")
@@ -141,24 +129,67 @@ class Assessment::ExerciseSessionsControllerTest < ActionDispatch::IntegrationTe
     assert_equal I18n.t("#{scope}.show.abandoned"), flash[:alert]
   end
 
-  test "le HTML d'une question non tentée ne contient aucune marque de proposition correcte (AS-10)" do
-    session = create_exercise_session(student: @student, exercise: @exercise)
-    correct_ids = Orm::Answer.where(question: @exercise.questions, correct: true).pluck(:id)
-    sign_in_as @student
+  # CA-14 : la copie ne contient aucune marque de proposition correcte, aucune explication, aucun identifiant de bonne réponse.
+  test "le HTML de la copie ne contient aucune marque de correction (CA-14, AS-10)" do
+    # Des ids de réponse qu'aucun indice d'affichage ne peut valoir : sans cela, un id petit passe pour un indice.
+    Orm::Answer.connection.execute("ALTER SEQUENCE #{Orm::Answer.sequence_name} RESTART WITH 914273001")
+    exercise = create_exercise(title: "Ids distincts", questions: 2)
+    exercise.questions.first.update!(explanation: "La méiose compte deux divisions.")
+    session = create_exercise_session(student: create_student_for(exercise.essential.course).tap { sign_in_as it }, exercise:)
 
     get exercise_session_path(session.public_id)
 
     assert_response :success
-    assert_no_match(/correct/i, response.body.scan(/<turbo-frame id="question".*<\/turbo-frame>/m).join)
-    # La question affichée n'est pas forcément celle dont la base rend d'abord la bonne réponse : une seule des bonnes
-    # réponses de l'exercice est dans le formulaire, sans marque qui la distingue.
-    assert_equal 1, correct_ids.count { |id| css_select("#attempt-form input[value='#{id}']").any? }
-    assert_select "#attempt-form [data-correct], #attempt-form .correct", 0
+    assert_no_match(/correct|La méiose compte deux divisions/i, response.body[/<form id="copy-form".*<\/form>/m].to_s)
+    # Tout le corps de la page, sauf les icônes : l'explication n'est nulle part.
+    assert_no_match(/La méiose compte deux divisions/, response.body.gsub(%r{<svg.*?</svg>}m, ""))
+    assert_select "#copy-form [data-correct], #copy-form .correct", 0
+    assert_select "#copy-form input[name$='[display_order][]']", 8
+    # ADR-0091 §4.4 : une proposition montrée porte son indice d'affichage, jamais son identifiant (qui trahit l'ordre de saisie).
+    answer_ids = exercise.questions.flat_map { it.answers.pluck(:id) }.map(&:to_s)
+    assert_empty answer_ids & css_select("#copy-form input[name$='[display_order][]']").map { it["value"] }
+    assert_equal [ "0", "1", "2", "3" ], css_select("#copy-form #question-1 input[name$='[display_order][]']").map { it["value"] }.sort
+  end
+
+  # CA-14 : la copie d'un exercice de toute la leçon s'ouvre pour l'élève du niveau (200), jamais pour un autre niveau (404).
+  test "exercice de toute la leçon : la copie s'ouvre au bon niveau (200), 404 à un autre niveau" do
+    lesson = create_lesson_wide_exercise(course: @exercise.essential.course, title: "Bilan", questions: 2)
+    session = create_exercise_session(student: @student, exercise: lesson)
+    sign_in_as @student
+
+    get exercise_session_path(session.public_id)
+    assert_response :success
+    assert_select "form#copy-form fieldset", 2
+
+    elsewhere = create_student_for(create_course(level: create_level(name: "6e")))
+    foreign = create_exercise_session(student: elsewhere, exercise: lesson)
+    sign_in_as elsewhere
+    get exercise_session_path(foreign.public_id)
+    assert_response :not_found
   end
 
   test "sans connexion : vers la page de connexion" do
     post exercise_sessions_path(@exercise.public_id)
 
     assert_redirected_to new_session_path
+  end
+
+  # ADR-0105 §4.4, UDR-0129 §3.4: the student reads the image of a question above its statement, lazily, at its dimensions.
+  test "l'image d'une question se lit au-dessus de l'énoncé, chargée à la demande et à ses dimensions" do
+    second = @exercise.questions.order(:position).second
+    image = create_question_image(question: second, alt: "Une pile reliée à une lampe")
+    session = create_exercise_session(student: @student, exercise: @exercise)
+    sign_in_as @student
+
+    get exercise_session_path(session.public_id)
+
+    assert_response :success
+    assert_select "#question-2 img[src=?][alt=?][loading=lazy][width=?][height=?]", question_image_path(image.public_id),
+                  "Une pile reliée à une lampe", image.width.to_s, image.height.to_s
+    assert_select "#question-1 img", 0
+    html = response.body
+    assert_operator html.index(%(id="question-2")), :<, html.index(question_image_path(image.public_id))
+    assert_operator html.index(question_image_path(image.public_id)), :<, html.index(CGI.escapeHTML(second.content)),
+                    "l'image précède l'énoncé"
   end
 end

@@ -101,8 +101,9 @@ module Finitions
         assert_selector "nav[aria-label='#{t('components.back_link.label')}'] a[href='#{courses_path}']",
                         text: "Cours"
         assert_no_link "SVT"
-        # UDR-0130 : la liste des fiches de révision d'une fiche de cours.
-        assert_selector "#course_essentials_title", text: "Révisions de la leçon"
+        # UDR page de la leçon §3.1 : les deux sections.
+        assert_selector "#revision_title", text: "Fiche de révision"
+        assert_selector "#prepare_title", text: "Prépare interros"
       end
       within("main nav") { click_on "Cours" }
       assert_current_path courses_path
@@ -131,40 +132,33 @@ module Finitions
       assert_no_selector "[data-controller~=clipboard]", visible: :all
     end
 
-    test "la fiche, l'exercice, la session et le résultat ont leur titre, leur retour et les infobulles des seuils" do
+    test "la leçon, l'exercice, la session et le résultat ont leur titre, leur retour et les infobulles des seuils" do
       session = completed_session
       sign_in_as @student
 
+      # ADR-0113 : la notion n'a plus de page ; l'ancienne adresse mène à la leçon, qui montre le cours.
       visit course_essential_path(@course.slug, @essential.slug)
-      assert_title "La méiose · Élève · Lnclass"
-      assert_selector "#essential_header p", exact_text: "Fiche de révision"
-      click_on "Génétique et évolution"
       assert_current_path course_path(@course.slug)
-
-      visit course_essential_path(@course.slug, @essential.slug)
-      # UDR-0015, amendement du 2026-10-02 : l'aide « Badges » quitte la fiche ; elle reste sur la page de l'exercice.
-      assert_no_selector "#essential_badges_help"
+      assert_title "Génétique et évolution · Élève · Lnclass"
+      assert_selector "h1", text: @course.name
 
       visit exercise_path(@exercise.public_id)
       assert_title "Méiose et ADN · Élève · Lnclass"
-      within "#student_progress" do
-        assert_info_tip t("assessment.exercises.student_progress.mastery"), ApplicationController.helpers.mastery_tip
-        assert_info_tip t("assessment.exercises.student_progress.badge"), ApplicationController.helpers.badges_tip
-      end
-      click_on "La méiose", match: :first
-      assert_current_path course_essential_path(@course.slug, @essential.slug)
+      # UDR-0138 §3.1 : la feuille n'a plus de panneau de progression ni d'infobulles ; le retour mène à la leçon, à la notion.
+      assert_no_selector "#student_progress"
+      assert_link @course.name, href: course_path(@course.slug, anchor: "notion-#{@essential.slug}")
 
       visit exercise_session_result_path(session.public_id)
       assert_title "Résultat de Méiose et ADN · Élève · Lnclass"
-      assert_link "La méiose", href: course_essential_path(@course.slug, @essential.slug)
+      assert_link t("assessment.session_results.show.back_to_lesson"), href: course_path(@course.slug, anchor: "notion-#{@essential.slug}")
       assert_info_tip t("assessment.session_results.show.mastery"), ApplicationController.helpers.mastery_tip
       within("#session_badge") { assert_info_tip t("assessment.session_results.badge.help"), ApplicationController.helpers.badges_tip }
 
       started = create_exercise_session(student: @student, exercise: @exercise)
       visit exercise_session_path(started.public_id)
       assert_title "Méiose et ADN · Élève · Lnclass"
-      # UDR-0087 §3.2 : en mode concentré, la croix « Quitter la session » mène à la page de l'exercice.
-      assert_selector "a[href='#{exercise_path(@exercise.public_id)}'][aria-label='#{t("assessment.exercise_sessions.quit_dialog.trigger")}']"
+      # UDR-0138 §3.2 : le retour de la copie mène à la page de l'exercice.
+      assert_link @exercise.title, href: exercise_path(@exercise.public_id)
     end
 
     # UDR-0077, amendement du 2026-10-06 : à 390 px, la recherche et les filtres restent ; un catalogue filtré offre « Tout voir ».

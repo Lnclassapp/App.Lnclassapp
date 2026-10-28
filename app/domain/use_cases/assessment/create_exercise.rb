@@ -25,8 +25,8 @@ module UseCases
         return Shared::Result.failure(:invalid, errors: dto.errors.to_hash) unless dto.valid?
 
         exercise = Entities::Assessment::Exercise.new(
-          essential_id: essential.id, author_id: actor.user_id, status: "draft", title: dto.title,
-          description: dto.description, exercise_type: dto.exercise_type, questions: dto.question_entities
+          course_id: essential.course_id, essential_id: essential.id, author_id: actor.user_id, status: "draft", title: dto.title,
+          statement: dto.statement, exercise_type: dto.exercise_type, questions: dto.question_entities
         )
         errors = errors_of(exercise)
         return Shared::Result.failure(:invalid, errors:) if errors.any?

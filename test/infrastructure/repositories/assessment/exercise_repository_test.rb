@@ -120,6 +120,72 @@ module Repositories
         assert_equal({ @essential.id => 4, empty.id => 1 }, @repository.next_positions(essential_ids: [ @essential.id, empty.id ]))
       end
 
+      test "donne la prochaine position de deux notions sœurs dans le même appel" do
+        sibling = create_essential(course: @essential.course)
+        create_exercise(essential: @essential, position: 3)
+
+        assert_equal({ @essential.id => 4, sibling.id => 4 },
+                     @repository.next_positions(essential_ids: [ @essential.id, sibling.id ]))
+      end
+
+      test "un exercice de toute la leçon d'un cours en brouillon n'a pas ses parents publiés" do
+        draft = create_lesson_wide_exercise(course: create_course(status: "draft"))
+        published = create_lesson_wide_exercise(course: create_course)
+
+        assert_not @repository.find(id: draft.id).parents_published
+        assert @repository.find(id: published.id).parents_published
+      end
+
+      test "la position est partagée par la leçon : la prochaine suit toutes ses notions" do
+        sibling = create_essential(course: @essential.course)
+        create_exercise(essential: @essential, position: 3)
+
+        assert_equal({ sibling.id => 4 }, @repository.next_positions(essential_ids: [ sibling.id ]))
+      end
+
+      test "ADR-XXXX : crée un exercice de notion rattaché à la leçon de sa notion, avec son sujet" do
+        created = @repository.create(exercise: exercise(statement: "Soit ABC un triangle."))
+
+        assert_equal [ @essential.course_id, @essential.id, "Soit ABC un triangle.", false ],
+                     [ created.course_id, created.essential_id, created.statement, created.lesson_wide? ]
+      end
+
+      test "ADR-XXXX : crée un exercice de toute la leçon sans notion, après les autres" do
+        create_exercise(essential: @essential)
+        lesson = Entities::Assessment::Exercise.new(course_id: @essential.course_id, author_id: @essential.author_id, title: "Bilan",
+                                                    exercise_type: "evaluation", questions: [ question("Q") ])
+
+        created = @repository.create(exercise: lesson)
+
+        assert_nil created.essential_id
+        assert_predicate created, :lesson_wide?
+        assert_equal [ 2, true ], [ created.position, created.parents_published ]
+      end
+
+      test "ADR-XXXX : refuse une notion d'une autre leçon" do
+        other_course = create_course
+
+        assert_raises(Ports::Assessment::ExerciseRepositoryPort::EssentialOutsideCourse) do
+          @repository.create(exercise: exercise(course_id: other_course.id))
+        end
+        assert_equal 0, Orm::Exercise.where(course_id: other_course.id).count
+      end
+
+      test "ADR-XXXX : for_course liste les exercices de notion dans l'ordre des notions, puis ceux de toute la leçon" do
+        course = @essential.course
+        second = create_essential(course:)
+        lesson = create_lesson_wide_exercise(course:)
+        of_second = create_exercise(essential: second)
+        of_first = create_exercise(essential: @essential)
+        create_exercise # another course
+
+        listed = @repository.for_course(course_id: course.id)
+
+        assert_equal [ of_first, of_second, lesson ].map(&:public_id), listed.map(&:public_id)
+        assert_equal [ false, false, true ], listed.map(&:lesson_wide?)
+        assert_equal [ 2, 2, 2 ], listed.map { it.questions.size }
+      end
+
       # ADR-0035, amendement du 2026-10-01 (« Tout publier ») : les exercices brouillons sous des fiches publiées, dans
       # l'ordre des fiches puis des exercices ; ceux d'une fiche brouillon ou archivée attendent leur fiche.
       test "draft_public_ids liste les exercices brouillons des fiches publiées d'un cours, ou d'une fiche" do
@@ -144,6 +210,15 @@ module Repositories
       # ADR-0105 : une question cite son image par public_id ; l'enregistrement la rattache (si elle n'est à personne), écrit
       # son texte de remplacement, et supprime l'image remplacée ou retirée. FK RESTRICT : une question remplacée perd son
       # image avant de partir.
+      test "ADR-XXXX : « Tout publier » suit aussi les exercices de toute la leçon, après ceux des notions" do
+        course = @essential.course
+        of_essential = create_exercise(essential: @essential, status: "draft")
+        lesson = create_lesson_wide_exercise(course:, status: "draft")
+        create_exercise(essential: create_essential(course:, status: "draft"), status: "draft")
+
+        assert_equal [ of_essential, lesson ].map(&:public_id), @repository.draft_public_ids(course_id: course.id)
+      end
+
       def illustrated(content, image: nil, alt: nil, description: nil)
         question(content).with(image_description: description,
                                image: image && Entities::Shared::ContentImage.new(public_id: image.public_id, alt:))

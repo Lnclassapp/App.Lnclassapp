@@ -1,0 +1,60 @@
+<%# 🌐 UI · catalog/courses/_revision_sheet — la « Fiche de révision » de la page d'une leçon : fiche cahier, ou texte de la leçon puis des notions ; coupée après 150 mots, « Voir plus » %>
+<%# Rôle : `course`, `revision` (RevisionSheetQuery::Revision) ; le serveur marque la suite (`rest`), catalog--revision-more la masque ; sans JavaScript tout se lit, sans « Voir plus » %>
+<%# ADR  : 0110-fiche-de-cours-en-donnees-importees, 0113 · UDR : 0137-fiche-de-cours-a-l-identique-des-maquettes, 0139 §3.2, §3.3, §3.6 %>
+<% cut = revision.cut %>
+<% rest_data = { catalog__revision_more_target: "rest" } %>
+<%# Le contrôleur ne vit que s'il y a une coupe ; ses trois textes lui viennent des locales. %>
+<% more_data = if cut
+                 { controller: "catalog--revision-more",
+                   catalog__revision_more_more_value: t("catalog.courses.show.revision_more"),
+                   catalog__revision_more_less_value: t("catalog.courses.show.revision_less"),
+                   catalog__revision_more_shown_value: t("catalog.courses.show.revision_shown") }
+               else
+                 {}
+               end %>
+<% controls = capture do %>
+  <% if cut %>
+    <div class="mt-4 flex justify-center">
+      <%= ui_button variant: :secondary, icon_end: "chevron-down", hidden: true, "aria-expanded": "false",
+                    data: { catalog__revision_more_target: "button", action: "catalog--revision-more#toggle" } do %>
+        <span data-role="label"><%= t("catalog.courses.show.revision_more") %></span>
+      <% end %>
+    </div>
+    <p class="sr-only" aria-live="polite" data-catalog--revision-more-target="status"></p>
+  <% end %>
+<% end %>
+
+<% case revision.kind %>
+<% when :sheet %>
+  <% content_for :head do %><%= stylesheet_link_tag "course_sheet" %><% end %>
+  <%= tag.div data: more_data do %>
+    <%= render "catalog/course_sheets/sheet", sheet: revision.sheet, cut:, embedded: true %>
+    <%= controls %>
+  <% end %>
+<% when :texts %>
+  <%= tag.div data: more_data do %>
+    <%= ui_card padding: :lg do %>
+      <div class="trix-content" data-controller="math">
+        <% revision.texts.each_with_index do |text, index| %>
+          <% text_rest = cut&.rest?(index) %>
+          <%= tag.div class: class_names({ "mt-6" => index.positive? }), data: (text_rest ? rest_data : {}) do %>
+            <% if text[:title] %><h3 class="mb-2 font-display text-lg font-medium"><%= text[:title] %></h3><% end %>
+            <% text[:blocks].each_with_index do |html, block_index| %>
+              <% if !text_rest && cut&.rest?(index, block_index) %>
+                <%= tag.div html, data: rest_data %>
+              <% else %>
+                <%= html %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      <% if cut %><div class="revision-fade" data-catalog--revision-more-target="fade" hidden></div><% end %>
+    <% end %>
+    <%= controls %>
+  <% end %>
+<% when :empty %>
+  <%= ui_empty_state title: t("catalog.courses.show.revision_empty"), icon: "document-text" %>
+<% else %>
+  <% raise ArgumentError, "unknown revision kind: #{revision.kind.inspect}" %>
+<% end %>

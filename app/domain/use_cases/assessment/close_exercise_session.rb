@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Assessment::CloseExerciseSession
 # Rôle : seul point qui termine une session : score recalculé des tentatives, badge monté, lacune ouverte ou résolue
-# ADR  : 0026, 0033, 0043, 0054
+# ADR  : 0026, 0033, 0043, 0054, 0112, 0113 (§4.2 : un exercice de toute la leçon n'ouvre ni ne lève aucune lacune)
 module UseCases
   module Assessment
     class CloseExerciseSession
@@ -16,8 +16,8 @@ module UseCases
         @clock = clock
       end
 
-      # Appelé par SubmitQuestionAttempt, dans sa transaction, à la dernière réponse.
-      # session : Entities::Assessment::ExerciseSession ouverte ; essential_id : fiche de son exercice.
+      # Appelé par SubmitExerciseCopy, dans sa transaction.
+      # session : Entities::Assessment::ExerciseSession ouverte ; essential_id : notion de son exercice, nil pour toute la leçon.
       # → Result(Row) | :forbidden
       def call(actor:, session:, essential_id:)
         allowed = @policy.call(actor:, session:)
@@ -54,6 +54,8 @@ module UseCases
 
       # ADR-0043 : ouverte sous le seuil, comptée à chaque nouvel échec, résolue par une réussite.
       def settle_gap(session, essential_id, score_percent, now)
+        return if essential_id.nil?
+
         pending = @gaps.pending_for(student_id: session.student_id, essential_id:)
         decision = Entities::Assessment::GapDecision.call(score_percent:, pending_gap: pending, session_kind: session.kind)
         return if decision == :none

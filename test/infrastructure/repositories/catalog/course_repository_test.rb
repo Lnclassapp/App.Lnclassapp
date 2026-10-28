@@ -109,6 +109,14 @@ module Repositories
         assert_equal [], @repository.assigned_classroom_levels(id: create_course.id)
       end
 
+      test "assigned_classroom_levels : une leçon assignée seulement par un exercice de toute la leçon rend le niveau de la classe" do
+        record = create_course(level: @level, material: @material)
+        classroom = create_classroom(level: @level)
+        create_assignment(classroom:, assignable: create_lesson_wide_exercise(course: record))
+
+        assert_equal [ [ @level.id, nil ] ], @repository.assigned_classroom_levels(id: record.id)
+      end
+
       test "donne les clés de doublon et les slugs pris" do
         series = create_series
         record = create_course(level: @level, material: @material, series:, name: "Génétique  et Évolution")
@@ -116,6 +124,7 @@ module Repositories
         assert_includes @repository.existing_keys, [ "genetiqueetevolution", @level.id, @material.id, series.id ]
         assert_includes @repository.taken_slugs, record.slug
         assert_instance_of Set, @repository.taken_slugs
+        assert_equal record.id, @repository.ids_by_key.fetch([ "genetiqueetevolution", @level.id, @material.id, series.id ])
       end
     end
   end

@@ -35,7 +35,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "courses" => [ [ %w[level_id material_id name], "series_idISNULL" ],
                    [ %w[level_id material_id series_id name], "series_idISNOTNULL" ] ],
     "essentials" => [ [ %w[course_id name], nil ], [ %w[course_id position], nil ] ],
-    "exercises" => [ [ %w[essential_id position], nil ] ],
+    "exercises" => [ [ %w[course_id position], nil ] ],
     "questions" => [ [ %w[exercise_id position], nil ] ],
     "answers" => [ [ %w[question_id position], nil ] ],
     "classroom_assignments" => [ [ %w[classroom_id assignable_type assignable_id], "status='active'" ] ],

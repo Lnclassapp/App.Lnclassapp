@@ -1,6 +1,7 @@
 # 🔌 INFRA · Queries::Assessment::SessionPlayQuery
-# Rôle : écran d'une session : progression, prochaine question sans aucune correction ni id révélateur, son image, verdict de la question tentée
-# ADR  : 0028, 0054, 0091 (§4.4 : rien de la solution dans la page), 0105 · UDR : 0007, 0022, 0087, 0129
+# Rôle : écran d'une session : la copie entière (copy : toutes les questions sans aucune correction ni id révélateur, leurs images) ;
+#        call, la prochaine question et le verdict de la question tentée, ne sert plus que l'ancien mode (retiré au Lot E)
+# ADR  : 0028, 0054, 0091 (§4.4 : rien de la solution dans la page), 0105, 0112 · UDR : 0007, 0022, 0087, 0129, 0138 §3.2
 module Queries
   module Assessment
     class SessionPlayQuery
@@ -34,6 +35,13 @@ module Queries
         def kind_name = Entities::Assessment::Question.kind_name_for(question_type)
       end
 
+      # La copie rendue à l'élève (UDR-0138 §3.2) : sujet et toutes les questions, mélange de la session. completed? et started? pour l'aiguillage.
+      Copy = Data.define(:session_public_id, :student_id, :status, :exercise_public_id, :exercise_title, :statement, :question_count,
+                         :questions) do
+        def completed? = status == "completed"
+        def started? = status == "started"
+      end
+
       SESSION_COLUMNS = %w[exercise_sessions.id exercise_sessions.public_id exercise_sessions.student_id exercise_sessions.status
                            exercise_sessions.answered_count exercise_sessions.question_count exercise_sessions.progress_percent
                            exercises.id exercises.public_id exercises.title].freeze
@@ -53,7 +61,41 @@ module Queries
                 last_feedback: feedback(id, questions, attempts, feedback_question_id))
       end
 
+      # Toute la copie : une requête pour les questions, une pour leurs propositions, une pour leurs images.
+      # → Copy | nil. Les identifiants ne servent qu'au mélange, ici, côté serveur (ADR-0091 §4.4).
+      def copy(public_id:)
+        id, public_id, student_id, status, question_count, exercise_id, exercise_public_id, title, statement =
+          Orm::ExerciseSession.joins(:exercise).where(public_id:)
+                              .pick("exercise_sessions.id", "exercise_sessions.public_id", "exercise_sessions.student_id", "exercise_sessions.status",
+                                    "exercise_sessions.question_count", "exercises.id", "exercises.public_id", "exercises.title", "exercises.statement")
+        return if id.nil?
+
+        rows = Orm::Question.where(exercise_id:).order(:position, :id).pluck(:id, :content, :question_type)
+        answers = Orm::Answer.where(question_id: rows.map(&:first)).order(:question_id, :position, :id)
+                             .pluck(:question_id, :id, :content, :match_content).group_by(&:first)
+        images = Orm::QuestionImage.where(question_id: rows.map(&:first)).pluck(:question_id, :public_id, :alt, :width, :height)
+                                   .to_h { |question_id, *image| [ question_id, Image.new(*image) ] }
+        questions = rows.each_with_index.map do |(question_id, content, question_type), index|
+          Question.new(id: question_id, number: index + 1, content:, question_type:, answers: [], image: images[question_id],
+                       **sheet(id, question_id, kind_name(question_type), answers.fetch(question_id, []).map { it.drop(1) }))
+        end
+        Copy.new(session_public_id: public_id, student_id:, status:, exercise_public_id:, exercise_title: title, statement:, question_count:,
+                 questions:)
+      end
+
       private
+
+      # Par type : propositions mélangées d'un choix (avec leur id), étapes ou colonne de droite mélangées sans id, colonne de gauche.
+      def sheet(session_id, question_id, kind, rows)
+        case kind
+        when "choice"
+          contents = rows.to_h { |id, content, _| [ id, content ] }
+          { answers: shuffled(session_id, question_id, contents.keys).each_with_index.map { |id, index| Answer.new(id:, content: contents[id], index:) } }
+        when "ordering" then { items: items(session_id, question_id, rows.to_h { |id, content, _| [ id, content ] }) }
+        when "matching" then { prompts: rows.map { it[1] }, items: items(session_id, question_id, rows.to_h { |id, _, right| [ id, right ] }) }
+        else {}
+        end
+      end
 
       def kind_name(question_type) = Entities::Assessment::Question.kind_name_for(question_type)
 

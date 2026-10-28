@@ -190,7 +190,7 @@ module PerfDataset
     rich_texts(course_ids, "Orm::Course") + rich_texts(essential_ids, "Orm::Essential")
     exercises = essential_ids.each_with_index.flat_map do |essential_id, index|
       (1..3).map do |position|
-        { essential_id:, public_id:, position:, title: "Exercice #{position} de #{essentials[index][:name]}".first(200), author_id: author,
+        { course_id: essentials[index][:course_id], essential_id:, public_id:, position: (essentials[index][:position] - 1) * 3 + position, title: "Exercice #{position} de #{essentials[index][:name]}".first(200), author_id: author,
           status: essentials[index][:status], published_at: essentials[index][:published_at],
           exercise_type: position == 3 ? "evaluation" : "fixation", created_at: now, updated_at: now }
       end

@@ -28,7 +28,7 @@ module Queries
       SELF_PRACTICE_COLUMNS = %w[exercise_sessions.public_id exercises.title materials.name materials.category
                                  exercise_sessions.score_percent exercise_sessions.completed_at].freeze
       MATERIAL = "JOIN exercises ON exercises.id = exercise_sessions.exercise_id " \
-                 "JOIN essentials ON essentials.id = exercises.essential_id JOIN courses ON courses.id = essentials.course_id " \
+                 "JOIN courses ON courses.id = exercises.course_id " \
                  "JOIN materials ON materials.id = courses.material_id".freeze
 
       # today : date d'Abidjan (Time.zone), jamais Date.today. → File | nil (élève absent de la classe : 404)

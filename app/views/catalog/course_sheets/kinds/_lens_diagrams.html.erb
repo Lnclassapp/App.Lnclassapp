@@ -1,0 +1,11 @@
+<%# 🌐 UI · catalog/course_sheets/kinds/_lens_diagrams — les figures fixes de la fiche Lentilles, une par `params.diagram` %>
+<%# Rôle : `block` {kind: lens_diagrams, params: {diagram: families|vocabulary|example|eye|ametropia|profiles|focal}} → lens_diagrams/_<diagram> ; sans `diagram`, families ; un nom hors liste ne rend que le message « non disponible » %>
+<%# ADR  : 0110-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs, 318) · UDR : 0137-fiche-de-cours-a-l-identique-des-maquettes · la liste fermée est ici : le schéma ne borne pas les params %>
+<% diagrams = %w[families vocabulary example eye ametropia profiles focal] %>
+<% options = block["params"].is_a?(Hash) ? block["params"] : {} %>
+<% diagram = options.fetch("diagram", "families") %>
+<% if diagrams.include?(diagram) %>
+  <%= render "catalog/course_sheets/kinds/lens_diagrams/#{diagram}", block: block %>
+<% else %>
+  <%= tag.p t("catalog.course_sheets.block.unavailable"), class: "sheet-muted" %>
+<% end %>

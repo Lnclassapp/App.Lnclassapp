@@ -1,0 +1,44 @@
+<%# 🌐 UI · catalog/courses/_exercise_row — un exercice de « Prépare interros » %>
+<%# Rôle : ligne-lien (titre, type, questions) ; élève : un état (à revoir, à rendre, note) ; équipe : statut ; enseignant : une bascule d'assignation par classe, sous la ligne %>
+<%# ADR  : 0113 · UDR : 0139 §3.4, 0087 (§3.1 : verte dès 14/20), 0134 (§3.13) · locals: (exercise:, targets:, classrooms:, team: false) %>
+<% state = exercise.student_state %>
+<% grading = Entities::Assessment::Grading %>
+<li id="exercise-<%= exercise.public_id %>" class="scroll-mt-24">
+  <%= link_to exercise_path(exercise.public_id),
+              class: "flex min-h-tap flex-wrap items-center gap-x-3 gap-y-1 px-4 py-3 transition hover:bg-mist active:bg-mist focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand" do %>
+    <span class="min-w-0 flex-1 basis-48 font-medium text-ink"><%= exercise.title %></span>
+    <span class="flex flex-wrap items-center gap-2">
+      <% if exercise.exercise_type == "evaluation" %>
+        <%= ui_badge t("assessment.exercises.show.exercise_types.evaluation"), tone: :brand %>
+      <% else %>
+        <%= ui_badge t("assessment.exercises.show.exercise_types.fixation"), tone: :info %>
+      <% end %>
+      <span class="text-sm text-mute"><%= t("catalog.courses.show.question_count", count: exercise.questions_count) %></span>
+      <% if team %>
+        <%= content_status_badge(exercise.status) %>
+      <% elsif state&.kind == :to_review %>
+        <%= ui_badge t("catalog.courses.show.to_review"), tone: :warning, icon: "arrow-path" %>
+      <% elsif state&.kind == :due %>
+        <% today = state.due_on == Time.zone.today %>
+        <%= ui_badge (today ? t("catalog.courses.show.due_today") : t("catalog.courses.show.due", day: l(state.due_on, format: "%A"))), tone: :info %>
+      <% elsif state&.kind == :score %>
+        <%= ui_badge grade_label(state.score_percent), tone: (grading.reaches?(state.score_percent, grading::MASTERY_THRESHOLD) ? :success : :neutral) %>
+      <% end %>
+    </span>
+  <% end %>
+  <% if exercise.status == "published" && classrooms.any? %>
+    <ul class="mx-4 mb-3 divide-y divide-line rounded-ln border border-line">
+      <% classrooms.each do |target| %>
+        <% assignment = targets.states[[ target.public_id, exercise.public_id ]] %>
+        <% first_assign = assignment.nil? && !@primary_assign_taken %>
+        <% @primary_assign_taken ||= first_assign %>
+        <li>
+          <%= render "classroom/assignments/toggle", classroom_public_id: target.public_id, assignable_type: "Exercise",
+                     assignable_key: exercise.public_id, assignable_name: exercise.title, classroom_name: target.name,
+                     assignment_public_id: assignment&.assignment_public_id, due_on: assignment&.due_on,
+                     needs_session_days: target.needs_session_days, compact: true, primary: first_assign %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</li>

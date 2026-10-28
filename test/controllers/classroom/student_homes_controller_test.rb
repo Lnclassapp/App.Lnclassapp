@@ -162,7 +162,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
       assert_select "#student_next_step_title", text: "Ancienne fiche"
       assert_select "span", text: tl("next_step.review.badge")
       assert_select "p", text: tl("next_step.review.note", grade: "8/20")
-      assert_select "a.ui-button-primary[href=?][data-turbo-prefetch=false]", course_essential_path(@course.slug, Orm::Essential.find_by!(name: "Ancienne fiche").slug),
+      assert_select "a.ui-button-primary[href=?][data-turbo-prefetch=false]", course_path(@course.slug, anchor: "notion-#{Orm::Essential.find_by!(name: "Ancienne fiche").slug}"),
                     text: tl("next_step.review.open")
     end
   end
@@ -403,7 +403,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#student_home_gaps, #student_home_exercises, #student_home_daily", 0
     assert_select "#{CARD}[data-state=review]"
-    assert_select "#student_home a[href*='/essentials/']", 1
+    assert_select "#student_home a[href*='#notion-']", 1
   end
 
   test "the history is a lazy frame; its frame alone lists the last sessions by day, a note and the way to Mon historique" do

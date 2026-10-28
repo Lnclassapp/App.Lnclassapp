@@ -29,9 +29,11 @@ class Catalog::ImportCourseTreeTest < ApplicationSystemTestCase
   end
 
   test "the help of the kind is shown, then a mixed file gives the exact report without a page reload" do
-    create_course(name: "Cours 6", level: Orm::Level.find_by!(slug: "tle"), material: Orm::Material.find_by!(slug: "svt"),
-                  series: Orm::Series.find_by!(slug: "d"))
-    document = mixed(course_tree_document(courses: 8, essentials: 1, exercises: 1, questions: 2, answers: 3),
+    existing = create_course(name: "Cours 6", level: Orm::Level.find_by!(slug: "tle"), material: Orm::Material.find_by!(slug: "svt"),
+                             series: Orm::Series.find_by!(slug: "d"))
+    create_essential(course: existing, name: "Fiche 1")
+    create_exercise(essential: existing.essentials.first)
+    document = mixed(course_tree_v2_document(courses: 8, essentials: 1, questions: 2, answers: 3),
                      invalid_at: [ 3 ], duplicate_of: { 7 => 1 })
     document["courses"][4]["material_name"] = "Astronomie"
     file = json_file(document.to_json)
@@ -42,9 +44,16 @@ class Catalog::ImportCourseTreeTest < ApplicationSystemTestCase
       within "turbo-frame#modal dialog[open]" do
         assert_selector "#import-help-course_tree h3", text: "Format du fichier"
         assert_selector "#import-help-course_tree", text: "Tout arrive en brouillon"
+        assert_selector "#import-help-course_tree", text: "version 2"
+        assert_selector "#import-help-exercise-rule", text: "un exercice par notion"
+        assert_selector "#import-help-exercise-rule", text: "quatre exercices pour l'ensemble de la fiche de cours"
+        assert_selector "#import-help-legacy-version", text: "exercices sont ignorés"
         assert_selector "#import-help-keys details[open] code", text: "sous_titre"
         find("summary", text: "Proposition").click
         assert_selector "#import-help-keys code", text: "is_correct"
+        find("summary", text: "Exercice").click
+        assert_selector "#import-help-keys code", text: "statement"
+        assert_no_selector "#import-help-keys code", text: "description"
         find("summary", text: "Noms acceptés du référentiel").click
         assert_selector "#import-help-levels li", text: /Tle\s+A1 · A2 · C · D/
         assert_selector "#import-help-levels li", text: /6ème\s+sans série/
@@ -57,21 +66,93 @@ class Catalog::ImportCourseTreeTest < ApplicationSystemTestCase
       using_wait_time(IMPORT_WAIT) { assert_toast "Import lancé." }
       within "turbo-frame#modal dialog[open] turbo-frame#import_status" do
         assert_text "Terminé"
-        assert_selector "#import_counter_imported", text: "4"
-        assert_selector "#import_counter_skipped", text: "2"
+        assert_selector "#import_counter_imported", text: "5"
+        assert_selector "#import_counter_skipped", text: "1"
         assert_selector "#import_counter_errors", text: "2"
         assert_selector "#import_counter_total", text: "8"
         assert_selector "#import_errors li", count: 2
         assert_selector "#import_errors li", text: /\Acourses\[3\]\.name\s+Valeur obligatoire manquante\.\z/
         assert_selector "#import_errors li", text: /\Acourses\[4\]\.material_name\s+Matière inconnue\.\z/
         assert_text "Fiches de révision créées : 4"
-        assert_text "Exercices créés : 4"
-        assert_text "Questions créées : 8"
-        assert_text "Propositions créées : 24"
+        assert_text "Exercices créés : 25"
+        assert_text "Exercices archivés (fiche de cours réimportée) : 1"
+        assert_text "Questions créées : 50"
+        assert_text "Propositions créées : 150"
       end
     end
     assert_equal [ "Cours 1", "Cours 2", "Cours 3", "Cours 6", "Cours 7" ], Orm::Course.order(:name).pluck(:name)
     assert_equal [ "draft" ], Orm::Course.where.not(name: "Cours 6").distinct.pluck(:status)
+  end
+
+  # CA-26, CA-27 (ADR-0113) : la leçon Thalès au format 2 entre ; une leçon dont une notion n'a pas d'exercice est refusée, nommée.
+  test "CA-26 the Thalès lesson in format 2 imports 1 lesson, 4 notions and 8 exercises" do
+    thales = Rails.root.join("docs/contenus/lecons-traitees/3eme/mathematiques/proprietes-de-thales-dans-un-triangle.json")
+
+    open_in_modal(new_teams_import_path(kind: "course_tree"))
+
+    within "turbo-frame#modal dialog[open]" do
+      attach_file "import[files][]", thales.to_s
+      click_on "Lancer l'import"
+    end
+
+    using_wait_time(IMPORT_WAIT) { assert_toast "Import lancé." }
+    within "turbo-frame#modal dialog[open] turbo-frame#import_status" do
+      assert_text "Terminé"
+      assert_selector "#import_counter_imported", text: "1"
+      assert_selector "#import_counter_errors", text: "0"
+      assert_text "Fiches de révision créées : 4"
+      assert_text "Exercices créés : 8"
+      assert_no_text "Exercices ignorés"
+    end
+    assert_equal 8, Orm::Exercise.count
+  end
+
+  test "CA-27 a notion without exercise: the report names the lesson, the notion and the rule, and nothing is written" do
+    document = course_tree_v2_document(courses: 1, essentials: 3, questions: 1, answers: 2)
+    document["courses"][0]["name"] = "Les fonctions"
+    document["courses"][0]["essentials"][1].merge!("name" => "Les limites", "exercises" => [])
+    document["courses"][0]["exercises"].pop
+    file = json_file(document.to_json)
+
+    open_in_modal(new_teams_import_path(kind: "course_tree"))
+
+    within "turbo-frame#modal dialog[open]" do
+      attach_file "import[files][]", file.path
+      click_on "Lancer l'import"
+    end
+
+    using_wait_time(IMPORT_WAIT) { assert_toast "Import lancé." }
+    within "turbo-frame#modal dialog[open] turbo-frame#import_status" do
+      assert_text "Terminé"
+      assert_selector "#import_counter_imported", text: "0"
+      assert_selector "#import_counter_errors", text: "1"
+      assert_selector "#import_errors li", count: 2
+      assert_selector "#import_errors li", text: /courses\[0\]\.essentials\[1\]\.exercises\s+Fiche de cours « Les fonctions », notion « Les limites » : il faut exactement un exercice par notion \(reçus : 0\)\./
+      assert_selector "#import_errors li", text: /courses\[0\]\.exercises\s+Fiche de cours « Les fonctions » : il faut exactement quatre exercices pour l'ensemble de la fiche de cours \(reçus : 3\)\./
+    end
+    assert_equal [ 0, 0 ], [ Orm::Course.count, Orm::Exercise.count ]
+  end
+
+  # CA-28 : un fichier du format précédent entre sans ses exercices, et le rapport le dit.
+  test "CA-28 a format 1 file imports the lesson and warns that its exercises are ignored" do
+    file = json_file(course_tree_document(courses: 1, essentials: 2, exercises: 2, questions: 1, answers: 2).to_json)
+
+    open_in_modal(new_teams_import_path(kind: "course_tree"))
+
+    within "turbo-frame#modal dialog[open]" do
+      attach_file "import[files][]", file.path
+      click_on "Lancer l'import"
+    end
+
+    using_wait_time(IMPORT_WAIT) { assert_toast "Import lancé." }
+    within "turbo-frame#modal dialog[open] turbo-frame#import_status" do
+      assert_text "Terminé"
+      assert_selector "#import_counter_imported", text: "1"
+      assert_text "Fiches de révision créées : 2"
+      assert_text "Exercices créés : 0"
+      assert_text "Exercices ignorés (format v1) : 4"
+    end
+    assert_equal [ 1, 0 ], [ Orm::Course.count, Orm::Exercise.count ]
   end
 
   # IM-01, IM-11, IM-12 (ADR-0068, UDR-0055) : les 4 leçons de Tle D, choisies d'un coup, forment un seul import.
@@ -97,7 +178,7 @@ class Catalog::ImportCourseTreeTest < ApplicationSystemTestCase
         assert_text "Terminé"
         assert_selector "#import_counter_imported", text: "4"
         assert_selector "#import_counter_errors", text: "0"
-        assert_text "Propositions créées : 786"
+        assert_text "Exercices ignorés (format v1) : 36"
         assert_selector "#import_files_title", text: "Fichiers (4)"
         assert_selector "#import_files li", text: /limites-et-continuite\.json\s+1 importé · 0 ignoré · 0 en erreur/
       end

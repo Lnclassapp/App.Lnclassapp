@@ -135,4 +135,13 @@ class Queries::Catalog::TeamHomeQueryTest < ActiveSupport::TestCase
     assert_equal home.recent_exercises, @query.recent_exercises
     assert_equal home.recent_imports, @query.recent_imports
   end
+
+  test "un exercice de toute la leçon paraît parmi les récents, sous le nom de sa leçon" do
+    course = create_course(name: "Thalès")
+    create_lesson_wide_exercise(course:, title: "Bilan")
+
+    row = @query.call.recent_exercises.first
+
+    assert_equal [ "Bilan", "Thalès" ], [ row.title, row.essential_name ]
+  end
 end

@@ -1,12 +1,15 @@
 # 🧠 DOMAINE · Ports::Assessment::ExerciseRepositoryPort
 # Rôle : contrat de persistance des exercices, de leurs questions et de leurs propositions
-# ADR  : 0035, 0036, 0039, 0054, 0105
+# ADR  : 0035, 0036, 0039, 0054, 0105, 0113
 module Ports
   module Assessment
     module ExerciseRepositoryPort
       # Levée par create et update quand une question cite une image qu'elle ne peut pas prendre (déjà à une autre
       # question, citée deux fois, inconnue ou purgée) : la transaction s'annule, le use case la rend en :invalid.
       ImageUnavailable = Class.new(StandardError)
+
+      # Levée par create quand la notion de l'exercice n'est pas de sa leçon (course_id).
+      EssentialOutsideCourse = Class.new(StandardError)
 
       # Avec questions, propositions et parents_published. → Entities::Assessment::Exercise | nil
       def find_by_public_id(public_id:)
@@ -18,7 +21,14 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #find"
       end
 
-      # Exercice, questions, propositions et images. → Entities::Assessment::Exercise ; lève ImageUnavailable
+      # Les exercices d'une leçon (tout statut), questions et propositions comprises : ceux de notion dans l'ordre des
+      # notions, puis ceux de toute la leçon, chacun par position. → [Entities::Assessment::Exercise]
+      def for_course(course_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #for_course"
+      end
+
+      # Exercice, questions, propositions et images. course_id vient de la notion si elle est donnée (sinon il est requis :
+      # exercice de toute la leçon). → Entities::Assessment::Exercise ; lève ImageUnavailable, EssentialOutsideCourse
       def create(exercise:)
         raise NotImplementedError, "#{self.class} doit implémenter #create"
       end
@@ -44,7 +54,7 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #existing_keys"
       end
 
-      # Prochaine position libre par fiche. → { essential_id => Integer }
+      # Prochaine position libre dans la leçon de chaque fiche. → { essential_id => Integer }
       def next_positions(essential_ids:)
         raise NotImplementedError, "#{self.class} doit implémenter #next_positions"
       end

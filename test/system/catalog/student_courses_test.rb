@@ -51,22 +51,27 @@ class Catalog::StudentCoursesTest < ApplicationSystemTestCase
     end
   end
 
-  # CA-7, CA-15 : une fiche ouverte fait « Reprendre » ; la page suivante ne répète pas le titre du groupe. Lot O5 : ce Cours
-  # est celui du téléphone ; sur ordinateur, les leçons en cartes le remplacent (test ci-dessous).
-  test "on a phone, an opened sheet turns the card into « Reprendre », and the next page does not repeat a title" do
-    sheet = create_essential(course: @fractions, name: "Simplifier une fraction")
+  # CA-7, CA-15 ; ADR-0113 §4.3 : ouvrir la leçon lit toutes ses notions, la carte prend la coche « Terminée » ; la page suivante
+  # ne répète pas le titre du groupe. Lot O5 : ce Cours est celui du téléphone ; sur ordinateur, les leçons en cartes le
+  # remplacent (test ci-dessous).
+  test "on a phone, an opened lesson turns the card into done, and the next page does not repeat a title" do
+    create_essential(course: @fractions, name: "Simplifier une fraction")
     create_essential(course: @fractions, name: "Comparer des fractions")
     25.times { |index| create_course(name: format("Thalès %02d", index), level: @level, material: @maths) }
     sign_in_as @student
 
     with_mobile_viewport do
-      visit course_essential_path(@fractions.slug, sheet.slug)
-      assert_selector "#essential_header h1", text: "Simplifier une fraction"
+      visit course_path(@fractions.slug)
+      assert_selector "#course_header h1", text: @fractions.name
 
       visit courses_path
       assert_selector "#courses_groups li", count: 24
-      within("#course_#{@fractions.slug}") { click_on t("catalog.courses.course_card.progress.started") }
-      assert_selector "#essential_header h1", text: "Simplifier une fraction"
+      within("#course_#{@fractions.slug}") do
+        assert_selector "svg.text-success"
+        assert_text t("catalog.courses.course_card.progress.done")
+        click_on @fractions.name
+      end
+      assert_selector "#course_header h1", text: @fractions.name
 
       visit courses_path
       assert_no_page_reload do

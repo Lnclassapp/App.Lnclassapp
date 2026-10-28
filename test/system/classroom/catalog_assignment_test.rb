@@ -28,12 +28,12 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
 
   # PRD, chemin nominal enseignant, étape 4 ; plan, Lot F « Done quand ».
   test "from a catalogue sheet: the days modal the first time, then « Assigné · Pour jeu. 8 oct. » in place, Tle D 1 only" do
-    visit course_essential_path(@course.slug, @meiose.slug)
-    assert_selector "h1", text: "Méiose"
-    assert_selector "#essential_exercises [id^='assignment_']", count: 4
+    visit course_path(@course.slug)
+    assert_selector "h1", text: "Génétique"
+    assert_selector "#prepare-interros [id^='assignment_']", count: 4
     assert_no_selector "[id^='assignment_#{@tle_c1.public_id}_']"
     assert_no_text "Tle C 1"
-    assert_selector "#essential_exercises .ui-button-primary", count: 1
+    assert_selector "#prepare-interros .ui-button-primary", count: 1
     assert_selector "#{toggle(@tle_d1, @phases)} .ui-button-primary"
 
     assert_no_page_reload do
@@ -76,8 +76,8 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
       assert_selector DAYS_MODAL, text: "Quels jours voyez-vous la Tle D 2 ?"
       within(DAYS_MODAL) { click_on "Annuler" } # ferme sans rien écrire
       assert_no_selector DAYS_MODAL
-      # CA-L4 : « Modifier les jours de la Tle D 1 » rouvre la fenêtre avec ses jours cochés ; « Enregistrer » les remplace.
-      click_on "Modifier les jours de la Tle D 1"
+      # CA-L4 : la fenêtre des jours de Tle D 1 (bouton de la page de la classe) rouvre avec ses jours cochés ; « Enregistrer » les remplace.
+      open_in_modal edit_classroom_session_days_path(@tle_d1.public_id)
       within DAYS_MODAL do
         assert_equal %w[session_days_weekdays_1 session_days_weekdays_4],
                      all("input[type=checkbox]:checked", visible: :all).map { it[:id] }
@@ -98,10 +98,10 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
   test "on a phone, each classroom is one compact row under the exercise title, and the page does not scroll sideways" do
     create_assignment(classroom: @tle_d1, assignable: @phases, by: @teacher, due_on: Date.new(2026, 10, 8))
     with_mobile_viewport do
-      visit course_essential_path(@course.slug, @meiose.slug)
+      visit course_path(@course.slug)
 
-      title = find("#essential_exercise_#{@phases.public_id} a", text: "Les phases")
-      list = find("#essential_exercise_#{@phases.public_id} ul[aria-label]").rect
+      title = find("#exercise-#{@phases.public_id} a", text: "Les phases")
+      list = find("#exercise-#{@phases.public_id} ul").rect
       assigned = find(toggle(@tle_d1, @phases), text: "Pour jeu. 8 oct.").rect
       assert_operator assigned.y, :>, title.rect.y
       assert_operator assigned.x + assigned.width, :<=, list.x + list.width, "la bascule déborde de sa liste"
@@ -112,7 +112,6 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
         assert_operator cross.x, :>, name.x + name.width, "✕ n'est pas à droite de la classe"
         assert_operator cross.height, :>=, 48
       end
-      assert_no_selector "#essential_exercise_#{@phases.public_id} a", text: I18n.t("catalog.essentials.exercise_progress.open")
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
     end

@@ -45,10 +45,10 @@ module UseCases
       # Identité, place, auteur et statut viennent de l'exercice enregistré, jamais de la saisie.
       def rebuild(current, dto, locked)
         Entities::Assessment::Exercise.new(
-          id: current.id, public_id: current.public_id, essential_id: current.essential_id, position: current.position,
+          id: current.id, public_id: current.public_id, course_id: current.course_id, essential_id: current.essential_id, position: current.position,
           author_id: current.author_id, status: current.status, published_at: current.published_at,
           archived_at: current.archived_at, parents_published: current.parents_published, title: dto.title,
-          description: dto.description, exercise_type: dto.exercise_type,
+          statement: dto.statement, exercise_type: dto.exercise_type,
           questions: locked ? current.questions : dto.question_entities
         )
       end

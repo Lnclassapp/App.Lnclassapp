@@ -10,15 +10,17 @@ module Queries
       # question_count : « 10 questions » (UDR enseignant §3.8).
       Row = Data.define(:public_id, :exercise_public_id, :exercise_title, :material_name, :material_category, :due_on,
                         :assigned_on, :counts, :late_students, :pending_students, :material_shortname, :material_slug,
-                        :question_count)
+                        :question_count, :copies)
       # public_id : celui de l'élève, le lien vers sa fiche dans la classe (ADR-0097 §4.9).
       LateStudent = Data.define(:public_id, :display_name, :done_on)
       PendingStudent = Data.define(:public_id, :display_name)
+      # CA-24 : la note de la première copie (sur 100, dans l'ordre completed_at, id) et la meilleure, de chaque élève qui a rendu.
+      CopyRow = Data.define(:public_id, :display_name, :first_score, :best_score, :copies_count)
 
       # ADR-0072 §4.1 : une assignation ne porte plus qu'un exercice.
       EXERCISE = "JOIN exercises ON exercises.id = classroom_assignments.assignable_id " \
                  "AND classroom_assignments.assignable_type = 'Exercise' " \
-                 "JOIN essentials ON essentials.id = exercises.essential_id JOIN courses ON courses.id = essentials.course_id " \
+                 "JOIN courses ON courses.id = exercises.course_id " \
                  "JOIN materials ON materials.id = courses.material_id".freeze
       COLUMNS = %w[classroom_assignments.id classroom_assignments.classroom_id classroom_assignments.public_id exercises.public_id
                    exercises.title materials.name materials.category classroom_assignments.due_on
@@ -38,7 +40,7 @@ module Queries
                 assigned_on: assigned_at.in_time_zone.to_date,
                 counts: self.class.counts(classroom_id:, assignment_ids: [ id ]).fetch(id),
                 late_students: late_students(classroom_id, id, due_on), pending_students: pending_students(classroom_id, id),
-                material_shortname:, material_slug:, question_count:)
+                material_shortname:, material_slug:, question_count:, copies: copies(classroom_id, id))
       end
 
       # { assignment_id => Counts } pour des assignations d'une même classe : deux requêtes, quel que soit leur nombre.
@@ -89,6 +91,20 @@ module Queries
                  .pluck(:public_id, :first_name, :last_name, "firsts.done_on")
                  .map do |public_id, first_name, last_name, done_on|
                    LateStudent.new(public_id:, display_name: "#{first_name} #{last_name}", done_on:)
+                 end
+      end
+
+      # Une ligne par élève présent qui a rendu au moins une copie, du nom au prénom ; les copies d'un élève partant, d'ailleurs ou
+      # anonymisé ne se lisent pas (present_students, ADR-0072 §4.4).
+      def copies(classroom_id, id)
+        scores = Orm::ExerciseSession.where(classroom_assignment_id: id, status: "completed",
+                                            student_id: self.class.present_students(classroom_id).select(:student_id))
+                                     .order(:completed_at, :id).pluck(:student_id, :score_percent).group_by(&:first)
+        Orm::User.where(id: scores.keys).order(:last_name, :first_name, :id).pluck(:id, :public_id, :first_name, :last_name)
+                 .map do |student_id, public_id, first_name, last_name|
+                   percents = scores.fetch(student_id).map(&:last)
+                   CopyRow.new(public_id:, display_name: "#{first_name} #{last_name}", first_score: percents.first,
+                               best_score: percents.max, copies_count: percents.size)
                  end
       end
 

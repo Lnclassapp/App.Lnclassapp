@@ -395,8 +395,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  # CA-E6 : la ligne dit où en est l'élève par la pastille « En cours » ; « Reprendre » rouvre toujours la dernière fiche lue
-  # (sans préchargement, qui la servirait sans l'ouvrir) ; une fiche de cours finie porte la coche verte.
+  # CA-E6 : la ligne dit où en est l'élève par la pastille « En cours » ; « Reprendre » rouvre la leçon, dont l'ouverture retient
+  # les lectures (sans préchargement, qui la servirait sans l'ouvrir) ; une fiche de cours finie porte la coche verte.
   test "CA-E6: the row carries « En cours » (last sheet read, no prefetch), or the green check once done" do
     student = create_student_for(@course)
     first = create_essential(course: @course, name: "La méiose")
@@ -405,7 +405,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     create_essential_read(student:, essential: second)
     get courses_path
-    assert_select "#course_#{@course.slug} a[href='#{course_essential_path(@course.slug, second.slug)}'][data-turbo-prefetch=false]",
+    assert_select "#course_#{@course.slug} a[href='#{course_path(@course.slug)}'][data-turbo-prefetch=false]",
                   text: including(tl("course_card.progress.started"))
     assert_select "#course_#{@course.slug} svg.text-success", 0
     assert_select "#course_#{@published.slug} a[href='#{course_path(@published.slug)}']" do
@@ -604,7 +604,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a[href='#{course_path(limits.slug)}']", text: including("Limites et continuité")
       assert_select "a[href='#{course_path(limits.slug)}']", text: /Progression DPFC/, count: 0
       assert_select "*", text: including(tl("show.essentials_title"))
-      assert_equal [ course_essential_path(limits.slug, first.slug), course_essential_path(limits.slug, second.slug) ],
+      assert_equal [ course_path(limits.slug, anchor: "notion-#{first.slug}"), course_path(limits.slug, anchor: "notion-#{second.slug}") ],
                    css_select("#course_#{limits.slug} ul a").map { it["href"] }
       assert_select "ul a", text: "Limites en l'infini"
       assert_select "*", text: including("Brouillon"), count: 0
@@ -706,7 +706,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
   # ── Page d'un cours ────────────────────────────────────────────────────────
 
-  test "a student reads a published course: back link, badges, content under KaTeX, published essential sheets" do
+  test "a student reads a published course: back link, badges, then « Fiche de révision » and « Prépare interros »" do
     meiose = create_essential(course: @course, name: "La méiose", subtitle: "Deux divisions")
     create_exercise(essential: meiose)
     create_essential(course: @course, name: "Fiche en brouillon", status: "draft")
@@ -725,60 +725,20 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_header", text: including("Du gène à l'espèce")
     assert_select "#course_header", text: including("Tle D")
     assert_select "#course_header", text: including("SVT")
-    assert_select "#course_content [data-controller=math][data-turbo-permanent] .trix-content strong", text: "ADN"
-    assert_select "#course_content", text: including("$x^2$")
-    assert_select "#course_essentials li", 1
-    assert_select "#course_essentials a[href='#{course_essential_path(@course.slug, meiose.slug)}']", text: "La méiose"
-    assert_select "#course_essentials", text: including("Deux divisions")
-    # Épuration (2026-09-30), UDR-0130 : « Révisions de la leçon », sans le nombre d'exercices de chaque fiche.
-    assert_select "#course_essentials_title", text: "Révisions de la leçon"
-    assert_select "#course_content[aria-label=?]", "Contenu de la fiche de cours"
-    assert_select "#course_essentials", text: /exercice/, count: 0
+    # UDR page de la leçon §3.1 : deux sections, plus de liste de notions ; sans fiche cahier, la fiche de révision est le texte
+    # de la leçon puis celui de ses notions publiées (Lot A, UDR-0139 §3.2) ; « Prépare interros » liste l'exercice de la notion (Lot B).
+    assert_select "#course_essentials", 0
+    assert_select "section#fiche-de-revision h2", text: tl("show.revision_title")
+    assert_select "section#fiche-de-revision", text: including("ADN et gènes")
+    assert_select "section#fiche-de-revision h3", text: "La méiose"
+    assert_select "section#prepare-interros[data-turbo-prefetch=false] h2", text: tl("show.prepare_title")
+    assert_select "section#prepare-interros", text: including(tl("show.prepare_intro"))
+    assert_select "section#prepare-interros #notion-#{meiose.slug} h3", text: "La méiose"
+    assert_select "section#prepare-interros", text: including(tl("show.exercises_empty")), count: 0
     assert_no_match(/Fiche en brouillon/, response.body)
     assert_select "#content_status_course_#{@course.slug}", 0
     assert_select "#course-actions-menu", 0
     assert_select "a[href='#{assignments_href(@course.slug)}']", 0
-  end
-
-  # UDR-0013, amendement du 2026-10-02 (UDR-0057) : 3 fiches, puis « Voir plus » ; chaque ligne est un lien étiré.
-  test "a student sees 3 sheets then « Voir plus », each row a stretched link without status" do
-    sheets = %w[Méiose Mitose Mutations Hérédité].map { create_essential(course: @course, name: it, subtitle: "Sous-titre") }
-    sign_in_as create_student_for(@course)
-
-    get course_path(@course.slug)
-
-    # ADR-0090 §4.1 : ouvrir une fiche la retient ; un préchargement au survol la servirait sans l'ouvrir.
-    assert_select "section#course_essentials[data-turbo-prefetch=false]"
-    assert_select "#course_essentials [data-controller=reveal]" do
-      assert_select "li", 4
-      assert_select "li[hidden]", 1
-      assert_select "li[data-reveal-target=item]", 4
-      assert_select "#essential_#{sheets.last.slug}[hidden]"
-      assert_select "button[data-action='reveal#more']", text: I18n.t("components.reveal.more")
-      assert_select "[role=status][aria-live=polite]"
-    end
-    assert_select "#essential_#{sheets.first.slug}.relative.active\\:bg-mist" do
-      assert_select "a.after\\:absolute.after\\:inset-0.line-clamp-2[href='#{course_essential_path(@course.slug, sheets.first.slug)}']",
-                    text: "Méiose"
-      assert_select "p.line-clamp-2", text: "Sous-titre"
-      assert_select "svg[aria-hidden=true]"
-    end
-  end
-
-  test "the teacher and the team keep the full list of sheets, without « Voir plus », in the current row" do
-    %w[Méiose Mitose Mutations Hérédité].each { create_essential(course: @course, name: it) }
-
-    [ create_teacher, create_team_member ].each do |user|
-      sign_in_as user
-
-      get course_path(@course.slug)
-
-      assert_select "#course_essentials li", 4
-      assert_select "#course_essentials li[hidden]", 0
-      assert_select "#course_essentials [data-controller=reveal]", 0
-      assert_select "#course_essentials li.sm\\:flex-row", 4
-      sign_out
-    end
   end
 
   test "a draft or archived course, or an unknown slug, answers 404 outside the team (CA-04)" do
@@ -814,11 +774,13 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_select "a[role=menuitem][data-turbo-method=patch][href='#{publish_all_teams_course_path(@draft.slug)}']",
                     text: I18n.t("catalog.content_status.actions.publish_all")
       assert_select modal_link(edit_teams_course_path(@draft.slug)), text: tl("role_actions.edit")
-      assert_select modal_link(new_teams_course_essential_path(@draft.slug)), text: tl("role_actions.new_essential")
+      # CA-29, ADR-0113 §4.6 : plus de « Nouvelle notion » ni de « Nouvel exercice » ; la leçon se réimporte.
+      assert_select "a[href='/teams/courses/#{@draft.slug}/essentials/new']", 0
+      assert_select "[role=menu] a", text: /Nouvelle (fiche|notion)|Nouvel exercice/, count: 0
       assert_select modal_link(new_teams_import_path(kind: "essentials", course: @draft.slug)),
                     text: tl("role_actions.import_essentials")
     end
-    assert_select "#course_essentials li", text: /Fiche en brouillon.*#{Regexp.escape(status_label(:draft))}/m
+    assert_select "#course_essentials", 0
     assert_select "a[href='#{assignments_href(@draft.slug)}']", 0
   end
 
@@ -864,17 +826,20 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{assignments_href(@course.slug)}']", 0
   end
 
-  test "a course without essential sheet nor content shows the empty state and no content section" do
+  test "a course without content shows both sections empty, without the former sheet button" do
     bare = create_course(name: "Cours vide", content: nil)
     sign_in_as create_student_for(bare)
 
     get course_path(bare.slug)
 
-    assert_select "#course_essentials", text: including("Aucune fiche de révision pour cette fiche de cours.")
+    assert_select "#fiche-de-revision", text: including(tl("show.revision_empty"))
+    assert_select "#prepare-interros", text: including(tl("show.exercises_empty"))
     assert_select "#course_content", 0
+    assert_select "#course_sheet_link", 0
   end
 
-  test "the content is sanitised on render: no script tag, no event attribute, no javascript link (CA-04)" do
+  # Le texte de la leçon est rendu par la fiche de révision (Lot A) : ce qu'il contient d'exécutable n'arrive pas dans la page.
+  test "the lesson text is sanitised on render: no script tag, no event attribute, no javascript link" do
     Orm::Course.find(@course.id).update!(
       content: "<p onclick=\"alert(1)\">Texte <strong>gras</strong></p><script>alert(2)</script><a href=\"javascript:alert(3)\">lien</a>"
     )
@@ -882,7 +847,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
     get course_path(@course.slug)
 
-    assert_select "#course_content strong", text: "gras"
+    assert_select "#fiche-de-revision strong", text: "gras"
     assert_no_match(/<script>alert|onclick|javascript:alert/, response.body)
   end
 
@@ -1025,7 +990,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "li#lesson_#{@course.slug}" do
       assert_select "li[id^=lesson_essential_]", 5
       assert_select "li[id^=lesson_essential_][hidden]", 2
-      assert_select "li#lesson_essential_#{sheets.first.slug} a[href=?]", course_essential_path(@course.slug, sheets.first.slug)
+      assert_select "li#lesson_essential_#{sheets.first.slug} a[href=?]", course_path(@course.slug, anchor: "notion-#{sheets.first.slug}")
       assert_select "li#lesson_essential_#{sheets.second.slug}", text: including(tl("essential_row.review"))
       assert_select "li#lesson_essential_#{sheets.first.slug}", text: including(tl("essential_row.review")), count: 0
       assert_select "button", text: tl("course_card.more_essentials", count: 5)

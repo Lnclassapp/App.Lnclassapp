@@ -3,6 +3,7 @@
 # duration, else it would weigh nothing. The repository itself is the first case; the rules follow on small sets.
 require "minitest/autorun"
 require_relative "../../script/ci/system_budget"
+require_relative "../../script/ci/timing_log"
 
 class SystemBudgetTest < Minitest::Test
   def budget(timings:, base: {}, touched: [], files: timings.keys)
@@ -66,5 +67,20 @@ class SystemBudgetTest < Minitest::Test
     mixed = budget(timings: { signup => 10.0, "other" => 0.5 }, touched: [ signup, "other" ])
 
     assert_equal 15.0, mixed.budget, "un autre fichier qui grandit avec eux ramène à 15 s"
+  end
+
+  # The recorded durations come from script/ci/record_timings: a lost line is a file that weighs less than it costs.
+  def test_every_duration_of_a_verbose_run_is_read_even_when_the_test_prints_before_it
+    log = <<~LOG
+      A::SheetTest#test_at_390_px = Capybara starting Puma...
+      * Listening on http://127.0.0.1:33203
+      5.25 s = .
+      A::SheetTest#test_the_figure_follows = 4.09 s = .
+      B::ImportTest#test_large_import =#{" "}
+      [PERF] import de 213 cours en 9.0 s
+      2026-10-28T18:00:00.0000000Z 2.50 s = F
+    LOG
+
+    assert_equal({ "A::SheetTest" => 9.34, "B::ImportTest" => 2.5 }, TimingLog.parse(log.each_line).transform_values { it.round(2) })
   end
 end

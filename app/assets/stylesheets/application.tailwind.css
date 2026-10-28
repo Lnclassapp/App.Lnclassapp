@@ -471,6 +471,12 @@
   scrollbar-width: none;
 }
 
+/* UDR-0139 §3.2 — dégradé du fond vers transparent (64 px) sous la partie visible d'un texte replié de la fiche de révision ;
+   le serveur le rend `hidden`, catalog--revision-more le montre. La fiche cahier a le sien, aux couleurs du papier (course_sheet.css). */
+@utility revision-fade {
+  @apply pointer-events-none -mt-16 h-16 bg-linear-to-t from-white to-transparent;
+}
+
 /* UDR-0061 §3.3 — poignée d'une feuille basse (36 × 4 px), décorative : elle signale la feuille, rien de plus. */
 @utility sheet-handle {
   display: block;

@@ -1,12 +1,12 @@
 require "application_system_test_case"
 
-# CA-7, UDR-0087 §3.4 et §3.10 : l'élève range les étapes avec « Monter » et « Descendre » (désactivés aux extrémités, le
-# focus suit l'étape, une annonce dit sa place), sans glisser-déposer, puis valide : le bon ordre est juste.
+# CA-7, UDR-0087 §3.4 et §3.10, UDR-0138 §3.2 : l'élève range les étapes avec « Monter » et « Descendre » (désactivés aux extrémités, le
+# focus suit l'étape, une annonce dit sa place), sans glisser-déposer, puis rend sa copie : le bon ordre est juste.
 class Assessment::QuestionOrderingTest < ApplicationSystemTestCase
   SCOPE = "assessment.exercise_sessions".freeze
   STEPS = %w[Prophase Métaphase Anaphase].freeze
 
-  test "ranger trois étapes avec les flèches, puis valider : « Bonne réponse »" do
+  test "ranger trois étapes avec les flèches, puis rendre la copie : 20/20" do
     exercise = create_exercise(title: "Mitose", questions: 0)
     create_kind_question(exercise:, question_type: "ordering", answers: STEPS, content: "Range les étapes.")
     student = create_student_for(exercise.essential.course)
@@ -15,7 +15,7 @@ class Assessment::QuestionOrderingTest < ApplicationSystemTestCase
 
     with_mobile_viewport do
       visit exercise_session_path(session.public_id)
-      assert_no_selector "select[name='attempt[display_order][]']"
+      assert_no_selector "select[name$='[display_order][]']"
       assert_selector "[data-assessment--ordering-target=item]:first-child button[data-direction=up][disabled]"
 
       STEPS.each_with_index do |step, rank|
@@ -26,9 +26,9 @@ class Assessment::QuestionOrderingTest < ApplicationSystemTestCase
       end
       # ADR-0091 §4.4 : le mélange ne donne jamais le bon ordre ; au moins un déplacement, donc une annonce.
       assert_selector "[role=status]", text: /position/, visible: :all
-      click_on I18n.t("#{SCOPE}.question_card.submit")
+      click_on I18n.t("#{SCOPE}.show.submit")
 
-      assert_selector "#feedback-card", text: I18n.t("#{SCOPE}.feedback_card.verdict.success")
+      assert_selector "#session_grade", text: "20/20"
     end
   end
 

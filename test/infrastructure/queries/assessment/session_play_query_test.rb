@@ -199,6 +199,46 @@ module Queries
         assert_equal [ 3, true ], [ question.expected_count, question.multiple? ]
         assert_not question.with(question_type: "true_false").multiple?
       end
+
+      # UDR-0138 §3.2 : la copie montre toutes les questions d'un coup, mélangées de la session, sans une marque de correction.
+      test "copy : le sujet et toutes les questions numérotées, propositions mélangées par session, sans colonne correct" do
+        @exercise.update!(statement: "Soit ABC un triangle.")
+        order = create_kind_question(exercise: @exercise, question_type: "ordering", answers: %w[un deux trois quatre])
+        pairs = create_kind_question(exercise: @exercise, question_type: "matching", answers: [ %w[a 1], %w[b 2], %w[c 3] ])
+        create_kind_question(exercise: @exercise, question_type: "fill_blank", answers: [ "x" ], content: "Un ___ ici")
+        create_question_image(question: @questions.first)
+        @session.update!(question_count: 6)
+
+        statements = []
+        collector = ->(*, payload) { statements << payload[:sql] unless payload[:name] == "SCHEMA" }
+        copy = ActiveSupport::Notifications.subscribed(collector, "sql.active_record") { SessionPlayQuery.new.copy(public_id: @session.public_id) }
+
+        assert_equal [ @session.public_id, "started", "Soit ABC un triangle.", 6 ],
+                     [ copy.session_public_id, copy.status, copy.statement, copy.question_count ]
+        assert_equal (1..6).to_a, copy.questions.map(&:number)
+        assert_equal @questions.first.answers.map(&:id).sort, copy.questions.first.answers.map(&:id).sort
+        assert_equal (0...4).to_a, copy.questions.first.answers.map(&:index)
+        assert_not_nil copy.questions.first.image
+        ordering = copy.questions.find { it.id == order.id }
+        matching = copy.questions.find { it.id == pairs.id }
+        assert_equal %w[deux quatre trois un], ordering.items.map(&:content).sort
+        assert_not_equal %w[un deux trois quatre], ordering.items.map(&:content)
+        assert_equal %w[a b c], matching.prompts
+        assert_empty copy.questions.last.answers
+        assert statements.none? { it.match?(/correct|explanation|numeric_tolerance/) }, "une colonne de correction a été lue"
+        assert_equal 4, statements.size
+      end
+
+      test "copy : le mélange suit la session, stable à chaque lecture ; une session inconnue donne nil" do
+        other = create_exercise_session(exercise: @exercise)
+        reads = Array.new(2) { SessionPlayQuery.new.copy(public_id: @session.public_id).questions.first.answers.map(&:id) }
+
+        assert_equal 1, reads.uniq.size
+        assert_nil SessionPlayQuery.new.copy(public_id: "inconnue")
+        assert_not_nil SessionPlayQuery.new.copy(public_id: other.public_id)
+        assert SessionPlayQuery.new.copy(public_id: @session.public_id).started?
+        assert_not SessionPlayQuery.new.copy(public_id: @session.public_id).completed?
+      end
     end
   end
 end

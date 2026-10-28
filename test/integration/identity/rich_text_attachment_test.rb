@@ -14,7 +14,7 @@ class Identity::RichTextAttachmentTest < ActionDispatch::IntegrationTest
     get course_path(course.slug)
 
     assert_response :success
-    assert_select ".trix-content figure.attachment" do
+    assert_select "#fiche-de-revision .trix-content figure.attachment" do
       assert_select ".attachment__name", "schema-secret.png"
       assert_select "img", 0
     end

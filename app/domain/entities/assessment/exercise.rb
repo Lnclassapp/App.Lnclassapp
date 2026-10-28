@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::Exercise
-# Rôle : un exercice d'une fiche, ses questions, et les faits de publication de ses parents
-# ADR  : 0035, 0036, 0054, 0105
+# Rôle : un exercice d'une leçon (de notion ou de toute la leçon), son sujet, ses questions et les faits de publication de ses parents
+# ADR  : 0035, 0036, 0054, 0105, 0113
 module Entities
   module Assessment
     class Exercise
@@ -8,14 +8,17 @@ module Entities
 
       TYPES = %w[fixation evaluation].freeze
       TITLE_MAX = 150
+      # Le sujet est envoyé à chaque élève qui ouvre l'exercice : borné comme le schéma de l'import (menace-import-v2, Q2).
+      STATEMENT_MAX = 5000
 
-      attr_accessor :id, :public_id, :essential_id, :exercise_type, :position, :author_id, :status,
+      attr_accessor :id, :public_id, :course_id, :essential_id, :exercise_type, :position, :author_id, :status,
                     :published_at, :archived_at, :parents_published
       attr_writer :questions
-      attr_reader :title, :description
+      attr_reader :title, :statement
 
       validates :title, presence: true, length: { maximum: TITLE_MAX }
-      validates :essential_id, presence: true
+      validates :statement, length: { maximum: STATEMENT_MAX }
+      validates :course_id, presence: true
       validates :exercise_type, inclusion: { in: TYPES }
       validates :status, inclusion: { in: Entities::Shared::ContentStatus::VALUES }
 
@@ -23,10 +26,12 @@ module Entities
         @title = value&.squish
       end
 
-      def description=(value)
-        @description = value&.strip.presence
+      def statement=(value)
+        @statement = value&.strip.presence
       end
 
+      # essential_id nil : exercice de toute la leçon.
+      def lesson_wide? = essential_id.nil?
       def questions = @questions || []
       def published? = status == "published"
       def readable_chain_published? = published? && parents_published == true

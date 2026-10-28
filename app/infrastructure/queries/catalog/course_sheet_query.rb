@@ -22,10 +22,6 @@ module Queries
         Row.new(course: CourseRow.new(slug: course_slug, name:, status:), theme:, pages: document.fetch("pages", []),
                 glossary: document.fetch("glossary", {}))
       end
-
-      def exists?(course_slug:)
-        Orm::CourseSheet.joins(:course).exists?(courses: { slug: course_slug })
-      end
     end
   end
 end
