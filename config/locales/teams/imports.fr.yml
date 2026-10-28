@@ -59,6 +59,8 @@ fr:
         essential_exercise_count: "Fiche de cours « %{course} », notion « %{name} » : il faut exactement un exercice par notion (reçus : %{count})."
         lesson_exercise_count: "Fiche de cours « %{course} » : il faut exactement quatre exercices pour l'ensemble de la fiche de cours (reçus : %{count})."
         essential_not_in_lesson: "Fiche de cours « %{course} » déjà présente : la notion « %{name} » n'en fait pas partie. Un réimport ne crée ni ne modifie aucune notion."
+        essential_missing_from_file: "Fiche de cours « %{course} » déjà présente : la notion « %{name} » n'est pas dans le fichier. Elle resterait sans exercice ; la fiche de cours n'est pas réimportée."
+        essential_name_ambiguous: "Fiche de cours « %{course} » déjà présente : deux de ses notions portent le même nom à la casse ou aux accents près (« %{name} »). Un réimport ne peut pas les distinguer ; la fiche de cours n'est pas réimportée."
       # Erreurs de schéma, par mot-clé json_schemer (Teams::ImportsHelper) ; les autres prennent error_codes.schema.
       schema_keywords:
         schema: "Clé inconnue : ce format ne la prévoit pas."

@@ -24,7 +24,8 @@ module Entities
           super
         end
 
-        def accepts?(received) = received == version || legacy_versions.include?(received)
+        # Un entier seulement : 2.0 == 2 en Ruby, mais le schéma « v2.0 » n'existe pas.
+        def accepts?(received) = received.is_a?(Integer) && (received == version || legacy_versions.include?(received))
 
         def authorize(actor:) = policy.new.call(actor:)
         def multiple_files? = max_files > 1

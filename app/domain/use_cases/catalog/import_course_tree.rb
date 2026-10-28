@@ -86,15 +86,30 @@ module UseCases
       def replacement_item(course, path, lookup, key, existing_id)
         known = @essentials.ids_by_name(course_id: existing_id)
         name = course["name"].squish
+        errors = replacement_errors(course, path, known, name, existing_id)
+        return Entities::Catalog::ImportItem.new(path:, errors:) if errors.any?
+
+        node = course_node(course, lookup, { course_slugs: Set.new, essential_slugs: Set.new }, existing_id:, known:)
+        Entities::Catalog::ImportItem.new(path:, plan: node, key: [ :replace, *key ])
+      end
+
+      # Trois refus, la leçon entière à chaque fois : deux notions de la base indiscernables par leur nom, une notion du fichier
+      # inconnue de la leçon, une notion de la leçon absente du fichier (elle perdrait son exercice : ADR-0113, un par notion).
+      def replacement_errors(course, path, known, name, existing_id)
+        names = @essentials.names(course_id: existing_id)
+        ambiguous = names.group_by { Entities::Shared::NaturalKey.normalize(it) }.values.select { it.size > 1 }
+        return ambiguous.map { rule_error(path, "essential_name_ambiguous", course: name, name: it.first) } if ambiguous.any?
+
         errors = course["essentials"].each_with_index.filter_map do |essential, index|
           next if known.key?(Entities::Shared::NaturalKey.normalize(essential["name"]))
 
           rule_error("#{path}.essentials[#{index}].name", "essential_not_in_lesson", course: name, name: essential["name"].to_s.squish)
         end
-        return Entities::Catalog::ImportItem.new(path:, errors:) if errors.any?
+        return errors if errors.any?
 
-        node = course_node(course, lookup, { course_slugs: Set.new, essential_slugs: Set.new }, existing_id:, known:)
-        Entities::Catalog::ImportItem.new(path:, plan: node, key: [ :replace, *key ])
+        in_file = course["essentials"].to_set { Entities::Shared::NaturalKey.normalize(it["name"]) }
+        names.reject { in_file.include?(Entities::Shared::NaturalKey.normalize(it)) }
+                   .map { rule_error(path, "essential_missing_from_file", course: name, name: it) }
       end
 
       # Les alias de l'ancienne application ramenés aux clés que ContentNode lit ; la clé status est ignorée.

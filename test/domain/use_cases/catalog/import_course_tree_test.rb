@@ -755,6 +755,154 @@ module UseCases
         assert_equal [ "published", 1 ], [ old.reload.status, exercises_of(other).count ]
       end
 
+      # Revue sécurité du Lot D : 2.0 == 2 en Ruby, le validateur cherchait alors un schéma « v2.0 » inexistant.
+      test "a version 2.0 envelope is rejected as version_unsupported, with zero writes" do
+        [ 2.0, 1.0 ].each do |version|
+          report = run_import(course_tree_v2_document(courses: 1).merge("version" => version))
+
+          assert_equal "rejected", report.status
+          assert_equal [ [ "version", "version_unsupported" ] ], schema_pairs(report)
+        end
+        assert_equal [ 0, 0, 0, 0, 0 ], tree_counts
+      end
+
+      # ADR-0113 (1 exercice par notion) : un réimport ne laisse jamais une notion de la leçon sans exercice.
+      test "a reimport whose file lacks a notion of the lesson refuses the lesson and keeps the old exercise" do
+        lesson = existing_lesson
+        old_first = create_exercise(essential: lesson.essentials.order(:position).first)
+        old_second = create_exercise(essential: lesson.essentials.order(:position).last)
+
+        report = run_import(course_tree_v2_document(courses: 1, essentials: 1))
+
+        assert_equal [ 0, 1 ], report.values_at(:imported_count, :error_count)
+        assert_equal [ { "path" => "courses[0]", "code" => "essential_missing_from_file",
+                         "params" => { "course" => "Cours 1", "name" => "Fiche 2" } } ], report.import_errors
+        assert_equal [ "published", "published" ], [ old_first.reload.status, old_second.reload.status ]
+        assert_equal 2, exercises_of(lesson).count
+      end
+
+      test "two notions of a lesson whose names differ by case or accents refuse the reimport, the name given" do
+        lesson = existing_lesson(notions: [ "Génétique", "GENETIQUE" ])
+        old = create_exercise(essential: lesson.essentials.first)
+        document = course_tree_v2_document(courses: 1, essentials: 1)
+        document["courses"][0]["essentials"][0]["name"] = "Génétique"
+
+        report = run_import(document)
+
+        assert_equal [ 0, 1 ], report.values_at(:imported_count, :error_count)
+        assert_equal [ [ "courses[0]", "essential_name_ambiguous" ] ], schema_pairs(report)
+        assert_equal "Génétique", report.import_errors.first.dig("params", "name")
+        assert_equal "published", old.reload.status
+        assert_equal 1, exercises_of(lesson).count
+      end
+
+      test "a reimport archives only the exercises of its own lesson: another lesson keeps its published exercise and active assignment" do
+        existing_lesson
+        other = existing_lesson(name: "Autre leçon", notions: [ "Fiche 1" ])
+        other_exercise = create_exercise(essential: other.essentials.first)
+        other_assignment = create_assignment(assignable: other_exercise)
+
+        report = run_import(course_tree_v2_document(courses: 1, essentials: 2))
+
+        assert_equal [ "completed", 1 ], report.values_at(:status, :imported_count)
+        assert_equal "published", other_exercise.reload.status
+        assert_nil other_exercise.archived_at
+        assert_equal [ "active", nil ], [ other_assignment.reload.status, other_assignment.archived_at ]
+      end
+
+      test "an assignment already archived keeps its archived_at at reimport" do
+        lesson = existing_lesson
+        old = create_exercise(essential: lesson.essentials.first)
+        assignment = create_assignment(assignable: old, status: "archived")
+        before = assignment.reload.archived_at
+
+        run_import(course_tree_v2_document(courses: 1, essentials: 2))
+
+        assert_equal "archived", old.reload.status
+        assert_equal before, assignment.reload.archived_at
+      end
+
+      test "a v2 reimport finds the lesson whatever the case, accents and spaces of its name" do
+        lesson = existing_lesson(name: "Génétique et Évolution", notions: [ "Fiche 1", "Fiche 2" ])
+        document = course_tree_v2_document(courses: 1, essentials: 2)
+        document["courses"][0]["name"] = "  GENETIQUE   et  evolution "
+
+        report = run_import(document)
+
+        assert_equal [ "completed", 1, 0, 0 ], report.values_at(:status, :imported_count, :skipped_count, :error_count)
+        assert_equal [ 1, 6 ], [ Orm::Course.count, exercises_of(lesson).count ]
+      end
+
+      test "the same lesson twice in one v2 envoi is written once" do
+        lesson = existing_lesson
+        one = course_tree_v2_document(courses: 1, essentials: 2)["courses"].first
+
+        report = run_import(document(one, one))
+
+        assert_equal [ "completed", 1, 1, 0 ], report.values_at(:status, :imported_count, :skipped_count, :error_count)
+        assert_equal 6, exercises_of(lesson).count
+        assert_equal 6, report.details["exercises_created"]
+      end
+
+      # Couverture reprise d'import_exercises_test.rb (retiré avec l'import d'exercices seuls, ADR-0113 §4.4), au format 2.
+      def question_in_notion(question)
+        root = course("Génétique")
+        root["essentials"][0]["exercises"][0]["questions"] = [ question ]
+        root
+      end
+
+      def numeric_question(**extra)
+        { "content" => "Combien ?", "question_type" => "numeric", "answers" => [ { "content" => "3,5" } ], **extra.transform_keys(&:to_s) }
+      end
+
+      QUESTIONS_PATH = "courses[0].essentials[0].exercises[0].questions[0]".freeze
+
+      test "a numeric tolerance too large (schema) or too precise (domain rule) is refused at .tolerance" do
+        { 1e30 => "schema", 0.00001 => "question_structure" }.each do |tolerance, code|
+          report = run_import(document(question_in_notion(numeric_question(tolerance:))))
+
+          assert_equal [ 0, 1 ], report.values_at(:imported_count, :error_count), tolerance
+          assert_equal [ [ "#{QUESTIONS_PATH}.tolerance", code ] ], schema_pairs(report), tolerance
+        end
+        assert_equal 0, Orm::Course.count
+      end
+
+      test "a negative tolerance is refused by the schema, at its path" do
+        report = run_import(document(question_in_notion(numeric_question(tolerance: -1))))
+
+        assert_equal [ [ "#{QUESTIONS_PATH}.tolerance", "schema" ] ], schema_pairs(report)
+        assert_equal 0, Orm::Course.count
+      end
+
+      test "a fill-in-the-blank question without a blank is refused at .content with its rule" do
+        question = { "content" => "Sans blanc.", "question_type" => "fill_blank", "answers" => [ { "content" => "Abidjan" } ] }
+
+        report = run_import(document(question_in_notion(question)))
+
+        assert_equal [ [ "#{QUESTIONS_PATH}.content", "blank_marker" ] ], report.import_errors.map { [ it["path"], it.dig("params", "rule") ] }
+        assert_equal 0, Orm::Course.count
+      end
+
+      test "a tolerance on a question that is not numeric is refused with tolerance_not_allowed" do
+        question = { "content" => "Choisis.", "question_type" => "single_choice", "tolerance" => 0.5,
+                     "answers" => [ { "content" => "A", "correct" => true }, { "content" => "B" } ] }
+
+        report = run_import(document(question_in_notion(question)))
+
+        assert_equal [ [ "#{QUESTIONS_PATH}.tolerance", "tolerance_not_allowed" ] ], report.import_errors.map { [ it["path"], it.dig("params", "rule") ] }
+        assert_equal 0, Orm::Course.count
+      end
+
+      test "a match longer than 500 characters is refused by the v2 schema, at its path" do
+        answers = %w[a b c].map { { "content" => it, "match" => it.upcase } }
+        answers[0]["match"] = "a" * 501
+
+        report = run_import(document(question_in_notion({ "content" => "Relie.", "question_type" => "matching", "answers" => answers })))
+
+        assert_equal [ [ "#{QUESTIONS_PATH}.answers[0].match", "schema" ] ], schema_pairs(report)
+        assert_equal 0, Orm::Course.count
+      end
+
       test "an author who lost the team role is refused: the import fails, nothing is written" do
         report = run_import(document(course), author: create_teacher)
 

@@ -39,6 +39,11 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #ids_by_name"
       end
 
+      # Les noms des notions d'une leçon tels qu'écrits, dans l'ordre de la leçon (ids_by_name confond ceux qui se normalisent pareil). → [String]
+      def names(course_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #names"
+      end
+
       # → Integer
       def next_position(course_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #next_position"

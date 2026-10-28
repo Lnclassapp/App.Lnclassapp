@@ -66,6 +66,10 @@ module Repositories
         Orm::Essential.where(course_id:).pluck(:name, :id).to_h { |name, id| [ Entities::Shared::NaturalKey.normalize(name), id ] }
       end
 
+      def names(course_id:)
+        Orm::Essential.where(course_id:).order(:position, :id).pluck(:name)
+      end
+
       def next_position(course_id:)
         Orm::Essential.where(course_id:).maximum(:position).to_i + 1
       end

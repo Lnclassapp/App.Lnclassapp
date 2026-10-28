@@ -134,6 +134,39 @@ module Repositories
         end
       end
 
+      # Réimport (ADR-0113 §4.5) : existing_id archive les exercices et leurs assignations, sans réécrire la leçon.
+      test "une leçon existante (existing_id) voit ses exercices et ses assignations actives archivés, puis remplacés" do
+        lesson = create_course
+        fiche = create_essential(course: lesson)
+        old = create_exercise(essential: fiche)
+        assignment = create_assignment(assignable: old)
+        node = course("remplace", content: nil, exercises: [ exercise("Bilan") ]).with(slug: nil, existing_id: lesson.id, essentials: [])
+
+        counts = @writer.write(author_id: @author.id, at: @at, courses: [ node ])
+
+        assert_equal 1, counts[:archived]
+        assert_equal [ "archived", @at ], old.reload.values_at(:status, :archived_at)
+        assert_equal [ "archived", @at ], assignment.reload.values_at(:status, :archived_at)
+        assert_equal [ 1, 1 ], [ Orm::Course.count, Orm::Exercise.where(status: "draft").count ]
+      end
+
+      test "une écriture qui échoue après l'archivage laisse les anciens exercices et leurs assignations intacts" do
+        lesson = create_course
+        old = create_exercise(essential: create_essential(course: lesson))
+        assignment = create_assignment(assignable: old)
+        twin = SecureRandom.base58(14)
+        collision = [ exercise("Un"), exercise("Deux") ].map { it.with(public_id: twin) }
+        node = course("remplace", content: nil, exercises: collision).with(slug: nil, existing_id: lesson.id, essentials: [])
+
+        result = Repositories::Shared::Transaction.new.attempt { @writer.write(author_id: @author.id, at: @at, courses: [ node ]) }
+
+        assert result.failure?
+        assert_equal "published", old.reload.status
+        assert_nil old.archived_at
+        assert_equal "active", assignment.reload.status
+        assert_nil assignment.archived_at
+      end
+
       def question(content, position: 1, explanation: nil, question_type: "true_false", answers: self.answers)
         Port::QuestionNode.new(position:, content:, explanation:, question_type:, answers:)
       end

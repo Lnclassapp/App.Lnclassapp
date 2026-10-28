@@ -292,14 +292,12 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
                       text: I18n.t("#{scope}.show.edit")
         assert_select "a[role=menuitem][data-turbo-frame=modal][href='#{new_teams_essential_exercise_path(essential.slug)}']",
                       text: I18n.t("#{scope}.show.new_exercise")
-        assert_select "a[role=menuitem][data-turbo-frame=modal]" \
-                      "[href='#{new_teams_import_path(kind: "exercises", essential: essential.slug)}']",
-                      text: I18n.t("#{scope}.show.import_exercises")
+        assert_select "a[href*=?]", "kind=exercises", 0
         assert_select "#content_transitions_essential_#{essential.slug} a[role=menuitem][data-turbo-method=patch]" \
                       "[href='#{publish_teams_essential_path(essential.slug)}']"
         assert_select "a[role=menuitem][data-turbo-method=patch][href='#{publish_all_teams_essential_path(essential.slug)}']",
                       text: I18n.t("catalog.content_status.actions.publish_all")
-        assert_select "[role=menuitem]", 5
+        assert_select "[role=menuitem]", 4
       end
     end
     assert_select "#essential_header p", text: I18n.t("#{scope}.show.eyebrow", course: course.name)
