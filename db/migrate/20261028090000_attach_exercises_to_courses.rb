@@ -1,4 +1,4 @@
-# ADR-XXXX (refonte-page-lecon) : l'exercice appartient à sa leçon ; la notion devient facultative et la description un sujet.
+# ADR-0113 (refonte-page-lecon) : l'exercice appartient à sa leçon ; la notion devient facultative et la description un sujet.
 # migration-en-deux-temps: le renommage description → statement se fait en un temps ; l'ancien code et le nouveau n'ont pas de période commune (pas d'utilisateurs réels, Q5).
 class AttachExercisesToCourses < ActiveRecord::Migration[8.1]
   def up
