@@ -9,7 +9,9 @@ class Catalog::CourseSheetSeedsTest < ActionDispatch::IntegrationTest
   LESSON = "Propriétés de Thalès dans un triangle".freeze
 
   setup do
-    @course = create_course(name: LESSON, level: create_level(name: "3ème"))
+    level = create_level(name: "3ème")
+    @course = create_course(name: LESSON, level:)
+    @lens_course = create_course(name: "Les lentilles", level:, material: create_material(name: "Physique-Chimie"))
     @document = JSON.parse(PATH.read)
   end
 
@@ -63,21 +65,23 @@ class Catalog::CourseSheetSeedsTest < ActionDispatch::IntegrationTest
   test "the demo seed imports the sheet on the lesson, then a second run does nothing" do
     create_team_member(team_role: "content", second_factor: false, contact: "0700000000")
 
-    assert_includes run_seed, "1 fiche(s) de cours importée(s) sur 1"
-    assert_equal [ @course.id ], Orm::CourseSheet.pluck(:course_id)
-    sheet = Orm::CourseSheet.last
+    assert_includes run_seed, "2 fiche(s) de cours importée(s) sur 2"
+    assert_equal [ @course.id, @lens_course.id ].sort, Orm::CourseSheet.pluck(:course_id).sort
+    stamps = Orm::CourseSheet.order(:id).pluck(:updated_at)
 
-    assert_includes run_seed, "0 fiche(s) de cours importée(s) sur 1"
-    assert_equal [ 1, sheet.updated_at ], [ Orm::CourseSheet.count, Orm::CourseSheet.last.updated_at ]
+    assert_includes run_seed, "0 fiche(s) de cours importée(s) sur 2"
+    assert_equal stamps, Orm::CourseSheet.order(:id).pluck(:updated_at)
   end
 
   test "the demo seed says so, and does not fail, when the lesson is missing" do
     create_team_member(team_role: "content", second_factor: false, contact: "0700000000")
     @course.destroy!
+    @lens_course.destroy!
 
     output = run_seed
 
     assert_includes output, "leçon « proprietes-de-thales-dans-un-triangle » absente"
+    assert_includes output, "leçon « les-lentilles » absente"
     assert_equal 0, Orm::CourseSheet.count
   end
 

@@ -1,0 +1,18 @@
+<%# 🌐 UI · catalog/course_sheets/kinds/lens_diagrams/_profiles — quatre lentilles vues de profil, à classer en convergentes ou divergentes (exercice 4) %>
+<%# Rôle : quatre cartes (dessin, numéro) ; quatre colonnes, deux sous 520 px ; la réponse n'est écrite nulle part : les formes la montrent %>
+<%# ADR  : 0110-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs, 318) · formes de la maquette Fiche Lentilles.dc.html (PROFILES) : 1 biconvexe, 2 plan-concave, 3 biconcave, 4 plan-convexe %>
+<% shapes = [ "M35,8 Q62,50 35,92 Q8,50 35,8", "M18,8 L52,8 L52,92 L18,92 Q34,50 18,8",
+              "M18,8 L52,8 Q38,50 52,92 L18,92 Q32,50 18,8", "M22,8 Q58,50 22,92 Z" ] %>
+<%= tag.figure class: "sheet-figure sheet-lens-diagram", data: { diagram: "profiles" }, role: "group", "aria-label": t(".label") do %>
+  <div class="sheet-lens-cards" data-columns="4">
+    <% shapes.each_with_index do |path, index| %>
+      <div class="sheet-lens-card" data-profile="<%= index + 1 %>">
+        <svg class="sheet-lens-profile" viewBox="0 0 70 100" aria-hidden="true" focusable="false">
+          <path class="sheet-lens-glass" d="<%= path %>"></path>
+        </svg>
+        <b class="sheet-lens-card-title"><%= t(".lens", number: index + 1) %></b>
+      </div>
+    <% end %>
+  </div>
+  <% if block["caption"].present? %><figcaption class="sheet-muted"><%= block["caption"] %></figcaption><% end %>
+<% end %>

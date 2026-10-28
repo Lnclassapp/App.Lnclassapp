@@ -1,0 +1,31 @@
+<%# 🌐 UI · catalog/course_sheets/kinds/lens_diagrams/_vocabulary — le vocabulaire de la lentille convergente : axe, centre O, foyers F et F′, distance focale f %>
+<%# Rôle : la liste « à retenir » (mots du lexique cliquables) à côté d'un dessin à quatre rayons parallèles ; sous 520 px, le dessin passe sous la liste %>
+<%# ADR  : 0110-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs, 318) · formes de la maquette Fiche Lentilles.dc.html (§ 2) %>
+<% rays = [ "0,30 110,30 290,165", "0,60 110,60 290,127.5", "0,120 110,120 290,52.5", "0,150 110,150 290,15" ] %>
+<%= tag.figure class: "sheet-figure sheet-lens-diagram", data: { diagram: "vocabulary" }, role: "group", "aria-label": t(".label") do %>
+  <span class="sheet-lens-badge"><%= t(".badge") %></span>
+  <div class="sheet-lens-split">
+    <ul class="sheet-lens-points">
+      <% t(".points").each do |point| %>
+        <li><%= sheet_text(point, glossary: @sheet.glossary) %></li>
+      <% end %>
+    </ul>
+    <svg viewBox="0 0 300 185" aria-hidden="true" focusable="false">
+      <line class="sheet-lens-axis" x1="0" y1="90" x2="300" y2="90"></line>
+      <% rays.each do |points| %>
+        <polyline class="sheet-lens-ray" data-ray="1" data-virtual="false" points="<%= points %>"></polyline>
+      <% end %>
+      <%= render "catalog/course_sheets/kinds/lens_diagrams/symbol", x: 110, top: 8, bottom: 168 %>
+      <circle class="sheet-lens-dot" cx="190" cy="90" r="3.5"></circle>
+      <circle class="sheet-lens-dot" cx="30" cy="90" r="3.5"></circle>
+      <line class="sheet-lens-measure" x1="110" y1="177" x2="190" y2="177"></line>
+      <line class="sheet-lens-measure" x1="190" y1="171" x2="190" y2="183"></line>
+      <text class="sheet-lens-name" data-tone="ink" x="120" y="106" text-anchor="middle">O</text>
+      <text class="sheet-lens-name" data-tone="accent" x="196" y="108" text-anchor="middle">F′</text>
+      <text class="sheet-lens-name" data-tone="accent" x="30" y="108" text-anchor="middle">F</text>
+      <text class="sheet-lens-name" data-tone="primary" x="150" y="173" text-anchor="middle">f</text>
+      <text class="sheet-lens-caption" x="262" y="84" text-anchor="middle"><%= t(".axis") %></text>
+    </svg>
+  </div>
+  <% if block["caption"].present? %><figcaption class="sheet-muted"><%= block["caption"] %></figcaption><% end %>
+<% end %>

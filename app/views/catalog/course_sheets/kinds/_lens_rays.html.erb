@@ -1,0 +1,6 @@
+<%# 🌐 UI · catalog/course_sheets/kinds/_lens_rays — les segments des rayons d'une scène de lentille, tels que le serveur les calcule %>
+<%# Rôle : local rays (Catalog::CourseSheetLensHelper::Ray) → une ligne par segment ; lens_simulator.js et lens_construction.js redessinent les mêmes lignes quand la figure bouge %>
+<%# ADR  : 0110-fiche-de-cours-en-donnees-importees (chantier contenu-en-blocs, 318) · formules de la maquette Fiche Lentilles.dc.html (rays) %>
+<% rays.each do |ray| %>
+  <%= tag.line class: "sheet-lens-ray", x1: ray.x1, y1: ray.y1, x2: ray.x2, y2: ray.y2, data: { ray: ray.ray, virtual: ray.virtual } %>
+<% end %>
