@@ -21,7 +21,7 @@ module Repositories
         questions = [ 1, 2 ].map do |rank|
           Port::QuestionNode.new(position: rank, content: "#{title} Q#{rank}", explanation: nil, question_type: "true_false", answers:)
         end
-        Port::ExerciseNode.new(public_id: SecureRandom.base58(14), essential_id:, title:, description: nil,
+        Port::ExerciseNode.new(public_id: SecureRandom.base58(14), essential_id:, title:, statement: nil,
                                exercise_type: "fixation", position:, questions:)
       end
 
@@ -43,8 +43,9 @@ module Repositories
         genetique = Orm::Course.find_by!(slug: "genetique")
         assert_equal [ "genetique-a", "genetique-b" ], genetique.essentials.order(:position).pluck(:slug)
         essential = Orm::Essential.find_by!(slug: "genetique-b")
-        assert_equal [ [ 1, "Quiz genetique-b" ], [ 2, "Défi genetique-b" ] ], essential.exercises.order(:position).pluck(:position, :title)
-        question = essential.exercises.find_by!(position: 2).questions.find_by!(position: 2)
+        # La position est unique par leçon : les deux notions se suivent (a : 1, 2 ; b : 3, 4).
+        assert_equal [ [ 3, "Quiz genetique-b" ], [ 4, "Défi genetique-b" ] ], essential.exercises.order(:position).pluck(:position, :title)
+        question = essential.exercises.find_by!(position: 4).questions.find_by!(position: 2)
         assert_equal [ "Défi genetique-b Q2", [ [ 1, "Vrai", true ], [ 2, "Faux", false ] ] ],
                      [ question.content, question.answers.order(:position).pluck(:position, :content, :correct) ]
         [ Orm::Course, Orm::Essential, Orm::Exercise ].each do |model|
@@ -113,8 +114,8 @@ module Repositories
         Port::QuestionNode.new(position:, content:, explanation:, question_type:, answers:)
       end
 
-      def exercise_with(questions, essential_id:, description: nil, public_id: SecureRandom.base58(14), position: 9)
-        Port::ExerciseNode.new(public_id:, essential_id:, title: "Échappement", description:, exercise_type: "fixation", position:, questions:)
+      def exercise_with(questions, essential_id:, statement: nil, public_id: SecureRandom.base58(14), position: 9)
+        Port::ExerciseNode.new(public_id:, essential_id:, title: "Échappement", statement:, exercise_type: "fixation", position:, questions:)
       end
 
       # ADR-0068 §5 : un caractère mal échappé au format texte de COPY corromprait une ligne.
@@ -125,11 +126,11 @@ module Repositories
         questions = [ question(tricky, explanation: nil, answers:), question("Deuxième", position: 2, explanation: "Pour\tla\nraison \\x") ]
         at = Time.zone.parse("2026-09-25 10:00:00.123456789").in_time_zone("Pacific/Auckland")
 
-        counts = @writer.write(author_id: @author.id, at:, exercises: [ exercise_with(questions, essential_id: fiche.id, description: tricky) ])
+        counts = @writer.write(author_id: @author.id, at:, exercises: [ exercise_with(questions, essential_id: fiche.id, statement: tricky) ])
 
         assert_equal({ courses: 0, essentials: 0, exercises: 1, questions: 2, answers: 4 }, counts)
-        exercise = fiche.exercises.find_by!(position: 9)
-        assert_equal [ "Échappement", tricky, "draft", @author.id ], [ exercise.title, exercise.description, exercise.status, exercise.author_id ]
+        exercise = fiche.exercises.find_by!(position: 1)
+        assert_equal [ "Échappement", tricky, "draft", @author.id ], [ exercise.title, exercise.statement, exercise.status, exercise.author_id ]
         written = exercise.questions.order(:position)
         assert_equal [ [ 1, tricky, nil, "true_false" ], [ 2, "Deuxième", "Pour\tla\nraison \\x", "true_false" ] ],
                      written.pluck(:position, :content, :explanation, :question_type)

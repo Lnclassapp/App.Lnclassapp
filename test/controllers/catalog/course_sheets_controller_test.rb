@@ -119,12 +119,13 @@ class Catalog::CourseSheetsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "the lesson page links to its sheet, and only when it has one" do
+  test "the lesson page no longer links to its sheet: the sheet is a section of the page itself (UDR page de la leçon §3.1)" do
     sign_in_as @student
 
     get course_path(@course.slug)
 
-    assert_select "a[href='#{sheet_path}']", text: I18n.t("catalog.course_sheets.name")
+    assert_select "a[href='#{sheet_path}']", count: 0
+    assert_select "section#fiche-de-revision"
 
     other = create_course
     sign_in_as create_student_for(other)

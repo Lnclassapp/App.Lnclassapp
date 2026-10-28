@@ -9,7 +9,7 @@ module Entities
       end
 
       def build(**overrides)
-        Exercise.new(title: " Mitose  et méiose ", description: "  Lire  ", essential_id: 1, exercise_type: "fixation",
+        Exercise.new(title: " Mitose  et méiose ", statement: "  Lire  ", course_id: 1, essential_id: 1, exercise_type: "fixation",
                      status: "draft", questions: [ question(true, false) ], **overrides)
       end
 
@@ -18,17 +18,23 @@ module Entities
 
         assert exercise.valid?
         assert_equal "Mitose et méiose", exercise.title
-        assert_equal "Lire", exercise.description
-        assert_nil build(description: " ").description
-        assert_nil build(description: nil).description
+        assert_equal "Lire", exercise.statement
+        assert_nil build(statement: " ").statement
+        assert_nil build(statement: nil).statement
       end
 
-      test "exige titre borné, fiche, type et statut connus" do
+      test "exige titre borné, leçon, type et statut connus" do
         assert build(title: nil).invalid?
         assert build(title: "a" * 151).invalid?
-        assert build(essential_id: nil).invalid?
+        assert build(course_id: nil).invalid?
         assert build(exercise_type: "examen").invalid?
         assert build(status: "brouillon").invalid?
+      end
+
+      test "ADR-XXXX : sans notion, l'exercice porte sur toute la leçon et reste valide" do
+        assert_not build.lesson_wide?
+        assert build(essential_id: nil).valid?
+        assert build(essential_id: nil).lesson_wide?
       end
 
       test "publiable avec au moins une question, toutes bien construites" do

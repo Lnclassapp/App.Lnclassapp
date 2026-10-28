@@ -221,10 +221,10 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       end
       assert_toast t("teams.essentials.create.created", name: ESSENTIAL)
       assert_no_selector "turbo-frame#modal dialog[open]"
-      assert_selector "#course_essentials", text: ESSENTIAL
     end
 
-    find("#course_essentials a", text: ESSENTIAL).click
+    # La page de la leçon ne liste plus les notions (UDR page de la leçon §3.1) : on ouvre la notion par son adresse.
+    visit course_essential_path(course.slug, Orm::Essential.find_by!(name: ESSENTIAL).slug)
     assert_selector "#essential_header h1", text: ESSENTIAL
     essential = Orm::Essential.find_by!(name: ESSENTIAL)
 

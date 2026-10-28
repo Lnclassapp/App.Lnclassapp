@@ -1,13 +1,13 @@
 # 🔌 INFRA · Repositories::Catalog::ContentTreeWriter
 # Rôle : écrit en masse des arbres de contenu validés (cours → fiches → exercices → questions → propositions), tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113
 module Repositories
   module Catalog
     class ContentTreeWriter
       include Ports::Catalog::ContentTreeWriterPort
 
       NATURAL_KEYS = { "Orm::Course" => %w[slug], "Orm::Essential" => %w[slug], "Orm::RichTextRow" => [] }.freeze
-      EXERCISE_COLUMNS = %w[id public_id essential_id title description exercise_type position author_id status created_at updated_at].freeze
+      EXERCISE_COLUMNS = %w[id public_id course_id essential_id title statement exercise_type position author_id status created_at updated_at].freeze
       QUESTION_COLUMNS = %w[id exercise_id position content explanation question_type numeric_tolerance image_description created_at
                             updated_at].freeze
       ANSWER_COLUMNS = %w[question_id position content correct match_content created_at updated_at].freeze
@@ -34,7 +34,9 @@ module Repositories
 
         exercises += essentials.flat_map { |essential| essential.exercises.map { |node| node.with(essential_id: essential_ids.fetch(essential.slug)) } }
         exercise_ids = reserve_ids(Orm::Exercise, exercises.size)
-        copy("exercises", EXERCISE_COLUMNS, exercises.zip(exercise_ids).map { |node, id| exercise_row(id, node) })
+        course_of = course_ids_of(exercises)
+        positions = course_positions(exercises, course_of)
+        copy("exercises", EXERCISE_COLUMNS, exercises.zip(exercise_ids, positions).map { |node, id, position| exercise_row(id, node, course_of.fetch(node.essential_id), position) })
 
         questions = exercises.zip(exercise_ids).flat_map { |exercise, exercise_id| exercise.questions.map { |node| [ exercise_id, node ] } }
         question_ids = reserve_ids(Orm::Question, questions.size)
@@ -107,9 +109,21 @@ module Repositories
           author_id: @author_id, status: "draft" }
       end
 
+      # La leçon de chaque notion qui porte un exercice (les fiches viennent d'être écrites, dans la même transaction).
+      def course_ids_of(exercises) = Orm::Essential.where(id: exercises.map(&:essential_id).uniq).pluck(:id, :course_id).to_h
+
+      # La position est unique par leçon : elle suit la dernière de la leçon, dans l'ordre des fiches puis des exercices.
+      def course_positions(exercises, course_of)
+        last = Orm::Exercise.where(course_id: course_of.values.uniq).group(:course_id).maximum(:position)
+        exercises.map do |node|
+          course_id = course_of.fetch(node.essential_id)
+          last[course_id] = last.fetch(course_id, 0) + 1
+        end
+      end
+
       # Dans l'ordre d'EXERCISE_COLUMNS.
-      def exercise_row(id, node)
-        [ id, node.public_id, node.essential_id, node.title, node.description, node.exercise_type, node.position, @author_id, "draft",
+      def exercise_row(id, node, course_id, position)
+        [ id, node.public_id, course_id, node.essential_id, node.title, node.statement, node.exercise_type, position, @author_id, "draft",
           @copy_at, @copy_at ]
       end
 

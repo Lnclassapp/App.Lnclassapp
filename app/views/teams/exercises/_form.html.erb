@@ -10,7 +10,7 @@
   <% end %>
   <%= ui_field form, :title, required: true, maxlength: Entities::Assessment::Exercise::TITLE_MAX, autocomplete: "off",
                              placeholder: t(".title_placeholder") %>
-  <%= ui_field form, :description, as: :textarea, rows: 3, hint: t(".description_hint") %>
+  <%= ui_field form, :statement, as: :textarea, rows: 3, hint: t(".statement_hint") %>
 
   <% if locked %>
     <%= form.hidden_field :exercise_type %>

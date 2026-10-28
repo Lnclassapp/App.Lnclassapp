@@ -35,10 +35,16 @@ module Catalog
       return if refuse_out_of_level(course_slug: params[:slug])
 
       render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: @detail.course),
-                    success: ->(_) { load_status_record }
+                    success: ->(_) { load_status_record; load_lesson_sections }
     end
 
     private
+
+    # UDR page de la leçon : les deux sections, lues pour le rôle courant (squelettes du Lot 0).
+    def load_lesson_sections
+      @revision = Queries::Catalog::RevisionSheetQuery.new.call(course_slug: params[:slug], actor: current_actor)
+      @prepare = Queries::Catalog::PrepareInterrosQuery.new.call(course_slug: params[:slug], actor: current_actor)
+    end
 
     # Le panneau de statut de l'équipe prend l'entité du cours : c'est lui que remplacent les transitions (Lot B2).
     def load_status_record

@@ -36,6 +36,10 @@ module Repositories
         assert_equal 1, Orm::ExerciseSession.where(student: @student).count
       end
 
+      test "record_copy est gelé au Lot 0 (signature seule) : le Lot C l'écrit" do
+        assert_raises(NotImplementedError) { @repository.record_copy(session_id: 1, attempts: [], at: Time.current) }
+      end
+
       test "enregistre chaque tentative une fois et tient les compteurs" do
         started = @repository.start(session: session)
         questions = @exercise.questions.to_a

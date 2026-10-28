@@ -1,4 +1,4 @@
-# ADR-XXXX : Un exercice se fait en une copie rendue d'un seul envoi
+# ADR-0112 : Un exercice se fait en une copie rendue d'un seul envoi
 <!-- index
 titre: Copie à rendre
 statut: Accepté
@@ -17,7 +17,7 @@ problematique: L'élève répond une question à la fois, sans voir le sujet ni 
 
 ## 1. Contexte et problématique
 
-ADR-0054 fait répondre l'élève **une question à la fois** : chaque réponse est un POST, corrigée et figée aussitôt ; la dernière clôt la session. Ce mode convient à un quiz, pas à un exercice qui a un sujet commun (ADR-XXXX-exercice-de-lecon-avec-sujet-et-notion-sans-page) : l'élève doit pouvoir relire le sujet, répondre dans l'ordre qu'il veut, corriger une réponse, puis rendre, comme une interrogation sur feuille.
+ADR-0054 fait répondre l'élève **une question à la fois** : chaque réponse est un POST, corrigée et figée aussitôt ; la dernière clôt la session. Ce mode convient à un quiz, pas à un exercice qui a un sujet commun (ADR-0113) : l'élève doit pouvoir relire le sujet, répondre dans l'ordre qu'il veut, corriger une réponse, puis rendre, comme une interrogation sur feuille.
 
 Le porteur a choisi la **copie à rendre** pour tous les exercices (memo, Q12) : l'ancien écran est retiré, le brouillon vit dans le navigateur, une réponse vide compte faux.
 

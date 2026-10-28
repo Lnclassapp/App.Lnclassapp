@@ -40,8 +40,8 @@
     <div class="min-w-0 flex-1 space-y-1.5">
       <%= link_to exercise.title, exercise_path(exercise.public_id),
                   class: "text-sm font-medium text-ink underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-brand" %>
-      <% if exercise.description.present? %>
-        <p class="line-clamp-2 text-sm text-mute"><%= exercise.description %></p>
+      <% if exercise.statement.present? %>
+        <p class="line-clamp-2 text-sm text-mute"><%= exercise.statement %></p>
       <% end %>
       <%# UDR-0077 §3.3 : type et nombre de questions en une ligne de texte ; le statut de l'équipe reste un badge. %>
       <div class="flex flex-wrap items-center gap-2">

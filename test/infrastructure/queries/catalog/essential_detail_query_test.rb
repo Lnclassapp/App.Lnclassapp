@@ -70,14 +70,14 @@ module Queries
       end
 
       test "each exercise carries its identity, type, description and question count" do
-        exercise = create_exercise(essential: @essential, title: "Méiose", description: "Deux divisions.", exercise_type: "evaluation",
+        exercise = create_exercise(essential: @essential, title: "Méiose", statement: "Deux divisions.", exercise_type: "evaluation",
                                    questions: 3)
         create_exercise(essential: @essential, title: "Vide", questions: 0)
 
         first, empty = detail.exercises
 
         assert_equal [ exercise.public_id, "Méiose", "Deux divisions.", "evaluation", 3 ],
-                     first.to_h.values_at(:public_id, :title, :description, :exercise_type, :questions_count)
+                     first.to_h.values_at(:public_id, :title, :statement, :exercise_type, :questions_count)
         assert_equal 0, empty.questions_count
       end
 

@@ -10,7 +10,7 @@ module Queries
       CourseRow = Data.define(:slug, :name, :status, :level_name, :series_name, :material_name, :material_category)
       # Hors élève : assigned_to_my_classroom vaut false, badge_level (symbole de Grading), best_score_percent et
       # started_session_public_id valent nil.
-      ExerciseRow = Data.define(:public_id, :title, :description, :exercise_type, :status, :questions_count,
+      ExerciseRow = Data.define(:public_id, :title, :statement, :exercise_type, :status, :questions_count,
                                 :assigned_to_my_classroom, :badge_level, :best_score_percent, :started_session_public_id)
       # exercise : l'ExerciseRow proposé pour lever la lacune (ADR-0101 §4.2), ou nil sans exercice publié.
       GapRow = Data.define(:public_id, :opened_at, :exercise)
@@ -20,7 +20,7 @@ module Queries
       HEADER_COLUMNS = %w[essentials.id essentials.slug essentials.name essentials.subtitle essentials.status
                           courses.slug courses.name courses.status levels.name series.name materials.name
                           materials.category].freeze
-      EXERCISE_COLUMNS = %i[id public_id title description exercise_type status].freeze
+      EXERCISE_COLUMNS = %i[id public_id title statement exercise_type status].freeze
       NO_PROGRESS = [ nil, nil, nil ].freeze
 
       # → Row | nil (fiche inconnue, ou lue sous un autre cours). La lecture d'un brouillon est l'affaire de
