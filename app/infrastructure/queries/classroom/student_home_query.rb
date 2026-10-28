@@ -38,8 +38,10 @@ module Queries
       # L'ordre du programme (ADR-0090 §4.2) : le rang de la matière, puis son nom ; une matière sans rang suit, par nom.
       PROGRAM_ORDER = [ Arel.sql("materials.position ASC NULLS LAST"), "materials.name" ].freeze
       HEADER_COLUMNS = [ "classrooms.id", "schools.name", "schools.sigle", "levels.name", "classrooms.name" ].freeze
+      # Un exercice de toute la leçon n'a pas de notion : il suit celles de sa leçon, et le tri Ruby ne compare jamais nil.
+      COALESCE_NOTION_POSITION = Arel.sql("COALESCE(essentials.position, 2147483647)")
       EXERCISE_COLUMNS = [ "exercises.id", "exercises.public_id", "exercises.title", "materials.name", "materials.category",
-                           "materials.slug", "courses.id", "essentials.position", "exercises.position" ].freeze
+                           "materials.slug", "courses.id", COALESCE_NOTION_POSITION, "exercises.position" ].freeze
 
       # today : la date d'Abidjan (Time.zone), qui dit si une échéance est passée.
       # → Row | nil (aucune classe principale active : l'élève n'a pas d'accueil)

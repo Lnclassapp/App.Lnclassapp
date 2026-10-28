@@ -11,13 +11,16 @@ module Queries
       COURSE_COLUMNS = %w[courses.slug courses.name courses.subtitle levels.name series.name materials.name
                           materials.category].freeze
 
-      # → Row | nil (classe inconnue, cours inconnu ou non publié)
+      # → Row | nil (classe inconnue, cours inconnu, non publié ou d'un autre niveau que la classe)
       def call(classroom_public_id:, course_slug:)
-        classroom_id, classroom_name = Orm::Classroom.where(public_id: classroom_public_id).pick(:id, :name)
+        classroom_id, classroom_name, level_id, series_id =
+          Orm::Classroom.where(public_id: classroom_public_id).pick(:id, :name, :level_id, :series_id)
         return if classroom_id.nil?
 
+        # UDR-0013 : une leçon ne se lit dans une classe que si elle est de son niveau (et de sa série, ou sans série).
         course = Orm::Course.joins(:level, :material).left_joins(:series)
-                            .where(slug: course_slug, status: "published").pick(*COURSE_COLUMNS)
+                            .where(slug: course_slug, status: "published", level_id:, series_id: [ nil, series_id ].uniq)
+                            .pick(*COURSE_COLUMNS)
         return if course.nil?
 
         Row.new(classroom_public_id:, classroom_name:, course: CourseRow.new(*course))

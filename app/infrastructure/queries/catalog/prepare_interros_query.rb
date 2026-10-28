@@ -33,9 +33,10 @@ module Queries
       private
 
       def exercises(course_id, team)
-        scope = Orm::Exercise.where(course_id:).order(:position, :id)
-        # ADR-0028 : l'élève lit un exercice publié, non archivé, dont la notion est publiée (celui de toute la leçon n'en a pas).
-        scope = scope.left_joins(:essential).where(status: "published", archived_at: nil)
+        # CA-30 : un exercice archivé ne figure ici pour personne ; l'équipe garde les brouillons.
+        scope = Orm::Exercise.where(course_id:, archived_at: nil).where.not(status: "archived").order(:position, :id)
+        # ADR-0028 : l'élève lit un exercice publié dont la notion est publiée (celui de toute la leçon n'en a pas).
+        scope = scope.left_joins(:essential).where(status: "published")
                      .where("essentials.id IS NULL OR essentials.status = 'published'") unless team
         scope.pluck(*EXERCISE_COLUMNS)
       end

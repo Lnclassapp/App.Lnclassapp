@@ -59,21 +59,19 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_select "##{toggle_id(@classroom, @ex_meiose)} .ui-button-primary"
   end
 
-  test "a teacher whose classroom is of another level sees the « no class at this level » line, without any toggle" do
+  # UDR-0013 : une leçon d'un autre niveau que la classe, atteinte par l'URL, n'existe pas sur la page de la classe.
+  test "a lesson of another level than the classroom is a 404" do
     classroom = create_classroom(name: "6ème 1")
-    teacher = create_teacher(classrooms: [ classroom ])
-    sign_in_as teacher
+    sign_in_as create_teacher(classrooms: [ classroom ])
 
     get classroom_course_path(classroom.public_id, @course.slug)
 
-    assert_response :success
-    assert_select "#assign_targets_none"
-    no_toggle
+    assert_response :not_found
   end
 
   # CA-10 : une leçon sans exercice.
   test "a lesson without exercise shows the empty state and no toggle" do
-    course = create_course
+    course = create_course(level: @course.level, series: @course.series)
     sign_in_as @teacher
 
     get classroom_course_path(@classroom.public_id, course.slug)

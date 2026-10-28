@@ -56,6 +56,8 @@ module Queries
       test "l'élève ne voit ni brouillon, ni archivé, ni notion non publiée, ni exercice d'une autre leçon" do
         create_exercise(essential: @n1, status: "draft", title: "Brouillon")
         create_exercise(essential: @n1, status: "archived", title: "Archivé", archived_at: Time.current)
+        # Seul archived_at écarte celui-ci : son statut dit encore « publié ».
+        create_exercise(essential: @n1, title: "Publié archivé", archived_at: Time.current)
         create_lesson_wide_exercise(course: @course, status: "draft", title: "Large brouillon")
         draft_notion = create_essential(course: @course, name: "Notion brouillon", status: "draft")
         create_exercise(essential: draft_notion, title: "Sous notion brouillon")
@@ -113,6 +115,36 @@ module Queries
         assert_equal [ :due, DUE ], [ states["Ex 2"].kind, states["Ex 2"].due_on ]
         assert_equal [ :score, 70 ], [ states["Ex 3"].kind, states["Ex 3"].score_percent ]
         assert_nil states["Large 1"]
+      end
+
+      test "l'équipe lit les brouillons mais jamais un exercice archivé" do
+        create_exercise(essential: @n1, status: "archived", title: "Archivé", archived_at: Time.current)
+        create_exercise(essential: @n1, title: "Publié archivé", archived_at: Time.current)
+        create_lesson_wide_exercise(course: @course, status: "archived", title: "Large archivé", archived_at: Time.current)
+        create_lesson_wide_exercise(course: @course, status: "draft", title: "Large brouillon")
+        team = Actor.new(user_id: create_team_member.id, role: :team, team_role: "admin")
+
+        prepare = call(team)
+
+        assert_equal [ "Ex 1", "Ex 2", "Ex 3" ], prepare.groups.flat_map(&:exercises).map(&:title)
+        assert_equal [ "Large 1", "Large 2", "Large brouillon" ], prepare.lesson_wide.map(&:title).sort
+      end
+
+      test "une assignation sans échéance ne donne pas « À rendre »" do
+        classroom = create_classroom(level: @course.level)
+        student = create_student(classroom:)
+        create_assignment(classroom:, assignable: @e1, by: create_teacher(classrooms: [ classroom ]), due_on: nil)
+
+        assert_nil states(call(student_actor(student)))["Ex 1"]
+      end
+
+      test "un élève parti de la classe ne voit pas son assignation" do
+        classroom = create_classroom(level: @course.level)
+        student = create_student(classroom:)
+        create_assignment(classroom:, assignable: @e1, by: create_teacher(classrooms: [ classroom ]), due_on: DUE)
+        Orm::ClassroomStudent.where(student_id: student.id).update_all(left_at: 1.day.ago)
+
+        assert_nil states(call(student_actor(student)))["Ex 1"]
       end
 
       test "une assignation rendue laisse la meilleure note" do
