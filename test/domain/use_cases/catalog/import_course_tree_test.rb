@@ -893,6 +893,16 @@ module UseCases
         assert_equal 0, Orm::Course.count
       end
 
+      test "a match on a question that is not matching is refused with match_not_allowed, at its answer" do
+        question = { "content" => "Choisis.", "question_type" => "single_choice",
+                     "answers" => [ { "content" => "A", "correct" => true }, { "content" => "B", "match" => "b" } ] }
+
+        report = run_import(document(question_in_notion(question)))
+
+        assert_equal [ [ "#{QUESTIONS_PATH}.answers[1].match", "match_not_allowed" ] ], report.import_errors.map { [ it["path"], it.dig("params", "rule") ] }
+        assert_equal 0, Orm::Course.count
+      end
+
       test "a match longer than 500 characters is refused by the v2 schema, at its path" do
         answers = %w[a b c].map { { "content" => it, "match" => it.upcase } }
         answers[0]["match"] = "a" * 501

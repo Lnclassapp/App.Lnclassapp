@@ -70,6 +70,14 @@ module Repositories
         assert_equal 3, @repository.find_by_public_id(public_id: started.public_id).answered_count
       end
 
+      test "record_copy : deux tentatives de la même question dans une copie rendent :duplicate, rien n'est écrit" do
+        started = @repository.start(session: session)
+        attempt = { question_id: @exercise.questions.first.id, selected_answer_ids: [], response_text: nil, correct: false, unanswered: true }
+
+        assert_equal :duplicate, @repository.record_copy(session_id: started.id, attempts: [ attempt, attempt ], at: @at)
+        assert_equal 0, Orm::QuestionAttempt.where(exercise_session_id: started.id).count
+      end
+
       # Copie commencée dans l'ancien mode : la tentative existante est gardée, seules les questions sans tentative s'écrivent.
       test "record_copy : une tentative déjà en base est gardée, les autres questions s'écrivent, les compteurs s'additionnent" do
         started = @repository.start(session: session)
