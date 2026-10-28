@@ -8,33 +8,33 @@ Décisions : [ADR-XXXX-exercice-de-lecon-avec-sujet-et-notion-sans-page](../../d
 ## Graphe
 
 ```
-Lot 0 — SOCLE : schéma, contrats, route nouvelle, textes, squelette de la page        (séquentiel)
+Lot 0 — SOCLE : schéma, contrats, route nouvelle, textes, squelette de la page        (porteur, séquentiel)
   ↓
   ├─► Lot A — Fiche de révision et « Voir plus »                   (Touré)        ┐
-  ├─► Lot B — « Prépare interros » : états élève, Assigner, classe (à attribuer)  │ en parallèle
-  ├─► Lot C — Exercice sur feuille et copie à rendre               (à attribuer)  │
-  └─► Lot D — Import v2 et contenu Thalès                          (à attribuer,  ┘
-                                                                     contenu relu par Touré)
+  ├─► Lot B — « Prépare interros » : états élève, Assigner, classe (porteur)      │ en parallèle
+  ├─► Lot C — Exercice sur feuille et copie à rendre               (porteur)      │
+  └─► Lot D — Import v2 et contenu Thalès                          (Touré)        ┘
   ↓
-Lot E — Entrées, redirections, lectures et retrait de l'ancien      (à attribuer, seul)
+Lot E — Entrées, redirections, lectures et retrait de l'ancien      (Touré, seul)
 ```
 
-## Pilotes
+## Pilotes (équipe du 2026-10-28 : le porteur et Touré)
 
-| Lot | Pilote | Pourquoi |
+| Vague | Porteur | Touré |
 |---|---|---|
-| Lot 0 | à attribuer (orchestrateur conseillé) | contrats partagés par tous |
-| Lot A | **Touré** | pilote de la fiche de révision (ex-fiche de cours, chantier `contenu-en-blocs`) |
-| Lot B | à attribuer | |
-| Lot C | à attribuer | |
-| Lot D | à attribuer ; **relecture du contenu Thalès par Touré** | le contenu doit coller à la fiche de révision |
-| Lot E | à attribuer | |
+| 1 | **Lot 0** — socle | prépare le contenu Thalès v2 (8 sujets, 8 exercices) pour le Lot D : il ne dépend pas du code |
+| 2 | **Lot B** — Prépare interros · **Lot C** — copie à rendre | **Lot A** — fiche de révision · **Lot D** — import v2 et contenu Thalès |
+| 3 | challenger des lots A et D | **Lot E** — entrées, redirections, retraits · challenger des lots B et C |
 
-Règle « une PR, un pilote » : tous les lots se fusionnent dans `feature/refonte-page-lecon` ; une seule PR vers `Develop`, pilotée par l'assigné du chantier.
+- Chaque pilote lance un agent `executant-lot` par lot et relit son résultat ; les deux lots d'une même personne tournent en parallèle, dans deux worktrees.
+- Le challenger d'un lot n'en est jamais le pilote : chacun met à l'épreuve les lots de l'autre (parcours nominal et un chemin d'erreur, dans l'application).
+- Charge : porteur = Lot 0, B, C ; Touré = A, D, E et le contenu.
+
+Règle « une PR, un pilote » : tous les lots se fusionnent dans `feature/refonte-page-lecon` ; une seule PR vers `Develop`, assignée au porteur.
 
 ---
 
-## Lot 0 — Socle
+## Lot 0 — Socle · pilote : porteur
 
 - **Couche**       : infrastructure + domaine (contrats) + delivery (squelette) + textes
 - **Fichiers**     : `db/migrate/XXXX_attach_exercises_to_courses.rb`
@@ -82,7 +82,7 @@ Règle « une PR, un pilote » : tous les lots se fusionnent dans `feature/refon
 
 ---
 
-## Lot B — « Prépare interros » : liste, états de l'élève, « Assigner », page de la leçon dans la classe
+## Lot B — « Prépare interros » : liste, états de l'élève, « Assigner », page de la leçon dans la classe · pilote : porteur
 
 - **Couche**       : infrastructure + delivery + ui
 - **Fichiers**     : `app/infrastructure/queries/catalog/prepare_interros_query.rb` (exercices publiés de la leçon dans l'ordre, groupés par notion puis « Toute la leçon » ; état élève : lacune, assignation, meilleure note ; statut pour l'équipe ; cibles d'assignation)
@@ -95,7 +95,7 @@ Règle « une PR, un pilote » : tous les lots se fusionnent dans `feature/refon
 
 ---
 
-## Lot C — Exercice sur feuille, copie à rendre, résultat
+## Lot C — Exercice sur feuille, copie à rendre, résultat · pilote : porteur
 
 - **Couche**       : domaine + infrastructure + delivery + ui
 - **Fichiers**     : `app/domain/dtos/assessment/copy_input.rb`
@@ -116,7 +116,7 @@ Règle « une PR, un pilote » : tous les lots se fusionnent dans `feature/refon
 
 ---
 
-## Lot D — Import `lnclass.course-tree` v2 et contenu Thalès
+## Lot D — Import `lnclass.course-tree` v2 et contenu Thalès · pilote : Touré
 
 - **Couche**       : domaine + infrastructure + ui (aide de l'import) + contenu
 - **Fichiers**     : `config/schemas/lnclass.course-tree.v2.json`
@@ -132,7 +132,7 @@ Règle « une PR, un pilote » : tous les lots se fusionnent dans `feature/refon
 
 ---
 
-## Lot E — Entrées, redirections, lectures et retrait de l'ancien
+## Lot E — Entrées, redirections, lectures et retrait de l'ancien · pilote : Touré
 
 - **Couche**       : delivery + ui + infrastructure (queries) + nettoyage
 - **Fichiers**     : `app/controllers/catalog/essentials_controller.rb` (`show` → 301 `#notion-<slug>`) · `app/controllers/catalog/course_sheets_controller.rb` (301 `#fiche-de-revision`) · `app/controllers/classroom/classroom_essentials_controller.rb` (301)
