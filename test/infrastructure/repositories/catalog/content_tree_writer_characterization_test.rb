@@ -53,8 +53,12 @@ module Repositories
       def snapshot
         taxonomy = { "level_id" => names("levels"), "series_id" => names("series"), "material_id" => names("materials") }
         paths = {}
+        # ADR-XXXX : la position d'un exercice est unique par leçon et sa description est devenue son sujet ; l'instantané les
+        # garde par notion et sous leur ancien nom, et c'est ce que l'on compare ici.
+        first_position = created("exercises").group_by { it["essential_id"] }.transform_values { |rows| rows.map { it["position"] }.min - 1 }
         rows = TABLES.to_h do |table|
           lines = created(table).map do |row|
+            row = row.merge("position" => row["position"] - first_position.fetch(row["essential_id"]), "description" => row["statement"]).except("statement") if table == "exercises"
             path = path_of(table, row, paths)
             paths[[ table, row["id"] ]] = path
             line = row.except(*IGNORED, *ADDED_LATER, "course_id", "essential_id", "exercise_id", "question_id")

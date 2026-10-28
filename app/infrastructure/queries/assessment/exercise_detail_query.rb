@@ -5,7 +5,7 @@ module Queries
   module Assessment
     class ExerciseDetailQuery
       Row = Data.define(:exercise, :essential, :course, :questions)
-      ExerciseRow = Data.define(:public_id, :title, :description, :exercise_type, :status)
+      ExerciseRow = Data.define(:public_id, :title, :statement, :exercise_type, :status)
       EssentialRow = Data.define(:slug, :name)
       CourseRow = Data.define(:slug, :name, :level_name, :series_name, :material_name, :material_category)
       # Sans reveal, explanation, correct, numeric_tolerance et match_content valent nil : leurs colonnes ne sont même pas
@@ -18,7 +18,7 @@ module Queries
         def initialize(match_content: nil, **) = super
       end
 
-      EXERCISE_COLUMNS = %w[exercises.id exercises.public_id exercises.title exercises.description exercises.exercise_type
+      EXERCISE_COLUMNS = %w[exercises.id exercises.public_id exercises.title exercises.statement exercises.exercise_type
                             exercises.status essentials.slug essentials.name courses.slug courses.name levels.name series.name
                             materials.name materials.category].freeze
       QUESTION_COLUMNS = %i[id position content question_type].freeze
@@ -38,9 +38,9 @@ module Queries
       private
 
       def split(values)
-        public_id, title, description, exercise_type, status, essential_slug, essential_name, *course = values
+        public_id, title, statement, exercise_type, status, essential_slug, essential_name, *course = values
         slug, name, level_name, series_name, material_name, material_category = course
-        [ ExerciseRow.new(public_id:, title:, description:, exercise_type:, status:),
+        [ ExerciseRow.new(public_id:, title:, statement:, exercise_type:, status:),
           EssentialRow.new(slug: essential_slug, name: essential_name),
           CourseRow.new(slug:, name:, level_name:, series_name:, material_name:, material_category:) ]
       end

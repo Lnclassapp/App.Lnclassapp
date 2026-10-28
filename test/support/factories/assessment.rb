@@ -4,10 +4,15 @@ module Factories
     ActiveSupport::TestCase.include(self)
 
     # Each question is a single choice among 4 answers; the first one is the correct one.
-    def create_exercise(essential: create_essential, title: "Exercice #{factory_sequence}", position: nil, status: "published",
-                        questions: 2, author: essential.author, **attributes)
-      position ||= essential.exercises.maximum(:position).to_i + 1
-      Orm::Exercise.create!(essential:, title:, position:, author:, **factory_publication(status), **attributes).tap do |exercise|
+    # The exercise belongs to a course: that of its essential, or the given one for a lesson-wide exercise (no essential).
+    def create_exercise(essential: nil, course: nil, lesson_wide: false, title: "Exercice #{factory_sequence}", position: nil,
+                        status: "published", questions: 2, author: nil, **attributes)
+      essential = nil if lesson_wide
+      essential ||= create_essential(course: course || create_course) unless lesson_wide
+      course = essential&.course || course || create_course
+      position ||= Orm::Exercise.where(course_id: course.id).maximum(:position).to_i + 1
+      Orm::Exercise.create!(course:, essential:, title:, position:, author: author || course.author,
+                            **factory_publication(status), **attributes).tap do |exercise|
         questions.times do |index|
           question = exercise.questions.create!(position: index + 1, content: "<p>Question #{index + 1}</p>",
                                                 question_type: "single_choice")
@@ -15,6 +20,9 @@ module Factories
         end
       end
     end
+
+    # An exercise on the whole lesson: no essential.
+    def create_lesson_wide_exercise(course: create_course, **attributes) = create_exercise(course:, lesson_wide: true, **attributes)
 
     # ADR-0105 : une image de question vérifiée et stockée comme par l'envoi de l'équipe, rattachée ou non à une question.
     def create_question_image(question: nil, alt: nil, fixture: "photos/photo.jpg", created_at: nil)

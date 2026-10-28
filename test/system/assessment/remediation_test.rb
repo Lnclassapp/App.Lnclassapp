@@ -28,7 +28,7 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     visit exercise_path(failed.public_id)
     click_on I18n.t("assessment.exercises.student_progress.start")
     play(correct: 0)
-    assert_selector "#session_gap_outcome", text: "Cette fiche de révision passe à revoir."
+    assert_selector "#session_gap_outcome", text: "Cette notion passe à revoir."
 
     visit student_home_path
     within("#student_next_step[data-state=review]") do
@@ -39,7 +39,7 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     within("#essential_exercise_#{offered.public_id}") { click_on I18n.t("catalog.essentials.exercise_progress.start") }
     remediation = play(correct: QUESTIONS)
     assert_equal "remediation", Orm::ExerciseSession.find_by!(public_id: remediation).kind
-    assert_selector "#session_gap_outcome", text: "Fiche de révision levée !"
+    assert_selector "#session_gap_outcome", text: "Notion levée !"
 
     visit student_home_path
     assert_no_selector "#student_next_step[data-state=review]"

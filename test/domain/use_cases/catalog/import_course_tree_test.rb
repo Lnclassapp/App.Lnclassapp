@@ -98,7 +98,7 @@ module UseCases
         assert_equal [ [ "genetique-et-evolution-fiche-1", 1 ], [ "genetique-et-evolution-fiche-2", 2 ] ],
                      node.essentials.map { [ it.slug, it.position ] }
         exercise = node.essentials.first.exercises.first
-        assert_equal [ 14, 1, "fixation", "Consigne 1" ], [ exercise.public_id.length, exercise.position, exercise.exercise_type, exercise.description ]
+        assert_equal [ 14, 1, "fixation", "Consigne 1" ], [ exercise.public_id.length, exercise.position, exercise.exercise_type, exercise.statement ]
         assert_not_equal exercise.public_id, node.essentials.last.exercises.first.public_id
         assert_equal [ [ 1, "Question 1" ], [ 2, "Question 2" ] ], exercise.questions.map { [ it.position, it.content ] }
         assert_equal [ [ 1, true ], [ 2, false ], [ 3, false ] ], exercise.questions.first.answers.map { [ it.position, it.correct ] }

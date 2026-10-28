@@ -25,7 +25,7 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
   setup do
     @course = course = create_course(name: "Génétique et évolution", material: create_material(name: "SVT", category: "science"))
     @essential = create_essential(course:, name: "La méiose")
-    @exercise = create_exercise(essential: @essential, title: "Méiose", description: "Deux divisions successives.")
+    @exercise = create_exercise(essential: @essential, title: "Méiose", statement: "Deux divisions successives.")
   end
 
   def scope = "assessment.exercises"

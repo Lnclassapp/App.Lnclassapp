@@ -9,7 +9,7 @@ module Queries
         course = create_course(name: "Génétique et évolution", level: create_level(name: "Tle"), series: create_series(name: "D"),
                                material: create_material(name: "SVT", category: "science"))
         @essential = create_essential(course:, name: "La méiose")
-        @exercise = create_exercise(essential: @essential, title: "Méiose", description: "Deux divisions successives.",
+        @exercise = create_exercise(essential: @essential, title: "Méiose", statement: "Deux divisions successives.",
                                     exercise_type: "evaluation", questions: 0)
         @second = add_question(position: 2, content: "La méiose produit des cellules haploïdes.", question_type: "true_false",
                                explanation: "n chromosomes.", answers: [ [ "Vrai", true ], [ "Faux", false ] ])
@@ -31,7 +31,7 @@ module Queries
         row = detail(reveal: true)
 
         assert_equal [ @exercise.public_id, "Méiose", "Deux divisions successives.", "evaluation", "published" ],
-                     row.exercise.to_h.values_at(:public_id, :title, :description, :exercise_type, :status)
+                     row.exercise.to_h.values_at(:public_id, :title, :statement, :exercise_type, :status)
         assert_equal [ @essential.slug, "La méiose" ], row.essential.to_h.values_at(:slug, :name)
         assert_equal [ @essential.course.slug, "Génétique et évolution", "Tle", "D", "SVT", "science" ],
                      row.course.to_h.values_at(:slug, :name, :level_name, :series_name, :material_name, :material_category)
@@ -74,7 +74,7 @@ module Queries
         row = ExerciseDetailQuery.new.call(public_id: exercise.public_id, reveal: true)
 
         assert_nil row.course.series_name
-        assert_nil row.exercise.description
+        assert_nil row.exercise.statement
         assert_equal "draft", row.exercise.status
         assert_empty row.questions
       end

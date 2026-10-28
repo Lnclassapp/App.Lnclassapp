@@ -27,8 +27,8 @@
           <%= ui_badge t(".exercise_types.#{exercise.exercise_type}") %>
           <%= ui_badge t(".questions", count: @detail.questions.size) %>
         </div>
-        <% if exercise.description.present? %>
-          <p id="exercise_description" class="mt-4 max-w-prose whitespace-pre-line text-ink"><%= exercise.description %></p>
+        <% if exercise.statement.present? %>
+          <p id="exercise_description" class="mt-4 max-w-prose whitespace-pre-line text-ink"><%= exercise.statement %></p>
         <% end %>
       </section>
       <%= render "student_progress", progress: @progress, exercise: %>
@@ -60,8 +60,8 @@
         </div>
       <% end %>
     </div>
-    <% if exercise.description.present? %>
-      <p id="exercise_description" class="mt-5 max-w-prose whitespace-pre-line text-ink"><%= exercise.description %></p>
+    <% if exercise.statement.present? %>
+      <p id="exercise_description" class="mt-5 max-w-prose whitespace-pre-line text-ink"><%= exercise.statement %></p>
     <% end %>
   <% end %>
 </div>

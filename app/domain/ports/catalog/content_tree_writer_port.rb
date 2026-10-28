@@ -28,7 +28,7 @@ module Ports
               image_description: question.dig("image", "description")&.squish)
         end
       end
-      ExerciseNode = Data.define(:public_id, :essential_id, :title, :description, :exercise_type, :position, :questions)
+      ExerciseNode = Data.define(:public_id, :essential_id, :title, :statement, :exercise_type, :position, :questions)
       EssentialNode = Data.define(:slug, :course_id, :name, :subtitle, :content, :position, :exercises)
       CourseNode = Data.define(:slug, :name, :subtitle, :content, :level_id, :series_id, :material_id, :essentials)
 

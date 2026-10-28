@@ -49,7 +49,7 @@ module Teams
     # Questions et propositions arrivent indexées par fields_for, ou par le clonage du contrôleur nested-form.
     def form_input
       Dtos::Assessment::ExerciseInput.from_params(params.expect(exercise: [
-        :title, :description, :exercise_type,
+        :title, :statement, :exercise_type,
         { questions_attributes: [ [ :content, :explanation, :question_type, :numeric_tolerance, :image_public_id, :image_alt,
                                     :image_description, { answers_attributes: [ [ :content, :correct, :match_content ] ] } ] ] }
       ]).to_h)

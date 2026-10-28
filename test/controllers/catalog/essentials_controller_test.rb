@@ -12,7 +12,7 @@ class Catalog::EssentialsControllerTest < ActionDispatch::IntegrationTest
     @classroom = create_classroom(level: @course.level, series: @course.series)
     @essential = create_essential(course: @course, name: "La méiose", subtitle: "Deux divisions",
                                   content: "<p>Le <strong>brassage</strong> génétique : $2^n$ combinaisons.</p>")
-    @exercise = create_exercise(essential: @essential, title: "Méiose et ADN", description: "Deux divisions successives.",
+    @exercise = create_exercise(essential: @essential, title: "Méiose et ADN", statement: "Deux divisions successives.",
                                 position: 1)
     @student = create_student(classroom: @classroom)
   end

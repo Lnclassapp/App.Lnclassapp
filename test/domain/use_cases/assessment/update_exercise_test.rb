@@ -39,8 +39,8 @@ module UseCases
         question = Question.new(id: 11, position: 1, content: "Ancienne question", explanation: nil, question_type: "true_false",
                                 answers: [ Answer.new(id: 21, position: 1, content: "Vrai", correct: true),
                                            Answer.new(id: 22, position: 2, content: "Faux", correct: false) ])
-        Entities::Assessment::Exercise.new(id: 40, public_id: "ExErCiCe000040", essential_id: 9, position: 3, author_id: 5,
-                                           title: "Méiose", description: "Ancienne consigne", exercise_type: "fixation",
+        Entities::Assessment::Exercise.new(id: 40, public_id: "ExErCiCe000040", course_id: 3, essential_id: 9, position: 3, author_id: 5,
+                                           title: "Méiose", statement: "Ancienne consigne", exercise_type: "fixation",
                                            status:, parents_published: true, questions: [ question ])
       end
 
@@ -51,7 +51,7 @@ module UseCases
         @exercises = FakeExercises.new(stored(status:), sessions:, refuse:)
         @transaction = FakeTransaction.new
         dto = Dtos::Assessment::ExerciseInput.from_params(
-          { title: "Méiose II", description: "Nouvelle consigne", exercise_type: "fixation", questions_attributes: NEW_QUESTION }
+          { title: "Méiose II", statement: "Nouvelle consigne", exercise_type: "fixation", questions_attributes: NEW_QUESTION }
             .merge(fields).with_indifferent_access
         )
         UpdateExercise.new(exercises: @exercises, transaction: @transaction, policy: Policies::Catalog::ManageContentPolicy.new)
@@ -66,7 +66,7 @@ module UseCases
         assert replace
         assert_equal [ 40, "ExErCiCe000040", 9, 3, 5, "draft" ],
                      [ exercise.id, exercise.public_id, exercise.essential_id, exercise.position, exercise.author_id, exercise.status ]
-        assert_equal [ "Méiose II", "Nouvelle consigne" ], [ exercise.title, exercise.description ]
+        assert_equal [ "Méiose II", "Nouvelle consigne" ], [ exercise.title, exercise.statement ]
         assert_equal [ "Nouvelle question" ], exercise.questions.map(&:content)
         assert_equal 1, @transaction.attempts
       end

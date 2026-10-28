@@ -41,6 +41,11 @@ module Repositories
         true
       end
 
+      # Signature seule (Lot 0 de refonte-page-lecon) : le Lot C écrit la copie.
+      def record_copy(session_id:, attempts:, at:)
+        raise NotImplementedError, "#{self.class}#record_copy arrive avec le Lot C"
+      end
+
       def record_attempt(session_id:, question_id:, selected_answer_ids:, correct:, at:, response_text: nil)
         # Savepoint : traduit seulement une violation d'index unique, sans casser la transaction du use case.
         Orm::QuestionAttempt.transaction(requires_new: true) do

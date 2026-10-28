@@ -99,7 +99,7 @@ module UseCases
         assert item.valid?
         node = item.plan
         assert_equal [ 14, @essential.id, "Crossing Over", "Lisez bien.", "evaluation" ],
-                     [ node.public_id.length, node.essential_id, node.title, node.description, node.exercise_type ]
+                     [ node.public_id.length, node.essential_id, node.title, node.statement, node.exercise_type ]
         assert_equal [ [ 1, "Question 1", nil ], [ 2, "Question 2", nil ] ], node.questions.map { [ it.position, it.content, it.explanation ] }
         assert_equal [ [ 1, true ], [ 2, false ], [ 3, false ] ], node.questions.first.answers.map { [ it.position, it.correct ] }
         assert_equal [ @essential.id, "crossing over" ], item.key
@@ -115,7 +115,7 @@ module UseCases
 
         node = validate(root).plan
 
-        assert_equal [ "Méiose", nil ], [ node.title, node.description ]
+        assert_equal [ "Méiose", nil ], [ node.title, node.statement ]
         assert_equal [ [ "Oui", true ], [ "Non", false ], [ "Peut-être", false ] ], node.questions.first.answers.map { [ it.content, it.correct ] }
         assert_equal [ nil, "Parce que." ], node.questions.map(&:explanation)
       end

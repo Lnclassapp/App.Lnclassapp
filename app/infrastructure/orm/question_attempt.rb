@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::QuestionAttempt
-# Rôle : table question_attempts, tentative immuable : une ligne enregistrée ne change plus
-# ADR  : 0036, 0054
+# Rôle : table question_attempts, tentative immuable (unanswered : question laissée vide à la copie) ; une ligne enregistrée ne change plus
+# ADR  : 0036, 0054, XXXX-copie-a-rendre
 module Orm
   class QuestionAttempt < ApplicationRecord
     self.table_name = "question_attempts"

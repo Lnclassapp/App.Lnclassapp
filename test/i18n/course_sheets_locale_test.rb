@@ -4,8 +4,8 @@ require "test_helper"
 class CourseSheetsLocaleTest < ActiveSupport::TestCase
   def t(key, **) = I18n.t("catalog.course_sheets.#{key}", locale: :fr, raise: true, **)
 
-  test "le nom à l'écran est « Fiche de cours » par défaut" do
-    assert_equal "Fiche de cours", t("name")
+  test "le nom à l'écran est « Fiche de révision » (UDR page de la leçon §2)" do
+    assert_equal "Fiche de révision", t("name")
     assert_equal "Fiche de cours", t("show.title")
   end
 

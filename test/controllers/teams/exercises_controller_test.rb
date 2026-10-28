@@ -24,7 +24,7 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
   end
 
   def exercise_params(title: "méiose et ADN", exercise_type: "evaluation", questions: meiosis_questions)
-    { exercise: { title:, description: "Lis bien.", exercise_type:, questions_attributes: questions }.compact }
+    { exercise: { title:, statement: "Lis bien.", exercise_type:, questions_attributes: questions }.compact }
   end
 
   test "a teacher or a student receives 403 on every action, and nothing is written" do
@@ -86,7 +86,7 @@ class Teams::ExercisesControllerTest < ActionDispatch::IntegrationTest
 
     exercise = Orm::Exercise.sole
     assert_equal [ "méiose et ADN", "Lis bien.", "evaluation", "draft", @essential.id, @member.id ],
-                 [ exercise.title, exercise.description, exercise.exercise_type, exercise.status, exercise.essential_id, exercise.author_id ]
+                 [ exercise.title, exercise.statement, exercise.exercise_type, exercise.status, exercise.essential_id, exercise.author_id ]
     assert_equal [ [ 1, "true_false", "Deux divisions." ], [ 2, "single_choice", nil ] ],
                  exercise.questions.map { [ it.position, it.question_type, it.explanation ] }
     assert_equal [ [ "Vrai", true ], [ "Faux", false ], [ "23", true ], [ "46", false ], [ "92", false ] ],

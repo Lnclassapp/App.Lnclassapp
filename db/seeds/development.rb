@@ -51,7 +51,7 @@ essential = Orm::Essential.find_by(course:, name: "La membrane plasmique") ||
             Orm::Essential.create!(course:, name: "La membrane plasmique", position: 1, author: member,
                                    content: "<p>La membrane plasmique délimite la cellule et contrôle les échanges.</p>", **published)
 unless Orm::Exercise.exists?(essential:)
-  exercise = Orm::Exercise.create!(essential:, title: "Reconnaître la membrane", position: 1, author: member, **published)
+  exercise = Orm::Exercise.create!(course:, essential:, title: "Reconnaître la membrane", position: 1, author: member, **published)
   [ [ "La membrane plasmique délimite la cellule.", [ [ "Vrai", true ], [ "Faux", false ] ], "true_false" ],
     [ "Quel est son rôle principal ?", [ [ "Contrôler les échanges", true ], [ "Produire l'énergie", false ],
                                          [ "Stocker l'ADN", false ], [ "Digérer les déchets", false ] ], "single_choice" ] ]

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Assessment::ExerciseSessionRepositoryPort
 # Rôle : contrat des sessions d'exercice et de leurs tentatives immuables
-# ADR  : 0033, 0043, 0054, 0091
+# ADR  : 0033, 0043, 0054, 0091, XXXX-copie-a-rendre
 module Ports
   module Assessment
     module ExerciseSessionRepositoryPort
@@ -28,6 +28,13 @@ module Ports
       # response_text : texte saisi (trous, nombre, ADR-0091), selected_answer_ids vide alors.
       def record_attempt(session_id:, question_id:, selected_answer_ids:, correct:, at:, response_text: nil)
         raise NotImplementedError, "#{self.class} doit implémenter #record_attempt"
+      end
+
+      # Enregistre les tentatives d'une copie, une par question, avec les compteurs de la session (ADR copie à rendre §6).
+      # attempts : [{ question_id:, selected_answer_ids:, response_text:, correct:, unanswered: }]
+      # → :ok | :duplicate (une tentative existait déjà pour cette session)
+      def record_copy(session_id:, attempts:, at:)
+        raise NotImplementedError, "#{self.class} doit implémenter #record_copy"
       end
 
       # → [Entities::Assessment::QuestionAttempt]

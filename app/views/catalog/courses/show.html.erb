@@ -1,9 +1,7 @@
-<%# 🌐 UI · catalog/courses/show — page d'un cours (CA-04, CA-10), pour tous les rôles connectés %>
-<%# Rôle : retour « Cours » (UDR-0054 §3.2), badges, actions du rôle, contenu riche sous KaTeX, fiches essentielles (élève : 3 puis « Voir plus ») ; morphing (B2, B4) %>
-<%# ADR  : 0028, 0035, 0051, 0090, 0110-fiche-de-cours-en-donnees-importees · UDR : 0006, 0007, 0013, 0054, 0057, 0137-fiche-de-cours-a-l-identique-des-maquettes %>
+<%# 🌐 UI · catalog/courses/show — page d'une leçon (CA-04, CA-10), pour tous les rôles connectés %>
+<%# Rôle : retour « Cours » (UDR-0054 §3.2), en-tête, actions du rôle, puis deux sections : « Fiche de révision » et « Prépare interros » ; morphing (B2, B4) %>
+<%# ADR  : 0028, 0035, 0051, 0090, 0110-fiche-de-cours-en-donnees-importees, XXXX-exercice-de-lecon-avec-sujet-et-notion-sans-page · UDR : 0006, 0007, 0013, 0054, XXXX-page-de-la-lecon-fiche-de-revision-et-prepare-interros §3.1 %>
 <% course = @detail.course %>
-<% team = !@status_record.nil? %>
-<% student = current_actor.student? %>
 <% page_title t(".page_title", name: course.name) %>
 <% content_for :nav_key, "courses" %>
 <%# UDR-0054 §3.2 : venu du catalogue filtré (?material=…), le retour y ramène avec son filtre. %>
@@ -21,13 +19,6 @@
           <%= ui_subject_badge course.material_name, category: course.material_category %>
           <%= ui_badge [ course.level_name, course.series_name ].compact.join(" ") %>
         </div>
-        <%# Contenu-en-blocs (chantier 318) : le lien n'existe que si la leçon a une fiche de cours importée. %>
-        <% if Queries::Catalog::CourseSheetQuery.new.exists?(course_slug: course.slug) %>
-          <div>
-            <%= ui_button t("catalog.course_sheets.name"), variant: :secondary, href: course_sheet_path(course.slug),
-                                                         icon: "document-text", id: "course_sheet_link" %>
-          </div>
-        <% end %>
       </div>
       <%= render "role_actions", course:, status_record: @status_record %>
     </div>
@@ -35,37 +26,15 @@
 </div>
 
 <div class="space-y-10">
-  <% if course.content.present? %>
-    <section id="course_content" aria-label="<%= t(".content_title") %>">
-      <%= ui_card padding: :lg do %>
-        <%# Rendu par Action Text, qui l'assainit par sa liste blanche. Au morphing d'un rafraîchissement (B2), un contenu
-            inchangé garde ses formules rendues (élément permanent) ; un contenu modifié change d'empreinte, donc d'id : son
-            conteneur est remplacé, et KaTeX rend le nouveau. Un permanent seul ne serait jamais retiré par le morphing. %>
-        <% content_html = course.content.to_s %>
-        <% digest = Digest::SHA256.hexdigest(content_html).first(16) %>
-        <div id="course_content_<%= digest %>">
-          <div id="course_math_<%= digest %>" data-turbo-permanent data-controller="math"><%= content_html %></div>
-        </div>
-      <% end %>
-    </section>
-  <% end %>
+  <section id="fiche-de-revision" aria-labelledby="revision_title">
+    <h2 id="revision_title" class="mb-4 font-display text-xl font-medium"><%= t(".revision_title") %></h2>
+    <%= render "catalog/courses/revision_sheet", course:, revision: @revision %>
+  </section>
 
-  <%# Ouvrir une fiche la retient (ADR-0090 §4.1) : pas de préchargement au survol, qui la servirait sans l'ouvrir. %>
-  <section id="course_essentials" aria-labelledby="course_essentials_title" data-turbo-prefetch="false">
-    <h2 id="course_essentials_title" class="mb-4 font-display text-xl font-medium"><%= t(".essentials_title") %></h2>
-    <% if @detail.essentials.empty? %>
-      <%= ui_empty_state title: t(".empty"), description: t(".empty_description"), icon: "document-text" %>
-    <% else %>
-      <%# UDR-0013, amendement du 2026-10-02 (UDR-0057 R3) : l'élève voit 3 fiches, puis « Voir plus » ; les autres rôles, la liste complète. %>
-      <%= tag.div(class: "space-y-3", data: (ui_reveal_data if student)) do %>
-        <ul class="divide-y divide-line rounded-card border border-line bg-white shadow-card">
-          <% @detail.essentials.each_with_index do |essential, index| %>
-            <%= render "essential_row", essential:, course_slug: course.slug, show_status: team, student:,
-                                        folded: student && index >= ComponentsHelper::REVEAL_LIMIT %>
-          <% end %>
-        </ul>
-        <%= ui_reveal_more @detail.essentials.size if student %>
-      <% end %>
-    <% end %>
+  <%# Ouvrir la page enregistre la lecture des notions (ADR-XXXX §4.3) : pas de préchargement au survol. %>
+  <section id="prepare-interros" aria-labelledby="prepare_title" data-turbo-prefetch="false">
+    <h2 id="prepare_title" class="mb-2 font-display text-xl font-medium"><%= t(".prepare_title") %></h2>
+    <p class="mb-4 text-mute"><%= t(".prepare_intro") %></p>
+    <%= render "catalog/courses/prepare_interros", course:, prepare: @prepare %>
   </section>
 </div>

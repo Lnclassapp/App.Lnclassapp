@@ -8,7 +8,7 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     course = create_course(name: "Génétique et évolution", level: create_level(name: "Tle"), series: create_series(name: "D"),
                            material: create_material(name: "SVT", category: "science"))
     @essential = create_essential(course:, name: "La méiose")
-    @exercise = create_exercise(essential: @essential, title: "Méiose", description: "Deux divisions successives.",
+    @exercise = create_exercise(essential: @essential, title: "Méiose", statement: "Deux divisions successives.",
                                 exercise_type: "evaluation")
     @exercise.questions.first.update!(explanation: "La méiose compte deux divisions.")
     @correct_ids = Orm::Answer.where(question: @exercise.questions, correct: true).pluck(:id)

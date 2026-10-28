@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::ExerciseRepository
 # Rôle : traduit Orm::Exercise, ses questions, propositions et images ↔ Entities::Assessment::Exercise, avec la publication des parents
-# ADR  : 0035, 0036, 0039, 0054, 0091, 0105
+# ADR  : 0035, 0036, 0039, 0054, 0091, 0105, XXXX-exercice-de-lecon-avec-sujet-et-notion-sans-page
 module Repositories
   module Assessment
     class ExerciseRepository
@@ -16,11 +16,18 @@ module Repositories
         record && map_to_entity(record)
       end
 
-      # Appelé dans la transaction du use case : l'exercice, ses questions et leurs propositions.
+      def for_course(course_id:)
+        hydrated.left_joins(:essential).where(course_id:).order(Arel.sql("essentials.position NULLS LAST, essentials.id NULLS LAST, exercises.position"))
+                .map { map_to_entity(it) }
+      end
+
+      # Appelé dans la transaction du use case : l'exercice, ses questions et leurs propositions. La leçon d'une notion est
+      # celle de la notion : une autre est refusée (la redondance course_id / notion ne se contredit jamais).
       def create(exercise:)
+        course_id = course_of(exercise)
         record = Orm::Exercise.create!(
-          public_id: exercise.public_id, essential_id: exercise.essential_id, author_id: exercise.author_id,
-          position: exercise.position || next_positions(essential_ids: [ exercise.essential_id ]).fetch(exercise.essential_id),
+          public_id: exercise.public_id, course_id:, essential_id: exercise.essential_id, author_id: exercise.author_id,
+          position: exercise.position || next_course_position(course_id),
           status: exercise.status || "draft", **editable_attributes(exercise)
         )
         write_questions(record.id, exercise.questions)
@@ -67,23 +74,36 @@ module Repositories
       end
 
       def draft_public_ids(course_id: nil, essential_id: nil)
-        scope = Orm::Exercise.joins(:essential).where(status: "draft", essentials: { status: "published" })
-        scope = course_id ? scope.where(essentials: { course_id: }) : scope.where(essential_id:)
-        scope.order("essentials.position", "essentials.id", :position, :id).pluck(:public_id)
+        scope = Orm::Exercise.left_joins(:essential).where(status: "draft")
+        # Un exercice de toute la leçon n'a pas de notion à attendre : il suit la leçon.
+        scope = course_id ? scope.where(course_id:).where("exercises.essential_id IS NULL OR essentials.status = 'published'") : scope.where(essential_id:, essentials: { status: "published" })
+        scope.order(Arel.sql("essentials.position NULLS LAST, essentials.id NULLS LAST, exercises.position, exercises.id")).pluck(:public_id)
       end
 
       def next_positions(essential_ids:)
-        maximums = Orm::Exercise.where(essential_id: essential_ids).group(:essential_id).maximum(:position)
-        essential_ids.index_with { |essential_id| maximums.fetch(essential_id, 0) + 1 }
+        course_ids = Orm::Essential.where(id: essential_ids).pluck(:id, :course_id).to_h
+        maximums = Orm::Exercise.where(course_id: course_ids.values).group(:course_id).maximum(:position)
+        essential_ids.index_with { |essential_id| maximums.fetch(course_ids.fetch(essential_id), 0) + 1 }
       end
 
       private
 
-      def hydrated = Orm::Exercise.includes({ essential: :course }, questions: %i[answers image])
+      def hydrated = Orm::Exercise.includes(:course, :essential, questions: %i[answers image])
 
       def editable_attributes(exercise)
-        { title: exercise.title, description: exercise.description, exercise_type: exercise.exercise_type }
+        { title: exercise.title, statement: exercise.statement, exercise_type: exercise.exercise_type }
       end
+
+      def course_of(exercise)
+        return exercise.course_id if exercise.essential_id.nil?
+
+        course_id = Orm::Essential.where(id: exercise.essential_id).pick(:course_id)
+        raise Ports::Assessment::ExerciseRepositoryPort::EssentialOutsideCourse if exercise.course_id && exercise.course_id != course_id
+
+        course_id
+      end
+
+      def next_course_position(course_id) = Orm::Exercise.where(course_id:).maximum(:position).to_i + 1
 
       def write_questions(exercise_id, questions)
         questions.each_with_index do |question, index|
@@ -118,11 +138,11 @@ module Repositories
 
       def map_to_entity(record)
         Entities::Assessment::Exercise.new(
-          id: record.id, public_id: record.public_id, essential_id: record.essential_id, title: record.title,
-          description: record.description, exercise_type: record.exercise_type, position: record.position,
+          id: record.id, public_id: record.public_id, course_id: record.course_id, essential_id: record.essential_id,
+          title: record.title, statement: record.statement, exercise_type: record.exercise_type, position: record.position,
           author_id: record.author_id, status: record.status, published_at: record.published_at,
           archived_at: record.archived_at, questions: record.questions.map { |question| map_question(question) },
-          parents_published: [ record.essential, record.essential.course ].all? { |parent| parent.status == "published" }
+          parents_published: [ record.essential, record.course ].compact.all? { |parent| parent.status == "published" }
         )
       end
 

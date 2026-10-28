@@ -59,7 +59,7 @@ module UseCases
       def exercise_node(exercise, essential_id)
         Node::ExerciseNode.new(
           public_id: SecureRandom.base58(PUBLIC_ID_LENGTH), essential_id:, title: exercise["title"].squish,
-          description: exercise["description"].to_s.strip.presence, exercise_type: exercise["exercise_type"], position: nil,
+          statement: exercise["description"].to_s.strip.presence, exercise_type: exercise["exercise_type"], position: nil,
           questions: exercise["questions"].each_with_index.map { |question, rank| Node::QuestionNode.from_import(question, position: rank + 1) }
         )
       end
