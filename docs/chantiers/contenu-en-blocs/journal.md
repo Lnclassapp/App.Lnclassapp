@@ -44,7 +44,14 @@
 
 **Fichiers partagés touchés (conflits probables avec le Lot F)** : `course_sheet.css` (un `@import`), `test/design/design_tokens_test.rb` (liste exacte des imports), `test/integration/catalog/course_sheet_seeds_test.rb` (« sur 2 »), `script/ci/test_timings.yml`.
 
-**Poids** : JS commun 60,33 Ko gzip avant, 60,60 Ko après (plafond du test : 61 Ko) ; chaque chunk de lentille ~1,5 Ko gzip, chargé à la demande. Budget des tests système : 8,5 s sur 15 s consommées par ce chantier, il reste ~6,5 s pour le Lot F.
+**Poids** : JS commun 60,33 Ko gzip avant, 60,60 Ko après (plafond du test : 61 Ko) ; chaque chunk de lentille ~1,5 Ko gzip, chargé à la demande. Budget des tests système : voir « Corrections après revue ».
+
+**Corrections après revue (erreurs silencieuses, tests)**
+- Coquilles Stimulus : le `try/catch` n'entoure plus que `import()` ; une erreur du constructeur remonte en vraie erreur. `attach()` et l'écouteur de clic se posent après `render()` / `load()`, juste avant `data-ready`.
+- Cache Turbo : `reset()` sur `turbo:before-cache@document` (modèle `argument_highlighter`) détruit la vue, remet le HTML et les `data-d/h/f` du serveur et retire `data-ready`. Le serveur garde l'état de départ ; `load()` continue d'écrire `data-f/d/h` (le test s'en sert comme énoncé de référence), `reset()` les remet.
+- Image qui existe mais sort du dessin (|OA′| ≥ 40 cm, ex. d = 3,1 et f = 3 → 93 cm) : statut dédié `status_far` côté serveur (`lens_status`) et côté JS ; le commentaire de `IMAGE_MAX` dit enfin que la règle porte sur l'image, pas sur l'objet.
+- Tests : `touch-action: none` vérifié sur les deux dessins ; leçon v2 importée par la vraie chaîne `course_tree` puis la fiche dessus ; graine jouée sur les deux leçons ; assertions à comptes exacts et à attente (`exact_text`) ; le cache Turbo est joué par un événement `turbo:before-cache`. Pas de glissement tactile Selenium sur la construction : `touch-action` et les zones de 44 px sont vérifiés, le geste de la souris passe par les mêmes événements pointeur.
+- Budget système : le fichier prend environ 11,6 s mesurées (le script `record_timings` en note 8,4 : il perd la première ligne, coupée par le message de Puma). Avec les 7,5 s du Lot F, le chantier dépasse les 15 s : à arbitrer par l'orchestrateur (candidat : fusionner « page de leçon » dans un autre test).
 
 **Point ouvert** : `bin/check-asset-budget` plafonne encore à 60 Ko alors que l'ADR-0114 et `javascript_bundle_test` disent 61 Ko (la base de 60,33 Ko dépassait déjà 60) ; à aligner par l'orchestrateur.
 

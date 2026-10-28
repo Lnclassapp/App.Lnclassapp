@@ -26,6 +26,9 @@ export class LensConstruction {
     this.abort = new AbortController()
     const { signal } = this.abort
 
+    // Les gestes ne s'installent qu'une fois le premier énoncé dessiné : une erreur de load() ne laisse pas un exercice à moitié vivant.
+    this.load(Math.floor(Math.random() * PROBLEMS.length))
+    this.renderScore()
     attach(element.querySelector("svg"), signal, {
       width: WIDTH,
       height: HEIGHT,
@@ -33,8 +36,6 @@ export class LensConstruction {
       key: (_hit, [dx, dy]) => this.place({ x: this.mark.x + dx * TOLERANCE, y: this.mark.y - dy * TOLERANCE })
     })
     element.addEventListener("click", (event) => this.click(event), { signal })
-    this.load(Math.floor(Math.random() * PROBLEMS.length))
-    this.renderScore()
     element.dataset.ready = "true"
   }
 

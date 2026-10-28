@@ -15,7 +15,7 @@
   marker = [ o + 5 * scale, ax + scale ]
   texts = t(".js").merge(score: t("#{i18n}.score", ok: "{ok}", total: "{total}"), solution_show: t("#{i18n}.solution"))
 %>
-<%= tag.section class: "sheet-practice sheet-lens-practice", data: { controller: ctrl, f:, d:, h:, texts: } do %>
+<%= tag.section class: "sheet-practice sheet-lens-practice", data: { controller: ctrl, action: "turbo:before-cache@document->#{ctrl}#reset", f:, d:, h:, texts: } do %>
   <span class="sheet-practice-badge"><%= t(".badge") %></span>
   <div class="sheet-practice-head">
     <b class="sheet-score" role="status" aria-live="polite" data-role="score"><%= t("#{i18n}.score", ok: 0, total: 0) %></b>

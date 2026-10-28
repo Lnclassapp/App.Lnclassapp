@@ -21,6 +21,8 @@ export class LensSimulator {
     this.abort = new AbortController()
     const { signal } = this.abort
 
+    // Les gestes ne s'installent qu'une fois le premier dessin réussi : une erreur de render() ne laisse pas une figure à moitié vivante.
+    this.render()
     attach(element.querySelector("svg"), signal, {
       width: WIDTH,
       height: HEIGHT,
@@ -28,7 +30,6 @@ export class LensSimulator {
       key: (hit, [dx, dy], fine) => this.nudge(hit, dx, dy, fine ? 0.1 : 0.5)
     })
     element.addEventListener("click", (event) => this.click(event), { signal })
-    this.render()
     element.dataset.ready = "true"
   }
 
@@ -107,14 +108,16 @@ export class LensSimulator {
     this.q("size").textContent = `${cm(h)} / ${image ? cm(Math.abs(image.gain) * h) : t.none_value}`
     this.q("application").textContent = t[`application_${kind ?? "none"}`]
 
-    let [oap, nature, status, tone] = [t.oap_infinite, t.nature_none, t.status_none, "warning"]
-    if (image?.virtual) [oap, nature, status, tone] = [fill(t.oap_virtual, { value: fr(-image.distance) }), t.nature_virtual, t.status_virtual, "note"]
-    else if (image) [oap, nature, status, tone] = [fill(t.oap_real, { value: fr(image.distance) }), fill(t.nature_real, { size: t[`size_${sizeOf(image.gain)}`] }), t.status_real, "success"]
+    let [oap, nature, tone] = [t.oap_infinite, t.nature_none, "warning"]
+    if (image?.virtual) [oap, nature, tone] = [fill(t.oap_virtual, { value: fr(-image.distance) }), t.nature_virtual, "note"]
+    else if (image) [oap, nature, tone] = [fill(t.oap_real, { value: fr(image.distance) }), fill(t.nature_real, { size: t[`size_${sizeOf(image.gain)}`] }), "success"]
+    // Une image qui existe mais sort du dessin (OA′ ≥ 40 cm) le dit : sinon la figure semble vide sans raison.
+    const state = image === null ? "none" : shown ? (image.virtual ? "virtual" : "real") : "far"
     this.q("oap").textContent = oap
     this.q("nature").textContent = nature
     this.q("nature").dataset.tone = tone
-    this.q("status").textContent = status
-    this.q("status").dataset.tone = tone
+    this.q("status").textContent = t[`status_${state}`]
+    this.q("status").dataset.tone = { none: "warning", far: "warning", virtual: "note", real: "success" }[state]
 
     for (const button of this.element.querySelectorAll("[data-preset]")) {
       if (button.dataset.preset === kind) button.setAttribute("aria-current", "true")

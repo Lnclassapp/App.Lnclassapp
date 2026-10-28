@@ -63,6 +63,20 @@ class Catalog::CourseSheetLensHelperTest < ActionView::TestCase
     assert_nil lens_application(3, 3)
   end
 
+  test "the status tells a real, a virtual, an absent and a too distant image apart" do
+    assert_equal :real, lens_status(scene(d: 8, f: 3).image)
+    assert_equal :virtual, lens_status(scene(d: 2, f: 4).image)
+    assert_equal :none, lens_status(scene(d: 3, f: 3).image)
+    # d = 3,1 et f = 3 : l'image existe (OA′ = 93 cm) mais sort du dessin, ce n'est ni « absente » ni « réelle »
+    far = scene(d: 3.1, f: 3).image
+    assert_in_delta 93.0, far.distance
+    assert_not lens_image_shown?(far)
+    assert_equal :far, lens_status(far)
+    assert_equal :far, lens_status(scene(d: 6.9, f: 7).image)
+    assert lens_image_shown?(scene(d: 8, f: 3).image)
+    assert_not lens_image_shown?(nil)
+  end
+
   test "the size compares the gain to one, with a small margin for the same size" do
     assert_equal :bigger, lens_size(-2)
     assert_equal :bigger, lens_size(1.5)

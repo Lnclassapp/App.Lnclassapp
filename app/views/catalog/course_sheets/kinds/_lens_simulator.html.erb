@@ -14,21 +14,24 @@
   scale = 20
   scene = lens_scene(o:, ax:, s: scale, w: 560, d:, h:, f:)
   image = scene.image
-  shown = image.present? && image.distance.abs < Catalog::CourseSheetLensHelper::IMAGE_MAX
+  shown = lens_image_shown?(image)
+  state = lens_status(image)
   object = [ o - d * scale, ax - h * scale ]
   tip = image ? [ image.x, image.y ] : [ o, ax ]
   application = lens_application(d, f)
   cm = ->(value) { t(".js.cm", value: lens_number(value)) }
-  size, nature, status, oap =
+  size, nature, oap =
     if image.nil?
-      [ t(".js.none_value"), t(".js.nature_none"), t(".js.status_none"), t(".js.oap_infinite") ]
+      [ t(".js.none_value"), t(".js.nature_none"), t(".js.oap_infinite") ]
     elsif image.virtual
-      [ cm.(image.gain.abs * h), t(".js.nature_virtual"), t(".js.status_virtual"), t(".js.oap_virtual", value: lens_number(-image.distance)) ]
+      [ cm.(image.gain.abs * h), t(".js.nature_virtual"), t(".js.oap_virtual", value: lens_number(-image.distance)) ]
     else
-      [ cm.(image.gain.abs * h), t(".js.nature_real", size: t(".js.size_#{lens_size(image.gain)}")), t(".js.status_real"), t(".js.oap_real", value: lens_number(image.distance)) ]
+      [ cm.(image.gain.abs * h), t(".js.nature_real", size: t(".js.size_#{lens_size(image.gain)}")), t(".js.oap_real", value: lens_number(image.distance)) ]
     end
+  status = t(".js.status_#{state}")
   tone = image.nil? ? "warning" : (image.virtual ? "note" : "success")
-  data = { controller: ctrl, d:, h:, f:, grid:, texts: t(".js") }
+  status_tone = { none: "warning", far: "warning", virtual: "note", real: "success" }.fetch(state)
+  data = { controller: ctrl, action: "turbo:before-cache@document->#{ctrl}#reset", d:, h:, f:, grid:, texts: t(".js") }
 %>
 <%= tag.figure class: "sheet-figure sheet-lens", data: do %>
   <svg class="sheet-lens-svg" viewBox="0 0 560 300" role="group" aria-label="<%= t(".label") %>">
@@ -75,7 +78,7 @@
       <% end %>
       <li class="sheet-muted"><%= t(".dashed") %></li>
     </ul>
-    <div class="sheet-lens-status" role="status" aria-live="polite" data-role="status" data-tone="<%= tone %>"><%= status %></div>
+    <div class="sheet-lens-status" role="status" aria-live="polite" data-role="status" data-tone="<%= status_tone %>"><%= status %></div>
     <div class="sheet-lens-actions">
       <% { "photo" => :photo, "projector" => :projector, "magnifier" => :magnifier }.each do |preset, name| %>
         <%= tag.button t(".preset_#{preset}"), type: "button", class: "sheet-btn", data: { preset: }, "aria-current": (application == name ? "true" : nil) %>

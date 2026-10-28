@@ -17,10 +17,10 @@ class Catalog::CourseSheetLensDocumentTest < ActionDispatch::IntegrationTest
     @document = JSON.parse(PATH.read)
   end
 
-  def import(document)
+  def import(document, kind: "course_sheet")
     file = Rack::Test::UploadedFile.new(StringIO.new(document.to_json), "application/json", original_filename: "lentilles.json")
     perform_enqueued_jobs do
-      post teams_imports_path, params: { import: { kind: "course_sheet", files: [ file ] } }, as: :turbo_stream
+      post teams_imports_path, params: { import: { kind:, files: [ file ] } }, as: :turbo_stream
     end
     Orm::ImportReport.order(:id).last
   end
@@ -44,6 +44,20 @@ class Catalog::CourseSheetLensDocumentTest < ActionDispatch::IntegrationTest
     assert_equal "teal", Orm::CourseSheet.find_by!(course_id: @course.id).theme
   end
 
+  test "the lesson imports through the course-tree chain, then the sheet lands on that very lesson" do
+    @course.destroy!
+    sign_in_as create_team_member(team_role: "content")
+
+    lesson_report = import(JSON.parse(LESSON_PATH.read), kind: "course_tree")
+    course = Orm::Course.find_by!(slug: @document["course"])
+    sheet_report = import(@document)
+
+    assert_equal [ "completed", 0 ], [ lesson_report.status, lesson_report.error_count ], lesson_report.inspect
+    assert_equal [ "completed", 1, 0 ], [ sheet_report.status, sheet_report.imported_count, sheet_report.error_count ], sheet_report.inspect
+    assert_equal [ course.id ], Orm::CourseSheet.pluck(:course_id)
+    assert_equal "Les lentilles", course.name
+  end
+
   test "the imported sheet reads: three pages, seven figures, the simulator, the construction, seven exercises, the lexicon" do
     sign_in_as create_team_member(team_role: "content")
     import(@document)
@@ -56,11 +70,11 @@ class Catalog::CourseSheetLensDocumentTest < ActionDispatch::IntegrationTest
     assert_select "[data-screen-label]", 3
     assert_select "h1", text: "Les lentilles"
     assert_select ".sheet-lens-diagram", 7
-    assert_select ".sheet-lens-diagram svg", minimum: 7
+    assert_select ".sheet-lens-diagram svg", 13
     assert_select "#{SIMULATOR} svg circle[data-hit]", 3
     assert_select "#{CONSTRUCTION} svg circle[data-hit='marker']", 1
     assert_select ".sheet-card[data-controller~='course-sheet--exercise']", 7
-    assert_select "button.sheet-word", minimum: 15
+    assert_select "button.sheet-word", 17
     assert_select ".sheet-screen[data-course-sheet--glossary-glossary-value*='Image virtuelle']"
     assert_select "p", text: I18n.t("catalog.course_sheets.block.unavailable"), count: 0
   end
@@ -82,12 +96,24 @@ class Catalog::CourseSheetLensDocumentTest < ActionDispatch::IntegrationTest
     read_blocks({ "type" => "media", "kind" => "lens_simulator", "params" => { "d" => 2, "h" => 1.5, "f" => 4 } },
                 { "type" => "media", "kind" => "lens_simulator", "params" => { "d" => 3, "h" => 1.5, "f" => 3 } })
 
-    assert_select "#{SIMULATOR}:first-of-type [data-role='nature']", text: I18n.t("catalog.course_sheets.kinds.lens_simulator.js.nature_virtual")
-    assert_select "#{SIMULATOR}:first-of-type .sheet-lens-ray[data-virtual='true']", 4
-    assert_select "#{SIMULATOR}:first-of-type button[data-preset='magnifier'][aria-current='true']"
-    assert_select "#{SIMULATOR}:last-of-type [data-role='nature']", text: I18n.t("catalog.course_sheets.kinds.lens_simulator.js.nature_none")
-    assert_select "#{SIMULATOR}:last-of-type [data-role='image'][data-visible='false']"
-    assert_select "#{SIMULATOR}:last-of-type [data-role='oap']", text: I18n.t("catalog.course_sheets.kinds.lens_simulator.js.oap_infinite")
+    virtual, focus = css_select(SIMULATOR)
+    assert_equal [ "2.0", "3.0" ], [ virtual, focus ].map { it["data-d"] }
+    assert_select virtual, "[data-role='nature']", text: I18n.t("catalog.course_sheets.kinds.lens_simulator.js.nature_virtual")
+    assert_select virtual, ".sheet-lens-ray[data-virtual='true']", 4
+    assert_select virtual, "button[data-preset='magnifier'][aria-current='true']"
+    assert_select focus, "[data-role='nature']", text: I18n.t("catalog.course_sheets.kinds.lens_simulator.js.nature_none")
+    assert_select focus, "[data-role='image'][data-visible='false']"
+    assert_select focus, "[data-role='oap']", text: I18n.t("catalog.course_sheets.kinds.lens_simulator.js.oap_infinite")
+    assert_select focus, "[data-role='status']", text: I18n.t("catalog.course_sheets.kinds.lens_simulator.js.status_none")
+  end
+
+  test "an image too far to be drawn says so instead of leaving an empty figure" do
+    read_blocks({ "type" => "media", "kind" => "lens_simulator", "params" => { "d" => 3.1, "h" => 1.5, "f" => 3 } })
+
+    assert_select "#{SIMULATOR} [data-role='image'][data-visible='false']"
+    assert_select "#{SIMULATOR} [data-role='status'][data-tone='warning']", text: I18n.t("catalog.course_sheets.kinds.lens_simulator.js.status_far")
+    assert_select "#{SIMULATOR} [data-role='oap']", text: I18n.t("catalog.course_sheets.kinds.lens_simulator.js.oap_real", value: "93")
+    assert_select "#{SIMULATOR} .sheet-lens-ray", 5
   end
 
   test "a simulator without params, with out-of-range or unreadable params, starts inside the bounds" do

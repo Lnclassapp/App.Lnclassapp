@@ -17,13 +17,15 @@ class Catalog::CourseSheetLensTest < ApplicationSystemTestCase
   # Les contrôleurs Stimulus chargent leur logique à la demande : `data-ready` dit que la figure répond aux gestes.
   def ready(scope) = assert_selector("#{scope}[data-ready='true']")
   def metric(script) = page.evaluate_script(script)
-  # Les textes de la figure d'un coup (un aller-retour avec le navigateur) : { "oa" => "8 cm", … } et "virtual" : le nombre de rayons en pointillés.
-  def read(scope)
-    page.evaluate_script(<<~JS)
-      Object.assign(Object.fromEntries([ ...document.querySelectorAll("#{scope} [data-role]") ].map((e) => [ e.dataset.role, e.textContent.trim() ])),
-        { virtual: document.querySelectorAll("#{scope} .sheet-lens-ray[data-virtual='true']").length })
-    JS
+  # Chaque texte de la figure, attendu en entier (Capybara patiente le temps du rendu) : shows(SIMULATOR, oa: "8 cm", f: "3 cm")
+  def shows(scope, **texts)
+    texts.each { |name, text| assert_selector "#{scope} [data-role='#{name.to_s.tr('_', '-')}']", exact_text: text, visible: :all }
   end
+
+  def before_cache = page.execute_script("document.dispatchEvent(new CustomEvent('turbo:before-cache'))")
+
+  def assert_rays(scope, virtual:) = assert_selector("#{scope} .sheet-lens-ray[data-virtual='true']", count: virtual, visible: :all)
+
   def scroll_to(scope) = page.execute_script("document.querySelector(\"#{scope} svg\").scrollIntoView({ block: 'center' })")
 
   def open_sheet(visit: true)
@@ -56,25 +58,25 @@ class Catalog::CourseSheetLensTest < ApplicationSystemTestCase
     within(".sheet-bubble") { assert_text "Qui rassemble." }
 
     ready(SIMULATOR)
-    now = read(SIMULATOR)
-    assert_equal [ sim("js.application_photo"), sim("js.nature_real", size: sim("js.size_smaller")), 0 ], now.values_at("application", "nature", "virtual")
+    shows(SIMULATOR, application: sim("js.application_photo"), nature: sim("js.nature_real", size: sim("js.size_smaller")), status: sim("js.status_real"))
+    assert_rays SIMULATOR, virtual: 0
     assert_selector "#{SIMULATOR} [data-role='image'] [data-role='image-line'][data-virtual='false']", visible: :all
+    assert_selector "#{SIMULATOR} button[data-preset='photo'][aria-current='true']"
 
     # B de 8 cm à 1,5 cm de la lentille : en deçà du foyer (3 cm), l'image devient virtuelle (CA-10)
     drag(SIMULATOR, "B", x: 270, y: 130)
-    now = read(SIMULATOR)
-    assert_equal [ sim("js.application_magnifier"), sim("js.nature_virtual"), "1,5 cm", sim("js.status_virtual") ], now.values_at("application", "nature", "oa", "status")
-    assert_operator now["virtual"], :>=, 3
+    shows(SIMULATOR, application: sim("js.application_magnifier"), nature: sim("js.nature_virtual"), oa: "1,5 cm", status: sim("js.status_virtual"))
+    assert_rays SIMULATOR, virtual: 4
     assert_selector "#{SIMULATOR} [data-role='image-line'][data-virtual='true']", visible: :all
     assert_selector "#{SIMULATOR} button[data-preset='magnifier'][aria-current='true']"
+    assert_no_selector "#{SIMULATOR} button[data-preset='photo'][aria-current]"
 
     press(SIMULATOR, sim("preset_projector"))
-    now = read(SIMULATOR)
-    assert_equal [ sim("js.application_projector"), sim("js.nature_real", size: sim("js.size_bigger")), 0, sim("js.status_real"), "4 cm" ],
-                 now.values_at("application", "nature", "virtual", "status", "oa")
+    shows(SIMULATOR, application: sim("js.application_projector"), nature: sim("js.nature_real", size: sim("js.size_bigger")), status: sim("js.status_real"), oa: "4 cm")
+    assert_rays SIMULATOR, virtual: 0
 
     press(SIMULATOR, sim("preset_magnifier"))
-    assert_equal [ "2 cm", "4 cm", sim("js.oap_virtual", value: "4") ], read(SIMULATOR).values_at("oa", "f", "oap")
+    shows(SIMULATOR, oa: "2 cm", f: "4 cm", oap: sim("js.oap_virtual", value: "4"))
 
     press(SIMULATOR, sim("js.grid_hide"))
     assert_selector "#{SIMULATOR} [data-role='grid'][data-visible='false']", visible: :all
@@ -83,28 +85,39 @@ class Catalog::CourseSheetLensTest < ApplicationSystemTestCase
 
     # F′ glisse sur l'axe : f passe de 4 à 5 cm
     drag(SIMULATOR, "Fp", x: 400, y: 170)
-    assert_equal "5 cm", read(SIMULATOR)["f"]
+    shows(SIMULATOR, f: "5 cm")
 
     # Les flèches déplacent le foyer F, Majuscule pour de petits pas ; B suit aussi le clavier
     press(SIMULATOR, sim("preset_photo"))
     find("#{SIMULATOR} circle[data-hit='F']").send_keys(:left)
-    assert_equal "3,5 cm", read(SIMULATOR)["f"]
+    shows(SIMULATOR, f: "3,5 cm")
     find("#{SIMULATOR} circle[data-hit='F']").send_keys([ :shift, :right ])
-    assert_equal "3,4 cm", read(SIMULATOR)["f"]
+    shows(SIMULATOR, f: "3,4 cm")
     find("#{SIMULATOR} circle[data-hit='B']").send_keys(:left)
-    assert_equal "12,5 cm", read(SIMULATOR)["oa"]
+    shows(SIMULATOR, oa: "12,5 cm")
 
     # L'objet au foyer : les rayons ressortent parallèles, pas d'image nette
     press(SIMULATOR, sim("preset_projector"))
     find("#{SIMULATOR} circle[data-hit='Fp']").send_keys(:right, :right)
-    assert_equal [ sim("js.nature_none"), sim("js.oap_infinite"), sim("js.application_none") ], read(SIMULATOR).values_at("nature", "oap", "application")
+    shows(SIMULATOR, nature: sim("js.nature_none"), oap: sim("js.oap_infinite"), application: sim("js.application_none"), status: sim("js.status_none"))
+
+    # Juste au-delà du foyer (d = 3,1 cm, f = 3 cm) l'image existe, à 93 cm : trop loin pour le dessin, la figure le dit
+    press(SIMULATOR, sim("preset_projector"))
+    find("#{SIMULATOR} circle[data-hit='B']").send_keys(*Array.new(9) { [ :shift, :right ] })
+    shows(SIMULATOR, oa: "3,1 cm", f: "3 cm", oap: sim("js.oap_real", value: "93"), status: sim("js.status_far"))
+    assert_selector "#{SIMULATOR} [data-role='image'][data-visible='false']", visible: :all
+
+    # Avant le cache de Turbo la figure revient à l'état du serveur : le retour arrière ne la montre pas à moitié jouée
+    before_cache
+    assert_no_selector "#{SIMULATOR}[data-ready]"
+    shows(SIMULATOR, oa: "8 cm", f: "3 cm", status: sim("js.status_real"))
   end
 
   test "the construction counts the score once per prompt, accepts the image point placed right, and shows the solution" do
     open_sheet
     ready(CONSTRUCTION)
     scroll_to(CONSTRUCTION)
-    assert_text t("practice.score", ok: 0, total: 0)
+    shows(CONSTRUCTION, score: t("practice.score", ok: 0, total: 0), message: "")
 
     answer = lambda do
       f, d, h = %w[f d h].map { find(CONSTRUCTION)["data-#{it}"].to_f }
@@ -115,27 +128,35 @@ class Catalog::CourseSheetLensTest < ApplicationSystemTestCase
     x, y = answer.call
     drag(CONSTRUCTION, "marker", x:, y:)
     press(CONSTRUCTION, t("practice.check"))
-    assert_match(/\A#{Regexp.escape(t('kinds.lens_construction.js.right_start'))}/, role(CONSTRUCTION, "message").text)
-    assert_text t("practice.score", ok: 1, total: 1)
+    assert_selector "#{CONSTRUCTION} [data-role='message'][data-state='correct']", text: /\A#{Regexp.escape(t('kinds.lens_construction.js.right_start'))}/
+    shows(CONSTRUCTION, score: t("practice.score", ok: 1, total: 1))
     press(CONSTRUCTION, t("practice.check"))
-    assert_text t("practice.score", ok: 1, total: 1)
+    shows(CONSTRUCTION, score: t("practice.score", ok: 1, total: 1))
+    assert_no_text t("practice.score", ok: 2, total: 2)
 
     # Le marqueur se pousse aussi aux flèches : le message s'efface, la réponse n'est plus juste
     find("#{CONSTRUCTION} circle[data-hit='marker']").send_keys(:left)
-    assert_equal "", role(CONSTRUCTION, "message").text
+    shows(CONSTRUCTION, message: "")
 
     press(CONSTRUCTION, t("practice.solution"))
     assert_selector "#{CONSTRUCTION} [data-role='solution'][data-visible='true'] .sheet-lens-ray", minimum: 3, visible: :all
     press(CONSTRUCTION, t("kinds.lens_construction.js.solution_hide"))
     assert_selector "#{CONSTRUCTION} [data-role='solution'][data-visible='false']", visible: :all
 
-    prompt = role(CONSTRUCTION, "prompt").text
+    # L'énoncé suivant est un autre énoncé, écrit en entier d'après ses valeurs (f, OA, AB)
+    before = %w[f d h].map { find(CONSTRUCTION)["data-#{it}"] }
     press(CONSTRUCTION, t("practice.next"))
-    assert_no_text prompt
-    assert_equal "", role(CONSTRUCTION, "message").text
+    assert_no_selector "#{CONSTRUCTION}[data-f='#{before[0]}'][data-d='#{before[1]}'][data-h='#{before[2]}']"
+    f, d, h = %w[f d h].map { find(CONSTRUCTION)["data-#{it}"].to_f }
+    number = ->(value) { value.to_s.delete_suffix(".0").tr(".", ",") }
+    shows(CONSTRUCTION, prompt: t("kinds.lens_construction.js.prompt", f: number.(f), h: number.(h), d: number.(d)), message: "")
     press(CONSTRUCTION, t("practice.check"))
-    assert_equal t("kinds.lens_construction.js.wrong"), role(CONSTRUCTION, "message").text
-    assert_text t("practice.score", ok: 1, total: 2)
+    shows(CONSTRUCTION, message: t("kinds.lens_construction.js.wrong"), score: t("practice.score", ok: 1, total: 2))
+
+    before_cache
+    assert_no_selector "#{CONSTRUCTION}[data-ready]"
+    shows(CONSTRUCTION, score: t("practice.score", ok: 0, total: 0), message: "")
+    assert_selector "#{CONSTRUCTION}[data-f='2'][data-d='3'][data-h='1.5']"
   end
 
   test "at 390 px the lens sheet does not scroll sideways and every handle is a 44 px target" do
@@ -161,12 +182,15 @@ class Catalog::CourseSheetLensTest < ApplicationSystemTestCase
         assert_operator sizes.min, :>=, 44, "#{scope} : #{sizes}"
       end
 
+      # Le doigt déplace les poignées sans faire défiler la page : touch-action vaut none sur les deux dessins
+      assert_equal [ "none", "none" ], metric("[ ...document.querySelectorAll(\"#{SIMULATOR} svg, #{CONSTRUCTION} svg\") ].map((e) => getComputedStyle(e).touchAction)")
+
       buttons = metric("[ ...document.querySelectorAll(\".sheet-lens-panel .sheet-btn, .sheet-practice .sheet-btn\") ].map((e) => Math.round(e.getBoundingClientRect().height))")
       assert_operator buttons.min, :>=, 44
 
       # La figure se manipule au doigt : B se déplace avec les mêmes gestes qu'à la souris
       drag(SIMULATOR, "B", x: 270, y: 130)
-      assert_equal sim("js.application_magnifier"), read(SIMULATOR)["application"]
+      shows(SIMULATOR, application: sim("js.application_magnifier"))
       assert_operator metric("document.documentElement.scrollWidth"), :<=, 390
     end
   end
@@ -177,6 +201,6 @@ class Catalog::CourseSheetLensTest < ApplicationSystemTestCase
     visit course_path(@course.slug)
     click_on I18n.t("catalog.courses.show.revision_more")
     ready(SIMULATOR)
-    assert_equal sim("js.application_photo"), read(SIMULATOR)["application"]
+    shows(SIMULATOR, application: sim("js.application_photo"))
   end
 end

@@ -11,7 +11,7 @@ module Catalog
 
     # À moins de 0,06 cm du foyer, les rayons ressortent parallèles : pas d'image nette.
     FOCUS_TOLERANCE = 0.06
-    # Objet à plus de 40 cm de la lentille : l'image est trop loin pour le dessin, elle n'est pas tracée.
+    # Image à 40 cm ou plus de la lentille (|OA′|) : trop loin pour le dessin, elle n'est pas tracée (les rayons le sont).
     IMAGE_MAX = 40
     SAME_SIZE = 0.03
 
@@ -41,6 +41,18 @@ module Catalog
         add.(o, y3, image.x, image.y, 3, true)
       end
       Scene.new(rays:, image:)
+    end
+
+    # L'image est-elle dans le dessin ? Faux sans image (objet au foyer) et pour une image trop lointaine.
+    def lens_image_shown?(image) = image.present? && image.distance.abs < IMAGE_MAX
+
+    # Ce que dit l'état de l'image : :none (au foyer), :far (existe mais trop loin pour être dessinée), :virtual ou :real
+    def lens_status(image)
+      if image.nil? then :none
+      elsif !lens_image_shown?(image) then :far
+      elsif image.virtual then :virtual
+      else :real
+      end
     end
 
     # :magnifier (objet entre la lentille et le foyer), :projector (entre F et 2F), :photo (au-delà de 2F), nil (au foyer)
