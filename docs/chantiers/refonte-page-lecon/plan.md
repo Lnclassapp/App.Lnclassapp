@@ -24,10 +24,11 @@ Lot E — Entrées, redirections, lectures et retrait de l'ancien      (Touré, 
 |---|---|---|
 | 1 | **Lot 0** — socle | prépare le contenu Thalès v2 (8 sujets, 8 exercices) pour le Lot D : il ne dépend pas du code |
 | 2 | **Lot B** — Prépare interros · **Lot C** — copie à rendre | **Lot A** — fiche de révision · **Lot D** — import v2 et contenu Thalès |
-| 3 | challenger des lots A et D | **Lot E** — entrées, redirections, retraits · challenger des lots B et C |
+| 3 | test des lots A, D et E dans `Develop`, après leur fusion | **Lot E** — entrées, redirections, retraits · challenger des lots B et C |
 
 - Chaque pilote lance un agent `executant-lot` par lot et relit son résultat ; les deux lots d'une même personne tournent en parallèle, dans deux worktrees.
-- Le challenger d'un lot n'en est jamais le pilote : chacun met à l'épreuve les lots de l'autre (parcours nominal et un chemin d'erreur, dans l'application).
+- Le challenger d'un lot n'en est jamais le pilote : Touré met à l'épreuve les lots B et C (parcours nominal et un chemin d'erreur, dans l'application).
+- **Lots A, D et E (pilote Touré) : pas de challenge avant la fusion** (porteur, 2026-10-28, environnements de PR désactivés). Ils fusionnent dans `Develop` sur la preuve de `bin/ci-quiet` et les revues ; le porteur les teste ensuite dans `Develop`, et un écart ouvre un correctif.
 - Charge : porteur = Lot 0, B, C ; Touré = A, D, E et le contenu.
 
 Règle « une PR, un pilote » : **une PR par lot vers `Develop`** (porteur, 2026-10-28, après la fusion du Lot 0 par #332), assignée au pilote du lot, qui seul pousse sur sa branche. Chaque lot part de `Develop` à jour ; la ligne de preuve de `bin/ci-quiet` et les revues se font PR par PR.
