@@ -36,4 +36,18 @@ class Catalog::PrepareInterrosTest < ApplicationSystemTestCase
     assert page.evaluate_script("window.lnclassNotReloaded")
     assert_equal 1, Orm::ClassroomAssignment.where(assignable_id: @exercise.id, classroom_id: @classroom.id, status: "active").count
   end
+
+  # Lot C : un exercice de toute la leçon s'ouvre depuis « Prépare interros » : feuille, copie, résultat.
+  test "a student opens the whole-lesson exercise from the lesson page, hands in a copy and reads the result" do
+    sign_in_as create_student_for(@course)
+
+    visit course_path(@course.slug)
+    within("#toute-la-lecon") { click_on "Bilan de la leçon" }
+    assert_current_path exercise_path(@wide.public_id)
+    assert_selector "#exercise-sheet"
+    click_on I18n.t("assessment.exercises.show.start")
+
+    hand_in_copy(rights: 1, questions: 2)
+    assert_selector "#session_grade"
+  end
 end
