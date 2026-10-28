@@ -5,7 +5,7 @@
 | **Type de cycle** | feature |
 | **Statut** | planifié |
 | **Ouvert le** | 2026-10-28 |
-| **Branche** | `feature/refonte-page-lecon` (le cadrage, documentation seule, est commité sur `Develop`) |
+| **Branche** | une par lot depuis `Develop` (`feature/refonte-page-lecon-lot-<lettre>`), une PR par lot vers `Develop` ; le Lot 0 a été livré par `feature/refonte-page-lecon` (#332) |
 | **Programme** | — |
 
 ---
