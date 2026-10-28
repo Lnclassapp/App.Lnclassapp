@@ -40,9 +40,10 @@ class Classroom::DailyExerciseTest < ApplicationSystemTestCase
     end
 
     within("#student_next_step_daily") { click_on tl("next_step.unassigned.start") }
+    assert_selector "#copy-form"
     choose @exercise.questions.first.answers.find_by!(correct: true).content
-    click_on I18n.t("assessment.exercise_sessions.question_card.submit")
-    assert_link I18n.t("assessment.exercise_sessions.feedback_card.result")
+    click_on I18n.t("assessment.exercise_sessions.show.submit")
+    assert_current_path %r{\A/sessions/[^/]+/result\z}
 
     visit student_home_path
     within("#student_next_step_daily[aria-live='polite']") do

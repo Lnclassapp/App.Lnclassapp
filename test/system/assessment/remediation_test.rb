@@ -8,10 +8,7 @@ require "application_system_test_case"
 # contrôleur et de la query.
 class Assessment::RemediationTest < ApplicationSystemTestCase
   RESULTS = "assessment.session_results".freeze
-  SESSIONS = "assessment.exercise_sessions".freeze
   QUESTIONS = 2
-  # Le POST de la fiche, puis la page de la session, sous une suite chargée (session_result_test.rb).
-  START_WAIT = 10
 
   test "l'élève rate, refait l'exercice proposé et lève la fiche ; l'enseignant le lit dans « Fiche de révision levée »" do
     maths = create_material(name: "Mathématiques")
@@ -26,7 +23,7 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     sign_in_as student
 
     visit exercise_path(failed.public_id)
-    click_on I18n.t("assessment.exercises.student_progress.start")
+    click_on I18n.t("assessment.exercises.show.start")
     play(correct: 0)
     assert_selector "#session_gap_outcome", text: "Cette notion passe à revoir."
 
@@ -54,18 +51,7 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
 
   private
 
-  # Répond aux questions de la session ouverte : les `correct` premières justes (la proposition 1 est la bonne, fabrique
-  # create_exercise), les autres fausses ; puis « Voir mon résultat ». → public_id de la session.
-  def play(correct:)
-    assert_current_path %r{\A/sessions/[^/]+\z}, wait: START_WAIT
-    public_id = current_path.split("/").last
-    QUESTIONS.times do |index|
-      within("#question-card", text: "Question #{index + 1}") { choose(index < correct ? "Proposition 1" : "Proposition 2") }
-      click_on I18n.t("#{SESSIONS}.question_card.submit")
-      assert_selector "#feedback-card"
-      click_on I18n.t("#{SESSIONS}.feedback_card.#{index == QUESTIONS - 1 ? 'result' : 'next'}")
-    end
-    assert_current_path exercise_session_result_path(public_id)
-    public_id
-  end
+  # Remplit et rend la copie de la session ouverte : les `correct` premières questions justes (la proposition 1 est la
+  # bonne, fabrique create_exercise), les autres fausses. → public_id de la session.
+  def play(correct:) = hand_in_copy(rights: correct, questions: QUESTIONS)
 end

@@ -123,7 +123,8 @@ form#copy-form  form_with url: exercise_session_copy_path(public_id), scope: :co
 - `input` / `change` sur le formulaire : écrit `{ "<name>": [valeurs] }`, pour les seuls champs `copy[answers]…`, dans `localStorage[key]` ; met à jour le compteur. Une question compte « répondue » quand sa saisie est complète au sens de l'UDR-0087 §3.4 (ordre : toujours).
 - `submit(event)` : si des questions sont vides et que l'envoi ne vient pas de « Rendre quand même » → `preventDefault`, remplit le texte, ouvre `#copy-confirm`.
 - `turbo:submit-end` : `event.detail.success` → `localStorage.removeItem(key)`. Échec réseau (`fetchResponse` absent) → toast `t(".offline")`, bouton réactivé.
-- Le brouillon ne contient que les champs de réponse.
+- Le brouillon ne contient que les champs de réponse : des indices d'affichage, jamais un identifiant ni une correction.
+- Risque accepté : après une déconnexion, le brouillon reste dans le navigateur. Sa clé est propre à la session (`lnclass:copy:<public_id>`) : un autre élève sur le même appareil n'y lit que des choix, jamais une correction.
 
 **Sans JavaScript** : le formulaire s'envoie tel quel, sans confirmation ; les questions vides comptent fausses ; pas de brouillon ; « Revoir le sujet » est une ancre ; `details` reste ouvert ; ordre et relier se saisissent par `select` (UDR-0087 §3.4).
 

@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
-# AS-02, AS-39 — UDR-0021. L'élève ouvre un exercice publié : il voit sa progression et les questions sans aucune marque,
-# clique « Commencer l'exercice » et arrive sur la première question (Turbo Drive). L'équipe ouvre « Modifier » (menu ⋮) dans la
+# AS-02, AS-39 — UDR-0138 §3.1. L'élève ouvre un exercice publié : il lit la feuille sans aucune marque,
+# clique « Faire l'exercice » et arrive sur sa copie (Turbo Drive). L'équipe ouvre « Modifier » (menu ⋮) dans la
 # modale, sans rechargement de page ; l'enseignant voit les propositions correctes marquées.
 class Assessment::ExercisePageTest < ApplicationSystemTestCase
   # Les accueils (Lots A2, B6, D3) et la session (Lot C2) appartiennent à d'autres lots : tant qu'ils ne sont pas fusionnés,
@@ -30,8 +30,8 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
 
   def scope = "assessment.exercises"
 
-  # UDR-0015, amendement du 2026-10-06 : après une session terminée, le bouton est « Refaire l'exercice ».
-  test "l'élève voit sa progression et les questions sans marque, puis « Refaire » l'amène à la première question" do
+  # UDR-0138 §3.1 : la page est la feuille ; après une copie rendue, le bouton est « Refaire l'exercice ».
+  test "l'élève lit la feuille sans marque, puis « Refaire l'exercice » l'amène à sa copie" do
     # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours.
     student = create_student_for(@course)
     create_exercise_session(student:, exercise: @exercise, status: "completed", score_percent: 50)
@@ -41,114 +41,72 @@ class Assessment::ExercisePageTest < ApplicationSystemTestCase
 
     within "#exercise_header" do
       assert_selector "h1", text: "Méiose"
-      assert_text "Deux divisions successives."
       assert_text I18n.t("#{scope}.show.questions", count: 2)
     end
-    within "#student_progress" do
-      assert_text "10/20"
-      assert_no_text "50 %"
-      assert_text "Fragile"
-      assert_text I18n.t("#{scope}.student_progress.completed", count: 1)
-    end
+    assert_selector "#exercise-sheet", text: "Deux divisions successives."
+    assert_selector "#exercise_best", text: "10/20"
     assert_selector "#exercise_questions li.question", count: 2
     assert_no_selector "#exercise_questions [data-correct]"
+    assert_no_selector "#exercise_questions input"
     assert_no_text I18n.t("#{scope}.questions_preview.correct")
 
-    assert_no_button I18n.t("#{scope}.student_progress.start")
-    click_on I18n.t("#{scope}.student_progress.redo")
+    assert_no_button I18n.t("#{scope}.show.start")
+    click_on I18n.t("#{scope}.show.redo")
 
     assert_current_path %r{\A/sessions/[^/]+\z}
-    assert_text(/question 1/i)
+    assert_selector "#copy-form #question-1"
   end
 
-  test "sur un téléphone, la page de l'élève tient dans la largeur" do
+  test "sur un téléphone, la feuille tient dans la largeur et l'action est collée en bas" do
     # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours.
     sign_in_as create_student_for(@course)
 
     with_mobile_viewport do
       visit exercise_path(@exercise.public_id)
 
-      assert_selector "#student_progress button", text: I18n.t("#{scope}.student_progress.start")
+      assert_selector "#exercise_actions button", text: I18n.t("#{scope}.show.start")
       assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
              "la page déborde en largeur"
+      assert page.evaluate_script("Math.abs(document.querySelector('#exercise_actions').getBoundingClientRect().bottom - window.innerHeight) < 2")
     end
   end
 
-  # UDR-0021, amendement du 2026-10-02 (UDR-0057) : ce que l'accueil retire de ses lignes vit ici (Q4), et la page suit
-  # la règle de sobriété à 390 × 844 (R1, R2, R3).
-  test "à 390 px, l'élève voit badge, meilleure note, maîtrise et sessions, une seule action principale, 3 questions puis « Voir plus »" do
+  # UDR-0138 §3.1 : une seule action principale à 390 px, toutes les questions de la feuille lisibles.
+  test "à 390 px, une seule action principale et toutes les questions de la feuille" do
     exercise = create_exercise(essential: @essential, title: "Mitose", questions: 7)
     student = create_student_for(@course)
-    best = create_exercise_session(student:, exercise:, status: "completed", score_percent: 85)
-    create_badge(student:, exercise:, level: "gold", session: best)
     create_exercise_session(student:, exercise:)
     sign_in_as student
 
     with_mobile_viewport do
       visit exercise_path(exercise.public_id)
 
-      assert_selector "#exercise_context", exact_text: "Génétique et évolution"
-      within "#student_progress" do
-        # UDR-0087 §3.1 : les libellés des cases s'affichent en capitales.
-        assert_text(/#{I18n.t("#{scope}.student_progress.best_score")}/i)
-        assert_text "17/20"
-        assert_text "Acquis"
-        assert_text I18n.t("#{scope}.student_progress.badge_level", level: "Or")
-        assert_text I18n.t("#{scope}.student_progress.completed", count: 1)
-        assert_link I18n.t("#{scope}.student_progress.resume_at", number: 1)
-        assert_button I18n.t("#{scope}.student_progress.restart")
-        assert_text I18n.t("#{scope}.student_progress.restart_note")
-      end
-      assert_no_text I18n.t("#{scope}.questions_preview.student_hint")
-      assert_single_primary_action
-      assert_blocks_above_fold "#exercise_layout > div > *, #exercise_layout > section"
-      assert_list_capped "#exercise_questions ol", items: "li.question"
-
-      within "#exercise_questions" do
-        assert_no_page_reload { click_on I18n.t("components.reveal.more") }
-        assert_selector "li.question", count: 6
-        click_on I18n.t("components.reveal.more")
-        assert_selector "li.question", count: 7
-        assert_no_button I18n.t("components.reveal.more")
-      end
+      assert_selector "#exercise_context", exact_text: "La méiose"
+      assert_link I18n.t("#{scope}.show.resume")
+      assert_button I18n.t("#{scope}.show.restart")
+      assert_selector "#exercise_questions li.question", count: 7
+      assert_no_button I18n.t("components.reveal.more")
       assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
              "la page déborde en largeur"
     end
   end
 
-  # CA-15, UDR-0087 §3.1 : dès 1 024 px, la présentation et « Ta progression » à gauche, l'aperçu des questions à droite.
-  test "sur un ordinateur, la présentation et la progression à gauche, l'aperçu à droite" do
-    sign_in_as create_student_for(@course)
-    page.current_window.resize_to(1280, 900)
-
-    visit exercise_path(@exercise.public_id)
-
-    left = page.evaluate_script("document.querySelector('#student_progress').getBoundingClientRect().right")
-    right = page.evaluate_script("document.querySelector('#exercise_questions').getBoundingClientRect().left")
-    top = page.evaluate_script("[document.querySelector('#exercise_header'), document.querySelector('#exercise_questions')]" \
-                               ".map((block) => Math.round(block.getBoundingClientRect().top))")
-    assert_operator left, :<, right
-    assert_equal 1, top.uniq.size
-  end
-
-  test "l'enseignant voit les propositions correctes marquées" do
+  test "l'enseignant voit la solution sous chaque question" do
     sign_in_as create_teacher
 
     visit exercise_path(@exercise.public_id)
 
-    assert_selector "#exercise_questions [data-correct]", count: 2, text: I18n.t("#{scope}.questions_preview.correct")
-    assert_no_selector "#student_progress"
+    assert_selector "#exercise_questions [data-correct]", minimum: 1, text: I18n.t("#{scope}.questions_preview.correct")
+    assert_no_selector "#exercise_actions"
   end
 
-  test "l'enseignant voit l'écran inchangé : contexte complet, aide affichée, toutes les questions, sans « Voir plus »" do
+  test "l'enseignant voit toutes les questions, sans « Voir plus »" do
     exercise = create_exercise(essential: @essential, title: "Mitose", questions: 5)
     sign_in_as create_teacher
 
     visit exercise_path(exercise.public_id)
 
-    assert_selector "#exercise_context", exact_text: I18n.t("#{scope}.show.context", course: "Génétique et évolution",
-                                                                                      essential: "La méiose")
-    assert_selector "#exercise_questions p", text: I18n.t("#{scope}.questions_preview.reveal_hint")
+    assert_selector "#exercise_context", exact_text: "La méiose"
     assert_selector "#exercise_questions li.question", count: 5
     assert_no_button I18n.t("components.reveal.more")
   end

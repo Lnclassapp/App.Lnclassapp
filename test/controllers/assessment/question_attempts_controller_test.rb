@@ -3,6 +3,8 @@ require "test_helper"
 # AS-09, AS-10, AS-11 (UDR-0022) : répondre une fois à une question, voir son verdict et sa progression en Turbo Stream,
 # une réponse vide en 422 dans la carte (jamais 500, C-10), une re-soumission refusée sans rien écrire (C-11), la
 # dernière réponse qui clôt la session et propose le résultat. La correction ne montre jamais les propositions correctes.
+# Lot C (refonte-page-lecon) : l’ancien mode (une question à la fois) n’a plus d’écran ; les tests qui rendaient sa carte
+# sont retirés avec lui, ceux qui prouvent les écritures et les refus restent. Suppression du contrôleur : Lot E.
 class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTest
   TURBO = { "Accept" => "text/vnd.turbo-stream.html, text/html, application/xhtml+xml" }.freeze
   ERRORS = "activemodel.errors.models.dtos/assessment/attempt_input.attributes".freeze
@@ -29,100 +31,6 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
                                                             params: { attempt: { question_id: question.id, answer_ids: answers.map(&:id) } }
   end
 
-  test "une mauvaise réponse : tentative enregistrée, verdict, choix de l'élève, explication, progression, question suivante" do
-    sign_in_as @student
-
-    answer @first, wrong(@first)
-
-    assert_response :success
-    assert_equal "text/vnd.turbo-stream.html", response.media_type
-    attempt = Orm::QuestionAttempt.sole
-    assert_equal [ @session.id, @first.id, [ wrong(@first).id ], false ],
-                 [ attempt.exercise_session_id, attempt.question_id, attempt.selected_answer_ids, attempt.correct ]
-    assert_not_nil attempt.answered_at
-    assert_equal [ 1, 0, 50 ], @session.reload.values_at(:answered_count, :correct_count, :progress_percent)
-
-    assert_select "turbo-stream[action=replace][target=question] template" do
-      assert_select "turbo-frame#question #feedback-card", text: /#{I18n.t("#{scope}.feedback_card.verdict.error")}/
-      assert_select "#feedback-card", text: /La méiose donne quatre cellules/
-      assert_select "#feedback-card", text: /#{I18n.t("#{scope}.feedback_card.selected")}/
-      # Le choix dans un span : un `li.flex` ferait du texte et de chaque formule KaTeX autant de colonnes (2026-10-06).
-      assert_select "#feedback-card li.flex > span.min-w-0", text: wrong(@first).content, count: 1
-      assert_select "a[href='#{exercise_session_path(@session.public_id)}']", text: I18n.t("#{scope}.feedback_card.next")
-      # UDR-0087 §3.2 : « Question suivante » colle au bas de l'écran, pleine largeur.
-      assert_select "#feedback-card #feedback-actions.sticky.bottom-0 a.w-full", 1
-    end
-    assert_select "turbo-stream[action=replace][target=progress_bar] template progress[value='50']"
-    # UDR-0087 §3.2–3.3 : « 1/2 » reste celui de la question tentée ; la confirmation pour quitter reprendra à la question 2.
-    assert_select "turbo-stream[action=replace][target=progress_bar] template #progress_counter", text: /1\/2/
-    assert_select "turbo-stream[action=replace][target=quit_resume] template #quit_resume",
-                  text: I18n.t("#{scope}.quit_dialog.resume", number: 2)
-  end
-
-  # UDR-0076 §3.3 (CA-7), ADR-0076 : la question suivante arrive avec le verdict, dans un <template> de la carte ; « Question
-  # suivante » l'affiche sans requête, et reste un lien vers la session (repli sans JavaScript), sans préchargement.
-  test "le verdict joint la question suivante, sans aucune correction : un aller-retour par question" do
-    sign_in_as @student
-
-    answer @first, wrong(@first)
-
-    assert_select "turbo-stream[action=replace][target=question] template turbo-frame#question " \
-                  "#feedback-card[data-controller~='assessment--next-question']" do
-      assert_select "a[href=?][data-action='assessment--next-question#show'][data-turbo-prefetch=false]",
-                    exercise_session_path(@session.public_id), text: I18n.t("#{scope}.feedback_card.next")
-      assert_select "template[data-assessment--next-question-target=question] turbo-frame#question #question-card" do
-        assert_select "legend", text: "La méiose réduit-elle le nombre de chromosomes ?"
-        assert_select "form[action=?]", exercise_session_attempts_path(@session.public_id)
-        assert_select "input[type=hidden][name='attempt[question_id]'][value=?]", @second.id.to_s
-        assert_equal @second.answers.pluck(:id).map(&:to_s).sort,
-                     css_select("input[type=radio][name='attempt[answer_ids][]']").map { it["value"] }.sort
-      end
-    end
-    assert_select "[data-correct], [correct]", 0
-    assert_no_match(/correct/i, response.body.scan(/<template data-assessment--next-question-target.*?<\/template>/m).join)
-  end
-
-  # ADR-0076 §4.1 (CA-8) : ni la page de la session ni le stream d'une réponse ne vont dans un cache partagé.
-  test "ADR-0076 — la session et le stream d'une réponse ne sont jamais publics en cache" do
-    sign_in_as @student
-
-    get exercise_session_path(@session.public_id)
-    page = response.headers["Cache-Control"]
-    answer @first, wrong(@first)
-
-    [ page, response.headers["Cache-Control"] ].each do |header|
-      assert_match(/private|no-store/, header)
-      assert_no_match(/public/, header)
-    end
-  end
-
-  test "la correction ne contient jamais le texte d'une proposition juste que l'élève n'a pas choisie" do
-    sign_in_as @student
-
-    answer @first, wrong(@first)
-
-    assert_no_match right(@first).content, response.body
-    assert_no_match(/proposition correcte|data-correct/i, response.body)
-    assert_select "#feedback-card li span.min-w-0" do |items|
-      assert_equal [ wrong(@first).content ], items.map { it.text.strip }
-    end
-  end
-
-  test "deux propositions correctes, une seule trouvée : l'autre n'apparaît ni dans la carte ni dans le stream" do
-    @second.update!(question_type: "multiple_correct_2")
-    found, missed, chosen_wrong = @second.answers.order(:position).first(3)
-    missed.update!(correct: true)
-    sign_in_as @student
-
-    answer @second, found, chosen_wrong
-
-    assert_select "#feedback-card", text: /#{I18n.t("#{scope}.feedback_card.verdict.error")}/
-    assert_select "#feedback-card li span.min-w-0" do |items|
-      assert_equal [ found.content, chosen_wrong.content ].sort, items.map { it.text.strip }.sort
-    end
-    assert_no_match missed.content, response.body
-  end
-
   test "la dernière réponse clôt la session dans la même requête : score, badge, lien vers le résultat" do
     create_attempt(session: @session, question: @first, correct: true)
     @session.update!(answered_count: 1, correct_count: 1, progress_percent: 50)
@@ -139,31 +47,6 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
                   text: I18n.t("#{scope}.feedback_card.result")
     assert_select "template[data-assessment--next-question-target]", 0
     assert_select "[data-controller='assessment--next-question']", 0
-  end
-
-  test "réponse vide en Turbo : 422 dans la carte, avec « Sélectionne au moins une proposition. », jamais 500" do
-    sign_in_as @student
-
-    post exercise_session_attempts_path(@session.public_id), headers: TURBO, params: { attempt: { question_id: @first.id } }
-
-    assert_response :unprocessable_entity
-    assert_select "turbo-stream[action=replace][target=question] template turbo-frame#question #question-card" do
-      assert_select "#attempt-errors[role=alert]", text: I18n.t("#{ERRORS}.answer_ids.blank")
-      assert_select "input[type=radio]", 4
-    end
-    assert_equal 0, Orm::QuestionAttempt.count
-  end
-
-  test "trop ou trop peu de propositions, ou celle d'une autre question : 422, rien n'est écrit" do
-    sign_in_as @student
-
-    answer @first, right(@first), wrong(@first)
-    assert_response :unprocessable_entity
-    assert_select "#attempt-errors", text: I18n.t("#{ERRORS}.answer_ids.wrong_selection")
-
-    answer @first, right(@second)
-    assert_response :unprocessable_entity
-    assert_equal 0, Orm::QuestionAttempt.count
   end
 
   test "question déjà répondue : rien n'est écrit, toast et retour à l'état de la session" do
@@ -227,43 +110,5 @@ class Assessment::QuestionAttemptsControllerTest < ActionDispatch::IntegrationTe
     answer @first, right(@first), headers: {}
     assert_redirected_to exercise_session_path(@session.public_id)
     assert_equal I18n.t("#{ERRORS}.base.session_closed"), flash[:alert]
-  end
-
-  test "repli HTML d'une réponse vide : la page de session en 422, avec l'erreur" do
-    sign_in_as @student
-
-    post exercise_session_attempts_path(@session.public_id), params: { attempt: { question_id: @first.id } }
-
-    assert_response :unprocessable_entity
-    assert_select "h1", text: "Méiose"
-    assert_select "#attempt-errors", text: I18n.t("#{ERRORS}.answer_ids.blank")
-  end
-
-  # PRD §7 : 22 requêtes avant le chantier, 23 après (la lettre affichée de « Ton choix ») ; la cible était « avant + 1 ».
-  # ADR-0105 : + 2 requêtes fixes, jamais une par question : les images de l'exercice chargé d'un bloc, celle de la question suivante.
-  test "envoyer une réponse coûte 25 requêtes SQL" do
-    sign_in_as @student
-    get exercise_session_path(@session.public_id)
-    count = 0
-    counter = lambda do |*, payload|
-      count += 1 unless payload[:name] == "SCHEMA" || payload[:sql] =~ /\A\s*(BEGIN|COMMIT|SAVEPOINT|RELEASE|ROLLBACK)/
-    end
-
-    ActiveSupport::Notifications.subscribed(counter, "sql.active_record") { answer @first, right(@first) }
-
-    assert_response :success
-    assert_equal 25, count
-  end
-
-  # PostgreSQL refuse l'octet nul : la saisie est refusée en 422, jamais en erreur 500.
-  test "un texte saisi avec un octet nul est refusé (422), rien n'est écrit" do
-    question = create_kind_question(exercise: @exercise, question_type: "fill_blank", answers: %w[Abidjan], content: "Capitale : ___ .")
-    sign_in_as @student
-
-    post exercise_session_attempts_path(@session.public_id), headers: TURBO,
-                                                             params: { attempt: { question_id: question.id, response_text: "Abi\0djan" } }
-
-    assert_response :unprocessable_entity
-    assert_equal 0, Orm::QuestionAttempt.count
   end
 end

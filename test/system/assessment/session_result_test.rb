@@ -1,12 +1,12 @@
 require "application_system_test_case"
 
 # AS-11, AS-12, AS-13 (UDR-0023) : le résultat d'une session. 10/10 : « Diamant », « Nouveau badge ! » et des confettis
-# pendant 3 s ; 9/10 : « Or », jamais Diamant, et « Recommencer » ouvre une nouvelle session (changement de page), l'ancienne
+# pendant 3 s ; 9/10 : « Or », jamais Diamant, et « Refaire l'exercice » ouvre une nouvelle session (changement de page), l'ancienne
 # gardant son score ; sous le seuil : « Courage ! », sans confettis. Sur un bureau comme à 390 px.
 class Assessment::SessionResultTest < ApplicationSystemTestCase
   SCOPE = "assessment.session_results".freeze
   GRADING = Entities::Assessment::Grading
-  # « Recommencer » : le POST puis la page de la session, sous une suite chargée ; au-delà, la page n'a vraiment pas changé.
+  # « Refaire l'exercice » : le POST puis la page de la session, sous une suite chargée ; au-delà, la page n'a vraiment pas changé.
   RESTART_WAIT = 10
 
   setup do
@@ -29,7 +29,7 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     end
   end
 
-  test "10/10 : Diamant, « Nouveau badge ! », confettis pendant 3 secondes, et plus de « Recommencer »" do
+  test "10/10 : Diamant, « Nouveau badge ! », confettis pendant 3 secondes, et plus de « Refaire l'exercice »" do
     session = completed_session(correct: 10)
 
     visit exercise_session_result_path(session.public_id)
@@ -39,10 +39,10 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     assert_text "20/20"
     assert_selector "#confetti span", visible: :all
     assert_no_selector "#confetti", visible: :all, wait: 8
-    assert_no_button I18n.t("#{SCOPE}.show.restart")
+    assert_no_button I18n.t("assessment.exercises.show.redo")
   end
 
-  test "9/10 : Or, jamais Diamant ; « Recommencer » ouvre une nouvelle session" do
+  test "9/10 : Or, jamais Diamant ; « Refaire l'exercice » ouvre une nouvelle session" do
     play_nine_out_of_ten
   end
 
@@ -50,9 +50,9 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     with_mobile_viewport { play_nine_out_of_ten }
   end
 
-  # Chantier tests-instables : « Recommencer » coûte deux allers-retours (le POST, puis la session vers laquelle il
+  # Chantier tests-instables : « Refaire l'exercice » coûte deux allers-retours (le POST, puis la session vers laquelle il
   # redirige). Sous une suite chargée, ils dépassaient les 2 s d'attente par défaut de Capybara.
-  test "« Recommencer » ouvre une nouvelle session même quand le serveur répond lentement" do
+  test "« Refaire l'exercice » ouvre une nouvelle session même quand le serveur répond lentement" do
     on_a_slow_network { play_nine_out_of_ten }
   end
 
@@ -113,7 +113,7 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     assert_selector "#session_badge[aria-label='#{I18n.t("#{SCOPE}.badge.none")}']"
     assert_text I18n.t("assessment.badges.mastery.struggling")
     assert_no_selector "#confetti", visible: :all
-    assert_button I18n.t("#{SCOPE}.show.restart")
+    assert_button I18n.t("assessment.exercises.show.redo")
   end
 
   # UDR-0054, amendement « survol » ; chantier infobulle-badges-hors-ecran. #session_badge est animé (animate-slide-up) :
@@ -139,19 +139,21 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     end
   end
 
-  # CA-E13 (UDR écrans élève §3.6 bis) : à 1 440 px, la note et « Recommencer » restent dans la colonne de 340 px pendant que la
+  # CA-E13 (UDR écrans élève §3.6 bis) : à 1 440 px, la note et « Refaire l'exercice » restent dans la colonne de 340 px pendant que la
   # correction défile.
-  test "à 1 440 px, la colonne de la note (340 px) et « Recommencer » restent visibles quand on défile la correction" do
+  test "à 1 440 px, la colonne de la note (340 px) et « Refaire l'exercice » restent visibles quand on défile la correction" do
     # Une correction assez longue pour défiler : l'élève n'en lit d'abord que 3 questions, chacune a une longue explication.
-    @exercise.questions.each { it.update!(explanation: "Explication. " * 250) }
+    @exercise.questions.each { it.update!(explanation: "Explication. " * 500) }
     session = completed_session(correct: 6)
 
     with_mobile_viewport([ 1440, 900 ]) do
       visit exercise_session_result_path(session.public_id)
 
       assert_selector "#session_result_side #session_result"
+      wait_for_animations("session_badge")
       assert_in_delta 340, evaluate_script("document.getElementById('session_result_side').getBoundingClientRect().width"), 1
-      page.execute_script("window.scrollTo(0, document.documentElement.scrollHeight)")
+      # En plein défilement : tout en bas, la colonne butte sur le bas de la page, comme n'importe quel élément collant.
+      page.execute_script("window.scrollTo(0, 1200)")
       page.document.synchronize do
         raise Capybara::ExpectationNotMet, "la page n'a pas défilé" unless page.evaluate_script("window.scrollY") > 300
       end
@@ -159,8 +161,8 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
       bar = evaluate_script("document.querySelector('header.sticky').getBoundingClientRect().bottom")
       side = evaluate_script("document.getElementById('session_result_side').getBoundingClientRect().top")
       assert_operator side, :>=, bar, "le haut de la colonne de la note passe sous la barre du haut"
-      assert_operator button["top"], :>=, bar, "« Recommencer » est sorti par le haut"
-      assert_operator button["bottom"], :<=, 900, "« Recommencer » est sorti de l'écran"
+      assert_operator button["top"], :>=, bar, "« Refaire l'exercice » est sorti par le haut"
+      assert_operator button["bottom"], :<=, 900, "« Refaire l'exercice » est sorti de l'écran"
       assert_selector "#session_grade", text: "12/20"
     end
   end
@@ -187,7 +189,7 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     assert_text "18/20"
     assert_selector "#session_review li[id^=question_review_]", count: 3
 
-    click_on I18n.t("#{SCOPE}.show.restart")
+    click_on I18n.t("assessment.exercises.show.redo")
 
     assert_current_path %r{\A/sessions/(?!#{session.public_id})[^/]+\z}, wait: RESTART_WAIT
     fresh = Orm::ExerciseSession.where(student: @student, exercise: @exercise, status: "started").sole

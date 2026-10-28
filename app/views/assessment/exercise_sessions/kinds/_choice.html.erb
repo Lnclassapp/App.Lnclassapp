@@ -1,8 +1,8 @@
 <%# 🌐 UI · assessment/exercise_sessions/kinds/_choice — Vrai / Faux, choix unique, 2 ou 3 propositions correctes %>
-<%# Rôle : l'énoncé en légende, puis une grande carte par proposition, lettre A, B, C… dans l'ordre mélangé de la session %>
-<%# ADR  : 0054, 0091 · UDR : 0022, 0087 §3.4 · le bouton radio ou la case est la pastille de la lettre ; « Coche N propositions. » si plusieurs %>
-<%# locals: (f:, question:) -%>
-<legend class="font-display text-xl font-medium text-balance whitespace-pre-line text-ink"><%= question.content %></legend>
+<%# Rôle : une grande carte par proposition, lettre A, B, C… dans l'ordre mélangé de la session (l'énoncé est la légende de la copie) %>
+<%# ADR  : 0054, 0091 (§4.4 : l'indice d'affichage, jamais l'id), 0112 · UDR : 0022, 0087 §3.4, 0138 §3.2 · le bouton radio ou la case est la pastille de la lettre ; « Coche N propositions. » si plusieurs ; jamais « required » : une question vide compte fausse %>
+<%# locals: (f:, question:, number:, values: {}) -%>
+<% picked = Array(values[:display_order]).map(&:to_s) %>
 <% if question.multiple? %>
   <p class="text-sm text-mute" data-hint><%= t("assessment.exercise_sessions.question_card.hint", count: question.expected_count) %></p>
 <% end %>
@@ -13,11 +13,10 @@
       <%# La pastille est le champ lui-même : cliquable et visible pour tous les outils ; sa lettre passe dessus sans intercepter le clic. %>
       <span class="relative grid shrink-0 place-items-center">
         <% if question.multiple? %>
-          <%= check_box_tag "attempt[answer_ids][]", answer.id, false, id: "attempt_answer_#{answer.id}",
-                            data: { assessment__answer_target: "choice" },
+          <%= check_box_tag "#{f.object_name}[display_order][]", answer.index, picked.include?(answer.index.to_s), id: "q#{number}-answer_#{answer.index}",
                             class: "peer size-8 cursor-pointer appearance-none rounded-sm border border-line bg-paper checked:border-brand-strong checked:bg-brand-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
         <% else %>
-          <%= radio_button_tag "attempt[answer_ids][]", answer.id, false, id: "attempt_answer_#{answer.id}", required: true,
+          <%= radio_button_tag "#{f.object_name}[display_order][]", answer.index, picked.include?(answer.index.to_s), id: "q#{number}-answer_#{answer.index}",
                                class: "peer size-8 cursor-pointer appearance-none rounded-full border border-line bg-paper checked:border-brand-strong checked:bg-brand-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" %>
         <% end %>
         <span class="pointer-events-none absolute text-sm font-medium text-ink peer-checked:text-white" aria-hidden="true"><%= letter %></span>

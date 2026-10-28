@@ -1,10 +1,9 @@
 <%# 🌐 UI · assessment/exercise_sessions/kinds/_fill_blank — texte à trous : un champ à la place de `___`, dans la phrase %>
-<%# Rôle : la consigne en légende ; la phrase dans une carte, le champ à la taille de ce qui est écrit ; aucune réponse acceptée dans la page %>
-<%# ADR  : 0091 §4.2, §4.4 · UDR : 0087 §3.4, §3.10 (le champ a pour nom l'énoncé, « blanc » à la place de `___`) %>
-<%# locals: (f:, question:) -%>
+<%# Rôle : la phrase dans une carte, le champ à la taille de ce qui est écrit ; la consigne est la légende de la copie ; aucune réponse acceptée dans la page %>
+<%# ADR  : 0091 §4.2, §4.4, 0112 · UDR : 0087 §3.4, §3.10 (le champ a pour nom l'énoncé, « blanc » à la place de `___`), 0138 §3.2 %>
+<%# locals: (f:, question:, number:, values: {}) -%>
 <% before, after = question.content.split(Entities::Assessment::QuestionKinds::FillBlank::MARKER, 2) %>
-<legend class="font-display text-xl font-medium text-balance text-ink"><%= t("assessment.exercise_sessions.kinds.fill_blank.legend") %></legend>
-<div class="rounded-card border border-line bg-white p-4 text-lg leading-loose whitespace-pre-line text-ink sm:p-5"><%= before %><%= f.text_field :response_text, value: nil, required: true, maxlength: Dtos::Assessment::AttemptInput::RESPONSE_TEXT_MAX,
+<div class="rounded-card border border-line bg-white p-4 text-lg leading-loose whitespace-pre-line text-ink sm:p-5"><%= before %><%= f.text_field :response_text, value: values[:response_text], id: "q#{number}-response_text", maxlength: Dtos::Assessment::AttemptInput::RESPONSE_TEXT_MAX,
                                 autocomplete: "off", autocapitalize: "off", autocorrect: "off", spellcheck: false,
                                 "aria-label": question.content.sub(Entities::Assessment::QuestionKinds::FillBlank::MARKER,
                                                                    t("assessment.exercise_sessions.kinds.fill_blank.blank")),

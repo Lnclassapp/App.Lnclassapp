@@ -8,7 +8,6 @@ require "application_system_test_case"
 # The memo's 25 % and 80 % need 9 questions to play; 3 and 2 keep the scenario within the system budget (≤ 10 s).
 class SchoolAdmin::RemediationHandedInTest < ApplicationSystemTestCase
   SIGN_IN_WAIT = SystemAuthenticationHelper::SIGN_IN_WAIT
-  SESSION = "assessment.exercise_sessions".freeze
 
   setup do
     school = create_school(name: "Collège Moderne de Daloa")
@@ -91,26 +90,16 @@ class SchoolAdmin::RemediationHandedInTest < ApplicationSystemTestCase
 
   private
 
-  # From the exercise page, « Commencer l'exercice », then each question in turn: the first `rights` answers are right,
+  # From the exercise page, « Faire l'exercice », then the copy handed in: the first `rights` answers are right,
   # the others wrong. The block receives the session just started.
   def play(exercise, rights:)
     visit exercise_path(exercise.public_id)
-    click_on I18n.t("assessment.exercises.student_progress.start")
+    click_on I18n.t("assessment.exercises.show.start")
     assert_current_path %r{\A/sessions/[^/]+\z}
     session = Orm::ExerciseSession.find_by!(public_id: current_path.split("/").last)
     yield session if block_given?
 
-    count = exercise.questions.count
-    count.times do |index|
-      within("#question-card") do
-        assert_text "Question #{index + 1}"
-        choose(index < rights ? "Proposition 1" : "Proposition 2")
-        click_on I18n.t("#{SESSION}.question_card.submit")
-      end
-      assert_selector "#feedback-card"
-      click_on I18n.t("#{SESSION}.feedback_card.next") if index < count - 1
-    end
-    assert_link I18n.t("#{SESSION}.feedback_card.result")
+    hand_in_copy(rights:, questions: exercise.questions.count)
   end
 
   # The figures of a classroom's card, on the page of its level.

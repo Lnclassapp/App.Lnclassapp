@@ -348,6 +348,32 @@ module Queries
 
         assert_equal 1, statements.size
       end
+
+      # UDR-0138 §3.4 : une question laissée vide à la copie est « Sans réponse », pas « Faux ».
+      test "une question laissée vide est marquée unanswered, sans choix, et reste fausse" do
+        copy = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 50)
+        create_attempt(session: copy, question: @first, correct: true)
+        Orm::QuestionAttempt.create!(exercise_session: copy, question: @second, selected_answer_ids: [], correct: false, unanswered: true,
+                                     answered_at: Time.current)
+
+        review = result(session: copy).review
+
+        assert_equal [ [ true, false ], [ false, true ] ], review.map { [ it.correct, it.unanswered ] }
+        assert_empty review.last.answers.select(&:selected)
+      end
+
+      # CA-21 : un exercice de toute la leçon n'a pas de notion ; le cours reste.
+      test "exercice de toute la leçon : pas de notion, le cours" do
+        lesson = create_lesson_wide_exercise(course: @essential.course, questions: 1)
+        session = create_exercise_session(student: @student, exercise: lesson, status: "completed", score_percent: 0)
+        create_attempt(session:, question: lesson.questions.first, correct: false)
+
+        row = result(session:)
+
+        assert_nil row.essential
+        assert_equal [ @essential.course.slug, "Awa Koné" ], [ row.course_slug, row.student_name ]
+        assert_nil row.gap_outcome
+      end
     end
   end
 end

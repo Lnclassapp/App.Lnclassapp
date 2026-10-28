@@ -1,7 +1,8 @@
 // ⚡ FRONT · assessment/matching_controller — relier : toucher un élément à gauche, puis un à droite
 // Rôle : une paire porte le même numéro des deux côtés ; toucher une paire la défait ; recopie chaque paire dans les listes
-//        de repli (attempt[display_order][] : pour chaque élément de gauche, l'indice d'affichage de droite, jamais un id)
-// UDR  : 0087 §3.4, §3.10 · ADR : 0091 §4.4 · boutons aria-pressed, tout au clavier ; sans JavaScript, une liste de choix par élément
+//        de repli (copy[answers][<id>][display_order][] : pour chaque élément de gauche, l'indice d'affichage de droite, jamais un id)
+//        une instance par question (la copie en porte plusieurs) ; `load` relit les listes (brouillon restauré, copie réaffichée en 422)
+// UDR  : 0087 §3.4, §3.10, 0138 §3.2 · ADR : 0091 §4.4, 0112 · boutons aria-pressed, tout au clavier ; sans JavaScript, une liste de choix par élément
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -11,6 +12,10 @@ export default class extends Controller {
   connect() {
     this.fallbackTarget.hidden = true
     this.boardTarget.hidden = false
+    this.load()
+  }
+
+  load() {
     this.pairs = new Map(this.selectTargets.flatMap((select, left) => (select.value === "" ? [] : [[left, Number(select.value)]])))
     this.active = null
     this.render()
