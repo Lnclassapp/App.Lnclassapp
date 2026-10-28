@@ -152,15 +152,19 @@ Points d'attention :
 
 ```
 Vague 1 : Lot 0           → 1 agent, séquentiel
-Vague 2 : Lot A ‖ Lot B   → 2 agents, worktrees isolés, branches depuis feature/correction-comme-en-classe une fois le Lot 0 fusionné
+Vague 2 : Lot A ‖ Lot B   → 2 agents, worktrees isolés, branches depuis origin/Develop une fois la PR du Lot 0 fusionnée
 ```
 
 ```bash
-git worktree add ../lnclass-correction-comme-en-classe-lot-a -b feature/correction-comme-en-classe-lot-a feature/correction-comme-en-classe
-git worktree add ../lnclass-correction-comme-en-classe-lot-b -b feature/correction-comme-en-classe-lot-b feature/correction-comme-en-classe
+git worktree add ../lnclass-correction-comme-en-classe-lot-a -b feature/correction-comme-en-classe-lot-a origin/Develop
+git worktree add ../lnclass-correction-comme-en-classe-lot-b -b feature/correction-comme-en-classe-lot-b origin/Develop
 ```
 
-Exécutants : `executant-lot` (Sonnet). Revues sur le diff final (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) : une policy, un use case et une vue de correction changent. Une seule PR vers `Develop`, sauf si le porteur demande une PR par lot, comme pour la refonte de la page de la leçon.
+Exécutants : `executant-lot` (Sonnet). Revues sur le diff final (`security-reviewer`, `silent-failure-hunter`, `pr-test-analyzer`) : une policy, un use case et une vue de correction changent. **Une PR par lot vers `Develop`** (décision du 2026-10-28, comme pour la refonte de la page de la leçon) :
+- chaque lot part de `origin/Develop` à jour, sur sa branche `feature/correction-comme-en-classe-lot-<x>` ;
+- A et B partent une fois la PR du Lot 0 fusionnée ;
+- chaque PR contient la ligne de preuve de `bin/ci-quiet` et ses revues.
+- la PR du Lot 0 part de `feature/correction-comme-en-classe` (branche `feature/correction-comme-en-classe-lot-0`) pour porter le cadrage ; elle numérote l'ADR et l'UDR (`script/docs/build_index --number`), puisque `Develop` refuse un `XXXX-`.
 
 ## Portes de sortie
 
@@ -175,7 +179,7 @@ Exécutants : `executant-lot` (Sonnet). Revues sur le diff final (`security-revi
 - [ ] En-tête HITL sur chaque fichier créé dans `app/`
 - [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
 - [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
+- [ ] Une PR par lot vers `Develop` (décision du 2026-10-28), chacune référençant chantier + ADR + UDR
 - [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
 
 ## Challenger (phase 5)
