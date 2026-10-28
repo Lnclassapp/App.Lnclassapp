@@ -1,8 +1,8 @@
 require "test_helper"
 
-# AS-02, AS-39 — UDR-0021. La page d'un exercice : titre, description, nombre de questions, matière, aperçu des questions.
-# L'équipe et l'enseignant voient les propositions correctes marquées ; l'élève jamais, mais il voit sa progression et
-# « Commencer » ou « Reprendre ». Un brouillon, ou un exercice dont un parent n'est pas publié, répond 404 hors de l'équipe.
+# AS-02, AS-39 — UDR-0138 §3.1. La page d'un exercice est la feuille : l'énoncé et les questions numérotées, rien à remplir.
+# L'équipe et l'enseignant voient la solution sous chaque question ; l'élève jamais, et une seule action : « Faire l'exercice »
+# ou « Reprendre ma copie ». Un brouillon, ou un exercice dont un parent n'est pas publié, répond 404 hors de l'équipe.
 class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
   setup do
     course = create_course(name: "Génétique et évolution", level: create_level(name: "Tle"), series: create_series(name: "D"),
@@ -18,7 +18,7 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
   def scope = "assessment.exercises"
   def correct_mark = I18n.t("#{scope}.questions_preview.correct")
 
-  test "l'élève voit le titre, la description, les questions sans marque, sa progression et « Commencer »" do
+  test "l'élève voit la feuille : titre, énoncé, questions numérotées sans marque, et « Faire l'exercice »" do
     sign_in_as @student
 
     get exercise_path(@exercise.public_id)
@@ -26,89 +26,64 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "title", text: /Méiose/
     assert_select "#exercise_header h1", text: "Méiose"
-    assert_select "#exercise_header", text: /Deux divisions successives\./
+    assert_select "#exercise-sheet", text: /Deux divisions successives\./
     assert_select "#exercise_header", text: /#{I18n.t("#{scope}.show.questions", count: 2)}/
-    assert_select "#exercise_header", text: /SVT/
-    assert_select "#exercise_header", text: /Tle D/
     assert_select "#exercise_header", text: /#{I18n.t("#{scope}.show.exercise_types.evaluation")}/
-    assert_select "a[href='#{course_essential_path(@essential.course.slug, @essential.slug)}']"
-    assert_select "#exercise_questions [data-controller=math] li.question", 2
-    assert_select "#exercise_questions", text: /Question 1/
-    assert_select "#exercise_questions", text: /Proposition 4/
-    assert_no_match(/#{correct_mark}|La méiose compte deux divisions/, response.body)
+    assert_select "a[href='#{course_path(@essential.course.slug, anchor: "notion-#{@essential.slug}")}']"
+    assert_select "#exercise_questions li.question", 2
+    assert_select "#exercise_questions #sheet-question-1", text: /1\./
+    assert_select "#exercise_questions input, #exercise_questions textarea, #exercise_questions select, #exercise_questions form", 0
+    # CA-13 : ni marque, ni explication, ni identifiant d'une bonne réponse dans la feuille de l'élève.
+    assert_no_match(/#{correct_mark}|La méiose compte deux divisions|data-correct/, response.body)
     @correct_ids.each { |id| assert_no_match(/answer_#{id}\b|value="#{id}"/, response.body) }
-
-    # UDR-0021, amendement du 2026-10-02 : la fiche n'est nommée que par le lien retour (R6) ; l'aide passe en infobulle (R4).
-    assert_select "#exercise_context", text: "Génétique et évolution"
-    assert_select "#exercise_header", text: /Fiche de révision :|Fiche essentielle/, count: 0
-    assert_select "#exercise_questions_title details", text: /#{I18n.t("#{scope}.questions_preview.student_hint")}/
-    assert_select "#exercise_questions p", text: /#{I18n.t("#{scope}.questions_preview.student_hint")}/, count: 0
-    assert_select "#exercise_questions[data-controller=reveal][data-reveal-step-value='3']"
-    assert_select "#exercise_questions li.question[data-reveal-target=item]", 2
-    assert_select "#exercise_questions li.question[hidden]", 0
-    assert_select "#exercise_questions [data-reveal-target=button]", 0
-
-    assert_select "#student_progress dt", text: I18n.t("#{scope}.student_progress.best_score")
-    assert_select "#student_progress dd", text: I18n.t("#{scope}.student_progress.no_score"), count: 2
-    assert_select "#student_progress", text: /Aucune session terminée/, count: 0
-    assert_select "#student_progress", text: /#{I18n.t("#{scope}.student_progress.no_badge")}/
-    assert_select "#student_progress form[method=post][action='#{exercise_sessions_path(@exercise.public_id)}']" do
+    assert_select "#exercise_actions form#start-exercise-form[action='#{exercise_sessions_path(@exercise.public_id)}']" do
       assert_select "input[name=restart]", 0
-      assert_select "button[type=submit]", text: I18n.t("#{scope}.student_progress.start")
+      assert_select "button[type=submit]", text: I18n.t("#{scope}.show.start")
     end
     assert_select "a[href='#{edit_teams_exercise_path(@exercise.public_id)}']", 0
     assert_select "#content_status_exercise_#{@exercise.public_id}", 0
   end
 
-  test "l'élève qui a une session en cours voit « Reprendre » et « Recommencer », sa meilleure note, sa maîtrise et son badge" do
-    best = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 85)
-    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 40)
-    create_badge(student: @student, exercise: @exercise, level: "gold", session: best)
+  test "l'élève qui a une copie en cours voit « Reprendre ma copie » et « Recommencer »" do
     started = create_exercise_session(student: @student, exercise: @exercise)
     sign_in_as @student
 
     get exercise_path(@exercise.public_id)
 
     assert_response :success
-    assert_select "#student_progress" do
-      # UDR-0021, amendement du 2026-10-02 : la meilleure note sur 20, la seule forme de la note pour l'élève (R6).
-      assert_select "*", text: /#{I18n.t("#{scope}.student_progress.best_score")}/
-      assert_select "dd", text: "17/20"
-      assert_select "*", text: /85 %/, count: 0
-      assert_select "*", text: /Acquis/
-      assert_select "*", text: /#{I18n.t("#{scope}.student_progress.badge_level", level: "Or")}/
-      assert_select "*", text: /#{I18n.t("#{scope}.student_progress.completed", count: 2)}/
-      # UDR-0087 §3.1 : la reprise dit sa question (aucune réponse encore : la première).
-      assert_select "a[href='#{exercise_session_path(started.public_id)}']", text: I18n.t("#{scope}.student_progress.resume_at", number: 1)
-      assert_select "form[method=post][action='#{exercise_sessions_path(@exercise.public_id)}']", 1 do
-        assert_select "input[type=hidden][name=restart][value=true]"
-        assert_select "button[type=submit]", text: I18n.t("#{scope}.student_progress.restart")
-      end
-      assert_select "button", text: I18n.t("#{scope}.student_progress.start"), count: 0
-      # UDR-0087 §3.1 : sous « Recommencer », une ligne courte, reliée au bouton.
-      assert_select "button[aria-describedby=restart-note]"
-      assert_select "p#restart-note", text: I18n.t("#{scope}.student_progress.restart_note")
+    assert_select "#exercise_actions a[href='#{exercise_session_path(started.public_id)}']", text: I18n.t("#{scope}.show.resume")
+    assert_select "#exercise_actions form#restart-exercise-form[action='#{exercise_sessions_path(@exercise.public_id)}']" do
+      assert_select "input[type=hidden][name=restart][value=true]"
+      assert_select "button[type=submit]", text: I18n.t("#{scope}.show.restart")
     end
+    assert_select "#start-exercise-form", 0
     assert_no_match(/#{correct_mark}/, response.body)
   end
 
-  test "l'enseignant voit les propositions correctes marquées et l'explication, sans progression ni bouton de session" do
+  test "l'élève qui a déjà rendu une copie voit « Refaire l'exercice » et sa meilleure note sur 20" do
+    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 85)
+    create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 40)
+    sign_in_as @student
+
+    get exercise_path(@exercise.public_id)
+
+    assert_select "#start-exercise-form button[type=submit]", text: I18n.t("#{scope}.show.redo")
+    assert_select "#exercise_best", text: I18n.t("#{scope}.show.best", grade: 17)
+    assert_select "#exercise_best.text-success"
+    assert_select "*", text: /85 %/, count: 0
+  end
+
+  test "l'enseignant voit la solution et l'explication sous chaque question, sans bouton de session" do
     sign_in_as create_teacher
 
     get exercise_path(@exercise.public_id)
 
     assert_response :success
-    assert_select "#exercise_questions li.answer", 8
-    assert_select "#exercise_questions li.answer[data-correct]", 2
-    @correct_ids.each { |id| assert_select "#answer_#{id}[data-correct]", text: /#{correct_mark}/ }
+    assert_select "#exercise_questions li.question", 2
     assert_select "#exercise_questions", text: /La méiose compte deux divisions\./
-    assert_select "#exercise_questions p", text: /#{I18n.t("#{scope}.questions_preview.reveal_hint")}/
-    assert_select "#student_progress", 0
-    # Décision du porteur (2026-10-02) : l'enseignant garde l'écran inchangé — contexte complet, toutes les questions.
-    assert_select "#exercise_context", text: I18n.t("#{scope}.show.context", course: "Génétique et évolution", essential: "La méiose")
-    assert_select "#exercise_context", text: "Génétique et évolution · Fiche de révision : La méiose"
-    assert_select "#exercise_questions[data-controller=reveal]", 0
-    assert_select "#exercise_questions [data-reveal-target]", 0
+    assert_select "#exercise_questions [data-correct]", text: /#{correct_mark}/
+    assert_select "#exercise_actions", 0
+    assert_select "#exercise_context", text: "La méiose"
     assert_select "form[action='#{exercise_sessions_path(@exercise.public_id)}']", 0
     assert_select "a[href='#{edit_teams_exercise_path(@exercise.public_id)}']", 0
   end
@@ -117,15 +92,16 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     sign_in_as @student
     session = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 67)
     get exercise_path(@exercise.public_id)
-    assert_select "#student_progress dd span.text-success", 0
+    assert_select "#exercise_best.text-success", 0
+    assert_select "#exercise_best", text: I18n.t("#{scope}.show.best", grade: 13)
 
     session.update!(score_percent: 68)
     get exercise_path(@exercise.public_id)
-    assert_select "#student_progress dd span.text-success", text: "14/20"
+    assert_select "#exercise_best.text-success", text: I18n.t("#{scope}.show.best", grade: 14)
   end
 
-  # CA-16, ADR-0091 §4.4 : l'enseignant voit la solution des nouveaux types ; l'élève ni valeur, ni réponse, ni ordre.
-  test "nouveaux types : la solution pour l'enseignant, l'énoncé et le type seuls pour l'élève" do
+  # CA-12, ADR-0091 §4.4 : la feuille de l'élève montre les nouveaux types sans solution ; l'enseignant la voit.
+  test "nouveaux types : la solution pour l'enseignant, l'énoncé et la feuille seuls pour l'élève" do
     create_kind_question(exercise: @exercise, question_type: "fill_blank", content: "La capitale est ___ .", answers: %w[Yamoussoukro])
     create_kind_question(exercise: @exercise, question_type: "numeric", content: "Combien ?", answers: [ "42,75" ],
                          numeric_tolerance: BigDecimal("0.25"))
@@ -142,8 +118,11 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     sign_in_as @student
     get exercise_path(@exercise.public_id)
     assert_select "#exercise_questions li.question", 6
-    assert_select "#exercise_questions", text: /#{I18n.t("#{scope}.questions_preview.question_types.matching")}/
-    %w[Yamoussoukro 42,75 Prophase Métaphase Gauche1 Droite1].each { assert_no_match(/#{it}/, response.body) }
+    # La feuille montre les étapes et les deux colonnes, mélangées ; jamais la valeur, la marge ni la bonne association.
+    %w[Prophase Métaphase Anaphase Gauche1 Droite1 Droite3].each { assert_match(/#{it}/, response.body) }
+    %w[Yamoussoukro 42,75 0,25].each { assert_no_match(/#{it}/, response.body) }
+    assert_select "#exercise_questions [data-correct]", 0
+    assert_no_match(/Gauche2 → Droite2/, response.body)
   end
 
   # RE-22 — UDR-0069 §3.8 : après l'en-tête, la carte « Assigner à mes classes », une bascule par classe de l'enseignant
@@ -160,7 +139,7 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     get exercise_path(@exercise.public_id)
 
     assert_response :success
-    assert_select "#exercise_header ~ div > #exercise_assign"
+    assert_select "#exercise_header ~ #exercise_assign"
     assert_select "#exercise_assign" do
       assert_select "h2", text: I18n.t("#{scope}.show.assign_title")
       assert_select "ul[aria-label=?]", I18n.t("#{scope}.show.assign_targets", title: "Méiose") do |list|
@@ -222,10 +201,9 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "button[aria-haspopup=menu][aria-label=?]", I18n.t("#{scope}.show.actions", name: exercise.title)
     assert_select "[role=menu] a[role=menuitem][href='#{edit_teams_exercise_path(exercise.public_id)}'][data-turbo-frame=modal]",
                   text: I18n.t("#{scope}.show.edit")
-    assert_select "#exercise_questions li.answer[data-correct]", 2
-    assert_select "#student_progress", 0
-    assert_select "#exercise_context", text: I18n.t("#{scope}.show.context", course: "Génétique et évolution", essential: "La méiose")
-    assert_select "#exercise_questions [data-reveal-target]", 0
+    assert_select "#exercise_questions [data-correct]", text: /#{correct_mark}/
+    assert_select "#exercise_actions", 0
+    assert_select "#exercise_context", text: "La méiose"
   end
 
   test "un exercice sans question ni description, vu par l'équipe, le dit" do
@@ -236,7 +214,7 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#exercise_header", text: /#{I18n.t("#{scope}.show.questions", count: 0)}/
-    assert_select "#exercise_questions_empty", text: /#{I18n.t("#{scope}.questions_preview.empty_title")}/
+    assert_select "#exercise_questions_empty", text: /#{I18n.t("#{scope}.show.no_questions")}/
     assert_select "#exercise_description", 0
   end
 
@@ -255,6 +233,27 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
       end
       sign_out
     end
+  end
+
+  # CA-14 : un exercice de toute la leçon n'a pas de notion ; l'élève du niveau, l'enseignant et l'équipe le lisent (200),
+  # l'élève d'un autre niveau reçoit 404.
+  test "exercice de toute la leçon : 200 pour le niveau, l'enseignant et l'équipe ; 404 pour un autre niveau" do
+    lesson = create_lesson_wide_exercise(course: @essential.course, title: "Bilan du chapitre", statement: "Soit un triangle ABC.")
+
+    [ @student, create_teacher, create_team_member ].each do |user|
+      sign_in_as user
+      get exercise_path(lesson.public_id)
+
+      assert_response :success
+      assert_select "#exercise_context", text: I18n.t("#{scope}.show.lesson_wide")
+      assert_select "#exercise-sheet", text: /Soit un triangle ABC\./
+      assert_select "a[href='#{course_path(@essential.course.slug, anchor: "toute-la-lecon")}']"
+      sign_out
+    end
+
+    sign_in_as create_student_for(create_course(level: create_level(name: "6e")))
+    get exercise_path(lesson.public_id)
+    assert_response :not_found
   end
 
   test "un exercice inconnu répond 404" do

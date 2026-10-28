@@ -1,0 +1,18 @@
+<%# 🌐 UI · assessment/exercises/sheet_kinds/_choice — Vrai / Faux, choix unique, 2 ou 3 propositions correctes, sur la feuille %>
+<%# Rôle : propositions A., B., C… dans le mélange de l'exercice ; « Plusieurs réponses » si 2 ou 3 sont correctes ; la bonne est marquée pour qui a reveal seul %>
+<%# ADR  : 0091 §4.4, 0112 · UDR : 0138 §3.1 %>
+<%# locals: (question:, reveal:) -%>
+<% if %w[multiple_correct_2 multiple_correct_3].include?(question.question_type) %>
+  <p class="mb-2 text-sm text-mute"><%= t("assessment.exercises.show.several_answers") %></p>
+<% end %>
+<ul class="space-y-1.5" aria-label="<%= t("assessment.exercises.questions_preview.answers") %>">
+  <% question.answers.each_with_index do |answer, index| %>
+    <% correct = reveal && answer.correct %>
+    <li <%= tag.attributes(id: ("answer_#{answer.id}" if reveal), data: { correct: (true if correct) }.compact) %>
+        class="answer flex items-start gap-2 text-ink <%= "rounded-ln bg-success-soft px-3 py-2 font-medium" if correct %>">
+      <span class="shrink-0 font-medium" aria-hidden="true"><%= ("A".ord + index).chr %>.</span>
+      <span class="min-w-0 flex-1"><%= answer.content %></span>
+      <% if correct %><%= ui_badge t("assessment.exercises.questions_preview.correct"), tone: :success, size: :sm %><% end %>
+    </li>
+  <% end %>
+</ul>

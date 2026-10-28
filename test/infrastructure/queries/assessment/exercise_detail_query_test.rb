@@ -38,10 +38,11 @@ module Queries
         assert_equal [ [ @first.id, 1, "Combien de divisions ?", "single_choice", "Méiose I, puis méiose II." ],
                        [ @second.id, 2, "La méiose produit des cellules haploïdes.", "true_false", "n chromosomes." ] ],
                      row.questions.map { it.to_h.values_at(:id, :position, :content, :question_type, :explanation) }
+        # UDR-0138 §3.1 : l'ordre affiché est le mélange de la graine de l'exercice, pas l'ordre de saisie.
         assert_equal [ [ 1, "Une", false ], [ 2, "Deux", true ], [ 3, "Trois", false ] ],
-                     row.questions.first.answers.map { it.to_h.values_at(:position, :content, :correct) }
-        assert_equal @first.answers.order(:position).pluck(:id), row.questions.first.answers.map(&:id)
-        assert_equal [ true, false ], row.questions.last.answers.map(&:correct)
+                     row.questions.first.answers.map { it.to_h.values_at(:position, :content, :correct) }.sort
+        assert_equal @first.answers.order(:position).pluck(:id).sort, row.questions.first.answers.map(&:id).sort
+        assert_equal [ false, true ], row.questions.last.answers.map(&:correct).sort_by(&:to_s)
       end
 
       test "sans reveal, ni la colonne correct ni l'explication ne sont lues" do
@@ -50,22 +51,61 @@ module Queries
 
         row = ActiveSupport::Notifications.subscribed(collector, "sql.active_record") { detail(reveal: false) }
 
-        assert_equal [ [ "Une", nil ], [ "Deux", nil ], [ "Trois", nil ] ],
-                     row.questions.first.answers.map { it.to_h.values_at(:content, :correct) }
+        assert_equal [ [ "Deux", nil ], [ "Trois", nil ], [ "Une", nil ] ],
+                     row.questions.first.answers.map { it.to_h.values_at(:content, :correct) }.sort
         assert_equal [ nil, nil ], row.questions.map(&:explanation)
         assert_equal [ "Combien de divisions ?", "La méiose produit des cellules haploïdes." ], row.questions.map(&:content)
         assert statements.any? { it.include?('"answers"') }, "les propositions sont bien lues"
         assert statements.none? { it.match?(/correct|explanation/) }, "une colonne de correction a été lue : #{statements.join("\n")}"
       end
 
-      test "trois requêtes, quel que soit le nombre de questions" do
+      test "quatre requêtes, quel que soit le nombre de questions" do
         count = ->(reveal) { count_queries { detail(reveal:) } }
 
-        assert_equal 3, count.call(true)
+        assert_equal 4, count.call(true)
         3.times { |index| add_question(position: index + 3, content: "Q#{index}", question_type: "true_false", explanation: nil,
                                        answers: [ [ "Vrai", true ], [ "Faux", false ] ]) }
-        assert_equal 3, count.call(true)
-        assert_equal 3, count.call(false)
+        create_kind_question(exercise: @exercise, question_type: "ordering", answers: %w[a b c])
+        assert_equal 5, count.call(true)
+        assert_equal 5, count.call(false)
+      end
+
+      # CA-14 : un exercice de toute la leçon n'a pas de notion ; il se lit par son cours.
+      test "un exercice de toute la leçon : pas de notion, le cours et le sujet" do
+        lesson = create_lesson_wide_exercise(course: @essential.course, statement: "Soit un triangle ABC.")
+
+        row = detail(reveal: false, public_id: lesson.public_id)
+
+        assert_nil row.essential
+        assert_equal [ @essential.course.slug, "Soit un triangle ABC." ], [ row.course.slug, row.exercise.statement ]
+        assert_equal lesson.id, row.exercise.id
+      end
+
+      # UDR-0138 §3.1 : la feuille de l'élève montre les étapes mélangées et les deux colonnes, sans solution ni identifiant.
+      test "ordre et relier sans reveal : étapes et colonne de droite mélangées de la graine de l'exercice, jamais dans l'ordre juste" do
+        order = create_kind_question(exercise: @exercise, question_type: "ordering", answers: %w[un deux trois quatre])
+        pairs = create_kind_question(exercise: @exercise, question_type: "matching", answers: [ %w[a 1], %w[b 2], %w[c 3] ])
+
+        first = detail(reveal: false).questions.find { it.id == order.id }
+        matching = detail(reveal: false).questions.find { it.id == pairs.id }
+
+        assert_equal %w[deux quatre trois un], first.items.map(&:content).sort
+        assert_not_equal %w[un deux trois quatre], first.items.map(&:content)
+        assert_equal [ 0, 1, 2, 3 ], first.items.map(&:index)
+        assert_equal first.items, detail(reveal: false).questions.find { it.id == order.id }.items
+        assert_equal %w[a b c], matching.prompts
+        assert_not_equal %w[1 2 3], matching.items.map(&:content)
+        assert_equal %w[1 2 3], matching.items.map(&:content).sort
+        assert_empty first.answers
+        assert_empty matching.answers
+      end
+
+      test "l'image d'une question" do
+        image = create_question_image(question: @first)
+
+        found = detail(reveal: false).questions.first.image
+
+        assert_equal [ image.public_id, nil ], [ found.public_id, detail(reveal: false).questions.last.image ]
       end
 
       test "un cours sans série, un exercice brouillon sans question ni description" do

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Assessment::ExerciseSessionsController
-# Rôle : l'élève démarre (exercice de son niveau), reprend ou recommence un exercice, puis joue sa session ; terminée → résultat
-# ADR  : 0026, 0028, 0043, 0048, 0054 · UDR : 0022
+# Rôle : l'élève démarre (exercice de son niveau), reprend ou recommence un exercice, puis remplit sa copie ; terminée → résultat
+# ADR  : 0026, 0028, 0043, 0048, 0054, 0112 · UDR : 0022, 0138 §3.2
 module Assessment
   class ExerciseSessionsController < AuthenticatedController
     include ReadsOwnLevel
@@ -17,15 +17,15 @@ module Assessment
     end
 
     def show
-      @play = Queries::Assessment::SessionPlayQuery.new.call(public_id: params[:public_id])
+      @play = Queries::Assessment::SessionPlayQuery.new.copy(public_id: params[:public_id])
       return render_not_found if @play.nil?
       return render_forbidden if Policies::Assessment::ReadSessionPolicy.new.call(actor: current_actor, session: @play).failure?
       # Une session ouverte avant la règle de niveau (UDR-0013, 2026-10-01) ne se joue plus hors niveau.
       return if refuse_out_of_level(exercise_public_id: @play.exercise_public_id)
       return redirect_to exercise_session_result_path(@play.session_public_id) if @play.completed?
 
-      # Une session abandonnée par « Recommencer » ne se joue plus : retour à l'exercice.
-      redirect_to exercise_path(@play.exercise_public_id), alert: t(".abandoned") unless @play.status == "started"
+      # Une session abandonnée par « Recommencer » ne se remplit plus : retour à l'exercice.
+      redirect_to exercise_path(@play.exercise_public_id), alert: t(".abandoned") unless @play.started?
     end
 
     private

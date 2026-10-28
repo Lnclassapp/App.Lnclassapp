@@ -1,97 +1,68 @@
 require "application_system_test_case"
 
-# AS-07 à AS-11 (UDR-0022), UDR-0087 §3.2–3.3 (CA-1 à CA-3) : la séance en mode concentré, sans en-tête ni menus ; la croix,
-# la barre et « n/T » en haut ; « Valider » collé en bas et désactivé tant que rien n'est choisi. Le verdict et la question
-# suivante arrivent sans rechargement (UDR-0076 §3.3). La croix demande confirmation : « Continuer l'exercice » referme la
-# feuille, « Quitter » ramène à la page de l'exercice, la session restant ouverte. Aucune proposition correcte n'est montrée.
+# AS-07 à AS-11 (UDR-0022), UDR-0138 §3.2 : la copie. Le compteur « n/T répondues » suit les réponses, « Revoir le sujet » mène au
+# sujet, « Rendre ma copie » est collé en bas à 390 px. Aucune proposition correcte n'est montrée ; les réponses survivent à un
+# rechargement ; une copie rendue ne se rouvre plus.
 class Assessment::ExerciseSessionTest < ApplicationSystemTestCase
   SCOPE = "assessment.exercise_sessions".freeze
 
   setup do
-    exercise = create_exercise(title: "Méiose", questions: 2)
+    exercise = create_exercise(title: "Méiose", questions: 2, statement: "Deux divisions successives.")
     # UDR-0013, amendement du 2026-10-01 : l'élève est d'une classe du niveau du cours de l'exercice.
     @student = create_student_for(exercise.essential.course)
     @first, @second = exercise.questions.order(:position).to_a
-    @first.update!(content: "Combien de cellules donne la méiose ?", explanation: "Quatre cellules filles.")
-    @second.update!(content: "La méiose réduit-elle le nombre de chromosomes ?")
     @session = create_exercise_session(student: @student, exercise:)
     sign_in_as @student
     assert_current_path student_home_path
   end
 
-  test "mode concentré : ni en-tête ni menus, « Valider » désactivé puis deux réponses corrigées sans rechargement" do
-    play_the_session
+  test "le compteur suit les réponses, le brouillon survit au rechargement, la copie rendue mène au résultat" do
+    visit exercise_session_path(@session.public_id)
+    assert_selector "#copy-counter", text: "0/2"
+
+    choose "q1-answer_#{right_answer(@first).id}"
+    assert_selector "#copy-counter", text: "1/2"
+    page.refresh
+    assert_selector "#copy-counter", text: "1/2"
+    assert_checked_field "q1-answer_#{right_answer(@first).id}"
+
+    choose "q2-answer_#{wrong_answer(@second).id}"
+    assert_selector "#copy-counter", text: "2/2"
+    click_on I18n.t("#{SCOPE}.show.submit")
+
+    assert_current_path exercise_session_result_path(@session.public_id)
+    assert_equal [ "completed", 50 ], @session.reload.values_at(:status, :score_percent)
+    visit exercise_session_path(@session.public_id)
+    assert_current_path exercise_session_result_path(@session.public_id)
   end
 
-  test "à 390 px : la croix ouvre la feuille ; « Continuer » la referme, « Quitter » mène à la page, la session reste ouverte" do
+  test "« Continuer ma copie » referme la confirmation et ne rend rien ; Échap fait de même" do
+    visit exercise_session_path(@session.public_id)
+    choose "q1-answer_#{right_answer(@first).id}"
+
+    click_on I18n.t("#{SCOPE}.show.submit")
+    within("dialog#copy-confirm[open]") do
+      assert_text I18n.t("#{SCOPE}.show.missing", count: 1)
+      click_on I18n.t("#{SCOPE}.show.keep_going")
+    end
+    assert_no_selector "dialog#copy-confirm[open]"
+    assert_equal "started", @session.reload.status
+    assert_current_path exercise_session_path(@session.public_id)
+  end
+
+  test "à 390 px : « Revoir le sujet » mène au sujet et « Rendre ma copie » colle au bas de l'écran" do
     with_mobile_viewport do
       visit exercise_session_path(@session.public_id)
-      choose wrong_answer(@first).content
-      click_on I18n.t("#{SCOPE}.question_card.submit")
-      assert_selector "#feedback-card"
 
-      quit_cross.click
-      within("dialog#quit-dialog[open]") do
-        assert_text I18n.t("#{SCOPE}.quit_dialog.title")
-        assert_text I18n.t("#{SCOPE}.quit_dialog.resume", number: 2)
-        click_on I18n.t("#{SCOPE}.quit_dialog.continue")
-      end
-      assert_no_selector "dialog#quit-dialog[open]"
-      assert_selector "#feedback-card"
-      # CA-1 : l'action colle au bas de l'écran.
-      assert page.evaluate_script("Math.abs(document.querySelector('#feedback-actions').getBoundingClientRect().bottom - window.innerHeight) < 2")
-
-      quit_cross.click
-      within("dialog#quit-dialog[open]") { click_on I18n.t("#{SCOPE}.quit_dialog.quit") }
-      assert_current_path exercise_path(@session.exercise.public_id)
+      assert_selector "details#copy-statement[open]", text: "Deux divisions successives."
+      assert_link I18n.t("#{SCOPE}.show.review_statement"), href: "#copy-statement"
+      assert page.evaluate_script("Math.abs(document.querySelector('#copy-form button[type=submit]').getBoundingClientRect().bottom - window.innerHeight) < 40")
+      assert page.evaluate_script("document.documentElement.scrollWidth <= document.documentElement.clientWidth"),
+             "la page déborde en largeur"
     end
-    assert_equal [ "started", 1 ], @session.reload.values_at(:status, :answered_count)
   end
 
   private
-
-  def play_the_session
-    visit exercise_session_path(@session.public_id)
-    assert_no_selector "header.sticky.z-40"
-    assert_no_selector "aside"
-    assert_equal I18n.t("#{SCOPE}.quit_dialog.trigger"), page.evaluate_script(<<~JS)
-      (document.querySelector("a[href], button:not([disabled]), input, select, textarea") || {}).getAttribute("aria-label")
-    JS
-    assert_selector "#progress_counter", text: "1/2"
-    assert_button I18n.t("#{SCOPE}.question_card.submit"), disabled: true
-
-    assert_no_page_reload do
-      choose wrong_answer(@first).content
-      click_on I18n.t("#{SCOPE}.question_card.submit")
-      within("#feedback-card") do
-        assert_text I18n.t("#{SCOPE}.feedback_card.verdict.error")
-        assert_text "Quatre cellules filles."
-        assert_no_text(/correcte/i)
-      end
-      assert_selector "#progress_bar progress[value='50']"
-
-      # UDR-0076 §3.3, ADR-0076 : la question suivante est arrivée avec le verdict ; l'afficher ne coûte aucune requête.
-      requests = server_requests
-      click_on I18n.t("#{SCOPE}.feedback_card.next")
-      assert_selector "#question-card", text: "La méiose réduit-elle le nombre de chromosomes ?"
-      assert_equal requests, server_requests, "« Question suivante » ne doit rien demander au serveur"
-      assert_selector "#progress_counter", text: "2/2"
-      assert_equal "La méiose réduit-elle le nombre de chromosomes ?", page.evaluate_script("document.activeElement.textContent").strip
-      choose right_answer(@second).content
-      click_on I18n.t("#{SCOPE}.question_card.submit")
-      assert_selector "#feedback-card", text: I18n.t("#{SCOPE}.feedback_card.verdict.success")
-      assert_selector "#progress_bar progress[value='100']"
-      assert_link I18n.t("#{SCOPE}.feedback_card.result"), href: exercise_session_result_path(@session.public_id)
-    end
-    assert_equal [ "completed", 50 ], @session.reload.values_at(:status, :score_percent)
-  end
-
-  def quit_cross = find("a[aria-label='#{I18n.t("#{SCOPE}.quit_dialog.trigger")}']")
-
-  # Les requêtes du document (fetch de Turbo, formulaires, frames), lues dans le Resource Timing du navigateur.
-  def server_requests = page.evaluate_script(<<~JS)
-    performance.getEntriesByType("resource").filter((entry) => ["fetch", "xmlhttprequest"].includes(entry.initiatorType)).length
-  JS
 
   def right_answer(question) = question.answers.find_by!(correct: true)
   def wrong_answer(question) = question.answers.where(correct: false).order(:id).first

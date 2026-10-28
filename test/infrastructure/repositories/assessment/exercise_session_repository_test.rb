@@ -36,8 +36,38 @@ module Repositories
         assert_equal 1, Orm::ExerciseSession.where(student: @student).count
       end
 
-      test "record_copy est gelé au Lot 0 (signature seule) : le Lot C l'écrit" do
-        assert_raises(NotImplementedError) { @repository.record_copy(session_id: 1, attempts: [], at: Time.current) }
+      test "record_copy écrit toute la copie d'un coup, avec la contrainte unanswered, et tient les compteurs" do
+        started = @repository.start(session: session)
+        first, second, third = @exercise.questions.to_a
+        attempts = [ { question_id: first.id, selected_answer_ids: [ 1 ], response_text: nil, correct: true, unanswered: false },
+                     { question_id: second.id, selected_answer_ids: [], response_text: "-3,5", correct: false, unanswered: false },
+                     { question_id: third.id, selected_answer_ids: [], response_text: nil, correct: false, unanswered: true } ]
+
+        assert_equal :ok, @repository.record_copy(session_id: started.id, attempts:, at: @at)
+
+        reloaded = @repository.find_by_public_id(public_id: started.public_id)
+        assert_equal [ 3, 1, 100 ], [ reloaded.answered_count, reloaded.correct_count, reloaded.progress_percent ]
+        assert_equal [ [ [ 1 ], nil, true ], [ [], "-3,5", false ], [ [], nil, false ] ],
+                     @repository.attempts(session_id: started.id).map { [ it.selected_answer_ids, it.response_text, it.correct ] }
+        assert_equal [ false, false, true ], Orm::QuestionAttempt.where(exercise_session_id: started.id).order(:id).pluck(:unanswered)
+      end
+
+      test "record_copy : une question sans réponse ni marque unanswered est refusée par la base" do
+        started = @repository.start(session: session)
+        attempt = { question_id: @exercise.questions.first.id, selected_answer_ids: [], response_text: nil, correct: false, unanswered: false }
+
+        assert_raises(ActiveRecord::StatementInvalid) { @repository.record_copy(session_id: started.id, attempts: [ attempt ], at: @at) }
+      end
+
+      test "record_copy : une seconde copie rend :duplicate et n'écrit rien de plus, compteurs compris" do
+        started = @repository.start(session: session)
+        questions = @exercise.questions.to_a
+        copy = questions.map { { question_id: it.id, selected_answer_ids: [], response_text: nil, correct: false, unanswered: true } }
+        @repository.record_copy(session_id: started.id, attempts: copy, at: @at)
+
+        assert_equal :duplicate, @repository.record_copy(session_id: started.id, attempts: copy, at: @at + 1)
+        assert_equal 3, Orm::QuestionAttempt.where(exercise_session_id: started.id).count
+        assert_equal 3, @repository.find_by_public_id(public_id: started.public_id).answered_count
       end
 
       test "enregistre chaque tentative une fois et tient les compteurs" do
