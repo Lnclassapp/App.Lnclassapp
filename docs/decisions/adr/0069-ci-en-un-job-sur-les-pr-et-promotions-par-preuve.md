@@ -8,7 +8,7 @@ problematique: Quota GitHub : ≈ 1 500 minutes perdues le 2026-10-01 (33 par ru
 
 | | |
 |---|---|
-| **Statut** | Accepté *(par le porteur le 2026-10-02 : runner auto-hébergé abandonné, quatre décisions validées)* — *amendé le 2026-10-02 : preuves des sessions cloud, §8 ; amendé les 2026-10-02 et 2026-10-03 : dix minutes par feature, deux jobs, budget de croissance, §9* — *amendé le 2026-10-03 au soir : 20 s pour le blog* |
+| **Statut** | Accepté *(par le porteur le 2026-10-02 : runner auto-hébergé abandonné, quatre décisions validées)* — *amendé le 2026-10-02 : preuves des sessions cloud, §8 ; amendé les 2026-10-02 et 2026-10-03 : dix minutes par feature, deux jobs, budget de croissance, §9* — *amendé le 2026-10-03 au soir : 20 s pour le blog* — *amendé le 2026-10-28 : 22 s pour la phase 2 de `contenu-en-blocs`* |
 | **Date** | 2026-10-02 *(première version proposée le 2026-09-30 : runner auto-hébergé)* |
 | **Chantier** | `docs/chantiers/ci-quota` |
 | **Remplace** | — *(amende l'[ADR-0064](./0064-ci-parallele-par-groupes-de-bin-ci.md) : la matrice de 14 jobs, §4 précision 6 et §5 « plus de minutes facturées »)* |
@@ -165,3 +165,13 @@ Précisions qui font partie de la décision :
 - **Règle** : chaque lot garde un test système court de son parcours principal et teste le reste au niveau contrôleur ou intégration. Un fichier système qui n'est pas dans la liste remonte au porteur avant d'entrer.
 - **Vérification** : `test/guards/system_budget_test.rb` : 50 s pour les seuls fichiers du chantier, 15 s dès qu'un autre fichier grandit avec eux, 50,1 s refusées.
 - **Élargi le 2026-10-26** (porteur : « fais ce qui est correct ») : les lots ont fait grandir, ou ajouté, des fichiers système hors de la liste (E2, O1 à O3, P4, P6 et les tests recalés par E1 et D). La liste couvre désormais les 53 fichiers système que le chantier touche (48, puis P3, puis O5 : `test/system/catalog/student_courses_test.rb`, décision du porteur, puis P1 et P2 : `teacher_home_desktop_test.rb`, `classroom_desktop_test.rb`, puis P0 : `teacher_account_panel_desktop_test.rb`) ; le budget reste de 50 s (+17,8 s à la fusion de P6). La règle « un fichier hors de la liste remonte au porteur » demeure pour les lots suivants.
+
+
+## Amendement du 2026-10-28 — 22 s pour la phase 2 de `contenu-en-blocs`
+
+*Décision du porteur, 2026-10-28 (« réduire + dérogation »), chantier [`contenu-en-blocs`](../../chantiers/contenu-en-blocs/plan.md).*
+
+- **Pourquoi** : les fiches Lentilles (Lot E, #339) et Texte argumentatif (Lot F, #338) ont chacune leurs figures interactives, que seul un navigateur juge. Fusionnées en deux PR, elles passaient la garde une par une ; ensemble, elles prenaient 27 s mesurées (11,5 + 15,4). `script/ci/record_timings` sous-comptait le premier test d'un fichier (corrigé par #341) : le Lot F était noté 7,5 s.
+- **Réduction d'abord** : le Lot F passe de 4 tests à 2 (les cas des connecteurs et le retour arrière Turbo rejoignent le parcours principal ; le test à 390 px ne visite la page qu'une fois), de 15,4 à 9,8 s, sans perdre de vérification.
+- **Décision** : les deux fichiers ont une dérogation de **22 s**, écrite dans `SystemBudget::GRANTS` sous la clé `contenu-en-blocs-phase-2` : `test/system/catalog/course_sheet_lens_test.rb` (11,5 s) et `test/system/catalog/course_sheet_argument_test.rb` (9,8 s), soit 21,3 s. Le budget général reste de 15 s.
+- **Vérification** : `test/guards/system_budget_test.rb` : 22 s pour ces deux fichiers seuls, 15 s dès qu'un autre fichier grandit avec eux, 22,1 s refusées.
