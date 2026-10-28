@@ -82,6 +82,21 @@
 
 Mesurés avec `record_timings` corrigé (#341), les tests système des Lots E et F prenaient 27 s (11,5 + 15,4), au-delà des 15 s par chantier ; chaque PR passait la garde seule. Le porteur a choisi « réduire + dérogation » : le Lot F passe de 4 tests à 2 (9,8 s, mêmes vérifications), et les deux fichiers ont 22 s (amendement de l'ADR-0069 du 2026-10-28).
 
+### Challenger empirique (2026-10-28)
+
+Un agent distinct, qui n'a pas écrit le code, a fait tourner l'application (base de développement, élève de 3ème) sur les trois fiches, à 390 px et 1 440 px. Captures envoyées au porteur, non commitées.
+
+- **Parcours nominal : OK sur les trois fiches.** En-tête « … · Fiche de révision », « Voir plus » déplie la fiche entière, les blocs interactifs réagissent (simulateur et construction de Lentilles, surligneurs, entraînement et rédaction de Texte argumentatif, figure et réciproque de Thalès, exercices corrigés). Console : aucune erreur, aucune requête en échec.
+- **Chemins d'erreur : OK.** Mauvaise réponse (retour « à revoir », solution), ancienne URL `/courses/:slug/fiche` (301 vers l'ancre, fiche repliée), visiteur anonyme (302 vers la connexion, rien d'exposé).
+- **Mesures** (bureau, 4 chargements) : page de la leçon chargée en 196 à 590 ms (TTFB 121 à 228 ms, 92 à 115 Ko) ; du clic « Voir plus » au bloc interactif prêt, 6 à 91 ms.
+- **390 px** : aucun débordement horizontal (`scrollWidth` = 390 sur les trois fiches).
+
+**Anomalies relevées**
+- A. Retour arrière (cache Turbo) : la fiche revient repliée et les blocs interactifs propres, mais les exercices corrigés gardent la saisie, les retours « à revoir » et le message global (Thalès, Lentilles, Texte argumentatif).
+- B. La coupe « Voir plus » tombe sur des blocs entiers : 346 mots visibles sur Lentilles, 229 sur Thalès, 199 sur Texte argumentatif, pour environ 150 annoncés ; sur Lentilles et Thalès le texte replié finit par l'annonce d'une figure masquée.
+- C. « Vérifier » sur un exercice vide : chaque champ dit « à compléter », le message global dit « Certaines réponses sont à revoir ».
+- D. Les graines n'importent que les fiches absentes : une base où Thalès est déjà importée garde « Géométrie · Fiche de cours » jusqu'à un ré-import (le remplacement d'une fiche est hors périmètre).
+
 ## Ce qui a dérapé
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
@@ -109,6 +124,8 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Écarts du Lot F avec la maquette (pastilles, colonnes, exercices à réponse libre, invite de rédaction) | Le contrat gelé du Lot 0 ne les porte pas ; acceptés par le porteur le 2026-10-28 | Une version 2 du format si une autre fiche en a besoin |
 | Conversion des 213 leçons au format des fiches | Hors périmètre (memo) | Chantier de contenu à ouvrir par le porteur |
 | Remplacement d'une fiche déjà en ligne, « Signaler une erreur », éditeur de fiches, serveur MCP | Hors périmètre (memo) | Chantiers à part |
+| Anomalies A, B et C du challenger (état des exercices au retour arrière, coupe « Voir plus », message de l'exercice vide) | Relevées à la clôture ; B tient à la coupe de `refonte-page-lecon` | À trancher par le porteur |
+| En-tête de Thalès sur une base déjà semée (anomalie D) | Le remplacement d'une fiche est hors périmètre | Ré-import à la main, ou le chantier du remplacement |
 | Budget système de 22 s pour les deux fiches | Dérogation de l'ADR-0069 (2026-10-28) | Toute nouvelle fiche refait le compte |
 
 ## Clôture
