@@ -32,7 +32,14 @@ class Catalog::CourseSheetLensTest < ApplicationSystemTestCase
     @course = create_course(name: "Les lentilles", level: create_level(name: "3ème"), material: create_material(name: "Physique-Chimie"))
     create_course_sheet(course: @course, theme: "teal", document: JSON.parse(SHEET.read))
     sign_in_as create_student_for(@course)
-    visit course_sheet_path(@course.slug) if visit
+    unfold if visit
+  end
+
+  # The old address redirects to the lesson page (refonte-page-lecon, ADR-0113), where the sheet is cut after 150 words
+  # (UDR-0139 § 3.2): the figures are in the rest.
+  def unfold
+    visit course_path(@course.slug)
+    click_on I18n.t("catalog.courses.show.revision_more")
   end
 
   # Moves a hit zone to a place of the drawing (viewBox width x height), with real pointer events.
@@ -163,7 +170,7 @@ class Catalog::CourseSheetLensTest < ApplicationSystemTestCase
     open_sheet(visit: false)
 
     with_mobile_viewport do
-      visit course_sheet_path(@course.slug)
+      unfold
       ready(SIMULATOR)
       ready(CONSTRUCTION)
 
@@ -193,14 +200,5 @@ class Catalog::CourseSheetLensTest < ApplicationSystemTestCase
       shows(SIMULATOR, application: sim("js.application_magnifier"))
       assert_operator metric("document.documentElement.scrollWidth"), :<=, 390
     end
-  end
-
-  test "in the lesson page the sheet unfolds on the spot and the simulator works there too" do
-    open_sheet(visit: false)
-
-    visit course_path(@course.slug)
-    click_on I18n.t("catalog.courses.show.revision_more")
-    ready(SIMULATOR)
-    shows(SIMULATOR, application: sim("js.application_photo"))
   end
 end
