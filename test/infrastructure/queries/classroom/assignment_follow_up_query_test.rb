@@ -227,6 +227,17 @@ module Queries
         ActiveSupport::Notifications.subscribed(counter, "sql.active_record", &)
         count
       end
+
+      test "le suivi d'un exercice de toute la leçon, sans notion" do
+        course = create_course(material: create_material(name: "Physique", category: "science"))
+        wide = create_lesson_wide_exercise(course:, title: "Bilan de la leçon")
+        teacher = create_teacher(classrooms: [ @classroom ])
+        assignment = create_assignment(classroom: @classroom, assignable: wide, by: teacher)
+
+        row = AssignmentFollowUpQuery.new.call(classroom_public_id: @classroom.public_id, public_id: assignment.public_id)
+
+        assert_equal [ "Bilan de la leçon", "Physique" ], [ row.exercise_title, row.material_name ]
+      end
     end
   end
 end

@@ -206,6 +206,17 @@ module Queries
 
         assert_equal @classroom.public_id, classroom.public_id
       end
+
+      test "un exercice de toute la leçon assigné paraît dans le cours, et une fois rendu dans les exercices traités" do
+        wide = create_lesson_wide_exercise(course: @course, title: "Bilan de la leçon")
+        create_assignment(classroom: @classroom, assignable: wide)
+        create_exercise_session(student: @student, exercise: wide, status: "completed", score_percent: 80)
+
+        row = classroom
+
+        assert_equal [ [ @course.slug, 1 ] ], row.courses.map { [ it.slug, it.assigned_count ] }
+        assert_includes row.treated_exercises.map(&:title), "Bilan de la leçon"
+      end
     end
   end
 end

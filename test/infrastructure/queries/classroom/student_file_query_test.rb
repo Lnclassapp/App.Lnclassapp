@@ -251,6 +251,16 @@ module Queries
         assert_equal few, count_queries { file }
         assert_equal 10, file.counts.assigned
       end
+
+      test "une session terminée d'un exercice de toute la leçon paraît dans l'entraînement seul, sans notion" do
+        wide = create_lesson_wide_exercise(course: @essential.course, title: "Bilan de la leçon")
+        session = create_exercise_session(student: @awa, exercise: wide, status: "completed", score_percent: 80,
+                                          started_at: Time.zone.local(2026, 10, 12, 9), completed_at: Time.zone.local(2026, 10, 12, 9, 10))
+
+        row = file.self_practice.find { it.session_public_id == session.public_id }
+
+        assert_equal [ "Bilan de la leçon", 80 ], [ row.exercise_title, row.score_percent ]
+      end
     end
   end
 end

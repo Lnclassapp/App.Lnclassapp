@@ -38,8 +38,10 @@ module Queries
       # L'ordre du programme (ADR-0090 §4.2) : le rang de la matière, puis son nom ; une matière sans rang suit, par nom.
       PROGRAM_ORDER = [ Arel.sql("materials.position ASC NULLS LAST"), "materials.name" ].freeze
       HEADER_COLUMNS = [ "classrooms.id", "schools.name", "schools.sigle", "levels.name", "classrooms.name" ].freeze
+      # Un exercice de toute la leçon n'a pas de notion : il suit celles de sa leçon, et le tri Ruby ne compare jamais nil.
+      COALESCE_NOTION_POSITION = Arel.sql("COALESCE(essentials.position, 2147483647)")
       EXERCISE_COLUMNS = [ "exercises.id", "exercises.public_id", "exercises.title", "materials.name", "materials.category",
-                           "materials.slug", "courses.id", "essentials.position", "exercises.position" ].freeze
+                           "materials.slug", "courses.id", COALESCE_NOTION_POSITION, "exercises.position" ].freeze
 
       # today : la date d'Abidjan (Time.zone), qui dit si une échéance est passée.
       # → Row | nil (aucune classe principale active : l'élève n'a pas d'accueil)
@@ -82,7 +84,7 @@ module Queries
 
       # Lue seule par le frame différé de l'activité récente. → [SessionRow]
       def recent_sessions(student_id:)
-        Orm::ExerciseSession.joins(exercise: { essential: { course: :material } }).where(student_id:, status: "completed")
+        Orm::ExerciseSession.joins(exercise: { course: :material }).where(student_id:, status: "completed")
                             .merge(own_level(student_id))
                             .order(completed_at: :desc, id: :desc).limit(RECENT_SESSIONS)
                             .pluck(:public_id, "exercises.public_id", "exercises.title", "materials.name", "materials.slug", :score_percent,
@@ -161,8 +163,9 @@ module Queries
 
       # Un exercice publié dont la fiche et le cours le sont aussi (ADR-0035).
       def published_exercises(ids)
-        Orm::Exercise.joins(essential: { course: :material })
-                     .where(id: ids, status: "published", essentials: { status: "published" }, courses: { status: "published" })
+        Orm::Exercise.joins(course: :material).left_joins(:essential)
+                     .where(id: ids, status: "published", courses: { status: "published" })
+                     .where("essentials.id IS NULL OR essentials.status = 'published'")
       end
 
       def exercise_rows(rows, assignments, student_id)

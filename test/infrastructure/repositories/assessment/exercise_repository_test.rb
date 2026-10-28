@@ -120,6 +120,22 @@ module Repositories
         assert_equal({ @essential.id => 4, empty.id => 1 }, @repository.next_positions(essential_ids: [ @essential.id, empty.id ]))
       end
 
+      test "donne la prochaine position de deux notions sœurs dans le même appel" do
+        sibling = create_essential(course: @essential.course)
+        create_exercise(essential: @essential, position: 3)
+
+        assert_equal({ @essential.id => 4, sibling.id => 4 },
+                     @repository.next_positions(essential_ids: [ @essential.id, sibling.id ]))
+      end
+
+      test "un exercice de toute la leçon d'un cours en brouillon n'a pas ses parents publiés" do
+        draft = create_lesson_wide_exercise(course: create_course(status: "draft"))
+        published = create_lesson_wide_exercise(course: create_course)
+
+        assert_not @repository.find(id: draft.id).parents_published
+        assert @repository.find(id: published.id).parents_published
+      end
+
       test "la position est partagée par la leçon : la prochaine suit toutes ses notions" do
         sibling = create_essential(course: @essential.course)
         create_exercise(essential: @essential, position: 3)

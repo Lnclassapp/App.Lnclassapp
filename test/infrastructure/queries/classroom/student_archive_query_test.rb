@@ -73,6 +73,16 @@ module Queries
                      archive.results
       end
 
+      test "a finished lesson-wide exercise (no notion) is archived too" do
+        completed_at = Time.zone.local(2026, 2, 3, 8)
+        exercise = create_lesson_wide_exercise(course: create_course(material: @maths), title: "Toute la leçon")
+        create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 70, completed_at:)
+
+        assert_equal [ StudentArchiveQuery::ResultRow.new(exercise_title: "Toute la leçon", material_name: "Mathématiques",
+                                                          material_slug: @maths.slug, material_category: "science",
+                                                          score_percent: 70, completed_at:) ], archive.results
+      end
+
       test "the most recent results only, past the limit" do
         3.times { |day| finished(title: "Exercice #{day}", completed_at: Time.zone.local(2026, 1, day + 1)) }
 
