@@ -1,0 +1,45 @@
+<%# 🌐 UI · catalog/course_sheets/blocks/_writing — « Ma rédaction » : un sujet, une zone de texte libre et une liste de vérification qui se coche en écrivant %>
+<%# Rôle : `block` {title, prompt, connectors?, min_words?, min_paragraphs?} ; lib/course_sheet/writing compte connecteurs, mots et paragraphes dans le navigateur : rien n'est envoyé au serveur, rien n'est noté, rien n'est gardé %>
+<%# ADR  : 0110-fiche-de-cours-en-donnees-importees, 0114 (budget du JS commun) · UDR : 0137-fiche-de-cours-a-l-identique-des-maquettes · pas de formulaire, pas d'attribut name, pas d'attribut style %>
+<%
+  connectors = Array(block["connectors"]).select { it.is_a?(String) }
+  min_words = block["min_words"].is_a?(Integer) ? block["min_words"].clamp(0, 1000) : 0
+  min_paragraphs = block["min_paragraphs"].is_a?(Integer) ? block["min_paragraphs"].clamp(0, 20) : 0
+  min_connectors = 3
+  # Les vérifications, dans l'ordre de la maquette ; celles qui dépendent d'un réglage du bloc ne viennent que s'il est posé.
+  # « Au moins 3 connecteurs » n'a de sens que si la liste en propose au moins 3.
+  checks = [ "opinion", (min_paragraphs.positive? ? "paragraphs" : nil), (connectors.size >= min_connectors ? "connectors" : nil), "example", "question", "conclusion",
+             (min_words.positive? ? "words" : nil) ].compact
+  counts = { "paragraphs" => min_paragraphs, "connectors" => min_connectors, "words" => min_words }
+  uid = "sheet-wr-#{block.object_id}"
+%>
+<%= tag.section class: "sheet-box sheet-writing", data: { tone: "property", controller: "course-sheet--writing",
+                                                           action: "turbo:before-cache@document->course-sheet--writing#reset", connectors: connectors,
+                                                           min_words:, min_paragraphs:, min_connectors:,
+                                                           stats: t(".stats", words: "{words}", paragraphs: "{paragraphs}"),
+                                                           label_done: t(".done"), label_todo: t(".todo") } do %>
+  <span class="sheet-box-label"><%= block["title"] %></span>
+  <p class="sheet-text"><%= sheet_text(block["prompt"], glossary: @sheet&.glossary || {}) %></p>
+  <textarea class="sheet-writing-input" id="<%= uid %>-text" rows="8" autocomplete="off" aria-label="<%= t(".label") %>"
+            aria-describedby="<%= uid %>-checks" placeholder="<%= t(".placeholder") %>"></textarea>
+  <div class="sheet-writing-panel">
+    <div class="sheet-writing-column">
+      <b class="sheet-writing-title" id="<%= uid %>-checks"><%= t(".checklist") %></b>
+      <ul class="sheet-writing-checks" aria-labelledby="<%= uid %>-checks">
+        <% checks.each do |name| %>
+          <li data-check="<%= name %>" data-state="todo">
+            <b class="sheet-writing-mark" aria-hidden="true">○</b>
+            <span><%= t(".checks.#{name}", count: counts[name]) %></span>
+            <span class="sheet-sr" data-role="state"><%= t(".todo") %></span>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="sheet-writing-column">
+      <b class="sheet-writing-title"><%= t(".found") %> <span data-role="count">0</span></b>
+      <div class="sheet-writing-pills" data-role="found"></div>
+      <span class="sheet-writing-stats" data-role="stats"><%= t(".stats", words: 0, paragraphs: 0) %></span>
+      <span class="sheet-writing-hint"><%= t(".blank_line") %></span>
+    </div>
+  </div>
+<% end %>
